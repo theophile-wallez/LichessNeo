@@ -79,11 +79,11 @@ dialog .help th p {
 /* ---- Game setup --- */
 
 /* Create a game, challenge a friend, play the computer: segments on a dark track,
- * and one look for any choice (a green ring on a green tint). */
+ * and one look for any choice (an accent ring on an accent tint). */
 .game-setup {
-  --cdc-setup-track: #1c1b19;
-  --cdc-setup-chosen: inset 0 0 0 2px var(--cdc-green);
-  --cdc-setup-tint: #81b64c26;
+  --cdc-setup-track: var(--cdc-grey-950);
+  --cdc-setup-chosen: inset 0 0 0 2px var(--cdc-accent);
+  --cdc-setup-tint: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
 }
 
 .game-setup h2 {
@@ -183,7 +183,7 @@ dialog .help th p {
   gap: 16px !important;
 }
 
-/* Minutes and increment read as values, not as green badges. */
+/* Minutes and increment read as values, not as accent badges. */
 .game-setup .time-control-tabs .time-panel .slider-container .label-row {
   align-items: baseline !important;
   margin-bottom: 10px !important;
@@ -232,7 +232,7 @@ dialog .help th p {
 .game-setup input.range:hover::-webkit-slider-thumb {
   box-shadow:
     0 1px 3px #00000080,
-    0 0 0 5px #81b64c33;
+    0 0 0 5px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
 }
 
 /* Presets: one row of chips sharing the width. */

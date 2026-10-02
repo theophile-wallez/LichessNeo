@@ -112,7 +112,7 @@
 
 .cdc-dist__cumul {
   fill: none;
-  stroke: #f1f1f0;
+  stroke: var(--cdc-grey-50);
   stroke-width: 2;
   stroke-linecap: round;
   opacity: 0.8;
@@ -127,7 +127,7 @@
 }
 
 .cdc-dist__dot {
-  fill: #f1f1f0;
+  fill: var(--cdc-grey-50);
   stroke: var(--cdc-bg-panel);
   stroke-width: 2.5;
   opacity: 0;

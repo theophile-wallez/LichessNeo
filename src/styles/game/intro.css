@@ -70,12 +70,12 @@
     overflow: hidden;
     border-radius: 0.8cqh;
     background: #fff;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     box-shadow: 0 0.6cqh 2cqh #00000059;
   }
 
   main.round .cdc-intro__card--bottom {
-    background: #262421;
+    background: var(--cdc-grey-900);
     color: #fff;
     animation: cdc-intro-rise var(--cdc-intro-ms) both !important;
   }
@@ -154,7 +154,7 @@
     position: relative;
     padding: 1.6cqh 2.6cqh;
     border-radius: 0.8cqh;
-    background: #3c3a37;
+    background: var(--cdc-grey-700);
     color: #fff;
     font-size: 4.6cqh;
     font-weight: 800;

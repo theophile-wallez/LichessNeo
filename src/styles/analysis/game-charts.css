@@ -79,16 +79,16 @@
 
 /* An even game, over the area as on the review's graph. */
 .cdc-gchart__even {
-  stroke: #8b8987;
+  stroke: var(--cdc-grey-400);
   stroke-opacity: 0.6;
 }
 
 .cdc-gchart__bar--white {
-  fill: #ebeae8;
+  fill: var(--cdc-grey-100);
 }
 
 .cdc-gchart__bar--black {
-  fill: #8b8987;
+  fill: var(--cdc-grey-400);
 }
 
 .cdc-gchart__phase {
@@ -101,10 +101,10 @@
   font: 700 10.5px var(--cdc-font);
 }
 
-/* The move on the board, in the review graph's green. */
+/* The move on the board, in the accent. */
 .cdc-gchart__ply {
   display: none;
-  stroke: var(--cdc-green);
+  stroke: var(--cdc-accent);
   stroke-width: 2;
 }
 

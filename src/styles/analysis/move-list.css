@@ -51,7 +51,7 @@
   html:not(.cdc-review-moves) main.analyse .tview2-column > index:nth-of-type(even),
   html:not(.cdc-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move,
   html:not(.cdc-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move + move {
-    background: #2a2926 !important;
+    background: var(--cdc-grey-850) !important;
   }
 
   main.analyse .tview2-column > move san {
@@ -96,7 +96,7 @@
     --cdc-glyph: #5288d6;
   }
   main.analyse .tview2 move.interesting {
-    --cdc-glyph: #96af8b;
+    --cdc-glyph: var(--cdc-grey-300);
   }
   main.analyse .tview2 move.inaccuracy {
     --cdc-glyph: #eeb422;
@@ -122,7 +122,7 @@
     height: 18px;
     margin: 0 -1px 0 0 !important;
     border-radius: 50%;
-    background: var(--cdc-glyph, #8b8987);
+    background: var(--cdc-glyph, var(--cdc-grey-400));
     box-shadow: 0 1px 0 #0000004d;
     color: #fff !important;
     font-family: var(--cdc-font) !important;
@@ -140,7 +140,7 @@
     margin: 4px 8px 6px !important;
     padding: 8px 10px !important;
     border: none !important;
-    border-left: 3px solid var(--cdc-note, #5d5b58) !important;
+    border-left: 3px solid var(--cdc-note, var(--cdc-grey-500)) !important;
     border-radius: 5px !important;
     background: var(--cdc-bg-panel-dark) !important;
     box-shadow: none !important;
@@ -261,7 +261,7 @@
     border-radius: 8px;
     background:
       var(---white-king) center / 84% no-repeat,
-      var(--cdc-sq-light, #f0d9b5);
+      var(--cdc-sq-light, var(--cdc-orange-light));
     box-shadow:
       inset 0 1px 0 #ffffff40,
       inset 0 -3px 0 #00000026,
@@ -272,7 +272,7 @@
   main.analyse .analyse__moves .result::after {
     background:
       var(---black-king) center / 84% no-repeat,
-      var(--cdc-sq-dark, #b58863);
+      var(--cdc-sq-dark, var(--cdc-orange-dark));
   }
 
   main.analyse .analyse__moves .result:hover::before {
@@ -307,7 +307,7 @@
     }
   }
 
-  /* A study's "Next chapter": a real button, green once the chapter is done. */
+  /* A study's "Next chapter": a real button, primary once the chapter is done. */
   main.analyse .analyse__moves button.next {
     flex: none;
     width: calc(100% - 16px) !important;
@@ -322,8 +322,8 @@
   }
 
   main.analyse .analyse__moves button.next.highlighted {
-    background: var(--cdc-btn-green) !important;
-    box-shadow: var(--cdc-btn-green-shadow);
+    background: var(--cdc-btn-primary) !important;
+    box-shadow: var(--cdc-btn-primary-shadow);
     color: #fff !important;
     text-shadow: 0 1px 1px #00000033;
   }
@@ -334,6 +334,6 @@
   }
 
   main.analyse .analyse__moves button.next.highlighted:hover {
-    background: var(--cdc-btn-green-hover) !important;
+    background: var(--cdc-btn-primary-hover) !important;
   }
 }

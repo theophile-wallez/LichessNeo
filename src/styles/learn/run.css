@@ -146,7 +146,7 @@
     box-shadow 0.15s !important;
 }
 
-/* The tile behind the piece: dim until played, green once done, the category's color if current. */
+/* The tile behind the piece: dim until played, the accent once done, the category's color if current. */
 .learn__side-map .stage::before {
   content: '';
   position: absolute;
@@ -184,8 +184,8 @@
 }
 
 .learn__side-map .stage.done::before {
-  background: var(--cdc-btn-green);
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary);
+  box-shadow: var(--cdc-btn-primary-shadow);
 }
 
 .learn__side-map .stage.active::before {

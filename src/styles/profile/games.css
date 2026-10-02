@@ -8,7 +8,7 @@
   margin: 12px 12px 0;
   padding: 5px !important;
   border-radius: 10px;
-  background: #1c1b19 !important;
+  background: var(--cdc-grey-950) !important;
 }
 
 .user-show .angle-content > #games .nm-item,
@@ -202,7 +202,7 @@
 }
 
 .user-show .game-row .versus .player a:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 .user-show .game-row .versus .player .uflair {
@@ -235,13 +235,13 @@
 }
 
 .user-show .game-row .result .win {
-  background: #81b64c2e;
-  color: var(--cdc-green-hover) !important;
+  background: color-mix(in srgb, var(--cdc-good) 18%, transparent);
+  color: var(--cdc-good-hover) !important;
 }
 
 .user-show .game-row .result .loss {
-  background: #d647422e;
-  color: #f08782 !important;
+  background: color-mix(in srgb, var(--cdc-red-dark) 18%, transparent);
+  color: var(--cdc-red) !important;
 }
 
 /* Lichess pads the row with two <br> after the result. */

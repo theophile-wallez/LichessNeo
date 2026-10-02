@@ -53,7 +53,7 @@
 }
 
 #dasher_app .cdc-src-status--failed {
-  color: #ff8a7a;
+  color: var(--cdc-red-light);
 }
 
 /* Paste a link, import; a private repository's token under it. */
@@ -107,7 +107,7 @@
 }
 
 #top #dasher_app .cdc-src-import input:focus {
-  border-color: var(--cdc-green);
+  border-color: var(--cdc-accent);
   outline: none;
 }
 
@@ -119,8 +119,8 @@
   padding: 0 12px;
   border: none;
   border-radius: 6px;
-  background: var(--cdc-btn-green);
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary);
+  box-shadow: var(--cdc-btn-primary-shadow);
   color: #fff;
   font: inherit;
   font-size: 13px;
@@ -129,7 +129,7 @@
 }
 
 #top #dasher_app .cdc-src-import button:hover {
-  background: var(--cdc-btn-green-hover);
+  background: var(--cdc-btn-primary-hover);
 }
 
 #top #dasher_app .cdc-src-help {

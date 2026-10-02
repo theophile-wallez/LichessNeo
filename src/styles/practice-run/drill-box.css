@@ -81,20 +81,20 @@
     font-weight: 600;
   }
 
-  /* The hint is the one action here: a green pill instead of a bare link. */
+  /* The hint is the one action here: an accent pill instead of a bare link. */
   main.analyse .practice-box .feedback .choices a {
     display: inline-block;
     margin-top: 4px;
     padding: 3px 10px;
     border-radius: 999px;
-    background: #81b64c2e;
-    color: var(--cdc-green-hover) !important;
+    background: color-mix(in srgb, var(--cdc-accent) 18%, transparent);
+    color: var(--cdc-accent-hover) !important;
     font-size: 12.5px;
     font-weight: 800;
   }
 
   main.analyse .practice-box .feedback .choices a:hover {
-    background: #81b64c47;
+    background: color-mix(in srgb, var(--cdc-accent) 28%, transparent);
     color: #fff !important;
   }
 
@@ -128,14 +128,14 @@
 
   main.analyse .practice-box > .comment .next {
     border-radius: 8px !important;
-    background: var(--cdc-btn-green) !important;
-    box-shadow: var(--cdc-btn-green-shadow) !important;
+    background: var(--cdc-btn-primary) !important;
+    box-shadow: var(--cdc-btn-primary-shadow) !important;
     color: #fff !important;
     font-weight: 800;
   }
 
   main.analyse .practice-box > .comment .next:hover {
-    background: var(--cdc-btn-green-hover) !important;
+    background: var(--cdc-btn-primary-hover) !important;
   }
 
   /* Lichess's controls end the panel, so they get the card's bottom corners. */

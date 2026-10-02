@@ -8,8 +8,8 @@
    data-cdc-search). */
 main.forum,
 main.forum .categs tr {
-  --cdc-fc: #95c85a;
-  --cdc-fc-2: #5d9948;
+  --cdc-fc: var(--cdc-accent);
+  --cdc-fc-2: var(--cdc-purple-dark);
   --cdc-fc-emoji: url('https://lichess1.org/assets/flair/img/activity.chess-pawn.webp');
 }
 
@@ -17,7 +17,7 @@ main.forum .categs tr[data-cdc-href$='/forum/lichess-feedback'],
 main.forum-categ[data-cdc-href*='/forum/lichess-feedback/'],
 main.forum-topic[data-cdc-back$='/forum/lichess-feedback'] {
   --cdc-fc: #45a3f5;
-  --cdc-fc-2: #2474c9;
+  --cdc-fc-2: var(--cdc-cyan-darker);
   --cdc-fc-emoji: url('https://lichess1.org/assets/flair/img/objects.light-bulb.webp');
 }
 
@@ -25,15 +25,15 @@ main.forum .categs tr[data-cdc-href$='/forum/game-analysis'],
 main.forum-categ[data-cdc-href*='/forum/game-analysis/'],
 main.forum-topic[data-cdc-back$='/forum/game-analysis'] {
   --cdc-fc: #a98bf0;
-  --cdc-fc-2: #7458c7;
+  --cdc-fc-2: var(--cdc-purple-dark);
   --cdc-fc-emoji: url('https://lichess1.org/assets/flair/img/objects.magnifying-glass-tilted-left.webp');
 }
 
 main.forum .categs tr[data-cdc-href$='/forum/off-topic-discussion'],
 main.forum-categ[data-cdc-href*='/forum/off-topic-discussion/'],
 main.forum-topic[data-cdc-back$='/forum/off-topic-discussion'] {
-  --cdc-fc: #fa8a4c;
-  --cdc-fc-2: #d9601c;
+  --cdc-fc: var(--cdc-orange-dark);
+  --cdc-fc-2: var(--cdc-orange-darker);
   --cdc-fc-emoji: url('https://lichess1.org/assets/flair/img/food-drink.hot-beverage.webp');
 }
 
@@ -41,8 +41,8 @@ main.forum-topic[data-cdc-back$='/forum/off-topic-discussion'] {
 main.forum .categs tr[data-cdc-href*='/forum/team-'],
 main.forum-categ[data-cdc-back*='/team/'],
 main.forum-topic[data-cdc-back*='/forum/team-'] {
-  --cdc-fc: #3fd0b2;
-  --cdc-fc-2: #1f9c83;
+  --cdc-fc: var(--cdc-cyan-darker);
+  --cdc-fc-2: var(--cdc-cyan-deep);
   --cdc-fc-emoji: url('https://lichess1.org/assets/flair/img/people.people-hugging.webp');
 }
 
@@ -248,25 +248,25 @@ html[dir='rtl'] main.search > .box__top form.search[action$='/forum/search'] inp
 
 main.forum form.search input:focus,
 main.search > .box__top form.search[action$='/forum/search'] input:focus {
-  box-shadow: 0 0 0 3px #81b64c33;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
 }
 
-/* "Create a new topic": a green button rather than a text link. */
+/* "Create a new topic": a primary button rather than a text link. */
 main.forum-categ .box__top__actions a.button-green {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   height: 42px;
   padding: 0 20px !important;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #fff !important;
   font-size: 15px;
   text-shadow: 0 1px 1px #00000033 !important;
 }
 
 main.forum-categ .box__top__actions a.button-green:hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
 }
 
 main.forum-categ .box__top__actions a.button-green::before {

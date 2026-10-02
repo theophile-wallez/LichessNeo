@@ -93,7 +93,7 @@ export function createManifest(target: Target, version: string): Manifest {
     ],
     web_accessible_resources: [
       {
-        resources: ['img/coaches/*', 'img/icons/*'],
+        resources: ['img/coaches/*', 'img/icons/*', 'img/sidebar/*'],
         matches: LICHESS,
       },
     ],

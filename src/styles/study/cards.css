@@ -67,7 +67,7 @@
   font-size: 20px !important;
 }
 
-/* List view on: the toggle looks pressed, not like a green action. */
+/* List view on: the toggle looks pressed, not like an action. */
 .study-index .box__top form[action*='list-format'] .button.active {
   background: var(--cdc-btn-grey-hover) !important;
   box-shadow:
@@ -163,8 +163,8 @@
   width: 46px;
   height: 46px;
   border-radius: 10px;
-  background: #81b64c26;
-  color: var(--cdc-green) !important;
+  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
+  color: var(--cdc-accent) !important;
   font-size: 24px !important;
 }
 
@@ -189,7 +189,7 @@
 }
 
 .study-index .studies .study .top .private {
-  color: var(--cdc-brag, #e3aa24);
+  color: var(--cdc-brag, var(--cdc-orange-dark));
 }
 
 .study-index .studies .study .body {
@@ -214,7 +214,7 @@
   display: block !important;
   overflow: hidden;
   padding: 2px 0;
-  color: #c8c7c4 !important;
+  color: var(--cdc-grey-200) !important;
   line-height: 1.4;
   text-overflow: ellipsis;
   white-space: nowrap;

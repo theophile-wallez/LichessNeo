@@ -51,7 +51,7 @@
   }
 
   main.round :is(aPp, l4x)[data-cdc-times] > :is(qZM, i5z) + * + [data-cdc-time]::before {
-    background: #8b8987;
+    background: var(--cdc-grey-400);
   }
 
   main.round :is(i5d, rm6) .result-wrap {
@@ -103,10 +103,10 @@
     justify-content: center;
     height: clamp(48px, 7vh, 64px);
     padding: 0 !important;
-    background: var(--cdc-btn-green) !important;
+    background: var(--cdc-btn-primary) !important;
     color: #fff !important;
     font-size: 0 !important;
-    box-shadow: var(--cdc-btn-green-shadow) !important;
+    box-shadow: var(--cdc-btn-primary-shadow) !important;
   }
 
   main.round
@@ -137,10 +137,10 @@
     .rcontrols
     .follow-up
     > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']):hover {
-    background: var(--cdc-btn-green-hover) !important;
+    background: var(--cdc-btn-primary-hover) !important;
   }
 
-  /* Rematch goes grey: Game Review is the one green button. */
+  /* Rematch goes grey: Game Review is the one primary button. */
   main.round .rcontrols .follow-up .fbt {
     height: 48px;
     margin: 0 !important;
@@ -209,14 +209,14 @@
     font-size: 15px;
   }
 
-  /* A rematch offer turns the button green, hover included. */
+  /* A rematch offer turns the button primary, hover included. */
   main.round .rcontrols .follow-up .rematch.glowing {
-    background: var(--cdc-btn-green) !important;
-    box-shadow: var(--cdc-btn-green-shadow) !important;
+    background: var(--cdc-btn-primary) !important;
+    box-shadow: var(--cdc-btn-primary-shadow) !important;
   }
 
   main.round .rcontrols .follow-up .rematch.glowing:hover:not(.disabled, :disabled) {
-    background: var(--cdc-btn-green-hover) !important;
+    background: var(--cdc-btn-primary-hover) !important;
   }
 
   /* Lichess turns the glowing button's ::before (our icon) into a pulsing overlay. */

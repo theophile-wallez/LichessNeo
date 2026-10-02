@@ -6,52 +6,52 @@
    "My broadcasts" and another user's end with their name; the last two lists are admin-only. */
 .subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/satellite-antenna.svg');
-  --cdc-nav-color: #81b64c;
+  --cdc-nav-color: var(--cdc-accent);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href*='/broadcast/by/'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/video-camera.svg');
-  --cdc-nav-color: #8a6fd8;
+  --cdc-nav-color: var(--cdc-purple-dark);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/subscribed'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/red-heart.svg');
-  --cdc-nav-color: #e25555;
+  --cdc-nav-color: var(--cdc-red);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/calendar'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
-  --cdc-nav-color: #1baaf0;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/help'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/open-book.svg');
-  --cdc-nav-color: #26c2a3;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/app'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/mobile-phone.svg');
-  --cdc-nav-color: #1baaf0;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/all-private'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/locked.svg');
-  --cdc-nav-color: #f7c631;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/non-official'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/eyes.svg');
-  --cdc-nav-color: #9aa3ad;
+  --cdc-nav-color: var(--cdc-grey-300);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href$='/fide'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/sports-medal.svg');
-  --cdc-nav-color: #f7c631;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='broadcast'] a[href*='/fide/federation'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/globe.svg');
-  --cdc-nav-color: #26c2a3;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 /* ---- Pinned --- */

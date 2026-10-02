@@ -29,7 +29,10 @@
     display: block;
     height: 40px;
     margin-top: -40px;
-    background: linear-gradient(#26252200, var(--cdc-bg-panel));
+    background: linear-gradient(
+      color-mix(in srgb, var(--cdc-grey-900) 0%, transparent),
+      var(--cdc-bg-panel)
+    );
     pointer-events: none;
   }
 
@@ -91,14 +94,14 @@
 
   main.lobby .daily-feed__update p {
     margin: -7px 0 0;
-    color: #d4d3d1;
+    color: var(--cdc-grey-200);
     font-size: 14.5px;
     line-height: 1.55;
   }
 
   /* The last entry is the "All updates" link. */
   main.lobby .daily-feed__update a.daily-feed__update__day[href$='/feed'] {
-    color: var(--cdc-green-hover) !important;
+    color: var(--cdc-accent-hover) !important;
     text-transform: none;
     letter-spacing: 0;
     font-size: 14px !important;
@@ -171,8 +174,8 @@
     height: 34px;
     margin: 0 !important;
     border-radius: 50%;
-    background: #e0282826;
-    color: #ff6b6b;
+    background: color-mix(in srgb, var(--cdc-red-dark) 15%, transparent);
+    color: var(--cdc-red);
     font-size: 18px !important;
     transform: translateY(-50%);
   }
@@ -184,8 +187,8 @@
     height: 7px;
     margin: 0 0 1px 8px;
     border-radius: 50%;
-    background: #ff4d4d;
-    box-shadow: 0 0 0 3px #ff4d4d2e;
+    background: var(--cdc-red);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-red) 18%, transparent);
   }
 
   main.lobby .lobby__streams .more {
@@ -229,7 +232,7 @@
   }
 
   main.lobby .tour-spotlight:hover {
-    background: #2c2b28 !important;
+    background: var(--cdc-grey-850) !important;
   }
 
   main.lobby .tour-spotlight .name {

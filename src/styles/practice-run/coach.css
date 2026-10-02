@@ -17,20 +17,20 @@
     border-radius: 12px !important;
     background: #fff !important;
     box-shadow: 0 6px 18px #00000059 !important;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     font-size: 15px !important;
   }
 
   main.analyse .gamebook .comment .content {
     padding: 14px 16px !important;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     font-weight: 500;
     line-height: 1.5;
   }
 
-  /* Links on white: the site's green is too pale (2.4:1), the darker one reads (5.4:1). */
+  /* Links on white: the accent is too pale, its darker shade reads. */
   main.analyse :is(.gamebook .comment .content, .analyse__underboard .feedback) a {
-    color: var(--cdc-green-shadow) !important;
+    color: var(--cdc-accent-shadow) !important;
     font-weight: 700;
   }
 
@@ -53,13 +53,13 @@
   }
 
   main.analyse .gamebook .comment.hinted::after {
-    background: var(--cdc-green) !important;
+    background: var(--cdc-accent) !important;
   }
 
-  /* The hint button, then the hint as a green band under the bubble. */
+  /* The hint button, then the hint as an accent band under the bubble. */
   main.analyse .gamebook .comment button.hint {
     padding: 0 16px 12px !important;
-    color: #4e8a3c !important;
+    color: var(--cdc-purple-dark) !important;
     font-size: 13px !important;
     font-weight: 800 !important;
     letter-spacing: 0.03em;
@@ -67,13 +67,13 @@
   }
 
   main.analyse .gamebook .comment button.hint:hover {
-    color: #3d7030 !important;
+    color: var(--cdc-purple-darker) !important;
   }
 
   main.analyse .gamebook .comment div.hint {
     padding: 12px 16px !important;
     border-radius: 0 0 12px 12px !important;
-    background: var(--cdc-green) !important;
+    background: var(--cdc-accent) !important;
     color: #fff !important;
     font-size: 14px !important;
     font-weight: 600;
@@ -150,7 +150,7 @@
 
   /* "Good move": the verdict in green on a dark card; a green card would shout. */
   main.analyse .gamebook .feedback.info.good {
-    color: var(--cdc-green-hover);
+    color: var(--cdc-good-hover);
     font-size: 19px !important;
     font-weight: 800;
   }
@@ -166,12 +166,12 @@
   }
 
   main.analyse .gamebook .feedback.act.good {
-    background: var(--cdc-btn-green) !important;
-    box-shadow: var(--cdc-btn-green-shadow) !important;
+    background: var(--cdc-btn-primary) !important;
+    box-shadow: var(--cdc-btn-primary-shadow) !important;
   }
 
   main.analyse .gamebook .feedback.act.good:hover {
-    background: var(--cdc-btn-green-hover) !important;
+    background: var(--cdc-btn-primary-hover) !important;
   }
 
   main.analyse .gamebook .feedback.act.bad {
@@ -205,7 +205,7 @@
     text-shadow: none;
   }
 
-  /* End of the lesson: next chapter in green, the rest grey, side by side. */
+  /* End of the lesson: next chapter in the primary color, the rest grey, side by side. */
   main.analyse .gamebook .feedback.end {
     gap: 8px;
     background: transparent !important;
@@ -233,13 +233,13 @@
   }
 
   main.analyse .gamebook .feedback.end button.next {
-    background: var(--cdc-btn-green) !important;
-    box-shadow: var(--cdc-btn-green-shadow) !important;
+    background: var(--cdc-btn-primary) !important;
+    box-shadow: var(--cdc-btn-primary-shadow) !important;
     color: #fff !important;
   }
 
   main.analyse .gamebook .feedback.end button.next:hover {
-    background: var(--cdc-btn-green-hover) !important;
+    background: var(--cdc-btn-primary-hover) !important;
     color: #fff !important;
   }
 }

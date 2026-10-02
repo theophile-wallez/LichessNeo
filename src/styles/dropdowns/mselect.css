@@ -1,5 +1,5 @@
 /* Every dropdown in one menu style: Lichess's `.mselect` here, native <select> and
- * autocomplete lists in native-select.css. Flat trigger, chevron, floating menu, green check. */
+ * autocomplete lists in native-select.css. Flat trigger, chevron, floating menu, accent check. */
 
 :root {
   --cdc-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 6 8 10.5 12.5 6' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -9,7 +9,7 @@
 /* ---- mselect --- */
 
 .mselect__label {
-  border: 1px solid #4b4847 !important;
+  border: 1px solid var(--cdc-grey-650) !important;
   border-radius: 8px !important;
   background: var(--cdc-bg-raised) !important;
   box-shadow: none !important;
@@ -27,7 +27,7 @@
 }
 
 .mselect__toggle:checked ~ .mselect__label {
-  border-color: #6b6966 !important;
+  border-color: var(--cdc-grey-500) !important;
 }
 
 /* Lichess's green triangle becomes a dim chevron. */
@@ -170,7 +170,7 @@ div.mselect__item.current::after {
   height: 14px;
   margin-inline-start: auto;
   padding-inline-start: 12px;
-  background: var(--cdc-green);
+  background: var(--cdc-accent);
   -webkit-mask: var(--cdc-check) right center / 14px no-repeat;
   mask: var(--cdc-check) right center / 14px no-repeat;
 }
@@ -230,7 +230,7 @@ dialog .scrollable:has(.game-setup .mselect__toggle:checked) {
 }
 
 .game-setup .mselect__item.current td {
-  background: #81b64c1f !important;
+  background: color-mix(in srgb, var(--cdc-accent) 12%, transparent) !important;
 }
 
 .game-setup .mselect__item .icon span {
@@ -240,7 +240,7 @@ dialog .scrollable:has(.game-setup .mselect__toggle:checked) {
 }
 
 .game-setup .mselect__item.current .icon span {
-  color: var(--cdc-green);
+  color: var(--cdc-accent);
 }
 
 .game-setup .mselect__item .desc {
@@ -249,5 +249,5 @@ dialog .scrollable:has(.game-setup .mselect__toggle:checked) {
 }
 
 .game-setup .mselect__label .icon {
-  color: var(--cdc-green);
+  color: var(--cdc-accent);
 }

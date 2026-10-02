@@ -103,7 +103,7 @@
 }
 
 .fide-players-table .player-intro__name:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 .fide-players-table .player-intro__fed {
@@ -160,17 +160,17 @@ html:not([data-cdc-fide-skip])
   :is(.fide-players-table, .fide-federations .slist)
   tbody
   tr.paginated:nth-child(1) {
-  --cdc-medal: linear-gradient(145deg, #fad541, #d8a31a);
+  --cdc-medal: linear-gradient(145deg, var(--cdc-yellow-dark), var(--cdc-orange-darker));
 }
 html:not([data-cdc-fide-skip])
   :is(.fide-players-table, .fide-federations .slist)
   tbody
   tr.paginated:nth-child(2) {
-  --cdc-medal: linear-gradient(145deg, #d9dde3, #9aa3ad);
+  --cdc-medal: linear-gradient(145deg, var(--cdc-grey-100), var(--cdc-grey-300));
 }
 html:not([data-cdc-fide-skip])
   :is(.fide-players-table, .fide-federations .slist)
   tbody
   tr.paginated:nth-child(3) {
-  --cdc-medal: linear-gradient(145deg, #e0a06a, #b06a35);
+  --cdc-medal: linear-gradient(145deg, var(--cdc-orange), var(--cdc-orange-darker));
 }

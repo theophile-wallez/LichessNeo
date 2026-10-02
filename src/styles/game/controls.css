@@ -36,7 +36,7 @@
     border-radius: 8px !important;
     background: var(--cdc-btn-grey) !important;
     box-shadow: var(--cdc-btn-grey-shadow);
-    color: #d0cfcd !important;
+    color: var(--cdc-grey-200) !important;
     font-size: 24px !important;
     text-shadow: none !important;
     visibility: visible !important;
@@ -59,7 +59,7 @@
     order: -1;
   }
 
-  /* Confirming a resignation or a draw offer: only confirm (red or green) and cancel. */
+  /* Confirming a resignation or a draw offer: only confirm (red or primary) and cancel. */
   main.round .rcontrols .ricons.confirm > .fbt {
     display: none !important;
   }
@@ -79,15 +79,15 @@
   }
 
   main.round .rcontrols .ricons .act-confirm .yes.draw-yes {
-    background: var(--cdc-btn-green) !important;
-    box-shadow: var(--cdc-btn-green-shadow);
+    background: var(--cdc-btn-primary) !important;
+    box-shadow: var(--cdc-btn-primary-shadow);
   }
 
   main.round .rcontrols .ricons .act-confirm .yes.draw-yes:hover {
-    background: var(--cdc-btn-green-hover) !important;
+    background: var(--cdc-btn-primary-hover) !important;
   }
 
-  /* A draw or takeback offer: the question between a grey decline and a green accept. */
+  /* A draw or takeback offer: the question between a grey decline and a primary accept. */
   main.round .rcontrols .question {
     gap: 8px;
     margin-top: 4px;
@@ -116,7 +116,7 @@
     border-radius: 8px;
     background: var(--cdc-btn-grey) !important;
     box-shadow: var(--cdc-btn-grey-shadow);
-    color: #d0cfcd !important;
+    color: var(--cdc-grey-200) !important;
     font-size: 22px !important;
     line-height: 1 !important;
     cursor: pointer;
@@ -128,12 +128,12 @@
   }
 
   main.round .rcontrols .question .yes {
-    background: var(--cdc-btn-green) !important;
-    box-shadow: var(--cdc-btn-green-shadow);
+    background: var(--cdc-btn-primary) !important;
+    box-shadow: var(--cdc-btn-primary-shadow);
     color: #fff !important;
   }
 
   main.round .rcontrols .question .yes:hover {
-    background: var(--cdc-btn-green-hover) !important;
+    background: var(--cdc-btn-primary-hover) !important;
   }
 }

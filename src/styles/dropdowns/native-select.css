@@ -104,7 +104,7 @@
     height: 14px;
     margin-inline-start: auto;
     padding-inline-start: 12px;
-    background: var(--cdc-green);
+    background: var(--cdc-accent);
     -webkit-mask: var(--cdc-check) right center / 14px no-repeat;
     mask: var(--cdc-check) right center / 14px no-repeat;
   }
@@ -160,5 +160,5 @@
 }
 
 .select-search__item.selected {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
 }

@@ -74,7 +74,7 @@ main.swiss-home .comparison thead strong {
 }
 
 main.swiss-home .comparison thead th:nth-child(3) strong {
-  color: var(--cdc-green);
+  color: var(--cdc-accent);
 }
 
 main.swiss-home .comparison tbody th {
@@ -126,7 +126,7 @@ main.swiss-home #faq .faq icon {
   margin: 0 !important;
   border-radius: 50%;
   background: var(--cdc-bg-raised);
-  color: #e3aa24 !important;
+  color: var(--cdc-orange-dark) !important;
   font-family: var(--cdc-font);
   font-size: 17px !important;
   font-weight: 800 !important;

@@ -87,7 +87,7 @@
 /* Tournament tiles: dark cards with their kind's color on the edge and icon, instead of
  * Lichess's saturated, grainy blocks. */
 .tsht {
-  --cdc-tsht: #6f6d6a;
+  --cdc-tsht: var(--cdc-grey-500);
   border-inline-start: 3px solid var(--cdc-tsht) !important;
   border-radius: 8px !important;
   background: var(--cdc-bg-raised) !important;
@@ -126,42 +126,42 @@
 }
 
 .tsht-hourly {
-  --cdc-tsht: #81b64c;
+  --cdc-tsht: var(--cdc-accent);
 }
 
 .tsht-daily,
 .tsht-eastern {
-  --cdc-tsht: #3692e7;
+  --cdc-tsht: var(--cdc-cyan-dark);
 }
 
 .tsht-weekly {
-  --cdc-tsht: #e58f2a;
+  --cdc-tsht: var(--cdc-orange-dark);
 }
 
 .tsht-monthly {
-  --cdc-tsht: #e0513a;
+  --cdc-tsht: var(--cdc-red-dark);
 }
 
 .tsht-yearly,
 .tsht-weekend,
 .tsht-unique {
-  --cdc-tsht: #e3aa24;
+  --cdc-tsht: var(--cdc-orange-dark);
 }
 
 .tsht-marathon {
-  --cdc-tsht: #9b7fd8;
+  --cdc-tsht: var(--cdc-purple-dark);
 }
 
 .tsht-max-rating {
-  --cdc-tsht: #7b68ee;
+  --cdc-tsht: var(--cdc-purple-dark);
 }
 
 .tsht-variant {
-  --cdc-tsht: #b07b4f;
+  --cdc-tsht: var(--cdc-orange-dark);
 }
 
 .tsht-user-created {
-  --cdc-tsht: #5d9948;
+  --cdc-tsht: var(--cdc-purple-dark);
 }
 
 /* The calendar draws the same tiles as bars. Its dates hang into the page's left margin,
@@ -173,7 +173,7 @@
 }
 
 #tournament-calendar .tournament {
-  --cdc-tsht: #6f6d6a;
+  --cdc-tsht: var(--cdc-grey-500);
   border-inline-start: 3px solid var(--cdc-tsht);
   border-radius: 6px !important;
   background: var(--cdc-bg-raised) !important;
@@ -198,23 +198,23 @@
 }
 
 #tournament-calendar .tournament.weekly {
-  --cdc-tsht: #e58f2a;
+  --cdc-tsht: var(--cdc-orange-dark);
 }
 
 #tournament-calendar .tournament.monthly {
-  --cdc-tsht: #e0513a;
+  --cdc-tsht: var(--cdc-red-dark);
 }
 
 #tournament-calendar .tournament:is(.yearly, .weekend, .unique) {
-  --cdc-tsht: #e3aa24;
+  --cdc-tsht: var(--cdc-orange-dark);
 }
 
 #tournament-calendar .tournament.marathon {
-  --cdc-tsht: #9b7fd8;
+  --cdc-tsht: var(--cdc-purple-dark);
 }
 
 #tournament-calendar .tournament.shield {
-  --cdc-tsht: #7f9aa8;
+  --cdc-tsht: var(--cdc-grey-300);
 }
 
 #tournament-calendar date {

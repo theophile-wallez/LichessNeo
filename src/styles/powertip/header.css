@@ -63,7 +63,7 @@
   height: 16px;
   border: 3px solid var(--cdc-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-green);
+  background: var(--cdc-good);
 }
 
 /* Lichess spreads the top row apart (space-between); keep the country by the name. */
@@ -87,7 +87,7 @@
 }
 
 #powerTip .upt__info__top .user-link:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 /* The title badge itself comes from theme/. */
@@ -191,7 +191,7 @@
 /* Unrated (no games, or too few): a quieter chip. */
 #powerTip .upt__info__ratings > span[data-cdc-rating='none'] {
   background: #ffffff05;
-  color: var(--cdc-font-dimmer, #6f6d6a) !important;
+  color: var(--cdc-font-dimmer, var(--cdc-grey-500)) !important;
 }
 
 #powerTip .upt__info__ratings > span[data-cdc-rating='none']::before {
@@ -204,7 +204,7 @@
   margin-top: 12px;
   padding: 8px;
   border-radius: 6px;
-  background: #e0282814;
+  background: color-mix(in srgb, var(--cdc-red-dark) 8%, transparent);
   font-size: 13px;
   font-weight: 600;
 }

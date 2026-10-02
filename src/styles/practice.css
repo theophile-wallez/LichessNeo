@@ -49,7 +49,7 @@
   font-weight: 600 !important;
 }
 
-/* Progress: a dark track with a green bar. */
+/* Progress: a dark track with an accent bar. */
 .practice-side .progress {
   height: 30px !important;
   border-radius: 999px !important;
@@ -60,11 +60,11 @@
 .practice-side .progress .bar {
   min-width: 30px;
   border-radius: 999px !important;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: inset 0 1px 0 #9ccd5e;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: inset 0 1px 0 var(--cdc-accent);
 }
 
-/* No progress yet: an empty track, not a green blob of min-width. */
+/* No progress yet: an empty track, not a blob of min-width. */
 .practice-side .progress .bar[style*='width: 0%'] {
   visibility: hidden;
 }
@@ -82,8 +82,8 @@
   display: block;
   padding: 10px 14px;
   border-radius: 7px;
-  background: var(--cdc-btn-green);
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary);
+  box-shadow: var(--cdc-btn-primary-shadow);
   color: #fff !important;
   font-size: 14px;
   font-weight: 800;
@@ -91,35 +91,35 @@
 }
 
 .practice-side form a[href$='/signup']:hover {
-  background: var(--cdc-btn-green-hover);
+  background: var(--cdc-btn-primary-hover);
 }
 
 /* ---- Sections --- */
 
 .practice-app section {
-  --cdc-practice: #81b64c;
-  --cdc-practice-2: #5d9948;
+  --cdc-practice: var(--cdc-accent);
+  --cdc-practice-2: var(--cdc-purple-dark);
 }
 
 .practice-app section:nth-of-type(5n + 1) {
   --cdc-practice: #f06a4a;
-  --cdc-practice-2: #c9412d;
+  --cdc-practice-2: var(--cdc-red-dark);
 }
 .practice-app section:nth-of-type(5n + 2) {
   --cdc-practice: #45a3f5;
-  --cdc-practice-2: #2474c9;
+  --cdc-practice-2: var(--cdc-cyan-darker);
 }
 .practice-app section:nth-of-type(5n + 3) {
   --cdc-practice: #a98bf0;
-  --cdc-practice-2: #7458c7;
+  --cdc-practice-2: var(--cdc-purple-dark);
 }
 .practice-app section:nth-of-type(5n + 4) {
-  --cdc-practice: #95c85a;
-  --cdc-practice-2: #5d9948;
+  --cdc-practice: var(--cdc-accent);
+  --cdc-practice-2: var(--cdc-purple-dark);
 }
 .practice-app section:nth-of-type(5n + 5) {
   --cdc-practice: #f5a93b;
-  --cdc-practice-2: #d27a1c;
+  --cdc-practice-2: var(--cdc-orange-darker);
 }
 
 /* A dot in the section's color, instead of Lichess's spaced-out grey capitals. */
@@ -266,7 +266,7 @@ html[dir='rtl'] .practice-app .study {
   height: 22px;
   border: 2px solid var(--cdc-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-green)
+  background: var(--cdc-good)
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5 6.5 11.5 12.5 4.5' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
     center / 14px no-repeat;
 }
@@ -309,8 +309,8 @@ html[dir='rtl'] .practice-app .study {
 }
 
 .practice-app .study .ribbon.done {
-  background: #81b64c40 !important;
-  color: var(--cdc-green-hover) !important;
+  background: color-mix(in srgb, var(--cdc-good) 25%, transparent) !important;
+  color: var(--cdc-good-hover) !important;
 }
 
 .practice-app .what_next > p {

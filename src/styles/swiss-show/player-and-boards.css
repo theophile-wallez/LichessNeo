@@ -121,11 +121,11 @@ main.swiss .swiss__player-info .sublist td:last-child {
 }
 
 main.swiss .swiss__player-info .sublist tr.win td:last-child {
-  color: var(--cdc-green);
+  color: var(--cdc-good);
 }
 
 main.swiss .swiss__player-info .sublist tr.loss td:last-child {
-  color: #fa412d;
+  color: var(--cdc-red-dark);
 }
 
 main.swiss .swiss__player-info .sublist .outcome {
@@ -233,22 +233,22 @@ main.swiss .swiss__board :is(.mini-game__clock, .mini-game__result) {
 }
 
 main.swiss .swiss__board .mini-game__clock--white {
-  background: #989795;
-  color: #312e2b99 !important;
+  background: var(--cdc-grey-300);
+  color: color-mix(in srgb, var(--cdc-grey-800) 60%, transparent) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--white.clock--run {
   background: #fff;
-  color: #312e2b !important;
+  color: var(--cdc-grey-800) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--black {
-  background: #2b2926;
-  color: #82807d !important;
+  background: var(--cdc-grey-850);
+  color: var(--cdc-grey-400) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--black.clock--run {
-  background: #1c1b19;
+  background: var(--cdc-grey-950);
   color: #fff !important;
 }
 

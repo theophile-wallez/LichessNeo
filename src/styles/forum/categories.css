@@ -214,7 +214,7 @@ main.forum table.categs td:last-child > a:first-child {
 }
 
 main.forum table.categs td:last-child > a:first-child:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 main.forum table.categs td:last-child time {

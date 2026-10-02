@@ -48,7 +48,7 @@ main.plan :is(.best_patrons, .recent-patrons) .user-link.online .line.patron::af
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--cdc-green);
+  background: var(--cdc-good);
   box-shadow: 0 0 0 2px var(--cdc-bg-panel);
 }
 

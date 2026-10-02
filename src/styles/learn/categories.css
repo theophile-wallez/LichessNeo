@@ -1,31 +1,31 @@
 /* Learn (#learn-app) in Practice's look (practice.css). The map (`.learn--map`) and a stage
  * (`.learn--run`) are one snabbdom app on one URL. */
 
-/* A color per category, for the map and the stage list; "what next" (links out) in green. */
+/* A color per category, for the map and the stage list; "what next" (links out) in the accent. */
 #learn-app .categ {
-  --cdc-practice: #81b64c;
-  --cdc-practice-2: #5d9948;
+  --cdc-practice: var(--cdc-accent);
+  --cdc-practice-2: var(--cdc-purple-dark);
 }
 
 #learn-app .categ:nth-of-type(5n + 1) {
   --cdc-practice: #f06a4a;
-  --cdc-practice-2: #c9412d;
+  --cdc-practice-2: var(--cdc-red-dark);
 }
 #learn-app .categ:nth-of-type(5n + 2) {
   --cdc-practice: #45a3f5;
-  --cdc-practice-2: #2474c9;
+  --cdc-practice-2: var(--cdc-cyan-darker);
 }
 #learn-app .categ:nth-of-type(5n + 3) {
   --cdc-practice: #a98bf0;
-  --cdc-practice-2: #7458c7;
+  --cdc-practice-2: var(--cdc-purple-dark);
 }
 #learn-app .categ:nth-of-type(5n + 4) {
   --cdc-practice: #f5a93b;
-  --cdc-practice-2: #d27a1c;
+  --cdc-practice-2: var(--cdc-orange-darker);
 }
 #learn-app .categ.what_next {
-  --cdc-practice: #95c85a;
-  --cdc-practice-2: #5d9948;
+  --cdc-practice: var(--cdc-accent);
+  --cdc-practice-2: var(--cdc-purple-dark);
 }
 
 /* ---- Side --- */
@@ -75,7 +75,7 @@
   }
 }
 
-/* Progress: a green bar on a dark track. */
+/* Progress: an accent bar on a dark track. */
 .learn__side-home .progress {
   height: 30px !important;
   border: none !important;
@@ -87,11 +87,11 @@
 .learn__side-home .progress .bar {
   min-width: 30px;
   border-radius: 999px !important;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: inset 0 1px 0 #9ccd5e;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: inset 0 1px 0 var(--cdc-accent);
 }
 
-/* No progress yet: an empty track, not a min-width green blob. */
+/* No progress yet: an empty track, not a min-width blob. */
 .learn__side-home .progress .bar[style*='width: 0%'] {
   visibility: hidden;
 }

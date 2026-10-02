@@ -45,21 +45,21 @@ main.simul-list .slist {
 /* A color per section. Finished is the default: it's always the last. */
 main.simul-list .slist :is(thead, tbody) {
   --cdc-simul: #a98bf0;
-  --cdc-simul-2: #7458c7;
+  --cdc-simul-2: var(--cdc-purple-dark);
 }
 
 /* Your pending simuls. */
 main.simul-list .slist tbody:has(> tr.scheduled):not(:has(> tr.create)),
 main.simul-list .slist thead:has(+ tbody > tr.scheduled):not(:has(+ tbody > tr.create)) {
   --cdc-simul: #f5a93b;
-  --cdc-simul-2: #d27a1c;
+  --cdc-simul-2: var(--cdc-orange-darker);
 }
 
 /* Open to join, and the "host a simul" row. */
 main.simul-list .slist tbody:has(> tr.create),
 main.simul-list .slist thead:has(+ tbody > tr.create) {
   --cdc-simul: #45a3f5;
-  --cdc-simul-2: #2474c9;
+  --cdc-simul-2: var(--cdc-cyan-darker);
 }
 
 /* In progress: plain rows, not the last section. :has() can't nest, so the
@@ -71,8 +71,8 @@ main.simul-list
     :has(+ tbody:last-child),
     :has(+ tbody > tr:first-child:is(.scheduled, .create))
   ) {
-  --cdc-simul: #95c85a;
-  --cdc-simul-2: #5d9948;
+  --cdc-simul: var(--cdc-accent);
+  --cdc-simul-2: var(--cdc-purple-dark);
 }
 
 main.simul-list .slist :is(thead, thead tr) {
@@ -119,17 +119,17 @@ main.simul-list
   )
   th:first-child::before {
   border-radius: 50%;
-  box-shadow: 0 0 0 0 #95c85ab3;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 70%, transparent);
   animation: cdc-simul-pulse 1.6s ease-out infinite;
 }
 
 @keyframes cdc-simul-pulse {
   70% {
-    box-shadow: 0 0 0 7px #95c85a00;
+    box-shadow: 0 0 0 7px color-mix(in srgb, var(--cdc-accent) 0%, transparent);
   }
 
   100% {
-    box-shadow: 0 0 0 0 #95c85a00;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 0%, transparent);
   }
 }
 

@@ -74,11 +74,11 @@ main.swiss .swiss__meta p[style*='--cdc-progress']::after {
   height: 4px;
   margin-top: 6px;
   border-radius: 2px;
-  background: linear-gradient(to right, var(--cdc-green) var(--cdc-progress), #ffffff14 0);
+  background: linear-gradient(to right, var(--cdc-accent) var(--cdc-progress), #ffffff14 0);
 }
 
 html[dir='rtl'] main.swiss .swiss__meta p[style*='--cdc-progress']::after {
-  background: linear-gradient(to left, var(--cdc-green) var(--cdc-progress), #ffffff14 0);
+  background: linear-gradient(to left, var(--cdc-accent) var(--cdc-progress), #ffffff14 0);
 }
 
 main.swiss .swiss__meta .description {
@@ -89,7 +89,7 @@ main.swiss .swiss__meta .description {
 }
 
 main.swiss .swiss__meta .description a {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
 }
 
 /* The team as a chip. */
@@ -155,11 +155,11 @@ main.swiss .swiss__meta section.conditions .condition {
 }
 
 main.swiss .swiss__meta section.conditions .condition.accepted {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-good) !important;
 }
 
 main.swiss .swiss__meta section.conditions .condition.refused {
-  color: #fa412d !important;
+  color: var(--cdc-red-dark) !important;
 }
 
 /* Creator and start date: a quiet footer. */

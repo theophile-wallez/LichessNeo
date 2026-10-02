@@ -215,7 +215,7 @@
     width: 7%;
     aspect-ratio: 3 / 4;
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    background: linear-gradient(#bfe3ff, #6fb6f0);
+    background: linear-gradient(var(--cdc-cyan-light), var(--cdc-cyan-dark));
     clip-path: polygon(50% 0, 100% 55%, 100% 100%, 0 100%, 0 55%);
     animation: cdc-drop 1.5s 0.3s ease-in;
   }

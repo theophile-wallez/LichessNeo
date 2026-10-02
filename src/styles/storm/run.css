@@ -4,7 +4,7 @@
 .storm,
 .storm-dashboard,
 html[data-cdc-has~='storm'] main {
-  --cdc-storm: #fa742c;
+  --cdc-storm: var(--cdc-orange-dark);
   --cdc-storm-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/high-voltage.svg');
 }
 
@@ -108,11 +108,11 @@ html[data-cdc-has~='storm'] main {
 
 /* Green for a bonus, red for a penalty: Lichess's colors lose to our white clock's dark digits. */
 .storm.puz-mod-bonus-slow .puz-clock__time {
-  color: #4f8a34 !important;
+  color: var(--cdc-purple-dark) !important;
 }
 
 .storm.puz-mod-malus-slow .puz-clock__time {
-  color: #c0392f !important;
+  color: var(--cdc-red-dark) !important;
 }
 
 /* Seconds won or lost float up from the clock as pills. */
@@ -120,8 +120,8 @@ html[data-cdc-has~='storm'] main {
   margin: 0 !important;
   padding: 3px 10px;
   border-radius: 999px;
-  background: #81b64c2e;
-  color: var(--cdc-green-hover) !important;
+  background: color-mix(in srgb, var(--cdc-accent) 18%, transparent);
+  color: var(--cdc-good-hover) !important;
   font-family: var(--cdc-font) !important;
   font-size: 22px !important;
   font-weight: 800;
@@ -129,8 +129,8 @@ html[data-cdc-has~='storm'] main {
 }
 
 .storm .puz-clock__malus {
-  background: #e0282833;
-  color: #f0645a !important;
+  background: color-mix(in srgb, var(--cdc-red-dark) 20%, transparent);
+  color: var(--cdc-red) !important;
 }
 
 /* "You play the white pieces": a chip with a pawn of that color, under the clock
@@ -166,7 +166,7 @@ html[data-cdc-has~='storm'] main {
   background-image: var(---black-pawn);
 }
 
-/* Flip, new run, end run: grey buttons; flip turns green while flipped. */
+/* Flip, new run, end run: grey buttons; flip turns to the accent while flipped. */
 .storm .puz-side__control .button {
   background: var(--cdc-btn-grey) !important;
   box-shadow: var(--cdc-btn-grey-shadow) !important;
@@ -179,8 +179,8 @@ html[data-cdc-has~='storm'] main {
 }
 
 .storm .puz-side__control .button.active {
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #fff !important;
 }
 
@@ -279,8 +279,8 @@ body.zenable.zen .storm-dashboard__high__periods {
 }
 
 .storm-dashboard__high__period:first-child {
-  border-color: #e3aa2466 !important;
-  box-shadow: inset 0 0 0 1px #e3aa2433 !important;
+  border-color: color-mix(in srgb, var(--cdc-orange-dark) 40%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cdc-orange-dark) 20%, transparent) !important;
 }
 
 .storm-dashboard__high__period:first-child strong {

@@ -140,7 +140,7 @@ main.box.page-small[data-cdc-list='players'] {
   }
 
   & .user-link:hover {
-    color: var(--cdc-green-hover) !important;
+    color: var(--cdc-accent-hover) !important;
   }
 
   & .user-link .utitle {
@@ -179,7 +179,7 @@ main.box.page-small[data-cdc-list='players'] {
     margin: 0 !important;
     border: 2px solid var(--cdc-bg-panel);
     border-radius: 50%;
-    background: var(--cdc-green);
+    background: var(--cdc-good);
     font-size: 0;
   }
 

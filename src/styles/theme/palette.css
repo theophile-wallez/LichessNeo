@@ -1,0 +1,61 @@
+/* The Dracula palette (draculatheme.com): the only place a color is written.
+ * Stylesheets name these, or base.css's roles built on them. Each hue's
+ * shades are mixed from it, so changing a hue re-tints all of them. White and
+ * black overlays (#ffffff14, #00000040) shade whatever is under them, and stay
+ * as they are. */
+
+:root {
+  /* Greys, from the darkest. 800 is Dracula's background, 600 its current line,
+   * 400 its comment, 50 its foreground. */
+  --cdc-grey-950: #191a21;
+  --cdc-grey-900: #1e1f29;
+  --cdc-grey-850: #21222c;
+  --cdc-grey-800: #282a36;
+  --cdc-grey-750: #2d2f3d;
+  --cdc-grey-700: #343746;
+  --cdc-grey-650: #3c3f51;
+  --cdc-grey-600: #44475a;
+  --cdc-grey-500: #565a72;
+  --cdc-grey-400: #6272a4;
+  --cdc-grey-300: #8b93b6;
+  --cdc-grey-200: #b6bbd4;
+  --cdc-grey-100: #dcdee9;
+  --cdc-grey-50: #f8f8f2;
+
+  --cdc-red: #ff5555;
+  --cdc-orange: #ffb86c;
+  --cdc-yellow: #f1fa8c;
+  --cdc-green: #50fa7b;
+  --cdc-cyan: #8be9fd;
+  --cdc-purple: #bd93f9;
+  --cdc-pink: #ff79c6;
+
+  --cdc-red-light: color-mix(in srgb, var(--cdc-red) 60%, #fff);
+  --cdc-red-dark: color-mix(in srgb, var(--cdc-red) 80%, #000);
+  --cdc-red-darker: color-mix(in srgb, var(--cdc-red) 60%, #000);
+  --cdc-red-deep: color-mix(in srgb, var(--cdc-red) 40%, #000);
+  --cdc-orange-light: color-mix(in srgb, var(--cdc-orange) 60%, #fff);
+  --cdc-orange-dark: color-mix(in srgb, var(--cdc-orange) 80%, #000);
+  --cdc-orange-darker: color-mix(in srgb, var(--cdc-orange) 60%, #000);
+  --cdc-orange-deep: color-mix(in srgb, var(--cdc-orange) 40%, #000);
+  --cdc-yellow-light: color-mix(in srgb, var(--cdc-yellow) 60%, #fff);
+  --cdc-yellow-dark: color-mix(in srgb, var(--cdc-yellow) 80%, #000);
+  --cdc-yellow-darker: color-mix(in srgb, var(--cdc-yellow) 60%, #000);
+  --cdc-yellow-deep: color-mix(in srgb, var(--cdc-yellow) 40%, #000);
+  --cdc-green-light: color-mix(in srgb, var(--cdc-green) 60%, #fff);
+  --cdc-green-dark: color-mix(in srgb, var(--cdc-green) 80%, #000);
+  --cdc-green-darker: color-mix(in srgb, var(--cdc-green) 60%, #000);
+  --cdc-green-deep: color-mix(in srgb, var(--cdc-green) 40%, #000);
+  --cdc-cyan-light: color-mix(in srgb, var(--cdc-cyan) 60%, #fff);
+  --cdc-cyan-dark: color-mix(in srgb, var(--cdc-cyan) 80%, #000);
+  --cdc-cyan-darker: color-mix(in srgb, var(--cdc-cyan) 60%, #000);
+  --cdc-cyan-deep: color-mix(in srgb, var(--cdc-cyan) 40%, #000);
+  --cdc-purple-light: color-mix(in srgb, var(--cdc-purple) 60%, #fff);
+  --cdc-purple-dark: color-mix(in srgb, var(--cdc-purple) 80%, #000);
+  --cdc-purple-darker: color-mix(in srgb, var(--cdc-purple) 60%, #000);
+  --cdc-purple-deep: color-mix(in srgb, var(--cdc-purple) 40%, #000);
+  --cdc-pink-light: color-mix(in srgb, var(--cdc-pink) 60%, #fff);
+  --cdc-pink-dark: color-mix(in srgb, var(--cdc-pink) 80%, #000);
+  --cdc-pink-darker: color-mix(in srgb, var(--cdc-pink) 60%, #000);
+  --cdc-pink-deep: color-mix(in srgb, var(--cdc-pink) 40%, #000);
+}

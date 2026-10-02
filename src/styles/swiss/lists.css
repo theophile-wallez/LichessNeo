@@ -74,18 +74,18 @@ main.swiss-home .swisses:nth-of-type(1) thead th::before {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--cdc-green);
-  box-shadow: 0 0 0 0 #81b64cb3;
+  background: var(--cdc-good);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 70%, transparent);
   animation: cdc-swiss-pulse 1.6s ease-out infinite;
 }
 
 @keyframes cdc-swiss-pulse {
   70% {
-    box-shadow: 0 0 0 6px #81b64c00;
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--cdc-accent) 0%, transparent);
   }
 
   100% {
-    box-shadow: 0 0 0 0 #81b64c00;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 0%, transparent);
   }
 }
 
@@ -199,11 +199,11 @@ main.swiss-home .swisses .rounds[style*='--cdc-progress']::after {
   height: 4px;
   margin-top: 5px;
   border-radius: 2px;
-  background: linear-gradient(to right, var(--cdc-green) var(--cdc-progress), #ffffff14 0);
+  background: linear-gradient(to right, var(--cdc-accent) var(--cdc-progress), #ffffff14 0);
 }
 
 html[dir='rtl'] main.swiss-home .swisses .rounds[style*='--cdc-progress']::after {
-  background: linear-gradient(to left, var(--cdc-green) var(--cdc-progress), #ffffff14 0);
+  background: linear-gradient(to left, var(--cdc-accent) var(--cdc-progress), #ffffff14 0);
 }
 
 main.swiss-home .swisses .setup {

@@ -173,7 +173,7 @@
   main.lobby .lobby__blog .ublog-post-card .user-link {
     grid-column: 1;
     padding-inline-start: 2px !important;
-    color: #d4d3d1 !important;
+    color: var(--cdc-grey-200) !important;
     font-weight: 600 !important;
   }
 

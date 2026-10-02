@@ -1,6 +1,6 @@
 /* Inside a stage: the goal panel, the level pills and the intro / outro screens. */
 
-/* The goal panel: a dark card with the piece on a green tile (a green header shouts next to
+/* The goal panel: a dark card with the piece on an accent tile (an accent header shouts next to
  * the board). */
 .learn__table .wrap {
   overflow: hidden;
@@ -32,7 +32,7 @@
   height: 52px;
   margin-top: -26px;
   border-radius: 14px;
-  background: var(--cdc-btn-green);
+  background: var(--cdc-btn-primary);
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
@@ -76,7 +76,7 @@
   line-height: 1.45;
 }
 
-/* Level passed or failed: the title and stars take the color; green to go on, grey to retry. */
+/* Level passed or failed: the title and stars take the color; the accent to go on, grey to retry. */
 .learn__table .result {
   min-height: 120px !important;
   border: none !important;
@@ -92,11 +92,11 @@
 }
 
 .learn__table .result.completed {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-good-hover) !important;
 }
 
 .learn__table .result.failed {
-  color: #ff7769 !important;
+  color: var(--cdc-red) !important;
 }
 
 .learn__table .result h2 {
@@ -110,8 +110,8 @@
   padding: 8px 22px !important;
   border: none !important;
   border-radius: 8px !important;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #fff !important;
   font-size: 18px !important;
   font-weight: 800 !important;
@@ -157,15 +157,15 @@
 }
 
 .learn__table .progress a.done {
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow);
   color: #fff !important;
 }
 
 .learn__table .progress a.active {
   background: #fff !important;
   box-shadow: 0 2px 6px #00000059;
-  color: #312e2b !important;
+  color: var(--cdc-grey-800) !important;
 }
 
 /* Three stars don't fit a narrow pill (up to nine levels share the row): they wrap, one over two. */

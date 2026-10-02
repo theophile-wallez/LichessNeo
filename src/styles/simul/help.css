@@ -38,7 +38,7 @@ main.simul-list .simul-list__help > img {
   display: block;
   padding: 8px 8px 22px;
   border-radius: 4px !important;
-  background: #f3efe6;
+  background: var(--cdc-orange-light);
   box-shadow:
     0 6px 14px #00000080,
     0 2px 4px #0006;
@@ -53,7 +53,7 @@ main.simul-list .simul-list__help > img:hover {
 main.simul-list .simul-list__help > em {
   margin: 16px 0 20px !important;
   padding-inline-start: 12px;
-  border-inline-start: 3px solid #e3aa24;
+  border-inline-start: 3px solid var(--cdc-orange-dark);
   color: var(--cdc-text-dim);
   font-size: 13px;
   line-height: 1.5;
@@ -76,7 +76,11 @@ main.simul-list .simul-list__help > em ~ p::before {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: linear-gradient(145deg, var(--cdc-rule, #45a3f5), var(--cdc-rule-2, #2474c9));
+  background: linear-gradient(
+    145deg,
+    var(--cdc-rule, #45a3f5),
+    var(--cdc-rule-2, var(--cdc-cyan-darker))
+  );
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -2px 0 #00000026;
@@ -87,12 +91,12 @@ main.simul-list .simul-list__help > em ~ p::before {
 }
 
 main.simul-list .simul-list__help > em ~ p:nth-of-type(3) {
-  --cdc-rule: #95c85a;
-  --cdc-rule-2: #5d9948;
+  --cdc-rule: var(--cdc-accent);
+  --cdc-rule-2: var(--cdc-purple-dark);
 }
 main.simul-list .simul-list__help > em ~ p:nth-of-type(4) {
   --cdc-rule: #f5a93b;
-  --cdc-rule-2: #d27a1c;
+  --cdc-rule-2: var(--cdc-orange-darker);
 }
 
 /* ---- Sticky title --- */

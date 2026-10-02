@@ -70,7 +70,7 @@ main.puzzle .puzzle__themes__vote {
 }
 
 main.puzzle .puzzle__themes__vote.vote-up:is(:hover, .active) {
-  background: var(--cdc-btn-green) !important;
+  background: var(--cdc-btn-primary) !important;
   color: #fff !important;
 }
 
@@ -91,7 +91,7 @@ main.puzzle .puzzle__themes__study {
 }
 
 main.puzzle .puzzle__themes__study:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__config {
@@ -107,7 +107,7 @@ main.puzzle .puzzle__session a {
 }
 
 main.puzzle .puzzle__session a.result-true {
-  background: var(--cdc-btn-green) !important;
+  background: var(--cdc-btn-primary) !important;
 }
 
 main.puzzle .puzzle__session a.result-false {
@@ -118,7 +118,7 @@ main.puzzle .puzzle__session a.current {
   box-shadow: 0 0 0 2px #fff;
 }
 
-/* Next puzzle: Lichess paints it in the link color (our green), so it looked solved.
+/* Next puzzle: Lichess paints it in the link color (our accent), so it looked solved.
    A grey chip with the dashboard's replay triangle (--cdc-play, dashboard/) instead. */
 main.puzzle .puzzle__session a.session-new {
   background: var(--cdc-btn-grey) !important;

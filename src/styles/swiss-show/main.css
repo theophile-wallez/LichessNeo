@@ -109,7 +109,7 @@ main.swiss .swiss__main__header :is(.time, .nb) {
 }
 
 main.swiss .swiss__main__header .ongoing .nb {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
 }
 
 main.swiss .swiss__main__header .clock > time.shy {
@@ -148,14 +148,14 @@ main.swiss blockquote.pull-quote footer {
   font-weight: 700;
 }
 
-/* Signed-in notices: "you are playing" as a green button, "stand by" dim. */
+/* Signed-in notices: "you are playing" as a primary button, "stand by" dim. */
 main.swiss .swiss__ur-playing {
   margin: 0 24px 16px !important;
   padding: 14px !important;
   border: none !important;
   border-radius: 8px !important;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #fff !important;
   font-size: 17px !important;
   font-weight: 800;
@@ -163,7 +163,7 @@ main.swiss .swiss__ur-playing {
 }
 
 main.swiss .swiss__ur-playing:hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
 }
 
 main.swiss .swiss__notice {
@@ -176,7 +176,7 @@ main.swiss .swiss__notice {
   font-weight: 600;
 }
 
-/* The director's "schedule the next round" field. Still required: a green edge
+/* The director's "schedule the next round" field. Still required: an accent edge
  * instead of Lichess's green band. */
 main.swiss .schedule-next-round {
   margin: 0 24px 16px;
@@ -186,11 +186,11 @@ main.swiss .schedule-next-round {
 }
 
 main.swiss .schedule-next-round.required {
-  box-shadow: inset 3px 0 0 var(--cdc-green);
+  box-shadow: inset 3px 0 0 var(--cdc-accent);
 }
 
 html[dir='rtl'] main.swiss .schedule-next-round.required {
-  box-shadow: inset -3px 0 0 var(--cdc-green);
+  box-shadow: inset -3px 0 0 var(--cdc-accent);
 }
 
 main.swiss .schedule-next-round input {
@@ -289,20 +289,20 @@ main.swiss .schedule-next-round input {
     border-radius: 0 !important;
   }
 
-  /* Keep the rows' own fill and the director's green edge over the panel color. */
+  /* Keep the rows' own fill and the director's accent edge over the panel color. */
   main.swiss .swiss__main > .box > .swiss__notice {
     background-color: var(--cdc-bg-raised);
   }
 
   main.swiss .swiss__main > .box > .schedule-next-round.required {
     box-shadow:
-      inset 3px 0 var(--cdc-green),
+      inset 3px 0 var(--cdc-accent),
       inset -1px 0 var(--cdc-card-border);
   }
 
   html[dir='rtl'] main.swiss .swiss__main > .box > .schedule-next-round.required {
     box-shadow:
-      inset -3px 0 var(--cdc-green),
+      inset -3px 0 var(--cdc-accent),
       inset 1px 0 var(--cdc-card-border);
   }
 

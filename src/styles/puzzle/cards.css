@@ -187,7 +187,7 @@ main.puzzle .puzzle__side__theme__back {
 }
 
 main.puzzle .puzzle__side__theme__back:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__theme > p {
@@ -204,7 +204,7 @@ main.puzzle .puzzle__side__replay > a {
 }
 
 main.puzzle .puzzle__side__replay > a:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__replay__bar {
@@ -221,8 +221,8 @@ main.puzzle .puzzle__side__replay__bar {
 main.puzzle .puzzle__side__replay__bar::before {
   min-width: 30px;
   border-radius: 999px;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: inset 0 1px 0 #9ccd5e;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: inset 0 1px 0 var(--cdc-accent);
 }
 
 /* Daily puzzle: a plain title like any theme's, not a box in Lichess's accent color. */

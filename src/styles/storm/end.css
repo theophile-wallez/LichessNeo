@@ -1,7 +1,7 @@
 /* ---- End --- */
 
 /* The score on a dark card like the stats. Lichess fills it with its "good" color,
-   our green, which made a green block next to the green Play again button. */
+   our accent, which made a block of it next to the Play again button. */
 .storm--end__score {
   gap: 6px;
   padding: 28px 24px !important;
@@ -21,7 +21,7 @@
 .storm--end__score__number {
   width: auto !important;
   min-width: 3ch;
-  color: var(--cdc-green-hover);
+  color: var(--cdc-accent-hover);
   font-family: var(--cdc-font) !important;
   font-size: 128px !important;
   font-weight: 800;
@@ -82,17 +82,22 @@
    (Lichess fills it with gold, between two tornadoes). */
 .storm--end__high {
   padding: 22px 24px !important;
-  border: 1px solid #e3aa2466;
+  border: 1px solid color-mix(in srgb, var(--cdc-orange-dark) 40%, transparent);
   border-radius: 12px !important;
   background: var(--cdc-bg-panel) !important;
-  box-shadow: inset 0 0 0 1px #e3aa2426 !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cdc-orange-dark) 15%, transparent) !important;
   color: var(--cdc-text-dim) !important;
 }
 
 /* Lichess's shimmer, in gold. */
 .storm--end__high.bar-glider::after {
   width: 120px;
-  background: linear-gradient(to right, transparent, #e3aa2426, transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--cdc-orange-dark) 15%, transparent),
+    transparent
+  );
 }
 
 .storm--end__high__content {
@@ -131,7 +136,7 @@
 
 /* ---- Play again --- */
 
-/* A big green button led by the Puzzle Rush icon (Lichess puts a tornado at each end). */
+/* A big primary button led by the Puzzle Rush icon (Lichess puts a tornado at each end). */
 .storm-play-again {
   justify-content: center !important;
   gap: 16px;

@@ -65,18 +65,18 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--cdc-green);
-  box-shadow: 0 0 0 0 #81b64cb3;
+  background: var(--cdc-good);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 70%, transparent);
   animation: cdc-online-pulse 1.6s ease-out infinite;
 }
 
 @keyframes cdc-online-pulse {
   70% {
-    box-shadow: 0 0 0 6px #81b64c00;
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--cdc-accent) 0%, transparent);
   }
 
   100% {
-    box-shadow: 0 0 0 0 #81b64c00;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 0%, transparent);
   }
 }
 

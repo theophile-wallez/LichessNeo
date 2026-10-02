@@ -38,7 +38,7 @@ main.puzzle .puzzle__controls .jumps .fbt {
   border-radius: 8px !important;
   background: var(--cdc-btn-grey) !important;
   box-shadow: var(--cdc-btn-grey-shadow);
-  color: #c5c5c4 !important;
+  color: var(--cdc-grey-200) !important;
   text-shadow: none !important;
 }
 
@@ -48,9 +48,9 @@ main.puzzle .puzzle__controls .jumps .fbt:hover:not(.disabled, [disabled]) {
 }
 
 main.puzzle .puzzle__controls .jumps .fbt:is(.disabled, [disabled]) {
-  background: linear-gradient(#2c2b29, #272624) !important;
+  background: linear-gradient(var(--cdc-grey-850), var(--cdc-grey-850)) !important;
   box-shadow: 0 1px 2px #00000033;
-  color: #747372 !important;
+  color: var(--cdc-grey-500) !important;
   opacity: 1 !important;
 }
 
@@ -58,7 +58,7 @@ main.puzzle .puzzle__controls .jumps .fbt.glowing {
   color: #fff !important;
   box-shadow:
     var(--cdc-btn-grey-shadow),
-    0 0 0 2px var(--cdc-green);
+    0 0 0 2px var(--cdc-accent);
 }
 
 /* ---- Moves, engine --- */

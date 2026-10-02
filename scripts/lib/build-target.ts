@@ -1,9 +1,11 @@
+import { existsSync } from 'node:fs';
 import { cp, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { build } from 'rolldown';
 import { createManifest, ManifestSchema, OUTPUT, type Target } from '#manifest';
 import { bundleCss } from './css-bundle.ts';
 import { stripCss } from './css-strip.ts';
+import { assertExtensionUrls } from './extension-urls.ts';
 import { assertNoChromeUrls, toFirefoxCss } from './firefox.ts';
 import { assertLicensed, LICENSES } from './licenses.ts';
 import { fromRoot } from './paths.ts';
@@ -65,10 +67,12 @@ async function bundleScripts({ out, release }: BuildOptions): Promise<string[]> 
   );
 }
 
-async function bundleStyles({ target, out, release }: BuildOptions): Promise<void> {
+/** Writes the stylesheet, and returns it as Chrome gets it. */
+async function bundleStyles({ target, out, release }: BuildOptions): Promise<string> {
   const bundled = await bundleCss(fromRoot('src/styles/index.css'));
   const css = release ? stripCss(bundled) : bundled;
   await writeFile(path.join(out, OUTPUT.styles), target === 'firefox' ? toFirefoxCss(css) : css);
+  return css;
 }
 
 async function checkFirefoxBuild(out: string): Promise<void> {
@@ -85,8 +89,12 @@ async function buildInto(options: BuildOptions): Promise<void> {
   for (const { from, to } of LICENSES) await cp(fromRoot(from), path.join(out, to));
   const moduleIds = await bundleScripts(options);
   assertLicensed(moduleIds);
-  await bundleStyles(options);
+  const css = await bundleStyles(options);
   const manifest = ManifestSchema.parse(createManifest(target, version));
+  assertExtensionUrls(css, {
+    exists: file => existsSync(path.join(out, file)),
+    resources: manifest.web_accessible_resources.flatMap(entry => entry.resources),
+  });
   await writeFile(path.join(out, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   if (target === 'firefox') await checkFirefoxBuild(out);
 }

@@ -79,7 +79,7 @@
 }
 
 .game-setup group.radio input:checked + label[for^='sf_level_']::after {
-  color: var(--cdc-green-hover);
+  color: var(--cdc-accent-hover);
 }
 
 .game-setup label[for='sf_level_1'] {
@@ -220,14 +220,14 @@
   height: 56px !important;
   border: none !important;
   border-radius: 10px !important;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #fff !important;
   font-size: 20px !important;
 }
 
 .game-setup .footer .lobby__start__button.button:not(.disabled):hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
 }
 
 dialog .game-setup .footer .lobby__start__button.button::before {
@@ -256,7 +256,7 @@ group.radio label:not(.disabled):hover {
 
 group.radio input:checked + label,
 group.radio input:checked + label:not(.disabled):hover {
-  background: var(--cdc-green) !important;
+  background: var(--cdc-accent) !important;
   box-shadow: none !important;
   color: #fff !important;
   font-weight: 700;
@@ -269,5 +269,5 @@ input.range::-webkit-slider-runnable-track {
 
 input.range::-webkit-slider-thumb {
   border: none !important;
-  background: var(--cdc-green) !important;
+  background: var(--cdc-accent) !important;
 }

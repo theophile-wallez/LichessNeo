@@ -136,11 +136,11 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
 
 /* Live: a red edge and pill instead of Lichess's thick red frame and glow. */
 .relay-card--live {
-  border-color: #e0282880;
+  border-color: color-mix(in srgb, var(--cdc-red-dark) 50%, transparent);
 }
 
 .relay-card--live:hover {
-  border-color: #e02828cc;
+  border-color: color-mix(in srgb, var(--cdc-red-dark) 80%, transparent);
 }
 
 .relay-card__image {
@@ -208,7 +208,7 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
 .relay-card__live {
   padding: 2px 8px 2px 7px;
   border-radius: 4px;
-  background: #e02828;
+  background: var(--cdc-red-dark);
 }
 
 @keyframes cdc-live-pulse {
@@ -235,7 +235,7 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
 }
 
 .relay-card__finished {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
 }
 
 .relay-card__title {

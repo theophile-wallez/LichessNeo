@@ -135,103 +135,103 @@ h3 {
 .subnav[data-cdc-nav~='account'] a[href$='/account/profile'],
 main.account[data-cdc-nav-active$='/account/profile'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.memo.webp');
-  --cdc-nav-color: #1baaf0;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/display'],
 main.account[data-cdc-nav-active$='/preferences/display'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/activity.artist-palette.webp');
-  --cdc-nav-color: #fa742c;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/chess-clock'],
 main.account[data-cdc-nav-active$='/preferences/chess-clock'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.stopwatch.webp');
-  --cdc-nav-color: #f7c631;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/game-behavior'],
 main.account[data-cdc-nav-active$='/preferences/game-behavior'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/activity.joystick.webp');
-  --cdc-nav-color: #8a6fd8;
+  --cdc-nav-color: var(--cdc-purple-dark);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/privacy'],
 main.account[data-cdc-nav-active$='/preferences/privacy'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/smileys.see-no-evil-monkey.webp');
-  --cdc-nav-color: #c8915b;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/notification'],
 main.account[data-cdc-nav-active$='/preferences/notification'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.bell.webp');
-  --cdc-nav-color: #f7c631;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/kid'],
 main.account[data-cdc-nav-active$='/account/kid'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.teddy-bear.webp');
-  --cdc-nav-color: #e27ba8;
+  --cdc-nav-color: var(--cdc-pink);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/username'],
 main.account[data-cdc-nav-active$='/account/username'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/symbols.name-badge.webp');
-  --cdc-nav-color: #e25555;
+  --cdc-nav-color: var(--cdc-red);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/coach/edit'],
 main.account[data-cdc-nav-active$='/coach/edit'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/people.teacher.webp');
-  --cdc-nav-color: #26c2a3;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/passwd'],
 main.account[data-cdc-nav-active$='/account/passwd'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.key.webp');
-  --cdc-nav-color: #f7c631;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/email'],
 main.account[data-cdc-nav-active$='/account/email'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.incoming-envelope.webp');
-  --cdc-nav-color: #1baaf0;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/twofactor'],
 main.account[data-cdc-nav-active$='/account/twofactor'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.mobile-phone-with-arrow.webp');
-  --cdc-nav-color: #26c2a3;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/oauth/token'],
 main.account[data-cdc-nav-active$='/account/oauth/token'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/activity.admission-tickets.webp');
-  --cdc-nav-color: #8a6fd8;
+  --cdc-nav-color: var(--cdc-purple-dark);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/security'],
 main.account[data-cdc-nav-active$='/account/security'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.shield.webp');
-  --cdc-nav-color: #81b64c;
+  --cdc-nav-color: var(--cdc-accent);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/network'],
 main.account[data-cdc-nav-active$='/preferences/network'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.satellite-antenna.webp');
-  --cdc-nav-color: #1baaf0;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/dgt'],
 main.account[data-cdc-nav-active$='/dgt'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/activity.chess.webp');
-  --cdc-nav-color: #9aa3ad;
+  --cdc-nav-color: var(--cdc-grey-300);
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/close'],
 main.account[data-cdc-nav-active$='/account/close'] .page-menu__content {
   --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.door.webp');
-  --cdc-nav-color: #e25555;
+  --cdc-nav-color: var(--cdc-red);
 }
 
 /* A settings page's title: white rather than Lichess's green, after its link's tile. */

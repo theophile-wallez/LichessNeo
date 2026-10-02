@@ -76,7 +76,7 @@
 }
 
 .user-show > .user-show__social .number-menu .nm-item:hover strong {
-  color: var(--cdc-green-hover);
+  color: var(--cdc-accent-hover);
 }
 
 .user-show > .user-show__social .number-menu .nm-item br {
@@ -131,14 +131,14 @@
 /* Follow is the call to action, as on the hover card. Matched on the href:
  * Block shares the rack, and /rel/ URLs aren't localized. */
 .user-show > .user-show__social .user-actions .relation-button[href*='/rel/follow/'] {
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #fff !important;
   text-shadow: 0 1px 1px #00000033 !important;
 }
 
 .user-show > .user-show__social .user-actions .relation-button[href*='/rel/follow/']:hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
   color: #fff !important;
 }
 

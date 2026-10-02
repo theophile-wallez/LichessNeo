@@ -34,9 +34,9 @@
     transform: translateY(-2px);
   }
 
-  /* Perf-stat page: the current card gets a green ring and stays dark. */
+  /* Perf-stat page: the current card gets an accent ring and stays dark. */
   .side.sub-ratings a.active {
-    border-color: var(--cdc-green) !important;
+    border-color: var(--cdc-accent) !important;
     background: var(--cdc-card-hover) !important;
   }
 
@@ -98,7 +98,7 @@
   }
 
   .side.sub-ratings rating bad.rp {
-    color: #ff7769;
+    color: var(--cdc-red);
   }
 
   .side.sub-ratings rating good.rp:not([data-icon])::before {

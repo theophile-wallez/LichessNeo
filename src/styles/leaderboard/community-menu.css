@@ -4,32 +4,32 @@
  * icon and color (the tiles are in pages/). */
 .subnav a[href$='/player'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/bar-chart.svg');
-  --cdc-nav-color: #f7c631;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav a[href*='/stat/rating/distribution'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/chart-increasing.svg');
-  --cdc-nav-color: #1baaf0;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav a[href$='/tournament/leaderboard'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg');
-  --cdc-nav-color: #fa742c;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav a[href$='/tournament/shields'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/shield.svg');
-  --cdc-nav-color: #81b64c;
+  --cdc-nav-color: var(--cdc-accent);
 }
 
 .subnav a[href$='/player/bots'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/robot.svg');
-  --cdc-nav-color: #8a6fd8;
+  --cdc-nav-color: var(--cdc-purple-dark);
 }
 
 .subnav[data-cdc-nav~='bots'] a[href*='/fide'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/globe.svg');
-  --cdc-nav-color: #26c2a3;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 /* Desktop only (Lichess's fixed top bar would cover them): the menu and the leaderboard's title

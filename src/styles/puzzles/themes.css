@@ -106,7 +106,7 @@ html[dir='rtl'] .puzzle-themes__link {
   -webkit-line-clamp: 2;
 }
 
-/* "Healthy mix" is the featured card: larger, a green tile on a dark card. */
+/* "Healthy mix" is the featured card: larger, an accent tile on a dark card. */
 .puzzle-themes .puzzle-recommended .puzzle-themes__link {
   min-height: 104px;
   margin: 0 !important;

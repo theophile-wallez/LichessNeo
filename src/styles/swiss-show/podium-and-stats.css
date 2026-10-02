@@ -8,7 +8,11 @@ main.swiss .podium-wrap {
 
 main.swiss .podium {
   padding-bottom: 20px;
-  background: radial-gradient(ellipse 60% 70% at 50% 45%, #e3aa2414, transparent 70%);
+  background: radial-gradient(
+    ellipse 60% 70% at 50% 45%,
+    color-mix(in srgb, var(--cdc-orange-dark) 8%, transparent),
+    transparent 70%
+  );
 }
 
 /* Keep Lichess's weight and tracking: the podium's widths depend on them.

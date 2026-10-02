@@ -110,7 +110,7 @@
     border: 0;
     border-radius: 4px;
     background: none;
-    color: #8b8987;
+    color: var(--cdc-grey-400);
     cursor: pointer;
     transition:
       color 0.15s,

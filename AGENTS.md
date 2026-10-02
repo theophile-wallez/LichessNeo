@@ -169,7 +169,7 @@ hold:
 | `src/shared/`     | helpers for both worlds and the worker (DOM, markup, messages, storage, chess, charts, packs), `testing/` for tests                                                                                                                                                                                                                                               |
 | `src/background/` | the service worker: auto-reload, old cache cleanup, pack downloads                                                                                                                                                                                                                                                                                                |
 | `src/styles/`     | one stylesheet per page or part, a folder of partials past 400 lines, joined in `index.css`'s order                                                                                                                                                                                                                                                               |
-| `public/`         | copied into each build: `_locales/`, `icons/`, `img/` (`icons`, `coaches`), `licenses/` (the bundled files' licenses)                                                                                                                                                                                                                                             |
+| `public/`         | copied into each build: `_locales/`, `icons/`, `img/` (`icons`, `sidebar`, `coaches`), `licenses/` (the bundled files' licenses)                                                                                                                                                                                                                                  |
 | `scripts/`        | build, package, typecheck, source rules, version, store publishing and rendering                                                                                                                                                                                                                                                                                  |
 | `tests/e2e/`      | Playwright tests on lichess.org                                                                                                                                                                                                                                                                                                                                   |
 | `tools/`          | Python generators, run by hand: `assets/fetch.py`, `coach-rig/extract.py`, `example-pack/sounds.py`, `game-rating/`                                                                                                                                                                                                                                               |
@@ -194,7 +194,9 @@ hold:
   (`src/content/ui/tab-bars.ts`), then its look in CSS (see "Tabs slide").
 - _An image or a sound:_ never a remote URL, and never Chess.com's (see
   the product rules). Icons are named in the CSS (`img/icons/<name>.svg`)
-  and in `EMOJI`, then `tools/assets/fetch.py`. Boards, piece sets and
+  and in `EMOJI`, then `tools/assets/fetch.py`; the sidebar's are our own
+  drawings, 96px WebP in `img/sidebar`. The build fails on a CSS extension
+  URL whose file is missing or not in `web_accessible_resources`. Boards, piece sets and
   sounds aren't bundled: they're Lichess's, or a pack's (`docs/packs.md`).
   A new sound a pack may have goes in `src/shared/sounds.ts`.
 - _A chart:_ redrawn in SVG from the page's data, in the rating chart's look
@@ -313,7 +315,8 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   `CDC Sans`) at the system font; they must come after Lichess's, hence not
   in the manifest CSS.
 - **Icons.** The colored icons are Microsoft's Fluent Emoji (MIT), each
-  named in `EMOJI` (`tools/assets/fetch.py`). Time-control icons are Lichess font glyphs in
+  named in `EMOJI` (`tools/assets/fetch.py`), except the sidebar's, our own
+  Dracula-colored drawings (`img/sidebar`). Time-control icons are Lichess font glyphs in
   `[data-icon]::before` (`\e059` ultrabullet, `\e032` bullet, `\e008` blitz,
   `\e002` rapid, `\e00a` classical, `\e019` correspondence), kept as they are
   and colored per mode in `styles/theme/game-modes.css`: set `--cdc-mode-color`
@@ -351,7 +354,7 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   base URL the content script puts in `data-cdc-assets` on `<html>`.
 - **Buttons.** A gradient with a 1px top highlight, a 1px darker bottom edge
   and a soft shadow, not a 3D ledge: use
-  `--cdc-btn-{green,grey,red}[-hover|-shadow]` (`styles/theme/base.css`).
+  `--cdc-btn-{primary,grey,red}[-hover|-shadow]` (`styles/theme/base.css`).
   Where Lichess glues a button to an input or stacks buttons flush, drop the
   shadow or add a gap.
 - **Scroll state.** Once scrolled, Lichess adds `.hide` to `#top`, hiding

@@ -29,11 +29,11 @@
 
 /* Lichess's own posts: a gold edge instead of a thick gold frame. */
 :is(.ublog-index, .ublog-post) .ublog-post-card--by-lichess {
-  border-color: #e3aa2466 !important;
+  border-color: color-mix(in srgb, var(--cdc-orange-dark) 40%, transparent) !important;
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card--by-lichess:hover {
-  border-color: #e3aa24b3 !important;
+  border-color: color-mix(in srgb, var(--cdc-orange-dark) 70%, transparent) !important;
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card__image {
@@ -132,7 +132,7 @@
 
 .ublog-index .box__top .atom:hover {
   background: #ffffff0f;
-  color: #e58f2a !important;
+  color: var(--cdc-orange-dark) !important;
 }
 
 /* "Show best / all", "Sort likes / date": segmented toggles. */
@@ -169,16 +169,16 @@
 }
 
 .ublog-index .btn-rack__btn.active {
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #fff !important;
 }
 
-/* The green one slides (see "Sliding tabs" in theme/). */
+/* The accent one slides (see "Sliding tabs" in theme/). */
 .ublog-index .btn-rack[data-cdc-tabs] {
   --cdc-tab-radius: 6px;
-  --cdc-tab-bg: var(--cdc-btn-green);
-  --cdc-tab-shadow: var(--cdc-btn-green-shadow);
+  --cdc-tab-bg: var(--cdc-btn-primary);
+  --cdc-tab-shadow: var(--cdc-btn-primary-shadow);
 }
 
 .ublog-index .btn-rack[data-cdc-tabs] .btn-rack__btn.active {
@@ -293,7 +293,7 @@
 }
 
 .ublog-topics__topic__nb {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
   font-size: 13px !important;
   font-weight: 700;
   white-space: nowrap;

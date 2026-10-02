@@ -70,12 +70,12 @@
 
 .fide-federations .slist thead th:nth-child(4) {
   --cdc-mode-icon: var(--cdc-mode-rapid);
-  --cdc-mode-color: #81b64c;
+  --cdc-mode-color: var(--cdc-accent);
 }
 
 .fide-federations .slist thead th:nth-child(5) {
   --cdc-mode-icon: var(--cdc-mode-blitz);
-  --cdc-mode-color: #fad541;
+  --cdc-mode-color: var(--cdc-yellow-dark);
 }
 
 .fide-federations .slist thead th:is(:nth-child(3), :nth-child(4), :nth-child(5))::before {
@@ -153,7 +153,7 @@
 }
 
 .fide-federations .slist tbody tr:hover td:first-child a {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 /* The rank, with the players' list's medals. */

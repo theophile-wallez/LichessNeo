@@ -120,7 +120,7 @@ main.forum table.topics td:last-child > a:first-child {
 }
 
 main.forum table.topics td:last-child > a:first-child:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 main.forum table.topics td:last-child time {
@@ -183,7 +183,7 @@ main.forum :is(table, .forum-post__metas) .user-link {
 }
 
 main.forum table .user-link:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 main.forum :is(table, .forum-post__metas) .user-link .line {
@@ -192,7 +192,7 @@ main.forum :is(table, .forum-post__metas) .user-link .line {
 }
 
 main.forum :is(table, .forum-post__metas) .user-link.online .line {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-good) !important;
   opacity: 1;
 }
 

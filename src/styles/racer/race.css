@@ -2,38 +2,38 @@
 
 /* Your vehicle and its color, for the side panel's tile. Your lane is always first. */
 .racer {
-  --cdc-car: #a42eff;
+  --cdc-car: var(--cdc-purple-dark);
   --cdc-car-glyph: '0';
   --cdc-lane-h: 34px;
   --cdc-lanes: 1;
 }
 
 .racer:has(.racer__race__track--me .car-1) {
-  --cdc-car: #5757ff;
+  --cdc-car: var(--cdc-purple-dark);
 }
 .racer:has(.racer__race__track--me .car-2) {
-  --cdc-car: #1f9d3a;
+  --cdc-car: var(--cdc-green-darker);
 }
 .racer:has(.racer__race__track--me .car-3) {
-  --cdc-car: #d23b3b;
+  --cdc-car: var(--cdc-red-dark);
 }
 .racer:has(.racer__race__track--me .car-4) {
-  --cdc-car: #ec7a51;
+  --cdc-car: var(--cdc-orange-dark);
 }
 .racer:has(.racer__race__track--me .car-5) {
-  --cdc-car: #8fbf2a;
+  --cdc-car: var(--cdc-purple-dark);
 }
 .racer:has(.racer__race__track--me .car-6) {
-  --cdc-car: #ff5a1f;
+  --cdc-car: var(--cdc-orange-dark);
 }
 .racer:has(.racer__race__track--me .car-7) {
-  --cdc-car: #2e8b57;
+  --cdc-car: var(--cdc-green-darker);
 }
 .racer:has(.racer__race__track--me .car-8) {
-  --cdc-car: #daa520;
+  --cdc-car: var(--cdc-orange-darker);
 }
 .racer:has(.racer__race__track--me .car-9) {
-  --cdc-car: #d27e1e;
+  --cdc-car: var(--cdc-orange-darker);
 }
 
 .racer:has(.racer__race__track--me .vehicle1) {
@@ -178,7 +178,7 @@
   gap: 7px;
   padding: 4px 11px 4px 9px;
   border-radius: 999px;
-  background: #e3aa2424;
+  background: color-mix(in srgb, var(--cdc-orange-dark) 14%, transparent);
   color: var(--c-brag);
   font-size: 13px !important;
   font-weight: 700 !important;
@@ -226,7 +226,7 @@
 
 @keyframes cdc-racer-bump {
   30% {
-    color: var(--cdc-green-hover);
+    color: var(--cdc-good-hover);
     transform: scale(1.15);
   }
 }

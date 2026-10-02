@@ -4,7 +4,7 @@
   /* Stripes per move number (data-cdc-even, from the review): the comment cards in
      between vary in height. */
   html.cdc-review-moves main.analyse .tview2-column > [data-cdc-even] {
-    background: #2a2926 !important;
+    background: var(--cdc-grey-850) !important;
   }
 
   /* Hide Lichess's comments and computer lines, and the "..." fillers around them, but keep
@@ -27,7 +27,7 @@
 
   /* With its comment hidden, a card keeps the neutral color, not the move's. */
   html.cdc-review-moves main.analyse .tview2-column > interrupt {
-    --cdc-note: #5d5b58 !important;
+    --cdc-note: var(--cdc-grey-500) !important;
   }
 
   html.cdc-review-moves main.analyse .tview2-column > index {

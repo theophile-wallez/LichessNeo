@@ -163,10 +163,10 @@
 }
 
 .cdc-rchart__diff--up {
-  color: var(--cdc-green-hover);
+  color: var(--cdc-good-hover);
 }
 .cdc-rchart__diff--down {
-  color: #ff7769;
+  color: var(--cdc-red);
 }
 .cdc-rchart__diff--flat {
   color: var(--cdc-text-dim);
@@ -295,7 +295,7 @@
   border: 1px solid #ffffff1f;
   border-radius: 10px;
   /* Frosted glass: the blurred curves show through. */
-  background: #1f1e1c8c;
+  background: color-mix(in srgb, var(--cdc-grey-950) 55%, transparent);
   box-shadow:
     inset 0 1px 0 #ffffff14,
     0 10px 28px #00000073;

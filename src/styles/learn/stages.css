@@ -123,7 +123,7 @@ html[dir='rtl'] .learn-stages .stage {
   height: 22px;
   border: 2px solid var(--cdc-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-green)
+  background: var(--cdc-good)
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5 6.5 11.5 12.5 4.5' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
     center / 14px no-repeat;
 }
@@ -170,7 +170,7 @@ html[dir='rtl'] .learn-stages .stage {
 }
 
 .learn-stages .stage .ribbon.done {
-  background: #81b64c40 !important;
+  background: color-mix(in srgb, var(--cdc-accent) 25%, transparent) !important;
 }
 
 /* Gold stars. */
@@ -180,7 +180,7 @@ html[dir='rtl'] .learn-stages .stage {
 }
 
 #learn-app .stars icon {
-  color: #f7c045 !important;
+  color: var(--cdc-orange-dark) !important;
   text-shadow: 0 1px 1px #00000066 !important;
 }
 

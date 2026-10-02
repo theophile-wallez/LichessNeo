@@ -80,73 +80,73 @@
   /* The leaderboards' color for each mode (leaderboard/). The class is the channel's key,
    * which Lichess doesn't translate. */
   main.round.tv-single .tv-channel {
-    --cdc-tv: #95c85a;
-    --cdc-tv-2: #5d9948;
+    --cdc-tv: var(--cdc-accent);
+    --cdc-tv-2: var(--cdc-purple-dark);
   }
 
   main.round.tv-single .tv-channel.best {
-    --cdc-tv: #c07af5;
-    --cdc-tv-2: #8a45c9;
+    --cdc-tv: var(--cdc-purple);
+    --cdc-tv-2: var(--cdc-purple-darker);
   }
   main.round.tv-single .tv-channel.bullet {
     --cdc-tv: #f5a93b;
-    --cdc-tv-2: #d27a1c;
+    --cdc-tv-2: var(--cdc-orange-darker);
   }
   main.round.tv-single .tv-channel.blitz {
-    --cdc-tv: #fad541;
-    --cdc-tv-2: #e0a21a;
+    --cdc-tv: var(--cdc-yellow-dark);
+    --cdc-tv-2: var(--cdc-orange-darker);
   }
   main.round.tv-single .tv-channel.rapid {
-    --cdc-tv: #95c85a;
-    --cdc-tv-2: #5d9948;
+    --cdc-tv: var(--cdc-accent);
+    --cdc-tv-2: var(--cdc-purple-dark);
   }
   main.round.tv-single .tv-channel.classical {
     --cdc-tv: #45a3f5;
-    --cdc-tv-2: #2474c9;
+    --cdc-tv-2: var(--cdc-cyan-darker);
   }
   main.round.tv-single .tv-channel.ultraBullet {
     --cdc-tv: #f06a4a;
-    --cdc-tv-2: #c9412d;
+    --cdc-tv-2: var(--cdc-red-dark);
   }
   main.round.tv-single .tv-channel.crazyhouse {
-    --cdc-tv: #3aa6e0;
-    --cdc-tv-2: #0a78b8;
+    --cdc-tv: var(--cdc-cyan-dark);
+    --cdc-tv-2: var(--cdc-cyan-deep);
   }
   main.round.tv-single .tv-channel.chess960 {
-    --cdc-tv: #fa8a4c;
-    --cdc-tv-2: #d9601c;
+    --cdc-tv: var(--cdc-orange-dark);
+    --cdc-tv-2: var(--cdc-orange-darker);
   }
   main.round.tv-single .tv-channel.antichess {
-    --cdc-tv: #e86bb0;
-    --cdc-tv-2: #b8438a;
+    --cdc-tv: var(--cdc-pink);
+    --cdc-tv-2: var(--cdc-pink-darker);
   }
   main.round.tv-single .tv-channel.atomic {
-    --cdc-tv: #f0645a;
-    --cdc-tv-2: #b93a2e;
+    --cdc-tv: var(--cdc-red);
+    --cdc-tv-2: var(--cdc-red-darker);
   }
   main.round.tv-single .tv-channel.threeCheck {
-    --cdc-tv: #3fd0b2;
-    --cdc-tv-2: #1f9c83;
+    --cdc-tv: var(--cdc-cyan-darker);
+    --cdc-tv-2: var(--cdc-cyan-deep);
   }
   main.round.tv-single .tv-channel.kingOfTheHill {
-    --cdc-tv: #d4a15f;
-    --cdc-tv-2: #a8743a;
+    --cdc-tv: var(--cdc-orange-dark);
+    --cdc-tv-2: var(--cdc-orange-darker);
   }
   main.round.tv-single .tv-channel.horde {
-    --cdc-tv: #9aa9bd;
-    --cdc-tv-2: #627288;
+    --cdc-tv: var(--cdc-cyan-dark);
+    --cdc-tv-2: var(--cdc-grey-400);
   }
   main.round.tv-single .tv-channel.racingKings {
-    --cdc-tv: #7fb2ff;
-    --cdc-tv-2: #4a7fd6;
+    --cdc-tv: var(--cdc-cyan);
+    --cdc-tv-2: var(--cdc-cyan-dark);
   }
   main.round.tv-single .tv-channel.bot {
-    --cdc-tv: #6e7cf2;
-    --cdc-tv-2: #4453c9;
+    --cdc-tv: var(--cdc-purple-dark);
+    --cdc-tv-2: var(--cdc-purple-darker);
   }
   main.round.tv-single .tv-channel.computer {
-    --cdc-tv: #5ec7e8;
-    --cdc-tv-2: #2a8fb8;
+    --cdc-tv: var(--cdc-cyan-dark);
+    --cdc-tv-2: var(--cdc-cyan-darker);
   }
 
   main.round.tv-single .subnav .tv-channel {
@@ -224,18 +224,18 @@
     height: 10px;
     border: 2px solid var(--cdc-bg-panel);
     border-radius: 50%;
-    background: #e02828;
-    box-shadow: 0 0 0 0 #e02828b3;
+    background: var(--cdc-red-dark);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-red-dark) 70%, transparent);
     animation: cdc-tv-live 1.6s ease-out infinite;
   }
 
   @keyframes cdc-tv-live {
     70% {
-      box-shadow: 0 0 0 6px #e0282800;
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--cdc-red-dark) 0%, transparent);
     }
 
     100% {
-      box-shadow: 0 0 0 0 #e0282800;
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-red-dark) 0%, transparent);
     }
   }
 

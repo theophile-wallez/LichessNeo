@@ -14,7 +14,7 @@
     padding: 10px 14px;
     border-radius: 12px;
     background: #fff;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
   }
 
   /* The tail: a horn from the bubble's left edge, overlapping it by 1px so there's no
@@ -39,7 +39,7 @@
   .cdc-bubble__title {
     flex: 1;
     margin: 0;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     font-size: 15px;
     font-weight: 600;
     line-height: 1.3;
@@ -57,20 +57,20 @@
     flex: none;
     padding: 3px 7px;
     border-radius: 4px;
-    background: #e8e7e6;
-    color: #312e2b;
+    background: var(--cdc-grey-100);
+    color: var(--cdc-grey-800);
     font-size: 13px;
     font-weight: 800;
   }
 
   .cdc-bubble__eval--black {
-    background: #312e2b;
+    background: var(--cdc-grey-800);
     color: #fff;
   }
 
   .cdc-bubble__sub {
     margin: 6px 0 0;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     font-size: 14px;
     line-height: 1.35;
   }
@@ -93,15 +93,15 @@
     padding: 4px 10px 4px 6px;
     border: none;
     border-radius: 999px;
-    background: #ebeae8;
-    color: #312e2b;
+    background: var(--cdc-grey-100);
+    color: var(--cdc-grey-800);
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
   }
 
   .cdc-bubble__line:hover {
-    background: #dcdad7;
+    background: var(--cdc-grey-100);
   }
 
   .cdc-bubble__line .cdc-i {
@@ -125,7 +125,7 @@
     display: inline;
     padding: 0.05em 0.3em 0.05em 0.1em;
     border-radius: 6px;
-    background: #ebeae8;
+    background: var(--cdc-grey-100);
     font-weight: 700;
     line-height: 1.3;
     vertical-align: -0.05em;
@@ -204,13 +204,13 @@
   }
 
   .cdc-btn--green {
-    background: var(--cdc-btn-green);
+    background: var(--cdc-btn-primary);
     text-shadow: 0 1px 1px #00000033;
-    box-shadow: var(--cdc-btn-green-shadow);
+    box-shadow: var(--cdc-btn-primary-shadow);
   }
 
   .cdc-btn--green:hover:not(:disabled) {
-    background: var(--cdc-btn-green-hover);
+    background: var(--cdc-btn-primary-hover);
   }
 
   .cdc-btn:disabled {
@@ -225,7 +225,7 @@
   }
 
   .cdc-btn--on .cdc-i {
-    color: #f7c045 !important;
+    color: var(--cdc-orange-dark) !important;
   }
 
   .cdc-review__foot .cdc-btn {

@@ -109,7 +109,7 @@ main.team-list .slist tbody {
 
 main.team-list .slist tbody tr,
 main.team-list .slist tbody tr:nth-child(2n) {
-  --cdc-team: #81b64c;
+  --cdc-team: var(--cdc-accent);
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -139,19 +139,19 @@ main.team-list .slist tbody tr:hover {
 
 /* Lichess has no team pictures: vary the avatar tints down the list. */
 main.team-list .slist tbody tr:nth-child(6n + 2) {
-  --cdc-team: #3692e7;
+  --cdc-team: var(--cdc-cyan-dark);
 }
 main.team-list .slist tbody tr:nth-child(6n + 3) {
-  --cdc-team: #e58f2a;
+  --cdc-team: var(--cdc-orange-dark);
 }
 main.team-list .slist tbody tr:nth-child(6n + 4) {
-  --cdc-team: #9b7fd8;
+  --cdc-team: var(--cdc-purple-dark);
 }
 main.team-list .slist tbody tr:nth-child(6n + 5) {
-  --cdc-team: #e0513a;
+  --cdc-team: var(--cdc-red-dark);
 }
 main.team-list .slist tbody tr:nth-child(6n + 6) {
-  --cdc-team: #26b6a6;
+  --cdc-team: var(--cdc-cyan-darker);
 }
 
 main.team-list .slist td,
@@ -192,7 +192,7 @@ main.team-list .slist .team-name::after {
 
 /* Teams you're in keep Lichess's gold name. */
 main.team-list .slist .team-name.mine {
-  color: var(--cdc-brag, #e3aa24) !important;
+  color: var(--cdc-brag, var(--cdc-orange-dark)) !important;
 }
 
 /* Avatar: the group icon on a tile tinted by `--cdc-team`. */
@@ -231,8 +231,8 @@ main.team-list .slist .team-name em {
   margin-inline-start: 8px !important;
   padding: 1px 6px !important;
   border-radius: 4px !important;
-  background: #81b64c33 !important;
-  color: var(--cdc-green-hover) !important;
+  background: color-mix(in srgb, var(--cdc-accent) 20%, transparent) !important;
+  color: var(--cdc-accent-hover) !important;
   font-size: 11px !important;
   font-style: normal;
   font-weight: 800;

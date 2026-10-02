@@ -44,11 +44,11 @@ main.forum-topic .reactions button:hover img {
   transform: scale(1.3) rotate(-10deg) !important;
 }
 
-/* Mine: in green, and it pops when picked. */
+/* Mine: in the accent, and it pops when picked. */
 main.forum-topic .reactions button.mine {
-  border-color: #81b64c99;
-  background: #81b64c26 !important;
-  color: var(--cdc-green-hover) !important;
+  border-color: color-mix(in srgb, var(--cdc-accent) 60%, transparent);
+  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 main.forum-topic .reactions button.mine img {
@@ -112,8 +112,8 @@ main.forum-topic .reactions-toggle {
 }
 
 :is(main.forum, main.search) .pagination > span.current {
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow);
   color: #fff !important;
 }
 
@@ -196,7 +196,7 @@ main.forum-topic form.form3 small.form-help {
 }
 
 main.forum-topic form.form3 small.form-help a {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
   font-weight: 700;
 }
 

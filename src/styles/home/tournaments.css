@@ -44,8 +44,8 @@
     height: 40px;
     margin: 0 !important;
     border-radius: 12px;
-    background: #81b64c26;
-    color: var(--cdc-green-hover);
+    background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
+    color: var(--cdc-accent-hover);
     font-size: 22px;
   }
 
@@ -141,7 +141,7 @@
 
   main.lobby .lobby__support-link:hover {
     transform: translateY(-2px);
-    background: #2c2b28 !important;
+    background: var(--cdc-grey-850) !important;
   }
 
   main.lobby .lobby__support-link icon {
@@ -151,7 +151,7 @@
     height: 56px;
     margin: 0 !important;
     border-radius: 14px;
-    background: #e3aa2424;
+    background: color-mix(in srgb, var(--cdc-orange-dark) 14%, transparent);
   }
 
   main.lobby .lobby__support-link icon::before {
@@ -160,11 +160,11 @@
   }
 
   main.lobby .lobby__support-link[href$='/swag'] icon {
-    background: #81b64c26;
+    background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
   }
 
   main.lobby .lobby__support-link[href$='/swag'] icon::before {
-    color: var(--cdc-green-hover) !important;
+    color: var(--cdc-accent-hover) !important;
   }
 
   main.lobby .lobby__support-link strong {

@@ -114,13 +114,13 @@
 }
 
 .explorer-box.explorer__config .choices button:is([aria-pressed='true'], .active) {
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #fff !important;
 }
 
 .explorer-box.explorer__config .choices button:is([aria-pressed='true'], .active):hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
 }
 
 /* Time controls keep their mode colors (theme/), white once chosen. */

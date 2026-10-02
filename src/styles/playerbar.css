@@ -250,19 +250,19 @@
   main.round .rclock-white .time,
   html[data-cdc-has~='analyse-white'] main.analyse .analyse__clock.bottom,
   html[data-cdc-has~='analyse-black'] main.analyse .analyse__clock.top {
-    --cdc-clock-bg: #989795;
-    --cdc-clock-fg: #312e2b99;
+    --cdc-clock-bg: var(--cdc-grey-300);
+    --cdc-clock-fg: color-mix(in srgb, var(--cdc-grey-800) 60%, transparent);
     --cdc-clock-on-bg: #fff;
-    --cdc-clock-on-fg: #312e2b;
+    --cdc-clock-on-fg: var(--cdc-grey-800);
     --cdc-clock-icon: none;
   }
 
   main.round .rclock-black .time,
   html[data-cdc-has~='analyse-white'] main.analyse .analyse__clock.top,
   html[data-cdc-has~='analyse-black'] main.analyse .analyse__clock.bottom {
-    --cdc-clock-bg: #2b2926;
-    --cdc-clock-fg: #82807d;
-    --cdc-clock-on-bg: #1c1b19;
+    --cdc-clock-bg: var(--cdc-grey-850);
+    --cdc-clock-fg: var(--cdc-grey-400);
+    --cdc-clock-on-bg: var(--cdc-grey-950);
     --cdc-clock-on-fg: #fff;
     --cdc-clock-icon: invert(1);
   }
@@ -310,7 +310,7 @@
 
   main.round .rclock.emerg.running .time,
   main.round .rclock.outoftime .time {
-    background: #c33a2f !important;
+    background: var(--cdc-red-dark) !important;
     color: #fff !important;
     --cdc-clock-icon: invert(1);
   }

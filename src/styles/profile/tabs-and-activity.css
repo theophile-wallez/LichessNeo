@@ -40,7 +40,7 @@
   padding: 5px !important;
   border: 1px solid var(--cdc-card-border) !important;
   border-radius: 12px;
-  background: #1c1b19 !important;
+  background: var(--cdc-grey-950) !important;
   background-image: none !important;
   box-shadow: none !important;
   font-size: inherit !important;
@@ -93,7 +93,7 @@
   margin-inline-start: 8px !important;
   padding: 1px 6px;
   border-radius: 999px;
-  background: var(--cdc-green);
+  background: var(--cdc-accent);
   color: #fff;
   font-size: 11px;
   font-weight: 800;
@@ -232,7 +232,7 @@
 }
 
 .user-show .activity .entry a:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 /* The rating reached, as a chip. */
@@ -266,7 +266,7 @@
 
 .user-show .activity .sub .is-gold,
 .user-show .activity .sub .is-gold a {
-  color: #e3aa24 !important;
+  color: var(--cdc-orange-dark) !important;
 }
 
 .user-show .activity .sub [data-icon]::before {
@@ -299,15 +299,15 @@
 }
 
 .user-show .activity win strong {
-  background: var(--cdc-green);
+  background: var(--cdc-good);
 }
 
 .user-show .activity draw strong {
-  background: #6f6d6a;
+  background: var(--cdc-grey-500);
 }
 
 .user-show .activity loss strong {
-  background: #d64742;
+  background: var(--cdc-red-dark);
 }
 
 /* Phones: the score goes under the text. */

@@ -111,7 +111,7 @@
   }
 
   main:is(.round, .analyse) .crosstable povs a.win {
-    background: var(--cdc-green);
+    background: var(--cdc-good);
     color: #fff !important;
   }
 
@@ -120,7 +120,7 @@
   }
 
   main:is(.round, .analyse) .crosstable povs.current a {
-    box-shadow: inset 0 0 0 2px var(--cdc-green);
+    box-shadow: inset 0 0 0 2px var(--cdc-accent);
   }
 
   main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) {
@@ -134,7 +134,7 @@
   main:is(.round, .analyse) .crosstable .crosstable__matchup {
     padding: 0 6px;
     border-radius: 4px;
-    background: color-mix(in srgb, var(--cdc-green) 16%, transparent) !important;
+    background: color-mix(in srgb, var(--cdc-accent) 16%, transparent) !important;
     font-size: 12px;
   }
 
@@ -149,6 +149,6 @@
   }
 
   main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) .win {
-    color: var(--cdc-green);
+    color: var(--cdc-good);
   }
 }

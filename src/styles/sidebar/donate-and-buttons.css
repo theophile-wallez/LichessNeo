@@ -32,8 +32,8 @@
     flex: none;
     width: 24px;
     height: 24px;
-    background: url('https://lichess1.org/assets/flair/img/objects.money-bag.webp') center / contain
-      no-repeat;
+    background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/donation.webp') center /
+      contain no-repeat;
   }
 
   #cdc-donate:hover {

@@ -88,7 +88,7 @@ main.racer-home > h1.box__top::before {
 /* Blue for the public race (the bus), orange for a race with friends (the car). */
 .racer-home .button {
   --cdc-race: #45a3f5;
-  --cdc-race-2: #2474c9;
+  --cdc-race-2: var(--cdc-cyan-darker);
   /* As tall as the window allows, so the page fills but never scrolls. */
   --cdc-scene-h: clamp(190px, calc(100dvh - 300px), 420px);
 
@@ -117,7 +117,7 @@ main.racer-home > h1.box__top::before {
 
 .racer-home__create .button {
   --cdc-race: #f5a93b;
-  --cdc-race-2: #d2671c;
+  --cdc-race-2: var(--cdc-orange-darker);
 }
 
 .racer-home .button:not(.disabled):hover {
@@ -143,7 +143,7 @@ main.racer-home > h1.box__top::before {
     linear-gradient(#ffffff38, #ffffff38) 0 calc(100% - 48px) / 100% 3px no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='60'%3E%3Cpath fill='%23000' fill-opacity='.14' d='M0 60V40q30-30 60-6t60-4 60-4 60 14v20z'/%3E%3C/svg%3E")
       0 calc(100% - 51px) / 240px 60px repeat-x,
-    linear-gradient(#3b3936, #2b2a27) bottom / 100% 48px no-repeat,
+    linear-gradient(var(--cdc-grey-750), var(--cdc-grey-850)) bottom / 100% 48px no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 52'%3E%3Cg fill='%23fff' fill-opacity='.8'%3E%3Ccircle cx='32' cy='32' r='17'/%3E%3Ccircle cx='56' cy='24' r='23'/%3E%3Ccircle cx='80' cy='33' r='16'/%3E%3Crect x='14' y='30' width='82' height='22' rx='11'/%3E%3C/g%3E%3C/svg%3E")
       12% 22% / 110px auto no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 52'%3E%3Cg fill='%23fff' fill-opacity='.8'%3E%3Ccircle cx='32' cy='32' r='17'/%3E%3Ccircle cx='56' cy='24' r='23'/%3E%3Ccircle cx='80' cy='33' r='16'/%3E%3Crect x='14' y='30' width='82' height='22' rx='11'/%3E%3C/g%3E%3C/svg%3E")
@@ -178,8 +178,8 @@ main.racer-home > h1.box__top::before {
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E")
       center / 16px no-repeat,
-    var(--cdc-btn-green);
-  box-shadow: var(--cdc-btn-green-shadow);
+    var(--cdc-btn-primary);
+  box-shadow: var(--cdc-btn-primary-shadow);
   transition: transform 0.15s !important;
 }
 
@@ -195,8 +195,8 @@ html[dir='rtl'] .racer-home .button::after {
 
 /* Lichess's boost flame, in fire colors. */
 .racer-home .button:hover .car::before {
-  color: #ffc53d;
-  text-shadow: 0 0 12px #ff8a00;
+  color: var(--cdc-orange-dark);
+  text-shadow: 0 0 12px var(--cdc-orange-dark);
 }
 
 html[dir='rtl'] .racer-home .button:hover::after {

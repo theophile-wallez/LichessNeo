@@ -120,7 +120,7 @@ main.page-menu .page-menu__content.puzzle-dashboard {
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--perf strong {
-  color: #f2b544 !important;
+  color: var(--cdc-orange-dark) !important;
 }
 
 /* Lichess paints the tile with ---first (solved first try) and ---win (solved at all): shown
@@ -131,7 +131,7 @@ main.page-menu .page-menu__content.puzzle-dashboard {
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--win strong {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-good-hover) !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--win::after {
@@ -142,18 +142,18 @@ main.page-menu .page-menu__content.puzzle-dashboard {
   border-radius: 2px;
   background: linear-gradient(
     to right,
-    var(--cdc-green) 0% var(---first),
-    var(--cdc-green-shadow) var(---first) var(---win),
-    #e02828 var(---win) 100%
+    var(--cdc-good) 0% var(---first),
+    var(--cdc-green-darker) var(---first) var(---win),
+    var(--cdc-red-dark) var(---win) 100%
   );
 }
 
 html[dir='rtl'] .puzzle-dashboard .puzzle-dashboard__metric--win::after {
   background: linear-gradient(
     to left,
-    var(--cdc-green) 0% var(---first),
-    var(--cdc-green-shadow) var(---first) var(---win),
-    #e02828 var(---win) 100%
+    var(--cdc-good) 0% var(---first),
+    var(--cdc-green-darker) var(---first) var(---win),
+    var(--cdc-red-dark) var(---win) 100%
   );
 }
 
@@ -169,13 +169,13 @@ html[dir='rtl'] .puzzle-dashboard .puzzle-dashboard__metric--win::after {
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix[href] {
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
   color: #ffffffcc !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix[href]:hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix__text {
@@ -217,13 +217,13 @@ html[dir='rtl'] .puzzle-dashboard .puzzle-dashboard__metric--win::after {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #81b64c26;
+  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix:not([href]) icon::before {
   width: 28px;
   height: 28px;
-  background: var(--cdc-green-hover);
+  background: var(--cdc-accent-hover);
   -webkit-mask-image: var(--cdc-check);
   mask-image: var(--cdc-check);
 }

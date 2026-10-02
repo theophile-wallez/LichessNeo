@@ -10,7 +10,7 @@
   padding: 58px clamp(18px, 12%, 130px);
   border-radius: 12px;
   /* A vignette on the plot: the panel is much wider than the chart. */
-  background: radial-gradient(circle at 50% 52%, #2e2d29, var(--cdc-bg-panel) 65%);
+  background: radial-gradient(circle at 50% 52%, var(--cdc-grey-800), var(--cdc-bg-panel) 65%);
   box-shadow: inset 0 1px 0 #ffffff0f;
 }
 
@@ -46,16 +46,16 @@
 }
 
 .cdc-radar__area {
-  fill: #81b64c2e;
-  stroke: var(--cdc-green);
+  fill: color-mix(in srgb, var(--cdc-accent) 18%, transparent);
+  stroke: var(--cdc-accent);
   stroke-width: 2px;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 10px #81b64c40);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--cdc-accent) 25%, transparent));
 }
 
 .cdc-radar__dots circle {
-  fill: var(--cdc-green-hover);
+  fill: var(--cdc-accent-hover);
   stroke: var(--cdc-bg-panel);
   stroke-width: 2px;
   vector-effect: non-scaling-stroke;
@@ -83,7 +83,7 @@
 
 .cdc-radar__value {
   display: block;
-  color: var(--cdc-green-hover);
+  color: var(--cdc-accent-hover);
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;

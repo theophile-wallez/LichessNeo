@@ -133,7 +133,7 @@
 }
 
 /* The LIVE ribbon hangs over the text's top-right corner: the name stops short of it.
- * Its folds take our green's shade, not Lichess's blue. */
+ * Its folds take the accent's shade, not Lichess's blue. */
 @media (min-width: 1020px) {
   .streamer-list .streamer:has(> .live-ribbon) .streamer-title h1 {
     margin-right: 70px !important;
@@ -142,5 +142,5 @@
 
 .streamer-list .live-ribbon::before,
 .streamer-list .live-ribbon::after {
-  border-color: transparent transparent var(--cdc-green-shadow) var(--cdc-green-shadow) !important;
+  border-color: transparent transparent var(--cdc-accent-shadow) var(--cdc-accent-shadow) !important;
 }

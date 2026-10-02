@@ -77,11 +77,16 @@
        the text clear, so a longer title (French, German) grows the hero instead. */
     padding: 44px 40px calc(140px + 28px);
     border-radius: 18px;
-    /* A dark card like the others (green is for buttons and badges), glowing behind the king. */
+    /* A dark card like the others (the accent is for buttons and badges), glowing behind the king. */
     background:
       radial-gradient(circle at 88% 18%, #ffffff17, transparent 52%),
       radial-gradient(circle at 10% 110%, #ffffff08, transparent 45%),
-      linear-gradient(135deg, #34322f 0%, #262522 50%, #1d1c1a 100%);
+      linear-gradient(
+        135deg,
+        var(--cdc-grey-800) 0%,
+        var(--cdc-grey-900) 50%,
+        var(--cdc-grey-950) 100%
+      );
     box-shadow:
       inset 0 1px 0 #ffffff12,
       0 12px 32px #00000040;
@@ -106,7 +111,12 @@
     background:
       radial-gradient(circle at 12% 18%, #ffffff17, transparent 52%),
       radial-gradient(circle at 90% 110%, #ffffff08, transparent 45%),
-      linear-gradient(225deg, #34322f 0%, #262522 50%, #1d1c1a 100%);
+      linear-gradient(
+        225deg,
+        var(--cdc-grey-800) 0%,
+        var(--cdc-grey-900) 50%,
+        var(--cdc-grey-950) 100%
+      );
   }
 
   html[dir='rtl'] .cdc-hero::after {
@@ -122,8 +132,8 @@
     margin: 0 0 16px;
     padding: 5px 12px;
     border-radius: 999px;
-    background: #81b64c26;
-    color: var(--cdc-green-hover);
+    background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
+    color: var(--cdc-accent-hover);
     font-size: 13px;
     font-weight: 800;
   }
@@ -133,8 +143,8 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--cdc-green-hover);
-    box-shadow: 0 0 0 4px #81b64c33;
+    background: var(--cdc-accent-hover);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
   }
 
   /* A signed-in title holds the username (up to 20 letters): it breaks rather than run
@@ -153,7 +163,7 @@
   .cdc-hero__sub {
     max-width: 55%;
     margin: 0;
-    color: #c8c7c4;
+    color: var(--cdc-grey-200);
     font-size: 17px;
     line-height: 1.45;
   }
@@ -263,8 +273,8 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--cdc-green);
-    box-shadow: 0 0 0 3px #81b64c33;
+    background: var(--cdc-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
   }
 
   main.lobby .lobby__counters strong {

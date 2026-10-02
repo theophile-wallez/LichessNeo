@@ -63,8 +63,8 @@
 }
 
 .study-topics .topic-list a:hover {
-  border-color: #81b64c80;
-  background: #81b64c26 !important;
+  border-color: color-mix(in srgb, var(--cdc-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent) !important;
   color: #fff !important;
 }
 
@@ -174,8 +174,8 @@ main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul a::before {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: #81b64c26;
-  color: var(--cdc-green);
+  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
+  color: var(--cdc-accent);
   font-family: lichess;
   font-size: 15px;
   font-weight: 400;

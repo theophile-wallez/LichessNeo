@@ -78,7 +78,7 @@ main.forum-topic .forum-post__metas .author {
 }
 
 main.forum-topic .forum-post__metas .author:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 main.forum-topic .forum-post__metas a.author--op {
@@ -110,7 +110,7 @@ main.forum-topic .forum-post__metas .author.online .line {
   margin: 0 !important;
   border: 2px solid var(--cdc-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-green);
+  background: var(--cdc-good);
   font-size: 0;
 }
 
@@ -170,7 +170,7 @@ main.forum-topic .button.forum-post__button:hover {
 
 main.forum-topic .button.forum-post__button.delete:hover,
 main.forum-topic .button.forum-post__button.report:hover {
-  color: #f0645a !important;
+  color: var(--cdc-red) !important;
 }
 
 /* ---- Message --- */
@@ -222,7 +222,7 @@ main.forum-topic .forum-post__message p + p {
 }
 
 main.forum-topic .forum-post__message a {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
   font-weight: 600;
 }
 
@@ -237,7 +237,7 @@ main.forum-topic .forum-post__message blockquote {
   border-inline-start: 3px solid var(--cdc-fc) !important;
   border-radius: 0 10px 10px 0;
   background: #ffffff08;
-  color: #d9d8d6;
+  color: var(--cdc-grey-100);
 }
 
 html[dir='rtl'] main.forum-topic .forum-post__message blockquote {

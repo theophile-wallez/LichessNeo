@@ -1,6 +1,6 @@
 /* ---- User menu: board, piece and sound pickers --- */
 
-/* Rounded tiles, the current one ringed green. */
+/* Rounded tiles, the current one ringed in the accent. */
 #dasher_app .board .list button,
 #dasher_app .piece .no-square {
   border-radius: 6px;
@@ -13,8 +13,8 @@
 
 #dasher_app .board .list button.active,
 #dasher_app .piece .no-square.active {
-  background: #81b64c33 !important;
-  box-shadow: inset 0 0 0 2px var(--cdc-green);
+  background: color-mix(in srgb, var(--cdc-accent) 20%, transparent) !important;
+  box-shadow: inset 0 0 0 2px var(--cdc-accent);
 }
 
 #dasher_app .board .list span {
@@ -162,8 +162,8 @@
 }
 
 #dasher_app .cdc-src-item.active {
-  background: #81b64c33;
-  box-shadow: inset 0 0 0 2px var(--cdc-green);
+  background: color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+  box-shadow: inset 0 0 0 2px var(--cdc-accent);
   color: #fff;
 }
 
@@ -214,7 +214,7 @@
   box-shadow: none !important;
 }
 
-/* "+" / "-" (more boards and pieces): a quiet row, not a green bar. */
+/* "+" / "-" (more boards and pieces): a quiet row, not an accent bar. */
 #top #dasher_app .button.more {
   height: 32px;
   padding: 0 !important;

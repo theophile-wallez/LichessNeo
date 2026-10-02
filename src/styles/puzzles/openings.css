@@ -3,22 +3,22 @@
 /* About 120 families, each a card with its own color and white piece. The color follows the
    family's position (names are localized), so the "my openings" block shifts it by one. */
 .puzzle-openings {
-  --cdc-fam: #81b64c;
-  --cdc-fam-2: #5d9948;
+  --cdc-fam: var(--cdc-accent);
+  --cdc-fam-2: var(--cdc-purple-dark);
   --cdc-fam-piece: none;
 }
 
 /* The themes page shows the same chips without families, under a brown heading. */
 .puzzle-themes > .puzzle-openings__list {
-  --cdc-fam: #b07b4f;
-  --cdc-fam-2: #8a5a33;
+  --cdc-fam: var(--cdc-orange-dark);
+  --cdc-fam-2: var(--cdc-orange-darker);
 }
 
 /* Signed in, your most played openings come first, in their own gold section
    instead of Lichess's zebra band. */
 .puzzle-openings__mine {
-  --cdc-fam: #e3aa24;
-  --cdc-fam-2: #c08d14;
+  --cdc-fam: var(--cdc-orange-dark);
+  --cdc-fam-2: var(--cdc-orange-darker);
 
   margin: 0 0 20px !important;
   padding: 0 !important;
@@ -53,38 +53,38 @@
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 1) {
-  --cdc-fam: #95c85a;
-  --cdc-fam-2: #5d9948;
+  --cdc-fam: var(--cdc-accent);
+  --cdc-fam-2: var(--cdc-purple-dark);
   --cdc-fam-piece: var(---white-pawn);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 2) {
   --cdc-fam: #45a3f5;
-  --cdc-fam-2: #2474c9;
+  --cdc-fam-2: var(--cdc-cyan-darker);
   --cdc-fam-piece: var(---white-knight);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 3) {
   --cdc-fam: #f5a93b;
-  --cdc-fam-2: #d27a1c;
+  --cdc-fam-2: var(--cdc-orange-darker);
   --cdc-fam-piece: var(---white-bishop);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 4) {
   --cdc-fam: #a98bf0;
-  --cdc-fam-2: #7458c7;
+  --cdc-fam-2: var(--cdc-purple-dark);
   --cdc-fam-piece: var(---white-rook);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 5) {
   --cdc-fam: #f06a4a;
-  --cdc-fam-2: #c9412d;
+  --cdc-fam-2: var(--cdc-red-dark);
   --cdc-fam-piece: var(---white-queen);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n) {
-  --cdc-fam: #2ec4b3;
-  --cdc-fam-2: #178f82;
+  --cdc-fam: var(--cdc-cyan-darker);
+  --cdc-fam-2: var(--cdc-cyan-deep);
   --cdc-fam-piece: var(---white-king);
 }
 
@@ -138,7 +138,7 @@
 }
 
 .puzzle-openings__tree__family h2 a:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 /* The puzzle count as a pill, like the theme cards'. */
@@ -215,12 +215,12 @@
 
 /* Openings you played, when the filter is on "my openings". */
 .puzzle-openings__link.opening-mine {
-  border-color: #e3aa2466;
-  background: #e3aa2417;
+  border-color: color-mix(in srgb, var(--cdc-orange-dark) 40%, transparent);
+  background: color-mix(in srgb, var(--cdc-orange-dark) 9%, transparent);
 }
 
 .puzzle-openings__link.opening-mine h3 {
-  color: #e3aa24;
+  color: var(--cdc-orange-dark);
 }
 
 .puzzle-themes__db {
@@ -302,40 +302,40 @@
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/training'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/puzzle-piece.svg');
-  --cdc-nav-color: #fa742c;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/training/themes'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/circus-tent.svg');
-  --cdc-nav-color: #81b64c;
+  --cdc-nav-color: var(--cdc-accent);
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/training/openings'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/bookmark-tabs.svg');
-  --cdc-nav-color: #c8915b;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/dashboard'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/chart-increasing.svg');
-  --cdc-nav-color: #1baaf0;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/improvementAreas'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/bullseye.svg');
-  --cdc-nav-color: #e25555;
+  --cdc-nav-color: var(--cdc-red);
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/strengths'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/brain.svg');
-  --cdc-nav-color: #8a6fd8;
+  --cdc-nav-color: var(--cdc-purple-dark);
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/training/history'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/clipboard.svg');
-  --cdc-nav-color: #f7c631;
+  --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href*='/training/of-player'] {
   --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/microscope.svg');
-  --cdc-nav-color: #26c2a3;
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }

@@ -81,26 +81,26 @@
 
 /* Five colors and six pieces: a color and piece pair repeats only every 30 cards. */
 .bots__list__entry {
-  --cdc-bot: #95c85a;
-  --cdc-bot-2: #5d9948;
+  --cdc-bot: var(--cdc-accent);
+  --cdc-bot-2: var(--cdc-purple-dark);
   --cdc-bot-piece: var(---white-knight);
 }
 
 .bots__list__entry:nth-child(5n + 2) {
   --cdc-bot: #45a3f5;
-  --cdc-bot-2: #2474c9;
+  --cdc-bot-2: var(--cdc-cyan-darker);
 }
 .bots__list__entry:nth-child(5n + 3) {
   --cdc-bot: #a98bf0;
-  --cdc-bot-2: #7458c7;
+  --cdc-bot-2: var(--cdc-purple-dark);
 }
 .bots__list__entry:nth-child(5n + 4) {
   --cdc-bot: #f5a93b;
-  --cdc-bot-2: #d27a1c;
+  --cdc-bot-2: var(--cdc-orange-darker);
 }
 .bots__list__entry:nth-child(5n + 5) {
-  --cdc-bot: #f0645a;
-  --cdc-bot-2: #b93a2e;
+  --cdc-bot: var(--cdc-red);
+  --cdc-bot-2: var(--cdc-red-darker);
 }
 
 .bots__list__entry:nth-child(6n + 2) {
@@ -120,8 +120,8 @@
 }
 
 .bots__featured .bots__list__entry {
-  --cdc-bot: #f2b53a;
-  --cdc-bot-2: #c27c14;
+  --cdc-bot: var(--cdc-orange-dark);
+  --cdc-bot-2: var(--cdc-orange-darker);
 }
 
 /* ---- Card --- */
@@ -193,7 +193,7 @@
   margin: 0 -4px -4px 0;
   border: 3px solid var(--cdc-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-green);
+  background: var(--cdc-good);
 }
 
 .bots__list__entry__head {
@@ -216,7 +216,7 @@
 }
 
 .bots__list__entry__head .user-link:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 .bots__list__entry__head .user-link .line {
@@ -275,8 +275,8 @@
   height: 40px;
   padding: 0 !important;
   border-radius: 8px;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow);
   color: #fff !important;
   font-size: 15px !important;
   font-weight: 800;
@@ -284,7 +284,7 @@
 }
 
 .bots__list__entry__play:hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
   color: #fff !important;
 }
 

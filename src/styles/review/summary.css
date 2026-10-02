@@ -63,9 +63,9 @@
     display: none;
     padding: 3px 6px;
     border-radius: 3px;
-    background: #e8e6e3;
+    background: var(--cdc-grey-100);
     box-shadow: 0 1px 3px #0000004d;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     font-size: 13px;
     font-weight: 800;
     pointer-events: none;
@@ -214,10 +214,10 @@
 
   .cdc-acc--w {
     background: #fff;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
   }
   .cdc-acc--b {
-    background: #403d39;
+    background: var(--cdc-grey-700);
     color: #fff;
   }
 
@@ -232,7 +232,7 @@
     max-width: 280px;
     padding: 7px 10px;
     border-radius: 5px;
-    background: #161512;
+    background: var(--cdc-grey-950);
     box-shadow: 0 2px 8px #00000080;
     color: #fff;
     font-size: 13px;
@@ -248,7 +248,7 @@
     left: var(--cdc-tip-x, 50%);
     margin-left: -6px;
     border: 6px solid transparent;
-    border-top-color: #161512;
+    border-top-color: var(--cdc-grey-950);
   }
 
   .cdc-cls-icon {

@@ -9,7 +9,7 @@
   border: 1px solid var(--cdc-menu-border) !important;
   border-bottom: none !important;
   border-radius: 8px 8px 0 0 !important;
-  background: #3c3a378c !important;
+  background: color-mix(in srgb, var(--cdc-grey-700) 55%, transparent) !important;
   backdrop-filter: blur(14px) saturate(1.4);
   box-shadow: 0 -2px 14px #0000004d;
   color: var(--cdc-text);
@@ -19,7 +19,7 @@
 
 #friend_box:has(.content_wrap):not(:has(.content_wrap.none)) {
   width: 240px;
-  background: #3c3a37cc !important;
+  background: color-mix(in srgb, var(--cdc-grey-700) 80%, transparent) !important;
 }
 
 /* ---- Title --- */
@@ -67,8 +67,8 @@
 }
 
 #friend_box:has(.list > div) .friend_box_title::before {
-  background: var(--cdc-green);
-  box-shadow: 0 0 0 3px #81b64c33;
+  background: var(--cdc-good);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
 }
 
 /* Chevron: up while closed, down while open. */
@@ -137,7 +137,7 @@
 }
 
 #friend_box .content a.user-link:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 /* Lichess has no profile pictures: everyone gets the default avatar. */
@@ -163,13 +163,13 @@
   margin: 0 !important;
   border: 2px solid var(--cdc-menu-bg);
   border-radius: 50%;
-  background: var(--cdc-green);
+  background: var(--cdc-good);
   font-size: 0;
   transition: border-color 0.15s !important;
 }
 
 #friend_box .content > div:hover a.user-link .line {
-  border-color: #464441;
+  border-color: var(--cdc-grey-650);
 }
 
 #friend_box .content a.user-link .line::before {
@@ -197,7 +197,7 @@
 
 #friend_box .content a.tv:hover {
   background: var(--cdc-btn-grey-hover);
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 #friend_box .content a.tv::before {

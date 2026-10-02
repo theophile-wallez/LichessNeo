@@ -70,7 +70,7 @@
     transform: scale(1.1);
   }
 
-  /* The current step: a lighter row, its number on the green badge. */
+  /* The current step: a lighter row, its number on the accent badge. */
   .ps__chapter.active {
     background: #ffffff14 !important;
     box-shadow: inset 0 0 0 1px #ffffff1a;
@@ -81,14 +81,14 @@
   }
 
   .ps__chapter.active .status {
-    background: var(--cdc-btn-green) !important;
-    box-shadow: var(--cdc-btn-green-shadow);
+    background: var(--cdc-btn-primary) !important;
+    box-shadow: var(--cdc-btn-primary-shadow);
     color: #fff !important;
   }
 
   .ps__chapter .status.done {
-    background: #81b64c33;
-    color: var(--cdc-green-hover) !important;
+    background: color-mix(in srgb, var(--cdc-good) 20%, transparent);
+    color: var(--cdc-good-hover) !important;
   }
 
   /* Footer: back to the practice list, and the lesson picker. */

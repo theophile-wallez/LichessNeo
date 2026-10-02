@@ -57,8 +57,8 @@
 }
 
 .ublog-post .ublog-post__like--mini:hover {
-  border-color: #e0282866;
-  background: #e0282814;
+  border-color: color-mix(in srgb, var(--cdc-red-dark) 40%, transparent);
+  background: color-mix(in srgb, var(--cdc-red-dark) 8%, transparent);
   color: #fff !important;
 }
 
@@ -98,16 +98,16 @@
 }
 
 .ublog-post .ublog-post__topics a:hover {
-  border-color: #81b64c80;
-  background: #81b64c26 !important;
+  border-color: color-mix(in srgb, var(--cdc-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent) !important;
   color: #fff !important;
 }
 
 .ublog-post .ublog-post__intro {
   margin: 24px 0 28px !important;
   padding-inline-start: 16px;
-  border-inline-start: 3px solid var(--cdc-green);
-  color: #e8e7e5;
+  border-inline-start: 3px solid var(--cdc-accent);
+  color: var(--cdc-grey-100);
   font-size: 19px !important;
   font-weight: 600;
   line-height: 1.5;
@@ -116,7 +116,7 @@
 /* ---- Typography --- */
 
 .ublog-post .ublog-post__markup {
-  color: #d4d3d1;
+  color: var(--cdc-grey-200);
   font-size: 16px !important;
   line-height: 1.7 !important;
 }
@@ -148,13 +148,13 @@
 }
 
 .ublog-post .ublog-post__markup a {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
   font-weight: 600;
   text-underline-offset: 3px;
 }
 
 .ublog-post .ublog-post__markup a:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
   text-decoration: underline;
 }
 
@@ -196,17 +196,17 @@
 }
 
 .ublog-post .ublog-post__markup li::marker {
-  color: var(--cdc-green);
+  color: var(--cdc-accent);
 }
 
 .ublog-post .ublog-post__markup blockquote {
   margin: 1.2em 0 !important;
   padding: 12px 18px !important;
   border: none !important;
-  border-inline-start: 3px solid var(--cdc-green) !important;
+  border-inline-start: 3px solid var(--cdc-accent) !important;
   border-radius: 0 8px 8px 0;
   background: #ffffff08;
-  color: #e8e7e5;
+  color: var(--cdc-grey-100);
 }
 
 .ublog-post .ublog-post__markup :not(pre) > code {

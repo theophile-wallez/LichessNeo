@@ -11,77 +11,77 @@
 /* A color per leaderboard, from its icon; shared with the tournament winners (Elite and
  * Marathon only exist there). */
 :is(.community .leaderboards .user-top, .tournament-leaderboards__item, .tournament-shields__item) {
-  --cdc-lb: #95c85a;
-  --cdc-lb-2: #5d9948;
+  --cdc-lb: var(--cdc-accent);
+  --cdc-lb-2: var(--cdc-purple-dark);
 }
 
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e032'] {
   --cdc-lb: #f5a93b;
-  --cdc-lb-2: #d27a1c;
+  --cdc-lb-2: var(--cdc-orange-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e008'] {
-  --cdc-lb: #fad541;
-  --cdc-lb-2: #e0a21a;
+  --cdc-lb: var(--cdc-yellow-dark);
+  --cdc-lb-2: var(--cdc-orange-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e002'] {
-  --cdc-lb: #95c85a;
-  --cdc-lb-2: #5d9948;
+  --cdc-lb: var(--cdc-accent);
+  --cdc-lb-2: var(--cdc-purple-dark);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e00a'] {
   --cdc-lb: #45a3f5;
-  --cdc-lb-2: #2474c9;
+  --cdc-lb-2: var(--cdc-cyan-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e059'] {
   --cdc-lb: #f06a4a;
-  --cdc-lb-2: #c9412d;
+  --cdc-lb-2: var(--cdc-red-dark);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e033'] {
   --cdc-lb: #a98bf0;
-  --cdc-lb-2: #7458c7;
+  --cdc-lb-2: var(--cdc-purple-dark);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e045'] {
-  --cdc-lb: #f7c631;
-  --cdc-lb-2: #cf951a;
+  --cdc-lb: var(--cdc-orange-dark);
+  --cdc-lb-2: var(--cdc-orange-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e066'] {
-  --cdc-lb: #3aa6e0;
-  --cdc-lb-2: #0a78b8;
+  --cdc-lb: var(--cdc-cyan-dark);
+  --cdc-lb-2: var(--cdc-cyan-deep);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e006'] {
-  --cdc-lb: #fa8a4c;
-  --cdc-lb-2: #d9601c;
+  --cdc-lb: var(--cdc-orange-dark);
+  --cdc-lb-2: var(--cdc-orange-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e01e'] {
-  --cdc-lb: #e86bb0;
-  --cdc-lb-2: #b8438a;
+  --cdc-lb: var(--cdc-pink);
+  --cdc-lb-2: var(--cdc-pink-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e01c'] {
-  --cdc-lb: #f0645a;
-  --cdc-lb-2: #b93a2e;
+  --cdc-lb: var(--cdc-red);
+  --cdc-lb-2: var(--cdc-red-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e00d'] {
-  --cdc-lb: #3fd0b2;
-  --cdc-lb-2: #1f9c83;
+  --cdc-lb: var(--cdc-cyan-darker);
+  --cdc-lb-2: var(--cdc-cyan-deep);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e007'] {
-  --cdc-lb: #d4a15f;
-  --cdc-lb-2: #a8743a;
+  --cdc-lb: var(--cdc-orange-dark);
+  --cdc-lb-2: var(--cdc-orange-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e03d'] {
-  --cdc-lb: #9aa9bd;
-  --cdc-lb-2: #627288;
+  --cdc-lb: var(--cdc-cyan-dark);
+  --cdc-lb-2: var(--cdc-grey-400);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e065'] {
-  --cdc-lb: #7fb2ff;
-  --cdc-lb-2: #4a7fd6;
+  --cdc-lb: var(--cdc-cyan);
+  --cdc-lb-2: var(--cdc-cyan-dark);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e021'] {
-  --cdc-lb: #c07af5;
-  --cdc-lb-2: #8a45c9;
+  --cdc-lb: var(--cdc-purple);
+  --cdc-lb-2: var(--cdc-purple-darker);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e03a'] {
-  --cdc-lb: #6e7cf2;
-  --cdc-lb-2: #4453c9;
+  --cdc-lb: var(--cdc-purple-dark);
+  --cdc-lb-2: var(--cdc-purple-darker);
 }
 
 :is(.community .leaderboards .user-top, .tournament-leaderboards__item, .tournament-shields__item) {
@@ -288,18 +288,18 @@ html[dir='rtl'] :is(.community .leaderboards, .tournament-shields) h2 a:hover::a
 }
 
 .community .leaderboards li:nth-child(1)::before {
-  background: linear-gradient(145deg, #ffe07a, #e3a51b);
-  color: #5c3c00;
+  background: linear-gradient(145deg, var(--cdc-yellow), var(--cdc-orange-darker));
+  color: var(--cdc-orange-deep);
 }
 
 .community .leaderboards li:nth-child(2)::before {
-  background: linear-gradient(145deg, #f1f4f8, #a7b0bc);
-  color: #394049;
+  background: linear-gradient(145deg, var(--cdc-grey-50), var(--cdc-grey-300));
+  color: var(--cdc-grey-700);
 }
 
 .community .leaderboards li:nth-child(3)::before {
-  background: linear-gradient(145deg, #f4b27a, #bf6a2c);
-  color: #4d2306;
+  background: linear-gradient(145deg, var(--cdc-orange), var(--cdc-orange-darker));
+  color: var(--cdc-orange-deep);
 }
 
 .community .leaderboards .user-link {
@@ -322,7 +322,7 @@ html[dir='rtl'] :is(.community .leaderboards, .tournament-shields) h2 a:hover::a
 }
 
 .community .leaderboards li > a:not(.user-link):hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 .community .leaderboards li > span {

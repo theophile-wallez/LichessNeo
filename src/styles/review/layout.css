@@ -188,7 +188,7 @@
     width: 30px;
     height: 30px;
     background: #fff;
-    color: #5d9948;
+    color: var(--cdc-purple-dark);
     font-size: 19px;
     text-shadow: none;
   }
@@ -250,7 +250,7 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: var(--cdc-green);
+    background: var(--cdc-accent);
     color: #fff;
     font-size: 14px;
     line-height: 1;

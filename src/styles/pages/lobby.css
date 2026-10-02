@@ -112,7 +112,7 @@
 
 /* Your own seek. */
 .hooks__list tr.cancel td {
-  background: #81b64c26 !important;
+  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent) !important;
 }
 
 .hooks__list tr.variants td {
@@ -143,17 +143,17 @@
   color: #fff !important;
 }
 
-/* "Create a game" as the big green Play button. The doubled class beats the metal-button
+/* "Create a game" as the big primary Play button. The doubled class beats the metal-button
  * hover in theme/; the icon stays white where Lichess tints it green. */
 .lobby__start__button--hook.button.button-metal {
-  background: var(--cdc-btn-green) !important;
+  background: var(--cdc-btn-primary) !important;
   color: #fff !important;
   text-shadow: 0 1px 1px #00000033 !important;
-  box-shadow: var(--cdc-btn-green-shadow) !important;
+  box-shadow: var(--cdc-btn-primary-shadow) !important;
 }
 
 .lobby__start__button--hook.button.button-metal:not(.disabled):hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
   color: #fff !important;
 }
 

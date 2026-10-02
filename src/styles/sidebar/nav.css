@@ -108,25 +108,25 @@
     color: #fff !important;
   }
 
-  /* Icons from public/img/icons. Sections are matched by position and links by how their
+  /* Icons from public/img/sidebar. Sections are matched by position and links by how their
    * href ends: Lichess localizes the labels and some paths (/fr/training). */
   #topnav section:nth-of-type(1) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/play-button.svg');
+    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/play.webp');
   }
   #topnav section:nth-of-type(2) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/puzzle-piece.svg');
+    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
   }
   #topnav section:nth-of-type(3) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/graduation-cap.svg');
+    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/learn.webp');
   }
   #topnav section:nth-of-type(4) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/eyes.svg');
+    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/watch-binoculars.webp');
   }
   #topnav section:nth-of-type(5) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/people-hugging.svg');
+    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
   }
   #topnav section:nth-of-type(6) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/hammer-and-wrench.svg');
+    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/tools.webp');
   }
 
   #topnav section > div a {
@@ -144,93 +144,93 @@
   }
 
   #topnav div a[href*='#hook'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/play-button.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friendly-challenge.webp');
   }
   #topnav div a[href$='/tournament'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp');
   }
   #topnav div a[href$='/swiss'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/ballot-box.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/swiss-tournaments.webp');
   }
   #topnav div a[href$='/simul'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/circus-tent.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp');
   }
   #topnav div a[href$='/training'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/puzzle-piece.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
   }
   #topnav div a[href$='/training/themes'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/bookmark-tabs.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
   }
   #topnav div a[href*='/training/dashboard'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/chart-increasing.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-dashboard.webp');
   }
   #topnav div a[href$='/streak'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
   }
   #topnav div a[href$='/storm'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/high-voltage.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
   }
   #topnav div a[href$='/racer'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
   }
   #topnav div a[href$='/learn'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/light-bulb.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/chess-basics.webp');
   }
   #topnav div a[href$='/practice'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/bullseye.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/practice.webp');
   }
   #topnav div a[href$='/training/coordinate'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/round-pushpin.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coordinate-practice.webp');
   }
   #topnav div a[href$='/study'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/open-book.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp');
   }
   #topnav div a[href$='/coach'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/teacher.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coach.webp');
   }
   #topnav div a[href$='/broadcast'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp');
   }
   #topnav div a[href$='/tv'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/television.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/lichess-tv.webp');
   }
   #topnav div a[href$='/games'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/hourglass.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/current-games.webp');
   }
   #topnav div a[href$='/streamer'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/video-camera.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/streamers.webp');
   }
   #topnav div a[href$='/video'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/satellite-antenna.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/video-library.webp');
   }
   #topnav div a[href$='/player'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/sports-medal.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
   }
   #topnav div a[href$='/following'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/people-hugging.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friends.webp');
   }
   #topnav div a[href$='/team'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/handshake.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/teams.webp');
   }
   #topnav div a[href$='/forum'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/speech-balloon.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/forum.webp');
   }
   #topnav div a[href*='/blog'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/newspaper.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp');
   }
   #topnav div a[href$='/analysis'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/microscope.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/analysis-board.webp');
   }
   #topnav div a[href$='/opening'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/books.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/openings.webp');
   }
   #topnav div a[href$='/editor'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/pencil.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/board-editor.webp');
   }
   #topnav div a[href$='/paste'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/clipboard.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/import-game.webp');
   }
   #topnav div a[href$='/games/search'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/magnifying-glass.svg');
+    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/advanced-search.webp');
   }
 }

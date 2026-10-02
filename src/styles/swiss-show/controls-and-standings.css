@@ -52,7 +52,7 @@ main.swiss .swiss__controls .pager input {
   font-size: 14px;
 }
 
-/* Join (or sign in, or join the team) in green, withdraw in grey. */
+/* Join (or sign in, or join the team) in the primary color, withdraw in grey. */
 main.swiss .swiss__controls > .fbt {
   display: inline-flex;
   align-items: center;
@@ -74,13 +74,13 @@ main.swiss .swiss__controls > .fbt:hover {
 }
 
 main.swiss .swiss__controls > .fbt.highlight {
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow);
   text-shadow: 0 1px 0 #0000004d;
 }
 
 main.swiss .swiss__controls > .fbt.highlight:hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
 }
 
 main.swiss .swiss__controls > .fbt::before {
@@ -131,14 +131,14 @@ main.swiss .swiss__standing:not(.created, .loading) tbody tr:hover {
   background: var(--cdc-card-hover) !important;
 }
 
-/* Me: a green bar at the start. The player whose card is open: raised. */
+/* Me: an accent bar at the start. The player whose card is open: raised. */
 main.swiss .swiss__standing tr.me td:first-child {
   background: none !important;
-  box-shadow: inset 4px 0 0 var(--cdc-green);
+  box-shadow: inset 4px 0 0 var(--cdc-accent);
 }
 
 html[dir='rtl'] main.swiss .swiss__standing tr.me td:first-child {
-  box-shadow: inset -4px 0 0 var(--cdc-green);
+  box-shadow: inset -4px 0 0 var(--cdc-accent);
 }
 
 main.swiss .swiss__standing tbody tr.active {
@@ -169,19 +169,19 @@ main.swiss .swiss__standing td.rank {
 main.swiss
   .swiss__standing:not(.created):has(.pairings :is(.win, .loss, .draw))
   td.rank[data-cdc-medal='1'] {
-  color: #e3aa24;
+  color: var(--cdc-orange-dark);
 }
 
 main.swiss
   .swiss__standing:not(.created):has(.pairings :is(.win, .loss, .draw))
   td.rank[data-cdc-medal='2'] {
-  color: #b7b7b7;
+  color: var(--cdc-grey-200);
 }
 
 main.swiss
   .swiss__standing:not(.created):has(.pairings :is(.win, .loss, .draw))
   td.rank[data-cdc-medal='3'] {
-  color: #d0844b;
+  color: var(--cdc-orange-dark);
 }
 
 main.swiss .swiss__standing td.rank icon {
@@ -219,7 +219,7 @@ main.swiss .swiss__standing .player .rating {
   font-weight: 600;
 }
 
-/* One square per round: green won, red lost, grey drawn, outlined while playing.
+/* One square per round: green won, red lost, grey drawn, outlined in the accent while playing.
  * Byes, late joins and absences plain; future rounds empty. */
 main.swiss .swiss__standing .pairings div {
   gap: var(--cdc-cell-gap);
@@ -267,24 +267,24 @@ main.swiss .swiss__standing .pairings div > * {
 }
 
 main.swiss .swiss__standing .pairings .win {
-  background: var(--cdc-green) !important;
+  background: var(--cdc-good) !important;
   color: #fff !important;
 }
 
 main.swiss .swiss__standing .pairings .loss {
-  background: #d64742 !important;
+  background: var(--cdc-red-dark) !important;
   color: #fff !important;
 }
 
 main.swiss .swiss__standing .pairings .draw {
-  background: #8b8987 !important;
+  background: var(--cdc-grey-400) !important;
   color: #fff !important;
 }
 
 main.swiss .swiss__standing .pairings .ongoing {
   background: transparent !important;
-  box-shadow: inset 0 0 0 2px var(--cdc-green);
-  color: var(--cdc-green) !important;
+  box-shadow: inset 0 0 0 2px var(--cdc-accent);
+  color: var(--cdc-accent) !important;
 }
 
 main.swiss .swiss__standing .pairings :is(bye, late) {

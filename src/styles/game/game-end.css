@@ -28,7 +28,7 @@
   }
 
   main.round .cdc-end__king {
-    --cdc-king-c: #8b8987;
+    --cdc-king-c: var(--cdc-grey-400);
     position: absolute;
     top: calc(var(--row) * 12.5%);
     left: calc(var(--column) * 12.5%);
@@ -37,11 +37,11 @@
   }
 
   main.round .cdc-end__king--win {
-    --cdc-king-c: #81b64c;
+    --cdc-king-c: var(--cdc-accent);
   }
 
   main.round .cdc-end__king--loss {
-    --cdc-king-c: #e0463c;
+    --cdc-king-c: var(--cdc-red-dark);
   }
 
   /* The square in the badge's color, the king showing faintly through it; then a pip. */

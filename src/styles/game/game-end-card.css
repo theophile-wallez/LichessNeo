@@ -18,7 +18,7 @@
     padding-bottom: 2.4cqh;
     overflow: hidden;
     border-radius: max(10px, 1.2cqh);
-    background: #262421;
+    background: var(--cdc-grey-900);
     color: #fff;
     box-shadow:
       0 12px 40px #0000008c,
@@ -46,7 +46,7 @@
     gap: 2cqh;
     /* As much room on the left as the close button takes on the right, so the title is centered. */
     padding: 2cqh 5cqh;
-    background: #1f1e1c;
+    background: var(--cdc-grey-950);
   }
 
   main.round .cdc-end__titles {
@@ -114,7 +114,7 @@
     padding: 1.4cqh 1.8cqh;
     border-radius: max(10px, 1.2cqh);
     background: #fff;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     font-size: max(13px, 2.5cqh);
     line-height: 1.35;
     /* Two lines, so the card keeps its height as the words type out. */
@@ -124,11 +124,11 @@
 
   /* Between the waiting words and the verdict, as the coach draws breath. */
   main.round .cdc-end__bubble--empty {
-    background-color: #3c3a37;
+    background-color: var(--cdc-grey-700);
   }
 
   main.round .cdc-end__bubble--empty::before {
-    border-right-color: #3c3a37;
+    border-right-color: var(--cdc-grey-700);
   }
 
   main.round .cdc-end__bubble::before {
@@ -221,14 +221,14 @@
 
   main.round .cdc-end__review {
     height: max(44px, 9cqh);
-    background: var(--cdc-btn-green);
-    box-shadow: var(--cdc-btn-green-shadow);
+    background: var(--cdc-btn-primary);
+    box-shadow: var(--cdc-btn-primary-shadow);
     font-size: max(16px, 3.4cqh);
     text-shadow: 0 1px 1px #00000033;
   }
 
   main.round .cdc-end__review:hover {
-    background: var(--cdc-btn-green-hover);
+    background: var(--cdc-btn-primary-hover);
   }
 
   main.round .cdc-end__more {

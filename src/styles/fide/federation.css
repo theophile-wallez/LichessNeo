@@ -65,7 +65,7 @@
 
 .fide-federation__card {
   --cdc-fc: #2dd4bf;
-  --cdc-fc-2: #14a38f;
+  --cdc-fc-2: var(--cdc-cyan-deep);
   gap: 18px !important;
   padding: 20px !important;
   border: 1px solid var(--cdc-card-border);
@@ -76,13 +76,13 @@
 }
 
 .fide-federation__card:nth-child(2) {
-  --cdc-fc: #95c85a;
-  --cdc-fc-2: #5d9948;
+  --cdc-fc: var(--cdc-accent);
+  --cdc-fc-2: var(--cdc-purple-dark);
 }
 
 .fide-federation__card:nth-child(3) {
-  --cdc-fc: #fad541;
-  --cdc-fc-2: #d8a31a;
+  --cdc-fc: var(--cdc-yellow-dark);
+  --cdc-fc-2: var(--cdc-orange-darker);
 }
 
 .fide-federation__card em {

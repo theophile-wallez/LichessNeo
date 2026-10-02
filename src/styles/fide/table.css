@@ -147,12 +147,12 @@
 
 :is(.fide-players, .fide-federation) .fide-players-table thead th:nth-child(3) {
   --cdc-mode-icon: var(--cdc-mode-rapid);
-  --cdc-mode-color: #81b64c;
+  --cdc-mode-color: var(--cdc-accent);
 }
 
 :is(.fide-players, .fide-federation) .fide-players-table thead th:nth-child(4) {
   --cdc-mode-icon: var(--cdc-mode-blitz);
-  --cdc-mode-color: #fad541;
+  --cdc-mode-color: var(--cdc-yellow-dark);
 }
 
 :is(.fide-players, .fide-federation)

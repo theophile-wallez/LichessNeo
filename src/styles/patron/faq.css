@@ -3,8 +3,8 @@
 /* A card per question, the dt its head and the dd its body. Lichess's three <dl>
    columns dissolve so every pair can sit in one grid. */
 main.plan .faq {
-  --cdc-faq: #95c85a;
-  --cdc-faq-2: #5d9948;
+  --cdc-faq: var(--cdc-accent);
+  --cdc-faq-2: var(--cdc-purple-dark);
   --cdc-faq-emoji: url('https://lichess1.org/assets/flair/img/objects.money-with-wings.webp');
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -73,25 +73,25 @@ main.plan .faq dd strong {
    the non-profit, changing or cancelling, other ways to give, what patrons get. */
 main.plan .faq dl:nth-child(1) :is(dt, dd):nth-of-type(2) {
   --cdc-faq: #45a3f5;
-  --cdc-faq-2: #2474c9;
+  --cdc-faq-2: var(--cdc-cyan-darker);
   --cdc-faq-emoji: url('https://lichess1.org/assets/flair/img/travel-places.classical-building.webp');
 }
 
 main.plan .faq dl:nth-child(2) :is(dt, dd):nth-of-type(1) {
   --cdc-faq: #a98bf0;
-  --cdc-faq-2: #7458c7;
+  --cdc-faq-2: var(--cdc-purple-dark);
   --cdc-faq-emoji: url('https://lichess1.org/assets/flair/img/objects.gear.webp');
 }
 
 main.plan .faq dl:nth-child(2) :is(dt, dd):nth-of-type(2) {
-  --cdc-faq: #fa8a4c;
-  --cdc-faq-2: #d9601c;
+  --cdc-faq: var(--cdc-orange-dark);
+  --cdc-faq-2: var(--cdc-orange-darker);
   --cdc-faq-emoji: url('https://lichess1.org/assets/flair/img/objects.credit-card.webp');
 }
 
 main.plan .faq dl:nth-child(3) :is(dt, dd) {
-  --cdc-faq: #f5c451;
-  --cdc-faq-2: #d2921c;
+  --cdc-faq: var(--cdc-orange-dark);
+  --cdc-faq-2: var(--cdc-orange-darker);
   --cdc-faq-emoji: url('https://lichess1.org/assets/flair/img/activity.trophy.webp');
 }
 

@@ -5,8 +5,8 @@
 
 /* ---- Lesson header --- */
 
-/* Dark, with the icon on a green tile: an all-green header shouts next to the
- * board. Lichess's mobile layout paints it in the (green) primary color too. */
+/* Dark, with the icon on an accent tile: an all-accent header shouts next to the
+ * board. Lichess's mobile layout paints it in the primary color too. */
 .practice__side__title {
   position: relative;
   isolation: isolate;
@@ -30,7 +30,7 @@
   height: 44px;
   margin-top: -22px;
   border-radius: 12px;
-  background: var(--cdc-btn-green);
+  background: var(--cdc-btn-primary);
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
@@ -64,7 +64,7 @@
 }
 
 /* The drill's title ("Practice with computer"): a quiet label, not a band in
- * Lichess's accent, which our theme makes green. */
+ * Lichess's accent, which our theme makes purple. */
 main.analyse .practice-box > .title {
   padding: 8px 14px 0 !important;
   background: transparent !important;

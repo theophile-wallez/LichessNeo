@@ -141,15 +141,18 @@
 }
 
 .tournament-leaderboards li:nth-child(1)::before {
-  background-image: var(--cdc-cup), linear-gradient(145deg, #ffe07a, #e3a51b);
+  background-image:
+    var(--cdc-cup), linear-gradient(145deg, var(--cdc-yellow), var(--cdc-orange-darker));
 }
 
 .tournament-leaderboards li:nth-child(2)::before {
-  background-image: var(--cdc-cup), linear-gradient(145deg, #f1f4f8, #a7b0bc);
+  background-image:
+    var(--cdc-cup), linear-gradient(145deg, var(--cdc-grey-50), var(--cdc-grey-300));
 }
 
 .tournament-leaderboards li:nth-child(3)::before {
-  background-image: var(--cdc-cup), linear-gradient(145deg, #f4b27a, #bf6a2c);
+  background-image:
+    var(--cdc-cup), linear-gradient(145deg, var(--cdc-orange), var(--cdc-orange-darker));
 }
 
 /* Elite and Marathon winners each won the same event: all in the card's color. */
@@ -195,5 +198,5 @@
 
 :is(.tournament-leaderboards, .tournament-shields) li > a:not(.user-link):hover {
   background: var(--cdc-lb);
-  color: #1f1e1b !important;
+  color: var(--cdc-grey-950) !important;
 }

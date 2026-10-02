@@ -83,8 +83,17 @@ main.plan .banner {
   border: 1px solid var(--cdc-card-border);
   border-radius: 14px !important;
   background:
-    radial-gradient(circle at 9% 55%, #e3aa242e, transparent 26%),
-    radial-gradient(circle at 91% 55%, #e3aa242e, transparent 26%), var(--cdc-bg-panel) !important;
+    radial-gradient(
+      circle at 9% 55%,
+      color-mix(in srgb, var(--cdc-orange-dark) 18%, transparent),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 91% 55%,
+      color-mix(in srgb, var(--cdc-orange-dark) 18%, transparent),
+      transparent 26%
+    ),
+    var(--cdc-bg-panel) !important;
   color: var(--cdc-text) !important;
   font-size: 17px !important;
   line-height: 1.5;
@@ -97,7 +106,13 @@ main.plan .banner::before {
   position: absolute;
   inset: 0 0 auto;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #f5c451 30%, #e3aa24 70%, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--cdc-orange-dark) 30%,
+    var(--cdc-orange-dark) 70%,
+    transparent
+  );
   opacity: 0.8;
 }
 
@@ -143,7 +158,13 @@ main.plan .banner > icon:last-child {
 }
 
 main.plan .banner > icon::before {
-  background: linear-gradient(150deg, #ffe08a 10%, #f5c451 35%, #e3aa24 60%, #b9791a 95%);
+  background: linear-gradient(
+    150deg,
+    var(--cdc-orange-light) 10%,
+    var(--cdc-orange-dark) 35%,
+    var(--cdc-orange-dark) 60%,
+    var(--cdc-orange-darker) 95%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent !important;
@@ -195,7 +216,7 @@ main.plan .wrapper > .text::before {
   background:
     url('https://lichess1.org/assets/flair/img/symbols.heart-with-ribbon.webp') center / 68%
       no-repeat,
-    linear-gradient(145deg, #f47fa4, #d24a78);
+    linear-gradient(145deg, var(--cdc-pink), var(--cdc-pink-dark));
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,

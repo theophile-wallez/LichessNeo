@@ -44,7 +44,7 @@
 }
 
 .slist tbody tr:nth-child(2n) {
-  background: #2a2926 !important;
+  background: var(--cdc-grey-850) !important;
 }
 
 .slist tbody tr:hover {
@@ -60,7 +60,7 @@
 input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='color']),
 select,
 textarea {
-  border: 1px solid #4b4847 !important;
+  border: 1px solid var(--cdc-grey-650) !important;
   border-radius: 6px !important;
   background-color: var(--cdc-bg-raised) !important;
   color: #fff !important;
@@ -69,13 +69,13 @@ textarea {
 input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='color']):focus,
 select:focus,
 textarea:focus {
-  border-color: var(--cdc-green) !important;
+  border-color: var(--cdc-accent) !important;
   outline: none !important;
 }
 
 input[type='checkbox'],
 input[type='radio'] {
-  accent-color: var(--cdc-green);
+  accent-color: var(--cdc-accent);
 }
 
 /* The file picker's "Choose file" button, in our grey button style. */
@@ -103,7 +103,7 @@ input[type='file']::file-selector-button:hover {
   padding: 0 !important;
   border: none !important;
   border-radius: 999px !important;
-  background: #5d5b58 !important;
+  background: var(--cdc-grey-500) !important;
 }
 
 .cmn-toggle label::before {
@@ -121,7 +121,7 @@ input[type='file']::file-selector-button:hover {
 }
 
 .cmn-toggle input:checked + label {
-  background: var(--cdc-green) !important;
+  background: var(--cdc-accent) !important;
 }
 
 .cmn-toggle input:checked + label::after {
@@ -148,7 +148,7 @@ input:not([type='hidden']) + .button {
 }
 
 input:not([type='hidden']) + .button.button-metal {
-  border: 1px solid #4b4847 !important;
+  border: 1px solid var(--cdc-grey-650) !important;
   border-left: none !important;
   color: var(--cdc-text-dim) !important;
 }

@@ -63,7 +63,7 @@ main.page-menu:has(.puzzle-openings) .help {
 }
 
 main.page-menu:has(.puzzle-openings) .help icon::before {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
   opacity: 1 !important;
 }
 
@@ -93,94 +93,94 @@ main.page-menu:has(.puzzle-openings) .box__top .mselect__list {
 
 .puzzle-themes {
   --cdc-theme: #45a3f5;
-  --cdc-theme-2: #2474c9;
+  --cdc-theme-2: var(--cdc-cyan-darker);
 }
 
 .puzzle-themes .puzzle-recommended {
-  --cdc-theme: #95c85a;
-  --cdc-theme-2: #5d9948;
+  --cdc-theme: var(--cdc-accent);
+  --cdc-theme-2: var(--cdc-purple-dark);
 }
 .puzzle-themes .puzzle-phases {
   --cdc-theme: #45a3f5;
-  --cdc-theme-2: #2474c9;
+  --cdc-theme-2: var(--cdc-cyan-darker);
 }
 .puzzle-themes .puzzle-motifs {
   --cdc-theme: #f5a93b;
-  --cdc-theme-2: #d27a1c;
+  --cdc-theme-2: var(--cdc-orange-darker);
 }
 .puzzle-themes .puzzle-advanced {
   --cdc-theme: #a98bf0;
-  --cdc-theme-2: #7458c7;
+  --cdc-theme-2: var(--cdc-purple-dark);
 }
 .puzzle-themes .puzzle-mates {
   --cdc-theme: #f06a4a;
-  --cdc-theme-2: #c9412d;
+  --cdc-theme-2: var(--cdc-red-dark);
 }
 .puzzle-themes .puzzle-mateThemes {
-  --cdc-theme: #ec6fa8;
-  --cdc-theme-2: #c2457e;
+  --cdc-theme: var(--cdc-pink);
+  --cdc-theme-2: var(--cdc-pink-darker);
 }
 .puzzle-themes .puzzle-specialMoves {
-  --cdc-theme: #2ec4b3;
-  --cdc-theme-2: #178f82;
+  --cdc-theme: var(--cdc-cyan-darker);
+  --cdc-theme-2: var(--cdc-cyan-deep);
 }
 .puzzle-themes .puzzle-goals {
-  --cdc-theme: #f2c230;
-  --cdc-theme-2: #c9951a;
+  --cdc-theme: var(--cdc-orange-dark);
+  --cdc-theme-2: var(--cdc-orange-darker);
 }
 .puzzle-themes .puzzle-lengths {
-  --cdc-theme: #4cc9e8;
-  --cdc-theme-2: #2593b5;
+  --cdc-theme: var(--cdc-cyan-dark);
+  --cdc-theme-2: var(--cdc-cyan-darker);
 }
 .puzzle-themes .puzzle-origin {
-  --cdc-theme: #95c85a;
-  --cdc-theme-2: #5d9948;
+  --cdc-theme: var(--cdc-accent);
+  --cdc-theme-2: var(--cdc-purple-dark);
 }
 
 /* Each heading's dot takes its list's color. */
 .puzzle-themes > h2:has(+ .puzzle-recommended) {
-  --cdc-theme: #95c85a;
-  --cdc-theme-2: #5d9948;
+  --cdc-theme: var(--cdc-accent);
+  --cdc-theme-2: var(--cdc-purple-dark);
 }
 .puzzle-themes > h2:has(+ .puzzle-phases) {
   --cdc-theme: #45a3f5;
-  --cdc-theme-2: #2474c9;
+  --cdc-theme-2: var(--cdc-cyan-darker);
 }
 .puzzle-themes > h2:has(+ .puzzle-motifs) {
   --cdc-theme: #f5a93b;
-  --cdc-theme-2: #d27a1c;
+  --cdc-theme-2: var(--cdc-orange-darker);
 }
 .puzzle-themes > h2:has(+ .puzzle-advanced) {
   --cdc-theme: #a98bf0;
-  --cdc-theme-2: #7458c7;
+  --cdc-theme-2: var(--cdc-purple-dark);
 }
 .puzzle-themes > h2:has(+ .puzzle-mates) {
   --cdc-theme: #f06a4a;
-  --cdc-theme-2: #c9412d;
+  --cdc-theme-2: var(--cdc-red-dark);
 }
 .puzzle-themes > h2:has(+ .puzzle-mateThemes) {
-  --cdc-theme: #ec6fa8;
-  --cdc-theme-2: #c2457e;
+  --cdc-theme: var(--cdc-pink);
+  --cdc-theme-2: var(--cdc-pink-darker);
 }
 .puzzle-themes > h2:has(+ .puzzle-specialMoves) {
-  --cdc-theme: #2ec4b3;
-  --cdc-theme-2: #178f82;
+  --cdc-theme: var(--cdc-cyan-darker);
+  --cdc-theme-2: var(--cdc-cyan-deep);
 }
 .puzzle-themes > h2:has(+ .puzzle-goals) {
-  --cdc-theme: #f2c230;
-  --cdc-theme-2: #c9951a;
+  --cdc-theme: var(--cdc-orange-dark);
+  --cdc-theme-2: var(--cdc-orange-darker);
 }
 .puzzle-themes > h2:has(+ .puzzle-lengths) {
-  --cdc-theme: #4cc9e8;
-  --cdc-theme-2: #2593b5;
+  --cdc-theme: var(--cdc-cyan-dark);
+  --cdc-theme-2: var(--cdc-cyan-darker);
 }
 .puzzle-themes > h2:has(+ .puzzle-origin) {
-  --cdc-theme: #95c85a;
-  --cdc-theme-2: #5d9948;
+  --cdc-theme: var(--cdc-accent);
+  --cdc-theme-2: var(--cdc-purple-dark);
 }
 .puzzle-themes > h2:has(+ .puzzle-openings__list) {
-  --cdc-theme: #b07b4f;
-  --cdc-theme-2: #8a5a33;
+  --cdc-theme: var(--cdc-orange-dark);
+  --cdc-theme-2: var(--cdc-orange-darker);
 }
 
 .puzzle-themes > h2 {
@@ -207,7 +207,7 @@ main.page-menu:has(.puzzle-openings) .box__top .mselect__list {
 /* "More »" after the openings heading. */
 .puzzle-themes > h2 > a {
   margin-inline-start: auto;
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
   font-size: 13px;
   font-weight: 700;
 }

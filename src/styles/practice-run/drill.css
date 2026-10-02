@@ -67,7 +67,7 @@
     border-radius: 12px;
     background: #fff !important;
     box-shadow: 0 6px 18px #00000059 !important;
-    color: #312e2b !important;
+    color: var(--cdc-grey-800) !important;
     /* Every new exercise, and every verdict, is a new bubble. */
     animation: cdc-say 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
     transform-origin: 0 calc(100% - var(--cdc-coach-h) * 0.36);
@@ -108,7 +108,7 @@
     align-items: center;
     width: auto !important;
     margin: 0 !important;
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     font-size: 15px !important;
     font-weight: 800;
     text-align: start !important;
@@ -120,14 +120,14 @@
     width: 18px;
     height: 18px;
     --cdc-goal: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2a6.8 6.8 0 1 1 0 13.6 6.8 6.8 0 0 1 0-13.6zm0 3.3a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z'/%3E%3C/svg%3E");
-    background: var(--cdc-green);
+    background: var(--cdc-accent);
     -webkit-mask: var(--cdc-goal) center / contain no-repeat;
     mask: var(--cdc-goal) center / contain no-repeat;
   }
 
   main.analyse .analyse__underboard .feedback .comment {
     margin-top: 4px;
-    color: #5d5b58;
+    color: var(--cdc-grey-500);
     font-size: 13.5px;
     font-weight: 500;
     line-height: 1.45;
@@ -140,7 +140,7 @@
     flex-flow: column;
     justify-content: center;
     align-items: flex-start !important;
-    color: #5d5b58 !important;
+    color: var(--cdc-grey-500) !important;
     font-size: 14px;
     font-weight: 600;
     opacity: 1 !important;
@@ -148,7 +148,7 @@
   }
 
   main.analyse .analyse__underboard .feedback:is(.win, .fail):hover {
-    background: #f2f1f0 !important;
+    background: var(--cdc-grey-50) !important;
   }
 
   main.analyse .analyse__underboard .feedback:is(.win, .fail):hover::before {
@@ -157,17 +157,17 @@
 
   main.analyse .analyse__underboard .feedback:is(.win, .fail) span {
     margin: 0 0 2px !important;
-    color: #4e8a3c;
+    color: var(--cdc-purple-dark);
     font-size: 17px;
     font-weight: 800;
   }
 
   main.analyse .analyse__underboard .feedback.fail span {
-    color: #c8403b;
+    color: var(--cdc-red-dark);
   }
 
   main.analyse .analyse__underboard .feedback.fail strong {
-    color: #312e2b;
+    color: var(--cdc-grey-800);
     font-weight: 700;
   }
 

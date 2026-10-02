@@ -5,8 +5,8 @@
    * (TV channel colors, tv.css), pills (content/game/game-meta.ts splits "3+0 • Rated •
    * Blitz"), players. */
   main.round .round__side > .game__meta {
-    --cdc-meta: #95c85a;
-    --cdc-meta-2: #5d9948;
+    --cdc-meta: var(--cdc-accent);
+    --cdc-meta-2: var(--cdc-purple-dark);
     padding: 14px 12px !important;
     background: var(--cdc-bg-panel) !important;
     color: var(--cdc-text);
@@ -17,59 +17,59 @@
 
   main.round .game__meta[data-cdc-icon='\e059'] {
     --cdc-meta: #f06a4a;
-    --cdc-meta-2: #c9412d;
+    --cdc-meta-2: var(--cdc-red-dark);
   }
   main.round .game__meta[data-cdc-icon='\e032'] {
     --cdc-meta: #f5a93b;
-    --cdc-meta-2: #d27a1c;
+    --cdc-meta-2: var(--cdc-orange-darker);
   }
   main.round .game__meta[data-cdc-icon='\e008'] {
-    --cdc-meta: #fad541;
-    --cdc-meta-2: #e0a21a;
+    --cdc-meta: var(--cdc-yellow-dark);
+    --cdc-meta-2: var(--cdc-orange-darker);
   }
   main.round .game__meta[data-cdc-icon='\e00a'] {
     --cdc-meta: #45a3f5;
-    --cdc-meta-2: #2474c9;
+    --cdc-meta-2: var(--cdc-cyan-darker);
   }
   main.round .game__meta[data-cdc-icon='\e019'] {
-    --cdc-meta: #f7c631;
-    --cdc-meta-2: #d6961a;
+    --cdc-meta: var(--cdc-orange-dark);
+    --cdc-meta-2: var(--cdc-orange-darker);
   }
   main.round .game__meta[data-cdc-icon='\e066'] {
-    --cdc-meta: #3aa6e0;
-    --cdc-meta-2: #0a78b8;
+    --cdc-meta: var(--cdc-cyan-dark);
+    --cdc-meta-2: var(--cdc-cyan-deep);
   }
   main.round .game__meta[data-cdc-icon='\e006'] {
-    --cdc-meta: #fa8a4c;
-    --cdc-meta-2: #d9601c;
+    --cdc-meta: var(--cdc-orange-dark);
+    --cdc-meta-2: var(--cdc-orange-darker);
   }
   main.round .game__meta[data-cdc-icon='\e01e'] {
-    --cdc-meta: #e86bb0;
-    --cdc-meta-2: #b8438a;
+    --cdc-meta: var(--cdc-pink);
+    --cdc-meta-2: var(--cdc-pink-darker);
   }
   main.round .game__meta[data-cdc-icon='\e01c'] {
-    --cdc-meta: #f0645a;
-    --cdc-meta-2: #b93a2e;
+    --cdc-meta: var(--cdc-red);
+    --cdc-meta-2: var(--cdc-red-darker);
   }
   main.round .game__meta[data-cdc-icon='\e00d'] {
-    --cdc-meta: #3fd0b2;
-    --cdc-meta-2: #1f9c83;
+    --cdc-meta: var(--cdc-cyan-darker);
+    --cdc-meta-2: var(--cdc-cyan-deep);
   }
   main.round .game__meta[data-cdc-icon='\e007'] {
-    --cdc-meta: #d4a15f;
-    --cdc-meta-2: #a8743a;
+    --cdc-meta: var(--cdc-orange-dark);
+    --cdc-meta-2: var(--cdc-orange-darker);
   }
   main.round .game__meta[data-cdc-icon='\e03d'] {
-    --cdc-meta: #9aa9bd;
-    --cdc-meta-2: #627288;
+    --cdc-meta: var(--cdc-cyan-dark);
+    --cdc-meta-2: var(--cdc-grey-400);
   }
   main.round .game__meta[data-cdc-icon='\e065'] {
-    --cdc-meta: #7fb2ff;
-    --cdc-meta-2: #4a7fd6;
+    --cdc-meta: var(--cdc-cyan);
+    --cdc-meta-2: var(--cdc-cyan-dark);
   }
   main.round .game__meta[data-cdc-icon='\e04c'] {
-    --cdc-meta: #5ec7e8;
-    --cdc-meta-2: #2a8fb8;
+    --cdc-meta: var(--cdc-cyan-dark);
+    --cdc-meta-2: var(--cdc-cyan-darker);
   }
 
   main.round .round__side > .game__meta section {

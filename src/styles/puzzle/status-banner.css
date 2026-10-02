@@ -69,12 +69,12 @@ main.puzzle .puzzle__feedback:is(.good, .fail) {
 }
 
 main.puzzle .puzzle__feedback.good {
-  --cdc-feedback: var(--cdc-green-hover);
-  --cdc-feedback-badge: var(--cdc-btn-green);
+  --cdc-feedback: var(--cdc-good-hover);
+  --cdc-feedback-badge: var(--cdc-btn-primary);
 }
 
 main.puzzle .puzzle__feedback.fail {
-  --cdc-feedback: #ff7769;
+  --cdc-feedback: var(--cdc-red);
   --cdc-feedback-badge: var(--cdc-btn-red);
 }
 
@@ -161,9 +161,9 @@ main.puzzle .puzzle__feedback .view_solution.skip .button::first-letter {
   text-transform: uppercase;
 }
 
-/* The hint once shown: pressed in, not a green call to action. */
+/* The hint once shown: pressed in, not a call to action. */
 main.puzzle .puzzle__feedback .view_solution .button:not(.button-empty) {
-  background: #282725 !important;
+  background: var(--cdc-grey-850) !important;
   box-shadow: inset 0 2px 5px #00000080 !important;
   color: var(--cdc-text-dim) !important;
 }
@@ -172,7 +172,7 @@ main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:not(.button-empt
   opacity: 0.55;
 }
 
-/* Solved or failed: a big title and a green next button. */
+/* Solved or failed: a big title and a primary next button. */
 main.puzzle .puzzle__feedback.after {
   gap: 12px;
   padding: 20px !important;
@@ -206,8 +206,8 @@ main.puzzle .puzzle__feedback.after .continue {
   gap: 10px;
   padding: 16px !important;
   border-radius: 10px;
-  background: var(--cdc-btn-green) !important;
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary) !important;
+  box-shadow: var(--cdc-btn-primary-shadow);
   color: #fff !important;
   font-size: 18px !important;
   font-weight: 800;
@@ -215,7 +215,7 @@ main.puzzle .puzzle__feedback.after .continue {
 }
 
 main.puzzle .puzzle__feedback.after .continue:hover {
-  background: var(--cdc-btn-green-hover) !important;
+  background: var(--cdc-btn-primary-hover) !important;
 }
 
 main.puzzle .puzzle__feedback.after .continue icon::before {
@@ -260,15 +260,15 @@ main.puzzle .puzzle__feedback.after .puzzle__vote .button {
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.vote-up:is(:hover, .active) {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-good-hover) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.vote-down:is(:hover, .active) {
-  color: #ff7769 !important;
+  color: var(--cdc-red) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.active {
-  background: #282725 !important;
+  background: var(--cdc-grey-850) !important;
   box-shadow: inset 0 2px 5px #00000080 !important;
 }
 

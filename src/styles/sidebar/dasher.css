@@ -78,7 +78,7 @@
   display: flex !important;
   justify-content: center;
   width: 20px !important;
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
 }
 
 #dasher_app .subs .sub:not(.language)::before {
@@ -201,7 +201,7 @@
   transition: background-color 0.1s !important;
 }
 
-/* The current choice gets a green check, not a fill: a fill looks like the hover. */
+/* The current choice gets an accent check, not a fill: a fill looks like the hover. */
 #top #dasher_app :is(.selector button.active, .langs .current, .langs .accepted) {
   border: none !important;
   background: none !important;
@@ -215,7 +215,7 @@
 
 #top #dasher_app .selector button::before,
 #top #dasher_app .selector button.active::before {
-  color: var(--cdc-green) !important;
+  color: var(--cdc-accent) !important;
 }
 
 #dasher_app .langs .current::after {
@@ -224,7 +224,7 @@
   width: 16px;
   height: 16px;
   margin-inline-start: auto;
-  background: var(--cdc-green);
+  background: var(--cdc-accent);
   -webkit-mask: var(--cdc-check) center / contain no-repeat;
   mask: var(--cdc-check) center / contain no-repeat;
 }

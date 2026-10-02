@@ -3,9 +3,9 @@
  * tr[data-uci] draws the arrow on hover): only colors and sizes change. */
 
 .explorer-box {
-  --cdc-ex-white: linear-gradient(#fff, #e3e2e0);
-  --cdc-ex-draw: #8b8987;
-  --cdc-ex-black: linear-gradient(#45423e, #383633);
+  --cdc-ex-white: linear-gradient(#fff, var(--cdc-grey-100));
+  --cdc-ex-draw: var(--cdc-grey-400);
+  --cdc-ex-black: linear-gradient(var(--cdc-grey-700), var(--cdc-grey-750));
   --cdc-ex-row-hover: #ffffff0f;
 
   /* Lichess underlines the box (.sub-box) in green. */
@@ -86,7 +86,7 @@
 .explorer-box .explorer-title > .active::before {
   flex: none;
   margin: 0 !important;
-  color: var(--cdc-green);
+  color: var(--cdc-accent);
   font-size: 15px;
 }
 
@@ -175,8 +175,8 @@
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: var(--cdc-btn-green);
-  box-shadow: var(--cdc-btn-green-shadow);
+  background: var(--cdc-btn-primary);
+  box-shadow: var(--cdc-btn-primary-shadow);
   color: #fff;
   font-family: 'lichess';
   font-size: 15px;
@@ -200,7 +200,7 @@ html.cdc-opening-on main.analyse .explorer-box .data > .title:has(> a) {
 }
 
 .explorer-box .data > .title > a:hover {
-  color: var(--cdc-green-hover) !important;
+  color: var(--cdc-accent-hover) !important;
 }
 
 /* Other titles head lists: "Top games", "Winning", "Game over". */
