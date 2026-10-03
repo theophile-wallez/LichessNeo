@@ -25,7 +25,7 @@ const TIMEOUT_MS = 30_000;
 const PANEL_COLOR = '#262522';
 // From GitHub itself: Firefox runs the download in the background script,
 // whose requests a page's interception never sees.
-const EXAMPLE_LINK = 'https://github.com/theophile-wallez/LichessDotCom/tree/main/packs/example';
+const EXAMPLE_LINK = 'https://github.com/theophile-wallez/LichessReimagined/tree/main/packs/example';
 
 /** Firefox's current release, downloaded unless it's already in the cache. */
 async function firefoxPath(): Promise<string> {

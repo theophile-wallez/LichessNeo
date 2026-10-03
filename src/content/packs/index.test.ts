@@ -86,7 +86,7 @@ describe('packs', () => {
     expect(root.dataset.cdcLoading).toBeUndefined();
     expect(root.dataset.cdcBoard).toBeUndefined();
     expect(error).toHaveBeenCalledWith(
-      '[LichessDotCom] the imported packs could not be read',
+      '[LichessReimagined] the imported packs could not be read',
       expect.any(Error),
     );
   });

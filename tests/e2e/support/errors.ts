@@ -5,7 +5,7 @@ import { EXTENSION_ORIGIN } from './extension.ts';
 // 404 from the cloud eval, a 401 from the explorer when signed out): those
 // aren't ours. Ours carry the extension's prefix or its URL in their stack.
 
-const LOG_PREFIX = '[LichessDotCom]';
+const LOG_PREFIX = '[LichessReimagined]';
 
 export interface ExtensionError {
   readonly kind: 'exception' | 'console';

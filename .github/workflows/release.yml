@@ -93,11 +93,11 @@ jobs:
             exit 0
           fi
           gh release create "v$VERSION" \
-            "LichessDotCom-v$VERSION.zip" \
-            "LichessDotCom-v$VERSION-store.zip" \
-            "LichessDotCom-v$VERSION-firefox.zip" \
+            "LichessReimagined-v$VERSION.zip" \
+            "LichessReimagined-v$VERSION-store.zip" \
+            "LichessReimagined-v$VERSION-firefox.zip" \
             --target "$GITHUB_SHA" \
-            --title "LichessDotCom $VERSION" \
+            --title "Lichess Reimagined $VERSION" \
             --generate-notes
 
   store:
@@ -122,7 +122,7 @@ jobs:
           CWS_SERVICE_ACCOUNT: ${{ secrets.CWS_SERVICE_ACCOUNT }}
           CWS_PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
           VERSION: ${{ needs.version.outputs.version }}
-        run: node scripts/store/publish-chrome.ts "dist/LichessDotCom-v$VERSION-store.zip" "$VERSION"
+        run: node scripts/store/publish-chrome.ts "dist/LichessReimagined-v$VERSION-store.zip" "$VERSION"
 
   amo:
     needs: version
@@ -154,11 +154,11 @@ jobs:
             exit 1
           fi
           mkdir firefox
-          unzip -q "LichessDotCom-v$VERSION-firefox.zip" -d firefox
+          unzip -q "LichessReimagined-v$VERSION-firefox.zip" -d firefox
           npx --yes web-ext@10 sign \
             --source-dir firefox \
             --channel listed \
             --api-key "$AMO_JWT_ISSUER" \
             --api-secret "$AMO_JWT_SECRET" \
             --approval-timeout 0 \
-            --upload-source-code "LichessDotCom-v$VERSION-source.zip"
+            --upload-source-code "LichessReimagined-v$VERSION-source.zip"

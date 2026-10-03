@@ -40,7 +40,7 @@ async function applyExport(session: Session, analysis: Analysis): Promise<void> 
 }
 
 function engineFailed(session: Session, what: string, error: unknown): void {
-  console.error(`[LichessDotCom] ${what}`, error);
+  console.error(`[LichessReimagined] ${what}`, error);
   session.view.error = session.language.ui.engineError;
   session.redraw(true);
 }

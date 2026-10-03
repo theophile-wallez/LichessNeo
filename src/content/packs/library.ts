@@ -76,7 +76,7 @@ export function createLibrary({ packs, readAll, save, erase, show }: LibraryOpti
       list = all.map(pack => list.find(entry => entry.id === pack.id) ?? pack);
       failed = false;
     } catch (error) {
-      console.error('[LichessDotCom] the imported packs could not be read', error);
+      console.error('[LichessReimagined] the imported packs could not be read', error);
       loading = null;
       failed = true;
     }

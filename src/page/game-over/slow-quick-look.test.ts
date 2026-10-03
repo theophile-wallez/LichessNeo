@@ -43,7 +43,7 @@ it('gives the review’s figures when the quick look’s engine never answers', 
   const ended = onGameEnd({ gameId: GAME.id, color: 'white' }, main);
   await advance(60_000);
   await ended;
-  expect(warned).toHaveBeenCalledWith('[LichessDotCom] game over analysis', expect.any(Error));
+  expect(warned).toHaveBeenCalledWith('[LichessReimagined] game over analysis', expect.any(Error));
   const bubble = queryOne(document, '.cdc-end__bubble', HTMLElement);
   expect(bubble?.textContent).toMatch(/You played with [\d.]+% accuracy/);
   expect(bubble?.textContent).not.toBe(gameOverTexts().failed);

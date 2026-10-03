@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Instructions for AI coding agents (and humans) working on LichessDotCom. Read
+Instructions for AI coding agents (and humans) working on Lichess Reimagined. Read
 this file whole before changing anything. The code's design is detailed in
 [docs/architecture.md](docs/architecture.md), the Game Review's in
 [src/page/review/README.md](src/page/review/README.md).

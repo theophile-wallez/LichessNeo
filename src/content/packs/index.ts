@@ -18,7 +18,7 @@ async function loadPicked(): Promise<Pack[]> {
     const packs = await Promise.all([...ids].map(id => readPack(id)));
     return packs.filter(pack => pack !== null);
   } catch (error) {
-    console.error('[LichessDotCom] the imported packs could not be read', error);
+    console.error('[LichessReimagined] the imported packs could not be read', error);
     return [];
   }
 }
@@ -72,6 +72,6 @@ export const packs: Feature = {
   start: () => {
     startPacks()
       .then(watchDasher)
-      .catch((error: unknown) => console.error('[LichessDotCom] packs failed', error));
+      .catch((error: unknown) => console.error('[LichessReimagined] packs failed', error));
   },
 };

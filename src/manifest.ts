@@ -65,7 +65,7 @@ export const OUTPUT = {
 export function createManifest(target: Target, version: string): Manifest {
   const manifest: Manifest = {
     manifest_version: 3,
-    name: 'LichessDotCom',
+    name: 'Lichess Reimagined',
     version,
     description: '__MSG_extDescription__',
     default_locale: 'en',

@@ -42,7 +42,7 @@ async function bootMore(pool: EnginePool, chess960: boolean, count: number): Pro
       pool.add(await bootEngine(chess960));
     } catch (error) {
       // The browser short of memory, say: the engines already up carry on.
-      console.warn('[LichessDotCom] an extra engine failed to boot', error);
+      console.warn('[LichessReimagined] an extra engine failed to boot', error);
       return;
     }
   }

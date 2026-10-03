@@ -5,7 +5,7 @@ A pack to import into the extension, and to copy when making one: its
 try it, paste this folder's link in the user menu's Board, Piece set or Sound
 panel, under Imported:
 
-    https://github.com/theophile-wallez/LichessDotCom/tree/main/packs/example
+    https://github.com/theophile-wallez/LichessReimagined/tree/main/packs/example
 
 | Files       | From                                                                                                                                    | License                                                       |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |

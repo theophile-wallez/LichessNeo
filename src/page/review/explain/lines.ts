@@ -69,7 +69,7 @@ async function lookUp(session: Session, analysis: Analysis, request: LineRequest
     const pv = result.lines[0]?.pv ?? [];
     if (pv[0] === request.first) line = pv;
   } catch (error) {
-    console.error('[LichessDotCom] engine failed', error);
+    console.error('[LichessReimagined] engine failed', error);
   }
   lines.found.set(keyOf(request), line);
   lines.busy = false;

@@ -19,17 +19,17 @@ async function fixture(files: readonly string[]): Promise<string> {
 
 describe('packageName', () => {
   it('keeps the names the releases have always had', () => {
-    expect(packageName('chrome', '0.1.295')).toBe('LichessDotCom-v0.1.295.zip');
-    expect(packageName('chrome-store', '0.1.295')).toBe('LichessDotCom-v0.1.295-store.zip');
-    expect(packageName('firefox', '0.1.295')).toBe('LichessDotCom-v0.1.295-firefox.zip');
-    expect(packageName('source', '0.1.295')).toBe('LichessDotCom-v0.1.295-source.zip');
+    expect(packageName('chrome', '0.1.295')).toBe('LichessReimagined-v0.1.295.zip');
+    expect(packageName('chrome-store', '0.1.295')).toBe('LichessReimagined-v0.1.295-store.zip');
+    expect(packageName('firefox', '0.1.295')).toBe('LichessReimagined-v0.1.295-firefox.zip');
+    expect(packageName('source', '0.1.295')).toBe('LichessReimagined-v0.1.295-source.zip');
   });
 
   it('recognizes its own names only', () => {
     expect(isPackageName(packageName('firefox', '0.1.3'))).toBe(true);
-    expect(isPackageName('LichessDotCom-v0.1.3.zip')).toBe(true);
+    expect(isPackageName('LichessReimagined-v0.1.3.zip')).toBe(true);
     expect(isPackageName('notes.zip')).toBe(false);
-    expect(isPackageName('LichessDotCom-v0.1.3.zip.part')).toBe(false);
+    expect(isPackageName('LichessReimagined-v0.1.3.zip.part')).toBe(false);
   });
 });
 

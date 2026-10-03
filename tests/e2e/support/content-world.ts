@@ -4,7 +4,7 @@ import type { Page } from '@playwright/test';
 // only; the extension's isolated world is reached over the DevTools protocol,
 // where Chrome names it after the extension.
 
-const WORLD_NAME = 'LichessDotCom';
+const WORLD_NAME = 'Lichess Reimagined';
 
 /** Evaluates `expression` where the content script runs, and returns its (awaited) value. */
 export async function evaluateInContentScript(page: Page, expression: string): Promise<unknown> {

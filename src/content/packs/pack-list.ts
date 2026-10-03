@@ -8,7 +8,7 @@ import { hasPart, type Pack, type PartKind } from '#shared/packs/pack.ts';
 // private repository's token is used for that import and never kept: the
 // page's storage is Lichess's to read.
 
-export const HELP_URL = 'https://github.com/theophile-wallez/LichessDotCom/blob/main/docs/packs.md';
+export const HELP_URL = 'https://github.com/theophile-wallez/LichessReimagined/blob/main/docs/packs.md';
 
 /** What the last import said, shown again in a panel Lichess draws anew. */
 interface ImportState {
@@ -80,7 +80,7 @@ async function importPack(link: string, token: string, library: Library): Promis
     await library.add(download.pack);
     setStatus(`Imported “${download.pack.name}”.`, false);
   } catch (error) {
-    console.error('[LichessDotCom] pack import failed', error);
+    console.error('[LichessReimagined] pack import failed', error);
     setStatus('The pack could not be imported.', true);
   } finally {
     importState.busy = false;

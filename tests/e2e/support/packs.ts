@@ -8,11 +8,11 @@ import { closeMenu, openPicker, pickerTab, type PickerKind } from './dasher.ts';
 // the test runs on the files of the change under test.
 
 export const EXAMPLE_LINK =
-  'https://github.com/theophile-wallez/LichessDotCom/tree/main/packs/example';
-export const EXAMPLE_ID = 'theophile-wallez/lichessdotcom/main/packs/example/';
+  'https://github.com/theophile-wallez/LichessReimagined/tree/main/packs/example';
+export const EXAMPLE_ID = 'theophile-wallez/lichessreimagined/main/packs/example/';
 
 const ROOT = path.resolve(import.meta.dirname, '..', '..', '..');
-const RAW = 'https://raw.githubusercontent.com/theophile-wallez/LichessDotCom/main/';
+const RAW = 'https://raw.githubusercontent.com/theophile-wallez/LichessReimagined/main/';
 
 /** Answers for GitHub's raw host with this checkout's files. */
 export async function serveRepository(context: BrowserContext): Promise<void> {

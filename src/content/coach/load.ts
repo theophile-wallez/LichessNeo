@@ -19,7 +19,7 @@ export function loadMascots(): Promise<MountMascot | null> {
   loading ??= import(extensionUrl(OUTPUT.mascot)).then(
     (module: unknown) => MascotModuleSchema.parse(module).mountMascot,
     (error: unknown) => {
-      console.warn('[LichessDotCom] the coach mascots', error);
+      console.warn('[LichessReimagined] the coach mascots', error);
       return null;
     },
   );

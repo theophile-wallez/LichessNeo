@@ -29,7 +29,7 @@ export async function analyseLive(
       toRecord(fen, await engine.analyse({ position: `fen ${fen}` }, { urgent: true })),
     );
   } catch (error) {
-    console.error('[LichessDotCom] engine failed', error);
+    console.error('[LichessReimagined] engine failed', error);
     live.error = session.language.ui.engineError;
   }
   live.busy = false;

@@ -28,7 +28,7 @@ it('tells a move played on the free board that the engine failed to start', asyn
   await advance(3000);
   const title = document.querySelector('#cdc-review .cdc-bubble__title');
   expect(title?.textContent).toBe(en.ui.engineError);
-  expect(logged).toHaveBeenCalledWith('[LichessDotCom] engine failed', expect.any(RangeError));
+  expect(logged).toHaveBeenCalledWith('[LichessReimagined] engine failed', expect.any(RangeError));
   // Nothing more is asked of an engine that isn't there.
   ctrl.playUci('e7e5');
   ctrl.redraw();

@@ -43,7 +43,7 @@ describe('sync loop', () => {
     vi.advanceTimersByTime(750);
     expect(ran).toEqual(['first', 'last', 'first', 'last', 'first', 'last']);
     expect(error).toHaveBeenCalledTimes(1);
-    expect(error).toHaveBeenCalledWith('[LichessDotCom] broken failed', expect.any(Error));
+    expect(error).toHaveBeenCalledWith('[LichessReimagined] broken failed', expect.any(Error));
   });
 
   it('reports each broken task on its own', async () => {
@@ -54,8 +54,8 @@ describe('sync loop', () => {
     startSyncLoop();
     vi.advanceTimersByTime(500);
     expect(error).toHaveBeenCalledTimes(2);
-    expect(error).toHaveBeenNthCalledWith(1, '[LichessDotCom] one failed', expect.any(Error));
-    expect(error).toHaveBeenNthCalledWith(2, '[LichessDotCom] two failed', expect.any(Error));
+    expect(error).toHaveBeenNthCalledWith(1, '[LichessReimagined] one failed', expect.any(Error));
+    expect(error).toHaveBeenNthCalledWith(2, '[LichessReimagined] two failed', expect.any(Error));
   });
 
   it('rests while the tab is hidden, and catches up as it shows', async () => {
