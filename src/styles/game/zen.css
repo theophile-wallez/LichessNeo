@@ -1,0 +1,113 @@
+/* ---- Zen --- */
+
+/* Zen mode (body.zenable.zen) shows only the board, clocks and controls. Lichess keeps
+ * the board's size; ours takes the whole height of the window, with no sidebar and no
+ * frame, and a narrow column beside it holds the opponent's clock at the top, the controls,
+ * and the player's at the bottom. Lichess's way out (#zenzone) shrinks to a column of icons
+ * in the top left corner, which the board keeps clear of. The rules of layout.css would
+ * bring the rest back. */
+
+@media (min-width: 1020px) {
+  body.zenable.zen {
+    --cdc-sidebar-w: 0px;
+    --cdc-frame-gap: 0px;
+  }
+
+  body.zenable.zen #main-wrap {
+    border-radius: 0;
+    outline: none;
+  }
+
+  body.zenable.zen #top,
+  body.zenable.zen main.round :is(.ruser, .cdc-captured, .mchat, .round__side),
+  body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
+    display: none !important;
+  }
+
+  body.zenable.zen main.round :is(i5d, rm6),
+  body.zenable.zen main.round :is(i5d, rm6) :is(aPp, l4x) {
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  body.zenable.zen main.round {
+    --cdc-zen-side: 220px;
+    /* #zenzone's column, kept clear on both sides so the board stays centered. */
+    --cdc-zen-margin: 56px;
+    --cdc-board: max(
+      320px,
+      calc(
+        min(
+            calc(var(--cdc-main-h, 100dvh) - 32px - var(--cdc-coords-off)),
+            calc(
+              var(--cdc-main-w, 100vw) - var(--cdc-zen-side) - var(--cdc-gap) - 48px - 2 *
+                var(--cdc-zen-margin)
+            )
+          ) *
+          var(--cdc-board-scale, 1)
+      )
+    );
+
+    grid-template-columns: var(--cdc-board) var(--cdc-zen-side) !important;
+    grid-template-rows:
+      var(--cdc-bar)
+      max(0px, calc(var(--cdc-board) - 2 * var(--cdc-bar) - var(--cdc-ctrl-h)))
+      var(--cdc-ctrl-h)
+      0
+      var(--cdc-bar)
+      var(--cdc-coords-off) !important;
+    grid-template-areas:
+      'board user-top'
+      'board moves'
+      'board controls'
+      'board chat'
+      'board user-bot'
+      'board .' !important;
+  }
+
+  /* The clocks beside the board, level with its top and its bottom edge (a clock is 40px
+   * tall, 8px into its 56px bar). */
+  body.zenable.zen main.round :is(.rclock-top, .expiration-top) {
+    --cdc-off: calc(var(--cdc-inset-t, 0px) - 8px);
+  }
+
+  body.zenable.zen main.round :is(.rclock-bottom, .expiration-bottom) {
+    --cdc-off: calc(8px - var(--cdc-inset-b, 0px));
+  }
+
+  body.zenable.zen main.round .rclock {
+    justify-self: start;
+  }
+
+  body.zenable.zen #zenzone {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    top: 12px !important;
+    left: 12px !important;
+    padding: 0 !important;
+  }
+
+  /* "Zen mode", checked: its check alone, on a tile. Clicking it still leaves zen. */
+  body.zenable.zen #zentog {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    font-size: 0 !important;
+  }
+
+  body.zenable.zen #zentog::before {
+    margin: 0 !important;
+    font-size: 14px;
+  }
+}
+
+/* Zen's way home is Lichess's logo, drawn dark for its light theme; ours is always dark. */
+html.light #zenzone .zen-home {
+  filter: invert(1);
+}

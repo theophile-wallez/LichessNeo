@@ -11,18 +11,18 @@
   #cdc-donate {
     display: flex !important;
     align-items: center;
-    gap: 12px;
-    height: 40px;
-    margin: 0 8px;
+    gap: 10px;
+    height: 34px;
+    margin: 14px 8px 0;
     padding: 0 8px;
-    border-radius: 5px;
+    border-radius: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--cdc-text) !important;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cdc-grey-200) !important;
     background: transparent;
     transition: background-color 0.15s !important;
   }
@@ -30,40 +30,15 @@
   #cdc-donate::before {
     content: '';
     flex: none;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/donation.webp') center /
       contain no-repeat;
   }
 
   #cdc-donate:hover {
     background: var(--cdc-sb-hover);
-    color: #fff !important;
-  }
-
-  #cdc-donate:hover::before {
-    transform-origin: 50% 85%;
-    animation: cdc-jingle 0.8s ease-in-out infinite;
-  }
-
-  @keyframes cdc-jingle {
-    0%,
-    70%,
-    100% {
-      transform: rotate(0) scale(1);
-    }
-    15% {
-      transform: rotate(-14deg) scale(1.12);
-    }
-    30% {
-      transform: rotate(12deg) scale(1.12);
-    }
-    45% {
-      transform: rotate(-8deg) scale(1.06);
-    }
-    60% {
-      transform: rotate(4deg) scale(1.02);
-    }
+    color: var(--cdc-text-strong) !important;
   }
 
   /* ---- Bottom buttons --- */
@@ -72,8 +47,8 @@
     display: flex !important;
     flex-flow: row wrap !important;
     align-items: center !important;
-    gap: 4px;
-    padding: 8px 8px 12px !important;
+    gap: 6px;
+    padding: 8px 8px 10px !important;
   }
 
   #top .site-buttons > * {
@@ -82,8 +57,8 @@
 
   #top .site-buttons .link,
   #top .site-buttons .toggle {
-    height: 36px !important;
-    line-height: 36px !important;
+    height: 30px !important;
+    line-height: 30px !important;
     padding: 0 8px !important;
     color: var(--cdc-text-dim) !important;
   }
@@ -96,15 +71,17 @@
   #top #clinput {
     order: 0;
     flex: 1 0 100%;
-    height: 36px !important;
+    height: 32px !important;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px #ffffff12;
   }
 
   #top #clinput input {
     width: 100% !important;
     padding: 0 4px !important;
-    line-height: 36px !important;
+    line-height: 32px !important;
+    font-size: 13.5px;
     color: var(--cdc-text) !important;
   }
 
@@ -123,15 +100,16 @@
     display: flex !important;
     flex-direction: column-reverse !important;
     align-items: stretch !important;
-    gap: 10px !important;
-    margin: 4px 0 8px;
+    gap: 6px !important;
+    margin: 2px 0 4px;
   }
 
   #top .signin-or-signup .button {
     display: block;
-    padding: 8px 0 !important;
+    padding: 6px 0 !important;
+    border-radius: 8px !important;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   /* min-width: 0, or a long name pushes the avatar icon out of the sidebar. */
@@ -148,7 +126,7 @@
     max-width: none !important;
     width: 100%;
     padding-inline-end: 44px !important;
-    border-radius: 5px;
+    border-radius: 8px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

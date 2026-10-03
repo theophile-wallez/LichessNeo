@@ -21,7 +21,7 @@
   --cdc-car: var(--cdc-orange-dark);
 }
 .racer:has(.racer__race__track--me .car-5) {
-  --cdc-car: var(--cdc-purple-dark);
+  --cdc-car: var(--cdc-accent-dim);
 }
 .racer:has(.racer__race__track--me .car-6) {
   --cdc-car: var(--cdc-orange-dark);
@@ -86,12 +86,10 @@
     grid-template-columns:
       min(
         var(---col2-uniboard-width),
+        calc(var(--cdc-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) - 275px),
         calc(
-          100vw - var(--cdc-sidebar-w, 0px) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) -
-            275px
-        ),
-        calc(
-          100dvh - 80px - var(---block-gap, 16px) - var(--cdc-race-h) - var(--cdc-coords-off, 0px)
+          var(--cdc-main-h, 100dvh) - 80px - var(---block-gap, 16px) - var(--cdc-race-h) -
+            var(--cdc-coords-off, 0px)
         )
       )
       minmax(240px, 400px) !important;

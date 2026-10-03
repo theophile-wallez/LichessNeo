@@ -7,6 +7,7 @@ import { watchClicks } from './view/clicks.ts';
 import { createElements } from './view/elements.ts';
 import { render, setMode } from './view/render.ts';
 import { refitStream } from './view/stream.ts';
+import { watchCostTips } from './view/cost-tip.ts';
 import { watchTips } from './view/tooltip.ts';
 import { REVIEWED_VARIANTS } from './variants.ts';
 
@@ -27,6 +28,7 @@ export function createReview(): Session {
   });
   watchClicks(session);
   watchTips(session);
+  watchCostTips(session);
   return session;
 }
 

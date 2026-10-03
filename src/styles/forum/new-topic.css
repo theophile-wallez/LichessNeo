@@ -105,7 +105,7 @@ main.forum-topic.topic-form .warning p:nth-of-type(3) {
 
 main.forum-topic.topic-form .warning p:nth-of-type(4) {
   --cdc-tip: var(--cdc-accent);
-  --cdc-tip-2: var(--cdc-purple-dark);
+  --cdc-tip-2: var(--cdc-accent-dim);
   --cdc-tip-emoji: url('https://lichess1.org/assets/flair/img/people.handshake.webp');
 }
 

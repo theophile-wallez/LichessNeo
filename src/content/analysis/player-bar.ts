@@ -3,10 +3,13 @@ import { createCustomElement, queryOne } from '#shared/dom.ts';
 // A bar in the markup of the round's `.ruser` (name, <rating>, rating
 // change), so both pages share one style (styles/playerbar.css).
 
+// The rating's change: `good`, `bad`, or a bare span for "±0".
+const CHANGE = 'good, bad, :scope > span:not([class])';
+
 function userParts(link: HTMLAnchorElement): Element[] {
   const rating = link.querySelector('.rating')?.textContent.replace(/[()\s]/g, '');
-  const change = link.querySelector('good, bad');
-  for (const extra of link.querySelectorAll('.rating, good, bad')) extra.remove();
+  const change = link.querySelector(CHANGE);
+  for (const extra of link.querySelectorAll(`.rating, ${CHANGE}`)) extra.remove();
   // The title's badge has its own margin: drop the no-break space after it
   // (trim() counts it as white space).
   for (const node of link.childNodes) if (node instanceof Text) node.data = node.data.trim();

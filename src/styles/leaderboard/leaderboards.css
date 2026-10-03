@@ -12,7 +12,7 @@
  * Marathon only exist there). */
 :is(.community .leaderboards .user-top, .tournament-leaderboards__item, .tournament-shields__item) {
   --cdc-lb: var(--cdc-accent);
-  --cdc-lb-2: var(--cdc-purple-dark);
+  --cdc-lb-2: var(--cdc-accent-dim);
 }
 
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e032'] {
@@ -25,7 +25,7 @@
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e002'] {
   --cdc-lb: var(--cdc-accent);
-  --cdc-lb-2: var(--cdc-purple-dark);
+  --cdc-lb-2: var(--cdc-accent-dim);
 }
 :is(.community .user-top, .tournament-leaderboards__item)[data-cdc-icon='\e00a'] {
   --cdc-lb: #45a3f5;

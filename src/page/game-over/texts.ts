@@ -10,6 +10,10 @@ type Forms = readonly [one: string, many: string];
 export interface GameOverTexts {
   /** The card's title, naming the opponent the player beat. */
   readonly title: (result: Result, opponent: string) => string;
+  /** The result in a word, over the title. */
+  readonly results: Readonly<Record<Result, string>>;
+  /** Under the player's accuracy. */
+  readonly accuracy: string;
   /** Under the title: how it ended, '' when the status doesn't say. */
   readonly reasons: Readonly<Record<EndReason, string>>;
   readonly winner: string;
@@ -58,6 +62,8 @@ const fr: GameOverTexts = {
     ({ win: `Vous avez battu ${opponent} !`, loss: 'Vous avez perdu', draw: 'Partie nulle' })[
       result
     ],
+  results: { win: 'Victoire', loss: 'Défaite', draw: 'Nulle' },
+  accuracy: 'précision',
   reasons: {
     mate: 'par échec et mat',
     resign: 'par abandon',
@@ -96,6 +102,8 @@ const fr: GameOverTexts = {
 const en: GameOverTexts = {
   title: (result, opponent) =>
     ({ win: `You beat ${opponent}!`, loss: 'You lost', draw: 'Draw' })[result],
+  results: { win: 'Victory', loss: 'Defeat', draw: 'Draw' },
+  accuracy: 'accuracy',
   reasons: {
     mate: 'by checkmate',
     resign: 'by resignation',

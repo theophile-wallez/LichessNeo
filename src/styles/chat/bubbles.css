@@ -1,0 +1,129 @@
+/* ---- Bubbles --- */
+
+/* The others' on the left, the player's on the right in the accent, as on a phone. A run
+ * of one author's lines shares the name, shown over its first, and the tail, on its last
+ * (page/chat marks `data-cdc-mine`, `-follows`, `-followed`). */
+.mchat .mchat__messages {
+  padding: 6px 12px 4px !important;
+  font-size: 13px !important;
+}
+
+.mchat .mchat__messages > li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px 0 0;
+  padding: 0 !important;
+  overflow: visible;
+  border: none !important;
+  background: none !important;
+  line-height: 1.35;
+}
+
+.mchat .mchat__messages > li[data-cdc-follows] {
+  margin-top: 2px;
+}
+
+.mchat .mchat__messages > li[data-cdc-mine] {
+  align-items: flex-end;
+}
+
+.mchat .mchat__messages > li > :is(.user-link, .color) {
+  margin: 0 0 3px 12px;
+  padding: 0 !important;
+  color: var(--cdc-text-dim) !important;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0 !important;
+}
+
+.mchat .mchat__messages > li:is([data-cdc-mine], [data-cdc-follows]) > :is(.user-link, .color) {
+  display: none !important;
+}
+
+.mchat .mchat__messages > li:not(.system) > t {
+  position: relative;
+  max-width: 82%;
+  padding: 6px 11px;
+  border-radius: 17px;
+  background: var(--cdc-bg-raised);
+  color: var(--cdc-text-strong);
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+.mchat .mchat__messages > li[data-cdc-mine] > t {
+  background: var(--cdc-accent);
+  color: #fff;
+}
+
+.mchat .mchat__messages > li.mentioned > t {
+  box-shadow: inset 0 0 0 1.5px var(--cdc-accent);
+}
+
+.mchat .mchat__messages > li[data-cdc-mine] > t a {
+  color: inherit !important;
+  text-decoration: underline;
+}
+
+/* Inside a run, the corners on the run's side tighten. */
+.mchat .mchat__messages > li:not(.system, [data-cdc-mine])[data-cdc-follows] > t {
+  border-top-left-radius: 5px;
+}
+
+.mchat .mchat__messages > li:not(.system, [data-cdc-mine])[data-cdc-followed] > t {
+  border-bottom-left-radius: 5px;
+}
+
+.mchat .mchat__messages > li[data-cdc-mine][data-cdc-follows] > t {
+  border-top-right-radius: 5px;
+}
+
+.mchat .mchat__messages > li[data-cdc-mine][data-cdc-followed] > t {
+  border-bottom-right-radius: 5px;
+}
+
+/* The tail on a run's last bubble: a curl off its bottom corner, which tightens to meet it. */
+.mchat .mchat__messages > li:not(.system, [data-cdc-mine], [data-cdc-followed]) > t {
+  border-bottom-left-radius: 4px;
+}
+
+.mchat .mchat__messages > li[data-cdc-mine]:not([data-cdc-followed]) > t {
+  border-bottom-right-radius: 4px;
+}
+
+.mchat .mchat__messages > li:not(.system, [data-cdc-followed]) > t::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -9px;
+  width: 11px;
+  height: 17px;
+  background: inherit;
+  mask: radial-gradient(ellipse 100% 100% at 0 0, #0000 98%, #000);
+}
+
+.mchat .mchat__messages > li[data-cdc-mine]:not([data-cdc-followed]) > t::before {
+  right: -9px;
+  left: auto;
+  mask: radial-gradient(ellipse 100% 100% at 100% 0, #0000 98%, #000);
+}
+
+/* Lichess's reply and report, shown on hover at the line's end. */
+.mchat .mchat__messages > li > action {
+  top: auto;
+  bottom: 4px;
+  color: var(--cdc-text-dim);
+  text-shadow: none !important;
+}
+
+/* The chat's own notices (welcome, rules) read as small centered captions. */
+.mchat .mchat__messages > li.system {
+  align-items: center;
+  margin: 12px 0 4px;
+  color: var(--cdc-text-dim);
+  font-size: 11.5px;
+  font-style: normal;
+  opacity: 1;
+  text-align: center;
+}

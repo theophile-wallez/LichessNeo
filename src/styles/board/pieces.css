@@ -1,4 +1,4 @@
-/* Board, pieces and highlights. The board and pieces are Lichess's, unless the user picked an
+/* Board, pieces and highlights. The board is ours and the pieces Lichess's, unless the user picked an
  * imported pack (content/packs/): its pieces then override the variables Lichess draws its own
  * from, and its board comes as `--cdc-board-img` with `data-cdc-board='pack'` on <html>. */
 
@@ -14,6 +14,28 @@
 }
 
 /* ---- Board and pieces --- */
+
+/* Our board, the accent and white, drawn from the palette, unless a pack's board is picked.
+ * A tile of 2×2 squares, light top left: a8 and h1 are light whichever side is down. */
+html:not([data-cdc-board='pack']) body .is2d cg-board::before {
+  background-image: repeating-conic-gradient(
+    var(--cdc-board-dark) 0 25%,
+    var(--cdc-board-light) 0 50%
+  ) !important;
+  background-size: 25% 25% !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Lichess's yellow turns olive on the accent: a pale cyan reads on both colors. */
+html:not([data-cdc-board='pack']) body {
+  --cdc-highlight: color-mix(in srgb, var(--cdc-cyan) 50%, transparent);
+}
+
+html:not([data-cdc-board='pack']) body .is2d coords {
+  ---cg-ccw: var(--cdc-board-light) !important;
+  ---cg-ccb: var(--cdc-board-dark) !important;
+}
 
 html[data-cdc-board='pack'] body .is2d cg-board::before {
   background-image: var(--cdc-board-img) !important;

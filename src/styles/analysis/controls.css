@@ -100,7 +100,8 @@
    * keyboard-move input sits at the bottom of the tools. The underboard and the advice summary
    * open in the panel instead (underboard.css). */
   html[data-cdc-has~='analyse'],
-  html[data-cdc-has~='analyse'] body {
+  html[data-cdc-has~='analyse'] body,
+  html[data-cdc-has~='analyse'] #main-wrap {
     overflow: hidden !important;
   }
 

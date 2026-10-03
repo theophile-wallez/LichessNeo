@@ -9,7 +9,7 @@
 main.forum,
 main.forum .categs tr {
   --cdc-fc: var(--cdc-accent);
-  --cdc-fc-2: var(--cdc-purple-dark);
+  --cdc-fc-2: var(--cdc-accent-dim);
   --cdc-fc-emoji: url('https://lichess1.org/assets/flair/img/activity.chess-pawn.webp');
 }
 

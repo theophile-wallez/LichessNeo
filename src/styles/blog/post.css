@@ -3,6 +3,51 @@
 
 /* ---- Post --- */
 
+/* A post as the lists are, no card around it (lists.css): its text in a reading column
+   centered beside the menu, and its title pinned while the post scrolls. Desktop only: below
+   1020px Lichess's fixed top bar would cover it. */
+@media (min-width: 1020px) {
+  /* The column through the box's padding (a share of the room beside the menu), not the
+     children's margins, which their own rules set. */
+  .ublog-post.box {
+    overflow: visible !important;
+    padding: 16px max(12px, calc((100% - 880px) / 2)) 40px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Side shadows in the page's color, not margins, cover the text scrolling by its sides. */
+  .ublog-post .ublog-post__title {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    padding: 12px 0 10px;
+    background: var(--cdc-bg-page);
+    box-shadow:
+      -16px 0 var(--cdc-bg-page),
+      16px 0 var(--cdc-bg-page);
+  }
+
+  .ublog-post .ublog-post__title::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--cdc-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    .ublog-post .ublog-post__title::after {
+      opacity: 1;
+    }
+  }
+}
+
 .ublog-post .ublog-post__image {
   border-radius: 12px !important;
   box-shadow: none !important;

@@ -13,6 +13,7 @@ interface License {
 
 export const LICENSES: readonly License[] = [
   { name: 'lottie-web', from: 'node_modules/lottie-web/LICENSE.md', to: 'licenses/lottie-web.md' },
+  { name: 'three', from: 'node_modules/three/LICENSE', to: 'licenses/three.md' },
   { name: 'zod', from: 'node_modules/zod/LICENSE', to: 'licenses/zod.md' },
 ];
 

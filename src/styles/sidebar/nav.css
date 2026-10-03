@@ -35,17 +35,17 @@
     white-space: nowrap;
     overflow: hidden;
     align-items: center;
-    gap: 12px;
-    height: 40px !important;
-    margin: 0 8px !important;
+    gap: 10px;
+    height: 34px !important;
+    margin: 1px 8px !important;
     padding: 0 8px !important;
     line-height: 1 !important;
     text-transform: none !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    color: var(--cdc-text) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--cdc-grey-200) !important;
     border: none !important;
-    border-radius: 5px !important;
+    border-radius: 8px !important;
     background: transparent !important;
     text-shadow: none !important;
     transition: background-color 0.15s !important;
@@ -64,48 +64,73 @@
   #topnav section > a::before {
     content: '';
     flex: none;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: var(--cdc-nav-icon) center / contain no-repeat;
   }
 
-  #topnav.hover section:hover > a,
-  #topnav section.active > a {
+  /* Lichess opens a flyout only once the pointer has slowed over its section for 200ms
+     (lib/menuHover.ts toggles #topnav.hover): ours opens and closes on hover itself. */
+  #topnav section:hover > a {
     background: var(--cdc-sb-hover) !important;
-    color: #fff !important;
+    color: var(--cdc-text-strong) !important;
   }
 
-  /* Flyouts open right of the sidebar. The section spans its full width (only the
-   * link is inset), so the pointer never leaves it on the way over. */
+  #topnav section:hover > div {
+    visibility: visible !important;
+    max-height: none !important;
+  }
+
+  #topnav section.active > a {
+    background: #ffffff14 !important;
+    color: var(--cdc-text-strong) !important;
+  }
+
+  /* Keyboard: a clear ring on the focused row, and a section's flyout opens while focus is
+     in it, so its links can be reached with Tab. */
+  #top :is(#topnav a, #cdc-donate, #cdc-sidebar-toggle, .site-title):focus-visible {
+    outline: 2px solid var(--cdc-accent) !important;
+    outline-offset: -2px;
+  }
+
+  #topnav section:focus-within > div {
+    visibility: visible !important;
+    max-height: none !important;
+  }
+
+  /* Flyouts: a small menu card overlapping the sidebar's edge, so the pointer never
+   * leaves the section on the way over. */
   #topnav section > div {
     position: absolute !important;
-    top: -8px !important;
-    left: 100% !important;
+    top: -4px !important;
+    left: calc(100% - 4px) !important;
     right: auto !important;
-    min-width: 240px;
-    padding: 8px !important;
+    min-width: 230px;
+    padding: 5px !important;
     border: none !important;
-    border-radius: 0 5px 5px 0 !important;
-    background: var(--cdc-bg-panel-dark) !important;
-    box-shadow: 4px 4px 12px #0006 !important;
+    border-radius: 10px !important;
+    background: var(--cdc-grey-750) !important;
+    box-shadow:
+      inset 0 0 0 1px #ffffff14,
+      0 12px 32px #00000080 !important;
     z-index: 110;
   }
 
   #topnav section > div a {
-    height: 40px;
+    height: 32px;
     box-sizing: border-box;
     padding: 0 8px !important;
     white-space: nowrap;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--cdc-text) !important;
-    border-radius: 5px !important;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--cdc-grey-100) !important;
+    border-radius: 6px !important;
     transition: background-color 0.15s !important;
   }
 
   #topnav section > div a:hover {
-    background: var(--cdc-sb-hover) !important;
-    color: #fff !important;
+    background: #ffffff0f !important;
+    color: var(--cdc-text-strong) !important;
   }
 
   /* Icons from public/img/sidebar. Sections are matched by position and links by how their
@@ -132,14 +157,14 @@
   #topnav section > div a {
     display: flex !important;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
 
   #topnav section > div a::before {
     content: '';
     flex: none;
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     background: var(--cdc-sub-icon, none) center / contain no-repeat;
   }
 

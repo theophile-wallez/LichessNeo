@@ -72,7 +72,7 @@ main.simul-list
     :has(+ tbody > tr:first-child:is(.scheduled, .create))
   ) {
   --cdc-simul: var(--cdc-accent);
-  --cdc-simul-2: var(--cdc-purple-dark);
+  --cdc-simul-2: var(--cdc-accent-dim);
 }
 
 main.simul-list .slist :is(thead, thead tr) {

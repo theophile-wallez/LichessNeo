@@ -268,3 +268,60 @@
     height: 26px;
   }
 }
+
+/* ---- The coach's card --- */
+
+/* The coach and its remark share one dark card, the coach standing on its bottom edge, the
+   remark beside it: no white bubble, no tail. */
+@media (min-width: 1020px) {
+  #cdc-review .cdc-coach {
+    align-items: flex-end;
+    gap: 12px;
+    margin: 0 12px;
+    padding: 0 14px 0 8px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--cdc-bg-raised);
+    box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  }
+
+  /* The live coach's canvas spills past the avatar's sides, so its arms and tail show: only
+     the card cuts it. The camera follows the canvas's width, the framing stays. */
+  #cdc-review .cdc-coach__face canvas {
+    left: -40%;
+    width: 180%;
+  }
+
+  #cdc-review .cdc-bubble {
+    align-self: center;
+    margin-top: 0;
+    padding: 10px 0;
+    background: transparent;
+    color: var(--cdc-text);
+  }
+
+  #cdc-review .cdc-bubble::before {
+    display: none;
+  }
+
+  #cdc-review .cdc-bubble__title {
+    color: var(--cdc-text-strong);
+  }
+
+  #cdc-review .cdc-bubble__sub {
+    color: var(--cdc-grey-100);
+  }
+
+  #cdc-review .cdc-bubble .cdc-mv,
+  #cdc-review .cdc-bubble__line,
+  #cdc-review .cdc-bubble__line:hover {
+    background: var(--cdc-grey-600);
+    color: var(--cdc-text-strong);
+  }
+
+  /* White's lead, on the dark card: the chip stays pale, Black's dark one gets an edge. */
+  #cdc-review .cdc-bubble__eval--black {
+    background: var(--cdc-grey-950);
+    box-shadow: inset 0 0 0 1px var(--cdc-card-border-hover);
+  }
+}

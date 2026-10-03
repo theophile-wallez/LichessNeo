@@ -1,29 +1,56 @@
-/* The game over's card over the board (page/game-over/card.ts): the result, the coach and its
- * bubble, the player's counts and what to do next. It comes in once the kings' badges have shown
- * (`.cdc-end--settled`, styles/game/game-end.css). */
+/* The game over's card over the board (page/game-over/card.ts), a ticket: the result, the
+ * coach's words and what to do next, then, past a perforation, a stub with the player's accuracy
+ * and counts. The coach leans out from behind its left side. It comes in once the kings' badges
+ * have shown (`.cdc-end--settled`, styles/game/game-end.css). */
 
 @media (min-width: 1020px) {
-  /* ---- Card --- */
+  /* ---- Ticket --- */
 
   main.round .cdc-end__card {
+    --cdc-coach-h: max(84px, 22cqh);
+    --cdc-stub-w: clamp(170px, 31cqw, 236px);
+    /* The perforation's notches, cut out of the ticket at its top and bottom. */
+    --cdc-notch: max(9px, 1.3cqh);
+    --cdc-tag-c: var(--cdc-good);
     position: absolute;
     top: 50%;
-    left: 50%;
+    /* Room on the left for the coach leaning out. */
+    left: calc(50% + var(--cdc-coach-h) * 0.2);
     translate: -50% -50%;
-    display: flex;
-    flex-direction: column;
-    gap: 2cqh;
-    width: max(280px, 60cqw);
-    max-height: 94cqh;
-    padding-bottom: 2.4cqh;
-    overflow: hidden;
-    border-radius: max(10px, 1.2cqh);
-    background: var(--cdc-grey-900);
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--cdc-stub-w);
+    width: min(86cqw, 660px);
     color: #fff;
-    box-shadow:
-      0 12px 40px #0000008c,
-      0 0 0 1px #ffffff0f;
+    filter: drop-shadow(0 12px 28px #0000008c);
     visibility: hidden;
+  }
+
+  main.round .cdc-end__card--loss {
+    --cdc-tag-c: var(--cdc-bad);
+  }
+
+  main.round .cdc-end__card--draw {
+    --cdc-tag-c: var(--cdc-text-dim);
+  }
+
+  /* The ticket's face: under the coach, notched where the perforation runs. */
+  main.round .cdc-end__card::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: max(12px, 1.6cqh);
+    background: var(--cdc-grey-750);
+    box-shadow: inset 0 0 0 1px #ffffff14;
+    mask:
+      radial-gradient(circle var(--cdc-notch) at calc(100% - var(--cdc-stub-w)) 0, #0000 98%, #000)
+        intersect,
+      radial-gradient(
+        circle var(--cdc-notch) at calc(100% - var(--cdc-stub-w)) 100%,
+        #0000 98%,
+        #000
+      );
   }
 
   main.round .cdc-end--settled .cdc-end__card {
@@ -39,136 +66,174 @@
     }
   }
 
-  main.round .cdc-end__head {
+  main.round .cdc-end__card > :is(.cdc-end__main, .cdc-end__stub) {
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 2cqh;
-    /* As much room on the left as the close button takes on the right, so the title is centered. */
-    padding: 2cqh 5cqh;
-    background: var(--cdc-grey-950);
+    z-index: 1;
   }
 
-  main.round .cdc-end__titles {
-    flex: 1;
+  /* ---- Coach --- */
+
+  /* Behind the ticket's face, which hides its cut-off bottom: its head and left side lean out
+     of the top left corner, toward the top right. */
+  main.round .cdc-end__card .cdc-coach__avatar {
+    position: absolute;
+    z-index: -1;
+    top: calc(var(--cdc-coach-h) * -0.55);
+    left: calc(var(--cdc-coach-h) * -0.5);
+    rotate: 16deg;
+    transform-origin: 80% 90%;
+    cursor: default;
+  }
+
+  main.round .cdc-end__card .cdc-coach__avatar:hover {
+    transform: none;
+  }
+
+  /* Live, its canvas spills past the avatar's sides so its arms and tail show; the ticket hides
+     what would be cut. */
+  main.round .cdc-end__card .cdc-coach__face canvas {
+    left: -40%;
+    width: 180%;
+  }
+
+  /* ---- Main --- */
+
+  main.round .cdc-end__main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8cqh;
     min-width: 0;
-    text-align: center;
+    padding: 2.6cqh 2.6cqh 2.6cqh 3cqh;
+  }
+
+  main.round .cdc-end__reason {
+    margin: 0;
+    color: var(--cdc-tag-c);
+    font-size: max(11px, 1.9cqh);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   main.round .cdc-end__title {
     margin: 0;
-    font-size: max(18px, 4.4cqh);
-    font-weight: 800;
+    font-size: max(18px, 3.9cqh);
+    font-weight: 900;
+    letter-spacing: -0.02em;
     line-height: 1.15;
   }
 
-  main.round .cdc-end__reason {
-    margin: 0.4cqh 0 0;
-    color: var(--cdc-text-dim);
-    font-size: max(12px, 2.4cqh);
-    font-weight: 700;
+  /* The coach's words, typed out as it speaks: two lines kept, so the ticket keeps its height. */
+  main.round .cdc-end__bubble {
+    min-height: 2.7em;
+    margin: 0;
+    color: var(--cdc-grey-200);
+    font-size: max(13px, 2.3cqh);
+    line-height: 1.35;
   }
 
-  main.round .cdc-end__close {
-    position: absolute;
-    top: 1.4cqh;
-    right: 1.4cqh;
-    display: grid;
-    place-items: center;
-    width: max(26px, 3.6cqh);
-    height: max(26px, 3.6cqh);
-    padding: max(5px, 0.7cqh);
-    border: 0;
-    border-radius: 6px;
-    background: transparent;
-    cursor: pointer;
-    opacity: 0.55;
-    transition: opacity 0.15s !important;
+  main.round .cdc-end__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1cqh;
+    margin-top: 0.8cqh;
   }
 
-  main.round .cdc-end__close:hover {
-    opacity: 1;
+  main.round .cdc-end__more {
+    display: flex;
+    gap: 1cqh;
   }
 
-  /* The coach and its bubble, the tail pointing at its mouth. */
-  main.round .cdc-end__coach {
-    --cdc-coach-h: max(64px, 15cqh);
+  main.round .cdc-end__review,
+  main.round .cdc-end__btn {
     display: flex;
     align-items: center;
-    gap: 1.6cqh;
-    padding: 0 2.6cqh;
+    justify-content: center;
+    height: max(34px, 6.4cqh);
+    padding: 0 2cqh;
+    border: 0;
+    border-radius: 8px;
+    color: #fff !important;
+    font-size: max(13px, 2.4cqh);
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
   }
 
-  main.round .cdc-end__coach .cdc-coach__avatar {
-    cursor: default;
+  main.round .cdc-end__review {
+    background: var(--cdc-btn-primary);
+    box-shadow: var(--cdc-btn-primary-shadow);
   }
 
-  main.round .cdc-end__coach .cdc-coach__avatar:hover {
-    transform: none;
+  main.round .cdc-end__review:hover {
+    background: var(--cdc-btn-primary-hover);
   }
 
-  main.round .cdc-end__bubble {
-    position: relative;
-    flex: 1;
+  main.round .cdc-end__btn {
+    background: var(--cdc-btn-grey);
+    box-shadow: var(--cdc-btn-grey-shadow);
+  }
+
+  main.round .cdc-end__btn:hover {
+    background: var(--cdc-btn-grey-hover);
+  }
+
+  /* ---- Stub --- */
+
+  main.round .cdc-end__stub {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2cqh;
+    min-width: 0;
+    padding: 2.4cqh 2.2cqh;
+    border-left: 2px dashed #ffffff1f;
+  }
+
+  main.round .cdc-end__accuracy {
+    display: flex;
+    flex-direction: column;
     margin: 0;
-    padding: 1.4cqh 1.8cqh;
-    border-radius: max(10px, 1.2cqh);
-    background: #fff;
-    color: var(--cdc-grey-800);
-    font-size: max(13px, 2.5cqh);
-    line-height: 1.35;
-    /* Two lines, so the card keeps its height as the words type out. */
-    min-height: 2.7em;
-    transition: background-color 0.2s !important;
   }
 
-  /* Between the waiting words and the verdict, as the coach draws breath. */
-  main.round .cdc-end__bubble--empty {
-    background-color: var(--cdc-grey-700);
+  main.round .cdc-end__accuracy b {
+    font-size: max(24px, 5.2cqh);
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    white-space: nowrap;
   }
 
-  main.round .cdc-end__bubble--empty::before {
-    border-right-color: var(--cdc-grey-700);
-  }
-
-  main.round .cdc-end__bubble::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    translate: 0 -50%;
-    border: max(8px, 1cqh) solid transparent;
-    border-right-color: #fff;
+  main.round .cdc-end__accuracy span {
+    margin-top: 0.4cqh;
+    color: var(--cdc-text-dim);
+    font-size: max(11px, 1.9cqh);
+    font-weight: 700;
   }
 
   main.round .cdc-end__counts {
     display: flex;
-    justify-content: space-evenly;
-    padding: 0 2.6cqh;
+    flex-direction: column;
+    gap: 0.9cqh;
   }
 
-  /* An icon and its number, the class's name under them in its color. */
+  /* A row each: the class's icon, its name, its number at the end. */
   main.round .cdc-end__count {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 0.4cqh;
-    min-width: 10cqh;
+    gap: 1cqh;
   }
 
   main.round .cdc-end__count-top {
-    display: flex;
-    align-items: center;
-    gap: 0.8cqh;
-    color: var(--cdc-count-c, #fff);
-    font-size: max(15px, 3cqh);
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
+    display: contents;
   }
 
   main.round .cdc-end__count-icon {
-    width: max(20px, 4cqh);
-    height: max(20px, 4cqh);
+    grid-column: 1;
+    width: max(18px, 3.2cqh);
+    height: max(18px, 3.2cqh);
   }
 
   main.round .cdc-end__count-icon svg {
@@ -178,12 +243,23 @@
   }
 
   main.round .cdc-end__count-label {
-    min-height: 1.2em;
-    color: var(--cdc-count-c, #fff);
-    font-size: max(11px, 2.1cqh);
-    font-weight: 700;
-    line-height: 1.2;
+    grid-column: 2;
+    grid-row: 1;
+    overflow: hidden;
+    color: var(--cdc-grey-100);
+    font-size: max(12px, 2.1cqh);
+    font-weight: 600;
+    text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  main.round .cdc-end__count b {
+    grid-column: 3;
+    grid-row: 1;
+    color: var(--cdc-count-c, #fff);
+    font-size: max(13px, 2.4cqh);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
   }
 
   main.round .cdc-end__counts--revealed .cdc-end__count {
@@ -198,58 +274,49 @@
     }
   }
 
-  main.round .cdc-end__actions {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2cqh;
-    padding: 0 2.6cqh;
-  }
-
-  main.round .cdc-end__review,
-  main.round .cdc-end__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
+  main.round .cdc-end__close {
+    position: absolute;
+    z-index: 2;
+    top: 1.2cqh;
+    right: 1.2cqh;
+    display: grid;
+    place-items: center;
+    width: max(24px, 3.4cqh);
+    height: max(24px, 3.4cqh);
+    padding: max(5px, 0.7cqh);
     border: 0;
     border-radius: 6px;
-    color: #fff !important;
-    font-weight: 800;
-    text-decoration: none;
+    background: transparent;
+    color: #fff;
     cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.15s !important;
   }
 
-  main.round .cdc-end__review {
-    height: max(44px, 9cqh);
-    background: var(--cdc-btn-primary);
-    box-shadow: var(--cdc-btn-primary-shadow);
-    font-size: max(16px, 3.4cqh);
-    text-shadow: 0 1px 1px #00000033;
+  main.round .cdc-end__close:hover {
+    opacity: 1;
   }
 
-  main.round .cdc-end__review:hover {
-    background: var(--cdc-btn-primary-hover);
-  }
+  /* A small board has no room for the stub beside: it goes under, the perforation across. */
+  @container (max-width: 480px) {
+    main.round .cdc-end__card {
+      grid-template-columns: minmax(0, 1fr);
+    }
 
-  main.round .cdc-end__more {
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-auto-flow: column;
-    gap: 1.2cqh;
-  }
+    main.round .cdc-end__card::before {
+      mask: none;
+    }
 
-  main.round .cdc-end__btn {
-    height: max(34px, 6.6cqh);
-    padding: 0 1cqh;
-    background: var(--cdc-btn-grey);
-    box-shadow: var(--cdc-btn-grey-shadow);
-    font-size: max(13px, 2.5cqh);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+    main.round .cdc-end__stub {
+      flex-direction: row;
+      align-items: center;
+      gap: 2.4cqh;
+      border-top: 2px dashed #ffffff1f;
+      border-left: 0;
+    }
 
-  main.round .cdc-end__btn:hover {
-    background: var(--cdc-btn-grey-hover);
+    main.round .cdc-end__counts {
+      flex: 1;
+    }
   }
 }

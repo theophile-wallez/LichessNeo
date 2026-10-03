@@ -4,7 +4,7 @@
    family's position (names are localized), so the "my openings" block shifts it by one. */
 .puzzle-openings {
   --cdc-fam: var(--cdc-accent);
-  --cdc-fam-2: var(--cdc-purple-dark);
+  --cdc-fam-2: var(--cdc-accent-dim);
   --cdc-fam-piece: none;
 }
 
@@ -54,7 +54,7 @@
 
 .puzzle-openings__tree__family:nth-of-type(6n + 1) {
   --cdc-fam: var(--cdc-accent);
-  --cdc-fam-2: var(--cdc-purple-dark);
+  --cdc-fam-2: var(--cdc-accent-dim);
   --cdc-fam-piece: var(---white-pawn);
 }
 

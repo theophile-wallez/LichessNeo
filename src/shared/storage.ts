@@ -10,6 +10,8 @@ export const StorageKey = {
   sounds: 'cdc-sounds',
   coach: 'cdc-coach',
   boardZoom: 'cdc-board-zoom',
+  // '1' while the sidebar is folded to its icons (content/sidebar/collapse.ts).
+  sidebarCollapsed: 'cdc-sidebar-collapsed',
   ratingChartRange: 'cdc-rchart:range',
   reviewCache: (gameId: string, positions: number, version: number): string =>
     `cdc-review:${gameId}:${positions}:v${version}`,

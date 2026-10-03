@@ -4,7 +4,7 @@
 /* A color per category, for the map and the stage list; "what next" (links out) in the accent. */
 #learn-app .categ {
   --cdc-practice: var(--cdc-accent);
-  --cdc-practice-2: var(--cdc-purple-dark);
+  --cdc-practice-2: var(--cdc-accent-dim);
 }
 
 #learn-app .categ:nth-of-type(5n + 1) {
@@ -25,7 +25,7 @@
 }
 #learn-app .categ.what_next {
   --cdc-practice: var(--cdc-accent);
-  --cdc-practice-2: var(--cdc-purple-dark);
+  --cdc-practice-2: var(--cdc-accent-dim);
 }
 
 /* ---- Side --- */

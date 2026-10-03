@@ -42,26 +42,21 @@
     grid-template-areas: 'gauge board rtop' !important;
   }
 
-  /* Move by move: coach, moves, graph, then our controls (with play) instead of Lichess's. */
+  /* Move by move: the graph and the key moments over the coach (all in the panel), the
+     moves, then our controls (with play) instead of Lichess's. The graph shrinks on a short
+     window, so the moves keep some room. */
   html.cdc-review-moves main.analyse {
-    --cdc-review-top: 254px;
-    --cdc-review-graph: 92px;
+    --cdc-review-graph: clamp(56px, calc(var(--cdc-stage) * 0.14), 112px);
+    --cdc-review-moments: 58px;
+    --cdc-review-top: calc(262px + var(--cdc-review-graph) + var(--cdc-review-moments));
     --cdc-review-ctrl: 72px;
     grid-template-rows:
       var(--cdc-review-top)
-      max(
-        0px,
-        calc(
-          var(--cdc-stage) - var(--cdc-review-top) - var(--cdc-review-graph) -
-            var(--cdc-review-ctrl)
-        )
-      )
-      var(--cdc-review-graph)
+      max(0px, calc(var(--cdc-stage) - var(--cdc-review-top) - var(--cdc-review-ctrl)))
       var(--cdc-review-ctrl) !important;
     grid-template-areas:
       'gauge board rtop'
       'gauge board tools'
-      'gauge board rgraph'
       'gauge board rctrl' !important;
   }
 
@@ -188,7 +183,7 @@
     width: 30px;
     height: 30px;
     background: #fff;
-    color: var(--cdc-purple-dark);
+    color: var(--cdc-accent-dim);
     font-size: 19px;
     text-shadow: none;
   }

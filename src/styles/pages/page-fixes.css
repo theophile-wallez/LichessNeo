@@ -51,10 +51,7 @@
     grid-template-columns:
       min(
         var(---col2-uniboard-width),
-        calc(
-          100vw - var(--cdc-sidebar-w, 0px) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) -
-            275px
-        )
+        calc(var(--cdc-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) - 275px)
       )
       var(---block-gap)
       minmax(240px, 400px) !important;
@@ -69,10 +66,7 @@
       calc(var(---block-gap) + var(--cdc-coords-l))
       min(
         var(---col3-uniboard-width),
-        calc(
-          100vw - var(--cdc-sidebar-w, 0px) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) -
-            540px
-        )
+        calc(var(--cdc-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) - 540px)
       )
       var(---block-gap)
       minmax(240px, 400px) !important;

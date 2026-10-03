@@ -57,8 +57,7 @@
   main.analyse .tview2-column > move san {
     padding: 0 5px;
     border-radius: 3px;
-    border-bottom: 2px solid transparent;
-    line-height: 22px;
+    line-height: 24px;
   }
 
   main.analyse .tview2-column > move:hover san {
@@ -68,7 +67,6 @@
 
   main.analyse .tview2-column > move.active san {
     background: #ffffff26;
-    border-bottom-color: #ffffff3d;
     color: #fff;
   }
 

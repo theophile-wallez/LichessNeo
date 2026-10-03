@@ -44,6 +44,8 @@ export const factsFr: FactSentences = {
   wouldForceMate: (best, moves) => `${best} forçait le mat en ${moves}.`,
   missedPunishment: (color, best) =>
     `Le dernier coup ${sides(color)} était une erreur, et ${best} l’aurait puni.`,
+  unfinishedPunishment: (color, best) =>
+    `L’erreur précédente ${sides(color)} restait à punir\u00a0: ${best} aurait conclu.`,
   leftUndefended: ({ piece, square, reply }) =>
     `${capitalize(definite(piece))} en ${square} n’est plus défendu${agreement(piece)}\u00a0: ${reply} ${pronoun(piece)} gagne.`,
   answersAndWins: (color, { piece, square, reply }) =>

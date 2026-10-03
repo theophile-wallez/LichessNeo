@@ -6,8 +6,12 @@ import { classImage } from '#page/review/classes/icon-svg.ts';
 import { bookAt, judgeAt } from '#page/review/live/judging.ts';
 import type { LiveState, Review } from '#page/review/session.ts';
 
-// Badges in Lichess's move list. We only set attributes on its moves and
-// lines (snabbdom owns them); review.css draws the rest.
+// Badges and cost bars in Lichess's move list. We only set attributes on its
+// moves and lines (snabbdom owns them); review.css draws the rest.
+
+// A move that leads with a piece's figurine gets a little room after it (review/move-list.css).
+const markPiece = (element: HTMLElement, san: string): void =>
+  setData(element, 'cdcPiece', /^[KQRBN]/.test(san) ? '' : null);
 
 function markClass(move: HTMLElement, moveClass: MoveClass, badge: boolean): void {
   setData(move, 'cdcCls', moveClass);
@@ -16,13 +20,30 @@ function markClass(move: HTMLElement, moveClass: MoveClass, badge: boolean): voi
   setData(move, 'cdcBadge', badge ? '' : null);
 }
 
+// A move giving away this much of the mover's win chance, or more, fills its bar.
+const FULL_COST = 30;
+// Below this, the bar would be a speck: none.
+const MIN_COST = 2;
+
+/** What a move gave away, as a bar beside it (review/move-list.css). */
+function markCost(element: HTMLElement, loss: number): void {
+  const cost = loss >= MIN_COST ? Math.min(1, loss / FULL_COST).toFixed(2) : null;
+  setStyleProperty(element, '--cdc-cost', cost);
+  // Its tooltip says how much (view/cost-tip.ts).
+  setData(element, 'cdcCost', cost === null ? null : String(Math.round(loss)));
+}
+
 /** The game's moves, from the review's draft; a book badge only on the last book move. */
 function mainlineBadges(tree: Element, review: Review): void {
   const moves = queryAll(tree, ':scope > move:not(.empty)', HTMLElement);
   for (const [i, element] of moves.entries()) {
     const move = review.draft[i];
+    if (!move) continue;
+    // A deeper pass may change what a move cost without changing its class.
+    markCost(element, move.loss);
+    markPiece(element, move.san);
     // Skip a move whose verdict hasn't changed: its badge was set with it.
-    if (!move || element.dataset.cdcCls === move.moveClass) continue;
+    if (element.dataset.cdcCls === move.moveClass) continue;
     const lastBook = !(move.moveClass === 'book' && review.draft[i + 1]?.moveClass === 'book');
     markClass(element, move.moveClass, LIST_BADGES.has(move.moveClass) && lastBook);
   }
@@ -58,6 +79,7 @@ export function liveBadges(
   for (const element of moves) {
     const path = element.getAttribute('p') ?? '';
     const move = judgeAt(live, analysis, path);
+    if (move) markPiece(element, move.san);
     if (!move) {
       setData(element, 'cdcCls', null);
       setData(element, 'cdcBadge', null);

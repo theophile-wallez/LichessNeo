@@ -1,5 +1,11 @@
 {
   "extDescription": {
     "message": "Un Lichess moderne : mise en page aérée, pages ludiques, votre échiquier, vos pièces et vos sons, et un bilan par partie."
+  },
+  "sidebarCollapse": {
+    "message": "Replier la barre latérale"
+  },
+  "sidebarExpand": {
+    "message": "Déplier la barre latérale"
   }
 }

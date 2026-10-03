@@ -80,7 +80,7 @@
     }
   }
 
-  /* Portraits load from manifest CSS, which gets the extension id (the page world can't
+  /* The stills load from manifest CSS, which gets the extension id (the page world can't
      call chrome.runtime.getURL). A button: clicking it changes coach. */
   .cdc-coach__avatar {
     position: relative;
@@ -114,42 +114,40 @@
   }
 
   .cdc-coach__avatar[data-cdc-coach-id='1'] .cdc-coach__face {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-1.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
   }
   .cdc-coach__avatar[data-cdc-coach-id='2'] .cdc-coach__face {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-2.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
   }
   .cdc-coach__avatar[data-cdc-coach-id='3'] .cdc-coach__face {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-3.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
   }
   .cdc-coach__avatar[data-cdc-coach-id='4'] .cdc-coach__face {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-4.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
+  }
+  .cdc-coach__avatar[data-cdc-coach-id='5'] .cdc-coach__face {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
+  }
+  .cdc-coach__avatar[data-cdc-coach-id='6'] .cdc-coach__face {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
+  }
+  .cdc-coach__avatar[data-cdc-coach-id='7'] .cdc-coach__face {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
   }
 
-  /* The rig (content/coach/): Lottie lids, brows and mouth over the plate, the portrait with its
-     brows and mouth painted out. Without the rig, the plain portrait shows. */
-  .cdc-coach__rig,
-  .cdc-coach__rig > span {
+  /* The live mascot (content/coach/): its canvas over the still, which it hides once drawn.
+     It breathes on its own. */
+  .cdc-coach__face canvas {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
   }
 
-  .cdc-coach__rig svg {
-    display: block;
-  }
-
-  .cdc-coach__avatar--rig[data-cdc-coach-id='1'] .cdc-coach__face {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-1-plate.webp');
-  }
-  .cdc-coach__avatar--rig[data-cdc-coach-id='2'] .cdc-coach__face {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-2-plate.webp');
-  }
-  .cdc-coach__avatar--rig[data-cdc-coach-id='3'] .cdc-coach__face {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-3-plate.webp');
-  }
-  .cdc-coach__avatar--rig[data-cdc-coach-id='4'] .cdc-coach__face {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-4-plate.webp');
+  .cdc-coach__avatar--live .cdc-coach__face {
+    background-image: none !important;
+    animation: none;
   }
 
   /* The marks over the head (sparkles, "?", "!", a drop) in the class's color, popping in
@@ -256,5 +254,114 @@
       opacity: 0;
       translate: 0 90%;
     }
+  }
+}
+
+/* ---- Key moments --- */
+
+/* The strip's fades (below), lengths so they can be animated. */
+@property --cdc-fade-start {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --cdc-fade-end {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* The game's turning points under the graph (view/moments.ts): a card each, in a strip that
+   scrolls sideways; the one on the board is ringed. */
+@media (min-width: 1020px) {
+  .cdc-moments {
+    flex: none;
+    display: flex;
+    gap: 8px;
+    height: var(--cdc-review-moments);
+    padding: 0 12px 10px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Cards fade out at an edge only while there are more past it: each fade follows the
+       strip's scroll, none at its start or its end, none if nothing scrolls. */
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 var(--cdc-fade-start),
+      #000 calc(100% - var(--cdc-fade-end)),
+      transparent
+    );
+    animation: cdc-moments-fade linear both !important;
+    animation-timeline: scroll(self inline) !important;
+  }
+
+  @keyframes cdc-moments-fade {
+    0% {
+      --cdc-fade-start: 0px;
+      --cdc-fade-end: 36px;
+    }
+    10% {
+      --cdc-fade-start: 36px;
+    }
+    90% {
+      --cdc-fade-end: 36px;
+    }
+    100% {
+      --cdc-fade-start: 36px;
+      --cdc-fade-end: 0px;
+    }
+  }
+
+  .cdc-moments::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cdc-moment {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    min-width: 104px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--cdc-bg-raised);
+    box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+    color: var(--cdc-text);
+    text-align: start;
+    transition: background-color 0.15s !important;
+  }
+
+  .cdc-moment:hover {
+    background: var(--cdc-bg-raised-hover);
+  }
+
+  .cdc-moment--on {
+    box-shadow: inset 0 0 0 1.5px var(--cdc-accent);
+  }
+
+  .cdc-moment__move {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .cdc-moment__move > :first-child {
+    flex: none;
+    width: 16px;
+    height: 16px;
+  }
+
+  .cdc-moment__class {
+    color: var(--cdc-class-color);
+    font-size: 11.5px;
+    font-weight: 600;
+    white-space: nowrap;
   }
 }

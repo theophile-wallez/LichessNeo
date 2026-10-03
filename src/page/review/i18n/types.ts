@@ -40,6 +40,8 @@ export interface InterfaceStrings {
   readonly phases: Readonly<Record<Phase, string>>;
   /** Explain's hint for a move that wasn't best. */
   readonly bestWas: (move: string) => string;
+  /** A move's cost bar, by the share of the mover's winning chances it gave away. */
+  readonly cost: (percent: number) => string;
   readonly lines: LineStrings;
 }
 
@@ -94,6 +96,8 @@ export interface FactSentences {
   readonly canForceMate: (side: Color, reply: string) => string;
   readonly wouldForceMate: (best: string, moves: number) => string;
   readonly missedPunishment: (side: Color, best: string) => string;
+  /** A miss in the middle of punishing an error from a move before. */
+  readonly unfinishedPunishment: (side: Color, best: string) => string;
   readonly leftUndefended: (lost: PieceWon) => string;
   readonly answersAndWins: (side: Color, lost: PieceWon) => string;
   readonly strongerCapture: (best: string, piece: Piece) => string;

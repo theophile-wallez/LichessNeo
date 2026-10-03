@@ -53,6 +53,7 @@ export const fr: ReviewLanguage = {
       endgame: 'Finale',
     },
     bestWas: move => `Le meilleur coup était ${move}.`,
+    cost: percent => `−${percent} % de chances de gain`,
     lines: {
       best: line => `La meilleure suite était ${line}.`,
       allows: (move, line) => `${move} permet ${line}.`,

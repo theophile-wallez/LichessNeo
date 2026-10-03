@@ -33,13 +33,19 @@ export function hideTip(session: Session): void {
   session.tipFor = null;
 }
 
-function showTip(session: Session, target: HTMLElement): void {
+/** What a tooltip says and points at, when it's not its target's `data-cdc-tip` and box. */
+export interface TipContent {
+  readonly text: string;
+  readonly anchor: TipInput['anchor'];
+}
+
+export function showTip(session: Session, target: HTMLElement, content?: TipContent): void {
   const { tip } = session.elements;
   session.tipFor = target;
-  tip.textContent = target.dataset.cdcTip ?? '';
+  tip.textContent = content?.text ?? target.dataset.cdcTip ?? '';
   document.body.append(tip);
   const { left, top, tail } = tipPlacement({
-    anchor: target.getBoundingClientRect(),
+    anchor: content?.anchor ?? target.getBoundingClientRect(),
     width: tip.offsetWidth,
     height: tip.offsetHeight,
     viewportWidth: window.innerWidth,

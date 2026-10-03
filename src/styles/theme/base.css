@@ -7,6 +7,9 @@
 :root.dark,
 :root.transp,
 :root.transp.light {
+  /* Around the content's box, under the sidebar. */
+  --cdc-bg-frame: var(--cdc-grey-950);
+  --cdc-frame-line: #ffffff0f;
   --cdc-bg-page: var(--cdc-grey-800);
   --cdc-bg-panel: var(--cdc-grey-850);
   --cdc-bg-panel-dark: var(--cdc-grey-900);
@@ -21,9 +24,13 @@
   /* Tertiary text (move numbers, unrated chips): still 3:1 on the panels. */
   --cdc-font-dimmer: var(--cdc-grey-400);
   /* Links, picks, focus rings, primary buttons. */
-  --cdc-accent: var(--cdc-purple);
-  --cdc-accent-hover: var(--cdc-purple-light);
-  --cdc-accent-shadow: var(--cdc-purple-darker);
+  --cdc-accent: var(--cdc-blue);
+  --cdc-accent-hover: var(--cdc-blue-light);
+  --cdc-accent-dim: var(--cdc-blue-dark);
+  --cdc-accent-shadow: var(--cdc-blue-darker);
+  /* Our board's squares (board/pieces.css). */
+  --cdc-board-light: var(--cdc-grey-50);
+  --cdc-board-dark: var(--cdc-accent);
   /* A win, a good move, someone online; and their opposite. */
   --cdc-good: var(--cdc-green);
   --cdc-good-hover: var(--cdc-green-light);
@@ -34,18 +41,16 @@
   --cdc-menu-border: #ffffff24;
   --cdc-menu-hover: #ffffff17;
   --cdc-menu-shadow: 0 0 0 1px #0000008c, 0 16px 40px #000000b3, 0 4px 12px #00000080;
-  /* Buttons: a gradient, 1px lighter top and darker bottom edges, a soft shadow. */
-  --cdc-btn-primary: linear-gradient(135deg, var(--cdc-purple-dark), var(--cdc-pink-dark));
-  --cdc-btn-primary-hover: linear-gradient(135deg, var(--cdc-purple), var(--cdc-pink));
-  --cdc-btn-primary-shadow:
-    inset 0 1px 0 #ffffff40, inset 0 -1px 0 var(--cdc-purple-deep), 0 1px 4px #0000005c;
-  --cdc-btn-grey: linear-gradient(var(--cdc-grey-650), var(--cdc-grey-700));
-  --cdc-btn-grey-hover: linear-gradient(var(--cdc-grey-600), var(--cdc-grey-650));
-  --cdc-btn-grey-shadow: inset 0 1px 0 #ffffff17, inset 0 -1px 0 #0000000f, 0 1px 4px #0000005c;
-  --cdc-btn-red: linear-gradient(var(--cdc-red), var(--cdc-red-dark));
-  --cdc-btn-red-hover: linear-gradient(var(--cdc-red-light), var(--cdc-red));
-  --cdc-btn-red-shadow:
-    inset 0 1px 0 #ffffff40, inset 0 -1px 0 var(--cdc-red-deep), 0 1px 4px #0000005c;
+  /* Buttons: flat, a hairline edge on the grey ones. */
+  --cdc-btn-primary: var(--cdc-blue);
+  --cdc-btn-primary-hover: var(--cdc-blue-light);
+  --cdc-btn-primary-shadow: 0 1px 2px #0000004d;
+  --cdc-btn-grey: var(--cdc-grey-700);
+  --cdc-btn-grey-hover: var(--cdc-grey-650);
+  --cdc-btn-grey-shadow: inset 0 0 0 1px #ffffff0f;
+  --cdc-btn-red: var(--cdc-red-dark);
+  --cdc-btn-red-hover: var(--cdc-red);
+  --cdc-btn-red-shadow: 0 1px 2px #0000004d;
   /* Cards: a faint edge keeps neighbours apart. The hover fill stays darker than
    * the page, or the card melts into it. */
   --cdc-card-border: #ffffff0f;
@@ -102,13 +107,13 @@
   --c-clearer: #fff !important;
   --c-over: #fff !important;
   --c-primary: var(--cdc-accent) !important;
-  --c-primary-dim: var(--cdc-purple-dark) !important;
+  --c-primary-dim: var(--cdc-accent-dim) !important;
   --c-primary-clear: var(--cdc-accent-hover) !important;
   --c-secondary: var(--cdc-accent) !important;
-  --c-secondary-dim: var(--cdc-purple-dark) !important;
-  --c-secondary-dimmer: var(--cdc-purple-darker) !important;
+  --c-secondary-dim: var(--cdc-accent-dim) !important;
+  --c-secondary-dimmer: var(--cdc-accent-shadow) !important;
   --c-link: var(--cdc-accent) !important;
-  --c-link-dim: var(--cdc-purple-dark) !important;
+  --c-link-dim: var(--cdc-accent-dim) !important;
   --c-link-clear: var(--cdc-accent-hover) !important;
   --c-link-hover: var(--cdc-accent-hover) !important;
   --c-good: var(--cdc-good) !important;

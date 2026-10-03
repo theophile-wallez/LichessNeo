@@ -39,6 +39,20 @@ h3 {
 
 /* ---- Side menus --- */
 
+/* One layout for every page with a side menu: Lichess's narrow ones (.page-small: a blog
+   post, settings) were 1000px and centered, their menu adrift mid-page. As wide as the
+   others, the menu where theirs is, and a little wider than its longest link. */
+@media (min-width: 1020px) {
+  main.page-menu.page-small {
+    justify-self: stretch !important;
+    max-width: none !important;
+  }
+
+  main.page-menu > .subnav {
+    min-width: 176px;
+  }
+}
+
 .subnav a {
   margin-bottom: 2px;
   padding: 10px 14px !important;

@@ -6,7 +6,7 @@
    * Blitz"), players. */
   main.round .round__side > .game__meta {
     --cdc-meta: var(--cdc-accent);
-    --cdc-meta-2: var(--cdc-purple-dark);
+    --cdc-meta-2: var(--cdc-accent-dim);
     padding: 14px 12px !important;
     background: var(--cdc-bg-panel) !important;
     color: var(--cdc-text);

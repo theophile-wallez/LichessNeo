@@ -1,0 +1,211 @@
+/* ---- Collapsed --- */
+
+/* The toggle beside the logo, and the sidebar folded to its icons
+ * (content/sidebar/collapse.ts sets data-cdc-sidebar on <html>). Folded, a flyout
+ * opens under its section's label, and the search box floats out of its icon. */
+
+#cdc-sidebar-toggle {
+  display: none;
+}
+
+@media (min-width: 1020px) {
+  #cdc-sidebar-toggle {
+    position: absolute;
+    top: 16px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--cdc-text-dim);
+    cursor: pointer;
+    transition: background-color 0.15s !important;
+  }
+
+  /* The logo's row leaves the toggle its room. */
+  #top .site-title {
+    margin-inline-end: 40px !important;
+  }
+
+  /* A window with its side panel. */
+  #cdc-sidebar-toggle::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Crect x='1.75' y='2.75' width='12.5' height='10.5' rx='2'/%3E%3Cpath d='M6 3v10'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  #cdc-sidebar-toggle:hover {
+    background: var(--cdc-sb-hover);
+    color: var(--cdc-text-strong);
+  }
+
+  html[data-cdc-sidebar='collapsed'] {
+    --cdc-sidebar-w: 56px;
+  }
+
+  /* While it folds or unfolds (content/sidebar/collapse.ts), everything follows the width:
+   * labels fade and get clipped, icons barely move, the page resizes along. */
+  html[data-cdc-sidebar-moving] {
+    transition: --cdc-sidebar-w 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  html[data-cdc-sidebar-moving]
+    :is(#topnav section > a, #cdc-donate, #top .site-title, #cdc-sidebar-toggle, #topnav) {
+    transition:
+      background-color 0.15s,
+      color 0.2s,
+      height 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      margin 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      padding 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      top 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      right 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  html[data-cdc-sidebar-moving] #top .site-title::after {
+    transition: color 0.2s !important;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #top .site-title {
+    margin: 12px 11px 6px !important;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #top .site-title::after {
+    color: transparent;
+  }
+
+  /* Under the logo, folded. */
+  html[data-cdc-sidebar='collapsed'] #cdc-sidebar-toggle {
+    top: 52px;
+    right: 15px;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #topnav {
+    margin-top: 36px !important;
+  }
+
+  /* Icons only: the labels go transparent and get clipped, so links keep their names. The
+   * hover rule is named too, as it sets the color as well. */
+  html[data-cdc-sidebar='collapsed'] :is(#topnav section > a, #cdc-donate) {
+    height: 40px !important;
+    margin: 2px 8px !important;
+    padding: 0 10px !important;
+  }
+
+  html[data-cdc-sidebar='collapsed'] :is(#topnav section > a, #cdc-donate, #cdc-donate:hover),
+  html[data-cdc-sidebar='collapsed'] #topnav section:hover > a {
+    color: transparent !important;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #topnav section > div::before {
+    content: attr(data-cdc-label);
+    display: block;
+    padding: 6px 8px 4px;
+    color: var(--cdc-text-dim);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Donate has no flyout: its label shows beside it, in the flyouts' look. */
+  html[data-cdc-sidebar='collapsed'] #cdc-donate {
+    position: relative;
+    overflow: visible;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #cdc-donate::after {
+    content: attr(data-cdc-label);
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 8px);
+    display: none;
+    padding: 7px 10px;
+    border-radius: 8px;
+    background: var(--cdc-grey-750);
+    box-shadow:
+      inset 0 0 0 1px #ffffff14,
+      0 12px 32px #00000080;
+    color: var(--cdc-grey-100);
+    font-size: 13px;
+    white-space: nowrap;
+    transform: translateY(-50%);
+  }
+
+  html[data-cdc-sidebar='collapsed'] #cdc-donate:hover::after {
+    display: block;
+  }
+
+  /* ---- Bottom buttons, folded --- */
+
+  html[data-cdc-sidebar='collapsed'] #top .site-buttons {
+    justify-content: center;
+    padding-inline: 8px !important;
+  }
+
+  /* Lichess focuses the search on hover and drops it on leaving the box: the field floats
+   * flush against the icon, inside the box, so the pointer can reach it. */
+  html[data-cdc-sidebar='collapsed'] #top #clinput {
+    position: relative;
+    justify-content: center;
+    box-shadow: none;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #top #clinput input {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 0 !important;
+    height: 32px;
+    padding: 0 !important;
+    opacity: 0;
+  }
+
+  html[data-cdc-sidebar='collapsed'] body.clinput #top #clinput input {
+    width: 260px !important;
+    padding: 0 10px !important;
+    border-radius: 8px;
+    background: var(--cdc-grey-750) !important;
+    box-shadow:
+      inset 0 0 0 1px #ffffff14,
+      0 12px 32px #00000080;
+    opacity: 1;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #top .signin-or-signup .signup {
+    display: none !important;
+  }
+
+  /* Sign in as Lichess's user glyph. */
+  html[data-cdc-sidebar='collapsed'] #top .signin-or-signup .signin {
+    height: 34px;
+    padding: 0 !important;
+    font-size: 0 !important;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #top .signin-or-signup .signin::before {
+    content: '\e050';
+    font-family: lichess;
+    font-size: 17px;
+    line-height: 34px;
+  }
+
+  /* Signed in: the avatar alone. */
+  html[data-cdc-sidebar='collapsed'] #top #user_tag {
+    height: 40px;
+    padding: 0 !important;
+    font-size: 0 !important;
+  }
+
+  html[data-cdc-sidebar='collapsed'] #top #user_tag::after {
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+}

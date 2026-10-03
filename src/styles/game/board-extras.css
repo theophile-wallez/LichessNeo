@@ -10,9 +10,9 @@
       320px,
       calc(
         min(
-            calc(100dvh - 32px - 2 * var(--cdc-bar) - var(--cdc-coords-off)),
+            calc(var(--cdc-main-h, 100dvh) - 32px - 2 * var(--cdc-bar) - var(--cdc-coords-off)),
             calc(
-              (100vw - var(--cdc-sidebar-w, 0px) - var(--cdc-lead-w, 0px) - var(--cdc-panel-min) -
+              (var(--cdc-main-w, 100vw) - var(--cdc-lead-w, 0px) - var(--cdc-panel-min) -
                   var(--cdc-gap) - var(--cdc-pocket-gap) - 48px) /
                 1.09375
             )
@@ -23,7 +23,7 @@
     --cdc-panel-w: clamp(
       var(--cdc-panel-min),
       calc(
-        100vw - var(--cdc-sidebar-w, 0px) - var(--cdc-lead-w, 0px) - var(--cdc-board) -
+        var(--cdc-main-w, 100vw) - var(--cdc-lead-w, 0px) - var(--cdc-board) -
           var(--cdc-pocket-gap) - var(--cdc-pocket-sq) - var(--cdc-gap) - 48px
       ),
       500px
@@ -143,29 +143,6 @@
     visibility: hidden;
     opacity: 0;
   }
-
-  /* ---- Zen --- */
-
-  /* Zen mode shows only the board, clocks and controls; the rules above would bring the
-   * rest back. */
-  body.zenable.zen {
-    --cdc-sidebar-w: 0px;
-  }
-
-  body.zenable.zen #top,
-  body.zenable.zen main.round :is(.ruser, .cdc-captured, .mchat, .round__side),
-  body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
-    display: none !important;
-  }
-
-  body.zenable.zen main.round :is(i5d, rm6) :is(aPp, l4x) {
-    background: none !important;
-  }
-}
-
-/* Zen's way home is Lichess's logo, drawn dark for its light theme; ours is always dark. */
-html.light #zenzone .zen-home {
-  filter: invert(1);
 }
 
 /* ---- Mobile --- */

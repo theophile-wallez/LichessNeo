@@ -13,6 +13,7 @@ import { isError, type MoveClass } from '#page/review/classes/classes.ts';
 import { moveToken, squareToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import type { FactSentences } from '#page/review/i18n/types.ts';
+import { PUNISHABLE } from '#page/review/judge/judge.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { evaluationLevel } from './trajectory.ts';
 
@@ -65,13 +66,21 @@ function mateFact(input: FactInput, replySan: string): string | null {
   return null;
 }
 
+// The error a miss fails to punish: the opponent's last move, or the one before it, the
+// punishment under way (judge.ts).
+function missFact({ move, facts, them, best }: FactInput): string {
+  return (move.previousMove?.loss ?? 0) >= PUNISHABLE
+    ? facts.missedPunishment(them, best)
+    : facts.unfinishedPunishment(them, best);
+}
+
 function errorFact(input: FactInput): string | null {
   const { move, facts, them, before, best } = input;
   const reply = move.after.best;
   const replySan = reply ? moveToken(uciToSan(move.position.fen, reply), them) : '';
   const mate = mateFact(input, replySan);
   if (mate !== null) return mate;
-  if (move.moveClass === 'miss' && best) return facts.missedPunishment(them, best);
+  if (move.moveClass === 'miss' && best) return missFact(input);
   const lost = reply ? lostPieceFact(input, reply, replySan) : null;
   if (lost !== null) return lost;
   if (!best) return null;

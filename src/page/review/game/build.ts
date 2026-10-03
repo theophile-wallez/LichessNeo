@@ -1,5 +1,5 @@
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import { judge } from '#page/review/judge/judge.ts';
+import { judge, withMiss } from '#page/review/judge/judge.ts';
 import { classCounts, playerAccuracy } from '#page/review/judge/summary.ts';
 import { type GamePosition, isPlayed } from '#page/review/judge/types.ts';
 import type { GameRating } from '#page/review/rating/rate-game.ts';
@@ -57,12 +57,13 @@ function judgeMainline(input: BuildInput): void {
     if (moves[i - 1] || !deep[i - 1] || !deep[i] || (i >= 2 && !deep[i - 2])) continue;
     moves[i - 1] = at(i, i >= 2 ? (moves[i - 2] ?? at(i - 1)) : undefined);
   }
-  // A move judged before the one it answers now links to it.
+  // A move judged before the one it answers now links to it, and may turn out a miss, as
+  // the moves before it show it was punishing an error.
   for (let k = 1; k < moves.length; k++) {
     const move = moves[k];
     const previousMove = moves[k - 1];
     if (move && previousMove && move.previousMove !== previousMove)
-      moves[k] = { ...move, previousMove };
+      moves[k] = withMiss({ ...move, previousMove });
   }
 }
 

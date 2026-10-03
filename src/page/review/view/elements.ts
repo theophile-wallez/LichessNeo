@@ -35,13 +35,17 @@ export function createElements(): ReviewElements {
   };
 }
 
+// The move-by-move review draws the graph inside its panel (view/moves-panel.ts).
+const isInPanel = ({ panel }: ReviewElements, element: HTMLElement): boolean =>
+  element !== panel && panel.contains(element);
+
 /** Puts the elements in the analysis page; false when it has no board yet. */
 export function attach(elements: ReviewElements): boolean {
   const main = queryOne(document, 'main.analyse', HTMLElement);
   const board = main && queryOne(main, '.analyse__board', HTMLElement);
   if (!main || !board) return false;
   for (const element of [elements.panel, elements.graphBox, elements.controls, elements.bar])
-    if (element.parentNode !== main) main.append(element);
+    if (element.parentNode !== main && !isInPanel(elements, element)) main.append(element);
   if (elements.overlay.parentNode !== board) board.append(elements.overlay);
   return true;
 }

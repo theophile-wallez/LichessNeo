@@ -3,11 +3,13 @@
 @import './moves-extras.css';
 @import './controls.css';
 @import './game-over.css';
+@import './rematch.css';
 @import './chat.css';
 @import './game-info.css';
 @import './players.css';
 @import './info-sections.css';
 @import './board-extras.css';
+@import './zen.css';
 @import './intro.css';
 @import './game-end.css';
 @import './game-end-card.css';

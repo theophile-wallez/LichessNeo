@@ -98,7 +98,7 @@
 
 .practice-app section {
   --cdc-practice: var(--cdc-accent);
-  --cdc-practice-2: var(--cdc-purple-dark);
+  --cdc-practice-2: var(--cdc-accent-dim);
 }
 
 .practice-app section:nth-of-type(5n + 1) {
@@ -115,7 +115,7 @@
 }
 .practice-app section:nth-of-type(5n + 4) {
   --cdc-practice: var(--cdc-accent);
-  --cdc-practice-2: var(--cdc-purple-dark);
+  --cdc-practice-2: var(--cdc-accent-dim);
 }
 .practice-app section:nth-of-type(5n + 5) {
   --cdc-practice: #f5a93b;

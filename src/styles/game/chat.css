@@ -14,30 +14,6 @@
     box-shadow: none !important;
   }
 
-  main.round .mchat__tabs {
-    background: var(--cdc-bg-panel);
-  }
-
-  main.round .mchat__tab {
-    border-radius: 0 !important;
-    padding: 8px 10px !important;
-    background: transparent !important;
-    color: var(--cdc-text-dim) !important;
-    font-family: var(--cdc-font) !important;
-    font-size: 13px;
-    font-weight: 600 !important;
-  }
-
-  main.round .mchat__tab-active {
-    color: #fff !important;
-    box-shadow: inset 0 -2px 0 #fff;
-  }
-
-  /* The underline slides (see "Sliding tabs" in theme/). */
-  main.round .mchat__tabs[data-cdc-tabs] .mchat__tab-active {
-    box-shadow: none;
-  }
-
   main.round .mchat__content {
     min-height: 0;
     background: transparent !important;
@@ -45,41 +21,6 @@
 
   main.round .mchat__messages {
     max-height: none !important;
-    padding: 4px 0;
-    font-size: 13px !important;
-  }
-
-  main.round .mchat__messages li {
-    padding: 3px 12px !important;
-    color: var(--cdc-text);
-  }
-
-  main.round .mchat__messages .user-link,
-  main.round .mchat__messages .color {
-    color: #fff !important;
-    letter-spacing: 0 !important;
-  }
-
-  main.round .mchat__messages .system {
-    color: var(--cdc-text-dim);
-  }
-
-  main.round .mchat__say {
-    box-sizing: border-box;
-    width: calc(100% - 16px);
-    margin: 6px 8px 8px;
-    padding: 9px 12px !important;
-    border: none !important;
-    border-radius: 5px !important;
-    outline: none !important;
-    background: var(--cdc-bg-raised) !important;
-    color: #fff !important;
-    font-size: 14px;
-  }
-
-  main.round .mchat__presets span {
-    border-color: var(--cdc-border) !important;
-    font-size: 11px;
   }
 
   /* ---- No scrolling --- */
@@ -88,7 +29,8 @@
    * crosstable joins the moves (moves-extras.css), and the keyboard-move input sits over the
    * chat. */
   html[data-cdc-has~='round'],
-  html[data-cdc-has~='round'] body {
+  html[data-cdc-has~='round'] body,
+  html[data-cdc-has~='round'] #main-wrap {
     overflow: hidden !important;
   }
 

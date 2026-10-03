@@ -54,6 +54,7 @@ export const en: ReviewLanguage = {
     gameRatingTip: 'An estimate of a player’s rating based on a single game.',
     phases: { opening: 'Opening', tactics: 'Tactics', strategy: 'Strategy', endgame: 'Endgame' },
     bestWas: move => `${move} was best.`,
+    cost: percent => `−${percent}% winning chances`,
     lines: {
       best: line => `Best was ${line}.`,
       allows: (move, line) => `${move} allows ${line}.`,

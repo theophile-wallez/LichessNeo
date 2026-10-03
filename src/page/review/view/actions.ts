@@ -16,6 +16,7 @@ const CommandSchema = z.enum([
   'line',
   'coach',
   'jump',
+  'moment',
   'learn',
 ]);
 

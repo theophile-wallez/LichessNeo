@@ -3,6 +3,7 @@ import type { Feature } from '#shared/features.ts';
 import { pageLang } from '#shared/lang.ts';
 import { nonEmpty } from '#shared/text.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
+import { mountHeroCoach } from './hero-coach.ts';
 import { heroText, type HeroText } from './hero-texts.ts';
 
 // The home page's hero card (styles/home/hero.css), in the page's language.
@@ -16,6 +17,7 @@ function buildHero(text: HeroText, user: string | undefined): HTMLElement {
       text: user ? text.greeting(user) : text.title,
     }),
     createElement('p', { className: 'cdc-hero__sub', text: text.sub }),
+    createElement('div', { className: 'cdc-hero__coach', attrs: { 'aria-hidden': 'true' } }),
   );
   return hero;
 }
@@ -29,7 +31,10 @@ function userName(): string | undefined {
 export function addHero(text: HeroText): void {
   const main = queryOne(document, 'main.lobby', HTMLElement);
   if (!main || main.querySelector(':scope > .cdc-hero')) return;
-  main.prepend(buildHero(text, userName()));
+  const hero = buildHero(text, userName());
+  main.prepend(hero);
+  const coach = hero.querySelector('.cdc-hero__coach');
+  if (coach instanceof HTMLElement) void mountHeroCoach(coach);
 }
 
 export const homeHero: Feature = {

@@ -15,15 +15,18 @@
       320px,
       calc(
         min(
-            calc(100dvh - var(--cdc-v-room) - 2 * var(--cdc-bar) - var(--cdc-coords-off)),
-            calc(100vw - var(--cdc-sidebar-w, 0px) - var(--cdc-panel-min) - var(--cdc-gap) - 72px)
+            calc(
+              var(--cdc-main-h, 100dvh) - var(--cdc-v-room) - 2 * var(--cdc-bar) -
+                var(--cdc-coords-off)
+            ),
+            calc(var(--cdc-main-w, 100vw) - var(--cdc-panel-min) - var(--cdc-gap) - 72px)
           ) *
           var(--cdc-board-scale, 1)
       )
     );
     --cdc-panel-w: clamp(
       var(--cdc-panel-min),
-      calc(100vw - var(--cdc-sidebar-w, 0px) - var(--cdc-board) - var(--cdc-gap) - 72px),
+      calc(var(--cdc-main-w, 100vw) - var(--cdc-board) - var(--cdc-gap) - 72px),
       500px
     );
     --cdc-stage: calc(var(--cdc-board) + 2 * var(--cdc-bar) + var(--cdc-coords-off));
@@ -284,24 +287,6 @@
     box-shadow: none !important;
   }
 
-  main.analyse > .mchat .mchat__tab {
-    border-radius: 0 !important;
-    background: transparent !important;
-    color: var(--cdc-text-dim) !important;
-    font-family: var(--cdc-font) !important;
-    font-weight: 600 !important;
-  }
-
-  main.analyse > .mchat .mchat__tab-active {
-    color: #fff !important;
-    box-shadow: inset 0 -2px 0 #fff;
-  }
-
-  /* The underline slides (see "Sliding tabs" in theme/). */
-  main.analyse > .mchat .mchat__tabs[data-cdc-tabs] .mchat__tab-active {
-    box-shadow: none;
-  }
-
   main.analyse > .mchat .mchat__content {
     min-height: 0;
     overflow: hidden;
@@ -312,16 +297,5 @@
     max-height: none !important;
     min-height: 0;
     overflow-y: auto;
-  }
-
-  main.analyse > .mchat .mchat__say {
-    box-sizing: border-box;
-    width: calc(100% - 16px);
-    margin: 6px 8px 8px;
-    padding: 9px 12px !important;
-    border: none !important;
-    border-radius: 5px !important;
-    background: var(--cdc-bg-raised) !important;
-    color: #fff !important;
   }
 }

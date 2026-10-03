@@ -131,15 +131,39 @@
     content: ')';
   }
 
-  /* Country flag right after the name (data-cdc-flag, from content/game/flags.ts). */
+  /* The rating's change follows the rating: `good`, `bad`, or a bare span for "±0". */
   :is(main.round .ruser, main.analyse > .cdc-player) :is(rating, good, bad) {
     order: 2;
   }
-  :is(main.round .ruser, main.analyse > .cdc-player)[data-cdc-flag]:not([data-cdc-flag=''])::after {
+
+  :is(main.round .ruser, main.analyse > .cdc-player) > span:not([data-icon]) {
+    order: 2;
+    color: var(--cdc-text-dim);
+  }
+
+  /* The country flag (data-cdc-flag, from content/game/flags.ts) right after the name,
+     before its flair. */
+  :is(main.round .ruser, main.analyse > .cdc-player) > a.user-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  :is(main.round .ruser, main.analyse > .cdc-player) > a.user-link :is(.uflair, .utitle) {
+    margin: 0;
+  }
+
+  :is(main.round .ruser, main.analyse > .cdc-player) > a.user-link .uflair {
+    order: 2;
+  }
+
+  :is(main.round .ruser, main.analyse > .cdc-player)
+    > a.user-link[data-cdc-flag]:not([data-cdc-flag=''])::after {
     order: 1;
     content: attr(data-cdc-flag);
     font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
     font-size: 16px;
+    font-weight: 400;
     line-height: 20px;
   }
 
@@ -229,6 +253,17 @@
     filter: none !important;
   }
 
+  /* Black pieces vanish on the near-black page: a light edge draws them as outlines. Specific
+   * enough to beat the `filter: none` above. */
+  main
+    .cdc-captured__group
+    .cdc-pc:is(.cdc-pc-bp, .cdc-pc-bn, .cdc-pc-bb, .cdc-pc-br, .cdc-pc-bq, .cdc-pc-bk),
+  html[data-cdc-has~='analyse-white'] main.analyse .material-bottom mpiece,
+  html[data-cdc-has~='analyse-black'] main.analyse .material-top mpiece {
+    filter: drop-shadow(1px 0 0 var(--cdc-text-dim)) drop-shadow(-1px 0 0 var(--cdc-text-dim))
+      drop-shadow(0 1px 0 var(--cdc-text-dim)) drop-shadow(0 -1px 0 var(--cdc-text-dim)) !important;
+  }
+
   :is(.cdc-captured__group .cdc-pc, main.analyse .material mpiece) + :is(.cdc-pc, mpiece) {
     margin-left: -11px !important;
   }
@@ -241,6 +276,18 @@
   }
 
   /* ---- Clock --- */
+
+  /* "Give more time" is a link, so in the accent: a quiet grey, lit on hover. */
+  main.round .rclock .moretime {
+    color: var(--cdc-text-dim) !important;
+    opacity: 0.6;
+    transition: opacity 0.15s !important;
+  }
+
+  main.round .rclock .moretime:hover {
+    color: var(--cdc-text-strong) !important;
+    opacity: 1;
+  }
 
   /* A fixed 140x40 box: dim while waiting, lit while running, red when low.
      Each page only maps its markup onto that state. */

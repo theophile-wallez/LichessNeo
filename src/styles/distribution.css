@@ -62,14 +62,14 @@
 .cdc-dist__plot {
   position: relative;
   min-width: 0;
-  height: clamp(240px, 100dvh - 330px, 760px);
+  height: clamp(240px, var(--cdc-main-h, 100dvh) - 330px, 760px);
 }
 
 /* Taller on a big window, up to half as tall as wide. The cap leaves room for
  * Lichess's box padding, which grows with the window's width. */
 @media (min-width: 1020px) {
   .cdc-dist__plot {
-    height: clamp(240px, min(100dvh - 330px, 50vw), 1060px);
+    height: clamp(240px, min(var(--cdc-main-h, 100dvh) - 330px, 50vw), 1060px);
   }
 }
 

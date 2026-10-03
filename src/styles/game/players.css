@@ -111,7 +111,9 @@
     text-overflow: ellipsis;
   }
 
+  /* After the flag. */
   main.round .game__meta__players .user-link .uflair {
+    order: 2;
     flex: none;
     width: 18px;
     height: 18px;

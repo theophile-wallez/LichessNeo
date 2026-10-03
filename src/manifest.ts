@@ -57,6 +57,8 @@ export const OUTPUT = {
   background: 'background.js',
   content: 'content.js',
   page: 'page.js',
+  /** The coach's 3D mascots, loaded by the content script when a coach shows. */
+  mascot: 'coach-mascot.js',
   styles: 'content.css',
 } satisfies Record<string, string>;
 
@@ -93,7 +95,7 @@ export function createManifest(target: Target, version: string): Manifest {
     ],
     web_accessible_resources: [
       {
-        resources: ['img/coaches/*', 'img/icons/*', 'img/sidebar/*'],
+        resources: [OUTPUT.mascot, 'img/coaches/*', 'img/icons/*', 'img/sidebar/*'],
         matches: LICHESS,
       },
     ],

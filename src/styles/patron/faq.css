@@ -4,7 +4,7 @@
    columns dissolve so every pair can sit in one grid. */
 main.plan .faq {
   --cdc-faq: var(--cdc-accent);
-  --cdc-faq-2: var(--cdc-purple-dark);
+  --cdc-faq-2: var(--cdc-accent-dim);
   --cdc-faq-emoji: url('https://lichess1.org/assets/flair/img/objects.money-with-wings.webp');
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr));

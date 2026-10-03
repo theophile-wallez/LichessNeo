@@ -159,7 +159,7 @@
     position: sticky;
     top: 12px;
     align-self: start;
-    max-height: calc(100dvh - 24px);
+    max-height: calc(var(--cdc-main-h, 100dvh) - 24px);
     margin: -4px;
     padding: 4px;
     overflow-y: auto;

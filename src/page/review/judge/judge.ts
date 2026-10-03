@@ -1,7 +1,7 @@
 import { fenTurn } from '#shared/chess/index.ts';
 import { isSacrifice } from '#page/review/chess/material.ts';
 import { normalizeUci, uciToSan } from '#page/review/chess/notation.ts';
-import { type MoveClass, RANK } from '#page/review/classes/classes.ts';
+import { isError, type MoveClass, RANK } from '#page/review/classes/classes.ts';
 import { forColor, moveAccuracy } from '#page/review/evaluation/score.ts';
 import { mateVerdict, SURE_MATE } from './mate.ts';
 import type { JudgeInput, MoveVerdict } from './types.ts';
@@ -45,6 +45,36 @@ function keepsLongMate({ before, after, previousPosition }: JudgeInput): boolean
   return !('mate' in after) || sign * after.mate >= own - 1;
 }
 
+// Win probability an error must lose for the opponent to have something to punish, the
+// mover's own share for it to count, and how little the opponent's move in between loses.
+export const PUNISHABLE = 10;
+const AHEAD = 60;
+const FORCED = 5;
+
+/**
+ * Whether an error now fails to punish the opponent's: their move just before was an
+ * error, or the mover was punishing one from three plies back, their reply no error (its
+ * class, not its loss: the engine's move can read a few points down at another depth),
+ * the opponent's move between all but forced.
+ */
+export function inPunishment(
+  previousMove: MoveVerdict | null | undefined,
+  before: number,
+): boolean {
+  if (!previousMove || before < AHEAD) return false;
+  if (previousMove.loss >= PUNISHABLE) return true;
+  const own = previousMove.previousMove;
+  return (
+    previousMove.loss < FORCED &&
+    own !== null &&
+    !isError(own.moveClass) &&
+    (own.previousMove?.loss ?? 0) >= PUNISHABLE
+  );
+}
+
+const isMistake = (moveClass: MoveClass): boolean =>
+  moveClass === 'mistake' || moveClass === 'blunder';
+
 function baseClass(input: JudgeInput, standing: Standing, isBest: boolean): MoveClass {
   if (input.book) return 'book';
   // Another way to a mate too long to judge by distance loses no win
@@ -54,9 +84,20 @@ function baseClass(input: JudgeInput, standing: Standing, isBest: boolean): Move
   if (otherWay && standing.loss < 0.5 && keepsLongMate(input)) return 'excellent';
   if (isBest || standing.loss < 0.5) return topClass(input, standing);
   const moveClass = lossClass(standing.loss);
-  // An error right after the opponent's own is a missed punishment.
-  const punishable = (input.previousMove?.loss ?? 0) >= 10 && standing.before >= 60;
-  return (moveClass === 'mistake' || moveClass === 'blunder') && punishable ? 'miss' : moveClass;
+  return isMistake(moveClass) && inPunishment(input.previousMove, standing.before)
+    ? 'miss'
+    : moveClass;
+}
+
+/**
+ * The move as a miss, if its error fails to punish the opponent's: for a move judged
+ * before the moves it answers were linked, which `judge` couldn't see then. A verdict
+ * from mate distances stands.
+ */
+export function withMiss<T extends MoveVerdict>(move: T): T {
+  if (move.slower || !isMistake(move.moveClass)) return move;
+  const before = forColor(move.before.whiteWinChance, move.color);
+  return inPunishment(move.previousMove, before) ? { ...move, moveClass: 'miss' } : move;
 }
 
 /** Judges one move from the engine's records of the positions before and after it. */

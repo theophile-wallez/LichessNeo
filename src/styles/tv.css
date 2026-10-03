@@ -81,7 +81,7 @@
    * which Lichess doesn't translate. */
   main.round.tv-single .tv-channel {
     --cdc-tv: var(--cdc-accent);
-    --cdc-tv-2: var(--cdc-purple-dark);
+    --cdc-tv-2: var(--cdc-accent-dim);
   }
 
   main.round.tv-single .tv-channel.best {
@@ -98,7 +98,7 @@
   }
   main.round.tv-single .tv-channel.rapid {
     --cdc-tv: var(--cdc-accent);
-    --cdc-tv-2: var(--cdc-purple-dark);
+    --cdc-tv-2: var(--cdc-accent-dim);
   }
   main.round.tv-single .tv-channel.classical {
     --cdc-tv: #45a3f5;

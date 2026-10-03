@@ -139,7 +139,7 @@
   .community__online {
     position: sticky;
     top: 16px;
-    max-height: calc(100dvh - 32px);
+    max-height: calc(var(--cdc-main-h, 100dvh) - 32px);
   }
 
   .community__online .user-top {

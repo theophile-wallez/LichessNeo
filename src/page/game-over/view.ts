@@ -53,6 +53,9 @@ interface Layer {
   readonly kings: HTMLElement;
   readonly card: HTMLElement | null;
   readonly counts: HTMLElement | null;
+  /** The ticket's stub: the accuracy over the counts. */
+  readonly stub: HTMLElement | null;
+  readonly accuracy: HTMLElement | null;
   readonly actions: HTMLElement | null;
   readonly voice: Voice | null;
   readonly chips: Chips | null;
@@ -73,6 +76,8 @@ function buildLayer(input: GameOverInput): Layer {
     kings,
     card,
     counts,
+    stub: part('stub'),
+    accuracy: card ? queryOne(card, '.cdc-end__accuracy b', HTMLElement) : null,
     actions: part('actions'),
     voice: bubble ? createVoice(bubble, input.coachId) : null,
     chips: counts ? createChips(counts) : null,
@@ -120,9 +125,14 @@ const shownAs = (summary: PlayerSummary): string =>
     summary.counts,
   ]);
 
+function showAccuracy(element: HTMLElement | null, summary: PlayerSummary): void {
+  if (element)
+    element.textContent = summary.accuracy === null ? '–' : formatAccuracy(summary.accuracy);
+}
+
 /** What the card shows and the coach says, once the card has come in. */
 function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): GameOverView {
-  const { card, counts, voice, chips } = layer;
+  const { card, stub, accuracy: accuracyNumber, voice, chips } = layer;
   const { outcome, texts } = input;
   const later = (show: () => void): void => {
     void settled.finally(() => {
@@ -152,8 +162,10 @@ function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): G
     verdict: summary =>
       afterSpin(() => {
         shown = summary;
-        if (summary) chips?.reveal(summary, texts);
-        else counts?.remove();
+        if (summary) {
+          chips?.reveal(summary, texts);
+          showAccuracy(accuracyNumber, summary);
+        } else stub?.remove();
         // The counts come in first, then the coach speaks.
         voice?.typeOut(words(summary), mood, summary ? CHIP_STAGGER_MS * 3 : 0);
       }),
@@ -162,12 +174,13 @@ function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): G
         if (!shown || shownAs(shown) === shownAs(summary)) return;
         shown = summary;
         chips?.update(summary, texts);
+        showAccuracy(accuracyNumber, summary);
         voice?.say(words(summary), mood);
       }),
     failed: () =>
       afterSpin(() => {
         chips?.stop();
-        counts?.remove();
+        stub?.remove();
         voice?.say(texts.failed, 'neutral');
       }),
   };

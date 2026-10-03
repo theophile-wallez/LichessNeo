@@ -13,11 +13,13 @@ import { replaceDir } from './replace-dir.ts';
 
 export const TARGETS: readonly Target[] = ['chrome', 'chrome-store', 'firefox'];
 
+// Each script is one file. The mascots' is a module, which the content script imports.
 const SCRIPTS = [
-  { input: 'src/background/index.ts', output: OUTPUT.background },
-  { input: 'src/content/index.ts', output: OUTPUT.content },
-  { input: 'src/page/index.ts', output: OUTPUT.page },
-];
+  { input: 'src/background/index.ts', output: OUTPUT.background, format: 'iife' },
+  { input: 'src/content/index.ts', output: OUTPUT.content, format: 'iife' },
+  { input: 'src/page/index.ts', output: OUTPUT.page, format: 'iife' },
+  { input: 'src/content/coach/mascot/index.ts', output: OUTPUT.mascot, format: 'es' },
+] as const;
 
 // The coach imports lottie's typed light player; bundle its production build.
 const ALIASES = {
@@ -45,7 +47,7 @@ async function settleAll<T>(tasks: readonly Promise<T>[]): Promise<T[]> {
 async function bundleScripts({ out, release }: BuildOptions): Promise<string[]> {
   // A failed build removes its staging folder: no bundle may still be writing into it.
   const bundles = await settleAll(
-    SCRIPTS.map(({ input, output }) =>
+    SCRIPTS.map(({ input, output, format }) =>
       build({
         input: fromRoot(input),
         platform: 'browser',
@@ -55,7 +57,7 @@ async function bundleScripts({ out, release }: BuildOptions): Promise<string[]> 
         transform: { define: { CDC_DEV_BUILD: String(!release) } },
         output: {
           file: path.join(out, output),
-          format: 'iife',
+          format,
           sourcemap: !release,
           minify: release,
         },

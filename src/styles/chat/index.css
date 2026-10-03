@@ -1,0 +1,7 @@
+/* Every chat (games, analysis, tournaments, studies): a segmented tab bar, messages as
+ * bubbles, the game's events as pills, a rounded input with quick replies. Each page's
+ * stylesheet places the chat; page/chat marks its lines. */
+@import './tabs.css';
+@import './bubbles.css';
+@import './events.css';
+@import './compose.css';

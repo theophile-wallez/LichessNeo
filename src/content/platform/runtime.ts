@@ -9,3 +9,6 @@ export const isConnected = (): boolean => chrome.runtime?.id !== undefined;
 /** Sends the background worker a message, and its answer, unchecked. */
 export const askWorker = (message: unknown): Promise<unknown> =>
   chrome.runtime.sendMessage<unknown, unknown>(message);
+
+/** One of the extension's messages (public/_locales), in the browser's language. */
+export const message = (name: string): string => chrome.i18n.getMessage(name);

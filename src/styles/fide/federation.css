@@ -77,7 +77,7 @@
 
 .fide-federation__card:nth-child(2) {
   --cdc-fc: var(--cdc-accent);
-  --cdc-fc-2: var(--cdc-purple-dark);
+  --cdc-fc-2: var(--cdc-accent-dim);
 }
 
 .fide-federation__card:nth-child(3) {

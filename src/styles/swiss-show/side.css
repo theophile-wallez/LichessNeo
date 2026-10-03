@@ -201,51 +201,8 @@ main.swiss .swiss__side .mchat {
   box-shadow: none !important;
 }
 
-main.swiss .mchat__tabs {
-  border-bottom: 1px solid var(--cdc-card-border);
-  background: transparent !important;
-}
-
-main.swiss .mchat__tab {
-  padding: 10px 14px !important;
-  background: transparent !important;
-  color: #fff !important;
-  font-family: var(--cdc-font) !important;
-  font-size: 14px;
-  font-weight: 700 !important;
-}
-
 main.swiss .mchat__content {
   background: transparent !important;
-}
-
-main.swiss .mchat__messages {
-  padding: 6px 0;
-  font-size: 13px !important;
-}
-
-main.swiss .mchat__messages li {
-  padding: 3px 14px !important;
-  color: var(--cdc-text);
-}
-
-main.swiss .mchat__messages .user-link {
-  color: #fff !important;
-  font-weight: 700;
-  letter-spacing: 0 !important;
-}
-
-main.swiss .mchat__say {
-  box-sizing: border-box;
-  width: calc(100% - 16px);
-  margin: 6px 8px 8px;
-  padding: 9px 12px !important;
-  border: none !important;
-  border-radius: 6px !important;
-  outline: none !important;
-  background: var(--cdc-bg-raised) !important;
-  color: #fff !important;
-  font-size: 14px;
 }
 
 main.swiss .chat__members {

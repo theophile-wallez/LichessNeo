@@ -98,7 +98,7 @@ main.page-menu:has(.puzzle-openings) .box__top .mselect__list {
 
 .puzzle-themes .puzzle-recommended {
   --cdc-theme: var(--cdc-accent);
-  --cdc-theme-2: var(--cdc-purple-dark);
+  --cdc-theme-2: var(--cdc-accent-dim);
 }
 .puzzle-themes .puzzle-phases {
   --cdc-theme: #45a3f5;
@@ -134,13 +134,13 @@ main.page-menu:has(.puzzle-openings) .box__top .mselect__list {
 }
 .puzzle-themes .puzzle-origin {
   --cdc-theme: var(--cdc-accent);
-  --cdc-theme-2: var(--cdc-purple-dark);
+  --cdc-theme-2: var(--cdc-accent-dim);
 }
 
 /* Each heading's dot takes its list's color. */
 .puzzle-themes > h2:has(+ .puzzle-recommended) {
   --cdc-theme: var(--cdc-accent);
-  --cdc-theme-2: var(--cdc-purple-dark);
+  --cdc-theme-2: var(--cdc-accent-dim);
 }
 .puzzle-themes > h2:has(+ .puzzle-phases) {
   --cdc-theme: #45a3f5;
@@ -176,7 +176,7 @@ main.page-menu:has(.puzzle-openings) .box__top .mselect__list {
 }
 .puzzle-themes > h2:has(+ .puzzle-origin) {
   --cdc-theme: var(--cdc-accent);
-  --cdc-theme-2: var(--cdc-purple-dark);
+  --cdc-theme-2: var(--cdc-accent-dim);
 }
 .puzzle-themes > h2:has(+ .puzzle-openings__list) {
   --cdc-theme: var(--cdc-orange-dark);

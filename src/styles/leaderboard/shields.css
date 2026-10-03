@@ -17,7 +17,7 @@
 }
 .tournament-shields .tournament-shields__item[data-cdc-href$='/rapid'] {
   --cdc-lb: var(--cdc-accent);
-  --cdc-lb-2: var(--cdc-purple-dark);
+  --cdc-lb-2: var(--cdc-accent-dim);
 }
 .tournament-shields .tournament-shields__item[data-cdc-href$='/classical'] {
   --cdc-lb: #45a3f5;

@@ -59,7 +59,7 @@
   /* The hint button, then the hint as an accent band under the bubble. */
   main.analyse .gamebook .comment button.hint {
     padding: 0 16px 12px !important;
-    color: var(--cdc-purple-dark) !important;
+    color: var(--cdc-accent-dim) !important;
     font-size: 13px !important;
     font-weight: 800 !important;
     letter-spacing: 0.03em;
@@ -67,7 +67,7 @@
   }
 
   main.analyse .gamebook .comment button.hint:hover {
-    color: var(--cdc-purple-darker) !important;
+    color: var(--cdc-accent-shadow) !important;
   }
 
   main.analyse .gamebook .comment div.hint {

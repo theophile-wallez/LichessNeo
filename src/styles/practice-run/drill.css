@@ -18,7 +18,7 @@
     background: var(--cdc-bg-panel);
   }
 
-  /* The coach's face (public/img/coaches/coach-<n>.webp, the number set by
+  /* The coach's still (public/img/coaches/mascot-<n>.webp, the number set by
    * content/bootstrap/coach-choice.ts). Face and bubble share the card's bottom row, so the
    * mouth is at a fixed height. */
   html[data-cdc-has~='practice'][data-cdc-has~='practice-box']
@@ -36,16 +36,25 @@
   }
 
   html[data-cdc-coach='1'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-1.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
   }
   html[data-cdc-coach='2'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-2.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
   }
   html[data-cdc-coach='3'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-3.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
   }
   html[data-cdc-coach='4'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/coach-4.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
+  }
+  html[data-cdc-coach='5'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
+  }
+  html[data-cdc-coach='6'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
+  }
+  html[data-cdc-coach='7'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
   }
 
   main.analyse .analyse__underboard .feedback {
@@ -157,7 +166,7 @@
 
   main.analyse .analyse__underboard .feedback:is(.win, .fail) span {
     margin: 0 0 2px !important;
-    color: var(--cdc-purple-dark);
+    color: var(--cdc-accent-dim);
     font-size: 17px;
     font-weight: 800;
   }

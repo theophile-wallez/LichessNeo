@@ -7,7 +7,7 @@ main.simul-list .simul-list__help {
   position: sticky;
   top: 16px;
   align-self: start;
-  max-height: calc(100dvh - 32px);
+  max-height: calc(var(--cdc-main-h, 100dvh) - 32px);
   margin-top: 16px !important;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -92,7 +92,7 @@ main.simul-list .simul-list__help > em ~ p::before {
 
 main.simul-list .simul-list__help > em ~ p:nth-of-type(3) {
   --cdc-rule: var(--cdc-accent);
-  --cdc-rule-2: var(--cdc-purple-dark);
+  --cdc-rule-2: var(--cdc-accent-dim);
 }
 main.simul-list .simul-list__help > em ~ p:nth-of-type(4) {
   --cdc-rule: #f5a93b;

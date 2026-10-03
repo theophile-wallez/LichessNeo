@@ -73,8 +73,21 @@
 
   html.cdc-review-moves main.analyse .tview2-column > move.active san {
     background: #ffffff26;
-    box-shadow: inset 0 -2px 0 #ffffff33;
     color: #fff;
+  }
+
+  /* A piece's figurine (Lichess's chess font) sat flush against its square: a hair of room,
+     on the moves that lead with a piece (data-cdc-piece, view/move-list.ts), not a pawn's file. */
+  html:is(.cdc-review-moves, .cdc-review-live) main.analyse .tview2 move[data-cdc-piece] san {
+    display: inline-block;
+  }
+
+  html:is(.cdc-review-moves, .cdc-review-live)
+    main.analyse
+    .tview2
+    move[data-cdc-piece]
+    san::first-letter {
+    margin-right: 2px;
   }
 
   /* No Lichess glyphs or per-move engine evals: the badges replace them. */
@@ -179,8 +192,26 @@
     font-weight: 700;
   }
 
-  /* Narrow white column, black gets the rest. */
-  html.cdc-review-moves main.analyse .tview2-column > move + move {
-    flex: 0 0 calc(74% - 40px) !important;
+  /* Two even columns, each with room for its moves' cost bars. */
+  html.cdc-review-moves main.analyse .tview2-column > move {
+    flex-basis: calc(50% - 20px) !important;
+  }
+
+  /* What a move gave away (data-cdc-cost, --cdc-cost from 0 to 1, view/move-list.ts), as a
+     bar in its class's color at the end of its cell. */
+  html.cdc-review-moves main.analyse .tview2-column > move[data-cdc-cost]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 40px;
+    height: 4px;
+    margin-top: -2px;
+    border-radius: 2px;
+    background: linear-gradient(
+      to right,
+      var(--cdc-class-color, var(--cdc-text-dim)) calc(var(--cdc-cost) * 100%),
+      #ffffff14 0
+    );
   }
 }

@@ -26,7 +26,12 @@ function toggleExplain(session: Session, analysis: Analysis): void {
   if (!view.explain && line) goTo(analysis, line.path);
 }
 
-type ReviewCommand = Exclude<PanelAction, 'coach' | 'jump' | 'learn'>;
+function jumpToMoment(analysis: Analysis, card: HTMLElement): void {
+  const ply = Number(card.dataset.cdcPly);
+  if (Number.isInteger(ply)) jump(analysis, ply);
+}
+
+type ReviewCommand = Exclude<PanelAction, 'coach' | 'jump' | 'moment' | 'learn'>;
 
 function act(session: Session, analysis: Analysis, action: ReviewCommand): void {
   const { view } = session;
@@ -64,6 +69,7 @@ function onClick(session: Session, event: MouseEvent): void {
   const focused = document.activeElement === button;
   if (action !== 'play') stopPlaying(session);
   if (action === 'jump') jumpToClass(session, analysis, button);
+  else if (action === 'moment') jumpToMoment(analysis, button);
   // Lichess's exercise, not the review's: it closes the review.
   else if (action === 'learn') learnFromMistakes(session, analysis);
   else act(session, analysis, action);

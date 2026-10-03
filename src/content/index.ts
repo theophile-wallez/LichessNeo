@@ -3,12 +3,15 @@ import { assets } from './bootstrap/assets.ts';
 import { packs } from './packs/index.ts';
 import { fonts } from './bootstrap/fonts.ts';
 import { donate } from './sidebar/donate.ts';
+import { sidebarCollapse } from './sidebar/collapse.ts';
+import { currentSection } from './sidebar/current.ts';
 import { coachChoice } from './bootstrap/coach-choice.ts';
 import { fideOffset } from './pages/fide.ts';
 import { marks } from './layout/marks.ts';
 import { hasFlags } from './layout/has-flags.ts';
 import { aiPlayers } from './game/ai-players.ts';
 import { boardZoom } from './layout/board-zoom.ts';
+import { mainScroll } from './layout/main-scroll.ts';
 import { controlsHeight } from './layout/controls-height.ts';
 import { movesExtrasHeight } from './layout/moves-extras-height.ts';
 import { analysisPlayers } from './analysis/players.ts';
@@ -50,12 +53,15 @@ function main(): void {
   startFeatures([
     fonts,
     donate,
+    sidebarCollapse,
+    currentSection,
     coachChoice,
     fideOffset,
     marks,
     hasFlags,
     aiPlayers,
     boardZoom,
+    mainScroll,
     controlsHeight,
     movesExtrasHeight,
     analysisPlayers,

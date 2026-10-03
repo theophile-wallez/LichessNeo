@@ -1,0 +1,67 @@
+/* ---- Input and quick replies --- */
+
+.mchat .mchat__say {
+  flex: none;
+  box-sizing: border-box;
+  width: calc(100% - 16px);
+  height: 36px;
+  margin: 6px 8px 8px;
+  padding: 0 14px !important;
+  border: none !important;
+  border-radius: 18px !important;
+  outline: none !important;
+  background: var(--cdc-bg-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  color: var(--cdc-text-strong) !important;
+  font-size: 13px;
+  transition: box-shadow 0.15s !important;
+}
+
+.mchat .mchat__say:focus {
+  box-shadow: inset 0 0 0 1.5px var(--cdc-accent);
+}
+
+.mchat .mchat__say::placeholder {
+  color: var(--cdc-text-dim);
+}
+
+/* Lichess's quick replies, as chips with their whole words (its labels are "GG", "WP"…);
+ * one already said goes away, rather than staying as an empty box. */
+.mchat .mchat__presets {
+  flex-wrap: wrap !important;
+  gap: 6px;
+  padding: 6px 8px 0;
+}
+
+.mchat .mchat__presets span {
+  flex: none !important;
+  height: 26px;
+  padding: 0 11px;
+  border: none !important;
+  border-radius: 13px;
+  background: var(--cdc-bg-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  color: var(--cdc-text) !important;
+  font-size: 0 !important;
+  line-height: 26px;
+  opacity: 1 !important;
+  text-transform: none !important;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+.mchat .mchat__presets span::after {
+  content: attr(title);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mchat .mchat__presets span:not(.disabled):hover {
+  background: var(--cdc-accent) !important;
+  color: #fff !important;
+}
+
+.mchat .mchat__presets span.disabled {
+  display: none !important;
+}

@@ -60,7 +60,7 @@
     position: sticky;
     top: 16px;
     align-self: start;
-    max-height: calc(100dvh - 32px);
+    max-height: calc(var(--cdc-main-h, 100dvh) - 32px);
     overflow-y: auto;
     scrollbar-width: thin;
   }
@@ -161,7 +161,7 @@
 }
 
 .tsht-user-created {
-  --cdc-tsht: var(--cdc-purple-dark);
+  --cdc-tsht: var(--cdc-accent-dim);
 }
 
 /* The calendar draws the same tiles as bars. Its dates hang into the page's left margin,

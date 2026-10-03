@@ -82,7 +82,7 @@
 /* Five colors and six pieces: a color and piece pair repeats only every 30 cards. */
 .bots__list__entry {
   --cdc-bot: var(--cdc-accent);
-  --cdc-bot-2: var(--cdc-purple-dark);
+  --cdc-bot-2: var(--cdc-accent-dim);
   --cdc-bot-piece: var(---white-knight);
 }
 

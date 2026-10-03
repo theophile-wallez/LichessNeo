@@ -44,6 +44,8 @@ export const factsEn: FactSentences = {
   wouldForceMate: (best, moves) => `${best} would have forced mate in ${moves}.`,
   missedPunishment: (color, best) =>
     `${possessive(color)} last move was a mistake, and ${best} would have punished it.`,
+  unfinishedPunishment: (color, best) =>
+    `${possessive(color)} earlier mistake was still there to punish: ${best} would have finished the job.`,
   leftUndefended: ({ piece, square, reply }) =>
     `The ${name(piece)} on ${square} is left undefended: ${reply} wins it.`,
   answersAndWins: (color, { piece, square, reply }) =>

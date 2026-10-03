@@ -12,7 +12,7 @@
     position: sticky;
     top: 16px;
     align-self: start;
-    max-height: calc(100dvh - 32px);
+    max-height: calc(var(--cdc-main-h, 100dvh) - 32px);
     overflow-y: auto;
     scrollbar-width: thin;
   }

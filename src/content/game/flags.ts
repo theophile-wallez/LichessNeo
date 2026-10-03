@@ -9,8 +9,12 @@ import { flagEmoji } from './flag-emoji.ts';
 // batch of names. Snabbdom draws the bars, so the flag is an attribute that CSS
 // shows, set again whenever a bar is redrawn.
 
-const BARS =
-  'main.round .ruser, main.analyse > .cdc-player, main.round .game__meta__players a.user-link';
+// The names' links, so that the flag can come between the name and its flair.
+const BARS = [
+  'main.round .ruser > a.user-link',
+  'main.analyse > .cdc-player > a.user-link',
+  'main.round .game__meta__players a.user-link',
+].join(', ');
 
 const UsersSchema = z.array(
   z.object({

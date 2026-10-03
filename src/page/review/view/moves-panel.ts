@@ -10,13 +10,15 @@ import type { PanelAction } from './actions.ts';
 import { avatarMarkup, takeReaction } from './coach-avatar.ts';
 import { explainHint } from './explain-hint.ts';
 import { movesGraph } from './graph.ts';
+import { momentsMarkup, momentsScroll, showMoment } from './moments.ts';
 import { bubbleTitle, evalChip, header, type IconName, svgIcon } from './markup.ts';
 import { bestShown, lineShown, spokenMove, stepPath } from './navigation.ts';
 import { type CoachComment, commentOn, followComment, verdictMarkup } from './verdict.ts';
 
-// The move-by-move review: the coach on the move on the board, the Explain /
-// Best / Next buttons, the player's controls and the graph. While Explain's
-// best line is on the board, the coach still speaks of the move it stands for.
+// The move-by-move review: the graph and the game's key moments on top, then
+// the coach on the move on the board, the Explain / Best / Next buttons and
+// the player's controls. While Explain's best line is on the board, the coach
+// still speaks of the move it stands for.
 
 interface BubbleInput {
   /** The move on the board, judged, and the coach's comment on it. */
@@ -133,13 +135,19 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const comment = movesComment(session, analysis, { move, shown });
   if (comment) followComment(session, comment);
   const spoken = { line, move, shown, comment };
+  const moments = view.review ? momentsMarkup(view.review, analysis.node.ply, language) : '';
+  const scrolled = momentsScroll(elements.panel);
   setHtml(
     elements.panel,
     html`${header(language.ui.review, 'summary', language)}
+      <div class="cdc-review__graph-slot"></div>${moments}
       ${coachMarkup(session, analysis, spoken)}
       ${navMarkup(session, analysis, spoken)}`,
   );
+  // The graph is kept across renders (its listeners, its first draw): put it back in its slot.
+  queryOne(elements.panel, '.cdc-review__graph-slot', HTMLElement)?.replaceWith(elements.graphBox);
   setHtml(elements.controls, controlsMarkup(view.playing !== null));
   movesGraph(session, analysis, true);
+  showMoment(elements.panel, scrolled);
   requestAnimationFrame(scrollMoveList);
 }

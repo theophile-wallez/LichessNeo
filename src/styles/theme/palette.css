@@ -1,27 +1,28 @@
-/* The Dracula palette (draculatheme.com): the only place a color is written.
+/* The palette: neutral near-black greys, a blue accent and Dracula's hues
+ * (draculatheme.com) for the sections. The only place a color is written.
  * Stylesheets name these, or base.css's roles built on them. Each hue's
  * shades are mixed from it, so changing a hue re-tints all of them. White and
  * black overlays (#ffffff14, #00000040) shade whatever is under them, and stay
  * as they are. */
 
 :root {
-  /* Greys, from the darkest. 800 is Dracula's background, 600 its current line,
-   * 400 its comment, 50 its foreground. */
-  --cdc-grey-950: #191a21;
-  --cdc-grey-900: #1e1f29;
-  --cdc-grey-850: #21222c;
-  --cdc-grey-800: #282a36;
-  --cdc-grey-750: #2d2f3d;
-  --cdc-grey-700: #343746;
-  --cdc-grey-650: #3c3f51;
-  --cdc-grey-600: #44475a;
-  --cdc-grey-500: #565a72;
-  --cdc-grey-400: #6272a4;
-  --cdc-grey-300: #8b93b6;
-  --cdc-grey-200: #b6bbd4;
-  --cdc-grey-100: #dcdee9;
-  --cdc-grey-50: #f8f8f2;
+  /* Neutral greys, from the darkest, near black as on Linear. */
+  --cdc-grey-950: #09090a;
+  --cdc-grey-900: #0c0c0d;
+  --cdc-grey-850: #101011;
+  --cdc-grey-800: #141415;
+  --cdc-grey-750: #19191b;
+  --cdc-grey-700: #1f1f21;
+  --cdc-grey-650: #262628;
+  --cdc-grey-600: #2e2e31;
+  --cdc-grey-500: #424246;
+  --cdc-grey-400: #5f6068;
+  --cdc-grey-300: #8a8f98;
+  --cdc-grey-200: #b4b6bc;
+  --cdc-grey-100: #d6d7da;
+  --cdc-grey-50: #f7f8f8;
 
+  --cdc-blue: #5e6ad2;
   --cdc-red: #ff5555;
   --cdc-orange: #ffb86c;
   --cdc-yellow: #f1fa8c;
@@ -30,6 +31,9 @@
   --cdc-purple: #bd93f9;
   --cdc-pink: #ff79c6;
 
+  --cdc-blue-light: color-mix(in srgb, var(--cdc-blue) 80%, #fff);
+  --cdc-blue-dark: color-mix(in srgb, var(--cdc-blue) 80%, #000);
+  --cdc-blue-darker: color-mix(in srgb, var(--cdc-blue) 60%, #000);
   --cdc-red-light: color-mix(in srgb, var(--cdc-red) 60%, #fff);
   --cdc-red-dark: color-mix(in srgb, var(--cdc-red) 80%, #000);
   --cdc-red-darker: color-mix(in srgb, var(--cdc-red) 60%, #000);

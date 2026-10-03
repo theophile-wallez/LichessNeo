@@ -1,8 +1,9 @@
 import { z } from 'zod/mini';
 import { readStored, StorageKey, writeStored } from './storage.ts';
 
-/** The Game Review's coaches: one portrait each, in public/img/coaches. */
-export const COACH_COUNT = 4;
+/** The Game Review's coaches: the 3D mascots of content/coach/mascot, a still of each in
+ * public/img/coaches. An id kept from the four human coaches is one of the first four. */
+export const COACH_COUNT = 7;
 
 export const CoachIdSchema = z.coerce.number().check(z.int(), z.minimum(1), z.maximum(COACH_COUNT));
 

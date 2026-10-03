@@ -39,7 +39,31 @@
   .cdc-summary-graph svg,
   #cdc-review-graph svg {
     display: block;
-    border-radius: 3px;
+    border-radius: 6px;
+  }
+
+  /* The graph's markup names Lichess-era colors (view/graph-markup.ts, kept as the legacy
+     fixtures recorded it): the palette's, through CSS, which beats SVG attributes. */
+  :is(.cdc-summary-graph, #cdc-review-graph) svg > rect {
+    fill: var(--cdc-grey-700);
+  }
+  :is(.cdc-summary-graph, #cdc-review-graph) svg > path {
+    fill: var(--cdc-grey-100);
+  }
+  :is(.cdc-summary-graph, #cdc-review-graph) svg > line[stroke='#8b8987'] {
+    stroke: var(--cdc-grey-400);
+    stroke-dasharray: 3 4;
+  }
+  :is(.cdc-summary-graph, #cdc-review-graph) svg > line[stroke='#81b64c'] {
+    stroke: var(--cdc-accent);
+  }
+  /* In the move-by-move panel, under its header: the story of the game, large. */
+  #cdc-review #cdc-review-graph {
+    flex: none;
+    height: var(--cdc-review-graph);
+    margin: 0 12px 8px;
+    padding: 0;
+    background: transparent;
   }
 
   /* The graph draws itself from left to right the first time it shows. */
@@ -261,5 +285,50 @@
   .cdc-cls-icon svg {
     width: 100%;
     height: 100%;
+  }
+}
+
+/* ---- The graph's board --- */
+
+/* The position under the pointer (view/graph-preview.ts), on <body> so no panel clips it: our
+   board's squares, or a pack's image, and the set's pieces. */
+@media (min-width: 1020px) {
+  #cdc-graph-board {
+    position: fixed;
+    z-index: 1000;
+    width: 176px;
+    height: 176px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow:
+      0 0 0 1px #ffffff1f,
+      0 14px 34px #000000b3;
+    pointer-events: none;
+  }
+
+  #cdc-graph-board .cdc-mini {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* Light top left either way the board is turned. */
+    background: repeating-conic-gradient(var(--cdc-board-dark) 0 25%, var(--cdc-board-light) 0 50%)
+      0 0 / 25% 25%;
+  }
+
+  html[data-cdc-board='pack'] #cdc-graph-board .cdc-mini {
+    background: var(--cdc-board-img) center / cover;
+  }
+
+  #cdc-graph-board :is(.cdc-mini__lit, .cdc-pc) {
+    position: absolute;
+    left: calc(var(--x) * 12.5%);
+    top: calc(var(--y) * 12.5%);
+    width: 12.5%;
+    height: 12.5%;
+    margin: 0;
+  }
+
+  #cdc-graph-board .cdc-mini__lit {
+    background: var(--cdc-highlight);
   }
 }

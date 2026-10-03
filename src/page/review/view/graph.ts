@@ -1,3 +1,4 @@
+import type { Color } from '#shared/chess/types.ts';
 import { setData, setStyleProperty } from '#shared/dom.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { clamp } from '#shared/math.ts';
@@ -5,10 +6,11 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { formatEval } from '#page/review/evaluation/format.ts';
 import type { GraphKind, Review, Session } from '#page/review/session.ts';
 import { graphMarkup, lastIndex } from './graph-markup.ts';
+import { hidePreview, positionAt, showPreview } from './graph-preview.ts';
 import { jump, stopPlaying } from './navigation.ts';
 
 // The graph in the summary and over the move-by-move review: hovering shows
-// a position's score, clicking goes to it.
+// a position's score and a little board of it, clicking goes to it.
 
 interface Box {
   readonly padX: number;
@@ -38,6 +40,7 @@ interface Drawn {
   readonly tip: HTMLElement;
   readonly review: Review;
   readonly box: Box;
+  readonly orientation: Color;
   readonly pick: (index: number) => void;
 }
 
@@ -53,6 +56,13 @@ function hover(container: HTMLElement, event: MouseEvent): void {
   const { tip, review, box } = graph;
   const index = pointedIndex(container, graph, event);
   const position = review.positions[index];
+  const shown = positionAt(review, index);
+  if (shown)
+    showPreview(shown, graph.orientation, {
+      x: event.clientX,
+      graph: container.getBoundingClientRect(),
+    });
+  else hidePreview();
   if (!position) {
     setStyleProperty(tip, 'display', 'none');
     return;
@@ -70,8 +80,10 @@ function listen(container: HTMLElement): void {
   container.addEventListener('mouseleave', () => {
     const graph = drawn.get(container);
     if (graph) setStyleProperty(graph.tip, 'display', 'none');
+    hidePreview();
   });
   container.addEventListener('click', event => {
+    hidePreview();
     const graph = drawn.get(container);
     if (graph) graph.pick(pointedIndex(container, graph, event));
   });
@@ -108,7 +120,7 @@ export function mountGraph(
     if (view.mode === 'summary') session.setMode('moves');
   };
   if (!drawn.has(container)) listen(container);
-  drawn.set(container, { tip, review, box, pick });
+  drawn.set(container, { tip, review, box, orientation: analysis.orientation(), pick });
 }
 
 /** The move-by-move graph, drawn again only as the analysis fills it in (or when forced). */
