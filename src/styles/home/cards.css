@@ -98,6 +98,16 @@
     display: none !important;
   }
 
+  main.lobby .lobby__tv .mini-game__player {
+    padding: 0 2px !important;
+  }
+  main.lobby .lobby__tv .mini-game__player:first-child {
+    margin-bottom: 8px;
+  }
+  main.lobby .lobby__tv .mini-game__player:last-child {
+    margin-top: 8px;
+  }
+
   /* ---- Blog --- */
 
   /* Lichess sizes the cards from the carousel's clientWidth, which counts padding: a
