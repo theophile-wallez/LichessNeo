@@ -51,14 +51,14 @@ describe('listPackageFiles', () => {
       'content.js',
       'content.js.map',
       'img/icons/trophy.svg',
-      'img/coaches/coach-1.webp',
+      'img/coaches/mascot-1.webp',
       'img/.DS_Store',
       '_locales/en/messages.json',
     ]);
     expect(await listPackageFiles(dir)).toEqual([
       '_locales/en/messages.json',
       'content.js',
-      'img/coaches/coach-1.webp',
+      'img/coaches/mascot-1.webp',
       'img/icons/trophy.svg',
       'manifest.json',
     ]);

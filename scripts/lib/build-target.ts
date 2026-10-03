@@ -21,13 +21,6 @@ const SCRIPTS = [
   { input: 'src/content/coach/mascot/index.ts', output: OUTPUT.mascot, format: 'es' },
 ] as const;
 
-// The coach imports lottie's typed light player; bundle its production build.
-const ALIASES = {
-  'lottie-web/build/player/lottie_light': fromRoot(
-    'node_modules/lottie-web/build/player/lottie_light.min.js',
-  ),
-};
-
 export interface BuildOptions {
   readonly target: Target;
   readonly out: string;
@@ -52,7 +45,6 @@ async function bundleScripts({ out, release }: BuildOptions): Promise<string[]> 
         input: fromRoot(input),
         platform: 'browser',
         logLevel: 'warn',
-        resolve: { alias: ALIASES },
         // Read by #shared/build-mode.ts: only a dev build reloads itself.
         transform: { define: { CDC_DEV_BUILD: String(!release) } },
         output: {

@@ -8,9 +8,7 @@ describe('packageOf', () => {
     expect(packageOf('/repo/node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/util.js')).toBe(
       'zod',
     );
-    expect(packageOf('/repo/node_modules/lottie-web/build/player/lottie_light.min.js')).toBe(
-      'lottie-web',
-    );
+    expect(packageOf('/repo/node_modules/three/build/three.module.js')).toBe('three');
     expect(packageOf('/repo/node_modules/.pnpm/@scope+pkg@1/node_modules/@scope/pkg/x.js')).toBe(
       '@scope/pkg',
     );
@@ -29,7 +27,7 @@ describe('assertLicensed', () => {
       assertLicensed([
         '/repo/src/page/index.ts',
         '/repo/node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/mini/schemas.js',
-        '/repo/node_modules/lottie-web/build/player/lottie_light.min.js',
+        '/repo/node_modules/three/build/three.module.js',
       ]),
     ).not.toThrow();
   });
