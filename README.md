@@ -106,7 +106,7 @@ unit tests (`pnpm check:fast` only those of the files changed since
 
 ### Building from the sources
 
-Each version sent to Firefox Add-ons comes with the sources it's built from,
+`pnpm package` also zips the sources each version is built from,
 `LichessReimagined-v<version>-source.zip`. To rebuild the add-on from them, with
 Node.js 24 and pnpm, in the unzipped folder:
 
@@ -116,7 +116,7 @@ pnpm build --target firefox --release --version <version>
 ```
 
 `dist/firefox` is then the add-on, file for file. From a full clone (not
-`--depth`) at the tag `store-<version>`, `pnpm package` writes every package
+`--depth`) at the release's tag `v<version>`, `pnpm package` writes every package
 into `dist/`: the version counts the commits.
 
 ## Disclaimer

@@ -170,12 +170,12 @@ hold:
 | `src/background/` | the service worker: auto-reload, old cache cleanup, pack downloads                                                                                                                                                                                                                                                                                                |
 | `src/styles/`     | one stylesheet per page or part, a folder of partials past 400 lines, joined in `index.css`'s order                                                                                                                                                                                                                                                               |
 | `public/`         | copied into each build: `_locales/`, `icons/`, `img/` (`icons`, `sidebar`, `coaches`), `licenses/` (the bundled files' licenses)                                                                                                                                                                                                                                  |
-| `scripts/`        | build, package, typecheck, source rules, version, store publishing and rendering                                                                                                                                                                                                                                                                                  |
+| `scripts/`        | build, package, typecheck, source rules, version, store image rendering                                                                                                                                                                                                                                                                                           |
 | `tests/e2e/`      | Playwright tests on lichess.org                                                                                                                                                                                                                                                                                                                                   |
 | `tools/`          | Python generators, run by hand: `assets/fetch.py`, `coach-rig/extract.py`, `example-pack/sounds.py`, `game-rating/`                                                                                                                                                                                                                                               |
 | `packs/`          | the example pack users can import (`docs/packs.md` describes the format)                                                                                                                                                                                                                                                                                          |
 | `store/`          | the store images and their HTML templates                                                                                                                                                                                                                                                                                                                         |
-| `.github/`        | CI (`ci.yml`), releases and store submissions (`release.yml`), Dependabot                                                                                                                                                                                                                                                                                         |
+| `.github/`        | CI (`ci.yml`), releases (`release.yml`), Dependabot                                                                                                                                                                                                                                                                                                               |
 
 **Recipes**
 
@@ -192,8 +192,8 @@ hold:
 - _A storage key:_ in `StorageKey` or `SessionKey` (`src/shared/storage.ts`).
 - _A tab bar that slides:_ an entry in `TAB_BARS`
   (`src/content/ui/tab-bars.ts`), then its look in CSS (see "Tabs slide").
-- _An image or a sound:_ never a remote URL, and never Chess.com's (see
-  the product rules). Icons are named in the CSS (`img/icons/<name>.svg`)
+- _An image or a sound:_ never a remote URL, and never another chess
+  site's (see the product rules). Icons are named in the CSS (`img/icons/<name>.svg`)
   and in `EMOJI`, then `tools/assets/fetch.py`; the sidebar's are our own
   drawings, 96px WebP in `img/sidebar`. The build fails on a CSS extension
   URL whose file is missing or not in `web_accessible_resources`. Boards, piece sets and
@@ -204,17 +204,17 @@ hold:
 
 ## Product rules
 
-The goal is a **modern Lichess, as easy to use as Chess.com**: a user of that
-site finds their way at once. When in doubt, compare with how Chess.com works
-and match that, never what it made (below). Lichess keeps its features and
-its name: free analysis, open data, no ads.
+The goal is a **modern Lichess, as easy to use as the big commercial chess
+apps**: someone coming from one finds their way at once. When in doubt,
+match how those apps work, never what they made (below). Lichess keeps its
+features and its name: free analysis, open data, no ads.
 
-- **Nothing of Chess.com's:** match how it works and feels, never copy what
-  it made. No image, icon, piece set, board, sound, logo, illustration or
-  text of Chess.com's goes in the extension, not even redrawn or traced:
-  Chess.com had it taken off the Chrome Web Store for that. Draw our own, use
-  Lichess's, or files under a free license, with that license in
-  `public/licenses/`.
+- **Nothing of another site's:** match how the commercial apps work and
+  feel, never copy what they made. No image, icon, piece set, board, sound,
+  logo, illustration or text of another chess site goes in the extension,
+  not even redrawn or traced: an earlier version was taken off the Chrome
+  Web Store for that. Draw our own, use Lichess's, or files under a free
+  license, with that license in `public/licenses/`.
 - **The look:** dark palette, Lichess's board and pieces (or a pack's), bold
   gradient buttons, a fixed left sidebar, roomy player bars with avatars and
   clocks.
@@ -579,19 +579,5 @@ git rebase origin/main`, never a merge: `main` stays a straight line) and
    only for a big change: that commit is `.0`, the next ones `.1`, `.2`…
 5. Finish with a short summary of what was done.
 
-Pushing to `main` doesn't reach the stores. Send a version there only when
-the user asks (each store reviews it, and the Chrome Web Store refuses a new
-version while one is in review): tag the commit of `main` with the version
-it gets.
-
-```bash
-git fetch origin
-v=$(node scripts/version.ts --ref origin/main)
-git tag "store-$v" origin/main && git push origin "store-$v"
-```
-
-The release workflow checks the tag, then sends the store zip to the Chrome
-Web Store (`scripts/store/publish-chrome.ts`, secrets `CWS_SERVICE_ACCOUNT`
-and `CWS_PUBLISHER_ID`) and the Firefox zip with its sources to Firefox
-Add-ons (`web-ext sign`, secrets `AMO_JWT_ISSUER` and `AMO_JWT_SECRET`).
-Each goes live once approved; the listings are edited by hand.
+The extension isn't on any store: each push to `main` makes a GitHub release
+with its zips, and that's how it's installed.

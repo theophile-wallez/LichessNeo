@@ -11,7 +11,7 @@ export type Target = 'chrome' | 'chrome-store' | 'firefox';
  */
 export const BASE_VERSION = '0.2';
 
-const GECKO_ID = 'lichessdotcom@theophile-wallez.github.io';
+const GECKO_ID = 'lichess-reimagined@theophile-wallez.github.io';
 const LICHESS = ['https://lichess.org/*'];
 
 const ContentScriptSchema = z.strictObject({
@@ -104,8 +104,7 @@ export function createManifest(target: Target, version: string): Manifest {
   return {
     ...manifest,
     browser_specific_settings: {
-      // Firefox keeps an extension's storage under its id, and AMO signs by
-      // it. 140 is the first desktop version with the data collection field,
+      // Firefox keeps an extension's storage under its id. 140 is the first desktop version with the data collection field,
       // 142 on Android.
       gecko: {
         id: GECKO_ID,
