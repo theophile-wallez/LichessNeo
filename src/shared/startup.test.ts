@@ -25,7 +25,10 @@ describe('startFeatures', () => {
       { name: 'last', start: () => started.push('last') },
     ]);
     expect(started).toEqual(['first', 'last']);
-    expect(error).toHaveBeenCalledWith('[LichessReimagined] broken failed to start', expect.any(Error));
+    expect(error).toHaveBeenCalledWith(
+      '[LichessReimagined] broken failed to start',
+      expect.any(Error),
+    );
   });
 });
 

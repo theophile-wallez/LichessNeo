@@ -47,7 +47,8 @@ export async function precomputeReview(
       draft: false,
       // A hidden tab keeps no engine: the review takes up the progress saved.
       stopped: () => document.hidden || !stillOver(),
-      onFailure: (what, error) => console.warn(`[LichessReimagined] game over review: ${what}`, error),
+      onFailure: (what, error) =>
+        console.warn(`[LichessReimagined] game over review: ${what}`, error),
     });
     return isComplete(work) ? work.deep : null;
   } finally {

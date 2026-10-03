@@ -21,5 +21,8 @@ it('says the engine failed to start, rather than analyzing forever', async () =>
   const error = document.querySelector('#cdc-review .cdc-review__error');
   expect(error?.textContent).toBe(en.ui.engineError);
   expect(document.querySelector('#cdc-review .cdc-summary-pct')).toBeNull();
-  expect(logged).toHaveBeenCalledWith('[LichessReimagined] engine boot failed', expect.any(RangeError));
+  expect(logged).toHaveBeenCalledWith(
+    '[LichessReimagined] engine boot failed',
+    expect.any(RangeError),
+  );
 });

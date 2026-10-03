@@ -5,7 +5,7 @@ import { nextOfClass } from '#page/review/judge/summary.ts';
 import type { Session } from '#page/review/session.ts';
 import { jump } from './navigation.ts';
 
-// The summary's counts, as Chess.com has them: a click goes to the player's
+// The summary's counts are buttons: a click goes to the player's
 // next move of that class after the one shown, round to the first again.
 
 export function jumpToClass(session: Session, analysis: Analysis, button: HTMLElement): void {

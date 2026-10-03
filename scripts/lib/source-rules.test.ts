@@ -90,10 +90,10 @@ describe('the remote assets rule', () => {
   const REMOTE = 'loads an asset from another site: bundle it';
 
   it.each([
-    '.a { background: url(https://images.chesscomfiles.com/x.png); }',
+    '.a { background: url(https://images.example.com/x.png); }',
     ".a { background: url('http://example.com/x.png'); }",
     '.a { background: url( "https://example.com/x.png" ); }',
-    '.a { background: url(//images.chesscomfiles.com/x.png); }',
+    '.a { background: url(//images.example.com/x.png); }',
     '.a { background: URL(HTTPS://example.com/x.png); }',
     '.a { background: image-set("https://example.com/x.png" 1x, "x2.png" 2x); }',
     ".a { background: -webkit-image-set(url(x.png) 1x, '//example.com/x2.png' 2x); }",
