@@ -1,3 +1,4 @@
+import { avatarAttributes } from '#shared/avatar.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import type { BarPlayer } from '#shared/player-bar.ts';
 
@@ -12,7 +13,7 @@ function card(player: BarPlayer, side: Side): SafeHtml {
     player.title === undefined ? '' : html`<span class="cdc-intro__title">${player.title}</span>`;
   const details = [player.rating, player.flag].filter(part => part !== undefined).join(' ');
   return html`<div class="cdc-intro__card cdc-intro__card--${side}${kind}">
-    <span class="cdc-intro__avatar"></span>
+    <span class="cdc-intro__avatar"${avatarAttributes(player.user)}></span>
     <span class="cdc-intro__who">
       <span class="cdc-intro__name">${title}<span class="cdc-intro__username">${player.name}</span></span>
       ${details === '' ? '' : html`<span class="cdc-intro__details">${details}</span>`}

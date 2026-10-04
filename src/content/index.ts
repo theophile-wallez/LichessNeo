@@ -33,6 +33,7 @@ import { swiss } from './pages/swiss.ts';
 import { forumLabels } from './pages/forum.ts';
 import { tv } from './pages/tv.ts';
 import { gameMeta } from './game/game-meta.ts';
+import { avatars } from './ui/avatars.ts';
 import { powertip } from './ui/powertip.ts';
 import { tooltip } from './ui/tooltip.ts';
 import { tabs } from './ui/tabs.ts';
@@ -85,6 +86,7 @@ function main(): void {
     forumLabels,
     tv,
     gameMeta,
+    avatars,
     powertip,
     tooltip,
     tabs,

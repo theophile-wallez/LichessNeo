@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { avatarOf } from '#shared/avatar.ts';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { introBoardImage, introMarkup } from './markup.ts';
@@ -6,6 +7,7 @@ import type { BarPlayer } from '#shared/player-bar.ts';
 
 const player = (name: string, extra: Partial<BarPlayer> = {}): BarPlayer => ({
   name,
+  user: undefined,
   title: undefined,
   rating: undefined,
   flag: undefined,
@@ -36,6 +38,20 @@ describe('introMarkup', () => {
     expect(
       root.querySelector('.cdc-intro__vs > .cdc-intro__swords + .cdc-intro__versus')?.textContent,
     ).toBe('VS');
+  });
+
+  it('gives a user their avatar, and the computer none', () => {
+    const root = render(
+      player('Stockfish level 1', { computer: true }),
+      player('alice', { user: 'alice' }),
+    );
+    const [top, bottom] = queryAll(root, '.cdc-intro__avatar', HTMLElement);
+    expect(top?.dataset.cdcAvatarCoach).toBeUndefined();
+    const { coach, color } = avatarOf('alice');
+    expect([bottom?.dataset.cdcAvatarCoach, bottom?.dataset.cdcAvatarColor]).toEqual([
+      String(coach),
+      color,
+    ]);
   });
 
   it('leaves out what a player lacks, and escapes names', () => {

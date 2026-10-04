@@ -1,3 +1,4 @@
+import { avatarAttributes } from '#shared/avatar.ts';
 import type { Color } from '#shared/chess/types.ts';
 import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml, trustedHtml } from '#shared/html.ts';
@@ -116,7 +117,7 @@ function topMarkup(input: SummaryInput): SafeHtml {
         <div class="cdc-review__graph cdc-summary-graph"></div>
         <table class="cdc-review__table">${COLUMNS}
           <tr class="cdc-t-names"><td></td><td title="${white}">${white}</td><td></td><td title="${black}">${black}</td></tr>
-          <tr><td class="cdc-t-label">${ui.players}</td><td><span class="cdc-avatar cdc-avatar--w"></span></td><td></td><td><span class="cdc-avatar cdc-avatar--b"></span></td></tr>
+          <tr><td class="cdc-t-label">${ui.players}</td><td><span class="cdc-avatar cdc-avatar--w"${avatarAttributes(players.white?.user?.username)}></span></td><td></td><td><span class="cdc-avatar cdc-avatar--b"${avatarAttributes(players.black?.user?.username)}></span></td></tr>
           <tr><td class="cdc-t-label">${ui.accuracy}</td>
             <td><span class="cdc-acc cdc-acc--w">${accuracy('white')}</span></td><td></td>
             <td><span class="cdc-acc cdc-acc--b">${accuracy('black')}</span></td></tr>

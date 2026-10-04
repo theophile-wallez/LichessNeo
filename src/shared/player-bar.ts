@@ -1,3 +1,4 @@
+import { userInHref } from './avatar.ts';
 import { queryOne } from './dom.ts';
 import { nonEmpty } from './text.ts';
 
@@ -7,6 +8,8 @@ import { nonEmpty } from './text.ts';
 
 export interface BarPlayer {
   readonly name: string;
+  /** The user's id from their profile link; none for anonymous players and the computer. */
+  readonly user: string | undefined;
   readonly title: string | undefined;
   readonly rating: string | undefined;
   readonly flag: string | undefined;
@@ -29,6 +32,7 @@ function barName(bar: HTMLElement): string {
 export function readPlayer(bar: HTMLElement, computerRating: string | undefined): BarPlayer {
   return {
     name: barName(bar),
+    user: userInHref(bar.querySelector('a.user-link')?.getAttribute('href')),
     title: nonEmpty(bar.querySelector('.utitle')?.textContent.trim()),
     rating: computerRating ?? nonEmpty(bar.querySelector('rating')?.textContent.trim()),
     flag: nonEmpty(bar.dataset.cdcFlag),

@@ -25,6 +25,7 @@ describe('readPlayer', () => {
   it('reads a user’s name apart from their title, with their rating and flag', () => {
     expect(readPlayer(bar(USER_BAR), undefined)).toEqual({
       name: 'tjychess',
+      user: 'tjychess',
       title: 'GM',
       rating: '3062?',
       flag: '🇫🇷',
@@ -35,6 +36,7 @@ describe('readPlayer', () => {
   it('gives the computer its level’s rating', () => {
     expect(readPlayer(bar(COMPUTER_BAR), '~800')).toEqual({
       name: 'Stockfish level 3',
+      user: undefined,
       title: undefined,
       rating: '~800',
       flag: undefined,

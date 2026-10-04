@@ -1,0 +1,61 @@
+/* A user's avatar (#shared/avatar.ts): a coach's still on a two-hue gradient picked
+ * from their name, with a glint at the top. Set on the element whose `::before` or
+ * background draws --cdc-avatar. */
+
+[data-cdc-avatar-coach] {
+  --cdc-avatar:
+    var(--cdc-avatar-coach) center bottom / 100% auto no-repeat,
+    radial-gradient(circle at 22% 12%, #ffffff47, transparent 58%),
+    linear-gradient(145deg, var(--cdc-avatar-from), var(--cdc-avatar-to));
+}
+
+[data-cdc-avatar-coach='1'] {
+  --cdc-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
+}
+[data-cdc-avatar-coach='2'] {
+  --cdc-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
+}
+[data-cdc-avatar-coach='3'] {
+  --cdc-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
+}
+[data-cdc-avatar-coach='4'] {
+  --cdc-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
+}
+[data-cdc-avatar-coach='5'] {
+  --cdc-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
+}
+[data-cdc-avatar-coach='6'] {
+  --cdc-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
+}
+[data-cdc-avatar-coach='7'] {
+  --cdc-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
+}
+
+[data-cdc-avatar-color='blue'] {
+  --cdc-avatar-from: #4f8dff;
+  --cdc-avatar-to: #7a5cff;
+}
+[data-cdc-avatar-color='purple'] {
+  --cdc-avatar-from: #a46cff;
+  --cdc-avatar-to: #e35bd0;
+}
+[data-cdc-avatar-color='pink'] {
+  --cdc-avatar-from: #ff6fae;
+  --cdc-avatar-to: #ff9a72;
+}
+[data-cdc-avatar-color='red'] {
+  --cdc-avatar-from: #ff6161;
+  --cdc-avatar-to: #e8336f;
+}
+[data-cdc-avatar-color='orange'] {
+  --cdc-avatar-from: #ffad4d;
+  --cdc-avatar-to: #ff6b3d;
+}
+[data-cdc-avatar-color='green'] {
+  --cdc-avatar-from: #2fd68f;
+  --cdc-avatar-to: #12a8a0;
+}
+[data-cdc-avatar-color='cyan'] {
+  --cdc-avatar-from: #3fd2ee;
+  --cdc-avatar-to: #3d7dff;
+}

@@ -1,4 +1,6 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { avatarOf } from '#shared/avatar.ts';
+import { queryOne } from '#shared/dom.ts';
 import { rectAt } from '#shared/testing/layout.ts';
 import { fitCard } from './card-fit.ts';
 import { ratingText } from './card-ratings.ts';
@@ -29,6 +31,20 @@ describe('hover card ratings', () => {
     card.innerHTML = legacy.ratings;
     await Promise.resolve();
     expect(card.innerHTML).toBe(legacy.cleaned);
+  });
+
+  it('gives each new card its user’s avatar before it shows', async () => {
+    const card = document.createElement('div');
+    card.id = 'powerTip';
+    document.body.append(card);
+    vi.stubGlobal('getComputedStyle', () => ({ visibility: 'hidden' }));
+    createPowertipSync()();
+    card.innerHTML =
+      '<div class="upt__info"><div class="upt__info__top"><a class="user-link" href="/@/Hikaru">Hikaru</a></div></div>';
+    await Promise.resolve();
+    expect(queryOne(card, '.upt__info', HTMLElement)?.dataset.cdcAvatarCoach).toBe(
+      String(avatarOf('Hikaru').coach),
+    );
   });
 
   it('reads a padded rating', () => {
