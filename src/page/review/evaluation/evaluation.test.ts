@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { z } from 'zod/mini';
 import { barLabel, formatEval } from './format.ts';
-import { forColor, moveAccuracy, winPercent } from './score.ts';
+import { winPercent } from '#shared/chess/index.ts';
+import { forColor, moveAccuracy } from './score.ts';
 import { StoredRecordCodec } from './stored.ts';
 // What the original script printed and computed.
 import legacy from './fixtures/legacy.json' with { type: 'json' };

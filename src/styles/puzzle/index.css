@@ -1,5 +1,8 @@
 @import './layout.css';
 @import './cards.css';
+@import './menu.css';
 @import './themes.css';
 @import './status-banner.css';
+@import './coach-card.css';
+@import './move-list.css';
 @import './controls.css';

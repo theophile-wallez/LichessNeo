@@ -7,6 +7,7 @@ import type { MascotView } from './mascot/index.ts';
 // Brings the Game Review's coach to life. The page world draws the coach's
 // avatar and posts which coach it is, its mood about the move and whether it's
 // talking (the comment typing out); this plays the coach's 3D mascot in it.
+// The puzzle page's coach is drawn here and played the same way.
 // It runs here rather than in the page world because the mascots' bundle is
 // the extension's, which the page's CSP keeps out of reach. Until it's in, or
 // without WebGL, the avatar shows the coach's still image.
@@ -53,12 +54,15 @@ function sync(): void {
   else if (mounting !== avatar) void mount(avatar);
 }
 
+/** Plays `state` on the page's coach: the review's, or the puzzle's (content/puzzle). */
+export function showCoach(state: CoachState): void {
+  wanted = state;
+  sync();
+}
+
 export const coach: Feature = {
   name: 'coach',
   start: () => {
-    onCoachState(state => {
-      wanted = state;
-      sync();
-    });
+    onCoachState(showCoach);
   },
 };

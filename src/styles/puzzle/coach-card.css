@@ -1,0 +1,181 @@
+/* ---- Coach card --- */
+
+/* In one panel the status card is the coach's (content/puzzle/coach.ts): the coach in its
+   bottom left corner, the badge and the words beside it, the buttons at the right. Lichess
+   redraws the card at each step, so the coach is a sibling sharing its cell of the panel's
+   grid. */
+@media (min-width: 1259.3px) {
+  main.puzzle .puzzle__tools {
+    --cdc-coach-h: 140px;
+    --cdc-coach-w: calc(var(--cdc-coach-h) * 1.09);
+
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'ceval' 'moves' 'card';
+  }
+
+  main.puzzle .puzzle__tools > .ceval-wrap {
+    grid-area: ceval;
+  }
+
+  main.puzzle .puzzle__moves {
+    grid-area: moves;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  main.puzzle .puzzle__feedback {
+    grid-area: card;
+    min-height: calc(var(--cdc-coach-h) + 16px);
+    box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  }
+
+  main.puzzle .puzzle__feedback:not(.after) {
+    /* The mascot is narrower than its box: the words start over the box's empty edge. */
+    padding: 16px 16px 16px calc(var(--cdc-coach-w) - 10px) !important;
+  }
+
+  /* Over the coach, whose arms reach past its box. */
+  main.puzzle .puzzle__feedback > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* The badge and the title on a row, the line under both. */
+  main.puzzle .puzzle__feedback .player {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  main.puzzle .puzzle__feedback .instruction {
+    display: contents !important;
+  }
+
+  main.puzzle .puzzle__feedback .instruction strong {
+    font-size: 18px !important;
+  }
+
+  main.puzzle .puzzle__feedback .instruction em {
+    grid-column: 1 / -1;
+    margin-top: 6px;
+  }
+
+  main.puzzle .puzzle__feedback :is(.no-square, .icon) {
+    flex: none !important;
+    width: 34px !important;
+    height: 34px !important;
+    margin: 0 !important;
+  }
+
+  main.puzzle .puzzle__feedback .no-square {
+    padding: 3px;
+    border-radius: 8px;
+  }
+
+  main.puzzle .puzzle__feedback.play .no-square > piece.black {
+    border-radius: 6px;
+    box-shadow: 0 0 0 3px #ffffffd9;
+  }
+
+  main.puzzle .puzzle__feedback:is(.good, .fail) .icon {
+    box-shadow:
+      inset 0 1px 0 #ffffff40,
+      0 0 0 4px color-mix(in srgb, var(--cdc-feedback) 18%, transparent);
+    font-size: 19px !important;
+    line-height: 34px !important;
+  }
+
+  /* Stacked at the right, each as wide as its label, leaving the coach its room. */
+  main.puzzle .puzzle__feedback .view_solution {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    padding-top: 14px;
+  }
+
+  main.puzzle .puzzle__feedback .view_solution .button {
+    min-height: 38px;
+    padding-inline: 14px 16px !important;
+  }
+
+  /* The coach stands on the card's bottom edge; only the card's left and bottom edges cut it. */
+  main.puzzle .cdc-puzzle-coach {
+    --cdc-mood-c: var(--cdc-good-hover);
+
+    z-index: 0;
+    grid-area: card;
+    align-self: end;
+    justify-self: start;
+    margin: 0 0 10px 10px;
+    clip-path: inset(-60% -60% 0 0 round 0 0 0 12px);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  main.puzzle .cdc-puzzle-coach:hover {
+    transform: none;
+  }
+
+  main.puzzle .cdc-puzzle-coach .cdc-coach__face canvas {
+    left: -40%;
+    width: 180%;
+  }
+
+  /* Solved or failed: the title and the next button beside the coach, who fades out above
+     the row of smaller buttons. */
+  main.puzzle .puzzle__feedback.after {
+    display: grid !important;
+    grid-template-columns: calc(var(--cdc-coach-w) - 26px) minmax(0, 1fr);
+    grid-template-areas:
+      '. title'
+      '. next'
+      'more more';
+    gap: 10px 0 !important;
+    padding: 16px !important;
+  }
+
+  main.puzzle .puzzle__feedback.after .complete {
+    display: flex;
+    flex-direction: column;
+    grid-area: title;
+    align-items: flex-start;
+    justify-content: center;
+    /* With the next button and the gap, as tall as the coach over the card's padding. */
+    min-height: calc(var(--cdc-coach-h) - 70px);
+    text-align: start;
+  }
+
+  main.puzzle .puzzle__feedback.after .continue {
+    grid-area: next;
+    justify-self: end;
+    padding: 10px 18px 10px 14px !important;
+    font-size: 15px !important;
+    /* On one line: in a narrow panel it reaches over the coach's side. */
+    white-space: nowrap;
+  }
+
+  main.puzzle .puzzle__feedback.after .continue icon::before {
+    font-size: 1.2em !important;
+  }
+
+  main.puzzle .puzzle__feedback.after .puzzle__more {
+    grid-area: more;
+  }
+
+  main.puzzle .puzzle__feedback.after ~ .cdc-puzzle-coach {
+    align-self: start;
+    margin-top: 10px;
+    clip-path: inset(-60% -60% 0 0 round 12px 0 0 0);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
+  }
+}
+
+@media (max-width: 1259.29px) {
+  main.puzzle .cdc-puzzle-coach {
+    display: none;
+  }
+}

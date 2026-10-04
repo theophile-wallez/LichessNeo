@@ -1,32 +1,54 @@
 /* ---- Engine --- */
 
+/* Registered so the win bar slides from one score to the next. */
+@property --cdc-white-share {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
 @media (min-width: 1020px) {
-  /* One compact header row (toggle, eval, engine name, icons), then one row per engine line. */
-  main.analyse .analyse__tools > .ceval {
+  /* One compact header row (toggle, eval, engine name, icons), then one row per engine line.
+     The puzzle's engine, once it's solved, is the same. */
+  :is(main.analyse .analyse__tools, main.puzzle .ceval-wrap) > .ceval {
     position: relative;
     flex: none;
     display: flex !important;
     align-items: center;
     gap: 10px;
-    height: 52px !important;
+    height: 60px !important;
     padding: 0 8px 0 12px !important;
     border-bottom: 1px solid var(--cdc-border);
     background: var(--cdc-bg-panel-dark) !important;
   }
 
-  main.analyse .ceval pearl {
+  /* The score on a chip in the leading side's color (content/analysis/eval-gauge.ts). */
+  :is(main.analyse, main.puzzle) .ceval pearl {
     flex: none;
-    min-width: 52px;
-    padding: 0 !important;
+    min-width: 0;
+    padding: 7px 11px !important;
+    border-radius: 8px;
+    background: linear-gradient(#2b2b2b, #111111);
+    box-shadow:
+      inset 0 1px 0 #ffffff1f,
+      0 0 0 1px #ffffff1a;
     color: #fff !important;
     font-family: var(--cdc-font) !important;
-    font-size: 20px !important;
+    font-size: 21px !important;
     font-weight: 800 !important;
     line-height: 1 !important;
     text-align: left;
   }
 
-  main.analyse .ceval .engine {
+  :is(main.analyse, main.puzzle) .ceval[data-cdc-lead='white'] pearl {
+    background: linear-gradient(#ffffff, #d9d9d9);
+    box-shadow:
+      inset 0 -1px 0 #0000001f,
+      0 1px 3px #00000066;
+    color: var(--cdc-grey-900) !important;
+  }
+
+  :is(main.analyse, main.puzzle) .ceval .engine {
     flex: 1;
     min-width: 0;
     overflow: hidden;
@@ -38,18 +60,18 @@
     text-overflow: ellipsis;
   }
 
-  main.analyse .ceval .engine .technology {
+  :is(main.analyse, main.puzzle) .ceval .engine .technology {
     margin-left: 4px;
     font-weight: 700;
   }
 
-  main.analyse .ceval .engine .info {
+  :is(main.analyse, main.puzzle) .ceval .engine .info {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  main.analyse .ceval .engine .cloud {
+  :is(main.analyse, main.puzzle) .ceval .engine .cloud {
     margin-left: 6px;
     padding: 0 5px;
     border-radius: 3px;
@@ -60,12 +82,12 @@
     text-transform: uppercase;
   }
 
-  main.analyse .ceval .engine .deeper {
+  :is(main.analyse, main.puzzle) .ceval .engine .deeper {
     display: none;
   }
 
   /* Lichess makes them left-aligned blocks, which pushed the glyph left. */
-  main.analyse .ceval > button {
+  :is(main.analyse, main.puzzle) .ceval > button {
     flex: none;
     display: grid !important;
     place-items: center;
@@ -78,25 +100,43 @@
     font-size: 18px;
   }
 
-  main.analyse .ceval > button:hover {
+  :is(main.analyse, main.puzzle) .ceval > button:hover {
     background: #ffffff14 !important;
     color: #fff !important;
   }
 
-  /* Depth progress: a thin line along the header's bottom. */
-  main.analyse .ceval .bar {
+  /* Depth progress: a thin line along the header's bottom, until there's a score. */
+  :is(main.analyse, main.puzzle) .ceval .bar {
     position: absolute !important;
     inset: auto 0 -1px !important;
     height: 2px !important;
   }
 
-  main.analyse .pv_box {
+  :is(main.analyse, main.puzzle) .ceval[data-cdc-lead] .bar {
+    display: none !important;
+  }
+
+  /* Then the win bar: White's chances from the left. */
+  :is(main.analyse, main.puzzle) .ceval[data-cdc-lead]::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px;
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      #f2f2f2 var(--cdc-white-share),
+      var(--cdc-grey-700) var(--cdc-white-share)
+    );
+    transition: --cdc-white-share 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  :is(main.analyse, main.puzzle) .pv_box {
     flex: none;
     border-bottom: 1px solid var(--cdc-border);
     background: var(--cdc-bg-panel-dark);
   }
 
-  main.analyse .pv_box .pv {
+  :is(main.analyse, main.puzzle) .pv_box .pv {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -112,11 +152,11 @@
     mask-image: linear-gradient(to right, #000 85%, transparent);
   }
 
-  main.analyse .pv_box .pv + .pv {
+  :is(main.analyse, main.puzzle) .pv_box .pv + .pv {
     border-top: 1px solid #ffffff0a !important;
   }
 
-  main.analyse .pv_box .pv strong {
+  :is(main.analyse, main.puzzle) .pv_box .pv strong {
     flex: none;
     min-width: 40px;
     margin-right: 4px;
@@ -130,12 +170,41 @@
     text-align: center;
   }
 
-  main.analyse .pv_box .pv-san {
+  :is(main.analyse, main.puzzle) .pv_box .pv-san {
     color: var(--cdc-text);
     font-weight: 700;
   }
 
-  main.analyse .pv_box .pv-wrap-toggle {
+  :is(main.analyse, main.puzzle) .pv_box .pv-wrap-toggle {
     display: none !important;
+  }
+
+  /* The best line's first move as a suggestion, its sequel dimmed. */
+  :is(main.analyse, main.puzzle) .pv_box .pv:first-child {
+    gap: 6px;
+    height: 44px;
+  }
+
+  :is(main.analyse, main.puzzle) .pv_box .pv:first-child > span:not(.pv-san, .pv-wrap-toggle) {
+    color: #ffffff80;
+    font-size: 12px;
+  }
+
+  :is(main.analyse, main.puzzle) .pv_box .pv:first-child .pv-san {
+    color: var(--cdc-text-dim);
+    font-weight: 600;
+  }
+
+  :is(main.analyse, main.puzzle) .pv_box .pv:first-child .pv-san[data-move-index='0'] {
+    flex: none;
+    padding: 3px 10px 3px 30px;
+    border-radius: 7px;
+    background: var(--cdc-bg-raised)
+      url('chrome-extension://__MSG_@@extension_id__/img/icons/light-bulb.svg') 8px center / 16px
+      no-repeat;
+    box-shadow: inset 0 0 0 1px #ffffff1f;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
   }
 }

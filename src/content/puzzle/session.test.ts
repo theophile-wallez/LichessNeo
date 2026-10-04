@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { createSessionSync } from './puzzle.ts';
+import { createSessionSync } from './session.ts';
 
 afterEach(() => {
   document.body.innerHTML = '';

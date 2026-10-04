@@ -1,7 +1,9 @@
 /* ---- Move list --- */
 
-/* Lichess obfuscates these tags and renames them now and then (new / old): i5d / rm6 list,
- * aPp / l4x rows, qZM / i5z numbers, Z7yx / kwdb moves, bo3 buttons, a1t / active move. */
+/* The analysis page's look (analysis/move-list.css): 30px rows, numbers, stripes, a pill on
+ * the current move. Lichess obfuscates these tags and renames them now and then (new / old):
+ * i5d / rm6 list, aPp / l4x rows, qZM / i5z numbers, Z7yx / kwdb moves, bo3 buttons, a1t /
+ * active move. */
 @media (min-width: 1020px) {
   main.round :is(i5d, rm6) {
     grid-area: moves !important;
@@ -23,7 +25,7 @@
     flex: 1 1 0 !important;
     min-height: 0;
     display: grid !important;
-    grid-template-columns: 48px minmax(0, 104px) minmax(0, 104px) 1fr;
+    grid-template-columns: 44px minmax(0, 104px) minmax(0, 104px) 1fr;
     /* Rows take their 30px from the move numbers: a `minmax(30px, auto)` track stops
      * growing once the list overflows, and the last moves overlapped. */
     grid-auto-rows: auto;
@@ -55,11 +57,12 @@
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    padding: 0 0 0 14px !important;
+    padding: 0 0 0 12px !important;
     background: none !important;
     color: var(--cdc-text-dim) !important;
     font-family: var(--cdc-font) !important;
-    font-weight: 600 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
   }
 
   main.round :is(i5d, rm6) :is(Z7yx, kwdb) {
@@ -69,10 +72,8 @@
     align-items: center;
     flex: none !important;
     height: 24px;
-    margin-left: 2px;
-    padding: 0 6px !important;
+    padding: 0 5px !important;
     border-radius: 3px;
-    border-bottom: 2px solid transparent;
     color: var(--cdc-text) !important;
     font-size: 14px !important;
     font-weight: 700 !important;
@@ -86,7 +87,6 @@
 
   main.round :is(i5d, rm6) :is(Z7yx, kwdb):is(.a1t, .active) {
     background: #ffffff26 !important;
-    border-bottom-color: #ffffff3d;
     color: #fff !important;
   }
 

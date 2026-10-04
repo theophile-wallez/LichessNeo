@@ -33,6 +33,7 @@ const FLAGS: Readonly<Record<string, string>> = {
   'analyse-training': 'main.analyse > .analyse__round-training > *',
   puzzle: 'main.puzzle',
   'puzzle-keyboard': 'main.puzzle > .keyboard-move',
+  'puzzle-session': 'main.puzzle > .puzzle__session',
   storm: 'main > .storm',
   'storm-play': 'main > .storm--play',
   swiss: 'main.swiss',

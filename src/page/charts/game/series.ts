@@ -2,7 +2,7 @@ import { z } from 'zod/mini';
 import type { Color } from '#shared/chess/types.ts';
 import type { GameCourse } from '#page/lichess/analysis.ts';
 import type { TreeNode } from '#page/lichess/tree.ts';
-import { winPercent } from '#page/review/evaluation/score.ts';
+import { winPercent } from '#shared/chess/index.ts';
 
 // What the analysis' two charts draw, from Lichess's own data: the server
 // analysis' score of each position, and each move's time.

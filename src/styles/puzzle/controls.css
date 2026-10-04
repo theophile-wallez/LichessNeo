@@ -61,27 +61,7 @@ main.puzzle .puzzle__controls .jumps .fbt.glowing {
     0 0 0 2px var(--cdc-accent);
 }
 
-/* ---- Moves, engine --- */
-
-/* The current move: a soft highlight, not Lichess's flat green block. */
-main.puzzle .tview2 move.active {
-  border-radius: 4px;
-  background: #ffffff24 !important;
-  color: #fff !important;
-  font-weight: 700;
-}
-
-/* Move numbers in the analysis page's grey: Lichess's dimmer one was barely readable. */
-main.puzzle .tview2-column > index {
-  color: var(--cdc-text-dim) !important;
-}
-
-/* The engine line after the puzzle. Horizontal padding only: the row has a fixed height. */
-main.puzzle .ceval {
-  padding-inline: 8px !important;
-  border-bottom: 1px solid #ffffff14;
-  background: none !important;
-}
+/* ---- Eval bar --- */
 
 /* The eval bar is drawn in board/; its width is --cdc-gauge-w from the layout. */
 main.puzzle .eval-gauge {

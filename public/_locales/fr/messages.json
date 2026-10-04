@@ -7,5 +7,8 @@
   },
   "sidebarExpand": {
     "message": "Déplier la barre latérale"
+  },
+  "puzzleMenu": {
+    "message": "Détails et réglages du puzzle"
   }
 }

@@ -10,5 +10,9 @@
   "sidebarExpand": {
     "message": "Expand the sidebar",
     "description": "The sidebar's toggle, while it shows only its icons."
+  },
+  "puzzleMenu": {
+    "message": "Puzzle details and settings",
+    "description": "The puzzle page's cog, which opens the puzzle's details, its theme and the settings."
   }
 }

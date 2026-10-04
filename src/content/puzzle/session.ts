@@ -1,6 +1,4 @@
 import { queryOne } from '#shared/dom.ts';
-import type { Feature } from '#shared/features.ts';
-import { onEveryTick } from '#content/sync-loop.ts';
 
 // The puzzle's session chips are one sideways-scrolling row
 // (styles/puzzle/layout.css): keep the latest in view.
@@ -16,8 +14,3 @@ export function createSessionSync(): () => void {
     if (session) session.scrollLeft = session.scrollWidth;
   };
 }
-
-export const puzzleSession: Feature = {
-  name: 'puzzle session',
-  start: () => onEveryTick('puzzle session', createSessionSync()),
-};

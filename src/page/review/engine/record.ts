@@ -1,5 +1,5 @@
-import { fenTurn } from '#shared/chess/index.ts';
-import { type PositionRecord, winPercent } from '#page/review/evaluation/score.ts';
+import { fenTurn, winPercent } from '#shared/chess/index.ts';
+import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import type { EngineLine, EngineResult } from './uci.ts';
 
 type WhiteScore =

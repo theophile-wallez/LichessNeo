@@ -1,7 +1,8 @@
 import { z } from 'zod/mini';
 import { parseJson } from '#shared/json.ts';
 import { lenient } from '#shared/zod.ts';
-import { type PositionRecord, winPercent } from '#page/review/evaluation/score.ts';
+import { winPercent } from '#shared/chess/index.ts';
+import type { PositionRecord } from '#page/review/evaluation/score.ts';
 
 // The game's export (/game/export/<id>): its opening, and Lichess's server
 // analysis when someone asked for one.

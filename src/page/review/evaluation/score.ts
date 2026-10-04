@@ -21,10 +21,6 @@ export const PositionRecordSchema = z.union([
 ]);
 export type PositionRecord = z.infer<typeof PositionRecordSchema>;
 
-/** Lichess's win probability curve, from White's centipawns. */
-export const winPercent = (cp: number): number =>
-  50 + 50 * (2 / (1 + Math.exp(-0.00368208 * cp)) - 1);
-
 /** A win probability from White's view, turned to `color`'s. */
 export const forColor = (whiteWin: number, color: Color): number =>
   color === 'white' ? whiteWin : 100 - whiteWin;
