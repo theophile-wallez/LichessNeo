@@ -1,21 +1,15 @@
 /* ---- Zen --- */
 
 /* Zen mode (body.zenable.zen) shows only the board, clocks and controls. Lichess keeps
- * the board's size; ours takes the whole height of the window, with no sidebar and no
- * frame, and a narrow column beside it holds the opponent's clock at the top, the controls,
- * and the player's at the bottom. Lichess's way out (#zenzone) shrinks to a column of icons
+ * the board's size; ours takes the whole height of the window, with no sidebar, and a
+ * narrow column beside it holds the opponent's clock at the top, the controls, and the
+ * player's at the bottom. Lichess's way out (#zenzone) shrinks to a column of icons
  * in the top left corner, which the board keeps clear of. The rules of layout.css would
  * bring the rest back. */
 
 @media (min-width: 1020px) {
   body.zenable.zen {
     --cdc-sidebar-w: 0px;
-    --cdc-frame-gap: 0px;
-  }
-
-  body.zenable.zen #main-wrap {
-    border-radius: 0;
-    outline: none;
   }
 
   body.zenable.zen #top,

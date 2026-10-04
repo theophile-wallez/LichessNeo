@@ -16,15 +16,13 @@
 @media (min-width: 1020px) {
   :root {
     --cdc-sidebar-w: 168px;
-    /* The content's box sits this far inside the window, the sidebar on the frame. */
-    --cdc-frame-gap: 8px;
   }
 
-  /* What the content's box leaves to a page that fits the window. On body, where zen mode
-   * drops the sidebar. */
+  /* What the content leaves to a page that fits the window. On body, where zen mode drops
+   * the sidebar. */
   body {
-    --cdc-main-w: calc(100vw - var(--cdc-sidebar-w) - var(--cdc-frame-gap));
-    --cdc-main-h: calc(100dvh - 2 * var(--cdc-frame-gap));
+    --cdc-main-w: calc(100vw - var(--cdc-sidebar-w));
+    --cdc-main-h: 100dvh;
     ---site-header-height: 44px !important;
     ---site-header-margin: 0px !important;
   }
@@ -34,7 +32,7 @@
     --cdc-sb-hover: #ffffff0d;
   }
 
-  /* Only the content's box scrolls. That also drops the ~40px Lichess's hidden hover cards
+  /* Only the content scrolls. That also drops the ~40px Lichess's hidden hover cards
    * leave at the document's end. */
   html,
   body {
@@ -42,7 +40,7 @@
   }
 
   html {
-    background: var(--cdc-bg-frame) !important;
+    background: var(--cdc-bg-page) !important;
   }
 
   #top,
@@ -75,23 +73,22 @@
     align-items: stretch !important;
   }
 
-  /* The content's box. Its own stacking context, or what Lichess draws behind the page (the
-   * clock faces) would go under its fill. The top room is a border, not padding: sticky
-   * titles stick below a padding, and what scrolls would show through it. */
+  /* The content, right of the sidebar to the window's edges, a hairline between them. Its
+   * own stacking context, or what Lichess draws behind the page (the clock faces) would go
+   * under its fill. The top room is a border, not padding: sticky titles stick below a
+   * padding, and what scrolls would show through it. */
   #main-wrap {
     box-sizing: border-box;
     height: var(--cdc-main-h);
-    margin: var(--cdc-frame-gap) var(--cdc-frame-gap) var(--cdc-frame-gap) var(--cdc-sidebar-w) !important;
+    margin: 0 0 0 var(--cdc-sidebar-w) !important;
     padding-top: 0;
     border-top: 16px solid transparent;
     overflow: hidden auto;
     overscroll-behavior: contain;
     align-content: start;
     isolation: isolate;
-    border-radius: 12px;
     background: var(--cdc-bg-page);
-    outline: 1px solid var(--cdc-frame-line);
-    outline-offset: -1px;
+    box-shadow: -1px 0 0 var(--cdc-sidebar-line);
   }
 
   /* ---- Logo --- */

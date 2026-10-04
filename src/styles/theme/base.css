@@ -7,9 +7,8 @@
 :root.dark,
 :root.transp,
 :root.transp.light {
-  /* Around the content's box, under the sidebar. */
-  --cdc-bg-frame: var(--cdc-grey-950);
-  --cdc-frame-line: #ffffff0f;
+  /* The hairline between the sidebar and the content. */
+  --cdc-sidebar-line: #ffffff0f;
   --cdc-bg-page: var(--cdc-grey-800);
   --cdc-bg-panel: var(--cdc-grey-850);
   --cdc-bg-panel-dark: var(--cdc-grey-900);
