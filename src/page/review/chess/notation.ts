@@ -54,10 +54,23 @@ const STANDARD_CASTLING: Readonly<Record<string, string>> = {
 /**
  * Lichess writes castling as king takes rook, Stockfish (outside Chess960)
  * as the king's two-square step: this puts a Lichess move in the engine's terms.
+ * `before` is the position it's played from, as a FEN or a board: a rook can go
+ * from e1 to h1 too, and the engine refuses `e1g1` for it, then says nothing.
  */
-export function normalizeUci(uci: string, chess960: boolean): string;
-export function normalizeUci(uci: string | undefined, chess960: boolean): string | undefined;
-export function normalizeUci(uci: string | undefined, chess960: boolean): string | undefined {
+export function normalizeUci(uci: string, before: Board | string, chess960: boolean): string;
+export function normalizeUci(
+  uci: string | undefined,
+  before: Board | string,
+  chess960: boolean,
+): string | undefined;
+export function normalizeUci(
+  uci: string | undefined,
+  before: Board | string,
+  chess960: boolean,
+): string | undefined {
   if (!uci || chess960) return uci;
-  return STANDARD_CASTLING[uci] ?? uci;
+  const castling = STANDARD_CASTLING[uci];
+  if (castling === undefined) return uci;
+  const board = typeof before === 'string' ? parseFen(before).board : before;
+  return pieceOn(board, uci.slice(0, 2))?.role === 'king' ? castling : uci;
 }

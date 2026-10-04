@@ -111,7 +111,8 @@ export function judge(input: JudgeInput): MoveVerdict {
     recordBefore.secondLineWinChance === null
       ? null
       : forColor(recordBefore.secondLineWinChance, color);
-  const isBest = normalizeUci(position.uci, input.chess960) === recordBefore.best;
+  const isBest =
+    normalizeUci(position.uci, previousPosition.fen, input.chess960) === recordBefore.best;
   let moveClass = baseClass(input, { before, after, loss, second }, isBest);
   const mated = isBest || input.book ? null : mateVerdict(recordBefore, recordAfter, color);
   if (mated && RANK.indexOf(moveClass) < RANK.indexOf(mated)) moveClass = mated;

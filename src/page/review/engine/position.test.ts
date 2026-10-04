@@ -35,4 +35,12 @@ describe('uciPosition', () => {
     expect(uciPosition(path, false)).toBe(`fen ${before} moves e1g1`);
     expect(uciPosition(path, true)).toBe(`fen ${before} moves e1h1`);
   });
+
+  // xiPhGUNi's 31. Rh1: taken for castling, the engine refused the line and said nothing.
+  it('leaves a rook going from e1 to h1 as it is', () => {
+    const before = '2rr4/p4kp1/1p5p/2p1Pp1b/3P1P2/1NP3K1/P5P1/2R1R3 w - - 2 31';
+    const after = '2rr4/p4kp1/1p5p/2p1Pp1b/3P1P2/1NP3K1/P5P1/2R4R b - - 3 31';
+    const path = [{ fen: before }, { fen: after, uci: 'e1h1' }];
+    expect(uciPosition(path, false)).toBe(`fen ${before} moves e1h1`);
+  });
 });

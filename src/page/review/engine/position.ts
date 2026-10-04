@@ -23,8 +23,8 @@ export function uciPosition(path: readonly PathPosition[], chess960: boolean): s
   if (!last) throw new Error('A position needs a path');
   const start = Math.max(0, path.length - 1 - halfmoveClock(last.fen));
   const moves: string[] = [];
-  for (const position of path.slice(start + 1)) {
-    const uci = normalizeUci(position.uci, chess960);
+  for (let i = start + 1; i < path.length; i++) {
+    const uci = normalizeUci(path[i]?.uci, path[i - 1]?.fen ?? '', chess960);
     if (uci === undefined) return `fen ${last.fen}`;
     moves.push(uci);
   }

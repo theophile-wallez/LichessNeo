@@ -24,7 +24,8 @@ export function bestShown(session: Session, analysis: Analysis): JudgedMove | nu
   const shown = session.view.bestOf;
   const { path, node } = analysis;
   if (!shown || path === shown.path || path !== parentPath(shown.path) + node.id) return null;
-  return normalizeUci(node.uci, analysis.chess960) === shown.move.best ? shown.move : null;
+  const before = analysis.nodeAtPath(parentPath(path)).fen;
+  return normalizeUci(node.uci, before, analysis.chess960) === shown.move.best ? shown.move : null;
 }
 
 /** Explain's best line, while the board is somewhere along it. */
@@ -34,8 +35,10 @@ export function lineShown(session: Session, analysis: Analysis): LineShown | nul
   const from = parentPath(shown.path);
   if (!analysis.path.startsWith(from)) return null;
   const played: string[] = [];
-  for (let at = analysis.path; at.length > from.length; at = parentPath(at))
-    played.unshift(normalizeUci(analysis.nodeAtPath(at).uci ?? '', analysis.chess960));
+  for (let at = analysis.path; at.length > from.length; at = parentPath(at)) {
+    const before = analysis.nodeAtPath(parentPath(at)).fen;
+    played.unshift(normalizeUci(analysis.nodeAtPath(at).uci ?? '', before, analysis.chess960));
+  }
   return played.length > 0 && played.every((uci, i) => uci === shown.line[i]) ? shown : null;
 }
 

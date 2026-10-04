@@ -110,7 +110,7 @@ export function fenAfter(root: FakeNode, fen: string, moves: readonly string[]):
   for (const uci of moves)
     // Chess960 keeps Lichess's king-takes-rook castling: either notation matches.
     node = node?.children.find(
-      child => child.uci === uci || normalizeUci(child.uci, false) === uci,
+      child => child.uci === uci || normalizeUci(child.uci, node?.fen ?? '', false) === uci,
     );
   if (!node) throw new Error(`No such line in the fake tree: ${fen} moves ${moves.join(' ')}`);
   return node.fen;

@@ -21,11 +21,20 @@ describe('uciToSan', () => {
 });
 
 describe('normalizeUci', () => {
+  // The kings on their squares, as for every castling of the original's cases.
+  const castlingFen = 'r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1';
+
   it('turns Lichess’s castling into the engine’s outside Chess960', () => {
     for (const [uci, chess960, normalized] of legacy.norm)
       expect(
-        normalizeUci(typeof uci === 'string' ? uci : undefined, chess960 === true) ?? null,
+        normalizeUci(typeof uci === 'string' ? uci : undefined, castlingFen, chess960 === true) ??
+          null,
       ).toBe(normalized);
+  });
+
+  it('leaves the same squares alone for a rook, as only a king castles', () => {
+    expect(normalizeUci('e1h1', '4k3/8/8/8/8/8/5K2/4R3 w - - 0 1', false)).toBe('e1h1');
+    expect(normalizeUci('e8a8', '4r3/5k2/8/8/8/8/8/4K3 b - - 0 1', false)).toBe('e8a8');
   });
 });
 
