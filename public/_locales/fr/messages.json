@@ -10,5 +10,20 @@
   },
   "puzzleMenu": {
     "message": "Détails et réglages du puzzle"
+  },
+  "settingsLink": {
+    "message": "Lichess Reimagined"
+  },
+  "settingsTitle": {
+    "message": "Lichess Reimagined"
+  },
+  "settingsIntro": {
+    "message": "Les réglages de l’extension. Ils vous suivent dans chaque navigateur synchronisé avec votre compte Google."
+  },
+  "settingUiSounds": {
+    "message": "Sons de l’interface"
+  },
+  "settingUiSoundsBody": {
+    "message": "Les petits sons des commandes de l’extension, comme les crans du curseur de niveau de Stockfish. Les sons de Lichess et de votre pack ne changent pas."
   }
 }

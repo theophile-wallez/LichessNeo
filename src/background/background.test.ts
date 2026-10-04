@@ -40,12 +40,11 @@ interface Fake {
 
 interface FakeOptions {
   readonly manifest: object;
-  readonly storage?: boolean;
   /** The files on disk; a missing one fails to fetch. */
   readonly files: Record<string, string | undefined>;
 }
 
-function fakeChrome({ manifest, storage = true, files }: FakeOptions): Fake {
+function fakeChrome({ manifest, files }: FakeOptions): Fake {
   const fake: Fake = {
     listeners: { installed: [], startup: [], message: [] },
     log: [],
@@ -69,7 +68,7 @@ function fakeChrome({ manifest, storage = true, files }: FakeOptions): Fake {
       },
     },
   };
-  vi.stubGlobal('chrome', storage ? { runtime, storage: storageArea } : { runtime });
+  vi.stubGlobal('chrome', { runtime, storage: storageArea });
   vi.stubGlobal('fetch', async (url: string, options: unknown) => {
     fake.log.push({ event: 'fetch', url, options });
     const text = files[url.replace('chrome-extension://abc/', '')];
@@ -143,11 +142,12 @@ beforeEach(() => vi.useFakeTimers({ now: 0, toFake: ['setTimeout', 'clearTimeout
 afterEach(() => vi.useRealTimers());
 
 describe('the background worker', () => {
-  it.each([
-    ['store install', { manifest: { ...CHROME_MANIFEST, update_url: 'https://x' } }],
-    ['store package loaded unpacked', { manifest: CHROME_MANIFEST, storage: false }],
-  ])('%s: only drops the old cache, as the original', async (name, options) => {
-    const fake = await startWorker({ ...options, files: files() });
+  // Every package asks for storage now (the settings live there): the original's store
+  // package loaded unpacked, without it, is gone.
+  it('store install: only drops the old cache, as the original', async () => {
+    const name = 'store install';
+    const manifest = { ...CHROME_MANIFEST, update_url: 'https://x' };
+    const fake = await startWorker({ manifest, files: files() });
     for (const listener of fake.listeners.installed) await listener({ reason: 'install' });
     const answer = await ask(fake, { type: 'cdc:dev-check' });
     const expected = legacy.scenarios.find(scenario => scenario.name === name);

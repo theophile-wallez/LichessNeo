@@ -1,6 +1,7 @@
 import { AI_LEVELS, robotTier } from '#shared/coach.ts';
 import { createElement, queryOne, setData, setStyleProperty } from '#shared/dom.ts';
 import { AI_RATINGS } from '#content/game/ai-players.ts';
+import { playUiSound } from '#content/ui/sounds.ts';
 
 // Stockfish's level as a slider (styles/pages/level-slider.css), in place of the
 // computer setup's eight buttons, which stay, hidden, and keep the setting: a
@@ -8,6 +9,9 @@ import { AI_RATINGS } from '#content/game/ai-players.ts';
 // the pointer and the keys over our drawn track; the robot stands on its left.
 
 const SPARKLES = 14;
+
+/** The notch's tick, a whole tone higher per level: semitones from Foley's, the middle level at 0. */
+export const tickPitch = (level: number): number => 2 * (level - Math.ceil(AI_LEVELS / 2));
 
 export interface LevelSlider {
   /** Where the robot goes. */
@@ -74,6 +78,7 @@ function build(pane: HTMLElement): Parts {
     const level = Number(input.value);
     pick(level);
     show(parts, level);
+    playUiSound('tick', { pitch: tickPitch(level) });
   });
   return parts;
 }

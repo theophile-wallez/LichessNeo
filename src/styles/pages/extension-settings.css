@@ -1,0 +1,146 @@
+/* ---- Extension settings --- */
+
+/* The account pages' section for the extension (content/settings): it takes the place of the
+   page's content while its link is picked, a card per setting with a switch. */
+
+main.account:not([data-cdc-settings]) > .cdc-settings,
+main.account[data-cdc-settings] > .page-menu__content:not(.cdc-settings) {
+  display: none !important;
+}
+
+/* Its link's tile in the menu (pages/headings-menus.css), and its title's. */
+.subnav[data-cdc-nav~='account'] a.cdc-settings-link,
+main.account .cdc-settings {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.control-knobs.webp');
+  --cdc-nav-color: var(--cdc-accent);
+}
+
+.cdc-settings__intro {
+  margin: 0 0 22px;
+  color: var(--cdc-text-dim);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cdc-settings__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cdc-setting {
+  --cdc-setting-color: var(--cdc-cyan-darker);
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: var(--cdc-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  transition: box-shadow 0.2s !important;
+}
+
+.cdc-setting:hover {
+  box-shadow: inset 0 0 0 1px var(--cdc-card-border-hover);
+}
+
+.cdc-setting[data-cdc-setting='uiSounds'] {
+  --cdc-setting-icon: url('https://lichess1.org/assets/flair/img/objects.speaker-high-volume.webp');
+}
+
+.cdc-setting__icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background:
+    var(--cdc-setting-icon, none) center / 30px 30px no-repeat,
+    color-mix(in srgb, var(--cdc-setting-color) 20%, transparent);
+  box-shadow: inset 0 1px #ffffff1a;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.cdc-setting:hover .cdc-setting__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* Off, the tile dims: what it stands for is silent. */
+.cdc-setting:not([data-cdc-on]) .cdc-setting__icon {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+.cdc-setting__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.cdc-setting__title {
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+  border: none !important;
+  color: var(--cdc-text-strong) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.3;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+.cdc-setting__body {
+  margin: 0;
+  color: var(--cdc-text-dim);
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+/* Until the stored settings are read (content/settings/section.ts). */
+.cdc-settings[data-cdc-pending] .cdc-switch {
+  visibility: hidden;
+}
+
+/* The switch: Lichess's pill (pages/tabs-tables-forms.css), larger, its knob springing over. */
+.cdc-switch {
+  position: relative;
+  flex: none;
+  width: 50px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--cdc-grey-600);
+  box-shadow: inset 0 1px 3px #00000066;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s !important;
+}
+
+.cdc-switch[aria-checked='true'] {
+  background: var(--cdc-btn-primary);
+  box-shadow:
+    inset 0 1px 0 #ffffff33,
+    0 0 0 4px color-mix(in srgb, var(--cdc-accent) 22%, transparent);
+}
+
+.cdc-switch:focus-visible {
+  outline: 2px solid var(--cdc-accent);
+  outline-offset: 3px;
+}
+
+.cdc-switch__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px #00000066;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.cdc-switch[aria-checked='true'] .cdc-switch__knob {
+  transform: translateX(22px);
+}

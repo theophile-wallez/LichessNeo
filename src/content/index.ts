@@ -26,6 +26,7 @@ import { coachMessage } from './game/coach-message.ts';
 import { boardInset } from './layout/board-inset.ts';
 import { evalGauge } from './analysis/eval-gauge.ts';
 import { puzzle } from './puzzle/index.ts';
+import { extensionSettings } from './settings/index.ts';
 import { homeHero } from './pages/home-hero.ts';
 import { blogCarousel } from './pages/blog-carousel/index.ts';
 import { coachTitles } from './pages/coach-titles.ts';
@@ -79,6 +80,7 @@ function main(): void {
     boardInset,
     evalGauge,
     puzzle,
+    extensionSettings,
     homeHero,
     blogCarousel,
     coachTitles,

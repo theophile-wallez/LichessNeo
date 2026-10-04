@@ -34,6 +34,7 @@
     "check:fast": "pnpm typecheck && pnpm lint && pnpm format:check && node scripts/check-sources.ts && vitest run --changed origin/main --passWithNoTests"
   },
   "dependencies": {
+    "@foleyjs/core": "^2.9.0",
     "three": "0.186.1",
     "zod": "^4.6.5"
   },

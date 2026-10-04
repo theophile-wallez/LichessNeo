@@ -1,6 +1,5 @@
 import { DEV_BUILD } from '#shared/build-mode.ts';
 import { startDevReload } from './dev-reload.ts';
-import { hasStorage } from './extension.ts';
 import { servePackDownloads } from './packs.ts';
 import { dropOldSoundCache } from './sound-cache.ts';
 
@@ -8,4 +7,4 @@ import { dropOldSoundCache } from './sound-cache.ts';
 
 chrome.runtime.onInstalled.addListener(dropOldSoundCache);
 servePackDownloads();
-if (DEV_BUILD && hasStorage()) startDevReload();
+if (DEV_BUILD) startDevReload();

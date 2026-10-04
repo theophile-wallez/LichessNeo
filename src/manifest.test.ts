@@ -17,9 +17,9 @@ describe('createManifest', () => {
     expect(page).toMatchObject({ js: [OUTPUT.page], world: 'MAIN' });
   });
 
-  it('keeps the storage permission out of the Chrome Web Store package', () => {
-    expect(createManifest('chrome', '0.1').permissions).toEqual(['storage']);
-    expect(createManifest('chrome-store', '0.1').permissions).toBeUndefined();
+  it('asks every package for storage, where the settings are kept', () => {
+    for (const target of TARGETS)
+      expect(createManifest(target, '0.1').permissions).toEqual(['storage']);
   });
 
   it('gives Firefox background scripts and a gecko id', () => {

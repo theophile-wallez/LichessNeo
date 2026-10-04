@@ -12,6 +12,7 @@ interface License {
 }
 
 export const LICENSES: readonly License[] = [
+  { name: '@foleyjs/core', from: 'node_modules/@foleyjs/core/LICENSE', to: 'licenses/foley.md' },
   { name: 'three', from: 'node_modules/three/LICENSE', to: 'licenses/three.md' },
   { name: 'zod', from: 'node_modules/zod/LICENSE', to: 'licenses/zod.md' },
 ];

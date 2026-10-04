@@ -21,6 +21,8 @@ export const StorageKey = {
     `cdc-review-progress:${gameId}:${positions}:v${version}`,
   // The review caches, least recently opened first.
   reviewIndex: 'cdc-review-index',
+  // The extension's settings, in chrome.storage.sync rather than the page's (content/settings).
+  settings: 'cdc-settings',
 } satisfies Record<string, string | ((...args: never[]) => string)>;
 
 export const SessionKey = {
