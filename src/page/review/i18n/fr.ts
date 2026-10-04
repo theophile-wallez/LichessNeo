@@ -31,7 +31,35 @@ export const fr: ReviewLanguage = {
     explain: 'Expliquer',
     best: 'Meilleur',
     analysing: 'Analyse de la partie…',
-    players: 'Joueurs',
+    playedLike: 'Niveau de la partie',
+    moves: 'Coups',
+    profileTitle: 'Profil de jeu',
+    profile: {
+      opening: {
+        name: 'Ouverture',
+        how: 'Précision des coups avant le milieu de partie : jusqu’aux premiers échanges ou au développement des pièces, ou au mélange des deux camps.',
+      },
+      middlegame: {
+        name: 'Milieu de partie',
+        how: 'Précision des coups du milieu de partie jusqu’à la finale.',
+      },
+      endgame: {
+        name: 'Finale',
+        how: 'Précision une fois qu’il reste six pièces ou moins, rois et pions à part.',
+      },
+      tactics: {
+        name: 'Tactique',
+        how: 'Part des occasions tactiques saisies : coups brillants et très bons, face aux occasions manquées.',
+      },
+      defense: {
+        name: 'Défense',
+        how: 'Précision des coups joués en position inférieure, sous 35 % de chances de gain.',
+      },
+      conversion: {
+        name: 'Conversion',
+        how: 'Précision des coups joués en position supérieure, au-delà de 65 % de chances de gain.',
+      },
+    },
     accuracy: 'Précision',
     anonymous: 'Anonyme',
     close: 'Fermer le bilan',
@@ -46,12 +74,6 @@ export const fr: ReviewLanguage = {
     less: 'Voir moins',
     gameRating: 'Classement de la partie',
     gameRatingTip: 'Donne une estimation du classement d’un joueur d’après une seule partie.',
-    phases: {
-      opening: 'Ouverture',
-      tactics: 'Exercices tactiques',
-      strategy: 'Stratégie',
-      endgame: 'Finale',
-    },
     bestWas: move => `Le meilleur coup était ${move}.`,
     cost: percent => `−${percent} % de chances de gain`,
     lines: {

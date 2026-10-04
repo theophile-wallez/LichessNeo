@@ -71,6 +71,11 @@ export class Analysis {
     return this.data?.game.variant.key === 'chess960';
   }
 
+  /** The side that won the game; null for a draw, a game going on or the free board. */
+  get winner(): Color | null {
+    return this.data?.game.winner ?? null;
+  }
+
   /** Both players by color, as Lichess lists them from the viewer's side. */
   players(): Readonly<Record<Color, Player | undefined>> {
     const data = this.data;

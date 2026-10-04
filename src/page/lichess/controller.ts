@@ -55,6 +55,8 @@ export const GameDataSchema = z.object({
     id: z.string(),
     speed: lenient(z.string()),
     variant: z.object({ key: z.string() }),
+    // Set once a game is won; none for a draw or a game going on.
+    winner: lenient(z.enum(['white', 'black'])),
   }),
   player: PlayerSchema,
   opponent: PlayerSchema,

@@ -1,6 +1,6 @@
+import type { ProfileAxis } from '#page/review/judge/profile.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
 import type { CountedClass, MoveClass } from '#page/review/classes/classes.ts';
-import type { Phase } from '#page/review/rating/phases.ts';
 
 // What the review says, per language. Moves, pieces and squares go into the
 // coach's sentences as [[…]] tokens (comment/tokens.ts), already built.
@@ -22,7 +22,13 @@ export interface InterfaceStrings {
   readonly explain: string;
   readonly best: string;
   readonly analysing: string;
-  readonly players: string;
+  /** Over the game rating, under a player's accuracy. */
+  readonly playedLike: string;
+  /** The summary's sections: the move classes, the phases' radar. */
+  readonly moves: string;
+  readonly profileTitle: string;
+  /** The profile radar's axes: a name, and how its score is worked out. */
+  readonly profile: Readonly<Record<ProfileAxis, { readonly name: string; readonly how: string }>>;
   readonly accuracy: string;
   readonly anonymous: string;
   readonly close: string;
@@ -37,7 +43,6 @@ export interface InterfaceStrings {
   readonly less: string;
   readonly gameRating: string;
   readonly gameRatingTip: string;
-  readonly phases: Readonly<Record<Phase, string>>;
   /** Explain's hint for a move that wasn't best. */
   readonly bestWas: (move: string) => string;
   /** A move's cost bar, by the share of the mover's winning chances it gave away. */

@@ -8,10 +8,6 @@
     cursor: pointer;
   }
 
-  .cdc-review__table--loading {
-    cursor: default;
-  }
-
   .cdc-summary-pct {
     position: absolute;
     top: 8px;
@@ -95,124 +91,6 @@
     pointer-events: none;
   }
 
-  /* ---- Table --- */
-
-  .cdc-review__table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-  }
-
-  .cdc-t-c-label {
-    width: 34%;
-  }
-
-  .cdc-t-c-icon {
-    width: 32px;
-  }
-
-  .cdc-review__table td {
-    padding: 6px 0;
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  .cdc-review__table .cdc-t-label {
-    text-align: left;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  /* A long name ends in an ellipsis (the full one is in its title) rather than
-     wrapping its last letters. */
-  .cdc-t-names td {
-    overflow: hidden;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 700;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .cdc-t-num {
-    font-size: 16px;
-    font-weight: 800;
-  }
-
-  /* A count goes to its moves: it lights up under the pointer, as the
-     chevron does. */
-  .cdc-t-jump {
-    min-width: 40px;
-    padding: 2px 8px;
-    border: 0;
-    border-radius: 6px;
-    background: none;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    transition: background-color 0.15s !important;
-  }
-
-  .cdc-t-jump:hover {
-    background: #ffffff14;
-  }
-
-  .cdc-t-jump:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 1px;
-  }
-
-  /* As much space under a separator line as above it. */
-  .cdc-t-sep td {
-    padding: 6px 0 0 !important;
-    border-bottom: 1px solid var(--cdc-border);
-  }
-
-  .cdc-t-sep + tr td {
-    padding-top: 12px;
-  }
-
-  .cdc-review__top + .cdc-review__body .cdc-review__table {
-    margin-top: 6px;
-  }
-
-  /* The chevron under the rows opens the rest of them. */
-  .cdc-t-more td {
-    padding: 2px 0 0 !important;
-  }
-
-  .cdc-review__more {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 28px;
-    padding: 0;
-    border: 0;
-    border-radius: 6px;
-    background: none;
-    color: #ffffff80;
-    cursor: pointer;
-    transition:
-      color 0.15s,
-      background-color 0.15s !important;
-  }
-
-  .cdc-review__more:hover {
-    background: #ffffff14;
-    color: #fff;
-  }
-
-  .cdc-review__more svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .cdc-review__more--open svg {
-    transform: rotate(180deg);
-  }
-
   .cdc-avatar {
     display: inline-block;
     width: 56px;
@@ -225,24 +103,6 @@
   html[data-cdc-ai~='white'] .cdc-avatar--w,
   html[data-cdc-ai~='black'] .cdc-avatar--b {
     background: var(--cdc-computer-avatar);
-  }
-
-  .cdc-acc {
-    display: inline-block;
-    min-width: 52px;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-size: 17px;
-    font-weight: 800;
-  }
-
-  .cdc-acc--w {
-    background: #fff;
-    color: var(--cdc-grey-800);
-  }
-  .cdc-acc--b {
-    background: var(--cdc-grey-700);
-    color: #fff;
   }
 
   /* The game rating's label explains itself on hover (#cdc-tip). */

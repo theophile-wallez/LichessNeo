@@ -16,7 +16,7 @@ import { graphMarkup, knownRuns } from './graph-markup.ts';
 import { evalChip, header } from './markup.ts';
 import { openingMarkup } from './opening.ts';
 import { overflows } from './stream.ts';
-import { playerName } from './summary-panel.ts';
+import { playerName } from './summary-players.ts';
 import { tipPlacement } from './tooltip.ts';
 // What the original script drew for the same inputs.
 import legacy from './fixtures/legacy.json' with { type: 'json' };

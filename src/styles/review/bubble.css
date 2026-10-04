@@ -227,18 +227,24 @@
     color: var(--cdc-orange-dark) !important;
   }
 
-  .cdc-review__foot .cdc-btn {
-    width: 100%;
-    height: 56px;
-    font-size: 20px;
+  .cdc-review__foot {
+    display: flex;
+    gap: 10px;
   }
 
-  /* Lichess's "Learn from your mistakes", under Start Review. */
+  .cdc-review__foot .cdc-btn {
+    flex: 1.4;
+    height: 52px;
+    font-size: 18px;
+  }
+
+  /* Lichess's "Learn from your mistakes", beside Start Review. */
   .cdc-review__foot .cdc-btn.cdc-review__learn {
-    height: 40px;
-    margin-top: 8px;
+    flex: 1;
+    padding-inline: 14px;
     color: var(--cdc-text);
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.2;
   }
 
   /* ---- Controls --- */

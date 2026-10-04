@@ -258,8 +258,8 @@
     padding: 12px 16px;
   }
 
-  /* The summary's graph, players and accuracy stay above the scrolling rows; both
-     reserve the scrollbar gutter so their columns line up. */
+  /* The summary's graph and players stay above the scrolling moves and phases; both
+     reserve the scrollbar gutter so they're as wide. */
   .cdc-review__top {
     flex: none;
     overflow: hidden;

@@ -37,7 +37,35 @@ export const en: ReviewLanguage = {
     explain: 'Explain',
     best: 'Best',
     analysing: 'Analyzing game…',
-    players: 'Players',
+    playedLike: 'Played like',
+    moves: 'Moves',
+    profileTitle: 'Profile',
+    profile: {
+      opening: {
+        name: 'Opening',
+        how: 'Accuracy of the moves before the middlegame: until pieces are traded or developed, or the two camps mix.',
+      },
+      middlegame: {
+        name: 'Middlegame',
+        how: 'Accuracy of the moves from the middlegame to the endgame.',
+      },
+      endgame: {
+        name: 'Endgame',
+        how: 'Accuracy once six pieces or fewer are left, kings and pawns aside.',
+      },
+      tactics: {
+        name: 'Tactics',
+        how: 'Share of the tactical chances found: brilliant and great moves, against the chances missed.',
+      },
+      defense: {
+        name: 'Defense',
+        how: 'Accuracy of the moves played while worse off, under 35% winning chances.',
+      },
+      conversion: {
+        name: 'Conversion',
+        how: 'Accuracy of the moves played while better off, over 65% winning chances.',
+      },
+    },
     accuracy: 'Accuracy',
     anonymous: 'Anonymous',
     close: 'Close review',
@@ -52,7 +80,6 @@ export const en: ReviewLanguage = {
     less: 'Show less',
     gameRating: 'Game Rating',
     gameRatingTip: 'An estimate of a player’s rating based on a single game.',
-    phases: { opening: 'Opening', tactics: 'Tactics', strategy: 'Strategy', endgame: 'Endgame' },
     bestWas: move => `${move} was best.`,
     cost: percent => `−${percent}% winning chances`,
     lines: {

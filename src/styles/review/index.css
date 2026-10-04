@@ -1,5 +1,7 @@
 @import './layout.css';
 @import './summary.css';
+@import './summary-players.css';
+@import './summary-moves.css';
 @import './coach.css';
 @import './bubble.css';
 @import './move-list.css';

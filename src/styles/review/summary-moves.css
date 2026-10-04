@@ -1,0 +1,252 @@
+/* ---- Summary: moves and phases --- */
+
+/* The summary's rows per move class and its phases' radar (view/summary-moves.ts,
+   view/summary-radar.ts), the bars and shapes in the sides' colors (summary-players.css). */
+
+@media (min-width: 1020px) {
+  .cdc-sum-h {
+    margin: 16px 0 10px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .cdc-sum-moves {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0 0;
+    border-radius: 14px;
+    background: #ffffff05;
+    box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  }
+
+  .cdc-sum-move {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) 96px 64px;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 14px;
+  }
+
+  .cdc-sum-move + .cdc-sum-move {
+    border-top: 1px solid #ffffff08;
+  }
+
+  .cdc-sum-move__label {
+    overflow: hidden;
+    color: var(--cdc-text);
+    font-size: 13.5px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cdc-sum-split {
+    display: flex;
+    gap: 3px;
+    height: 5px;
+  }
+
+  .cdc-sum-split > span {
+    border-radius: 999px;
+    background: var(--cdc-side);
+  }
+
+  .cdc-sum-move--none :is(.cdc-sum-split, .cdc-sum-move__counts) {
+    opacity: 0.35;
+  }
+
+  .cdc-sum-move__counts {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+    white-space: nowrap;
+  }
+
+  .cdc-sum-move__counts i {
+    color: var(--cdc-text-dim);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* A count that goes nowhere sits where a button's number would. */
+  .cdc-t-num {
+    padding: 2px 4px;
+    color: var(--cdc-side);
+    font-size: 15px;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Draft counts, until every move is judged at full depth. */
+  .cdc-sum-moves--loading .cdc-t-num {
+    opacity: 0.6;
+  }
+
+  /* A count goes to its moves: it lights up under the pointer, as the chevron does. */
+  .cdc-t-jump {
+    margin: -2px -4px;
+    padding: 2px 4px;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 0.15s !important;
+  }
+
+  .cdc-t-jump:hover {
+    background: #ffffff14;
+  }
+
+  .cdc-t-jump:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 1px;
+  }
+
+  /* The chevron under the rows opens the rest of them. */
+  .cdc-review__more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 36px;
+    height: 28px;
+    margin: 2px 0 4px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: #ffffff80;
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      background-color 0.15s !important;
+  }
+
+  .cdc-review__more:hover {
+    background: #ffffff14;
+    color: #fff;
+  }
+
+  .cdc-review__more svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cdc-review__more--open svg {
+    transform: rotate(180deg);
+  }
+
+  /* ---- Phases --- */
+
+  .cdc-sum-radar {
+    display: flex;
+    justify-content: center;
+    padding: 10px 8px 4px;
+    border-radius: 16px;
+    background: #ffffff05;
+    box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  }
+
+  .cdc-sum-radar svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .cdc-sum-radar__ring {
+    fill: none;
+    stroke: #ffffff12;
+    stroke-dasharray: 3 5;
+  }
+
+  .cdc-sum-radar__ring--edge {
+    stroke: #ffffff24;
+    stroke-dasharray: none;
+  }
+
+  .cdc-sum-radar__spoke {
+    stroke: #ffffff10;
+  }
+
+  .cdc-sum-radar g polygon {
+    fill: color-mix(in srgb, var(--cdc-side) 24%, transparent);
+    stroke: var(--cdc-side);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+  }
+
+  .cdc-sum-radar g circle {
+    fill: var(--cdc-side);
+  }
+
+  /* Only the names, the "?" and the corners' hit areas take the pointer: the shapes would
+     cover the other side's corners. */
+  .cdc-sum-radar :is(g polygon, g circle, .cdc-sum-radar__axis) {
+    pointer-events: none;
+  }
+
+  .cdc-sum-radar :is(.cdc-sum-radar__name, .cdc-sum-radar__how) {
+    pointer-events: auto;
+  }
+
+  .cdc-sum-radar__axis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 100%;
+  }
+
+  .cdc-sum-radar__name {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #d6d6dc;
+    font-size: 12.5px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  /* How the score is worked out, in the tooltip. */
+  .cdc-sum-radar__how {
+    display: inline-grid;
+    place-items: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffffff14;
+    box-shadow: inset 0 0 0 1px #ffffff26;
+    color: var(--cdc-text-dim);
+    font-size: 9.5px;
+    font-weight: 900;
+    cursor: help;
+  }
+
+  .cdc-sum-radar__how:hover {
+    background: #ffffff26;
+    color: #fff;
+  }
+
+  .cdc-sum-radar__scores {
+    display: flex;
+    gap: 8px;
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .cdc-sum-radar__scores b {
+    color: var(--cdc-side);
+    font-weight: 900;
+  }
+
+  .cdc-sum-radar__hit {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}

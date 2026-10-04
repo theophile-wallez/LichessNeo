@@ -30,16 +30,19 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
 
   it('has the original’s interface strings', () => {
     const { T } = original;
-    // Explain's lines are new: the original had none.
-    const { phases, bestWas, lines: _lines, ...ui } = language.ui;
-    const { phases: originalPhases, bestWas: originalBestWas, ...originalUi } = T;
+    // Explain's lines and the summary's profile are new: the original had none. Its phase
+    // and player labels went with its table.
+    const {
+      bestWas,
+      lines: _lines,
+      playedLike: _playedLike,
+      moves: _moves,
+      profileTitle: _profileTitle,
+      profile: _profile,
+      ...ui
+    } = language.ui;
+    const { phases: _phases, players: _players, bestWas: originalBestWas, ...originalUi } = T;
     expect(ui).toEqual(originalUi);
-    expect([phases.opening, phases.tactics, phases.strategy, phases.endgame]).toEqual([
-      originalPhases.o,
-      originalPhases.t,
-      originalPhases.s,
-      originalPhases.e,
-    ]);
     expect(bestWas('[[m:w:Nf3]]')).toBe(originalBestWas.replace('{m}', '[[m:w:Nf3]]'));
   });
 
