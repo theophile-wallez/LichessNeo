@@ -71,10 +71,22 @@ export class Jumper {
     this.#squash = squash;
   }
 
+  /** On the ground, and not about to leave it. */
+  get resting(): boolean {
+    return this.height === 0 && this.#pending === null;
+  }
+
   hop(time: number, strength: number): void {
-    if (this.height > 0 || this.#pending) return;
+    if (!this.resting) return;
     this.#squash.kick(-2.4);
     this.#pending = { at: time + 0.1, strength };
+  }
+
+  /** Lets go of it `height` up: it falls and lands with a squash. */
+  drop(height: number): void {
+    this.#pending = null;
+    this.height = height;
+    this.velocity = 0;
   }
 
   step(time: number, dt: number): void {
@@ -103,7 +115,8 @@ export class Glances {
   y = 0;
   #target: Gaze = { x: 0, y: 0 };
   #pointerAt = -10;
-  #wanderAt = 0;
+  // It looks straight ahead a moment first, as its still does, before glancing around.
+  #wanderAt = 2;
   readonly #random: () => number;
 
   constructor(random: () => number = Math.random) {

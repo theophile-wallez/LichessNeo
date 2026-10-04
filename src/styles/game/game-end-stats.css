@@ -1,0 +1,125 @@
+/* The game over's card within (page/game-over/card.ts, game-end-card.css): the player's
+ * accuracy over the counts of their moves, then the way to Game Review. */
+
+@media (min-width: 1020px) {
+  /* A card within, a shade lighter. */
+  main:is(.round, .analyse) .cdc-end__stub {
+    grid-area: stub;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2cqh;
+    min-width: 0;
+    padding: 2.4cqh 1.6cqh var(--cdc-card-foot);
+    border-radius: var(--cdc-inner-r);
+    background: #ffffff0a;
+    box-shadow: inset 0 0 0 1px #ffffff0f;
+  }
+
+  main:is(.round, .analyse) .cdc-end__accuracy {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  main:is(.round, .analyse) .cdc-end__accuracy b {
+    font-size: max(24px, 5.2cqh);
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  main:is(.round, .analyse) .cdc-end__accuracy span {
+    margin-top: 0.4cqh;
+    color: var(--cdc-text-dim);
+    font-size: max(11px, 1.9cqh);
+    font-weight: 700;
+  }
+
+  main:is(.round, .analyse) .cdc-end__counts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9cqh;
+  }
+
+  /* A row each: the class's icon, its name, its number at the end. */
+  main:is(.round, .analyse) .cdc-end__count {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1cqh;
+  }
+
+  main:is(.round, .analyse) .cdc-end__count-top {
+    display: contents;
+  }
+
+  main:is(.round, .analyse) .cdc-end__count-icon {
+    grid-column: 1;
+    width: max(18px, 3.2cqh);
+    height: max(18px, 3.2cqh);
+  }
+
+  main:is(.round, .analyse) .cdc-end__count-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  main:is(.round, .analyse) .cdc-end__count-label {
+    grid-column: 2;
+    grid-row: 1;
+    overflow: hidden;
+    color: var(--cdc-grey-100);
+    font-size: max(12px, 2.1cqh);
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  main:is(.round, .analyse) .cdc-end__count b {
+    grid-column: 3;
+    grid-row: 1;
+    color: var(--cdc-count-c, #fff);
+    font-size: max(13px, 2.4cqh);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+
+  main:is(.round, .analyse) .cdc-end__counts--revealed .cdc-end__count {
+    animation: cdc-end-chip 0.4s calc(var(--cdc-count-i, 0) * 180ms)
+      cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+  }
+
+  @keyframes cdc-end-chip {
+    from {
+      opacity: 0;
+      scale: 0.6;
+    }
+  }
+
+  /* A small board has no room for the counts beside: they go under. */
+  @container (max-width: 480px) {
+    main:is(.round, .analyse) .cdc-end__card {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        'main'
+        'stub';
+    }
+
+    main:is(.round, .analyse) .cdc-end__stub {
+      flex-flow: row wrap;
+      align-items: center;
+      gap: 2.4cqh;
+    }
+
+    main:is(.round, .analyse) .cdc-end__actions {
+      flex-basis: 100%;
+      padding-top: 0;
+    }
+
+    main:is(.round, .analyse) .cdc-end__counts {
+      flex: 1;
+    }
+  }
+}

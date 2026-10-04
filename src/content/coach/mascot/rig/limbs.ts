@@ -8,6 +8,7 @@ import {
   type Matrix4,
 } from 'three';
 import { ARM_LENGTH, armGeometry, footGeometry } from '#content/coach/mascot/cast/shapes.ts';
+import type { Lights } from '#content/coach/mascot/cast/shell.ts';
 import { FurMode, type FurModeValue, type FurOptions } from '#content/coach/mascot/fur/fur.ts';
 import { Spring } from '#content/coach/mascot/motion.ts';
 
@@ -39,10 +40,12 @@ export interface FeetLook {
   readonly mode: FurModeValue;
 }
 
-/** What a part needs from the rig: the body to hang on, and a furry mesh that bends as it moves. */
+/** What a part needs: the body to hang on, and a furry mesh that bends (a robot's: plastic). */
 export interface RigBuilder {
   readonly body: Group;
   readonly fur: (geometry: BufferGeometry, options: FurOptions, probe?: Vector3) => Mesh;
+  /** A robot's lights, which ease to another level's colors with its plastic. */
+  readonly lights: () => Lights;
 }
 
 export interface Ear {
@@ -50,6 +53,13 @@ export interface Ear {
   readonly side: number;
   readonly tilt: number;
   readonly twitch: Spring;
+}
+
+export interface Foot {
+  readonly mesh: Mesh;
+  readonly side: number;
+  /** Its height standing. */
+  readonly rest: number;
 }
 
 export interface Arm {
@@ -131,16 +141,24 @@ export function buildArms(rig: RigBuilder, arms: ArmsLook | null): Arm[] {
 }
 
 /** Feet stand under the body, outside its squash. */
-export function buildFeet(rig: RigBuilder, ground: Group, feet: FeetLook | null): void {
-  if (!feet) return;
+export function buildFeet(rig: RigBuilder, ground: Group, feet: FeetLook | null): Foot[] {
+  if (!feet) return [];
   const geometry = footGeometry();
-  for (const side of SIDES) {
-    const foot = rig.fur(geometry, { layers: 10, length: 0.04, mode: feet.mode, density: 80 });
+  return SIDES.map(side => {
+    const mesh = rig.fur(geometry, { layers: 10, length: 0.04, mode: feet.mode, density: 80 });
     const [x, y, z] = feet.position;
-    foot.position.set(side * x, y, z);
-    foot.scale.setScalar(feet.scale);
-    ground.add(foot);
-  }
+    mesh.position.set(side * x, y, z);
+    mesh.scale.setScalar(feet.scale);
+    ground.add(mesh);
+    return { mesh, side, rest: y };
+  });
+}
+
+/** The feet lift one after the other, `stride` steps into a walk, as much as `gait`. */
+export function stepFeet(feet: readonly Foot[], stride: number, gait: number): void {
+  const swing = Math.sin(stride * Math.PI);
+  for (const { mesh, side, rest } of feet)
+    mesh.position.y = rest + Math.max(0, swing * side) * 0.16 * gait;
 }
 
 const FORWARD = new Vector3(0, 0, 1);

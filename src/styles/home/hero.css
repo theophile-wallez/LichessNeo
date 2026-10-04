@@ -92,8 +92,9 @@
       0 12px 32px #00000040;
   }
 
-  /* The user's coach, big and whole, as the hero illustration (content/pages/hero-coach.ts):
-     its still (the number set by content/bootstrap/coach-choice.ts) until the live one is in. */
+  /* The user's coach, big and whole, as the hero illustration (content/pages/hero-coach.ts).
+     The live one makes an entrance, so the corner stays empty until it's in: its still (the
+     number set by content/bootstrap/coach-choice.ts) shows only if it can't load. */
   .cdc-hero__coach {
     position: absolute;
     top: 4px;
@@ -107,31 +108,30 @@
     pointer-events: none;
   }
 
-  html[data-cdc-coach='1'] .cdc-hero__coach {
+  html[data-cdc-coach='1'] .cdc-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
   }
-  html[data-cdc-coach='2'] .cdc-hero__coach {
+  html[data-cdc-coach='2'] .cdc-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
   }
-  html[data-cdc-coach='3'] .cdc-hero__coach {
+  html[data-cdc-coach='3'] .cdc-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
   }
-  html[data-cdc-coach='4'] .cdc-hero__coach {
+  html[data-cdc-coach='4'] .cdc-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
   }
-  html[data-cdc-coach='5'] .cdc-hero__coach {
+  html[data-cdc-coach='5'] .cdc-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
   }
-  html[data-cdc-coach='6'] .cdc-hero__coach {
+  html[data-cdc-coach='6'] .cdc-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
   }
-  html[data-cdc-coach='7'] .cdc-hero__coach {
+  html[data-cdc-coach='7'] .cdc-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
   }
 
   /* Live, its canvas spills past the sides so arms and tails show, and a click makes it react. */
   .cdc-hero__coach--live {
-    background-image: none !important;
     pointer-events: auto;
     cursor: pointer;
   }

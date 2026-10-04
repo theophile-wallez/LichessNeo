@@ -1,11 +1,13 @@
 import { BufferGeometry, Group, Matrix4, Mesh, Vector3 } from 'three';
 import type { CoachMood } from '#shared/coach.ts';
 import type { Character, PartMotion } from '#content/coach/mascot/cast/character.ts';
+import { Shell, type Lights } from '#content/coach/mascot/cast/shell.ts';
 import { Face } from '#content/coach/mascot/face/face.ts';
 import { Surface } from '#content/coach/mascot/face/surface.ts';
 import {
   createFur,
   FurMode,
+  type Colors,
   type FurLook,
   type FurOptions,
   type FurPart,
@@ -13,6 +15,7 @@ import {
 import { easePose, MOODS, type Pose } from '#content/coach/mascot/moods.ts';
 import { between, damp, Spring } from '#content/coach/mascot/motion.ts';
 import { Blinker, Glances, Jumper, Talker, type Gaze } from './behaviour.ts';
+import { Entrance, type EntranceKind } from './entrance.ts';
 import { bendFur } from './fur-lag.ts';
 import { Reactions } from './reactions.ts';
 import {
@@ -20,21 +23,24 @@ import {
   buildEars,
   buildFeet,
   palmForward,
+  stepFeet,
   type Arm,
   type Ear,
+  type Foot,
   type RigBuilder,
 } from './limbs.ts';
 
-// One rig for every mascot: a character says what its body, face, ears, arms
-// and feet look like, and what else it has; the rig breathes, blinks, talks,
-// hops, takes the review's moods, and reacts when it's clicked.
+// One rig for every mascot, furry or plastic: a character says what its body,
+// face, ears, arms and feet look like, and what else it has; the rig breathes, blinks, talks,
+// hops, takes the review's moods, reacts when it's clicked, and can make an
+// entrance.
 
 const HELLO_SECONDS = 1.8;
 
 export class Mascot implements RigBuilder {
   readonly root = new Group();
   readonly body = new Group();
-  /** The mood it shows: the one it was given, or a reaction's. */
+  /** The mood it shows: the one it was given, a reaction's, or its entrance's. */
   mood: CoachMood = 'neutral';
   #given: CoachMood = 'neutral';
   #talking = false;
@@ -43,9 +49,12 @@ export class Mascot implements RigBuilder {
   readonly #torso = new Group();
   readonly #look: FurLook;
   readonly #furs: FurPart[] = [];
+  /** A robot's plastic, in place of fur. */
+  readonly #shell: Shell | null;
   readonly #face: Face;
   readonly #ears: Ear[];
   readonly #arms: Arm[];
+  readonly #feet: Foot[];
   readonly #extra: PartMotion | null;
   #pose: Pose = MOODS.neutral.pose;
   #time = 0;
@@ -59,10 +68,14 @@ export class Mascot implements RigBuilder {
   #twitchAt = 3;
   #waveUntil = 0;
   #wave = 0;
+  #entrance: Entrance | null = null;
+  /** Its walk's sway, from -1 to 1: its feet, body and arms follow it. */
+  #swing = 0;
   readonly #armRotation = new Matrix4();
 
   constructor(character: Character, look: FurLook) {
     this.#look = look;
+    this.#shell = character.skin === 'shell' ? new Shell(character.colors) : null;
     this.body.position.y = -character.body.bottom;
     this.root.add(this.#squashed);
     this.#squashed.add(this.#torso);
@@ -80,7 +93,7 @@ export class Mascot implements RigBuilder {
     this.body.add(this.#face.group);
     this.#ears = buildEars(this, character.ears);
     this.#arms = buildArms(this, character.arms);
-    buildFeet(this, this.#squashed, character.feet);
+    this.#feet = buildFeet(this, this.#squashed, character.feet);
     this.#extra = character.extras(this);
   }
 
@@ -89,11 +102,27 @@ export class Mascot implements RigBuilder {
     return this.#jumper.height;
   }
 
+  /** How far it is from its place, sideways, making its entrance. */
+  get x(): number {
+    return this.#entrance?.x ?? 0;
+  }
+
   readonly fur = (geometry: BufferGeometry, options: FurOptions, probe?: Vector3): Mesh => {
+    if (this.#shell) return this.#shell.mesh(geometry, options.mode);
     const part = createFur(geometry, this.#look, options, probe);
     this.#furs.push(part);
     return part.mesh;
   };
+
+  readonly lights = (): Lights => {
+    if (!this.#shell) throw new Error('only a robot has lights');
+    return this.#shell.lights;
+  };
+
+  /** Eases into `colors`, another look of the same mascot: a robot of another level. */
+  recolor(colors: Colors): void {
+    this.#shell?.recolor(colors);
+  }
 
   dispose(): void {
     this.root.traverse(object => {
@@ -101,6 +130,7 @@ export class Mascot implements RigBuilder {
         object.geometry.dispose();
     });
     for (const part of this.#furs) part.material.dispose();
+    this.#shell?.dispose();
   }
 
   setMood(mood: CoachMood): void {
@@ -128,6 +158,7 @@ export class Mascot implements RigBuilder {
 
   /** A cute reaction to a click: a hop, a hello, a laugh or a twirl. */
   poke(): void {
+    if (this.#entrance) return;
     const kind = this.#reactions.start(this.#time);
     if (kind === 'hop') this.hop(4);
     if (kind === 'wave') this.waveHello();
@@ -142,6 +173,26 @@ export class Mascot implements RigBuilder {
     this.#waveUntil = this.#time + HELLO_SECONDS;
   }
 
+  /** Comes on stage from `from` sideways (or from the sky), then waves hello. */
+  enter(kind: EntranceKind, from: number): void {
+    this.#waveUntil = 0;
+    this.#entrance = new Entrance(kind, from, this.#jumper);
+  }
+
+  #moveIn(time: number, dt: number): void {
+    const motion = this.#entrance;
+    if (!motion) return;
+    motion.step(time, dt);
+    this.#swing = Math.sin(motion.stride * Math.PI) * motion.gait;
+    this.root.position.x = motion.x;
+    stepFeet(this.#feet, motion.stride, motion.gait);
+    this.#squashed.rotation.y = motion.turn;
+    if (!motion.done) return;
+    this.#entrance = null;
+    this.#reactions.play('hello', time);
+    this.waveHello();
+  }
+
   /** The pointer, from -1 to 1 each way. */
   pointTo(gaze: Gaze): void {
     this.#glances.pointTo(gaze, this.#time);
@@ -150,13 +201,15 @@ export class Mascot implements RigBuilder {
   update(dt: number): void {
     this.#time += dt;
     const time = this.#time;
-    this.#show(this.#reactions.mood(time, this.#given));
-    this.#talker.talking = this.#talking || this.#reactions.laughing(time);
+    this.#shell?.update(dt);
+    this.#moveIn(time, dt);
+    this.#show(this.#entrance?.mood ?? this.#reactions.mood(time, this.#given));
+    this.#talker.talking = this.#talking || this.#reactions.chattering(time);
     const mood = MOODS[this.mood];
     this.#pose = easePose(this.#pose, mood.pose, (from, to) => damp(from, to, 9, dt));
     const pose = this.#pose;
     this.#jumper.step(time, dt);
-    this.#glances.step(time, dt, mood.look);
+    this.#glances.step(time, dt, this.#entrance?.look ?? mood.look);
     const blink = this.#blinker.openness(time);
     const talkOpen = this.#talker.openness(dt);
 
@@ -171,12 +224,13 @@ export class Mascot implements RigBuilder {
       Math.max(velocity, 0) * 0.02;
     const thin = 1 / Math.sqrt(Math.max(stretch, 0.5));
     this.#squashed.scale.set(thin, stretch, thin);
-    this.root.position.y = this.#jumper.height;
+    this.root.position.y = this.#jumper.height + Math.abs(this.#swing) * 0.05;
 
     this.#lean.target = pose.lean;
     this.#torso.rotation.x = this.#lean.step(dt);
     // Without arms to wave, it says hello by wobbling.
-    const wobble = this.#arms.length > 0 ? 0 : Math.sin(time * 11) * 0.09 * this.#wave;
+    const wobble =
+      (this.#arms.length > 0 ? 0 : Math.sin(time * 11) * 0.09 * this.#wave) + this.#swing * 0.1;
     this.#torso.rotation.z =
       pose.tilt + wobble + Math.sin(time * 0.8) * 0.022 + Math.sin(time * 0.37) * 0.012;
     this.#torso.rotation.y = this.#glances.x * 0.14 + this.#reactions.spin(time);
@@ -213,6 +267,7 @@ export class Mascot implements RigBuilder {
     for (const arm of this.#arms) {
       wanted.fromArray(arm.side < 0 ? arms.left : arms.right);
       if (this.mood === 'delight') wanted.x += Math.sin(time * 15 + arm.side) * 0.18;
+      wanted.z += arm.side * this.#swing * 0.4;
       if (arm.side < 0 && this.#wave > 0.01) {
         const angle = -0.5 + Math.sin(time * 11) * 0.32;
         wanted.lerp(new Vector3(Math.sin(angle), Math.cos(angle), 0.25), this.#wave);

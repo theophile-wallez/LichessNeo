@@ -16,6 +16,7 @@ describe('cardMarkup', () => {
   it('heads the card with the result and how it came', () => {
     const root = render(
       cardMarkup({
+        quote: null,
         outcome: { result: 'win', reason: 'mate', winner: 'white' },
         texts,
         coachId: 3,
@@ -38,6 +39,7 @@ describe('cardMarkup', () => {
   it('leaves the reason out when the status doesn’t say', () => {
     const root = render(
       cardMarkup({
+        quote: null,
         outcome: { result: 'draw', reason: 'draw', winner: null },
         texts,
         coachId: 1,

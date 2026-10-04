@@ -28,6 +28,7 @@ const NO_STRIPES = [0, 0, 0] as const;
 
 const pawn: Character = {
   name: 'Pion',
+  skin: 'fur',
   colors: { coat: '#f1e9da', front: '#fbf7ef', accent: '#ff7a5c' },
   frontMask: [0.5, 0.86],
   stripes: NO_STRIPES,
@@ -50,6 +51,7 @@ const pawn: Character = {
 
 const fennec: Character = {
   name: 'Fennec',
+  skin: 'fur',
   colors: { coat: '#e9b679', front: '#fff4e4', accent: '#f2a99a' },
   frontMask: [0.5, 0.86],
   stripes: NO_STRIPES,
@@ -84,6 +86,7 @@ const fennec: Character = {
 
 const dino: Character = {
   name: 'Dino',
+  skin: 'fur',
   colors: { coat: '#5ccf9c', front: '#fff1b5', accent: '#ff8a66' },
   frontMask: [0.42, 0.9],
   stripes: NO_STRIPES,
@@ -113,6 +116,7 @@ const dino: Character = {
 
 const axolotl: Character = {
   name: 'Axolotl',
+  skin: 'fur',
   colors: { coat: '#ff8fbf', front: '#ffc7de', accent: '#d9307a' },
   frontMask: [0.55, 0.9],
   stripes: NO_STRIPES,
@@ -141,6 +145,7 @@ const axolotl: Character = {
 
 const frog: Character = {
   name: 'Grenouille',
+  skin: 'fur',
   colors: { coat: '#7ad650', front: '#eef8b8', accent: '#ff6f91' },
   frontMask: [0.42, 0.9],
   stripes: NO_STRIPES,
@@ -163,6 +168,7 @@ const frog: Character = {
 
 const bee: Character = {
   name: 'Abeille',
+  skin: 'fur',
   colors: { coat: '#ffc93c', front: '#ffe28c', accent: '#3b2a20' },
   frontMask: [0.5, 0.86],
   stripes: [2.6, -9, 0.26],
@@ -183,6 +189,7 @@ const bee: Character = {
 
 const octopus: Character = {
   name: 'Poulpe',
+  skin: 'fur',
   colors: { coat: '#2bbfd4', front: '#9fe7ef', accent: '#ff8fb1' },
   frontMask: [0.55, 0.9],
   stripes: NO_STRIPES,

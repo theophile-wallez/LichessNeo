@@ -229,8 +229,9 @@
     color: #fff;
   }
 
+  /* Room for the segmented tabs (pages/lobby.css) over the whole quick-pairing grid. */
   main.lobby .lobby__app {
-    height: 490px !important;
+    height: 520px !important;
     max-height: none !important;
   }
 

@@ -22,6 +22,7 @@ import { moveTimes } from './game/move-times.ts';
 import { newGame } from './game/new-game.ts';
 import { countryFlags } from './game/flags.ts';
 import { gameIntro } from './game/intro/index.ts';
+import { coachMessage } from './game/coach-message.ts';
 import { boardInset } from './layout/board-inset.ts';
 import { evalGauge } from './analysis/eval-gauge.ts';
 import { puzzleSession } from './pages/puzzle.ts';
@@ -39,6 +40,7 @@ import { devReload } from './dev/reload.ts';
 import { radar } from './charts/radar/index.ts';
 import { ratingChart } from './charts/rating-chart/index.ts';
 import { coach } from './coach/index.ts';
+import { computer } from './computer/index.ts';
 import { reloadIfInjectedLate } from './bootstrap/late-reload.ts';
 import { startSyncLoop } from './sync-loop.ts';
 
@@ -72,6 +74,7 @@ function main(): void {
     newGame,
     countryFlags,
     gameIntro,
+    coachMessage,
     boardInset,
     evalGauge,
     puzzleSession,
@@ -89,6 +92,7 @@ function main(): void {
     radar,
     ratingChart,
     coach,
+    computer,
   ]);
   startSyncLoop();
 }

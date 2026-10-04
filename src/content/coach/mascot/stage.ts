@@ -85,9 +85,15 @@ export class Stage {
     this.#camera.updateProjectionMatrix();
   }
 
+  /** Half the width it shows where the mascot stands. */
+  get halfWidth(): number {
+    return Math.tan(MathUtils.degToRad(this.#camera.fov) / 2) * DISTANCE * this.#camera.aspect;
+  }
+
   /** The shadow under a mascot `height` off the ground, mid-hop: smaller and fainter. */
-  lift(height: number): void {
+  lift(height: number, x: number): void {
     if (!this.#shadow) return;
+    this.#shadow.position.x = x;
     const lift = 1 / (1 + height * 1.6);
     this.#shadow.scale.setScalar(lift);
     this.#shadow.material.opacity = lift;

@@ -5,6 +5,77 @@
   background-image: none !important;
 }
 
+/* The tabs as a segmented control, like the profile's (styles/profile). Lichess draws the bar
+   anew on a click, so its raised tab can't slide (content/ui/tab-bars.ts). */
+.lobby__app > .tabs-horiz {
+  display: flex;
+  gap: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid var(--cdc-card-border) !important;
+  border-radius: 12px;
+  background: var(--cdc-grey-950);
+}
+
+.lobby__app > .tabs-horiz > button,
+.lobby__app > .tabs-horiz > button.active {
+  display: flex;
+  /* Sized to their labels, which differ by language, then sharing what's left. */
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 38px;
+  padding: 0 10px;
+  border: none !important;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cdc-text-dim) !important;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+.lobby__app > .tabs-horiz > button:hover {
+  background: #ffffff0a;
+  color: var(--cdc-text-strong) !important;
+}
+
+.lobby__app > .tabs-horiz > button.active {
+  background: var(--cdc-bg-raised);
+  box-shadow: 0 1px 3px #00000080;
+  color: var(--cdc-text-strong) !important;
+}
+
+/* Lichess's phone layout: four tabs signed in, on a narrow screen. */
+@media (max-width: 800px) {
+  .lobby__app > .tabs-horiz > button,
+  .lobby__app > .tabs-horiz > button.active {
+    padding: 0 6px;
+    font-size: 13px;
+  }
+}
+
+/* The count of games in play, as the profile's unread count. */
+.lobby__app > .tabs-horiz .unread {
+  flex: none;
+  box-sizing: border-box;
+  min-width: 20px;
+  margin-inline-start: 8px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--cdc-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+}
+
 .lpools {
   font-family: var(--cdc-font) !important;
 }

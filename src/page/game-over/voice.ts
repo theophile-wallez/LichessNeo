@@ -1,10 +1,12 @@
 import type { CoachMood } from '#shared/coach.ts';
+import { html, setHtml } from '#shared/html.ts';
 import { postCoachState } from '#shared/protocol.ts';
+import { WORD_MS } from '#page/review/view/stream.ts';
 
-// The coach's words in the card's bubble, typed out as the coach speaks: its
-// mouth moves, played by the content script's rig, while the letters come.
-
-const TYPE_MS = 26;
+// The coach's words in the card's bubble, typed out as the coach speaks, word
+// by word as in Game Review (each fading in where it already holds its place,
+// review/bubble.css): its mouth moves, played by the content script's rig,
+// while the words come.
 // Words said at once still get a moment of talking.
 const TALK_MS = 1200;
 
@@ -37,16 +39,22 @@ export function createVoice(bubble: HTMLElement, coachId: number): Voice {
       bubble.classList.toggle('cdc-end__bubble--empty', true);
       talk(mood, false);
       timer = window.setTimeout(() => {
+        const words = text.match(/\S+\s*/g) ?? [];
+        setHtml(
+          bubble,
+          html`${words.map(word => html`<span class="cdc-w cdc-w--off">${word}</span>`)}`,
+        );
         bubble.classList.toggle('cdc-end__bubble--empty', false);
         talk(mood, true);
+        const spans = [...bubble.children];
         let shown = 0;
         timer = window.setInterval(() => {
-          shown++;
-          bubble.textContent = text.slice(0, shown);
-          if (shown < text.length) return;
+          const word = spans[shown++];
+          if (word) word.className = 'cdc-w cdc-w--in';
+          if (shown < spans.length) return;
           clearInterval(timer);
           talk(mood, false);
-        }, TYPE_MS);
+        }, WORD_MS);
       }, delayMs);
     },
   };

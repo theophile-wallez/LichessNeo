@@ -5,14 +5,15 @@
  * card comes in. */
 
 @media (min-width: 1020px) {
-  main.round[data-cdc-end] .cg-custom-svgs {
+  main:is(.round, .analyse)[data-cdc-end] .cg-custom-svgs {
     display: none !important;
   }
 
-  main.round > .cdc-end {
+  main:is(.round, .analyse) > .cdc-end {
     grid-area: board;
     position: relative;
-    z-index: 3;
+    /* Over the review's badges on the board (#cdc-board-overlay, review/eval-bar.css). */
+    z-index: 6;
     margin: var(--cdc-inset-t, 0px) var(--cdc-inset-r, 0px) var(--cdc-inset-b, 0px)
       var(--cdc-inset-l, 0px);
     container-type: size;
@@ -20,14 +21,22 @@
     font-family: var(--cdc-font);
   }
 
+  /* The analysis board's area also holds its player bars: the layer is the board's square,
+     under the top bar. Only a dev build shows it there (page/game-over/preview.ts). */
+  main.analyse > .cdc-end {
+    align-self: start;
+    aspect-ratio: 1;
+    margin-top: calc(var(--cdc-bar, 0px) + var(--cdc-inset-t, 0px));
+  }
+
   /* ---- Kings --- */
 
-  main.round .cdc-end__kings {
+  main:is(.round, .analyse) .cdc-end__kings {
     position: absolute;
     inset: 0;
   }
 
-  main.round .cdc-end__king {
+  main:is(.round, .analyse) .cdc-end__king {
     --cdc-king-c: var(--cdc-grey-400);
     position: absolute;
     top: calc(var(--row) * 12.5%);
@@ -36,16 +45,16 @@
     height: 12.5%;
   }
 
-  main.round .cdc-end__king--win {
+  main:is(.round, .analyse) .cdc-end__king--win {
     --cdc-king-c: var(--cdc-accent);
   }
 
-  main.round .cdc-end__king--loss {
+  main:is(.round, .analyse) .cdc-end__king--loss {
     --cdc-king-c: var(--cdc-red-dark);
   }
 
   /* The square in the badge's color, the king showing faintly through it; then a pip. */
-  main.round .cdc-end__king-icon {
+  main:is(.round, .analyse) .cdc-end__king-icon {
     position: absolute;
     top: 0;
     right: 0;
@@ -66,7 +75,7 @@
       box-shadow 0.4s !important;
   }
 
-  main.round .cdc-end--settled .cdc-end__king-icon {
+  main:is(.round, .analyse) .cdc-end--settled .cdc-end__king-icon {
     top: -10%;
     right: -10%;
     width: 38%;
@@ -76,22 +85,22 @@
     box-shadow: 0 0.3cqh 0.8cqh #00000059;
   }
 
-  main.round .cdc-end--settled .cdc-end__king-icon svg {
+  main:is(.round, .analyse) .cdc-end--settled .cdc-end__king-icon svg {
     width: 62%;
     height: 62%;
   }
 
-  main.round .cdc-end--settled .cdc-end__king-label {
+  main:is(.round, .analyse) .cdc-end--settled .cdc-end__king-label {
     animation: cdc-end-label-out 0.25s both !important;
   }
 
-  main.round .cdc-end__king-icon svg {
+  main:is(.round, .analyse) .cdc-end__king-icon svg {
     width: 52%;
     height: 52%;
     filter: drop-shadow(0 0.3cqh 0.4cqh #00000040);
   }
 
-  main.round .cdc-end__king-label {
+  main:is(.round, .analyse) .cdc-end__king-label {
     position: absolute;
     bottom: 80%;
     left: 50%;
@@ -108,17 +117,17 @@
     animation: cdc-end-label 0.4s 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
   }
 
-  main.round .cdc-end__king--below .cdc-end__king-label {
+  main:is(.round, .analyse) .cdc-end__king--below .cdc-end__king-label {
     top: 80%;
     bottom: auto;
   }
 
-  main.round .cdc-end__king--start .cdc-end__king-label {
+  main:is(.round, .analyse) .cdc-end__king--start .cdc-end__king-label {
     left: 0.6cqh;
     translate: none;
   }
 
-  main.round .cdc-end__king--end .cdc-end__king-label {
+  main:is(.round, .analyse) .cdc-end__king--end .cdc-end__king-label {
     right: 0.6cqh;
     left: auto;
     translate: none;
@@ -149,14 +158,14 @@
 
   /* Each piece falls from above the board with its own drift, spin, size and pace
    * (page/game-over/confetti.ts), then is gone. */
-  main.round .cdc-confetti {
+  main:is(.round, .analyse) .cdc-confetti {
     position: absolute;
     inset: 0;
     overflow: hidden;
     border-radius: 4px;
   }
 
-  main.round .cdc-confetti__piece {
+  main:is(.round, .analyse) .cdc-confetti__piece {
     position: absolute;
     top: 0;
     left: calc(var(--x) * 1%);
@@ -169,14 +178,14 @@
     animation: cdc-confetti-fall var(--fall) var(--delay) cubic-bezier(0.25, 0.4, 0.55, 1) both !important;
   }
 
-  main.round .cdc-confetti__piece--dot {
+  main:is(.round, .analyse) .cdc-confetti__piece--dot {
     height: calc(var(--size) * 1.3cqh);
     width: calc(var(--size) * 1.3cqh);
     border-radius: 50%;
   }
 
   /* A ribbon: a quarter of a ring, as a curled strip reads. */
-  main.round .cdc-confetti__piece--curl {
+  main:is(.round, .analyse) .cdc-confetti__piece--curl {
     width: calc(var(--size) * 4cqh);
     height: calc(var(--size) * 4cqh);
     border: calc(var(--size) * 0.9cqh) solid var(--c);

@@ -31,11 +31,13 @@ export type FinishedGame = z.infer<typeof FinishedPageSchema>['cfg']['data'];
 // The init data is JSON in a script element, which can't hold `</script>`.
 const INIT_DATA = /<script[^>]*\bid="page-init-data"[^>]*>([\s\S]*?)<\/script>/;
 
+/** The game in a finished game's init data, or null for any other page's. */
+export const parseFinishedGame = (initData: string | null | undefined): FinishedGame | null =>
+  parseJson(initData, FinishedPageSchema)?.cfg.data ?? null;
+
 /** The game in a finished game's page, or null for any other page. */
-export function readFinishedGame(page: string): FinishedGame | null {
-  const text = INIT_DATA.exec(page)?.[1];
-  return parseJson(text, FinishedPageSchema)?.cfg.data ?? null;
-}
+export const readFinishedGame = (page: string): FinishedGame | null =>
+  parseFinishedGame(INIT_DATA.exec(page)?.[1]);
 
 // The page can lag the game's end by a moment: try again, a second apart.
 const MAX_TRIES = 5;

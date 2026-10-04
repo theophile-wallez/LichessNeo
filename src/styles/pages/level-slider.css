@@ -1,0 +1,230 @@
+/* ---- Game setup: the computer's level as a slider --- */
+
+/* Stockfish's level (content/computer/level-slider.ts): the robot, a thick pill track in the
+   color of the level's robot, filled up to a big white knob, a dot per level and sparkles in
+   the fill, then the level and its rating. Lichess's buttons stay, hidden, and keep it. */
+.game-setup group.radio[data-cdc-slid] {
+  display: none !important;
+}
+
+.cdc-level {
+  --cdc-tier: #4f8cff;
+  --cdc-knob: 34px;
+  /* The first level sits this far in, so the fill shows even there; the last is at the end. */
+  --cdc-pad: 26px;
+  /* Where a level sits along the track, from 0 to 1, as the native range puts its knob. */
+  --cdc-at: calc(
+    var(--cdc-pad) + var(--cdc-knob) / 2 + (100% - var(--cdc-pad) - var(--cdc-knob)) *
+      var(--cdc-level-p, 0)
+  );
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cdc-level[data-cdc-tier='1'] {
+  --cdc-tier: #3fcf8e;
+}
+
+.cdc-level[data-cdc-tier='1'] .cdc-level__robot {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-1.webp');
+}
+
+.cdc-level[data-cdc-tier='2'] {
+  --cdc-tier: #4f8cff;
+}
+
+.cdc-level[data-cdc-tier='2'] .cdc-level__robot {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
+}
+
+.cdc-level[data-cdc-tier='3'] {
+  --cdc-tier: #9b6dff;
+}
+
+.cdc-level[data-cdc-tier='3'] .cdc-level__robot {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-3.webp');
+}
+
+.cdc-level[data-cdc-tier='4'] {
+  --cdc-tier: #ff5a5f;
+}
+
+.cdc-level[data-cdc-tier='4'] .cdc-level__robot {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-4.webp');
+}
+
+/* Its still at once, in the coaches' framing; the live one, drawn over it, hides it. */
+.cdc-level__robot {
+  position: relative;
+  flex: none;
+  height: 76px;
+  aspect-ratio: 124 / 114;
+  background: bottom center / contain no-repeat;
+  mask-image: linear-gradient(#000 74%, transparent);
+  cursor: pointer;
+}
+
+.cdc-level__robot[data-cdc-live] {
+  background-image: none !important;
+}
+
+.cdc-level__robot .cdc-level__live {
+  position: absolute;
+  inset: 0;
+}
+
+.cdc-level__slider {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+}
+
+/* The native range, invisible, on top: it takes the pointer and the keys. Inset as the levels
+   are, its knob is where ours is drawn. */
+.cdc-level__input {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 0 var(--cdc-pad);
+  width: calc(100% - var(--cdc-pad));
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  appearance: none;
+}
+
+.cdc-level__input::-webkit-slider-thumb {
+  width: var(--cdc-knob);
+  height: 44px;
+  appearance: none;
+}
+
+.cdc-level__input::-moz-range-thumb {
+  width: var(--cdc-knob);
+  height: 44px;
+  border: 0;
+}
+
+.cdc-level__track {
+  position: absolute;
+  inset: 6px 0;
+  border-radius: 999px;
+  background: #ffffff10;
+  box-shadow: inset 0 1px 3px #00000080;
+}
+
+.cdc-level__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--cdc-at);
+  /* Square at its end, the knob's middle: a rounded end would show through the knob's halo. */
+  border-radius: 999px 0 0 999px;
+  background:
+    radial-gradient(
+      circle at 75% 40%,
+      color-mix(in srgb, var(--cdc-tier) 55%, #fff),
+      transparent 60%
+    ),
+    linear-gradient(90deg, color-mix(in srgb, var(--cdc-tier) 55%, #000), var(--cdc-tier));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--cdc-tier) 45%, transparent);
+  transition:
+    width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s !important;
+}
+
+/* Sparkles at fixed spots across the whole track, cut to the fill: the fuller, the more show. */
+.cdc-level__glints {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--cdc-at)) 0 0 round 999px);
+  pointer-events: none;
+  transition: clip-path 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.cdc-level__sparkle {
+  position: absolute;
+  top: var(--cdc-y);
+  left: var(--cdc-x);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 4px #fff;
+  animation: cdc-level-twinkle 2.4s ease-in-out var(--cdc-delay) infinite both !important;
+}
+
+@keyframes cdc-level-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    scale: 0.6;
+  }
+  50% {
+    opacity: 0.9;
+    scale: 1.2;
+  }
+}
+
+/* A dot per level, where the knob stops. */
+.cdc-level__dot {
+  position: absolute;
+  top: 50%;
+  left: calc(
+    var(--cdc-pad) + var(--cdc-knob) / 2 + (100% - var(--cdc-pad) - var(--cdc-knob)) *
+      var(--cdc-i) / 7
+  );
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff59;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
+.cdc-level__thumb {
+  position: absolute;
+  top: 50%;
+  left: var(--cdc-at);
+  width: var(--cdc-knob);
+  height: var(--cdc-knob);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 2px 8px #00000080,
+    0 0 0 6px color-mix(in srgb, var(--cdc-tier) 28%, transparent);
+  translate: -50% -50%;
+  transition:
+    left 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s !important;
+}
+
+.cdc-level__input:focus-visible + .cdc-level__track .cdc-level__thumb {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.cdc-level__value {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 58px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cdc-level__value b {
+  color: var(--cdc-tier);
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+  transition: color 0.3s !important;
+}
+
+.cdc-level__value span {
+  margin-top: 3px;
+  color: var(--cdc-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+}

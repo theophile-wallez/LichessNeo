@@ -9,6 +9,8 @@ export const StorageKey = {
   pieces: 'cdc-pieces',
   sounds: 'cdc-sounds',
   coach: 'cdc-coach',
+  // The home hero coach's last entrance, never played twice running (content/coach/mascot).
+  coachEntrance: 'cdc-coach-entrance',
   boardZoom: 'cdc-board-zoom',
   // '1' while the sidebar is folded to its icons (content/sidebar/collapse.ts).
   sidebarCollapsed: 'cdc-sidebar-collapsed',

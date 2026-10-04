@@ -8,8 +8,9 @@ import { cellOf, type BoardCell } from './badges.ts';
 // What the game over reads off the game page: where the kings stand, and the
 // opponent's name as their bar shows it.
 
+// The game page's board, or the analysis board's, where a dev build previews it (preview.ts).
 const boardWrap = (main: HTMLElement): HTMLElement | null =>
-  queryOne(main, '.round__app__board .cg-wrap', HTMLElement);
+  queryOne(main, ':is(.round__app__board, .analyse__board) .cg-wrap', HTMLElement);
 
 /** Each king's cell, as the board is turned now. */
 export function kingCells(main: HTMLElement): Partial<Record<Color, BoardCell>> {
@@ -31,7 +32,9 @@ export function opponentName(main: HTMLElement, player: Color, fallback: string)
   const bottom = wrap ? wrapOrientation(wrap) : player;
   const bar = queryOne(
     main,
-    bottom === opposite(player) ? '.ruser-bottom' : '.ruser-top',
+    bottom === opposite(player)
+      ? ':is(.ruser-bottom, .cdc-player--bottom)'
+      : ':is(.ruser-top, .cdc-player--top)',
     HTMLElement,
   );
   const name = bar ? readPlayer(bar, undefined).name : '';

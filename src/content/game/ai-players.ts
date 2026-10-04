@@ -6,7 +6,8 @@ import { parseJson } from '#shared/json.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
 
 // The color(s) the computer plays, in `data-cdc-ai` on <html>, so its player
-// bar gets the "Play the computer" monitor as its avatar (styles/playerbar.css).
+// bar gets the computer's robot as its avatar (styles/playerbar.css), in the
+// colors of its level, in `data-cdc-ai-level`.
 // Lichess draws that bar like an anonymous player's, and only the game's data
 // tells them apart. The estimated rating of its level goes in `--cdc-ai-<color>`
 // for the bar, and into the game info (game-meta.ts). Every level's is in
@@ -37,6 +38,8 @@ const PageInitSchema = z.union([
 
 export interface ComputerPlayer {
   readonly color: Color;
+  /** Stockfish's level, 1 to 8. */
+  readonly level: number;
   readonly rating: string | undefined;
 }
 
@@ -49,7 +52,7 @@ export function readComputerPlayers(initData: string | null): ComputerPlayer[] {
     const computer = ComputerSchema.safeParse(seat);
     if (!computer.success || computer.data.ai === 0) return [];
     const { color, ai } = computer.data;
-    return [{ color, rating: AI_RATINGS[ai - 1] }];
+    return [{ color, level: ai, rating: AI_RATINGS[ai - 1] }];
   });
 }
 
@@ -62,6 +65,7 @@ export function markComputerPlayers(players: readonly ComputerPlayer[]): void {
   if (players.length === 0) return;
   const root = document.documentElement;
   setData(root, 'cdcAi', players.map(({ color }) => color).join(' '));
+  setData(root, 'cdcAiLevel', players[0] ? String(players[0].level) : null);
   for (const { color, rating } of players) {
     if (rating === undefined) continue;
     ratings.set(color, rating);

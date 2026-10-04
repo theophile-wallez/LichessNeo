@@ -4,9 +4,9 @@ import type { FaceLook } from '#content/coach/mascot/face/face.ts';
 import type { Colors } from '#content/coach/mascot/fur/fur.ts';
 import type { ArmsLook, EarsLook, FeetLook, RigBuilder } from '#content/coach/mascot/rig/limbs.ts';
 
-// What a mascot is made of: a furry body with a face laid on it, optional
-// ears, arms and feet, and extras (a collar, a tail, plates) that may move on
-// their own.
+// What a mascot is made of: a furry body (or a robot's plastic one) with a face
+// laid on it, optional ears, arms and feet, and extras (a collar, a tail,
+// plates) that may move on their own.
 
 export interface BodyLook {
   readonly geometry: () => BufferGeometry;
@@ -24,6 +24,8 @@ export interface PartMotion {
 
 export interface Character {
   readonly name: string;
+  /** Fur, or a robot's glossy plastic in the same colors (cast/shell.ts). */
+  readonly skin: 'fur' | 'shell';
   readonly colors: Colors;
   /** Where the front color starts on the body, at its bottom and at its top. */
   readonly frontMask: readonly [number, number];

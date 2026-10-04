@@ -31,6 +31,8 @@ export interface Colors {
   readonly coat: string;
   readonly front: string;
   readonly accent: string;
+  /** A robot's lights (cast/shell.ts). */
+  readonly light?: string;
 }
 
 let strands: Data3DTexture | null = null;

@@ -1,10 +1,12 @@
+import type { CoachMood } from '#shared/coach.ts';
 import { closestTo, createElement, queryOne, setData } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { badgesMarkup, kingBadges } from './badges.ts';
 import { kingCells } from './board.ts';
-import { actionsMarkup, cardMarkup } from './card.ts';
+import { actionsMarkup, cardMarkup, followUpMarkup, pickQuote } from './card.ts';
 import { CHIP_STAGGER_MS, createChips, type Chips } from './chips.ts';
 import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from './confetti.ts';
+import { countUp } from './count-up.ts';
 import { isFollowUpAction, pressFollowUp, readFollowUp } from './follow-up.ts';
 import type { Outcome } from './outcome.ts';
 import type { PlayerSummary } from './quick-review.ts';
@@ -53,10 +55,12 @@ interface Layer {
   readonly kings: HTMLElement;
   readonly card: HTMLElement | null;
   readonly counts: HTMLElement | null;
-  /** The ticket's stub: the accuracy over the counts. */
-  readonly stub: HTMLElement | null;
+  /** The accuracy and the counts, which go without figures; the review's way stays. */
+  readonly stats: readonly HTMLElement[];
   readonly accuracy: HTMLElement | null;
   readonly actions: HTMLElement | null;
+  /** The follow-ups' row, across the bottom. */
+  readonly more: HTMLElement | null;
   readonly voice: Voice | null;
   readonly chips: Chips | null;
 }
@@ -66,7 +70,8 @@ function buildLayer(input: GameOverInput): Layer {
   const kings = createElement('div', { className: 'cdc-end__kings' });
   root.append(kings);
   if (input.outcome.result === 'win') addConfetti(root);
-  root.insertAdjacentHTML('beforeend', cardMarkup(input).value);
+  const quote = pickQuote(input.outcome.result, input.texts, Math.random);
+  root.insertAdjacentHTML('beforeend', cardMarkup({ ...input, quote }).value);
   const card = queryOne(root, '.cdc-end__card', HTMLElement);
   const part = (name: string): HTMLElement | null =>
     card ? queryOne(card, `.cdc-end__${name}`, HTMLElement) : null;
@@ -76,9 +81,10 @@ function buildLayer(input: GameOverInput): Layer {
     kings,
     card,
     counts,
-    stub: part('stub'),
+    stats: [part('accuracy'), part('counts')].filter(element => element !== null),
     accuracy: card ? queryOne(card, '.cdc-end__accuracy b', HTMLElement) : null,
     actions: part('actions'),
+    more: part('more'),
     voice: bubble ? createVoice(bubble, input.coachId) : null,
     chips: counts ? createChips(counts) : null,
   };
@@ -96,8 +102,10 @@ function followBoard(layer: Layer, input: GameOverInput): void {
     kingsKey = key;
     const followUp = readFollowUp(input.reviewHref);
     const next = JSON.stringify(followUp);
-    if (layer.actions && next !== actionsKey)
-      setHtml(layer.actions, actionsMarkup(followUp, input.texts));
+    if (next !== actionsKey) {
+      if (layer.actions) setHtml(layer.actions, actionsMarkup(followUp, input.texts));
+      if (layer.more) setHtml(layer.more, followUpMarkup(followUp));
+    }
     actionsKey = next;
   };
   sync();
@@ -107,16 +115,29 @@ function followBoard(layer: Layer, input: GameOverInput): void {
   }, SYNC_MS);
 }
 
-function listen(layer: Layer): void {
+const CLOSED_CLASS = 'cdc-end__card--closed';
+
+/** Closed, the card hides; a click on the game's result, in the moves, brings it back. */
+function listen(layer: Layer, main: HTMLElement): void {
   layer.root.addEventListener('click', event => {
     if (closestTo(event.target, '.cdc-end__close', HTMLElement)) {
       layer.chips?.stop();
-      layer.card?.remove();
+      layer.card?.classList.toggle(CLOSED_CLASS, true);
     }
     const action = closestTo(event.target, '[data-cdc-end]', HTMLElement)?.dataset.cdcEnd;
     if (isFollowUpAction(action)) pressFollowUp(action);
   });
+  main.addEventListener('click', event => {
+    if (closestTo(event.target, '.result-wrap', HTMLElement))
+      layer.card?.classList.toggle(CLOSED_CLASS, false);
+  });
 }
+
+const MOODS: Readonly<Record<Outcome['result'], CoachMood>> = {
+  win: 'happy',
+  loss: 'worry',
+  draw: 'neutral',
+};
 
 /** The figures a card shows: two summaries that read the same change nothing. */
 const shownAs = (summary: PlayerSummary): string =>
@@ -125,27 +146,39 @@ const shownAs = (summary: PlayerSummary): string =>
     summary.counts,
   ]);
 
-function showAccuracy(element: HTMLElement | null, summary: PlayerSummary): void {
-  if (element)
-    element.textContent = summary.accuracy === null ? '–' : formatAccuracy(summary.accuracy);
+/** Counts the accuracy up to `summary`'s, from `from`; returns where it ends. */
+function showAccuracy(element: HTMLElement | null, summary: PlayerSummary, from: number): number {
+  if (!element) return from;
+  if (summary.accuracy === null) {
+    element.textContent = '–';
+    return 0;
+  }
+  countUp(element, { from, to: summary.accuracy }, formatAccuracy);
+  return summary.accuracy;
 }
 
 /** What the card shows and the coach says, once the card has come in. */
 function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): GameOverView {
-  const { card, stub, accuracy: accuracyNumber, voice, chips } = layer;
+  const { card, stats, accuracy: accuracyNumber, voice, chips } = layer;
+  const dropStats = (): void => {
+    for (const element of stats) element.remove();
+  };
   const { outcome, texts } = input;
   const later = (show: () => void): void => {
     void settled.finally(() => {
       if (card?.isConnected) show();
     });
   };
-  const mood = outcome.result === 'win' ? 'happy' : 'neutral';
+  // Pleased with a win, sorry for a loss.
+  const mood = MOODS[outcome.result];
   const words = (summary: PlayerSummary | null): string => {
     const accuracy = summary?.accuracy ?? null;
     return texts.verdict(outcome.result, accuracy === null ? null : formatAccuracy(accuracy));
   };
   let spunAt: number | null = null;
   let shown: PlayerSummary | null = null;
+  // Where the accuracy's count stands: the review's figure glides on from the quick look's.
+  let counted = 0;
   const afterSpin = (show: () => void): void =>
     later(() => {
       const left = spunAt === null ? 0 : spunAt + MIN_SPIN_MS - Date.now();
@@ -164,8 +197,8 @@ function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): G
         shown = summary;
         if (summary) {
           chips?.reveal(summary, texts);
-          showAccuracy(accuracyNumber, summary);
-        } else stub?.remove();
+          counted = showAccuracy(accuracyNumber, summary, counted);
+        } else dropStats();
         // The counts come in first, then the coach speaks.
         voice?.typeOut(words(summary), mood, summary ? CHIP_STAGGER_MS * 3 : 0);
       }),
@@ -174,13 +207,13 @@ function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): G
         if (!shown || shownAs(shown) === shownAs(summary)) return;
         shown = summary;
         chips?.update(summary, texts);
-        showAccuracy(accuracyNumber, summary);
+        counted = showAccuracy(accuracyNumber, summary, counted);
         voice?.say(words(summary), mood);
       }),
     failed: () =>
       afterSpin(() => {
         chips?.stop();
-        stub?.remove();
+        dropStats();
         voice?.say(texts.failed, 'neutral');
       }),
   };
@@ -191,7 +224,7 @@ export function mountGameOver(input: GameOverInput): GameOverView {
   setData(input.main, 'cdcEnd', '');
   input.main.append(layer.root);
   followBoard(layer, input);
-  listen(layer);
+  listen(layer, input.main);
   // What the card shows waits for it to come in.
   const settled = new Promise<void>(resolve => {
     setTimeout(() => {

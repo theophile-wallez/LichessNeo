@@ -1,3 +1,4 @@
+import { DEV_BUILD } from '#shared/build-mode.ts';
 import { pickCoach } from '#shared/coach.ts';
 import { isParsing, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
@@ -10,6 +11,7 @@ import { opponentName } from './board.ts';
 import { fetchFinishedGame, type FinishedGame } from './game-data.ts';
 import { readOutcome } from './outcome.ts';
 import { precomputeReview, worthReviewing } from './precompute.ts';
+import { startPreview } from './preview.ts';
 import { type PlayerSummary, quickReview, quickSearch, summarize } from './quick-review.ts';
 import { gameOverTexts } from './texts.ts';
 import { mountGameOver } from './view.ts';
@@ -19,7 +21,8 @@ import { mountGameOver } from './view.ts';
 // errors before sending them to Game Review, whose analysis then runs here,
 // so the review is ready when opened, and its figures replace the count's.
 // Only for a game that ends while the page is open: a finished game's page
-// opens on its review instead.
+// opens on its review instead. A click on the result brings the card back
+// once closed; a dev build can show it at will (preview.ts).
 
 const WATCH_MS = 250;
 // Our layout's: below, the board isn't in the grid the game over is placed in.
@@ -154,6 +157,7 @@ function watchEnd(game: PlayedGame): void {
 export const gameOver: Feature = {
   name: 'game over',
   start: () => {
+    if (DEV_BUILD) startPreview();
     // Lichess removes its init data once read: only a script running while
     // the page parses sees it.
     if (!isParsing()) return;

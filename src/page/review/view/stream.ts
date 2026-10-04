@@ -5,7 +5,8 @@ import { tellCoach } from './coach-avatar.ts';
 // The coach's comment types out word by word (comment/markup.ts draws each
 // moment of it); this runs the typing's clock.
 
-const WORD_MS = 35;
+/** A word's turn to show, as the coach types its comment out (the game over's card too). */
+export const WORD_MS = 35;
 const FALLBACK_LINE_HEIGHT = 18;
 
 interface Fit {
