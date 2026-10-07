@@ -3,11 +3,13 @@ import { pickCoach } from '#shared/coach.ts';
 import { isParsing, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
+import { postReviewCurve } from '#shared/protocol.ts';
 import { playedGame, type PlayedGame } from '#shared/round-init.ts';
 import type { Stockfish } from '#page/review/engine/stockfish.ts';
 import { bootEngine } from '#page/review/engine-pool.ts';
 import { fetchExport } from '#page/review/game/export.ts';
 import { opponentName } from './board.ts';
+import { reviewCurve } from './curve.ts';
 import { fetchFinishedGame, type FinishedGame } from './game-data.ts';
 import { readOutcome } from './outcome.ts';
 import { precomputeReview, worthReviewing } from './precompute.ts';
@@ -122,7 +124,10 @@ interface ReviewRun {
   readonly stillOver: () => boolean;
 }
 
-/** The player's figures from Game Review's analysis, run here; null if it didn't finish. */
+/**
+ * The player's figures from Game Review's analysis, run here; null if it didn't finish.
+ * The game's panel is sent the win chances it found.
+ */
 async function reviewSummary(
   game: PlayedGame,
   finished: FinishedGame,
@@ -138,6 +143,7 @@ async function reviewSummary(
     stillOver,
   });
   if (!records) return null;
+  postReviewCurve({ gameId: game.gameId, ...reviewCurve(positions, records) });
   // Asked again: right after the game, the export may not know its opening yet.
   const book = await bookPly(game.gameId, positions.length);
   const chess960 = variant === 'chess960';

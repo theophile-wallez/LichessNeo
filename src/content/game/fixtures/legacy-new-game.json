@@ -14,7 +14,7 @@
         "initial": 180,
         "increment": 2
       },
-      "label": "New 3 |⁠ 2"
+      "label": "New 3+2"
     },
     {
       "lang": "en",
@@ -38,7 +38,7 @@
         "initial": 45,
         "increment": 1
       },
-      "label": "New 0.75 |⁠ 1"
+      "label": "New 0.75+1"
     },
     {
       "lang": "en",
@@ -54,7 +54,7 @@
         "initial": 5400,
         "increment": 30
       },
-      "label": "New 90 |⁠ 30"
+      "label": "New 90+30"
     },
     {
       "lang": "en",
@@ -62,7 +62,7 @@
         "initial": 20,
         "increment": 3
       },
-      "label": "New 0.33 |⁠ 3"
+      "label": "New 0.33+3"
     },
     {
       "lang": "fr",
@@ -78,7 +78,7 @@
         "initial": 180,
         "increment": 2
       },
-      "label": "Nouvelle 3 |⁠ 2"
+      "label": "Nouvelle 3+2"
     },
     {
       "lang": "fr",
@@ -102,7 +102,7 @@
         "initial": 45,
         "increment": 1
       },
-      "label": "Nouvelle 0.75 |⁠ 1"
+      "label": "Nouvelle 0.75+1"
     },
     {
       "lang": "fr",
@@ -118,7 +118,7 @@
         "initial": 5400,
         "increment": 30
       },
-      "label": "Nouvelle 90 |⁠ 30"
+      "label": "Nouvelle 90+30"
     },
     {
       "lang": "fr",
@@ -126,7 +126,7 @@
         "initial": 20,
         "increment": 3
       },
-      "label": "Nouvelle 0.33 |⁠ 3"
+      "label": "Nouvelle 0.33+3"
     },
     {
       "lang": "fr-CA",
@@ -142,7 +142,7 @@
         "initial": 180,
         "increment": 2
       },
-      "label": "Nouvelle 3 |⁠ 2"
+      "label": "Nouvelle 3+2"
     },
     {
       "lang": "fr-CA",
@@ -166,7 +166,7 @@
         "initial": 45,
         "increment": 1
       },
-      "label": "Nouvelle 0.75 |⁠ 1"
+      "label": "Nouvelle 0.75+1"
     },
     {
       "lang": "fr-CA",
@@ -182,7 +182,7 @@
         "initial": 5400,
         "increment": 30
       },
-      "label": "Nouvelle 90 |⁠ 30"
+      "label": "Nouvelle 90+30"
     },
     {
       "lang": "fr-CA",
@@ -190,7 +190,7 @@
         "initial": 20,
         "increment": 3
       },
-      "label": "Nouvelle 0.33 |⁠ 3"
+      "label": "Nouvelle 0.33+3"
     },
     {
       "lang": "de",
@@ -206,7 +206,7 @@
         "initial": 180,
         "increment": 2
       },
-      "label": "New 3 |⁠ 2"
+      "label": "New 3+2"
     },
     {
       "lang": "de",
@@ -230,7 +230,7 @@
         "initial": 45,
         "increment": 1
       },
-      "label": "New 0.75 |⁠ 1"
+      "label": "New 0.75+1"
     },
     {
       "lang": "de",
@@ -246,7 +246,7 @@
         "initial": 5400,
         "increment": 30
       },
-      "label": "New 90 |⁠ 30"
+      "label": "New 90+30"
     },
     {
       "lang": "de",
@@ -254,7 +254,7 @@
         "initial": 20,
         "increment": 3
       },
-      "label": "New 0.33 |⁠ 3"
+      "label": "New 0.33+3"
     }
   ],
   "id": "abcdefgh",
@@ -266,12 +266,12 @@
     {
       "name": "a player: our button goes first",
       "html": "<div class=\"follow-up\"><button class=\"fbt rematch\">Rematch</button><a class=\"fbt\" href=\"/analysis\">Analysis board</a></div>",
-      "after": "<a class=\"fbt cdc-new-game\" href=\"/?hook_like=abcdefgh\">New 3&nbsp;|⁠&nbsp;2</a><button class=\"fbt rematch\">Rematch</button><a class=\"fbt\" href=\"/analysis\">Analysis board</a>"
+      "after": "<a class=\"fbt cdc-new-game\" href=\"/?hook_like=abcdefgh\">New 3+2</a><button class=\"fbt rematch\">Rematch</button><a class=\"fbt\" href=\"/analysis\">Analysis board</a>"
     },
     {
       "name": "Lichess has its own New opponent",
       "html": "<div class=\"follow-up\"><button class=\"fbt rematch\">Rematch</button><a class=\"fbt new-opponent\" href=\"/?hook_like=abcdefgh\">New opponent</a></div>",
-      "after": "<button class=\"fbt rematch\">Rematch</button><a class=\"fbt new-opponent\" href=\"/?hook_like=abcdefgh\" data-cdc-label=\"New 3 |⁠ 2\">New opponent</a>"
+      "after": "<button class=\"fbt rematch\">Rematch</button><a class=\"fbt new-opponent\" href=\"/?hook_like=abcdefgh\" data-cdc-label=\"New 3+2\">New opponent</a>"
     },
     {
       "name": "a spectator has no rematch",

@@ -333,7 +333,10 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
 - **Game over.** The end-of-game buttons are `.rcontrols > .follow-up`
   (rematch, new opponent, tournament, then the analysis link, always last).
   "New opponent" exists only for lobby and pool games; otherwise
-  `content/game/new-game.ts` prepends its own `/?hook_like=<id>` button. The
+  `content/game/new-game.ts` prepends its own `/?hook_like=<id>` button.
+  The analysis link stays, hidden: `content/game/review-invite` puts the
+  coach's invite to Game Review ahead of the buttons, with the game's win
+  chances once `page/game-over` has analysed it. The
   round data has no clock history: move times come from
   `/game/export/<id>?clocks=true`, and every position of a game just over
   from its finished page (`/<id>`, `cfg.data.treeParts`), with its status and

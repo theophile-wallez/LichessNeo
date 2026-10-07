@@ -20,8 +20,19 @@ const CoachStateSchema = z.object({
   talking: z.boolean(),
 });
 
+const ReviewCurveSchema = z.object({
+  type: z.literal('cdc:review-curve'),
+  gameId: z.string(),
+  // White's win chance, 0 to 100, at each position, the start first; null where unknown.
+  whiteWinChances: z.array(z.nullable(z.number())),
+  // The move that gave away the most, if one gave away enough to turn the game: its
+  // position's index, and its name ("19… Rxf1+").
+  turning: z.nullable(z.object({ index: z.int(), move: z.string() })),
+});
+
 export type SoundFiles = z.infer<typeof SoundsSchema>['sounds'];
 export type CoachState = Omit<z.infer<typeof CoachStateSchema>, 'type'>;
+export type ReviewCurve = Omit<z.infer<typeof ReviewCurveSchema>, 'type'>;
 
 function listen<T>(schema: z.ZodMiniType<T>, handler: (message: T) => void): () => void {
   const listener = (event: MessageEvent<unknown>): void => {
@@ -50,3 +61,11 @@ export const onSounds = (handler: (sounds: SoundFiles) => void): (() => void) =>
 export const postCoachState = (state: CoachState): void => post({ type: 'cdc:coach', ...state });
 export const onCoachState = (handler: (state: CoachState) => void): (() => void) =>
   listen(CoachStateSchema, ({ coach, mood, talking }) => handler({ coach, mood, talking }));
+
+/** Page → content: a game's win chances once Game Review's analysis of it is done on its page. */
+export const postReviewCurve = (curve: ReviewCurve): void =>
+  post({ type: 'cdc:review-curve', ...curve });
+export const onReviewCurve = (handler: (curve: ReviewCurve) => void): (() => void) =>
+  listen(ReviewCurveSchema, ({ gameId, whiteWinChances, turning }) =>
+    handler({ gameId, whiteWinChances, turning }),
+  );

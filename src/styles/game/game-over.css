@@ -54,27 +54,38 @@
     background: var(--cdc-grey-400);
   }
 
+  /* The result on one line: the score, then how the game ended. */
   main.round :is(i5d, rm6) .result-wrap {
-    padding: 10px 0 12px !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 10px;
+    padding: 10px 16px 12px !important;
     border-top: 1px solid var(--cdc-border);
     background: var(--cdc-bg-panel);
+    text-align: start !important;
   }
 
   main.round :is(i5d, rm6) .result {
-    margin: 0 0 2px !important;
+    margin: 0 !important;
+    color: var(--cdc-text-strong);
+    font-size: 20px;
     font-weight: 800;
   }
 
   main.round :is(i5d, rm6) .status {
+    color: var(--cdc-text-dim);
     font-size: 13px;
     font-style: normal !important;
   }
 
+  /* Under the coach's invite to Game Review (review-invite.css), the other follow-ups in one
+   * row. */
   main.round .rcontrols .follow-up {
     display: flex !important;
     flex-flow: row wrap !important;
-    gap: 8px !important;
-    padding: 8px 0 6px !important;
+    gap: 6px !important;
+    padding: 10px 0 8px !important;
     border: none !important;
   }
 
@@ -83,75 +94,25 @@
     min-width: 0;
   }
 
-  /* Game Review: Lichess's analysis link, always the last button. It opens the analysis
-   * page, where page/review/ starts the review. */
-  html {
-    --cdc-t-review: 'Game Review';
-  }
-  html[lang^='fr'] {
-    --cdc-t-review: 'Bilan';
-  }
-
+  /* Lichess's analysis link, always the last button: the invite leads there instead. */
   main.round
     .rcontrols
     .follow-up
     > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']) {
-    order: -1;
-    flex-basis: 100%;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    height: clamp(48px, 7vh, 64px);
-    padding: 0 !important;
-    background: var(--cdc-btn-primary) !important;
-    color: #fff !important;
-    font-size: 0 !important;
-    box-shadow: var(--cdc-btn-primary-shadow) !important;
+    display: none !important;
   }
 
-  main.round
-    .rcontrols
-    .follow-up
-    > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/'])::before {
-    content: '';
-    width: 32px;
-    height: 32px;
-    /* A margin, not a gap: Lichess's hidden label is still a flex item. */
-    margin-right: 12px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23fff'/%3E%3Cpath fill='%235d9948' d='M12 4.6l2.2 4.9 5.3.5-4 3.6 1.2 5.2L12 16.1l-4.7 2.7 1.2-5.2-4-3.6 5.3-.5z'/%3E%3C/svg%3E")
-      center / contain no-repeat;
-    filter: drop-shadow(0 1px 1px #0003);
-  }
-
-  main.round
-    .rcontrols
-    .follow-up
-    > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/'])::after {
-    content: var(--cdc-t-review);
-    font-size: 26px;
-    font-weight: 800;
-    text-shadow: 0 1px 1px #0003;
-  }
-
-  main.round
-    .rcontrols
-    .follow-up
-    > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']):hover {
-    background: var(--cdc-btn-primary-hover) !important;
-  }
-
-  /* Rematch goes grey: Game Review is the one primary button. */
   main.round .rcontrols .follow-up .fbt {
-    height: 48px;
+    height: 44px;
     margin: 0 !important;
     padding: 0 8px !important;
-    border-radius: 6px !important;
+    border-radius: 10px !important;
     overflow: hidden;
     background: var(--cdc-btn-grey) !important;
     color: #fff !important;
-    font-size: 15px !important;
-    font-weight: 800;
-    line-height: 48px !important;
+    font-size: 14px !important;
+    font-weight: 700;
+    line-height: 44px !important;
     text-align: center;
     text-transform: none !important;
     text-overflow: ellipsis;
@@ -164,39 +125,33 @@
     background: var(--cdc-btn-grey-hover) !important;
   }
 
-  /* The pair under Game Review: "New 10 min" (Lichess's "New opponent" or ours), then
-   * Rematch. */
+  /* "New 10+5" (Lichess's "New opponent" or ours), then Rematch, each with its emoji. */
   main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .cdc-new-game) {
     display: flex !important;
     align-items: center;
     /* A label too long for the button wraps, rather than losing its end or the icon. */
     justify-content: safe center;
-    font-size: 15px !important;
-    font-weight: 600;
     line-height: 1.15 !important;
     white-space: normal;
   }
 
-  /* Lichess's glyphs: a plus for a new game, its reload arrow for the rematch. */
   main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .cdc-new-game)::before {
-    content: var(--cdc-icon);
+    content: '';
     flex: none;
+    width: 20px;
+    height: 20px;
     /* A margin, not a gap: Lichess's hidden label is still a flex item. */
-    margin-right: 9px;
-    color: #ffffffb3;
-    font-family: lichess;
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 1;
+    margin-right: 8px;
+    background: var(--cdc-icon) center / contain no-repeat;
   }
 
   main.round .rcontrols .follow-up :is(.new-opponent, .cdc-new-game) {
-    --cdc-icon: '\e02d';
+    --cdc-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/stopwatch.svg');
   }
 
   main.round .rcontrols .follow-up .rematch {
-    --cdc-icon: '\e078';
-    order: 1;
+    --cdc-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
+    order: -2;
   }
 
   /* The time control replaces Lichess's "New opponent". */
@@ -206,7 +161,7 @@
 
   main.round .rcontrols .follow-up .new-opponent[data-cdc-label]::after {
     content: attr(data-cdc-label);
-    font-size: 15px;
+    font-size: 14px;
   }
 
   /* A rematch offer turns the button primary, hover included. */
@@ -227,18 +182,18 @@
   }
 
   /* Declining: Lichess's tab off the panel's edge would stick out, so it becomes a small
-   * button after Rematch. */
+   * button right after Rematch. */
   main.round .rcontrols .follow-up .rematch-decline {
     position: static !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    order: 2;
+    order: -1;
     flex: none;
     width: 44px !important;
-    height: 48px !important;
+    height: 44px !important;
     padding: 0;
-    border-radius: 6px !important;
+    border-radius: 10px !important;
     opacity: 1 !important;
     background: var(--cdc-btn-grey) !important;
     box-shadow: var(--cdc-btn-grey-shadow) !important;

@@ -36,6 +36,11 @@
   main.round .rcontrols .follow-up .rematch.me:hover::before {
     content: '\e02a';
     display: block;
+    width: auto;
+    height: auto;
+    background: none;
+    font-family: lichess;
+    line-height: 1;
     color: var(--cdc-bad);
     font-size: 15px;
   }
