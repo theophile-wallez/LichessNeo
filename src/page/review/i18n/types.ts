@@ -1,3 +1,4 @@
+import type { SafeHtml } from '#shared/html.ts';
 import type { ProfileAxis } from '#page/review/judge/profile.ts';
 import type { Theme } from '#page/review/coach/fact.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
@@ -48,11 +49,23 @@ export interface ClockStrings {
   readonly praiseTitle: string;
 }
 
+/** The coach's brief before the first move. */
+export interface BriefStrings {
+  /** The game's opening, named. */
+  readonly opening: (name: SafeHtml) => SafeHtml;
+  /** How many key moments the review found, and the move the game turned on, if one did. */
+  readonly moments: (count: number, turning: SafeHtml | null) => SafeHtml;
+  /** For a game without a key moment. */
+  readonly calm: string;
+  readonly start: string;
+}
+
 export interface InterfaceStrings {
   readonly review: string;
   readonly start: string;
   /** The closed review's way back to the summary, beside Game Review's. */
   readonly summary: string;
+  readonly brief: BriefStrings;
   readonly next: string;
   readonly explain: string;
   readonly best: string;

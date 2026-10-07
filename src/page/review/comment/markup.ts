@@ -44,10 +44,10 @@ function movedRole(san: string): string {
   return PIECE_LETTER.test(san) ? san.charAt(0).toLowerCase() : 'p';
 }
 
-// A move: the piece that moves, then the notation, a promotion's piece drawn too.
+// A move (`w:Nf3`): the piece that moves, then the notation, a promotion's piece drawn too.
 // One that can be played (tokens.ts) is a button: pointing at it draws its
 // arrow, clicking plays it (view/chips.ts).
-function moveChip(token: string): SafeHtml {
+export function moveChip(token: string): SafeHtml {
   const [value = '', play] = token.split('@');
   const color = value.charAt(0);
   const san = value.slice(2).replace(PIECE_LETTER, '');

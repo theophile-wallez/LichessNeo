@@ -1,3 +1,4 @@
+import { html } from '#shared/html.ts';
 import type { Color } from '#shared/chess/types.ts';
 import { factsFr, trajectoryFr } from './fr-comment.ts';
 import { capitalize, conjugate, partyOf, typography } from './fr-grammar.ts';
@@ -34,6 +35,16 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   review: 'Bilan',
   start: 'Démarrer le bilan',
   summary: 'Résumé',
+  brief: {
+    opening: name => html`Ouverture jouée : <b>${name}</b>.`,
+    moments: (count, turning) => {
+      const plural = count > 1 ? 's' : '';
+      const found = html`J’ai repéré <b>${count} moment${plural} clé${plural}</b>`;
+      return turning ? html`${found} : la partie a basculé sur ${turning}.` : html`${found}.`;
+    },
+    calm: 'Pas de grosse erreur dans cette partie : voyons-la coup par coup.',
+    start: 'Commencer',
+  },
   next: 'Suivant',
   explain: 'Expliquer',
   best: 'Meilleur',

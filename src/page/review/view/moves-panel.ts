@@ -7,6 +7,7 @@ import { verdictTitle } from '#page/review/comment/title.ts';
 import { explainLines } from '#page/review/explain/lines.ts';
 import type { JudgedMove, LineShown, Session } from '#page/review/session.ts';
 import type { PanelAction } from './actions.ts';
+import { briefMarkup } from './brief.ts';
 import { avatarMarkup, takeReaction } from './coach-avatar.ts';
 import { explainHint } from './explain-hint.ts';
 import { movesGraph } from './graph.ts';
@@ -41,6 +42,7 @@ function bubbleMarkup(
   const { view, live, language } = session;
   const { ui } = language;
   if (!view.review) return bubbleTitle(`${ui.analysing} ${Math.round(view.progress * 100)}%`);
+  if (!analysis.path) return briefMarkup(session, analysis, view.review);
   if (shown)
     return html`<div class="cdc-bubble__row">${classIcon('best')}
           <p class="cdc-bubble__title">${verdictTitle('best', analysis.node.san ?? '', language)}</p>
@@ -49,7 +51,7 @@ function bubbleMarkup(
     // No verdict yet: the move waits for the engine, as the game's own moves do
     // while the game's analysis runs.
     const error = analysis.onMainline ? view.error : live.error;
-    return bubbleTitle(analysis.path ? (error ?? ui.thinking) : ui.intro);
+    return bubbleTitle(error ?? ui.thinking);
   }
   return verdictMarkup(session, comment, actions);
 }

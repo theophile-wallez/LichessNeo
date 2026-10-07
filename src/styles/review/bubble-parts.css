@@ -184,4 +184,50 @@
   .cdc-tag--paidOff {
     --cdc-tag: #50fa7b;
   }
+
+  /* ---- Brief --- */
+
+  /* Before the first move (view/brief.ts): the errors of the bottom side's, then the way in. */
+  .cdc-brief {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .cdc-brief__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: var(--cdc-grey-600);
+    color: var(--cdc-grey-50);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .cdc-brief__chip b {
+    font-weight: 800;
+  }
+
+  .cdc-brief__chip .cdc-cls-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .cdc-brief__chip .cdc-cls-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #cdc-review .cdc-brief__start {
+    height: 28px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 13px;
+  }
 }

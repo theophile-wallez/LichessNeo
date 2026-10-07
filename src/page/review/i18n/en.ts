@@ -1,3 +1,4 @@
+import { html } from '#shared/html.ts';
 import type { Color } from '#shared/chess/types.ts';
 import { factsEn, trajectoryEn } from './en-comment.ts';
 import { capitalize, partyOf } from './en-grammar.ts';
@@ -41,6 +42,15 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   review: 'Game Review',
   start: 'Start Review',
   summary: 'Summary',
+  brief: {
+    opening: name => html`This game opened with the <b>${name}</b>.`,
+    moments: (count, turning) => {
+      const found = html`I found <b>${count} key moment${count === 1 ? '' : 's'}</b>`;
+      return turning ? html`${found}: the game turned at ${turning}.` : html`${found}.`;
+    },
+    calm: 'No big error in this game: let’s go through it move by move.',
+    start: 'Start',
+  },
   next: 'Next',
   explain: 'Explain',
   best: 'Best',
