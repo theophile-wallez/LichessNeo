@@ -13,24 +13,30 @@ import { movesGraph } from './graph.ts';
 import { momentsMarkup, momentsScroll, showMoment } from './moments.ts';
 import { bubbleTitle, evalChip, header, type IconName, svgIcon } from './markup.ts';
 import { bestShown, lineShown, spokenMove, stepPath } from './navigation.ts';
+import { canRetry, type RetryOutcome, retryOutcome } from './retry.ts';
+import { retryBubble } from './retry-bubble.ts';
+import { timingAt } from './timing.ts';
 import { type CoachComment, commentOn, followComment, verdictMarkup } from './verdict.ts';
 
 // The move-by-move review: the graph and the game's key moments on top, then
 // the coach on the move on the board, the Explain / Best / Next buttons and
 // the player's controls. While Explain's best line is on the board, the coach
-// still speaks of the move it stands for.
+// still speaks of the move it stands for; while the player retries an error,
+// of the moves tried.
 
 interface BubbleInput {
   /** The move on the board, judged, and the coach's comment on it. */
   readonly comment: CoachComment | null;
   /** The engine's best move, played in place of the move on the board. */
   readonly shown: JudgedMove | null;
+  /** The buttons under the comment. */
+  readonly actions: SafeHtml;
 }
 
 function bubbleMarkup(
   session: Session,
   analysis: Analysis,
-  { comment, shown }: BubbleInput,
+  { comment, shown, actions }: BubbleInput,
 ): SafeHtml {
   const { view, live, language } = session;
   const { ui } = language;
@@ -45,7 +51,7 @@ function bubbleMarkup(
     const error = analysis.onMainline ? view.error : live.error;
     return bubbleTitle(analysis.path ? (error ?? ui.thinking) : ui.intro);
   }
-  return verdictMarkup(session, comment);
+  return verdictMarkup(session, comment, actions);
 }
 
 /** What the coach says of the move on the board, when the bubble shows its verdict. */
@@ -54,9 +60,11 @@ function movesComment(
   analysis: Analysis,
   { move, shown }: { readonly move: JudgedMove | null; readonly shown: JudgedMove | null },
 ): CoachComment | null {
-  if (!session.view.review || shown || !move) return null;
-  const hint = session.view.explain ? explainHint(session, move) : [];
-  return commentOn(session, { move, gameId: analysis.gameId, hint });
+  const { review, explain } = session.view;
+  if (!review || shown || !move) return null;
+  const hint = explain ? explainHint(session, move) : [];
+  const timing = review.moves[move.ply - 1] === move ? timingAt(analysis, move.ply) : null;
+  return commentOn(session, { move, gameId: analysis.gameId, hint, timing });
 }
 
 /** Under Explain's lines, the button that plays the best one on the board, or goes back. */
@@ -69,6 +77,20 @@ function lineButton(session: Session, analysis: Analysis, move: JudgedMove | nul
     ? html`${svgIcon('prev')}${language.ui.back}`
     : html`${svgIcon('play')}${language.ui.lines.show}`;
   return html`<button class="cdc-bubble__line" data-cdc="line">${label}</button>`;
+}
+
+/** Under an error's comment, the button that has the player look for a better move. */
+const retryButton = (session: Session, analysis: Analysis, move: JudgedMove | null): SafeHtml =>
+  canRetry(move, analysis)
+    ? html`<button class="cdc-bubble__line cdc-bubble__retry" data-cdc="retry">${svgIcon('retry')}${session.language.ui.retry.button}</button>`
+    : html``;
+
+function actionsMarkup(session: Session, analysis: Analysis, move: JudgedMove | null): SafeHtml {
+  const line = lineButton(session, analysis, move);
+  const retry = retryButton(session, analysis, move);
+  return line.value || retry.value
+    ? html`<div class="cdc-bubble__actions">${retry}${line}</div>`
+    : html``;
 }
 
 /** The player's controls, each drawn with the icon of its name. */
@@ -98,30 +120,50 @@ interface Spoken {
   readonly move: JudgedMove | null;
   readonly shown: JudgedMove | null;
   readonly comment: CoachComment | null;
+  /** Where a retry stands, while the player retries an error. */
+  readonly retried: RetryOutcome | null;
+}
+
+/** The coach's mood: the verdict on the board, or on the move tried. */
+function coachClass({ move, shown, retried }: Spoken): JudgedMove['moveClass'] | null {
+  if (retried) {
+    if (retried.kind === 'wrong') return retried.tried.moveClass;
+    return retried.kind === 'found' ? 'best' : null;
+  }
+  return shown ? null : (move?.moveClass ?? null);
 }
 
 function coachMarkup(session: Session, analysis: Analysis, spoken: Spoken): SafeHtml {
-  const { line, move, shown, comment } = spoken;
-  const moveClass = shown ? null : (move?.moveClass ?? null);
+  const { line, move, shown, comment, retried } = spoken;
+  const moveClass = coachClass(spoken);
   const avatar = avatarMarkup({
     coachId: session.coach.id,
     moveClass,
     react: takeReaction(session.coach, moveClass, line ? line.path : analysis.path),
     label: session.language.ui.coach,
   });
-  const bubble = bubbleMarkup(session, analysis, { comment, shown });
-  const button = comment ? lineButton(session, analysis, move) : '';
-  return html`<div class="cdc-coach">${avatar}<div class="cdc-bubble">${bubble}${button}</div></div>`;
+  const { retry } = session.view;
+  const bubble =
+    retry && retried
+      ? retryBubble(session, retry, retried)
+      : bubbleMarkup(session, analysis, {
+          comment,
+          shown,
+          actions: comment ? actionsMarkup(session, analysis, move) : html``,
+        });
+  return html`<div class="cdc-coach">${avatar}<div class="cdc-bubble">${bubble}</div></div>`;
 }
 
 function navMarkup(session: Session, analysis: Analysis, spoken: Spoken): SafeHtml {
   const { view, language } = session;
   const { ui } = language;
-  const { line, move, shown } = spoken;
-  const atEnd = !stepPath(session, analysis, 1);
-  const canBest = !line && (shown !== null || (move?.best && !GOOD.has(move.moveClass)));
+  const { line, move, shown, retried } = spoken;
+  // Retrying, Next goes on with the game; Explain and Best would give the answer away.
+  const atEnd = !retried && !stepPath(session, analysis, 1);
+  const canBest =
+    !retried && !line && (shown !== null || (move?.best && !GOOD.has(move.moveClass)));
   return html`<div class="cdc-review__nav">
-        <button class="cdc-btn${view.explain ? ' cdc-btn--on' : ''}" data-cdc="explain">${svgIcon('bulb')}${ui.explain}</button>
+        <button class="cdc-btn${view.explain ? ' cdc-btn--on' : ''}" data-cdc="explain" ${retried ? 'disabled' : ''}>${svgIcon('bulb')}${ui.explain}</button>
         <button class="cdc-btn${shown ? ' cdc-btn--on' : ''}" data-cdc="best" ${canBest ? '' : 'disabled'}>${svgIcon('star')}${ui.best}</button>
         <button class="cdc-btn cdc-btn--green" data-cdc="next" ${atEnd ? 'disabled' : ''}>${svgIcon('arrow')}${ui.next}</button>
       </div>`;
@@ -132,9 +174,10 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const line = lineShown(session, analysis);
   const move = spokenMove(session, analysis);
   const shown = line ? null : bestShown(session, analysis);
-  const comment = movesComment(session, analysis, { move, shown });
+  const retried = retryOutcome(session, analysis);
+  const comment = retried ? null : movesComment(session, analysis, { move, shown });
   if (comment) followComment(session, comment);
-  const spoken = { line, move, shown, comment };
+  const spoken = { line, move, shown, comment, retried };
   const moments = view.review ? momentsMarkup(view.review, analysis.node.ply, language) : '';
   const scrolled = momentsScroll(elements.panel);
   setHtml(

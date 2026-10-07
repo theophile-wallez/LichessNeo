@@ -1,10 +1,11 @@
 /* ---- Graph --- */
 
 @media (min-width: 1020px) {
+  /* As tall as the move-by-move review's (#cdc-review-graph), so it doesn't move between them. */
   .cdc-summary-graph {
     position: relative;
-    height: 88px;
-    margin-bottom: 14px;
+    height: var(--cdc-review-graph);
+    margin-bottom: 12px;
     cursor: pointer;
   }
 

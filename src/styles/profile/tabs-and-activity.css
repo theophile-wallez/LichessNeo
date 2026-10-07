@@ -207,23 +207,38 @@
 }
 
 .user-show .activity .entry > icon[data-icon='\e00c'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/puzzle-piece.svg');
+  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e05a'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/high-voltage.svg');
+  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e00b'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
+  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e06f'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
+  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
 }
 
-/* Take the rest of the row: sized to content, a long line wrapped under the icon. */
+/* Take the rest of the row: sized to content, a long line wrapped under the icon. The first
+   line sits level with the icon's middle. */
 .user-show .activity .entry > :is(div, a) {
   flex: 1 1 0;
   min-width: 0;
   max-width: none !important;
+  padding-block-start: calc((36px - 1lh) / 2);
+}
+
+/* A completed correspondence game has its score inside the text (lila's
+   renderCorresEnds): it goes to the right of the first line, as the other entries' do,
+   the games under both. */
+.user-show .activity .entry > div:has(> score) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.user-show .activity .entry > div > .sub {
+  flex: 1 0 100%;
 }
 
 .user-show .activity .entry a {
@@ -274,13 +289,18 @@
   opacity: 0.9;
 }
 
-/* Wins / draws / losses, as score pills. */
+/* Wins / draws / losses, as score pills, level with the icon. */
 .user-show .activity score {
   gap: 10px;
   margin-inline-start: auto;
   padding-inline-start: 12px;
   color: var(--cdc-text-dim);
   font-size: 12px !important;
+}
+
+.user-show .activity .entry > score {
+  align-items: center;
+  height: 36px;
 }
 
 .user-show .activity score > * {
@@ -291,23 +311,25 @@
   min-width: 22px;
   padding: 2px 6px !important;
   border-radius: 5px !important;
-  color: #fff;
+  background: color-mix(in srgb, var(--cdc-score) 18%, transparent);
+  color: var(--cdc-score);
   font-size: 12px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   opacity: 1 !important;
 }
 
+/* Tinted, not filled: a full green pill glared on the dark card. */
 .user-show .activity win strong {
-  background: var(--cdc-good);
+  --cdc-score: var(--cdc-good);
 }
 
 .user-show .activity draw strong {
-  background: var(--cdc-grey-500);
+  --cdc-score: var(--cdc-grey-200);
 }
 
 .user-show .activity loss strong {
-  background: var(--cdc-red-dark);
+  --cdc-score: var(--cdc-red);
 }
 
 /* Phones: the score goes under the text. */

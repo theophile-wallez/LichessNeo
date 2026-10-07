@@ -13,7 +13,7 @@ main.page-menu:has(.puzzle-themes) .page-menu__content.box {
 /* An icon before each page's title. Only the openings page has .puzzle-openings;
    the themes page just shows a row of opening chips. */
 main.page-menu:has(.puzzle-themes) {
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/puzzle-piece.svg');
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
 }
 
 main.page-menu:has(.puzzle-openings) {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { setHtml } from '#shared/html.ts';
-import { clockTime, moveTimesMarkup, timeShare } from './move-times.ts';
+import { clockTime } from '#shared/clock-time.ts';
+import { moveTimesMarkup, timeShare } from './move-times.ts';
 import type { MoveTime } from './series.ts';
 
 const NAMES = { middlegame: 'Middlegame', endgame: 'Endgame' };

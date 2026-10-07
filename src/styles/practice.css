@@ -11,11 +11,11 @@
   background: var(--cdc-bg-panel) !important;
 }
 
-/* The Drills illustration instead of Lichess's grey golem. !important: the
+/* The sidebar's Practice picture instead of Lichess's grey golem. !important: the
  * light theme darkens the golem, and would darken ours with it. */
 .practice-side__decoration {
-  content: url('chrome-extension://__MSG_@@extension_id__/img/icons/bullseye.svg');
-  width: 120px !important;
+  content: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/practice.webp');
+  width: 96px !important;
   opacity: 1 !important;
   filter: drop-shadow(0 8px 16px #0006) !important;
   animation: cdc-float 4s ease-in-out infinite;

@@ -245,6 +245,12 @@ features and its name: free analysis, open data, no ads.
   gets an icon per link on a tile in its own color: add the menu to the
   shared rule in `styles/pages/headings-menus.css`, then set
   `--cdc-nav-icon` and `--cdc-nav-color` per link.
+- **One picture per page:** a page the sidebar lists is drawn with its
+  sidebar picture (`img/sidebar/<page>.webp`, as `styles/sidebar/nav.css`
+  names them) wherever it stands for that page: its title, a menu's link, the
+  profile's activity and rating cards, a button that leads there. Never a
+  Fluent emoji or a Lichess glyph in its place. A page the sidebar doesn't
+  list takes its side menu link's icon in its title.
 - **Cards stay dark:** never fill a card's background with green or red;
   color a badge, a tile or the title instead (buttons aside).
 - **Hover feels the same everywhere:** a card lifts and its icon tile hops,

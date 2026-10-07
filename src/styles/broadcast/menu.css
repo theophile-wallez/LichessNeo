@@ -5,7 +5,7 @@
 /* Side menu icons and tile colors (tiles in pages/; the FIDE pages share this menu).
    "My broadcasts" and another user's end with their name; the last two lists are admin-only. */
 .subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/satellite-antenna.svg');
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp');
   --cdc-nav-color: var(--cdc-accent);
 }
 

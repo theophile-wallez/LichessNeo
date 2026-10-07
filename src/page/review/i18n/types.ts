@@ -1,9 +1,13 @@
 import type { ProfileAxis } from '#page/review/judge/profile.ts';
+import type { Theme } from '#page/review/coach/fact.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
 import type { CountedClass, MoveClass } from '#page/review/classes/classes.ts';
 
 // What the review says, per language. Moves, pieces and squares go into the
 // coach's sentences as [[…]] tokens (comment/tokens.ts), already built.
+
+/** The side the reader played, whom the coach calls "you"; null when they watch the game. */
+export type Viewer = Color | null;
 
 /** Explain's engine lines, written out as numbered [[…]] moves. */
 export interface LineStrings {
@@ -15,6 +19,35 @@ export interface LineStrings {
   readonly show: string;
 }
 
+/** Retry: the player looks for a better move than the one played. */
+export interface RetryStrings {
+  readonly button: string;
+  readonly prompt: (side: Color) => string;
+  readonly checking: string;
+  readonly found: (move: string) => string;
+  /** Another good move than the engine's. */
+  readonly alsoGood: (move: string) => string;
+  readonly wrong: (move: string) => string;
+  /** The move played in the game, tried again. */
+  readonly same: string;
+  readonly reveal: string;
+  readonly revealed: (best: string) => string;
+}
+
+/** What the coach says of the time a move took; times come written ("2 s", "1:24"). */
+export interface ClockStrings {
+  /** An error played fast, with time on the clock. */
+  readonly rushed: (side: Color, spent: string, clock: string) => string;
+  /** An error with almost no time left. */
+  readonly timeTrouble: (clock: string) => string;
+  /** A long think that found a good move. */
+  readonly paidOff: (side: Color, spent: string) => string;
+  readonly seconds: (seconds: number) => string;
+  /** The advice box's titles: advice, and praise for a long think that paid off. */
+  readonly tipTitle: string;
+  readonly praiseTitle: string;
+}
+
 export interface InterfaceStrings {
   readonly review: string;
   readonly start: string;
@@ -23,7 +56,11 @@ export interface InterfaceStrings {
   readonly best: string;
   readonly analysing: string;
   /** Over the game rating, under a player's accuracy. */
-  readonly playedLike: string;
+  /**
+   * "You played like an [1850] Elo": the words around a player's game
+   * rating, null while it's unknown.
+   */
+  readonly playedLike: (side: Color, elo: number | null) => readonly [string, string];
   /** The summary's sections: the move classes, the phases' radar. */
   readonly moves: string;
   readonly profileTitle: string;
@@ -48,6 +85,10 @@ export interface InterfaceStrings {
   /** A move's cost bar, by the share of the mover's winning chances it gave away. */
   readonly cost: (percent: number) => string;
   readonly lines: LineStrings;
+  readonly retry: RetryStrings;
+  /** The bubble's tags: the tactic a move is about. */
+  readonly themes: Readonly<Record<Theme, string>>;
+  readonly clock: ClockStrings;
 }
 
 /** The situations with remarks of their own, besides each class's. */
@@ -119,6 +160,11 @@ export interface FactSentences {
   readonly winsMaterial: (won: Piece, given: Piece) => string;
   readonly checkForces: (side: Color) => string;
   readonly littleMorePrecise: (best: string) => string;
+  readonly forks: (first: Piece, second: Piece) => string;
+  readonly missedFork: (best: string, first: Piece, second: Piece) => string;
+  readonly allowsFork: (reply: string, first: Piece, second: Piece) => string;
+  /** The reply an error lets in. */
+  readonly canPlay: (side: Color, reply: string) => string;
 }
 
 export interface ReviewLanguage {

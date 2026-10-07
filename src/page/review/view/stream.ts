@@ -17,8 +17,8 @@ interface Fit {
 }
 
 /**
- * Whether the comment runs past its clamped lines, which overflow by a whole
- * line: a move chip poking a pixel out of the last one doesn't count.
+ * Whether the comment runs past the bubble's room by a whole line: a move
+ * chip poking a pixel out of the last one doesn't count.
  */
 export const overflows = ({ scrollHeight, clientHeight, lineHeight }: Fit): boolean =>
   scrollHeight > clientHeight + (Number.parseFloat(lineHeight) || FALLBACK_LINE_HEIGHT) / 2;
@@ -36,15 +36,20 @@ function tick(session: Session): void {
   }
 }
 
-/** After a render: drops the sentence that doesn't fit, then carries on typing. */
+/**
+ * After a render: drops the sentence that doesn't fit, then carries on typing.
+ * What still doesn't fit scrolls (review/bubble.css).
+ */
 export function startStream(session: Session): void {
-  const sub = queryOne(session.elements.panel, '.cdc-bubble__sub', HTMLElement);
+  const { panel } = session.elements;
+  const sub = queryOne(panel, '.cdc-bubble__sub', HTMLElement);
   if (!sub) return;
+  const room = queryOne(panel, '.cdc-bubble__body', HTMLElement) ?? sub;
   const { stream } = session;
   const drop = queryOne(sub, '.cdc-say--drop', HTMLElement);
   const fit = (): Fit => ({
-    scrollHeight: sub.scrollHeight,
-    clientHeight: sub.clientHeight,
+    scrollHeight: room.scrollHeight,
+    clientHeight: room.clientHeight,
     lineHeight: getComputedStyle(sub).lineHeight,
   });
   if (drop && overflows(fit())) {

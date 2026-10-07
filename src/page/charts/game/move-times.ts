@@ -1,5 +1,6 @@
 import { hitArea, tipRow, tipTitle } from '#shared/charts/markup.ts';
 import type { Color } from '#shared/chess/types.ts';
+import { clockTime } from '#shared/clock-time.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { overlayMarkup, PLOT_TOP, phasesMarkup, type PhaseNames } from './parts.ts';
 import { type PlotSize, plyScale } from './scale.ts';
@@ -53,19 +54,6 @@ export interface TimeFormats {
   readonly seconds: Intl.NumberFormat;
   readonly side: Readonly<Record<Color, string>>;
   readonly clockLabel: string;
-}
-
-const pad = (value: number): string => String(value).padStart(2, '0');
-
-/** A clock's time: 2:05, or 1:02:05 past the hour. */
-export function clockTime(seconds: number): string {
-  const whole = Math.max(0, Math.floor(seconds));
-  const [hours, minutes, rest] = [
-    Math.floor(whole / 3600),
-    Math.floor(whole / 60) % 60,
-    whole % 60,
-  ];
-  return hours > 0 ? `${hours}:${pad(minutes)}:${pad(rest)}` : `${minutes}:${pad(rest)}`;
 }
 
 export function moveTimeTip(time: MoveTime, formats: TimeFormats): SafeHtml {

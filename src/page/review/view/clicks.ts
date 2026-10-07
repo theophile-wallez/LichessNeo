@@ -2,6 +2,7 @@ import { closestTo, queryOne } from '#shared/dom.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import type { Session } from '#page/review/session.ts';
 import { type PanelAction, PanelActionSchema } from './actions.ts';
+import { playChip } from './chips.ts';
 import { jumpToClass } from './class-jump.ts';
 import { nextCoach } from './coach-avatar.ts';
 import { learnFromMistakes } from './learn.ts';
@@ -9,12 +10,14 @@ import {
   goTo,
   jump,
   lineShown,
+  reviewMove,
   showBest,
   stepPath,
   stopPlaying,
   toggleLine,
   togglePlay,
 } from './navigation.ts';
+import { endRetry, revealRetry, startRetry } from './retry.ts';
 
 // The panel's and the controls' buttons, by their `data-cdc` action.
 
@@ -31,7 +34,20 @@ function jumpToMoment(analysis: Analysis, card: HTMLElement): void {
   if (Number.isInteger(ply)) jump(analysis, ply);
 }
 
-type ReviewCommand = Exclude<PanelAction, 'coach' | 'jump' | 'moment' | 'learn'>;
+type ReviewCommand = Exclude<
+  PanelAction,
+  'coach' | 'jump' | 'moment' | 'learn' | 'chip' | 'retry' | 'reveal'
+>;
+
+/** Retry's button starts a retry of the move on the board, or ends the one going on. */
+function toggleRetry(session: Session, analysis: Analysis): void {
+  if (session.view.retry) {
+    endRetry(session, analysis, false);
+    return;
+  }
+  const move = lineShown(session, analysis)?.move ?? reviewMove(session, analysis);
+  if (move) startRetry(session, analysis, move);
+}
 
 function act(session: Session, analysis: Analysis, action: ReviewCommand): void {
   const { view } = session;
@@ -52,6 +68,25 @@ function act(session: Session, analysis: Analysis, action: ReviewCommand): void 
   }
 }
 
+interface Clicked {
+  readonly action: Exclude<PanelAction, 'coach'>;
+  readonly button: HTMLElement;
+}
+
+/** The buttons that carry their own data, Retry's, then the review's commands. */
+function dispatch(session: Session, analysis: Analysis, { action, button }: Clicked): void {
+  if (action === 'jump') jumpToClass(session, analysis, button);
+  else if (action === 'moment') jumpToMoment(analysis, button);
+  else if (action === 'chip') playChip(session, analysis, button);
+  // Lichess's exercise, not the review's: it closes the review.
+  else if (action === 'learn') learnFromMistakes(session, analysis);
+  else if (action === 'retry') toggleRetry(session, analysis);
+  else if (action === 'reveal') revealRetry(session, analysis);
+  // Retrying, Next goes on with the game.
+  else if (action === 'next' && session.view.retry) endRetry(session, analysis, true);
+  else act(session, analysis, action);
+}
+
 function onClick(session: Session, event: MouseEvent): void {
   const button = closestTo(event.target, '[data-cdc]', HTMLElement);
   if (!button || (button instanceof HTMLButtonElement && button.disabled)) return;
@@ -68,11 +103,7 @@ function onClick(session: Session, event: MouseEvent): void {
   if (!analysis) return;
   const focused = document.activeElement === button;
   if (action !== 'play') stopPlaying(session);
-  if (action === 'jump') jumpToClass(session, analysis, button);
-  else if (action === 'moment') jumpToMoment(analysis, button);
-  // Lichess's exercise, not the review's: it closes the review.
-  else if (action === 'learn') learnFromMistakes(session, analysis);
-  else act(session, analysis, action);
+  dispatch(session, analysis, { action, button });
   session.redraw(true);
   if (focused && !button.isConnected) keepFocus(session, action);
 }

@@ -1,11 +1,11 @@
 /* Puzzle Storm: a run, its end screen and the dashboard. The panel, clock and combo
-   are Racer's (racer.css shares them); the Puzzle Rush icon replaces the tornado. */
+   are Racer's (racer.css shares them); the Storm picture replaces the tornado. */
 
 .storm,
 .storm-dashboard,
 html[data-cdc-has~='storm'] main {
   --cdc-storm: var(--cdc-orange-dark);
-  --cdc-storm-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/high-voltage.svg');
+  --cdc-storm-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
 }
 
 /* ---- Run --- */
@@ -72,7 +72,7 @@ html[data-cdc-has~='storm'] main {
 
 /* ---- Side panel --- */
 
-/* The Puzzle Rush icon on a tinted tile, where Lichess draws its tornado. */
+/* The Storm picture on a tinted tile, where Lichess draws its tornado. */
 .storm .puz-side__top::before {
   content: '' !important;
   flex: none;

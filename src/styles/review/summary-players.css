@@ -139,6 +139,11 @@
     font-weight: 600;
   }
 
+  /* The rating and its unit never part. */
+  .cdc-sum-player__rating {
+    white-space: nowrap;
+  }
+
   .cdc-sum-player__elo b {
     color: #fff;
     font-weight: 800;

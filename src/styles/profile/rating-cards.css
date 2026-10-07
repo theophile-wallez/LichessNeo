@@ -228,14 +228,14 @@
 }
 
 .side.sub-ratings a[href*='/training/dashboard'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/puzzle-piece.svg');
+  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
 }
 .side.sub-ratings a[href*='/storm/dashboard/'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/high-voltage.svg');
+  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
 }
 .side.sub-ratings a[href$='/racer'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
+  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
 }
 .side.sub-ratings a[href$='/streak'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
+  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
 }

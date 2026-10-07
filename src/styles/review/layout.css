@@ -37,16 +37,20 @@
       'gauge board controls' !important;
   }
 
+  /* The graph, as tall in the summary as in the move-by-move review; it shrinks on a short
+     window, so the moves keep some room. */
+  html:is(.cdc-review-summary, .cdc-review-moves) main.analyse {
+    --cdc-review-graph: clamp(56px, calc(var(--cdc-stage) * 0.14), 112px);
+  }
+
   html.cdc-review-summary main.analyse {
     grid-template-rows: var(--cdc-stage) !important;
     grid-template-areas: 'gauge board rtop' !important;
   }
 
   /* Move by move: the graph and the key moments over the coach (all in the panel), the
-     moves, then our controls (with play) instead of Lichess's. The graph shrinks on a short
-     window, so the moves keep some room. */
+     moves, then our controls (with play) instead of Lichess's. */
   html.cdc-review-moves main.analyse {
-    --cdc-review-graph: clamp(56px, calc(var(--cdc-stage) * 0.14), 112px);
     --cdc-review-moments: 58px;
     --cdc-review-top: calc(262px + var(--cdc-review-graph) + var(--cdc-review-moments));
     --cdc-review-ctrl: 72px;
@@ -258,13 +262,12 @@
     padding: 12px 16px;
   }
 
-  /* The summary's graph and players stay above the scrolling moves and phases; both
-     reserve the scrollbar gutter so they're as wide. */
+  /* The summary's graph and players stay above the scrolling moves and phases. The graph
+     sits where the move-by-move review has its own, at its size, 12px from the sides. */
   .cdc-review__top {
     flex: none;
     overflow: hidden;
-    padding: 12px 16px 0;
-    scrollbar-gutter: stable;
+    padding: 0 12px;
   }
 
   /* Engine failure, shown where the coach would speak. */
@@ -278,13 +281,15 @@
     line-height: 1.4;
   }
 
+  /* Its scrollbar (Lichess's, 0.5rem wide) takes from the right padding, so the cards end
+     where the graph does. */
   .cdc-review__top + .cdc-review__body {
-    padding-top: 0;
+    padding: 0 calc(12px - 0.5rem) 12px 12px;
     scrollbar-gutter: stable;
   }
 
   .cdc-review__foot {
     flex: none;
-    padding: 12px 16px 16px;
+    padding: 12px 12px 16px;
   }
 }

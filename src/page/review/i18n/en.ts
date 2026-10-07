@@ -1,7 +1,15 @@
+import type { Color } from '#shared/chess/types.ts';
 import { factsEn, trajectoryEn } from './en-comment.ts';
+import { capitalize, partyOf } from './en-grammar.ts';
 import { remarksEn } from './en-remarks.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
-import type { ReviewLanguage } from './types.ts';
+import type {
+  ClockStrings,
+  InterfaceStrings,
+  RetryStrings,
+  ReviewLanguage,
+  Viewer,
+} from './types.ts';
 
 const CLASS_LABELS = {
   brilliant: 'Brilliant',
@@ -29,64 +37,106 @@ const CLASS_PLURALS: Readonly<Record<MoveClass, string>> = {
   blunder: 'blunders',
 };
 
-export const en: ReviewLanguage = {
+const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
+  review: 'Game Review',
+  start: 'Start Review',
+  next: 'Next',
+  explain: 'Explain',
+  best: 'Best',
+  analysing: 'Analyzing game…',
+  moves: 'Moves',
+  profileTitle: 'Profile',
+  profile: {
+    opening: {
+      name: 'Opening',
+      how: 'Accuracy of the moves before the middlegame: until pieces are traded or developed, or the two camps mix.',
+    },
+    middlegame: {
+      name: 'Middlegame',
+      how: 'Accuracy of the moves from the middlegame to the endgame.',
+    },
+    endgame: {
+      name: 'Endgame',
+      how: 'Accuracy once six pieces or fewer are left, kings and pawns aside.',
+    },
+    tactics: {
+      name: 'Tactics',
+      how: 'Share of the tactical chances found: brilliant and great moves, against the chances missed.',
+    },
+    defense: {
+      name: 'Defense',
+      how: 'Accuracy of the moves played while worse off, under 35% winning chances.',
+    },
+    conversion: {
+      name: 'Conversion',
+      how: 'Accuracy of the moves played while better off, over 65% winning chances.',
+    },
+  },
+  accuracy: 'Accuracy',
+  anonymous: 'Anonymous',
+  close: 'Close review',
+  back: 'Back',
+  coach: 'Change coach',
+  intro: "Let's review this game!",
+  engineError: 'The engine failed to start.',
+  liveIntro: 'Play a move and I’ll tell you what I think.',
+  thinking: 'Let me look at this move…',
+  startPosition: 'Starting position',
+  more: 'Show all moves',
+  less: 'Show less',
+  gameRating: 'Game Rating',
+  gameRatingTip: 'An estimate of a player’s rating based on a single game.',
+  bestWas: move => `${move} was best.`,
+  cost: percent => `−${percent}% winning chances`,
+  lines: {
+    best: line => `Best was ${line}.`,
+    allows: (move, line) => `${move} allows ${line}.`,
+    show: 'Show line',
+  },
+  themes: { fork: 'Fork', hanging: 'Hanging piece', mate: 'Checkmate', sacrifice: 'Sacrifice' },
+};
+
+/** "an 1850", "an 800", "a 1500": the article as the number is said ("eighteen fifty"). */
+const article = (elo: number): string => (/^(8|11|18)/.test(String(elo)) ? 'an' : 'a');
+
+const playedLike = (viewer: Viewer, color: Color, elo: number | null): [string, string] => {
+  const player = capitalize(partyOf(viewer, color, String(elo)).name);
+  return [elo === null ? `${player} played like` : `${player} played like ${article(elo)}`, 'Elo'];
+};
+
+const retryStrings = (viewer: Viewer): RetryStrings => ({
+  button: 'Retry',
+  prompt: color =>
+    viewer === color
+      ? 'Find a better move.'
+      : `Find a better move for ${partyOf(viewer, color, 'retry').name}.`,
+  checking: 'Let me see…',
+  found: move => `Yes! ${move} is the move.`,
+  alsoGood: move => `${move} works too. Well found!`,
+  wrong: move => `Not quite: ${move} isn’t it. Try again!`,
+  same: 'That’s the move played in the game. Try another one!',
+  reveal: 'Show the answer',
+  revealed: best => `The move was ${best}.`,
+});
+
+const clockStrings = (viewer: Viewer): ClockStrings => ({
+  rushed: (color, spent, clock) =>
+    `${capitalize(partyOf(viewer, color, spent).name)} played this in ${spent} with ${clock} remaining on the clock: a little more time here would have paid off.`,
+  timeTrouble: clock => `With only ${clock} left on the clock, this was hard to find.`,
+  paidOff: (color, spent) =>
+    `${capitalize(partyOf(viewer, color, spent).name)} spent ${spent} on this move, and it was worth it.`,
+  seconds: seconds => `${seconds} s`,
+  tipTitle: 'Tip',
+  praiseTitle: 'Time well spent',
+});
+
+/** English, the coach speaking to `viewer` of their own moves. */
+export const english = (viewer: Viewer): ReviewLanguage => ({
   ui: {
-    review: 'Game Review',
-    start: 'Start Review',
-    next: 'Next',
-    explain: 'Explain',
-    best: 'Best',
-    analysing: 'Analyzing game…',
-    playedLike: 'Played like',
-    moves: 'Moves',
-    profileTitle: 'Profile',
-    profile: {
-      opening: {
-        name: 'Opening',
-        how: 'Accuracy of the moves before the middlegame: until pieces are traded or developed, or the two camps mix.',
-      },
-      middlegame: {
-        name: 'Middlegame',
-        how: 'Accuracy of the moves from the middlegame to the endgame.',
-      },
-      endgame: {
-        name: 'Endgame',
-        how: 'Accuracy once six pieces or fewer are left, kings and pawns aside.',
-      },
-      tactics: {
-        name: 'Tactics',
-        how: 'Share of the tactical chances found: brilliant and great moves, against the chances missed.',
-      },
-      defense: {
-        name: 'Defense',
-        how: 'Accuracy of the moves played while worse off, under 35% winning chances.',
-      },
-      conversion: {
-        name: 'Conversion',
-        how: 'Accuracy of the moves played while better off, over 65% winning chances.',
-      },
-    },
-    accuracy: 'Accuracy',
-    anonymous: 'Anonymous',
-    close: 'Close review',
-    back: 'Back',
-    coach: 'Change coach',
-    intro: "Let's review this game!",
-    engineError: 'The engine failed to start.',
-    liveIntro: 'Play a move and I’ll tell you what I think.',
-    thinking: 'Let me look at this move…',
-    startPosition: 'Starting position',
-    more: 'Show all moves',
-    less: 'Show less',
-    gameRating: 'Game Rating',
-    gameRatingTip: 'An estimate of a player’s rating based on a single game.',
-    bestWas: move => `${move} was best.`,
-    cost: percent => `−${percent}% winning chances`,
-    lines: {
-      best: line => `Best was ${line}.`,
-      allows: (move, line) => `${move} allows ${line}.`,
-      show: 'Show line',
-    },
+    ...INTERFACE,
+    playedLike: (color, elo) => playedLike(viewer, color, elo),
+    retry: retryStrings(viewer),
+    clock: clockStrings(viewer),
   },
   classLabels: CLASS_LABELS,
   classSentences: {
@@ -107,6 +157,9 @@ export const en: ReviewLanguage = {
   typography: text => text,
   openingLine: name => `Opening: ${name}.`,
   remarks: remarksEn,
-  trajectory: trajectoryEn,
-  facts: factsEn,
-};
+  trajectory: trajectoryEn(viewer),
+  facts: factsEn(viewer),
+});
+
+/** English as a watcher reads it: "White", "Black". */
+export const en = english(null);

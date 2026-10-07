@@ -86,6 +86,16 @@ export class Analysis {
     return { white: byColor('white'), black: byColor('black') };
   }
 
+  /** The side the signed-in user played in this game; null when they didn't play it. */
+  viewerColor(): Color | null {
+    const me = document.body.dataset.user?.toLowerCase();
+    if (!me) return null;
+    const players = this.players();
+    const plays = (color: Color): boolean => players[color]?.user?.username?.toLowerCase() === me;
+    if (plays('white') === plays('black')) return null;
+    return plays('white') ? 'white' : 'black';
+  }
+
   get node(): TreeNode {
     return narrowNode(this.#controller.node);
   }

@@ -38,10 +38,11 @@
   background: var(--cdc-bg-panel) !important;
 }
 
-/* The Lessons illustration instead of Lichess's grey helmet, floating like Practice's. */
+/* The sidebar's Chess basics picture instead of Lichess's grey helmet, floating like
+   Practice's. */
 .learn__side-home img.decoration {
-  content: url('chrome-extension://__MSG_@@extension_id__/img/icons/graduation-cap.svg');
-  width: 120px !important;
+  content: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/chess-basics.webp');
+  width: 96px !important;
   opacity: 1 !important;
   filter: drop-shadow(0 8px 16px #0006) !important;
   animation: cdc-float 4s ease-in-out infinite !important;

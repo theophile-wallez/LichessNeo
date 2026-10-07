@@ -251,7 +251,7 @@
 }
 
 :is(.lobby__start__button--friend, .lobby__start__button--friend-user).button::before {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/icons/handshake.svg');
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friendly-challenge.webp');
 }
 
 .lobby__start__button--ai.button::before {

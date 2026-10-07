@@ -56,6 +56,7 @@ function playerCard({ review, players, winner, language }: PlayersInput, color: 
   const name = playerName(players[color], language);
   const accuracy = review?.accuracy[color];
   const elo = review?.rating?.[color]?.elo;
+  const [lead, tail] = ui.playedLike(color, elo ?? null);
   const best = ahead(review) === color;
   // The trophy sits at the card's right, beside the accuracy, clear of a long name.
   const trophy = winner === color ? html`<span class="cdc-sum-player__trophy"></span>` : '';
@@ -63,7 +64,7 @@ function playerCard({ review, players, winner, language }: PlayersInput, color: 
       <span class="cdc-avatar cdc-avatar--${side}"${avatarAttributes(players[color]?.user?.username)}></span>
       <span class="cdc-sum-player__name"><span>${name}</span></span>${trophy}
       <span class="cdc-sum-player__acc"><span class="cdc-acc cdc-acc--${side}">${accuracy === null || accuracy === undefined ? NBSP : accuracy.toFixed(1)}</span><small>${ui.accuracy}</small></span>
-      <span class="cdc-sum-player__elo">${ui.playedLike} <b>${elo ?? '—'}</b></span>
+      <span class="cdc-sum-player__elo">${lead} <span class="cdc-sum-player__rating"><b>${elo ?? '—'}</b> ${tail}</span></span>
     </div>`;
 }
 

@@ -21,7 +21,9 @@ export function renderLive(session: Session, analysis: Analysis): void {
   const { live, language } = session;
   const move = judgeAt(live, analysis, analysis.path);
   const comment =
-    move && !live.error ? commentOn(session, { move, gameId: analysis.gameId, hint: [] }) : null;
+    move && !live.error
+      ? commentOn(session, { move, gameId: analysis.gameId, hint: [], timing: null })
+      : null;
   if (comment) followComment(session, comment);
   const bubble = liveBubble(session, analysis, comment);
   const moveClass = live.error ? null : (move?.moveClass ?? null);

@@ -78,7 +78,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* New highscore: a dark card with a gold title between two Puzzle Rush icons
+/* New highscore: a dark card with a gold title between two Storm pictures
    (Lichess fills it with gold, between two tornadoes). */
 .storm--end__high {
   padding: 22px 24px !important;
@@ -136,7 +136,7 @@
 
 /* ---- Play again --- */
 
-/* A big primary button led by the Puzzle Rush icon (Lichess puts a tornado at each end). */
+/* A big primary button led by the Storm picture (Lichess puts a tornado at each end). */
 .storm-play-again {
   justify-content: center !important;
   gap: 16px;
@@ -237,7 +237,7 @@
 
 /* ---- Reload --- */
 
-/* "Opened in another tab": the Puzzle Rush icon replaces Lichess's tornado glyph. */
+/* "Opened in another tab": the Storm picture replaces Lichess's tornado glyph. */
 .storm--reload {
   align-items: center;
   gap: 16px;

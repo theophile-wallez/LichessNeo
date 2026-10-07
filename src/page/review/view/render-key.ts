@@ -42,6 +42,8 @@ export function renderKey(session: Session, analysis: Analysis): string {
     session.lines.found.size,
     view.lineOf?.path ?? '',
     view.playing !== null,
+    // Retry's misses and answer.
+    view.retry ? `${view.retry.misses}:${view.retry.revealed}` : '',
     liveDigest(reviewMove(session, analysis)),
     live.error ?? '',
   ].join('|');

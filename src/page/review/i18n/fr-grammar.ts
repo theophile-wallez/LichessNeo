@@ -1,8 +1,12 @@
 import type { Color, Piece, Role } from '#shared/chess/index.ts';
+import { hash } from '#page/review/coach/hash.ts';
 import { pieceToken } from '#page/review/comment/tokens.ts';
+import type { Viewer } from './types.ts';
 
 // French grammar for the coach's sentences: a piece's gender picks its
-// articles and agreements.
+// articles and agreements, and the reader's side its persons: "tu" and
+// "l’adversaire" (or its color, for a change) when the reader played the
+// game, "les Blancs" and "les Noirs" when they watch it.
 
 const ROLE_NAMES: Readonly<Record<Role, string>> = {
   pawn: 'pion',
@@ -21,6 +25,13 @@ const pieceName = (piece: Piece): string => pieceToken(piece) + ROLE_NAMES[piece
 export const definite = (piece: Piece): string =>
   `${isFeminine(piece) ? 'la' : 'le'} ${pieceName(piece)}`;
 
+/** "la [dame]", or whose it is when the reader played: "ta [dame]", "la [dame] adverse". */
+export function owned(viewer: Viewer, piece: Piece): string {
+  if (viewer === null) return definite(piece);
+  if (viewer === piece.color) return `${isFeminine(piece) ? 'ta' : 'ton'} ${pieceName(piece)}`;
+  return `${definite(piece)} adverse`;
+}
+
 /** "une [tour]", "un [cavalier]". */
 export const indefinite = (piece: Piece): string =>
   `${isFeminine(piece) ? 'une' : 'un'} ${pieceName(piece)}`;
@@ -31,11 +42,6 @@ export const pronoun = (piece: Piece): string => (isFeminine(piece) ? 'la' : 'le
 /** A past participle's agreement: "défendue", "défendu". */
 export const agreement = (piece: Piece): string => (isFeminine(piece) ? 'e' : '');
 
-export const side = (color: Color): string => (color === 'white' ? 'les Blancs' : 'les Noirs');
-
-/** "des Blancs": a side as a complement. */
-export const sides = (color: Color): string => (color === 'white' ? 'des Blancs' : 'des Noirs');
-
 export const capitalize = (text: string): string =>
   text.length === 0 ? text : text.charAt(0).toUpperCase() + text.slice(1);
 
@@ -44,3 +50,50 @@ export const withDe = (text: string): string => text.replace(/^un(e?) /, 'd’un
 
 /** French puts a space before ! ? : ;, which mustn't wrap away from its word. */
 export const typography = (text: string): string => text.replace(/ ([!?:;])/g, '\u00a0$1');
+
+/** A side, as the coach names it to the reader. */
+export interface Party {
+  /** "tu", "l’adversaire", "les Blancs". */
+  readonly subject: string;
+  /** "l’adversaire", "les Blancs"; null for the reader, whom a pronoun stands for ("te"). */
+  readonly object: string | null;
+  /** "de l’adversaire", "des Blancs": an owner; null for the reader ("ton …"). */
+  readonly of: string | null;
+  /** "à l’adversaire", "aux Blancs". */
+  readonly to: string | null;
+  readonly person: 'tu' | 'il' | 'ils';
+}
+
+/**
+ * The side of `color`. The reader's opponent goes by "l’adversaire", or now and then by its
+ * color, picked from `seed`, so a sentence reads the same on every redraw.
+ */
+export function partyOf(viewer: Viewer, color: Color, seed = ''): Party {
+  if (viewer === color) return { subject: 'tu', object: null, of: null, to: null, person: 'tu' };
+  if (viewer !== null && hash(seed) % 3 !== 0)
+    return {
+      subject: 'l’adversaire',
+      object: 'l’adversaire',
+      of: 'de l’adversaire',
+      to: 'à l’adversaire',
+      person: 'il',
+    };
+  const name = color === 'white' ? 'Blancs' : 'Noirs';
+  return {
+    subject: `les ${name}`,
+    object: `les ${name}`,
+    of: `des ${name}`,
+    to: `aux ${name}`,
+    person: 'ils',
+  };
+}
+
+/** The verb in the party's person: `conjugate(party, 'as', 'a', 'ont')`. */
+export function conjugate(party: Party, tu: string, il: string, ils: string): string {
+  if (party.person === 'tu') return tu;
+  return party.person === 'il' ? il : ils;
+}
+
+/** "ton dernier coup", "le dernier coup des Blancs": `mine` for the reader, else `theirs` and its owner. */
+export const ownedBy = (party: Party, mine: string, theirs: string): string =>
+  party.of === null ? mine : `${theirs} ${party.of}`;

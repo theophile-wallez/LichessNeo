@@ -17,14 +17,14 @@ main.swiss .swiss__main__header {
   padding: 20px 24px !important;
 }
 
-/* A trophy instead of Lichess's glyph, like the other pages' title icons. */
+/* The sidebar's Swiss picture instead of Lichess's glyph, like the other pages' title icons. */
 main.swiss .swiss__main__header > icon.img {
   flex: none;
   width: 48px;
   height: 48px;
   margin: 0 !important;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg') center / contain
-    no-repeat;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/swiss-tournaments.webp')
+    center / contain no-repeat;
 }
 
 main.swiss .swiss__main__header > icon.img::before {

@@ -154,13 +154,15 @@ describe('the board', () => {
   });
 
   it('draws the best move for a move that needed it, and the engine’s off the game', () => {
-    expect(reviewArrowsFor({ moveClass: 'mistake', best: 'e2e4', engine: null })).toEqual([
-      { orig: 'e2', dest: 'e4', brush: 'best' },
-    ]);
-    expect(reviewArrowsFor({ moveClass: 'best', best: 'e2e4', engine: 'g8f6' })).toEqual([
-      { orig: 'g8', dest: 'f6', brush: 'engine' },
-    ]);
-    expect(reviewArrowsFor({ moveClass: null, best: null, engine: 'zz' })).toEqual([]);
+    expect(
+      reviewArrowsFor({ moveClass: 'mistake', best: 'e2e4', threat: null, engine: null }),
+    ).toEqual([{ orig: 'e2', dest: 'e4', brush: 'best' }]);
+    expect(
+      reviewArrowsFor({ moveClass: 'best', best: 'e2e4', threat: null, engine: 'g8f6' }),
+    ).toEqual([{ orig: 'g8', dest: 'f6', brush: 'engine' }]);
+    expect(reviewArrowsFor({ moveClass: null, best: null, threat: null, engine: 'zz' })).toEqual(
+      [],
+    );
   });
 
   it('shows the eval bar’s score for the position on the board', () => {

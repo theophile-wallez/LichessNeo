@@ -64,3 +64,37 @@ export function attackers(board: Board, target: Square, by: Color): Role[] {
 
 export const isAttacked = (board: Board, target: Square, by: Color): boolean =>
   attackers(board, target, by).length > 0;
+
+/** The squares the piece on `from` attacks, pins ignored; a slider stops at the first piece. */
+export function attackedSquares(board: Board, from: Square): Square[] {
+  const piece = board.get(from);
+  if (!piece) return [];
+  const [file, rank] = squareCoords(from);
+  const found: Square[] = [];
+  const reach = (steps: readonly Step[], slides: boolean): void => {
+    for (const [fileStep, rankStep] of steps) {
+      for (let k = 1; ; k++) {
+        const square = squareAt(file + fileStep * k, rank + rankStep * k);
+        if (!square) break;
+        found.push(square);
+        if (!slides || board.has(square)) break;
+      }
+    }
+  };
+  if (piece.role === 'pawn') {
+    const ahead = piece.color === 'white' ? 1 : -1;
+    reach(
+      [
+        [-1, ahead],
+        [1, ahead],
+      ],
+      false,
+    );
+  } else if (piece.role === 'knight') reach(KNIGHT_JUMPS, false);
+  else if (piece.role === 'king') reach([...ORTHOGONAL, ...DIAGONAL], false);
+  else {
+    if (piece.role !== 'bishop') reach(ORTHOGONAL, true);
+    if (piece.role !== 'rook') reach(DIAGONAL, true);
+  }
+  return found;
+}

@@ -109,7 +109,7 @@
   width: 36px;
   height: 36px;
   margin-inline-end: 12px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/newspaper.svg') center /
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp') center /
     contain no-repeat;
 }
 

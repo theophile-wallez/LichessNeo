@@ -10,6 +10,7 @@ import type { ClassCounts } from './judge/summary.ts';
 import type { MoveVerdict } from './judge/types.ts';
 import type { GameRating } from './rating/rate-game.ts';
 import type { ReviewElements } from './view/elements.ts';
+import type { ReviewArrow } from '#page/board/review-arrows.ts';
 
 // Everything the review keeps while a page is open, shared by its parts.
 
@@ -50,6 +51,18 @@ export interface LineShown {
   readonly line: readonly string[];
 }
 
+/** Retry: the player looks for a better move than the error at `path`, from the position before. */
+export interface RetryState {
+  readonly path: string;
+  readonly move: JudgedMove;
+  /** The moves tried and judged no better. */
+  misses: number;
+  /** The miss on the board, already counted. */
+  counted: string | null;
+  /** The answer is on the board. */
+  revealed: boolean;
+}
+
 export type GraphKind = 'summary' | 'moves';
 
 export interface ViewState {
@@ -68,6 +81,9 @@ export interface ViewState {
   readonly revealed: Set<GraphKind>;
   bestOf: BestShown | null;
   lineOf: LineShown | null;
+  retry: RetryState | null;
+  /** The arrow of the comment's move under the pointer (view/chips.ts). */
+  hover: ReviewArrow | null;
   /** The summary's chevron is open. */
   allRows: boolean;
   /** The ply the summary was opened on. Moving to another ply opens the move-by-move review. */
@@ -174,6 +190,8 @@ export function createSession(options: SessionOptions): Session {
       revealed: new Set(),
       bestOf: null,
       lineOf: null,
+      retry: null,
+      hover: null,
       allRows: false,
       summaryPly: undefined,
       drawnMode: null,

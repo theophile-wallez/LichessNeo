@@ -23,7 +23,7 @@
   margin: 0 !important;
 }
 
-/* The trophy icon of the sidebar's Watch menu; it replaces the calendar's Lichess icon. */
+/* The sidebar's Broadcasts picture; it replaces the calendar's Lichess icon. */
 :is(.relay-index, .relay-calendar) .box__top h1::before {
   content: '' !important;
   margin: 0 !important;
@@ -31,8 +31,8 @@
   flex: none;
   width: 36px;
   height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg') center / contain
-    no-repeat;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp') center /
+    contain no-repeat;
 }
 
 :is(.relay-index, .relay-calendar) .box__top .search input {

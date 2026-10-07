@@ -301,12 +301,12 @@
    Dashboard links carry their period (/training/dashboard/30/strengths), hence the $= matches. */
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/training'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/puzzle-piece.svg');
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
   --cdc-nav-color: var(--cdc-orange-dark);
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/training/themes'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/circus-tent.svg');
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
   --cdc-nav-color: var(--cdc-accent);
 }
 
@@ -316,7 +316,7 @@
 }
 
 .subnav[data-cdc-nav~='puzzles'] a[href$='/dashboard'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/chart-increasing.svg');
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-dashboard.webp');
   --cdc-nav-color: var(--cdc-cyan-darker);
 }
 

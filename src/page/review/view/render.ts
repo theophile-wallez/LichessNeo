@@ -13,6 +13,7 @@ import { renderLive } from './live-panel.ts';
 import { renderMoves } from './moves-panel.ts';
 import { closeTools, spokenMove, stopPlaying } from './navigation.ts';
 import { renderKey } from './render-key.ts';
+import { followRetry } from './retry.ts';
 import { startStream } from './stream.ts';
 import { renderSummary } from './summary-panel.ts';
 import { hideTip } from './tooltip.ts';
@@ -20,7 +21,8 @@ import { hideTip } from './tooltip.ts';
 // The panel, drawn again whenever what it shows changes, and the board's
 // marks on every pass.
 
-const KEPT_BUTTONS = 'button[data-cdc]:not([data-cdc="coach"])';
+// Not the comment's move chips: the same move may be named twice.
+const KEPT_BUTTONS = 'button[data-cdc]:not([data-cdc="coach"], [data-cdc="chip"])';
 
 const classOf = (element: Element): string => element.getAttribute('class') ?? '';
 
@@ -69,6 +71,17 @@ function redrawPanel(session: Session, analysis: Analysis): void {
   fitBubble(panel);
 }
 
+/** What runs on its own as the board moves: the engines' lookups, a retry. */
+function follow(session: Session, analysis: Analysis): void {
+  const { view } = session;
+  // Off the game's moves, the review judges them like the free board.
+  if (view.mode === 'live' || (view.mode === 'moves' && view.review)) pump(session, analysis);
+  const explained = view.mode === 'moves' && view.explain ? spokenMove(session, analysis) : null;
+  if (explained) pumpLines(session, analysis, explained);
+  if (view.mode === 'moves') followRetry(session, analysis);
+  else view.retry = null;
+}
+
 export function render(session: Session, force = false): void {
   const analysis = pageAnalysis();
   if (!analysis || !attach(session.elements)) return;
@@ -77,10 +90,7 @@ export function render(session: Session, force = false): void {
     setMode(session, 'moves');
     return;
   }
-  // Off the game's moves, the review judges them like the free board.
-  if (view.mode === 'live' || (view.mode === 'moves' && view.review)) pump(session, analysis);
-  const explained = view.mode === 'moves' && view.explain ? spokenMove(session, analysis) : null;
-  if (explained) pumpLines(session, analysis, explained);
+  follow(session, analysis);
   const key = renderKey(session, analysis);
   if (force || key !== view.lastKey) {
     view.lastKey = key;

@@ -3,7 +3,7 @@
 /* The side menu these pages share with the rating stats, bots and FIDE players: each link's
  * icon and color (the tiles are in pages/). */
 .subnav a[href$='/player'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/bar-chart.svg');
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
   --cdc-nav-color: var(--cdc-orange-dark);
 }
 

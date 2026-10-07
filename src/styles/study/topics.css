@@ -22,7 +22,7 @@
   flex: none;
   width: 36px;
   height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/open-book.svg') center /
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp') center /
     contain no-repeat;
 }
 
@@ -100,7 +100,7 @@ main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top::before {
   flex: none;
   width: 36px;
   height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/open-book.svg') center /
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp') center /
     contain no-repeat;
 }
 

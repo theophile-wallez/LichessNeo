@@ -74,14 +74,6 @@
     line-height: 1.35;
   }
 
-  /* Up to three lines; the review drops the second sentence rather than cut it. */
-  .cdc-bubble__sub {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-  }
-
   /* Explain's button under its lines, which plays the best one on the board. */
   .cdc-bubble__line {
     align-self: flex-start;
@@ -109,13 +101,14 @@
   }
 
   /* Pieces are drawn in the board's set, moves as chips led by the moving piece. Negative
-     margins keep the pieces from pushing the lines apart. */
+     margins keep the pieces from pushing the lines apart; the piece's foot sits on the
+     text's baseline. */
   .cdc-pc {
     display: inline-block;
-    width: 1.45em;
-    height: 1.45em;
-    margin: -0.25em 0.1em -0.2em 0;
-    vertical-align: -0.35em;
+    width: 1.3em;
+    height: 1.3em;
+    margin: -0.2em 0.2em -0.1em 0;
+    vertical-align: -0.3em;
   }
 
   /* A chip's pieces are sized to its line. Inline, its padding doesn't push the lines
@@ -297,12 +290,22 @@
     width: 180%;
   }
 
+  /* The verdict stays on top, the rest scrolls under it once the review has dropped the
+     trajectory (view/stream.ts). Short, the bubble is centered on the card. */
   #cdc-review .cdc-bubble {
-    align-self: center;
+    align-self: stretch;
+    justify-content: safe center;
+    min-height: 0;
     margin-top: 0;
-    padding: 10px 0;
+    padding: 10px 0 0;
     background: transparent;
     color: var(--cdc-text);
+  }
+
+  /* The bottom gap is the scrolling part's own (bubble-parts.css), so it scrolls to the
+     card's edge; a bubble without one keeps it. */
+  #cdc-review .cdc-bubble > :last-child:not(.cdc-bubble__body) {
+    margin-bottom: 10px;
   }
 
   #cdc-review .cdc-bubble::before {

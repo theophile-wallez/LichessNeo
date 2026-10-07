@@ -82,7 +82,7 @@ main.forum.index > .box__top:first-child h1::before {
   width: 44px;
   height: 44px;
   margin: 0 !important;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/speech-balloon.svg') center /
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/forum.webp') center /
     contain no-repeat;
 }
 

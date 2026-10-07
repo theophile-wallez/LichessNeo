@@ -45,7 +45,10 @@ function movedRole(san: string): string {
 }
 
 // A move: the piece that moves, then the notation, a promotion's piece drawn too.
-function moveChip(value: string): SafeHtml {
+// One that can be played (tokens.ts) is a button: pointing at it draws its
+// arrow, clicking plays it (view/chips.ts).
+function moveChip(token: string): SafeHtml {
+  const [value = '', play] = token.split('@');
   const color = value.charAt(0);
   const san = value.slice(2).replace(PIECE_LETTER, '');
   const promotion = /=([QRBN])/.exec(san);
@@ -53,7 +56,10 @@ function moveChip(value: string): SafeHtml {
     promotion === null
       ? html`${san}`
       : html`${san.slice(0, promotion.index)}=${pieceGlyph(color + (promotion[1] ?? '').toLowerCase())}${san.slice(promotion.index + promotion[0].length)}`;
-  return html`<span class="cdc-mv">${pieceGlyph(color + movedRole(value.slice(2)))}${text}</span>`;
+  const chip = html`${pieceGlyph(color + movedRole(value.slice(2)))}${text}`;
+  if (play === undefined) return html`<span class="cdc-mv">${chip}</span>`;
+  const [base = '', ucis = ''] = play.split(':');
+  return html`<button class="cdc-mv cdc-mv--play" data-cdc="chip" data-cdc-base="${base}" data-cdc-ucis="${ucis}">${chip}</button>`;
 }
 
 function tokenMarkup(kind: string, value: string): SafeHtml {

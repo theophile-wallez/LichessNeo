@@ -31,8 +31,8 @@ main.swiss-home h1.box__top::before {
   flex: none;
   width: 36px;
   height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/ballot-box.svg') center /
-    contain no-repeat;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/swiss-tournaments.webp')
+    center / contain no-repeat;
 }
 
 /* ---- Lists --- */

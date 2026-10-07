@@ -38,7 +38,8 @@ export function badgeMarkup({ moveClass, uci, san, orientation }: BadgeInput): S
   return html`<div class="cdc-badge" style="${style}">${classSvg(moveClass)}</div>`;
 }
 
-function arrow(uci: string, brush: ReviewArrow['brush']): ReviewArrow[] {
+/** A move's arrow, in the engine's notation; none for a move it can't read. */
+export function arrow(uci: string, brush: ReviewArrow['brush']): ReviewArrow[] {
   const orig = parseSquare(uci.slice(0, 2));
   const dest = parseSquare(uci.slice(2, 4));
   return orig && dest ? [{ orig, dest, brush }] : [];
@@ -49,13 +50,21 @@ export interface ArrowsInput {
   readonly moveClass: MoveClass | null;
   /** The engine's best move instead of the one played. */
   readonly best: string | null;
+  /** The reply that punishes a mistake or a blunder. */
+  readonly threat: string | null;
   /** The engine's move from the position on the board, off the game's moves. */
   readonly engine: string | null;
 }
 
-/** The best move when the one played needed a correction, and the engine's move off the game. */
-export function reviewArrowsFor({ moveClass, best, engine }: ArrowsInput): ReviewArrow[] {
+const THREATENED: ReadonlySet<MoveClass> = new Set<MoveClass>(['mistake', 'blunder']);
+
+/**
+ * The best move when the one played needed a correction, the reply that
+ * punishes an error, and the engine's move off the game.
+ */
+export function reviewArrowsFor({ moveClass, best, threat, engine }: ArrowsInput): ReviewArrow[] {
   const arrows = moveClass && best && !GOOD.has(moveClass) ? arrow(best, 'best') : [];
+  if (moveClass && threat && THREATENED.has(moveClass)) arrows.push(...arrow(threat, 'threat'));
   if (engine) arrows.push(...arrow(engine, 'engine'));
   return arrows;
 }

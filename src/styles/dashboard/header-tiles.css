@@ -38,8 +38,21 @@ main.page-menu .page-menu__content.puzzle-dashboard {
   grid-row: 1 / span 2;
   width: 40px;
   height: 40px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/chart-increasing.svg') center
-    / contain no-repeat;
+  background: var(--cdc-dashboard-icon) center / contain no-repeat;
+}
+
+/* The dashboard's three pages share the title: each takes its menu link's icon
+   (puzzles/openings.css). */
+.puzzle-dashboard .box__top h1 {
+  --cdc-dashboard-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-dashboard.webp');
+}
+
+main.page-menu[data-cdc-nav-active$='/improvementAreas'] .puzzle-dashboard .box__top h1 {
+  --cdc-dashboard-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/bullseye.svg');
+}
+
+main.page-menu[data-cdc-nav-active$='/strengths'] .puzzle-dashboard .box__top h1 {
+  --cdc-dashboard-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/brain.svg');
 }
 
 .puzzle-dashboard .box__top h1 strong {

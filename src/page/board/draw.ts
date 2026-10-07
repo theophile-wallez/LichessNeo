@@ -3,7 +3,7 @@ import { createElement, queryOne } from '#shared/dom.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { createSvgElement } from '#shared/svg.ts';
 import { currentNode } from '#page/lichess/analysis.ts';
-import { ENGINE_COLOR, REVIEW_COLOR } from './colors.ts';
+import { ENGINE_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
 import { squareCenter } from './geometry.ts';
 import { createMateClock, matedKing } from './mate.ts';
 import { arrowsMarkup, fillsMarkup, mateMarkup } from './render.ts';
@@ -20,13 +20,18 @@ export interface DrawOptions {
   readonly redraw: () => void;
 }
 
+const BRUSH_COLORS: Readonly<Record<ReviewArrow['brush'], string>> = {
+  best: REVIEW_COLOR,
+  threat: THREAT_COLOR,
+  engine: ENGINE_COLOR,
+};
+
 function reviewArrow({ orig, dest, brush }: ReviewArrow, whiteAtBottom: boolean): Arrow {
-  const engine = brush === 'engine';
   return {
     from: squareCenter(orig, whiteAtBottom),
     to: squareCenter(dest, whiteAtBottom),
-    color: engine ? ENGINE_COLOR : REVIEW_COLOR,
-    opacity: engine ? 0.5 : 0.8,
+    color: BRUSH_COLORS[brush],
+    opacity: brush === 'engine' ? 0.5 : 0.8,
   };
 }
 
