@@ -51,6 +51,8 @@ export interface ClockStrings {
 export interface InterfaceStrings {
   readonly review: string;
   readonly start: string;
+  /** The closed review's way back to the summary, beside Game Review's. */
+  readonly summary: string;
   readonly next: string;
   readonly explain: string;
   readonly best: string;

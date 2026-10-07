@@ -33,6 +33,7 @@ const CLASS_PLURALS: Readonly<Record<MoveClass, string>> = {
 const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   review: 'Bilan',
   start: 'Démarrer le bilan',
+  summary: 'Résumé',
   next: 'Suivant',
   explain: 'Expliquer',
   best: 'Meilleur',

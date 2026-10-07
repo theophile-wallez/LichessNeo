@@ -15,9 +15,9 @@ import { formatAccuracy, type GameOverTexts, gameOverTexts } from '#page/game-ov
 import type { Session } from '#page/review/session.ts';
 
 // The review closed: the game over's card (page/game-over/card.ts), as the
-// game's page showed it at its end, over the ways back into the review. It
-// speaks to the player of their moves; to anyone else, of the board's bottom
-// side's.
+// game's page showed it at its end, over the ways back into the review: its
+// summary, or Game Review itself, move by move. It speaks to the player of
+// their moves; to anyone else, of the board's bottom side's.
 
 interface Side {
   readonly color: Color;
@@ -94,8 +94,8 @@ export function renderClosed(session: Session, analysis: Analysis): void {
   setHtml(
     session.elements.panel,
     html`<div class="cdc-end__frame">${card}<div class="cdc-end__foot">
-      <button class="cdc-btn cdc-btn--green" data-cdc="summary">${ui.review}</button>
-      <button class="cdc-btn" data-cdc="moves">${ui.start}</button>
+      <button class="cdc-btn" data-cdc="summary">${ui.summary}</button>
+      <button class="cdc-btn cdc-btn--green" data-cdc="moves">${ui.review}</button>
     </div></div>`,
   );
 }
