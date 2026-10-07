@@ -79,14 +79,23 @@
     font-style: normal !important;
   }
 
-  /* Under the coach's invite to Game Review (review-invite.css), the other follow-ups in one
-   * row. */
+  /* The follow-ups in one row: Game Review, the new game, then Rematch. Once the game over's
+   * card is in (page/game-over, game-end-card.css), they're its foot, and the row its frame. */
   main.round .rcontrols .follow-up {
     display: flex !important;
     flex-flow: row wrap !important;
     gap: 6px !important;
     padding: 10px 0 8px !important;
     border: none !important;
+    text-align: start;
+  }
+
+  main.round .rcontrols .follow-up[data-cdc-end-card] {
+    margin: 10px 0 8px;
+    padding: 10px !important;
+    border-radius: 16px;
+    background: var(--cdc-grey-750);
+    box-shadow: inset 0 0 0 1px #ffffff14;
   }
 
   main.round .rcontrols .follow-up > * {
@@ -94,25 +103,17 @@
     min-width: 0;
   }
 
-  /* Lichess's analysis link, always the last button: the invite leads there instead. */
-  main.round
-    .rcontrols
-    .follow-up
-    > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']) {
-    display: none !important;
-  }
-
   main.round .rcontrols .follow-up .fbt {
-    height: 44px;
+    height: 40px;
     margin: 0 !important;
     padding: 0 8px !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     overflow: hidden;
     background: var(--cdc-btn-grey) !important;
     color: #fff !important;
     font-size: 14px !important;
-    font-weight: 700;
-    line-height: 44px !important;
+    font-weight: 800;
+    line-height: 40px !important;
     text-align: center;
     text-transform: none !important;
     text-overflow: ellipsis;
@@ -125,33 +126,53 @@
     background: var(--cdc-btn-grey-hover) !important;
   }
 
-  /* "New 10+5" (Lichess's "New opponent" or ours), then Rematch, each with its emoji. */
+  /* Game Review: Lichess's analysis link, always the last button, first in the row. It opens
+   * the analysis page, where page/review/ starts the review. */
+  html {
+    --cdc-t-review: 'Game Review';
+  }
+  html[lang^='fr'] {
+    --cdc-t-review: 'Bilan';
+  }
+
+  main.round
+    .rcontrols
+    .follow-up
+    > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']) {
+    order: -2;
+    flex-grow: 1.4;
+    background: var(--cdc-btn-primary) !important;
+    font-size: 0 !important;
+    box-shadow: var(--cdc-btn-primary-shadow) !important;
+  }
+
+  main.round
+    .rcontrols
+    .follow-up
+    > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/'])::after {
+    content: var(--cdc-t-review);
+    font-size: 14px;
+  }
+
+  main.round
+    .rcontrols
+    .follow-up
+    > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']):hover {
+    background: var(--cdc-btn-primary-hover) !important;
+  }
+
+  /* "New 16 min" (Lichess's "New opponent" or ours), then Rematch. */
   main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .cdc-new-game) {
     display: flex !important;
     align-items: center;
-    /* A label too long for the button wraps, rather than losing its end or the icon. */
+    /* A label too long for the button wraps, rather than losing its end. */
     justify-content: safe center;
     line-height: 1.15 !important;
     white-space: normal;
   }
 
-  main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .cdc-new-game)::before {
-    content: '';
-    flex: none;
-    width: 20px;
-    height: 20px;
-    /* A margin, not a gap: Lichess's hidden label is still a flex item. */
-    margin-right: 8px;
-    background: var(--cdc-icon) center / contain no-repeat;
-  }
-
   main.round .rcontrols .follow-up :is(.new-opponent, .cdc-new-game) {
-    --cdc-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/stopwatch.svg');
-  }
-
-  main.round .rcontrols .follow-up .rematch {
-    --cdc-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
-    order: -2;
+    order: -1;
   }
 
   /* The time control replaces Lichess's "New opponent". */
@@ -174,26 +195,24 @@
     background: var(--cdc-btn-primary-hover) !important;
   }
 
-  /* Lichess turns the glowing button's ::before (our icon) into a pulsing overlay. */
+  /* Lichess turns the glowing button's ::before into a pulsing overlay: the ring
+   * (rematch.css) says it instead. */
   main.round .rcontrols .follow-up .rematch.glowing::before {
-    position: static;
-    opacity: 1;
-    animation: none;
+    display: none;
   }
 
   /* Declining: Lichess's tab off the panel's edge would stick out, so it becomes a small
-   * button right after Rematch. */
+   * button after Rematch. */
   main.round .rcontrols .follow-up .rematch-decline {
     position: static !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    order: -1;
     flex: none;
-    width: 44px !important;
-    height: 44px !important;
+    width: 40px !important;
+    height: 40px !important;
     padding: 0;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     opacity: 1 !important;
     background: var(--cdc-btn-grey) !important;
     box-shadow: var(--cdc-btn-grey-shadow) !important;

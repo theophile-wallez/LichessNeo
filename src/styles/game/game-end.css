@@ -1,8 +1,8 @@
-/* The end of a game the player watched end (page/game-over): the kings' badges, the winner's
- * confetti and the result's card (game-end-card.css), in one layer over the board. Lichess's own
- * badges on the kings give way to ours. The layer lets every click through but on the card. The
+/* The end of a game the player watched end (page/game-over): the kings' badges and the winner's
+ * confetti, in a layer over the board that lets every click through; the result's card is in the
+ * right-hand panel (game-end-card.css). Lichess's own badges on the kings give way to ours. The
  * badges show large, then `.cdc-end--settled` shrinks them to pips on the kings' corners as the
- * card comes in. */
+ * coach starts speaking. */
 
 @media (min-width: 1020px) {
   main:is(.round, .analyse)[data-cdc-end] .cg-custom-svgs {

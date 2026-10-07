@@ -1,26 +1,27 @@
 import type { CoachMood } from '#shared/coach.ts';
-import { closestTo, createElement, queryOne, setData } from '#shared/dom.ts';
+import { createElement, queryOne, setData } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { badgesMarkup, kingBadges } from './badges.ts';
 import { kingCells } from './board.ts';
-import { actionsMarkup, cardMarkup, followUpMarkup, pickQuote } from './card.ts';
+import { cardMarkup } from './card.ts';
 import { CHIP_STAGGER_MS, createChips, type Chips } from './chips.ts';
 import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from './confetti.ts';
 import { countUp } from './count-up.ts';
-import { isFollowUpAction, pressFollowUp, readFollowUp } from './follow-up.ts';
 import type { Outcome } from './outcome.ts';
 import type { PlayerSummary } from './quick-review.ts';
 import { formatAccuracy, type GameOverTexts } from './texts.ts';
 import { createVoice, type Voice } from './voice.ts';
 
-// The game over on the board (styles/game/game-end.css): the kings' badges,
-// the winner's confetti and the card, in one layer over the board that lets
-// clicks through but on the card. The badges show large for a moment, then
-// shrink to pips on the kings' corners as the card comes in. They follow the
-// kings as the player steps through the moves or flips the board.
+// The game over (styles/game/game-end.css, game-end-card.css): the kings'
+// badges and the winner's confetti in a layer over the board that lets clicks
+// through, and the card at the head of Lichess's follow-up buttons. The badges
+// show large for a moment, then shrink to pips on the kings' corners as the
+// coach starts speaking. They follow the kings as the player steps through the
+// moves or flips the board.
 
 const SYNC_MS = 250;
-/** How long the large badges show before the card comes. */
+const FOLLOW_UP = '.rcontrols .follow-up';
+/** How long the large badges show before the coach speaks. */
 export const SETTLE_MS = 1500;
 /** The counts spin at least this long, even when the moves were counted at once. */
 export const MIN_SPIN_MS = 1200;
@@ -31,7 +32,6 @@ export interface GameOverInput {
   readonly texts: GameOverTexts;
   readonly coachId: number;
   readonly opponent: string;
-  readonly reviewHref: string;
 }
 
 export interface GameOverView {
@@ -54,13 +54,9 @@ interface Layer {
   readonly root: HTMLElement;
   readonly kings: HTMLElement;
   readonly card: HTMLElement | null;
-  readonly counts: HTMLElement | null;
-  /** The accuracy and the counts, which go without figures; the review's way stays. */
-  readonly stats: readonly HTMLElement[];
+  /** The accuracy and the counts, which go without figures. */
+  readonly stats: HTMLElement | null;
   readonly accuracy: HTMLElement | null;
-  readonly actions: HTMLElement | null;
-  /** The follow-ups' row, across the bottom. */
-  readonly more: HTMLElement | null;
   readonly voice: Voice | null;
   readonly chips: Chips | null;
 }
@@ -70,9 +66,9 @@ function buildLayer(input: GameOverInput): Layer {
   const kings = createElement('div', { className: 'cdc-end__kings' });
   root.append(kings);
   if (input.outcome.result === 'win') addConfetti(root);
-  const quote = pickQuote(input.outcome.result, input.texts, Math.random);
-  root.insertAdjacentHTML('beforeend', cardMarkup({ ...input, quote }).value);
-  const card = queryOne(root, '.cdc-end__card', HTMLElement);
+  const holder = createElement('div');
+  setHtml(holder, cardMarkup(input));
+  const card = queryOne(holder, '.cdc-end__card', HTMLElement);
   const part = (name: string): HTMLElement | null =>
     card ? queryOne(card, `.cdc-end__${name}`, HTMLElement) : null;
   const [bubble, counts] = [part('bubble'), part('counts')];
@@ -80,57 +76,35 @@ function buildLayer(input: GameOverInput): Layer {
     root,
     kings,
     card,
-    counts,
-    stats: [part('accuracy'), part('counts')].filter(element => element !== null),
+    stats: part('stats'),
     accuracy: card ? queryOne(card, '.cdc-end__accuracy b', HTMLElement) : null,
-    actions: part('actions'),
-    more: part('more'),
     voice: bubble ? createVoice(bubble, input.coachId) : null,
     chips: counts ? createChips(counts) : null,
   };
 }
 
-/** Redraws the badges and the buttons when the kings or Lichess's buttons change. */
-function followBoard(layer: Layer, input: GameOverInput): void {
+/**
+ * Keeps the card at the head of Lichess's follow-up buttons, which Lichess may
+ * draw again, and redraws the badges when the kings move.
+ */
+function followPage(layer: Layer, input: GameOverInput): void {
   const badges = kingBadges(input.outcome, input.texts);
   let kingsKey = '';
-  let actionsKey = '';
   const sync = (): void => {
     const cells = kingCells(input.main);
     const key = JSON.stringify(cells);
     if (key !== kingsKey) setHtml(layer.kings, badgesMarkup(badges, cells));
     kingsKey = key;
-    const followUp = readFollowUp(input.reviewHref);
-    const next = JSON.stringify(followUp);
-    if (next !== actionsKey) {
-      if (layer.actions) setHtml(layer.actions, actionsMarkup(followUp, input.texts));
-      if (layer.more) setHtml(layer.more, followUpMarkup(followUp));
-    }
-    actionsKey = next;
+    const followUp = queryOne(input.main, FOLLOW_UP, HTMLElement);
+    if (!followUp || !layer.card || layer.card.parentElement === followUp) return;
+    followUp.prepend(layer.card);
+    setData(followUp, 'cdcEndCard', '');
   };
   sync();
   const timer = setInterval(() => {
     if (layer.root.isConnected) sync();
     else clearInterval(timer);
   }, SYNC_MS);
-}
-
-const CLOSED_CLASS = 'cdc-end__card--closed';
-
-/** Closed, the card hides; a click on the game's result, in the moves, brings it back. */
-function listen(layer: Layer, main: HTMLElement): void {
-  layer.root.addEventListener('click', event => {
-    if (closestTo(event.target, '.cdc-end__close', HTMLElement)) {
-      layer.chips?.stop();
-      layer.card?.classList.toggle(CLOSED_CLASS, true);
-    }
-    const action = closestTo(event.target, '[data-cdc-end]', HTMLElement)?.dataset.cdcEnd;
-    if (isFollowUpAction(action)) pressFollowUp(action);
-  });
-  main.addEventListener('click', event => {
-    if (closestTo(event.target, '.result-wrap', HTMLElement))
-      layer.card?.classList.toggle(CLOSED_CLASS, false);
-  });
 }
 
 const MOODS: Readonly<Record<Outcome['result'], CoachMood>> = {
@@ -160,9 +134,7 @@ function showAccuracy(element: HTMLElement | null, summary: PlayerSummary, from:
 /** What the card shows and the coach says, once the card has come in. */
 function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): GameOverView {
   const { card, stats, accuracy: accuracyNumber, voice, chips } = layer;
-  const dropStats = (): void => {
-    for (const element of stats) element.remove();
-  };
+  const dropStats = (): void => stats?.remove();
   const { outcome, texts } = input;
   const later = (show: () => void): void => {
     void settled.finally(() => {
@@ -220,12 +192,14 @@ function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): G
 }
 
 export function mountGameOver(input: GameOverInput): GameOverView {
+  // A dev preview shows it again: the last one goes, its card too.
+  input.main.querySelector(':scope > .cdc-end')?.remove();
+  input.main.querySelector('.cdc-end__card')?.remove();
   const layer = buildLayer(input);
   setData(input.main, 'cdcEnd', '');
   input.main.append(layer.root);
-  followBoard(layer, input);
-  listen(layer, input.main);
-  // What the card shows waits for it to come in.
+  followPage(layer, input);
+  // What the card shows waits for the badges to settle.
   const settled = new Promise<void>(resolve => {
     setTimeout(() => {
       layer.root.classList.toggle('cdc-end--settled', true);

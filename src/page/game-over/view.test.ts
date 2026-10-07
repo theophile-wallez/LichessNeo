@@ -28,7 +28,6 @@ function mount(outcome: Outcome): ReturnType<typeof mountGameOver> {
     texts: gameOverTexts(),
     coachId: 2,
     opponent: 'bob',
-    reviewHref: '/abcd1234/white',
   };
   return mountGameOver(input);
 }

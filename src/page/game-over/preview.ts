@@ -14,7 +14,8 @@ import { mountGameOver } from './view.ts';
 // engine: on a game page, or a finished game's analysis board (where its page
 // lands once reloaded), Alt+Shift+E shows it as the game really ended for the
 // board's bottom side (a win while it goes on), then each other result at each
-// press; `?cdc-end=win` (or loss, draw) shows it as the page opens.
+// press; `?cdc-end=win` (or loss, draw) shows it as the page opens. The card
+// shows on a game page only, where Lichess's follow-up buttons are.
 
 const PARAM = 'cdc-end';
 const RESULTS: readonly Result[] = ['win', 'loss', 'draw'];
@@ -63,8 +64,7 @@ async function realOutcome({ gameId, player }: Board): Promise<Outcome | null> {
   return readOutcome({ status: finished.game.status.name, winner: finished.game.winner, player });
 }
 
-function show({ main, gameId, player }: Board, outcome: Outcome): void {
-  main.querySelector(':scope > .cdc-end')?.remove();
+function show({ main, player }: Board, outcome: Outcome): void {
   const texts = gameOverTexts();
   const view = mountGameOver({
     main,
@@ -72,7 +72,6 @@ function show({ main, gameId, player }: Board, outcome: Outcome): void {
     texts,
     coachId: pickCoach(),
     opponent: opponentName(main, player, texts.anonymous),
-    reviewHref: `/${gameId}/${player}`,
   });
   view.analysing();
   setTimeout(() => view.verdict(SAMPLE), SAMPLE_MS);

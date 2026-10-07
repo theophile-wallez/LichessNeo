@@ -1,6 +1,6 @@
 import { trustedHtml, type SafeHtml } from '#shared/html.ts';
 
-// The game over's white glyphs, on the kings' badges and the card's close button.
+// The game over's white glyphs, on the kings' badges.
 
 const svg = (body: string): SafeHtml =>
   trustedHtml(

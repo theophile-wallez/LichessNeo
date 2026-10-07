@@ -12,7 +12,6 @@ function counts(): HTMLElement {
   setHtml(
     root,
     cardMarkup({
-      quote: null,
       outcome: { result: 'win', reason: 'mate', winner: 'white' },
       texts,
       coachId: 1,

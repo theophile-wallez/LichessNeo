@@ -1,303 +1,130 @@
-/* The game over's card over the board (page/game-over/card.ts): the coach in a band lit in the
- * result's color, the result, the coach's words and the game's follow-ups; beside, a card within
- * with the player's accuracy and counts over the way to Game Review, its button level with the
- * follow-ups. What's inside sits a gap in from the card's edge, its corners rounded by the card's
- * radius less that gap. It comes in once the kings' badges have shown (`.cdc-end--settled`,
- * game-end.css). */
+/* The game over's card (page/game-over/card.ts), at the head of Lichess's follow-up buttons,
+ * which game-over.css turns into its frame and its foot: the coach standing in a glow of the
+ * result's color beside the result and its words, then the player's accuracy and counts
+ * (game-end-stats.css). */
 
 @media (min-width: 1020px) {
-  /* ---- Ticket --- */
-
-  main:is(.round, .analyse) .cdc-end__card {
-    --cdc-coach-h: max(84px, 22cqh);
-    --cdc-stub-w: clamp(170px, 31cqw, 236px);
-    --cdc-card-r: max(16px, 2.4cqh);
-    --cdc-card-gap: max(8px, 1.2cqh);
-    /* Concentric with the card's corners, a gap in. */
-    --cdc-inner-r: calc(var(--cdc-card-r) - var(--cdc-card-gap));
-    /* Both sides end this far under their buttons, which so line up. */
-    --cdc-card-foot: max(10px, 1.6cqh);
+  main.round .rcontrols .follow-up > .cdc-end__card {
+    --cdc-coach-h: 140px;
     --cdc-tag-c: var(--cdc-good);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    /* Over the kings' badges, which share its layer (game-end.css). */
-    z-index: 2;
-    isolation: isolate;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) var(--cdc-stub-w);
-    grid-template-areas: 'main stub';
-    gap: var(--cdc-card-gap);
-    box-sizing: border-box;
-    width: min(86cqw, 660px);
-    padding: var(--cdc-card-gap);
+    order: -3;
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 2px;
+    container-type: inline-size;
     color: #fff;
-    filter: drop-shadow(0 12px 28px #0000008c);
-    visibility: hidden;
+    font-family: var(--cdc-font);
+    animation: cdc-end-card 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
   }
 
-  main:is(.round, .analyse) .cdc-end__card--loss {
+  main.round .rcontrols .follow-up > .cdc-end__card--loss {
     --cdc-tag-c: var(--cdc-bad);
   }
 
-  main:is(.round, .analyse) .cdc-end__card--draw {
+  main.round .rcontrols .follow-up > .cdc-end__card--draw {
     --cdc-tag-c: var(--cdc-text-dim);
-  }
-
-  /* The card's face, under what's on it. */
-  main:is(.round, .analyse) .cdc-end__card::before {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    border-radius: var(--cdc-card-r);
-    background: var(--cdc-grey-750);
-    box-shadow: inset 0 0 0 1px #ffffff14;
-  }
-
-  main:is(.round, .analyse) .cdc-end--settled .cdc-end__card {
-    visibility: visible;
-    pointer-events: auto;
-    animation: cdc-end-card 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
-  }
-
-  /* Closed, until a click on the game's result brings it back, popping in again
-     (page/game-over/view.ts). */
-  main:is(.round, .analyse) .cdc-end__card.cdc-end__card--closed {
-    display: none;
-  }
-
-  main.round[data-cdc-end] :is(i5d, rm6) .result-wrap {
-    cursor: pointer;
-    transition: background-color 0.15s !important;
-  }
-
-  main.round[data-cdc-end] :is(i5d, rm6) .result-wrap:hover {
-    background-color: #ffffff0a;
   }
 
   @keyframes cdc-end-card {
     from {
       opacity: 0;
-      scale: 0.85;
+      translate: 0 8px;
     }
   }
 
-  main:is(.round, .analyse) .cdc-end__card > :is(.cdc-end__main, .cdc-end__stub) {
-    position: relative;
-    z-index: 1;
+  /* Short windows and narrow panels: the moves keep their room, the words theirs. */
+  @media (max-height: 820px) {
+    main.round .rcontrols .follow-up > .cdc-end__card {
+      --cdc-coach-h: 112px;
+    }
+  }
+
+  @container (max-width: 400px) {
+    main.round .cdc-end__card .cdc-end__glow {
+      --cdc-coach-h: 108px;
+    }
+
+    main.round .cdc-end__card .cdc-end__title {
+      font-size: 22px;
+    }
   }
 
   /* ---- Coach --- */
 
-  /* Across the main side's top, glowing in the result's color from below, the coach's bust
-     fading into it. */
-  main:is(.round, .analyse) .cdc-end__band {
+  /* Lit in the result's color from under the coach, fading out behind the words. The coach
+     stands on its bottom edge, with room above for its hops: only the glow's edge cuts it. */
+  main.round .cdc-end__glow {
     display: flex;
-    flex: none;
-    align-items: flex-end;
-    justify-content: center;
-    height: calc(var(--cdc-coach-h) + 1.4cqh);
-    margin: 0 -1.4cqh 0.6cqh -1.6cqh;
+    gap: 6px;
+    min-height: calc(var(--cdc-coach-h) + 18px);
     overflow: hidden;
-    border-radius: var(--cdc-inner-r);
+    border-radius: 12px;
     background:
       radial-gradient(
-        circle at 50% 125%,
+        70% 140% at 18% 125%,
         color-mix(in srgb, var(--cdc-tag-c) 55%, transparent),
         transparent 70%
       ),
-      linear-gradient(color-mix(in srgb, var(--cdc-tag-c) 22%, transparent), transparent);
+      linear-gradient(
+        100deg,
+        color-mix(in srgb, var(--cdc-tag-c) 22%, transparent),
+        transparent 85%
+      );
   }
 
-  main:is(.round, .analyse) .cdc-end__card .cdc-coach__avatar {
+  main.round .cdc-end__card .cdc-coach__avatar {
+    align-self: flex-end;
     cursor: default;
   }
 
-  main:is(.round, .analyse) .cdc-end__card .cdc-coach__avatar:hover {
+  main.round .cdc-end__card .cdc-coach__avatar:hover {
     transform: none;
   }
 
-  /* Its bust fades out at the bottom. The fade is on the canvas rather than the face: a mask
-     clips to its box, which would cut the arms and tails the canvas spills past the sides. */
-  main:is(.round, .analyse)
-    .cdc-end__card
-    .cdc-coach__avatar:not(.cdc-coach__avatar--live)
-    .cdc-coach__face,
-  main:is(.round, .analyse) .cdc-end__card .cdc-coach__face canvas {
-    mask-image: linear-gradient(#000 78%, transparent);
-  }
-
-  main:is(.round, .analyse) .cdc-end__card .cdc-coach__face canvas {
+  /* The canvas spills past the avatar's sides, so its arms show, and above it, into the room
+     for its hops. The framing stays the avatar's (content/coach/mascot/stage.ts). */
+  main.round .cdc-end__card .cdc-coach__face canvas {
+    top: -13%;
     left: -60%;
     width: 220%;
+    height: 113%;
   }
 
-  /* ---- Main --- */
+  /* ---- Words --- */
 
-  main:is(.round, .analyse) .cdc-end__main {
-    grid-area: main;
+  main.round .cdc-end__main {
     display: flex;
     flex-direction: column;
-    gap: 0.8cqh;
+    justify-content: center;
     min-width: 0;
-    padding: 0 1.4cqh var(--cdc-card-foot) 1.6cqh;
+    padding: 14px 14px 14px 0;
   }
 
-  main:is(.round, .analyse) .cdc-end__reason {
+  main.round .cdc-end__reason {
     margin: 0;
     color: var(--cdc-tag-c);
-    font-size: max(11px, 1.9cqh);
+    font-size: 11.5px;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
-  main:is(.round, .analyse) .cdc-end__title {
-    margin: 0;
-    font-size: max(18px, 3.9cqh);
+  main.round .cdc-end__title {
+    margin: 2px 0 0;
+    font-size: 26px;
     font-weight: 900;
     letter-spacing: -0.02em;
-    line-height: 1.15;
+    line-height: 1.1;
   }
 
   /* The coach's words, typed out as it speaks: two lines kept, so the card keeps its height. */
-  main:is(.round, .analyse) .cdc-end__bubble {
-    min-height: 2.7em;
-    margin: 0;
+  main.round .cdc-end__bubble {
+    min-height: 2.9em;
+    margin: 4px 0 0;
     color: var(--cdc-grey-200);
-    font-size: max(13px, 2.3cqh);
-    line-height: 1.35;
-  }
-
-  /* A chess player's words after a loss or a draw, quiet under the coach's, in the page's
-     quotation marks, their author after them; coming in just after the card. */
-  main:is(.round, .analyse) .cdc-end__quote {
-    margin: 0.4cqh 0 0;
-    line-height: 1.35;
-  }
-
-  main:is(.round, .analyse) .cdc-end--settled .cdc-end__quote {
-    animation: cdc-end-quote 0.6s 0.9s ease-out both !important;
-  }
-
-  /* The author follows the words on their line. */
-  main:is(.round, .analyse) .cdc-end__quote :is(blockquote, figcaption) {
-    display: inline;
-  }
-
-  main:is(.round, .analyse) .cdc-end__quote blockquote {
-    margin: 0;
-    color: var(--cdc-grey-300);
-    font-size: max(12px, 2cqh);
-    font-style: italic;
-    line-height: 1.35;
-    quotes: auto;
-  }
-
-  /* French sets its marks off with a thin space, which the browser's leave out. */
-  html:lang(fr) main:is(.round, .analyse) .cdc-end__quote blockquote {
-    quotes: '«\202f' '\202f»';
-  }
-
-  main:is(.round, .analyse) .cdc-end__quote blockquote::before {
-    content: open-quote;
-  }
-
-  main:is(.round, .analyse) .cdc-end__quote blockquote::after {
-    content: close-quote;
-  }
-
-  main:is(.round, .analyse) .cdc-end__quote figcaption {
-    color: var(--cdc-text-dim);
-    font-size: max(11px, 1.8cqh);
-    font-weight: 700;
-  }
-
-  main:is(.round, .analyse) .cdc-end__quote figcaption::before {
-    content: ' — ';
-  }
-
-  @keyframes cdc-end-quote {
-    from {
-      opacity: 0;
-      translate: 0 4px;
-    }
-  }
-
-  /* Each side's buttons at its bottom: the follow-ups sharing the main side's width (gone when
-     Lichess offers none), the review's across the stats' card. */
-  main:is(.round, .analyse) :is(.cdc-end__more, .cdc-end__actions) {
-    display: flex;
-    gap: var(--cdc-card-gap);
-    margin-top: auto;
-    padding-top: 1cqh;
-  }
-
-  main:is(.round, .analyse) .cdc-end__more:empty {
-    display: none;
-  }
-
-  main:is(.round, .analyse) :is(.cdc-end__more .cdc-end__btn, .cdc-end__actions .cdc-end__review) {
-    flex: 1;
-  }
-
-  main:is(.round, .analyse) .cdc-end__review,
-  main:is(.round, .analyse) .cdc-end__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: max(34px, 6.4cqh);
-    padding: 0 2cqh;
-    border: 0;
-    border-radius: 8px;
-    color: #fff !important;
-    font-size: max(13px, 2.4cqh);
-    font-weight: 800;
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-
-  main:is(.round, .analyse) .cdc-end__review {
-    background: var(--cdc-btn-primary);
-    box-shadow: var(--cdc-btn-primary-shadow);
-  }
-
-  main:is(.round, .analyse) .cdc-end__review:hover {
-    background: var(--cdc-btn-primary-hover);
-  }
-
-  main:is(.round, .analyse) .cdc-end__btn {
-    background: var(--cdc-btn-grey);
-    box-shadow: var(--cdc-btn-grey-shadow);
-  }
-
-  main:is(.round, .analyse) .cdc-end__btn:hover {
-    background: var(--cdc-btn-grey-hover);
-  }
-
-  main:is(.round, .analyse) .cdc-end__close {
-    position: absolute;
-    z-index: 2;
-    top: 1.2cqh;
-    right: 1.2cqh;
-    display: grid;
-    place-items: center;
-    width: max(24px, 3.4cqh);
-    height: max(24px, 3.4cqh);
-    padding: max(5px, 0.7cqh);
-    border: 0;
-    border-radius: 6px;
-    background: transparent;
-    color: #fff;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: opacity 0.15s !important;
-  }
-
-  main:is(.round, .analyse) .cdc-end__close:hover {
-    opacity: 1;
+    font-size: 14px;
+    line-height: 1.45;
   }
 }

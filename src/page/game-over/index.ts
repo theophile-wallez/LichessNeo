@@ -3,13 +3,11 @@ import { pickCoach } from '#shared/coach.ts';
 import { isParsing, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
-import { postReviewCurve } from '#shared/protocol.ts';
 import { playedGame, type PlayedGame } from '#shared/round-init.ts';
 import type { Stockfish } from '#page/review/engine/stockfish.ts';
 import { bootEngine } from '#page/review/engine-pool.ts';
 import { fetchExport } from '#page/review/game/export.ts';
 import { opponentName } from './board.ts';
-import { reviewCurve } from './curve.ts';
 import { fetchFinishedGame, type FinishedGame } from './game-data.ts';
 import { readOutcome } from './outcome.ts';
 import { precomputeReview, worthReviewing } from './precompute.ts';
@@ -19,12 +17,12 @@ import { gameOverTexts } from './texts.ts';
 import { mountGameOver } from './view.ts';
 
 // The end of a game the player watches end: the kings' badges, confetti for
-// the winner, and a card where the coach counts the player's best moves and
-// errors before sending them to Game Review, whose analysis then runs here,
-// so the review is ready when opened, and its figures replace the count's.
-// Only for a game that ends while the page is open: a finished game's page
-// opens on its review instead. A click on the result brings the card back
-// once closed; a dev build can show it at will (preview.ts).
+// the winner, and a card in the right-hand panel where the coach counts the
+// player's best moves and errors before sending them to Game Review, whose
+// analysis then runs here, so the review is ready when opened, and its
+// figures replace the count's. Only for a game that ends while the page is
+// open: a finished game's page opens on its review instead. A dev build can
+// show it at will (preview.ts).
 
 const WATCH_MS = 250;
 // Our layout's: below, the board isn't in the grid the game over is placed in.
@@ -94,7 +92,6 @@ export async function onGameEnd(game: PlayedGame, main: HTMLElement): Promise<vo
     texts,
     coachId: pickCoach(),
     opponent: opponentName(main, game.color, texts.anonymous),
-    reviewHref: `/${game.gameId}/${game.color}`,
   });
   const positions = finished.treeParts;
   if (!worthReviewing(finished.game.variant.key, positions.length)) {
@@ -124,10 +121,7 @@ interface ReviewRun {
   readonly stillOver: () => boolean;
 }
 
-/**
- * The player's figures from Game Review's analysis, run here; null if it didn't finish.
- * The game's panel is sent the win chances it found.
- */
+/** The player's figures from Game Review's analysis, run here; null if it didn't finish. */
 async function reviewSummary(
   game: PlayedGame,
   finished: FinishedGame,
@@ -143,7 +137,6 @@ async function reviewSummary(
     stillOver,
   });
   if (!records) return null;
-  postReviewCurve({ gameId: game.gameId, ...reviewCurve(positions, records) });
   // Asked again: right after the game, the export may not know its opening yet.
   const book = await bookPly(game.gameId, positions.length);
   const chess960 = variant === 'chess960';
