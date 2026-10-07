@@ -2,8 +2,8 @@
  * autocomplete lists in native-select.css. Flat trigger, chevron, floating menu, accent check. */
 
 :root {
-  --cdc-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 6 8 10.5 12.5 6' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  --cdc-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --cdc-chevron: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg');
+  --cdc-check: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02.svg');
 }
 
 /* ---- mselect --- */

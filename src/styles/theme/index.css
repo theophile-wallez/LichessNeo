@@ -2,5 +2,6 @@
 @import './base.css';
 @import './avatars.css';
 @import './game-modes.css';
+@import './hugeicons/index.css';
 @import './tooltips-and-tabs.css';
 @import './crosstable.css';

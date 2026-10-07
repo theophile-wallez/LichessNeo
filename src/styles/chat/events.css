@@ -30,20 +30,37 @@
   line-height: 1;
 }
 
+/* Where an event has a Hugeicon (theme/hugeicons/), the glyph keeps its box, see-through,
+   and the icon is painted in it; a draw's ½ stays Lichess's. */
+.mchat
+  .mchat__messages
+  > li:is(
+    [data-cdc-topic='rematch'],
+    [data-cdc-topic='takeback'],
+    [data-cdc-topic='time']
+  )::before {
+  -webkit-text-fill-color: transparent;
+  background: currentColor;
+  mask: var(--cdc-event-mask) center / 1em 1em no-repeat;
+}
+
 .mchat .mchat__messages > li[data-cdc-topic]::after {
   content: attr(data-cdc-label);
 }
 
 .mchat .mchat__messages > li[data-cdc-topic='rematch'] {
+  --cdc-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/reload.svg');
   --cdc-event-icon: '\e078';
 }
 .mchat .mchat__messages > li[data-cdc-topic='draw'] {
   --cdc-event-icon: '\e076';
 }
 .mchat .mchat__messages > li[data-cdc-topic='takeback'] {
+  --cdc-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-turn-backward.svg');
   --cdc-event-icon: '\e047';
 }
 .mchat .mchat__messages > li[data-cdc-topic='time'] {
+  --cdc-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
   --cdc-event-icon: '\e04e';
 }
 

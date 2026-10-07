@@ -1,17 +1,9 @@
 // A tagged template for markup built as text: every interpolated value is
 // escaped unless it is itself `html` output, so templates can nest safely.
 
-const ENTITIES: Readonly<Record<string, string>> = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;',
-};
+import { escapeHtml } from './escape.ts';
 
-export function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, char => ENTITIES[char] ?? char);
-}
+export { escapeHtml };
 
 // The private field makes the type nominal, and only its type is exported:
 // `html` and `trustedHtml` are the only ways to make one.

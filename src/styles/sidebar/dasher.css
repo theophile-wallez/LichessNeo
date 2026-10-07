@@ -5,10 +5,10 @@
 #top #dasher_app {
   --c-dasher: var(--cdc-menu-hover) !important;
   --c-dasher-light: var(--cdc-menu-hover) !important;
-  --cdc-sound-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 9h3.5L12 5v14l-4.5-4H4z'/%3E%3Cpath d='M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-  --cdc-theme-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='8' fill='none' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M12 4a8 8 0 0 1 0 16z'/%3E%3C/svg%3E");
-  --cdc-board-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='4' y='4' width='16' height='16' rx='2' fill='none' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M4 4h8v8H4zM12 12h8v8h-8z'/%3E%3C/svg%3E");
-  --cdc-piece-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='6.5' r='3.5'/%3E%3Cpath d='M9 11h6l1.5 7h-9zM6 19h12v2H6z'/%3E%3C/svg%3E");
+  --cdc-sound-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
+  --cdc-theme-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
+  --cdc-board-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-view.svg');
+  --cdc-piece-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn.svg');
   box-sizing: border-box;
   width: 264px !important;
   padding: 6px !important;

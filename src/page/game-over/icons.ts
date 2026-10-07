@@ -1,6 +1,12 @@
+import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
+import Clock01Icon from '@hugeicons/core-free-icons/Clock01Icon';
+import CrownIcon from '@hugeicons/core-free-icons/CrownIcon';
+import Flag01Icon from '@hugeicons/core-free-icons/Flag01Icon';
+import HashtagIcon from '@hugeicons/core-free-icons/HashtagIcon';
+import { hugeicon } from '#shared/hugeicons.ts';
 import { trustedHtml, type SafeHtml } from '#shared/html.ts';
 
-// The game over's white glyphs, on the kings' badges.
+// The game over's white glyphs, on the kings' badges: Hugeicons', and a draw's ½.
 
 const svg = (body: string): SafeHtml =>
   trustedHtml(
@@ -8,22 +14,15 @@ const svg = (body: string): SafeHtml =>
   );
 
 export const ICONS = {
-  crown: svg(
-    '<path stroke-width="1.2" d="M3.5 17.5 2.5 7.5l5.5 4.2L12 5l4 6.7 5.5-4.2-1 10z"/><rect x="3.5" y="19" width="17" height="2.2" rx="1" stroke="none"/>',
-  ),
-  flag: svg(
-    '<path fill="none" stroke-width="2.2" d="M6 21V3.5"/><path stroke-width="1.2" d="M7 4.5h11l-2.8 4.3L18 13H7z"/>',
-  ),
-  clock: svg(
-    '<circle cx="12" cy="12" r="8.2" fill="none" stroke-width="2.4"/><path fill="none" stroke-width="2.4" d="M12 7.5V12l3.2 2.2"/>',
-  ),
-  mate: svg(
-    '<path fill="none" stroke-width="2.6" d="M9.8 4 8.2 20M15.8 4l-1.6 16M4.8 9.2h15.4M3.8 14.8h15.4"/>',
-  ),
+  crown: hugeicon(CrownIcon),
+  flag: hugeicon(Flag01Icon),
+  clock: hugeicon(Clock01Icon),
+  mate: hugeicon(HashtagIcon),
+  // A draw's ½ is text: no icon says it as well.
   half: svg(
     '<text x="12" y="18" stroke="none" font-family="Arial, sans-serif" font-size="18" font-weight="800" text-anchor="middle">½</text>',
   ),
-  cross: svg('<path fill="none" stroke-width="2.8" d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>'),
+  cross: hugeicon(Cancel01Icon),
 } satisfies Record<string, SafeHtml>;
 
 export type IconName = keyof typeof ICONS;

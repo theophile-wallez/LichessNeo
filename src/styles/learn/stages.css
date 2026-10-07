@@ -124,8 +124,8 @@ html[dir='rtl'] .learn-stages .stage {
   border: 2px solid var(--cdc-bg-panel);
   border-radius: 50%;
   background: var(--cdc-good)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5 6.5 11.5 12.5 4.5' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-    center / 14px no-repeat;
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02--ffffff.svg') center / 14px
+    no-repeat;
 }
 
 /* "Play!" and the stars: a corner pill, not a diagonal ribbon. */

@@ -194,6 +194,9 @@ importers:
       '@foleyjs/core':
         specifier: ^2.9.0
         version: 2.9.0
+      '@hugeicons/core-free-icons':
+        specifier: 4.3.5
+        version: 4.3.5
       three:
         specifier: 0.186.1
         version: 0.186.1
@@ -275,6 +278,9 @@ packages:
 
   '@foleyjs/core@2.9.0':
     resolution: {integrity: sha512-mL15Y3KDQiU7BUcvVpojBkpgJgsanCQjyH7Rv9CDdVIDhNS1jAXdInX+jjW2983q1jRvkmCcv/s5Qn5k9gViSg==}
+
+  '@hugeicons/core-free-icons@4.3.5':
+    resolution: {integrity: sha512-Sv+NjHRPnQk+yZsGCMcGznCHdTfJR9PMMOEKcJYAQU4gy90dmlc9PwdtvYOImBZIjiheMsTLL5eMn2DmHxUiUg==}
 
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
@@ -1328,6 +1334,8 @@ snapshots:
   '@dimforge/rapier3d-compat@0.12.0': {}
 
   '@foleyjs/core@2.9.0': {}
+
+  '@hugeicons/core-free-icons@4.3.5': {}
 
   '@jridgewell/resolve-uri@3.1.2': {}
 

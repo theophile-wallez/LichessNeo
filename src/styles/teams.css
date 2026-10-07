@@ -38,7 +38,7 @@ main.team-list h1.box__top::before {
 main.team-list .box__top .search input {
   width: 260px;
   padding-inline-start: 38px !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='7' cy='7' r='4.75' fill='none' stroke='%23989795' stroke-width='1.8'/%3E%3Cpath d='m10.5 10.5 3.5 3.5' stroke='%23989795' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--989795.svg') !important;
   background-position: 12px center !important;
   background-repeat: no-repeat !important;
   background-size: 16px !important;
@@ -269,12 +269,17 @@ main.team-list .slist td.info p {
   text-align: start !important;
 }
 
-/* Lichess's group glyph (U+E044) before the member count. */
+/* A group's icon before the member count, in Lichess's glyph's box (U+E044). */
 main.team-list .slist td.info p::before {
   content: '\e044';
   font-family: lichess;
   font-size: 15px;
   font-weight: 400;
+  /* The glyph keeps its box, see-through; its Hugeicon is painted in it (theme/hugeicons/). */
+  -webkit-text-fill-color: transparent;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg') center / 1em
+    1em no-repeat;
 }
 
 main.team-list .slist td.actions {

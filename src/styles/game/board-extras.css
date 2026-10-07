@@ -132,11 +132,11 @@
 
   /* The cog and the flip arrows. */
   main.round .cdc-board-tools__btn--menu::before {
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M10.3 1.5h3.4l.6 3a8 8 0 0 1 2 1.2l2.9-1 1.7 3-2.3 2a8 8 0 0 1 0 2.4l2.3 2-1.7 3-2.9-1a8 8 0 0 1-2 1.2l-.6 3h-3.4l-.6-3a8 8 0 0 1-2-1.2l-2.9 1-1.7-3 2.3-2a8 8 0 0 1 0-2.4l-2.3-2 1.7-3 2.9 1a8 8 0 0 1 2-1.2zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z'/%3E%3C/svg%3E");
+    mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
   }
 
   main.round .cdc-board-tools__btn--flip::before {
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.5 2 2.5 7.5h3.5V21h3V7.5h3.5zM16.5 22l5-5.5H18V3h-3v13.5h-3.5z'/%3E%3C/svg%3E");
+    mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-data-transfer-vertical.svg');
   }
 
   main.round .cdc-board-tools:not(.cdc-board-tools--hover) .cdc-board-tools__btn--flip {

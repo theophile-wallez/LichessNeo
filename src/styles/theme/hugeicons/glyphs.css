@@ -1,0 +1,352 @@
+/* ---- Hugeicons: Lichess's glyphs --- */
+
+/* Each of Lichess's interface glyphs drawn as a Hugeicon (paint.css), by its code point
+   (lila's ui/lib/src/licon.ts names them). */
+
+[data-icon='\e000']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alert-02.svg');
+}
+
+[data-icon='\e001']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/link-01.svg');
+}
+
+[data-icon='\e003']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/share-01.svg');
+}
+
+[data-icon='\e004']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/share-08.svg');
+}
+
+[data-icon='\e005']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
+}
+
+[data-icon='\e00c']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg');
+}
+
+[data-icon='\e00e']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cloud-upload.svg');
+}
+
+[data-icon='\e00f']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/link-square-02.svg');
+}
+
+[data-icon='\e010']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tv-01.svg');
+}
+
+[data-icon='\e011']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/rss.svg');
+}
+
+[data-icon='\e013']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01.svg');
+}
+
+[data-icon='\e014']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/quill-write-01.svg');
+}
+
+[data-icon='\e015']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-01.svg');
+}
+
+[data-icon='\e016']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
+}
+
+[data-icon='\e017']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-line-data-01.svg');
+}
+
+[data-icon='\e018']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mortarboard-01.svg');
+}
+
+[data-icon='\e01a']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-add.svg');
+}
+
+[data-icon='\e01b']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/maximize-01.svg');
+}
+
+[data-icon='\e01d']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/left-to-right-list-bullet.svg');
+}
+
+[data-icon='\e01f']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/microscope.svg');
+}
+
+[data-icon='\e020']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/repeat.svg');
+}
+
+[data-icon='\e022']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/filter.svg');
+}
+
+[data-icon='\e023']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02.svg');
+}
+
+[data-icon='\e024']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/link-forward.svg');
+}
+
+[data-icon='\e025']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/play.svg');
+}
+
+[data-icon='\e026']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-01.svg');
+}
+
+[data-icon='\e027']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-left-01.svg');
+}
+
+[data-icon='\e02a']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg');
+}
+
+[data-icon='\e02b']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-right-01.svg');
+}
+
+[data-icon='\e02c']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-up-right-01.svg');
+}
+
+[data-icon='\e02d']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/plus-sign.svg');
+}
+
+[data-icon='\e02e']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/minus-sign.svg');
+}
+
+[data-icon='\e02f']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/fire.svg');
+}
+
+[data-icon='\e030']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg');
+}
+
+[data-icon='\e031']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-up-01.svg');
+}
+
+[data-icon='\e034']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-double.svg');
+}
+
+[data-icon='\e035']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-left-double.svg');
+}
+
+[data-icon='\e036']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-01.svg');
+}
+
+[data-icon='\e037']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-left-01.svg');
+}
+
+[data-icon='\e038']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pause.svg');
+}
+
+[data-icon='\e039']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/menu-01.svg');
+}
+
+[data-icon='\e03a']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
+}
+
+[data-icon='\e03b']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-02.svg');
+}
+
+[data-icon='\e03c']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-column.svg');
+}
+
+[data-icon='\e03d']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/keyboard.svg');
+}
+
+[data-icon='\e03f']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
+}
+
+[data-icon='\e040']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/flag-01.svg');
+}
+
+[data-icon='\e041']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat.svg');
+}
+
+[data-icon='\e042']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/message-multiple-01.svg');
+}
+
+[data-icon='\e043']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
+}
+
+[data-icon='\e044']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+}
+
+[data-icon='\e045']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion.svg');
+}
+
+[data-icon='\e046']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/thumbs-up.svg');
+}
+
+[data-icon='\e047']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-turn-backward.svg');
+}
+
+[data-icon='\e048']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alert-circle.svg');
+}
+
+[data-icon='\e049']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/unavailable.svg');
+}
+
+[data-icon='\e04b']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pencil-edit-01.svg');
+}
+
+[data-icon='\e04c']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
+}
+
+[data-icon='\e04d']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
+}
+
+[data-icon='\e04e']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+}
+
+[data-icon='\e04f']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/delete-02.svg');
+}
+
+[data-icon='\e050']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
+}
+
+[data-icon='\e051']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star.svg');
+}
+
+[data-icon='\e054']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view.svg');
+}
+
+[data-icon='\e055']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-03.svg');
+}
+
+[data-icon='\e056']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/download-04.svg');
+}
+
+[data-icon='\e057']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01.svg');
+}
+
+[data-icon='\e058']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-turn-forward.svg');
+}
+
+[data-icon='\e05b']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01.svg');
+}
+
+[data-icon='\e05c']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-03.svg');
+}
+
+[data-icon='\e05e']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01.svg');
+}
+
+[data-icon='\e05f']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-bar-line.svg');
+}
+
+[data-icon='\e060']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg');
+}
+
+[data-icon='\e061']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/computer.svg');
+}
+
+[data-icon='\e062']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
+}
+
+[data-icon='\e064']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+}
+
+[data-icon='\e069']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-01.svg');
+}
+
+[data-icon='\e06a']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-01.svg');
+}
+
+[data-icon='\e06e']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/language-circle.svg');
+}
+
+[data-icon='\e070']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/copy-01.svg');
+}
+
+[data-icon='\e073']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-circle.svg');
+}
+
+[data-icon='\e074']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/voice.svg');
+}
+
+[data-icon='\e077']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-mute-01.svg');
+}
+
+[data-icon='\e078']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/reload.svg');
+}
+
+[data-icon='\e079']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg');
+}
+
+[data-icon='\e07e']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cpu.svg');
+}
+
+[data-icon='\e080']::before {
+  --cdc-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+}

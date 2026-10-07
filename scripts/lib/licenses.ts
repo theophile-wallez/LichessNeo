@@ -13,6 +13,12 @@ interface License {
 
 export const LICENSES: readonly License[] = [
   { name: '@foleyjs/core', from: 'node_modules/@foleyjs/core/LICENSE', to: 'licenses/foley.md' },
+  // Its icons in img/hugeicons too (scripts/icons.ts).
+  {
+    name: '@hugeicons/core-free-icons',
+    from: 'node_modules/@hugeicons/core-free-icons/LICENSE.md',
+    to: 'licenses/hugeicons.md',
+  },
   { name: 'three', from: 'node_modules/three/LICENSE', to: 'licenses/three.md' },
   { name: 'zod', from: 'node_modules/zod/LICENSE', to: 'licenses/zod.md' },
 ];

@@ -158,6 +158,7 @@ hold:
 | `pnpm lint:fix` / `pnpm format` | fix what oxlint and oxfmt can                                                    |
 | `pnpm package`                  | release zips of every target into `dist/`, plus the sources zip                  |
 | `pnpm store:render`             | renders the store images from `store/templates`                                  |
+| `pnpm icons`                    | writes `public/img/hugeicons`, the Hugeicons the CSS names                       |
 
 ## Where things go
 
@@ -169,8 +170,8 @@ hold:
 | `src/shared/`     | helpers for both worlds and the worker (DOM, markup, messages, storage, chess, charts, packs), `testing/` for tests                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `src/background/` | the service worker: auto-reload, old cache cleanup, pack downloads                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `src/styles/`     | one stylesheet per page or part, a folder of partials past 400 lines, joined in `index.css`'s order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `public/`         | copied into each build: `_locales/`, `icons/`, `img/` (`icons`, `sidebar`, `coaches`), `licenses/` (the bundled files' licenses)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `scripts/`        | build, package, typecheck, source rules, version, store image rendering                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `public/`         | copied into each build: `_locales/`, `icons/`, `img/` (`icons`, `hugeicons`, `sidebar`, `coaches`), `licenses/` (the bundled files' licenses)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `scripts/`        | build, package, typecheck, source rules, version, icons, store image rendering                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `tests/e2e/`      | Playwright tests on lichess.org                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `tools/`          | Python generators, run by hand: `assets/fetch.py`, `sidebar-icons/recolor.py`, `example-pack/sounds.py`, `game-rating/`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `packs/`          | the example pack users can import (`docs/packs.md` describes the format)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -201,6 +202,24 @@ hold:
   A new sound a pack may have goes in `src/shared/sounds.ts`.
 - _A chart:_ redrawn in SVG from the page's data, in the rating chart's look
   (see "Every chart is modern"), with `src/shared/charts/`.
+- _An icon:_ an interface icon (a button's, a control's, a menu's, a
+  field's) is one of Hugeicons' free icons (`@hugeicons/core-free-icons`,
+  MIT, stroke rounded), never one drawn by hand. In TS, import it on its
+  own (`import Search01Icon from '@hugeicons/core-free-icons/Search01Icon'`)
+  and draw it with `hugeicon()` (`#shared/hugeicons.ts`). In CSS, name
+  `img/hugeicons/<name>.svg` (`Search01Icon` is `search-01`) as a mask over
+  `currentColor`, or, where no mask can go (an input's background), as an
+  image with its color in its name (`search-01--989795.svg`); then run
+  `pnpm icons`, which writes the files the CSS names. Lichess's interface
+  glyphs are mapped once, for every `[data-icon]`, in
+  `styles/theme/hugeicons/`; a glyph our CSS draws keeps its box,
+  see-through, with the icon painted in it (as there). Colored, playful
+  icons stay Fluent Emoji; the time controls', the variants' and Lichess's
+  own marks (logo, Storm, Berserk, studies) stay its glyphs.
+- _Icons as you go:_ don't wait to be asked. On a page you work on, a
+  Lichess glyph that has no Hugeicon yet, or an icon drawn by hand in our
+  code, gets its Hugeicons counterpart in the same change (a line in the
+  table, or `hugeicon()`), checked on the page.
 
 ## Product rules
 
@@ -328,8 +347,10 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   and colored per mode in `styles/theme/game-modes.css`: set `--cdc-mode-color`
   on the `::before` to recolor one. Outside a `[data-icon]`, draw the glyph with
   `content: var(--cdc-mode-rapid)` (and `bullet`, `blitz`, `classical`) in
-  `font-family: lichess`. Never copy another site's icons or drawings: use
-  Lichess's glyphs, Fluent Emoji, Lichess's flair images, or draw your own.
+  `font-family: lichess`. The interface's monochrome icons are Hugeicons'
+  (see the recipe "An icon"). Never copy another site's icons or drawings:
+  use Hugeicons, Lichess's glyphs, Fluent Emoji, Lichess's flair images, or
+  draw your own (illustrations, not icons Hugeicons has).
 - **Practice lessons are analysis pages.** `/practice/…` is `main.analyse`
   with `.practice__side` and either `.gamebook` (a lesson) or
   `.practice-box` (a drill). "Practice with computer" adds `.practice-box`

@@ -3,7 +3,7 @@
 
 /* The replay tile's triangle; its check reuses `--cdc-check` (dropdowns). */
 :root {
-  --cdc-play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 2.5 13 8l-9 5.5z'/%3E%3C/svg%3E");
+  --cdc-play: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/play.svg');
 }
 
 /* The tiles are the cards now, so the box is bare. And unclipped: the radar's labels reach

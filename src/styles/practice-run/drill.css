@@ -128,7 +128,7 @@
     flex: none;
     width: 18px;
     height: 18px;
-    --cdc-goal: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2a6.8 6.8 0 1 1 0 13.6 6.8 6.8 0 0 1 0-13.6zm0 3.3a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z'/%3E%3C/svg%3E");
+    --cdc-goal: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg');
     background: var(--cdc-accent);
     -webkit-mask: var(--cdc-goal) center / contain no-repeat;
     mask: var(--cdc-goal) center / contain no-repeat;

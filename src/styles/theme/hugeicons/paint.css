@@ -1,0 +1,110 @@
+/* ---- Hugeicons: how they're drawn --- */
+
+/* The interface's icons are Hugeicons' free ones (#shared/hugeicons.ts; img/hugeicons, written
+ * by `pnpm icons`): ours inline as `.cdc-hi`, and Lichess's font glyphs drawn as their
+ * counterpart. A glyph keeps its box (its size, its baseline), only see-through, and the icon
+ * is painted in it in the text's color: Lichess's layouts don't move. Each glyph listed here is
+ * drawn so wherever a `[data-icon]` shows it; those of the time controls, the variants and
+ * Lichess's own marks (logo, Storm, Berserk, studies) stay Lichess's. */
+
+.cdc-hi {
+  display: inline-block;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+:is(
+  [data-icon='\e000'],
+  [data-icon='\e001'],
+  [data-icon='\e003'],
+  [data-icon='\e004'],
+  [data-icon='\e005'],
+  [data-icon='\e00c'],
+  [data-icon='\e00e'],
+  [data-icon='\e00f'],
+  [data-icon='\e010'],
+  [data-icon='\e011'],
+  [data-icon='\e013'],
+  [data-icon='\e014'],
+  [data-icon='\e015'],
+  [data-icon='\e016'],
+  [data-icon='\e017'],
+  [data-icon='\e018'],
+  [data-icon='\e01a'],
+  [data-icon='\e01b'],
+  [data-icon='\e01d'],
+  [data-icon='\e01f'],
+  [data-icon='\e020'],
+  [data-icon='\e022'],
+  [data-icon='\e023'],
+  [data-icon='\e024'],
+  [data-icon='\e025'],
+  [data-icon='\e026'],
+  [data-icon='\e027'],
+  [data-icon='\e02a'],
+  [data-icon='\e02b'],
+  [data-icon='\e02c'],
+  [data-icon='\e02d'],
+  [data-icon='\e02e'],
+  [data-icon='\e02f'],
+  [data-icon='\e030'],
+  [data-icon='\e031'],
+  [data-icon='\e034'],
+  [data-icon='\e035'],
+  [data-icon='\e036'],
+  [data-icon='\e037'],
+  [data-icon='\e038'],
+  [data-icon='\e039'],
+  [data-icon='\e03a'],
+  [data-icon='\e03b'],
+  [data-icon='\e03c'],
+  [data-icon='\e03d'],
+  [data-icon='\e03f'],
+  [data-icon='\e040'],
+  [data-icon='\e041'],
+  [data-icon='\e042'],
+  [data-icon='\e043'],
+  [data-icon='\e044'],
+  [data-icon='\e045'],
+  [data-icon='\e046'],
+  [data-icon='\e047'],
+  [data-icon='\e048'],
+  [data-icon='\e049'],
+  [data-icon='\e04b'],
+  [data-icon='\e04c'],
+  [data-icon='\e04d'],
+  [data-icon='\e04e'],
+  [data-icon='\e04f'],
+  [data-icon='\e050'],
+  [data-icon='\e051'],
+  [data-icon='\e054'],
+  [data-icon='\e055'],
+  [data-icon='\e056'],
+  [data-icon='\e057'],
+  [data-icon='\e058'],
+  [data-icon='\e05b'],
+  [data-icon='\e05c'],
+  [data-icon='\e05e'],
+  [data-icon='\e05f'],
+  [data-icon='\e060'],
+  [data-icon='\e061'],
+  [data-icon='\e062'],
+  [data-icon='\e064'],
+  [data-icon='\e069'],
+  [data-icon='\e06a'],
+  [data-icon='\e06e'],
+  [data-icon='\e070'],
+  [data-icon='\e073'],
+  [data-icon='\e074'],
+  [data-icon='\e077'],
+  [data-icon='\e078'],
+  [data-icon='\e079'],
+  [data-icon='\e07e'],
+  [data-icon='\e080']
+)::before {
+  -webkit-text-fill-color: transparent;
+  background: currentColor;
+  mask: var(--cdc-glyph) center / 1em 1em no-repeat;
+}

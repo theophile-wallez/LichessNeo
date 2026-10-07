@@ -39,6 +39,11 @@
     margin-right: 9px;
     font-family: lichess;
     line-height: 1;
+    /* The glyph keeps its box, see-through; its Hugeicon is painted in it (theme/hugeicons/). */
+    -webkit-text-fill-color: transparent;
+    background: currentColor;
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg') center / 1em
+      1em no-repeat;
     color: var(--cdc-bad);
     font-size: 15px;
   }

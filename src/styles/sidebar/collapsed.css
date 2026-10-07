@@ -38,8 +38,8 @@
     width: 16px;
     height: 16px;
     background: currentColor;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Crect x='1.75' y='2.75' width='12.5' height='10.5' rx='2'/%3E%3Cpath d='M6 3v10'/%3E%3C/svg%3E")
-      center / contain no-repeat;
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sidebar-left.svg') center /
+      contain no-repeat;
   }
 
   #cdc-sidebar-toggle:hover {
@@ -195,6 +195,11 @@
     font-family: lichess;
     font-size: 17px;
     line-height: 34px;
+    /* The glyph keeps its box, see-through; its Hugeicon is painted in it (theme/hugeicons/). */
+    -webkit-text-fill-color: transparent;
+    background: currentColor;
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg') center / 1em 1em
+      no-repeat;
   }
 
   /* Signed in: the avatar alone. */

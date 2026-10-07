@@ -19,6 +19,7 @@
     "preview": "node scripts/build.ts --out \"$(git worktree list --porcelain | sed -n '1s/^worktree //p')/dist/chrome\"",
     "package": "node scripts/package.ts",
     "store:render": "node scripts/store/render.ts",
+    "icons": "node scripts/icons.ts",
     "typecheck": "node scripts/typecheck.ts",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "@foleyjs/core": "^2.9.0",
+    "@hugeicons/core-free-icons": "4.3.5",
     "three": "0.186.1",
     "zod": "^4.6.5"
   },
