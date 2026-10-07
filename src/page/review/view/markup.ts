@@ -39,7 +39,7 @@ export function header(title: string, back: Mode | null, language: ReviewLanguag
   const backButton =
     back === null
       ? trustedHtml('<span></span>')
-      : html`<button class="cdc-review__back" data-cdc="${back}" data-cdc-tip="${ui.back}" aria-label="${ui.back}">${BACK_ICON}</button>`;
+      : html`<button class="cdc-review__back" data-cdc="${back}" aria-label="${ui.back}">${BACK_ICON}</button>`;
   return html`<div class="cdc-review__head">
       ${backButton}
       <div class="cdc-review__title"><span class="cdc-review__star">★</span>${title}</div>
