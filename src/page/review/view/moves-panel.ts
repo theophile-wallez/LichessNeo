@@ -16,7 +16,7 @@ import { bestShown, lineShown, spokenMove, stepPath } from './navigation.ts';
 import { canRetry, type RetryOutcome, retryOutcome } from './retry.ts';
 import { retryBubble } from './retry-bubble.ts';
 import { timingAt } from './timing.ts';
-import { type CoachComment, commentOn, followComment, verdictMarkup } from './verdict.ts';
+import { type CoachComment, commentOn, followComment, timeTag, verdictMarkup } from './verdict.ts';
 
 // The move-by-move review: the graph and the game's key moments on top, then
 // the coach on the move on the board, the Explain / Best / Next buttons and
@@ -151,7 +151,8 @@ function coachMarkup(session: Session, analysis: Analysis, spoken: Spoken): Safe
           shown,
           actions: comment ? actionsMarkup(session, analysis, move) : html``,
         });
-  return html`<div class="cdc-coach">${avatar}<div class="cdc-bubble">${bubble}</div></div>`;
+  const time = comment && !(retry && retried) ? timeTag(session, comment) : '';
+  return html`<div class="cdc-coach">${avatar}${time}<div class="cdc-bubble">${bubble}</div></div>`;
 }
 
 function navMarkup(session: Session, analysis: Analysis, spoken: Spoken): SafeHtml {

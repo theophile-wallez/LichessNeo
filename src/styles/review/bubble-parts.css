@@ -127,7 +127,8 @@
     line-height: 1.35;
   }
 
-  /* The tags: the tactic, the move's time, the chances an error gave away. */
+  /* The tags: the tactic, the chances an error gave away; and the move's time, which the card
+   * shows over the coach (bubble.css). */
   .cdc-bubble__tags {
     display: flex;
     flex-wrap: wrap;

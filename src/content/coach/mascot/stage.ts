@@ -77,11 +77,18 @@ export class Stage {
     this.#ground.add(actor);
   }
 
-  resize(width: number, height: number): void {
-    if (width === 0 || height === 0) return;
+  /**
+   * Sizes the canvas. The framing fills its bottom `framed` pixels: a canvas taller than that
+   * shows more above, at the same scale, room for the mascot's hops.
+   */
+  resize(width: number, height: number, framed = height): void {
+    if (width === 0 || height === 0 || framed === 0) return;
     this.#renderer.setPixelRatio(Math.min(devicePixelRatio, MAX_PIXEL_RATIO));
     this.#renderer.setSize(width, height, false);
-    this.#camera.aspect = width / height;
+    this.#camera.aspect = width / framed;
+    if (height > framed)
+      this.#camera.setViewOffset(width, framed, 0, framed - height, width, height);
+    else this.#camera.clearViewOffset();
     this.#camera.updateProjectionMatrix();
   }
 

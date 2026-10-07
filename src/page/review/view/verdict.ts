@@ -19,7 +19,8 @@ import { evalChip, svgIcon } from './markup.ts';
 
 // The bubble for a judged move: its icon, the verdict and how the score
 // moved, then the coach's comment, typed out, the coach's advice on the
-// move's time, and the tags: the tactic, the time, the chances an error gave away.
+// move's time, and the tags: the tactic, the chances an error gave away. The
+// move's time is the card's (`timeTag`).
 
 const coachContext = (session: Session, gameId: string): CoachContext => ({
   gameId,
@@ -97,17 +98,18 @@ function chancesLost(move: JudgedMove): number {
   return Math.round(before - after);
 }
 
-function tagsMarkup(session: Session, { move, themes, timing }: CoachComment): SafeHtml {
+/** The move's time, which the card shows over the coach's head; none without clocks. */
+export function timeTag(session: Session, { move, timing }: CoachComment): SafeHtml | '' {
+  if (!timing) return '';
+  const note = clockNote(move.moveClass, timing);
+  return html`<span class="cdc-tag cdc-tag--time${note ? ` cdc-tag--${note}` : ''}">${spentTime(timing.spent, session.language.ui.clock)}</span>`;
+}
+
+function tagsMarkup(session: Session, { move, themes }: CoachComment): SafeHtml {
   const { ui } = session.language;
   const tags = themes.map(
     theme => html`<span class="cdc-tag cdc-tag--${theme}">${ui.themes[theme]}</span>`,
   );
-  if (timing) {
-    const note = clockNote(move.moveClass, timing);
-    tags.push(
-      html`<span class="cdc-tag cdc-tag--time${note ? ` cdc-tag--${note}` : ''}">${spentTime(timing.spent, ui.clock)}</span>`,
-    );
-  }
   // A verdict from mate distances isn't about winning chances, which stay the same.
   const lost = isError(move.moveClass) && !move.slower ? chancesLost(move) : 0;
   if (lost > 0) tags.push(html`<span class="cdc-tag cdc-tag--cost">${ui.cost(lost)}</span>`);

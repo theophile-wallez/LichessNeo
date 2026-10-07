@@ -45,6 +45,7 @@ function cast(character: Character): Mascot {
 
 class LiveMascot implements MascotView {
   readonly #stage: Stage;
+  readonly #host: HTMLElement;
   readonly #loop: VisibleLoop;
   readonly #resizer: ResizeObserver;
   #mascot: Mascot | null = null;
@@ -56,16 +57,20 @@ class LiveMascot implements MascotView {
 
   constructor(host: HTMLElement, stage: Stage, options: MascotOptions) {
     this.#stage = stage;
+    this.#host = host;
     this.#greets = options.greets ?? true;
     this.#onDrawn = options.onDrawn ?? null;
     host.append(stage.canvas);
-    // The canvas, not its host: a stylesheet may let it spill past the avatar's sides.
+    // The canvas, not its host: a stylesheet may let it spill past the avatar's sides, and
+    // above it, where the framing, kept to the host's height, leaves room for hops.
     const { canvas } = stage;
-    const resize = (): void => stage.resize(canvas.clientWidth, canvas.clientHeight);
+    const resize = (): void =>
+      stage.resize(canvas.clientWidth, canvas.clientHeight, host.clientHeight);
     // Now too, not only once observed: an entrance starts from the canvas's edge.
     resize();
     this.#resizer = new ResizeObserver(resize);
     this.#resizer.observe(canvas);
+    this.#resizer.observe(host);
     this.#loop = new VisibleLoop(host, dt => this.#frame(dt));
     window.addEventListener('pointermove', this.#follow, { passive: true });
   }
@@ -73,9 +78,11 @@ class LiveMascot implements MascotView {
   readonly #follow = (event: PointerEvent): void => {
     if (!this.#loop.running) return;
     const box = this.#stage.canvas.getBoundingClientRect();
-    if (box.width === 0) return;
+    // Its head's height is the framing's, which the host holds, whatever room the canvas has above.
+    const framed = this.#host.getBoundingClientRect();
+    if (box.width === 0 || framed.height === 0) return;
     const x = (event.clientX - (box.left + box.width / 2)) / (box.width / 2);
-    const y = -(event.clientY - (box.top + box.height * 0.35)) / (box.height / 2);
+    const y = -(event.clientY - (framed.top + framed.height * 0.35)) / (framed.height / 2);
     this.#mascot?.pointTo({ x, y });
   };
 

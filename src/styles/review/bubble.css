@@ -273,6 +273,7 @@
    remark beside it: no white bubble, no tail. */
 @media (min-width: 1020px) {
   #cdc-review .cdc-coach {
+    position: relative;
     align-items: flex-end;
     gap: 12px;
     margin: 0 12px;
@@ -283,11 +284,24 @@
     box-shadow: inset 0 0 0 1px var(--cdc-card-border);
   }
 
-  /* The live coach's canvas spills past the avatar's sides, so its arms and tail show: only
-     the card cuts it. The camera follows the canvas's width, the framing stays. */
+  /* The live coach's canvas spills past the avatar's sides, so its arms and tail show, and
+     above its head, so its hops do: only the card cuts it. The framing stays the avatar's
+     (mascot/stage.ts). */
   #cdc-review .cdc-coach__face canvas {
+    top: -50%;
     left: -40%;
     width: 180%;
+    height: 150%;
+  }
+
+  /* The move's time, in the card's corner over the coach's head. */
+  #cdc-review .cdc-coach > .cdc-tag--time {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    background: color-mix(in srgb, var(--cdc-tag) 16%, var(--cdc-bg-raised));
+    pointer-events: none;
   }
 
   /* The verdict stays on top, the rest scrolls under it once the review has dropped the
