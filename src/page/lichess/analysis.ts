@@ -76,6 +76,11 @@ export class Analysis {
     return this.data?.game.winner ?? null;
   }
 
+  /** How the game ended (lila's chess.Status name); '' when we can't tell. */
+  get status(): string {
+    return this.data?.game.status?.name ?? '';
+  }
+
   /** Both players by color, as Lichess lists them from the viewer's side. */
   players(): Readonly<Record<Color, Player | undefined>> {
     const data = this.data;

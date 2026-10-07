@@ -67,17 +67,6 @@
       width: 18px;
       height: 18px;
     }
-
-    /* "3 excellents coups, 27 meilleurs coups" ran 6px past both ends. */
-    #cdc-review .cdc-review__counts {
-      gap: 8px;
-      font-size: 13px;
-    }
-
-    #cdc-review .cdc-review__counts .cdc-cls-icon {
-      width: 16px;
-      height: 16px;
-    }
   }
 
   /* The stills load from manifest CSS, which gets the extension id (the page world can't

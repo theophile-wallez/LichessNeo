@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 import { setHtml, type SafeHtml } from '#shared/html.ts';
-import { cardClasses, cardMarkup, CHIP_COUNT } from './card.ts';
+import { cardClasses, cardMarkup, CHIP_COUNT, endCardInput } from './card.ts';
 import { gameOverTexts } from './texts.ts';
 
 const texts = gameOverTexts();
@@ -15,12 +15,14 @@ function render(markup: SafeHtml): HTMLElement {
 describe('cardMarkup', () => {
   it('heads the card with the result and how it came', () => {
     const root = render(
-      cardMarkup({
-        outcome: { result: 'win', reason: 'mate', winner: 'white' },
-        texts,
-        coachId: 3,
-        opponent: '<i>bob</i>',
-      }),
+      cardMarkup(
+        endCardInput({
+          outcome: { result: 'win', reason: 'mate', winner: 'white' },
+          texts,
+          coachId: 3,
+          opponent: '<i>bob</i>',
+        }),
+      ),
     );
     expect(root.querySelector('.cdc-end__card--win .cdc-end__title')?.textContent).toBe(
       'You beat <i>bob</i>!',
@@ -34,12 +36,14 @@ describe('cardMarkup', () => {
 
   it('leaves the reason out when the status doesn’t say', () => {
     const root = render(
-      cardMarkup({
-        outcome: { result: 'draw', reason: 'draw', winner: null },
-        texts,
-        coachId: 1,
-        opponent: 'bob',
-      }),
+      cardMarkup(
+        endCardInput({
+          outcome: { result: 'draw', reason: 'draw', winner: null },
+          texts,
+          coachId: 1,
+          opponent: 'bob',
+        }),
+      ),
     );
     expect(root.querySelector('.cdc-end__title')?.textContent).toBe('Draw');
     expect(root.querySelector('.cdc-end__reason')).toBeNull();

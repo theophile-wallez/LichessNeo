@@ -1,9 +1,8 @@
-import type { CoachMood } from '#shared/coach.ts';
 import { createElement, queryOne, setData } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { badgesMarkup, kingBadges } from './badges.ts';
 import { kingCells } from './board.ts';
-import { cardMarkup } from './card.ts';
+import { cardMarkup, endCardInput, RESULT_MOODS } from './card.ts';
 import { CHIP_STAGGER_MS, createChips, type Chips } from './chips.ts';
 import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from './confetti.ts';
 import { countUp } from './count-up.ts';
@@ -67,7 +66,7 @@ function buildLayer(input: GameOverInput): Layer {
   root.append(kings);
   if (input.outcome.result === 'win') addConfetti(root);
   const holder = createElement('div');
-  setHtml(holder, cardMarkup(input));
+  setHtml(holder, cardMarkup(endCardInput(input)));
   const card = queryOne(holder, '.cdc-end__card', HTMLElement);
   const part = (name: string): HTMLElement | null =>
     card ? queryOne(card, `.cdc-end__${name}`, HTMLElement) : null;
@@ -107,12 +106,6 @@ function followPage(layer: Layer, input: GameOverInput): void {
   }, SYNC_MS);
 }
 
-const MOODS: Readonly<Record<Outcome['result'], CoachMood>> = {
-  win: 'happy',
-  loss: 'worry',
-  draw: 'neutral',
-};
-
 /** The figures a card shows: two summaries that read the same change nothing. */
 const shownAs = (summary: PlayerSummary): string =>
   JSON.stringify([
@@ -141,8 +134,7 @@ function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): G
       if (card?.isConnected) show();
     });
   };
-  // Pleased with a win, sorry for a loss.
-  const mood = MOODS[outcome.result];
+  const mood = RESULT_MOODS[outcome.result];
   const words = (summary: PlayerSummary | null): string => {
     const accuracy = summary?.accuracy ?? null;
     return texts.verdict(outcome.result, accuracy === null ? null : formatAccuracy(accuracy));

@@ -1,30 +1,73 @@
-/* The game over's card (page/game-over/card.ts), at the head of Lichess's follow-up buttons,
- * which game-over.css turns into its frame and its foot: the coach standing in a glow of the
- * result's color beside the result and its words, then the player's accuracy and counts
- * (game-end-stats.css). */
+/* The game over's card (page/game-over/card.ts): the coach standing in a glow of the result's
+ * color beside the result and its words, then the player's accuracy and counts
+ * (game-end-stats.css). At a game's end it heads Lichess's follow-up buttons, which game-over.css
+ * lines up as its foot; on the game's analysis, the closed Game Review draws it over its own
+ * buttons. Either way, a frame holds the card and its foot. */
 
 @media (min-width: 1020px) {
-  main.round .rcontrols .follow-up > .cdc-end__card {
+  /* ---- Frame --- */
+
+  main.round .rcontrols .follow-up[data-cdc-end-card],
+  .cdc-end__frame {
+    margin: 10px 0 8px;
+    padding: 10px !important;
+    border-radius: 16px;
+    background: var(--cdc-grey-750);
+    box-shadow: inset 0 0 0 1px #ffffff14;
+  }
+
+  .cdc-end__frame {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .cdc-end__foot {
+    display: flex;
+    gap: 6px;
+  }
+
+  .cdc-end__foot .cdc-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .cdc-end__foot .cdc-btn--green {
+    flex-grow: 1.4;
+  }
+
+  /* ---- Card --- */
+
+  .cdc-end__card {
     --cdc-coach-h: 140px;
     --cdc-tag-c: var(--cdc-good);
-    order: -3;
-    flex-basis: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 2px;
     container-type: inline-size;
     color: #fff;
     font-family: var(--cdc-font);
-    animation: cdc-end-card 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+    text-align: start;
   }
 
-  main.round .rcontrols .follow-up > .cdc-end__card--loss {
+  .cdc-end__card--loss {
     --cdc-tag-c: var(--cdc-bad);
   }
 
-  main.round .rcontrols .follow-up > .cdc-end__card--draw {
+  .cdc-end__card--draw {
     --cdc-tag-c: var(--cdc-text-dim);
+  }
+
+  /* At a game's end it comes in once; the closed review draws it again as its analysis goes. */
+  main.round .rcontrols .follow-up > .cdc-end__card {
+    order: -3;
+    flex-basis: 100%;
+    margin-bottom: 2px;
+    animation: cdc-end-card 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
   }
 
   @keyframes cdc-end-card {
@@ -36,17 +79,17 @@
 
   /* Short windows and narrow panels: the moves keep their room, the words theirs. */
   @media (max-height: 820px) {
-    main.round .rcontrols .follow-up > .cdc-end__card {
+    .cdc-end__card {
       --cdc-coach-h: 112px;
     }
   }
 
   @container (max-width: 400px) {
-    main.round .cdc-end__card .cdc-end__glow {
+    .cdc-end__card .cdc-end__glow {
       --cdc-coach-h: 108px;
     }
 
-    main.round .cdc-end__card .cdc-end__title {
+    .cdc-end__card .cdc-end__title {
       font-size: 22px;
     }
   }
@@ -55,7 +98,7 @@
 
   /* Lit in the result's color from under the coach, fading out behind the words. The coach
      stands on its bottom edge, with room above for its hops: only the glow's edge cuts it. */
-  main.round .cdc-end__glow {
+  .cdc-end__glow {
     display: flex;
     gap: 6px;
     min-height: calc(var(--cdc-coach-h) + 18px);
@@ -74,18 +117,19 @@
       );
   }
 
-  main.round .cdc-end__card .cdc-coach__avatar {
+  .cdc-end__card .cdc-coach__avatar {
     align-self: flex-end;
     cursor: default;
   }
 
-  main.round .cdc-end__card .cdc-coach__avatar:hover {
+  .cdc-end__card .cdc-coach__avatar:hover {
     transform: none;
   }
 
   /* The canvas spills past the avatar's sides, so its arms show, and above it, into the room
-     for its hops. The framing stays the avatar's (content/coach/mascot/stage.ts). */
-  main.round .cdc-end__card .cdc-coach__face canvas {
+     for its hops. The framing stays the avatar's (content/coach/mascot/stage.ts). The id
+     outweighs the review's own rule for its coach's canvas (review/bubble.css). */
+  :is(#cdc-review, main.round) .cdc-end__card .cdc-coach__face canvas {
     top: -13%;
     left: -60%;
     width: 220%;
@@ -94,7 +138,7 @@
 
   /* ---- Words --- */
 
-  main.round .cdc-end__main {
+  .cdc-end__main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -102,7 +146,7 @@
     padding: 14px 14px 14px 0;
   }
 
-  main.round .cdc-end__reason {
+  .cdc-end__reason {
     margin: 0;
     color: var(--cdc-tag-c);
     font-size: 11.5px;
@@ -111,7 +155,7 @@
     text-transform: uppercase;
   }
 
-  main.round .cdc-end__title {
+  .cdc-end__title {
     margin: 2px 0 0;
     font-size: 26px;
     font-weight: 900;
@@ -120,7 +164,7 @@
   }
 
   /* The coach's words, typed out as it speaks: two lines kept, so the card keeps its height. */
-  main.round .cdc-end__bubble {
+  .cdc-end__bubble {
     min-height: 2.9em;
     margin: 4px 0 0;
     color: var(--cdc-grey-200);

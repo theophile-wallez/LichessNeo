@@ -80,7 +80,7 @@
   }
 
   /* The follow-ups in one row: Game Review, the new game, then Rematch. Once the game over's
-   * card is in (page/game-over, game-end-card.css), they're its foot, and the row its frame. */
+   * card is in (page/game-over, game-end-card.css), they're its foot, the row its frame. */
   main.round .rcontrols .follow-up {
     display: flex !important;
     flex-flow: row wrap !important;
@@ -88,14 +88,6 @@
     padding: 10px 0 8px !important;
     border: none !important;
     text-align: start;
-  }
-
-  main.round .rcontrols .follow-up[data-cdc-end-card] {
-    margin: 10px 0 8px;
-    padding: 10px !important;
-    border-radius: 16px;
-    background: var(--cdc-grey-750);
-    box-shadow: inset 0 0 0 1px #ffffff14;
   }
 
   main.round .rcontrols .follow-up > * {

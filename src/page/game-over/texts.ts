@@ -1,3 +1,4 @@
+import type { Color } from '#shared/chess/types.ts';
 import { isFrench, pageLocale } from '#shared/lang.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import type { EndReason, Result } from './outcome.ts';
@@ -10,6 +11,8 @@ type Forms = readonly [one: string, many: string];
 export interface GameOverTexts {
   /** The card's title, naming the opponent the player beat. */
   readonly title: (result: Result, opponent: string) => string;
+  /** The title for someone who didn't play the game: who won, null for a draw. */
+  readonly watchedTitle: (winner: Color | null) => string;
   /** The result in a word, over the title. */
   readonly results: Readonly<Record<Result, string>>;
   /** Under the player's accuracy. */
@@ -60,6 +63,8 @@ const fr: GameOverTexts = {
     ({ win: `Vous avez battu ${opponent} !`, loss: 'Vous avez perdu', draw: 'Partie nulle' })[
       result
     ],
+  watchedTitle: winner =>
+    winner === null ? 'Partie nulle' : `Victoire des ${winner === 'white' ? 'Blancs' : 'Noirs'}`,
   results: { win: 'Victoire', loss: 'Défaite', draw: 'Nulle' },
   accuracy: 'précision',
   reasons: {
@@ -98,6 +103,8 @@ const fr: GameOverTexts = {
 const en: GameOverTexts = {
   title: (result, opponent) =>
     ({ win: `You beat ${opponent}!`, loss: 'You lost', draw: 'Draw' })[result],
+  watchedTitle: winner =>
+    winner === null ? 'Draw' : `${winner === 'white' ? 'White' : 'Black'} won`,
   results: { win: 'Victory', loss: 'Defeat', draw: 'Draw' },
   accuracy: 'accuracy',
   reasons: {

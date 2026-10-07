@@ -57,6 +57,8 @@ export const GameDataSchema = z.object({
     variant: z.object({ key: z.string() }),
     // Set once a game is won; none for a draw or a game going on.
     winner: lenient(z.enum(['white', 'black'])),
+    // How it ended, as lila's chess.Status names it ("mate", "resign"…).
+    status: lenient(z.object({ name: z.string() })),
   }),
   player: PlayerSchema,
   opponent: PlayerSchema,

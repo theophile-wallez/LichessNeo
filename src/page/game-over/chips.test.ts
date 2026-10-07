@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
-import { cardMarkup } from './card.ts';
+import { cardMarkup, endCardInput } from './card.ts';
 import { CHIP_STAGGER_MS, createChips, rolled } from './chips.ts';
 import { gameOverTexts } from './texts.ts';
 
@@ -11,12 +11,14 @@ function counts(): HTMLElement {
   const root = document.createElement('div');
   setHtml(
     root,
-    cardMarkup({
-      outcome: { result: 'win', reason: 'mate', winner: 'white' },
-      texts,
-      coachId: 1,
-      opponent: 'bob',
-    }),
+    cardMarkup(
+      endCardInput({
+        outcome: { result: 'win', reason: 'mate', winner: 'white' },
+        texts,
+        coachId: 1,
+        opponent: 'bob',
+      }),
+    ),
   );
   const element = queryOne(root, '.cdc-end__counts', HTMLElement);
   if (!element) throw new Error('no counts');

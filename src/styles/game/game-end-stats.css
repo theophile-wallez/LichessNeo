@@ -2,7 +2,7 @@
  * player's accuracy, then a count per class, its icon and number over its name. */
 
 @media (min-width: 1020px) {
-  main.round .cdc-end__stats {
+  .cdc-end__stats {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -12,14 +12,14 @@
     box-shadow: inset 0 0 0 1px #ffffff0f;
   }
 
-  main.round .cdc-end__accuracy {
+  .cdc-end__accuracy {
     display: flex;
     flex: none;
     flex-direction: column;
     margin: 0;
   }
 
-  main.round .cdc-end__accuracy b {
+  .cdc-end__accuracy b {
     font-size: 34px;
     font-weight: 900;
     font-variant-numeric: tabular-nums;
@@ -28,14 +28,14 @@
     white-space: nowrap;
   }
 
-  main.round .cdc-end__accuracy span {
+  .cdc-end__accuracy span {
     margin-top: 3px;
     color: var(--cdc-text-dim);
     font-size: 11.5px;
     font-weight: 700;
   }
 
-  main.round .cdc-end__counts {
+  .cdc-end__counts {
     display: flex;
     flex: 1;
     justify-content: space-between;
@@ -43,31 +43,31 @@
     min-width: 0;
   }
 
-  main.round .cdc-end__count {
+  .cdc-end__count {
     display: flex;
     flex-direction: column;
     gap: 3px;
     min-width: 0;
   }
 
-  main.round .cdc-end__count-top {
+  .cdc-end__count-top {
     display: flex;
     align-items: center;
     gap: 5px;
   }
 
-  main.round .cdc-end__count-icon {
+  .cdc-end__count-icon {
     width: 16px;
     height: 16px;
   }
 
-  main.round .cdc-end__count-icon svg {
+  .cdc-end__count-icon svg {
     display: block;
     width: 100%;
     height: 100%;
   }
 
-  main.round .cdc-end__count b {
+  .cdc-end__count b {
     color: var(--cdc-count-c, #fff);
     font-size: 18px;
     font-weight: 800;
@@ -75,7 +75,7 @@
     line-height: 1;
   }
 
-  main.round .cdc-end__count-label {
+  .cdc-end__count-label {
     overflow: hidden;
     color: var(--cdc-text-dim);
     font-size: 11.5px;
@@ -84,7 +84,16 @@
     white-space: nowrap;
   }
 
-  main.round .cdc-end__counts--revealed .cdc-end__count {
+  /* While the closed review's analysis goes, in place of the figures. */
+  .cdc-end__progress {
+    margin: 0;
+    padding: 8px 0;
+    color: var(--cdc-text-dim);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .cdc-end__counts--revealed .cdc-end__count {
     animation: cdc-end-chip 0.4s calc(var(--cdc-count-i, 0) * 180ms)
       cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
   }
