@@ -245,7 +245,12 @@ main.plan .small_team::before {
   flex: none;
   width: 44px;
   height: 44px;
-  background: url('https://lichess1.org/assets/flair/img/people.handshake.webp') center / contain
-    no-repeat;
-  filter: drop-shadow(0 4px 8px #00000080);
+  border-radius: 12px;
+  background:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01--7e88db.svg') center /
+      26px no-repeat,
+    color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+  box-shadow:
+    inset 0 1px #ffffff1a,
+    0 0 0 1px color-mix(in srgb, var(--cdc-accent) 35%, transparent);
 }

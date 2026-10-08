@@ -85,9 +85,14 @@ main.plan .best_patrons h2::before {
   flex: none;
   width: 38px;
   height: 38px;
-  background: url('https://lichess1.org/assets/flair/img/activity.sparkles.webp') center / contain
-    no-repeat;
-  filter: drop-shadow(0 4px 8px #00000080);
+  border-radius: 12px;
+  background:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sparkles--ffc689.svg') center /
+      22px no-repeat,
+    color-mix(in srgb, var(--cdc-orange) 20%, transparent);
+  box-shadow:
+    inset 0 1px #ffffff1a,
+    0 0 0 1px color-mix(in srgb, var(--cdc-orange) 35%, transparent);
 }
 
 main.plan .best_patrons .list {
@@ -194,10 +199,16 @@ main.plan .recent-patrons h2 {
 main.plan .recent-patrons h2::before {
   content: '';
   flex: none;
-  width: 30px;
-  height: 30px;
-  background: url('https://lichess1.org/assets/flair/img/activity.party-popper.webp') center /
-    contain no-repeat;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg') center / 20px
+      no-repeat,
+    color-mix(in srgb, var(--cdc-pink) 20%, transparent);
+  box-shadow:
+    inset 0 1px #ffffff1a,
+    0 0 0 1px color-mix(in srgb, var(--cdc-pink) 35%, transparent);
 }
 
 main.plan .recent-patrons .list {
