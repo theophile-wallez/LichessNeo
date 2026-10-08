@@ -14,8 +14,9 @@ export const isConnected = (): boolean =>
 export const askWorker = (message: unknown): Promise<unknown> =>
   chrome.runtime.sendMessage<unknown, unknown>(message);
 
-/** One of the extension's messages (public/_locales), in the browser's language. */
-export const message = (name: string): string => chrome.i18n.getMessage(name);
+/** One of the extension's messages (public/_locales), in the browser's language, `$1`… filled in. */
+export const message = (name: string, ...substitutions: string[]): string =>
+  chrome.i18n.getMessage(name, substitutions);
 
 /** A value of the browser's synced storage, which follows the user to their other browsers. */
 export async function readSynced(key: string): Promise<unknown> {

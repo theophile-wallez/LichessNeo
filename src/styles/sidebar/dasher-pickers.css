@@ -11,7 +11,6 @@
   background: var(--cdc-menu-hover) !important;
 }
 
-#dasher_app .board .list button.active,
 #dasher_app .piece .no-square.active {
   background: color-mix(in srgb, var(--cdc-accent) 20%, transparent) !important;
   box-shadow: inset 0 0 0 2px var(--cdc-accent);
@@ -21,17 +20,28 @@
   border-radius: 3px;
 }
 
-/* With a pack on, Lichess's current board, set or sounds aren't what the page shows: no ring. */
-#top #dasher_app .sub[data-cdc-src-on='packs'] :is(.list, .selector) > button.active {
+/* A board's ring hugs its picture, not its tile. */
+#dasher_app .board .list button.active {
+  background: none !important;
+}
+
+#dasher_app .board .list button.active span {
+  box-shadow: 0 0 0 3px var(--cdc-accent);
+}
+
+/* With the extension's on, Lichess's current board, set or sounds aren't what the page shows:
+ * no ring. */
+#top #dasher_app .sub[data-cdc-src-on='extension'] :is(.list, .selector) > button.active,
+#top #dasher_app .sub[data-cdc-src-on='extension'] .list > button.active span {
   background: none !important;
   box-shadow: none;
 }
 
-#top #dasher_app .sub[data-cdc-src-on='packs'] .list > button.active:hover {
+#top #dasher_app .sub[data-cdc-src-on='extension'] .list > button.active:hover {
   background: var(--cdc-menu-hover) !important;
 }
 
-/* The Lichess / Imported tabs (content/packs/panel.ts), whose pill slides
+/* The Extension / Lichess tabs (content/packs/panel.ts), whose pill slides
  * (content/ui/tab-bars.ts). */
 #dasher_app .cdc-src-tabs {
   --cdc-tab-bg: var(--cdc-bg-raised-hover);
@@ -84,55 +94,29 @@
 
 #top
   #dasher_app
-  .sub:not(.sound)[data-cdc-view='packs']
-  > :not(.head, .cdc-src-tabs, .cdc-src-packs),
-#top #dasher_app .sub.sound[data-cdc-view='packs'] .selector {
+  .sub:not(.sound)[data-cdc-view='extension']
+  > :not(.head, .cdc-src-tabs, .cdc-src-choices),
+#top #dasher_app .sub.sound[data-cdc-view='extension'] .selector {
   display: none !important;
 }
 
-#dasher_app .sub[data-cdc-view='lichess'] .cdc-src-packs {
+#dasher_app .sub[data-cdc-view='lichess'] .cdc-src-choices {
   display: none;
 }
 
-/* The Sound panel's packs sit beside its volume slider. */
-#dasher_app .sub.sound .cdc-src-packs {
+/* The Sound panel's choices sit beside its volume slider. */
+#dasher_app .sub.sound .cdc-src-choices {
   flex: 1;
   min-width: 0;
 }
 
-/* Sounds have no picture: a row per pack, like Lichess's own list. */
-#dasher_app .sub.sound .cdc-src-list {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-#dasher_app .sub.sound .cdc-src-item {
-  align-items: flex-start;
-  padding: 8px 28px 8px 10px;
-}
-
-#dasher_app .sub.sound .cdc-src-thumb {
-  display: none;
-}
-
-#dasher_app .sub.sound .cdc-src-name {
-  font-size: 13px;
-  text-align: start;
-}
-
-#top #dasher_app .sub.sound .cdc-src-remove {
-  top: 50%;
-  right: 4px;
-  translate: 0 -50%;
-}
-
-/* Three to a row, each with its name, scrolling in place. */
+/* Tiles as Lichess's own (lila's ui/dasher/css): a board's two top-left squares, three to a row,
+ * or a piece on its square, the name in the tooltip. Scrolling in place. */
 #dasher_app .cdc-src-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
+  display: flex;
+  flex-wrap: wrap;
   max-height: min(440px, calc(100dvh - 190px));
-  margin: 0 -4px 2px;
-  padding: 2px 4px;
+  margin: 5px 0;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #ffffff2e transparent;
@@ -140,11 +124,11 @@
 
 #dasher_app .cdc-src-item {
   display: flex;
-  flex-direction: column;
+  flex: 0 0 33%;
   align-items: center;
-  gap: 6px;
-  min-width: 0;
-  padding: 7px 5px 6px;
+  justify-content: center;
+  height: 40px;
+  padding: 0;
   border: none;
   border-radius: 6px;
   background: none;
@@ -154,6 +138,12 @@
   transition:
     background-color 0.1s,
     color 0.1s !important;
+}
+
+#dasher_app .piece .cdc-src-item {
+  flex: none;
+  width: 75px;
+  height: 75px;
 }
 
 #dasher_app .cdc-src-item:hover {
@@ -167,46 +157,83 @@
   color: #fff;
 }
 
-/* A board's two top-left squares, like Lichess's own tiles: a quarter of its width. */
-#dasher_app .cdc-src-thumb {
-  width: 100%;
-  aspect-ratio: 2;
-  border-radius: 3px;
-  background: 0 0 / 400% no-repeat;
-  box-shadow: 0 1px 3px #00000059;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-#dasher_app .piece .cdc-src-thumb {
-  width: 76%;
-  aspect-ratio: 1;
-  border-radius: 0;
-  background-position: center;
-  background-size: contain;
+#dasher_app .board .cdc-src-item.active {
+  background: none;
   box-shadow: none;
 }
 
-#dasher_app .cdc-src-item:hover .cdc-src-thumb {
-  transform: translateY(-2px);
+#dasher_app .board .cdc-src-item.active .cdc-src-thumb {
+  box-shadow: 0 0 0 3px var(--cdc-accent);
 }
 
-#dasher_app .piece .cdc-src-item:hover .cdc-src-thumb {
-  transform: rotate(-6deg) scale(1.08);
+/* Sounds have no picture: a row per pack, like Lichess's own list. */
+#dasher_app .sub.sound .cdc-src-list {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 4px;
+  margin: 0;
+}
+
+#dasher_app .sub.sound .cdc-src-item {
+  flex: none;
+  justify-content: flex-start;
+  height: auto;
+  padding: 8px 10px;
 }
 
 #dasher_app .cdc-src-name {
-  display: -webkit-box;
-  max-width: 100%;
   overflow: hidden;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
-  line-height: 1.25;
-  text-align: center;
-  overflow-wrap: anywhere;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
+#dasher_app .cdc-src-empty {
+  margin: 4px 2px 6px;
+  color: var(--cdc-text-dim);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+/* To the settings, where packs are imported. */
+#top #dasher_app .cdc-src-import-link {
+  display: inline-block !important;
+  margin: 4px 2px 4px;
+  padding: 0 !important;
+  color: var(--cdc-text-dim) !important;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+#top #dasher_app .cdc-src-import-link:hover {
+  color: #fff !important;
+}
+
+/* A board's two top-left squares, as Lichess's thumbnails show them: a quarter of its width. */
+#dasher_app .cdc-src-thumb {
+  width: 64px;
+  height: 32px;
+  border-radius: 3px;
+  background: 0 0 / 400% no-repeat;
+  transition: transform 0.1s !important;
+}
+
+/* Our blue board's two top-left squares (styles/board/pieces.css). */
+#dasher_app .cdc-src-thumb[data-cdc-theme='blue'] {
+  background: linear-gradient(90deg, var(--cdc-board-light) 50%, var(--cdc-board-dark) 50%);
+}
+
+#dasher_app .board .cdc-src-item:hover .cdc-src-thumb {
+  transform: scale(1.05);
+}
+
+#dasher_app .piece .cdc-src-thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: center / contain no-repeat;
+}
 /* Drop the light marble backdrop behind Lichess's piece grid. */
 #top #dasher_app .piece .list {
   margin-bottom: 6px;

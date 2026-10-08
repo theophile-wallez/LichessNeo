@@ -3,26 +3,27 @@ import { oncePerFrame } from '#shared/frame.ts';
 import type { Feature } from '#shared/features.ts';
 import { message } from '#content/platform/runtime.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
+import { packLibrary } from '#content/packs/index.ts';
+import { SETTINGS_HASH, SETTINGS_URL } from './address.ts';
 import { buildSection } from './section.ts';
 
 // The extension's settings as a section of Lichess's account pages: a link in
 // their menu, over Display, shows it in place of the page's content
-// (styles/pages/extension-settings.css). Its address is the profile page's
-// with a hash, so it opens from any account page and comes back on reload.
+// (styles/pages/extension-settings.css).
 
-const HASH = '#cdc-extension';
 const DISPLAY = "a[href$='/preferences/display']";
 // Lichess's own link that was active, given back its look once the section closes.
 const WAS_ACTIVE = 'cdcWasActive';
 
 let link: HTMLAnchorElement | null = null;
 let section: HTMLElement | null = null;
+let wasOpen = false;
 
 function addLink(menu: HTMLElement): HTMLAnchorElement {
   const added = createElement('a', {
     className: 'cdc-settings-link',
     text: message('settingsLink'),
-    attrs: { href: `/account/profile${HASH}` },
+    attrs: { href: SETTINGS_URL },
   });
   // The links sit in the menu's inner nav. Lichess separates the profile from the
   // preferences: ours gets its own group, over Display.
@@ -59,7 +60,11 @@ export function syncSettings(): void {
     section = buildSection();
     main.append(section);
   }
-  showOpen(main, menu, location.hash === HASH);
+  const open = location.hash === SETTINGS_HASH;
+  // The packs are read as the section opens: again only if that failed.
+  if (open && !wasOpen) void packLibrary().loadAll();
+  wasOpen = open;
+  showOpen(main, menu, open);
 }
 
 // As the menu comes in, so it never shows without the link: once a frame, before it's drawn.

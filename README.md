@@ -25,10 +25,11 @@ The engine runs on your own computer, so it's free and there's no daily limit.
 
 ### Your board, your pieces, your sounds
 
-The board, pieces and sounds you picked in Lichess's settings, or your own:
-put them in a folder on GitHub with a `pack.json`, paste its link in the
-settings menu (Board, Piece set or Sound, under **Imported**), and they're
-yours on every page. Private repositories work too, with a token. How to make
+The extension's blue board, the board, pieces and sounds of Lichess's
+settings, or your own: put them in a folder on GitHub with a `pack.json`,
+paste its link in the extension's settings (**Packs**), pick them in the user
+menu (Board, Piece set or Sound, under **Extension**), and they're yours on
+every page. Private repositories work too, with a token. How to make
 one: [docs/packs.md](docs/packs.md), and a pack to start from:
 [packs/example](packs/example).
 

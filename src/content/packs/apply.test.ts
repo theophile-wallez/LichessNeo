@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { packRules, setLoading, showPacks, soundFiles } from './apply.ts';
+import { packRules, setLoading, showLooks, soundFiles } from './apply.ts';
 import { fakePack, IMAGE, SOUND } from '#shared/testing/packs.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
@@ -60,14 +60,14 @@ describe('packRules', () => {
   });
 });
 
-describe('showPacks', () => {
+describe('showLooks', () => {
   it('puts the rules in our stylesheet and marks a pack’s board on <html>', () => {
-    showPacks({ board: null, pieces: null });
+    showLooks({ board: null, pieces: null });
     expect(style()).toBeNull();
-    showPacks({ board: WOOD, pieces: WOOD });
+    showLooks({ board: WOOD, pieces: WOOD });
     expect(document.documentElement.dataset.cdcBoard).toBe('pack');
     expect(style()?.textContent).toBe(packRules({ board: WOOD, pieces: WOOD }));
-    showPacks({ board: null, pieces: null });
+    showLooks({ board: null, pieces: null });
     expect(document.documentElement.dataset.cdcBoard).toBeUndefined();
     expect(style()?.textContent).toBe('');
   });

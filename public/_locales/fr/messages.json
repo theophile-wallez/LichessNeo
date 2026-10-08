@@ -25,5 +25,59 @@
   },
   "settingUiSoundsBody": {
     "message": "Les petits sons des commandes de l’extension, comme les crans du curseur de niveau de Stockfish. Les sons de Lichess et de votre pack ne changent pas."
+  },
+  "packsTitle": {
+    "message": "Packs"
+  },
+  "packsBody": {
+    "message": "Votre propre plateau, vos pièces ou vos sons, depuis un pack sur GitHub. Une fois importés, choisissez-les dans le menu utilisateur, sous l’onglet Extension de Plateau, Pièces ou Son."
+  },
+  "packsEmpty": {
+    "message": "Aucun pack importé pour l’instant."
+  },
+  "packsUnreadable": {
+    "message": "Les packs importés n’ont pas pu être lus."
+  },
+  "packsPartBoard": {
+    "message": "Plateau"
+  },
+  "packsPartPieces": {
+    "message": "Pièces"
+  },
+  "packsPartSounds": {
+    "message": "Sons"
+  },
+  "packsRemove": {
+    "message": "Retirer"
+  },
+  "packsLink": {
+    "message": "Lien vers un pack sur GitHub"
+  },
+  "packsImport": {
+    "message": "Importer"
+  },
+  "packsPrivate": {
+    "message": "Dépôt privé ?"
+  },
+  "packsToken": {
+    "message": "Jeton GitHub"
+  },
+  "packsTokenNote": {
+    "message": "Un jeton à accès précis qui ne peut que lire le contenu de ce dépôt, utilisé pour cet import et jamais conservé."
+  },
+  "packsImporting": {
+    "message": "Import en cours…"
+  },
+  "packsImported": {
+    "message": "« $1 » importé."
+  },
+  "packsImportFailed": {
+    "message": "Le pack n’a pas pu être importé."
+  },
+  "packsNoLink": {
+    "message": "Collez d’abord le lien d’un pack."
+  },
+  "packsHelp": {
+    "message": "Comment créer un pack"
   }
 }

@@ -1,6 +1,8 @@
 import { closestTo, createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
+import { packLibrary } from '#content/packs/index.ts';
+import { importSection } from '#content/packs/import-section.ts';
 import {
   currentSettings,
   onSettings,
@@ -10,8 +12,8 @@ import {
 } from './settings.ts';
 
 // The account page's section for the extension: a card per setting, each
-// with a switch. A new setting is a field of the schema (settings.ts) and a
-// row here.
+// with a switch, then the imported packs. A new setting is a field of the
+// schema (settings.ts) and a row here.
 
 type Toggle = { [K in keyof Settings]: Settings[K] extends boolean ? K : never }[keyof Settings];
 
@@ -71,6 +73,7 @@ export function buildSection(): HTMLElement {
       <div class="cdc-settings__list">${rows().map(rowMarkup)}</div>
     </div>`,
   );
+  section.querySelector('.box')?.append(importSection(packLibrary()));
   section.addEventListener('click', onClick);
   showSettings(section, currentSettings());
   onSettings(settings => showSettings(section, settings));

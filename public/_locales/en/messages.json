@@ -34,5 +34,77 @@
   "settingUiSoundsBody": {
     "message": "Little sounds as you use the extension's controls, like the notches of Stockfish's level slider. Lichess's sounds and your pack's don't change.",
     "description": "What the interface sounds setting covers."
+  },
+  "packsTitle": {
+    "message": "Packs",
+    "description": "The title of the settings' card for the imported packs."
+  },
+  "packsBody": {
+    "message": "Your own board, pieces or sounds, from a pack on GitHub. Once imported, pick them in the user menu, in the Extension tab of Board, Piece set or Sound.",
+    "description": "What the packs card is for."
+  },
+  "packsEmpty": {
+    "message": "No pack imported yet.",
+    "description": "The packs card, before any import."
+  },
+  "packsUnreadable": {
+    "message": "The imported packs could not be read.",
+    "description": "The packs card, when the browser's storage fails."
+  },
+  "packsPartBoard": {
+    "message": "Board",
+    "description": "A pack holds a board."
+  },
+  "packsPartPieces": {
+    "message": "Pieces",
+    "description": "A pack holds a piece set."
+  },
+  "packsPartSounds": {
+    "message": "Sounds",
+    "description": "A pack holds sounds."
+  },
+  "packsRemove": {
+    "message": "Remove",
+    "description": "The button that removes an imported pack."
+  },
+  "packsLink": {
+    "message": "Link to a pack on GitHub",
+    "description": "The placeholder of the field for a pack's link."
+  },
+  "packsImport": {
+    "message": "Import",
+    "description": "The button that imports a pack."
+  },
+  "packsPrivate": {
+    "message": "Private repository?",
+    "description": "Opens the field for a private repository's token."
+  },
+  "packsToken": {
+    "message": "GitHub token",
+    "description": "The placeholder of the token's field."
+  },
+  "packsTokenNote": {
+    "message": "A fine-grained token that can only read this repository’s contents, used for this import and never kept.",
+    "description": "Under the token's field."
+  },
+  "packsImporting": {
+    "message": "Importing…",
+    "description": "While a pack downloads."
+  },
+  "packsImported": {
+    "message": "Imported “$1”.",
+    "description": "Once a pack is imported; $1 is its name."
+  },
+  "packsImportFailed": {
+    "message": "The pack could not be imported.",
+    "description": "An import that failed for an unknown reason."
+  },
+  "packsNoLink": {
+    "message": "Paste a link to a pack first.",
+    "description": "Import pressed with an empty link."
+  },
+  "packsHelp": {
+    "message": "How to make a pack",
+    "description": "The link to the pack format's guide."
   }
 }

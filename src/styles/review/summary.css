@@ -171,13 +171,10 @@
     position: relative;
     width: 100%;
     height: 100%;
-    /* Light top left either way the board is turned. */
+    /* The board's background, copied from it (page/review/view/graph-preview.ts), or ours.
+       Light top left either way the board is turned. */
     background: repeating-conic-gradient(var(--cdc-board-dark) 0 25%, var(--cdc-board-light) 0 50%)
       0 0 / 25% 25%;
-  }
-
-  html[data-cdc-board='pack'] #cdc-graph-board .cdc-mini {
-    background: var(--cdc-board-img) center / cover;
   }
 
   #cdc-graph-board :is(.cdc-mini__lit, .cdc-pc) {

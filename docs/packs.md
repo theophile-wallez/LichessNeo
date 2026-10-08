@@ -1,15 +1,18 @@
 # Packs: your own pieces, board and sounds
 
-The extension shows Lichess's own board, pieces and sounds, the ones picked in
-Lichess's settings. A pack replaces any of the three with yours: a folder on
-GitHub holding a `pack.json` and the files it names.
+The extension shows its own blue board and Lichess's pieces and sounds, until
+you pick others in the user menu's Board, Piece set and Sound panels: the
+**Extension** tab has the extension's own and your packs, the **Lichess** tab
+Lichess's. A pack replaces any of the three with yours: a folder on GitHub
+holding a `pack.json` and the files it names.
 
-To import one, open the user menu, then Board, Piece set or Sound, pick the
-**Imported** tab, paste the link to the pack's folder and press **Import**.
-The extension downloads every file once and keeps them in the browser; it
-asks GitHub for nothing after that. An import shows every part the pack has,
-from whichever panel; then each part is picked on its own: a pack's pieces
-with Lichess's board, say. Lichess's own tab hands a part back to it.
+To import one, open the extension's settings (your account's settings, then
+**Lichess Reimagined**, or **Import** in a panel's Extension tab), paste the
+link to the pack's folder under **Packs** and press **Import**. The extension
+downloads every file once and keeps them in the browser; it asks GitHub for
+nothing after that. An import shows every part the pack has; then each part is
+picked on its own: a pack's pieces with Lichess's board, say. The settings also
+list your packs, and remove them.
 
 The [example pack](../packs/example) uses every field. Copy it to start.
 
@@ -35,7 +38,7 @@ for that repository alone, with **Contents: Read-only**, and paste it under
 **Private repository?** before importing. The extension sends it to GitHub's
 API for that import only and never keeps it; the pack's files are kept, so it
 isn't needed again until you import the pack anew. The field is in Lichess's
-page, like the rest of the menu: a token that can do nothing but read that
+page, like the rest of the settings: a token that can do nothing but read that
 repository keeps the risk to that.
 
 ## pack.json

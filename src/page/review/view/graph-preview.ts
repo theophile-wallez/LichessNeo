@@ -1,4 +1,4 @@
-import { createElement, setStyleProperty } from '#shared/dom.ts';
+import { createElement, queryOne, setStyleProperty } from '#shared/dom.ts';
 import { parsePlacement } from '#shared/chess/fen.ts';
 import { colorLetter, ROLE_LETTERS } from '#shared/chess/pieces.ts';
 import { parseSquare, squareCoords } from '#shared/chess/squares.ts';
@@ -50,6 +50,15 @@ export function boardMarkup({ fen, lastMove }: PreviewPosition, orientation: Col
   return html`<div class="cdc-mini">${lit}${pieces}</div>`;
 }
 
+// The board's own background, whichever it is: ours, a pack's or Lichess's.
+function copyBoardBackground(mini: HTMLElement | null): void {
+  const board = queryOne(document, '.is2d cg-board', HTMLElement);
+  if (!board || !mini) return;
+  const style = getComputedStyle(board, '::before');
+  for (const property of ['background-image', 'background-size', 'background-position'])
+    setStyleProperty(mini, property, style.getPropertyValue(property));
+}
+
 let preview: HTMLElement | null = null;
 let shown = '';
 
@@ -64,6 +73,7 @@ export function showPreview(
   if (key !== shown) {
     shown = key;
     setHtml(preview, boardMarkup(position, orientation));
+    copyBoardBackground(queryOne(preview, '.cdc-mini', HTMLElement));
   }
   if (!preview.isConnected) document.body.append(preview);
   const width = preview.offsetWidth;

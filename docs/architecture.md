@@ -57,9 +57,12 @@ so the logic can be unit-tested without a page.
 
 ## Packs
 
-The board, the pieces and the sounds are Lichess's, unless the user imports a
-pack from GitHub (`docs/packs.md`) and picks it for one of them, in the
-user menu's own panels (`src/content/packs/`):
+Each of the board, the pieces and the sounds shows one of the extension's
+themes (`themes.ts`: our blue board, the default), a pack the user imported
+from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
+menu's own panels, under an Extension and a Lichess tab (`dasher.ts`,
+`panel.ts`, `choices.ts`); packs are imported and removed in the extension's
+settings (`import-section.ts`, `import-form.ts`), all in `src/content/packs/`:
 
 - `src/shared/packs/download.ts` reads the pack's `pack.json` and files from
   GitHub's raw host, or through its API with a token for a private
@@ -68,13 +71,15 @@ user menu's own panels (`src/content/packs/`):
   a content script's requests to the page's CSP; `import.ts` asks for it, then
   checks that each image decodes, which needs a DOM.
 - `store.ts` keeps the packs in an IndexedDB database of the page's origin;
-  `library.ts` keeps which one each part shows in localStorage, so the content
-  script knows it at `document_start` and hides that part until the pack is
-  read, 2 s at most. Only the picked packs are read then; the menu reads the
-  others when one of its panels opens.
-- `apply.ts` writes one stylesheet: the pieces override the variables Lichess
-  draws its own from, the board comes as `--cdc-board-img` under
-  `data-cdc-board='pack'`. The sounds go to the page world as bytes
+  `library.ts` keeps what each part shows in localStorage, so the content
+  script knows it at `document_start`, shows a theme or Lichess's at once, and
+  hides a part whose pack is picked until it's read, 2 s at most. Only the
+  picked packs are read then; the menu and the settings read the others when
+  they open.
+- `apply.ts` names the board in `data-cdc-board` (a theme's id, `pack`, or
+  none for Lichess's) and writes one stylesheet: a pack's pieces override the
+  variables Lichess draws its own from, its board comes as `--cdc-board-img`.
+  The sounds go to the page world as bytes
   (`cdc:sounds`), where `src/page/sounds` puts them in Lichess's player. With
   no pack, Lichess's player is left alone.
 

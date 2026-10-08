@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi, type Mock } from 'vitest';
 import { fakePack } from '#shared/testing/packs.ts';
-import { createLibrary, LICHESS, storedPick, type Shown } from './library.ts';
+import { createLibrary, LICHESS, storedPick, type Look, type Shown } from './library.ts';
 import type { Pack } from '#shared/packs/pack.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
@@ -9,33 +9,38 @@ const CLICKS = fakePack('ann/packs/main/clicks/', ['sound']);
 type Save = (pack: Pack) => Promise<void>;
 type Erase = (id: string) => Promise<void>;
 
-function library(
+async function library(
   packs: readonly Pack[],
   stored: readonly Pack[] = packs,
-): {
+): Promise<{
   readonly shown: Shown[];
   readonly readAll: Mock<() => Promise<readonly Pack[]>>;
   readonly save: Mock<Save>;
   readonly erase: Mock<Erase>;
   readonly library: ReturnType<typeof createLibrary>;
-} {
+}> {
   const shown: Shown[] = [];
   const save = vi.fn<Save>(() => Promise.resolve());
   const erase = vi.fn<Erase>(() => Promise.resolve());
   const readAll = vi.fn<() => Promise<readonly Pack[]>>(() => Promise.resolve(stored));
-  return {
-    shown,
+  const created = createLibrary({
+    readPicked: () => Promise.resolve(packs),
     readAll,
     save,
     erase,
-    library: createLibrary({ packs, readAll, save, erase, show: next => shown.push(next) }),
-  };
+    show: next => shown.push(next),
+  });
+  await created.ready;
+  return { shown, readAll, save, erase, library: created };
 }
 
+const idOf = (look: Look | undefined): string | null =>
+  typeof look === 'string' ? look : (look?.id ?? null);
+
 const ids = (shown: Shown | undefined): Record<string, string | null> => ({
-  board: shown?.board?.id ?? null,
-  piece: shown?.piece?.id ?? null,
-  sound: shown?.sound?.id ?? null,
+  board: idOf(shown?.board),
+  piece: idOf(shown?.piece),
+  sound: idOf(shown?.sound),
 });
 
 afterEach(() => {
@@ -43,8 +48,12 @@ afterEach(() => {
 });
 
 describe('storedPick', () => {
-  it('reads a pack’s id, and anything older or missing as Lichess’s', () => {
-    expect(storedPick('board')).toBe(LICHESS);
+  it('reads a pack’s id, a theme’s or Lichess’s, and anything older or missing as the default', () => {
+    expect([storedPick('board'), storedPick('piece'), storedPick('sound')]).toEqual([
+      'blue',
+      LICHESS,
+      LICHESS,
+    ]);
     localStorage.setItem('cdc-board', WOOD.id);
     // An older version's bundled sets and boards: they're gone.
     localStorage.setItem('cdc-pieces', 'neo');
@@ -54,35 +63,40 @@ describe('storedPick', () => {
       LICHESS,
       LICHESS,
     ]);
+    localStorage.setItem('cdc-board', 'brown');
+    expect(storedPick('board')).toBe('blue');
+    localStorage.setItem('cdc-board', LICHESS);
+    expect(storedPick('board')).toBe(LICHESS);
   });
 });
 
 describe('createLibrary', () => {
-  it('shows Lichess’s own until a pack is picked, then the pick', () => {
-    const { shown, library: packs } = library([WOOD, CLICKS]);
-    expect(ids(shown.at(-1))).toEqual({ board: null, piece: null, sound: null });
+  it('shows the defaults until something is picked, then the pick', async () => {
+    const { shown, library: packs } = await library([WOOD, CLICKS]);
+    expect(ids(shown.at(-1))).toEqual({ board: 'blue', piece: null, sound: null });
     packs.choose('piece', WOOD.id);
     packs.choose('sound', CLICKS.id);
-    expect(ids(shown.at(-1))).toEqual({ board: null, piece: WOOD.id, sound: CLICKS.id });
+    expect(ids(shown.at(-1))).toEqual({ board: 'blue', piece: WOOD.id, sound: CLICKS.id });
     expect(localStorage.getItem('cdc-pieces')).toBe(WOOD.id);
-    expect([packs.current('board'), packs.current('piece')]).toEqual([LICHESS, WOOD.id]);
+    expect([packs.current('board'), packs.current('piece')]).toEqual(['blue', WOOD.id]);
     packs.choose('piece', LICHESS);
-    expect(ids(shown.at(-1)).piece).toBeNull();
+    packs.choose('board', LICHESS);
+    expect(ids(shown.at(-1))).toEqual({ board: null, piece: null, sound: CLICKS.id });
   });
 
-  it('shows Lichess’s for a pick whose pack is gone or lacks the part', () => {
+  it('shows the default for a pick whose pack is gone or lacks the part', async () => {
     localStorage.setItem('cdc-board', CLICKS.id);
     localStorage.setItem('cdc-pieces', 'ann/packs/main/gone/');
-    const { shown, library: packs } = library([WOOD, CLICKS]);
-    expect(ids(shown.at(-1))).toEqual({ board: null, piece: null, sound: null });
-    expect(packs.current('board')).toBe(LICHESS);
+    const { shown, library: packs } = await library([WOOD, CLICKS]);
+    expect(ids(shown.at(-1))).toEqual({ board: 'blue', piece: null, sound: null });
+    expect(packs.current('board')).toBe('blue');
     // The pick is kept: a pack that failed to read this time may read the next.
     expect(localStorage.getItem('cdc-pieces')).toBe('ann/packs/main/gone/');
   });
 
   it('stores an imported pack and shows each part it has', async () => {
     localStorage.setItem('cdc-board', WOOD.id);
-    const { shown, save, library: packs } = library([WOOD]);
+    const { shown, save, library: packs } = await library([WOOD]);
     const listener = vi.fn<() => void>();
     packs.onChange(listener);
     await packs.add(CLICKS);
@@ -93,25 +107,26 @@ describe('createLibrary', () => {
   });
 
   it('replaces a pack imported again, keeping one of each', async () => {
-    const { library: packs } = library([WOOD, CLICKS]);
+    const { library: packs } = await library([WOOD, CLICKS]);
     const renamed = { ...WOOD, name: 'Wood, again' };
     await packs.add(renamed);
     expect(packs.packs()).toEqual([CLICKS, renamed]);
   });
 
-  it('removes a pack, and the parts it showed go back to Lichess', async () => {
-    const { shown, erase, library: packs } = library([WOOD]);
+  it('removes a pack, and the parts it showed go back to their default', async () => {
+    const { shown, erase, library: packs } = await library([WOOD]);
     packs.choose('board', WOOD.id);
+    packs.choose('piece', WOOD.id);
     await packs.remove(WOOD.id);
     expect(erase).toHaveBeenCalledWith(WOOD.id);
     expect(packs.packs()).toEqual([]);
-    expect(ids(shown.at(-1)).board).toBeNull();
-    expect(storedPick('board')).toBe(LICHESS);
-    expect(localStorage.getItem('cdc-board')).toBe(LICHESS);
+    expect(ids(shown.at(-1))).toEqual({ board: 'blue', piece: null, sound: null });
+    expect(localStorage.getItem('cdc-board')).toBe('blue');
+    expect(localStorage.getItem('cdc-pieces')).toBe(LICHESS);
   });
 
   it('changes nothing when the store fails', async () => {
-    const { save, library: packs } = library([]);
+    const { save, library: packs } = await library([]);
     save.mockRejectedValueOnce(new Error('quota'));
     await expect(packs.add(WOOD)).rejects.toThrow('quota');
     expect(packs.packs()).toEqual([]);
@@ -120,7 +135,7 @@ describe('createLibrary', () => {
 
   it('reads the other packs once, keeping those already shown as they are', async () => {
     localStorage.setItem('cdc-sounds', CLICKS.id);
-    const { shown, readAll, library: packs } = library([CLICKS], [WOOD, { ...CLICKS }]);
+    const { shown, readAll, library: packs } = await library([CLICKS], [WOOD, { ...CLICKS }]);
     expect(packs.packs()).toEqual([CLICKS]);
     await Promise.all([packs.loadAll(), packs.loadAll()]);
     await packs.loadAll();

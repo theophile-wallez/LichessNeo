@@ -3,7 +3,7 @@ import { z } from 'zod/mini';
 import { trackListeners } from '#shared/testing/listeners.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { fakePack } from '#shared/testing/packs.ts';
-import { packs, startPacks } from './index.ts';
+import { startPacks } from './index.ts';
 import type { Pack } from '#shared/packs/pack.ts';
 import { readPack, readPacks } from './store.ts';
 
@@ -43,7 +43,7 @@ describe('packs', () => {
     localStorage.setItem('cdc-pieces', WOOD.id);
     const read = Promise.withResolvers<Pack | null>();
     vi.mocked(readPack).mockReturnValue(read.promise);
-    packs.start();
+    startPacks();
     expect(root.dataset.cdcLoading).toBe('board pieces');
     read.resolve(WOOD);
     await flush();
@@ -52,12 +52,12 @@ describe('packs', () => {
     expect(document.getElementById('cdc-packs')?.textContent).toContain('---white-king:url(');
   });
 
-  it('shows Lichess’s if the packs take too long to read, and the pack once they’re in', async () => {
+  it('shows the default if the packs take too long to read, and the pack once they’re in', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
     localStorage.setItem('cdc-board', WOOD.id);
     const read = Promise.withResolvers<Pack | null>();
     vi.mocked(readPack).mockReturnValue(read.promise);
-    packs.start();
+    startPacks();
     vi.advanceTimersByTime(1999);
     expect(root.dataset.cdcLoading).toBe('board');
     vi.advanceTimersByTime(1);
@@ -68,47 +68,55 @@ describe('packs', () => {
     expect(root.dataset.cdcBoard).toBe('pack');
   });
 
-  it('hides nothing while Lichess’s own are picked', async () => {
+  it('hides nothing and shows our board at once while no pack is picked', () => {
     vi.mocked(readPack).mockResolvedValue(WOOD);
-    packs.start();
+    startPacks();
     expect(root.dataset.cdcLoading).toBeUndefined();
-    await flush();
-    expect(root.dataset.cdcBoard).toBeUndefined();
+    expect(root.dataset.cdcBoard).toBe('blue');
     expect(document.getElementById('cdc-packs')).toBeNull();
   });
 
-  it('shows Lichess’s when the packs can’t be read', async () => {
+  it('leaves the board to Lichess when its own is picked', () => {
+    localStorage.setItem('cdc-board', 'lichess');
+    startPacks();
+    expect(root.dataset.cdcBoard).toBeUndefined();
+  });
+
+  it('shows the default when the packs can’t be read', async () => {
     localStorage.setItem('cdc-board', WOOD.id);
     vi.mocked(readPack).mockRejectedValue(new Error('blocked'));
     const error = vi.spyOn(console, 'error').mockImplementation(() => {});
-    packs.start();
+    startPacks();
     await flush();
     expect(root.dataset.cdcLoading).toBeUndefined();
-    expect(root.dataset.cdcBoard).toBeUndefined();
+    expect(root.dataset.cdcBoard).toBe('blue');
     expect(error).toHaveBeenCalledWith(
       '[LichessReimagined] the imported packs could not be read',
       expect.any(Error),
     );
   });
 
-  it('sends the picked sounds, and again when the page script asks', async () => {
+  it('sends the picked sounds once read, and again when the page script asks', async () => {
     localStorage.setItem('cdc-sounds', WOOD.id);
     vi.mocked(readPack).mockResolvedValue(WOOD);
-    packs.start();
+    startPacks();
+    // Lichess's until the pack is read.
+    expect(posted()).toEqual([{ type: 'cdc:sounds', sounds: {} }]);
     await flush();
-    const [sent] = posted();
+    const sent = posted().at(-1);
     expect(sent).toMatchObject({ type: 'cdc:sounds' });
     expect(Object.keys(SentSoundsSchema.parse(sent).sounds)).toEqual(['capture']);
     window.dispatchEvent(
       new MessageEvent('message', { data: { type: 'cdc:page-ready' }, source: window }),
     );
-    expect(posted()).toEqual([sent, sent]);
+    expect(posted().slice(1)).toEqual([sent, sent]);
   });
 
   it('sends the sounds again when the picked pack is imported anew', async () => {
     localStorage.setItem('cdc-sounds', WOOD.id);
     vi.mocked(readPack).mockResolvedValue(WOOD);
-    const library = await startPacks();
+    const library = startPacks();
+    await library.ready;
     vi.mocked(window.postMessage).mockClear();
     await library.add({
       ...WOOD,
@@ -122,7 +130,7 @@ describe('packs', () => {
     localStorage.setItem('cdc-board', WOOD.id);
     localStorage.setItem('cdc-pieces', WOOD.id);
     vi.mocked(readPack).mockResolvedValue(WOOD);
-    await startPacks();
+    await startPacks().ready;
     expect(vi.mocked(readPack).mock.calls).toEqual([[WOOD.id]]);
     expect(readPacks).not.toHaveBeenCalled();
   });

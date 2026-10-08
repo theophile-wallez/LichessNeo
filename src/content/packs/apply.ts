@@ -3,17 +3,27 @@ import type { SoundFiles } from '#shared/protocol.ts';
 import { SOUND_NAMES } from '#shared/sounds.ts';
 import { PIECE_NAMES, pieceVariable, type Pack } from '#shared/packs/pack.ts';
 import { dataUrlBytes } from '#shared/packs/sniff.ts';
+import type { Look } from './library.ts';
 
-// Puts the picked packs on the page. Their images go in a stylesheet of ours,
-// as data: URLs too long for <html>'s style attribute, which other features
-// rewrite. Pieces override the variables Lichess draws its own from; the
-// board needs `data-cdc-board` for styles/board/pieces.css.
+// Puts the picked looks on the page. A pack's images go in a stylesheet of
+// ours, as data: URLs too long for <html>'s style attribute, which other
+// features rewrite. Pieces override the variables Lichess draws its own from;
+// the board is named in `data-cdc-board` for styles/board/pieces.css: a theme
+// of ours, a pack's, or none for Lichess's.
 
 const STYLE_ID = 'cdc-packs';
 
 export interface Shown {
-  readonly board: Pack | null;
-  readonly pieces: Pack | null;
+  readonly board: Look;
+  readonly pieces: Look;
+}
+
+// A theme is drawn by our CSS alone.
+const packOf = (look: Look): Pack | null => (typeof look === 'string' ? null : look);
+
+function boardName(look: Look): string | null {
+  if (typeof look === 'string') return look;
+  return look?.board ? 'pack' : null;
 }
 
 // Unquoted, as Lichess writes its own: it reads them back to decode each image
@@ -46,7 +56,9 @@ function boardRules(pack: Pack | null): string[] {
 
 /** The stylesheet that shows these packs ('' for Lichess's own). */
 export function packRules({ board, pieces }: Shown): string {
-  return [pieceRule(pieces), ...boardRules(board)].filter(rule => rule !== null).join('\n');
+  return [pieceRule(packOf(pieces)), ...boardRules(packOf(board))]
+    .filter(rule => rule !== null)
+    .join('\n');
 }
 
 function packStyle(): HTMLStyleElement {
@@ -58,18 +70,18 @@ function packStyle(): HTMLStyleElement {
   return style;
 }
 
-export function showPacks(shown: Shown): void {
-  setData(document.documentElement, 'cdcBoard', shown.board?.board ? 'pack' : null);
+export function showLooks(shown: Shown): void {
+  setData(document.documentElement, 'cdcBoard', boardName(shown.board));
   const text = packRules(shown);
   const style = document.getElementById(STYLE_ID) ?? (text === '' ? null : packStyle());
   if (style && style.textContent !== text) style.textContent = text;
 }
 
 /** The pack's sounds as bytes, for the page world to play (none: Lichess's own). */
-export function soundFiles(pack: Pack | null): SoundFiles {
+export function soundFiles(look: Look): SoundFiles {
   const files: SoundFiles = {};
   for (const name of SOUND_NAMES) {
-    const url = pack?.sounds?.[name];
+    const url = packOf(look)?.sounds?.[name];
     if (url !== undefined) files[name] = dataUrlBytes(url);
   }
   return files;

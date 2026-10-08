@@ -3,8 +3,6 @@ import { queryAll, queryOne } from '#shared/dom.ts';
 import { trackListeners } from '#shared/testing/listeners.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { watchDasher } from './dasher.ts';
-import { fakeGithub } from '#shared/testing/github.ts';
-import { fakeWorker } from '#shared/testing/worker.ts';
 import { fakePack } from '#shared/testing/packs.ts';
 import { createLibrary, LICHESS, type Library } from './library.ts';
 import type { Pack } from '#shared/packs/pack.ts';
@@ -36,38 +34,31 @@ function openPanel(kind: keyof typeof PANELS): HTMLElement {
   return panel;
 }
 
-function start(
+async function start(
   packs: readonly Pack[],
   readAll = (): Promise<readonly Pack[]> => Promise.resolve(packs),
-): Library {
+): Promise<Library> {
   const library = createLibrary({
-    packs,
+    readPicked: () => Promise.resolve(packs),
     readAll,
     save: () => Promise.resolve(),
     erase: () => Promise.resolve(),
     show: () => undefined,
   });
+  await library.ready;
   watchDasher(library);
   return library;
 }
 
 const tab = (panel: HTMLElement, view: string): HTMLElement | null =>
   queryOne(panel, `.cdc-src-tabs button[data-cdc-tab="${view}"]`, HTMLElement);
+// A tile's name is its label, a sound's its text.
 const names = (panel: HTMLElement): (string | null)[] =>
-  queryAll(panel, '.cdc-src-name', HTMLElement).map(name => name.textContent);
-const status = (panel: HTMLElement): string | null | undefined =>
-  panel.querySelector('.cdc-src-status')?.textContent;
-
-function submit(panel: HTMLElement, link: string, token = ''): void {
-  const [input, secret] = queryAll(panel, '.cdc-src-import input', HTMLInputElement);
-  if (!input || !secret) throw new Error('no form');
-  input.value = link;
-  secret.value = token;
-  queryOne(panel, '.cdc-src-import button', HTMLButtonElement)?.click();
-}
+  queryAll(panel, '.cdc-src-item', HTMLElement).map(
+    item => item.getAttribute('aria-label') ?? item.textContent,
+  );
 
 beforeEach(() => {
-  fakeWorker();
   stopListeners = trackListeners(document);
   document.body.innerHTML =
     '<div id="top"><div class="dasher"><div id="dasher_app"></div></div></div>';
@@ -81,67 +72,73 @@ afterEach(() => {
 });
 
 describe('the user menu’s panels', () => {
-  it('get a Lichess and an Imported tab, open on what the page shows', async () => {
+  it('get an Extension and a Lichess tab, open on what the page shows', async () => {
     localStorage.setItem('cdc-pieces', WOOD.id);
-    start([WOOD, CLICKS]);
+    localStorage.setItem('cdc-sounds', LICHESS);
+    await start([WOOD, CLICKS]);
     const board = openPanel('board');
     await flush();
     expect(
       queryAll(board, '.cdc-src-tabs button', HTMLElement).map(button => button.textContent),
-    ).toEqual(['Lichess', 'Imported']);
-    expect(board.dataset.cdcView).toBe(LICHESS);
-    // Only the packs with a board.
-    expect(names(board)).toEqual(['Pack ann/packs/main/wood/']);
+    ).toEqual(['Extension', 'Lichess']);
+    // Our blue board, then only the packs with a board, named in their tooltip only.
+    expect(board.dataset.cdcView).toBe('extension');
+    expect(names(board)).toEqual(['Blue', 'Pack ann/packs/main/wood/']);
+    expect(board.querySelector('.cdc-src-name')).toBeNull();
+    expect(queryOne(board, '.cdc-src-item.active', HTMLElement)?.dataset.cdcChoice).toBe('blue');
     const piece = openPanel('piece');
     await flush();
-    expect(piece.dataset.cdcView).toBe('packs');
-    expect(piece.dataset.cdcSrcOn).toBe('packs');
+    expect(piece.dataset.cdcView).toBe('extension');
+    expect(piece.dataset.cdcSrcOn).toBe('extension');
     expect(queryOne(piece, '.cdc-src-item.active', HTMLElement)?.dataset.cdcChoice).toBe(WOOD.id);
+    const sound = openPanel('sound');
+    await flush();
+    expect(sound.dataset.cdcView).toBe(LICHESS);
   });
 
-  it('pick a pack, and hand the part back to Lichess from its own list', async () => {
-    const library = start([WOOD]);
+  it('pick a theme or a pack, and hand the part back to Lichess from its own list', async () => {
+    const library = await start([WOOD]);
     const panel = openPanel('board');
     await flush();
-    tab(panel, 'packs')?.click();
-    expect(panel.dataset.cdcView).toBe('packs');
     queryOne(panel, `.cdc-src-item[data-cdc-choice="${WOOD.id}"]`, HTMLElement)?.click();
     expect(library.current('board')).toBe(WOOD.id);
-    expect(panel.dataset.cdcSrcOn).toBe('packs');
+    expect(panel.dataset.cdcSrcOn).toBe('extension');
+    tab(panel, LICHESS)?.click();
+    expect(panel.dataset.cdcView).toBe(LICHESS);
     queryOne(panel, '.list > button', HTMLElement)?.click();
     expect(library.current('board')).toBe(LICHESS);
     expect(panel.dataset.cdcSrcOn).toBe(LICHESS);
+    tab(panel, 'extension')?.click();
+    queryOne(panel, '.cdc-src-item[data-cdc-choice="blue"]', HTMLElement)?.click();
+    expect(library.current('board')).toBe('blue');
   });
 
   it('list the sound packs beside the volume, and Lichess’s sets hand the sounds back', async () => {
-    const library = start([WOOD, CLICKS]);
+    const library = await start([WOOD, CLICKS]);
     const panel = openPanel('sound');
     await flush();
-    expect(panel.querySelector('.content > .cdc-src-packs')).not.toBeNull();
+    expect(panel.querySelector('.content > .cdc-src-choices')).not.toBeNull();
     expect(names(panel)).toEqual(['Pack ann/packs/main/wood/', 'Pack ann/packs/main/clicks/']);
     library.choose('sound', CLICKS.id);
     queryAll(panel, '.selector > button', HTMLElement)[1]?.click();
     expect(library.current('sound')).toBe(LICHESS);
   });
 
-  it('list the packs read once the menu opens, keeping what’s typed', async () => {
+  it('list the packs read once the menu opens, and lead to the settings to import one', async () => {
     const all = Promise.withResolvers<readonly Pack[]>();
-    start([], () => all.promise);
+    await start([], () => all.promise);
     const panel = openPanel('sound');
     await flush();
-    expect(panel.querySelector('.cdc-src-empty')?.textContent).toBe('No pack imported yet.');
-    const [link, token] = queryAll(panel, '.cdc-src-import input', HTMLInputElement);
-    if (!link || !token) throw new Error('no form');
-    link.value = 'https://github.com/ann/packs';
-    token.value = 'secret';
+    expect(panel.querySelector('.cdc-src-empty')?.textContent).toBe(
+      'No sound set of the extension yet: import your own from GitHub.',
+    );
+    expect(queryOne(panel, '.cdc-src-import-link', HTMLAnchorElement)?.getAttribute('href')).toBe(
+      '/account/profile#cdc-extension',
+    );
     all.resolve([WOOD, CLICKS]);
     await flush();
     expect(names(panel)).toEqual(['Pack ann/packs/main/wood/', 'Pack ann/packs/main/clicks/']);
-    expect([link.isConnected, link.value, token.value]).toEqual([
-      true,
-      'https://github.com/ann/packs',
-      'secret',
-    ]);
+    expect(panel.querySelector('.cdc-src-empty')).toBeNull();
   });
 
   it('say so when the packs can’t be read, and try again on the next opening', async () => {
@@ -150,10 +147,10 @@ describe('the user menu’s panels', () => {
       .fn<() => Promise<readonly Pack[]>>()
       .mockRejectedValueOnce(new Error('blocked'))
       .mockResolvedValue([WOOD]);
-    start([], readAll);
+    await start([], readAll);
     const panel = openPanel('board');
     await flush();
-    tab(panel, 'packs')?.click();
+    expect(names(panel)).toEqual(['Blue']);
     expect(panel.querySelector('.cdc-src-empty')?.textContent).toBe(
       'The imported packs could not be read.',
     );
@@ -164,79 +161,15 @@ describe('the user menu’s panels', () => {
     await flush();
     const again = openPanel('board');
     await flush();
-    expect(names(again)).toEqual(['Pack ann/packs/main/wood/']);
+    expect(names(again)).toEqual(['Blue', 'Pack ann/packs/main/wood/']);
     expect(readAll).toHaveBeenCalledTimes(2);
   });
 
-  it('remove a pack from every list', async () => {
-    const library = start([WOOD, CLICKS]);
+  it('drop a removed pack from the lists', async () => {
+    const library = await start([WOOD, CLICKS]);
     const panel = openPanel('sound');
     await flush();
-    queryOne(panel, '.cdc-src-remove', HTMLElement)?.click();
-    await flush();
-    expect(library.packs()).toEqual([CLICKS]);
-    expect(names(queryOne(document, '#dasher_app .sub.sound', HTMLElement) ?? panel)).toEqual([
-      'Pack ann/packs/main/clicks/',
-    ]);
-  });
-});
-
-describe('importing a pack', () => {
-  const files = new Map([
-    ['pack.json', new TextEncoder().encode('{"name":"Clicks","sounds":{"capture":"c.mp3"}}')],
-    ['c.mp3', new Uint8Array([0x49, 0x44, 0x33, 4])],
-  ]);
-
-  it('downloads it, lists it, picks it, and says so', async () => {
-    fakeGithub({ repo: 'ann/packs', files });
-    const library = start([]);
-    const panel = openPanel('sound');
-    await flush();
-    expect(panel.querySelector('.cdc-src-empty')?.textContent).toBe('No pack imported yet.');
-    submit(panel, 'https://github.com/ann/packs');
-    expect(status(panel)).toBe('Importing…');
-    await vi.waitFor(() => expect(library.packs()).toHaveLength(1));
-    await flush();
-    const redrawn = queryOne(document, '#dasher_app .sub.sound', HTMLElement) ?? panel;
-    expect(names(redrawn)).toEqual(['Clicks']);
-    expect(library.current('sound')).toBe('ann/packs/HEAD/');
-    expect(status(redrawn)).toBe('Imported “Clicks”.');
-    expect(queryOne(redrawn, '.cdc-src-import input', HTMLInputElement)?.value).toBe('');
-  });
-
-  it('takes the token in no form and no password field, which browsers offer to save', async () => {
-    fakeGithub({ repo: 'ann/packs', files });
-    const library = start([]);
-    const panel = openPanel('sound');
-    await flush();
-    expect(panel.querySelector('form, input[type="password"]')).toBeNull();
-    const [link] = queryAll(panel, '.cdc-src-import input', HTMLInputElement);
-    if (!link) throw new Error('no link field');
-    link.value = 'https://github.com/ann/packs';
-    link.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-    await vi.waitFor(() => expect(library.packs()).toHaveLength(1));
-  });
-
-  it('keeps the token when there’s no link to import yet', async () => {
-    start([]);
-    const panel = openPanel('piece');
-    await flush();
-    submit(panel, '  ', 'secret');
-    expect(status(panel)).toBe('Paste a link to a pack first.');
-    expect(queryAll(panel, '.cdc-src-import input', HTMLInputElement)[1]?.value).toBe('secret');
-  });
-
-  it('says what went wrong, keeping the link to fix it', async () => {
-    fakeGithub({ repo: 'ann/packs', files, token: 'secret' });
-    start([]);
-    const panel = openPanel('board');
-    await flush();
-    submit(panel, 'https://github.com/ann/packs', 'nope');
-    const [link, token] = queryAll(panel, '.cdc-src-import input', HTMLInputElement);
-    // Never left in the page, which Lichess's scripts can read.
-    expect(token?.value).toBe('');
-    await vi.waitFor(() => expect(status(panel)).toBe('GitHub turned the token down.'));
-    expect(panel.querySelector('.cdc-src-status--failed')).not.toBeNull();
-    expect(link?.value).toBe('https://github.com/ann/packs');
+    await library.remove(WOOD.id);
+    expect(names(panel)).toEqual(['Pack ann/packs/main/clicks/']);
   });
 });

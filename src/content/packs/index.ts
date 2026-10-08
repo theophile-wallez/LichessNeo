@@ -1,26 +1,28 @@
 import type { Feature } from '#shared/features.ts';
 import { onPageReady, postSounds, type SoundFiles } from '#shared/protocol.ts';
-import { setLoading, showPacks, soundFiles } from './apply.ts';
+import { setLoading, showLooks, soundFiles } from './apply.ts';
 import { watchDasher } from './dasher.ts';
-import { createLibrary, LICHESS, storedPick, type Library, type Shown } from './library.ts';
+import {
+  createLibrary,
+  isPackId,
+  storedPick,
+  type Library,
+  type Look,
+  type Shown,
+} from './library.ts';
 import { PART_KINDS, type Pack } from '#shared/packs/pack.ts';
 import { deletePack, readPack, readPacks, writePack } from './store.ts';
 
-// Lichess's own board, pieces and sounds, unless the user picked a pack they
-// imported from GitHub (docs/packs.md) for one of them. Started first, from
-// document_start: a picked board or set is hidden until it's read, so the
-// page never shows Lichess's first.
+// The board, pieces and sounds: the extension's own themes, Lichess's, or a
+// pack the user imported from GitHub (docs/packs.md). Started first, from
+// document_start: a board or set from a pack is hidden until it's read, so
+// the page never shows another first.
 
-// Only the picked packs: the menu reads the others when it opens.
-async function loadPicked(): Promise<Pack[]> {
-  const ids = new Set(PART_KINDS.map(storedPick).filter(id => id !== LICHESS));
-  try {
-    const packs = await Promise.all([...ids].map(id => readPack(id)));
-    return packs.filter(pack => pack !== null);
-  } catch (error) {
-    console.error('[LichessReimagined] the imported packs could not be read', error);
-    return [];
-  }
+// Only the picked packs: the menu and the settings read the others when they open.
+async function readPicked(): Promise<Pack[]> {
+  const ids = new Set(PART_KINDS.map(storedPick).filter(isPackId));
+  const packs = await Promise.all([...ids].map(id => readPack(id)));
+  return packs.filter(pack => pack !== null);
 }
 
 // The page script may start before or after the packs are read: each side
@@ -28,7 +30,7 @@ async function loadPicked(): Promise<Pack[]> {
 // A pack imported again has the same id and new sounds: compare the pack itself.
 function createSoundSender(): (shown: Shown) => void {
   let files: SoundFiles = {};
-  let sent: Pack | null | undefined;
+  let sent: Look | undefined;
   onPageReady(() => postSounds(files));
   return ({ sound }) => {
     if (sound === sent) return;
@@ -39,39 +41,40 @@ function createSoundSender(): (shown: Shown) => void {
 }
 
 // IndexedDB answers in milliseconds, but nothing bounds it: past this, the
-// page shows Lichess's, and the pack once it's read.
+// page shows the part's default, and the pack once it's read.
 const LOADING_MAX_MS = 2000;
 
-/** Reads the packs and shows the picked ones; the library, for the menu. */
-export async function startPacks(): Promise<Library> {
+/** Shows the picks at once, and the picked packs once they're read. */
+export function startPacks(): Library {
   setLoading([
-    ...(storedPick('board') === LICHESS ? [] : ['board']),
-    ...(storedPick('piece') === LICHESS ? [] : ['pieces']),
+    ...(isPackId(storedPick('board')) ? ['board'] : []),
+    ...(isPackId(storedPick('piece')) ? ['pieces'] : []),
   ]);
   const timer = window.setTimeout(() => setLoading([]), LOADING_MAX_MS);
   const sendSounds = createSoundSender();
-  try {
-    return createLibrary({
-      packs: await loadPicked(),
-      readAll: readPacks,
-      save: writePack,
-      erase: deletePack,
-      show: shown => {
-        showPacks({ board: shown.board, pieces: shown.piece });
-        sendSounds(shown);
-      },
-    });
-  } finally {
+  const library = createLibrary({
+    readPicked,
+    readAll: readPacks,
+    save: writePack,
+    erase: deletePack,
+    show: shown => {
+      showLooks({ board: shown.board, pieces: shown.piece });
+      sendSounds(shown);
+    },
+  });
+  void library.ready.finally(() => {
     window.clearTimeout(timer);
     setLoading([]);
-  }
+  });
+  return library;
 }
+
+let started: Library | null = null;
+
+/** The page's one library, for the user menu and the settings' imports. */
+export const packLibrary = (): Library => (started ??= startPacks());
 
 export const packs: Feature = {
   name: 'packs',
-  start: () => {
-    startPacks()
-      .then(watchDasher)
-      .catch((error: unknown) => console.error('[LichessReimagined] packs failed', error));
-  },
+  start: () => watchDasher(packLibrary()),
 };

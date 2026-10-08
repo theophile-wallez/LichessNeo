@@ -1,7 +1,7 @@
 import { closestTo, onDomReady, queryOne } from '#shared/dom.ts';
 import { LICHESS, type Library } from './library.ts';
 import { PART_KINDS, type PartKind } from '#shared/packs/pack.ts';
-import { refreshListing } from './pack-list.ts';
+import { refreshListing } from './choices.ts';
 import { dressPanel, markPanel, panelSelector, viewOf, type View } from './panel.ts';
 
 // The user menu (#dasher_app) and its Board, Piece set and Sound panels.
@@ -20,7 +20,7 @@ const LICHESS_CHOICES: Readonly<Record<PartKind, string>> = {
   sound: `${panelSelector('sound')} .selector > button`,
 };
 
-// Boards and pieces only in 2D: packs are flat, so in 3D the panel is Lichess's.
+// Boards and pieces only in 2D: themes and packs are flat, so in 3D the panel is Lichess's.
 const isDressable = (panel: HTMLElement, kind: PartKind): boolean =>
   kind === 'sound' || panel.matches('.d2');
 
@@ -63,7 +63,7 @@ function onLichessPick(library: Library, target: EventTarget | null): void {
  * watched rather than polled, so a panel never shows without its tabs.
  */
 export function watchDasher(library: Library): void {
-  const states: PanelState[] = PART_KINDS.map(kind => ({ kind, open: false, view: LICHESS }));
+  const states: PanelState[] = PART_KINDS.map(kind => ({ kind, open: false, view: 'extension' }));
   document.addEventListener('click', event => onLichessPick(library, event.target));
   // New packs, or packs read at last, redraw our lists; a pick only moves the ring.
   let listed = library.packs();
