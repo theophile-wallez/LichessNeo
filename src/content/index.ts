@@ -34,6 +34,7 @@ import { coachTitles } from './pages/coach-titles.ts';
 import { swiss } from './pages/swiss.ts';
 import { forumLabels } from './pages/forum.ts';
 import { tv } from './pages/tv.ts';
+import { practiceIcons } from './pages/practice-icons.ts';
 import { gameMeta } from './game/game-meta.ts';
 import { avatars } from './ui/avatars.ts';
 import { powertip } from './ui/powertip.ts';
@@ -89,6 +90,7 @@ function main(): void {
     swiss,
     forumLabels,
     tv,
+    practiceIcons,
     gameMeta,
     avatars,
     powertip,

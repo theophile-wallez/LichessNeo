@@ -53,9 +53,21 @@
     transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   }
 
+  /* Lichess's glyph here (a play triangle, a checkmark) is painted as its Hugeicon's mask
+   * (theme/hugeicons): a step's number takes its place, unmasked, and the done step's check
+   * gets a whole 1em box, which the narrower glyph's would crop. */
   .ps__chapter .status:not(.done)::before {
     content: counter(cdc-step);
+    background: none;
     font-family: var(--cdc-font);
+    mask: none;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .ps__chapter .status.done::before {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
   }
 
   .ps__chapter:hover {
