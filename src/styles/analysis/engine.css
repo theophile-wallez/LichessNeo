@@ -200,8 +200,8 @@
     padding: 3px 10px 3px 30px;
     border-radius: 7px;
     background: var(--cdc-bg-raised)
-      url('chrome-extension://__MSG_@@extension_id__/img/icons/light-bulb.svg') 8px center / 16px
-      no-repeat;
+      url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01--f4fba3.svg') 8px center
+      / 16px no-repeat;
     box-shadow: inset 0 0 0 1px #ffffff1f;
     color: #fff;
     font-size: 15px;

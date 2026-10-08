@@ -144,7 +144,11 @@
   main.round .cdc-intro__swords {
     width: 15cqh;
     height: 15cqh;
-    background: var(--cdc-intro-swords) center / contain no-repeat;
+    background: var(
+        --cdc-intro-swords,
+        url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/swords--ffc689.svg')
+      )
+      center / contain no-repeat;
     filter: drop-shadow(0 0.4cqh 0.8cqh #00000073);
     animation: cdc-intro-clash var(--cdc-intro-ms) both !important;
   }

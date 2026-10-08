@@ -61,7 +61,8 @@ main.racer-home > h1.box__top::before {
   content: '';
   width: 18px;
   height: 18px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/graduation-cap.svg') center /
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mortarboard-01.svg') center /
     contain no-repeat;
 }
 

@@ -96,8 +96,14 @@
     grid-area: trophy;
     width: 40px;
     height: 40px;
-    background: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg') center /
-      contain no-repeat;
+    border-radius: 12px;
+    background:
+      url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion--ffc689.svg') center /
+        60% no-repeat,
+      color-mix(in srgb, var(--cdc-orange) 20%, transparent);
+    box-shadow:
+      inset 0 1px #ffffff1a,
+      0 0 0 1px color-mix(in srgb, var(--cdc-orange) 35%, transparent);
   }
 
   .cdc-sum-player__acc {

@@ -58,8 +58,8 @@
   width: 16px;
   height: 16px;
   margin-inline-end: 6px;
-  background: url('https://lichess1.org/assets/flair/img/people.busts-in-silhouette.webp') center /
-    contain no-repeat;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--a1a5ad.svg')
+    center / contain no-repeat;
   vertical-align: -3px;
 }
 

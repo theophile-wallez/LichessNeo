@@ -145,15 +145,16 @@ main.puzzle .puzzle__feedback .view_solution:not(.skip) .button::before {
   flex: none;
   width: 20px;
   height: 20px;
-  background: var(--cdc-hint-icon) center / contain no-repeat;
+  background: currentColor;
+  mask: var(--cdc-hint-icon) center / contain no-repeat;
 }
 
 main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:first-child {
-  --cdc-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/light-bulb.svg');
+  --cdc-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01.svg');
 }
 
 main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:nth-child(2) {
-  --cdc-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/question-mark.svg');
+  --cdc-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
 }
 
 /* The streak's "skip" comes lowercase from Lichess (its uppercase buttons used to hide it). */

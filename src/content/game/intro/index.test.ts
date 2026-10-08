@@ -75,8 +75,8 @@ describe('the game intro', () => {
     expect(main()?.style.getPropertyValue('--cdc-intro-board')).toMatch(
       /^url\("data:image\/svg\+xml,%3Csvg%20/,
     );
-    expect(main()?.style.getPropertyValue('--cdc-intro-swords')).toMatch(
-      /^url\('https:\/\/lichess1\.org\/assets\/flair\/img\/objects\.crossed-swords\.webp'\)$/,
+    expect(main()?.style.getPropertyValue('--cdc-intro-swords')).toBe(
+      "url('chrome-extension://id/img/hugeicons/swords--ffc689.svg')",
     );
     expect(sessionStorage.getItem(SessionKey.gameIntro(GAME_ID))).toBe('1');
     vi.advanceTimersByTime(INTRO_MS);

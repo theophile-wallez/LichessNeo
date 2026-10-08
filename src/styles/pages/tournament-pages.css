@@ -152,7 +152,7 @@ main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament
   }
 
   html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top,
-  main.page-small.box-pad.page > .box__top,
+  main.page-small.box-pad.page > .box__top:has(+ .body),
   main.arena-history > .page-menu__content > .box__top {
     container-type: scroll-state;
     position: sticky;
@@ -163,14 +163,15 @@ main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament
   }
 
   /* A plain page's title sits in its card's padding: pulled out to its edges, as on the
-   * about pages (static-pages.css). */
-  main.page-small.box-pad.page > .box__top {
+   * about pages (static-pages.css). Only a title over a body of text: the Racer's home has
+   * this card too, its title in a row with a link. */
+  main.page-small.box-pad.page > .box__top:has(+ .body) {
     margin: -4vh calc(-1 * var(---box-padding)) 0 !important;
     padding: 4vh var(---box-padding) !important;
   }
 
   html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top::after,
-  main.page-small.box-pad.page > .box__top::after,
+  main.page-small.box-pad.page > .box__top:has(+ .body)::after,
   main.arena-history > .page-menu__content > .box__top::after {
     content: '';
     position: absolute;
@@ -185,7 +186,7 @@ main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament
 
   @container scroll-state(stuck: top) {
     html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top::after,
-    main.page-small.box-pad.page > .box__top::after,
+    main.page-small.box-pad.page > .box__top:has(+ .body)::after,
     main.arena-history > .page-menu__content > .box__top::after {
       opacity: 1;
     }

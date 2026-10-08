@@ -7,6 +7,7 @@ import { setHtml } from '#shared/html.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
 import { freshGameId } from '#shared/round-init.ts';
 import { readStored, SessionKey, writeStored } from '#shared/storage.ts';
+import { extensionUrl } from '#content/platform/runtime.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { computerRatings } from '#content/game/ai-players.ts';
 import { introBoardImage, introMarkup } from './markup.ts';
@@ -23,8 +24,8 @@ export const INTRO_MS = 1900;
 // Our layout's: below, the board isn't in the grid the intro is placed in.
 const DESKTOP = '(min-width: 1020px)';
 
-// Lichess's own 3D emoji, by the "VS".
-const SWORDS_URL = 'https://lichess1.org/assets/flair/img/objects.crossed-swords.webp';
+// A Hugeicon by the "VS", in its color: styles/game/intro.css names it, so `pnpm icons` writes it.
+const SWORDS_PATH = 'img/hugeicons/swords--ffc689.svg';
 
 const ShownSchema = z.string().check(z.minLength(1));
 
@@ -46,7 +47,7 @@ export function prepareIntro(initData: string | null): void {
   pending = next;
   // Decoded before it shows, or its first frames would lack it.
   const swords = new Image();
-  swords.src = SWORDS_URL;
+  swords.src = extensionUrl(SWORDS_PATH);
   void swords
     .decode()
     .catch(() => undefined)
@@ -82,7 +83,7 @@ function play(next: Pending): boolean {
   );
   writeStored(SessionKey.gameIntro(next.gameId), '1', 'session');
   setStyleProperty(main, '--cdc-intro-board', next.board);
-  setStyleProperty(main, '--cdc-intro-swords', `url('${SWORDS_URL}')`);
+  setStyleProperty(main, '--cdc-intro-swords', `url('${extensionUrl(SWORDS_PATH)}')`);
   setStyleProperty(main, '--cdc-intro-ms', `${INTRO_MS}ms`);
   setData(main, 'cdcIntro', '');
   main.append(intro);

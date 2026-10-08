@@ -173,7 +173,7 @@ hold:
 | `public/`         | copied into each build: `_locales/`, `icons/`, `img/` (`icons`, `hugeicons`, `sidebar`, `coaches`), `licenses/` (the bundled files' licenses)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `scripts/`        | build, package, typecheck, source rules, version, icons, store image rendering                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `tests/e2e/`      | Playwright tests on lichess.org                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `tools/`          | Python generators, run by hand: `assets/fetch.py`, `sidebar-icons/recolor.py`, `example-pack/sounds.py`, `game-rating/`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `tools/`          | Python generators, run by hand: `sidebar-icons/recolor.py`, `example-pack/sounds.py`, `game-rating/`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `packs/`          | the example pack users can import (`docs/packs.md` describes the format)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `store/`          | the store images and their HTML templates                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `.github/`        | CI (`ci.yml`), releases (`release.yml`), Dependabot                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -194,9 +194,8 @@ hold:
 - _A tab bar that slides:_ an entry in `TAB_BARS`
   (`src/content/ui/tab-bars.ts`), then its look in CSS (see "Tabs slide").
 - _An image or a sound:_ never a remote URL, and never another chess
-  site's (see the product rules). Icons are named in the CSS (`img/icons/<name>.svg`)
-  and in `EMOJI`, then `tools/assets/fetch.py`; the sidebar's are our own
-  drawings, 96px WebP in `img/sidebar`. The build fails on a CSS extension
+  site's (see the product rules). Icons are Hugeicons (see "An icon"); the
+  sidebar's are our own drawings, 96px WebP in `img/sidebar`. The build fails on a CSS extension
   URL whose file is missing or not in `web_accessible_resources`. Boards, piece sets and
   sounds aren't bundled: they're Lichess's, or a pack's (`docs/packs.md`).
   A new sound a pack may have goes in `src/shared/sounds.ts`.
@@ -219,8 +218,8 @@ hold:
 - _No emoji:_ emoji don't look clean. A colored icon is a Hugeicon in a
   color of the palette on a tile tinted with it (a side menu's link sets
   `--cdc-nav-glyph` and `--cdc-nav-color`, `styles/pages/headings-menus.css`),
-  not a Fluent Emoji nor one of Lichess's flair images. Those still in place
-  are to be replaced as you go, like Lichess's glyphs.
+  never an emoji file nor one of Lichess's flair images (the players' own
+  flairs aside, theirs to pick).
 - _Icons as you go:_ don't wait to be asked. On a page you work on, a
   Lichess glyph that has no Hugeicon yet, or an icon drawn by hand in our
   code, gets its Hugeicons counterpart in the same change (a line in the
@@ -365,9 +364,7 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   in the manifest CSS.
 - **Icons.** The colored icons are Hugeicons on tinted tiles (see "No
   emoji"); the sidebar's are our own Dracula-colored drawings
-  (`img/sidebar`). The Fluent Emoji (MIT, named in `EMOJI`,
-  `tools/assets/fetch.py`) and flair images still used are on their way
-  out. Time-control icons are Lichess font glyphs in
+  (`img/sidebar`). Time-control icons are Lichess font glyphs in
   `[data-icon]::before` (`\e059` ultrabullet, `\e032` bullet, `\e008` blitz,
   `\e002` rapid, `\e00a` classical, `\e019` correspondence), kept as they are
   and colored per mode in `styles/theme/game-modes.css`: set `--cdc-mode-color`

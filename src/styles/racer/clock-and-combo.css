@@ -34,7 +34,8 @@
   content: '';
   width: 24px;
   height: 24px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/stopwatch.svg') center /
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/stop-watch.svg') center /
     contain no-repeat;
 }
 
@@ -198,7 +199,7 @@
   box-shadow: 0 0 0 1px #ffffff40;
 }
 
-/* "Your rank: 1/2", on a gold pill with a trophy. */
+/* "Your rank: 1/2", on a gold pill with a trophy, dark on the gold (white can't be read there). */
 .racer .race__post__rank {
   display: inline-flex;
   align-items: center;
@@ -210,17 +211,17 @@
   box-shadow:
     inset 0 1px 0 #ffffff66,
     0 1px 4px #0000005c;
-  color: #fff;
+  color: var(--cdc-grey-900);
   font-size: 15px;
   font-weight: 800;
-  text-shadow: 0 1px 1px #0000004d;
 }
 
 .racer .race__post__rank::before {
   content: '';
   width: 22px;
   height: 22px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg') center / contain
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion.svg') center / contain
     no-repeat;
 }
 
