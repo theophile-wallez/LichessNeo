@@ -101,6 +101,7 @@ h3 {
   a {
   /* The open link's variables also sit on <main> (menu-titles.css): not inherited here. */
   --cdc-nav-glyph: initial;
+  --cdc-nav-icon: initial;
   --cdc-nav-color: initial;
   --cdc-title-icon: initial;
   position: relative;
