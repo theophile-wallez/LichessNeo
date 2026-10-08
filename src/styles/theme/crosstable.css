@@ -110,9 +110,10 @@
     transition: filter 0.15s;
   }
 
+  /* Dark on the bright green: white is hard to read there. */
   main:is(.round, .analyse) .crosstable povs a.win {
     background: var(--cdc-good);
-    color: #fff !important;
+    color: var(--cdc-grey-900) !important;
   }
 
   main:is(.round, .analyse) .crosstable povs a:hover {

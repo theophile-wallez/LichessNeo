@@ -283,6 +283,11 @@ features and its name: free analysis, open data, no ads.
   `main.page-menu[data-cdc-menu~=…][data-cdc-nav-active$=…]` selector too).
 - **Cards stay dark:** never fill a card's background with green or red;
   color a badge, a tile or the title instead (buttons aside).
+- **Dark on the bright hues:** never white text or a white icon on a
+  bright hue of the palette (green, yellow, cyan, orange, pink): it can't be
+  read. Write it in `--cdc-grey-900` (a Hugeicon as a file:
+  `tick-02--0c0c0d.svg`), or put the hue on the icon over a tile tinted with
+  it instead.
 - **Hover feels the same everywhere:** a card lifts and its icon tile hops,
   `rotate(-6deg) scale(1.08)` on cards, `translateY(-2px) rotate(-8deg)
 scale(1.08)` on menu links, both

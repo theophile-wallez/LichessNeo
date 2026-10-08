@@ -266,9 +266,10 @@ main.swiss .swiss__standing .pairings div > * {
   }
 }
 
+/* Dark on the bright green: white is hard to read there. */
 main.swiss .swiss__standing .pairings .win {
   background: var(--cdc-good) !important;
-  color: #fff !important;
+  color: var(--cdc-grey-900) !important;
 }
 
 main.swiss .swiss__standing .pairings .loss {

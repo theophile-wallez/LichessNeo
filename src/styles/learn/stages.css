@@ -124,7 +124,7 @@ html[dir='rtl'] .learn-stages .stage {
   border: 2px solid var(--cdc-bg-panel);
   border-radius: 50%;
   background: var(--cdc-good)
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02--ffffff.svg') center / 14px
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02--0c0c0d.svg') center / 14px
     no-repeat;
 }
 
