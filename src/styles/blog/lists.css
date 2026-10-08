@@ -206,7 +206,8 @@
   font-size: 16px;
 }
 
-/* The side menu: an icon tile per link (tiles in pages/headings-menus.css). */
+/* The side menu: an icon tile per link (tiles in pages/headings-menus.css). Signed in, it
+ * also has the friends' posts and the user's own blog (`/@/<user>/blog`), its drafts there. */
 .subnav[data-cdc-nav~='blog'] a[href$='/blog/community'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
   --cdc-nav-color: var(--cdc-accent);
@@ -225,6 +226,21 @@
 .subnav[data-cdc-nav~='blog'] a[href$='/@/lichess/blog'] {
   --cdc-nav-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
   --cdc-nav-color: var(--cdc-grey-300);
+}
+
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/friends'] {
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+  --cdc-nav-color: var(--cdc-green);
+}
+
+.subnav[data-cdc-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pen-tool-02.svg');
+  --cdc-nav-color: var(--cdc-purple);
+}
+
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/drafts'] {
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit.svg');
+  --cdc-nav-color: var(--cdc-orange);
 }
 
 .subnav[data-cdc-nav~='blog'] a[href$='/blog/liked'] {
