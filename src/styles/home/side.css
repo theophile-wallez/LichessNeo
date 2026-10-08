@@ -63,17 +63,64 @@
     padding: 10px 0 !important;
   }
 
+  /* Each update's icon: Lichess picks a flair (an emoji) per update, drawn here as the closest
+   * Hugeicon in a palette color, a news one for any other. */
+  main.lobby .daily-feed__update__marker {
+    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
+    --cdc-feed-color: var(--cdc-accent);
+  }
+
+  main.lobby .daily-feed__update__marker[src*='/activity.lichess.webp'] {
+    --cdc-feed-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+    --cdc-feed-color: var(--cdc-grey-300);
+  }
+
+  main.lobby .daily-feed__update__marker[src*='/activity.party-popper.webp'] {
+    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg');
+    --cdc-feed-color: var(--cdc-pink);
+  }
+
+  main.lobby .daily-feed__update__marker[src*='/objects.megaphone.webp'] {
+    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--ffc689.svg');
+    --cdc-feed-color: var(--cdc-orange);
+  }
+
+  main.lobby .daily-feed__update__marker[src*='/objects.studio-microphone.webp'] {
+    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--caa9fa.svg');
+    --cdc-feed-color: var(--cdc-purple);
+  }
+
+  main.lobby .daily-feed__update__marker[src*='/objects.hammer-and-wrench.webp'] {
+    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--a2edfd.svg');
+    --cdc-feed-color: var(--cdc-cyan);
+  }
+
+  main.lobby .daily-feed__update__marker[src*='/objects.camera.webp'] {
+    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--a2edfd.svg');
+    --cdc-feed-color: var(--cdc-cyan);
+  }
+
+  main.lobby .daily-feed__update__marker[src*='/activity.puzzle-piece.webp'] {
+    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--73fb95.svg');
+    --cdc-feed-color: var(--cdc-green);
+  }
+
   main.lobby .daily-feed__update__marker {
     position: relative;
     box-sizing: border-box;
     width: 36px !important;
     height: 36px !important;
     margin: 0 !important;
-    padding: 7px !important;
+    /* As wide as the box: the flair image Lichess picked has no room left, the Hugeicon shows. */
+    padding: 18px !important;
     border: none !important;
     border-radius: 10px !important;
-    background: var(--cdc-bg-raised) !important;
-    box-shadow: 0 0 0 4px var(--cdc-bg-panel);
+    background:
+      var(--cdc-feed-icon) center / 20px no-repeat,
+      color-mix(in srgb, var(--cdc-feed-color) 20%, var(--cdc-bg-panel)) !important;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--cdc-feed-color) 35%, transparent),
+      0 0 0 4px var(--cdc-bg-panel);
     /* Lichess lifts its ringed marker 5px, which set it above its date's middle. */
     transform: none !important;
   }
