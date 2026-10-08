@@ -8,46 +8,61 @@
 /* Each with its page's tile, the one its title shows. */
 
 .tour__links a[href$='/tournament/calendar'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 .tour__links a[href$='/tournament/history'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/books.svg');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-02.svg');
+  --cdc-nav-color: var(--cdc-orange);
 }
 
 .tour__links a[href$='/tournament/help'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/question-mark.svg');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
   --cdc-nav-color: var(--cdc-accent);
 }
 
 .tour__links a[href$='/page/leagues-and-battles'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sword-01.svg');
   --cdc-nav-color: var(--cdc-red);
 }
 
 main.tour-home .tour__links a {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
   padding-inline-start: 8px;
 }
 
+/* A tile and its Hugeicon, as the side menus' (pages/headings-menus.css). */
 main.tour-home .tour__links a::before {
   content: '';
   flex: none;
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  background:
-    var(--cdc-nav-icon, none) center / 20px 20px no-repeat,
-    color-mix(in srgb, var(--cdc-nav-color, #fff) 16%, transparent);
+  background: color-mix(in srgb, var(--cdc-nav-color, #fff) 16%, transparent);
   box-shadow: inset 0 1px #ffffff14;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-main.tour-home .tour__links a:hover::before {
+main.tour-home .tour__links a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 12px;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  background: color-mix(in srgb, var(--cdc-nav-color, #fff) 80%, #fff);
+  mask: var(--cdc-nav-glyph) center / contain no-repeat;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+main.tour-home .tour__links a:hover::before,
+main.tour-home .tour__links a:hover::after {
   transform: translateY(-2px) rotate(-8deg) scale(1.08);
 }
 
@@ -57,62 +72,72 @@ main.tour-home .tour__links a:hover::before {
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history'],
 main.arena-history[data-cdc-nav-active$='/tournament/history'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.gem-stone.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/diamond.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/diamond--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/marathon'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/marathon'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/people.man-running.webp');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/running-shoes.svg');
+  --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/running-shoes--caa9fa.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/shield'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/shield'] .page-menu__content {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/shield.svg');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
   --cdc-nav-color: var(--cdc-grey-300);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02--a1a5ad.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/yearly'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/yearly'] .page-menu__content {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crown.svg');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/monthly'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/monthly'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.tear-off-calendar.webp');
-  --cdc-nav-color: var(--cdc-red-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-02.svg');
+  --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-02--ff7777.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/weekend'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/weekend'] .page-menu__content {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/sports-medal.svg');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/weekly'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/weekly'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.calendar.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/daily'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/daily'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/nature.sun.webp');
-  --cdc-nav-color: var(--cdc-cyan-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sun-03.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sun-03--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/eastern'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/eastern'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/travel-places.sunrise.webp');
-  --cdc-nav-color: var(--cdc-cyan-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sunrise.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sunrise--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/hourly'],
 main.arena-history[data-cdc-nav-active$='/tournament/history/hourly'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.stopwatch.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--7e88db.svg');
 }
 
 /* ---- Pinned titles --- */
@@ -182,18 +207,18 @@ main.arena-history[data-cdc-nav-active$='/tournament/history/hourly'] .page-menu
 /* The tile of the link that leads there: the calendar's, the FAQ's and the leagues' from the
  * home's links, the history's from its menu. */
 html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--a2edfd.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 html[data-cdc-has~='leagues-page'] main.page > h1.box__top {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sword-01--ff7777.svg');
   --cdc-nav-color: var(--cdc-red);
 }
 
 /* The FAQ's: after Lichess's link back to the tournaments, which its title starts with. */
 main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/question-mark.svg');
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle--7e88db.svg');
   --cdc-nav-color: var(--cdc-accent);
   display: inline-flex;
   align-items: center;
@@ -219,7 +244,7 @@ main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child::afte
   height: 52px;
   border-radius: 13px;
   background:
-    var(--cdc-nav-icon, none) center / 36px 36px no-repeat,
+    var(--cdc-title-icon, none) center / 30px 30px no-repeat,
     color-mix(in srgb, var(--cdc-nav-color, #fff) 24%, transparent);
   box-shadow:
     inset 0 1px #ffffff26,

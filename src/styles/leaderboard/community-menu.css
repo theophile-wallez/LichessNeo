@@ -3,33 +3,33 @@
 /* The side menu these pages share with the rating stats, bots and FIDE players: each link's
  * icon and color (the tiles are in pages/). */
 .subnav a[href$='/player'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');
+  --cdc-nav-color: var(--cdc-orange);
 }
 
 .subnav a[href*='/stat/rating/distribution'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/chart-increasing.svg');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 .subnav a[href$='/tournament/leaderboard'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01.svg');
+  --cdc-nav-color: var(--cdc-orange);
 }
 
 .subnav a[href$='/tournament/shields'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/shield.svg');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
   --cdc-nav-color: var(--cdc-accent);
 }
 
 .subnav a[href$='/player/bots'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/robot.svg');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
+  --cdc-nav-color: var(--cdc-purple);
 }
 
 .subnav[data-cdc-nav~='bots'] a[href*='/fide'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/globe.svg');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 /* Desktop only (Lichess's fixed top bar would cover them): the menu and the leaderboard's title

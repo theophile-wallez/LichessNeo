@@ -213,9 +213,14 @@ hold:
   `pnpm icons`, which writes the files the CSS names. Lichess's interface
   glyphs are mapped once, for every `[data-icon]`, in
   `styles/theme/hugeicons/`; a glyph our CSS draws keeps its box,
-  see-through, with the icon painted in it (as there). Colored, playful
-  icons stay Fluent Emoji; the time controls', the variants' and Lichess's
-  own marks (logo, Storm, Berserk, studies) stay its glyphs.
+  see-through, with the icon painted in it (as there). The time controls',
+  the variants' and Lichess's own marks (logo, Storm, Berserk, studies) stay
+  its glyphs.
+- _No emoji:_ emoji don't look clean. A colored icon is a Hugeicon in a
+  color of the palette on a tile tinted with it (a side menu's link sets
+  `--cdc-nav-glyph` and `--cdc-nav-color`, `styles/pages/headings-menus.css`),
+  not a Fluent Emoji nor one of Lichess's flair images. Those still in place
+  are to be replaced as you go, like Lichess's glyphs.
 - _Icons as you go:_ don't wait to be asked. On a page you work on, a
   Lichess glyph that has no Hugeicon yet, or an icon drawn by hand in our
   code, gets its Hugeicons counterpart in the same change (a line in the
@@ -258,21 +263,22 @@ features and its name: free analysis, open data, no ads.
 - **Desktop first:** our layout from 1020px; below, Lichess's mobile layout
   with our theme, board and pieces.
 - **Playful pages:** a color per section, icons on gradient tiles, cards,
-  pills, illustrations (pieces in the board's set, Fluent and Lichess's 3D
-  emoji, little boards).
+  pills, illustrations (pieces in the board's set, our sidebar's drawings,
+  little boards), never emoji (see "No emoji").
   Practice, simuls and the forum set the tone. Every side menu (`.subnav`)
   gets an icon per link on a tile in its own color: add the menu to the
   shared rule in `styles/pages/headings-menus.css`, then set
-  `--cdc-nav-icon` and `--cdc-nav-color` per link. Every item of a side
-  menu, a link to a page, has at least an icon: first the illustration that
-  page already has elsewhere (its main sidebar picture, its title's, another
-  link's), else a Hugeicons icon (see "An icon" in the recipes).
+  `--cdc-nav-glyph` (a Hugeicon) and `--cdc-nav-color` per link. Every
+  item of a side menu, a link to a page, has its icon: the Hugeicon that
+  page already has elsewhere if it has one (another menu's link, its
+  title's), else the closest one Hugeicons has.
 - **One picture per page:** a page the sidebar lists is drawn with its
   sidebar picture (`img/sidebar/<page>.webp`, as `styles/sidebar/nav.css`
-  names them) wherever it stands for that page: its title, a menu's link, the
-  profile's activity and rating cards, a button that leads there. Never a
-  Fluent emoji or a Lichess glyph in its place. A page the sidebar doesn't
-  list takes its side menu link's icon in its title.
+  names them) wherever it stands for that page: its title, the profile's
+  activity and rating cards, a button that leads there. Never an emoji or a
+  Lichess glyph in its place. A side menu's links are the exception: all
+  Hugeicons, alike (see "Playful pages"). A page the sidebar doesn't list
+  takes its side menu link's icon in its title.
 - **Cards stay dark:** never fill a card's background with green or red;
   color a badge, a tile or the title instead (buttons aside).
 - **Hover feels the same everywhere:** a card lifts and its icon tile hops,
@@ -350,9 +356,11 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   `content/bootstrap/fonts.ts` appends `@font-face` rules pointing them (and
   `CDC Sans`) at the system font; they must come after Lichess's, hence not
   in the manifest CSS.
-- **Icons.** The colored icons are Microsoft's Fluent Emoji (MIT), each
-  named in `EMOJI` (`tools/assets/fetch.py`), except the sidebar's, our own
-  Dracula-colored drawings (`img/sidebar`). Time-control icons are Lichess font glyphs in
+- **Icons.** The colored icons are Hugeicons on tinted tiles (see "No
+  emoji"); the sidebar's are our own Dracula-colored drawings
+  (`img/sidebar`). The Fluent Emoji (MIT, named in `EMOJI`,
+  `tools/assets/fetch.py`) and flair images still used are on their way
+  out. Time-control icons are Lichess font glyphs in
   `[data-icon]::before` (`\e059` ultrabullet, `\e032` bullet, `\e008` blitz,
   `\e002` rapid, `\e00a` classical, `\e019` correspondence), kept as they are
   and colored per mode in `styles/theme/game-modes.css`: set `--cdc-mode-color`
@@ -360,8 +368,8 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   `content: var(--cdc-mode-rapid)` (and `bullet`, `blitz`, `classical`) in
   `font-family: lichess`. The interface's monochrome icons are Hugeicons'
   (see the recipe "An icon"). Never copy another site's icons or drawings:
-  use Hugeicons, Lichess's glyphs, Fluent Emoji, Lichess's flair images, or
-  draw your own (illustrations, not icons Hugeicons has).
+  use Hugeicons, Lichess's glyphs, or draw your own (illustrations, not
+  icons Hugeicons has).
 - **Practice lessons are analysis pages.** `/practice/…` is `main.analyse`
   with `.practice__side` and either `.gamebook` (a lesson) or
   `.practice-box` (a drill). "Practice with computer" adds `.practice-box`

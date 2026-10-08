@@ -75,25 +75,51 @@
     var(--cdc-btn-grey-shadow) !important;
 }
 
-/* The side menu: an icon tile per link (tiles in pages/headings-menus.css). */
+/* The side menu: a Hugeicon per link on a tile of its color (pages/headings-menus.css).
+ * Signed in, it also lists the user's studies, those they're in, public, private and liked. */
 .subnav[data-cdc-nav~='studies'] a[href*='/study/all'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
   --cdc-nav-color: var(--cdc-accent);
 }
 
+.subnav[data-cdc-nav~='studies'] a[href*='/study/mine/'] {
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+}
+
+.subnav[data-cdc-nav~='studies'] a[href*='/study/member/'] {
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+}
+
+.subnav[data-cdc-nav~='studies'] a[href*='/study/public/'] {
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
+  --cdc-nav-color: var(--cdc-green);
+}
+
+.subnav[data-cdc-nav~='studies'] a[href*='/study/private/'] {
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
+  --cdc-nav-color: var(--cdc-red);
+}
+
+.subnav[data-cdc-nav~='studies'] a[href*='/study/likes/'] {
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+  --cdc-nav-color: var(--cdc-pink);
+}
+
 .subnav[data-cdc-nav~='studies'] a[href$='/study/topic'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.label.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 .subnav[data-cdc-nav~='studies'] a[href$='/study/staff-picks'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/nature.glowing-star.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star.svg');
+  --cdc-nav-color: var(--cdc-orange);
 }
 
 .subnav[data-cdc-nav~='studies'] a[href*='/blog/'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/light-bulb.svg');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
+  --cdc-nav-color: var(--cdc-purple);
 }
 
 /* Only the studies scroll: the menu and toolbar stay put.

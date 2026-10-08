@@ -51,28 +51,28 @@ html[dir='rtl'] main.team-list .box__top .search input {
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css); signed in, it
  * has the user's teams, those they lead, the requests and a new team. */
 .subnav[data-cdc-nav~='teams'] a[href$='/team/all'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/teams.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
   --cdc-nav-color: var(--cdc-accent);
 }
 
 .subnav[data-cdc-nav~='teams'] a[href$='/team/me'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/people.busts-in-silhouette.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 .subnav[data-cdc-nav~='teams'] a[href$='/team/leader'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crown.svg');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
+  --cdc-nav-color: var(--cdc-orange);
 }
 
 .subnav[data-cdc-nav~='teams'] a[href$='/team/requests'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.inbox-tray.webp');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/inbox.svg');
+  --cdc-nav-color: var(--cdc-purple);
 }
 
 .subnav[data-cdc-nav~='teams'] a[href$='/team/new'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/symbols.plus.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-circle.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 /* Desktop only (Lichess's top bar holds the top edge below 1020px): the menu and title bar stay

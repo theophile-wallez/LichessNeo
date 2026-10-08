@@ -125,7 +125,7 @@
 }
 
 /* Titles' icons: the videos' as in the sidebar's Videos entry; the variants' overview has
- * none to borrow, so a die. */
+ * none to borrow, so a die's Hugeicon on a tile. */
 main.page-menu.video > .page-menu__content > .box__top > h1,
 main.page-menu > .page-menu__content.variants > h1.box__top {
   display: flex;
@@ -145,7 +145,16 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
 }
 
 main.page-menu > .page-menu__content.variants > h1.box__top::before {
-  background-image: url('https://lichess1.org/assets/flair/img/activity.game-die.webp');
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  background:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dice--caa9fa.svg') center / 30px
+      30px no-repeat,
+    color-mix(in srgb, var(--cdc-purple) 24%, transparent);
+  box-shadow:
+    inset 0 1px #ffffff26,
+    0 0 0 1px color-mix(in srgb, var(--cdc-purple) 40%, transparent);
 }
 
 /* Lichess rules each section off in its gold: a quiet line instead. */
@@ -186,23 +195,23 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
 /* Streamers' side menu: an icon tile per link (tiles in headings-menus.css). The streamer
  * kit's link goes to the about page. */
 .subnav[data-cdc-nav~='streamers'] a[href$='/streamer'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/streamers.webp');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
+  --cdc-nav-color: var(--cdc-purple);
 }
 
 .subnav[data-cdc-nav~='streamers'] a[href$='/streamer/edit'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/video-camera.svg');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
+  --cdc-nav-color: var(--cdc-purple);
 }
 
 .subnav[data-cdc-nav~='streamers'] a[href*='/blog/'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/people.people-hugging.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+  --cdc-nav-color: var(--cdc-orange);
 }
 
 .subnav[data-cdc-nav~='streamers'] a[href$='/about'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.package.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 /* Streamers: Lichess sizes the name from the window's width, so on a narrow desktop it ran

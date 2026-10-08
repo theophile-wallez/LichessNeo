@@ -11,8 +11,9 @@ main.account[data-cdc-settings] > .page-menu__content:not(.cdc-settings) {
 /* Its link's tile in the menu (pages/headings-menus.css), and its title's. */
 .subnav[data-cdc-nav~='account'] a.cdc-settings-link,
 main.account .cdc-settings {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.control-knobs.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02--7e88db.svg');
 }
 
 .cdc-settings__intro {
@@ -29,7 +30,7 @@ main.account .cdc-settings {
 }
 
 .cdc-setting {
-  --cdc-setting-color: var(--cdc-cyan-darker);
+  --cdc-setting-color: var(--cdc-cyan);
 
   display: flex;
   align-items: center;
@@ -46,19 +47,30 @@ main.account .cdc-settings {
 }
 
 .cdc-setting[data-cdc-setting='uiSounds'] {
-  --cdc-setting-icon: url('https://lichess1.org/assets/flair/img/objects.speaker-high-volume.webp');
+  --cdc-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
 }
 
 .cdc-setting__icon {
+  position: relative;
   flex: none;
   width: 46px;
   height: 46px;
   border-radius: 12px;
-  background:
-    var(--cdc-setting-icon, none) center / 30px 30px no-repeat,
-    color-mix(in srgb, var(--cdc-setting-color) 20%, transparent);
+  background: color-mix(in srgb, var(--cdc-setting-color) 20%, transparent);
   box-shadow: inset 0 1px #ffffff1a;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* Its Hugeicon, in the tile's color. */
+.cdc-setting__icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 28px;
+  height: 28px;
+  background: color-mix(in srgb, var(--cdc-setting-color) 80%, #fff);
+  mask: var(--cdc-setting-glyph) center / contain no-repeat;
 }
 
 .cdc-setting:hover .cdc-setting__icon {
@@ -149,7 +161,7 @@ main.account .cdc-settings {
 
 .cdc-packs {
   --cdc-setting-color: var(--cdc-accent);
-  --cdc-setting-icon: url('https://lichess1.org/assets/flair/img/objects.package.webp');
+  --cdc-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
 
   display: flex;
   flex-direction: column;

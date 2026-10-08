@@ -6,99 +6,114 @@
 
 .subnav[data-cdc-nav~='about'] a[href$='/about'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/about'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/symbols.information.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle--7e88db.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/feed'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/feed'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.newspaper.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/faq'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/faq'] .page-menu__content {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/question-mark.svg');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle--7e88db.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/contact'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/contact'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.envelope.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/terms-of-service'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/terms-of-service']
   .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.scroll.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-02.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-02--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/privacy'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/privacy'] .page-menu__content {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/locked.svg');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/verify-title'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/verify-title'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.identification-card.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/checkmark-badge-01.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/checkmark-badge-01--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/source'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/source'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.laptop.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/source-code.svg');
   --cdc-nav-color: var(--cdc-grey-300);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/source-code--a1a5ad.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/help/contribute'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/help/contribute']
   .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/people.handshake.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/changelog'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/changelog'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.spiral-notepad.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/note-01.svg');
   --cdc-nav-color: var(--cdc-grey-300);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/note-01--a1a5ad.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/thanks'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/thanks'] .page-menu__content {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/red-heart.svg');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
   --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff7777.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/developers'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/developers'] .page-menu__content {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/globe.svg');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/code.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/code--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href*='database.lichess.org'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.file-cabinet.webp');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/database.svg');
+  --cdc-nav-color: var(--cdc-purple);
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/api'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/api'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.gear.webp');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/api.svg');
+  --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/api--caa9fa.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/lag'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/lag'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/nature.high-voltage.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/flash.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/flash--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='about'] a[href$='/ads'],
 main.page-menu[data-cdc-menu~='about'][data-cdc-nav-active$='/ads'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/symbols.no-entry.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/unavailable.svg');
   --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/unavailable--ff7777.svg');
 }
 
 /* The open page's title, after its link's tile, as in the settings (headings-menus.css). */
@@ -118,7 +133,7 @@ main.page-menu[data-cdc-menu~='about']
   height: 52px;
   border-radius: 13px;
   background:
-    var(--cdc-nav-icon, none) center / 36px 36px no-repeat,
+    var(--cdc-title-icon, none) center / 30px 30px no-repeat,
     color-mix(in srgb, var(--cdc-nav-color, #fff) 24%, transparent);
   box-shadow:
     inset 0 1px #ffffff26,

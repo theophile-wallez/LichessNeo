@@ -82,9 +82,10 @@ h3 {
   display: none !important;
 }
 
-/* Menus with an icon tile per link; each page sets `--cdc-nav-icon` and `--cdc-nav-color`.
- * content/layout/marks.ts tags the menu (`data-cdc-nav`), as a `:has()` here slowed every
- * board move. */
+/* Menus with an icon tile per link; each page sets `--cdc-nav-color` and either
+ * `--cdc-nav-glyph`, a Hugeicon painted in that color over the tile (`::after`), or
+ * `--cdc-nav-icon`, a picture. content/layout/marks.ts tags the menu (`data-cdc-nav`), as a
+ * `:has()` here slowed every board move. */
 .subnav:is(
     [data-cdc-nav~='bots'],
     [data-cdc-nav~='broadcast'],
@@ -98,6 +99,7 @@ h3 {
     [data-cdc-nav~='arena-history']
   )
   a {
+  position: relative;
   display: flex !important;
   align-items: center;
   gap: 12px;
@@ -122,6 +124,9 @@ h3 {
   width: 34px;
   height: 34px;
   border-radius: 9px;
+  /* A link with Lichess's glyph (`[data-icon]`) gets its Hugeicon's mask (theme/hugeicons). */
+  mask: none;
+  -webkit-text-fill-color: initial;
   background:
     var(--cdc-nav-icon, none) center / 24px 24px no-repeat,
     color-mix(in srgb, var(--cdc-nav-color, #fff) 16%, transparent);
@@ -144,7 +149,49 @@ h3 {
     [data-cdc-nav~='blog'],
     [data-cdc-nav~='arena-history']
   )
-  a:hover::before {
+  a::after {
+  content: '' !important;
+  display: block !important;
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 13px;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  border: none;
+  background: color-mix(in srgb, var(--cdc-nav-color, #fff) 80%, #fff);
+  /* Without a glyph, a mask that hides it all. */
+  mask: var(--cdc-nav-glyph, linear-gradient(#0000, #0000)) center / contain no-repeat;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.subnav:is(
+    [data-cdc-nav~='bots'],
+    [data-cdc-nav~='broadcast'],
+    [data-cdc-nav~='puzzles'],
+    [data-cdc-nav~='account'],
+    [data-cdc-nav~='about'],
+    [data-cdc-nav~='streamers'],
+    [data-cdc-nav~='studies'],
+    [data-cdc-nav~='teams'],
+    [data-cdc-nav~='blog'],
+    [data-cdc-nav~='arena-history']
+  )
+  a:hover::before,
+.subnav:is(
+    [data-cdc-nav~='bots'],
+    [data-cdc-nav~='broadcast'],
+    [data-cdc-nav~='puzzles'],
+    [data-cdc-nav~='account'],
+    [data-cdc-nav~='about'],
+    [data-cdc-nav~='streamers'],
+    [data-cdc-nav~='studies'],
+    [data-cdc-nav~='teams'],
+    [data-cdc-nav~='blog'],
+    [data-cdc-nav~='arena-history']
+  )
+  a:hover::after {
   transform: translateY(-2px) rotate(-8deg) scale(1.08);
 }
 
@@ -167,109 +214,126 @@ h3 {
     0 0 0 1px color-mix(in srgb, var(--cdc-nav-color, #fff) 45%, transparent);
 }
 
-/* Settings links have no color icon to borrow: Lichess's 3D emoji instead. The variables
- * also go on the open page, for its title's tile. */
+/* Settings links: the variables also go on the open page, for its title's tile, which takes
+ * the Hugeicon as a file in its color (`--cdc-title-icon`): a tile can't hold a mask. */
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/profile'],
 main.account[data-cdc-nav-active$='/account/profile'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.memo.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/display'],
 main.account[data-cdc-nav-active$='/preferences/display'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/activity.artist-palette.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/chess-clock'],
 main.account[data-cdc-nav-active$='/preferences/chess-clock'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.stopwatch.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/game-behavior'],
 main.account[data-cdc-nav-active$='/preferences/game-behavior'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/activity.joystick.webp');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03.svg');
+  --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03--caa9fa.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/privacy'],
 main.account[data-cdc-nav-active$='/preferences/privacy'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/smileys.see-no-evil-monkey.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/notification'],
 main.account[data-cdc-nav-active$='/preferences/notification'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.bell.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/kid'],
 main.account[data-cdc-nav-active$='/account/kid'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.teddy-bear.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01.svg');
   --cdc-nav-color: var(--cdc-pink);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01--ff94d1.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/username'],
 main.account[data-cdc-nav-active$='/account/username'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/symbols.name-badge.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account.svg');
   --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account--ff7777.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/coach/edit'],
 main.account[data-cdc-nav-active$='/coach/edit'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/people.teacher.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/passwd'],
 main.account[data-cdc-nav-active$='/account/passwd'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.key.webp');
-  --cdc-nav-color: var(--cdc-orange-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01.svg');
+  --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/email'],
 main.account[data-cdc-nav-active$='/account/email'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.incoming-envelope.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/twofactor'],
 main.account[data-cdc-nav-active$='/account/twofactor'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.mobile-phone-with-arrow.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/oauth/token'],
 main.account[data-cdc-nav-active$='/account/oauth/token'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/activity.admission-tickets.webp');
-  --cdc-nav-color: var(--cdc-purple-dark);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01.svg');
+  --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01--caa9fa.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/security'],
 main.account[data-cdc-nav-active$='/account/security'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.shield.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01--7e88db.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/preferences/network'],
 main.account[data-cdc-nav-active$='/preferences/network'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.satellite-antenna.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01.svg');
+  --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/dgt'],
 main.account[data-cdc-nav-active$='/dgt'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/activity.chess.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
   --cdc-nav-color: var(--cdc-grey-300);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01--a1a5ad.svg');
 }
 
 .subnav[data-cdc-nav~='account'] a[href$='/account/close'],
 main.account[data-cdc-nav-active$='/account/close'] .page-menu__content {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.door.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01.svg');
   --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01--ff7777.svg');
 }
 
 /* A settings page's title: white rather than Lichess's green, after its link's tile. */
@@ -292,7 +356,7 @@ main.account:has(.subnav a.active) .page-menu__content h1:is(.box__top, .box__to
   margin: 0 !important;
   border-radius: 13px;
   background:
-    var(--cdc-nav-icon, none) center / 36px 36px no-repeat,
+    var(--cdc-title-icon, none) center / 30px 30px no-repeat,
     color-mix(in srgb, var(--cdc-nav-color, #fff) 24%, transparent);
   box-shadow:
     inset 0 1px #ffffff26,

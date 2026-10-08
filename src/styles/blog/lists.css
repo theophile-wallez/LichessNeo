@@ -208,18 +208,18 @@
 
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css). */
 .subnav[data-cdc-nav~='blog'] a[href$='/blog/community'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
   --cdc-nav-color: var(--cdc-accent);
 }
 
 .subnav[data-cdc-nav~='blog'] a[href$='/blog/monthly'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 .subnav[data-cdc-nav~='blog'] a[href$='/blog/topic'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.label.webp');
-  --cdc-nav-color: var(--cdc-cyan-darker);
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
+  --cdc-nav-color: var(--cdc-cyan);
 }
 
 .subnav[data-cdc-nav~='blog'] a[href$='/@/lichess/blog'] {
@@ -228,7 +228,7 @@
 }
 
 .subnav[data-cdc-nav~='blog'] a[href$='/blog/liked'] {
-  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/red-heart.svg');
+  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
   --cdc-nav-color: var(--cdc-red);
 }
 
