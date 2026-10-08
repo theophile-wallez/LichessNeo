@@ -27,16 +27,6 @@
   font-weight: 800 !important;
 }
 
-/* The trophy icon, as on the broadcasts. */
-.community__leaders > h2::before {
-  content: '';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg') center / contain
-    no-repeat;
-}
-
 /* ---- Online --- */
 
 .community__online {

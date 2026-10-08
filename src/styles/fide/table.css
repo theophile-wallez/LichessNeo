@@ -30,21 +30,6 @@
   letter-spacing: normal !important;
 }
 
-/* A globe: players of every federation, and the federations themselves. */
-:is(.fide-players, .fide-federations) > .box__top > h1::before {
-  content: '';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/globe.svg') center / contain
-    no-repeat;
-}
-
-.fide-federations > .box__top > h1::before {
-  width: 40px;
-  height: 40px;
-}
-
 .fide-players__search-form {
   display: flex;
 }

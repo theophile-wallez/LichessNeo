@@ -4,54 +4,74 @@
 
 /* Side menu icons and tile colors (tiles in pages/; the FIDE pages share this menu).
    "My broadcasts" and another user's end with their name; the last two lists are admin-only. */
-.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast'] {
+.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active$='/broadcast'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href*='/broadcast/by/'] {
+.subnav[data-cdc-nav~='broadcast'] a[href*='/broadcast/by/'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active*='/broadcast/by/'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/video-01.svg');
   --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/video-01--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/subscribed'] {
+.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/subscribed'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active$='/broadcast/subscribed'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
   --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff7777.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/calendar'] {
+.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/calendar'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active$='/broadcast/calendar'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/help'] {
+.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/help'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active$='/broadcast/help'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-02.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-02--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/app'] {
+.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/app'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active$='/broadcast/app'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/all-private'] {
+.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/all-private'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active$='/broadcast/all-private'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/non-official'] {
+.subnav[data-cdc-nav~='broadcast'] a[href$='/broadcast/non-official'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active$='/broadcast/non-official'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view.svg');
   --cdc-nav-color: var(--cdc-grey-300);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view--a1a5ad.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href$='/fide'] {
+.subnav[data-cdc-nav~='broadcast'] a[href$='/fide'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active$='/fide'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='broadcast'] a[href*='/fide/federation'] {
+.subnav[data-cdc-nav~='broadcast'] a[href*='/fide/federation'],
+main.page-menu[data-cdc-menu~='broadcast'][data-cdc-nav-active*='/fide/federation'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02--a2edfd.svg');
 }
 
 /* ---- Pinned --- */

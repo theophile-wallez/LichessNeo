@@ -71,70 +71,70 @@ main.tour-home .tour__links a:hover::after {
 /* A tile per kind, in its tiles' color (tournaments.css); the open kind's in the title. */
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history'],
-main.arena-history[data-cdc-nav-active$='/tournament/history'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/diamond.svg');
   --cdc-nav-color: var(--cdc-orange);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/diamond--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/marathon'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/marathon'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/marathon'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/running-shoes.svg');
   --cdc-nav-color: var(--cdc-purple);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/running-shoes--caa9fa.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/shield'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/shield'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/shield'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
   --cdc-nav-color: var(--cdc-grey-300);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02--a1a5ad.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/yearly'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/yearly'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/yearly'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
   --cdc-nav-color: var(--cdc-orange);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/monthly'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/monthly'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/monthly'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-02.svg');
   --cdc-nav-color: var(--cdc-red);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-02--ff7777.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/weekend'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/weekend'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/weekend'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg');
   --cdc-nav-color: var(--cdc-orange);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/weekly'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/weekly'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/weekly'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
   --cdc-nav-color: var(--cdc-orange);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--ffc689.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/daily'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/daily'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/daily'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sun-03.svg');
   --cdc-nav-color: var(--cdc-cyan);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sun-03--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/eastern'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/eastern'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/eastern'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sunrise.svg');
   --cdc-nav-color: var(--cdc-cyan);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sunrise--a2edfd.svg');
 }
 
 .subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/hourly'],
-main.arena-history[data-cdc-nav-active$='/tournament/history/hourly'] .page-menu__content {
+main.page-menu[data-cdc-menu~='arena-history'][data-cdc-nav-active$='/tournament/history/hourly'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
   --cdc-nav-color: var(--cdc-accent);
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--7e88db.svg');
@@ -205,7 +205,7 @@ main.arena-history[data-cdc-nav-active$='/tournament/history/hourly'] .page-menu
 /* ---- Titles' icons --- */
 
 /* The tile of the link that leads there: the calendar's, the FAQ's and the leagues' from the
- * home's links, the history's from its menu. */
+ * home's links (the history's is its menu's, menu-titles.css). */
 html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top {
   --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--a2edfd.svg');
   --cdc-nav-color: var(--cdc-cyan);
@@ -226,8 +226,7 @@ main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child {
 }
 
 html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top,
-html[data-cdc-has~='leagues-page'] main.page > h1.box__top,
-main.arena-history > .page-menu__content > .box__top > h1 {
+html[data-cdc-has~='leagues-page'] main.page > h1.box__top {
   display: flex !important;
   justify-content: flex-start !important;
   align-items: center;
@@ -236,7 +235,6 @@ main.arena-history > .page-menu__content > .box__top > h1 {
 
 html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top::before,
 html[data-cdc-has~='leagues-page'] main.page > h1.box__top::before,
-main.arena-history > .page-menu__content > .box__top > h1::before,
 main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child::after {
   content: '';
   flex: none;

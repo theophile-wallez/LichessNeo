@@ -276,9 +276,11 @@ features and its name: free analysis, open data, no ads.
   sidebar picture (`img/sidebar/<page>.webp`, as `styles/sidebar/nav.css`
   names them) wherever it stands for that page: its title, the profile's
   activity and rating cards, a button that leads there. Never an emoji or a
-  Lichess glyph in its place. A side menu's links are the exception: all
-  Hugeicons, alike (see "Playful pages"). A page the sidebar doesn't list
-  takes its side menu link's icon in its title.
+  Lichess glyph in its place. Side menus are the exception: their links
+  are all Hugeicons, alike (see "Playful pages"), and a page with a side
+  menu starts its title with its open link's tile, the same icon
+  (`styles/pages/menu-titles.css`: give a new menu's link a
+  `main.page-menu[data-cdc-menu~=…][data-cdc-nav-active$=…]` selector too).
 - **Cards stay dark:** never fill a card's background with green or red;
   color a badge, a tile or the title instead (buttons aside).
 - **Hover feels the same everywhere:** a card lifts and its icon tile hops,

@@ -301,42 +301,58 @@
 /* Puzzle side menu (these pages, dashboard, history): icons and tile colors, tiles in pages/.
    Dashboard links carry their period (/training/dashboard/30/strengths), hence the $= matches. */
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/training'] {
+.subnav[data-cdc-nav~='puzzles'] a[href$='/training'],
+main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/training'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/training/themes'] {
+.subnav[data-cdc-nav~='puzzles'] a[href$='/training/themes'],
+main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/training/themes'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layers-01.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layers-01--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/training/openings'] {
+.subnav[data-cdc-nav~='puzzles'] a[href$='/training/openings'],
+main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/training/openings'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/dashboard'] {
+.subnav[data-cdc-nav~='puzzles'] a[href$='/dashboard'],
+main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/dashboard'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-01.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/improvementAreas'] {
+.subnav[data-cdc-nav~='puzzles'] a[href$='/improvementAreas'],
+main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/improvementAreas'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg');
   --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02--ff7777.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/strengths'] {
+.subnav[data-cdc-nav~='puzzles'] a[href$='/strengths'],
+main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/strengths'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/brain.svg');
   --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/brain--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/training/history'] {
+.subnav[data-cdc-nav~='puzzles'] a[href$='/training/history'],
+main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/training/history'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/task-01.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/task-01--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href*='/training/of-player'] {
+.subnav[data-cdc-nav~='puzzles'] a[href*='/training/of-player'],
+main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active*='/training/of-player'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--a2edfd.svg');
 }

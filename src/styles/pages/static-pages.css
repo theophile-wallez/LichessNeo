@@ -194,24 +194,32 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
 
 /* Streamers' side menu: an icon tile per link (tiles in headings-menus.css). The streamer
  * kit's link goes to the about page. */
-.subnav[data-cdc-nav~='streamers'] a[href$='/streamer'] {
+.subnav[data-cdc-nav~='streamers'] a[href$='/streamer'],
+main.page-menu[data-cdc-menu~='streamers'][data-cdc-nav-active$='/streamer'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
   --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='streamers'] a[href$='/streamer/edit'] {
+.subnav[data-cdc-nav~='streamers'] a[href$='/streamer/edit'],
+main.page-menu[data-cdc-menu~='streamers'][data-cdc-nav-active$='/streamer/edit'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
   --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='streamers'] a[href*='/blog/'] {
+.subnav[data-cdc-nav~='streamers'] a[href*='/blog/'],
+main.page-menu[data-cdc-menu~='streamers'][data-cdc-nav-active*='/blog/'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='streamers'] a[href$='/about'] {
+.subnav[data-cdc-nav~='streamers'] a[href$='/about'],
+main.page-menu[data-cdc-menu~='streamers'][data-cdc-nav-active$='/about'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package--a2edfd.svg');
 }
 
 /* Streamers: Lichess sizes the name from the window's width, so on a narrow desktop it ran

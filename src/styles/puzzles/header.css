@@ -10,16 +10,6 @@ main.page-menu:has(.puzzle-themes) .page-menu__content.box {
   background: transparent !important;
 }
 
-/* An icon before each page's title. Only the openings page has .puzzle-openings;
-   the themes page just shows a row of opening chips. */
-main.page-menu:has(.puzzle-themes) {
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
-}
-
-main.page-menu:has(.puzzle-openings) {
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/books.svg');
-}
-
 /* The themes page's h1 is the box top; the openings page's sits in one, by the sort picker. */
 main.page-menu:has(.puzzle-themes) :is(h1.box__top, .box__top > h1) {
   display: flex;
@@ -38,14 +28,6 @@ main.page-menu:has(.puzzle-openings) .box__top {
   margin: 0 !important;
   padding: 16px 0 10px !important;
   border: none !important;
-}
-
-main.page-menu:has(.puzzle-themes) :is(h1.box__top, .box__top > h1)::before {
-  content: '';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  background: var(--cdc-title-icon) center / contain no-repeat;
 }
 
 /* The Ctrl+F hint as a quiet pill, not a full-width panel. Lichess puts the text

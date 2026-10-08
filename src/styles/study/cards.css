@@ -77,49 +77,67 @@
 
 /* The side menu: a Hugeicon per link on a tile of its color (pages/headings-menus.css).
  * Signed in, it also lists the user's studies, those they're in, public, private and liked. */
-.subnav[data-cdc-nav~='studies'] a[href*='/study/all'] {
+.subnav[data-cdc-nav~='studies'] a[href*='/study/all'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/all'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/mine/'] {
+.subnav[data-cdc-nav~='studies'] a[href*='/study/mine/'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/mine/'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/member/'] {
+.subnav[data-cdc-nav~='studies'] a[href*='/study/member/'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/member/'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/public/'] {
+.subnav[data-cdc-nav~='studies'] a[href*='/study/public/'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/public/'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
   --cdc-nav-color: var(--cdc-green);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02--73fb95.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/private/'] {
+.subnav[data-cdc-nav~='studies'] a[href*='/study/private/'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/private/'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
   --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02--ff7777.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/likes/'] {
+.subnav[data-cdc-nav~='studies'] a[href*='/study/likes/'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/likes/'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
   --cdc-nav-color: var(--cdc-pink);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff94d1.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href$='/study/topic'] {
+.subnav[data-cdc-nav~='studies'] a[href$='/study/topic'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active$='/study/topic'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href$='/study/staff-picks'] {
+.subnav[data-cdc-nav~='studies'] a[href$='/study/staff-picks'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active$='/study/staff-picks'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/blog/'] {
+.subnav[data-cdc-nav~='studies'] a[href*='/blog/'],
+main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
   --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle--caa9fa.svg');
 }
 
 /* Only the studies scroll: the menu and toolbar stay put.

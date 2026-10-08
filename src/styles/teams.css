@@ -24,17 +24,6 @@ main.team-list h1.box__top {
   margin: 0 !important;
 }
 
-/* The clubs icon, as in the sidebar. */
-main.team-list .box__top h1::before,
-main.team-list h1.box__top::before {
-  content: '';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/teams.webp') center /
-    contain no-repeat;
-}
-
 main.team-list .box__top .search input {
   width: 260px;
   padding-inline-start: 38px !important;
@@ -50,29 +39,39 @@ html[dir='rtl'] main.team-list .box__top .search input {
 
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css); signed in, it
  * has the user's teams, those they lead, the requests and a new team. */
-.subnav[data-cdc-nav~='teams'] a[href$='/team/all'] {
+.subnav[data-cdc-nav~='teams'] a[href$='/team/all'],
+main.page-menu[data-cdc-menu~='teams'][data-cdc-nav-active$='/team/all'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='teams'] a[href$='/team/me'] {
+.subnav[data-cdc-nav~='teams'] a[href$='/team/me'],
+main.page-menu[data-cdc-menu~='teams'][data-cdc-nav-active$='/team/me'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='teams'] a[href$='/team/leader'] {
+.subnav[data-cdc-nav~='teams'] a[href$='/team/leader'],
+main.page-menu[data-cdc-menu~='teams'][data-cdc-nav-active$='/team/leader'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='teams'] a[href$='/team/requests'] {
+.subnav[data-cdc-nav~='teams'] a[href$='/team/requests'],
+main.page-menu[data-cdc-menu~='teams'][data-cdc-nav-active$='/team/requests'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/inbox.svg');
   --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/inbox--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='teams'] a[href$='/team/new'] {
+.subnav[data-cdc-nav~='teams'] a[href$='/team/new'],
+main.page-menu[data-cdc-menu~='teams'][data-cdc-nav-active$='/team/new'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-circle.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-circle--a2edfd.svg');
 }
 
 /* Desktop only (Lichess's top bar holds the top edge below 1020px): the menu and title bar stay

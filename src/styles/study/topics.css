@@ -17,15 +17,6 @@
   padding: 16px 0 20px !important;
 }
 
-.study-topics h1.box__top::before {
-  content: '';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp') center /
-    contain no-repeat;
-}
-
 .study-topics h2 {
   margin: 0 0 12px !important;
   color: #fff;
@@ -93,15 +84,6 @@ main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top {
   gap: 12px;
   margin: 0 !important;
   padding: 16px 0 12px !important;
-}
-
-main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top::before {
-  content: '';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp') center /
-    contain no-repeat;
 }
 
 main.page-menu[data-cdc-nav-active$='/staff-picks'] .body {

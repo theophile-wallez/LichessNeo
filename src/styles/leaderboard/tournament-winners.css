@@ -16,17 +16,6 @@
   font-size: 28px !important;
 }
 
-/* The trophy icon, as on the players leaderboard. */
-.page-menu__content
-  > h1.box__top:has(+ :is(.tournament-leaderboards, .tournament-shields))::before {
-  content: '';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/icons/trophy.svg') center / contain
-    no-repeat;
-}
-
 /* Desktop only (Lichess's fixed top bar would cover them): the side menu and title stay put
  * while the cards scroll; the title's shadow shows once stuck (as on the blog). */
 @media (min-width: 1020px) {

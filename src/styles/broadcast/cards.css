@@ -23,18 +23,6 @@
   margin: 0 !important;
 }
 
-/* The sidebar's Broadcasts picture; it replaces the calendar's Lichess icon. */
-:is(.relay-index, .relay-calendar) .box__top h1::before {
-  content: '' !important;
-  margin: 0 !important;
-  opacity: 1 !important;
-  flex: none;
-  width: 36px;
-  height: 36px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp') center /
-    contain no-repeat;
-}
-
 :is(.relay-index, .relay-calendar) .box__top .search input {
   width: 260px;
   padding-inline-start: 38px !important;

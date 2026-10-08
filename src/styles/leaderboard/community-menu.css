@@ -2,34 +2,46 @@
 
 /* The side menu these pages share with the rating stats, bots and FIDE players: each link's
  * icon and color (the tiles are in pages/). */
-.subnav a[href$='/player'] {
+.subnav a[href$='/player'],
+main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active$='/player'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking--ffc689.svg');
 }
 
-.subnav a[href*='/stat/rating/distribution'] {
+.subnav a[href*='/stat/rating/distribution'],
+main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active*='/stat/rating/distribution'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram--a2edfd.svg');
 }
 
-.subnav a[href$='/tournament/leaderboard'] {
+.subnav a[href$='/tournament/leaderboard'],
+main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active$='/tournament/leaderboard'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01--ffc689.svg');
 }
 
-.subnav a[href$='/tournament/shields'] {
+.subnav a[href$='/tournament/shields'],
+main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active$='/tournament/shields'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02--7e88db.svg');
 }
 
-.subnav a[href$='/player/bots'] {
+.subnav a[href$='/player/bots'],
+main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active$='/player/bots'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
   --cdc-nav-color: var(--cdc-purple);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='bots'] a[href*='/fide'] {
+.subnav[data-cdc-nav~='bots'] a[href*='/fide'],
+main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active*='/fide'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02--a2edfd.svg');
 }
 
 /* Desktop only (Lichess's fixed top bar would cover them): the menu and the leaderboard's title

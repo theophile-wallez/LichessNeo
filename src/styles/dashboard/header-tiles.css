@@ -33,26 +33,19 @@ main.page-menu .page-menu__content.puzzle-dashboard {
   line-height: 1.15;
 }
 
+/* The open menu link's tile, as on the other pages with a menu (pages/menu-titles.css). */
 .puzzle-dashboard .box__top h1::before {
   content: '';
   grid-row: 1 / span 2;
-  width: 40px;
-  height: 40px;
-  background: var(--cdc-dashboard-icon) center / contain no-repeat;
-}
-
-/* The dashboard's three pages share the title: each takes its menu link's icon
-   (puzzles/openings.css). */
-.puzzle-dashboard .box__top h1 {
-  --cdc-dashboard-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-dashboard.webp');
-}
-
-main.page-menu[data-cdc-nav-active$='/improvementAreas'] .puzzle-dashboard .box__top h1 {
-  --cdc-dashboard-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/bullseye.svg');
-}
-
-main.page-menu[data-cdc-nav-active$='/strengths'] .puzzle-dashboard .box__top h1 {
-  --cdc-dashboard-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/brain.svg');
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  background:
+    var(--cdc-title-icon, none) center / 30px 30px no-repeat,
+    color-mix(in srgb, var(--cdc-nav-color, #fff) 24%, transparent);
+  box-shadow:
+    inset 0 1px #ffffff26,
+    0 0 0 1px color-mix(in srgb, var(--cdc-nav-color, #fff) 40%, transparent);
 }
 
 .puzzle-dashboard .box__top h1 strong {

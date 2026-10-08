@@ -101,18 +101,6 @@
   color: #fff;
 }
 
-/* The blog icon, as in the sidebar. A user's blog already starts with the
- * author's icon. */
-.ublog-index .box__top h1:not(:has(.user-link))::before {
-  content: '';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  margin-inline-end: 12px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp') center /
-    contain no-repeat;
-}
-
 .ublog-index .box__top h1 .user-link {
   color: #fff !important;
 }
@@ -208,29 +196,39 @@
 
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css). Signed in, it
  * also has the friends' posts and the user's own blog (`/@/<user>/blog`), its drafts there. */
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/community'] {
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/community'],
+main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/community'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
   --cdc-nav-color: var(--cdc-accent);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/monthly'] {
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/monthly'],
+main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/monthly'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/topic'] {
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/topic'],
+main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/topic'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
   --cdc-nav-color: var(--cdc-cyan);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/@/lichess/blog'] {
+.subnav[data-cdc-nav~='blog'] a[href$='/@/lichess/blog'],
+main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/@/lichess/blog'] {
   --cdc-nav-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
   --cdc-nav-color: var(--cdc-grey-300);
+  --cdc-title-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/friends'] {
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/friends'],
+main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/friends'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
   --cdc-nav-color: var(--cdc-green);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple--73fb95.svg');
 }
 
 .subnav[data-cdc-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
@@ -238,14 +236,18 @@
   --cdc-nav-color: var(--cdc-purple);
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/drafts'] {
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/drafts'],
+main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/drafts'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit.svg');
   --cdc-nav-color: var(--cdc-orange);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/liked'] {
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/liked'],
+main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/liked'] {
   --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
   --cdc-nav-color: var(--cdc-red);
+  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff7777.svg');
 }
 
 /* Only the posts scroll: the side menu and the title with its filters stay put.
