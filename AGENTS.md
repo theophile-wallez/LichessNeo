@@ -263,7 +263,10 @@ features and its name: free analysis, open data, no ads.
   Practice, simuls and the forum set the tone. Every side menu (`.subnav`)
   gets an icon per link on a tile in its own color: add the menu to the
   shared rule in `styles/pages/headings-menus.css`, then set
-  `--cdc-nav-icon` and `--cdc-nav-color` per link.
+  `--cdc-nav-icon` and `--cdc-nav-color` per link. Every item of a side
+  menu, a link to a page, has at least an icon: first the illustration that
+  page already has elsewhere (its main sidebar picture, its title's, another
+  link's), else a Hugeicons icon (see "An icon" in the recipes).
 - **One picture per page:** a page the sidebar lists is drawn with its
   sidebar picture (`img/sidebar/<page>.webp`, as `styles/sidebar/nav.css`
   names them) wherever it stands for that page: its title, a menu's link, the
@@ -285,7 +288,15 @@ scale(1.08)` on menu links, both
   `src/page/motion` makes every such query answer as if nothing were asked.
 - **Only the content scrolls:** a page's side panel and title stay put while
   its content scrolls (`position: sticky`, as in `styles/simul`, or a
-  scrolling content area).
+  scrolling content area). A side menu or column never scrolls with the
+  content: it stays put, and if it's taller than the window it scrolls on
+  its own (`max-height` and `overflow-y: auto`, from the window's edge, see
+  "The top room"). Every page that scrolls has its title pinned at
+  the top (see "The top room" under the pitfalls), with an icon on the
+  title's left. Look for the page's icon before drawing one: first the main
+  sidebar's picture for it, then the icon of another link that leads there
+  (a side menu, a card, a button); pick a new one only if none exists, and
+  then use it on those links too (see "One picture per page").
 - **Every chart is modern:** Lichess's Chart.js canvases are redrawn in SVG
   from the page's data (`content/charts/rating-chart`,
   `page/charts/distribution`, `content/charts/radar`, `page/charts/game`
@@ -493,6 +504,21 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   and headsets `100vh` is taller than the view.
 - **Pinned titles.** Don't widen a sticky title with negative margins (it
   overflows at 1024px): use side box-shadows in the page's color.
+- **The top room.** On desktop `#main-wrap` is what scrolls, and its 16px
+  top room (`--cdc-page-top`, `styles/sidebar/layout.css`) is padding, so the
+  content scrolls up to the window's edge. Never make it a border again: the
+  content would be cut 16px short of the top. But sticky things stick below a
+  scroller's padding (`top: 0` is 16px down), and what scrolls shows in the
+  strip above them:
+  - a pinned title puts `var(--cdc-pin-cover)` first in its `box-shadow`
+    (`--cdc-pin-cover-wide` when 12px side shadows widen it): the page's
+    color over the strip. It also covers the 16px above the title when not
+    stuck, so keep that room empty;
+  - a column that scrolls in place starts at the window's edge, its content
+    where it was: `top` and `margin-top` at minus the room, twice the room
+    as `padding-top` (`.tour-home__side`, `styles/pages/tournaments.css`).
+    Otherwise its content is cut at its own top, 32px down;
+  - side menus and cards that don't scroll stay at `top: 16px`.
 - **The page's background.** Lichess draws some things behind the page with
   a negative z-index (clock faces): paint the page's color on `html`, never
   on `body` (`styles/theme/base.css`).

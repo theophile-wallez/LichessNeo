@@ -245,6 +245,7 @@
     margin-inline: -8px !important;
     padding-inline: 8px !important;
     background: var(--cdc-bg-page);
+    box-shadow: var(--cdc-pin-cover);
   }
 
   /* In RTL Lichess leaves no gap before the menu: widen the free side only. */

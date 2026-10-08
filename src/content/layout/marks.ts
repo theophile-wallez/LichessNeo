@@ -25,6 +25,10 @@ const NAV_LINKS: Readonly<Record<string, readonly string[]>> = {
   about: ['/thanks'],
   variants: ['/variant/chess960'],
   streamers: ['/streamer/edit'],
+  studies: ['/study/staff-picks'],
+  teams: ['/team/all'],
+  blog: ['/blog/monthly'],
+  'arena-history': ['/tournament/history/hourly'],
 };
 
 const hrefIn = (element: Element, selector: string): string | null | undefined =>
@@ -51,11 +55,29 @@ const MARKS: readonly Mark[] = [
     key: 'cdcNavActive',
     read: main => hrefIn(main, '.subnav a.active'),
   },
+  // Which side menu the page has, for its title's tile (styles/pages/static-pages.css).
+  {
+    selector: 'main.page-menu',
+    key: 'cdcMenu',
+    read: main => {
+      const menu = main.querySelector(':scope > .subnav');
+      return menu ? navsOf(menu) : null;
+    },
+  },
   // A game's mode, by its info's icon (styles/game/game-info.css).
   {
     selector: 'main.round .game__meta',
     key: 'cdcIcon',
     read: meta => iconIn(meta, '.game__meta__infos'),
+  },
+  // A rating's stats page: its title takes the glyph of its card in the menu (styles/profile/).
+  {
+    selector: 'main.page-menu > .perf-stat > .box__top h1',
+    key: 'cdcIcon',
+    read: title => {
+      const main = title.closest('main');
+      return main ? iconIn(main, ':scope > .page-menu__menu a.active') : null;
+    },
   },
   // A leaderboard by its title's icon, a shield by its title's link (styles/leaderboard/).
   {

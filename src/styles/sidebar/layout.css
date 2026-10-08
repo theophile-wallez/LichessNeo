@@ -23,6 +23,8 @@
   body {
     --cdc-main-w: calc(100vw - var(--cdc-sidebar-w));
     --cdc-main-h: 100dvh;
+    /* The room over the content, which scrolls away with it (#main-wrap below). */
+    --cdc-page-top: 16px;
     ---site-header-height: 44px !important;
     ---site-header-margin: 0px !important;
   }
@@ -75,14 +77,18 @@
 
   /* The content, right of the sidebar to the window's edges, a hairline between them. Its
    * own stacking context, or what Lichess draws behind the page (the clock faces) would go
-   * under its fill. The top room is a border, not padding: sticky titles stick below a
-   * padding, and what scrolls would show through it. */
+   * under its fill. The top room is padding, so the content scrolls up to the window's edge;
+   * but sticky things stick below it, and what scrolls shows above them: a pinned title
+   * covers that strip (`--cdc-pin-cover`), a column that scrolls in place starts at the
+   * edge (see "The top room" in AGENTS.md). */
   #main-wrap {
+    --cdc-pin-cover: 0 calc(-1 * var(--cdc-page-top)) var(--cdc-bg-page);
+    /* For a title widened by 12px side shadows. */
+    --cdc-pin-cover-wide: 0 calc(-1 * var(--cdc-page-top)) 0 12px var(--cdc-bg-page);
     box-sizing: border-box;
     height: var(--cdc-main-h);
     margin: 0 0 0 var(--cdc-sidebar-w) !important;
-    padding-top: 0;
-    border-top: 16px solid transparent;
+    padding-top: var(--cdc-page-top);
     overflow: hidden auto;
     overscroll-behavior: contain;
     align-content: start;

@@ -75,6 +75,27 @@
     var(--cdc-btn-grey-shadow) !important;
 }
 
+/* The side menu: an icon tile per link (tiles in pages/headings-menus.css). */
+.subnav[data-cdc-nav~='studies'] a[href*='/study/all'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp');
+  --cdc-nav-color: var(--cdc-accent);
+}
+
+.subnav[data-cdc-nav~='studies'] a[href$='/study/topic'] {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.label.webp');
+  --cdc-nav-color: var(--cdc-cyan-darker);
+}
+
+.subnav[data-cdc-nav~='studies'] a[href$='/study/staff-picks'] {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/nature.glowing-star.webp');
+  --cdc-nav-color: var(--cdc-orange-dark);
+}
+
+.subnav[data-cdc-nav~='studies'] a[href*='/blog/'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/light-bulb.svg');
+  --cdc-nav-color: var(--cdc-orange-dark);
+}
+
 /* Only the studies scroll: the menu and toolbar stay put.
    Desktop only: below 1020px Lichess's fixed top bar would cover them. */
 @media (min-width: 1020px) {
@@ -93,6 +114,7 @@
     margin-inline: calc(-1 * min(12px, 1vw)) !important;
     padding-inline: min(12px, 1vw) !important;
     background: var(--cdc-bg-page);
+    box-shadow: var(--cdc-pin-cover);
   }
 
   .study-index .box__top::after {

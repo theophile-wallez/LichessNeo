@@ -35,6 +35,37 @@ main.swiss-home h1.box__top::before {
     center / contain no-repeat;
 }
 
+/* Pinned while the lists scroll, as on the other pages. Desktop only: below 1020px
+ * Lichess's top bar holds the top edge. */
+@media (min-width: 1020px) {
+  main.swiss-home h1.box__top {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background: var(--cdc-bg-page);
+    box-shadow: var(--cdc-pin-cover);
+  }
+
+  main.swiss-home h1.box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--cdc-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.swiss-home h1.box__top::after {
+      opacity: 1;
+    }
+  }
+}
+
 /* ---- Lists --- */
 
 main.swiss-home .swisses {

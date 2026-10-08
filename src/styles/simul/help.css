@@ -113,6 +113,7 @@ main.simul-list .simul-list__help > em ~ p:nth-of-type(4) {
      * page on a narrow window. */
     background: var(--cdc-bg-page);
     box-shadow:
+      var(--cdc-pin-cover-wide),
       -12px 0 var(--cdc-bg-page),
       12px 0 var(--cdc-bg-page);
   }

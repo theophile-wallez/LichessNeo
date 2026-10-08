@@ -89,7 +89,13 @@ h3 {
     [data-cdc-nav~='bots'],
     [data-cdc-nav~='broadcast'],
     [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account']
+    [data-cdc-nav~='account'],
+    [data-cdc-nav~='about'],
+    [data-cdc-nav~='streamers'],
+    [data-cdc-nav~='studies'],
+    [data-cdc-nav~='teams'],
+    [data-cdc-nav~='blog'],
+    [data-cdc-nav~='arena-history']
   )
   a {
   display: flex !important;
@@ -102,7 +108,13 @@ h3 {
     [data-cdc-nav~='bots'],
     [data-cdc-nav~='broadcast'],
     [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account']
+    [data-cdc-nav~='account'],
+    [data-cdc-nav~='about'],
+    [data-cdc-nav~='streamers'],
+    [data-cdc-nav~='studies'],
+    [data-cdc-nav~='teams'],
+    [data-cdc-nav~='blog'],
+    [data-cdc-nav~='arena-history']
   )
   a::before {
   content: '';
@@ -124,7 +136,13 @@ h3 {
     [data-cdc-nav~='bots'],
     [data-cdc-nav~='broadcast'],
     [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account']
+    [data-cdc-nav~='account'],
+    [data-cdc-nav~='about'],
+    [data-cdc-nav~='streamers'],
+    [data-cdc-nav~='studies'],
+    [data-cdc-nav~='teams'],
+    [data-cdc-nav~='blog'],
+    [data-cdc-nav~='arena-history']
   )
   a:hover::before {
   transform: translateY(-2px) rotate(-8deg) scale(1.08);
@@ -134,7 +152,13 @@ h3 {
     [data-cdc-nav~='bots'],
     [data-cdc-nav~='broadcast'],
     [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account']
+    [data-cdc-nav~='account'],
+    [data-cdc-nav~='about'],
+    [data-cdc-nav~='streamers'],
+    [data-cdc-nav~='studies'],
+    [data-cdc-nav~='teams'],
+    [data-cdc-nav~='blog'],
+    [data-cdc-nav~='arena-history']
   )
   a.active::before {
   background-color: color-mix(in srgb, var(--cdc-nav-color, #fff) 32%, transparent);
@@ -285,7 +309,13 @@ main.account .page-menu__content .twofactor h1 > .is-green {
     [data-cdc-nav~='bots'],
     [data-cdc-nav~='broadcast'],
     [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account']
+    [data-cdc-nav~='account'],
+    [data-cdc-nav~='about'],
+    [data-cdc-nav~='streamers'],
+    [data-cdc-nav~='studies'],
+    [data-cdc-nav~='teams'],
+    [data-cdc-nav~='blog'],
+    [data-cdc-nav~='arena-history']
   )
   .sep {
   height: 1px;

@@ -25,6 +25,7 @@
     padding: 12px 0 10px;
     background: var(--cdc-bg-page);
     box-shadow:
+      0 calc(-1 * var(--cdc-page-top)) 0 16px var(--cdc-bg-page),
       -16px 0 var(--cdc-bg-page),
       16px 0 var(--cdc-bg-page);
   }

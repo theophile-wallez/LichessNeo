@@ -178,6 +178,7 @@
     z-index: 3;
     border-radius: 7px 7px 0 0;
     background: var(--cdc-bg-panel);
+    box-shadow: var(--cdc-pin-cover);
   }
 
   main.page-menu > .perf-stat > .box__top::after {
@@ -238,4 +239,29 @@
 }
 .side.sub-ratings a[href$='/streak'] {
   --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
+}
+
+/* The stats page's title, after its rating's glyph (content/layout/marks.ts), on a tile. */
+main.page-menu > .perf-stat > .box__top h1[data-cdc-icon] {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+main.page-menu > .perf-stat > .box__top h1[data-cdc-icon]::before {
+  content: attr(data-cdc-icon);
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--cdc-accent) 24%, transparent);
+  box-shadow:
+    inset 0 1px #ffffff26,
+    0 0 0 1px color-mix(in srgb, var(--cdc-accent) 40%, transparent);
+  color: #fff;
+  font-family: lichess;
+  font-size: 28px;
+  font-weight: normal;
 }

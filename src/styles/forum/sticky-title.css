@@ -22,6 +22,7 @@
     padding: 16px min(12px, 1vw) 12px !important;
     margin-bottom: 10px !important;
     background: var(--cdc-bg-page);
+    box-shadow: var(--cdc-pin-cover);
   }
 
   main.forum:is(.forum-categ, .forum-topic:not(.topic-form)) > .box__top::after,

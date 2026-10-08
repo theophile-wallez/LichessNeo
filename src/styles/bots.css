@@ -319,6 +319,7 @@
     padding-bottom: 14px !important;
     background: var(--cdc-bg-page);
     box-shadow:
+      var(--cdc-pin-cover-wide),
       -12px 0 var(--cdc-bg-page),
       12px 0 var(--cdc-bg-page);
   }

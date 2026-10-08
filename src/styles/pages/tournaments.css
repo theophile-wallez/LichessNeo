@@ -53,16 +53,77 @@
   background: #ffffff0d !important;
 }
 
-/* The side column stays in view and scrolls on its own. Desktop only: below 1020px it
- * goes under the lists. */
+/* The side column stays in view and scrolls on its own, from the window's top edge, its
+ * content starting where it did. Desktop only: below 1020px it goes under the lists. */
 @media (min-width: 1020px) {
   main.tour-home > .tour-home__side {
     position: sticky;
-    top: 16px;
+    top: calc(-1 * var(--cdc-page-top));
     align-self: start;
-    max-height: calc(var(--cdc-main-h, 100dvh) - 32px);
+    max-height: var(--cdc-main-h, 100dvh);
+    margin-top: calc(-1 * var(--cdc-page-top));
+    padding-top: calc(2 * var(--cdc-page-top));
     overflow-y: auto;
     scrollbar-width: thin;
+  }
+}
+
+/* ---- Title --- */
+
+/* Pinned over the chart and the list while they scroll, as on the other pages (simul.css):
+ * its box lets it out into the page's grid (`display: contents`), and the chart keeps the
+ * box's look. Desktop only: below 1020px Lichess's top bar holds the top edge. */
+@media (min-width: 1020px) {
+  main.tour-home > .tour-home__schedule {
+    display: contents;
+  }
+
+  main.tour-home > .tour-home__schedule > .box__top {
+    container-type: scroll-state;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    justify-content: flex-start !important;
+    align-items: center;
+    gap: 12px;
+    margin: 0 !important;
+    padding: 16px 0 !important;
+    background: var(--cdc-bg-page);
+    box-shadow: var(--cdc-pin-cover);
+  }
+
+  /* The trophy, as in the sidebar's Arena tournaments entry. */
+  main.tour-home > .tour-home__schedule > .box__top::before {
+    content: '';
+    flex: none;
+    width: 38px;
+    height: 38px;
+    background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp')
+      center / contain no-repeat;
+  }
+
+  main.tour-home > .tour-home__schedule > .box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--cdc-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.tour-home > .tour-home__schedule > .box__top::after {
+      opacity: 1;
+    }
+  }
+
+  main.tour-home > .tour-home__schedule > .tour-chart {
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--c-bg-box);
   }
 }
 

@@ -334,7 +334,7 @@ main.swiss .schedule-next-round input {
     background: var(--cdc-bg-panel);
     /* The page color behind the rounded corners hides the boards passing under. */
     box-shadow:
-      0 -10px 0 var(--cdc-bg-page),
+      var(--cdc-pin-cover),
       inset 0 1px var(--cdc-card-border),
       inset 1px 0 var(--cdc-card-border),
       inset -1px 0 var(--cdc-card-border) !important;

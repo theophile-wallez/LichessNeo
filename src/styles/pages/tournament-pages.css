@@ -1,0 +1,227 @@
+/* The tournament pages around the home (tournaments.css): the home's links, the history's
+ * menu, and every page's title pinned with its icon, as the home's (AGENTS.md, "Only the
+ * content scrolls"). Desktop only for the pinning: below 1020px Lichess's top bar holds the
+ * top edge. */
+
+/* ---- Home's links --- */
+
+/* Each with its page's tile, the one its title shows. */
+
+.tour__links a[href$='/tournament/calendar'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
+  --cdc-nav-color: var(--cdc-cyan-darker);
+}
+
+.tour__links a[href$='/tournament/history'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/books.svg');
+  --cdc-nav-color: var(--cdc-orange-dark);
+}
+
+.tour__links a[href$='/tournament/help'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/question-mark.svg');
+  --cdc-nav-color: var(--cdc-accent);
+}
+
+.tour__links a[href$='/page/leagues-and-battles'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
+  --cdc-nav-color: var(--cdc-red);
+}
+
+main.tour-home .tour__links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-inline-start: 8px;
+}
+
+main.tour-home .tour__links a::before {
+  content: '';
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background:
+    var(--cdc-nav-icon, none) center / 20px 20px no-repeat,
+    color-mix(in srgb, var(--cdc-nav-color, #fff) 16%, transparent);
+  box-shadow: inset 0 1px #ffffff14;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+main.tour-home .tour__links a:hover::before {
+  transform: translateY(-2px) rotate(-8deg) scale(1.08);
+}
+
+/* ---- History's menu --- */
+
+/* A tile per kind, in its tiles' color (tournaments.css); the open kind's in the title. */
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history'],
+main.arena-history[data-cdc-nav-active$='/tournament/history'] .page-menu__content {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.gem-stone.webp');
+  --cdc-nav-color: var(--cdc-orange-dark);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/marathon'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/marathon'] .page-menu__content {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/people.man-running.webp');
+  --cdc-nav-color: var(--cdc-purple-dark);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/shield'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/shield'] .page-menu__content {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/shield.svg');
+  --cdc-nav-color: var(--cdc-grey-300);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/yearly'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/yearly'] .page-menu__content {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crown.svg');
+  --cdc-nav-color: var(--cdc-orange-dark);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/monthly'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/monthly'] .page-menu__content {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.tear-off-calendar.webp');
+  --cdc-nav-color: var(--cdc-red-dark);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/weekend'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/weekend'] .page-menu__content {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/sports-medal.svg');
+  --cdc-nav-color: var(--cdc-orange-dark);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/weekly'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/weekly'] .page-menu__content {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.calendar.webp');
+  --cdc-nav-color: var(--cdc-orange-dark);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/daily'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/daily'] .page-menu__content {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/nature.sun.webp');
+  --cdc-nav-color: var(--cdc-cyan-dark);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/eastern'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/eastern'] .page-menu__content {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/travel-places.sunrise.webp');
+  --cdc-nav-color: var(--cdc-cyan-dark);
+}
+
+.subnav[data-cdc-nav~='arena-history'] a[href$='/tournament/history/hourly'],
+main.arena-history[data-cdc-nav-active$='/tournament/history/hourly'] .page-menu__content {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.stopwatch.webp');
+  --cdc-nav-color: var(--cdc-accent);
+}
+
+/* ---- Pinned titles --- */
+
+@media (min-width: 1020px) {
+  /* Lichess's boxes clip, which would catch the titles: `clip` doesn't. */
+  html[data-cdc-has~='tournament-calendar'] main.box,
+  main.page-small.box-pad.page,
+  main.arena-history > .page-menu__content.box {
+    min-width: 0;
+    overflow: clip !important;
+  }
+
+  html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top,
+  main.page-small.box-pad.page > .box__top,
+  main.arena-history > .page-menu__content > .box__top {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background: var(--cdc-bg-panel);
+    box-shadow: var(--cdc-pin-cover);
+  }
+
+  /* A plain page's title sits in its card's padding: pulled out to its edges, as on the
+   * about pages (static-pages.css). */
+  main.page-small.box-pad.page > .box__top {
+    margin: -4vh calc(-1 * var(---box-padding)) 0 !important;
+    padding: 4vh var(---box-padding) !important;
+  }
+
+  html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top::after,
+  main.page-small.box-pad.page > .box__top::after,
+  main.arena-history > .page-menu__content > .box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--cdc-bg-panel), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top::after,
+    main.page-small.box-pad.page > .box__top::after,
+    main.arena-history > .page-menu__content > .box__top::after {
+      opacity: 1;
+    }
+  }
+
+  /* The history's menu stays put, and scrolls on its own on a short window. */
+  main.arena-history > .subnav {
+    position: sticky;
+    top: 16px;
+    align-self: start;
+    max-height: calc(var(--cdc-main-h, 100dvh) - 32px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+}
+
+/* ---- Titles' icons --- */
+
+/* The tile of the link that leads there: the calendar's, the FAQ's and the leagues' from the
+ * home's links, the history's from its menu. */
+html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
+  --cdc-nav-color: var(--cdc-cyan-darker);
+}
+
+html[data-cdc-has~='leagues-page'] main.page > h1.box__top {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/crossed-swords.svg');
+  --cdc-nav-color: var(--cdc-red);
+}
+
+/* The FAQ's: after Lichess's link back to the tournaments, which its title starts with. */
+main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/question-mark.svg');
+  --cdc-nav-color: var(--cdc-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top,
+html[data-cdc-has~='leagues-page'] main.page > h1.box__top,
+main.arena-history > .page-menu__content > .box__top > h1 {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 16px;
+}
+
+html[data-cdc-has~='tournament-calendar'] main.box > h1.box__top::before,
+html[data-cdc-has~='leagues-page'] main.page > h1.box__top::before,
+main.arena-history > .page-menu__content > .box__top > h1::before,
+main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child::after {
+  content: '';
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  background:
+    var(--cdc-nav-icon, none) center / 36px 36px no-repeat,
+    color-mix(in srgb, var(--cdc-nav-color, #fff) 24%, transparent);
+  box-shadow:
+    inset 0 1px #ffffff26,
+    0 0 0 1px color-mix(in srgb, var(--cdc-nav-color, #fff) 40%, transparent);
+}

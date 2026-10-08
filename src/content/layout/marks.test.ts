@@ -9,6 +9,10 @@ import legacy from './fixtures/legacy.json' with { type: 'json' };
 const navOf = (): string | undefined =>
   queryOne(document, '.subnav', HTMLElement)?.dataset['cdcNav'];
 
+// A mark the original didn't set: the page's side menu, on its <main> (static-pages.css).
+const withoutNewMarks = (markup: string): string =>
+  markup.replaceAll(/ data-cdc-menu="[^"]*"/g, '');
+
 /** Lets the observer's callback run, then the frame it asks for. */
 async function nextFrame(): Promise<void> {
   await Promise.resolve();
@@ -24,11 +28,19 @@ describe('syncMarks', () => {
   it.each(legacy.marks)('marks $page as the original did', ({ page, marked }) => {
     document.body.innerHTML = page;
     syncMarks();
-    expect(document.body.innerHTML).toBe(marked);
+    expect(withoutNewMarks(document.body.innerHTML)).toBe(marked);
+  });
+
+  it('names the side menu on its page', () => {
+    document.body.innerHTML =
+      '<main class="page-menu"><aside class="subnav"><a href="/faq">FAQ</a><a href="/thanks">Thanks</a></aside></main>';
+    syncMarks();
+    expect(queryOne(document, 'main', HTMLElement)?.dataset['cdcMenu']).toBe('about');
   });
 
   it('writes nothing when the marks are already right', () => {
     document.body.innerHTML = legacy.marks[0]?.marked ?? '';
+    syncMarks();
     const observer = new MutationObserver(() => {});
     observer.observe(document.body, { attributes: true, subtree: true });
     syncMarks();

@@ -43,6 +43,9 @@ const FLAGS: Readonly<Record<string, string>> = {
   'user-show': 'main.page-menu .user-show',
   'perf-stat': 'main.page-menu > .perf-stat',
   'puzzle-themes': 'main.page-menu .puzzle-themes',
+  'tournament-calendar': 'main.box > #tournament-calendar',
+  // The leagues' page is one of Lichess's plain pages: told by its first section.
+  'leagues-page': 'main.page #lichess-streamer-battles',
 };
 
 /** The words for what `root` holds, space-separated. */

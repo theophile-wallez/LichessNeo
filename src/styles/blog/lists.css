@@ -206,6 +206,32 @@
   font-size: 16px;
 }
 
+/* The side menu: an icon tile per link (tiles in pages/headings-menus.css). */
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/community'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp');
+  --cdc-nav-color: var(--cdc-accent);
+}
+
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/monthly'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/spiral-calendar.svg');
+  --cdc-nav-color: var(--cdc-cyan-darker);
+}
+
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/topic'] {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.label.webp');
+  --cdc-nav-color: var(--cdc-cyan-darker);
+}
+
+.subnav[data-cdc-nav~='blog'] a[href$='/@/lichess/blog'] {
+  --cdc-nav-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+  --cdc-nav-color: var(--cdc-grey-300);
+}
+
+.subnav[data-cdc-nav~='blog'] a[href$='/blog/liked'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/red-heart.svg');
+  --cdc-nav-color: var(--cdc-red);
+}
+
 /* Only the posts scroll: the side menu and the title with its filters stay put.
  * Desktop only: below 1020px Lichess's fixed top bar would cover them. */
 @media (min-width: 1020px) {
@@ -225,6 +251,7 @@
     margin: -16px calc(-1 * min(12px, 1vw)) -8px !important;
     padding: 16px min(12px, 1vw) 8px !important;
     background: var(--cdc-bg-page);
+    box-shadow: var(--cdc-pin-cover);
   }
 
   .ublog-index .box__top::after {

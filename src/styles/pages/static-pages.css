@@ -37,6 +37,7 @@
     z-index: 2;
     top: 0;
     background: var(--cdc-bg-panel);
+    box-shadow: var(--cdc-pin-cover);
   }
 
   main.page-menu > .page-menu__content.page.box-pad > .box__top,
@@ -70,11 +71,81 @@
     }
   }
 
+  /* Source code and Webmasters are a stack of boxes, the title in the first: that box lets it
+   * out (`display: contents`), so it stays put over them all, on the page, and what's left of
+   * the box keeps its look. */
+  main.page-menu > .page-menu__content.page > section.box:first-child {
+    display: contents;
+  }
+
+  main.page-menu > .page-menu__content.page > section.box:first-child > h1.box__top {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    margin: 0 !important;
+    padding: 16px 0 !important;
+    background: var(--cdc-bg-page);
+    box-shadow: var(--cdc-pin-cover);
+  }
+
+  main.page-menu > .page-menu__content.page > section.box:first-child > h1.box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--cdc-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.page-menu > .page-menu__content.page > section.box:first-child > h1.box__top::after {
+      opacity: 1;
+    }
+  }
+
+  main.page-menu > .page-menu__content.page > section.box:first-child > :not(h1) {
+    margin-bottom: var(---block-gap, 16px);
+    border-radius: 6px;
+    background: var(--c-bg-box);
+  }
+
+  main.page-menu > .page-menu__content.page > section.box-pad:first-child > :not(h1) {
+    padding: var(---box-padding);
+  }
+
   /* Anchor links (#tldr, a FAQ question) land below the title, not under it. */
   main.page-menu > .page-menu__content.page .body [id],
   main.page-menu > .page-menu__content > .faq [id] {
     scroll-margin-top: calc(8vh + 80px);
   }
+}
+
+/* Titles' icons: the videos' as in the sidebar's Videos entry; the variants' overview has
+ * none to borrow, so a die. */
+main.page-menu.video > .page-menu__content > .box__top > h1,
+main.page-menu > .page-menu__content.variants > h1.box__top {
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 12px;
+}
+
+main.page-menu.video > .page-menu__content > .box__top > h1::before,
+main.page-menu > .page-menu__content.variants > h1.box__top::before {
+  content: '';
+  flex: none;
+  width: 38px;
+  height: 38px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/video-library.webp') center
+    / contain no-repeat;
+}
+
+main.page-menu > .page-menu__content.variants > h1.box__top::before {
+  background-image: url('https://lichess1.org/assets/flair/img/activity.game-die.webp');
 }
 
 /* Lichess rules each section off in its gold: a quiet line instead. */
@@ -110,6 +181,28 @@
   color: var(--cdc-text-dim);
   font-style: normal !important;
   font-weight: 600 !important;
+}
+
+/* Streamers' side menu: an icon tile per link (tiles in headings-menus.css). The streamer
+ * kit's link goes to the about page. */
+.subnav[data-cdc-nav~='streamers'] a[href$='/streamer'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/streamers.webp');
+  --cdc-nav-color: var(--cdc-purple-dark);
+}
+
+.subnav[data-cdc-nav~='streamers'] a[href$='/streamer/edit'] {
+  --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/icons/video-camera.svg');
+  --cdc-nav-color: var(--cdc-purple-dark);
+}
+
+.subnav[data-cdc-nav~='streamers'] a[href*='/blog/'] {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/people.people-hugging.webp');
+  --cdc-nav-color: var(--cdc-orange-dark);
+}
+
+.subnav[data-cdc-nav~='streamers'] a[href$='/about'] {
+  --cdc-nav-icon: url('https://lichess1.org/assets/flair/img/objects.package.webp');
+  --cdc-nav-color: var(--cdc-cyan-darker);
 }
 
 /* Streamers: Lichess sizes the name from the window's width, so on a narrow desktop it ran

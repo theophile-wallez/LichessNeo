@@ -202,6 +202,7 @@ main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul a:hover {
     margin-inline: calc(-1 * min(12px, 1vw)) !important;
     padding-inline: min(12px, 1vw) !important;
     background: var(--cdc-bg-page);
+    box-shadow: var(--cdc-pin-cover);
   }
 
   main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top::after {
