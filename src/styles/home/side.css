@@ -74,6 +74,8 @@
     border-radius: 10px !important;
     background: var(--cdc-bg-raised) !important;
     box-shadow: 0 0 0 4px var(--cdc-bg-panel);
+    /* Lichess lifts its ringed marker 5px, which set it above its date's middle. */
+    transform: none !important;
   }
 
   main.lobby .daily-feed__update__day {

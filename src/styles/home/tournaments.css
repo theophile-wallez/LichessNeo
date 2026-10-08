@@ -37,6 +37,17 @@
     font-weight: 800 !important;
   }
 
+  /* The box's Hugeicon on a tile tinted with its color. Lichess's glyph there is masked as
+   * its Hugeicon (theme/hugeicons), which would cut the tile to the icon's shape: the icon
+   * comes as a file in its color instead, and the glyph stays see-through. */
+  main.lobby .lobby__box__top[href$='/tournament'] {
+    --cdc-box-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion--7e88db.svg');
+  }
+
+  main.lobby .lobby__box__top[href$='/simul'] {
+    --cdc-box-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--7e88db.svg');
+  }
+
   main.lobby .lobby__box__top .title::before {
     display: grid;
     place-items: center;
@@ -44,9 +55,12 @@
     height: 40px;
     margin: 0 !important;
     border-radius: 12px;
-    background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
-    color: var(--cdc-accent-hover);
+    background:
+      var(--cdc-box-icon, none) center / 22px no-repeat,
+      color-mix(in srgb, var(--cdc-accent) 15%, transparent);
     font-size: 22px;
+    mask: none;
+    -webkit-text-fill-color: transparent;
   }
 
   main.lobby .lobby__box__top .more {
