@@ -139,8 +139,8 @@ main.forum table.topics tr.sticky td.subject a::before {
   width: 20px;
   height: 20px;
   margin-inline-end: 8px;
-  background: url('https://lichess1.org/assets/flair/img/objects.pushpin.webp') center / contain
-    no-repeat;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pin--ffc689.svg') center
+    / contain no-repeat;
   vertical-align: -3px;
 }
 

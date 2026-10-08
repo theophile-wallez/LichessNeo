@@ -158,8 +158,14 @@ main.forum-topic .forum-topic__actions h2::before {
   flex: none;
   width: 32px;
   height: 32px;
-  background: url('https://lichess1.org/assets/flair/img/symbols.left-speech-bubble.webp') center /
-    contain no-repeat;
+  border-radius: 9px;
+  background:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat--7e88db.svg') center /
+      20px no-repeat,
+    color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+  box-shadow:
+    inset 0 1px #ffffff1a,
+    0 0 0 1px color-mix(in srgb, var(--cdc-accent) 35%, transparent);
 }
 
 main.forum-topic .forum-topic__actions div {
