@@ -215,6 +215,11 @@
     transform: translate(50%, -50%);
   }
 
+  /* With a rating, its speed's glyph alone, in the pill's place. */
+  html[data-lr-ext-sidebar='collapsed'] #top #user_tag::before {
+    display: none;
+  }
+
   /* With a rating, its speed's glyph alone. */
   html[data-lr-ext-sidebar='collapsed'][data-lr-ext-account-perf] #top #user_tag::after {
     content: var(--lr-ext-account-glyph);
