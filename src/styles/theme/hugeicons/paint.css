@@ -105,6 +105,9 @@
   [data-icon='\e080']
 )::before {
   -webkit-text-fill-color: transparent;
+  /* A see-through glyph still casts its shadow (Lichess's buttons have one): inside the mask,
+   * it drew Lichess's glyph over the Hugeicon. */
+  text-shadow: none !important;
   background: currentColor;
   mask: var(--cdc-glyph) center / 1em 1em no-repeat;
 }
