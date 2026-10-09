@@ -59,7 +59,10 @@ describe('the counts', () => {
     const root = counts();
     const chips = createChips(root);
     chips.spin();
-    chips.reveal({ accuracy: 90, counts: { best: 26, excellent: 12, miss: 1 } }, texts);
+    chips.reveal(
+      { accuracy: 90, counts: { best: 26, excellent: 12, miss: 1 }, firstPlies: {} },
+      texts,
+    );
     expect(root.classList.contains('lr-ext-end__counts--spinning')).toBe(false);
     expect(root.classList.contains('lr-ext-end__counts--revealed')).toBe(true);
     expect(numbers(root)).toEqual(['0', '0', '0']);
@@ -76,9 +79,15 @@ describe('the counts', () => {
   it('change in place to other counts, even mid-roll', () => {
     const root = counts();
     const chips = createChips(root);
-    chips.reveal({ accuracy: 90, counts: { best: 26, excellent: 12, miss: 1 } }, texts);
+    chips.reveal(
+      { accuracy: 90, counts: { best: 26, excellent: 12, miss: 1 }, firstPlies: {} },
+      texts,
+    );
     vi.advanceTimersByTime(200);
-    chips.update({ accuracy: 88, counts: { best: 24, excellent: 13, mistake: 2 } }, texts);
+    chips.update(
+      { accuracy: 88, counts: { best: 24, excellent: 13, mistake: 2 }, firstPlies: {} },
+      texts,
+    );
     expect(numbers(root)).toEqual(['24', '13', '2']);
     vi.advanceTimersByTime(2000);
     expect(numbers(root)).toEqual(['24', '13', '2']);
@@ -86,5 +95,25 @@ describe('the counts', () => {
       label => label.textContent,
     );
     expect(labels).toEqual(['best moves', 'excellent moves', 'mistakes']);
+  });
+
+  it("lead to the review on each class's first move, once Lichess's analysis link is there", () => {
+    document.body.innerHTML = `<main class="round"><div class="rcontrols"><div class="follow-up">
+      <button class="fbt rematch">Rematch</button><a class="fbt" href="/abcd1234/white">Analysis</a>
+    </div></div></main>`;
+    const root = counts();
+    createChips(root).reveal(
+      {
+        accuracy: 90,
+        counts: { best: 26, excellent: 12, miss: 1 },
+        firstPlies: { best: 3, miss: 21 },
+      },
+      texts,
+    );
+    const links = queryAll(root, '.lr-ext-end__count', HTMLElement).map(chip =>
+      chip.getAttribute('href'),
+    );
+    expect(links).toEqual(['/abcd1234/white#3', null, '/abcd1234/white#21']);
+    document.body.innerHTML = '';
   });
 });

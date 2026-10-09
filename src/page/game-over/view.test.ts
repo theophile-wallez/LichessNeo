@@ -90,7 +90,11 @@ describe('the game over', () => {
     const posted = vi.spyOn(window, 'postMessage');
     const view = mount(WIN);
     view.analysing();
-    view.verdict({ accuracy: 91.24, counts: { best: 12, excellent: 3, mistake: 1 } });
+    view.verdict({
+      accuracy: 91.24,
+      counts: { best: 12, excellent: 3, mistake: 1 },
+      firstPlies: {},
+    });
     const bubble = document.querySelector('.lr-ext-end__bubble');
     const counts = document.querySelector('.lr-ext-end__counts');
     expect(bubble?.textContent).toBe('');
@@ -117,15 +121,19 @@ describe('the game over', () => {
     const posted = vi.spyOn(window, 'postMessage');
     const view = mount(WIN);
     view.analysing();
-    view.verdict({ accuracy: 91.24, counts: { best: 12, excellent: 3, mistake: 1 } });
+    view.verdict({
+      accuracy: 91.24,
+      counts: { best: 12, excellent: 3, mistake: 1 },
+      firstPlies: {},
+    });
     await vi.advanceTimersByTimeAsync(SETTLE_MS + MIN_SPIN_MS + 3000);
     const bubble = document.querySelector('.lr-ext-end__bubble');
     // Figures that read the same leave the card, and the coach, alone.
     const said = posted.mock.calls.length;
-    view.refine({ accuracy: 91.2, counts: { best: 12, excellent: 3, mistake: 1 } });
+    view.refine({ accuracy: 91.2, counts: { best: 12, excellent: 3, mistake: 1 }, firstPlies: {} });
     await vi.advanceTimersByTimeAsync(0);
     expect(posted.mock.calls).toHaveLength(said);
-    view.refine({ accuracy: 89.6, counts: { best: 11, excellent: 3, mistake: 2 } });
+    view.refine({ accuracy: 89.6, counts: { best: 11, excellent: 3, mistake: 2 }, firstPlies: {} });
     await vi.advanceTimersByTimeAsync(0);
     expect(shownCounts()).toEqual(['11', '3', '2']);
     expect(bubble?.textContent).toBe('Well played! You played with 89.6% accuracy.');

@@ -50,6 +50,31 @@
     min-width: 0;
   }
 
+  /* A count with moves leads to the review, on the first of them. */
+  a.lr-ext-end__count[href] {
+    margin: -6px;
+    padding: 6px;
+    border-radius: 8px;
+    color: inherit;
+    transition: background-color 0.15s !important;
+  }
+
+  a.lr-ext-end__count[href]:hover {
+    background: #ffffff0d;
+  }
+
+  a.lr-ext-end__count[href] .lr-ext-end__count-icon {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  }
+
+  a.lr-ext-end__count[href]:hover .lr-ext-end__count-icon {
+    transform: rotate(-6deg) scale(1.08);
+  }
+
+  a.lr-ext-end__count[href]:hover .lr-ext-end__count-label {
+    color: var(--lr-ext-text);
+  }
+
   .lr-ext-end__count-top {
     display: flex;
     align-items: center;

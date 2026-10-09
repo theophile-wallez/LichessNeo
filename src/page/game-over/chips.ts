@@ -30,6 +30,17 @@ export interface Chips {
 export const rolled = (target: number, elapsed: number): number =>
   Math.round(target * Math.min(1, Math.max(0, elapsed / ROLL_MS)));
 
+// Lichess's analysis link, always the last follow-up button (styles/game/game-over.css).
+const ANALYSIS_LINK =
+  ".rcontrols .follow-up > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/'])";
+
+/** Where a chip leads: the game's review, opened on the class's first move (`#<ply>`). */
+function linkChip(chip: HTMLElement, ply: number | undefined): void {
+  const analysis = queryOne(document, ANALYSIS_LINK, HTMLAnchorElement);
+  if (analysis && ply !== undefined) chip.setAttribute('href', `${analysis.pathname}#${ply}`);
+  else chip.removeAttribute('href');
+}
+
 const part = (chip: HTMLElement, name: string): HTMLElement | null =>
   queryOne(chip, `.lr-ext-end__count-${name}`, HTMLElement);
 
@@ -52,6 +63,7 @@ function show(
     const label = part(chip, 'label');
     if (label) label.textContent = texts.countLabel(moveClass, count);
     chip.dataset.lrExtCount = String(count);
+    linkChip(chip, summary.firstPlies[moveClass]);
     numbers.push(chip.querySelector('b'));
   }
   return numbers;

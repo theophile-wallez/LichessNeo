@@ -23,7 +23,11 @@ const NEXT: Readonly<Record<Result, Result>> = { win: 'loss', loss: 'draw', draw
 const WATCH_MS = 250;
 /** How long the counts spin before the sample figures come. */
 const SAMPLE_MS = 900;
-const SAMPLE: PlayerSummary = { accuracy: 85.3, counts: { best: 9, excellent: 2, mistake: 1 } };
+const SAMPLE: PlayerSummary = {
+  accuracy: 85.3,
+  counts: { best: 9, excellent: 2, mistake: 1 },
+  firstPlies: { best: 9, excellent: 15, mistake: 21 },
+};
 
 /** The result `?lr-ext-end=` asks for, or null. */
 export function previewResult(search: string): Result | null {

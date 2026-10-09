@@ -100,6 +100,9 @@ describe('quickReview', () => {
     expect(white.accuracy).toBeCloseTo(30.71, 2);
     expect(black.counts).toEqual({ best: 2 });
     expect(black.accuracy).toBeCloseTo(100, 2);
+    // Where each class first comes, for the card's chips.
+    expect(white.firstPlies).toEqual({ inaccuracy: 1, blunder: 3 });
+    expect(black.firstPlies).toEqual({ best: 2 });
   });
 
   it('counts theory as theory, not as the player’s errors', async () => {

@@ -62,7 +62,13 @@ function stats(session: Session, color: Color, texts: GameOverTexts): SafeHtml {
   const { review } = view;
   if (!review?.complete)
     return html`<p class="lr-ext-end__progress">${language.ui.analysing} ${Math.round(view.progress * 100)}%</p>`;
-  return statsMarkup({ accuracy: review.accuracy[color], counts: review.counts[color] }, texts);
+  // Here the review is the page's own: its chips lead nowhere.
+  const summary = {
+    accuracy: review.accuracy[color],
+    counts: review.counts[color],
+    firstPlies: {},
+  };
+  return statsMarkup(summary, texts);
 }
 
 /** What the coach says to the player, their accuracy once known; nothing to a spectator. */

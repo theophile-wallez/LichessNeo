@@ -81,8 +81,9 @@ export const endCardInput = ({ outcome, texts, coachId, opponent }: EndInput): C
   texts,
 });
 
+// Links once they know where they lead (chips.ts): to the review, on the class's first move.
 const CHIP = trustedHtml(
-  '<span class="lr-ext-end__count"><span class="lr-ext-end__count-top"><span class="lr-ext-end__count-icon"></span><b></b></span><span class="lr-ext-end__count-label"></span></span>',
+  '<a class="lr-ext-end__count"><span class="lr-ext-end__count-top"><span class="lr-ext-end__count-icon"></span><b></b></span><span class="lr-ext-end__count-label"></span></a>',
 );
 
 const emptyStats = (texts: GameOverTexts): SafeHtml =>
@@ -94,7 +95,7 @@ export function statsMarkup(summary: PlayerSummary, texts: GameOverTexts): SafeH
   const accuracy = summary.accuracy === null ? '–' : formatAccuracy(summary.accuracy);
   const chips = cardClasses(summary.counts).map(moveClass => {
     const count = summary.counts[moveClass] ?? 0;
-    return html`<span class="lr-ext-end__count" style="--lr-ext-count-c:${CLASS_COLORS[moveClass]}"><span class="lr-ext-end__count-top"><span class="lr-ext-end__count-icon">${classSvg(moveClass)}</span><b>${count}</b></span><span class="lr-ext-end__count-label">${texts.countLabel(moveClass, count)}</span></span>`;
+    return html`<a class="lr-ext-end__count" style="--lr-ext-count-c:${CLASS_COLORS[moveClass]}"><span class="lr-ext-end__count-top"><span class="lr-ext-end__count-icon">${classSvg(moveClass)}</span><b>${count}</b></span><span class="lr-ext-end__count-label">${texts.countLabel(moveClass, count)}</span></a>`;
   });
   return html`<p class="lr-ext-end__accuracy"><b>${accuracy}</b><span>${texts.accuracy}</span></p>
     <div class="lr-ext-end__counts">${chips}</div>`;

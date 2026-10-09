@@ -7,7 +7,7 @@ import type { Stockfish } from '#page/review/engine/stockfish.ts';
 import type { EngineResult } from '#page/review/engine/uci.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { buildReview } from '#page/review/game/build.ts';
-import type { GamePosition } from '#page/review/judge/types.ts';
+import type { GamePosition, MoveVerdict } from '#page/review/judge/types.ts';
 import type { GameRating } from '#page/review/rating/rate-game.ts';
 
 // The coach's quick look at a game that just ended: every position at a low
@@ -33,6 +33,8 @@ export interface PlayerSummary {
   /** Null when the player made no move. */
   readonly accuracy: number | null;
   readonly counts: Readonly<Partial<Record<MoveClass, number>>>;
+  /** The ply of the player's first move of each class, for the card's chips to lead to. */
+  readonly firstPlies: Readonly<Partial<Record<MoveClass, number>>>;
 }
 
 // The review rates a game from full-depth verdicts only.
@@ -45,6 +47,17 @@ export interface SummaryInput {
   readonly color: Color;
   readonly bookPly: number;
   readonly chess960: boolean;
+}
+
+type PlacedMove = Pick<MoveVerdict, 'ply' | 'color' | 'moveClass'>;
+
+function firstPlies(
+  moves: readonly (PlacedMove | undefined)[],
+  color: Color,
+): Partial<Record<MoveClass, number>> {
+  const plies: Partial<Record<MoveClass, number>> = {};
+  for (const move of moves) if (move?.color === color) plies[move.moveClass] ??= move.ply;
+  return plies;
 }
 
 /** The player's accuracy and counts, judged from the records as the review judges them. */
@@ -65,7 +78,11 @@ export function summarize({
     previous: null,
     rate: () => NO_RATING,
   });
-  return { accuracy: review.accuracy[color], counts: review.counts[color] };
+  return {
+    accuracy: review.accuracy[color],
+    counts: review.counts[color],
+    firstPlies: firstPlies(review.draft, color),
+  };
 }
 
 export async function quickReview(input: QuickReviewInput): Promise<PlayerSummary> {
