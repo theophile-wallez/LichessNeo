@@ -31,6 +31,7 @@
     "test:e2e": "playwright test",
     "test:e2e:fast": "playwright test --grep-invert @slow",
     "test:firefox": "node --test tests/firefox/smoke.test.ts",
+    "lichess:login": "node tests/e2e/login.ts",
     "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && node scripts/check-sources.ts",
     "check:fast": "pnpm typecheck && pnpm lint && pnpm format:check && node scripts/check-sources.ts && vitest run --changed origin/main --passWithNoTests"
   },

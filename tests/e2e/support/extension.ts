@@ -41,17 +41,21 @@ export interface LaunchOptions {
   readonly locale?: string | undefined;
   readonly colorScheme: Option<'colorScheme'> | null;
   readonly reducedMotion: Option<'reducedMotion'> | null;
+  /** A profile kept between runs (session.ts), or a fresh one. */
+  readonly userDataDir?: string | undefined;
+  /** Shown, for someone to act in it (signing in), or headless. */
+  readonly headless?: boolean | undefined;
 }
 
-/** A fresh Chromium profile with the built extension loaded, as a user would have it. */
+/** A Chromium profile (fresh by default) with the built extension loaded, as a user would have it. */
 export async function launchWithExtension(options: LaunchOptions): Promise<BrowserContext> {
   assertBuilt();
   const { baseURL, viewport, locale, colorScheme, reducedMotion } = options;
   // `channel: 'chromium'` is what loads extensions: Playwright's default
   // headless shell drops them without a word.
-  return chromium.launchPersistentContext('', {
+  return chromium.launchPersistentContext(options.userDataDir ?? '', {
     channel: 'chromium',
-    headless: true,
+    headless: options.headless ?? true,
     args: [...LAUNCH_ARGS],
     // Headless, Playwright hides the scrollbars: a layout that only fits
     // without them would pass here and overflow in a real Chrome.

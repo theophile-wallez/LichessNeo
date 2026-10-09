@@ -104,7 +104,7 @@
       }
     },
     {
-      "files": ["scripts/**", "*.config.ts"],
+      "files": ["scripts/**", "*.config.ts", "tests/e2e/login.ts"],
       "env": { "browser": false, "node": true },
       "rules": {
         "eslint/no-console": "off"

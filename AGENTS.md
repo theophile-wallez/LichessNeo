@@ -157,6 +157,7 @@ hold:
 | `pnpm test:e2e`                 | end-to-end tests on lichess.org (build first)                                    |
 | `pnpm test:e2e:fast`            | the same, without the `@slow` ones (the engine's)                                |
 | `pnpm test:firefox`             | Firefox smoke test of `dist/firefox` (after `pnpm build --target firefox`)       |
+| `pnpm lichess:login`            | signs a kept Chromium profile in to lichess.org, by hand, for signed-in checks   |
 | `pnpm lint:fix` / `pnpm format` | fix what oxlint and oxfmt can                                                    |
 | `pnpm package`                  | release zips of every target into `dist/`, plus the sources zip                  |
 | `pnpm store:render`             | renders the store images from `store/templates`                                  |
@@ -629,7 +630,15 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   (sample frames with `requestAnimationFrame`, in the page), and emulate
   `dark` too. Playwright hides scrollbars in headless mode
   (`ignoreDefaultArgs: ['--hide-scrollbars']` brings them back).
-- Pages that need an account (the puzzle dashboard) can't be driven live:
+- Signed in: `pnpm lichess:login` opens a window on Lichess's sign-in page
+  for the user to sign in (`--cookie <lila2>` takes a signed-in browser's
+  session cookie instead, `--check` says who's in). The profile is kept
+  outside the repo (`tests/e2e/support/session.ts`), and a one-off check
+  opens it with `launchSignedIn()`, one browser at a time. Never sign in for
+  the user, and never put a session or a password in the repo; CI's tests
+  stay signed out.
+- Pages that need an account and that the kept session can't reach (the
+  puzzle dashboard of another account) can't be driven live:
   rebuild them locally from a public page's shell, the markup of lila's
   Scala template and Lichess's own stylesheet for the page
   (`assets/css/<key>.<hash>.css`), without the shell's CSP `<meta>`, and
