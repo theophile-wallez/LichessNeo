@@ -137,6 +137,66 @@
   color: #fff;
 }
 
+/* The lobby's lists fade out in the card's color at an edge where more is hidden: under the
+   pinned header (each header cell draws its share), or at the top of a list without one, and
+   at the bottom. The fades follow the scroll, none at the very top or bottom, nor on a list
+   too short to scroll (its timeline is inactive: the base, no fade, shows), nor where scroll
+   timelines aren't (Firefox). */
+.lobby__app__content {
+  --lr-ext-lobby-bg: var(--lr-ext-bg-panel);
+  --lr-ext-lobby-fade: 40px;
+}
+
+.hooks__list th::after,
+.lobby__app__content::before,
+.lobby__app__content::after {
+  content: '';
+  display: block;
+  height: var(--lr-ext-lobby-fade);
+  pointer-events: none;
+}
+
+.hooks__list th::after {
+  position: absolute;
+  inset: 100% 0 auto;
+  background: linear-gradient(var(--lr-ext-lobby-bg), transparent);
+  opacity: 0;
+}
+
+/* A list without a pinned header (the games in play): the fade sits at the top. */
+.lobby__app__content::before {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin-bottom: calc(-1 * var(--lr-ext-lobby-fade));
+  background: linear-gradient(var(--lr-ext-lobby-bg), transparent);
+  opacity: 0;
+}
+
+.lobby__app__content::after {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  margin-top: calc(-1 * var(--lr-ext-lobby-fade));
+  background: linear-gradient(transparent, var(--lr-ext-lobby-bg));
+  opacity: 0;
+}
+
+@supports (animation-timeline: scroll()) {
+  .hooks__list th::after,
+  .lobby__app__content::before {
+    animation: lr-ext-scroll-fade-in linear both !important;
+    animation-timeline: scroll(nearest) !important;
+    animation-range: 0 var(--lr-ext-lobby-fade) !important;
+  }
+
+  .lobby__app__content::after {
+    animation: lr-ext-scroll-fade-out linear both !important;
+    animation-timeline: scroll(nearest) !important;
+    animation-range: calc(100% - var(--lr-ext-lobby-fade)) 100% !important;
+  }
+}
+
 .hooks__list td {
   height: 40px;
   padding: 0 12px !important;

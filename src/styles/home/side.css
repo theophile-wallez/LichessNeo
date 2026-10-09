@@ -57,21 +57,17 @@ main.lobby .lobby__feed::after {
   height: var(--lr-ext-feed-fade);
   margin-top: calc(-1 * var(--lr-ext-feed-fade));
   background: linear-gradient(transparent, var(--lr-ext-feed-bg));
+  opacity: 0;
   pointer-events: none;
 }
 
 /* The fades follow the scroll: the top one comes in over the first 40px, the bottom one goes
-   over the last 40px. Elsewhere (Firefox) the bottom one stays, the top one never shows.
-   !important for Lichess's reduced motion. */
+   over the last 40px (theme/scroll-fades.css). Without a scroll (too
+   few updates, or no scroll timelines in Firefox), neither shows. !important for Lichess's
+   reduced motion. */
 @keyframes lr-ext-feed-top-in {
   to {
     --lr-ext-feed-top-fade: 1;
-  }
-}
-
-@keyframes lr-ext-feed-bottom-out {
-  to {
-    opacity: 0;
   }
 }
 
@@ -83,7 +79,7 @@ main.lobby .lobby__feed::after {
   }
 
   main.lobby .lobby__feed::after {
-    animation: lr-ext-feed-bottom-out linear both !important;
+    animation: lr-ext-scroll-fade-out linear both !important;
     animation-timeline: scroll(nearest) !important;
     animation-range: calc(100% - var(--lr-ext-feed-fade)) 100% !important;
   }
