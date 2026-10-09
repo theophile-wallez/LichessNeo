@@ -259,8 +259,14 @@ features and its name: free analysis, open data, no ads.
 - **Every language:** Lichess localizes text and some URLs (`/fr/training`).
   Never match on text or exact hrefs: match on structure, classes, or how an
   href ends (`a[href$='/training']`).
-- **Desktop first:** our layout from 1020px; below, Lichess's mobile layout
-  with our theme, board and pieces.
+- **Every screen, not just the desktop:** our layout is built from 1020px,
+  and below it Lichess's mobile layout still shows with our theme, board and
+  pieces. That's no longer enough: tablets (about 768 to 1019px, portrait
+  and landscape) and phones (about 390px) are a first-class target. A new or
+  changed design comes with its tablet and phone versions, shown to the user
+  and validated before it's built, and the build covers all three (a page
+  that never scrolls on a desktop may scroll on a phone, but nothing
+  overflows sideways). Leave no page half-done below 1020px.
 - **Playful pages:** a color per section, icons on gradient tiles, cards,
   pills, illustrations (pieces in the board's set, our sidebar's drawings,
   little boards), never emoji (see "No emoji").
@@ -602,7 +608,8 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   `clip` on the element's `boundingBox()`.
 - Viewports: 1024×768, 1366×640, 1600×900, 1920×1080 and 2560×1440, both
   sides of each breakpoint the page's CSS uses (1019 / 1020, 1259 / 1260,
-  800 / 801), and 390 and 800 wide for the mobile layout. Nothing overflows,
+  800 / 801), and the tablet and phone sizes: 768×1024 and 1024×768 (a
+  tablet), 820×1180, 390×844 and 360×800 (phones). Nothing overflows,
   the page doesn't scroll, bars and the eval bar line up with the board.
 - Headless Chrome reports `prefers-reduced-motion: reduce` (like the user's
   own Chrome) and a light color scheme: check animations under `reduce`
