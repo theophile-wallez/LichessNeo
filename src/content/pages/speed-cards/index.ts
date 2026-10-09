@@ -1,4 +1,4 @@
-import { closestTo, createElement, onDomReady, queryAll, queryOne } from '#shared/dom.ts';
+import { closestTo, createElement, onDomReady, queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { setHtml } from '#shared/html.ts';
 import { pageLang } from '#shared/lang.ts';
@@ -7,6 +7,7 @@ import type { Card } from './data.ts';
 import {
   clickPool,
   isDriving,
+  keepPoolsTabForPoolLink,
   leavePoolsTab,
   openCustomGame,
   quickPairingName,
@@ -14,7 +15,7 @@ import {
   shownSeekingPool,
 } from './lobby-pools.ts';
 import { cardsMarkup, sectionMarkup } from './markup.ts';
-import { CARD_SPEEDS } from './pools.ts';
+import { CARD_SPEEDS, poolLabel } from './pools.ts';
 import { fetchCards, keepLastPool, keptCards } from './store.ts';
 import { speedTexts, type SpeedTexts } from './texts.ts';
 
@@ -62,6 +63,16 @@ function buildSection(state: State): HTMLElement {
 
 // Lichess's own state wins: it may have left the pool (Esc, a game found) or
 // joined one itself (a game's "New opponent" opens /#pool/<id>).
+// The heading says which pool Lichess seeks a game in, with a button to stop: a game's "New
+// opponent" lands here seeking.
+function syncBanner(section: HTMLElement, state: State): void {
+  const text = queryOne(section, '.lr-ext-speeds__seeking-text', HTMLElement);
+  const cancel = queryOne(section, '.lr-ext-speeds__cancel', HTMLElement);
+  const label = state.seeking === null ? '' : state.texts.seeking(poolLabel(state.seeking));
+  if (text && text.textContent !== label) text.textContent = label;
+  if (cancel) setData(cancel, 'lrExtPool', state.seeking ?? '');
+}
+
 function syncSeeking(section: HTMLElement, state: State): void {
   if (!isDriving()) {
     const shown = shownSeekingPool();
@@ -70,7 +81,8 @@ function syncSeeking(section: HTMLElement, state: State): void {
     leavePoolsTab();
   }
   section.classList.toggle('lr-ext-speeds--seeking', state.seeking !== null);
-  for (const button of queryAll(section, '[data-lr-ext-pool]', HTMLElement)) {
+  syncBanner(section, state);
+  for (const button of queryAll(section, '.lr-ext-speed__pool', HTMLElement)) {
     button.classList.toggle(
       'lr-ext-speed__pool--seeking',
       button.dataset.lrExtPool === state.seeking,
@@ -117,11 +129,13 @@ export function createSpeedCards(user: string | undefined, lang: string): () => 
 
 export const speedCards: Feature = {
   name: 'speed cards',
-  start: () =>
+  start: () => {
+    keepPoolsTabForPoolLink();
     onDomReady(() => {
       if (!queryOne(document, 'main.lobby', HTMLElement)) return;
       const sync = createSpeedCards(signedInUser(), pageLang());
       sync();
       onEveryTick('speed cards', sync);
-    }),
+    });
+  },
 };

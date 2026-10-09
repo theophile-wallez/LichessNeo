@@ -582,8 +582,12 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   first; bots have none), click its `.lpool[data-id]`, go back. Signed in,
   joining a pool keeps Lichess on that tab, which then glows (`glowing`)
   while it seeks from another; signed out, a pool's click makes a seek in
-  the lobby. `/api/user/<name>/rating-history` names its series by key
-  (`blitz`), not as its docs show them.
+  the lobby. A game's "New opponent" opens `/#pool/<id>`, where the lobby
+  switches to its pools tab while it's built: from another stored tab
+  (`lobby.tab:<user>`, which ours leave on the lobby's), that redraw throws
+  and the lobby never shows, so the link resets it first.
+  `/api/user/<name>/rating-history` names its series by key (`blitz`), not
+  as its docs show them.
 - **Picker names.** lila puts a picker's name in its `mselect`'s id
   (`#…__day-select`), not its class.
 - **`:has()` slows the board.** Chrome re-checks a `:has()` whenever an

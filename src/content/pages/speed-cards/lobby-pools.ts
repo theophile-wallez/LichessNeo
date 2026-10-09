@@ -1,4 +1,5 @@
 import { queryAll, queryOne } from '#shared/dom.ts';
+import { storedKeys, writeStored } from '#shared/storage.ts';
 
 // Lichess's quick pairing, driven through its own lobby: the cards replace its
 // pools tab (hidden, styles/home/speed-cards.css), so a card's button opens
@@ -69,4 +70,15 @@ export async function clickPool(id: string): Promise<void> {
 /** Opens Lichess's game setup, as its "Create a game" button does. */
 export function openCustomGame(): void {
   queryOne(document, 'main.lobby .lobby__start__button--hook', HTMLElement)?.click();
+}
+
+/**
+ * A game's "New opponent" opens /#pool/<id>, and Lichess's lobby then switches to its pools
+ * tab while it's still being built: from another tab (the cards leave it for the lobby's),
+ * that redraw throws and the lobby never shows. So its stored tab (`lobby.tab:<user>`) goes
+ * back to the pools one first, at document_start.
+ */
+export function keepPoolsTabForPoolLink(): void {
+  if (!location.hash.startsWith('#pool/')) return;
+  for (const key of storedKeys('lobby.tab:')) writeStored(key, 'pools');
 }

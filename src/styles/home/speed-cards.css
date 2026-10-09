@@ -69,6 +69,56 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   color: var(--lr-ext-text-dim);
 }
 
+/* While Lichess seeks a game in a pool: which one, and a button to stop, in the custom
+   game's place. */
+.lr-ext-speeds__seeking {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  height: 34px;
+  padding: 0 4px 0 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lr-ext-accent) 16%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 40%, transparent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.lr-ext-speeds--seeking .lr-ext-speeds__seeking {
+  display: inline-flex;
+}
+
+.lr-ext-speeds--seeking .lr-ext-speeds__custom {
+  display: none;
+}
+
+.lr-ext-speeds__seeking-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lr-ext-speeds__cancel {
+  flex: none;
+  height: 26px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 999px;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.15s !important;
+}
+
+.lr-ext-speeds__cancel:hover {
+  background: var(--lr-ext-btn-grey-hover);
+}
+
 .lr-ext-speeds__cards {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

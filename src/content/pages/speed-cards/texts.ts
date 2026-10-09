@@ -9,6 +9,9 @@ export interface SpeedTexts {
   readonly games: (count: number) => string;
   readonly provisional: string;
   readonly custom: string;
+  /** While Lichess seeks a game in a pool, its label given. */
+  readonly seeking: (pool: string) => string;
+  readonly cancel: string;
 }
 
 const ENGLISH: SpeedTexts = {
@@ -16,6 +19,8 @@ const ENGLISH: SpeedTexts = {
   games: count => (count === 1 ? '1 game' : `${count} games`),
   provisional: 'provisional',
   custom: 'Custom game',
+  seeking: pool => `Looking for a ${pool} opponent…`,
+  cancel: 'Cancel',
 };
 
 const TEXTS: Readonly<Record<string, SpeedTexts>> = {
@@ -25,24 +30,32 @@ const TEXTS: Readonly<Record<string, SpeedTexts>> = {
     games: count => (count <= 1 ? `${count} partie` : `${count} parties`),
     provisional: 'provisoire',
     custom: 'Partie personnalisée',
+    seeking: pool => `Recherche d’un adversaire en ${pool}…`,
+    cancel: 'Annuler',
   },
   de: {
     names: { bullet: 'Bullet', blitz: 'Blitz', rapid: 'Schnellschach', classical: 'Klassisch' },
     games: count => (count === 1 ? '1 Partie' : `${count} Partien`),
     provisional: 'vorläufig',
     custom: 'Eigene Partie',
+    seeking: pool => `Suche nach einem Gegner (${pool})…`,
+    cancel: 'Abbrechen',
   },
   es: {
     names: { bullet: 'Bullet', blitz: 'Blitz', rapid: 'Rápida', classical: 'Clásica' },
     games: count => (count === 1 ? '1 partida' : `${count} partidas`),
     provisional: 'provisional',
     custom: 'Partida personalizada',
+    seeking: pool => `Buscando rival (${pool})…`,
+    cancel: 'Cancelar',
   },
   pt: {
     names: { bullet: 'Bullet', blitz: 'Blitz', rapid: 'Rápida', classical: 'Clássico' },
     games: count => (count === 1 ? '1 partida' : `${count} partidas`),
     provisional: 'provisório',
     custom: 'Partida personalizada',
+    seeking: pool => `Procurando adversário (${pool})…`,
+    cancel: 'Cancelar',
   },
 };
 

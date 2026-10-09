@@ -67,7 +67,7 @@ afterEach(() => {
 });
 
 const pool = (id: string): HTMLElement | null =>
-  queryOne(document, `.lr-ext-speeds [data-lr-ext-pool='${id}']`, HTMLElement);
+  queryOne(document, `.lr-ext-speeds .lr-ext-speed__pool[data-lr-ext-pool='${id}']`, HTMLElement);
 
 describe('the speed cards', () => {
   it("go under the hero, headed by Lichess's quick pairing tab", () => {
@@ -122,6 +122,17 @@ describe('the speed cards', () => {
     expect(
       document.querySelector('.lr-ext-speeds')?.classList.contains('lr-ext-speeds--seeking'),
     ).toBe(true);
+    // The heading says so, with a button to stop.
+    expect(document.querySelector('.lr-ext-speeds__seeking-text')?.textContent).toBe(
+      'Looking for a 3 + 2 opponent…',
+    );
+    queryOne(document, '.lr-ext-speeds__cancel', HTMLElement)?.click();
+    await flush();
+    expect(lobby).toEqual({ tab: 'real_time', member: null });
+    pool('3+2')?.click();
+    await flush();
+    expect(lobby).toEqual({ tab: 'real_time', member: '3+2' });
+    sync();
     pool('3+2')?.click();
     await flush();
     expect(lobby).toEqual({ tab: 'real_time', member: null });

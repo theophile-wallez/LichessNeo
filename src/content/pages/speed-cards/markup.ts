@@ -92,5 +92,9 @@ export const sectionMarkup = (texts: SpeedTexts): SafeHtml =>
       <button type="button" class="lr-ext-speeds__custom">
         ${SETTINGS_ICON}<span>${texts.custom}</span>${CHEVRON_ICON}
       </button>
+      <div class="lr-ext-speeds__seeking" aria-live="polite">
+        <span class="lr-ext-speeds__seeking-text"></span>
+        <button type="button" class="lr-ext-speeds__cancel" data-lr-ext-pool="">${texts.cancel}</button>
+      </div>
     </div>
     <div class="lr-ext-speeds__cards"></div>`;
