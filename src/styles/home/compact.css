@@ -167,8 +167,15 @@
     grid-column: 1 / -1;
   }
 
+  /* The counters lead into the buttons, over the primary one. */
+  main.lobby .lobby__table {
+    flex-direction: column;
+  }
+
   main.lobby .lobby__counters {
+    order: -1;
     justify-content: center !important;
+    margin: 0 0 14px !important;
   }
 
   .lr-ext-speeds__title {
