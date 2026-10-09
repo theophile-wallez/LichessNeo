@@ -240,19 +240,3 @@
     box-shadow: none !important;
   }
 }
-
-/* The blog cards are dragged (content/pages/blog-carousel): horizontal swipes are
-   ours, and the cards follow the pointer without their hover transition. */
-main.lobby .lobby__blog .carousel__track {
-  touch-action: pan-y;
-  user-select: none;
-}
-
-main.lobby .lobby__blog[data-cdc-dragging],
-main.lobby .lobby__blog[data-cdc-dragging] .ublog-post-card {
-  cursor: grabbing;
-}
-
-main.lobby .lobby__blog[data-cdc-dragging] .ublog-post-card {
-  transition: none !important;
-}
