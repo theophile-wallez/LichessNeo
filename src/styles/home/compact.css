@@ -80,7 +80,7 @@
   }
 }
 
-/* A phone, or a narrow window: one column, the coach over the title, the primary start
+/* A phone, or a narrow window: one column, the coach beside the title, the primary start
    button on its own row. */
 @media (max-width: 640px) {
   main.lobby {
@@ -94,35 +94,42 @@
     grid-column: 1 / -1 !important;
   }
 
+  /* The coach beside the title, whole, and no blurb: the speeds show in the first screen. */
   .lr-ext-hero {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'eyebrow eyebrow'
+      'title coach';
     align-items: center;
-    padding: 12px 18px calc(var(--lr-ext-hero-foot) + 16px);
-    text-align: center;
+    column-gap: 8px;
+    padding: 16px 18px calc(var(--lr-ext-hero-foot) + 14px);
+  }
+
+  .lr-ext-hero__eyebrow {
+    grid-area: eyebrow;
+    justify-self: start;
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .lr-ext-hero__title {
+    grid-area: title;
+    max-width: none;
+    margin: 0;
+    font-size: 25px;
+  }
+
+  .lr-ext-hero__sub {
+    display: none;
   }
 
   .lr-ext-hero__coach {
     position: relative;
     inset: auto;
-    order: -1;
-    height: 170px;
+    grid-area: coach;
+    height: 124px;
     max-width: none;
-    margin-bottom: 8px;
-  }
-
-  .lr-ext-hero__eyebrow {
-    margin-bottom: 10px;
-  }
-
-  .lr-ext-hero__title {
-    max-width: none;
-    font-size: 28px;
-  }
-
-  .lr-ext-hero__sub {
-    max-width: none;
-    font-size: 15px;
   }
 
   main.lobby .lobby__table {
@@ -162,6 +169,10 @@
 
   main.lobby .lobby__counters {
     justify-content: center !important;
+  }
+
+  .lr-ext-speeds__title {
+    font-size: 16px;
   }
 
   .lr-ext-speeds__custom {
