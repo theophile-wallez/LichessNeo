@@ -23,7 +23,6 @@ const keep = (user: string, at: number): void =>
       user,
       at,
       top: { speed: 'blitz', rating: 1600, provisional: true },
-      ratings: { blitz: '1600?' },
     }),
   );
 
@@ -67,12 +66,6 @@ describe('the account rating', () => {
     await flush();
     expect(fetchUser).toHaveBeenCalledWith('/api/user/eresy', expect.anything());
     expect(shown()).toEqual(['rapid', '"1673"']);
-    // Each speed's, for the quick pairing; none for one never played.
-    expect(
-      ['blitz', 'rapid', 'bullet'].map(speed =>
-        root.style.getPropertyValue(`--cdc-rating-${speed}`),
-      ),
-    ).toEqual(['"1584"', '"1673"', '']);
     expect(localStorage.getItem(KEY)).toContain('"rapid"');
   });
 

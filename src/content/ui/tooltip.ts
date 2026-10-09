@@ -10,6 +10,9 @@ import { placeTooltip, splitShortcut } from './tooltip-layout.ts';
 
 const TARGETS =
   'main :is(button:is([title], [data-cdc-tip]), a.tv-channel[data-cdc-tip]):not(#cdc-review *)';
+// Lichess's home start buttons carry an English title that only repeats their label:
+// adopted, so the browser's doesn't show either, but never shown.
+const NO_TIP = 'main.lobby .lobby__start__button';
 const ON = 'cdc-tooltip--on';
 // A short wait before the first one, none when going from button to button.
 const FIRST_DELAY_MS = 250;
@@ -51,7 +54,7 @@ export class Tooltip {
     this.hide();
     if (!target) return;
     adoptTitle(target);
-    if (!target.dataset.cdcTip) return;
+    if (!target.dataset.cdcTip || target.matches(NO_TIP)) return;
     this.#target = target;
     const delay = Date.now() - this.#hiddenAt < CHAIN_MS ? 0 : FIRST_DELAY_MS;
     this.#timer = setTimeout(() => this.#show(target), delay);

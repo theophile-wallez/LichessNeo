@@ -229,9 +229,12 @@
     color: #fff;
   }
 
-  /* Room for the segmented tabs (pages/lobby.css) over the whole quick-pairing grid. */
+  /* As tall as the featured game beside it (contain: size stops it growing the row), its
+     list scrolling. */
   main.lobby .lobby__app {
-    height: 520px !important;
+    contain: size;
+    height: auto !important;
+    min-height: 420px;
     max-height: none !important;
   }
 

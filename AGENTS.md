@@ -569,6 +569,13 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   picked, so nothing can slide: they stay out of `TAB_BARS`. Before adding a
   snabbdom bar, check in lila that neither it nor a parent changes its
   selector with the tab.
+- **The home's quick pairing.** Our speed cards (`content/pages/speed-cards`)
+  replace the lobby's pools tab, hidden, and drive it: open that tab (the
+  first; bots have none), click its `.lpool[data-id]`, go back. Signed in,
+  joining a pool keeps Lichess on that tab, which then glows (`glowing`)
+  while it seeks from another; signed out, a pool's click makes a seek in
+  the lobby. `/api/user/<name>/rating-history` names its series by key
+  (`blitz`), not as its docs show them.
 - **Picker names.** lila puts a picker's name in its `mselect`'s id
   (`#…__day-select`), not its class.
 - **`:has()` slows the board.** Chrome re-checks a `:has()` whenever an

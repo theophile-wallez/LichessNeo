@@ -16,6 +16,8 @@ export const StorageKey = {
   sidebarCollapsed: 'cdc-sidebar-collapsed',
   // The signed-in player's most played speed and its rating (content/sidebar/account-rating.ts).
   accountRating: 'cdc-account-rating',
+  // The home's speed cards: each speed's rating, curve and last pool (content/pages/speed-cards).
+  speedCards: 'cdc-speed-cards',
   ratingChartRange: 'cdc-rchart:range',
   reviewCache: (gameId: string, positions: number, version: number): string =>
     `cdc-review:${gameId}:${positions}:v${version}`,

@@ -129,11 +129,10 @@
 
   /* ---- Support --- */
 
-  /* The support links as two stacked tiles beside the tournaments, filling what would be
-     a hole in the grid. They keep their height when the tournaments run longer. */
+  /* The support links as two tiles side by side under the tournaments. */
   main.lobby .lobby__support {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-content: start;
     gap: 20px;
     visibility: visible !important;

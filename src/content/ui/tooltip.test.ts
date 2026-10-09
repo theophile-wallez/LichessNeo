@@ -67,6 +67,20 @@ describe('tooltips', () => {
     expect(button.outerHTML).toBe('<button data-cdc-tip="Resign" aria-label="Resign"></button>');
   });
 
+  it("shows none on the home's start buttons, nor the browser's", () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main class="lobby"><button class="lobby__start__button" title="Create a custom game"></button></main>',
+    );
+    const button = document.querySelector('main.lobby > button');
+    if (!button) throw new Error('no button');
+    hover(button);
+    vi.advanceTimersByTime(250);
+    expect(shown()).toBeNull();
+    expect(button.hasAttribute('title')).toBe(false);
+    expect(button.getAttribute('aria-label')).toBe('Create a custom game');
+  });
+
   it('waits before the first one, not from one button to the next', () => {
     const first = addButton('title="One"');
     const second = addButton('title="Two"');

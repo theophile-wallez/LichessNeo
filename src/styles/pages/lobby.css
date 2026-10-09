@@ -60,20 +60,18 @@
   }
 }
 
-/* The count of games in play, as the profile's unread count. */
+/* Lichess's badge counts the games where it's the player's turn, which the tab's own
+   count (games in play) usually repeats: a dot says "your move" without a second number. */
 .lobby__app > .tabs-horiz .unread {
   flex: none;
-  box-sizing: border-box;
-  min-width: 20px;
-  margin-inline-start: 8px;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: var(--cdc-accent);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 18px;
-  text-align: center;
+  width: 8px;
+  height: 8px;
+  margin-inline-start: 10px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--cdc-accent-hover);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-accent) 25%, transparent);
+  font-size: 0;
 }
 
 .lpools {
