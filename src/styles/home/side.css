@@ -1,57 +1,18 @@
 /* ---- Updates --- */
 
-/* The feed scrolls under its pinned title, fading out at an edge where more is hidden: the
-   fades follow the scroll (a scroll-driven animation), none at the very top or bottom. A mask
-   doesn't scroll with the content, so it fades the list, never the title. On a desktop the
-   feed takes the puzzle's height beside it (contain: size stops it growing the row). */
-@property --lr-ext-fade-top {
-  syntax: '<length>';
-  inherits: false;
-  initial-value: 0px;
-}
-
-/* Where scroll timelines aren't (Firefox), the bottom fade stays, as it was. */
-@property --lr-ext-fade-bottom {
-  syntax: '<length>';
-  inherits: false;
-  initial-value: 40px;
-}
-
-@keyframes lr-ext-fade-top-in {
-  to {
-    --lr-ext-fade-top: 40px;
-  }
-}
-
-@keyframes lr-ext-fade-bottom-out {
-  to {
-    --lr-ext-fade-bottom: 0px;
-  }
-}
-
+/* The feed scrolls under its pinned title, with a fade in the card's own color at an edge
+   where more is hidden: drawn by the title (its foot, over the list) and by an overlay at the
+   bottom. On a desktop the feed takes the puzzle's height beside it (contain: size stops it
+   growing the row). */
 main.lobby .lobby__feed {
-  /* The pinned title's height: 18px + 22px + 10px. */
-  --lr-ext-feed-head: 50px;
+  --lr-ext-feed-bg: var(--lr-ext-bg-panel);
+  /* How far each fade reaches into the list. */
+  --lr-ext-feed-fade: 40px;
   max-height: 460px;
   padding: 0 20px !important;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #ffffff26 transparent;
-  mask-image: linear-gradient(
-    #000 var(--lr-ext-feed-head),
-    transparent var(--lr-ext-feed-head),
-    #000 calc(var(--lr-ext-feed-head) + var(--lr-ext-fade-top)),
-    #000 calc(100% - var(--lr-ext-fade-bottom)),
-    transparent
-  );
-  animation:
-    lr-ext-fade-top-in linear both,
-    lr-ext-fade-bottom-out linear both !important;
-  /* !important like the shorthand, which resets them (it must win Lichess's reduced motion). */
-  animation-timeline: scroll(self), scroll(self) !important;
-  animation-range:
-    0 40px,
-    calc(100% - 40px) 100% !important;
 }
 
 @media (min-width: 1020px) {
@@ -62,14 +23,70 @@ main.lobby .lobby__feed {
   }
 }
 
+/* 0 to 1, how much of the top fade shows (none until the list is scrolled). */
+@property --lr-ext-feed-top-fade {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/* The title, its foot over the list: the room it takes back with a negative margin, so the
+   list doesn't move, and lets the pointer through. */
 main.lobby .lobby__feed::before {
   position: sticky;
   top: 0;
   z-index: 2;
-  margin: 0 !important;
-  padding: 18px 2px 10px;
-  background: var(--lr-ext-bg-panel);
+  margin: 0 0 calc(-1 * var(--lr-ext-feed-fade)) !important;
+  padding: 18px 2px calc(10px + var(--lr-ext-feed-fade));
+  background: linear-gradient(
+    var(--lr-ext-feed-bg) calc(100% - var(--lr-ext-feed-fade)),
+    color-mix(in srgb, var(--lr-ext-feed-bg) calc(var(--lr-ext-feed-top-fade) * 100%), transparent)
+      calc(100% - var(--lr-ext-feed-fade)),
+    transparent
+  );
   line-height: 22px;
+  pointer-events: none;
+}
+
+main.lobby .lobby__feed::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  height: var(--lr-ext-feed-fade);
+  margin-top: calc(-1 * var(--lr-ext-feed-fade));
+  background: linear-gradient(transparent, var(--lr-ext-feed-bg));
+  pointer-events: none;
+}
+
+/* The fades follow the scroll: the top one comes in over the first 40px, the bottom one goes
+   over the last 40px. Elsewhere (Firefox) the bottom one stays, the top one never shows.
+   !important for Lichess's reduced motion. */
+@keyframes lr-ext-feed-top-in {
+  to {
+    --lr-ext-feed-top-fade: 1;
+  }
+}
+
+@keyframes lr-ext-feed-bottom-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  main.lobby .lobby__feed::before {
+    animation: lr-ext-feed-top-in linear both !important;
+    animation-timeline: scroll(nearest) !important;
+    animation-range: 0 var(--lr-ext-feed-fade) !important;
+  }
+
+  main.lobby .lobby__feed::after {
+    animation: lr-ext-feed-bottom-out linear both !important;
+    animation-timeline: scroll(nearest) !important;
+    animation-range: calc(100% - var(--lr-ext-feed-fade)) 100% !important;
+  }
 }
 
 /* Lichess's gold rail and ringed markers → a faint rail and icon tiles. */
