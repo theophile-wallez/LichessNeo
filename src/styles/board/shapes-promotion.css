@@ -1,14 +1,14 @@
 /* ---- Shapes and mate --- */
 
-/* page/board/ redraws the main board's shapes (square fills in .cdc-marks, arrows in
- * #cdc-shapes). Hidden only once its layers are up, so a board it misses keeps Lichess's. */
-html.cdc-shapes main .main-board svg.cg-shapes > g {
+/* page/board/ redraws the main board's shapes (square fills in .lr-ext-marks, arrows in
+ * #lr-ext-shapes). Hidden only once its layers are up, so a board it misses keeps Lichess's. */
+html.lr-ext-shapes main .main-board svg.cg-shapes > g {
   display: none;
 }
 
 /* z-index 1 like chessground's under-piece layer, and after it in the DOM, so the fills also
  * cover the last-move highlight. */
-svg.cdc-marks {
+svg.lr-ext-marks {
   position: absolute;
   top: 0;
   left: 0;
@@ -26,27 +26,27 @@ svg.cdc-marks {
   fill: #ffaa00 !important;
 }
 
-#cdc-shapes {
+#lr-ext-shapes {
   position: absolute;
   inset: 0;
   z-index: 3;
   pointer-events: none;
   container-type: inline-size; /* label size in cqw */
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
 }
 
-.cdc-shapes__arrows {
+.lr-ext-shapes__arrows {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
-html.cdc-mate main.analyse cg-board square.check {
+html.lr-ext-mate main.analyse cg-board square.check {
   background: none !important;
 }
 
-.cdc-mate__badge {
+.lr-ext-mate__badge {
   position: absolute;
   display: flex;
   align-items: center;
@@ -59,12 +59,12 @@ html.cdc-mate main.analyse cg-board square.check {
   box-shadow: 0 2px 3px #00000059;
 }
 
-.cdc-mate__badge svg {
+.lr-ext-mate__badge svg {
   width: 86%;
   height: 86%;
 }
 
-.cdc-mate__square {
+.lr-ext-mate__square {
   position: absolute;
   display: flex;
   align-items: flex-end;
@@ -72,21 +72,21 @@ html.cdc-mate main.analyse cg-board square.check {
   width: 12.5%;
   height: 12.5%;
   background: rgba(224, 40, 40, 0.65);
-  animation: cdc-fade 0.3s ease-out;
+  animation: lr-ext-fade 0.3s ease-out;
 }
 
-.cdc-mate__icon {
+.lr-ext-mate__icon {
   width: 42%;
   height: 42%;
   margin-bottom: 14%;
 }
 
-.cdc-mate__icon svg {
+.lr-ext-mate__icon svg {
   width: 100%;
   height: 100%;
 }
 
-.cdc-mate__label {
+.lr-ext-mate__label {
   position: absolute;
   transform: translateX(-50%);
   padding: 0.3em 0.8em;
@@ -98,10 +98,10 @@ html.cdc-mate main.analyse cg-board square.check {
   font-weight: 800;
   line-height: 1.2;
   white-space: nowrap;
-  animation: cdc-fade 0.3s ease-out;
+  animation: lr-ext-fade 0.3s ease-out;
 }
 
-@keyframes cdc-fade {
+@keyframes lr-ext-fade {
   from {
     opacity: 0;
   }
@@ -113,7 +113,7 @@ html.cdc-mate main.analyse cg-board square.check {
  * grey squares. Lichess places a square per 12.5% (`.top` down, `.bottom` up). */
 #promotion-choice {
   background: rgba(0, 0, 0, 0.18) !important;
-  animation: cdc-fade 0.15s ease-out;
+  animation: lr-ext-fade 0.15s ease-out;
   container-type: inline-size; /* the "×" in cqw */
 }
 
@@ -185,7 +185,7 @@ html.cdc-mate main.analyse cg-board square.check {
 .is2d #promotion-choice piece {
   transform: scale(0.94) !important;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-  animation: cdc-promo-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation: lr-ext-promo-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
 .is2d #promotion-choice square:hover piece {
@@ -205,7 +205,7 @@ html.cdc-mate main.analyse cg-board square.check {
   animation-delay: 0.12s;
 }
 
-@keyframes cdc-promo-in {
+@keyframes lr-ext-promo-in {
   from {
     opacity: 0;
     transform: scale(0.5);

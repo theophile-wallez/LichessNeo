@@ -13,11 +13,11 @@ afterEach(() => {
 });
 
 const text = (selector: string): string =>
-  document.querySelector(`#cdc-review ${selector}`)?.textContent ?? '';
+  document.querySelector(`#lr-ext-review ${selector}`)?.textContent ?? '';
 
 function click(selector: string): void {
   document
-    .querySelector(`#cdc-review ${selector}`)
+    .querySelector(`#lr-ext-review ${selector}`)
     ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
 }
 
@@ -33,42 +33,42 @@ it('writes the lines around a mistake, and plays the best one on the board', asy
   const { ctrl, advance } = setUp({ game: 'opera', lang: 'en', cached: true, steps: [] });
   review.start();
   await advance(500);
-  click('[data-cdc="moves"]');
+  click('[data-lr-ext="moves"]');
   await advance(1500);
   ctrl.jumpToMain(14);
   ctrl.redraw();
   await advance(1500);
   const move = ctrl.path;
-  const title = text('.cdc-bubble__title');
+  const title = text('.lr-ext-bubble__title');
   expect(title).toBe('♛e7 is an inaccuracy');
-  click('[data-cdc="explain"]');
+  click('[data-lr-ext="explain"]');
   await advance(1000);
   // The chips draw the pieces: only the squares show as text.
-  expect(text('.cdc-bubble__sub')).toBe(
+  expect(text('.lr-ext-bubble__sub')).toBe(
     'Best was 7... c5 8. a3 a6 9. a4. e7 allows 8. d1 a6 9. a3. ',
   );
-  expect(text('.cdc-bubble__line')).toBe('Show line');
+  expect(text('.lr-ext-bubble__line')).toBe('Show line');
 
-  click('[data-cdc="line"]');
+  click('[data-lr-ext="line"]');
   await advance(0);
   expect(playedSince(ctrl, parentPath(move))).toEqual(['f8c5']);
   await advance(900 * 4);
   expect(playedSince(ctrl, parentPath(move))).toEqual(['f8c5', 'a2a3', 'a7a6', 'a3a4']);
   // The coach still speaks of the move the line stands for.
-  expect(text('.cdc-bubble__title')).toBe(title);
-  expect(text('.cdc-bubble__line')).toBe('Back');
-  expect(document.querySelector('#cdc-review [data-cdc="best"]')?.hasAttribute('disabled')).toBe(
-    true,
-  );
-  click('[data-cdc="line"]');
+  expect(text('.lr-ext-bubble__title')).toBe(title);
+  expect(text('.lr-ext-bubble__line')).toBe('Back');
+  expect(
+    document.querySelector('#lr-ext-review [data-lr-ext="best"]')?.hasAttribute('disabled'),
+  ).toBe(true);
+  click('[data-lr-ext="line"]');
   await advance(500);
   expect(ctrl.path).toBe(move);
 
   // Explain off, halfway through the line, goes back to the move and stops there.
-  click('[data-cdc="line"]');
+  click('[data-lr-ext="line"]');
   await advance(900);
-  click('[data-cdc="explain"]');
+  click('[data-lr-ext="explain"]');
   await advance(3000);
   expect(ctrl.path).toBe(move);
-  expect(document.querySelector('#cdc-review .cdc-bubble__line')).toBeNull();
+  expect(document.querySelector('#lr-ext-review .lr-ext-bubble__line')).toBeNull();
 }, 30_000);

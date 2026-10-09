@@ -86,7 +86,7 @@ export function moveTimesSpec(analysis: Analysis): PlyChartSpec | null {
   const formats = timeFormats();
   const chips = SIDES.map(
     color =>
-      html`<span class="cdc-gchart__chip" style="--cdc-series-color:${SIDE_COLORS[color]}">${chipLabel(formats.side[color])}</span>`,
+      html`<span class="lr-ext-gchart__chip" style="--lr-ext-series-color:${SIDE_COLORS[color]}">${chipLabel(formats.side[color])}</span>`,
   );
   return {
     plies: times.map(time => time.ply),

@@ -18,7 +18,7 @@
     z-index: 2;
     margin: 0 !important;
     padding: 18px 2px 10px;
-    background: var(--cdc-bg-panel);
+    background: var(--lr-ext-bg-panel);
   }
 
   main.lobby .lobby__feed::after {
@@ -30,8 +30,8 @@
     height: 40px;
     margin-top: -40px;
     background: linear-gradient(
-      color-mix(in srgb, var(--cdc-grey-900) 0%, transparent),
-      var(--cdc-bg-panel)
+      color-mix(in srgb, var(--lr-ext-grey-900) 0%, transparent),
+      var(--lr-ext-bg-panel)
     );
     pointer-events: none;
   }
@@ -66,43 +66,43 @@
   /* Each update's icon: Lichess picks a flair (an emoji) per update, drawn here as the closest
    * Hugeicon in a palette color, a news one for any other. */
   main.lobby .daily-feed__update__marker {
-    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
-    --cdc-feed-color: var(--cdc-accent);
+    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
+    --lr-ext-feed-color: var(--lr-ext-accent);
   }
 
   main.lobby .daily-feed__update__marker[src*='/activity.lichess.webp'] {
-    --cdc-feed-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
-    --cdc-feed-color: var(--cdc-grey-300);
+    --lr-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+    --lr-ext-feed-color: var(--lr-ext-grey-300);
   }
 
   main.lobby .daily-feed__update__marker[src*='/activity.party-popper.webp'] {
-    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg');
-    --cdc-feed-color: var(--cdc-pink);
+    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg');
+    --lr-ext-feed-color: var(--lr-ext-pink);
   }
 
   main.lobby .daily-feed__update__marker[src*='/objects.megaphone.webp'] {
-    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--ffc689.svg');
-    --cdc-feed-color: var(--cdc-orange);
+    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--ffc689.svg');
+    --lr-ext-feed-color: var(--lr-ext-orange);
   }
 
   main.lobby .daily-feed__update__marker[src*='/objects.studio-microphone.webp'] {
-    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--caa9fa.svg');
-    --cdc-feed-color: var(--cdc-purple);
+    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--caa9fa.svg');
+    --lr-ext-feed-color: var(--lr-ext-purple);
   }
 
   main.lobby .daily-feed__update__marker[src*='/objects.hammer-and-wrench.webp'] {
-    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--a2edfd.svg');
-    --cdc-feed-color: var(--cdc-cyan);
+    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--a2edfd.svg');
+    --lr-ext-feed-color: var(--lr-ext-cyan);
   }
 
   main.lobby .daily-feed__update__marker[src*='/objects.camera.webp'] {
-    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--a2edfd.svg');
-    --cdc-feed-color: var(--cdc-cyan);
+    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--a2edfd.svg');
+    --lr-ext-feed-color: var(--lr-ext-cyan);
   }
 
   main.lobby .daily-feed__update__marker[src*='/activity.puzzle-piece.webp'] {
-    --cdc-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--73fb95.svg');
-    --cdc-feed-color: var(--cdc-green);
+    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--73fb95.svg');
+    --lr-ext-feed-color: var(--lr-ext-green);
   }
 
   main.lobby .daily-feed__update__marker {
@@ -116,11 +116,11 @@
     border: none !important;
     border-radius: 10px !important;
     background:
-      var(--cdc-feed-icon) center / 20px no-repeat,
-      color-mix(in srgb, var(--cdc-feed-color) 20%, var(--cdc-bg-panel)) !important;
+      var(--lr-ext-feed-icon) center / 20px no-repeat,
+      color-mix(in srgb, var(--lr-ext-feed-color) 20%, var(--lr-ext-bg-panel)) !important;
     box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--cdc-feed-color) 35%, transparent),
-      0 0 0 4px var(--cdc-bg-panel);
+      inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-feed-color) 35%, transparent),
+      0 0 0 4px var(--lr-ext-bg-panel);
     /* Lichess lifts its ringed marker 5px, which set it above its date's middle. */
     transform: none !important;
   }
@@ -129,7 +129,7 @@
     display: inline-flex !important;
     align-items: center;
     min-height: 36px;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px !important;
     font-weight: 700 !important;
     text-transform: uppercase;
@@ -143,14 +143,14 @@
 
   main.lobby .daily-feed__update p {
     margin: -7px 0 0;
-    color: var(--cdc-grey-200);
+    color: var(--lr-ext-grey-200);
     font-size: 14.5px;
     line-height: 1.55;
   }
 
   /* The last entry is the "All updates" link. */
   main.lobby .daily-feed__update a.daily-feed__update__day[href$='/feed'] {
-    color: var(--cdc-accent-hover) !important;
+    color: var(--lr-ext-accent-hover) !important;
     text-transform: none;
     letter-spacing: 0;
     font-size: 14px !important;
@@ -191,7 +191,7 @@
     padding: 9px 12px 9px 56px;
     border-radius: 10px;
     background: #ffffff08;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px;
     line-height: 1.4 !important;
     text-shadow: none !important;
@@ -223,8 +223,8 @@
     height: 34px;
     margin: 0 !important;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--cdc-red-dark) 15%, transparent);
-    color: var(--cdc-red);
+    background: color-mix(in srgb, var(--lr-ext-red-dark) 15%, transparent);
+    color: var(--lr-ext-red);
     font-size: 18px !important;
     transform: translateY(-50%);
   }
@@ -236,8 +236,8 @@
     height: 7px;
     margin: 0 0 1px 8px;
     border-radius: 50%;
-    background: var(--cdc-red);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-red) 18%, transparent);
+    background: var(--lr-ext-red);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-red) 18%, transparent);
   }
 
   main.lobby .lobby__streams .more {
@@ -272,7 +272,7 @@
   main.lobby .tour-spotlight {
     padding: 12px !important;
     border-radius: 14px !important;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow:
       inset 0 1px 0 #ffffff0d,
       0 10px 28px #00000033 !important;
@@ -281,7 +281,7 @@
   }
 
   main.lobby .tour-spotlight:hover {
-    background: var(--cdc-grey-850) !important;
+    background: var(--lr-ext-grey-850) !important;
   }
 
   main.lobby .tour-spotlight .name {
@@ -290,7 +290,7 @@
   }
 
   main.lobby .tour-spotlight :is(.headline, .more) {
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
   }
 
   /* The side column is narrow at 1024: long names or counts (Spanish, French) end in an
@@ -307,7 +307,7 @@
   main.lobby .about-side {
     flex: none;
     margin: 0 !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px;
     line-height: 1.55;
     text-shadow: none !important;

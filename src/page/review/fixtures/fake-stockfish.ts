@@ -5,9 +5,9 @@ import { fnv } from './fnv.ts';
 // through `site.asset.url`. Its scores come from a hash of the position, so
 // every run (and the original script and the port) sees the same lines.
 
-/** A module that hands the factory's options to `globalThis.cdcFakeStockfish`. */
+/** A module that hands the factory's options to `globalThis.lrExtFakeStockfish`. */
 export const FAKE_STOCKFISH_URL = `data:text/javascript,${encodeURIComponent(
-  'export default async options => globalThis.cdcFakeStockfish(options);',
+  'export default async options => globalThis.lrExtFakeStockfish(options);',
 )}`;
 
 /** A line of five moves from `first`, each side then pushing a pawn. */
@@ -97,6 +97,6 @@ export function installFakeStockfish(
     };
     return module;
   };
-  Reflect.set(globalThis, 'cdcFakeStockfish', factory);
+  Reflect.set(globalThis, 'lrExtFakeStockfish', factory);
   return () => booted;
 }

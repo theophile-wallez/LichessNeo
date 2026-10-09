@@ -5,15 +5,15 @@ import { placeTooltip, splitShortcut } from './tooltip-layout.ts';
 
 // Styled tooltips on the page's buttons (styles/theme/tooltips-and-tabs.css),
 // instead of the browser's slow, unstyled `title`. On hover the title moves to
-// `data-cdc-tip`, so the native one never shows. Snabbdom only sets the title
+// `data-lr-ext-tip`, so the native one never shows. Snabbdom only sets the title
 // again if it changes, and the next hover moves it again.
 
 const TARGETS =
-  'main :is(button:is([title], [data-cdc-tip]), a.tv-channel[data-cdc-tip]):not(#cdc-review *)';
+  'main :is(button:is([title], [data-lr-ext-tip]), a.tv-channel[data-lr-ext-tip]):not(#lr-ext-review *)';
 // Lichess's home start buttons carry an English title that only repeats their label:
 // adopted, so the browser's doesn't show either, but never shown.
 const NO_TIP = 'main.lobby .lobby__start__button';
-const ON = 'cdc-tooltip--on';
+const ON = 'lr-ext-tooltip--on';
 // A short wait before the first one, none when going from button to button.
 const FIRST_DELAY_MS = 250;
 const CHAIN_MS = 400;
@@ -27,14 +27,14 @@ function hoverTarget(event: MouseEvent): HTMLElement | null {
 
 function adoptTitle(target: HTMLElement): void {
   if (!target.title) return;
-  setData(target, 'cdcTip', target.title);
+  setData(target, 'lrExtTip', target.title);
   if (!target.hasAttribute('aria-label')) target.setAttribute('aria-label', target.title);
   target.removeAttribute('title');
 }
 
 export class Tooltip {
   readonly #element = createElement('div', {
-    className: 'cdc-tooltip',
+    className: 'lr-ext-tooltip',
     attrs: { 'aria-hidden': 'true' },
   });
   #target: HTMLElement | null = null;
@@ -54,7 +54,7 @@ export class Tooltip {
     this.hide();
     if (!target) return;
     adoptTitle(target);
-    if (!target.dataset.cdcTip || target.matches(NO_TIP)) return;
+    if (!target.dataset.lrExtTip || target.matches(NO_TIP)) return;
     this.#target = target;
     const delay = Date.now() - this.#hiddenAt < CHAIN_MS ? 0 : FIRST_DELAY_MS;
     this.#timer = setTimeout(() => this.#show(target), delay);
@@ -67,7 +67,7 @@ export class Tooltip {
 
   #show(target: HTMLElement): void {
     const tooltip = this.#element;
-    const { label, key } = splitShortcut(target.dataset.cdcTip ?? '');
+    const { label, key } = splitShortcut(target.dataset.lrExtTip ?? '');
     tooltip.textContent = label;
     if (key !== null) tooltip.append(createElement('kbd', { text: key }));
     if (!tooltip.isConnected) document.body.append(tooltip);
@@ -79,7 +79,7 @@ export class Tooltip {
     setData(tooltip, 'side', place.side);
     tooltip.style.top = `${place.top}px`;
     tooltip.style.left = `${place.left}px`;
-    setStyleProperty(tooltip, '--cdc-tooltip-arrow', `${place.arrow}px`);
+    setStyleProperty(tooltip, '--lr-ext-tooltip-arrow', `${place.arrow}px`);
     tooltip.classList.toggle(ON, true);
   }
 }

@@ -20,9 +20,9 @@
   height: auto !important;
   padding: 0 !important;
   overflow: hidden;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 10px;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   transition:
     background-color 0.15s,
     border-color 0.15s,
@@ -30,9 +30,9 @@
 }
 
 .coach-list__main .coach-widget:hover {
-  border-color: var(--cdc-card-border-hover) !important;
-  background: var(--cdc-card-hover) !important;
-  box-shadow: var(--cdc-card-shadow-hover);
+  border-color: var(--lr-ext-card-border-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
+  box-shadow: var(--lr-ext-card-shadow-hover);
 }
 
 /* Lichess hides pictures on narrow screens; a card always has one. */
@@ -45,7 +45,7 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   object-position: center 30%;
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
 }
 
 .coach-list__main .coach-widget .overview {
@@ -73,7 +73,7 @@
   overflow: hidden;
   min-height: 2.8em;
   margin: 0 0 14px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px !important;
   font-style: normal !important;
   line-height: 1.4;
@@ -106,7 +106,7 @@
 .coach-list__main .coach-widget th {
   padding: 0 !important;
   overflow: hidden;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px !important;
   font-weight: 600;
   text-align: start !important;
@@ -116,7 +116,7 @@
 
 .coach-list__main .coach-widget td {
   overflow: hidden;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -124,7 +124,7 @@
 
 .coach-list__main .coach-widget td .location::after {
   content: ' ·';
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 .coach-list__main .coach-widget td .flag img {
@@ -157,7 +157,7 @@
 
 .coach-list__main .coach-widget .rating td a span::before {
   margin-inline-end: 3px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-weight: 400;
 }
 
@@ -181,18 +181,18 @@
 }
 
 .coach-list__main .coach-widget tr.seen td {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
 }
 
 /* ---- Title badge --- */
 
-.cdc-coach-title {
+.lr-ext-coach-title {
   display: inline-block;
   margin-inline-end: 6px;
   padding: 0 4px;
   border-radius: 3px;
-  background: var(--cdc-title-bg);
+  background: var(--lr-ext-title-bg);
   color: #fff;
   font-size: 0.62em;
   font-weight: 800;

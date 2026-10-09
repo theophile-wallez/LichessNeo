@@ -13,7 +13,7 @@
     margin: 0 !important;
     overflow: hidden;
     border-radius: 6px 6px 0 0;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
@@ -40,7 +40,7 @@
     background: repeating-linear-gradient(
         to bottom,
         transparent 0 30px,
-        var(--cdc-grey-850) 30px 60px
+        var(--lr-ext-grey-850) 30px 60px
       )
       local !important;
     box-shadow: none !important;
@@ -59,8 +59,8 @@
     justify-content: flex-start !important;
     padding: 0 0 0 12px !important;
     background: none !important;
-    color: var(--cdc-text-dim) !important;
-    font-family: var(--cdc-font) !important;
+    color: var(--lr-ext-text-dim) !important;
+    font-family: var(--lr-ext-font) !important;
     font-size: 13px !important;
     font-weight: 700 !important;
   }
@@ -74,7 +74,7 @@
     height: 24px;
     padding: 0 5px !important;
     border-radius: 3px;
-    color: var(--cdc-text) !important;
+    color: var(--lr-ext-text) !important;
     font-size: 14px !important;
     font-weight: 700 !important;
     background: none !important;
@@ -101,7 +101,7 @@
   }
 
   main.round :is(i5d, rm6) .status {
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
   }
 
   /* The navigation buttons stay at the bottom, even before the first move. */
@@ -122,14 +122,14 @@
     height: 40px !important;
     line-height: 40px !important;
     border-radius: 5px;
-    background: var(--cdc-btn-grey) !important;
-    color: var(--cdc-text) !important;
+    background: var(--lr-ext-btn-grey) !important;
+    color: var(--lr-ext-text) !important;
     font-size: 18px;
-    box-shadow: var(--cdc-btn-grey-shadow);
+    box-shadow: var(--lr-ext-btn-grey-shadow);
   }
 
   main.round :is(i5d, rm6) bo3 .fbt:hover:not(.disabled) {
-    background: var(--cdc-btn-grey-hover) !important;
+    background: var(--lr-ext-btn-grey-hover) !important;
     color: #fff !important;
   }
 

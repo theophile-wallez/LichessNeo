@@ -33,16 +33,16 @@ function badgeTitle(name: HTMLElement): void {
   const card = closestTo(name, '.coach-widget', Element);
   const title = coachTitle(card ? queryOne(card, 'img.picture', HTMLImageElement)?.alt : undefined);
   // Also marks the name as done.
-  setData(name, 'cdcTitle', title);
+  setData(name, 'lrExtTitle', title);
   if (title === '') return;
   const text = name.firstChild;
   if (text instanceof Text && text.data.startsWith(`${title} `))
     text.data = text.data.slice(title.length + 1);
-  name.prepend(createElement('span', { className: 'cdc-coach-title', text: title }));
+  name.prepend(createElement('span', { className: 'lr-ext-coach-title', text: title }));
 }
 
 export function syncCoachTitles(): void {
-  const names = '.coach-widget .coach-name:not([data-cdc-title])';
+  const names = '.coach-widget .coach-name:not([data-lr-ext-title])';
   for (const name of queryAll(document, names, HTMLElement)) badgeTitle(name);
 }
 

@@ -45,7 +45,7 @@ export function createReview(analysis: Analysis): Session {
 // Called only for a page the review covers. Rendering on any other page (a
 // variant, a game without moves) would show an empty panel.
 function run(session: Session, mode: Mode): void {
-  document.documentElement.classList.toggle('cdc-review', true);
+  document.documentElement.classList.toggle('lr-ext-review', true);
   setMode(session, mode);
   setInterval(() => render(session), RENDER_MS);
   let lastWidth = window.innerWidth;

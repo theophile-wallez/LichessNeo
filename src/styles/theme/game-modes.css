@@ -1,69 +1,69 @@
 /* ---- Game modes --- */
 
 /* Lichess's time-control and variant glyphs ([data-icon]::before) keep their
- * shape and take a color per mode, --cdc-mode-color. The --cdc-mode-<speed>
+ * shape and take a color per mode, --lr-ext-mode-color. The --lr-ext-mode-<speed>
  * glyphs are for the places that draw one outside a [data-icon] (the lobby's
  * pools, the FIDE tables), in Lichess's icon font. */
 :root {
-  --cdc-mode-ultrabullet: '\e059';
-  --cdc-mode-bullet: '\e032';
-  --cdc-mode-blitz: '\e008';
-  --cdc-mode-rapid: '\e002';
-  --cdc-mode-classical: '\e00a';
-  --cdc-mode-correspondence: '\e019';
+  --lr-ext-mode-ultrabullet: '\e059';
+  --lr-ext-mode-bullet: '\e032';
+  --lr-ext-mode-blitz: '\e008';
+  --lr-ext-mode-rapid: '\e002';
+  --lr-ext-mode-classical: '\e00a';
+  --lr-ext-mode-correspondence: '\e019';
   /* Each speed's color, for the places that draw its glyph themselves. */
-  --cdc-mode-bullet-color: #e3aa24;
-  --cdc-mode-blitz-color: #fad541;
-  --cdc-mode-rapid-color: #81b64c;
-  --cdc-mode-correspondence-color: #f7c631;
+  --lr-ext-mode-bullet-color: #e3aa24;
+  --lr-ext-mode-blitz-color: #fad541;
+  --lr-ext-mode-rapid-color: #81b64c;
+  --lr-ext-mode-correspondence-color: #f7c631;
 }
 
 /* UltraBullet, Bullet */
 [data-icon='\e059']::before,
 [data-icon='\e032']::before {
-  --cdc-mode-color: var(--cdc-mode-bullet-color);
+  --lr-ext-mode-color: var(--lr-ext-mode-bullet-color);
 }
 
 /* Blitz */
 [data-icon='\e008']::before {
-  --cdc-mode-color: var(--cdc-mode-blitz-color);
+  --lr-ext-mode-color: var(--lr-ext-mode-blitz-color);
 }
 
 /* Rapid, Classical */
 [data-icon='\e002']::before,
 [data-icon='\e00a']::before {
-  --cdc-mode-color: var(--cdc-mode-rapid-color);
+  --lr-ext-mode-color: var(--lr-ext-mode-rapid-color);
 }
 
 /* Correspondence */
 [data-icon='\e019']::before {
-  --cdc-mode-color: var(--cdc-mode-correspondence-color);
+  --lr-ext-mode-color: var(--lr-ext-mode-correspondence-color);
 }
 
 /* Crazyhouse */
 [data-icon='\e066']::before {
-  --cdc-mode-color: #008cd1;
+  --lr-ext-mode-color: #008cd1;
 }
 
 /* Chess960, also on the editor's "random 960 position" buttons. */
 [data-icon='\e006']::before {
-  --cdc-mode-color: #fa742c;
+  --lr-ext-mode-color: #fa742c;
 }
 
 /* King of the Hill */
 [data-icon='\e007']::before {
-  --cdc-mode-color: #ca9350;
+  --lr-ext-mode-color: #ca9350;
 }
 
 /* Three-check. The same glyph, in green, marks the current session in security. */
 [data-icon='\e00d']:not(.is-green)::before {
-  --cdc-mode-color: #26c2a3;
+  --lr-ext-mode-color: #26c2a3;
 }
 
 /* Standard's crown is also Elite Arena's and top-rated TV's: only the variant
  * picker's takes a color. */
 .mselect [data-icon='\e021']::before {
-  --cdc-mode-color: var(--cdc-mode-rapid-color);
+  --lr-ext-mode-color: var(--lr-ext-mode-rapid-color);
 }
 
 :is(
@@ -79,24 +79,24 @@
   [data-icon='\e00d']:not(.is-green),
   .mselect [data-icon='\e021']
 )::before {
-  color: var(--cdc-mode-color) !important;
+  color: var(--lr-ext-mode-color) !important;
   opacity: 1 !important;
 }
 
 /* Atomic, Antichess and Horde only have full-color pictures: a Hugeicon in their color instead. */
 [data-icon='\e01c']::before {
-  --cdc-mode-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/atom-01.svg');
-  --cdc-mode-color: var(--cdc-red);
+  --lr-ext-mode-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/atom-01.svg');
+  --lr-ext-mode-color: var(--lr-ext-red);
 }
 
 [data-icon='\e01e']::before {
-  --cdc-mode-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/exchange-01.svg');
-  --cdc-mode-color: var(--cdc-purple);
+  --lr-ext-mode-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/exchange-01.svg');
+  --lr-ext-mode-color: var(--lr-ext-purple);
 }
 
 [data-icon='\e03d']::before {
-  --cdc-mode-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
-  --cdc-mode-color: var(--cdc-green);
+  --lr-ext-mode-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+  --lr-ext-mode-color: var(--lr-ext-green);
 }
 
 :is([data-icon='\e01c'], [data-icon='\e01e'], [data-icon='\e03d'])::before {
@@ -104,7 +104,7 @@
   display: inline-block;
   width: 1em;
   height: 1em;
-  background: var(--cdc-mode-color) !important;
-  mask: var(--cdc-mode-icon) center / contain no-repeat !important;
+  background: var(--lr-ext-mode-color) !important;
+  mask: var(--lr-ext-mode-icon) center / contain no-repeat !important;
   opacity: 1 !important;
 }

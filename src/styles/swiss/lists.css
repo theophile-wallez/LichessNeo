@@ -43,8 +43,8 @@ main.swiss-home h1.box__top::before {
     position: sticky;
     z-index: 3;
     top: 0;
-    background: var(--cdc-bg-page);
-    box-shadow: var(--cdc-pin-cover);
+    background: var(--lr-ext-bg-page);
+    box-shadow: var(--lr-ext-pin-cover);
   }
 
   main.swiss-home h1.box__top::after {
@@ -53,7 +53,7 @@ main.swiss-home h1.box__top::before {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -92,7 +92,7 @@ main.swiss-home .swisses thead th {
   gap: 10px;
   margin-bottom: 12px;
   color: #fff !important;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 20px !important;
   font-weight: 800 !important;
   text-align: start;
@@ -105,18 +105,18 @@ main.swiss-home .swisses:nth-of-type(1) thead th::before {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--cdc-good);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 70%, transparent);
-  animation: cdc-swiss-pulse 1.6s ease-out infinite;
+  background: var(--lr-ext-good);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--lr-ext-accent) 70%, transparent);
+  animation: lr-ext-swiss-pulse 1.6s ease-out infinite;
 }
 
-@keyframes cdc-swiss-pulse {
+@keyframes lr-ext-swiss-pulse {
   70% {
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--cdc-accent) 0%, transparent);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--lr-ext-accent) 0%, transparent);
   }
 
   100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 0%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--lr-ext-accent) 0%, transparent);
   }
 }
 
@@ -136,9 +136,9 @@ main.swiss-home .swisses tbody tr {
   align-items: center;
   column-gap: 18px;
   padding: 12px 18px;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   transition:
     background-color 0.15s,
     border-color 0.15s,
@@ -146,9 +146,9 @@ main.swiss-home .swisses tbody tr {
 }
 
 main.swiss-home .swisses tbody tr:hover {
-  border-color: var(--cdc-card-border-hover);
-  background: var(--cdc-card-hover) !important;
-  box-shadow: var(--cdc-card-shadow-hover);
+  border-color: var(--lr-ext-card-border-hover);
+  background: var(--lr-ext-card-hover) !important;
+  box-shadow: var(--lr-ext-card-shadow-hover);
 }
 
 main.swiss-home .swisses td {
@@ -164,14 +164,14 @@ main.swiss-home .swisses td.icon icon {
   width: 48px;
   height: 48px;
   border-radius: 10px;
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   font-size: 28px !important;
 }
 
 main.swiss-home .swisses td.header a {
   display: block;
   padding: 0 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
@@ -196,7 +196,7 @@ main.swiss-home .swisses .name {
 }
 
 main.swiss-home .swisses .team {
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-weight: 700;
 }
 
@@ -219,27 +219,27 @@ main.swiss-home .swisses td.infos {
 }
 
 main.swiss-home .swisses .rounds {
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 13px;
   font-weight: 700;
 }
 
-main.swiss-home .swisses .rounds[style*='--cdc-progress']::after {
+main.swiss-home .swisses .rounds[style*='--lr-ext-progress']::after {
   content: '';
   display: block;
   height: 4px;
   margin-top: 5px;
   border-radius: 2px;
-  background: linear-gradient(to right, var(--cdc-accent) var(--cdc-progress), #ffffff14 0);
+  background: linear-gradient(to right, var(--lr-ext-accent) var(--lr-ext-progress), #ffffff14 0);
 }
 
-html[dir='rtl'] main.swiss-home .swisses .rounds[style*='--cdc-progress']::after {
-  background: linear-gradient(to left, var(--cdc-accent) var(--cdc-progress), #ffffff14 0);
+html[dir='rtl'] main.swiss-home .swisses .rounds[style*='--lr-ext-progress']::after {
+  background: linear-gradient(to left, var(--lr-ext-accent) var(--lr-ext-progress), #ffffff14 0);
 }
 
 main.swiss-home .swisses .setup {
   overflow: hidden;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
   text-overflow: ellipsis;
@@ -259,7 +259,7 @@ main.swiss-home .swisses td:last-child br {
 }
 
 main.swiss-home .swisses time {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px !important;
   font-weight: 600;
   white-space: nowrap;
@@ -272,14 +272,14 @@ main.swiss-home .swisses .players {
   margin: 0 !important;
   padding: 3px 9px;
   border-radius: 999px;
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   color: #fff !important;
   font-size: 13px;
   font-weight: 800 !important;
 }
 
 main.swiss-home .swisses .players::before {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
   vertical-align: 0 !important;
 }

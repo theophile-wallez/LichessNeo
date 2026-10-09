@@ -172,11 +172,11 @@ export function setUp(scenario: Scenario): Driver {
   localStorage.clear();
   // The original's storage keys and format, spelled out rather than taken from
   // the port: a change to them would orphan the caches users have.
-  localStorage.setItem('cdc-coach', String(game.coach));
+  localStorage.setItem('lr-ext-coach', String(game.coach));
   const positions = scenario.synthetic ? game.nodes.slice(0, 1) : game.nodes;
   if (scenario.cached)
     localStorage.setItem(
-      `cdc-review:${game.id}:${positions.length}:v1`,
+      `lr-ext-review:${game.id}:${positions.length}:v1`,
       JSON.stringify(z.encode(z.array(StoredRecordCodec), [...game.records])),
     );
   const id = scenario.synthetic ? 'synthetic' : game.id;
@@ -192,7 +192,7 @@ export function setUp(scenario: Scenario): Driver {
   });
   mountFakePage(ctrl);
   document.head.innerHTML =
-    '<style>.cdc-review__graph, #cdc-review-graph { padding: 4px 8px } .cdc-bubble__sub { line-height: 18px }</style>';
+    '<style>.lr-ext-review__graph, #lr-ext-review-graph { padding: 4px 8px } .lr-ext-bubble__sub { line-height: 18px }</style>';
   Object.assign(window, {
     site: {
       analysis: ctrl,
@@ -237,14 +237,15 @@ export async function runScenario(
     if (state !== null) posted.push(state);
   });
   const cacheKey = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i)).find(
-    key => key?.startsWith('cdc-review:'),
+    key => key?.startsWith('lr-ext-review:'),
   );
   boot();
   const snapshots: Record<string, ReviewSnapshot> = {};
   for (const step of scenario.steps) {
     await step.run(driver);
     const key =
-      cacheKey ?? `cdc-review:${fixtureGame(scenario.game).id}:${driver.ctrl.mainline.length}:v1`;
+      cacheKey ??
+      `lr-ext-review:${fixtureGame(scenario.game).id}:${driver.ctrl.mainline.length}:v1`;
     snapshots[step.name] = snapshotReview({
       arrows: arrows(),
       coach: `${posted.length} ${posted.at(-1) ?? ''}`,

@@ -1,29 +1,31 @@
 /* ---- Eval bar --- */
 
 @media (min-width: 1020px) {
-  #cdc-evalbar {
+  #lr-ext-evalbar {
     grid-area: gauge;
     display: none;
     position: relative;
     width: 26px;
-    margin-right: var(--cdc-gauge-gap, 10px);
+    margin-right: var(--lr-ext-gauge-gap, 10px);
     /* Level with the squares, between the player bars if any. */
-    margin-top: calc(var(--cdc-bar, 0px) + var(--cdc-inset-t, 0px));
-    margin-bottom: calc(var(--cdc-bar, 0px) + var(--cdc-coords-off, 0px) + var(--cdc-inset-b, 0px));
+    margin-top: calc(var(--lr-ext-bar, 0px) + var(--lr-ext-inset-t, 0px));
+    margin-bottom: calc(
+      var(--lr-ext-bar, 0px) + var(--lr-ext-coords-off, 0px) + var(--lr-ext-inset-b, 0px)
+    );
     overflow: hidden;
     border-radius: 3px;
     background: #403d39;
   }
 
-  html.cdc-evalbar-on #cdc-evalbar {
+  html.lr-ext-evalbar-on #lr-ext-evalbar {
     display: block;
   }
 
-  html.cdc-evalbar-on main.analyse .eval-gauge {
+  html.lr-ext-evalbar-on main.analyse .eval-gauge {
     display: none !important;
   }
 
-  .cdc-evalbar__fill {
+  .lr-ext-evalbar__fill {
     position: absolute;
     left: 0;
     right: 0;
@@ -32,35 +34,35 @@
     transition: height 0.3s ease !important;
   }
 
-  .cdc-evalbar--flip .cdc-evalbar__fill {
+  .lr-ext-evalbar--flip .lr-ext-evalbar__fill {
     top: 0;
     bottom: auto;
   }
 
-  .cdc-evalbar__label {
+  .lr-ext-evalbar__label {
     position: absolute;
     left: 0;
     right: 0;
     text-align: center;
-    font-family: var(--cdc-font);
+    font-family: var(--lr-ext-font);
     font-size: 10px;
     font-weight: 700;
     z-index: 1;
   }
 
-  .cdc-evalbar__label--white {
+  .lr-ext-evalbar__label--white {
     bottom: 5px;
     color: #403d39;
   }
-  .cdc-evalbar__label--black {
+  .lr-ext-evalbar__label--black {
     top: 5px;
     color: #fff;
   }
-  .cdc-evalbar--flip .cdc-evalbar__label--white {
+  .lr-ext-evalbar--flip .lr-ext-evalbar__label--white {
     top: 5px;
     bottom: auto;
   }
-  .cdc-evalbar--flip .cdc-evalbar__label--black {
+  .lr-ext-evalbar--flip .lr-ext-evalbar__label--black {
     bottom: 5px;
     top: auto;
   }
@@ -68,81 +70,81 @@
 
 /* ---- Board overlay --- */
 
-#cdc-board-overlay {
+#lr-ext-board-overlay {
   position: absolute;
   inset: 0;
   z-index: 5;
   pointer-events: none;
 }
 
-.cdc-badge {
+.lr-ext-badge {
   position: absolute;
   width: 4.8%;
   aspect-ratio: 1;
   transform: translate(-72%, -28%);
 }
 
-.cdc-badge svg {
+.lr-ext-badge svg {
   width: 100%;
   height: 100%;
 }
 
 /* Last-move squares take the classification color (the free board's too). */
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='brilliant']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='brilliant']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(28, 179, 200, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='great']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='great']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(82, 136, 214, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='best']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='best']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(76, 170, 72, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='excellent']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='excellent']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(76, 170, 72, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='good']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='good']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(138, 171, 94, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='book']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='book']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(176, 138, 99, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='inaccuracy']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='inaccuracy']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(238, 180, 34, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='mistake']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='mistake']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(242, 134, 47, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='miss']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='miss']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(232, 87, 106, 0.5) !important;
 }
-html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='blunder']
+html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='blunder']
   main.analyse
   cg-board
   square.last-move {
@@ -154,7 +156,13 @@ html:is(.cdc-review-moves, .cdc-review-live)[data-cdc-cls='blunder']
 /* Below 1020px Lichess's mobile layout stays, without the review: its parts are only
    styled for the desktop grid and would spill into Lichess's. */
 @media (max-width: 1019.98px) {
-  :is(#cdc-review, #cdc-review-graph, #cdc-review-controls, #cdc-evalbar, #cdc-opening) {
+  :is(
+    #lr-ext-review,
+    #lr-ext-review-graph,
+    #lr-ext-review-controls,
+    #lr-ext-evalbar,
+    #lr-ext-opening
+  ) {
     display: none !important;
   }
 }

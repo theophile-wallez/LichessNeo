@@ -9,9 +9,9 @@ import { review } from '#page/review/index.ts';
 // The original drew the comments' pieces as bundled images, from the base URL
 // the recordings ran with; we draw them from the board's set. Ours are put
 // back as recorded, so the recordings stay the reference.
-const PIECE_GLYPH = /<i class="cdc-pc cdc-pc-(\w\w)"><\/i>/g;
+const PIECE_GLYPH = /<i class="lr-ext-pc lr-ext-pc-(\w\w)"><\/i>/g;
 const RECORDED_PIECE =
-  '<img class="cdc-pc" alt="" src="chrome-extension://abc/img/pieces/neo/$1.webp">';
+  '<img class="lr-ext-pc" alt="" src="chrome-extension://abc/img/pieces/neo/$1.webp">';
 
 function asRecorded(value: unknown): unknown {
   if (typeof value === 'string') return value.replace(PIECE_GLYPH, RECORDED_PIECE);

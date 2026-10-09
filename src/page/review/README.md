@@ -90,8 +90,8 @@ the analysis page adds the export, the draft and the move on the board first
 (`game/analyse-game.ts`); the game page, once the game is over, runs it at
 full depth only and ends its engines when done, or as soon as the tab is
 hidden (the review takes up the progress saved). Its records are saved as they
-come in (`cdc-review-progress:*`), then under the finished game's key
-(`cdc-review:*`); an index (`cdc-review-index`) keeps the 200 games analysed
+come in (`lr-ext-review-progress:*`), then under the finished game's key
+(`lr-ext-review:*`); an index (`lr-ext-review-index`) keeps the 200 games analysed
 last, on either page, and drops the others (`game/cache.ts`).
 
 The summary's "Learn from your mistakes" hands over to Lichess's own

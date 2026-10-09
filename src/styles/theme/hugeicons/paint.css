@@ -1,13 +1,13 @@
 /* ---- Hugeicons: how they're drawn --- */
 
 /* The interface's icons are Hugeicons' free ones (#shared/hugeicons.ts; img/hugeicons, written
- * by `pnpm icons`): ours inline as `.cdc-hi`, and Lichess's font glyphs drawn as their
+ * by `pnpm icons`): ours inline as `.lr-ext-hi`, and Lichess's font glyphs drawn as their
  * counterpart. A glyph keeps its box (its size, its baseline), only see-through, and the icon
  * is painted in it in the text's color: Lichess's layouts don't move. Each glyph listed here is
  * drawn so wherever a `[data-icon]` shows it; those of the time controls, the variants and
  * Lichess's own marks (logo, Storm, Berserk, studies) stay Lichess's. */
 
-.cdc-hi {
+.lr-ext-hi {
   display: inline-block;
   flex: none;
   width: 1em;
@@ -109,5 +109,5 @@
    * it drew Lichess's glyph over the Hugeicon. */
   text-shadow: none !important;
   background: currentColor;
-  mask: var(--cdc-glyph) center / 1em 1em no-repeat;
+  mask: var(--lr-ext-glyph) center / 1em 1em no-repeat;
 }

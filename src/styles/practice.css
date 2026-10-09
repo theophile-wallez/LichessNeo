@@ -6,9 +6,9 @@
 .practice-side {
   gap: 14px !important;
   padding: 20px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 /* The sidebar's Practice picture instead of Lichess's grey golem. !important: the
@@ -18,7 +18,7 @@
   width: 96px !important;
   opacity: 1 !important;
   filter: drop-shadow(0 8px 16px #0006) !important;
-  animation: cdc-float 4s ease-in-out infinite;
+  animation: lr-ext-float 4s ease-in-out infinite;
 }
 
 /* Only the lessons scroll: the progress card stays in view. Desktop only:
@@ -30,7 +30,7 @@
   }
 }
 
-@keyframes cdc-float {
+@keyframes lr-ext-float {
   50% {
     transform: translateY(-6px);
   }
@@ -44,7 +44,7 @@
 
 .practice-side__title h2 {
   margin: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 15px !important;
   font-weight: 600 !important;
 }
@@ -60,8 +60,8 @@
 .practice-side .progress .bar {
   min-width: 30px;
   border-radius: 999px !important;
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: inset 0 1px 0 var(--cdc-accent);
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: inset 0 1px 0 var(--lr-ext-accent);
 }
 
 /* No progress yet: an empty track, not a blob of min-width. */
@@ -82,8 +82,8 @@
   display: block;
   padding: 10px 14px;
   border-radius: 7px;
-  background: var(--cdc-btn-primary);
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   color: #fff !important;
   font-size: 14px;
   font-weight: 800;
@@ -91,35 +91,35 @@
 }
 
 .practice-side form a[href$='/signup']:hover {
-  background: var(--cdc-btn-primary-hover);
+  background: var(--lr-ext-btn-primary-hover);
 }
 
 /* ---- Sections --- */
 
 .practice-app section {
-  --cdc-practice: var(--cdc-accent);
-  --cdc-practice-2: var(--cdc-accent-dim);
+  --lr-ext-practice: var(--lr-ext-accent);
+  --lr-ext-practice-2: var(--lr-ext-accent-dim);
 }
 
 .practice-app section:nth-of-type(5n + 1) {
-  --cdc-practice: var(--cdc-red);
-  --cdc-practice-2: var(--cdc-red-dark);
+  --lr-ext-practice: var(--lr-ext-red);
+  --lr-ext-practice-2: var(--lr-ext-red-dark);
 }
 .practice-app section:nth-of-type(5n + 2) {
-  --cdc-practice: var(--cdc-cyan);
-  --cdc-practice-2: var(--cdc-cyan-darker);
+  --lr-ext-practice: var(--lr-ext-cyan);
+  --lr-ext-practice-2: var(--lr-ext-cyan-darker);
 }
 .practice-app section:nth-of-type(5n + 3) {
-  --cdc-practice: var(--cdc-purple);
-  --cdc-practice-2: var(--cdc-purple-dark);
+  --lr-ext-practice: var(--lr-ext-purple);
+  --lr-ext-practice-2: var(--lr-ext-purple-dark);
 }
 .practice-app section:nth-of-type(5n + 4) {
-  --cdc-practice: var(--cdc-accent);
-  --cdc-practice-2: var(--cdc-accent-dim);
+  --lr-ext-practice: var(--lr-ext-accent);
+  --lr-ext-practice-2: var(--lr-ext-accent-dim);
 }
 .practice-app section:nth-of-type(5n + 5) {
-  --cdc-practice: var(--cdc-orange);
-  --cdc-practice-2: var(--cdc-orange-darker);
+  --lr-ext-practice: var(--lr-ext-orange);
+  --lr-ext-practice-2: var(--lr-ext-orange-darker);
 }
 
 /* A dot in the section's color, instead of Lichess's spaced-out grey capitals. */
@@ -141,8 +141,8 @@
   width: 12px;
   height: 12px;
   border-radius: 4px;
-  background: linear-gradient(135deg, var(--cdc-practice), var(--cdc-practice-2));
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cdc-practice) 22%, transparent);
+  background: linear-gradient(135deg, var(--lr-ext-practice), var(--lr-ext-practice-2));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-practice) 22%, transparent);
 }
 
 .practice-app .studies {
@@ -158,9 +158,9 @@
   isolation: isolate;
   min-height: 92px !important;
   padding: 14px 44px 14px 96px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -175,8 +175,8 @@ html[dir='rtl'] .practice-app .study {
 
 .practice-app .study:hover,
 .practice-app .study.active {
-  border-color: color-mix(in srgb, var(--cdc-practice) 60%, transparent) !important;
-  background: var(--cdc-card-hover) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-practice) 60%, transparent) !important;
+  background: var(--lr-ext-card-hover) !important;
   box-shadow: 0 6px 18px #00000059 !important;
   transform: translateY(-3px) !important;
 }
@@ -192,10 +192,10 @@ html[dir='rtl'] .practice-app .study {
   height: 64px;
   margin-top: -32px;
   border-radius: 16px;
-  background: color-mix(in srgb, var(--cdc-practice) 20%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-practice) 20%, transparent);
   box-shadow:
     inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--cdc-practice) 35%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-practice) 35%, transparent);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
@@ -210,8 +210,8 @@ html[dir='rtl'] .practice-app .study {
   margin: -20px 0 0 !important;
   padding: 0 !important;
   border: none !important;
-  background: color-mix(in srgb, var(--cdc-practice) 80%, #fff) !important;
-  mask: var(--cdc-practice-icon) center / contain no-repeat;
+  background: color-mix(in srgb, var(--lr-ext-practice) 80%, #fff) !important;
+  mask: var(--lr-ext-practice-icon) center / contain no-repeat;
   opacity: 1 !important;
   filter: none !important;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
@@ -232,7 +232,7 @@ html[dir='rtl'] .practice-app .study {
 
 .practice-app .study p {
   margin: 4px 0 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
   font-weight: 600;
   opacity: 1 !important;
@@ -241,19 +241,19 @@ html[dir='rtl'] .practice-app .study {
 /* Lichess's state gradients go: every card stays dark. Not while hovered, or
  * the hover fill would lose to this one. */
 .practice-app .study:is(.future, .ongoing, .done):not(:hover, .active) {
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 .practice-app .study.ongoing {
-  border-color: color-mix(in srgb, var(--cdc-practice) 45%, transparent) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-practice) 45%, transparent) !important;
 }
 
 .practice-app .study.ongoing .attention-effect {
   --gradient-border: conic-gradient(
     from var(--border-angle),
     transparent 25%,
-    var(--cdc-practice),
-    color-mix(in srgb, var(--cdc-practice) 20%, transparent)
+    var(--lr-ext-practice),
+    color-mix(in srgb, var(--lr-ext-practice) 20%, transparent)
   ) !important;
   border-radius: 12px !important;
 }
@@ -267,9 +267,9 @@ html[dir='rtl'] .practice-app .study {
   z-index: 1;
   width: 22px;
   height: 22px;
-  border: 2px solid var(--cdc-bg-panel);
+  border: 2px solid var(--lr-ext-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-good)
+  background: var(--lr-ext-good)
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02--0c0c0d.svg') center / 14px
     no-repeat;
 }
@@ -294,7 +294,7 @@ html[dir='rtl'] .practice-app .study {
   border-radius: 999px;
   background: #ffffff14 !important;
   box-shadow: none !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 12px !important;
   font-weight: 800;
   text-shadow: none !important;
@@ -307,17 +307,17 @@ html[dir='rtl'] .practice-app .study {
 }
 
 .practice-app .study .ribbon.ongoing {
-  background: color-mix(in srgb, var(--cdc-practice) 30%, transparent) !important;
+  background: color-mix(in srgb, var(--lr-ext-practice) 30%, transparent) !important;
   color: #fff !important;
 }
 
 .practice-app .study .ribbon.done {
-  background: color-mix(in srgb, var(--cdc-good) 25%, transparent) !important;
-  color: var(--cdc-good-hover) !important;
+  background: color-mix(in srgb, var(--lr-ext-good) 25%, transparent) !important;
+  color: var(--lr-ext-good-hover) !important;
 }
 
 .practice-app .what_next > p {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   text-shadow: none !important;
 }
 

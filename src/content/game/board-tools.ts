@@ -9,8 +9,8 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // pointer is on the board. They press Lichess's own keys: `h` for its board
 // menu (whose button the stylesheet hides), `f` to flip.
 
-const HOVER = 'cdc-board-tools--hover';
-const BUTTON = 'cdc-board-tools__btn';
+const HOVER = 'lr-ext-board-tools--hover';
+const BUTTON = 'lr-ext-board-tools__btn';
 
 function toolButton(name: string, key: string): HTMLButtonElement {
   const button = createElement('button', {
@@ -23,14 +23,14 @@ function toolButton(name: string, key: string): HTMLButtonElement {
 }
 
 function buildTools(): HTMLElement {
-  const root = createElement('div', { className: 'cdc-board-tools' });
+  const root = createElement('div', { className: 'lr-ext-board-tools' });
   root.append(toolButton('menu', 'h'), toolButton('flip', 'f'));
   return root;
 }
 
 function setTip(button: HTMLButtonElement | null, label: string | undefined): void {
-  if (!button || !label || button.dataset.cdcTip === label) return;
-  setData(button, 'cdcTip', label);
+  if (!button || !label || button.dataset.lrExtTip === label) return;
+  setData(button, 'lrExtTip', label);
   button.setAttribute('aria-label', label);
 }
 
@@ -43,12 +43,12 @@ export function syncBoardTools(): void {
   if (!main) return;
   tools = ownTools(main).element;
   const menu = queryOne(tools, `.${BUTTON}--menu`, HTMLButtonElement);
-  // Our tooltips move a hovered button's title to data-cdc-tip.
+  // Our tooltips move a hovered button's title to data-lr-ext-tip.
   const lichessMenu = queryOne(main, '.board-menu-toggle-btn', HTMLElement);
-  setTip(menu, nonEmpty(lichessMenu?.title) ?? lichessMenu?.dataset.cdcTip);
+  setTip(menu, nonEmpty(lichessMenu?.title) ?? lichessMenu?.dataset.lrExtTip);
   setTip(
     queryOne(tools, `.${BUTTON}--flip`, HTMLButtonElement),
-    document.documentElement.dataset.cdcFlipLabel,
+    document.documentElement.dataset.lrExtFlipLabel,
   );
   menu?.classList.toggle(`${BUTTON}--on`, lichessMenu?.classList.contains('active') ?? false);
 }
@@ -57,7 +57,7 @@ function onMouseOver(event: MouseEvent): void {
   if (!tools?.isConnected) return;
   const target = closestTo(
     event.target,
-    'main.round :is(.round__app__board, .cdc-board-tools)',
+    'main.round :is(.round__app__board, .lr-ext-board-tools)',
     Element,
   );
   tools.classList.toggle(HOVER, target !== null);

@@ -10,48 +10,48 @@
   /* Move times (content/game/move-times.ts): a bar growing left, then the time; White's above,
    * Black's below.
    * Absolute against the list so they scroll with it; with no `top`, each stays on its row. */
-  main.round :is(i5d, rm6) :is(aPp, l4x)[data-cdc-times] {
+  main.round :is(i5d, rm6) :is(aPp, l4x)[data-lr-ext-times] {
     position: relative;
     grid-template-columns: 48px minmax(0, 104px) minmax(0, 104px) minmax(84px, 1fr);
   }
 
-  main.round :is(aPp, l4x)[data-cdc-times] > :is(Z7yx, kwdb)[data-cdc-time] {
+  main.round :is(aPp, l4x)[data-lr-ext-times] > :is(Z7yx, kwdb)[data-lr-ext-time] {
     position: static !important;
   }
 
-  main.round :is(aPp, l4x)[data-cdc-times] > [data-cdc-time]::before,
-  main.round :is(aPp, l4x)[data-cdc-times] > [data-cdc-time]::after {
+  main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::before,
+  main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::after {
     position: absolute;
     translate: 0 -6px;
     pointer-events: none;
   }
 
-  main.round :is(aPp, l4x)[data-cdc-times] > [data-cdc-time]::before {
+  main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::before {
     content: '';
     right: 52px;
-    width: max(2px, calc(var(--cdc-time, 0) * 44px));
+    width: max(2px, calc(var(--lr-ext-time, 0) * 44px));
     height: 9px;
     border-radius: 1px;
     background: #fff;
   }
 
-  main.round :is(aPp, l4x)[data-cdc-times] > [data-cdc-time]::after {
-    content: attr(data-cdc-time);
+  main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::after {
+    content: attr(data-lr-ext-time);
     left: calc(100% - 48px);
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     font-size: 11px;
     font-weight: 400;
     line-height: 12px;
   }
 
   /* Black's move: the second one after its number. */
-  main.round :is(aPp, l4x)[data-cdc-times] > :is(qZM, i5z) + * + [data-cdc-time]::before,
-  main.round :is(aPp, l4x)[data-cdc-times] > :is(qZM, i5z) + * + [data-cdc-time]::after {
+  main.round :is(aPp, l4x)[data-lr-ext-times] > :is(qZM, i5z) + * + [data-lr-ext-time]::before,
+  main.round :is(aPp, l4x)[data-lr-ext-times] > :is(qZM, i5z) + * + [data-lr-ext-time]::after {
     translate: 0 7px;
   }
 
-  main.round :is(aPp, l4x)[data-cdc-times] > :is(qZM, i5z) + * + [data-cdc-time]::before {
-    background: var(--cdc-grey-400);
+  main.round :is(aPp, l4x)[data-lr-ext-times] > :is(qZM, i5z) + * + [data-lr-ext-time]::before {
+    background: var(--lr-ext-grey-400);
   }
 
   /* The result on one line: the score, then how the game ended. */
@@ -61,20 +61,20 @@
     align-items: baseline;
     column-gap: 10px;
     padding: 10px 16px 12px !important;
-    border-top: 1px solid var(--cdc-border);
-    background: var(--cdc-bg-panel);
+    border-top: 1px solid var(--lr-ext-border);
+    background: var(--lr-ext-bg-panel);
     text-align: start !important;
   }
 
   main.round :is(i5d, rm6) .result {
     margin: 0 !important;
-    color: var(--cdc-text-strong);
+    color: var(--lr-ext-text-strong);
     font-size: 20px;
     font-weight: 800;
   }
 
   main.round :is(i5d, rm6) .status {
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     font-size: 13px;
     font-style: normal !important;
   }
@@ -101,7 +101,7 @@
     padding: 0 8px !important;
     border-radius: 8px !important;
     overflow: hidden;
-    background: var(--cdc-btn-grey) !important;
+    background: var(--lr-ext-btn-grey) !important;
     color: #fff !important;
     font-size: 14px !important;
     font-weight: 800;
@@ -111,20 +111,20 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     text-shadow: none !important;
-    box-shadow: var(--cdc-btn-grey-shadow) !important;
+    box-shadow: var(--lr-ext-btn-grey-shadow) !important;
   }
 
   main.round .rcontrols .follow-up .fbt:hover:not(.disabled, :disabled) {
-    background: var(--cdc-btn-grey-hover) !important;
+    background: var(--lr-ext-btn-grey-hover) !important;
   }
 
   /* Game Review: Lichess's analysis link, always the last button, first in the row. It opens
    * the analysis page, where page/review/ starts the review. */
   html {
-    --cdc-t-review: 'Game Review';
+    --lr-ext-t-review: 'Game Review';
   }
   html[lang^='fr'] {
-    --cdc-t-review: 'Bilan';
+    --lr-ext-t-review: 'Bilan';
   }
 
   main.round
@@ -133,16 +133,16 @@
     > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']) {
     order: -2;
     flex-grow: 1.4;
-    background: var(--cdc-btn-primary) !important;
+    background: var(--lr-ext-btn-primary) !important;
     font-size: 0 !important;
-    box-shadow: var(--cdc-btn-primary-shadow) !important;
+    box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   }
 
   main.round
     .rcontrols
     .follow-up
     > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/'])::after {
-    content: var(--cdc-t-review);
+    content: var(--lr-ext-t-review);
     font-size: 14px;
   }
 
@@ -150,11 +150,11 @@
     .rcontrols
     .follow-up
     > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']):hover {
-    background: var(--cdc-btn-primary-hover) !important;
+    background: var(--lr-ext-btn-primary-hover) !important;
   }
 
   /* "New 16 min" (Lichess's "New opponent" or ours), then Rematch. */
-  main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .cdc-new-game) {
+  main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .lr-ext-new-game) {
     display: flex !important;
     align-items: center;
     /* A label too long for the button wraps, rather than losing its end. */
@@ -163,28 +163,28 @@
     white-space: normal;
   }
 
-  main.round .rcontrols .follow-up :is(.new-opponent, .cdc-new-game) {
+  main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game) {
     order: -1;
   }
 
   /* The time control replaces Lichess's "New opponent". */
-  main.round .rcontrols .follow-up .new-opponent[data-cdc-label] {
+  main.round .rcontrols .follow-up .new-opponent[data-lr-ext-label] {
     font-size: 0 !important;
   }
 
-  main.round .rcontrols .follow-up .new-opponent[data-cdc-label]::after {
-    content: attr(data-cdc-label);
+  main.round .rcontrols .follow-up .new-opponent[data-lr-ext-label]::after {
+    content: attr(data-lr-ext-label);
     font-size: 14px;
   }
 
   /* A rematch offer turns the button primary, hover included. */
   main.round .rcontrols .follow-up .rematch.glowing {
-    background: var(--cdc-btn-primary) !important;
-    box-shadow: var(--cdc-btn-primary-shadow) !important;
+    background: var(--lr-ext-btn-primary) !important;
+    box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   }
 
   main.round .rcontrols .follow-up .rematch.glowing:hover:not(.disabled, :disabled) {
-    background: var(--cdc-btn-primary-hover) !important;
+    background: var(--lr-ext-btn-primary-hover) !important;
   }
 
   /* Lichess turns the glowing button's ::before into a pulsing overlay: the ring
@@ -206,15 +206,15 @@
     padding: 0;
     border-radius: 8px !important;
     opacity: 1 !important;
-    background: var(--cdc-btn-grey) !important;
-    box-shadow: var(--cdc-btn-grey-shadow) !important;
+    background: var(--lr-ext-btn-grey) !important;
+    box-shadow: var(--lr-ext-btn-grey-shadow) !important;
     color: var(--c-bad) !important;
     font-size: 18px;
   }
 
   main.round .rcontrols .follow-up .rematch-decline:hover {
-    background: var(--cdc-btn-red) !important;
-    box-shadow: var(--cdc-btn-red-shadow) !important;
+    background: var(--lr-ext-btn-red) !important;
+    box-shadow: var(--lr-ext-btn-red-shadow) !important;
     color: #fff !important;
   }
 }

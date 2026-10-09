@@ -7,7 +7,7 @@ import start from './fixtures/legacy-start.json' with { type: 'json' };
 
 afterEach(() => {
   document.body.innerHTML = '';
-  document.documentElement.classList.remove('cdc-tv-still');
+  document.documentElement.classList.remove('lr-ext-tv-still');
   Reflect.deleteProperty(document, 'referrer');
   history.replaceState(null, '', '/');
 });
@@ -26,7 +26,7 @@ describe('TV intro', () => {
       Object.defineProperty(document, 'referrer', { value: referrer, configurable: true });
       vi.spyOn(performance, 'getEntriesByType').mockReturnValue([navigation(scenario.type)]);
       markStillIntro();
-      expect(document.documentElement.classList.contains('cdc-tv-still')).toBe(scenario.still);
+      expect(document.documentElement.classList.contains('lr-ext-tv-still')).toBe(scenario.still);
     },
   );
 });
@@ -42,7 +42,7 @@ function render(clientHeight: number): HTMLElement {
   return list;
 }
 const tips = (): (string | null)[] =>
-  queryAll(document, 'a.tv-channel', HTMLElement).map(channel => channel.dataset.cdcTip ?? null);
+  queryAll(document, 'a.tv-channel', HTMLElement).map(channel => channel.dataset.lrExtTip ?? null);
 
 describe('TV channels', () => {
   it('gives each channel its tooltip and scrolls to the one on air, as the original did', () => {
@@ -50,13 +50,13 @@ describe('TV channels', () => {
     syncChannels();
     expect(tips()).toEqual(legacy.tips);
     expect(list.scrollTop).toBe(legacy.scrollTop);
-    expect(list.dataset.cdcTv !== undefined).toBe(legacy.marked);
+    expect(list.dataset.lrExtTv !== undefined).toBe(legacy.marked);
   });
 
   it('waits for the column to have a height', () => {
     const list = render(0);
     syncChannels();
-    expect(list.dataset.cdcTv).toBeUndefined();
+    expect(list.dataset.lrExtTv).toBeUndefined();
     expect(tips().every(tip => tip === null)).toBe(true);
   });
 

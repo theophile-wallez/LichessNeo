@@ -1,7 +1,7 @@
 import { setStyleProperty } from '#shared/dom.ts';
 import { type SafeHtml, setHtml } from '#shared/html.ts';
 
-const ON = 'cdc-rchart__tip--on';
+const ON = 'lr-ext-rchart__tip--on';
 
 interface Beside {
   /** The x the tooltip points at. */

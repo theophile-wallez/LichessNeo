@@ -58,10 +58,10 @@ export function prepareIntro(initData: string | null): void {
 
 function clear(main: HTMLElement, intro: HTMLElement): void {
   intro.remove();
-  setData(main, 'cdcIntro', null);
-  setStyleProperty(main, '--cdc-intro-board', null);
-  setStyleProperty(main, '--cdc-intro-swords', null);
-  setStyleProperty(main, '--cdc-intro-ms', null);
+  setData(main, 'lrExtIntro', null);
+  setStyleProperty(main, '--lr-ext-intro-board', null);
+  setStyleProperty(main, '--lr-ext-intro-swords', null);
+  setStyleProperty(main, '--lr-ext-intro-ms', null);
 }
 
 /** Plays the intro if the game page is drawn; false when it isn't yet. */
@@ -73,7 +73,10 @@ function play(next: Pending): boolean {
   if (!main || !wrap?.querySelector('cg-board') || !top || !bottom) return false;
   const bottomColor = wrapOrientation(wrap);
   const ratings = computerRatings();
-  const intro = createElement('div', { className: 'cdc-intro', attrs: { 'aria-hidden': 'true' } });
+  const intro = createElement('div', {
+    className: 'lr-ext-intro',
+    attrs: { 'aria-hidden': 'true' },
+  });
   setHtml(
     intro,
     introMarkup({
@@ -82,10 +85,10 @@ function play(next: Pending): boolean {
     }),
   );
   writeStored(SessionKey.gameIntro(next.gameId), '1', 'session');
-  setStyleProperty(main, '--cdc-intro-board', next.board);
-  setStyleProperty(main, '--cdc-intro-swords', `url('${extensionUrl(SWORDS_PATH)}')`);
-  setStyleProperty(main, '--cdc-intro-ms', `${INTRO_MS}ms`);
-  setData(main, 'cdcIntro', '');
+  setStyleProperty(main, '--lr-ext-intro-board', next.board);
+  setStyleProperty(main, '--lr-ext-intro-swords', `url('${extensionUrl(SWORDS_PATH)}')`);
+  setStyleProperty(main, '--lr-ext-intro-ms', `${INTRO_MS}ms`);
+  setData(main, 'lrExtIntro', '');
   main.append(intro);
   // A timer rather than `animationend`: with animations off, none would come.
   window.setTimeout(() => clear(main, intro), INTRO_MS);

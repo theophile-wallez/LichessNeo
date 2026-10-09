@@ -84,11 +84,11 @@ class RatingChart {
     const axis = { start, end: layout.end, width: layout.width - PADDING.left - PADDING.right };
     sizeSvg(svg, layout.width, HEIGHT);
     setHtml(svg, plotMarkup(plot, timeTicks(axis, this.#formats)));
-    svg.classList.toggle('cdc-rchart__svg--intro', animate);
+    svg.classList.toggle('lr-ext-rchart__svg--intro', animate);
     this.#update();
     this.#renderLegend();
-    for (const button of queryAll(root, '[data-cdc-range]', HTMLElement))
-      button.classList.toggle('active', button.dataset.cdcRange === this.#range);
+    for (const button of queryAll(root, '[data-lr-ext-range]', HTMLElement))
+      button.classList.toggle('active', button.dataset.lrExtRange === this.#range);
     this.#placeThumb();
   }
 
@@ -99,21 +99,21 @@ class RatingChart {
     const { svg } = this.#parts;
     const plot = scalePlot(this.#layout, this.#hidden);
     this.#plot = plot;
-    for (const group of queryAll(svg, '.cdc-rchart__series', SVGElement)) {
-      const row = plot.rows.find(({ index }) => index === Number(group.dataset.cdcSeries));
+    for (const group of queryAll(svg, '.lr-ext-rchart__series', SVGElement)) {
+      const row = plot.rows.find(({ index }) => index === Number(group.dataset.lrExtSeries));
       if (!row) continue;
-      group.classList.toggle('cdc-rchart__series--hidden', this.#hidden.has(row.index));
+      group.classList.toggle('lr-ext-rchart__series--hidden', this.#hidden.has(row.index));
       const { line, area, top, low } = seriesPaths(plot, row);
-      setPath(queryOne(group, '.cdc-rchart__line', SVGElement), line);
-      setPath(queryOne(group, '.cdc-rchart__area', SVGElement), area);
+      setPath(queryOne(group, '.lr-ext-rchart__line', SVGElement), line);
+      setPath(queryOne(group, '.lr-ext-rchart__area', SVGElement), area);
       // Each fill fades out just under its own curve. If they all faded at the
       // plot's bottom, the higher ratings' fills would cover the lower curves.
       const gradient = queryOne(svg, `#${gradientId(row.index)}`, SVGElement);
       if (gradient) setAttributes(gradient, { y1: top, y2: Math.min(plot.bottom, low + 70) });
     }
-    const axis = queryOne(svg, '.cdc-rchart__axis', SVGElement);
+    const axis = queryOne(svg, '.lr-ext-rchart__axis', SVGElement);
     if (!axis) return;
-    for (const old of queryAll(axis, '.cdc-rchart__grid, .cdc-rchart__ylabel', Element))
+    for (const old of queryAll(axis, '.lr-ext-rchart__grid, .lr-ext-rchart__ylabel', Element))
       old.remove();
     prependSvg(axis, ratingGrid(plot));
   }
@@ -129,17 +129,17 @@ class RatingChart {
 
   click(event: MouseEvent): void {
     const range = RangeKeySchema.safeParse(
-      closestTo(event.target, '[data-cdc-range]', HTMLElement)?.dataset.cdcRange,
+      closestTo(event.target, '[data-lr-ext-range]', HTMLElement)?.dataset.lrExtRange,
     );
     if (range.success && range.data !== this.#range) {
       this.#range = range.data;
       writeStored(StorageKey.ratingChartRange, range.data);
-      setData(this.#parts.root, 'cdcSlide', '1');
+      setData(this.#parts.root, 'lrExtSlide', '1');
       this.leave();
       this.draw(true);
     }
-    const chip = closestTo(event.target, '.cdc-rchart__chip', HTMLElement);
-    if (chip) this.#toggleSeries(Number(chip.dataset.cdcSeries));
+    const chip = closestTo(event.target, '.lr-ext-rchart__chip', HTMLElement);
+    if (chip) this.#toggleSeries(Number(chip.dataset.lrExtSeries));
   }
 
   #toggleSeries(index: number): void {
@@ -181,7 +181,7 @@ export function mountChart(host: HTMLElement, series: readonly Series[]): void {
   // Read before adding anything, so that Lichess's chart stays if blocked storage throws.
   const range = initialRange(readStored(StorageKey.ratingChartRange, RangeKeySchema), span);
   const formats = dateFormats(pageLocale());
-  const root = createElement('div', { className: 'cdc-rchart' });
+  const root = createElement('div', { className: 'lr-ext-rchart' });
   setHtml(root, chartShell());
   host.append(root);
   const parts = findParts(root);
@@ -190,7 +190,7 @@ export function mountChart(host: HTMLElement, series: readonly Series[]): void {
     return;
   }
   // Lichess's own chart is hidden from here on (styles/ratingchart.css).
-  host.classList.toggle('cdc-rchart-on', true);
+  host.classList.toggle('lr-ext-rchart-on', true);
   const chart = new RatingChart({ series, parts, span, range, formats });
   root.addEventListener('click', event => chart.click(event));
   parts.svg.addEventListener('pointermove', event => chart.hover(event));

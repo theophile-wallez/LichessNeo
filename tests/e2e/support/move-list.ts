@@ -16,4 +16,4 @@ export function activePly(page: Page): Promise<number> {
 
 /** The variations played on the board, as the review marks them (not the engine's lines). */
 export const ownVariations = (page: Page): Locator =>
-  page.locator('main.analyse .tview2 interrupt line.cdc-var');
+  page.locator('main.analyse .tview2 interrupt line.lr-ext-var');

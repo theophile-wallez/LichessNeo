@@ -14,13 +14,13 @@
     visibility: hidden;
   }
 
-  .cdc-speeds {
+  .lr-ext-speeds {
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
 
-  .cdc-speeds__head {
+  .lr-ext-speeds__head {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,23 +29,23 @@
     padding-inline-start: 4px;
   }
 
-  .cdc-speeds__title {
+  .lr-ext-speeds__title {
     margin: 0;
     color: #fff;
     font-size: 17px;
     font-weight: 800;
   }
 
-  .cdc-speeds__custom {
+  .lr-ext-speeds__custom {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     height: 34px;
     padding: 0 10px 0 12px;
-    border: 1px solid var(--cdc-card-border);
+    border: 1px solid var(--lr-ext-card-border);
     border-radius: 999px;
-    background: var(--cdc-bg-panel);
-    color: var(--cdc-grey-100);
+    background: var(--lr-ext-bg-panel);
+    color: var(--lr-ext-grey-100);
     font: inherit;
     font-size: 14px;
     font-weight: 700;
@@ -55,41 +55,41 @@
       border-color 0.15s !important;
   }
 
-  .cdc-speeds__custom:hover {
-    border-color: var(--cdc-card-border-hover);
-    background: var(--cdc-btn-grey);
+  .lr-ext-speeds__custom:hover {
+    border-color: var(--lr-ext-card-border-hover);
+    background: var(--lr-ext-btn-grey);
     color: #fff;
   }
 
-  .cdc-speeds__custom .cdc-hi {
+  .lr-ext-speeds__custom .lr-ext-hi {
     width: 16px;
     height: 16px;
   }
 
-  .cdc-speeds__custom .cdc-hi:last-child {
-    color: var(--cdc-text-dim);
+  .lr-ext-speeds__custom .lr-ext-hi:last-child {
+    color: var(--lr-ext-text-dim);
   }
 
-  .cdc-speeds__cards {
+  .lr-ext-speeds__cards {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
   }
 
-  .cdc-speed {
+  .lr-ext-speed {
     display: flex;
     flex-direction: column;
     gap: 8px;
     box-sizing: border-box;
     padding: 16px;
     border-radius: 16px;
-    background: var(--cdc-bg-panel);
+    background: var(--lr-ext-bg-panel);
     box-shadow:
       inset 0 1px 0 #ffffff0d,
       0 10px 28px #00000033;
   }
 
-  .cdc-speed__top {
+  .lr-ext-speed__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -97,7 +97,7 @@
     min-width: 0;
   }
 
-  .cdc-speed__name {
+  .lr-ext-speed__name {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -108,46 +108,46 @@
     white-space: nowrap;
   }
 
-  .cdc-speed__name > span {
+  .lr-ext-speed__name > span {
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   /* The speed's Lichess glyph, in its rating's color. */
-  .cdc-speed__name::before {
+  .lr-ext-speed__name::before {
     flex: none;
-    color: var(--cdc-speed-color);
+    color: var(--lr-ext-speed-color);
     font-family: lichess;
     font-size: 18px;
     font-weight: 400;
     line-height: 1;
   }
 
-  .cdc-speed[data-cdc-speed='bullet'] .cdc-speed__name::before {
-    content: var(--cdc-mode-bullet);
+  .lr-ext-speed[data-lr-ext-speed='bullet'] .lr-ext-speed__name::before {
+    content: var(--lr-ext-mode-bullet);
   }
-  .cdc-speed[data-cdc-speed='blitz'] .cdc-speed__name::before {
-    content: var(--cdc-mode-blitz);
+  .lr-ext-speed[data-lr-ext-speed='blitz'] .lr-ext-speed__name::before {
+    content: var(--lr-ext-mode-blitz);
   }
-  .cdc-speed[data-cdc-speed='rapid'] .cdc-speed__name::before {
-    content: var(--cdc-mode-rapid);
+  .lr-ext-speed[data-lr-ext-speed='rapid'] .lr-ext-speed__name::before {
+    content: var(--lr-ext-mode-rapid);
   }
-  .cdc-speed[data-cdc-speed='classical'] .cdc-speed__name::before {
-    content: var(--cdc-mode-classical);
+  .lr-ext-speed[data-lr-ext-speed='classical'] .lr-ext-speed__name::before {
+    content: var(--lr-ext-mode-classical);
   }
 
-  .cdc-speed__games {
+  .lr-ext-speed__games {
     flex: none;
     padding: 2px 9px;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--cdc-speed-color) 16%, transparent);
-    color: color-mix(in srgb, var(--cdc-speed-color) 80%, #fff);
+    background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
+    color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, #fff);
     font-size: 12.5px;
     font-weight: 800;
     white-space: nowrap;
   }
 
-  .cdc-speed__rating {
+  .lr-ext-speed__rating {
     display: flex;
     align-items: baseline;
     gap: 8px;
@@ -159,18 +159,18 @@
     letter-spacing: -0.01em;
   }
 
-  .cdc-speed__rating small {
-    color: var(--cdc-text-dim);
+  .lr-ext-speed__rating small {
+    color: var(--lr-ext-text-dim);
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0;
   }
 
-  .cdc-speed__rating--none {
-    color: var(--cdc-grey-400);
+  .lr-ext-speed__rating--none {
+    color: var(--lr-ext-grey-400);
   }
 
-  .cdc-speed__curve {
+  .lr-ext-speed__curve {
     display: block;
     width: 100%;
     height: 40px;
@@ -178,37 +178,37 @@
   }
 
   /* No rating history yet: a faint dashed line where the curve would be. */
-  .cdc-speed__curve--empty {
+  .lr-ext-speed__curve--empty {
     box-sizing: border-box;
     height: 28px;
     margin-bottom: 12px;
     border-bottom: 1px dashed #ffffff1f;
   }
 
-  .cdc-speed__line {
+  .lr-ext-speed__line {
     fill: none;
-    stroke: var(--cdc-speed-color);
+    stroke: var(--lr-ext-speed-color);
     stroke-width: 2px;
     stroke-linecap: round;
     vector-effect: non-scaling-stroke;
   }
 
-  .cdc-speed__stop {
-    stop-color: var(--cdc-speed-color);
+  .lr-ext-speed__stop {
+    stop-color: var(--lr-ext-speed-color);
     stop-opacity: 0.32;
   }
 
-  .cdc-speed__stop--end {
+  .lr-ext-speed__stop--end {
     stop-opacity: 0;
   }
 
-  .cdc-speed__pools {
+  .lr-ext-speed__pools {
     display: flex;
     gap: 6px;
     margin-top: auto;
   }
 
-  .cdc-speed__pool {
+  .lr-ext-speed__pool {
     display: inline-flex;
     flex: 1 1 0;
     align-items: center;
@@ -219,8 +219,8 @@
     padding: 0 4px;
     border: none;
     border-radius: 8px;
-    background: var(--cdc-btn-grey);
-    box-shadow: var(--cdc-btn-grey-shadow);
+    background: var(--lr-ext-btn-grey);
+    box-shadow: var(--lr-ext-btn-grey-shadow);
     color: #fff;
     font: inherit;
     font-size: 14.5px;
@@ -232,32 +232,32 @@
       opacity 0.15s !important;
   }
 
-  .cdc-speed__pool:hover {
-    background: var(--cdc-btn-grey-hover);
+  .lr-ext-speed__pool:hover {
+    background: var(--lr-ext-btn-grey-hover);
   }
 
   /* The pool last played at this speed: one click to play it again. */
-  .cdc-speed__pool--last {
-    background: var(--cdc-btn-primary);
-    box-shadow: var(--cdc-btn-primary-shadow);
+  .lr-ext-speed__pool--last {
+    background: var(--lr-ext-btn-primary);
+    box-shadow: var(--lr-ext-btn-primary-shadow);
   }
 
-  .cdc-speed__pool--last:hover {
-    background: var(--cdc-btn-primary-hover);
+  .lr-ext-speed__pool--last:hover {
+    background: var(--lr-ext-btn-primary-hover);
   }
 
   /* Seeking: the pool ringed, a cross to cancel, the others faded. */
-  .cdc-speeds--seeking .cdc-speed__pool:not(.cdc-speed__pool--seeking) {
+  .lr-ext-speeds--seeking .lr-ext-speed__pool:not(.lr-ext-speed__pool--seeking) {
     opacity: 0.4;
   }
 
-  .cdc-speed__pool--seeking,
-  .cdc-speed__pool--seeking:hover {
-    background: var(--cdc-btn-grey);
-    box-shadow: inset 0 0 0 2px var(--cdc-accent);
+  .lr-ext-speed__pool--seeking,
+  .lr-ext-speed__pool--seeking:hover {
+    background: var(--lr-ext-btn-grey);
+    box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
   }
 
-  .cdc-speed__pool--seeking::after {
+  .lr-ext-speed__pool--seeking::after {
     content: '';
     width: 14px;
     height: 14px;
@@ -269,33 +269,33 @@
   /* Four cards in what the sidebar leaves of a 1024px window: tighter, so the names and the
      blitz's four pools still fit. */
   @media (max-width: 1259.29px) {
-    .cdc-speeds__cards {
+    .lr-ext-speeds__cards {
       gap: 12px;
     }
 
-    .cdc-speed {
+    .lr-ext-speed {
       padding: 14px 12px 12px;
     }
 
-    .cdc-speed__name {
+    .lr-ext-speed__name {
       gap: 6px;
       font-size: 15px;
     }
 
-    .cdc-speed__games {
+    .lr-ext-speed__games {
       padding: 1px 7px;
       font-size: 11.5px;
     }
 
-    .cdc-speed__rating {
+    .lr-ext-speed__rating {
       font-size: 26px;
     }
 
-    .cdc-speed__pools {
+    .lr-ext-speed__pools {
       gap: 4px;
     }
 
-    .cdc-speed__pool {
+    .lr-ext-speed__pool {
       padding: 0 2px;
       font-size: 13px;
     }

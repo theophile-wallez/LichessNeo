@@ -37,7 +37,7 @@ main.forum-topic .reactions button img {
 
 main.forum-topic .reactions-auth button:hover {
   border-color: #ffffff2e;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
 }
 
 main.forum-topic .reactions button:hover img {
@@ -46,16 +46,16 @@ main.forum-topic .reactions button:hover img {
 
 /* Mine: in the accent, and it pops when picked. */
 main.forum-topic .reactions button.mine {
-  border-color: color-mix(in srgb, var(--cdc-accent) 60%, transparent);
-  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent) !important;
-  color: var(--cdc-accent-hover) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-accent) 60%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 main.forum-topic .reactions button.mine img {
-  animation: cdc-forum-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: lr-ext-forum-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes cdc-forum-pop {
+@keyframes lr-ext-forum-pop {
   40% {
     transform: scale(1.5) rotate(-12deg);
   }
@@ -71,13 +71,13 @@ main.forum-topic .reactions-toggle {
   width: 32px;
   padding: 0 !important;
   justify-content: center;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 15px !important;
 }
 
 /* ---- Pagination --- */
 
-:is(main.forum, main.search[data-cdc-search$='/forum/search']) .pagination {
+:is(main.forum, main.search[data-lr-ext-search$='/forum/search']) .pagination {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -85,7 +85,7 @@ main.forum-topic .reactions-toggle {
   gap: 6px;
   margin: 0 0 16px !important;
   padding: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 :is(main.forum, main.search) .pagination > :is(a, span) {
@@ -97,23 +97,23 @@ main.forum-topic .reactions-toggle {
   padding: 0 10px !important;
   border: none !important;
   border-radius: 8px !important;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text) !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 :is(main.forum, main.search) .pagination > a:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
   color: #fff !important;
   transform: translateY(-2px);
 }
 
 :is(main.forum, main.search) .pagination > span.current {
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   color: #fff !important;
 }
 
@@ -132,7 +132,7 @@ main.forum-topic .forum-topic__actions {
   flex-wrap: wrap;
   gap: 12px;
   margin: 8px 0 14px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 main.forum-topic .forum-topic__actions > p {
@@ -162,10 +162,10 @@ main.forum-topic .forum-topic__actions h2::before {
   background:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat--7e88db.svg') center /
       20px no-repeat,
-    color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+    color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
   box-shadow:
     inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--cdc-accent) 35%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 35%, transparent);
 }
 
 main.forum-topic .forum-topic__actions div {
@@ -179,9 +179,9 @@ main.forum-topic .forum-topic__actions div .button {
 /* The reply box (and the new topic form): a card. */
 main.forum-topic form.form3:is(.reply, :not(.edit-post-form)) {
   padding: 20px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 14px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
 }
 
 main.forum-topic form.form3 .form-label {
@@ -197,12 +197,12 @@ main.forum-topic form.form3 input.form-control {
 }
 
 main.forum-topic form.form3 small.form-help {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
 }
 
 main.forum-topic form.form3 small.form-help a {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
   font-weight: 700;
 }
 
@@ -217,7 +217,7 @@ main.forum-topic form.form3 .form-actions {
 }
 
 main.forum-topic form.form3 .form-actions > a {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-weight: 700;
 }
 
@@ -249,7 +249,7 @@ main.forum-topic .markdown-editor .header-tab {
   border: none !important;
   border-radius: 999px !important;
   background: transparent !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 14px;
   font-weight: 700;
 }
@@ -260,7 +260,7 @@ main.forum-topic .markdown-editor .header-tab:hover {
 
 main.forum-topic .markdown-editor .header-tab.active {
   outline: none !important;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   color: #fff !important;
 }
 
@@ -269,12 +269,12 @@ main.forum-topic .markdown-editor .header-tab.active::after {
 }
 
 /* The pill slides from one to the other (see "Sliding tabs" in theme/). */
-main.forum-topic .markdown-editor .header[data-cdc-tabs] {
-  --cdc-tab-radius: 999px;
-  --cdc-tab-shadow: none;
+main.forum-topic .markdown-editor .header[data-lr-ext-tabs] {
+  --lr-ext-tab-radius: 999px;
+  --lr-ext-tab-shadow: none;
 }
 
-main.forum-topic .markdown-editor .header[data-cdc-tabs] .header-tab.active {
+main.forum-topic .markdown-editor .header[data-lr-ext-tabs] .header-tab.active {
   background: transparent !important;
 }
 
@@ -290,6 +290,6 @@ main.forum-topic .markdown-editor textarea {
 main.forum-topic .markdown-editor .preview {
   padding: 12px 14px;
   border-radius: 10px;
-  background: var(--cdc-bg-panel-dark) !important;
+  background: var(--lr-ext-bg-panel-dark) !important;
   backdrop-filter: none !important;
 }

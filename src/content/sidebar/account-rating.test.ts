@@ -3,7 +3,7 @@ import { flush } from '#shared/testing/timers.ts';
 import { accountRating } from './account-rating.ts';
 
 const root = document.documentElement;
-const KEY = 'cdc-account-rating';
+const KEY = 'lr-ext-account-rating';
 const HOUR = 60 * 60 * 1000;
 
 const apiUser = {
@@ -27,8 +27,8 @@ const keep = (user: string, at: number): void =>
   );
 
 const shown = (): [string | undefined, string] => [
-  root.dataset.cdcAccountPerf,
-  root.style.getPropertyValue('--cdc-account-rating'),
+  root.dataset.lrExtAccountPerf,
+  root.style.getPropertyValue('--lr-ext-account-rating'),
 ];
 
 let fetchUser: ReturnType<typeof vi.fn<(url: string) => Promise<Response>>>;
@@ -43,7 +43,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals();
   localStorage.clear();
-  delete root.dataset.cdcAccountPerf;
+  delete root.dataset.lrExtAccountPerf;
   root.removeAttribute('style');
   signIn(null);
 });

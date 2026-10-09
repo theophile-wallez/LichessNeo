@@ -1,89 +1,93 @@
 /* ---- Radar --- */
 
 /* Hidden only once ours is in: if the data moves, Lichess's chart beats an empty panel. */
-.puzzle-dashboard__global:has(.cdc-radar) > .puzzle-dashboard__radar {
+.puzzle-dashboard__global:has(.lr-ext-radar) > .puzzle-dashboard__radar {
   display: none !important;
 }
 
 /* Room for the labels: ~110px past the rim sideways, three wrapped lines above and below. */
-.cdc-radar {
+.lr-ext-radar {
   padding: 58px clamp(18px, 12%, 130px);
   border-radius: 12px;
   /* A vignette on the plot: the panel is much wider than the chart. */
-  background: radial-gradient(circle at 50% 52%, var(--cdc-grey-800), var(--cdc-bg-panel) 65%);
+  background: radial-gradient(
+    circle at 50% 52%,
+    var(--lr-ext-grey-800),
+    var(--lr-ext-bg-panel) 65%
+  );
   box-shadow: inset 0 1px 0 #ffffff0f;
 }
 
-.cdc-radar__plot {
+.lr-ext-radar__plot {
   position: relative;
   width: min(100%, 560px);
   margin-inline: auto;
   aspect-ratio: 1;
 }
 
-.cdc-radar__chart {
+.lr-ext-radar__chart {
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
 }
 
-.cdc-radar__rings polygon {
+.lr-ext-radar__rings polygon {
   fill: none;
   stroke: #ffffff12;
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;
 }
 
-.cdc-radar__rings polygon:last-child {
+.lr-ext-radar__rings polygon:last-child {
   stroke: #ffffff26;
 }
 
-.cdc-radar__spokes line {
+.lr-ext-radar__spokes line {
   stroke: #ffffff12;
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;
 }
 
-.cdc-radar__area {
-  fill: color-mix(in srgb, var(--cdc-accent) 18%, transparent);
-  stroke: var(--cdc-accent);
+.lr-ext-radar__area {
+  fill: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent);
+  stroke: var(--lr-ext-accent);
   stroke-width: 2px;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--cdc-accent) 25%, transparent));
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--lr-ext-accent) 25%, transparent));
 }
 
-.cdc-radar__dots circle {
-  fill: var(--cdc-accent-hover);
-  stroke: var(--cdc-bg-panel);
+.lr-ext-radar__dots circle {
+  fill: var(--lr-ext-accent-hover);
+  stroke: var(--lr-ext-bg-panel);
   stroke-width: 2px;
   vector-effect: non-scaling-stroke;
 }
 
-/* Each label sits on its spoke (`--cdc-x` / `--cdc-y`), pushed out by half its own box to clear
+/* Each label sits on its spoke (`--lr-ext-x` / `--lr-ext-y`), pushed out by half its own box to clear
  * the rim. */
-.cdc-radar__label {
+.lr-ext-radar__label {
   position: absolute;
-  top: var(--cdc-y);
-  left: var(--cdc-x);
+  top: var(--lr-ext-y);
+  left: var(--lr-ext-x);
   width: max-content;
   max-width: 13ch;
-  translate: calc(-50% + var(--cdc-ox) * (50% + 9px)) calc(-50% + var(--cdc-oy) * (50% + 9px));
+  translate: calc(-50% + var(--lr-ext-ox) * (50% + 9px)) calc(-50% + var(--lr-ext-oy) * (50% + 9px));
   text-align: center;
 }
 
-.cdc-radar__name {
+.lr-ext-radar__name {
   display: block;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 13px;
   font-weight: 700;
   line-height: 1.25;
 }
 
-.cdc-radar__value {
+.lr-ext-radar__value {
   display: block;
-  color: var(--cdc-accent-hover);
+  color: var(--lr-ext-accent-hover);
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -91,34 +95,34 @@
 
 /* Narrower labels, still ~72px beside the rim. */
 @media (max-width: 1100px) {
-  .cdc-radar {
+  .lr-ext-radar {
     padding-inline: 72px;
   }
 
-  .cdc-radar__label {
+  .lr-ext-radar__label {
     max-width: 11ch;
   }
 
-  .cdc-radar__name {
+  .lr-ext-radar__name {
     font-size: 12px;
   }
 }
 
 /* Phones: side labels reach ~85px past the rim and ran off the screen. */
 @media (max-width: 649.98px) {
-  .cdc-radar {
+  .lr-ext-radar {
     padding: 52px 64px;
   }
 
-  .cdc-radar__label {
+  .lr-ext-radar__label {
     max-width: 9ch;
   }
 
-  .cdc-radar__name {
+  .lr-ext-radar__name {
     font-size: 11px;
   }
 
-  .cdc-radar__value {
+  .lr-ext-radar__value {
     font-size: 11px;
   }
 }

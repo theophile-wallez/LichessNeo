@@ -6,8 +6,8 @@
 
 .tabs-horiz span,
 .tabs-horiz button {
-  color: var(--cdc-text-dim);
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim);
+  font-family: var(--lr-ext-font) !important;
   font-weight: 700;
   letter-spacing: 0 !important;
 }
@@ -24,27 +24,27 @@
 }
 
 /* The underline is the sliding piece (see "Sliding tabs" in theme/). */
-.tabs-horiz[data-cdc-tabs='line'] > .active {
+.tabs-horiz[data-lr-ext-tabs='line'] > .active {
   border-bottom-color: transparent !important;
 }
 
 /* ---- Tables --- */
 
 .slist thead {
-  background: var(--cdc-bg-panel-dark) !important;
+  background: var(--lr-ext-bg-panel-dark) !important;
   box-shadow: none !important;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
   font-weight: 600 !important;
 }
 
 .slist thead th {
-  border-bottom-color: var(--cdc-border) !important;
-  color: var(--cdc-text-dim);
+  border-bottom-color: var(--lr-ext-border) !important;
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
 }
 
 .slist tbody tr:nth-child(2n) {
-  background: var(--cdc-grey-850) !important;
+  background: var(--lr-ext-grey-850) !important;
 }
 
 .slist tbody tr:hover {
@@ -52,7 +52,7 @@
 }
 
 .slist td {
-  border-color: var(--cdc-border) !important;
+  border-color: var(--lr-ext-border) !important;
 }
 
 /* ---- Forms --- */
@@ -60,22 +60,22 @@
 input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='color']),
 select,
 textarea {
-  border: 1px solid var(--cdc-grey-650) !important;
+  border: 1px solid var(--lr-ext-grey-650) !important;
   border-radius: 6px !important;
-  background-color: var(--cdc-bg-raised) !important;
+  background-color: var(--lr-ext-bg-raised) !important;
   color: #fff !important;
 }
 
 input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='color']):focus,
 select:focus,
 textarea:focus {
-  border-color: var(--cdc-accent) !important;
+  border-color: var(--lr-ext-accent) !important;
   outline: none !important;
 }
 
 input[type='checkbox'],
 input[type='radio'] {
-  accent-color: var(--cdc-accent);
+  accent-color: var(--lr-ext-accent);
 }
 
 /* The file picker's "Choose file" button, in our grey button style. */
@@ -84,15 +84,15 @@ input[type='file']::file-selector-button {
   padding: 6px 12px;
   border: none;
   border-radius: 6px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
   color: #fff;
-  font: 700 14px var(--cdc-font);
+  font: 700 14px var(--lr-ext-font);
   cursor: pointer;
 }
 
 input[type='file']::file-selector-button:hover {
-  background: var(--cdc-btn-grey-hover);
+  background: var(--lr-ext-btn-grey-hover);
 }
 
 /* Lichess's switches (.cmn-toggle) as a pill with a white knob. */
@@ -103,7 +103,7 @@ input[type='file']::file-selector-button:hover {
   padding: 0 !important;
   border: none !important;
   border-radius: 999px !important;
-  background: var(--cdc-grey-500) !important;
+  background: var(--lr-ext-grey-500) !important;
 }
 
 .cmn-toggle label::before {
@@ -121,7 +121,7 @@ input[type='file']::file-selector-button:hover {
 }
 
 .cmn-toggle input:checked + label {
-  background: var(--cdc-accent) !important;
+  background: var(--lr-ext-accent) !important;
 }
 
 .cmn-toggle input:checked + label::after {
@@ -148,9 +148,9 @@ input:not([type='hidden']) + .button {
 }
 
 input:not([type='hidden']) + .button.button-metal {
-  border: 1px solid var(--cdc-grey-650) !important;
+  border: 1px solid var(--lr-ext-grey-650) !important;
   border-left: none !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
 }
 
 input:not([type='hidden']) + .button.button-metal:hover {

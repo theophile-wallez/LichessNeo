@@ -31,7 +31,7 @@ export async function waitForRoundKeys(page: Page, keys: readonly string[]): Pro
     .toEqual(keys);
 }
 
-const PAGE_MARK = 'cdcTestPageMark';
+const PAGE_MARK = 'lrExtTestPageMark';
 const ATTEMPTS = 3;
 
 /** Marks the page's window, which a reload replaces; false if it can't be reached. */

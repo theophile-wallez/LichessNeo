@@ -33,8 +33,8 @@ export function opponentName(main: HTMLElement, player: Color, fallback: string)
   const bar = queryOne(
     main,
     bottom === opposite(player)
-      ? ':is(.ruser-bottom, .cdc-player--bottom)'
-      : ':is(.ruser-top, .cdc-player--top)',
+      ? ':is(.ruser-bottom, .lr-ext-player--bottom)'
+      : ':is(.ruser-top, .lr-ext-player--top)',
     HTMLElement,
   );
   const name = bar ? readPlayer(bar, undefined).name : '';

@@ -2,7 +2,7 @@
 
 /* A live mascot in a box of ours (content/coach/spot.ts), over the still the page shows under
    it, in the same framing. */
-.cdc-mascot canvas {
+.lr-ext-mascot canvas {
   position: absolute;
   inset: 0;
   width: 100%;

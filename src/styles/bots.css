@@ -35,13 +35,13 @@
 
 /* Each category's Hugeicon on a tile tinted with its color: a robot, a crown for the featured. */
 .bots__categ > .box__top > h1 {
-  --cdc-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01--caa9fa.svg');
-  --cdc-bots-color: var(--cdc-purple);
+  --lr-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01--caa9fa.svg');
+  --lr-ext-bots-color: var(--lr-ext-purple);
 }
 
 .bots__categ:has(.bots__featured) > .box__top > h1 {
-  --cdc-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown--ffc689.svg');
-  --cdc-bots-color: var(--cdc-orange);
+  --lr-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown--ffc689.svg');
+  --lr-ext-bots-color: var(--lr-ext-orange);
 }
 
 .bots__categ > .box__top > h1::before {
@@ -51,11 +51,11 @@
   height: 40px;
   border-radius: 11px;
   background:
-    var(--cdc-bots-icon) center / 24px no-repeat,
-    color-mix(in srgb, var(--cdc-bots-color) 20%, transparent);
+    var(--lr-ext-bots-icon) center / 24px no-repeat,
+    color-mix(in srgb, var(--lr-ext-bots-color) 20%, transparent);
   box-shadow:
     inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--cdc-bots-color) 35%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-bots-color) 35%, transparent);
 }
 
 /* The "About bots" link, as a pill. */
@@ -63,8 +63,8 @@
   flex: none;
   padding: 7px 14px;
   border-radius: 999px;
-  background: var(--cdc-bg-raised);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-bg-raised);
+  color: var(--lr-ext-text) !important;
   font-size: 13px;
   font-weight: 700;
   transition:
@@ -73,13 +73,13 @@
 }
 
 .bots__categ > .box__top > a:hover {
-  background: var(--cdc-bg-raised-hover);
+  background: var(--lr-ext-bg-raised-hover);
   color: #fff !important;
 }
 
 .bots__categ > p {
   margin: 0 0 18px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 15px;
 }
 
@@ -93,47 +93,47 @@
 
 /* Five colors and six pieces: a color and piece pair repeats only every 30 cards. */
 .bots__list__entry {
-  --cdc-bot: var(--cdc-accent);
-  --cdc-bot-2: var(--cdc-accent-dim);
-  --cdc-bot-piece: var(---white-knight);
+  --lr-ext-bot: var(--lr-ext-accent);
+  --lr-ext-bot-2: var(--lr-ext-accent-dim);
+  --lr-ext-bot-piece: var(---white-knight);
 }
 
 .bots__list__entry:nth-child(5n + 2) {
-  --cdc-bot: #45a3f5;
-  --cdc-bot-2: var(--cdc-cyan-darker);
+  --lr-ext-bot: #45a3f5;
+  --lr-ext-bot-2: var(--lr-ext-cyan-darker);
 }
 .bots__list__entry:nth-child(5n + 3) {
-  --cdc-bot: #a98bf0;
-  --cdc-bot-2: var(--cdc-purple-dark);
+  --lr-ext-bot: #a98bf0;
+  --lr-ext-bot-2: var(--lr-ext-purple-dark);
 }
 .bots__list__entry:nth-child(5n + 4) {
-  --cdc-bot: #f5a93b;
-  --cdc-bot-2: var(--cdc-orange-darker);
+  --lr-ext-bot: #f5a93b;
+  --lr-ext-bot-2: var(--lr-ext-orange-darker);
 }
 .bots__list__entry:nth-child(5n + 5) {
-  --cdc-bot: var(--cdc-red);
-  --cdc-bot-2: var(--cdc-red-darker);
+  --lr-ext-bot: var(--lr-ext-red);
+  --lr-ext-bot-2: var(--lr-ext-red-darker);
 }
 
 .bots__list__entry:nth-child(6n + 2) {
-  --cdc-bot-piece: var(---white-bishop);
+  --lr-ext-bot-piece: var(---white-bishop);
 }
 .bots__list__entry:nth-child(6n + 3) {
-  --cdc-bot-piece: var(---white-rook);
+  --lr-ext-bot-piece: var(---white-rook);
 }
 .bots__list__entry:nth-child(6n + 4) {
-  --cdc-bot-piece: var(---white-queen);
+  --lr-ext-bot-piece: var(---white-queen);
 }
 .bots__list__entry:nth-child(6n + 5) {
-  --cdc-bot-piece: var(---white-king);
+  --lr-ext-bot-piece: var(---white-king);
 }
 .bots__list__entry:nth-child(6n + 6) {
-  --cdc-bot-piece: var(---white-pawn);
+  --lr-ext-bot-piece: var(---white-pawn);
 }
 
 .bots__featured .bots__list__entry {
-  --cdc-bot: var(--cdc-orange-dark);
-  --cdc-bot-2: var(--cdc-orange-darker);
+  --lr-ext-bot: var(--lr-ext-orange-dark);
+  --lr-ext-bot-2: var(--lr-ext-orange-darker);
 }
 
 /* ---- Card --- */
@@ -146,26 +146,26 @@
     'play play' auto / 52px minmax(0, 1fr);
   gap: 12px 14px !important;
   padding: 16px;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   overflow: visible !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     border-color 0.15s,
     box-shadow 0.15s !important;
-  animation: cdc-bot-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation: lr-ext-bot-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   /* Stagger only the first cards; the hundreds below come in at once. */
   animation-delay: calc(min(sibling-index(), 12) * 35ms);
 }
 
 .bots__list__entry:hover {
-  border-color: color-mix(in srgb, var(--cdc-bot) 55%, transparent) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-bot) 55%, transparent) !important;
   box-shadow: 0 6px 18px #00000059;
   transform: translateY(-3px);
 }
 
-@keyframes cdc-bot-in {
+@keyframes lr-ext-bot-in {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -180,8 +180,8 @@
   height: 52px;
   border-radius: 12px;
   background:
-    var(--cdc-bot-piece) center / 80% no-repeat,
-    linear-gradient(145deg, var(--cdc-bot), var(--cdc-bot-2));
+    var(--lr-ext-bot-piece) center / 80% no-repeat,
+    linear-gradient(145deg, var(--lr-ext-bot), var(--lr-ext-bot-2));
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
@@ -203,9 +203,9 @@
   width: 16px;
   height: 16px;
   margin: 0 -4px -4px 0;
-  border: 3px solid var(--cdc-bg-panel);
+  border: 3px solid var(--lr-ext-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-good);
+  background: var(--lr-ext-good);
 }
 
 .bots__list__entry__head {
@@ -228,12 +228,12 @@
 }
 
 .bots__list__entry__head .user-link:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 .bots__list__entry__head .user-link .line {
   margin-inline-end: 2px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 .bots__list__entry__head .user-link .uflair {
@@ -259,7 +259,7 @@
   gap: 5px;
   padding: 2px 9px 2px 7px;
   border-radius: 999px;
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   color: #fff;
   font-size: 12px;
   font-weight: 800;
@@ -275,7 +275,7 @@
   grid-area: bio;
   -webkit-line-clamp: 3 !important;
   padding: 0 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px !important;
   line-height: 1.45;
   overflow-wrap: anywhere;
@@ -287,8 +287,8 @@
   height: 40px;
   padding: 0 !important;
   border-radius: 8px;
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   color: #fff !important;
   font-size: 15px !important;
   font-weight: 800;
@@ -296,7 +296,7 @@
 }
 
 .bots__list__entry__play:hover {
-  background: var(--cdc-btn-primary-hover) !important;
+  background: var(--lr-ext-btn-primary-hover) !important;
   color: #fff !important;
 }
 
@@ -329,11 +329,11 @@
     top: 0;
     /* Side shadows hide the cards' shadows passing under; margins would widen the page. */
     padding-bottom: 14px !important;
-    background: var(--cdc-bg-page);
+    background: var(--lr-ext-bg-page);
     box-shadow:
-      var(--cdc-pin-cover-wide),
-      -12px 0 var(--cdc-bg-page),
-      12px 0 var(--cdc-bg-page);
+      var(--lr-ext-pin-cover-wide),
+      -12px 0 var(--lr-ext-bg-page),
+      12px 0 var(--lr-ext-bg-page);
   }
 
   .bots__categ > .box__top::after {
@@ -342,7 +342,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

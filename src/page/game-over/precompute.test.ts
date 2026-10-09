@@ -18,8 +18,8 @@ afterEach(() => {
 });
 
 const GAME = fixtureGame('passant');
-const CACHE_KEY = `cdc-review:passanta:${GAME.nodes.length}:v1`;
-const PROGRESS_KEY = `cdc-review-progress:passanta:${GAME.nodes.length}:v1`;
+const CACHE_KEY = `lr-ext-review:passanta:${GAME.nodes.length}:v1`;
+const PROGRESS_KEY = `lr-ext-review-progress:passanta:${GAME.nodes.length}:v1`;
 
 interface Searches {
   deep: number;

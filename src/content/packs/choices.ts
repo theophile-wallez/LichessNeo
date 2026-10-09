@@ -31,15 +31,15 @@ interface Choice {
 // tiles are; sounds are names, as Lichess's list is.
 function choiceItem({ kind, id, name, image }: Choice, library: Library): HTMLButtonElement {
   const item = createElement('button', {
-    attrs: { type: 'button', class: 'cdc-src-item', 'data-cdc-choice': id },
+    attrs: { type: 'button', class: 'lr-ext-src-item', 'data-lr-ext-choice': id },
   });
   if (kind === 'sound')
-    item.append(createElement('span', { className: 'cdc-src-name', text: name }));
+    item.append(createElement('span', { className: 'lr-ext-src-name', text: name }));
   else {
     item.title = name;
     item.setAttribute('aria-label', name);
-    const thumb = createElement('span', { className: 'cdc-src-thumb' });
-    if (image === null) setData(thumb, 'cdcTheme', id);
+    const thumb = createElement('span', { className: 'lr-ext-src-thumb' });
+    if (image === null) setData(thumb, 'lrExtTheme', id);
     else setStyleProperty(thumb, 'background-image', `url("${image}")`);
     item.append(thumb);
   }
@@ -55,14 +55,14 @@ const packItem = (kind: PartKind, pack: Pack, library: Library): HTMLElement =>
 
 /** The part's themes and packs, and a line if there are none or the packs can't be read. */
 function choiceListing(kind: PartKind, library: Library): HTMLElement {
-  const listing = createElement('div', { className: 'cdc-src-listing' });
+  const listing = createElement('div', { className: 'lr-ext-src-listing' });
   const packs = library.packs().filter(pack => hasPart(pack, kind));
   const items = [
     ...THEMES[kind].map(theme => themeItem(kind, theme, library)),
     ...packs.map(pack => packItem(kind, pack, library)),
   ];
   if (items.length > 0) {
-    const list = createElement('div', { className: 'cdc-src-list' });
+    const list = createElement('div', { className: 'lr-ext-src-list' });
     list.append(...items);
     listing.append(list);
   }
@@ -70,22 +70,22 @@ function choiceListing(kind: PartKind, library: Library): HTMLElement {
     ? 'The imported packs could not be read.'
     : `No ${NOUNS[kind]} of the extension yet: import your own from GitHub.`;
   if (library.unreadable() || items.length === 0)
-    listing.append(createElement('p', { className: 'cdc-src-empty', text: note }));
+    listing.append(createElement('p', { className: 'lr-ext-src-empty', text: note }));
   return listing;
 }
 
 /** Draws the panel's choices again, as packs are read, imported or removed. */
 export function refreshListing(panel: HTMLElement, kind: PartKind, library: Library): void {
   panel
-    .querySelector('.cdc-src-choices > .cdc-src-listing')
+    .querySelector('.lr-ext-src-choices > .lr-ext-src-listing')
     ?.replaceWith(choiceListing(kind, library));
 }
 
 /** The Extension tab's content for a panel's part. */
 export function choiceSection(kind: PartKind, library: Library): HTMLElement {
-  const section = createElement('div', { className: 'cdc-src-choices' });
+  const section = createElement('div', { className: 'lr-ext-src-choices' });
   const settings = createElement('a', {
-    className: 'cdc-src-import-link',
+    className: 'lr-ext-src-import-link',
     text: `Import a ${NOUNS[kind]}`,
     attrs: { href: SETTINGS_URL },
   });

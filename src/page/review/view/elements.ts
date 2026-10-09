@@ -16,22 +16,22 @@ export interface ReviewElements {
 }
 
 export function createElements(): ReviewElements {
-  const bar = createElement('div', { id: 'cdc-evalbar' });
-  const barFill = createElement('div', { className: 'cdc-evalbar__fill' });
-  const barLabel = createElement('span', { className: 'cdc-evalbar__label' });
+  const bar = createElement('div', { id: 'lr-ext-evalbar' });
+  const barFill = createElement('div', { className: 'lr-ext-evalbar__fill' });
+  const barLabel = createElement('span', { className: 'lr-ext-evalbar__label' });
   bar.append(barFill, barLabel);
   return {
     // Focusable, to keep the focus of a button its redraw replaced.
-    panel: createElement('div', { id: 'cdc-review', attrs: { tabindex: '-1' } }),
-    graphBox: createElement('div', { id: 'cdc-review-graph' }),
-    controls: createElement('div', { id: 'cdc-review-controls' }),
+    panel: createElement('div', { id: 'lr-ext-review', attrs: { tabindex: '-1' } }),
+    graphBox: createElement('div', { id: 'lr-ext-review-graph' }),
+    controls: createElement('div', { id: 'lr-ext-review-controls' }),
     bar,
     barFill,
     barLabel,
-    overlay: createElement('div', { id: 'cdc-board-overlay' }),
-    opening: createElement('div', { id: 'cdc-opening' }),
+    overlay: createElement('div', { id: 'lr-ext-board-overlay' }),
+    opening: createElement('div', { id: 'lr-ext-opening' }),
     // Put on <body>, because the panel's rows scroll and would clip it.
-    tip: createElement('div', { id: 'cdc-tip', attrs: { role: 'tooltip' } }),
+    tip: createElement('div', { id: 'lr-ext-tip', attrs: { role: 'tooltip' } }),
   };
 }
 

@@ -30,7 +30,7 @@ function capturedCount(page: Page): Promise<CapturedCount> {
         ).length;
         expected += Math.max(0, count - left);
       }
-    const shown = document.querySelectorAll('main.round .cdc-captured .cdc-pc').length;
+    const shown = document.querySelectorAll('main.round .lr-ext-captured .lr-ext-pc').length;
     return { expected, shown };
   });
 }
@@ -56,8 +56,8 @@ test.describe('a game on Lichess TV', () => {
 
   test('shows the captured pieces in the player bars, in the board’s set', async ({ page }) => {
     await onOneTvGame(page, async () => {
-      await expect(page.locator('main.round .cdc-captured--top')).toBeAttached();
-      await expect(page.locator('main.round .cdc-captured--bottom')).toBeAttached();
+      await expect(page.locator('main.round .lr-ext-captured--top')).toBeAttached();
+      await expect(page.locator('main.round .lr-ext-captured--bottom')).toBeAttached();
       await expect
         .poll(async () => {
           const { expected, shown } = await capturedCount(page);
@@ -65,7 +65,7 @@ test.describe('a game on Lichess TV', () => {
         })
         .toBe(true);
       // Lichess's own pieces, from the variables it draws the board's from.
-      for (const piece of await page.locator('main.round .cdc-captured .cdc-pc').all())
+      for (const piece of await page.locator('main.round .lr-ext-captured .lr-ext-pc').all())
         await expect(piece).toHaveCSS(
           'background-image',
           /^url\("https:\/\/lichess1\.org\/assets\//,
@@ -76,7 +76,7 @@ test.describe('a game on Lichess TV', () => {
   test('flips the board with its flip button, shown while the pointer is on the board', async ({
     page,
   }) => {
-    const flip = page.locator('main.round .cdc-board-tools__btn--flip');
+    const flip = page.locator('main.round .lr-ext-board-tools__btn--flip');
     await onOneTvGame(page, async () => {
       // After a reload the pointer may still be over the board.
       await page.mouse.move(0, 0);
@@ -94,13 +94,13 @@ test.describe('a game on Lichess TV', () => {
   });
 
   test('opens Lichess’s board menu with its cog', async ({ page }) => {
-    const cog = page.locator('main.round .cdc-board-tools__btn--menu');
+    const cog = page.locator('main.round .lr-ext-board-tools__btn--menu');
     await onOneTvGame(page, async () => {
       await expect(cog).toBeVisible();
       await waitForRoundKeys(page, ['h']);
       await cog.click();
       await expect(page.locator('main.round .board-menu')).toBeVisible();
-      await expect(cog).toHaveClass(/\bcdc-board-tools__btn--on\b/);
+      await expect(cog).toHaveClass(/\blr-ext-board-tools__btn--on\b/);
     });
   });
 
@@ -108,11 +108,11 @@ test.describe('a game on Lichess TV', () => {
     const meta = page.locator('main.round .round__side > .game__meta');
     await onOneTvGame(page, async () => {
       await expect(meta).toBeVisible();
-      await expect(meta.locator('.setup[data-cdc-parts] .cdc-part').first()).toBeVisible();
-      const players = meta.locator('.game__meta__players .user-link[data-cdc-name]');
+      await expect(meta.locator('.setup[data-lr-ext-parts] .lr-ext-part').first()).toBeVisible();
+      const players = meta.locator('.game__meta__players .user-link[data-lr-ext-name]');
       await expect(players).toHaveCount(2);
       for (const player of await players.all()) {
-        await expect(player.locator('.cdc-meta-name')).not.toBeEmpty();
+        await expect(player.locator('.lr-ext-meta-name')).not.toBeEmpty();
         // A provisional rating keeps its "?"; the brackets go.
         await expect(player.locator('.rating')).toHaveText(/^\d+\??$/);
       }

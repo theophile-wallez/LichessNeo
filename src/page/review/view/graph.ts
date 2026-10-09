@@ -105,12 +105,12 @@ export function mountGraph(
   const box = measure(container);
   setHtml(
     container,
-    html`${graphMarkup(review, analysis.node.ply, box)}<span class="cdc-graph-tip"></span>`,
+    html`${graphMarkup(review, analysis.node.ply, box)}<span class="lr-ext-graph-tip"></span>`,
   );
   // The first time each graph shows, it draws itself from left to right.
   if (!view.revealed.has(kind)) {
     view.revealed.add(kind);
-    container.firstElementChild?.classList.add('cdc-graph-reveal');
+    container.firstElementChild?.classList.add('lr-ext-graph-reveal');
   }
   const tip = container.lastElementChild;
   if (!(tip instanceof HTMLElement)) return;
@@ -131,7 +131,7 @@ export function movesGraph(session: Session, analysis: Analysis, force = false):
     graphBox.replaceChildren();
     return;
   }
-  if (!force && graphBox.dataset.cdcVersion === String(version)) return;
-  setData(graphBox, 'cdcVersion', String(version));
+  if (!force && graphBox.dataset.lrExtVersion === String(version)) return;
+  setData(graphBox, 'lrExtVersion', String(version));
   mountGraph(session, analysis, { container: graphBox, kind: 'moves' });
 }

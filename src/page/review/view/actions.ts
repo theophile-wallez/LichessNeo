@@ -1,7 +1,7 @@
 import { z } from 'zod/mini';
 import { ModeSchema } from '#page/review/session.ts';
 
-// What the panel's and the controls' buttons do, named by their `data-cdc`:
+// What the panel's and the controls' buttons do, named by their `data-lr-ext`:
 // a mode to show, or a command on the review.
 
 const CommandSchema = z.enum([

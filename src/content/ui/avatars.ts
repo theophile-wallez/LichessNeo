@@ -15,11 +15,11 @@ interface Spot {
 
 const SPOTS: readonly Spot[] = [
   // The game page's player bars, and ours on the analysis board.
-  { selector: 'main.round .ruser, main.analyse > .cdc-player', link: ':scope > a.user-link' },
+  { selector: 'main.round .ruser, main.analyse > .lr-ext-player', link: ':scope > a.user-link' },
   { selector: '#powerTip .upt__info', link: '.upt__info__top > a.user-link' },
   { selector: '#friend_box .content a.user-link' },
   {
-    selector: "main.box.page-small[data-cdc-list='players'] > table.slist > tbody > tr",
+    selector: "main.box.page-small[data-lr-ext-list='players'] > table.slist > tbody > tr",
     link: ':scope > td:first-child > .user-link',
   },
   { selector: 'main.forum-topic .forum-post', link: '.forum-post__metas > a.author' },
@@ -34,8 +34,8 @@ function userIn(spot: HTMLElement, link: string | undefined): string | undefined
 
 export function markAvatar(element: HTMLElement, user: string | undefined): void {
   const avatar = user === undefined ? null : avatarOf(user);
-  setData(element, 'cdcAvatarCoach', avatar && String(avatar.coach));
-  setData(element, 'cdcAvatarColor', avatar && avatar.color);
+  setData(element, 'lrExtAvatarCoach', avatar && String(avatar.coach));
+  setData(element, 'lrExtAvatarColor', avatar && avatar.color);
 }
 
 export function syncAvatars(root: ParentNode = document): void {

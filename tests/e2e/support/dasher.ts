@@ -36,11 +36,11 @@ export async function closeMenu(page: Page): Promise<void> {
 }
 
 export const pickerTab = (panel: Locator, view: 'packs' | 'lichess'): Locator =>
-  panel.locator(`.cdc-src-tabs > button[data-cdc-tab="${view}"]`);
+  panel.locator(`.lr-ext-src-tabs > button[data-lr-ext-tab="${view}"]`);
 
 /** An imported pack, in the panel's Imported tab. */
 export const packChoice = (panel: Locator, id: string): Locator =>
-  panel.locator(`.cdc-src-list .cdc-src-item[data-cdc-choice="${id}"]`);
+  panel.locator(`.lr-ext-src-list .lr-ext-src-item[data-lr-ext-choice="${id}"]`);
 
 /** Lichess's own choices, in its tab: boards and piece sets, or sound sets. */
 export const lichessChoices = (panel: Locator): Locator =>

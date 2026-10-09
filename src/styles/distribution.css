@@ -1,13 +1,13 @@
 /* The rating distribution (/stat/rating/distribution/<perf>), drawn in SVG by
  * page/charts/distribution/. Reuses ratingchart.css's chips, grid and tooltip.
- * Lichess's canvas is hidden only once ours is in (.cdc-dist-on). */
+ * Lichess's canvas is hidden only once ours is in (.lr-ext-dist-on). */
 
 /* ---- Page --- */
 
 .rating-stats .desc {
   gap: 14px;
   margin: 0 0 4px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
   line-height: 1.5;
 }
@@ -28,52 +28,52 @@
 
 /* ---- Chart --- */
 
-.rating-stats #rating_distribution.cdc-dist-on {
+.rating-stats #rating_distribution.lr-ext-dist-on {
   height: auto !important;
   margin-top: 18px !important;
 }
 
-#rating_distribution.cdc-dist-on > canvas {
+#rating_distribution.lr-ext-dist-on > canvas {
   display: none !important;
 }
 
-.cdc-dist {
+.lr-ext-dist {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
 }
 
-.cdc-dist__legend {
+.lr-ext-dist__legend {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
 /* These chips are a legend, not toggles. */
-.cdc-dist__chip,
-.cdc-dist__chip:hover {
-  border-color: var(--cdc-card-border);
+.lr-ext-dist__chip,
+.lr-ext-dist__chip:hover {
+  border-color: var(--lr-ext-card-border);
   background: #ffffff08;
   cursor: default;
 }
 
 /* As tall as the window allows, so the page doesn't scroll. */
-.cdc-dist__plot {
+.lr-ext-dist__plot {
   position: relative;
   min-width: 0;
-  height: clamp(240px, var(--cdc-main-h, 100dvh) - 330px, 760px);
+  height: clamp(240px, var(--lr-ext-main-h, 100dvh) - 330px, 760px);
 }
 
 /* Taller on a big window, up to half as tall as wide. The cap leaves room for
  * Lichess's box padding, which grows with the window's width. */
 @media (min-width: 1020px) {
-  .cdc-dist__plot {
-    height: clamp(240px, min(var(--cdc-main-h, 100dvh) - 330px, 50vw), 1060px);
+  .lr-ext-dist__plot {
+    height: clamp(240px, min(var(--lr-ext-main-h, 100dvh) - 330px, 50vw), 1060px);
   }
 }
 
-.cdc-dist__svg {
+.lr-ext-dist__svg {
   display: block;
   position: absolute;
   inset: 0;
@@ -81,72 +81,72 @@
   touch-action: pan-y;
 }
 
-.cdc-dist__base {
+.lr-ext-dist__base {
   stroke: #ffffff26;
   stroke-dasharray: none;
 }
 
-.cdc-dist__slabel {
-  fill: var(--cdc-text-dim);
-  font: 600 11px var(--cdc-font);
+.lr-ext-dist__slabel {
+  fill: var(--lr-ext-text-dim);
+  font: 600 11px var(--lr-ext-font);
   font-variant-numeric: tabular-nums;
   dominant-baseline: middle;
 }
 
-.cdc-dist__bar {
-  fill: url(#cdc-dist-g);
+.lr-ext-dist__bar {
+  fill: url(#lr-ext-dist-g);
   transition:
     opacity 0.2s,
     filter 0.2s !important;
 }
 
 /* Players rated above you, or above the column under the pointer. */
-.cdc-dist__bar--dim {
+.lr-ext-dist__bar--dim {
   opacity: 0.32;
 }
 
-.cdc-dist__bar--on {
+.lr-ext-dist__bar--on {
   opacity: 1;
   filter: brightness(1.3);
 }
 
-.cdc-dist__cumul {
+.lr-ext-dist__cumul {
   fill: none;
-  stroke: var(--cdc-grey-50);
+  stroke: var(--lr-ext-grey-50);
   stroke-width: 2;
   stroke-linecap: round;
   opacity: 0.8;
   pointer-events: none;
 }
 
-.cdc-dist__mline {
-  stroke: var(--cdc-marker-color);
+.lr-ext-dist__mline {
+  stroke: var(--lr-ext-marker-color);
   stroke-width: 1.5;
   stroke-dasharray: 4 4;
   pointer-events: none;
 }
 
-.cdc-dist__dot {
-  fill: var(--cdc-grey-50);
-  stroke: var(--cdc-bg-panel);
+.lr-ext-dist__dot {
+  fill: var(--lr-ext-grey-50);
+  stroke: var(--lr-ext-bg-panel);
   stroke-width: 2.5;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s !important;
 }
 
-.cdc-dist__svg--hover .cdc-dist__dot {
+.lr-ext-dist__svg--hover .lr-ext-dist__dot {
   opacity: 1;
 }
 
 /* A marker's pill: the player's name and rating. */
-.cdc-dist__marks {
+.lr-ext-dist__marks {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.cdc-dist__mark {
+.lr-ext-dist__mark {
   position: absolute;
   top: 0;
   left: 0;
@@ -158,48 +158,48 @@
   border-radius: 999px;
   background: #fff;
   box-shadow: 0 2px 6px #00000059;
-  color: var(--cdc-bg-panel);
-  font: 700 12px/1 var(--cdc-font);
+  color: var(--lr-ext-bg-panel);
+  font: 700 12px/1 var(--lr-ext-font);
   white-space: nowrap;
 }
 
 /* The player you came from gets a dark pill; yours stays bright. */
-.cdc-dist__mark--other {
+.lr-ext-dist__mark--other {
   border: 1px solid #ffffff2e;
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   color: #fff;
 }
 
-.cdc-dist__mark strong {
+.lr-ext-dist__mark strong {
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-.cdc-dist__tip {
+.lr-ext-dist__tip {
   min-width: 170px;
 }
 
 /* ---- Intro --- */
 
 /* The columns rise left to right, the curve draws itself, then the markers drop in. */
-.cdc-dist__svg--intro .cdc-dist__bar {
+.lr-ext-dist__svg--intro .lr-ext-dist__bar {
   transform-box: fill-box;
   transform-origin: bottom;
-  animation: cdc-dist-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--cdc-bar-index) * 7ms);
+  animation: lr-ext-dist-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--lr-ext-bar-index) * 7ms);
 }
 
-.cdc-dist__svg--intro .cdc-dist__cumul {
+.lr-ext-dist__svg--intro .lr-ext-dist__cumul {
   stroke-dasharray: 1;
-  animation: cdc-dist-draw 1.1s cubic-bezier(0.45, 0, 0.2, 1) 0.25s both;
+  animation: lr-ext-dist-draw 1.1s cubic-bezier(0.45, 0, 0.2, 1) 0.25s both;
 }
 
-.cdc-dist__svg--intro .cdc-dist__mline,
-.cdc-dist--intro .cdc-dist__mark {
-  animation: cdc-dist-drop 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
+.lr-ext-dist__svg--intro .lr-ext-dist__mline,
+.lr-ext-dist--intro .lr-ext-dist__mark {
+  animation: lr-ext-dist-drop 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
 }
 
-@keyframes cdc-dist-rise {
+@keyframes lr-ext-dist-rise {
   from {
     transform: scaleY(0);
   }
@@ -208,7 +208,7 @@
   }
 }
 
-@keyframes cdc-dist-draw {
+@keyframes lr-ext-dist-draw {
   from {
     stroke-dashoffset: 1;
   }
@@ -217,7 +217,7 @@
   }
 }
 
-@keyframes cdc-dist-drop {
+@keyframes lr-ext-dist-drop {
   from {
     opacity: 0;
     translate: 0 -6px;

@@ -3,29 +3,29 @@
 
 /* A color per category, for the map and the stage list; "what next" (links out) in the accent. */
 #learn-app .categ {
-  --cdc-practice: var(--cdc-accent);
-  --cdc-practice-2: var(--cdc-accent-dim);
+  --lr-ext-practice: var(--lr-ext-accent);
+  --lr-ext-practice-2: var(--lr-ext-accent-dim);
 }
 
 #learn-app .categ:nth-of-type(5n + 1) {
-  --cdc-practice: #f06a4a;
-  --cdc-practice-2: var(--cdc-red-dark);
+  --lr-ext-practice: #f06a4a;
+  --lr-ext-practice-2: var(--lr-ext-red-dark);
 }
 #learn-app .categ:nth-of-type(5n + 2) {
-  --cdc-practice: #45a3f5;
-  --cdc-practice-2: var(--cdc-cyan-darker);
+  --lr-ext-practice: #45a3f5;
+  --lr-ext-practice-2: var(--lr-ext-cyan-darker);
 }
 #learn-app .categ:nth-of-type(5n + 3) {
-  --cdc-practice: #a98bf0;
-  --cdc-practice-2: var(--cdc-purple-dark);
+  --lr-ext-practice: #a98bf0;
+  --lr-ext-practice-2: var(--lr-ext-purple-dark);
 }
 #learn-app .categ:nth-of-type(5n + 4) {
-  --cdc-practice: #f5a93b;
-  --cdc-practice-2: var(--cdc-orange-darker);
+  --lr-ext-practice: #f5a93b;
+  --lr-ext-practice-2: var(--lr-ext-orange-darker);
 }
 #learn-app .categ.what_next {
-  --cdc-practice: var(--cdc-accent);
-  --cdc-practice-2: var(--cdc-accent-dim);
+  --lr-ext-practice: var(--lr-ext-accent);
+  --lr-ext-practice-2: var(--lr-ext-accent-dim);
 }
 
 /* ---- Side --- */
@@ -33,9 +33,9 @@
 .learn__side-home {
   gap: 14px !important;
   padding: 20px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 /* The sidebar's Chess basics picture instead of Lichess's grey helmet, floating like
@@ -45,7 +45,7 @@
   width: 96px !important;
   opacity: 1 !important;
   filter: drop-shadow(0 8px 16px #0006) !important;
-  animation: cdc-float 4s ease-in-out infinite !important;
+  animation: lr-ext-float 4s ease-in-out infinite !important;
 }
 
 .learn__side-home__header {
@@ -62,7 +62,7 @@
 
 .learn__side-home h2 {
   margin: 4px 0 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 15px !important;
   font-weight: 600 !important;
 }
@@ -88,8 +88,8 @@
 .learn__side-home .progress .bar {
   min-width: 30px;
   border-radius: 999px !important;
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: inset 0 1px 0 var(--cdc-accent);
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: inset 0 1px 0 var(--lr-ext-accent);
 }
 
 /* No progress yet: an empty track, not a min-width blob. */
@@ -111,9 +111,9 @@
   padding: 8px 12px !important;
   border: none !important;
   border-radius: 7px !important;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow) !important;
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   opacity: 1 !important;
@@ -121,7 +121,7 @@
 }
 
 .learn__side-home .actions .confirm:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
   color: #fff !important;
 }
 
@@ -148,8 +148,8 @@
   width: 12px;
   height: 12px;
   border-radius: 4px;
-  background: linear-gradient(135deg, var(--cdc-practice), var(--cdc-practice-2));
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cdc-practice) 22%, transparent);
+  background: linear-gradient(135deg, var(--lr-ext-practice), var(--lr-ext-practice-2));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-practice) 22%, transparent);
 }
 
 .learn-stages .categ_stages {
@@ -160,7 +160,7 @@
 
 .learn-stages .what_next > p {
   margin: 6px 0 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 15px !important;
   text-align: start !important;
   text-shadow: none !important;

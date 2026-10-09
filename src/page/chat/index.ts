@@ -24,9 +24,9 @@ function authorOf(line: HTMLElement): string | null {
 function markEvent(line: HTMLElement): void {
   const text = line.querySelector(':scope > t')?.textContent ?? '';
   const found = line.classList.contains('system') ? chatEvent(text) : null;
-  setData(line, 'cdcTopic', found?.topic ?? null);
-  setData(line, 'cdcTone', found?.tone ?? null);
-  setData(line, 'cdcLabel', found ? translate(found.key ?? '', text.trim()) : null);
+  setData(line, 'lrExtTopic', found?.topic ?? null);
+  setData(line, 'lrExtTone', found?.tone ?? null);
+  setData(line, 'lrExtLabel', found ? translate(found.key ?? '', text.trim()) : null);
 }
 
 function markLines(chat: HTMLElement): void {
@@ -36,9 +36,9 @@ function markLines(chat: HTMLElement): void {
   const authors = lines.map(authorOf);
   for (const [i, line] of lines.entries()) {
     const author = authors[i] ?? null;
-    setData(line, 'cdcMine', isMine(line, author) ? '' : null);
-    setData(line, 'cdcFollows', author !== null && authors[i - 1] === author ? '' : null);
-    setData(line, 'cdcFollowed', author !== null && authors[i + 1] === author ? '' : null);
+    setData(line, 'lrExtMine', isMine(line, author) ? '' : null);
+    setData(line, 'lrExtFollows', author !== null && authors[i - 1] === author ? '' : null);
+    setData(line, 'lrExtFollowed', author !== null && authors[i + 1] === author ? '' : null);
     markEvent(line);
   }
 }

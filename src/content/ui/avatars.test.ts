@@ -16,9 +16,9 @@ const SPOTS = [
   {
     name: 'the analysis board’s bar',
     markup:
-      '<main class="analyse"><div class="cdc-player cdc-player--top">' +
+      '<main class="analyse"><div class="lr-ext-player lr-ext-player--top">' +
       '<a class="user-link" href="/@/tjychess">tjychess</a></div></main>',
-    avatar: '.cdc-player',
+    avatar: '.lr-ext-player',
   },
   {
     name: 'the hover card',
@@ -37,7 +37,7 @@ const SPOTS = [
   {
     name: 'a list of players',
     markup:
-      '<main class="box page-small" data-cdc-list="players"><table class="slist"><tbody><tr>' +
+      '<main class="box page-small" data-lr-ext-list="players"><table class="slist"><tbody><tr>' +
       '<td><a class="user-link ulpt" href="/@/tjychess">tjychess</a></td><td>2400</td>' +
       '</tr></tbody></table></main>',
     avatar: 'tr',
@@ -79,8 +79,8 @@ describe('syncAvatars', () => {
     document.body.innerHTML = markup;
     syncAvatars();
     const element = avatarIn(avatar);
-    expect(element.dataset.cdcAvatarCoach).toBe(String(coach));
-    expect(element.dataset.cdcAvatarColor).toBe(color);
+    expect(element.dataset.lrExtAvatarCoach).toBe(String(coach));
+    expect(element.dataset.lrExtAvatarColor).toBe(color);
   });
 
   it('leaves the computer and anonymous players the default', () => {
@@ -89,7 +89,7 @@ describe('syncAvatars', () => {
       '<div class="ruser-bottom ruser"><name>Anonymous</name></div></main>';
     syncAvatars();
     for (const bar of document.querySelectorAll('.ruser'))
-      expect(bar.getAttributeNames().filter(name => name.startsWith('data-cdc-avatar'))).toEqual(
+      expect(bar.getAttributeNames().filter(name => name.startsWith('data-lr-ext-avatar'))).toEqual(
         [],
       );
   });
@@ -102,13 +102,13 @@ describe('syncAvatars', () => {
     const next = avatarOf('Hikaru');
     bar.innerHTML = '<a class="user-link" href="/@/Hikaru">Hikaru</a>';
     syncAvatars();
-    expect([bar.dataset.cdcAvatarCoach, bar.dataset.cdcAvatarColor]).toEqual([
+    expect([bar.dataset.lrExtAvatarCoach, bar.dataset.lrExtAvatarColor]).toEqual([
       String(next.coach),
       next.color,
     ]);
     bar.innerHTML = '<name>Anonymous</name>';
     syncAvatars();
-    expect(bar.dataset.cdcAvatarCoach).toBeUndefined();
-    expect(bar.dataset.cdcAvatarColor).toBeUndefined();
+    expect(bar.dataset.lrExtAvatarCoach).toBeUndefined();
+    expect(bar.dataset.lrExtAvatarColor).toBeUndefined();
   });
 });

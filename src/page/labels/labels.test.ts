@@ -12,8 +12,8 @@ afterEach(() => {
   vi.useRealTimers();
   setReadyState('complete');
   Reflect.deleteProperty(window, 'i18n');
-  delete dataset.cdcFlipLabel;
-  delete dataset.cdcToolsLabel;
+  delete dataset.lrExtFlipLabel;
+  delete dataset.lrExtToolsLabel;
   document.body.replaceChildren();
 });
 
@@ -23,25 +23,25 @@ describe('labels', () => {
       i18n: { site: { flipBoard: 'Tourner l’échiquier', tools: 'Outils' } },
     });
     labels.start();
-    expect(dataset.cdcFlipLabel).toBe('Tourner l’échiquier');
-    expect(dataset.cdcToolsLabel).toBe('Outils');
+    expect(dataset.lrExtFlipLabel).toBe('Tourner l’échiquier');
+    expect(dataset.lrExtToolsLabel).toBe('Outils');
   });
 
   it('leaves out a label Lichess doesn’t have', () => {
     Object.assign(window, { i18n: { site: { tools: 'Werkzeuge' } } });
     labels.start();
-    expect(dataset.cdcToolsLabel).toBe('Werkzeuge');
-    expect(dataset.cdcFlipLabel).toBeUndefined();
+    expect(dataset.lrExtToolsLabel).toBe('Werkzeuge');
+    expect(dataset.lrExtFlipLabel).toBeUndefined();
   });
 
   it('waits for the translations while the page parses', () => {
     setReadyState('loading');
     labels.start();
     vi.advanceTimersByTime(500);
-    expect(dataset.cdcFlipLabel).toBeUndefined();
+    expect(dataset.lrExtFlipLabel).toBeUndefined();
     Object.assign(window, { i18n: { site: { flipBoard: 'Flip board' } } });
     vi.advanceTimersByTime(250);
-    expect(dataset.cdcFlipLabel).toBe('Flip board');
+    expect(dataset.lrExtFlipLabel).toBe('Flip board');
   });
 
   it.each([
@@ -53,7 +53,7 @@ describe('labels', () => {
     vi.advanceTimersByTime(29_000);
     Object.assign(window, { i18n: { site: { tools: 'Tools' } } });
     vi.advanceTimersByTime(250);
-    expect(dataset.cdcToolsLabel).toBe('Tools');
+    expect(dataset.lrExtToolsLabel).toBe('Tools');
   });
 
   it('gives up after 30 seconds', () => {
@@ -62,13 +62,13 @@ describe('labels', () => {
     vi.advanceTimersByTime(30_000);
     Object.assign(window, { i18n: { site: { flipBoard: 'Flip board' } } });
     vi.advanceTimersByTime(1000);
-    expect(dataset.cdcFlipLabel).toBeUndefined();
+    expect(dataset.lrExtFlipLabel).toBeUndefined();
   });
 
   it('gives up at once on a parsed page with no game', () => {
     labels.start();
     Object.assign(window, { i18n: { site: { flipBoard: 'Flip board' } } });
     vi.advanceTimersByTime(1000);
-    expect(dataset.cdcFlipLabel).toBeUndefined();
+    expect(dataset.lrExtFlipLabel).toBeUndefined();
   });
 });

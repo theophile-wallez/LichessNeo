@@ -17,7 +17,7 @@
     overflow: hidden;
     box-shadow: none !important;
     container-type: inline-size;
-    font-family: var(--cdc-font);
+    font-family: var(--lr-ext-font);
     line-height: 20px;
   }
 
@@ -47,7 +47,7 @@
   main:is(.round, .analyse) .crosstable__users a {
     overflow: hidden;
     padding: 0 !important;
-    color: var(--cdc-text) !important;
+    color: var(--lr-ext-text) !important;
     font-size: 13px;
     font-weight: 600;
     text-overflow: ellipsis;
@@ -55,7 +55,7 @@
   }
 
   main:is(.round, .analyse) .crosstable__users a:hover {
-    color: var(--cdc-text-strong) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   main:is(.round, .analyse) .crosstable__users .uflair {
@@ -94,15 +94,15 @@
   main:is(.round, .analyse) .crosstable povs.sep {
     margin-inline-start: 4px;
     padding-inline-start: 4px;
-    border-inline-start: 1px solid var(--cdc-border);
+    border-inline-start: 1px solid var(--lr-ext-border);
     border-radius: 0;
   }
 
   main:is(.round, .analyse) .crosstable povs a {
     flex: 0 0 20px;
     border-radius: 3px;
-    background: var(--cdc-bg-raised);
-    color: var(--cdc-text-dim) !important;
+    background: var(--lr-ext-bg-raised);
+    color: var(--lr-ext-text-dim) !important;
     font-size: 11px;
     font-weight: 700;
     text-align: center;
@@ -112,8 +112,8 @@
 
   /* Dark on the bright green: white is hard to read there. */
   main:is(.round, .analyse) .crosstable povs a.win {
-    background: var(--cdc-good);
-    color: var(--cdc-grey-900) !important;
+    background: var(--lr-ext-good);
+    color: var(--lr-ext-grey-900) !important;
   }
 
   main:is(.round, .analyse) .crosstable povs a:hover {
@@ -121,7 +121,7 @@
   }
 
   main:is(.round, .analyse) .crosstable povs.current a {
-    box-shadow: inset 0 0 0 2px var(--cdc-accent);
+    box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
   }
 
   main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) {
@@ -135,7 +135,7 @@
   main:is(.round, .analyse) .crosstable .crosstable__matchup {
     padding: 0 6px;
     border-radius: 4px;
-    background: color-mix(in srgb, var(--cdc-accent) 16%, transparent) !important;
+    background: color-mix(in srgb, var(--lr-ext-accent) 16%, transparent) !important;
     font-size: 12px;
   }
 
@@ -146,10 +146,10 @@
 
   main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) span {
     padding: 0 !important;
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
   }
 
   main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) .win {
-    color: var(--cdc-good);
+    color: var(--lr-ext-good);
   }
 }

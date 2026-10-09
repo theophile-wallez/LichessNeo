@@ -33,7 +33,7 @@ interface State {
 
 function draw(section: HTMLElement, state: State): void {
   const key = JSON.stringify(state.cards);
-  const holder = queryOne(section, '.cdc-speeds__cards', HTMLElement);
+  const holder = queryOne(section, '.lr-ext-speeds__cards', HTMLElement);
   if (!holder || key === state.drawn) return;
   state.drawn = key;
   setHtml(holder, cardsMarkup(state.cards, state.texts));
@@ -41,12 +41,12 @@ function draw(section: HTMLElement, state: State): void {
 
 function onClick(event: MouseEvent, state: State): void {
   if (!(event.target instanceof Element)) return;
-  if (closestTo(event.target, '.cdc-speeds__custom', HTMLElement)) return openCustomGame();
-  const id = closestTo(event.target, '[data-cdc-pool]', HTMLElement)?.dataset.cdcPool;
+  if (closestTo(event.target, '.lr-ext-speeds__custom', HTMLElement)) return openCustomGame();
+  const id = closestTo(event.target, '[data-lr-ext-pool]', HTMLElement)?.dataset.lrExtPool;
   if (!id) return;
   const joining = state.seeking !== id;
   state.seeking = joining ? id : null;
-  const card = closestTo(event.target, '[data-cdc-speed]', HTMLElement)?.dataset.cdcSpeed;
+  const card = closestTo(event.target, '[data-lr-ext-speed]', HTMLElement)?.dataset.lrExtSpeed;
   const speed = CARD_SPEEDS.find(candidate => candidate === card);
   if (joining && state.user && speed)
     state.cards = keepLastPool(state.user, speed, id) ?? state.cards;
@@ -54,7 +54,7 @@ function onClick(event: MouseEvent, state: State): void {
 }
 
 function buildSection(state: State): HTMLElement {
-  const section = createElement('section', { className: 'cdc-speeds' });
+  const section = createElement('section', { className: 'lr-ext-speeds' });
   setHtml(section, sectionMarkup(state.texts));
   section.addEventListener('click', event => onClick(event, state));
   return section;
@@ -69,23 +69,26 @@ function syncSeeking(section: HTMLElement, state: State): void {
     else if (!seekingElsewhere()) state.seeking = null;
     leavePoolsTab();
   }
-  section.classList.toggle('cdc-speeds--seeking', state.seeking !== null);
-  for (const button of queryAll(section, '[data-cdc-pool]', HTMLElement)) {
-    button.classList.toggle('cdc-speed__pool--seeking', button.dataset.cdcPool === state.seeking);
+  section.classList.toggle('lr-ext-speeds--seeking', state.seeking !== null);
+  for (const button of queryAll(section, '[data-lr-ext-pool]', HTMLElement)) {
+    button.classList.toggle(
+      'lr-ext-speed__pool--seeking',
+      button.dataset.lrExtPool === state.seeking,
+    );
   }
 }
 
 function sync(state: State): void {
   const main = queryOne(document, 'main.lobby', HTMLElement);
   if (!main) return;
-  let section = queryOne(main, ':scope > .cdc-speeds', HTMLElement);
+  let section = queryOne(main, ':scope > .lr-ext-speeds', HTMLElement);
   if (!section) {
     section = buildSection(state);
-    const hero = main.querySelector(':scope > .cdc-hero');
+    const hero = main.querySelector(':scope > .lr-ext-hero');
     if (hero) hero.after(section);
     else main.prepend(section);
   }
-  const title = queryOne(section, '.cdc-speeds__title', HTMLElement);
+  const title = queryOne(section, '.lr-ext-speeds__title', HTMLElement);
   const name = quickPairingName();
   if (title && name && title.textContent !== name) title.textContent = name;
   draw(section, state);

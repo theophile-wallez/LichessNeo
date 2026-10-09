@@ -27,16 +27,17 @@ describe('introMarkup', () => {
       player('Stockfish level 1', { rating: '~400', computer: true }),
       player('alice', { title: 'IM', rating: '2400', flag: '🇫🇷' }),
     );
-    const top = queryOne(root, '.cdc-intro__drop > .cdc-intro__card--top', HTMLElement);
-    const bottom = queryOne(root, '.cdc-intro__stay > .cdc-intro__card--bottom', HTMLElement);
-    expect(top?.classList.contains('cdc-intro__card--computer')).toBe(true);
-    expect(top?.querySelector('.cdc-intro__details')?.textContent).toBe('~400');
-    expect(bottom?.classList.contains('cdc-intro__card--computer')).toBe(false);
-    expect(bottom?.querySelector('.cdc-intro__title')?.textContent).toBe('IM');
-    expect(bottom?.querySelector('.cdc-intro__username')?.textContent).toBe('alice');
-    expect(bottom?.querySelector('.cdc-intro__details')?.textContent).toBe('2400 🇫🇷');
+    const top = queryOne(root, '.lr-ext-intro__drop > .lr-ext-intro__card--top', HTMLElement);
+    const bottom = queryOne(root, '.lr-ext-intro__stay > .lr-ext-intro__card--bottom', HTMLElement);
+    expect(top?.classList.contains('lr-ext-intro__card--computer')).toBe(true);
+    expect(top?.querySelector('.lr-ext-intro__details')?.textContent).toBe('~400');
+    expect(bottom?.classList.contains('lr-ext-intro__card--computer')).toBe(false);
+    expect(bottom?.querySelector('.lr-ext-intro__title')?.textContent).toBe('IM');
+    expect(bottom?.querySelector('.lr-ext-intro__username')?.textContent).toBe('alice');
+    expect(bottom?.querySelector('.lr-ext-intro__details')?.textContent).toBe('2400 🇫🇷');
     expect(
-      root.querySelector('.cdc-intro__vs > .cdc-intro__swords + .cdc-intro__versus')?.textContent,
+      root.querySelector('.lr-ext-intro__vs > .lr-ext-intro__swords + .lr-ext-intro__versus')
+        ?.textContent,
     ).toBe('VS');
   });
 
@@ -45,10 +46,10 @@ describe('introMarkup', () => {
       player('Stockfish level 1', { computer: true }),
       player('alice', { user: 'alice' }),
     );
-    const [top, bottom] = queryAll(root, '.cdc-intro__avatar', HTMLElement);
-    expect(top?.dataset.cdcAvatarCoach).toBeUndefined();
+    const [top, bottom] = queryAll(root, '.lr-ext-intro__avatar', HTMLElement);
+    expect(top?.dataset.lrExtAvatarCoach).toBeUndefined();
     const { coach, color } = avatarOf('alice');
-    expect([bottom?.dataset.cdcAvatarCoach, bottom?.dataset.cdcAvatarColor]).toEqual([
+    expect([bottom?.dataset.lrExtAvatarCoach, bottom?.dataset.lrExtAvatarColor]).toEqual([
       String(coach),
       color,
     ]);
@@ -56,9 +57,9 @@ describe('introMarkup', () => {
 
   it('leaves out what a player lacks, and escapes names', () => {
     const root = render(player('<b>x</b>'), player('Anonymous'));
-    expect(queryAll(root, '.cdc-intro__title, .cdc-intro__details', HTMLElement)).toEqual([]);
+    expect(queryAll(root, '.lr-ext-intro__title, .lr-ext-intro__details', HTMLElement)).toEqual([]);
     expect(root.querySelector('b')).toBeNull();
-    expect(root.querySelector('.cdc-intro__username')?.textContent).toBe('<b>x</b>');
+    expect(root.querySelector('.lr-ext-intro__username')?.textContent).toBe('<b>x</b>');
   });
 });
 

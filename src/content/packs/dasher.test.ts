@@ -51,10 +51,10 @@ async function start(
 }
 
 const tab = (panel: HTMLElement, view: string): HTMLElement | null =>
-  queryOne(panel, `.cdc-src-tabs button[data-cdc-tab="${view}"]`, HTMLElement);
+  queryOne(panel, `.lr-ext-src-tabs button[data-lr-ext-tab="${view}"]`, HTMLElement);
 // A tile's name is its label, a sound's its text.
 const names = (panel: HTMLElement): (string | null)[] =>
-  queryAll(panel, '.cdc-src-item', HTMLElement).map(
+  queryAll(panel, '.lr-ext-src-item', HTMLElement).map(
     item => item.getAttribute('aria-label') ?? item.textContent,
   );
 
@@ -73,43 +73,47 @@ afterEach(() => {
 
 describe('the user menu’s panels', () => {
   it('get an Extension and a Lichess tab, open on what the page shows', async () => {
-    localStorage.setItem('cdc-pieces', WOOD.id);
-    localStorage.setItem('cdc-sounds', LICHESS);
+    localStorage.setItem('lr-ext-pieces', WOOD.id);
+    localStorage.setItem('lr-ext-sounds', LICHESS);
     await start([WOOD, CLICKS]);
     const board = openPanel('board');
     await flush();
     expect(
-      queryAll(board, '.cdc-src-tabs button', HTMLElement).map(button => button.textContent),
+      queryAll(board, '.lr-ext-src-tabs button', HTMLElement).map(button => button.textContent),
     ).toEqual(['Extension', 'Lichess']);
     // Our blue board, then only the packs with a board, named in their tooltip only.
-    expect(board.dataset.cdcView).toBe('extension');
+    expect(board.dataset.lrExtView).toBe('extension');
     expect(names(board)).toEqual(['Blue', 'Pack ann/packs/main/wood/']);
-    expect(board.querySelector('.cdc-src-name')).toBeNull();
-    expect(queryOne(board, '.cdc-src-item.active', HTMLElement)?.dataset.cdcChoice).toBe('blue');
+    expect(board.querySelector('.lr-ext-src-name')).toBeNull();
+    expect(queryOne(board, '.lr-ext-src-item.active', HTMLElement)?.dataset.lrExtChoice).toBe(
+      'blue',
+    );
     const piece = openPanel('piece');
     await flush();
-    expect(piece.dataset.cdcView).toBe('extension');
-    expect(piece.dataset.cdcSrcOn).toBe('extension');
-    expect(queryOne(piece, '.cdc-src-item.active', HTMLElement)?.dataset.cdcChoice).toBe(WOOD.id);
+    expect(piece.dataset.lrExtView).toBe('extension');
+    expect(piece.dataset.lrExtSrcOn).toBe('extension');
+    expect(queryOne(piece, '.lr-ext-src-item.active', HTMLElement)?.dataset.lrExtChoice).toBe(
+      WOOD.id,
+    );
     const sound = openPanel('sound');
     await flush();
-    expect(sound.dataset.cdcView).toBe(LICHESS);
+    expect(sound.dataset.lrExtView).toBe(LICHESS);
   });
 
   it('pick a theme or a pack, and hand the part back to Lichess from its own list', async () => {
     const library = await start([WOOD]);
     const panel = openPanel('board');
     await flush();
-    queryOne(panel, `.cdc-src-item[data-cdc-choice="${WOOD.id}"]`, HTMLElement)?.click();
+    queryOne(panel, `.lr-ext-src-item[data-lr-ext-choice="${WOOD.id}"]`, HTMLElement)?.click();
     expect(library.current('board')).toBe(WOOD.id);
-    expect(panel.dataset.cdcSrcOn).toBe('extension');
+    expect(panel.dataset.lrExtSrcOn).toBe('extension');
     tab(panel, LICHESS)?.click();
-    expect(panel.dataset.cdcView).toBe(LICHESS);
+    expect(panel.dataset.lrExtView).toBe(LICHESS);
     queryOne(panel, '.list > button', HTMLElement)?.click();
     expect(library.current('board')).toBe(LICHESS);
-    expect(panel.dataset.cdcSrcOn).toBe(LICHESS);
+    expect(panel.dataset.lrExtSrcOn).toBe(LICHESS);
     tab(panel, 'extension')?.click();
-    queryOne(panel, '.cdc-src-item[data-cdc-choice="blue"]', HTMLElement)?.click();
+    queryOne(panel, '.lr-ext-src-item[data-lr-ext-choice="blue"]', HTMLElement)?.click();
     expect(library.current('board')).toBe('blue');
   });
 
@@ -117,7 +121,7 @@ describe('the user menu’s panels', () => {
     const library = await start([WOOD, CLICKS]);
     const panel = openPanel('sound');
     await flush();
-    expect(panel.querySelector('.content > .cdc-src-choices')).not.toBeNull();
+    expect(panel.querySelector('.content > .lr-ext-src-choices')).not.toBeNull();
     expect(names(panel)).toEqual(['Pack ann/packs/main/wood/', 'Pack ann/packs/main/clicks/']);
     library.choose('sound', CLICKS.id);
     queryAll(panel, '.selector > button', HTMLElement)[1]?.click();
@@ -129,16 +133,16 @@ describe('the user menu’s panels', () => {
     await start([], () => all.promise);
     const panel = openPanel('sound');
     await flush();
-    expect(panel.querySelector('.cdc-src-empty')?.textContent).toBe(
+    expect(panel.querySelector('.lr-ext-src-empty')?.textContent).toBe(
       'No sound set of the extension yet: import your own from GitHub.',
     );
-    expect(queryOne(panel, '.cdc-src-import-link', HTMLAnchorElement)?.getAttribute('href')).toBe(
-      '/account/profile#cdc-extension',
-    );
+    expect(
+      queryOne(panel, '.lr-ext-src-import-link', HTMLAnchorElement)?.getAttribute('href'),
+    ).toBe('/account/profile#lr-ext-extension');
     all.resolve([WOOD, CLICKS]);
     await flush();
     expect(names(panel)).toEqual(['Pack ann/packs/main/wood/', 'Pack ann/packs/main/clicks/']);
-    expect(panel.querySelector('.cdc-src-empty')).toBeNull();
+    expect(panel.querySelector('.lr-ext-src-empty')).toBeNull();
   });
 
   it('say so when the packs can’t be read, and try again on the next opening', async () => {
@@ -151,7 +155,7 @@ describe('the user menu’s panels', () => {
     const panel = openPanel('board');
     await flush();
     expect(names(panel)).toEqual(['Blue']);
-    expect(panel.querySelector('.cdc-src-empty')?.textContent).toBe(
+    expect(panel.querySelector('.lr-ext-src-empty')?.textContent).toBe(
       'The imported packs could not be read.',
     );
     expect(error).toHaveBeenCalledOnce();

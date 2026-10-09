@@ -42,7 +42,7 @@ describe('hover card ratings', () => {
     card.innerHTML =
       '<div class="upt__info"><div class="upt__info__top"><a class="user-link" href="/@/Hikaru">Hikaru</a></div></div>';
     await Promise.resolve();
-    expect(queryOne(card, '.upt__info', HTMLElement)?.dataset.cdcAvatarCoach).toBe(
+    expect(queryOne(card, '.upt__info', HTMLElement)?.dataset.lrExtAvatarCoach).toBe(
       String(avatarOf('Hikaru').coach),
     );
   });

@@ -9,6 +9,6 @@ export function syncAttempts(): void {
   for (const group of queryAll(document, 'main.puzzle .tview2 interrupt', HTMLElement)) {
     const moves = queryAll(group, 'move', HTMLElement);
     const tries = moves.length > 0 && moves.every(move => move.classList.contains('fail'));
-    setData(group, 'cdcTries', tries ? '' : null);
+    setData(group, 'lrExtTries', tries ? '' : null);
   }
 }

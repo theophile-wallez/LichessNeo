@@ -9,11 +9,11 @@
 
 @media (min-width: 1020px) {
   body.zenable.zen {
-    --cdc-sidebar-w: 0px;
+    --lr-ext-sidebar-w: 0px;
   }
 
   body.zenable.zen #top,
-  body.zenable.zen main.round :is(.ruser, .cdc-captured, .mchat, .round__side),
+  body.zenable.zen main.round :is(.ruser, .lr-ext-captured, .mchat, .round__side),
   body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
     display: none !important;
   }
@@ -25,31 +25,31 @@
   }
 
   body.zenable.zen main.round {
-    --cdc-zen-side: 220px;
+    --lr-ext-zen-side: 220px;
     /* #zenzone's column, kept clear on both sides so the board stays centered. */
-    --cdc-zen-margin: 56px;
-    --cdc-board: max(
+    --lr-ext-zen-margin: 56px;
+    --lr-ext-board: max(
       320px,
       calc(
         min(
-            calc(var(--cdc-main-h, 100dvh) - 32px - var(--cdc-coords-off)),
+            calc(var(--lr-ext-main-h, 100dvh) - 32px - var(--lr-ext-coords-off)),
             calc(
-              var(--cdc-main-w, 100vw) - var(--cdc-zen-side) - var(--cdc-gap) - 48px - 2 *
-                var(--cdc-zen-margin)
+              var(--lr-ext-main-w, 100vw) - var(--lr-ext-zen-side) - var(--lr-ext-gap) - 48px - 2 *
+                var(--lr-ext-zen-margin)
             )
           ) *
-          var(--cdc-board-scale, 1)
+          var(--lr-ext-board-scale, 1)
       )
     );
 
-    grid-template-columns: var(--cdc-board) var(--cdc-zen-side) !important;
+    grid-template-columns: var(--lr-ext-board) var(--lr-ext-zen-side) !important;
     grid-template-rows:
-      var(--cdc-bar)
-      max(0px, calc(var(--cdc-board) - 2 * var(--cdc-bar) - var(--cdc-ctrl-h)))
-      var(--cdc-ctrl-h)
+      var(--lr-ext-bar)
+      max(0px, calc(var(--lr-ext-board) - 2 * var(--lr-ext-bar) - var(--lr-ext-ctrl-h)))
+      var(--lr-ext-ctrl-h)
       0
-      var(--cdc-bar)
-      var(--cdc-coords-off) !important;
+      var(--lr-ext-bar)
+      var(--lr-ext-coords-off) !important;
     grid-template-areas:
       'board user-top'
       'board moves'
@@ -62,11 +62,11 @@
   /* The clocks beside the board, level with its top and its bottom edge (a clock is 40px
    * tall, 8px into its 56px bar). */
   body.zenable.zen main.round :is(.rclock-top, .expiration-top) {
-    --cdc-off: calc(var(--cdc-inset-t, 0px) - 8px);
+    --lr-ext-off: calc(var(--lr-ext-inset-t, 0px) - 8px);
   }
 
   body.zenable.zen main.round :is(.rclock-bottom, .expiration-bottom) {
-    --cdc-off: calc(8px - var(--cdc-inset-b, 0px));
+    --lr-ext-off: calc(8px - var(--lr-ext-inset-b, 0px));
   }
 
   body.zenable.zen main.round .rclock {

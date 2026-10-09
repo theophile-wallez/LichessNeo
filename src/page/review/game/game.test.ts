@@ -162,12 +162,12 @@ describe('the cache', () => {
       { mate: -2, whiteWinChance: 0, secondLineWinChance: null, best: null },
     ];
     cacheRecords('abcdefgh', 2, records);
-    expect(localStorage.getItem('cdc-review:abcdefgh:2:v1')).toBe(
+    expect(localStorage.getItem('lr-ext-review:abcdefgh:2:v1')).toBe(
       '[{"cp":20,"wp":51.8,"wp2":50,"best":"e2e4"},{"mate":-2,"wp":0,"wp2":null,"best":null}]',
     );
     expect(readCachedRecords('abcdefgh', 2)).toEqual(records);
     expect(readCachedRecords('abcdefgh', 3)).toBeNull();
-    localStorage.setItem('cdc-review:abcdefgh:3:v1', '[1,2,3]');
+    localStorage.setItem('lr-ext-review:abcdefgh:3:v1', '[1,2,3]');
     expect(readCachedRecords('abcdefgh', 3)).toBeNull();
   });
 });

@@ -5,7 +5,7 @@
   gap: 4px;
   padding: 4px;
   border-radius: 10px !important;
-  background: var(--cdc-setup-track);
+  background: var(--lr-ext-setup-track);
   overflow: visible !important;
 }
 
@@ -15,7 +15,7 @@
   border: none !important;
   border-radius: 7px;
   background: transparent !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
   font-weight: 700;
   transition:
@@ -30,8 +30,8 @@
 
 .game-setup group.radio input:checked + label,
 .game-setup group.radio input:checked + label:not(.disabled):hover {
-  background: var(--cdc-setup-tint) !important;
-  box-shadow: var(--cdc-setup-chosen) !important;
+  background: var(--lr-ext-setup-tint) !important;
+  box-shadow: var(--lr-ext-setup-chosen) !important;
   color: #fff !important;
 }
 
@@ -70,8 +70,8 @@
 }
 
 .game-setup group.radio label[for^='sf_level_']::after {
-  content: var(--cdc-level-elo, none);
-  color: var(--cdc-text-dim);
+  content: var(--lr-ext-level-elo, none);
+  color: var(--lr-ext-text-dim);
   font-size: 11px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -79,39 +79,39 @@
 }
 
 .game-setup group.radio input:checked + label[for^='sf_level_']::after {
-  color: var(--cdc-accent-hover);
+  color: var(--lr-ext-accent-hover);
 }
 
 .game-setup label[for='sf_level_1'] {
-  --cdc-level-elo: var(--cdc-ai-level-1);
+  --lr-ext-level-elo: var(--lr-ext-ai-level-1);
 }
 
 .game-setup label[for='sf_level_2'] {
-  --cdc-level-elo: var(--cdc-ai-level-2);
+  --lr-ext-level-elo: var(--lr-ext-ai-level-2);
 }
 
 .game-setup label[for='sf_level_3'] {
-  --cdc-level-elo: var(--cdc-ai-level-3);
+  --lr-ext-level-elo: var(--lr-ext-ai-level-3);
 }
 
 .game-setup label[for='sf_level_4'] {
-  --cdc-level-elo: var(--cdc-ai-level-4);
+  --lr-ext-level-elo: var(--lr-ext-ai-level-4);
 }
 
 .game-setup label[for='sf_level_5'] {
-  --cdc-level-elo: var(--cdc-ai-level-5);
+  --lr-ext-level-elo: var(--lr-ext-ai-level-5);
 }
 
 .game-setup label[for='sf_level_6'] {
-  --cdc-level-elo: var(--cdc-ai-level-6);
+  --lr-ext-level-elo: var(--lr-ext-ai-level-6);
 }
 
 .game-setup label[for='sf_level_7'] {
-  --cdc-level-elo: var(--cdc-ai-level-7);
+  --lr-ext-level-elo: var(--lr-ext-ai-level-7);
 }
 
 .game-setup label[for='sf_level_8'] {
-  --cdc-level-elo: var(--cdc-ai-level-8);
+  --lr-ext-level-elo: var(--lr-ext-ai-level-8);
 }
 
 /* Phones: four levels a row (eight left a lone eighth), and time tabs sized by their
@@ -148,7 +148,7 @@
   align-items: center;
   gap: 5px;
   margin-top: -8px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
 }
 
@@ -162,7 +162,7 @@
 
 .game-setup .setup-content > div.disabled {
   opacity: 1 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   line-height: 1.45;
   text-align: center;
@@ -189,19 +189,19 @@
 .game-setup .color-cards label.card-radio {
   border: none !important;
   border-radius: 10px !important;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   transition:
     background-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 .game-setup .color-cards label.card-radio:hover {
-  background: var(--cdc-bg-raised-hover) !important;
+  background: var(--lr-ext-bg-raised-hover) !important;
 }
 
 .game-setup .color-cards input:checked + label.card-radio {
-  background: var(--cdc-setup-tint) !important;
-  box-shadow: var(--cdc-setup-chosen) !important;
+  background: var(--lr-ext-setup-tint) !important;
+  box-shadow: var(--lr-ext-setup-chosen) !important;
   text-shadow: none !important;
 }
 
@@ -220,14 +220,14 @@
   height: 56px !important;
   border: none !important;
   border-radius: 10px !important;
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow) !important;
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   color: #fff !important;
   font-size: 20px !important;
 }
 
 .game-setup .footer .lobby__start__button.button:not(.disabled):hover {
-  background: var(--cdc-btn-primary-hover) !important;
+  background: var(--lr-ext-btn-primary-hover) !important;
 }
 
 dialog .game-setup .footer .lobby__start__button.button::before {
@@ -244,19 +244,19 @@ group.radio {
 
 group.radio label,
 group.radio .label {
-  border-color: var(--cdc-bg-panel) !important;
-  background: var(--cdc-bg-raised) !important;
+  border-color: var(--lr-ext-bg-panel) !important;
+  background: var(--lr-ext-bg-raised) !important;
   box-shadow: none !important;
   text-shadow: none !important;
 }
 
 group.radio label:not(.disabled):hover {
-  background: var(--cdc-bg-raised-hover) !important;
+  background: var(--lr-ext-bg-raised-hover) !important;
 }
 
 group.radio input:checked + label,
 group.radio input:checked + label:not(.disabled):hover {
-  background: var(--cdc-accent) !important;
+  background: var(--lr-ext-accent) !important;
   box-shadow: none !important;
   color: #fff !important;
   font-weight: 700;
@@ -264,10 +264,10 @@ group.radio input:checked + label:not(.disabled):hover {
 
 /* Range sliders (time controls). */
 input.range::-webkit-slider-runnable-track {
-  background: var(--cdc-bg-raised-hover) !important;
+  background: var(--lr-ext-bg-raised-hover) !important;
 }
 
 input.range::-webkit-slider-thumb {
   border: none !important;
-  background: var(--cdc-accent) !important;
+  background: var(--lr-ext-accent) !important;
 }

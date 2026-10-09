@@ -3,7 +3,7 @@
 /* Lichess's voice input (#voice-bar, with the "voice move" preference) and the players'
  * crosstable (in .round__underboard, under the board) join the moves' panel: the bar on top, as
  * in Lichess's own column, the crosstable under the move buttons. The moves make room for them,
- * keyed on `data-cdc-has` (content/layout/has-flags.ts), by their measured heights
+ * keyed on `data-lr-ext-has` (content/layout/has-flags.ts), by their measured heights
  * (content/layout/moves-extras-height.ts). */
 
 @media (min-width: 1020px) {
@@ -12,23 +12,23 @@
     align-self: start;
     z-index: 3;
     margin: 0 !important;
-    border-bottom: 1px solid var(--cdc-border);
+    border-bottom: 1px solid var(--lr-ext-border);
     border-radius: 6px 6px 0 0;
-    background: var(--cdc-bg-panel-dark);
+    background: var(--lr-ext-bg-panel-dark);
   }
 
   main.round #voice-status-row {
     border-radius: 6px 6px 0 0;
     background: transparent !important;
     box-shadow: none !important;
-    color: var(--cdc-text);
-    font-family: var(--cdc-font);
+    color: var(--lr-ext-text);
+    font-family: var(--lr-ext-font);
     font-size: 14px !important;
     font-weight: 600;
   }
 
-  html[data-cdc-has~='round-voice'] main.round :is(i5d, rm6) {
-    padding-top: var(--cdc-voice-h, 0px) !important;
+  html[data-lr-ext-has~='round-voice'] main.round :is(i5d, rm6) {
+    padding-top: var(--lr-ext-voice-h, 0px) !important;
   }
 
   /* Only the crosstable: a signed-in player's other games stay on Lichess's phone layout. */
@@ -47,13 +47,13 @@
     z-index: 2;
     height: auto !important;
     border: 0 !important;
-    border-top: 1px solid var(--cdc-border) !important;
+    border-top: 1px solid var(--lr-ext-border) !important;
     border-radius: 0 0 6px 6px !important;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
   }
 
-  html[data-cdc-has~='round-crosstable'] main.round :is(i5d, rm6) {
-    padding-bottom: var(--cdc-crosstable-h, 0px) !important;
+  html[data-lr-ext-has~='round-crosstable'] main.round :is(i5d, rm6) {
+    padding-bottom: var(--lr-ext-crosstable-h, 0px) !important;
   }
 
   body.zenable.zen main.round .round__underboard > .crosstable {

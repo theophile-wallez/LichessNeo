@@ -24,23 +24,23 @@ export const panelSelector = (kind: PartKind): string => `#dasher_app .sub.${kin
  */
 export function markPanel(panel: HTMLElement, kind: PartKind, library: Library): void {
   const current = library.current(kind);
-  setData(panel, 'cdcSrcOn', viewOf(current));
-  for (const item of queryAll(panel, '.cdc-src-item', HTMLElement))
-    item.classList.toggle('active', item.dataset.cdcChoice === current);
+  setData(panel, 'lrExtSrcOn', viewOf(current));
+  for (const item of queryAll(panel, '.lr-ext-src-item', HTMLElement))
+    item.classList.toggle('active', item.dataset.lrExtChoice === current);
 }
 
 function showView(panel: HTMLElement, view: View): void {
-  setData(panel, 'cdcView', view);
-  for (const tab of queryAll(panel, '.cdc-src-tabs button', HTMLElement))
-    tab.classList.toggle('active', tab.dataset.cdcTab === view);
+  setData(panel, 'lrExtView', view);
+  for (const tab of queryAll(panel, '.lr-ext-src-tabs button', HTMLElement))
+    tab.classList.toggle('active', tab.dataset.lrExtTab === view);
 }
 
 function tabBar(onTab: (view: View) => void): HTMLElement {
-  const bar = createElement('div', { className: 'cdc-src-tabs' });
+  const bar = createElement('div', { className: 'lr-ext-src-tabs' });
   for (const [view, label] of TABS) {
     const tab = createElement('button', {
       text: label,
-      attrs: { type: 'button', class: '', 'data-cdc-tab': view },
+      attrs: { type: 'button', class: '', 'data-lr-ext-tab': view },
     });
     tab.addEventListener('click', () => onTab(view));
     bar.append(tab);
@@ -62,7 +62,8 @@ export interface DressOptions {
  */
 export function dressPanel(panel: HTMLElement, options: DressOptions): void {
   const { kind, library, view } = options;
-  for (const ours of queryAll(panel, '.cdc-src-tabs, .cdc-src-choices', HTMLElement)) ours.remove();
+  for (const ours of queryAll(panel, '.lr-ext-src-tabs, .lr-ext-src-choices', HTMLElement))
+    ours.remove();
   const tabs = tabBar(next => {
     options.onTab(next);
     showView(panel, next);

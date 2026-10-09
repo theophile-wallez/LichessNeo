@@ -17,14 +17,14 @@
     "<svg width=\"250\" height=\"61\" viewBox=\"0 0 250 61\">\n      <rect width=\"250\" height=\"61\" fill=\"#403d39\"/>\n      <path d=\"M16.7,61 L16.7,40.8 L22.2,42.0 L27.8,49.9 L27.8,61 Z M50.0,61 L50.0,41.4 L55.6,38.9 L55.6,61 Z\" fill=\"#fff\"/>\n      <line x1=\"0\" x2=\"250\" y1=\"30.5\" y2=\"30.5\" stroke=\"#8b8987\" stroke-width=\"1\" opacity=\"0.6\"/>\n      <line x1=\"166.7\" x2=\"166.7\" y1=\"0\" y2=\"61\" stroke=\"#81b64c\" stroke-width=\"2\"/><circle cx=\"27.8\" cy=\"49.9\" r=\"3.5\" fill=\"#f2862f\"/></svg>"
   ],
   "chips": [
-    "<span class=\"cdc-bubble__eval\">+0.30</span>",
-    "<span class=\"cdc-bubble__eval cdc-bubble__eval--black\">-0.05</span>",
-    "<span class=\"cdc-bubble__eval\">0.00</span>",
-    "<span class=\"cdc-bubble__eval cdc-bubble__eval--black\">#</span>",
-    "<span class=\"cdc-bubble__eval\">#</span>",
-    "<span class=\"cdc-bubble__eval cdc-bubble__eval--black\">-M3</span>",
-    "<span class=\"cdc-bubble__eval\">+M2</span>",
-    "<span class=\"cdc-bubble__eval\"></span>"
+    "<span class=\"lr-ext-bubble__eval\">+0.30</span>",
+    "<span class=\"lr-ext-bubble__eval lr-ext-bubble__eval--black\">-0.05</span>",
+    "<span class=\"lr-ext-bubble__eval\">0.00</span>",
+    "<span class=\"lr-ext-bubble__eval lr-ext-bubble__eval--black\">#</span>",
+    "<span class=\"lr-ext-bubble__eval\">#</span>",
+    "<span class=\"lr-ext-bubble__eval lr-ext-bubble__eval--black\">-M3</span>",
+    "<span class=\"lr-ext-bubble__eval\">+M2</span>",
+    "<span class=\"lr-ext-bubble__eval\"></span>"
   ],
   "names": [
     "Alice",
@@ -37,8 +37,8 @@
     "Anonymous"
   ],
   "headers": [
-    "<div class=\"cdc-review__head\">\n      <button class=\"cdc-review__back\" data-cdc=\"normal\" data-cdc-tip=\"Back\" aria-label=\"Back\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 12H5M11 5l-7 7 7 7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n      <div class=\"cdc-review__title\"><span class=\"cdc-review__star\">★</span>Game Review</div>\n      <button class=\"cdc-review__close\" data-cdc=\"normal\" data-cdc-tip=\"Close review\" aria-label=\"Close review\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n    </div>",
-    "<div class=\"cdc-review__head\">\n      <span></span>\n      <div class=\"cdc-review__title\"><span class=\"cdc-review__star\">★</span>Bilan &lt;&amp;&gt;</div>\n      <button class=\"cdc-review__close\" data-cdc=\"normal\" data-cdc-tip=\"Close review\" aria-label=\"Close review\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n    </div>",
-    "<div class=\"cdc-review__head\">\n      <button class=\"cdc-review__back\" data-cdc=\"summary\" data-cdc-tip=\"Back\" aria-label=\"Back\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 12H5M11 5l-7 7 7 7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n      <div class=\"cdc-review__title\"><span class=\"cdc-review__star\">★</span>Game Review</div>\n      <button class=\"cdc-review__close\" data-cdc=\"normal\" data-cdc-tip=\"Close review\" aria-label=\"Close review\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n    </div>"
+    "<div class=\"lr-ext-review__head\">\n      <button class=\"lr-ext-review__back\" data-lr-ext=\"normal\" data-lr-ext-tip=\"Back\" aria-label=\"Back\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 12H5M11 5l-7 7 7 7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n      <div class=\"lr-ext-review__title\"><span class=\"lr-ext-review__star\">★</span>Game Review</div>\n      <button class=\"lr-ext-review__close\" data-lr-ext=\"normal\" data-lr-ext-tip=\"Close review\" aria-label=\"Close review\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n    </div>",
+    "<div class=\"lr-ext-review__head\">\n      <span></span>\n      <div class=\"lr-ext-review__title\"><span class=\"lr-ext-review__star\">★</span>Bilan &lt;&amp;&gt;</div>\n      <button class=\"lr-ext-review__close\" data-lr-ext=\"normal\" data-lr-ext-tip=\"Close review\" aria-label=\"Close review\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n    </div>",
+    "<div class=\"lr-ext-review__head\">\n      <button class=\"lr-ext-review__back\" data-lr-ext=\"summary\" data-lr-ext-tip=\"Back\" aria-label=\"Back\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 12H5M11 5l-7 7 7 7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n      <div class=\"lr-ext-review__title\"><span class=\"lr-ext-review__star\">★</span>Game Review</div>\n      <button class=\"lr-ext-review__close\" data-lr-ext=\"normal\" data-lr-ext-tip=\"Close review\" aria-label=\"Close review\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>\n    </div>"
   ]
 }

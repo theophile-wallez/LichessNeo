@@ -30,7 +30,7 @@ describe('confetti', () => {
     if (!piece) throw new Error('no piece');
     const root = document.createElement('div');
     root.innerHTML = confettiMarkup([piece]).value;
-    const element = root.querySelector('.cdc-confetti > .cdc-confetti__piece--dot');
+    const element = root.querySelector('.lr-ext-confetti > .lr-ext-confetti__piece--dot');
     expect(element?.getAttribute('style')).toBe(
       '--x:50.0;--drift:0.0;--spin:0.00;--size:1.20;--delay:350ms;--fall:2800ms;--c:#f7f3e8',
     );

@@ -44,22 +44,22 @@ main.simul-list .slist {
 
 /* A color per section. Finished is the default: it's always the last. */
 main.simul-list .slist :is(thead, tbody) {
-  --cdc-simul: #a98bf0;
-  --cdc-simul-2: var(--cdc-purple-dark);
+  --lr-ext-simul: #a98bf0;
+  --lr-ext-simul-2: var(--lr-ext-purple-dark);
 }
 
 /* Your pending simuls. */
 main.simul-list .slist tbody:has(> tr.scheduled):not(:has(> tr.create)),
 main.simul-list .slist thead:has(+ tbody > tr.scheduled):not(:has(+ tbody > tr.create)) {
-  --cdc-simul: #f5a93b;
-  --cdc-simul-2: var(--cdc-orange-darker);
+  --lr-ext-simul: #f5a93b;
+  --lr-ext-simul-2: var(--lr-ext-orange-darker);
 }
 
 /* Open to join, and the "host a simul" row. */
 main.simul-list .slist tbody:has(> tr.create),
 main.simul-list .slist thead:has(+ tbody > tr.create) {
-  --cdc-simul: #45a3f5;
-  --cdc-simul-2: var(--cdc-cyan-darker);
+  --lr-ext-simul: #45a3f5;
+  --lr-ext-simul-2: var(--lr-ext-cyan-darker);
 }
 
 /* In progress: plain rows, not the last section. :has() can't nest, so the
@@ -71,8 +71,8 @@ main.simul-list
     :has(+ tbody:last-child),
     :has(+ tbody > tr:first-child:is(.scheduled, .create))
   ) {
-  --cdc-simul: var(--cdc-accent);
-  --cdc-simul-2: var(--cdc-accent-dim);
+  --lr-ext-simul: var(--lr-ext-accent);
+  --lr-ext-simul-2: var(--lr-ext-accent-dim);
 }
 
 main.simul-list .slist :is(thead, thead tr) {
@@ -93,7 +93,7 @@ main.simul-list .slist thead th:first-child {
   padding: 0 !important;
   border: none !important;
   color: #fff !important;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 20px !important;
   font-weight: 800 !important;
   text-align: start;
@@ -106,8 +106,8 @@ main.simul-list .slist thead th:first-child::before {
   width: 12px;
   height: 12px;
   border-radius: 4px;
-  background: linear-gradient(135deg, var(--cdc-simul), var(--cdc-simul-2));
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cdc-simul) 22%, transparent);
+  background: linear-gradient(135deg, var(--lr-ext-simul), var(--lr-ext-simul-2));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-simul) 22%, transparent);
 }
 
 /* In progress: a live dot that pulses instead. */
@@ -119,17 +119,17 @@ main.simul-list
   )
   th:first-child::before {
   border-radius: 50%;
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 70%, transparent);
-  animation: cdc-simul-pulse 1.6s ease-out infinite;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--lr-ext-accent) 70%, transparent);
+  animation: lr-ext-simul-pulse 1.6s ease-out infinite;
 }
 
-@keyframes cdc-simul-pulse {
+@keyframes lr-ext-simul-pulse {
   70% {
-    box-shadow: 0 0 0 7px color-mix(in srgb, var(--cdc-accent) 0%, transparent);
+    box-shadow: 0 0 0 7px color-mix(in srgb, var(--lr-ext-accent) 0%, transparent);
   }
 
   100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cdc-accent) 0%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--lr-ext-accent) 0%, transparent);
   }
 }
 

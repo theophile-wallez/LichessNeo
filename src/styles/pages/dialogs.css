@@ -11,9 +11,9 @@ dialog::backdrop,
 dialog {
   border: 1px solid #ffffff14 !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: 0 24px 64px #0009 !important;
-  animation: cdc-dialog-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: lr-ext-dialog-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Lichess moves dialogs 16px down to fit its close button above them. Ours is inside,
@@ -24,7 +24,7 @@ dialog:not(.touch-scroll) {
 
 /* A rise, not a zoom: `scale` grows from a dialog's untranslated center, so the ones
  * Lichess centers with `translate(-50%, -50%)` came in from the right. */
-@keyframes cdc-dialog-in {
+@keyframes lr-ext-dialog-in {
   from {
     opacity: 0;
     translate: 0 24px;
@@ -39,7 +39,7 @@ dialog:not(.touch-scroll) button.close-button {
   border-radius: 6px !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   transform: none !important;
 }
 
@@ -69,7 +69,7 @@ dialog .dialog-content > h2 {
 dialog .help th p {
   margin: 1.2em 0 0.4em !important;
   padding: 12px 0 0 !important;
-  border-top: 1px solid var(--cdc-border);
+  border-top: 1px solid var(--lr-ext-border);
   background: transparent !important;
   color: #fff !important;
   font-size: 16px;
@@ -81,9 +81,9 @@ dialog .help th p {
 /* Create a game, challenge a friend, play the computer: segments on a dark track,
  * and one look for any choice (an accent ring on an accent tint). */
 .game-setup {
-  --cdc-setup-track: var(--cdc-grey-950);
-  --cdc-setup-chosen: inset 0 0 0 2px var(--cdc-accent);
-  --cdc-setup-tint: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
+  --lr-ext-setup-track: var(--lr-ext-grey-950);
+  --lr-ext-setup-chosen: inset 0 0 0 2px var(--lr-ext-accent);
+  --lr-ext-setup-tint: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
 }
 
 .game-setup h2 {
@@ -110,7 +110,7 @@ dialog .help th p {
 
 .game-setup :is(.config-group, .radio-pane) > .label {
   margin: 0 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 700 !important;
   text-align: start;
@@ -147,7 +147,7 @@ dialog .help th p {
   padding: 4px;
   border: none !important;
   border-radius: 10px;
-  background: var(--cdc-setup-track);
+  background: var(--lr-ext-setup-track);
 }
 
 .game-setup .time-control-tabs .tabs-horiz button {
@@ -169,12 +169,12 @@ dialog .help th p {
 }
 
 .game-setup .time-control-tabs .tabs-horiz button.active {
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   box-shadow: 0 1px 3px #00000080;
   color: #fff !important;
 }
 
-.game-setup .time-control-tabs .tabs-horiz[data-cdc-tabs] button.active {
+.game-setup .time-control-tabs .tabs-horiz[data-lr-ext-tabs] button.active {
   background: transparent !important;
   box-shadow: none;
 }
@@ -187,7 +187,7 @@ dialog .help th p {
 .game-setup .time-control-tabs .time-panel .slider-container .label-row {
   align-items: baseline !important;
   margin-bottom: 10px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
 }
@@ -204,7 +204,7 @@ dialog .help th p {
 
 .game-setup .time-control-tabs .time-panel .slider-separator {
   align-self: start;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 18px;
   font-weight: 700;
   line-height: 20px !important;
@@ -232,7 +232,7 @@ dialog .help th p {
 .game-setup input.range:hover::-webkit-slider-thumb {
   box-shadow:
     0 1px 3px #00000080,
-    0 0 0 5px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+    0 0 0 5px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
 }
 
 /* Presets: one row of chips sharing the width. */
@@ -255,7 +255,7 @@ dialog .help th p {
 }
 
 .game-setup .time-control-tabs .time-panel .presets .preset-btn.active {
-  background: var(--cdc-setup-tint) !important;
-  box-shadow: var(--cdc-setup-chosen);
+  background: var(--lr-ext-setup-tint) !important;
+  box-shadow: var(--lr-ext-setup-chosen);
   color: #fff !important;
 }

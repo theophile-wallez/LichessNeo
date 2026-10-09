@@ -32,8 +32,8 @@ describe('watchMovesExtras', () => {
     measureAs('#voice-bar', 38.4);
     measureAs('.crosstable', 61);
     tick();
-    expect(main()?.style.getPropertyValue('--cdc-voice-h')).toBe('39px');
-    expect(main()?.style.getPropertyValue('--cdc-crosstable-h')).toBe('61px');
+    expect(main()?.style.getPropertyValue('--lr-ext-voice-h')).toBe('39px');
+    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('61px');
   });
 
   it('follows a crosstable that grows, and drops what Lichess removed', () => {
@@ -44,8 +44,8 @@ describe('watchMovesExtras', () => {
     layout.resize();
     document.querySelector('#voice-bar')?.remove();
     tick();
-    expect(main()?.style.getPropertyValue('--cdc-crosstable-h')).toBe('80px');
-    expect(main()?.style.getPropertyValue('--cdc-voice-h')).toBe('');
+    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('80px');
+    expect(main()?.style.getPropertyValue('--lr-ext-voice-h')).toBe('');
   });
 
   it('writes nothing while the heights stay', () => {
@@ -67,10 +67,10 @@ describe('watchMovesExtras', () => {
     tick();
     measureAs('.crosstable', 80);
     tick();
-    expect(main()?.style.getPropertyValue('--cdc-crosstable-h')).toBe('58px');
+    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('58px');
     layout.resize();
     tick();
-    expect(main()?.style.getPropertyValue('--cdc-crosstable-h')).toBe('80px');
+    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('80px');
   });
 
   it('leaves other pages alone', () => {

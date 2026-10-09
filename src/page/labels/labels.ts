@@ -10,7 +10,7 @@ import { translate } from '#page/lichess/globals.ts';
 // can read Lichess's translations, so this copies them onto <html>.
 
 /** Each label's `i18n.site` key, by the data attribute it goes into. */
-const LABELS = { cdcFlipLabel: 'flipBoard', cdcToolsLabel: 'tools' };
+const LABELS = { lrExtFlipLabel: 'flipBoard', lrExtToolsLabel: 'tools' };
 
 // All come in the same table: once one is in, they all are.
 const readLabels = (): Map<string, string> | null => {

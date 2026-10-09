@@ -107,11 +107,11 @@
     position: sticky;
     top: 0;
     z-index: 3;
-    background: var(--cdc-bg-page);
+    background: var(--lr-ext-bg-page);
     box-shadow:
-      var(--cdc-pin-cover-wide),
-      -12px 0 var(--cdc-bg-page),
-      12px 0 var(--cdc-bg-page);
+      var(--lr-ext-pin-cover-wide),
+      -12px 0 var(--lr-ext-bg-page),
+      12px 0 var(--lr-ext-bg-page);
   }
 
   .coach-list__main .box__top::after {
@@ -120,7 +120,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -139,7 +139,7 @@
   }
 
   /* Keyboard focus scrolls to below the bar, not under it. */
-  html[data-cdc-has~='coach-list'] {
+  html[data-lr-ext-has~='coach-list'] {
     scroll-padding-top: 90px;
   }
 }
@@ -150,8 +150,8 @@
   box-sizing: border-box;
   padding: 20px;
   border-radius: 10px;
-  background: var(--cdc-bg-panel);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-bg-panel);
+  color: var(--lr-ext-text) !important;
   text-align: left !important;
 }
 
@@ -172,8 +172,8 @@
   margin-top: 16px;
   padding: 10px 14px 9px;
   border-radius: 6px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
   color: #fff !important;
   font-size: 14px;
   font-weight: 700;
@@ -182,5 +182,5 @@
 }
 
 .coach-list__side p a:hover {
-  background: var(--cdc-btn-grey-hover);
+  background: var(--lr-ext-btn-grey-hover);
 }

@@ -64,5 +64,5 @@ export function userInHref(href: string | null | undefined): string | undefined 
 export function avatarAttributes(user: string | undefined): SafeHtml {
   if (user === undefined) return html``;
   const { coach, color } = avatarOf(user);
-  return html` data-cdc-avatar-coach="${coach}" data-cdc-avatar-color="${color}"`;
+  return html` data-lr-ext-avatar-coach="${coach}" data-lr-ext-avatar-color="${color}"`;
 }

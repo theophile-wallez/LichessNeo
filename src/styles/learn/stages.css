@@ -5,9 +5,9 @@
   isolation: isolate;
   min-height: 92px !important;
   padding: 14px 44px 14px 96px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
   color: #fff !important;
   font-size: 1em !important;
@@ -24,8 +24,8 @@ html[dir='rtl'] .learn-stages .stage {
 
 .learn-stages .stage:hover,
 .learn-stages .stage.active {
-  border-color: color-mix(in srgb, var(--cdc-practice) 60%, transparent) !important;
-  background: var(--cdc-card-hover) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-practice) 60%, transparent) !important;
+  background: var(--lr-ext-card-hover) !important;
   box-shadow: 0 6px 18px #00000059 !important;
   transform: translateY(-3px) !important;
 }
@@ -41,7 +41,7 @@ html[dir='rtl'] .learn-stages .stage {
   height: 64px;
   margin-top: -32px;
   border-radius: 16px;
-  background: linear-gradient(145deg, var(--cdc-practice), var(--cdc-practice-2));
+  background: linear-gradient(145deg, var(--lr-ext-practice), var(--lr-ext-practice-2));
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
@@ -81,7 +81,7 @@ html[dir='rtl'] .learn-stages .stage {
 
 .learn-stages .stage p {
   margin: 4px 0 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.3 !important;
@@ -91,23 +91,23 @@ html[dir='rtl'] .learn-stages .stage {
 /* Cards stay dark in every state (no Lichess state gradients). Not while hovered, or this
  * would beat the hover's lighter fill. */
 .learn-stages .stage:is(.future, .ongoing, .done):not(:hover, .active) {
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 .learn-stages .stage.future {
-  border-color: var(--cdc-card-border) !important;
+  border-color: var(--lr-ext-card-border) !important;
 }
 
 .learn-stages .stage.ongoing {
-  border-color: color-mix(in srgb, var(--cdc-practice) 45%, transparent) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-practice) 45%, transparent) !important;
 }
 
 .learn-stages .stage.ongoing .attention-effect {
   --gradient-border: conic-gradient(
     from var(--border-angle),
     transparent 25%,
-    var(--cdc-practice),
-    color-mix(in srgb, var(--cdc-practice) 20%, transparent)
+    var(--lr-ext-practice),
+    color-mix(in srgb, var(--lr-ext-practice) 20%, transparent)
   ) !important;
   border-radius: 12px !important;
 }
@@ -121,9 +121,9 @@ html[dir='rtl'] .learn-stages .stage {
   z-index: 1;
   width: 22px;
   height: 22px;
-  border: 2px solid var(--cdc-bg-panel);
+  border: 2px solid var(--lr-ext-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-good)
+  background: var(--lr-ext-good)
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02--0c0c0d.svg') center / 14px
     no-repeat;
 }
@@ -151,7 +151,7 @@ html[dir='rtl'] .learn-stages .stage {
   border-radius: 999px;
   background: #ffffff14 !important;
   box-shadow: none !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 12px !important;
   font-weight: 800;
   line-height: 1.5 !important;
@@ -165,12 +165,12 @@ html[dir='rtl'] .learn-stages .stage {
 }
 
 .learn-stages .stage .ribbon.ongoing {
-  background: color-mix(in srgb, var(--cdc-practice) 30%, transparent) !important;
+  background: color-mix(in srgb, var(--lr-ext-practice) 30%, transparent) !important;
   color: #fff !important;
 }
 
 .learn-stages .stage .ribbon.done {
-  background: color-mix(in srgb, var(--cdc-accent) 25%, transparent) !important;
+  background: color-mix(in srgb, var(--lr-ext-accent) 25%, transparent) !important;
 }
 
 /* Gold stars. */
@@ -180,7 +180,7 @@ html[dir='rtl'] .learn-stages .stage {
 }
 
 #learn-app .stars icon {
-  color: var(--cdc-orange-dark) !important;
+  color: var(--lr-ext-orange-dark) !important;
   text-shadow: 0 1px 1px #00000066 !important;
 }
 

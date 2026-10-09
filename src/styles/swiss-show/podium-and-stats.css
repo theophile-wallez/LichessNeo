@@ -10,7 +10,7 @@ main.swiss .podium {
   padding-bottom: 20px;
   background: radial-gradient(
     ellipse 60% 70% at 50% 45%,
-    color-mix(in srgb, var(--cdc-orange-dark) 8%, transparent),
+    color-mix(in srgb, var(--lr-ext-orange-dark) 8%, transparent),
     transparent 70%
   );
 }
@@ -22,7 +22,7 @@ main.swiss .podium .user-link {
   margin-top: 4px;
   overflow: hidden;
   color: #fff !important;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -44,7 +44,7 @@ main.swiss .podium .first .stats {
 
 main.swiss .podium .stats th {
   padding: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-weight: 600;
   letter-spacing: 0 !important;
 }
@@ -60,16 +60,16 @@ main.swiss .podium .stats td {
 
 main.swiss .swiss__stats {
   padding: 20px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
 main.swiss .swiss__stats h2 {
   margin: 0 0 12px !important;
   color: #fff;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 18px !important;
   font-weight: 800 !important;
   text-align: start !important;
@@ -82,12 +82,12 @@ main.swiss .swiss__stats table {
 }
 
 main.swiss .swiss__stats tr {
-  box-shadow: inset 0 -1px 0 var(--cdc-card-border);
+  box-shadow: inset 0 -1px 0 var(--lr-ext-card-border);
 }
 
 main.swiss .swiss__stats th {
   padding: 9px 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
   text-align: start;
@@ -122,7 +122,7 @@ main.swiss .swiss__stats__links a {
   margin: 0 !important;
   padding: 8px 10px;
   border-radius: 6px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 13px;
   font-weight: 600;
   transition:
@@ -131,26 +131,26 @@ main.swiss .swiss__stats__links a {
 }
 
 main.swiss .swiss__stats__links a:hover {
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   color: #fff !important;
 }
 
 main.swiss .swiss__stats__links a::before {
   margin: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 main.swiss .swiss__stats__links a:first-child {
   justify-content: center;
   margin-bottom: 10px !important;
   padding: 10px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
   color: #fff !important;
   font-size: 14px;
   font-weight: 800;
 }
 
 main.swiss .swiss__stats__links a:first-child:hover {
-  background: var(--cdc-btn-grey-hover);
+  background: var(--lr-ext-btn-grey-hover);
 }

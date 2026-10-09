@@ -1,27 +1,27 @@
-/* Board, pieces and highlights. `data-cdc-board` on <html> names the board the user picked
+/* Board, pieces and highlights. `data-lr-ext-board` on <html> names the board the user picked
  * (content/packs/): one of ours ('blue'), an imported pack's ('pack', its image in
- * `--cdc-board-img`), or none for Lichess's. A pack's pieces override the variables Lichess
+ * `--lr-ext-board-img`), or none for Lichess's. A pack's pieces override the variables Lichess
  * draws its own from. */
 
 :root {
-  --cdc-highlight: rgba(255, 255, 51, 0.5);
-  --cdc-hint: rgba(0, 0, 0, 0.14);
+  --lr-ext-highlight: rgba(255, 255, 51, 0.5);
+  --lr-ext-hint: rgba(0, 0, 0, 0.14);
   /* Opaque, so it covers the square on both colors. */
-  --cdc-premove: #f19082;
-  /* The board's share of the room its layout gives it: all of it until resized (`--cdc-zoom`,
+  --lr-ext-premove: #f19082;
+  /* The board's share of the room its layout gives it: all of it until resized (`--lr-ext-zoom`,
    * 0-100, from content/layout/board-zoom.ts), down to a quarter, like Lichess's
    * `---board-scale`. */
-  --cdc-board-scale: calc(var(--cdc-zoom, 100) / 100 * 0.75 + 0.25);
+  --lr-ext-board-scale: calc(var(--lr-ext-zoom, 100) / 100 * 0.75 + 0.25);
 }
 
 /* ---- Board and pieces --- */
 
 /* Our blue board, the accent and white, drawn from the palette.
  * A tile of 2×2 squares, light top left: a8 and h1 are light whichever side is down. */
-html[data-cdc-board='blue'] body .is2d cg-board::before {
+html[data-lr-ext-board='blue'] body .is2d cg-board::before {
   background-image: repeating-conic-gradient(
-    var(--cdc-board-dark) 0 25%,
-    var(--cdc-board-light) 0 50%
+    var(--lr-ext-board-dark) 0 25%,
+    var(--lr-ext-board-light) 0 50%
   ) !important;
   background-size: 25% 25% !important;
   filter: none !important;
@@ -29,17 +29,17 @@ html[data-cdc-board='blue'] body .is2d cg-board::before {
 }
 
 /* Lichess's yellow turns olive on the accent: a pale cyan reads on both colors. */
-html[data-cdc-board='blue'] body {
-  --cdc-highlight: color-mix(in srgb, var(--cdc-cyan) 50%, transparent);
+html[data-lr-ext-board='blue'] body {
+  --lr-ext-highlight: color-mix(in srgb, var(--lr-ext-cyan) 50%, transparent);
 }
 
-html[data-cdc-board='blue'] body .is2d coords {
-  ---cg-ccw: var(--cdc-board-light) !important;
-  ---cg-ccb: var(--cdc-board-dark) !important;
+html[data-lr-ext-board='blue'] body .is2d coords {
+  ---cg-ccw: var(--lr-ext-board-light) !important;
+  ---cg-ccb: var(--lr-ext-board-dark) !important;
 }
 
-html[data-cdc-board='pack'] body .is2d cg-board::before {
-  background-image: var(--cdc-board-img) !important;
+html[data-lr-ext-board='pack'] body .is2d cg-board::before {
+  background-image: var(--lr-ext-board-img) !important;
   background-size: cover !important;
   filter: none !important;
   opacity: 1 !important;
@@ -51,51 +51,51 @@ cg-board {
 }
 
 /* A picked pack is read a moment after the page starts: show nothing rather than Lichess's. */
-html[data-cdc-loading~='board'] .is2d cg-board::before,
-html[data-cdc-loading~='pieces'] .is2d piece {
+html[data-lr-ext-loading~='board'] .is2d cg-board::before,
+html[data-lr-ext-loading~='pieces'] .is2d piece {
   visibility: hidden !important;
 }
 
 /* ---- Our own pieces (#shared/piece-glyph.ts), in the set the board shows --- */
 
-.cdc-pc {
+.lr-ext-pc {
   background: center / contain no-repeat;
 }
 
-.cdc-pc-wp {
+.lr-ext-pc-wp {
   background-image: var(---white-pawn);
 }
-.cdc-pc-wn {
+.lr-ext-pc-wn {
   background-image: var(---white-knight);
 }
-.cdc-pc-wb {
+.lr-ext-pc-wb {
   background-image: var(---white-bishop);
 }
-.cdc-pc-wr {
+.lr-ext-pc-wr {
   background-image: var(---white-rook);
 }
-.cdc-pc-wq {
+.lr-ext-pc-wq {
   background-image: var(---white-queen);
 }
-.cdc-pc-wk {
+.lr-ext-pc-wk {
   background-image: var(---white-king);
 }
-.cdc-pc-bp {
+.lr-ext-pc-bp {
   background-image: var(---black-pawn);
 }
-.cdc-pc-bn {
+.lr-ext-pc-bn {
   background-image: var(---black-knight);
 }
-.cdc-pc-bb {
+.lr-ext-pc-bb {
   background-image: var(---black-bishop);
 }
-.cdc-pc-br {
+.lr-ext-pc-br {
   background-image: var(---black-rook);
 }
-.cdc-pc-bq {
+.lr-ext-pc-bq {
   background-image: var(---black-queen);
 }
-.cdc-pc-bk {
+.lr-ext-pc-bk {
   background-image: var(---black-king);
 }
 
@@ -105,21 +105,21 @@ html[data-cdc-loading~='pieces'] .is2d piece {
    and move hints its image, so a hint on the last move's square draws over the highlight. */
 cg-board square.last-move,
 body[data-board] .is2d cg-board square.last-move {
-  background-color: var(--cdc-highlight) !important;
+  background-color: var(--lr-ext-highlight) !important;
 }
 
 cg-board square.selected {
-  background-color: var(--cdc-highlight) !important;
+  background-color: var(--lr-ext-highlight) !important;
 }
 
 cg-board square:is(.move-dest, .premove-dest) {
-  background-image: radial-gradient(var(--cdc-hint) 22%, transparent 23%) !important;
+  background-image: radial-gradient(var(--lr-ext-hint) 22%, transparent 23%) !important;
 }
 
 cg-board square.oc:is(.move-dest, .premove-dest) {
   background-image: radial-gradient(
     transparent 0 57%,
-    var(--cdc-hint) 58% 70%,
+    var(--lr-ext-hint) 58% 70%,
     transparent 71%
   ) !important;
 }
@@ -132,7 +132,7 @@ cg-board square.move-dest.hover {
 /* A set premove: both squares, opaque (chessground already shows the piece on the new one). */
 cg-board square.current-premove,
 body[data-board] .is2d cg-board square.current-premove {
-  background-color: var(--cdc-premove) !important;
+  background-color: var(--lr-ext-premove) !important;
 }
 
 cg-board square.check {

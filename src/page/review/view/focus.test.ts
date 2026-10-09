@@ -13,11 +13,11 @@ it('keeps the focus in the review when a click redraws its button away', async (
   const { advance } = setUp({ game: 'passant', lang: 'en', cached: true, steps: [] });
   review.start();
   await advance(500);
-  const count = queryOne(document, '#cdc-review [data-cdc="jump"]', HTMLButtonElement);
+  const count = queryOne(document, '#lr-ext-review [data-lr-ext="jump"]', HTMLButtonElement);
   if (!count) throw new Error('no count to click');
   count.focus();
   count.click();
   await advance(100);
   expect(count.isConnected).toBe(false);
-  expect(document.activeElement?.closest('#cdc-review')).not.toBeNull();
+  expect(document.activeElement?.closest('#lr-ext-review')).not.toBeNull();
 });

@@ -6,20 +6,20 @@
   inset-inline-end: 6px !important;
   width: max-content;
   min-width: 0 !important;
-  border: 1px solid var(--cdc-menu-border) !important;
+  border: 1px solid var(--lr-ext-menu-border) !important;
   border-bottom: none !important;
   border-radius: 8px 8px 0 0 !important;
-  background: color-mix(in srgb, var(--cdc-grey-700) 55%, transparent) !important;
+  background: color-mix(in srgb, var(--lr-ext-grey-700) 55%, transparent) !important;
   backdrop-filter: blur(14px) saturate(1.4);
   box-shadow: 0 -2px 14px #0000004d;
-  color: var(--cdc-text);
-  font-family: var(--cdc-font);
+  color: var(--lr-ext-text);
+  font-family: var(--lr-ext-font);
   font-size: 13px !important;
 }
 
 #friend_box:has(.content_wrap):not(:has(.content_wrap.none)) {
   width: 240px;
-  background: color-mix(in srgb, var(--cdc-grey-700) 80%, transparent) !important;
+  background: color-mix(in srgb, var(--lr-ext-grey-700) 80%, transparent) !important;
 }
 
 /* ---- Title --- */
@@ -31,7 +31,7 @@
   border: none !important;
   background: none !important;
   box-shadow: none !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-weight: 600;
   text-shadow: none !important;
   white-space: nowrap;
@@ -40,11 +40,11 @@
 }
 
 #friend_box .friend_box_title:hover {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
 }
 
 #friend_box .friend_box_title strong {
-  color: var(--cdc-text-strong);
+  color: var(--lr-ext-text-strong);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
@@ -63,12 +63,12 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--cdc-font-dimmer);
+  background: var(--lr-ext-font-dimmer);
 }
 
 #friend_box:has(.list > div) .friend_box_title::before {
-  background: var(--cdc-good);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+  background: var(--lr-ext-good);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
 }
 
 /* Chevron: up while closed, down while open. */
@@ -80,7 +80,7 @@
   width: 6px;
   height: 6px;
   margin-top: -3px;
-  border: solid var(--cdc-text-dim);
+  border: solid var(--lr-ext-text-dim);
   border-width: 2px 2px 0 0;
   transform: translateY(2px) rotate(-45deg);
   transition: transform 0.2s ease !important;
@@ -93,11 +93,11 @@
 /* ---- List --- */
 
 #friend_box .content_wrap:not(.none) {
-  border-top: 1px solid var(--cdc-menu-border);
-  animation: cdc-friend-box-in 0.18s ease-out;
+  border-top: 1px solid var(--lr-ext-menu-border);
+  animation: lr-ext-friend-box-in 0.18s ease-out;
 }
 
-@keyframes cdc-friend-box-in {
+@keyframes lr-ext-friend-box-in {
   from {
     opacity: 0;
     transform: translateY(6px);
@@ -121,7 +121,7 @@
 }
 
 #friend_box .content > div:hover {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
 }
 
 /* A block, not a flexbox, so a long name still ends in an ellipsis. */
@@ -132,12 +132,12 @@
   max-width: none !important;
   padding: 6px 8px !important;
   line-height: 28px;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 600;
 }
 
 #friend_box .content a.user-link:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 /* Lichess has no profile pictures: everyone gets the default avatar. */
@@ -149,7 +149,7 @@
   width: 28px;
   height: 28px;
   border-radius: 4px;
-  background: var(--cdc-avatar);
+  background: var(--lr-ext-avatar);
 }
 
 /* The online mark (a line, or patron wings) becomes a dot on the avatar's corner. */
@@ -161,15 +161,15 @@
   width: 12px;
   height: 12px;
   margin: 0 !important;
-  border: 2px solid var(--cdc-menu-bg);
+  border: 2px solid var(--lr-ext-menu-bg);
   border-radius: 50%;
-  background: var(--cdc-good);
+  background: var(--lr-ext-good);
   font-size: 0;
   transition: border-color 0.15s !important;
 }
 
 #friend_box .content > div:hover a.user-link .line {
-  border-color: var(--cdc-grey-650);
+  border-color: var(--lr-ext-grey-650);
 }
 
 #friend_box .content a.user-link .line::before {
@@ -186,9 +186,9 @@
   margin-inline-end: 6px;
   padding: 0 !important;
   border-radius: 50%;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-text-dim) !important;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-dim) !important;
   font-size: 14px;
   transition:
     background 0.15s,
@@ -196,8 +196,8 @@
 }
 
 #friend_box .content a.tv:hover {
-  background: var(--cdc-btn-grey-hover);
-  color: var(--cdc-accent-hover) !important;
+  background: var(--lr-ext-btn-grey-hover);
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 #friend_box .content a.tv::before {

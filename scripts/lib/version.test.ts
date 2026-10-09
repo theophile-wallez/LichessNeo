@@ -6,7 +6,7 @@ import { BASE_VERSION } from '#manifest';
 import { tempDirs } from './testing.ts';
 import { currentVersion, releaseVersion } from './version.ts';
 
-const newDir = tempDirs('cdc-version-');
+const newDir = tempDirs('lr-ext-version-');
 
 // The fixtures' git leaves the user's config (signing, hooks) out.
 const GIT_ENV = {

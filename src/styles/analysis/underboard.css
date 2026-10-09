@@ -5,24 +5,24 @@
  * ("Learn from your mistakes") takes the chat's row, or a study's chapter list's. */
 
 /* Lichess's mobile layout keeps its underboard. */
-main.analyse .analyse__controls > .cdc-underboard {
+main.analyse .analyse__controls > .lr-ext-underboard {
   display: none;
 }
 
 @media (min-width: 1020px) {
   /* With Lichess's toggles, before its menu. */
-  main.analyse .analyse__controls > .cdc-underboard {
+  main.analyse .analyse__controls > .lr-ext-underboard {
     order: 1;
     display: block;
   }
 
   /* The review's summary and move-by-move panels have no controls to close it with. The advice
    * summary is flagged (content/layout/has-flags.ts): Lichess leaves an empty one. */
-  html.cdc-underboard-open:where(:not(.cdc-review-summary, .cdc-review-moves))
+  html.lr-ext-underboard-open:where(:not(.lr-ext-review-summary, .lr-ext-review-moves))
     main.analyse
     > .analyse__underboard,
-  html.cdc-underboard-open[data-cdc-has~='analyse-training']:where(
-      :not(.cdc-review-summary, .cdc-review-moves)
+  html.lr-ext-underboard-open[data-lr-ext-has~='analyse-training']:where(
+      :not(.lr-ext-review-summary, .lr-ext-review-moves)
     )
     main.analyse
     > .analyse__round-training {
@@ -31,40 +31,47 @@ main.analyse .analyse__controls > .cdc-underboard {
     display: block !important;
     box-sizing: border-box;
     min-height: 0;
-    margin: 0 0 0 var(--cdc-gap) !important;
+    margin: 0 0 0 var(--lr-ext-gap) !important;
     padding: 12px;
     overflow-y: auto;
-    background: var(--cdc-bg-panel);
+    background: var(--lr-ext-bg-panel);
   }
 
-  html.cdc-underboard-open[data-cdc-has~='analyse-chat'] main.analyse > .analyse__round-training {
+  html.lr-ext-underboard-open[data-lr-ext-has~='analyse-chat']
+    main.analyse
+    > .analyse__round-training {
     grid-area: chat !important;
-    border-top: 1px solid var(--cdc-border);
+    border-top: 1px solid var(--lr-ext-border);
   }
 
-  html.cdc-underboard-open[data-cdc-has~='study-side'] main.analyse > .analyse__round-training {
+  html.lr-ext-underboard-open[data-lr-ext-has~='study-side']
+    main.analyse
+    > .analyse__round-training {
     grid-area: side !important;
-    border-top: 1px solid var(--cdc-border);
+    border-top: 1px solid var(--lr-ext-border);
   }
 
   /* No chat, nor chapters: the summary shares the tools' row, under the rest. */
-  html.cdc-underboard-open[data-cdc-has~='analyse-training']:not(
-      [data-cdc-has~='analyse-chat'],
-      [data-cdc-has~='study-side']
+  html.lr-ext-underboard-open[data-lr-ext-has~='analyse-training']:not(
+      [data-lr-ext-has~='analyse-chat'],
+      [data-lr-ext-has~='study-side']
     )
     main.analyse
     > :is(.analyse__underboard, .analyse__round-training) {
     max-height: 50%;
   }
 
-  html.cdc-underboard-open:not([data-cdc-has~='analyse-chat'], [data-cdc-has~='study-side'])
+  html.lr-ext-underboard-open:not(
+      [data-lr-ext-has~='analyse-chat'],
+      [data-lr-ext-has~='study-side']
+    )
     main.analyse
     > .analyse__round-training {
     align-self: end;
   }
 
   /* Lichess's panels are 240px tall and scroll, which cut the PGN: ours scrolls instead. */
-  html.cdc-underboard-open main.analyse .analyse__underboard__panels {
+  html.lr-ext-underboard-open main.analyse .analyse__underboard__panels {
     height: auto !important;
     overflow: visible !important;
   }
@@ -76,8 +83,8 @@ main.analyse .analyse__controls > .cdc-underboard {
     top: -12px;
     z-index: 1;
     margin: -12px -12px 12px !important;
-    border-bottom: 1px solid var(--cdc-border);
-    background: var(--cdc-bg-panel-dark);
+    border-bottom: 1px solid var(--lr-ext-border);
+    background: var(--lr-ext-bg-panel-dark);
   }
 
   /* In a narrow panel the tabs take a second row rather than cut their names. */
@@ -88,8 +95,8 @@ main.analyse .analyse__controls > .cdc-underboard {
   main.analyse .analyse__underboard__menu > button {
     flex: 1 0 auto;
     border-color: transparent !important;
-    color: var(--cdc-text-dim) !important;
-    font-family: var(--cdc-font) !important;
+    color: var(--lr-ext-text-dim) !important;
+    font-family: var(--lr-ext-font) !important;
     font-weight: 700;
   }
 
@@ -98,7 +105,7 @@ main.analyse .analyse__controls > .cdc-underboard {
     color: #fff !important;
   }
 
-  main.analyse .analyse__underboard__menu:not([data-cdc-tabs]) > button.active {
+  main.analyse .analyse__underboard__menu:not([data-lr-ext-tabs]) > button.active {
     border-bottom-color: #fff !important;
   }
 
@@ -106,17 +113,17 @@ main.analyse .analyse__controls > .cdc-underboard {
   /* Its width is the panel's: a container has no width of its own to center with. */
   main.analyse .analyse__underboard .crosstable {
     width: 100% !important;
-    border: 1px solid var(--cdc-border) !important;
+    border: 1px solid var(--lr-ext-border) !important;
     border-radius: 6px !important;
-    background: var(--cdc-bg-panel-dark) !important;
+    background: var(--lr-ext-bg-panel-dark) !important;
   }
 
   /* A fourth toggle in the bar: in a narrow panel they give the jump buttons room. */
   main.analyse .analyse__controls {
-    container: cdc-controls / inline-size;
+    container: lr-ext-controls / inline-size;
   }
 
-  @container cdc-controls (max-width: 360px) {
+  @container lr-ext-controls (max-width: 360px) {
     main.analyse .analyse__controls > .fbt {
       width: 28px;
     }

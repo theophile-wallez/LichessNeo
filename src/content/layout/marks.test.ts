@@ -7,11 +7,11 @@ import { marks, syncMarks } from './marks.ts';
 import legacy from './fixtures/legacy.json' with { type: 'json' };
 
 const navOf = (): string | undefined =>
-  queryOne(document, '.subnav', HTMLElement)?.dataset['cdcNav'];
+  queryOne(document, '.subnav', HTMLElement)?.dataset['lrExtNav'];
 
 // A mark the original didn't set: the page's side menu, on its <main> (static-pages.css).
 const withoutNewMarks = (markup: string): string =>
-  markup.replaceAll(/ data-cdc-menu="[^"]*"/g, '');
+  markup.replaceAll(/ data-lr-ext-menu="[^"]*"/g, '');
 
 /** Lets the observer's callback run, then the frame it asks for. */
 async function nextFrame(): Promise<void> {
@@ -35,7 +35,7 @@ describe('syncMarks', () => {
     document.body.innerHTML =
       '<main class="page-menu"><aside class="subnav"><a href="/faq">FAQ</a><a href="/thanks">Thanks</a></aside></main>';
     syncMarks();
-    expect(queryOne(document, 'main', HTMLElement)?.dataset['cdcMenu']).toBe('about');
+    expect(queryOne(document, 'main', HTMLElement)?.dataset['lrExtMenu']).toBe('about');
   });
 
   it('writes nothing when the marks are already right', () => {

@@ -57,8 +57,8 @@ h3 {
   margin-bottom: 2px;
   padding: 10px 14px !important;
   border-radius: 6px !important;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 15px;
   font-weight: 600;
   text-shadow: none !important;
@@ -82,28 +82,28 @@ h3 {
   display: none !important;
 }
 
-/* Menus with an icon tile per link; each page sets `--cdc-nav-color` and either
- * `--cdc-nav-glyph`, a Hugeicon painted in that color over the tile (`::after`), or
- * `--cdc-nav-icon`, a picture. content/layout/marks.ts tags the menu (`data-cdc-nav`), as a
+/* Menus with an icon tile per link; each page sets `--lr-ext-nav-color` and either
+ * `--lr-ext-nav-glyph`, a Hugeicon painted in that color over the tile (`::after`), or
+ * `--lr-ext-nav-icon`, a picture. content/layout/marks.ts tags the menu (`data-lr-ext-nav`), as a
  * `:has()` here slowed every board move. */
 .subnav:is(
-    [data-cdc-nav~='bots'],
-    [data-cdc-nav~='broadcast'],
-    [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account'],
-    [data-cdc-nav~='about'],
-    [data-cdc-nav~='streamers'],
-    [data-cdc-nav~='studies'],
-    [data-cdc-nav~='teams'],
-    [data-cdc-nav~='blog'],
-    [data-cdc-nav~='arena-history']
+    [data-lr-ext-nav~='bots'],
+    [data-lr-ext-nav~='broadcast'],
+    [data-lr-ext-nav~='puzzles'],
+    [data-lr-ext-nav~='account'],
+    [data-lr-ext-nav~='about'],
+    [data-lr-ext-nav~='streamers'],
+    [data-lr-ext-nav~='studies'],
+    [data-lr-ext-nav~='teams'],
+    [data-lr-ext-nav~='blog'],
+    [data-lr-ext-nav~='arena-history']
   )
   a {
   /* The open link's variables also sit on <main> (menu-titles.css): not inherited here. */
-  --cdc-nav-glyph: initial;
-  --cdc-nav-icon: initial;
-  --cdc-nav-color: initial;
-  --cdc-title-icon: initial;
+  --lr-ext-nav-glyph: initial;
+  --lr-ext-nav-icon: initial;
+  --lr-ext-nav-color: initial;
+  --lr-ext-title-icon: initial;
   position: relative;
   display: flex !important;
   align-items: center;
@@ -112,16 +112,16 @@ h3 {
 }
 
 .subnav:is(
-    [data-cdc-nav~='bots'],
-    [data-cdc-nav~='broadcast'],
-    [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account'],
-    [data-cdc-nav~='about'],
-    [data-cdc-nav~='streamers'],
-    [data-cdc-nav~='studies'],
-    [data-cdc-nav~='teams'],
-    [data-cdc-nav~='blog'],
-    [data-cdc-nav~='arena-history']
+    [data-lr-ext-nav~='bots'],
+    [data-lr-ext-nav~='broadcast'],
+    [data-lr-ext-nav~='puzzles'],
+    [data-lr-ext-nav~='account'],
+    [data-lr-ext-nav~='about'],
+    [data-lr-ext-nav~='streamers'],
+    [data-lr-ext-nav~='studies'],
+    [data-lr-ext-nav~='teams'],
+    [data-lr-ext-nav~='blog'],
+    [data-lr-ext-nav~='arena-history']
   )
   a::before {
   content: '';
@@ -133,8 +133,8 @@ h3 {
   mask: none;
   -webkit-text-fill-color: initial;
   background:
-    var(--cdc-nav-icon, none) center / 24px 24px no-repeat,
-    color-mix(in srgb, var(--cdc-nav-color, #fff) 16%, transparent);
+    var(--lr-ext-nav-icon, none) center / 24px 24px no-repeat,
+    color-mix(in srgb, var(--lr-ext-nav-color, #fff) 16%, transparent);
   box-shadow: inset 0 1px #ffffff14;
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -143,16 +143,16 @@ h3 {
 }
 
 .subnav:is(
-    [data-cdc-nav~='bots'],
-    [data-cdc-nav~='broadcast'],
-    [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account'],
-    [data-cdc-nav~='about'],
-    [data-cdc-nav~='streamers'],
-    [data-cdc-nav~='studies'],
-    [data-cdc-nav~='teams'],
-    [data-cdc-nav~='blog'],
-    [data-cdc-nav~='arena-history']
+    [data-lr-ext-nav~='bots'],
+    [data-lr-ext-nav~='broadcast'],
+    [data-lr-ext-nav~='puzzles'],
+    [data-lr-ext-nav~='account'],
+    [data-lr-ext-nav~='about'],
+    [data-lr-ext-nav~='streamers'],
+    [data-lr-ext-nav~='studies'],
+    [data-lr-ext-nav~='teams'],
+    [data-lr-ext-nav~='blog'],
+    [data-lr-ext-nav~='arena-history']
   )
   a::after {
   content: '' !important;
@@ -164,181 +164,181 @@ h3 {
   height: 24px;
   margin: -12px 0 0;
   border: none;
-  background: color-mix(in srgb, var(--cdc-nav-color, #fff) 80%, #fff);
+  background: color-mix(in srgb, var(--lr-ext-nav-color, #fff) 80%, #fff);
   /* Without a glyph, a mask that hides it all. */
-  mask: var(--cdc-nav-glyph, linear-gradient(#0000, #0000)) center / contain no-repeat;
+  mask: var(--lr-ext-nav-glyph, linear-gradient(#0000, #0000)) center / contain no-repeat;
   pointer-events: none;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 .subnav:is(
-    [data-cdc-nav~='bots'],
-    [data-cdc-nav~='broadcast'],
-    [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account'],
-    [data-cdc-nav~='about'],
-    [data-cdc-nav~='streamers'],
-    [data-cdc-nav~='studies'],
-    [data-cdc-nav~='teams'],
-    [data-cdc-nav~='blog'],
-    [data-cdc-nav~='arena-history']
+    [data-lr-ext-nav~='bots'],
+    [data-lr-ext-nav~='broadcast'],
+    [data-lr-ext-nav~='puzzles'],
+    [data-lr-ext-nav~='account'],
+    [data-lr-ext-nav~='about'],
+    [data-lr-ext-nav~='streamers'],
+    [data-lr-ext-nav~='studies'],
+    [data-lr-ext-nav~='teams'],
+    [data-lr-ext-nav~='blog'],
+    [data-lr-ext-nav~='arena-history']
   )
   a:hover::before,
 .subnav:is(
-    [data-cdc-nav~='bots'],
-    [data-cdc-nav~='broadcast'],
-    [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account'],
-    [data-cdc-nav~='about'],
-    [data-cdc-nav~='streamers'],
-    [data-cdc-nav~='studies'],
-    [data-cdc-nav~='teams'],
-    [data-cdc-nav~='blog'],
-    [data-cdc-nav~='arena-history']
+    [data-lr-ext-nav~='bots'],
+    [data-lr-ext-nav~='broadcast'],
+    [data-lr-ext-nav~='puzzles'],
+    [data-lr-ext-nav~='account'],
+    [data-lr-ext-nav~='about'],
+    [data-lr-ext-nav~='streamers'],
+    [data-lr-ext-nav~='studies'],
+    [data-lr-ext-nav~='teams'],
+    [data-lr-ext-nav~='blog'],
+    [data-lr-ext-nav~='arena-history']
   )
   a:hover::after {
   transform: translateY(-2px) rotate(-8deg) scale(1.08);
 }
 
 .subnav:is(
-    [data-cdc-nav~='bots'],
-    [data-cdc-nav~='broadcast'],
-    [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account'],
-    [data-cdc-nav~='about'],
-    [data-cdc-nav~='streamers'],
-    [data-cdc-nav~='studies'],
-    [data-cdc-nav~='teams'],
-    [data-cdc-nav~='blog'],
-    [data-cdc-nav~='arena-history']
+    [data-lr-ext-nav~='bots'],
+    [data-lr-ext-nav~='broadcast'],
+    [data-lr-ext-nav~='puzzles'],
+    [data-lr-ext-nav~='account'],
+    [data-lr-ext-nav~='about'],
+    [data-lr-ext-nav~='streamers'],
+    [data-lr-ext-nav~='studies'],
+    [data-lr-ext-nav~='teams'],
+    [data-lr-ext-nav~='blog'],
+    [data-lr-ext-nav~='arena-history']
   )
   a.active::before {
-  background-color: color-mix(in srgb, var(--cdc-nav-color, #fff) 32%, transparent);
+  background-color: color-mix(in srgb, var(--lr-ext-nav-color, #fff) 32%, transparent);
   box-shadow:
     inset 0 1px #ffffff26,
-    0 0 0 1px color-mix(in srgb, var(--cdc-nav-color, #fff) 45%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-nav-color, #fff) 45%, transparent);
 }
 
 /* Settings links: the variables also go on the open page, for its title's tile, which takes
- * the Hugeicon as a file in its color (`--cdc-title-icon`): a tile can't hold a mask. */
+ * the Hugeicon as a file in its color (`--lr-ext-title-icon`): a tile can't hold a mask. */
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/profile'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/profile'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01--a2edfd.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/profile'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/profile'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/preferences/display'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/preferences/display'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board--ffc689.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/display'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/display'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/preferences/chess-clock'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/preferences/chess-clock'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--ffc689.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/chess-clock'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/chess-clock'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/preferences/game-behavior'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/preferences/game-behavior'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03.svg');
-  --cdc-nav-color: var(--cdc-purple);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03--caa9fa.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/game-behavior'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/game-behavior'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/preferences/privacy'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/preferences/privacy'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off--ffc689.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/privacy'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/privacy'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/preferences/notification'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/preferences/notification'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03--ffc689.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/notification'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/notification'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/kid'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/kid'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01.svg');
-  --cdc-nav-color: var(--cdc-pink);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01--ff94d1.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/kid'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/kid'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-pink);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01--ff94d1.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/username'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/username'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account.svg');
-  --cdc-nav-color: var(--cdc-red);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account--ff7777.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/username'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/username'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account.svg');
+  --lr-ext-nav-color: var(--lr-ext-red);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account--ff7777.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/coach/edit'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/coach/edit'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher--a2edfd.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/coach/edit'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/coach/edit'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/passwd'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/passwd'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01--ffc689.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/passwd'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/passwd'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/email'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/email'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01--a2edfd.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/email'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/email'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/twofactor'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/twofactor'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01--a2edfd.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/twofactor'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/twofactor'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/oauth/token'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/oauth/token'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01.svg');
-  --cdc-nav-color: var(--cdc-purple);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01--caa9fa.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/oauth/token'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/oauth/token'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/security'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/security'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01.svg');
-  --cdc-nav-color: var(--cdc-accent);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01--7e88db.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/security'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/security'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/preferences/network'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/preferences/network'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01--a2edfd.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/network'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/network'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/dgt'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/dgt'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
-  --cdc-nav-color: var(--cdc-grey-300);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01--a1a5ad.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/dgt'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/dgt'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-grey-300);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01--a1a5ad.svg');
 }
 
-.subnav[data-cdc-nav~='account'] a[href$='/account/close'],
-main.page-menu[data-cdc-menu~='account'][data-cdc-nav-active$='/account/close'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01.svg');
-  --cdc-nav-color: var(--cdc-red);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01--ff7777.svg');
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/close'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/close'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-red);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01--ff7777.svg');
 }
 
 /* A settings page's title: white rather than Lichess's green, after its link's tile
@@ -354,19 +354,19 @@ main.account .page-menu__content .twofactor h1 > .is-green {
 
 /* Lichess's separators are blank gaps: draw a faint line. */
 .subnav:is(
-    [data-cdc-nav~='bots'],
-    [data-cdc-nav~='broadcast'],
-    [data-cdc-nav~='puzzles'],
-    [data-cdc-nav~='account'],
-    [data-cdc-nav~='about'],
-    [data-cdc-nav~='streamers'],
-    [data-cdc-nav~='studies'],
-    [data-cdc-nav~='teams'],
-    [data-cdc-nav~='blog'],
-    [data-cdc-nav~='arena-history']
+    [data-lr-ext-nav~='bots'],
+    [data-lr-ext-nav~='broadcast'],
+    [data-lr-ext-nav~='puzzles'],
+    [data-lr-ext-nav~='account'],
+    [data-lr-ext-nav~='about'],
+    [data-lr-ext-nav~='streamers'],
+    [data-lr-ext-nav~='studies'],
+    [data-lr-ext-nav~='teams'],
+    [data-lr-ext-nav~='blog'],
+    [data-lr-ext-nav~='arena-history']
   )
   .sep {
   height: 1px;
   margin: 8px 14px !important;
-  background: var(--cdc-border);
+  background: var(--lr-ext-border);
 }

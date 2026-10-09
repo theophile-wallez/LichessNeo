@@ -1,9 +1,9 @@
 /* Puzzle dashboard (/training/dashboard): a header with the range picker, stat tiles, and
  * the theme radar, redrawn by content/charts/radar/. */
 
-/* The replay tile's triangle; its check reuses `--cdc-check` (dropdowns). */
+/* The replay tile's triangle; its check reuses `--lr-ext-check` (dropdowns). */
 :root {
-  --cdc-play: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/play.svg');
+  --lr-ext-play: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/play.svg');
 }
 
 /* The tiles are the cards now, so the box is bare. And unclipped: the radar's labels reach
@@ -41,16 +41,16 @@ main.page-menu .page-menu__content.puzzle-dashboard {
   height: 52px;
   border-radius: 13px;
   background:
-    var(--cdc-title-icon, none) center / 30px 30px no-repeat,
-    color-mix(in srgb, var(--cdc-nav-color, #fff) 24%, transparent);
+    var(--lr-ext-title-icon, none) center / 30px 30px no-repeat,
+    color-mix(in srgb, var(--lr-ext-nav-color, #fff) 24%, transparent);
   box-shadow:
     inset 0 1px #ffffff26,
-    0 0 0 1px color-mix(in srgb, var(--cdc-nav-color, #fff) 40%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-nav-color, #fff) 40%, transparent);
 }
 
 .puzzle-dashboard .box__top h1 strong {
   grid-column: 2;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 15px !important;
   font-weight: 600 !important;
 }
@@ -94,7 +94,7 @@ main.page-menu .page-menu__content.puzzle-dashboard {
   justify-content: flex-start !important;
   padding: 18px 14px 22px !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: inset 0 1px 0 #ffffff0f !important;
   color: #ffffffa6 !important;
   font-size: 12px !important;
@@ -122,22 +122,22 @@ main.page-menu .page-menu__content.puzzle-dashboard {
 
 /* Tint the number, not the tile: three solid gold and green tiles were far too loud. */
 .puzzle-dashboard .puzzle-dashboard__metric--perf {
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--perf strong {
-  color: var(--cdc-orange-dark) !important;
+  color: var(--lr-ext-orange-dark) !important;
 }
 
 /* Lichess paints the tile with ---first (solved first try) and ---win (solved at all): shown
  * as a bar along the bottom edge instead. */
 .puzzle-dashboard .puzzle-dashboard__metric--win {
   position: relative;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--win strong {
-  color: var(--cdc-good-hover) !important;
+  color: var(--lr-ext-good-hover) !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--win::after {
@@ -148,18 +148,18 @@ main.page-menu .page-menu__content.puzzle-dashboard {
   border-radius: 2px;
   background: linear-gradient(
     to right,
-    var(--cdc-good) 0% var(---first),
-    var(--cdc-green-darker) var(---first) var(---win),
-    var(--cdc-red-dark) var(---win) 100%
+    var(--lr-ext-good) 0% var(---first),
+    var(--lr-ext-green-darker) var(---first) var(---win),
+    var(--lr-ext-red-dark) var(---win) 100%
   );
 }
 
 html[dir='rtl'] .puzzle-dashboard .puzzle-dashboard__metric--win::after {
   background: linear-gradient(
     to left,
-    var(--cdc-good) 0% var(---first),
-    var(--cdc-green-darker) var(---first) var(---win),
-    var(--cdc-red-dark) var(---win) 100%
+    var(--lr-ext-good) 0% var(---first),
+    var(--lr-ext-green-darker) var(---first) var(---win),
+    var(--lr-ext-red-dark) var(---win) 100%
   );
 }
 
@@ -175,13 +175,13 @@ html[dir='rtl'] .puzzle-dashboard .puzzle-dashboard__metric--win::after {
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix[href] {
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow) !important;
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   color: #ffffffcc !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix[href]:hover {
-  background: var(--cdc-btn-primary-hover) !important;
+  background: var(--lr-ext-btn-primary-hover) !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix__text {
@@ -203,8 +203,8 @@ html[dir='rtl'] .puzzle-dashboard .puzzle-dashboard__metric--win::after {
   width: 22px;
   height: 22px;
   background: currentcolor;
-  -webkit-mask: var(--cdc-play) center / contain no-repeat;
-  mask: var(--cdc-play) center / contain no-repeat;
+  -webkit-mask: var(--lr-ext-play) center / contain no-repeat;
+  mask: var(--lr-ext-play) center / contain no-repeat;
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix[href] icon::before {
@@ -223,13 +223,13 @@ html[dir='rtl'] .puzzle-dashboard .puzzle-dashboard__metric--win::after {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
 }
 
 .puzzle-dashboard .puzzle-dashboard__metric--fix:not([href]) icon::before {
   width: 28px;
   height: 28px;
-  background: var(--cdc-accent-hover);
-  -webkit-mask-image: var(--cdc-check);
-  mask-image: var(--cdc-check);
+  background: var(--lr-ext-accent-hover);
+  -webkit-mask-image: var(--lr-ext-check);
+  mask-image: var(--lr-ext-check);
 }

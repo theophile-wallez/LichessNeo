@@ -58,7 +58,7 @@ describe('hookSoundPlayer', () => {
     const urls = new Map(scenario.names.map(name => [name, `blob:${name}`]));
     expect(hookSoundPlayer(sound, urls, createSession())).toBe(true);
     expect([...sound.paths]).toEqual(scenario.paths);
-    expect(sound.cdcHooked).toBe(scenario.hooked);
+    expect(sound.lrExtHooked).toBe(scenario.hooked);
     const results: string[] = [];
     for (const step of scenario.steps) {
       if (step.board) {
@@ -78,11 +78,11 @@ describe('hookSoundPlayer', () => {
 
   it('only adds the sounds when another copy of the script hooked the player first', () => {
     const { sound, calls } = fakeSoundPlayer();
-    sound.cdcHooked = true;
+    sound.lrExtHooked = true;
     const { play } = sound;
     const session = createSession();
     expect(hookSoundPlayer(sound, new Map([['capture', 'blob:capture']]), session)).toBe(false);
-    expect(sound.paths.get('cdc-capture')).toBe('blob:capture');
+    expect(sound.paths.get('lr-ext-capture')).toBe('blob:capture');
     expect(sound.play).toBe(play);
     expect(session.playOurs).toBeNull();
     expect(calls).toEqual([]);
@@ -93,7 +93,7 @@ describe('hookSoundPlayer', () => {
     hookSoundPlayer(sound, new Map([['move-self', 'blob:move-self']]), createSession());
     sound.move({ san: 'exd5', ply: 3 });
     sound.move({ san: 'O-O', ply: 9 });
-    expect(played(calls)).toEqual(['capture', 'cdc-move-self']);
+    expect(played(calls)).toEqual(['capture', 'lr-ext-move-self']);
   });
 
   it('plays a capture’s sound for a capture that checks, when the pack has no check sound', () => {
@@ -103,7 +103,7 @@ describe('hookSoundPlayer', () => {
     sound.move({ san: 'Qh5+', ply: 7 });
     // Lichess plays its own check sound beside it: the pack has none to replace it.
     sound.play('check');
-    expect(played(calls)).toEqual(['cdc-capture', 'move', 'check']);
+    expect(played(calls)).toEqual(['lr-ext-capture', 'move', 'check']);
   });
 
   it('remembers the board after each move, for the next one', async () => {
@@ -143,7 +143,7 @@ describe('hookSoundPlayer', () => {
       sound.saySan?.('Nf3', true);
       expect(played(calls)).toEqual([]);
       await vi.advanceTimersByTimeAsync(20);
-      expect(played(calls)).toEqual(['cdc-move-opponent']);
+      expect(played(calls)).toEqual(['lr-ext-move-opponent']);
       // Lichess still speaks it.
       expect(calls[0]).toEqual(['saySan', 'Nf3', true]);
     });
@@ -154,7 +154,7 @@ describe('hookSoundPlayer', () => {
       sound.move({ san: 'Kxd2', ply: 1 });
       sound.saySan?.('Kxd2', true);
       await vi.advanceTimersByTimeAsync(20);
-      expect(played(calls)).toEqual(['cdc-capture']);
+      expect(played(calls)).toEqual(['lr-ext-capture']);
     });
 
     it('plays nothing for a move being played, whose SAN is spoken without cutting', async () => {
@@ -173,7 +173,7 @@ describe('hookSoundPlayer', () => {
       await Promise.resolve();
       sound.move({ san: 'Kd2', ply: 1 });
       await vi.advanceTimersByTimeAsync(20);
-      expect(played(calls)).toEqual(['cdc-move-self']);
+      expect(played(calls)).toEqual(['lr-ext-move-self']);
     });
 
     it('leaves the music theme to Lichess', async () => {

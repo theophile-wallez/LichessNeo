@@ -10,8 +10,8 @@ import { jump } from './navigation.ts';
 
 export function jumpToClass(session: Session, analysis: Analysis, button: HTMLElement): void {
   const { view } = session;
-  const color = COLORS.find(each => each === button.dataset.cdcColor);
-  const moveClass = MOVE_CLASSES.find(each => each === button.dataset.cdcClass);
+  const color = COLORS.find(each => each === button.dataset.lrExtColor);
+  const moveClass = MOVE_CLASSES.find(each => each === button.dataset.lrExtClass);
   if (!view.review || !color || !moveClass) return;
   const move = nextOfClass(view.review.moves, { color, moveClass }, analysis.node.ply);
   if (!move) return;

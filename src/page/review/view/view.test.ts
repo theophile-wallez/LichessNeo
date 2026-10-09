@@ -103,10 +103,10 @@ describe('markup', () => {
 
   it('names the opening’s family in bold, then its variation', () => {
     expect(openingMarkup({ name: 'Ruy Lopez: Morphy Defense: Norwegian', eco: 'C70' }).value).toBe(
-      '<i class="cdc-opening__icon"></i><span class="cdc-opening__eco">C70</span><span class="cdc-opening__name"><b>Ruy Lopez</b>: Morphy Defense: Norwegian</span>',
+      '<i class="lr-ext-opening__icon"></i><span class="lr-ext-opening__eco">C70</span><span class="lr-ext-opening__name"><b>Ruy Lopez</b>: Morphy Defense: Norwegian</span>',
     );
     expect(openingMarkup({ name: 'Start <position>', eco: '' }).value).toBe(
-      '<i class="cdc-opening__icon"></i><span class="cdc-opening__name"><b>Start &lt;position&gt;</b></span>',
+      '<i class="lr-ext-opening__icon"></i><span class="lr-ext-opening__name"><b>Start &lt;position&gt;</b></span>',
     );
   });
 });
@@ -141,7 +141,7 @@ describe('the board', () => {
     expect(landingSquare('e8a8', 'O-O-O+')).toBe('c8');
     expect(
       badgeMarkup({ moveClass: 'best', uci: 'g1f3', san: 'Nf3', orientation: 'white' }).value,
-    ).toMatch(/^<div class="cdc-badge" style="left:75%;top:62\.5%">/);
+    ).toMatch(/^<div class="lr-ext-badge" style="left:75%;top:62\.5%">/);
   });
 
   it('puts the badge at the top right of the square as shown', () => {
@@ -237,8 +237,8 @@ describe('the coach', () => {
     const input: AvatarInput = { coachId: 2, moveClass: 'blunder', react: true, label: 'Coach' };
     const markup = avatarMarkup(input).value;
     expect(avatarMarkup(input).value).toBe(markup);
-    expect(markup).toContain('cdc-coach__avatar--react');
-    expect(markup).toContain('data-cdc-coach-id="2" data-cdc-mood="shock"');
+    expect(markup).toContain('lr-ext-coach__avatar--react');
+    expect(markup).toContain('data-lr-ext-coach-id="2" data-lr-ext-mood="shock"');
   });
 });
 

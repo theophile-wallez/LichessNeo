@@ -12,8 +12,8 @@ const legacy = LegacySchema.parse(legacyJson);
 // The original's markup had line breaks between some tags, which draw nothing.
 const tight = (markup: string): string => markup.replaceAll(/>\s+</g, '><');
 
-const marks = (): string => queryOne(document, 'svg.cdc-marks', SVGElement)?.innerHTML ?? '';
-const layer = (): string => queryOne(document, '#cdc-shapes', HTMLElement)?.innerHTML ?? '';
+const marks = (): string => queryOne(document, 'svg.lr-ext-marks', SVGElement)?.innerHTML ?? '';
+const layer = (): string => queryOne(document, '#lr-ext-shapes', HTMLElement)?.innerHTML ?? '';
 
 /** What a new drawer puts in its layer on the board `setUp` draws. */
 function drawOn(setUp: () => void): string {
@@ -77,8 +77,8 @@ describe('createShapeDrawer', () => {
     document.body.innerHTML =
       '<main><div class="main-board"><cg-container></cg-container></div></main>';
     draw();
-    expect(document.querySelector('#cdc-shapes')).toBeNull();
-    expect(document.documentElement.classList.contains('cdc-shapes')).toBe(false);
+    expect(document.querySelector('#lr-ext-shapes')).toBeNull();
+    expect(document.documentElement.classList.contains('lr-ext-shapes')).toBe(false);
   });
 
   it('asks for a redraw when the label is due', () => {
@@ -87,13 +87,13 @@ describe('createShapeDrawer', () => {
     Object.assign(window, { site: { analysis: { node: SCHOLAR_MATE } } });
     renderBoard({ orientation: 'white' });
     draw();
-    expect(layer()).toContain('cdc-mate__badge');
+    expect(layer()).toContain('lr-ext-mate__badge');
     vi.advanceTimersByTime(2499);
     expect(redraw).not.toHaveBeenCalled();
     vi.advanceTimersByTime(1);
     expect(redraw).toHaveBeenCalledOnce();
     draw();
-    expect(layer()).toContain('cdc-mate__label');
+    expect(layer()).toContain('lr-ext-mate__label');
   });
 
   // The original compared the squares, not where they're drawn, and left the

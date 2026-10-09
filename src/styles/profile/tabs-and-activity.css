@@ -9,9 +9,9 @@
 
 .user-show > .user-show__blog .ublog-post-card {
   overflow: hidden;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
   transition:
     background-color 0.15s,
@@ -20,9 +20,9 @@
 }
 
 .user-show > .user-show__blog .ublog-post-card--link:hover {
-  border-color: var(--cdc-card-border-hover) !important;
-  background: var(--cdc-card-hover) !important;
-  box-shadow: var(--cdc-card-shadow-hover) !important;
+  border-color: var(--lr-ext-card-border-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
+  box-shadow: var(--lr-ext-card-shadow-hover) !important;
 }
 
 .user-show > .user-show__blog .ublog-post-card__image {
@@ -38,9 +38,9 @@
   box-sizing: border-box;
   height: auto !important;
   padding: 5px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px;
-  background: var(--cdc-grey-950) !important;
+  background: var(--lr-ext-grey-950) !important;
   background-image: none !important;
   box-shadow: none !important;
   font-size: inherit !important;
@@ -57,8 +57,8 @@
   border: none !important;
   border-radius: 8px !important;
   background: transparent !important;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 15px;
   font-weight: 700;
   text-transform: none;
@@ -69,21 +69,21 @@
 
 .user-show > .angles .nm-item:hover {
   background: #ffffff0a !important;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show > .angles .nm-item.active {
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   box-shadow: 0 1px 3px #00000080;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The raised tab slides (see "Sliding tabs" in theme/). */
-.user-show > .angles[data-cdc-tabs] {
-  --cdc-tab-radius: 8px;
+.user-show > .angles[data-lr-ext-tabs] {
+  --lr-ext-tab-radius: 8px;
 }
 
-.user-show > .angles[data-cdc-tabs] .nm-item.active {
+.user-show > .angles[data-lr-ext-tabs] .nm-item.active {
   background: transparent !important;
   box-shadow: none;
 }
@@ -93,7 +93,7 @@
   margin-inline-start: 8px !important;
   padding: 1px 6px;
   border-radius: 999px;
-  background: var(--cdc-accent);
+  background: var(--lr-ext-accent);
   color: #fff;
   font-size: 11px;
   font-weight: 800;
@@ -102,9 +102,9 @@
 
 .user-show > .angle-content {
   box-sizing: border-box;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 14px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
   overflow: hidden;
 }
 
@@ -128,15 +128,15 @@
 }
 
 .user-show .activity section + section {
-  border-top: 1px solid var(--cdc-border);
+  border-top: 1px solid var(--lr-ext-border);
   margin-top: 6px !important;
   padding-top: 18px !important;
 }
 
 .user-show .activity section h2 {
   margin: 0 0 12px !important;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 12px !important;
   font-weight: 800 !important;
   letter-spacing: 0.07em;
@@ -163,7 +163,7 @@
   padding: 11px 12px !important;
   border-radius: 10px;
   background: #ffffff05;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   line-height: 1.4;
   transition: background-color 0.15s !important;
 }
@@ -184,7 +184,7 @@
   border: none !important;
   border-radius: 9px !important;
   background-color: #ffffff0f !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 19px !important;
   line-height: 1 !important;
 }
@@ -203,20 +203,20 @@
   display: block;
   width: 24px;
   height: 24px;
-  background: var(--cdc-puzzle-icon) center / contain no-repeat;
+  background: var(--lr-ext-puzzle-icon) center / contain no-repeat;
 }
 
 .user-show .activity .entry > icon[data-icon='\e00c'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
+  --lr-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e05a'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
+  --lr-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e00b'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
+  --lr-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e06f'] {
-  --cdc-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
+  --lr-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
 }
 
 /* Take the rest of the row: sized to content, a long line wrapped under the icon. The first
@@ -242,12 +242,12 @@
 }
 
 .user-show .activity .entry a {
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }
 
 .user-show .activity .entry a:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 /* The rating reached, as a chip. */
@@ -256,8 +256,8 @@
   padding: 1px 7px;
   border-radius: 5px;
   background: #ffffff0f;
-  color: var(--cdc-text-dim);
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim);
+  font-family: var(--lr-ext-font) !important;
   font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -267,7 +267,7 @@
 /* Sub-entries (the tournaments, studies and teams behind a line). */
 .user-show .activity .sub {
   margin: 6px 0 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px !important;
 }
 
@@ -281,7 +281,7 @@
 
 .user-show .activity .sub .is-gold,
 .user-show .activity .sub .is-gold a {
-  color: var(--cdc-orange-dark) !important;
+  color: var(--lr-ext-orange-dark) !important;
 }
 
 .user-show .activity .sub [data-icon]::before {
@@ -294,7 +294,7 @@
   gap: 10px;
   margin-inline-start: auto;
   padding-inline-start: 12px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px !important;
 }
 
@@ -311,8 +311,8 @@
   min-width: 22px;
   padding: 2px 6px !important;
   border-radius: 5px !important;
-  background: color-mix(in srgb, var(--cdc-score) 18%, transparent);
-  color: var(--cdc-score);
+  background: color-mix(in srgb, var(--lr-ext-score) 18%, transparent);
+  color: var(--lr-ext-score);
   font-size: 12px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -321,15 +321,15 @@
 
 /* Tinted, not filled: a full green pill glared on the dark card. */
 .user-show .activity win strong {
-  --cdc-score: var(--cdc-good);
+  --lr-ext-score: var(--lr-ext-good);
 }
 
 .user-show .activity draw strong {
-  --cdc-score: var(--cdc-grey-200);
+  --lr-ext-score: var(--lr-ext-grey-200);
 }
 
 .user-show .activity loss strong {
-  --cdc-score: var(--cdc-red);
+  --lr-ext-score: var(--lr-ext-red);
 }
 
 /* Phones: the score goes under the text. */

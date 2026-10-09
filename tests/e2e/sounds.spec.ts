@@ -24,7 +24,7 @@ test('a pack’s sounds are in Lichess’s sound player, as blobs of audio', asy
     SOUND_NAMES.map(name => `${OUR_SOUND_PREFIX}${name}`).toSorted(),
   );
   for (const url of sounds.values()) expect(url).toMatch(/^blob:https:\/\/lichess\.org\//);
-  expect(await readPageGlobal(page, ['site', 'sound', 'cdcHooked'])).toBe(true);
+  expect(await readPageGlobal(page, ['site', 'sound', 'lrExtHooked'])).toBe(true);
 
   // The bytes made it across: each blob is a whole WAV of the example pack.
   const heads = await page.evaluate(
@@ -46,7 +46,7 @@ test('a pack’s sounds are in Lichess’s sound player, as blobs of audio', asy
 
 test('stepping back through a game sounds like stepping forward', async ({ page }) => {
   await openLichess(page, FINISHED_GAME.path);
-  await page.locator('.cdc-review__close').click();
+  await page.locator('.lr-ext-review__close').click();
   await expect.poll(async () => (await ourSounds(page)).size).toBe(SOUND_NAMES.length);
   await recordSounds(page);
   const step = async (key: string, ply: number): Promise<string[]> => {

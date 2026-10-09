@@ -10,9 +10,9 @@ import { arrowsMarkup, fillsMarkup, mateMarkup } from './render.ts';
 import { reviewArrows, type ReviewArrow } from './review-arrows.ts';
 import { readShapes, type Arrow } from './svg-shapes.ts';
 
-// Our shapes on the main board: fills under the pieces (.cdc-marks), arrows
-// and checkmate over them (#cdc-shapes). Chessground's own are hidden by the
-// stylesheet once html.cdc-shapes is set.
+// Our shapes on the main board: fills under the pieces (.lr-ext-marks), arrows
+// and checkmate over them (#lr-ext-shapes). Chessground's own are hidden by the
+// stylesheet once html.lr-ext-shapes is set.
 
 export interface DrawOptions {
   readonly mateLabel: string;
@@ -36,12 +36,13 @@ function reviewArrow({ orig, dest, brush }: ReviewArrow, whiteAtBottom: boolean)
 }
 
 const isReviewing = (root: Element): boolean =>
-  root.classList.contains('cdc-review-moves') || root.classList.contains('cdc-review-summary');
+  root.classList.contains('lr-ext-review-moves') ||
+  root.classList.contains('lr-ext-review-summary');
 
 /** Returns the draw: cheap when nothing changed, as it runs on most mutations. */
 export function createShapeDrawer({ mateLabel, redraw }: DrawOptions): () => void {
-  const layer = createElement('div', { id: 'cdc-shapes' });
-  const marks = createSvgElement('svg', { class: 'cdc-marks', viewBox: '0 0 8 8' });
+  const layer = createElement('div', { id: 'lr-ext-shapes' });
+  const marks = createSvgElement('svg', { class: 'lr-ext-marks', viewBox: '0 0 8 8' });
   const matePhase = createMateClock(redraw);
   let drawn: string | null = null;
 
@@ -54,7 +55,7 @@ export function createShapeDrawer({ mateLabel, redraw }: DrawOptions): () => voi
     const root = document.documentElement;
     // `add` would write the class even when it's there, and a write on <html>
     // has Chrome check the whole page's styles.
-    root.classList.toggle('cdc-shapes', true);
+    root.classList.toggle('lr-ext-shapes', true);
 
     const wrap = container.closest('.cg-wrap');
     const whiteAtBottom = !wrap || wrapOrientation(wrap) === 'white';
@@ -63,7 +64,7 @@ export function createShapeDrawer({ mateLabel, redraw }: DrawOptions): () => voi
     const node = currentNode();
     const king = matedKing(node);
     const phase = matePhase(node, king);
-    root.classList.toggle('cdc-mate', king !== null);
+    root.classList.toggle('lr-ext-mate', king !== null);
 
     const mate =
       king && phase !== 'none'

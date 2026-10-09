@@ -38,7 +38,7 @@ test('the background worker starts, and tells a tab its files haven’t changed'
   await openLichess(page, '/');
   const answer = await evaluateInContentScript(
     page,
-    "chrome.runtime.sendMessage({ type: 'cdc:dev-check' })",
+    "chrome.runtime.sendMessage({ type: 'lr-ext:dev-check' })",
   );
   expect(DevCheckResponseSchema.parse(answer)).toEqual({ reload: false });
   expect(errors).toEqual([]);

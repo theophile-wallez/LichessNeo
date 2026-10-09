@@ -68,8 +68,8 @@ function showTimes(moves: readonly HTMLElement[], spent: readonly number[]): voi
   for (const [i, move] of moves.entries()) {
     const time = spent[i];
     if (time === undefined) continue;
-    setData(move, 'cdcTime', formatSpent(time));
-    setStyleProperty(move, '--cdc-time', (time / longest).toFixed(3));
+    setData(move, 'lrExtTime', formatSpent(time));
+    setStyleProperty(move, '--lr-ext-time', (time / longest).toFixed(3));
   }
 }
 
@@ -107,7 +107,7 @@ const sameDrawn = (drawn: Drawn, previous: Drawn | null): boolean =>
   drawn.lastMove === previous.lastMove &&
   drawn.spent === previous.spent &&
   // snabbdom may have put back a move without our attributes.
-  drawn.lastMove?.dataset.cdcTime !== undefined;
+  drawn.lastMove?.dataset.lrExtTime !== undefined;
 
 // Into the game it was asked for, which may no longer be the one shown.
 async function loadTimes(times: GameTimes): Promise<void> {
@@ -149,7 +149,7 @@ export function createMoveTimes(): MoveTimes {
     if (missing) retryWhenDue(game);
     if (!game.spent || game.spent.length === 0) return;
     showTimes(moves, game.spent);
-    setData(list, 'cdcTimes', '');
+    setData(list, 'lrExtTimes', '');
     // Lagging times are drawn again as each retry comes back.
     drawn = missing && game.tries < MAX_TRIES ? null : shape;
   }

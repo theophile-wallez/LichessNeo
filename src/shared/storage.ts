@@ -1,38 +1,39 @@
 import type { z } from 'zod/mini';
 import { parseJson } from './json.ts';
+import { prefixed } from './prefix.ts';
 
-// Everything we keep in the page's storage, prefixed `cdc` so it can't clash
-// with Lichess's own keys.
+// Everything we keep in the page's storage, prefixed (prefix.ts) so it can't
+// clash with Lichess's own keys.
 export const StorageKey = {
   // Which imported pack each part shows (content/packs).
-  board: 'cdc-board',
-  pieces: 'cdc-pieces',
-  sounds: 'cdc-sounds',
-  coach: 'cdc-coach',
+  board: prefixed('board'),
+  pieces: prefixed('pieces'),
+  sounds: prefixed('sounds'),
+  coach: prefixed('coach'),
   // The home hero coach's last entrance, never played twice running (content/coach/mascot).
-  coachEntrance: 'cdc-coach-entrance',
-  boardZoom: 'cdc-board-zoom',
+  coachEntrance: prefixed('coach-entrance'),
+  boardZoom: prefixed('board-zoom'),
   // '1' while the sidebar is folded to its icons (content/sidebar/collapse.ts).
-  sidebarCollapsed: 'cdc-sidebar-collapsed',
+  sidebarCollapsed: prefixed('sidebar-collapsed'),
   // The signed-in player's most played speed and its rating (content/sidebar/account-rating.ts).
-  accountRating: 'cdc-account-rating',
+  accountRating: prefixed('account-rating'),
   // The home's speed cards: each speed's rating, curve and last pool (content/pages/speed-cards).
-  speedCards: 'cdc-speed-cards',
-  ratingChartRange: 'cdc-rchart:range',
+  speedCards: prefixed('speed-cards'),
+  ratingChartRange: prefixed('rchart:range'),
   reviewCache: (gameId: string, positions: number, version: number): string =>
-    `cdc-review:${gameId}:${positions}:v${version}`,
+    `${prefixed('review')}:${gameId}:${positions}:v${version}`,
   reviewProgress: (gameId: string, positions: number, version: number): string =>
-    `cdc-review-progress:${gameId}:${positions}:v${version}`,
+    `${prefixed('review-progress')}:${gameId}:${positions}:v${version}`,
   // The review caches, least recently opened first.
-  reviewIndex: 'cdc-review-index',
+  reviewIndex: prefixed('review-index'),
   // The extension's settings, in chrome.storage.sync rather than the page's (content/settings).
-  settings: 'cdc-settings',
+  settings: prefixed('settings'),
 } satisfies Record<string, string | ((...args: never[]) => string)>;
 
 export const SessionKey = {
-  lateReload: 'cdc-late-reload',
-  gameStarted: (gameId: string): string => `cdc-started:${gameId}`,
-  gameIntro: (gameId: string): string => `cdc-intro:${gameId}`,
+  lateReload: prefixed('late-reload'),
+  gameStarted: (gameId: string): string => `${prefixed('started')}:${gameId}`,
+  gameIntro: (gameId: string): string => `${prefixed('intro')}:${gameId}`,
 } satisfies Record<string, string | ((...args: never[]) => string)>;
 
 type Area = 'local' | 'session';

@@ -15,7 +15,7 @@
     min-width: 0 !important;
     max-width: none !important;
     border-radius: 12px 12px 0 0 !important;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow: inset 0 -1px 0 #ffffff14 !important;
     transition: box-shadow 0.2s !important;
   }
@@ -30,7 +30,7 @@
 
   /* ---- Shut: one row --- */
 
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) auto;
     /* Lichess names its own areas for these blocks. */
@@ -38,29 +38,29 @@
     align-content: center;
     align-items: center;
     column-gap: 14px;
-    height: var(--cdc-head-h);
+    height: var(--lr-ext-head-h);
     /* The cog's room at the right. */
     padding: 0 64px 0 18px;
     overflow: hidden;
   }
 
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__metas {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__metas {
     display: contents !important;
   }
 
-  html:not(.cdc-puzzle-menu-open)
+  html:not(.lr-ext-puzzle-menu-open)
     main.puzzle
     .puzzle__side
     > :not(.puzzle__side__metas, .puzzle__side__user),
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__metas > .infos:not(.puzzle),
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__user > p,
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__user__rating:empty,
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__user__rating__casual,
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__streak__info {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__metas > .infos:not(.puzzle),
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__user > p,
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__user__rating:empty,
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__user__rating__casual,
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__streak__info {
     display: none !important;
   }
 
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__metas .infos.puzzle {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__metas .infos.puzzle {
     grid-area: puzzle;
     min-width: 0;
     margin: 0 !important;
@@ -68,7 +68,7 @@
     border: none !important;
   }
 
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__user {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__user {
     grid-area: user !important;
     display: flex !important;
     flex-direction: column;
@@ -78,21 +78,21 @@
     border: none !important;
   }
 
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__user__rating strong {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__user__rating strong {
     gap: 8px;
     font-size: 22px !important;
   }
 
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__user .rp {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__user .rp {
     font-size: 14px !important;
   }
 
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__user > a.button {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__user > a.button {
     padding: 8px 16px !important;
     font-size: 13px;
   }
 
-  html:not(.cdc-puzzle-menu-open) main.puzzle .puzzle__side__user .cmn-toggle-wrap {
+  html:not(.lr-ext-puzzle-menu-open) main.puzzle .puzzle__side__user .cmn-toggle-wrap {
     margin: 0 !important;
     font-size: 13px;
     white-space: nowrap;
@@ -100,31 +100,31 @@
 
   /* ---- Open: the whole card --- */
 
-  html.cdc-puzzle-menu-open main.puzzle .puzzle__side {
+  html.lr-ext-puzzle-menu-open main.puzzle .puzzle__side {
     display: flex !important;
     flex-direction: column;
-    max-height: var(--cdc-board);
+    max-height: var(--lr-ext-board);
     padding: 0 18px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #ffffff26 transparent;
     border-radius: 12px !important;
-    background: var(--cdc-bg-raised) !important;
+    background: var(--lr-ext-bg-raised) !important;
     box-shadow:
-      inset 0 0 0 1px var(--cdc-card-border),
+      inset 0 0 0 1px var(--lr-ext-card-border),
       0 18px 44px #000000a6 !important;
   }
 
-  html.cdc-puzzle-menu-open main.puzzle .puzzle__side > * + * {
+  html.lr-ext-puzzle-menu-open main.puzzle .puzzle__side > * + * {
     border-top: 1px solid #ffffff14 !important;
   }
 
   /* Room for the cog. */
-  html.cdc-puzzle-menu-open main.puzzle .puzzle__side > :first-child {
+  html.lr-ext-puzzle-menu-open main.puzzle .puzzle__side > :first-child {
     padding-inline-end: 44px !important;
   }
 
-  main.puzzle .cdc-puzzle-menu {
+  main.puzzle .lr-ext-puzzle-menu {
     z-index: 4;
     display: flex;
     grid-area: side;
@@ -134,29 +134,29 @@
     justify-content: center;
     width: 36px;
     height: 36px;
-    margin: calc((var(--cdc-head-h) - 36px) / 2) 14px 0 0;
+    margin: calc((var(--lr-ext-head-h) - 36px) / 2) 14px 0 0;
     padding: 0;
     border: none;
     border-radius: 8px;
-    background: var(--cdc-btn-grey);
-    box-shadow: var(--cdc-btn-grey-shadow);
-    color: var(--cdc-grey-200);
+    background: var(--lr-ext-btn-grey);
+    box-shadow: var(--lr-ext-btn-grey-shadow);
+    color: var(--lr-ext-grey-200);
     cursor: pointer;
   }
 
-  main.puzzle .cdc-puzzle-menu:hover {
-    background: var(--cdc-btn-grey-hover);
+  main.puzzle .lr-ext-puzzle-menu:hover {
+    background: var(--lr-ext-btn-grey-hover);
     color: #fff;
   }
 
-  main.puzzle .cdc-puzzle-menu[data-cdc-open] {
-    background: var(--cdc-grey-850);
+  main.puzzle .lr-ext-puzzle-menu[data-lr-ext-open] {
+    background: var(--lr-ext-grey-850);
     box-shadow: inset 0 2px 5px #00000080;
     color: #fff;
   }
 
   /* The board tools' cog (styles/game/board-extras.css). */
-  main.puzzle .cdc-puzzle-menu::before {
+  main.puzzle .lr-ext-puzzle-menu::before {
     content: '';
     width: 20px;
     height: 20px;
@@ -168,7 +168,7 @@
 
 /* The cog only has a card to open in one panel. */
 @media (max-width: 1259.29px) {
-  main.puzzle .cdc-puzzle-menu {
+  main.puzzle .lr-ext-puzzle-menu {
     display: none;
   }
 }

@@ -24,10 +24,10 @@ export function classSvg(moveClass: MoveClass): SafeHtml {
   return svg;
 }
 
-/** The icon as a CSS image (`--cdc-class-icon` on the move list's moves, the opening's name). */
+/** The icon as a CSS image (`--lr-ext-class-icon` on the move list's moves, the opening's name). */
 export const classImage = (moveClass: MoveClass): string =>
   `url("data:image/svg+xml,${encodeURIComponent(classSvg(moveClass).value)}")`;
 
 /** The icon in its wrapper, as the panel shows it. */
 export const classIcon = (moveClass: MoveClass): SafeHtml =>
-  html`<span class="cdc-cls-icon">${classSvg(moveClass)}</span>`;
+  html`<span class="lr-ext-cls-icon">${classSvg(moveClass)}</span>`;

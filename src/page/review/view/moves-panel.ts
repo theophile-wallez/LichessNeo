@@ -44,8 +44,8 @@ function bubbleMarkup(
   if (!view.review) return bubbleTitle(`${ui.analysing} ${Math.round(view.progress * 100)}%`);
   if (!analysis.path) return briefMarkup(session, analysis, view.review);
   if (shown)
-    return html`<div class="cdc-bubble__row">${classIcon('best')}
-          <p class="cdc-bubble__title">${verdictTitle('best', analysis.node.san ?? '', language)}</p>
+    return html`<div class="lr-ext-bubble__row">${classIcon('best')}
+          <p class="lr-ext-bubble__title">${verdictTitle('best', analysis.node.san ?? '', language)}</p>
           ${evalChip(shown.before)}</div>`;
   if (!comment) {
     // No verdict yet: the move waits for the engine, as the game's own moves do
@@ -78,20 +78,20 @@ function lineButton(session: Session, analysis: Analysis, move: JudgedMove | nul
   const label = onLine
     ? html`${svgIcon('prev')}${language.ui.back}`
     : html`${svgIcon('play')}${language.ui.lines.show}`;
-  return html`<button class="cdc-bubble__line" data-cdc="line">${label}</button>`;
+  return html`<button class="lr-ext-bubble__line" data-lr-ext="line">${label}</button>`;
 }
 
 /** Under an error's comment, the button that has the player look for a better move. */
 const retryButton = (session: Session, analysis: Analysis, move: JudgedMove | null): SafeHtml =>
   canRetry(move, analysis)
-    ? html`<button class="cdc-bubble__line cdc-bubble__retry" data-cdc="retry">${svgIcon('retry')}${session.language.ui.retry.button}</button>`
+    ? html`<button class="lr-ext-bubble__line lr-ext-bubble__retry" data-lr-ext="retry">${svgIcon('retry')}${session.language.ui.retry.button}</button>`
     : html``;
 
 function actionsMarkup(session: Session, analysis: Analysis, move: JudgedMove | null): SafeHtml {
   const line = lineButton(session, analysis, move);
   const retry = retryButton(session, analysis, move);
   return line.value || retry.value
-    ? html`<div class="cdc-bubble__actions">${retry}${line}</div>`
+    ? html`<div class="lr-ext-bubble__actions">${retry}${line}</div>`
     : html``;
 }
 
@@ -101,7 +101,7 @@ const CONTROLS: readonly (PanelAction & IconName)[] = ['first', 'prev', 'play', 
 function controlsMarkup(playing: boolean): SafeHtml {
   const buttons = CONTROLS.map(action => {
     const icon: IconName = action === 'play' && playing ? 'pause' : action;
-    return html`<button class="cdc-btn" data-cdc="${action}">${svgIcon(icon)}</button>`;
+    return html`<button class="lr-ext-btn" data-lr-ext="${action}">${svgIcon(icon)}</button>`;
   });
   return html`${buttons}`;
 }
@@ -154,7 +154,7 @@ function coachMarkup(session: Session, analysis: Analysis, spoken: Spoken): Safe
           actions: comment ? actionsMarkup(session, analysis, move) : html``,
         });
   const time = comment && !(retry && retried) ? timeTag(session, comment) : '';
-  return html`<div class="cdc-coach">${avatar}${time}<div class="cdc-bubble">${bubble}</div></div>`;
+  return html`<div class="lr-ext-coach">${avatar}${time}<div class="lr-ext-bubble">${bubble}</div></div>`;
 }
 
 function navMarkup(session: Session, analysis: Analysis, spoken: Spoken): SafeHtml {
@@ -165,10 +165,10 @@ function navMarkup(session: Session, analysis: Analysis, spoken: Spoken): SafeHt
   const atEnd = !retried && !stepPath(session, analysis, 1);
   const canBest =
     !retried && !line && (shown !== null || (move?.best && !GOOD.has(move.moveClass)));
-  return html`<div class="cdc-review__nav">
-        <button class="cdc-btn${view.explain ? ' cdc-btn--on' : ''}" data-cdc="explain" ${retried ? 'disabled' : ''}>${svgIcon('bulb')}${ui.explain}</button>
-        <button class="cdc-btn${shown ? ' cdc-btn--on' : ''}" data-cdc="best" ${canBest ? '' : 'disabled'}>${svgIcon('star')}${ui.best}</button>
-        <button class="cdc-btn cdc-btn--green" data-cdc="next" ${atEnd ? 'disabled' : ''}>${svgIcon('arrow')}${ui.next}</button>
+  return html`<div class="lr-ext-review__nav">
+        <button class="lr-ext-btn${view.explain ? ' lr-ext-btn--on' : ''}" data-lr-ext="explain" ${retried ? 'disabled' : ''}>${svgIcon('bulb')}${ui.explain}</button>
+        <button class="lr-ext-btn${shown ? ' lr-ext-btn--on' : ''}" data-lr-ext="best" ${canBest ? '' : 'disabled'}>${svgIcon('star')}${ui.best}</button>
+        <button class="lr-ext-btn lr-ext-btn--green" data-lr-ext="next" ${atEnd ? 'disabled' : ''}>${svgIcon('arrow')}${ui.next}</button>
       </div>`;
 }
 
@@ -186,12 +186,14 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   setHtml(
     elements.panel,
     html`${header(language.ui.review, 'summary', language)}
-      <div class="cdc-review__graph-slot"></div>${moments}
+      <div class="lr-ext-review__graph-slot"></div>${moments}
       ${coachMarkup(session, analysis, spoken)}
       ${navMarkup(session, analysis, spoken)}`,
   );
   // The graph is kept across renders (its listeners, its first draw): put it back in its slot.
-  queryOne(elements.panel, '.cdc-review__graph-slot', HTMLElement)?.replaceWith(elements.graphBox);
+  queryOne(elements.panel, '.lr-ext-review__graph-slot', HTMLElement)?.replaceWith(
+    elements.graphBox,
+  );
   setHtml(elements.controls, controlsMarkup(view.playing !== null));
   movesGraph(session, analysis, true);
   showMoment(elements.panel, scrolled);

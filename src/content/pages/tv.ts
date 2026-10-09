@@ -26,7 +26,7 @@ function isReload(): boolean {
 export function markStillIntro(): void {
   if (!TV_PATH.test(location.pathname)) return;
   if (comesFromTv(document.referrer) || isReload())
-    document.documentElement.classList.toggle('cdc-tv-still', true);
+    document.documentElement.classList.toggle('lr-ext-tv-still', true);
 }
 
 /** A channel's tooltip, shown where only its tile is (below 1260px). */
@@ -39,14 +39,18 @@ export function channelTip(name: string | undefined, champion: string | undefine
 // into view once the column has a height. The column is server-rendered and
 // TV reloads for its next game, so doing it once is enough.
 export function syncChannels(): void {
-  const list = queryOne(document, 'main.tv-single .subnav__inner:not([data-cdc-tv])', HTMLElement);
+  const list = queryOne(
+    document,
+    'main.tv-single .subnav__inner:not([data-lr-ext-tv])',
+    HTMLElement,
+  );
   if (!list || list.clientHeight === 0) return;
-  setData(list, 'cdcTv', '');
+  setData(list, 'lrExtTv', '');
   for (const channel of queryAll(list, 'a.tv-channel', HTMLElement)) {
     const name = channel.querySelector('strong')?.textContent.trim();
     const champion = channel.querySelector('.champion')?.textContent.replace(/\s+/g, ' ').trim();
     const tip = channelTip(name, champion);
-    if (tip !== null) setData(channel, 'cdcTip', tip);
+    if (tip !== null) setData(channel, 'lrExtTip', tip);
   }
   const active = queryOne(list, 'a.tv-channel.active', HTMLElement);
   if (active) list.scrollTop = active.offsetTop - (list.clientHeight - active.offsetHeight) / 2;

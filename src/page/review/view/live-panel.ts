@@ -35,6 +35,6 @@ export function renderLive(session: Session, analysis: Analysis): void {
   });
   setHtml(
     session.elements.panel,
-    html`<div class="cdc-coach">${avatar}<div class="cdc-bubble">${bubble}</div></div>`,
+    html`<div class="lr-ext-coach">${avatar}<div class="lr-ext-bubble">${bubble}</div></div>`,
   );
 }

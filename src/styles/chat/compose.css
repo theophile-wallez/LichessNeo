@@ -10,19 +10,19 @@
   border: none !important;
   border-radius: 18px !important;
   outline: none !important;
-  background: var(--cdc-bg-raised) !important;
-  box-shadow: inset 0 0 0 1px var(--cdc-card-border);
-  color: var(--cdc-text-strong) !important;
+  background: var(--lr-ext-bg-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text-strong) !important;
   font-size: 13px;
   transition: box-shadow 0.15s !important;
 }
 
 .mchat .mchat__say:focus {
-  box-shadow: inset 0 0 0 1.5px var(--cdc-accent);
+  box-shadow: inset 0 0 0 1.5px var(--lr-ext-accent);
 }
 
 .mchat .mchat__say::placeholder {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 /* Lichess's quick replies, as chips with their whole words (its labels are "GG", "WP"…);
@@ -39,9 +39,9 @@
   padding: 0 11px;
   border: none !important;
   border-radius: 13px;
-  background: var(--cdc-bg-raised) !important;
-  box-shadow: inset 0 0 0 1px var(--cdc-card-border);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-bg-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text) !important;
   font-size: 0 !important;
   line-height: 26px;
   opacity: 1 !important;
@@ -58,7 +58,7 @@
 }
 
 .mchat .mchat__presets span:not(.disabled):hover {
-  background: var(--cdc-accent) !important;
+  background: var(--lr-ext-accent) !important;
   color: #fff !important;
 }
 

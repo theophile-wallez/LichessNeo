@@ -21,21 +21,21 @@
           "at": 0,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         },
         {
           "at": 10,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         },
         {
           "at": 1020,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         }
       ]
@@ -48,21 +48,21 @@
           "at": 0,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         },
         {
           "at": 10,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         },
         {
           "at": 1020,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         }
       ]
@@ -76,21 +76,21 @@
           "at": 0,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         },
         {
           "at": 10,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         },
         {
           "at": 1020,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         }
       ]
@@ -107,14 +107,14 @@
           "at": 0,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         },
         {
           "at": 10,
           "event": "send",
           "message": {
-            "type": "cdc:dev-check"
+            "type": "lr-ext:dev-check"
           }
         },
         {

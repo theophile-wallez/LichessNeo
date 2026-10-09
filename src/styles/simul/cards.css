@@ -3,15 +3,15 @@
 /* Tile (::before) and piece (::after), then name and time control, with host
  * and player count as the footer. The simul's link (its ::after) covers the card. */
 main.simul-list .slist tbody tr:not(.create) {
-  --cdc-piece: var(---white-king);
+  --lr-ext-piece: var(---white-king);
   position: relative;
   isolation: isolate;
   display: grid;
   grid-template: 'tile head head' 1fr 'host host players' auto / 58px minmax(0, 1fr) auto;
   padding: 18px 16px 12px;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 12px;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     border-color 0.15s,
@@ -20,27 +20,27 @@ main.simul-list .slist tbody tr:not(.create) {
 }
 
 main.simul-list .slist tbody tr:not(.create):hover {
-  border-color: color-mix(in srgb, var(--cdc-simul) 55%, transparent);
-  background: var(--cdc-card-hover) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-simul) 55%, transparent);
+  background: var(--lr-ext-card-hover) !important;
   box-shadow: 0 6px 18px #00000059;
   transform: translateY(-3px);
 }
 
 /* A different piece on each card, so a page of them looks like a set. */
 main.simul-list .slist tbody tr:nth-child(6n + 2) {
-  --cdc-piece: var(---white-queen);
+  --lr-ext-piece: var(---white-queen);
 }
 main.simul-list .slist tbody tr:nth-child(6n + 3) {
-  --cdc-piece: var(---white-knight);
+  --lr-ext-piece: var(---white-knight);
 }
 main.simul-list .slist tbody tr:nth-child(6n + 4) {
-  --cdc-piece: var(---white-rook);
+  --lr-ext-piece: var(---white-rook);
 }
 main.simul-list .slist tbody tr:nth-child(6n + 5) {
-  --cdc-piece: var(---white-bishop);
+  --lr-ext-piece: var(---white-bishop);
 }
 main.simul-list .slist tbody tr:nth-child(6n + 6) {
-  --cdc-piece: var(---white-pawn);
+  --lr-ext-piece: var(---white-pawn);
 }
 
 /* A 4x4 board in the section's colors, two more stacked behind it that fan out
@@ -53,13 +53,13 @@ main.simul-list .slist tbody tr:not(.create)::before {
   height: 50px;
   margin: 8px 0 0;
   border-radius: 9px;
-  background: repeating-conic-gradient(var(--cdc-simul) 0 25%, var(--cdc-simul-2) 0 50%) 0 0 / 50%
-    50%;
+  background: repeating-conic-gradient(var(--lr-ext-simul) 0 25%, var(--lr-ext-simul-2) 0 50%) 0 0 /
+    50% 50%;
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
-    4px -4px 0 -1px color-mix(in srgb, var(--cdc-simul-2) 70%, var(--cdc-grey-900)),
-    8px -8px 0 -2px color-mix(in srgb, var(--cdc-simul-2) 40%, var(--cdc-grey-900)),
+    4px -4px 0 -1px color-mix(in srgb, var(--lr-ext-simul-2) 70%, var(--lr-ext-grey-900)),
+    8px -8px 0 -2px color-mix(in srgb, var(--lr-ext-simul-2) 40%, var(--lr-ext-grey-900)),
     0 4px 10px #00000040;
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -70,8 +70,8 @@ main.simul-list .slist tbody tr:not(.create):hover::before {
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
-    6px -6px 0 -1px color-mix(in srgb, var(--cdc-simul-2) 70%, var(--cdc-grey-900)),
-    12px -12px 0 -2px color-mix(in srgb, var(--cdc-simul-2) 40%, var(--cdc-grey-900)),
+    6px -6px 0 -1px color-mix(in srgb, var(--lr-ext-simul-2) 70%, var(--lr-ext-grey-900)),
+    12px -12px 0 -2px color-mix(in srgb, var(--lr-ext-simul-2) 40%, var(--lr-ext-grey-900)),
     0 6px 14px #00000059;
   transform: rotate(-5deg);
 }
@@ -85,16 +85,16 @@ main.simul-list .slist tbody tr:not(.create)::after {
   inset-inline-start: 16px;
   width: 50px;
   height: 50px;
-  background: var(--cdc-piece) center / 78% no-repeat;
+  background: var(--lr-ext-piece) center / 78% no-repeat;
   filter: drop-shadow(0 2px 2px #00000080);
   pointer-events: none;
 }
 
 main.simul-list .slist tbody tr:not(.create):hover::after {
-  animation: cdc-simul-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: lr-ext-simul-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes cdc-simul-hop {
+@keyframes lr-ext-simul-hop {
   40% {
     transform: translateY(-9px) rotate(-6deg);
   }
@@ -139,7 +139,7 @@ main.simul-list .slist .name {
 
 main.simul-list .slist .setup {
   overflow: hidden;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
   text-overflow: ellipsis;
@@ -169,7 +169,7 @@ main.simul-list .slist td.host br {
 
 main.simul-list .slist td.host .user-link {
   overflow: hidden;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 13px;
   font-weight: 700;
   text-overflow: ellipsis;
@@ -188,7 +188,7 @@ main.simul-list .slist td.host .uflair {
 
 main.simul-list .slist td.host strong {
   flex: none;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -210,7 +210,7 @@ main.simul-list .slist td.players {
   margin-inline-start: 10px;
   padding: 3px 10px !important;
   border-radius: 999px;
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   color: #fff;
   font-size: 13px;
   font-weight: 800;
@@ -219,7 +219,7 @@ main.simul-list .slist td.players {
 
 main.simul-list .slist td.players::before {
   margin: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
 }
 
@@ -236,7 +236,7 @@ main.simul-list .slist tr.create {
 }
 
 main.simul-list .slist tr.create:hover {
-  border-color: color-mix(in srgb, var(--cdc-accent) 60%, transparent);
+  border-color: color-mix(in srgb, var(--lr-ext-accent) 60%, transparent);
 }
 
 main.simul-list .slist tr.create td {
@@ -255,10 +255,10 @@ main.simul-list .slist tr.create td::before {
   background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp')
     center / contain no-repeat;
   filter: drop-shadow(0 6px 10px #0006);
-  animation: cdc-simul-float 4s ease-in-out infinite;
+  animation: lr-ext-simul-float 4s ease-in-out infinite;
 }
 
-@keyframes cdc-simul-float {
+@keyframes lr-ext-simul-float {
   50% {
     transform: translateY(-5px) rotate(-3deg);
   }

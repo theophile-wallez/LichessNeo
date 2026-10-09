@@ -11,7 +11,7 @@ interface BoxInput {
   readonly width: number;
   readonly height: number;
 }
-const shown = (): Element | null => document.querySelector('.cdc-tooltip.cdc-tooltip--on');
+const shown = (): Element | null => document.querySelector('.lr-ext-tooltip.lr-ext-tooltip--on');
 
 function addButton(
   attrs: string,
@@ -55,7 +55,7 @@ afterEach(() => {
 describe('tooltips', () => {
   it.each(legacy.scenarios)('places it as the original did: $name', ({ tip, box, html }) => {
     const button = addButton('', box);
-    button.dataset.cdcTip = tip;
+    button.dataset.lrExtTip = tip;
     hover(button);
     vi.advanceTimersByTime(250);
     expect(shown()?.outerHTML).toBe(html);
@@ -64,7 +64,7 @@ describe('tooltips', () => {
   it('moves the title out of the way, keeping it as the label', () => {
     const button = addButton('title="Resign"');
     hover(button);
-    expect(button.outerHTML).toBe('<button data-cdc-tip="Resign" aria-label="Resign"></button>');
+    expect(button.outerHTML).toBe('<button data-lr-ext-tip="Resign" aria-label="Resign"></button>');
   });
 
   it("shows none on the home's start buttons, nor the browser's", () => {
@@ -122,7 +122,7 @@ describe('tooltips', () => {
     vi.stubGlobal('matchMedia', () => ({ matches: false }));
     document.body.insertAdjacentHTML(
       'beforeend',
-      '<main><a class="tv-channel" data-cdc-tip="Blitz"></a></main>',
+      '<main><a class="tv-channel" data-lr-ext-tip="Blitz"></a></main>',
     );
     const channel = document.querySelector('a.tv-channel');
     if (!channel) throw new Error('no channel');

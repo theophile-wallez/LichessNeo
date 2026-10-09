@@ -76,11 +76,11 @@ settings (`import-section.ts`, `import-form.ts`), all in `src/content/packs/`:
   hides a part whose pack is picked until it's read, 2 s at most. Only the
   picked packs are read then; the menu and the settings read the others when
   they open.
-- `apply.ts` names the board in `data-cdc-board` (a theme's id, `pack`, or
+- `apply.ts` names the board in `data-lr-ext-board` (a theme's id, `pack`, or
   none for Lichess's) and writes one stylesheet: a pack's pieces override the
-  variables Lichess draws its own from, its board comes as `--cdc-board-img`.
+  variables Lichess draws its own from, its board comes as `--lr-ext-board-img`.
   The sounds go to the page world as bytes
-  (`cdc:sounds`), where `src/page/sounds` puts them in Lichess's player. With
+  (`lr-ext:sounds`), where `src/page/sounds` puts them in Lichess's player. With
   no pack, Lichess's player is left alone.
 
 ## Types
@@ -123,14 +123,15 @@ settings (`import-section.ts`, `import-form.ts`), all in `src/content/packs/`:
   (`src/shared/html.ts`): every interpolated value is escaped unless it's
   `html` output itself. `trustedHtml` is for constants only.
 - **Never move or remove Lichess's DOM nodes**: it renders with snabbdom,
-  which breaks if its nodes move. Add ours (`cdc-` prefixed) beside them,
+  which breaks if its nodes move. Add ours (`lr-ext-` prefixed) beside them,
   set attributes, and let CSS rearrange.
 - **Write only what changes**: `setData` and `setStyleProperty` skip
   unchanged values, as every write wakes the page's observers. Prefer
   `classList.toggle(name, force)` to `add`, which writes even when the class
   is there.
 - Everything of ours (classes, ids, data attributes, CSS variables, storage
-  keys) starts with `cdc`. Storage keys live in `StorageKey` / `SessionKey`.
+  keys, messages) starts with `lr-ext`, `PREFIX` in `src/shared/prefix.ts`.
+  Storage keys live in `StorageKey` / `SessionKey`.
 
 ## Styles
 

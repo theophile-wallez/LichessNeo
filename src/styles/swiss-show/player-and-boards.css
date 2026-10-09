@@ -2,9 +2,9 @@
 
 /* A standing row's card: name and numbers, then their games by round. */
 main.swiss .swiss__player-info {
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
@@ -17,7 +17,7 @@ main.swiss .swiss__player-info .close {
   height: 28px;
   border-radius: 6px;
   opacity: 1 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
 }
 
@@ -30,24 +30,24 @@ html[dir='rtl'] main.swiss .swiss__player-info .close {
 }
 
 main.swiss .swiss__player-info .close:hover {
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   color: #fff !important;
 }
 
 main.swiss .swiss__player-info .stats h2 {
   padding-block: 16px 14px !important;
   padding-inline: 20px 48px !important;
-  border-bottom: 1px solid var(--cdc-card-border) !important;
+  border-bottom: 1px solid var(--lr-ext-card-border) !important;
   background: transparent !important;
   box-shadow: none !important;
   color: #fff;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 18px !important;
   font-weight: 800 !important;
 }
 
 main.swiss .swiss__player-info .stats h2 .rank {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 main.swiss .swiss__player-info .stats h2 .user-link {
@@ -55,7 +55,7 @@ main.swiss .swiss__player-info .stats h2 .user-link {
 }
 
 main.swiss .swiss__player-info .stats h2 .rating {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
   font-weight: 600;
 }
@@ -67,12 +67,12 @@ main.swiss .swiss__player-info .stats table {
 }
 
 main.swiss .swiss__player-info .stats tr {
-  box-shadow: inset 0 -1px 0 var(--cdc-card-border);
+  box-shadow: inset 0 -1px 0 var(--lr-ext-card-border);
 }
 
 main.swiss .swiss__player-info .stats th {
   padding: 7px 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
   text-align: start;
@@ -93,23 +93,23 @@ main.swiss .swiss__player-info .sublist {
 main.swiss .swiss__player-info .sublist tr,
 main.swiss .swiss__player-info .sublist tr:nth-child(odd) {
   background: transparent !important;
-  box-shadow: inset 0 -1px 0 var(--cdc-card-border);
+  box-shadow: inset 0 -1px 0 var(--lr-ext-card-border);
 }
 
 main.swiss .swiss__player-info .sublist tr:hover {
-  background: var(--cdc-card-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
 }
 
 main.swiss .swiss__player-info .sublist :is(th, td) {
   padding: 7px 6px !important;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 13px;
 }
 
 main.swiss .swiss__player-info .sublist th {
   padding-inline-start: 20px !important;
   border: none !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-weight: 700;
 }
 
@@ -121,15 +121,15 @@ main.swiss .swiss__player-info .sublist td:last-child {
 }
 
 main.swiss .swiss__player-info .sublist tr.win td:last-child {
-  color: var(--cdc-good);
+  color: var(--lr-ext-good);
 }
 
 main.swiss .swiss__player-info .sublist tr.loss td:last-child {
-  color: var(--cdc-red-dark);
+  color: var(--lr-ext-red-dark);
 }
 
 main.swiss .swiss__player-info .sublist .outcome {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-style: italic;
 }
 
@@ -141,9 +141,9 @@ main.swiss .swiss__board {
   container-type: inline-size;
   isolation: isolate;
   overflow: hidden;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
   transition:
     border-color 0.15s,
@@ -151,8 +151,8 @@ main.swiss .swiss__board {
 }
 
 main.swiss .swiss__board:hover {
-  border-color: var(--cdc-card-border-hover);
-  box-shadow: var(--cdc-card-shadow-hover) !important;
+  border-color: var(--lr-ext-card-border-hover);
+  box-shadow: var(--lr-ext-card-shadow-hover) !important;
 }
 
 main.swiss .swiss__boards {
@@ -178,8 +178,8 @@ main.swiss .swiss__board .mini-game__user strong {
   margin: 0 !important;
   padding: 1px 6px;
   border-radius: 4px;
-  background: var(--cdc-bg-raised);
-  color: var(--cdc-text-dim);
+  background: var(--lr-ext-bg-raised);
+  color: var(--lr-ext-text-dim);
   font-size: 11px;
   font-weight: 800;
 }
@@ -217,7 +217,7 @@ main.swiss .swiss__board .mini-game__user .name .uflair {
 
 main.swiss .swiss__board .mini-game__user .rating {
   flex: none;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
 }
@@ -226,33 +226,33 @@ main.swiss .swiss__board :is(.mini-game__clock, .mini-game__result) {
   flex: none;
   padding: 2px 7px;
   border-radius: 4px;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
   font-size: 13px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
 main.swiss .swiss__board .mini-game__clock--white {
-  background: var(--cdc-grey-300);
-  color: color-mix(in srgb, var(--cdc-grey-800) 60%, transparent) !important;
+  background: var(--lr-ext-grey-300);
+  color: color-mix(in srgb, var(--lr-ext-grey-800) 60%, transparent) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--white.clock--run {
   background: #fff;
-  color: var(--cdc-grey-800) !important;
+  color: var(--lr-ext-grey-800) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--black {
-  background: var(--cdc-grey-850);
-  color: var(--cdc-grey-400) !important;
+  background: var(--lr-ext-grey-850);
+  color: var(--lr-ext-grey-400) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--black.clock--run {
-  background: var(--cdc-grey-950);
+  background: var(--lr-ext-grey-950);
   color: #fff !important;
 }
 
 main.swiss .swiss__board .mini-game__result {
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   color: #fff;
 }

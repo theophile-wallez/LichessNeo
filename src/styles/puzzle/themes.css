@@ -40,7 +40,7 @@ main.puzzle .puzzle__themes__list__entry a {
 }
 
 main.puzzle .puzzle__themes__list__entry.strike a {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
 }
 
 main.puzzle .puzzle__themes__votes {
@@ -51,7 +51,7 @@ main.puzzle .puzzle__themes__votes {
 main.puzzle .puzzle__themes__lock {
   flex: none !important;
   width: 28px;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
   opacity: 0.6 !important;
 }
@@ -62,7 +62,7 @@ main.puzzle .puzzle__themes__vote {
   height: 28px;
   border-radius: 6px;
   background: #ffffff0d;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
   transition:
     background 0.15s,
@@ -70,12 +70,12 @@ main.puzzle .puzzle__themes__vote {
 }
 
 main.puzzle .puzzle__themes__vote.vote-up:is(:hover, .active) {
-  background: var(--cdc-btn-primary) !important;
+  background: var(--lr-ext-btn-primary) !important;
   color: #fff !important;
 }
 
 main.puzzle .puzzle__themes__vote.vote-down:is(:hover, .active) {
-  background: var(--cdc-btn-red) !important;
+  background: var(--lr-ext-btn-red) !important;
   color: #fff !important;
 }
 
@@ -85,17 +85,17 @@ main.puzzle .puzzle__themes__selector {
 }
 
 main.puzzle .puzzle__themes__study {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
   transition: color 0.15s !important;
 }
 
 main.puzzle .puzzle__themes__study:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__config {
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
 }
 
 /* Puzzles played this session: rounded green and red chips. */
@@ -107,11 +107,11 @@ main.puzzle .puzzle__session a {
 }
 
 main.puzzle .puzzle__session a.result-true {
-  background: var(--cdc-btn-primary) !important;
+  background: var(--lr-ext-btn-primary) !important;
 }
 
 main.puzzle .puzzle__session a.result-false {
-  background: var(--cdc-btn-red) !important;
+  background: var(--lr-ext-btn-red) !important;
 }
 
 main.puzzle .puzzle__session a.current {
@@ -119,15 +119,15 @@ main.puzzle .puzzle__session a.current {
 }
 
 /* Next puzzle: Lichess paints it in the link color (our accent), so it looked solved.
-   A grey chip with the dashboard's replay triangle (--cdc-play, dashboard/) instead. */
+   A grey chip with the dashboard's replay triangle (--lr-ext-play, dashboard/) instead. */
 main.puzzle .puzzle__session a.session-new {
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text) !important;
 }
 
 main.puzzle .puzzle__session a.session-new:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
   color: #fff !important;
 }
 
@@ -136,6 +136,6 @@ main.puzzle .puzzle__session a.session-new::before {
   width: 10px;
   height: 10px;
   background: currentColor;
-  -webkit-mask: var(--cdc-play) center / contain no-repeat;
-  mask: var(--cdc-play) center / contain no-repeat;
+  -webkit-mask: var(--lr-ext-play) center / contain no-repeat;
+  mask: var(--lr-ext-play) center / contain no-repeat;
 }

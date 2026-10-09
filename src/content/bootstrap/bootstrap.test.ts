@@ -10,7 +10,7 @@ import legacy from './fixtures/legacy.json' with { type: 'json' };
 beforeEach(() => {
   localStorage.clear();
   sessionStorage.clear();
-  delete document.documentElement.dataset['cdcCoach'];
+  delete document.documentElement.dataset['lrExtCoach'];
 });
 afterEach(() => setReadyState('complete'));
 
@@ -20,8 +20,8 @@ describe('assets', () => {
       runtime: { getURL: (path: string) => `chrome-extension://id/${path}` },
     });
     assets.start();
-    expect(document.documentElement.dataset.cdcAssets).toBe('chrome-extension://id/');
-    delete document.documentElement.dataset.cdcAssets;
+    expect(document.documentElement.dataset.lrExtAssets).toBe('chrome-extension://id/');
+    delete document.documentElement.dataset.lrExtAssets;
   });
 });
 
@@ -47,10 +47,10 @@ describe('coach choice', () => {
     'reads $stored (random $random) as the original did',
     ({ stored, random, dataset, storedAfter }) => {
       vi.spyOn(Math, 'random').mockReturnValue(random);
-      if (stored !== null) localStorage.setItem('cdc-coach', stored);
+      if (stored !== null) localStorage.setItem('lr-ext-coach', stored);
       coachChoice.start();
-      expect(document.documentElement.dataset['cdcCoach']).toBe(dataset);
-      expect(localStorage.getItem('cdc-coach')).toBe(storedAfter);
+      expect(document.documentElement.dataset['lrExtCoach']).toBe(dataset);
+      expect(localStorage.getItem('lr-ext-coach')).toBe(storedAfter);
     },
   );
 });
@@ -62,11 +62,11 @@ describe('late reload', () => {
       const reload = vi.fn<() => void>();
       vi.stubGlobal('location', { reload });
       vi.spyOn(Date, 'now').mockReturnValue(now);
-      if (stored !== null) sessionStorage.setItem('cdc-late-reload', stored);
+      if (stored !== null) sessionStorage.setItem('lr-ext-late-reload', stored);
       setReadyState(ReadyStateSchema.parse(readyState));
       expect(reloadIfInjectedLate()).toBe(reloaded);
       expect(reload).toHaveBeenCalledTimes(reloads);
-      expect(sessionStorage.getItem('cdc-late-reload')).toBe(storedAfter);
+      expect(sessionStorage.getItem('lr-ext-late-reload')).toBe(storedAfter);
     },
   );
 });

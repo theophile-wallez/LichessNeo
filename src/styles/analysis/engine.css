@@ -1,7 +1,7 @@
 /* ---- Engine --- */
 
 /* Registered so the win bar slides from one score to the next. */
-@property --cdc-white-share {
+@property --lr-ext-white-share {
   syntax: '<percentage>';
   inherits: false;
   initial-value: 50%;
@@ -18,8 +18,8 @@
     gap: 10px;
     height: 60px !important;
     padding: 0 8px 0 12px !important;
-    border-bottom: 1px solid var(--cdc-border);
-    background: var(--cdc-bg-panel-dark) !important;
+    border-bottom: 1px solid var(--lr-ext-border);
+    background: var(--lr-ext-bg-panel-dark) !important;
   }
 
   /* The score on a chip in the leading side's color (content/analysis/eval-gauge.ts). */
@@ -33,27 +33,27 @@
       inset 0 1px 0 #ffffff1f,
       0 0 0 1px #ffffff1a;
     color: #fff !important;
-    font-family: var(--cdc-font) !important;
+    font-family: var(--lr-ext-font) !important;
     font-size: 21px !important;
     font-weight: 800 !important;
     line-height: 1 !important;
     text-align: left;
   }
 
-  :is(main.analyse, main.puzzle) .ceval[data-cdc-lead='white'] pearl {
+  :is(main.analyse, main.puzzle) .ceval[data-lr-ext-lead='white'] pearl {
     background: linear-gradient(#ffffff, #d9d9d9);
     box-shadow:
       inset 0 -1px 0 #0000001f,
       0 1px 3px #00000066;
-    color: var(--cdc-grey-900) !important;
+    color: var(--lr-ext-grey-900) !important;
   }
 
   :is(main.analyse, main.puzzle) .ceval .engine {
     flex: 1;
     min-width: 0;
     overflow: hidden;
-    color: var(--cdc-text-dim) !important;
-    font-family: var(--cdc-font) !important;
+    color: var(--lr-ext-text-dim) !important;
+    font-family: var(--lr-ext-font) !important;
     font-size: 12px !important;
     line-height: 17px !important;
     white-space: nowrap;
@@ -76,7 +76,7 @@
     padding: 0 5px;
     border-radius: 3px;
     background: #ffffff1a !important;
-    color: var(--cdc-text) !important;
+    color: var(--lr-ext-text) !important;
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -96,7 +96,7 @@
     padding: 0 !important;
     border-radius: 5px;
     background: none !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 18px;
   }
 
@@ -112,28 +112,28 @@
     height: 2px !important;
   }
 
-  :is(main.analyse, main.puzzle) .ceval[data-cdc-lead] .bar {
+  :is(main.analyse, main.puzzle) .ceval[data-lr-ext-lead] .bar {
     display: none !important;
   }
 
   /* Then the win bar: White's chances from the left. */
-  :is(main.analyse, main.puzzle) .ceval[data-cdc-lead]::after {
+  :is(main.analyse, main.puzzle) .ceval[data-lr-ext-lead]::after {
     content: '';
     position: absolute;
     inset: auto 0 -1px;
     height: 6px;
     background: linear-gradient(
       to right,
-      #f2f2f2 var(--cdc-white-share),
-      var(--cdc-grey-700) var(--cdc-white-share)
+      #f2f2f2 var(--lr-ext-white-share),
+      var(--lr-ext-grey-700) var(--lr-ext-white-share)
     );
-    transition: --cdc-white-share 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    transition: --lr-ext-white-share 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
   :is(main.analyse, main.puzzle) .pv_box {
     flex: none;
-    border-bottom: 1px solid var(--cdc-border);
-    background: var(--cdc-bg-panel-dark);
+    border-bottom: 1px solid var(--lr-ext-border);
+    background: var(--lr-ext-bg-panel-dark);
   }
 
   :is(main.analyse, main.puzzle) .pv_box .pv {
@@ -144,8 +144,8 @@
     padding: 0 12px !important;
     overflow: hidden;
     border: none !important;
-    color: var(--cdc-text-dim);
-    font-family: var(--cdc-font) !important;
+    color: var(--lr-ext-text-dim);
+    font-family: var(--lr-ext-font) !important;
     font-size: 13px !important;
     line-height: 30px !important;
     white-space: nowrap;
@@ -171,7 +171,7 @@
   }
 
   :is(main.analyse, main.puzzle) .pv_box .pv-san {
-    color: var(--cdc-text);
+    color: var(--lr-ext-text);
     font-weight: 700;
   }
 
@@ -191,7 +191,7 @@
   }
 
   :is(main.analyse, main.puzzle) .pv_box .pv:first-child .pv-san {
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     font-weight: 600;
   }
 
@@ -199,7 +199,7 @@
     flex: none;
     padding: 3px 10px 3px 30px;
     border-radius: 7px;
-    background: var(--cdc-bg-raised)
+    background: var(--lr-ext-bg-raised)
       url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01--f4fba3.svg') 8px center
       / 16px no-repeat;
     box-shadow: inset 0 0 0 1px #ffffff1f;

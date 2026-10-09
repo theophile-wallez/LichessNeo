@@ -19,33 +19,34 @@ const LOCALE_NUMBER = new Intl.NumberFormat(document.documentElement.lang || und
 
 function curve(speed: CardSpeed, ratings: readonly number[]): SafeHtml {
   const paths = curvePaths(ratings);
-  if (!paths) return html`<div class="cdc-speed__curve cdc-speed__curve--empty"></div>`;
-  const fill = `cdc-speed-fill-${speed}`;
-  return html`<svg class="cdc-speed__curve" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true">
+  if (!paths) return html`<div class="lr-ext-speed__curve lr-ext-speed__curve--empty"></div>`;
+  const fill = `lr-ext-speed-fill-${speed}`;
+  return html`<svg class="lr-ext-speed__curve" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true">
     <defs>
       <linearGradient id="${fill}" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0" class="cdc-speed__stop" />
-        <stop offset="1" class="cdc-speed__stop cdc-speed__stop--end" />
+        <stop offset="0" class="lr-ext-speed__stop" />
+        <stop offset="1" class="lr-ext-speed__stop lr-ext-speed__stop--end" />
       </linearGradient>
     </defs>
-    <path class="cdc-speed__area" d="${paths.area}" fill="url(#${fill})" />
-    <path class="cdc-speed__line" d="${paths.line}" />
+    <path class="lr-ext-speed__area" d="${paths.area}" fill="url(#${fill})" />
+    <path class="lr-ext-speed__line" d="${paths.line}" />
   </svg>`;
 }
 
 function rating(card: Card, texts: SpeedTexts): SafeHtml {
-  if (card.games === 0) return html`<div class="cdc-speed__rating cdc-speed__rating--none">–</div>`;
-  return html`<div class="cdc-speed__rating">
+  if (card.games === 0)
+    return html`<div class="lr-ext-speed__rating lr-ext-speed__rating--none">–</div>`;
+  return html`<div class="lr-ext-speed__rating">
     ${LOCALE_NUMBER.format(Math.round(card.rating))}
     ${card.provisional && html`<small>${texts.provisional}</small>`}
   </div>`;
 }
 
 function pools(speed: CardSpeed, last: string | undefined): SafeHtml {
-  return html`<div class="cdc-speed__pools">
+  return html`<div class="lr-ext-speed__pools">
     ${POOLS[speed].map(
       id =>
-        html`<button type="button" class="cdc-speed__pool${id === last ? ' cdc-speed__pool--last' : ''}" data-cdc-pool="${id}">
+        html`<button type="button" class="lr-ext-speed__pool${id === last ? ' lr-ext-speed__pool--last' : ''}" data-lr-ext-pool="${id}">
           ${poolLabel(id)}
         </button>`,
     )}
@@ -54,11 +55,11 @@ function pools(speed: CardSpeed, last: string | undefined): SafeHtml {
 
 function card(speed: CardSpeed, played: Card | undefined, texts: SpeedTexts): SafeHtml {
   // The rating's color on every chart of ours.
-  const color = `--cdc-speed-color: ${gameRatingColor(speed)}`;
-  return html`<article class="cdc-speed" data-cdc-speed="${speed}" style="${color}">
-    <div class="cdc-speed__top">
-      <span class="cdc-speed__name"><span>${texts.names[speed]}</span></span>
-      ${played && html`<span class="cdc-speed__games">${texts.games(played.games)}</span>`}
+  const color = `--lr-ext-speed-color: ${gameRatingColor(speed)}`;
+  return html`<article class="lr-ext-speed" data-lr-ext-speed="${speed}" style="${color}">
+    <div class="lr-ext-speed__top">
+      <span class="lr-ext-speed__name"><span>${texts.names[speed]}</span></span>
+      ${played && html`<span class="lr-ext-speed__games">${texts.games(played.games)}</span>`}
     </div>
     ${played && [rating(played, texts), curve(speed, played.history)]}
     ${pools(speed, played?.last)}
@@ -76,12 +77,12 @@ export function cardsMarkup(cards: readonly Card[] | null, texts: SpeedTexts): S
   )}`;
 }
 
-/** The section's frame, its cards drawn into `.cdc-speeds__cards`. */
+/** The section's frame, its cards drawn into `.lr-ext-speeds__cards`. */
 export const sectionMarkup = (texts: SpeedTexts): SafeHtml =>
-  html`<div class="cdc-speeds__head">
-      <h2 class="cdc-speeds__title"></h2>
-      <button type="button" class="cdc-speeds__custom">
+  html`<div class="lr-ext-speeds__head">
+      <h2 class="lr-ext-speeds__title"></h2>
+      <button type="button" class="lr-ext-speeds__custom">
         ${SETTINGS_ICON}<span>${texts.custom}</span>${CHEVRON_ICON}
       </button>
     </div>
-    <div class="cdc-speeds__cards"></div>`;
+    <div class="lr-ext-speeds__cards"></div>`;

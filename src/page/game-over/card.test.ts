@@ -24,14 +24,16 @@ describe('cardMarkup', () => {
         }),
       ),
     );
-    expect(root.querySelector('.cdc-end__card--win .cdc-end__title')?.textContent).toBe(
+    expect(root.querySelector('.lr-ext-end__card--win .lr-ext-end__title')?.textContent).toBe(
       'You beat <i>bob</i>!',
     );
-    expect(root.querySelectorAll('.cdc-end__counts > .cdc-end__count')).toHaveLength(CHIP_COUNT);
-    expect(root.querySelector('.cdc-end__reason')?.textContent).toBe('by checkmate');
-    const avatar = queryOne(root, '.cdc-coach__avatar', HTMLElement);
-    expect(avatar?.dataset.cdcCoachId).toBe('3');
-    expect(avatar?.querySelector('.cdc-coach__face')).not.toBeNull();
+    expect(root.querySelectorAll('.lr-ext-end__counts > .lr-ext-end__count')).toHaveLength(
+      CHIP_COUNT,
+    );
+    expect(root.querySelector('.lr-ext-end__reason')?.textContent).toBe('by checkmate');
+    const avatar = queryOne(root, '.lr-ext-coach__avatar', HTMLElement);
+    expect(avatar?.dataset.lrExtCoachId).toBe('3');
+    expect(avatar?.querySelector('.lr-ext-coach__face')).not.toBeNull();
   });
 
   it('leaves the reason out when the status doesn’t say', () => {
@@ -45,8 +47,8 @@ describe('cardMarkup', () => {
         }),
       ),
     );
-    expect(root.querySelector('.cdc-end__title')?.textContent).toBe('Draw');
-    expect(root.querySelector('.cdc-end__reason')).toBeNull();
+    expect(root.querySelector('.lr-ext-end__title')?.textContent).toBe('Draw');
+    expect(root.querySelector('.lr-ext-end__reason')).toBeNull();
   });
 });
 

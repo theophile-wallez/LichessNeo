@@ -22,8 +22,8 @@ test('Lichess’s own board, pieces and sounds, with no pack picked', async ({ p
   await expect(page.locator('main .main-board piece.knight.white').first()).toBeVisible();
   expect(await knightImage(page)).toMatch(LICHESS_ASSET);
   expect(await boardImage(page)).toMatch(LICHESS_ASSET);
-  await expect(page.locator('html')).not.toHaveAttribute('data-cdc-board', /./);
-  await expect(page.locator('style#cdc-packs')).toHaveCount(0);
+  await expect(page.locator('html')).not.toHaveAttribute('data-lr-ext-board', /./);
+  await expect(page.locator('style#lr-ext-packs')).toHaveCount(0);
   expect((await ourSounds(page)).size).toBe(0);
 });
 
@@ -34,7 +34,7 @@ test('a pack imported from GitHub shows its board, pieces and sounds, and stays'
   await serveRepository(context);
   await openLichess(page, '/analysis');
   await importExamplePack(page);
-  await expect(page.locator('html')).toHaveAttribute('data-cdc-board', 'pack');
+  await expect(page.locator('html')).toHaveAttribute('data-lr-ext-board', 'pack');
   await expect.poll(() => knightImage(page)).toMatch(PACK_SVG);
   await expect.poll(() => boardImage(page)).toMatch(PACK_SVG);
   await expect.poll(async () => (await ourSounds(page)).size).toBe(12);
@@ -66,7 +66,7 @@ test('Lichess’s own list hands a part back, and a removed pack is gone', async
   const board = await openPicker(page, 'board');
   await pickerTab(board, 'lichess').click();
   await lichessChoices(board).nth(2).click();
-  await expect(page.locator('html')).not.toHaveAttribute('data-cdc-board', /./);
+  await expect(page.locator('html')).not.toHaveAttribute('data-lr-ext-board', /./);
   await expect.poll(() => boardImage(page)).toMatch(LICHESS_ASSET);
   expect(await knightImage(page)).toMatch(PACK_SVG);
   await closeMenu(page);
@@ -75,7 +75,7 @@ test('Lichess’s own list hands a part back, and a removed pack is gone', async
   await expect(pickerTab(pieces, 'packs')).toHaveClass(/\bactive\b/);
   const choice = packChoice(pieces, EXAMPLE_ID);
   await choice.hover();
-  await pieces.locator('.cdc-src-remove').click();
+  await pieces.locator('.lr-ext-src-remove').click();
   await expect(choice).toHaveCount(0);
   await expect.poll(() => knightImage(page)).toMatch(LICHESS_ASSET);
   await expect.poll(async () => (await ourSounds(page)).size).toBe(0);

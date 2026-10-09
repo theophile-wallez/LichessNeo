@@ -12,7 +12,7 @@
   isolation: isolate;
   gap: 12px;
   padding: 13px 16px !important;
-  border-bottom: 1px solid var(--cdc-card-border);
+  border-bottom: 1px solid var(--lr-ext-card-border);
   background: none !important;
   box-shadow: none;
   color: #fff !important;
@@ -30,7 +30,7 @@
   height: 44px;
   margin-top: -22px;
   border-radius: 12px;
-  background: var(--cdc-btn-primary);
+  background: var(--lr-ext-btn-primary);
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
@@ -47,7 +47,7 @@
   background: #fff !important;
   opacity: 1 !important;
   filter: none !important;
-  mask: var(--cdc-practice-icon) center / 30px no-repeat;
+  mask: var(--lr-ext-practice-icon) center / 30px no-repeat;
 }
 
 .practice__side__title h1 {
@@ -57,7 +57,7 @@
 }
 
 .practice__side__title em {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px !important;
   font-style: normal;
   font-weight: 600;
@@ -69,7 +69,7 @@
 main.analyse .practice-box > .title {
   padding: 8px 14px 0 !important;
   background: transparent !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 11.5px !important;
   font-weight: 800 !important;
   letter-spacing: 0.06em;
@@ -79,11 +79,14 @@ main.analyse .practice-box > .title {
 @media (min-width: 1020px) {
   /* ---- Layout --- */
 
-  html[data-cdc-has~='practice'] main.analyse {
+  html[data-lr-ext-has~='practice'] main.analyse {
     /* Rows are shares of a definite height: without one, 1fr grows with its content
      * and the chapter list pushed the coach off the page. A small board still gets
      * a panel up to 660px tall. */
-    height: max(var(--cdc-board), min(var(--cdc-main-h, 100dvh) - var(--cdc-v-room, 56px), 660px));
+    height: max(
+      var(--lr-ext-board),
+      min(var(--lr-ext-main-h, 100dvh) - var(--lr-ext-v-room, 56px), 660px)
+    );
     row-gap: 10px !important;
     grid-template-rows: minmax(0, 1fr) auto !important;
     grid-template-areas:
@@ -94,8 +97,8 @@ main.analyse .practice-box > .title {
   /* A drill: the goal card, then the engine, moves and controls. Not keyed on
    * .practice-box alone: "practice with computer" adds it to any analysis board.
    * The tools keep 190px so the verdict isn't cut off; the chapter list gives way. */
-  html[data-cdc-has~='practice'][data-cdc-has~='practice-box'] main.analyse {
-    grid-template-rows: minmax(0, 1fr) auto minmax(190px, 1fr) var(--cdc-ctrl-h) !important;
+  html[data-lr-ext-has~='practice'][data-lr-ext-has~='practice-box'] main.analyse {
+    grid-template-rows: minmax(0, 1fr) auto minmax(190px, 1fr) var(--lr-ext-ctrl-h) !important;
     grid-template-areas:
       'gauge board side'
       'gauge board goal'
@@ -105,7 +108,7 @@ main.analyse .practice-box > .title {
 
   /* The keyboard-move input gets a row of its own, or it lands in the chapter
    * list's. Only when it's on: an empty row still costs a gap. */
-  html[data-cdc-has~='practice'][data-cdc-has~='keyboard-move'] main.analyse {
+  html[data-lr-ext-has~='practice'][data-lr-ext-has~='keyboard-move'] main.analyse {
     grid-template-rows: minmax(0, 1fr) auto auto !important;
     grid-template-areas:
       'gauge board side'
@@ -113,9 +116,9 @@ main.analyse .practice-box > .title {
       'gauge board kb' !important;
   }
 
-  html[data-cdc-has~='practice'][data-cdc-has~='practice-box'][data-cdc-has~='keyboard-move']
+  html[data-lr-ext-has~='practice'][data-lr-ext-has~='practice-box'][data-lr-ext-has~='keyboard-move']
     main.analyse {
-    grid-template-rows: minmax(0, 1fr) auto minmax(190px, 1fr) var(--cdc-ctrl-h) auto !important;
+    grid-template-rows: minmax(0, 1fr) auto minmax(190px, 1fr) var(--lr-ext-ctrl-h) auto !important;
     grid-template-areas:
       'gauge board side'
       'gauge board goal'
@@ -124,18 +127,18 @@ main.analyse .practice-box > .title {
       'gauge board kb' !important;
   }
 
-  html[data-cdc-has~='practice']
+  html[data-lr-ext-has~='practice']
     main.analyse
     > :is(.practice__side, .gamebook, .analyse__underboard, .keyboard-move) {
-    margin: 0 0 0 var(--cdc-gap) !important;
+    margin: 0 0 0 var(--lr-ext-gap) !important;
   }
 
   /* A lesson has no players: Lichess's bars would only show captured material. */
-  html[data-cdc-has~='practice'] main.analyse .study__player {
+  html[data-lr-ext-has~='practice'] main.analyse .study__player {
     display: none !important;
   }
 
-  html[data-cdc-has~='practice'] main.analyse .keyboard-move {
+  html[data-lr-ext-has~='practice'] main.analyse .keyboard-move {
     grid-area: kb !important;
     align-self: stretch !important;
     border-radius: 10px;

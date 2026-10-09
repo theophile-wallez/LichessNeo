@@ -3,12 +3,12 @@ import { packRules, setLoading, showLooks, soundFiles } from './apply.ts';
 import { fakePack, IMAGE, SOUND } from '#shared/testing/packs.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
-const style = (): HTMLStyleElement | null => document.querySelector('style#cdc-packs');
+const style = (): HTMLStyleElement | null => document.querySelector('style#lr-ext-packs');
 
 afterEach(() => {
   style()?.remove();
-  delete document.documentElement.dataset.cdcBoard;
-  delete document.documentElement.dataset.cdcLoading;
+  delete document.documentElement.dataset.lrExtBoard;
+  delete document.documentElement.dataset.lrExtLoading;
 });
 
 describe('packRules', () => {
@@ -50,12 +50,12 @@ describe('packRules', () => {
 
   it('gives the board its image, and the coordinates its colors when it has them', () => {
     expect(packRules({ board: WOOD, pieces: null })).toBe(
-      `:root{--cdc-board-img:url("${IMAGE}");--cdc-sq-light:#eeeeee;--cdc-sq-dark:#333333}\n` +
+      `:root{--lr-ext-board-img:url("${IMAGE}");--lr-ext-sq-light:#eeeeee;--lr-ext-sq-dark:#333333}\n` +
         'html body .is2d coords{---cg-ccw:#eeeeee !important;---cg-ccb:#333333 !important}',
     );
     const colorless = { ...WOOD, board: { image: IMAGE } };
     expect(packRules({ board: colorless, pieces: null })).toBe(
-      `:root{--cdc-board-img:url("${IMAGE}")}`,
+      `:root{--lr-ext-board-img:url("${IMAGE}")}`,
     );
   });
 });
@@ -65,10 +65,10 @@ describe('showLooks', () => {
     showLooks({ board: null, pieces: null });
     expect(style()).toBeNull();
     showLooks({ board: WOOD, pieces: WOOD });
-    expect(document.documentElement.dataset.cdcBoard).toBe('pack');
+    expect(document.documentElement.dataset.lrExtBoard).toBe('pack');
     expect(style()?.textContent).toBe(packRules({ board: WOOD, pieces: WOOD }));
     showLooks({ board: null, pieces: null });
-    expect(document.documentElement.dataset.cdcBoard).toBeUndefined();
+    expect(document.documentElement.dataset.lrExtBoard).toBeUndefined();
     expect(style()?.textContent).toBe('');
   });
 });
@@ -85,8 +85,8 @@ describe('soundFiles', () => {
 describe('setLoading', () => {
   it('names what the page hides, and clears it', () => {
     setLoading(['board', 'pieces']);
-    expect(document.documentElement.dataset.cdcLoading).toBe('board pieces');
+    expect(document.documentElement.dataset.lrExtLoading).toBe('board pieces');
     setLoading([]);
-    expect(document.documentElement.dataset.cdcLoading).toBeUndefined();
+    expect(document.documentElement.dataset.lrExtLoading).toBeUndefined();
   });
 });

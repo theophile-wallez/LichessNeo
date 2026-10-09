@@ -29,12 +29,12 @@ function readBar(bar: HTMLElement, step: string): Record<string, string | null> 
   const variable = (name: string): string | null => bar.style.getPropertyValue(name) || null;
   return {
     step,
-    tabs: bar.dataset.cdcTabs ?? null,
-    still: bar.dataset.cdcTabsStill ?? null,
-    x: variable('--cdc-tab-x'),
-    y: variable('--cdc-tab-y'),
-    w: variable('--cdc-tab-w'),
-    h: variable('--cdc-tab-h'),
+    tabs: bar.dataset.lrExtTabs ?? null,
+    still: bar.dataset.lrExtTabsStill ?? null,
+    x: variable('--lr-ext-tab-x'),
+    y: variable('--lr-ext-tab-y'),
+    w: variable('--lr-ext-tab-w'),
+    h: variable('--lr-ext-tab-h'),
   };
 }
 
@@ -116,18 +116,18 @@ describe('sliding tabs', () => {
     layOut(signUp, () => ({ top: 0, left: 100, width: 100, height: 40 }));
     const bars = createTabBars();
     bars.sync();
-    expect(bar.style.getPropertyValue('--cdc-tab-x')).toBe('0px');
+    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('0px');
     const click = new MouseEvent('click', { bubbles: true, cancelable: true });
     Object.defineProperty(click, 'target', { value: signUp });
     bars.onClick(click);
     await nextFrame();
-    expect(bar.style.getPropertyValue('--cdc-tab-x')).toBe('100px');
-    expect(bar.dataset.cdcTabsStill).toBeUndefined();
+    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('100px');
+    expect(bar.dataset.lrExtTabsStill).toBeUndefined();
     const back = new PageTransitionEvent('pageshow');
     Object.defineProperty(back, 'persisted', { value: true });
     bars.onPageShow(back);
     await nextFrame();
-    expect(bar.style.getPropertyValue('--cdc-tab-x')).toBe('0px');
+    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('0px');
   });
 
   it('forgets a bar Lichess removed, and starts afresh if it comes back', () => {
@@ -148,8 +148,8 @@ describe('sliding tabs', () => {
     document.body.append(bar);
     bars.sync();
     // A first placement: nothing to slide from.
-    expect(bar.dataset.cdcTabsStill).toBe('');
-    expect(bar.style.getPropertyValue('--cdc-tab-x')).toBe('100px');
+    expect(bar.dataset.lrExtTabsStill).toBe('');
+    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('100px');
   });
 });
 

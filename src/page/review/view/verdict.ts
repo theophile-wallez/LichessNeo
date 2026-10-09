@@ -81,9 +81,9 @@ function adviceMarkup(session: Session, advice: Advice | null): SafeHtml {
   if (!advice) return html``;
   const { ui, typography } = session.language;
   const praise = advice.note === 'paidOff';
-  return html`<div class="cdc-advice${praise ? ' cdc-advice--praise' : ''}">
-      <p class="cdc-advice__title">${svgIcon(praise ? 'star' : 'bulb')}${praise ? ui.clock.praiseTitle : ui.clock.tipTitle}</p>
-      <p class="cdc-advice__text">${typography(advice.text)}</p></div>`;
+  return html`<div class="lr-ext-advice${praise ? ' lr-ext-advice--praise' : ''}">
+      <p class="lr-ext-advice__title">${svgIcon(praise ? 'star' : 'bulb')}${praise ? ui.clock.praiseTitle : ui.clock.tipTitle}</p>
+      <p class="lr-ext-advice__text">${typography(advice.text)}</p></div>`;
 }
 
 /** Keeps the typing going through the renders of one comment; a new comment starts it over. */
@@ -102,23 +102,23 @@ function chancesLost(move: JudgedMove): number {
 export function timeTag(session: Session, { move, timing }: CoachComment): SafeHtml | '' {
   if (!timing) return '';
   const note = clockNote(move.moveClass, timing);
-  return html`<span class="cdc-tag cdc-tag--time${note ? ` cdc-tag--${note}` : ''}">${spentTime(timing.spent, session.language.ui.clock)}</span>`;
+  return html`<span class="lr-ext-tag lr-ext-tag--time${note ? ` lr-ext-tag--${note}` : ''}">${spentTime(timing.spent, session.language.ui.clock)}</span>`;
 }
 
 function tagsMarkup(session: Session, { move, themes }: CoachComment): SafeHtml {
   const { ui } = session.language;
   const tags = themes.map(
-    theme => html`<span class="cdc-tag cdc-tag--${theme}">${ui.themes[theme]}</span>`,
+    theme => html`<span class="lr-ext-tag lr-ext-tag--${theme}">${ui.themes[theme]}</span>`,
   );
   // A verdict from mate distances isn't about winning chances, which stay the same.
   const lost = isError(move.moveClass) && !move.slower ? chancesLost(move) : 0;
-  if (lost > 0) tags.push(html`<span class="cdc-tag cdc-tag--cost">${ui.cost(lost)}</span>`);
-  return tags.length > 0 ? html`<div class="cdc-bubble__tags">${tags}</div>` : html``;
+  if (lost > 0) tags.push(html`<span class="lr-ext-tag lr-ext-tag--cost">${ui.cost(lost)}</span>`);
+  return tags.length > 0 ? html`<div class="lr-ext-bubble__tags">${tags}</div>` : html``;
 }
 
 /** How the score moved: before, then after the move. */
 const scoreChange = (move: JudgedMove): SafeHtml =>
-  html`<span class="cdc-bubble__evals">${evalChip(move.before)}<span class="cdc-bubble__to">→</span>${evalChip(move.after)}</span>`;
+  html`<span class="lr-ext-bubble__evals">${evalChip(move.before)}<span class="lr-ext-bubble__to">→</span>${evalChip(move.after)}</span>`;
 
 /**
  * The verdict's bubble, its comment typed out as far as the typing has got.
@@ -132,9 +132,9 @@ export function verdictMarkup(
   const { language, stream } = session;
   const { move, parts } = comment;
   const said = commentMarkup(parts, { stream: stream.state, language });
-  return html`<div class="cdc-bubble__row">${classIcon(move.moveClass)}
-      <p class="cdc-bubble__title">${verdictTitle(move.moveClass, move.san, language)}</p>
+  return html`<div class="lr-ext-bubble__row">${classIcon(move.moveClass)}
+      <p class="lr-ext-bubble__title">${verdictTitle(move.moveClass, move.san, language)}</p>
       ${scoreChange(move)}</div>
-    <div class="cdc-bubble__body"><p class="cdc-bubble__sub">${said}</p>
+    <div class="lr-ext-bubble__body"><p class="lr-ext-bubble__sub">${said}</p>
       ${adviceMarkup(session, comment.advice)}${tagsMarkup(session, comment)}${actions}</div>`;
 }

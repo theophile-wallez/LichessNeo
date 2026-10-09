@@ -46,13 +46,13 @@ function summaryMarkup(input: SummaryInput): SafeHtml {
   const { review, error, language, learn } = input;
   const canStart = review !== null && !error;
   return html`${header(language.ui.review, 'normal', language)}
-      <div class="cdc-review__top">
-        ${error ? html`<p class="cdc-review__error">${error}</p>` : ''}
-        <div class="cdc-review__graph cdc-summary-graph"></div>
+      <div class="lr-ext-review__top">
+        ${error ? html`<p class="lr-ext-review__error">${error}</p>` : ''}
+        <div class="lr-ext-review__graph lr-ext-summary-graph"></div>
         ${playersMarkup(input)}
       </div>
-      <div class="cdc-review__body">${movesMarkup(input)}${radarMarkup({ profiles: profilesOf(review), names: namesOf(input), language, order: input.order })}</div>
-      <div class="cdc-review__foot"><button class="cdc-btn cdc-btn--green" data-cdc="moves" ${canStart ? '' : 'disabled'}>${language.ui.start}</button>${learn === null ? '' : html`<button class="cdc-btn cdc-review__learn" data-cdc="learn">${learn}</button>`}</div>`;
+      <div class="lr-ext-review__body">${movesMarkup(input)}${radarMarkup({ profiles: profilesOf(review), names: namesOf(input), language, order: input.order })}</div>
+      <div class="lr-ext-review__foot"><button class="lr-ext-btn lr-ext-btn--green" data-lr-ext="moves" ${canStart ? '' : 'disabled'}>${language.ui.start}</button>${learn === null ? '' : html`<button class="lr-ext-btn lr-ext-review__learn" data-lr-ext="learn">${learn}</button>`}</div>`;
 }
 
 export function renderSummary(session: Session, analysis: Analysis): void {
@@ -74,12 +74,12 @@ export function renderSummary(session: Session, analysis: Analysis): void {
     }),
   );
   watchPlayerFocus(elements.panel);
-  const graph = queryOne(elements.panel, '.cdc-summary-graph', HTMLElement);
+  const graph = queryOne(elements.panel, '.lr-ext-summary-graph', HTMLElement);
   if (!graph) return;
   if (review) mountGraph(session, analysis, { container: graph, kind: 'summary' });
   if (!review?.complete && !error)
     graph.insertAdjacentHTML(
       'afterbegin',
-      html`<span class="cdc-summary-pct">${Math.round(view.progress * 100)}%</span>`.value,
+      html`<span class="lr-ext-summary-pct">${Math.round(view.progress * 100)}%</span>`.value,
     );
 }

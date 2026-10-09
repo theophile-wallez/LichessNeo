@@ -17,7 +17,7 @@
     padding: 16px !important;
     border: none !important;
     border-radius: 16px !important;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow:
       inset 0 1px 0 #ffffff0d,
       0 10px 28px #00000033 !important;
@@ -143,7 +143,7 @@
   main.lobby .lobby__blog .ublog-post-card__image {
     grid-area: 1 / 1 / 2 / -1;
     border-radius: 10px !important;
-    box-shadow: 0 0 0 1px var(--cdc-card-border);
+    box-shadow: 0 0 0 1px var(--lr-ext-card-border);
     transition: filter 0.15s !important;
   }
 
@@ -172,7 +172,7 @@
     padding: 0 !important;
     border-radius: 0 !important;
     background: none !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px;
     font-weight: 400 !important;
     line-height: 1.4;
@@ -183,7 +183,7 @@
   main.lobby .lobby__blog .ublog-post-card .user-link {
     grid-column: 1;
     padding-inline-start: 2px !important;
-    color: var(--cdc-grey-200) !important;
+    color: var(--lr-ext-grey-200) !important;
     font-weight: 600 !important;
   }
 
@@ -216,16 +216,16 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--cdc-btn-grey);
+    background: var(--lr-ext-btn-grey);
     box-shadow:
-      var(--cdc-btn-grey-shadow),
+      var(--lr-ext-btn-grey-shadow),
       0 4px 12px #00000080;
     color: #fff;
     font-size: 18px;
   }
 
   main.lobby .lobby__blog .carousel__controls button:hover {
-    background: var(--cdc-btn-grey-hover);
+    background: var(--lr-ext-btn-grey-hover);
     color: #fff;
   }
 

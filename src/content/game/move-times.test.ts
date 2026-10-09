@@ -8,8 +8,8 @@ import legacy from './fixtures/legacy-move-times.json' with { type: 'json' };
 
 const readMoves = (): { time: string | null; share: string | null }[] =>
   queryAll(document, 'kwdb:not(.empty)', HTMLElement).map(move => ({
-    time: move.dataset.cdcTime ?? null,
-    share: move.style.getPropertyValue('--cdc-time') || null,
+    time: move.dataset.lrExtTime ?? null,
+    share: move.style.getPropertyValue('--lr-ext-time') || null,
   }));
 
 function serveExports(games: ReadonlyMap<string, unknown>): string[] {
@@ -59,7 +59,7 @@ describe('move times', () => {
     expect(urls).toEqual(scenario.requests.map(({ url }) => url));
     expect(readMoves()).toEqual(scenario.moves);
     const list = queryOne(document, 'l4x', HTMLElement);
-    expect(list?.dataset.cdcTimes !== undefined).toBe(scenario.listMarked);
+    expect(list?.dataset.lrExtTimes !== undefined).toBe(scenario.listMarked);
     const clock = scenario.clock && {
       initial: scenario.clock.initial,
       increment: scenario.clock.increment,

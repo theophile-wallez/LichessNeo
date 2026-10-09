@@ -3,7 +3,7 @@
 main.puzzle .puzzle__feedback {
   margin: 10px;
   border-radius: 12px;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   transition: background 0.2s !important;
 }
 
@@ -54,8 +54,8 @@ main.puzzle .puzzle__feedback .instruction em {
 
 /* Your turn: the same dark card for either side; a white card was the page's brightest spot. */
 main.puzzle .puzzle__feedback.play {
-  background: var(--cdc-bg-raised) !important;
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-bg-raised) !important;
+  color: var(--lr-ext-text) !important;
 }
 
 main.puzzle .puzzle__feedback.play strong {
@@ -64,35 +64,35 @@ main.puzzle .puzzle__feedback.play strong {
 
 /* Right or wrong: the card stays dark, only the badge and the title take the color. */
 main.puzzle .puzzle__feedback:is(.good, .fail) {
-  background: var(--cdc-bg-raised) !important;
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-bg-raised) !important;
+  color: var(--lr-ext-text) !important;
 }
 
 main.puzzle .puzzle__feedback.good {
-  --cdc-feedback: var(--cdc-good-hover);
-  --cdc-feedback-badge: var(--cdc-btn-primary);
+  --lr-ext-feedback: var(--lr-ext-good-hover);
+  --lr-ext-feedback-badge: var(--lr-ext-btn-primary);
 }
 
 main.puzzle .puzzle__feedback.fail {
-  --cdc-feedback: var(--cdc-red);
-  --cdc-feedback-badge: var(--cdc-btn-red);
+  --lr-ext-feedback: var(--lr-ext-red);
+  --lr-ext-feedback-badge: var(--lr-ext-btn-red);
 }
 
 main.puzzle .puzzle__feedback:is(.good, .fail) strong {
-  color: var(--cdc-feedback) !important;
+  color: var(--lr-ext-feedback) !important;
 }
 
 main.puzzle .puzzle__feedback:is(.good, .fail) em {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   opacity: 1;
 }
 
 main.puzzle .puzzle__feedback:is(.good, .fail) .icon {
   border-radius: 50%;
-  background: var(--cdc-feedback-badge);
+  background: var(--lr-ext-feedback-badge);
   box-shadow:
     inset 0 1px 0 #ffffff40,
-    0 0 0 5px color-mix(in srgb, var(--cdc-feedback) 18%, transparent);
+    0 0 0 5px color-mix(in srgb, var(--lr-ext-feedback) 18%, transparent);
   color: #fff !important;
   font-size: 30px !important;
   font-weight: 800;
@@ -118,8 +118,8 @@ main.puzzle .puzzle__feedback .view_solution .button {
   padding: 6px 12px !important;
   border: none !important;
   border-radius: 8px !important;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
   color: #fff !important;
   font-size: 14px !important;
   font-weight: 700 !important;
@@ -129,7 +129,7 @@ main.puzzle .puzzle__feedback .view_solution .button {
 }
 
 main.puzzle .puzzle__feedback .view_solution .button:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
 }
 
 /* Color pictures before the labels. The streak's lone skip button gets none. */
@@ -146,15 +146,15 @@ main.puzzle .puzzle__feedback .view_solution:not(.skip) .button::before {
   width: 20px;
   height: 20px;
   background: currentColor;
-  mask: var(--cdc-hint-icon) center / contain no-repeat;
+  mask: var(--lr-ext-hint-icon) center / contain no-repeat;
 }
 
 main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:first-child {
-  --cdc-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01.svg');
+  --lr-ext-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01.svg');
 }
 
 main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:nth-child(2) {
-  --cdc-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
+  --lr-ext-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
 }
 
 /* The streak's "skip" comes lowercase from Lichess (its uppercase buttons used to hide it). */
@@ -164,9 +164,9 @@ main.puzzle .puzzle__feedback .view_solution.skip .button::first-letter {
 
 /* The hint once shown: pressed in, not a call to action. */
 main.puzzle .puzzle__feedback .view_solution .button:not(.button-empty) {
-  background: var(--cdc-grey-850) !important;
+  background: var(--lr-ext-grey-850) !important;
   box-shadow: inset 0 2px 5px #00000080 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
 }
 
 main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:not(.button-empty)::before {
@@ -198,7 +198,7 @@ main.puzzle .puzzle__feedback.after .complete .game-over {
 }
 
 main.puzzle .puzzle__feedback.after .complete .game-over + span {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 16px;
   font-weight: 700;
 }
@@ -207,8 +207,8 @@ main.puzzle .puzzle__feedback.after .continue {
   gap: 10px;
   padding: 16px !important;
   border-radius: 10px;
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   color: #fff !important;
   font-size: 18px !important;
   font-weight: 800;
@@ -216,7 +216,7 @@ main.puzzle .puzzle__feedback.after .continue {
 }
 
 main.puzzle .puzzle__feedback.after .continue:hover {
-  background: var(--cdc-btn-primary-hover) !important;
+  background: var(--lr-ext-btn-primary-hover) !important;
 }
 
 main.puzzle .puzzle__feedback.after .continue icon::before {
@@ -251,33 +251,33 @@ main.puzzle .puzzle__feedback.after .puzzle__vote__help {
   flex: 0 0 100%;
   order: -1;
   margin: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   text-align: center;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button {
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.vote-up:is(:hover, .active) {
-  color: var(--cdc-good-hover) !important;
+  color: var(--lr-ext-good-hover) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.vote-down:is(:hover, .active) {
-  color: var(--cdc-red) !important;
+  color: var(--lr-ext-red) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.active {
-  background: var(--cdc-grey-850) !important;
+  background: var(--lr-ext-grey-850) !important;
   box-shadow: inset 0 2px 5px #00000080 !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__more .button {
   border: none !important;
   border-radius: 8px !important;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__more .button::before {
@@ -285,5 +285,5 @@ main.puzzle .puzzle__feedback.after .puzzle__more .button::before {
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__more .button:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
 }

@@ -6,17 +6,17 @@
   main.analyse .practice-box {
     flex: none !important;
     margin-top: auto;
-    border-top: 1px solid var(--cdc-border);
+    border-top: 1px solid var(--lr-ext-border);
     border-bottom: none !important;
   }
 
   /* A short panel only fits the engine line and the drill's box: hide the moves
    * until a whole row fits (222px with a verdict) rather than show a sliver. */
-  html[data-cdc-has~='practice'][data-cdc-has~='practice-box'] main.analyse .analyse__tools {
-    container: cdc-drill-tools / size;
+  html[data-lr-ext-has~='practice'][data-lr-ext-has~='practice-box'] main.analyse .analyse__tools {
+    container: lr-ext-drill-tools / size;
   }
 
-  @container cdc-drill-tools (max-height: 221px) {
+  @container lr-ext-drill-tools (max-height: 221px) {
     main.analyse .analyse__moves {
       display: none !important;
     }
@@ -75,7 +75,7 @@
   }
 
   main.analyse .practice-box .feedback .instruction em {
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     font-size: 13.5px;
     font-style: normal;
     font-weight: 600;
@@ -87,14 +87,14 @@
     margin-top: 4px;
     padding: 3px 10px;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--cdc-accent) 18%, transparent);
-    color: var(--cdc-accent-hover) !important;
+    background: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent);
+    color: var(--lr-ext-accent-hover) !important;
     font-size: 12.5px;
     font-weight: 800;
   }
 
   main.analyse .practice-box .feedback .choices a:hover {
-    background: color-mix(in srgb, var(--cdc-accent) 28%, transparent);
+    background: color-mix(in srgb, var(--lr-ext-accent) 28%, transparent);
     color: #fff !important;
   }
 
@@ -128,23 +128,25 @@
 
   main.analyse .practice-box > .comment .next {
     border-radius: 8px !important;
-    background: var(--cdc-btn-primary) !important;
-    box-shadow: var(--cdc-btn-primary-shadow) !important;
+    background: var(--lr-ext-btn-primary) !important;
+    box-shadow: var(--lr-ext-btn-primary-shadow) !important;
     color: #fff !important;
     font-weight: 800;
   }
 
   main.analyse .practice-box > .comment .next:hover {
-    background: var(--cdc-btn-primary-hover) !important;
+    background: var(--lr-ext-btn-primary-hover) !important;
   }
 
   /* Lichess's controls end the panel, so they get the card's bottom corners. */
-  html[data-cdc-has~='practice'][data-cdc-has~='practice-box'] main.analyse .analyse__controls {
+  html[data-lr-ext-has~='practice'][data-lr-ext-has~='practice-box']
+    main.analyse
+    .analyse__controls {
     align-self: stretch !important;
     border-radius: 12px !important;
   }
 
-  html[data-cdc-has~='practice'][data-cdc-has~='practice-box'] main.analyse .analyse__tools {
+  html[data-lr-ext-has~='practice'][data-lr-ext-has~='practice-box'] main.analyse .analyse__tools {
     border-radius: 12px !important;
   }
 }

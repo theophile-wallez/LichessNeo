@@ -1,10 +1,10 @@
-/* Player bars: game page (.ruser, .rclock) and analysis board (.cdc-player, .analyse__clock).
-   Only the look: each page places the parts and sets --cdc-off for the board's inset. */
+/* Player bars: game page (.ruser, .rclock) and analysis board (.lr-ext-player, .analyse__clock).
+   Only the look: each page places the parts and sets --lr-ext-off for the board's inset. */
 
 @media (min-width: 1020px) {
   /* ---- Player --- */
 
-  :is(main.round .ruser, main.analyse > .cdc-player) {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) {
     position: relative;
     justify-self: start;
     align-self: start;
@@ -14,18 +14,19 @@
     gap: 5px;
     /* Clear of the clock (140px plus a gap), so a long name ends in an ellipsis. */
     max-width: calc(
-      100% - var(--cdc-inset-l, 0px) - var(--cdc-inset-r, 0px) - var(--cdc-clock-room, 152px)
+      100% - var(--lr-ext-inset-l, 0px) - var(--lr-ext-inset-r, 0px) -
+        var(--lr-ext-clock-room, 152px)
     );
     height: 20px;
-    margin: calc(var(--cdc-off) + 8px) 0 0 var(--cdc-inset-l, 0px) !important;
+    margin: calc(var(--lr-ext-off) + 8px) 0 0 var(--lr-ext-inset-l, 0px) !important;
     padding: 0 0 0 50px !important;
     overflow: visible !important;
     font-size: 14px !important;
     line-height: 20px !important;
-    color: var(--cdc-text-strong) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player)::before {
+  :is(main.round .ruser, main.analyse > .lr-ext-player)::before {
     content: '';
     position: absolute;
     left: 0;
@@ -33,83 +34,91 @@
     width: 40px;
     height: 40px;
     border-radius: 3px;
-    background: var(--cdc-avatar);
+    background: var(--lr-ext-avatar);
   }
 
-  /* The computer's side (data-cdc-ai, from content/game/ai-players.ts) gets the monitor avatar. */
-  html[data-cdc-ai~='white']:not([data-cdc-has~='round-black']) main.round .ruser-bottom::before,
-  html[data-cdc-ai~='white'][data-cdc-has~='round-black'] main.round .ruser-top::before,
-  html[data-cdc-ai~='black']:not([data-cdc-has~='round-black']) main.round .ruser-top::before,
-  html[data-cdc-ai~='black'][data-cdc-has~='round-black'] main.round .ruser-bottom::before,
-  html[data-cdc-ai~='white']:not([data-cdc-has~='analyse-black'])
+  /* The computer's side (data-lr-ext-ai, from content/game/ai-players.ts) gets the monitor avatar. */
+  html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='round-black'])
+    main.round
+    .ruser-bottom::before,
+  html[data-lr-ext-ai~='white'][data-lr-ext-has~='round-black'] main.round .ruser-top::before,
+  html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='round-black']) main.round .ruser-top::before,
+  html[data-lr-ext-ai~='black'][data-lr-ext-has~='round-black'] main.round .ruser-bottom::before,
+  html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='analyse-black'])
     main.analyse
-    > .cdc-player--bottom::before,
-  html[data-cdc-ai~='white'][data-cdc-has~='analyse-black'] main.analyse > .cdc-player--top::before,
-  html[data-cdc-ai~='black']:not([data-cdc-has~='analyse-black'])
+    > .lr-ext-player--bottom::before,
+  html[data-lr-ext-ai~='white'][data-lr-ext-has~='analyse-black']
     main.analyse
-    > .cdc-player--top::before,
-  html[data-cdc-ai~='black'][data-cdc-has~='analyse-black']
+    > .lr-ext-player--top::before,
+  html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='analyse-black'])
     main.analyse
-    > .cdc-player--bottom::before {
-    background: var(--cdc-computer-avatar);
+    > .lr-ext-player--top::before,
+  html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
+    main.analyse
+    > .lr-ext-player--bottom::before {
+    background: var(--lr-ext-computer-avatar);
   }
 
   /* Its level's rating goes where a player's flag would. */
-  html[data-cdc-ai~='white']:not([data-cdc-has~='round-black']) main.round .ruser-bottom::after,
-  html[data-cdc-ai~='white'][data-cdc-has~='round-black'] main.round .ruser-top::after,
-  html[data-cdc-ai~='white']:not([data-cdc-has~='analyse-black'])
+  html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='round-black'])
+    main.round
+    .ruser-bottom::after,
+  html[data-lr-ext-ai~='white'][data-lr-ext-has~='round-black'] main.round .ruser-top::after,
+  html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='analyse-black'])
     main.analyse
-    > .cdc-player--bottom::after,
-  html[data-cdc-ai~='white'][data-cdc-has~='analyse-black'] main.analyse > .cdc-player--top::after {
-    content: '(' var(--cdc-ai-white) ')';
+    > .lr-ext-player--bottom::after,
+  html[data-lr-ext-ai~='white'][data-lr-ext-has~='analyse-black']
+    main.analyse
+    > .lr-ext-player--top::after {
+    content: '(' var(--lr-ext-ai-white) ')';
   }
 
-  html[data-cdc-ai~='black']:not([data-cdc-has~='round-black']) main.round .ruser-top::after,
-  html[data-cdc-ai~='black'][data-cdc-has~='round-black'] main.round .ruser-bottom::after,
-  html[data-cdc-ai~='black']:not([data-cdc-has~='analyse-black'])
+  html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='round-black']) main.round .ruser-top::after,
+  html[data-lr-ext-ai~='black'][data-lr-ext-has~='round-black'] main.round .ruser-bottom::after,
+  html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='analyse-black'])
     main.analyse
-    > .cdc-player--top::after,
-  html[data-cdc-ai~='black'][data-cdc-has~='analyse-black']
+    > .lr-ext-player--top::after,
+  html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
     main.analyse
-    > .cdc-player--bottom::after {
-    content: '(' var(--cdc-ai-black) ')';
+    > .lr-ext-player--bottom::after {
+    content: '(' var(--lr-ext-ai-black) ')';
   }
 
   /* Styled like a rating; a flag emoji ignores the color anyway. */
-  :is(main.round .ruser, main.analyse > .cdc-player)::after {
+  :is(main.round .ruser, main.analyse > .lr-ext-player)::after {
     flex: none;
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     font-weight: 400;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player) .line {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) .line {
     display: none !important;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player) a,
-  :is(main.round .ruser, main.analyse > .cdc-player) name {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) a,
+  :is(main.round .ruser, main.analyse > .lr-ext-player) name {
     flex: 0 1 auto !important;
     min-width: 0;
     overflow: hidden;
     font-weight: 700;
-    color: var(--cdc-text-strong) !important;
+    color: var(--lr-ext-text-strong) !important;
     letter-spacing: 0 !important;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   /* Only the name shrinks. */
-  :is(main.round .ruser, main.analyse > .cdc-player) > :not(a, name) {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) > :not(a, name) {
     flex: none;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player) .utitle,
-  :is(main.round .ruser, main.analyse > .cdc-player) a .utitle {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) .utitle,
+  :is(main.round .ruser, main.analyse > .lr-ext-player) a .utitle {
     display: inline-block;
     margin-right: 5px;
     padding: 0 3px;
     border-radius: 3px;
-    background: var(--cdc-title-bg);
+    background: var(--lr-ext-title-bg);
     color: #fff !important;
     font-size: 11px;
     font-weight: 800;
@@ -117,50 +126,50 @@
     vertical-align: 1px;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player) rating {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) rating {
     margin: 0 !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     letter-spacing: 0 !important;
     font-weight: 400;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player) rating::before {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) rating::before {
     content: '(';
   }
-  :is(main.round .ruser, main.analyse > .cdc-player) rating::after {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) rating::after {
     content: ')';
   }
 
   /* The rating's change follows the rating: `good`, `bad`, or a bare span for "±0". */
-  :is(main.round .ruser, main.analyse > .cdc-player) :is(rating, good, bad) {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) :is(rating, good, bad) {
     order: 2;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player) > span:not([data-icon]) {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) > span:not([data-icon]) {
     order: 2;
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
   }
 
-  /* The country flag (data-cdc-flag, from content/game/flags.ts) right after the name,
+  /* The country flag (data-lr-ext-flag, from content/game/flags.ts) right after the name,
      before its flair. */
-  :is(main.round .ruser, main.analyse > .cdc-player) > a.user-link {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player) > a.user-link :is(.uflair, .utitle) {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link :is(.uflair, .utitle) {
     margin: 0;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player) > a.user-link .uflair {
+  :is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link .uflair {
     order: 2;
   }
 
-  :is(main.round .ruser, main.analyse > .cdc-player)
-    > a.user-link[data-cdc-flag]:not([data-cdc-flag=''])::after {
+  :is(main.round .ruser, main.analyse > .lr-ext-player)
+    > a.user-link[data-lr-ext-flag]:not([data-lr-ext-flag=''])::after {
     order: 1;
-    content: attr(data-cdc-flag);
+    content: attr(data-lr-ext-flag);
     font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -171,14 +180,14 @@
 
   /* Built by content/game/captured.ts: the pieces taken, grouped by type, then the material
    * lead. */
-  :is(main.round, main.analyse) > .cdc-captured {
+  :is(main.round, main.analyse) > .lr-ext-captured {
     justify-self: start;
     align-self: start;
     display: flex;
     align-items: center;
     gap: 3px;
     height: 18px;
-    margin: calc(var(--cdc-off) + 30px) 0 0 calc(50px + var(--cdc-inset-l, 0px));
+    margin: calc(var(--lr-ext-off) + 30px) 0 0 calc(50px + var(--lr-ext-inset-l, 0px));
     pointer-events: none;
   }
 
@@ -196,56 +205,56 @@
     order: -1;
   }
 
-  html:not([data-cdc-has~='analyse-clock']) main.analyse .analyse__player_strip {
-    left: var(--cdc-inset-l, 0px) !important;
+  html:not([data-lr-ext-has~='analyse-clock']) main.analyse .analyse__player_strip {
+    left: var(--lr-ext-inset-l, 0px) !important;
     right: auto !important;
   }
 
-  html[data-cdc-has~='analyse-white'] main.analyse .material-bottom,
-  html[data-cdc-has~='analyse-black'] main.analyse .material-top {
-    --cdc-mpiece-pawn: var(---black-pawn);
-    --cdc-mpiece-knight: var(---black-knight);
-    --cdc-mpiece-bishop: var(---black-bishop);
-    --cdc-mpiece-rook: var(---black-rook);
-    --cdc-mpiece-queen: var(---black-queen);
-    --cdc-mpiece-king: var(---black-king);
+  html[data-lr-ext-has~='analyse-white'] main.analyse .material-bottom,
+  html[data-lr-ext-has~='analyse-black'] main.analyse .material-top {
+    --lr-ext-mpiece-pawn: var(---black-pawn);
+    --lr-ext-mpiece-knight: var(---black-knight);
+    --lr-ext-mpiece-bishop: var(---black-bishop);
+    --lr-ext-mpiece-rook: var(---black-rook);
+    --lr-ext-mpiece-queen: var(---black-queen);
+    --lr-ext-mpiece-king: var(---black-king);
   }
 
-  html[data-cdc-has~='analyse-white'] main.analyse .material-top,
-  html[data-cdc-has~='analyse-black'] main.analyse .material-bottom {
-    --cdc-mpiece-pawn: var(---white-pawn);
-    --cdc-mpiece-knight: var(---white-knight);
-    --cdc-mpiece-bishop: var(---white-bishop);
-    --cdc-mpiece-rook: var(---white-rook);
-    --cdc-mpiece-queen: var(---white-queen);
-    --cdc-mpiece-king: var(---white-king);
+  html[data-lr-ext-has~='analyse-white'] main.analyse .material-top,
+  html[data-lr-ext-has~='analyse-black'] main.analyse .material-bottom {
+    --lr-ext-mpiece-pawn: var(---white-pawn);
+    --lr-ext-mpiece-knight: var(---white-knight);
+    --lr-ext-mpiece-bishop: var(---white-bishop);
+    --lr-ext-mpiece-rook: var(---white-rook);
+    --lr-ext-mpiece-queen: var(---white-queen);
+    --lr-ext-mpiece-king: var(---white-king);
   }
 
   main.analyse .material mpiece.pawn {
-    background-image: var(--cdc-mpiece-pawn) !important;
+    background-image: var(--lr-ext-mpiece-pawn) !important;
   }
   main.analyse .material mpiece.knight {
-    background-image: var(--cdc-mpiece-knight) !important;
+    background-image: var(--lr-ext-mpiece-knight) !important;
   }
   main.analyse .material mpiece.bishop {
-    background-image: var(--cdc-mpiece-bishop) !important;
+    background-image: var(--lr-ext-mpiece-bishop) !important;
   }
   main.analyse .material mpiece.rook {
-    background-image: var(--cdc-mpiece-rook) !important;
+    background-image: var(--lr-ext-mpiece-rook) !important;
   }
   main.analyse .material mpiece.queen {
-    background-image: var(--cdc-mpiece-queen) !important;
+    background-image: var(--lr-ext-mpiece-queen) !important;
   }
   main.analyse .material mpiece.king {
-    background-image: var(--cdc-mpiece-king) !important;
+    background-image: var(--lr-ext-mpiece-king) !important;
   }
 
-  :is(.cdc-captured__group, main.analyse .material > div) {
+  :is(.lr-ext-captured__group, main.analyse .material > div) {
     display: flex !important;
     margin: 0 !important;
   }
 
-  :is(.cdc-captured__group .cdc-pc, main.analyse .material mpiece) {
+  :is(.lr-ext-captured__group .lr-ext-pc, main.analyse .material mpiece) {
     display: block;
     width: 18px !important;
     height: 18px !important;
@@ -256,21 +265,28 @@
   /* Black pieces vanish on the near-black page: a light edge draws them as outlines. Specific
    * enough to beat the `filter: none` above. */
   main
-    .cdc-captured__group
-    .cdc-pc:is(.cdc-pc-bp, .cdc-pc-bn, .cdc-pc-bb, .cdc-pc-br, .cdc-pc-bq, .cdc-pc-bk),
-  html[data-cdc-has~='analyse-white'] main.analyse .material-bottom mpiece,
-  html[data-cdc-has~='analyse-black'] main.analyse .material-top mpiece {
-    filter: drop-shadow(1px 0 0 var(--cdc-text-dim)) drop-shadow(-1px 0 0 var(--cdc-text-dim))
-      drop-shadow(0 1px 0 var(--cdc-text-dim)) drop-shadow(0 -1px 0 var(--cdc-text-dim)) !important;
+    .lr-ext-captured__group
+    .lr-ext-pc:is(
+      .lr-ext-pc-bp,
+      .lr-ext-pc-bn,
+      .lr-ext-pc-bb,
+      .lr-ext-pc-br,
+      .lr-ext-pc-bq,
+      .lr-ext-pc-bk
+    ),
+  html[data-lr-ext-has~='analyse-white'] main.analyse .material-bottom mpiece,
+  html[data-lr-ext-has~='analyse-black'] main.analyse .material-top mpiece {
+    filter: drop-shadow(1px 0 0 var(--lr-ext-text-dim)) drop-shadow(-1px 0 0 var(--lr-ext-text-dim))
+      drop-shadow(0 1px 0 var(--lr-ext-text-dim)) drop-shadow(0 -1px 0 var(--lr-ext-text-dim)) !important;
   }
 
-  :is(.cdc-captured__group .cdc-pc, main.analyse .material mpiece) + :is(.cdc-pc, mpiece) {
+  :is(.lr-ext-captured__group .lr-ext-pc, main.analyse .material mpiece) + :is(.lr-ext-pc, mpiece) {
     margin-left: -11px !important;
   }
 
-  :is(.cdc-captured__score, main.analyse .material score) {
+  :is(.lr-ext-captured__score, main.analyse .material score) {
     margin: 0 0 0 3px !important;
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     font-size: 12px;
     font-weight: 700 !important;
   }
@@ -279,13 +295,13 @@
 
   /* "Give more time" is a link, so in the accent: a quiet grey, lit on hover. */
   main.round .rclock .moretime {
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     opacity: 0.6;
     transition: opacity 0.15s !important;
   }
 
   main.round .rclock .moretime:hover {
-    color: var(--cdc-text-strong) !important;
+    color: var(--lr-ext-text-strong) !important;
     opacity: 1;
   }
 
@@ -295,23 +311,23 @@
   /* Which side: the game has a class, but the analysis clock only says top or bottom,
      so the board's orientation decides. */
   main.round .rclock-white .time,
-  html[data-cdc-has~='analyse-white'] main.analyse .analyse__clock.bottom,
-  html[data-cdc-has~='analyse-black'] main.analyse .analyse__clock.top {
-    --cdc-clock-bg: var(--cdc-grey-300);
-    --cdc-clock-fg: color-mix(in srgb, var(--cdc-grey-800) 60%, transparent);
-    --cdc-clock-on-bg: #fff;
-    --cdc-clock-on-fg: var(--cdc-grey-800);
-    --cdc-clock-icon: none;
+  html[data-lr-ext-has~='analyse-white'] main.analyse .analyse__clock.bottom,
+  html[data-lr-ext-has~='analyse-black'] main.analyse .analyse__clock.top {
+    --lr-ext-clock-bg: var(--lr-ext-grey-300);
+    --lr-ext-clock-fg: color-mix(in srgb, var(--lr-ext-grey-800) 60%, transparent);
+    --lr-ext-clock-on-bg: #fff;
+    --lr-ext-clock-on-fg: var(--lr-ext-grey-800);
+    --lr-ext-clock-icon: none;
   }
 
   main.round .rclock-black .time,
-  html[data-cdc-has~='analyse-white'] main.analyse .analyse__clock.top,
-  html[data-cdc-has~='analyse-black'] main.analyse .analyse__clock.bottom {
-    --cdc-clock-bg: var(--cdc-grey-850);
-    --cdc-clock-fg: var(--cdc-grey-400);
-    --cdc-clock-on-bg: var(--cdc-grey-950);
-    --cdc-clock-on-fg: #fff;
-    --cdc-clock-icon: invert(1);
+  html[data-lr-ext-has~='analyse-white'] main.analyse .analyse__clock.top,
+  html[data-lr-ext-has~='analyse-black'] main.analyse .analyse__clock.bottom {
+    --lr-ext-clock-bg: var(--lr-ext-grey-850);
+    --lr-ext-clock-fg: var(--lr-ext-grey-400);
+    --lr-ext-clock-on-bg: var(--lr-ext-grey-950);
+    --lr-ext-clock-on-fg: #fff;
+    --lr-ext-clock-icon: invert(1);
   }
 
   main.round .rclock .time,
@@ -331,9 +347,9 @@
     border-radius: 4px !important;
     box-shadow: none !important;
     z-index: auto !important;
-    background: var(--cdc-clock-bg) !important;
-    color: var(--cdc-clock-fg) !important;
-    font-family: var(--cdc-font) !important;
+    background: var(--lr-ext-clock-bg) !important;
+    color: var(--lr-ext-clock-fg) !important;
+    font-family: var(--lr-ext-font) !important;
     font-size: 24px !important;
     font-weight: 600 !important;
     font-variant-numeric: tabular-nums;
@@ -351,15 +367,15 @@
   /* Running; on the analysis board, the side to move. */
   main.round .rclock.running .time,
   main.analyse .analyse__clock.active {
-    background: var(--cdc-clock-on-bg) !important;
-    color: var(--cdc-clock-on-fg) !important;
+    background: var(--lr-ext-clock-on-bg) !important;
+    color: var(--lr-ext-clock-on-fg) !important;
   }
 
   main.round .rclock.emerg.running .time,
   main.round .rclock.outoftime .time {
-    background: var(--cdc-red-dark) !important;
+    background: var(--lr-ext-red-dark) !important;
     color: #fff !important;
-    --cdc-clock-icon: invert(1);
+    --lr-ext-clock-icon: invert(1);
   }
 
   /* Stopwatch on the running clock. */
@@ -373,6 +389,6 @@
     padding-right: 10px;
     background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--312e2b.svg')
       left center / 18px no-repeat;
-    filter: var(--cdc-clock-icon);
+    filter: var(--lr-ext-clock-icon);
   }
 }

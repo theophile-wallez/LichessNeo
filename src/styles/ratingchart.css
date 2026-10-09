@@ -1,32 +1,32 @@
 /* The rating history chart, drawn in SVG by content/charts/rating-chart/ (profile,
  * rating stats page). Lichess's chart, the inner container, is hidden only once
- * ours is in (.cdc-rchart-on on the outer one). */
+ * ours is in (.lr-ext-rchart-on on the outer one). */
 
-.rating-history-container.cdc-rchart-on > .rating-history-container {
+.rating-history-container.lr-ext-rchart-on > .rating-history-container {
   display: none !important;
 }
 
 /* No history to draw (a rating never played): no empty box. */
-.rating-history-container.cdc-rchart-none {
+.rating-history-container.lr-ext-rchart-none {
   display: none !important;
 }
 
 /* On the stats page the container isn't a card, unlike the profile's. */
-.perf-stat > .rating-history-container.cdc-rchart-on {
+.perf-stat > .rating-history-container.lr-ext-rchart-on {
   height: auto !important;
   margin: 0 var(--box-padding, 20px) 8px;
 }
 
-.cdc-rchart {
+.lr-ext-rchart {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
 }
 
 /* ---- Top --- */
 
-.cdc-rchart__top {
+.lr-ext-rchart__top {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -34,20 +34,20 @@
   gap: 10px 16px;
 }
 
-.cdc-rchart__legend,
-.cdc-rchart__ranges {
+.lr-ext-rchart__legend,
+.lr-ext-rchart__ranges {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
 /* The chips wrap onto more lines; the range pills stay top right. */
-.cdc-rchart__legend {
+.lr-ext-rchart__legend {
   flex: 1 1 300px;
   min-width: 0;
 }
 
-.cdc-rchart__ranges {
+.lr-ext-rchart__ranges {
   position: relative;
   isolation: isolate;
   padding: 3px;
@@ -56,13 +56,13 @@
 }
 
 /* The active range's pill: one element that slides, placed by rating-chart/thumb.ts. */
-.cdc-rchart__thumb {
+.lr-ext-rchart__thumb {
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
   border-radius: 7px;
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
   box-shadow:
     0 1px 2px #00000059,
     inset 0 1px 0 #ffffff14;
@@ -71,178 +71,178 @@
     width 0.35s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
-.cdc-rchart__thumb--still {
+.lr-ext-rchart__thumb--still {
   transition: none !important;
 }
 
-.cdc-rchart__ranges button {
+.lr-ext-rchart__ranges button {
   height: 28px;
   padding: 0 11px;
   border: none;
   border-radius: 7px;
   background: none;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   cursor: pointer;
-  font: 700 12px/1 var(--cdc-font);
+  font: 700 12px/1 var(--lr-ext-font);
   letter-spacing: 0.03em;
   transition:
     background-color 0.15s,
     color 0.15s !important;
 }
 
-.cdc-rchart__ranges button:hover {
+.lr-ext-rchart__ranges button:hover {
   color: #fff;
 }
 
-.cdc-rchart__ranges button.active {
+.lr-ext-rchart__ranges button.active {
   color: #fff;
 }
 
 /* A rating's chip: its color, name, current value and change over the range. */
-.cdc-rchart__chip {
+.lr-ext-rchart__chip {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   height: 34px;
   padding: 0 12px 0 10px;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 999px;
   background: #ffffff08;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   cursor: pointer;
-  font: 600 13px/1 var(--cdc-font);
+  font: 600 13px/1 var(--lr-ext-font);
   transition:
     background-color 0.15s,
     border-color 0.15s,
     opacity 0.15s !important;
 }
 
-.cdc-rchart__chip:hover {
-  border-color: color-mix(in srgb, var(--cdc-series-color) 55%, transparent);
-  background: color-mix(in srgb, var(--cdc-series-color) 10%, transparent);
+.lr-ext-rchart__chip:hover {
+  border-color: color-mix(in srgb, var(--lr-ext-series-color) 55%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-series-color) 10%, transparent);
 }
 
-.cdc-rchart__chip:disabled {
+.lr-ext-rchart__chip:disabled {
   cursor: default;
 }
 
-.cdc-rchart__chip:disabled:hover {
-  border-color: var(--cdc-card-border);
+.lr-ext-rchart__chip:disabled:hover {
+  border-color: var(--lr-ext-card-border);
   background: #ffffff08;
 }
 
-.cdc-rchart__chip strong {
+.lr-ext-rchart__chip strong {
   color: #fff;
   font-size: 14px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-.cdc-rchart__chip--off {
+.lr-ext-rchart__chip--off {
   opacity: 0.45;
 }
 
-.cdc-rchart__chip--off .cdc-rchart__swatch {
+.lr-ext-rchart__chip--off .lr-ext-rchart__swatch {
   background: none;
-  box-shadow: inset 0 0 0 2px var(--cdc-series-color);
+  box-shadow: inset 0 0 0 2px var(--lr-ext-series-color);
 }
 
-.cdc-rchart__swatch {
+.lr-ext-rchart__swatch {
   flex: none;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--cdc-series-color);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-series-color) 22%, transparent);
+  background: var(--lr-ext-series-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-series-color) 22%, transparent);
 }
 
-.cdc-rchart__diff {
+.lr-ext-rchart__diff {
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-.cdc-rchart__diff--up {
-  color: var(--cdc-good-hover);
+.lr-ext-rchart__diff--up {
+  color: var(--lr-ext-good-hover);
 }
-.cdc-rchart__diff--down {
-  color: var(--cdc-red);
+.lr-ext-rchart__diff--down {
+  color: var(--lr-ext-red);
 }
-.cdc-rchart__diff--flat {
-  color: var(--cdc-text-dim);
+.lr-ext-rchart__diff--flat {
+  color: var(--lr-ext-text-dim);
 }
 
 /* ---- Plot --- */
 
 /* The SVG is drawn at the plot's width, so it must not size the plot: on a
  * phone it held the page wider than the window. */
-.cdc-rchart__plot {
+.lr-ext-rchart__plot {
   position: relative;
   min-width: 0;
   contain: inline-size;
 }
 
-.cdc-rchart__svg {
+.lr-ext-rchart__svg {
   display: block;
   overflow: visible;
   touch-action: pan-y;
 }
 
-.cdc-rchart__grid {
+.lr-ext-rchart__grid {
   stroke: #ffffff12;
   stroke-dasharray: 3 4;
 }
 
-.cdc-rchart__ylabel,
-.cdc-rchart__xlabel {
-  fill: var(--cdc-text-dim);
-  font: 600 11px var(--cdc-font);
+.lr-ext-rchart__ylabel,
+.lr-ext-rchart__xlabel {
+  fill: var(--lr-ext-text-dim);
+  font: 600 11px var(--lr-ext-font);
   font-variant-numeric: tabular-nums;
 }
 
-.cdc-rchart__ylabel {
+.lr-ext-rchart__ylabel {
   text-anchor: end;
   dominant-baseline: middle;
 }
 
-.cdc-rchart__xlabel {
+.lr-ext-rchart__xlabel {
   text-anchor: middle;
 }
 
 /* `d` is a CSS property, so the new scale after toggling a rating morphs the curves. */
-.cdc-rchart__line,
-.cdc-rchart__area {
+.lr-ext-rchart__line,
+.lr-ext-rchart__area {
   transition:
     d 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.3s !important;
 }
 
-.cdc-rchart__line {
+.lr-ext-rchart__line {
   fill: none;
-  stroke: var(--cdc-series-color);
+  stroke: var(--lr-ext-series-color);
   stroke-width: 2.25;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.cdc-rchart__series--hidden {
+.lr-ext-rchart__series--hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.cdc-rchart__series--hidden path {
+.lr-ext-rchart__series--hidden path {
   transition: opacity 0.3s !important;
 }
 
 /* A new range: one widening clip reveals curves and fills together. Drawing each
  * line along its length would run each at its own pace. */
-.cdc-rchart__svg--intro .cdc-rchart__wipe {
+.lr-ext-rchart__svg--intro .lr-ext-rchart__wipe {
   transform-box: fill-box;
   transform-origin: left;
-  animation: cdc-rchart-wipe 1.2s cubic-bezier(0.45, 0, 0.2, 1) both;
+  animation: lr-ext-rchart-wipe 1.2s cubic-bezier(0.45, 0, 0.2, 1) both;
 }
 
-@keyframes cdc-rchart-wipe {
+@keyframes lr-ext-rchart-wipe {
   from {
     transform: scaleX(0);
   }
@@ -253,39 +253,39 @@
 
 /* ---- Hover --- */
 
-.cdc-rchart__hit {
+.lr-ext-rchart__hit {
   fill: transparent;
   cursor: crosshair;
 }
 
-.cdc-rchart__hover {
+.lr-ext-rchart__hover {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s !important;
 }
 
-.cdc-rchart__svg--hover .cdc-rchart__hover {
+.lr-ext-rchart__svg--hover .lr-ext-rchart__hover {
   opacity: 1;
 }
 
-.cdc-rchart__guide {
+.lr-ext-rchart__guide {
   stroke: #ffffff40;
   stroke-width: 1;
   stroke-dasharray: 3 3;
 }
 
-.cdc-rchart__dot {
+.lr-ext-rchart__dot {
   display: none;
-  fill: var(--cdc-series-color);
-  stroke: var(--cdc-bg-panel);
+  fill: var(--lr-ext-series-color);
+  stroke: var(--lr-ext-bg-panel);
   stroke-width: 2.5;
 }
 
-.cdc-rchart__dot--on {
+.lr-ext-rchart__dot--on {
   display: inline;
 }
 
-.cdc-rchart__tip {
+.lr-ext-rchart__tip {
   position: absolute;
   top: 0;
   left: 0;
@@ -295,7 +295,7 @@
   border: 1px solid #ffffff1f;
   border-radius: 10px;
   /* Frosted glass: the blurred curves show through. */
-  background: color-mix(in srgb, var(--cdc-grey-950) 55%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-grey-950) 55%, transparent);
   box-shadow:
     inset 0 1px 0 #ffffff14,
     0 10px 28px #00000073;
@@ -308,34 +308,34 @@
     transform 0.12s ease-out !important;
 }
 
-.cdc-rchart__tip--on {
+.lr-ext-rchart__tip--on {
   opacity: 1;
 }
 
-.cdc-rchart__tipdate {
+.lr-ext-rchart__tipdate {
   margin-bottom: 6px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
   font-weight: 700;
 }
 
-.cdc-rchart__tiprow {
+.lr-ext-rchart__tiprow {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 13px;
   font-weight: 600;
   line-height: 1.7;
 }
 
-.cdc-rchart__tiprow .cdc-rchart__swatch {
+.lr-ext-rchart__tiprow .lr-ext-rchart__swatch {
   width: 8px;
   height: 8px;
   box-shadow: none;
 }
 
-.cdc-rchart__tiprow strong {
+.lr-ext-rchart__tiprow strong {
   margin-inline-start: auto;
   padding-inline-start: 14px;
   color: #fff;

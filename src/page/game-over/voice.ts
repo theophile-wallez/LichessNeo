@@ -28,7 +28,7 @@ export function createVoice(bubble: HTMLElement, coachId: number): Voice {
   return {
     say: (text, mood) => {
       cancel();
-      bubble.classList.toggle('cdc-end__bubble--empty', false);
+      bubble.classList.toggle('lr-ext-end__bubble--empty', false);
       bubble.textContent = text;
       talk(mood, true);
       timer = window.setTimeout(() => talk(mood, false), TALK_MS);
@@ -36,21 +36,21 @@ export function createVoice(bubble: HTMLElement, coachId: number): Voice {
     typeOut: (text, mood, delayMs) => {
       cancel();
       bubble.textContent = '';
-      bubble.classList.toggle('cdc-end__bubble--empty', true);
+      bubble.classList.toggle('lr-ext-end__bubble--empty', true);
       talk(mood, false);
       timer = window.setTimeout(() => {
         const words = text.match(/\S+\s*/g) ?? [];
         setHtml(
           bubble,
-          html`${words.map(word => html`<span class="cdc-w cdc-w--off">${word}</span>`)}`,
+          html`${words.map(word => html`<span class="lr-ext-w lr-ext-w--off">${word}</span>`)}`,
         );
-        bubble.classList.toggle('cdc-end__bubble--empty', false);
+        bubble.classList.toggle('lr-ext-end__bubble--empty', false);
         talk(mood, true);
         const spans = [...bubble.children];
         let shown = 0;
         timer = window.setInterval(() => {
           const word = spans[shown++];
-          if (word) word.className = 'cdc-w cdc-w--in';
+          if (word) word.className = 'lr-ext-w lr-ext-w--in';
           if (shown < spans.length) return;
           clearInterval(timer);
           talk(mood, false);

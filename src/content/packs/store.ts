@@ -1,10 +1,11 @@
 import { PackSchema, type Pack } from '#shared/packs/pack.ts';
+import { prefixed } from '#shared/prefix.ts';
 
 // The imported packs, in an IndexedDB database of the page's origin: they're
 // too big for localStorage, and chrome.storage would need a permission. Read
 // back through PackSchema, as anything stored may have been changed since.
 
-const DATABASE = 'cdc-packs';
+const DATABASE = prefixed('packs');
 const STORE = 'packs';
 const VERSION = 1;
 

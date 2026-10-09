@@ -1,11 +1,11 @@
 /* ---- Coach --- */
 
 @media (min-width: 1020px) {
-  /* The bubble's tail sits under the coach's mouth (--cdc-tip, 64% of the portrait's
-     height) and the bubble grows both ways from it; the review measures --cdc-bubble-h. */
-  .cdc-coach {
-    --cdc-coach-h: 114px;
-    --cdc-tip: calc(var(--cdc-coach-h) * 0.64);
+  /* The bubble's tail sits under the coach's mouth (--lr-ext-tip, 64% of the portrait's
+     height) and the bubble grows both ways from it; the review measures --lr-ext-bubble-h. */
+  .lr-ext-coach {
+    --lr-ext-coach-h: 114px;
+    --lr-ext-tip: calc(var(--lr-ext-coach-h) * 0.64);
     flex: none;
     display: flex;
     align-items: flex-start;
@@ -18,52 +18,52 @@
 
   /* Narrow panels wrap the bubble: a smaller coach gives it room, so two-line titles
      still clear the nav. */
-  @container cdc-review (max-width: 440px) {
-    .cdc-coach {
-      --cdc-coach-h: 100px;
+  @container lr-ext-review (max-width: 440px) {
+    .lr-ext-coach {
+      --lr-ext-coach-h: 100px;
     }
 
-    .cdc-bubble .cdc-bubble__title {
+    .lr-ext-bubble .lr-ext-bubble__title {
       font-size: 14px;
     }
   }
 
   /* Narrowest panels (windows up to ~1380px): the title had ~45px and broke in three.
      A smaller coach and tighter padding double that. */
-  @container cdc-review (max-width: 360px) {
-    .cdc-coach {
-      --cdc-coach-h: 84px;
+  @container lr-ext-review (max-width: 360px) {
+    .lr-ext-coach {
+      --lr-ext-coach-h: 84px;
       padding: 4px 10px 0 6px;
     }
 
-    .cdc-coach .cdc-bubble {
+    .lr-ext-coach .lr-ext-bubble {
       padding: 8px 12px;
     }
 
-    .cdc-bubble .cdc-bubble__row {
+    .lr-ext-bubble .lr-ext-bubble__row {
       gap: 6px;
     }
 
-    .cdc-bubble .cdc-bubble__eval {
+    .lr-ext-bubble .lr-ext-bubble__eval {
       padding: 2px 5px;
       font-size: 12px;
     }
 
-    .cdc-bubble .cdc-bubble__sub {
+    .lr-ext-bubble .lr-ext-bubble__sub {
       margin-top: 4px;
     }
 
     /* Three buttons of 84px: "Expliquer" and its bulb ran into the edges. */
-    #cdc-review .cdc-review__nav {
+    #lr-ext-review .lr-ext-review__nav {
       padding-inline: 10px;
     }
 
-    #cdc-review .cdc-review__nav .cdc-btn {
+    #lr-ext-review .lr-ext-review__nav .lr-ext-btn {
       gap: 4px;
       font-size: 13px;
     }
 
-    #cdc-review .cdc-review__nav .cdc-i {
+    #lr-ext-review .lr-ext-review__nav .lr-ext-i {
       width: 18px;
       height: 18px;
     }
@@ -71,11 +71,11 @@
 
   /* The stills load from manifest CSS, which gets the extension id (the page world can't
      call chrome.runtime.getURL). A button: clicking it changes coach. */
-  .cdc-coach__avatar {
+  .lr-ext-coach__avatar {
     position: relative;
     flex: none;
-    width: calc(var(--cdc-coach-h) * 1.09);
-    height: var(--cdc-coach-h);
+    width: calc(var(--lr-ext-coach-h) * 1.09);
+    height: var(--lr-ext-coach-h);
     padding: 0;
     border: none;
     background: transparent;
@@ -84,49 +84,49 @@
     transition: transform 0.15s !important;
   }
 
-  .cdc-coach__avatar:hover {
+  .lr-ext-coach__avatar:hover {
     transform: scale(1.04);
   }
 
-  .cdc-coach__face {
+  .lr-ext-coach__face {
     position: absolute;
     inset: 0;
     background: bottom center / contain no-repeat;
     transform-origin: 50% 100%;
-    animation: cdc-breathe 3.5s ease-in-out infinite;
+    animation: lr-ext-breathe 3.5s ease-in-out infinite;
   }
 
-  @keyframes cdc-breathe {
+  @keyframes lr-ext-breathe {
     50% {
       transform: scaleY(1.012);
     }
   }
 
-  .cdc-coach__avatar[data-cdc-coach-id='1'] .cdc-coach__face {
+  .lr-ext-coach__avatar[data-lr-ext-coach-id='1'] .lr-ext-coach__face {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
   }
-  .cdc-coach__avatar[data-cdc-coach-id='2'] .cdc-coach__face {
+  .lr-ext-coach__avatar[data-lr-ext-coach-id='2'] .lr-ext-coach__face {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
   }
-  .cdc-coach__avatar[data-cdc-coach-id='3'] .cdc-coach__face {
+  .lr-ext-coach__avatar[data-lr-ext-coach-id='3'] .lr-ext-coach__face {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
   }
-  .cdc-coach__avatar[data-cdc-coach-id='4'] .cdc-coach__face {
+  .lr-ext-coach__avatar[data-lr-ext-coach-id='4'] .lr-ext-coach__face {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
   }
-  .cdc-coach__avatar[data-cdc-coach-id='5'] .cdc-coach__face {
+  .lr-ext-coach__avatar[data-lr-ext-coach-id='5'] .lr-ext-coach__face {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
   }
-  .cdc-coach__avatar[data-cdc-coach-id='6'] .cdc-coach__face {
+  .lr-ext-coach__avatar[data-lr-ext-coach-id='6'] .lr-ext-coach__face {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
   }
-  .cdc-coach__avatar[data-cdc-coach-id='7'] .cdc-coach__face {
+  .lr-ext-coach__avatar[data-lr-ext-coach-id='7'] .lr-ext-coach__face {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
   }
 
   /* The live mascot (content/coach/): its canvas over the still, which it hides once drawn.
      It breathes on its own. */
-  .cdc-coach__face canvas {
+  .lr-ext-coach__face canvas {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -134,80 +134,80 @@
     pointer-events: none;
   }
 
-  .cdc-coach__avatar--live .cdc-coach__face {
+  .lr-ext-coach__avatar--live .lr-ext-coach__face {
     background-image: none !important;
     animation: none;
   }
 
   /* The marks over the head (sparkles, "?", "!", a drop) in the class's color, popping in
      and fading. */
-  .cdc-coach__avatar::before,
-  .cdc-coach__avatar::after {
+  .lr-ext-coach__avatar::before,
+  .lr-ext-coach__avatar::after {
     position: absolute;
     z-index: 1;
     opacity: 0;
     pointer-events: none;
   }
 
-  .cdc-coach__avatar--react:is(
-      [data-cdc-mood='delight'],
-      [data-cdc-mood='doubt'],
-      [data-cdc-mood='shock'],
-      [data-cdc-mood='worry']
+  .lr-ext-coach__avatar--react:is(
+      [data-lr-ext-mood='delight'],
+      [data-lr-ext-mood='doubt'],
+      [data-lr-ext-mood='shock'],
+      [data-lr-ext-mood='worry']
     )::after {
     content: '';
     top: 2%;
     right: 6%;
-    animation: cdc-mark 1.4s ease-out;
+    animation: lr-ext-mark 1.4s ease-out;
   }
 
-  .cdc-coach__avatar--react[data-cdc-mood='delight']::before {
+  .lr-ext-coach__avatar--react[data-lr-ext-mood='delight']::before {
     content: '';
     top: 22%;
     left: 8%;
-    animation: cdc-mark 1.2s 0.15s ease-out;
+    animation: lr-ext-mark 1.2s 0.15s ease-out;
   }
 
-  .cdc-coach__avatar--react[data-cdc-mood='delight']::before,
-  .cdc-coach__avatar--react[data-cdc-mood='delight']::after {
+  .lr-ext-coach__avatar--react[data-lr-ext-mood='delight']::before,
+  .lr-ext-coach__avatar--react[data-lr-ext-mood='delight']::after {
     width: 18%;
     aspect-ratio: 1;
-    background: var(--cdc-mood-c);
+    background: var(--lr-ext-mood-c);
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0Q11 9 20 10Q11 11 10 20Q9 11 0 10Q9 9 10 0z'/%3E%3C/svg%3E")
       center / contain no-repeat;
   }
 
-  .cdc-coach__avatar--react[data-cdc-mood='delight']::before {
+  .lr-ext-coach__avatar--react[data-lr-ext-mood='delight']::before {
     width: 12%;
   }
 
-  .cdc-coach__avatar--react:is([data-cdc-mood='doubt'], [data-cdc-mood='shock'])::after {
-    color: var(--cdc-mood-c);
-    font: 900 calc(var(--cdc-coach-h) * 0.26) / 1 var(--cdc-font);
+  .lr-ext-coach__avatar--react:is([data-lr-ext-mood='doubt'], [data-lr-ext-mood='shock'])::after {
+    color: var(--lr-ext-mood-c);
+    font: 900 calc(var(--lr-ext-coach-h) * 0.26) / 1 var(--lr-ext-font);
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
   }
 
-  .cdc-coach__avatar--react[data-cdc-mood='doubt']::after {
+  .lr-ext-coach__avatar--react[data-lr-ext-mood='doubt']::after {
     content: '?';
   }
-  .cdc-coach__avatar--react[data-cdc-mood='shock']::after {
+  .lr-ext-coach__avatar--react[data-lr-ext-mood='shock']::after {
     content: '!';
     right: 10%;
-    font-size: calc(var(--cdc-coach-h) * 0.3);
+    font-size: calc(var(--lr-ext-coach-h) * 0.3);
   }
 
-  .cdc-coach__avatar--react[data-cdc-mood='worry']::after {
+  .lr-ext-coach__avatar--react[data-lr-ext-mood='worry']::after {
     top: 24%;
     right: 20%;
     width: 7%;
     aspect-ratio: 3 / 4;
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    background: linear-gradient(var(--cdc-cyan-light), var(--cdc-cyan-dark));
+    background: linear-gradient(var(--lr-ext-cyan-light), var(--lr-ext-cyan-dark));
     clip-path: polygon(50% 0, 100% 55%, 100% 100%, 0 100%, 0 55%);
-    animation: cdc-drop 1.5s 0.3s ease-in;
+    animation: lr-ext-drop 1.5s 0.3s ease-in;
   }
 
-  @keyframes cdc-mark {
+  @keyframes lr-ext-mark {
     0% {
       opacity: 0;
       scale: 0.3;
@@ -230,7 +230,7 @@
     }
   }
 
-  @keyframes cdc-drop {
+  @keyframes lr-ext-drop {
     0% {
       opacity: 0;
       translate: 0 0;
@@ -249,13 +249,13 @@
 /* ---- Key moments --- */
 
 /* The strip's fades (below), lengths so they can be animated. */
-@property --cdc-fade-start {
+@property --lr-ext-fade-start {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
 }
 
-@property --cdc-fade-end {
+@property --lr-ext-fade-end {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
@@ -264,11 +264,11 @@
 /* The game's turning points under the graph (view/moments.ts): a card each, in a strip that
    scrolls sideways; the one on the board is ringed. */
 @media (min-width: 1020px) {
-  .cdc-moments {
+  .lr-ext-moments {
     flex: none;
     display: flex;
     gap: 8px;
-    height: var(--cdc-review-moments);
+    height: var(--lr-ext-review-moments);
     padding: 0 12px 10px;
     box-sizing: border-box;
     overflow-x: auto;
@@ -278,36 +278,36 @@
     mask-image: linear-gradient(
       to right,
       transparent,
-      #000 var(--cdc-fade-start),
-      #000 calc(100% - var(--cdc-fade-end)),
+      #000 var(--lr-ext-fade-start),
+      #000 calc(100% - var(--lr-ext-fade-end)),
       transparent
     );
-    animation: cdc-moments-fade linear both !important;
+    animation: lr-ext-moments-fade linear both !important;
     animation-timeline: scroll(self inline) !important;
   }
 
-  @keyframes cdc-moments-fade {
+  @keyframes lr-ext-moments-fade {
     0% {
-      --cdc-fade-start: 0px;
-      --cdc-fade-end: 36px;
+      --lr-ext-fade-start: 0px;
+      --lr-ext-fade-end: 36px;
     }
     10% {
-      --cdc-fade-start: 36px;
+      --lr-ext-fade-start: 36px;
     }
     90% {
-      --cdc-fade-end: 36px;
+      --lr-ext-fade-end: 36px;
     }
     100% {
-      --cdc-fade-start: 36px;
-      --cdc-fade-end: 0px;
+      --lr-ext-fade-start: 36px;
+      --lr-ext-fade-end: 0px;
     }
   }
 
-  .cdc-moments::-webkit-scrollbar {
+  .lr-ext-moments::-webkit-scrollbar {
     display: none;
   }
 
-  .cdc-moment {
+  .lr-ext-moment {
     flex: none;
     display: flex;
     flex-direction: column;
@@ -317,22 +317,22 @@
     padding: 0 12px;
     border: none;
     border-radius: 10px;
-    background: var(--cdc-bg-raised);
-    box-shadow: inset 0 0 0 1px var(--cdc-card-border);
-    color: var(--cdc-text);
+    background: var(--lr-ext-bg-raised);
+    box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+    color: var(--lr-ext-text);
     text-align: start;
     transition: background-color 0.15s !important;
   }
 
-  .cdc-moment:hover {
-    background: var(--cdc-bg-raised-hover);
+  .lr-ext-moment:hover {
+    background: var(--lr-ext-bg-raised-hover);
   }
 
-  .cdc-moment--on {
-    box-shadow: inset 0 0 0 1.5px var(--cdc-accent);
+  .lr-ext-moment--on {
+    box-shadow: inset 0 0 0 1.5px var(--lr-ext-accent);
   }
 
-  .cdc-moment__move {
+  .lr-ext-moment__move {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -341,14 +341,14 @@
     white-space: nowrap;
   }
 
-  .cdc-moment__move > :first-child {
+  .lr-ext-moment__move > :first-child {
     flex: none;
     width: 16px;
     height: 16px;
   }
 
-  .cdc-moment__class {
-    color: var(--cdc-class-color);
+  .lr-ext-moment__class {
+    color: var(--lr-ext-class-color);
     font-size: 11.5px;
     font-weight: 600;
     white-space: nowrap;

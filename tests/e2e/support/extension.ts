@@ -5,12 +5,12 @@ import { chromium, type BrowserContext, type BrowserContextOptions } from '@play
 // Where the build under test is, and how Chromium must be launched to load it.
 
 /**
- * The unpacked extension: dist/chrome, or the folder CDC_EXTENSION_DIR names.
+ * The unpacked extension: dist/chrome, or the folder LR_EXT_EXTENSION_DIR names.
  * A private build keeps a `pnpm dev` running elsewhere from reloading the
  * extension, and the tabs with it, in the middle of a run.
  */
 export const EXTENSION_DIR = path.resolve(
-  process.env['CDC_EXTENSION_DIR'] ??
+  process.env['LR_EXT_EXTENSION_DIR'] ??
     path.join(import.meta.dirname, '..', '..', '..', 'dist', 'chrome'),
 );
 

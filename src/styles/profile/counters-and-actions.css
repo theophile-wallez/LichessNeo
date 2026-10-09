@@ -5,11 +5,11 @@
 .user-show > .user-show__social {
   gap: 16px !important;
   box-sizing: border-box;
-  padding: 0 20px 18px calc(var(--cdc-pf-pad) + var(--cdc-pf-avatar) + var(--cdc-pf-gap));
-  border: 1px solid var(--cdc-card-border);
+  padding: 0 20px 18px calc(var(--lr-ext-pf-pad) + var(--lr-ext-pf-avatar) + var(--lr-ext-pf-gap));
+  border: 1px solid var(--lr-ext-card-border);
   border-top: none;
   border-radius: 0 0 14px 14px;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 /* Phones: counters on one row, actions on the next. */
@@ -17,7 +17,7 @@
   .user-show > .user-show__social {
     flex-wrap: wrap !important;
     row-gap: 14px !important;
-    padding-inline: var(--cdc-pf-pad) !important;
+    padding-inline: var(--lr-ext-pf-pad) !important;
   }
 
   .user-show > .user-show__social .number-menu {
@@ -48,8 +48,8 @@
   justify-content: center;
   gap: 2px;
   padding: 0 18px 0 0 !important;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 11px !important;
   font-weight: 700 !important;
   letter-spacing: 0.05em;
@@ -60,11 +60,11 @@
 
 .user-show > .user-show__social .number-menu .nm-item + .nm-item {
   padding-inline-start: 18px !important;
-  border-inline-start: 1px solid var(--cdc-border);
+  border-inline-start: 1px solid var(--lr-ext-border);
 }
 
 .user-show > .user-show__social .number-menu .nm-item strong {
-  color: var(--cdc-text-strong);
+  color: var(--lr-ext-text-strong);
   font-size: 19px !important;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
@@ -72,11 +72,11 @@
 }
 
 .user-show > .user-show__social .number-menu .nm-item:hover {
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
 }
 
 .user-show > .user-show__social .number-menu .nm-item:hover strong {
-  color: var(--cdc-accent-hover);
+  color: var(--lr-ext-accent-hover);
 }
 
 .user-show > .user-show__social .number-menu .nm-item br {
@@ -107,9 +107,9 @@
   box-sizing: border-box;
   height: 38px;
   padding: 0 14px !important;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow) !important;
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 700;
   line-height: 1;
@@ -118,8 +118,8 @@
 }
 
 .user-show > .user-show__social .user-actions .menu-container .btn-rack__btn:hover {
-  background: var(--cdc-btn-grey-hover) !important;
-  color: var(--cdc-text-strong) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show > .user-show__social .user-actions .menu-container .btn-rack__btn::before {
@@ -131,14 +131,14 @@
 /* Follow is the call to action, as on the hover card. Matched on the href:
  * Block shares the rack, and /rel/ URLs aren't localized. */
 .user-show > .user-show__social .user-actions .relation-button[href*='/rel/follow/'] {
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow) !important;
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   color: #fff !important;
   text-shadow: 0 1px 1px #00000033 !important;
 }
 
 .user-show > .user-show__social .user-actions .relation-button[href*='/rel/follow/']:hover {
-  background: var(--cdc-btn-primary-hover) !important;
+  background: var(--lr-ext-btn-primary-hover) !important;
   color: #fff !important;
 }
 
@@ -158,34 +158,34 @@
   height: 38px !important;
   padding: 0 14px !important;
   border-radius: 8px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text) !important;
   font-size: 14px !important;
   font-weight: 700;
 }
 
 .user-show > .user-show__social .user-actions .dropdown:hover > a,
 .user-show > .user-show__social .user-actions .dropdown.visible > a {
-  background: var(--cdc-btn-grey-hover);
+  background: var(--lr-ext-btn-grey-hover);
   border-radius: 8px;
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-text-strong) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show > .user-show__social .user-actions .dropdown .dropdown-window {
   top: 44px !important;
   padding: 6px;
-  border: 1px solid var(--cdc-menu-border);
+  border: 1px solid var(--lr-ext-menu-border);
   border-radius: 10px !important;
-  background: var(--cdc-menu-bg) !important;
-  box-shadow: var(--cdc-menu-shadow) !important;
+  background: var(--lr-ext-menu-bg) !important;
+  box-shadow: var(--lr-ext-menu-shadow) !important;
 }
 
 .user-show > .user-show__social .user-actions .dropdown .dropdown-window :is(a, button) {
   width: 15em;
   border-radius: 7px !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
 }
@@ -197,8 +197,8 @@
 }
 
 .user-show > .user-show__social .user-actions .dropdown .dropdown-window :is(a, button):hover {
-  background: var(--cdc-menu-hover) !important;
-  color: var(--cdc-text-strong) !important;
+  background: var(--lr-ext-menu-hover) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* ---- Note zone --- */
@@ -206,10 +206,10 @@
 .user-show > .note-zone {
   margin: 0 0 16px !important;
   padding: 18px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 14px;
-  background: var(--cdc-bg-panel);
-  color: var(--cdc-text-dim);
+  background: var(--lr-ext-bg-panel);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
 }
 
@@ -227,10 +227,10 @@
 }
 
 .user-show > .note-zone .note {
-  border-top-color: var(--cdc-border) !important;
+  border-top-color: var(--lr-ext-border) !important;
 }
 
 .user-show > .note-zone .note__meta {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
 }

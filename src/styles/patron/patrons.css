@@ -11,7 +11,7 @@ main.plan :is(.best_patrons, .recent-patrons) .user-link {
   display: block !important;
   overflow: hidden;
   min-width: 0;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 700;
   line-height: 30px;
@@ -29,8 +29,8 @@ main.plan :is(.best_patrons, .recent-patrons) .user-link .line {
   margin-inline-end: 10px !important;
   vertical-align: top;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--cdc-paco) 16%, transparent);
-  color: var(--cdc-paco) !important;
+  background: color-mix(in srgb, var(--lr-ext-paco) 16%, transparent);
+  color: var(--lr-ext-paco) !important;
   font-size: 17px;
   opacity: 1 !important;
 }
@@ -48,8 +48,8 @@ main.plan :is(.best_patrons, .recent-patrons) .user-link.online .line.patron::af
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--cdc-good);
-  box-shadow: 0 0 0 2px var(--cdc-bg-panel);
+  background: var(--lr-ext-good);
+  box-shadow: 0 0 0 2px var(--lr-ext-bg-panel);
 }
 
 /* Lichess puts a no-break space after the title: that's its gap. */
@@ -74,7 +74,7 @@ main.plan .best_patrons h2 {
   gap: 12px;
   margin: 0 0 16px !important;
   color: #fff;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
   font-size: 22px !important;
   font-weight: 800 !important;
   text-align: start !important;
@@ -89,10 +89,10 @@ main.plan .best_patrons h2::before {
   background:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sparkles--ffc689.svg') center /
       22px no-repeat,
-    color-mix(in srgb, var(--cdc-orange) 20%, transparent);
+    color-mix(in srgb, var(--lr-ext-orange) 20%, transparent);
   box-shadow:
     inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--cdc-orange) 35%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-orange) 35%, transparent);
 }
 
 main.plan .best_patrons .list {
@@ -103,10 +103,10 @@ main.plan .best_patrons .list {
 }
 
 main.plan .best_patrons .list > .paginated {
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px;
-  background: var(--cdc-bg-panel);
-  animation: cdc-plan-in 0.35s ease-out both;
+  background: var(--lr-ext-bg-panel);
+  animation: lr-ext-plan-in 0.35s ease-out both;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     border-color 0.15s,
@@ -115,9 +115,9 @@ main.plan .best_patrons .list > .paginated {
 }
 
 main.plan .best_patrons .list > .paginated:hover {
-  border-color: color-mix(in srgb, var(--cdc-paco) 55%, transparent);
-  background: var(--cdc-card-hover);
-  box-shadow: var(--cdc-card-shadow-hover);
+  border-color: color-mix(in srgb, var(--lr-ext-paco) 55%, transparent);
+  background: var(--lr-ext-card-hover);
+  box-shadow: var(--lr-ext-card-shadow-hover);
   transform: translateY(-2px);
 }
 
@@ -140,18 +140,18 @@ main.plan .best_patrons .pager {
 main.plan .best_patrons .pager a {
   padding: 10px 22px;
   border-radius: 8px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text) !important;
   font-weight: 700;
 }
 
 main.plan .best_patrons .pager a:hover {
-  background: var(--cdc-btn-grey-hover);
+  background: var(--lr-ext-btn-grey-hover);
   color: #fff !important;
 }
 
-@keyframes cdc-plan-in {
+@keyframes lr-ext-plan-in {
   from {
     opacity: 0;
     transform: translateY(6px);
@@ -167,13 +167,13 @@ main.plan .recent-patrons {
   align-self: start;
   display: none;
   flex-direction: column;
-  max-height: calc(var(--cdc-main-h, 100dvh) - 32px);
+  max-height: calc(var(--lr-ext-main-h, 100dvh) - 32px);
   margin-top: 16px !important;
   padding: 0 !important;
   overflow: hidden;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 12px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
 }
 
 @media (min-width: 1020px) {
@@ -189,9 +189,9 @@ main.plan .recent-patrons h2 {
   gap: 10px;
   margin: 0 !important;
   padding: 16px 16px 12px;
-  border-bottom: 1px solid var(--cdc-border) !important;
+  border-bottom: 1px solid var(--lr-ext-border) !important;
   color: #fff;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
   font-size: 17px !important;
   font-weight: 800 !important;
 }
@@ -205,10 +205,10 @@ main.plan .recent-patrons h2::before {
   background:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg') center / 20px
       no-repeat,
-    color-mix(in srgb, var(--cdc-pink) 20%, transparent);
+    color-mix(in srgb, var(--lr-ext-pink) 20%, transparent);
   box-shadow:
     inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--cdc-pink) 35%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-pink) 35%, transparent);
 }
 
 main.plan .recent-patrons .list {
@@ -240,7 +240,7 @@ main.plan .recent-patrons .user-link .line {
 }
 
 main.plan .recent-patrons .user-link.online .line.patron::after {
-  box-shadow: 0 0 0 2px var(--cdc-bg-panel);
+  box-shadow: 0 0 0 2px var(--lr-ext-bg-panel);
 }
 
 /* ---- Your wings --- */
@@ -250,9 +250,9 @@ main.plan .patron-style-selector {
   gap: 20px !important;
   margin: 0 0 16px !important;
   padding: 24px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
 }
 
 main.plan .pss__colors {
@@ -269,8 +269,8 @@ main.plan .pss__colors {
 
 main.plan .pss__color {
   border-radius: 12px !important;
-  background: var(--cdc-bg-raised) !important;
-  font-family: var(--cdc-font) !important;
+  background: var(--lr-ext-bg-raised) !important;
+  font-family: var(--lr-ext-font) !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.15s !important;
@@ -291,7 +291,7 @@ main.plan .pss__color__tier-name {
 
 main.plan .patron-style-selector__info p {
   margin: 0;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 15px;
   line-height: 1.55;
 }

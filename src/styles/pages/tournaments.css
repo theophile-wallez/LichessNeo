@@ -4,7 +4,7 @@
   display: block;
   padding: 8px 12px;
   border-radius: 6px;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-weight: 600;
 }
 
@@ -33,7 +33,7 @@
 .tour-home__side .scheduled {
   padding: 6px;
   border-radius: 8px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
 }
 
 .tour-home__side .leaderboard li {
@@ -58,11 +58,11 @@
 @media (min-width: 1020px) {
   main.tour-home > .tour-home__side {
     position: sticky;
-    top: calc(-1 * var(--cdc-page-top));
+    top: calc(-1 * var(--lr-ext-page-top));
     align-self: start;
-    max-height: var(--cdc-main-h, 100dvh);
-    margin-top: calc(-1 * var(--cdc-page-top));
-    padding-top: calc(2 * var(--cdc-page-top));
+    max-height: var(--lr-ext-main-h, 100dvh);
+    margin-top: calc(-1 * var(--lr-ext-page-top));
+    padding-top: calc(2 * var(--lr-ext-page-top));
     overflow-y: auto;
     scrollbar-width: thin;
   }
@@ -88,8 +88,8 @@
     gap: 12px;
     margin: 0 !important;
     padding: 16px 0 !important;
-    background: var(--cdc-bg-page);
-    box-shadow: var(--cdc-pin-cover);
+    background: var(--lr-ext-bg-page);
+    box-shadow: var(--lr-ext-pin-cover);
   }
 
   /* The trophy, as in the sidebar's Arena tournaments entry. */
@@ -108,7 +108,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -134,7 +134,7 @@
 
 .tour-chart .timeheader {
   border-inline-start-color: #ffffff0f !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
 }
@@ -148,10 +148,10 @@
 /* Tournament tiles: dark cards with their kind's color on the edge and icon, instead of
  * Lichess's saturated, grainy blocks. */
 .tsht {
-  --cdc-tsht: var(--cdc-grey-500);
-  border-inline-start: 3px solid var(--cdc-tsht) !important;
+  --lr-ext-tsht: var(--lr-ext-grey-500);
+  border-inline-start: 3px solid var(--lr-ext-tsht) !important;
   border-radius: 8px !important;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   background-image: none !important;
   box-shadow: none !important;
   letter-spacing: normal !important;
@@ -160,7 +160,7 @@
 }
 
 .tsht:hover {
-  background: var(--cdc-bg-raised-hover) !important;
+  background: var(--lr-ext-bg-raised-hover) !important;
   filter: none !important;
 }
 
@@ -169,12 +169,12 @@
 }
 
 .tsht icon {
-  color: color-mix(in srgb, var(--cdc-tsht) 70%, #fff);
+  color: color-mix(in srgb, var(--lr-ext-tsht) 70%, #fff);
 }
 
 /* The tile's color beats the mode icon's own (theme/). */
 .tsht icon::before {
-  --cdc-mode-color: currentColor;
+  --lr-ext-mode-color: currentColor;
 }
 
 .tsht .name {
@@ -187,42 +187,42 @@
 }
 
 .tsht-hourly {
-  --cdc-tsht: var(--cdc-accent);
+  --lr-ext-tsht: var(--lr-ext-accent);
 }
 
 .tsht-daily,
 .tsht-eastern {
-  --cdc-tsht: var(--cdc-cyan-dark);
+  --lr-ext-tsht: var(--lr-ext-cyan-dark);
 }
 
 .tsht-weekly {
-  --cdc-tsht: var(--cdc-orange-dark);
+  --lr-ext-tsht: var(--lr-ext-orange-dark);
 }
 
 .tsht-monthly {
-  --cdc-tsht: var(--cdc-red-dark);
+  --lr-ext-tsht: var(--lr-ext-red-dark);
 }
 
 .tsht-yearly,
 .tsht-weekend,
 .tsht-unique {
-  --cdc-tsht: var(--cdc-orange-dark);
+  --lr-ext-tsht: var(--lr-ext-orange-dark);
 }
 
 .tsht-marathon {
-  --cdc-tsht: var(--cdc-purple-dark);
+  --lr-ext-tsht: var(--lr-ext-purple-dark);
 }
 
 .tsht-max-rating {
-  --cdc-tsht: var(--cdc-purple-dark);
+  --lr-ext-tsht: var(--lr-ext-purple-dark);
 }
 
 .tsht-variant {
-  --cdc-tsht: var(--cdc-orange-dark);
+  --lr-ext-tsht: var(--lr-ext-orange-dark);
 }
 
 .tsht-user-created {
-  --cdc-tsht: var(--cdc-accent-dim);
+  --lr-ext-tsht: var(--lr-ext-accent-dim);
 }
 
 /* The calendar draws the same tiles as bars. Its dates hang into the page's left margin,
@@ -234,10 +234,10 @@
 }
 
 #tournament-calendar .tournament {
-  --cdc-tsht: var(--cdc-grey-500);
-  border-inline-start: 3px solid var(--cdc-tsht);
+  --lr-ext-tsht: var(--lr-ext-grey-500);
+  border-inline-start: 3px solid var(--lr-ext-tsht);
   border-radius: 6px !important;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   box-shadow: none !important;
   color: #fff !important;
   font-weight: 700;
@@ -247,39 +247,39 @@
 }
 
 #tournament-calendar .tournament:hover {
-  background: var(--cdc-bg-raised-hover) !important;
+  background: var(--lr-ext-bg-raised-hover) !important;
 }
 
 #tournament-calendar .tournament .icon {
-  color: color-mix(in srgb, var(--cdc-tsht) 70%, #fff);
+  color: color-mix(in srgb, var(--lr-ext-tsht) 70%, #fff);
 }
 
 #tournament-calendar .tournament .icon::before {
-  --cdc-mode-color: currentColor;
+  --lr-ext-mode-color: currentColor;
 }
 
 #tournament-calendar .tournament.weekly {
-  --cdc-tsht: var(--cdc-orange-dark);
+  --lr-ext-tsht: var(--lr-ext-orange-dark);
 }
 
 #tournament-calendar .tournament.monthly {
-  --cdc-tsht: var(--cdc-red-dark);
+  --lr-ext-tsht: var(--lr-ext-red-dark);
 }
 
 #tournament-calendar .tournament:is(.yearly, .weekend, .unique) {
-  --cdc-tsht: var(--cdc-orange-dark);
+  --lr-ext-tsht: var(--lr-ext-orange-dark);
 }
 
 #tournament-calendar .tournament.marathon {
-  --cdc-tsht: var(--cdc-purple-dark);
+  --lr-ext-tsht: var(--lr-ext-purple-dark);
 }
 
 #tournament-calendar .tournament.shield {
-  --cdc-tsht: var(--cdc-grey-300);
+  --lr-ext-tsht: var(--lr-ext-grey-300);
 }
 
 #tournament-calendar date {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-weight: 700;
 }
 

@@ -17,7 +17,7 @@
         "width": 40,
         "height": 40
       },
-      "html": "<div class=\"cdc-tooltip cdc-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 460px; --cdc-tooltip-arrow: 60px;\">Flip board<kbd>f</kbd></div>"
+      "html": "<div class=\"lr-ext-tooltip lr-ext-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 460px; --lr-ext-tooltip-arrow: 60px;\">Flip board<kbd>f</kbd></div>"
     },
     {
       "name": "below, near the top",
@@ -28,7 +28,7 @@
         "width": 40,
         "height": 40
       },
-      "html": "<div class=\"cdc-tooltip cdc-tooltip--on\" aria-hidden=\"true\" data-side=\"below\" style=\"top: 68px; left: 460px; --cdc-tooltip-arrow: 60px;\">Menu</div>"
+      "html": "<div class=\"lr-ext-tooltip lr-ext-tooltip--on\" aria-hidden=\"true\" data-side=\"below\" style=\"top: 68px; left: 460px; --lr-ext-tooltip-arrow: 60px;\">Menu</div>"
     },
     {
       "name": "against the right edge",
@@ -39,7 +39,7 @@
         "width": 40,
         "height": 40
       },
-      "html": "<div class=\"cdc-tooltip cdc-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 872px; --cdc-tooltip-arrow: 108px;\">Settings<kbd>s</kbd></div>"
+      "html": "<div class=\"lr-ext-tooltip lr-ext-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 872px; --lr-ext-tooltip-arrow: 108px;\">Settings<kbd>s</kbd></div>"
     },
     {
       "name": "against the left edge",
@@ -50,7 +50,7 @@
         "width": 30,
         "height": 30
       },
-      "html": "<div class=\"cdc-tooltip cdc-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 8px; --cdc-tooltip-arrow: 7px;\">Analysis (a)<kbd>b</kbd></div>"
+      "html": "<div class=\"lr-ext-tooltip lr-ext-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 8px; --lr-ext-tooltip-arrow: 7px;\">Analysis (a)<kbd>b</kbd></div>"
     },
     {
       "name": "a bracket alone",
@@ -61,7 +61,7 @@
         "width": 40,
         "height": 40
       },
-      "html": "<div class=\"cdc-tooltip cdc-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 460px; --cdc-tooltip-arrow: 60px;\">(x)</div>"
+      "html": "<div class=\"lr-ext-tooltip lr-ext-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 460px; --lr-ext-tooltip-arrow: 60px;\">(x)</div>"
     },
     {
       "name": "a word in brackets",
@@ -72,7 +72,7 @@
         "width": 33,
         "height": 40
       },
-      "html": "<div class=\"cdc-tooltip cdc-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 457px; --cdc-tooltip-arrow: 60px;\">Resign (confirm)</div>"
+      "html": "<div class=\"lr-ext-tooltip lr-ext-tooltip--on\" aria-hidden=\"true\" data-side=\"above\" style=\"top: 362px; left: 457px; --lr-ext-tooltip-arrow: 60px;\">Resign (confirm)</div>"
     }
   ]
 }

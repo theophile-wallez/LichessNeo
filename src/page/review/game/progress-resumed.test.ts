@@ -21,7 +21,7 @@ it('takes up a saved analysis where it was left', async () => {
   const saved = 20;
   const progress = records.map((record, i) => (i < saved ? record : undefined));
   localStorage.setItem(
-    `cdc-review-progress:passanta:${records.length}:v1`,
+    `lr-ext-review-progress:passanta:${records.length}:v1`,
     JSON.stringify(z.encode(z.array(z.optional(StoredRecordCodec)), progress)),
   );
   let deep = 0;
@@ -31,6 +31,6 @@ it('takes up a saved analysis where it was left', async () => {
   });
   review.start();
   await advance(10_000);
-  expect(localStorage.getItem(`cdc-review:passanta:${records.length}:v1`)).not.toBeNull();
+  expect(localStorage.getItem(`lr-ext-review:passanta:${records.length}:v1`)).not.toBeNull();
   expect(deep).toBe(records.length - saved);
 });

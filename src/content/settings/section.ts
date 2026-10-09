@@ -28,15 +28,15 @@ const rows = (): readonly Row[] => [
 ];
 
 function rowMarkup({ key, title, body }: Row): SafeHtml {
-  const id = `cdc-setting-${key}`;
-  return html`<div class="cdc-setting" data-cdc-setting="${key}">
-    <span class="cdc-setting__icon" aria-hidden="true"></span>
-    <div class="cdc-setting__text">
-      <h2 class="cdc-setting__title" id="${id}">${title}</h2>
-      <p class="cdc-setting__body">${body}</p>
+  const id = `lr-ext-setting-${key}`;
+  return html`<div class="lr-ext-setting" data-lr-ext-setting="${key}">
+    <span class="lr-ext-setting__icon" aria-hidden="true"></span>
+    <div class="lr-ext-setting__text">
+      <h2 class="lr-ext-setting__title" id="${id}">${title}</h2>
+      <p class="lr-ext-setting__body">${body}</p>
     </div>
-    <button type="button" class="cdc-switch" role="switch" aria-checked="false" aria-labelledby="${id}">
-      <span class="cdc-switch__knob"></span>
+    <button type="button" class="lr-ext-switch" role="switch" aria-checked="false" aria-labelledby="${id}">
+      <span class="lr-ext-switch__knob"></span>
     </button>
   </div>`;
 }
@@ -45,32 +45,32 @@ const rowOf = (key: string | undefined): Row | undefined => rows().find(row => r
 
 function showSettings(section: HTMLElement, settings: Settings): void {
   // The switches wait for the stored settings, rather than flip from the defaults to them.
-  setData(section, 'cdcPending', settingsRead() ? null : '');
-  for (const element of queryAll(section, '.cdc-setting', HTMLElement)) {
-    const row = rowOf(element.dataset.cdcSetting);
+  setData(section, 'lrExtPending', settingsRead() ? null : '');
+  for (const element of queryAll(section, '.lr-ext-setting', HTMLElement)) {
+    const row = rowOf(element.dataset.lrExtSetting);
     const on = row ? settings[row.key] : false;
-    setData(element, 'cdcOn', on ? '' : null);
-    const button = queryOne(element, '.cdc-switch', HTMLButtonElement);
+    setData(element, 'lrExtOn', on ? '' : null);
+    const button = queryOne(element, '.lr-ext-switch', HTMLButtonElement);
     if (button?.getAttribute('aria-checked') !== String(on))
       button?.setAttribute('aria-checked', String(on));
   }
 }
 
 function onClick(event: MouseEvent): void {
-  if (!closestTo(event.target, '.cdc-switch', HTMLButtonElement)) return;
-  const row = rowOf(closestTo(event.target, '.cdc-setting', HTMLElement)?.dataset.cdcSetting);
+  if (!closestTo(event.target, '.lr-ext-switch', HTMLButtonElement)) return;
+  const row = rowOf(closestTo(event.target, '.lr-ext-setting', HTMLElement)?.dataset.lrExtSetting);
   if (row) void saveSetting(row.key, !currentSettings()[row.key]);
 }
 
 /** The section, for the account page's content column, kept in step with the settings. */
 export function buildSection(): HTMLElement {
-  const section = createElement('div', { className: 'page-menu__content cdc-settings' });
+  const section = createElement('div', { className: 'page-menu__content lr-ext-settings' });
   setHtml(
     section,
     html`<div class="box box-pad">
       <h1 class="box__top">${message('settingsTitle')}</h1>
-      <p class="cdc-settings__intro">${message('settingsIntro')}</p>
-      <div class="cdc-settings__list">${rows().map(rowMarkup)}</div>
+      <p class="lr-ext-settings__intro">${message('settingsIntro')}</p>
+      <div class="lr-ext-settings__list">${rows().map(rowMarkup)}</div>
     </div>`,
   );
   section.querySelector('.box')?.append(importSection(packLibrary()));

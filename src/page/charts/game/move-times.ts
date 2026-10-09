@@ -41,10 +41,10 @@ export function moveTimesMarkup(chart: MoveTimesChart, size: PlotSize): SafeHtml
     const length = Math.max(1, timeShare(time.seconds, longest) * half);
     const top = time.color === 'white' ? middle - length : middle;
     const x = (scale.x(time.ply) - width / 2).toFixed(1);
-    return html`<rect class="cdc-gchart__bar cdc-gchart__bar--${time.color}" data-cdc-ply="${time.ply}" x="${x}" y="${top.toFixed(1)}" width="${width.toFixed(1)}" height="${length.toFixed(1)}" rx="${Math.min(2, width / 2).toFixed(1)}"/>`;
+    return html`<rect class="lr-ext-gchart__bar lr-ext-gchart__bar--${time.color}" data-lr-ext-ply="${time.ply}" x="${x}" y="${top.toFixed(1)}" width="${width.toFixed(1)}" height="${length.toFixed(1)}" rx="${Math.min(2, width / 2).toFixed(1)}"/>`;
   });
-  return html`<line class="cdc-rchart__grid" x1="0" x2="${size.width}" y1="${middle}" y2="${middle}"/>
-    <g class="cdc-rchart__wipe">${columns}</g>
+  return html`<line class="lr-ext-rchart__grid" x1="0" x2="${size.width}" y1="${middle}" y2="${middle}"/>
+    <g class="lr-ext-rchart__wipe">${columns}</g>
     ${phasesMarkup(phases, names, { scale, size })}
     ${overlayMarkup(size)}
     ${hitArea({ x: 0, y: 0, width: size.width, height: size.height })}`;

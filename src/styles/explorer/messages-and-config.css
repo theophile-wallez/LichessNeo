@@ -12,13 +12,13 @@
 .explorer-box .message {
   gap: 8px;
   padding: 16px 12px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-style: normal !important;
 }
 
 .explorer-box .message > [data-icon]::before,
 .explorer-box .message > i::before {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 28px;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .explorer-box.explorer__config :is(label, .toggle) {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
   font-weight: 700 !important;
   letter-spacing: 0.04em;
@@ -99,28 +99,28 @@
   padding: 0 4px !important;
   border: none !important;
   border-radius: 5px !important;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow) !important;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 13px;
   font-weight: 700;
   text-shadow: none !important;
 }
 
 .explorer-box.explorer__config .choices button:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
   color: #fff !important;
 }
 
 .explorer-box.explorer__config .choices button:is([aria-pressed='true'], .active) {
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow) !important;
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   color: #fff !important;
 }
 
 .explorer-box.explorer__config .choices button:is([aria-pressed='true'], .active):hover {
-  background: var(--cdc-btn-primary-hover) !important;
+  background: var(--lr-ext-btn-primary-hover) !important;
 }
 
 /* Time controls keep their mode colors (theme/), white once chosen. */
@@ -129,7 +129,7 @@
 }
 
 .explorer-box.explorer__config .speed .choices button[aria-pressed='true'] [data-icon]::before {
-  --cdc-mode-color: #fff;
+  --lr-ext-mode-color: #fff;
 }
 
 .explorer-box.explorer__config .name .player-name {
@@ -137,7 +137,7 @@
 }
 
 .explorer-box.explorer__config .name .color {
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-weight: 700;
   text-transform: none;
 }
@@ -153,10 +153,10 @@
   height: 30px;
   padding: 0 8px !important;
   border-radius: 5px !important;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   color: #fff !important;
   color-scheme: dark;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
 }
 
 .explorer-box.explorer__config section.save {

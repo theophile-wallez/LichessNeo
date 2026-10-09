@@ -3,20 +3,20 @@
 /* Lichess paints the dasher's hovers and current choice with --c-dasher: make it
  * the menu's hover grey. */
 #top #dasher_app {
-  --c-dasher: var(--cdc-menu-hover) !important;
-  --c-dasher-light: var(--cdc-menu-hover) !important;
-  --cdc-sound-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
-  --cdc-theme-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
-  --cdc-board-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-view.svg');
-  --cdc-piece-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn.svg');
+  --c-dasher: var(--lr-ext-menu-hover) !important;
+  --c-dasher-light: var(--lr-ext-menu-hover) !important;
+  --lr-ext-sound-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
+  --lr-ext-theme-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
+  --lr-ext-board-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-view.svg');
+  --lr-ext-piece-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn.svg');
   box-sizing: border-box;
   width: 264px !important;
   padding: 6px !important;
-  border: 1px solid var(--cdc-menu-border) !important;
+  border: 1px solid var(--lr-ext-menu-border) !important;
   border-radius: 10px !important;
-  background: var(--cdc-menu-bg) !important;
-  box-shadow: var(--cdc-menu-shadow) !important;
-  font-family: var(--cdc-font);
+  background: var(--lr-ext-menu-bg) !important;
+  box-shadow: var(--lr-ext-menu-shadow) !important;
+  font-family: var(--lr-ext-font);
   text-shadow: none !important;
 }
 
@@ -43,7 +43,7 @@
   padding: 0 12px !important;
   border-radius: 6px;
   background: none !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 15px;
   font-weight: 600;
   opacity: 1 !important;
@@ -51,7 +51,7 @@
 }
 
 #dasher_app :is(.links a, .links button, .subs .sub, .zen button):hover {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
   color: #fff !important;
 }
 
@@ -62,7 +62,7 @@
   width: 20px;
   margin: 0 !important;
   background: none !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 18px !important;
   text-align: center;
   opacity: 1 !important;
@@ -78,15 +78,15 @@
   display: flex !important;
   justify-content: center;
   width: 20px !important;
-  color: var(--cdc-accent) !important;
+  color: var(--lr-ext-accent) !important;
 }
 
 #dasher_app .subs .sub:not(.language)::before {
   content: '';
   height: 20px;
-  background: var(--cdc-text-dim) !important;
-  -webkit-mask: var(--cdc-sub-icon) center / 20px no-repeat;
-  mask: var(--cdc-sub-icon) center / 20px no-repeat;
+  background: var(--lr-ext-text-dim) !important;
+  -webkit-mask: var(--lr-ext-sub-icon) center / 20px no-repeat;
+  mask: var(--lr-ext-sub-icon) center / 20px no-repeat;
 }
 
 #dasher_app .subs .sub:not(.language):hover::before {
@@ -95,20 +95,20 @@
 
 /* Sub-menus are matched by position: their labels are localized. */
 #dasher_app .subs .sub:nth-child(2) {
-  --cdc-sub-icon: var(--cdc-sound-icon);
+  --lr-ext-sub-icon: var(--lr-ext-sound-icon);
 }
 #dasher_app .subs .sub:nth-child(3) {
-  --cdc-sub-icon: var(--cdc-theme-icon);
+  --lr-ext-sub-icon: var(--lr-ext-theme-icon);
 }
 #dasher_app .subs .sub:nth-child(4) {
-  --cdc-sub-icon: var(--cdc-board-icon);
+  --lr-ext-sub-icon: var(--lr-ext-board-icon);
 }
 #dasher_app .subs .sub:nth-child(5) {
-  --cdc-sub-icon: var(--cdc-piece-icon);
+  --lr-ext-sub-icon: var(--lr-ext-piece-icon);
 }
 
 #dasher_app .subs .sub::after {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
   opacity: 1 !important;
 }
@@ -118,7 +118,7 @@
 }
 
 #dasher_app .logout button:hover {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
 }
 
 /* Ping and server lag: one small dim line with the signal bars. */
@@ -129,7 +129,7 @@
   margin: 6px -6px 0;
   padding: 10px 18px 6px !important;
   border-top: 1px solid #ffffff14 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
 }
 
@@ -139,7 +139,7 @@
 
 #dasher_app .status :is(.ping, .server) {
   display: inline !important;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
 }
 
 #dasher_app .status em {
@@ -148,7 +148,7 @@
 
 #dasher_app .status strong {
   padding: 0 3px !important;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-weight: 700;
 }
 
@@ -177,7 +177,7 @@
 
 #dasher_app .head::before {
   margin: 0 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 14px;
   opacity: 1 !important;
 }
@@ -195,7 +195,7 @@
   padding: 6px 12px !important;
   border: none !important;
   border-radius: 6px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
   transition: background-color 0.1s !important;
@@ -209,13 +209,13 @@
 }
 
 #top #dasher_app :is(.selector button, .langs form button):hover {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
   color: #fff !important;
 }
 
 #top #dasher_app .selector button::before,
 #top #dasher_app .selector button.active::before {
-  color: var(--cdc-accent) !important;
+  color: var(--lr-ext-accent) !important;
 }
 
 #dasher_app .langs .current::after {
@@ -224,9 +224,9 @@
   width: 16px;
   height: 16px;
   margin-inline-start: auto;
-  background: var(--cdc-accent);
-  -webkit-mask: var(--cdc-check) center / contain no-repeat;
-  mask: var(--cdc-check) center / contain no-repeat;
+  background: var(--lr-ext-accent);
+  -webkit-mask: var(--lr-ext-check) center / contain no-repeat;
+  mask: var(--lr-ext-check) center / contain no-repeat;
 }
 
 #dasher_app .langs .help {
@@ -236,13 +236,13 @@
   margin-top: 6px;
   padding: 10px 12px !important;
   border-radius: 6px !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 600;
 }
 
 #top #dasher_app .langs .help:hover {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
   color: #fff !important;
 }
 

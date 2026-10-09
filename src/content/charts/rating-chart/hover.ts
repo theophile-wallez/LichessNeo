@@ -27,17 +27,17 @@ function nearestSample(plot: Plot, x: number): number {
 }
 
 function placeDots(svg: SVGSVGElement, hits: readonly Hit[], x: number, plot: Plot): void {
-  const guide = queryOne(svg, '.cdc-rchart__guide', SVGElement);
+  const guide = queryOne(svg, '.lr-ext-rchart__guide', SVGElement);
   if (guide) setAttributes(guide, { x1: x, x2: x });
-  for (const dot of queryAll(svg, '.cdc-rchart__dot', SVGElement)) {
-    const hit = hits.find(({ row }) => row.index === Number(dot.dataset.cdcSeries));
-    dot.classList.toggle('cdc-rchart__dot--on', hit !== undefined);
+  for (const dot of queryAll(svg, '.lr-ext-rchart__dot', SVGElement)) {
+    const hit = hits.find(({ row }) => row.index === Number(dot.dataset.lrExtSeries));
+    dot.classList.toggle('lr-ext-rchart__dot--on', hit !== undefined);
     if (hit) setAttributes(dot, { cx: x, cy: plot.y(hit.value) });
   }
 }
 
 export function hideSample({ svg, tip }: ChartParts): void {
-  svg.classList.toggle('cdc-rchart__svg--hover', false);
+  svg.classList.toggle('lr-ext-rchart__svg--hover', false);
   hideTip(tip);
 }
 
@@ -61,7 +61,7 @@ export function showSample({ event, plot, parts, formats }: Hover): void {
     return;
   }
   const x = plot.x(time);
-  parts.svg.classList.toggle('cdc-rchart__svg--hover', true);
+  parts.svg.classList.toggle('lr-ext-rchart__svg--hover', true);
   placeDots(parts.svg, hits, x, plot);
   // Highest rating first.
   const rows = hits

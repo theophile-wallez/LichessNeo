@@ -7,9 +7,9 @@ import { hugeiconMarkup, type HugeIcon, type IconOptions } from './hugeicons-svg
 
 export type { HugeIcon };
 
-/** The icon inline, sized by `.cdc-hi` (styles/theme/hugeicons/) to the text around it. */
+/** The icon inline, sized by `.lr-ext-hi` (styles/theme/hugeicons/) to the text around it. */
 export const hugeicon = (icon: HugeIcon, options: IconOptions = {}): SafeHtml => {
-  const className = options.className ? `cdc-hi ${options.className}` : 'cdc-hi';
+  const className = options.className ? `lr-ext-hi ${options.className}` : 'lr-ext-hi';
   // The package's own constants, every value escaped: no outside markup gets in.
   return trustedHtml(hugeiconMarkup(icon, { ...options, className }));
 };

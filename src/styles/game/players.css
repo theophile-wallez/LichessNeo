@@ -16,13 +16,13 @@
     gap: 10px;
     min-height: 46px;
     padding: 6px 10px 6px 6px;
-    border: 1px solid var(--cdc-card-border);
+    border: 1px solid var(--lr-ext-card-border);
     border-radius: 10px;
     background: #ffffff08;
     transition:
       background-color 0.15s,
       border-color 0.15s !important;
-    animation: cdc-meta-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+    animation: lr-ext-meta-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
     animation-delay: 60ms;
   }
 
@@ -31,7 +31,7 @@
   }
 
   main.round .game__meta__players .player:hover {
-    border-color: var(--cdc-card-border-hover);
+    border-color: var(--lr-ext-card-border-hover);
     background: #ffffff0f;
   }
 
@@ -46,7 +46,7 @@
     border-radius: 8px;
     background:
       var(---white-king) center / 84% no-repeat,
-      var(--cdc-sq-light, var(--cdc-orange-light));
+      var(--lr-ext-sq-light, var(--lr-ext-orange-light));
     box-shadow:
       inset 0 1px 0 #ffffff40,
       inset 0 -3px 0 #00000026,
@@ -59,7 +59,7 @@
   main.round .game__meta__players .player.black::before {
     background:
       var(---black-king) center / 84% no-repeat,
-      var(--cdc-sq-dark, var(--cdc-orange-dark));
+      var(--lr-ext-sq-dark, var(--lr-ext-orange-dark));
   }
 
   main.round .game__meta__players .player:hover::before {
@@ -75,9 +75,9 @@
     inset-inline-start: 9px;
     width: 30px;
     height: 18px;
-    border: 2px solid var(--cdc-bg-panel);
+    border: 2px solid var(--lr-ext-bg-panel);
     border-radius: 999px;
-    background: linear-gradient(145deg, var(--cdc-meta), var(--cdc-meta-2));
+    background: linear-gradient(145deg, var(--lr-ext-meta), var(--lr-ext-meta-2));
     color: #fff;
     font-size: 9px;
     font-style: italic;
@@ -105,7 +105,7 @@
     margin: 0 !important;
   }
 
-  main.round .game__meta__players .cdc-meta-name {
+  main.round .game__meta__players .lr-ext-meta-name {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -119,10 +119,10 @@
     height: 18px;
   }
 
-  main.round .game__meta__players .user-link[data-cdc-flag]:not([data-cdc-flag=''])::after {
+  main.round .game__meta__players .user-link[data-lr-ext-flag]:not([data-lr-ext-flag=''])::after {
     order: 1;
     flex: none;
-    content: attr(data-cdc-flag);
+    content: attr(data-lr-ext-flag);
     font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
     font-size: 15px;
     line-height: 18px;
@@ -135,7 +135,7 @@
     padding: 0 7px;
     border-radius: 999px;
     background: #ffffff12;
-    color: var(--cdc-text);
+    color: var(--lr-ext-text);
     font-size: 12px;
     font-weight: 800;
     line-height: 20px;
@@ -146,7 +146,7 @@
   }
 
   main.round .game__meta__players .player:hover .rating {
-    background: color-mix(in srgb, var(--cdc-meta) 24%, transparent);
+    background: color-mix(in srgb, var(--lr-ext-meta) 24%, transparent);
     color: #fff;
   }
 
@@ -160,7 +160,7 @@
   /* A team battle: the player's team, under their row. */
   main.round .game__meta__players .team {
     margin: -4px 0 0 48px !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 12px;
     font-weight: 700;
   }

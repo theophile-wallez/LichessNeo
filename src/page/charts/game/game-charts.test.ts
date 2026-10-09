@@ -32,12 +32,16 @@ function analyse(count: number): void {
 
 /** The middle of a move's column on the move times. */
 function columnX(ply: number): number {
-  const column = queryOne(document, `#movetimes-chart-container [data-cdc-ply="${ply}"]`, Element);
+  const column = queryOne(
+    document,
+    `#movetimes-chart-container [data-lr-ext-ply="${ply}"]`,
+    Element,
+  );
   return Number(column?.getAttribute('x')) + Number(column?.getAttribute('width')) / 2;
 }
 
 const chartOf = (container: string): HTMLElement | null =>
-  queryOne(document, `${container} .cdc-gchart`, HTMLElement);
+  queryOne(document, `${container} .lr-ext-gchart`, HTMLElement);
 
 // Spies are restored before each test (vitest.config.ts): the layout is faked for each.
 beforeEach(() => {
@@ -75,23 +79,23 @@ it('waits for the server analysis, then draws it over Lichess’s hidden canvas'
   analyse(10);
   vi.advanceTimersByTime(300);
   const container = queryOne(document, '#acpl-chart-container', HTMLElement);
-  expect(container?.classList.contains('cdc-gchart-on')).toBe(true);
-  const line = queryOne(document, '#acpl-chart-container .cdc-gchart__line', Element);
+  expect(container?.classList.contains('lr-ext-gchart-on')).toBe(true);
+  const line = queryOne(document, '#acpl-chart-container .lr-ext-gchart__line', Element);
   const partial = line?.getAttribute('d');
   expect(partial).toMatch(/^M[\d.]+,[\d.]+C/);
   // The rest of the analysis comes in.
   analyse(ctrl.mainline.length);
   vi.advanceTimersByTime(300);
-  const whole = queryOne(document, '#acpl-chart-container .cdc-gchart__line', Element);
+  const whole = queryOne(document, '#acpl-chart-container .lr-ext-gchart__line', Element);
   expect(whole?.getAttribute('d')).not.toBe(partial);
 });
 
 it('draws a column per move, White’s and Black’s, with the phases named', () => {
   const chart = chartOf('#movetimes-chart-container');
-  expect(queryAll(chart ?? document, '.cdc-gchart__bar--white', Element)).toHaveLength(
+  expect(queryAll(chart ?? document, '.lr-ext-gchart__bar--white', Element)).toHaveLength(
     Math.ceil((ctrl.mainline.length - 1) / 2),
   );
-  const names = queryAll(chart ?? document, '.cdc-gchart__phase-name', Element).map(
+  const names = queryAll(chart ?? document, '.lr-ext-gchart__phase-name', Element).map(
     name => name.textContent,
   );
   expect(names).toEqual(['Middlegame', 'Endgame']);
@@ -100,8 +104,8 @@ it('draws a column per move, White’s and Black’s, with the phases named', ()
 it('marks the move on the board, and goes to the move clicked', () => {
   ctrl.jumpToMain(3);
   vi.advanceTimersByTime(300);
-  const marker = queryOne(document, '#acpl-chart-container .cdc-gchart__ply', Element);
-  expect(marker?.classList.contains('cdc-gchart__ply--on')).toBe(true);
+  const marker = queryOne(document, '#acpl-chart-container .lr-ext-gchart__ply', Element);
+  expect(marker?.classList.contains('lr-ext-gchart__ply--on')).toBe(true);
   const svg = queryOne(document, '#movetimes-chart-container svg', SVGSVGElement);
   svg?.dispatchEvent(new MouseEvent('click', { clientX: columnX(6), bubbles: true }));
   expect(ctrl.node.ply).toBe(6);
@@ -111,7 +115,7 @@ it('names the move under the pointer, with its time and clock', () => {
   vi.advanceTimersByTime(300);
   const svg = queryOne(document, '#movetimes-chart-container svg', SVGSVGElement);
   svg?.dispatchEvent(new MouseEvent('pointermove', { clientX: columnX(6), bubbles: true }));
-  const tip = queryOne(document, '#movetimes-chart-container .cdc-rchart__tip', HTMLElement);
+  const tip = queryOne(document, '#movetimes-chart-container .lr-ext-rchart__tip', HTMLElement);
   expect(tip?.textContent).toContain('3... ');
   expect(tip?.textContent).toContain('Clock');
 });

@@ -46,7 +46,7 @@ async function bundleScripts({ out, release }: BuildOptions): Promise<string[]> 
         platform: 'browser',
         logLevel: 'warn',
         // Read by #shared/build-mode.ts: only a dev build reloads itself.
-        transform: { define: { CDC_DEV_BUILD: String(!release) } },
+        transform: { define: { LR_EXT_DEV_BUILD: String(!release) } },
         output: {
           file: path.join(out, output),
           format,

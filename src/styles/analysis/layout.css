@@ -1,44 +1,44 @@
 /* Analysis page (main.analyse, finished games too) from 1020px: the board, then one panel with
- * engine, moves, controls and chat. The page never scrolls; the rows add up to `--cdc-stage`. */
+ * engine, moves, controls and chat. The page never scrolls; the rows add up to `--lr-ext-stage`. */
 
 @media (min-width: 1020px) {
   main.analyse {
-    --cdc-gap: 24px;
-    --cdc-bar: 0px;
-    --cdc-coords-off: 0px;
-    --cdc-gauge-gap: 10px;
-    --cdc-v-room: 56px;
+    --lr-ext-gap: 24px;
+    --lr-ext-bar: 0px;
+    --lr-ext-coords-off: 0px;
+    --lr-ext-gauge-gap: 10px;
+    --lr-ext-v-room: 56px;
     /* Board sized as if the panel were at its minimum; the panel takes the rest, up to 500px. */
-    --cdc-panel-min: 300px;
+    --lr-ext-panel-min: 300px;
     /* Resizable like the game page's board (game/). */
-    --cdc-board: max(
+    --lr-ext-board: max(
       320px,
       calc(
         min(
             calc(
-              var(--cdc-main-h, 100dvh) - var(--cdc-v-room) - 2 * var(--cdc-bar) -
-                var(--cdc-coords-off)
+              var(--lr-ext-main-h, 100dvh) - var(--lr-ext-v-room) - 2 * var(--lr-ext-bar) -
+                var(--lr-ext-coords-off)
             ),
-            calc(var(--cdc-main-w, 100vw) - var(--cdc-panel-min) - var(--cdc-gap) - 72px)
+            calc(var(--lr-ext-main-w, 100vw) - var(--lr-ext-panel-min) - var(--lr-ext-gap) - 72px)
           ) *
-          var(--cdc-board-scale, 1)
+          var(--lr-ext-board-scale, 1)
       )
     );
-    --cdc-panel-w: clamp(
-      var(--cdc-panel-min),
-      calc(var(--cdc-main-w, 100vw) - var(--cdc-board) - var(--cdc-gap) - 72px),
+    --lr-ext-panel-w: clamp(
+      var(--lr-ext-panel-min),
+      calc(var(--lr-ext-main-w, 100vw) - var(--lr-ext-board) - var(--lr-ext-gap) - 72px),
       500px
     );
-    --cdc-stage: calc(var(--cdc-board) + 2 * var(--cdc-bar) + var(--cdc-coords-off));
-    --cdc-chat-h: min(clamp(180px, 30vh, 320px), calc(var(--cdc-board) * 0.4));
-    --cdc-ctrl-h: var(--cdc-controls-h, 48px); /* content/layout/controls-height.ts */
+    --lr-ext-stage: calc(var(--lr-ext-board) + 2 * var(--lr-ext-bar) + var(--lr-ext-coords-off));
+    --lr-ext-chat-h: min(clamp(180px, 30vh, 320px), calc(var(--lr-ext-board) * 0.4));
+    --lr-ext-ctrl-h: var(--lr-ext-controls-h, 48px); /* content/layout/controls-height.ts */
 
     display: grid !important;
-    grid-template-columns: auto var(--cdc-board) calc(var(--cdc-panel-w) + var(--cdc-gap)) !important;
+    grid-template-columns: auto var(--lr-ext-board) calc(var(--lr-ext-panel-w) + var(--lr-ext-gap)) !important;
     grid-template-rows:
-      max(0px, calc(var(--cdc-stage) - var(--cdc-ctrl-h) - var(--cdc-chat-h)))
-      var(--cdc-ctrl-h)
-      var(--cdc-chat-h) !important;
+      max(0px, calc(var(--lr-ext-stage) - var(--lr-ext-ctrl-h) - var(--lr-ext-chat-h)))
+      var(--lr-ext-ctrl-h)
+      var(--lr-ext-chat-h) !important;
     grid-auto-rows: auto !important;
     grid-template-areas:
       'gauge board tools'
@@ -53,15 +53,15 @@
   main.analyse .analyse__board {
     grid-area: board !important;
     align-self: start;
-    margin: var(--cdc-bar) 0 0 !important;
+    margin: var(--lr-ext-bar) 0 0 !important;
   }
 
   /* Placed like the Game Review's bar (review/), which replaces it: level with the squares. */
   main.analyse .eval-gauge {
-    --cdc-gauge-w: 26px;
+    --lr-ext-gauge-w: 26px;
     grid-area: gauge !important;
-    margin: calc(var(--cdc-bar) + var(--cdc-inset-t, 0px)) var(--cdc-gauge-gap)
-      calc(var(--cdc-bar) + var(--cdc-coords-off) + var(--cdc-inset-b, 0px)) 0 !important;
+    margin: calc(var(--lr-ext-bar) + var(--lr-ext-inset-t, 0px)) var(--lr-ext-gauge-gap)
+      calc(var(--lr-ext-bar) + var(--lr-ext-coords-off) + var(--lr-ext-inset-b, 0px)) 0 !important;
   }
 
   /* ---- Player bars --- */
@@ -69,53 +69,54 @@
   /* A game gets the game page's player bars (playerbar.css): ours for the players
    * (content/analysis/players.ts), Lichess's clock strips grown into bars. The board shrinks;
    * a lesson has none. */
-  html:is([data-cdc-has~='analyse-players'], [data-cdc-has~='analyse-clock']):not(
-      [data-cdc-has~='practice']
+  html:is([data-lr-ext-has~='analyse-players'], [data-lr-ext-has~='analyse-clock']):not(
+      [data-lr-ext-has~='practice']
     )
     main.analyse {
-    --cdc-bar: 56px;
-    --cdc-v-room: 32px;
+    --lr-ext-bar: 56px;
+    --lr-ext-v-room: 32px;
     margin-top: 0 !important;
   }
 
-  html:is([data-cdc-has~='analyse-players'], [data-cdc-has~='analyse-clock']):not(
-      [data-cdc-has~='practice']
+  html:is([data-lr-ext-has~='analyse-players'], [data-lr-ext-has~='analyse-clock']):not(
+      [data-lr-ext-has~='practice']
     )
     body:is(.coords-in, .coords-out)
     main.analyse {
-    --cdc-coords-off: calc(1.2 * var(--cdc-coords-size, 13px) + 8px);
+    --lr-ext-coords-off: calc(1.2 * var(--lr-ext-coords-size, 13px) + 8px);
   }
 
   /* Room for the ranks left of the board (board/). */
   body:is(.coords-in, .coords-out) main.analyse {
-    --cdc-gauge-gap: calc(0.6 * var(--cdc-coords-size, 13px) + 18px);
+    --lr-ext-gauge-gap: calc(0.6 * var(--lr-ext-coords-size, 13px) + 18px);
   }
 
-  main.analyse > :is(.cdc-player, .cdc-captured) {
+  main.analyse > :is(.lr-ext-player, .lr-ext-captured) {
     grid-area: board;
   }
 
-  main.analyse > :is(.cdc-player--top, .cdc-captured--top) {
-    --cdc-off: var(--cdc-inset-t, 0px);
+  main.analyse > :is(.lr-ext-player--top, .lr-ext-captured--top) {
+    --lr-ext-off: var(--lr-ext-inset-t, 0px);
   }
 
-  main.analyse > :is(.cdc-player--bottom, .cdc-captured--bottom) {
-    --cdc-off: calc(
-      var(--cdc-bar) + var(--cdc-board) + var(--cdc-coords-off) - var(--cdc-inset-b, 0px)
+  main.analyse > :is(.lr-ext-player--bottom, .lr-ext-captured--bottom) {
+    --lr-ext-off: calc(
+      var(--lr-ext-bar) + var(--lr-ext-board) + var(--lr-ext-coords-off) -
+        var(--lr-ext-inset-b, 0px)
     );
   }
 
-  html[data-cdc-has~='analyse-players'] main.analyse .analyse__player_strip .material {
+  html[data-lr-ext-has~='analyse-players'] main.analyse .analyse__player_strip .material {
     display: none !important;
   }
 
-  html[data-cdc-has~='analyse-clock'] main.analyse .analyse__player_strip {
+  html[data-lr-ext-has~='analyse-clock'] main.analyse .analyse__player_strip {
     left: 0 !important;
     right: 0 !important;
     box-sizing: border-box;
     display: flex !important;
     justify-content: flex-end !important;
-    height: var(--cdc-bar) !important;
+    height: var(--lr-ext-bar) !important;
     pointer-events: none;
   }
 
@@ -125,31 +126,31 @@
   }
 
   /* The clock level with the avatar, as on the game page. */
-  html[data-cdc-has~='analyse-clock'] main.analyse .analyse__player_strip.top {
+  html[data-lr-ext-has~='analyse-clock'] main.analyse .analyse__player_strip.top {
     top: auto !important;
-    bottom: calc(100% - var(--cdc-inset-t, 0px)) !important;
+    bottom: calc(100% - var(--lr-ext-inset-t, 0px)) !important;
     align-items: flex-end !important;
-    padding: 0 var(--cdc-inset-r, 0px) 8px var(--cdc-inset-l, 0px) !important;
+    padding: 0 var(--lr-ext-inset-r, 0px) 8px var(--lr-ext-inset-l, 0px) !important;
   }
 
-  html[data-cdc-has~='analyse-clock'] main.analyse .analyse__player_strip.bottom {
-    top: calc(100% + var(--cdc-coords-off) - var(--cdc-inset-b, 0px)) !important;
+  html[data-lr-ext-has~='analyse-clock'] main.analyse .analyse__player_strip.bottom {
+    top: calc(100% + var(--lr-ext-coords-off) - var(--lr-ext-inset-b, 0px)) !important;
     bottom: auto !important;
     align-items: flex-start !important;
-    padding: 8px var(--cdc-inset-r, 0px) 0 var(--cdc-inset-l, 0px) !important;
+    padding: 8px var(--lr-ext-inset-r, 0px) 0 var(--lr-ext-inset-l, 0px) !important;
   }
 
   /* ---- Study, broadcast --- */
 
   /* Lichess puts a study's chapters and a broadcast's games in a column left of the board, which
    * our grid lacks. They take the panel's last row instead, where a game's chat goes. */
-  html[data-cdc-has~='study-side'] main.analyse,
+  html[data-lr-ext-has~='study-side'] main.analyse,
   main.analyse.is-relay:not(.has-relay-tour) {
-    --cdc-side-h: min(clamp(200px, 36vh, 400px), calc(var(--cdc-board) * 0.45));
+    --lr-ext-side-h: min(clamp(200px, 36vh, 400px), calc(var(--lr-ext-board) * 0.45));
     grid-template-rows:
-      max(0px, calc(var(--cdc-stage) - var(--cdc-ctrl-h) - var(--cdc-side-h)))
-      var(--cdc-ctrl-h)
-      var(--cdc-side-h) !important;
+      max(0px, calc(var(--lr-ext-stage) - var(--lr-ext-ctrl-h) - var(--lr-ext-side-h)))
+      var(--lr-ext-ctrl-h)
+      var(--lr-ext-side-h) !important;
     grid-template-areas:
       'gauge board tools'
       'gauge board controls'
@@ -158,12 +159,13 @@
 
   /* A gamebook study: the coach takes what its comment needs (a long one scrolls), the
    * chapter list the rest, rather than a tall empty cell over the bubble. */
-  html[data-cdc-has~='study-side']:not([data-cdc-has~='practice']) main.analyse.gamebook-play {
-    height: var(--cdc-stage);
+  html[data-lr-ext-has~='study-side']:not([data-lr-ext-has~='practice'])
+    main.analyse.gamebook-play {
+    height: var(--lr-ext-stage);
     grid-template-rows:
-      fit-content(calc(var(--cdc-stage) - var(--cdc-ctrl-h) - var(--cdc-side-h)))
-      var(--cdc-ctrl-h)
-      minmax(var(--cdc-side-h), 1fr) !important;
+      fit-content(calc(var(--lr-ext-stage) - var(--lr-ext-ctrl-h) - var(--lr-ext-side-h)))
+      var(--lr-ext-ctrl-h)
+      minmax(var(--lr-ext-side-h), 1fr) !important;
   }
 
   main.analyse > .analyse__side:has(> .study__side),
@@ -172,14 +174,14 @@
     display: block !important;
     align-self: stretch !important;
     min-height: 0;
-    margin: 0 0 0 var(--cdc-gap) !important;
+    margin: 0 0 0 var(--lr-ext-gap) !important;
     overflow-y: auto;
-    border-top: 1px solid var(--cdc-border);
+    border-top: 1px solid var(--lr-ext-border);
     border-radius: 0 0 6px 6px;
-    background: var(--cdc-bg-panel);
+    background: var(--lr-ext-bg-panel);
   }
 
-  html[data-cdc-has~='study-side'] main.analyse .analyse__controls,
+  html[data-lr-ext-has~='study-side'] main.analyse .analyse__controls,
   main.analyse.is-relay:not(.has-relay-tour) .analyse__controls {
     border-radius: 0 !important;
   }
@@ -190,7 +192,7 @@
     position: sticky;
     top: 0;
     z-index: 2;
-    background: var(--cdc-bg-panel-dark);
+    background: var(--lr-ext-bg-panel-dark);
   }
 
   /* The chapter or game on the board: a lighter row, not Lichess's green tint (on hover too). */
@@ -207,13 +209,13 @@
   /* A broadcast game has Lichess's own 45px player bars: here they're rows of the stage, which
    * the panel spans, rather than Lichess's margin over the page. */
   main.analyse.is-relay:not(.has-relay-tour) {
-    --cdc-bar: 45px;
-    --cdc-v-room: 32px;
+    --lr-ext-bar: 45px;
+    --lr-ext-v-room: 32px;
     margin-top: 0 !important;
   }
 
   body:is(.coords-in, .coords-out) main.analyse.is-relay:not(.has-relay-tour) {
-    --cdc-coords-off: calc(1.2 * var(--cdc-coords-size, 13px) + 8px);
+    --lr-ext-coords-off: calc(1.2 * var(--lr-ext-coords-size, 13px) + 8px);
   }
 
   main.analyse.is-relay:not(.has-relay-tour) > :is(.analyse__tools, .relay-tour__side) {
@@ -221,26 +223,26 @@
   }
 
   /* A study with players has thinner bars (1.6rem), which hung into the margins and the files. */
-  html:not([data-cdc-has~='practice']) main.analyse.has-players:not(.is-relay) {
-    --cdc-bar: 1.6rem;
-    --cdc-v-room: 32px;
+  html:not([data-lr-ext-has~='practice']) main.analyse.has-players:not(.is-relay) {
+    --lr-ext-bar: 1.6rem;
+    --lr-ext-v-room: 32px;
     margin-top: 0 !important;
   }
 
-  html:not([data-cdc-has~='practice'])
+  html:not([data-lr-ext-has~='practice'])
     body:is(.coords-in, .coords-out)
     main.analyse.has-players:not(.has-relay-tour) {
-    --cdc-coords-off: calc(1.2 * var(--cdc-coords-size, 13px) + 8px);
+    --lr-ext-coords-off: calc(1.2 * var(--lr-ext-coords-size, 13px) + 8px);
   }
 
   /* Below the files, like the game page's bar. */
   main.analyse.is-relay:not(.has-relay-tour) .relay-board-player-bot,
-  html:not([data-cdc-has~='practice']) main.analyse.has-players .study__player-bot {
-    top: calc(100% + var(--cdc-coords-off)) !important;
+  html:not([data-lr-ext-has~='practice']) main.analyse.has-players .study__player-bot {
+    top: calc(100% + var(--lr-ext-coords-off)) !important;
   }
 
   main.analyse > :is(.analyse__tools, .analyse__controls, .mchat, .gamebook) {
-    margin-left: var(--cdc-gap) !important;
+    margin-left: var(--lr-ext-gap) !important;
   }
 
   main.analyse .analyse__tools {
@@ -249,25 +251,25 @@
     height: auto !important;
     min-height: 0;
     border-radius: 6px 6px 0 0;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
   main.analyse .analyse__controls {
     grid-area: controls !important;
     align-self: start;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
   main.analyse .analyse__controls .fbt,
   main.analyse .analyse__controls .jumps .fbt {
     border-radius: 5px;
-    color: var(--cdc-text) !important;
+    color: var(--lr-ext-text) !important;
   }
 
   main.analyse .analyse__controls .fbt:hover:not(.disabled) {
-    background: var(--cdc-bg-raised) !important;
+    background: var(--lr-ext-bg-raised) !important;
     color: #fff !important;
   }
 
@@ -281,9 +283,9 @@
     min-height: 0 !important;
     margin-top: 0 !important;
     overflow: hidden;
-    border-top: 1px solid var(--cdc-border);
+    border-top: 1px solid var(--lr-ext-border);
     border-radius: 0 0 6px 6px !important;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 

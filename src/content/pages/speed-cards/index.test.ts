@@ -52,7 +52,7 @@ let custom: ReturnType<typeof vi.fn<() => void>>;
 
 beforeEach(() => {
   document.body.innerHTML = `<main class="lobby">
-    <section class="cdc-hero"></section>
+    <section class="lr-ext-hero"></section>
     <div class="lobby__table"><button class="lobby__start__button--hook"></button></div>
     <div class="lobby__app"></div>
   </main>`;
@@ -67,21 +67,25 @@ afterEach(() => {
 });
 
 const pool = (id: string): HTMLElement | null =>
-  queryOne(document, `.cdc-speeds [data-cdc-pool='${id}']`, HTMLElement);
+  queryOne(document, `.lr-ext-speeds [data-lr-ext-pool='${id}']`, HTMLElement);
 
 describe('the speed cards', () => {
   it("go under the hero, headed by Lichess's quick pairing tab", () => {
     const sync = createSpeedCards(undefined, 'fr');
     sync();
     sync();
-    expect(document.querySelectorAll('.cdc-speeds')).toHaveLength(1);
-    expect(document.querySelector('.cdc-hero')?.nextElementSibling?.className).toBe('cdc-speeds');
-    expect(document.querySelector('.cdc-speeds__title')?.textContent).toBe('Appariement rapide');
-    const names = [...document.querySelectorAll('.cdc-speed__name')].map(name => name.textContent);
+    expect(document.querySelectorAll('.lr-ext-speeds')).toHaveLength(1);
+    expect(document.querySelector('.lr-ext-hero')?.nextElementSibling?.className).toBe(
+      'lr-ext-speeds',
+    );
+    expect(document.querySelector('.lr-ext-speeds__title')?.textContent).toBe('Appariement rapide');
+    const names = [...document.querySelectorAll('.lr-ext-speed__name')].map(
+      name => name.textContent,
+    );
     expect(names).toEqual(['Bullet', 'Blitz', 'Rapide', 'Classique']);
     // Signed out: the pools only.
-    expect(document.querySelector('.cdc-speed__rating')).toBeNull();
-    expect(document.querySelectorAll('.cdc-speed__pool')).toHaveLength(11);
+    expect(document.querySelector('.lr-ext-speed__rating')).toBeNull();
+    expect(document.querySelectorAll('.lr-ext-speed__pool')).toHaveLength(11);
   });
 
   it("show the player's kept numbers, the last pool as the primary", () => {
@@ -90,16 +94,18 @@ describe('the speed cards', () => {
       { speed: 'blitz', games: 25, rating: 1584, provisional: true, history, last: '3+2' },
     ];
     localStorage.setItem(
-      'cdc-speed-cards',
+      'lr-ext-speed-cards',
       JSON.stringify({ user: 'eresy', at: Date.now(), cards }),
     );
     createSpeedCards('eresy', 'en')();
-    const blitz = document.querySelector("[data-cdc-speed='blitz']");
-    expect(blitz?.querySelector('.cdc-speed__rating')?.textContent).toMatch(/1,584\s*provisional/);
-    expect(blitz?.querySelector('.cdc-speed__games')?.textContent).toBe('25 games');
-    expect(blitz?.querySelector('.cdc-speed__line')?.getAttribute('d')).toMatch(/^M0,27C/);
-    expect(pool('3+2')?.classList.contains('cdc-speed__pool--last')).toBe(true);
-    expect(document.querySelector("[data-cdc-speed='bullet'] .cdc-speed__games")).toBeNull();
+    const blitz = document.querySelector("[data-lr-ext-speed='blitz']");
+    expect(blitz?.querySelector('.lr-ext-speed__rating')?.textContent).toMatch(
+      /1,584\s*provisional/,
+    );
+    expect(blitz?.querySelector('.lr-ext-speed__games')?.textContent).toBe('25 games');
+    expect(blitz?.querySelector('.lr-ext-speed__line')?.getAttribute('d')).toMatch(/^M0,27C/);
+    expect(pool('3+2')?.classList.contains('lr-ext-speed__pool--last')).toBe(true);
+    expect(document.querySelector("[data-lr-ext-speed='bullet'] .lr-ext-speed__games")).toBeNull();
   });
 
   it("join Lichess's pool from the lobby's tab, and leave it on a second click", async () => {
@@ -109,15 +115,15 @@ describe('the speed cards', () => {
     await flush();
     expect(lobby).toEqual({ tab: 'real_time', member: '3+2' });
     sync();
-    expect(pool('3+2')?.classList.contains('cdc-speed__pool--seeking')).toBe(true);
-    expect(document.querySelector('.cdc-speeds')?.classList.contains('cdc-speeds--seeking')).toBe(
-      true,
-    );
+    expect(pool('3+2')?.classList.contains('lr-ext-speed__pool--seeking')).toBe(true);
+    expect(
+      document.querySelector('.lr-ext-speeds')?.classList.contains('lr-ext-speeds--seeking'),
+    ).toBe(true);
     pool('3+2')?.click();
     await flush();
     expect(lobby).toEqual({ tab: 'real_time', member: null });
     sync();
-    expect(document.querySelector('.cdc-speed__pool--seeking')).toBeNull();
+    expect(document.querySelector('.lr-ext-speed__pool--seeking')).toBeNull();
   });
 
   it("follow a pool Lichess joined itself, and leave its pools tab for the lobby's", () => {
@@ -125,12 +131,12 @@ describe('the speed cards', () => {
     drawLobby(lobby);
     createSpeedCards(undefined, 'en')();
     expect(lobby.tab).toBe('real_time');
-    expect(pool('3+0')?.classList.contains('cdc-speed__pool--seeking')).toBe(true);
+    expect(pool('3+0')?.classList.contains('lr-ext-speed__pool--seeking')).toBe(true);
   });
 
   it("open Lichess's game setup from the custom game's pill", () => {
     createSpeedCards(undefined, 'en')();
-    queryOne(document, '.cdc-speeds__custom', HTMLElement)?.click();
+    queryOne(document, '.lr-ext-speeds__custom', HTMLElement)?.click();
     expect(custom).toHaveBeenCalledOnce();
   });
 });

@@ -3,16 +3,16 @@
  * tr[data-uci] draws the arrow on hover): only colors and sizes change. */
 
 .explorer-box {
-  --cdc-ex-white: linear-gradient(#fff, var(--cdc-grey-100));
-  --cdc-ex-draw: var(--cdc-grey-400);
-  --cdc-ex-black: linear-gradient(var(--cdc-grey-700), var(--cdc-grey-750));
-  --cdc-ex-row-hover: #ffffff0f;
+  --lr-ext-ex-white: linear-gradient(#fff, var(--lr-ext-grey-100));
+  --lr-ext-ex-draw: var(--lr-ext-grey-400);
+  --lr-ext-ex-black: linear-gradient(var(--lr-ext-grey-700), var(--lr-ext-grey-750));
+  --lr-ext-ex-row-hover: #ffffff0f;
 
   /* Lichess underlines the box (.sub-box) in green. */
   border: none !important;
-  background: var(--cdc-bg-panel) !important;
-  color: var(--cdc-text) !important;
-  font-family: var(--cdc-font) !important;
+  background: var(--lr-ext-bg-panel) !important;
+  color: var(--lr-ext-text) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 13px !important;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .explorer-box tbody tr:hover {
-  background: var(--cdc-ex-row-hover) !important;
+  background: var(--lr-ext-ex-row-hover) !important;
 }
 
 .explorer-box.loading tbody {
@@ -40,8 +40,8 @@
   box-sizing: border-box;
   height: 44px;
   padding: 0 6px 0 8px !important;
-  border-bottom: 1px solid var(--cdc-border);
-  background: var(--cdc-bg-panel-dark) !important;
+  border-bottom: 1px solid var(--lr-ext-border);
+  background: var(--lr-ext-bg-panel-dark) !important;
   backdrop-filter: none !important;
   font-size: 13px !important;
   line-height: 1 !important;
@@ -59,8 +59,8 @@
   border: none !important;
   border-radius: 5px;
   background: none !important;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 13px !important;
   font-weight: 700;
   line-height: 1 !important;
@@ -76,8 +76,8 @@
 .explorer-box .explorer-title > .active {
   flex: 0 1 auto;
   min-width: 0;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
   color: #fff !important;
   font-weight: 400;
   white-space: nowrap;
@@ -86,7 +86,7 @@
 .explorer-box .explorer-title > .active::before {
   flex: none;
   margin: 0 !important;
-  color: var(--cdc-accent);
+  color: var(--lr-ext-accent);
   font-size: 15px;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .explorer-box .explorer-title > .active.player:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
 }
 
 .explorer-box .explorer-title .ddloader {
@@ -138,7 +138,7 @@
   padding: 0 !important;
   border-radius: 5px;
   background: none !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 18px !important;
   opacity: 1 !important;
 }
@@ -162,9 +162,9 @@
   gap: 10px;
   margin: 8px 8px 4px;
   padding: 8px 10px;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 6px;
-  background: var(--cdc-bg-panel-dark);
+  background: var(--lr-ext-bg-panel-dark);
 }
 
 .explorer-box .data > .title:has(> a)::before {
@@ -175,8 +175,8 @@
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: var(--cdc-btn-primary);
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   color: #fff;
   font-family: 'lichess';
   font-size: 15px;
@@ -184,7 +184,7 @@
 }
 
 /* The Game Review (page/review/) already names the line over the move list. */
-html.cdc-opening-on main.analyse .explorer-box .data > .title:has(> a) {
+html.lr-ext-opening-on main.analyse .explorer-box .data > .title:has(> a) {
   display: none !important;
 }
 
@@ -200,14 +200,14 @@ html.cdc-opening-on main.analyse .explorer-box .data > .title:has(> a) {
 }
 
 .explorer-box .data > .title > a:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 /* Other titles head lists: "Top games", "Winning", "Game over". */
 .explorer-box :is(.data > .title:not(:has(> a)), th.title) {
   padding: 14px 12px 6px !important;
   background: none !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px !important;
   font-weight: 700 !important;
   letter-spacing: 0.04em;

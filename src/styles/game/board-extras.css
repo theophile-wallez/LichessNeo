@@ -3,36 +3,38 @@
 @media (min-width: 1020px) {
   /* Pockets go in a strip right of the board, a cell being 3/4 of a square. Lichess's
    * `mat-top` / `mat-bot` areas aren't in this grid: they'd get tracks of their own. */
-  html[data-cdc-has~='pocket'] main.round {
-    --cdc-pocket-gap: 8px;
-    --cdc-pocket-sq: calc(var(--cdc-board) * 0.09375);
-    --cdc-board: max(
+  html[data-lr-ext-has~='pocket'] main.round {
+    --lr-ext-pocket-gap: 8px;
+    --lr-ext-pocket-sq: calc(var(--lr-ext-board) * 0.09375);
+    --lr-ext-board: max(
       320px,
       calc(
         min(
-            calc(var(--cdc-main-h, 100dvh) - 32px - 2 * var(--cdc-bar) - var(--cdc-coords-off)),
             calc(
-              (var(--cdc-main-w, 100vw) - var(--cdc-lead-w, 0px) - var(--cdc-panel-min) -
-                  var(--cdc-gap) - var(--cdc-pocket-gap) - 48px) /
+              var(--lr-ext-main-h, 100dvh) - 32px - 2 * var(--lr-ext-bar) - var(--lr-ext-coords-off)
+            ),
+            calc(
+              (var(--lr-ext-main-w, 100vw) - var(--lr-ext-lead-w, 0px) - var(--lr-ext-panel-min) -
+                  var(--lr-ext-gap) - var(--lr-ext-pocket-gap) - 48px) /
                 1.09375
             )
           ) *
-          var(--cdc-board-scale, 1)
+          var(--lr-ext-board-scale, 1)
       )
     );
-    --cdc-panel-w: clamp(
-      var(--cdc-panel-min),
+    --lr-ext-panel-w: clamp(
+      var(--lr-ext-panel-min),
       calc(
-        var(--cdc-main-w, 100vw) - var(--cdc-lead-w, 0px) - var(--cdc-board) -
-          var(--cdc-pocket-gap) - var(--cdc-pocket-sq) - var(--cdc-gap) - 48px
+        var(--lr-ext-main-w, 100vw) - var(--lr-ext-lead-w, 0px) - var(--lr-ext-board) -
+          var(--lr-ext-pocket-gap) - var(--lr-ext-pocket-sq) - var(--lr-ext-gap) - 48px
       ),
       500px
     );
 
     grid-template-columns:
-      var(--cdc-board)
-      calc(var(--cdc-pocket-gap) + var(--cdc-pocket-sq) + var(--cdc-gap))
-      var(--cdc-panel-w) !important;
+      var(--lr-ext-board)
+      calc(var(--lr-ext-pocket-gap) + var(--lr-ext-pocket-sq) + var(--lr-ext-gap))
+      var(--lr-ext-panel-w) !important;
     grid-template-areas:
       'user-top .      moves'
       'board    pocket moves'
@@ -45,22 +47,22 @@
   main.round .pocket {
     grid-area: pocket !important;
     flex-direction: column;
-    width: var(--cdc-pocket-sq) !important;
-    margin: 0 0 0 var(--cdc-pocket-gap) !important;
+    width: var(--lr-ext-pocket-sq) !important;
+    margin: 0 0 0 var(--lr-ext-pocket-gap) !important;
     overflow: hidden;
     border-radius: 4px !important;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
   main.round .pocket-top {
     align-self: start;
-    margin-top: var(--cdc-inset-t, 0px) !important;
+    margin-top: var(--lr-ext-inset-t, 0px) !important;
   }
 
   main.round .pocket-bottom {
     align-self: end;
-    margin-bottom: var(--cdc-inset-b, 0px) !important;
+    margin-bottom: var(--lr-ext-inset-b, 0px) !important;
   }
 
   main.round .pocket-c1 {
@@ -82,25 +84,25 @@
     display: none !important;
   }
 
-  main.round > .cdc-board-tools {
+  main.round > .lr-ext-board-tools {
     grid-area: board;
     justify-self: end;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    width: var(--cdc-gap);
-    margin-inline-end: calc(-1 * var(--cdc-gap));
+    width: var(--lr-ext-gap);
+    margin-inline-end: calc(-1 * var(--lr-ext-gap));
     z-index: 2;
   }
 
   /* Crazyhouse: the tools go after the pockets' strip. */
-  html[data-cdc-has~='pocket'] main.round > .cdc-board-tools {
+  html[data-lr-ext-has~='pocket'] main.round > .lr-ext-board-tools {
     grid-area: pocket;
     margin-inline-end: 0;
   }
 
-  main.round .cdc-board-tools__btn {
+  main.round .lr-ext-board-tools__btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,7 +112,7 @@
     border: 0;
     border-radius: 4px;
     background: none;
-    color: var(--cdc-grey-400);
+    color: var(--lr-ext-grey-400);
     cursor: pointer;
     transition:
       color 0.15s,
@@ -118,11 +120,11 @@
       visibility 0.2s !important;
   }
 
-  main.round .cdc-board-tools__btn:is(:hover, .cdc-board-tools__btn--on) {
+  main.round .lr-ext-board-tools__btn:is(:hover, .lr-ext-board-tools__btn--on) {
     color: #fff;
   }
 
-  main.round .cdc-board-tools__btn::before {
+  main.round .lr-ext-board-tools__btn::before {
     content: '';
     width: 20px;
     height: 20px;
@@ -131,15 +133,15 @@
   }
 
   /* The cog and the flip arrows. */
-  main.round .cdc-board-tools__btn--menu::before {
+  main.round .lr-ext-board-tools__btn--menu::before {
     mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
   }
 
-  main.round .cdc-board-tools__btn--flip::before {
+  main.round .lr-ext-board-tools__btn--flip::before {
     mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-data-transfer-vertical.svg');
   }
 
-  main.round .cdc-board-tools:not(.cdc-board-tools--hover) .cdc-board-tools__btn--flip {
+  main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-tools__btn--flip {
     visibility: hidden;
     opacity: 0;
   }
@@ -150,7 +152,7 @@
 /* Below 1020px Lichess's own layout stays, with our theme. */
 @media (max-width: 1019.98px) {
   /* Captured pieces and board tools belong to the desktop layout. */
-  main.round > :is(.cdc-captured, .cdc-board-tools) {
+  main.round > :is(.lr-ext-captured, .lr-ext-board-tools) {
     display: none !important;
   }
 }

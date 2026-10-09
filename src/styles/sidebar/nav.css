@@ -43,7 +43,7 @@
     text-transform: none !important;
     font-size: 14px !important;
     font-weight: 500 !important;
-    color: var(--cdc-grey-200) !important;
+    color: var(--lr-ext-grey-200) !important;
     border: none !important;
     border-radius: 8px !important;
     background: transparent !important;
@@ -66,14 +66,14 @@
     flex: none;
     width: 20px;
     height: 20px;
-    background: var(--cdc-nav-icon) center / contain no-repeat;
+    background: var(--lr-ext-nav-icon) center / contain no-repeat;
   }
 
   /* Lichess opens a flyout only once the pointer has slowed over its section for 200ms
      (lib/menuHover.ts toggles #topnav.hover): ours opens and closes on hover itself. */
   #topnav section:hover > a {
-    background: var(--cdc-sb-hover) !important;
-    color: var(--cdc-text-strong) !important;
+    background: var(--lr-ext-sb-hover) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   #topnav section:hover > div {
@@ -83,13 +83,13 @@
 
   #topnav section.active > a {
     background: #ffffff14 !important;
-    color: var(--cdc-text-strong) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   /* Keyboard: a clear ring on the focused row, and a section's flyout opens while focus is
      in it, so its links can be reached with Tab. */
-  #top :is(#topnav a, #cdc-donate, #cdc-sidebar-toggle, .site-title):focus-visible {
-    outline: 2px solid var(--cdc-accent) !important;
+  #top :is(#topnav a, #lr-ext-donate, #lr-ext-sidebar-toggle, .site-title):focus-visible {
+    outline: 2px solid var(--lr-ext-accent) !important;
     outline-offset: -2px;
   }
 
@@ -109,7 +109,7 @@
     padding: 5px !important;
     border: none !important;
     border-radius: 10px !important;
-    background: var(--cdc-grey-750) !important;
+    background: var(--lr-ext-grey-750) !important;
     box-shadow:
       inset 0 0 0 1px #ffffff14,
       0 12px 32px #00000080 !important;
@@ -123,35 +123,35 @@
     white-space: nowrap;
     font-size: 13.5px;
     font-weight: 500;
-    color: var(--cdc-grey-100) !important;
+    color: var(--lr-ext-grey-100) !important;
     border-radius: 6px !important;
     transition: background-color 0.15s !important;
   }
 
   #topnav section > div a:hover {
     background: #ffffff0f !important;
-    color: var(--cdc-text-strong) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   /* Icons from public/img/sidebar. Sections are matched by position and links by how their
    * href ends: Lichess localizes the labels and some paths (/fr/training). */
   #topnav section:nth-of-type(1) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/play.webp');
+    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/play.webp');
   }
   #topnav section:nth-of-type(2) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
+    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
   }
   #topnav section:nth-of-type(3) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/learn.webp');
+    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/learn.webp');
   }
   #topnav section:nth-of-type(4) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/watch-binoculars.webp');
+    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/watch-binoculars.webp');
   }
   #topnav section:nth-of-type(5) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
+    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
   }
   #topnav section:nth-of-type(6) > a {
-    --cdc-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/tools.webp');
+    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/tools.webp');
   }
 
   #topnav section > div a {
@@ -165,97 +165,97 @@
     flex: none;
     width: 18px;
     height: 18px;
-    background: var(--cdc-sub-icon, none) center / contain no-repeat;
+    background: var(--lr-ext-sub-icon, none) center / contain no-repeat;
   }
 
   #topnav div a[href*='#hook'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friendly-challenge.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friendly-challenge.webp');
   }
   #topnav div a[href$='/tournament'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp');
   }
   #topnav div a[href$='/swiss'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/swiss-tournaments.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/swiss-tournaments.webp');
   }
   #topnav div a[href$='/simul'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp');
   }
   #topnav div a[href$='/training'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
   }
   #topnav div a[href$='/training/themes'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
   }
   #topnav div a[href*='/training/dashboard'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-dashboard.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-dashboard.webp');
   }
   #topnav div a[href$='/streak'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
   }
   #topnav div a[href$='/storm'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
   }
   #topnav div a[href$='/racer'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
   }
   #topnav div a[href$='/learn'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/chess-basics.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/chess-basics.webp');
   }
   #topnav div a[href$='/practice'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/practice.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/practice.webp');
   }
   #topnav div a[href$='/training/coordinate'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coordinate-practice.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coordinate-practice.webp');
   }
   #topnav div a[href$='/study'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp');
   }
   #topnav div a[href$='/coach'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coach.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coach.webp');
   }
   #topnav div a[href$='/broadcast'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp');
   }
   #topnav div a[href$='/tv'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/lichess-tv.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/lichess-tv.webp');
   }
   #topnav div a[href$='/games'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/current-games.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/current-games.webp');
   }
   #topnav div a[href$='/streamer'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/streamers.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/streamers.webp');
   }
   #topnav div a[href$='/video'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/video-library.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/video-library.webp');
   }
   #topnav div a[href$='/player'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
   }
   #topnav div a[href$='/following'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friends.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friends.webp');
   }
   #topnav div a[href$='/team'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/teams.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/teams.webp');
   }
   #topnav div a[href$='/forum'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/forum.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/forum.webp');
   }
   #topnav div a[href*='/blog'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp');
   }
   #topnav div a[href$='/analysis'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/analysis-board.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/analysis-board.webp');
   }
   #topnav div a[href$='/opening'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/openings.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/openings.webp');
   }
   #topnav div a[href$='/editor'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/board-editor.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/board-editor.webp');
   }
   #topnav div a[href$='/paste'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/import-game.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/import-game.webp');
   }
   #topnav div a[href$='/games/search'] {
-    --cdc-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/advanced-search.webp');
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/advanced-search.webp');
   }
 }

@@ -2,16 +2,16 @@
  * autocomplete lists in native-select.css. Flat trigger, chevron, floating menu, accent check. */
 
 :root {
-  --cdc-chevron: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg');
-  --cdc-check: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02.svg');
+  --lr-ext-chevron: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg');
+  --lr-ext-check: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02.svg');
 }
 
 /* ---- mselect --- */
 
 .mselect__label {
-  border: 1px solid var(--cdc-grey-650) !important;
+  border: 1px solid var(--lr-ext-grey-650) !important;
   border-radius: 8px !important;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   box-shadow: none !important;
   color: #fff;
   font-weight: 600;
@@ -23,11 +23,11 @@
 
 .mselect__label:hover,
 .mselect__toggle:checked ~ .mselect__label {
-  background: var(--cdc-bg-raised-hover) !important;
+  background: var(--lr-ext-bg-raised-hover) !important;
 }
 
 .mselect__toggle:checked ~ .mselect__label {
-  border-color: var(--cdc-grey-500) !important;
+  border-color: var(--lr-ext-grey-500) !important;
 }
 
 /* Lichess's green triangle becomes a dim chevron. */
@@ -37,10 +37,10 @@
   width: 14px;
   height: 14px;
   margin-inline: 2px 0 !important;
-  background: var(--cdc-text-dim);
+  background: var(--lr-ext-text-dim);
   opacity: 1 !important;
-  -webkit-mask: var(--cdc-chevron) center / contain no-repeat;
-  mask: var(--cdc-chevron) center / contain no-repeat;
+  -webkit-mask: var(--lr-ext-chevron) center / contain no-repeat;
+  mask: var(--lr-ext-chevron) center / contain no-repeat;
   transition:
     transform 0.15s ease,
     background-color 0.15s !important;
@@ -58,10 +58,10 @@
 .mselect__list {
   box-sizing: border-box;
   padding: 4px;
-  border: 1px solid var(--cdc-menu-border);
+  border: 1px solid var(--lr-ext-menu-border);
   border-radius: 8px !important;
-  background: var(--cdc-menu-bg) !important;
-  box-shadow: var(--cdc-menu-shadow) !important;
+  background: var(--lr-ext-menu-bg) !important;
+  box-shadow: var(--lr-ext-menu-shadow) !important;
   scrollbar-width: thin;
 }
 
@@ -72,7 +72,7 @@
 
 .mselect__item:hover,
 .mselect__item.current:hover {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
 }
 
 /* Desktop: the menu drops below its button instead of unrolling over it. From 800.02px, as
@@ -128,7 +128,7 @@
 .mselect__item {
   border: none !important;
   border-radius: 5px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
 }
@@ -144,7 +144,7 @@ div.mselect__item {
 
 .mselect__item:hover,
 .mselect__item:focus-visible {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
   color: #fff !important;
   outline: none !important;
 }
@@ -157,7 +157,7 @@ div.mselect__item {
 
 .mselect__item::before {
   margin: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 /* A check at the end of the current choice's row. */
@@ -170,9 +170,9 @@ div.mselect__item.current::after {
   height: 14px;
   margin-inline-start: auto;
   padding-inline-start: 12px;
-  background: var(--cdc-accent);
-  -webkit-mask: var(--cdc-check) right center / 14px no-repeat;
-  mask: var(--cdc-check) right center / 14px no-repeat;
+  background: var(--lr-ext-accent);
+  -webkit-mask: var(--lr-ext-check) right center / 14px no-repeat;
+  mask: var(--lr-ext-check) right center / 14px no-repeat;
 }
 
 /* The setup dialog scrolls, which clipped the variant menu to a few rows. */
@@ -226,28 +226,28 @@ dialog .scrollable:has(.game-setup .mselect__toggle:checked) {
 
 .game-setup .mselect__item:hover td,
 .game-setup .mselect__item:focus-visible td {
-  background: var(--cdc-menu-hover) !important;
+  background: var(--lr-ext-menu-hover) !important;
 }
 
 .game-setup .mselect__item.current td {
-  background: color-mix(in srgb, var(--cdc-accent) 12%, transparent) !important;
+  background: color-mix(in srgb, var(--lr-ext-accent) 12%, transparent) !important;
 }
 
 .game-setup .mselect__item .icon span {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 20px;
   line-height: 1;
 }
 
 .game-setup .mselect__item.current .icon span {
-  color: var(--cdc-accent);
+  color: var(--lr-ext-accent);
 }
 
 .game-setup .mselect__item .desc {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-weight: 400;
 }
 
 .game-setup .mselect__label .icon {
-  color: var(--cdc-accent);
+  color: var(--lr-ext-accent);
 }

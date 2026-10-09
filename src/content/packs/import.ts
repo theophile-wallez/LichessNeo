@@ -1,6 +1,7 @@
 import { DownloadResponseSchema, type DownloadResponse } from '#shared/packs/messages.ts';
 import { PIECE_NAMES, type Pack } from '#shared/packs/pack.ts';
 import { askWorker } from '#content/platform/runtime.ts';
+import { messageType } from '#shared/prefix.ts';
 
 // Imports a pack: the background worker downloads it (shared/packs/download.ts),
 // then each image is drawn once here, where there's a DOM. Lichess decodes
@@ -38,7 +39,7 @@ const NO_ANSWER = 'The extension did not answer: try again.';
 export async function fetchPack(link: string, token: string): Promise<DownloadResponse> {
   let answer: unknown;
   try {
-    answer = await askWorker({ type: 'cdc:download-pack', link, token });
+    answer = await askWorker({ type: messageType('download-pack'), link, token });
   } catch (error) {
     // Chrome says so when the extension was updated or reloaded under this page.
     const updated = error instanceof Error && error.message.includes('context invalidated');

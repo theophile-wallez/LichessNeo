@@ -69,75 +69,75 @@
 
 /* List view on: the toggle looks pressed, not like an action. */
 .study-index .box__top form[action*='list-format'] .button.active {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
   box-shadow:
-    inset 0 0 0 1px var(--cdc-card-border-hover),
-    var(--cdc-btn-grey-shadow) !important;
+    inset 0 0 0 1px var(--lr-ext-card-border-hover),
+    var(--lr-ext-btn-grey-shadow) !important;
 }
 
 /* The side menu: a Hugeicon per link on a tile of its color (pages/headings-menus.css).
  * Signed in, it also lists the user's studies, those they're in, public, private and liked. */
-.subnav[data-cdc-nav~='studies'] a[href*='/study/all'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/all'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
-  --cdc-nav-color: var(--cdc-accent);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01--7e88db.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href*='/study/all'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active*='/study/all'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/mine/'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/mine/'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user--a2edfd.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href*='/study/mine/'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active*='/study/mine/'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/member/'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/member/'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--a2edfd.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href*='/study/member/'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active*='/study/member/'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/public/'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/public/'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
-  --cdc-nav-color: var(--cdc-green);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02--73fb95.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href*='/study/public/'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active*='/study/public/'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-green);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02--73fb95.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/private/'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/private/'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
-  --cdc-nav-color: var(--cdc-red);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02--ff7777.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href*='/study/private/'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active*='/study/private/'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-red);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02--ff7777.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/study/likes/'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/study/likes/'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
-  --cdc-nav-color: var(--cdc-pink);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff94d1.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href*='/study/likes/'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active*='/study/likes/'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+  --lr-ext-nav-color: var(--lr-ext-pink);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff94d1.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href$='/study/topic'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active$='/study/topic'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01--a2edfd.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href$='/study/topic'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active$='/study/topic'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href$='/study/staff-picks'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active$='/study/staff-picks'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star--ffc689.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href$='/study/staff-picks'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active$='/study/staff-picks'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='studies'] a[href*='/blog/'],
-main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
-  --cdc-nav-color: var(--cdc-purple);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle--caa9fa.svg');
+.subnav[data-lr-ext-nav~='studies'] a[href*='/blog/'],
+main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active*='/blog/'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle--caa9fa.svg');
 }
 
 /* Only the studies scroll: the menu and toolbar stay put.
@@ -157,8 +157,8 @@ main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
     /* Wider than the grid to cover the cards' shadows, but within the page's 1vw gutter. */
     margin-inline: calc(-1 * min(12px, 1vw)) !important;
     padding-inline: min(12px, 1vw) !important;
-    background: var(--cdc-bg-page);
-    box-shadow: var(--cdc-pin-cover);
+    background: var(--lr-ext-bg-page);
+    box-shadow: var(--lr-ext-pin-cover);
   }
 
   .study-index .box__top::after {
@@ -167,7 +167,7 @@ main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -201,9 +201,9 @@ main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
   display: flex;
   flex-direction: column;
   padding: 16px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 10px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
   transition:
     background-color 0.15s,
     border-color 0.15s,
@@ -211,9 +211,9 @@ main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
 }
 
 .study-index .studies .study:hover {
-  border-color: var(--cdc-card-border-hover) !important;
-  background: var(--cdc-card-hover) !important;
-  box-shadow: var(--cdc-card-shadow-hover);
+  border-color: var(--lr-ext-card-border-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
+  box-shadow: var(--lr-ext-card-shadow-hover);
 }
 
 .study-index .studies .study .top {
@@ -229,8 +229,8 @@ main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
   width: 46px;
   height: 46px;
   border-radius: 10px;
-  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
-  color: var(--cdc-accent) !important;
+  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
+  color: var(--lr-ext-accent) !important;
   font-size: 24px !important;
 }
 
@@ -249,13 +249,13 @@ main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
 
 .study-index .studies .study .top span {
   margin-top: 2px;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px !important;
   font-weight: 600;
 }
 
 .study-index .studies .study .top .private {
-  color: var(--cdc-brag, var(--cdc-orange-dark));
+  color: var(--lr-ext-brag, var(--lr-ext-orange-dark));
 }
 
 .study-index .studies .study .body {
@@ -280,19 +280,19 @@ main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
   display: block !important;
   overflow: hidden;
   padding: 2px 0;
-  color: var(--cdc-grey-200) !important;
+  color: var(--lr-ext-grey-200) !important;
   line-height: 1.4;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .study-index .studies .study .members li {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
 }
 
 .study-index .studies .study li::before {
   margin-inline-end: 6px !important;
-  color: var(--cdc-font-dimmer) !important;
+  color: var(--lr-ext-font-dimmer) !important;
   font-size: 11px !important;
 }
 
@@ -337,10 +337,10 @@ main.page-menu[data-cdc-menu~='studies'][data-cdc-nav-active*='/blog/'] {
 
 .study-index .nostudies {
   padding: 48px 16px;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px;
-  background: var(--cdc-bg-panel);
-  color: var(--cdc-text-dim);
+  background: var(--lr-ext-bg-panel);
+  color: var(--lr-ext-text-dim);
   font-size: 18px !important;
   font-weight: 600;
 }

@@ -10,8 +10,8 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // it over the engine and the moves (styles/analysis/underboard.css), with the
 // advice summary and its "Learn from your mistakes" over the chat.
 
-export const OPEN = 'cdc-underboard-open';
-const BUTTON = 'cdc-underboard';
+export const OPEN = 'lr-ext-underboard-open';
+const BUTTON = 'lr-ext-underboard';
 // Lichess's tools glyph.
 const ICON = '';
 // Lichess's own "Tools" (i18n.site.tools), which the page world copies onto
@@ -41,11 +41,11 @@ function buildButton(): HTMLButtonElement {
 
 const ownButton = createOwnedElement(buildButton);
 
-// Our tooltips read data-cdc-tip.
+// Our tooltips read data-lr-ext-tip.
 function setLabel(button: HTMLButtonElement): void {
-  const label = document.documentElement.dataset.cdcToolsLabel ?? FALLBACK_LABEL;
-  if (button.dataset.cdcTip === label) return;
-  setData(button, 'cdcTip', label);
+  const label = document.documentElement.dataset.lrExtToolsLabel ?? FALLBACK_LABEL;
+  if (button.dataset.lrExtTip === label) return;
+  setData(button, 'lrExtTip', label);
   button.setAttribute('aria-label', label);
 }
 

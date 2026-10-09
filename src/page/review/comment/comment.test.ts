@@ -52,7 +52,7 @@ describe('commentMarkup', () => {
     for (const [kind, value, html] of legacy.tokens) {
       const word = `[[${kind}:${value}]]`;
       expect(markup([say(word)])).toBe(
-        `<span class="cdc-say"><span class="cdc-w">${withPieceGlyphs(html ?? '')}</span> </span>`,
+        `<span class="lr-ext-say"><span class="lr-ext-w">${withPieceGlyphs(html ?? '')}</span> </span>`,
       );
     }
   });
@@ -66,23 +66,23 @@ describe('commentMarkup', () => {
 
   it('keeps a numbered move’s number with its chip', () => {
     expect(markup([say('[[n:12...:b:Qb6]]')])).toBe(
-      `<span class="cdc-say"><span class="cdc-w"><span class="cdc-num">12... <span class="cdc-mv"><i class="cdc-pc cdc-pc-bq"></i>b6</span></span></span> </span>`,
+      `<span class="lr-ext-say"><span class="lr-ext-w"><span class="lr-ext-num">12... <span class="lr-ext-mv"><i class="lr-ext-pc lr-ext-pc-bq"></i>b6</span></span></span> </span>`,
     );
   });
 
   it('escapes the text around the tokens', () => {
     expect(markup([say('a<b [[s:e4]]&')])).toBe(
-      '<span class="cdc-say"><span class="cdc-w">a&lt;b </span><span class="cdc-w"><b class="cdc-sq">e4</b>&amp;</span> </span>',
+      '<span class="lr-ext-say"><span class="lr-ext-w">a&lt;b </span><span class="lr-ext-w"><b class="lr-ext-sq">e4</b>&amp;</span> </span>',
     );
   });
 
   it('hides the words not typed yet, and leaves a dropped sentence out', () => {
     const parts = [say('one two', true), say('three')];
     expect(markup(parts, { shown: 1 })).toContain(
-      '<span class="cdc-w">one </span><span class="cdc-w cdc-w--off">two</span>',
+      '<span class="lr-ext-w">one </span><span class="lr-ext-w lr-ext-w--off">two</span>',
     );
     expect(markup(parts, { dropped: true })).toBe(
-      '<span class="cdc-say"><span class="cdc-w">three</span> </span>',
+      '<span class="lr-ext-say"><span class="lr-ext-w">three</span> </span>',
     );
   });
 });

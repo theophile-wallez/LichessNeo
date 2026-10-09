@@ -2,7 +2,7 @@
 
 @media (min-width: 1020px) {
   /* Practice pages only: a user-made gamebook study keeps Lichess's layout. */
-  html[data-cdc-has~='practice'] main.analyse .gamebook {
+  html[data-lr-ext-has~='practice'] main.analyse .gamebook {
     grid-area: book !important;
   }
 
@@ -17,20 +17,20 @@
     border-radius: 12px !important;
     background: #fff !important;
     box-shadow: 0 6px 18px #00000059 !important;
-    color: var(--cdc-grey-800);
+    color: var(--lr-ext-grey-800);
     font-size: 15px !important;
   }
 
   main.analyse .gamebook .comment .content {
     padding: 14px 16px !important;
-    color: var(--cdc-grey-800);
+    color: var(--lr-ext-grey-800);
     font-weight: 500;
     line-height: 1.5;
   }
 
   /* Links on white: the accent is too pale, its darker shade reads. */
   main.analyse :is(.gamebook .comment .content, .analyse__underboard .feedback) a {
-    color: var(--cdc-accent-shadow) !important;
+    color: var(--lr-ext-accent-shadow) !important;
     font-weight: 700;
   }
 
@@ -40,7 +40,7 @@
 
   /* On a lesson the bubble shares the panel with the chapter list, so a long
    * comment scrolls. A gamebook study keeps Lichess's full height. */
-  html[data-cdc-has~='practice'] main.analyse .gamebook .comment .content {
+  html[data-lr-ext-has~='practice'] main.analyse .gamebook .comment .content {
     max-height: min(240px, 26vh);
   }
 
@@ -53,13 +53,13 @@
   }
 
   main.analyse .gamebook .comment.hinted::after {
-    background: var(--cdc-accent) !important;
+    background: var(--lr-ext-accent) !important;
   }
 
   /* The hint button, then the hint as an accent band under the bubble. */
   main.analyse .gamebook .comment button.hint {
     padding: 0 16px 12px !important;
-    color: var(--cdc-accent-dim) !important;
+    color: var(--lr-ext-accent-dim) !important;
     font-size: 13px !important;
     font-weight: 800 !important;
     letter-spacing: 0.03em;
@@ -67,13 +67,13 @@
   }
 
   main.analyse .gamebook .comment button.hint:hover {
-    color: var(--cdc-accent-shadow) !important;
+    color: var(--lr-ext-accent-shadow) !important;
   }
 
   main.analyse .gamebook .comment div.hint {
     padding: 12px 16px !important;
     border-radius: 0 0 12px 12px !important;
-    background: var(--cdc-accent) !important;
+    background: var(--lr-ext-accent) !important;
     color: #fff !important;
     font-size: 14px !important;
     font-weight: 600;
@@ -94,7 +94,7 @@
     margin: 0 !important;
     align-self: end;
     filter: drop-shadow(0 8px 16px #0006);
-    animation: cdc-float 4s ease-in-out infinite;
+    animation: lr-ext-float 4s ease-in-out infinite;
   }
 
   main.analyse .gamebook .feedback {
@@ -105,8 +105,8 @@
   }
 
   main.analyse .gamebook .feedback.info {
-    border: 1px solid var(--cdc-card-border);
-    background: var(--cdc-bg-panel);
+    border: 1px solid var(--lr-ext-card-border);
+    background: var(--lr-ext-bg-panel);
     font-size: 16px !important;
   }
 
@@ -142,7 +142,7 @@
 
   main.analyse .gamebook .feedback.play em {
     margin-top: 2px;
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -150,7 +150,7 @@
 
   /* "Good move": the verdict in green on a dark card; a green card would shout. */
   main.analyse .gamebook .feedback.info.good {
-    color: var(--cdc-good-hover);
+    color: var(--lr-ext-good-hover);
     font-size: 19px !important;
     font-weight: 800;
   }
@@ -166,21 +166,21 @@
   }
 
   main.analyse .gamebook .feedback.act.good {
-    background: var(--cdc-btn-primary) !important;
-    box-shadow: var(--cdc-btn-primary-shadow) !important;
+    background: var(--lr-ext-btn-primary) !important;
+    box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   }
 
   main.analyse .gamebook .feedback.act.good:hover {
-    background: var(--cdc-btn-primary-hover) !important;
+    background: var(--lr-ext-btn-primary-hover) !important;
   }
 
   main.analyse .gamebook .feedback.act.bad {
-    background: var(--cdc-btn-red) !important;
-    box-shadow: var(--cdc-btn-red-shadow) !important;
+    background: var(--lr-ext-btn-red) !important;
+    box-shadow: var(--lr-ext-btn-red-shadow) !important;
   }
 
   main.analyse .gamebook .feedback.act.bad:hover {
-    background: var(--cdc-btn-red-hover) !important;
+    background: var(--lr-ext-btn-red-hover) !important;
   }
 
   main.analyse .gamebook .feedback.act:active {
@@ -199,7 +199,7 @@
     background: #ffffff26;
     box-shadow: inset 0 -1px 0 #00000026;
     color: #ffffffe6;
-    font-family: var(--cdc-font);
+    font-family: var(--lr-ext-font);
     font-size: 12px !important;
     font-weight: 700;
     text-shadow: none;
@@ -214,9 +214,9 @@
   main.analyse .gamebook .feedback.end button {
     border: none !important;
     border-radius: 12px !important;
-    background: var(--cdc-btn-grey) !important;
-    box-shadow: var(--cdc-btn-grey-shadow) !important;
-    color: var(--cdc-text) !important;
+    background: var(--lr-ext-btn-grey) !important;
+    box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+    color: var(--lr-ext-text) !important;
     font-size: 14px !important;
     font-weight: 800 !important;
     transition: background 0.15s !important;
@@ -228,18 +228,18 @@
   }
 
   main.analyse .gamebook .feedback.end button:hover {
-    background: var(--cdc-btn-grey-hover) !important;
+    background: var(--lr-ext-btn-grey-hover) !important;
     color: #fff !important;
   }
 
   main.analyse .gamebook .feedback.end button.next {
-    background: var(--cdc-btn-primary) !important;
-    box-shadow: var(--cdc-btn-primary-shadow) !important;
+    background: var(--lr-ext-btn-primary) !important;
+    box-shadow: var(--lr-ext-btn-primary-shadow) !important;
     color: #fff !important;
   }
 
   main.analyse .gamebook .feedback.end button.next:hover {
-    background: var(--cdc-btn-primary-hover) !important;
+    background: var(--lr-ext-btn-primary-hover) !important;
     color: #fff !important;
   }
 }

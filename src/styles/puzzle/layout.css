@@ -8,28 +8,31 @@
    the panel off screen. Cap it to what the sidebar leaves, with a gutter for the ranks. */
 @media (min-width: 1020px) and (max-width: 1259.29px) {
   main.puzzle {
-    --cdc-coords-l: 0px;
+    --lr-ext-coords-l: 0px;
 
     grid-template-columns:
       min(
         var(---col2-uniboard-width),
-        calc(var(--cdc-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) - 270px)
+        calc(
+          var(--lr-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--lr-ext-coords-l) -
+            270px
+        )
       )
       var(---puzzle-gauge-col)
       minmax(
         calc(240px - var(---puzzle-gauge-offset)),
         calc(400px - var(---puzzle-gauge-offset))
       ) !important;
-    margin-left: var(--cdc-coords-l);
+    margin-left: var(--lr-ext-coords-l);
   }
 
   body:is(.coords-in, .coords-out) main.puzzle {
-    --cdc-coords-l: calc(0.6 * var(--cdc-coords-size, 13px) + 10px);
+    --lr-ext-coords-l: calc(0.6 * var(--lr-ext-coords-size, 13px) + 10px);
   }
 
   /* The files under the board ran into the session chips' row. */
   body:is(.coords-in, .coords-out) main.puzzle .puzzle__session {
-    margin-top: calc(1.2 * var(--cdc-coords-size, 13px) - 10px) !important;
+    margin-top: calc(1.2 * var(--lr-ext-coords-size, 13px) - 10px) !important;
   }
 
   /* Lichess's bar is only 15px wide here: too narrow for the score, which the engine line shows. */
@@ -43,40 +46,48 @@
    the status card. The board takes the window's height, the panel what's left up to 440px. */
 @media (min-width: 1259.3px) {
   main.puzzle {
-    --cdc-gap: 16px;
-    --cdc-panel-min: 340px;
-    --cdc-gauge-w: 26px;
-    --cdc-coords-l: 0px;
-    --cdc-coords-off: 0px;
+    --lr-ext-gap: 16px;
+    --lr-ext-panel-min: 340px;
+    --lr-ext-gauge-w: 26px;
+    --lr-ext-coords-l: 0px;
+    --lr-ext-coords-off: 0px;
     /* The eval bar shows once the puzzle ends: its column is kept from the start, so the
        board doesn't move then. */
-    --cdc-gauge-col: calc(var(--cdc-gap) + var(--cdc-gauge-w) + 8px + var(--cdc-coords-l));
-    --cdc-head-h: 86px;
-    --cdc-session-h: 0px;
-    --cdc-kb-h: 0px;
-    --cdc-cols-w: calc(
-      var(--cdc-main-w, 100vw) - var(--cdc-coords-l) - var(--cdc-gauge-w) - 8px - 2 *
-        var(--cdc-gap) - 48px
+    --lr-ext-gauge-col: calc(
+      var(--lr-ext-gap) + var(--lr-ext-gauge-w) + 8px + var(--lr-ext-coords-l)
     );
-    --cdc-board: max(
+    --lr-ext-head-h: 86px;
+    --lr-ext-session-h: 0px;
+    --lr-ext-kb-h: 0px;
+    --lr-ext-cols-w: calc(
+      var(--lr-ext-main-w, 100vw) - var(--lr-ext-coords-l) - var(--lr-ext-gauge-w) - 8px - 2 *
+        var(--lr-ext-gap) - 48px
+    );
+    --lr-ext-board: max(
       320px,
       calc(
         min(
-            calc(var(--cdc-main-h, 100dvh) - 28px - var(--cdc-coords-off) - var(--cdc-kb-h)),
-            calc(var(--cdc-cols-w) - var(--cdc-panel-min))
+            calc(
+              var(--lr-ext-main-h, 100dvh) - 28px - var(--lr-ext-coords-off) - var(--lr-ext-kb-h)
+            ),
+            calc(var(--lr-ext-cols-w) - var(--lr-ext-panel-min))
           ) *
-          var(--cdc-board-scale, 1)
+          var(--lr-ext-board-scale, 1)
       )
     );
-    --cdc-panel-w: clamp(var(--cdc-panel-min), calc(var(--cdc-cols-w) - var(--cdc-board)), 440px);
+    --lr-ext-panel-w: clamp(
+      var(--lr-ext-panel-min),
+      calc(var(--lr-ext-cols-w) - var(--lr-ext-board)),
+      440px
+    );
 
     grid-template-columns:
-      var(--cdc-gauge-col) var(--cdc-board) var(--cdc-gap)
-      var(--cdc-panel-w) !important;
+      var(--lr-ext-gauge-col) var(--lr-ext-board) var(--lr-ext-gap)
+      var(--lr-ext-panel-w) !important;
     grid-template-rows:
-      var(--cdc-head-h) var(--cdc-session-h)
-      calc(var(--cdc-board) - var(--cdc-head-h) - var(--cdc-session-h))
-      var(--cdc-coords-off) auto !important;
+      var(--lr-ext-head-h) var(--lr-ext-session-h)
+      calc(var(--lr-ext-board) - var(--lr-ext-head-h) - var(--lr-ext-session-h))
+      var(--lr-ext-coords-off) auto !important;
     grid-template-areas:
       'gauge board . side'
       'gauge board . session'
@@ -90,18 +101,18 @@
 
   /* Coordinates sit outside the board (board/): a gutter for ranks, a strip for files. */
   body:is(.coords-in, .coords-out) main.puzzle {
-    --cdc-coords-l: calc(0.6 * var(--cdc-coords-size, 13px) + 10px);
-    --cdc-coords-off: calc(1.2 * var(--cdc-coords-size, 13px) + 8px);
+    --lr-ext-coords-l: calc(0.6 * var(--lr-ext-coords-size, 13px) + 10px);
+    --lr-ext-coords-off: calc(1.2 * var(--lr-ext-coords-size, 13px) + 8px);
   }
 
   /* The session's row shows once the first puzzle is played. */
-  html[data-cdc-has~='puzzle-session'] main.puzzle {
-    --cdc-session-h: 44px;
+  html[data-lr-ext-has~='puzzle-session'] main.puzzle {
+    --lr-ext-session-h: 44px;
   }
 
   /* The keyboard-move input (a preference) gets its own row; the board leaves room for it. */
-  html[data-cdc-has~='puzzle-keyboard'] main.puzzle {
-    --cdc-kb-h: 44px;
+  html[data-lr-ext-has~='puzzle-keyboard'] main.puzzle {
+    --lr-ext-kb-h: 44px;
   }
 
   main.puzzle .puzzle__board {
@@ -110,13 +121,13 @@
 
   /* The page never scrolls: Lichess keeps a bottom margin and its hidden hover cards at the end.
      The move list scrolls in place. */
-  html[data-cdc-has~='puzzle'],
-  html[data-cdc-has~='puzzle'] body,
-  html[data-cdc-has~='puzzle'] #main-wrap {
+  html[data-lr-ext-has~='puzzle'],
+  html[data-lr-ext-has~='puzzle'] body,
+  html[data-lr-ext-has~='puzzle'] #main-wrap {
     overflow: hidden !important;
   }
 
-  html[data-cdc-has~='puzzle'] body {
+  html[data-lr-ext-has~='puzzle'] body {
     height: 100dvh;
     margin-bottom: 0 !important;
   }
@@ -140,7 +151,7 @@
     padding: 0 14px;
     overflow-x: auto;
     scrollbar-width: none;
-    background: var(--cdc-bg-panel);
+    background: var(--lr-ext-bg-panel);
     box-shadow: inset 0 -1px 0 #ffffff14;
   }
 

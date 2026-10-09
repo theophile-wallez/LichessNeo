@@ -7,28 +7,28 @@
 @media (min-width: 1020px) {
   /* ---- Frame --- */
 
-  main.round .rcontrols .follow-up[data-cdc-end-card],
-  .cdc-end__frame {
+  main.round .rcontrols .follow-up[data-lr-ext-end-card],
+  .lr-ext-end__frame {
     margin: 10px 0 8px;
     padding: 10px !important;
     border-radius: 16px;
-    background: var(--cdc-grey-750);
+    background: var(--lr-ext-grey-750);
     box-shadow: inset 0 0 0 1px #ffffff14;
   }
 
-  .cdc-end__frame {
+  .lr-ext-end__frame {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin: 0;
   }
 
-  .cdc-end__foot {
+  .lr-ext-end__foot {
     display: flex;
     gap: 6px;
   }
 
-  .cdc-end__foot .cdc-btn {
+  .lr-ext-end__foot .lr-ext-btn {
     flex: 1 1 0;
     min-width: 0;
     height: 40px;
@@ -36,41 +36,41 @@
     font-size: 14px;
   }
 
-  .cdc-end__foot .cdc-btn--green {
+  .lr-ext-end__foot .lr-ext-btn--green {
     flex-grow: 1.4;
   }
 
   /* ---- Card --- */
 
-  .cdc-end__card {
-    --cdc-coach-h: 140px;
-    --cdc-tag-c: var(--cdc-good);
+  .lr-ext-end__card {
+    --lr-ext-coach-h: 140px;
+    --lr-ext-tag-c: var(--lr-ext-good);
     display: flex;
     flex-direction: column;
     gap: 10px;
     container-type: inline-size;
     color: #fff;
-    font-family: var(--cdc-font);
+    font-family: var(--lr-ext-font);
     text-align: start;
   }
 
-  .cdc-end__card--loss {
-    --cdc-tag-c: var(--cdc-bad);
+  .lr-ext-end__card--loss {
+    --lr-ext-tag-c: var(--lr-ext-bad);
   }
 
-  .cdc-end__card--draw {
-    --cdc-tag-c: var(--cdc-text-dim);
+  .lr-ext-end__card--draw {
+    --lr-ext-tag-c: var(--lr-ext-text-dim);
   }
 
   /* At a game's end it comes in once; the closed review draws it again as its analysis goes. */
-  main.round .rcontrols .follow-up > .cdc-end__card {
+  main.round .rcontrols .follow-up > .lr-ext-end__card {
     order: -3;
     flex-basis: 100%;
     margin-bottom: 2px;
-    animation: cdc-end-card 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+    animation: lr-ext-end-card 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
   }
 
-  @keyframes cdc-end-card {
+  @keyframes lr-ext-end-card {
     from {
       opacity: 0;
       translate: 0 8px;
@@ -79,17 +79,17 @@
 
   /* Short windows and narrow panels: the moves keep their room, the words theirs. */
   @media (max-height: 820px) {
-    .cdc-end__card {
-      --cdc-coach-h: 112px;
+    .lr-ext-end__card {
+      --lr-ext-coach-h: 112px;
     }
   }
 
   @container (max-width: 400px) {
-    .cdc-end__card .cdc-end__glow {
-      --cdc-coach-h: 108px;
+    .lr-ext-end__card .lr-ext-end__glow {
+      --lr-ext-coach-h: 108px;
     }
 
-    .cdc-end__card .cdc-end__title {
+    .lr-ext-end__card .lr-ext-end__title {
       font-size: 22px;
     }
   }
@@ -98,38 +98,38 @@
 
   /* Lit in the result's color from under the coach, fading out behind the words. The coach
      stands on its bottom edge, with room above for its hops: only the glow's edge cuts it. */
-  .cdc-end__glow {
+  .lr-ext-end__glow {
     display: flex;
     gap: 6px;
-    min-height: calc(var(--cdc-coach-h) + 18px);
+    min-height: calc(var(--lr-ext-coach-h) + 18px);
     overflow: hidden;
     border-radius: 12px;
     background:
       radial-gradient(
         70% 140% at 18% 125%,
-        color-mix(in srgb, var(--cdc-tag-c) 55%, transparent),
+        color-mix(in srgb, var(--lr-ext-tag-c) 55%, transparent),
         transparent 70%
       ),
       linear-gradient(
         100deg,
-        color-mix(in srgb, var(--cdc-tag-c) 22%, transparent),
+        color-mix(in srgb, var(--lr-ext-tag-c) 22%, transparent),
         transparent 85%
       );
   }
 
-  .cdc-end__card .cdc-coach__avatar {
+  .lr-ext-end__card .lr-ext-coach__avatar {
     align-self: flex-end;
     cursor: default;
   }
 
-  .cdc-end__card .cdc-coach__avatar:hover {
+  .lr-ext-end__card .lr-ext-coach__avatar:hover {
     transform: none;
   }
 
   /* The canvas spills past the avatar's sides, so its arms show, and above it, into the room
      for its hops. The framing stays the avatar's (content/coach/mascot/stage.ts). The id
      outweighs the review's own rule for its coach's canvas (review/bubble.css). */
-  :is(#cdc-review, main.round) .cdc-end__card .cdc-coach__face canvas {
+  :is(#lr-ext-review, main.round) .lr-ext-end__card .lr-ext-coach__face canvas {
     top: -13%;
     left: -60%;
     width: 220%;
@@ -138,7 +138,7 @@
 
   /* ---- Words --- */
 
-  .cdc-end__main {
+  .lr-ext-end__main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -146,16 +146,16 @@
     padding: 14px 14px 14px 0;
   }
 
-  .cdc-end__reason {
+  .lr-ext-end__reason {
     margin: 0;
-    color: var(--cdc-tag-c);
+    color: var(--lr-ext-tag-c);
     font-size: 11.5px;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
-  .cdc-end__title {
+  .lr-ext-end__title {
     margin: 2px 0 0;
     font-size: 26px;
     font-weight: 900;
@@ -164,10 +164,10 @@
   }
 
   /* The coach's words, typed out as it speaks: two lines kept, so the card keeps its height. */
-  .cdc-end__bubble {
+  .lr-ext-end__bubble {
     min-height: 2.9em;
     margin: 4px 0 0;
-    color: var(--cdc-grey-200);
+    color: var(--lr-ext-grey-200);
     font-size: 14px;
     line-height: 1.45;
   }

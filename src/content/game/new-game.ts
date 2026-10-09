@@ -16,12 +16,12 @@ export function syncNewGame(game: FinishedGame | null): void {
   const label = newGameLabel(game.clock, isFrench());
   const lichessButton = queryOne(followUp, '.new-opponent', HTMLElement);
   if (lichessButton) {
-    setData(lichessButton, 'cdcLabel', label);
+    setData(lichessButton, 'lrExtLabel', label);
     return;
   }
   // Players only: a spectator's follow-up has no rematch button.
-  if (!followUp.querySelector('.rematch') || followUp.querySelector('.cdc-new-game')) return;
-  const button = createElement('a', { className: 'fbt cdc-new-game', text: label });
+  if (!followUp.querySelector('.rematch') || followUp.querySelector('.lr-ext-new-game')) return;
+  const button = createElement('a', { className: 'fbt lr-ext-new-game', text: label });
   button.href = `/?hook_like=${game.id}`;
   followUp.prepend(button);
 }

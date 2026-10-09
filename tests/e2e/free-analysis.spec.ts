@@ -12,7 +12,7 @@ const JUDGING_MS = 60_000;
 test('the coach judges a move played on the free analysis board', async ({ page }) => {
   const { bubbleTitle, comment, badge } = reviewParts(page);
   await openLichess(page, '/analysis');
-  await expect(page.locator('html')).toHaveClass(/\bcdc-review-live\b/);
+  await expect(page.locator('html')).toHaveClass(/\blr-ext-review-live\b/);
   // Before a move, an invitation to play one.
   await expect(bubbleTitle).not.toBeEmpty();
   await expect(comment).toHaveCount(0);
@@ -22,12 +22,12 @@ test('the coach judges a move played on the free analysis board', async ({ page 
   await expect(played).toHaveClass(/\bactive\b/);
   await expect(bubbleTitle).toContainText('e4', { timeout: JUDGING_MS });
   await expect(comment).not.toBeEmpty();
-  await expect(played).toHaveAttribute('data-cdc-cls', VERDICT);
+  await expect(played).toHaveAttribute('data-lr-ext-cls', VERDICT);
   await expect(badge).toHaveCount(1);
-  await expect(page.locator('html')).toHaveAttribute('data-cdc-cls', VERDICT);
+  await expect(page.locator('html')).toHaveAttribute('data-lr-ext-cls', VERDICT);
 
   // And the reply, judged in turn.
   await clickMove(page, 'e7', 'e5');
   await expect(bubbleTitle).toContainText('e5', { timeout: JUDGING_MS });
-  await expect(page.locator('main.analyse .tview2 move[data-cdc-cls]')).toHaveCount(2);
+  await expect(page.locator('main.analyse .tview2 move[data-lr-ext-cls]')).toHaveCount(2);
 });

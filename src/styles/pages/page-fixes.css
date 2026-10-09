@@ -1,19 +1,19 @@
 /* ---- Leaderboards --- */
 
 .community__leaders .leaderboards h2 {
-  background: var(--cdc-bg-panel-dark) !important;
+  background: var(--lr-ext-bg-panel-dark) !important;
   font-weight: 800 !important;
   letter-spacing: 0 !important;
 }
 
 .community__leaders .leaderboards .user-top {
-  border-color: var(--cdc-border) !important;
+  border-color: var(--lr-ext-border) !important;
 }
 
 /* ---- Sign in --- */
 
 .auth .auth-tabs a {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-weight: 700 !important;
 }
 
@@ -22,7 +22,7 @@
   border-bottom-color: #fff !important;
 }
 
-.auth .auth-tabs[data-cdc-tabs] a.active {
+.auth .auth-tabs[data-lr-ext-tabs] a.active {
   border-bottom-color: transparent !important;
 }
 
@@ -38,11 +38,11 @@
  * Start button ran past the window. The ranks get a gutter only when shown. */
 @media (min-width: 1020px) {
   main#trainer > .trainer {
-    --cdc-coords-l: 0px;
+    --lr-ext-coords-l: 0px;
   }
 
   main#trainer > .trainer:has(coords.ranks) {
-    --cdc-coords-l: calc(0.6 * var(--cdc-coords-size, 13px) + 10px);
+    --lr-ext-coords-l: calc(0.6 * var(--lr-ext-coords-size, 13px) + 10px);
   }
 }
 
@@ -51,11 +51,14 @@
     grid-template-columns:
       min(
         var(---col2-uniboard-width),
-        calc(var(--cdc-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) - 275px)
+        calc(
+          var(--lr-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--lr-ext-coords-l) -
+            275px
+        )
       )
       var(---block-gap)
       minmax(240px, 400px) !important;
-    margin-left: var(--cdc-coords-l);
+    margin-left: var(--lr-ext-coords-l);
   }
 }
 
@@ -63,10 +66,13 @@
   main#trainer > .trainer {
     grid-template-columns:
       minmax(var(---col3-uniboard-side-min, 250px), 350px)
-      calc(var(---block-gap) + var(--cdc-coords-l))
+      calc(var(---block-gap) + var(--lr-ext-coords-l))
       min(
         var(---col3-uniboard-width),
-        calc(var(--cdc-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) - 540px)
+        calc(
+          var(--lr-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--lr-ext-coords-l) -
+            540px
+        )
       )
       var(---block-gap)
       minmax(240px, 400px) !important;

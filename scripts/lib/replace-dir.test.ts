@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { replaceDir } from './replace-dir.ts';
 import { tempDirs, writeFiles } from './testing.ts';
 
-const newDir = tempDirs('cdc-replace-');
+const newDir = tempDirs('lr-ext-replace-');
 
 /** A parent folder holding `out` with an earlier build in it. */
 async function earlierBuild(): Promise<{ parent: string; out: string }> {

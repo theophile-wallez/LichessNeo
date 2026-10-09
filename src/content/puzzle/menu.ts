@@ -6,12 +6,12 @@ import { message } from '#content/platform/runtime.ts';
 // card is its header, cut to the puzzle's details. This cog opens the card
 // whole over the panel, with the game, the theme and the settings.
 
-const OPEN = 'cdc-puzzle-menu-open';
+const OPEN = 'lr-ext-puzzle-menu-open';
 
 function setOpen(open: boolean): void {
   document.documentElement.classList.toggle(OPEN, open);
-  const button = queryOne(document, '.cdc-puzzle-menu', HTMLButtonElement);
-  if (button) setData(button, 'cdcOpen', open ? '' : null);
+  const button = queryOne(document, '.lr-ext-puzzle-menu', HTMLButtonElement);
+  if (button) setData(button, 'lrExtOpen', open ? '' : null);
   button?.setAttribute('aria-expanded', String(open));
 }
 
@@ -20,8 +20,13 @@ const isOpen = (): boolean => document.documentElement.classList.contains(OPEN);
 function buildButton(): HTMLButtonElement {
   const label = message('puzzleMenu');
   const button = createElement('button', {
-    className: 'cdc-puzzle-menu',
-    attrs: { type: 'button', 'aria-label': label, 'aria-expanded': 'false', 'data-cdc-tip': label },
+    className: 'lr-ext-puzzle-menu',
+    attrs: {
+      type: 'button',
+      'aria-label': label,
+      'aria-expanded': 'false',
+      'data-lr-ext-tip': label,
+    },
   });
   button.addEventListener('click', () => setOpen(!isOpen()));
   return button;
@@ -38,7 +43,7 @@ export function syncPuzzleMenu(): void {
 // A press anywhere else closes the card, as Escape does.
 function onPointerDown(event: PointerEvent): void {
   if (!isOpen()) return;
-  if (!closestTo(event.target, 'main.puzzle :is(.puzzle__side, .cdc-puzzle-menu)', Element))
+  if (!closestTo(event.target, 'main.puzzle :is(.puzzle__side, .lr-ext-puzzle-menu)', Element))
     setOpen(false);
 }
 

@@ -35,7 +35,8 @@ const ICONS = {
 
 export type IconName = keyof typeof ICONS;
 
-export const svgIcon = (name: IconName): SafeHtml => hugeicon(ICONS[name], { className: 'cdc-i' });
+export const svgIcon = (name: IconName): SafeHtml =>
+  hugeicon(ICONS[name], { className: 'lr-ext-i' });
 
 const BACK_ICON = hugeicon(ArrowLeft02Icon);
 const CLOSE_ICON = hugeicon(Cancel01Icon);
@@ -47,11 +48,11 @@ export function header(title: string, back: Mode | null, language: ReviewLanguag
   const backButton =
     back === null
       ? trustedHtml('<span></span>')
-      : html`<button class="cdc-review__back" data-cdc="${back}" aria-label="${ui.back}">${BACK_ICON}</button>`;
-  return html`<div class="cdc-review__head">
+      : html`<button class="lr-ext-review__back" data-lr-ext="${back}" aria-label="${ui.back}">${BACK_ICON}</button>`;
+  return html`<div class="lr-ext-review__head">
       ${backButton}
-      <div class="cdc-review__title"><span class="cdc-review__star">★</span>${title}</div>
-      <button class="cdc-review__close" data-cdc="normal" data-cdc-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button>
+      <div class="lr-ext-review__title"><span class="lr-ext-review__star">★</span>${title}</div>
+      <button class="lr-ext-review__close" data-lr-ext="normal" data-lr-ext-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button>
     </div>`;
 }
 
@@ -64,7 +65,7 @@ function blackIsBetter(record: PositionRecord | null | undefined): boolean {
 
 /** The score, dark when Black is better. */
 export const evalChip = (record: PositionRecord | null | undefined): SafeHtml =>
-  html`<span class="cdc-bubble__eval${blackIsBetter(record) ? ' cdc-bubble__eval--black' : ''}">${formatEval(record)}</span>`;
+  html`<span class="lr-ext-bubble__eval${blackIsBetter(record) ? ' lr-ext-bubble__eval--black' : ''}">${formatEval(record)}</span>`;
 
 export const bubbleTitle = (text: string): SafeHtml =>
-  html`<p class="cdc-bubble__title">${text}</p>`;
+  html`<p class="lr-ext-bubble__title">${text}</p>`;

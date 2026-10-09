@@ -134,7 +134,7 @@ const TV_BARS: BarSelectors = {
   clock: side => `main.round .rclock-${side}`,
 };
 const ANALYSIS_BARS: BarSelectors = {
-  bar: side => `main.analyse > .cdc-player--${side}`,
+  bar: side => `main.analyse > .lr-ext-player--${side}`,
   clock: side => `main.analyse .analyse__clock.${side}`,
 };
 
@@ -170,7 +170,7 @@ for (const size of DESKTOP_SIZES) {
       context,
     }) => {
       await openAnalysis(page, context);
-      const evalBar = page.locator('#cdc-evalbar');
+      const evalBar = page.locator('#lr-ext-evalbar');
       await expect(evalBar).toBeVisible();
       await expectLinedUp(page.locator(BOARD), [
         ...barsAndClocks(page, ANALYSIS_BARS),
@@ -188,7 +188,7 @@ for (const size of MOBILE_SIZES) {
       await openTv(page);
       await onTvBoard(page, async () => {
         await expectLichessHeader(page);
-        expect(await rootVariable(page, '--cdc-bg-panel')).toBe('#262522');
+        expect(await rootVariable(page, '--lr-ext-bg-panel')).toBe('#262522');
         expect(await horizontalOverflow(page)).toBe(0);
       });
     });
@@ -197,9 +197,9 @@ for (const size of MOBILE_SIZES) {
       await openAnalysis(page, context);
       await expectLichessHeader(page);
       // It has no room there: the board stays Lichess's.
-      await expect(page.locator('#cdc-review')).toBeAttached();
-      await expect(page.locator('#cdc-review')).toBeHidden();
-      await expect(page.locator('#cdc-board-overlay .cdc-badge')).toHaveCount(0);
+      await expect(page.locator('#lr-ext-review')).toBeAttached();
+      await expect(page.locator('#lr-ext-review')).toBeHidden();
+      await expect(page.locator('#lr-ext-board-overlay .lr-ext-badge')).toHaveCount(0);
       expect(await horizontalOverflow(page)).toBe(0);
     });
   });

@@ -48,8 +48,8 @@ main.racer-home > h1.box__top::before {
   gap: 8px;
   padding: 8px 15px;
   border-radius: 999px;
-  background: var(--cdc-bg-raised);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-bg-raised);
+  color: var(--lr-ext-text) !important;
   font-size: 13px;
   font-weight: 700;
   transition:
@@ -67,7 +67,7 @@ main.racer-home > h1.box__top::before {
 }
 
 .racer-home__about a:hover {
-  background: var(--cdc-bg-raised-hover);
+  background: var(--lr-ext-bg-raised-hover);
   color: #fff !important;
 }
 
@@ -88,10 +88,10 @@ main.racer-home > h1.box__top::before {
 
 /* Blue for the public race (the bus), orange for a race with friends (the car). */
 .racer-home .button {
-  --cdc-race: #45a3f5;
-  --cdc-race-2: var(--cdc-cyan-darker);
+  --lr-ext-race: #45a3f5;
+  --lr-ext-race-2: var(--lr-ext-cyan-darker);
   /* As tall as the window allows, so the page fills but never scrolls. */
-  --cdc-scene-h: clamp(190px, calc(var(--cdc-main-h, 100dvh) - 300px), 420px);
+  --lr-ext-scene-h: clamp(190px, calc(var(--lr-ext-main-h, 100dvh) - 300px), 420px);
 
   position: relative;
   display: flex !important;
@@ -100,9 +100,9 @@ main.racer-home > h1.box__top::before {
   gap: 18px;
   width: 100%;
   padding: 0 16px 22px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
   color: #fff !important;
   font-size: 20px !important;
@@ -117,25 +117,25 @@ main.racer-home > h1.box__top::before {
 }
 
 .racer-home__create .button {
-  --cdc-race: #f5a93b;
-  --cdc-race-2: var(--cdc-orange-darker);
+  --lr-ext-race: #f5a93b;
+  --lr-ext-race-2: var(--lr-ext-orange-darker);
 }
 
 .racer-home .button:not(.disabled):hover {
-  border-color: var(--cdc-card-border-hover) !important;
-  background: var(--cdc-card-hover) !important;
-  box-shadow: var(--cdc-card-shadow-hover) !important;
+  border-color: var(--lr-ext-card-border-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
+  box-shadow: var(--lr-ext-card-shadow-hover) !important;
   transform: translateY(-2px);
 }
 
 /* The scene's layers, top to bottom: the road's dashes, the finish line, the
- * shoulder, hills, the road, two clouds, the sun, the sky. cdc-racer-road
+ * shoulder, hills, the road, two clouds, the sun, the sky. lr-ext-racer-road
  * moves them in the same order. */
 .racer-home .button::before {
   content: '';
   position: absolute;
   inset: 0 0 auto;
-  height: var(--cdc-scene-h);
+  height: var(--lr-ext-scene-h);
   background:
     repeating-linear-gradient(90deg, #ffffffb3 0 26px, transparent 26px 52px) 0 calc(100% - 22px) /
       52px 3px repeat-x,
@@ -144,13 +144,13 @@ main.racer-home > h1.box__top::before {
     linear-gradient(#ffffff38, #ffffff38) 0 calc(100% - 48px) / 100% 3px no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='60'%3E%3Cpath fill='%23000' fill-opacity='.14' d='M0 60V40q30-30 60-6t60-4 60-4 60 14v20z'/%3E%3C/svg%3E")
       0 calc(100% - 51px) / 240px 60px repeat-x,
-    linear-gradient(var(--cdc-grey-750), var(--cdc-grey-850)) bottom / 100% 48px no-repeat,
+    linear-gradient(var(--lr-ext-grey-750), var(--lr-ext-grey-850)) bottom / 100% 48px no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 52'%3E%3Cg fill='%23fff' fill-opacity='.8'%3E%3Ccircle cx='32' cy='32' r='17'/%3E%3Ccircle cx='56' cy='24' r='23'/%3E%3Ccircle cx='80' cy='33' r='16'/%3E%3Crect x='14' y='30' width='82' height='22' rx='11'/%3E%3C/g%3E%3C/svg%3E")
       12% 22% / 110px auto no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 52'%3E%3Cg fill='%23fff' fill-opacity='.8'%3E%3Ccircle cx='32' cy='32' r='17'/%3E%3Ccircle cx='56' cy='24' r='23'/%3E%3Ccircle cx='80' cy='33' r='16'/%3E%3Crect x='14' y='30' width='82' height='22' rx='11'/%3E%3C/g%3E%3C/svg%3E")
       58% 10% / 70px auto no-repeat,
     radial-gradient(circle at 84% 24%, #fff6 0 22px, #fff2 23px 40px, transparent 41px),
-    linear-gradient(160deg, var(--cdc-race), var(--cdc-race-2));
+    linear-gradient(160deg, var(--lr-ext-race), var(--lr-ext-race-2));
 }
 
 /* Lichess's vehicle. Only as wide as itself, so the boost flame on hover comes
@@ -158,11 +158,11 @@ main.racer-home > h1.box__top::before {
 .racer-home .button .car {
   display: flex !important;
   align-items: flex-end;
-  height: var(--cdc-scene-h);
+  height: var(--lr-ext-scene-h);
   margin: 0 !important;
   padding-bottom: 5px;
   color: #fff;
-  font-size: calc(var(--cdc-scene-h) * 0.55) !important;
+  font-size: calc(var(--lr-ext-scene-h) * 0.55) !important;
   line-height: 0.62 !important;
   text-shadow: 0 6px 10px #0000004d;
 }
@@ -179,8 +179,8 @@ main.racer-home > h1.box__top::before {
   background:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-01--ffffff.svg') center
       / 16px no-repeat,
-    var(--cdc-btn-primary);
-  box-shadow: var(--cdc-btn-primary-shadow);
+    var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   transition: transform 0.15s !important;
 }
 
@@ -196,8 +196,8 @@ html[dir='rtl'] .racer-home .button::after {
 
 /* Lichess's boost flame, in fire colors. */
 .racer-home .button:hover .car::before {
-  color: var(--cdc-orange-dark);
-  text-shadow: 0 0 12px var(--cdc-orange-dark);
+  color: var(--lr-ext-orange-dark);
+  text-shadow: 0 0 12px var(--lr-ext-orange-dark);
 }
 
 html[dir='rtl'] .racer-home .button:hover::after {
@@ -206,7 +206,7 @@ html[dir='rtl'] .racer-home .button:hover::after {
 
 /* The vehicle drives in; on hover the road rushes by. */
 .racer-home .button .car {
-  animation: cdc-racer-drive-in 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: lr-ext-racer-drive-in 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .racer-home__create .button .car {
@@ -214,17 +214,17 @@ html[dir='rtl'] .racer-home .button:hover::after {
 }
 
 .racer-home .button:hover::before {
-  animation: cdc-racer-road 0.35s linear infinite;
+  animation: lr-ext-racer-road 0.35s linear infinite;
 }
 
-@keyframes cdc-racer-drive-in {
+@keyframes lr-ext-racer-drive-in {
   from {
     opacity: 0;
     translate: -60% 0;
   }
 }
 
-@keyframes cdc-racer-road {
+@keyframes lr-ext-racer-road {
   to {
     background-position:
       -52px calc(100% - 22px),
@@ -255,6 +255,6 @@ html[dir='rtl'] .racer-home .button:hover::after {
   }
 
   .racer-home .button {
-    --cdc-scene-h: 170px;
+    --lr-ext-scene-h: 170px;
   }
 }

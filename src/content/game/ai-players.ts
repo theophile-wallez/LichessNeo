@@ -5,13 +5,13 @@ import type { Feature } from '#shared/features.ts';
 import { parseJson } from '#shared/json.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
 
-// The color(s) the computer plays, in `data-cdc-ai` on <html>, so its player
+// The color(s) the computer plays, in `data-lr-ext-ai` on <html>, so its player
 // bar gets the computer's robot as its avatar (styles/playerbar.css), in the
-// colors of its level, in `data-cdc-ai-level`.
+// colors of its level, in `data-lr-ext-ai-level`.
 // Lichess draws that bar like an anonymous player's, and only the game's data
-// tells them apart. The estimated rating of its level goes in `--cdc-ai-<color>`
+// tells them apart. The estimated rating of its level goes in `--lr-ext-ai-<color>`
 // for the bar, and into the game info (game-meta.ts). Every level's is in
-// `--cdc-ai-level-<level>` for the game setup (styles/pages/setup-options.css).
+// `--lr-ext-ai-level-<level>` for the game setup (styles/pages/setup-options.css).
 
 // Lichess shows no rating for its levels since 2022. These are the over-the-board
 // estimates a Lichess developer gave for the current engine settings (forum,
@@ -64,12 +64,12 @@ export const computerRatings = (): ReadonlyMap<Color, string> => ratings;
 export function markComputerPlayers(players: readonly ComputerPlayer[]): void {
   if (players.length === 0) return;
   const root = document.documentElement;
-  setData(root, 'cdcAi', players.map(({ color }) => color).join(' '));
-  setData(root, 'cdcAiLevel', players[0] ? String(players[0].level) : null);
+  setData(root, 'lrExtAi', players.map(({ color }) => color).join(' '));
+  setData(root, 'lrExtAiLevel', players[0] ? String(players[0].level) : null);
   for (const { color, rating } of players) {
     if (rating === undefined) continue;
     ratings.set(color, rating);
-    setStyleProperty(root, `--cdc-ai-${color}`, `"${rating}"`);
+    setStyleProperty(root, `--lr-ext-ai-${color}`, `"${rating}"`);
   }
 }
 
@@ -77,7 +77,7 @@ export function markComputerPlayers(players: readonly ComputerPlayer[]): void {
 export function markLevelRatings(): void {
   const root = document.documentElement;
   for (const [index, rating] of AI_RATINGS.entries())
-    setStyleProperty(root, `--cdc-ai-level-${index + 1}`, `"${rating}"`);
+    setStyleProperty(root, `--lr-ext-ai-level-${index + 1}`, `"${rating}"`);
 }
 
 export const aiPlayers: Feature = {

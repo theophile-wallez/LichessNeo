@@ -5,10 +5,10 @@
 
 main.analyse .retro-box {
   border: none !important;
-  border-top: 1px solid var(--cdc-border) !important;
-  background: var(--cdc-bg-panel) !important;
-  color: var(--cdc-text);
-  font-family: var(--cdc-font) !important;
+  border-top: 1px solid var(--lr-ext-border) !important;
+  background: var(--lr-ext-bg-panel) !important;
+  color: var(--lr-ext-text);
+  font-family: var(--lr-ext-font) !important;
 }
 
 main.analyse .retro-box > .title {
@@ -17,8 +17,8 @@ main.analyse .retro-box > .title {
   box-sizing: border-box;
   height: 40px;
   padding: 0 6px 0 14px !important;
-  border-bottom: 1px solid var(--cdc-border);
-  background: var(--cdc-bg-panel-dark) !important;
+  border-bottom: 1px solid var(--lr-ext-border);
+  background: var(--lr-ext-bg-panel-dark) !important;
   color: #fff !important;
   font-size: 14px !important;
   font-weight: 800;
@@ -28,7 +28,7 @@ main.analyse .retro-box > .title {
 /* The count, before the close button. */
 main.analyse .retro-box > .title > span + span {
   margin-left: auto;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   font-weight: 700;
 }
@@ -39,7 +39,7 @@ main.analyse .retro-box > .title > .fbt {
   padding: 0 !important;
   border-radius: 6px;
   background: transparent !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
 }
 
 main.analyse .retro-box > .title > .fbt:hover {
@@ -85,7 +85,7 @@ main.analyse .retro-box .no-square > piece.black {
 }
 
 main.analyse .retro-box .win .icon:not(.off) {
-  color: var(--cdc-good) !important;
+  color: var(--lr-ext-good) !important;
 }
 
 main.analyse .retro-box .instruction > strong {
@@ -96,7 +96,7 @@ main.analyse .retro-box .instruction > strong {
 }
 
 main.analyse .retro-box .instruction > em {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13.5px;
   font-style: normal;
   font-weight: 600;
@@ -112,8 +112,8 @@ main.analyse .retro-box .choices {
 main.analyse .retro-box .choices a {
   padding: 3px 10px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--cdc-accent) 18%, transparent);
-  color: var(--cdc-accent-hover) !important;
+  background: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent);
+  color: var(--lr-ext-accent-hover) !important;
   font-size: 12.5px;
   font-weight: 800;
   line-height: 1.6;
@@ -121,7 +121,7 @@ main.analyse .retro-box .choices a {
 }
 
 main.analyse .retro-box .choices a:hover {
-  background: color-mix(in srgb, var(--cdc-accent) 28%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-accent) 28%, transparent);
   color: #fff !important;
 }
 
@@ -130,8 +130,8 @@ main.analyse .retro-box .continue {
   margin: 0 14px 12px;
   min-height: 44px;
   border-radius: 6px;
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   font-size: 16px !important;
   font-weight: 800;
   text-shadow: 0 1px 1px #00000033;
@@ -140,7 +140,7 @@ main.analyse .retro-box .continue {
 }
 
 main.analyse .retro-box .continue:hover {
-  background: var(--cdc-btn-primary-hover) !important;
+  background: var(--lr-ext-btn-primary-hover) !important;
 }
 
 main.analyse .retro-box .continue icon::before {
@@ -155,5 +155,5 @@ main.analyse .retro-box .progress {
 }
 
 main.analyse .retro-box .progress div {
-  background: var(--cdc-accent) !important;
+  background: var(--lr-ext-accent) !important;
 }

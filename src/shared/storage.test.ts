@@ -48,13 +48,13 @@ afterEach(() => {
 });
 
 describe('storage', () => {
-  it('names every key with the cdc prefix', () => {
-    expect(StorageKey.reviewCache('abcd1234', 80, 3)).toBe('cdc-review:abcd1234:80:v3');
-    expect(SessionKey.gameStarted('abcd1234')).toBe('cdc-started:abcd1234');
-    const names = [...Object.values(StorageKey), ...Object.values(SessionKey)].filter(
-      (key): key is string => typeof key === 'string',
+  it('names every key with the lr-ext prefix', () => {
+    expect(StorageKey.reviewCache('abcd1234', 80, 3)).toBe('lr-ext-review:abcd1234:80:v3');
+    expect(SessionKey.gameStarted('abcd1234')).toBe('lr-ext-started:abcd1234');
+    const names = [...Object.values(StorageKey), ...Object.values(SessionKey)].flatMap(key =>
+      typeof key === 'string' ? [key] : [],
     );
-    for (const name of names) expect(name).toMatch(/^cdc-/);
+    for (const name of names) expect(name).toMatch(/^lr-ext-/);
   });
 
   it('reads back what it wrote, in either area, through a schema', () => {
@@ -68,36 +68,36 @@ describe('storage', () => {
   });
 
   it('reads JSON, and a value that fails its schema as missing', () => {
-    writeStoredJson('cdc-test', { a: 1 });
-    expect(readStoredJson('cdc-test', z.object({ a: z.number() }))).toEqual({ a: 1 });
-    expect(readStoredJson('cdc-test', z.object({ a: z.string() }))).toBeNull();
-    localStorage.setItem('cdc-test', '{');
-    expect(readStoredJson('cdc-test', z.unknown())).toBeNull();
+    writeStoredJson('lr-ext-test', { a: 1 });
+    expect(readStoredJson('lr-ext-test', z.object({ a: z.number() }))).toEqual({ a: 1 });
+    expect(readStoredJson('lr-ext-test', z.object({ a: z.string() }))).toBeNull();
+    localStorage.setItem('lr-ext-test', '{');
+    expect(readStoredJson('lr-ext-test', z.unknown())).toBeNull();
   });
 
   it('loses only the value when the storage is full', () => {
     const setItem = fillStorage();
     expect(() => writeStored(StorageKey.coach, 2)).not.toThrow();
-    expect(() => writeStoredJson('cdc-test', { a: 1 })).not.toThrow();
+    expect(() => writeStoredJson('lr-ext-test', { a: 1 })).not.toThrow();
     expect(setItem).toHaveBeenCalledTimes(2);
   });
 
   it('writes and removes quietly on a blocked storage, but reads throw', () => {
     blockStorage();
     expect(() => writeStored(StorageKey.coach, 2)).not.toThrow();
-    expect(() => writeStoredJson('cdc-test', { a: 1 }, 'session')).not.toThrow();
+    expect(() => writeStoredJson('lr-ext-test', { a: 1 }, 'session')).not.toThrow();
     expect(() => removeStored(StorageKey.coach)).not.toThrow();
-    expect(storedKeys('cdc-')).toEqual([]);
+    expect(storedKeys('lr-ext-')).toEqual([]);
     // Read as missing, a once-per-game check would pass on every load.
     expect(() => readStored(StorageKey.coach, z.string())).toThrow('denied');
-    expect(() => readStoredJson('cdc-test', z.unknown(), 'session')).toThrow('denied');
+    expect(() => readStoredJson('lr-ext-test', z.unknown(), 'session')).toThrow('denied');
   });
 
   it('lists the keys with a prefix', () => {
     localStorage.clear();
-    writeStored('cdc-review:a', 1);
-    writeStored('cdc-review:b', 2);
-    writeStored('cdc-coach', 3);
-    expect(storedKeys('cdc-review:').toSorted()).toEqual(['cdc-review:a', 'cdc-review:b']);
+    writeStored('lr-ext-review:a', 1);
+    writeStored('lr-ext-review:b', 2);
+    writeStored('lr-ext-coach', 3);
+    expect(storedKeys('lr-ext-review:').toSorted()).toEqual(['lr-ext-review:a', 'lr-ext-review:b']);
   });
 });

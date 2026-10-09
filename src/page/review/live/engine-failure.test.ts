@@ -17,7 +17,7 @@ it('tells a move played on the free board that the engine failed to start', asyn
     synthetic: true,
     steps: [],
   });
-  Reflect.set(globalThis, 'cdcFakeStockfish', () => {
+  Reflect.set(globalThis, 'lrExtFakeStockfish', () => {
     throw new RangeError('no shared memory');
   });
   const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -26,7 +26,7 @@ it('tells a move played on the free board that the engine failed to start', asyn
   ctrl.playUci('e2e4');
   ctrl.redraw();
   await advance(3000);
-  const title = document.querySelector('#cdc-review .cdc-bubble__title');
+  const title = document.querySelector('#lr-ext-review .lr-ext-bubble__title');
   expect(title?.textContent).toBe(en.ui.engineError);
   expect(logged).toHaveBeenCalledWith('[LichessReimagined] engine failed', expect.any(RangeError));
   // Nothing more is asked of an engine that isn't there.

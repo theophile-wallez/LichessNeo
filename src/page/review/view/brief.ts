@@ -34,7 +34,7 @@ function errorChips(review: Review, color: Color): SafeHtml[] {
     const count = counts[moveClass] ?? 0;
     return count > 0
       ? [
-          html`<span class="cdc-brief__chip">${classIcon(moveClass)}<b>${count}</b>${texts.countLabel(moveClass, count)}</span>`,
+          html`<span class="lr-ext-brief__chip">${classIcon(moveClass)}<b>${count}</b>${texts.countLabel(moveClass, count)}</span>`,
         ]
       : [];
   });
@@ -52,8 +52,8 @@ export function briefMarkup(session: Session, analysis: Analysis, review: Review
       : brief.moments(moments.length, turning && moveName(turning));
   const color = analysis.viewerColor() ?? analysis.orientation();
   return html`${bubbleTitle(ui.intro)}
-    <div class="cdc-bubble__body">
-      <p class="cdc-bubble__sub">${opening === '' ? '' : html`${brief.opening(html`${opening}`)} `}${found}</p>
-      <div class="cdc-brief">${errorChips(review, color)}<button class="cdc-btn cdc-btn--green cdc-brief__start" data-cdc="next">${brief.start} →</button></div>
+    <div class="lr-ext-bubble__body">
+      <p class="lr-ext-bubble__sub">${opening === '' ? '' : html`${brief.opening(html`${opening}`)} `}${found}</p>
+      <div class="lr-ext-brief">${errorChips(review, color)}<button class="lr-ext-btn lr-ext-btn--green lr-ext-brief__start" data-lr-ext="next">${brief.start} →</button></div>
     </div>`;
 }

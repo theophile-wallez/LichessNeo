@@ -20,7 +20,7 @@
   border-collapse: separate !important;
   border-spacing: 0 6px;
   margin-top: -6px;
-  counter-reset: cdc-fide var(--cdc-fide-skip, 0);
+  counter-reset: lr-ext-fide var(--lr-ext-fide-skip, 0);
 }
 
 .fide-federations .slist thead {
@@ -31,8 +31,8 @@
 .fide-federations .slist thead th {
   padding: 0 10px 8px !important;
   border: none !important;
-  background: var(--cdc-bg-page);
-  color: var(--cdc-text-dim) !important;
+  background: var(--lr-ext-bg-page);
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px !important;
   font-weight: 700;
   text-align: center;
@@ -64,25 +64,25 @@
 }
 
 .fide-federations .slist thead th:is(:nth-child(3), :nth-child(4), :nth-child(5)) {
-  --cdc-mode-icon: var(--cdc-mode-classical);
-  --cdc-mode-color: #2dd4bf;
+  --lr-ext-mode-icon: var(--lr-ext-mode-classical);
+  --lr-ext-mode-color: #2dd4bf;
 }
 
 .fide-federations .slist thead th:nth-child(4) {
-  --cdc-mode-icon: var(--cdc-mode-rapid);
-  --cdc-mode-color: var(--cdc-accent);
+  --lr-ext-mode-icon: var(--lr-ext-mode-rapid);
+  --lr-ext-mode-color: var(--lr-ext-accent);
 }
 
 .fide-federations .slist thead th:nth-child(5) {
-  --cdc-mode-icon: var(--cdc-mode-blitz);
-  --cdc-mode-color: var(--cdc-yellow-dark);
+  --lr-ext-mode-icon: var(--lr-ext-mode-blitz);
+  --lr-ext-mode-color: var(--lr-ext-yellow-dark);
 }
 
 .fide-federations .slist thead th:is(:nth-child(3), :nth-child(4), :nth-child(5))::before {
-  content: var(--cdc-mode-icon);
+  content: var(--lr-ext-mode-icon);
   display: inline-block;
   margin-inline-end: 6px;
-  color: var(--cdc-mode-color);
+  color: var(--lr-ext-mode-color);
   font-family: lichess;
   font-size: 14px;
   font-weight: 400;
@@ -92,7 +92,7 @@
 
 /* The federation's link covers the whole card. */
 .fide-federations .slist tbody tr.paginated {
-  counter-increment: cdc-fide;
+  counter-increment: lr-ext-fide;
   position: relative;
   background: none !important;
 }
@@ -100,8 +100,8 @@
 .fide-federations .slist tbody tr.paginated > td {
   padding: 10px 14px !important;
   border: none !important;
-  background: var(--cdc-bg-panel);
-  color: var(--cdc-text-dim);
+  background: var(--lr-ext-bg-panel);
+  color: var(--lr-ext-text-dim);
   font-size: 15px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -121,12 +121,12 @@
 }
 
 .fide-federations .slist tbody tr.paginated:hover > td {
-  background: var(--cdc-card-hover);
+  background: var(--lr-ext-card-hover);
 }
 
 /* The other two ratings in the text color; classical, the sort order, stands out. */
 .fide-federations .slist tbody td:is(:nth-child(4), :nth-child(5)) {
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
 }
 
 .fide-federations .slist tbody td:nth-child(3) {
@@ -153,12 +153,12 @@
 }
 
 .fide-federations .slist tbody tr:hover td:first-child a {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 /* The rank, with the players' list's medals. */
 .fide-federations .slist tbody td:first-child a::before {
-  content: counter(cdc-fide);
+  content: counter(lr-ext-fide);
   flex: none;
   display: grid;
   place-items: center;
@@ -166,13 +166,13 @@
   height: 30px;
   margin-inline-end: -2px;
   border-radius: 999px;
-  background: var(--cdc-medal, transparent);
-  box-shadow: var(--cdc-medal-shadow, none);
-  color: var(--cdc-medal-text, var(--cdc-text-dim));
+  background: var(--lr-ext-medal, transparent);
+  box-shadow: var(--lr-ext-medal-shadow, none);
+  color: var(--lr-ext-medal-text, var(--lr-ext-text-dim));
   font-size: 14px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
-  text-shadow: var(--cdc-medal-text-shadow, none);
+  text-shadow: var(--lr-ext-medal-text-shadow, none);
 }
 
 /* The flag, big and round; it bounces on hover. */
@@ -201,8 +201,8 @@
   display: inline-block;
   padding: 8px 18px;
   border-radius: 8px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
   color: #fff !important;
   font-weight: 700;
 }

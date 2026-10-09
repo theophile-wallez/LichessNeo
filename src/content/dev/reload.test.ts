@@ -12,9 +12,9 @@ interface OddScenario {
   readonly release?: boolean;
 }
 
-/** The feature as a build with `CDC_DEV_BUILD` set so would have it: the module reads it once. */
+/** The feature as a build with `LR_EXT_DEV_BUILD` set so would have it: the module reads it once. */
 async function devReloadFor(devBuild: boolean): Promise<Feature> {
-  vi.stubGlobal('CDC_DEV_BUILD', devBuild);
+  vi.stubGlobal('LR_EXT_DEV_BUILD', devBuild);
   vi.resetModules();
   const { devReload } = await import('./reload.ts');
   return devReload;

@@ -8,10 +8,10 @@ import type { Look } from './library.ts';
 // Puts the picked looks on the page. A pack's images go in a stylesheet of
 // ours, as data: URLs too long for <html>'s style attribute, which other
 // features rewrite. Pieces override the variables Lichess draws its own from;
-// the board is named in `data-cdc-board` for styles/board/pieces.css: a theme
+// the board is named in `data-lr-ext-board` for styles/board/pieces.css: a theme
 // of ours, a pack's, or none for Lichess's.
 
-const STYLE_ID = 'cdc-packs';
+const STYLE_ID = 'lr-ext-packs';
 
 export interface Shown {
   readonly board: Look;
@@ -44,8 +44,8 @@ function boardRules(pack: Pack | null): string[] {
   const board = pack?.board;
   if (board === undefined) return [];
   const { image, light, dark } = board;
-  const squares = light && dark ? `;--cdc-sq-light:${light};--cdc-sq-dark:${dark}` : '';
-  const rules = [`:root{--cdc-board-img:url("${image}")${squares}}`];
+  const squares = light && dark ? `;--lr-ext-sq-light:${light};--lr-ext-sq-dark:${dark}` : '';
+  const rules = [`:root{--lr-ext-board-img:url("${image}")${squares}}`];
   // Without the squares' colors, the coordinates keep Lichess's board's.
   if (squares)
     rules.push(
@@ -71,7 +71,7 @@ function packStyle(): HTMLStyleElement {
 }
 
 export function showLooks(shown: Shown): void {
-  setData(document.documentElement, 'cdcBoard', boardName(shown.board));
+  setData(document.documentElement, 'lrExtBoard', boardName(shown.board));
   const text = packRules(shown);
   const style = document.getElementById(STYLE_ID) ?? (text === '' ? null : packStyle());
   if (style && style.textContent !== text) style.textContent = text;
@@ -89,5 +89,5 @@ export function soundFiles(look: Look): SoundFiles {
 
 /** What the page hides until the stored packs are read, so it never shows Lichess's first. */
 export function setLoading(parts: readonly string[]): void {
-  setData(document.documentElement, 'cdcLoading', parts.length > 0 ? parts.join(' ') : null);
+  setData(document.documentElement, 'lrExtLoading', parts.length > 0 ? parts.join(' ') : null);
 }

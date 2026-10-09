@@ -49,16 +49,16 @@ const PLAYER_ROWS =
 
 const MARKS: readonly Mark[] = [
   // Which side menu, and which of its pages this is (its active link).
-  { selector: '.subnav', key: 'cdcNav', read: navsOf },
+  { selector: '.subnav', key: 'lrExtNav', read: navsOf },
   {
     selector: 'main.page-menu',
-    key: 'cdcNavActive',
+    key: 'lrExtNavActive',
     read: main => hrefIn(main, '.subnav a.active'),
   },
   // Which side menu the page has, for its title's tile (styles/pages/static-pages.css).
   {
     selector: 'main.page-menu',
-    key: 'cdcMenu',
+    key: 'lrExtMenu',
     read: main => {
       const menu = main.querySelector(':scope > .subnav');
       return menu ? navsOf(menu) : null;
@@ -67,13 +67,13 @@ const MARKS: readonly Mark[] = [
   // A game's mode, by its info's icon (styles/game/game-info.css).
   {
     selector: 'main.round .game__meta',
-    key: 'cdcIcon',
+    key: 'lrExtIcon',
     read: meta => iconIn(meta, '.game__meta__infos'),
   },
   // A rating's stats page: its title takes the glyph of its card in the menu (styles/profile/).
   {
     selector: 'main.page-menu > .perf-stat > .box__top h1',
-    key: 'cdcIcon',
+    key: 'lrExtIcon',
     read: title => {
       const main = title.closest('main');
       return main ? iconIn(main, ':scope > .page-menu__menu a.active') : null;
@@ -82,34 +82,34 @@ const MARKS: readonly Mark[] = [
   // A leaderboard by its title's icon, a shield by its title's link (styles/leaderboard/).
   {
     selector: '.community .user-top, .tournament-leaderboards__item',
-    key: 'cdcIcon',
+    key: 'lrExtIcon',
     read: board => iconIn(board, ':scope > h2'),
   },
   {
     selector: '.tournament-shields__item',
-    key: 'cdcHref',
+    key: 'lrExtHref',
     read: shield => hrefIn(shield, ':scope > h2 > a'),
   },
   // A forum category (styles/forum/): the index links to it, a category page to
   // its topics, a topic back to it, and so does a team's board.
-  { selector: 'main.forum .categs tr', key: 'cdcHref', read: row => hrefIn(row, 'h2 a') },
-  { selector: 'main.forum-categ', key: 'cdcHref', read: main => hrefIn(main, 'td.subject a') },
+  { selector: 'main.forum .categs tr', key: 'lrExtHref', read: row => hrefIn(row, 'h2 a') },
+  { selector: 'main.forum-categ', key: 'lrExtHref', read: main => hrefIn(main, 'td.subject a') },
   {
     selector: 'main.forum:is(.forum-categ, .forum-topic)',
-    key: 'cdcBack',
+    key: 'lrExtBack',
     read: main => hrefIn(main, '.box__top h1 > a'),
   },
   // The forum's search results, by where the search form goes (styles/forum/).
   {
     selector: 'main.search',
-    key: 'cdcSearch',
+    key: 'lrExtSearch',
     read: main => main.querySelector(':scope > .box__top form.search')?.getAttribute('action'),
   },
   // A list of players (styles/friends.css): a user link first on each row, or one
   // row of one cell when it's empty.
   {
     selector: 'main.box.page-small',
-    key: 'cdcList',
+    key: 'lrExtList',
     read: main => (main.querySelector(PLAYER_ROWS) ? 'players' : null),
   },
 ];

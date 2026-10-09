@@ -91,7 +91,7 @@ describe('the radar feature', () => {
     const host = await startOnParsingPage(JSON.stringify(INIT));
     const figure = host.lastElementChild;
     expect(host.children).toHaveLength(2);
-    expect(figure?.className).toBe('cdc-radar');
+    expect(figure?.className).toBe('lr-ext-radar');
     expect(figure?.innerHTML).toBe(legacy.markup);
   });
 
@@ -112,6 +112,6 @@ describe('the radar feature', () => {
     document.body.append(script);
     radar.start();
     radar.start();
-    expect(document.querySelectorAll('.cdc-radar')).toHaveLength(1);
+    expect(document.querySelectorAll('.lr-ext-radar')).toHaveLength(1);
   });
 });

@@ -9,7 +9,7 @@ import { FINISHED_GAME, openLichess } from './support/lichess.ts';
 const ANALYSED_GAME = '/kAdOQKeh/black';
 const STUDY = '/study/2Zl6MgFH';
 
-const BUTTON = '.analyse__controls > .cdc-underboard';
+const BUTTON = '.analyse__controls > .lr-ext-underboard';
 const UNDERBOARD = 'main.analyse > .analyse__underboard';
 
 test('the free board takes a pasted PGN, and shows the position’s FEN', async ({ page }) => {
@@ -29,7 +29,7 @@ test('the free board takes a pasted PGN, and shows the position’s FEN', async 
 
 test('a game without server analysis offers to request one', async ({ page }) => {
   await openLichess(page, FINISHED_GAME.path);
-  await page.locator('.cdc-review__close').click();
+  await page.locator('.lr-ext-review__close').click();
   await page.locator(BUTTON).click();
   const underboard = page.locator(UNDERBOARD);
   await underboard.locator('.analyse__underboard__menu > .computer-analysis').click();
@@ -39,7 +39,7 @@ test('a game without server analysis offers to request one', async ({ page }) =>
 
 test('an analysed game shows its charts and "Learn from your mistakes"', async ({ page }) => {
   await openLichess(page, ANALYSED_GAME);
-  await page.locator('.cdc-review__close').click();
+  await page.locator('.lr-ext-review__close').click();
   await page.locator(BUTTON).click();
   await expectInView(page, page.locator(`${UNDERBOARD} .analyse__underboard__menu`));
   const learn = page.locator('main.analyse > .analyse__round-training .advice-summary a.button');
@@ -53,28 +53,28 @@ test('an analysed game shows its charts and "Learn from your mistakes"', async (
 
 test('a game’s charts are ours, and a click on one goes to its move', async ({ page }) => {
   await openLichess(page, ANALYSED_GAME);
-  await page.locator('.cdc-review__close').click();
+  await page.locator('.lr-ext-review__close').click();
   await page.locator(BUTTON).click();
   const menu = page.locator(`${UNDERBOARD} .analyse__underboard__menu`);
   await menu.locator('[data-panel="computer-analysis"]').click();
   const advantage = page.locator('#acpl-chart-container');
-  await expect(advantage.locator('.cdc-gchart .cdc-gchart__line')).toHaveAttribute('d', /^M/);
+  await expect(advantage.locator('.lr-ext-gchart .lr-ext-gchart__line')).toHaveAttribute('d', /^M/);
   await expect(advantage.locator('canvas')).toBeHidden();
   await menu.locator('[data-panel="move-times"]').click();
   const times = page.locator('#movetimes-chart-container');
-  await expect(times.locator('.cdc-gchart__bar--white').first()).toBeVisible();
+  await expect(times.locator('.lr-ext-gchart__bar--white').first()).toBeVisible();
   await expect(times.locator('canvas')).toBeHidden();
-  const plot = await times.locator('.cdc-gchart svg').boundingBox();
+  const plot = await times.locator('.lr-ext-gchart svg').boundingBox();
   if (!plot) throw new Error('no move times chart');
   await page.mouse.click(plot.x + plot.width / 2, plot.y + plot.height / 2);
-  await expect(times.locator('.cdc-gchart__ply')).toHaveClass(/\bcdc-gchart__ply--on\b/);
-  await expect(times.locator('.cdc-rchart__tip')).toContainText(/\d+\.{1,3} \S+/);
+  await expect(times.locator('.lr-ext-gchart__ply')).toHaveClass(/\blr-ext-gchart__ply--on\b/);
+  await expect(times.locator('.lr-ext-rchart__tip')).toContainText(/\d+\.{1,3} \S+/);
   expect(await wheelScroll(page)).toBe(0);
 });
 
 test('the exercise’s spinner stays in its tile', async ({ page }) => {
   await openLichess(page, ANALYSED_GAME);
-  await page.locator('.cdc-review__close').click();
+  await page.locator('.lr-ext-review__close').click();
   await page.locator(BUTTON).click();
   await page.locator('main.analyse > .analyse__round-training .advice-summary a.button').click();
   const player = page.locator('.analyse__tools > .retro-box .player').first();
@@ -106,7 +106,7 @@ test('a game’s tabs keep their whole names, and its crosstable spans the panel
 }) => {
   await page.setViewportSize({ width: 1024, height: 768 });
   await openLichess(page, ANALYSED_GAME);
-  await page.locator('.cdc-review__close').click();
+  await page.locator('.lr-ext-review__close').click();
   await page.locator(BUTTON).click();
   const menu = page.locator(`${UNDERBOARD} .analyse__underboard__menu`);
   await menu.locator('[data-panel="ctable"]').click();

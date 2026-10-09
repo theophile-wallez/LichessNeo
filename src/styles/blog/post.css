@@ -23,11 +23,11 @@
     z-index: 3;
     top: 0;
     padding: 12px 0 10px;
-    background: var(--cdc-bg-page);
+    background: var(--lr-ext-bg-page);
     box-shadow:
-      0 calc(-1 * var(--cdc-page-top)) 0 16px var(--cdc-bg-page),
-      -16px 0 var(--cdc-bg-page),
-      16px 0 var(--cdc-bg-page);
+      0 calc(-1 * var(--lr-ext-page-top)) 0 16px var(--lr-ext-bg-page),
+      -16px 0 var(--lr-ext-bg-page),
+      16px 0 var(--lr-ext-bg-page);
   }
 
   .ublog-post .ublog-post__title::after {
@@ -36,7 +36,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -69,7 +69,7 @@
   justify-content: flex-start !important;
   gap: 6px 16px !important;
   margin: 0 0 20px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
   font-weight: 600;
 }
@@ -85,7 +85,7 @@
 }
 
 .ublog-post .ublog-post__meta__date {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
 }
 
 .ublog-post .ublog-post__like--mini {
@@ -94,7 +94,7 @@
   border: 1px solid #ffffff14;
   border-radius: 999px;
   background: #ffffff0a;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-weight: 700;
   transition:
     background-color 0.15s,
@@ -103,13 +103,13 @@
 }
 
 .ublog-post .ublog-post__like--mini:hover {
-  border-color: color-mix(in srgb, var(--cdc-red-dark) 40%, transparent);
-  background: color-mix(in srgb, var(--cdc-red-dark) 8%, transparent);
+  border-color: color-mix(in srgb, var(--lr-ext-red-dark) 40%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-red-dark) 8%, transparent);
   color: #fff !important;
 }
 
 .ublog-post .ublog-post__views strong {
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
 }
 
 /* The report link is a quiet icon, not a big grey button. */
@@ -117,7 +117,7 @@
   padding: 4px 6px !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--cdc-font-dimmer) !important;
+  color: var(--lr-ext-font-dimmer) !important;
 }
 
 .ublog-post .ublog-post__meta__report.button:hover {
@@ -138,22 +138,22 @@
   border: 1px solid #ffffff14;
   border-radius: 999px !important;
   background: #ffffff0a !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 13px;
   font-weight: 600;
 }
 
 .ublog-post .ublog-post__topics a:hover {
-  border-color: color-mix(in srgb, var(--cdc-accent) 50%, transparent);
-  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
   color: #fff !important;
 }
 
 .ublog-post .ublog-post__intro {
   margin: 24px 0 28px !important;
   padding-inline-start: 16px;
-  border-inline-start: 3px solid var(--cdc-accent);
-  color: var(--cdc-grey-100);
+  border-inline-start: 3px solid var(--lr-ext-accent);
+  color: var(--lr-ext-grey-100);
   font-size: 19px !important;
   font-weight: 600;
   line-height: 1.5;
@@ -162,7 +162,7 @@
 /* ---- Typography --- */
 
 .ublog-post .ublog-post__markup {
-  color: var(--cdc-grey-200);
+  color: var(--lr-ext-grey-200);
   font-size: 16px !important;
   line-height: 1.7 !important;
 }
@@ -181,7 +181,7 @@
 
 /* Lichess rules each section off in gold: a quiet line instead. */
 .ublog-post .ublog-post__markup h2 {
-  border-bottom-color: var(--cdc-border) !important;
+  border-bottom-color: var(--lr-ext-border) !important;
   font-size: 26px !important;
 }
 
@@ -194,13 +194,13 @@
 }
 
 .ublog-post .ublog-post__markup a {
-  color: var(--cdc-accent) !important;
+  color: var(--lr-ext-accent) !important;
   font-weight: 600;
   text-underline-offset: 3px;
 }
 
 .ublog-post .ublog-post__markup a:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
   text-decoration: underline;
 }
 
@@ -228,7 +228,8 @@
  * needs room for them on the left and below. */
 @media (min-width: 1020px) {
   body:is(.coords-in, .coords-out) .ublog-post .ublog-post__markup .lpv__board {
-    padding: 0 0 calc(1.2 * var(--cdc-coords-size) + 10px) calc(0.6 * var(--cdc-coords-size) + 16px);
+    padding: 0 0 calc(1.2 * var(--lr-ext-coords-size) + 10px)
+      calc(0.6 * var(--lr-ext-coords-size) + 16px);
   }
 }
 
@@ -242,17 +243,17 @@
 }
 
 .ublog-post .ublog-post__markup li::marker {
-  color: var(--cdc-accent);
+  color: var(--lr-ext-accent);
 }
 
 .ublog-post .ublog-post__markup blockquote {
   margin: 1.2em 0 !important;
   padding: 12px 18px !important;
   border: none !important;
-  border-inline-start: 3px solid var(--cdc-accent) !important;
+  border-inline-start: 3px solid var(--lr-ext-accent) !important;
   border-radius: 0 8px 8px 0;
   background: #ffffff08;
-  color: var(--cdc-grey-100);
+  color: var(--lr-ext-grey-100);
 }
 
 .ublog-post .ublog-post__markup :not(pre) > code {
@@ -273,7 +274,7 @@
   margin: 40px 0 !important;
   padding-top: 24px;
   border-top: 1px solid #ffffff14;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
 }
 
@@ -282,7 +283,7 @@
   padding: 6px 12px;
   border: 1px solid #ffffff14;
   border-radius: 999px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 13px;
   font-weight: 600;
 }
@@ -293,7 +294,7 @@
 }
 
 .ublog-post .ublog-post__lichess a:not(.connect-links a) {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
 }
 
 .ublog-post .ublog-post__footer {

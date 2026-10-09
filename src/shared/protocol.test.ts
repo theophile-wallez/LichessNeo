@@ -15,18 +15,18 @@ describe('protocol', () => {
   it('takes only its own messages, from this window', () => {
     const ready = vi.fn<() => void>();
     stops.push(onPageReady(ready));
-    receive({ type: 'cdc:page-ready' }, null);
+    receive({ type: 'lr-ext:page-ready' }, null);
     receive({ type: 'other' });
     expect(ready).not.toHaveBeenCalled();
-    receive({ type: 'cdc:page-ready' });
+    receive({ type: 'lr-ext:page-ready' });
     expect(ready).toHaveBeenCalledTimes(1);
   });
 
   it('passes the coach’s state on without its type, and drops one out of shape', () => {
     const states: unknown[] = [];
     stops.push(onCoachState(state => states.push(state)));
-    receive({ type: 'cdc:coach', coach: 2, mood: 'happy', talking: true });
-    receive({ type: 'cdc:coach', coach: 2, mood: 'angry', talking: true });
+    receive({ type: 'lr-ext:coach', coach: 2, mood: 'happy', talking: true });
+    receive({ type: 'lr-ext:coach', coach: 2, mood: 'angry', talking: true });
     expect(states).toEqual([{ coach: 2, mood: 'happy', talking: true }]);
   });
 
@@ -34,9 +34,9 @@ describe('protocol', () => {
     const received: unknown[] = [];
     stops.push(onSounds(sounds => received.push(Object.keys(sounds))));
     const bytes = new ArrayBuffer(4);
-    receive({ type: 'cdc:sounds', sounds: { capture: bytes } });
-    receive({ type: 'cdc:sounds', sounds: { boom: bytes } });
-    receive({ type: 'cdc:sounds', sounds: { capture: 'bytes' } });
+    receive({ type: 'lr-ext:sounds', sounds: { capture: bytes } });
+    receive({ type: 'lr-ext:sounds', sounds: { boom: bytes } });
+    receive({ type: 'lr-ext:sounds', sounds: { capture: 'bytes' } });
     expect(received).toEqual([['capture']]);
   });
 
@@ -44,7 +44,7 @@ describe('protocol', () => {
     const ready = vi.fn<() => void>();
     const stop = onPageReady(ready);
     stop();
-    receive({ type: 'cdc:page-ready' });
+    receive({ type: 'lr-ext:page-ready' });
     expect(ready).not.toHaveBeenCalled();
   });
 });

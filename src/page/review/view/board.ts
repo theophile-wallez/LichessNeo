@@ -28,7 +28,7 @@ function renderBar(session: Session, analysis: Analysis, shown: JudgedMove | nul
     last: view.barPosition,
   });
   view.barPosition = reviewing ? position : null;
-  document.documentElement.classList.toggle('cdc-evalbar-on', position !== null);
+  document.documentElement.classList.toggle('lr-ext-evalbar-on', position !== null);
   if (position) drawBar(session.elements, position, analysis.orientation());
 }
 
@@ -100,7 +100,7 @@ export function renderBoard(session: Session, analysis: Analysis): void {
   const shown = view.mode === 'live' ? null : bestShown(session, analysis);
   renderBar(session, analysis, shown);
   const move = boardMove(session, analysis, shown);
-  setData(document.documentElement, 'cdcCls', move ? move.moveClass : '');
+  setData(document.documentElement, 'lrExtCls', move ? move.moveClass : '');
   renderBadge(session, analysis, move);
   renderArrows(session, analysis, move);
   if (view.mode === 'live') {

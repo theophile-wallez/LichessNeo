@@ -8,7 +8,7 @@ import {
 } from './package-files.ts';
 import { tempDirs, writeFiles } from './testing.ts';
 
-const newDir = tempDirs('cdc-package-');
+const newDir = tempDirs('lr-ext-package-');
 
 // Each file holds its own name.
 async function fixture(files: readonly string[]): Promise<string> {

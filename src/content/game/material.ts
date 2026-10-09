@@ -61,7 +61,7 @@ const materialOf = (army: Army): number =>
 
 function group(color: Color, role: Role, count: number): SafeHtml {
   const piece = pieceGlyph(`${colorLetter(color)}${ROLE_LETTERS[role]}`);
-  return html`<div class="cdc-captured__group">${Array.from({ length: count }, () => piece)}</div>`;
+  return html`<div class="lr-ext-captured__group">${Array.from({ length: count }, () => piece)}</div>`;
 }
 
 interface RowOptions {
@@ -77,7 +77,7 @@ function rowMarkup({ color, missing, lead, checks }: RowOptions): SafeHtml {
     group(color, role, missing[role]),
   );
   const kings = checks > 0 && group(color, 'king', checks);
-  const score = lead > 0 && html`<span class="cdc-captured__score">+${lead}</span>`;
+  const score = lead > 0 && html`<span class="lr-ext-captured__score">+${lead}</span>`;
   return html`${groups}${kings}${score}`;
 }
 

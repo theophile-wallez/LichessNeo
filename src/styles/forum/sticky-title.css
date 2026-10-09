@@ -5,13 +5,13 @@
 @media (min-width: 1020px) {
   /* The box's overflow clip would keep the title from sticking. */
   main.forum:is(.forum-categ, .forum-topic:not(.topic-form)),
-  main.box.search[data-cdc-search$='/forum/search'] {
+  main.box.search[data-lr-ext-search$='/forum/search'] {
     overflow: visible !important;
     padding-top: 0 !important;
   }
 
   main.forum:is(.forum-categ, .forum-topic:not(.topic-form)) > .box__top,
-  main.search[data-cdc-search$='/forum/search'] > .box__top {
+  main.search[data-lr-ext-search$='/forum/search'] > .box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 3;
@@ -21,18 +21,18 @@
     margin-inline: calc(-1 * min(12px, 1vw)) !important;
     padding: 16px min(12px, 1vw) 12px !important;
     margin-bottom: 10px !important;
-    background: var(--cdc-bg-page);
-    box-shadow: var(--cdc-pin-cover);
+    background: var(--lr-ext-bg-page);
+    box-shadow: var(--lr-ext-pin-cover);
   }
 
   main.forum:is(.forum-categ, .forum-topic:not(.topic-form)) > .box__top::after,
-  main.search[data-cdc-search$='/forum/search'] > .box__top::after {
+  main.search[data-lr-ext-search$='/forum/search'] > .box__top::after {
     content: '';
     position: absolute;
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -40,7 +40,7 @@
 
   @container scroll-state(stuck: top) {
     main.forum:is(.forum-categ, .forum-topic:not(.topic-form)) > .box__top::after,
-    main.search[data-cdc-search$='/forum/search'] > .box__top::after {
+    main.search[data-lr-ext-search$='/forum/search'] > .box__top::after {
       opacity: 1;
     }
   }
@@ -50,12 +50,12 @@
 
 @media (max-width: 799.98px) {
   main.forum.box,
-  main.box.search[data-cdc-search$='/forum/search'] {
+  main.box.search[data-lr-ext-search$='/forum/search'] {
     padding: 12px 12px 32px !important;
   }
 
   main.forum .box__top h1,
-  main.search[data-cdc-search$='/forum/search'] > .box__top h1 {
+  main.search[data-lr-ext-search$='/forum/search'] > .box__top h1 {
     font-size: 24px !important;
   }
 

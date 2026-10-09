@@ -33,7 +33,7 @@ function summaryOf(build: (typeof UNIT_CASES.builds)[number]): Summary {
 const countButton = (session: Session, color: string, moveClass: string): HTMLElement | null =>
   queryOne(
     session.elements.panel,
-    `[data-cdc="jump"][data-cdc-color="${color}"][data-cdc-class="${moveClass}"]`,
+    `[data-lr-ext="jump"][data-lr-ext-color="${color}"][data-lr-ext-class="${moveClass}"]`,
     HTMLElement,
   );
 
@@ -82,16 +82,16 @@ describe('the summary’s counts', () => {
 
   it('are plain numbers when zero, or until every move is judged at full depth', () => {
     const { session } = summaryOf(complete);
-    const buttons = queryAll(session.elements.panel, '[data-cdc="jump"]', HTMLButtonElement);
+    const buttons = queryAll(session.elements.panel, '[data-lr-ext="jump"]', HTMLButtonElement);
     expect(buttons.map(button => Number(button.textContent))).not.toContain(0);
     expect(buttons.length).toBe(
-      queryAll(session.elements.panel, '.cdc-t-num', HTMLElement).filter(
+      queryAll(session.elements.panel, '.lr-ext-t-num', HTMLElement).filter(
         cell => Number(cell.textContent) > 0,
       ).length,
     );
     document.body.replaceChildren();
     const unfinished = summaryOf(partial).session;
     expect(unfinished.view.review?.complete).toBe(false);
-    expect(queryAll(unfinished.elements.panel, '[data-cdc="jump"]', Element)).toHaveLength(0);
+    expect(queryAll(unfinished.elements.panel, '[data-lr-ext="jump"]', Element)).toHaveLength(0);
   });
 });

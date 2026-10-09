@@ -22,7 +22,7 @@ import { hideTip } from './tooltip.ts';
 // marks on every pass.
 
 // Not the comment's move chips: the same move may be named twice.
-const KEPT_BUTTONS = 'button[data-cdc]:not([data-cdc="coach"], [data-cdc="chip"])';
+const KEPT_BUTTONS = 'button[data-lr-ext]:not([data-lr-ext="coach"], [data-lr-ext="chip"])';
 
 const classOf = (element: Element): string => element.getAttribute('class') ?? '';
 
@@ -109,6 +109,6 @@ export function setMode(session: Session, mode: Mode): void {
   if (mode !== 'moves') stopPlaying(session);
   if (mode === 'moves' && analysis) closeTools(analysis);
   const root = document.documentElement;
-  for (const each of MODES) root.classList.toggle(`cdc-review-${each}`, each === mode);
+  for (const each of MODES) root.classList.toggle(`lr-ext-review-${each}`, each === mode);
   render(session, true);
 }

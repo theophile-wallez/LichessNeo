@@ -2,9 +2,9 @@ import type { Page } from '@playwright/test';
 import { z } from 'zod/mini';
 import { readPageGlobal } from './lichess.ts';
 
-// Our sounds, registered in Lichess's sound player (`site.sound`) under cdc- names.
+// Our sounds, registered in Lichess's sound player (`site.sound`) under lr-ext- names.
 
-export const OUR_SOUND_PREFIX = 'cdc-';
+export const OUR_SOUND_PREFIX = 'lr-ext-';
 
 // The player's paths: a Map from each sound's name to its URL.
 const PathsSchema = z.array(z.tuple([z.string(), z.string()]));
@@ -25,8 +25,8 @@ export async function recordSounds(page: Page): Promise<void> {
     const load: unknown = Reflect.get(Object(sound), 'load');
     if (typeof load !== 'function') throw new Error('Lichess’s sound player has no load()');
     const heard: unknown[] = [];
-    Reflect.set(window, 'cdcHeard', heard);
-    // `play()` loads the sound it's given through `this.load`, where ours are cdc- names.
+    Reflect.set(window, 'lrExtHeard', heard);
+    // `play()` loads the sound it's given through `this.load`, where ours are lr-ext- names.
     Reflect.set(Object(sound), 'load', (...args: unknown[]): unknown => {
       heard.push(args[0]);
       const loaded: unknown = Reflect.apply(load, sound, args);
@@ -38,7 +38,7 @@ export async function recordSounds(page: Page): Promise<void> {
 /** The sounds asked for since the last call, and forgets them. */
 export async function heardSounds(page: Page): Promise<string[]> {
   const heard = await page.evaluate((): unknown => {
-    const list: unknown = Reflect.get(window, 'cdcHeard');
+    const list: unknown = Reflect.get(window, 'lrExtHeard');
     if (!Array.isArray(list)) return undefined;
     const taken: unknown[] = list.splice(0);
     return taken;

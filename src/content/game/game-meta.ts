@@ -19,23 +19,23 @@ export const infoParts = (text: string): string[] =>
     .filter(part => part !== '');
 
 function splitParts(line: HTMLElement): void {
-  setData(line, 'cdcParts', '');
+  setData(line, 'lrExtParts', '');
   // A copy: replacing a node changes the live list.
   for (const node of Array.from(line.childNodes)) {
     if (!(node instanceof Text)) continue;
     const parts = infoParts(node.data).map(text =>
-      createElement('span', { className: 'cdc-part', text }),
+      createElement('span', { className: 'lr-ext-part', text }),
     );
     node.replaceWith(...parts);
   }
 }
 
 function wrapName(link: HTMLElement): void {
-  setData(link, 'cdcName', '');
+  setData(link, 'lrExtName', '');
   for (const node of Array.from(link.childNodes)) {
     const name = node instanceof Text ? node.data.trim() : '';
     if (name !== '')
-      node.replaceWith(createElement('span', { className: 'cdc-meta-name', text: name }));
+      node.replaceWith(createElement('span', { className: 'lr-ext-meta-name', text: name }));
   }
   const rating = queryOne(link, '.rating', HTMLElement);
   if (!rating) return;
@@ -57,9 +57,9 @@ function addComputerRatings(meta: HTMLElement, ratings: ReadonlyMap<Color, strin
 export function syncGameMeta(ratings: ReadonlyMap<Color, string>): void {
   const meta = queryOne(document, 'main.round .round__side > .game__meta', HTMLElement);
   if (!meta) return;
-  const lines = ':is(.setup, section.status):not([data-cdc-parts])';
+  const lines = ':is(.setup, section.status):not([data-lr-ext-parts])';
   for (const line of queryAll(meta, lines, HTMLElement)) splitParts(line);
-  const links = '.game__meta__players .user-link:not([data-cdc-name])';
+  const links = '.game__meta__players .user-link:not([data-lr-ext-name])';
   for (const link of queryAll(meta, links, HTMLElement)) wrapName(link);
   addComputerRatings(meta, ratings);
 }

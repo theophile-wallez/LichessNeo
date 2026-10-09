@@ -29,8 +29,8 @@ export async function serveRepository(context: BrowserContext): Promise<void> {
 export async function importExamplePack(page: Page, kind: PickerKind = 'board'): Promise<void> {
   const panel = await openPicker(page, kind);
   await pickerTab(panel, 'packs').click();
-  await panel.locator('.cdc-src-import input[type="url"]').fill(EXAMPLE_LINK);
-  await panel.locator('.cdc-src-import button').click();
-  await expect(panel.locator('.cdc-src-status')).toHaveText('Imported “Warm wood”.');
+  await panel.locator('.lr-ext-src-import input[type="url"]').fill(EXAMPLE_LINK);
+  await panel.locator('.lr-ext-src-import button').click();
+  await expect(panel.locator('.lr-ext-src-status')).toHaveText('Imported “Warm wood”.');
   await closeMenu(page);
 }

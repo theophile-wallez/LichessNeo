@@ -1,20 +1,21 @@
 import { z } from 'zod/mini';
 import { CoachMoodSchema } from './coach.ts';
 import { SoundNameSchema } from './sounds.ts';
+import { messageType } from './prefix.ts';
 
 // Messages between the extension's two worlds on a Lichess tab: the isolated
 // content script, which can reach the extension's files, and the page script,
 // which can reach Lichess's objects. They only share `window.postMessage`.
 
-const PageReadySchema = z.object({ type: z.literal('cdc:page-ready') });
+const PageReadySchema = z.object({ type: z.literal(messageType('page-ready')) });
 
 const SoundsSchema = z.object({
-  type: z.literal('cdc:sounds'),
+  type: z.literal(messageType('sounds')),
   sounds: z.partialRecord(SoundNameSchema, z.instanceof(ArrayBuffer)),
 });
 
 const CoachStateSchema = z.object({
-  type: z.literal('cdc:coach'),
+  type: z.literal(messageType('coach')),
   coach: z.int(),
   mood: CoachMoodSchema,
   talking: z.boolean(),
@@ -38,15 +39,17 @@ function post(message: unknown): void {
 }
 
 /** Page → content: the page script is listening, send the sounds. */
-export const postPageReady = (): void => post({ type: 'cdc:page-ready' });
+export const postPageReady = (): void => post({ type: messageType('page-ready') });
 export const onPageReady = (handler: () => void): (() => void) => listen(PageReadySchema, handler);
 
 /** Content → page: the picked pack's sounds, none for Lichess's own; sent again on every pick. */
-export const postSounds = (sounds: SoundFiles): void => post({ type: 'cdc:sounds', sounds });
+export const postSounds = (sounds: SoundFiles): void =>
+  post({ type: messageType('sounds'), sounds });
 export const onSounds = (handler: (sounds: SoundFiles) => void): (() => void) =>
   listen(SoundsSchema, message => handler(message.sounds));
 
 /** Page → content: which coach the review shows, and how it looks. */
-export const postCoachState = (state: CoachState): void => post({ type: 'cdc:coach', ...state });
+export const postCoachState = (state: CoachState): void =>
+  post({ type: messageType('coach'), ...state });
 export const onCoachState = (handler: (state: CoachState) => void): (() => void) =>
   listen(CoachStateSchema, ({ coach, mood, talking }) => handler({ coach, mood, talking }));

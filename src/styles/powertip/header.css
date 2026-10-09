@@ -2,8 +2,8 @@
    Lichess's flat fragment is reordered in a flex column; the header is a grid the avatar spans. */
 
 #powerTip {
-  --cdc-upt-avatar: 56px;
-  --cdc-upt-pad: 16px;
+  --lr-ext-upt-avatar: 56px;
+  --lr-ext-upt-pad: 16px;
 
   display: flex;
   flex-direction: column;
@@ -13,11 +13,11 @@
      Wide enough for a full name and four rating chips. */
   width: 340px !important;
   max-width: calc(100vw - 16px);
-  padding: var(--cdc-upt-pad) 0;
-  border: 1px solid var(--cdc-menu-border);
+  padding: var(--lr-ext-upt-pad) 0;
+  border: 1px solid var(--lr-ext-menu-border);
   border-radius: 10px !important;
-  background: var(--cdc-bg-panel) !important;
-  box-shadow: var(--cdc-menu-shadow) !important;
+  background: var(--lr-ext-bg-panel) !important;
+  box-shadow: var(--lr-ext-menu-shadow) !important;
   font-size: 14px;
 }
 
@@ -28,11 +28,11 @@
 #powerTip .upt__info {
   position: relative;
   display: grid !important;
-  grid-template-columns: var(--cdc-upt-avatar) minmax(0, 1fr);
+  grid-template-columns: var(--lr-ext-upt-avatar) minmax(0, 1fr);
   align-content: start;
   align-items: center;
   gap: 2px 14px;
-  padding: 0 var(--cdc-upt-pad) !important;
+  padding: 0 var(--lr-ext-upt-pad) !important;
   border: none !important;
   overflow: visible !important;
 }
@@ -42,10 +42,10 @@
   content: '';
   grid-column: 1;
   align-self: start;
-  width: var(--cdc-upt-avatar);
-  height: var(--cdc-upt-avatar);
+  width: var(--lr-ext-upt-avatar);
+  height: var(--lr-ext-upt-avatar);
   border-radius: 8px;
-  background: var(--cdc-avatar);
+  background: var(--lr-ext-avatar);
 }
 
 #powerTip .upt__info:has(.upt__info__realname)::before {
@@ -56,14 +56,14 @@
 #powerTip .upt__info:has(.user-link.online)::after {
   content: '';
   position: absolute;
-  top: calc(var(--cdc-upt-avatar) - 15px);
-  inset-inline-start: calc(var(--cdc-upt-pad) + var(--cdc-upt-avatar) - 15px);
+  top: calc(var(--lr-ext-upt-avatar) - 15px);
+  inset-inline-start: calc(var(--lr-ext-upt-pad) + var(--lr-ext-upt-avatar) - 15px);
   box-sizing: border-box;
   width: 16px;
   height: 16px;
-  border: 3px solid var(--cdc-bg-panel);
+  border: 3px solid var(--lr-ext-bg-panel);
   border-radius: 50%;
-  background: var(--cdc-good);
+  background: var(--lr-ext-good);
 }
 
 /* Lichess spreads the top row apart (space-between); keep the country by the name. */
@@ -80,14 +80,14 @@
 #powerTip .upt__info__top .user-link {
   flex: 0 1 auto;
   min-width: 0;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 700;
   text-overflow: ellipsis;
 }
 
 #powerTip .upt__info__top .user-link:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 /* The title badge itself comes from theme/. */
@@ -122,7 +122,7 @@
   flex-wrap: nowrap;
   min-width: 18px;
   margin: 0 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px !important;
   font-weight: 600;
   white-space: nowrap;
@@ -144,7 +144,7 @@
   min-width: 0;
   padding: 0 !important;
   background: none !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 600;
   text-align: start !important;
@@ -175,7 +175,7 @@
   padding: 7px 2px !important;
   border-radius: 6px;
   background: #ffffff0a;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 400;
   font-variant-numeric: tabular-nums;
@@ -189,12 +189,12 @@
 }
 
 /* Unrated (no games, or too few): a quieter chip. */
-#powerTip .upt__info__ratings > span[data-cdc-rating='none'] {
+#powerTip .upt__info__ratings > span[data-lr-ext-rating='none'] {
   background: #ffffff05;
-  color: var(--cdc-font-dimmer, var(--cdc-grey-500)) !important;
+  color: var(--lr-ext-font-dimmer, var(--lr-ext-grey-500)) !important;
 }
 
-#powerTip .upt__info__ratings > span[data-cdc-rating='none']::before {
+#powerTip .upt__info__ratings > span[data-lr-ext-rating='none']::before {
   opacity: 0.4 !important;
 }
 
@@ -204,7 +204,7 @@
   margin-top: 12px;
   padding: 8px;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--cdc-red-dark) 8%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-red-dark) 8%, transparent);
   font-size: 13px;
   font-weight: 600;
 }

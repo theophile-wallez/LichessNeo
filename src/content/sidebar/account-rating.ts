@@ -22,10 +22,10 @@ const KeptSchema = z.object({ user: z.string(), at: z.number(), top: TopRatingSc
 
 function show(top: TopRating | null): void {
   const root = document.documentElement;
-  setData(root, 'cdcAccountPerf', top?.speed ?? null);
+  setData(root, 'lrExtAccountPerf', top?.speed ?? null);
   // A CSS string, for the tag's `content`.
   const label = top ? JSON.stringify(ratingLabel(top.rating, top.provisional)) : null;
-  setStyleProperty(root, '--cdc-account-rating', label);
+  setStyleProperty(root, '--lr-ext-account-rating', label);
 }
 
 async function fetchTopRating(user: string): Promise<TopRating | null> {

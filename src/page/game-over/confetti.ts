@@ -57,7 +57,7 @@ export const confettiEndMs = (pieces: readonly ConfettiPiece[]): number =>
 export function confettiMarkup(pieces: readonly ConfettiPiece[]): SafeHtml {
   const items = pieces.map(
     piece =>
-      html`<i class="cdc-confetti__piece cdc-confetti__piece--${piece.shape}" style="--x:${piece.x.toFixed(1)};--drift:${piece.drift.toFixed(1)};--spin:${piece.spin.toFixed(2)};--size:${piece.size.toFixed(2)};--delay:${piece.delayMs}ms;--fall:${piece.durationMs}ms;--c:${piece.color}"></i>`,
+      html`<i class="lr-ext-confetti__piece lr-ext-confetti__piece--${piece.shape}" style="--x:${piece.x.toFixed(1)};--drift:${piece.drift.toFixed(1)};--spin:${piece.spin.toFixed(2)};--size:${piece.size.toFixed(2)};--delay:${piece.delayMs}ms;--fall:${piece.durationMs}ms;--c:${piece.color}"></i>`,
   );
-  return html`<div class="cdc-confetti">${items}</div>`;
+  return html`<div class="lr-ext-confetti">${items}</div>`;
 }

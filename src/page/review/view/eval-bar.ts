@@ -47,11 +47,11 @@ export function drawBar(
   orientation: Color,
 ): void {
   const { bar, barFill, barLabel: label } = elements;
-  bar.classList.toggle('cdc-evalbar--flip', orientation === 'black');
+  bar.classList.toggle('lr-ext-evalbar--flip', orientation === 'black');
   setStyleProperty(barFill, 'height', `${position.whiteWinChance}%`);
   const text = barLabel(position);
   if (label.textContent !== text) label.textContent = text;
   const side = position.whiteWinChance >= 50 ? 'white' : 'black';
-  const className = `cdc-evalbar__label cdc-evalbar__label--${side}`;
+  const className = `lr-ext-evalbar__label lr-ext-evalbar__label--${side}`;
   if (label.className !== className) label.className = className;
 }

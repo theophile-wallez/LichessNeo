@@ -7,7 +7,7 @@
 @media (min-width: 1020px) {
   main.puzzle .puzzle__moves {
     overflow-x: hidden;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
   }
 
   main.puzzle .tview2-column {
@@ -18,7 +18,7 @@
     padding-bottom: 8px;
     overflow-x: clip;
     background: none !important;
-    font-family: var(--cdc-font) !important;
+    font-family: var(--lr-ext-font) !important;
   }
 
   main.puzzle .tview2-column > index {
@@ -31,7 +31,7 @@
     padding-left: 12px !important;
     border: none !important;
     background: transparent !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px !important;
     font-weight: 700;
   }
@@ -45,7 +45,7 @@
     position: absolute;
     z-index: -1;
     inset: 0 -100vw 0 0;
-    background: var(--cdc-grey-850);
+    background: var(--lr-ext-grey-850);
   }
 
   main.puzzle .tview2-column > move {
@@ -59,7 +59,7 @@
     border: none !important;
     border-radius: 3px;
     background: transparent !important;
-    color: var(--cdc-text) !important;
+    color: var(--lr-ext-text) !important;
     font-size: 14px !important;
     font-weight: 700 !important;
     line-height: 24px !important;
@@ -81,24 +81,24 @@
   }
 
   main.puzzle .tview2-column > move.empty {
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-weight: 400 !important;
   }
 
   /* Right and wrong moves take their color, the verdict a badge before them. */
   main.puzzle .tview2 move:is(.good, .win) {
-    --cdc-glyph: var(--cdc-green-dark);
+    --lr-ext-glyph: var(--lr-ext-green-dark);
 
-    color: var(--cdc-good-hover) !important;
+    color: var(--lr-ext-good-hover) !important;
   }
 
   main.puzzle .tview2 move.fail {
-    --cdc-glyph: var(--cdc-red);
+    --lr-ext-glyph: var(--lr-ext-red);
 
-    color: var(--cdc-red) !important;
+    color: var(--lr-ext-red) !important;
   }
 
-  main.puzzle :is(.tview2-column > move, interrupt[data-cdc-tries] move) glyph {
+  main.puzzle :is(.tview2-column > move, interrupt[data-lr-ext-tries] move) glyph {
     order: -1;
     flex: none;
     display: flex;
@@ -108,10 +108,10 @@
     height: 18px;
     margin: 0 !important;
     border-radius: 50%;
-    background: var(--cdc-glyph, var(--cdc-grey-400));
+    background: var(--lr-ext-glyph, var(--lr-ext-grey-400));
     box-shadow: 0 1px 0 #0000004d;
     color: #fff !important;
-    font-family: var(--cdc-font) !important;
+    font-family: var(--lr-ext-font) !important;
     font-size: 11px !important;
     font-weight: 900;
     line-height: 1 !important;
@@ -120,7 +120,7 @@
   main.puzzle .tview2-column > move eval {
     flex: none;
     padding: 0 0 0 2px !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 11px !important;
     font-weight: 400;
   }
@@ -133,9 +133,9 @@
     margin: 4px 8px 6px !important;
     padding: 8px 10px !important;
     border: none !important;
-    border-left: 3px solid var(--cdc-grey-500) !important;
+    border-left: 3px solid var(--lr-ext-grey-500) !important;
     border-radius: 5px !important;
-    background: var(--cdc-bg-panel-dark) !important;
+    background: var(--lr-ext-bg-panel-dark) !important;
     box-shadow: none !important;
   }
 
@@ -164,7 +164,7 @@
     padding: 0 3px !important;
     border-radius: 3px;
     background: none !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px !important;
     font-weight: 600 !important;
     line-height: 20px !important;
@@ -184,38 +184,38 @@
 
   /* Wrong tries (content/puzzle/attempts.ts): one row under the move, each marked like a
      right move, with a red badge. */
-  main.puzzle .tview2-column > interrupt[data-cdc-tries] {
+  main.puzzle .tview2-column > interrupt[data-lr-ext-tries] {
     margin: 0 0 2px !important;
     padding: 0 10px 0 44px !important;
     border: none !important;
     background: none !important;
   }
 
-  main.puzzle .tview2 interrupt[data-cdc-tries] > lines {
+  main.puzzle .tview2 interrupt[data-lr-ext-tries] > lines {
     display: flex !important;
     flex-wrap: wrap;
     gap: 2px 8px;
   }
 
-  main.puzzle .tview2 interrupt[data-cdc-tries] line {
+  main.puzzle .tview2 interrupt[data-lr-ext-tries] line {
     display: contents !important;
   }
 
-  main.puzzle .tview2 interrupt[data-cdc-tries] move.fail {
-    --cdc-glyph: var(--cdc-red);
+  main.puzzle .tview2 interrupt[data-lr-ext-tries] move.fail {
+    --lr-ext-glyph: var(--lr-ext-red);
 
     display: flex !important;
     align-items: center;
     gap: 4px;
     height: 26px;
     padding: 0 5px !important;
-    color: var(--cdc-red) !important;
+    color: var(--lr-ext-red) !important;
     font-size: 14px !important;
     font-weight: 700 !important;
     line-height: 26px !important;
   }
 
-  main.puzzle .tview2 interrupt[data-cdc-tries] move.fail index {
+  main.puzzle .tview2 interrupt[data-lr-ext-tries] move.fail index {
     display: none !important;
   }
 }

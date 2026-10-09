@@ -1,25 +1,28 @@
-/* Game Review (page/review/). It sets a state class on <html>: cdc-review-normal (Lichess's
+/* Game Review (page/review/). It sets a state class on <html>: lr-ext-review-normal (Lichess's
    analysis and a Game Review button), -summary, -moves (move by move) or -live (the free
-   board), plus cdc-evalbar-on and data-cdc-cls (the current move's classification). */
+   board), plus lr-ext-evalbar-on and data-lr-ext-cls (the current move's classification). */
 
 @media (min-width: 1020px) {
-  html.cdc-review main.analyse {
-    --cdc-review-top: 48px;
+  html.lr-ext-review main.analyse {
+    --lr-ext-review-top: 48px;
   }
 
   /* Review closed: Lichess's analysis, then the game over's card and the ways back into the
      review (view/closed-panel.ts, game/game-end-card.css), its coach smaller on a short window. */
-  html.cdc-review-normal main.analyse {
-    --cdc-review-top: 328px;
-    --cdc-chat-h: min(clamp(150px, 24vh, 260px), calc(var(--cdc-board) * 0.32));
+  html.lr-ext-review-normal main.analyse {
+    --lr-ext-review-top: 328px;
+    --lr-ext-chat-h: min(clamp(150px, 24vh, 260px), calc(var(--lr-ext-board) * 0.32));
     grid-template-rows:
       max(
         0px,
-        calc(var(--cdc-stage) - var(--cdc-review-top) - var(--cdc-ctrl-h) - var(--cdc-chat-h))
+        calc(
+          var(--lr-ext-stage) - var(--lr-ext-review-top) - var(--lr-ext-ctrl-h) -
+            var(--lr-ext-chat-h)
+        )
       )
-      var(--cdc-review-top)
-      var(--cdc-ctrl-h)
-      var(--cdc-chat-h) !important;
+      var(--lr-ext-review-top)
+      var(--lr-ext-ctrl-h)
+      var(--lr-ext-chat-h) !important;
     grid-template-areas:
       'gauge board tools'
       'gauge board rtop'
@@ -28,16 +31,16 @@
   }
 
   @media (max-height: 820px) {
-    html.cdc-review-normal main.analyse {
-      --cdc-review-top: 300px;
+    html.lr-ext-review-normal main.analyse {
+      --lr-ext-review-top: 300px;
     }
   }
 
-  html.cdc-review-normal:not([data-cdc-has~='analyse-chat']) main.analyse {
+  html.lr-ext-review-normal:not([data-lr-ext-has~='analyse-chat']) main.analyse {
     grid-template-rows:
-      max(0px, calc(var(--cdc-stage) - var(--cdc-review-top) - var(--cdc-ctrl-h)))
-      var(--cdc-review-top)
-      var(--cdc-ctrl-h) !important;
+      max(0px, calc(var(--lr-ext-stage) - var(--lr-ext-review-top) - var(--lr-ext-ctrl-h)))
+      var(--lr-ext-review-top)
+      var(--lr-ext-ctrl-h) !important;
     grid-template-areas:
       'gauge board tools'
       'gauge board rtop'
@@ -46,25 +49,25 @@
 
   /* The graph, as tall in the summary as in the move-by-move review; it shrinks on a short
      window, so the moves keep some room. */
-  html:is(.cdc-review-summary, .cdc-review-moves) main.analyse {
-    --cdc-review-graph: clamp(56px, calc(var(--cdc-stage) * 0.14), 112px);
+  html:is(.lr-ext-review-summary, .lr-ext-review-moves) main.analyse {
+    --lr-ext-review-graph: clamp(56px, calc(var(--lr-ext-stage) * 0.14), 112px);
   }
 
-  html.cdc-review-summary main.analyse {
-    grid-template-rows: var(--cdc-stage) !important;
+  html.lr-ext-review-summary main.analyse {
+    grid-template-rows: var(--lr-ext-stage) !important;
     grid-template-areas: 'gauge board rtop' !important;
   }
 
   /* Move by move: the graph and the key moments over the coach (all in the panel), the
      moves, then our controls (with play) instead of Lichess's. */
-  html.cdc-review-moves main.analyse {
-    --cdc-review-moments: 58px;
-    --cdc-review-top: calc(262px + var(--cdc-review-graph) + var(--cdc-review-moments));
-    --cdc-review-ctrl: 72px;
+  html.lr-ext-review-moves main.analyse {
+    --lr-ext-review-moments: 58px;
+    --lr-ext-review-top: calc(262px + var(--lr-ext-review-graph) + var(--lr-ext-review-moments));
+    --lr-ext-review-ctrl: 72px;
     grid-template-rows:
-      var(--cdc-review-top)
-      max(0px, calc(var(--cdc-stage) - var(--cdc-review-top) - var(--cdc-review-ctrl)))
-      var(--cdc-review-ctrl) !important;
+      var(--lr-ext-review-top)
+      max(0px, calc(var(--lr-ext-stage) - var(--lr-ext-review-top) - var(--lr-ext-review-ctrl)))
+      var(--lr-ext-review-ctrl) !important;
     grid-template-areas:
       'gauge board rtop'
       'gauge board tools'
@@ -72,16 +75,19 @@
   }
 
   /* The free board: the coach on top of Lichess's engine, moves and controls. */
-  html.cdc-review-live main.analyse {
-    --cdc-review-top: 140px;
+  html.lr-ext-review-live main.analyse {
+    --lr-ext-review-top: 140px;
     grid-template-rows:
-      var(--cdc-review-top)
+      var(--lr-ext-review-top)
       max(
         0px,
-        calc(var(--cdc-stage) - var(--cdc-review-top) - var(--cdc-ctrl-h) - var(--cdc-chat-h))
+        calc(
+          var(--lr-ext-stage) - var(--lr-ext-review-top) - var(--lr-ext-ctrl-h) -
+            var(--lr-ext-chat-h)
+        )
       )
-      var(--cdc-ctrl-h)
-      var(--cdc-chat-h) !important;
+      var(--lr-ext-ctrl-h)
+      var(--lr-ext-chat-h) !important;
     grid-template-areas:
       'gauge board rtop'
       'gauge board tools'
@@ -89,11 +95,11 @@
       'gauge board chat' !important;
   }
 
-  html.cdc-review-live:not([data-cdc-has~='analyse-chat']) main.analyse {
+  html.lr-ext-review-live:not([data-lr-ext-has~='analyse-chat']) main.analyse {
     grid-template-rows:
-      var(--cdc-review-top)
-      max(0px, calc(var(--cdc-stage) - var(--cdc-review-top) - var(--cdc-ctrl-h)))
-      var(--cdc-ctrl-h) !important;
+      var(--lr-ext-review-top)
+      max(0px, calc(var(--lr-ext-stage) - var(--lr-ext-review-top) - var(--lr-ext-ctrl-h)))
+      var(--lr-ext-ctrl-h) !important;
     grid-template-areas:
       'gauge board rtop'
       'gauge board tools'
@@ -102,69 +108,69 @@
 
   /* The review hides the engine lines, the explorer (left open, it squeezed the moves) and
      the fork picker (it offered the computer's move). All come back once it's closed. */
-  html.cdc-review-summary main.analyse > :is(.analyse__tools, .analyse__controls, .mchat),
-  html.cdc-review-moves main.analyse > :is(.analyse__controls, .mchat),
-  html.cdc-review-moves
+  html.lr-ext-review-summary main.analyse > :is(.analyse__tools, .analyse__controls, .mchat),
+  html.lr-ext-review-moves main.analyse > :is(.analyse__controls, .mchat),
+  html.lr-ext-review-moves
     main.analyse
     .analyse__tools
     > :is(.ceval, .pv_box, .explorer-box, .analyse__fork),
-  html.cdc-review:not(.cdc-review-moves) :is(#cdc-review-graph, #cdc-review-controls) {
+  html.lr-ext-review:not(.lr-ext-review-moves) :is(#lr-ext-review-graph, #lr-ext-review-controls) {
     display: none !important;
   }
 
-  html.cdc-review:not(.cdc-review-normal) main.analyse .analyse__tools {
+  html.lr-ext-review:not(.lr-ext-review-normal) main.analyse .analyse__tools {
     border-radius: 0 !important;
   }
 
   /* ---- Panel --- */
 
-  #cdc-review {
+  #lr-ext-review {
     grid-area: rtop;
-    container: cdc-review / inline-size;
+    container: lr-ext-review / inline-size;
     display: flex;
     flex-direction: column;
     min-height: 0;
-    margin-left: var(--cdc-gap);
+    margin-left: var(--lr-ext-gap);
     overflow: hidden;
     border-radius: 6px 6px 0 0;
-    background: var(--cdc-bg-panel);
-    color: var(--cdc-text);
-    font-family: var(--cdc-font);
+    background: var(--lr-ext-bg-panel);
+    color: var(--lr-ext-text);
+    font-family: var(--lr-ext-font);
   }
 
   /* It holds the focus only for a button its redraw replaced (view/clicks.ts). */
-  #cdc-review:focus {
+  #lr-ext-review:focus {
     outline: none;
   }
 
-  html.cdc-review-summary #cdc-review {
+  html.lr-ext-review-summary #lr-ext-review {
     border-radius: 6px;
   }
 
-  #cdc-review button {
-    font-family: var(--cdc-font) !important;
+  #lr-ext-review button {
+    font-family: var(--lr-ext-font) !important;
     cursor: pointer;
   }
 
-  html.cdc-review-normal #cdc-review {
+  html.lr-ext-review-normal #lr-ext-review {
     justify-content: flex-end;
     padding: 8px;
-    border-top: 1px solid var(--cdc-border);
+    border-top: 1px solid var(--lr-ext-border);
     border-radius: 0;
   }
 
-  .cdc-review__head {
+  .lr-ext-review__head {
     flex: none;
     display: grid;
     grid-template-columns: 40px 1fr 40px;
     align-items: center;
     height: 48px;
     padding: 0 4px;
-    background: var(--cdc-bg-panel-dark);
+    background: var(--lr-ext-bg-panel-dark);
   }
 
-  .cdc-review__back,
-  .cdc-review__close {
+  .lr-ext-review__back,
+  .lr-ext-review__close {
     display: grid;
     place-items: center;
     width: 36px;
@@ -173,27 +179,27 @@
     border: none;
     border-radius: 6px;
     background: transparent;
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     cursor: pointer;
     transition:
       background-color 0.15s,
       color 0.15s !important;
   }
 
-  .cdc-review__back svg,
-  .cdc-review__close svg {
+  .lr-ext-review__back svg,
+  .lr-ext-review__close svg {
     width: 22px;
     height: 22px;
     pointer-events: none;
   }
 
-  .cdc-review__back:hover,
-  .cdc-review__close:hover {
+  .lr-ext-review__back:hover,
+  .lr-ext-review__close:hover {
     background: #ffffff12;
     color: #fff;
   }
 
-  .cdc-review__title {
+  .lr-ext-review__title {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -203,20 +209,20 @@
     font-weight: 800;
   }
 
-  .cdc-review__star {
+  .lr-ext-review__star {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: var(--cdc-accent);
+    background: var(--lr-ext-accent);
     color: #fff;
     font-size: 14px;
     line-height: 1;
   }
 
-  .cdc-review__body {
+  .lr-ext-review__body {
     flex: 1 1 0;
     min-height: 0;
     overflow-y: auto;
@@ -225,14 +231,14 @@
 
   /* The summary's graph and players stay above the scrolling moves and phases. The graph
      sits where the move-by-move review has its own, at its size, 12px from the sides. */
-  .cdc-review__top {
+  .lr-ext-review__top {
     flex: none;
     overflow: hidden;
     padding: 0 12px;
   }
 
   /* Engine failure, shown where the coach would speak. */
-  .cdc-review__error {
+  .lr-ext-review__error {
     margin: 0 0 12px;
     padding: 10px 12px;
     border-radius: 8px;
@@ -244,12 +250,12 @@
 
   /* Its scrollbar (Lichess's, 0.5rem wide) takes from the right padding, so the cards end
      where the graph does. */
-  .cdc-review__top + .cdc-review__body {
+  .lr-ext-review__top + .lr-ext-review__body {
     padding: 0 calc(12px - 0.5rem) 12px 12px;
     scrollbar-gutter: stable;
   }
 
-  .cdc-review__foot {
+  .lr-ext-review__foot {
     flex: none;
     padding: 12px 12px 16px;
   }

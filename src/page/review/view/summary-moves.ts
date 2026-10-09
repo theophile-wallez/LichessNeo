@@ -29,12 +29,12 @@ function count({ review, language }: MovesInput, color: Color, moveClass: MoveCl
   const tip = language.countTip(color, moveClass, value);
   const shown =
     review?.complete && value > 0
-      ? html`<button class="cdc-t-jump" data-cdc="jump" data-cdc-color="${color}" data-cdc-class="${moveClass}" aria-label="${tip}">${value}</button>`
+      ? html`<button class="lr-ext-t-jump" data-lr-ext="jump" data-lr-ext-color="${color}" data-lr-ext-class="${moveClass}" aria-label="${tip}">${value}</button>`
       : value;
-  return html`<span class="cdc-t-num ${sideClass(color)}">${shown}</span>`;
+  return html`<span class="lr-ext-t-num ${sideClass(color)}">${shown}</span>`;
 }
 
-const sideClass = (color: Color): string => `cdc-side-${color === 'white' ? 'w' : 'b'}`;
+const sideClass = (color: Color): string => `lr-ext-side-${color === 'white' ? 'w' : 'b'}`;
 
 function row(input: MovesInput, moveClass: MoveClass): SafeHtml {
   const { review, order, language } = input;
@@ -46,11 +46,11 @@ function row(input: MovesInput, moveClass: MoveClass): SafeHtml {
       html`<span class="${sideClass(color)}" style="flex:${none ? 1 : valueOf(color)}"></span>`,
   );
   const [left = 'white', right = 'black'] = order;
-  return html`<div class="cdc-sum-move${none ? ' cdc-sum-move--none' : ''}" style="--cdc-class-color:${CLASS_COLORS[moveClass]}">
+  return html`<div class="lr-ext-sum-move${none ? ' lr-ext-sum-move--none' : ''}" style="--lr-ext-class-color:${CLASS_COLORS[moveClass]}">
       ${classIcon(moveClass)}
-      <span class="cdc-sum-move__label">${language.classLabels[moveClass]}</span>
-      <span class="cdc-sum-split">${parts}</span>
-      <span class="cdc-sum-move__counts">${count(input, left, moveClass)}<i>·</i>${count(input, right, moveClass)}</span>
+      <span class="lr-ext-sum-move__label">${language.classLabels[moveClass]}</span>
+      <span class="lr-ext-sum-split">${parts}</span>
+      <span class="lr-ext-sum-move__counts">${count(input, left, moveClass)}<i>·</i>${count(input, right, moveClass)}</span>
     </div>`;
 }
 
@@ -66,9 +66,9 @@ export function movesMarkup(input: MovesInput): SafeHtml {
   const { review, allRows, language } = input;
   const loading = !review?.complete;
   const label = allRows ? language.ui.less : language.ui.more;
-  return html`<h2 class="cdc-sum-h">${language.ui.moves}</h2>
-    <div class="cdc-sum-moves${loading ? ' cdc-sum-moves--loading' : ''}">
+  return html`<h2 class="lr-ext-sum-h">${language.ui.moves}</h2>
+    <div class="lr-ext-sum-moves${loading ? ' lr-ext-sum-moves--loading' : ''}">
       ${shownClasses(input).map(moveClass => row(input, moveClass))}
-      <button class="cdc-review__more${allRows ? ' cdc-review__more--open' : ''}" data-cdc="rows" data-cdc-tip="${label}" aria-label="${label}" aria-expanded="${String(allRows)}">${CHEVRON_ICON}</button>
+      <button class="lr-ext-review__more${allRows ? ' lr-ext-review__more--open' : ''}" data-lr-ext="rows" data-lr-ext-tip="${label}" aria-label="${label}" aria-expanded="${String(allRows)}">${CHEVRON_ICON}</button>
     </div>`;
 }

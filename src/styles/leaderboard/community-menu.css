@@ -3,51 +3,51 @@
 /* The side menu these pages share with the rating stats, bots and FIDE players: each link's
  * icon and color (the tiles are in pages/). */
 .subnav a[href$='/player'],
-main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active$='/player'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking--ffc689.svg');
+main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active$='/player'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking--ffc689.svg');
 }
 
 .subnav a[href*='/stat/rating/distribution'],
-main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active*='/stat/rating/distribution'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram--a2edfd.svg');
+main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active*='/stat/rating/distribution'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram--a2edfd.svg');
 }
 
 .subnav a[href$='/tournament/leaderboard'],
-main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active$='/tournament/leaderboard'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01--ffc689.svg');
+main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active$='/tournament/leaderboard'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01--ffc689.svg');
 }
 
 .subnav a[href$='/tournament/shields'],
-main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active$='/tournament/shields'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
-  --cdc-nav-color: var(--cdc-accent);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02--7e88db.svg');
+main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active$='/tournament/shields'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02--7e88db.svg');
 }
 
 .subnav a[href$='/player/bots'],
-main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active$='/player/bots'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
-  --cdc-nav-color: var(--cdc-purple);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01--caa9fa.svg');
+main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active$='/player/bots'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='bots'] a[href*='/fide'],
-main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active*='/fide'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02--a2edfd.svg');
+.subnav[data-lr-ext-nav~='bots'] a[href*='/fide'],
+main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active*='/fide'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02--a2edfd.svg');
 }
 
 /* Desktop only (Lichess's fixed top bar would cover them): the menu and the leaderboard's title
  * stay put; the title's shadow shows once stuck. */
 @media (min-width: 1020px) {
-  main.page-menu > .subnav[data-cdc-nav~='bots'] {
+  main.page-menu > .subnav[data-lr-ext-nav~='bots'] {
     position: sticky;
     top: 16px;
     align-self: start;
@@ -61,11 +61,11 @@ main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active*='/fide'] {
     /* Into the box's top padding, so it sticks where it stands. */
     margin: -16px 0 8px !important;
     padding: 16px 0 10px;
-    background: var(--cdc-bg-page);
+    background: var(--lr-ext-bg-page);
     box-shadow:
-      var(--cdc-pin-cover-wide),
-      -12px 0 var(--cdc-bg-page),
-      12px 0 var(--cdc-bg-page);
+      var(--lr-ext-pin-cover-wide),
+      -12px 0 var(--lr-ext-bg-page),
+      12px 0 var(--lr-ext-bg-page);
   }
 
   .community__leaders > h2::after {
@@ -74,7 +74,7 @@ main.page-menu[data-cdc-menu~='bots'][data-cdc-nav-active*='/fide'] {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

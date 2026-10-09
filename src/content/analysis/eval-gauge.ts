@@ -54,8 +54,8 @@ export function whiteShare(pearl: string): number | null {
 
 function markHeader(ceval: HTMLElement, pearl: string): void {
   const share = whiteShare(pearl);
-  setData(ceval, 'cdcLead', share === null ? null : gaugeScore(pearl).lead);
-  setStyleProperty(ceval, '--cdc-white-share', share === null ? null : `${share.toFixed(1)}%`);
+  setData(ceval, 'lrExtLead', share === null ? null : gaugeScore(pearl).lead);
+  setStyleProperty(ceval, '--lr-ext-white-share', share === null ? null : `${share.toFixed(1)}%`);
 }
 
 /** A sync task copying the engine line's score onto the eval bar and the engine's header. */
@@ -67,8 +67,8 @@ export function syncEvalGauge(): void {
   const gauge = queryOne(main, '.eval-gauge', HTMLElement);
   if (gauge) {
     const { label, lead } = gaugeScore(pearl);
-    setDataText(gauge, 'cdcEval', label);
-    setData(gauge, 'cdcLead', lead);
+    setDataText(gauge, 'lrExtEval', label);
+    setData(gauge, 'lrExtLead', lead);
   }
   if (ceval) markHeader(ceval, pearl);
 }

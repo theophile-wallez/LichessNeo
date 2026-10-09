@@ -18,8 +18,8 @@ describe('captured pieces', () => {
     const sync = createCapturedSync();
     document.body.innerHTML = scenario.html;
     sync();
-    expect(inner('.cdc-captured--top')).toBe(withPieceGlyphs(scenario.top));
-    expect(inner('.cdc-captured--bottom')).toBe(withPieceGlyphs(scenario.bottom));
+    expect(inner('.lr-ext-captured--top')).toBe(withPieceGlyphs(scenario.top));
+    expect(inner('.lr-ext-captured--bottom')).toBe(withPieceGlyphs(scenario.bottom));
   });
 
   it('leaves the bars alone while the board is the same', () => {
@@ -27,10 +27,10 @@ describe('captured pieces', () => {
     const [scenario] = legacy.scenarios;
     document.body.innerHTML = scenario?.html ?? '';
     sync();
-    const group = document.querySelector('.cdc-captured--top > .cdc-captured__group');
+    const group = document.querySelector('.lr-ext-captured--top > .lr-ext-captured__group');
     sync();
-    expect(document.querySelector('.cdc-captured--top > .cdc-captured__group')).toBe(group);
-    expect(document.querySelectorAll('.cdc-captured')).toHaveLength(2);
+    expect(document.querySelector('.lr-ext-captured--top > .lr-ext-captured__group')).toBe(group);
+    expect(document.querySelectorAll('.lr-ext-captured')).toHaveLength(2);
   });
 
   it('reads the board again only once it changes', async () => {
@@ -41,11 +41,11 @@ describe('captured pieces', () => {
     const reads = vi.spyOn(Element.prototype, 'querySelectorAll');
     sync();
     expect(reads).not.toHaveBeenCalled();
-    const before = inner('.cdc-captured--top') ?? '';
+    const before = inner('.lr-ext-captured--top') ?? '';
     for (const piece of document.querySelectorAll('cg-board piece')) piece.remove();
     await flush();
     sync();
-    expect(inner('.cdc-captured--top')).not.toBe(before);
+    expect(inner('.lr-ext-captured--top')).not.toBe(before);
   });
 
   it('draws again into new bars when Lichess replaces <main>', () => {
@@ -55,7 +55,7 @@ describe('captured pieces', () => {
     sync();
     document.body.innerHTML = scenario?.html ?? '';
     sync();
-    expect(inner('.cdc-captured--top')).toBe(withPieceGlyphs(scenario?.top ?? ''));
+    expect(inner('.lr-ext-captured--top')).toBe(withPieceGlyphs(scenario?.top ?? ''));
   });
 });
 
@@ -68,6 +68,6 @@ describe('capturedMarkup', () => {
       variant: 'threeCheck',
       checks: { top: 0, bottom: 2 },
     });
-    expect(markup.bottom.value).toMatch(/cdc-pc-bk.*cdc-pc-bk.*cdc-captured__score">\+1</);
+    expect(markup.bottom.value).toMatch(/lr-ext-pc-bk.*lr-ext-pc-bk.*lr-ext-captured__score">\+1</);
   });
 });

@@ -77,7 +77,7 @@ describe('userInHref', () => {
 describe('avatarAttributes', () => {
   it('names the coach and the color', () => {
     expect(avatarAttributes('Hikaru').value).toBe(
-      ' data-cdc-avatar-coach="2" data-cdc-avatar-color="cyan"',
+      ' data-lr-ext-avatar-coach="2" data-lr-ext-avatar-color="cyan"',
     );
   });
 

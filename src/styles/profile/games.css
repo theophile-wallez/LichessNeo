@@ -8,7 +8,7 @@
   margin: 12px 12px 0;
   padding: 5px !important;
   border-radius: 10px;
-  background: var(--cdc-grey-950) !important;
+  background: var(--lr-ext-grey-950) !important;
 }
 
 .user-show .angle-content > #games .nm-item,
@@ -25,8 +25,8 @@
   border: none !important;
   border-radius: 7px !important;
   background: transparent !important;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 11px !important;
   font-weight: 700 !important;
   letter-spacing: 0.04em;
@@ -39,7 +39,7 @@
 
 .user-show .angle-content > #games .nm-item strong {
   display: block;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 17px !important;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
@@ -47,18 +47,18 @@
 
 .user-show .angle-content > #games .nm-item:hover {
   background: #ffffff0a !important;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show .angle-content > #games .nm-item.active {
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   box-shadow: 0 1px 3px #00000080;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show .angle-content > #games .nm-item.active strong,
 .user-show .angle-content > #games .nm-item:hover strong {
-  color: var(--cdc-text-strong);
+  color: var(--lr-ext-text-strong);
 }
 
 /* Stack each count over its label (and the search icon over its own). */
@@ -87,7 +87,7 @@
 
 .user-show .search__status {
   padding: 8px 4px 12px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
 }
 
@@ -105,7 +105,7 @@
   gap: 16px;
   min-height: 0 !important;
   padding: 12px 14px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px;
   background: #ffffff06 !important;
   transition:
@@ -115,9 +115,9 @@
 }
 
 .user-show .game-row:hover {
-  border-color: var(--cdc-card-border-hover) !important;
-  background: var(--cdc-card-hover) !important;
-  box-shadow: var(--cdc-card-shadow-hover);
+  border-color: var(--lr-ext-card-border-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
+  box-shadow: var(--lr-ext-card-shadow-hover);
 }
 
 .user-show .game-row__board {
@@ -153,14 +153,14 @@
   align-items: baseline;
   gap: 0 10px;
   min-width: 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
 }
 
 .user-show .game-row .header__text strong {
   display: inline !important;
-  color: var(--cdc-text);
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text);
+  font-family: var(--lr-ext-font) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   letter-spacing: 0.02em;
@@ -184,7 +184,7 @@
 .user-show .game-row .versus .player.black {
   width: auto !important;
   min-width: 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px !important;
   font-variant-numeric: tabular-nums;
   text-align: start !important;
@@ -195,14 +195,14 @@
   display: inline-block;
   max-width: 100%;
   overflow: hidden;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14px;
   text-overflow: ellipsis;
   vertical-align: bottom;
 }
 
 .user-show .game-row .versus .player a:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 .user-show .game-row .versus .player .uflair {
@@ -221,7 +221,7 @@
 /* The outcome, as a pill: green for a win, red for a loss, grey otherwise. */
 .user-show .game-row .result {
   min-width: 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
   text-align: start !important;
 }
@@ -235,13 +235,13 @@
 }
 
 .user-show .game-row .result .win {
-  background: color-mix(in srgb, var(--cdc-good) 18%, transparent);
-  color: var(--cdc-good-hover) !important;
+  background: color-mix(in srgb, var(--lr-ext-good) 18%, transparent);
+  color: var(--lr-ext-good-hover) !important;
 }
 
 .user-show .game-row .result .loss {
-  background: color-mix(in srgb, var(--cdc-red-dark) 18%, transparent);
-  color: var(--cdc-red) !important;
+  background: color-mix(in srgb, var(--lr-ext-red-dark) 18%, transparent);
+  color: var(--lr-ext-red) !important;
 }
 
 /* Lichess pads the row with two <br> after the result. */
@@ -254,7 +254,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
 }
 
@@ -292,16 +292,16 @@
   display: inline-block;
   padding: 9px 22px;
   border-radius: 8px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 700;
 }
 
 .user-show .pager a:hover {
-  background: var(--cdc-btn-grey-hover);
-  color: var(--cdc-text-strong) !important;
+  background: var(--lr-ext-btn-grey-hover);
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The head-to-head table, on the "games with you" filter. */

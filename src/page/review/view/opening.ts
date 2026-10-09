@@ -13,9 +13,9 @@ import type { BookEntry, Session } from '#page/review/session.ts';
 /** "Ruy Lopez: Morphy Defense": the family in bold, then the variation. */
 export function openingMarkup({ name, eco }: Pick<BookEntry, 'name' | 'eco'>): SafeHtml {
   const [family = '', ...rest] = name.split(': ');
-  const code = eco ? html`<span class="cdc-opening__eco">${eco}</span>` : '';
+  const code = eco ? html`<span class="lr-ext-opening__eco">${eco}</span>` : '';
   const variation = rest.length > 0 ? html`: ${rest.join(': ')}` : '';
-  return html`<i class="cdc-opening__icon"></i>${code}<span class="cdc-opening__name"><b>${family}</b>${variation}</span>`;
+  return html`<i class="lr-ext-opening__icon"></i>${code}<span class="lr-ext-opening__name"><b>${family}</b>${variation}</span>`;
 }
 
 function shownOpening(
@@ -34,14 +34,14 @@ export function renderOpening(session: Session, analysis: Analysis): void {
   if (element.parentNode !== tools) tools.append(element);
   const opening = shownOpening(session, analysis);
   const key = opening ? `${opening.eco}|${opening.name}` : '';
-  if (element.dataset.cdcOpening === key) return;
-  setData(element, 'cdcOpening', key);
-  document.documentElement.classList.toggle('cdc-opening-on', opening !== null);
+  if (element.dataset.lrExtOpening === key) return;
+  setData(element, 'lrExtOpening', key);
+  document.documentElement.classList.toggle('lr-ext-opening-on', opening !== null);
   if (!opening) {
     element.replaceChildren();
     return;
   }
   element.title = opening.name;
-  setStyleProperty(element, '--cdc-class-icon', classImage('book'));
+  setStyleProperty(element, '--lr-ext-class-icon', classImage('book'));
   setHtml(element, openingMarkup(opening));
 }

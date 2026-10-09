@@ -15,7 +15,7 @@ const SoundPlayerSchema = z.object({
   saySan: z.optional(method<[san?: unknown, cut?: unknown, force?: unknown]>()),
   theme: z.optional(z.unknown()),
   // Set once our hooks are in, so another copy of the page script leaves them be.
-  cdcHooked: z.optional(z.boolean()),
+  lrExtHooked: z.optional(z.boolean()),
 });
 
 export type SoundPlayer = z.infer<typeof SoundPlayerSchema>;

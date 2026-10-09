@@ -82,35 +82,35 @@ export const endCardInput = ({ outcome, texts, coachId, opponent }: EndInput): C
 });
 
 const CHIP = trustedHtml(
-  '<span class="cdc-end__count"><span class="cdc-end__count-top"><span class="cdc-end__count-icon"></span><b></b></span><span class="cdc-end__count-label"></span></span>',
+  '<span class="lr-ext-end__count"><span class="lr-ext-end__count-top"><span class="lr-ext-end__count-icon"></span><b></b></span><span class="lr-ext-end__count-label"></span></span>',
 );
 
 const emptyStats = (texts: GameOverTexts): SafeHtml =>
-  html`<p class="cdc-end__accuracy"><b>–</b><span>${texts.accuracy}</span></p>
-    <div class="cdc-end__counts">${Array.from({ length: CHIP_COUNT }, () => CHIP)}</div>`;
+  html`<p class="lr-ext-end__accuracy"><b>–</b><span>${texts.accuracy}</span></p>
+    <div class="lr-ext-end__counts">${Array.from({ length: CHIP_COUNT }, () => CHIP)}</div>`;
 
 /** The strip with the player's figures in, for a card drawn at once. */
 export function statsMarkup(summary: PlayerSummary, texts: GameOverTexts): SafeHtml {
   const accuracy = summary.accuracy === null ? '–' : formatAccuracy(summary.accuracy);
   const chips = cardClasses(summary.counts).map(moveClass => {
     const count = summary.counts[moveClass] ?? 0;
-    return html`<span class="cdc-end__count" style="--cdc-count-c:${CLASS_COLORS[moveClass]}"><span class="cdc-end__count-top"><span class="cdc-end__count-icon">${classSvg(moveClass)}</span><b>${count}</b></span><span class="cdc-end__count-label">${texts.countLabel(moveClass, count)}</span></span>`;
+    return html`<span class="lr-ext-end__count" style="--lr-ext-count-c:${CLASS_COLORS[moveClass]}"><span class="lr-ext-end__count-top"><span class="lr-ext-end__count-icon">${classSvg(moveClass)}</span><b>${count}</b></span><span class="lr-ext-end__count-label">${texts.countLabel(moveClass, count)}</span></span>`;
   });
-  return html`<p class="cdc-end__accuracy"><b>${accuracy}</b><span>${texts.accuracy}</span></p>
-    <div class="cdc-end__counts">${chips}</div>`;
+  return html`<p class="lr-ext-end__accuracy"><b>${accuracy}</b><span>${texts.accuracy}</span></p>
+    <div class="lr-ext-end__counts">${chips}</div>`;
 }
 
 export function cardMarkup(input: CardInput): SafeHtml {
   const { result, heading, words, mood, coachId, texts } = input;
-  const tag = heading.tag === '' ? '' : html`<p class="cdc-end__reason">${heading.tag}</p>`;
-  return html`<section class="cdc-end__card cdc-end__card--${result}" aria-labelledby="cdc-end-title">
-    <div class="cdc-end__glow">
-      <span class="cdc-coach__avatar" data-cdc-coach-id="${coachId}" data-cdc-mood="${mood}"><span class="cdc-coach__face"></span></span>
-      <div class="cdc-end__main">
-        ${tag}<h2 class="cdc-end__title" id="cdc-end-title">${heading.title}</h2>
-        <p class="cdc-end__bubble">${words}</p>
+  const tag = heading.tag === '' ? '' : html`<p class="lr-ext-end__reason">${heading.tag}</p>`;
+  return html`<section class="lr-ext-end__card lr-ext-end__card--${result}" aria-labelledby="lr-ext-end-title">
+    <div class="lr-ext-end__glow">
+      <span class="lr-ext-coach__avatar" data-lr-ext-coach-id="${coachId}" data-lr-ext-mood="${mood}"><span class="lr-ext-coach__face"></span></span>
+      <div class="lr-ext-end__main">
+        ${tag}<h2 class="lr-ext-end__title" id="lr-ext-end-title">${heading.title}</h2>
+        <p class="lr-ext-end__bubble">${words}</p>
       </div>
     </div>
-    <div class="cdc-end__stats">${input.stats ?? emptyStats(texts)}</div>
+    <div class="lr-ext-end__stats">${input.stats ?? emptyStats(texts)}</div>
   </section>`;
 }

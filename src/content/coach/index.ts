@@ -12,7 +12,7 @@ import type { MascotView } from './mascot/index.ts';
 // the extension's, which the page's CSP keeps out of reach. Until it's in, or
 // without WebGL, the avatar shows the coach's still image.
 
-const LIVE_CLASS = 'cdc-coach__avatar--live';
+const LIVE_CLASS = 'lr-ext-coach__avatar--live';
 
 let wanted: CoachState = { coach: 0, mood: 'neutral', talking: false };
 let live: { readonly avatar: HTMLElement; readonly mascot: MascotView } | null = null;
@@ -32,7 +32,7 @@ function unmount(): void {
 }
 
 async function mount(avatar: HTMLElement): Promise<void> {
-  const face = queryOne(avatar, '.cdc-coach__face', HTMLElement);
+  const face = queryOne(avatar, '.lr-ext-coach__face', HTMLElement);
   if (!face) return;
   mounting = avatar;
   const mountMascot = await loadMascots();
@@ -48,7 +48,7 @@ async function mount(avatar: HTMLElement): Promise<void> {
 }
 
 function sync(): void {
-  const avatar = queryOne(document, '.cdc-coach__avatar', HTMLElement);
+  const avatar = queryOne(document, '.lr-ext-coach__avatar', HTMLElement);
   if (!avatar) return;
   if (live?.avatar === avatar) apply(live.mascot);
   else if (mounting !== avatar) void mount(avatar);

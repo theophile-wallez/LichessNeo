@@ -35,7 +35,7 @@ function badgeCell(square: string, orientation: Color): Point {
 export function badgeMarkup({ moveClass, uci, san, orientation }: BadgeInput): SafeHtml {
   const [column, row] = badgeCell(landingSquare(uci, san), orientation);
   const style = `left:${(column + 1) * 12.5}%;top:${row * 12.5}%`;
-  return html`<div class="cdc-badge" style="${style}">${classSvg(moveClass)}</div>`;
+  return html`<div class="lr-ext-badge" style="${style}">${classSvg(moveClass)}</div>`;
 }
 
 /** A move's arrow, in the engine's notation; none for a move it can't read. */

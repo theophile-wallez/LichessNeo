@@ -70,7 +70,7 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
 **DOM, performance and security**
 
 - Never move or remove Lichess's DOM nodes (snabbdom breaks). Add our own,
-  prefixed `cdc`, and rearrange with CSS.
+  prefixed `lr-ext`, and rearrange with CSS.
 - The content script runs on every page and its tasks every 250 ms: a task
   must cost next to nothing when nothing changed. Write only what changes
   (`setData`, `setStyleProperty`, `classList.toggle(name, force)`), and
@@ -80,8 +80,10 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
   (`#shared/html.ts`); `trustedHtml` is for constants only. A message
   handler checks `event.source === window` and validates with a schema
   (`#shared/protocol.ts` does both).
-- Everything of ours is prefixed `cdc`: classes, ids, data attributes, CSS
-  variables, storage keys (listed in `StorageKey` / `SessionKey`).
+- Everything of ours is prefixed `lr-ext` (`PREFIX`, `#shared/prefix.ts`):
+  classes, ids, data attributes and CSS variables, written out in full;
+  storage keys (listed in `StorageKey` / `SessionKey`) and message types,
+  built with `prefixed()` and `messageType()`.
 
 **Tests**
 
@@ -217,7 +219,7 @@ hold:
   its glyphs.
 - _No emoji:_ emoji don't look clean. A colored icon is a Hugeicon in a
   color of the palette on a tile tinted with it (a side menu's link sets
-  `--cdc-nav-glyph` and `--cdc-nav-color`, `styles/pages/headings-menus.css`),
+  `--lr-ext-nav-glyph` and `--lr-ext-nav-color`, `styles/pages/headings-menus.css`),
   never an emoji file nor one of Lichess's flair images (the players' own
   flairs aside, theirs to pick).
 - _Icons as you go:_ don't wait to be asked. On a page you work on, a
@@ -273,7 +275,7 @@ features and its name: free analysis, open data, no ads.
   Practice, simuls and the forum set the tone. Every side menu (`.subnav`)
   gets an icon per link on a tile in its own color: add the menu to the
   shared rule in `styles/pages/headings-menus.css`, then set
-  `--cdc-nav-glyph` (a Hugeicon) and `--cdc-nav-color` per link. Every
+  `--lr-ext-nav-glyph` (a Hugeicon) and `--lr-ext-nav-color` per link. Every
   item of a side menu, a link to a page, has its icon: the Hugeicon that
   page already has elsewhere if it has one (another menu's link, its
   title's), else the closest one Hugeicons has.
@@ -285,12 +287,12 @@ features and its name: free analysis, open data, no ads.
   are all Hugeicons, alike (see "Playful pages"), and a page with a side
   menu starts its title with its open link's tile, the same icon
   (`styles/pages/menu-titles.css`: give a new menu's link a
-  `main.page-menu[data-cdc-menu~=…][data-cdc-nav-active$=…]` selector too).
+  `main.page-menu[data-lr-ext-menu~=…][data-lr-ext-nav-active$=…]` selector too).
 - **Cards stay dark:** never fill a card's background with green or red;
   color a badge, a tile or the title instead (buttons aside).
 - **Dark on the bright hues:** never white text or a white icon on a
   bright hue of the palette (green, yellow, cyan, orange, pink): it can't be
-  read. Write it in `--cdc-grey-900` (a Hugeicon as a file:
+  read. Write it in `--lr-ext-grey-900` (a Hugeicon as a file:
   `tick-02--0c0c0d.svg`), or put the hue on the icon over a tile tinted with
   it instead.
 - **Hover feels the same everywhere:** a card lifts and its icon tile hops,
@@ -299,9 +301,9 @@ scale(1.08)` on menu links, both
   `transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)`.
 - **Tabs slide:** a tab bar's highlight is one piece that slides to the tab
   picked (`0.35s cubic-bezier(0.22, 1, 0.36, 1)`). Register the bar in
-  `TAB_BARS`; its CSS gives the piece the active tab's look (`--cdc-tab-bg`,
+  `TAB_BARS`; its CSS gives the piece the active tab's look (`--lr-ext-tab-bg`,
   `-shadow`, `-radius`, `-line`) and takes that look off the active tab
-  under `[data-cdc-tabs]` (`styles/theme/tooltips-and-tabs.css`).
+  under `[data-lr-ext-tabs]` (`styles/theme/tooltips-and-tabs.css`).
 - **Motion is never reduced:** never write a `prefers-reduced-motion` query.
   `src/page/motion` makes every such query answer as if nothing were asked.
 - **Only the content scrolls:** a page's side panel and title stay put while
@@ -335,18 +337,18 @@ Learned the hard way. Check here before touching the area concerned.
 - **Coordinates.** Lichess swaps `body.coords-out` for `coords-in` while its
   eval gauge shows (`forceInnerCoords`). On desktop
   `styles/board/coordinates.css` draws both outside, sized by
-  `--cdc-coords-size`; a layout leaves them room under
+  `--lr-ext-coords-size`; a layout leaves them room under
   `body:is(.coords-in, .coords-out)` (a gutter for the ranks,
-  `--cdc-coords-off` for the files). Below 1020px they stay where Lichess
+  `--lr-ext-coords-off` for the files). Below 1020px they stay where Lichess
   puts them.
 - **Board inset.** Chessground shrinks the board to whole pixels per square,
   so `cg-container` sits a few px inside its wrapper:
-  `content/layout/board-inset.ts` measures it into `--cdc-inset-{t,r,b,l}`.
+  `content/layout/board-inset.ts` measures it into `--lr-ext-inset-{t,r,b,l}`.
   Align anything with the squares through those.
 - **Definite grid rows.** The right panel's rows need known heights: the
-  controls' is measured into `--cdc-controls-h`, and on the game page the
-  voice bar's and crosstable's, over the moves, into `--cdc-voice-h` and
-  `--cdc-crosstable-h`. Lichess sets an inline `height` on the analysis
+  controls' is measured into `--lr-ext-controls-h`, and on the game page the
+  voice bar's and crosstable's, over the moves, into `--lr-ext-voice-h` and
+  `--lr-ext-crosstable-h`. Lichess sets an inline `height` on the analysis
   chat: override it.
 - **CSP.** Images load from anywhere; audio and `fetch` only from Lichess's
   domains, `blob:` and `data:`, not even the extension's files. So
@@ -366,18 +368,18 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   for that at import.
 - **Thin fonts.** Lichess sets weight 300 on Roboto / Noto Sans.
   `content/bootstrap/fonts.ts` appends `@font-face` rules pointing them (and
-  `CDC Sans`) at the system font; they must come after Lichess's, hence not
+  `LR Ext Sans`) at the system font; they must come after Lichess's, hence not
   in the manifest CSS.
 - **Icons.** The colored icons are Hugeicons on tinted tiles (see "No
   emoji"); the sidebar's are our own Dracula-colored drawings
   (`img/sidebar`). Time-control icons are Lichess font glyphs in
   `[data-icon]::before` (`\e059` ultrabullet, `\e032` bullet, `\e008` blitz,
   `\e002` rapid, `\e00a` classical, `\e019` correspondence), kept as they are
-  and colored per mode in `styles/theme/game-modes.css`: set `--cdc-mode-color`
+  and colored per mode in `styles/theme/game-modes.css`: set `--lr-ext-mode-color`
   on the `::before` to recolor one. Outside a `[data-icon]`, draw the glyph with
-  `content: var(--cdc-mode-rapid)` (and `ultrabullet`, `bullet`, `blitz`,
+  `content: var(--lr-ext-mode-rapid)` (and `ultrabullet`, `bullet`, `blitz`,
   `classical`, `correspondence`) in `font-family: lichess`, in its color
-  `var(--cdc-mode-rapid-color)` (`bullet`, `blitz`, `rapid`, `correspondence`). The interface's monochrome icons are Hugeicons'
+  `var(--lr-ext-mode-rapid-color)` (`bullet`, `blitz`, `rapid`, `correspondence`). The interface's monochrome icons are Hugeicons'
   (see the recipe "An icon"). Never copy another site's icons or drawings:
   use Hugeicons, Lichess's glyphs, or draw your own (illustrations, not
   icons Hugeicons has).
@@ -410,10 +412,10 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   `src/shared/protocol.ts`. To show a bundled image from the page world,
   list it in `web_accessible_resources` and load it from CSS with
   `url('chrome-extension://__MSG_@@extension_id__/<path>')`, or read the
-  base URL the content script puts in `data-cdc-assets` on `<html>`.
+  base URL the content script puts in `data-lr-ext-assets` on `<html>`.
 - **Buttons.** A gradient with a 1px top highlight, a 1px darker bottom edge
   and a soft shadow, not a 3D ledge: use
-  `--cdc-btn-{primary,grey,red}[-hover|-shadow]` (`styles/theme/base.css`).
+  `--lr-ext-btn-{primary,grey,red}[-hover|-shadow]` (`styles/theme/base.css`).
   Where Lichess glues a button to an input or stacks buttons flush, drop the
   shadow or add a gap.
 - **Scroll state.** Once scrolled, Lichess adds `.hide` to `#top`, hiding
@@ -512,25 +514,25 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
 - **Boards sized to the window.** Lichess sizes some boards from the whole
   window's width, as if there were no sidebar (Storm, Racer, coordinates,
   Learn, puzzles): cap the board's column by what the sidebar leaves
-  (`100vw - var(--cdc-sidebar-w)`, margins, side panel) and keep the ranks'
+  (`100vw - var(--lr-ext-sidebar-w)`, margins, side panel) and keep the ranks'
   gutter.
 - **The board's resize handle.** `cg-resize` sets `---zoom` (0–100) on
   `body`, which Lichess turns into `---board-scale` and saves as a pref that
   may predate our layout. Ours ignores it: the board takes all its room
   until dragged, and `content/layout/board-zoom.ts` keeps the dragged size
-  (`cdc-board-zoom`, `--cdc-zoom`). A layout that sizes its own board
-  multiplies by `var(--cdc-board-scale, 1)`. Use `dvh`, not `vh`: on phones
+  (`lr-ext-board-zoom`, `--lr-ext-zoom`). A layout that sizes its own board
+  multiplies by `var(--lr-ext-board-scale, 1)`. Use `dvh`, not `vh`: on phones
   and headsets `100vh` is taller than the view.
 - **Pinned titles.** Don't widen a sticky title with negative margins (it
   overflows at 1024px): use side box-shadows in the page's color.
 - **The top room.** On desktop `#main-wrap` is what scrolls, and its 16px
-  top room (`--cdc-page-top`, `styles/sidebar/layout.css`) is padding, so the
+  top room (`--lr-ext-page-top`, `styles/sidebar/layout.css`) is padding, so the
   content scrolls up to the window's edge. Never make it a border again: the
   content would be cut 16px short of the top. But sticky things stick below a
   scroller's padding (`top: 0` is 16px down), and what scrolls shows in the
   strip above them:
-  - a pinned title puts `var(--cdc-pin-cover)` first in its `box-shadow`
-    (`--cdc-pin-cover-wide` when 12px side shadows widen it): the page's
+  - a pinned title puts `var(--lr-ext-pin-cover)` first in its `box-shadow`
+    (`--lr-ext-pin-cover-wide` when 12px side shadows widen it): the page's
     color over the strip. It also covers the 16px above the title when not
     stuck, so keep that room empty;
   - a column that scrolls in place starts at the window's edge, its content
@@ -583,11 +585,11 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   could style: on a board, every move. Every stylesheet loads on every page,
   so everywhere:
   - no `:has()` on `html`, `body`, `#main-wrap` or `main`: read a word of
-    `data-cdc-has` on `<html>` instead (`html[data-cdc-has~='round']`),
+    `data-lr-ext-has` on `<html>` instead (`html[data-lr-ext-has~='round']`),
     kept by `HAS` in `content/layout/has-flags.ts`;
   - no attribute selector, `:not()` or `*` inside a `:has()`: have `MARKS`
     (`content/layout/marks.ts`) copy what a rule needs onto the element
-    (`data-cdc-nav`, `data-cdc-icon`, `data-cdc-href`…);
+    (`data-lr-ext-nav`, `data-lr-ext-icon`, `data-lr-ext-href`…);
   - nothing inside a `:has()` that Lichess adds during a game (`piece`,
     `square`, `div`, `button`, `a`, the move list's tags), and no bare tag
     or `*` after one (`.x:has(.y) div` restyles every `div`);
@@ -608,7 +610,7 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   style one of our rules sets (on an analysis page, `.analyse__controls` has
   a 1px `border-top`).
 - A finished game's analysis opens on the review's summary, which hides the
-  move list: click "Start Review", or `.cdc-review__close` for Lichess's
+  move list: click "Start Review", or `.lr-ext-review__close` for Lichess's
   panel.
 - Wait for elements, not for time: snabbdom draws after `load`. Scroll
   panels yourself (`.analyse__moves`' `scrollTop`) and screenshot with a
@@ -630,7 +632,7 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
 - The Game Review's Stockfish is nondeterministic (two runs of a game
   differ on about one verdict in six, mostly by one step, the game rating by
   100+ points):
-  compare runs from the same `cdc-review:*` cache entry, which skips the
+  compare runs from the same `lr-ext-review:*` cache entry, which skips the
   engine, or against that spread.
 - Firefox: Puppeteer loads `dist/firefox` over WebDriver BiDi
   (`puppeteer.launch({ browser: 'firefox' })`, then

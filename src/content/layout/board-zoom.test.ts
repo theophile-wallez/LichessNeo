@@ -8,8 +8,8 @@ const root = document.documentElement;
 
 function zoomState(): { zoom: string; stored: string | null; bodyZoom: string } {
   return {
-    zoom: root.style.getPropertyValue('--cdc-zoom'),
-    stored: localStorage.getItem('cdc-board-zoom'),
+    zoom: root.style.getPropertyValue('--lr-ext-zoom'),
+    stored: localStorage.getItem('lr-ext-board-zoom'),
     bodyZoom: document.body.style.getPropertyValue('---zoom'),
   };
 }
@@ -37,19 +37,19 @@ beforeEach(() => {
 
 describe('boardZoom', () => {
   it.each(legacy.initial)('starts from a stored $stored as the original', ({ stored, zoom }) => {
-    if (stored !== null) localStorage.setItem('cdc-board-zoom', stored);
+    if (stored !== null) localStorage.setItem('lr-ext-board-zoom', stored);
     boardZoom.start();
-    expect(root.style.getPropertyValue('--cdc-zoom')).toBe(zoom);
+    expect(root.style.getPropertyValue('--lr-ext-zoom')).toBe(zoom);
   });
 
   it('ignores a stored value that isn’t a number (the original wrote NaN)', () => {
-    localStorage.setItem('cdc-board-zoom', 'abc');
+    localStorage.setItem('lr-ext-board-zoom', 'abc');
     boardZoom.start();
-    expect(root.style.getPropertyValue('--cdc-zoom')).toBe('');
+    expect(root.style.getPropertyValue('--lr-ext-zoom')).toBe('');
   });
 
   it('follows a drag on the handle as the original did', async () => {
-    localStorage.setItem('cdc-board-zoom', '80');
+    localStorage.setItem('lr-ext-board-zoom', '80');
     document.body.innerHTML =
       '<div class="main-board"><div class="cg-wrap"><cg-container><cg-resize><span class="grip"></span></cg-resize></cg-container></div></div><div class="other"></div>';
     boardZoom.start();
@@ -96,7 +96,7 @@ describe('boardZoom', () => {
     await release('touchend');
     await setBodyZoom('50');
     record('after touchend');
-    root.style.removeProperty('--cdc-zoom');
+    root.style.removeProperty('--lr-ext-zoom');
     await press('.grip', 'mousedown');
     record('a drag from full size');
     await release('mouseup');

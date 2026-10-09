@@ -43,7 +43,7 @@ describe('mayChangeShapes', () => {
     expect(
       changesShapes(() => wrap?.classList.replace('orientation-white', 'orientation-black')),
     ).toBe(true);
-    expect(changesShapes(() => document.documentElement.classList.add('cdc-review-moves'))).toBe(
+    expect(changesShapes(() => document.documentElement.classList.add('lr-ext-review-moves'))).toBe(
       true,
     );
   });

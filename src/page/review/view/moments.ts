@@ -20,16 +20,16 @@ export const moveLabel = ({ ply, san }: Pick<JudgedMove, 'ply' | 'san'>): string
 export function momentsMarkup(review: Review, ply: number, language: ReviewLanguage): SafeHtml {
   const cards = keyMoments(review).map(
     move =>
-      html`<button class="cdc-moment${move.ply === ply ? ' cdc-moment--on' : ''}" data-cdc="moment" data-cdc-ply="${move.ply}" style="--cdc-class-color:${CLASS_COLORS[move.moveClass]}">
-        <span class="cdc-moment__move">${classIcon(move.moveClass)}${moveLabel(move)}</span>
-        <span class="cdc-moment__class">${language.classLabels[move.moveClass]}</span>
+      html`<button class="lr-ext-moment${move.ply === ply ? ' lr-ext-moment--on' : ''}" data-lr-ext="moment" data-lr-ext-ply="${move.ply}" style="--lr-ext-class-color:${CLASS_COLORS[move.moveClass]}">
+        <span class="lr-ext-moment__move">${classIcon(move.moveClass)}${moveLabel(move)}</span>
+        <span class="lr-ext-moment__class">${language.classLabels[move.moveClass]}</span>
       </button>`,
   );
-  return cards.length > 0 ? html`<div class="cdc-moments">${cards}</div>` : html``;
+  return cards.length > 0 ? html`<div class="lr-ext-moments">${cards}</div>` : html``;
 }
 
 const strip = (panel: HTMLElement): HTMLElement | null =>
-  queryOne(panel, '.cdc-moments', HTMLElement);
+  queryOne(panel, '.lr-ext-moments', HTMLElement);
 
 /** Where the strip was scrolled to, read before a render replaces it. */
 export const momentsScroll = (panel: HTMLElement): number => strip(panel)?.scrollLeft ?? 0;
@@ -42,7 +42,7 @@ export function showMoment(panel: HTMLElement, from: number): void {
   const moments = strip(panel);
   if (!moments) return;
   moments.scrollLeft = from;
-  const card = queryOne(moments, '.cdc-moment--on', HTMLElement);
+  const card = queryOne(moments, '.lr-ext-moment--on', HTMLElement);
   if (!card) return;
   const box = moments.getBoundingClientRect();
   const cardBox = card.getBoundingClientRect();

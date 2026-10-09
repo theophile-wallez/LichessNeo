@@ -1,15 +1,15 @@
 /* ---- Graph --- */
 
 @media (min-width: 1020px) {
-  /* As tall as the move-by-move review's (#cdc-review-graph), so it doesn't move between them. */
-  .cdc-summary-graph {
+  /* As tall as the move-by-move review's (#lr-ext-review-graph), so it doesn't move between them. */
+  .lr-ext-summary-graph {
     position: relative;
-    height: var(--cdc-review-graph);
+    height: var(--lr-ext-review-graph);
     margin-bottom: 12px;
     cursor: pointer;
   }
 
-  .cdc-summary-pct {
+  .lr-ext-summary-pct {
     position: absolute;
     top: 8px;
     left: 0;
@@ -23,52 +23,52 @@
     pointer-events: none; /* the graph stays clickable while this fills in */
   }
 
-  #cdc-review-graph {
+  #lr-ext-review-graph {
     grid-area: rgraph;
     position: relative;
-    margin-left: var(--cdc-gap);
+    margin-left: var(--lr-ext-gap);
     padding: 8px 12px;
     box-sizing: border-box;
-    background: var(--cdc-bg-panel);
+    background: var(--lr-ext-bg-panel);
     cursor: pointer;
   }
 
-  .cdc-summary-graph svg,
-  #cdc-review-graph svg {
+  .lr-ext-summary-graph svg,
+  #lr-ext-review-graph svg {
     display: block;
     border-radius: 6px;
   }
 
   /* The graph's markup names Lichess-era colors (view/graph-markup.ts, kept as the legacy
      fixtures recorded it): the palette's, through CSS, which beats SVG attributes. */
-  :is(.cdc-summary-graph, #cdc-review-graph) svg > rect {
-    fill: var(--cdc-grey-700);
+  :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > rect {
+    fill: var(--lr-ext-grey-700);
   }
-  :is(.cdc-summary-graph, #cdc-review-graph) svg > path {
-    fill: var(--cdc-grey-100);
+  :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > path {
+    fill: var(--lr-ext-grey-100);
   }
-  :is(.cdc-summary-graph, #cdc-review-graph) svg > line[stroke='#8b8987'] {
-    stroke: var(--cdc-grey-400);
+  :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > line[stroke='#8b8987'] {
+    stroke: var(--lr-ext-grey-400);
     stroke-dasharray: 3 4;
   }
-  :is(.cdc-summary-graph, #cdc-review-graph) svg > line[stroke='#81b64c'] {
-    stroke: var(--cdc-accent);
+  :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > line[stroke='#81b64c'] {
+    stroke: var(--lr-ext-accent);
   }
   /* In the move-by-move panel, under its header: the story of the game, large. */
-  #cdc-review #cdc-review-graph {
+  #lr-ext-review #lr-ext-review-graph {
     flex: none;
-    height: var(--cdc-review-graph);
+    height: var(--lr-ext-review-graph);
     margin: 0 12px 8px;
     padding: 0;
     background: transparent;
   }
 
   /* The graph draws itself from left to right the first time it shows. */
-  .cdc-graph-reveal {
-    animation: cdc-reveal 1.4s ease-out;
+  .lr-ext-graph-reveal {
+    animation: lr-ext-reveal 1.4s ease-out;
   }
 
-  @keyframes cdc-reveal {
+  @keyframes lr-ext-reveal {
     from {
       clip-path: inset(0 100% 0 0);
     }
@@ -78,46 +78,46 @@
   }
 
   /* Eval under the mouse. */
-  .cdc-graph-tip {
+  .lr-ext-graph-tip {
     position: absolute;
     top: 6px;
     display: none;
     padding: 3px 6px;
     border-radius: 3px;
-    background: var(--cdc-grey-100);
+    background: var(--lr-ext-grey-100);
     box-shadow: 0 1px 3px #0000004d;
-    color: var(--cdc-grey-800);
+    color: var(--lr-ext-grey-800);
     font-size: 13px;
     font-weight: 800;
     pointer-events: none;
   }
 
-  .cdc-avatar {
+  .lr-ext-avatar {
     display: inline-block;
     width: 56px;
     height: 56px;
     border-radius: 6px;
-    background: var(--cdc-avatar);
+    background: var(--lr-ext-avatar);
   }
 
   /* The computer, as in its player bar (playerbar.css). */
-  html[data-cdc-ai~='white'] .cdc-avatar--w,
-  html[data-cdc-ai~='black'] .cdc-avatar--b {
-    background: var(--cdc-computer-avatar);
+  html[data-lr-ext-ai~='white'] .lr-ext-avatar--w,
+  html[data-lr-ext-ai~='black'] .lr-ext-avatar--b {
+    background: var(--lr-ext-computer-avatar);
   }
 
-  /* The game rating's label explains itself on hover (#cdc-tip). */
-  :not(button)[data-cdc-tip] {
+  /* The game rating's label explains itself on hover (#lr-ext-tip). */
+  :not(button)[data-lr-ext-tip] {
     cursor: default;
   }
 
-  #cdc-tip {
+  #lr-ext-tip {
     position: fixed;
     z-index: 1000;
     max-width: 280px;
     padding: 7px 10px;
     border-radius: 5px;
-    background: var(--cdc-grey-950);
+    background: var(--lr-ext-grey-950);
     box-shadow: 0 2px 8px #00000080;
     color: #fff;
     font-size: 13px;
@@ -126,24 +126,24 @@
     pointer-events: none;
   }
 
-  #cdc-tip::after {
+  #lr-ext-tip::after {
     content: '';
     position: absolute;
     top: 100%;
-    left: var(--cdc-tip-x, 50%);
+    left: var(--lr-ext-tip-x, 50%);
     margin-left: -6px;
     border: 6px solid transparent;
-    border-top-color: var(--cdc-grey-950);
+    border-top-color: var(--lr-ext-grey-950);
   }
 
-  .cdc-cls-icon {
+  .lr-ext-cls-icon {
     display: inline-flex;
     width: 22px;
     height: 22px;
     flex: none;
   }
 
-  .cdc-cls-icon svg {
+  .lr-ext-cls-icon svg {
     width: 100%;
     height: 100%;
   }
@@ -154,7 +154,7 @@
 /* The position under the pointer (view/graph-preview.ts), on <body> so no panel clips it: our
    board's squares, or a pack's image, and the set's pieces. */
 @media (min-width: 1020px) {
-  #cdc-graph-board {
+  #lr-ext-graph-board {
     position: fixed;
     z-index: 1000;
     width: 176px;
@@ -167,17 +167,20 @@
     pointer-events: none;
   }
 
-  #cdc-graph-board .cdc-mini {
+  #lr-ext-graph-board .lr-ext-mini {
     position: relative;
     width: 100%;
     height: 100%;
     /* The board's background, copied from it (page/review/view/graph-preview.ts), or ours.
        Light top left either way the board is turned. */
-    background: repeating-conic-gradient(var(--cdc-board-dark) 0 25%, var(--cdc-board-light) 0 50%)
+    background: repeating-conic-gradient(
+        var(--lr-ext-board-dark) 0 25%,
+        var(--lr-ext-board-light) 0 50%
+      )
       0 0 / 25% 25%;
   }
 
-  #cdc-graph-board :is(.cdc-mini__lit, .cdc-pc) {
+  #lr-ext-graph-board :is(.lr-ext-mini__lit, .lr-ext-pc) {
     position: absolute;
     left: calc(var(--x) * 12.5%);
     top: calc(var(--y) * 12.5%);
@@ -186,7 +189,7 @@
     margin: 0;
   }
 
-  #cdc-graph-board .cdc-mini__lit {
-    background: var(--cdc-highlight);
+  #lr-ext-graph-board .lr-ext-mini__lit {
+    background: var(--lr-ext-highlight);
   }
 }

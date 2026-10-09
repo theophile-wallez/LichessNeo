@@ -6,5 +6,5 @@ import type { Feature } from '#shared/features.ts';
 // is the Game Review's coach.
 export const coachChoice: Feature = {
   name: 'coach choice',
-  start: () => setData(document.documentElement, 'cdcCoach', String(pickCoach())),
+  start: () => setData(document.documentElement, 'lrExtCoach', String(pickCoach())),
 };

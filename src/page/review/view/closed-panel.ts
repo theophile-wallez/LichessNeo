@@ -58,10 +58,10 @@ function heading(outcome: Outcome | null, side: Side, fallback: string): Heading
 /** The figures once the analysis is done; until then, how far it's got. */
 function stats(session: Session, color: Color, texts: GameOverTexts): SafeHtml {
   const { view, language } = session;
-  if (view.error) return html`<p class="cdc-end__progress">${view.error}</p>`;
+  if (view.error) return html`<p class="lr-ext-end__progress">${view.error}</p>`;
   const { review } = view;
   if (!review?.complete)
-    return html`<p class="cdc-end__progress">${language.ui.analysing} ${Math.round(view.progress * 100)}%</p>`;
+    return html`<p class="lr-ext-end__progress">${language.ui.analysing} ${Math.round(view.progress * 100)}%</p>`;
   return statsMarkup({ accuracy: review.accuracy[color], counts: review.counts[color] }, texts);
 }
 
@@ -93,9 +93,9 @@ export function renderClosed(session: Session, analysis: Analysis): void {
   });
   setHtml(
     session.elements.panel,
-    html`<div class="cdc-end__frame">${card}<div class="cdc-end__foot">
-      <button class="cdc-btn" data-cdc="summary">${ui.summary}</button>
-      <button class="cdc-btn cdc-btn--green" data-cdc="moves">${ui.review}</button>
+    html`<div class="lr-ext-end__frame">${card}<div class="lr-ext-end__foot">
+      <button class="lr-ext-btn" data-lr-ext="summary">${ui.summary}</button>
+      <button class="lr-ext-btn lr-ext-btn--green" data-lr-ext="moves">${ui.review}</button>
     </div></div>`,
   );
 }

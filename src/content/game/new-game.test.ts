@@ -29,6 +29,6 @@ describe('the New game button', () => {
   it('waits for the clock', () => {
     document.body.innerHTML = `<main class="round"><div class="rcontrols">${legacy.followUps[0]?.html ?? ''}</div></main>`;
     syncNewGame(null);
-    expect(document.querySelector('.cdc-new-game')).toBeNull();
+    expect(document.querySelector('.lr-ext-new-game')).toBeNull();
   });
 });

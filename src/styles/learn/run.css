@@ -4,19 +4,22 @@
  * up to ~1500px: cap it by what the sidebar leaves. In two columns the ranks get a gutter. */
 @media (min-width: 1020px) and (max-width: 1259.29px) {
   .learn--run {
-    --cdc-coords-l: 0px;
+    --lr-ext-coords-l: 0px;
 
     grid-template-columns:
       min(
         var(---col2-uniboard-width),
-        calc(var(--cdc-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--cdc-coords-l) - 290px)
+        calc(
+          var(--lr-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--lr-ext-coords-l) -
+            290px
+        )
       )
       minmax(240px, 400px) !important;
-    margin-left: var(--cdc-coords-l);
+    margin-left: var(--lr-ext-coords-l);
   }
 
   body:is(.coords-in, .coords-out) .learn--run {
-    --cdc-coords-l: calc(0.6 * var(--cdc-coords-size, 13px) + 10px);
+    --lr-ext-coords-l: calc(0.6 * var(--lr-ext-coords-size, 13px) + 10px);
   }
 }
 
@@ -26,7 +29,7 @@
       minmax(var(---col3-uniboard-side-min, 250px), 350px)
       min(
         var(---col3-uniboard-width),
-        calc(var(--cdc-main-w, 100vw) - 2 * var(---main-margin, 0px) - 575px)
+        calc(var(--lr-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - 575px)
       )
       minmax(240px, 400px) !important;
   }
@@ -40,9 +43,9 @@
 /* The stage list: one card, categories as an accordion, each stage a row on a small tile. */
 .learn__side-map {
   padding: 8px !important;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 .learn__side-map .back {
@@ -68,8 +71,8 @@
   margin: 0 !important;
   padding: 5px !important;
   border-radius: 8px;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
 }
 
 .learn__side-map .back:hover {
@@ -90,7 +93,7 @@
   padding: 0 10px !important;
   border: none !important;
   border-radius: 9px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 15px !important;
   font-weight: 800 !important;
   line-height: 40px !important;
@@ -107,7 +110,7 @@
   width: 10px;
   height: 10px;
   border-radius: 3px;
-  background: linear-gradient(135deg, var(--cdc-practice), var(--cdc-practice-2));
+  background: linear-gradient(135deg, var(--lr-ext-practice), var(--lr-ext-practice-2));
 }
 
 .learn__side-map .categ > h2:hover {
@@ -133,7 +136,7 @@
   gap: 10px;
   padding: 5px 10px 5px 6px !important;
   border-radius: 9px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14.5px !important;
   font-weight: 700;
   opacity: 1 !important;
@@ -181,12 +184,12 @@
 }
 
 .learn__side-map .stage.done::before {
-  background: var(--cdc-btn-primary);
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
 }
 
 .learn__side-map .stage.active::before {
-  background: linear-gradient(145deg, var(--cdc-practice), var(--cdc-practice-2));
+  background: linear-gradient(145deg, var(--lr-ext-practice), var(--lr-ext-practice-2));
   box-shadow:
     inset 0 1px 0 #ffffff40,
     0 2px 6px #00000040;

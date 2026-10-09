@@ -21,20 +21,20 @@ const importState: ImportState = { busy: false, message: '', failed: false };
 
 function statusLine(): HTMLElement {
   const status = createElement('p', {
-    className: 'cdc-packs__status',
+    className: 'lr-ext-packs__status',
     text: importState.message,
     attrs: { 'aria-live': 'polite' },
   });
-  status.classList.toggle('cdc-packs__status--failed', importState.failed);
+  status.classList.toggle('lr-ext-packs__status--failed', importState.failed);
   return status;
 }
 
 function setStatus(text: string, failed: boolean): void {
   importState.message = text;
   importState.failed = failed;
-  for (const status of document.querySelectorAll('.cdc-packs__status')) {
+  for (const status of document.querySelectorAll('.lr-ext-packs__status')) {
     status.textContent = text;
-    status.classList.toggle('cdc-packs__status--failed', failed);
+    status.classList.toggle('lr-ext-packs__status--failed', failed);
   }
 }
 
@@ -66,9 +66,9 @@ async function importInto(link: HTMLInputElement, token: string, library: Librar
 // A text field masked by CSS, outside any <form>: a password field in a form
 // is what browsers offer to save as the site's password.
 function tokenField(): { readonly field: HTMLElement; readonly input: HTMLInputElement } {
-  const field = createElement('details', { className: 'cdc-packs__private' });
+  const field = createElement('details', { className: 'lr-ext-packs__private' });
   const input = createElement('input', {
-    className: 'cdc-packs__token',
+    className: 'lr-ext-packs__token',
     attrs: {
       type: 'text',
       autocomplete: 'off',
@@ -80,7 +80,7 @@ function tokenField(): { readonly field: HTMLElement; readonly input: HTMLInputE
   field.append(
     createElement('summary', { text: message('packsPrivate') }),
     input,
-    createElement('p', { className: 'cdc-packs__note', text: message('packsTokenNote') }),
+    createElement('p', { className: 'lr-ext-packs__note', text: message('packsTokenNote') }),
   );
   return { field, input };
 }
@@ -92,7 +92,7 @@ interface LinkRow {
 }
 
 function linkRow(): LinkRow {
-  const row = createElement('div', { className: 'cdc-packs__row' });
+  const row = createElement('div', { className: 'lr-ext-packs__row' });
   const link = createElement('input', {
     attrs: {
       type: 'url',
@@ -111,11 +111,11 @@ function linkRow(): LinkRow {
 
 /** The link to import, the token of a private repository, and what the import said. */
 export function importForm(library: Library): HTMLElement {
-  const form = createElement('div', { className: 'cdc-packs__import' });
+  const form = createElement('div', { className: 'lr-ext-packs__import' });
   const { row, link, button } = linkRow();
   const token = tokenField();
   const help = createElement('a', {
-    className: 'cdc-packs__help',
+    className: 'lr-ext-packs__help',
     text: message('packsHelp'),
     attrs: { href: HELP_URL, target: '_blank', rel: 'noopener' },
   });

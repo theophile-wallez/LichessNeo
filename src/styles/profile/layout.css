@@ -5,14 +5,14 @@
 
 :root {
   /* Icons for "member since" and "time spent", drawn on a 24x24 grid. */
-  --cdc-pf-calendar: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --cdc-pf-clock: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+  --lr-ext-pf-calendar: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --lr-ext-pf-clock: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
 }
 
 /* ---- Layout --- */
 
 @media (min-width: 1020px) {
-  html[data-cdc-has~='user-show'] #main-wrap {
+  html[data-lr-ext-has~='user-show'] #main-wrap {
     ---main-max-width: 1300px !important;
   }
 
@@ -83,9 +83,9 @@
 /* The box is only a wrapper, each block is its own card. It holds the hero's
  * sizes, shared by the header and the social bar. */
 .page-menu__content.box.user-show {
-  --cdc-pf-avatar: 96px;
-  --cdc-pf-pad: 24px;
-  --cdc-pf-gap: 20px;
+  --lr-ext-pf-avatar: 96px;
+  --lr-ext-pf-pad: 24px;
+  --lr-ext-pf-gap: 20px;
 
   min-height: 0 !important;
   padding: 0 !important;

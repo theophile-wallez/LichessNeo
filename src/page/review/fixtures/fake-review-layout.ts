@@ -15,17 +15,17 @@ const METRICS: readonly Metric[] = [
 ];
 
 const SIZES: readonly (readonly [string, Partial<Record<Metric, number>>])[] = [
-  ['.cdc-review__graph, #cdc-review-graph', { clientWidth: 316, clientHeight: 96 }],
-  ['.cdc-bubble__sub', { clientHeight: 36 }],
-  ['#cdc-tip', { offsetWidth: 120, offsetHeight: 30 }],
-  ['.cdc-graph-tip', { offsetWidth: 40 }],
+  ['.lr-ext-review__graph, #lr-ext-review-graph', { clientWidth: 316, clientHeight: 96 }],
+  ['.lr-ext-bubble__sub', { clientHeight: 36 }],
+  ['#lr-ext-tip', { offsetWidth: 120, offsetHeight: 30 }],
+  ['.lr-ext-graph-tip', { offsetWidth: 40 }],
   ['.analyse__moves', { clientHeight: 300 }],
   ['move', { offsetHeight: 20 }],
 ];
 
 function measure(element: HTMLElement, metric: Metric): number {
-  if (metric === 'scrollHeight' && element.matches('.cdc-bubble__sub'))
-    return element.querySelectorAll('.cdc-w').length * 2;
+  if (metric === 'scrollHeight' && element.matches('.lr-ext-bubble__sub'))
+    return element.querySelectorAll('.lr-ext-w').length * 2;
   const size = SIZES.find(([selector]) => element.matches(selector))?.[1];
   return size?.[metric] ?? 0;
 }

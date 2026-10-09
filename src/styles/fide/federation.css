@@ -38,8 +38,8 @@
   margin: 6px 0 0;
   padding: 3px 12px 3px 8px;
   border-radius: 999px;
-  background: var(--cdc-bg-raised);
-  color: var(--cdc-text);
+  background: var(--lr-ext-bg-raised);
+  color: var(--lr-ext-text);
   font-size: 13px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -64,25 +64,25 @@
 }
 
 .fide-federation__card {
-  --cdc-fc: #2dd4bf;
-  --cdc-fc-2: var(--cdc-cyan-deep);
+  --lr-ext-fc: #2dd4bf;
+  --lr-ext-fc-2: var(--lr-ext-cyan-deep);
   gap: 18px !important;
   padding: 20px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
 }
 
 .fide-federation__card:nth-child(2) {
-  --cdc-fc: var(--cdc-accent);
-  --cdc-fc-2: var(--cdc-accent-dim);
+  --lr-ext-fc: var(--lr-ext-accent);
+  --lr-ext-fc-2: var(--lr-ext-accent-dim);
 }
 
 .fide-federation__card:nth-child(3) {
-  --cdc-fc: var(--cdc-yellow-dark);
-  --cdc-fc-2: var(--cdc-orange-darker);
+  --lr-ext-fc: var(--lr-ext-yellow-dark);
+  --lr-ext-fc-2: var(--lr-ext-orange-darker);
 }
 
 .fide-federation__card em {
@@ -91,7 +91,7 @@
   gap: 14px;
   min-height: 44px;
   color: #fff !important;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 19px;
   font-style: normal;
   font-weight: 800 !important;
@@ -109,7 +109,7 @@
   height: 44px;
   margin: 0 !important;
   border-radius: 12px;
-  background: linear-gradient(145deg, var(--cdc-fc), var(--cdc-fc-2));
+  background: linear-gradient(145deg, var(--lr-ext-fc), var(--lr-ext-fc-2));
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
@@ -134,7 +134,7 @@
   gap: 2px;
   min-width: 0;
   margin: 0 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px !important;
   font-weight: 700;
   line-height: 1.3;
@@ -150,7 +150,7 @@
 
 .fide-federation__card p:first-child strong::before {
   content: '#';
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-weight: 700;
 }
 
@@ -166,8 +166,8 @@
   display: inline-block;
   padding: 8px 18px;
   border-radius: 8px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
   color: #fff !important;
   font-weight: 700;
 }

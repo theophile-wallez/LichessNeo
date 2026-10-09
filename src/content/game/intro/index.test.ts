@@ -54,7 +54,7 @@ afterEach(() => {
 });
 
 const main = (): HTMLElement | null => queryOne(document, 'main.round', HTMLElement);
-const intro = (): Element | null => document.querySelector('main.round > .cdc-intro');
+const intro = (): Element | null => document.querySelector('main.round > .lr-ext-intro');
 
 describe('the game intro', () => {
   it('drops once its images are decoded, faces the players, and leaves on time', async () => {
@@ -65,25 +65,25 @@ describe('the game intro', () => {
     await flush();
     vi.useFakeTimers();
     syncIntro();
-    expect(intro()?.querySelector('.cdc-intro__card--top .cdc-intro__username')?.textContent).toBe(
-      'alice',
-    );
     expect(
-      intro()?.querySelector('.cdc-intro__card--bottom .cdc-intro__username')?.textContent,
+      intro()?.querySelector('.lr-ext-intro__card--top .lr-ext-intro__username')?.textContent,
+    ).toBe('alice');
+    expect(
+      intro()?.querySelector('.lr-ext-intro__card--bottom .lr-ext-intro__username')?.textContent,
     ).toBe('Anonymous');
-    expect(main()?.dataset.cdcIntro).toBe('');
-    expect(main()?.style.getPropertyValue('--cdc-intro-board')).toMatch(
+    expect(main()?.dataset.lrExtIntro).toBe('');
+    expect(main()?.style.getPropertyValue('--lr-ext-intro-board')).toMatch(
       /^url\("data:image\/svg\+xml,%3Csvg%20/,
     );
-    expect(main()?.style.getPropertyValue('--cdc-intro-swords')).toBe(
+    expect(main()?.style.getPropertyValue('--lr-ext-intro-swords')).toBe(
       "url('chrome-extension://id/img/hugeicons/swords--ffc689.svg')",
     );
     expect(sessionStorage.getItem(SessionKey.gameIntro(GAME_ID))).toBe('1');
     vi.advanceTimersByTime(INTRO_MS);
     expect(intro()).toBeNull();
-    expect(main()?.dataset.cdcIntro).toBeUndefined();
-    expect(main()?.style.getPropertyValue('--cdc-intro-board')).toBe('');
-    expect(main()?.style.getPropertyValue('--cdc-intro-swords')).toBe('');
+    expect(main()?.dataset.lrExtIntro).toBeUndefined();
+    expect(main()?.style.getPropertyValue('--lr-ext-intro-board')).toBe('');
+    expect(main()?.style.getPropertyValue('--lr-ext-intro-swords')).toBe('');
     // Once only.
     syncIntro();
     expect(intro()).toBeNull();

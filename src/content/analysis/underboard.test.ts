@@ -15,7 +15,8 @@ const EMPTY = `<main class="analyse">${TOOLS}${CONTROLS}<div class="analyse__und
 const RETRO_BOX = '<div class="retro-box training-box sub-box"></div>';
 
 const root = document.documentElement;
-const buttons = (): HTMLButtonElement[] => queryAll(document, '.cdc-underboard', HTMLButtonElement);
+const buttons = (): HTMLButtonElement[] =>
+  queryAll(document, '.lr-ext-underboard', HTMLButtonElement);
 
 // A fresh module per test: it remembers whether "Learn from your mistakes" showed.
 let syncUnderboard: () => void;
@@ -28,7 +29,7 @@ beforeEach(async () => {
 afterEach(() => {
   document.body.innerHTML = '';
   root.classList.toggle(OPEN, false);
-  delete root.dataset.cdcToolsLabel;
+  delete root.dataset.lrExtToolsLabel;
 });
 
 describe('the underboard button', () => {
@@ -90,10 +91,10 @@ describe('the underboard button', () => {
     document.body.innerHTML = GAME;
     syncUnderboard();
     expect(buttons()[0]?.getAttribute('aria-label')).toBe('Tools');
-    root.dataset.cdcToolsLabel = 'Outils';
+    root.dataset.lrExtToolsLabel = 'Outils';
     syncUnderboard();
     expect(buttons()[0]?.getAttribute('aria-label')).toBe('Outils');
-    expect(buttons()[0]?.dataset.cdcTip).toBe('Outils');
+    expect(buttons()[0]?.dataset.lrExtTip).toBe('Outils');
   });
 
   it('comes back when Lichess redraws the controls', () => {

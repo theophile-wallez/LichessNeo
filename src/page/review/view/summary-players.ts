@@ -59,24 +59,24 @@ function playerCard({ review, players, winner, language }: PlayersInput, color: 
   const [lead, tail] = ui.playedLike(color, elo ?? null);
   const best = ahead(review) === color;
   // The trophy sits at the card's right, beside the accuracy, clear of a long name.
-  const trophy = winner === color ? html`<span class="cdc-sum-player__trophy"></span>` : '';
-  return html`<div class="cdc-sum-player cdc-side-${side}${best ? ' cdc-sum-player--ahead' : ''}" data-cdc-side="${color}">
-      <span class="cdc-avatar cdc-avatar--${side}"${avatarAttributes(players[color]?.user?.username)}></span>
-      <span class="cdc-sum-player__name"><span>${name}</span></span>${trophy}
-      <span class="cdc-sum-player__acc"><span class="cdc-acc cdc-acc--${side}">${accuracy === null || accuracy === undefined ? NBSP : accuracy.toFixed(1)}</span><small>${ui.accuracy}</small></span>
-      <span class="cdc-sum-player__elo">${lead} <span class="cdc-sum-player__rating"><b>${elo ?? '—'}</b> ${tail}</span></span>
+  const trophy = winner === color ? html`<span class="lr-ext-sum-player__trophy"></span>` : '';
+  return html`<div class="lr-ext-sum-player lr-ext-side-${side}${best ? ' lr-ext-sum-player--ahead' : ''}" data-lr-ext-side="${color}">
+      <span class="lr-ext-avatar lr-ext-avatar--${side}"${avatarAttributes(players[color]?.user?.username)}></span>
+      <span class="lr-ext-sum-player__name"><span>${name}</span></span>${trophy}
+      <span class="lr-ext-sum-player__acc"><span class="lr-ext-acc lr-ext-acc--${side}">${accuracy === null || accuracy === undefined ? NBSP : accuracy.toFixed(1)}</span><small>${ui.accuracy}</small></span>
+      <span class="lr-ext-sum-player__elo">${lead} <span class="lr-ext-sum-player__rating"><b>${elo ?? '—'}</b> ${tail}</span></span>
     </div>`;
 }
 
 export const playersMarkup = (input: PlayersInput): SafeHtml =>
-  html`<div class="cdc-sum-players">${input.order.map(color => playerCard(input, color))}</div>`;
+  html`<div class="lr-ext-sum-players">${input.order.map(color => playerCard(input, color))}</div>`;
 
-/** Pointing at a player dims the other side: `data-cdc-focus` on the panel. */
+/** Pointing at a player dims the other side: `data-lr-ext-focus` on the panel. */
 export function watchPlayerFocus(panel: HTMLElement): void {
-  for (const card of queryAll(panel, '.cdc-sum-player', HTMLElement)) {
+  for (const card of queryAll(panel, '.lr-ext-sum-player', HTMLElement)) {
     card.addEventListener('pointerenter', () =>
-      setData(panel, 'cdcFocus', card.dataset.cdcSide ?? null),
+      setData(panel, 'lrExtFocus', card.dataset.lrExtSide ?? null),
     );
-    card.addEventListener('pointerleave', () => setData(panel, 'cdcFocus', null));
+    card.addEventListener('pointerleave', () => setData(panel, 'lrExtFocus', null));
   }
 }

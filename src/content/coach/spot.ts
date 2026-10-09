@@ -63,7 +63,7 @@ export class MascotSpot {
 
   async #mount(holder: HTMLElement): Promise<void> {
     const box = createElement('div', {
-      className: `cdc-mascot ${this.#options.className}`,
+      className: `lr-ext-mascot ${this.#options.className}`,
       attrs: { 'aria-hidden': 'true' },
     });
     holder.append(box);

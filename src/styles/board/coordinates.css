@@ -62,15 +62,15 @@ coords {
  * shows, so they jumped in and out between moves. Layouts leave room for both classes. */
 @media (min-width: 1020px) {
   body:is(.coords-in, .coords-out) {
-    --cdc-coords-size: clamp(13px, 1.7vh, 16px);
+    --lr-ext-coords-size: clamp(13px, 1.7vh, 16px);
   }
 
   body:is(.coords-in, .coords-out) coords {
-    font-size: var(--cdc-coords-size) !important;
+    font-size: var(--lr-ext-coords-size) !important;
   }
 
   body:is(.coords-in, .coords-out) .is2d coords coord {
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
   }
 
   body:is(.coords-in, .coords-out) coords.ranks {
@@ -120,7 +120,7 @@ coords {
 
 .eval-gauge {
   box-sizing: border-box;
-  width: var(--cdc-gauge-w, 15px) !important;
+  width: var(--lr-ext-gauge-w, 15px) !important;
   overflow: hidden;
   border-radius: 3px !important;
   background: linear-gradient(
@@ -145,24 +145,27 @@ coords {
 }
 
 .eval-gauge::after {
-  content: attr(data-cdc-eval) !important;
+  content: attr(data-lr-ext-eval) !important;
   inset: auto 0 !important;
   bottom: 5px !important;
   box-shadow: none !important;
   border-radius: 0 !important;
   color: #403d39;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
   font-size: 10px;
   font-weight: 700;
   line-height: 1;
   text-align: center;
 }
 
-.eval-gauge:is([data-cdc-lead='black']:not(.reverse), [data-cdc-lead='white'].reverse)::after {
+.eval-gauge:is(
+    [data-lr-ext-lead='black']:not(.reverse),
+    [data-lr-ext-lead='white'].reverse
+  )::after {
   top: 5px !important;
   bottom: auto !important;
 }
 
-.eval-gauge[data-cdc-lead='black']::after {
+.eval-gauge[data-lr-ext-lead='black']::after {
   color: #fff;
 }

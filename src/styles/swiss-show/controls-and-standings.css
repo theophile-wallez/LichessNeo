@@ -3,8 +3,8 @@
 main.swiss .swiss__controls {
   gap: 8px;
   padding: 8px 12px !important;
-  border-block: 1px solid var(--cdc-card-border) !important;
-  background: var(--cdc-bg-panel-dark) !important;
+  border-block: 1px solid var(--lr-ext-card-border) !important;
+  background: var(--lr-ext-bg-panel-dark) !important;
   box-shadow: none !important;
 }
 
@@ -20,14 +20,14 @@ main.swiss .swiss__controls .pager .fbt {
   height: 32px;
   padding: 0 8px !important;
   border-radius: 6px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   transition:
     background-color 0.15s,
     color 0.15s !important;
 }
 
 main.swiss .swiss__controls .pager .fbt:hover:not(:disabled, .disabled) {
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   color: #fff !important;
 }
 
@@ -37,7 +37,7 @@ main.swiss .swiss__controls .pager .fbt:disabled {
 
 main.swiss .swiss__controls .pager .page {
   margin: 0 6px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -47,7 +47,7 @@ main.swiss .swiss__controls .pager input {
   height: 32px !important;
   padding: 0 12px;
   border-radius: 6px;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   color: #fff;
   font-size: 14px;
 }
@@ -60,27 +60,27 @@ main.swiss .swiss__controls > .fbt {
   height: 36px;
   padding: 0 16px !important;
   border-radius: 6px;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
   color: #fff !important;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
   font-size: 14px;
   font-weight: 800;
   text-transform: none !important;
 }
 
 main.swiss .swiss__controls > .fbt:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
 }
 
 main.swiss .swiss__controls > .fbt.highlight {
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   text-shadow: 0 1px 0 #0000004d;
 }
 
 main.swiss .swiss__controls > .fbt.highlight:hover {
-  background: var(--cdc-btn-primary-hover) !important;
+  background: var(--lr-ext-btn-primary-hover) !important;
 }
 
 main.swiss .swiss__controls > .fbt::before {
@@ -94,55 +94,55 @@ main.swiss .swiss__controls > .fbt::before {
  * number of squares (one per round, played or not), not Lichess's .long / .xlong,
  * which count rounds played. Past 20 they wrap, so the size stays fixed. */
 main.swiss .swiss__standing {
-  --cdc-cell: 24px;
-  --cdc-cell-min: 15px;
-  --cdc-cell-gap: 3px;
-  --cdc-cell-font: 11px;
+  --lr-ext-cell: 24px;
+  --lr-ext-cell-min: 15px;
+  --lr-ext-cell-gap: 3px;
+  --lr-ext-cell-font: 11px;
   border: none !important;
 }
 
 main.swiss .swiss__standing:has(.pairings div > :nth-child(11)) {
-  --cdc-cell: 20px;
-  --cdc-cell-min: 11px;
-  --cdc-cell-gap: 2px;
-  --cdc-cell-font: 10px;
+  --lr-ext-cell: 20px;
+  --lr-ext-cell-min: 11px;
+  --lr-ext-cell-gap: 2px;
+  --lr-ext-cell-font: 10px;
 }
 
 main.swiss .swiss__standing:has(.pairings div > :nth-child(17)) {
-  --cdc-cell-min: 9px;
-  --cdc-cell-gap: 1px;
-  --cdc-cell-font: 8px;
+  --lr-ext-cell-min: 9px;
+  --lr-ext-cell-gap: 1px;
+  --lr-ext-cell-font: 8px;
 }
 
 main.swiss .swiss__standing:has(.pairings div > :nth-child(21)) {
-  --cdc-cell: 13px;
-  --cdc-cell-min: 13px;
-  --cdc-cell-gap: 2px;
-  --cdc-cell-font: 10px;
+  --lr-ext-cell: 13px;
+  --lr-ext-cell-min: 13px;
+  --lr-ext-cell-gap: 2px;
+  --lr-ext-cell-font: 10px;
 }
 
 main.swiss .swiss__standing tbody tr,
 main.swiss .swiss__standing tbody tr:nth-child(2n) {
   background: transparent !important;
-  box-shadow: inset 0 -1px 0 var(--cdc-card-border);
+  box-shadow: inset 0 -1px 0 var(--lr-ext-card-border);
 }
 
 main.swiss .swiss__standing:not(.created, .loading) tbody tr:hover {
-  background: var(--cdc-card-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
 }
 
 /* Me: an accent bar at the start. The player whose card is open: raised. */
 main.swiss .swiss__standing tr.me td:first-child {
   background: none !important;
-  box-shadow: inset 4px 0 0 var(--cdc-accent);
+  box-shadow: inset 4px 0 0 var(--lr-ext-accent);
 }
 
 html[dir='rtl'] main.swiss .swiss__standing tr.me td:first-child {
-  box-shadow: inset -4px 0 0 var(--cdc-accent);
+  box-shadow: inset -4px 0 0 var(--lr-ext-accent);
 }
 
 main.swiss .swiss__standing tbody tr.active {
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
 }
 
 main.swiss .swiss__standing tr.active td:last-child {
@@ -157,8 +157,8 @@ main.swiss .swiss__standing td {
 main.swiss .swiss__standing td.rank {
   min-width: 20px;
   padding-inline: 12px 6px !important;
-  color: var(--cdc-text-dim);
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim);
+  font-family: var(--lr-ext-font) !important;
   font-size: 14px;
   font-weight: 800;
   text-align: center;
@@ -168,25 +168,25 @@ main.swiss .swiss__standing td.rank {
  * that, the order is only the seeding. */
 main.swiss
   .swiss__standing:not(.created):has(.pairings :is(.win, .loss, .draw))
-  td.rank[data-cdc-medal='1'] {
-  color: var(--cdc-orange-dark);
+  td.rank[data-lr-ext-medal='1'] {
+  color: var(--lr-ext-orange-dark);
 }
 
 main.swiss
   .swiss__standing:not(.created):has(.pairings :is(.win, .loss, .draw))
-  td.rank[data-cdc-medal='2'] {
-  color: var(--cdc-grey-200);
+  td.rank[data-lr-ext-medal='2'] {
+  color: var(--lr-ext-grey-200);
 }
 
 main.swiss
   .swiss__standing:not(.created):has(.pairings :is(.win, .loss, .draw))
-  td.rank[data-cdc-medal='3'] {
-  color: var(--cdc-orange-dark);
+  td.rank[data-lr-ext-medal='3'] {
+  color: var(--lr-ext-orange-dark);
 }
 
 main.swiss .swiss__standing td.rank icon {
   opacity: 1 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px !important;
 }
 
@@ -213,7 +213,7 @@ main.swiss .swiss__standing .player .rating {
   display: block;
   margin-top: 1px;
   padding: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12px !important;
   font-style: normal !important;
   font-weight: 600;
@@ -222,7 +222,7 @@ main.swiss .swiss__standing .player .rating {
 /* One square per round: green won, red lost, grey drawn, outlined in the accent while playing.
  * Byes, late joins and absences plain; future rounds empty. */
 main.swiss .swiss__standing .pairings div {
-  gap: var(--cdc-cell-gap);
+  gap: var(--lr-ext-cell-gap);
   align-items: center !important;
   min-height: 0 !important;
   padding-inline: 6px 4px;
@@ -230,15 +230,15 @@ main.swiss .swiss__standing .pairings div {
 
 /* Squares grow to full size when there's room, and wrap only at their smallest. */
 main.swiss .swiss__standing .pairings div > * {
-  flex: 1 1 var(--cdc-cell-min) !important;
-  max-width: var(--cdc-cell);
+  flex: 1 1 var(--lr-ext-cell-min) !important;
+  max-width: var(--lr-ext-cell);
   aspect-ratio: 1;
   border: none !important;
   border-radius: 4px;
   background: #ffffff0a;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font);
-  font-size: var(--cdc-cell-font);
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font);
+  font-size: var(--lr-ext-cell-font);
   font-weight: 800;
   line-height: 1;
   transition:
@@ -268,29 +268,29 @@ main.swiss .swiss__standing .pairings div > * {
 
 /* Dark on the bright green: white is hard to read there. */
 main.swiss .swiss__standing .pairings .win {
-  background: var(--cdc-good) !important;
-  color: var(--cdc-grey-900) !important;
+  background: var(--lr-ext-good) !important;
+  color: var(--lr-ext-grey-900) !important;
 }
 
 main.swiss .swiss__standing .pairings .loss {
-  background: var(--cdc-red-dark) !important;
+  background: var(--lr-ext-red-dark) !important;
   color: #fff !important;
 }
 
 main.swiss .swiss__standing .pairings .draw {
-  background: var(--cdc-grey-400) !important;
+  background: var(--lr-ext-grey-400) !important;
   color: #fff !important;
 }
 
 main.swiss .swiss__standing .pairings .ongoing {
   background: transparent !important;
-  box-shadow: inset 0 0 0 2px var(--cdc-accent);
-  color: var(--cdc-accent) !important;
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+  color: var(--lr-ext-accent) !important;
 }
 
 main.swiss .swiss__standing .pairings :is(bye, late) {
-  background: var(--cdc-bg-raised);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-bg-raised);
+  color: var(--lr-ext-text) !important;
 }
 
 main.swiss .swiss__standing .pairings a:hover {
@@ -300,7 +300,7 @@ main.swiss .swiss__standing .pairings a:hover {
 main.swiss .swiss__standing td.points {
   padding-inline: 8px !important;
   color: #fff;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 15px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -308,8 +308,8 @@ main.swiss .swiss__standing td.points {
 
 main.swiss .swiss__standing td.tieBreak {
   padding-inline: 6px 14px !important;
-  color: var(--cdc-text-dim);
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim);
+  font-family: var(--lr-ext-font) !important;
   font-size: 13px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;

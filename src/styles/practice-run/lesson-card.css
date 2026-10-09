@@ -5,15 +5,15 @@
     grid-area: side !important;
     min-height: 0;
     overflow: hidden !important;
-    border: 1px solid var(--cdc-card-border) !important;
+    border: 1px solid var(--lr-ext-card-border) !important;
     border-radius: 12px !important;
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
   .practice__side__chapters {
     /* Number the steps: Lichess's grey checkmark on every chapter reads as "done". */
-    counter-reset: cdc-step;
+    counter-reset: lr-ext-step;
     min-height: 0;
     padding: 8px !important;
     /* Snap to a step, not mid-title. */
@@ -22,14 +22,14 @@
   }
 
   .ps__chapter {
-    counter-increment: cdc-step;
+    counter-increment: lr-ext-step;
     scroll-snap-align: start;
     gap: 10px;
     align-items: center !important;
     padding: 6px 10px 6px 6px !important;
     border: none !important;
     border-radius: 9px;
-    color: var(--cdc-text) !important;
+    color: var(--lr-ext-text) !important;
     transition:
       background-color 0.15s,
       box-shadow 0.15s !important;
@@ -47,7 +47,7 @@
     height: 26px;
     border-radius: 50%;
     background: #ffffff12;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px !important;
     font-weight: 800;
     transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
@@ -57,9 +57,9 @@
    * (theme/hugeicons): a step's number takes its place, unmasked, and the done step's check
    * gets a whole 1em box, which the narrower glyph's would crop. */
   .ps__chapter .status:not(.done)::before {
-    content: counter(cdc-step);
+    content: counter(lr-ext-step);
     background: none;
-    font-family: var(--cdc-font);
+    font-family: var(--lr-ext-font);
     mask: none;
     -webkit-text-fill-color: currentColor;
   }
@@ -93,22 +93,22 @@
   }
 
   .ps__chapter.active .status {
-    background: var(--cdc-btn-primary) !important;
-    box-shadow: var(--cdc-btn-primary-shadow);
+    background: var(--lr-ext-btn-primary) !important;
+    box-shadow: var(--lr-ext-btn-primary-shadow);
     color: #fff !important;
   }
 
   .ps__chapter .status.done {
-    background: color-mix(in srgb, var(--cdc-good) 20%, transparent);
-    color: var(--cdc-good-hover) !important;
+    background: color-mix(in srgb, var(--lr-ext-good) 20%, transparent);
+    color: var(--lr-ext-good-hover) !important;
   }
 
   /* Footer: back to the practice list, and the lesson picker. */
   .practice__side .finally {
     gap: 8px;
     padding: 10px !important;
-    border-top: 1px solid var(--cdc-card-border);
-    background: var(--cdc-bg-panel-dark) !important;
+    border-top: 1px solid var(--lr-ext-card-border);
+    background: var(--lr-ext-bg-panel-dark) !important;
     font-size: 14px !important;
   }
 
@@ -120,14 +120,14 @@
     height: 34px;
     margin: 0 !important;
     border-radius: 8px;
-    background: var(--cdc-btn-grey);
-    box-shadow: var(--cdc-btn-grey-shadow);
-    color: var(--cdc-text) !important;
+    background: var(--lr-ext-btn-grey);
+    box-shadow: var(--lr-ext-btn-grey-shadow);
+    color: var(--lr-ext-text) !important;
     font-size: 15px !important;
   }
 
   .practice__side .finally .back:hover {
-    background: var(--cdc-btn-grey-hover);
+    background: var(--lr-ext-btn-grey-hover);
     color: #fff !important;
   }
 

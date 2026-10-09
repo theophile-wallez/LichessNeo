@@ -26,14 +26,14 @@ export async function noteFleeting(page: Page): Promise<void> {
       new MutationObserver(() => {
         // Read here: the script runs before the page has an <html>.
         const root = document.documentElement;
-        const intro = document.querySelector('main.round > .cdc-intro');
+        const intro = document.querySelector('main.round > .lr-ext-intro');
         if (intro && !('testIntro' in root.dataset)) {
           const board = document.querySelector('main.round .round__app__board cg-board');
-          const swords = intro.querySelector('.cdc-intro__swords');
-          const cards = [...intro.querySelectorAll('.cdc-intro__card')];
+          const swords = intro.querySelector('.lr-ext-intro__swords');
+          const cards = [...intro.querySelectorAll('.lr-ext-intro__card')];
           root.dataset.testIntro = JSON.stringify({
             usernames: cards.map(
-              card => card.querySelector('.cdc-intro__username')?.textContent ?? '',
+              card => card.querySelector('.lr-ext-intro__username')?.textContent ?? '',
             ),
             widths: cards.map(card => card.getBoundingClientRect().width),
             board: board ? getComputedStyle(board, '::after').backgroundImage : '',
@@ -41,7 +41,7 @@ export async function noteFleeting(page: Page): Promise<void> {
             overflow: board ? getComputedStyle(board).overflow : '',
           });
         }
-        if (document.querySelector('.cdc-confetti__piece')) root.dataset.testConfetti = '';
+        if (document.querySelector('.lr-ext-confetti__piece')) root.dataset.testConfetti = '';
       }).observe(document.body, { childList: true, subtree: true }),
     );
   });

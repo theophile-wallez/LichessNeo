@@ -32,9 +32,9 @@
   gap: 8px;
   margin: 0 !important;
   padding: 20px;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
   line-height: normal !important;
 }
 
@@ -44,7 +44,7 @@
   border: 1px solid #ffffff14;
   border-radius: 999px !important;
   background: #ffffff0a !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
   transition:
@@ -54,8 +54,8 @@
 }
 
 .study-topics .topic-list a:hover {
-  border-color: color-mix(in srgb, var(--cdc-accent) 50%, transparent);
-  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
   color: #fff !important;
 }
 
@@ -71,13 +71,13 @@
    Each heading and its list form one card, and a column never breaks between them. */
 
 /* Lichess's overflow: hidden would make the box the title's scroller: it would never stick. */
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .page-menu__content.box {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .page-menu__content.box {
   overflow: visible !important;
   padding: 0 !important;
   background: transparent !important;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top {
   display: flex;
   justify-content: flex-start !important;
   align-items: center;
@@ -86,59 +86,59 @@ main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top {
   padding: 16px 0 12px !important;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body {
   columns: 2 340px;
   column-gap: 16px;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > p {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > p {
   column-span: all;
   margin: 0 0 20px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 15px;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > h2 {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > h2 {
   margin: 0 !important;
   padding: 14px 16px 12px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-bottom-color: #ffffff0f;
   border-radius: 10px 10px 0 0;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
   color: #fff !important;
   font-size: 17px !important;
   font-weight: 800 !important;
   break-after: avoid;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > h2 strong {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > h2 strong {
   font-weight: inherit;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul {
   margin: 0 0 16px !important;
   padding: 6px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-top: none;
   border-radius: 0 0 10px 10px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
   list-style: none;
   break-before: avoid;
   break-inside: avoid;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul li {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul li {
   margin: 0 !important;
 }
 
 /* Each row: Lichess's study icon, then the title. */
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul a {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
   border-radius: 6px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
@@ -147,7 +147,7 @@ main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul a {
     color 0.1s !important;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul a::before {
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a::before {
   content: '\e012';
   flex: none;
   display: flex;
@@ -156,58 +156,58 @@ main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul a::before {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
-  color: var(--cdc-accent);
+  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
+  color: var(--lr-ext-accent);
   font-family: lichess;
   font-size: 15px;
   font-weight: 400;
 }
 
-main.page-menu[data-cdc-nav-active$='/staff-picks'] .body > ul a:hover {
-  background: var(--cdc-menu-hover);
+main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a:hover {
+  background: var(--lr-ext-menu-hover);
   color: #fff !important;
 }
 
 /* Only the picks scroll: the menu and title stay put, as on the study lists. */
 @media (min-width: 1020px) {
-  main.page-menu[data-cdc-nav-active$='/staff-picks'] > .subnav {
+  main.page-menu[data-lr-ext-nav-active$='/staff-picks'] > .subnav {
     position: sticky;
     top: 16px;
     align-self: start;
   }
 
-  main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top {
+  main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 3;
     top: 0;
     margin-inline: calc(-1 * min(12px, 1vw)) !important;
     padding-inline: min(12px, 1vw) !important;
-    background: var(--cdc-bg-page);
-    box-shadow: var(--cdc-pin-cover);
+    background: var(--lr-ext-bg-page);
+    box-shadow: var(--lr-ext-pin-cover);
   }
 
-  main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top::after {
+  main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top::after {
     content: '';
     position: absolute;
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
   }
 
   @container scroll-state(stuck: top) {
-    main.page-menu[data-cdc-nav-active$='/staff-picks'] h1.box__top::after {
+    main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top::after {
       opacity: 1;
     }
   }
 }
 
 @media (max-width: 799.98px) {
-  main.page-menu[data-cdc-nav-active$='/staff-picks'] .page-menu__content.box {
+  main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .page-menu__content.box {
     padding: 0 12px 24px !important;
   }
 }

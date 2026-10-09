@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fetchCards, keepLastPool, keptCards } from './store.ts';
 
-const KEY = 'cdc-speed-cards';
+const KEY = 'lr-ext-speed-cards';
 const HOUR = 60 * 60 * 1000;
 
 const card = { speed: 'blitz', games: 25, rating: 1584, provisional: true, history: [1500] };

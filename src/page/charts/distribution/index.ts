@@ -17,7 +17,7 @@ function boot(initData: string | null): void {
   const host = queryOne(document, '#rating_distribution', HTMLElement);
   if (!host) return;
   const data = parseJson(initData, DistributionSchema);
-  if (!data || host.querySelector('.cdc-dist')) return;
+  if (!data || host.querySelector('.lr-ext-dist')) return;
   mountDistribution(host, data);
 }
 

@@ -1,22 +1,22 @@
 /* ---- Titles of the pages with a side menu --- */
 
 /* A page's title starts with its open link's tile (AGENTS.md, "One picture per page"): each
- * link's variables also go on the <main> it's open on (`data-cdc-nav-active`), and its
- * Hugeicon there as a file in its color (`--cdc-title-icon`), as a tile can't hold a mask.
+ * link's variables also go on the <main> it's open on (`data-lr-ext-nav-active`), and its
+ * Hugeicon there as a file in its color (`--lr-ext-title-icon`), as a tile can't hold a mask.
  * Not a user's blog, whose title starts with its author; the puzzle dashboard lays its own
  * out (dashboard/header-tiles.css). */
 
 main.page-menu:is(
-    [data-cdc-menu~='bots'],
-    [data-cdc-menu~='broadcast'],
-    [data-cdc-menu~='puzzles'],
-    [data-cdc-menu~='account'],
-    [data-cdc-menu~='about'],
-    [data-cdc-menu~='streamers'],
-    [data-cdc-menu~='studies'],
-    [data-cdc-menu~='teams'],
-    [data-cdc-menu~='blog'],
-    [data-cdc-menu~='arena-history']
+    [data-lr-ext-menu~='bots'],
+    [data-lr-ext-menu~='broadcast'],
+    [data-lr-ext-menu~='puzzles'],
+    [data-lr-ext-menu~='account'],
+    [data-lr-ext-menu~='about'],
+    [data-lr-ext-menu~='streamers'],
+    [data-lr-ext-menu~='studies'],
+    [data-lr-ext-menu~='teams'],
+    [data-lr-ext-menu~='blog'],
+    [data-lr-ext-menu~='arena-history']
   )
   .page-menu__content
   :is(h1.box__top, .box__top > h1, .community__leaders > h2):not(
@@ -30,16 +30,16 @@ main.page-menu:is(
 }
 
 main.page-menu:is(
-    [data-cdc-menu~='bots'],
-    [data-cdc-menu~='broadcast'],
-    [data-cdc-menu~='puzzles'],
-    [data-cdc-menu~='account'],
-    [data-cdc-menu~='about'],
-    [data-cdc-menu~='streamers'],
-    [data-cdc-menu~='studies'],
-    [data-cdc-menu~='teams'],
-    [data-cdc-menu~='blog'],
-    [data-cdc-menu~='arena-history']
+    [data-lr-ext-menu~='bots'],
+    [data-lr-ext-menu~='broadcast'],
+    [data-lr-ext-menu~='puzzles'],
+    [data-lr-ext-menu~='account'],
+    [data-lr-ext-menu~='about'],
+    [data-lr-ext-menu~='streamers'],
+    [data-lr-ext-menu~='studies'],
+    [data-lr-ext-menu~='teams'],
+    [data-lr-ext-menu~='blog'],
+    [data-lr-ext-menu~='arena-history']
   )
   .page-menu__content
   :is(h1.box__top, .box__top > h1, .community__leaders > h2):not(
@@ -56,16 +56,16 @@ main.page-menu:is(
   margin: 0 !important;
   border-radius: 13px;
   background:
-    var(--cdc-title-icon, none) center / 30px 30px no-repeat,
-    color-mix(in srgb, var(--cdc-nav-color, #fff) 24%, transparent);
+    var(--lr-ext-title-icon, none) center / 30px 30px no-repeat,
+    color-mix(in srgb, var(--lr-ext-nav-color, #fff) 24%, transparent);
   box-shadow:
     inset 0 1px #ffffff26,
-    0 0 0 1px color-mix(in srgb, var(--cdc-nav-color, #fff) 40%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-nav-color, #fff) 40%, transparent);
   opacity: 1 !important;
 }
 
 /* Webmasters' later boxes have titles of their own, not the page's: no tile. */
-main.page-menu[data-cdc-menu~='about']
+main.page-menu[data-lr-ext-menu~='about']
   .page-menu__content
   > section.box:not(:first-child)
   h1.box__top::before {

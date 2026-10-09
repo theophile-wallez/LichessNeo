@@ -43,7 +43,7 @@ function setUp(serverAnalysis: boolean) {
 function learnButton(serverAnalysis: boolean): HTMLButtonElement | null {
   const { facade, session } = setUp(serverAnalysis);
   renderSummary(session, facade);
-  return session.elements.panel.querySelector('.cdc-review__learn');
+  return session.elements.panel.querySelector('.lr-ext-review__learn');
 }
 
 afterEach(() => {

@@ -1,9 +1,9 @@
 /* Home page (main.lobby): Lichess's blocks as cards on a 12-column grid, under our hero
-   (.cdc-hero, added by content/pages/home-hero.ts). A signed-in user's timeline sits in the
+   (.lr-ext-hero, added by content/pages/home-hero.ts). A signed-in user's timeline sits in the
    side column. */
 
 @media (min-width: 1020px) {
-  html[data-cdc-has~='lobby'] #main-wrap {
+  html[data-lr-ext-has~='lobby'] #main-wrap {
     ---main-max-width: 1260px !important;
   }
 
@@ -29,7 +29,7 @@
     grid-column: 1 / 9 !important;
     grid-row: 2 !important;
   }
-  .cdc-speeds {
+  .lr-ext-speeds {
     grid-row: 3;
   }
   main.lobby .lobby__app {
@@ -74,7 +74,7 @@
 
   /* ---- Hero --- */
 
-  .cdc-hero {
+  .lr-ext-hero {
     grid-column: 1 / -1 !important;
     grid-row: 1 / 3;
     position: relative;
@@ -91,9 +91,9 @@
       radial-gradient(circle at 10% 110%, #ffffff08, transparent 45%),
       linear-gradient(
         135deg,
-        var(--cdc-grey-800) 0%,
-        var(--cdc-grey-900) 50%,
-        var(--cdc-grey-950) 100%
+        var(--lr-ext-grey-800) 0%,
+        var(--lr-ext-grey-900) 50%,
+        var(--lr-ext-grey-950) 100%
       );
     box-shadow:
       inset 0 1px 0 #ffffff12,
@@ -103,7 +103,7 @@
   /* The user's coach, big and whole, as the hero illustration (content/pages/hero-coach.ts).
      The live one makes an entrance, so the corner stays empty until it's in: its still (the
      number set by content/bootstrap/coach-choice.ts) shows only if it can't load. */
-  .cdc-hero__coach {
+  .lr-ext-hero__coach {
     position: absolute;
     top: 4px;
     right: 24px;
@@ -116,36 +116,36 @@
     pointer-events: none;
   }
 
-  html[data-cdc-coach='1'] .cdc-hero__coach--still {
+  html[data-lr-ext-coach='1'] .lr-ext-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
   }
-  html[data-cdc-coach='2'] .cdc-hero__coach--still {
+  html[data-lr-ext-coach='2'] .lr-ext-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
   }
-  html[data-cdc-coach='3'] .cdc-hero__coach--still {
+  html[data-lr-ext-coach='3'] .lr-ext-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
   }
-  html[data-cdc-coach='4'] .cdc-hero__coach--still {
+  html[data-lr-ext-coach='4'] .lr-ext-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
   }
-  html[data-cdc-coach='5'] .cdc-hero__coach--still {
+  html[data-lr-ext-coach='5'] .lr-ext-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
   }
-  html[data-cdc-coach='6'] .cdc-hero__coach--still {
+  html[data-lr-ext-coach='6'] .lr-ext-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
   }
-  html[data-cdc-coach='7'] .cdc-hero__coach--still {
+  html[data-lr-ext-coach='7'] .lr-ext-hero__coach--still {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
   }
 
   /* Live, its canvas spills past the sides so arms and tails show, and a click makes it react. */
-  .cdc-hero__coach--live {
+  .lr-ext-hero__coach--live {
     pointer-events: auto;
     cursor: pointer;
   }
 
   /* Only the coach's own box takes the click, not the canvas's clear sides over the title. */
-  .cdc-hero__coach canvas {
+  .lr-ext-hero__coach canvas {
     position: absolute;
     top: 0;
     left: -30%;
@@ -155,48 +155,48 @@
   }
 
   /* Right to left, the coach and its glow move to the other corner, clear of the text. */
-  html[dir='rtl'] .cdc-hero {
+  html[dir='rtl'] .lr-ext-hero {
     background:
       radial-gradient(circle at 12% 18%, #ffffff17, transparent 52%),
       radial-gradient(circle at 90% 110%, #ffffff08, transparent 45%),
       linear-gradient(
         225deg,
-        var(--cdc-grey-800) 0%,
-        var(--cdc-grey-900) 50%,
-        var(--cdc-grey-950) 100%
+        var(--lr-ext-grey-800) 0%,
+        var(--lr-ext-grey-900) 50%,
+        var(--lr-ext-grey-950) 100%
       );
   }
 
-  html[dir='rtl'] .cdc-hero__coach {
+  html[dir='rtl'] .lr-ext-hero__coach {
     right: auto;
     left: 24px;
   }
 
-  .cdc-hero__eyebrow {
+  .lr-ext-hero__eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     margin: 0 0 16px;
     padding: 5px 12px;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--cdc-accent) 15%, transparent);
-    color: var(--cdc-accent-hover);
+    background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
+    color: var(--lr-ext-accent-hover);
     font-size: 13px;
     font-weight: 800;
   }
 
-  .cdc-hero__eyebrow::before {
+  .lr-ext-hero__eyebrow::before {
     content: '';
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--cdc-accent-hover);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+    background: var(--lr-ext-accent-hover);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
   }
 
   /* A signed-in title holds the username (up to 20 letters): it breaks rather than run
      under the coach. */
-  .cdc-hero__title {
+  .lr-ext-hero__title {
     max-width: 62%;
     margin: 0 0 14px;
     overflow-wrap: anywhere;
@@ -207,10 +207,10 @@
     letter-spacing: -0.03em !important;
   }
 
-  .cdc-hero__sub {
+  .lr-ext-hero__sub {
     max-width: 55%;
     margin: 0;
-    color: var(--cdc-grey-200);
+    color: var(--lr-ext-grey-200);
     font-size: 17px;
     line-height: 1.45;
   }
@@ -258,7 +258,7 @@
   /* Below 1260px the labels wrapped to four or five lines in French or German: smaller
      type, icons and gutters keep them to three. */
   @media (max-width: 1259.29px) {
-    .cdc-hero {
+    .lr-ext-hero {
       padding-inline: 28px;
     }
 
@@ -311,7 +311,7 @@
     align-items: center;
     gap: 8px;
     overflow: visible !important; /* Lichess clips it, cutting the dot's ring */
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 14px;
   }
 
@@ -320,8 +320,8 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--cdc-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+    background: var(--lr-ext-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
   }
 
   main.lobby .lobby__counters strong {

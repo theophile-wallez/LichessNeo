@@ -4,13 +4,13 @@
   /* 30px rows, "8." numbers, a box on the current move, its eval dim on the right. Stripes go
    * by move number, so comments in between don't shift them. */
   main.analyse .analyse__moves {
-    background: var(--cdc-bg-panel) !important;
+    background: var(--lr-ext-bg-panel) !important;
   }
 
   main.analyse .tview2-column {
     padding-bottom: 8px;
     background: none !important;
-    font-family: var(--cdc-font) !important;
+    font-family: var(--lr-ext-font) !important;
   }
 
   main.analyse .tview2-column > index {
@@ -21,7 +21,7 @@
     padding-left: 12px !important;
     border: none !important;
     background: transparent !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px !important;
     font-weight: 700;
     line-height: 30px !important;
@@ -41,17 +41,22 @@
     padding: 0 10px 0 0 !important;
     border: none !important;
     background: transparent !important;
-    color: var(--cdc-text) !important;
+    color: var(--lr-ext-text) !important;
     font-size: 14px !important;
     font-weight: 700 !important;
     line-height: 30px !important;
   }
 
   /* The review's list has its own stripes (review/). */
-  html:not(.cdc-review-moves) main.analyse .tview2-column > index:nth-of-type(even),
-  html:not(.cdc-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move,
-  html:not(.cdc-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move + move {
-    background: var(--cdc-grey-850) !important;
+  html:not(.lr-ext-review-moves) main.analyse .tview2-column > index:nth-of-type(even),
+  html:not(.lr-ext-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move,
+  html:not(.lr-ext-review-moves)
+    main.analyse
+    .tview2-column
+    > index:nth-of-type(even)
+    + move
+    + move {
+    background: var(--lr-ext-grey-850) !important;
   }
 
   main.analyse .tview2-column > move san {
@@ -72,7 +77,7 @@
 
   main.analyse .tview2-column > move.empty {
     padding-left: 5px !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-weight: 400 !important;
   }
 
@@ -80,7 +85,7 @@
     flex: none;
     margin-left: auto;
     padding: 0 !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 11px !important;
     font-weight: 400;
     opacity: 0.8;
@@ -88,26 +93,26 @@
 
   /* Annotated moves take the Game Review's colors; the glyph is a round badge before the move. */
   main.analyse .tview2 move.brilliant {
-    --cdc-glyph: #1cb3c8;
+    --lr-ext-glyph: #1cb3c8;
   }
   main.analyse .tview2 move.good {
-    --cdc-glyph: #5288d6;
+    --lr-ext-glyph: #5288d6;
   }
   main.analyse .tview2 move.interesting {
-    --cdc-glyph: var(--cdc-grey-300);
+    --lr-ext-glyph: var(--lr-ext-grey-300);
   }
   main.analyse .tview2 move.inaccuracy {
-    --cdc-glyph: #eeb422;
+    --lr-ext-glyph: #eeb422;
   }
   main.analyse .tview2 move.mistake {
-    --cdc-glyph: #f2862f;
+    --lr-ext-glyph: #f2862f;
   }
   main.analyse .tview2 move.blunder {
-    --cdc-glyph: #d4322a;
+    --lr-ext-glyph: #d4322a;
   }
 
   main.analyse .tview2 move:is(.brilliant, .good, .interesting, .inaccuracy, .mistake, .blunder) {
-    color: var(--cdc-glyph) !important;
+    color: var(--lr-ext-glyph) !important;
   }
 
   main.analyse .tview2-column > move glyph {
@@ -120,10 +125,10 @@
     height: 18px;
     margin: 0 -1px 0 0 !important;
     border-radius: 50%;
-    background: var(--cdc-glyph, var(--cdc-grey-400));
+    background: var(--lr-ext-glyph, var(--lr-ext-grey-400));
     box-shadow: 0 1px 0 #0000004d;
     color: #fff !important;
-    font-family: var(--cdc-font) !important;
+    font-family: var(--lr-ext-font) !important;
     font-size: 10px !important;
     font-weight: 900;
     letter-spacing: -0.5px;
@@ -138,34 +143,34 @@
     margin: 4px 8px 6px !important;
     padding: 8px 10px !important;
     border: none !important;
-    border-left: 3px solid var(--cdc-note, var(--cdc-grey-500)) !important;
+    border-left: 3px solid var(--lr-ext-note, var(--lr-ext-grey-500)) !important;
     border-radius: 5px !important;
-    background: var(--cdc-bg-panel-dark) !important;
+    background: var(--lr-ext-bg-panel-dark) !important;
     box-shadow: none !important;
-    font-family: var(--cdc-font) !important;
+    font-family: var(--lr-ext-font) !important;
   }
 
   main.analyse .tview2-column > interrupt:has(> comment.inaccuracy) {
-    --cdc-note: #eeb422;
+    --lr-ext-note: #eeb422;
   }
   main.analyse .tview2-column > interrupt:has(> comment.mistake) {
-    --cdc-note: #f2862f;
+    --lr-ext-note: #f2862f;
   }
   main.analyse .tview2-column > interrupt:has(> comment.blunder) {
-    --cdc-note: #d4322a;
+    --lr-ext-note: #d4322a;
   }
 
   main.analyse .tview2 interrupt comment {
     display: block;
     padding: 0 !important;
     border: none !important;
-    color: var(--cdc-text) !important;
+    color: var(--lr-ext-text) !important;
     font-size: 13px !important;
     line-height: 1.4 !important;
   }
 
   main.analyse .tview2 interrupt comment:is(.inaccuracy, .mistake, .blunder) {
-    color: var(--cdc-note) !important;
+    color: var(--lr-ext-note) !important;
     font-weight: 700;
   }
 
@@ -205,7 +210,7 @@
     line-height: 20px !important;
     border-radius: 3px;
     background: none !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px !important;
     font-weight: 600 !important;
   }
@@ -236,18 +241,18 @@
     gap: 14px;
     margin: 10px 10px 0 !important;
     padding: 14px 12px 6px !important;
-    border: 1px solid var(--cdc-card-border) !important;
+    border: 1px solid var(--lr-ext-card-border) !important;
     border-bottom: none !important;
     border-radius: 12px 12px 0 0;
     background: linear-gradient(#ffffff12, #ffffff0a) !important;
-    color: var(--cdc-text-strong) !important;
-    font-family: var(--cdc-font) !important;
+    color: var(--lr-ext-text-strong) !important;
+    font-family: var(--lr-ext-font) !important;
     font-size: 24px !important;
     font-weight: 800 !important;
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.06em;
     line-height: 1;
-    animation: cdc-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: lr-ext-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   main.analyse .analyse__moves .result::before,
@@ -259,7 +264,7 @@
     border-radius: 8px;
     background:
       var(---white-king) center / 84% no-repeat,
-      var(--cdc-sq-light, var(--cdc-orange-light));
+      var(--lr-ext-sq-light, var(--lr-ext-orange-light));
     box-shadow:
       inset 0 1px 0 #ffffff40,
       inset 0 -3px 0 #00000026,
@@ -270,7 +275,7 @@
   main.analyse .analyse__moves .result::after {
     background:
       var(---black-king) center / 84% no-repeat,
-      var(--cdc-sq-dark, var(--cdc-orange-dark));
+      var(--lr-ext-sq-dark, var(--lr-ext-orange-dark));
   }
 
   main.analyse .analyse__moves .result:hover::before {
@@ -284,21 +289,21 @@
   main.analyse .analyse__moves .result + .status {
     margin: 0 10px 12px !important;
     padding: 6px 12px 14px !important;
-    border: 1px solid var(--cdc-card-border);
+    border: 1px solid var(--lr-ext-card-border);
     border-top: none;
     border-radius: 0 0 12px 12px;
     background: #ffffff0a !important;
-    color: var(--cdc-text-dim) !important;
-    font-family: var(--cdc-font) !important;
+    color: var(--lr-ext-text-dim) !important;
+    font-family: var(--lr-ext-font) !important;
     font-size: 13px !important;
     font-style: normal !important;
     font-weight: 600;
     line-height: 1.35;
     text-align: center;
-    animation: cdc-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: lr-ext-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  @keyframes cdc-result-in {
+  @keyframes lr-ext-result-in {
     from {
       opacity: 0;
       transform: translateY(6px);
@@ -312,26 +317,26 @@
     margin: 8px !important;
     padding: 10px !important;
     border-radius: 5px !important;
-    background: var(--cdc-btn-grey) !important;
-    box-shadow: var(--cdc-btn-grey-shadow);
-    color: var(--cdc-text) !important;
-    font-family: var(--cdc-font) !important;
+    background: var(--lr-ext-btn-grey) !important;
+    box-shadow: var(--lr-ext-btn-grey-shadow);
+    color: var(--lr-ext-text) !important;
+    font-family: var(--lr-ext-font) !important;
     font-weight: 700;
   }
 
   main.analyse .analyse__moves button.next.highlighted {
-    background: var(--cdc-btn-primary) !important;
-    box-shadow: var(--cdc-btn-primary-shadow);
+    background: var(--lr-ext-btn-primary) !important;
+    box-shadow: var(--lr-ext-btn-primary-shadow);
     color: #fff !important;
     text-shadow: 0 1px 1px #00000033;
   }
 
   main.analyse .analyse__moves button.next:hover {
-    background: var(--cdc-btn-grey-hover) !important;
+    background: var(--lr-ext-btn-grey-hover) !important;
     color: #fff !important;
   }
 
   main.analyse .analyse__moves button.next.highlighted:hover {
-    background: var(--cdc-btn-primary-hover) !important;
+    background: var(--lr-ext-btn-primary-hover) !important;
   }
 }

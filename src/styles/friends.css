@@ -1,9 +1,9 @@
 /* Player lists (following, blocks, favourite opponents) as friend cards. Lichess renders a
  * table: user link, best rating (absent when ratings are hidden), games, last seen. */
 
-/* content/layout/marks.ts tags these lists (`data-cdc-list`): a `:has()` over rules ending on
+/* content/layout/marks.ts tags these lists (`data-lr-ext-list`): a `:has()` over rules ending on
  * `tr` and `td` slowed every board move. Covers the empty list too (one "None" cell). */
-main.box.page-small[data-cdc-list='players'] {
+main.box.page-small[data-lr-ext-list='players'] {
   /* ---- Header --- */
 
   & > .box__top {
@@ -26,15 +26,15 @@ main.box.page-small[data-cdc-list='players'] {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: var(--cdc-btn-grey);
-    box-shadow: var(--cdc-btn-grey-shadow);
+    background: var(--lr-ext-btn-grey);
+    box-shadow: var(--lr-ext-btn-grey-shadow);
     color: #fff !important;
     font-size: 15px;
     transition: background 0.15s !important;
   }
 
   & > .box__top h1 > a[data-icon]:hover {
-    background: var(--cdc-btn-grey-hover);
+    background: var(--lr-ext-btn-grey-hover);
   }
 
   & > .box__top h1 > a[data-icon]::before {
@@ -79,9 +79,9 @@ main.box.page-small[data-cdc-list='players'] {
   }
 
   & > table.slist > tbody > tr:hover {
-    border-color: var(--cdc-card-border-hover);
-    background: var(--cdc-card-hover) !important;
-    box-shadow: var(--cdc-card-shadow-hover);
+    border-color: var(--lr-ext-card-border-hover);
+    background: var(--lr-ext-card-hover) !important;
+    box-shadow: var(--lr-ext-card-shadow-hover);
   }
 
   /* Lichess has no profile pictures: a default avatar. */
@@ -93,7 +93,7 @@ main.box.page-small[data-cdc-list='players'] {
     width: 44px;
     height: 44px;
     border-radius: 6px;
-    background: var(--cdc-avatar);
+    background: var(--lr-ext-avatar);
     transform: translateY(-50%);
   }
 
@@ -103,7 +103,7 @@ main.box.page-small[data-cdc-list='players'] {
     min-width: 0;
     padding: 0 !important;
     border: none !important;
-    color: var(--cdc-text-dim) !important;
+    color: var(--lr-ext-text-dim) !important;
     font-size: 13px;
     white-space: nowrap;
     overflow: hidden;
@@ -140,7 +140,7 @@ main.box.page-small[data-cdc-list='players'] {
   }
 
   & .user-link:hover {
-    color: var(--cdc-accent-hover) !important;
+    color: var(--lr-ext-accent-hover) !important;
   }
 
   & .user-link .utitle {
@@ -148,7 +148,7 @@ main.box.page-small[data-cdc-list='players'] {
     margin-inline-end: 2px;
     padding: 0 4px;
     border-radius: 3px;
-    background: var(--cdc-title-bg);
+    background: var(--lr-ext-title-bg);
     color: #fff !important;
     font-size: 11px;
     font-weight: 800;
@@ -177,9 +177,9 @@ main.box.page-small[data-cdc-list='players'] {
     width: 14px;
     height: 14px;
     margin: 0 !important;
-    border: 2px solid var(--cdc-bg-panel);
+    border: 2px solid var(--lr-ext-bg-panel);
     border-radius: 50%;
-    background: var(--cdc-good);
+    background: var(--lr-ext-good);
     font-size: 0;
   }
 
@@ -189,13 +189,13 @@ main.box.page-small[data-cdc-list='players'] {
 
   /* Best rating: brighter than the rest of the line, after its perf icon. */
   & td > span.text[data-icon] {
-    color: var(--cdc-text);
+    color: var(--lr-ext-text);
     font-weight: 700;
   }
 
   & td > span.text[data-icon]::before {
     margin-inline-end: 4px;
-    color: var(--cdc-text-dim);
+    color: var(--lr-ext-text-dim);
     font-size: 15px;
     opacity: 1;
   }

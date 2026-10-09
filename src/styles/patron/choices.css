@@ -6,7 +6,7 @@ main.plan .plan_checkout group.radio {
   margin: 0 0 12px !important;
   padding: 4px;
   border-radius: 10px !important;
-  background: var(--cdc-grey-950);
+  background: var(--lr-ext-grey-950);
   box-shadow: none !important;
   backdrop-filter: none !important;
   overflow: visible !important;
@@ -24,8 +24,8 @@ main.plan .plan_checkout group.radio label {
   border-radius: 7px !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--cdc-text-dim) !important;
-  font-family: var(--cdc-font) !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.25;
@@ -47,8 +47,8 @@ main.plan .plan_checkout group.radio input:not(:disabled) + label:hover {
 main.plan .plan_checkout group.radio input:checked + label,
 main.plan .plan_checkout group.radio input:checked + label:hover,
 main.plan .plan_checkout .amount_fixed label {
-  background: color-mix(in srgb, var(--cdc-accent) 15%, transparent) !important;
-  box-shadow: inset 0 0 0 2px var(--cdc-accent) !important;
+  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent) !important;
   color: #fff !important;
 }
 
@@ -60,14 +60,14 @@ main.plan .plan_checkout group.radio input:focus-visible + label {
 main.plan .plan_checkout group.freq input:checked + label::before {
   content: '✓';
   padding-inline-end: 6px;
-  color: var(--cdc-accent-hover);
+  color: var(--lr-ext-accent-hover);
 }
 
 /* Already a lifetime patron: that choice is theirs, in gold. */
 main.plan .plan_checkout group.radio .lifetime-check + label {
-  background: color-mix(in srgb, var(--cdc-orange-dark) 15%, transparent) !important;
-  box-shadow: inset 0 0 0 2px var(--cdc-orange-dark) !important;
-  color: var(--cdc-orange-dark) !important;
+  background: color-mix(in srgb, var(--lr-ext-orange-dark) 15%, transparent) !important;
+  box-shadow: inset 0 0 0 2px var(--lr-ext-orange-dark) !important;
+  color: var(--lr-ext-orange-dark) !important;
   opacity: 1 !important;
 }
 
@@ -87,8 +87,8 @@ main.plan .plan_checkout group.amount {
 
 main.plan .plan_checkout group.amount label {
   min-height: 56px;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
   color: #fff !important;
   font-size: 20px;
   font-weight: 800;
@@ -100,12 +100,12 @@ main.plan .plan_checkout group.amount label {
 }
 
 main.plan .plan_checkout group.amount input:not(:checked) + label:hover {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
   transform: translateY(-2px);
 }
 
 main.plan .plan_checkout group.amount input:checked + label {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 /* The suggested amounts share one row (wrapped, the last one sat alone); "Other
@@ -154,11 +154,11 @@ main.plan .plan_checkout .cover-fees input {
   height: 18px;
   margin: 0 !important;
   transform: none !important;
-  accent-color: var(--cdc-accent);
+  accent-color: var(--lr-ext-accent);
 }
 
 main.plan .plan_checkout .cover-fees label {
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
 }
 
 /* ---- Paying --- */
@@ -200,7 +200,7 @@ main.plan .plan_checkout .service :is(.other-choices, .currency) {
 }
 
 main.plan .plan_checkout .service .currency-toggle {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -217,10 +217,10 @@ main.plan .plan_checkout .service .currency select {
 main.plan #error:not(:empty) {
   margin: 16px 0 0;
   padding: 12px 16px;
-  border-inline-start: 3px solid var(--cdc-red);
+  border-inline-start: 3px solid var(--lr-ext-red);
   border-radius: 8px;
-  background: var(--cdc-bg-panel);
-  color: var(--cdc-red);
+  background: var(--lr-ext-bg-panel);
+  color: var(--lr-ext-red);
   font-weight: 700;
 }
 
@@ -249,8 +249,8 @@ main.plan .small_team::before {
   background:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01--7e88db.svg') center /
       26px no-repeat,
-    color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+    color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
   box-shadow:
     inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--cdc-accent) 35%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 35%, transparent);
 }

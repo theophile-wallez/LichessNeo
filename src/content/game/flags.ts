@@ -12,7 +12,7 @@ import { flagEmoji } from './flag-emoji.ts';
 // The names' links, so that the flag can come between the name and its flair.
 const BARS = [
   'main.round .ruser > a.user-link',
-  'main.analyse > .cdc-player > a.user-link',
+  'main.analyse > .lr-ext-player > a.user-link',
   'main.round .game__meta__players a.user-link',
 ].join(', ');
 
@@ -82,7 +82,7 @@ export function createFlagsSync(): () => void {
     for (const [i, bar] of bars.entries()) {
       const name = names[i];
       const flag = name === undefined ? undefined : flags.get(name);
-      setDataText(bar, 'cdcFlag', flag ?? '');
+      setDataText(bar, 'lrExtFlag', flag ?? '');
     }
   };
 }

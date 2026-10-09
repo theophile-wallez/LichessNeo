@@ -13,7 +13,10 @@ export const FINISHED_GAME = { id: 'tKlG0mrQ', path: '/tKlG0mrQ/black' };
  */
 export async function openLichess(page: Page, path: string): Promise<void> {
   await goToLichess(page, path);
-  await expect(page.locator('html')).toHaveAttribute('data-cdc-assets', /^chrome-extension:\/\//);
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-lr-ext-assets',
+    /^chrome-extension:\/\//,
+  );
 }
 
 // Lichess answers 429 with its "Too many requests" page when one network asks

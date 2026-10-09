@@ -33,7 +33,7 @@ export const TAB_BARS: readonly TabBarKind[] = [
   kind('.analyse__underboard__menu', 'button', '.active', 'line'),
   kind('.auth .auth-tabs', 'a', '.active', 'line'),
   kind('.relay-tour__tabs', 'button', '.active', 'pill'),
-  kind('#dasher_app .cdc-src-tabs', 'button', '.active', 'pill'),
+  kind('#dasher_app .lr-ext-src-tabs', 'button', '.active', 'pill'),
 ];
 
 /** Where a bar's highlight goes: x, y, width, height, in px. */

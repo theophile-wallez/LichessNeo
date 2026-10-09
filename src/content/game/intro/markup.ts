@@ -8,15 +8,17 @@ import type { BarPlayer } from '#shared/player-bar.ts';
 type Side = 'top' | 'bottom';
 
 function card(player: BarPlayer, side: Side): SafeHtml {
-  const kind = player.computer ? ' cdc-intro__card--computer' : '';
+  const kind = player.computer ? ' lr-ext-intro__card--computer' : '';
   const title =
-    player.title === undefined ? '' : html`<span class="cdc-intro__title">${player.title}</span>`;
+    player.title === undefined
+      ? ''
+      : html`<span class="lr-ext-intro__title">${player.title}</span>`;
   const details = [player.rating, player.flag].filter(part => part !== undefined).join(' ');
-  return html`<div class="cdc-intro__card cdc-intro__card--${side}${kind}">
-    <span class="cdc-intro__avatar"${avatarAttributes(player.user)}></span>
-    <span class="cdc-intro__who">
-      <span class="cdc-intro__name">${title}<span class="cdc-intro__username">${player.name}</span></span>
-      ${details === '' ? '' : html`<span class="cdc-intro__details">${details}</span>`}
+  return html`<div class="lr-ext-intro__card lr-ext-intro__card--${side}${kind}">
+    <span class="lr-ext-intro__avatar"${avatarAttributes(player.user)}></span>
+    <span class="lr-ext-intro__who">
+      <span class="lr-ext-intro__name">${title}<span class="lr-ext-intro__username">${player.name}</span></span>
+      ${details === '' ? '' : html`<span class="lr-ext-intro__details">${details}</span>`}
     </span>
   </div>`;
 }
@@ -27,9 +29,9 @@ export interface BarPlayers {
 }
 
 export const introMarkup = ({ top, bottom }: BarPlayers): SafeHtml =>
-  html`<div class="cdc-intro__drop">${card(top, 'top')}</div>
-    <div class="cdc-intro__stay">${card(bottom, 'bottom')}</div>
-    <span class="cdc-intro__vs"><span class="cdc-intro__swords"></span><span class="cdc-intro__versus">VS</span></span>`;
+  html`<div class="lr-ext-intro__drop">${card(top, 'top')}</div>
+    <div class="lr-ext-intro__stay">${card(bottom, 'bottom')}</div>
+    <span class="lr-ext-intro__vs"><span class="lr-ext-intro__swords"></span><span class="lr-ext-intro__versus">VS</span></span>`;
 
 // The dropped board's squares, light then dark, in colors no board of
 // Lichess's has, so it stands out from the one under it.

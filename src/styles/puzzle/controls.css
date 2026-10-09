@@ -1,7 +1,7 @@
 /* ---- Controls --- */
 
 main.puzzle {
-  --cdc-jumps-h: 48px;
+  --lr-ext-jumps-h: 48px;
 }
 
 /* Lichess puts the move buttons in a row under the panel, which made the page scroll.
@@ -11,7 +11,7 @@ main.puzzle {
      Filling the cell keeps the buttons' 10px inset equal to the banner's. */
   main.puzzle .puzzle__tools {
     height: auto !important;
-    padding-bottom: calc(var(--cdc-jumps-h) + 10px) !important;
+    padding-bottom: calc(var(--lr-ext-jumps-h) + 10px) !important;
   }
 
   main.puzzle .puzzle__controls {
@@ -34,36 +34,36 @@ main.puzzle .puzzle__controls .jumps {
 
 main.puzzle .puzzle__controls .jumps .fbt {
   flex: 1 1 0 !important;
-  height: var(--cdc-jumps-h);
+  height: var(--lr-ext-jumps-h);
   border-radius: 8px !important;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-grey-200) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-grey-200) !important;
   text-shadow: none !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt:hover:not(.disabled, [disabled]) {
-  background: var(--cdc-btn-grey-hover) !important;
+  background: var(--lr-ext-btn-grey-hover) !important;
   color: #fff !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt:is(.disabled, [disabled]) {
-  background: linear-gradient(var(--cdc-grey-850), var(--cdc-grey-850)) !important;
+  background: linear-gradient(var(--lr-ext-grey-850), var(--lr-ext-grey-850)) !important;
   box-shadow: 0 1px 2px #00000033;
-  color: var(--cdc-grey-500) !important;
+  color: var(--lr-ext-grey-500) !important;
   opacity: 1 !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt.glowing {
   color: #fff !important;
   box-shadow:
-    var(--cdc-btn-grey-shadow),
-    0 0 0 2px var(--cdc-accent);
+    var(--lr-ext-btn-grey-shadow),
+    0 0 0 2px var(--lr-ext-accent);
 }
 
 /* ---- Eval bar --- */
 
-/* The eval bar is drawn in board/; its width is --cdc-gauge-w from the layout. */
+/* The eval bar is drawn in board/; its width is --lr-ext-gauge-w from the layout. */
 main.puzzle .eval-gauge {
-  margin-left: var(--cdc-gap, 0px);
+  margin-left: var(--lr-ext-gap, 0px);
 }

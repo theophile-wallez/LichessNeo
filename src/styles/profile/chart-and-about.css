@@ -13,7 +13,7 @@
 .user-show
   > #us_profile:is(
     :not(:has(> .rating-history-container)),
-    :has(> .rating-history-container.cdc-rchart-none)
+    :has(> .rating-history-container.lr-ext-rchart-none)
   ) {
   grid-template-columns: minmax(0, 1fr);
 }
@@ -21,7 +21,7 @@
 .user-show
   > #us_profile:is(
     :not(:has(> .rating-history-container)),
-    :has(> .rating-history-container.cdc-rchart-none)
+    :has(> .rating-history-container.lr-ext-rchart-none)
   )
   .stats {
   display: grid;
@@ -32,7 +32,7 @@
 .user-show
   > #us_profile:is(
     :not(:has(> .rating-history-container)),
-    :has(> .rating-history-container.cdc-rchart-none)
+    :has(> .rating-history-container.lr-ext-rchart-none)
   )
   .stats
   > .col2 {
@@ -41,9 +41,9 @@
 
 .user-show > #us_profile > :is(.rating-history-container, .profile-side, .new-player) {
   box-sizing: border-box;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 14px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
 }
 
 /* Lichess nests two containers: the outer is the card, the inner keeps the chart's height. */
@@ -66,7 +66,7 @@
   border-radius: 7px !important;
   background: #ffffff0a !important;
   box-shadow: none !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -75,13 +75,13 @@
 
 .user-show > #us_profile .time-selector-buttons button:hover {
   background: #ffffff1a !important;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show > #us_profile .time-selector-buttons button.active {
-  background: color-mix(in srgb, var(--cdc-accent) 18%, transparent) !important;
-  box-shadow: inset 0 0 0 1px var(--cdc-accent) !important;
-  color: var(--cdc-text-strong) !important;
+  background: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-accent) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show > #us_profile #time-range-slider .noUi-target {
@@ -90,7 +90,7 @@
 }
 
 .user-show > #us_profile #time-range-slider .noUi-connect {
-  background: var(--cdc-accent) !important;
+  background: var(--lr-ext-accent) !important;
 }
 
 .user-show > #us_profile #time-range-slider .noUi-handle {
@@ -114,7 +114,7 @@
 .user-show > #us_profile .user-infos .name {
   display: block;
   margin-bottom: 6px;
-  color: var(--cdc-text-strong);
+  color: var(--lr-ext-text-strong);
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -122,7 +122,7 @@
 
 .user-show > #us_profile .user-infos .bio {
   margin: 0 !important;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -154,7 +154,7 @@
   flex-direction: column;
   gap: 9px;
   margin-top: 14px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13.5px;
 }
 
@@ -188,13 +188,13 @@
 }
 
 .user-show > #us_profile .stats strong {
-  color: var(--cdc-text-strong);
+  color: var(--lr-ext-text-strong);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
 .user-show > #us_profile .stats time {
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
 }
 
 /* Lichess prints the location row even when it's empty. */
@@ -220,21 +220,21 @@
   width: 14px;
   height: 14px;
   background: currentColor;
-  -webkit-mask: var(--cdc-pf-icon) center / contain no-repeat;
-  mask: var(--cdc-pf-icon) center / contain no-repeat;
+  -webkit-mask: var(--lr-ext-pf-icon) center / contain no-repeat;
+  mask: var(--lr-ext-pf-icon) center / contain no-repeat;
 }
 
 .user-show > #us_profile .stats > p.thin:nth-of-type(1)::before {
-  --cdc-pf-icon: var(--cdc-pf-calendar);
+  --lr-ext-pf-icon: var(--lr-ext-pf-calendar);
 }
 
 .user-show > #us_profile .stats > p[title]::before {
-  --cdc-pf-icon: var(--cdc-pf-clock);
+  --lr-ext-pf-icon: var(--lr-ext-pf-clock);
 }
 
 /* Time on TV always follows time playing. */
 .user-show > #us_profile .stats > p[title] ~ p[title]::before {
-  --cdc-pf-icon: var(--cdc-upt-watch);
+  --lr-ext-pf-icon: var(--lr-ext-upt-watch);
 }
 
 /* Last seen: a dot, green while they are online. */
@@ -249,13 +249,13 @@
 }
 
 .user-show:has(.user-show__header .online) > #us_profile .stats > p.thin:nth-of-type(2)::before {
-  background: var(--cdc-good);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cdc-accent) 20%, transparent);
+  background: var(--lr-ext-good);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
 }
 
 /* Your own profile: the completion link. */
 .user-show > #us_profile .stats > a {
-  color: var(--cdc-accent) !important;
+  color: var(--lr-ext-accent) !important;
   font-weight: 700;
 }
 
@@ -274,7 +274,7 @@
 .user-show > #us_profile .col2 > strong {
   flex: 0 0 100% !important;
   margin: 6px 0 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -287,7 +287,7 @@
   padding: 5px 11px;
   border-radius: 999px;
   background: #ffffff0f;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 12.5px;
   font-weight: 600;
   white-space: nowrap;
@@ -297,7 +297,7 @@
 
 .user-show > #us_profile .col2 > a:hover {
   background: #ffffff26;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* Chess Insights: the card stays dark, only the icon is in the accent. */
@@ -305,32 +305,32 @@
 .user-show > #us_profile .tutor-link {
   gap: 14px;
   padding: 14px 18px !important;
-  border-top: 1px solid var(--cdc-border) !important;
+  border-top: 1px solid var(--lr-ext-border) !important;
   background: transparent !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   transition: background-color 0.15s !important;
 }
 
 .user-show > #us_profile .insight:hover {
   background: #ffffff0a !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
 }
 
 .user-show > #us_profile .insight::before {
   flex: none;
   margin: 0 !important;
-  color: var(--cdc-accent);
+  color: var(--lr-ext-accent);
   font-size: 28px !important;
 }
 
 .user-show > #us_profile :is(.insight, .tutor-link) strong {
-  color: var(--cdc-text-strong);
+  color: var(--lr-ext-text-strong);
   font-size: 15px !important;
   font-weight: 800 !important;
 }
 
 .user-show > #us_profile :is(.insight, .tutor-link) em {
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 12.5px;
   font-style: normal;
 }
@@ -344,7 +344,7 @@
 
 .user-show > #us_profile .new-player h2 {
   margin: 0 0 4px !important;
-  color: var(--cdc-text-strong);
+  color: var(--lr-ext-text-strong);
   font-size: 20px !important;
   font-weight: 800 !important;
 }

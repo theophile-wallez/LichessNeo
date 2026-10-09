@@ -11,9 +11,9 @@
 
 :is(.ublog-index, .ublog-post) .ublog-post-card {
   overflow: hidden;
-  border: 1px solid var(--cdc-card-border) !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 10px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
   transition:
     background-color 0.15s,
@@ -22,18 +22,18 @@
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card--link:hover {
-  border-color: var(--cdc-card-border-hover) !important;
-  background: var(--cdc-card-hover) !important;
-  box-shadow: var(--cdc-card-shadow-hover) !important;
+  border-color: var(--lr-ext-card-border-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
+  box-shadow: var(--lr-ext-card-shadow-hover) !important;
 }
 
 /* Lichess's own posts: a gold edge instead of a thick gold frame. */
 :is(.ublog-index, .ublog-post) .ublog-post-card--by-lichess {
-  border-color: color-mix(in srgb, var(--cdc-orange-dark) 40%, transparent) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-orange-dark) 40%, transparent) !important;
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card--by-lichess:hover {
-  border-color: color-mix(in srgb, var(--cdc-orange-dark) 70%, transparent) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-orange-dark) 70%, transparent) !important;
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card__image {
@@ -74,7 +74,7 @@
 
 :is(.ublog-index, .ublog-post) .ublog-post-card__intro {
   margin-top: 6px !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   line-height: 1.45;
 }
@@ -114,19 +114,19 @@
   height: 40px;
   justify-content: center;
   border-radius: 8px;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 20px !important;
 }
 
 .ublog-index .box__top .atom:hover {
   background: #ffffff0f;
-  color: var(--cdc-orange-dark) !important;
+  color: var(--lr-ext-orange-dark) !important;
 }
 
 /* "Show best / all", "Sort likes / date": segmented toggles. */
 .ublog-index .filter-and-sort {
   gap: 16px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
   font-weight: 600;
 }
@@ -135,7 +135,7 @@
   gap: 2px;
   padding: 3px;
   border-radius: 8px !important;
-  background: var(--cdc-bg-raised) !important;
+  background: var(--lr-ext-bg-raised) !important;
   box-shadow: none !important;
 }
 
@@ -145,7 +145,7 @@
   border-radius: 6px !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 700;
   text-shadow: none !important;
@@ -157,19 +157,19 @@
 }
 
 .ublog-index .btn-rack__btn.active {
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow) !important;
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   color: #fff !important;
 }
 
 /* The accent one slides (see "Sliding tabs" in theme/). */
-.ublog-index .btn-rack[data-cdc-tabs] {
-  --cdc-tab-radius: 6px;
-  --cdc-tab-bg: var(--cdc-btn-primary);
-  --cdc-tab-shadow: var(--cdc-btn-primary-shadow);
+.ublog-index .btn-rack[data-lr-ext-tabs] {
+  --lr-ext-tab-radius: 6px;
+  --lr-ext-tab-bg: var(--lr-ext-btn-primary);
+  --lr-ext-tab-shadow: var(--lr-ext-btn-primary-shadow);
 }
 
-.ublog-index .btn-rack[data-cdc-tabs] .btn-rack__btn.active {
+.ublog-index .btn-rack[data-lr-ext-tabs] .btn-rack__btn.active {
   background: transparent !important;
   box-shadow: none !important;
 }
@@ -180,7 +180,7 @@
   height: 40px;
   justify-content: center;
   border-radius: 8px;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 18px !important;
 }
 
@@ -196,58 +196,58 @@
 
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css). Signed in, it
  * also has the friends' posts and the user's own blog (`/@/<user>/blog`), its drafts there. */
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/community'],
-main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/community'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
-  --cdc-nav-color: var(--cdc-accent);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/community'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/community'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/monthly'],
-main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/monthly'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--a2edfd.svg');
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/monthly'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/monthly'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/topic'],
-main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/topic'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01--a2edfd.svg');
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/topic'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/topic'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/@/lichess/blog'],
-main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/@/lichess/blog'] {
-  --cdc-nav-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
-  --cdc-nav-color: var(--cdc-grey-300);
-  --cdc-title-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+.subnav[data-lr-ext-nav~='blog'] a[href$='/@/lichess/blog'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/@/lichess/blog'] {
+  --lr-ext-nav-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+  --lr-ext-nav-color: var(--lr-ext-grey-300);
+  --lr-ext-title-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/friends'],
-main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/friends'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
-  --cdc-nav-color: var(--cdc-green);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple--73fb95.svg');
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/friends'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/friends'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+  --lr-ext-nav-color: var(--lr-ext-green);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple--73fb95.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pen-tool-02.svg');
-  --cdc-nav-color: var(--cdc-purple);
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pen-tool-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/drafts'],
-main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/drafts'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit--ffc689.svg');
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/drafts'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/drafts'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='blog'] a[href$='/blog/liked'],
-main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/liked'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
-  --cdc-nav-color: var(--cdc-red);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff7777.svg');
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/liked'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/liked'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+  --lr-ext-nav-color: var(--lr-ext-red);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff7777.svg');
 }
 
 /* Only the posts scroll: the side menu and the title with its filters stay put.
@@ -268,8 +268,8 @@ main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/liked'] {
      * bit wider to cover their shadows, but within the page's 1vw gutter. */
     margin: -16px calc(-1 * min(12px, 1vw)) -8px !important;
     padding: 16px min(12px, 1vw) 8px !important;
-    background: var(--cdc-bg-page);
-    box-shadow: var(--cdc-pin-cover);
+    background: var(--lr-ext-bg-page);
+    box-shadow: var(--lr-ext-pin-cover);
   }
 
   .ublog-index .box__top::after {
@@ -278,7 +278,7 @@ main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/liked'] {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -311,9 +311,9 @@ main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/liked'] {
 
 .ublog-topics__topic {
   padding: 16px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
   transition:
     background-color 0.15s,
     border-color 0.15s,
@@ -321,9 +321,9 @@ main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/liked'] {
 }
 
 .ublog-topics__topic:hover {
-  border-color: var(--cdc-card-border-hover);
-  background: var(--cdc-card-hover);
-  box-shadow: var(--cdc-card-shadow-hover);
+  border-color: var(--lr-ext-card-border-hover);
+  background: var(--lr-ext-card-hover);
+  box-shadow: var(--lr-ext-card-shadow-hover);
 }
 
 .ublog-topics__topic h2 {
@@ -338,7 +338,7 @@ main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/liked'] {
 }
 
 .ublog-topics__topic__nb {
-  color: var(--cdc-accent) !important;
+  color: var(--lr-ext-accent) !important;
   font-size: 13px !important;
   font-weight: 700;
   white-space: nowrap;
@@ -369,7 +369,7 @@ main.page-menu[data-cdc-menu~='blog'][data-cdc-nav-active$='/blog/liked'] {
   margin: 8px 0 0 !important;
   padding: 0 !important;
   background: none !important;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   line-height: 1.35;

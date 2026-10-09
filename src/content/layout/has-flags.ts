@@ -2,7 +2,7 @@ import { closestTo, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { oncePerFrame } from '#shared/frame.ts';
 
-// What the page holds, one word each in `data-cdc-has` on <html>, for the rules
+// What the page holds, one word each in `data-lr-ext-has` on <html>, for the rules
 // that would otherwise use `html:has(main.round)` or `main.analyse:has(.mchat)`.
 // <html> and <main> hold the board, and Chrome checked a `:has()` on them again
 // on every move, restyling everything the rule styles.
@@ -20,7 +20,7 @@ const FLAGS: Readonly<Record<string, string>> = {
   'clock-extras-bottom': `main.round .rclock-bottom > ${CLOCK_EXTRAS}`,
   analyse: 'main.analyse',
   'analyse-chat': 'main.analyse > .mchat',
-  'analyse-players': 'main.analyse > .cdc-player',
+  'analyse-players': 'main.analyse > .lr-ext-player',
   'analyse-clock': 'main.analyse .analyse__clock',
   'analyse-white': 'main.analyse .analyse__board > .orientation-white',
   'analyse-black': 'main.analyse .analyse__board > .orientation-black',
@@ -57,7 +57,7 @@ export function presentFlags(root: ParentNode): string {
 }
 
 export function syncHasFlags(): void {
-  setData(document.documentElement, 'cdcHas', presentFlags(document));
+  setData(document.documentElement, 'lrExtHas', presentFlags(document));
 }
 
 // The pieces and the clock's digits change all the time and hold none of the

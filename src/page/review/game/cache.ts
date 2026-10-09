@@ -8,6 +8,7 @@ import {
 } from '#shared/storage.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { StoredRecordCodec } from '#page/review/evaluation/stored.ts';
+import { prefixed } from '#shared/prefix.ts';
 
 // Each game's records at full depth: kept once its analysis is complete, so
 // opening the game again shows its review at once, and kept as they come in
@@ -36,7 +37,10 @@ const isCurrent = (key: string): boolean => key.endsWith(`:v${CACHE_VERSION}`);
 function readIndex(): string[] {
   const index = readStoredJson(StorageKey.reviewIndex, IndexSchema);
   if (index) return index;
-  const cached = [...storedKeys('cdc-review:'), ...storedKeys('cdc-review-progress:')];
+  const cached = [
+    ...storedKeys(`${prefixed('review')}:`),
+    ...storedKeys(`${prefixed('review-progress')}:`),
+  ];
   for (const key of cached.filter(key => !isCurrent(key))) removeStored(key);
   return cached.filter(isCurrent);
 }

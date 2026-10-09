@@ -5,8 +5,8 @@
    * aria-label once ui/tooltips takes it). A click takes it back, so on hover the spinner
    * becomes a cross. */
   main.round .rcontrols .follow-up .rematch.me {
-    background: color-mix(in srgb, var(--cdc-accent) 16%, var(--cdc-bg-raised)) !important;
-    box-shadow: inset 0 0 0 1.5px var(--cdc-accent) !important;
+    background: color-mix(in srgb, var(--lr-ext-accent) 16%, var(--lr-ext-bg-raised)) !important;
+    box-shadow: inset 0 0 0 1.5px var(--lr-ext-accent) !important;
   }
 
   main.round .rcontrols .follow-up .rematch.me::before {
@@ -25,8 +25,8 @@
   }
 
   main.round .rcontrols .follow-up .rematch.me:hover {
-    background: color-mix(in srgb, var(--cdc-bad) 16%, var(--cdc-bg-raised)) !important;
-    box-shadow: inset 0 0 0 1.5px var(--cdc-bad) !important;
+    background: color-mix(in srgb, var(--lr-ext-bad) 16%, var(--lr-ext-bg-raised)) !important;
+    box-shadow: inset 0 0 0 1.5px var(--lr-ext-bad) !important;
   }
 
   main.round .rcontrols .follow-up .rematch.me:hover .spinner {
@@ -44,7 +44,7 @@
     background: currentColor;
     mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg') center / 1em
       1em no-repeat;
-    color: var(--cdc-bad);
+    color: var(--lr-ext-bad);
     font-size: 15px;
   }
 
@@ -52,12 +52,12 @@
    * held by game-over.css, so the ring is an outline. */
   main.round .rcontrols .follow-up .rematch.glowing {
     outline: 2px solid transparent;
-    animation: cdc-rematch-ring 1.4s 3 ease-out !important;
+    animation: lr-ext-rematch-ring 1.4s 3 ease-out !important;
   }
 
-  @keyframes cdc-rematch-ring {
+  @keyframes lr-ext-rematch-ring {
     from {
-      outline-color: var(--cdc-accent);
+      outline-color: var(--lr-ext-accent);
       outline-offset: 0;
     }
     to {

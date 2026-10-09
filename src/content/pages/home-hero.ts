@@ -9,15 +9,15 @@ import { heroText, type HeroText } from './hero-texts.ts';
 // The home page's hero card (styles/home/hero.css), in the page's language.
 
 function buildHero(text: HeroText, user: string | undefined): HTMLElement {
-  const hero = createElement('section', { className: 'cdc-hero' });
+  const hero = createElement('section', { className: 'lr-ext-hero' });
   hero.append(
-    createElement('p', { className: 'cdc-hero__eyebrow', text: text.eyebrow }),
+    createElement('p', { className: 'lr-ext-hero__eyebrow', text: text.eyebrow }),
     createElement('h1', {
-      className: 'cdc-hero__title',
+      className: 'lr-ext-hero__title',
       text: user ? text.greeting(user) : text.title,
     }),
-    createElement('p', { className: 'cdc-hero__sub', text: text.sub }),
-    createElement('div', { className: 'cdc-hero__coach', attrs: { 'aria-hidden': 'true' } }),
+    createElement('p', { className: 'lr-ext-hero__sub', text: text.sub }),
+    createElement('div', { className: 'lr-ext-hero__coach', attrs: { 'aria-hidden': 'true' } }),
   );
   return hero;
 }
@@ -30,10 +30,10 @@ function userName(): string | undefined {
 
 export function addHero(text: HeroText): void {
   const main = queryOne(document, 'main.lobby', HTMLElement);
-  if (!main || main.querySelector(':scope > .cdc-hero')) return;
+  if (!main || main.querySelector(':scope > .lr-ext-hero')) return;
   const hero = buildHero(text, userName());
   main.prepend(hero);
-  const coach = hero.querySelector('.cdc-hero__coach');
+  const coach = hero.querySelector('.lr-ext-hero__coach');
   if (coach instanceof HTMLElement) void mountHeroCoach(coach);
 }
 

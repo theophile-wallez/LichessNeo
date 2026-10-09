@@ -18,13 +18,13 @@ describe('the coach’s voice', () => {
     voice.say('One moment…', 'neutral');
     voice.typeOut('Well played!', 'happy', 500);
     expect(bubble.textContent).toBe('');
-    expect(bubble.classList.contains('cdc-end__bubble--empty')).toBe(true);
+    expect(bubble.classList.contains('lr-ext-end__bubble--empty')).toBe(true);
     vi.advanceTimersByTime(500 + 26 * 4);
     expect(bubble.textContent).toBe('Well');
     expect(posted.mock.calls.at(-1)?.[0]).toMatchObject({ coach: 4, mood: 'happy', talking: true });
     vi.advanceTimersByTime(26 * 20);
     expect(bubble.textContent).toBe('Well played!');
-    expect(bubble.classList.contains('cdc-end__bubble--empty')).toBe(false);
+    expect(bubble.classList.contains('lr-ext-end__bubble--empty')).toBe(false);
     expect(posted.mock.calls.at(-1)?.[0]).toMatchObject({ mood: 'happy', talking: false });
   });
 });

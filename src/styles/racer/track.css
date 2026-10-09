@@ -4,9 +4,9 @@
  * and a finish line before the scores. */
 .racer .racer__race {
   height: auto !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .racer .racer__race__track {
-  height: var(--cdc-lane-h) !important;
+  height: var(--lr-ext-lane-h) !important;
 }
 
 .racer .racer__race__track::before,
@@ -39,7 +39,7 @@
   background:
     repeating-linear-gradient(90deg, #ffffff24 0 18px, transparent 18px 40px) 0 100% / 40px 2px
       repeat-x,
-    linear-gradient(var(--cdc-grey-800), var(--cdc-grey-850));
+    linear-gradient(var(--lr-ext-grey-800), var(--lr-ext-grey-850));
 }
 
 html[dir='rtl'] .racer .racer__race__track::before {
@@ -51,7 +51,12 @@ html[dir='rtl'] .racer .racer__race__track::before {
   bottom: 0;
   inset-inline-end: -88px;
   width: 10px;
-  background: conic-gradient(#fff 25%, var(--cdc-grey-950) 0 50%, #fff 0 75%, var(--cdc-grey-950) 0)
+  background: conic-gradient(
+      #fff 25%,
+      var(--lr-ext-grey-950) 0 50%,
+      #fff 0 75%,
+      var(--lr-ext-grey-950) 0
+    )
     0 0 / 10px 10px;
   opacity: 0.85;
 }
@@ -60,15 +65,15 @@ html[dir='rtl'] .racer .racer__race__track::before {
   background:
     repeating-linear-gradient(90deg, #ffffff38 0 18px, transparent 18px 40px) 0 100% / 40px 2px
       repeat-x,
-    linear-gradient(var(--cdc-grey-700), var(--cdc-grey-750));
+    linear-gradient(var(--lr-ext-grey-700), var(--lr-ext-grey-750));
   box-shadow: inset 0 0 0 1px #ffffff1f;
 }
 
 .racer--racing .racer__race__track::before {
-  animation: cdc-racer-lane 0.5s linear infinite;
+  animation: lr-ext-racer-lane 0.5s linear infinite;
 }
 
-@keyframes cdc-racer-lane {
+@keyframes lr-ext-racer-lane {
   to {
     background-position:
       -40px 100%,
@@ -89,8 +94,8 @@ html[dir='rtl'] .racer .racer__race__track::before {
 
 /* Lichess's boost flame, in fire colors rather than the car's. */
 .racer .racer__race__track--boost .racer__race__player__car::before {
-  color: var(--cdc-orange-dark);
-  text-shadow: 0 0 8px var(--cdc-orange-dark);
+  color: var(--lr-ext-orange-dark);
+  text-shadow: 0 0 8px var(--lr-ext-orange-dark);
 }
 
 .racer .racer__race__player__name {
@@ -99,7 +104,7 @@ html[dir='rtl'] .racer .racer__race__track::before {
 }
 
 .racer .racer__race__player :is(.user-link, anonymous) {
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
 }
 
 .racer .racer__race__track--me .racer__race__player :is(.user-link, anonymous) {
@@ -111,19 +116,19 @@ html[dir='rtl'] .racer .racer__race__track::before {
   top: 4px !important;
   justify-content: center !important;
   width: 46px !important;
-  height: calc(var(--cdc-lane-h) - 8px) !important;
+  height: calc(var(--lr-ext-lane-h) - 8px) !important;
   padding: 0 !important;
   border-radius: 6px;
   background: #0000006b !important;
   color: #fff !important;
-  font-family: var(--cdc-font) !important;
+  font-family: var(--lr-ext-font) !important;
   font-size: 14px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
 .racer .racer__race__track--first .racer__race__score {
-  background: linear-gradient(var(--cdc-orange-dark), var(--cdc-orange-darker)) !important;
+  background: linear-gradient(var(--lr-ext-orange-dark), var(--lr-ext-orange-darker)) !important;
   box-shadow: inset 0 1px 0 #ffffff66;
   text-shadow: 0 1px 1px #0000004d;
 }
@@ -134,9 +139,9 @@ html[dir='rtl'] .racer .racer__race__track::before {
  * result's color. */
 :is(.racer, .storm) .puz-history {
   padding: 20px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
 }
 
 :is(.racer, .storm) .puz-history .box__top {
@@ -161,15 +166,15 @@ html[dir='rtl'] .racer .racer__race__track::before {
 :is(.racer, .storm) .puz-history__filter {
   padding: 7px 14px !important;
   border-radius: 999px !important;
-  background: var(--cdc-btn-grey) !important;
-  box-shadow: var(--cdc-btn-grey-shadow) !important;
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 13px !important;
 }
 
 :is(.racer, .storm) .puz-history__filter.active {
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: var(--cdc-btn-primary-shadow) !important;
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
   color: #fff !important;
 }
 
@@ -180,16 +185,16 @@ html[dir='rtl'] .racer .racer__race__track::before {
 
 :is(.racer, .storm) .puz-history__round {
   padding: 8px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 10px;
-  background: var(--cdc-bg-panel-dark);
+  background: var(--lr-ext-bg-panel-dark);
   transition:
     border-color 0.15s,
     transform 0.15s !important;
 }
 
 :is(.racer, .storm) .puz-history__round:hover {
-  border-color: var(--cdc-card-border-hover);
+  border-color: var(--lr-ext-card-border-hover);
   transform: translateY(-2px);
 }
 
@@ -214,21 +219,21 @@ html[dir='rtl'] .racer .racer__race__track::before {
 }
 
 :is(.racer, .storm) .puz-history good {
-  background: color-mix(in srgb, var(--cdc-good) 15%, transparent);
-  color: var(--cdc-good-hover) !important;
+  background: color-mix(in srgb, var(--lr-ext-good) 15%, transparent);
+  color: var(--lr-ext-good-hover) !important;
 }
 
 :is(.racer, .storm) .puz-history bad {
-  background: color-mix(in srgb, var(--cdc-red-dark) 15%, transparent);
-  color: var(--cdc-red) !important;
+  background: color-mix(in srgb, var(--lr-ext-red-dark) 15%, transparent);
+  color: var(--lr-ext-red) !important;
 }
 
 :is(.racer, .storm) .puz-history unfinished {
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
 }
 
 :is(.racer, .storm) .puz-history__round__result rating {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px !important;
   font-weight: 700;
 }

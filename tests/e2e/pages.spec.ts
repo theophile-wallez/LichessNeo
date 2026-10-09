@@ -14,63 +14,71 @@ interface PublicPage {
 }
 
 const PAGES: readonly PublicPage[] = [
-  { name: 'home', path: '/', ours: 'main.lobby > .cdc-hero' },
+  { name: 'home', path: '/', ours: 'main.lobby > .lr-ext-hero' },
   {
     name: 'a finished game’s analysis',
     path: FINISHED_GAME.path,
-    ours: 'main.analyse > #cdc-review',
+    ours: 'main.analyse > #lr-ext-review',
   },
-  { name: 'the free analysis board', path: '/analysis', ours: '#cdc-review .cdc-coach' },
-  { name: 'TV', path: '/tv', ours: 'main.round > .cdc-board-tools' },
-  { name: 'a profile', path: '/@/DrNykterstein', ours: 'html[data-cdc-has~="user-show"]' },
+  { name: 'the free analysis board', path: '/analysis', ours: '#lr-ext-review .lr-ext-coach' },
+  { name: 'TV', path: '/tv', ours: 'main.round > .lr-ext-board-tools' },
+  { name: 'a profile', path: '/@/DrNykterstein', ours: 'html[data-lr-ext-has~="user-show"]' },
   // Its chart is only served to a signed-in visitor: see charts.spec.ts.
   {
     name: 'a rating’s stats',
     path: '/@/DrNykterstein/perf/blitz',
-    ours: 'html[data-cdc-has~="perf-stat"]',
+    ours: 'html[data-lr-ext-has~="perf-stat"]',
   },
-  { name: 'the rating distribution', path: '/stat/rating/distribution/blitz', ours: '.cdc-dist' },
-  { name: 'puzzles', path: '/training', ours: 'html[data-cdc-has~="puzzle"]' },
-  { name: 'puzzle themes', path: '/training/themes', ours: 'html[data-cdc-has~="puzzle-themes"]' },
+  {
+    name: 'the rating distribution',
+    path: '/stat/rating/distribution/blitz',
+    ours: '.lr-ext-dist',
+  },
+  { name: 'puzzles', path: '/training', ours: 'html[data-lr-ext-has~="puzzle"]' },
+  {
+    name: 'puzzle themes',
+    path: '/training/themes',
+    ours: 'html[data-lr-ext-has~="puzzle-themes"]',
+  },
   { name: 'puzzles by opening', path: '/training/openings' },
   { name: 'practice', path: '/practice' },
   {
     name: 'a practice lesson',
     path: '/practice/checkmates/piece-checkmates-i/BJy6fEDf',
-    ours: 'html[data-cdc-has~="practice"]',
+    ours: 'html[data-lr-ext-has~="practice"]',
   },
   { name: 'learn', path: '/learn' },
-  { name: 'the forum', path: '/forum', ours: 'main.forum .categs tr[data-cdc-href]' },
+  { name: 'the forum', path: '/forum', ours: 'main.forum .categs tr[data-lr-ext-href]' },
   {
     name: 'a forum category',
     path: '/forum/general-chess-discussion',
-    ours: 'main.forum-categ[data-cdc-href]',
+    ours: 'main.forum-categ[data-lr-ext-href]',
   },
   { name: 'simuls', path: '/simul' },
   { name: 'Swiss tournaments', path: '/swiss' },
   {
     name: 'tournament winners',
     path: '/tournament/leaderboard',
-    ours: '.tournament-leaderboards__item[data-cdc-icon]',
+    ours: '.tournament-leaderboards__item[data-lr-ext-icon]',
   },
   {
     name: 'tournament shields',
     path: '/tournament/shields',
-    ours: '.tournament-shields__item[data-cdc-href]',
+    ours: '.tournament-shields__item[data-lr-ext-href]',
   },
-  { name: 'players', path: '/player', ours: '.community .user-top[data-cdc-icon]' },
+  { name: 'players', path: '/player', ours: '.community .user-top[data-lr-ext-icon]' },
   { name: 'FIDE players', path: '/fide' },
   { name: 'FIDE federations', path: '/fide/federation' },
-  { name: 'bots', path: '/player/bots', ours: '.subnav[data-cdc-nav~="bots"]' },
-  { name: 'coaches', path: '/coach', ours: 'html[data-cdc-has~="coach-list"]' },
-  { name: 'teams', path: '/team/all', ours: 'html[data-cdc-has~="team-list"]' },
+  { name: 'bots', path: '/player/bots', ours: '.subnav[data-lr-ext-nav~="bots"]' },
+  { name: 'coaches', path: '/coach', ours: 'html[data-lr-ext-has~="coach-list"]' },
+  { name: 'teams', path: '/team/all', ours: 'html[data-lr-ext-has~="team-list"]' },
   { name: 'studies', path: '/study' },
   { name: 'the blog', path: '/blog' },
-  { name: 'broadcasts', path: '/broadcast', ours: '.subnav[data-cdc-nav~="broadcast"]' },
+  { name: 'broadcasts', path: '/broadcast', ours: '.subnav[data-lr-ext-nav~="broadcast"]' },
   { name: 'patron', path: '/patron' },
-  { name: 'Puzzle Storm', path: '/storm', ours: 'html[data-cdc-has~="storm"]' },
+  { name: 'Puzzle Storm', path: '/storm', ours: 'html[data-lr-ext-has~="storm"]' },
   { name: 'Puzzle Racer', path: '/racer' },
-  { name: 'about', path: '/about', ours: '.subnav[data-cdc-nav~="about"]' },
+  { name: 'about', path: '/about', ours: '.subnav[data-lr-ext-nav~="about"]' },
   { name: 'the board editor', path: '/editor' },
   { name: 'the coordinate trainer', path: '/training/coordinate' },
 ];
@@ -82,7 +90,7 @@ const PAGE_BACKGROUND = 'rgb(48, 46, 43)';
 for (const { name, path, ours } of PAGES) {
   test(`${name} gets the extension`, async ({ page, extensionErrors }) => {
     await openLichess(page, path);
-    expect(await rootVariable(page, '--cdc-bg-panel')).toBe(PANEL_COLOR);
+    expect(await rootVariable(page, '--lr-ext-bg-panel')).toBe(PANEL_COLOR);
     await expectSidebar(page);
     if (ours !== undefined) await expect(page.locator(ours).first()).toBeAttached();
     // The page script is in too: headless Chrome asks for reduced motion, which
@@ -105,7 +113,7 @@ test.describe('in Lichess’s light theme', () => {
       await openLichess(page, path);
       await expect(page.locator('html')).toHaveClass(/\blight\b/);
       await expect(page.locator('html')).toHaveCSS('background-color', PAGE_BACKGROUND);
-      expect(await rootVariable(page, '--cdc-bg-panel')).toBe(PANEL_COLOR);
+      expect(await rootVariable(page, '--lr-ext-bg-panel')).toBe(PANEL_COLOR);
       await expectSidebar(page);
       expect(await horizontalOverflow(page)).toBe(0);
     });

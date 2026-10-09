@@ -10,13 +10,13 @@ function onResize(entries: readonly ResizeObserverEntry[]): void {
   for (const entry of entries) {
     const size = entry.borderBoxSize[0];
     if (entry.target instanceof HTMLElement && size)
-      setStyleProperty(entry.target, '--cdc-bubble-h', `${size.blockSize}px`);
+      setStyleProperty(entry.target, '--lr-ext-bubble-h', `${size.blockSize}px`);
   }
 }
 
 export function fitBubble(panel: HTMLElement): void {
   sizes ??= new ResizeObserver(onResize);
   sizes.disconnect();
-  const bubble = queryOne(panel, '.cdc-bubble', HTMLElement);
+  const bubble = queryOne(panel, '.lr-ext-bubble', HTMLElement);
   if (bubble) sizes.observe(bubble);
 }

@@ -41,8 +41,8 @@ export function retryBubble(session: Session, retry: RetryState, outcome: RetryO
   const { ui } = session.language;
   const reveal = done
     ? ''
-    : html`<button class="cdc-bubble__line" data-cdc="reveal">${svgIcon('bulb')}${ui.retry.reveal}</button>`;
-  return html`<div class="cdc-bubble__row cdc-bubble__row--retry">${icon(outcome)}
-      <p class="cdc-bubble__title">${title(session, retry, outcome)}</p></div>
-    <div class="cdc-bubble__body"><div class="cdc-bubble__actions">${reveal}</div></div>`;
+    : html`<button class="lr-ext-bubble__line" data-lr-ext="reveal">${svgIcon('bulb')}${ui.retry.reveal}</button>`;
+  return html`<div class="lr-ext-bubble__row lr-ext-bubble__row--retry">${icon(outcome)}
+      <p class="lr-ext-bubble__title">${title(session, retry, outcome)}</p></div>
+    <div class="lr-ext-bubble__body"><div class="lr-ext-bubble__actions">${reveal}</div></div>`;
 }

@@ -32,7 +32,11 @@ describe('servePackDownloads', () => {
     ]);
     fakeGithub({ repo: 'ann/packs', files });
     const respond = vi.fn<(answer: unknown) => void>();
-    const message = { type: 'cdc:download-pack', link: 'https://github.com/ann/packs', token: '' };
+    const message = {
+      type: 'lr-ext:download-pack',
+      link: 'https://github.com/ann/packs',
+      token: '',
+    };
     expect(serve()(message, {}, respond)).toBe(true);
     await vi.waitFor(() => expect(respond).toHaveBeenCalledOnce());
     expect(respond.mock.calls[0]?.[0]).toMatchObject({
@@ -42,7 +46,7 @@ describe('servePackDownloads', () => {
 
   it('leaves other messages to other listeners', () => {
     const respond = vi.fn<(answer: unknown) => void>();
-    expect(serve()({ type: 'cdc:dev-check' }, {}, respond)).toBeUndefined();
+    expect(serve()({ type: 'lr-ext:dev-check' }, {}, respond)).toBeUndefined();
     expect(respond).not.toHaveBeenCalled();
   });
 
@@ -51,7 +55,11 @@ describe('servePackDownloads', () => {
     const answered = Promise.withResolvers<Response>();
     vi.stubGlobal('fetch', () => answered.promise);
     const respond = vi.fn<(answer: unknown) => void>();
-    const message = { type: 'cdc:download-pack', link: 'https://github.com/ann/packs', token: '' };
+    const message = {
+      type: 'lr-ext:download-pack',
+      link: 'https://github.com/ann/packs',
+      token: '',
+    };
     serve()(message, {}, respond);
     vi.advanceTimersByTime(45_000);
     expect(getPlatformInfo).toHaveBeenCalledTimes(2);

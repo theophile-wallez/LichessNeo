@@ -13,7 +13,7 @@ const stillOf = (user: string): RegExp =>
 test('a profile, a forum post and a hover card show their user’s avatar', async ({ page }) => {
   await openLichess(page, '/@/DrNykterstein');
   const header = page.locator('.user-show > .user-show__header');
-  await expect(header).toHaveAttribute('data-cdc-avatar-color', avatarOf('DrNykterstein').color);
+  await expect(header).toHaveAttribute('data-lr-ext-avatar-color', avatarOf('DrNykterstein').color);
   await expect
     .poll(() => computedStyle(header, 'background-image', '::before'))
     .toMatch(stillOf('DrNykterstein'));
@@ -30,7 +30,7 @@ test('a profile, a forum post and a hover card show their user’s avatar', asyn
     .toMatch(stillOf(user));
   await author.hover();
   const card = page.locator('#powerTip .upt__info');
-  await expect(card).toHaveAttribute('data-cdc-avatar-coach', String(avatarOf(user).coach));
+  await expect(card).toHaveAttribute('data-lr-ext-avatar-coach', String(avatarOf(user).coach));
   await expect
     .poll(() => computedStyle(card, 'background-image', '::before'))
     .toMatch(stillOf(user));
@@ -38,12 +38,12 @@ test('a profile, a forum post and a hover card show their user’s avatar', asyn
 
 test('a game’s players get their avatars in their bars', async ({ page }) => {
   await openLichess(page, USERS_GAME);
-  const bars = page.locator('main.analyse > .cdc-player');
+  const bars = page.locator('main.analyse > .lr-ext-player');
   await expect(bars).toHaveCount(2);
   for (const bar of await bars.all()) {
     const href = await bar.locator('a.user-link').getAttribute('href');
     const user = href?.split('/')[2] ?? '';
-    await expect(bar).toHaveAttribute('data-cdc-avatar-color', avatarOf(user).color);
+    await expect(bar).toHaveAttribute('data-lr-ext-avatar-color', avatarOf(user).color);
     await expect
       .poll(() => computedStyle(bar, 'background-image', '::before'))
       .toMatch(stillOf(user));

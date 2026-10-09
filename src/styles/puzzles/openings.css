@@ -3,22 +3,22 @@
 /* About 120 families, each a card with its own color and white piece. The color follows the
    family's position (names are localized), so the "my openings" block shifts it by one. */
 .puzzle-openings {
-  --cdc-fam: var(--cdc-accent);
-  --cdc-fam-2: var(--cdc-accent-dim);
-  --cdc-fam-piece: none;
+  --lr-ext-fam: var(--lr-ext-accent);
+  --lr-ext-fam-2: var(--lr-ext-accent-dim);
+  --lr-ext-fam-piece: none;
 }
 
 /* The themes page shows the same chips without families, under a brown heading. */
 .puzzle-themes > .puzzle-openings__list {
-  --cdc-fam: var(--cdc-orange-dark);
-  --cdc-fam-2: var(--cdc-orange-darker);
+  --lr-ext-fam: var(--lr-ext-orange-dark);
+  --lr-ext-fam-2: var(--lr-ext-orange-darker);
 }
 
 /* Signed in, your most played openings come first, in their own gold section
    instead of Lichess's zebra band. */
 .puzzle-openings__mine {
-  --cdc-fam: var(--cdc-orange-dark);
-  --cdc-fam-2: var(--cdc-orange-darker);
+  --lr-ext-fam: var(--lr-ext-orange-dark);
+  --lr-ext-fam-2: var(--lr-ext-orange-darker);
 
   margin: 0 0 20px !important;
   padding: 0 !important;
@@ -44,8 +44,8 @@
   width: 12px;
   height: 12px;
   border-radius: 4px;
-  background: linear-gradient(135deg, var(--cdc-fam), var(--cdc-fam-2));
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cdc-fam) 22%, transparent);
+  background: linear-gradient(135deg, var(--lr-ext-fam), var(--lr-ext-fam-2));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-fam) 22%, transparent);
 }
 
 .puzzle-openings__mine .puzzle-openings__list {
@@ -53,39 +53,39 @@
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 1) {
-  --cdc-fam: var(--cdc-accent);
-  --cdc-fam-2: var(--cdc-accent-dim);
-  --cdc-fam-piece: var(---white-pawn);
+  --lr-ext-fam: var(--lr-ext-accent);
+  --lr-ext-fam-2: var(--lr-ext-accent-dim);
+  --lr-ext-fam-piece: var(---white-pawn);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 2) {
-  --cdc-fam: #45a3f5;
-  --cdc-fam-2: var(--cdc-cyan-darker);
-  --cdc-fam-piece: var(---white-knight);
+  --lr-ext-fam: #45a3f5;
+  --lr-ext-fam-2: var(--lr-ext-cyan-darker);
+  --lr-ext-fam-piece: var(---white-knight);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 3) {
-  --cdc-fam: #f5a93b;
-  --cdc-fam-2: var(--cdc-orange-darker);
-  --cdc-fam-piece: var(---white-bishop);
+  --lr-ext-fam: #f5a93b;
+  --lr-ext-fam-2: var(--lr-ext-orange-darker);
+  --lr-ext-fam-piece: var(---white-bishop);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 4) {
-  --cdc-fam: #a98bf0;
-  --cdc-fam-2: var(--cdc-purple-dark);
-  --cdc-fam-piece: var(---white-rook);
+  --lr-ext-fam: #a98bf0;
+  --lr-ext-fam-2: var(--lr-ext-purple-dark);
+  --lr-ext-fam-piece: var(---white-rook);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n + 5) {
-  --cdc-fam: #f06a4a;
-  --cdc-fam-2: var(--cdc-red-dark);
-  --cdc-fam-piece: var(---white-queen);
+  --lr-ext-fam: #f06a4a;
+  --lr-ext-fam-2: var(--lr-ext-red-dark);
+  --lr-ext-fam-piece: var(---white-queen);
 }
 
 .puzzle-openings__tree__family:nth-of-type(6n) {
-  --cdc-fam: var(--cdc-cyan-darker);
-  --cdc-fam-2: var(--cdc-cyan-deep);
-  --cdc-fam-piece: var(---white-king);
+  --lr-ext-fam: var(--lr-ext-cyan-darker);
+  --lr-ext-fam-2: var(--lr-ext-cyan-deep);
+  --lr-ext-fam-piece: var(---white-king);
 }
 
 /* The card stays dark; the family's color is only on the tile and the chips' hover. */
@@ -93,9 +93,9 @@
   box-sizing: border-box;
   margin: 0 0 12px !important;
   padding: 14px 16px 16px;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 14px;
-  background: var(--cdc-bg-panel);
+  background: var(--lr-ext-bg-panel);
 }
 
 /* Lichess indents headings by the box padding we removed; in a card that just parts
@@ -118,8 +118,8 @@
   height: 40px;
   border-radius: 12px;
   background:
-    var(--cdc-fam-piece) center 55% / 26px no-repeat,
-    linear-gradient(145deg, var(--cdc-fam), var(--cdc-fam-2));
+    var(--lr-ext-fam-piece) center 55% / 26px no-repeat,
+    linear-gradient(145deg, var(--lr-ext-fam), var(--lr-ext-fam-2));
   box-shadow:
     inset 0 1px 0 #ffffff45,
     inset 0 -2px 0 #00000026,
@@ -138,7 +138,7 @@
 }
 
 .puzzle-openings__tree__family h2 a:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 /* The puzzle count as a pill, like the theme cards'. */
@@ -147,7 +147,7 @@
   padding: 2px 8px;
   border-radius: 999px;
   background: #ffffff12;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 11px !important;
   font-style: normal;
   font-weight: 700 !important;
@@ -185,8 +185,8 @@
 
 /* A chip lights up in its family's color. */
 .puzzle-openings__link:hover {
-  border-color: color-mix(in srgb, var(--cdc-fam) 60%, transparent);
-  background: color-mix(in srgb, var(--cdc-fam) 22%, transparent) !important;
+  border-color: color-mix(in srgb, var(--lr-ext-fam) 60%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-fam) 22%, transparent) !important;
   transform: translateY(-1px);
 }
 
@@ -199,14 +199,14 @@
   align-items: baseline;
   gap: 6px;
   margin: 0 !important;
-  color: var(--cdc-text);
+  color: var(--lr-ext-text);
   font-size: 14px !important;
   font-weight: 700 !important;
 }
 
 .puzzle-openings__link em {
   margin: 0 !important;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 12px !important;
   font-style: normal;
   font-weight: 600 !important;
@@ -215,18 +215,18 @@
 
 /* Openings you played, when the filter is on "my openings". */
 .puzzle-openings__link.opening-mine {
-  border-color: color-mix(in srgb, var(--cdc-orange-dark) 40%, transparent);
-  background: color-mix(in srgb, var(--cdc-orange-dark) 9%, transparent);
+  border-color: color-mix(in srgb, var(--lr-ext-orange-dark) 40%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-orange-dark) 9%, transparent);
 }
 
 .puzzle-openings__link.opening-mine h3 {
-  color: var(--cdc-orange-dark);
+  color: var(--lr-ext-orange-dark);
 }
 
 .puzzle-themes__db {
   margin-top: 28px;
   padding: 0 !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   text-align: center;
 }
@@ -244,8 +244,8 @@
     z-index: 3;
     margin-inline: -8px !important;
     padding-inline: 8px !important;
-    background: var(--cdc-bg-page);
-    box-shadow: var(--cdc-pin-cover);
+    background: var(--lr-ext-bg-page);
+    box-shadow: var(--lr-ext-pin-cover);
   }
 
   /* In RTL Lichess leaves no gap before the menu: widen the free side only. */
@@ -260,7 +260,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -279,7 +279,7 @@
   }
 
   /* Keep focus and #link scrolls below the title, up to 101px tall when it wraps. */
-  html[data-cdc-has~='puzzle-themes'] {
+  html[data-lr-ext-has~='puzzle-themes'] {
     scroll-padding-top: 112px;
   }
 
@@ -301,58 +301,58 @@
 /* Puzzle side menu (these pages, dashboard, history): icons and tile colors, tiles in pages/.
    Dashboard links carry their period (/training/dashboard/30/strengths), hence the $= matches. */
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/training'],
-main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/training'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--ffc689.svg');
+.subnav[data-lr-ext-nav~='puzzles'] a[href$='/training'],
+main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/training'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/training/themes'],
-main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/training/themes'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layers-01.svg');
-  --cdc-nav-color: var(--cdc-accent);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layers-01--7e88db.svg');
+.subnav[data-lr-ext-nav~='puzzles'] a[href$='/training/themes'],
+main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/training/themes'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layers-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layers-01--7e88db.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/training/openings'],
-main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/training/openings'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01--ffc689.svg');
+.subnav[data-lr-ext-nav~='puzzles'] a[href$='/training/openings'],
+main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/training/openings'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/dashboard'],
-main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/dashboard'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-01.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-01--a2edfd.svg');
+.subnav[data-lr-ext-nav~='puzzles'] a[href$='/dashboard'],
+main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/dashboard'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-01--a2edfd.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/improvementAreas'],
-main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/improvementAreas'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg');
-  --cdc-nav-color: var(--cdc-red);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02--ff7777.svg');
+.subnav[data-lr-ext-nav~='puzzles'] a[href$='/improvementAreas'],
+main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/improvementAreas'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-red);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02--ff7777.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/strengths'],
-main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/strengths'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/brain.svg');
-  --cdc-nav-color: var(--cdc-purple);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/brain--caa9fa.svg');
+.subnav[data-lr-ext-nav~='puzzles'] a[href$='/strengths'],
+main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/strengths'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/brain.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/brain--caa9fa.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href$='/training/history'],
-main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active$='/training/history'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/task-01.svg');
-  --cdc-nav-color: var(--cdc-orange);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/task-01--ffc689.svg');
+.subnav[data-lr-ext-nav~='puzzles'] a[href$='/training/history'],
+main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/training/history'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/task-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/task-01--ffc689.svg');
 }
 
-.subnav[data-cdc-nav~='puzzles'] a[href*='/training/of-player'],
-main.page-menu[data-cdc-menu~='puzzles'][data-cdc-nav-active*='/training/of-player'] {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01.svg');
-  --cdc-nav-color: var(--cdc-cyan);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--a2edfd.svg');
+.subnav[data-lr-ext-nav~='puzzles'] a[href*='/training/of-player'],
+main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active*='/training/of-player'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--a2edfd.svg');
 }

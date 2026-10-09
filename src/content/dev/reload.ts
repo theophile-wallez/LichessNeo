@@ -2,6 +2,7 @@ import { DevCheckResponseSchema, type DevCheckRequest } from '#shared/dev-check.
 import { DEV_BUILD } from '#shared/build-mode.ts';
 import type { Feature } from '#shared/features.ts';
 import { isConnected } from '#content/platform/runtime.ts';
+import { messageType } from '#shared/prefix.ts';
 
 // Dev builds only (#shared/build-mode.ts): when the tab gets focus, ask the
 // background worker whether the files on disk changed (a new build). If so it
@@ -20,7 +21,7 @@ function reloadWhenOrphaned(): void {
 }
 
 async function isStale(): Promise<boolean> {
-  const request: DevCheckRequest = { type: 'cdc:dev-check' };
+  const request: DevCheckRequest = { type: messageType('dev-check') };
   try {
     const response = await chrome.runtime.sendMessage<DevCheckRequest, unknown>(request);
     return DevCheckResponseSchema.safeParse(response).data?.reload === true;

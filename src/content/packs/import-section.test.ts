@@ -30,16 +30,16 @@ async function start(
 }
 
 const names = (section: HTMLElement): (string | null)[] =>
-  queryAll(section, '.cdc-pack__name', HTMLElement).map(name => name.textContent);
+  queryAll(section, '.lr-ext-pack__name', HTMLElement).map(name => name.textContent);
 const status = (section: HTMLElement): string | null | undefined =>
-  section.querySelector('.cdc-packs__status')?.textContent;
+  section.querySelector('.lr-ext-packs__status')?.textContent;
 
 function submit(section: HTMLElement, link: string, token = ''): void {
-  const [input, secret] = queryAll(section, '.cdc-packs__import input', HTMLInputElement);
+  const [input, secret] = queryAll(section, '.lr-ext-packs__import input', HTMLInputElement);
   if (!input || !secret) throw new Error('no form');
   input.value = link;
   secret.value = token;
-  queryOne(section, '.cdc-packs__row button', HTMLButtonElement)?.click();
+  queryOne(section, '.lr-ext-packs__row button', HTMLButtonElement)?.click();
 }
 
 // Each message as its name, then what fills it in.
@@ -62,13 +62,13 @@ describe('the settings’ packs', () => {
     const { section } = await start([WOOD, CLICKS]);
     expect(names(section)).toEqual(['Pack ann/packs/main/wood/', 'Pack ann/packs/main/clicks/']);
     expect(
-      queryAll(section, '.cdc-pack__parts', HTMLElement).map(parts => parts.textContent),
+      queryAll(section, '.lr-ext-pack__parts', HTMLElement).map(parts => parts.textContent),
     ).toEqual(['packsPartBoard · packsPartPieces · packsPartSounds', 'packsPartSounds']);
   });
 
   it('remove a pack', async () => {
     const { library, section } = await start([WOOD, CLICKS]);
-    queryOne(section, '.cdc-pack__remove', HTMLButtonElement)?.click();
+    queryOne(section, '.lr-ext-pack__remove', HTMLButtonElement)?.click();
     await flush();
     expect(library.packs()).toEqual([CLICKS]);
     expect(names(section)).toEqual(['Pack ann/packs/main/clicks/']);
@@ -77,7 +77,7 @@ describe('the settings’ packs', () => {
   it('say so when the packs can’t be read', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
     const { section } = await start([], () => Promise.reject(new Error('blocked')));
-    expect(section.querySelector('.cdc-packs__empty')?.textContent).toBe('packsUnreadable');
+    expect(section.querySelector('.lr-ext-packs__empty')?.textContent).toBe('packsUnreadable');
   });
 });
 
@@ -90,7 +90,7 @@ describe('importing a pack', () => {
   it('downloads it, lists it, picks it, and says so', async () => {
     fakeGithub({ repo: 'ann/packs', files });
     const { library, section } = await start([]);
-    expect(section.querySelector('.cdc-packs__empty')?.textContent).toBe('packsEmpty');
+    expect(section.querySelector('.lr-ext-packs__empty')?.textContent).toBe('packsEmpty');
     submit(section, 'https://github.com/ann/packs');
     expect(status(section)).toBe('packsImporting');
     await vi.waitFor(() => expect(library.packs()).toHaveLength(1));
@@ -98,14 +98,14 @@ describe('importing a pack', () => {
     expect(names(section)).toEqual(['Clicks']);
     expect(library.current('sound')).toBe('ann/packs/HEAD/');
     expect(status(section)).toBe('packsImported:Clicks');
-    expect(queryOne(section, '.cdc-packs__row input', HTMLInputElement)?.value).toBe('');
+    expect(queryOne(section, '.lr-ext-packs__row input', HTMLInputElement)?.value).toBe('');
   });
 
   it('takes the token in no form and no password field, which browsers offer to save', async () => {
     fakeGithub({ repo: 'ann/packs', files });
     const { library, section } = await start([]);
     expect(section.querySelector('form, input[type="password"]')).toBeNull();
-    const link = queryOne(section, '.cdc-packs__row input', HTMLInputElement);
+    const link = queryOne(section, '.lr-ext-packs__row input', HTMLInputElement);
     if (!link) throw new Error('no link field');
     link.value = 'https://github.com/ann/packs';
     link.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
@@ -116,18 +116,18 @@ describe('importing a pack', () => {
     const { section } = await start([]);
     submit(section, '  ', 'secret');
     expect(status(section)).toBe('packsNoLink');
-    expect(queryOne(section, '.cdc-packs__token', HTMLInputElement)?.value).toBe('secret');
+    expect(queryOne(section, '.lr-ext-packs__token', HTMLInputElement)?.value).toBe('secret');
   });
 
   it('says what went wrong, keeping the link to fix it', async () => {
     fakeGithub({ repo: 'ann/packs', files, token: 'secret' });
     const { section } = await start([]);
     submit(section, 'https://github.com/ann/packs', 'nope');
-    const [link, token] = queryAll(section, '.cdc-packs__import input', HTMLInputElement);
+    const [link, token] = queryAll(section, '.lr-ext-packs__import input', HTMLInputElement);
     // Never left in the page, which Lichess's scripts can read.
     expect(token?.value).toBe('');
     await vi.waitFor(() => expect(status(section)).toBe('GitHub turned the token down.'));
-    expect(section.querySelector('.cdc-packs__status--failed')).not.toBeNull();
+    expect(section.querySelector('.lr-ext-packs__status--failed')).not.toBeNull();
     expect(link?.value).toBe('https://github.com/ann/packs');
   });
 });

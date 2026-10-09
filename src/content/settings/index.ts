@@ -13,7 +13,7 @@ import { buildSection } from './section.ts';
 
 const DISPLAY = "a[href$='/preferences/display']";
 // Lichess's own link that was active, given back its look once the section closes.
-const WAS_ACTIVE = 'cdcWasActive';
+const WAS_ACTIVE = 'lrExtWasActive';
 
 let link: HTMLAnchorElement | null = null;
 let section: HTMLElement | null = null;
@@ -21,7 +21,7 @@ let wasOpen = false;
 
 function addLink(menu: HTMLElement): HTMLAnchorElement {
   const added = createElement('a', {
-    className: 'cdc-settings-link',
+    className: 'lr-ext-settings-link',
     text: message('settingsLink'),
     attrs: { href: SETTINGS_URL },
   });
@@ -30,14 +30,14 @@ function addLink(menu: HTMLElement): HTMLAnchorElement {
   const display = queryOne(menu, DISPLAY, HTMLElement);
   const links = display?.parentElement ?? queryOne(menu, '.subnav__inner', HTMLElement) ?? menu;
   links.insertBefore(added, display);
-  links.insertBefore(createElement('div', { className: 'sep cdc-settings-sep' }), display);
+  links.insertBefore(createElement('div', { className: 'sep lr-ext-settings-sep' }), display);
   return added;
 }
 
 function showOpen(main: HTMLElement, menu: HTMLElement, open: boolean): void {
-  setData(main, 'cdcSettings', open ? '' : null);
+  setData(main, 'lrExtSettings', open ? '' : null);
   link?.classList.toggle('active', open);
-  for (const other of menu.querySelectorAll('a:not(.cdc-settings-link)')) {
+  for (const other of menu.querySelectorAll('a:not(.lr-ext-settings-link)')) {
     if (!(other instanceof HTMLElement)) continue;
     if (open && other.classList.contains('active')) {
       other.classList.toggle('active', false);

@@ -22,7 +22,7 @@
         "premove": ["e2", "e4"]
       }
     ],
-    "calls": [["play", "cdc-premove", null]]
+    "calls": [["play", "lr-ext-premove", null]]
   },
   {
     "name": "a click-to-move with a premove already queued",
@@ -49,7 +49,7 @@
         "premove": ["e2", "e4"]
       }
     ],
-    "calls": [["play", "cdc-premove", null]]
+    "calls": [["play", "lr-ext-premove", null]]
   },
   {
     "name": "a click-to-move that plays a move",
@@ -65,7 +65,7 @@
         }
       }
     ],
-    "calls": [["play", "cdc-move-self", 1]]
+    "calls": [["play", "lr-ext-move-self", 1]]
   },
   {
     "name": "a click on another own piece",
@@ -91,7 +91,7 @@
         "premove": ["e2", "e7"]
       }
     ],
-    "calls": [["play", "cdc-premove", null]]
+    "calls": [["play", "lr-ext-premove", null]]
   },
   {
     "name": "a click on the selected piece",
@@ -129,7 +129,7 @@
         "up": "e5"
       }
     ],
-    "calls": [["play", "cdc-illegal", null]]
+    "calls": [["play", "lr-ext-illegal", null]]
   },
   {
     "name": "a drop that queues a premove",
@@ -143,7 +143,7 @@
         "premove": ["e7", "e5"]
       }
     ],
-    "calls": [["play", "cdc-premove", null]]
+    "calls": [["play", "lr-ext-premove", null]]
   },
   {
     "name": "a drop that plays a move",
@@ -159,7 +159,7 @@
         }
       }
     ],
-    "calls": [["play", "cdc-move-self", 1]]
+    "calls": [["play", "lr-ext-move-self", 1]]
   },
   {
     "name": "a drop back on its square",
@@ -253,7 +253,7 @@
         }
       }
     ],
-    "calls": [["play", "cdc-promote", 1]]
+    "calls": [["play", "lr-ext-promote", 1]]
   },
   {
     "name": "a promotion with nothing pressed on",
@@ -267,6 +267,6 @@
         }
       }
     ],
-    "calls": [["play", "cdc-move-self", 1]]
+    "calls": [["play", "lr-ext-move-self", 1]]
   }
 ]

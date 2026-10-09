@@ -15,12 +15,13 @@ import {
 } from './choose.ts';
 import { watchJumps, type JumpSounds } from './jumps.ts';
 import type { SoundSession } from './session.ts';
+import { PREFIX } from '#shared/prefix.ts';
 
 // Our sounds go into Lichess's player under their own names, and its `play()`,
 // `move()` and `saySan()` are wrapped so each event picks the matching one.
 // `urls` changes with the pick: once it's empty, every call goes to Lichess.
 
-const PREFIX = 'cdc-';
+const NAME_PREFIX = `${PREFIX}-`;
 // Our own moves reach the server, and come back with their SAN, only after
 // the board sound: a SAN this fresh is the move being played now.
 const FRESH_SAN_MS = 300;
@@ -62,7 +63,7 @@ function soundAfterBoardMove(session: SoundSession, lichessName: string | undefi
 
 function hookPlay({ sound, urls, playOurs, playLichess }: Hook): void {
   sound.play = (name: unknown, volume: unknown = 1): unknown => {
-    if (typeof name === 'string' && !name.startsWith(PREFIX)) {
+    if (typeof name === 'string' && !name.startsWith(NAME_PREFIX)) {
       // Our one check sound comes from move(). Lichess plays its own check and
       // mate sounds just before an opponent's move, or on the echo of ours.
       const ownCheck = name === 'check' || name === 'checkmate';
@@ -130,8 +131,8 @@ function hookSaySan({ sound, urls, jumps }: Hook): void {
 export function setSoundPaths(sound: SoundPlayer, urls: ReadonlyMap<SoundName, string>): void {
   for (const name of SOUND_NAMES) {
     const url = urls.get(name);
-    if (url === undefined) sound.paths.delete(PREFIX + name);
-    else sound.paths.set(PREFIX + name, url);
+    if (url === undefined) sound.paths.delete(NAME_PREFIX + name);
+    else sound.paths.set(NAME_PREFIX + name, url);
   }
 }
 
@@ -144,12 +145,12 @@ export function hookSoundPlayer(
   urls: ReadonlyMap<SoundName, string>,
   session: SoundSession,
 ): boolean {
-  for (const [name, url] of urls) sound.paths.set(PREFIX + name, url);
-  if (sound.cdcHooked) return false;
-  sound.cdcHooked = true;
+  for (const [name, url] of urls) sound.paths.set(NAME_PREFIX + name, url);
+  if (sound.lrExtHooked) return false;
+  sound.lrExtHooked = true;
   const playLichess = sound.play.bind(sound);
   const playOurs: PlayOurs = (name, volume) =>
-    urls.has(name) ? playLichess(PREFIX + name, volume) : undefined;
+    urls.has(name) ? playLichess(NAME_PREFIX + name, volume) : undefined;
   const playMove: PlayMove = (name, volume, captured) => {
     session.lastMoveSoundAt = Date.now();
     jumps.moved();

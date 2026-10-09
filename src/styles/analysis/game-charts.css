@@ -2,75 +2,75 @@
 
 /* The advantage and the move times in the analysis' tools, drawn in SVG by page/charts/game in
  * the rating chart's look (ratingchart.css: grid, guide, dot, tooltip, entrance). Lichess's
- * canvas is hidden only once ours is in (.cdc-gchart-on on its container). */
+ * canvas is hidden only once ours is in (.lr-ext-gchart-on on its container). */
 
-:is(#acpl-chart-container, #movetimes-chart-container).cdc-gchart-on > canvas {
+:is(#acpl-chart-container, #movetimes-chart-container).lr-ext-gchart-on > canvas {
   display: none !important;
 }
 
-:is(#acpl-chart-container, #movetimes-chart-container).cdc-gchart-on {
+:is(#acpl-chart-container, #movetimes-chart-container).lr-ext-gchart-on {
   height: auto !important;
 }
 
-.cdc-gchart {
+.lr-ext-gchart {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-family: var(--cdc-font);
+  font-family: var(--lr-ext-font);
 }
 
-.cdc-gchart__legend {
+.lr-ext-gchart__legend {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.cdc-gchart__legend:empty {
+.lr-ext-gchart__legend:empty {
   display: none;
 }
 
-.cdc-gchart__chip {
+.lr-ext-gchart__chip {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   height: 28px;
   padding: 0 12px 0 10px;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 999px;
   background: #ffffff08;
-  color: var(--cdc-text);
-  font: 600 12.5px/1 var(--cdc-font);
+  color: var(--lr-ext-text);
+  font: 600 12.5px/1 var(--lr-ext-font);
 }
 
-.cdc-gchart .cdc-rchart__plot {
+.lr-ext-gchart .lr-ext-rchart__plot {
   border-radius: 8px;
-  background: var(--cdc-bg-panel-dark);
+  background: var(--lr-ext-bg-panel-dark);
 }
 
 /* The areas end flush with the plot's rounded corners; the tooltip, outside the SVG, isn't cut. */
-.cdc-gchart .cdc-rchart__svg {
+.lr-ext-gchart .lr-ext-rchart__svg {
   overflow: hidden;
   border-radius: 8px;
 }
 
 /* Lichess's game duration, under the move times rather than over them. */
-#movetimes-chart-container.cdc-gchart-on > .game-duration {
+#movetimes-chart-container.lr-ext-gchart-on > .game-duration {
   position: static !important;
   margin-top: 6px;
-  color: var(--cdc-text-dim);
-  font: 600 12px var(--cdc-font);
+  color: var(--lr-ext-text-dim);
+  font: 600 12px var(--lr-ext-font);
   text-align: end;
 }
 
-.cdc-gchart .cdc-rchart__hit {
+.lr-ext-gchart .lr-ext-rchart__hit {
   cursor: pointer;
 }
 
-.cdc-gchart__area {
-  fill: url('#cdc-gchart-white');
+.lr-ext-gchart__area {
+  fill: url('#lr-ext-gchart-white');
 }
 
-.cdc-gchart__line {
+.lr-ext-gchart__line {
   fill: none;
   stroke: #fff;
   stroke-width: 1.5;
@@ -78,41 +78,41 @@
 }
 
 /* An even game, over the area as on the review's graph. */
-.cdc-gchart__even {
-  stroke: var(--cdc-grey-400);
+.lr-ext-gchart__even {
+  stroke: var(--lr-ext-grey-400);
   stroke-opacity: 0.6;
 }
 
-.cdc-gchart__bar--white {
-  fill: var(--cdc-grey-100);
+.lr-ext-gchart__bar--white {
+  fill: var(--lr-ext-grey-100);
 }
 
-.cdc-gchart__bar--black {
-  fill: var(--cdc-grey-400);
+.lr-ext-gchart__bar--black {
+  fill: var(--lr-ext-grey-400);
 }
 
-.cdc-gchart__phase {
+.lr-ext-gchart__phase {
   stroke: #ffffff33;
   stroke-dasharray: 3 4;
 }
 
-.cdc-gchart__phase-name {
-  fill: var(--cdc-text-dim);
-  font: 700 10.5px var(--cdc-font);
+.lr-ext-gchart__phase-name {
+  fill: var(--lr-ext-text-dim);
+  font: 700 10.5px var(--lr-ext-font);
 }
 
 /* The move on the board, in the accent. */
-.cdc-gchart__ply {
+.lr-ext-gchart__ply {
   display: none;
-  stroke: var(--cdc-accent);
+  stroke: var(--lr-ext-accent);
   stroke-width: 2;
 }
 
-.cdc-gchart__ply--on {
+.lr-ext-gchart__ply--on {
   display: inline;
 }
 
-.cdc-gchart .cdc-rchart__dot {
-  --cdc-series-color: #fff;
-  stroke: var(--cdc-bg-panel-dark);
+.lr-ext-gchart .lr-ext-rchart__dot {
+  --lr-ext-series-color: #fff;
+  stroke: var(--lr-ext-bg-panel-dark);
 }

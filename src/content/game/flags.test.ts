@@ -7,7 +7,7 @@ import { createFlagsSync } from './flags.ts';
 import legacy from './fixtures/legacy-flags.json' with { type: 'json' };
 
 const readFlags = (): (string | null)[] =>
-  queryAll(document, '.ruser, a.user-link', HTMLElement).map(bar => bar.dataset.cdcFlag ?? null);
+  queryAll(document, '.ruser, a.user-link', HTMLElement).map(bar => bar.dataset.lrExtFlag ?? null);
 
 afterEach(() => {
   document.body.innerHTML = '';

@@ -1,64 +1,64 @@
 /* ---- Shields --- */
 
 /* Shields have no header icon: the same colors, keyed on how the header's link ends. */
-.tournament-shields .tournament-shields__item[data-cdc-href$='/ultraBullet'] {
-  --cdc-lb: #f06a4a;
-  --cdc-lb-2: var(--cdc-red-dark);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/ultraBullet'] {
+  --lr-ext-lb: #f06a4a;
+  --lr-ext-lb-2: var(--lr-ext-red-dark);
 }
 .tournament-shields
-  .tournament-shields__item:is([data-cdc-href$='/hyperBullet'], [data-cdc-href$='/bullet']) {
-  --cdc-lb: #f5a93b;
-  --cdc-lb-2: var(--cdc-orange-darker);
+  .tournament-shields__item:is([data-lr-ext-href$='/hyperBullet'], [data-lr-ext-href$='/bullet']) {
+  --lr-ext-lb: #f5a93b;
+  --lr-ext-lb-2: var(--lr-ext-orange-darker);
 }
 .tournament-shields
-  .tournament-shields__item:is([data-cdc-href$='/superBlitz'], [data-cdc-href$='/blitz']) {
-  --cdc-lb: var(--cdc-yellow-dark);
-  --cdc-lb-2: var(--cdc-orange-darker);
+  .tournament-shields__item:is([data-lr-ext-href$='/superBlitz'], [data-lr-ext-href$='/blitz']) {
+  --lr-ext-lb: var(--lr-ext-yellow-dark);
+  --lr-ext-lb-2: var(--lr-ext-orange-darker);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/rapid'] {
-  --cdc-lb: var(--cdc-accent);
-  --cdc-lb-2: var(--cdc-accent-dim);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/rapid'] {
+  --lr-ext-lb: var(--lr-ext-accent);
+  --lr-ext-lb-2: var(--lr-ext-accent-dim);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/classical'] {
-  --cdc-lb: #45a3f5;
-  --cdc-lb-2: var(--cdc-cyan-darker);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/classical'] {
+  --lr-ext-lb: #45a3f5;
+  --lr-ext-lb-2: var(--lr-ext-cyan-darker);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/crazyhouse'] {
-  --cdc-lb: var(--cdc-cyan-dark);
-  --cdc-lb-2: var(--cdc-cyan-deep);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/crazyhouse'] {
+  --lr-ext-lb: var(--lr-ext-cyan-dark);
+  --lr-ext-lb-2: var(--lr-ext-cyan-deep);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/chess960'] {
-  --cdc-lb: var(--cdc-orange-dark);
-  --cdc-lb-2: var(--cdc-orange-darker);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/chess960'] {
+  --lr-ext-lb: var(--lr-ext-orange-dark);
+  --lr-ext-lb-2: var(--lr-ext-orange-darker);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/antichess'] {
-  --cdc-lb: var(--cdc-pink);
-  --cdc-lb-2: var(--cdc-pink-darker);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/antichess'] {
+  --lr-ext-lb: var(--lr-ext-pink);
+  --lr-ext-lb-2: var(--lr-ext-pink-darker);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/atomic'] {
-  --cdc-lb: var(--cdc-red);
-  --cdc-lb-2: var(--cdc-red-darker);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/atomic'] {
+  --lr-ext-lb: var(--lr-ext-red);
+  --lr-ext-lb-2: var(--lr-ext-red-darker);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/threeCheck'] {
-  --cdc-lb: var(--cdc-cyan-darker);
-  --cdc-lb-2: var(--cdc-cyan-deep);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/threeCheck'] {
+  --lr-ext-lb: var(--lr-ext-cyan-darker);
+  --lr-ext-lb-2: var(--lr-ext-cyan-deep);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/kingOfTheHill'] {
-  --cdc-lb: var(--cdc-orange-dark);
-  --cdc-lb-2: var(--cdc-orange-darker);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/kingOfTheHill'] {
+  --lr-ext-lb: var(--lr-ext-orange-dark);
+  --lr-ext-lb-2: var(--lr-ext-orange-darker);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/horde'] {
-  --cdc-lb: var(--cdc-cyan-dark);
-  --cdc-lb-2: var(--cdc-grey-400);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/horde'] {
+  --lr-ext-lb: var(--lr-ext-cyan-dark);
+  --lr-ext-lb-2: var(--lr-ext-grey-400);
 }
-.tournament-shields .tournament-shields__item[data-cdc-href$='/racingKings'] {
-  --cdc-lb: var(--cdc-cyan);
-  --cdc-lb-2: var(--cdc-cyan-dark);
+.tournament-shields .tournament-shields__item[data-lr-ext-href$='/racingKings'] {
+  --lr-ext-lb: var(--lr-ext-cyan);
+  --lr-ext-lb-2: var(--lr-ext-cyan-dark);
 }
 
 .tournament-shields,
 main.tournament-categ-shields {
-  --cdc-shield: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 46'%3E%3Cpath d='M20 1 38 7v14c0 11-7.6 19.6-18 24C9.6 40.6 2 32 2 21V7z'/%3E%3C/svg%3E");
+  --lr-ext-shield: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 46'%3E%3Cpath d='M20 1 38 7v14c0 11-7.6 19.6-18 24C9.6 40.6 2 32 2 21V7z'/%3E%3C/svg%3E");
 }
 
 /* Lichess's gold shield picture becomes the header's tile: the card's gradient, cut as a shield. */
@@ -69,9 +69,9 @@ main.tournament-categ-shields {
   height: 46px !important;
   margin-inline-end: 6px;
   padding-bottom: 4px;
-  background: linear-gradient(145deg, var(--cdc-lb), var(--cdc-lb-2)) !important;
-  -webkit-mask: var(--cdc-shield) center / contain no-repeat;
-  mask: var(--cdc-shield) center / contain no-repeat;
+  background: linear-gradient(145deg, var(--lr-ext-lb), var(--lr-ext-lb-2)) !important;
+  -webkit-mask: var(--lr-ext-shield) center / contain no-repeat;
+  mask: var(--lr-ext-shield) center / contain no-repeat;
   filter: none !important;
   color: #fff !important;
   font-size: 22px !important;
@@ -97,12 +97,12 @@ main.tournament-categ-shields {
   height: 21px;
   margin-inline: 3px;
   background: #ffffff26;
-  -webkit-mask: var(--cdc-shield) center / contain no-repeat;
-  mask: var(--cdc-shield) center / contain no-repeat;
+  -webkit-mask: var(--lr-ext-shield) center / contain no-repeat;
+  mask: var(--lr-ext-shield) center / contain no-repeat;
 }
 
 .tournament-shields li:first-child::before {
-  background: linear-gradient(145deg, var(--cdc-yellow), var(--cdc-orange-darker));
+  background: linear-gradient(145deg, var(--lr-ext-yellow), var(--lr-ext-orange-darker));
 }
 
 .tournament-shields li:first-child .user-link {
@@ -112,8 +112,8 @@ main.tournament-categ-shields {
 /* ---- A shield's history --- */
 
 main.tournament-categ-shields {
-  --cdc-lb: var(--cdc-orange-dark);
-  --cdc-lb-2: var(--cdc-orange-darker);
+  --lr-ext-lb: var(--lr-ext-orange-dark);
+  --lr-ext-lb-2: var(--lr-ext-orange-darker);
 }
 
 main.tournament-categ-shields .page-menu__content.box {
@@ -144,14 +144,14 @@ main.tournament-categ-shields .box__top h1 > a {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
-  color: var(--cdc-text) !important;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text) !important;
   font-size: 16px;
 }
 
 main.tournament-categ-shields .box__top h1 > a:hover {
-  background: var(--cdc-btn-grey-hover);
+  background: var(--lr-ext-btn-grey-hover);
   color: #fff !important;
 }
 
@@ -178,19 +178,19 @@ main.tournament-categ-shields .box > ol > li {
   height: auto !important;
   min-width: 0;
   padding: 12px 14px !important;
-  border: 1px solid var(--cdc-card-border);
+  border: 1px solid var(--lr-ext-card-border);
   border-radius: 12px;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     border-color 0.15s,
     box-shadow 0.15s !important;
-  animation: cdc-lb-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation: lr-ext-lb-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   animation-delay: calc(min(sibling-index(), 24) * 25ms);
 }
 
 main.tournament-categ-shields .box > ol > li:hover {
-  border-color: color-mix(in srgb, var(--cdc-lb) 55%, transparent);
+  border-color: color-mix(in srgb, var(--lr-ext-lb) 55%, transparent);
   box-shadow: 0 6px 18px #00000059;
   transform: translateY(-3px);
 }
@@ -202,11 +202,11 @@ main.tournament-categ-shields .shield-trophy {
   width: 34px !important;
   height: 39px !important;
   padding-bottom: 3px;
-  background: linear-gradient(145deg, var(--cdc-yellow), var(--cdc-orange-darker)) !important;
-  -webkit-mask: var(--cdc-shield) center / contain no-repeat;
-  mask: var(--cdc-shield) center / contain no-repeat;
+  background: linear-gradient(145deg, var(--lr-ext-yellow), var(--lr-ext-orange-darker)) !important;
+  -webkit-mask: var(--lr-ext-shield) center / contain no-repeat;
+  mask: var(--lr-ext-shield) center / contain no-repeat;
   filter: none !important;
-  color: var(--cdc-orange-deep) !important;
+  color: var(--lr-ext-orange-deep) !important;
   font-size: 18px !important;
   line-height: 36px !important;
   text-shadow: 0 1px 0 #ffffff59 !important;
@@ -226,7 +226,7 @@ main.tournament-categ-shields .user-link {
   align-self: end;
   overflow: hidden;
   min-width: 0;
-  color: var(--cdc-text) !important;
+  color: var(--lr-ext-text) !important;
   font-size: 15px;
   font-weight: 700;
   text-overflow: ellipsis;
@@ -242,8 +242,8 @@ main.tournament-categ-shields li > a:not(.user-link) {
   justify-self: start;
   padding: 3px 10px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--cdc-lb) 16%, transparent);
-  color: var(--cdc-lb) !important;
+  background: color-mix(in srgb, var(--lr-ext-lb) 16%, transparent);
+  color: var(--lr-ext-lb) !important;
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -254,8 +254,8 @@ main.tournament-categ-shields li > a:not(.user-link) {
 }
 
 main.tournament-categ-shields li > a:not(.user-link):hover {
-  background: var(--cdc-lb);
-  color: var(--cdc-grey-950) !important;
+  background: var(--lr-ext-lb);
+  color: var(--lr-ext-grey-950) !important;
 }
 
 /* The current holder: a card across the cabinet, with a bigger shield. */
@@ -263,7 +263,7 @@ main.tournament-categ-shields .box > ol > li:first-child {
   grid-column: 1 / -1;
   gap: 6px 16px;
   padding: 16px 20px !important;
-  border-color: color-mix(in srgb, var(--cdc-lb) 40%, transparent);
+  border-color: color-mix(in srgb, var(--lr-ext-lb) 40%, transparent);
 }
 
 main.tournament-categ-shields li:first-child .shield-trophy {
@@ -293,11 +293,11 @@ main.tournament-categ-shields li:first-child .user-link {
     top: 0;
     margin: -16px 0 0 !important;
     padding: 16px 0 10px !important;
-    background: var(--cdc-bg-page);
+    background: var(--lr-ext-bg-page);
     box-shadow:
-      var(--cdc-pin-cover-wide),
-      -12px 0 var(--cdc-bg-page),
-      12px 0 var(--cdc-bg-page);
+      var(--lr-ext-pin-cover-wide),
+      -12px 0 var(--lr-ext-bg-page),
+      12px 0 var(--lr-ext-bg-page);
   }
 
   main.tournament-categ-shields .box__top::after {
@@ -306,7 +306,7 @@ main.tournament-categ-shields li:first-child .user-link {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--cdc-bg-page), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

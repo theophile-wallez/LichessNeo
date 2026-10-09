@@ -7,27 +7,27 @@ import legacy from './fixtures/legacy-board-tools.json' with { type: 'json' };
 const ROUND = legacy.html;
 
 const button = (name: string): HTMLButtonElement | null =>
-  queryOne(document, `.cdc-board-tools__btn--${name}`, HTMLButtonElement);
+  queryOne(document, `.lr-ext-board-tools__btn--${name}`, HTMLButtonElement);
 
 afterEach(() => {
   document.body.innerHTML = '';
-  delete document.documentElement.dataset.cdcFlipLabel;
+  delete document.documentElement.dataset.lrExtFlipLabel;
 });
 
 describe('board tools', () => {
   it('adds a cog and a flip button to the game page, as the original did', () => {
     document.body.innerHTML = ROUND;
-    document.documentElement.dataset.cdcFlipLabel = legacy.flipLabel;
+    document.documentElement.dataset.lrExtFlipLabel = legacy.flipLabel;
     syncBoardTools();
     syncBoardTools();
-    expect(document.querySelector('.cdc-board-tools')?.outerHTML).toBe(legacy.tools);
+    expect(document.querySelector('.lr-ext-board-tools')?.outerHTML).toBe(legacy.tools);
     document.querySelector('.board-menu-toggle-btn')?.classList.add('active');
     syncBoardTools();
     expect(document.querySelector('main')?.lastElementChild?.outerHTML).toBe(legacy.active);
   });
 
   it('takes the menu’s label from its tooltip once the title has moved there', () => {
-    document.body.innerHTML = ROUND.replace('title="Board menu"', 'data-cdc-tip="Menu"');
+    document.body.innerHTML = ROUND.replace('title="Board menu"', 'data-lr-ext-tip="Menu"');
     syncBoardTools();
     expect(button('menu')?.getAttribute('aria-label')).toBe('Menu');
   });
@@ -47,22 +47,22 @@ describe('board tools', () => {
     syncBoardTools();
     document.body.innerHTML = ROUND;
     syncBoardTools();
-    expect(document.querySelectorAll('.cdc-board-tools')).toHaveLength(1);
+    expect(document.querySelectorAll('.lr-ext-board-tools')).toHaveLength(1);
   });
 
   it('shows the flip button while the pointer is on the board', () => {
     boardTools.start();
     document.body.innerHTML = ROUND;
     syncBoardTools();
-    const tools = document.querySelector('.cdc-board-tools');
+    const tools = document.querySelector('.lr-ext-board-tools');
     document
       .querySelector('.cg-wrap')
       ?.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(tools?.classList.contains('cdc-board-tools--hover')).toBe(true);
+    expect(tools?.classList.contains('lr-ext-board-tools--hover')).toBe(true);
     document.body.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(tools?.classList.contains('cdc-board-tools--hover')).toBe(false);
+    expect(tools?.classList.contains('lr-ext-board-tools--hover')).toBe(false);
     tools?.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
     document.dispatchEvent(new MouseEvent('mouseout', { relatedTarget: null }));
-    expect(tools?.classList.contains('cdc-board-tools--hover')).toBe(false);
+    expect(tools?.classList.contains('lr-ext-board-tools--hover')).toBe(false);
   });
 });

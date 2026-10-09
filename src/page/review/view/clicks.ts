@@ -19,7 +19,7 @@ import {
 } from './navigation.ts';
 import { endRetry, revealRetry, startRetry } from './retry.ts';
 
-// The panel's and the controls' buttons, by their `data-cdc` action.
+// The panel's and the controls' buttons, by their `data-lr-ext` action.
 
 // Explain off leaves the line it played for the move it stands for.
 function toggleExplain(session: Session, analysis: Analysis): void {
@@ -30,7 +30,7 @@ function toggleExplain(session: Session, analysis: Analysis): void {
 }
 
 function jumpToMoment(analysis: Analysis, card: HTMLElement): void {
-  const ply = Number(card.dataset.cdcPly);
+  const ply = Number(card.dataset.lrExtPly);
   if (Number.isInteger(ply)) jump(analysis, ply);
 }
 
@@ -88,9 +88,9 @@ function dispatch(session: Session, analysis: Analysis, { action, button }: Clic
 }
 
 function onClick(session: Session, event: MouseEvent): void {
-  const button = closestTo(event.target, '[data-cdc]', HTMLElement);
+  const button = closestTo(event.target, '[data-lr-ext]', HTMLElement);
   if (!button || (button instanceof HTMLButtonElement && button.disabled)) return;
-  const parsed = PanelActionSchema.safeParse(button.dataset.cdc);
+  const parsed = PanelActionSchema.safeParse(button.dataset.lrExt);
   if (!parsed.success) return;
   const action = parsed.data;
   if (action === 'coach') {
@@ -111,7 +111,7 @@ function onClick(session: Session, event: MouseEvent): void {
 /** The redraw replaced the button: the focus stays in the review, on the same action if it's there. */
 function keepFocus({ elements }: Session, action: PanelAction): void {
   const same = [elements.panel, elements.controls]
-    .map(root => queryOne(root, `[data-cdc="${action}"]`, HTMLElement))
+    .map(root => queryOne(root, `[data-lr-ext="${action}"]`, HTMLElement))
     .find(element => element !== null);
   (same ?? elements.panel).focus({ preventScroll: true });
 }

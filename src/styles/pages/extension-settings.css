@@ -3,96 +3,96 @@
 /* The account pages' section for the extension (content/settings): it takes the place of the
    page's content while its link is picked, a card per setting with a switch. */
 
-main.account:not([data-cdc-settings]) > .cdc-settings,
-main.account[data-cdc-settings] > .page-menu__content:not(.cdc-settings) {
+main.account:not([data-lr-ext-settings]) > .lr-ext-settings,
+main.account[data-lr-ext-settings] > .page-menu__content:not(.lr-ext-settings) {
   display: none !important;
 }
 
 /* Its link's tile in the menu (pages/headings-menus.css), and its title's. */
-.subnav[data-cdc-nav~='account'] a.cdc-settings-link,
-main.account .cdc-settings {
-  --cdc-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
-  --cdc-nav-color: var(--cdc-accent);
-  --cdc-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02--7e88db.svg');
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-link,
+main.account .lr-ext-settings {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02--7e88db.svg');
 }
 
-.cdc-settings__intro {
+.lr-ext-settings__intro {
   margin: 0 0 22px;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 14px;
   line-height: 1.5;
 }
 
-.cdc-settings__list {
+.lr-ext-settings__list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.cdc-setting {
-  --cdc-setting-color: var(--cdc-cyan);
+.lr-ext-setting {
+  --lr-ext-setting-color: var(--lr-ext-cyan);
 
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 16px 18px;
   border-radius: 14px;
-  background: var(--cdc-bg-panel);
-  box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  background: var(--lr-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
   transition: box-shadow 0.2s !important;
 }
 
-.cdc-setting:hover {
-  box-shadow: inset 0 0 0 1px var(--cdc-card-border-hover);
+.lr-ext-setting:hover {
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border-hover);
 }
 
-.cdc-setting[data-cdc-setting='uiSounds'] {
-  --cdc-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
+.lr-ext-setting[data-lr-ext-setting='uiSounds'] {
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
 }
 
-.cdc-setting__icon {
+.lr-ext-setting__icon {
   position: relative;
   flex: none;
   width: 46px;
   height: 46px;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--cdc-setting-color) 20%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-setting-color) 20%, transparent);
   box-shadow: inset 0 1px #ffffff1a;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 /* Its Hugeicon, in the tile's color. */
-.cdc-setting__icon::after {
+.lr-ext-setting__icon::after {
   content: '';
   position: absolute;
   inset: 0;
   margin: auto;
   width: 28px;
   height: 28px;
-  background: color-mix(in srgb, var(--cdc-setting-color) 80%, #fff);
-  mask: var(--cdc-setting-glyph) center / contain no-repeat;
+  background: color-mix(in srgb, var(--lr-ext-setting-color) 80%, #fff);
+  mask: var(--lr-ext-setting-glyph) center / contain no-repeat;
 }
 
-.cdc-setting:hover .cdc-setting__icon {
+.lr-ext-setting:hover .lr-ext-setting__icon {
   transform: rotate(-6deg) scale(1.08);
 }
 
 /* Off, the tile dims: what it stands for is silent. */
-.cdc-setting:not([data-cdc-on]) .cdc-setting__icon {
+.lr-ext-setting:not([data-lr-ext-on]) .lr-ext-setting__icon {
   filter: grayscale(1);
   opacity: 0.55;
 }
 
-.cdc-setting__text {
+.lr-ext-setting__text {
   flex: 1;
   min-width: 0;
 }
 
-.cdc-setting__title {
+.lr-ext-setting__title {
   margin: 0 0 3px !important;
   padding: 0 !important;
   border: none !important;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 16px !important;
   font-weight: 700 !important;
   line-height: 1.3;
@@ -100,20 +100,20 @@ main.account .cdc-settings {
   text-transform: none !important;
 }
 
-.cdc-setting__body {
+.lr-ext-setting__body {
   margin: 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13.5px;
   line-height: 1.45;
 }
 
 /* Until the stored settings are read (content/settings/section.ts). */
-.cdc-settings[data-cdc-pending] .cdc-switch {
+.lr-ext-settings[data-lr-ext-pending] .lr-ext-switch {
   visibility: hidden;
 }
 
 /* The switch: Lichess's pill (pages/tabs-tables-forms.css), larger, its knob springing over. */
-.cdc-switch {
+.lr-ext-switch {
   position: relative;
   flex: none;
   width: 50px;
@@ -121,7 +121,7 @@ main.account .cdc-settings {
   padding: 0;
   border: none;
   border-radius: 999px;
-  background: var(--cdc-grey-600);
+  background: var(--lr-ext-grey-600);
   box-shadow: inset 0 1px 3px #00000066;
   cursor: pointer;
   transition:
@@ -129,19 +129,19 @@ main.account .cdc-settings {
     box-shadow 0.2s !important;
 }
 
-.cdc-switch[aria-checked='true'] {
-  background: var(--cdc-btn-primary);
+.lr-ext-switch[aria-checked='true'] {
+  background: var(--lr-ext-btn-primary);
   box-shadow:
     inset 0 1px 0 #ffffff33,
-    0 0 0 4px color-mix(in srgb, var(--cdc-accent) 22%, transparent);
+    0 0 0 4px color-mix(in srgb, var(--lr-ext-accent) 22%, transparent);
 }
 
-.cdc-switch:focus-visible {
-  outline: 2px solid var(--cdc-accent);
+.lr-ext-switch:focus-visible {
+  outline: 2px solid var(--lr-ext-accent);
   outline-offset: 3px;
 }
 
-.cdc-switch__knob {
+.lr-ext-switch__knob {
   position: absolute;
   top: 3px;
   left: 3px;
@@ -153,15 +153,15 @@ main.account .cdc-settings {
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-.cdc-switch[aria-checked='true'] .cdc-switch__knob {
+.lr-ext-switch[aria-checked='true'] .lr-ext-switch__knob {
   transform: translateX(22px);
 }
 
 /* ---- The Packs card (content/packs/import-section.ts) --- */
 
-.cdc-packs {
-  --cdc-setting-color: var(--cdc-accent);
-  --cdc-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
+.lr-ext-packs {
+  --lr-ext-setting-color: var(--lr-ext-accent);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
 
   display: flex;
   flex-direction: column;
@@ -169,38 +169,38 @@ main.account .cdc-settings {
   margin-top: 10px;
   padding: 16px 18px 18px;
   border-radius: 14px;
-  background: var(--cdc-bg-panel);
-  box-shadow: inset 0 0 0 1px var(--cdc-card-border);
+  background: var(--lr-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
 }
 
-.cdc-packs__head {
+.lr-ext-packs__head {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.cdc-packs:hover .cdc-setting__icon {
+.lr-ext-packs:hover .lr-ext-setting__icon {
   transform: rotate(-6deg) scale(1.08);
 }
 
-.cdc-packs__heading {
+.lr-ext-packs__heading {
   flex: 1;
   min-width: 0;
 }
 
-.cdc-packs__list {
+.lr-ext-packs__list {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.cdc-packs__empty {
+.lr-ext-packs__empty {
   margin: 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13.5px;
 }
 
-.cdc-pack {
+.lr-ext-pack {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -210,24 +210,24 @@ main.account .cdc-settings {
 }
 
 /* The pack's board, its white knight over it; a plain tile for a pack of sounds. */
-.cdc-pack__thumb {
+.lr-ext-pack__thumb {
   display: grid;
   flex: none;
   place-items: center;
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--cdc-accent) 20%, transparent) center / cover no-repeat;
+  background: color-mix(in srgb, var(--lr-ext-accent) 20%, transparent) center / cover no-repeat;
   box-shadow: 0 1px 3px #00000059;
 }
 
-.cdc-pack__piece {
+.lr-ext-pack__piece {
   width: 80%;
   height: 80%;
   background: center / contain no-repeat;
 }
 
-.cdc-pack__text {
+.lr-ext-pack__text {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -235,32 +235,32 @@ main.account .cdc-settings {
   min-width: 0;
 }
 
-.cdc-pack__name {
+.lr-ext-pack__name {
   overflow: hidden;
-  color: var(--cdc-text-strong) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14.5px;
   font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.cdc-pack__name:hover {
+.lr-ext-pack__name:hover {
   text-decoration: underline;
 }
 
-.cdc-pack__parts {
-  color: var(--cdc-text-dim);
+.lr-ext-pack__parts {
+  color: var(--lr-ext-text-dim);
   font-size: 12.5px;
 }
 
-.cdc-pack__remove {
+.lr-ext-pack__remove {
   flex: none;
   height: 30px;
   padding: 0 12px;
   border: none;
   border-radius: 8px;
-  background: var(--cdc-btn-grey);
-  box-shadow: var(--cdc-btn-grey-shadow);
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
   color: #fff;
   font: inherit;
   font-size: 13px;
@@ -268,18 +268,18 @@ main.account .cdc-settings {
   cursor: pointer;
 }
 
-.cdc-pack__remove:hover {
-  background: var(--cdc-btn-red);
-  box-shadow: var(--cdc-btn-red-shadow);
+.lr-ext-pack__remove:hover {
+  background: var(--lr-ext-btn-red);
+  box-shadow: var(--lr-ext-btn-red-shadow);
 }
 
 /* Paste a link, import; a private repository's token under it. */
-.cdc-packs__row {
+.lr-ext-packs__row {
   display: flex;
   gap: 8px;
 }
 
-.cdc-packs__row input {
+.lr-ext-packs__row input {
   box-sizing: border-box;
   flex: 1;
   min-width: 0;
@@ -293,19 +293,19 @@ main.account .cdc-settings {
   font-size: 14px;
 }
 
-.cdc-packs__row input:focus,
-.cdc-packs__token:focus {
-  border-color: var(--cdc-accent);
+.lr-ext-packs__row input:focus,
+.lr-ext-packs__token:focus {
+  border-color: var(--lr-ext-accent);
   outline: none;
 }
 
-.cdc-packs__row button {
+.lr-ext-packs__row button {
   height: 38px;
   padding: 0 18px;
   border: none;
   border-radius: 8px;
-  background: var(--cdc-btn-primary);
-  box-shadow: var(--cdc-btn-primary-shadow);
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
   color: #fff;
   font: inherit;
   font-size: 14px;
@@ -313,26 +313,26 @@ main.account .cdc-settings {
   cursor: pointer;
 }
 
-.cdc-packs__row button:hover {
-  background: var(--cdc-btn-primary-hover);
+.lr-ext-packs__row button:hover {
+  background: var(--lr-ext-btn-primary-hover);
 }
 
-.cdc-packs__private {
+.lr-ext-packs__private {
   margin: 8px 2px 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
 }
 
-.cdc-packs__private summary {
+.lr-ext-packs__private summary {
   width: fit-content;
   cursor: pointer;
 }
 
-.cdc-packs__private summary:hover {
+.lr-ext-packs__private summary:hover {
   color: #fff;
 }
 
-.cdc-packs__token {
+.lr-ext-packs__token {
   box-sizing: border-box;
   width: 100%;
   height: 34px;
@@ -346,33 +346,33 @@ main.account .cdc-settings {
   -webkit-text-security: disc;
 }
 
-.cdc-packs__note {
+.lr-ext-packs__note {
   margin: 6px 0 0;
   line-height: 1.4;
 }
 
-.cdc-packs__status {
+.lr-ext-packs__status {
   margin: 8px 2px 0;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
 }
 
-.cdc-packs__status:empty {
+.lr-ext-packs__status:empty {
   display: none;
 }
 
-.cdc-packs__status--failed {
-  color: var(--cdc-red-light);
+.lr-ext-packs__status--failed {
+  color: var(--lr-ext-red-light);
 }
 
-.cdc-packs__help {
+.lr-ext-packs__help {
   display: inline-block;
   margin: 8px 2px 0;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   text-decoration: underline;
 }
 
-.cdc-packs__help:hover {
+.lr-ext-packs__help:hover {
   color: #fff !important;
 }

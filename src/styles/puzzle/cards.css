@@ -9,7 +9,7 @@ main.puzzle .puzzle__tools {
   box-sizing: border-box;
   border: none !important;
   border-radius: 12px !important;
-  background: var(--cdc-bg-panel) !important;
+  background: var(--lr-ext-bg-panel) !important;
   box-shadow:
     inset 0 1px 0 #ffffff0d,
     0 10px 28px #00000033 !important;
@@ -17,7 +17,7 @@ main.puzzle .puzzle__tools {
 
 main.puzzle .puzzle__side > * {
   padding: 14px !important;
-  color: var(--cdc-text-dim);
+  color: var(--lr-ext-text-dim);
   font-size: 13px;
   line-height: 1.45;
 }
@@ -40,20 +40,20 @@ main.puzzle .puzzle__side__metas .infos::before {
   margin: 0 !important;
   padding: 6px;
   border-radius: 12px;
-  background: var(--cdc-bg-raised);
+  background: var(--lr-ext-bg-raised);
 }
 
 main.puzzle .puzzle__side__metas .infos::before {
   display: grid;
   place-items: center;
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
   font-size: 26px !important;
 }
 
 /* The puzzle's picture on a tile in the puzzles' color, like the sidebar's links. */
 main.puzzle .puzzle__side__metas .infos__angle-img {
   padding: 7px;
-  background: color-mix(in srgb, var(--cdc-orange) 16%, transparent);
+  background: color-mix(in srgb, var(--lr-ext-orange) 16%, transparent);
   box-shadow: inset 0 1px #ffffff14;
 }
 
@@ -102,7 +102,7 @@ main.puzzle .puzzle__side__metas .players .user-link {
 
 /* The rating hidden until solved: dim but readable. */
 main.puzzle .puzzle__side__metas .hidden {
-  color: var(--cdc-text-dim) !important;
+  color: var(--lr-ext-text-dim) !important;
 }
 
 /* Your puzzle rating, big, after the puzzle icon. */
@@ -130,7 +130,7 @@ main.puzzle .puzzle__side__user__rating strong::before {
    it (digits ~2.4em, icon 1em, change, gaps and padding 134px). */
 @media (min-width: 1259.3px) {
   main.puzzle .puzzle__side__user__rating strong {
-    font-size: clamp(24px, calc((var(--cdc-panel-w) - 134px) / 3.4), 44px) !important;
+    font-size: clamp(24px, calc((var(--lr-ext-panel-w) - 134px) / 3.4), 44px) !important;
   }
 }
 
@@ -158,7 +158,7 @@ main.puzzle .puzzle__side__theme__back {
 }
 
 main.puzzle .puzzle__side__theme__back:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__theme > p {
@@ -175,7 +175,7 @@ main.puzzle .puzzle__side__replay > a {
 }
 
 main.puzzle .puzzle__side__replay > a:hover {
-  color: var(--cdc-accent-hover) !important;
+  color: var(--lr-ext-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__replay__bar {
@@ -192,8 +192,8 @@ main.puzzle .puzzle__side__replay__bar {
 main.puzzle .puzzle__side__replay__bar::before {
   min-width: 30px;
   border-radius: 999px;
-  background: var(--cdc-btn-primary) !important;
-  box-shadow: inset 0 1px 0 var(--cdc-accent);
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: inset 0 1px 0 var(--lr-ext-accent);
 }
 
 /* Daily puzzle: a plain title like any theme's, not a box in Lichess's accent color. */
