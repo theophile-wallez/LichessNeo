@@ -62,3 +62,9 @@ export function keepLastPool(user: string, speed: CardSpeed, pool: string): Card
   writeStoredJson(StorageKey.speedCards, kept);
   return kept.cards;
 }
+
+/** Has the kept cards asked for again on the next visit, still drawn until the answer comes. */
+export function markCardsStale(): void {
+  const kept = readStoredJson(StorageKey.speedCards, KeptSchema);
+  if (kept) writeStoredJson(StorageKey.speedCards, { ...kept, at: 0 });
+}

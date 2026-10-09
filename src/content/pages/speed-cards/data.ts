@@ -17,6 +17,24 @@ export const HistorySchema = z.array(
 
 const CURVE_POINTS = 30;
 
+// Every rating starts there (Glicko-2's default, as Lichess has it).
+const START_RATING = 1500;
+
+/**
+ * The curve's ratings, oldest first. Lichess keeps one a day, its last: a speed's first day
+ * draws from where every rating starts, and the current rating ends the curve even before the
+ * day's point is written.
+ */
+type HistoryPoint = z.infer<typeof HistorySchema>[number]['points'][number];
+
+function curveOf(points: readonly HistoryPoint[], games: number, rating: number): number[] {
+  if (games === 0) return [];
+  const ratings = points.slice(-CURVE_POINTS).map(point => point[3]);
+  if (ratings.at(-1) !== rating) ratings.push(rating);
+  if (ratings.length === 1 && points.length <= 1) ratings.unshift(START_RATING);
+  return ratings.slice(-CURVE_POINTS);
+}
+
 const GameSchema = z.object({
   speed: z.string(),
   clock: z.optional(z.object({ initial: z.number(), increment: z.number() })),
@@ -60,12 +78,14 @@ export function cardsOf({ user, history, last }: CardSources): Card[] {
     const perf = user.perfs[speed];
     // Its series are named by their key (`blitz`); Lichess's docs show them capitalized.
     const points = history.find(entry => entry.name.toLowerCase() === speed)?.points ?? [];
+    const games = perf?.games ?? 0;
+    const rating = perf?.rating ?? START_RATING;
     const card: Card = {
       speed,
-      games: perf?.games ?? 0,
-      rating: perf?.rating ?? 1500,
+      games,
+      rating,
       provisional: perf?.prov === true,
-      history: points.slice(-CURVE_POINTS).map(point => point[3]),
+      history: curveOf(points, games, rating),
     };
     const pool = last[speed];
     if (pool !== undefined) card.last = pool;

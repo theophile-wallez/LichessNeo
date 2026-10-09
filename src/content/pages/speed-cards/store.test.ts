@@ -57,7 +57,8 @@ describe('the kept cards', () => {
       games: 78,
       rating: 1673,
       provisional: false,
-      history: [1673],
+      // Its first day: from where every rating starts.
+      history: [1500, 1673],
       last: '10+5',
     });
     expect(keptCards('eresy')?.cards).toEqual(cards);

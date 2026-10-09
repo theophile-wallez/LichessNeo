@@ -37,7 +37,8 @@ export function keepAccountRating(user: string, profile: z.infer<typeof UserSche
   show(top);
 }
 
-async function fetchProfile(user: string): Promise<z.infer<typeof UserSchema> | null> {
+/** The player's profile as Lichess has it now; null if it can't say. */
+export async function fetchProfile(user: string): Promise<z.infer<typeof UserSchema> | null> {
   const response = await fetch(`/api/user/${encodeURIComponent(user)}`, {
     headers: { Accept: 'application/json' },
   });

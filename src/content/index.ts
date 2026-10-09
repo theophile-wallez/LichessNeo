@@ -23,6 +23,7 @@ import { capturedPieces } from './game/captured.ts';
 import { boardTools } from './game/board-tools.ts';
 import { moveTimes } from './game/move-times.ts';
 import { newGame } from './game/new-game.ts';
+import { ratingRefresh } from './game/rating-refresh.ts';
 import { countryFlags } from './game/flags.ts';
 import { gameIntro } from './game/intro/index.ts';
 import { coachMessage } from './game/coach-message.ts';
@@ -80,6 +81,7 @@ function main(): void {
     boardTools,
     moveTimes,
     newGame,
+    ratingRefresh,
     countryFlags,
     gameIntro,
     coachMessage,

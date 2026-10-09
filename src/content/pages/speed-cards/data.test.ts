@@ -50,19 +50,44 @@ describe('cardsOf', () => {
       provisional: false,
       history: [],
     });
-    expect(cards[1]).toMatchObject({ games: 25, rating: 1584, provisional: true, history: [] });
+    // No point written yet: from where every rating starts to the current one.
+    expect(cards[1]).toMatchObject({
+      games: 25,
+      rating: 1584,
+      provisional: true,
+      history: [1500, 1584],
+    });
+    // A point a day, the last ones, then the current rating.
     expect(cards[2]?.history).toHaveLength(30);
-    expect(cards[2]?.history.at(0)).toBe(1510);
-    expect(cards[2]?.history.at(-1)).toBe(1539);
+    expect(cards[2]?.history.at(0)).toBe(1511);
+    expect(cards[2]?.history.at(-2)).toBe(1539);
+    expect(cards[2]?.history.at(-1)).toBe(1673);
     expect(cards[2]?.last).toBe('10+0');
   });
 
   it('reads the series by name whatever its case', () => {
     const [, blitz] = cardsOf({
       user,
-      history: [{ name: 'Blitz', points: [[2026, 0, 1, 1500]] }],
+      history: [
+        {
+          name: 'Blitz',
+          points: [
+            [2026, 0, 1, 1520],
+            [2026, 0, 2, 1584],
+          ],
+        },
+      ],
       last: {},
     });
-    expect(blitz?.history).toEqual([1500]);
+    expect(blitz?.history).toEqual([1520, 1584]);
+  });
+
+  it('draws a first day from where every rating starts', () => {
+    const [, blitz] = cardsOf({
+      user,
+      history: [{ name: 'blitz', points: [[2026, 9, 9, 1584]] }],
+      last: {},
+    });
+    expect(blitz?.history).toEqual([1500, 1584]);
   });
 });
