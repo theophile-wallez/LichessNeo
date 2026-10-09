@@ -103,13 +103,16 @@
 }
 
 /* The seek list: rounded rows that light up on hover, and a header pinned while it scrolls. */
+/* No room under the list: the bottom fade sticks to the scroller's padded edge, and the rows
+   showed through that room below it. The table keeps the room instead. */
 .lreal_time {
-  padding: 0 8px 8px;
+  padding: 0 8px !important;
   scrollbar-width: thin;
   scrollbar-color: #ffffff26 transparent;
 }
 
 .hooks__list {
+  margin-bottom: 8px;
   border-collapse: separate;
   border-spacing: 0;
   font-family: var(--lr-ext-font);
