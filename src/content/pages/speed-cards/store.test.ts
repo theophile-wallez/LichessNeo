@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fetchCards, keepLastPool, keptCards } from './store.ts';
 
 const KEY = 'lr-ext-speed-cards';
-const HOUR = 60 * 60 * 1000;
+const MAX_AGE = 30 * 1000;
 
 const card = { speed: 'blitz', games: 25, rating: 1584, provisional: true, history: [1500] };
 
@@ -36,11 +36,13 @@ afterEach(() => {
 });
 
 describe('the kept cards', () => {
-  it("are the signed-in player's, due again once an hour old", () => {
+  it("are the signed-in player's, due again once 30s old", () => {
     keep('eresy', Date.now());
     expect(keptCards('eresy')).toEqual({ cards: [card], stale: false });
     expect(keptCards('someone')).toBeNull();
-    keep('eresy', Date.now() - HOUR);
+    keep('eresy', Date.now() - MAX_AGE + 1000);
+    expect(keptCards('eresy')?.stale).toBe(false);
+    keep('eresy', Date.now() - MAX_AGE);
     expect(keptCards('eresy')?.stale).toBe(true);
   });
 
@@ -59,6 +61,8 @@ describe('the kept cards', () => {
       last: '10+5',
     });
     expect(keptCards('eresy')?.cards).toEqual(cards);
+    // The sidebar's rating comes with them.
+    expect(localStorage.getItem('lr-ext-account-rating')).toContain('"rating":1673');
   });
 
   it("stay as they were when Lichess doesn't know the player", async () => {

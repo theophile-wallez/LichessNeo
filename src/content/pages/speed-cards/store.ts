@@ -1,13 +1,15 @@
 import { z } from 'zod/mini';
 import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
+import { keepAccountRating } from '#content/sidebar/account-rating.ts';
 import { UserSchema } from '#content/sidebar/top-rating.ts';
 import { CardSchema, cardsOf, HistorySchema, lastPools, type Card } from './data.ts';
 import { CARD_SPEEDS, type CardSpeed } from './pools.ts';
 
-// The signed-in player's cards, kept an hour so the home draws them at once,
-// then asked of Lichess again.
+// The signed-in player's cards, kept so the home draws them at once, then
+// asked of Lichess again on each visit, as games change them: at most every
+// 30s, for a page reloaded in a row.
 
-const MAX_AGE_MS = 60 * 60 * 1000;
+const MAX_AGE_MS = 30 * 1000;
 
 const KeptSchema = z.object({ user: z.string(), at: z.number(), cards: z.array(CardSchema) });
 
@@ -45,6 +47,8 @@ export async function fetchCards(user: string): Promise<Card[] | null> {
     lastGames(name),
   ]);
   if (!profile) return null;
+  // The sidebar's rating, fresh too.
+  keepAccountRating(user, profile);
   const cards = cardsOf({ user: profile, history: history ?? [], last: lastPools(games) });
   writeStoredJson(StorageKey.speedCards, { user, at: Date.now(), cards });
   return cards;

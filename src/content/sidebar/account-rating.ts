@@ -14,9 +14,10 @@ import {
 // beside their name, in place of Lichess's avatar glyph
 // (styles/sidebar/donate-and-buttons.css). The last one is kept, and put on
 // <html> from document_start, so it's there with the sidebar's first frame;
-// Lichess is asked again once it's an hour old.
+// Lichess is asked again once it's 5 minutes old, and the home page's speed
+// cards bring it a fresh one each time they're drawn.
 
-const MAX_AGE_MS = 60 * 60 * 1000;
+const MAX_AGE_MS = 5 * 60 * 1000;
 
 const KeptSchema = z.object({ user: z.string(), at: z.number(), top: TopRatingSchema });
 
@@ -28,13 +29,21 @@ function show(top: TopRating | null): void {
   setStyleProperty(root, '--lr-ext-account-rating', label);
 }
 
-async function fetchTopRating(user: string): Promise<TopRating | null> {
+/** Keeps and shows the rating of a profile just asked of Lichess. */
+export function keepAccountRating(user: string, profile: z.infer<typeof UserSchema>): void {
+  const top = topRating(profile);
+  if (!top) return;
+  writeStoredJson(StorageKey.accountRating, { user, at: Date.now(), top });
+  show(top);
+}
+
+async function fetchProfile(user: string): Promise<z.infer<typeof UserSchema> | null> {
   const response = await fetch(`/api/user/${encodeURIComponent(user)}`, {
     headers: { Accept: 'application/json' },
   });
   if (!response.ok) return null;
   const parsed = UserSchema.safeParse(await response.json());
-  return parsed.success ? topRating(parsed.data) : null;
+  return parsed.success ? parsed.data : null;
 }
 
 async function refresh(kept: z.infer<typeof KeptSchema> | null): Promise<void> {
@@ -45,10 +54,8 @@ async function refresh(kept: z.infer<typeof KeptSchema> | null): Promise<void> {
   if (!mine) show(null);
   if (mine && Date.now() - mine.at < MAX_AGE_MS) return;
   // Offline, or Lichess busy: the kept rating stays.
-  const top = await fetchTopRating(user).catch(() => null);
-  if (!top) return;
-  writeStoredJson(StorageKey.accountRating, { user, at: Date.now(), top });
-  show(top);
+  const profile = await fetchProfile(user).catch(() => null);
+  if (profile) keepAccountRating(user, profile);
 }
 
 export const accountRating: Feature = {

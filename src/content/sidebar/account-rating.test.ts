@@ -4,7 +4,7 @@ import { accountRating } from './account-rating.ts';
 
 const root = document.documentElement;
 const KEY = 'lr-ext-account-rating';
-const HOUR = 60 * 60 * 1000;
+const MAX_AGE = 5 * 60 * 1000;
 
 const apiUser = {
   perfs: { blitz: { games: 25, rating: 1584 }, rapid: { games: 78, rating: 1673 } },
@@ -59,9 +59,9 @@ describe('the account rating', () => {
     expect(shown()).toEqual(['blitz', '"1600?"']);
   });
 
-  it('asks Lichess when the kept one is an hour old, and keeps the answer', async () => {
+  it('asks Lichess when the kept one is 5 minutes old, and keeps the answer', async () => {
     signIn('eresy');
-    keep('eresy', Date.now() - HOUR - 1);
+    keep('eresy', Date.now() - MAX_AGE - 1);
     accountRating.start();
     await flush();
     expect(fetchUser).toHaveBeenCalledWith('/api/user/eresy', expect.anything());
@@ -88,7 +88,7 @@ describe('the account rating', () => {
 
   it('keeps the kept rating when Lichess fails', async () => {
     signIn('eresy');
-    keep('eresy', Date.now() - HOUR - 1);
+    keep('eresy', Date.now() - MAX_AGE - 1);
     fetchUser.mockRejectedValue(new TypeError('offline'));
     accountRating.start();
     await flush();
