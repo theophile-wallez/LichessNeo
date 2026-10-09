@@ -149,21 +149,25 @@
 
   /* Our own speed names: Lichess's sit in .perf, which it swaps for the spinner while seeking. */
   main.lobby .lpool:is([data-id='1+0'], [data-id='2+1']) {
+    --cdc-pool-rating: var(--cdc-rating-bullet, none);
     --cdc-pool-speed: 'Bullet';
     --cdc-pool-icon: var(--cdc-mode-bullet);
     --cdc-pool-color: var(--cdc-orange-dark);
   }
   main.lobby .lpool:is([data-id^='3+'], [data-id^='5+']) {
+    --cdc-pool-rating: var(--cdc-rating-blitz, none);
     --cdc-pool-speed: 'Blitz';
     --cdc-pool-icon: var(--cdc-mode-blitz);
     --cdc-pool-color: var(--cdc-yellow-dark);
   }
   main.lobby .lpool:is([data-id^='10+'], [data-id^='15+']) {
+    --cdc-pool-rating: var(--cdc-rating-rapid, none);
     --cdc-pool-speed: 'Rapid';
     --cdc-pool-icon: var(--cdc-mode-rapid);
     --cdc-pool-color: var(--cdc-accent);
   }
   main.lobby .lpool[data-id^='30+'] {
+    --cdc-pool-rating: var(--cdc-rating-classical, none);
     --cdc-pool-speed: 'Classical';
     --cdc-pool-icon: var(--cdc-mode-classical);
     --cdc-pool-color: var(--cdc-accent);
@@ -226,6 +230,42 @@
     font-size: 19px;
     line-height: 20px;
     text-align: center;
+  }
+
+  /* Signed in, the speed's rating right after its heading (content/sidebar/account-rating.ts
+     puts the ratings on <html>), in a span of ours (content/pages/pool-ratings.ts) that sets
+     the heading's name again, unseen, so the rating lands after it. None for a speed never
+     played. */
+  main.lobby .lpool > .cdc-pool-rating {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    inset-inline-start: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+  }
+
+  main.lobby .lpool > .cdc-pool-rating > .cdc-pool-rating__name::before {
+    content: var(--cdc-pool-speed);
+    padding-inline-start: 28px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    visibility: hidden;
+  }
+
+  main.lobby .lpool > .cdc-pool-rating::after {
+    content: var(--cdc-pool-rating);
+    padding: 1px 9px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--cdc-pool-color) 16%, transparent);
+    color: color-mix(in srgb, var(--cdc-pool-color) 80%, #fff);
+    font-size: 13px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 20px;
   }
 
   /* "Custom" opens the game setup dialog: a "More time controls" link under the grid. */

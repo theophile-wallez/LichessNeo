@@ -30,6 +30,7 @@ import { evalGauge } from './analysis/eval-gauge.ts';
 import { puzzle } from './puzzle/index.ts';
 import { extensionSettings } from './settings/index.ts';
 import { homeHero } from './pages/home-hero.ts';
+import { poolRatings } from './pages/pool-ratings.ts';
 import { coachTitles } from './pages/coach-titles.ts';
 import { swiss } from './pages/swiss.ts';
 import { forumLabels } from './pages/forum.ts';
@@ -85,6 +86,7 @@ function main(): void {
     puzzle,
     extensionSettings,
     homeHero,
+    poolRatings,
     coachTitles,
     swiss,
     forumLabels,

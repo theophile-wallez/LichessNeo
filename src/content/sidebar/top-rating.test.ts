@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { topRating, UserSchema } from './top-rating.ts';
+import { speedRatings, topRating, UserSchema } from './top-rating.ts';
 
 // Lichess's `/api/user/<name>`, cut to what's read.
 const user = (perfs: Record<string, unknown>) => UserSchema.parse({ perfs });
@@ -28,5 +28,19 @@ describe('topRating', () => {
 
   it('gives null before any game', () => {
     expect(topRating(user({ blitz: { games: 0, rating: 1500, prov: true } }))).toBeNull();
+  });
+});
+
+describe('speedRatings', () => {
+  it('writes every speed played, provisional ones with a question mark', () => {
+    expect(
+      speedRatings(
+        user({
+          bullet: { games: 0, rating: 1500, prov: true },
+          blitz: { games: 25, rating: 1584.4, prov: true },
+          rapid: { games: 78, rating: 1673 },
+        }),
+      ),
+    ).toEqual({ blitz: '1584?', rapid: '1673' });
   });
 });

@@ -16,10 +16,15 @@ function signIn(user: string | null): void {
   else document.body.dataset.user = user;
 }
 
-const keep = (user: string, at: number, rating = 1600): void =>
+const keep = (user: string, at: number): void =>
   localStorage.setItem(
     KEY,
-    JSON.stringify({ user, at, top: { speed: 'blitz', rating, provisional: true } }),
+    JSON.stringify({
+      user,
+      at,
+      top: { speed: 'blitz', rating: 1600, provisional: true },
+      ratings: { blitz: '1600?' },
+    }),
   );
 
 const shown = (): [string | undefined, string] => [
@@ -40,7 +45,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
   localStorage.clear();
   delete root.dataset.cdcAccountPerf;
-  root.style.removeProperty('--cdc-account-rating');
+  root.removeAttribute('style');
   signIn(null);
 });
 
@@ -62,6 +67,12 @@ describe('the account rating', () => {
     await flush();
     expect(fetchUser).toHaveBeenCalledWith('/api/user/eresy', expect.anything());
     expect(shown()).toEqual(['rapid', '"1673"']);
+    // Each speed's, for the quick pairing; none for one never played.
+    expect(
+      ['blitz', 'rapid', 'bullet'].map(speed =>
+        root.style.getPropertyValue(`--cdc-rating-${speed}`),
+      ),
+    ).toEqual(['"1584"', '"1673"', '']);
     expect(localStorage.getItem(KEY)).toContain('"rapid"');
   });
 

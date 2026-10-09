@@ -42,6 +42,24 @@ export const TopRatingSchema = z.object({
 
 export type TopRating = z.infer<typeof TopRatingSchema>;
 
+/** Each speed's rating as the sidebar and the quick pairing write it, "1500?" when provisional. */
+export const ratingLabel = (rating: number, provisional: boolean): string =>
+  `${Math.round(rating)}${provisional ? '?' : ''}`;
+
+export const RatingsSchema = z.partialRecord(z.enum(SPEEDS), z.string());
+
+export type Ratings = z.infer<typeof RatingsSchema>;
+
+/** The rating of every speed played at least once. */
+export function speedRatings({ perfs }: z.infer<typeof UserSchema>): Ratings {
+  const ratings: Ratings = {};
+  for (const speed of SPEEDS) {
+    const perf = perfs[speed];
+    if (perf && perf.games > 0) ratings[speed] = ratingLabel(perf.rating, perf.prov === true);
+  }
+  return ratings;
+}
+
 /** The speed with the most games, the first on a tie; null before any game. */
 export function topRating({ perfs }: z.infer<typeof UserSchema>): TopRating | null {
   let best: TopRating | null = null;
