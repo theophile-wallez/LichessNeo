@@ -88,8 +88,8 @@
   content: '';
   height: 20px;
   background: currentColor !important;
-  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg') center /
-    20px no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg') center / 20px
+    no-repeat;
 }
 
 #dasher_app .subs .sub:not(.language)::before {
