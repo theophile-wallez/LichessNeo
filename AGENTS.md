@@ -630,9 +630,10 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   (sample frames with `requestAnimationFrame`, in the page), and emulate
   `dark` too. Playwright hides scrollbars in headless mode
   (`ignoreDefaultArgs: ['--hide-scrollbars']` brings them back).
-- Signed in: `pnpm lichess:login` opens a window on Lichess's sign-in page
-  for the user to sign in (`--cookie <lila2>` takes a signed-in browser's
-  session cookie instead, `--check` says who's in). The profile is kept
+- Signed in: `pnpm lichess:login` opens Playwright's Chromium on Lichess's
+  sign-in page as a plain browser (its bot check fails one Playwright
+  drives) for the user to sign in and close; `--cookie <lila2>` takes a
+  signed-in browser's session cookie instead, `--check` says who's in. The profile is kept
   outside the repo (`tests/e2e/support/session.ts`), and a one-off check
   opens it with `launchSignedIn()`, one browser at a time. Never sign in for
   the user, and never put a session or a password in the repo; CI's tests
