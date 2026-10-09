@@ -608,8 +608,7 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   `clip` on the element's `boundingBox()`.
 - Viewports: 1024×768, 1366×640, 1600×900, 1920×1080 and 2560×1440, both
   sides of each breakpoint the page's CSS uses (1019 / 1020, 1259 / 1260,
-  800 / 801), and the tablet and phone sizes: 768×1024 and 1024×768 (a
-  tablet), 820×1180, 390×844 and 360×800 (phones). Nothing overflows,
+  800 / 801), and the tablet and phone sizes: 768×1024, 820×1180 and 1024×768 (tablets), 390×844 and 360×800 (phones). Nothing overflows,
   the page doesn't scroll, bars and the eval bar line up with the board.
 - Headless Chrome reports `prefers-reduced-motion: reduce` (like the user's
   own Chrome) and a light color scheme: check animations under `reduce`
