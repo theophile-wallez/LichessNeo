@@ -193,7 +193,21 @@
   cursor: default;
 }
 
-/* Graph and filter toggles, in the header row's corners. */
+/* Graph and filter toggles, in the header row's corners. Lichess places them absolutely in the
+   list, so they scrolled away from the pinned header: here they're pinned with it, floats of
+   no height so the table keeps its width and place. */
+.lreal_time > .toggle {
+  position: sticky !important;
+  inset: 7px auto auto !important;
+  z-index: 2;
+  float: left;
+  margin-bottom: -34px !important;
+}
+
+.lreal_time > .toggle.toggle-filter {
+  float: right;
+}
+
 .lobby__app .toggle {
   top: 7px;
   display: grid;
