@@ -1,112 +1,33 @@
-/* Online friends dock (#friend_box, bottom right, signed in only).
-   Lichess shows and hides the box itself, so its display is left alone. */
+/* Online friends (#friend_box, signed in only). Lichess moved it from a dock at the bottom
+   right into the header: a button beside the notifications, whose dropdown lists them
+   (styles/sidebar places the dropdowns beside the sidebar). */
 
-/* Closed, as wide as its title; open, wide enough for the rows. */
-#friend_box {
-  inset-inline-end: 6px !important;
-  width: max-content;
-  min-width: 0 !important;
-  border: 1px solid var(--lr-ext-menu-border) !important;
-  border-bottom: none !important;
-  border-radius: 8px 8px 0 0 !important;
-  background: color-mix(in srgb, var(--lr-ext-grey-700) 55%, transparent) !important;
-  backdrop-filter: blur(14px) saturate(1.4);
-  box-shadow: 0 -2px 14px #0000004d;
-  color: var(--lr-ext-text);
+#friend_box .content_wrap {
+  min-width: 240px;
+  padding: 0 !important;
+  overflow: hidden;
   font-family: var(--lr-ext-font);
-  font-size: 13px !important;
+  font-size: 13px;
 }
 
-#friend_box:has(.content_wrap):not(:has(.content_wrap.none)) {
-  width: 240px;
-  background: color-mix(in srgb, var(--lr-ext-grey-700) 80%, transparent) !important;
-}
-
-/* ---- Title --- */
-
-/* Not a flexbox: the count and the words are separate text nodes a gap would split. */
-#friend_box .friend_box_title {
-  position: relative;
-  padding: 6px 28px 6px 10px !important;
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  color: var(--lr-ext-text) !important;
+#friend_box .friend_box_count {
+  padding: 12px 14px 10px !important;
+  color: var(--lr-ext-text-dim);
   font-weight: 600;
-  text-shadow: none !important;
-  white-space: nowrap;
-  user-select: none;
-  transition: background-color 0.15s !important;
 }
 
-#friend_box .friend_box_title:hover {
-  background: var(--lr-ext-menu-hover) !important;
-}
-
-#friend_box .friend_box_title strong {
+#friend_box .friend_box_count strong {
   color: var(--lr-ext-text-strong);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-/* Lichess shows a triangle until the first count arrives; the chevron replaces it. */
-#friend_box .friend_box_title [data-icon] {
-  display: none;
-}
-
-/* Status dot: green when a friend is online, grey otherwise. */
-#friend_box .friend_box_title::before {
-  content: '';
-  display: inline-block;
-  margin-inline-end: 8px;
-  vertical-align: 1px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--lr-ext-font-dimmer);
-}
-
-#friend_box:has(.list > div) .friend_box_title::before {
-  background: var(--lr-ext-good);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
-}
-
-/* Chevron: up while closed, down while open. */
-#friend_box .friend_box_title::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  inset-inline-end: 11px;
-  width: 6px;
-  height: 6px;
-  margin-top: -3px;
-  border: solid var(--lr-ext-text-dim);
-  border-width: 2px 2px 0 0;
-  transform: translateY(2px) rotate(-45deg);
-  transition: transform 0.2s ease !important;
-}
-
-#friend_box:has(.content_wrap):not(:has(.content_wrap.none)) .friend_box_title::after {
-  transform: translateY(-2px) rotate(135deg);
-}
-
 /* ---- List --- */
-
-#friend_box .content_wrap:not(.none) {
-  border-top: 1px solid var(--lr-ext-menu-border);
-  animation: lr-ext-friend-box-in 0.18s ease-out;
-}
-
-@keyframes lr-ext-friend-box-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-}
 
 #friend_box .content {
   max-height: min(60vh, 420px) !important;
   padding: 6px;
+  border-top: 1px solid var(--lr-ext-menu-border) !important;
 }
 
 #friend_box .content:empty {
