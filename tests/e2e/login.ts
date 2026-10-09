@@ -16,6 +16,8 @@ import { hasSession, SESSION_PROFILE, signedInUser } from './support/session.ts'
 // The sign-in page's bot check fails a browser Playwright drives, so the
 // window is the browser on its own; the profile is read back once it's closed.
 
+const COOKIE_DAYS = 365;
+
 const { values } = parseArgs({
   options: { cookie: { type: 'string' }, check: { type: 'boolean' } },
 });
@@ -56,6 +58,8 @@ async function readSession(cookie: string | undefined): Promise<string | null> {
         httpOnly: true,
         secure: true,
         sameSite: 'Lax',
+        // Without an expiry it's a session cookie, gone when the browser closes.
+        expires: Math.floor(Date.now() / 1000) + COOKIE_DAYS * 24 * 60 * 60,
       },
     ]);
   }
