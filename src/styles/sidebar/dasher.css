@@ -73,12 +73,23 @@
   color: #fff !important;
 }
 
-/* The profile's online dot stays green. */
+/* The account links' glyphs are painted as their Hugeicons (theme/hugeicons): through the
+   text's color, which the `background: none` above took away. */
+#dasher_app .links [data-icon]::before {
+  background: currentColor !important;
+}
+
+/* The profile gets a user icon where Lichess has its online dot. */
 #top #dasher_app .links .user-link .line {
-  display: flex !important;
-  justify-content: center;
-  width: 20px !important;
-  color: var(--lr-ext-accent) !important;
+  display: none !important;
+}
+
+#dasher_app .links .user-link::before {
+  content: '';
+  height: 20px;
+  background: currentColor !important;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg') center /
+    20px no-repeat;
 }
 
 #dasher_app .subs .sub:not(.language)::before {
