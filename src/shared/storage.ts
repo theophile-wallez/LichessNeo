@@ -14,6 +14,8 @@ export const StorageKey = {
   boardZoom: 'cdc-board-zoom',
   // '1' while the sidebar is folded to its icons (content/sidebar/collapse.ts).
   sidebarCollapsed: 'cdc-sidebar-collapsed',
+  // The signed-in player's most played speed and its rating (content/sidebar/account-rating.ts).
+  accountRating: 'cdc-account-rating',
   ratingChartRange: 'cdc-rchart:range',
   reviewCache: (gameId: string, positions: number, version: number): string =>
     `cdc-review:${gameId}:${positions}:v${version}`,

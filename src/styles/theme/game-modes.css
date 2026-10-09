@@ -5,32 +5,39 @@
  * glyphs are for the places that draw one outside a [data-icon] (the lobby's
  * pools, the FIDE tables), in Lichess's icon font. */
 :root {
+  --cdc-mode-ultrabullet: '\e059';
   --cdc-mode-bullet: '\e032';
   --cdc-mode-blitz: '\e008';
   --cdc-mode-rapid: '\e002';
   --cdc-mode-classical: '\e00a';
+  --cdc-mode-correspondence: '\e019';
+  /* Each speed's color, for the places that draw its glyph themselves. */
+  --cdc-mode-bullet-color: #e3aa24;
+  --cdc-mode-blitz-color: #fad541;
+  --cdc-mode-rapid-color: #81b64c;
+  --cdc-mode-correspondence-color: #f7c631;
 }
 
 /* UltraBullet, Bullet */
 [data-icon='\e059']::before,
 [data-icon='\e032']::before {
-  --cdc-mode-color: #e3aa24;
+  --cdc-mode-color: var(--cdc-mode-bullet-color);
 }
 
 /* Blitz */
 [data-icon='\e008']::before {
-  --cdc-mode-color: #fad541;
+  --cdc-mode-color: var(--cdc-mode-blitz-color);
 }
 
 /* Rapid, Classical */
 [data-icon='\e002']::before,
 [data-icon='\e00a']::before {
-  --cdc-mode-color: #81b64c;
+  --cdc-mode-color: var(--cdc-mode-rapid-color);
 }
 
 /* Correspondence */
 [data-icon='\e019']::before {
-  --cdc-mode-color: #f7c631;
+  --cdc-mode-color: var(--cdc-mode-correspondence-color);
 }
 
 /* Crazyhouse */
@@ -56,7 +63,7 @@
 /* Standard's crown is also Elite Arena's and top-rated TV's: only the variant
  * picker's takes a color. */
 .mselect [data-icon='\e021']::before {
-  --cdc-mode-color: #81b64c;
+  --cdc-mode-color: var(--cdc-mode-rapid-color);
 }
 
 :is(

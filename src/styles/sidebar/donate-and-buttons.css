@@ -144,6 +144,65 @@
     transform: translateY(-50%);
   }
 
+  /* Signed in, the most played speed's glyph and rating in its color, where Lichess draws its
+   * avatar glyph, which never shows (content/sidebar/account-rating.ts puts them on <html>
+   * before the sidebar is drawn). The digits fall through Lichess's icon font to ours. */
+  html[data-cdc-account-perf='ultraBullet'] #top #user_tag {
+    --cdc-account-glyph: var(--cdc-mode-ultrabullet);
+    --cdc-account-color: var(--cdc-mode-bullet-color);
+  }
+
+  html[data-cdc-account-perf='bullet'] #top #user_tag {
+    --cdc-account-glyph: var(--cdc-mode-bullet);
+    --cdc-account-color: var(--cdc-mode-bullet-color);
+  }
+
+  html[data-cdc-account-perf='blitz'] #top #user_tag {
+    --cdc-account-glyph: var(--cdc-mode-blitz);
+    --cdc-account-color: var(--cdc-mode-blitz-color);
+  }
+
+  html[data-cdc-account-perf='rapid'] #top #user_tag {
+    --cdc-account-glyph: var(--cdc-mode-rapid);
+    --cdc-account-color: var(--cdc-mode-rapid-color);
+  }
+
+  html[data-cdc-account-perf='classical'] #top #user_tag {
+    --cdc-account-glyph: var(--cdc-mode-classical);
+    --cdc-account-color: var(--cdc-mode-rapid-color);
+  }
+
+  html[data-cdc-account-perf='correspondence'] #top #user_tag {
+    --cdc-account-glyph: var(--cdc-mode-correspondence);
+    --cdc-account-color: var(--cdc-mode-correspondence-color);
+  }
+
+  html[data-cdc-account-perf] #top #user_tag {
+    padding-inline-end: 84px !important;
+  }
+
+  html[data-cdc-account-perf] #top #user_tag::after {
+    content: var(--cdc-account-glyph) '\a0' var(--cdc-account-rating);
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--cdc-account-color) 16%, transparent);
+    color: var(--cdc-account-color) !important;
+    font-family: lichess, var(--cdc-font);
+    font-size: 13px !important;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    opacity: 1;
+  }
+
+  /* Before the first rating is known: the name alone, not an avatar the rating would replace. */
+  html:not([data-cdc-account-perf], [data-cdc-sidebar='collapsed']) #top #user_tag {
+    padding-inline-end: 10px !important;
+  }
+
+  html:not([data-cdc-account-perf], [data-cdc-sidebar='collapsed']) #top #user_tag::after {
+    display: none;
+  }
+
   #top #user_tag:hover,
   #top .dasher.shown #user_tag {
     background: var(--cdc-sb-hover) !important;

@@ -213,4 +213,12 @@
     right: 50%;
     transform: translate(50%, -50%);
   }
+
+  /* With a rating, its speed's glyph alone. */
+  html[data-cdc-sidebar='collapsed'][data-cdc-account-perf] #top #user_tag::after {
+    content: var(--cdc-account-glyph);
+    padding: 0;
+    background: none;
+    font-size: 22px !important;
+  }
 }
