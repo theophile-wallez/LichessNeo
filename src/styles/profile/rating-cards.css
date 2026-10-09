@@ -226,6 +226,8 @@
   height: 1em;
   background: var(--lr-ext-puzzle-icon) center / contain no-repeat;
   opacity: 1 !important;
+  /* The puzzle glyph has a Hugeicon (theme/hugeicons), whose mask would cut the picture. */
+  mask: none;
 }
 
 .side.sub-ratings a[href*='/training/dashboard'] {
