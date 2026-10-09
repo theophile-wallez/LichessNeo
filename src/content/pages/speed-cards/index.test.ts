@@ -99,8 +99,10 @@ describe('the speed cards', () => {
     );
     createSpeedCards('eresy', 'en')();
     const blitz = document.querySelector("[data-lr-ext-speed='blitz']");
-    expect(blitz?.querySelector('.lr-ext-speed__rating')?.textContent).toMatch(
-      /1,584\s*provisional/,
+    expect(blitz?.querySelector('.lr-ext-speed__rating')?.textContent).toMatch(/1,584\s*\?/);
+    // Provisional: a question mark, its word for whoever asks.
+    expect(blitz?.querySelector('.lr-ext-speed__provisional')?.getAttribute('title')).toBe(
+      'provisional',
     );
     expect(blitz?.querySelector('.lr-ext-speed__games')?.textContent).toBe('25 games');
     // Both lead to the speed's stats page.

@@ -229,11 +229,21 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   letter-spacing: -0.01em;
 }
 
-.lr-ext-speed__rating small {
-  color: var(--lr-ext-text-dim);
-  font-size: 13px;
-  font-weight: 600;
+/* A provisional rating, as Lichess marks one: a question mark, on a badge in the speed's color. */
+.lr-ext-speed__provisional {
+  display: grid;
+  place-items: center;
+  align-self: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
+  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, #fff);
+  font-size: 14px;
+  font-weight: 800;
   letter-spacing: 0;
+  line-height: 1;
+  cursor: help;
 }
 
 .lr-ext-speed__rating--none {

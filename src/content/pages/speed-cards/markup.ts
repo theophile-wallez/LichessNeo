@@ -38,7 +38,10 @@ function rating(card: Card, texts: SpeedTexts): SafeHtml {
     return html`<div class="lr-ext-speed__rating lr-ext-speed__rating--none">–</div>`;
   return html`<div class="lr-ext-speed__rating">
     ${LOCALE_NUMBER.format(Math.round(card.rating))}
-    ${card.provisional && html`<small>${texts.provisional}</small>`}
+    ${
+      card.provisional &&
+      html`<small class="lr-ext-speed__provisional" title="${texts.provisional}" aria-label="${texts.provisional}">?</small>`
+    }
   </div>`;
 }
 

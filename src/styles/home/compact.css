@@ -225,21 +225,17 @@
   }
 
   .lr-ext-speed__rating {
-    gap: 0;
     font-size: 16px;
   }
 
-  /* "provisoire" as Lichess writes it in tight places: a question mark. */
-  .lr-ext-speed__rating small {
-    font-size: 0;
+  .lr-ext-speed__rating {
+    gap: 6px;
   }
 
-  .lr-ext-speed__rating small::before {
-    content: '?';
-    color: var(--lr-ext-text-dim);
-    /* The rating's own size and weight (the small's own is 0): one word, "1695?". */
-    font-size: 16px;
-    font-weight: 800;
+  .lr-ext-speed__provisional {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
   }
 
   .lr-ext-speed__curve {
