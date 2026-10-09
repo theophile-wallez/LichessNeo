@@ -140,10 +140,31 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   padding: 2px 9px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
-  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, #fff);
+  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, #fff) !important;
   font-size: 12.5px;
   font-weight: 800;
   white-space: nowrap;
+  transition: background-color 0.15s !important;
+}
+
+.lr-ext-speed__games:hover {
+  background: color-mix(in srgb, var(--lr-ext-speed-color) 28%, transparent);
+}
+
+/* The rating and its curve, a link to the speed's stats. */
+.lr-ext-speed__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: inherit !important;
+}
+
+.lr-ext-speed__stats .lr-ext-speed__rating {
+  transition: color 0.15s !important;
+}
+
+.lr-ext-speed__stats:hover .lr-ext-speed__rating {
+  color: color-mix(in srgb, var(--lr-ext-speed-color) 45%, #fff);
 }
 
 .lr-ext-speed__rating {

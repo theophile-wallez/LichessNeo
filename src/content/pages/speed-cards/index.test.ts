@@ -103,6 +103,9 @@ describe('the speed cards', () => {
       /1,584\s*provisional/,
     );
     expect(blitz?.querySelector('.lr-ext-speed__games')?.textContent).toBe('25 games');
+    // Both lead to the speed's stats page.
+    const links = [...(blitz?.querySelectorAll('a') ?? [])].map(link => link.getAttribute('href'));
+    expect(links).toEqual(['/@/eresy/perf/blitz', '/@/eresy/perf/blitz']);
     expect(blitz?.querySelector('.lr-ext-speed__line')?.getAttribute('d')).toMatch(/^M0,27C/);
     expect(pool('3+2')?.classList.contains('lr-ext-speed__pool--last')).toBe(true);
     expect(document.querySelector("[data-lr-ext-speed='bullet'] .lr-ext-speed__games")).toBeNull();

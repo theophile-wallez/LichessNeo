@@ -36,7 +36,7 @@ function draw(section: HTMLElement, state: State): void {
   const holder = queryOne(section, '.lr-ext-speeds__cards', HTMLElement);
   if (!holder || key === state.drawn) return;
   state.drawn = key;
-  setHtml(holder, cardsMarkup(state.cards, state.texts));
+  setHtml(holder, cardsMarkup(state));
 }
 
 function onClick(event: MouseEvent, state: State): void {

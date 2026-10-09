@@ -215,7 +215,8 @@
     padding: 12px;
   }
 
-  .lr-ext-speed__top {
+  .lr-ext-speed__top,
+  .lr-ext-speed__stats {
     display: contents;
   }
 

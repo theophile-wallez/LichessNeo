@@ -53,29 +53,37 @@ function pools(speed: CardSpeed, last: string | undefined): SafeHtml {
   </div>`;
 }
 
-function card(speed: CardSpeed, played: Card | undefined, texts: SpeedTexts): SafeHtml {
+interface CardsOptions {
+  /** The player's numbers, null signed out. */
+  readonly cards: readonly Card[] | null;
+  readonly texts: SpeedTexts;
+  readonly user: string | undefined;
+}
+
+function card(speed: CardSpeed, { cards, texts, user }: CardsOptions): SafeHtml {
+  const numbers = user === undefined ? undefined : cards?.find(each => each.speed === speed);
+  // Signed in, the games and the rating lead to the speed's stats page.
+  const stats = `/@/${encodeURIComponent(user ?? '')}/perf/${speed}`;
   // The rating's color on every chart of ours.
   const color = `--lr-ext-speed-color: ${gameRatingColor(speed)}`;
   return html`<article class="lr-ext-speed" data-lr-ext-speed="${speed}" style="${color}">
     <div class="lr-ext-speed__top">
       <span class="lr-ext-speed__name"><span>${texts.names[speed]}</span></span>
-      ${played && html`<span class="lr-ext-speed__games">${texts.games(played.games)}</span>`}
+      ${numbers && html`<a class="lr-ext-speed__games" href="${stats}">${texts.games(numbers.games)}</a>`}
     </div>
-    ${played && [rating(played, texts), curve(speed, played.history)]}
-    ${pools(speed, played?.last)}
+    ${
+      numbers &&
+      html`<a class="lr-ext-speed__stats" href="${stats}">
+      ${rating(numbers, texts)} ${curve(speed, numbers.history)}
+    </a>`
+    }
+    ${pools(speed, numbers?.last)}
   </article>`;
 }
 
 /** The cards: with a player's numbers when signed in, only the pools otherwise. */
-export function cardsMarkup(cards: readonly Card[] | null, texts: SpeedTexts): SafeHtml {
-  return html`${CARD_SPEEDS.map(speed =>
-    card(
-      speed,
-      cards?.find(played => played.speed === speed),
-      texts,
-    ),
-  )}`;
-}
+export const cardsMarkup = (options: CardsOptions): SafeHtml =>
+  html`${CARD_SPEEDS.map(speed => card(speed, options))}`;
 
 /** The section's frame, its cards drawn into `.lr-ext-speeds__cards`. */
 export const sectionMarkup = (texts: SpeedTexts): SafeHtml =>
