@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ReadyStateSchema, setReadyState } from '#shared/testing/ready-state.ts';
+import { flush } from '#shared/testing/timers.ts';
 import { assets } from './assets.ts';
 import { coachChoice } from './coach-choice.ts';
 import { fontFaces, fonts } from './fonts.ts';
@@ -30,13 +31,16 @@ describe('fonts', () => {
     expect(fontFaces()).toBe(legacy.fontFaces);
   });
 
-  it.each(legacy.fonts)('adds them after Lichess’s, page $readyState', ({ readyState, after }) => {
+  // The original added them at DOMContentLoaded; they now come as the body begins, before the
+  // first paint, and still after Lichess's.
+  it.each(legacy.fonts)('adds them after Lichess’s, page $readyState', async ({ after }) => {
+    const body = document.body;
+    body.remove();
     document.head.innerHTML = '<style id="lichess">x</style>';
-    setReadyState(ReadyStateSchema.parse(readyState));
     fonts.start();
-    const added = document.head.children.length > 1;
-    expect(added).toBe(readyState !== 'loading');
-    document.dispatchEvent(new Event('DOMContentLoaded'));
+    expect(document.head.children).toHaveLength(1);
+    document.documentElement.append(body);
+    await flush();
     expect(document.head.innerHTML.replace(legacy.fontFaces, '<faces>')).toBe(after);
     document.head.innerHTML = '';
   });

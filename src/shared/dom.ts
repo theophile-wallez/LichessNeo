@@ -11,6 +11,20 @@ export function onDomReady(callback: () => void): void {
   else callback();
 }
 
+/**
+ * Runs `callback` once <head> is parsed (as <body> begins), or right away if it is. Before the
+ * first paint, unlike `onDomReady`.
+ */
+export function onHeadParsed(callback: () => void): void {
+  if (document.body) return callback();
+  const observer = new MutationObserver(() => {
+    if (!document.body) return;
+    observer.disconnect();
+    callback();
+  });
+  observer.observe(document.documentElement, { childList: true });
+}
+
 export function queryOne<T extends Element>(
   root: ParentNode,
   selector: string,
