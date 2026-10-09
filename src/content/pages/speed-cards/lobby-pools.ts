@@ -39,9 +39,6 @@ async function nextPool(id: string): Promise<HTMLElement | null> {
   return null;
 }
 
-// Below it, the cards are hidden and Lichess's pools tab stays.
-const DESKTOP = matchMedia('(min-width: 1020px)');
-
 let driving = false;
 
 /** Whether a card is clicking through Lichess's tabs, which then mustn't be switched. */
@@ -49,7 +46,7 @@ export const isDriving = (): boolean => driving;
 
 /** Leaves the pools tab for the lobby's, unless a card is using it. */
 export function leavePoolsTab(): void {
-  if (driving || !DESKTOP.matches || !poolsShown()) return;
+  if (driving || !poolsShown()) return;
   tabs()[1]?.click();
 }
 

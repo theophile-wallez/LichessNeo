@@ -1,5 +1,7 @@
+@import './grid.css';
 @import './hero.css';
 @import './cards.css';
 @import './speed-cards.css';
 @import './side.css';
 @import './tournaments.css';
+@import './compact.css';

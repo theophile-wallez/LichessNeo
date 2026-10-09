@@ -4,6 +4,7 @@ import { packs } from './packs/index.ts';
 import { fonts } from './bootstrap/fonts.ts';
 import { donate } from './sidebar/donate.ts';
 import { sidebarCollapse } from './sidebar/collapse.ts';
+import { drawer } from './sidebar/drawer.ts';
 import { currentSection } from './sidebar/current.ts';
 import { accountRating } from './sidebar/account-rating.ts';
 import { coachChoice } from './bootstrap/coach-choice.ts';
@@ -61,6 +62,7 @@ function main(): void {
     fonts,
     donate,
     sidebarCollapse,
+    drawer,
     currentSection,
     coachChoice,
     fideOffset,

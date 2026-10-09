@@ -1,245 +1,248 @@
 /* ---- Cards --- */
 
+main.lobby
+  :is(
+    .lobby__tv,
+    .lobby__puzzle,
+    .lobby__blog,
+    .lobby__feed,
+    .lobby__streams,
+    .about-side,
+    .lobby__tournaments-simuls,
+    .lobby__app,
+    .lobby__timeline
+  ) {
+  box-sizing: border-box;
+  padding: 16px !important;
+  border: none !important;
+  border-radius: 16px !important;
+  background: var(--lr-ext-bg-panel) !important;
+  box-shadow:
+    inset 0 1px 0 #ffffff0d,
+    0 10px 28px #00000033 !important;
+}
+
+/* Card titles Lichess doesn't provide. */
+main.lobby :is(.lobby__tv, .lobby__blog, .lobby__feed, .lobby__streams)::before {
+  display: block;
+  margin: 0 0 12px 2px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+main.lobby .lobby__tv::before {
+  content: 'Featured game';
+}
+main.lobby .lobby__blog::before {
+  content: 'From the blog';
+}
+main.lobby .lobby__feed::before {
+  content: "What's new";
+}
+main.lobby .lobby__streams::before {
+  content: 'Live streams';
+}
+html[lang^='fr'] main.lobby .lobby__tv::before {
+  content: 'Partie en vedette';
+}
+html[lang^='fr'] main.lobby .lobby__blog::before {
+  content: 'Articles du blog';
+}
+html[lang^='fr'] main.lobby .lobby__feed::before {
+  content: 'Nouveautés';
+}
+html[lang^='fr'] main.lobby .lobby__streams::before {
+  content: 'Streams en direct';
+}
+html[lang^='de'] main.lobby .lobby__tv::before {
+  content: 'Ausgewählte Partie';
+}
+html[lang^='de'] main.lobby .lobby__blog::before {
+  content: 'Aus dem Blog';
+}
+html[lang^='de'] main.lobby .lobby__feed::before {
+  content: 'Neuigkeiten';
+}
+html[lang^='de'] main.lobby .lobby__streams::before {
+  content: 'Live-Streams';
+}
+html[lang^='es'] main.lobby .lobby__tv::before {
+  content: 'Partida destacada';
+}
+html[lang^='es'] main.lobby .lobby__blog::before {
+  content: 'Del blog';
+}
+html[lang^='es'] main.lobby .lobby__feed::before {
+  content: 'Novedades';
+}
+html[lang^='es'] main.lobby .lobby__streams::before {
+  content: 'Streams en directo';
+}
+html[lang^='pt'] main.lobby .lobby__tv::before {
+  content: 'Partida em destaque';
+}
+html[lang^='pt'] main.lobby .lobby__blog::before {
+  content: 'Do blog';
+}
+html[lang^='pt'] main.lobby .lobby__feed::before {
+  content: 'Novidades';
+}
+html[lang^='pt'] main.lobby .lobby__streams::before {
+  content: 'Transmissões ao vivo';
+}
+
+/* Lichess repeats the support links inside these blocks on some widths. */
+main.lobby :is(.lobby__tv, .lobby__puzzle) > .lobby__support-link {
+  display: none !important;
+}
+
+main.lobby .lobby__tv .mini-game__player {
+  padding: 0 2px !important;
+}
+main.lobby .lobby__tv .mini-game__player:first-child {
+  margin-bottom: 8px;
+}
+main.lobby .lobby__tv .mini-game__player:last-child {
+  margin-top: 8px;
+}
+
+/* ---- Blog --- */
+
+/* Lichess sizes the cards from the carousel's clientWidth, which counts padding: a
+   transparent border insets them without clipping the last card. */
+main.lobby .lobby__blog {
+  padding: 16px 0 !important;
+  border: solid transparent !important;
+  border-width: 0 16px !important;
+}
+
+/* News cards: the image, then the title and "author · date" under it rather than over
+   it. The image wrapper is display: contents so its labels join the card's grid. */
+main.lobby .lobby__blog .ublog-post-card {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  column-gap: 6px;
+  border: none !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  transition: transform 0.15s !important;
+}
+
+main.lobby .lobby__blog .ublog-post-card:hover {
+  transform: translateY(-2px);
+}
+
+main.lobby .lobby__blog .ublog-post-card__top {
+  display: contents !important;
+}
+
+main.lobby .lobby__blog .ublog-post-card__image {
+  grid-area: 1 / 1 / 2 / -1;
+  border-radius: 10px !important;
+  box-shadow: 0 0 0 1px var(--lr-ext-card-border);
+  transition: filter 0.15s !important;
+}
+
+main.lobby .lobby__blog .ublog-post-card:hover .ublog-post-card__image {
+  filter: brightness(1.1);
+}
+
+main.lobby .lobby__blog .ublog-post-card__content {
+  grid-area: 2 / 1 / 3 / -1;
+  padding: 10px 2px 4px !important;
+}
+
+main.lobby .lobby__blog .ublog-post-card__title {
+  min-height: 2.6em;
+  margin: 0;
+  -webkit-line-clamp: 2 !important;
+  color: #fff !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1.3;
+}
+
+main.lobby .lobby__blog .ublog-post-card__over-image {
+  position: static !important;
+  grid-row: 3;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px;
+  font-weight: 400 !important;
+  line-height: 1.4;
+  text-shadow: none !important;
+  white-space: nowrap;
+}
+
+main.lobby .lobby__blog .ublog-post-card .user-link {
+  grid-column: 1;
+  padding-inline-start: 2px !important;
+  color: var(--lr-ext-grey-200) !important;
+  font-weight: 600 !important;
+}
+
+main.lobby .lobby__blog .ublog-post-card time {
+  grid-column: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+main.lobby .lobby__blog .ublog-post-card time::before {
+  content: '·';
+  position: static;
+  margin-inline-end: 6px;
+  backdrop-filter: none;
+}
+
+main.lobby .lobby__blog .ublog-post-card .user-link::before {
+  display: none;
+}
+
+/* Round arrow buttons on the images' edges, not full-height chevrons. */
+main.lobby .lobby__blog .carousel__controls {
+  box-sizing: border-box;
+  padding: 0 6px;
+}
+
+main.lobby .lobby__blog .carousel__controls button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--lr-ext-btn-grey);
+  box-shadow:
+    var(--lr-ext-btn-grey-shadow),
+    0 4px 12px #00000080;
+  color: #fff;
+  font-size: 18px;
+}
+
+main.lobby .lobby__blog .carousel__controls button:hover {
+  background: var(--lr-ext-btn-grey-hover);
+  color: #fff;
+}
+
+/* As tall as the featured game beside it (contain: size stops it growing the row), its
+   list scrolling. */
+main.lobby .lobby__app {
+  height: auto !important;
+  max-height: none !important;
+}
+
 @media (min-width: 1020px) {
-  main.lobby
-    :is(
-      .lobby__tv,
-      .lobby__puzzle,
-      .lobby__blog,
-      .lobby__feed,
-      .lobby__streams,
-      .about-side,
-      .lobby__tournaments-simuls,
-      .lobby__app,
-      .lobby__timeline
-    ) {
-    box-sizing: border-box;
-    padding: 16px !important;
-    border: none !important;
-    border-radius: 16px !important;
-    background: var(--lr-ext-bg-panel) !important;
-    box-shadow:
-      inset 0 1px 0 #ffffff0d,
-      0 10px 28px #00000033 !important;
-  }
-
-  /* Card titles Lichess doesn't provide. */
-  main.lobby :is(.lobby__tv, .lobby__blog, .lobby__feed, .lobby__streams)::before {
-    display: block;
-    margin: 0 0 12px 2px;
-    color: #fff;
-    font-size: 17px;
-    font-weight: 800;
-  }
-
-  main.lobby .lobby__tv::before {
-    content: 'Featured game';
-  }
-  main.lobby .lobby__blog::before {
-    content: 'From the blog';
-  }
-  main.lobby .lobby__feed::before {
-    content: "What's new";
-  }
-  main.lobby .lobby__streams::before {
-    content: 'Live streams';
-  }
-  html[lang^='fr'] main.lobby .lobby__tv::before {
-    content: 'Partie en vedette';
-  }
-  html[lang^='fr'] main.lobby .lobby__blog::before {
-    content: 'Articles du blog';
-  }
-  html[lang^='fr'] main.lobby .lobby__feed::before {
-    content: 'Nouveautés';
-  }
-  html[lang^='fr'] main.lobby .lobby__streams::before {
-    content: 'Streams en direct';
-  }
-  html[lang^='de'] main.lobby .lobby__tv::before {
-    content: 'Ausgewählte Partie';
-  }
-  html[lang^='de'] main.lobby .lobby__blog::before {
-    content: 'Aus dem Blog';
-  }
-  html[lang^='de'] main.lobby .lobby__feed::before {
-    content: 'Neuigkeiten';
-  }
-  html[lang^='de'] main.lobby .lobby__streams::before {
-    content: 'Live-Streams';
-  }
-  html[lang^='es'] main.lobby .lobby__tv::before {
-    content: 'Partida destacada';
-  }
-  html[lang^='es'] main.lobby .lobby__blog::before {
-    content: 'Del blog';
-  }
-  html[lang^='es'] main.lobby .lobby__feed::before {
-    content: 'Novedades';
-  }
-  html[lang^='es'] main.lobby .lobby__streams::before {
-    content: 'Streams en directo';
-  }
-  html[lang^='pt'] main.lobby .lobby__tv::before {
-    content: 'Partida em destaque';
-  }
-  html[lang^='pt'] main.lobby .lobby__blog::before {
-    content: 'Do blog';
-  }
-  html[lang^='pt'] main.lobby .lobby__feed::before {
-    content: 'Novidades';
-  }
-  html[lang^='pt'] main.lobby .lobby__streams::before {
-    content: 'Transmissões ao vivo';
-  }
-
-  /* Lichess repeats the support links inside these blocks on some widths. */
-  main.lobby :is(.lobby__tv, .lobby__puzzle) > .lobby__support-link {
-    display: none !important;
-  }
-
-  main.lobby .lobby__tv .mini-game__player {
-    padding: 0 2px !important;
-  }
-  main.lobby .lobby__tv .mini-game__player:first-child {
-    margin-bottom: 8px;
-  }
-  main.lobby .lobby__tv .mini-game__player:last-child {
-    margin-top: 8px;
-  }
-
-  /* ---- Blog --- */
-
-  /* Lichess sizes the cards from the carousel's clientWidth, which counts padding: a
-     transparent border insets them without clipping the last card. */
-  main.lobby .lobby__blog {
-    padding: 16px 0 !important;
-    border: solid transparent !important;
-    border-width: 0 16px !important;
-  }
-
-  /* News cards: the image, then the title and "author · date" under it rather than over
-     it. The image wrapper is display: contents so its labels join the card's grid. */
-  main.lobby .lobby__blog .ublog-post-card {
-    display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-content: start;
-    column-gap: 6px;
-    border: none !important;
-    border-radius: 0 !important;
-    background: none !important;
-    box-shadow: none !important;
-    transition: transform 0.15s !important;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card:hover {
-    transform: translateY(-2px);
-  }
-
-  main.lobby .lobby__blog .ublog-post-card__top {
-    display: contents !important;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card__image {
-    grid-area: 1 / 1 / 2 / -1;
-    border-radius: 10px !important;
-    box-shadow: 0 0 0 1px var(--lr-ext-card-border);
-    transition: filter 0.15s !important;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card:hover .ublog-post-card__image {
-    filter: brightness(1.1);
-  }
-
-  main.lobby .lobby__blog .ublog-post-card__content {
-    grid-area: 2 / 1 / 3 / -1;
-    padding: 10px 2px 4px !important;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card__title {
-    min-height: 2.6em;
-    margin: 0;
-    -webkit-line-clamp: 2 !important;
-    color: #fff !important;
-    font-size: 15px !important;
-    font-weight: 700 !important;
-    line-height: 1.3;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card__over-image {
-    position: static !important;
-    grid-row: 3;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    background: none !important;
-    color: var(--lr-ext-text-dim) !important;
-    font-size: 13px;
-    font-weight: 400 !important;
-    line-height: 1.4;
-    text-shadow: none !important;
-    white-space: nowrap;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card .user-link {
-    grid-column: 1;
-    padding-inline-start: 2px !important;
-    color: var(--lr-ext-grey-200) !important;
-    font-weight: 600 !important;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card time {
-    grid-column: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card time::before {
-    content: '·';
-    position: static;
-    margin-inline-end: 6px;
-    backdrop-filter: none;
-  }
-
-  main.lobby .lobby__blog .ublog-post-card .user-link::before {
-    display: none;
-  }
-
-  /* Round arrow buttons on the images' edges, not full-height chevrons. */
-  main.lobby .lobby__blog .carousel__controls {
-    box-sizing: border-box;
-    padding: 0 6px;
-  }
-
-  main.lobby .lobby__blog .carousel__controls button {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--lr-ext-btn-grey);
-    box-shadow:
-      var(--lr-ext-btn-grey-shadow),
-      0 4px 12px #00000080;
-    color: #fff;
-    font-size: 18px;
-  }
-
-  main.lobby .lobby__blog .carousel__controls button:hover {
-    background: var(--lr-ext-btn-grey-hover);
-    color: #fff;
-  }
-
-  /* As tall as the featured game beside it (contain: size stops it growing the row), its
-     list scrolling. */
   main.lobby .lobby__app {
     contain: size;
-    height: auto !important;
     min-height: 420px;
-    max-height: none !important;
   }
+}
 
-  main.lobby .lobby__app__content {
-    background-color: transparent !important;
-    box-shadow: none !important;
-  }
+main.lobby .lobby__app__content {
+  background-color: transparent !important;
+  box-shadow: none !important;
 }

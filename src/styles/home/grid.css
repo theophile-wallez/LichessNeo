@@ -1,0 +1,77 @@
+/* Home page (main.lobby) on a desktop: Lichess's blocks as cards on a 12-column grid, under
+   our hero (hero.css) and speed cards. Below 1020px, compact.css lays them out. */
+
+@media (min-width: 1020px) {
+  html[data-lr-ext-has~='lobby'] #main-wrap {
+    ---main-max-width: 1260px !important;
+  }
+
+  main.lobby {
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    grid-template-rows: none !important;
+    grid-template-areas: none !important;
+    grid-auto-rows: auto !important;
+    gap: 20px !important;
+    margin: 8px 0 40px;
+  }
+
+  main.lobby > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+    margin: 0 !important;
+  }
+
+  /* The hero over the start buttons, the speed cards, then the lobby by the featured game and
+     the news by the puzzle. */
+  .lr-ext-hero {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 / 3;
+  }
+  main.lobby .lobby__table {
+    grid-column: 1 / 9 !important;
+    grid-row: 2 !important;
+  }
+  .lr-ext-speeds {
+    grid-row: 3;
+  }
+  main.lobby .lobby__app {
+    grid-column: 1 / 9 !important;
+    grid-row: 4 !important;
+  }
+  main.lobby .lobby__tv {
+    grid-column: 9 / 13 !important;
+    grid-row: 4 !important;
+  }
+  main.lobby .lobby__feed {
+    grid-column: 1 / 9 !important;
+    grid-row: 5 !important;
+  }
+  main.lobby .lobby__puzzle {
+    grid-column: 9 / 13 !important;
+    grid-row: 5 !important;
+  }
+  main.lobby .lobby__blog {
+    grid-column: 1 / -1 !important;
+    grid-row: 6 !important;
+  }
+  /* The side column (streams, spotlights) is the tall one: the support links go under the
+     tournaments. */
+  main.lobby .lobby__tournaments-simuls {
+    grid-column: 1 / 9 !important;
+    grid-row: 7 !important;
+  }
+  main.lobby .lobby__support {
+    grid-column: 1 / 9 !important;
+    grid-row: 8 !important;
+    align-self: start;
+  }
+  main.lobby .lobby__side {
+    grid-column: 9 / 13 !important;
+    grid-row: 7 / 9 !important;
+  }
+  main.lobby .lobby__about {
+    grid-column: 1 / -1 !important;
+    grid-row: 9 !important;
+  }
+}

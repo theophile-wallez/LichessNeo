@@ -3,301 +3,299 @@
 /* The quick pairing as a card per speed under the hero (content/pages/speed-cards), in place
    of Lichess's pools tab, which stays hidden: the cards click its pools for it. */
 
-@media (min-width: 1020px) {
-  /* The pools tab is the first of several; a bot's only tab is its games. Its content stays
-     unseen for the moment the cards take to switch back to the lobby. */
-  main.lobby .lobby__app > .tabs-horiz > button:first-child:not(:only-child) {
-    display: none !important;
-  }
+/* The pools tab is the first of several; a bot's only tab is its games. Its content stays
+   unseen for the moment the cards take to switch back to the lobby. */
+main.lobby .lobby__app > .tabs-horiz > button:first-child:not(:only-child) {
+  display: none !important;
+}
 
-  main.lobby .lobby__app-pools > .lobby__app__content {
-    visibility: hidden;
-  }
+main.lobby .lobby__app-pools > .lobby__app__content {
+  visibility: hidden;
+}
 
-  .lr-ext-speeds {
-    display: flex;
-    flex-direction: column;
+.lr-ext-speeds {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lr-ext-speeds__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 34px;
+  padding-inline-start: 4px;
+}
+
+.lr-ext-speeds__title {
+  margin: 0;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.lr-ext-speeds__custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 10px 0 12px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 999px;
+  background: var(--lr-ext-bg-panel);
+  color: var(--lr-ext-grey-100);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s !important;
+}
+
+.lr-ext-speeds__custom:hover {
+  border-color: var(--lr-ext-card-border-hover);
+  background: var(--lr-ext-btn-grey);
+  color: #fff;
+}
+
+.lr-ext-speeds__custom .lr-ext-hi {
+  width: 16px;
+  height: 16px;
+}
+
+.lr-ext-speeds__custom .lr-ext-hi:last-child {
+  color: var(--lr-ext-text-dim);
+}
+
+.lr-ext-speeds__cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.lr-ext-speed {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--lr-ext-bg-panel);
+  box-shadow:
+    inset 0 1px 0 #ffffff0d,
+    0 10px 28px #00000033;
+}
+
+.lr-ext-speed__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.lr-ext-speed__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.lr-ext-speed__name > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The speed's Lichess glyph, in its rating's color. */
+.lr-ext-speed__name::before {
+  flex: none;
+  color: var(--lr-ext-speed-color);
+  font-family: lichess;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.lr-ext-speed[data-lr-ext-speed='bullet'] .lr-ext-speed__name::before {
+  content: var(--lr-ext-mode-bullet);
+}
+.lr-ext-speed[data-lr-ext-speed='blitz'] .lr-ext-speed__name::before {
+  content: var(--lr-ext-mode-blitz);
+}
+.lr-ext-speed[data-lr-ext-speed='rapid'] .lr-ext-speed__name::before {
+  content: var(--lr-ext-mode-rapid);
+}
+.lr-ext-speed[data-lr-ext-speed='classical'] .lr-ext-speed__name::before {
+  content: var(--lr-ext-mode-classical);
+}
+
+.lr-ext-speed__games {
+  flex: none;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
+  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, #fff);
+  font-size: 12.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.lr-ext-speed__rating {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.lr-ext-speed__rating small {
+  color: var(--lr-ext-text-dim);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.lr-ext-speed__rating--none {
+  color: var(--lr-ext-grey-400);
+}
+
+.lr-ext-speed__curve {
+  display: block;
+  width: 100%;
+  height: 40px;
+  overflow: visible;
+}
+
+/* No rating history yet: a faint dashed line where the curve would be. */
+.lr-ext-speed__curve--empty {
+  box-sizing: border-box;
+  height: 28px;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed #ffffff1f;
+}
+
+.lr-ext-speed__line {
+  fill: none;
+  stroke: var(--lr-ext-speed-color);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.lr-ext-speed__stop {
+  stop-color: var(--lr-ext-speed-color);
+  stop-opacity: 0.32;
+}
+
+.lr-ext-speed__stop--end {
+  stop-opacity: 0;
+}
+
+.lr-ext-speed__pools {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.lr-ext-speed__pool {
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  height: 38px;
+  padding: 0 4px;
+  border: none;
+  border-radius: 8px;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: #fff;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    opacity 0.15s !important;
+}
+
+.lr-ext-speed__pool:hover {
+  background: var(--lr-ext-btn-grey-hover);
+}
+
+/* The pool last played at this speed: one click to play it again. */
+.lr-ext-speed__pool--last {
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+}
+
+.lr-ext-speed__pool--last:hover {
+  background: var(--lr-ext-btn-primary-hover);
+}
+
+/* Seeking: the pool ringed, a cross to cancel, the others faded. */
+.lr-ext-speeds--seeking .lr-ext-speed__pool:not(.lr-ext-speed__pool--seeking) {
+  opacity: 0.4;
+}
+
+.lr-ext-speed__pool--seeking,
+.lr-ext-speed__pool--seeking:hover {
+  background: var(--lr-ext-btn-grey);
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+}
+
+.lr-ext-speed__pool--seeking::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg') center /
+    contain no-repeat;
+}
+
+/* Four cards in what the sidebar leaves of a 1024px window: tighter, so the names and the
+   blitz's four pools still fit. */
+@media (max-width: 1259.29px) {
+  .lr-ext-speeds__cards {
     gap: 12px;
   }
 
-  .lr-ext-speeds__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    min-height: 34px;
-    padding-inline-start: 4px;
-  }
-
-  .lr-ext-speeds__title {
-    margin: 0;
-    color: #fff;
-    font-size: 17px;
-    font-weight: 800;
-  }
-
-  .lr-ext-speeds__custom {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    height: 34px;
-    padding: 0 10px 0 12px;
-    border: 1px solid var(--lr-ext-card-border);
-    border-radius: 999px;
-    background: var(--lr-ext-bg-panel);
-    color: var(--lr-ext-grey-100);
-    font: inherit;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition:
-      background-color 0.15s,
-      border-color 0.15s !important;
-  }
-
-  .lr-ext-speeds__custom:hover {
-    border-color: var(--lr-ext-card-border-hover);
-    background: var(--lr-ext-btn-grey);
-    color: #fff;
-  }
-
-  .lr-ext-speeds__custom .lr-ext-hi {
-    width: 16px;
-    height: 16px;
-  }
-
-  .lr-ext-speeds__custom .lr-ext-hi:last-child {
-    color: var(--lr-ext-text-dim);
-  }
-
-  .lr-ext-speeds__cards {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
-  }
-
   .lr-ext-speed {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-sizing: border-box;
-    padding: 16px;
-    border-radius: 16px;
-    background: var(--lr-ext-bg-panel);
-    box-shadow:
-      inset 0 1px 0 #ffffff0d,
-      0 10px 28px #00000033;
-  }
-
-  .lr-ext-speed__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    min-width: 0;
+    padding: 14px 12px 12px;
   }
 
   .lr-ext-speed__name {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 0;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  .lr-ext-speed__name > span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* The speed's Lichess glyph, in its rating's color. */
-  .lr-ext-speed__name::before {
-    flex: none;
-    color: var(--lr-ext-speed-color);
-    font-family: lichess;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1;
-  }
-
-  .lr-ext-speed[data-lr-ext-speed='bullet'] .lr-ext-speed__name::before {
-    content: var(--lr-ext-mode-bullet);
-  }
-  .lr-ext-speed[data-lr-ext-speed='blitz'] .lr-ext-speed__name::before {
-    content: var(--lr-ext-mode-blitz);
-  }
-  .lr-ext-speed[data-lr-ext-speed='rapid'] .lr-ext-speed__name::before {
-    content: var(--lr-ext-mode-rapid);
-  }
-  .lr-ext-speed[data-lr-ext-speed='classical'] .lr-ext-speed__name::before {
-    content: var(--lr-ext-mode-classical);
+    gap: 6px;
+    font-size: 15px;
   }
 
   .lr-ext-speed__games {
-    flex: none;
-    padding: 2px 9px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
-    color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, #fff);
-    font-size: 12.5px;
-    font-weight: 800;
-    white-space: nowrap;
+    padding: 1px 7px;
+    font-size: 11.5px;
   }
 
   .lr-ext-speed__rating {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    color: #fff;
-    font-size: 30px;
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-  }
-
-  .lr-ext-speed__rating small {
-    color: var(--lr-ext-text-dim);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0;
-  }
-
-  .lr-ext-speed__rating--none {
-    color: var(--lr-ext-grey-400);
-  }
-
-  .lr-ext-speed__curve {
-    display: block;
-    width: 100%;
-    height: 40px;
-    overflow: visible;
-  }
-
-  /* No rating history yet: a faint dashed line where the curve would be. */
-  .lr-ext-speed__curve--empty {
-    box-sizing: border-box;
-    height: 28px;
-    margin-bottom: 12px;
-    border-bottom: 1px dashed #ffffff1f;
-  }
-
-  .lr-ext-speed__line {
-    fill: none;
-    stroke: var(--lr-ext-speed-color);
-    stroke-width: 2px;
-    stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .lr-ext-speed__stop {
-    stop-color: var(--lr-ext-speed-color);
-    stop-opacity: 0.32;
-  }
-
-  .lr-ext-speed__stop--end {
-    stop-opacity: 0;
+    font-size: 26px;
   }
 
   .lr-ext-speed__pools {
-    display: flex;
-    gap: 6px;
-    margin-top: auto;
+    gap: 4px;
   }
 
   .lr-ext-speed__pool {
-    display: inline-flex;
-    flex: 1 1 0;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    min-width: 0;
-    height: 38px;
-    padding: 0 4px;
-    border: none;
-    border-radius: 8px;
-    background: var(--lr-ext-btn-grey);
-    box-shadow: var(--lr-ext-btn-grey-shadow);
-    color: #fff;
-    font: inherit;
-    font-size: 14.5px;
-    font-weight: 700;
-    white-space: nowrap;
-    cursor: pointer;
-    transition:
-      background-color 0.15s,
-      opacity 0.15s !important;
-  }
-
-  .lr-ext-speed__pool:hover {
-    background: var(--lr-ext-btn-grey-hover);
-  }
-
-  /* The pool last played at this speed: one click to play it again. */
-  .lr-ext-speed__pool--last {
-    background: var(--lr-ext-btn-primary);
-    box-shadow: var(--lr-ext-btn-primary-shadow);
-  }
-
-  .lr-ext-speed__pool--last:hover {
-    background: var(--lr-ext-btn-primary-hover);
-  }
-
-  /* Seeking: the pool ringed, a cross to cancel, the others faded. */
-  .lr-ext-speeds--seeking .lr-ext-speed__pool:not(.lr-ext-speed__pool--seeking) {
-    opacity: 0.4;
-  }
-
-  .lr-ext-speed__pool--seeking,
-  .lr-ext-speed__pool--seeking:hover {
-    background: var(--lr-ext-btn-grey);
-    box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
-  }
-
-  .lr-ext-speed__pool--seeking::after {
-    content: '';
-    width: 14px;
-    height: 14px;
-    background: currentColor;
-    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg') center /
-      contain no-repeat;
-  }
-
-  /* Four cards in what the sidebar leaves of a 1024px window: tighter, so the names and the
-     blitz's four pools still fit. */
-  @media (max-width: 1259.29px) {
-    .lr-ext-speeds__cards {
-      gap: 12px;
-    }
-
-    .lr-ext-speed {
-      padding: 14px 12px 12px;
-    }
-
-    .lr-ext-speed__name {
-      gap: 6px;
-      font-size: 15px;
-    }
-
-    .lr-ext-speed__games {
-      padding: 1px 7px;
-      font-size: 11.5px;
-    }
-
-    .lr-ext-speed__rating {
-      font-size: 26px;
-    }
-
-    .lr-ext-speed__pools {
-      gap: 4px;
-    }
-
-    .lr-ext-speed__pool {
-      padding: 0 2px;
-      font-size: 13px;
-    }
+    padding: 0 2px;
+    font-size: 13px;
   }
 }

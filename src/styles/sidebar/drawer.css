@@ -1,0 +1,240 @@
+/* ---- Drawer --- */
+
+/* Below 1020px Lichess keeps its header and its hamburger, which opens the nav as a drawer
+ * (#tn-tg checked). The header takes our look, and the drawer the sidebar's: its sections
+ * with their pictures, each folding open on a tap (content/sidebar/drawer.ts). */
+
+@media (max-width: 1019.98px) {
+  #top {
+    background: var(--lr-ext-bg-page) !important;
+    box-shadow: inset 0 -1px 0 var(--lr-ext-sidebar-line) !important;
+  }
+
+  /* The hamburger as a Hugeicon, a cross while the drawer is open. */
+  #top .hbg__in {
+    display: none !important;
+  }
+
+  #top .hbg {
+    display: grid !important;
+    place-items: center;
+    color: var(--lr-ext-grey-100);
+  }
+
+  #top .hbg::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background: currentColor;
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/menu-01.svg') center /
+      contain no-repeat;
+  }
+
+  #top #tn-tg:checked ~ .hbg::before {
+    mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg');
+  }
+
+  /* The sidebar's logo: the horse and the name, where Lichess shows its own. */
+  #top .site-title {
+    align-items: center;
+    gap: 8px;
+    font-size: 0 !important;
+  }
+
+  #top .site-title > * {
+    display: none !important;
+  }
+
+  #top .site-title::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background: var(--lr-ext-logo) center / contain no-repeat;
+  }
+
+  #top .site-title::after {
+    content: 'Lichess';
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  @media (min-width: 800.02px) {
+    #top .site-title {
+      display: flex !important;
+    }
+  }
+
+  /* The drawer has Donate, at the end of Play's links. */
+  #top .site-title-nav__donate {
+    display: none !important;
+  }
+
+  #topnav {
+    flex-flow: column nowrap !important;
+    justify-content: flex-start !important;
+    align-content: stretch !important;
+    box-sizing: border-box;
+    width: min(300px, 86vw) !important;
+    padding: 10px 0 24px !important;
+    background: var(--lr-ext-bg-page) !important;
+    box-shadow:
+      1px 0 0 var(--lr-ext-sidebar-line),
+      16px 0 40px #00000080 !important;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  /* A phone's header has no room for the logo: it heads the drawer, as it heads the sidebar. */
+  @media (max-width: 800px) {
+    #topnav::before {
+      content: 'Lichess';
+      display: flex;
+      align-items: center;
+      height: 34px;
+      margin: 4px 10px 10px;
+      padding: 0 12px 0 46px;
+      background: var(--lr-ext-logo) 12px center / 24px no-repeat;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+    }
+  }
+
+  #topnav section {
+    flex: none !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #topnav section > a {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    height: 46px;
+    margin: 1px 10px !important;
+    padding: 0 12px !important;
+    border-radius: 10px;
+    color: var(--lr-ext-grey-100) !important;
+    font-size: 15.5px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    transition: background-color 0.15s !important;
+  }
+
+  #topnav section > a .home {
+    display: none !important;
+  }
+
+  #topnav section > a .play {
+    display: inline !important;
+  }
+
+  #topnav section > a::before {
+    content: '';
+    flex: none;
+    width: 24px;
+    height: 24px;
+    background: var(--lr-ext-nav-icon) center / contain no-repeat;
+  }
+
+  /* A chevron that turns as the section opens. */
+  #topnav section > a::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin-inline-start: auto;
+    background: var(--lr-ext-text-dim);
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg') center /
+      contain no-repeat;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  #topnav section.lr-ext-open > a::after {
+    transform: rotate(180deg);
+  }
+
+  #topnav section:is(.active, .lr-ext-open) > a,
+  #topnav section > a:hover {
+    background: #ffffff0f !important;
+    color: #fff !important;
+  }
+
+  /* A section's links slide open from its row, and fold back into it. `height: auto` animates
+     where the browser can interpolate it (Chrome); elsewhere they only fade. */
+  #topnav section > div {
+    display: flex !important;
+    flex-direction: column;
+    height: 0;
+    margin: 0 10px 0 26px !important;
+    padding: 0 0 0 10px !important;
+    overflow: hidden;
+    border-inline-start: 2px solid #ffffff12;
+    opacity: 0;
+    visibility: hidden;
+    interpolate-size: allow-keywords;
+    transition:
+      height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      margin 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.2s,
+      visibility 0s 0.3s !important;
+  }
+
+  #topnav section.lr-ext-open > div {
+    height: auto;
+    margin: 2px 10px 8px 26px !important;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      height 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      margin 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.25s,
+      visibility 0s !important;
+  }
+
+  /* The links drop in a little as they show. */
+  #topnav section > div a {
+    transform: translateY(-6px);
+    transition:
+      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.15s !important;
+  }
+
+  #topnav section.lr-ext-open > div a {
+    transform: none;
+  }
+
+  #topnav section > div a {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 10px !important;
+    border-radius: 8px;
+    color: var(--lr-ext-grey-200) !important;
+    font-size: 14.5px !important;
+    font-weight: 500;
+  }
+
+  #topnav section > div a:hover {
+    background: #ffffff0f !important;
+    color: #fff !important;
+  }
+
+  #topnav div a.community-patron {
+    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/donation.webp');
+  }
+
+  #topnav div a.community-patron::after {
+    display: none !important;
+  }
+
+  #topnav section > div a::before {
+    content: '';
+    flex: none;
+    width: 20px;
+    height: 20px;
+    background: var(--lr-ext-sub-icon, none) center / contain no-repeat;
+  }
+}

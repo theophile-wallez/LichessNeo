@@ -28,3 +28,31 @@ test("the custom game's pill opens Lichess's game setup", async ({ page }) => {
   await page.locator('.lr-ext-speeds__custom').click();
   await expect(page.locator('.game-setup')).toBeVisible();
 });
+
+// Tablets and phones: two columns, then one, the start buttons still over the hero's foot.
+for (const { width, height } of [
+  { width: 390, height: 844 },
+  { width: 768, height: 1024 },
+  { width: 1019, height: 800 },
+]) {
+  test(`the home fits a ${width}px screen`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await openLichess(page, '/');
+    await expect(page.locator('.lr-ext-speed')).toHaveCount(4);
+    const hero = await page.locator('main.lobby > .lr-ext-hero').boundingBox();
+    const table = await page.locator('main.lobby > .lobby__table').boundingBox();
+    expect(table && hero && Math.round(table.y + table.height - (hero.y + hero.height))).toBe(0);
+    expect(await horizontalOverflow(page)).toBe(0);
+  });
+}
+
+test('the hamburger opens the nav as a drawer, its sections folding open', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openLichess(page, '/');
+  await page.locator('#top label.hbg').click();
+  const puzzles = page.locator('#topnav > section').nth(1);
+  await expect(puzzles.locator('> div')).toBeHidden();
+  await puzzles.locator('> a').click();
+  await expect(puzzles.locator('> div')).toBeVisible();
+  await expect(page).toHaveURL(/\/$/);
+});

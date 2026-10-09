@@ -133,27 +133,6 @@
     color: var(--lr-ext-text-strong) !important;
   }
 
-  /* Icons from public/img/sidebar. Sections are matched by position and links by how their
-   * href ends: Lichess localizes the labels and some paths (/fr/training). */
-  #topnav section:nth-of-type(1) > a {
-    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/play.webp');
-  }
-  #topnav section:nth-of-type(2) > a {
-    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
-  }
-  #topnav section:nth-of-type(3) > a {
-    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/learn.webp');
-  }
-  #topnav section:nth-of-type(4) > a {
-    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/watch-binoculars.webp');
-  }
-  #topnav section:nth-of-type(5) > a {
-    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
-  }
-  #topnav section:nth-of-type(6) > a {
-    --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/tools.webp');
-  }
-
   #topnav section > div a {
     display: flex !important;
     align-items: center;
@@ -167,95 +146,116 @@
     height: 18px;
     background: var(--lr-ext-sub-icon, none) center / contain no-repeat;
   }
+}
 
-  #topnav div a[href*='#hook'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friendly-challenge.webp');
-  }
-  #topnav div a[href$='/tournament'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp');
-  }
-  #topnav div a[href$='/swiss'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/swiss-tournaments.webp');
-  }
-  #topnav div a[href$='/simul'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp');
-  }
-  #topnav div a[href$='/training'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
-  }
-  #topnav div a[href$='/training/themes'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
-  }
-  #topnav div a[href*='/training/dashboard'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-dashboard.webp');
-  }
-  #topnav div a[href$='/streak'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
-  }
-  #topnav div a[href$='/storm'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
-  }
-  #topnav div a[href$='/racer'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
-  }
-  #topnav div a[href$='/learn'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/chess-basics.webp');
-  }
-  #topnav div a[href$='/practice'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/practice.webp');
-  }
-  #topnav div a[href$='/training/coordinate'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coordinate-practice.webp');
-  }
-  #topnav div a[href$='/study'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp');
-  }
-  #topnav div a[href$='/coach'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coach.webp');
-  }
-  #topnav div a[href$='/broadcast'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp');
-  }
-  #topnav div a[href$='/tv'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/lichess-tv.webp');
-  }
-  #topnav div a[href$='/games'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/current-games.webp');
-  }
-  #topnav div a[href$='/streamer'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/streamers.webp');
-  }
-  #topnav div a[href$='/video'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/video-library.webp');
-  }
-  #topnav div a[href$='/player'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
-  }
-  #topnav div a[href$='/following'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friends.webp');
-  }
-  #topnav div a[href$='/team'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/teams.webp');
-  }
-  #topnav div a[href$='/forum'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/forum.webp');
-  }
-  #topnav div a[href*='/blog'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp');
-  }
-  #topnav div a[href$='/analysis'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/analysis-board.webp');
-  }
-  #topnav div a[href$='/opening'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/openings.webp');
-  }
-  #topnav div a[href$='/editor'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/board-editor.webp');
-  }
-  #topnav div a[href$='/paste'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/import-game.webp');
-  }
-  #topnav div a[href$='/games/search'] {
-    --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/advanced-search.webp');
-  }
+/* Icons from public/img/sidebar, for the sidebar and the drawer (drawer.css). Sections are
+ * matched by position and links by how their href ends: Lichess localizes the labels and
+ * some paths (/fr/training). */
+#topnav section:nth-of-type(1) > a {
+  --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/play.webp');
+}
+#topnav section:nth-of-type(2) > a {
+  --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
+}
+#topnav section:nth-of-type(3) > a {
+  --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/learn.webp');
+}
+#topnav section:nth-of-type(4) > a {
+  --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/watch-binoculars.webp');
+}
+#topnav section:nth-of-type(5) > a {
+  --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
+}
+#topnav section:nth-of-type(6) > a {
+  --lr-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/tools.webp');
+}
+#topnav div a[href*='#hook'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friendly-challenge.webp');
+}
+#topnav div a[href$='/tournament'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp');
+}
+#topnav div a[href$='/swiss'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/swiss-tournaments.webp');
+}
+#topnav div a[href$='/simul'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp');
+}
+#topnav div a[href$='/training'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
+}
+#topnav div a[href$='/training/themes'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
+}
+#topnav div a[href*='/training/dashboard'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-dashboard.webp');
+}
+#topnav div a[href$='/streak'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
+}
+#topnav div a[href$='/storm'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
+}
+#topnav div a[href$='/racer'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
+}
+#topnav div a[href$='/learn'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/chess-basics.webp');
+}
+#topnav div a[href$='/practice'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/practice.webp');
+}
+#topnav div a[href$='/training/coordinate'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coordinate-practice.webp');
+}
+#topnav div a[href$='/study'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp');
+}
+#topnav div a[href$='/coach'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coach.webp');
+}
+#topnav div a[href$='/broadcast'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp');
+}
+#topnav div a[href$='/tv'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/lichess-tv.webp');
+}
+#topnav div a[href$='/games'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/current-games.webp');
+}
+#topnav div a[href$='/streamer'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/streamers.webp');
+}
+#topnav div a[href$='/video'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/video-library.webp');
+}
+#topnav div a[href$='/player'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/community.webp');
+}
+#topnav div a[href$='/following'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friends.webp');
+}
+#topnav div a[href$='/team'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/teams.webp');
+}
+#topnav div a[href$='/forum'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/forum.webp');
+}
+#topnav div a[href*='/blog'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/blog.webp');
+}
+#topnav div a[href$='/analysis'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/analysis-board.webp');
+}
+#topnav div a[href$='/opening'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/openings.webp');
+}
+#topnav div a[href$='/editor'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/board-editor.webp');
+}
+#topnav div a[href$='/paste'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/import-game.webp');
+}
+#topnav div a[href$='/games/search'] {
+  --lr-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/advanced-search.webp');
 }

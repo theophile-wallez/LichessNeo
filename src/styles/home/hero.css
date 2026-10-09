@@ -1,331 +1,257 @@
-/* Home page (main.lobby): Lichess's blocks as cards on a 12-column grid, under our hero
-   (.lr-ext-hero, added by content/pages/home-hero.ts). A signed-in user's timeline sits in the
-   side column. */
+/* ---- Hero --- */
 
-@media (min-width: 1020px) {
-  html[data-lr-ext-has~='lobby'] #main-wrap {
-    ---main-max-width: 1260px !important;
-  }
+/* Our hero card (content/pages/home-hero.ts), the start buttons and counters of Lichess's
+   .lobby__table laid over its bottom. */
 
-  main.lobby {
-    display: grid !important;
-    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-    grid-template-rows: none !important;
-    grid-template-areas: none !important;
-    grid-auto-rows: auto !important;
-    gap: 20px !important;
-    margin: 8px 0 40px;
-  }
+.lr-ext-hero {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-height: 400px;
+  /* The start buttons and counters (140px) lie over the hero's bottom: this padding keeps
+     the text clear, so a longer title (French, German) grows the hero instead. */
+  padding: 44px 40px calc(140px + 28px);
+  border-radius: 18px;
+  /* A dark card like the others (the accent is for buttons and badges), glowing behind the coach. */
+  background:
+    radial-gradient(circle at 88% 18%, #ffffff17, transparent 52%),
+    radial-gradient(circle at 10% 110%, #ffffff08, transparent 45%),
+    linear-gradient(
+      135deg,
+      var(--lr-ext-grey-800) 0%,
+      var(--lr-ext-grey-900) 50%,
+      var(--lr-ext-grey-950) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 #ffffff12,
+    0 12px 32px #00000040;
+}
 
-  main.lobby > * {
-    grid-column: 1 / -1;
-    min-width: 0;
-    margin: 0 !important;
-  }
+/* The user's coach, big and whole, as the hero illustration (content/pages/hero-coach.ts).
+   The live one makes an entrance, so the corner stays empty until it's in: its still (the
+   number set by content/bootstrap/coach-choice.ts) shows only if it can't load. */
+.lr-ext-hero__coach {
+  position: absolute;
+  top: 4px;
+  right: 24px;
+  /* The hero's whole height, beside the start buttons (8 of 12 columns), its width from its
+     height, and narrower on a narrow hero, clear of the title's 62%. */
+  bottom: 16px;
+  aspect-ratio: 250 / 270;
+  max-width: 34%;
+  background: bottom center / contain no-repeat;
+  pointer-events: none;
+}
 
-  /* The hero over the start buttons, the speed cards, then the lobby by the featured game and
-     the news by the puzzle. */
-  main.lobby .lobby__table {
-    grid-column: 1 / 9 !important;
-    grid-row: 2 !important;
-  }
-  .lr-ext-speeds {
-    grid-row: 3;
-  }
-  main.lobby .lobby__app {
-    grid-column: 1 / 9 !important;
-    grid-row: 4 !important;
-  }
-  main.lobby .lobby__tv {
-    grid-column: 9 / 13 !important;
-    grid-row: 4 !important;
-  }
-  main.lobby .lobby__feed {
-    grid-column: 1 / 9 !important;
-    grid-row: 5 !important;
-  }
-  main.lobby .lobby__puzzle {
-    grid-column: 9 / 13 !important;
-    grid-row: 5 !important;
-  }
-  main.lobby .lobby__blog {
-    grid-column: 1 / -1 !important;
-    grid-row: 6 !important;
-  }
-  /* The side column (streams, spotlights) is the tall one: the support links go under the
-     tournaments. */
-  main.lobby .lobby__tournaments-simuls {
-    grid-column: 1 / 9 !important;
-    grid-row: 7 !important;
-  }
-  main.lobby .lobby__support {
-    grid-column: 1 / 9 !important;
-    grid-row: 8 !important;
-    align-self: start;
-  }
-  main.lobby .lobby__side {
-    grid-column: 9 / 13 !important;
-    grid-row: 7 / 9 !important;
-  }
-  main.lobby .lobby__about {
-    grid-column: 1 / -1 !important;
-    grid-row: 9 !important;
-  }
+html[data-lr-ext-coach='1'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
+}
+html[data-lr-ext-coach='2'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
+}
+html[data-lr-ext-coach='3'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
+}
+html[data-lr-ext-coach='4'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
+}
+html[data-lr-ext-coach='5'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
+}
+html[data-lr-ext-coach='6'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
+}
+html[data-lr-ext-coach='7'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
+}
 
-  /* ---- Hero --- */
+/* Live, its canvas spills past the sides so arms and tails show, and a click makes it react. */
+.lr-ext-hero__coach--live {
+  pointer-events: auto;
+  cursor: pointer;
+}
 
+/* Only the coach's own box takes the click, not the canvas's clear sides over the title. */
+.lr-ext-hero__coach canvas {
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 160%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Right to left, the coach and its glow move to the other corner, clear of the text. */
+html[dir='rtl'] .lr-ext-hero {
+  background:
+    radial-gradient(circle at 12% 18%, #ffffff17, transparent 52%),
+    radial-gradient(circle at 90% 110%, #ffffff08, transparent 45%),
+    linear-gradient(
+      225deg,
+      var(--lr-ext-grey-800) 0%,
+      var(--lr-ext-grey-900) 50%,
+      var(--lr-ext-grey-950) 100%
+    );
+}
+
+html[dir='rtl'] .lr-ext-hero__coach {
+  right: auto;
+  left: 24px;
+}
+
+.lr-ext-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
+  color: var(--lr-ext-accent-hover);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.lr-ext-hero__eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lr-ext-accent-hover);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
+}
+
+/* A signed-in title holds the username (up to 20 letters): it breaks rather than run
+   under the coach. */
+.lr-ext-hero__title {
+  max-width: 62%;
+  margin: 0 0 14px;
+  overflow-wrap: anywhere;
+  color: #fff;
+  font-size: clamp(34px, 3.4vw, 50px);
+  font-weight: 800 !important;
+  line-height: 1.04;
+  letter-spacing: -0.03em !important;
+}
+
+.lr-ext-hero__sub {
+  max-width: 55%;
+  margin: 0;
+  color: var(--lr-ext-grey-200);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+/* Lichess's start buttons and counters, laid over the hero's bottom. */
+main.lobby .lobby__table {
+  z-index: 1;
+  align-self: end;
+  padding: 0 40px 36px;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* The game setup dialog opens inside the table (not as a modal), so the table's z-index
+   traps it: raised, or the feed's pinned title drew over it. */
+main.lobby .lobby__table:has(.snab-modal-mask) {
+  z-index: 110;
+}
+
+/* Lichess adds a top margin below 1260px: the table must stay 140px tall (64px buttons,
+   40px counters, 36px padding) to match the hero's reserve. */
+main.lobby .lobby__start {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 12px !important;
+  margin: 0 !important;
+}
+
+main.lobby .lobby__start__button {
+  flex: 1 1 0;
+  justify-content: center;
+  height: 64px !important;
+  padding: 0 14px !important;
+  border-radius: 10px !important;
+  font-size: 16px !important;
+  white-space: normal;
+  line-height: 1.15;
+  text-align: left;
+}
+
+main.lobby .lobby__start__button::before {
+  font-size: 26px !important;
+}
+
+/* Below 1260px the labels wrapped to four or five lines in French or German: smaller
+   type, icons and gutters keep them to three. */
+@media (min-width: 1020px) and (max-width: 1259.29px) {
   .lr-ext-hero {
-    grid-column: 1 / -1 !important;
-    grid-row: 1 / 3;
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-    min-height: 400px;
-    /* The start buttons and counters (140px) lie over the hero's bottom: this padding keeps
-       the text clear, so a longer title (French, German) grows the hero instead. */
-    padding: 44px 40px calc(140px + 28px);
-    border-radius: 18px;
-    /* A dark card like the others (the accent is for buttons and badges), glowing behind the coach. */
-    background:
-      radial-gradient(circle at 88% 18%, #ffffff17, transparent 52%),
-      radial-gradient(circle at 10% 110%, #ffffff08, transparent 45%),
-      linear-gradient(
-        135deg,
-        var(--lr-ext-grey-800) 0%,
-        var(--lr-ext-grey-900) 50%,
-        var(--lr-ext-grey-950) 100%
-      );
-    box-shadow:
-      inset 0 1px 0 #ffffff12,
-      0 12px 32px #00000040;
+    padding-inline: 28px;
   }
 
-  /* The user's coach, big and whole, as the hero illustration (content/pages/hero-coach.ts).
-     The live one makes an entrance, so the corner stays empty until it's in: its still (the
-     number set by content/bootstrap/coach-choice.ts) shows only if it can't load. */
-  .lr-ext-hero__coach {
-    position: absolute;
-    top: 4px;
-    right: 24px;
-    /* The hero's whole height, beside the start buttons (8 of 12 columns), its width from its
-       height, and narrower on a narrow hero, clear of the title's 62%. */
-    bottom: 16px;
-    aspect-ratio: 250 / 270;
-    max-width: 34%;
-    background: bottom center / contain no-repeat;
-    pointer-events: none;
-  }
-
-  html[data-lr-ext-coach='1'] .lr-ext-hero__coach--still {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
-  }
-  html[data-lr-ext-coach='2'] .lr-ext-hero__coach--still {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
-  }
-  html[data-lr-ext-coach='3'] .lr-ext-hero__coach--still {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
-  }
-  html[data-lr-ext-coach='4'] .lr-ext-hero__coach--still {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
-  }
-  html[data-lr-ext-coach='5'] .lr-ext-hero__coach--still {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
-  }
-  html[data-lr-ext-coach='6'] .lr-ext-hero__coach--still {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
-  }
-  html[data-lr-ext-coach='7'] .lr-ext-hero__coach--still {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
-  }
-
-  /* Live, its canvas spills past the sides so arms and tails show, and a click makes it react. */
-  .lr-ext-hero__coach--live {
-    pointer-events: auto;
-    cursor: pointer;
-  }
-
-  /* Only the coach's own box takes the click, not the canvas's clear sides over the title. */
-  .lr-ext-hero__coach canvas {
-    position: absolute;
-    top: 0;
-    left: -30%;
-    width: 160%;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  /* Right to left, the coach and its glow move to the other corner, clear of the text. */
-  html[dir='rtl'] .lr-ext-hero {
-    background:
-      radial-gradient(circle at 12% 18%, #ffffff17, transparent 52%),
-      radial-gradient(circle at 90% 110%, #ffffff08, transparent 45%),
-      linear-gradient(
-        225deg,
-        var(--lr-ext-grey-800) 0%,
-        var(--lr-ext-grey-900) 50%,
-        var(--lr-ext-grey-950) 100%
-      );
-  }
-
-  html[dir='rtl'] .lr-ext-hero__coach {
-    right: auto;
-    left: 24px;
-  }
-
-  .lr-ext-hero__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 0 16px;
-    padding: 5px 12px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
-    color: var(--lr-ext-accent-hover);
-    font-size: 13px;
-    font-weight: 800;
-  }
-
-  .lr-ext-hero__eyebrow::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--lr-ext-accent-hover);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
-  }
-
-  /* A signed-in title holds the username (up to 20 letters): it breaks rather than run
-     under the coach. */
-  .lr-ext-hero__title {
-    max-width: 62%;
-    margin: 0 0 14px;
-    overflow-wrap: anywhere;
-    color: #fff;
-    font-size: clamp(34px, 3.4vw, 50px);
-    font-weight: 800 !important;
-    line-height: 1.04;
-    letter-spacing: -0.03em !important;
-  }
-
-  .lr-ext-hero__sub {
-    max-width: 55%;
-    margin: 0;
-    color: var(--lr-ext-grey-200);
-    font-size: 17px;
-    line-height: 1.45;
-  }
-
-  /* Lichess's start buttons and counters, laid over the hero's bottom. */
   main.lobby .lobby__table {
-    z-index: 1;
-    align-self: end;
-    padding: 0 40px 36px;
-    background: none !important;
-    box-shadow: none !important;
-  }
-
-  /* The game setup dialog opens inside the table (not as a modal), so the table's z-index
-     traps it: raised, or the feed's pinned title drew over it. */
-  main.lobby .lobby__table:has(.snab-modal-mask) {
-    z-index: 110;
-  }
-
-  /* Lichess adds a top margin below 1260px: the table must stay 140px tall (64px buttons,
-     40px counters, 36px padding) to match the hero's reserve. */
-  main.lobby .lobby__start {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 12px !important;
-    margin: 0 !important;
+    padding-inline: 28px;
   }
 
   main.lobby .lobby__start__button {
-    flex: 1 1 0;
-    justify-content: center;
-    height: 64px !important;
-    padding: 0 14px !important;
-    border-radius: 10px !important;
-    font-size: 16px !important;
-    white-space: normal;
-    line-height: 1.15;
-    text-align: left;
+    gap: 10px !important;
+    padding: 0 10px !important;
+    font-size: 14px !important;
   }
 
   main.lobby .lobby__start__button::before {
-    font-size: 26px !important;
+    font-size: 22px !important;
   }
 
-  /* Below 1260px the labels wrapped to four or five lines in French or German: smaller
-     type, icons and gutters keep them to three. */
-  @media (max-width: 1259.29px) {
-    .lr-ext-hero {
-      padding-inline: 28px;
-    }
-
-    main.lobby .lobby__table {
-      padding-inline: 28px;
-    }
-
-    main.lobby .lobby__start__button {
-      gap: 10px !important;
-      padding: 0 10px !important;
-      font-size: 14px !important;
-    }
-
-    main.lobby .lobby__start__button::before {
-      font-size: 22px !important;
-    }
-
-    main.lobby
-      :is(
-        .lobby__start__button--friend,
-        .lobby__start__button--friend-user,
-        .lobby__start__button--ai
-      )::before {
-      width: 30px;
-      height: 30px;
-    }
+  main.lobby
+    :is(
+      .lobby__start__button--friend,
+      .lobby__start__button--friend-user,
+      .lobby__start__button--ai
+    )::before {
+    width: 30px;
+    height: 30px;
   }
+}
 
-  main.lobby .lobby__counters {
-    display: flex !important;
-    position: static !important;
-    flex-flow: row !important;
-    align-items: center !important;
-    gap: 18px;
-    justify-content: flex-start !important;
-    height: 22px;
-    margin-top: 18px;
-    text-shadow: none !important;
-  }
+main.lobby .lobby__counters {
+  display: flex !important;
+  position: static !important;
+  flex-flow: row !important;
+  align-items: center !important;
+  gap: 18px;
+  justify-content: flex-start !important;
+  height: 22px;
+  margin-top: 18px;
+  text-shadow: none !important;
+}
 
-  /* The counters come in by JS after load: hold their room so the buttons don't jump. */
-  main.lobby .lobby__table:not(:has(.lobby__counters))::after {
-    content: '';
-    display: block;
-    height: 40px; /* margin-top + height of .lobby__counters */
-  }
+/* The counters come in by JS after load: hold their room so the buttons don't jump. */
+main.lobby .lobby__table:not(:has(.lobby__counters))::after {
+  content: '';
+  display: block;
+  height: 40px; /* margin-top + height of .lobby__counters */
+}
 
-  main.lobby .lobby__counters a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    overflow: visible !important; /* Lichess clips it, cutting the dot's ring */
-    color: var(--lr-ext-text-dim) !important;
-    font-size: 14px;
-  }
+main.lobby .lobby__counters a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  overflow: visible !important; /* Lichess clips it, cutting the dot's ring */
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 14px;
+}
 
-  main.lobby .lobby__counters a::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--lr-ext-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
-  }
+main.lobby .lobby__counters a::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lr-ext-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
+}
 
-  main.lobby .lobby__counters strong {
-    color: #fff;
-    font-weight: 800;
-  }
+main.lobby .lobby__counters strong {
+  color: #fff;
+  font-weight: 800;
 }

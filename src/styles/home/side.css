@@ -1,315 +1,320 @@
 /* ---- Updates --- */
 
+/* The feed scrolls, its title pinned and a fade at the bottom. On a desktop it takes the
+   puzzle's height beside it (contain: size stops it growing the row). */
+main.lobby .lobby__feed {
+  max-height: 460px;
+  padding: 0 20px !important;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff26 transparent;
+}
+
 @media (min-width: 1020px) {
-  /* The feed takes the side column's height (contain: size stops it growing the row) and
-     scrolls, its title pinned and a fade at the bottom. */
   main.lobby .lobby__feed {
     contain: size;
     min-height: 340px;
-    padding: 0 20px !important;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #ffffff26 transparent;
+    max-height: none;
   }
+}
 
-  main.lobby .lobby__feed::before {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    margin: 0 !important;
-    padding: 18px 2px 10px;
-    background: var(--lr-ext-bg-panel);
-  }
+main.lobby .lobby__feed::before {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin: 0 !important;
+  padding: 18px 2px 10px;
+  background: var(--lr-ext-bg-panel);
+}
 
-  main.lobby .lobby__feed::after {
-    content: '';
-    position: sticky;
-    bottom: 0;
-    z-index: 2;
-    display: block;
-    height: 40px;
-    margin-top: -40px;
-    background: linear-gradient(
-      color-mix(in srgb, var(--lr-ext-grey-900) 0%, transparent),
-      var(--lr-ext-bg-panel)
-    );
-    pointer-events: none;
-  }
+main.lobby .lobby__feed::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  height: 40px;
+  margin-top: -40px;
+  background: linear-gradient(
+    color-mix(in srgb, var(--lr-ext-grey-900) 0%, transparent),
+    var(--lr-ext-bg-panel)
+  );
+  pointer-events: none;
+}
 
-  /* Lichess's gold rail and ringed markers → a faint rail and icon tiles. */
-  main.lobby .daily-feed__updates {
-    position: relative;
-    margin: 0 0 12px !important;
-    border: none !important;
-  }
+/* Lichess's gold rail and ringed markers → a faint rail and icon tiles. */
+main.lobby .daily-feed__updates {
+  position: relative;
+  margin: 0 0 12px !important;
+  border: none !important;
+}
 
-  main.lobby .daily-feed__updates::before {
-    content: '';
-    position: absolute;
-    top: 24px;
-    bottom: 24px;
-    left: 17px;
-    width: 2px;
-    border-radius: 1px;
-    background: #ffffff12;
-  }
+main.lobby .daily-feed__updates::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 17px;
+  width: 2px;
+  border-radius: 1px;
+  background: #ffffff12;
+}
 
-  main.lobby .daily-feed__update {
-    position: relative;
-    display: grid !important;
-    grid-template-columns: 36px minmax(0, 1fr);
-    gap: 14px;
-    margin: 0 !important;
-    padding: 10px 0 !important;
-  }
+main.lobby .daily-feed__update {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 14px;
+  margin: 0 !important;
+  padding: 10px 0 !important;
+}
 
-  /* Each update's icon: Lichess picks a flair (an emoji) per update, drawn here as the closest
-   * Hugeicon in a palette color, a news one for any other. */
-  main.lobby .daily-feed__update__marker {
-    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
-    --lr-ext-feed-color: var(--lr-ext-accent);
-  }
+/* Each update's icon: Lichess picks a flair (an emoji) per update, drawn here as the closest
+ * Hugeicon in a palette color, a news one for any other. */
+main.lobby .daily-feed__update__marker {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
+  --lr-ext-feed-color: var(--lr-ext-accent);
+}
 
-  main.lobby .daily-feed__update__marker[src*='/activity.lichess.webp'] {
-    --lr-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
-    --lr-ext-feed-color: var(--lr-ext-grey-300);
-  }
+main.lobby .daily-feed__update__marker[src*='/activity.lichess.webp'] {
+  --lr-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+  --lr-ext-feed-color: var(--lr-ext-grey-300);
+}
 
-  main.lobby .daily-feed__update__marker[src*='/activity.party-popper.webp'] {
-    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg');
-    --lr-ext-feed-color: var(--lr-ext-pink);
-  }
+main.lobby .daily-feed__update__marker[src*='/activity.party-popper.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg');
+  --lr-ext-feed-color: var(--lr-ext-pink);
+}
 
-  main.lobby .daily-feed__update__marker[src*='/objects.megaphone.webp'] {
-    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--ffc689.svg');
-    --lr-ext-feed-color: var(--lr-ext-orange);
-  }
+main.lobby .daily-feed__update__marker[src*='/objects.megaphone.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--ffc689.svg');
+  --lr-ext-feed-color: var(--lr-ext-orange);
+}
 
-  main.lobby .daily-feed__update__marker[src*='/objects.studio-microphone.webp'] {
-    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--caa9fa.svg');
-    --lr-ext-feed-color: var(--lr-ext-purple);
-  }
+main.lobby .daily-feed__update__marker[src*='/objects.studio-microphone.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--caa9fa.svg');
+  --lr-ext-feed-color: var(--lr-ext-purple);
+}
 
-  main.lobby .daily-feed__update__marker[src*='/objects.hammer-and-wrench.webp'] {
-    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--a2edfd.svg');
-    --lr-ext-feed-color: var(--lr-ext-cyan);
-  }
+main.lobby .daily-feed__update__marker[src*='/objects.hammer-and-wrench.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--a2edfd.svg');
+  --lr-ext-feed-color: var(--lr-ext-cyan);
+}
 
-  main.lobby .daily-feed__update__marker[src*='/objects.camera.webp'] {
-    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--a2edfd.svg');
-    --lr-ext-feed-color: var(--lr-ext-cyan);
-  }
+main.lobby .daily-feed__update__marker[src*='/objects.camera.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--a2edfd.svg');
+  --lr-ext-feed-color: var(--lr-ext-cyan);
+}
 
-  main.lobby .daily-feed__update__marker[src*='/activity.puzzle-piece.webp'] {
-    --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--73fb95.svg');
-    --lr-ext-feed-color: var(--lr-ext-green);
-  }
+main.lobby .daily-feed__update__marker[src*='/activity.puzzle-piece.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--73fb95.svg');
+  --lr-ext-feed-color: var(--lr-ext-green);
+}
 
-  main.lobby .daily-feed__update__marker {
-    position: relative;
-    box-sizing: border-box;
-    width: 36px !important;
-    height: 36px !important;
-    margin: 0 !important;
-    /* As wide as the box: the flair image Lichess picked has no room left, the Hugeicon shows. */
-    padding: 18px !important;
-    border: none !important;
-    border-radius: 10px !important;
-    background:
-      var(--lr-ext-feed-icon) center / 20px no-repeat,
-      color-mix(in srgb, var(--lr-ext-feed-color) 20%, var(--lr-ext-bg-panel)) !important;
-    box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-feed-color) 35%, transparent),
-      0 0 0 4px var(--lr-ext-bg-panel);
-    /* Lichess lifts its ringed marker 5px, which set it above its date's middle. */
-    transform: none !important;
-  }
+main.lobby .daily-feed__update__marker {
+  position: relative;
+  box-sizing: border-box;
+  width: 36px !important;
+  height: 36px !important;
+  margin: 0 !important;
+  /* As wide as the box: the flair image Lichess picked has no room left, the Hugeicon shows. */
+  padding: 18px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  background:
+    var(--lr-ext-feed-icon) center / 20px no-repeat,
+    color-mix(in srgb, var(--lr-ext-feed-color) 20%, var(--lr-ext-bg-panel)) !important;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-feed-color) 35%, transparent),
+    0 0 0 4px var(--lr-ext-bg-panel);
+  /* Lichess lifts its ringed marker 5px, which set it above its date's middle. */
+  transform: none !important;
+}
 
-  main.lobby .daily-feed__update__day {
-    display: inline-flex !important;
-    align-items: center;
-    min-height: 36px;
-    color: var(--lr-ext-text-dim) !important;
-    font-size: 13px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    transition: color 0.15s !important;
-  }
+main.lobby .daily-feed__update__day {
+  display: inline-flex !important;
+  align-items: center;
+  min-height: 36px;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color 0.15s !important;
+}
 
-  main.lobby .daily-feed__update__day:hover {
-    color: #fff !important;
-  }
+main.lobby .daily-feed__update__day:hover {
+  color: #fff !important;
+}
 
-  main.lobby .daily-feed__update p {
-    margin: -7px 0 0;
-    color: var(--lr-ext-grey-200);
-    font-size: 14.5px;
-    line-height: 1.55;
-  }
+main.lobby .daily-feed__update p {
+  margin: -7px 0 0;
+  color: var(--lr-ext-grey-200);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
 
-  /* The last entry is the "All updates" link. */
-  main.lobby .daily-feed__update a.daily-feed__update__day[href$='/feed'] {
-    color: var(--lr-ext-accent-hover) !important;
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 14px !important;
-  }
+/* The last entry is the "All updates" link. */
+main.lobby .daily-feed__update a.daily-feed__update__day[href$='/feed'] {
+  color: var(--lr-ext-accent-hover) !important;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px !important;
+}
 
-  /* ---- Side --- */
+/* ---- Side --- */
 
-  /* A stack of cards (streams, spotlights, about) rather than one tall card with a hole.
-     No longer a card itself, it mustn't clip their shadows. */
-  main.lobby .lobby__side {
-    overflow: visible !important;
-    gap: 20px !important;
-    padding: 0 !important;
-    background: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-  }
+/* A stack of cards (streams, spotlights, about) rather than one tall card with a hole.
+   No longer a card itself, it mustn't clip their shadows. */
+main.lobby .lobby__side {
+  overflow: visible !important;
+  gap: 20px !important;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
 
-  main.lobby .lobby__streams {
-    display: flex !important;
-    flex: 1 1 auto;
-    flex-direction: column;
-    gap: 6px;
-  }
+main.lobby .lobby__streams {
+  display: flex !important;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 6px;
+}
 
-  /* No one live: Lichess leaves the block empty; hide the titled, empty card. */
-  main.lobby .lobby__streams:not(:has(a)) {
-    display: none !important;
-  }
+/* No one live: Lichess leaves the block empty; hide the titled, empty card. */
+main.lobby .lobby__streams:not(:has(a)) {
+  display: none !important;
+}
 
-  main.lobby .lobby__streams::before {
-    margin-bottom: 6px !important;
-  }
+main.lobby .lobby__streams::before {
+  margin-bottom: 6px !important;
+}
 
-  main.lobby .lobby__streams .stream {
-    position: relative;
-    margin: 0 !important;
-    padding: 9px 12px 9px 56px;
-    border-radius: 10px;
-    background: #ffffff08;
-    color: var(--lr-ext-text-dim) !important;
-    font-size: 13px;
-    line-height: 1.4 !important;
-    text-shadow: none !important;
-    transition: background 0.15s !important;
-  }
+main.lobby .lobby__streams .stream {
+  position: relative;
+  margin: 0 !important;
+  padding: 9px 12px 9px 56px;
+  border-radius: 10px;
+  background: #ffffff08;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px;
+  line-height: 1.4 !important;
+  text-shadow: none !important;
+  transition: background 0.15s !important;
+}
 
-  main.lobby .lobby__streams .stream:hover {
-    background: #ffffff12;
-  }
+main.lobby .lobby__streams .stream:hover {
+  background: #ffffff12;
+}
 
-  main.lobby .lobby__streams .stream strong {
-    display: block;
-    overflow: hidden;
-    color: #fff !important;
-    font-family: inherit !important;
-    font-size: 14px;
-    font-weight: 700;
-    text-overflow: ellipsis;
-  }
+main.lobby .lobby__streams .stream strong {
+  display: block;
+  overflow: hidden;
+  color: #fff !important;
+  font-family: inherit !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+}
 
-  /* Lichess's mic icon, in a red "live" tile. */
-  main.lobby .lobby__streams .stream strong::before {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    margin: 0 !important;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--lr-ext-red-dark) 15%, transparent);
-    color: var(--lr-ext-red);
-    font-size: 18px !important;
-    transform: translateY(-50%);
-  }
+/* Lichess's mic icon, in a red "live" tile. */
+main.lobby .lobby__streams .stream strong::before {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: 0 !important;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--lr-ext-red-dark) 15%, transparent);
+  color: var(--lr-ext-red);
+  font-size: 18px !important;
+  transform: translateY(-50%);
+}
 
-  main.lobby .lobby__streams .stream strong::after {
-    content: '';
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin: 0 0 1px 8px;
-    border-radius: 50%;
-    background: var(--lr-ext-red);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-red) 18%, transparent);
-  }
+main.lobby .lobby__streams .stream strong::after {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin: 0 0 1px 8px;
+  border-radius: 50%;
+  background: var(--lr-ext-red);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-red) 18%, transparent);
+}
 
-  main.lobby .lobby__streams .more {
-    margin: auto 0 0 !important;
-    padding: 9px;
-    border-radius: 10px;
-    background: #ffffff0a;
-    color: #fff !important;
-    font-size: 13px !important;
-    font-weight: 700 !important;
-    text-align: center;
-    transition: background 0.15s !important;
-  }
+main.lobby .lobby__streams .more {
+  margin: auto 0 0 !important;
+  padding: 9px;
+  border-radius: 10px;
+  background: #ffffff0a;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-align: center;
+  transition: background 0.15s !important;
+}
 
-  main.lobby .lobby__streams .more:hover {
-    background: #ffffff17;
-  }
+main.lobby .lobby__streams .more:hover {
+  background: #ffffff17;
+}
 
-  main.lobby .lobby__spotlights {
-    display: flex !important;
-    flex-direction: column;
-    gap: 10px;
-    overflow: visible !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-  }
+main.lobby .lobby__spotlights {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  overflow: visible !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
 
-  main.lobby .lobby__spotlights:empty {
-    display: none !important;
-  }
+main.lobby .lobby__spotlights:empty {
+  display: none !important;
+}
 
-  main.lobby .tour-spotlight {
-    padding: 12px !important;
-    border-radius: 14px !important;
-    background: var(--lr-ext-bg-panel) !important;
-    box-shadow:
-      inset 0 1px 0 #ffffff0d,
-      0 10px 28px #00000033 !important;
-    opacity: 1 !important;
-    text-shadow: none !important;
-  }
+main.lobby .tour-spotlight {
+  padding: 12px !important;
+  border-radius: 14px !important;
+  background: var(--lr-ext-bg-panel) !important;
+  box-shadow:
+    inset 0 1px 0 #ffffff0d,
+    0 10px 28px #00000033 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
 
-  main.lobby .tour-spotlight:hover {
-    background: var(--lr-ext-grey-850) !important;
-  }
+main.lobby .tour-spotlight:hover {
+  background: var(--lr-ext-grey-850) !important;
+}
 
-  main.lobby .tour-spotlight .name {
-    color: #fff;
-    font-weight: 700;
-  }
+main.lobby .tour-spotlight .name {
+  color: #fff;
+  font-weight: 700;
+}
 
-  main.lobby .tour-spotlight :is(.headline, .more) {
-    color: var(--lr-ext-text-dim);
-  }
+main.lobby .tour-spotlight :is(.headline, .more) {
+  color: var(--lr-ext-text-dim);
+}
 
-  /* The side column is narrow at 1024: long names or counts (Spanish, French) end in an
-     ellipsis instead of being cut at the edge. */
-  main.lobby .tour-spotlight .content {
-    min-width: 0;
-  }
+/* The side column is narrow at 1024: long names or counts (Spanish, French) end in an
+   ellipsis instead of being cut at the edge. */
+main.lobby .tour-spotlight .content {
+  min-width: 0;
+}
 
-  main.lobby .tour-spotlight :is(.content, .name, .headline) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+main.lobby .tour-spotlight :is(.content, .name, .headline) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  main.lobby .about-side {
-    flex: none;
-    margin: 0 !important;
-    color: var(--lr-ext-text-dim) !important;
-    font-size: 13px;
-    line-height: 1.55;
-    text-shadow: none !important;
-  }
+main.lobby .about-side {
+  flex: none;
+  margin: 0 !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px;
+  line-height: 1.55;
+  text-shadow: none !important;
 }
