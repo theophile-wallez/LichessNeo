@@ -218,8 +218,10 @@
   /* With a rating, its speed's glyph alone. */
   html[data-lr-ext-sidebar='collapsed'][data-lr-ext-account-perf] #top #user_tag::after {
     content: var(--lr-ext-account-glyph);
+    width: auto;
     padding: 0;
     background: none;
+    font-family: lichess;
     font-size: 22px !important;
   }
 }

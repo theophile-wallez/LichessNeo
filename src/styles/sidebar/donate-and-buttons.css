@@ -181,17 +181,34 @@
     padding-inline-end: 84px !important;
   }
 
+  /* The pill holds the rating, and the glyph is laid over its start: in one string, the
+   * glyph's font set the line and the digits sat 2px low. Fixed width, so the glyph knows
+   * where the pill starts. */
   html[data-lr-ext-account-perf] #top #user_tag::after {
-    content: var(--lr-ext-account-glyph) '\a0' var(--lr-ext-account-rating);
-    padding: 3px 8px;
+    content: var(--lr-ext-account-rating);
+    box-sizing: border-box;
+    width: 74px;
+    padding: 4px 6px 4px 27px;
     border-radius: 999px;
     background: color-mix(in srgb, var(--lr-ext-account-color) 16%, transparent);
     color: var(--lr-ext-account-color) !important;
-    font-family: lichess, var(--lr-ext-font);
+    font-family: var(--lr-ext-font);
     font-size: 13px !important;
     font-weight: 800;
     font-variant-numeric: tabular-nums;
     opacity: 1;
+  }
+
+  html[data-lr-ext-account-perf]:not([data-lr-ext-sidebar='collapsed']) #top #user_tag::before {
+    content: var(--lr-ext-account-glyph);
+    position: absolute;
+    top: 50%;
+    right: calc(6px + 74px - 9px - 14px);
+    color: var(--lr-ext-account-color);
+    font-family: lichess;
+    font-size: 14px;
+    line-height: 1;
+    transform: translateY(-50%);
   }
 
   /* Before the first rating is known: the name alone, not an avatar the rating would replace. */
