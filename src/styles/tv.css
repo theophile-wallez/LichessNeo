@@ -1,5 +1,26 @@
 /* Lichess TV (main.round.tv-single): the game page's layout (game/), plus the channels (Lichess's
- * `.round__side > .subnav`, hidden by game/) in a scrolling column left of the board. */
+ * `.round__side > .subnav`, hidden by game/) in a scrolling column left of the board; below
+ * 1020px, a row over the game that scrolls sideways. */
+
+@media (max-width: 1019.98px) {
+  main.round.tv-single .round__side > .subnav {
+    grid-area: tv !important;
+    width: auto !important;
+    margin: 0 0 8px !important;
+    overflow: auto hidden;
+    scrollbar-width: none;
+  }
+
+  main.round.tv-single .round__side > .subnav .subnav__inner {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 6px;
+  }
+
+  main.round.tv-single .round__side > .subnav .subnav__inner > * {
+    flex: none;
+  }
+}
 
 @media (min-width: 1020px) {
   html[data-lr-ext-has~='tv-channels'] main.round.tv-single {

@@ -4,239 +4,237 @@
  * under the pieces (z-index 2); the cards are ours, over the board, and let every click through.
  * The timeline's shares are of `--lr-ext-intro-ms`: in 24%, a second's hold, out from 78%. */
 
-@media (min-width: 1020px) {
-  /* Clips the dropped board to the squares. A `clip-path` animated beside the `transform` falls
-   * out of step with it in Chrome, which runs the two on different threads. */
-  .is2d main.round[data-lr-ext-intro] cg-board {
-    overflow: hidden;
-  }
+/* Clips the dropped board to the squares. A `clip-path` animated beside the `transform` falls
+ * out of step with it in Chrome, which runs the two on different threads. */
+.is2d main.round[data-lr-ext-intro] cg-board {
+  overflow: hidden;
+}
 
-  .is2d main.round[data-lr-ext-intro] cg-board::after {
-    content: '';
-    position: absolute;
-    inset: 0 0 50%;
-    z-index: 1;
-    border-radius: 4px 4px 0 0;
-    background: var(--lr-ext-intro-board) top / 100% 200% no-repeat;
-    pointer-events: none;
-    animation: lr-ext-intro-slide var(--lr-ext-intro-ms) both !important;
-  }
+.is2d main.round[data-lr-ext-intro] cg-board::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 50%;
+  z-index: 1;
+  border-radius: 4px 4px 0 0;
+  background: var(--lr-ext-intro-board) top / 100% 200% no-repeat;
+  pointer-events: none;
+  animation: lr-ext-intro-slide var(--lr-ext-intro-ms) both !important;
+}
 
-  main.round > .lr-ext-intro {
-    grid-area: board;
-    position: relative;
-    z-index: 3;
-    margin: var(--lr-ext-inset-t, 0px) var(--lr-ext-inset-r, 0px) var(--lr-ext-inset-b, 0px)
-      var(--lr-ext-inset-l, 0px);
-    overflow: hidden;
-    border-radius: 4px;
-    container-type: size;
-    pointer-events: none;
-    font-family: var(--lr-ext-font);
-  }
+main.round > .lr-ext-intro {
+  grid-area: board;
+  position: relative;
+  z-index: 3;
+  margin: var(--lr-ext-inset-t, 0px) var(--lr-ext-inset-r, 0px) var(--lr-ext-inset-b, 0px)
+    var(--lr-ext-inset-l, 0px);
+  overflow: hidden;
+  border-radius: 4px;
+  container-type: size;
+  pointer-events: none;
+  font-family: var(--lr-ext-font);
+}
 
-  main.round .lr-ext-intro__drop,
-  main.round .lr-ext-intro__stay {
-    position: absolute;
-    inset-inline: 0;
-    display: flex;
-    justify-content: center;
-    height: 50%;
-  }
+main.round .lr-ext-intro__drop,
+main.round .lr-ext-intro__stay {
+  position: absolute;
+  inset-inline: 0;
+  display: flex;
+  justify-content: center;
+  height: 50%;
+}
 
-  /* The dropped half carries the opponent's card and casts the board's shadow. */
-  main.round .lr-ext-intro__drop {
-    top: 0;
-    align-items: flex-end;
-    padding-bottom: 10cqh;
-    box-sizing: border-box;
-    box-shadow: 0 1cqh 3cqh #00000059;
-    animation: lr-ext-intro-slide var(--lr-ext-intro-ms) both !important;
-  }
+/* The dropped half carries the opponent's card and casts the board's shadow. */
+main.round .lr-ext-intro__drop {
+  top: 0;
+  align-items: flex-end;
+  padding-bottom: 10cqh;
+  box-sizing: border-box;
+  box-shadow: 0 1cqh 3cqh #00000059;
+  animation: lr-ext-intro-slide var(--lr-ext-intro-ms) both !important;
+}
 
-  main.round .lr-ext-intro__stay {
-    bottom: 0;
-    align-items: flex-start;
-    padding-top: 10cqh;
-    box-sizing: border-box;
-  }
+main.round .lr-ext-intro__stay {
+  bottom: 0;
+  align-items: flex-start;
+  padding-top: 10cqh;
+  box-sizing: border-box;
+}
 
-  /* One size for both, whatever the names' lengths; a long one ends in an ellipsis. */
-  main.round .lr-ext-intro__card {
-    display: flex;
-    align-items: stretch;
-    width: 56cqw;
-    height: 12.5cqh;
-    overflow: hidden;
-    border-radius: 0.8cqh;
-    background: #fff;
-    color: var(--lr-ext-grey-800);
-    box-shadow: 0 0.6cqh 2cqh #00000059;
-  }
+/* One size for both, whatever the names' lengths; a long one ends in an ellipsis. */
+main.round .lr-ext-intro__card {
+  display: flex;
+  align-items: stretch;
+  width: 56cqw;
+  height: 12.5cqh;
+  overflow: hidden;
+  border-radius: 0.8cqh;
+  background: #fff;
+  color: var(--lr-ext-grey-800);
+  box-shadow: 0 0.6cqh 2cqh #00000059;
+}
 
-  main.round .lr-ext-intro__card--bottom {
-    background: var(--lr-ext-grey-900);
-    color: #fff;
-    animation: lr-ext-intro-rise var(--lr-ext-intro-ms) both !important;
-  }
+main.round .lr-ext-intro__card--bottom {
+  background: var(--lr-ext-grey-900);
+  color: #fff;
+  animation: lr-ext-intro-rise var(--lr-ext-intro-ms) both !important;
+}
 
-  main.round .lr-ext-intro__avatar {
-    flex: none;
-    aspect-ratio: 1;
-    background: var(--lr-ext-avatar);
-  }
+main.round .lr-ext-intro__avatar {
+  flex: none;
+  aspect-ratio: 1;
+  background: var(--lr-ext-avatar);
+}
 
-  main.round .lr-ext-intro__card--computer .lr-ext-intro__avatar {
-    background: var(--lr-ext-computer-avatar);
-  }
+main.round .lr-ext-intro__card--computer .lr-ext-intro__avatar {
+  background: var(--lr-ext-computer-avatar);
+}
 
-  main.round .lr-ext-intro__who {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.8cqh;
-    min-width: 0;
-    padding: 0 3cqw;
-  }
+main.round .lr-ext-intro__who {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8cqh;
+  min-width: 0;
+  padding: 0 3cqw;
+}
 
-  main.round .lr-ext-intro__name {
-    overflow: hidden;
-    font-size: 3.6cqh;
-    font-weight: 800;
-    line-height: 1.2;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+main.round .lr-ext-intro__name {
+  overflow: hidden;
+  font-size: 3.6cqh;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
-  main.round .lr-ext-intro__title {
-    margin-right: 1cqw;
-    padding: 0 0.6cqw;
-    border-radius: 0.5cqh;
-    background: var(--lr-ext-title-bg);
-    color: #fff;
-    font-size: 2.6cqh;
-    vertical-align: 0.4cqh;
-  }
+main.round .lr-ext-intro__title {
+  margin-right: 1cqw;
+  padding: 0 0.6cqw;
+  border-radius: 0.5cqh;
+  background: var(--lr-ext-title-bg);
+  color: #fff;
+  font-size: 2.6cqh;
+  vertical-align: 0.4cqh;
+}
 
-  main.round .lr-ext-intro__details {
-    font-size: 2.4cqh;
-    font-weight: 600;
-    line-height: 1.2;
-    white-space: nowrap;
-    opacity: 0.6;
-  }
+main.round .lr-ext-intro__details {
+  font-size: 2.4cqh;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0.6;
+}
 
-  /* The "VS" badge over crossed swords, both centered on the middle line. */
-  main.round .lr-ext-intro__vs {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    display: grid;
-    place-items: center;
-    translate: -50% -50%;
-    animation: lr-ext-intro-pop var(--lr-ext-intro-ms) both !important;
-  }
+/* The "VS" badge over crossed swords, both centered on the middle line. */
+main.round .lr-ext-intro__vs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  translate: -50% -50%;
+  animation: lr-ext-intro-pop var(--lr-ext-intro-ms) both !important;
+}
 
-  main.round .lr-ext-intro__vs > * {
-    grid-area: 1 / 1;
-  }
+main.round .lr-ext-intro__vs > * {
+  grid-area: 1 / 1;
+}
 
-  main.round .lr-ext-intro__swords {
-    width: 15cqh;
-    height: 15cqh;
-    background: var(
-        --lr-ext-intro-swords,
-        url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/swords--ffc689.svg')
-      )
-      center / contain no-repeat;
-    filter: drop-shadow(0 0.4cqh 0.8cqh #00000073);
-    animation: lr-ext-intro-clash var(--lr-ext-intro-ms) both !important;
-  }
+main.round .lr-ext-intro__swords {
+  width: 15cqh;
+  height: 15cqh;
+  background: var(
+      --lr-ext-intro-swords,
+      url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/swords--ffc689.svg')
+    )
+    center / contain no-repeat;
+  filter: drop-shadow(0 0.4cqh 0.8cqh #00000073);
+  animation: lr-ext-intro-clash var(--lr-ext-intro-ms) both !important;
+}
 
-  /* Positioned, or the swords (a stacking context for their filter and animation) paint over it. */
-  main.round .lr-ext-intro__versus {
-    position: relative;
-    padding: 1.6cqh 2.6cqh;
-    border-radius: 0.8cqh;
-    background: var(--lr-ext-grey-700);
-    color: #fff;
-    font-size: 4.6cqh;
-    font-weight: 800;
-    line-height: 1;
-    box-shadow: 0 0.6cqh 2cqh #00000073;
-  }
+/* Positioned, or the swords (a stacking context for their filter and animation) paint over it. */
+main.round .lr-ext-intro__versus {
+  position: relative;
+  padding: 1.6cqh 2.6cqh;
+  border-radius: 0.8cqh;
+  background: var(--lr-ext-grey-700);
+  color: #fff;
+  font-size: 4.6cqh;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 0.6cqh 2cqh #00000073;
+}
 
-  /* The board and the opponent's card move as one. No overshoot on landing: its top edge would
-   * leave the board's and show the squares under it. */
-  @keyframes lr-ext-intro-slide {
-    0% {
-      transform: translateY(-100%);
-      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    24% {
-      transform: none;
-    }
-    78% {
-      transform: none;
-      animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
-    }
-    100% {
-      transform: translateY(-100%);
-    }
+/* The board and the opponent's card move as one. No overshoot on landing: its top edge would
+ * leave the board's and show the squares under it. */
+@keyframes lr-ext-intro-slide {
+  0% {
+    transform: translateY(-100%);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
-
-  @keyframes lr-ext-intro-rise {
-    0%,
-    10% {
-      opacity: 0;
-      transform: translateY(6cqh);
-      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    30%,
-    78% {
-      opacity: 1;
-      transform: none;
-    }
-    92%,
-    100% {
-      opacity: 0;
-      transform: translateY(3cqh);
-    }
+  24% {
+    transform: none;
   }
-
-  @keyframes lr-ext-intro-pop {
-    0%,
-    18% {
-      opacity: 0;
-      scale: 0.4;
-      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    30%,
-    78% {
-      opacity: 1;
-      scale: 1;
-    }
-    90%,
-    100% {
-      opacity: 0;
-      scale: 0.8;
-    }
+  78% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
   }
+  100% {
+    transform: translateY(-100%);
+  }
+}
 
-  /* The swords spin in from behind the badge just after it, and settle square. */
-  @keyframes lr-ext-intro-clash {
-    0%,
-    22% {
-      scale: 0.3;
-      rotate: -90deg;
-      opacity: 0;
-      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    36%,
-    100% {
-      scale: 1;
-      rotate: 0deg;
-      opacity: 1;
-    }
+@keyframes lr-ext-intro-rise {
+  0%,
+  10% {
+    opacity: 0;
+    transform: translateY(6cqh);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  30%,
+  78% {
+    opacity: 1;
+    transform: none;
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: translateY(3cqh);
+  }
+}
+
+@keyframes lr-ext-intro-pop {
+  0%,
+  18% {
+    opacity: 0;
+    scale: 0.4;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  30%,
+  78% {
+    opacity: 1;
+    scale: 1;
+  }
+  90%,
+  100% {
+    opacity: 0;
+    scale: 0.8;
+  }
+}
+
+/* The swords spin in from behind the badge just after it, and settle square. */
+@keyframes lr-ext-intro-clash {
+  0%,
+  22% {
+    scale: 0.3;
+    rotate: -90deg;
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  36%,
+  100% {
+    scale: 1;
+    rotate: 0deg;
+    opacity: 1;
   }
 }

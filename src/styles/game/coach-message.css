@@ -8,100 +8,98 @@
   display: none;
 }
 
-@media (min-width: 1020px) {
-  main.round .round__app .message {
-    position: relative;
-    display: flex !important;
-    align-items: center;
-    gap: 18px;
-    margin: 0 !important;
-    padding: 16px 14px !important;
-    background: none !important;
-  }
+main.round .round__app .message {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  gap: 18px;
+  margin: 0 !important;
+  padding: 16px 14px !important;
+  background: none !important;
+}
 
-  /* The still: the coach picked at boot (data-lr-ext-coach), or the robot of the game's level. */
-  main.round .round__app .message::before {
-    content: '' !important;
-    flex: none;
-    /* The stills' own shape (124 × 114), so the live one lands on its still exactly. */
-    width: calc(84px * 124 / 114);
-    height: 84px;
-    margin: 0 !important;
-    background: bottom center / contain no-repeat;
-    /* Lichess dims its icon: the still must look as the live one will. */
-    opacity: 1 !important;
-    /* Its bust fades out rather than end on a straight cut. */
-    mask-image: linear-gradient(#000 72%, transparent);
-  }
+/* The still: the coach picked at boot (data-lr-ext-coach), or the robot of the game's level. */
+main.round .round__app .message::before {
+  content: '' !important;
+  flex: none;
+  /* The stills' own shape (124 × 114), so the live one lands on its still exactly. */
+  width: calc(84px * 124 / 114);
+  height: 84px;
+  margin: 0 !important;
+  background: bottom center / contain no-repeat;
+  /* Lichess dims its icon: the still must look as the live one will. */
+  opacity: 1 !important;
+  /* Its bust fades out rather than end on a straight cut. */
+  mask-image: linear-gradient(#000 72%, transparent);
+}
 
-  html[data-lr-ext-coach='1'] main.round .round__app .message::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
-  }
-  html[data-lr-ext-coach='2'] main.round .round__app .message::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
-  }
-  html[data-lr-ext-coach='3'] main.round .round__app .message::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
-  }
-  html[data-lr-ext-coach='4'] main.round .round__app .message::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
-  }
-  html[data-lr-ext-coach='5'] main.round .round__app .message::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
-  }
-  html[data-lr-ext-coach='6'] main.round .round__app .message::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
-  }
-  html[data-lr-ext-coach='7'] main.round .round__app .message::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
-  }
+html[data-lr-ext-coach='1'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
+}
+html[data-lr-ext-coach='2'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
+}
+html[data-lr-ext-coach='3'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
+}
+html[data-lr-ext-coach='4'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
+}
+html[data-lr-ext-coach='5'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
+}
+html[data-lr-ext-coach='6'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
+}
+html[data-lr-ext-coach='7'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
+}
 
-  html[data-lr-ext-ai] main.round .round__app .message::before {
-    background-image: var(--lr-ext-computer-portrait);
-  }
+html[data-lr-ext-ai] main.round .round__app .message::before {
+  background-image: var(--lr-ext-computer-portrait);
+}
 
-  main.round .round__app .message[data-lr-ext-live]::before {
-    background-image: none !important;
-  }
+main.round .round__app .message[data-lr-ext-live]::before {
+  background-image: none !important;
+}
 
-  /* The live one, exactly over the still. */
-  main.round .round__app .message > .lr-ext-message-coach {
-    position: absolute;
-    top: 50%;
-    left: 14px;
-    display: block;
-    width: calc(84px * 124 / 114);
-    height: 84px;
-    translate: 0 -50%;
-    mask-image: linear-gradient(#000 72%, transparent);
-  }
+/* The live one, exactly over the still. */
+main.round .round__app .message > .lr-ext-message-coach {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  display: block;
+  width: calc(84px * 124 / 114);
+  height: 84px;
+  translate: 0 -50%;
+  mask-image: linear-gradient(#000 72%, transparent);
+}
 
-  main.round .round__app .message > div:not(.lr-ext-mascot) {
-    position: relative;
-    flex: 1;
-    min-width: 0;
-    box-sizing: border-box;
-    min-height: 56px;
-    padding: 12px 16px;
-    border-radius: 12px;
-    background: #fff;
-    color: var(--lr-ext-grey-700);
-    font-size: 15px;
-    line-height: 1.4;
-  }
+main.round .round__app .message > div:not(.lr-ext-mascot) {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  min-height: 56px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--lr-ext-grey-700);
+  font-size: 15px;
+  line-height: 1.4;
+}
 
-  main.round .round__app .message > div:not(.lr-ext-mascot)::before {
-    content: '';
-    position: absolute;
-    left: -17px;
-    top: calc(50% - 12px);
-    width: 18px;
-    height: 25px;
-    background: var(--lr-ext-bubble-tail) center / 100% 100% no-repeat;
-  }
+main.round .round__app .message > div:not(.lr-ext-mascot)::before {
+  content: '';
+  position: absolute;
+  left: -17px;
+  top: calc(50% - 12px);
+  width: 18px;
+  height: 25px;
+  background: var(--lr-ext-bubble-tail) center / 100% 100% no-repeat;
+}
 
-  main.round .round__app .message strong {
-    color: var(--lr-ext-grey-900);
-    font-weight: 800;
-  }
+main.round .round__app .message strong {
+  color: var(--lr-ext-grey-900);
+  font-weight: 800;
 }

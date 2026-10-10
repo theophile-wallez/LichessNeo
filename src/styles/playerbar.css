@@ -1,394 +1,389 @@
 /* Player bars: game page (.ruser, .rclock) and analysis board (.lr-ext-player, .analyse__clock).
    Only the look: each page places the parts and sets --lr-ext-off for the board's inset. */
 
-@media (min-width: 1020px) {
-  /* ---- Player --- */
+/* ---- Player --- */
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) {
-    position: relative;
-    justify-self: start;
-    align-self: start;
-    box-sizing: border-box;
-    display: flex !important;
-    align-items: center;
-    gap: 5px;
-    /* Clear of the clock (140px plus a gap), so a long name ends in an ellipsis. */
-    max-width: calc(
-      100% - var(--lr-ext-inset-l, 0px) - var(--lr-ext-inset-r, 0px) -
-        var(--lr-ext-clock-room, 152px)
-    );
-    height: 20px;
-    margin: calc(var(--lr-ext-off) + 8px) 0 0 var(--lr-ext-inset-l, 0px) !important;
-    padding: 0 0 0 50px !important;
-    overflow: visible !important;
-    font-size: 14px !important;
-    line-height: 20px !important;
-    color: var(--lr-ext-text-strong) !important;
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) {
+  position: relative;
+  justify-self: start;
+  align-self: start;
+  box-sizing: border-box;
+  display: flex !important;
+  align-items: center;
+  gap: 5px;
+  /* Clear of the clock (140px plus a gap), so a long name ends in an ellipsis. */
+  max-width: calc(
+    100% - var(--lr-ext-inset-l, 0px) - var(--lr-ext-inset-r, 0px) - var(--lr-ext-clock-room, 152px)
+  );
+  height: 20px;
+  margin: calc(var(--lr-ext-off) + 8px) 0 0 var(--lr-ext-inset-l, 0px) !important;
+  padding: 0 0 0 50px !important;
+  overflow: visible !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  color: var(--lr-ext-text-strong) !important;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player)::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 3px;
-    background: var(--lr-ext-avatar);
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  background: var(--lr-ext-avatar);
+}
 
-  /* The computer's side (data-lr-ext-ai, from content/game/ai-players.ts) gets the monitor avatar. */
-  html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='round-black'])
-    main.round
-    .ruser-bottom::before,
-  html[data-lr-ext-ai~='white'][data-lr-ext-has~='round-black'] main.round .ruser-top::before,
-  html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='round-black']) main.round .ruser-top::before,
-  html[data-lr-ext-ai~='black'][data-lr-ext-has~='round-black'] main.round .ruser-bottom::before,
-  html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='analyse-black'])
-    main.analyse
-    > .lr-ext-player--bottom::before,
-  html[data-lr-ext-ai~='white'][data-lr-ext-has~='analyse-black']
-    main.analyse
-    > .lr-ext-player--top::before,
-  html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='analyse-black'])
-    main.analyse
-    > .lr-ext-player--top::before,
-  html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
-    main.analyse
-    > .lr-ext-player--bottom::before {
-    background: var(--lr-ext-computer-avatar);
-  }
+/* The computer's side (data-lr-ext-ai, from content/game/ai-players.ts) gets the monitor avatar. */
+html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='round-black'])
+  main.round
+  .ruser-bottom::before,
+html[data-lr-ext-ai~='white'][data-lr-ext-has~='round-black'] main.round .ruser-top::before,
+html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='round-black']) main.round .ruser-top::before,
+html[data-lr-ext-ai~='black'][data-lr-ext-has~='round-black'] main.round .ruser-bottom::before,
+html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='analyse-black'])
+  main.analyse
+  > .lr-ext-player--bottom::before,
+html[data-lr-ext-ai~='white'][data-lr-ext-has~='analyse-black']
+  main.analyse
+  > .lr-ext-player--top::before,
+html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='analyse-black'])
+  main.analyse
+  > .lr-ext-player--top::before,
+html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
+  main.analyse
+  > .lr-ext-player--bottom::before {
+  background: var(--lr-ext-computer-avatar);
+}
 
-  /* Its level's rating goes where a player's flag would. */
-  html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='round-black'])
-    main.round
-    .ruser-bottom::after,
-  html[data-lr-ext-ai~='white'][data-lr-ext-has~='round-black'] main.round .ruser-top::after,
-  html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='analyse-black'])
-    main.analyse
-    > .lr-ext-player--bottom::after,
-  html[data-lr-ext-ai~='white'][data-lr-ext-has~='analyse-black']
-    main.analyse
-    > .lr-ext-player--top::after {
-    content: '(' var(--lr-ext-ai-white) ')';
-  }
+/* Its level's rating goes where a player's flag would. */
+html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='round-black']) main.round .ruser-bottom::after,
+html[data-lr-ext-ai~='white'][data-lr-ext-has~='round-black'] main.round .ruser-top::after,
+html[data-lr-ext-ai~='white']:not([data-lr-ext-has~='analyse-black'])
+  main.analyse
+  > .lr-ext-player--bottom::after,
+html[data-lr-ext-ai~='white'][data-lr-ext-has~='analyse-black']
+  main.analyse
+  > .lr-ext-player--top::after {
+  content: '(' var(--lr-ext-ai-white) ')';
+}
 
-  html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='round-black']) main.round .ruser-top::after,
-  html[data-lr-ext-ai~='black'][data-lr-ext-has~='round-black'] main.round .ruser-bottom::after,
-  html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='analyse-black'])
-    main.analyse
-    > .lr-ext-player--top::after,
-  html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
-    main.analyse
-    > .lr-ext-player--bottom::after {
-    content: '(' var(--lr-ext-ai-black) ')';
-  }
+html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='round-black']) main.round .ruser-top::after,
+html[data-lr-ext-ai~='black'][data-lr-ext-has~='round-black'] main.round .ruser-bottom::after,
+html[data-lr-ext-ai~='black']:not([data-lr-ext-has~='analyse-black'])
+  main.analyse
+  > .lr-ext-player--top::after,
+html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
+  main.analyse
+  > .lr-ext-player--bottom::after {
+  content: '(' var(--lr-ext-ai-black) ')';
+}
 
-  /* Styled like a rating; a flag emoji ignores the color anyway. */
-  :is(main.round .ruser, main.analyse > .lr-ext-player)::after {
-    flex: none;
-    color: var(--lr-ext-text-dim);
-    font-weight: 400;
-  }
+/* Styled like a rating; a flag emoji ignores the color anyway. */
+:is(main.round .ruser, main.analyse > .lr-ext-player)::after {
+  flex: none;
+  color: var(--lr-ext-text-dim);
+  font-weight: 400;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) .line {
-    display: none !important;
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) .line {
+  display: none !important;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) a,
-  :is(main.round .ruser, main.analyse > .lr-ext-player) name {
-    flex: 0 1 auto !important;
-    min-width: 0;
-    overflow: hidden;
-    font-weight: 700;
-    color: var(--lr-ext-text-strong) !important;
-    letter-spacing: 0 !important;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) a,
+:is(main.round .ruser, main.analyse > .lr-ext-player) name {
+  flex: 0 1 auto !important;
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 700;
+  color: var(--lr-ext-text-strong) !important;
+  letter-spacing: 0 !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-  /* Only the name shrinks. */
-  :is(main.round .ruser, main.analyse > .lr-ext-player) > :not(a, name) {
-    flex: none;
-  }
+/* Only the name shrinks. */
+:is(main.round .ruser, main.analyse > .lr-ext-player) > :not(a, name) {
+  flex: none;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) .utitle,
-  :is(main.round .ruser, main.analyse > .lr-ext-player) a .utitle {
-    display: inline-block;
-    margin-right: 5px;
-    padding: 0 3px;
-    border-radius: 3px;
-    background: var(--lr-ext-title-bg);
-    color: #fff !important;
-    font-size: 11px;
-    font-weight: 800;
-    line-height: 16px;
-    vertical-align: 1px;
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) .utitle,
+:is(main.round .ruser, main.analyse > .lr-ext-player) a .utitle {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 0 3px;
+  border-radius: 3px;
+  background: var(--lr-ext-title-bg);
+  color: #fff !important;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 16px;
+  vertical-align: 1px;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) rating {
-    margin: 0 !important;
-    color: var(--lr-ext-text-dim) !important;
-    letter-spacing: 0 !important;
-    font-weight: 400;
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) rating {
+  margin: 0 !important;
+  color: var(--lr-ext-text-dim) !important;
+  letter-spacing: 0 !important;
+  font-weight: 400;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) rating::before {
-    content: '(';
-  }
-  :is(main.round .ruser, main.analyse > .lr-ext-player) rating::after {
-    content: ')';
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) rating::before {
+  content: '(';
+}
+:is(main.round .ruser, main.analyse > .lr-ext-player) rating::after {
+  content: ')';
+}
 
-  /* The rating's change follows the rating: `good`, `bad`, or a bare span for "±0". */
-  :is(main.round .ruser, main.analyse > .lr-ext-player) :is(rating, good, bad) {
-    order: 2;
-  }
+/* The rating's change follows the rating: `good`, `bad`, or a bare span for "±0". */
+:is(main.round .ruser, main.analyse > .lr-ext-player) :is(rating, good, bad) {
+  order: 2;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) > span:not([data-icon]) {
-    order: 2;
-    color: var(--lr-ext-text-dim);
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) > span:not([data-icon]) {
+  order: 2;
+  color: var(--lr-ext-text-dim);
+}
 
-  /* The country flag (data-lr-ext-flag, from content/game/flags.ts) right after the name,
-     before its flair. */
-  :is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
+/* The country flag (data-lr-ext-flag, from content/game/flags.ts) right after the name,
+   before its flair. */
+:is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link :is(.uflair, .utitle) {
-    margin: 0;
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link :is(.uflair, .utitle) {
+  margin: 0;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link .uflair {
-    order: 2;
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link .uflair {
+  order: 2;
+}
 
-  :is(main.round .ruser, main.analyse > .lr-ext-player)
-    > a.user-link[data-lr-ext-flag]:not([data-lr-ext-flag=''])::after {
-    order: 1;
-    content: attr(data-lr-ext-flag);
-    font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-  }
+:is(main.round .ruser, main.analyse > .lr-ext-player)
+  > a.user-link[data-lr-ext-flag]:not([data-lr-ext-flag=''])::after {
+  order: 1;
+  content: attr(data-lr-ext-flag);
+  font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
 
-  /* ---- Captured pieces --- */
+/* ---- Captured pieces --- */
 
-  /* Built by content/game/captured.ts: the pieces taken, grouped by type, then the material
-   * lead. */
-  :is(main.round, main.analyse) > .lr-ext-captured {
-    justify-self: start;
-    align-self: start;
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    height: 18px;
-    margin: calc(var(--lr-ext-off) + 30px) 0 0 calc(50px + var(--lr-ext-inset-l, 0px));
-    pointer-events: none;
-  }
+/* Built by content/game/captured.ts: the pieces taken, grouped by type, then the material
+ * lead. */
+:is(main.round, main.analyse) > .lr-ext-captured {
+  justify-self: start;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+  margin: calc(var(--lr-ext-off) + 30px) 0 0 calc(50px + var(--lr-ext-inset-l, 0px));
+  pointer-events: none;
+}
 
-  /* Boards without players (free board, study) keep Lichess's material diff, restyled to match.
-     It lists the pieces a side is up by, so they're drawn in the other color. */
-  main.analyse .material {
-    /* Lichess lists the queen first; reversed, pawns lead and the score stays last. */
-    flex-direction: row-reverse !important;
-    gap: 3px;
-    height: 18px;
-    padding: 0 !important;
-  }
+/* Boards without players (free board, study) keep Lichess's material diff, restyled to match.
+   It lists the pieces a side is up by, so they're drawn in the other color. */
+main.analyse .material {
+  /* Lichess lists the queen first; reversed, pawns lead and the score stays last. */
+  flex-direction: row-reverse !important;
+  gap: 3px;
+  height: 18px;
+  padding: 0 !important;
+}
 
-  main.analyse .material score {
-    order: -1;
-  }
+main.analyse .material score {
+  order: -1;
+}
 
-  html:not([data-lr-ext-has~='analyse-clock']) main.analyse .analyse__player_strip {
-    left: var(--lr-ext-inset-l, 0px) !important;
-    right: auto !important;
-  }
+html:not([data-lr-ext-has~='analyse-clock']) main.analyse .analyse__player_strip {
+  left: var(--lr-ext-inset-l, 0px) !important;
+  right: auto !important;
+}
 
-  html[data-lr-ext-has~='analyse-white'] main.analyse .material-bottom,
-  html[data-lr-ext-has~='analyse-black'] main.analyse .material-top {
-    --lr-ext-mpiece-pawn: var(---black-pawn);
-    --lr-ext-mpiece-knight: var(---black-knight);
-    --lr-ext-mpiece-bishop: var(---black-bishop);
-    --lr-ext-mpiece-rook: var(---black-rook);
-    --lr-ext-mpiece-queen: var(---black-queen);
-    --lr-ext-mpiece-king: var(---black-king);
-  }
+html[data-lr-ext-has~='analyse-white'] main.analyse .material-bottom,
+html[data-lr-ext-has~='analyse-black'] main.analyse .material-top {
+  --lr-ext-mpiece-pawn: var(---black-pawn);
+  --lr-ext-mpiece-knight: var(---black-knight);
+  --lr-ext-mpiece-bishop: var(---black-bishop);
+  --lr-ext-mpiece-rook: var(---black-rook);
+  --lr-ext-mpiece-queen: var(---black-queen);
+  --lr-ext-mpiece-king: var(---black-king);
+}
 
-  html[data-lr-ext-has~='analyse-white'] main.analyse .material-top,
-  html[data-lr-ext-has~='analyse-black'] main.analyse .material-bottom {
-    --lr-ext-mpiece-pawn: var(---white-pawn);
-    --lr-ext-mpiece-knight: var(---white-knight);
-    --lr-ext-mpiece-bishop: var(---white-bishop);
-    --lr-ext-mpiece-rook: var(---white-rook);
-    --lr-ext-mpiece-queen: var(---white-queen);
-    --lr-ext-mpiece-king: var(---white-king);
-  }
+html[data-lr-ext-has~='analyse-white'] main.analyse .material-top,
+html[data-lr-ext-has~='analyse-black'] main.analyse .material-bottom {
+  --lr-ext-mpiece-pawn: var(---white-pawn);
+  --lr-ext-mpiece-knight: var(---white-knight);
+  --lr-ext-mpiece-bishop: var(---white-bishop);
+  --lr-ext-mpiece-rook: var(---white-rook);
+  --lr-ext-mpiece-queen: var(---white-queen);
+  --lr-ext-mpiece-king: var(---white-king);
+}
 
-  main.analyse .material mpiece.pawn {
-    background-image: var(--lr-ext-mpiece-pawn) !important;
-  }
-  main.analyse .material mpiece.knight {
-    background-image: var(--lr-ext-mpiece-knight) !important;
-  }
-  main.analyse .material mpiece.bishop {
-    background-image: var(--lr-ext-mpiece-bishop) !important;
-  }
-  main.analyse .material mpiece.rook {
-    background-image: var(--lr-ext-mpiece-rook) !important;
-  }
-  main.analyse .material mpiece.queen {
-    background-image: var(--lr-ext-mpiece-queen) !important;
-  }
-  main.analyse .material mpiece.king {
-    background-image: var(--lr-ext-mpiece-king) !important;
-  }
+main.analyse .material mpiece.pawn {
+  background-image: var(--lr-ext-mpiece-pawn) !important;
+}
+main.analyse .material mpiece.knight {
+  background-image: var(--lr-ext-mpiece-knight) !important;
+}
+main.analyse .material mpiece.bishop {
+  background-image: var(--lr-ext-mpiece-bishop) !important;
+}
+main.analyse .material mpiece.rook {
+  background-image: var(--lr-ext-mpiece-rook) !important;
+}
+main.analyse .material mpiece.queen {
+  background-image: var(--lr-ext-mpiece-queen) !important;
+}
+main.analyse .material mpiece.king {
+  background-image: var(--lr-ext-mpiece-king) !important;
+}
 
-  :is(.lr-ext-captured__group, main.analyse .material > div) {
-    display: flex !important;
-    margin: 0 !important;
-  }
+:is(.lr-ext-captured__group, main.analyse .material > div) {
+  display: flex !important;
+  margin: 0 !important;
+}
 
-  :is(.lr-ext-captured__group .lr-ext-pc, main.analyse .material mpiece) {
-    display: block;
-    width: 18px !important;
-    height: 18px !important;
-    margin: 0 !important;
-    filter: none !important;
-  }
+:is(.lr-ext-captured__group .lr-ext-pc, main.analyse .material mpiece) {
+  display: block;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  filter: none !important;
+}
 
-  /* Black pieces vanish on the near-black page: a light edge draws them as outlines. Specific
-   * enough to beat the `filter: none` above. */
-  main
-    .lr-ext-captured__group
-    .lr-ext-pc:is(
-      .lr-ext-pc-bp,
-      .lr-ext-pc-bn,
-      .lr-ext-pc-bb,
-      .lr-ext-pc-br,
-      .lr-ext-pc-bq,
-      .lr-ext-pc-bk
-    ),
-  html[data-lr-ext-has~='analyse-white'] main.analyse .material-bottom mpiece,
-  html[data-lr-ext-has~='analyse-black'] main.analyse .material-top mpiece {
-    filter: drop-shadow(1px 0 0 var(--lr-ext-text-dim)) drop-shadow(-1px 0 0 var(--lr-ext-text-dim))
-      drop-shadow(0 1px 0 var(--lr-ext-text-dim)) drop-shadow(0 -1px 0 var(--lr-ext-text-dim)) !important;
-  }
+/* Black pieces vanish on the near-black page: a light edge draws them as outlines. Specific
+ * enough to beat the `filter: none` above. */
+main
+  .lr-ext-captured__group
+  .lr-ext-pc:is(
+    .lr-ext-pc-bp,
+    .lr-ext-pc-bn,
+    .lr-ext-pc-bb,
+    .lr-ext-pc-br,
+    .lr-ext-pc-bq,
+    .lr-ext-pc-bk
+  ),
+html[data-lr-ext-has~='analyse-white'] main.analyse .material-bottom mpiece,
+html[data-lr-ext-has~='analyse-black'] main.analyse .material-top mpiece {
+  filter: drop-shadow(1px 0 0 var(--lr-ext-text-dim)) drop-shadow(-1px 0 0 var(--lr-ext-text-dim))
+    drop-shadow(0 1px 0 var(--lr-ext-text-dim)) drop-shadow(0 -1px 0 var(--lr-ext-text-dim)) !important;
+}
 
-  :is(.lr-ext-captured__group .lr-ext-pc, main.analyse .material mpiece) + :is(.lr-ext-pc, mpiece) {
-    margin-left: -11px !important;
-  }
+:is(.lr-ext-captured__group .lr-ext-pc, main.analyse .material mpiece) + :is(.lr-ext-pc, mpiece) {
+  margin-left: -11px !important;
+}
 
-  :is(.lr-ext-captured__score, main.analyse .material score) {
-    margin: 0 0 0 3px !important;
-    color: var(--lr-ext-text-dim);
-    font-size: 12px;
-    font-weight: 700 !important;
-  }
+:is(.lr-ext-captured__score, main.analyse .material score) {
+  margin: 0 0 0 3px !important;
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+  font-weight: 700 !important;
+}
 
-  /* ---- Clock --- */
+/* ---- Clock --- */
 
-  /* "Give more time" is a link, so in the accent: a quiet grey, lit on hover. */
-  main.round .rclock .moretime {
-    color: var(--lr-ext-text-dim) !important;
-    opacity: 0.6;
-    transition: opacity 0.15s !important;
-  }
+/* "Give more time" is a link, so in the accent: a quiet grey, lit on hover. */
+main.round .rclock .moretime {
+  color: var(--lr-ext-text-dim) !important;
+  opacity: 0.6;
+  transition: opacity 0.15s !important;
+}
 
-  main.round .rclock .moretime:hover {
-    color: var(--lr-ext-text-strong) !important;
-    opacity: 1;
-  }
+main.round .rclock .moretime:hover {
+  color: var(--lr-ext-text-strong) !important;
+  opacity: 1;
+}
 
-  /* A fixed 140x40 box: dim while waiting, lit while running, red when low.
-     Each page only maps its markup onto that state. */
+/* A fixed 140x40 box: dim while waiting, lit while running, red when low.
+   Each page only maps its markup onto that state. */
 
-  /* Which side: the game has a class, but the analysis clock only says top or bottom,
-     so the board's orientation decides. */
-  main.round .rclock-white .time,
-  html[data-lr-ext-has~='analyse-white'] main.analyse .analyse__clock.bottom,
-  html[data-lr-ext-has~='analyse-black'] main.analyse .analyse__clock.top {
-    --lr-ext-clock-bg: var(--lr-ext-grey-300);
-    --lr-ext-clock-fg: color-mix(in srgb, var(--lr-ext-grey-800) 60%, transparent);
-    --lr-ext-clock-on-bg: #fff;
-    --lr-ext-clock-on-fg: var(--lr-ext-grey-800);
-    --lr-ext-clock-icon: none;
-  }
+/* Which side: the game has a class, but the analysis clock only says top or bottom,
+   so the board's orientation decides. */
+main.round .rclock-white .time,
+html[data-lr-ext-has~='analyse-white'] main.analyse .analyse__clock.bottom,
+html[data-lr-ext-has~='analyse-black'] main.analyse .analyse__clock.top {
+  --lr-ext-clock-bg: var(--lr-ext-grey-300);
+  --lr-ext-clock-fg: color-mix(in srgb, var(--lr-ext-grey-800) 60%, transparent);
+  --lr-ext-clock-on-bg: #fff;
+  --lr-ext-clock-on-fg: var(--lr-ext-grey-800);
+  --lr-ext-clock-icon: none;
+}
 
-  main.round .rclock-black .time,
-  html[data-lr-ext-has~='analyse-white'] main.analyse .analyse__clock.top,
-  html[data-lr-ext-has~='analyse-black'] main.analyse .analyse__clock.bottom {
-    --lr-ext-clock-bg: var(--lr-ext-grey-850);
-    --lr-ext-clock-fg: var(--lr-ext-grey-400);
-    --lr-ext-clock-on-bg: var(--lr-ext-grey-950);
-    --lr-ext-clock-on-fg: #fff;
-    --lr-ext-clock-icon: invert(1);
-  }
+main.round .rclock-black .time,
+html[data-lr-ext-has~='analyse-white'] main.analyse .analyse__clock.top,
+html[data-lr-ext-has~='analyse-black'] main.analyse .analyse__clock.bottom {
+  --lr-ext-clock-bg: var(--lr-ext-grey-850);
+  --lr-ext-clock-fg: var(--lr-ext-grey-400);
+  --lr-ext-clock-on-bg: var(--lr-ext-grey-950);
+  --lr-ext-clock-on-fg: #fff;
+  --lr-ext-clock-icon: invert(1);
+}
 
-  main.round .rclock .time,
-  main.analyse .analyse__clock {
-    box-sizing: border-box;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end;
-    gap: 0;
-    flex: none !important;
-    width: 140px !important;
-    height: 40px !important;
-    margin: 0 !important;
-    padding: 0 12px !important;
-    overflow: hidden;
-    border: none !important;
-    border-radius: 4px !important;
-    box-shadow: none !important;
-    z-index: auto !important;
-    background: var(--lr-ext-clock-bg) !important;
-    color: var(--lr-ext-clock-fg) !important;
-    font-family: var(--lr-ext-font) !important;
-    font-size: 24px !important;
-    font-weight: 600 !important;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0 !important;
-    line-height: 1 !important;
-    white-space: nowrap;
-    backdrop-filter: none !important;
-  }
+main.round .rclock .time,
+main.analyse .analyse__clock {
+  box-sizing: border-box;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end;
+  gap: 0;
+  flex: none !important;
+  width: 140px !important;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  overflow: hidden;
+  border: none !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  z-index: auto !important;
+  background: var(--lr-ext-clock-bg) !important;
+  color: var(--lr-ext-clock-fg) !important;
+  font-family: var(--lr-ext-font) !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  backdrop-filter: none !important;
+}
 
-  main.round .rclock .time sep {
-    opacity: 1 !important;
-    font-size: 1em !important;
-  }
+main.round .rclock .time sep {
+  opacity: 1 !important;
+  font-size: 1em !important;
+}
 
-  /* Running; on the analysis board, the side to move. */
-  main.round .rclock.running .time,
-  main.analyse .analyse__clock.active {
-    background: var(--lr-ext-clock-on-bg) !important;
-    color: var(--lr-ext-clock-on-fg) !important;
-  }
+/* Running; on the analysis board, the side to move. */
+main.round .rclock.running .time,
+main.analyse .analyse__clock.active {
+  background: var(--lr-ext-clock-on-bg) !important;
+  color: var(--lr-ext-clock-on-fg) !important;
+}
 
-  main.round .rclock.emerg.running .time,
-  main.round .rclock.outoftime .time {
-    background: var(--lr-ext-red-dark) !important;
-    color: #fff !important;
-    --lr-ext-clock-icon: invert(1);
-  }
+main.round .rclock.emerg.running .time,
+main.round .rclock.outoftime .time {
+  background: var(--lr-ext-red-dark) !important;
+  color: #fff !important;
+  --lr-ext-clock-icon: invert(1);
+}
 
-  /* Stopwatch on the running clock. */
-  main.round .rclock.running .time::before,
-  main.analyse .analyse__clock.active::before {
-    content: '';
-    flex: none;
-    width: 18px;
-    height: 18px;
-    margin-right: auto;
-    padding-right: 10px;
-    background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--312e2b.svg')
-      left center / 18px no-repeat;
-    filter: var(--lr-ext-clock-icon);
-  }
+/* Stopwatch on the running clock. */
+main.round .rclock.running .time::before,
+main.analyse .analyse__clock.active::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-right: auto;
+  padding-right: 10px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--312e2b.svg')
+    left center / 18px no-repeat;
+  filter: var(--lr-ext-clock-icon);
 }

@@ -25,8 +25,6 @@ import { mountGameOver } from './view.ts';
 // show it at will (preview.ts).
 
 const WATCH_MS = 250;
-// Our layout's: below, the board isn't in the grid the game over is placed in.
-const DESKTOP = '(min-width: 1020px)';
 
 async function bookPly(gameId: string, positions: number): Promise<number> {
   try {
@@ -149,7 +147,7 @@ function watchEnd(game: PlayedGame): void {
     const main = queryOne(document, 'main.round', HTMLElement);
     if (!main?.querySelector('.result-wrap')) return;
     clearInterval(timer);
-    if (window.matchMedia(DESKTOP).matches) void onGameEnd(game, main);
+    void onGameEnd(game, main);
   }, WATCH_MS);
 }
 

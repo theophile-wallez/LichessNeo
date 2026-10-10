@@ -6,57 +6,55 @@
  * keyed on `data-lr-ext-has` (content/layout/has-flags.ts), by their measured heights
  * (content/layout/moves-extras-height.ts). */
 
-@media (min-width: 1020px) {
-  main.round #voice-bar {
-    grid-area: moves !important;
-    align-self: start;
-    z-index: 3;
-    margin: 0 !important;
-    border-bottom: 1px solid var(--lr-ext-border);
-    border-radius: 6px 6px 0 0;
-    background: var(--lr-ext-bg-panel-dark);
-  }
+main.round #voice-bar {
+  grid-area: moves !important;
+  align-self: start;
+  z-index: 3;
+  margin: 0 !important;
+  border-bottom: 1px solid var(--lr-ext-border);
+  border-radius: 6px 6px 0 0;
+  background: var(--lr-ext-bg-panel-dark);
+}
 
-  main.round #voice-status-row {
-    border-radius: 6px 6px 0 0;
-    background: transparent !important;
-    box-shadow: none !important;
-    color: var(--lr-ext-text);
-    font-family: var(--lr-ext-font);
-    font-size: 14px !important;
-    font-weight: 600;
-  }
+main.round #voice-status-row {
+  border-radius: 6px 6px 0 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--lr-ext-text);
+  font-family: var(--lr-ext-font);
+  font-size: 14px !important;
+  font-weight: 600;
+}
 
-  html[data-lr-ext-has~='round-voice'] main.round :is(i5d, rm6) {
-    padding-top: var(--lr-ext-voice-h, 0px) !important;
-  }
+html[data-lr-ext-has~='round-voice'] main.round :is(i5d, rm6) {
+  padding-top: var(--lr-ext-voice-h, 0px) !important;
+}
 
-  /* Only the crosstable: a signed-in player's other games stay on Lichess's phone layout. */
-  main.round .round__underboard {
-    display: contents !important;
-  }
+/* Only the crosstable: a signed-in player's other games stay out, as the panel has no room. */
+main.round .round__underboard {
+  display: contents !important;
+}
 
-  main.round .round__underboard > :not(.crosstable) {
-    display: none !important;
-  }
+main.round .round__underboard > :not(.crosstable) {
+  display: none !important;
+}
 
-  /* In our look (theme/crosstable.css), under the move buttons. */
-  main.round .round__underboard > .crosstable {
-    grid-area: moves !important;
-    align-self: end;
-    z-index: 2;
-    height: auto !important;
-    border: 0 !important;
-    border-top: 1px solid var(--lr-ext-border) !important;
-    border-radius: 0 0 6px 6px !important;
-    background: var(--lr-ext-bg-panel) !important;
-  }
+/* In our look (theme/crosstable.css), under the move buttons. */
+main.round .round__underboard > .crosstable {
+  grid-area: moves !important;
+  align-self: end;
+  z-index: 2;
+  height: auto !important;
+  border: 0 !important;
+  border-top: 1px solid var(--lr-ext-border) !important;
+  border-radius: 0 0 6px 6px !important;
+  background: var(--lr-ext-bg-panel) !important;
+}
 
-  html[data-lr-ext-has~='round-crosstable'] main.round :is(i5d, rm6) {
-    padding-bottom: var(--lr-ext-crosstable-h, 0px) !important;
-  }
+html[data-lr-ext-has~='round-crosstable'] main.round :is(i5d, rm6) {
+  padding-bottom: var(--lr-ext-crosstable-h, 0px) !important;
+}
 
-  body.zenable.zen main.round .round__underboard > .crosstable {
-    display: none !important;
-  }
+body.zenable.zen main.round .round__underboard > .crosstable {
+  display: none !important;
 }

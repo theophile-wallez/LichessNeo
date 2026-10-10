@@ -269,7 +269,10 @@ features and its name: free analysis, open data, no ads.
   changed design comes with its tablet and phone versions, shown to the user
   and validated before it's built, and the build covers all three (a page
   that never scrolls on a desktop may scroll on a phone, but nothing
-  overflows sideways). Leave no page half-done below 1020px.
+  overflows sideways). Leave no page half-done below 1020px. The game page
+  shows how: its parts' look applies at every width, and only its grid
+  changes, a column that scrolls below 1020px
+  (`styles/game/layout-narrow.css`).
 - **Playful pages:** a color per section, icons on gradient tiles, cards,
   pills, illustrations (pieces in the board's set, our sidebar's drawings,
   little boards), never emoji (see "No emoji").

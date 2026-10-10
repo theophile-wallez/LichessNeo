@@ -1,0 +1,204 @@
+/* ---- Below 1020px --- */
+
+/* Phones and tablets get the desktop's parts (bars, clocks, captured pieces, actions, moves,
+ * game info, chat, the game's end) in one column that scrolls: the bars and the board on the
+ * first screen, the rest under them. Lichess's coordinates stay on the board here. */
+
+@media (max-width: 1019.98px) {
+  main.round {
+    --lr-ext-bar: 56px;
+    --lr-ext-coords-off: 0px;
+    --lr-ext-gap: 12px;
+    --lr-ext-board: calc(100vw - 16px);
+    --lr-ext-bar-bot: var(--lr-ext-bar);
+    --lr-ext-chat-h: 360px;
+
+    display: grid !important;
+    grid-template-columns: var(--lr-ext-board) !important;
+    /* TV's channels first (tv.css); a row with nothing in it takes no room. */
+    grid-template-rows:
+      auto var(--lr-ext-bar) auto var(--lr-ext-board) auto var(--lr-ext-bar-bot)
+      auto auto auto auto !important;
+    grid-template-areas:
+      'tv'
+      'user-top'
+      'pocket-top'
+      'board'
+      'pocket-bot'
+      'user-bot'
+      'controls'
+      'moves'
+      'meta'
+      'chat' !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 4px 0 32px !important;
+  }
+
+  main.round .rcontrols {
+    margin-top: 8px !important;
+    border-radius: 6px;
+  }
+
+  main.round :is(i5d, rm6) {
+    margin-top: 12px !important;
+    border-radius: 6px !important;
+  }
+
+  /* The page scrolls here: the game info shows, with a chat too, and as tall as it needs. */
+  main.round .round__side > .game__meta {
+    display: block !important;
+    grid-area: meta !important;
+    margin-top: 12px !important;
+    border-radius: 6px;
+  }
+
+  main.round .mchat {
+    height: var(--lr-ext-chat-h);
+    margin-top: 12px !important;
+    border-top: 0;
+    border-radius: 6px !important;
+  }
+
+  /* No gutter beside a phone's board: the tools join the player's bar, before the clock, level
+   * with the name, clear of the captured pieces under it. */
+  main.round > .lr-ext-board-tools {
+    grid-area: user-bot !important;
+    flex-direction: row !important;
+    align-self: start;
+    gap: 6px;
+    width: auto !important;
+    margin: 2px 152px 0 0 !important;
+  }
+
+  main.round .lr-ext-board-tools__btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: var(--lr-ext-bg-raised);
+    color: var(--lr-ext-text);
+  }
+
+  main.round .ruser-bottom {
+    --lr-ext-clock-room: 226px;
+  }
+
+  /* A touch screen has no hover to reveal the flip button. */
+  main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-tools__btn--flip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* Crazyhouse: a row of pockets over and under the board. */
+  main.round .pocket {
+    flex-direction: row;
+    justify-self: center;
+    width: auto !important;
+    height: calc(var(--lr-ext-board) * 0.09375);
+    margin: 4px 0 !important;
+  }
+
+  main.round .pocket-top {
+    grid-area: pocket-top !important;
+  }
+
+  main.round .pocket-bottom {
+    grid-area: pocket-bot !important;
+  }
+}
+
+/* ---- Phones' moves --- */
+
+/* Below 800px Lichess renders the moves as one row (`.col1-moves`): chips that scroll
+ * sideways, the move buttons under them. */
+@media (max-width: 799.29px) {
+  main.round :is(i5d, rm6) .col1-moves {
+    display: flex !important;
+    align-items: center;
+    height: 44px;
+    padding: 0 4px !important;
+    background: none !important;
+  }
+
+  main.round :is(i5d, rm6) .col1-moves > .fbt {
+    display: none !important;
+  }
+
+  main.round :is(i5d, rm6) .col1-moves :is(aPp, l4x) {
+    display: flex !important;
+    flex: 1 !important;
+    align-items: center !important;
+    gap: 2px;
+    min-width: 0;
+    padding: 0 !important;
+    overflow: auto hidden !important;
+    background: none !important;
+    scrollbar-width: none;
+  }
+
+  main.round :is(i5d, rm6) .col1-moves :is(qZM, i5z, Z7yx, kwdb) {
+    flex: none;
+    min-height: 0 !important;
+    padding: 5px 7px !important;
+    background: none !important;
+  }
+
+  /* The move times (game-over.css) need the list's column: none in a row. */
+  main.round :is(i5d, rm6) .col1-moves [data-lr-ext-time]::before,
+  main.round :is(i5d, rm6) .col1-moves [data-lr-ext-time]::after {
+    content: none !important;
+  }
+
+  main.round :is(i5d, rm6) .col1-moves :is(Z7yx, kwdb):is(.a1t, .active) {
+    border-radius: 6px;
+    background: var(--lr-ext-accent) !important;
+    color: #fff !important;
+  }
+}
+
+/* ---- Tablets --- */
+
+/* The board as big as the first screen allows with its bars and actions, a gutter beside it
+ * for the tools, as on desktop; the moves scroll in their own list. */
+@media (min-width: 600px) and (max-width: 1019.98px) {
+  main.round {
+    --lr-ext-gap: 24px;
+    --lr-ext-board: min(
+      100vw - 96px,
+      100dvh - var(---site-header-height, 50px) - 2 * var(--lr-ext-bar) - 88px
+    );
+  }
+
+  main.round :is(i5d, rm6) {
+    max-height: 320px;
+  }
+
+  main.round :is(i5d, rm6) > :is(aPp, l4x) {
+    min-height: 180px;
+  }
+
+  main.round > .lr-ext-board-tools {
+    grid-area: board !important;
+    flex-direction: column !important;
+    width: 30px !important;
+    margin: 0 -40px 0 0 !important;
+  }
+
+  main.round .lr-ext-board-tools__btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  main.round .ruser-bottom {
+    --lr-ext-clock-room: 152px;
+  }
+}
+
+/* A phone on its side: the board as tall as the screen, its bars above and under it. */
+@media (max-width: 1019.98px) and (max-height: 599.98px) {
+  main.round {
+    --lr-ext-board: min(100vw - 96px, 100dvh - 16px);
+  }
+}

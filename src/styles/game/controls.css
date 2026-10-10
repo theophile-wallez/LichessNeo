@@ -1,139 +1,137 @@
 /* ---- Controls --- */
 
-@media (min-width: 1020px) {
-  main.round .rcontrols {
-    grid-area: controls !important;
-    align-self: start;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 4px 8px 8px;
-    background: var(--lr-ext-bg-panel);
-  }
+main.round .rcontrols {
+  grid-area: controls !important;
+  align-self: start;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4px 8px 8px;
+  background: var(--lr-ext-bg-panel);
+}
 
-  /* While playing: equal big grey buttons, resign first, then abort or takeback, then draw.
-   * Lichess's analysis link and menu stay hidden, as on its own desktop layout. */
-  main.round .rcontrols .ricons {
-    display: flex !important;
-    gap: 8px;
-    margin: 4px 0 0 !important;
-  }
+/* While playing: equal big grey buttons, resign first, then abort or takeback, then draw.
+ * Lichess's analysis link and menu stay hidden, as on its own desktop layout. */
+main.round .rcontrols .ricons {
+  display: flex !important;
+  gap: 8px;
+  margin: 4px 0 0 !important;
+}
 
-  main.round .rcontrols .ricons .fbt:is(.analysis, .board-menu-toggle-btn) {
-    display: none !important;
-  }
+main.round .rcontrols .ricons .fbt:is(.analysis, .board-menu-toggle-btn) {
+  display: none !important;
+}
 
-  main.round .rcontrols .ricons .fbt {
-    position: static !important;
-    flex: 1 1 0;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: auto !important;
-    height: 48px;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 8px !important;
-    background: var(--lr-ext-btn-grey) !important;
-    box-shadow: var(--lr-ext-btn-grey-shadow);
-    color: var(--lr-ext-grey-200) !important;
-    font-size: 24px !important;
-    text-shadow: none !important;
-    visibility: visible !important;
-    transform: none !important;
-    filter: none !important;
-    transition: background 0.15s !important;
-  }
+main.round .rcontrols .ricons .fbt {
+  position: static !important;
+  flex: 1 1 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: auto !important;
+  height: 48px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-grey-200) !important;
+  font-size: 24px !important;
+  text-shadow: none !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
+  transition: background 0.15s !important;
+}
 
-  main.round .rcontrols .ricons .fbt:hover:not(:disabled) {
-    background: var(--lr-ext-btn-grey-hover) !important;
-    color: #fff !important;
-  }
+main.round .rcontrols .ricons .fbt:hover:not(:disabled) {
+  background: var(--lr-ext-btn-grey-hover) !important;
+  color: #fff !important;
+}
 
-  main.round .rcontrols .ricons .fbt:disabled {
-    opacity: 0.4;
-    cursor: default;
-  }
+main.round .rcontrols .ricons .fbt:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
 
-  main.round .rcontrols .ricons :is(.resign, .act-confirm) {
-    order: -1;
-  }
+main.round .rcontrols .ricons :is(.resign, .act-confirm) {
+  order: -1;
+}
 
-  /* Confirming a resignation or a draw offer: only confirm (red or primary) and cancel. */
-  main.round .rcontrols .ricons.confirm > .fbt {
-    display: none !important;
-  }
+/* Confirming a resignation or a draw offer: only confirm (red or primary) and cancel. */
+main.round .rcontrols .ricons.confirm > .fbt {
+  display: none !important;
+}
 
-  main.round .rcontrols .ricons .act-confirm {
-    display: contents;
-  }
+main.round .rcontrols .ricons .act-confirm {
+  display: contents;
+}
 
-  main.round .rcontrols .ricons .act-confirm .yes {
-    background: var(--lr-ext-btn-red) !important;
-    box-shadow: var(--lr-ext-btn-red-shadow);
-    color: #fff !important;
-  }
+main.round .rcontrols .ricons .act-confirm .yes {
+  background: var(--lr-ext-btn-red) !important;
+  box-shadow: var(--lr-ext-btn-red-shadow);
+  color: #fff !important;
+}
 
-  main.round .rcontrols .ricons .act-confirm .yes:hover {
-    background: var(--lr-ext-btn-red-hover) !important;
-  }
+main.round .rcontrols .ricons .act-confirm .yes:hover {
+  background: var(--lr-ext-btn-red-hover) !important;
+}
 
-  main.round .rcontrols .ricons .act-confirm .yes.draw-yes {
-    background: var(--lr-ext-btn-primary) !important;
-    box-shadow: var(--lr-ext-btn-primary-shadow);
-  }
+main.round .rcontrols .ricons .act-confirm .yes.draw-yes {
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+}
 
-  main.round .rcontrols .ricons .act-confirm .yes.draw-yes:hover {
-    background: var(--lr-ext-btn-primary-hover) !important;
-  }
+main.round .rcontrols .ricons .act-confirm .yes.draw-yes:hover {
+  background: var(--lr-ext-btn-primary-hover) !important;
+}
 
-  /* A draw or takeback offer: the question between a grey decline and a primary accept. */
-  main.round .rcontrols .question {
-    gap: 8px;
-    margin-top: 4px;
-    padding: 0 !important;
-    border: 0 !important;
-    background: none !important;
-  }
+/* A draw or takeback offer: the question between a grey decline and a primary accept. */
+main.round .rcontrols .question {
+  gap: 8px;
+  margin-top: 4px;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
 
-  main.round .rcontrols .question p {
-    flex: 1 1 auto !important;
-    margin: 0;
-    padding: 0 !important;
-    color: var(--lr-ext-text);
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-  }
+main.round .rcontrols .question p {
+  flex: 1 1 auto !important;
+  margin: 0;
+  padding: 0 !important;
+  color: var(--lr-ext-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
 
-  main.round .rcontrols .question :is(a, button) {
-    flex: 0 0 64px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 48px;
-    padding: 0 !important;
-    border-radius: 8px;
-    background: var(--lr-ext-btn-grey) !important;
-    box-shadow: var(--lr-ext-btn-grey-shadow);
-    color: var(--lr-ext-grey-200) !important;
-    font-size: 22px !important;
-    line-height: 1 !important;
-    cursor: pointer;
-  }
+main.round .rcontrols .question :is(a, button) {
+  flex: 0 0 64px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 !important;
+  border-radius: 8px;
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-grey-200) !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  cursor: pointer;
+}
 
-  main.round .rcontrols .question :is(a, button):hover {
-    background: var(--lr-ext-btn-grey-hover) !important;
-    color: #fff !important;
-  }
+main.round .rcontrols .question :is(a, button):hover {
+  background: var(--lr-ext-btn-grey-hover) !important;
+  color: #fff !important;
+}
 
-  main.round .rcontrols .question .yes {
-    background: var(--lr-ext-btn-primary) !important;
-    box-shadow: var(--lr-ext-btn-primary-shadow);
-    color: #fff !important;
-  }
+main.round .rcontrols .question .yes {
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: #fff !important;
+}
 
-  main.round .rcontrols .question .yes:hover {
-    background: var(--lr-ext-btn-primary-hover) !important;
-  }
+main.round .rcontrols .question .yes:hover {
+  background: var(--lr-ext-btn-primary-hover) !important;
 }

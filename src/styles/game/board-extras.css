@@ -1,8 +1,9 @@
 /* ---- Crazyhouse --- */
 
+/* Pockets go in a strip right of the board, a cell being 3/4 of a square (below 1020px, a
+ * row over and under it: layout-narrow.css). Lichess's `mat-top` / `mat-bot` areas aren't in
+ * this grid: they'd get tracks of their own. */
 @media (min-width: 1020px) {
-  /* Pockets go in a strip right of the board, a cell being 3/4 of a square. Lichess's
-   * `mat-top` / `mat-bot` areas aren't in this grid: they'd get tracks of their own. */
   html[data-lr-ext-has~='pocket'] main.round {
     --lr-ext-pocket-gap: 8px;
     --lr-ext-pocket-sq: calc(var(--lr-ext-board) * 0.09375);
@@ -43,119 +44,111 @@
       'user-bot .      chat' !important;
     column-gap: 0 !important;
   }
+}
 
-  main.round .pocket {
-    grid-area: pocket !important;
-    flex-direction: column;
-    width: var(--lr-ext-pocket-sq) !important;
-    margin: 0 0 0 var(--lr-ext-pocket-gap) !important;
-    overflow: hidden;
-    border-radius: 4px !important;
-    background: var(--lr-ext-bg-panel) !important;
-    box-shadow: none !important;
-  }
+main.round .pocket {
+  grid-area: pocket !important;
+  flex-direction: column;
+  width: var(--lr-ext-pocket-sq) !important;
+  margin: 0 0 0 var(--lr-ext-pocket-gap) !important;
+  overflow: hidden;
+  border-radius: 4px !important;
+  background: var(--lr-ext-bg-panel) !important;
+  box-shadow: none !important;
+}
 
-  main.round .pocket-top {
-    align-self: start;
-    margin-top: var(--lr-ext-inset-t, 0px) !important;
-  }
+main.round .pocket-top {
+  align-self: start;
+  margin-top: var(--lr-ext-inset-t, 0px) !important;
+}
 
-  main.round .pocket-bottom {
-    align-self: end;
-    margin-bottom: var(--lr-ext-inset-b, 0px) !important;
-  }
+main.round .pocket-bottom {
+  align-self: end;
+  margin-bottom: var(--lr-ext-inset-b, 0px) !important;
+}
 
-  main.round .pocket-c1 {
-    flex: none !important;
-    max-width: none !important;
-  }
+main.round .pocket-c1 {
+  flex: none !important;
+  max-width: none !important;
+}
 
-  /* Lichess's light grey hover was made for its grey strip. */
-  main.round .pocket.usable piece:hover {
-    background-color: #ffffff1a !important;
-  }
+/* Lichess's light grey hover was made for its grey strip. */
+main.round .pocket.usable piece:hover {
+  background-color: #ffffff1a !important;
+}
 
-  /* ---- Board tools --- */
+/* ---- Board tools --- */
 
-  /* Our board tools (content/game/board-tools.ts) in the gap right of the board: the cog, and
-   * the flip button while the pointer is over the board. The cog replaces the move bar's menu
-   * button. */
-  main.round :is(i5d, rm6) bo3 .board-menu-toggle-btn {
-    display: none !important;
-  }
+/* Our board tools (content/game/board-tools.ts) in the gap right of the board: the cog, and
+ * the flip button while the pointer is over the board. The cog replaces the move bar's menu
+ * button. */
+main.round :is(i5d, rm6) bo3 .board-menu-toggle-btn {
+  display: none !important;
+}
 
-  main.round > .lr-ext-board-tools {
-    grid-area: board;
-    justify-self: end;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    width: var(--lr-ext-gap);
-    margin-inline-end: calc(-1 * var(--lr-ext-gap));
-    z-index: 2;
-  }
+main.round > .lr-ext-board-tools {
+  grid-area: board;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: var(--lr-ext-gap);
+  margin-inline-end: calc(-1 * var(--lr-ext-gap));
+  z-index: 2;
+}
 
-  /* Crazyhouse: the tools go after the pockets' strip. */
-  html[data-lr-ext-has~='pocket'] main.round > .lr-ext-board-tools {
-    grid-area: pocket;
-    margin-inline-end: 0;
-  }
+/* Crazyhouse: the tools go after the pockets' strip. */
+html[data-lr-ext-has~='pocket'] main.round > .lr-ext-board-tools {
+  grid-area: pocket;
+  margin-inline-end: 0;
+}
 
-  main.round .lr-ext-board-tools__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: 0;
-    border-radius: 4px;
-    background: none;
-    color: var(--lr-ext-grey-400);
-    cursor: pointer;
-    transition:
-      color 0.15s,
-      opacity 0.2s,
-      visibility 0.2s !important;
-  }
+main.round .lr-ext-board-tools__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--lr-ext-grey-400);
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    opacity 0.2s,
+    visibility 0.2s !important;
+}
 
-  main.round .lr-ext-board-tools__btn:is(:hover, .lr-ext-board-tools__btn--on) {
-    color: #fff;
-  }
+main.round .lr-ext-board-tools__btn:is(:hover, .lr-ext-board-tools__btn--on) {
+  color: #fff;
+}
 
-  main.round .lr-ext-board-tools__btn::before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background: currentColor;
-    mask: center / contain no-repeat;
-  }
+main.round .lr-ext-board-tools__btn::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  mask: center / contain no-repeat;
+}
 
-  /* The cog and the flip arrows. */
-  main.round .lr-ext-board-tools__btn--menu::before {
-    mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
-  }
+/* The cog and the flip arrows. */
+main.round .lr-ext-board-tools__btn--menu::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
+}
 
-  main.round .lr-ext-board-tools__btn--flip::before {
-    mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-data-transfer-vertical.svg');
-  }
+main.round .lr-ext-board-tools__btn--flip::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-data-transfer-vertical.svg');
+}
 
-  main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-tools__btn--flip {
-    visibility: hidden;
-    opacity: 0;
-  }
+main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-tools__btn--flip {
+  visibility: hidden;
+  opacity: 0;
 }
 
 /* ---- Mobile --- */
-
-/* Below 1020px Lichess's own layout stays, with our theme. */
-@media (max-width: 1019.98px) {
-  /* Captured pieces and board tools belong to the desktop layout. */
-  main.round > :is(.lr-ext-captured, .lr-ext-board-tools) {
-    display: none !important;
-  }
-}
 
 /* Lichess draws clock faces behind the clock (`z-index: -1`) and from 800px lifts only the
  * bottom one over the page background (painted by theme/): the top one vanished. */

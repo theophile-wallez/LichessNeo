@@ -1,5 +1,6 @@
-/* Game page (main.round) from 1020px. `.round__app` and `.round__side` become `display:
- * contents`, so their children join one grid without moving Lichess's nodes. */
+/* Game page (main.round). `.round__app` and `.round__side` become `display: contents`, so their
+ * children join one grid without moving Lichess's nodes. From 1020px the grid is the board
+ * beside a panel; below, a column (layout-narrow.css). */
 
 @media (min-width: 1020px) {
   main.round {
@@ -67,109 +68,112 @@
   body:is(.coords-in, .coords-out) main.round {
     --lr-ext-coords-off: calc(1.2 * var(--lr-ext-coords-size, 13px) + 8px);
   }
+}
 
-  main.round .round__app,
-  main.round .round__side {
-    display: contents !important;
-  }
+/* ---- Parts --- */
 
-  main.round .round__app__table,
-  main.round .col1-rmoves-preload,
-  main.round .round__underchat {
-    display: none !important;
-  }
+/* The same at every width. */
+main.round .round__app,
+main.round .round__side {
+  display: contents !important;
+}
 
-  main.round .round__app__board {
-    grid-area: board !important;
-    margin: 0 !important;
-  }
+main.round .round__app__table,
+main.round .col1-rmoves-preload,
+main.round .round__underchat {
+  display: none !important;
+}
 
-  /* ---- Player bars --- */
+main.round .round__app__board {
+  grid-area: board !important;
+  margin: 0 !important;
+}
 
-  /* Which bar each part goes in, and its offset from the bar's top (`--lr-ext-off`).
-   * playerbar.css draws them. */
-  main.round .ruser-top,
-  main.round .rclock-top,
-  main.round .material-top,
-  main.round .expiration-top {
-    grid-area: user-top !important;
-    --lr-ext-off: var(--lr-ext-inset-t, 0px);
-  }
+/* ---- Player bars --- */
 
-  main.round .ruser-bottom,
-  main.round .rclock-bottom,
-  main.round .material-bottom,
-  main.round .expiration-bottom {
-    grid-area: user-bot !important;
-    --lr-ext-off: calc(var(--lr-ext-coords-off) - var(--lr-ext-inset-b, 0px));
-  }
+/* Which bar each part goes in, and its offset from the bar's top (`--lr-ext-off`).
+ * playerbar.css draws them. */
+main.round .ruser-top,
+main.round .rclock-top,
+main.round .material-top,
+main.round .expiration-top {
+  grid-area: user-top !important;
+  --lr-ext-off: var(--lr-ext-inset-t, 0px);
+}
 
-  /* The bars show captured pieces instead of Lichess's material difference. */
-  main.round .material {
-    display: none !important;
-  }
+main.round .ruser-bottom,
+main.round .rclock-bottom,
+main.round .material-bottom,
+main.round .expiration-bottom {
+  grid-area: user-bot !important;
+  --lr-ext-off: calc(var(--lr-ext-coords-off) - var(--lr-ext-inset-b, 0px));
+}
 
-  main.round .lr-ext-captured--top {
-    grid-area: user-top;
-    --lr-ext-off: var(--lr-ext-inset-t, 0px);
-  }
-  main.round .lr-ext-captured--bottom {
-    grid-area: user-bot;
-    --lr-ext-off: calc(var(--lr-ext-coords-off) - var(--lr-ext-inset-b, 0px));
-  }
+/* The bars show captured pieces instead of Lichess's material difference. */
+main.round .material {
+  display: none !important;
+}
 
-  /* The first-move countdown goes under the name, where captured pieces will be:
-   * centered, it covered the rating and the clock. */
-  main.round .expiration {
-    justify-self: start;
-    align-self: start;
-    height: 18px;
-    margin: calc(var(--lr-ext-off) + 30px) 0 0 calc(50px + var(--lr-ext-inset-l, 0px)) !important;
-    padding: 0 8px;
-    border-radius: 4px !important;
-    font-size: 12px !important;
-    line-height: 18px !important;
-    white-space: nowrap;
-  }
+main.round .lr-ext-captured--top {
+  grid-area: user-top;
+  --lr-ext-off: var(--lr-ext-inset-t, 0px);
+}
+main.round .lr-ext-captured--bottom {
+  grid-area: user-bot;
+  --lr-ext-off: calc(var(--lr-ext-coords-off) - var(--lr-ext-inset-b, 0px));
+}
 
-  main.round .expiration strong {
-    font-size: 13px !important;
-  }
+/* The first-move countdown goes under the name, where captured pieces will be:
+ * centered, it covered the rating and the clock. */
+main.round .expiration {
+  justify-self: start;
+  align-self: start;
+  height: 18px;
+  margin: calc(var(--lr-ext-off) + 30px) 0 0 calc(50px + var(--lr-ext-inset-l, 0px)) !important;
+  padding: 0 8px;
+  border-radius: 4px !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  white-space: nowrap;
+}
 
-  /* ---- Clocks --- */
+main.round .expiration strong {
+  font-size: 13px !important;
+}
 
-  /* Placement only; playerbar.css draws them. */
-  main.round .rclock {
-    justify-self: end;
-    align-self: start;
-    display: flex !important;
-    align-items: center;
-    gap: 6px;
-    /* Level with the avatar, which is as tall as the clock. */
-    margin-top: calc(var(--lr-ext-off) + 8px) !important;
-    margin-right: var(--lr-ext-inset-r, 0px) !important;
-  }
+/* ---- Clocks --- */
 
-  main.round .rclock .bar {
-    display: none !important;
-  }
+/* Placement only; playerbar.css draws them. */
+main.round .rclock {
+  justify-self: end;
+  align-self: start;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  /* Level with the avatar, which is as tall as the clock. */
+  margin-top: calc(var(--lr-ext-off) + 8px) !important;
+  margin-right: var(--lr-ext-inset-r, 0px) !important;
+}
 
-  /* Lichess's clock extras (tournament rank, +time, berserk) go before the clock, which
-   * stays flush with the board's edge. The name leaves them room (playerbar.css). */
-  main.round .rclock > :not(.time, .bar) {
-    order: -1;
-  }
+main.round .rclock .bar {
+  display: none !important;
+}
 
-  /* Keyed on `data-lr-ext-has` (content/layout/has-flags.ts): a `:has()` here would rerun on
-   * every move. */
-  html[data-lr-ext-has~='clock-extras-top'] main.round .ruser-top,
-  html[data-lr-ext-has~='clock-extras-bottom'] main.round .ruser-bottom {
-    --lr-ext-clock-room: 212px;
-  }
+/* Lichess's clock extras (tournament rank, +time, berserk) go before the clock, which
+ * stays flush with the board's edge. The name leaves them room (playerbar.css). */
+main.round .rclock > :not(.time, .bar) {
+  order: -1;
+}
 
-  /* Streamer mode shifts the bottom clock down a board's height, which here pushed it
-   * off the screen. */
-  main.round--streamer .rclock-bottom {
-    transform: none !important;
-  }
+/* Keyed on `data-lr-ext-has` (content/layout/has-flags.ts): a `:has()` here would rerun on
+ * every move. */
+html[data-lr-ext-has~='clock-extras-top'] main.round .ruser-top,
+html[data-lr-ext-has~='clock-extras-bottom'] main.round .ruser-bottom {
+  --lr-ext-clock-room: 212px;
+}
+
+/* Streamer mode shifts the bottom clock down a board's height, which here pushed it
+ * off the screen. */
+main.round--streamer .rclock-bottom {
+  transform: none !important;
 }

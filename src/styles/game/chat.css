@@ -1,30 +1,30 @@
 /* ---- Chat --- */
 
+main.round .mchat {
+  grid-area: chat !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  border-top: 1px solid var(--lr-ext-border);
+  border-radius: 0 0 6px 6px !important;
+  background: var(--lr-ext-bg-panel) !important;
+  box-shadow: none !important;
+}
+
+main.round .mchat__content {
+  min-height: 0;
+  background: transparent !important;
+}
+
+main.round .mchat__messages {
+  max-height: none !important;
+}
+
+/* ---- No scrolling --- */
+
 @media (min-width: 1020px) {
-  main.round .mchat {
-    grid-area: chat !important;
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    overflow: hidden;
-    border-top: 1px solid var(--lr-ext-border);
-    border-radius: 0 0 6px 6px !important;
-    background: var(--lr-ext-bg-panel) !important;
-    box-shadow: none !important;
-  }
-
-  main.round .mchat__content {
-    min-height: 0;
-    background: transparent !important;
-  }
-
-  main.round .mchat__messages {
-    max-height: none !important;
-  }
-
-  /* ---- No scrolling --- */
-
   /* The page never scrolls: what Lichess puts beside the board (game info) is hidden, the
    * crosstable joins the moves (moves-extras.css), and the keyboard-move input sits over the
    * chat. */
