@@ -87,14 +87,14 @@ const fr: GameOverTexts = {
     other: 'Défaite',
   },
   drawLabel: 'Nulle',
-  analysing: 'Un instant, le temps que votre Bilan se prépare…',
+  analysing: 'Un instant, le temps que votre Débrief se prépare…',
   verdict: (result, accuracy) => {
     const opening = { win: 'Belle victoire !', loss: 'Pas cette fois !', draw: 'Partie serrée !' };
     if (accuracy === null) return `${opening[result]} Voyons la partie ensemble.`;
     const close = result === 'loss' ? ' Voyons où elle s’est jouée.' : '';
     return `${opening[result]} Vous avez joué avec ${accuracy} de précision.${close}`;
   },
-  failed: 'Je n’ai pas pu analyser la partie ici : le Bilan vous montrera tout.',
+  failed: 'Je n’ai pas pu analyser la partie ici : le Débrief vous montrera tout.',
   anonymous: 'Anonyme',
   // French counts 0 and 1 as singular.
   countLabel: (moveClass, count) => FR_COUNTS[moveClass][count > 1 ? 1 : 0],
@@ -127,14 +127,14 @@ const en: GameOverTexts = {
     other: 'Lost',
   },
   drawLabel: 'Draw',
-  analysing: 'One moment while your Game Review loads…',
+  analysing: 'One moment while your Debrief loads…',
   verdict: (result, accuracy) => {
     const opening = { win: 'Well played!', loss: 'Not this time!', draw: 'A close game!' };
     if (accuracy === null) return `${opening[result]} Let’s look at the game together.`;
     const close = result === 'loss' ? ' Let’s see where it turned.' : '';
     return `${opening[result]} You played with ${accuracy} accuracy.${close}`;
   },
-  failed: 'I couldn’t analyse the game here: Game Review will show you everything.',
+  failed: 'I couldn’t analyse the game here: the Debrief will show you everything.',
   anonymous: 'Anonymous',
   countLabel: (moveClass, count) => EN_COUNTS[moveClass][count === 1 ? 0 : 1],
 };

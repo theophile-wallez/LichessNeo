@@ -39,8 +39,8 @@ const CLASS_PLURALS: Readonly<Record<MoveClass, string>> = {
 };
 
 const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
-  review: 'Game Review',
-  start: 'Start Review',
+  review: 'Debrief',
+  start: 'Start Debrief',
   summary: 'Summary',
   brief: {
     opening: name => html`This game opened with the <b>${name}</b>.`,
@@ -85,10 +85,10 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   },
   accuracy: 'Accuracy',
   anonymous: 'Anonymous',
-  close: 'Close review',
+  close: 'Close debrief',
   back: 'Back',
   coach: 'Change coach',
-  intro: "Let's review this game!",
+  intro: "Let's debrief this game!",
   engineError: 'The engine failed to start.',
   liveIntro: 'Play a move and I’ll tell you what I think.',
   thinking: 'Let me look at this move…',

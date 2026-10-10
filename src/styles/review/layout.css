@@ -203,23 +203,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
     color: var(--lr-ext-text-strong);
     font-size: 17px;
     font-weight: 800;
-  }
-
-  .lr-ext-review__star {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--lr-ext-accent);
-    color: var(--lr-ext-white);
-    font-size: 14px;
-    line-height: 1;
   }
 
   .lr-ext-review__body {

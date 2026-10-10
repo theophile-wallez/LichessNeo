@@ -120,10 +120,10 @@ main.round .rcontrols .follow-up .fbt:hover:not(.disabled, :disabled) {
 /* Game Review: Lichess's analysis link, always the last button, first in the row. It opens
  * the analysis page, where page/review/ starts the review. */
 html {
-  --lr-ext-t-review: 'Game Review';
+  --lr-ext-t-review: 'Debrief';
 }
 html[lang^='fr'] {
-  --lr-ext-t-review: 'Bilan';
+  --lr-ext-t-review: 'Débrief';
 }
 
 main.round

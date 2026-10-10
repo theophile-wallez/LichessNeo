@@ -232,7 +232,7 @@
     font-size: 18px;
   }
 
-  /* Lichess's "Learn from your mistakes", beside Start Review. */
+  /* Lichess's "Learn from your mistakes", beside Start Debrief. */
   .lr-ext-review__foot .lr-ext-btn.lr-ext-review__learn {
     flex: 1;
     padding-inline: 14px;

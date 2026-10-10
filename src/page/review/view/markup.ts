@@ -51,7 +51,7 @@ export function header(title: string, back: Mode | null, language: ReviewLanguag
       : html`<button class="lr-ext-review__back" data-lr-ext="${back}" aria-label="${ui.back}">${BACK_ICON}</button>`;
   return html`<div class="lr-ext-review__head">
       ${backButton}
-      <div class="lr-ext-review__title"><span class="lr-ext-review__star">★</span>${title}</div>
+      <div class="lr-ext-review__title">${title}</div>
       <button class="lr-ext-review__close" data-lr-ext="normal" data-lr-ext-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button>
     </div>`;
 }

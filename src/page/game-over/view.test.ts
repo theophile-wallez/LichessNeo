@@ -106,7 +106,7 @@ describe('the game over', () => {
     const counts = document.querySelector('.lr-ext-end__counts');
     expect(bubble?.textContent).toBe('');
     await vi.advanceTimersByTimeAsync(SETTLE_MS);
-    expect(bubble?.textContent).toBe('One moment while your Game Review loads…');
+    expect(bubble?.textContent).toBe('One moment while your Debrief loads…');
     expect(counts?.classList.contains('lr-ext-end__counts--spinning')).toBe(true);
     // The moves were counted at once, yet the counts spin a moment.
     await vi.advanceTimersByTimeAsync(MIN_SPIN_MS);

@@ -1,8 +1,8 @@
 {
   "en": {
     "T": {
-      "review": "Game Review",
-      "start": "Start Review",
+      "review": "Debrief",
+      "start": "Start Debrief",
       "next": "Next",
       "explain": "Explain",
       "best": "Best",
@@ -10,10 +10,10 @@
       "players": "Players",
       "accuracy": "Accuracy",
       "anonymous": "Anonymous",
-      "close": "Close review",
+      "close": "Close debrief",
       "back": "Back",
       "coach": "Change coach",
-      "intro": "Let's review this game!",
+      "intro": "Let's debrief this game!",
       "bestWas": "{m} was best.",
       "engineError": "The engine failed to start.",
       "liveIntro": "Play a move and I’ll tell you what I think.",
@@ -203,8 +203,8 @@
   },
   "fr": {
     "T": {
-      "review": "Bilan",
-      "start": "Démarrer le bilan",
+      "review": "Débrief",
+      "start": "Démarrer le débrief",
       "next": "Suivant",
       "explain": "Expliquer",
       "best": "Meilleur",
@@ -212,10 +212,10 @@
       "players": "Joueurs",
       "accuracy": "Précision",
       "anonymous": "Anonyme",
-      "close": "Fermer le bilan",
+      "close": "Fermer le débrief",
       "back": "Retour",
       "coach": "Changer de coach",
-      "intro": "Passons en revue cette partie !",
+      "intro": "Débriefons cette partie !",
       "bestWas": "Le meilleur coup était {m}.",
       "engineError": "Le moteur n'a pas pu démarrer.",
       "liveIntro": "Joue un coup, je te dirai ce que j’en pense.",

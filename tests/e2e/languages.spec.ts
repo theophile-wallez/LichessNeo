@@ -21,8 +21,8 @@ test('the Game Review speaks French', async ({ context, page }) => {
   const { panel, start, next, explain } = reviewParts(page);
   await seedReviewCache(context);
   await openLichess(page, FINISHED_GAME.path);
-  await expect(panel.locator('.lr-ext-review__title')).toHaveText('★Bilan');
-  await expect(start).toHaveText('Démarrer le bilan');
+  await expect(panel.locator('.lr-ext-review__title')).toHaveText('Débrief');
+  await expect(start).toHaveText('Démarrer le débrief');
   await expect(panel.locator('.lr-ext-review__top .lr-ext-t-label').first()).toHaveText('Joueurs');
   await start.click();
   await expect(next).toHaveText('Suivant');

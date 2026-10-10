@@ -32,8 +32,8 @@ const CLASS_PLURALS: Readonly<Record<MoveClass, string>> = {
 };
 
 const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
-  review: 'Bilan',
-  start: 'Démarrer le bilan',
+  review: 'Débrief',
+  start: 'Démarrer le débrief',
   summary: 'Résumé',
   brief: {
     opening: name => html`Ouverture jouée : <b>${name}</b>.`,
@@ -79,10 +79,10 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   },
   accuracy: 'Précision',
   anonymous: 'Anonyme',
-  close: 'Fermer le bilan',
+  close: 'Fermer le débrief',
   back: 'Retour',
   coach: 'Changer de coach',
-  intro: 'Passons en revue cette partie !',
+  intro: 'Débriefons cette partie !',
   engineError: "Le moteur n'a pas pu démarrer.",
   liveIntro: 'Joue un coup, je te dirai ce que j’en pense.',
   thinking: 'Voyons ce coup…',

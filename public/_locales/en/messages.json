@@ -1,6 +1,6 @@
 {
   "extDescription": {
-    "message": "A modern Lichess: a roomy layout, playful pages, your own board, pieces and sounds, and a Game Review for every game.",
+    "message": "A modern Lichess: a roomy layout, playful pages, your own board, pieces and sounds, and a Debrief for every game.",
     "description": "The extension's summary, shown in chrome://extensions and on the Chrome Web Store (132 characters at most)."
   },
   "sidebarCollapse": {
