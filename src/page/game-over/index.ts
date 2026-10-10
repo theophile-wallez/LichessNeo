@@ -20,9 +20,8 @@ import { mountGameOver } from './view.ts';
 // the winner, and a card in the right-hand panel where the coach counts the
 // player's best moves and errors before sending them to Game Review, whose
 // analysis then runs here, so the review is ready when opened, and its
-// figures replace the count's. Only for a game that ends while the page is
-// open: a finished game's page opens on its review instead. A dev build can
-// show it at will (preview.ts).
+// figures replace the count's. A player's game opened once over gets it too,
+// without the confetti. A dev build can show it at will (preview.ts).
 
 const WATCH_MS = 250;
 
@@ -90,6 +89,7 @@ export async function onGameEnd(game: PlayedGame, main: HTMLElement): Promise<vo
     texts,
     coachId: pickCoach(),
     opponent: opponentName(main, game.color, texts.anonymous),
+    live: game.live,
   });
   const positions = finished.treeParts;
   if (!worthReviewing(finished.game.variant.key, positions.length)) {

@@ -144,7 +144,13 @@ export const gameOverTexts = (): GameOverTexts => (isFrench() ? fr : en);
 /** An accuracy of 0 to 100 as the page's language writes a percentage: "87,3 %", "87.3%". */
 // Rounded to the tenth as the review rounds it (toFixed), so that both show 88.8
 // for 88.85, where Intl alone would say 88.9.
-export const formatAccuracy = (accuracy: number): string =>
-  new Intl.NumberFormat(pageLocale(), { style: 'percent', maximumFractionDigits: 1 }).format(
-    Number(accuracy.toFixed(1)) / 100,
-  );
+export const formatAccuracy = (accuracy: number, fractionDigits?: number): string =>
+  new Intl.NumberFormat(pageLocale(), {
+    style: 'percent',
+    minimumFractionDigits: fractionDigits ?? 0,
+    maximumFractionDigits: fractionDigits ?? 1,
+  }).format(Number(accuracy.toFixed(1)) / 100);
+
+/** The tenths `formatAccuracy` writes for an accuracy: none for a whole one. */
+export const accuracyDecimals = (accuracy: number): number =>
+  Number(accuracy.toFixed(1)) % 1 === 0 ? 0 : 1;

@@ -33,13 +33,24 @@ const round = (color: string, spectator?: boolean, status = 'started'): string =
 
 describe('playedGame', () => {
   it('names the game its player watches, and their color', () => {
-    expect(playedGame(round('black'))).toEqual({ gameId: 'abcd1234', color: 'black' });
-    expect(playedGame(round('white', false))).toEqual({ gameId: 'abcd1234', color: 'white' });
+    expect(playedGame(round('black'))).toEqual({ gameId: 'abcd1234', color: 'black', live: true });
+    expect(playedGame(round('white', false, 'created'))).toEqual({
+      gameId: 'abcd1234',
+      color: 'white',
+      live: true,
+    });
   });
 
-  it('leaves out spectators and games already over', () => {
+  it('names a game its player opens once over, as not live', () => {
+    expect(playedGame(round('white', false, 'resign'))).toEqual({
+      gameId: 'abcd1234',
+      color: 'white',
+      live: false,
+    });
+  });
+
+  it('leaves out spectators and other pages', () => {
     expect(playedGame(round('white', true))).toBeNull();
-    expect(playedGame(round('white', false, 'resign'))).toBeNull();
     expect(playedGame(null)).toBeNull();
   });
 });

@@ -18,7 +18,11 @@
   margin: 0;
 }
 
+/* As wide as its final figure (page/game-over/view.ts), its "%" at the right end. */
 .lr-ext-end__accuracy b {
+  align-self: flex-start;
+  box-sizing: border-box;
+  text-align: right;
   font-size: 34px;
   font-weight: 900;
   font-variant-numeric: tabular-nums;

@@ -40,7 +40,7 @@ it('gives the review’s figures when the quick look’s engine never answers', 
   document.body.innerHTML = '<main class="round"><div class="result-wrap"></div></main>';
   const main = queryOne(document, 'main.round', HTMLElement);
   if (!main) throw new Error('no game page');
-  const ended = onGameEnd({ gameId: GAME.id, color: 'white' }, main);
+  const ended = onGameEnd({ gameId: GAME.id, color: 'white', live: true }, main);
   await advance(60_000);
   await ended;
   expect(warned).toHaveBeenCalledWith('[LichessReimagined] game over analysis', expect.any(Error));

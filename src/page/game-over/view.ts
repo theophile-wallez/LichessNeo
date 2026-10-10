@@ -1,4 +1,4 @@
-import { createElement, queryOne, setData } from '#shared/dom.ts';
+import { createElement, queryOne, setData, setStyleProperty } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { badgesMarkup, kingBadges } from './badges.ts';
 import { kingCells } from './board.ts';
@@ -8,7 +8,7 @@ import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from '.
 import { countUp } from './count-up.ts';
 import type { Outcome } from './outcome.ts';
 import type { PlayerSummary } from './quick-review.ts';
-import { formatAccuracy, type GameOverTexts } from './texts.ts';
+import { accuracyDecimals, formatAccuracy, type GameOverTexts } from './texts.ts';
 import { createVoice, type Voice } from './voice.ts';
 
 // The game over (styles/game/game-end.css, game-end-card.css): the kings'
@@ -31,6 +31,8 @@ export interface GameOverInput {
   readonly texts: GameOverTexts;
   readonly coachId: number;
   readonly opponent: string;
+  /** Watched as it ended, not opened once over: only then the winner gets confetti. */
+  readonly live: boolean;
 }
 
 export interface GameOverView {
@@ -64,7 +66,7 @@ function buildLayer(input: GameOverInput): Layer {
   const root = createElement('div', { className: 'lr-ext-end' });
   const kings = createElement('div', { className: 'lr-ext-end__kings' });
   root.append(kings);
-  if (input.outcome.result === 'win') addConfetti(root);
+  if (input.outcome.result === 'win' && input.live) addConfetti(root);
   const holder = createElement('div');
   setHtml(holder, cardMarkup(endCardInput(input)));
   const card = queryOne(holder, '.lr-ext-end__card', HTMLElement);
@@ -120,7 +122,16 @@ function showAccuracy(element: HTMLElement | null, summary: PlayerSummary, from:
     element.textContent = '–';
     return 0;
   }
-  countUp(element, { from, to: summary.accuracy }, formatAccuracy);
+  // As many tenths all along as at the end, and the room the end takes, right-aligned
+  // (game-end-stats.css): the digits change, not where the "%" stands.
+  const decimals = accuracyDecimals(summary.accuracy);
+  const format = (figure: number): string => formatAccuracy(figure, decimals);
+  setStyleProperty(element, 'min-width', null);
+  const shown = element.textContent;
+  element.textContent = format(summary.accuracy);
+  setStyleProperty(element, 'min-width', `${element.offsetWidth}px`);
+  element.textContent = shown;
+  countUp(element, { from, to: summary.accuracy }, format);
   return summary.accuracy;
 }
 

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { formatAccuracy, gameOverTexts } from './texts.ts';
+import { accuracyDecimals, formatAccuracy, gameOverTexts } from './texts.ts';
 
 afterEach(() => {
   document.documentElement.lang = '';
@@ -19,6 +19,14 @@ describe('the game over’s words', () => {
     // 88.85 is a hair under in binary: the review shows 88.8.
     expect(formatAccuracy(88.85)).toBe('88.8%');
     expect(formatAccuracy(82.65)).toBe('82.7%');
+  });
+
+  it('keeps the final figure’s tenths while it counts up to it', () => {
+    document.documentElement.lang = 'en-US';
+    expect(accuracyDecimals(80.5)).toBe(1);
+    expect(accuracyDecimals(80.02)).toBe(0);
+    expect(formatAccuracy(80, accuracyDecimals(80.5))).toBe('80.0%');
+    expect(formatAccuracy(79.96, accuracyDecimals(80))).toBe('80%');
   });
 
   it('speaks French on a French page, English elsewhere', () => {

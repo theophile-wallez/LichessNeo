@@ -76,6 +76,7 @@ function show({ main, player }: Board, outcome: Outcome): void {
     texts,
     coachId: pickCoach(),
     opponent: opponentName(main, player, texts.anonymous),
+    live: true,
   });
   view.analysing();
   setTimeout(() => view.verdict(SAMPLE), SAMPLE_MS);

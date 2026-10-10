@@ -19,7 +19,7 @@ const WIN: Outcome = { result: 'win', reason: 'resign', winner: 'white' };
 const shownCounts = (): string[] =>
   queryAll(document, '.lr-ext-end__count b', HTMLElement).map(number => number.textContent);
 
-function mount(outcome: Outcome): ReturnType<typeof mountGameOver> {
+function mount(outcome: Outcome, live = true): ReturnType<typeof mountGameOver> {
   const main = queryOne(document, 'main.round', HTMLElement);
   if (!main) throw new Error('no game page');
   const input: GameOverInput = {
@@ -28,6 +28,7 @@ function mount(outcome: Outcome): ReturnType<typeof mountGameOver> {
     texts: gameOverTexts(),
     coachId: 2,
     opponent: 'bob',
+    live,
   };
   return mountGameOver(input);
 }
@@ -74,6 +75,12 @@ describe('the game over', () => {
     expect(document.querySelector('.lr-ext-confetti')).toBeNull();
     document.body.innerHTML = ROUND;
     mount({ result: 'loss', reason: 'mate', winner: 'black' });
+    expect(document.querySelector('.lr-ext-confetti')).toBeNull();
+  });
+
+  it('throws none on a game opened once over', () => {
+    mount(WIN, false);
+    expect(document.querySelector('.lr-ext-end__kings')).not.toBeNull();
     expect(document.querySelector('.lr-ext-confetti')).toBeNull();
   });
 
