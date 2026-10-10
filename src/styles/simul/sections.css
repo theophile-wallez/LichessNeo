@@ -1,4 +1,4 @@
-/* Simuls home (main.simul-list), in the Practice look. Lichess renders one table,
+/* Simuls home (main.page-menu.simul-list), in the Practice look. Lichess renders one table,
  * a thead + tbody pair per section. The socket re-renders it (innerHTML), so
  * nothing animates in: it would replay on every update. */
 
@@ -9,7 +9,7 @@ main.page-menu.simul-list {
   padding-bottom: 40px;
 }
 
-main.simul-list .simul-list__content > .box {
+main.page-menu.simul-list .simul-list__content > .box {
   overflow: visible !important;
   padding: 0 !important;
   border: none !important;
@@ -17,7 +17,7 @@ main.simul-list .simul-list__content > .box {
   box-shadow: none !important;
 }
 
-main.simul-list h1.box__top {
+main.page-menu.simul-list h1.box__top {
   justify-content: flex-start !important;
   align-items: center;
   gap: 12px;
@@ -26,7 +26,7 @@ main.simul-list h1.box__top {
 }
 
 /* The board stack, as in the sidebar's Simuls entry. */
-main.simul-list h1.box__top::before {
+main.page-menu.simul-list h1.box__top::before {
   content: '';
   flex: none;
   width: 38px;
@@ -37,35 +37,37 @@ main.simul-list h1.box__top::before {
 
 /* ---- Sections --- */
 
-main.simul-list .slist {
+main.page-menu.simul-list .slist {
   display: block;
   border: none !important;
 }
 
 /* A color per section. Finished is the default: it's always the last. */
-main.simul-list .slist :is(thead, tbody) {
+main.page-menu.simul-list .slist :is(thead, tbody) {
   --lr-ext-simul: #a98bf0;
   --lr-ext-simul-2: var(--lr-ext-purple-dark);
 }
 
 /* Your pending simuls. */
-main.simul-list .slist tbody:has(> tr.scheduled):not(:has(> tr.create)),
-main.simul-list .slist thead:has(+ tbody > tr.scheduled):not(:has(+ tbody > tr.create)) {
+main.page-menu.simul-list .slist tbody:has(> tr.scheduled):not(:has(> tr.create)),
+main.page-menu.simul-list .slist thead:has(+ tbody > tr.scheduled):not(:has(+ tbody > tr.create)) {
   --lr-ext-simul: #f5a93b;
   --lr-ext-simul-2: var(--lr-ext-orange-darker);
 }
 
 /* Open to join, and the "host a simul" row. */
-main.simul-list .slist tbody:has(> tr.create),
-main.simul-list .slist thead:has(+ tbody > tr.create) {
+main.page-menu.simul-list .slist tbody:has(> tr.create),
+main.page-menu.simul-list .slist thead:has(+ tbody > tr.create) {
   --lr-ext-simul: #45a3f5;
   --lr-ext-simul-2: var(--lr-ext-cyan-darker);
 }
 
 /* In progress: plain rows, not the last section. :has() can't nest, so the
  * first row stands for the section. */
-main.simul-list .slist tbody:not(:last-child):not(:has(> tr:first-child:is(.scheduled, .create))),
-main.simul-list
+main.page-menu.simul-list
+  .slist
+  tbody:not(:last-child):not(:has(> tr:first-child:is(.scheduled, .create))),
+main.page-menu.simul-list
   .slist
   thead:has(+ tbody):not(
     :has(+ tbody:last-child),
@@ -75,18 +77,18 @@ main.simul-list
   --lr-ext-simul-2: var(--lr-ext-accent-dim);
 }
 
-main.simul-list .slist :is(thead, thead tr) {
+main.page-menu.simul-list .slist :is(thead, thead tr) {
   display: block;
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 
-main.simul-list .slist thead th:is(.host, .players) {
+main.page-menu.simul-list .slist thead th:is(.host, .players) {
   display: none !important;
 }
 
-main.simul-list .slist thead th:first-child {
+main.page-menu.simul-list .slist thead th:first-child {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -100,7 +102,7 @@ main.simul-list .slist thead th:first-child {
 }
 
 /* The section's marker: a rounded square in its color. */
-main.simul-list .slist thead th:first-child::before {
+main.page-menu.simul-list .slist thead th:first-child::before {
   content: '';
   flex: none;
   width: 12px;
@@ -111,7 +113,7 @@ main.simul-list .slist thead th:first-child::before {
 }
 
 /* In progress: a live dot that pulses instead. */
-main.simul-list
+main.page-menu.simul-list
   .slist
   thead:has(+ tbody):not(
     :has(+ tbody:last-child),
@@ -133,9 +135,10 @@ main.simul-list
   }
 }
 
-main.simul-list .slist tbody {
+/* Lichess stacks the rows below 1020px: tablets keep two columns. */
+main.page-menu.simul-list .slist tbody {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr)) !important;
   gap: 14px;
   margin: 16px 0 36px;
 }

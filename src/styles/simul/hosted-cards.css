@@ -1,0 +1,214 @@
+/* ---- Cards --- */
+
+/* A host's simuls as cards: the board tile and its piece, the name over the time control and
+ * the date, then the score. The simul's link (its ::after) covers the card. */
+main.page-small.simul-list .slist tbody {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 14px;
+}
+
+main.page-small.simul-list .slist tbody tr {
+  --lr-ext-piece: var(---white-king);
+  position: relative;
+  display: grid;
+  grid-template:
+    'tile name' auto
+    'tile meta' auto
+    'score score' auto / 46px minmax(0, 1fr);
+  gap: 6px 14px;
+  padding: 16px;
+  border: 1px solid var(--lr-ext-card-border) !important;
+  border-radius: 12px;
+  background: var(--lr-ext-bg-panel) !important;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.15s !important;
+}
+
+main.page-small.simul-list .slist tbody tr:hover {
+  border-color: color-mix(in srgb, var(--lr-ext-purple) 55%, transparent) !important;
+  transform: translateY(-3px);
+}
+
+main.page-small.simul-list .slist tbody tr:nth-child(3n + 2) {
+  --lr-ext-piece: var(---white-queen);
+}
+
+main.page-small.simul-list .slist tbody tr:nth-child(3n + 3) {
+  --lr-ext-piece: var(---white-knight);
+}
+
+/* The board and its piece share the tile's cell, so the piece sits at its center. */
+main.page-small.simul-list .slist tbody tr::before,
+main.page-small.simul-list .slist tbody tr::after {
+  content: '';
+  grid-area: tile;
+  align-self: center;
+  width: 46px;
+  height: 46px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+main.page-small.simul-list .slist tbody tr::before {
+  border-radius: 9px;
+  background: repeating-conic-gradient(#a98bf0 0 25%, var(--lr-ext-purple-dark) 0 50%) 0 0 / 50% 50%;
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    inset 0 -3px 0 #00000026,
+    4px -4px 0 -1px color-mix(in srgb, var(--lr-ext-purple-dark) 70%, var(--lr-ext-grey-900)),
+    0 4px 10px #00000040;
+}
+
+main.page-small.simul-list .slist tbody tr::after {
+  background: var(--lr-ext-piece) center / 76% no-repeat;
+  filter: drop-shadow(0 2px 2px #00000080);
+  pointer-events: none;
+}
+
+main.page-small.simul-list .slist tbody tr:hover::before {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+main.page-small.simul-list .slist tbody tr:hover::after {
+  animation: lr-ext-simul-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Lichess's speed glyph: the time control says it. */
+main.page-small.simul-list .slist td.icon {
+  display: none;
+}
+
+main.page-small.simul-list .slist td.name {
+  grid-area: name;
+  align-self: end;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.page-small.simul-list .slist td.name a {
+  color: #fff !important;
+  font-weight: 800;
+}
+
+main.page-small.simul-list .slist td.name a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* The time control as a chip, Lichess's color glyph in it, then the date. */
+main.page-small.simul-list .slist td:nth-child(3) {
+  grid-area: meta;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+main.page-small.simul-list .slist td:nth-child(3) br {
+  display: none;
+}
+
+main.page-small.simul-list .slist td .color-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--lr-ext-bg-raised);
+  color: var(--lr-ext-text);
+  font-family: var(--lr-ext-font);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+main.page-small.simul-list .slist td .color-icon::before {
+  margin: 0 !important;
+  font-size: 11px;
+}
+
+main.page-small.simul-list .slist td time {
+  overflow: hidden;
+  color: var(--lr-ext-text-dim);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Score --- */
+
+/* Our numbers replace Lichess's "10 / 1 / 4", then the bar takes what's left of the line. */
+main.page-small.simul-list .slist tbody td:nth-child(4) {
+  grid-area: score;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 12px !important;
+  border-top: 1px solid var(--lr-ext-border) !important;
+  font-size: 0;
+}
+
+main.page-small.simul-list .slist tbody tr[data-lr-ext-score='yes'] td:nth-child(4)::after {
+  content: '';
+  flex: 1;
+  height: 8px;
+  border-radius: 99px;
+  background: linear-gradient(
+    90deg,
+    var(--lr-ext-simul-win) 0 var(--lr-ext-wins),
+    var(--lr-ext-simul-draw) 0 calc(var(--lr-ext-wins) + var(--lr-ext-draws)),
+    var(--lr-ext-simul-loss) 0
+  );
+}
+
+/* A margin, not the cell's gap: Lichess's text, though hidden, is a flex item too. */
+main.page-small.simul-list .lr-ext-simul-score {
+  display: flex;
+  gap: 12px;
+  margin-inline-end: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+main.page-small.simul-list .lr-ext-simul-score > b::after {
+  content: attr(data-lr-ext-label);
+  margin-inline-start: 3px;
+  color: var(--lr-ext-text-dim);
+  font-weight: 600;
+}
+
+main.page-small.simul-list .lr-ext-simul-score > b:nth-child(1) {
+  color: var(--lr-ext-simul-win);
+}
+
+main.page-small.simul-list .lr-ext-simul-score > b:nth-child(2) {
+  color: var(--lr-ext-grey-200);
+}
+
+main.page-small.simul-list .lr-ext-simul-score > b:nth-child(3) {
+  color: var(--lr-ext-simul-loss);
+}
+
+/* ---- Pager --- */
+
+/* The infinite scroll's next page: a plain link under the cards. */
+main.page-small.simul-list .slist tbody tr.pager {
+  display: block;
+  grid-column: 1 / -1;
+  padding: 8px;
+  border: none !important;
+  background: transparent !important;
+  text-align: center;
+  transform: none;
+}
+
+main.page-small.simul-list .slist tbody tr.pager::before,
+main.page-small.simul-list .slist tbody tr.pager::after {
+  content: none;
+}

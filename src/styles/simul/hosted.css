@@ -1,0 +1,188 @@
+/* A host's simuls (/@/<user>/simuls/hosted): the home's cards (cards.css), each with the
+ * host's wins, draws and losses as numbers and a bar (content/pages/simul-scores.ts). Lichess
+ * renders one table: the count, the title and the score's column in the head, a row per
+ * simul (speed, name, time control and date, score), then the infinite scroll's pager. */
+
+/* ---- Page --- */
+
+main.page-small.simul-list {
+  --lr-ext-simul-win: color-mix(in srgb, var(--lr-ext-green) 55%, var(--lr-ext-grey-400));
+  --lr-ext-simul-draw: var(--lr-ext-grey-400);
+  --lr-ext-simul-loss: color-mix(in srgb, var(--lr-ext-red) 60%, var(--lr-ext-grey-400));
+  max-width: 1180px;
+  overflow: visible !important;
+  padding: 0 0 40px !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main.page-small.simul-list .slist {
+  display: block;
+  border: none !important;
+  background: transparent !important;
+}
+
+main.page-small.simul-list .slist :is(thead, tr, th, td) {
+  border: none !important;
+  background: transparent !important;
+}
+
+main.page-small.simul-list .slist :is(th, td) {
+  padding: 0 !important;
+}
+
+/* ---- Title --- */
+
+/* The title, then the count as a pill; the score's column head stays out. */
+main.page-small.simul-list .slist thead {
+  display: block;
+}
+
+main.page-small.simul-list .slist thead tr {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 0 20px;
+}
+
+main.page-small.simul-list .slist thead th[colspan] {
+  order: -1;
+  flex: 1;
+  min-width: 0;
+}
+
+main.page-small.simul-list .slist thead th:last-child {
+  display: none;
+}
+
+main.page-small.simul-list .slist thead h1 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 !important;
+  overflow: hidden;
+  color: #fff;
+  font-size: 28px !important;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The board stack, as in the sidebar's Simuls entry. */
+main.page-small.simul-list .slist thead h1::before {
+  content: '';
+  flex: none;
+  width: 44px;
+  height: 44px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp')
+    center / contain no-repeat;
+}
+
+/* Lichess puts a no-break space after the name, before " simuls". */
+main.page-small.simul-list .slist thead h1 .user-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-inline-end: -0.3em;
+  color: #fff !important;
+}
+
+main.page-small.simul-list .slist thead h1 .user-link .line {
+  display: none;
+}
+
+main.page-small.simul-list .slist thead h1 .utitle {
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--lr-ext-orange) 18%, transparent);
+  color: var(--lr-ext-orange) !important;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+main.page-small.simul-list .slist thead th.count {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px 6px 10px !important;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lr-ext-purple) 16%, transparent) !important;
+  color: var(--lr-ext-purple) !important;
+  font-family: var(--lr-ext-font) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  width: auto;
+}
+
+main.page-small.simul-list .slist thead th.count::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg') center /
+    contain no-repeat;
+}
+
+/* Pinned on desktop, a fade under it once the cards scroll by (Lichess's top bar would cover
+ * it below 1020px). */
+@media (min-width: 1020px) {
+  main.page-small.simul-list .slist thead {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background: var(--lr-ext-bg-page) !important;
+    box-shadow: var(--lr-ext-pin-cover) !important;
+  }
+
+  main.page-small.simul-list .slist thead::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.page-small.simul-list .slist thead::after {
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: 1019.98px) {
+  main.page-small.simul-list {
+    padding: 0 12px 32px !important;
+  }
+
+  main.page-small.simul-list .slist thead tr {
+    gap: 10px;
+    padding: 12px 0 14px;
+  }
+
+  main.page-small.simul-list .slist thead h1 {
+    gap: 10px;
+    font-size: 20px !important;
+  }
+
+  main.page-small.simul-list .slist thead h1::before {
+    width: 34px;
+    height: 34px;
+  }
+
+  main.page-small.simul-list .slist thead h1 .utitle {
+    font-size: 12px;
+  }
+
+  main.page-small.simul-list .slist thead th.count {
+    padding: 4px 10px 4px 8px !important;
+    font-size: 12px !important;
+  }
+}

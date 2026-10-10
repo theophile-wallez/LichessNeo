@@ -2,7 +2,7 @@
 
 /* Tile (::before) and piece (::after), then name and time control, with host
  * and player count as the footer. The simul's link (its ::after) covers the card. */
-main.simul-list .slist tbody tr:not(.create) {
+main.page-menu.simul-list .slist tbody tr:not(.create) {
   --lr-ext-piece: var(---white-king);
   position: relative;
   isolation: isolate;
@@ -19,7 +19,7 @@ main.simul-list .slist tbody tr:not(.create) {
     box-shadow 0.15s !important;
 }
 
-main.simul-list .slist tbody tr:not(.create):hover {
+main.page-menu.simul-list .slist tbody tr:not(.create):hover {
   border-color: color-mix(in srgb, var(--lr-ext-simul) 55%, transparent);
   background: var(--lr-ext-card-hover) !important;
   box-shadow: 0 6px 18px #00000059;
@@ -27,25 +27,25 @@ main.simul-list .slist tbody tr:not(.create):hover {
 }
 
 /* A different piece on each card, so a page of them looks like a set. */
-main.simul-list .slist tbody tr:nth-child(6n + 2) {
+main.page-menu.simul-list .slist tbody tr:nth-child(6n + 2) {
   --lr-ext-piece: var(---white-queen);
 }
-main.simul-list .slist tbody tr:nth-child(6n + 3) {
+main.page-menu.simul-list .slist tbody tr:nth-child(6n + 3) {
   --lr-ext-piece: var(---white-knight);
 }
-main.simul-list .slist tbody tr:nth-child(6n + 4) {
+main.page-menu.simul-list .slist tbody tr:nth-child(6n + 4) {
   --lr-ext-piece: var(---white-rook);
 }
-main.simul-list .slist tbody tr:nth-child(6n + 5) {
+main.page-menu.simul-list .slist tbody tr:nth-child(6n + 5) {
   --lr-ext-piece: var(---white-bishop);
 }
-main.simul-list .slist tbody tr:nth-child(6n + 6) {
+main.page-menu.simul-list .slist tbody tr:nth-child(6n + 6) {
   --lr-ext-piece: var(---white-pawn);
 }
 
 /* A 4x4 board in the section's colors, two more stacked behind it that fan out
  * on hover. */
-main.simul-list .slist tbody tr:not(.create)::before {
+main.page-menu.simul-list .slist tbody tr:not(.create)::before {
   content: '';
   grid-area: tile;
   align-self: start;
@@ -66,7 +66,7 @@ main.simul-list .slist tbody tr:not(.create)::before {
     box-shadow 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-main.simul-list .slist tbody tr:not(.create):hover::before {
+main.page-menu.simul-list .slist tbody tr:not(.create):hover::before {
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
@@ -77,7 +77,7 @@ main.simul-list .slist tbody tr:not(.create):hover::before {
 }
 
 /* The piece hops when the card is hovered. */
-main.simul-list .slist tbody tr:not(.create)::after {
+main.page-menu.simul-list .slist tbody tr:not(.create)::after {
   content: '';
   position: absolute;
   z-index: 1;
@@ -90,7 +90,7 @@ main.simul-list .slist tbody tr:not(.create)::after {
   pointer-events: none;
 }
 
-main.simul-list .slist tbody tr:not(.create):hover::after {
+main.page-menu.simul-list .slist tbody tr:not(.create):hover::after {
   animation: lr-ext-simul-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -100,33 +100,33 @@ main.simul-list .slist tbody tr:not(.create):hover::after {
   }
 }
 
-main.simul-list .slist td {
+main.page-menu.simul-list .slist td {
   min-width: 0;
   padding: 0 !important;
   border: none !important;
 }
 
-main.simul-list .slist td.header {
+main.page-menu.simul-list .slist td.header {
   grid-area: head;
   align-self: center;
   margin-inline-start: 18px;
 }
 
-main.simul-list .slist td.header a {
+main.page-menu.simul-list .slist td.header a {
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: 0 !important;
 }
 
-main.simul-list .slist td.header a::after {
+main.page-menu.simul-list .slist td.header a::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
 }
 
-main.simul-list .slist .name {
+main.page-menu.simul-list .slist .name {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -137,7 +137,7 @@ main.simul-list .slist .name {
   line-height: 1.3;
 }
 
-main.simul-list .slist .setup {
+main.page-menu.simul-list .slist .setup {
   overflow: hidden;
   color: var(--lr-ext-text-dim);
   font-size: 13px;
@@ -147,12 +147,12 @@ main.simul-list .slist .setup {
 }
 
 /* The host sits above the card's link so its hover card still works. */
-main.simul-list .slist td:is(.host, .players) {
+main.page-menu.simul-list .slist td:is(.host, .players) {
   align-self: end;
   margin-top: 16px;
 }
 
-main.simul-list .slist td.host {
+main.page-menu.simul-list .slist td.host {
   grid-area: host;
   position: relative;
   z-index: 2;
@@ -163,11 +163,11 @@ main.simul-list .slist td.host {
   white-space: nowrap;
 }
 
-main.simul-list .slist td.host br {
+main.page-menu.simul-list .slist td.host br {
   display: none;
 }
 
-main.simul-list .slist td.host .user-link {
+main.page-menu.simul-list .slist td.host .user-link {
   overflow: hidden;
   color: var(--lr-ext-text) !important;
   font-size: 13px;
@@ -175,18 +175,18 @@ main.simul-list .slist td.host .user-link {
   text-overflow: ellipsis;
 }
 
-main.simul-list .slist td.host .user-link:hover {
+main.page-menu.simul-list .slist td.host .user-link:hover {
   color: #fff !important;
 }
 
-main.simul-list .slist td.host .uflair {
+main.page-menu.simul-list .slist td.host .uflair {
   width: 1.3em;
   height: 1.3em;
   margin-inline-start: 4px;
   vertical-align: -0.3em;
 }
 
-main.simul-list .slist td.host strong {
+main.page-menu.simul-list .slist td.host strong {
   flex: none;
   color: var(--lr-ext-text-dim);
   font-size: 12px;
@@ -194,15 +194,15 @@ main.simul-list .slist td.host strong {
   font-variant-numeric: tabular-nums;
 }
 
-main.simul-list .slist td.host strong::before {
+main.page-menu.simul-list .slist td.host strong::before {
   content: '(';
 }
 
-main.simul-list .slist td.host strong::after {
+main.page-menu.simul-list .slist td.host strong::after {
   content: ')';
 }
 
-main.simul-list .slist td.players {
+main.page-menu.simul-list .slist td.players {
   grid-area: players;
   display: inline-flex !important;
   align-items: center;
@@ -217,7 +217,7 @@ main.simul-list .slist td.players {
   font-variant-numeric: tabular-nums;
 }
 
-main.simul-list .slist td.players::before {
+main.page-menu.simul-list .slist td.players::before {
   margin: 0 !important;
   color: var(--lr-ext-text-dim);
   font-size: 12px;
@@ -226,7 +226,7 @@ main.simul-list .slist td.players::before {
 /* ---- Host a simul --- */
 
 /* The "host a simul" (or sign up) row: a dashed card across the grid. */
-main.simul-list .slist tr.create {
+main.page-menu.simul-list .slist tr.create {
   display: block;
   grid-column: 1 / -1;
   border: 2px dashed #ffffff1f;
@@ -235,11 +235,11 @@ main.simul-list .slist tr.create {
   transition: border-color 0.15s !important;
 }
 
-main.simul-list .slist tr.create:hover {
+main.page-menu.simul-list .slist tr.create:hover {
   border-color: color-mix(in srgb, var(--lr-ext-accent) 60%, transparent);
 }
 
-main.simul-list .slist tr.create td {
+main.page-menu.simul-list .slist tr.create td {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,7 +247,7 @@ main.simul-list .slist tr.create td {
   padding: 18px 20px !important;
 }
 
-main.simul-list .slist tr.create td::before {
+main.page-menu.simul-list .slist tr.create td::before {
   content: '';
   flex: none;
   width: 48px;
@@ -264,7 +264,7 @@ main.simul-list .slist tr.create td::before {
   }
 }
 
-main.simul-list .slist tr.create .button {
+main.page-menu.simul-list .slist tr.create .button {
   padding: 12px 22px !important;
   font-size: 15px !important;
   white-space: normal;
