@@ -91,7 +91,7 @@ main.swiss-home .swisses thead th {
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 20px !important;
   font-weight: 800 !important;
@@ -189,7 +189,7 @@ main.swiss-home .swisses td.header a::after {
 main.swiss-home .swisses .name {
   overflow: hidden;
   margin-bottom: 3px;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 17px !important;
   font-weight: 800;
   text-overflow: ellipsis;
@@ -201,7 +201,7 @@ main.swiss-home .swisses .team {
 }
 
 main.swiss-home .swisses tr:hover .team {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.swiss-home .swisses .team .uflair {
@@ -230,11 +230,19 @@ main.swiss-home .swisses .rounds[style*='--lr-ext-progress']::after {
   height: 4px;
   margin-top: 5px;
   border-radius: 2px;
-  background: linear-gradient(to right, var(--lr-ext-accent) var(--lr-ext-progress), #ffffff14 0);
+  background: linear-gradient(
+    to right,
+    var(--lr-ext-accent) var(--lr-ext-progress),
+    var(--lr-ext-lift-8) 0
+  );
 }
 
 html[dir='rtl'] main.swiss-home .swisses .rounds[style*='--lr-ext-progress']::after {
-  background: linear-gradient(to left, var(--lr-ext-accent) var(--lr-ext-progress), #ffffff14 0);
+  background: linear-gradient(
+    to left,
+    var(--lr-ext-accent) var(--lr-ext-progress),
+    var(--lr-ext-lift-8) 0
+  );
 }
 
 main.swiss-home .swisses .setup {
@@ -273,7 +281,7 @@ main.swiss-home .swisses .players {
   padding: 3px 9px;
   border-radius: 999px;
   background: var(--lr-ext-bg-raised);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 13px;
   font-weight: 800 !important;
 }

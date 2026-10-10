@@ -38,7 +38,7 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
 
 .relay-index .relay-index__section {
   margin: 32px 0 14px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 20px !important;
   font-weight: 800 !important;
 }
@@ -74,7 +74,7 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
 
 .relay-calendar .calendar-mselect > a:hover {
   background: var(--lr-ext-btn-grey-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .relay-calendar .calendar-mselect__selects {
@@ -175,7 +175,7 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
   flex: none !important;
   justify-content: flex-start !important;
   gap: 8px;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 11px;
   font-weight: 800 !important;
   letter-spacing: 0.04em;
@@ -188,7 +188,7 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
   height: 6px;
   margin-inline-end: -4px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--lr-ext-white);
   box-shadow: 0 0 0 0 #ffffffb3;
   animation: lr-ext-live-pulse 1.6s ease-out infinite;
 }
@@ -213,7 +213,7 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
   margin-inline-start: 4px;
   padding-inline-start: 8px;
   border-inline-start: 1px solid #ffffff4d;
-  color: #fff;
+  color: var(--lr-ext-white);
   font-weight: 700;
   letter-spacing: 0;
 }
@@ -228,7 +228,7 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
 
 .relay-card__title {
   margin: 0 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 15px !important;
   font-weight: 800 !important;
   line-height: 1.3;

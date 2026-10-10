@@ -102,11 +102,11 @@ main.analyse .analyse__controls > .lr-ext-underboard {
 
   main.analyse .analyse__underboard__menu > button:hover,
   main.analyse .analyse__underboard__menu > button.active {
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   main.analyse .analyse__underboard__menu:not([data-lr-ext-tabs]) > button.active {
-    border-bottom-color: #fff !important;
+    border-bottom-color: var(--lr-ext-text-strong) !important;
   }
 
   /* The crosstable's tab: our crosstable (theme/crosstable.css), as a card. */

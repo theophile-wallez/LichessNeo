@@ -87,7 +87,7 @@ html[data-lr-ext-has~='storm'] main {
     var(--lr-ext-storm-icon) center / 46px no-repeat,
     color-mix(in srgb, var(--lr-ext-storm) 18%, var(--lr-ext-bg-raised)) !important;
   box-shadow:
-    inset 0 1px 0 #ffffff1f,
+    inset 0 1px 0 var(--lr-ext-lift-12),
     0 0 0 1px color-mix(in srgb, var(--lr-ext-storm) 35%, transparent);
 }
 
@@ -175,13 +175,13 @@ html[data-lr-ext-has~='storm'] main {
 
 .storm .puz-side__control .button:hover {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .storm .puz-side__control .button.active {
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 /* ---- Highscores --- */
@@ -190,7 +190,7 @@ html[data-lr-ext-has~='storm'] main {
 .storm-play-scores {
   align-items: center;
   gap: 10px;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .storm-play-scores span {
@@ -206,8 +206,9 @@ html[data-lr-ext-has~='storm'] main {
   content: '';
   width: 24px;
   height: 24px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion--ffc689.svg')
-    center / contain no-repeat;
+  background: color-mix(in srgb, var(--lr-ext-orange) 80%, var(--lr-ext-text-strong));
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion.svg') center / contain
+    no-repeat;
 }
 
 .storm-play-scores a {
@@ -224,7 +225,7 @@ html[data-lr-ext-has~='storm'] main {
 
 .storm-play-scores a:hover {
   background: var(--lr-ext-bg-raised-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* A tile per period, the all-time best in gold.
@@ -270,7 +271,7 @@ body.zenable.zen .storm-dashboard__high__periods {
 }
 
 .storm-dashboard__high__period strong {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-size: 28px !important;
   font-weight: 800 !important;
@@ -317,5 +318,5 @@ body.zenable.zen .storm-dashboard__high__periods {
 
 .storm__about__link a:hover {
   background: var(--lr-ext-bg-raised-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }

@@ -58,14 +58,15 @@
   width: 16px;
   height: 16px;
   margin-inline-end: 6px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--a1a5ad.svg')
-    center / contain no-repeat;
+  background: var(--lr-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg') center /
+    contain no-repeat;
   vertical-align: -3px;
 }
 
 .fide-federations .slist thead th:is(:nth-child(3), :nth-child(4), :nth-child(5)) {
   --lr-ext-mode-icon: var(--lr-ext-mode-classical);
-  --lr-ext-mode-color: #2dd4bf;
+  --lr-ext-mode-color: var(--lr-ext-mode-classical-color);
 }
 
 .fide-federations .slist thead th:nth-child(4) {
@@ -130,7 +131,7 @@
 }
 
 .fide-federations .slist tbody td:nth-child(3) {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 16px;
   font-weight: 800;
 }
@@ -140,7 +141,7 @@
   align-items: center;
   gap: 14px;
   min-width: 0;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 16px;
   font-weight: 800 !important;
 }
@@ -183,8 +184,8 @@
   margin: 0 !important;
   border-radius: 50%;
   box-shadow:
-    0 0 0 2px #ffffff1a,
-    0 3px 8px #00000066;
+    0 0 0 2px var(--lr-ext-lift-10),
+    0 3px 8px var(--lr-ext-shade-40);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
@@ -203,6 +204,6 @@
   border-radius: 8px;
   background: var(--lr-ext-btn-grey);
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }

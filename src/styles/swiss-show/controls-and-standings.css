@@ -28,7 +28,7 @@ main.swiss .swiss__controls .pager .fbt {
 
 main.swiss .swiss__controls .pager .fbt:hover:not(:disabled, .disabled) {
   background: var(--lr-ext-bg-raised) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.swiss .swiss__controls .pager .fbt:disabled {
@@ -48,7 +48,7 @@ main.swiss .swiss__controls .pager input {
   padding: 0 12px;
   border-radius: 6px;
   background: var(--lr-ext-bg-raised) !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 14px;
 }
 
@@ -62,7 +62,7 @@ main.swiss .swiss__controls > .fbt {
   border-radius: 6px;
   background: var(--lr-ext-btn-grey) !important;
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font);
   font-size: 14px;
   font-weight: 800;
@@ -175,7 +175,7 @@ main.swiss
 main.swiss
   .swiss__standing:not(.created):has(.pairings :is(.win, .loss, .draw))
   td.rank[data-lr-ext-medal='2'] {
-  color: var(--lr-ext-grey-200);
+  color: var(--lr-ext-neutral-12);
 }
 
 main.swiss
@@ -198,7 +198,7 @@ main.swiss .swiss__standing .player .user-link {
 
 main.swiss .swiss__standing .player .name {
   max-width: 140px;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 14px;
   font-weight: 700;
 }
@@ -235,7 +235,7 @@ main.swiss .swiss__standing .pairings div > * {
   aspect-ratio: 1;
   border: none !important;
   border-radius: 4px;
-  background: #ffffff0a;
+  background: var(--lr-ext-lift-4);
   color: var(--lr-ext-text-dim) !important;
   font-family: var(--lr-ext-font);
   font-size: var(--lr-ext-cell-font);
@@ -269,17 +269,17 @@ main.swiss .swiss__standing .pairings div > * {
 /* Dark on the bright green: white is hard to read there. */
 main.swiss .swiss__standing .pairings .win {
   background: var(--lr-ext-good) !important;
-  color: var(--lr-ext-grey-900) !important;
+  color: var(--lr-ext-ink) !important;
 }
 
 main.swiss .swiss__standing .pairings .loss {
   background: var(--lr-ext-red-dark) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 main.swiss .swiss__standing .pairings .draw {
-  background: var(--lr-ext-grey-400) !important;
-  color: #fff !important;
+  background: var(--lr-ext-neutral-10) !important;
+  color: var(--lr-ext-white) !important;
 }
 
 main.swiss .swiss__standing .pairings .ongoing {
@@ -299,7 +299,7 @@ main.swiss .swiss__standing .pairings a:hover {
 
 main.swiss .swiss__standing td.points {
   padding-inline: 8px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-size: 15px;
   font-weight: 800;

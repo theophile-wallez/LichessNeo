@@ -3,10 +3,17 @@
  * tr[data-uci] draws the arrow on hover): only colors and sizes change. */
 
 .explorer-box {
-  --lr-ext-ex-white: linear-gradient(#fff, var(--lr-ext-grey-100));
-  --lr-ext-ex-draw: var(--lr-ext-grey-400);
-  --lr-ext-ex-black: linear-gradient(var(--lr-ext-grey-700), var(--lr-ext-grey-750));
-  --lr-ext-ex-row-hover: #ffffff0f;
+  /* The sides' colors, the same on either scheme. */
+  --lr-ext-ex-white: linear-gradient(
+    var(--lr-ext-white),
+    color-mix(in srgb, var(--lr-ext-white) 84%, var(--lr-ext-ink))
+  );
+  --lr-ext-ex-draw: color-mix(in srgb, var(--lr-ext-white) 35%, var(--lr-ext-ink));
+  --lr-ext-ex-black: linear-gradient(
+    color-mix(in srgb, var(--lr-ext-white) 8%, var(--lr-ext-ink)),
+    color-mix(in srgb, var(--lr-ext-white) 5%, var(--lr-ext-ink))
+  );
+  --lr-ext-ex-row-hover: var(--lr-ext-lift-6);
 
   /* Lichess underlines the box (.sub-box) in green. */
   border: none !important;
@@ -21,7 +28,7 @@
 }
 
 .explorer-box tr:nth-child(even) {
-  background: #ffffff05 !important;
+  background: var(--lr-ext-lift-2) !important;
 }
 
 .explorer-box tbody tr:hover {
@@ -68,8 +75,8 @@
 }
 
 .explorer-box .explorer-title > button.button-link:hover {
-  background: #ffffff14 !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-8) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The chosen database: a raised grey tab. */
@@ -78,7 +85,7 @@
   min-width: 0;
   background: var(--lr-ext-btn-grey) !important;
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 400;
   white-space: nowrap;
 }
@@ -149,8 +156,8 @@
 }
 
 .explorer-box .explorer-title > .toconf:hover {
-  background: #ffffff14 !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-8) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* ---- Titles --- */
@@ -177,7 +184,7 @@
   border-radius: 6px;
   background: var(--lr-ext-btn-primary);
   box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: #fff;
+  color: var(--lr-ext-white);
   font-family: 'lichess';
   font-size: 15px;
   line-height: 1;
@@ -191,7 +198,7 @@ html.lr-ext-opening-on main.analyse .explorer-box .data > .title:has(> a) {
 .explorer-box .data > .title > a {
   min-width: 0;
   overflow: hidden;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.3;

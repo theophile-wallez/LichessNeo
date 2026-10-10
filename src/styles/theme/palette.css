@@ -1,27 +1,49 @@
-/* The palette: neutral near-black greys, a blue accent and Dracula's hues
- * (draculatheme.com) for the sections. The only place a color is written.
- * Stylesheets name these, or base.css's roles built on them. Each hue's
- * shades are mixed from it, so changing a hue re-tints all of them. White and
- * black overlays (#ffffff14, #00000040) shade whatever is under them, and stay
- * as they are. */
+/* The palette: the hues, and the neutrals a theme tints. Where the interface's colors
+ * are written: stylesheets name these, or base.css's roles built on them.
+ *
+ * Most values here depend on the color scheme, which is Lichess's own
+ * (html.light, set by its Theme menu or the device), so that a rule written
+ * once reads on both: the neutrals run from the page's deepest background (1)
+ * to its strongest text (14) in either scheme, and the hues deepen on the
+ * light one to read on white. A theme (content/colors) only sets
+ * --lr-ext-tint-hue, --lr-ext-tint-chroma and --lr-ext-accent per scheme.
+ *
+ * White and black overlays on a fill, a picture or the board (#ffffff14,
+ * #00000040) shade whatever is under them, and stay as they are.
+ *
+ * A [data-lr-ext-palette] element gets the whole palette again from its own
+ * theme variables: the settings' previews show a theme that isn't on. */
 
+/* The default theme, Reimagined: near-neutral greys and a blue accent. */
 :root {
-  /* Neutral greys, from the darkest, near black as on Linear. */
-  --lr-ext-grey-950: #09090a;
-  --lr-ext-grey-900: #0c0c0d;
-  --lr-ext-grey-850: #101011;
-  --lr-ext-grey-800: #141415;
-  --lr-ext-grey-750: #19191b;
-  --lr-ext-grey-700: #1f1f21;
-  --lr-ext-grey-650: #262628;
-  --lr-ext-grey-600: #2e2e31;
-  --lr-ext-grey-500: #424246;
-  --lr-ext-grey-400: #5f6068;
-  --lr-ext-grey-300: #8a8f98;
-  --lr-ext-grey-200: #b4b6bc;
-  --lr-ext-grey-100: #d6d7da;
-  --lr-ext-grey-50: #f7f8f8;
+  --lr-ext-tint-hue: 286;
+  --lr-ext-tint-chroma: 0.004;
+  --lr-ext-accent: #5e6ad2;
+}
 
+:root.light {
+  --lr-ext-tint-chroma: 0.006;
+}
+
+:root,
+[data-lr-ext-palette] {
+  /* Lightness steps measured off the original greys, near black as on Linear. */
+  --lr-ext-neutral-1: oklch(14% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-2: oklch(15.5% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-3: oklch(17.3% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-4: oklch(19.2% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-5: oklch(21.4% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-6: oklch(24% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-7: oklch(26.9% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-8: oklch(30.2% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-9: oklch(38.1% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-10: oklch(49.1% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-11: oklch(64.9% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-12: oklch(77.6% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-13: oklch(87.9% calc(var(--lr-ext-tint-chroma) / 2) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-14: oklch(97.8% calc(var(--lr-ext-tint-chroma) / 2) var(--lr-ext-tint-hue));
+
+  /* Dracula's hues (draculatheme.com) for the sections, and our blue. */
   --lr-ext-blue: #5e6ad2;
   --lr-ext-red: #ff5555;
   --lr-ext-orange: #ffb86c;
@@ -31,6 +53,137 @@
   --lr-ext-purple: #bd93f9;
   --lr-ext-pink: #ff79c6;
 
+  /* The players in a game's charts and bars: White's lighter, Black's darker. */
+  --lr-ext-side-white: #ebeae8;
+  --lr-ext-side-black: #8b8987;
+
+  /* Shadows and the wells sunk into a surface. */
+  --lr-ext-shade-2: #00000005;
+  --lr-ext-shade-3: #00000008;
+  --lr-ext-shade-4: #0000000a;
+  --lr-ext-shade-5: #0000000d;
+  --lr-ext-shade-6: #0000000f;
+  --lr-ext-shade-7: #00000012;
+  --lr-ext-shade-8: #00000014;
+  --lr-ext-shade-10: #0000001a;
+  --lr-ext-shade-12: #0000001f;
+  --lr-ext-shade-15: #00000026;
+  --lr-ext-shade-18: #0000002e;
+  --lr-ext-shade-20: #00000033;
+  --lr-ext-shade-25: #00000040;
+  --lr-ext-shade-30: #0000004d;
+  --lr-ext-shade-35: #00000059;
+  --lr-ext-shade-40: #00000066;
+  --lr-ext-shade-45: #00000073;
+  --lr-ext-shade-50: #0000007f;
+  --lr-ext-shade-55: #0000008c;
+  --lr-ext-shade-60: #00000099;
+  --lr-ext-shade-65: #000000a6;
+  --lr-ext-shade-70: #000000b3;
+  --lr-ext-shade-80: #000000cc;
+  --lr-ext-shade-85: #000000d9;
+  --lr-ext-shade-90: #000000e5;
+
+  color-scheme: dark;
+}
+
+:root.light,
+[data-lr-ext-palette='light'] {
+  /* Text keeps 4.5:1 on the page from step 11, and 3:1 from step 10. */
+  --lr-ext-neutral-1: oklch(100% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-2: oklch(99.3% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-3: oklch(98.5% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-4: oklch(96.8% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-5: oklch(95.4% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-6: oklch(93.4% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-7: oklch(91.2% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-8: oklch(88.6% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-9: oklch(80% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-10: oklch(63% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-11: oklch(54% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-12: oklch(44% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-13: oklch(30% calc(var(--lr-ext-tint-chroma) / 2) var(--lr-ext-tint-hue));
+  --lr-ext-neutral-14: oklch(18% calc(var(--lr-ext-tint-chroma) / 2) var(--lr-ext-tint-hue));
+
+  /* Dracula's hues read on dark only: these keep about 3:1 on white. */
+  --lr-ext-red: #e5484d;
+  --lr-ext-orange: #e3700d;
+  --lr-ext-yellow: #b98a0c;
+  --lr-ext-green: #1e9e50;
+  --lr-ext-cyan: #0a97bb;
+  --lr-ext-purple: #8b5cf6;
+  --lr-ext-pink: #e0479e;
+
+  /* White itself would vanish on the page. */
+  --lr-ext-side-white: var(--lr-ext-neutral-9);
+  --lr-ext-side-black: var(--lr-ext-neutral-12);
+
+  /* Half as strong as on dark, in the text's tint rather than black. */
+  --lr-ext-shade-2: color-mix(in srgb, var(--lr-ext-neutral-14) 1%, transparent);
+  --lr-ext-shade-3: color-mix(in srgb, var(--lr-ext-neutral-14) 1.5%, transparent);
+  --lr-ext-shade-4: color-mix(in srgb, var(--lr-ext-neutral-14) 2%, transparent);
+  --lr-ext-shade-5: color-mix(in srgb, var(--lr-ext-neutral-14) 2.5%, transparent);
+  --lr-ext-shade-6: color-mix(in srgb, var(--lr-ext-neutral-14) 3%, transparent);
+  --lr-ext-shade-7: color-mix(in srgb, var(--lr-ext-neutral-14) 3.5%, transparent);
+  --lr-ext-shade-8: color-mix(in srgb, var(--lr-ext-neutral-14) 4%, transparent);
+  --lr-ext-shade-10: color-mix(in srgb, var(--lr-ext-neutral-14) 5%, transparent);
+  --lr-ext-shade-12: color-mix(in srgb, var(--lr-ext-neutral-14) 6%, transparent);
+  --lr-ext-shade-15: color-mix(in srgb, var(--lr-ext-neutral-14) 7.5%, transparent);
+  --lr-ext-shade-18: color-mix(in srgb, var(--lr-ext-neutral-14) 9%, transparent);
+  --lr-ext-shade-20: color-mix(in srgb, var(--lr-ext-neutral-14) 10%, transparent);
+  --lr-ext-shade-25: color-mix(in srgb, var(--lr-ext-neutral-14) 12.5%, transparent);
+  --lr-ext-shade-30: color-mix(in srgb, var(--lr-ext-neutral-14) 15%, transparent);
+  --lr-ext-shade-35: color-mix(in srgb, var(--lr-ext-neutral-14) 17.5%, transparent);
+  --lr-ext-shade-40: color-mix(in srgb, var(--lr-ext-neutral-14) 20%, transparent);
+  --lr-ext-shade-45: color-mix(in srgb, var(--lr-ext-neutral-14) 22.5%, transparent);
+  --lr-ext-shade-50: color-mix(in srgb, var(--lr-ext-neutral-14) 25%, transparent);
+  --lr-ext-shade-55: color-mix(in srgb, var(--lr-ext-neutral-14) 27.5%, transparent);
+  --lr-ext-shade-60: color-mix(in srgb, var(--lr-ext-neutral-14) 30%, transparent);
+  --lr-ext-shade-65: color-mix(in srgb, var(--lr-ext-neutral-14) 32.5%, transparent);
+  --lr-ext-shade-70: color-mix(in srgb, var(--lr-ext-neutral-14) 35%, transparent);
+  --lr-ext-shade-80: color-mix(in srgb, var(--lr-ext-neutral-14) 40%, transparent);
+  --lr-ext-shade-85: color-mix(in srgb, var(--lr-ext-neutral-14) 42.5%, transparent);
+  --lr-ext-shade-90: color-mix(in srgb, var(--lr-ext-neutral-14) 45%, transparent);
+
+  color-scheme: light;
+}
+
+:root,
+[data-lr-ext-palette] {
+  /* On a fill of the accent or a deep hue, and on a bright hue (green, yellow,
+   * cyan, orange, pink), where white can't be read. Both fixed. */
+  --lr-ext-white: #fff;
+  --lr-ext-ink: #0c0c0d;
+
+  /* The text color over a surface, from a hairline to a hover: white on dark,
+   * ink on light. */
+  --lr-ext-lift-2: color-mix(in srgb, var(--lr-ext-neutral-14) 2%, transparent);
+  --lr-ext-lift-3: color-mix(in srgb, var(--lr-ext-neutral-14) 3%, transparent);
+  --lr-ext-lift-4: color-mix(in srgb, var(--lr-ext-neutral-14) 4%, transparent);
+  --lr-ext-lift-5: color-mix(in srgb, var(--lr-ext-neutral-14) 5%, transparent);
+  --lr-ext-lift-6: color-mix(in srgb, var(--lr-ext-neutral-14) 6%, transparent);
+  --lr-ext-lift-7: color-mix(in srgb, var(--lr-ext-neutral-14) 7%, transparent);
+  --lr-ext-lift-8: color-mix(in srgb, var(--lr-ext-neutral-14) 8%, transparent);
+  --lr-ext-lift-10: color-mix(in srgb, var(--lr-ext-neutral-14) 10%, transparent);
+  --lr-ext-lift-12: color-mix(in srgb, var(--lr-ext-neutral-14) 12%, transparent);
+  --lr-ext-lift-15: color-mix(in srgb, var(--lr-ext-neutral-14) 15%, transparent);
+  --lr-ext-lift-18: color-mix(in srgb, var(--lr-ext-neutral-14) 18%, transparent);
+  --lr-ext-lift-20: color-mix(in srgb, var(--lr-ext-neutral-14) 20%, transparent);
+  --lr-ext-lift-25: color-mix(in srgb, var(--lr-ext-neutral-14) 25%, transparent);
+  --lr-ext-lift-30: color-mix(in srgb, var(--lr-ext-neutral-14) 30%, transparent);
+  --lr-ext-lift-35: color-mix(in srgb, var(--lr-ext-neutral-14) 35%, transparent);
+  --lr-ext-lift-40: color-mix(in srgb, var(--lr-ext-neutral-14) 40%, transparent);
+  --lr-ext-lift-45: color-mix(in srgb, var(--lr-ext-neutral-14) 45%, transparent);
+  --lr-ext-lift-50: color-mix(in srgb, var(--lr-ext-neutral-14) 50%, transparent);
+  --lr-ext-lift-55: color-mix(in srgb, var(--lr-ext-neutral-14) 55%, transparent);
+  --lr-ext-lift-60: color-mix(in srgb, var(--lr-ext-neutral-14) 60%, transparent);
+  --lr-ext-lift-65: color-mix(in srgb, var(--lr-ext-neutral-14) 65%, transparent);
+  --lr-ext-lift-70: color-mix(in srgb, var(--lr-ext-neutral-14) 70%, transparent);
+  --lr-ext-lift-80: color-mix(in srgb, var(--lr-ext-neutral-14) 80%, transparent);
+  --lr-ext-lift-85: color-mix(in srgb, var(--lr-ext-neutral-14) 85%, transparent);
+  --lr-ext-lift-90: color-mix(in srgb, var(--lr-ext-neutral-14) 90%, transparent);
+
+  /* Each hue's shades are mixed from it, so changing a hue re-tints all of them. */
   --lr-ext-blue-light: color-mix(in srgb, var(--lr-ext-blue) 80%, #fff);
   --lr-ext-blue-dark: color-mix(in srgb, var(--lr-ext-blue) 80%, #000);
   --lr-ext-blue-darker: color-mix(in srgb, var(--lr-ext-blue) 60%, #000);

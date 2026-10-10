@@ -30,7 +30,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 
 .lr-ext-speeds__title {
   margin: 0;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 17px;
   font-weight: 800;
 }
@@ -44,7 +44,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   border: 1px solid var(--lr-ext-card-border);
   border-radius: 999px;
   background: var(--lr-ext-bg-panel);
-  color: var(--lr-ext-grey-100);
+  color: var(--lr-ext-neutral-13);
   font: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -57,7 +57,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 .lr-ext-speeds__custom:hover {
   border-color: var(--lr-ext-card-border-hover);
   background: var(--lr-ext-btn-grey);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 .lr-ext-speeds__custom .lr-ext-hi {
@@ -81,7 +81,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   border-radius: 999px;
   background: color-mix(in srgb, var(--lr-ext-accent) 16%, transparent);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 40%, transparent);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 14px;
   font-weight: 700;
 }
@@ -108,7 +108,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   border-radius: 999px;
   background: var(--lr-ext-btn-grey);
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font: inherit;
   font-size: 13px;
   cursor: pointer;
@@ -134,8 +134,8 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   border-radius: 16px;
   background: var(--lr-ext-bg-panel);
   box-shadow:
-    inset 0 1px 0 #ffffff0d,
-    0 10px 28px #00000033;
+    inset 0 1px 0 var(--lr-ext-lift-5),
+    0 10px 28px var(--lr-ext-shade-20);
 }
 
 .lr-ext-speed__top {
@@ -151,7 +151,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   align-items: center;
   gap: 8px;
   min-width: 0;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 16px;
   font-weight: 700;
   white-space: nowrap;
@@ -190,7 +190,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   padding: 2px 9px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
-  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, #fff) !important;
+  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, var(--lr-ext-text-strong)) !important;
   font-size: 12.5px;
   font-weight: 800;
   white-space: nowrap;
@@ -214,14 +214,14 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 }
 
 .lr-ext-speed__stats:hover .lr-ext-speed__rating {
-  color: color-mix(in srgb, var(--lr-ext-speed-color) 45%, #fff);
+  color: color-mix(in srgb, var(--lr-ext-speed-color) 45%, var(--lr-ext-text-strong));
 }
 
 .lr-ext-speed__rating {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 30px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -238,7 +238,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   height: 22px;
   border-radius: 50%;
   background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
-  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, #fff);
+  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, var(--lr-ext-text-strong));
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0;
@@ -247,7 +247,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 }
 
 .lr-ext-speed__rating--none {
-  color: var(--lr-ext-grey-400);
+  color: var(--lr-ext-neutral-10);
 }
 
 .lr-ext-speed__curve {
@@ -262,7 +262,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   box-sizing: border-box;
   height: 28px;
   margin-bottom: 12px;
-  border-bottom: 1px dashed #ffffff1f;
+  border-bottom: 1px dashed var(--lr-ext-lift-12);
 }
 
 .lr-ext-speed__line {
@@ -301,7 +301,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   border-radius: 8px;
   background: var(--lr-ext-btn-grey);
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font: inherit;
   font-size: 14.5px;
   font-weight: 700;
@@ -320,6 +320,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 .lr-ext-speed__pool--last {
   background: var(--lr-ext-btn-primary);
   box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: var(--lr-ext-white);
 }
 
 .lr-ext-speed__pool--last:hover {

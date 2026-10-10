@@ -28,6 +28,11 @@ main.swiss .swiss__meta section[data-icon]:first-child {
   line-height: 1.4;
 }
 
+/* A data URI can't read a variable: the light scheme's tile is written out too. */
+html.light main.swiss .swiss__meta section[data-icon]:first-child {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52'%3E%3Crect width='52' height='52' rx='12' fill='%23e6e6ea'/%3E%3C/svg%3E");
+}
+
 html[dir='rtl'] main.swiss .swiss__meta section[data-icon]:first-child {
   background-position: right center;
 }
@@ -48,7 +53,7 @@ main.swiss .swiss__meta section[data-icon]:first-child > div {
 
 main.swiss .swiss__meta section[data-icon]:first-child p:first-child {
   margin-bottom: 3px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 16px;
   font-weight: 800;
 }
@@ -74,11 +79,19 @@ main.swiss .swiss__meta p[style*='--lr-ext-progress']::after {
   height: 4px;
   margin-top: 6px;
   border-radius: 2px;
-  background: linear-gradient(to right, var(--lr-ext-accent) var(--lr-ext-progress), #ffffff14 0);
+  background: linear-gradient(
+    to right,
+    var(--lr-ext-accent) var(--lr-ext-progress),
+    var(--lr-ext-lift-8) 0
+  );
 }
 
 html[dir='rtl'] main.swiss .swiss__meta p[style*='--lr-ext-progress']::after {
-  background: linear-gradient(to left, var(--lr-ext-accent) var(--lr-ext-progress), #ffffff14 0);
+  background: linear-gradient(
+    to left,
+    var(--lr-ext-accent) var(--lr-ext-progress),
+    var(--lr-ext-lift-8) 0
+  );
 }
 
 main.swiss .swiss__meta .description {
@@ -103,7 +116,7 @@ main.swiss .swiss__meta > a.text[href^='/team/'] {
   padding: 5px 12px;
   border-radius: 999px;
   background: var(--lr-ext-bg-raised);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 13px;
   font-weight: 700;
   transition: background-color 0.15s !important;
@@ -172,7 +185,7 @@ main.swiss .swiss__meta > small {
 }
 
 main.swiss .swiss__meta > small .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }
 

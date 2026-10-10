@@ -9,11 +9,11 @@
 /* ---- mselect --- */
 
 .mselect__label {
-  border: 1px solid var(--lr-ext-grey-650) !important;
+  border: 1px solid var(--lr-ext-neutral-7) !important;
   border-radius: 8px !important;
   background: var(--lr-ext-bg-raised) !important;
   box-shadow: none !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-weight: 600;
   text-shadow: none !important;
   transition:
@@ -27,7 +27,7 @@
 }
 
 .mselect__toggle:checked ~ .mselect__label {
-  border-color: var(--lr-ext-grey-500) !important;
+  border-color: var(--lr-ext-neutral-9) !important;
 }
 
 /* Lichess's green triangle becomes a dim chevron. */
@@ -48,7 +48,7 @@
 
 .mselect__label:hover::after,
 .mselect__toggle:checked ~ .mselect__label::after {
-  background: #fff;
+  background: var(--lr-ext-text-strong);
 }
 
 .mselect__toggle:checked ~ .mselect__label::after {
@@ -145,13 +145,13 @@ div.mselect__item {
 .mselect__item:hover,
 .mselect__item:focus-visible {
   background: var(--lr-ext-menu-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   outline: none !important;
 }
 
 .mselect__item.current {
   background: transparent !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }
 

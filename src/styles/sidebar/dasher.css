@@ -1,10 +1,12 @@
 /* ---- User menu (dasher) --- */
 
 /* Lichess paints the dasher's hovers and current choice with --c-dasher: make it
- * the menu's hover grey. */
+ * the menu's hover grey. Their text is --c-over, the color over its accent: the
+ * text's own here, or it's white on the light scheme's grey. */
 #top #dasher_app {
   --c-dasher: var(--lr-ext-menu-hover) !important;
   --c-dasher-light: var(--lr-ext-menu-hover) !important;
+  --c-over: var(--lr-ext-text-strong) !important;
   --lr-ext-sound-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
   --lr-ext-theme-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
   --lr-ext-board-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-view.svg');
@@ -29,7 +31,7 @@
 #dasher_app .subs:not(:first-child) {
   margin: 6px -6px 0;
   padding: 6px 6px 0 !important;
-  border-top: 1px solid #ffffff14 !important;
+  border-top: 1px solid var(--lr-ext-lift-8) !important;
 }
 
 /* Rows: account links, sub-menu buttons, zen mode. */
@@ -52,7 +54,7 @@
 
 #dasher_app :is(.links a, .links button, .subs .sub, .zen button):hover {
   background: var(--lr-ext-menu-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The icon column: Lichess glyphs, the online dot, our masks. */
@@ -70,7 +72,7 @@
 }
 
 #dasher_app :is(.links a, .links button, .subs .sub, .zen button):hover::before {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The account links' glyphs are painted as their Hugeicons (theme/hugeicons): through the
@@ -101,7 +103,7 @@
 }
 
 #dasher_app .subs .sub:not(.language):hover::before {
-  background: #fff !important;
+  background: var(--lr-ext-text-strong) !important;
 }
 
 /* Sub-menus are matched by position: their labels are localized. */
@@ -125,7 +127,7 @@
 }
 
 #dasher_app .subs .sub:hover::after {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 #dasher_app .logout button:hover {
@@ -139,13 +141,13 @@
   gap: 10px;
   margin: 6px -6px 0;
   padding: 10px 18px 6px !important;
-  border-top: 1px solid #ffffff14 !important;
+  border-top: 1px solid var(--lr-ext-lift-8) !important;
   color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
 }
 
 #dasher_app .status:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 #dasher_app .status :is(.ping, .server) {
@@ -180,8 +182,8 @@
   height: 44px;
   margin: -6px -6px 6px;
   padding: 0 16px !important;
-  border-bottom: 1px solid #ffffff14 !important;
-  color: #fff !important;
+  border-bottom: 1px solid var(--lr-ext-lift-8) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 15px;
   font-weight: 700;
 }
@@ -194,7 +196,7 @@
 }
 
 #dasher_app .head:hover::before {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 #dasher_app :is(.selector button, .langs form button) {
@@ -216,12 +218,12 @@
 #top #dasher_app :is(.selector button.active, .langs .current, .langs .accepted) {
   border: none !important;
   background: none !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 #top #dasher_app :is(.selector button, .langs form button):hover {
   background: var(--lr-ext-menu-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 #top #dasher_app .selector button::before,
@@ -254,7 +256,7 @@
 
 #top #dasher_app .langs .help:hover {
   background: var(--lr-ext-menu-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 #dasher_app .langs .help::before {

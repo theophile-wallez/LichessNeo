@@ -21,7 +21,7 @@
     margin-top: 0;
   }
 
-  /* A black piece named in the text vanishes on the dark card: a light edge outlines it, as
+  /* A black piece named in the text vanishes on a dark card: a dim edge outlines it, as
      the captured pieces' (playerbar.css). A chip's grey keeps its own visible. */
   #lr-ext-review
     .lr-ext-bubble__sub
@@ -67,7 +67,7 @@
   }
 
   #lr-ext-review .lr-ext-bubble .lr-ext-mv--play:hover {
-    background: var(--lr-ext-grey-500);
+    background: var(--lr-ext-neutral-9);
   }
 
   .lr-ext-bubble__actions {
@@ -88,7 +88,7 @@
   #lr-ext-review .lr-ext-bubble__retry,
   #lr-ext-review .lr-ext-bubble__retry:hover {
     background: var(--lr-ext-btn-primary);
-    color: #fff;
+    color: var(--lr-ext-white);
   }
 
   .lr-ext-bubble__row--retry .lr-ext-bubble__title {
@@ -98,7 +98,7 @@
   /* The coach's advice on the move's time (view/verdict.ts): a tinted box, a bulb and a
      title, in orange; praise for a long think that paid off, in green. */
   .lr-ext-advice {
-    --lr-ext-advice: #ffb86c;
+    --lr-ext-advice: var(--lr-ext-orange);
     margin-top: 8px;
     padding: 8px 10px;
     border-radius: 10px;
@@ -107,7 +107,7 @@
   }
 
   .lr-ext-advice--praise {
-    --lr-ext-advice: #50fa7b;
+    --lr-ext-advice: var(--lr-ext-green);
   }
 
   .lr-ext-advice__title {
@@ -129,7 +129,7 @@
 
   .lr-ext-advice__text {
     margin: 0;
-    color: var(--lr-ext-grey-100);
+    color: var(--lr-ext-neutral-13);
     font-size: 13px;
     line-height: 1.35;
   }
@@ -144,7 +144,7 @@
   }
 
   .lr-ext-tag {
-    --lr-ext-tag: var(--lr-ext-grey-300);
+    --lr-ext-tag: var(--lr-ext-text-dim);
     padding: 2px 8px;
     border-radius: 999px;
     background: color-mix(in srgb, var(--lr-ext-tag) 16%, transparent);
@@ -156,16 +156,16 @@
 
   .lr-ext-tag--fork,
   .lr-ext-tag--sacrifice {
-    --lr-ext-tag: #c792ea;
+    --lr-ext-tag: color-mix(in srgb, var(--lr-ext-purple) 80%, var(--lr-ext-text-strong));
   }
 
   .lr-ext-tag--hanging,
   .lr-ext-tag--cost {
-    --lr-ext-tag: #ff7b72;
+    --lr-ext-tag: color-mix(in srgb, var(--lr-ext-red) 80%, var(--lr-ext-text-strong));
   }
 
   .lr-ext-tag--mate {
-    --lr-ext-tag: #ffb86c;
+    --lr-ext-tag: var(--lr-ext-orange);
   }
 
   /* The time, after a stopwatch; orange when rushed or short of time, green when it paid off. */
@@ -186,11 +186,11 @@
 
   .lr-ext-tag--rushed,
   .lr-ext-tag--timeTrouble {
-    --lr-ext-tag: #ffb86c;
+    --lr-ext-tag: var(--lr-ext-orange);
   }
 
   .lr-ext-tag--paidOff {
-    --lr-ext-tag: #50fa7b;
+    --lr-ext-tag: var(--lr-ext-green);
   }
 
   /* ---- Brief --- */
@@ -211,8 +211,8 @@
     height: 26px;
     padding: 0 10px;
     border-radius: 999px;
-    background: var(--lr-ext-grey-600);
-    color: var(--lr-ext-grey-50);
+    background: var(--lr-ext-neutral-8);
+    color: var(--lr-ext-text-strong);
     font-size: 12px;
     font-weight: 600;
   }

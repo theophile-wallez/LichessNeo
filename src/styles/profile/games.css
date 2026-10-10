@@ -8,7 +8,7 @@
   margin: 12px 12px 0;
   padding: 5px !important;
   border-radius: 10px;
-  background: var(--lr-ext-grey-950) !important;
+  background: var(--lr-ext-neutral-1) !important;
 }
 
 .user-show .angle-content > #games .nm-item,
@@ -46,13 +46,13 @@
 }
 
 .user-show .angle-content > #games .nm-item:hover {
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show .angle-content > #games .nm-item.active {
   background: var(--lr-ext-bg-raised) !important;
-  box-shadow: 0 1px 3px #00000080;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
   color: var(--lr-ext-text-strong) !important;
 }
 
@@ -107,7 +107,7 @@
   padding: 12px 14px !important;
   border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px;
-  background: #ffffff06 !important;
+  background: var(--lr-ext-lift-3) !important;
   transition:
     background-color 0.15s,
     border-color 0.15s,
@@ -230,7 +230,7 @@
   display: inline-block;
   padding: 2px 9px;
   border-radius: 999px;
-  background: #ffffff12;
+  background: var(--lr-ext-lift-7);
   font-weight: 700;
 }
 

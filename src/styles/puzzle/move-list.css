@@ -45,7 +45,7 @@
     position: absolute;
     z-index: -1;
     inset: 0 -100vw 0 0;
-    background: var(--lr-ext-grey-850);
+    background: var(--lr-ext-neutral-3);
   }
 
   main.puzzle .tview2-column > move {
@@ -66,18 +66,18 @@
   }
 
   main.puzzle .tview2-column > move:hover {
-    background: #ffffff14 !important;
-    color: #fff !important;
+    background: var(--lr-ext-lift-8) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   main.puzzle .tview2-column > move.active {
-    background: #ffffff26 !important;
-    color: #fff !important;
+    background: var(--lr-ext-lift-15) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   /* Where the puzzle starts. */
   main.puzzle .tview2-column > move.current {
-    box-shadow: inset 0 0 0 1px #ffffff3d;
+    box-shadow: inset 0 0 0 1px var(--lr-ext-lift-25);
   }
 
   main.puzzle .tview2-column > move.empty {
@@ -108,9 +108,9 @@
     height: 18px;
     margin: 0 !important;
     border-radius: 50%;
-    background: var(--lr-ext-glyph, var(--lr-ext-grey-400));
-    box-shadow: 0 1px 0 #0000004d;
-    color: #fff !important;
+    background: var(--lr-ext-glyph, var(--lr-ext-neutral-10));
+    box-shadow: 0 1px 0 var(--lr-ext-shade-30);
+    color: var(--lr-ext-white) !important;
     font-family: var(--lr-ext-font) !important;
     font-size: 11px !important;
     font-weight: 900;
@@ -133,7 +133,7 @@
     margin: 4px 8px 6px !important;
     padding: 8px 10px !important;
     border: none !important;
-    border-left: 3px solid var(--lr-ext-grey-500) !important;
+    border-left: 3px solid var(--lr-ext-neutral-9) !important;
     border-radius: 5px !important;
     background: var(--lr-ext-bg-panel-dark) !important;
     box-shadow: none !important;
@@ -173,13 +173,13 @@
   main.puzzle .tview2 interrupt line move index {
     margin-right: 2px;
     padding: 0 !important;
-    color: #ffffff59 !important;
+    color: var(--lr-ext-lift-35) !important;
     font-weight: 400;
   }
 
   main.puzzle .tview2 interrupt line move:is(:hover, .active) {
-    background: #ffffff26 !important;
-    color: #fff !important;
+    background: var(--lr-ext-lift-15) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   /* Wrong tries (content/puzzle/attempts.ts): one row under the move, each marked like a

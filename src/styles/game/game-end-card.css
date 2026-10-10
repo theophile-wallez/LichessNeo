@@ -11,8 +11,8 @@ main.round .rcontrols .follow-up[data-lr-ext-end-card],
   margin: 10px 0 8px;
   padding: 10px !important;
   border-radius: 16px;
-  background: var(--lr-ext-grey-750);
-  box-shadow: inset 0 0 0 1px #ffffff14;
+  background: var(--lr-ext-neutral-5);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-8);
 }
 
 .lr-ext-end__frame {
@@ -48,7 +48,7 @@ main.round .rcontrols .follow-up[data-lr-ext-end-card],
   flex-direction: column;
   gap: 10px;
   container-type: inline-size;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font);
   text-align: start;
 }
@@ -166,7 +166,7 @@ main.round .rcontrols .follow-up > .lr-ext-end__card {
 .lr-ext-end__bubble {
   min-height: 2.9em;
   margin: 4px 0 0;
-  color: var(--lr-ext-grey-200);
+  color: var(--lr-ext-neutral-12);
   font-size: 14px;
   line-height: 1.45;
 }

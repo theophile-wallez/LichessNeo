@@ -15,7 +15,7 @@
 .mchat .mchat__tabs[data-lr-ext-tabs] {
   --lr-ext-tab-radius: 6px;
   --lr-ext-tab-bg: var(--lr-ext-bg-raised);
-  --lr-ext-tab-shadow: 0 1px 2px #0000008c;
+  --lr-ext-tab-shadow: 0 1px 2px var(--lr-ext-shade-55);
 }
 
 .mchat .mchat__tab {

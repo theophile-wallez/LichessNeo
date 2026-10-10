@@ -4,7 +4,7 @@
    columns dissolve so every pair can sit in one grid. */
 main.plan .faq {
   --lr-ext-faq: var(--lr-ext-accent);
-  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/money-bag-02--7e88db.svg');
+  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/money-bag-02.svg');
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch !important;
@@ -28,7 +28,7 @@ main.plan .faq dt {
   border-bottom: none;
   border-radius: 12px 12px 0 0;
   background: var(--lr-ext-bg-panel);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font);
   font-size: 17px !important;
   font-weight: 800;
@@ -41,12 +41,11 @@ main.plan .faq dt::before {
   width: 46px;
   height: 46px;
   border-radius: 12px;
-  background:
+  /* The glyph at full strength over the tile at a quarter: both in the question's color. */
+  background: var(--lr-ext-faq);
+  mask:
     var(--lr-ext-faq-icon) center / 26px no-repeat,
-    color-mix(in srgb, var(--lr-ext-faq) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-faq) 35%, transparent);
+    linear-gradient(#0000003d, #0000003d);
 }
 
 main.plan .faq dd {
@@ -64,29 +63,29 @@ main.plan .faq dd {
 main.plan .faq dd strong {
   display: inline-block;
   margin-top: 8px;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 /* A color and a Hugeicon per question, in Lichess's fixed order: where the money goes,
    the non-profit, changing or cancelling, other ways to give, what patrons get. */
 main.plan .faq dl:nth-child(1) :is(dt, dd):nth-of-type(2) {
   --lr-ext-faq: var(--lr-ext-cyan);
-  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bank--a2edfd.svg');
+  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bank.svg');
 }
 
 main.plan .faq dl:nth-child(2) :is(dt, dd):nth-of-type(1) {
   --lr-ext-faq: var(--lr-ext-purple);
-  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02--caa9fa.svg');
+  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
 }
 
 main.plan .faq dl:nth-child(2) :is(dt, dd):nth-of-type(2) {
   --lr-ext-faq: var(--lr-ext-green);
-  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/credit-card--73fb95.svg');
+  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/credit-card.svg');
 }
 
 main.plan .faq dl:nth-child(3) :is(dt, dd) {
   --lr-ext-faq: var(--lr-ext-orange);
-  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion--ffc689.svg');
+  --lr-ext-faq-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion.svg');
 }
 
 /* Two cards a row, head and body in consecutive grid rows so both cards share their
@@ -123,7 +122,7 @@ main.plan .faq dl:nth-child(3) dd:nth-of-type(1) {
 }
 
 main.plan .faq dd .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }
 

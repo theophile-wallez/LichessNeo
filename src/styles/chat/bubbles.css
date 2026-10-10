@@ -57,7 +57,7 @@
 
 .mchat .mchat__messages > li[data-lr-ext-mine] > t {
   background: var(--lr-ext-accent);
-  color: #fff;
+  color: var(--lr-ext-white);
 }
 
 .mchat .mchat__messages > li.mentioned > t {
@@ -183,7 +183,7 @@
 }
 
 .mchat .mchat__messages > li > action:hover {
-  background: #ffffff14;
+  background: var(--lr-ext-lift-8);
   color: var(--lr-ext-text);
 }
 

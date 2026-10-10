@@ -6,7 +6,7 @@ main.plan .plan_checkout group.radio {
   margin: 0 0 12px !important;
   padding: 4px;
   border-radius: 10px !important;
-  background: var(--lr-ext-grey-950);
+  background: var(--lr-ext-neutral-1);
   box-shadow: none !important;
   backdrop-filter: none !important;
   overflow: visible !important;
@@ -40,8 +40,8 @@ main.plan .plan_checkout group.radio label {
 }
 
 main.plan .plan_checkout group.radio input:not(:disabled) + label:hover {
-  background: #ffffff0a !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-4) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.plan .plan_checkout group.radio input:checked + label,
@@ -49,11 +49,11 @@ main.plan .plan_checkout group.radio input:checked + label:hover,
 main.plan .plan_checkout .amount_fixed label {
   background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
   box-shadow: inset 0 0 0 2px var(--lr-ext-accent) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.plan .plan_checkout group.radio input:focus-visible + label {
-  outline: 2px solid #fff !important;
+  outline: 2px solid var(--lr-ext-text-strong) !important;
   outline-offset: -2px;
 }
 
@@ -89,7 +89,7 @@ main.plan .plan_checkout group.amount label {
   min-height: 56px;
   background: var(--lr-ext-btn-grey) !important;
   box-shadow: var(--lr-ext-btn-grey-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 20px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -221,7 +221,7 @@ main.plan .plan_checkout .service .currency-toggle {
 }
 
 main.plan .plan_checkout .service .currency-toggle:hover {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 main.plan .plan_checkout .service .currency select {
@@ -246,7 +246,7 @@ main.plan .small_team {
   justify-content: center;
   gap: 14px;
   margin: 28px 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 18px !important;
   font-style: normal !important;
   font-weight: 800;
@@ -260,11 +260,9 @@ main.plan .small_team::before {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01--7e88db.svg') center /
-      26px no-repeat,
-    color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 35%, transparent);
+  background: var(--lr-ext-accent);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01.svg') center / 26px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
 }

@@ -1,7 +1,8 @@
 import { z } from 'zod/mini';
 
-// A player's most played speed, from Lichess's public user API
-// (`/api/user/<name>`): what the sidebar shows beside their name.
+// A player's ratings, from Lichess's public user API (`/api/user/<name>`):
+// the sidebar shows one beside their name, the most played speed's unless the
+// settings pick another.
 
 /** The speeds a player's games count in (not puzzles, Storm or Racer), in Lichess's order. */
 export const SPEEDS = [
@@ -42,6 +43,19 @@ export const TopRatingSchema = z.object({
 
 export type TopRating = z.infer<typeof TopRatingSchema>;
 
+/** Each speed the player has a rating in, played or not. */
+export const RatingsSchema = z.partialRecord(
+  z.enum(SPEEDS),
+  z.object({ rating: z.number(), provisional: z.boolean() }),
+);
+
+export type Ratings = z.infer<typeof RatingsSchema>;
+
+/** What the sidebar shows: the most played speed's rating, or one speed's. */
+export const RatingPickSchema = z.enum(['mostPlayed', ...SPEEDS]);
+
+export type RatingPick = z.infer<typeof RatingPickSchema>;
+
 /** A rating as the sidebar writes it, "1500?" when provisional. */
 export const ratingLabel = (rating: number, provisional: boolean): string =>
   `${Math.round(rating)}${provisional ? '?' : ''}`;
@@ -57,4 +71,24 @@ export function topRating({ perfs }: z.infer<typeof UserSchema>): TopRating | nu
     best = { speed, rating: perf.rating, provisional: perf.prov === true };
   }
   return best;
+}
+
+export function ratingsOf({ perfs }: z.infer<typeof UserSchema>): Ratings {
+  const ratings: Ratings = {};
+  for (const speed of SPEEDS) {
+    const perf = perfs[speed];
+    if (perf) ratings[speed] = { rating: perf.rating, provisional: perf.prov === true };
+  }
+  return ratings;
+}
+
+/** The rating picked, or the most played one for a speed the player has none in. */
+export function pickedRating(
+  top: TopRating | null,
+  ratings: Ratings | undefined,
+  pick: RatingPick,
+): TopRating | null {
+  if (pick === 'mostPlayed') return top;
+  const rating = ratings?.[pick];
+  return rating ? { speed: pick, ...rating } : top;
 }

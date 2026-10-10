@@ -119,7 +119,7 @@
 .lr-ext-coach__avatar--react:is([data-lr-ext-mood='doubt'], [data-lr-ext-mood='shock'])::after {
   color: var(--lr-ext-mood-c);
   font: 900 calc(var(--lr-ext-coach-h) * 0.26) / 1 var(--lr-ext-font);
-  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 0 var(--lr-ext-shade-35);
 }
 
 .lr-ext-coach__avatar--react[data-lr-ext-mood='doubt']::after {

@@ -96,7 +96,7 @@
 .board-editor .board-editor__tools .actions > :is(button, a):hover,
 .board-editor .board-editor__tools .actions > form > button:hover {
   background: var(--lr-ext-bg-raised-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   transform: translateY(-2px);
 }
 

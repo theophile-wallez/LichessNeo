@@ -46,7 +46,7 @@
     flex: 0 0 26px !important;
     height: 26px;
     border-radius: 50%;
-    background: #ffffff12;
+    background: var(--lr-ext-lift-7);
     color: var(--lr-ext-text-dim) !important;
     font-size: 13px !important;
     font-weight: 800;
@@ -71,11 +71,11 @@
   }
 
   .ps__chapter:hover {
-    background: #ffffff0f !important;
+    background: var(--lr-ext-lift-6) !important;
   }
 
   .ps__chapter:hover h3 {
-    color: #fff;
+    color: var(--lr-ext-text-strong);
   }
 
   .ps__chapter:hover .status {
@@ -84,18 +84,18 @@
 
   /* The current step: a lighter row, its number on the accent badge. */
   .ps__chapter.active {
-    background: #ffffff14 !important;
-    box-shadow: inset 0 0 0 1px #ffffff1a;
+    background: var(--lr-ext-lift-8) !important;
+    box-shadow: inset 0 0 0 1px var(--lr-ext-lift-10);
   }
 
   .ps__chapter.active h3 {
-    color: #fff;
+    color: var(--lr-ext-text-strong);
   }
 
   .ps__chapter.active .status {
     background: var(--lr-ext-btn-primary) !important;
     box-shadow: var(--lr-ext-btn-primary-shadow);
-    color: #fff !important;
+    color: var(--lr-ext-white) !important;
   }
 
   .ps__chapter .status.done {
@@ -128,7 +128,7 @@
 
   .practice__side .finally .back:hover {
     background: var(--lr-ext-btn-grey-hover);
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   .practice__side .finally select {

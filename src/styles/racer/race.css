@@ -150,7 +150,7 @@
   box-shadow:
     inset 0 1px 0 #ffffff4d,
     inset 0 -2px 0 #0000002e;
-  color: #fff;
+  color: var(--lr-ext-white);
   font: 400 52px / 0.5 racer-car;
   text-shadow: 0 2px 4px #0000004d;
 }
@@ -166,7 +166,7 @@
 }
 
 :is(.racer, .storm) .puz-side__start__text strong {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 26px !important;
   font-weight: 800 !important;
   line-height: 1.1;
@@ -194,14 +194,14 @@
   background: currentColor;
 }
 
-/* The score: a big white number. */
+/* The score: a big number. */
 :is(.racer, .storm) .puz-side__solved {
   text-align: start;
 }
 
 :is(.racer, .storm) .puz-side__solved__text {
   margin: 0 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 60px !important;
   font-weight: 800;

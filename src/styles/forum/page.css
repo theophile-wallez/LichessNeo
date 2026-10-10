@@ -3,14 +3,13 @@
 
 /* ---- Colors --- */
 
-/* A color and a Hugeicon per category, the icon as a file in that color (a tile can't hold a
-   mask). Slugs aren't localized, so rules key on the links content/layout/marks.ts copies
+/* A color and a Hugeicon per category, the icon masking a tile of that color. Slugs aren't localized, so rules key on the links content/layout/marks.ts copies
    onto rows and pages (data-lr-ext-href, data-lr-ext-back, data-lr-ext-search). */
 main.forum,
 main.forum .categs tr {
   --lr-ext-fc: var(--lr-ext-accent);
   --lr-ext-fc-2: var(--lr-ext-accent-dim);
-  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn--7e88db.svg');
+  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn.svg');
 }
 
 main.forum .categs tr[data-lr-ext-href$='/forum/lichess-feedback'],
@@ -18,7 +17,7 @@ main.forum-categ[data-lr-ext-href*='/forum/lichess-feedback/'],
 main.forum-topic[data-lr-ext-back$='/forum/lichess-feedback'] {
   --lr-ext-fc: var(--lr-ext-cyan);
   --lr-ext-fc-2: var(--lr-ext-cyan-darker);
-  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01--a2edfd.svg');
+  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01.svg');
 }
 
 main.forum .categs tr[data-lr-ext-href$='/forum/game-analysis'],
@@ -26,7 +25,7 @@ main.forum-categ[data-lr-ext-href*='/forum/game-analysis/'],
 main.forum-topic[data-lr-ext-back$='/forum/game-analysis'] {
   --lr-ext-fc: var(--lr-ext-purple);
   --lr-ext-fc-2: var(--lr-ext-purple-dark);
-  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--caa9fa.svg');
+  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01.svg');
 }
 
 main.forum .categs tr[data-lr-ext-href$='/forum/off-topic-discussion'],
@@ -34,7 +33,7 @@ main.forum-categ[data-lr-ext-href*='/forum/off-topic-discussion/'],
 main.forum-topic[data-lr-ext-back$='/forum/off-topic-discussion'] {
   --lr-ext-fc: var(--lr-ext-orange);
   --lr-ext-fc-2: var(--lr-ext-orange-darker);
-  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/coffee-02--ffc689.svg');
+  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/coffee-02.svg');
 }
 
 /* A team's board: its back link goes to the team. */
@@ -43,7 +42,7 @@ main.forum-categ[data-lr-ext-back*='/team/'],
 main.forum-topic[data-lr-ext-back*='/forum/team-'] {
   --lr-ext-fc: var(--lr-ext-green);
   --lr-ext-fc-2: var(--lr-ext-green-darker);
-  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--73fb95.svg');
+  --lr-ext-fc-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
 }
 
 /* ---- Page --- */
@@ -101,13 +100,11 @@ main.forum.index > .box__top:not(:first-child) h1::before {
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--73fb95.svg') center /
-      22px no-repeat,
-    color-mix(in srgb, var(--lr-ext-green) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-green) 35%, transparent);
+  background: var(--lr-ext-green);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg') center / 22px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
 }
 
 /* Back links (category, topic, search): a round chevron button. */
@@ -139,7 +136,7 @@ main.search[data-lr-ext-search$='/forum/search'] > .box__top h1 > a[data-icon]:f
 main.forum .box__top h1 > a[data-icon]:first-child:hover,
 main.search[data-lr-ext-search$='/forum/search'] > .box__top h1 > a[data-icon]:first-child:hover {
   background: var(--lr-ext-btn-grey-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   transform: translateX(-3px);
 }
 
@@ -170,12 +167,10 @@ main.forum-topic:not(.topic-form) .box__top h1::before {
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  background:
+  background: var(--lr-ext-fc);
+  mask:
     var(--lr-ext-fc-icon) center / 28px no-repeat,
-    color-mix(in srgb, var(--lr-ext-fc) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-fc) 35%, transparent);
+    linear-gradient(#0000003d, #0000003d);
   animation: lr-ext-forum-wobble 0.6s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
@@ -185,14 +180,14 @@ main.forum-topic:not(.topic-form) .box__top h1 > a:first-child {
   order: -2;
 }
 
-/* A team board's title links to the team: white like any title, and without the
+/* A team board's title links to the team: as bright as any title, and without the
    group icon, which the tile already shows. */
 main.forum-categ .box__top h1 > a:not(:first-child) {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   min-width: 0;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.forum-categ .box__top h1 > a:not(:first-child)::before {
@@ -265,7 +260,7 @@ main.forum-categ .box__top__actions a.button-green {
   padding: 0 20px !important;
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 15px;
   text-shadow: 0 1px 1px #00000033 !important;
 }

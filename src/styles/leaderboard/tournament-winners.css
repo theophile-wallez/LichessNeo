@@ -104,7 +104,7 @@
 }
 
 :is(.tournament-leaderboards, .tournament-shields) li:hover {
-  background: #ffffff0d !important;
+  background: var(--lr-ext-lift-5) !important;
 }
 
 /* A cup per winner: gold yearly, silver monthly, bronze weekly, plain daily. Lichess always
@@ -117,7 +117,7 @@
   border-radius: 50%;
   background:
     var(--lr-ext-cup) center no-repeat,
-    #ffffff1a;
+    var(--lr-ext-lift-10);
   background-size: 14px, cover;
   opacity: 0.8;
 }
@@ -126,7 +126,7 @@
   box-shadow:
     inset 0 1px 0 #ffffff80,
     inset 0 -2px 0 #0000002e,
-    0 2px 4px #00000059;
+    0 2px 4px var(--lr-ext-shade-35);
   opacity: 1;
 }
 
@@ -137,7 +137,12 @@
 
 .tournament-leaderboards li:nth-child(2)::before {
   background-image:
-    var(--lr-ext-cup), linear-gradient(145deg, var(--lr-ext-grey-50), var(--lr-ext-grey-300));
+    var(--lr-ext-cup),
+    linear-gradient(
+      145deg,
+      var(--lr-ext-white),
+      color-mix(in srgb, var(--lr-ext-white) 55%, var(--lr-ext-ink))
+    );
 }
 
 .tournament-leaderboards li:nth-child(3)::before {
@@ -153,7 +158,7 @@
   box-shadow:
     inset 0 1px 0 #ffffff59,
     inset 0 -2px 0 #0000002e,
-    0 2px 4px #00000059;
+    0 2px 4px var(--lr-ext-shade-35);
   opacity: 1;
 }
 
@@ -169,7 +174,7 @@
 }
 
 :is(.tournament-leaderboards, .tournament-shields) li:hover .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The tournament as a pill in the card's color. */
@@ -178,7 +183,7 @@
   padding: 3px 10px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--lr-ext-lb) 16%, transparent);
-  color: var(--lr-ext-lb) !important;
+  color: color-mix(in srgb, var(--lr-ext-lb) 80%, var(--lr-ext-text-strong)) !important;
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -190,5 +195,5 @@
 
 :is(.tournament-leaderboards, .tournament-shields) li > a:not(.user-link):hover {
   background: var(--lr-ext-lb);
-  color: var(--lr-ext-grey-950) !important;
+  color: var(--lr-ext-ink) !important;
 }

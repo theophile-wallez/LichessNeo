@@ -72,7 +72,7 @@ main.team-show .team-show__tour td.header a::after {
 
 main.team-show .team-show__tour .name {
   overflow: hidden;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 15px !important;
   font-weight: 800;
   text-overflow: ellipsis;
@@ -103,7 +103,7 @@ main.team-show .team-show__tour td.text {
   padding: 3px 9px !important;
   border-radius: 999px;
   background: var(--lr-ext-bg-raised) !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 13px;
   font-weight: 800;
 }

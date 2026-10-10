@@ -83,8 +83,8 @@ main.round .round__app .message > div:not(.lr-ext-mascot) {
   min-height: 56px;
   padding: 12px 16px;
   border-radius: 12px;
-  background: #fff;
-  color: var(--lr-ext-grey-700);
+  background: var(--lr-ext-white);
+  color: color-mix(in srgb, var(--lr-ext-ink) 88%, var(--lr-ext-white));
   font-size: 15px;
   line-height: 1.4;
 }
@@ -100,6 +100,6 @@ main.round .round__app .message > div:not(.lr-ext-mascot)::before {
 }
 
 main.round .round__app .message strong {
-  color: var(--lr-ext-grey-900);
+  color: var(--lr-ext-ink);
   font-weight: 800;
 }

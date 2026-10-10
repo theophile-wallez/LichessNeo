@@ -11,8 +11,8 @@ main.puzzle .puzzle__tools {
   border-radius: 12px !important;
   background: var(--lr-ext-bg-panel) !important;
   box-shadow:
-    inset 0 1px 0 #ffffff0d,
-    0 10px 28px #00000033 !important;
+    inset 0 1px 0 var(--lr-ext-lift-5),
+    0 10px 28px var(--lr-ext-shade-20) !important;
 }
 
 main.puzzle .puzzle__side > * {
@@ -23,7 +23,7 @@ main.puzzle .puzzle__side > * {
 }
 
 main.puzzle .puzzle__side strong {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 /* Puzzle and game info: the theme picture and perf icon as tiles. */
@@ -54,7 +54,7 @@ main.puzzle .puzzle__side__metas .infos::before {
 main.puzzle .puzzle__side__metas .infos__angle-img {
   padding: 7px;
   background: color-mix(in srgb, var(--lr-ext-orange) 16%, transparent);
-  box-shadow: inset 0 1px #ffffff14;
+  box-shadow: inset 0 1px var(--lr-ext-lift-8);
 }
 
 /* The "mix" theme has no picture, just a grey target: the sidebar's puzzle piece instead. */
@@ -65,11 +65,11 @@ main.puzzle .puzzle__side__metas .infos__angle-img[src*='/mix.'] {
 main.puzzle .puzzle__side__metas .infos.puzzle {
   margin-bottom: 10px !important;
   padding-bottom: 10px !important;
-  border-bottom: 1px solid #ffffff14 !important;
+  border-bottom: 1px solid var(--lr-ext-lift-8) !important;
 }
 
 main.puzzle .puzzle__side__metas .infos.puzzle p:first-child {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 15px;
   font-weight: 800;
 }
@@ -109,7 +109,7 @@ main.puzzle .puzzle__side__metas .hidden {
 main.puzzle .puzzle__side__user__rating strong {
   flex-wrap: nowrap !important;
   gap: 12px;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: clamp(34px, 2.8vw, 44px) !important;
   white-space: nowrap;
   font-weight: 800;
@@ -151,7 +151,7 @@ main.puzzle .puzzle__side__user > a.button {
 /* The theme, as the card's title. */
 main.puzzle .puzzle__side__theme__back {
   margin-bottom: 6px !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 800;
   transition: color 0.15s !important;
@@ -168,7 +168,7 @@ main.puzzle .puzzle__side__theme > p {
 /* Replaying failed puzzles (from the dashboard): the title like a theme's, over a progress bar. */
 main.puzzle .puzzle__side__replay > a {
   margin-bottom: 10px !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 800 !important;
   transition: color 0.15s !important;
@@ -181,12 +181,12 @@ main.puzzle .puzzle__side__replay > a:hover {
 main.puzzle .puzzle__side__replay__bar {
   height: 30px !important;
   border-radius: 999px !important;
-  background: #ffffff12 !important;
-  box-shadow: inset 0 1px 2px #00000066;
-  color: #fff;
+  background: var(--lr-ext-lift-7) !important;
+  box-shadow: inset 0 1px 2px var(--lr-ext-shade-40);
+  color: var(--lr-ext-text-strong);
   font-size: 14px;
   font-weight: 800 !important;
-  text-shadow: 0 1px 1px #00000066;
+  text-shadow: 0 1px 1px var(--lr-ext-shade-40);
 }
 
 main.puzzle .puzzle__side__replay__bar::before {

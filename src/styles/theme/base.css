@@ -1,70 +1,94 @@
-/* Palette, fonts, buttons and boxes. Lichess drives its colors through --c-*
- * variables, so overriding them for every theme (dark, light, transparent)
- * re-skins most pages. */
+/* Roles, fonts, buttons and boxes. The roles name what a color is for, in
+ * either scheme (palette.css). Lichess drives its colors through --c-*
+ * variables, so pointing them at the roles for every theme of its own (dark,
+ * light, transparent) re-skins most pages. */
 
 :root,
-:root.light,
-:root.dark,
-:root.transp,
-:root.transp.light {
+[data-lr-ext-palette] {
   /* The hairline between the sidebar and the content. */
-  --lr-ext-sidebar-line: #ffffff0f;
-  --lr-ext-bg-page: var(--lr-ext-grey-800);
-  --lr-ext-bg-panel: var(--lr-ext-grey-850);
-  --lr-ext-bg-panel-dark: var(--lr-ext-grey-900);
+  --lr-ext-sidebar-line: var(--lr-ext-lift-6);
+  --lr-ext-bg-page: var(--lr-ext-neutral-4);
+  --lr-ext-bg-panel: var(--lr-ext-neutral-3);
+  --lr-ext-bg-panel-dark: var(--lr-ext-neutral-2);
   /* Between the panels and the page: zebra rows, a hovered card. */
-  --lr-ext-bg-mid: color-mix(in srgb, var(--lr-ext-grey-850) 50%, var(--lr-ext-grey-800));
-  --lr-ext-bg-raised: var(--lr-ext-grey-700);
-  --lr-ext-bg-raised-hover: var(--lr-ext-grey-650);
-  --lr-ext-border: var(--lr-ext-grey-700);
-  --lr-ext-text: color-mix(in srgb, var(--lr-ext-grey-50) 88%, transparent);
-  --lr-ext-text-strong: var(--lr-ext-grey-50);
-  --lr-ext-text-dim: var(--lr-ext-grey-300);
+  --lr-ext-bg-mid: color-mix(in srgb, var(--lr-ext-neutral-3) 50%, var(--lr-ext-neutral-4));
+  --lr-ext-bg-raised: var(--lr-ext-neutral-6);
+  --lr-ext-bg-raised-hover: var(--lr-ext-neutral-7);
+  --lr-ext-border: var(--lr-ext-neutral-6);
+  --lr-ext-text: color-mix(in srgb, var(--lr-ext-neutral-14) 88%, transparent);
+  --lr-ext-text-strong: var(--lr-ext-neutral-14);
+  --lr-ext-text-dim: var(--lr-ext-neutral-11);
   /* Tertiary text (move numbers, unrated chips): still 3:1 on the panels. */
-  --lr-ext-font-dimmer: var(--lr-ext-grey-400);
-  /* Links, picks, focus rings, primary buttons. */
-  --lr-ext-accent: var(--lr-ext-blue);
-  --lr-ext-accent-hover: var(--lr-ext-blue-light);
-  --lr-ext-accent-dim: var(--lr-ext-blue-dark);
-  --lr-ext-accent-shadow: var(--lr-ext-blue-darker);
-  /* Our board's squares (board/pieces.css). */
-  --lr-ext-board-light: var(--lr-ext-grey-50);
-  --lr-ext-board-dark: var(--lr-ext-accent);
+  --lr-ext-font-dimmer: var(--lr-ext-neutral-10);
+  /* Links, picks, focus rings, primary buttons: the theme's accent. */
+  --lr-ext-accent-hover: color-mix(in srgb, var(--lr-ext-accent) 80%, #fff);
+  --lr-ext-accent-dim: color-mix(in srgb, var(--lr-ext-accent) 80%, #000);
+  --lr-ext-accent-shadow: color-mix(in srgb, var(--lr-ext-accent) 60%, #000);
   /* A win, a good move, someone online; and their opposite. */
   --lr-ext-good: var(--lr-ext-green);
   --lr-ext-good-hover: var(--lr-ext-green-light);
   --lr-ext-bad: var(--lr-ext-red);
   /* Menus are lighter than cards, and outlined: on a dark UI a shadow alone
    * doesn't separate them. */
-  --lr-ext-menu-bg: var(--lr-ext-grey-700);
-  --lr-ext-menu-border: #ffffff24;
-  --lr-ext-menu-hover: #ffffff17;
-  --lr-ext-menu-shadow: 0 0 0 1px #0000008c, 0 16px 40px #000000b3, 0 4px 12px #00000080;
+  --lr-ext-menu-bg: var(--lr-ext-neutral-6);
+  --lr-ext-menu-border: var(--lr-ext-lift-15);
+  --lr-ext-menu-hover: var(--lr-ext-lift-8);
+  --lr-ext-menu-shadow:
+    0 0 0 1px var(--lr-ext-shade-55), 0 16px 40px var(--lr-ext-shade-70),
+    0 4px 12px var(--lr-ext-shade-50);
   /* Buttons: flat, a hairline edge on the grey ones. */
-  --lr-ext-btn-primary: var(--lr-ext-blue);
-  --lr-ext-btn-primary-hover: var(--lr-ext-blue-light);
-  --lr-ext-btn-primary-shadow: 0 1px 2px #0000004d;
-  --lr-ext-btn-grey: var(--lr-ext-grey-700);
-  --lr-ext-btn-grey-hover: var(--lr-ext-grey-650);
-  --lr-ext-btn-grey-shadow: inset 0 0 0 1px #ffffff0f;
+  --lr-ext-btn-primary: var(--lr-ext-accent);
+  --lr-ext-btn-primary-hover: var(--lr-ext-accent-hover);
+  --lr-ext-btn-primary-shadow: 0 1px 2px var(--lr-ext-shade-30);
+  --lr-ext-btn-grey: var(--lr-ext-neutral-6);
+  --lr-ext-btn-grey-hover: var(--lr-ext-neutral-7);
+  --lr-ext-btn-grey-shadow: inset 0 0 0 1px var(--lr-ext-lift-6);
   --lr-ext-btn-red: var(--lr-ext-red-dark);
   --lr-ext-btn-red-hover: var(--lr-ext-red);
-  --lr-ext-btn-red-shadow: 0 1px 2px #0000004d;
+  --lr-ext-btn-red-shadow: 0 1px 2px var(--lr-ext-shade-30);
   /* Cards: a faint edge keeps neighbours apart. The hover fill stays darker than
    * the page, or the card melts into it. */
-  --lr-ext-card-border: #ffffff0f;
-  --lr-ext-card-border-hover: #ffffff2e;
+  /* A card standing on the page rather than in a panel: a faint lift on dark. */
+  --lr-ext-card-bg: var(--lr-ext-lift-3);
+  --lr-ext-card-border: var(--lr-ext-lift-6);
+  --lr-ext-card-border-hover: var(--lr-ext-lift-18);
   --lr-ext-card-hover: var(--lr-ext-bg-mid);
-  --lr-ext-card-shadow-hover: 0 4px 12px #00000040;
+  --lr-ext-card-shadow-hover: 0 4px 12px var(--lr-ext-shade-25);
   /* Title badge (GM, IM...). */
   --lr-ext-title-bg: var(--lr-ext-red-deep);
+  /* Behind a dialog. */
+  --lr-ext-page-mask: var(--lr-ext-shade-70);
+}
+
+/* On white, menus are white and a shadow does separate them; cards lift
+ * rather than darken. */
+:root.light,
+[data-lr-ext-palette='light'] {
+  --lr-ext-menu-bg: var(--lr-ext-neutral-1);
+  --lr-ext-menu-border: var(--lr-ext-lift-10);
+  --lr-ext-menu-hover: var(--lr-ext-lift-6);
+  --lr-ext-card-bg: var(--lr-ext-neutral-1);
+  --lr-ext-card-border: var(--lr-ext-lift-8);
+  --lr-ext-card-border-hover: var(--lr-ext-lift-20);
+  --lr-ext-card-hover: var(--lr-ext-neutral-1);
+  --lr-ext-btn-grey-shadow: inset 0 0 0 1px var(--lr-ext-lift-8);
+  --lr-ext-title-bg: var(--lr-ext-red);
+  --lr-ext-page-mask: var(--lr-ext-shade-50);
+  /* As text, a lighter green fades on white. */
+  --lr-ext-good-hover: var(--lr-ext-green-dark);
+}
+
+:root {
+  /* Our board's squares (board/pieces.css), the same on either scheme. */
+  --lr-ext-board-light: #f7f8f8;
+  --lr-ext-board-dark: #5e6ad2;
   /* Lichess has no profile pictures: a user's is one of the coaches (avatars.css),
-   * anyone else's this silhouette. A data URI can't read a variable: its grey is
-   * written out. */
+   * anyone else's this silhouette, the same on either scheme. A data URI can't
+   * read a variable: its colors are written out. */
   --lr-ext-avatar:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='15.5' r='7' fill='%23b6bbd4'/%3E%3Cpath fill='%23b6bbd4' d='M5 40c0-8.3 6.7-14 15-14s15 5.7 15 14z'/%3E%3C/svg%3E")
       center / cover no-repeat,
-    var(--lr-ext-grey-500);
+    #424246;
   /* The computer's robot from the chest up, rendered from the live one (content/computer), in
      the colors of levels 3–4 until a game says which (below). */
   --lr-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-2.webp');
@@ -79,7 +103,13 @@
   --lr-ext-font:
     'LR Ext Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif;
+}
 
+:root,
+:root.light,
+:root.dark,
+:root.transp,
+:root.transp.light {
   --c-bg: var(--lr-ext-bg-panel) !important;
   --c-bg-box: var(--lr-ext-bg-panel) !important;
   --c-bg-high: var(--lr-ext-bg-panel) !important;
@@ -90,27 +120,27 @@
   --c-bg-popup: var(--lr-ext-bg-panel) !important;
   --c-bg-header-dropdown: var(--lr-ext-bg-panel) !important;
   --c-bg-zebra: var(--lr-ext-bg-mid) !important;
-  --c-bg-zebra2: var(--lr-ext-grey-750) !important;
+  --c-bg-zebra2: var(--lr-ext-neutral-5) !important;
   --c-bg-input: var(--lr-ext-bg-raised) !important;
   --c-page-input: var(--lr-ext-bg-raised) !important;
   --c-bg-variation: var(--lr-ext-bg-mid) !important;
   --c-body-gradient: var(--lr-ext-bg-page) !important;
-  --c-font: var(--lr-ext-grey-100) !important;
+  --c-font: var(--lr-ext-neutral-13) !important;
   --c-font-dim: var(--lr-ext-text-dim) !important;
   --c-font-dimmer: var(--lr-ext-font-dimmer) !important;
-  --c-font-clear: var(--lr-ext-grey-50) !important;
-  --c-font-clearer: #fff !important;
+  --c-font-clear: var(--lr-ext-neutral-14) !important;
+  --c-font-clearer: var(--lr-ext-text-strong) !important;
   --c-font-page: var(--lr-ext-text-dim) !important;
   --c-font-shadow: transparent !important;
   --c-header-dropdown: var(--lr-ext-text) !important;
   --c-border: var(--lr-ext-border) !important;
   --c-border-page: var(--lr-ext-border) !important;
-  --c-border-light: var(--lr-ext-grey-500) !important;
-  --c-shade: var(--lr-ext-grey-650) !important;
-  --c-dark: var(--lr-ext-grey-900) !important;
-  --c-dimmer: #000 !important;
-  --c-clearer: #fff !important;
-  --c-over: #fff !important;
+  --c-border-light: var(--lr-ext-neutral-9) !important;
+  --c-shade: var(--lr-ext-neutral-7) !important;
+  --c-dark: var(--lr-ext-neutral-2) !important;
+  --c-dimmer: var(--lr-ext-neutral-1) !important;
+  --c-clearer: var(--lr-ext-neutral-14) !important;
+  --c-over: var(--lr-ext-white) !important;
   --c-primary: var(--lr-ext-accent) !important;
   --c-primary-dim: var(--lr-ext-accent-dim) !important;
   --c-primary-clear: var(--lr-ext-accent-hover) !important;
@@ -124,24 +154,23 @@
   --c-good: var(--lr-ext-good) !important;
   --c-bad: var(--lr-ext-bad) !important;
   --c-accent: var(--lr-ext-accent) !important;
-  --c-future: var(--lr-ext-grey-650) !important;
+  --c-future: var(--lr-ext-neutral-7) !important;
   --c-brag: var(--lr-ext-orange) !important;
   --c-metal-top: var(--lr-ext-bg-raised) !important;
   --c-metal-bottom: var(--lr-ext-bg-raised) !important;
   --c-metal-top-hover: var(--lr-ext-bg-raised-hover) !important;
   --c-metal-bottom-hover: var(--lr-ext-bg-raised-hover) !important;
-  --c-page-mask: #000000b3 !important;
+  --c-page-mask: var(--lr-ext-page-mask) !important;
   --c-chat-host-bg: color-mix(in srgb, var(--lr-ext-accent) 20%, transparent) !important;
   --c-chat-mention-bg: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
   --c-paper: var(--lr-ext-bg-panel) !important;
 
-  color-scheme: dark;
   background: var(--lr-ext-bg-page) !important;
 }
 
 /* The robot of the level a game is played against (data-lr-ext-ai-level, from
    content/game/ai-players.ts), one for each two levels, as content/coach/mascot/cast/robot.ts
-   colors it. :root, to win over :root.dark. */
+   colors it. */
 :root:is([data-lr-ext-ai-level='1'], [data-lr-ext-ai-level='2']) {
   --lr-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-1.webp');
   --lr-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-1.webp');
@@ -190,7 +219,7 @@ html.transp::before {
 
 .button {
   background: var(--lr-ext-btn-primary) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   border: none !important;
   border-radius: 7px !important;
   text-transform: none !important;
@@ -211,6 +240,12 @@ html.transp::before {
   transform: translateY(1px);
 }
 
+/* Lichess shades the text of a picked button, written white on its fill: on the light scheme
+ * ours is often ink on a pale one. */
+html.light :is(.button.active, .btn-rack__btn.active) {
+  text-shadow: none !important;
+}
+
 .button.button-empty,
 .button.button-metal,
 .button.button-inverse {
@@ -224,12 +259,12 @@ html.transp::before {
 .button.button-metal:not(.disabled):hover,
 .button.button-inverse:not(.disabled):hover {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .button.button-red {
   background: var(--lr-ext-btn-red) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   box-shadow: var(--lr-ext-btn-red-shadow) !important;
 }
 
@@ -256,7 +291,7 @@ select {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--lr-ext-grey-650);
+  background: var(--lr-ext-neutral-7);
   border-radius: 4px;
 }
 
@@ -264,7 +299,7 @@ select {
  * would switch off the rules above. */
 @supports (-moz-appearance: none) {
   html {
-    scrollbar-color: var(--lr-ext-grey-650) transparent;
+    scrollbar-color: var(--lr-ext-neutral-7) transparent;
   }
 }
 
@@ -279,7 +314,7 @@ select {
   padding: 0 0.3em;
   border-radius: 0.25em;
   background: var(--lr-ext-title-bg);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 0.72em;
   font-weight: 800 !important;
   letter-spacing: 0;

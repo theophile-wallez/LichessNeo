@@ -32,7 +32,7 @@
   gap: 10px;
   margin: 0 0 12px !important;
   padding: 0 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 20px !important;
   font-weight: 800 !important;
 }
@@ -88,7 +88,7 @@
   --lr-ext-fam-piece: var(---white-king);
 }
 
-/* The card stays dark; the family's color is only on the tile and the chips' hover. */
+/* The card stays plain; the family's color is only on the tile and the chips' hover. */
 .puzzle-openings__tree__family {
   box-sizing: border-box;
   margin: 0 0 12px !important;
@@ -123,7 +123,7 @@
   box-shadow:
     inset 0 1px 0 #ffffff45,
     inset 0 -2px 0 #00000026,
-    0 3px 8px #0000004d;
+    0 3px 8px var(--lr-ext-shade-30);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
@@ -134,7 +134,7 @@
 
 .puzzle-openings__tree__family h2 a {
   min-width: 0;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .puzzle-openings__tree__family h2 a:hover {
@@ -146,7 +146,7 @@
   margin: 0 !important;
   padding: 2px 8px;
   border-radius: 999px;
-  background: #ffffff12;
+  background: var(--lr-ext-lift-7);
   color: var(--lr-ext-text-dim) !important;
   font-size: 11px !important;
   font-style: normal;
@@ -174,9 +174,9 @@
   align-items: baseline;
   gap: 6px;
   padding: 7px 14px !important;
-  border: 1px solid #ffffff14;
+  border: 1px solid var(--lr-ext-lift-8);
   border-radius: 999px !important;
-  background: #ffffff0a;
+  background: var(--lr-ext-lift-4);
   transition:
     background-color 0.15s,
     border-color 0.15s,
@@ -191,7 +191,7 @@
 }
 
 .puzzle-openings__link:hover h3 {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 .puzzle-openings__link h3 {
@@ -305,54 +305,46 @@
 main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/training'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='puzzles'] a[href$='/training/themes'],
 main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/training/themes'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layers-01.svg');
   --lr-ext-nav-color: var(--lr-ext-accent);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layers-01--7e88db.svg');
 }
 
 .subnav[data-lr-ext-nav~='puzzles'] a[href$='/training/openings'],
 main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/training/openings'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='puzzles'] a[href$='/dashboard'],
 main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/dashboard'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-01.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-01--a2edfd.svg');
 }
 
 .subnav[data-lr-ext-nav~='puzzles'] a[href$='/improvementAreas'],
 main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/improvementAreas'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg');
   --lr-ext-nav-color: var(--lr-ext-red);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02--ff7777.svg');
 }
 
 .subnav[data-lr-ext-nav~='puzzles'] a[href$='/strengths'],
 main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/strengths'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/brain.svg');
   --lr-ext-nav-color: var(--lr-ext-purple);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/brain--caa9fa.svg');
 }
 
 .subnav[data-lr-ext-nav~='puzzles'] a[href$='/training/history'],
 main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active$='/training/history'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/task-01.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/task-01--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='puzzles'] a[href*='/training/of-player'],
 main.page-menu[data-lr-ext-menu~='puzzles'][data-lr-ext-nav-active*='/training/of-player'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--a2edfd.svg');
 }

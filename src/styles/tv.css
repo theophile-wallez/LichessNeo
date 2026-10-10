@@ -93,7 +93,7 @@
     padding: 6px !important;
     overflow: hidden auto !important;
     scrollbar-width: thin;
-    scrollbar-color: #ffffff26 transparent;
+    scrollbar-color: var(--lr-ext-lift-15) transparent;
   }
 
   /* ---- Channel --- */
@@ -155,7 +155,7 @@
   }
   main.round.tv-single .tv-channel.horde {
     --lr-ext-tv: var(--lr-ext-cyan-dark);
-    --lr-ext-tv-2: var(--lr-ext-grey-400);
+    --lr-ext-tv-2: var(--lr-ext-neutral-10);
   }
   main.round.tv-single .tv-channel.racingKings {
     --lr-ext-tv: var(--lr-ext-cyan);
@@ -201,11 +201,11 @@
   }
 
   main.round.tv-single .subnav .tv-channel:hover {
-    background: #ffffff0d !important;
+    background: var(--lr-ext-lift-5) !important;
   }
 
   main.round.tv-single .subnav .tv-channel.active {
-    background: #ffffff14 !important;
+    background: var(--lr-ext-lift-8) !important;
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-tv) 30%, transparent);
   }
 
@@ -223,7 +223,7 @@
     box-shadow:
       inset 0 1px 0 #ffffff40,
       inset 0 -3px 0 #00000026,
-      0 3px 8px #00000040;
+      0 3px 8px var(--lr-ext-shade-25);
     filter: saturate(0.75) brightness(0.85);
     transition:
       transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -269,13 +269,13 @@
 
   /* Lichess's glyph, white on the tile. */
   main.round.tv-single .tv-channel > span::before {
-    --lr-ext-mode-color: #fff;
+    --lr-ext-mode-color: var(--lr-ext-white);
     order: 0 !important;
     flex: none;
     width: 24px !important;
     height: 24px !important;
     margin: 0 7px !important;
-    color: #fff !important;
+    color: var(--lr-ext-white) !important;
     font-size: 22px !important;
     line-height: 24px !important;
     text-align: center;
@@ -316,7 +316,7 @@
   }
 
   main.round.tv-single .tv-channel:is(:hover, .active) strong {
-    color: #fff;
+    color: var(--lr-ext-text-strong);
   }
 
   main.round.tv-single .tv-channel .champion {
@@ -337,7 +337,7 @@
     height: 16px;
     padding: 0 6px;
     border-radius: 999px;
-    background: #ffffff0f;
+    background: var(--lr-ext-lift-6);
     color: var(--lr-ext-text);
     font-size: 11px;
     font-weight: 800;
@@ -350,7 +350,7 @@
 
   main.round.tv-single .tv-channel:is(:hover, .active) .champion rating {
     background: color-mix(in srgb, var(--lr-ext-tv) 24%, transparent);
-    color: #fff;
+    color: var(--lr-ext-text-strong);
   }
 
   body.no-rating main.round.tv-single .tv-channel .champion {

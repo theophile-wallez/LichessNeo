@@ -28,9 +28,10 @@ html[data-lr-ext-board='blue'] body .is2d cg-board::before {
   opacity: 1 !important;
 }
 
-/* Lichess's yellow turns olive on the accent: a pale cyan reads on both colors. */
+/* Lichess's yellow turns olive on the accent: a pale cyan reads on both colors. Dracula's
+ * cyan written out, as the palette's deepens on the light scheme and the board doesn't. */
 html[data-lr-ext-board='blue'] body {
-  --lr-ext-highlight: color-mix(in srgb, var(--lr-ext-cyan) 50%, transparent);
+  --lr-ext-highlight: #8be9fd80;
 }
 
 html[data-lr-ext-board='blue'] body .is2d coords {

@@ -48,7 +48,7 @@
     margin: 0 !important;
     padding: 4px;
     border-radius: 12px;
-    background: #ffffff14;
+    background: var(--lr-ext-lift-8);
   }
 
   main.analyse .practice-box .feedback .player .no-square > piece.black {
@@ -61,14 +61,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #f5a93b;
+    color: var(--lr-ext-orange);
     font-size: 24px;
     font-weight: 800;
   }
 
   main.analyse .practice-box .feedback .instruction strong {
     display: block;
-    color: #fff;
+    color: var(--lr-ext-text-strong);
     font-size: 17px;
     font-weight: 800;
     line-height: 1.2;
@@ -95,7 +95,7 @@
 
   main.analyse .practice-box .feedback .choices a:hover {
     background: color-mix(in srgb, var(--lr-ext-accent) 28%, transparent);
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   main.analyse .practice-box > .comment {
@@ -130,7 +130,7 @@
     border-radius: 8px !important;
     background: var(--lr-ext-btn-primary) !important;
     box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-    color: #fff !important;
+    color: var(--lr-ext-white) !important;
     font-weight: 800;
   }
 

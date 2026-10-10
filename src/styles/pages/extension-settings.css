@@ -13,7 +13,6 @@ main.account[data-lr-ext-settings] > .page-menu__content:not(.lr-ext-settings) {
 main.account .lr-ext-settings {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
   --lr-ext-nav-color: var(--lr-ext-accent);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02--7e88db.svg');
 }
 
 .lr-ext-settings__intro {
@@ -50,6 +49,11 @@ main.account .lr-ext-settings {
   --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
 }
 
+.lr-ext-setting[data-lr-ext-setting='sidebarRating'] {
+  --lr-ext-setting-color: var(--lr-ext-green);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');
+}
+
 .lr-ext-setting__icon {
   position: relative;
   flex: none;
@@ -69,7 +73,7 @@ main.account .lr-ext-settings {
   margin: auto;
   width: 28px;
   height: 28px;
-  background: color-mix(in srgb, var(--lr-ext-setting-color) 80%, #fff);
+  background: color-mix(in srgb, var(--lr-ext-setting-color) 80%, var(--lr-ext-text-strong));
   mask: var(--lr-ext-setting-glyph) center / contain no-repeat;
 }
 
@@ -121,8 +125,8 @@ main.account .lr-ext-settings {
   padding: 0;
   border: none;
   border-radius: 999px;
-  background: var(--lr-ext-grey-600);
-  box-shadow: inset 0 1px 3px #00000066;
+  background: var(--lr-ext-neutral-8);
+  box-shadow: inset 0 1px 3px var(--lr-ext-shade-40);
   cursor: pointer;
   transition:
     background 0.2s,
@@ -148,8 +152,8 @@ main.account .lr-ext-settings {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 1px 3px #00000066;
+  background: var(--lr-ext-white);
+  box-shadow: 0 1px 3px var(--lr-ext-shade-40);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
@@ -206,7 +210,7 @@ main.account .lr-ext-settings {
   gap: 12px;
   padding: 8px 10px 8px 8px;
   border-radius: 10px;
-  background: #0000002e;
+  background: var(--lr-ext-shade-18);
 }
 
 /* The pack's board, its white knight over it; a plain tile for a pack of sounds. */
@@ -218,7 +222,7 @@ main.account .lr-ext-settings {
   height: 40px;
   border-radius: 8px;
   background: color-mix(in srgb, var(--lr-ext-accent) 20%, transparent) center / cover no-repeat;
-  box-shadow: 0 1px 3px #00000059;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-35);
 }
 
 .lr-ext-pack__piece {
@@ -261,7 +265,7 @@ main.account .lr-ext-settings {
   border-radius: 8px;
   background: var(--lr-ext-btn-grey);
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font: inherit;
   font-size: 13px;
   font-weight: 700;
@@ -285,10 +289,10 @@ main.account .lr-ext-settings {
   min-width: 0;
   height: 38px;
   padding: 0 12px;
-  border: 1px solid #ffffff1f;
+  border: 1px solid var(--lr-ext-lift-12);
   border-radius: 8px;
-  background: #0000003d;
-  color: #fff;
+  background: var(--lr-ext-shade-25);
+  color: var(--lr-ext-text-strong);
   font: inherit;
   font-size: 14px;
 }
@@ -306,7 +310,7 @@ main.account .lr-ext-settings {
   border-radius: 8px;
   background: var(--lr-ext-btn-primary);
   box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: #fff;
+  color: var(--lr-ext-white);
   font: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -329,7 +333,7 @@ main.account .lr-ext-settings {
 }
 
 .lr-ext-packs__private summary:hover {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 .lr-ext-packs__token {
@@ -338,10 +342,10 @@ main.account .lr-ext-settings {
   height: 34px;
   margin: 8px 0 0;
   padding: 0 12px;
-  border: 1px solid #ffffff1f;
+  border: 1px solid var(--lr-ext-lift-12);
   border-radius: 8px;
-  background: #0000003d;
-  color: #fff;
+  background: var(--lr-ext-shade-25);
+  color: var(--lr-ext-text-strong);
   font: inherit;
   -webkit-text-security: disc;
 }
@@ -374,5 +378,5 @@ main.account .lr-ext-settings {
 }
 
 .lr-ext-packs__help:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }

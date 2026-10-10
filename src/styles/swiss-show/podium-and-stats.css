@@ -21,7 +21,7 @@ main.swiss .podium .user-link {
   display: block;
   margin-top: 4px;
   overflow: hidden;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font);
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -51,7 +51,7 @@ main.swiss .podium .stats th {
 
 main.swiss .podium .stats td {
   padding-inline-start: 14px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
@@ -68,7 +68,7 @@ main.swiss .swiss__stats {
 
 main.swiss .swiss__stats h2 {
   margin: 0 0 12px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-size: 18px !important;
   font-weight: 800 !important;
@@ -95,7 +95,7 @@ main.swiss .swiss__stats th {
 
 main.swiss .swiss__stats td {
   padding: 9px 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 14px;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
@@ -132,7 +132,7 @@ main.swiss .swiss__stats__links a {
 
 main.swiss .swiss__stats__links a:hover {
   background: var(--lr-ext-bg-raised);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.swiss .swiss__stats__links a::before {
@@ -146,7 +146,7 @@ main.swiss .swiss__stats__links a:first-child {
   padding: 10px;
   background: var(--lr-ext-btn-grey);
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 800;
 }

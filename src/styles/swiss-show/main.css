@@ -48,7 +48,7 @@ main.swiss .swiss__main__header h1 {
   -webkit-line-clamp: 2;
   min-width: 0;
   overflow: hidden;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-size: 26px !important;
   font-weight: 800 !important;
@@ -100,7 +100,7 @@ main.swiss .swiss__main__header .shy {
 
 main.swiss .swiss__main__header :is(.time, .nb) {
   margin: 0 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 22px !important;
   font-weight: 800;
@@ -114,7 +114,7 @@ main.swiss .swiss__main__header .ongoing .nb {
 
 main.swiss .swiss__main__header .clock > time.shy {
   order: 0;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 15px !important;
   font-weight: 800;
   text-transform: none;
@@ -156,7 +156,7 @@ main.swiss .swiss__ur-playing {
   border-radius: 8px !important;
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 17px !important;
   font-weight: 800;
   text-shadow: 0 1px 0 #0000004d;
@@ -198,7 +198,7 @@ main.swiss .schedule-next-round input {
   border: none !important;
   border-radius: 6px;
   background: var(--lr-ext-bg-panel) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14px;
 }
 
@@ -242,7 +242,7 @@ main.swiss .schedule-next-round input {
     overflow-y: auto;
     overscroll-behavior: contain;
     scroll-padding-top: 120px;
-    scrollbar-color: #ffffff26 transparent;
+    scrollbar-color: var(--lr-ext-lift-15) transparent;
     scrollbar-width: thin;
   }
 

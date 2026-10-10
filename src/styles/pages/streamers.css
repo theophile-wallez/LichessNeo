@@ -6,28 +6,24 @@
 main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/streamer'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
   --lr-ext-nav-color: var(--lr-ext-purple);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02--caa9fa.svg');
 }
 
 .subnav[data-lr-ext-nav~='streamers'] a[href$='/streamer/edit'],
 main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/streamer/edit'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
   --lr-ext-nav-color: var(--lr-ext-purple);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01--caa9fa.svg');
 }
 
 .subnav[data-lr-ext-nav~='streamers'] a[href*='/blog/'],
 main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active*='/blog/'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='streamers'] a[href$='/about'],
 main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/about'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package--a2edfd.svg');
 }
 
 /* Streamers: Lichess sizes the name from the window's width, so on a narrow desktop it ran
@@ -41,7 +37,7 @@ main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/about'] 
 }
 
 .streamer-list .streamer:hover {
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
 }
 
 @media (min-width: 1020px) and (max-width: 1259.98px) {

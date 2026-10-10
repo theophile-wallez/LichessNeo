@@ -6,7 +6,7 @@
 h1,
 .box__top h1,
 .page-menu__content h1 {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-weight: 800 !important;
   letter-spacing: -0.02em !important;
 }
@@ -31,7 +31,7 @@ h3 {
 
 .learn-stages .categ > h2,
 .practice-app section > h2 {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 1.5em !important;
   font-weight: 800 !important;
   text-align: left !important;
@@ -75,13 +75,13 @@ h3 {
 }
 
 .subnav a:hover {
-  background: #ffffff0d !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-5) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .subnav a.active {
-  background: #ffffff1a !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-10) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }
 
@@ -89,10 +89,10 @@ h3 {
   display: none !important;
 }
 
-/* Menus with an icon tile per link; each page sets `--lr-ext-nav-color` and either
- * `--lr-ext-nav-glyph`, a Hugeicon painted in that color over the tile (`::after`), or
- * `--lr-ext-nav-icon`, a picture. content/layout/marks.ts tags the menu (`data-lr-ext-nav`), as a
- * `:has()` here slowed every board move. */
+/* Menus with an icon tile per link; each page sets `--lr-ext-nav-color` and
+ * `--lr-ext-nav-glyph`, a Hugeicon painted in that color over the tile (`::after`).
+ * content/layout/marks.ts tags the menu (`data-lr-ext-nav`), as a `:has()` here slowed every
+ * board move. */
 .subnav:is(
     [data-lr-ext-nav~='bots'],
     [data-lr-ext-nav~='broadcast'],
@@ -108,9 +108,7 @@ h3 {
   a {
   /* The open link's variables also sit on <main> (menu-titles.css): not inherited here. */
   --lr-ext-nav-glyph: initial;
-  --lr-ext-nav-icon: initial;
   --lr-ext-nav-color: initial;
-  --lr-ext-title-icon: initial;
   position: relative;
   display: flex !important;
   align-items: center;
@@ -139,9 +137,11 @@ h3 {
   /* A link with Lichess's glyph (`[data-icon]`) gets its Hugeicon's mask (theme/hugeicons). */
   mask: none;
   -webkit-text-fill-color: initial;
-  background:
-    var(--lr-ext-nav-icon, none) center / 24px 24px no-repeat,
-    color-mix(in srgb, var(--lr-ext-nav-color, #fff) 16%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 16%,
+    transparent
+  );
   box-shadow: inset 0 1px #ffffff14;
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -171,7 +171,11 @@ h3 {
   height: 24px;
   margin: -12px 0 0;
   border: none;
-  background: color-mix(in srgb, var(--lr-ext-nav-color, #fff) 80%, #fff);
+  background: color-mix(
+    in srgb,
+    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 80%,
+    var(--lr-ext-text-strong)
+  );
   /* Without a glyph, a mask that hides it all. */
   mask: var(--lr-ext-nav-glyph, linear-gradient(#0000, #0000)) center / contain no-repeat;
   pointer-events: none;
@@ -224,7 +228,11 @@ h3 {
      link: the glyph keeps its own box. */
   width: 24px !important;
   height: 24px !important;
-  background: color-mix(in srgb, var(--lr-ext-nav-color, #fff) 80%, #fff) !important;
+  background: color-mix(
+    in srgb,
+    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 80%,
+    var(--lr-ext-text-strong)
+  ) !important;
   transform: none !important;
 }
 
@@ -241,138 +249,125 @@ h3 {
     [data-lr-ext-nav~='arena-history']
   )
   a.active::before {
-  background-color: color-mix(in srgb, var(--lr-ext-nav-color, #fff) 32%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 32%,
+    transparent
+  );
   box-shadow:
     inset 0 1px #ffffff26,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-nav-color, #fff) 45%, transparent);
+    0 0 0 1px
+      color-mix(in srgb, var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 45%, transparent);
 }
 
-/* Settings links: the variables also go on the open page, for its title's tile, which takes
- * the Hugeicon as a file in its color (`--lr-ext-title-icon`): a tile can't hold a mask. */
+/* Settings links: the variables also go on the open page, for its title's tile. */
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/profile'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/profile'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01--a2edfd.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/preferences/display'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/display'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/preferences/chess-clock'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/chess-clock'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/preferences/game-behavior'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/game-behavior'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03.svg');
   --lr-ext-nav-color: var(--lr-ext-purple);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03--caa9fa.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/preferences/privacy'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/privacy'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/preferences/notification'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/notification'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/kid'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/kid'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01.svg');
   --lr-ext-nav-color: var(--lr-ext-pink);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01--ff94d1.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/username'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/username'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account.svg');
   --lr-ext-nav-color: var(--lr-ext-red);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account--ff7777.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/coach/edit'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/coach/edit'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher--a2edfd.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/passwd'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/passwd'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/email'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/email'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01--a2edfd.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/twofactor'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/twofactor'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01--a2edfd.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/oauth/token'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/oauth/token'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01.svg');
   --lr-ext-nav-color: var(--lr-ext-purple);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01--caa9fa.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/security'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/security'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01.svg');
   --lr-ext-nav-color: var(--lr-ext-accent);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01--7e88db.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/preferences/network'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/network'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01--a2edfd.svg');
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/dgt'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/dgt'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-grey-300);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01--a1a5ad.svg');
+  --lr-ext-nav-color: var(--lr-ext-neutral-11);
 }
 
 .subnav[data-lr-ext-nav~='account'] a[href$='/account/close'],
 main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/close'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01.svg');
   --lr-ext-nav-color: var(--lr-ext-red);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01--ff7777.svg');
 }
 
-/* A settings page's title: white rather than Lichess's green, after its link's tile
+/* A settings page's title: the text's color rather than Lichess's green, after its link's tile
  * (menu-titles.css). */
 main.account .page-menu__content h1 {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* Two-factor's "enabled" title has its own green check; the tile replaces it. */

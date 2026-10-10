@@ -4,7 +4,7 @@
   /* Stripes per move number (data-lr-ext-even, from the review): the comment cards in
      between vary in height. */
   html.lr-ext-review-moves main.analyse .tview2-column > [data-lr-ext-even] {
-    background: var(--lr-ext-grey-850) !important;
+    background: var(--lr-ext-neutral-3) !important;
   }
 
   /* Hide Lichess's comments and computer lines, and the "..." fillers around them, but keep
@@ -27,7 +27,7 @@
 
   /* With its comment hidden, a card keeps the neutral color, not the move's. */
   html.lr-ext-review-moves main.analyse .tview2-column > interrupt {
-    --lr-ext-note: var(--lr-ext-grey-500) !important;
+    --lr-ext-note: var(--lr-ext-neutral-9) !important;
   }
 
   html.lr-ext-review-moves main.analyse .tview2-column > index {
@@ -68,12 +68,12 @@
   }
 
   html.lr-ext-review-moves main.analyse .tview2-column > move:hover san {
-    background: #ffffff14;
+    background: var(--lr-ext-lift-8);
   }
 
   html.lr-ext-review-moves main.analyse .tview2-column > move.active san {
-    background: #ffffff26;
-    color: #fff;
+    background: var(--lr-ext-lift-15);
+    color: var(--lr-ext-text-strong);
   }
 
   /* A piece's figurine (Lichess's chess font) sat flush against its square: a hair of room,
@@ -215,7 +215,7 @@
     background: linear-gradient(
       to right,
       var(--lr-ext-class-color, var(--lr-ext-text-dim)) calc(var(--lr-ext-cost) * 100%),
-      #ffffff14 0
+      var(--lr-ext-lift-8) 0
     );
   }
 }

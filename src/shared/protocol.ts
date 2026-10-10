@@ -21,6 +21,15 @@ const CoachStateSchema = z.object({
   talking: z.boolean(),
 });
 
+/** Lichess's own color schemes, as its Theme menu offers them. */
+export const ColorSchemeSchema = z.enum(['system', 'light', 'dark']);
+
+const ColorSchemePickSchema = z.object({
+  type: z.literal(messageType('color-scheme')),
+  scheme: ColorSchemeSchema,
+});
+
+export type ColorScheme = z.infer<typeof ColorSchemeSchema>;
 export type SoundFiles = z.infer<typeof SoundsSchema>['sounds'];
 export type CoachState = Omit<z.infer<typeof CoachStateSchema>, 'type'>;
 
@@ -53,3 +62,9 @@ export const postCoachState = (state: CoachState): void =>
   post({ type: messageType('coach'), ...state });
 export const onCoachState = (handler: (state: CoachState) => void): (() => void) =>
   listen(CoachStateSchema, ({ coach, mood, talking }) => handler({ coach, mood, talking }));
+
+/** Content → page: the color scheme picked in the extension's settings, for Lichess to keep. */
+export const postColorScheme = (scheme: ColorScheme): void =>
+  post({ type: messageType('color-scheme'), scheme });
+export const onColorScheme = (handler: (scheme: ColorScheme) => void): (() => void) =>
+  listen(ColorSchemePickSchema, message => handler(message.scheme));

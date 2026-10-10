@@ -64,7 +64,7 @@
   padding: 0 12px;
   border: none !important;
   border-radius: 7px !important;
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   box-shadow: none !important;
   color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
@@ -74,7 +74,7 @@
 }
 
 .user-show > #us_profile .time-selector-buttons button:hover {
-  background: #ffffff1a !important;
+  background: var(--lr-ext-lift-10) !important;
   color: var(--lr-ext-text-strong) !important;
 }
 
@@ -86,7 +86,7 @@
 
 .user-show > #us_profile #time-range-slider .noUi-target {
   border: none !important;
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
 }
 
 .user-show > #us_profile #time-range-slider .noUi-connect {
@@ -96,8 +96,8 @@
 .user-show > #us_profile #time-range-slider .noUi-handle {
   border: none !important;
   border-radius: 3px !important;
-  background: #fff !important;
-  box-shadow: 0 1px 3px #000000a6 !important;
+  background: var(--lr-ext-white) !important;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-65) !important;
 }
 
 /* Lichess fixes the about column at 350px and scrolls it on hover; let it grow. */
@@ -286,7 +286,7 @@
   max-width: 100%;
   padding: 5px 11px;
   border-radius: 999px;
-  background: #ffffff0f;
+  background: var(--lr-ext-lift-6);
   color: var(--lr-ext-text) !important;
   font-size: 12.5px;
   font-weight: 600;
@@ -296,11 +296,11 @@
 }
 
 .user-show > #us_profile .col2 > a:hover {
-  background: #ffffff26;
+  background: var(--lr-ext-lift-15);
   color: var(--lr-ext-text-strong) !important;
 }
 
-/* Chess Insights: the card stays dark, only the icon is in the accent. */
+/* Chess Insights: the card stays plain, only the icon is in the accent. */
 .user-show > #us_profile .insight,
 .user-show > #us_profile .tutor-link {
   gap: 14px;
@@ -312,7 +312,7 @@
 }
 
 .user-show > #us_profile .insight:hover {
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   color: var(--lr-ext-text) !important;
 }
 

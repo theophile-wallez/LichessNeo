@@ -39,7 +39,7 @@ main.round :is(i5d, rm6) :is(aPp, l4x) {
   background: repeating-linear-gradient(
       to bottom,
       transparent 0 30px,
-      var(--lr-ext-grey-850) 30px 60px
+      var(--lr-ext-neutral-3) 30px 60px
     )
     local !important;
   box-shadow: none !important;
@@ -80,13 +80,13 @@ main.round :is(i5d, rm6) :is(Z7yx, kwdb) {
 }
 
 main.round :is(i5d, rm6) :is(Z7yx, kwdb):hover {
-  background: #ffffff14 !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-8) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.round :is(i5d, rm6) :is(Z7yx, kwdb):is(.a1t, .active) {
-  background: #ffffff26 !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-15) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.round :is(i5d, rm6) .result-wrap {
@@ -95,7 +95,7 @@ main.round :is(i5d, rm6) .result-wrap {
 
 main.round :is(i5d, rm6) .result {
   border: none !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 16px !important;
 }
 
@@ -129,7 +129,7 @@ main.round :is(i5d, rm6) bo3 .noop {
 
 main.round :is(i5d, rm6) bo3 .fbt:hover:not(.disabled) {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* No analysis button while playing: the arrows take the bar (the menu is right of the

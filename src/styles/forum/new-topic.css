@@ -1,6 +1,6 @@
 /* ---- New topic --- */
 
-/* Lichess's red warning box as a dark card: "Important" on a badge, the four tips
+/* Lichess's red warning box as one of our cards: "Important" on a badge, the four tips
    as tiles with their emoji. */
 main.forum-topic.topic-form .warning {
   display: grid;
@@ -21,7 +21,7 @@ main.forum-topic.topic-form .warning h2 {
   align-items: center;
   gap: 10px;
   margin: 0 0 4px !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 18px !important;
   font-weight: 800 !important;
 }
@@ -54,14 +54,14 @@ main.forum-topic.topic-form .warning p {
   padding: 12px 14px !important;
   padding-inline-start: 72px !important;
   border-radius: 10px;
-  background: #ffffff08;
+  background: var(--lr-ext-lift-3);
   color: var(--lr-ext-text);
   line-height: 1.45;
   transition: background-color 0.15s !important;
 }
 
 main.forum-topic.topic-form .warning p:hover {
-  background: #ffffff0f;
+  background: var(--lr-ext-lift-6);
 }
 
 main.forum-topic.topic-form .warning p::before {
@@ -72,12 +72,10 @@ main.forum-topic.topic-form .warning p::before {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background:
+  background: var(--lr-ext-tip);
+  mask:
     var(--lr-ext-tip-icon) center / 26px no-repeat,
-    color-mix(in srgb, var(--lr-ext-tip) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-tip) 35%, transparent);
+    linear-gradient(#0000003d, #0000003d);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
@@ -87,22 +85,22 @@ main.forum-topic.topic-form .warning p:hover::before {
 
 main.forum-topic.topic-form .warning p:nth-of-type(1) {
   --lr-ext-tip: var(--lr-ext-cyan);
-  --lr-ext-tip-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle--a2edfd.svg');
+  --lr-ext-tip-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
 }
 
 main.forum-topic.topic-form .warning p:nth-of-type(2) {
   --lr-ext-tip: var(--lr-ext-red);
-  --lr-ext-tip-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alert-02--ff7777.svg');
+  --lr-ext-tip-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alert-02.svg');
 }
 
 main.forum-topic.topic-form .warning p:nth-of-type(3) {
   --lr-ext-tip: var(--lr-ext-purple);
-  --lr-ext-tip-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01--caa9fa.svg');
+  --lr-ext-tip-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
 }
 
 main.forum-topic.topic-form .warning p:nth-of-type(4) {
   --lr-ext-tip: var(--lr-ext-accent);
-  --lr-ext-tip-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01--7e88db.svg');
+  --lr-ext-tip-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01.svg');
 }
 
 main.forum-topic.topic-form .warning strong a {
@@ -134,8 +132,9 @@ main.search[data-lr-ext-search$='/forum/search'] > .nb-results::before {
   content: '';
   width: 28px;
   height: 28px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--caa9fa.svg')
-    center / 22px no-repeat;
+  background: var(--lr-ext-purple);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01.svg') center / 22px
+    no-repeat;
 }
 
 main.search .search__results,
@@ -184,7 +183,7 @@ main.search .search__results td {
 }
 
 main.search .search__results a.post {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 16px !important;
   font-weight: 800;
   line-height: 1.35;

@@ -24,7 +24,7 @@
   align-items: center;
   gap: 12px;
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 28px !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
@@ -124,13 +124,13 @@
 
 .fide-players-table thead th > a[href]:hover {
   background: var(--lr-ext-bg-raised) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .fide-players-table thead th > a.active {
   background: var(--lr-ext-bg-raised) !important;
-  box-shadow: inset 0 1px 0 #ffffff14;
-  color: #fff !important;
+  box-shadow: inset 0 1px 0 var(--lr-ext-lift-8);
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* Each rating's time-control glyph (Lichess's font) in its color. */
@@ -139,7 +139,7 @@
   thead
   th:is(:nth-child(2), :nth-child(3), :nth-child(4)) {
   --lr-ext-mode-icon: var(--lr-ext-mode-classical);
-  --lr-ext-mode-color: #2dd4bf;
+  --lr-ext-mode-color: var(--lr-ext-mode-classical-color);
 }
 
 :is(.fide-players, .fide-federation) .fide-players-table thead th:nth-child(3) {

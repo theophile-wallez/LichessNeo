@@ -37,9 +37,9 @@
   inset: 0 -140px 0 0;
   border-radius: 6px;
   background:
-    repeating-linear-gradient(90deg, #ffffff24 0 18px, transparent 18px 40px) 0 100% / 40px 2px
-      repeat-x,
-    linear-gradient(var(--lr-ext-grey-800), var(--lr-ext-grey-850));
+    repeating-linear-gradient(90deg, var(--lr-ext-lift-15) 0 18px, transparent 18px 40px) 0 100% /
+      40px 2px repeat-x,
+    linear-gradient(var(--lr-ext-neutral-4), var(--lr-ext-neutral-3));
 }
 
 html[dir='rtl'] .racer .racer__race__track::before {
@@ -52,10 +52,10 @@ html[dir='rtl'] .racer .racer__race__track::before {
   inset-inline-end: -88px;
   width: 10px;
   background: conic-gradient(
-      #fff 25%,
-      var(--lr-ext-grey-950) 0 50%,
-      #fff 0 75%,
-      var(--lr-ext-grey-950) 0
+      var(--lr-ext-white) 25%,
+      var(--lr-ext-ink) 0 50%,
+      var(--lr-ext-white) 0 75%,
+      var(--lr-ext-ink) 0
     )
     0 0 / 10px 10px;
   opacity: 0.85;
@@ -63,10 +63,10 @@ html[dir='rtl'] .racer .racer__race__track::before {
 
 .racer .racer__race__track--me::before {
   background:
-    repeating-linear-gradient(90deg, #ffffff38 0 18px, transparent 18px 40px) 0 100% / 40px 2px
-      repeat-x,
-    linear-gradient(var(--lr-ext-grey-700), var(--lr-ext-grey-750));
-  box-shadow: inset 0 0 0 1px #ffffff1f;
+    repeating-linear-gradient(90deg, var(--lr-ext-lift-25) 0 18px, transparent 18px 40px) 0 100% /
+      40px 2px repeat-x,
+    linear-gradient(var(--lr-ext-neutral-6), var(--lr-ext-neutral-5));
+  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-12);
 }
 
 .racer--racing .racer__race__track::before {
@@ -89,7 +89,7 @@ html[dir='rtl'] .racer .racer__race__track::before {
   flex-basis: 3.4rem !important;
   font-size: 3.4rem !important;
   translate: 0 3px;
-  text-shadow: 0 2px 3px #00000080 !important;
+  text-shadow: 0 2px 3px var(--lr-ext-shade-50) !important;
 }
 
 /* Lichess's boost flame, in fire colors rather than the car's. */
@@ -119,8 +119,8 @@ html[dir='rtl'] .racer .racer__race__track::before {
   height: calc(var(--lr-ext-lane-h) - 8px) !important;
   padding: 0 !important;
   border-radius: 6px;
-  background: #0000006b !important;
-  color: #fff !important;
+  background: var(--lr-ext-shade-40) !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 14px !important;
   font-weight: 800;
@@ -130,6 +130,7 @@ html[dir='rtl'] .racer .racer__race__track::before {
 .racer .racer__race__track--first .racer__race__score {
   background: linear-gradient(var(--lr-ext-orange-dark), var(--lr-ext-orange-darker)) !important;
   box-shadow: inset 0 1px 0 #ffffff66;
+  color: var(--lr-ext-white) !important;
   text-shadow: 0 1px 1px #0000004d;
 }
 
@@ -153,7 +154,7 @@ html[dir='rtl'] .racer .racer__race__track::before {
 
 :is(.racer, .storm) .puz-history .box__top h2 {
   margin: 0;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 22px;
   font-weight: 800;
 }
@@ -175,7 +176,7 @@ html[dir='rtl'] .racer .racer__race__track::before {
 :is(.racer, .storm) .puz-history__filter.active {
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 :is(.racer, .storm) .puz-history__rounds {

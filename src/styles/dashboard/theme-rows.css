@@ -7,7 +7,7 @@
   padding: 16px 20px;
   border-radius: 12px;
   background: var(--lr-ext-bg-panel);
-  box-shadow: inset 0 1px 0 #ffffff0f;
+  box-shadow: inset 0 1px 0 var(--lr-ext-lift-6);
 }
 
 /* Lichess's 40% basis for the name pushed the tiles under it on narrower pages, row by row.
@@ -26,7 +26,7 @@
 }
 
 .puzzle-dashboard .puzzle-dashboard__theme__name a {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .puzzle-dashboard .puzzle-dashboard__theme__name a:hover {
@@ -40,8 +40,8 @@
   line-height: 1.45;
 }
 
-/* Smaller, darker tiles of a fixed width; the last one as wide as a "12 to replay", so the
- * rows line up whichever tile they end on. */
+/* Smaller tiles of a fixed width, set off from the card; the last one as wide as a
+ * "12 to replay", so the rows line up whichever tile they end on. */
 .puzzle-dashboard .puzzle-dashboard__theme .puzzle-dashboard__metrics {
   flex: 0 0 auto !important;
   justify-content: flex-end;
@@ -108,7 +108,7 @@
   padding: 72px 24px !important;
   border-radius: 12px;
   background: var(--lr-ext-bg-panel);
-  box-shadow: inset 0 1px 0 #ffffff0f;
+  box-shadow: inset 0 1px 0 var(--lr-ext-lift-6);
 }
 
 .puzzle-dashboard .puzzle-dashboard__empty a {
@@ -117,7 +117,7 @@
   border-radius: 7px;
   background: var(--lr-ext-btn-primary);
   box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-weight: 800;
 }
 

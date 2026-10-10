@@ -56,7 +56,7 @@
 
 .ublog-post .ublog-post__title {
   margin: 28px 0 14px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: clamp(28px, 3vw, 40px) !important;
   font-weight: 800 !important;
   line-height: 1.15;
@@ -75,7 +75,7 @@
 }
 
 .ublog-post .ublog-post__meta .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 15px !important;
   font-weight: 800;
 }
@@ -91,9 +91,9 @@
 .ublog-post .ublog-post__like--mini {
   margin: 0 !important;
   padding: 4px 10px !important;
-  border: 1px solid #ffffff14;
+  border: 1px solid var(--lr-ext-lift-8);
   border-radius: 999px;
-  background: #ffffff0a;
+  background: var(--lr-ext-lift-4);
   color: var(--lr-ext-text) !important;
   font-weight: 700;
   transition:
@@ -105,7 +105,7 @@
 .ublog-post .ublog-post__like--mini:hover {
   border-color: color-mix(in srgb, var(--lr-ext-red-dark) 40%, transparent);
   background: color-mix(in srgb, var(--lr-ext-red-dark) 8%, transparent);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .ublog-post .ublog-post__views strong {
@@ -121,7 +121,7 @@
 }
 
 .ublog-post .ublog-post__meta__report.button:hover {
-  background: #ffffff0f !important;
+  background: var(--lr-ext-lift-6) !important;
   color: var(--c-bad) !important;
 }
 
@@ -135,9 +135,9 @@
 .ublog-post .ublog-post__topics a {
   margin: 0 !important;
   padding: 6px 12px !important;
-  border: 1px solid #ffffff14;
+  border: 1px solid var(--lr-ext-lift-8);
   border-radius: 999px !important;
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   color: var(--lr-ext-text) !important;
   font-size: 13px;
   font-weight: 600;
@@ -146,14 +146,14 @@
 .ublog-post .ublog-post__topics a:hover {
   border-color: color-mix(in srgb, var(--lr-ext-accent) 50%, transparent);
   background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .ublog-post .ublog-post__intro {
   margin: 24px 0 28px !important;
   padding-inline-start: 16px;
   border-inline-start: 3px solid var(--lr-ext-accent);
-  color: var(--lr-ext-grey-100);
+  color: var(--lr-ext-neutral-13);
   font-size: 19px !important;
   font-weight: 600;
   line-height: 1.5;
@@ -162,7 +162,7 @@
 /* ---- Typography --- */
 
 .ublog-post .ublog-post__markup {
-  color: var(--lr-ext-grey-200);
+  color: var(--lr-ext-neutral-12);
   font-size: 16px !important;
   line-height: 1.7 !important;
 }
@@ -173,7 +173,7 @@
 
 .ublog-post .ublog-post__markup :is(h2, h3, h4) {
   margin: 1.8em 0 0.6em !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 800 !important;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -210,7 +210,7 @@
 }
 
 .ublog-post .ublog-post__markup strong {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 .ublog-post .ublog-post__markup img,
@@ -252,28 +252,28 @@
   border: none !important;
   border-inline-start: 3px solid var(--lr-ext-accent) !important;
   border-radius: 0 8px 8px 0;
-  background: #ffffff08;
-  color: var(--lr-ext-grey-100);
+  background: var(--lr-ext-lift-3);
+  color: var(--lr-ext-neutral-13);
 }
 
 .ublog-post .ublog-post__markup :not(pre) > code {
   padding: 2px 6px;
   border-radius: 4px;
-  background: #ffffff12;
+  background: var(--lr-ext-lift-7);
   font-size: 0.9em;
 }
 
 .ublog-post .ublog-post__markup hr {
   margin: 2em 0;
   border: none;
-  border-top: 1px solid #ffffff14;
+  border-top: 1px solid var(--lr-ext-lift-8);
 }
 
 /* Lichess's links and charity note after a Lichess post: quiet, not green. */
 .ublog-post .ublog-post__lichess {
   margin: 40px 0 !important;
   padding-top: 24px;
-  border-top: 1px solid #ffffff14;
+  border-top: 1px solid var(--lr-ext-lift-8);
   color: var(--lr-ext-text-dim);
   font-size: 13px;
 }
@@ -281,7 +281,7 @@
 .ublog-post .ublog-post__lichess .connect-links a {
   margin: 0 4px 12px !important;
   padding: 6px 12px;
-  border: 1px solid #ffffff14;
+  border: 1px solid var(--lr-ext-lift-8);
   border-radius: 999px;
   color: var(--lr-ext-text) !important;
   font-size: 13px;
@@ -289,8 +289,8 @@
 }
 
 .ublog-post .ublog-post__lichess .connect-links a:hover {
-  border-color: #ffffff33;
-  color: #fff !important;
+  border-color: var(--lr-ext-lift-20);
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .ublog-post .ublog-post__lichess a:not(.connect-links a) {
@@ -303,7 +303,7 @@
 
 .ublog-post .ublog-post__footer h2:not(.ublog-post-card__title) {
   margin-bottom: 20px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 22px !important;
   font-weight: 800 !important;
 }

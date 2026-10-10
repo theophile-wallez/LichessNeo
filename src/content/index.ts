@@ -1,10 +1,12 @@
 import { startFeatures } from '#shared/features.ts';
 import { assets } from './bootstrap/assets.ts';
 import { packs } from './packs/index.ts';
+import { colorThemes } from './colors/index.ts';
 import { fonts } from './bootstrap/fonts.ts';
 import { donate } from './sidebar/donate.ts';
 import { sidebarCollapse } from './sidebar/collapse.ts';
 import { drawer } from './sidebar/drawer.ts';
+import { schemeToggle } from './sidebar/scheme-toggle.ts';
 import { currentSection } from './sidebar/current.ts';
 import { accountRating } from './sidebar/account-rating.ts';
 import { coachChoice } from './bootstrap/coach-choice.ts';
@@ -57,15 +59,16 @@ import { startSyncLoop } from './sync-loop.ts';
 // APIs, not Lichess's objects (see src/page for those).
 
 function main(): void {
-  // Our mark, the picked packs and the account's rating go on <html> first, so the page never
-  // shows Lichess's board, pieces or avatar in their place.
-  startFeatures([assets, packs, accountRating]);
+  // Our mark, the picked packs and color themes, and the account's rating go on <html> first, so
+  // the page never shows Lichess's board, pieces, colors or avatar in their place.
+  startFeatures([assets, packs, colorThemes, accountRating]);
   if (reloadIfInjectedLate()) return;
   startFeatures([
     fonts,
     donate,
     sidebarCollapse,
     drawer,
+    schemeToggle,
     currentSection,
     coachChoice,
     fideOffset,

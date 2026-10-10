@@ -22,13 +22,13 @@ main.puzzle .puzzle__feedback .icon {
   margin-inline-end: 14px !important;
 }
 
-/* The king on a tile; the card stays dark, so the tile shows the side to move
-   (light under the black king, which would vanish otherwise). */
+/* The king on a tile that shows the side to move: light under the black king, which would
+   vanish on a dark card. */
 main.puzzle .puzzle__feedback .no-square {
   box-sizing: border-box;
   padding: 4px;
   border-radius: 12px;
-  background: #ffffff14;
+  background: var(--lr-ext-lift-8);
 }
 
 /* The black king paints its own light tile with a spread shadow: a :has(piece) restyled
@@ -52,17 +52,17 @@ main.puzzle .puzzle__feedback .instruction em {
   opacity: 0.85;
 }
 
-/* Your turn: the same dark card for either side; a white card was the page's brightest spot. */
+/* Your turn: the same card for either side; Lichess's white card was the page's brightest spot. */
 main.puzzle .puzzle__feedback.play {
   background: var(--lr-ext-bg-raised) !important;
   color: var(--lr-ext-text) !important;
 }
 
 main.puzzle .puzzle__feedback.play strong {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
-/* Right or wrong: the card stays dark, only the badge and the title take the color. */
+/* Right or wrong: the card keeps its color, only the badge and the title take the verdict's. */
 main.puzzle .puzzle__feedback:is(.good, .fail) {
   background: var(--lr-ext-bg-raised) !important;
   color: var(--lr-ext-text) !important;
@@ -93,7 +93,7 @@ main.puzzle .puzzle__feedback:is(.good, .fail) .icon {
   box-shadow:
     inset 0 1px 0 #ffffff40,
     0 0 0 5px color-mix(in srgb, var(--lr-ext-feedback) 18%, transparent);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 30px !important;
   font-weight: 800;
   line-height: 56px !important;
@@ -120,7 +120,7 @@ main.puzzle .puzzle__feedback .view_solution .button {
   border-radius: 8px !important;
   background: var(--lr-ext-btn-grey) !important;
   box-shadow: var(--lr-ext-btn-grey-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   line-height: 1.15;
@@ -164,8 +164,8 @@ main.puzzle .puzzle__feedback .view_solution.skip .button::first-letter {
 
 /* The hint once shown: pressed in, not a call to action. */
 main.puzzle .puzzle__feedback .view_solution .button:not(.button-empty) {
-  background: var(--lr-ext-grey-850) !important;
-  box-shadow: inset 0 2px 5px #00000080 !important;
+  background: var(--lr-ext-neutral-3) !important;
+  box-shadow: inset 0 2px 5px var(--lr-ext-shade-50) !important;
   color: var(--lr-ext-text-dim) !important;
 }
 
@@ -182,7 +182,7 @@ main.puzzle .puzzle__feedback.after {
 main.puzzle .puzzle__feedback.after .complete {
   flex: none !important;
   padding: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 22px;
   font-weight: 800;
   text-align: center;
@@ -209,7 +209,7 @@ main.puzzle .puzzle__feedback.after .continue {
   border-radius: 10px;
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 18px !important;
   font-weight: 800;
   text-transform: none !important;
@@ -269,8 +269,8 @@ main.puzzle .puzzle__feedback.after .puzzle__vote .button.vote-down:is(:hover, .
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.active {
-  background: var(--lr-ext-grey-850) !important;
-  box-shadow: inset 0 2px 5px #00000080 !important;
+  background: var(--lr-ext-neutral-3) !important;
+  box-shadow: inset 0 2px 5px var(--lr-ext-shade-50) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__more .button {

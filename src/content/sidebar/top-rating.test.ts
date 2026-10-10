@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { topRating, UserSchema } from './top-rating.ts';
+import { pickedRating, ratingsOf, topRating, UserSchema } from './top-rating.ts';
 
 // Lichess's `/api/user/<name>`, cut to what's read.
 const user = (perfs: Record<string, unknown>) => UserSchema.parse({ perfs });
@@ -28,5 +28,27 @@ describe('topRating', () => {
 
   it('gives null before any game', () => {
     expect(topRating(user({ blitz: { games: 0, rating: 1500, prov: true } }))).toBeNull();
+  });
+});
+
+describe('pickedRating', () => {
+  const profile = user({
+    blitz: { games: 25, rating: 1584, prov: true },
+    rapid: { games: 78, rating: 1673 },
+  });
+  const top = topRating(profile);
+
+  it('shows the most played speed by default, or the speed picked', () => {
+    expect(pickedRating(top, ratingsOf(profile), 'mostPlayed')).toEqual(top);
+    expect(pickedRating(top, ratingsOf(profile), 'blitz')).toEqual({
+      speed: 'blitz',
+      rating: 1584,
+      provisional: true,
+    });
+  });
+
+  it('falls back to the most played one for a speed without a rating, or ratings kept before', () => {
+    expect(pickedRating(top, ratingsOf(profile), 'classical')).toEqual(top);
+    expect(pickedRating(top, undefined, 'blitz')).toEqual(top);
   });
 });

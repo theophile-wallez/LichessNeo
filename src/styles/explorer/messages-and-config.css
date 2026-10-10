@@ -24,7 +24,7 @@
 
 .explorer-box .message :is(strong, h3) {
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 15px;
   font-weight: 700;
 }
@@ -110,13 +110,13 @@
 
 .explorer-box.explorer__config .choices button:hover {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .explorer-box.explorer__config .choices button:is([aria-pressed='true'], .active) {
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 .explorer-box.explorer__config .choices button:is([aria-pressed='true'], .active):hover {
@@ -129,7 +129,7 @@
 }
 
 .explorer-box.explorer__config .speed .choices button[aria-pressed='true'] [data-icon]::before {
-  --lr-ext-mode-color: #fff;
+  --lr-ext-mode-color: var(--lr-ext-white);
 }
 
 .explorer-box.explorer__config .name .player-name {
@@ -154,8 +154,7 @@
   padding: 0 8px !important;
   border-radius: 5px !important;
   background: var(--lr-ext-bg-raised) !important;
-  color: #fff !important;
-  color-scheme: dark;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
 }
 

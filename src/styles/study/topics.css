@@ -19,7 +19,7 @@
 
 .study-topics h2 {
   margin: 0 0 12px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 18px !important;
   font-weight: 800 !important;
 }
@@ -41,9 +41,9 @@
 .study-topics .topic-list a {
   margin: 0 !important;
   padding: 8px 14px !important;
-  border: 1px solid #ffffff14;
+  border: 1px solid var(--lr-ext-lift-8);
   border-radius: 999px !important;
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   color: var(--lr-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
@@ -56,7 +56,7 @@
 .study-topics .topic-list a:hover {
   border-color: color-mix(in srgb, var(--lr-ext-accent) 50%, transparent);
   background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 @media (max-width: 799.98px) {
@@ -102,10 +102,10 @@ main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > h2 {
   margin: 0 !important;
   padding: 14px 16px 12px !important;
   border: 1px solid var(--lr-ext-card-border);
-  border-bottom-color: #ffffff0f;
+  border-bottom-color: var(--lr-ext-lift-6);
   border-radius: 10px 10px 0 0;
   background: var(--lr-ext-bg-panel);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 800 !important;
   break-after: avoid;
@@ -165,7 +165,7 @@ main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a::before {
 
 main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a:hover {
   background: var(--lr-ext-menu-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* Only the picks scroll: the menu and title stay put, as on the study lists. */

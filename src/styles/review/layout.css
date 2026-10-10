@@ -195,8 +195,8 @@
 
   .lr-ext-review__back:hover,
   .lr-ext-review__close:hover {
-    background: #ffffff12;
-    color: #fff;
+    background: var(--lr-ext-lift-7);
+    color: var(--lr-ext-text-strong);
   }
 
   .lr-ext-review__title {
@@ -204,7 +204,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: #fff;
+    color: var(--lr-ext-text-strong);
     font-size: 17px;
     font-weight: 800;
   }
@@ -217,7 +217,7 @@
     height: 24px;
     border-radius: 50%;
     background: var(--lr-ext-accent);
-    color: #fff;
+    color: var(--lr-ext-white);
     font-size: 14px;
     line-height: 1;
   }
@@ -243,7 +243,7 @@
     padding: 10px 12px;
     border-radius: 8px;
     background: rgba(212, 50, 42, 0.15);
-    color: #fff;
+    color: var(--lr-ext-text-strong);
     font-size: 14px;
     line-height: 1.4;
   }

@@ -22,7 +22,7 @@ main.lobby .lobby__tournaments-simuls .lobby__box__top {
 }
 
 main.lobby .lobby__tournaments-simuls .lobby__box__top:hover {
-  background: #ffffff05 !important;
+  background: var(--lr-ext-lift-2) !important;
 }
 
 main.lobby .lobby__box__top .title {
@@ -30,21 +30,21 @@ main.lobby .lobby__box__top .title {
   align-items: center;
   gap: 12px;
   padding: 0 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: inherit !important;
   font-size: 17px !important;
   font-weight: 800 !important;
 }
 
 /* The box's Hugeicon on a tile tinted with its color. Lichess's glyph there is masked as
- * its Hugeicon (theme/hugeicons), which would cut the tile to the icon's shape: the icon
- * comes as a file in its color instead, and the glyph stays see-through. */
+ * its Hugeicon (theme/hugeicons): the mask is ours instead, the icon at full strength over
+ * the tile at 15%, and the glyph stays see-through. */
 main.lobby .lobby__box__top[href$='/tournament'] {
-  --lr-ext-box-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion--7e88db.svg');
+  --lr-ext-box-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion.svg');
 }
 
 main.lobby .lobby__box__top[href$='/simul'] {
-  --lr-ext-box-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--7e88db.svg');
+  --lr-ext-box-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
 }
 
 main.lobby .lobby__box__top .title::before {
@@ -54,26 +54,26 @@ main.lobby .lobby__box__top .title::before {
   height: 40px;
   margin: 0 !important;
   border-radius: 12px;
-  background:
-    var(--lr-ext-box-icon, none) center / 22px no-repeat,
-    color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
+  background: var(--lr-ext-accent-hover);
   font-size: 22px;
-  mask: none;
+  mask:
+    var(--lr-ext-box-icon, linear-gradient(#0000, #0000)) center / 22px no-repeat,
+    linear-gradient(#00000026, #00000026);
   -webkit-text-fill-color: transparent;
 }
 
 main.lobby .lobby__box__top .more {
   padding: 7px 14px;
   border-radius: 999px;
-  background: #ffffff0d;
-  color: #fff !important;
+  background: var(--lr-ext-lift-5);
+  color: var(--lr-ext-text-strong) !important;
   font-size: 13px;
   font-weight: 700;
   transition: background 0.15s !important;
 }
 
 main.lobby .lobby__box__top:hover .more {
-  background: #ffffff1a;
+  background: var(--lr-ext-lift-10);
 }
 
 main.lobby .lobby__tournaments-simuls .lobby__box__content {
@@ -92,12 +92,12 @@ main.lobby .lobby__tournaments-simuls tr {
 }
 
 main.lobby .lobby__tournaments-simuls tr:hover {
-  background: #ffffff08 !important;
+  background: var(--lr-ext-lift-3) !important;
 }
 
 main.lobby .lobby__tournaments-simuls td {
   padding: 10px !important;
-  border-bottom: 1px solid #ffffff0d !important;
+  border-bottom: 1px solid var(--lr-ext-lift-5) !important;
 }
 
 main.lobby .lobby__tournaments-simuls tr:last-child td {
@@ -106,7 +106,7 @@ main.lobby .lobby__tournaments-simuls tr:last-child td {
 
 /* The name is the first cell (it has no class). */
 main.lobby .lobby__tournaments-simuls td:first-child a {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* Lichess's bar is 30ch wide in a cell capped at 21ch, which cut its rounded end:
@@ -144,8 +144,8 @@ main.lobby .lobby__support-link {
   border-radius: 16px !important;
   background: var(--lr-ext-bg-panel) !important;
   box-shadow:
-    inset 0 1px 0 #ffffff0d,
-    0 10px 28px #00000033 !important;
+    inset 0 1px 0 var(--lr-ext-lift-5),
+    0 10px 28px var(--lr-ext-shade-20) !important;
   transition:
     transform 0.15s,
     background 0.15s !important;
@@ -153,7 +153,7 @@ main.lobby .lobby__support-link {
 
 main.lobby .lobby__support-link:hover {
   transform: translateY(-2px);
-  background: var(--lr-ext-grey-850) !important;
+  background: var(--lr-ext-neutral-3) !important;
 }
 
 main.lobby .lobby__support-link icon {
@@ -180,7 +180,7 @@ main.lobby .lobby__support-link[href$='/swag'] icon::before {
 }
 
 main.lobby .lobby__support-link strong {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 17px;
   font-weight: 800;
 }
@@ -211,7 +211,7 @@ main.lobby .lobby__support-link::after {
 }
 
 main.lobby .lobby__support-link:hover::after {
-  border-color: #fff;
+  border-color: var(--lr-ext-text-strong);
   transform: translateX(3px) rotate(45deg);
 }
 
@@ -223,7 +223,7 @@ main.lobby .lobby__about {
   justify-content: center;
   gap: 6px 22px;
   padding: 24px 0 0;
-  border-top: 1px solid #ffffff12;
+  border-top: 1px solid var(--lr-ext-lift-7);
   background: none !important;
   box-shadow: none !important;
 }
@@ -234,5 +234,5 @@ main.lobby .lobby__about a {
 }
 
 main.lobby .lobby__about a:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }

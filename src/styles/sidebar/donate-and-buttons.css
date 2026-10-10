@@ -22,7 +22,7 @@
     line-height: 1;
     font-size: 14px;
     font-weight: 500;
-    color: var(--lr-ext-grey-200) !important;
+    color: var(--lr-ext-neutral-12) !important;
     background: transparent;
     transition: background-color 0.15s !important;
   }
@@ -59,13 +59,18 @@
   #top .site-buttons .toggle {
     height: 30px !important;
     line-height: 30px !important;
-    padding: 0 8px !important;
+    /* Four fit in a row: friends, challenges, notifications and the light / dark switch. */
+    padding: 0 6px !important;
     color: var(--lr-ext-text-dim) !important;
   }
 
   #top .site-buttons .link:hover,
   #top .site-buttons .toggle:hover {
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
+  }
+
+  #top #lr-ext-scheme-toggle {
+    font-size: 18.5px;
   }
 
   #top #clinput {
@@ -74,7 +79,7 @@
     height: 32px !important;
     align-items: center;
     border-radius: 8px;
-    box-shadow: inset 0 0 0 1px #ffffff12;
+    box-shadow: inset 0 0 0 1px var(--lr-ext-lift-7);
   }
 
   #top #clinput input {
@@ -161,7 +166,7 @@
   #top #user_tag:hover,
   #top .dasher.shown #user_tag {
     background: var(--lr-ext-sb-hover) !important;
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   /* Dropdowns (preferences, notifications, challenges) open beside the sidebar. */
@@ -175,7 +180,7 @@
     overflow-y: auto;
     border-radius: 6px;
     background: var(--lr-ext-bg-panel) !important;
-    box-shadow: 0 6px 24px #0009 !important;
+    box-shadow: 0 6px 24px var(--lr-ext-shade-60) !important;
   }
 
   /* Search suggestions too: under the search box they'd open off screen. */
@@ -192,4 +197,35 @@
   #top .site-buttons .shown .toggle {
     background: transparent !important;
   }
+}
+
+/* The light / dark switch (content/sidebar/scheme-toggle.ts), its icon the scheme on show, at
+ * every width: in the sidebar, and in Lichess's top bar below 1020px. */
+#lr-ext-scheme-toggle {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: none;
+  /* Lichess's top bar glyphs' size and color; the sidebar's below. */
+  color: var(--lr-ext-neutral-13);
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.15s !important;
+}
+
+#lr-ext-scheme-toggle .lr-ext-hi {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+#lr-ext-scheme-toggle:hover {
+  color: var(--lr-ext-text-strong);
+}
+
+#lr-ext-scheme-toggle:hover .lr-ext-hi {
+  transform: rotate(-20deg) scale(1.1);
+}
+
+html.light #lr-ext-scheme-toggle .lr-ext-scheme-toggle__dark,
+html:not(.light) #lr-ext-scheme-toggle .lr-ext-scheme-toggle__light {
+  display: none;
 }

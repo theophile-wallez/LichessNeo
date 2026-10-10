@@ -115,7 +115,7 @@ html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
   padding: 0 3px;
   border-radius: 3px;
   background: var(--lr-ext-title-bg);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 11px;
   font-weight: 800;
   line-height: 16px;
@@ -258,7 +258,7 @@ main.analyse .material mpiece.king {
   filter: none !important;
 }
 
-/* Black pieces vanish on the near-black page: a light edge draws them as outlines. Specific
+/* Black pieces vanish on the dark page: an edge in the dim text's color outlines them. Specific
  * enough to beat the `filter: none` above. */
 main
   .lr-ext-captured__group
@@ -302,27 +302,28 @@ main.round .rclock .moretime:hover {
 }
 
 /* A fixed 140x40 box: dim while waiting, lit while running, red when low.
-   Each page only maps its markup onto that state. */
+   Each page only maps its markup onto that state. Like the pieces, a side's clock keeps its
+   colors in either scheme. */
 
 /* Which side: the game has a class, but the analysis clock only says top or bottom,
    so the board's orientation decides. */
 main.round .rclock-white .time,
 html[data-lr-ext-has~='analyse-white'] main.analyse .analyse__clock.bottom,
 html[data-lr-ext-has~='analyse-black'] main.analyse .analyse__clock.top {
-  --lr-ext-clock-bg: var(--lr-ext-grey-300);
-  --lr-ext-clock-fg: color-mix(in srgb, var(--lr-ext-grey-800) 60%, transparent);
-  --lr-ext-clock-on-bg: #fff;
-  --lr-ext-clock-on-fg: var(--lr-ext-grey-800);
+  --lr-ext-clock-bg: color-mix(in srgb, var(--lr-ext-ink) 40%, var(--lr-ext-white));
+  --lr-ext-clock-fg: color-mix(in srgb, var(--lr-ext-ink) 60%, transparent);
+  --lr-ext-clock-on-bg: var(--lr-ext-white);
+  --lr-ext-clock-on-fg: var(--lr-ext-ink);
   --lr-ext-clock-icon: none;
 }
 
 main.round .rclock-black .time,
 html[data-lr-ext-has~='analyse-white'] main.analyse .analyse__clock.top,
 html[data-lr-ext-has~='analyse-black'] main.analyse .analyse__clock.bottom {
-  --lr-ext-clock-bg: var(--lr-ext-grey-850);
-  --lr-ext-clock-fg: var(--lr-ext-grey-400);
-  --lr-ext-clock-on-bg: var(--lr-ext-grey-950);
-  --lr-ext-clock-on-fg: #fff;
+  --lr-ext-clock-bg: color-mix(in srgb, var(--lr-ext-ink) 94%, var(--lr-ext-white));
+  --lr-ext-clock-fg: color-mix(in srgb, var(--lr-ext-ink) 65%, var(--lr-ext-white));
+  --lr-ext-clock-on-bg: var(--lr-ext-ink);
+  --lr-ext-clock-on-fg: var(--lr-ext-white);
   --lr-ext-clock-icon: invert(1);
 }
 
@@ -370,7 +371,7 @@ main.analyse .analyse__clock.active {
 main.round .rclock.emerg.running .time,
 main.round .rclock.outoftime .time {
   background: var(--lr-ext-red-dark) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   --lr-ext-clock-icon: invert(1);
 }
 

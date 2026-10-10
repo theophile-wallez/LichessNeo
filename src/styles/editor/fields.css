@@ -48,7 +48,7 @@
 .board-editor .castling label:has(> input:checked) {
   background: color-mix(in srgb, var(--lr-ext-accent) 22%, transparent);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 60%, transparent);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 .board-editor .castling label:has(> input:focus-visible) {

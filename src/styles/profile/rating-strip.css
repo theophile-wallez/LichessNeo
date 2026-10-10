@@ -94,7 +94,7 @@
   }
 
   .side.sub-ratings rating strong {
-    color: #fff;
+    color: var(--lr-ext-text-strong);
     font-size: 14px !important;
     font-weight: 800 !important;
     font-variant-numeric: tabular-nums;

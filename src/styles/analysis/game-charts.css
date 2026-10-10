@@ -37,7 +37,7 @@
   padding: 0 12px 0 10px;
   border: 1px solid var(--lr-ext-card-border);
   border-radius: 999px;
-  background: #ffffff08;
+  background: var(--lr-ext-lift-3);
   color: var(--lr-ext-text);
   font: 600 12.5px/1 var(--lr-ext-font);
 }
@@ -72,27 +72,27 @@
 
 .lr-ext-gchart__line {
   fill: none;
-  stroke: #fff;
+  stroke: var(--lr-ext-side-white);
   stroke-width: 1.5;
   stroke-linejoin: round;
 }
 
 /* An even game, over the area as on the review's graph. */
 .lr-ext-gchart__even {
-  stroke: var(--lr-ext-grey-400);
+  stroke: var(--lr-ext-neutral-10);
   stroke-opacity: 0.6;
 }
 
 .lr-ext-gchart__bar--white {
-  fill: var(--lr-ext-grey-100);
+  fill: var(--lr-ext-side-white);
 }
 
 .lr-ext-gchart__bar--black {
-  fill: var(--lr-ext-grey-400);
+  fill: var(--lr-ext-side-black);
 }
 
 .lr-ext-gchart__phase {
-  stroke: #ffffff33;
+  stroke: var(--lr-ext-lift-20);
   stroke-dasharray: 3 4;
 }
 
@@ -113,6 +113,6 @@
 }
 
 .lr-ext-gchart .lr-ext-rchart__dot {
-  --lr-ext-series-color: #fff;
+  --lr-ext-series-color: var(--lr-ext-side-white);
   stroke: var(--lr-ext-bg-panel-dark);
 }

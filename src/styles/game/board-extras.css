@@ -74,7 +74,7 @@ main.round .pocket-c1 {
 
 /* Lichess's light grey hover was made for its grey strip. */
 main.round .pocket.usable piece:hover {
-  background-color: #ffffff1a !important;
+  background-color: var(--lr-ext-lift-10) !important;
 }
 
 /* ---- Board tools --- */
@@ -114,7 +114,7 @@ main.round .lr-ext-board-tools__btn {
   border: 0;
   border-radius: 4px;
   background: none;
-  color: var(--lr-ext-grey-400);
+  color: var(--lr-ext-neutral-10);
   cursor: pointer;
   transition:
     color 0.15s,
@@ -123,7 +123,7 @@ main.round .lr-ext-board-tools__btn {
 }
 
 main.round .lr-ext-board-tools__btn:is(:hover, .lr-ext-board-tools__btn--on) {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 main.round .lr-ext-board-tools__btn::before {
@@ -159,10 +159,10 @@ main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-too
   }
 }
 
-/* Lichess's light theme gives the phone's move strip fixed colors, under our white moves. */
+/* Lichess's light theme gives the phone's move strip fixed colors of its own. */
 @media (max-width: 799.29px) and (orientation: portrait) {
   html.light main.round :is(i5d, rm6) :is(aPp, l4x) {
-    box-shadow: inset 0 4px 16px #0006 !important;
+    box-shadow: inset 0 4px 16px var(--lr-ext-shade-40) !important;
   }
 
   html.light main.round :is(i5d, rm6) :is(Z7yx, kwdb):is(.a1t, .active, :hover) {

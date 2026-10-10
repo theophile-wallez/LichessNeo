@@ -51,7 +51,7 @@
   margin: 0 0 8px;
   padding: 3px;
   border-radius: 9px;
-  background: #0000003d;
+  background: var(--lr-ext-shade-25);
 }
 
 /* Dasher rows are left-aligned flexboxes: center the labels. */
@@ -78,13 +78,13 @@
 }
 
 #top #dasher_app .lr-ext-src-tabs button:hover {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 #top #dasher_app .lr-ext-src-tabs button.active {
   background: var(--lr-ext-bg-raised-hover);
-  box-shadow: 0 1px 3px #00000080;
-  color: #fff;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
+  color: var(--lr-ext-text-strong);
 }
 
 #top #dasher_app .lr-ext-src-tabs[data-lr-ext-tabs] button.active {
@@ -119,7 +119,7 @@
   margin: 5px 0;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #ffffff2e transparent;
+  scrollbar-color: var(--lr-ext-lift-18) transparent;
 }
 
 #dasher_app .lr-ext-src-item {
@@ -148,13 +148,13 @@
 
 #dasher_app .lr-ext-src-item:hover {
   background: var(--lr-ext-menu-hover);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 #dasher_app .lr-ext-src-item.active {
   background: color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
   box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 #dasher_app .board .lr-ext-src-item.active {
@@ -207,7 +207,7 @@
 }
 
 #top #dasher_app .lr-ext-src-import-link:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* A board's two top-left squares, as Lichess's thumbnails show them: a quarter of its width. */
@@ -256,7 +256,7 @@
 
 #top #dasher_app .button.more:hover {
   background: var(--lr-ext-menu-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* Sliders: a thin track and a round white thumb. The vertical volume slider is
@@ -270,7 +270,7 @@
 #top #dasher_app .sound input[type='range']:not(.rate)::-webkit-slider-runnable-track {
   width: 4px;
   border-radius: 2px;
-  background: #ffffff26;
+  background: var(--lr-ext-lift-15);
 }
 
 #top #dasher_app .sound input[type='range']:not(.rate)::-webkit-slider-thumb {
@@ -279,14 +279,14 @@
   height: 16px;
   margin-left: -6px; /* physical: in a vertical slider "inline" is vertical */
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 1px 4px #0009;
+  background: var(--lr-ext-white);
+  box-shadow: 0 1px 4px var(--lr-ext-shade-60);
 }
 
 #top #dasher_app input.range::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: #ffffff26 !important;
+  background: var(--lr-ext-lift-15) !important;
 }
 
 #top #dasher_app input.range::-webkit-slider-thumb {
@@ -295,6 +295,6 @@
   margin-top: -6px;
   border: none !important;
   border-radius: 50%;
-  background: #fff !important;
-  box-shadow: 0 1px 4px #0009;
+  background: var(--lr-ext-white) !important;
+  box-shadow: 0 1px 4px var(--lr-ext-shade-60);
 }

@@ -174,7 +174,7 @@
   border-radius: 6px;
   background: var(--lr-ext-btn-grey);
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.35;

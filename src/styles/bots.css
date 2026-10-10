@@ -27,7 +27,7 @@
   align-items: center;
   gap: 12px;
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 28px !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
@@ -35,12 +35,12 @@
 
 /* Each category's Hugeicon on a tile tinted with its color: a robot, a crown for the featured. */
 .bots__categ > .box__top > h1 {
-  --lr-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01--caa9fa.svg');
+  --lr-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
   --lr-ext-bots-color: var(--lr-ext-purple);
 }
 
 .bots__categ:has(.bots__featured) > .box__top > h1 {
-  --lr-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown--ffc689.svg');
+  --lr-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
   --lr-ext-bots-color: var(--lr-ext-orange);
 }
 
@@ -50,12 +50,11 @@
   width: 40px;
   height: 40px;
   border-radius: 11px;
-  background:
+  /* The glyph at full strength over the tile at a quarter, as menu-titles.css draws them. */
+  background: var(--lr-ext-bots-color);
+  mask:
     var(--lr-ext-bots-icon) center / 24px no-repeat,
-    color-mix(in srgb, var(--lr-ext-bots-color) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-bots-color) 35%, transparent);
+    linear-gradient(#0000003d, #0000003d);
 }
 
 /* The "About bots" link, as a pill. */
@@ -74,7 +73,7 @@
 
 .bots__categ > .box__top > a:hover {
   background: var(--lr-ext-bg-raised-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .bots__categ > p {
@@ -161,7 +160,7 @@
 
 .bots__list__entry:hover {
   border-color: color-mix(in srgb, var(--lr-ext-bot) 55%, transparent) !important;
-  box-shadow: 0 6px 18px #00000059;
+  box-shadow: 0 6px 18px var(--lr-ext-shade-35);
   transform: translateY(-3px);
 }
 
@@ -185,7 +184,7 @@
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
-    0 4px 10px #00000040;
+    0 4px 10px var(--lr-ext-shade-25);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
@@ -219,7 +218,7 @@
 .bots__list__entry__head .user-link {
   display: block;
   overflow: hidden;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 800;
   line-height: 1.2;
@@ -260,7 +259,7 @@
   padding: 2px 9px 2px 7px;
   border-radius: 999px;
   background: var(--lr-ext-bg-raised);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -289,7 +288,7 @@
   border-radius: 8px;
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 15px !important;
   font-weight: 800;
   text-shadow: 0 1px 1px #0000004d;
@@ -297,12 +296,12 @@
 
 .bots__list__entry__play:hover {
   background: var(--lr-ext-btn-primary-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 .bots__list__entry__play::before {
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-white);
   font-size: 17px;
 }
 

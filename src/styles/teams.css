@@ -43,42 +43,36 @@ html[dir='rtl'] main.team-list .box__top .search input {
 main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/all'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
   --lr-ext-nav-color: var(--lr-ext-accent);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--7e88db.svg');
 }
 
 .subnav[data-lr-ext-nav~='teams'] a[href$='/team/me'],
 main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/me'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user--a2edfd.svg');
 }
 
 .subnav[data-lr-ext-nav~='teams'] a[href$='/team/updates'],
 main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/updates'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
   --lr-ext-nav-color: var(--lr-ext-green);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--73fb95.svg');
 }
 
 .subnav[data-lr-ext-nav~='teams'] a[href$='/team/leader'],
 main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/leader'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
   --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown--ffc689.svg');
 }
 
 .subnav[data-lr-ext-nav~='teams'] a[href$='/team/requests'],
 main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/requests'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/inbox.svg');
   --lr-ext-nav-color: var(--lr-ext-purple);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/inbox--caa9fa.svg');
 }
 
 .subnav[data-lr-ext-nav~='teams'] a[href$='/team/new'],
 main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/new'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-circle.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-circle--a2edfd.svg');
 }
 
 /* Desktop only (Lichess's top bar holds the top edge below 1020px): the menu and title bar stay
@@ -208,7 +202,7 @@ main.team-list .slist td.subject {
 main.team-list .slist .team-name {
   display: block !important;
   overflow: hidden;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 16px !important;
   font-weight: 800;
   line-height: 1.35;

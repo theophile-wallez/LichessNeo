@@ -18,7 +18,7 @@
   #top .hbg {
     display: grid !important;
     place-items: center;
-    color: var(--lr-ext-grey-100);
+    color: var(--lr-ext-neutral-13);
   }
 
   #top .hbg::before {
@@ -49,12 +49,13 @@
     content: '';
     width: 24px;
     height: 24px;
-    background: var(--lr-ext-logo) center / contain no-repeat;
+    background: var(--lr-ext-text-strong);
+    mask: var(--lr-ext-logo) center / contain no-repeat;
   }
 
   #top .site-title::after {
     content: 'Lichess';
-    color: #fff;
+    color: var(--lr-ext-text-strong);
     font-size: 17px;
     font-weight: 700;
   }
@@ -86,7 +87,7 @@
     background: var(--lr-ext-bg-page) !important;
     box-shadow:
       1px 0 0 var(--lr-ext-sidebar-line),
-      16px 0 40px #00000080 !important;
+      16px 0 40px var(--lr-ext-shade-50) !important;
     transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
@@ -99,8 +100,12 @@
       height: 34px;
       margin: 4px 10px 10px;
       padding: 0 12px 0 46px;
-      background: var(--lr-ext-logo) 12px center / 24px no-repeat;
-      color: #fff;
+      /* The logo is a mask; its second layer lets the name show. */
+      background: linear-gradient(var(--lr-ext-text-strong) 0 0) 12px center / 24px 24px no-repeat;
+      mask:
+        var(--lr-ext-logo) 12px center / 24px no-repeat,
+        linear-gradient(#000 0 0) 46px 0 / calc(100% - 46px) 100% no-repeat;
+      color: var(--lr-ext-text-strong);
       font-size: 17px;
       font-weight: 700;
     }
@@ -122,7 +127,7 @@
     margin: 1px 10px !important;
     padding: 0 12px !important;
     border-radius: 10px;
-    color: var(--lr-ext-grey-100) !important;
+    color: var(--lr-ext-neutral-13) !important;
     font-size: 15.5px !important;
     font-weight: 600 !important;
     text-transform: none !important;
@@ -163,8 +168,8 @@
 
   #topnav section:is(.active, .lr-ext-open) > a,
   #topnav section > a:hover {
-    background: #ffffff0f !important;
-    color: #fff !important;
+    background: var(--lr-ext-lift-6) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   /* A section's links slide open from its row, and fold back into it. `height: auto` animates
@@ -176,7 +181,7 @@
     margin: 0 10px 0 26px !important;
     padding: 0 0 0 10px !important;
     overflow: hidden;
-    border-inline-start: 2px solid #ffffff12;
+    border-inline-start: 2px solid var(--lr-ext-lift-7);
     opacity: 0;
     visibility: hidden;
     interpolate-size: allow-keywords;
@@ -218,14 +223,14 @@
     height: 40px;
     padding: 0 10px !important;
     border-radius: 8px;
-    color: var(--lr-ext-grey-200) !important;
+    color: var(--lr-ext-neutral-12) !important;
     font-size: 14.5px !important;
     font-weight: 500;
   }
 
   #topnav section > div a:hover {
-    background: #ffffff0f !important;
-    color: #fff !important;
+    background: var(--lr-ext-lift-6) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   #topnav div a.community-patron {

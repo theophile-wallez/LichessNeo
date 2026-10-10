@@ -106,5 +106,237 @@
   "packsHelp": {
     "message": "How to make a pack",
     "description": "The link to the pack format's guide."
+  },
+  "appearanceTitle": {
+    "message": "Appearance",
+    "description": "The title of the settings' card for the color scheme and the color themes."
+  },
+  "appearanceBody": {
+    "message": "Light or dark, as in Lichess's own Theme menu, and a color theme for each.",
+    "description": "What the appearance card is for."
+  },
+  "colorSchemeTitle": {
+    "message": "Color scheme",
+    "description": "Above the light, dark and system choices; it's Lichess's own Theme preference."
+  },
+  "schemeSystem": {
+    "message": "System",
+    "description": "The color scheme that follows the device's."
+  },
+  "schemeLight": {
+    "message": "Light",
+    "description": "The light color scheme."
+  },
+  "schemeDark": {
+    "message": "Dark",
+    "description": "The dark color scheme."
+  },
+  "themesTitle": {
+    "message": "Themes",
+    "description": "Above the color themes, each with a light and a dark side to pick."
+  },
+  "themeForLight": {
+    "message": "$1, for the light scheme",
+    "description": "A theme's light side, a button; $1 is the theme's name."
+  },
+  "themeForDark": {
+    "message": "$1, for the dark scheme",
+    "description": "A theme's dark side, a button; $1 is the theme's name."
+  },
+  "themeReimagined": {
+    "message": "Reimagined",
+    "description": "The default color theme: neutral greys and a blue accent."
+  },
+  "themeLichess": {
+    "message": "Lichess",
+    "description": "A color theme in Lichess's own warm greys and blue."
+  },
+  "themeOcean": {
+    "message": "Ocean",
+    "description": "A color theme in sea blues."
+  },
+  "themeGrove": {
+    "message": "Grove",
+    "description": "A color theme in forest greens."
+  },
+  "themeEmber": {
+    "message": "Ember",
+    "description": "A color theme in warm oranges."
+  },
+  "themeIris": {
+    "message": "Iris",
+    "description": "A color theme in violets."
+  },
+  "themeBlossom": {
+    "message": "Blossom",
+    "description": "A color theme in pinks."
+  },
+  "themeMidnight": {
+    "message": "Midnight",
+    "description": "A color theme in deep night blues."
+  },
+  "schemeToggleToDark": {
+    "message": "Switch to dark mode",
+    "description": "The sidebar's light / dark switch, while the page is light."
+  },
+  "schemeToggleToLight": {
+    "message": "Switch to light mode",
+    "description": "The sidebar's light / dark switch, while the page is dark."
+  },
+  "themeRuby": {
+    "message": "Ruby",
+    "description": "A color theme in deep reds."
+  },
+  "themeDune": {
+    "message": "Dune",
+    "description": "A color theme in sand and amber."
+  },
+  "themeMatcha": {
+    "message": "Matcha",
+    "description": "A color theme in tea greens."
+  },
+  "themeAurora": {
+    "message": "Aurora",
+    "description": "A color theme in teals."
+  },
+  "themeFjord": {
+    "message": "Fjord",
+    "description": "A color theme in cold steel blues."
+  },
+  "themeMocha": {
+    "message": "Mocha",
+    "description": "A color theme in coffee browns."
+  },
+  "themePlum": {
+    "message": "Plum",
+    "description": "A color theme in plum magentas."
+  },
+  "themeTwilight": {
+    "message": "Twilight",
+    "description": "A color theme of a violet dusk with an orange sun: violet greys, an orange accent."
+  },
+  "themeCreate": {
+    "message": "Create theme",
+    "description": "Opens the editor for a new color theme."
+  },
+  "themeAdd": {
+    "message": "Add theme",
+    "description": "Opens the field to paste a shared theme's code."
+  },
+  "themeCopy": {
+    "message": "Copy $1 to make your own",
+    "description": "A built-in theme's copy button; $1 is its name."
+  },
+  "themeEdit": {
+    "message": "Edit $1",
+    "description": "A theme of the user's, its edit button; $1 is its name."
+  },
+  "themeCopyName": {
+    "message": "$1 copy",
+    "description": "The name a copied theme starts with; $1 is the original's."
+  },
+  "editorNew": {
+    "message": "New theme",
+    "description": "The theme editor's title, for a new theme."
+  },
+  "editorEdit": {
+    "message": "Edit theme",
+    "description": "The theme editor's title, for one of the user's themes."
+  },
+  "editorName": {
+    "message": "Theme name",
+    "description": "The label of the theme's name field."
+  },
+  "editorUntitled": {
+    "message": "My theme",
+    "description": "The placeholder of the name field, and the name of a theme saved without one."
+  },
+  "editorTint": {
+    "message": "Background tint",
+    "description": "The slider of the hue the backgrounds and greys take."
+  },
+  "editorStrength": {
+    "message": "Tint strength",
+    "description": "The slider of how much the backgrounds and greys take the tint."
+  },
+  "editorAccent": {
+    "message": "Accent",
+    "description": "The color of links, picks and primary buttons."
+  },
+  "editorLowContrast": {
+    "message": "White text is hard to read on this accent: try a deeper one.",
+    "description": "Shown when the accent is too light for the white text of buttons."
+  },
+  "editorDelete": {
+    "message": "Delete",
+    "description": "Deletes the theme."
+  },
+  "editorDeleteConfirm": {
+    "message": "Click again to delete",
+    "description": "The delete button, after a first click."
+  },
+  "editorShare": {
+    "message": "Copy code",
+    "description": "Copies the theme's code, to share it."
+  },
+  "editorCopied": {
+    "message": "Copied",
+    "description": "The share button, once the code is copied."
+  },
+  "editorCancel": {
+    "message": "Cancel",
+    "description": "Closes the editor without saving."
+  },
+  "editorSave": {
+    "message": "Save",
+    "description": "Saves the theme."
+  },
+  "themeCodePlaceholder": {
+    "message": "Paste a theme's code",
+    "description": "The field for a shared theme's code."
+  },
+  "themeCodeAdd": {
+    "message": "Add",
+    "description": "Adds the theme of the pasted code."
+  },
+  "themeCodeInvalid": {
+    "message": "This isn't a theme's code.",
+    "description": "When the pasted text isn't a theme's code."
+  },
+  "settingSidebarRating": {
+    "message": "Rating in the sidebar",
+    "description": "The setting of which speed's rating shows beside the player's name in the sidebar."
+  },
+  "settingSidebarRatingBody": {
+    "message": "The rating beside your name. By default, the speed you play the most.",
+    "description": "What the sidebar rating setting covers."
+  },
+  "ratingMostPlayed": {
+    "message": "Most played",
+    "description": "The default pick: the speed with the most games."
+  },
+  "speedUltraBullet": {
+    "message": "UltraBullet",
+    "description": "A speed."
+  },
+  "speedBullet": {
+    "message": "Bullet",
+    "description": "A speed."
+  },
+  "speedBlitz": {
+    "message": "Blitz",
+    "description": "A speed."
+  },
+  "speedRapid": {
+    "message": "Rapid",
+    "description": "A speed."
+  },
+  "speedClassical": {
+    "message": "Classical",
+    "description": "A speed."
+  },
+  "speedCorrespondence": {
+    "message": "Correspondence",
+    "description": "A speed."
   }
 }

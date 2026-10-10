@@ -8,9 +8,9 @@ import { type PlotSize, plyScale } from './scale.ts';
 import type { AdvantagePoint, Phases } from './series.ts';
 
 // The server analysis' chart, as the review's graph reads: White's winning
-// chances as a white area over the dark, rising as White gets ahead.
+// chances as an area in White's color, rising as White gets ahead.
 
-export const WHITE = '#ffffff';
+export const WHITE = 'var(--lr-ext-side-white)';
 
 export interface AdvantageChart {
   readonly points: readonly AdvantagePoint[];
@@ -37,7 +37,7 @@ export function advantageMarkup(chart: AdvantageChart, size: PlotSize): SafeHtml
   const grid = [25, 50, 75].map(share =>
     gridLine({ y: y(share), left: 0, right: size.width, label: '' }),
   );
-  return html`<defs><linearGradient id="lr-ext-gchart-white" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="${WHITE}" stop-opacity="0.95"/><stop offset="1" stop-color="${WHITE}" stop-opacity="0.7"/></linearGradient></defs>
+  return html`<defs><linearGradient id="lr-ext-gchart-white" x1="0" x2="0" y1="0" y2="1"><stop offset="0" style="stop-color:${WHITE}" stop-opacity="0.95"/><stop offset="1" style="stop-color:${WHITE}" stop-opacity="0.7"/></linearGradient></defs>
     ${grid}
     <g class="lr-ext-rchart__wipe"><path class="lr-ext-gchart__area" d="${area}"/><path class="lr-ext-gchart__line" d="${line}"/></g>
     <line class="lr-ext-gchart__even" x1="0" x2="${size.width}" y1="${y(50)}" y2="${y(50)}"/>

@@ -43,7 +43,7 @@
     text-transform: none !important;
     font-size: 14px !important;
     font-weight: 500 !important;
-    color: var(--lr-ext-grey-200) !important;
+    color: var(--lr-ext-neutral-12) !important;
     border: none !important;
     border-radius: 8px !important;
     background: transparent !important;
@@ -82,7 +82,7 @@
   }
 
   #topnav section.active > a {
-    background: #ffffff14 !important;
+    background: var(--lr-ext-lift-8) !important;
     color: var(--lr-ext-text-strong) !important;
   }
 
@@ -109,10 +109,10 @@
     padding: 5px !important;
     border: none !important;
     border-radius: 10px !important;
-    background: var(--lr-ext-grey-750) !important;
+    background: var(--lr-ext-neutral-5) !important;
     box-shadow:
-      inset 0 0 0 1px #ffffff14,
-      0 12px 32px #00000080 !important;
+      inset 0 0 0 1px var(--lr-ext-lift-8),
+      0 12px 32px var(--lr-ext-shade-50) !important;
     z-index: 110;
   }
 
@@ -123,13 +123,13 @@
     white-space: nowrap;
     font-size: 13.5px;
     font-weight: 500;
-    color: var(--lr-ext-grey-100) !important;
+    color: var(--lr-ext-neutral-13) !important;
     border-radius: 6px !important;
     transition: background-color 0.15s !important;
   }
 
   #topnav section > div a:hover {
-    background: #ffffff0f !important;
+    background: var(--lr-ext-lift-6) !important;
     color: var(--lr-ext-text-strong) !important;
   }
 

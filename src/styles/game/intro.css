@@ -60,7 +60,8 @@ main.round .lr-ext-intro__stay {
   box-sizing: border-box;
 }
 
-/* One size for both, whatever the names' lengths; a long one ends in an ellipsis. */
+/* One size for both, whatever the names' lengths; a long one ends in an ellipsis. Over the
+ * board, the cards keep their colors in either scheme. */
 main.round .lr-ext-intro__card {
   display: flex;
   align-items: stretch;
@@ -68,14 +69,14 @@ main.round .lr-ext-intro__card {
   height: 12.5cqh;
   overflow: hidden;
   border-radius: 0.8cqh;
-  background: #fff;
-  color: var(--lr-ext-grey-800);
+  background: var(--lr-ext-white);
+  color: var(--lr-ext-ink);
   box-shadow: 0 0.6cqh 2cqh #00000059;
 }
 
 main.round .lr-ext-intro__card--bottom {
-  background: var(--lr-ext-grey-900);
-  color: #fff;
+  background: var(--lr-ext-ink);
+  color: var(--lr-ext-white);
   animation: lr-ext-intro-rise var(--lr-ext-intro-ms) both !important;
 }
 
@@ -112,7 +113,7 @@ main.round .lr-ext-intro__title {
   padding: 0 0.6cqw;
   border-radius: 0.5cqh;
   background: var(--lr-ext-title-bg);
-  color: #fff;
+  color: var(--lr-ext-white);
   font-size: 2.6cqh;
   vertical-align: 0.4cqh;
 }
@@ -157,8 +158,8 @@ main.round .lr-ext-intro__versus {
   position: relative;
   padding: 1.6cqh 2.6cqh;
   border-radius: 0.8cqh;
-  background: var(--lr-ext-grey-700);
-  color: #fff;
+  background: color-mix(in srgb, var(--lr-ext-ink) 88%, var(--lr-ext-white));
+  color: var(--lr-ext-white);
   font-size: 4.6cqh;
   font-weight: 800;
   line-height: 1;

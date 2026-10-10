@@ -9,7 +9,10 @@ import type { MoveTime, Phases } from './series.ts';
 // Each move's time as a rounded column, White's above the middle line and
 // Black's below, on the same x as the advantage chart.
 
-export const SIDE_COLORS: Readonly<Record<Color, string>> = { white: '#ebeae8', black: '#8b8987' };
+export const SIDE_COLORS: Readonly<Record<Color, string>> = {
+  white: 'var(--lr-ext-side-white)',
+  black: 'var(--lr-ext-side-black)',
+};
 
 export interface MoveTimesChart {
   readonly times: readonly MoveTime[];

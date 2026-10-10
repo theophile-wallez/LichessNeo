@@ -59,7 +59,7 @@
 
 .mchat .mchat__presets span:not(.disabled):hover {
   background: var(--lr-ext-accent) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 .mchat .mchat__presets span.disabled {

@@ -1,6 +1,6 @@
 /* ---- End --- */
 
-/* The score on a dark card like the stats. Lichess fills it with its "good" color,
+/* The score on a plain card like the stats. Lichess fills it with its "good" color,
    our accent, which made a block of it next to the Play again button. */
 .storm--end__score {
   gap: 6px;
@@ -35,7 +35,7 @@
   font-weight: 700;
 }
 
-/* Stats: a row each, dim label and bold white number. */
+/* Stats: a row each, dim label and bold number. */
 .storm--end__stats {
   padding: 16px 24px !important;
   border: 1px solid var(--lr-ext-card-border);
@@ -71,14 +71,14 @@
 
 .storm--end__stats td number,
 .storm-dashboard__history number {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-size: 22px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-/* New highscore: a dark card with a gold title between two Storm pictures
+/* New highscore: a plain card with a gold title between two Storm pictures
    (Lichess fills it with gold, between two tornadoes). */
 .storm--end__high {
   padding: 22px 24px !important;
@@ -209,7 +209,7 @@
   margin: 0 !important;
 }
 
-/* Best run per day: rows with bold white numbers, the score in gold. */
+/* Best run per day: rows with bold numbers, the score in gold. */
 .storm-dashboard__history {
   border: 1px solid var(--lr-ext-card-border);
   border-radius: 12px !important;
@@ -254,7 +254,7 @@
 
 .storm--reload p {
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 18px;
   font-weight: 700;
 }

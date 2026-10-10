@@ -14,7 +14,7 @@
 }
 
 .community h2 {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   letter-spacing: normal !important;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .community__online li:hover {
-  background: #ffffff0d;
+  background: var(--lr-ext-lift-5);
 }
 
 .community .user-top .user-link {
@@ -97,7 +97,7 @@
 }
 
 .community .user-top li:hover .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The rating as a chip, its time control's icon in front. */
@@ -109,7 +109,7 @@
   padding: 2px 9px 2px 7px;
   border-radius: 999px;
   background: var(--lr-ext-bg-raised);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 13px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;

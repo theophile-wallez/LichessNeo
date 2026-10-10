@@ -6,6 +6,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 import { packLibrary } from '#content/packs/index.ts';
 import { SETTINGS_HASH, SETTINGS_URL } from './address.ts';
 import { buildSection } from './section.ts';
+import { showScheme } from './appearance.ts';
 
 // The extension's settings as a section of Lichess's account pages: a link in
 // their menu, over Display, shows it in place of the page's content
@@ -65,6 +66,7 @@ export function syncSettings(): void {
   if (open && !wasOpen) void packLibrary().loadAll();
   wasOpen = open;
   showOpen(main, menu, open);
+  if (open && section) showScheme(section);
 }
 
 // As the menu comes in, so it never shows without the link: once a frame, before it's drawn.

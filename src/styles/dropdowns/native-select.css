@@ -37,7 +37,7 @@
 
   select:not([multiple], [size]):hover::picker-icon,
   select:not([multiple], [size]):open::picker-icon {
-    background: #fff;
+    background: var(--lr-ext-text-strong);
   }
 
   select:not([multiple], [size]):open::picker-icon {
@@ -84,12 +84,12 @@
   select:not([multiple], [size]) option:hover,
   select:not([multiple], [size]) option:focus-visible {
     background: var(--lr-ext-menu-hover);
-    color: #fff;
+    color: var(--lr-ext-text-strong);
     outline: none;
   }
 
   select:not([multiple], [size]) option:checked {
-    color: #fff;
+    color: var(--lr-ext-text-strong);
     font-weight: 700;
   }
 
@@ -147,7 +147,7 @@
 .select-search__item:hover,
 .select-search__item.focus {
   background: var(--lr-ext-menu-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .textcomplete-dropdown a {

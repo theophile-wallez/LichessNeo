@@ -3,6 +3,8 @@ import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import { packLibrary } from '#content/packs/index.ts';
 import { importSection } from '#content/packs/import-section.ts';
+import { buildAppearance } from './appearance.ts';
+import { onRatingChange, ratingRowMarkup, showRatingRow } from './rating-row.ts';
 import {
   currentSettings,
   onSettings,
@@ -11,8 +13,8 @@ import {
   type Settings,
 } from './settings.ts';
 
-// The account page's section for the extension: a card per setting, each
-// with a switch, then the imported packs. A new setting is a field of the
+// The account page's section for the extension: the appearance, a card per
+// setting, each with a switch or a menu, then the imported packs. A new setting is a field of the
 // schema (settings.ts) and a row here.
 
 type Toggle = { [K in keyof Settings]: Settings[K] extends boolean ? K : never }[keyof Settings];
@@ -46,9 +48,12 @@ const rowOf = (key: string | undefined): Row | undefined => rows().find(row => r
 function showSettings(section: HTMLElement, settings: Settings): void {
   // The switches wait for the stored settings, rather than flip from the defaults to them.
   setData(section, 'lrExtPending', settingsRead() ? null : '');
+  showRatingRow(section, settings);
   for (const element of queryAll(section, '.lr-ext-setting', HTMLElement)) {
     const row = rowOf(element.dataset.lrExtSetting);
-    const on = row ? settings[row.key] : false;
+    // A menu's card, always on.
+    if (!row) continue;
+    const on = settings[row.key];
     setData(element, 'lrExtOn', on ? '' : null);
     const button = queryOne(element, '.lr-ext-switch', HTMLButtonElement);
     if (button?.getAttribute('aria-checked') !== String(on))
@@ -70,11 +75,14 @@ export function buildSection(): HTMLElement {
     html`<div class="box box-pad">
       <h1 class="box__top">${message('settingsTitle')}</h1>
       <p class="lr-ext-settings__intro">${message('settingsIntro')}</p>
-      <div class="lr-ext-settings__list">${rows().map(rowMarkup)}</div>
+      <div class="lr-ext-settings__list">${rows().map(rowMarkup)}${ratingRowMarkup()}</div>
     </div>`,
   );
+  const list = section.querySelector('.lr-ext-settings__list');
+  list?.before(buildAppearance());
   section.querySelector('.box')?.append(importSection(packLibrary()));
   section.addEventListener('click', onClick);
+  section.addEventListener('change', onRatingChange);
   showSettings(section, currentSettings());
   onSettings(settings => showSettings(section, settings));
   return section;

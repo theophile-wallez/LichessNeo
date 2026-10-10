@@ -31,7 +31,7 @@ html[dir='rtl'] main.swiss .swiss__player-info .close {
 
 main.swiss .swiss__player-info .close:hover {
   background: var(--lr-ext-bg-raised);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.swiss .swiss__player-info .stats h2 {
@@ -40,7 +40,7 @@ main.swiss .swiss__player-info .stats h2 {
   border-bottom: 1px solid var(--lr-ext-card-border) !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-size: 18px !important;
   font-weight: 800 !important;
@@ -51,7 +51,7 @@ main.swiss .swiss__player-info .stats h2 .rank {
 }
 
 main.swiss .swiss__player-info .stats h2 .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.swiss .swiss__player-info .stats h2 .rating {
@@ -80,7 +80,7 @@ main.swiss .swiss__player-info .stats th {
 
 main.swiss .swiss__player-info .stats td {
   padding: 7px 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 14px;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
@@ -115,7 +115,7 @@ main.swiss .swiss__player-info .sublist th {
 
 main.swiss .swiss__player-info .sublist td:last-child {
   padding-inline-end: 20px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-weight: 800;
   text-align: end;
 }
@@ -189,7 +189,7 @@ main.swiss .swiss__board .mini-game__user .user-link {
   align-items: baseline;
   gap: 5px;
   min-width: 0;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }
 
@@ -232,27 +232,28 @@ main.swiss .swiss__board :is(.mini-game__clock, .mini-game__result) {
   font-variant-numeric: tabular-nums;
 }
 
+/* Each clock keeps its side's color on either scheme. */
 main.swiss .swiss__board .mini-game__clock--white {
-  background: var(--lr-ext-grey-300);
-  color: color-mix(in srgb, var(--lr-ext-grey-800) 60%, transparent) !important;
+  background: color-mix(in srgb, var(--lr-ext-white) 54%, var(--lr-ext-ink));
+  color: color-mix(in srgb, var(--lr-ext-ink) 60%, transparent) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--white.clock--run {
-  background: #fff;
-  color: var(--lr-ext-grey-800) !important;
+  background: var(--lr-ext-white);
+  color: var(--lr-ext-ink) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--black {
-  background: var(--lr-ext-grey-850);
-  color: var(--lr-ext-grey-400) !important;
+  background: color-mix(in srgb, var(--lr-ext-white) 2%, var(--lr-ext-ink));
+  color: color-mix(in srgb, var(--lr-ext-white) 35%, var(--lr-ext-ink)) !important;
 }
 
 main.swiss .swiss__board .mini-game__clock--black.clock--run {
-  background: var(--lr-ext-grey-950);
-  color: #fff !important;
+  background: var(--lr-ext-ink);
+  color: var(--lr-ext-white) !important;
 }
 
 main.swiss .swiss__board .mini-game__result {
   background: var(--lr-ext-bg-raised);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }

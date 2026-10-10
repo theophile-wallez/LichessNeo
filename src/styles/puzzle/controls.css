@@ -38,24 +38,24 @@ main.puzzle .puzzle__controls .jumps .fbt {
   border-radius: 8px !important;
   background: var(--lr-ext-btn-grey) !important;
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-grey-200) !important;
+  color: var(--lr-ext-neutral-12) !important;
   text-shadow: none !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt:hover:not(.disabled, [disabled]) {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt:is(.disabled, [disabled]) {
-  background: linear-gradient(var(--lr-ext-grey-850), var(--lr-ext-grey-850)) !important;
-  box-shadow: 0 1px 2px #00000033;
-  color: var(--lr-ext-grey-500) !important;
+  background: linear-gradient(var(--lr-ext-neutral-3), var(--lr-ext-neutral-3)) !important;
+  box-shadow: 0 1px 2px var(--lr-ext-shade-20);
+  color: var(--lr-ext-neutral-9) !important;
   opacity: 1 !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt.glowing {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   box-shadow:
     var(--lr-ext-btn-grey-shadow),
     0 0 0 2px var(--lr-ext-accent);

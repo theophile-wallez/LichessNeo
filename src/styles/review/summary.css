@@ -16,7 +16,7 @@
     right: 0;
     z-index: 1;
     text-align: center;
-    color: #fff;
+    color: var(--lr-ext-white);
     font-size: 12px;
     font-weight: 800;
     mix-blend-mode: difference;
@@ -42,17 +42,24 @@
   /* The graph's markup names Lichess-era colors (view/graph-markup.ts, kept as the legacy
      fixtures recorded it): the palette's, through CSS, which beats SVG attributes. */
   :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > rect {
-    fill: var(--lr-ext-grey-700);
+    fill: var(--lr-ext-neutral-6);
   }
   :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > path {
-    fill: var(--lr-ext-grey-100);
+    fill: var(--lr-ext-neutral-13);
   }
   :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > line[stroke='#8b8987'] {
-    stroke: var(--lr-ext-grey-400);
+    stroke: var(--lr-ext-neutral-10);
     stroke-dasharray: 3 4;
   }
   :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > line[stroke='#81b64c'] {
     stroke: var(--lr-ext-accent);
+  }
+  /* On white, Black's area stays dark and White's light, as on the engine's win bar. */
+  html.light :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > rect {
+    fill: var(--lr-ext-neutral-12);
+  }
+  html.light :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > path {
+    fill: var(--lr-ext-neutral-1);
   }
   /* In the move-by-move panel, under its header: the story of the game, large. */
   #lr-ext-review #lr-ext-review-graph {
@@ -84,9 +91,9 @@
     display: none;
     padding: 3px 6px;
     border-radius: 3px;
-    background: var(--lr-ext-grey-100);
-    box-shadow: 0 1px 3px #0000004d;
-    color: var(--lr-ext-grey-800);
+    background: var(--lr-ext-neutral-13);
+    box-shadow: 0 1px 3px var(--lr-ext-shade-30);
+    color: var(--lr-ext-neutral-4);
     font-size: 13px;
     font-weight: 800;
     pointer-events: none;
@@ -117,9 +124,9 @@
     max-width: 280px;
     padding: 7px 10px;
     border-radius: 5px;
-    background: var(--lr-ext-grey-950);
-    box-shadow: 0 2px 8px #00000080;
-    color: #fff;
+    background: var(--lr-ext-neutral-1);
+    box-shadow: 0 2px 8px var(--lr-ext-shade-50);
+    color: var(--lr-ext-text-strong);
     font-size: 13px;
     font-weight: 700;
     line-height: 1.3;
@@ -133,7 +140,7 @@
     left: var(--lr-ext-tip-x, 50%);
     margin-left: -6px;
     border: 6px solid transparent;
-    border-top-color: var(--lr-ext-grey-950);
+    border-top-color: var(--lr-ext-neutral-1);
   }
 
   .lr-ext-cls-icon {
@@ -162,8 +169,8 @@
     overflow: hidden;
     border-radius: 8px;
     box-shadow:
-      0 0 0 1px #ffffff1f,
-      0 14px 34px #000000b3;
+      0 0 0 1px var(--lr-ext-lift-12),
+      0 14px 34px var(--lr-ext-shade-70);
     pointer-events: none;
   }
 

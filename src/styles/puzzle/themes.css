@@ -20,12 +20,12 @@ main.puzzle .puzzle__themes__list__entry {
   margin: 0 !important;
   padding: 0 6px 0 12px;
   border-radius: 8px;
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   transition: background 0.15s !important;
 }
 
 main.puzzle .puzzle__themes__list__entry:hover {
-  background: #ffffff14 !important;
+  background: var(--lr-ext-lift-8) !important;
 }
 
 main.puzzle .puzzle__themes__list__entry a {
@@ -33,7 +33,7 @@ main.puzzle .puzzle__themes__list__entry a {
   min-width: 0;
   margin: 0 !important;
   padding: 9px 0;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.25;
@@ -61,7 +61,7 @@ main.puzzle .puzzle__themes__vote {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: #ffffff0d;
+  background: var(--lr-ext-lift-5);
   color: var(--lr-ext-text-dim) !important;
   font-size: 12px;
   transition:
@@ -71,12 +71,12 @@ main.puzzle .puzzle__themes__vote {
 
 main.puzzle .puzzle__themes__vote.vote-up:is(:hover, .active) {
   background: var(--lr-ext-btn-primary) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 main.puzzle .puzzle__themes__vote.vote-down:is(:hover, .active) {
   background: var(--lr-ext-btn-red) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 main.puzzle .puzzle__themes__selector {
@@ -115,7 +115,7 @@ main.puzzle .puzzle__session a.result-false {
 }
 
 main.puzzle .puzzle__session a.current {
-  box-shadow: 0 0 0 2px #fff;
+  box-shadow: 0 0 0 2px var(--lr-ext-text-strong);
 }
 
 /* Next puzzle: Lichess paints it in the link color (our accent), so it looked solved.
@@ -128,7 +128,7 @@ main.puzzle .puzzle__session a.session-new {
 
 main.puzzle .puzzle__session a.session-new:hover {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.puzzle .puzzle__session a.session-new::before {

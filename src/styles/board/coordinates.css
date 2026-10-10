@@ -126,7 +126,7 @@ coords {
   background: linear-gradient(
     to bottom,
     #403d39 var(--eval-percent),
-    #fff var(--eval-percent)
+    var(--lr-ext-white) var(--eval-percent)
   ) !important;
   transition: --eval-percent 0.3s ease !important;
 }
@@ -136,7 +136,7 @@ coords {
   background: linear-gradient(
     to top,
     #403d39 var(--eval-percent),
-    #fff var(--eval-percent)
+    var(--lr-ext-white) var(--eval-percent)
   ) !important;
 }
 
@@ -167,5 +167,5 @@ coords {
 }
 
 .eval-gauge[data-lr-ext-lead='black']::after {
-  color: #fff;
+  color: var(--lr-ext-white);
 }

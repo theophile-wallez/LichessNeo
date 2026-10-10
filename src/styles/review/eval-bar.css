@@ -30,7 +30,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #fff;
+    background: var(--lr-ext-white);
     transition: height 0.3s ease !important;
   }
 
@@ -56,7 +56,7 @@
   }
   .lr-ext-evalbar__label--black {
     top: 5px;
-    color: #fff;
+    color: var(--lr-ext-white);
   }
   .lr-ext-evalbar--flip .lr-ext-evalbar__label--white {
     top: 5px;

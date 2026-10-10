@@ -13,8 +13,8 @@
     box-sizing: border-box;
     padding: 10px 14px;
     border-radius: 12px;
-    background: #fff;
-    color: var(--lr-ext-grey-800);
+    background: var(--lr-ext-white);
+    color: var(--lr-ext-ink);
   }
 
   /* The tail: a horn from the bubble's left edge, overlapping it by 1px so there's no
@@ -38,7 +38,7 @@
   .lr-ext-bubble__title {
     flex: 1;
     margin: 0;
-    color: var(--lr-ext-grey-800);
+    color: var(--lr-ext-ink);
     font-size: 15px;
     font-weight: 600;
     line-height: 1.3;
@@ -56,20 +56,20 @@
     flex: none;
     padding: 3px 7px;
     border-radius: 4px;
-    background: var(--lr-ext-grey-100);
-    color: var(--lr-ext-grey-800);
+    background: color-mix(in srgb, var(--lr-ext-ink) 12%, var(--lr-ext-white));
+    color: var(--lr-ext-ink);
     font-size: 13px;
     font-weight: 800;
   }
 
   .lr-ext-bubble__eval--black {
-    background: var(--lr-ext-grey-800);
-    color: #fff;
+    background: var(--lr-ext-ink);
+    color: var(--lr-ext-white);
   }
 
   .lr-ext-bubble__sub {
     margin: 6px 0 0;
-    color: var(--lr-ext-grey-800);
+    color: var(--lr-ext-ink);
     font-size: 14px;
     line-height: 1.35;
   }
@@ -84,15 +84,15 @@
     padding: 4px 10px 4px 6px;
     border: none;
     border-radius: 999px;
-    background: var(--lr-ext-grey-100);
-    color: var(--lr-ext-grey-800);
+    background: color-mix(in srgb, var(--lr-ext-ink) 12%, var(--lr-ext-white));
+    color: var(--lr-ext-ink);
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
   }
 
   .lr-ext-bubble__line:hover {
-    background: var(--lr-ext-grey-100);
+    background: color-mix(in srgb, var(--lr-ext-ink) 12%, var(--lr-ext-white));
   }
 
   .lr-ext-bubble__line .lr-ext-i {
@@ -117,7 +117,7 @@
     display: inline;
     padding: 0.05em 0.3em 0.05em 0.1em;
     border-radius: 6px;
-    background: var(--lr-ext-grey-100);
+    background: color-mix(in srgb, var(--lr-ext-ink) 12%, var(--lr-ext-white));
     font-weight: 700;
     line-height: 1.3;
     vertical-align: -0.05em;
@@ -185,7 +185,7 @@
     border: none;
     border-radius: 6px;
     background: var(--lr-ext-btn-grey);
-    color: #fff;
+    color: var(--lr-ext-text-strong);
     font-size: 15px;
     font-weight: 800;
     box-shadow: var(--lr-ext-btn-grey-shadow);
@@ -197,6 +197,7 @@
 
   .lr-ext-btn--green {
     background: var(--lr-ext-btn-primary);
+    color: var(--lr-ext-white);
     text-shadow: 0 1px 1px #00000033;
     box-shadow: var(--lr-ext-btn-primary-shadow);
   }
@@ -269,7 +270,7 @@
 
 /* ---- The coach's card --- */
 
-/* The coach and its remark share one dark card, the coach standing on its bottom edge, the
+/* The coach and its remark share one card, the coach standing on its bottom edge, the
    remark beside it: no white bubble, no tail. */
 @media (min-width: 1020px) {
   #lr-ext-review .lr-ext-coach {
@@ -331,19 +332,19 @@
   }
 
   #lr-ext-review .lr-ext-bubble__sub {
-    color: var(--lr-ext-grey-100);
+    color: var(--lr-ext-neutral-13);
   }
 
   #lr-ext-review .lr-ext-bubble .lr-ext-mv,
   #lr-ext-review .lr-ext-bubble__line,
   #lr-ext-review .lr-ext-bubble__line:hover {
-    background: var(--lr-ext-grey-600);
+    background: var(--lr-ext-neutral-8);
     color: var(--lr-ext-text-strong);
   }
 
-  /* White's lead, on the dark card: the chip stays pale, Black's dark one gets an edge. */
+  /* On the card, White's chip stays pale and Black's dark one gets an edge. */
   #lr-ext-review .lr-ext-bubble__eval--black {
-    background: var(--lr-ext-grey-950);
+    background: var(--lr-ext-ink);
     box-shadow: inset 0 0 0 1px var(--lr-ext-card-border-hover);
   }
 }

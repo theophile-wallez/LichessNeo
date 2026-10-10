@@ -90,7 +90,7 @@
 }
 
 #friend_box .content > div:hover a.user-link .line {
-  border-color: var(--lr-ext-grey-650);
+  border-color: var(--lr-ext-neutral-7);
 }
 
 #friend_box .content a.user-link .line::before {

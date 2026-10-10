@@ -9,8 +9,8 @@
 }
 
 .tour__links a:hover {
-  background: #ffffff0d;
-  color: #fff !important;
+  background: var(--lr-ext-lift-5);
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .tour__links br {
@@ -26,7 +26,7 @@
 }
 
 .tour-home__side h2 a {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .tour-home__side .leaderboard,
@@ -42,7 +42,7 @@
 }
 
 .tour-home__side .leaderboard li:hover {
-  background: #ffffff0d;
+  background: var(--lr-ext-lift-5);
 }
 
 .tour-home__side .scheduled a {
@@ -50,7 +50,7 @@
 }
 
 .tour-home__side .scheduled a:hover {
-  background: #ffffff0d !important;
+  background: var(--lr-ext-lift-5) !important;
 }
 
 /* The side column stays in view and scrolls on its own, from the window's top edge, its
@@ -133,27 +133,29 @@
 }
 
 .tour-chart .timeheader {
-  border-inline-start-color: #ffffff0f !important;
+  border-inline-start-color: var(--lr-ext-lift-6) !important;
   color: var(--lr-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
 }
 
 .tour-chart .timeheader.hour {
-  border-inline-start-color: #ffffff24 !important;
-  color: #fff;
+  border-inline-start-color: var(--lr-ext-lift-15) !important;
+  color: var(--lr-ext-text-strong);
   font-weight: 800;
 }
 
-/* Tournament tiles: dark cards with their kind's color on the edge and icon, instead of
+/* Tournament tiles: plain cards with their kind's color on the edge and icon, instead of
  * Lichess's saturated, grainy blocks. */
 .tsht {
-  --lr-ext-tsht: var(--lr-ext-grey-500);
+  --lr-ext-tsht: var(--lr-ext-neutral-9);
   border-inline-start: 3px solid var(--lr-ext-tsht) !important;
   border-radius: 8px !important;
   background: var(--lr-ext-bg-raised) !important;
   background-image: none !important;
   box-shadow: none !important;
+  /* Lichess writes them white, for its saturated blocks. */
+  color: var(--lr-ext-text-strong) !important;
   letter-spacing: normal !important;
   text-shadow: none !important;
   transition: background-color 0.15s !important;
@@ -169,7 +171,7 @@
 }
 
 .tsht icon {
-  color: color-mix(in srgb, var(--lr-ext-tsht) 70%, #fff);
+  color: color-mix(in srgb, var(--lr-ext-tsht) 70%, var(--lr-ext-text-strong));
 }
 
 /* The tile's color beats the mode icon's own (theme/). */
@@ -182,7 +184,7 @@
 }
 
 .tsht .infos {
-  color: #ffffffa6;
+  color: var(--lr-ext-text-dim);
   font-size: 12px;
 }
 
@@ -234,12 +236,12 @@
 }
 
 #tournament-calendar .tournament {
-  --lr-ext-tsht: var(--lr-ext-grey-500);
+  --lr-ext-tsht: var(--lr-ext-neutral-9);
   border-inline-start: 3px solid var(--lr-ext-tsht);
   border-radius: 6px !important;
   background: var(--lr-ext-bg-raised) !important;
   box-shadow: none !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
   letter-spacing: normal !important;
   text-shadow: none !important;
@@ -251,7 +253,7 @@
 }
 
 #tournament-calendar .tournament .icon {
-  color: color-mix(in srgb, var(--lr-ext-tsht) 70%, #fff);
+  color: color-mix(in srgb, var(--lr-ext-tsht) 70%, var(--lr-ext-text-strong));
 }
 
 #tournament-calendar .tournament .icon::before {
@@ -275,7 +277,7 @@
 }
 
 #tournament-calendar .tournament.shield {
-  --lr-ext-tsht: var(--lr-ext-grey-300);
+  --lr-ext-tsht: var(--lr-ext-neutral-11);
 }
 
 #tournament-calendar date {
@@ -289,6 +291,6 @@
 }
 
 .arena-list .slist .name {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-weight: 700;
 }

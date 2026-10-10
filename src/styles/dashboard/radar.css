@@ -12,10 +12,10 @@
   /* A vignette on the plot: the panel is much wider than the chart. */
   background: radial-gradient(
     circle at 50% 52%,
-    var(--lr-ext-grey-800),
+    var(--lr-ext-neutral-4),
     var(--lr-ext-bg-panel) 65%
   );
-  box-shadow: inset 0 1px 0 #ffffff0f;
+  box-shadow: inset 0 1px 0 var(--lr-ext-lift-6);
 }
 
 .lr-ext-radar__plot {
@@ -34,17 +34,17 @@
 
 .lr-ext-radar__rings polygon {
   fill: none;
-  stroke: #ffffff12;
+  stroke: var(--lr-ext-lift-7);
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;
 }
 
 .lr-ext-radar__rings polygon:last-child {
-  stroke: #ffffff26;
+  stroke: var(--lr-ext-lift-15);
 }
 
 .lr-ext-radar__spokes line {
-  stroke: #ffffff12;
+  stroke: var(--lr-ext-lift-7);
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;
 }

@@ -15,8 +15,11 @@ export const StorageKey = {
   boardZoom: prefixed('board-zoom'),
   // '1' while the sidebar is folded to its icons (content/sidebar/collapse.ts).
   sidebarCollapsed: prefixed('sidebar-collapsed'),
-  // The signed-in player's most played speed and its rating (content/sidebar/account-rating.ts).
+  // The signed-in player's most played speed and its rating, and the others
+  // (content/sidebar/account-rating.ts).
   accountRating: prefixed('account-rating'),
+  // The settings' pick of the speed the sidebar shows, kept here too to show it from document_start.
+  sidebarRating: prefixed('sidebar-rating'),
   // The home's speed cards: each speed's rating, curve and last pool (content/pages/speed-cards).
   speedCards: prefixed('speed-cards'),
   ratingChartRange: prefixed('rchart:range'),
@@ -28,6 +31,8 @@ export const StorageKey = {
   reviewIndex: prefixed('review-index'),
   // The extension's settings, in chrome.storage.sync rather than the page's (content/settings).
   settings: prefixed('settings'),
+  // The picked color themes' palettes, kept here too to be drawn from document_start (content/colors).
+  palettes: prefixed('palettes'),
 } satisfies Record<string, string | ((...args: never[]) => string)>;
 
 export const SessionKey = {

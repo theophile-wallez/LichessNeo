@@ -152,13 +152,12 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
   width: 52px;
   height: 52px;
   border-radius: 13px;
-  background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dice--caa9fa.svg') center / 30px
-      30px no-repeat,
-    color-mix(in srgb, var(--lr-ext-purple) 24%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff26,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-purple) 40%, transparent);
+  /* The glyph at full strength over the tile at a quarter, as menu-titles.css draws them. */
+  background: var(--lr-ext-purple);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dice.svg') center / 30px 30px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
 }
 
 /* Lichess rules each section off in its gold: a quiet line instead. */
@@ -170,11 +169,11 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
 /* Variants: bold headings instead of thin spaced-out capitals, and a grey hover
  * instead of Lichess's green tint on the whole row. */
 .page-menu__content.variants .variant:hover {
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
 }
 
 .page-menu__content.variants .variant h2 {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-size: 20px !important;
   font-weight: 800 !important;

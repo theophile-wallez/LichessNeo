@@ -49,7 +49,7 @@
 }
 .tournament-shields .tournament-shields__item[data-lr-ext-href$='/horde'] {
   --lr-ext-lb: var(--lr-ext-cyan-dark);
-  --lr-ext-lb-2: var(--lr-ext-grey-400);
+  --lr-ext-lb-2: var(--lr-ext-neutral-10);
 }
 .tournament-shields .tournament-shields__item[data-lr-ext-href$='/racingKings'] {
   --lr-ext-lb: var(--lr-ext-cyan);
@@ -73,7 +73,7 @@ main.tournament-categ-shields {
   -webkit-mask: var(--lr-ext-shield) center / contain no-repeat;
   mask: var(--lr-ext-shield) center / contain no-repeat;
   filter: none !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 22px !important;
   line-height: 42px !important;
   text-shadow: 0 1px 1px #0000004d !important;
@@ -96,7 +96,7 @@ main.tournament-categ-shields {
   width: 18px;
   height: 21px;
   margin-inline: 3px;
-  background: #ffffff26;
+  background: var(--lr-ext-lift-15);
   -webkit-mask: var(--lr-ext-shield) center / contain no-repeat;
   mask: var(--lr-ext-shield) center / contain no-repeat;
 }
@@ -106,7 +106,7 @@ main.tournament-categ-shields {
 }
 
 .tournament-shields li:first-child .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* ---- A shield's history --- */
@@ -152,7 +152,7 @@ main.tournament-categ-shields .box__top h1 > a {
 
 main.tournament-categ-shields .box__top h1 > a:hover {
   background: var(--lr-ext-btn-grey-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.tournament-categ-shields .box__top h1 > a::before {
@@ -191,7 +191,7 @@ main.tournament-categ-shields .box > ol > li {
 
 main.tournament-categ-shields .box > ol > li:hover {
   border-color: color-mix(in srgb, var(--lr-ext-lb) 55%, transparent);
-  box-shadow: 0 6px 18px #00000059;
+  box-shadow: 0 6px 18px var(--lr-ext-shade-35);
   transform: translateY(-3px);
 }
 
@@ -234,7 +234,7 @@ main.tournament-categ-shields .user-link {
 }
 
 main.tournament-categ-shields li:hover .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.tournament-categ-shields li > a:not(.user-link) {
@@ -243,7 +243,7 @@ main.tournament-categ-shields li > a:not(.user-link) {
   padding: 3px 10px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--lr-ext-lb) 16%, transparent);
-  color: var(--lr-ext-lb) !important;
+  color: color-mix(in srgb, var(--lr-ext-lb) 80%, var(--lr-ext-text-strong)) !important;
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -255,7 +255,7 @@ main.tournament-categ-shields li > a:not(.user-link) {
 
 main.tournament-categ-shields li > a:not(.user-link):hover {
   background: var(--lr-ext-lb);
-  color: var(--lr-ext-grey-950) !important;
+  color: var(--lr-ext-ink) !important;
 }
 
 /* The current holder: a card across the cabinet, with a bigger shield. */
@@ -275,7 +275,7 @@ main.tournament-categ-shields li:first-child .shield-trophy {
 }
 
 main.tournament-categ-shields li:first-child .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 20px;
   font-weight: 800;
 }

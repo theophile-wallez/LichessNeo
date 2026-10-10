@@ -12,7 +12,7 @@ main.lobby .lobby__feed {
   padding: 0 20px !important;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #ffffff26 transparent;
+  scrollbar-color: var(--lr-ext-lift-15) transparent;
 }
 
 @media (min-width: 1020px) {
@@ -100,7 +100,7 @@ main.lobby .daily-feed__updates::before {
   left: 17px;
   width: 2px;
   border-radius: 1px;
-  background: #ffffff12;
+  background: var(--lr-ext-lift-7);
 }
 
 main.lobby .daily-feed__update {
@@ -121,7 +121,7 @@ main.lobby .daily-feed__update__marker {
 
 main.lobby .daily-feed__update__marker[src*='/activity.lichess.webp'] {
   --lr-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
-  --lr-ext-feed-color: var(--lr-ext-grey-300);
+  --lr-ext-feed-color: var(--lr-ext-neutral-11);
 }
 
 main.lobby .daily-feed__update__marker[src*='/activity.party-popper.webp'] {
@@ -152,6 +152,39 @@ main.lobby .daily-feed__update__marker[src*='/objects.camera.webp'] {
 main.lobby .daily-feed__update__marker[src*='/activity.puzzle-piece.webp'] {
   --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--73fb95.svg');
   --lr-ext-feed-color: var(--lr-ext-green);
+}
+
+/* An <img> holds no mask over a tile: on light, the icons are files in the deeper hues. */
+html.light main.lobby .daily-feed__update__marker {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--5e6ad2.svg');
+}
+
+html.light main.lobby .daily-feed__update__marker[src*='/activity.party-popper.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--e0479e.svg');
+}
+
+html.light main.lobby .daily-feed__update__marker[src*='/objects.megaphone.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--e3700d.svg');
+}
+
+html.light main.lobby .daily-feed__update__marker[src*='/objects.studio-microphone.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--8b5cf6.svg');
+}
+
+html.light main.lobby .daily-feed__update__marker[src*='/objects.hammer-and-wrench.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--0a97bb.svg');
+}
+
+html.light main.lobby .daily-feed__update__marker[src*='/objects.camera.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--0a97bb.svg');
+}
+
+html.light main.lobby .daily-feed__update__marker[src*='/activity.puzzle-piece.webp'] {
+  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--1e9e50.svg');
+}
+
+html.light main.lobby .daily-feed__update__marker[src*='/activity.lichess.webp'] {
+  --lr-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess.svg');
 }
 
 main.lobby .daily-feed__update__marker {
@@ -187,12 +220,12 @@ main.lobby .daily-feed__update__day {
 }
 
 main.lobby .daily-feed__update__day:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.lobby .daily-feed__update p {
   margin: -7px 0 0;
-  color: var(--lr-ext-grey-200);
+  color: var(--lr-ext-neutral-12);
   font-size: 14.5px;
   line-height: 1.55;
 }
@@ -239,7 +272,7 @@ main.lobby .lobby__streams .stream {
   margin: 0 !important;
   padding: 9px 12px 9px 56px;
   border-radius: 10px;
-  background: #ffffff08;
+  background: var(--lr-ext-lift-3);
   color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   line-height: 1.4 !important;
@@ -248,13 +281,13 @@ main.lobby .lobby__streams .stream {
 }
 
 main.lobby .lobby__streams .stream:hover {
-  background: #ffffff12;
+  background: var(--lr-ext-lift-7);
 }
 
 main.lobby .lobby__streams .stream strong {
   display: block;
   overflow: hidden;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: inherit !important;
   font-size: 14px;
   font-weight: 700;
@@ -293,8 +326,8 @@ main.lobby .lobby__streams .more {
   margin: auto 0 0 !important;
   padding: 9px;
   border-radius: 10px;
-  background: #ffffff0a;
-  color: #fff !important;
+  background: var(--lr-ext-lift-4);
+  color: var(--lr-ext-text-strong) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   text-align: center;
@@ -302,7 +335,7 @@ main.lobby .lobby__streams .more {
 }
 
 main.lobby .lobby__streams .more:hover {
-  background: #ffffff17;
+  background: var(--lr-ext-lift-10);
 }
 
 main.lobby .lobby__spotlights {
@@ -323,18 +356,18 @@ main.lobby .tour-spotlight {
   border-radius: 14px !important;
   background: var(--lr-ext-bg-panel) !important;
   box-shadow:
-    inset 0 1px 0 #ffffff0d,
-    0 10px 28px #00000033 !important;
+    inset 0 1px 0 var(--lr-ext-lift-5),
+    0 10px 28px var(--lr-ext-shade-20) !important;
   opacity: 1 !important;
   text-shadow: none !important;
 }
 
 main.lobby .tour-spotlight:hover {
-  background: var(--lr-ext-grey-850) !important;
+  background: var(--lr-ext-neutral-3) !important;
 }
 
 main.lobby .tour-spotlight .name {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-weight: 700;
 }
 

@@ -37,9 +37,9 @@ main.page-menu:has(.puzzle-openings) .help {
   align-items: center;
   margin: 0 0 16px !important;
   padding: 7px 15px !important;
-  border: 1px solid #ffffff14 !important;
+  border: 1px solid var(--lr-ext-lift-8) !important;
   border-radius: 999px !important;
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   color: var(--lr-ext-text-dim) !important;
   font-size: 13px !important;
 }
@@ -171,7 +171,7 @@ main.page-menu:has(.puzzle-openings) .box__top .mselect__list {
   gap: 10px;
   margin: 28px 0 12px !important;
   padding: 0 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 20px !important;
   font-weight: 800 !important;
 }

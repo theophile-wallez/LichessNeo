@@ -1,14 +1,25 @@
 import { z } from 'zod/mini';
 import { StorageKey } from '#shared/storage.ts';
 import { isConnected, onSyncedChange, readSynced, writeSynced } from '#content/platform/runtime.ts';
+import { CustomThemeSchema, DEFAULT_THEME, ThemePicksSchema } from '#content/colors/themes.ts';
+import { RatingPickSchema } from '#content/sidebar/top-rating.ts';
 
 // The extension's settings (the account page's Lichess Reimagined section),
 // kept in chrome.storage.sync so they follow the user to their other
 // browsers. Read once, then kept up to date as they change in any tab.
 
+/** chrome.storage.sync keeps 8 KB per item: room for these and the rest. */
+export const MAX_CUSTOM_THEMES = 24;
+
 const SettingsSchema = z.object({
   /** The interface's own sounds (content/ui/sounds.ts), not Lichess's nor a pack's. */
   uiSounds: z.prefault(z.boolean(), true),
+  /** The speed whose rating the sidebar shows beside the player's name (content/sidebar). */
+  sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
+  /** The color theme of Lichess's light scheme and of its dark one (content/colors). */
+  colorThemes: z.prefault(ThemePicksSchema, { light: DEFAULT_THEME, dark: DEFAULT_THEME }),
+  /** The themes the user made. Unreadable, they're dropped rather than every setting. */
+  customThemes: z.catch(z.array(CustomThemeSchema).check(z.maxLength(MAX_CUSTOM_THEMES)), []),
 });
 
 export type Settings = z.infer<typeof SettingsSchema>;
@@ -72,6 +83,13 @@ export async function saveSetting<K extends keyof Settings>(
   value: Settings[K],
 ): Promise<void> {
   const next = { ...current, [key]: value };
+  update(next);
+  await writeSynced(StorageKey.settings, next);
+}
+
+/** Saves the settings `change` makes of the current ones, several fields at once. */
+export async function updateSettings(change: (settings: Settings) => Settings): Promise<void> {
+  const next = change(current);
   update(next);
   await writeSynced(StorageKey.settings, next);
 }

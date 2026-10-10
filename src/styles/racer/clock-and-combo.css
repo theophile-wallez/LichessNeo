@@ -20,9 +20,9 @@
   margin: 0 !important;
   padding: 6px 16px 6px 12px;
   border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 6px #0000004d;
-  color: var(--lr-ext-grey-900) !important;
+  background: var(--lr-ext-white);
+  box-shadow: 0 2px 6px var(--lr-ext-shade-30);
+  color: var(--lr-ext-ink) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 34px !important;
   font-weight: 800;
@@ -90,7 +90,7 @@
 :is(.racer, .storm) .puz-combo__counter__value {
   width: auto !important;
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-size: 34px !important;
   font-weight: 800;
@@ -120,8 +120,8 @@
   flex: 0 0 16px !important;
   border: none !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-grey-950) !important;
-  box-shadow: inset 0 1px 3px #00000080;
+  background: var(--lr-ext-neutral-1) !important;
+  box-shadow: inset 0 1px 3px var(--lr-ext-shade-50);
   overflow: hidden;
 }
 
@@ -166,7 +166,7 @@
 :is(.racer, .storm) .puz-combo__level.active {
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 /* ---- After the race --- */
@@ -182,7 +182,7 @@
   align-items: center;
   gap: 10px;
   margin: 0;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 22px;
   font-weight: 800;
 }
@@ -195,13 +195,13 @@
   height: 24px;
   border-radius: 5px;
   background: conic-gradient(
-      #fff 25%,
-      var(--lr-ext-grey-950) 0 50%,
-      #fff 0 75%,
-      var(--lr-ext-grey-950) 0
+      var(--lr-ext-white) 25%,
+      var(--lr-ext-ink) 0 50%,
+      var(--lr-ext-white) 0 75%,
+      var(--lr-ext-ink) 0
     )
     0 0 / 12px 12px;
-  box-shadow: 0 0 0 1px #ffffff40;
+  box-shadow: 0 0 0 1px var(--lr-ext-lift-25);
 }
 
 /* "Your rank: 1/2", on a gold pill with a trophy, dark on the gold (white can't be read there). */
@@ -215,10 +215,15 @@
   background: linear-gradient(var(--lr-ext-orange-dark), var(--lr-ext-orange-darker));
   box-shadow:
     inset 0 1px 0 #ffffff66,
-    0 1px 4px #0000005c;
-  color: var(--lr-ext-grey-900);
+    0 1px 4px var(--lr-ext-shade-35);
+  color: var(--lr-ext-ink);
   font-size: 15px;
   font-weight: 800;
+}
+
+/* The light scheme's darker orange shades are too deep for dark text. */
+html.light .racer .race__post__rank {
+  background: linear-gradient(var(--lr-ext-orange), var(--lr-ext-orange-dark));
 }
 
 .racer .race__post__rank::before {
@@ -255,8 +260,8 @@
   padding: 24px 32px !important;
   border: 1px solid var(--lr-ext-card-border);
   border-radius: 18px !important;
-  background: color-mix(in srgb, var(--lr-ext-grey-900) 92%, transparent) !important;
-  box-shadow: 0 16px 40px #000000b3 !important;
+  background: color-mix(in srgb, var(--lr-ext-bg-panel-dark) 92%, transparent) !important;
+  box-shadow: 0 16px 40px var(--lr-ext-shade-70) !important;
   backdrop-filter: blur(6px);
 }
 
@@ -267,8 +272,8 @@
   margin: 0 !important;
   padding: 10px;
   border-radius: 999px !important;
-  background: var(--lr-ext-grey-950) !important;
-  box-shadow: inset 0 2px 6px #000;
+  background: var(--lr-ext-neutral-1) !important;
+  box-shadow: inset 0 2px 6px var(--lr-ext-shade-90);
 }
 
 .racer .racer__countdown__lights light {
@@ -283,7 +288,7 @@
   min-width: 1.2ch;
   justify-content: center;
   margin: 0 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 110px !important;
   font-weight: 800;

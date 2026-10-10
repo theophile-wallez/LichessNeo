@@ -79,5 +79,179 @@
   },
   "packsHelp": {
     "message": "Comment créer un pack"
+  },
+  "appearanceTitle": {
+    "message": "Apparence"
+  },
+  "appearanceBody": {
+    "message": "Clair ou sombre, comme dans le menu Thème de Lichess, et un thème de couleurs pour chacun."
+  },
+  "colorSchemeTitle": {
+    "message": "Mode"
+  },
+  "schemeSystem": {
+    "message": "Système"
+  },
+  "schemeLight": {
+    "message": "Clair"
+  },
+  "schemeDark": {
+    "message": "Sombre"
+  },
+  "themesTitle": {
+    "message": "Thèmes"
+  },
+  "themeForLight": {
+    "message": "$1, pour le mode clair"
+  },
+  "themeForDark": {
+    "message": "$1, pour le mode sombre"
+  },
+  "themeReimagined": {
+    "message": "Reimagined"
+  },
+  "themeLichess": {
+    "message": "Lichess"
+  },
+  "themeOcean": {
+    "message": "Océan"
+  },
+  "themeGrove": {
+    "message": "Bosquet"
+  },
+  "themeEmber": {
+    "message": "Braise"
+  },
+  "themeIris": {
+    "message": "Iris"
+  },
+  "themeBlossom": {
+    "message": "Floraison"
+  },
+  "themeMidnight": {
+    "message": "Minuit"
+  },
+  "schemeToggleToDark": {
+    "message": "Passer en mode sombre"
+  },
+  "schemeToggleToLight": {
+    "message": "Passer en mode clair"
+  },
+  "themeRuby": {
+    "message": "Rubis"
+  },
+  "themeDune": {
+    "message": "Dune"
+  },
+  "themeMatcha": {
+    "message": "Matcha"
+  },
+  "themeAurora": {
+    "message": "Aurore"
+  },
+  "themeFjord": {
+    "message": "Fjord"
+  },
+  "themeMocha": {
+    "message": "Moka"
+  },
+  "themePlum": {
+    "message": "Prune"
+  },
+  "themeTwilight": {
+    "message": "Crépuscule"
+  },
+  "themeCreate": {
+    "message": "Créer un thème"
+  },
+  "themeAdd": {
+    "message": "Ajouter un thème"
+  },
+  "themeCopy": {
+    "message": "Copier $1 pour en faire le vôtre"
+  },
+  "themeEdit": {
+    "message": "Modifier $1"
+  },
+  "themeCopyName": {
+    "message": "Copie de $1"
+  },
+  "editorNew": {
+    "message": "Nouveau thème"
+  },
+  "editorEdit": {
+    "message": "Modifier le thème"
+  },
+  "editorName": {
+    "message": "Nom du thème"
+  },
+  "editorUntitled": {
+    "message": "Mon thème"
+  },
+  "editorTint": {
+    "message": "Teinte du fond"
+  },
+  "editorStrength": {
+    "message": "Intensité de la teinte"
+  },
+  "editorAccent": {
+    "message": "Accent"
+  },
+  "editorLowContrast": {
+    "message": "Le texte blanc se lit mal sur cet accent : essayez-en un plus profond."
+  },
+  "editorDelete": {
+    "message": "Supprimer"
+  },
+  "editorDeleteConfirm": {
+    "message": "Cliquez encore pour supprimer"
+  },
+  "editorShare": {
+    "message": "Copier le code"
+  },
+  "editorCopied": {
+    "message": "Copié"
+  },
+  "editorCancel": {
+    "message": "Annuler"
+  },
+  "editorSave": {
+    "message": "Enregistrer"
+  },
+  "themeCodePlaceholder": {
+    "message": "Collez le code d’un thème"
+  },
+  "themeCodeAdd": {
+    "message": "Ajouter"
+  },
+  "themeCodeInvalid": {
+    "message": "Ce n’est pas le code d’un thème."
+  },
+  "settingSidebarRating": {
+    "message": "Classement dans la barre latérale"
+  },
+  "settingSidebarRatingBody": {
+    "message": "Le classement affiché à côté de votre nom. Par défaut, la cadence que vous jouez le plus."
+  },
+  "ratingMostPlayed": {
+    "message": "La plus jouée"
+  },
+  "speedUltraBullet": {
+    "message": "UltraBullet"
+  },
+  "speedBullet": {
+    "message": "Bullet"
+  },
+  "speedBlitz": {
+    "message": "Blitz"
+  },
+  "speedRapid": {
+    "message": "Rapide"
+  },
+  "speedClassical": {
+    "message": "Classique"
+  },
+  "speedCorrespondence": {
+    "message": "Correspondance"
   }
 }

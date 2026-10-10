@@ -142,6 +142,22 @@ stylesheet longer than 400 lines is a folder of partials with its own
 indentation (`scripts/lib/css-strip.ts`). Content-script CSS loses ties with Lichess's, hence the many
 `!important`s; scope every rule to its page (`main.round …`).
 
+Colors follow Lichess's scheme, light under `html.light`, dark otherwise.
+`theme/palette.css` writes them: a ramp of neutrals from the page's deepest
+background (1) to its strongest text (14) in either scheme, tinted by the
+color theme; the hues, deeper on light; the text's color and black at every
+strength (`--lr-ext-lift-N`, `--lr-ext-shade-N`). `theme/base.css` names
+their roles and points Lichess's `--c-*` variables at them. A color theme
+(`src/content/colors`) is a palette per scheme, three variables each:
+`apply.ts` writes the picked ones in a stylesheet of ours, from
+`document_start`, out of a copy the settings leave in localStorage. The
+settings' Appearance card (`src/content/settings/appearance.ts`) picks them,
+and the scheme too, which `src/page/color-scheme` saves as Lichess's own
+preference, as its Theme menu does. Users make their own in its editor
+(`theme-editor.ts`): kept in the settings beside the built-in ones
+(`colors/built-in.ts`), checked by the same schema, and shared as a code
+(`colors/share.ts`).
+
 ## Tests
 
 - Unit tests sit next to the code (`foo.test.ts`), run by vitest in

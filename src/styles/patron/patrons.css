@@ -73,7 +73,7 @@ main.plan .best_patrons h2 {
   justify-content: flex-start !important;
   gap: 12px;
   margin: 0 0 16px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font);
   font-size: 22px !important;
   font-weight: 800 !important;
@@ -86,13 +86,11 @@ main.plan .best_patrons h2::before {
   width: 38px;
   height: 38px;
   border-radius: 12px;
-  background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sparkles--ffc689.svg') center /
-      22px no-repeat,
-    color-mix(in srgb, var(--lr-ext-orange) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-orange) 35%, transparent);
+  background: var(--lr-ext-orange);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sparkles.svg') center / 22px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
 }
 
 main.plan .best_patrons .list {
@@ -126,7 +124,7 @@ main.plan .best_patrons .list > .paginated > .user-link {
 }
 
 main.plan .best_patrons .list > .paginated > .user-link:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The next page's link, until infinite scroll loads it. */
@@ -148,7 +146,7 @@ main.plan .best_patrons .pager a {
 
 main.plan .best_patrons .pager a:hover {
   background: var(--lr-ext-btn-grey-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 @keyframes lr-ext-plan-in {
@@ -190,7 +188,7 @@ main.plan .recent-patrons h2 {
   margin: 0 !important;
   padding: 16px 16px 12px;
   border-bottom: 1px solid var(--lr-ext-border) !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font);
   font-size: 17px !important;
   font-weight: 800 !important;
@@ -202,13 +200,10 @@ main.plan .recent-patrons h2::before {
   width: 32px;
   height: 32px;
   border-radius: 9px;
-  background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg') center / 20px
-      no-repeat,
-    color-mix(in srgb, var(--lr-ext-pink) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-pink) 35%, transparent);
+  background: var(--lr-ext-pink);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party.svg') center / 20px no-repeat,
+    linear-gradient(#0000003d, #0000003d);
 }
 
 main.plan .recent-patrons .list {
@@ -225,8 +220,8 @@ main.plan .recent-patrons .list > div > .user-link {
 }
 
 main.plan .recent-patrons .list > div > .user-link:hover {
-  background: #ffffff0d;
-  color: #fff !important;
+  background: var(--lr-ext-lift-5);
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.plan .recent-patrons .user-link {
@@ -297,7 +292,7 @@ main.plan .patron-style-selector__info p {
 }
 
 main.plan .patron-style-selector__info .user-link {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }
 

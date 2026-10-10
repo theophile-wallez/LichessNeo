@@ -68,7 +68,7 @@ main.swiss-home .comparison thead th {
 }
 
 main.swiss-home .comparison thead strong {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 15px;
   font-weight: 800;
 }
@@ -79,7 +79,7 @@ main.swiss-home .comparison thead th:nth-child(3) strong {
 
 main.swiss-home .comparison tbody th {
   width: 28%;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-family: var(--lr-ext-font) !important;
   font-weight: 700 !important;
 }
@@ -94,7 +94,7 @@ main.swiss-home .comparison tbody td:nth-child(3) {
 }
 
 main.swiss-home .comparison tbody tr:hover {
-  background: #ffffff08 !important;
+  background: var(--lr-ext-lift-3) !important;
 }
 
 /* FAQ: a grid of question cards, the "?" as a round badge. */
@@ -134,7 +134,7 @@ main.swiss-home #faq .faq icon {
 
 main.swiss-home #faq .faq strong {
   margin: 5px 0 6px !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 15px;
   font-weight: 800;
   line-height: 1.35;

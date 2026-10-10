@@ -125,7 +125,7 @@ main.plan .banner h1.box__top {
   display: block !important;
   margin: 0 0 8px !important;
   padding: 0 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 34px !important;
   line-height: 1.15;
@@ -149,7 +149,7 @@ main.plan .banner > icon {
   line-height: 1;
   transform-origin: 50% 85%;
   transform: var(--lr-ext-wing) translateX(32%) rotate(0deg) translateX(-32%);
-  filter: drop-shadow(0 6px 14px #00000080);
+  filter: drop-shadow(0 6px 14px var(--lr-ext-shade-50));
   animation: lr-ext-plan-flap 3.2s ease-in-out infinite;
 }
 
@@ -239,13 +239,11 @@ main.plan .wrapper > .text::before {
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff94d1.svg') center /
-      28px no-repeat,
-    color-mix(in srgb, var(--lr-ext-pink) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-pink) 35%, transparent);
+  background: var(--lr-ext-pink);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg') center / 28px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
 }
 
 main.plan .wrapper > .text p {
@@ -256,7 +254,7 @@ main.plan .wrapper > .text p {
 }
 
 main.plan .wrapper > .text p:first-of-type {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 18px;
   font-weight: 700;
   line-height: 1.45;
@@ -279,13 +277,10 @@ main.plan .plan_checkout:not(:has(group))::before {
   width: 84px;
   height: 84px;
   border-radius: 22px;
-  background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/gift--ff94d1.svg') center / 44px
-      no-repeat,
-    color-mix(in srgb, var(--lr-ext-pink) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-pink) 35%, transparent);
+  background: var(--lr-ext-pink);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/gift.svg') center / 44px no-repeat,
+    linear-gradient(#0000003d, #0000003d);
   animation: lr-ext-plan-float 4s ease-in-out infinite;
 }
 

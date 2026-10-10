@@ -20,7 +20,7 @@
 }
 
 .rating-stats .desc strong {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 16px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -54,7 +54,7 @@
 .lr-ext-dist__chip,
 .lr-ext-dist__chip:hover {
   border-color: var(--lr-ext-card-border);
-  background: #ffffff08;
+  background: var(--lr-ext-lift-3);
   cursor: default;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .lr-ext-dist__base {
-  stroke: #ffffff26;
+  stroke: var(--lr-ext-lift-15);
   stroke-dasharray: none;
 }
 
@@ -112,7 +112,7 @@
 
 .lr-ext-dist__cumul {
   fill: none;
-  stroke: var(--lr-ext-grey-50);
+  stroke: var(--lr-ext-neutral-14);
   stroke-width: 2;
   stroke-linecap: round;
   opacity: 0.8;
@@ -126,8 +126,14 @@
   pointer-events: none;
 }
 
+/* The markers' colors are white and a light grey, for the dark scheme (page/charts/distribution):
+   on light, drawn toward the ink. */
+html.light .lr-ext-dist__mline {
+  stroke: color-mix(in srgb, var(--lr-ext-marker-color) 40%, var(--lr-ext-text-strong));
+}
+
 .lr-ext-dist__dot {
-  fill: var(--lr-ext-grey-50);
+  fill: var(--lr-ext-neutral-14);
   stroke: var(--lr-ext-bg-panel);
   stroke-width: 2.5;
   opacity: 0;
@@ -156,18 +162,18 @@
   height: 24px;
   padding: 0 10px;
   border-radius: 999px;
-  background: #fff;
-  box-shadow: 0 2px 6px #00000059;
+  background: var(--lr-ext-text-strong);
+  box-shadow: 0 2px 6px var(--lr-ext-shade-35);
   color: var(--lr-ext-bg-panel);
   font: 700 12px/1 var(--lr-ext-font);
   white-space: nowrap;
 }
 
-/* The player you came from gets a dark pill; yours stays bright. */
+/* The player you came from gets a raised pill; yours stands out in the text's color. */
 .lr-ext-dist__mark--other {
-  border: 1px solid #ffffff2e;
+  border: 1px solid var(--lr-ext-lift-18);
   background: var(--lr-ext-bg-raised);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 .lr-ext-dist__mark strong {

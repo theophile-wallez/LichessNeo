@@ -1,0 +1,273 @@
+/* ---- The theme editor and the theme code field (content/settings/theme-editor.ts) --- */
+
+/* Flex boxes and Lichess's buttons: [hidden] alone would lose to their display. */
+.lr-ext-editor[hidden],
+.lr-ext-editor [hidden],
+.lr-ext-theme-code[hidden],
+.lr-ext-theme-code [hidden] {
+  display: none !important;
+}
+
+@keyframes lr-ext-editor-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.lr-ext-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel-dark);
+  box-shadow:
+    inset 0 0 0 1px var(--lr-ext-card-border-hover),
+    0 10px 30px var(--lr-ext-shade-25);
+  animation: lr-ext-editor-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lr-ext-editor__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.lr-ext-editor__title {
+  margin: 0 !important;
+}
+
+/* The name field and the code field. */
+.lr-ext-editor__name,
+.lr-ext-theme-code__field {
+  flex: 1;
+  min-width: 180px;
+  height: 38px;
+  padding: 0 12px !important;
+  border: none !important;
+  border-radius: 9px !important;
+  background: var(--lr-ext-bg-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text-strong) !important;
+  font: 600 14.5px var(--lr-ext-font);
+}
+
+.lr-ext-editor__name:focus,
+.lr-ext-theme-code__field:focus {
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+  outline: none;
+}
+
+.lr-ext-editor__schemes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .lr-ext-editor__schemes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.lr-ext-editor__scheme {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: var(--lr-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+}
+
+/* Floated, a legend sits inside its box rather than across its edge. */
+.lr-ext-editor__legend {
+  display: flex;
+  float: left;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 0;
+  color: var(--lr-ext-text-strong);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+/* The scheme's page in small, as the scheme cards draw it (appearance.css). */
+.lr-ext-editor__preview {
+  display: grid;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 9px;
+  box-shadow: 0 0 0 1px var(--lr-ext-lift-6);
+  container-type: inline-size;
+}
+
+.lr-ext-editor__field {
+  display: grid;
+  grid-template-columns: minmax(96px, 34%) minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--lr-ext-text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---- Sliders: the hues all around, and the strength from grey to the hue --- */
+
+.lr-ext-editor__field input[type='range'] {
+  height: 8px;
+  margin: 0;
+  border-radius: 99px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.lr-ext-editor__hue {
+  background: linear-gradient(
+    to right,
+    oklch(72% 0.13 0),
+    oklch(72% 0.13 60),
+    oklch(72% 0.13 120),
+    oklch(72% 0.13 180),
+    oklch(72% 0.13 240),
+    oklch(72% 0.13 300),
+    oklch(72% 0.13 360)
+  );
+}
+
+.lr-ext-editor__chroma {
+  background: linear-gradient(
+    to right,
+    oklch(72% 0 0),
+    oklch(72% 0.13 var(--lr-ext-editor-hue, 286))
+  );
+}
+
+.lr-ext-editor__field input[type='range']::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--lr-ext-white);
+  box-shadow:
+    0 0 0 1px var(--lr-ext-shade-20),
+    0 2px 6px var(--lr-ext-shade-40);
+  appearance: none;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-editor__field input[type='range']:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+.lr-ext-editor__field input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--lr-ext-white);
+  box-shadow:
+    0 0 0 1px var(--lr-ext-shade-20),
+    0 2px 6px var(--lr-ext-shade-40);
+}
+
+/* ---- The accent: the browser's color picker behind a swatch --- */
+
+.lr-ext-editor__field--accent {
+  grid-template-columns: minmax(96px, 34%) auto minmax(0, 1fr);
+}
+
+.lr-ext-editor__accent {
+  width: 40px;
+  height: 28px;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: none !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-10);
+  cursor: pointer;
+}
+
+.lr-ext-editor__accent::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.lr-ext-editor__accent::-webkit-color-swatch {
+  border: none;
+  border-radius: 8px;
+}
+
+.lr-ext-editor__accent::-moz-color-swatch {
+  border: none;
+  border-radius: 8px;
+}
+
+.lr-ext-editor__hex {
+  color: var(--lr-ext-text-dim);
+  font:
+    600 12.5px ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+  text-transform: uppercase;
+}
+
+.lr-ext-editor__warning,
+.lr-ext-theme-code__error {
+  margin: 0;
+  color: color-mix(in srgb, var(--lr-ext-orange) 80%, var(--lr-ext-text-strong));
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ---- Actions --- */
+
+.lr-ext-editor__actions,
+.lr-ext-theme-code {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.lr-ext-editor__spacer {
+  flex: 1;
+}
+
+.lr-ext-editor__actions .button,
+.lr-ext-theme-code .button {
+  height: 36px;
+  padding: 0 16px !important;
+  font-size: 13.5px;
+}
+
+.lr-ext-theme-code__error {
+  flex: 1 0 100%;
+}
+
+/* The code field and its button, glued into one control. */
+.lr-ext-theme-code {
+  row-gap: 8px;
+  column-gap: 0;
+}
+
+.lr-ext-theme-code .lr-ext-theme-code__field {
+  height: 38px;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+}
+
+.lr-ext-theme-code .button {
+  height: 38px;
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  box-shadow: none !important;
+}

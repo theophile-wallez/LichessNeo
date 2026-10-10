@@ -36,7 +36,8 @@ main:is(.round, .analyse) .lr-ext-end__kings {
 }
 
 main:is(.round, .analyse) .lr-ext-end__king {
-  --lr-ext-king-c: var(--lr-ext-grey-400);
+  /* A fixed grey: the board looks the same in either scheme. */
+  --lr-ext-king-c: color-mix(in srgb, var(--lr-ext-ink) 65%, var(--lr-ext-white));
   position: absolute;
   top: calc(var(--row) * 12.5%);
   left: calc(var(--column) * 12.5%);
@@ -64,7 +65,7 @@ main:is(.round, .analyse) .lr-ext-end__king-icon {
   height: 100%;
   background: color-mix(in srgb, var(--lr-ext-king-c) 88%, transparent);
   /* The icons are drawn in the text's color. */
-  color: #fff;
+  color: var(--lr-ext-white);
   animation: lr-ext-end-square 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
   transition:
     top 0.4s,
@@ -108,7 +109,7 @@ main:is(.round, .analyse) .lr-ext-end__king-label {
   translate: -50% 0;
   padding: 0.6cqh 1.6cqh;
   border-radius: 999px;
-  background: #fff;
+  background: var(--lr-ext-white);
   color: var(--lr-ext-king-c);
   font-size: 2.3cqh;
   font-weight: 800;

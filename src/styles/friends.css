@@ -28,7 +28,7 @@ main.box.page-small[data-lr-ext-list='players'] {
     border-radius: 50%;
     background: var(--lr-ext-btn-grey);
     box-shadow: var(--lr-ext-btn-grey-shadow);
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
     font-size: 15px;
     transition: background 0.15s !important;
   }
@@ -69,9 +69,9 @@ main.box.page-small[data-lr-ext-list='players'] {
     box-sizing: border-box;
     min-height: 72px;
     padding: 12px 16px 12px 76px;
-    border: 1px solid #ffffff14;
+    border: 1px solid var(--lr-ext-lift-8);
     border-radius: 10px;
-    background: #ffffff06 !important;
+    background: var(--lr-ext-lift-3) !important;
     transition:
       background-color 0.15s,
       border-color 0.15s,
@@ -135,7 +135,7 @@ main.box.page-small[data-lr-ext-list='players'] {
   }
 
   & .user-link {
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
     font-weight: 700;
   }
 
@@ -149,7 +149,7 @@ main.box.page-small[data-lr-ext-list='players'] {
     padding: 0 4px;
     border-radius: 3px;
     background: var(--lr-ext-title-bg);
-    color: #fff !important;
+    color: var(--lr-ext-white) !important;
     font-size: 11px;
     font-weight: 800;
     line-height: 16px;

@@ -15,7 +15,7 @@
   padding: 5px;
   border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px;
-  background: var(--lr-ext-grey-950);
+  background: var(--lr-ext-neutral-1);
 }
 
 .lobby__app > .tabs-horiz > button,
@@ -41,13 +41,13 @@
 }
 
 .lobby__app > .tabs-horiz > button:hover {
-  background: #ffffff0a;
+  background: var(--lr-ext-lift-4);
   color: var(--lr-ext-text-strong) !important;
 }
 
 .lobby__app > .tabs-horiz > button.active {
   background: var(--lr-ext-bg-raised);
-  box-shadow: 0 1px 3px #00000080;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
   color: var(--lr-ext-text-strong) !important;
 }
 
@@ -67,10 +67,12 @@
   width: 8px;
   height: 8px;
   margin-inline-start: 10px;
+  /* Lichess pads it for a number, which stretched the dot into an oval. */
+  padding: 0 !important;
   overflow: hidden;
   border-radius: 50%;
   background: var(--lr-ext-accent-hover);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 25%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 25%, transparent) !important;
   font-size: 0;
 }
 
@@ -83,7 +85,7 @@
   border-radius: 8px !important;
   background: var(--lr-ext-btn-grey) !important;
   box-shadow: var(--lr-ext-btn-grey-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   opacity: 1 !important;
 }
 
@@ -92,7 +94,7 @@
 }
 
 .lpool .clock {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-weight: 800;
   letter-spacing: 0 !important;
 }
@@ -108,7 +110,7 @@
 .lreal_time {
   padding: 0 8px !important;
   scrollbar-width: thin;
-  scrollbar-color: #ffffff26 transparent;
+  scrollbar-color: var(--lr-ext-lift-15) transparent;
 }
 
 .hooks__list {
@@ -137,7 +139,7 @@
 }
 
 .hooks__list th.sortable:hover {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 /* The lobby's lists fade out in the card's color at an edge where more is hidden: under the
@@ -213,7 +215,7 @@
 .hooks__list td:first-child {
   padding-inline-start: 14px !important;
   border-radius: 6px 0 0 6px;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-weight: 700;
 }
 
@@ -229,12 +231,12 @@
 }
 
 .hooks__list tr.join:not(.disabled):hover td {
-  background: #ffffff12 !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-7) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .hooks__list tr.join:not(.disabled):hover td:last-child ::before {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 /* Seeks you can't join (rating range, rated while anonymous). */
@@ -285,22 +287,22 @@
 }
 
 .lobby__app .toggle:hover {
-  background: #ffffff12;
-  color: #fff !important;
+  background: var(--lr-ext-lift-7);
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* "Create a game" as the big primary Play button. The doubled class beats the metal-button
  * hover in theme/; the icon stays white where Lichess tints it green. */
 .lobby__start__button--hook.button.button-metal {
   background: var(--lr-ext-btn-primary) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   text-shadow: 0 1px 1px #00000033 !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
 }
 
 .lobby__start__button--hook.button.button-metal:not(.disabled):hover {
   background: var(--lr-ext-btn-primary-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 .lobby__start__button.button::before {
@@ -309,7 +311,7 @@
 }
 
 .lobby__start__button--hook.button.button-metal::before {
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 /* Color pictures (a handshake, a robot) instead of Lichess's font glyphs. */

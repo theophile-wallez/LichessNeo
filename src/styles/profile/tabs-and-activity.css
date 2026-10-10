@@ -40,7 +40,7 @@
   padding: 5px !important;
   border: 1px solid var(--lr-ext-card-border) !important;
   border-radius: 12px;
-  background: var(--lr-ext-grey-950) !important;
+  background: var(--lr-ext-neutral-1) !important;
   background-image: none !important;
   box-shadow: none !important;
   font-size: inherit !important;
@@ -68,13 +68,13 @@
 }
 
 .user-show > .angles .nm-item:hover {
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   color: var(--lr-ext-text-strong) !important;
 }
 
 .user-show > .angles .nm-item.active {
   background: var(--lr-ext-bg-raised) !important;
-  box-shadow: 0 1px 3px #00000080;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
   color: var(--lr-ext-text-strong) !important;
 }
 
@@ -94,7 +94,7 @@
   padding: 1px 6px;
   border-radius: 999px;
   background: var(--lr-ext-accent);
-  color: #fff;
+  color: var(--lr-ext-white);
   font-size: 11px;
   font-weight: 800;
   text-align: center;
@@ -162,14 +162,14 @@
   margin: 0 !important;
   padding: 11px 12px !important;
   border-radius: 10px;
-  background: #ffffff05;
+  background: var(--lr-ext-lift-2);
   color: var(--lr-ext-text);
   line-height: 1.4;
   transition: background-color 0.15s !important;
 }
 
 .user-show .activity .entry:hover {
-  background: #ffffff0f;
+  background: var(--lr-ext-lift-6);
 }
 
 .user-show .activity .entry > icon {
@@ -183,7 +183,7 @@
   margin: 0 !important;
   border: none !important;
   border-radius: 9px !important;
-  background-color: #ffffff0f !important;
+  background-color: var(--lr-ext-lift-6) !important;
   color: var(--lr-ext-text-dim) !important;
   font-size: 19px !important;
   line-height: 1 !important;
@@ -255,7 +255,7 @@
   margin-inline-start: 8px !important;
   padding: 1px 7px;
   border-radius: 5px;
-  background: #ffffff0f;
+  background: var(--lr-ext-lift-6);
   color: var(--lr-ext-text-dim);
   font-family: var(--lr-ext-font) !important;
   font-size: 12px;
@@ -319,13 +319,13 @@
   opacity: 1 !important;
 }
 
-/* Tinted, not filled: a full green pill glared on the dark card. */
+/* Tinted, not filled: a full green pill glared on the card. */
 .user-show .activity win strong {
   --lr-ext-score: var(--lr-ext-good);
 }
 
 .user-show .activity draw strong {
-  --lr-ext-score: var(--lr-ext-grey-200);
+  --lr-ext-score: var(--lr-ext-neutral-12);
 }
 
 .user-show .activity loss strong {

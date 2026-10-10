@@ -18,13 +18,13 @@
   height: 64px !important;
   border-radius: 50% !important;
   box-shadow:
-    0 0 0 3px #ffffff1a,
-    0 6px 16px #00000073;
+    0 0 0 3px var(--lr-ext-lift-10),
+    0 6px 16px var(--lr-ext-shade-45);
 }
 
 .fide-federation__head h1 {
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 30px !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
@@ -49,8 +49,9 @@
   content: '';
   width: 16px;
   height: 16px;
-  background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--a1a5ad.svg')
-    center / contain no-repeat;
+  background: var(--lr-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg') center /
+    contain no-repeat;
 }
 
 /* A stat card per time control: its icon on a tile of its color, then rank, top-10 rating and
@@ -64,7 +65,7 @@
 }
 
 .fide-federation__card {
-  --lr-ext-fc: #2dd4bf;
+  --lr-ext-fc: var(--lr-ext-mode-classical-color);
   --lr-ext-fc-2: var(--lr-ext-cyan-deep);
   gap: 18px !important;
   padding: 20px !important;
@@ -90,7 +91,7 @@
   align-items: center;
   gap: 14px;
   min-height: 44px;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 19px;
   font-style: normal;
@@ -113,8 +114,8 @@
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
-    0 4px 10px #00000040;
-  color: #fff !important;
+    0 4px 10px var(--lr-ext-shade-25);
+  color: var(--lr-ext-white) !important;
   font-size: 23px;
   font-weight: 400 !important;
   text-shadow: 0 1px 1px #00000040;
@@ -141,7 +142,7 @@
 }
 
 .fide-federation__card strong {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 22px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -168,6 +169,6 @@
   border-radius: 8px;
   background: var(--lr-ext-btn-grey);
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 700;
 }

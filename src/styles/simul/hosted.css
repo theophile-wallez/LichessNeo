@@ -6,9 +6,9 @@
 /* ---- Page --- */
 
 main.page-small.simul-list {
-  --lr-ext-simul-win: color-mix(in srgb, var(--lr-ext-green) 55%, var(--lr-ext-grey-400));
-  --lr-ext-simul-draw: var(--lr-ext-grey-400);
-  --lr-ext-simul-loss: color-mix(in srgb, var(--lr-ext-red) 60%, var(--lr-ext-grey-400));
+  --lr-ext-simul-win: color-mix(in srgb, var(--lr-ext-green) 55%, var(--lr-ext-neutral-10));
+  --lr-ext-simul-draw: var(--lr-ext-neutral-10);
+  --lr-ext-simul-loss: color-mix(in srgb, var(--lr-ext-red) 60%, var(--lr-ext-neutral-10));
   max-width: 1180px;
   overflow: visible !important;
   padding: 0 0 40px !important;
@@ -62,7 +62,7 @@ main.page-small.simul-list .slist thead h1 {
   gap: 14px;
   margin: 0 !important;
   overflow: hidden;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 28px !important;
   font-weight: 800;
   text-overflow: ellipsis;
@@ -85,7 +85,7 @@ main.page-small.simul-list .slist thead h1 .user-link {
   align-items: center;
   gap: 8px;
   margin-inline-end: -0.3em;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.page-small.simul-list .slist thead h1 .user-link .line {

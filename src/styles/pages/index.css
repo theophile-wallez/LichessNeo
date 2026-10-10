@@ -12,4 +12,7 @@
 @import './streamers.css';
 @import './about-menu.css';
 @import './extension-settings.css';
+@import './setting-menu.css';
+@import './appearance.css';
+@import './theme-editor.css';
 @import './menu-titles.css';

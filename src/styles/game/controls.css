@@ -35,7 +35,7 @@ main.round .rcontrols .ricons .fbt {
   border-radius: 8px !important;
   background: var(--lr-ext-btn-grey) !important;
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-grey-200) !important;
+  color: var(--lr-ext-neutral-12) !important;
   font-size: 24px !important;
   text-shadow: none !important;
   visibility: visible !important;
@@ -46,7 +46,7 @@ main.round .rcontrols .ricons .fbt {
 
 main.round .rcontrols .ricons .fbt:hover:not(:disabled) {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.round .rcontrols .ricons .fbt:disabled {
@@ -70,7 +70,7 @@ main.round .rcontrols .ricons .act-confirm {
 main.round .rcontrols .ricons .act-confirm .yes {
   background: var(--lr-ext-btn-red) !important;
   box-shadow: var(--lr-ext-btn-red-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 main.round .rcontrols .ricons .act-confirm .yes:hover {
@@ -115,7 +115,7 @@ main.round .rcontrols .question :is(a, button) {
   border-radius: 8px;
   background: var(--lr-ext-btn-grey) !important;
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-grey-200) !important;
+  color: var(--lr-ext-neutral-12) !important;
   font-size: 22px !important;
   line-height: 1 !important;
   cursor: pointer;
@@ -123,13 +123,13 @@ main.round .rcontrols .question :is(a, button) {
 
 main.round .rcontrols .question :is(a, button):hover {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.round .rcontrols .question .yes {
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 main.round .rcontrols .question .yes:hover {

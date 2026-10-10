@@ -31,8 +31,8 @@
     background: linear-gradient(#2b2b2b, #111111);
     box-shadow:
       inset 0 1px 0 #ffffff1f,
-      0 0 0 1px #ffffff1a;
-    color: #fff !important;
+      0 0 0 1px var(--lr-ext-lift-10);
+    color: var(--lr-ext-white) !important;
     font-family: var(--lr-ext-font) !important;
     font-size: 15px !important;
     font-weight: 800 !important;
@@ -49,8 +49,8 @@
     background: linear-gradient(#ffffff, #d9d9d9);
     box-shadow:
       inset 0 -1px 0 #0000001f,
-      0 1px 3px #00000066;
-    color: var(--lr-ext-grey-900) !important;
+      0 1px 3px var(--lr-ext-shade-40);
+    color: var(--lr-ext-ink) !important;
   }
 
   :is(main.analyse, main.puzzle, .board-editor) .ceval .engine {
@@ -80,7 +80,7 @@
     margin-left: 6px;
     padding: 0 5px;
     border-radius: 3px;
-    background: #ffffff1a !important;
+    background: var(--lr-ext-lift-10) !important;
     color: var(--lr-ext-text) !important;
     font-size: 10px;
     font-weight: 700;
@@ -109,14 +109,14 @@
   }
 
   :is(main.analyse, main.puzzle, .board-editor) .ceval > button:hover {
-    background: #ffffff14 !important;
-    color: #fff !important;
+    background: var(--lr-ext-lift-8) !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   /* The settings open. */
   :is(main.analyse, main.puzzle, .board-editor) .ceval > button.active {
     background: color-mix(in srgb, var(--lr-ext-accent) 24%, transparent) !important;
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   /* The threat: red, on a red tint while it shows. */
@@ -149,9 +149,14 @@
     background: linear-gradient(
       to right,
       #f2f2f2 var(--lr-ext-white-share),
-      var(--lr-ext-grey-700) var(--lr-ext-white-share)
+      var(--lr-ext-win-bar-black, var(--lr-ext-neutral-6)) var(--lr-ext-white-share)
     );
     transition: --lr-ext-white-share 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  /* On white, Black's share stays dark, or White's near-white one can't be told from it. */
+  html.light :is(main.analyse, main.puzzle, .board-editor) .ceval[data-lr-ext-lead]::after {
+    --lr-ext-win-bar-black: var(--lr-ext-neutral-12);
   }
 
   :is(main.analyse, main.puzzle, .board-editor) .pv_box {
@@ -177,7 +182,7 @@
   }
 
   :is(main.analyse, main.puzzle, .board-editor) .pv_box .pv + .pv {
-    border-top: 1px solid #ffffff0a !important;
+    border-top: 1px solid var(--lr-ext-lift-4) !important;
   }
 
   :is(main.analyse, main.puzzle, .board-editor) .pv_box .pv strong {
@@ -186,8 +191,8 @@
     margin-right: 4px;
     padding: 0 5px;
     border-radius: 3px;
-    background: #ffffff1f;
-    color: #fff;
+    background: var(--lr-ext-lift-12);
+    color: var(--lr-ext-text-strong);
     font-size: 12px;
     font-weight: 800;
     line-height: 20px;
@@ -213,7 +218,7 @@
     .pv_box
     .pv:first-child
     > span:not(.pv-san, .pv-wrap-toggle) {
-    color: #ffffff80;
+    color: var(--lr-ext-font-dimmer);
     font-size: 12px;
   }
 
@@ -232,9 +237,18 @@
     background: var(--lr-ext-bg-raised)
       url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01--f4fba3.svg') 8px center
       / 16px no-repeat;
-    box-shadow: inset 0 0 0 1px #ffffff1f;
-    color: #fff;
+    box-shadow: inset 0 0 0 1px var(--lr-ext-lift-12);
+    color: var(--lr-ext-text-strong);
     font-size: 15px;
     font-weight: 800;
+  }
+
+  /* The bulb's pastel yellow fades on a light chip: the palette's deeper yellow there. */
+  html.light
+    :is(main.analyse, main.puzzle, .board-editor)
+    .pv_box
+    .pv:first-child
+    .pv-san[data-move-index='0'] {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01--b98a0c.svg');
   }
 }

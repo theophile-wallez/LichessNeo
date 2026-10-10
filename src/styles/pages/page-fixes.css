@@ -18,8 +18,8 @@
 }
 
 .auth .auth-tabs a.active {
-  color: #fff !important;
-  border-bottom-color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
+  border-bottom-color: var(--lr-ext-text-strong) !important;
 }
 
 .auth .auth-tabs[data-lr-ext-tabs] a.active {

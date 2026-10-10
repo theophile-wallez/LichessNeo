@@ -154,7 +154,7 @@
   main.round :is(i5d, rm6) .col1-moves :is(Z7yx, kwdb):is(.a1t, .active) {
     border-radius: 6px;
     background: var(--lr-ext-accent) !important;
-    color: #fff !important;
+    color: var(--lr-ext-white) !important;
   }
 }
 

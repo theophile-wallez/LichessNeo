@@ -18,15 +18,15 @@ main.lobby
   border-radius: 16px !important;
   background: var(--lr-ext-bg-panel) !important;
   box-shadow:
-    inset 0 1px 0 #ffffff0d,
-    0 10px 28px #00000033 !important;
+    inset 0 1px 0 var(--lr-ext-lift-5),
+    0 10px 28px var(--lr-ext-shade-20) !important;
 }
 
 /* Card titles Lichess doesn't provide. */
 main.lobby :is(.lobby__tv, .lobby__blog, .lobby__feed, .lobby__streams)::before {
   display: block;
   margin: 0 0 12px 2px;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 17px;
   font-weight: 800;
 }
@@ -159,7 +159,7 @@ main.lobby .lobby__blog .ublog-post-card__title {
   min-height: 2.6em;
   margin: 0;
   -webkit-line-clamp: 2 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 15px !important;
   font-weight: 700 !important;
   line-height: 1.3;
@@ -182,7 +182,7 @@ main.lobby .lobby__blog .ublog-post-card__over-image {
 main.lobby .lobby__blog .ublog-post-card .user-link {
   grid-column: 1;
   padding-inline-start: 2px !important;
-  color: var(--lr-ext-grey-200) !important;
+  color: var(--lr-ext-neutral-12) !important;
   font-weight: 600 !important;
 }
 
@@ -218,14 +218,14 @@ main.lobby .lobby__blog .carousel__controls button {
   background: var(--lr-ext-btn-grey);
   box-shadow:
     var(--lr-ext-btn-grey-shadow),
-    0 4px 12px #00000080;
-  color: #fff;
+    0 4px 12px var(--lr-ext-shade-50);
+  color: var(--lr-ext-text-strong);
   font-size: 18px;
 }
 
 main.lobby .lobby__blog .carousel__controls button:hover {
   background: var(--lr-ext-btn-grey-hover);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 /* As tall as the featured game beside it (contain: size stops it growing the row), its

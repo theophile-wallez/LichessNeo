@@ -3,16 +3,16 @@
 /* Modals: blurred backdrop, rounded card, close button inside the corner. */
 dialog::backdrop,
 .snab-modal-mask {
-  background: #00000073 !important;
+  background: var(--lr-ext-shade-45) !important;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
 dialog {
-  border: 1px solid #ffffff14 !important;
+  border: 1px solid var(--lr-ext-lift-8) !important;
   border-radius: 12px !important;
   background: var(--lr-ext-bg-panel) !important;
-  box-shadow: 0 24px 64px #0009 !important;
+  box-shadow: 0 24px 64px var(--lr-ext-shade-60) !important;
   animation: lr-ext-dialog-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -49,8 +49,8 @@ html[dir='rtl'] dialog:not(.touch-scroll) button.close-button {
 }
 
 dialog:not(.touch-scroll) button.close-button:hover {
-  background: #ffffff14 !important;
-  color: #fff !important;
+  background: var(--lr-ext-lift-8) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* The dialog frame is enough: no second border on alerts. */
@@ -60,7 +60,7 @@ dialog .dialog-content.debug {
 }
 
 dialog .dialog-content > h2 {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 24px !important;
   font-weight: 800 !important;
 }
@@ -71,17 +71,17 @@ dialog .help th p {
   padding: 12px 0 0 !important;
   border-top: 1px solid var(--lr-ext-border);
   background: transparent !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 16px;
   font-weight: 800 !important;
 }
 
 /* ---- Game setup --- */
 
-/* Create a game, challenge a friend, play the computer: segments on a dark track,
+/* Create a game, challenge a friend, play the computer: segments on a track,
  * and one look for any choice (an accent ring on an accent tint). */
 .game-setup {
-  --lr-ext-setup-track: var(--lr-ext-grey-950);
+  --lr-ext-setup-track: var(--lr-ext-neutral-1);
   --lr-ext-setup-chosen: inset 0 0 0 2px var(--lr-ext-accent);
   --lr-ext-setup-tint: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
 }
@@ -165,13 +165,13 @@ dialog .help th p {
 }
 
 .game-setup .time-control-tabs .tabs-horiz button:hover {
-  background: #ffffff0a;
+  background: var(--lr-ext-lift-4);
 }
 
 .game-setup .time-control-tabs .tabs-horiz button.active {
   background: var(--lr-ext-bg-raised) !important;
-  box-shadow: 0 1px 3px #00000080;
-  color: #fff !important;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .game-setup .time-control-tabs .tabs-horiz[data-lr-ext-tabs] button.active {
@@ -195,7 +195,7 @@ dialog .help th p {
 .game-setup .time-control-tabs .time-panel .slider-container .label-row .val-box {
   padding: 0 !important;
   background: transparent !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 20px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -225,13 +225,13 @@ dialog .help th p {
   height: 18px !important;
   margin-top: -6px;
   border-radius: 50% !important;
-  box-shadow: 0 1px 3px #00000080;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
   transition: box-shadow 0.15s !important;
 }
 
 .game-setup input.range:hover::-webkit-slider-thumb {
   box-shadow:
-    0 1px 3px #00000080,
+    0 1px 3px var(--lr-ext-shade-50),
     0 0 0 5px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
 }
 
@@ -245,7 +245,7 @@ dialog .help th p {
   flex: 1 0 auto;
   height: 36px;
   padding: 0 6px !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   border-radius: 8px !important;
   font-size: 14px !important;
   font-variant-numeric: tabular-nums;
@@ -257,5 +257,5 @@ dialog .help th p {
 .game-setup .time-control-tabs .time-panel .presets .preset-btn.active {
   background: var(--lr-ext-setup-tint) !important;
   box-shadow: var(--lr-ext-setup-chosen);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }

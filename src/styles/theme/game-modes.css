@@ -11,11 +11,29 @@
   --lr-ext-mode-rapid: '\e002';
   --lr-ext-mode-classical: '\e00a';
   --lr-ext-mode-correspondence: '\e019';
-  /* Each speed's color, for the places that draw its glyph themselves. */
+  /* Each speed's color, for the places that draw its glyph themselves, and the variants'.
+   * Classical's is the rating charts' (#shared/charts/colors.ts). */
   --lr-ext-mode-bullet-color: #e3aa24;
   --lr-ext-mode-blitz-color: #fad541;
   --lr-ext-mode-rapid-color: #81b64c;
   --lr-ext-mode-correspondence-color: #f7c631;
+  --lr-ext-mode-classical-color: #2dd4bf;
+  --lr-ext-mode-crazyhouse-color: #008cd1;
+  --lr-ext-mode-chess960-color: #fa742c;
+  --lr-ext-mode-koth-color: #ca9350;
+  --lr-ext-mode-three-check-color: #26c2a3;
+}
+
+/* The yellows and greens deepened to read on white. */
+:root.light {
+  --lr-ext-mode-bullet-color: #c98a06;
+  --lr-ext-mode-blitz-color: #c29a00;
+  --lr-ext-mode-rapid-color: #5c9a2a;
+  --lr-ext-mode-correspondence-color: #bf930a;
+  --lr-ext-mode-classical-color: #0f9e8d;
+  --lr-ext-mode-chess960-color: #e8600f;
+  --lr-ext-mode-koth-color: #a87530;
+  --lr-ext-mode-three-check-color: #129a80;
 }
 
 /* UltraBullet, Bullet */
@@ -42,22 +60,22 @@
 
 /* Crazyhouse */
 [data-icon='\e066']::before {
-  --lr-ext-mode-color: #008cd1;
+  --lr-ext-mode-color: var(--lr-ext-mode-crazyhouse-color);
 }
 
 /* Chess960, also on the editor's "random 960 position" buttons. */
 [data-icon='\e006']::before {
-  --lr-ext-mode-color: #fa742c;
+  --lr-ext-mode-color: var(--lr-ext-mode-chess960-color);
 }
 
 /* King of the Hill */
 [data-icon='\e007']::before {
-  --lr-ext-mode-color: #ca9350;
+  --lr-ext-mode-color: var(--lr-ext-mode-koth-color);
 }
 
 /* Three-check. The same glyph, in green, marks the current session in security. */
 [data-icon='\e00d']:not(.is-green)::before {
-  --lr-ext-mode-color: #26c2a3;
+  --lr-ext-mode-color: var(--lr-ext-mode-three-check-color);
 }
 
 /* Standard's crown is also Elite Arena's and top-rated TV's: only the variant

@@ -100,8 +100,3 @@
     font-size: 14px;
   }
 }
-
-/* Zen's way home is Lichess's logo, drawn dark for its light theme; ours is always dark. */
-html.light #zenzone .zen-home {
-  filter: invert(1);
-}

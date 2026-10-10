@@ -24,19 +24,21 @@
 }
 
 .game-setup group.radio label:not(.disabled):hover {
-  background: #ffffff0a !important;
-  color: #fff;
+  background: var(--lr-ext-lift-4) !important;
+  color: var(--lr-ext-text-strong);
 }
 
 .game-setup group.radio input:checked + label,
 .game-setup group.radio input:checked + label:not(.disabled):hover {
   background: var(--lr-ext-setup-tint) !important;
   box-shadow: var(--lr-ext-setup-chosen) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
+  /* Lichess shades the picked one's text for white on its green: ours is the text's color. */
+  text-shadow: none !important;
 }
 
 .game-setup group.radio input:focus-visible + label {
-  outline: 2px solid #fff !important;
+  outline: 2px solid var(--lr-ext-text-strong) !important;
   outline-offset: -2px;
 }
 
@@ -157,7 +159,7 @@
   align-items: center;
   gap: 4px;
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 .game-setup .setup-content > div.disabled {
@@ -175,7 +177,7 @@
 }
 
 .game-setup .rating-range :is(.rating-min, .rating-max) {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 /* White / random / black: separate cards, off the segmented track. */
@@ -222,7 +224,7 @@
   border-radius: 10px !important;
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-size: 20px !important;
 }
 
@@ -231,7 +233,7 @@
 }
 
 dialog .game-setup .footer .lobby__start__button.button::before {
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 /* ---- Radio groups --- */
@@ -258,7 +260,7 @@ group.radio input:checked + label,
 group.radio input:checked + label:not(.disabled):hover {
   background: var(--lr-ext-accent) !important;
   box-shadow: none !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
   font-weight: 700;
 }
 

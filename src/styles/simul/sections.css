@@ -94,7 +94,7 @@ main.page-menu.simul-list .slist thead th:first-child {
   gap: 12px;
   padding: 0 !important;
   border: none !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 20px !important;
   font-weight: 800 !important;

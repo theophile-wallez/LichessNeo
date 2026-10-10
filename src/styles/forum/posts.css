@@ -72,7 +72,7 @@ main.forum-topic .forum-post__metas .author {
   margin: 0 !important;
   padding: 0 !important;
   background: none !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 16px !important;
   font-weight: 800 !important;
 }
@@ -152,7 +152,7 @@ main.forum-topic .button.forum-post__button {
   height: 30px;
   padding: 0 10px !important;
   border-radius: 999px !important;
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
   box-shadow: none !important;
   color: var(--lr-ext-text-dim) !important;
   font-size: 13px !important;
@@ -165,7 +165,7 @@ main.forum-topic .button.forum-post__button::before {
 
 main.forum-topic .button.forum-post__button:hover {
   background: var(--lr-ext-bg-raised) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.forum-topic .button.forum-post__button.delete:hover,
@@ -191,7 +191,7 @@ main.forum-topic .forum-post__message :is(h1, h2, h3, h4) {
   margin: 0.9em 0 0.35em !important;
   padding: 0 !important;
   border: none !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-weight: 800 !important;
   line-height: 1.3;
 }
@@ -236,8 +236,8 @@ main.forum-topic .forum-post__message blockquote {
   border: none !important;
   border-inline-start: 3px solid var(--lr-ext-fc) !important;
   border-radius: 0 10px 10px 0;
-  background: #ffffff08;
-  color: var(--lr-ext-grey-100);
+  background: var(--lr-ext-lift-3);
+  color: var(--lr-ext-neutral-13);
 }
 
 html[dir='rtl'] main.forum-topic .forum-post__message blockquote {
@@ -245,13 +245,13 @@ html[dir='rtl'] main.forum-topic .forum-post__message blockquote {
 }
 
 main.forum-topic .forum-post__message blockquote blockquote {
-  background: #ffffff06;
+  background: var(--lr-ext-lift-3);
 }
 
 main.forum-topic .forum-post__message :not(pre) > code {
   padding: 2px 6px;
   border-radius: 4px;
-  background: #ffffff12;
+  background: var(--lr-ext-lift-7);
   font-size: 0.9em;
 }
 
@@ -277,7 +277,7 @@ main.forum-topic .forum-post__message img {
 main.forum-topic .forum-post__message hr {
   margin: 1.2em 0;
   border: none;
-  border-top: 1px solid #ffffff14;
+  border-top: 1px solid var(--lr-ext-lift-8);
 }
 
 /* Markdown tables come with bare cells: give them rows, and let a wide table
@@ -294,7 +294,7 @@ main.forum-topic .forum-post__message table {
 
 main.forum-topic .forum-post__message :is(th, td) {
   padding: 8px 14px;
-  border-bottom: 1px solid #ffffff14;
+  border-bottom: 1px solid var(--lr-ext-lift-8);
   text-align: start;
 }
 
@@ -305,7 +305,7 @@ main.forum-topic .forum-post__message th {
 }
 
 main.forum-topic .forum-post__message tbody tr:nth-child(2n) {
-  background: #ffffff05;
+  background: var(--lr-ext-lift-2);
 }
 
 main.forum-topic .forum-post__blocked > button {

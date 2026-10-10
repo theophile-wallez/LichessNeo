@@ -198,12 +198,12 @@
   /* The chapter or game on the board: a lighter row, not Lichess's green tint (on hover too). */
   main.analyse > .analyse__side .study-list > button:hover,
   main.analyse > .relay-tour__side .relay-game:hover {
-    background: #ffffff0f !important;
+    background: var(--lr-ext-lift-6) !important;
   }
 
   main.analyse > .analyse__side .study-list > button.active,
   main.analyse > .relay-tour__side .relay-game--current {
-    background: #ffffff14 !important;
+    background: var(--lr-ext-lift-8) !important;
   }
 
   /* A broadcast game has Lichess's own 45px player bars: here they're rows of the stage, which
@@ -270,7 +270,7 @@
 
   main.analyse .analyse__controls .fbt:hover:not(.disabled) {
     background: var(--lr-ext-bg-raised) !important;
-    color: #fff !important;
+    color: var(--lr-ext-text-strong) !important;
   }
 
   main.analyse > .mchat {

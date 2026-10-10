@@ -113,7 +113,7 @@
   /* Dark on the bright green: white is hard to read there. */
   main:is(.round, .analyse) .crosstable povs a.win {
     background: var(--lr-ext-good);
-    color: var(--lr-ext-grey-900) !important;
+    color: var(--lr-ext-ink) !important;
   }
 
   main:is(.round, .analyse) .crosstable povs a:hover {

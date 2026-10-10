@@ -21,7 +21,7 @@ main.racer-home > h1.box__top {
   gap: 14px;
   margin: 0 !important;
   padding: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 30px !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
@@ -68,7 +68,7 @@ main.racer-home > h1.box__top::before {
 
 .racer-home__about a:hover {
   background: var(--lr-ext-bg-raised-hover);
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .racer-home__buttons {
@@ -104,7 +104,7 @@ main.racer-home > h1.box__top::before {
   border-radius: 12px !important;
   background: var(--lr-ext-bg-panel) !important;
   box-shadow: none !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 20px !important;
   text-shadow: none !important;
   opacity: 1 !important;
@@ -144,7 +144,11 @@ main.racer-home > h1.box__top::before {
     linear-gradient(#ffffff38, #ffffff38) 0 calc(100% - 48px) / 100% 3px no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='60'%3E%3Cpath fill='%23000' fill-opacity='.14' d='M0 60V40q30-30 60-6t60-4 60-4 60 14v20z'/%3E%3C/svg%3E")
       0 calc(100% - 51px) / 240px 60px repeat-x,
-    linear-gradient(var(--lr-ext-grey-750), var(--lr-ext-grey-850)) bottom / 100% 48px no-repeat,
+    linear-gradient(
+        color-mix(in srgb, var(--lr-ext-ink) 95%, var(--lr-ext-white)),
+        color-mix(in srgb, var(--lr-ext-ink) 98%, var(--lr-ext-white))
+      )
+      bottom / 100% 48px no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 52'%3E%3Cg fill='%23fff' fill-opacity='.8'%3E%3Ccircle cx='32' cy='32' r='17'/%3E%3Ccircle cx='56' cy='24' r='23'/%3E%3Ccircle cx='80' cy='33' r='16'/%3E%3Crect x='14' y='30' width='82' height='22' rx='11'/%3E%3C/g%3E%3C/svg%3E")
       12% 22% / 110px auto no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 52'%3E%3Cg fill='%23fff' fill-opacity='.8'%3E%3Ccircle cx='32' cy='32' r='17'/%3E%3Ccircle cx='56' cy='24' r='23'/%3E%3Ccircle cx='80' cy='33' r='16'/%3E%3Crect x='14' y='30' width='82' height='22' rx='11'/%3E%3C/g%3E%3C/svg%3E")
@@ -161,7 +165,7 @@ main.racer-home > h1.box__top::before {
   height: var(--lr-ext-scene-h);
   margin: 0 !important;
   padding-bottom: 5px;
-  color: #fff;
+  color: var(--lr-ext-white);
   font-size: calc(var(--lr-ext-scene-h) * 0.55) !important;
   line-height: 0.62 !important;
   text-shadow: 0 6px 10px #0000004d;

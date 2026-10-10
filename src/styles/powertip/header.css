@@ -174,7 +174,7 @@
   max-width: none !important;
   padding: 7px 2px !important;
   border-radius: 6px;
-  background: #ffffff0a;
+  background: var(--lr-ext-lift-4);
   color: var(--lr-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 400;
@@ -190,8 +190,8 @@
 
 /* Unrated (no games, or too few): a quieter chip. */
 #powerTip .upt__info__ratings > span[data-lr-ext-rating='none'] {
-  background: #ffffff05;
-  color: var(--lr-ext-font-dimmer, var(--lr-ext-grey-500)) !important;
+  background: var(--lr-ext-lift-2);
+  color: var(--lr-ext-font-dimmer, var(--lr-ext-neutral-9)) !important;
 }
 
 #powerTip .upt__info__ratings > span[data-lr-ext-rating='none']::before {

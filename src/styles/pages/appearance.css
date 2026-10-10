@@ -1,0 +1,344 @@
+/* ---- The settings' Appearance card (content/settings/appearance.ts) --- */
+
+/* Lichess's color scheme over the color themes. Each preview is a `[data-lr-ext-palette]`:
+   it draws itself from the palette of the theme it shows (theme/palette.css). */
+
+.lr-ext-appearance {
+  --lr-ext-setting-color: var(--lr-ext-pink);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-brush-04.svg');
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 16px 18px 20px;
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+}
+
+.lr-ext-appearance__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.lr-ext-appearance:hover .lr-ext-appearance__head .lr-ext-setting__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.lr-ext-appearance__label {
+  margin: 6px 0 0 !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+/* ---- Color schemes --- */
+
+.lr-ext-schemes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lr-ext-scheme {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 8px 10px;
+  border: none;
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text-dim);
+  font: 600 13.5px var(--lr-ext-font);
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    color 0.2s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-scheme:hover {
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border-hover);
+  color: var(--lr-ext-text-strong);
+  transform: translateY(-2px);
+}
+
+.lr-ext-scheme[aria-pressed='true'] {
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+  color: var(--lr-ext-text-strong);
+}
+
+.lr-ext-scheme:focus-visible,
+.lr-ext-orb:focus-visible {
+  outline: 2px solid var(--lr-ext-accent);
+  outline-offset: 3px;
+}
+
+.lr-ext-scheme__preview {
+  display: grid;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border-radius: 9px;
+  box-shadow: 0 0 0 1px var(--lr-ext-lift-6);
+  container-type: inline-size;
+}
+
+/* The device's scheme: its light page, then its dark one over the right half. */
+.lr-ext-scheme__preview .lr-ext-mock + .lr-ext-mock {
+  clip-path: polygon(58% 0, 100% 0, 100% 100%, 42% 100%);
+}
+
+/* A page in small, in cqw of its preview: the sidebar, a board, the moves and a button. */
+.lr-ext-mock {
+  display: grid;
+  grid-area: 1 / 1;
+  grid-template-columns: 17cqw 1fr 30cqw;
+  align-items: center;
+  gap: 5cqw;
+  padding-inline-end: 5cqw;
+  background: var(--lr-ext-bg-page);
+}
+
+.lr-ext-mock i,
+.lr-ext-mock b {
+  display: block;
+  border-radius: 99px;
+}
+
+.lr-ext-mock__side {
+  display: flex;
+  flex-direction: column;
+  gap: 3cqw;
+  align-self: stretch;
+  padding: 6cqw 3cqw;
+  background: var(--lr-ext-bg-panel-dark);
+  box-shadow: 1px 0 var(--lr-ext-sidebar-line);
+}
+
+.lr-ext-mock__side i {
+  height: 3.4cqw;
+  background: var(--lr-ext-lift-10);
+}
+
+.lr-ext-mock__side i:first-child {
+  background: color-mix(in srgb, var(--lr-ext-accent) 55%, transparent);
+}
+
+.lr-ext-mock__board {
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: 1.5cqw;
+  background: var(--lr-ext-board-light);
+  box-shadow: 0 1.5cqw 4cqw var(--lr-ext-shade-30);
+}
+
+/* The dark squares, as a mask: a conic gradient's squares blur at their seams. */
+.lr-ext-mock__board::before {
+  content: '';
+  display: block;
+  height: 100%;
+  background: var(--lr-ext-board-dark);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4' shape-rendering='crispEdges'%3E%3Cpath d='M1 0h1v1H1zM3 0h1v1H3zM0 1h1v1H0zM2 1h1v1H2zM1 2h1v1H1zM3 2h1v1H3zM0 3h1v1H0zM2 3h1v1H2z'/%3E%3C/svg%3E")
+    0 0 / 100% 100%;
+}
+
+.lr-ext-mock__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2.6cqw;
+  padding: 4cqw 3.5cqw;
+  border-radius: 3cqw;
+  background: var(--lr-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+}
+
+.lr-ext-mock__panel i {
+  height: 2.6cqw;
+  background: var(--lr-ext-lift-15);
+}
+
+.lr-ext-mock__panel i:nth-child(2) {
+  width: 70%;
+}
+
+.lr-ext-mock__panel b {
+  height: 5.5cqw;
+  margin-top: 2cqw;
+  background: var(--lr-ext-btn-primary);
+}
+
+/* ---- Color themes --- */
+
+.lr-ext-themes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.lr-ext-theme {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px 14px 12px;
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  transition: box-shadow 0.2s !important;
+}
+
+.lr-ext-theme:hover {
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border-hover);
+}
+
+.lr-ext-theme__orbs {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.lr-ext-theme__foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+}
+
+.lr-ext-theme__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--lr-ext-text-strong);
+  font-size: 14.5px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Copy (a built-in theme) or edit (the user's own): quiet until the card is hovered. */
+.lr-ext-theme__action,
+.lr-ext-appearance__tool {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 7px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--lr-ext-text-dim);
+  font: 600 13px var(--lr-ext-font);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    opacity 0.15s !important;
+}
+
+.lr-ext-theme__action {
+  width: 28px;
+  height: 28px;
+  justify-content: center;
+  padding: 0;
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.lr-ext-theme:hover .lr-ext-theme__action {
+  opacity: 1;
+}
+
+.lr-ext-theme__action:hover:not(:disabled),
+.lr-ext-appearance__tool:hover:not(:disabled) {
+  background: var(--lr-ext-lift-8);
+  color: var(--lr-ext-text-strong);
+}
+
+.lr-ext-theme__action:disabled,
+.lr-ext-appearance__tool:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+/* The themes' title, with Create and Add on its right. */
+.lr-ext-appearance__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.lr-ext-appearance__row .lr-ext-appearance__label {
+  flex: 1;
+  margin: 0 !important;
+}
+
+.lr-ext-appearance__tool {
+  height: 32px;
+  padding: 0 11px;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+}
+
+.lr-ext-appearance__tool .lr-ext-hi {
+  font-size: 16px;
+}
+
+/* A theme's palette as a pearl: its page's neutrals, its accent glowing through, a gloss. */
+.lr-ext-orb {
+  position: relative;
+  flex: none;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 26%, #ffffffb3, #fff0 34%),
+    radial-gradient(circle at 70% 76%, var(--lr-ext-accent), transparent 64%),
+    radial-gradient(circle at 38% 32%, var(--lr-ext-neutral-7), var(--lr-ext-neutral-2) 78%);
+  box-shadow:
+    inset -5px -7px 14px var(--lr-ext-shade-30),
+    0 6px 14px var(--lr-ext-shade-35);
+  cursor: pointer;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    outline-color 0.2s !important;
+  outline: 2.5px solid transparent;
+  outline-offset: 4px;
+}
+
+.lr-ext-orb:hover {
+  transform: scale(1.07);
+}
+
+/* Ringed in its own accent once picked. */
+.lr-ext-orb[aria-pressed='true'] {
+  outline-color: var(--lr-ext-accent);
+}
+
+/* The scheme it's picked for, in the orb's own colors. */
+.lr-ext-orb__badge {
+  position: absolute;
+  inset-inline-end: -5px;
+  bottom: -5px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--lr-ext-neutral-2);
+  box-shadow: 0 0 0 2px var(--lr-ext-accent);
+  color: var(--lr-ext-text-strong);
+  font-size: 14px;
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-orb[aria-pressed='true'] .lr-ext-orb__badge {
+  transform: scale(1);
+}

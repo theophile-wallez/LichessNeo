@@ -31,7 +31,7 @@ main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::before {
   width: max(2px, calc(var(--lr-ext-time, 0) * 44px));
   height: 9px;
   border-radius: 1px;
-  background: #fff;
+  background: var(--lr-ext-text-strong);
 }
 
 main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::after {
@@ -50,7 +50,7 @@ main.round :is(aPp, l4x)[data-lr-ext-times] > :is(qZM, i5z) + * + [data-lr-ext-t
 }
 
 main.round :is(aPp, l4x)[data-lr-ext-times] > :is(qZM, i5z) + * + [data-lr-ext-time]::before {
-  background: var(--lr-ext-grey-400);
+  background: var(--lr-ext-neutral-10);
 }
 
 /* The result on one line: the score, then how the game ended. */
@@ -101,7 +101,7 @@ main.round .rcontrols .follow-up .fbt {
   border-radius: 8px !important;
   overflow: hidden;
   background: var(--lr-ext-btn-grey) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   font-size: 14px !important;
   font-weight: 800;
   line-height: 40px !important;
@@ -133,6 +133,7 @@ main.round
   order: -2;
   flex-grow: 1.4;
   background: var(--lr-ext-btn-primary) !important;
+  color: var(--lr-ext-white) !important;
   font-size: 0 !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
 }
@@ -198,8 +199,8 @@ main.round
   .rcontrols
   .follow-up
   :is(.new-opponent, .lr-ext-new-game)[data-lr-ext-seek='connecting']::before {
-  border: 2px solid #ffffff33;
-  border-top-color: #fff;
+  border: 2px solid var(--lr-ext-lift-20);
+  border-top-color: var(--lr-ext-text-strong);
   border-radius: 50%;
   animation: lr-ext-seek-spin 0.7s linear infinite !important;
 }
@@ -231,6 +232,7 @@ main.round
 /* A rematch offer turns the button primary, hover included. */
 main.round .rcontrols .follow-up .rematch.glowing {
   background: var(--lr-ext-btn-primary) !important;
+  color: var(--lr-ext-white) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow) !important;
 }
 
@@ -266,5 +268,5 @@ main.round .rcontrols .follow-up .rematch-decline {
 main.round .rcontrols .follow-up .rematch-decline:hover {
   background: var(--lr-ext-btn-red) !important;
   box-shadow: var(--lr-ext-btn-red-shadow) !important;
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }

@@ -15,10 +15,10 @@ main.forum-topic .reactions button {
   gap: 6px;
   height: 32px !important;
   padding: 0 11px !important;
-  border: 1px solid #ffffff14;
+  border: 1px solid var(--lr-ext-lift-8);
   border-radius: 999px !important;
-  background: #ffffff0a;
-  color: #fff !important;
+  background: var(--lr-ext-lift-4);
+  color: var(--lr-ext-text-strong) !important;
   font-size: 13px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -36,7 +36,7 @@ main.forum-topic .reactions button img {
 }
 
 main.forum-topic .reactions-auth button:hover {
-  border-color: #ffffff2e;
+  border-color: var(--lr-ext-lift-18);
   background: var(--lr-ext-bg-raised) !important;
 }
 
@@ -118,14 +118,14 @@ main.forum-topic .reactions-toggle {
 
 :is(main.forum, main.search) .pagination > a:hover {
   background: var(--lr-ext-btn-grey-hover) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
   transform: translateY(-2px);
 }
 
 :is(main.forum, main.search) .pagination > span.current {
   background: var(--lr-ext-btn-primary) !important;
   box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: #fff !important;
+  color: var(--lr-ext-white) !important;
 }
 
 :is(main.forum, main.search) .pagination > span.disabled {
@@ -149,7 +149,7 @@ main.forum-topic .forum-topic__actions {
 main.forum-topic .forum-topic__actions > p {
   margin: 0;
   padding: 14px 18px;
-  border: 1px dashed #ffffff1f;
+  border: 1px dashed var(--lr-ext-lift-12);
   border-radius: 12px;
   font-size: 14px;
 }
@@ -159,7 +159,7 @@ main.forum-topic .forum-topic__actions h2 {
   align-items: center;
   gap: 12px;
   margin: 0 !important;
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 22px !important;
   font-weight: 800 !important;
 }
@@ -170,13 +170,11 @@ main.forum-topic .forum-topic__actions h2::before {
   width: 32px;
   height: 32px;
   border-radius: 9px;
-  background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat--7e88db.svg') center /
-      20px no-repeat,
-    color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
-  box-shadow:
-    inset 0 1px #ffffff1a,
-    0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 35%, transparent);
+  background: var(--lr-ext-accent);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat.svg') center / 20px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
 }
 
 main.forum-topic .forum-topic__actions div {
@@ -196,7 +194,7 @@ main.forum-topic form.form3:is(.reply, :not(.edit-post-form)) {
 }
 
 main.forum-topic form.form3 .form-label {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font-size: 15px;
   font-weight: 800;
 }
@@ -233,7 +231,7 @@ main.forum-topic form.form3 .form-actions > a {
 }
 
 main.forum-topic form.form3 .form-actions > a:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.forum-topic form.form3 .form-actions .button {
@@ -266,13 +264,13 @@ main.forum-topic .markdown-editor .header-tab {
 }
 
 main.forum-topic .markdown-editor .header-tab:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.forum-topic .markdown-editor .header-tab.active {
   outline: none !important;
   background: var(--lr-ext-bg-raised) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 main.forum-topic .markdown-editor .header-tab.active::after {

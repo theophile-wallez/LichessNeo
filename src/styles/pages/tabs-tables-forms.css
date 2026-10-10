@@ -14,13 +14,13 @@
 
 .tabs-horiz span:hover,
 .tabs-horiz button:hover {
-  color: #fff;
+  color: var(--lr-ext-text-strong);
 }
 
 .tabs-horiz span.active,
 .tabs-horiz button.active {
-  color: #fff !important;
-  border-color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
+  border-color: var(--lr-ext-text-strong) !important;
 }
 
 /* The underline is the sliding piece (see "Sliding tabs" in theme/). */
@@ -44,11 +44,11 @@
 }
 
 .slist tbody tr:nth-child(2n) {
-  background: var(--lr-ext-grey-850) !important;
+  background: var(--lr-ext-neutral-3) !important;
 }
 
 .slist tbody tr:hover {
-  background: #ffffff0a !important;
+  background: var(--lr-ext-lift-4) !important;
 }
 
 .slist td {
@@ -60,10 +60,10 @@
 input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='color']),
 select,
 textarea {
-  border: 1px solid var(--lr-ext-grey-650) !important;
+  border: 1px solid var(--lr-ext-neutral-7) !important;
   border-radius: 6px !important;
   background-color: var(--lr-ext-bg-raised) !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='color']):focus,
@@ -86,7 +86,7 @@ input[type='file']::file-selector-button {
   border-radius: 6px;
   background: var(--lr-ext-btn-grey);
   box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: #fff;
+  color: var(--lr-ext-text-strong);
   font: 700 14px var(--lr-ext-font);
   cursor: pointer;
 }
@@ -103,7 +103,7 @@ input[type='file']::file-selector-button:hover {
   padding: 0 !important;
   border: none !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-grey-500) !important;
+  background: var(--lr-ext-neutral-9) !important;
 }
 
 .cmn-toggle label::before {
@@ -116,8 +116,8 @@ input[type='file']::file-selector-button:hover {
   width: 18px !important;
   height: 18px !important;
   border-radius: 50% !important;
-  background: #fff !important;
-  box-shadow: 0 1px 3px #0006 !important;
+  background: var(--lr-ext-white) !important;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-40) !important;
 }
 
 .cmn-toggle input:checked + label {
@@ -148,13 +148,13 @@ input:not([type='hidden']) + .button {
 }
 
 input:not([type='hidden']) + .button.button-metal {
-  border: 1px solid var(--lr-ext-grey-650) !important;
+  border: 1px solid var(--lr-ext-neutral-7) !important;
   border-left: none !important;
   color: var(--lr-ext-text-dim) !important;
 }
 
 input:not([type='hidden']) + .button.button-metal:hover {
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 /* Fields in thirds (a profile's national ratings): on a phone Lichess leaves no gap between
