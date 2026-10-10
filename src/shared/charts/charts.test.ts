@@ -48,7 +48,7 @@ describe('colors', () => {
   });
 
   it('gives a game rating its color by key, Blitz when unknown', () => {
-    expect(gameRatingColor('rapid')).toBe('#81b64c');
+    expect(gameRatingColor('rapid')).toBe('#77ba2c');
     expect(gameRatingColor('racingKings')).toBe('#67e8f9');
     expect(gameRatingColor('puzzle')).toBe('#45a3f5');
     expect(gameRatingColor('constructor')).toBe('#45a3f5');

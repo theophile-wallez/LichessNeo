@@ -12,16 +12,17 @@
   --lr-ext-mode-classical: '\e00a';
   --lr-ext-mode-correspondence: '\e019';
   /* Each speed's color, for the places that draw its glyph themselves, and the variants'.
-   * Classical's is the rating charts' (#shared/charts/colors.ts). */
+   * Rapid's, Classical's, Correspondence's and Three-check's are the rating charts'
+   * (#shared/charts/colors.ts). */
   --lr-ext-mode-bullet-color: #e3aa24;
   --lr-ext-mode-blitz-color: #fad541;
-  --lr-ext-mode-rapid-color: #81b64c;
-  --lr-ext-mode-correspondence-color: #f7c631;
+  --lr-ext-mode-rapid-color: #77ba2c;
+  --lr-ext-mode-correspondence-color: #fcd34d;
   --lr-ext-mode-classical-color: #2dd4bf;
   --lr-ext-mode-crazyhouse-color: #008cd1;
   --lr-ext-mode-chess960-color: #fa742c;
   --lr-ext-mode-koth-color: #ca9350;
-  --lr-ext-mode-three-check-color: #26c2a3;
+  --lr-ext-mode-three-check-color: #fb7185;
 }
 
 /* The yellows and greens deepened to read on white. */
@@ -33,7 +34,7 @@
   --lr-ext-mode-classical-color: #0f9e8d;
   --lr-ext-mode-chess960-color: #e8600f;
   --lr-ext-mode-koth-color: #a87530;
-  --lr-ext-mode-three-check-color: #129a80;
+  --lr-ext-mode-three-check-color: #e0435e;
 }
 
 /* UltraBullet, Bullet */

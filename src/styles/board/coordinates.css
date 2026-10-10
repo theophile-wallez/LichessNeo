@@ -125,7 +125,7 @@ coords {
   border-radius: 3px !important;
   background: linear-gradient(
     to bottom,
-    #403d39 var(--eval-percent),
+    #3a393e var(--eval-percent),
     var(--lr-ext-white) var(--eval-percent)
   ) !important;
   transition: --eval-percent 0.3s ease !important;
@@ -135,7 +135,7 @@ coords {
   transform: none !important;
   background: linear-gradient(
     to top,
-    #403d39 var(--eval-percent),
+    #3a393e var(--eval-percent),
     var(--lr-ext-white) var(--eval-percent)
   ) !important;
 }
@@ -150,7 +150,7 @@ coords {
   bottom: 5px !important;
   box-shadow: none !important;
   border-radius: 0 !important;
-  color: #403d39;
+  color: #3a393e;
   font-family: var(--lr-ext-font);
   font-size: 10px;
   font-weight: 700;

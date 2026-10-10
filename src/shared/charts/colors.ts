@@ -5,7 +5,7 @@ const GAME_COLORS: ReadonlyMap<string, string> = new Map([
   ['ultraBullet', '#c084fc'],
   ['bullet', '#f5a93b'],
   ['blitz', '#45a3f5'],
-  ['rapid', '#81b64c'],
+  ['rapid', '#77ba2c'],
   ['classical', '#2dd4bf'],
   ['correspondence', '#fcd34d'],
   ['crazyhouse', '#f472b6'],

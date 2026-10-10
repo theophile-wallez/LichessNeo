@@ -14,7 +14,7 @@
     );
     overflow: hidden;
     border-radius: 3px;
-    background: #403d39;
+    background: #3a393e;
   }
 
   html.lr-ext-evalbar-on #lr-ext-evalbar {
@@ -52,7 +52,7 @@
 
   .lr-ext-evalbar__label--white {
     bottom: 5px;
-    color: #403d39;
+    color: #3a393e;
   }
   .lr-ext-evalbar__label--black {
     top: 5px;
