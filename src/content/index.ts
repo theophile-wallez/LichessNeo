@@ -6,6 +6,7 @@ import { fonts } from './bootstrap/fonts.ts';
 import { donate } from './sidebar/donate.ts';
 import { sidebarCollapse } from './sidebar/collapse.ts';
 import { drawer } from './sidebar/drawer.ts';
+import { preferencesButton } from './sidebar/preferences-button.ts';
 import { schemeToggle } from './sidebar/scheme-toggle.ts';
 import { currentSection } from './sidebar/current.ts';
 import { accountRating } from './sidebar/account-rating.ts';
@@ -72,6 +73,7 @@ function main(): void {
     sidebarCollapse,
     drawer,
     schemeToggle,
+    preferencesButton,
     currentSection,
     coachChoice,
     fideOffset,

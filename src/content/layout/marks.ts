@@ -106,6 +106,19 @@ const MARKS: readonly Mark[] = [
     key: 'lrExtSearch',
     read: main => main.querySelector(':scope > .box__top form.search')?.getAttribute('action'),
   },
+  // The sidebar's bottom buttons Lichess wraps in a bare div, for their order
+  // (styles/sidebar/donate-and-buttons.css): the challenges show only while some wait.
+  {
+    selector: '#top .site-buttons > div',
+    key: 'lrExtButton',
+    read: wrapper => {
+      if (wrapper.querySelector(':scope > #notify-toggle')) return 'notifications';
+      const count = queryOne(wrapper, ':scope > #challenge-toggle > span', HTMLElement)?.dataset
+        .count;
+      if (count === undefined) return null;
+      return count === '0' ? 'challenges' : 'challenges pending';
+    },
+  },
   // A list of players (styles/friends.css): a user link first on each row, or one
   // row of one cell when it's empty.
   {

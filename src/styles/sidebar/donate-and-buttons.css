@@ -47,6 +47,7 @@
     display: flex !important;
     flex-flow: row wrap !important;
     align-items: center !important;
+    justify-content: space-between;
     gap: 6px;
     padding: 8px 8px 10px !important;
   }
@@ -55,12 +56,35 @@
     order: 2;
   }
 
+  /* Notifications, the light / dark switch, Lichess's preferences, friends. The challenges
+   * (data-lr-ext-button, content/layout/marks.ts) give their place to the cog
+   * (content/sidebar/preferences-button.ts), and come back first while some wait. */
+  #top .site-buttons > [data-lr-ext-button='notifications'] {
+    order: 3;
+  }
+
+  #top #lr-ext-scheme-toggle {
+    order: 4;
+  }
+
+  #top #lr-ext-preferences-button {
+    order: 5;
+  }
+
+  #top #friend_box {
+    order: 6;
+  }
+
+  #top .site-buttons > [data-lr-ext-button='challenges'] {
+    display: none;
+  }
+
   #top .site-buttons .link,
   #top .site-buttons .toggle {
     height: 30px !important;
     line-height: 30px !important;
-    /* Four fit in a row: friends, challenges, notifications and the light / dark switch. */
-    padding: 0 6px !important;
+    /* Five fit in a row, as when challenges wait; spread over it (space-between above). */
+    padding: 0 3px !important;
     color: var(--lr-ext-text-dim) !important;
   }
 
@@ -69,7 +93,7 @@
     color: var(--lr-ext-text-strong) !important;
   }
 
-  #top #lr-ext-scheme-toggle {
+  #top :is(#lr-ext-scheme-toggle, #lr-ext-preferences-button) {
     font-size: 18.5px;
   }
 
@@ -228,4 +252,26 @@
 html.light #lr-ext-scheme-toggle .lr-ext-scheme-toggle__dark,
 html:not(.light) #lr-ext-scheme-toggle .lr-ext-scheme-toggle__light {
   display: none;
+}
+
+/* The cog to Lichess's preferences (content/sidebar/preferences-button.ts), drawn as the
+ * light / dark switch: in the sidebar, and in Lichess's top bar below 1020px. */
+#lr-ext-preferences-button {
+  display: inline-flex;
+  align-items: center;
+  color: var(--lr-ext-neutral-13);
+  font-size: 16px;
+  transition: color 0.15s !important;
+}
+
+#lr-ext-preferences-button .lr-ext-hi {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+#lr-ext-preferences-button:hover {
+  color: var(--lr-ext-text-strong);
+}
+
+#lr-ext-preferences-button:hover .lr-ext-hi {
+  transform: rotate(60deg);
 }

@@ -137,6 +137,9 @@
   "schemeToggleToLight": {
     "message": "Passer en mode clair"
   },
+  "preferencesButton": {
+    "message": "Préférences de Lichess"
+  },
   "themeRuby": {
     "message": "Rubis"
   },

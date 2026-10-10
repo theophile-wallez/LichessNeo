@@ -183,6 +183,10 @@
     "message": "Switch to light mode",
     "description": "The sidebar's light / dark switch, while the page is dark."
   },
+  "preferencesButton": {
+    "message": "Lichess preferences",
+    "description": "The sidebar's cog, a link to Lichess's own preferences."
+  },
   "themeRuby": {
     "message": "Ruby",
     "description": "A color theme in deep reds."
