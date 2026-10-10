@@ -1,0 +1,9 @@
+/* ---- Videos --- */
+
+/* The video library: its tags as chips (wrapping beside the videos, one row that scrolls
+ * sideways on a phone, as Lichess has it), and its videos as a grid of 16:9 thumbnails with
+ * their title, author and level. */
+
+@import './tags.css';
+@import './cards.css';
+@import './layout.css';

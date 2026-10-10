@@ -1,0 +1,125 @@
+/* ---- Videos: the title, and the page's layout at each width --- */
+
+/* ---- The title, with our pill for Lichess's intro (content/pages/video-count.ts) --- */
+
+main.page-menu.video > .page-menu__content > .box__top {
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 12px 14px;
+}
+
+main.page-menu.video > .page-menu__content > .box__top .search {
+  margin-inline-start: auto;
+}
+
+main.page-menu.video > .page-menu__content > .box__top .search input {
+  width: 260px;
+  height: 38px;
+  border-radius: 10px !important;
+}
+
+.lr-ext-video-count {
+  padding: 4px 11px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--lr-ext-green) 16%, transparent);
+  color: color-mix(in srgb, var(--lr-ext-green) 80%, var(--lr-ext-text-strong));
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+main.page-menu.video > .page-menu__content > p.explain[data-lr-ext-counted] {
+  display: none !important;
+}
+
+/* ---- Desktop: the tags' column stays and scrolls on its own, the title is pinned --- */
+
+@media (min-width: 1020px) {
+  /* As tall as the videos: stretched to the window, it held the tags' column, which a sticky
+   * box can't leave. */
+  main.page-menu.video {
+    align-self: start;
+  }
+
+  main.page-menu.video > .page-menu__menu {
+    position: sticky;
+    top: calc(-1 * var(--lr-ext-page-top));
+    align-self: start;
+    box-sizing: border-box;
+    min-width: 0;
+    max-height: var(--lr-ext-main-h, 100dvh);
+    margin-top: calc(-1 * var(--lr-ext-page-top));
+    padding-top: calc(2 * var(--lr-ext-page-top));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  main.page-menu.video .page-menu__menu .subnav {
+    position: static !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Lichess's box clips, which traps a sticky title. */
+  main.page-menu.video > .page-menu__content.box {
+    overflow: visible !important;
+  }
+
+  main.page-menu.video > .page-menu__content > .box__top {
+    position: sticky;
+    z-index: 4;
+    top: calc(-1 * var(--lr-ext-page-top));
+    border-radius: 6px 6px 0 0;
+    background: var(--lr-ext-bg-panel);
+  }
+}
+
+/* ---- Beside the videos (tablets too, where Lichess stacks them in a column), the tags wrap;
+ * on a phone they're one row that scrolls sideways --- */
+
+@media (min-width: 800.02px) {
+  /* Lichess sizes the column to its content, which the chips in a row would widen past the
+   * window. */
+  main.page-menu.video {
+    grid-template-columns: 260px minmax(0, 1fr) !important;
+  }
+
+  main.page-menu.video > .page-menu__menu {
+    min-width: 0;
+  }
+
+  main.page-menu.video .subnav__inner {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    gap: 6px;
+    padding: 0 0 12px !important;
+  }
+}
+
+@media (max-width: 799.98px) {
+  main.page-menu.video .subnav__inner {
+    padding: 10px 12px !important;
+  }
+}
+
+/* Wrapped under the title on a phone, the search takes the row. */
+@media (max-width: 559.98px) {
+  main.page-menu.video .list > .not_much {
+    padding-inline-end: 18px !important;
+  }
+
+  main.page-menu.video .list > .not_much .button {
+    position: static;
+    translate: none;
+    margin-inline-start: auto;
+  }
+
+  main.page-menu.video > .page-menu__content > .box__top .search {
+    flex: 1 1 100%;
+  }
+
+  main.page-menu.video > .page-menu__content > .box__top .search input {
+    width: 100%;
+  }
+}

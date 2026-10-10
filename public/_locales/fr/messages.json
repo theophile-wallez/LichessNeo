@@ -304,5 +304,8 @@
   },
   "racerThemesBody": {
     "message": "Entraînez un motif précis"
+  },
+  "videosCount": {
+    "message": "$1 vidéos · toutes gratuites"
   }
 }

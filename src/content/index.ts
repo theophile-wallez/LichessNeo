@@ -44,6 +44,7 @@ import { tv } from './pages/tv.ts';
 import { practiceIcons } from './pages/practice-icons.ts';
 import { streamerSections } from './pages/streamer-sections.ts';
 import { racerHome } from './pages/racer-home.ts';
+import { videoCountPill } from './pages/video-count.ts';
 import { gameMeta } from './game/game-meta.ts';
 import { avatars } from './ui/avatars.ts';
 import { powertip } from './ui/powertip.ts';
@@ -107,6 +108,7 @@ function main(): void {
     practiceIcons,
     streamerSections,
     racerHome,
+    videoCountPill,
     gameMeta,
     avatars,
     powertip,

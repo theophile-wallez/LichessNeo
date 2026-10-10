@@ -406,5 +406,9 @@
   "racerThemesBody": {
     "message": "Train one pattern",
     "description": "Under racerThemes."
+  },
+  "videosCount": {
+    "message": "$1 videos · all free",
+    "description": "The video library's pill beside its title; $1 is how many videos it has."
   }
 }

@@ -1,0 +1,75 @@
+/* ---- Videos: the tags, as chips --- */
+
+main.page-menu.video .subnav__inner {
+  gap: 8px;
+  scrollbar-width: none;
+}
+
+main.page-menu.video .subnav__inner::-webkit-scrollbar {
+  display: none;
+}
+
+/* A "+" from Hugeicons for Lichess's text one, a cross on a picked tag, the count dimmed. */
+main.page-menu.video .subnav a {
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  margin: 0 !important;
+  padding: 0 12px 0 10px !important;
+  border-radius: 999px !important;
+  background: var(--lr-ext-bg-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text) !important;
+  font-size: 13.5px;
+  font-weight: 650;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+main.page-menu.video .subnav a:hover {
+  background: var(--lr-ext-bg-raised-hover) !important;
+  color: var(--lr-ext-text-strong) !important;
+}
+
+main.page-menu.video .subnav a.checked {
+  background: color-mix(in srgb, var(--lr-ext-accent) 22%, var(--lr-ext-bg-raised)) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-accent);
+  color: var(--lr-ext-text-strong) !important;
+}
+
+main.page-menu.video .subnav a > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+main.page-menu.video .subnav a > span::before {
+  content: '' !important;
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-01.svg') center / contain
+    no-repeat;
+}
+
+main.page-menu.video .subnav a.checked > span::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg');
+}
+
+main.page-menu.video .subnav a > em {
+  display: inline !important;
+  color: var(--lr-ext-text-dim);
+  font-size: 11.5px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* "More tags" under them: Lichess's glyph and its words, apart. */
+main.page-menu.video .under-tags a[data-icon] {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
