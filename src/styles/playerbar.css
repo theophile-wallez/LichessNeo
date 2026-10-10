@@ -166,8 +166,8 @@ html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
   > a.user-link[data-lr-ext-flag]:not([data-lr-ext-flag=''])::after {
   order: 1;
   flex: none;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background: var(--lr-ext-flag) center / contain no-repeat;
   content: '';
 }
