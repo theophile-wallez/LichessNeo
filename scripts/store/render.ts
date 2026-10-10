@@ -1,5 +1,5 @@
-// Renders the store's images from the pages in store/templates: store/<name>.png
-// for each, and public/icons/icon<n>.png for the icon's page. Needs
+// Renders the pages in store/templates: public/icons/icon<n>.png for the icon's
+// page, store/<name>.png for any other. Needs
 // Playwright's Chromium (`pnpm exec playwright install chromium`).
 //
 //   node scripts/store/render.ts [name…]
