@@ -1,7 +1,8 @@
-import { closestTo, createElement, onDomReady, queryAll, queryOne, setData } from '#shared/dom.ts';
+import { closestTo, createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { setHtml } from '#shared/html.ts';
 import { pageLang } from '#shared/lang.ts';
+import { syncWhileParsing } from '#shared/frame.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import type { Card } from './data.ts';
 import {
@@ -131,11 +132,15 @@ export const speedCards: Feature = {
   name: 'speed cards',
   start: () => {
     keepPoolsTabForPoolLink();
-    onDomReady(() => {
-      if (!queryOne(document, 'main.lobby', HTMLElement)) return;
-      const sync = createSpeedCards(signedInUser(), pageLang());
-      sync();
-      onEveryTick('speed cards', sync);
-    });
+    let sync: (() => void) | null = null;
+    const run = (): void => {
+      if (!sync && queryOne(document, 'main.lobby', HTMLElement))
+        sync = createSpeedCards(signedInUser(), pageLang());
+      sync?.();
+    };
+    // As the page comes in: added once it's drawn, the cards pushed the lobby down. The header,
+    // whose tag says who's signed in, comes before the lobby.
+    syncWhileParsing(run);
+    onEveryTick('speed cards', run);
   },
 };

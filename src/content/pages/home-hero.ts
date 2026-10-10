@@ -1,5 +1,6 @@
-import { createElement, onDomReady, queryOne } from '#shared/dom.ts';
+import { createElement, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
+import { syncWhileParsing } from '#shared/frame.ts';
 import { pageLang } from '#shared/lang.ts';
 import { nonEmpty } from '#shared/text.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
@@ -41,7 +42,8 @@ export const homeHero: Feature = {
   name: 'home hero',
   start: () => {
     const text = heroText(pageLang());
-    onDomReady(() => addHero(text));
+    // As the page comes in: added once it's drawn, the hero pushed the whole lobby down.
+    syncWhileParsing(() => addHero(text));
     onEveryTick('home hero', () => addHero(text));
   },
 };
