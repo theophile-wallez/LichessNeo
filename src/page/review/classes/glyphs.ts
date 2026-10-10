@@ -1,7 +1,8 @@
 import type { MoveClass } from './classes.ts';
 
-// The class icons' white glyphs, drawn over a disc in a 20 x 20 viewBox:
-// round-capped strokes, and a few solid shapes.
+// The class icons' glyphs, in the class's color over a tint of it, in a 20 x 20
+// viewBox: the annotation symbols (!!, !, ?!, ?, ??) where chess has one, dots
+// for the good tiers, lines for the book and a slashed circle for a miss.
 
 /** One path of a glyph: its `d`, stroked, or filled when solid. */
 export interface GlyphPath {
@@ -34,34 +35,27 @@ function question(x: number, radius: number): GlyphPath {
   );
 }
 
-/** A five-pointed star around (10, 10.4). */
-function star(): GlyphPath {
-  const corners = Array.from({ length: 10 }, (_, i) => {
-    const radius = i % 2 === 0 ? 5.6 : 2.4;
-    const angle = (i * Math.PI) / 5 - Math.PI / 2;
-    return `${round(10 + radius * Math.cos(angle))} ${round(10.4 + radius * Math.sin(angle))}`;
+const DOT_RADIUS = 1.6;
+const DOT_GAP = 4.6;
+
+/** `count` dots in a row, centered: three for best, two for excellent, one for good. */
+function dots(count: number): GlyphPath[] {
+  return Array.from({ length: count }, (_, i) => {
+    const x = round(10 + (i - (count - 1) / 2) * DOT_GAP - DOT_RADIUS);
+    const arc = `a${DOT_RADIUS} ${DOT_RADIUS} 0 1 0`;
+    return solid(`M${x} 10${arc} ${DOT_RADIUS * 2} 0${arc} -${DOT_RADIUS * 2} 0`);
   });
-  return solid(`M${corners.join('L')}Z`);
 }
 
 export const CLASS_GLYPHS: Readonly<Record<MoveClass, readonly GlyphPath[]>> = {
   brilliant: [exclamation(7.2), exclamation(12.8)],
   great: [exclamation(10)],
-  book: [
-    solid('M9.3 6.6C7.9 5.6 6 5.3 4.3 5.6v8.6c1.8-.3 3.6 0 5 1z'),
-    solid('M10.7 6.6c1.4-1 3.3-1.3 5-1v8.6c-1.8-.3-3.6 0-5 1z'),
-  ],
-  best: [star()],
-  // A thumb up: the cuff, then the hand.
-  excellent: [
-    solid('M4.6 9.3h2.3v6.4H4.6z'),
-    solid(
-      'M8.2 9.3 10.3 5c1.1 0 1.8.9 1.6 2l-.4 1.8h2.9c1 0 1.7.9 1.5 1.9l-.9 3.8c-.2.7-.8 1.2-1.5 1.2H8.2z',
-    ),
-  ],
-  good: [stroke('M5.8 10.3l2.9 2.9 5.6-6')],
+  book: [stroke('M5.6 6.4h8.8M5.6 10h8.8M5.6 13.6h8.8')],
+  best: dots(3),
+  excellent: dots(2),
+  good: dots(1),
   inaccuracy: [question(7.6, 2.3), exclamation(13.6)],
   mistake: [question(10, 2.3)],
-  miss: [stroke('M6.6 6.6l6.8 6.8M13.4 6.6l-6.8 6.8')],
+  miss: [stroke('M14.4 10a4.4 4.4 0 1 1-8.8 0 4.4 4.4 0 1 1 8.8 0M6.9 13.1l6.2-6.2')],
   blunder: [question(6.8, 1.9), question(13.2, 1.9)],
 };

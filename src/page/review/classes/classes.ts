@@ -27,17 +27,19 @@ export const MOVE_CLASSES: readonly MoveClass[] = [
   'blunder',
 ];
 
+// Lichess's own annotation colors (--c-brilliant, --c-inaccuracy…), its good-move
+// green a little lighter; the three good tiers in greys, under the annotated ones.
 export const CLASS_COLORS: Readonly<Record<MoveClass, string>> = {
-  brilliant: '#1cb3c8',
-  great: '#5288d6',
-  book: '#b08a63',
-  best: '#4caa48',
-  excellent: '#4caa48',
-  good: '#8aab5e',
-  inaccuracy: '#eeb422',
-  mistake: '#f2862f',
-  miss: '#e8576a',
-  blunder: '#d4322a',
+  brilliant: '#21c43a',
+  great: '#77ba2c',
+  book: '#ba9978',
+  best: '#a3a1ad',
+  excellent: '#96949f',
+  good: '#8a8893',
+  inaccuracy: '#53b2ea',
+  mistake: '#e69d00',
+  miss: '#de7cd3',
+  blunder: '#df5353',
 };
 
 /** From best to worst: a mate verdict only ever makes a move's class worse. Book has no rank. */

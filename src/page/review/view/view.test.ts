@@ -3,6 +3,7 @@ import { z } from 'zod/mini';
 import type { Color } from '#shared/chess/types.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { StoredRecordCodec } from '#page/review/evaluation/stored.ts';
+import { CLASS_COLORS } from '#page/review/classes/classes.ts';
 import { en } from '#page/review/i18n/en.ts';
 import { UNIT_CASES } from '#page/review/fixtures/unit-cases.ts';
 import { builtSession } from '#page/review/fixtures/unit-review.ts';
@@ -134,6 +135,10 @@ const bar = (input: Partial<BarInput>): ReturnType<typeof barPosition> =>
 const badgeStyle = (uci: string, orientation: Color): string | undefined =>
   /style="([^"]*)"/.exec(badgeMarkup({ moveClass: 'best', uci, san: '', orientation }).value)?.[1];
 
+/** Where the badge's style puts it, without its color. */
+const position = (uci: string, orientation: Color): string | undefined =>
+  badgeStyle(uci, orientation)?.split(';--')[0];
+
 describe('the board', () => {
   it('puts the badge on the square the piece landed on, the king’s for a castle', () => {
     expect(landingSquare('e2e4', 'e4')).toBe('e4');
@@ -141,16 +146,22 @@ describe('the board', () => {
     expect(landingSquare('e8a8', 'O-O-O+')).toBe('c8');
     expect(
       badgeMarkup({ moveClass: 'best', uci: 'g1f3', san: 'Nf3', orientation: 'white' }).value,
-    ).toMatch(/^<div class="lr-ext-badge" style="left:75%;top:62\.5%">/);
+    ).toMatch(/^<div class="lr-ext-badge" style="left:75%;top:62\.5%;[^"]*">/);
+  });
+
+  it('gives the badge its class’s color, for the base under the icon', () => {
+    expect(badgeStyle('e2e4', 'white')).toMatch(
+      new RegExp(`;--lr-ext-badge-c:${CLASS_COLORS.best}$`),
+    );
   });
 
   it('puts the badge at the top right of the square as shown', () => {
-    expect(badgeStyle('b2a1', 'white')).toBe('left:12.5%;top:87.5%');
-    expect(badgeStyle('b2a1', 'black')).toBe('left:100%;top:0%');
-    expect(badgeStyle('g2h8', 'black')).toBe('left:12.5%;top:87.5%');
+    expect(position('b2a1', 'white')).toBe('left:12.5%;top:87.5%');
+    expect(position('b2a1', 'black')).toBe('left:100%;top:0%');
+    expect(position('g2h8', 'black')).toBe('left:12.5%;top:87.5%');
     // A move with no square to land on puts the badge nowhere, as before.
-    expect(badgeStyle('', 'white')).toBe('left:0%;top:NaN%');
-    expect(badgeStyle('', 'black')).toBe('left:112.5%;top:NaN%');
+    expect(position('', 'white')).toBe('left:0%;top:NaN%');
+    expect(position('', 'black')).toBe('left:112.5%;top:NaN%');
   });
 
   it('draws the best move for a move that needed it, and the engine’s off the game', () => {

@@ -4,7 +4,7 @@ import type { Point } from '#shared/geometry.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { squareOnScreen } from '#page/board/geometry.ts';
 import type { ReviewArrow } from '#page/board/review-arrows.ts';
-import { GOOD, type MoveClass } from '#page/review/classes/classes.ts';
+import { CLASS_COLORS, GOOD, type MoveClass } from '#page/review/classes/classes.ts';
 import { classSvg } from '#page/review/classes/icon-svg.ts';
 
 // The verdict's badge on the board, at the top right of the square the
@@ -34,7 +34,7 @@ function badgeCell(square: string, orientation: Color): Point {
 
 export function badgeMarkup({ moveClass, uci, san, orientation }: BadgeInput): SafeHtml {
   const [column, row] = badgeCell(landingSquare(uci, san), orientation);
-  const style = `left:${(column + 1) * 12.5}%;top:${row * 12.5}%`;
+  const style = `left:${(column + 1) * 12.5}%;top:${row * 12.5}%;--lr-ext-badge-c:${CLASS_COLORS[moveClass]}`;
   return html`<div class="lr-ext-badge" style="${style}">${classSvg(moveClass)}</div>`;
 }
 

@@ -34,19 +34,21 @@ describe('move classes', () => {
     }
   });
 
-  it('draw a disc in the class’s color under a white glyph', () => {
+  it('draw a glyph in the class’s color over a tint of it', () => {
     for (const moveClass of MOVE_CLASSES) {
+      const color = CLASS_COLORS[moveClass];
       const svg = new DOMParser().parseFromString(classSvg(moveClass).value, 'image/svg+xml');
-      const [disc, glyph, ...rest] = [...svg.documentElement.children];
+      const [tint, glyph, ...rest] = [...svg.documentElement.children];
       expect(rest).toEqual([]);
-      expect(disc?.tagName).toBe('circle');
-      expect(disc?.getAttribute('fill')).toBe(CLASS_COLORS[moveClass]);
-      expect(glyph?.getAttribute('stroke')).toBe('#fff');
+      expect(tint?.tagName).toBe('rect');
+      expect(tint?.getAttribute('fill')).toBe(color);
+      expect(Number(tint?.getAttribute('fill-opacity'))).toBeLessThan(0.5);
+      expect(glyph?.getAttribute('stroke')).toBe(color);
       const paths = [...(glyph?.children ?? [])];
       expect(paths.length).toBeGreaterThan(0);
-      // Strokes leave the fill unset, solid shapes fill in white.
-      const fills = new Set(paths.map(path => path.getAttribute('fill') ?? '#fff'));
-      expect([...fills]).toEqual(['#fff']);
+      // Strokes leave the fill unset, solid shapes fill in the color.
+      const fills = new Set(paths.map(path => path.getAttribute('fill') ?? color));
+      expect([...fills]).toEqual([color]);
     }
   });
 

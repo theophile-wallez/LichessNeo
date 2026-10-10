@@ -91,24 +91,24 @@
     opacity: 0.8;
   }
 
-  /* Annotated moves take the Game Review's colors; the glyph is a round badge before the move. */
+  /* Annotated moves take the Debrief's colors; the glyph is a chip tinted with it before the move. */
   main.analyse .tview2 move.brilliant {
-    --lr-ext-glyph: #1cb3c8;
+    --lr-ext-glyph: #21c43a;
   }
   main.analyse .tview2 move.good {
-    --lr-ext-glyph: #5288d6;
+    --lr-ext-glyph: #77ba2c;
   }
   main.analyse .tview2 move.interesting {
     --lr-ext-glyph: var(--lr-ext-neutral-11);
   }
   main.analyse .tview2 move.inaccuracy {
-    --lr-ext-glyph: #eeb422;
+    --lr-ext-glyph: #53b2ea;
   }
   main.analyse .tview2 move.mistake {
-    --lr-ext-glyph: #f2862f;
+    --lr-ext-glyph: #e69d00;
   }
   main.analyse .tview2 move.blunder {
-    --lr-ext-glyph: #d4322a;
+    --lr-ext-glyph: #df5353;
   }
 
   main.analyse .tview2 move:is(.brilliant, .good, .interesting, .inaccuracy, .mistake, .blunder) {
@@ -124,10 +124,9 @@
     width: 18px;
     height: 18px;
     margin: 0 -1px 0 0 !important;
-    border-radius: 50%;
-    background: var(--lr-ext-glyph, var(--lr-ext-neutral-10));
-    box-shadow: 0 1px 0 var(--lr-ext-shade-30);
-    color: var(--lr-ext-white) !important;
+    border-radius: 25%;
+    background: color-mix(in srgb, var(--lr-ext-glyph, var(--lr-ext-neutral-10)) 18%, transparent);
+    color: var(--lr-ext-glyph, var(--lr-ext-neutral-10)) !important;
     font-family: var(--lr-ext-font) !important;
     font-size: 10px !important;
     font-weight: 900;
@@ -151,13 +150,13 @@
   }
 
   main.analyse .tview2-column > interrupt:has(> comment.inaccuracy) {
-    --lr-ext-note: #eeb422;
+    --lr-ext-note: #53b2ea;
   }
   main.analyse .tview2-column > interrupt:has(> comment.mistake) {
-    --lr-ext-note: #f2862f;
+    --lr-ext-note: #e69d00;
   }
   main.analyse .tview2-column > interrupt:has(> comment.blunder) {
-    --lr-ext-note: #d4322a;
+    --lr-ext-note: #df5353;
   }
 
   main.analyse .tview2 interrupt comment {

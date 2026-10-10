@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
+import { CLASS_COLORS } from '#page/review/classes/classes.ts';
 import { cardMarkup, endCardInput } from './card.ts';
 import { CHIP_STAGGER_MS, createChips, rolled } from './chips.ts';
 import { gameOverTexts } from './texts.ts';
@@ -73,7 +74,7 @@ describe('the counts', () => {
     );
     expect(labels).toEqual(['best moves', 'excellent moves', 'miss']);
     const [best] = queryAll(root, '.lr-ext-end__count', HTMLElement);
-    expect(best?.style.getPropertyValue('--lr-ext-count-c')).toBe('#4caa48');
+    expect(best?.style.getPropertyValue('--lr-ext-count-c')).toBe(CLASS_COLORS.best);
   });
 
   it('change in place to other counts, even mid-roll', () => {
