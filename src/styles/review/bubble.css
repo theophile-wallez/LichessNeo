@@ -249,7 +249,7 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
     margin-left: var(--lr-ext-gap);
-    padding: 10px 8px 18px;
+    padding: 10px 8px;
     box-sizing: border-box;
     border-top: 1px solid var(--lr-ext-border);
     border-radius: 0 0 6px 6px;

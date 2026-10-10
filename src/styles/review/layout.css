@@ -63,7 +63,7 @@
   html.lr-ext-review-moves main.analyse {
     --lr-ext-review-moments: 58px;
     --lr-ext-review-top: calc(262px + var(--lr-ext-review-graph) + var(--lr-ext-review-moments));
-    --lr-ext-review-ctrl: 72px;
+    --lr-ext-review-ctrl: 64px;
     grid-template-rows:
       var(--lr-ext-review-top)
       max(0px, calc(var(--lr-ext-stage) - var(--lr-ext-review-top) - var(--lr-ext-review-ctrl)))
