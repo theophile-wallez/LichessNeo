@@ -1,27 +1,33 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll } from '#shared/dom.ts';
 import { flush } from '#shared/testing/timers.ts';
-import { flagEmoji } from './flag-emoji.ts';
 import { createFlagsSync } from './flags.ts';
-// The original's emoji per code, its request, and the flags it set.
+// The original's request, and the bars it marked.
 import legacy from './fixtures/legacy-flags.json' with { type: 'json' };
 
 const readFlags = (): (string | null)[] =>
   queryAll(document, '.ruser, a.user-link', HTMLElement).map(bar => bar.dataset.lrExtFlag ?? null);
 
-afterEach(() => {
-  document.body.innerHTML = '';
-  vi.useRealTimers();
+const readImages = (): string[] =>
+  queryAll(document, '.ruser, a.user-link', HTMLElement).map(bar =>
+    bar.style.getPropertyValue('--lr-ext-flag'),
+  );
+
+// The original showed emoji, which Windows draws as two letters: the codes
+// stand in for them, beside Lichess's images.
+const FLAGS = [null, 'FR', null, null, 'FR', 'GB-SCT', null];
+const image = (code: string): string => `url("https://lichess1.org/assets/_v1/flags/${code}.webp")`;
+const IMAGES = ['', image('FR'), '', '', image('FR'), image('GB-SCT'), ''];
+
+beforeEach(() => {
+  document.body.dataset.assetUrl = 'https://lichess1.org';
+  document.body.dataset.assetVersion = 'v1';
 });
 
-describe('flagEmoji', () => {
-  it.each(legacy.emoji)('turns %j into what the original showed', (code, emoji) => {
-    expect(flagEmoji(code)).toBe(emoji);
-  });
-
-  it('shows nothing without a code', () => {
-    expect(flagEmoji(undefined)).toBe('');
-  });
+afterEach(() => {
+  document.body.innerHTML = '';
+  for (const key of Object.keys(document.body.dataset)) delete document.body.dataset[key];
+  vi.useRealTimers();
 });
 
 describe('country flags', () => {
@@ -43,7 +49,8 @@ describe('country flags', () => {
     expect(readFlags()).toEqual(legacy.loading);
     await flush();
     sync();
-    expect(readFlags()).toEqual(legacy.after);
+    expect(readFlags()).toEqual(FLAGS);
+    expect(readImages()).toEqual(IMAGES);
     expect(
       requests.map(({ url, init }) => ({ url, method: init?.method, body: init?.body })),
     ).toEqual(legacy.requests);
@@ -84,6 +91,7 @@ describe('country flags', () => {
     await tickFor(2000);
     expect(requests).toBe(3);
     sync();
-    expect(readFlags()).toEqual(legacy.after);
+    expect(readFlags()).toEqual(FLAGS);
+    expect(readImages()).toEqual(IMAGES);
   });
 });

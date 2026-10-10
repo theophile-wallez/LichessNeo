@@ -118,12 +118,21 @@ main.round .lr-ext-intro__title {
   vertical-align: 0.4cqh;
 }
 
+/* The rating, then the flag. */
 main.round .lr-ext-intro__details {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
   font-size: 2.4cqh;
   font-weight: 600;
   line-height: 1.2;
   white-space: nowrap;
   opacity: 0.6;
+}
+
+main.round .lr-ext-intro__flag {
+  width: 1.2em;
+  height: 1.2em;
 }
 
 /* The "VS" badge over crossed swords, both centered on the middle line. */

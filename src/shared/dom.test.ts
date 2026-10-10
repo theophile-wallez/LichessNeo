@@ -94,8 +94,8 @@ describe('setDataText', () => {
   it('reads a missing attribute as empty: an empty value clears, but doesn’t add', () => {
     const element = createElement('div');
     expect(writesOf(element, () => setDataText(element, 'lrExtFlag', ''))).toBe(0);
-    setDataText(element, 'lrExtFlag', '🇫🇷');
-    expect(element.dataset.lrExtFlag).toBe('🇫🇷');
+    setDataText(element, 'lrExtFlag', 'FR');
+    expect(element.dataset.lrExtFlag).toBe('FR');
     setDataText(element, 'lrExtFlag', '');
     expect(element.outerHTML).toBe('<div data-lr-ext-flag=""></div>');
   });

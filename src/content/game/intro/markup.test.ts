@@ -25,7 +25,7 @@ describe('introMarkup', () => {
   it('puts the top player’s card on the dropped board and the bottom one’s on the board', () => {
     const root = render(
       player('Stockfish level 1', { rating: '~400', computer: true }),
-      player('alice', { title: 'IM', rating: '2400', flag: '🇫🇷' }),
+      player('alice', { title: 'IM', rating: '2400', flag: 'FR' }),
     );
     const top = queryOne(root, '.lr-ext-intro__drop > .lr-ext-intro__card--top', HTMLElement);
     const bottom = queryOne(root, '.lr-ext-intro__stay > .lr-ext-intro__card--bottom', HTMLElement);
@@ -34,7 +34,10 @@ describe('introMarkup', () => {
     expect(bottom?.classList.contains('lr-ext-intro__card--computer')).toBe(false);
     expect(bottom?.querySelector('.lr-ext-intro__title')?.textContent).toBe('IM');
     expect(bottom?.querySelector('.lr-ext-intro__username')?.textContent).toBe('alice');
-    expect(bottom?.querySelector('.lr-ext-intro__details')?.textContent).toBe('2400 🇫🇷');
+    expect(bottom?.querySelector('.lr-ext-intro__details')?.textContent).toBe('2400');
+    expect(
+      bottom?.querySelector('.lr-ext-intro__details > img.lr-ext-intro__flag')?.getAttribute('src'),
+    ).toBe('/assets/flags/FR.webp');
     expect(
       root.querySelector('.lr-ext-intro__vs > .lr-ext-intro__swords + .lr-ext-intro__versus')
         ?.textContent,

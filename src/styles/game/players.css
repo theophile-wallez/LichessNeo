@@ -121,10 +121,10 @@ main.round .game__meta__players .user-link .uflair {
 main.round .game__meta__players .user-link[data-lr-ext-flag]:not([data-lr-ext-flag=''])::after {
   order: 1;
   flex: none;
-  content: attr(data-lr-ext-flag);
-  font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
-  font-size: 15px;
-  line-height: 18px;
+  width: 18px;
+  height: 18px;
+  background: var(--lr-ext-flag) center / contain no-repeat;
+  content: '';
 }
 
 main.round .game__meta__players .rating {

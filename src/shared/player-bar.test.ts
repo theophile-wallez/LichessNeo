@@ -4,7 +4,7 @@ import { readPlayer } from './player-bar.ts';
 
 // Bars as Lichess draws them: a titled user, and the computer.
 const USER_BAR =
-  '<div class="ruser-bottom ruser user-link online" data-lr-ext-flag="🇫🇷"><icon class="line"></icon>' +
+  '<div class="ruser-bottom ruser user-link online" data-lr-ext-flag="FR"><icon class="line"></icon>' +
   '<a class="user-link ulpt" href="/@/tjychess"><span class="utitle">GM&nbsp;</span>tjychess</a>' +
   '<rating>3062?</rating></div>';
 const COMPUTER_BAR =
@@ -28,7 +28,7 @@ describe('readPlayer', () => {
       user: 'tjychess',
       title: 'GM',
       rating: '3062?',
-      flag: '🇫🇷',
+      flag: 'FR',
       computer: false,
     });
   });

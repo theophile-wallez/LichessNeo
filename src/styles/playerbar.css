@@ -80,7 +80,7 @@ html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
   content: '(' var(--lr-ext-ai-black) ')';
 }
 
-/* Styled like a rating; a flag emoji ignores the color anyway. */
+/* Styled like a rating. */
 :is(main.round .ruser, main.analyse > .lr-ext-player)::after {
   flex: none;
   color: var(--lr-ext-text-dim);
@@ -146,8 +146,8 @@ html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
   color: var(--lr-ext-text-dim);
 }
 
-/* The country flag (data-lr-ext-flag, from content/game/flags.ts) right after the name,
-   before its flair. */
+/* The country flag (data-lr-ext-flag and its image, --lr-ext-flag, from
+   content/game/flags.ts) right after the name, before its flair. */
 :is(main.round .ruser, main.analyse > .lr-ext-player) > a.user-link {
   display: inline-flex;
   align-items: center;
@@ -165,11 +165,11 @@ html[data-lr-ext-ai~='black'][data-lr-ext-has~='analyse-black']
 :is(main.round .ruser, main.analyse > .lr-ext-player)
   > a.user-link[data-lr-ext-flag]:not([data-lr-ext-flag=''])::after {
   order: 1;
-  content: attr(data-lr-ext-flag);
-  font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: var(--lr-ext-flag) center / contain no-repeat;
+  content: '';
 }
 
 /* ---- Captured pieces --- */

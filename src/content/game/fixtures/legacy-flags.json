@@ -1,21 +1,4 @@
 {
-  "emoji": [
-    ["FR", "🇫🇷"],
-    ["US", "🇺🇸"],
-    ["GB-ENG", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"],
-    ["GB-SCT", "🏴󠁧󠁢󠁳󠁣󠁴󠁿"],
-    ["GB-WLS", "🏴󠁧󠁢󠁷󠁬󠁳󠁿"],
-    ["_rainbow", "🏳️‍🌈"],
-    ["_transgender", "🏳️‍⚧️"],
-    ["_pirate", "🏴‍☠️"],
-    ["_united-nations", "🇺🇳"],
-    ["_earth", "🌍"],
-    ["_lichess", ""],
-    ["ES-CT", ""],
-    ["fr", ""],
-    ["FRA", ""],
-    ["", ""]
-  ],
   "html": "<main class=\"round\"><div class=\"ruser ruser-top\"><a class=\"user-link\" href=\"/@/Alice\">Alice</a></div><div class=\"ruser ruser-bottom\"><a class=\"user-link\" href=\"/@/Bob\">Bob</a></div><div class=\"game__meta__players\"><a class=\"user-link\" href=\"/@/Alice\">Alice</a><a class=\"user-link\" href=\"/@/Carol\">Carol</a></div><div class=\"ruser\"><span class=\"user-link\">Anonymous</span></div></main>",
   "requests": [
     {
@@ -24,6 +7,5 @@
       "body": "alice,bob,alice,carol"
     }
   ],
-  "loading": [null, null, null, null, null, null, null],
-  "after": ["🇫🇷", null, null, null, "🇫🇷", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", null]
+  "loading": [null, null, null, null, null, null, null]
 }

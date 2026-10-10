@@ -1,4 +1,5 @@
 import { avatarAttributes } from '#shared/avatar.ts';
+import { flagImageUrl } from '#shared/flag.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import type { BarPlayer } from '#shared/player-bar.ts';
 
@@ -13,12 +14,16 @@ function card(player: BarPlayer, side: Side): SafeHtml {
     player.title === undefined
       ? ''
       : html`<span class="lr-ext-intro__title">${player.title}</span>`;
-  const details = [player.rating, player.flag].filter(part => part !== undefined).join(' ');
+  const flag = flagImageUrl(player.flag);
+  const details =
+    player.rating === undefined && flag === undefined
+      ? ''
+      : html`<span class="lr-ext-intro__details">${player.rating}${flag === undefined ? '' : html`<img class="lr-ext-intro__flag" src="${flag}" alt="">`}</span>`;
   return html`<div class="lr-ext-intro__card lr-ext-intro__card--${side}${kind}">
     <span class="lr-ext-intro__avatar"${avatarAttributes(player.user)}></span>
     <span class="lr-ext-intro__who">
       <span class="lr-ext-intro__name">${title}<span class="lr-ext-intro__username">${player.name}</span></span>
-      ${details === '' ? '' : html`<span class="lr-ext-intro__details">${details}</span>`}
+      ${details}
     </span>
   </div>`;
 }

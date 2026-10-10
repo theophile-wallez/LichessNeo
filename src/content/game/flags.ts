@@ -1,13 +1,14 @@
 import { z } from 'zod/mini';
-import { queryAll, setDataText } from '#shared/dom.ts';
+import { queryAll, setDataText, setStyleProperty } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
+import { flagImageUrl } from '#shared/flag.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
-import { flagEmoji } from './flag-emoji.ts';
 
 // Country flags in the player bars (styles/playerbar.css). The round data has
 // no country, so it comes from the players' profiles: `/api/users` takes a
-// batch of names. Snabbdom draws the bars, so the flag is an attribute that CSS
-// shows, set again whenever a bar is redrawn.
+// batch of names. Snabbdom draws the bars, so the flag is an attribute (its
+// code) and a custom property (its image) that CSS shows, set again whenever a
+// bar is redrawn.
 
 // The names' links, so that the flag can come between the name and its flair.
 const BARS = [
@@ -53,7 +54,7 @@ function userName(bar: HTMLElement): string | undefined {
 
 /** A sync task marking each bar with its player's flag, fetched once per name. */
 export function createFlagsSync(): () => void {
-  // A name maps to null while its flag loads, then to its emoji or ''.
+  // A name maps to null while its flag loads, then to its code or ''.
   const flags = new Map<string, string | null>();
   let retryMs = FIRST_RETRY_MS;
   let retryAt = 0;
@@ -69,7 +70,7 @@ export function createFlagsSync(): () => void {
     }
     retryMs = FIRST_RETRY_MS;
     for (const name of names) flags.set(name, '');
-    for (const user of users) flags.set(user.id, flagEmoji(user.profile?.flag));
+    for (const user of users) flags.set(user.id, user.profile?.flag ?? '');
   }
 
   return () => {
@@ -81,8 +82,10 @@ export function createFlagsSync(): () => void {
     if (missing.length > 0 && Date.now() >= retryAt) void load(missing);
     for (const [i, bar] of bars.entries()) {
       const name = names[i];
-      const flag = name === undefined ? undefined : flags.get(name);
-      setDataText(bar, 'lrExtFlag', flag ?? '');
+      const flag = (name === undefined ? undefined : flags.get(name)) ?? '';
+      const url = flagImageUrl(flag);
+      setDataText(bar, 'lrExtFlag', url === undefined ? '' : flag);
+      setStyleProperty(bar, '--lr-ext-flag', url === undefined ? null : `url("${url}")`);
     }
   };
 }
