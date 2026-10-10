@@ -44,6 +44,20 @@ const EVENTS: ReadonlyMap<string, ChatEvent> = new Map([
 const MORE_TIME = /^(?:white|black) (?:\+ \d+ seconds|gets more time)$/;
 const TIME_EVENT = event('time', 'offer', null);
 
+/** Who made the offer a line reports, when the page can tell. */
+export type Offerer = 'me' | 'opponent';
+
+/**
+ * The `i18n.site` key that says an event in the page's language. lila writes "Rematch offer
+ * sent" to both players, whoever sent it: the opponent's offer gets the words Lichess's
+ * rematch button has for it.
+ */
+export function eventKey(found: ChatEvent, offerer: Offerer | null): string | null {
+  const theirRematch =
+    found.topic === 'rematch' && found.tone === 'offer' && offerer === 'opponent';
+  return theirRematch ? 'yourOpponentWantsToPlayANewGameWithYou' : found.key;
+}
+
 /** The event a system line of the chat reports, if it's one of the game's. */
 export function chatEvent(text: string): ChatEvent | null {
   const trimmed = text.trim();

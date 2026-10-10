@@ -2,7 +2,7 @@ import { isParsing, queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { pollUntil } from '#shared/poll.ts';
 import { translate } from '#page/lichess/globals.ts';
-import { chatEvent } from './events.ts';
+import { chatEvent, eventKey, type ChatEvent, type Offerer } from './events.ts';
 
 // Marks each line of a chat for its bubbles (styles/chat): whose it is, whether it
 // follows or is followed by one of the same author's, and which game event a system
@@ -21,25 +21,53 @@ function authorOf(line: HTMLElement): string | null {
   return line.querySelector(':scope > .user-link, :scope > .color')?.textContent.trim() ?? null;
 }
 
-function markEvent(line: HTMLElement): void {
-  const text = line.querySelector(':scope > t')?.textContent ?? '';
-  const found = line.classList.contains('system') ? chatEvent(text) : null;
+// Lichess's rematch button says whose offer is pending: `glowing` for the opponent's, `me`
+// for the player's (lila's ui/round view/button.ts).
+function pendingRematch(): Offerer | null {
+  const button = queryOne(document, 'main.round .rcontrols .rematch', HTMLElement);
+  if (button?.classList.contains('glowing')) return 'opponent';
+  return button?.classList.contains('me') ? 'me' : null;
+}
+
+const isRematchOffer = (found: ChatEvent | null): boolean =>
+  found?.topic === 'rematch' && found.tone === 'offer';
+
+// Only the latest offer can be the pending one. Once known, whose it is stays on the line:
+// the button forgets once the offer is answered.
+function offererOf(line: HTMLElement, latestOffer: boolean): Offerer | null {
+  const kept = line.dataset['lrExtOfferer'];
+  if (kept === 'me' || kept === 'opponent') return kept;
+  const pending = latestOffer ? pendingRematch() : null;
+  setData(line, 'lrExtOfferer', pending);
+  return pending;
+}
+
+function markEvent(line: HTMLElement, found: ChatEvent | null, latestOffer: boolean): void {
+  const text = line.querySelector(':scope > t')?.textContent.trim() ?? '';
+  const offerer = isRematchOffer(found) ? offererOf(line, latestOffer) : null;
   setData(line, 'lrExtTopic', found?.topic ?? null);
   setData(line, 'lrExtTone', found?.tone ?? null);
-  setData(line, 'lrExtLabel', found ? translate(found.key ?? '', text.trim()) : null);
+  setData(line, 'lrExtLabel', found ? translate(eventKey(found, offerer) ?? '', text) : null);
 }
+
+const eventOf = (line: HTMLElement): ChatEvent | null =>
+  line.classList.contains('system')
+    ? chatEvent(line.querySelector(':scope > t')?.textContent ?? '')
+    : null;
 
 function markLines(chat: HTMLElement): void {
   const list = queryOne(chat, '.mchat__messages', HTMLElement);
   if (!list) return;
   const lines = queryAll(list, ':scope > li', HTMLElement);
   const authors = lines.map(authorOf);
+  const events = lines.map(eventOf);
+  const latestOffer = events.findLastIndex(isRematchOffer);
   for (const [i, line] of lines.entries()) {
     const author = authors[i] ?? null;
     setData(line, 'lrExtMine', isMine(line, author) ? '' : null);
     setData(line, 'lrExtFollows', author !== null && authors[i - 1] === author ? '' : null);
     setData(line, 'lrExtFollowed', author !== null && authors[i + 1] === author ? '' : null);
-    markEvent(line);
+    markEvent(line, events[i] ?? null, i === latestOffer);
   }
 }
 
@@ -57,6 +85,15 @@ function watch(found: HTMLElement): void {
     markLines(chat);
   };
   follow(found);
+  // The rematch button may learn whose offer it is after the chat shows the offer.
+  const controls = queryOne(document, 'main.round .rcontrols', HTMLElement);
+  if (controls) {
+    new MutationObserver(() => markLines(chat)).observe(controls, {
+      subtree: true,
+      childList: true,
+      attributeFilter: ['class'],
+    });
+  }
   const parent = found.parentElement;
   if (!parent) return;
   new MutationObserver(() => {
