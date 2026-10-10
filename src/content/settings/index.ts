@@ -1,5 +1,5 @@
 import { createElement, isParsing, queryOne, setData } from '#shared/dom.ts';
-import { oncePerFrame } from '#shared/frame.ts';
+import { syncWhileParsing } from '#shared/frame.ts';
 import type { Feature } from '#shared/features.ts';
 import { message } from '#content/platform/runtime.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
@@ -70,25 +70,11 @@ export function syncSettings(): void {
   if (open && section) showScheme(section);
 }
 
-// As the menu comes in, so it never shows without the link: once a frame, before it's drawn.
-function syncWhileParsing(): void {
-  const parsing = new MutationObserver(oncePerFrame(syncSettings));
-  parsing.observe(document, { childList: true, subtree: true });
-  document.addEventListener(
-    'DOMContentLoaded',
-    () => {
-      parsing.disconnect();
-      syncSettings();
-    },
-    { once: true },
-  );
-}
-
 export const extensionSettings: Feature = {
   name: 'extension settings',
   start: () => {
-    if (isParsing()) syncWhileParsing();
-    else syncSettings();
+    // As the menu comes in, so it never shows without the link.
+    syncWhileParsing(syncSettings);
     onEveryTick('extension settings', syncSettings);
     window.addEventListener('hashchange', syncSettings);
   },

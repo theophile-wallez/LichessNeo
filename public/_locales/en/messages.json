@@ -346,5 +346,65 @@
   "streamersOffline": {
     "message": "Offline",
     "description": "The streamers' page: the title of the others."
+  },
+  "racerTagline": {
+    "message": "Fastest wins.",
+    "description": "Puzzle Racer's home: the scene's title."
+  },
+  "racerPitch": {
+    "message": "Solve as many puzzles as you can in 90 seconds, against players from all around the world, or with your friends.",
+    "description": "Puzzle Racer's home: under the scene's title."
+  },
+  "racerStepSame": {
+    "message": "The same puzzles",
+    "description": "How a race goes: everyone gets the same puzzles."
+  },
+  "racerStepSameBody": {
+    "message": "Everyone in the race gets them, and each right move takes your car forward.",
+    "description": "Under racerStepSame."
+  },
+  "racerStepTime": {
+    "message": "90 seconds",
+    "description": "How a race goes: its length."
+  },
+  "racerStepTimeBody": {
+    "message": "Each right move is a point. The most points at the end wins.",
+    "description": "Under racerStepTime."
+  },
+  "racerStepCombo": {
+    "message": "Combos pay",
+    "description": "How a race goes: the combo bar."
+  },
+  "racerStepComboBody": {
+    "message": "Right moves in a row fill the combo bar, for bonus points. A wrong move empties it.",
+    "description": "Under racerStepCombo."
+  },
+  "racerMore": {
+    "message": "More puzzle challenges",
+    "description": "Puzzle Racer's home: the title over links to Puzzle Storm, Puzzle Streak and the puzzle themes."
+  },
+  "racerStorm": {
+    "message": "Puzzle Storm",
+    "description": "Lichess's Puzzle Storm, by its name."
+  },
+  "racerStormBody": {
+    "message": "Alone against the clock",
+    "description": "Under racerStorm."
+  },
+  "racerStreak": {
+    "message": "Puzzle Streak",
+    "description": "Lichess's Puzzle Streak, by its name."
+  },
+  "racerStreakBody": {
+    "message": "One mistake and it's over",
+    "description": "Under racerStreak."
+  },
+  "racerThemes": {
+    "message": "Puzzle themes",
+    "description": "The puzzle themes page."
+  },
+  "racerThemesBody": {
+    "message": "Train one pattern",
+    "description": "Under racerThemes."
   }
 }

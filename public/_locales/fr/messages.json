@@ -259,5 +259,50 @@
   },
   "streamersOffline": {
     "message": "Hors ligne"
+  },
+  "racerTagline": {
+    "message": "Le plus rapide gagne."
+  },
+  "racerPitch": {
+    "message": "Résolvez un maximum de problèmes en 90 secondes, face à des joueurs du monde entier, ou avec vos amis."
+  },
+  "racerStepSame": {
+    "message": "Les mêmes problèmes"
+  },
+  "racerStepSameBody": {
+    "message": "Tous les joueurs ont les mêmes, et chaque bon coup fait avancer votre voiture."
+  },
+  "racerStepTime": {
+    "message": "90 secondes"
+  },
+  "racerStepTimeBody": {
+    "message": "Chaque bon coup rapporte un point. Le plus de points à la fin l'emporte."
+  },
+  "racerStepCombo": {
+    "message": "Les combos rapportent"
+  },
+  "racerStepComboBody": {
+    "message": "Les bons coups d'affilée remplissent la barre de combo, pour des points bonus. Une erreur la vide."
+  },
+  "racerMore": {
+    "message": "Autres défis de problèmes"
+  },
+  "racerStorm": {
+    "message": "Puzzle Storm"
+  },
+  "racerStormBody": {
+    "message": "Seul contre la montre"
+  },
+  "racerStreak": {
+    "message": "Puzzle Streak"
+  },
+  "racerStreakBody": {
+    "message": "Une erreur et c'est fini"
+  },
+  "racerThemes": {
+    "message": "Thèmes de problèmes"
+  },
+  "racerThemesBody": {
+    "message": "Entraînez un motif précis"
   }
 }

@@ -13,3 +13,25 @@ export function oncePerFrame(task: () => void): () => void {
     });
   };
 }
+
+/**
+ * Runs `task` while the page parses, once a frame as its chunks come in (each is a mutation),
+ * still before the frame is drawn, and once more when it's parsed; at once on a page already
+ * parsed. What it adds is there from the first paint.
+ */
+export function syncWhileParsing(task: () => void): void {
+  if (document.readyState !== 'loading') {
+    task();
+    return;
+  }
+  const parsing = new MutationObserver(oncePerFrame(task));
+  parsing.observe(document, { childList: true, subtree: true });
+  document.addEventListener(
+    'DOMContentLoaded',
+    () => {
+      parsing.disconnect();
+      task();
+    },
+    { once: true },
+  );
+}

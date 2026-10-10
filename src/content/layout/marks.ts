@@ -1,6 +1,6 @@
-import { isParsing, queryAll, queryOne, setData } from '#shared/dom.ts';
+import { queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
-import { oncePerFrame } from '#shared/frame.ts';
+import { syncWhileParsing } from '#shared/frame.ts';
 import { nonEmpty } from '#shared/text.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
@@ -122,25 +122,10 @@ export function syncMarks(): void {
   }
 }
 
-function markWhileParsing(): void {
-  // Each chunk the parser adds is a mutation: mark once a frame, still before it's drawn.
-  const parsing = new MutationObserver(oncePerFrame(syncMarks));
-  parsing.observe(document, { childList: true, subtree: true });
-  document.addEventListener(
-    'DOMContentLoaded',
-    () => {
-      parsing.disconnect();
-      syncMarks();
-    },
-    { once: true },
-  );
-}
-
 export const marks: Feature = {
   name: 'marks',
   start: () => {
-    if (isParsing()) markWhileParsing();
-    else syncMarks();
+    syncWhileParsing(syncMarks);
     onEveryTick('marks', syncMarks);
   },
 };
