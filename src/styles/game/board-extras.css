@@ -140,7 +140,7 @@ main.round .lr-ext-board-tools__btn--menu::before {
 }
 
 main.round .lr-ext-board-tools__btn--flip::before {
-  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-data-transfer-vertical.svg');
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-reload-vertical.svg');
 }
 
 main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-tools__btn--flip {
