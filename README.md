@@ -2,7 +2,7 @@
 
 Lichess is free, open source and has no ads. This Chrome extension gives it
 a modern look and feel: a dark, roomy layout, playful pages, the board, pieces
-and sounds of your choice, and a Game Review after every game.
+and sounds of your choice, and a Debrief after every game.
 
 Your Lichess account, your games and your friends don't change. Only the look
 and the sounds do.
@@ -15,9 +15,9 @@ A sidebar on the left, player bars with the clocks above and below the board,
 and one panel on the right for the moves and the chat. A game fits on your
 screen, so there's nothing to scroll.
 
-### A Game Review for every game
+### A Debrief after every game
 
-Open any finished game and you get a full review: each player's accuracy, a
+Open any finished game and you get a full debrief: each player's accuracy, a
 rating for how well they played, and every move marked brilliant, great, best,
 mistake, blunder… A coach then takes you through the game move by move.
 
@@ -125,8 +125,9 @@ into `dist/`: the version counts the commits.
 This is a free, personal fan project, made for fun. It isn't sold, it shows
 no ads, it asks for no money, and it's not meant to make money in any way.
 
-It isn't affiliated with, endorsed by or sponsored by Lichess or any other
-chess site or company. Its images are its own or under free licenses, listed
+It isn't affiliated with, endorsed by or sponsored by Lichess, Chess.com or
+any other chess site or company, and uses none of their names for its
+features. Its images are its own or under free licenses, listed
 in [public/licenses](public/licenses) and [packs/example](packs/example);
 Lichess's own board, pieces and sounds come from lichess.org itself. A pack you
 import is yours: share only what you may share.
