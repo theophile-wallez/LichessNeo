@@ -1,0 +1,148 @@
+/* ---- Panel --- */
+
+/* The tools and the FEN read as one card: the engine across its top, then the tools as icons
+ * (their names in our tooltips, content/pages/editor-tools.ts), the position's settings, and
+ * the FEN and URL at its foot. */
+.board-editor .board-editor__tools,
+.board-editor .copyables {
+  box-sizing: border-box;
+  border: 1px solid var(--lr-ext-card-border);
+  background: var(--lr-ext-bg-panel) !important;
+}
+
+.board-editor .board-editor__tools {
+  display: flex !important;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 16px 16px !important;
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+}
+
+/* The engine's row in the analysis look (analysis/engine.css). */
+.board-editor .board-editor__tools .ceval-wrap {
+  order: 0;
+  flex: none;
+  margin: 0 -16px !important;
+}
+
+/* ---- Tools --- */
+
+.board-editor .board-editor__tools .actions {
+  order: 1;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  justify-content: space-between;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+.board-editor .board-editor__tools .actions form {
+  width: auto !important;
+  margin: 0;
+}
+
+.board-editor .board-editor__tools .actions > :is(button, a),
+.board-editor .board-editor__tools .actions > form > button {
+  /* Flex, not grid: the hidden label would take a second row and push the icon up. */
+  display: flex !important;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  max-width: 44px;
+  width: auto !important;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: var(--lr-ext-bg-raised) !important;
+  box-shadow: none !important;
+  color: var(--lr-ext-text) !important;
+  font-size: 0 !important;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.15s !important;
+}
+
+.board-editor .board-editor__tools .actions > form > button {
+  width: 44px !important;
+}
+
+.board-editor .board-editor__tools .actions > button > .text {
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+/* The glyph's box on its own line, as tall as it is wide: the button centers it, not the
+ * text's baseline. */
+.board-editor .board-editor__tools .actions [data-icon]::before {
+  display: block;
+  width: 1em;
+  height: 1em;
+  margin: 0 !important;
+  font-size: 19px !important;
+  line-height: 1 !important;
+}
+
+/* "From image" draws Lichess's eye: an image says it better. */
+.board-editor .board-editor__tools .actions [data-icon='\e054']::before {
+  --lr-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/image-upload.svg');
+}
+
+.board-editor .board-editor__tools .actions > :is(button, a):hover,
+.board-editor .board-editor__tools .actions > form > button:hover {
+  background: var(--lr-ext-bg-raised-hover) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+
+/* "Continue from here": play the computer or a friend, side by side. */
+.board-editor .board-editor__tools .continue-with:not(.none) {
+  order: 2;
+  display: flex !important;
+  gap: 8px;
+  margin: 0 !important;
+}
+
+.board-editor .board-editor__tools .continue-with .button {
+  flex: 1 1 0;
+  margin: 0 !important;
+  padding: 10px 8px !important;
+  font-size: 13px !important;
+  white-space: normal;
+}
+
+/* ---- Position --- */
+
+.board-editor .board-editor__tools .metadata {
+  order: 3;
+  display: flex !important;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.board-editor .board-editor__tools > select.positions {
+  order: 4;
+}
+
+.board-editor .board-editor__tools > div:has(> #variants) {
+  order: 5;
+}
+
+.board-editor .board-editor__tools > :is(select.positions, div:has(> #variants)) {
+  margin: 0 !important;
+}
+
+.board-editor .board-editor__tools select {
+  width: 100%;
+  height: 38px;
+  border-radius: 9px !important;
+}

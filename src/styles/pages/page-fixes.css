@@ -84,31 +84,6 @@
   min-width: 0;
 }
 
-/* ---- Board editor --- */
-
-/* The action buttons were stacked flush, each shadow over the next: space them out. */
-.board-editor__tools .actions {
-  gap: 10px;
-}
-
-.board-editor__tools .actions form .button {
-  width: 100%;
-}
-
-.board-editor__tools .castling label {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Below 1020px Lichess runs the tools to the screen's edge. */
-@media (max-width: 1019.98px) {
-  .board-editor__tools {
-    box-sizing: border-box;
-    padding-inline: 12px;
-  }
-}
-
 /* ---- Openings --- */
 
 /* A phone's openings two by two: one board per row filled the screen with each. */

@@ -135,6 +135,23 @@ describe('tooltips', () => {
     expect(shown()?.textContent).toBe('Blitz');
   });
 
+  it('shows the board editor’s analysis link, at any width', () => {
+    vi.stubGlobal('matchMedia', () => ({ matches: false }));
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main><div class="board-editor__tools"><div class="actions"><a data-lr-ext-tip="Analysis board (a)"></a></div></div><a class="plain" data-lr-ext-tip="Elsewhere"></a></main>',
+    );
+    const link = document.querySelector('.actions > a');
+    const plain = document.querySelector('a.plain');
+    if (!link || !plain) throw new Error('no links');
+    hover(plain);
+    vi.advanceTimersByTime(250);
+    expect(shown()).toBeNull();
+    hover(link);
+    vi.advanceTimersByTime(250);
+    expect(shown()?.innerHTML).toBe('Analysis board<kbd>a</kbd>');
+  });
+
   it('splits a shortcut off the label', () => {
     expect(splitShortcut('Flip board (f)')).toEqual({ label: 'Flip board', key: 'f' });
     expect(splitShortcut('(x)')).toEqual({ label: '(x)', key: null });

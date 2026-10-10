@@ -36,6 +36,7 @@ import { speedCards } from './pages/speed-cards/index.ts';
 import { coachTitles } from './pages/coach-titles.ts';
 import { swiss } from './pages/swiss.ts';
 import { simulScores } from './pages/simul-scores.ts';
+import { editorTools } from './pages/editor-tools.ts';
 import { forumLabels } from './pages/forum.ts';
 import { tv } from './pages/tv.ts';
 import { practiceIcons } from './pages/practice-icons.ts';
@@ -95,6 +96,7 @@ function main(): void {
     coachTitles,
     swiss,
     simulScores,
+    editorTools,
     forumLabels,
     tv,
     practiceIcons,

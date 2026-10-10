@@ -24,6 +24,7 @@ describe('presentFlags, for flags the original lacked', () => {
       'round-crosstable',
       '<main class="round"><div class="round__underboard"><div class="crosstable"></div></div></main>',
     ],
+    ['board-editor', '<main><div class="board-editor"><div class="main-board"></div></div></main>'],
     [
       'analyse-training',
       '<main class="analyse"><div class="analyse__round-training"><div class="analyse__acpl"></div></div></main>',

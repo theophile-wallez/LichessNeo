@@ -8,8 +8,11 @@ import { placeTooltip, splitShortcut } from './tooltip-layout.ts';
 // `data-lr-ext-tip`, so the native one never shows. Snabbdom only sets the title
 // again if it changes, and the next hover moves it again.
 
-const TARGETS =
-  'main :is(button:is([title], [data-lr-ext-tip]), a.tv-channel[data-lr-ext-tip]):not(#lr-ext-review *)';
+// The board editor's analysis link is one of its tools (content/pages/editor-tools.ts).
+const TARGETS = [
+  'main :is(button:is([title], [data-lr-ext-tip]), a.tv-channel[data-lr-ext-tip]):not(#lr-ext-review *)',
+  'main .board-editor__tools .actions > a[data-lr-ext-tip]',
+].join(', ');
 // Lichess's home start buttons carry an English title that only repeats their label:
 // adopted, so the browser's doesn't show either, but never shown.
 const NO_TIP = 'main.lobby .lobby__start__button';
@@ -21,7 +24,7 @@ const CHAIN_MS = 400;
 function hoverTarget(event: MouseEvent): HTMLElement | null {
   const target = closestTo(event.target, TARGETS, HTMLElement);
   // TV's channels only need theirs while their names are hidden (styles/tv.css).
-  if (target?.matches('a') && !matchMedia('(max-width: 1259.98px)').matches) return null;
+  if (target?.matches('a.tv-channel') && !matchMedia('(max-width: 1259.98px)').matches) return null;
   return target;
 }
 

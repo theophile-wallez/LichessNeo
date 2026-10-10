@@ -1,0 +1,140 @@
+/* Board editor (/editor): the board between its spare pieces, each in line with its file, and
+ * one panel on the right with the engine, the tools, the position's settings, then the FEN and
+ * URL. From 1020px the page never scrolls; below it the panel goes under the board. */
+
+/* ---- Desktop --- */
+
+@media (min-width: 1020px) {
+  html[data-lr-ext-has~='board-editor'],
+  html[data-lr-ext-has~='board-editor'] body,
+  html[data-lr-ext-has~='board-editor'] #main-wrap {
+    overflow: hidden !important;
+  }
+
+  .board-editor {
+    --lr-ext-gap: 24px;
+    --lr-ext-panel-w: 360px;
+    --lr-ext-coords-off: calc(1.2 * var(--lr-ext-coords-size, 13px) + 8px);
+    /* The spare rows are a square tall, so their pieces match the board's: the board and its
+     * two rows take 10 squares of height, plus 8px between each row and the board. */
+    --lr-ext-board-room: max(
+      320px,
+      min(
+        (var(--lr-ext-main-h, 100dvh) - 32px - 16px - var(--lr-ext-coords-off)) * 0.8,
+        var(--lr-ext-main-w, 100vw) - var(--lr-ext-panel-w) - var(--lr-ext-gap) - 64px
+      )
+    );
+    /* All of the room until the handle is dragged (board/pieces.css). Whole pixels per square,
+     * as chessground draws them, so the pieces line up with the files. */
+    --lr-ext-board: round(
+      down,
+      max(200px, var(--lr-ext-board-room) * var(--lr-ext-board-scale, 1)),
+      8px
+    );
+    --lr-ext-spare-h: calc(var(--lr-ext-board) / 8);
+    --lr-ext-spare-room: calc(var(--lr-ext-spare-h) + 8px);
+    /* What a smaller board leaves, half over it and half under it: the panel keeps its height. */
+    --lr-ext-board-slack: calc((var(--lr-ext-board-room) - var(--lr-ext-board)) * 0.625);
+
+    display: grid !important;
+    grid-template-areas:
+      '. tools'
+      'spare-top tools'
+      'board tools'
+      'board copyables'
+      'spare-bottom copyables'
+      '. copyables' !important;
+    grid-template-columns: var(--lr-ext-board) var(--lr-ext-panel-w) !important;
+    /* The board spans the middle rows: the panel's settings take what the FEN leaves. */
+    grid-template-rows:
+      var(--lr-ext-board-slack) var(--lr-ext-spare-room) minmax(0, 1fr) auto
+      calc(
+        var(--lr-ext-spare-room) + var(--lr-ext-coords-off)
+      ) var(--lr-ext-board-slack) !important;
+    justify-content: center;
+    gap: 0 var(--lr-ext-gap) !important;
+    height: calc(1.25 * var(--lr-ext-board-room) + 16px + var(--lr-ext-coords-off)) !important;
+    margin: 0 auto !important;
+  }
+
+  .board-editor .main-board {
+    width: var(--lr-ext-board) !important;
+    height: var(--lr-ext-board) !important;
+  }
+
+  .board-editor .spare {
+    width: var(--lr-ext-board) !important;
+  }
+
+  .board-editor .spare-top {
+    align-self: start;
+  }
+
+  .board-editor .spare-bottom {
+    align-self: end;
+  }
+
+  .board-editor .board-editor__tools {
+    align-self: stretch !important;
+    width: auto !important;
+    min-height: 0;
+    max-height: none !important;
+    overflow: hidden auto;
+    scrollbar-width: thin;
+  }
+
+  /* Down to the panel's foot, its fields at the bottom, so a smaller board leaves no gap. */
+  .board-editor .copyables {
+    align-self: stretch;
+    justify-content: flex-end;
+    width: auto !important;
+  }
+}
+
+/* A small window: a narrower panel, so the board keeps its room. */
+@media (min-width: 1020px) and (max-width: 1259.98px) {
+  .board-editor {
+    --lr-ext-panel-w: 300px;
+    --lr-ext-gap: 18px;
+  }
+}
+
+/* ---- Phones and tablets --- */
+
+/* One column that scrolls: the board between its spare pieces, then the panel. */
+@media (max-width: 1019.98px) {
+  .board-editor {
+    --lr-ext-board: round(down, min(100vw - 16px, 640px), 8px);
+    --lr-ext-spare-h: calc(var(--lr-ext-board) / 8);
+
+    display: grid !important;
+    grid-template-areas:
+      'spare-top'
+      'board'
+      'spare-bottom'
+      'tools'
+      'copyables' !important;
+    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-rows: auto !important;
+    justify-content: center;
+    gap: 8px 0 !important;
+    margin: 0 !important;
+    padding: 8px 0 32px !important;
+  }
+
+  .board-editor .main-board {
+    width: var(--lr-ext-board) !important;
+    height: var(--lr-ext-board) !important;
+  }
+
+  .board-editor .spare,
+  .board-editor .board-editor__tools,
+  .board-editor .copyables {
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  .board-editor .board-editor__tools {
+    margin-top: 8px !important;
+  }
+}
