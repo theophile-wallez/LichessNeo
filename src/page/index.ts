@@ -8,7 +8,7 @@ import { distribution } from './charts/distribution/index.ts';
 import { gameCharts } from './charts/game/index.ts';
 import { gameOver } from './game-over/index.ts';
 import { chat } from './chat/index.ts';
-import { poolSeek } from './seek/index.ts';
+import { nextGameSeek } from './seek/index.ts';
 
 // The page-world script: it runs in Lichess's own JavaScript context, so it
 // can reach `site`, the analysis controller and the sound player, but not
@@ -24,5 +24,5 @@ startFeatures([
   gameCharts,
   gameOver,
   chat,
-  poolSeek,
+  nextGameSeek,
 ]);

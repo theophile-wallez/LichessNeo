@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { seekInPool, type PoolSeekOptions } from './pool-socket.ts';
+import { seekNextGame, type LobbySeekOptions, type SeekRequest } from './lobby-seek.ts';
 
 // Lichess's lobby socket, as the seek sees it.
 class FakeSocket extends EventTarget {
@@ -29,22 +29,34 @@ class FakeSocket extends EventTarget {
 let socket: FakeSocket;
 let events: string[];
 
-function seek(): ReturnType<typeof seekInPool> {
-  const options: PoolSeekOptions = {
-    url: 'wss://socket.test/lobby/socket/v5',
-    member: { id: '2+1', blocking: 'bob' },
+const POOL: SeekRequest = { kind: 'pool', member: { id: '2+1', blocking: 'bob' } };
+
+// The lobby's answer to a seek like a game, and the seeks asked for.
+let hookAccepted: boolean;
+let hooks: string[];
+
+function seek(request: SeekRequest = POOL): ReturnType<typeof seekNextGame> {
+  const options: LobbySeekOptions = {
+    url: 'wss://socket.test/lobby/socket/v5?sri=abc123&from=website',
+    request,
     onOpen: () => events.push('open'),
-    onPaired: url => events.push(`paired ${url}`),
+    onPaired: ({ url, cookie }) => events.push(`paired ${url}${cookie ? ` ${cookie.name}` : ''}`),
     onFailed: () => events.push('failed'),
     connect: () => socket,
+    hookLike: (sri, gameId) => {
+      hooks.push(`${sri} ${gameId}`);
+      return Promise.resolve(hookAccepted);
+    },
   };
-  return seekInPool(options);
+  return seekNextGame(options);
 }
 
 beforeEach(() => {
   vi.useFakeTimers();
   socket = new FakeSocket();
   events = [];
+  hookAccepted = true;
+  hooks = [];
 });
 
 afterEach(() => vi.useRealTimers());
@@ -95,5 +107,44 @@ describe('a seek in a pool', () => {
     socket.open();
     vi.advanceTimersByTime(9000);
     expect(events).toEqual(['open', 'failed']);
+  });
+});
+
+describe('a seek like a game', () => {
+  const LIKE: SeekRequest = { kind: 'like', gameId: 'abcd1234' };
+
+  it('asks the lobby for it once the socket opens, for this socket only', async () => {
+    seek(LIKE);
+    expect(hooks).toEqual([]);
+    socket.open();
+    expect(hooks).toEqual(['abc123 abcd1234']);
+    expect(socket.sent).toEqual(['p']);
+    await vi.advanceTimersByTimeAsync(20_000);
+    expect(hooks).toHaveLength(1);
+  });
+
+  it('opens the game it is paired in, with the cookie an anonymous player gets', () => {
+    seek(LIKE);
+    socket.open();
+    socket.receive(
+      '{"t":"redirect","d":{"id":"wxyz9876","url":"/wxyz9876abcd","cookie":{"name":"rk2","value":"v","maxAge":100}}}',
+    );
+    expect(events).toEqual(['open', 'paired /wxyz9876abcd rk2']);
+  });
+
+  it('cancels the seek when cancelled, and fails when the lobby refuses it', async () => {
+    const like = seek(LIKE);
+    socket.open();
+    like.cancel();
+    expect(socket.sent.at(-1)).toBe('{"t":"cancel"}');
+    expect(socket.closed).toBe(true);
+    socket = new FakeSocket();
+    events = [];
+    hookAccepted = false;
+    seek(LIKE);
+    socket.open();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(events).toEqual(['open', 'failed']);
+    expect(socket.closed).toBe(true);
   });
 });

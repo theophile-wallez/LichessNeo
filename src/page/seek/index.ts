@@ -1,28 +1,33 @@
 import { z } from 'zod/mini';
 import { closestTo, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
+import { readPageInitData } from '#shared/page-init-data.ts';
 import { readStored } from '#shared/storage.ts';
-import { poolOfLink, rangeKey, waited, type PoolMember } from './pool-link.ts';
-import { seekInPool, type PoolSeek } from './pool-socket.ts';
+import { seekNextGame, type LobbySeek, type Paired, type SeekRequest } from './lobby-seek.ts';
+import { nextGameOf, nextGameOfLink, type NextGame } from './next-game.ts';
+import { rangeKey, waited, type PoolMember } from './pool-link.ts';
 
-// A game's "New opponent" seeks the next game right there, as the big apps
-// do, rather than on the home page as Lichess does: the button shows a
-// loader, then how long it has waited and a cross, and a click stops it
-// (styles/game/game-over.css). Signed in only: Lichess pairs an anonymous
-// player through the lobby's seeks instead. If our socket fails, the button
-// does what Lichess's does.
+// A game's "New opponent" (or our "New 10 min", content/game/new-game.ts)
+// seeks the next game right there, as the big apps do, rather than on the home
+// page as Lichess does: the button shows a loader, then how long it has waited
+// and a cross, and a click stops it (styles/game/game-over.css). If our socket
+// fails, the button does what Lichess's does.
 
-const BUTTON = 'main.round .rcontrols .follow-up a.new-opponent';
+const BUTTON = 'main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game)';
 const SECOND_MS = 1000;
 
 interface Seeking {
-  readonly seek: PoolSeek;
+  readonly seek: LobbySeek;
   readonly timer: number;
   /** When the socket opened: the wait counts from there. */
   openedAt: number | null;
 }
 
 let seeking: Seeking | null = null;
+// What Lichess's button seeks after this game, from the page's init data.
+let roundNext: NextGame | null = null;
+
+const signedIn = (): boolean => Boolean(document.body.dataset.user);
 
 function socketUrl(): string | null {
   const domains = document.body.dataset.socketDomains?.split(',').filter(Boolean) ?? [];
@@ -59,17 +64,29 @@ function withRange(member: PoolMember): PoolMember {
   return range ? { ...member, range } : member;
 }
 
-function start(member: PoolMember, fallback: string): void {
+const ranged = (request: SeekRequest): SeekRequest =>
+  request.kind === 'pool' ? { kind: 'pool', member: withRange(request.member) } : request;
+
+// As Lichess's own redirect does (lila's ui/site/src/reload.ts): an anonymous player owns the
+// game through the cookie it comes with.
+function openGame({ url, cookie }: Paired): void {
+  if (cookie) {
+    document.cookie = `${encodeURIComponent(cookie.name)}=${cookie.value}; max-age=${cookie.maxAge}; path=/; domain=${location.hostname}`;
+  }
+  location.assign(`/${url.replace(/^\//, '')}`);
+}
+
+function start({ request, fallback }: NextGame): void {
   const url = socketUrl();
   if (!url) return location.assign(fallback);
-  const seek = seekInPool({
+  const seek = seekNextGame({
     url,
-    member: withRange(member),
+    request: ranged(request),
     onOpen: () => {
       if (seeking) seeking.openedAt = Date.now();
       show();
     },
-    onPaired: game => location.assign(game),
+    onPaired: openGame,
     onFailed: () => {
       stop();
       location.assign(fallback);
@@ -79,20 +96,28 @@ function start(member: PoolMember, fallback: string): void {
   show();
 }
 
+function nextGameFor(button: HTMLElement): NextGame | null {
+  if (button instanceof HTMLAnchorElement) return nextGameOfLink(button.href, signedIn());
+  return roundNext;
+}
+
 function onClick(event: MouseEvent): void {
-  const button = closestTo(event.target, BUTTON, HTMLAnchorElement);
-  const member = button && document.body.dataset.user ? poolOfLink(button.href) : null;
-  if (!button || !member) return;
+  const button = closestTo(event.target, BUTTON, HTMLElement);
+  const next = button ? nextGameFor(button) : null;
+  if (!next) return;
   event.preventDefault();
   event.stopPropagation();
   if (seeking) stop();
-  else start(member, button.href);
+  else start(next);
 }
 
-export const poolSeek: Feature = {
-  name: 'pool seek',
+export const nextGameSeek: Feature = {
+  name: 'next game seek',
   start: () => {
-    // Capturing, so the link doesn't take the page home first.
+    readPageInitData(text => {
+      roundNext = nextGameOf(text, signedIn());
+    });
+    // Capturing, so the button doesn't take the page home first.
     document.addEventListener('click', onClick, true);
     // Leaving the page leaves the pool, as the lobby does.
     window.addEventListener('pagehide', stop);

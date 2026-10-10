@@ -178,7 +178,7 @@ main.round .rcontrols .follow-up .new-opponent[data-lr-ext-label]::after {
 
 /* Seeking the next game from here (page/seek): a loader while the socket connects, then
  * how long it has waited and a cross that stops it. */
-main.round .rcontrols .follow-up .new-opponent[data-lr-ext-seek] {
+main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game)[data-lr-ext-seek] {
   gap: 8px;
   font-size: 0 !important;
   box-shadow:
@@ -186,7 +186,7 @@ main.round .rcontrols .follow-up .new-opponent[data-lr-ext-seek] {
     var(--lr-ext-btn-grey-shadow) !important;
 }
 
-main.round .rcontrols .follow-up .new-opponent[data-lr-ext-seek]::before {
+main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game)[data-lr-ext-seek]::before {
   content: '';
   flex: none;
   box-sizing: border-box;
@@ -194,20 +194,29 @@ main.round .rcontrols .follow-up .new-opponent[data-lr-ext-seek]::before {
   height: 16px;
 }
 
-main.round .rcontrols .follow-up .new-opponent[data-lr-ext-seek='connecting']::before {
+main.round
+  .rcontrols
+  .follow-up
+  :is(.new-opponent, .lr-ext-new-game)[data-lr-ext-seek='connecting']::before {
   border: 2px solid #ffffff33;
   border-top-color: #fff;
   border-radius: 50%;
   animation: lr-ext-seek-spin 0.7s linear infinite !important;
 }
 
-main.round .rcontrols .follow-up .new-opponent[data-lr-ext-seek='seeking']::before {
+main.round
+  .rcontrols
+  .follow-up
+  :is(.new-opponent, .lr-ext-new-game)[data-lr-ext-seek='seeking']::before {
   background: currentColor;
   mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg') center /
     contain no-repeat;
 }
 
-main.round .rcontrols .follow-up .new-opponent[data-lr-ext-seek='seeking']::after {
+main.round
+  .rcontrols
+  .follow-up
+  :is(.new-opponent, .lr-ext-new-game)[data-lr-ext-seek='seeking']::after {
   content: attr(data-lr-ext-waited);
   font-size: 14px;
   font-variant-numeric: tabular-nums;
