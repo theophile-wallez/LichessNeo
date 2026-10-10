@@ -1,7 +1,7 @@
 /* ---- Rating cards --- */
 
-/* The perf list as rating cards, from 1020px (below, Lichess shows only the icon and
- * rating). The same list is the perf-stat page's side menu: layouts come further down. */
+/* The perf list as rating cards, from 1020px (below, a strip of pills: rating-strip.css).
+ * The same list is the perf-stat page's side menu: layouts come further down. */
 @media (min-width: 1020px) {
   .side.sub-ratings {
     box-shadow: none !important;

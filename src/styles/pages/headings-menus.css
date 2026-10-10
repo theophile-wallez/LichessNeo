@@ -53,6 +53,13 @@ h3 {
   }
 }
 
+/* Below 800px Lichess sizes the one column to its content, which ran wide pages off screen. */
+@media (max-width: 799.98px) {
+  main.page-menu {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
 .subnav a {
   margin-bottom: 2px;
   padding: 10px 14px !important;
@@ -198,6 +205,27 @@ h3 {
   )
   a:hover::after {
   transform: translateY(-2px) rotate(-8deg) scale(1.08);
+}
+
+.subnav:is(
+    [data-lr-ext-nav~='bots'],
+    [data-lr-ext-nav~='broadcast'],
+    [data-lr-ext-nav~='puzzles'],
+    [data-lr-ext-nav~='account'],
+    [data-lr-ext-nav~='about'],
+    [data-lr-ext-nav~='streamers'],
+    [data-lr-ext-nav~='studies'],
+    [data-lr-ext-nav~='teams'],
+    [data-lr-ext-nav~='blog'],
+    [data-lr-ext-nav~='arena-history']
+  )
+  a.active::after {
+  /* Below 800px Lichess underlines the open link with its ::after, a bar 4px high across the
+     link: the glyph keeps its own box. */
+  width: 24px !important;
+  height: 24px !important;
+  background: color-mix(in srgb, var(--lr-ext-nav-color, #fff) 80%, #fff) !important;
+  transform: none !important;
 }
 
 .subnav:is(

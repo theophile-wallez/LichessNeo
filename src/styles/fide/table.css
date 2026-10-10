@@ -44,6 +44,18 @@
   padding: 0 16px !important;
 }
 
+/* Wrapped under the title, the search takes the row. */
+@media (max-width: 799.98px) {
+  .fide-players__search-form {
+    flex: 1 1 100%;
+  }
+
+  .fide-players__search-form__input {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
 /* ---- Table --- */
 
 /* A federation's rows are cards in the box's color: take them off the box, as on the list. */

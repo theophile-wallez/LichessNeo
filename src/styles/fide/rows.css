@@ -174,3 +174,81 @@ html:not([data-lr-ext-fide-skip])
   tr.paginated:nth-child(3) {
   --lr-ext-medal: linear-gradient(145deg, var(--lr-ext-orange), var(--lr-ext-orange-darker));
 }
+
+/* Phones: the three ratings fit beside the name, each column headed by its glyph alone (the
+ * follow star's too), and the age goes. Lichess let the table run 620px wide, scrolled
+ * sideways. */
+@media (max-width: 559.98px) {
+  /* Lichess gives the table a minimum width, for its sideways scroll. */
+  :is(.fide-players, .fide-federation) .fide-players-table {
+    width: 100%;
+    min-width: 0 !important;
+    table-layout: fixed;
+  }
+
+  :is(.fide-players, .fide-federation) .fide-players-table :is(th, td):nth-child(5) {
+    display: none;
+  }
+
+  :is(.fide-players, .fide-federation) .fide-players-table thead th:not(:first-child) {
+    width: 44px;
+    padding-inline: 0 !important;
+    font-size: 0 !important;
+  }
+
+  :is(.fide-players, .fide-federation) .fide-players-table thead th:nth-child(6) {
+    width: 40px;
+  }
+
+  :is(.fide-players, .fide-federation) .fide-players-table thead th:not(:first-child) > a {
+    justify-content: center;
+    padding: 6px 0;
+    font-size: 0;
+  }
+
+  .fide-players-table tbody tr.paginated > td {
+    padding: 8px 2px !important;
+    font-size: 13px;
+  }
+
+  .fide-players-table tbody tr.paginated > td:first-child {
+    padding-inline: 8px 4px !important;
+  }
+
+  .fide-players-table tbody tr.paginated > td:last-child {
+    padding-inline-end: 6px !important;
+  }
+
+  /* Signed out, the blitz rating ends the card. */
+  .fide-players-table tbody tr.paginated > td:nth-child(4):nth-last-child(2) {
+    padding-inline-end: 8px !important;
+    border-start-end-radius: 10px;
+    border-end-end-radius: 10px;
+  }
+
+  .fide-players-table .player-intro {
+    gap: 8px;
+  }
+
+  .fide-players-table--sortable .player-intro::before {
+    min-width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+  }
+
+  .fide-players-table .fide-players__photo {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .fide-players-table .player-intro__name {
+    font-size: 14px;
+  }
+}
+
+/* The smallest phones keep the name's room over the photo. */
+@media (max-width: 479.98px) {
+  .fide-players-table .player-intro__photo {
+    display: none !important;
+  }
+}

@@ -156,3 +156,16 @@ input:not([type='hidden']) + .button.button-metal {
 input:not([type='hidden']) + .button.button-metal:hover {
   color: #fff !important;
 }
+
+/* Fields in thirds (a profile's national ratings): on a phone Lichess leaves no gap between
+ * them. */
+@media (max-width: 559.98px) {
+  .form-split {
+    column-gap: 8px;
+  }
+
+  .form-split > .form-third {
+    flex: 1 1 calc((100% - 16px) / 3) !important;
+    max-width: calc((100% - 16px) / 3);
+  }
+}

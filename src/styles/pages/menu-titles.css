@@ -47,6 +47,8 @@ main.page-menu:is(
     .puzzle-dashboard h1
   )::before {
   content: '' !important;
+  /* Lichess hides a title's glyph on phones. */
+  display: block !important;
   flex: none;
   width: 52px;
   /* A title with Lichess's glyph (`[data-icon]`) gets its Hugeicon's mask (theme/hugeicons). */
@@ -70,4 +72,22 @@ main.page-menu[data-lr-ext-menu~='about']
   > section.box:not(:first-child)
   h1.box__top::before {
   content: none !important;
+}
+
+/* A phone's title tile: smaller, as its title is. */
+@media (max-width: 640px) {
+  main.page-menu .page-menu__content :is(h1.box__top, .box__top > h1, .community__leaders > h2) {
+    gap: 12px !important;
+  }
+
+  main.page-menu
+    .page-menu__content
+    :is(h1.box__top, .box__top > h1, .community__leaders > h2)::before {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 11px !important;
+    background-size:
+      24px 24px,
+      auto !important;
+  }
 }

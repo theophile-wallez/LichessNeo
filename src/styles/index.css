@@ -4,6 +4,7 @@
 @import './playerbar.css';
 @import './game/index.css';
 @import './tv.css';
+@import './tv-games.css';
 @import './analysis/index.css';
 @import './chat/index.css';
 @import './explorer/index.css';
@@ -18,6 +19,7 @@
 @import './home/index.css';
 @import './coach/index.css';
 @import './teams.css';
+@import './team-show.css';
 @import './study/index.css';
 @import './friends.css';
 @import './friendbox.css';

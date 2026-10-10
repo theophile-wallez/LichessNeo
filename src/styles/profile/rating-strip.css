@@ -1,0 +1,107 @@
+/* ---- Rating strip --- */
+
+/* Below 1020px the perf list (a profile's, the stats page's menu) is one row of pills that
+ * scrolls sideways: each speed's glyph, name and rating, the open one ringed. Lichess wrapped
+ * its glyphs and ratings over two or three lines. */
+
+@media (max-width: 1019.98px) {
+  /* The strip over the page, whose own width it mustn't set: Lichess puts the menu in a
+     column beside the page from 800px, and sizes the column to its content. */
+  html:is([data-lr-ext-has~='perf-stat'], [data-lr-ext-has~='user-show']) main.page-menu {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas: 'menu' 'content' !important;
+  }
+
+  main.page-menu > .page-menu__menu {
+    min-width: 0;
+  }
+
+  main.page-menu .page-menu__menu .side.sub-ratings {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    gap: 8px;
+    box-sizing: border-box;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    overflow-x: auto;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  main.page-menu .page-menu__menu .side.sub-ratings::-webkit-scrollbar {
+    display: none;
+  }
+
+  .side.sub-ratings a {
+    display: flex !important;
+    flex: none !important;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    margin: 0 !important;
+    padding: 0 14px 0 10px !important;
+    border: none !important;
+    border-radius: 999px !important;
+    background: var(--lr-ext-bg-panel) !important;
+    box-shadow: inset 0 0 0 1px var(--lr-ext-card-border) !important;
+    color: var(--lr-ext-text) !important;
+    white-space: nowrap;
+    text-shadow: none !important;
+    scroll-snap-align: start;
+  }
+
+  .side.sub-ratings a.active {
+    background: var(--lr-ext-card-hover) !important;
+    box-shadow: inset 0 0 0 2px var(--lr-ext-accent) !important;
+  }
+
+  .side.sub-ratings a.empty {
+    opacity: 0.5 !important;
+  }
+
+  .side.sub-ratings a::before {
+    flex: none;
+    margin: 0 !important;
+    font-size: 18px !important;
+    opacity: 1 !important;
+  }
+
+  .side.sub-ratings a > span {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .side.sub-ratings h3 {
+    display: block !important;
+    margin: 0 !important;
+    color: var(--lr-ext-text-dim);
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+  }
+
+  .side.sub-ratings rating {
+    display: flex !important;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .side.sub-ratings rating strong {
+    color: #fff;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The pill keeps the rating: its games, its last change, its rank and Lichess's arrow go. */
+  .side.sub-ratings :is(rating > span, rating .rp, .rank, a > icon, hr) {
+    display: none !important;
+  }
+}

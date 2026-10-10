@@ -67,6 +67,17 @@ main.forum-topic .reactions-auth button.no {
   background: transparent;
 }
 
+/* On a phone the six ghosts wrapped to a second row, an empty band under each post. */
+@media (max-width: 559.98px) {
+  main.forum-topic .reactions {
+    gap: 4px;
+  }
+
+  main.forum-topic .reactions button {
+    padding: 0 7px !important;
+  }
+}
+
 main.forum-topic .reactions-toggle {
   width: 32px;
   padding: 0 !important;

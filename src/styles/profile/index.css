@@ -2,6 +2,8 @@
 @import './hero.css';
 @import './counters-and-actions.css';
 @import './rating-cards.css';
+@import './rating-strip.css';
+@import './perf-stat.css';
 @import './chart-and-about.css';
 @import './tabs-and-activity.css';
 @import './games.css';

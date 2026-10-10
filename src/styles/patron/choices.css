@@ -129,6 +129,20 @@ main.plan .plan_checkout .amount_fixed label {
   cursor: default;
 }
 
+/* Four amounts across a phone: "5,00 €" broke over two lines, and the check over "Monthly". */
+@media (max-width: 559.98px) {
+  main.plan .plan_checkout group.amount label {
+    padding-inline: 2px !important;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  main.plan .plan_checkout group.freq label {
+    padding-inline: 4px !important;
+    white-space: nowrap;
+  }
+}
+
 main.plan .plan_checkout .gift {
   margin: 0 0 12px !important;
 }

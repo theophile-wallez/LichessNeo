@@ -169,16 +169,30 @@
 
 /* Phones: drop the player count so the names keep their room. */
 @media (max-width: 559.98px) {
+  /* Lichess gives the table a minimum width, for its sideways scroll. */
+  .fide-federations .slist {
+    width: 100%;
+    min-width: 0 !important;
+    table-layout: fixed;
+  }
+
+  /* Each rating headed by its glyph alone. */
+  .fide-federations .slist thead th:not(:first-child) {
+    width: 48px;
+    font-size: 0 !important;
+    text-align: center !important;
+  }
+
+  .fide-federations .slist thead th:not(:first-child)::before {
+    margin: 0 !important;
+  }
+
   .fide-federations .slist :is(th, td):nth-child(2) {
     display: none;
   }
 
   .fide-federations .slist :is(th, td):not(:first-child) {
     padding-inline: 4px !important;
-  }
-
-  .fide-federations .slist thead th {
-    font-size: 12px !important;
   }
 
   .fide-federations .slist tbody tr.paginated > td {

@@ -38,7 +38,7 @@ html[dir='rtl'] main.team-list .box__top .search input {
 }
 
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css); signed in, it
- * has the user's teams, those they lead, the requests and a new team. */
+ * has the user's teams and their news, those they lead, the requests and a new team. */
 .subnav[data-lr-ext-nav~='teams'] a[href$='/team/all'],
 main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/all'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
@@ -51,6 +51,13 @@ main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/me'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
   --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user--a2edfd.svg');
+}
+
+.subnav[data-lr-ext-nav~='teams'] a[href$='/team/updates'],
+main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/updates'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
+  --lr-ext-nav-color: var(--lr-ext-green);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--73fb95.svg');
 }
 
 .subnav[data-lr-ext-nav~='teams'] a[href$='/team/leader'],

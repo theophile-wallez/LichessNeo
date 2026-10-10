@@ -1,0 +1,146 @@
+/* A team's page (/team/<id>): its tournaments as cards, as on the Swiss home (swiss/lists.css).
+ * Lichess's table ringed the upcoming ones in orange and, below 800px, lost the icons. */
+
+main.team-show .team-show__tour .slist {
+  display: block;
+  border: none !important;
+  background: none !important;
+}
+
+main.team-show .team-show__tour tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Icon, name and time control, rounds and state, players. The link's ::after covers the card. */
+main.team-show .team-show__tour tbody tr {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  column-gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--lr-ext-card-border) !important;
+  border-radius: 10px;
+  background: var(--lr-ext-bg-panel) !important;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s !important;
+}
+
+main.team-show .team-show__tour tbody tr:hover {
+  border-color: var(--lr-ext-card-border-hover) !important;
+  background: var(--lr-ext-card-hover) !important;
+}
+
+main.team-show .team-show__tour td {
+  min-width: 0;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+main.team-show .team-show__tour td.icon {
+  display: block !important;
+}
+
+main.team-show .team-show__tour td.icon icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--lr-ext-bg-raised);
+  font-size: 24px !important;
+}
+
+main.team-show .team-show__tour td.header a {
+  display: flex !important;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 !important;
+}
+
+main.team-show .team-show__tour td.header a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+main.team-show .team-show__tour .name {
+  overflow: hidden;
+  color: #fff;
+  font-size: 15px !important;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.team-show .team-show__tour .setup {
+  overflow: hidden;
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.team-show .team-show__tour td.infos {
+  display: block !important;
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: end;
+}
+
+main.team-show .team-show__tour td.text {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px !important;
+  border-radius: 999px;
+  background: var(--lr-ext-bg-raised) !important;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+main.team-show .team-show__tour td.text::before {
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+}
+
+/* A phone's card: icon, name and players on top, the rounds and state beneath. */
+@media (max-width: 559.98px) {
+  main.team-show .team-show__tour tbody tr {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'icon header players'
+      'icon infos infos';
+    column-gap: 12px;
+    row-gap: 6px;
+    padding: 10px 12px;
+  }
+
+  main.team-show .team-show__tour td.icon {
+    grid-area: icon;
+    align-self: start;
+  }
+
+  main.team-show .team-show__tour td.header {
+    grid-area: header;
+  }
+
+  main.team-show .team-show__tour td.infos {
+    grid-area: infos;
+    text-align: start;
+  }
+
+  main.team-show .team-show__tour td.text {
+    grid-area: players;
+    align-self: start;
+  }
+}

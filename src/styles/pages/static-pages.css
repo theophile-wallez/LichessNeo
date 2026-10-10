@@ -196,65 +196,8 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
   font-weight: 600 !important;
 }
 
-/* Streamers' side menu: an icon tile per link (tiles in headings-menus.css). The streamer
- * kit's link goes to the about page. */
-.subnav[data-lr-ext-nav~='streamers'] a[href$='/streamer'],
-main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/streamer'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02--caa9fa.svg');
-}
-
-.subnav[data-lr-ext-nav~='streamers'] a[href$='/streamer/edit'],
-main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/streamer/edit'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01--caa9fa.svg');
-}
-
-.subnav[data-lr-ext-nav~='streamers'] a[href*='/blog/'],
-main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active*='/blog/'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group--ffc689.svg');
-}
-
-.subnav[data-lr-ext-nav~='streamers'] a[href$='/about'],
-main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/about'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package--a2edfd.svg');
-}
-
-/* Streamers: Lichess sizes the name from the window's width, so on a narrow desktop it ran
- * out of the card. A smaller name there, and a grey hover. */
-.streamer-list .streamer .overview {
-  min-width: 0;
-}
-
-.streamer-list .streamer h1 {
-  overflow-wrap: anywhere;
-}
-
-.streamer-list .streamer:hover {
-  background: #ffffff0a !important;
-}
-
-@media (min-width: 1020px) and (max-width: 1259.98px) {
-  .streamer-list .streamer h1 {
-    font-size: 26px !important;
-  }
-}
-
-/* The LIVE ribbon hangs over the text's top-right corner: the name stops short of it.
- * Its folds take the accent's shade, not Lichess's blue. */
-@media (min-width: 1020px) {
-  .streamer-list .streamer:has(> .live-ribbon) .streamer-title h1 {
-    margin-right: 70px !important;
-  }
-}
-
-.streamer-list .live-ribbon::before,
-.streamer-list .live-ribbon::after {
-  border-color: transparent transparent var(--lr-ext-accent-shadow) var(--lr-ext-accent-shadow) !important;
+/* Contact: the open question is the URL's anchor (#help-root first), shown alone where the
+ * first was. The browser scrolled to it, the title out of view: it stays where it is. */
+main.page-menu .nav-tree .node {
+  scroll-margin-top: 100dvh;
 }

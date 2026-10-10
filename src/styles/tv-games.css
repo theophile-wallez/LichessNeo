@@ -1,0 +1,44 @@
+/* Current games (/games): each mini-game a card, the cards spaced out. Lichess packs the
+ * boards edge to edge. */
+
+main.tv-games .now-playing {
+  gap: 12px;
+}
+
+main.tv-games .now-playing .mini-game {
+  padding: 8px !important;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 12px;
+  background: var(--lr-ext-bg-panel);
+  transition:
+    background-color 0.15s,
+    border-color 0.15s !important;
+}
+
+main.tv-games .now-playing .mini-game:hover {
+  border-color: var(--lr-ext-card-border-hover);
+  background: var(--lr-ext-card-hover);
+}
+
+main.tv-games .now-playing .mini-game__player {
+  padding: 4px 2px !important;
+}
+
+/* Below 1020px the list runs to the screen's edges. */
+@media (max-width: 1019.98px) {
+  main.tv-games .now-playing {
+    padding: 12px !important;
+  }
+}
+
+/* Two by two on a phone, as Lichess has them: its column minimum leaves no room for a gap. */
+@media (max-width: 559.98px) {
+  main.tv-games .now-playing {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px;
+  }
+
+  main.tv-games .now-playing .mini-game {
+    padding: 6px !important;
+  }
+}

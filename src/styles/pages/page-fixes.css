@@ -100,3 +100,103 @@
   align-items: center;
   gap: 6px;
 }
+
+/* Below 1020px Lichess runs the tools to the screen's edge. */
+@media (max-width: 1019.98px) {
+  .board-editor__tools {
+    box-sizing: border-box;
+    padding-inline: 12px;
+  }
+}
+
+/* ---- Openings --- */
+
+/* A phone's openings two by two: one board per row filled the screen with each. */
+@media (max-width: 559.98px) {
+  .opening__nexts {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .opening__next__title {
+    gap: 6px;
+  }
+
+  .opening__next__name {
+    min-width: 0;
+    font-size: 14px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .opening__next__san {
+    flex: none;
+    font-size: 16px !important;
+  }
+}
+
+/* ---- Game search --- */
+
+/* On a phone each label sits over its fields, which take the whole row: beside them, the
+ * fields had a third of it. */
+@media (max-width: 559.98px) {
+  main.search .search__form :is(table, tbody) {
+    display: block;
+    width: 100%;
+  }
+
+  main.search .search__form tr {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  main.search .search__form tr > :is(th, td) {
+    display: block;
+    width: auto !important;
+    padding: 0 !important;
+    text-align: start !important;
+  }
+
+  main.search .search__form td.two-columns {
+    display: flex;
+    gap: 8px;
+  }
+
+  main.search .search__form td.two-columns > * {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* ---- Account sessions --- */
+
+/* Lichess hides each session's device icon on a phone: smaller, it fits beside the details. */
+@media (max-width: 799.98px) {
+  main.account .slist {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  main.account .slist td:last-child {
+    width: 60px;
+    padding-inline: 4px 12px !important;
+  }
+
+  main.account .slist td.info {
+    overflow-wrap: anywhere;
+  }
+
+  main.account .slist td.icon {
+    display: table-cell !important;
+    width: 36px;
+    padding-inline: 12px 4px !important;
+    vertical-align: top;
+  }
+
+  main.account .slist td.icon > span {
+    font-size: 28px !important;
+  }
+}

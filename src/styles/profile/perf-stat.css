@@ -1,0 +1,45 @@
+/* ---- Rating stats on a phone --- */
+
+/* The stats page (/@/<user>/perf/<speed>) below 560px: the player's name over the page's,
+ * beside the tile, and headings that wrap at a phone's size. Lichess kept them on one line
+ * at its desktop size, past the screen's edge. */
+@media (max-width: 559.98px) {
+  main.page-menu > .perf-stat > .box__top h1[data-lr-ext-icon] {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 2px;
+    font-size: 22px !important;
+  }
+
+  main.page-menu > .perf-stat > .box__top h1[data-lr-ext-icon]::before {
+    grid-row: span 2;
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    font-size: 24px;
+  }
+
+  main.page-menu > .perf-stat > .box__top h1 > a {
+    align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  main.page-menu > .perf-stat > .box__top h1 > span {
+    align-self: start;
+    color: var(--lr-ext-text-dim);
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  main.page-menu > .perf-stat h2 {
+    font-size: 19px !important;
+    white-space: normal !important;
+  }
+
+  main.page-menu > .perf-stat h2 > span {
+    white-space: normal !important;
+  }
+}

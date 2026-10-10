@@ -181,6 +181,32 @@ main.plan .banner > icon::before {
   }
 }
 
+/* Lichess drops the wings below 800px: tablets keep them, smaller. Phones need the room. */
+@media (max-width: 799.98px) {
+  main.plan .banner > icon {
+    display: block !important;
+    font-size: 64px !important;
+  }
+}
+
+@media (max-width: 559.98px) {
+  main.plan .banner {
+    padding: 22px 16px !important;
+  }
+
+  main.plan .banner > icon {
+    display: none !important;
+  }
+
+  main.plan .banner h1.box__top {
+    font-size: 26px !important;
+  }
+
+  main.plan .banner p {
+    font-size: 15px;
+  }
+}
+
 /* ---- Pitch and form --- */
 
 main.plan .wrapper {

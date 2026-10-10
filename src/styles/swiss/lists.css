@@ -283,3 +283,42 @@ main.swiss-home .swisses .players::before {
   font-size: 12px;
   vertical-align: 0 !important;
 }
+
+/* A phone's card: icon, name and start on top, the rounds and time control beneath. Lichess
+ * hides the icon there. */
+@media (max-width: 640px) {
+  main.swiss-home .swisses tbody tr {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'icon header end'
+      'icon infos infos';
+    column-gap: 12px;
+    row-gap: 10px;
+    padding: 12px 14px;
+  }
+
+  main.swiss-home .swisses td.icon {
+    display: block !important;
+    grid-area: icon;
+    align-self: start;
+  }
+
+  main.swiss-home .swisses td.icon icon {
+    width: 40px;
+    height: 40px;
+    font-size: 24px !important;
+  }
+
+  main.swiss-home .swisses td.header {
+    grid-area: header;
+  }
+
+  main.swiss-home .swisses td.infos {
+    grid-area: infos;
+  }
+
+  main.swiss-home .swisses td:last-child {
+    grid-area: end;
+    align-self: start;
+  }
+}

@@ -7,6 +7,12 @@
 
 /* Each with its page's tile, the one its title shows. */
 
+/* Signed in, the tournaments the user created come first. */
+.tour__links a[href$='/tournaments/created'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-star-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-green);
+}
+
 .tour__links a[href$='/tournament/calendar'] {
   --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
   --lr-ext-nav-color: var(--lr-ext-cyan);
