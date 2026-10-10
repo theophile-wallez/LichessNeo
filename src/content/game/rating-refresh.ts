@@ -16,7 +16,8 @@ let refreshedFor: string | null = null;
 /** Refreshes the kept ratings once per finished game the player played. */
 export async function refreshAfterGame(): Promise<void> {
   const game = finishedGame();
-  const user = document.body.dataset.user;
+  // The sync loop starts at document_start, before <body> is parsed.
+  const user = document.body?.dataset.user;
   if (!game || !user || game.id === refreshedFor) return;
   if (!queryOne(document, PLAYER_FOLLOW_UP, HTMLElement)) return;
   refreshedFor = game.id;

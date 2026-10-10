@@ -59,4 +59,16 @@ describe('after a game', () => {
     expect(fetches).toEqual([]);
     expect(keptAt()).not.toBe(0);
   });
+
+  it('waits for <body>, which the sync loop starts before', async () => {
+    const body = document.body;
+    body.remove();
+    game = { id: 'ijkl9012', clock: { initial: 60, increment: 0 } };
+    try {
+      await expect(refreshAfterGame()).resolves.toBeUndefined();
+    } finally {
+      document.documentElement.append(body);
+    }
+    expect(fetches).toEqual([]);
+  });
 });
