@@ -1,0 +1,22 @@
+/* ---- The DGT board's pages --- */
+
+/* An account page of their own (main.account.dgt), with a menu of their own: its links' tiles,
+ * as on every side menu (headings-menus.css), the open one's also on the page's title. The
+ * board's own is the account menu's DGT link's. */
+.subnav[data-lr-ext-nav~='dgt'] a[href$='/dgt'],
+main.page-menu[data-lr-ext-menu~='dgt'][data-lr-ext-nav-active$='/dgt'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+}
+
+.subnav[data-lr-ext-nav~='dgt'] a[href$='/dgt/play'],
+main.page-menu[data-lr-ext-menu~='dgt'][data-lr-ext-nav-active$='/dgt/play'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/play-circle.svg');
+  --lr-ext-nav-color: var(--lr-ext-green);
+}
+
+.subnav[data-lr-ext-nav~='dgt'] a[href$='/dgt/config'],
+main.page-menu[data-lr-ext-menu~='dgt'][data-lr-ext-nav-active$='/dgt/config'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+}

@@ -8,7 +8,8 @@ const BORDER_BOX: ResizeObserverOptions = { box: 'border-box' };
 // One tab bar. Its active tab's highlight is the bar's ::before, placed in
 // `--lr-ext-tab-{x,y,w,h}`; the bar is only marked once it's placed, so until
 // then (and with no active tab) the tab keeps its own highlight. It's placed
-// again when the bar or a child resizes, scrolls, or changes a tab.
+// again when the bar or a child resizes, scrolls, or changes a tab, a radio's
+// check included (a property, which no observer sees).
 
 export class TabBar {
   readonly element: HTMLElement;
@@ -31,6 +32,7 @@ export class TabBar {
     this.#sizes = new ResizeObserver(this.queue);
     this.#sizes.observe(element, BORDER_BOX);
     element.addEventListener('scroll', this.queue, { passive: true });
+    element.addEventListener('change', this.queue);
     this.#changes = new MutationObserver(this.queue);
     this.#changes.observe(element, {
       subtree: true,
@@ -46,6 +48,7 @@ export class TabBar {
     this.#sizes.disconnect();
     this.#changes.disconnect();
     this.element.removeEventListener('scroll', this.queue);
+    this.element.removeEventListener('change', this.queue);
     this.#onDetach();
     return true;
   }

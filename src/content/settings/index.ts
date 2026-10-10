@@ -51,7 +51,8 @@ function showOpen(main: HTMLElement, menu: HTMLElement, open: boolean): void {
 }
 
 export function syncSettings(): void {
-  const main = queryOne(document, 'main.account', HTMLElement);
+  // Not on the DGT board's pages, which Lichess also draws as account pages.
+  const main = queryOne(document, 'main.account:not(.dgt)', HTMLElement);
   const menu = main && queryOne(main, '.subnav', HTMLElement);
   if (!main || !menu) return;
   // While the page parses, the link waits for Display, which it goes over.

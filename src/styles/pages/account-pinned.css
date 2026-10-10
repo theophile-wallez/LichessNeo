@@ -1,0 +1,69 @@
+/* ---- Account pages: the menu and the titles stay put --- */
+
+/* The settings scroll, as every page with a side menu does (AGENTS.md, "Only the content
+ * scrolls"): the menu stays, scrolling on its own when taller than the window, from the
+ * window's edge ("The top room"), and each page's title is pinned at the top of its card.
+ * Desktop only: below 1020px Lichess's top bar holds the top edge. */
+@media (min-width: 1020px) {
+  /* As tall as the settings: stretched to the window, it held the menu, which a sticky box
+   * can't leave. */
+  main.account {
+    align-self: start;
+  }
+
+  /* Lichess sizes the menu to its longest link: the DGT board's, short, as wide as the
+   * settings' (about this in French, its longest). */
+  main.account > .subnav {
+    min-width: 296px;
+    position: sticky;
+    top: calc(-1 * var(--lr-ext-page-top));
+    align-self: start;
+    box-sizing: border-box;
+    max-height: var(--lr-ext-main-h, 100dvh);
+    margin-top: calc(-1 * var(--lr-ext-page-top));
+    padding-top: calc(2 * var(--lr-ext-page-top));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  /* Lichess's box clips, which traps a sticky title. The DGT board's pages are the box
+   * themselves; the settings' hold one. */
+  main.account > .page-menu__content.box,
+  main.account > .page-menu__content > .box {
+    overflow: visible !important;
+  }
+
+  /* Stuck at the window's edge, the room above it its own padding: the card's look runs up
+   * to the edge, and the title keeps its place when it isn't stuck. */
+  main.account > .page-menu__content.box > h1.box__top,
+  main.account > .page-menu__content > .box > h1.box__top {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 4;
+    top: calc(-1 * var(--lr-ext-page-top));
+    margin-top: calc(-1 * var(--lr-ext-page-top)) !important;
+    padding-top: var(--lr-ext-page-top) !important;
+    background: var(--lr-ext-bg-panel);
+  }
+
+  /* A fade under the stuck title, over what scrolls beneath it. */
+  main.account > .page-menu__content.box > h1.box__top::after,
+  main.account > .page-menu__content > .box > h1.box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--lr-ext-bg-panel), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s !important;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.account > .page-menu__content.box > h1.box__top::after,
+    main.account > .page-menu__content > .box > h1.box__top::after {
+      opacity: 1;
+    }
+  }
+}

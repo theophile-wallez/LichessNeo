@@ -5,6 +5,7 @@
   gap: 4px;
   padding: 4px;
   border-radius: 10px !important;
+  border: none;
   background: var(--lr-ext-setup-track);
   overflow: visible !important;
 }
@@ -238,30 +239,57 @@ dialog .game-setup .footer .lobby__start__button.button::before {
 
 /* ---- Radio groups --- */
 
-/* Lichess's metal segmented controls (setup, coordinate trainer, preferences), flat. */
+/* Lichess's metal segmented controls (coordinate trainer, preferences) as the lobby's tabs
+ * (lobby.css): a track, the picked option raised on it. The game setup's are its own (above). */
 group.radio {
-  border-radius: 8px !important;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 11px !important;
+  background: var(--lr-ext-neutral-1);
   box-shadow: none !important;
 }
 
 group.radio label,
 group.radio .label {
-  border-color: var(--lr-ext-bg-panel) !important;
-  background: var(--lr-ext-bg-raised) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: transparent !important;
   box-shadow: none !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-weight: 700;
   text-shadow: none !important;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
 }
 
 group.radio label:not(.disabled):hover {
-  background: var(--lr-ext-bg-raised-hover) !important;
+  background: var(--lr-ext-lift-4) !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
+/* Also on the account pages, where Lichess's own grey for it (`.account group.radio`) wins
+ * without `main`. */
 group.radio input:checked + label,
-group.radio input:checked + label:not(.disabled):hover {
-  background: var(--lr-ext-accent) !important;
+group.radio input:checked + label:not(.disabled):hover,
+main.account group.radio input:checked + label {
+  background: var(--lr-ext-bg-raised) !important;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-50) !important;
+  color: var(--lr-ext-text-strong) !important;
+}
+
+/* Once content/ui/tabs.ts slides a highlight under the picked option, the option's own fill
+ * goes (theme/tooltips-and-tabs.css). */
+group.radio {
+  --lr-ext-tab-bg: var(--lr-ext-bg-raised);
+  --lr-ext-tab-radius: 8px;
+}
+
+group.radio[data-lr-ext-tabs] input:checked + label,
+main.account group.radio[data-lr-ext-tabs] input:checked + label {
+  background: transparent !important;
   box-shadow: none !important;
-  color: var(--lr-ext-white) !important;
-  font-weight: 700;
 }
 
 /* Range sliders (time controls). */

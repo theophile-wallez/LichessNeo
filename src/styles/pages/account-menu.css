@@ -1,0 +1,106 @@
+/* ---- The account menu's links --- */
+
+/* Each link's Hugeicon and color, drawn by headings-menus.css; the variables also go on the
+ * open page, for its title's tile. */
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/profile'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/profile'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/display'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/display'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/chess-clock'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/chess-clock'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/game-behavior'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/game-behavior'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/privacy'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/privacy'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/notification'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/notification'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-03.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/kid'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/kid'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/baby-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-pink);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/username'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/username'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-account.svg');
+  --lr-ext-nav-color: var(--lr-ext-red);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/coach/edit'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/coach/edit'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/teacher.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/passwd'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/passwd'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/key-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/email'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/email'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/twofactor'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/twofactor'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/oauth/token'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/oauth/token'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ticket-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/security'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/security'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/preferences/network'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/preferences/network'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wifi-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/dgt'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/dgt'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+}
+
+.subnav[data-lr-ext-nav~='account'] a[href$='/account/close'],
+main.page-menu[data-lr-ext-menu~='account'][data-lr-ext-nav-active$='/account/close'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/logout-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-red);
+}

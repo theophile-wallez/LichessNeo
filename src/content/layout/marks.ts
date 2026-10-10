@@ -22,6 +22,7 @@ const NAV_LINKS: Readonly<Record<string, readonly string[]>> = {
   broadcast: ['/broadcast/calendar'],
   puzzles: ['/training/themes'],
   account: ['/account/kid'],
+  dgt: ['/dgt/config'],
   about: ['/thanks'],
   variants: ['/variant/chess960'],
   streamers: ['/streamer/edit'],

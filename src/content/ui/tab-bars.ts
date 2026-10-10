@@ -34,6 +34,14 @@ export const TAB_BARS: readonly TabBarKind[] = [
   kind('.auth .auth-tabs', 'a', '.active', 'line'),
   kind('.relay-tour__tabs', 'button', '.active', 'pill'),
   kind('#dasher_app .lr-ext-src-tabs', 'button', '.active', 'pill'),
+  // Lichess's radio groups (preferences, coordinate trainer): each option a div with its radio.
+  // The game setup's and the patron page's keep a look of their own.
+  kind(
+    'group.radio:not(.game-setup group.radio, main.plan group.radio)',
+    'div',
+    ':has(> input:checked)',
+    'pill',
+  ),
 ];
 
 /** Where a bar's highlight goes: x, y, width, height, in px. */

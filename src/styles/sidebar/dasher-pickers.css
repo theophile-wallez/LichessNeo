@@ -31,9 +31,13 @@
 
 /* With the extension's on, Lichess's current board, set or sounds aren't what the page shows:
  * no ring. */
-#top #dasher_app .sub[data-lr-ext-src-on='extension'] :is(.list, .selector) > button.active,
-#top #dasher_app .sub[data-lr-ext-src-on='extension'] .list > button.active span {
+#top #dasher_app .sub[data-lr-ext-src-on='extension'] :is(.list, .selector) > button.active {
   background: none !important;
+  box-shadow: none;
+}
+
+/* The span is the board's picture: only its ring goes. */
+#top #dasher_app .sub[data-lr-ext-src-on='extension'] .list > button.active span {
   box-shadow: none;
 }
 
