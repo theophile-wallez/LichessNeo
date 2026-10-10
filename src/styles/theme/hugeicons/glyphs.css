@@ -143,6 +143,10 @@
   --lr-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-up-01.svg');
 }
 
+[data-icon='\e033']::before {
+  --lr-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/swords.svg');
+}
+
 [data-icon='\e034']::before {
   --lr-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-double.svg');
 }
