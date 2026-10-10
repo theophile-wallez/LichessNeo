@@ -1,0 +1,318 @@
+/* ---- The streamers' list --- */
+
+/* A row per streamer: the picture as a round avatar, ringed in red while live, the name and
+ * language, what's on, the headline, and the platforms on the right. Live first, then the
+ * others under titles of ours (content/pages/streamer-sections.ts). The row's overlay link
+ * still covers it whole. */
+
+.streamer-list .list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin: 0 !important;
+  padding: 0 50px 28px !important;
+}
+
+.streamer-list .list > .none {
+  display: none !important;
+}
+
+.lr-ext-streamers__section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 50px 12px !important;
+  padding: 0 !important;
+  border: none !important;
+  color: var(--lr-ext-text-strong) !important;
+  font: 800 15px var(--lr-ext-font) !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+/* Lichess draws a line after a box's titles. */
+.lr-ext-streamers__section::after {
+  content: none !important;
+}
+
+.lr-ext-streamers__section-count {
+  padding: 1px 8px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--lr-ext-red) 18%, transparent);
+  color: color-mix(in srgb, var(--lr-ext-red) 80%, var(--lr-ext-text-strong));
+  font-size: 12.5px;
+}
+
+/* The offline ones' title, after the live list. */
+.streamer-list .list.live ~ .lr-ext-streamers__section {
+  color: var(--lr-ext-text-dim) !important;
+}
+
+/* ---- Pinned --- */
+
+/* The menu stays, and the title is pinned at the window's edge, its own top padding the room
+ * above its text. Desktop only: below 1020px Lichess's top bar holds the top edge. */
+@media (min-width: 1020px) {
+  /* As tall as the list: stretched to the window, it held the menu, which a sticky box
+   * can't leave. */
+  main.page-menu[data-lr-ext-menu~='streamers'] {
+    align-self: start;
+  }
+
+  main.page-menu[data-lr-ext-menu~='streamers'] > .subnav {
+    position: sticky;
+    top: var(--lr-ext-page-top);
+    align-self: start;
+  }
+
+  /* Lichess's box clips, which traps a sticky title. */
+  .streamer-list.box {
+    overflow: visible !important;
+  }
+
+  .streamer-list > .box__top {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 4;
+    top: calc(-1 * var(--lr-ext-page-top));
+    border-radius: 6px 6px 0 0;
+    background: var(--lr-ext-bg-panel);
+  }
+
+  .streamer-list > .box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--lr-ext-bg-panel), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s !important;
+  }
+
+  @container scroll-state(stuck: top) {
+    .streamer-list > .box__top::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* ---- A streamer --- */
+
+.streamer-list .streamer {
+  position: relative;
+  display: grid !important;
+  grid-template:
+    'picture title services' auto
+    'picture on services' auto
+    'picture headline services' auto
+    / 72px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 3px 16px;
+  margin: 0 !important;
+  padding: 12px 16px !important;
+  border: none !important;
+  border-radius: 14px;
+  background: var(--lr-ext-card-bg) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  text-shadow: none !important;
+  transition:
+    background-color 0.15s,
+    box-shadow 0.2s !important;
+}
+
+.streamer-list .streamer:hover {
+  background: var(--lr-ext-card-hover) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border-hover);
+}
+
+/* The offline ones are quieter: no fill until hovered. */
+.streamer-list .list:not(.live) .streamer:not(:hover) {
+  background: transparent !important;
+}
+
+/* Its parts are the row's grid items. */
+.streamer-list .streamer .overview {
+  display: contents !important;
+}
+
+.streamer-list .streamer .picture {
+  display: block !important;
+  grid-area: picture;
+  width: 72px !important;
+  height: 72px !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+}
+
+.streamer-list .list.live .streamer .picture {
+  box-shadow:
+    0 0 0 2px var(--lr-ext-bg-panel),
+    0 0 0 4px var(--lr-ext-red);
+}
+
+/* Live shows in the ring and the section's title: no ribbon. */
+.streamer-list .live-ribbon {
+  display: none !important;
+}
+
+.streamer-list .streamer .streamer-title {
+  display: flex !important;
+  grid-area: title;
+  flex-wrap: nowrap !important;
+  /* The language right after the name, which Lichess pushed to the far end. */
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.streamer-list .streamer h1 {
+  flex: 0 1 auto !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  color: var(--lr-ext-text-strong) !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.streamer-list .streamer h1::before {
+  display: none !important;
+}
+
+.streamer-list .streamer .streamer-lang {
+  flex: none;
+  /* Lichess's room for its ribbon. */
+  margin: 0 !important;
+  padding: 2px 9px;
+  border-radius: 99px;
+  background: var(--lr-ext-lift-8);
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 11.5px !important;
+  font-weight: 700;
+  opacity: 1 !important;
+}
+
+.streamer-list .streamer .ats {
+  grid-area: on;
+  min-width: 0;
+  margin: 0 !important;
+}
+
+.streamer-list .streamer .ats .at {
+  margin: 0 !important;
+  overflow: hidden;
+  color: var(--lr-ext-text) !important;
+  font-size: 13px !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.streamer-list .streamer .ats .at strong {
+  color: var(--lr-ext-text-strong);
+  font-weight: 650;
+}
+
+.streamer-list .streamer .headline {
+  grid-area: headline;
+  margin: 0 !important;
+  overflow: hidden;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px !important;
+  font-style: italic;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The platforms as chips in their colors, in place of their bare addresses. */
+.streamer-list .streamer .services {
+  display: flex !important;
+  grid-area: services;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 0 !important;
+}
+
+.streamer-list .streamer .service {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0 !important;
+}
+
+.streamer-list .streamer .service::before {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--lr-ext-service) 16%, transparent);
+  color: color-mix(in srgb, var(--lr-ext-service) 80%, var(--lr-ext-text-strong));
+  font: 800 11.5px var(--lr-ext-font);
+}
+
+/* The platforms' own names and colors. */
+.streamer-list .streamer .service.twitch {
+  --lr-ext-service: var(--lr-ext-purple);
+}
+
+.streamer-list .streamer .service.twitch::before {
+  content: 'Twitch';
+}
+
+.streamer-list .streamer .service.youtube {
+  --lr-ext-service: var(--lr-ext-red);
+}
+
+.streamer-list .streamer .service.youtube::before {
+  content: 'YouTube';
+}
+
+/* The profile link repeats the name. */
+.streamer-list .streamer .streamer-footer {
+  display: none !important;
+}
+
+/* ---- Phones --- */
+
+@media (max-width: 640px) {
+  .streamer-list .list {
+    padding: 0 12px 20px !important;
+  }
+
+  .lr-ext-streamers__section {
+    margin-inline: 12px !important;
+  }
+
+  .streamer-list .streamer {
+    grid-template:
+      'picture title' auto
+      'picture on' auto
+      'picture services' auto
+      / 56px minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 10px 12px !important;
+  }
+
+  .streamer-list .streamer .picture {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .streamer-list .streamer .headline {
+    display: none !important;
+  }
+
+  .streamer-list .streamer .services {
+    justify-content: flex-start;
+    margin-top: 4px !important;
+  }
+}

@@ -253,5 +253,11 @@
   },
   "speedCorrespondence": {
     "message": "Correspondance"
+  },
+  "streamersLive": {
+    "message": "En direct"
+  },
+  "streamersOffline": {
+    "message": "Hors ligne"
   }
 }

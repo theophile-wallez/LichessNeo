@@ -338,5 +338,13 @@
   "speedCorrespondence": {
     "message": "Correspondence",
     "description": "A speed."
+  },
+  "streamersLive": {
+    "message": "Live now",
+    "description": "The streamers' page: the title of the streamers live."
+  },
+  "streamersOffline": {
+    "message": "Offline",
+    "description": "The streamers' page: the title of the others."
   }
 }
