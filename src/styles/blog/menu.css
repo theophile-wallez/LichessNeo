@@ -1,0 +1,57 @@
+/* ---- Side menu --- */
+
+/* The side menu: an icon tile per link (tiles in pages/headings-menus.css). Signed in, it
+ * also has the friends' posts and the user's own blog (`/@/<user>/blog`), its drafts there. */
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/community'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/community'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
+}
+
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/monthly'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/monthly'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--a2edfd.svg');
+}
+
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/topic'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/topic'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01--a2edfd.svg');
+}
+
+.subnav[data-lr-ext-nav~='blog'] a[href$='/@/lichess/blog'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/@/lichess/blog'] {
+  --lr-ext-nav-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+  --lr-ext-nav-color: var(--lr-ext-grey-300);
+  --lr-ext-title-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+}
+
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/friends'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/friends'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+  --lr-ext-nav-color: var(--lr-ext-green);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple--73fb95.svg');
+}
+
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pen-tool-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+}
+
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/drafts'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/drafts'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit.svg');
+  --lr-ext-nav-color: var(--lr-ext-orange);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit--ffc689.svg');
+}
+
+.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/liked'],
+main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/liked'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+  --lr-ext-nav-color: var(--lr-ext-red);
+  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff7777.svg');
+}

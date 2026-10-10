@@ -97,8 +97,13 @@
 }
 
 .ublog-index .box__top h1 {
-  gap: 0 !important;
   color: #fff;
+}
+
+/* A user's blog: "Blog of" runs into the author's link. Other titles keep their tile's gap
+ * (pages/menu-titles.css). */
+.ublog-index .box__top h1:has(> .user-link) {
+  gap: 0 !important;
 }
 
 .ublog-index .box__top h1 .user-link {
@@ -123,7 +128,7 @@
   color: var(--lr-ext-orange-dark) !important;
 }
 
-/* "Show best / all", "Sort likes / date": segmented toggles. */
+/* "Show best / all", "Sort likes / date": segmented controls, as the chat's tabs. */
 .ublog-index .filter-and-sort {
   gap: 16px !important;
   color: var(--lr-ext-text-dim);
@@ -131,42 +136,66 @@
   font-weight: 600;
 }
 
+.ublog-index .filter-and-sort > span:not(.btn-rack) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .ublog-index .btn-rack {
   gap: 2px;
   padding: 3px;
-  border-radius: 8px !important;
-  background: var(--lr-ext-bg-raised) !important;
-  box-shadow: none !important;
+  border-radius: 9px !important;
+  background: var(--lr-ext-bg-panel-dark) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border) !important;
 }
 
 .ublog-index .btn-rack__btn {
-  padding: 6px 12px !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px !important;
   border: none !important;
   border-radius: 6px !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text) !important;
-  font-size: 14px;
-  font-weight: 700;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px;
+  font-weight: 600;
   text-shadow: none !important;
+  transition: color 0.15s !important;
 }
 
 .ublog-index .btn-rack__btn:hover {
-  background: #ffffff12 !important;
-  color: #fff !important;
+  color: var(--lr-ext-text-strong) !important;
 }
 
 .ublog-index .btn-rack__btn.active {
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
+  background: var(--lr-ext-bg-raised) !important;
+  box-shadow: 0 1px 2px #0000008c !important;
   color: #fff !important;
 }
 
-/* The accent one slides (see "Sliding tabs" in theme/). */
+/* The sort's direction: a chevron instead of Lichess's triangle, turned for the oldest first. */
+.ublog-index .btn-rack__btn:is(.ascending, .descending)::after {
+  content: '' !important;
+  width: 12px;
+  height: 12px;
+  margin: 0 !important;
+  background: currentColor;
+  mask: var(--lr-ext-chevron) center / contain no-repeat;
+}
+
+.ublog-index .btn-rack__btn.ascending::after {
+  rotate: 180deg;
+}
+
+/* The raised pill slides (see "Sliding tabs" in theme/). */
 .ublog-index .btn-rack[data-lr-ext-tabs] {
   --lr-ext-tab-radius: 6px;
-  --lr-ext-tab-bg: var(--lr-ext-btn-primary);
-  --lr-ext-tab-shadow: var(--lr-ext-btn-primary-shadow);
+  --lr-ext-tab-bg: var(--lr-ext-bg-raised);
+  --lr-ext-tab-shadow: 0 1px 2px #0000008c;
 }
 
 .ublog-index .btn-rack[data-lr-ext-tabs] .btn-rack__btn.active {
@@ -174,7 +203,15 @@
   box-shadow: none !important;
 }
 
-/* By month: previous / next month as quiet icon buttons around the pickers. */
+/* By month: previous / next month as quiet icon buttons around the pickers, beside them:
+ * Lichess spreads them over the row. */
+.ublog-index .calendar-mselect {
+  flex: none !important;
+  justify-content: flex-start !important;
+  gap: 6px;
+  margin-inline-start: auto !important;
+}
+
 .ublog-index .calendar-mselect > a {
   width: 40px;
   height: 40px;
@@ -194,67 +231,13 @@
   font-size: 16px;
 }
 
-/* The side menu: an icon tile per link (tiles in pages/headings-menus.css). Signed in, it
- * also has the friends' posts and the user's own blog (`/@/<user>/blog`), its drafts there. */
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/community'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/community'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
-}
-
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/monthly'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/monthly'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03--a2edfd.svg');
-}
-
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/topic'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/topic'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01--a2edfd.svg');
-}
-
-.subnav[data-lr-ext-nav~='blog'] a[href$='/@/lichess/blog'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/@/lichess/blog'] {
-  --lr-ext-nav-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
-  --lr-ext-nav-color: var(--lr-ext-grey-300);
-  --lr-ext-title-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
-}
-
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/friends'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/friends'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
-  --lr-ext-nav-color: var(--lr-ext-green);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple--73fb95.svg');
-}
-
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pen-tool-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
-}
-
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/drafts'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/drafts'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit--ffc689.svg');
-}
-
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/liked'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/liked'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
-  --lr-ext-nav-color: var(--lr-ext-red);
-  --lr-ext-title-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite--ff7777.svg');
-}
-
 /* Only the posts scroll: the side menu and the title with its filters stay put.
  * Desktop only: below 1020px Lichess's fixed top bar would cover them. */
 @media (min-width: 1020px) {
+  /* Over the title, which reaches into the gap beside it and cut the open link's edge. */
   main.page-menu:has(> :is(.ublog-index, .ublog-post)) > .subnav {
     position: sticky;
+    z-index: 4;
     top: 16px;
     align-self: start;
   }
