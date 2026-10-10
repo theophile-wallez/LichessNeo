@@ -120,13 +120,6 @@ main.round .game__meta__infos::before {
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-/* Atomic, Antichess and Horde have color pictures (theme/): Lichess's white glyph here. */
-main.round
-  .game__meta__infos:is([data-icon='\e01e'], [data-icon='\e01c'], [data-icon='\e03d'])::before {
-  content: attr(data-icon) !important;
-  background: none !important;
-}
-
 main.round .game__meta__infos:hover::after,
 main.round .game__meta__infos:hover::before {
   transform: rotate(-6deg) scale(1.08);
