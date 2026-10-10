@@ -1,0 +1,77 @@
+/* ---- A move's right-click menu --- */
+
+/* Lichess's #analyse-cm, on the analysis board and in studies: frosted glass over the move
+ * list, the move as its header, then rows like our dropdowns'. */
+#analyse-cm {
+  box-sizing: border-box;
+  min-width: 220px;
+  padding: 4px;
+  border: 1px solid var(--lr-ext-menu-border);
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--lr-ext-menu-bg) 65%, transparent) !important;
+  box-shadow: var(--lr-ext-menu-shadow) !important;
+  color: var(--lr-ext-text-strong);
+  font-size: 13px;
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+  transform-origin: top left;
+}
+
+/* Lichess draws a new menu on each right click, so it pops in each time. */
+#analyse-cm.visible {
+  animation: lr-ext-cm-in 0.14s ease-out;
+}
+
+@keyframes lr-ext-cm-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+}
+
+#analyse-cm .title {
+  margin: 0 0 4px !important;
+  padding: 6px 10px 8px !important;
+  border-bottom: 1px solid var(--lr-ext-menu-border) !important;
+  background: none !important;
+  color: var(--lr-ext-text-strong);
+  font-size: 16px !important;
+  font-weight: 700;
+  text-align: start !important;
+  text-shadow: none !important;
+}
+
+#analyse-cm a {
+  gap: 10px;
+  padding: 7px 10px !important;
+  border-radius: 8px;
+  color: var(--lr-ext-text-strong) !important;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.12s;
+}
+
+#analyse-cm a::before {
+  width: auto !important;
+  color: var(--lr-ext-text-dim);
+  font-size: 16px;
+  transition: color 0.12s;
+}
+
+#analyse-cm a:hover {
+  background: var(--lr-ext-menu-hover) !important;
+}
+
+#analyse-cm a:hover::before {
+  color: var(--lr-ext-text-strong);
+}
+
+/* "Delete from here" (the bin) turns red under the pointer. */
+#analyse-cm a[data-icon='\e04f']:hover {
+  background: color-mix(in srgb, var(--lr-ext-bad) 15%, transparent) !important;
+}
+
+#analyse-cm a[data-icon='\e04f']:hover,
+#analyse-cm a[data-icon='\e04f']:hover::before {
+  color: var(--lr-ext-bad) !important;
+}
