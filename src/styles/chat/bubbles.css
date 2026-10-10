@@ -112,12 +112,83 @@
   mask: radial-gradient(ellipse 100% 100% at 100% 0, #0000 98%, #000);
 }
 
-/* Lichess's reply and report, shown on hover at the line's end. */
+/* Lichess's reply and report, shown on hover, beside the bubble rather than at the line's
+ * end: the line is a grid, the name over the bubble, the two buttons in the columns next to
+ * it, which take no room while hidden. */
+.mchat .mchat__messages > li:not(.system) {
+  display: grid;
+  grid-template-columns: fit-content(82%) auto auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.mchat .mchat__messages > li:not(.system) > :is(.user-link, .color) {
+  grid-area: 1 / 1 / 2 / -1;
+  justify-self: start;
+}
+
+.mchat .mchat__messages > li:not(.system) > t {
+  grid-area: 2 / 1;
+  justify-self: start;
+  max-width: none;
+}
+
+.mchat .mchat__messages > li:not(.system) > action.reply {
+  grid-area: 2 / 2;
+}
+
+.mchat .mchat__messages > li:not(.system) > action.flag {
+  grid-area: 2 / 3;
+}
+
+/* Yours on the right: the buttons on the bubble's left. */
+.mchat .mchat__messages > li[data-lr-ext-mine] {
+  grid-template-columns: minmax(0, 1fr) auto auto fit-content(82%);
+}
+
+.mchat .mchat__messages > li[data-lr-ext-mine] > t {
+  grid-area: 2 / 4;
+  justify-self: end;
+}
+
 .mchat .mchat__messages > li > action {
-  top: auto;
-  bottom: 4px;
+  position: static !important;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: 0 0 0 4px;
+  border-radius: 7px;
   color: var(--lr-ext-text-dim);
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
   text-shadow: none !important;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+.mchat .mchat__messages > li[data-lr-ext-mine] > action {
+  margin: 0 4px 0 0;
+}
+
+/* Lichess shows them as blocks on hover, never on your own lines: a grid instead, the glyph
+ * centered in its tile. */
+.mchat .mchat__messages > li:not(.me):hover > action {
+  display: grid !important;
+}
+
+.mchat .mchat__messages > li > action::before {
+  display: block;
+  line-height: 1 !important;
+}
+
+.mchat .mchat__messages > li > action:hover {
+  background: #ffffff14;
+  color: var(--lr-ext-text);
+}
+
+.mchat .mchat__messages > li > action.flag:hover {
+  color: var(--lr-ext-bad);
 }
 
 /* The chat's own notices (welcome, rules) read as small centered captions. */

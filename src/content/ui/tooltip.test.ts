@@ -152,6 +152,19 @@ describe('tooltips', () => {
     expect(shown()?.innerHTML).toBe('Analysis board<kbd>a</kbd>');
   });
 
+  it('shows a chat line’s reply and report in place of their title', () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main><ol class="mchat__messages"><li><action class="flag" title="Report"></action><t>Hi</t></li></ol></main>',
+    );
+    const report = document.querySelector('action.flag');
+    if (!report) throw new Error('no report');
+    hover(report);
+    expect(report.hasAttribute('title')).toBe(false);
+    vi.advanceTimersByTime(250);
+    expect(shown()?.textContent).toBe('Report');
+  });
+
   it('splits a shortcut off the label', () => {
     expect(splitShortcut('Flip board (f)')).toEqual({ label: 'Flip board', key: 'f' });
     expect(splitShortcut('(x)')).toEqual({ label: '(x)', key: null });

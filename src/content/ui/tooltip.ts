@@ -8,10 +8,12 @@ import { placeTooltip, splitShortcut } from './tooltip-layout.ts';
 // `data-lr-ext-tip`, so the native one never shows. Snabbdom only sets the title
 // again if it changes, and the next hover moves it again.
 
-// The board editor's analysis link is one of its tools (content/pages/editor-tools.ts).
+// The board editor's analysis link is one of its tools (content/pages/editor-tools.ts); a
+// chat line's reply and report are Lichess's own `action` tags.
 const TARGETS = [
   'main :is(button:is([title], [data-lr-ext-tip]), a.tv-channel[data-lr-ext-tip]):not(#lr-ext-review *)',
   'main .board-editor__tools .actions > a[data-lr-ext-tip]',
+  'main .mchat__messages > li > action:is([title], [data-lr-ext-tip])',
 ].join(', ');
 // Lichess's home start buttons carry an English title that only repeats their label:
 // adopted, so the browser's doesn't show either, but never shown.
