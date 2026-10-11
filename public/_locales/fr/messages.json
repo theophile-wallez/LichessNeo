@@ -493,5 +493,35 @@
   },
   "pdashAllClear": {
     "message": "Rien à rejouer : chaque erreur a été rattrapée."
+  },
+  "pdashStartHere": {
+    "message": "Commencez ici"
+  },
+  "pdashBestWeapon": {
+    "message": "Votre meilleure arme"
+  },
+  "pdashTrainNow": {
+    "message": "Vous y entraîner"
+  },
+  "pdashKeepSharp": {
+    "message": "Rester affûté"
+  },
+  "pdashThenThese": {
+    "message": "Ensuite"
+  },
+  "pdashAlsoStrong": {
+    "message": "Aussi solides"
+  },
+  "pdashFactPerformance": {
+    "message": "performance"
+  },
+  "pdashFactLevel": {
+    "message": "niveau des problèmes"
+  },
+  "pdashFactPlayed": {
+    "message": "joués"
+  },
+  "pdashReplayCount": {
+    "message": "En rejouer $1"
   }
 }

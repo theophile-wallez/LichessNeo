@@ -6,7 +6,9 @@
  * are asked for, and stay so once it's in (`data-lr-ext-pdash` on <html>). Its layout follows
  * its own width, which the sidebar and the menu cut into, not the window's. */
 
-html[data-lr-ext-pdash] .puzzle-dashboard > .puzzle-dashboard__global {
+html[data-lr-ext-pdash]
+  .puzzle-dashboard
+  > :is(.puzzle-dashboard__global, .puzzle-dashboard__theme) {
   display: none !important;
 }
 
@@ -85,12 +87,19 @@ html[data-lr-ext-pdash] .puzzle-dashboard .box__top h1 {
 /* Its mascot, large, then what it says over a pager: arrows either side of a dot per tip.
  * A tip turned slides out the way it goes, then the next slides in (puzzle-dashboard/coach.ts). */
 .lr-ext-pdash__coach {
-  /* How far the mascot's arms reach past its still, either side. */
-  --lr-ext-pdash-arms: 14px;
+  /* How far the mascot's arms reach past its still, either side: 14px past a 124px still. */
+  --lr-ext-pdash-arms: 21px;
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 14px 22px 14px calc(14px + var(--lr-ext-pdash-arms));
+}
+
+/* Large, rising from the card's floor: the bust's cut sits on its bottom edge. */
+.lr-ext-pdash__coach .lr-ext-pdash__mascot {
+  width: 186px;
+  align-self: flex-end;
+  margin-bottom: -14px;
 }
 
 .lr-ext-pdash__mascot {

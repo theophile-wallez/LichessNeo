@@ -1,3 +1,4 @@
+import type { CoachMood } from '#shared/coach.ts';
 import { queryAll, queryOne, setData } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
@@ -8,6 +9,28 @@ import { tipMarkup } from './summary.ts';
 // period's tips one at a time, in the face each calls for. A click on it, or
 // on the pager's arrows, turns to the next tip or back; the tip said slides
 // out the way it goes, the new one in from the other side.
+
+/**
+ * The player's mascot, live over its still in `holder`: it comes in neutral,
+ * as its still looks, then takes `mood()` once drawn, so the swap never shows.
+ */
+export function liveMascot(
+  holder: HTMLElement,
+  coachId: number,
+  mood: () => CoachMood,
+): MascotSpot {
+  const spot = new MascotSpot({
+    className: 'lr-ext-pdash__live',
+    framing: 'bust',
+    whenIdle: true,
+    onDrawn: drawn => {
+      setData(drawn, 'lrExtLive', '');
+      spot.sync(holder, mood(), { coach: coachId });
+    },
+  });
+  spot.sync(holder, 'neutral', { coach: coachId });
+  return spot;
+}
 
 type Turn = 'next' | 'back';
 
@@ -35,19 +58,7 @@ export function startCoach(section: HTMLElement, tips: readonly Tip[], coachId: 
   const first = tips[0];
   if (!mascot || !text || !first) return;
   let at = 0;
-  // It comes in looking as its still does, then takes the tip's face: a mood from the start
-  // would show as a jump from the still.
-  const spot = new MascotSpot({
-    className: 'lr-ext-pdash__live',
-    framing: 'bust',
-    whenIdle: true,
-    onDrawn: holder => {
-      setData(holder, 'lrExtLive', '');
-      const tip = tips[at];
-      if (tip) spot.sync(mascot, tip.mood, { coach: coachId });
-    },
-  });
-  spot.sync(mascot, 'neutral', { coach: coachId });
+  const spot = liveMascot(mascot, coachId, () => tips[at]?.mood ?? 'neutral');
   const turn = (to: Turn): void => {
     at = turned(at, to, tips.length);
     const tip = tips[at];

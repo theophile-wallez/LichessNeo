@@ -215,10 +215,19 @@
 
 /* ---- Narrower --- */
 
-/* The lists one under the other (the numbers have theirs, overview-numbers.css). */
+/* The lists one under the other (the numbers have theirs, overview-numbers.css), the mascot at
+   its still's size. */
 @container (max-width: 760px) {
   .lr-ext-pdash__lists {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lr-ext-pdash__coach {
+    --lr-ext-pdash-arms: 14px;
+  }
+
+  .lr-ext-pdash__coach .lr-ext-pdash__mascot {
+    width: 124px;
   }
 }
 
@@ -230,8 +239,9 @@
     padding: 12px 14px 12px calc(8px + var(--lr-ext-pdash-arms));
   }
 
-  .lr-ext-pdash__mascot {
+  .lr-ext-pdash__coach .lr-ext-pdash__mascot {
     width: 86px;
+    margin-bottom: -12px;
   }
 
   /* Its fade no wider than the gap to the mascot. */

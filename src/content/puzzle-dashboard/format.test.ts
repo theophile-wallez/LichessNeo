@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { days, sign, signed, trainHref } from './format.ts';
-import { pageDays } from './index.ts';
+import { pageOf } from './page.ts';
 
 afterEach(() => {
   document.documentElement.lang = '';
@@ -25,12 +25,13 @@ describe('a period', () => {
 });
 
 describe('the dashboard’s address', () => {
-  it('gives its period, 30 days without one, and nothing on another page', () => {
-    expect(pageDays('/training/dashboard/7/dashboard')).toBe(7);
-    expect(pageDays('/fr/training/dashboard/90/dashboard')).toBe(90);
-    expect(pageDays('/training/dashboard')).toBe(30);
-    expect(pageDays('/training/dashboard/30/improvementAreas')).toBeNull();
-    expect(pageDays('/training/themes')).toBeNull();
+  it('gives its period and page, 30 days without one, and nothing on another page', () => {
+    expect(pageOf('/training/dashboard/7/dashboard')).toEqual({ days: 7, view: 'dashboard' });
+    expect(pageOf('/fr/training/dashboard/90/strengths')).toEqual({ days: 90, view: 'strengths' });
+    expect(pageOf('/training/dashboard/30/improvementAreas')?.view).toBe('improvementAreas');
+    expect(pageOf('/training/dashboard')).toEqual({ days: 30, view: 'dashboard' });
+    expect(pageOf('/training/dashboard/30/history')).toBeNull();
+    expect(pageOf('/training/themes')).toBeNull();
   });
 
   it('leads a theme to its puzzles', () => {

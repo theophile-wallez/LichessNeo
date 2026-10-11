@@ -36,6 +36,8 @@ export interface ThemeResult {
   readonly performance: number;
   /** Performance minus level: above zero, better than expected. */
   readonly gap: number;
+  /** Puzzles failed, not solved since. */
+  readonly replays: number;
 }
 
 export interface Overview {
@@ -57,8 +59,17 @@ export interface Overview {
 const byGap = (first: ThemeResult, second: ThemeResult): number =>
   second.gap - first.gap || second.puzzles - first.puzzles;
 
-export function overview({ days, global, themes }: Dashboard): Overview {
-  const all = Object.entries(themes).map(([key, { theme, results }]) => ({
+type Results = z.infer<typeof ResultsSchema>;
+
+const toReplay = (results: Results): number =>
+  Math.max(0, results.nb - results.firstWins - results.replayWins);
+
+/** A theme's numbers, from its key and the API's entry for it. */
+export function themeResult(
+  key: string,
+  { theme, results }: Dashboard['themes'][string],
+): ThemeResult {
+  return {
     key,
     name: theme,
     puzzles: results.nb,
@@ -66,7 +77,12 @@ export function overview({ days, global, themes }: Dashboard): Overview {
     level: results.puzzleRatingAvg,
     performance: results.performance,
     gap: results.performance - results.puzzleRatingAvg,
-  }));
+    replays: toReplay(results),
+  };
+}
+
+export function overview({ days, global, themes }: Dashboard): Overview {
+  const all = Object.entries(themes).map(([key, entry]) => themeResult(key, entry));
   const counted = all.filter(theme => theme.puzzles >= MIN_PUZZLES).toSorted(byGap);
   return {
     days,
@@ -74,7 +90,7 @@ export function overview({ days, global, themes }: Dashboard): Overview {
     firstWins: global.firstWins,
     level: global.puzzleRatingAvg,
     performance: global.performance,
-    toReplay: Math.max(0, global.nb - global.firstWins - global.replayWins),
+    toReplay: toReplay(global),
     themes: counted,
     fewer: all.length - counted.length,
     weakest: counted

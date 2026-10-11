@@ -1,0 +1,295 @@
+/* ---- Improvement areas and strengths --- */
+
+/* content/puzzle-dashboard/areas-view.ts: the first theme in a card with the player's mascot,
+ * its numbers and its two links (train, replay), then the others in a list. The page's tone
+ * is red for the areas, green for the strengths. The mascot takes the coach's box and its
+ * seamless swap (overview.css). */
+
+.lr-ext-pdash--areas[data-lr-ext-areas='weak'] {
+  --lr-ext-pdash-tone: var(--lr-ext-pdash-down);
+}
+
+.lr-ext-pdash--areas[data-lr-ext-areas='strong'] {
+  --lr-ext-pdash-tone: var(--lr-ext-pdash-up);
+}
+
+.lr-ext-pdash--areas .lr-ext-pdash__ring,
+.lr-ext-pdash--areas .lr-ext-pdash__ring.lr-ext-pdash__ring--big {
+  --lr-ext-pdash-sign: var(--lr-ext-pdash-tone);
+}
+
+.lr-ext-pdash__hero {
+  /* The arms' reach grows with the mascot: 14px past a 124px still. */
+  --lr-ext-pdash-arms: 21px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 22px;
+  padding: 20px 24px 20px calc(14px + var(--lr-ext-pdash-arms));
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 14px;
+  background:
+    radial-gradient(
+      90% 120% at 0% 50%,
+      color-mix(in srgb, var(--lr-ext-pdash-tone) 10%, transparent),
+      transparent 60%
+    ),
+    var(--lr-ext-bg-panel);
+}
+
+/* Large, rising from the card's floor: the bust's cut sits on its bottom edge. */
+.lr-ext-pdash__hero .lr-ext-pdash__mascot {
+  width: 186px;
+  align-self: end;
+  margin-bottom: -20px;
+}
+
+.lr-ext-pdash__about {
+  min-width: 0;
+}
+
+.lr-ext-pdash__about small {
+  color: var(--lr-ext-pdash-tone);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lr-ext-pdash__about h2 {
+  margin: 4px 0 6px;
+  color: var(--lr-ext-text-strong);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.lr-ext-pdash__about p {
+  margin: 0;
+  color: var(--lr-ext-text-dim);
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.lr-ext-pdash__facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 14px;
+}
+
+.lr-ext-pdash--areas .lr-ext-pdash__ring.lr-ext-pdash__ring--big {
+  width: 56px;
+  height: 56px;
+}
+
+.lr-ext-pdash--areas .lr-ext-pdash__ring.lr-ext-pdash__ring--big > span {
+  width: 46px;
+  height: 46px;
+  font-size: 13px;
+}
+
+.lr-ext-pdash__fact b {
+  display: block;
+  color: var(--lr-ext-text-strong);
+  font-size: 20px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.lr-ext-pdash__fact b .lr-ext-pdash__pill {
+  margin-inline-start: 4px;
+  font-size: 12px;
+  vertical-align: 3px;
+}
+
+.lr-ext-pdash__fact > span {
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---- The links --- */
+
+.lr-ext-pdash__acts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lr-ext-pdash__train,
+.lr-ext-pdash__again {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+.lr-ext-pdash__train {
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: var(--lr-ext-white) !important;
+}
+
+.lr-ext-pdash__train:hover {
+  background: var(--lr-ext-btn-primary-hover);
+}
+
+.lr-ext-pdash__again {
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-strong) !important;
+}
+
+.lr-ext-pdash__again:hover {
+  background: var(--lr-ext-btn-grey-hover);
+}
+
+.lr-ext-pdash__train::before,
+.lr-ext-pdash__again::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: var(--lr-ext-play) center / contain no-repeat;
+}
+
+.lr-ext-pdash__again::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/repeat.svg');
+}
+
+/* ---- The others --- */
+
+.lr-ext-pdash__area {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--lr-ext-card-border);
+}
+
+.lr-ext-pdash__area .lr-ext-pdash__theme {
+  color: var(--lr-ext-text) !important;
+  text-decoration: none !important;
+}
+
+.lr-ext-pdash__area .lr-ext-pdash__theme:hover b {
+  text-decoration: underline;
+}
+
+.lr-ext-pdash__area .lr-ext-pdash__go {
+  text-decoration: none !important;
+}
+
+/* The replays' count, a chip. */
+.lr-ext-pdash__again.lr-ext-pdash__again--count {
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  font-size: 12.5px;
+}
+
+.lr-ext-pdash__again--count::before {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---- Narrower --- */
+
+/* The links go under the theme, side by side, so the mascot leaves the floor at its still's size. */
+@container (max-width: 760px) {
+  .lr-ext-pdash__hero {
+    --lr-ext-pdash-arms: 14px;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .lr-ext-pdash__hero .lr-ext-pdash__mascot {
+    width: 124px;
+    align-self: center;
+    margin-bottom: 0;
+  }
+
+  .lr-ext-pdash__acts {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+
+  .lr-ext-pdash__acts > * {
+    flex: 1;
+  }
+}
+
+/* A phone: the mascot smaller beside the theme's name, its numbers on one line across the card,
+ * the replays' chip gone from the list (its theme's page has it). */
+@container (max-width: 520px) {
+  .lr-ext-pdash__hero {
+    --lr-ext-pdash-arms: 10px;
+    grid-template-columns: 86px minmax(0, 1fr);
+    grid-template-areas:
+      'mascot tag'
+      'mascot name'
+      'mascot text'
+      'facts facts'
+      'acts acts';
+    gap: 0 14px;
+    padding: 16px 14px 16px calc(8px + var(--lr-ext-pdash-arms));
+  }
+
+  .lr-ext-pdash__hero .lr-ext-pdash__mascot {
+    grid-area: mascot;
+    width: 86px;
+  }
+
+  .lr-ext-pdash__about {
+    display: contents;
+  }
+
+  .lr-ext-pdash__about small {
+    grid-area: tag;
+  }
+
+  .lr-ext-pdash__about h2 {
+    grid-area: name;
+    font-size: 19px;
+  }
+
+  .lr-ext-pdash__about p {
+    grid-area: text;
+  }
+
+  .lr-ext-pdash__facts {
+    grid-area: facts;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .lr-ext-pdash__fact b {
+    font-size: 18px;
+  }
+
+  .lr-ext-pdash__acts {
+    grid-area: acts;
+    margin-top: 14px;
+  }
+
+  .lr-ext-pdash__area {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .lr-ext-pdash__area .lr-ext-pdash__again--count {
+    display: none;
+  }
+}

@@ -658,5 +658,45 @@
   "pdashAllClear": {
     "message": "Nothing to replay: every miss has been solved since.",
     "description": "The numbers card's foot when no puzzle waits to be replayed."
+  },
+  "pdashStartHere": {
+    "message": "Start here",
+    "description": "Over the first improvement area, the one to work on first."
+  },
+  "pdashBestWeapon": {
+    "message": "Your best weapon",
+    "description": "Over the first strength."
+  },
+  "pdashTrainNow": {
+    "message": "Train it now",
+    "description": "The first improvement area's link to its puzzles."
+  },
+  "pdashKeepSharp": {
+    "message": "Keep it sharp",
+    "description": "The first strength's link to its puzzles."
+  },
+  "pdashThenThese": {
+    "message": "Then these",
+    "description": "The title over the other improvement areas."
+  },
+  "pdashAlsoStrong": {
+    "message": "Also strong",
+    "description": "The title over the other strengths."
+  },
+  "pdashFactPerformance": {
+    "message": "performance",
+    "description": "Under a theme's performance, before its gap."
+  },
+  "pdashFactLevel": {
+    "message": "puzzles' level",
+    "description": "Under the average rating of a theme's puzzles."
+  },
+  "pdashFactPlayed": {
+    "message": "played",
+    "description": "Under the number of a theme's puzzles played."
+  },
+  "pdashReplayCount": {
+    "message": "Replay $1",
+    "description": "A theme's link to its failed puzzles; $1 is how many."
   }
 }
