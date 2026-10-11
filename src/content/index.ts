@@ -38,6 +38,7 @@ import { homeHero } from './pages/home-hero.ts';
 import { speedCards } from './pages/speed-cards/index.ts';
 import { coachTitles } from './pages/coach-titles.ts';
 import { swiss } from './pages/swiss.ts';
+import { podium } from './pages/podium.ts';
 import { simulScores } from './pages/simul-scores.ts';
 import { editorTools } from './pages/editor-tools.ts';
 import { forumLabels } from './pages/forum.ts';
@@ -62,66 +63,70 @@ import { startSyncLoop } from './sync-loop.ts';
 // The isolated-world content script. It can reach the extension's files and
 // APIs, not Lichess's objects (see src/page for those).
 
+// The rest, in start order: a feature can rely on those before it.
+const FEATURES = [
+  fonts,
+  donate,
+  sidebarCollapse,
+  drawer,
+  schemeToggle,
+  preferencesButton,
+  currentSection,
+  coachChoice,
+  fideOffset,
+  marks,
+  hasFlags,
+  aiPlayers,
+  boardZoom,
+  mainScroll,
+  controlsHeight,
+  movesExtrasHeight,
+  analysisPlayers,
+  underboard,
+  activeMove,
+  capturedPieces,
+  boardTools,
+  moveTimes,
+  newGame,
+  ratingRefresh,
+  countryFlags,
+  gameIntro,
+  coachMessage,
+  boardInset,
+  evalGauge,
+  puzzle,
+  extensionSettings,
+  homeHero,
+  speedCards,
+  coachTitles,
+  swiss,
+  podium,
+  simulScores,
+  editorTools,
+  forumLabels,
+  tv,
+  practiceIcons,
+  streamerSections,
+  racerHome,
+  videoCountPill,
+  gameMeta,
+  avatars,
+  powertip,
+  tooltip,
+  tabs,
+  devReload,
+  radar,
+  ratingChart,
+  coach,
+  computer,
+] as const;
+
 function main(): void {
   // Our mark, the picked packs and color themes, and the account's rating go on <html> first, so
   // the page never shows Lichess's board, pieces, colors or avatar in their place.
   startFeatures([assets, packs, colorThemes, accountRating]);
   if (reloadIfInjectedLate()) return;
-  startFeatures([
-    fonts,
-    donate,
-    sidebarCollapse,
-    drawer,
-    schemeToggle,
-    preferencesButton,
-    currentSection,
-    coachChoice,
-    fideOffset,
-    marks,
-    hasFlags,
-    aiPlayers,
-    boardZoom,
-    mainScroll,
-    controlsHeight,
-    movesExtrasHeight,
-    analysisPlayers,
-    underboard,
-    activeMove,
-    capturedPieces,
-    boardTools,
-    moveTimes,
-    newGame,
-    ratingRefresh,
-    countryFlags,
-    gameIntro,
-    coachMessage,
-    boardInset,
-    evalGauge,
-    puzzle,
-    extensionSettings,
-    homeHero,
-    speedCards,
-    coachTitles,
-    swiss,
-    simulScores,
-    editorTools,
-    forumLabels,
-    tv,
-    practiceIcons,
-    streamerSections,
-    racerHome,
-    videoCountPill,
-    gameMeta,
-    avatars,
-    powertip,
-    tooltip,
-    tabs,
-    devReload,
-    radar,
-    ratingChart,
-    coach,
-    computer,
-  ]);
+  startFeatures(FEATURES);
   startSyncLoop();
 }
 

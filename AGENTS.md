@@ -612,6 +612,11 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   a `redirect` once paired), and falls back to Lichess's link if it fails.
 - **Picker names.** lila puts a picker's name in its `mselect`'s id
   (`#…__day-select`), not its class.
+- **Tournament podiums.** A finished Arena's and Swiss's `.podium` holds
+  `.second`, `.first`, `.third`, in that order, and Lichess hides it below
+  500px. An Arena's shows no score: `content/pages/podium.ts` reads it from
+  `#page-init-data` (`data.podium`, a Swiss's `points`), and
+  `styles/podium.css` draws the steps for both.
 - **`:has()` slows the board.** Chrome re-checks a `:has()` whenever an
   element is added or removed under its anchor, restyling all the rule
   could style: on a board, every move. Every stylesheet loads on every page,

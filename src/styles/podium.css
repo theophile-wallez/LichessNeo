@@ -1,0 +1,265 @@
+/* A finished tournament's podium, on Arena and Swiss pages alike: three metal steps, each
+ * player's mascot (theme/avatars.css) standing on theirs with their name and score
+ * (content/pages/podium.ts), a crown over the winner and confetti around. The steps rise
+ * third, second, then first, and the crown pops, once, as the podium shows. Lichess's own
+ * trophy box draws the mascot; the steps are each place's pseudo-elements. */
+
+/* Lichess hides the podium below 500px: ours fits a phone. Inside it, sizes follow its
+ * width, as drawn at 540px, down to a phone's. It spans the card, as the Swiss card's
+ * pieces must (swiss-show/main.css), and centers the steps. */
+main:is(.tour, .swiss) .podium {
+  --lr-ext-podium-u: max(0.72px, min(100cqi, 620px) / 540);
+  --lr-ext-podium-gold: #e0a930;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.12fr 1fr;
+  align-items: end;
+  gap: min(1.8%, 12px);
+  padding: min(8%, 48px) max(12px, (100% - 620px) / 2) 0;
+  container-type: inline-size;
+  background-image: radial-gradient(
+    70% 80% at 50% 100%,
+    color-mix(in srgb, var(--lr-ext-podium-gold) 14%, transparent),
+    transparent 70%
+  );
+  /* The steps rise from under its floor, and the tilted confetti stays in. */
+  overflow: clip;
+}
+
+main:is(.tour, .swiss) .podium > div {
+  --lr-ext-podium-delay: 0.6s;
+  /* Each metal's edge, where the light catches it, and its body. */
+  --lr-ext-podium-shine: #ffe7a0;
+  --lr-ext-podium-metal: var(--lr-ext-podium-gold);
+  --lr-ext-podium-step: calc(var(--lr-ext-podium-u) * 128);
+  --lr-ext-podium-mascot: calc(var(--lr-ext-podium-u) * 100);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  min-width: 0;
+  overflow: visible;
+  font-size: 1rem;
+  white-space: normal;
+  animation: lr-ext-podium-rise 0.75s var(--lr-ext-podium-delay) cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+main:is(.tour, .swiss) .podium > .second {
+  --lr-ext-podium-delay: 0.35s;
+  --lr-ext-podium-shine: #f4f6f9;
+  --lr-ext-podium-metal: #a9b2be;
+  --lr-ext-podium-step: calc(var(--lr-ext-podium-u) * 96);
+  --lr-ext-podium-mascot: calc(var(--lr-ext-podium-u) * 84);
+}
+
+main:is(.tour, .swiss) .podium > .third {
+  --lr-ext-podium-delay: 0.1s;
+  --lr-ext-podium-shine: #f3c09b;
+  --lr-ext-podium-metal: #c27a48;
+  --lr-ext-podium-step: calc(var(--lr-ext-podium-u) * 74);
+  --lr-ext-podium-mascot: calc(var(--lr-ext-podium-u) * 76);
+}
+
+@keyframes lr-ext-podium-rise {
+  from {
+    translate: 0 100%;
+  }
+}
+
+/* ---- Players --- */
+
+/* The coach's still, the box at its own aspect, fading into the step's light. */
+main:is(.tour, .swiss) .podium .trophy {
+  position: relative;
+  display: block;
+  width: calc(var(--lr-ext-podium-mascot) * 124 / 114);
+  height: var(--lr-ext-podium-mascot);
+  margin: 0 0 calc(var(--lr-ext-podium-u) * -6);
+  background: none;
+}
+
+main:is(.tour, .swiss) .podium .trophy::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--lr-ext-avatar-coach) center bottom / contain no-repeat;
+  mask-image: linear-gradient(#000 85%, transparent);
+}
+
+main:is(.tour, .swiss) .podium .first .trophy::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + var(--lr-ext-podium-u) * 2);
+  left: 50%;
+  width: calc(var(--lr-ext-podium-u) * 30);
+  height: calc(var(--lr-ext-podium-u) * 30);
+  margin-left: calc(var(--lr-ext-podium-u) * -15);
+  background: #ffd56a;
+  filter: drop-shadow(0 0 calc(var(--lr-ext-podium-u) * 10) #ffd56a);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg') center / contain
+    no-repeat;
+  animation: lr-ext-podium-crown 0.6s 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+}
+
+/* A pale gold vanishes on a light page. */
+html.light main:is(.tour, .swiss) .podium .first .trophy::before {
+  background: var(--lr-ext-podium-gold);
+}
+
+@keyframes lr-ext-podium-crown {
+  from {
+    opacity: 0;
+    scale: 0;
+    rotate: -25deg;
+  }
+}
+
+/* A disqualified player (.lame) keeps Lichess's faded look and struck name, but their
+ * mascot stays readable in grey. */
+main:is(.tour, .swiss) .podium > .lame .trophy {
+  opacity: 0.6;
+  filter: grayscale(1);
+}
+
+/* Lichess's weight and tracking give way to ours. */
+main:is(.tour, .swiss) .podium .user-link {
+  display: block;
+  max-width: 100%;
+  margin-top: calc(var(--lr-ext-podium-u) * 8);
+  overflow: hidden;
+  color: var(--lr-ext-text-strong) !important;
+  font-family: var(--lr-ext-font);
+  font-size: clamp(11px, calc(var(--lr-ext-podium-u) * 14), 15px);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main:is(.tour, .swiss) .podium .user-link .uflair {
+  width: 1em;
+  height: 1em;
+  margin-inline-start: 3px;
+}
+
+/* The score stands in for Lichess's table, whose other figures are in the standings. */
+main:is(.tour, .swiss) .podium .stats {
+  display: none;
+}
+
+main:is(.tour, .swiss) .podium .lr-ext-podium__score {
+  color: var(--lr-ext-text-dim);
+  font-size: clamp(10px, calc(var(--lr-ext-podium-u) * 12), 13px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+}
+
+main:is(.tour, .swiss) .podium .lr-ext-podium__score b {
+  font-weight: 800;
+}
+
+/* ---- Steps --- */
+
+/* The front in the metal's color, lit at the top, its rank stamped in. */
+main:is(.tour, .swiss) .podium > div::after {
+  content: '1';
+  display: grid;
+  place-items: start center;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--lr-ext-podium-step);
+  margin-top: calc(var(--lr-ext-podium-u) * 16);
+  padding-top: calc(var(--lr-ext-podium-u) * 14);
+  border-radius: calc(var(--lr-ext-podium-u) * 10) calc(var(--lr-ext-podium-u) * 10) 0 0;
+  background: linear-gradient(
+    180deg,
+    var(--lr-ext-podium-shine),
+    var(--lr-ext-podium-metal) 30%,
+    color-mix(in srgb, var(--lr-ext-podium-metal) 50%, #000)
+  );
+  box-shadow:
+    inset 0 2px 0 #ffffff70,
+    inset 0 -10px 20px #00000044;
+  color: color-mix(in srgb, var(--lr-ext-podium-metal) 40%, #000);
+  font-family: var(--lr-ext-font);
+  font-size: calc(var(--lr-ext-podium-u) * 40);
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 1px 0 #ffffff60;
+}
+
+main:is(.tour, .swiss) .podium > .second::after {
+  content: '2';
+}
+
+main:is(.tour, .swiss) .podium > .third::after {
+  content: '3';
+}
+
+/* The top face, seen from a little above. */
+main:is(.tour, .swiss) .podium > div::before {
+  content: '';
+  position: absolute;
+  right: calc(var(--lr-ext-podium-u) * 6);
+  bottom: calc(var(--lr-ext-podium-step) - 2px);
+  left: calc(var(--lr-ext-podium-u) * 6);
+  height: calc(var(--lr-ext-podium-u) * 10);
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(var(--lr-ext-podium-shine), var(--lr-ext-podium-metal));
+  filter: brightness(1.15);
+  transform: perspective(60px) rotateX(40deg);
+  transform-origin: bottom;
+}
+
+/* ---- Confetti --- */
+
+/* Two layers of pieces at their own tilt, under the players, which fall in once the
+ * winner is up. */
+main:is(.tour, .swiss) .podium::before,
+main:is(.tour, .swiss) .podium::after {
+  content: '';
+  position: absolute;
+  inset: 0 max(0px, (100% - 700px) / 2) 30%;
+  z-index: 0;
+  pointer-events: none;
+  animation: lr-ext-podium-confetti 1.2s 1.15s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+main:is(.tour, .swiss) .podium::before {
+  --lr-ext-podium-tilt: 24deg;
+  background:
+    linear-gradient(var(--lr-ext-pink) 0 0) 12% 12% / 7px 13px no-repeat,
+    linear-gradient(var(--lr-ext-yellow) 0 0) 74% 6% / 7px 13px no-repeat,
+    linear-gradient(var(--lr-ext-orange) 0 0) 2% 40% / 7px 13px no-repeat,
+    linear-gradient(var(--lr-ext-green) 0 0) 44% 2% / 6px 11px no-repeat,
+    linear-gradient(var(--lr-ext-purple) 0 0) 97% 52% / 6px 11px no-repeat,
+    radial-gradient(circle, var(--lr-ext-cyan) 3.5px, transparent 4px) 90% 22% / 8px 8px no-repeat,
+    radial-gradient(circle, var(--lr-ext-pink) 3px, transparent 3.5px) 26% 30% / 8px 8px no-repeat;
+  rotate: var(--lr-ext-podium-tilt);
+}
+
+main:is(.tour, .swiss) .podium::after {
+  --lr-ext-podium-tilt: -30deg;
+  background:
+    linear-gradient(var(--lr-ext-cyan) 0 0) 30% 8% / 7px 13px no-repeat,
+    linear-gradient(var(--lr-ext-purple) 0 0) 60% 0% / 7px 13px no-repeat,
+    linear-gradient(var(--lr-ext-green) 0 0) 88% 16% / 7px 13px no-repeat,
+    linear-gradient(var(--lr-ext-pink) 0 0) 6% 62% / 6px 11px no-repeat,
+    linear-gradient(var(--lr-ext-orange) 0 0) 82% 4% / 6px 11px no-repeat,
+    radial-gradient(circle, var(--lr-ext-yellow) 3px, transparent 3.5px) 16% 26% / 8px 8px no-repeat,
+    radial-gradient(circle, var(--lr-ext-cyan) 3px, transparent 3.5px) 99% 70% / 8px 8px no-repeat;
+  rotate: var(--lr-ext-podium-tilt);
+}
+
+@keyframes lr-ext-podium-confetti {
+  from {
+    opacity: 0;
+    translate: 0 -40px;
+    rotate: 0deg;
+  }
+}

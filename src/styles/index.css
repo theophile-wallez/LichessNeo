@@ -34,6 +34,7 @@
 @import './broadcast/index.css';
 @import './swiss/index.css';
 @import './swiss-show/index.css';
+@import './podium.css';
 @import './leaderboard/index.css';
 @import './fide/index.css';
 @import './bots.css';

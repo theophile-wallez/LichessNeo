@@ -31,6 +31,12 @@ main.swiss .swiss__main__header > icon.img::before {
   content: none !important;
 }
 
+/* display: contents makes the finished title the card's own child, so it can stick over
+ * the card (its podium is styles/podium.css). Lichess's confetti then covers the card. */
+main.swiss .podium-wrap {
+  display: contents;
+}
+
 /* Finished: the podium carries the trophies. */
 main.swiss .swiss__main-finished .swiss__main__header > icon.img {
   display: none;
@@ -54,13 +60,6 @@ main.swiss .swiss__main__header h1 {
   font-weight: 800 !important;
   line-height: 1.2;
   overflow-wrap: anywhere;
-}
-
-/* Below 500px Lichess hides the podium, which made the room under the title. */
-@media (max-width: 499.29px) {
-  main.swiss .swiss__main-finished .swiss__main__header {
-    padding-bottom: 20px !important;
-  }
 }
 
 /* Mobile: no tile, and a third line so a usual name fits. */

@@ -14,6 +14,7 @@ afterEach(() => {
   Reflect.deleteProperty(window, 'i18n');
   delete dataset.lrExtFlipLabel;
   delete dataset.lrExtToolsLabel;
+  delete dataset.lrExtPointsLabel;
   document.body.replaceChildren();
 });
 
@@ -54,6 +55,15 @@ describe('labels', () => {
     Object.assign(window, { i18n: { site: { tools: 'Tools' } } });
     vi.advanceTimersByTime(250);
     expect(dataset.lrExtToolsLabel).toBe('Tools');
+  });
+
+  it('keeps waiting on a tournament page, for the podium’s scores', () => {
+    document.body.innerHTML = '<main class="tour"></main>';
+    labels.start();
+    vi.advanceTimersByTime(1000);
+    Object.assign(window, { i18n: { site: { points: 'Punkte' } } });
+    vi.advanceTimersByTime(250);
+    expect(dataset.lrExtPointsLabel).toBe('Punkte');
   });
 
   it('gives up after 30 seconds', () => {

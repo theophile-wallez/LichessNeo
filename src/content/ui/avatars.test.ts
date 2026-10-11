@@ -60,6 +60,14 @@ const SPOTS = [
       '</h1></div></div>',
     avatar: '.user-show__header',
   },
+  {
+    name: 'a tournament’s podium',
+    markup:
+      '<main class="swiss"><div class="podium"><div class="first"><div class="trophy"></div>' +
+      '<a class="user-link ulpt" href="/@/tjychess">tjychess</a><table class="stats"></table>' +
+      '</div></div></main>',
+    avatar: '.first',
+  },
 ];
 
 function avatarIn(selector: string): HTMLElement {
