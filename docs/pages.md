@@ -1,0 +1,93 @@
+# Pages
+
+Where each page the sidebar lists stands in the redesign, and what it needs
+next. Update a page's row in the same change that moves it.
+
+## Levels
+
+| Level          | What it means                                                                                   |
+| -------------- | ----------------------------------------------------------------------------------------------- |
+| 1 · Repainted  | Lichess's own layout in our colors: its forms, its fonts, no title tile, nothing of ours on top |
+| 2 · Redesigned | our layout and parts: pinned title with its tile, cards, pills, Hugeicons, side menu with tiles |
+| 3 · Signature  | a living piece at the computer level slider's bar: a mascot, a glowing track, one strong number |
+
+The level slider (`styles/pages/level-slider.css`) is the reference for 3: a
+mascot that answers what the user does, a well with a glowing fill, sparkles
+and a white knob, and a single big number in the state's color.
+
+## Play
+
+| Page              | Path          | Level | Next                                                                                                 |
+| ----------------- | ------------- | ----- | ---------------------------------------------------------------------------------------------------- |
+| Home              | `/`           | 2     | the lobby's table is still Lichess's rows; the speed cards could take the track for the day's rating |
+| Computer setup    | `/#ai`        | 3     | the reference                                                                                        |
+| Game, playing     | `/<id>`       | –     | not audited yet                                                                                      |
+| Game over         | `/<id>`       | 2     | signature planned: the rating's change on the track, toward the next hundred                         |
+| Arena tournaments | `/tournament` | 2     | the leaderboard beside the schedule is a plain list                                                  |
+| Swiss tournaments | `/swiss`      | 2     |                                                                                                      |
+| Simuls            | `/simul`      | 2     | sets the tone for 2                                                                                  |
+
+## Puzzles
+
+| Page             | Path                  | Level | Next                                                                                              |
+| ---------------- | --------------------- | ----- | ------------------------------------------------------------------------------------------------- |
+| Puzzles          | `/training`           | 2     | a solved puzzle has no moment of its own; the rating's change could                               |
+| Puzzle themes    | `/training/themes`    | 2     |                                                                                                   |
+| Puzzle dashboard | `/training/dashboard` | 2     |                                                                                                   |
+| Puzzle Streak    | `/streak`             | 2     | the streak's count doesn't show in the panel: a flame and the track, the best streak on it        |
+| Puzzle Storm     | `/storm`              | 2     | signature planned: the combo on the track, its bonuses as stops; the panel is empty in the middle |
+| Puzzle Racer     | `/racer`              | 2     |                                                                                                   |
+
+## Learn
+
+| Page        | Path                   | Level | Next                                                                       |
+| ----------- | ---------------------- | ----- | -------------------------------------------------------------------------- |
+| Learn       | `/learn`               | 2     |                                                                            |
+| Practice    | `/practice`            | 2     | sets the tone for 2                                                        |
+| Coordinates | `/training/coordinate` | 1     | Lichess's text panel and tabs; a title with its tile, the score on a track |
+| Studies     | `/study`               | 2     |                                                                            |
+| Coaches     | `/coach`               | 2     |                                                                            |
+
+## Watch
+
+| Page          | Path         | Level | Next                                                                |
+| ------------- | ------------ | ----- | ------------------------------------------------------------------- |
+| Broadcasts    | `/broadcast` | 2     |                                                                     |
+| TV            | `/tv`        | 2     |                                                                     |
+| Current games | `/games`     | 1     | its channels are Lichess's list, in capitals: give them TV's column |
+| Streamers     | `/streamer`  | 2     |                                                                     |
+| Videos        | `/video`     | 2     | the tags are a long column of plain pills                           |
+
+## Community
+
+| Page    | Path        | Level | Next                                                                         |
+| ------- | ----------- | ----- | ---------------------------------------------------------------------------- |
+| Players | `/player`   | 2     |                                                                              |
+| Profile | `/@/<user>` | 2     | the medals under the chart                                                   |
+| Teams   | `/team`     | 1     | one bare card on an empty page: a team card and an empty state with a mascot |
+| Forum   | `/forum`    | 2     |                                                                              |
+| Blog    | `/blog`     | 2     |                                                                              |
+
+## Tools
+
+| Page            | Path               | Level | Next                                                                       |
+| --------------- | ------------------ | ----- | -------------------------------------------------------------------------- |
+| Analysis board  | `/analysis`        | 2     | the panel is empty under the coach until a move is played                  |
+| Game review     | `/<id>` (finished) | 2     | signature planned: each side's accuracy on the track, in its grade's color |
+| Openings        | `/opening`         | 1     | Lichess's cards and thin text, no title tile                               |
+| Board editor    | `/editor`          | 2     |                                                                            |
+| Import game     | `/paste`           | 1     | Lichess's form: no title tile, a bare text area, the browser's file picker |
+| Advanced search | `/games/search`    | 1     | Lichess's form: no title tile, rows of empty selects                       |
+
+## Account
+
+| Page           | Path                                  | Level | Next                            |
+| -------------- | ------------------------------------- | ----- | ------------------------------- |
+| Preferences    | `/account/preferences`                | 2     |                                 |
+| Our settings   | the account's Lichess Reimagined link | –     | not audited yet                 |
+| Page not found | any unknown path                      | 1     | Lichess's 404 and its mini-game |
+
+## Seen while auditing
+
+- Puzzles, Streak and Storm: the sidebar's footer wraps, its fifth icon (the
+  sound switch) pushing the last one to a second line.

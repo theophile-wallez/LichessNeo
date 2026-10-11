@@ -106,6 +106,8 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
 
 - When you change what `AGENTS.md`, `docs/architecture.md`, a README or a
   comment describes, update it in the same change.
+- `docs/pages.md` tracks where each page stands in the redesign: when a
+  change moves a page, update its row.
 
 ## How a change goes
 
