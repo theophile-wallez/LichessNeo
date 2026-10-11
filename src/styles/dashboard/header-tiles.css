@@ -236,3 +236,57 @@ html[dir='rtl'] .puzzle-dashboard .puzzle-dashboard__metric--win::after {
   -webkit-mask-image: var(--lr-ext-check);
   mask-image: var(--lr-ext-check);
 }
+
+/* ---- On scroll --- */
+
+/* Only the content scrolls: the menu stays put and the title row (with the periods) stays
+   pinned, as on the puzzle themes (puzzles/openings.css). Desktop only: below 1020px
+   Lichess's top bar holds the top edge. */
+@media (min-width: 1020px) {
+  .page-menu__content.puzzle-dashboard > .box__top {
+    container-type: scroll-state;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    margin-inline: -8px !important;
+    padding-inline: 8px !important;
+    margin-bottom: 6px !important;
+    padding-bottom: 12px !important;
+    background: var(--lr-ext-bg-page);
+    box-shadow: var(--lr-ext-pin-cover);
+  }
+
+  html[dir='rtl'] .page-menu__content.puzzle-dashboard > .box__top {
+    margin-inline-start: 0 !important;
+    padding-inline-start: 0 !important;
+  }
+
+  /* Once stuck, a fade under it, over the cards passing beneath. */
+  .page-menu__content.puzzle-dashboard > .box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    .page-menu__content.puzzle-dashboard > .box__top::after {
+      opacity: 1;
+    }
+  }
+
+  /* Open, the period picker's click-away mask must clear the sidebar (z-index 106). */
+  .page-menu__content.puzzle-dashboard > .box__top:has(.mselect__toggle:checked) {
+    z-index: 107;
+  }
+
+  main.page-menu[data-lr-ext-nav-active*='/training/dashboard/'] .page-menu__menu {
+    position: sticky;
+    top: 16px;
+  }
+}

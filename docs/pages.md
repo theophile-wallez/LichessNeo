@@ -29,14 +29,14 @@ and a white knob, and a single big number in the state's color.
 
 ## Puzzles
 
-| Page             | Path                  | Level | Next                                                                                              |
-| ---------------- | --------------------- | ----- | ------------------------------------------------------------------------------------------------- |
-| Puzzles          | `/training`           | 2     | a solved puzzle has no moment of its own; the rating's change could                               |
-| Puzzle themes    | `/training/themes`    | 2     |                                                                                                   |
-| Puzzle dashboard | `/training/dashboard` | 2     |                                                                                                   |
-| Puzzle Streak    | `/streak`             | 2     | the streak's count doesn't show in the panel: a flame and the track, the best streak on it        |
-| Puzzle Storm     | `/storm`              | 2     | signature planned: the combo on the track, its bonuses as stops; the panel is empty in the middle |
-| Puzzle Racer     | `/racer`              | 2     |                                                                                                   |
+| Page             | Path                  | Level | Next                                                                                                       |
+| ---------------- | --------------------- | ----- | ---------------------------------------------------------------------------------------------------------- |
+| Puzzles          | `/training`           | 2     | a solved puzzle has no moment of its own; the rating's change could                                        |
+| Puzzle themes    | `/training/themes`    | 2     |                                                                                                            |
+| Puzzle dashboard | `/training/dashboard` | 3     | the numbers, a live coach's tips, the themes to work on and the strong ones, every theme against its level |
+| Puzzle Streak    | `/streak`             | 2     | the streak's count doesn't show in the panel: a flame and the track, the best streak on it                 |
+| Puzzle Storm     | `/storm`              | 2     | signature planned: the combo on the track, its bonuses as stops; the panel is empty in the middle          |
+| Puzzle Racer     | `/racer`              | 2     |                                                                                                            |
 
 ## Learn
 

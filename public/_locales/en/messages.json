@@ -486,5 +486,177 @@
   "medalNew": {
     "message": "New",
     "description": "The tag on a medal won since the player last looked."
+  },
+  "pdashSolved": {
+    "message": "Solved first try",
+    "description": "The share of puzzles solved without a mistake."
+  },
+  "pdashPerformance": {
+    "message": "Performance",
+    "description": "The rating the period's results are worth."
+  },
+  "pdashAgainst": {
+    "message": "vs puzzles rated $1",
+    "description": "After a gap such as \"−50\"; $1 is the average rating of the puzzles."
+  },
+  "pdashReplay": {
+    "message": "Replay them",
+    "description": "The button to replay the failed puzzles."
+  },
+  "pdashWork": {
+    "message": "Work on these",
+    "description": "The themes the player does worst in, against their level."
+  },
+  "pdashWorkSub": {
+    "message": "Lowest against their level",
+    "description": "Under \"Work on these\"."
+  },
+  "pdashStrengths": {
+    "message": "Your strengths",
+    "description": "The themes the player does best in, against their level."
+  },
+  "pdashStrengthsSub": {
+    "message": "Highest against their level",
+    "description": "Under \"Your strengths\"."
+  },
+  "pdashTrain": {
+    "message": "Train",
+    "description": "A weak theme's link to its puzzles."
+  },
+  "pdashKeep": {
+    "message": "Keep it up",
+    "description": "A strong theme's link to its puzzles."
+  },
+  "pdashByTheme": {
+    "message": "By theme",
+    "description": "The chart of every theme."
+  },
+  "pdashByThemeSub": {
+    "message": "Your performance against the puzzles' level, themes with 3 puzzles or more",
+    "description": "Under \"By theme\"."
+  },
+  "pdashPuzzles": {
+    "message": "Puzzles",
+    "description": "The chart's column of puzzles solved first try, over those played."
+  },
+  "pdashBelow": {
+    "message": "Below their level",
+    "description": "The chart's left side."
+  },
+  "pdashAbove": {
+    "message": "Above their level",
+    "description": "The chart's right side."
+  },
+  "pdashFewer": {
+    "message": "+ $1 themes with fewer than 3 puzzles",
+    "description": "Under the chart; $1 is how many themes are left out."
+  },
+  "pdashCoachMixed": {
+    "message": "Strong on $1, shaky on $2.",
+    "description": "The coach's gist; $1 is the best theme, $2 the worst."
+  },
+  "pdashCoachMixedBody": {
+    "message": "You play $2 points above the puzzles' level on $1, and $4 below it on $3: a few $3 puzzles a day would pay off fastest.",
+    "description": "The coach, after the gist; $1 and $2 are the best theme and its gap, $3 and $4 the worst's."
+  },
+  "pdashCoachStrong": {
+    "message": "Everything goes your way.",
+    "description": "The coach's gist when no theme is below its level."
+  },
+  "pdashCoachStrongBody": {
+    "message": "Your best is $1, $2 points above the puzzles' level. Harder puzzles will keep you climbing.",
+    "description": "After the gist; $1 is the best theme, $2 its gap."
+  },
+  "pdashCoachWeak": {
+    "message": "A tough stretch.",
+    "description": "The coach's gist when no theme is above its level."
+  },
+  "pdashCoachWeakBody": {
+    "message": "$1 hurts most, $2 points below the puzzles' level: a few a day would pay off fastest.",
+    "description": "After the gist; $1 is the worst theme, $2 its gap."
+  },
+  "pdashCoachEarly": {
+    "message": "Too early to tell.",
+    "description": "The coach's gist with no theme played 3 times."
+  },
+  "pdashCoachEarlyBody": {
+    "message": "Play a few more puzzles and I'll show you where you shine.",
+    "description": "After the gist, with too few puzzles."
+  },
+  "pdashCoachNext": {
+    "message": "Next tip",
+    "description": "The coach's button to its next tip, for screen readers."
+  },
+  "pdashCoachBest": {
+    "message": "$1 is your weapon.",
+    "description": "A coach tip; $1 is the best theme against its level."
+  },
+  "pdashCoachBestBody": {
+    "message": "$1 out of $2 solved first try: look for it in your games, it's where you strike.",
+    "description": "After the tip's gist; $1 puzzles solved first try out of $2."
+  },
+  "pdashCoachWorst": {
+    "message": "$1 costs you most.",
+    "description": "A coach tip; $1 is the worst theme against its level."
+  },
+  "pdashCoachWorstBody": {
+    "message": "Only $1 out of $2 solved first try. Its puzzles are one click away, in the list below.",
+    "description": "After the tip's gist; $1 puzzles solved first try out of $2."
+  },
+  "pdashCoachEasy": {
+    "message": "Too easy for you?",
+    "description": "A coach tip when most puzzles are solved first try."
+  },
+  "pdashCoachEasyBody": {
+    "message": "$1% solved first try: harder puzzles would teach you more.",
+    "description": "After the tip's gist; $1 is the share solved first try."
+  },
+  "pdashCoachHard": {
+    "message": "Take your time.",
+    "description": "A coach tip when few puzzles are solved first try."
+  },
+  "pdashCoachHardBody": {
+    "message": "$1% solved first try: check every reply of your opponent before you move.",
+    "description": "After the tip's gist; $1 is the share solved first try."
+  },
+  "pdashCoachReplay": {
+    "message": "$1 puzzles to replay.",
+    "description": "A coach tip; $1 is how many failed puzzles wait to be replayed."
+  },
+  "pdashCoachReplayBody": {
+    "message": "Going back over a miss is the fastest way to stop missing it.",
+    "description": "After the replay tip's gist."
+  },
+  "pdashCoachBack": {
+    "message": "Previous tip",
+    "description": "The coach's button back to its previous tip, for screen readers."
+  },
+  "pdashSolvedOf": {
+    "message": "$1 of $2",
+    "description": "The puzzles solved first try, $1, out of those played, $2."
+  },
+  "pdashSolvedOver": {
+    "message": "puzzles over $1",
+    "description": "Under \"18 of 41\"; $1 is the period, as \"30 days\"."
+  },
+  "pdashBest": {
+    "message": "Best theme",
+    "description": "The theme the player does best in, against its level."
+  },
+  "pdashBestAgainst": {
+    "message": "vs its level",
+    "description": "After the best theme's gap, as \"+500\"."
+  },
+  "pdashFailedOne": {
+    "message": "puzzle failed and not solved since",
+    "description": "After a count of 1, in the numbers card's foot."
+  },
+  "pdashFailed": {
+    "message": "puzzles failed and not solved since",
+    "description": "After a count of puzzles to replay, in the numbers card's foot."
+  },
+  "pdashAllClear": {
+    "message": "Nothing to replay: every miss has been solved since.",
+    "description": "The numbers card's foot when no puzzle waits to be replayed."
   }
 }

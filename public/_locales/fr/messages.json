@@ -364,5 +364,134 @@
   },
   "medalNew": {
     "message": "Nouveau"
+  },
+  "pdashSolved": {
+    "message": "Réussis du premier coup"
+  },
+  "pdashPerformance": {
+    "message": "Performance"
+  },
+  "pdashAgainst": {
+    "message": "face à des problèmes classés $1"
+  },
+  "pdashReplay": {
+    "message": "Les rejouer"
+  },
+  "pdashWork": {
+    "message": "À travailler"
+  },
+  "pdashWorkSub": {
+    "message": "Les plus bas face à leur niveau"
+  },
+  "pdashStrengths": {
+    "message": "Vos points forts"
+  },
+  "pdashStrengthsSub": {
+    "message": "Les plus hauts face à leur niveau"
+  },
+  "pdashTrain": {
+    "message": "S’entraîner"
+  },
+  "pdashKeep": {
+    "message": "Continuer"
+  },
+  "pdashByTheme": {
+    "message": "Par thème"
+  },
+  "pdashByThemeSub": {
+    "message": "Votre performance face au niveau des problèmes, thèmes d'au moins 3 problèmes"
+  },
+  "pdashPuzzles": {
+    "message": "Problèmes"
+  },
+  "pdashBelow": {
+    "message": "Sous leur niveau"
+  },
+  "pdashAbove": {
+    "message": "Au-dessus de leur niveau"
+  },
+  "pdashFewer": {
+    "message": "+ $1 thèmes de moins de 3 problèmes"
+  },
+  "pdashCoachMixed": {
+    "message": "Solide sur $1, fragile sur $2."
+  },
+  "pdashCoachMixedBody": {
+    "message": "Vous jouez $2 points au-dessus du niveau des problèmes en $1, et $4 en dessous en $3 : quelques problèmes de $3 par jour paieraient le plus vite."
+  },
+  "pdashCoachStrong": {
+    "message": "Tout vous réussit."
+  },
+  "pdashCoachStrongBody": {
+    "message": "Votre meilleur thème est $1, $2 points au-dessus du niveau des problèmes. Des problèmes plus durs vous feront monter."
+  },
+  "pdashCoachWeak": {
+    "message": "Une période difficile."
+  },
+  "pdashCoachWeakBody": {
+    "message": "$1 coûte le plus, $2 points sous le niveau des problèmes : quelques-uns par jour paieraient le plus vite."
+  },
+  "pdashCoachEarly": {
+    "message": "Trop tôt pour le dire."
+  },
+  "pdashCoachEarlyBody": {
+    "message": "Jouez encore quelques problèmes et je vous montrerai où vous brillez."
+  },
+  "pdashCoachNext": {
+    "message": "Conseil suivant"
+  },
+  "pdashCoachBest": {
+    "message": "$1 est votre arme."
+  },
+  "pdashCoachBestBody": {
+    "message": "$1 sur $2 réussis du premier coup : cherchez-le dans vos parties, c'est là que vous frappez."
+  },
+  "pdashCoachWorst": {
+    "message": "$1 vous coûte le plus."
+  },
+  "pdashCoachWorstBody": {
+    "message": "Seulement $1 sur $2 réussis du premier coup. Ses problèmes sont à un clic, dans la liste plus bas."
+  },
+  "pdashCoachEasy": {
+    "message": "Trop facile pour vous ?"
+  },
+  "pdashCoachEasyBody": {
+    "message": "$1 % réussis du premier coup : des problèmes plus durs vous apprendraient davantage."
+  },
+  "pdashCoachHard": {
+    "message": "Prenez votre temps."
+  },
+  "pdashCoachHardBody": {
+    "message": "$1 % réussis du premier coup : vérifiez chaque réponse de l'adversaire avant de jouer."
+  },
+  "pdashCoachReplay": {
+    "message": "$1 problèmes à rejouer."
+  },
+  "pdashCoachReplayBody": {
+    "message": "Revoir une erreur est le plus sûr moyen de ne plus la refaire."
+  },
+  "pdashCoachBack": {
+    "message": "Conseil précédent"
+  },
+  "pdashSolvedOf": {
+    "message": "$1 sur $2"
+  },
+  "pdashSolvedOver": {
+    "message": "problèmes sur $1"
+  },
+  "pdashBest": {
+    "message": "Meilleur thème"
+  },
+  "pdashBestAgainst": {
+    "message": "face à son niveau"
+  },
+  "pdashFailedOne": {
+    "message": "problème raté, pas encore résolu"
+  },
+  "pdashFailed": {
+    "message": "problèmes ratés, pas encore résolus"
+  },
+  "pdashAllClear": {
+    "message": "Rien à rejouer : chaque erreur a été rattrapée."
   }
 }

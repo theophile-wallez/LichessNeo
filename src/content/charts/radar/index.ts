@@ -10,6 +10,8 @@ import { DashboardInitSchema } from './schema.ts';
 // with Chart.js into a canvas, out of reach of CSS; we draw it again in SVG
 // from the same data. styles/dashboard/radar.css only hides Lichess's canvas
 // once ours is in, so if the data ever changes shape the page keeps theirs.
+// The dashboard's own page shows our overview instead (content/puzzle-dashboard),
+// which hides the radar too unless its API can't be read.
 
 function draw(text: string | null): void {
   const host = queryOne(document, '.puzzle-dashboard__global', HTMLElement);

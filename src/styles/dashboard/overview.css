@@ -1,0 +1,297 @@
+/* ---- Overview --- */
+
+/* The dashboard's overview (content/puzzle-dashboard): the period's numbers in one card, the
+ * coach's word, the themes to work on and the strong ones, then every theme as a bar
+ * (overview-chart.css). Lichess's tiles and radar are hidden from the start, while its numbers
+ * are asked for, and stay so once it's in (`data-lr-ext-pdash` on <html>). Its layout follows
+ * its own width, which the sidebar and the menu cut into, not the window's. */
+
+html[data-lr-ext-pdash] .puzzle-dashboard > .puzzle-dashboard__global {
+  display: none !important;
+}
+
+.lr-ext-pdash {
+  --lr-ext-pdash-up: var(--lr-ext-green);
+  --lr-ext-pdash-down: var(--lr-ext-red);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  container-type: inline-size;
+}
+
+.lr-ext-pdash [data-lr-ext-sign='up'] {
+  --lr-ext-pdash-sign: var(--lr-ext-pdash-up);
+}
+.lr-ext-pdash [data-lr-ext-sign='down'] {
+  --lr-ext-pdash-sign: var(--lr-ext-pdash-down);
+}
+.lr-ext-pdash [data-lr-ext-sign='even'] {
+  --lr-ext-pdash-sign: var(--lr-ext-text-dim);
+}
+
+.lr-ext-pdash :is(b[data-lr-ext-sign], [data-lr-ext-sign] em) {
+  color: var(--lr-ext-pdash-sign);
+}
+
+.lr-ext-pdash
+  :is(.lr-ext-pdash__numbers, .lr-ext-pdash__coach, .lr-ext-pdash__list, .lr-ext-pdash__chart) {
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel);
+}
+
+/* ---- The period --- */
+
+/* Where the title and the periods don't fit on a line, the periods go under it. */
+html[data-lr-ext-pdash] .puzzle-dashboard .box__top {
+  flex-wrap: wrap;
+}
+
+html[data-lr-ext-pdash] .puzzle-dashboard .box__top h1 {
+  flex: 0 0 auto;
+}
+
+.puzzle-dashboard .box__top .lr-ext-pdash__days {
+  display: flex;
+  gap: 2px;
+  margin-inline-start: auto;
+  padding: 3px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 10px;
+  background: var(--lr-ext-card-bg);
+}
+
+.lr-ext-pdash__days a {
+  padding: 6px 12px;
+  border-radius: 7px;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+.lr-ext-pdash__days a:hover {
+  color: var(--lr-ext-text-strong) !important;
+}
+
+.lr-ext-pdash__days a[aria-current] {
+  background: var(--lr-ext-lift-8);
+  color: var(--lr-ext-text-strong) !important;
+}
+
+/* ---- The coach --- */
+
+/* Its mascot, large, then what it says over a pager: arrows either side of a dot per tip.
+ * A tip turned slides out the way it goes, then the next slides in (puzzle-dashboard/coach.ts). */
+.lr-ext-pdash__coach {
+  /* How far the mascot's arms reach past its still, either side. */
+  --lr-ext-pdash-arms: 14px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 22px 14px calc(14px + var(--lr-ext-pdash-arms));
+}
+
+.lr-ext-pdash__mascot {
+  position: relative;
+  flex: none;
+  width: 124px;
+  /* The stills' own (img/coaches): the live mascot lands on its still only in this box. */
+  aspect-ratio: 124 / 114;
+  background: var(--lr-ext-avatar-coach) center bottom / contain no-repeat;
+  cursor: pointer;
+}
+
+/* The live mascot over its still, which goes once it's drawn. */
+.lr-ext-pdash__mascot[data-lr-ext-live] {
+  background: none;
+}
+
+/* The still's box, so the live mascot lands on its still. Its canvas spills past the sides,
+   for the arms the still cuts, but comes in cut as the still is, then opens out. */
+.lr-ext-pdash__mascot .lr-ext-pdash__live {
+  position: absolute;
+  inset: 0;
+}
+
+.lr-ext-pdash__mascot .lr-ext-pdash__live canvas {
+  left: calc(-1 * var(--lr-ext-pdash-arms));
+  width: calc(100% + 2 * var(--lr-ext-pdash-arms));
+  clip-path: inset(0 var(--lr-ext-pdash-arms));
+  transition: clip-path 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.1s !important;
+}
+
+.lr-ext-pdash__mascot[data-lr-ext-live] .lr-ext-pdash__live canvas {
+  clip-path: inset(0);
+}
+
+.lr-ext-pdash__talk {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* The tips said and to say share one cell, so one slides over the other. The cell reaches
+   20px past the text on both sides, the gap to the mascot, and fades out there: a tip
+   sliding away fades rather than being cut, and one at rest stays whole. */
+.lr-ext-pdash__tip {
+  --lr-ext-pdash-fade: 20px;
+  display: grid;
+  margin: 0 calc(-1 * var(--lr-ext-pdash-fade));
+  padding: 0 var(--lr-ext-pdash-fade);
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 var(--lr-ext-pdash-fade),
+    #000 calc(100% - var(--lr-ext-pdash-fade)),
+    transparent
+  );
+  color: var(--lr-ext-text);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.lr-ext-pdash__say {
+  grid-area: 1 / 1;
+}
+
+.lr-ext-pdash__say b {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--lr-ext-text-strong);
+  font-size: 17px;
+}
+
+.lr-ext-pdash__say[data-lr-ext-enter='next'] {
+  animation: lr-ext-pdash-from-right 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+.lr-ext-pdash__say[data-lr-ext-enter='back'] {
+  animation: lr-ext-pdash-from-left 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+.lr-ext-pdash__say[data-lr-ext-leave='next'] {
+  animation: lr-ext-pdash-to-left 0.2s cubic-bezier(0.4, 0, 1, 1) both;
+}
+.lr-ext-pdash__say[data-lr-ext-leave='back'] {
+  animation: lr-ext-pdash-to-right 0.2s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+@keyframes lr-ext-pdash-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+@keyframes lr-ext-pdash-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+@keyframes lr-ext-pdash-to-left {
+  to {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+@keyframes lr-ext-pdash-to-right {
+  to {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+
+.lr-ext-pdash__pager {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lr-ext-pdash__turn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-dim);
+  cursor: pointer;
+}
+
+.lr-ext-pdash__turn::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-01.svg') center /
+    contain no-repeat;
+}
+
+.lr-ext-pdash__turn[data-lr-ext-turn='back']::before {
+  transform: scaleX(-1);
+}
+
+.lr-ext-pdash__turn:hover {
+  background: var(--lr-ext-btn-grey-hover);
+  color: var(--lr-ext-text-strong);
+}
+
+.lr-ext-pdash__dots {
+  display: flex;
+  gap: 5px;
+}
+
+.lr-ext-pdash__dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--lr-ext-lift-15);
+  transition:
+    width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s !important;
+}
+
+.lr-ext-pdash__dots i[data-lr-ext-on] {
+  width: 18px;
+  background: var(--lr-ext-text-strong);
+}
+
+/* ---- The lists --- */
+
+.lr-ext-pdash__lists {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.lr-ext-pdash__lists:empty {
+  display: none;
+}
+
+.lr-ext-pdash__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 12px;
+  padding: 16px 20px 10px;
+}
+
+.lr-ext-pdash__head h2 {
+  margin: 0;
+  color: var(--lr-ext-text-strong);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.lr-ext-pdash__head small {
+  color: var(--lr-ext-text-dim);
+  font-size: 12.5px;
+  font-weight: 600;
+}

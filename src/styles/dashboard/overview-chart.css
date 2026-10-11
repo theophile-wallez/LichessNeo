@@ -1,0 +1,267 @@
+/* ---- Overview: the themes --- */
+
+/* A theme in a list: its first-try share as a ring, its gap, a link to its puzzles. In the
+ * chart: a bar either side of zero (overview.css has the rest). */
+
+.lr-ext-pdash__item {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--lr-ext-card-border);
+  color: var(--lr-ext-text) !important;
+  text-decoration: none !important;
+  transition: background-color 0.15s !important;
+}
+
+.lr-ext-pdash__item:last-child {
+  border-radius: 0 0 14px 14px;
+}
+
+.lr-ext-pdash__item:hover {
+  background: var(--lr-ext-lift-4);
+}
+
+.lr-ext-pdash__ring {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--lr-ext-pdash-sign) calc(var(--lr-ext-pdash-p) * 100%),
+    var(--lr-ext-lift-8) 0
+  );
+}
+
+.lr-ext-pdash__ring > span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--lr-ext-bg-panel);
+  color: var(--lr-ext-text);
+  font-size: 11.5px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.lr-ext-pdash__theme {
+  min-width: 0;
+}
+
+.lr-ext-pdash__theme b {
+  display: block;
+  overflow: hidden;
+  color: var(--lr-ext-text-strong);
+  font-size: 14.5px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lr-ext-pdash__theme small {
+  display: block;
+  margin-top: 2px;
+  color: var(--lr-ext-text-dim);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.lr-ext-pdash__theme em {
+  font-style: normal;
+  font-weight: 800;
+}
+
+.lr-ext-pdash__go {
+  padding: 7px 14px;
+  border-radius: 9px;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-strong);
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+[data-lr-ext-list='weak'] .lr-ext-pdash__go {
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: var(--lr-ext-white);
+}
+
+/* ---- The chart --- */
+
+.lr-ext-pdash__axis,
+.lr-ext-pdash__row {
+  display: grid;
+  grid-template-columns: 170px 60px minmax(0, 1fr) 64px;
+  align-items: center;
+  gap: 12px;
+}
+
+.lr-ext-pdash__axis {
+  padding: 0 20px 4px;
+  color: var(--lr-ext-font-dimmer);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.lr-ext-pdash__axis > * {
+  grid-row: 1;
+}
+
+.lr-ext-pdash__axis > :first-child {
+  grid-column: 2;
+  text-align: end;
+}
+
+/* Both sides' labels share the bar's column, one at each end. */
+.lr-ext-pdash__axis > :nth-child(2) {
+  grid-column: 3;
+}
+
+.lr-ext-pdash__axis > :last-child {
+  grid-column: 3;
+  text-align: end;
+}
+
+.lr-ext-pdash__rows {
+  padding: 4px 8px;
+}
+
+.lr-ext-pdash__row {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: var(--lr-ext-text) !important;
+  text-decoration: none !important;
+}
+
+.lr-ext-pdash__row:hover {
+  background: var(--lr-ext-lift-4);
+}
+
+.lr-ext-pdash__name {
+  overflow: hidden;
+  color: var(--lr-ext-text-strong);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lr-ext-pdash__count {
+  color: var(--lr-ext-font-dimmer);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Zero down the middle; the bar grows right in green, left in red. */
+.lr-ext-pdash__track {
+  position: relative;
+  align-self: stretch;
+  background: linear-gradient(var(--lr-ext-lift-10), var(--lr-ext-lift-10)) center / 1px 100%
+    no-repeat;
+}
+
+.lr-ext-pdash__track i {
+  position: absolute;
+  top: calc(50% - 6px);
+  width: calc(var(--lr-ext-pdash-p) * 50%);
+  height: 12px;
+  border-radius: 4px;
+}
+
+[data-lr-ext-sign='up'] .lr-ext-pdash__track i {
+  left: 50%;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--lr-ext-pdash-sign) 35%, transparent),
+    var(--lr-ext-pdash-sign)
+  );
+}
+
+[data-lr-ext-sign='down'] .lr-ext-pdash__track i {
+  right: 50%;
+  background: linear-gradient(
+    270deg,
+    color-mix(in srgb, var(--lr-ext-pdash-sign) 35%, transparent),
+    var(--lr-ext-pdash-sign)
+  );
+}
+
+.lr-ext-pdash__gap {
+  color: var(--lr-ext-pdash-sign);
+  font-size: 13px;
+  font-weight: 800;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.lr-ext-pdash__fewer {
+  margin: 0;
+  padding: 8px 20px 16px;
+  color: var(--lr-ext-font-dimmer);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+/* ---- Narrower --- */
+
+/* The lists one under the other (the numbers have theirs, overview-numbers.css). */
+@container (max-width: 760px) {
+  .lr-ext-pdash__lists {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* A phone: tighter, the chart without its count, the strong themes without their button. */
+@container (max-width: 520px) {
+  .lr-ext-pdash__coach {
+    --lr-ext-pdash-arms: 10px;
+    gap: 12px;
+    padding: 12px 14px 12px calc(8px + var(--lr-ext-pdash-arms));
+  }
+
+  .lr-ext-pdash__mascot {
+    width: 86px;
+  }
+
+  /* Its fade no wider than the gap to the mascot. */
+  .lr-ext-pdash__tip {
+    --lr-ext-pdash-fade: 12px;
+    font-size: 14px;
+  }
+
+  .lr-ext-pdash :is(.lr-ext-pdash__head, .lr-ext-pdash__item) {
+    padding-inline: 14px;
+  }
+
+  .lr-ext-pdash__item {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  [data-lr-ext-list='strong'] .lr-ext-pdash__go {
+    display: none;
+  }
+
+  .lr-ext-pdash__axis,
+  .lr-ext-pdash__row {
+    grid-template-columns: 110px minmax(0, 1fr) 44px;
+    gap: 8px;
+  }
+
+  /* The bars' colors say which side is which. */
+  .lr-ext-pdash__count,
+  .lr-ext-pdash__axis {
+    display: none;
+  }
+}

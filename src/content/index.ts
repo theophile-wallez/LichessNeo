@@ -55,6 +55,7 @@ import { tooltip } from './ui/tooltip.ts';
 import { tabs } from './ui/tabs.ts';
 import { devReload } from './dev/reload.ts';
 import { radar } from './charts/radar/index.ts';
+import { puzzleDashboard } from './puzzle-dashboard/index.ts';
 import { ratingChart } from './charts/rating-chart/index.ts';
 import { coach } from './coach/index.ts';
 import { computer } from './computer/index.ts';
@@ -118,6 +119,7 @@ const FEATURES = [
   tabs,
   devReload,
   radar,
+  puzzleDashboard,
   ratingChart,
   coach,
   computer,
