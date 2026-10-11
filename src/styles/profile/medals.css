@@ -1,0 +1,103 @@
+/* ---- Medals --- */
+
+/* The profile's medals (content/profile/medals.ts), a row under the chart: a struck coin per
+ * family in its metal, its icon stamped in and a glint across; one not won yet is a well
+ * ringed by its progress. Metals are the same in both schemes. */
+
+.user-show > .lr-ext-medals {
+  margin-bottom: 16px;
+  padding: 16px 18px 6px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel);
+}
+
+.lr-ext-medals__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.lr-ext-medals__head h2 {
+  margin: 0;
+  color: var(--lr-ext-text-strong);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.lr-ext-medals__tile {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #e3aa24, #a8741d);
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    inset 0 -3px 0 #00000026;
+}
+
+.lr-ext-medals__tile::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--lr-ext-white);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg') center / 20px
+    no-repeat;
+}
+
+.lr-ext-medals__won {
+  margin-inline-start: auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--lr-ext-lift-6);
+  color: var(--lr-ext-text);
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* One row, scrolling sideways when it doesn't fit; room for the coins' hop and shadow. */
+.lr-ext-medals__row {
+  display: flex;
+  gap: 6px;
+  margin: 0 -18px;
+  padding: 10px 18px 12px;
+  overflow: auto hidden;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.lr-ext-medal {
+  position: relative;
+  display: grid;
+  flex: 1 0 104px;
+  justify-items: center;
+  gap: 4px;
+  max-width: 140px;
+  text-align: center;
+  scroll-snap-align: start;
+  animation: lr-ext-medal-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation-delay: calc(min(sibling-index(), 12) * 45ms);
+}
+
+@keyframes lr-ext-medal-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.85);
+  }
+}
+
+.lr-ext-medal__name {
+  margin-top: 6px;
+  color: var(--lr-ext-text-strong);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.lr-ext-medal__count {
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}

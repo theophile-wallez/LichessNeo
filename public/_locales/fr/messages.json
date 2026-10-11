@@ -310,5 +310,59 @@
   },
   "videosCount": {
     "message": "$1 vidéos · toutes gratuites"
+  },
+  "medalsTitle": {
+    "message": "Médailles"
+  },
+  "medalGames": {
+    "message": "Parties"
+  },
+  "medalWins": {
+    "message": "Victoires"
+  },
+  "medalPeak": {
+    "message": "Meilleur classement"
+  },
+  "medalPuzzles": {
+    "message": "Problèmes"
+  },
+  "medalStorm": {
+    "message": "Puzzle Storm"
+  },
+  "medalStreak": {
+    "message": "Puzzle Streak"
+  },
+  "medalVariants": {
+    "message": "Variantes"
+  },
+  "medalVeteran": {
+    "message": "Ancienneté"
+  },
+  "medalMarathon": {
+    "message": "Temps de jeu"
+  },
+  "medalBronze": {
+    "message": "Bronze"
+  },
+  "medalSilver": {
+    "message": "Argent"
+  },
+  "medalGold": {
+    "message": "Or"
+  },
+  "medalCrystal": {
+    "message": "Cristal"
+  },
+  "medalLocked": {
+    "message": "Pas encore gagnée"
+  },
+  "medalNext": {
+    "message": "prochain palier : $1"
+  },
+  "medalTop": {
+    "message": "tous les paliers gagnés"
+  },
+  "medalNew": {
+    "message": "Nouveau"
   }
 }

@@ -49,6 +49,7 @@ import { racerHome } from './pages/racer-home.ts';
 import { videoCountPill } from './pages/video-count.ts';
 import { gameMeta } from './game/game-meta.ts';
 import { avatars } from './ui/avatars.ts';
+import { profileMedals } from './profile/medals.ts';
 import { powertip } from './ui/powertip.ts';
 import { tooltip } from './ui/tooltip.ts';
 import { tabs } from './ui/tabs.ts';
@@ -111,6 +112,7 @@ const FEATURES = [
   videoCountPill,
   gameMeta,
   avatars,
+  profileMedals,
   powertip,
   tooltip,
   tabs,

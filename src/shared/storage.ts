@@ -23,6 +23,8 @@ export const StorageKey = {
   // The home's speed cards: each speed's rating, curve and last pool (content/pages/speed-cards).
   speedCards: prefixed('speed-cards'),
   ratingChartRange: prefixed('rchart:range'),
+  // The metals the player last saw on their own profile's medals (content/profile).
+  medalsSeen: prefixed('medals-seen'),
   reviewCache: (gameId: string, positions: number, version: number): string =>
     `${prefixed('review')}:${gameId}:${positions}:v${version}`,
   reviewProgress: (gameId: string, positions: number, version: number): string =>

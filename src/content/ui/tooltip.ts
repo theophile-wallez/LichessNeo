@@ -14,6 +14,7 @@ const TARGETS = [
   'main :is(button:is([title], [data-lr-ext-tip]), a.tv-channel[data-lr-ext-tip]):not(#lr-ext-review *)',
   'main .board-editor__tools .actions > a[data-lr-ext-tip]',
   'main .mchat__messages > li > action:is([title], [data-lr-ext-tip])',
+  'main .lr-ext-medal[data-lr-ext-tip]',
 ].join(', ');
 // Lichess's home start buttons carry an English title that only repeats their label:
 // adopted, so the browser's doesn't show either, but never shown.

@@ -414,5 +414,77 @@
   "videosCount": {
     "message": "$1 videos · all free",
     "description": "The video library's pill beside its title; $1 is how many videos it has."
+  },
+  "medalsTitle": {
+    "message": "Medals",
+    "description": "The title of a profile's medals."
+  },
+  "medalGames": {
+    "message": "Games",
+    "description": "The medal for games played."
+  },
+  "medalWins": {
+    "message": "Wins",
+    "description": "The medal for games won."
+  },
+  "medalPeak": {
+    "message": "Top rating",
+    "description": "The medal for the best settled rating in a speed."
+  },
+  "medalPuzzles": {
+    "message": "Puzzles",
+    "description": "The medal for puzzles solved."
+  },
+  "medalStorm": {
+    "message": "Puzzle Storm",
+    "description": "The medal for the best Puzzle Storm score."
+  },
+  "medalStreak": {
+    "message": "Puzzle Streak",
+    "description": "The medal for the best Puzzle Streak score."
+  },
+  "medalVariants": {
+    "message": "Variants",
+    "description": "The medal for variants played (10 games or more each)."
+  },
+  "medalVeteran": {
+    "message": "Seniority",
+    "description": "The medal for the account's age."
+  },
+  "medalMarathon": {
+    "message": "Time played",
+    "description": "The medal for the hours spent playing."
+  },
+  "medalBronze": {
+    "message": "Bronze",
+    "description": "A medal won in bronze, its first step."
+  },
+  "medalSilver": {
+    "message": "Silver",
+    "description": "A medal won in silver, its second step."
+  },
+  "medalGold": {
+    "message": "Gold",
+    "description": "A medal won in gold, its third step."
+  },
+  "medalCrystal": {
+    "message": "Crystal",
+    "description": "A medal won in crystal, its last step."
+  },
+  "medalLocked": {
+    "message": "Not won yet",
+    "description": "A medal's tooltip, before its first step."
+  },
+  "medalNext": {
+    "message": "next at $1",
+    "description": "A medal's tooltip; $1 is the next step's count."
+  },
+  "medalTop": {
+    "message": "every step won",
+    "description": "A medal's tooltip, once crystal."
+  },
+  "medalNew": {
+    "message": "New",
+    "description": "The tag on a medal won since the player last looked."
   }
 }
