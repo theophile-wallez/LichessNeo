@@ -1,0 +1,45 @@
+import { parsePlacement } from '#shared/chess/fen.ts';
+import { parseSquare, squareCoords } from '#shared/chess/squares.ts';
+import type { Color, Square } from '#shared/chess/types.ts';
+import { html, type SafeHtml } from '#shared/html.ts';
+
+// A still board of our own, in chessground's markup, so the board and the
+// pieces the user picked (Lichess's, ours or a pack's) draw it as they draw
+// Lichess's. Each piece and square moves by its own size (`translate` in %),
+// so the board takes any size. Not a `.mini-board`: Lichess would draw over it.
+
+export interface BoardState {
+  readonly fen: string;
+  readonly orientation: Color;
+  readonly lastMove: readonly Square[];
+}
+
+/** A mini board's `data-state` ("<fen>,<orientation>,<uci>"), null if it isn't one. */
+export function parseBoardState(state: string): BoardState | null {
+  const [fen, orientation, uci = ''] = state.split(',');
+  if (!fen || (orientation !== 'white' && orientation !== 'black')) return null;
+  const lastMove = [parseSquare(uci), parseSquare(uci.slice(2))].filter(square => square !== null);
+  return { fen, orientation, lastMove };
+}
+
+// Where a square sits, in squares from the board's top left corner.
+function place(square: Square, orientation: Color): string {
+  const [file, rank] = squareCoords(square);
+  const x = orientation === 'white' ? file : 7 - file;
+  const y = orientation === 'white' ? 7 - rank : rank;
+  return `transform: translate(${x * 100}%, ${y * 100}%)`;
+}
+
+export function boardMarkup({ fen, orientation, lastMove }: BoardState): SafeHtml {
+  const [placement = ''] = fen.split(' ');
+  const pieces = [...parsePlacement(placement)].map(
+    ([square, piece]) =>
+      html`<piece class="${piece.color} ${piece.role}" style="${place(square, orientation)}"></piece>`,
+  );
+  const squares = lastMove.map(
+    square => html`<square class="last-move" style="${place(square, orientation)}"></square>`,
+  );
+  return html`<span class="lr-ext-phist__board cg-wrap is2d orientation-${orientation}">
+    <cg-container><cg-board>${squares}${pieces}</cg-board></cg-container>
+  </span>`;
+}

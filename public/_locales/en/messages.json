@@ -698,5 +698,81 @@
   "pdashReplayCount": {
     "message": "Replay $1",
     "description": "A theme's link to its failed puzzles; $1 is how many."
+  },
+  "phistKicker": {
+    "message": "Last 7 days",
+    "description": "Over the puzzle history, the period the coach speaks of."
+  },
+  "phistSolved": {
+    "message": "of $1 solved first try",
+    "description": "After the big number of puzzles solved first try; $1 is how many were played."
+  },
+  "phistRunDay": {
+    "message": "$1 in a row $2.",
+    "description": "The coach on the best run; $1 is its length, $2 \"today\" or \"yesterday\"."
+  },
+  "phistRunOn": {
+    "message": "$1 in a row on $2.",
+    "description": "The coach on the best run; $1 is its length, $2 a weekday."
+  },
+  "phistSharp": {
+    "message": "A sharp week.",
+    "description": "The coach, when most puzzles were solved first try."
+  },
+  "phistSteady": {
+    "message": "A steady week.",
+    "description": "The coach, when about half the puzzles were solved first try."
+  },
+  "phistTough": {
+    "message": "Tough puzzles this week.",
+    "description": "The coach, when few puzzles were solved first try."
+  },
+  "phistMissedOne": {
+    "message": "One still beats you: shall we go back to it?",
+    "description": "The coach, when one failed puzzle is left to retry."
+  },
+  "phistMissedMany": {
+    "message": "$1 still beat you: shall we go back to them?",
+    "description": "The coach; $1 is how many failed puzzles are left to retry."
+  },
+  "phistAllClear": {
+    "message": "Nothing left to retry: on to new ones.",
+    "description": "The coach, when every failed puzzle was solved since."
+  },
+  "phistNone": {
+    "message": "No puzzles these last 7 days.",
+    "description": "The coach, when no puzzle was played in the period."
+  },
+  "phistNoneBody": {
+    "message": "A few a day keep you sharp.",
+    "description": "After the coach's line on an empty week."
+  },
+  "phistRetryOne": {
+    "message": "Retry the missed one",
+    "description": "A button to Lichess's replay of the one failed puzzle."
+  },
+  "phistRetryMany": {
+    "message": "Retry the $1 missed",
+    "description": "A button to Lichess's replay of the failed puzzles; $1 is how many."
+  },
+  "phistKeepGoing": {
+    "message": "Keep going",
+    "description": "A button to the next puzzle."
+  },
+  "phistStart": {
+    "message": "Solve puzzles",
+    "description": "A button to the puzzles, after an empty week."
+  },
+  "phistToRetry": {
+    "message": "To retry",
+    "description": "The heading over the failed puzzles' boards."
+  },
+  "phistToRetrySub": {
+    "message": "Missed, not solved since",
+    "description": "Beside the heading over the failed puzzles."
+  },
+  "phistRetry": {
+    "message": "Retry",
+    "description": "Under a failed puzzle's board, its link."
   }
 }

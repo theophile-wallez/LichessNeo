@@ -523,5 +523,62 @@
   },
   "pdashReplayCount": {
     "message": "En rejouer $1"
+  },
+  "phistKicker": {
+    "message": "Ces 7 derniers jours"
+  },
+  "phistSolved": {
+    "message": "sur $1 réussis du premier coup"
+  },
+  "phistRunDay": {
+    "message": "$1 d’affilée $2."
+  },
+  "phistRunOn": {
+    "message": "$1 d’affilée $2."
+  },
+  "phistSharp": {
+    "message": "Une semaine affûtée."
+  },
+  "phistSteady": {
+    "message": "Une semaine solide."
+  },
+  "phistTough": {
+    "message": "Des problèmes coriaces cette semaine."
+  },
+  "phistMissedOne": {
+    "message": "Un problème te résiste encore : on y retourne ?"
+  },
+  "phistMissedMany": {
+    "message": "$1 problèmes te résistent encore : on y retourne ?"
+  },
+  "phistAllClear": {
+    "message": "Plus rien à retenter : place aux nouveaux."
+  },
+  "phistNone": {
+    "message": "Aucun problème ces 7 derniers jours."
+  },
+  "phistNoneBody": {
+    "message": "Quelques-uns par jour suffisent à garder la main."
+  },
+  "phistRetryOne": {
+    "message": "Retenter le raté"
+  },
+  "phistRetryMany": {
+    "message": "Retenter les $1 ratés"
+  },
+  "phistKeepGoing": {
+    "message": "Continuer"
+  },
+  "phistStart": {
+    "message": "Résoudre des problèmes"
+  },
+  "phistToRetry": {
+    "message": "À retenter"
+  },
+  "phistToRetrySub": {
+    "message": "Ratés, pas réussis depuis"
+  },
+  "phistRetry": {
+    "message": "Retenter"
   }
 }

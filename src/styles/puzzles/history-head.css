@@ -1,0 +1,353 @@
+/* ---- Puzzle history: the week and the puzzles to retry --- */
+
+/* content/puzzle-dashboard/history/view.ts. The player's mascot, rising from the card's floor,
+ * beside the week's one number on a glowing track in its color (green, orange, red), and two
+ * links; then the missed puzzles, a board each, in a row that scrolls sideways. The mascot
+ * takes the dashboard's box and its seamless swap (dashboard/overview.css). Its layout follows
+ * its own width, which the sidebar and the menu cut into. */
+
+.lr-ext-phist {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 10px;
+  container-type: inline-size;
+}
+
+.lr-ext-phist__hero {
+  /* The arms' reach grows with the mascot: 14px past a 124px still. */
+  --lr-ext-pdash-arms: 21px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 24px 20px calc(14px + var(--lr-ext-pdash-arms));
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 14px;
+  background:
+    radial-gradient(
+      90% 120% at 0% 100%,
+      color-mix(in srgb, var(--lr-ext-phist-tone) 10%, transparent),
+      transparent 60%
+    ),
+    var(--lr-ext-bg-panel);
+}
+
+.lr-ext-phist__hero .lr-ext-pdash__mascot {
+  width: 186px;
+  align-self: end;
+  margin-bottom: -20px;
+}
+
+.lr-ext-phist__week {
+  min-width: 0;
+}
+
+.lr-ext-phist__week > small {
+  color: var(--lr-ext-phist-tone);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lr-ext-phist__big {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+
+.lr-ext-phist__big b {
+  color: var(--lr-ext-phist-tone);
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--lr-ext-phist-tone) 35%, transparent);
+}
+
+.lr-ext-phist__big span {
+  color: var(--lr-ext-text-strong);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* The level slider's track (pages/level-slider.css), read-only: filled up to the share. */
+.lr-ext-phist__track {
+  position: relative;
+  display: block;
+  max-width: 520px;
+  height: 14px;
+  margin: 12px 0;
+  border-radius: 999px;
+  background: var(--lr-ext-lift-6);
+  box-shadow: inset 0 1px 3px var(--lr-ext-shade-50);
+}
+
+/* The fill and the knob grow in by `transform` only, which the compositor runs on its own:
+ * the fill scales out from its start, the knob rides a box as wide that slides in with it. */
+.lr-ext-phist__fill,
+.lr-ext-phist__knob {
+  position: absolute;
+  inset: 0 auto 0 0;
+  /* Never so short the knob would hide the fill. */
+  width: max(14px, calc(var(--lr-ext-phist-p) * 100%));
+  will-change: transform;
+}
+
+.lr-ext-phist__fill {
+  border-radius: 999px;
+  background:
+    radial-gradient(
+      circle at 75% 40%,
+      color-mix(in srgb, var(--lr-ext-phist-tone) 55%, #fff),
+      transparent 60%
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--lr-ext-phist-tone) 55%, #000),
+      var(--lr-ext-phist-tone)
+    );
+  box-shadow: 0 0 18px color-mix(in srgb, var(--lr-ext-phist-tone) 45%, transparent);
+  transform-origin: left;
+  animation: lr-ext-phist-fill 1.2s cubic-bezier(0.33, 1, 0.68, 1) 0.25s both !important;
+}
+
+.lr-ext-phist__knob {
+  animation: lr-ext-phist-knob 1.2s cubic-bezier(0.33, 1, 0.68, 1) 0.25s both !important;
+}
+
+.lr-ext-phist__knob::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -11px;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: var(--lr-ext-white);
+  box-shadow: 0 2px 6px var(--lr-ext-shade-50);
+}
+
+@keyframes lr-ext-phist-fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes lr-ext-phist-knob {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+.lr-ext-phist__week p {
+  margin: 0;
+  color: var(--lr-ext-text);
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+/* ---- Its links --- */
+
+.lr-ext-phist__acts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lr-ext-phist__retry,
+.lr-ext-phist__go,
+.lr-ext-phist__redo-go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 10px;
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: var(--lr-ext-white) !important;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+.lr-ext-phist__retry:hover,
+.lr-ext-phist__redo:hover .lr-ext-phist__redo-go {
+  background: var(--lr-ext-btn-primary-hover);
+}
+
+.lr-ext-phist__go {
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-strong) !important;
+}
+
+.lr-ext-phist__go:hover {
+  background: var(--lr-ext-btn-grey-hover);
+}
+
+.lr-ext-phist__retry::before,
+.lr-ext-phist__go::before,
+.lr-ext-phist__redo-go::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: var(--lr-ext-play) center / contain no-repeat;
+}
+
+.lr-ext-phist__retry[href*='/replay/']::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/repeat.svg');
+}
+
+/* ---- The puzzles to retry --- */
+
+.lr-ext-phist__shelf {
+  padding: 14px 16px 16px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel);
+}
+
+.lr-ext-phist__shelf header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  margin-bottom: 12px;
+}
+
+.lr-ext-phist__shelf h2 {
+  margin: 0;
+  color: var(--lr-ext-text-strong);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.lr-ext-phist__shelf small {
+  color: var(--lr-ext-text-dim);
+  font-size: 13px;
+}
+
+/* Room above for a board's lift on hover, which the scroller would cut. */
+.lr-ext-phist__redos {
+  display: flex;
+  gap: 12px;
+  margin-top: -6px;
+  padding: 6px 0 4px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.lr-ext-phist__redo {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 8px;
+  width: 136px;
+  scroll-snap-align: start;
+  text-decoration: none !important;
+}
+
+.lr-ext-phist__redo-go {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 12.5px;
+}
+
+.lr-ext-phist__redo-go::before {
+  width: 13px;
+  height: 13px;
+}
+
+.lr-ext-phist__board {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-phist__redo:hover .lr-ext-phist__board {
+  transform: translateY(-3px);
+}
+
+.lr-ext-phist__board cg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Narrower --- */
+
+/* The links go under the week, side by side, so the mascot leaves the floor at its still's size. */
+@container (max-width: 760px) {
+  .lr-ext-phist__hero {
+    --lr-ext-pdash-arms: 14px;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .lr-ext-phist__hero .lr-ext-pdash__mascot {
+    width: 124px;
+    align-self: center;
+    margin-bottom: 0;
+  }
+
+  .lr-ext-phist__acts {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+
+  .lr-ext-phist__acts > * {
+    flex: 1;
+  }
+}
+
+/* A phone: the mascot smaller beside the number, the coach's words across the card. */
+@container (max-width: 520px) {
+  .lr-ext-phist__hero {
+    --lr-ext-pdash-arms: 10px;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 14px;
+    padding: 16px 14px 16px calc(8px + var(--lr-ext-pdash-arms));
+  }
+
+  .lr-ext-phist__hero .lr-ext-pdash__mascot {
+    width: 86px;
+  }
+
+  .lr-ext-phist__big b {
+    font-size: 42px;
+  }
+
+  .lr-ext-phist__big span {
+    font-size: 14px;
+  }
+
+  .lr-ext-phist__week p {
+    font-size: 13.5px;
+  }
+
+  .lr-ext-phist__acts {
+    flex-direction: column;
+  }
+
+  .lr-ext-phist__acts > * {
+    flex: none;
+  }
+
+  .lr-ext-phist__redo {
+    width: 108px;
+  }
+}
