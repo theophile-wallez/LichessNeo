@@ -2,16 +2,12 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { BrowserContext, Page } from '@playwright/test';
 import { z } from 'zod/mini';
-import { MOVE_CLASSES } from '#page/review/classes/classes.ts';
 import { StoredRecordSchema } from '#page/review/evaluation/stored.ts';
 
 // The Game Review of FINISHED_GAME. The engine takes a minute and never
 // judges twice alike, so most tests start from its cache: every position
 // at full depth, as this extension stored it once the analysis was done.
 // The @slow review test records it again with LR_EXT_RECORD_REVIEW=1.
-
-/** Any of the review's verdicts, as it writes them in `data-lr-ext-cls`. */
-export const VERDICT = new RegExp(`^(${MOVE_CLASSES.join('|')})$`);
 
 const ReviewCacheSchema = z.object({
   storageKey: z.string().check(z.startsWith('lr-ext-review:')),
@@ -56,17 +52,5 @@ export function reviewParts(page: Page) {
   return {
     panel,
     start: panel.locator('.lr-ext-review__foot [data-lr-ext="moves"]'),
-    close: panel.locator('.lr-ext-review__close'),
-    reopen: panel.locator('.lr-ext-review__open'),
-    bubbleTitle: panel.locator('.lr-ext-bubble .lr-ext-bubble__title'),
-    comment: panel.locator('.lr-ext-bubble .lr-ext-bubble__sub'),
-    avatar: panel.locator('.lr-ext-coach__avatar'),
-    explain: panel.locator('.lr-ext-review__nav [data-lr-ext="explain"]'),
-    best: panel.locator('.lr-ext-review__nav [data-lr-ext="best"]'),
-    next: panel.locator('.lr-ext-review__nav [data-lr-ext="next"]'),
-    controls: page.locator('#lr-ext-review-controls'),
-    badge: page.locator('#lr-ext-board-overlay .lr-ext-badge'),
-    evalBar: page.locator('#lr-ext-evalbar'),
-    arrows: page.locator('#lr-ext-shapes .lr-ext-shapes__arrows polygon'),
   };
 }

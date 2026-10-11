@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { expect, type Page } from '@playwright/test';
 
 // Opening Lichess's pages, and reading what the extension sets on them.
 
@@ -39,49 +39,4 @@ export function rootVariable(page: Page, name: string): Promise<string> {
     variable => getComputedStyle(document.documentElement).getPropertyValue(variable).trim(),
     name,
   );
-}
-
-/** A CSS variable as set inline on <html> by the extension, '' when it isn't. */
-export function inlineRootVariable(page: Page, name: string): Promise<string> {
-  return page.evaluate(
-    variable => document.documentElement.style.getPropertyValue(variable).trim(),
-    name,
-  );
-}
-
-/** A computed style property of an element or one of its pseudo-elements. */
-export function computedStyle(
-  locator: Locator,
-  property: string,
-  pseudo?: '::before' | '::after',
-): Promise<string> {
-  return locator.evaluate(
-    (element, { name, pseudoElement }) =>
-      getComputedStyle(element, pseudoElement).getPropertyValue(name),
-    { name: property, pseudoElement: pseudo ?? null },
-  );
-}
-
-/**
- * Reads a value off the page's own objects (`['site', 'sound', 'paths']`), in
- * the page's world. A Map comes back as its entries. Validate the result: it
- * is whatever Lichess holds there.
- */
-export function readPageGlobal(page: Page, path: readonly string[]): Promise<unknown> {
-  return page.evaluate(
-    (keys): unknown => {
-      let value: unknown = window;
-      for (const key of keys) {
-        if (typeof value !== 'object' || value === null) return undefined;
-        value = Reflect.get(value, key);
-      }
-      return value instanceof Map ? Array.from(value.entries()) : value;
-    },
-    [...path],
-  );
-}
-
-/** The page's stored value under `key`, or null. */
-export function storedValue(page: Page, key: string): Promise<string | null> {
-  return page.evaluate(storageKey => localStorage.getItem(storageKey), key);
 }

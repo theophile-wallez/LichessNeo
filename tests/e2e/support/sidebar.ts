@@ -51,11 +51,3 @@ async function expectIconsLoad(page: Page): Promise<void> {
     expect(loaded, url).toBe(true);
   }
 }
-
-/** Below 1020px: Lichess's own header, which scrolls with the page. */
-export async function expectLichessHeader(page: Page): Promise<void> {
-  await expect(page.locator('#top')).not.toHaveCSS('position', 'fixed');
-  await expect(page.locator('#main-wrap')).toHaveCSS('margin-left', '0px');
-  await expect(page.locator('#lr-ext-donate')).toBeAttached();
-  await expect(page.locator('#lr-ext-donate')).toBeHidden();
-}

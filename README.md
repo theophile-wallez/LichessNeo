@@ -101,8 +101,8 @@ doesn't).
 
 `pnpm check` runs the type checks, the linter, the formatting check and the
 unit tests (`pnpm check:fast` only those of the files changed since
-`origin/main`), and `pnpm test:e2e` the end-to-end tests on lichess.org
-(after `pnpm build`). How the code is organized:
+`origin/main`), and `pnpm test:e2e` the end-to-end smoke tests on
+lichess.org (after `pnpm build`), which CI runs on every push. How the code is organized:
 [docs/architecture.md](docs/architecture.md).
 
 ### Building from the sources

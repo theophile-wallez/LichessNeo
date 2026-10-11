@@ -167,7 +167,9 @@ preference, as its Theme menu does. Users make their own in its editor
   produced: `fixtures/legacy*.json` holds outputs recorded from the
   original for representative inputs (see the radar's test).
 - End-to-end tests (`tests/e2e`) load `dist/chrome` into Playwright's
-  Chromium and drive live lichess.org pages.
+  Chromium and drive live lichess.org pages: a dozen smoke tests, one per
+  main page, for what happy-dom can't see (Lichess's markup today, the
+  layout, both scripts, the engine). CI runs them on every push.
 
 ## Commands
 

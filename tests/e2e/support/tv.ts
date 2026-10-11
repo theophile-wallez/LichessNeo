@@ -1,35 +1,6 @@
-import { expect, type Page } from '@playwright/test';
-import { z } from 'zod/mini';
-import { readPageGlobal } from './lichess.ts';
+import type { Page } from '@playwright/test';
 
-// Lichess TV, which can switch to another game in the middle of a test, and
-// the game page's keys, which the extension's board tools press.
-
-// The bindings of Lichess's key handler (lila's ui/site/src/mousetrap.ts), by key.
-const BindingsSchema = z.record(z.string(), z.unknown());
-
-async function boundKeys(page: Page, keys: readonly string[]): Promise<string[]> {
-  try {
-    const bindings = BindingsSchema.safeParse(
-      await readPageGlobal(page, ['site', 'mousetrap', 'bindings']),
-    );
-    return bindings.success ? keys.filter(key => key in bindings.data) : [];
-  } catch {
-    // The page is reloading: nothing is bound in it yet.
-    return [];
-  }
-}
-
-/**
- * Waits until the game page handles `keys`. Lichess binds them in an idle
- * callback after the game starts (lila's round ctrl.ts, `delayedInit`), often
- * after `load`: a key pressed before that does nothing.
- */
-export async function waitForRoundKeys(page: Page, keys: readonly string[]): Promise<void> {
-  await expect
-    .poll(() => boundKeys(page, keys), { message: `Lichess handles the keys ${keys.join(' ')}` })
-    .toEqual(keys);
-}
+// Lichess TV, which can switch to another game in the middle of a test.
 
 const PAGE_MARK = 'lrExtTestPageMark';
 const ATTEMPTS = 3;

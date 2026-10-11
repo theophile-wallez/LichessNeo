@@ -7,7 +7,7 @@ import { startPacks } from './index.ts';
 import type { Pack } from '#shared/packs/pack.ts';
 import { readPack, readPacks } from './store.ts';
 
-// IndexedDB isn't in happy-dom: the store is the browser's (tests/e2e/packs.spec.ts).
+// IndexedDB isn't in happy-dom: the store is the browser's, so it's mocked.
 vi.mock('./store.ts', () => ({
   readPack: vi.fn<(id: string) => Promise<Pack | null>>(),
   readPacks: vi.fn<() => Promise<Pack[]>>(() => Promise.resolve([])),
