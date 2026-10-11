@@ -103,8 +103,9 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
   background: var(--lr-ext-red);
 }
 
+/* Dimmed: a bright green on the dark panel looks bigger than the red beside it. */
 .lr-ext-phist__dots > i[data-lr-ext-solved] {
-  background: var(--lr-ext-green);
+  background: color-mix(in srgb, var(--lr-ext-green) 70%, transparent);
 }
 
 .lr-ext-phist__score b {
