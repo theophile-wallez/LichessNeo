@@ -1,25 +1,18 @@
 /* ---- Game info: result and event --- */
 
-/* How it ended ("Checkmate", split out by content/game/game-meta.ts) on a banner. */
+/* How it ended ("Checkmate", split out by content/game/game-meta.ts), a line under the players:
+ * who won is their crown (players.css). */
 main.round .round__side > .game__meta section.status {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding: 10px 12px !important;
-  border-radius: 10px;
-  background: linear-gradient(145deg, var(--lr-ext-lift-7), var(--lr-ext-lift-2));
-  box-shadow: inset 0 1px 0 var(--lr-ext-lift-8);
+  margin-top: 8px !important;
   color: var(--lr-ext-text-dim);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
-  animation: lr-ext-meta-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) 180ms backwards;
+  text-align: center;
+  animation: lr-ext-meta-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) 120ms backwards;
 }
 
-main.round .game__meta section.status > .lr-ext-part:first-child {
-  color: var(--lr-ext-text-strong);
-  font-size: 15px;
-  font-weight: 800;
+main.round .game__meta section.status > .lr-ext-part:not(:first-child) {
+  display: none;
 }
 
 /* The tournament, simul or Swiss: a card linking to it, with a tile and the time left. */

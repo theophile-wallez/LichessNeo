@@ -1,5 +1,5 @@
 import type { Color } from '#shared/chess/types.ts';
-import { createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
+import { createElement, queryAll, queryOne, setData, setStyleProperty } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { computerRatings } from './ai-players.ts';
@@ -9,7 +9,8 @@ import { computerRatings } from './ai-players.ts';
 // span of its own, shown as a pill or its own line. The players' names get one
 // too, so they can be truncated alone, and the ratings lose their brackets to
 // show as chips. The info is server-rendered, so editing it is safe; each piece
-// is marked once done, as Lichess may add new ones.
+// is marked once done, as Lichess may add new ones. Once the game is over, its
+// score and winner, from the move list's result, go on the info itself.
 
 /** The parts of a line of the game info. */
 export const infoParts = (text: string): string[] =>
@@ -54,6 +55,32 @@ function addComputerRatings(meta: HTMLElement, ratings: ReadonlyMap<Color, strin
   }
 }
 
+export interface Result {
+  readonly winner: Color | 'draw';
+  /** The score as shown between the players: "0 – 1". */
+  readonly score: string;
+}
+
+const WINNERS: ReadonlyMap<string, Color | 'draw'> = new Map([
+  ['1-0', 'white'],
+  ['0-1', 'black'],
+  ['½-½', 'draw'],
+]);
+
+/** A game's result as the move list writes it, the same in every language; null for any other. */
+export function readResult(text: string): Result | null {
+  const result = text.trim();
+  const winner = WINNERS.get(result);
+  return winner ? { winner, score: result.replace('-', ' – ') } : null;
+}
+
+function markResult(meta: HTMLElement): void {
+  const line = queryOne(document, 'main.round .result-wrap > .result', HTMLElement);
+  const result = line ? readResult(line.textContent) : null;
+  setData(meta, 'lrExtWinner', result?.winner ?? null);
+  setStyleProperty(meta, '--lr-ext-meta-score', result ? `"${result.score}"` : null);
+}
+
 export function syncGameMeta(ratings: ReadonlyMap<Color, string>): void {
   const meta = queryOne(document, 'main.round .round__side > .game__meta', HTMLElement);
   if (!meta) return;
@@ -62,6 +89,7 @@ export function syncGameMeta(ratings: ReadonlyMap<Color, string>): void {
   const links = '.game__meta__players .user-link:not([data-lr-ext-name])';
   for (const link of queryAll(meta, links, HTMLElement)) wrapName(link);
   addComputerRatings(meta, ratings);
+  markResult(meta);
 }
 
 export const gameMeta: Feature = {

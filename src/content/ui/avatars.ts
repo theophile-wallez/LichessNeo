@@ -16,6 +16,8 @@ interface Spot {
 const SPOTS: readonly Spot[] = [
   // The game page's player bars, and ours on the analysis board.
   { selector: 'main.round .ruser, main.analyse > .lr-ext-player', link: ':scope > a.user-link' },
+  // The game info's players, without a chat.
+  { selector: 'main.round .game__meta__players > .player', link: ':scope > a.user-link' },
   { selector: '#powerTip .upt__info', link: '.upt__info__top > a.user-link' },
   { selector: '#friend_box .content a.user-link' },
   {

@@ -21,6 +21,14 @@ const SPOTS = [
     avatar: '.lr-ext-player',
   },
   {
+    name: 'a player of the game info',
+    markup:
+      '<main class="round"><div class="round__side"><div class="game__meta">' +
+      '<div class="game__meta__players"><div class="player color-icon is white text">' +
+      '<a class="user-link ulpt" href="/@/tjychess">tjychess</a></div></div></div></div></main>',
+    avatar: '.player',
+  },
+  {
     name: 'the hover card',
     markup:
       '<div id="powerTip"><div class="upt__info"><div class="upt__info__top">' +
