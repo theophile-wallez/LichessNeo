@@ -15,6 +15,8 @@ afterEach(() => {
   delete dataset.lrExtFlipLabel;
   delete dataset.lrExtToolsLabel;
   delete dataset.lrExtPointsLabel;
+  delete dataset.lrExtVariantLabel;
+  delete dataset.lrExtTimeControlLabel;
   document.body.replaceChildren();
 });
 
@@ -64,6 +66,16 @@ describe('labels', () => {
     Object.assign(window, { i18n: { site: { points: 'Punkte' } } });
     vi.advanceTimersByTime(250);
     expect(dataset.lrExtPointsLabel).toBe('Punkte');
+  });
+
+  it('keeps waiting on the home page, for the game setup’s captions', () => {
+    document.body.innerHTML = '<main class="lobby"></main>';
+    labels.start();
+    vi.advanceTimersByTime(1000);
+    Object.assign(window, { i18n: { site: { variant: 'Variante', timeControl: 'Cadence' } } });
+    vi.advanceTimersByTime(250);
+    expect(dataset.lrExtVariantLabel).toBe('Variante');
+    expect(dataset.lrExtTimeControlLabel).toBe('Cadence');
   });
 
   it('gives up after 30 seconds', () => {

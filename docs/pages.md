@@ -21,6 +21,7 @@ and a white knob, and a single big number in the state's color.
 | ----------------- | ------------- | ----- | ---------------------------------------------------------------------------------------------------- |
 | Home              | `/`           | 2     | the lobby's table is still Lichess's rows; the speed cards could take the track for the day's rating |
 | Computer setup    | `/#ai`        | 3     | the reference                                                                                        |
+| Game setup        | `/#hook`      | 2     | tiles for the variant, the time control and the side over Lichess's controls; no signature yet       |
 | Game, playing     | `/<id>`       | –     | not audited yet                                                                                      |
 | Game over         | `/<id>`       | 2     | signature planned: the rating's change on the track, toward the next hundred                         |
 | Arena tournaments | `/tournament` | 2     | the leaderboard beside the schedule is a plain list                                                  |

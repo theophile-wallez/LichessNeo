@@ -4,8 +4,8 @@
 .game-setup group.radio {
   gap: 4px;
   padding: 4px;
-  border-radius: 10px !important;
-  border: none;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 11px !important;
   background: var(--lr-ext-setup-track);
   overflow: visible !important;
 }
@@ -185,6 +185,7 @@
 .game-setup group.radio.color-cards {
   gap: 8px;
   padding: 0;
+  border: none;
   background: none;
   box-shadow: none !important;
 }

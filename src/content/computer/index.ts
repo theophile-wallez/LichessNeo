@@ -1,7 +1,7 @@
 import { setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
-import { onEveryTick } from '#content/sync-loop.ts';
+import { followSetup } from '#content/game-setup/redraws.ts';
 import { syncLevelSlider } from './level-slider.ts';
 import { levelMood } from './moods.ts';
 
@@ -17,28 +17,6 @@ const setup = new MascotSpot({
 });
 let pickedLevel = 0;
 
-// Lichess draws the setup when a click opens it, and anew on some picks: the slider goes in
-// before it's painted, not on the next tick, so its buttons never show.
-const OPENING_FRAMES = 12;
-const redraws = new MutationObserver(() => syncSetup());
-let watched: Element | null = null;
-
-/** Follows the open setup's redraws, and only them. */
-function watch(dialog: Element | null): void {
-  if (dialog === watched) return;
-  redraws.disconnect();
-  watched = dialog;
-  if (dialog) redraws.observe(dialog, { childList: true, subtree: true });
-}
-
-/** The frames after a click, until a setup opens or a few have gone by. */
-function syncAfterClick(frames: number): void {
-  requestAnimationFrame(() => {
-    syncSetup();
-    if (!watched && frames > 1) syncAfterClick(frames - 1);
-  });
-}
-
 function syncSetup(): void {
   const slider = syncLevelSlider();
   const level = slider?.level ?? 0;
@@ -46,16 +24,9 @@ function syncSetup(): void {
   if (slider && pickedLevel !== 0 && level !== pickedLevel) setup.poke();
   pickedLevel = level;
   setup.sync(slider?.robot ?? null, levelMood(level), { computer: level });
-  watch(slider?.robot.closest('dialog') ?? null);
 }
 
 export const computer: Feature = {
   name: 'computer',
-  start: () => {
-    document.addEventListener('click', () => syncAfterClick(OPENING_FRAMES), {
-      capture: true,
-      passive: true,
-    });
-    onEveryTick('computer robot', syncSetup);
-  },
+  start: () => followSetup('computer robot', syncSetup),
 };

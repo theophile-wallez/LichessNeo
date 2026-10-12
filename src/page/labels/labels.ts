@@ -6,15 +6,17 @@ import { translate } from '#page/lichess/globals.ts';
 
 // Lichess's own labels for what the content script adds: the game page's flip
 // button (src/content/game/board-tools.ts), the analysis controls' tools
-// (src/content/analysis/underboard.ts) and the tournament podium's scores
-// (src/content/pages/podium.ts). Only the page world can read Lichess's
-// translations, so this copies them onto <html>.
+// (src/content/analysis/underboard.ts), the tournament podium's scores
+// (src/content/pages/podium.ts) and the game setup's tiles (src/content/game-setup).
+// Only the page world can read Lichess's translations, so this copies them onto <html>.
 
 /** Each label's `i18n.site` key, by the data attribute it goes into. */
 const LABELS = {
   lrExtFlipLabel: 'flipBoard',
   lrExtToolsLabel: 'tools',
   lrExtPointsLabel: 'points',
+  lrExtVariantLabel: 'variant',
+  lrExtTimeControlLabel: 'timeControl',
 };
 
 // All come in the same table: once one is in, they all are.
@@ -27,9 +29,10 @@ const readLabels = (): Map<string, string> | null => {
   return labels.size > 0 ? labels : null;
 };
 
-// The translations may still be on their way to a game, analysis or tournament page.
+// The translations may still be on their way to a game, analysis, tournament or home page.
 const mayCome = (): boolean =>
-  isParsing() || document.querySelector('main:is(.round, .analyse, .tour, .swiss)') !== null;
+  isParsing() ||
+  document.querySelector('main:is(.round, .analyse, .tour, .swiss, .lobby)') !== null;
 
 export const labels: Feature = {
   name: 'labels',

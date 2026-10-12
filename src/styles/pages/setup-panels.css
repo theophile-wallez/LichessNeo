@@ -1,0 +1,194 @@
+/* ---- Game setup: the panels --- */
+
+/* Under the tiles (setup-picks.css): the time control's or the side's control, the game mode
+ * over them, the variant's menu, and the dialog easing to its new height. */
+
+.game-setup
+  .setup-content
+  > .lr-ext-setup:not([data-lr-ext-open='time'])
+  ~ [data-lr-ext-setup-part='time'],
+.game-setup
+  .setup-content
+  > .lr-ext-setup:not([data-lr-ext-open='side'])
+  ~ [data-lr-ext-setup-part='side'] {
+  display: none !important;
+}
+
+.game-setup
+  .setup-content
+  > .lr-ext-setup
+  ~ :is([data-lr-ext-setup-part='time'], [data-lr-ext-setup-part='side']) {
+  padding: 14px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 14px;
+  background: var(--lr-ext-lift-3);
+  overflow-x: clip;
+}
+
+/* A switched-to panel's content slides in the way the tiles went: the side's from the left,
+ * the time control's from the right. */
+.game-setup
+  .setup-content
+  > .lr-ext-setup[data-lr-ext-switched='side']
+  ~ [data-lr-ext-setup-part='side']
+  > *,
+.game-setup
+  .setup-content
+  > .lr-ext-setup[data-lr-ext-switched='time']
+  ~ [data-lr-ext-setup-part='time']
+  > * {
+  animation: lr-ext-setup-slide 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.game-setup
+  .setup-content
+  > .lr-ext-setup[data-lr-ext-switched='side']
+  ~ [data-lr-ext-setup-part='side'] {
+  --lr-ext-setup-from: -32px;
+}
+
+.game-setup
+  .setup-content
+  > .lr-ext-setup[data-lr-ext-switched='time']
+  ~ [data-lr-ext-setup-part='time'] {
+  --lr-ext-setup-from: 32px;
+}
+
+@keyframes lr-ext-setup-slide {
+  from {
+    opacity: 0;
+    translate: var(--lr-ext-setup-from) 0;
+  }
+}
+
+/* The tile says what the section is. */
+.game-setup
+  .setup-content
+  > .lr-ext-setup
+  ~ :is([data-lr-ext-setup-part='mode'], [data-lr-ext-setup-part='side'])
+  > .label {
+  display: none !important;
+}
+
+/* The game mode: its two segments, each with its icon. */
+.game-setup .lr-ext-setup ~ [data-lr-ext-setup-part='mode'] group.radio label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.game-setup .lr-ext-setup ~ [data-lr-ext-setup-part='mode'] group.radio label::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: var(--lr-ext-setup-mode-hue);
+  -webkit-mask: var(--lr-ext-setup-mode-icon) center / contain no-repeat;
+  mask: var(--lr-ext-setup-mode-icon) center / contain no-repeat;
+}
+
+.game-setup .lr-ext-setup ~ [data-lr-ext-setup-part='mode'] label[for='sf_mode_casual'] {
+  --lr-ext-setup-mode-hue: var(--lr-ext-cyan);
+  --lr-ext-setup-mode-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/coffee-02.svg');
+}
+
+.game-setup .lr-ext-setup ~ [data-lr-ext-setup-part='mode'] label[for='sf_mode_rated'] {
+  --lr-ext-setup-mode-hue: var(--lr-ext-yellow);
+  --lr-ext-setup-mode-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion.svg');
+}
+
+/* The variant's menu is anchored to an empty box under the tiles, its gap taken back. */
+.game-setup .setup-content > .lr-ext-setup ~ [data-lr-ext-setup-part='variant'] {
+  height: 0;
+  margin-top: -16px !important;
+}
+
+.game-setup .setup-content > .lr-ext-setup ~ [data-lr-ext-setup-part='variant'] .mselect__label {
+  display: none !important;
+}
+
+/* The clock: its presets first, a row per speed after its glyph, then the sliders. */
+.game-setup .lr-ext-setup ~ .time-control-tabs .tabs-horiz {
+  margin-bottom: 14px !important;
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .tabs-horiz button {
+  height: 32px;
+  font-size: 13.5px;
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .time-panel {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .time-panel .presets {
+  order: -1;
+  display: grid !important;
+  grid-template-columns: 28px repeat(4, max-content);
+  justify-content: start;
+  align-items: center;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .time-panel .presets .preset-btn {
+  --lr-ext-setup-hue: var(--lr-ext-accent);
+  position: relative;
+  overflow: visible;
+  height: 32px;
+  padding: 0 13px !important;
+  border-radius: 999px !important;
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .presets .preset-btn[data-lr-ext-first] {
+  grid-column-start: 2;
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .presets .preset-btn[data-lr-ext-first]::before {
+  content: var(--lr-ext-setup-glyph);
+  position: absolute;
+  top: 2px;
+  inset-inline-end: calc(100% + 6px);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--lr-ext-setup-hue) 18%, transparent);
+  color: var(--lr-ext-setup-hue);
+  font-family: lichess;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .presets .preset-btn.active {
+  background: color-mix(in srgb, var(--lr-ext-setup-hue) 20%, transparent) !important;
+  box-shadow: inset 0 0 0 2px var(--lr-ext-setup-hue);
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .presets .preset-btn[data-lr-ext-speed$='bullet'] {
+  --lr-ext-setup-hue: var(--lr-ext-mode-bullet-color);
+  --lr-ext-setup-glyph: var(--lr-ext-mode-bullet);
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .presets .preset-btn[data-lr-ext-speed='blitz'] {
+  --lr-ext-setup-hue: var(--lr-ext-mode-blitz-color);
+  --lr-ext-setup-glyph: var(--lr-ext-mode-blitz);
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .presets .preset-btn[data-lr-ext-speed='rapid'] {
+  --lr-ext-setup-hue: var(--lr-ext-mode-rapid-color);
+  --lr-ext-setup-glyph: var(--lr-ext-mode-rapid);
+}
+
+.game-setup .lr-ext-setup ~ .time-control-tabs .presets .preset-btn[data-lr-ext-speed='classical'] {
+  --lr-ext-setup-hue: var(--lr-ext-mode-classical-color);
+  --lr-ext-setup-glyph: var(--lr-ext-mode-classical);
+}
+
+/* As the dialog eases to its new height (content/game-setup/height.ts), what's past it waits. */
+dialog[data-lr-ext-easing] {
+  overflow: hidden !important;
+}

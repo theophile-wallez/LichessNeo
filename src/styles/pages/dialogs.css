@@ -92,7 +92,7 @@ dialog .help th p {
 }
 
 .game-setup .setup-content {
-  gap: 22px !important;
+  gap: 16px !important;
   border: none !important;
   background: transparent !important;
   padding: 0 24px 4px !important;
@@ -145,8 +145,8 @@ dialog .help th p {
   gap: 4px;
   margin: 0 0 18px !important;
   padding: 4px;
-  border: none !important;
-  border-radius: 10px;
+  border: 1px solid var(--lr-ext-card-border) !important;
+  border-radius: 11px;
   background: var(--lr-ext-setup-track);
 }
 

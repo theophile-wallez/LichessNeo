@@ -50,6 +50,10 @@ Content features that follow the page as Lichess redraws it register a task
 with `onEveryTick` (`src/content/sync-loop.ts`): one 250 ms interval runs them
 all, in registration order, while the tab shows (a hidden tab catches up as
 it shows again). A task must cost next to nothing when there's nothing to do.
+What goes in the game setup dialog follows it with `followSetup`
+(`src/content/game-setup/redraws.ts`) instead: Lichess draws the dialog as a
+click opens it, and anew on some picks, so it syncs on the frames after a
+click and on each redraw too, before the browser paints Lichess's own controls.
 
 A feature's folder splits what it does into small modules: pure logic
 (parsing, geometry, text, classification) apart from what touches the DOM,
