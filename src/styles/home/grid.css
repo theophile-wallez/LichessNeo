@@ -9,7 +9,9 @@
   main.lobby {
     display: grid !important;
     grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-    grid-template-rows: none !important;
+    /* The side column spans rows 7 and 8 and is the tallest: its extra goes to the support
+       links' row (the flexible one), so the tournaments' card keeps its own height. */
+    grid-template-rows: repeat(7, auto) 1fr !important;
     grid-template-areas: none !important;
     grid-auto-rows: auto !important;
     gap: 20px !important;
