@@ -137,8 +137,6 @@ const clockStrings = (viewer: Viewer): ClockStrings => ({
   paidOff: (color, spent) =>
     `${capitalize(partyOf(viewer, color, spent).name)} spent ${spent} on this move, and it was worth it.`,
   seconds: seconds => `${seconds} s`,
-  tipTitle: 'Tip',
-  praiseTitle: 'Time well spent',
 });
 
 /** English, the coach speaking to `viewer` of their own moves. */

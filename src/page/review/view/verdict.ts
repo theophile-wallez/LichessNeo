@@ -15,12 +15,12 @@ import { type CommentPart, commentMarkup, streamFor } from '#page/review/comment
 import { verdictTitle } from '#page/review/comment/title.ts';
 import { forColor } from '#page/review/evaluation/score.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
-import { evalChip, svgIcon } from './markup.ts';
+import { evalChip } from './markup.ts';
 
 // The bubble for a judged move: its icon, the verdict and how the score
-// moved, then the coach's comment, typed out, the coach's advice on the
-// move's time, and the tags: the tactic, the chances an error gave away. The
-// move's time is the card's (`timeTag`).
+// moved, then the coach's comment, typed out, and the tags: the tactic, the
+// chances an error gave away. The move's time is the card's (`timeTag`), the
+// coach's advice on it in its tooltip.
 
 const coachContext = (session: Session, gameId: string): CoachContext => ({
   gameId,
@@ -50,7 +50,7 @@ export interface CoachComment {
   readonly parts: readonly CommentPart[];
   readonly themes: readonly Theme[];
   readonly timing: MoveTiming | null;
-  /** What the coach makes of the move's time, in a box under the comment. */
+  /** What the coach makes of the move's time, in the time's tooltip. */
   readonly advice: Advice | null;
 }
 
@@ -76,16 +76,6 @@ export function commentOn(session: Session, input: VerdictInput): CoachComment {
   return { move, parts, themes, timing, advice };
 }
 
-// A long think that paid off is praise; the other notes are advice.
-function adviceMarkup(session: Session, advice: Advice | null): SafeHtml {
-  if (!advice) return html``;
-  const { ui, typography } = session.language;
-  const praise = advice.note === 'paidOff';
-  return html`<div class="lr-ext-advice${praise ? ' lr-ext-advice--praise' : ''}">
-      <p class="lr-ext-advice__title">${svgIcon(praise ? 'star' : 'bulb')}${praise ? ui.clock.praiseTitle : ui.clock.tipTitle}</p>
-      <p class="lr-ext-advice__text">${typography(advice.text)}</p></div>`;
-}
-
 /** Keeps the typing going through the renders of one comment; a new comment starts it over. */
 export function followComment(session: Session, { parts }: CoachComment): void {
   session.stream.state = streamFor(session.stream.state, parts);
@@ -99,10 +89,12 @@ function chancesLost(move: JudgedMove): number {
 }
 
 /** The move's time, which the card shows over the coach's head; none without clocks. */
-export function timeTag(session: Session, { move, timing }: CoachComment): SafeHtml | '' {
+export function timeTag(session: Session, { timing, advice }: CoachComment): SafeHtml | '' {
   if (!timing) return '';
-  const note = clockNote(move.moveClass, timing);
-  return html`<span class="lr-ext-tag lr-ext-tag--time${note ? ` lr-ext-tag--${note}` : ''}">${spentTime(timing.spent, session.language.ui.clock)}</span>`;
+  const { ui, typography } = session.language;
+  const spent = spentTime(timing.spent, ui.clock);
+  if (!advice) return html`<span class="lr-ext-tag lr-ext-tag--time">${spent}</span>`;
+  return html`<span class="lr-ext-tag lr-ext-tag--time lr-ext-tag--${advice.note}" data-lr-ext-tip="${typography(advice.text)}">${spent}</span>`;
 }
 
 function tagsMarkup(session: Session, { move, themes }: CoachComment): SafeHtml {
@@ -136,5 +128,5 @@ export function verdictMarkup(
       <p class="lr-ext-bubble__title">${verdictTitle(move.moveClass, move.san, language)}</p>
       ${scoreChange(move)}</div>
     <div class="lr-ext-bubble__body"><p class="lr-ext-bubble__sub">${said}</p>
-      ${adviceMarkup(session, comment.advice)}${tagsMarkup(session, comment)}${actions}</div>`;
+      ${tagsMarkup(session, comment)}${actions}</div>`;
 }

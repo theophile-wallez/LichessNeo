@@ -143,6 +143,13 @@
     border-top-color: var(--lr-ext-neutral-1);
   }
 
+  #lr-ext-tip[data-lr-ext-below]::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: var(--lr-ext-neutral-1);
+  }
+
   .lr-ext-cls-icon {
     display: inline-flex;
     width: 22px;

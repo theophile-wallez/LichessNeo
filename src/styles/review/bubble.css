@@ -295,7 +295,8 @@
     height: 150%;
   }
 
-  /* The move's time, in the card's corner over the coach's head. */
+  /* The move's time, in the card's corner over the coach's head; the coach's advice on it,
+     when there's some, in its tooltip (view/verdict.ts). */
   #lr-ext-review .lr-ext-coach > .lr-ext-tag--time {
     position: absolute;
     top: 10px;
@@ -303,6 +304,11 @@
     z-index: 2;
     background: color-mix(in srgb, var(--lr-ext-tag) 16%, var(--lr-ext-bg-raised));
     pointer-events: none;
+  }
+
+  #lr-ext-review .lr-ext-coach > .lr-ext-tag--time[data-lr-ext-tip] {
+    cursor: help;
+    pointer-events: auto;
   }
 
   /* The verdict stays on top, the rest scrolls under it once the review has dropped the

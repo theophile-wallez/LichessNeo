@@ -44,9 +44,6 @@ export interface ClockStrings {
   /** A long think that found a good move. */
   readonly paidOff: (side: Color, spent: string) => string;
   readonly seconds: (seconds: number) => string;
-  /** The advice box's titles: advice, and praise for a long think that paid off. */
-  readonly tipTitle: string;
-  readonly praiseTitle: string;
 }
 
 /** The coach's brief before the first move. */

@@ -1,14 +1,15 @@
-import { closestTo, setStyleProperty } from '#shared/dom.ts';
+import { closestTo, setData, setStyleProperty } from '#shared/dom.ts';
 import { clamp } from '#shared/math.ts';
 import type { Session } from '#page/review/session.ts';
 
-// The panel's tooltip: dark, over what it explains, its tail pointing at it.
+// The panel's tooltip: dark, over what it explains, its tail pointing at it; under it
+// when there's no room above (the move's time, at the card's top).
 
 const MARGIN = 8;
 const GAP = 10;
 
 export interface TipInput {
-  readonly anchor: Pick<DOMRect, 'left' | 'top' | 'width'>;
+  readonly anchor: Pick<DOMRect, 'left' | 'top' | 'width' | 'height'>;
   readonly width: number;
   readonly height: number;
   readonly viewportWidth: number;
@@ -19,13 +20,18 @@ export interface TipPlacement {
   readonly top: number;
   /** The tail's x, from the tooltip's left edge. */
   readonly tail: number;
+  /** Under its anchor, the tail pointing up. */
+  readonly below: boolean;
 }
 
-/** Centers the tooltip over its anchor, keeping it inside the window. */
+/** Centers the tooltip over its anchor, or under it near the window's top, inside the window. */
 export function tipPlacement({ anchor, width, height, viewportWidth }: TipInput): TipPlacement {
   const center = anchor.left + anchor.width / 2;
   const left = clamp(center - width / 2, MARGIN, viewportWidth - width - MARGIN);
-  return { left, top: anchor.top - height - GAP, tail: center - left };
+  const above = anchor.top - height - GAP;
+  const below = above < MARGIN;
+  const top = below ? anchor.top + anchor.height + GAP : above;
+  return { left, top, tail: center - left, below };
 }
 
 export function hideTip(session: Session): void {
@@ -44,7 +50,7 @@ export function showTip(session: Session, target: HTMLElement, content?: TipCont
   session.tipFor = target;
   tip.textContent = content?.text ?? target.dataset.lrExtTip ?? '';
   document.body.append(tip);
-  const { left, top, tail } = tipPlacement({
+  const { left, top, tail, below } = tipPlacement({
     anchor: content?.anchor ?? target.getBoundingClientRect(),
     width: tip.offsetWidth,
     height: tip.offsetHeight,
@@ -53,6 +59,7 @@ export function showTip(session: Session, target: HTMLElement, content?: TipCont
   setStyleProperty(tip, 'left', `${left}px`);
   setStyleProperty(tip, 'top', `${top}px`);
   setStyleProperty(tip, '--lr-ext-tip-x', `${tail}px`);
+  setData(tip, 'lrExtBelow', below ? '' : null);
 }
 
 export function watchTips(session: Session): void {

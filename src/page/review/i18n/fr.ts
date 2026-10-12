@@ -135,8 +135,6 @@ const clockStrings = (viewer: Viewer): ClockStrings => ({
     return `${capitalize(player.subject)} ${conjugate(player, 'as', 'a', 'ont')} réfléchi ${spent} sur ce coup, et ça en valait la peine.`;
   },
   seconds: seconds => `${String(seconds).replace('.', ',')} s`,
-  tipTitle: 'Conseil',
-  praiseTitle: 'Temps bien investi',
 });
 
 /** French, the coach speaking to `viewer` of their own moves. */

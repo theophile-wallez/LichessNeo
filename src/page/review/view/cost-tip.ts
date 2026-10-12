@@ -29,7 +29,7 @@ function onPointer(session: Session, event: PointerEvent): void {
   const text = moveClass ? `${classLabels[moveClass]} · ${cost}` : cost;
   showTip(session, move, {
     text,
-    anchor: { left, top: box.top + box.height / 2 - 2, width: BAR_WIDTH },
+    anchor: { left, top: box.top + box.height / 2 - 2, width: BAR_WIDTH, height: 4 },
   });
 }
 

@@ -194,7 +194,7 @@ describe('the panel', () => {
   it('places the tooltip over its anchor, inside the window', () => {
     expect(
       tipPlacement({
-        anchor: { left: 100, top: 200, width: 40 },
+        anchor: { left: 100, top: 200, width: 40, height: 20 },
         width: 120,
         height: 30,
         viewportWidth: 1000,
@@ -203,10 +203,11 @@ describe('the panel', () => {
       left: 60,
       top: 160,
       tail: 60,
+      below: false,
     });
     expect(
       tipPlacement({
-        anchor: { left: 0, top: 50, width: 20 },
+        anchor: { left: 0, top: 50, width: 20, height: 20 },
         width: 120,
         height: 30,
         viewportWidth: 1000,
@@ -214,7 +215,7 @@ describe('the panel', () => {
     ).toBe(8);
     expect(
       tipPlacement({
-        anchor: { left: 990, top: 50, width: 20 },
+        anchor: { left: 990, top: 50, width: 20, height: 20 },
         width: 120,
         height: 30,
         viewportWidth: 1000,
@@ -223,6 +224,23 @@ describe('the panel', () => {
       left: 872,
       top: 10,
       tail: 128,
+      below: false,
+    });
+  });
+
+  it('places the tooltip under its anchor when there’s no room above', () => {
+    expect(
+      tipPlacement({
+        anchor: { left: 100, top: 30, width: 40, height: 20 },
+        width: 120,
+        height: 30,
+        viewportWidth: 1000,
+      }),
+    ).toEqual({
+      left: 60,
+      top: 60,
+      tail: 60,
+      below: true,
     });
   });
 

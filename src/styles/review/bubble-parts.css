@@ -95,45 +95,6 @@
     font-size: 15px;
   }
 
-  /* The coach's advice on the move's time (view/verdict.ts): a tinted box, a bulb and a
-     title, in orange; praise for a long think that paid off, in green. */
-  .lr-ext-advice {
-    --lr-ext-advice: var(--lr-ext-orange);
-    margin-top: 8px;
-    padding: 8px 10px;
-    border-radius: 10px;
-    background: color-mix(in srgb, var(--lr-ext-advice) 10%, transparent);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-advice) 28%, transparent);
-  }
-
-  .lr-ext-advice--praise {
-    --lr-ext-advice: var(--lr-ext-green);
-  }
-
-  .lr-ext-advice__title {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin: 0 0 3px;
-    color: var(--lr-ext-advice);
-    font-size: 11.5px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .lr-ext-advice__title .lr-ext-i {
-    width: 14px;
-    height: 14px;
-  }
-
-  .lr-ext-advice__text {
-    margin: 0;
-    color: var(--lr-ext-neutral-13);
-    font-size: 13px;
-    line-height: 1.35;
-  }
-
   /* The tags: the tactic, the chances an error gave away; and the move's time, which the card
    * shows over the coach (bubble.css). */
   .lr-ext-bubble__tags {
