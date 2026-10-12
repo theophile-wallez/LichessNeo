@@ -128,6 +128,49 @@ input[type='file']::file-selector-button:hover {
   margin-inline-start: 18px !important;
 }
 
+/* Lichess's checkboxes (.form-check__input, a green box with a tick) as the same switch. */
+.form-check__input .form-check__label {
+  width: 40px !important;
+  height: 22px !important;
+  border: none !important;
+  border-radius: 999px !important;
+  background: var(--lr-ext-neutral-9) !important;
+  box-shadow: none !important;
+  transition: background-color 0.2s !important;
+}
+
+/* Lichess's tick is this box's borders, turned: they go, the box is the knob. */
+.form-check__input .form-check__label::after {
+  top: 2px !important;
+  inset-inline: 2px auto !important;
+  width: 18px !important;
+  height: 18px !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background: var(--lr-ext-white) !important;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-40) !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.form-check__input input:checked + .form-check__label {
+  background: var(--lr-ext-accent) !important;
+}
+
+.form-check__input input:checked + .form-check__label::after {
+  transform: translateX(18px) !important;
+}
+
+.form-check__input input:checked + .form-check__label:dir(rtl)::after {
+  transform: translateX(-18px) !important;
+}
+
+.form-check__input input:not(:disabled):focus-visible + .form-check__label {
+  outline: 2px solid var(--lr-ext-accent) !important;
+  outline-offset: 2px;
+}
+
 /* The sidebar search box stays borderless. */
 #top #clinput input {
   border: none !important;
