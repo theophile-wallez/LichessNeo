@@ -158,6 +158,21 @@
   object-fit: contain;
 }
 
+/* The top 50's and top 100's cups (Fancy-Gold, 90 × 160, and Gold-Cup, 68 × 160) leave
+ * their top third empty: it's cut off so the cup itself is centered. */
+.user-show > .user-show__header .trophies .trophy.perf:is(.top50, .top100) img {
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.user-show > .user-show__header .trophies .trophy.perf.top50 img {
+  aspect-ratio: 90 / 108;
+}
+
+.user-show > .user-show__header .trophies .trophy.perf.top100 img {
+  aspect-ratio: 68 / 107;
+}
+
 .user-show > .user-show__header .trophies :is(.trophy, .shield-trophy, .combo-trophy):hover {
   background-color: var(--lr-ext-lift-15);
   transform: translateY(-2px);
