@@ -165,6 +165,28 @@ describe('tooltips', () => {
     expect(shown()?.textContent).toBe('Report');
   });
 
+  it('shows an opening’s way back, popularity and results in place of their title', () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main class="opening"><h1 class="opening__title"><a href="/opening" title="Openings"></a></h1>' +
+        '<a class="opening__next"><span class="opening__next__popularity">' +
+        '<span title="Popularity">12%</span></span><span class="result-bar">' +
+        '<span class="white" title="White wins">35%</span></span></a></main>',
+    );
+    for (const [selector, label] of [
+      ['h1.opening__title > a', 'Openings'],
+      ['.opening__next__popularity > span', 'Popularity'],
+      ['.result-bar > span', 'White wins'],
+    ] as const) {
+      const target = document.querySelector(selector);
+      if (!target) throw new Error(`no ${selector}`);
+      hover(target);
+      expect(target.hasAttribute('title')).toBe(false);
+      vi.advanceTimersByTime(250);
+      expect(shown()?.textContent).toBe(label);
+    }
+  });
+
   it('splits a shortcut off the label', () => {
     expect(splitShortcut('Flip board (f)')).toEqual({ label: 'Flip board', key: 'f' });
     expect(splitShortcut('(x)')).toEqual({ label: '(x)', key: null });

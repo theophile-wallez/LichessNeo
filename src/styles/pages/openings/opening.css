@@ -1,0 +1,209 @@
+/* ---- Openings: an opening's page --- */
+
+/* Its board and moves in a card on the left; on the right, its story, then its popularity
+ * with the ways to practice it. */
+main.opening .opening__intro {
+  display: grid !important;
+  grid-template-columns: minmax(0, 400px) minmax(0, 1fr) !important;
+  align-items: start;
+  gap: 20px !important;
+}
+
+main.opening .opening__intro__result-lpv {
+  display: flex !important;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px !important;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 18px;
+  background: var(--lr-ext-card-bg);
+}
+
+main.opening .opening__intro__result-lpv > .result-bar {
+  order: 2;
+}
+
+/* Lichess sizes the viewer for its narrow column: it takes the card's width. */
+main.opening .opening__intro__result-lpv .lpv {
+  flex: none !important;
+  height: auto !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main.opening .opening__intro__result-lpv .lpv__board .cg-wrap {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+main.opening .opening__intro__content {
+  display: flex !important;
+  flex-direction: column;
+  gap: 16px;
+}
+
+main.opening .opening__wiki {
+  padding: 20px 22px !important;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 18px;
+  background: var(--lr-ext-card-bg);
+}
+
+main.opening .opening__wiki__markup {
+  padding: 0 !important;
+  color: var(--lr-ext-text) !important;
+  font-size: 14.5px !important;
+  line-height: 1.6 !important;
+}
+
+/* The story opens on its summary, in bold. */
+main.opening .opening__wiki__markup > ul:first-child {
+  margin: 0 0 4px !important;
+  padding: 0 !important;
+  list-style: none;
+}
+
+main.opening .opening__wiki__markup > ul:first-child p {
+  color: var(--lr-ext-text-strong);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+main.opening .opening__wiki hr {
+  margin: 14px 0 !important;
+  border-color: var(--lr-ext-card-border) !important;
+}
+
+main.opening .opening__popularity-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 16px 18px !important;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 18px;
+  background: var(--lr-ext-card-bg);
+}
+
+main.opening .opening__actions {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  order: 2;
+  gap: 10px !important;
+}
+
+main.opening .opening__actions .button {
+  height: 44px;
+  margin: 0 !important;
+  border-radius: 10px !important;
+}
+
+main.opening .opening__actions .button + .button {
+  background: var(--lr-ext-btn-grey) !important;
+  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  color: var(--lr-ext-text-strong) !important;
+}
+
+main.opening .opening__actions .button + .button:hover {
+  background: var(--lr-ext-btn-grey-hover) !important;
+}
+
+/* ---- The panels --- */
+
+/* The continuations and the example games, behind tabs whose highlight slides
+ * (content/ui/tab-bars.ts). */
+main.opening .opening__panels .tab-list {
+  --lr-ext-tab-radius: 9px;
+  display: inline-flex !important;
+  gap: 4px;
+  margin: 28px 0 16px !important;
+  padding: 4px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 12px;
+  background: var(--lr-ext-neutral-1);
+}
+
+main.opening .opening__panels .tab-list__tab {
+  height: 36px;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: none !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+main.opening .opening__panels .tab-list__tab[aria-selected='true'] {
+  color: var(--lr-ext-text-strong) !important;
+}
+
+main.opening
+  .opening__panels
+  .tab-list:not([data-lr-ext-tabs])
+  .tab-list__tab[aria-selected='true'] {
+  background: var(--lr-ext-bg-raised) !important;
+}
+
+/* The example games: each viewer a card, its players over and under its board. */
+main.opening .opening__games {
+  gap: 16px !important;
+}
+
+main.opening .opening__games__game {
+  overflow: hidden;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 18px;
+  background: var(--lr-ext-card-bg) !important;
+  box-shadow: none !important;
+}
+
+main.opening .opening__games__game .lpv__player {
+  padding: 8px 12px !important;
+  background: none !important;
+}
+
+main.opening .opening__games__game .lpv__player__name {
+  color: var(--lr-ext-text-strong);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+main.opening .opening__games__game .lpv__player__rating {
+  margin-inline-start: 6px;
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1019.98px) {
+  main.opening .opening__intro {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  main.opening .opening__intro__result-lpv {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 599.98px) {
+  main.opening .opening__wiki {
+    padding: 16px !important;
+  }
+
+  main.opening .opening__popularity-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  main.opening .opening__actions {
+    flex-direction: row;
+  }
+
+  main.opening .opening__actions .button {
+    flex: 1;
+  }
+}

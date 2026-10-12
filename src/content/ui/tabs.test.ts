@@ -151,6 +151,25 @@ describe('sliding tabs', () => {
     expect(bar.dataset.lrExtTabsStill).toBe('');
     expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('100px');
   });
+
+  it('slides to the tab an opening’s panels mark selected', async () => {
+    document.body.innerHTML =
+      '<main class="opening"><div class="opening__panels"><div class="tab-list" role="tablist">' +
+      '<span class="tab-list__tab" role="tab" aria-selected="true">Games</span>' +
+      '<span class="tab-list__tab" role="tab" aria-selected="false">Moves</span></div></div></main>';
+    const [bar] = elements('.tab-list');
+    const [games, moves] = elements('.tab-list__tab');
+    if (!bar || !games || !moves) throw new Error('no bar');
+    layOut(bar, () => ({ top: 0, left: 0, width: 200, height: 40 }));
+    layOut(games, () => ({ top: 0, left: 0, width: 100, height: 40 }));
+    layOut(moves, () => ({ top: 0, left: 100, width: 100, height: 40 }));
+    createTabBars().sync();
+    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('0px');
+    games.setAttribute('aria-selected', 'false');
+    moves.setAttribute('aria-selected', 'true');
+    await nextFrame();
+    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('100px');
+  });
 });
 
 describe('tab geometry', () => {

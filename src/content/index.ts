@@ -47,6 +47,7 @@ import { practiceIcons } from './pages/practice-icons.ts';
 import { streamerSections } from './pages/streamer-sections.ts';
 import { racerHome } from './pages/racer-home.ts';
 import { videoCountPill } from './pages/video-count.ts';
+import { openings } from './pages/openings.ts';
 import { gameMeta } from './game/game-meta.ts';
 import { avatars } from './ui/avatars.ts';
 import { profileMedals } from './profile/medals.ts';
@@ -113,6 +114,7 @@ const FEATURES = [
   streamerSections,
   racerHome,
   videoCountPill,
+  openings,
   gameMeta,
   avatars,
   profileMedals,

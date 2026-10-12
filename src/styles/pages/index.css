@@ -9,6 +9,7 @@
 @import './setup-picks.css';
 @import './setup-panels.css';
 @import './page-fixes.css';
+@import './openings/index.css';
 @import './tournaments.css';
 @import './tournament-pages.css';
 @import './static-pages.css';

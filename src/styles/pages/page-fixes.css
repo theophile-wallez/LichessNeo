@@ -84,33 +84,6 @@
   min-width: 0;
 }
 
-/* ---- Openings --- */
-
-/* A phone's openings two by two: one board per row filled the screen with each. */
-@media (max-width: 559.98px) {
-  .opening__nexts {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-  }
-
-  .opening__next__title {
-    gap: 6px;
-  }
-
-  .opening__next__name {
-    min-width: 0;
-    font-size: 14px !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .opening__next__san {
-    flex: none;
-    font-size: 16px !important;
-  }
-}
-
 /* ---- Game search --- */
 
 /* On a phone each label sits over its fields, which take the whole row: beside them, the

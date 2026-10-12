@@ -1,0 +1,109 @@
+/* ---- Openings: the list --- */
+
+/* Every opening by name, its variations folded under it: each family a card whose row opens
+ * with a chevron, its variations in plain links. */
+main.opening .opening__tree {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+main.opening .opening__tree > :is(details, div) {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
+  border-radius: 14px;
+  background: var(--lr-ext-card-bg) !important;
+}
+
+main.opening .opening__tree details > summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 0 13px 16px !important;
+  background: none !important;
+  list-style: none;
+  cursor: pointer;
+}
+
+main.opening .opening__tree details > summary::-webkit-details-marker {
+  display: none;
+}
+
+main.opening .opening__tree details > summary::before {
+  content: '';
+  flex: none;
+  order: 2;
+  width: 18px;
+  height: 18px;
+  margin-inline: auto 14px;
+  background: var(--lr-ext-text-dim);
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg')
+    center / contain no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg') center /
+    contain no-repeat;
+  transition: rotate 0.2s !important;
+}
+
+main.opening .opening__tree details[open] > summary::before {
+  rotate: 180deg;
+}
+
+main.opening .opening__tree a {
+  display: block;
+  color: var(--lr-ext-text) !important;
+  font-size: 14.5px !important;
+  font-weight: 600;
+}
+
+main.opening .opening__tree a:hover {
+  color: var(--lr-ext-accent-hover) !important;
+}
+
+main.opening .opening__tree > :is(details, div) > :is(summary, a),
+main.opening .opening__tree > :is(details, div) > summary > a {
+  color: var(--lr-ext-text-strong) !important;
+  font-size: 16px !important;
+  font-weight: 800;
+}
+
+main.opening .opening__tree > div > a,
+main.opening .opening__tree > details > summary > a {
+  padding: 13px 16px !important;
+}
+
+/* A family without a page of its own has its name bare in its row, which takes the link's
+ * room; a link takes it back, so the whole row leads to its page. */
+main.opening .opening__tree > details > summary > a {
+  margin: -13px 0 -13px -16px;
+}
+
+/* The variations, indented under their opening, a hairline down their side. */
+main.opening .opening__tree details > :is(div, details) {
+  margin: 0 16px 0 28px !important;
+  padding: 0 0 0 12px !important;
+  border: 0 !important;
+  border-inline-start: 1px solid var(--lr-ext-card-border) !important;
+  background: none !important;
+}
+
+main.opening .opening__tree details > div > a,
+main.opening .opening__tree details details > summary > a {
+  padding: 6px 0 !important;
+}
+
+main.opening .opening__tree details details > summary {
+  padding: 6px 0 !important;
+}
+
+main.opening .opening__tree details details > summary > a {
+  margin-block: -6px;
+}
+
+main.opening .opening__tree details[open] {
+  padding-bottom: 8px !important;
+}
+
+main.opening .opening__tree details details[open] {
+  padding-bottom: 0 !important;
+}

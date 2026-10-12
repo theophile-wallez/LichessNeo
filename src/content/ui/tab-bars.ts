@@ -33,11 +33,18 @@ export const TAB_BARS: readonly TabBarKind[] = [
   kind('.analyse__underboard__menu', 'button', '.active', 'line'),
   kind('.auth .auth-tabs', 'a', '.active', 'line'),
   kind('.relay-tour__tabs', 'button', '.active', 'pill'),
+  kind(
+    'main.opening .opening__panels > .tab-list',
+    '.tab-list__tab',
+    "[aria-selected='true']",
+    'pill',
+  ),
   kind('#dasher_app .lr-ext-src-tabs', 'button', '.active', 'pill'),
   // Lichess's radio groups (preferences, coordinate trainer): each option a div with its radio.
-  // The game setup's and the patron page's keep a look of their own.
+  // The game setup's and the patron page's keep a look of their own; the openings' filters
+  // are checkboxes, several picked at once.
   kind(
-    'group.radio:not(.game-setup group.radio, main.plan group.radio)',
+    'group.radio:not(.game-setup group.radio, main.plan group.radio, .opening__config group.radio)',
     'div',
     ':has(> input:checked)',
     'pill',

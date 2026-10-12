@@ -1,0 +1,389 @@
+/* ---- Openings: the title, the search and its filters --- */
+
+main.opening.box {
+  overflow: visible !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main.opening .opening__search-config {
+  display: flex !important;
+  align-items: center;
+  gap: 10px !important;
+  margin-bottom: 22px !important;
+}
+
+main.opening .opening__search-form {
+  position: relative;
+  display: flex !important;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+main.opening .opening__search-form__input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 46px !important;
+  padding: 0 16px 0 46px !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
+  border-radius: 14px !important;
+  background: var(--lr-ext-card-bg) !important;
+  color: var(--lr-ext-text-strong) !important;
+  font-size: 15px !important;
+}
+
+main.opening .opening__search-form__input:focus {
+  border-color: var(--lr-ext-accent) !important;
+}
+
+/* The search button is the field's magnifier, on its left. */
+main.opening .opening__search-form > button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  width: 40px;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: var(--lr-ext-text-dim) !important;
+}
+
+/* The filters: a pill that drops its form below. */
+main.opening .opening__config {
+  position: relative;
+  display: block !important;
+  flex: none;
+  min-width: 0;
+  border: 0 !important;
+  background: none !important;
+}
+
+main.opening .opening__config__summary {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 46px;
+  padding: 0 16px !important;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 14px;
+  background: var(--lr-ext-card-bg);
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13.5px;
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+
+main.opening .opening__config__summary::-webkit-details-marker {
+  display: none;
+}
+
+main.opening .opening__config__summary:hover,
+main.opening .opening__config[open] > .opening__config__summary {
+  border-color: var(--lr-ext-card-border-hover);
+}
+
+main.opening .opening__config__summary::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/filter.svg') center /
+    contain no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/filter.svg') center / contain
+    no-repeat;
+}
+
+/* Lichess swaps the summary for its icon alone on phones: ours fits, cut short. */
+main.opening .opening__config__summary__short {
+  display: none !important;
+}
+
+main.opening .opening__config__summary__large {
+  display: block !important;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.opening .opening__config__summary__large span {
+  color: var(--lr-ext-text-strong) !important;
+}
+
+main.opening .opening__config__summary__speed::after {
+  content: '·';
+  margin: 0 8px;
+  color: var(--lr-ext-text-dim);
+}
+
+main.opening .opening__config__form {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 5;
+  display: flex !important;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(560px, calc(100vw - 32px));
+  padding: 16px !important;
+  border: 1px solid var(--lr-ext-menu-border);
+  border-radius: 16px;
+  background: var(--lr-ext-menu-bg);
+  box-shadow: var(--lr-ext-menu-shadow);
+}
+
+/* The speeds and the ratings are ranges, several picked at once: chips, each lit when in. */
+main.opening .opening__config__form group.radio {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+main.opening .opening__config__form group.radio > div {
+  flex: none !important;
+}
+
+main.opening .opening__config__form group.radio label {
+  display: block;
+  padding: 7px 12px !important;
+  border-radius: 999px !important;
+  background: var(--lr-ext-lift-6) !important;
+  color: var(--lr-ext-text) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+}
+
+main.opening .opening__config__form group.radio label:hover {
+  background: var(--lr-ext-lift-12) !important;
+}
+
+main.opening .opening__config__form group.radio input:checked + label {
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: var(--lr-ext-white) !important;
+}
+
+main.opening .opening__config__form group.radio input:checked + label:hover {
+  background: var(--lr-ext-btn-primary-hover) !important;
+}
+
+main.opening .opening__config__form__submit .button {
+  width: 100%;
+  height: 42px;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: var(--lr-ext-btn-primary) !important;
+  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
+  color: var(--lr-ext-white) !important;
+}
+
+/* ---- The title --- */
+
+/* The index's, the list's and the search's: the openings' picture, then their links. */
+main.opening > .box__top,
+main.opening > h1.box__top {
+  align-items: center !important;
+  gap: 12px;
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+}
+
+main.opening > .box__top h1,
+main.opening > h1.box__top,
+main.opening h1.opening__title {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 14px;
+  margin: 0 !important;
+  color: var(--lr-ext-text-strong) !important;
+  font-size: 30px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+}
+
+main.opening > h1.box__top {
+  margin-bottom: 22px !important;
+}
+
+main.opening > .box__top h1::before,
+main.opening > h1.box__top::before {
+  content: '';
+  flex: none;
+  width: 46px;
+  height: 46px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/openings.webp') center /
+    contain no-repeat;
+}
+
+main.opening .box__top__actions {
+  gap: 8px !important;
+}
+
+main.opening .box__top__actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  margin: 0 !important;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-strong) !important;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+main.opening .box__top__actions a:hover {
+  background: var(--lr-ext-btn-grey-hover);
+}
+
+main.opening .box__top__actions a::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask: var(--lr-ext-opening-link) center / contain no-repeat;
+  mask: var(--lr-ext-opening-link) center / contain no-repeat;
+}
+
+main.opening .box__top__actions a[href$='/opening/tree'] {
+  --lr-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/left-to-right-list-bullet.svg');
+}
+
+main.opening .box__top__actions a[href$='/opening'] {
+  --lr-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-view.svg');
+}
+
+main.opening .box__top__actions a[href$='#explorer'] {
+  --lr-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
+}
+
+/* An opening's: the way back to its parent, then its name. */
+main.opening h1.opening__title {
+  margin: 0 0 22px !important;
+}
+
+main.opening h1.opening__title > a {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-strong) !important;
+  font-size: 0 !important;
+}
+
+main.opening h1.opening__title > a:hover {
+  background: var(--lr-ext-btn-grey-hover);
+}
+
+main.opening h1.opening__title > a::before {
+  content: '' !important;
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-left-01.svg')
+    center / contain no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-left-01.svg') center /
+    contain no-repeat;
+}
+
+main.opening .opening__name {
+  font-size: inherit !important;
+}
+
+main.opening .opening__name a {
+  color: inherit !important;
+}
+
+/* The pinned titles, stuck under the window's edge as the page scrolls ("The top room"). */
+@media (min-width: 1020px) {
+  main.opening > .box__top,
+  main.opening h1.opening__title {
+    container-type: scroll-state;
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    padding-block: 8px !important;
+    background: var(--lr-ext-bg-page);
+    /* Side shadows hide the cards' borders and shadows passing under; margins would widen
+       the page. */
+    box-shadow:
+      var(--lr-ext-pin-cover-wide),
+      -12px 0 var(--lr-ext-bg-page),
+      12px 0 var(--lr-ext-bg-page);
+  }
+
+  main.opening > .box__top::after,
+  main.opening h1.opening__title::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: -12px;
+    height: 14px;
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.opening > .box__top::after,
+    main.opening h1.opening__title::after {
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: 599.98px) {
+  main.opening .opening__search-config {
+    flex-wrap: wrap;
+  }
+
+  /* Its own width, or its summary's would widen the page. */
+  main.opening .opening__config {
+    flex: 1 1 100%;
+    contain: inline-size;
+  }
+
+  main.opening .opening__config__summary {
+    font-size: 12.5px;
+  }
+
+  main.opening .opening__config__form {
+    left: 0;
+    width: auto;
+  }
+
+  main.opening > .box__top {
+    flex-wrap: wrap;
+  }
+
+  main.opening > .box__top h1,
+  main.opening h1.opening__title {
+    font-size: 24px !important;
+  }
+
+  main.opening > .box__top h1::before {
+    width: 38px;
+    height: 38px;
+  }
+}

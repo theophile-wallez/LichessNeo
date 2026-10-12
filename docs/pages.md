@@ -76,7 +76,7 @@ and a white knob, and a single big number in the state's color.
 | --------------- | ------------------ | ----- | -------------------------------------------------------------------------- |
 | Analysis board  | `/analysis`        | 2     | the panel is empty under the coach until a move is played                  |
 | Game review     | `/<id>` (finished) | 2     | signature planned: each side's accuracy on the track, in its grade's color |
-| Openings        | `/opening`         | 1     | Lichess's cards and thin text, no title tile                               |
+| Openings        | `/opening`         | 2     | the popularity chart is still Lichess's Chart.js canvas                    |
 | Board editor    | `/editor`          | 2     |                                                                            |
 | Import game     | `/paste`           | 1     | Lichess's form: no title tile, a bare text area, the browser's file picker |
 | Advanced search | `/games/search`    | 1     | Lichess's form: no title tile, rows of empty selects                       |

@@ -1,0 +1,259 @@
+/* ---- Openings: the cards --- */
+
+/* Each opening (a continuation, a search result) as a card: its board on top, its name and
+ * its move under it, then how often it's played and how its games end. */
+main.opening :is(.opening__nexts, .opening__search__results) {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: start;
+  gap: 16px !important;
+}
+
+main.opening .opening__search__results.none {
+  display: none !important;
+}
+
+main.opening :is(.opening__next, .opening__search__result) {
+  display: grid !important;
+  grid-template-areas:
+    'board board'
+    'title title'
+    'popularity result';
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin: 0 !important;
+  padding: 10px 10px 12px !important;
+  overflow: visible !important;
+  border: 1px solid var(--lr-ext-card-border) !important;
+  border-radius: 18px !important;
+  background: var(--lr-ext-card-bg) !important;
+  box-shadow: none !important;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.15s,
+    box-shadow 0.15s !important;
+}
+
+main.opening :is(.opening__next, .opening__search__result):hover {
+  border-color: var(--lr-ext-card-border-hover) !important;
+  box-shadow: var(--lr-ext-card-shadow-hover) !important;
+  transform: translateY(-3px);
+}
+
+main.opening .opening__next__result-board {
+  display: contents !important;
+}
+
+main.opening :is(.opening__next__board, .opening__search__result__board) {
+  grid-area: board;
+  width: 100% !important;
+  margin: 0 !important;
+  overflow: hidden;
+  border-radius: 11px;
+}
+
+main.opening :is(.opening__next__title, .opening__search__result__title) {
+  display: flex !important;
+  grid-area: title;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0 4px !important;
+  border: 0 !important;
+  background: none !important;
+}
+
+main.opening .opening__next__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--lr-ext-text-strong) !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A move that keeps its opening's name has none on Lichess: content/pages/openings.ts puts
+ * the opening's there, dimmed. */
+main.opening .opening__next__name[data-lr-ext-name]::before {
+  content: attr(data-lr-ext-name);
+  color: var(--lr-ext-text-dim);
+}
+
+/* A search result: the family, its variation under it. */
+main.opening .opening__search__result__title {
+  display: block !important;
+  color: var(--lr-ext-text-strong);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+main.opening .opening__search__result__title > .opening-name__variation {
+  display: block;
+  overflow: hidden;
+  color: var(--lr-ext-text-dim) !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+main.opening .opening__search__result {
+  grid-template-areas:
+    'board'
+    'title';
+  grid-template-columns: minmax(0, 1fr);
+}
+
+main.opening .opening__next__san {
+  position: static !important;
+  flex: none;
+  margin: 0 !important;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent);
+  color: var(--lr-ext-opening-san, var(--lr-ext-accent-hover)) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums;
+}
+
+html.light main.opening {
+  --lr-ext-opening-san: var(--lr-ext-accent);
+}
+
+/* The popularity: a chip, its flame in ink on the orange. */
+main.opening .opening__next__popularity {
+  position: static !important;
+  grid-area: popularity;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 0 0 4px !important;
+  background: none !important;
+}
+
+main.opening .opening__next__popularity > span {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+  width: auto !important;
+  height: auto !important;
+  padding: 5px 9px 5px 7px !important;
+  border-radius: 999px;
+  background: var(--lr-ext-orange) !important;
+  color: var(--lr-ext-ink) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums;
+}
+
+main.opening .opening__next__popularity > span::before {
+  content: '';
+  width: 13px;
+  height: 13px;
+  background: currentColor;
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/fire.svg') center /
+    contain no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/fire.svg') center / contain
+    no-repeat;
+}
+
+main.opening .opening__next__result {
+  grid-area: result;
+  margin-right: 4px;
+}
+
+/* ---- The results bar --- */
+
+/* White's wins, the draws, Black's, across: Lichess stacks them up, as heights that
+ * content/pages/openings.ts copies into --lr-ext-share. */
+main.opening .result-bar {
+  display: flex !important;
+  flex-direction: row !important;
+  width: auto !important;
+  height: 20px !important;
+  overflow: hidden;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-8);
+}
+
+main.opening .result-bar > span {
+  display: flex !important;
+  flex: var(--lr-ext-share, 1) 1 0 !important;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  height: auto !important;
+  overflow: hidden;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  font-variant-numeric: tabular-nums;
+  writing-mode: horizontal-tb !important;
+}
+
+main.opening .result-bar > .white {
+  order: 1;
+  background: var(--lr-ext-white) !important;
+  color: var(--lr-ext-ink) !important;
+}
+
+main.opening .result-bar > .draws {
+  order: 2;
+  background: var(--lr-ext-neutral-10) !important;
+}
+
+main.opening .result-bar > .black {
+  order: 3;
+  background: var(--lr-ext-ink) !important;
+  color: var(--lr-ext-white) !important;
+}
+
+@media (max-width: 1259.98px) {
+  main.opening :is(.opening__nexts, .opening__search__results) {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 599.98px) {
+  main.opening :is(.opening__nexts, .opening__search__results) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  main.opening :is(.opening__next, .opening__search__result) {
+    gap: 8px;
+    padding: 7px 7px 9px !important;
+    border-radius: 14px !important;
+  }
+
+  main.opening :is(.opening__next__name, .opening__search__result__title) {
+    font-size: 13px !important;
+  }
+
+  main.opening .opening__next__san {
+    padding: 3px 6px;
+    font-size: 12px !important;
+  }
+
+  main.opening .opening__next__popularity > span {
+    padding: 3px 6px 3px 5px !important;
+    font-size: 10.5px !important;
+  }
+
+  main.opening .opening__next__popularity > span::before {
+    width: 11px;
+    height: 11px;
+  }
+
+  main.opening .result-bar {
+    height: 16px !important;
+  }
+
+  main.opening .result-bar > span {
+    font-size: 9.5px !important;
+  }
+}
