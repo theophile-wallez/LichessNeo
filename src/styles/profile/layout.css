@@ -4,9 +4,10 @@
  * Logged out, Lichess serves no rating chart and no activity feed. */
 
 :root {
-  /* Icons for "member since" and "time spent", drawn on a 24x24 grid. */
+  /* Icons for "member since", "time spent" and "time on TV", drawn on a 24x24 grid. */
   --lr-ext-pf-calendar: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
   --lr-ext-pf-clock: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+  --lr-ext-pf-tv: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tv-01.svg');
 }
 
 /* ---- Layout --- */

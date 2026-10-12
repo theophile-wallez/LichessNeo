@@ -234,7 +234,7 @@
 
 /* Time on TV always follows time playing. */
 .user-show > #us_profile .stats > p[title] ~ p[title]::before {
-  --lr-ext-pf-icon: var(--lr-ext-upt-watch);
+  --lr-ext-pf-icon: var(--lr-ext-pf-tv);
 }
 
 /* Last seen: a dot, green while they are online. */
@@ -257,47 +257,6 @@
 .user-show > #us_profile .stats > a {
   color: var(--lr-ext-accent) !important;
   font-weight: 700;
-}
-
-/* Social links and teams, as chips. */
-.user-show > #us_profile .col2 {
-  display: flex !important;
-  flex-flow: row wrap;
-  gap: 6px;
-  margin-top: 6px !important;
-}
-
-.user-show > #us_profile .col2:empty {
-  display: none !important;
-}
-
-.user-show > #us_profile .col2 > strong {
-  flex: 0 0 100% !important;
-  margin: 6px 0 0 !important;
-  color: var(--lr-ext-text-dim);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.user-show > #us_profile .col2 > a {
-  flex: 0 1 auto !important;
-  max-width: 100%;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: var(--lr-ext-lift-6);
-  color: var(--lr-ext-text) !important;
-  font-size: 12.5px;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.user-show > #us_profile .col2 > a:hover {
-  background: var(--lr-ext-lift-15);
-  color: var(--lr-ext-text-strong) !important;
 }
 
 /* Chess Insights: the card stays plain, only the icon is in the accent. */
