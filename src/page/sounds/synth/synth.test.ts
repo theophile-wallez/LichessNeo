@@ -96,7 +96,21 @@ describe('the extension’s sound set', () => {
     expect(specsPlayed()).toEqual(['king', 'castling-rook']);
   });
 
-  it('slides a bishop in from where it left, its swoosh going forward, its whoosh back', () => {
+  it('jumps a knight: a lift of air, then its landing', () => {
+    const synth = createSynth('none');
+    show({ placement: '4k3/8/8/8/8/5N2/8/4K3', lastMove: ['g1', 'f3'] });
+    synth.play('move-self', 1);
+    vi.advanceTimersToNextFrame();
+    const [lift, ...landing] = vi.mocked(playSpec).mock.calls[0]?.[0] ?? [];
+    expect(lift?.at).toBe(0);
+    const rising = (layer: typeof lift): boolean =>
+      layer?.kind === 'noise' && (layer.f2 ?? 0) > layer.f;
+    expect(rising(lift)).toBe(true);
+    expect(landing.length).toBeGreaterThan(0);
+    for (const layer of landing) expect(layer.at).toBeGreaterThanOrEqual(lift?.d ?? Infinity);
+  });
+
+  it('slides a bishop in from where it left, its swoosh going forward, its whoosh back, and nothing more', () => {
     const synth = createSynth('stereo');
     show({ placement: '4k3/8/8/8/2B5/8/8/4K3', lastMove: ['f1', 'c4'] });
     synth.play('move-self', 1);
@@ -106,6 +120,8 @@ describe('the extension’s sound set', () => {
     vi.advanceTimersToNextFrame();
     const slides = vi.mocked(play).mock.calls;
     expect(slides.map(([name]) => name)).toEqual(['swoosh', 'whoosh']);
+    // The slide is all a bishop makes.
+    expect(playSpec).not.toHaveBeenCalled();
     // From f1, on the right, for the first; from c4, on the left, for the second.
     expect(slides[0]?.[1]?.pan).toBeGreaterThan(0);
     expect(slides[1]?.[1]?.pan).toBeLessThan(0);

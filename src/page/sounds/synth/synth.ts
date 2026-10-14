@@ -67,6 +67,8 @@ function playPiece({ name, landing }: Performance, { at, shift }: Voicing): void
   }
   // A promoted pawn sounds as the pawn it was, at the top.
   const role = name === 'promote' || !landing ? 'pawn' : landing.role;
+  // A bishop is its slide alone (playAccents).
+  if (role === 'bishop') return;
   const pitch = landing ? pitchFor(landing.to, landing.color) : 0;
   playSpec(PIECE_SPECS[role], { ...options, id: role, pitch: pitch + shift });
 }

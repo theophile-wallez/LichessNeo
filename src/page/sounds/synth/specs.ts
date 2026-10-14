@@ -2,8 +2,9 @@ import type { CueName, NoiseLayer, Spec, ToneLayer } from '@foleyjs/core';
 import type { Role } from '#shared/chess/types.ts';
 import type { SoundName } from '#shared/sounds.ts';
 
-// The extension's own sound set, as Foley's layer specs: a sound per piece,
-// what a capture and a check add on top, and Foley's own cues for the rest.
+// The extension's own sound set, as Foley's layer specs: a sound per piece
+// (a bishop has its slide only, Foley's swoosh or whoosh, synth.ts), what a
+// capture and a check add on top, and Foley's own cues for the rest.
 // The levels are matched by ear: the low ones louder, as they sound softer.
 
 type ToneInput = Partial<ToneLayer> & Pick<ToneLayer, 'f' | 'd' | 'peak'>;
@@ -32,21 +33,14 @@ const noise = (layer: NoiseInput): NoiseLayer => ({
   ...layer,
 });
 
-export const PIECE_SPECS: Readonly<Record<Role, Spec>> = {
+export const PIECE_SPECS: Readonly<Record<Exclude<Role, 'bishop'>, Spec>> = {
   // A light, dry tap of wood.
   pawn: [noise({ f: 1900, q: 1.3, d: 0.022, peak: 0.24 }), tone({ f: 523, d: 0.06, peak: 0.11 })],
-  // Two knocks of wood, as a jump.
+  // A short lift of air, then a dull wooden landing: a jump.
   knight: [
-    tone({ wave: 'triangle', f: 330, f2: 270, d: 0.04, peak: 0.12 }),
-    noise({ f: 1500, d: 0.014, peak: 0.08 }),
-    tone({ at: 0.075, wave: 'triangle', f: 440, f2: 360, d: 0.05, peak: 0.13 }),
-    noise({ at: 0.075, f: 1700, d: 0.016, peak: 0.08 }),
-  ],
-  // A clear, glassy tap; its slide is Foley's swoosh or whoosh (synth.ts).
-  bishop: [
-    noise({ filter: 'highpass', f: 3800, d: 0.016, peak: 0.1 }),
-    tone({ f: 1046, d: 0.1, peak: 0.07, send: 0.25 }),
-    tone({ f: 1568, d: 0.07, peak: 0.03, send: 0.25 }),
+    noise({ f: 700, f2: 2600, glide: 0.06, q: 1.6, a: 0.01, d: 0.06, peak: 0.08 }),
+    tone({ at: 0.075, f: 196, f2: 150, glide: 0.04, d: 0.07, peak: 0.26 }),
+    noise({ at: 0.075, filter: 'lowpass', f: 900, d: 0.025, peak: 0.2 }),
   ],
   // A heavy, low thock.
   rook: [
