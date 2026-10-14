@@ -1,0 +1,117 @@
+/* ---- User menu: the extension's theme families and settings (content/packs) --- */
+
+/* A family's tile (content/packs/family.ts): its boards stacked, the one picked on top. */
+#dasher_app .lr-ext-src-family-item .lr-ext-src-thumb {
+  box-shadow:
+    4px -4px 0 -1px var(--lr-ext-lift-30),
+    8px -8px 0 -3px var(--lr-ext-lift-15);
+}
+
+#dasher_app .board .lr-ext-src-family-item.active .lr-ext-src-thumb {
+  box-shadow:
+    0 0 0 3px var(--lr-ext-accent),
+    6px -6px 0 0 var(--lr-ext-lift-30),
+    10px -10px 0 -2px var(--lr-ext-lift-15);
+}
+
+/* A family's view hides the list, and its way back leads there. */
+#top #dasher_app .lr-ext-src-choices[data-lr-ext-open] > :not(.lr-ext-src-family),
+#dasher_app .lr-ext-src-family[hidden] {
+  display: none !important;
+}
+
+#top #dasher_app .lr-ext-src-back {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 30px;
+  margin: 0 0 2px !important;
+  padding: 0 6px !important;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--lr-ext-text-strong);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#top #dasher_app .lr-ext-src-back:hover {
+  background: var(--lr-ext-menu-hover);
+}
+
+#dasher_app .lr-ext-src-back .lr-ext-hi {
+  color: var(--lr-ext-text-dim);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+#dasher_app .lr-ext-src-back:hover .lr-ext-hi {
+  transform: translateX(-2px);
+}
+
+/* A theme's setting (content/packs/option-row.ts): a smaller pill bar under the list, its pill
+ * sliding as the tabs' does. */
+#dasher_app .lr-ext-src-option-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 8px 2px 4px;
+}
+
+#dasher_app .lr-ext-src-option-row[hidden] {
+  display: none;
+}
+
+#dasher_app .lr-ext-src-option-label {
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#dasher_app .lr-ext-src-options {
+  --lr-ext-tab-bg: var(--lr-ext-bg-raised-hover);
+  --lr-ext-tab-radius: 5px;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--lr-ext-shade-25);
+}
+
+#top #dasher_app .lr-ext-src-options button {
+  display: flex !important;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  margin: 0 !important;
+  padding: 0 6px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--lr-ext-text-dim);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    background-color 0.15s !important;
+}
+
+#top #dasher_app .lr-ext-src-options button:hover,
+#top #dasher_app .lr-ext-src-options button.active {
+  color: var(--lr-ext-text-strong);
+}
+
+#top #dasher_app .lr-ext-src-options button.active {
+  background: var(--lr-ext-bg-raised-hover);
+  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
+}
+
+#top #dasher_app .lr-ext-src-options[data-lr-ext-tabs] button.active {
+  background: transparent;
+  box-shadow: none;
+}

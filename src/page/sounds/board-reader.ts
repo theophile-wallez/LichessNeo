@@ -1,7 +1,8 @@
-import type { Color, Piece, Square } from '#shared/chess/types.ts';
+import type { Board, Color, Piece, Role, Square } from '#shared/chess/types.ts';
 import { pieceOf, wrapOrientation } from '#shared/chessground.ts';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { cgKey } from '#page/lichess/chessground.ts';
+import { readHighlight } from './choose.ts';
 
 // The main board as chessground draws it: its pieces and highlighted squares.
 
@@ -38,4 +39,20 @@ export function readBoard(wrap: Element | null): BoardState | null {
     if (square && piece) pieces.set(square, piece);
   }
   return { pieces, lastMove: markedSquares(board, 'last-move') };
+}
+
+export interface Landing {
+  readonly role: Role;
+  readonly color: Color;
+  readonly from: Square | null;
+  readonly to: Square;
+}
+
+/** The last move the board highlights; null without a highlight. */
+export function lastLanding(pieces: Board, lastMove: readonly Square[]): Landing | null {
+  const first = lastMove[0];
+  if (first === undefined) return null;
+  const { orig, dest, mover } = readHighlight(pieces, first, lastMove[1] ?? first);
+  if (!dest || !mover) return null;
+  return { role: mover.role, color: mover.color, from: orig === dest ? null : orig, to: dest };
 }

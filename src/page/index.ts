@@ -3,6 +3,7 @@ import { motion } from './motion/index.ts';
 import { sounds } from './sounds/index.ts';
 import { labels } from './labels/labels.ts';
 import { shapes } from './board/index.ts';
+import { backlit } from './backlit/index.ts';
 import { review } from './review/index.ts';
 import { distribution } from './charts/distribution/index.ts';
 import { gameCharts } from './charts/game/index.ts';
@@ -20,6 +21,7 @@ startFeatures([
   sounds,
   labels,
   shapes,
+  backlit,
   review,
   distribution,
   gameCharts,

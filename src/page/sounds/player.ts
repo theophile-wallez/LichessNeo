@@ -1,6 +1,7 @@
 import { SOUND_NAMES, type SoundName } from '#shared/sounds.ts';
 import {
   readMoveOptions,
+  soundVolume,
   type MoveOptions,
   type PlaySound,
   type SoundPlayer,
@@ -15,11 +16,13 @@ import {
 } from './choose.ts';
 import { watchJumps, type JumpSounds } from './jumps.ts';
 import type { SoundSession } from './session.ts';
+import type { Synth } from './synth/synth.ts';
 import { PREFIX } from '#shared/prefix.ts';
 
-// Our sounds go into Lichess's player under their own names, and its `play()`,
-// `move()` and `saySan()` are wrapped so each event picks the matching one.
-// `urls` changes with the pick: once it's empty, every call goes to Lichess.
+// A pack's sounds go into Lichess's player under their own names, and its `play()`,
+// `move()` and `saySan()` are wrapped so each event picks the matching one. The
+// extension's own set plays every one itself. Both change with the pick: with
+// neither, every call goes to Lichess.
 
 const NAME_PREFIX = `${PREFIX}-`;
 // Our own moves reach the server, and come back with their SAN, only after
@@ -38,7 +41,10 @@ type PlayMove = (name: SoundName, volume: unknown, captured: boolean) => unknown
 
 interface Hook {
   readonly sound: SoundPlayer;
-  readonly urls: ReadonlyMap<SoundName, string>;
+  /** Whether we have our own sound for `name`. */
+  readonly has: (name: SoundName) => boolean;
+  /** Whether we play any: none leaves every call to Lichess. */
+  readonly active: () => boolean;
   readonly session: SoundSession;
   readonly playOurs: PlayOurs;
   readonly playLichess: PlaySound;
@@ -61,15 +67,15 @@ function soundAfterBoardMove(session: SoundSession, lichessName: string | undefi
   return soundFromBoard({ before, ...state, lichessName, orientation: boardOrientation() });
 }
 
-function hookPlay({ sound, urls, playOurs, playLichess }: Hook): void {
+function hookPlay({ sound, has, playOurs, playLichess }: Hook): void {
   sound.play = (name: unknown, volume: unknown = 1): unknown => {
     if (typeof name === 'string' && !name.startsWith(NAME_PREFIX)) {
       // Our one check sound comes from move(). Lichess plays its own check and
       // mate sounds just before an opponent's move, or on the echo of ours.
       const ownCheck = name === 'check' || name === 'checkmate';
-      if (ownCheck && urls.has('move-check')) return Promise.resolve();
+      if (ownCheck && has('move-check')) return Promise.resolve();
       const ours = soundForLichessEvent(name);
-      if (ours && urls.has(ours)) return playOurs(ours, volume);
+      if (ours && has(ours)) return playOurs(ours, volume);
     }
     return playLichess(name, volume);
   };
@@ -100,7 +106,7 @@ function hookMove(hook: Hook): void {
   };
 
   sound.move = (options?: unknown): unknown => {
-    if (hook.urls.size === 0) return moveLichess(options);
+    if (!hook.active()) return moveLichess(options);
     const move = readMoveOptions(options);
     // The game page passes each server move here with its SAN (filter "music"),
     // just before chessground asks for the board sound: SAN says exactly what it was.
@@ -116,12 +122,12 @@ function hookMove(hook: Hook): void {
 }
 
 // Lichess passes `cut` when a jump has the SAN spoken, not when a move is played.
-function hookSaySan({ sound, urls, jumps }: Hook): void {
+function hookSaySan({ sound, active, jumps }: Hook): void {
   const { saySan } = sound;
   if (!saySan) return;
   const sayLichess = saySan.bind(sound);
   sound.saySan = (san, cut, force): unknown => {
-    if (cut === true && sound.theme !== 'music' && urls.size > 0)
+    if (cut === true && sound.theme !== 'music' && active())
       jumps.jumped(typeof san === 'string' ? san : undefined);
     return sayLichess(san, cut, force);
   };
@@ -136,21 +142,29 @@ export function setSoundPaths(sound: SoundPlayer, urls: ReadonlyMap<SoundName, s
   }
 }
 
+const volumeOf = (volume: unknown): number => (typeof volume === 'number' ? volume : 1);
+
 /**
- * Adds our sounds to Lichess's player and wraps its methods, once per page.
- * Returns false when another copy of this script got there first.
+ * Adds a pack's sounds to Lichess's player and wraps its methods, once per page;
+ * `synth` is the extension's own set while it's picked. Returns false when
+ * another copy of this script got there first.
  */
 export function hookSoundPlayer(
   sound: SoundPlayer,
   urls: ReadonlyMap<SoundName, string>,
   session: SoundSession,
+  synth: () => Synth | null = () => null,
 ): boolean {
   for (const [name, url] of urls) sound.paths.set(NAME_PREFIX + name, url);
   if (sound.lrExtHooked) return false;
   sound.lrExtHooked = true;
   const playLichess = sound.play.bind(sound);
-  const playOurs: PlayOurs = (name, volume) =>
-    urls.has(name) ? playLichess(NAME_PREFIX + name, volume) : undefined;
+  const playOurs: PlayOurs = (name, volume) => {
+    const live = synth();
+    if (!live) return urls.has(name) ? playLichess(NAME_PREFIX + name, volume) : undefined;
+    live.play(name, soundVolume(sound) * volumeOf(volume));
+    return Promise.resolve();
+  };
   const playMove: PlayMove = (name, volume, captured) => {
     session.lastMoveSoundAt = Date.now();
     jumps.moved();
@@ -158,7 +172,9 @@ export function hookSoundPlayer(
     return playOurs(name, volume) ?? playOurs(ours, volume) ?? playLichess(lichess, volume);
   };
   const jumps = watchJumps(session, name => playMove(name, undefined, name === 'capture'));
-  const hook: Hook = { sound, urls, session, playOurs, playLichess, playMove, jumps };
+  const has = (name: SoundName): boolean => synth() !== null || urls.has(name);
+  const active = (): boolean => synth() !== null || urls.size > 0;
+  const hook: Hook = { sound, has, active, session, playOurs, playLichess, playMove, jumps };
   hookPlay(hook);
   hookMove(hook);
   hookSaySan(hook);

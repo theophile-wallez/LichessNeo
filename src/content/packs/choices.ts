@@ -2,10 +2,13 @@ import { createElement, setData, setStyleProperty } from '#shared/dom.ts';
 import { hasPart, type Pack, type PartKind } from '#shared/packs/pack.ts';
 import { SETTINGS_URL } from '#content/settings/address.ts';
 import type { Library } from './library.ts';
-import { THEMES, type Theme } from './themes.ts';
+import { familyItem, familyView, openFamily } from './family.ts';
+import { OPTION_ROWS } from './options.ts';
+import { FAMILIES, familyOf, THEMES, type Theme } from './themes.ts';
 
-// The Extension tab of a panel: the extension's themes for its part, then the
-// imported packs that have it. Packs are imported and removed in the
+// The Extension tab of a panel: the extension's themes for its part, a
+// family's under its one tile (family.ts), then the imported packs that have
+// it, and the themes' settings. Packs are imported and removed in the
 // extension's settings, which a link at the foot leads to.
 
 const NOUNS: Readonly<Record<PartKind, string>> = {
@@ -53,14 +56,21 @@ const themeItem = (kind: PartKind, { id, name }: Theme, library: Library): HTMLE
 const packItem = (kind: PartKind, pack: Pack, library: Library): HTMLElement =>
   choiceItem({ kind, id: pack.id, name: pack.name, image: thumbnail(kind, pack) }, library);
 
+// A family's tile stands where its first theme would.
+function themeItems(kind: PartKind, library: Library): HTMLElement[] {
+  return THEMES[kind].flatMap(theme => {
+    if (theme.family === undefined) return [themeItem(kind, theme, library)];
+    const family = FAMILIES.find(entry => entry.id === theme.family);
+    const first = THEMES[kind].find(entry => entry.family === theme.family);
+    return family && first === theme ? [familyItem(kind, family)] : [];
+  });
+}
+
 /** The part's themes and packs, and a line if there are none or the packs can't be read. */
 function choiceListing(kind: PartKind, library: Library): HTMLElement {
   const listing = createElement('div', { className: 'lr-ext-src-listing' });
   const packs = library.packs().filter(pack => hasPart(pack, kind));
-  const items = [
-    ...THEMES[kind].map(theme => themeItem(kind, theme, library)),
-    ...packs.map(pack => packItem(kind, pack, library)),
-  ];
+  const items = [...themeItems(kind, library), ...packs.map(pack => packItem(kind, pack, library))];
   if (items.length > 0) {
     const list = createElement('div', { className: 'lr-ext-src-list' });
     list.append(...items);
@@ -89,6 +99,18 @@ export function choiceSection(kind: PartKind, library: Library): HTMLElement {
     text: `Import a ${NOUNS[kind]}`,
     attrs: { href: SETTINGS_URL },
   });
-  section.append(choiceListing(kind, library), settings);
+  const families = FAMILIES.map(family => {
+    const themes = THEMES[kind].filter(theme => theme.family === family.id);
+    return themes.length > 0
+      ? familyView(
+          family,
+          themes.map(theme => themeItem(kind, theme, library)),
+        )
+      : null;
+  }).filter(view => view !== null);
+  section.append(choiceListing(kind, library), ...families);
+  section.append(...OPTION_ROWS[kind].map(row => row()));
+  section.append(settings);
+  openFamily(section, familyOf(kind, library.current(kind)));
   return section;
 }

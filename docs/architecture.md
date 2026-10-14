@@ -62,7 +62,8 @@ so the logic can be unit-tested without a page.
 ## Packs
 
 Each of the board, the pieces and the sounds shows one of the extension's
-themes (`themes.ts`: our blue board, the default), a pack the user imported
+themes (`themes.ts`: our blue board, the default, the backlit boards, listed
+as a family under one tile, `family.ts`, and the Foley sound set), a pack the user imported
 from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
 menu's own panels, under an Extension and a Lichess tab (`dasher.ts`,
 `panel.ts`, `choices.ts`); packs are imported and removed in the extension's
@@ -86,6 +87,13 @@ settings (`import-section.ts`, `import-form.ts`), all in `src/content/packs/`:
   The sounds go to the page world as bytes
   (`lr-ext:sounds`), where `src/page/sounds` puts them in Lichess's player. With
   no pack, Lichess's player is left alone.
+- A theme's settings are rows of options in its panel (`options.ts`,
+  `option-row.ts`), kept in localStorage (`stored-option.ts`). The Foley set
+  comes to the page in the same message, with no file and its placement, and
+  `src/page/sounds/synth` plays it through Foley's Web Audio. A backlit board
+  puts its settings in `data-lr-ext-backlit` on `<html>`, only while it's
+  shown, and `src/page/backlit` lights the keys around each move on a canvas
+  of its own, under the pieces, drawing only while something is lit.
 
 ## Types
 

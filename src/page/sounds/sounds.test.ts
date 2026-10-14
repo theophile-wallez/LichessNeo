@@ -1,9 +1,17 @@
+import { play, type playSpec, type set } from '@foleyjs/core';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { SoundPlayer } from '#page/lichess/sound.ts';
 import { fakeSoundPlayer } from './fixtures/sound-player.ts';
 import { sounds } from './index.ts';
 import type { SoundName } from '#shared/sounds.ts';
 import { replaceSounds, whenSoundPlayerReady } from './install.ts';
+
+// Foley plays through Web Audio, which happy-dom hasn't: what it's asked to play is checked.
+vi.mock('@foleyjs/core', () => ({
+  play: vi.fn<typeof play>(),
+  playSpec: vi.fn<typeof playSpec>(),
+  set: vi.fn<typeof set>(),
+}));
 
 const post = (data: unknown): void => {
   window.dispatchEvent(new MessageEvent('message', { data, source: window }));
@@ -106,5 +114,17 @@ describe('sounds', () => {
       ['play', 'capture', 1],
       ['move', { name: 'move' }],
     ]);
+  });
+
+  it('plays the extension’s set while it’s picked, with no files, then Lichess’s again', () => {
+    const { sound, calls } = startHooked();
+    post({ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'none' } });
+    expect(sound.lrExtHooked).toBe(true);
+    sound.play('genericNotify');
+    expect(vi.mocked(play).mock.calls).toEqual([['ready', { volume: 0.7 }]]);
+    post({ type: 'lr-ext:sounds', sounds: {} });
+    sound.play('genericNotify');
+    expect(calls).toEqual([['play', 'genericNotify', 1]]);
+    expect(play).toHaveBeenCalledTimes(1);
   });
 });

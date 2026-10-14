@@ -2,6 +2,8 @@ import { createElement, queryAll, setData } from '#shared/dom.ts';
 import { LICHESS, type Library } from './library.ts';
 import type { PartKind } from '#shared/packs/pack.ts';
 import { choiceSection } from './choices.ts';
+import { markFamilies } from './family.ts';
+import { showOptionRows } from './option-row.ts';
 
 // The Extension / Lichess tabs added to the user menu's Board, Piece set and
 // Sound panels (styles/sidebar/dasher-pickers.css).
@@ -25,8 +27,10 @@ export const panelSelector = (kind: PartKind): string => `#dasher_app .sub.${kin
 export function markPanel(panel: HTMLElement, kind: PartKind, library: Library): void {
   const current = library.current(kind);
   setData(panel, 'lrExtSrcOn', viewOf(current));
-  for (const item of queryAll(panel, '.lr-ext-src-item', HTMLElement))
+  for (const item of queryAll(panel, '.lr-ext-src-item[data-lr-ext-choice]', HTMLElement))
     item.classList.toggle('active', item.dataset.lrExtChoice === current);
+  markFamilies(panel, kind, current);
+  showOptionRows(panel, current);
 }
 
 function showView(panel: HTMLElement, view: View): void {

@@ -6,6 +6,7 @@ import { ColorSchema, renderBoard } from './fixtures/boards.ts';
 import { fakeSoundPlayer, type PlayerCall } from './fixtures/sound-player.ts';
 import { hookSoundPlayer } from './player.ts';
 import { createSession } from './session.ts';
+import type { Synth } from './synth/synth.ts';
 // Each scenario's calls to Lichess's player, as recorded from the original.
 import legacy from './fixtures/legacy-hooks.json' with { type: 'json' };
 
@@ -122,6 +123,31 @@ describe('hookSoundPlayer', () => {
     expect(session.lastPieces?.has('d2')).toBe(true);
     // Played on the next frame, once the board is redrawn.
     expect(session.lastMoveSoundAt).toBeGreaterThan(movedAt);
+  });
+
+  it('plays every sound with the extension’s set while it’s picked, at Lichess’s volume', () => {
+    const { sound, calls } = fakeSoundPlayer();
+    sound.getVolume = () => 0.5;
+    const synthPlayed: [SoundName, number][] = [];
+    const synth: Synth = {
+      play: (name, volume) => synthPlayed.push([name, volume]),
+      setPlace: () => {},
+    };
+    let picked: Synth | null = synth;
+    hookSoundPlayer(sound, new Map(), createSession(), () => picked);
+    sound.play('genericNotify');
+    sound.play('check');
+    sound.move({ san: 'exd5', ply: 3 });
+    sound.play('berserk');
+    expect(synthPlayed).toEqual([
+      ['game-start', 0.5],
+      ['capture', 0.5],
+    ]);
+    expect(calls).toEqual([['play', 'berserk', 1]]);
+    // Picked away from: every call goes to Lichess again.
+    picked = null;
+    sound.move({ san: 'exd5', ply: 3 });
+    expect(calls.at(-1)).toEqual(['move', { san: 'exd5', ply: 3 }]);
   });
 
   describe('jumps', () => {

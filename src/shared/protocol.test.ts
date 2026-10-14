@@ -40,6 +40,15 @@ describe('protocol', () => {
     expect(received).toEqual([['capture']]);
   });
 
+  it('passes the extension’s sound set on, and drops a placement it doesn’t know', () => {
+    const received: unknown[] = [];
+    stops.push(onSounds((_, synth) => received.push(synth)));
+    receive({ type: 'lr-ext:sounds', sounds: {} });
+    receive({ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'stereo' } });
+    receive({ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'surround' } });
+    expect(received).toEqual([null, { place: 'stereo' }]);
+  });
+
   it('stops listening once told', () => {
     const ready = vi.fn<() => void>();
     const stop = onPageReady(ready);

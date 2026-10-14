@@ -228,6 +228,17 @@
   background: linear-gradient(90deg, var(--lr-ext-board-light) 50%, var(--lr-ext-board-dark) 50%);
 }
 
+/* A backlit board's two top-left keys (styles/board/backlit-keys.css), the first one lit. */
+#dasher_app .lr-ext-src-thumb[data-lr-ext-theme^='backlit'] {
+  background:
+    radial-gradient(
+      circle at 25% 50%,
+      color-mix(in srgb, var(--lr-ext-backlit-tint) 80%, transparent) 0 10%,
+      transparent 34%
+    ),
+    var(--lr-ext-backlit-keys) 0 0 / 64px 64px;
+}
+
 #dasher_app .board .lr-ext-src-item:hover .lr-ext-src-thumb {
   transform: scale(1.05);
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod/mini';
 import { CoachMoodSchema } from './coach.ts';
-import { SoundNameSchema } from './sounds.ts';
+import { SoundNameSchema, SoundPlaceSchema } from './sounds.ts';
 import { messageType } from './prefix.ts';
 
 // Messages between the extension's two worlds on a Lichess tab: the isolated
@@ -12,6 +12,8 @@ const PageReadySchema = z.object({ type: z.literal(messageType('page-ready')) })
 const SoundsSchema = z.object({
   type: z.literal(messageType('sounds')),
   sounds: z.partialRecord(SoundNameSchema, z.instanceof(ArrayBuffer)),
+  // The extension's own set, played in place of any files; absent for a pack's or Lichess's.
+  synth: z.optional(z.object({ place: SoundPlaceSchema })),
 });
 
 const CoachStateSchema = z.object({
@@ -31,6 +33,7 @@ const ColorSchemePickSchema = z.object({
 
 export type ColorScheme = z.infer<typeof ColorSchemeSchema>;
 export type SoundFiles = z.infer<typeof SoundsSchema>['sounds'];
+export type SynthPick = NonNullable<z.infer<typeof SoundsSchema>['synth']>;
 export type CoachState = Omit<z.infer<typeof CoachStateSchema>, 'type'>;
 
 function listen<T>(schema: z.ZodMiniType<T>, handler: (message: T) => void): () => void {
@@ -51,11 +54,15 @@ function post(message: unknown): void {
 export const postPageReady = (): void => post({ type: messageType('page-ready') });
 export const onPageReady = (handler: () => void): (() => void) => listen(PageReadySchema, handler);
 
-/** Content → page: the picked pack's sounds, none for Lichess's own; sent again on every pick. */
-export const postSounds = (sounds: SoundFiles): void =>
-  post({ type: messageType('sounds'), sounds });
-export const onSounds = (handler: (sounds: SoundFiles) => void): (() => void) =>
-  listen(SoundsSchema, message => handler(message.sounds));
+/**
+ * Content → page: the picked pack's sounds, none for Lichess's own, or the extension's own
+ * set; sent again on every pick.
+ */
+export const postSounds = (sounds: SoundFiles, synth: SynthPick | null = null): void =>
+  post({ type: messageType('sounds'), sounds, ...(synth ? { synth } : {}) });
+export const onSounds = (
+  handler: (sounds: SoundFiles, synth: SynthPick | null) => void,
+): (() => void) => listen(SoundsSchema, message => handler(message.sounds, message.synth ?? null));
 
 /** Page → content: which coach the review shows, and how it looks. */
 export const postCoachState = (state: CoachState): void =>

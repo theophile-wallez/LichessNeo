@@ -9,6 +9,12 @@ export const StorageKey = {
   board: prefixed('board'),
   pieces: prefixed('pieces'),
   sounds: prefixed('sounds'),
+  // Where the extension's own sound set puts a move's sound, and the backlit board's
+  // settings (content/packs/options.ts).
+  soundPlace: prefixed('sound-place'),
+  backlitLight: prefixed('backlit-light'),
+  backlitReach: prefixed('backlit-reach'),
+  backlitWaves: prefixed('backlit-waves'),
   coach: prefixed('coach'),
   // The home hero coach's last entrance, never played twice running (content/coach/mascot).
   coachEntrance: prefixed('coach-entrance'),

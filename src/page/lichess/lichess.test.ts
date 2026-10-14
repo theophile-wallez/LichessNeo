@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cgKey } from './chessground.ts';
 import { method } from './method.ts';
-import { readMoveOptions, soundPlayer } from './sound.ts';
+import { readMoveOptions, type SoundPlayer, soundPlayer, soundVolume } from './sound.ts';
 import { lastNodeId, parentPath, pathPrefixes } from './tree.ts';
 
 afterEach(() => {
@@ -61,6 +61,23 @@ describe('soundPlayer', () => {
     expect(soundPlayer()).toBeNull();
     Object.assign(window, { site: { sound: { ...player(), move: 'move' } } });
     expect(soundPlayer()).toBeNull();
+  });
+});
+
+const withVolume = (extra: Partial<SoundPlayer>): SoundPlayer => ({
+  paths: new Map(),
+  play: () => Promise.resolve(),
+  move: () => Promise.resolve(),
+  ...extra,
+});
+
+describe('soundVolume', () => {
+  it('is the slider’s, Lichess’s default before it’s moved, and none for the silent set', () => {
+    expect(soundVolume(withVolume({ getVolume: () => 0.25, enabled: () => true }))).toBe(0.25);
+    expect(soundVolume(withVolume({ getVolume: () => 0 }))).toBe(0);
+    expect(soundVolume(withVolume({ getVolume: () => Number.NaN }))).toBe(0.7);
+    expect(soundVolume(withVolume({}))).toBe(0.7);
+    expect(soundVolume(withVolume({ getVolume: () => 1, enabled: () => false }))).toBe(0);
   });
 });
 

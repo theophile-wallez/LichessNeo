@@ -4,6 +4,7 @@ import { trackListeners } from '#shared/testing/listeners.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { fakePack } from '#shared/testing/packs.ts';
 import { startPacks } from './index.ts';
+import { FAMILY_ROWS, OPTION_ROWS } from './options.ts';
 import type { Pack } from '#shared/packs/pack.ts';
 import { readPack, readPacks } from './store.ts';
 
@@ -35,7 +36,15 @@ afterEach(() => {
   document.getElementById('lr-ext-packs')?.remove();
   delete root.dataset.lrExtBoard;
   delete root.dataset.lrExtLoading;
+  delete root.dataset.lrExtBacklit;
 });
+
+/** Picks `value` in a settings row, as the user menu's does. */
+function choose(row: (() => HTMLElement) | undefined, value: string): void {
+  const option = row?.().querySelector(`[data-lr-ext-option="${value}"]`);
+  if (!(option instanceof HTMLElement)) throw new Error(`no ${value}`);
+  option.click();
+}
 
 describe('packs', () => {
   it('hides a picked board and set until the packs are read, then shows them', async () => {
@@ -133,5 +142,37 @@ describe('packs', () => {
     await startPacks().ready;
     expect(vi.mocked(readPack).mock.calls).toEqual([[WOOD.id]]);
     expect(readPacks).not.toHaveBeenCalled();
+  });
+
+  it('sends the extension’s sound set with its placement, again as that changes, until left', async () => {
+    localStorage.setItem('lr-ext-sounds', 'foley');
+    localStorage.setItem('lr-ext-sound-place', 'stereo');
+    const library = startPacks();
+    await library.ready;
+    expect(posted()).toEqual([{ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'stereo' } }]);
+    choose(OPTION_ROWS.sound[0], 'none');
+    expect(posted().at(-1)).toEqual({
+      type: 'lr-ext:sounds',
+      sounds: {},
+      synth: { place: 'none' },
+    });
+    library.choose('sound', 'lichess');
+    expect(posted().at(-1)).toEqual({ type: 'lr-ext:sounds', sounds: {} });
+    choose(OPTION_ROWS.sound[0], 'space');
+    expect(posted()).toHaveLength(3);
+  });
+
+  it('puts the backlit settings on <html> only while a backlit board shows', async () => {
+    localStorage.setItem('lr-ext-board', 'backlit-walnut');
+    localStorage.setItem('lr-ext-backlit-waves', 'always');
+    const library = startPacks();
+    await library.ready;
+    expect(root.dataset.lrExtBacklit).toBe('accent short always');
+    choose(FAMILY_ROWS.backlit?.[0], 'sides');
+    expect(root.dataset.lrExtBacklit).toBe('sides short always');
+    library.choose('board', 'blue');
+    expect(root.dataset.lrExtBacklit).toBeUndefined();
+    choose(FAMILY_ROWS.backlit?.[1], 'wide');
+    expect(root.dataset.lrExtBacklit).toBeUndefined();
   });
 });

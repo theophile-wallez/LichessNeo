@@ -52,9 +52,9 @@ async function start(
 
 const tab = (panel: HTMLElement, view: string): HTMLElement | null =>
   queryOne(panel, `.lr-ext-src-tabs button[data-lr-ext-tab="${view}"]`, HTMLElement);
-// A tile's name is its label, a sound's its text.
+// The list's tiles, not a family's view: a tile's name is its label, a sound's its text.
 const names = (panel: HTMLElement): (string | null)[] =>
-  queryAll(panel, '.lr-ext-src-item', HTMLElement).map(
+  queryAll(panel, '.lr-ext-src-listing .lr-ext-src-item', HTMLElement).map(
     item => item.getAttribute('aria-label') ?? item.textContent,
   );
 
@@ -83,7 +83,7 @@ describe('the user menu’s panels', () => {
     ).toEqual(['Extension', 'Lichess']);
     // Our blue board, then only the packs with a board, named in their tooltip only.
     expect(board.dataset.lrExtView).toBe('extension');
-    expect(names(board)).toEqual(['Blue', 'Pack ann/packs/main/wood/']);
+    expect(names(board)).toEqual(['Blue', 'Backlit', 'Pack ann/packs/main/wood/']);
     expect(board.querySelector('.lr-ext-src-name')).toBeNull();
     expect(queryOne(board, '.lr-ext-src-item.active', HTMLElement)?.dataset.lrExtChoice).toBe(
       'blue',
@@ -122,7 +122,11 @@ describe('the user menu’s panels', () => {
     const panel = openPanel('sound');
     await flush();
     expect(panel.querySelector('.content > .lr-ext-src-choices')).not.toBeNull();
-    expect(names(panel)).toEqual(['Pack ann/packs/main/wood/', 'Pack ann/packs/main/clicks/']);
+    expect(names(panel)).toEqual([
+      'Foley',
+      'Pack ann/packs/main/wood/',
+      'Pack ann/packs/main/clicks/',
+    ]);
     library.choose('sound', CLICKS.id);
     queryAll(panel, '.selector > button', HTMLElement)[1]?.click();
     expect(library.current('sound')).toBe(LICHESS);
@@ -133,16 +137,17 @@ describe('the user menu’s panels', () => {
     await start([], () => all.promise);
     const panel = openPanel('sound');
     await flush();
-    expect(panel.querySelector('.lr-ext-src-empty')?.textContent).toBe(
-      'No sound set of the extension yet: import your own from GitHub.',
-    );
+    expect(names(panel)).toEqual(['Foley']);
     expect(
       queryOne(panel, '.lr-ext-src-import-link', HTMLAnchorElement)?.getAttribute('href'),
     ).toBe('/account/profile#lr-ext-extension');
     all.resolve([WOOD, CLICKS]);
     await flush();
-    expect(names(panel)).toEqual(['Pack ann/packs/main/wood/', 'Pack ann/packs/main/clicks/']);
-    expect(panel.querySelector('.lr-ext-src-empty')).toBeNull();
+    expect(names(panel)).toEqual([
+      'Foley',
+      'Pack ann/packs/main/wood/',
+      'Pack ann/packs/main/clicks/',
+    ]);
   });
 
   it('say so when the packs can’t be read, and try again on the next opening', async () => {
@@ -154,7 +159,7 @@ describe('the user menu’s panels', () => {
     await start([], readAll);
     const panel = openPanel('board');
     await flush();
-    expect(names(panel)).toEqual(['Blue']);
+    expect(names(panel)).toEqual(['Blue', 'Backlit']);
     expect(panel.querySelector('.lr-ext-src-empty')?.textContent).toBe(
       'The imported packs could not be read.',
     );
@@ -165,7 +170,7 @@ describe('the user menu’s panels', () => {
     await flush();
     const again = openPanel('board');
     await flush();
-    expect(names(again)).toEqual(['Blue', 'Pack ann/packs/main/wood/']);
+    expect(names(again)).toEqual(['Blue', 'Backlit', 'Pack ann/packs/main/wood/']);
     expect(readAll).toHaveBeenCalledTimes(2);
   });
 
@@ -174,6 +179,6 @@ describe('the user menu’s panels', () => {
     const panel = openPanel('sound');
     await flush();
     await library.remove(WOOD.id);
-    expect(names(panel)).toEqual(['Pack ann/packs/main/clicks/']);
+    expect(names(panel)).toEqual(['Foley', 'Pack ann/packs/main/clicks/']);
   });
 });

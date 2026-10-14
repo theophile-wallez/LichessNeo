@@ -106,7 +106,7 @@ export function castled(before: Board | null, after: Board): boolean {
   );
 }
 
-interface Highlight {
+export interface Highlight {
   readonly orig: Square;
   readonly dest: Square | null;
   readonly mover: Piece | undefined;
@@ -114,7 +114,7 @@ interface Highlight {
 
 // The destination is the highlighted square with a piece on it. A drop
 // highlights a single square.
-function readHighlight(pieces: Board, first: Square, second: Square): Highlight {
+export function readHighlight(pieces: Board, first: Square, second: Square): Highlight {
   let dest: Square | null = null;
   if (pieces.has(second)) dest = second;
   else if (pieces.has(first)) dest = first;

@@ -10,7 +10,8 @@ import { placeTooltip, splitShortcut } from './tooltip-layout.ts';
 
 // The board editor's analysis link is one of its tools (content/pages/editor-tools.ts); a
 // chat line's reply and report are Lichess's own `action` tags; an opening's popularity, its
-// results' parts and its way back to its parent say what they are in a title.
+// results' parts and its way back to its parent say what they are in a title; a theme's
+// settings in the user menu say what each does.
 const TARGETS = [
   'main :is(button:is([title], [data-lr-ext-tip]), a.tv-channel[data-lr-ext-tip]):not(#lr-ext-review *)',
   'main .board-editor__tools .actions > a[data-lr-ext-tip]',
@@ -19,6 +20,7 @@ const TARGETS = [
   'main.opening .opening__next__popularity > span:is([title], [data-lr-ext-tip])',
   'main.opening .result-bar > span:is([title], [data-lr-ext-tip])',
   'main.opening h1.opening__title > a:is([title], [data-lr-ext-tip])',
+  '#dasher_app .lr-ext-src-options > button[data-lr-ext-tip]',
 ].join(', ');
 // Lichess's home start buttons carry an English title that only repeats their label:
 // adopted, so the browser's doesn't show either, but never shown.

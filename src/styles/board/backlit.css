@@ -1,0 +1,79 @@
+/* The backlit boards (#shared/backlit.ts): keys on a darker frame, as a keyboard with its
+ * backlight off, each board's in its colors (backlit-keys.css), dark on the dark scheme and pale on
+ * the light one. Each key is inset
+ * in its square, so the pieces stay on it, and page/backlit lights them up on the main board, from
+ * a canvas under the pieces. Nothing here applies to another board. */
+
+html[data-lr-ext-board^='backlit'] body .is2d cg-board::before {
+  background-image: var(--lr-ext-backlit-keys) !important;
+  background-size: 25% 25% !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+html[data-lr-ext-board^='backlit'] body {
+  /* The light: the theme's accent, lightened, as it shines on dark keys. page/backlit reads it
+   * off its canvas. */
+  --lr-ext-backlit-glow: color-mix(
+    in srgb,
+    var(--lr-ext-accent) var(--lr-ext-backlit-lift, 75%),
+    #fff
+  );
+  /* The keys draw the squares: no fill, a lit outline instead (below). */
+  --lr-ext-highlight: transparent;
+  --lr-ext-hint: color-mix(in srgb, var(--lr-ext-backlit-glow) 70%, transparent);
+}
+
+/* The light picked as the board's own. */
+html[data-lr-ext-backlit^='board'] body {
+  --lr-ext-backlit-glow: var(--lr-ext-backlit-tint);
+}
+
+html[data-lr-ext-board^='backlit'] body .is2d coords {
+  ---cg-ccw: #ffffff66 !important;
+  ---cg-ccb: #ffffff66 !important;
+}
+
+html.light[data-lr-ext-board^='backlit'] body .is2d coords {
+  ---cg-ccw: #00000073 !important;
+  ---cg-ccb: #00000073 !important;
+}
+
+/* z-index 1 as chessground's under-piece layer, first in the container: over the keys and the
+ * squares' marks, under the pieces and every layer of ours. */
+canvas.lr-ext-backlit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  color: var(--lr-ext-backlit-glow);
+  /* The sides' lights, page/backlit's "Sides": Dracula's cyan and pink, deeper on pale keys. */
+  --lr-ext-backlit-white: #8be9fd;
+  --lr-ext-backlit-black: #ff79c6;
+  pointer-events: none;
+}
+
+html.light canvas.lr-ext-backlit {
+  --lr-ext-backlit-white: #0a9fc7;
+  --lr-ext-backlit-black: #d6338f;
+}
+
+/* The last move's keys keep a lit outline, the picked piece's its key lit, at the key's inset
+ * and corners (page/backlit/sprites.ts). */
+html[data-lr-ext-board^='backlit'] body .is2d cg-board square:is(.last-move, .selected)::before {
+  content: '';
+  position: absolute;
+  inset: 2.75%;
+  border-radius: 9.6%;
+  box-shadow:
+    inset 0 0 0 2px var(--lr-ext-backlit-glow),
+    inset 0 0 12px color-mix(in srgb, var(--lr-ext-backlit-glow) 50%, transparent);
+  opacity: 0.8;
+}
+
+html[data-lr-ext-board^='backlit'] body .is2d cg-board square.selected::before {
+  background: color-mix(in srgb, var(--lr-ext-backlit-glow) 30%, transparent);
+  opacity: 1;
+}

@@ -187,6 +187,21 @@ describe('tooltips', () => {
     }
   });
 
+  it('shows what each of a theme’s settings in the user menu does, outside the page’s main', () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<div id="dasher_app"><div class="lr-ext-src-options">' +
+        '<button data-lr-ext-option="wide" data-lr-ext-tip="Most of the board">Wide</button>' +
+        '</div></div>',
+    );
+    const option = document.querySelector('[data-lr-ext-option]');
+    if (!option) throw new Error('no option');
+    hover(option);
+    vi.advanceTimersByTime(250);
+    expect(shown()?.textContent).toBe('Most of the board');
+    document.getElementById('dasher_app')?.remove();
+  });
+
   it('splits a shortcut off the label', () => {
     expect(splitShortcut('Flip board (f)')).toEqual({ label: 'Flip board', key: 'f' });
     expect(splitShortcut('(x)')).toEqual({ label: '(x)', key: null });

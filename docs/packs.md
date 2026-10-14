@@ -3,7 +3,10 @@
 The extension shows its own blue board and Lichess's pieces and sounds, until
 you pick others in the user menu's Board, Piece set and Sound panels: the
 **Extension** tab has the extension's own and your packs, the **Lichess** tab
-Lichess's. A pack replaces any of the three with yours: a folder on GitHub
+Lichess's. The extension's own are its blue board, its backlit boards (one
+**Backlit** tile, which opens onto the six of them and how they light up),
+and its **Foley** sound set, played live, with where it puts each move's
+sound. A pack replaces any of the three with yours: a folder on GitHub
 holding a `pack.json` and the files it names.
 
 To import one, open the extension's settings (your account's settings, then

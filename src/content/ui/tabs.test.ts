@@ -170,6 +170,24 @@ describe('sliding tabs', () => {
     await nextFrame();
     expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('100px');
   });
+
+  it('slides to the option a theme’s setting picks in the user menu', async () => {
+    document.body.innerHTML =
+      '<div id="dasher_app"><div class="lr-ext-src-options">' +
+      '<button class="active">Short</button><button>Wide</button></div></div>';
+    const [bar] = elements('.lr-ext-src-options');
+    const [short, wide] = elements('.lr-ext-src-options > button');
+    if (!bar || !short || !wide) throw new Error('no bar');
+    layOut(bar, () => ({ top: 0, left: 0, width: 160, height: 30 }));
+    layOut(short, () => ({ top: 0, left: 0, width: 80, height: 30 }));
+    layOut(wide, () => ({ top: 0, left: 80, width: 80, height: 30 }));
+    createTabBars().sync();
+    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('0px');
+    short.classList.remove('active');
+    wide.classList.add('active');
+    await nextFrame();
+    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('80px');
+  });
 });
 
 describe('tab geometry', () => {

@@ -19,3 +19,11 @@ export const SoundNameSchema = z.enum([
 
 export type SoundName = z.infer<typeof SoundNameSchema>;
 export const SOUND_NAMES: readonly SoundName[] = SoundNameSchema.options;
+
+/** The extension's own sound set, synthesized as it plays (page/sounds/synth). */
+export const SYNTH_SET = 'foley';
+
+/** Where that set puts a move's sound: around the listener, left or right, or in the middle. */
+export const SoundPlaceSchema = z.enum(['space', 'stereo', 'none']);
+
+export type SoundPlace = z.infer<typeof SoundPlaceSchema>;
