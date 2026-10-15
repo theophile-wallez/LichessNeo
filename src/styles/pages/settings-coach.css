@@ -1,0 +1,256 @@
+/* ---- The settings' Coach card (content/settings/coach-card.ts) --- */
+
+/* The picked coach, live over its still, says hello from a stage, over a tile for each
+ * coach in a color of its own. */
+
+.lr-ext-coach-pick {
+  --lr-ext-setting-color: var(--lr-ext-orange);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mentoring.svg');
+
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 18px 20px;
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+}
+
+.lr-ext-coach-pick__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lr-ext-coach-pick:hover .lr-ext-coach-pick__head .lr-ext-setting__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* ---- The stage --- */
+
+/* The mascot rises from the stage's floor, its bubble beside it. */
+.lr-ext-coach-pick__stage {
+  /* How far the mascot's arms reach past its still, either side: the fox's, waving, the
+   * furthest, 22px past a 124px still. The bubble keeps clear of them. */
+  --lr-ext-coach-pick-arms: 30px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--lr-ext-coach-pick-arms);
+  padding: 18px 22px 0 calc(18px + var(--lr-ext-coach-pick-arms));
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    radial-gradient(
+      120% 90% at 18% 100%,
+      color-mix(in srgb, var(--lr-ext-orange) 16%, transparent),
+      transparent 70%
+    ),
+    var(--lr-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+}
+
+.lr-ext-coach-pick__mascot {
+  position: relative;
+  flex: none;
+  align-self: flex-end;
+  width: 168px;
+  /* The stills' own (img/coaches): the live mascot lands on its still only in this box. */
+  aspect-ratio: 124 / 114;
+  background: var(--lr-ext-avatar-coach) center bottom / contain no-repeat;
+  cursor: pointer;
+}
+
+/* The live mascot over its still, which goes once it's drawn. */
+.lr-ext-coach-pick__mascot[data-lr-ext-live] {
+  background: none;
+}
+
+/* The still's box. Its canvas spills past the sides, for the arms the still cuts, but comes
+   in cut as the still is, then opens out. */
+.lr-ext-coach-pick__live {
+  position: absolute;
+  inset: 0;
+}
+
+.lr-ext-coach-pick__mascot .lr-ext-coach-pick__live canvas {
+  left: calc(-1 * var(--lr-ext-coach-pick-arms));
+  width: calc(100% + 2 * var(--lr-ext-coach-pick-arms));
+  clip-path: inset(0 var(--lr-ext-coach-pick-arms));
+  transition: clip-path 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.1s !important;
+}
+
+.lr-ext-coach-pick__mascot[data-lr-ext-live] .lr-ext-coach-pick__live canvas {
+  clip-path: inset(0);
+}
+
+/* A speech bubble, its tail toward the mascot. */
+.lr-ext-coach-pick__bubble {
+  position: relative;
+  flex: 0 1 auto;
+  max-width: 360px;
+  margin: 0 0 18px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: var(--lr-ext-bg-raised);
+  box-shadow:
+    inset 0 1px #ffffff14,
+    0 4px 14px var(--lr-ext-shade-30);
+  color: var(--lr-ext-text-strong);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.lr-ext-coach-pick__bubble::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--lr-ext-bg-raised);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Each hello pops in, the bubble drawn anew for it. */
+.lr-ext-coach-pick__bubble > span {
+  display: block;
+  animation: lr-ext-coach-pick-hello 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes lr-ext-coach-pick-hello {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+}
+
+/* ---- The coaches --- */
+
+/* All eight on a row, else four on two. */
+.lr-ext-coach-pick__grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@container (max-width: 640px) {
+  .lr-ext-coach-pick__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.lr-ext-coach-choice {
+  --lr-ext-coach-color: var(--lr-ext-accent);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 8px 12px;
+  border: none;
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text-dim);
+  font: 700 13.5px var(--lr-ext-font);
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    color 0.2s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-coach-choice:hover {
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border-hover);
+  color: var(--lr-ext-text-strong);
+  transform: translateY(-2px);
+}
+
+.lr-ext-coach-choice[aria-pressed='true'] {
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+  color: var(--lr-ext-text-strong);
+}
+
+.lr-ext-coach-choice:focus-visible {
+  outline: 2px solid var(--lr-ext-accent);
+  outline-offset: 2px;
+}
+
+/* The coach's still on a tile tinted with its color. */
+.lr-ext-coach-choice__face {
+  width: 100%;
+  max-width: 88px;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background:
+    var(--lr-ext-avatar-coach) center bottom / 92% auto no-repeat,
+    color-mix(in srgb, var(--lr-ext-coach-color) 22%, transparent);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-coach-choice:hover .lr-ext-coach-choice__face {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='1'] {
+  --lr-ext-coach-color: var(--lr-ext-purple);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='2'] {
+  --lr-ext-coach-color: var(--lr-ext-orange);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='3'] {
+  --lr-ext-coach-color: var(--lr-ext-green);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='4'] {
+  --lr-ext-coach-color: var(--lr-ext-pink);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='5'] {
+  --lr-ext-coach-color: var(--lr-ext-cyan);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='6'] {
+  --lr-ext-coach-color: var(--lr-ext-yellow);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='7'] {
+  --lr-ext-coach-color: var(--lr-ext-blue);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='8'] {
+  --lr-ext-coach-color: var(--lr-ext-red);
+}
+
+/* A phone's stage: the bubble under the mascot. */
+@media (max-width: 640px) {
+  .lr-ext-coach-pick__stage {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 16px 0;
+  }
+
+  .lr-ext-coach-pick__mascot {
+    align-self: center;
+    width: 140px;
+  }
+
+  .lr-ext-coach-pick__bubble {
+    margin: 0;
+    text-align: center;
+  }
+
+  .lr-ext-coach-pick__bubble::before {
+    top: auto;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}

@@ -115,3 +115,253 @@
   background: transparent;
   box-shadow: none;
 }
+
+/* ---- The custom board's rows (content/packs/color-row.ts), here and in the settings --- */
+
+.lr-ext-src-colors {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.lr-ext-src-color {
+  box-sizing: border-box;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--lr-ext-src-color);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-12);
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-src-color:hover {
+  transform: scale(1.12);
+}
+
+.lr-ext-src-color.active {
+  box-shadow:
+    0 0 0 2px var(--lr-ext-bg-panel),
+    0 0 0 4px var(--lr-ext-accent);
+}
+
+/* Any color: a pill with its swatch, the color input over it, and its code. */
+.lr-ext-src-color-own {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 12px 0 3px;
+  border-radius: 999px;
+  background: var(--lr-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text-dim);
+  font:
+    600 12.5px ui-monospace,
+    monospace;
+  cursor: pointer;
+}
+
+.lr-ext-src-color-own::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--lr-ext-src-color);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-12);
+}
+
+.lr-ext-src-color-own.active {
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+  color: var(--lr-ext-text-strong);
+}
+
+.lr-ext-src-color-own:hover {
+  color: var(--lr-ext-text-strong);
+}
+
+.lr-ext-src-color-own input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* The name to save it under, and its button. */
+.lr-ext-src-save {
+  display: flex;
+  flex: 1 1 200px;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+}
+
+.lr-ext-src-save input {
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--lr-ext-lift-12);
+  border-radius: 8px;
+  background: var(--lr-ext-shade-25);
+  color: var(--lr-ext-text-strong);
+  font: 600 13px var(--lr-ext-font);
+}
+
+.lr-ext-src-save input:focus {
+  border-color: var(--lr-ext-accent);
+  outline: none;
+}
+
+.lr-ext-src-save button {
+  height: 32px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: var(--lr-ext-white);
+  font: 700 13px var(--lr-ext-font);
+  cursor: pointer;
+}
+
+.lr-ext-src-save button:hover {
+  background: var(--lr-ext-btn-primary-hover);
+}
+
+/* A slider (content/packs/slider-row.ts): a track filled with the accent up to a round white
+ * thumb, its value, and a button back to the default, dimmed while it's the default. */
+.lr-ext-src-slider-row {
+  flex-wrap: nowrap !important;
+}
+
+input.lr-ext-src-slider {
+  flex: 1 1 140px;
+  min-width: 0;
+  max-width: 260px;
+  height: 20px;
+  margin: 0;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+}
+
+.lr-ext-src-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--lr-ext-accent) var(--lr-ext-slider-fill, 0%),
+    var(--lr-ext-lift-15) var(--lr-ext-slider-fill, 0%)
+  );
+}
+
+.lr-ext-src-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--lr-ext-accent) var(--lr-ext-slider-fill, 0%),
+    var(--lr-ext-lift-15) var(--lr-ext-slider-fill, 0%)
+  );
+}
+
+.lr-ext-src-slider::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  border-radius: 50%;
+  appearance: none;
+  background: var(--lr-ext-white);
+  box-shadow: 0 1px 4px var(--lr-ext-shade-60);
+  transition: transform 0.15s !important;
+}
+
+.lr-ext-src-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--lr-ext-white);
+  box-shadow: 0 1px 4px var(--lr-ext-shade-60);
+}
+
+.lr-ext-src-slider:active::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+
+.lr-ext-src-slider:focus-visible {
+  outline: 2px solid var(--lr-ext-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.lr-ext-src-slider-value {
+  min-width: 40px;
+  color: var(--lr-ext-text-strong);
+  font: 600 13px var(--lr-ext-font);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.lr-ext-src-slider-reset {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: var(--lr-ext-btn-grey);
+  box-shadow: var(--lr-ext-btn-grey-shadow);
+  color: var(--lr-ext-text-strong);
+  cursor: pointer;
+}
+
+.lr-ext-src-slider-reset:hover:not(:disabled) {
+  background: var(--lr-ext-btn-grey-hover);
+}
+
+.lr-ext-src-slider-reset:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.lr-ext-src-slider-reset svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* In the user menu, the label over the slider, its value and its button. Lichess's inputs there
+ * are tall: the slider takes its own height back. */
+#dasher_app .lr-ext-src-slider-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 5px 8px;
+}
+
+#dasher_app .lr-ext-src-slider-row .lr-ext-src-option-label {
+  grid-column: 1 / -1;
+}
+
+#top #dasher_app input.lr-ext-src-slider {
+  max-width: none;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+}

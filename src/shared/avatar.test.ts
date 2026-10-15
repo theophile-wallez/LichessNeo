@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { AVATAR_COLORS, avatarAttributes, avatarOf, nameHash, userInHref } from './avatar.ts';
-import { COACH_COUNT } from './coach.ts';
+import { AVATAR_COLORS, avatarOf, nameHash, userInHref } from './avatar.ts';
+import { ANIMAL_COACHES, ROBOT_COACH } from './coach.ts';
 
 // Names in the shape of Lichess's: letters, digits, `_` and `-`.
 const NAMES = Array.from({ length: 4200 }, (_, i) => `player_${i.toString(36)}`);
@@ -30,13 +30,19 @@ describe('avatarOf', () => {
     expect(picked.filter(pair => clashes.has(pair))).toEqual([]);
   });
 
+  it('never gives a name the robot, which is the computer’s', () => {
+    const coaches = new Set(NAMES.map(name => avatarOf(name).coach));
+    expect(coaches.has(ROBOT_COACH)).toBe(false);
+    expect(coaches.size).toBe(ANIMAL_COACHES);
+  });
+
   it('spreads names over every other pair, about evenly', () => {
     const counts = new Map<string, number>();
     for (const { coach, color } of NAMES.map(name => avatarOf(name))) {
       const pair = `${coach} ${color}`;
       counts.set(pair, (counts.get(pair) ?? 0) + 1);
     }
-    expect(counts.size).toBe(COACH_COUNT * AVATAR_COLORS.length - 7);
+    expect(counts.size).toBe(ANIMAL_COACHES * AVATAR_COLORS.length - 7);
     // 100 names a pair on average.
     for (const count of counts.values()) expect(count).toBeGreaterThan(60);
     for (const count of counts.values()) expect(count).toBeLessThan(140);
@@ -72,16 +78,4 @@ describe('userInHref', () => {
       expect(userInHref(href)).toBeUndefined();
     },
   );
-});
-
-describe('avatarAttributes', () => {
-  it('names the coach and the color', () => {
-    expect(avatarAttributes('Hikaru').value).toBe(
-      ' data-lr-ext-avatar-coach="2" data-lr-ext-avatar-color="cyan"',
-    );
-  });
-
-  it('is empty without a user', () => {
-    expect(avatarAttributes(undefined).value).toBe('');
-  });
 });

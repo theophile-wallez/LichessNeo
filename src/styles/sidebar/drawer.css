@@ -69,7 +69,7 @@
   /* The account's rating where Lichess has its avatar glyph, as in the sidebar. */
   html[data-lr-ext-account-perf] #top #user_tag {
     position: relative;
-    padding-inline-end: 84px !important;
+    padding-inline-end: calc(var(--lr-ext-account-pill) + 12px) !important;
   }
 
   /* The drawer has Donate, at the end of Play's links. */

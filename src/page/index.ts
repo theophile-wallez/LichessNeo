@@ -11,6 +11,7 @@ import { gameOver } from './game-over/index.ts';
 import { chat } from './chat/index.ts';
 import { nextGameSeek } from './seek/index.ts';
 import { colorScheme } from './color-scheme/index.ts';
+import { lichessLooks } from './looks/index.ts';
 
 // The page-world script: it runs in Lichess's own JavaScript context, so it
 // can reach `site`, the analysis controller and the sound player, but not
@@ -29,4 +30,5 @@ startFeatures([
   chat,
   nextGameSeek,
   colorScheme,
+  lichessLooks,
 ]);

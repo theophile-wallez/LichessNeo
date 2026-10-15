@@ -1,7 +1,9 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { avatarOf } from '#shared/avatar.ts';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
+import { keepOwnAvatar } from '#shared/own-avatar.ts';
+import { keepOwnName } from '#shared/own-name.ts';
 import { introBoardImage, introMarkup } from './markup.ts';
 import type { BarPlayer } from '#shared/player-bar.ts';
 
@@ -20,6 +22,12 @@ function render(top: BarPlayer, bottom: BarPlayer): HTMLElement {
   setHtml(root, introMarkup({ top, bottom }));
   return root;
 }
+
+afterEach(() => {
+  keepOwnName(null);
+  keepOwnAvatar(null);
+  delete document.body.dataset.user;
+});
 
 describe('introMarkup', () => {
   it('puts the top player’s card on the dropped board and the bottom one’s on the board', () => {
@@ -55,6 +63,21 @@ describe('introMarkup', () => {
     expect([bottom?.dataset.lrExtAvatarCoach, bottom?.dataset.lrExtAvatarColor]).toEqual([
       String(coach),
       color,
+    ]);
+  });
+
+  it('gives the signed-in user their own name and avatar, and their opponent theirs', () => {
+    document.body.dataset.user = 'alice';
+    keepOwnName('<i>Ali</i>');
+    keepOwnAvatar({ kind: 'coach', coach: 5, color: 'blue' });
+    const root = render(player('bob', { user: 'bob' }), player('alice', { user: 'alice' }));
+    const names = queryAll(root, '.lr-ext-intro__username', HTMLElement);
+    expect(names.map(name => name.textContent)).toEqual(['bob', '<i>Ali</i>']);
+    const [top, bottom] = queryAll(root, '.lr-ext-intro__avatar', HTMLElement);
+    expect(top?.dataset.lrExtAvatarCoach).toBe(String(avatarOf('bob').coach));
+    expect([bottom?.dataset.lrExtAvatarCoach, bottom?.dataset.lrExtAvatarColor]).toEqual([
+      '5',
+      'blue',
     ]);
   });
 

@@ -1,8 +1,7 @@
-import { COACH_COUNT, CoachMoodSchema } from '#shared/coach.ts';
+import { COACH_COUNT, CoachMoodSchema, keepCoach } from '#shared/coach.ts';
 import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { postCoachState } from '#shared/protocol.ts';
-import { StorageKey, writeStored } from '#shared/storage.ts';
 import { CLASS_COLORS, classMood, type MoveClass } from '#page/review/classes/classes.ts';
 import type { AvatarState, Session } from '#page/review/session.ts';
 
@@ -75,7 +74,7 @@ export function keepAvatar(session: Session): void {
 export function nextCoach(session: Session, avatar: HTMLElement): void {
   const coach = (session.coach.id % COACH_COUNT) + 1;
   session.coach.id = coach;
-  writeStored(StorageKey.coach, coach);
+  keepCoach(coach);
   avatar.dataset.lrExtCoachId = String(coach);
   tellCoach(session);
 }

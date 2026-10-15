@@ -1,5 +1,5 @@
 import { z } from 'zod/mini';
-import type { CoachMood } from '#shared/coach.ts';
+import { type CoachMood, ROBOT_COACH, ROBOT_COACH_LEVEL } from '#shared/coach.ts';
 import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
 import type { Character } from './cast/character.ts';
 import { CAST } from './cast/characters.ts';
@@ -14,7 +14,7 @@ import { Stage, type Framing } from './stage.ts';
 // asks of it. Its eyes follow the pointer while it runs.
 
 export interface MascotView {
-  /** The coach's number, 1 to 7. */
+  /** The coach's number, 1 to 8 (the robot). */
   readonly setCoach: (coach: number) => void;
   /** The computer's robot in place of a coach, in the colors of Stockfish's `level`, 1 to 8. */
   readonly setComputer: (level: number) => void;
@@ -97,7 +97,7 @@ class LiveMascot implements MascotView {
   }
 
   setCoach(coach: number): void {
-    this.#play(coachCharacter(coach));
+    this.#play(coach === ROBOT_COACH ? robotFor(ROBOT_COACH_LEVEL) : coachCharacter(coach));
   }
 
   setComputer(level: number): void {

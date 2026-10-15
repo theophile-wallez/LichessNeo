@@ -26,3 +26,14 @@ export function assetUrl(path: string, options?: AssetOptions): string {
   if (typeof url !== 'string') throw new Error('Lichess’s asset helper returned no URL');
   return url;
 }
+
+// `site.manifest.hashed`: Lichess's files by path, which tells the piece sets it has in WebP.
+const hasManifest = createGuard(
+  z.object({ manifest: z.object({ hashed: z.record(z.string(), z.unknown()) }) }),
+);
+
+/** Whether Lichess serves the file at `path` (`piece/<set>/wP.webp`). */
+export function isHashedAsset(path: string): boolean {
+  const site = readSite();
+  return hasManifest(site) && path in site.manifest.hashed;
+}

@@ -1,4 +1,5 @@
-import { backlitWords, isBacklitBoard } from '#shared/backlit.ts';
+import { showCustomBoard } from './custom-board.ts';
+import { type BacklitBoardId, backlitWords, isBacklitBoard, keyBox } from '#shared/backlit.ts';
 import { setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onPageReady, postSounds, type SoundFiles, type SynthPick } from '#shared/protocol.ts';
@@ -14,6 +15,7 @@ import {
   type Shown,
 } from './library.ts';
 import { PART_KINDS, type Pack } from '#shared/packs/pack.ts';
+import { paintTiles, showKeys } from './backlit-keys.ts';
 import { onBacklitChange, readBacklit, soundPlace } from './options.ts';
 import { deletePack, readPack, readPacks, writePack } from './store.ts';
 
@@ -53,14 +55,21 @@ function createSoundSender(): (shown: Shown) => void {
 }
 
 // The backlit boards' settings, on <html> for the page world, which lights them
-// up, only while one is shown: other boards cost the page nothing.
+// up, only while one is shown: other boards cost the page nothing. Their keys
+// are drawn in the shape picked, on the board and on their tiles.
 function createBacklitSwitch(): (shown: Shown) => void {
-  let on = false;
-  const show = (): void =>
-    setData(document.documentElement, 'lrExtBacklit', on ? backlitWords(readBacklit()) : null);
-  onBacklitChange(show);
-  return ({ board }) => {
-    on = typeof board === 'string' && isBacklitBoard(board);
+  let board: BacklitBoardId | null = null;
+  const show = (): void => {
+    const settings = readBacklit();
+    if (board !== null) showKeys(board, keyBox(settings.shape));
+    setData(document.documentElement, 'lrExtBacklit', board && backlitWords(settings));
+  };
+  onBacklitChange(() => {
+    show();
+    paintTiles();
+  });
+  return shown => {
+    board = typeof shown.board === 'string' && isBacklitBoard(shown.board) ? shown.board : null;
     show();
   };
 }
@@ -71,6 +80,7 @@ const LOADING_MAX_MS = 2000;
 
 /** Shows the picks at once, and the picked packs once they're read. */
 export function startPacks(): Library {
+  showCustomBoard();
   setLoading([
     ...(isPackId(storedPick('board')) ? ['board'] : []),
     ...(isPackId(storedPick('piece')) ? ['pieces'] : []),

@@ -1,4 +1,5 @@
-import { avatarAttributes } from '#shared/avatar.ts';
+import { avatarAttributes } from '#shared/own-avatar.ts';
+import { shownName } from '#shared/own-name.ts';
 import { COLORS, type Color } from '#shared/chess/types.ts';
 import { queryAll, setData } from '#shared/dom.ts';
 import { html, type SafeHtml, trustedHtml } from '#shared/html.ts';
@@ -13,7 +14,7 @@ import type { Review } from '#page/review/session.ts';
 const NBSP = trustedHtml('&nbsp;');
 
 export function playerName(player: Player | undefined, language: ReviewLanguage): string {
-  if (player?.user?.username) return player.user.username;
+  if (player?.user?.username) return shownName(player.user.username);
   if (player?.name) return player.name;
   return player?.ai ? `Stockfish ${player.ai}` : language.ui.anonymous;
 }

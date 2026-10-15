@@ -14,6 +14,8 @@ const SoundPlayerSchema = z.object({
   // Speaks a move, if the user turned speech on; called on every jump.
   saySan: z.optional(method<[san?: unknown, cut?: unknown, force?: unknown]>()),
   theme: z.optional(z.unknown()),
+  // Switches to another of its sound sets, as its menu does.
+  changeSet: z.optional(method<[set: string]>()),
   // The volume of the panel's slider, 0 to 1, and false for its silent set.
   getVolume: z.optional(method<[]>()),
   enabled: z.optional(method<[]>()),

@@ -54,6 +54,9 @@ html[data-lr-ext-coach='6'] main.round .round__app .message::before {
 html[data-lr-ext-coach='7'] main.round .round__app .message::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
 }
+html[data-lr-ext-coach='8'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
+}
 
 html[data-lr-ext-ai] main.round .round__app .message::before {
   background-image: var(--lr-ext-computer-portrait);

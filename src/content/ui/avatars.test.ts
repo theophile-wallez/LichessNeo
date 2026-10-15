@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { avatarOf } from '#shared/avatar.ts';
 import { queryOne } from '#shared/dom.ts';
-import { syncAvatars } from './avatars.ts';
+import { keepOwnAvatar } from '#shared/own-avatar.ts';
+import { IMAGE } from '#shared/testing/packs.ts';
+import { avatars, syncAvatars } from './avatars.ts';
 
 // Each spot as Lichess serves it, with the element our avatar is drawn on.
 const SPOTS = [
@@ -84,8 +86,14 @@ function avatarIn(selector: string): HTMLElement {
   return element;
 }
 
+const pictureRule = (): string | null =>
+  document.getElementById('lr-ext-own-avatar')?.textContent ?? null;
+
 afterEach(() => {
+  keepOwnAvatar(null);
   document.body.innerHTML = '';
+  delete document.body.dataset.user;
+  document.getElementById('lr-ext-own-avatar')?.remove();
 });
 
 describe('syncAvatars', () => {
@@ -126,5 +134,54 @@ describe('syncAvatars', () => {
     syncAvatars();
     expect(bar.dataset.lrExtAvatarCoach).toBeUndefined();
     expect(bar.dataset.lrExtAvatarColor).toBeUndefined();
+  });
+});
+
+describe('the signed-in user’s own avatar', () => {
+  const BAR =
+    '<main class="round"><div class="ruser"><a class="user-link" href="/@/tjychess">tjychess</a></div></main>';
+
+  it('gives the user the coach they picked, and no one else', () => {
+    document.body.innerHTML = BAR;
+    keepOwnAvatar({ kind: 'coach', coach: 8, color: 'pink' });
+    syncAvatars();
+    expect(avatarIn('.ruser').dataset.lrExtAvatarCoach).toBe(String(avatarOf('tjychess').coach));
+    document.body.dataset.user = 'tjychess';
+    syncAvatars();
+    const bar = avatarIn('.ruser');
+    expect([bar.dataset.lrExtAvatarCoach, bar.dataset.lrExtAvatarColor]).toEqual(['8', 'pink']);
+    expect(bar.dataset.lrExtAvatarPicture).toBeUndefined();
+  });
+
+  it('marks the user’s picture over their name’s coach, and drops the mark with the pick', () => {
+    document.body.innerHTML = BAR;
+    document.body.dataset.user = 'tjychess';
+    keepOwnAvatar({ kind: 'picture', picture: IMAGE });
+    syncAvatars();
+    const bar = avatarIn('.ruser');
+    expect(bar.dataset.lrExtAvatarPicture).toBe('');
+    expect(bar.dataset.lrExtAvatarCoach).toBe(String(avatarOf('tjychess').coach));
+    keepOwnAvatar(null);
+    syncAvatars();
+    expect(bar.dataset.lrExtAvatarPicture).toBeUndefined();
+  });
+
+  it('shows a picture kept before the page loaded', () => {
+    keepOwnAvatar({ kind: 'picture', picture: IMAGE });
+    avatars.start();
+    expect(pictureRule()).toBe(`:root{--lr-ext-avatar-own:url(${IMAGE})}`);
+  });
+
+  it('puts the picture in a stylesheet of ours, and follows the pick at once', () => {
+    document.body.innerHTML = BAR;
+    document.body.dataset.user = 'tjychess';
+    avatars.start();
+    expect(pictureRule()).toBeNull();
+    keepOwnAvatar({ kind: 'picture', picture: IMAGE });
+    expect(pictureRule()).toBe(`:root{--lr-ext-avatar-own:url(${IMAGE})}`);
+    expect(avatarIn('.ruser').dataset.lrExtAvatarPicture).toBe('');
+    keepOwnAvatar({ kind: 'coach', coach: 3, color: 'blue' });
+    expect(pictureRule()).toBe('');
+    expect(avatarIn('.ruser').dataset.lrExtAvatarCoach).toBe('3');
   });
 });

@@ -18,6 +18,11 @@
 @import './streamer-list.css';
 @import './about-menu.css';
 @import './extension-settings.css';
+@import './settings-menu.css';
+@import './settings-coach.css';
+@import './settings-profile.css';
+@import './settings-looks.css';
+@import './settings-board-tiles.css';
 @import './setting-menu.css';
 @import './appearance.css';
 @import './theme-editor.css';

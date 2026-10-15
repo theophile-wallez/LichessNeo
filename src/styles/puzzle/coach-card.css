@@ -33,7 +33,7 @@
 
   main.puzzle .puzzle__feedback:not(.after) {
     /* The mascot is narrower than its box: the words start over the box's empty edge. */
-    padding: 16px 16px 16px calc(var(--lr-ext-coach-w) - 10px) !important;
+    padding: 16px 16px 16px calc(var(--lr-ext-coach-w) + 20px) !important;
   }
 
   /* Over the coach, whose arms reach past its box. */
@@ -102,7 +102,8 @@
     padding-inline: 14px 16px !important;
   }
 
-  /* The coach stands on the card's bottom edge; only the card's left and bottom edges cut it. */
+  /* The coach stands on the card's bottom edge, which cuts it; its sides never are, room left
+     for its arms (AGENTS.md, "The coach talks in a card"). */
   main.puzzle .lr-ext-puzzle-coach {
     --lr-ext-mood-c: var(--lr-ext-good-hover);
 
@@ -110,8 +111,8 @@
     grid-area: card;
     align-self: end;
     justify-self: start;
-    margin: 0 0 10px 10px;
-    clip-path: inset(-60% -60% 0 0 round 0 0 0 12px);
+    margin: 0 0 10px 40px;
+    clip-path: inset(-60% -60% 0);
     cursor: default;
     pointer-events: none;
   }
@@ -129,7 +130,7 @@
      the row of smaller buttons. */
   main.puzzle .puzzle__feedback.after {
     display: grid !important;
-    grid-template-columns: calc(var(--lr-ext-coach-w) - 26px) minmax(0, 1fr);
+    grid-template-columns: calc(var(--lr-ext-coach-w) + 4px) minmax(0, 1fr);
     grid-template-areas:
       '. title'
       '. next'
@@ -169,7 +170,7 @@
   main.puzzle .puzzle__feedback.after ~ .lr-ext-puzzle-coach {
     align-self: start;
     margin-top: 10px;
-    clip-path: inset(-60% -60% 0 0 round 12px 0 0 0);
+    clip-path: inset(-60% -60% 0);
     mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
   }
 }

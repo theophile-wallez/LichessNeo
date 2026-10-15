@@ -1,14 +1,21 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { packRules, setLoading, showLooks, soundFiles } from './apply.ts';
 import { fakePack, IMAGE, SOUND } from '#shared/testing/packs.ts';
+import { deleteBoard, saveBoard } from './saved-boards.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
 const style = (): HTMLStyleElement | null => document.querySelector('style#lr-ext-packs');
+const flatColors = (): string[] =>
+  ['--lr-ext-board-flat-light', '--lr-ext-board-flat-dark'].map(name =>
+    document.documentElement.style.getPropertyValue(name),
+  );
 
 afterEach(() => {
   style()?.remove();
   delete document.documentElement.dataset.lrExtBoard;
   delete document.documentElement.dataset.lrExtLoading;
+  document.documentElement.removeAttribute('style');
+  localStorage.clear();
 });
 
 describe('packRules', () => {
@@ -70,6 +77,22 @@ describe('showLooks', () => {
     showLooks({ board: null, pieces: null });
     expect(document.documentElement.dataset.lrExtBoard).toBeUndefined();
     expect(style()?.textContent).toBe('');
+  });
+
+  it('names a two-tone board flat, its colors on <html>, and another board by its id', () => {
+    showLooks({ board: 'tone-ocean', pieces: null });
+    expect(document.documentElement.dataset.lrExtBoard).toBe('flat');
+    expect(flatColors()).toEqual(['#f7f8f8', '#2f9bea']);
+    const saved = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
+    showLooks({ board: saved, pieces: null });
+    expect(document.documentElement.dataset.lrExtBoard).toBe('flat');
+    expect(flatColors()).toEqual(['#ffffff', '#123456']);
+    deleteBoard(saved);
+    showLooks({ board: 'accent', pieces: null });
+    expect(document.documentElement.dataset.lrExtBoard).toBe('accent');
+    expect(flatColors()).toEqual(['', '']);
+    showLooks({ board: WOOD, pieces: null });
+    expect(flatColors()).toEqual(['', '']);
   });
 });
 

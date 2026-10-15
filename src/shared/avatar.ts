@@ -1,9 +1,9 @@
-import { COACH_COUNT } from './coach.ts';
-import { html, type SafeHtml } from './html.ts';
+import { ANIMAL_COACHES } from './coach.ts';
 
 // Lichess has no profile pictures: each user gets one of the coaches on a color,
 // picked from their name, so it's the same on every page and every computer.
-// The look of each coach and color is in styles/theme/avatars.css.
+// The signed-in user may pick their own (own-avatar.ts), which only their
+// browser shows. The look of each coach and color is in styles/theme/avatars.css.
 
 export const AVATAR_COLORS = ['blue', 'purple', 'pink', 'red', 'orange', 'green', 'cyan'] as const;
 export type AvatarColor = (typeof AVATAR_COLORS)[number];
@@ -24,7 +24,8 @@ export interface Avatar {
   readonly color: AvatarColor;
 }
 
-const AVATARS: readonly Avatar[] = Array.from({ length: COACH_COUNT }, (_, i) => i + 1).flatMap(
+// The animals only: the robot is the computer's, and one the user may pick for themselves.
+const AVATARS: readonly Avatar[] = Array.from({ length: ANIMAL_COACHES }, (_, i) => i + 1).flatMap(
   coach =>
     AVATAR_COLORS.filter(color => !CLASHES[coach]?.includes(color)).map(color => ({
       coach,
@@ -58,11 +59,4 @@ export function avatarOf(name: string): Avatar {
 /** The user a profile link (`/@/<name>`, in an `href` or a `data-href`) points at. */
 export function userInHref(href: string | null | undefined): string | undefined {
   return href ? /\/@\/([\w-]+)/.exec(href)?.[1] : undefined;
-}
-
-/** The attributes that give an element (and its `::before`) the avatar of `user`. */
-export function avatarAttributes(user: string | undefined): SafeHtml {
-  if (user === undefined) return html``;
-  const { coach, color } = avatarOf(user);
-  return html` data-lr-ext-avatar-coach="${coach}" data-lr-ext-avatar-color="${color}"`;
 }

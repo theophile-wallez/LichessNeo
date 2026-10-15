@@ -1,11 +1,19 @@
 /* A user's avatar (#shared/avatar.ts): a coach's still on a two-hue gradient picked
- * from their name, with a glint at the top. Set on the element whose `::before` or
+ * from their name, or by the user, with a glint at the top. Set on the element whose `::before` or
  * background draws --lr-ext-avatar. */
 
 [data-lr-ext-avatar-coach] {
   --lr-ext-avatar:
     var(--lr-ext-avatar-coach) center bottom / 100% auto no-repeat,
     radial-gradient(circle at 22% 12%, #ffffff47, transparent 58%),
+    linear-gradient(145deg, var(--lr-ext-avatar-from), var(--lr-ext-avatar-to));
+}
+
+/* The signed-in user's own picture (#shared/own-avatar.ts), set on :root by content/ui/avatars.ts:
+ * over the gradient, which shows through a transparent one. */
+[data-lr-ext-avatar-coach][data-lr-ext-avatar-picture] {
+  --lr-ext-avatar:
+    var(--lr-ext-avatar-own, var(--lr-ext-avatar-coach)) center / cover no-repeat,
     linear-gradient(145deg, var(--lr-ext-avatar-from), var(--lr-ext-avatar-to));
 }
 
@@ -29,6 +37,10 @@
 }
 [data-lr-ext-avatar-coach='7'] {
   --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
+}
+/* The computer's robot, in Stockfish's blue (#shared/coach.ts). */
+[data-lr-ext-avatar-coach='8'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
 }
 
 [data-lr-ext-avatar-color='blue'] {

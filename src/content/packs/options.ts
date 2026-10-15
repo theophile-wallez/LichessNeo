@@ -7,16 +7,25 @@ import {
   type BacklitSettings,
   type BacklitWaves,
   BacklitWavesSchema,
+  DEFAULT_KEY_SHAPE,
+  KEY_GAP_MAX,
+  KEY_RADIUS_MAX,
+  KeyGapSchema,
+  KeyRadiusSchema,
 } from '#shared/backlit.ts';
 import type { PartKind } from '#shared/packs/pack.ts';
 import { type SoundPlace, SoundPlaceSchema, SYNTH_SET } from '#shared/sounds.ts';
 import { StorageKey } from '#shared/storage.ts';
+import { colorRow, saveRow } from './color-row.ts';
+import type { Library } from './library.ts';
 import { optionRow, type OptionRowSpec } from './option-row.ts';
-import { storedOption } from './stored-option.ts';
+import { sliderRow } from './slider-row.ts';
+import { storedNumber, storedOption } from './stored-option.ts';
 
-// The settings of the extension's themes, each a row in its panel: where the
-// sound set puts a move's sound, under the list, and how the backlit boards
-// light up, in their family's view, the same for them all.
+// The settings of the extension's themes, each a row in its panel: the custom
+// board's colors and where the sound set puts a move's sound, under the list,
+// and how the backlit boards light up and the shape of their keys, in their
+// family's view, the same for them all.
 
 export const soundPlace = storedOption<SoundPlace>(
   StorageKey.soundPlace,
@@ -40,16 +49,23 @@ const backlitWaves = storedOption<BacklitWaves>(
   'captures',
 );
 
+const backlitGap = storedNumber(StorageKey.backlitGap, KeyGapSchema, DEFAULT_KEY_SHAPE.gap);
+const backlitRadius = storedNumber(
+  StorageKey.backlitRadius,
+  KeyRadiusSchema,
+  DEFAULT_KEY_SHAPE.radius,
+);
+
 export const readBacklit = (): BacklitSettings => ({
   light: backlitLight.read(),
   reach: backlitReach.read(),
   waves: backlitWaves.read(),
+  shape: { gap: backlitGap.read(), radius: backlitRadius.read() },
 });
 
 export function onBacklitChange(listener: () => void): void {
-  backlitLight.onChange(listener);
-  backlitReach.onChange(listener);
-  backlitWaves.onChange(listener);
+  for (const setting of [backlitLight, backlitReach, backlitWaves, backlitGap, backlitRadius])
+    setting.onChange(listener);
 }
 
 const PLACE_ROW: OptionRowSpec<SoundPlace> = {
@@ -97,16 +113,38 @@ const WAVES_ROW: OptionRowSpec<BacklitWaves> = {
   ],
 };
 
-type Rows = readonly (() => HTMLElement)[];
+type Rows = readonly ((library: Library) => HTMLElement)[];
 
 /** A panel's rows, under its list. */
 export const OPTION_ROWS: Readonly<Record<PartKind, Rows>> = {
-  board: [],
+  board: [() => colorRow('light'), () => colorRow('dark'), saveRow],
   piece: [],
   sound: [() => optionRow(PLACE_ROW)],
 };
 
 /** A family's rows, under its boards in its view. */
-export const FAMILY_ROWS: Readonly<Record<string, Rows>> = {
-  [BACKLIT]: [() => optionRow(LIGHT_ROW), () => optionRow(REACH_ROW), () => optionRow(WAVES_ROW)],
+export const FAMILY_ROWS: Readonly<Record<string, readonly (() => HTMLElement)[]>> = {
+  [BACKLIT]: [
+    () => optionRow(LIGHT_ROW),
+    () => optionRow(REACH_ROW),
+    () => optionRow(WAVES_ROW),
+    () =>
+      sliderRow({
+        label: 'Gap',
+        setting: backlitGap,
+        min: 0,
+        max: KEY_GAP_MAX,
+        step: 0.5,
+        fallback: DEFAULT_KEY_SHAPE.gap,
+      }),
+    () =>
+      sliderRow({
+        label: 'Corners',
+        setting: backlitRadius,
+        min: 0,
+        max: KEY_RADIUS_MAX,
+        step: 0.2,
+        fallback: DEFAULT_KEY_SHAPE.radius,
+      }),
+  ],
 };

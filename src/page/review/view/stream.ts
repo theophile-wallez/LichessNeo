@@ -1,3 +1,4 @@
+import { WORD_MS } from '#shared/coach-voice.ts';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import type { Session } from '#page/review/session.ts';
 import { tellCoach } from './coach-avatar.ts';
@@ -5,8 +6,6 @@ import { tellCoach } from './coach-avatar.ts';
 // The coach's comment types out word by word (comment/markup.ts draws each
 // moment of it); this runs the typing's clock.
 
-/** A word's turn to show, as the coach types its comment out (the game over's card too). */
-export const WORD_MS = 35;
 const FALLBACK_LINE_HEIGHT = 18;
 
 interface Fit {

@@ -14,11 +14,170 @@
   "settingsLink": {
     "message": "Lichess Reimagined"
   },
-  "settingsTitle": {
+  "settingsPagePersonalization": {
+    "message": "Personnalisation"
+  },
+  "settingsPageBoard": {
+    "message": "Plateau et sons"
+  },
+  "looksBoard": {
+    "message": "Plateau"
+  },
+  "looksBoardBody": {
+    "message": "Le plateau de vos parties, puzzles et analyses."
+  },
+  "looksPieces": {
+    "message": "Pièces"
+  },
+  "looksPiecesBody": {
+    "message": "Les pièces de tous les plateaux."
+  },
+  "looksSounds": {
+    "message": "Sons"
+  },
+  "looksSoundsBody": {
+    "message": "Les sons des coups et des parties."
+  },
+  "looksOurs": {
     "message": "Lichess Reimagined"
   },
-  "settingsIntro": {
-    "message": "Les réglages de l’extension. Ils vous suivent dans chaque navigateur synchronisé avec votre compte Google."
+  "looksClassic": {
+    "message": "Classiques"
+  },
+  "looksBacklit": {
+    "message": "Rétroéclairés"
+  },
+  "looksLichess": {
+    "message": "Lichess"
+  },
+  "looksNoPieces": {
+    "message": "Pas encore de jeu de pièces de l’extension : importez le vôtre depuis un pack dans"
+  },
+  "looksLichessFailed": {
+    "message": "La liste de Lichess n’a pas pu être chargée."
+  },
+  "looksDeleteBoard": {
+    "message": "Supprimer $1"
+  },
+  "looksPreview": {
+    "message": "Aperçu"
+  },
+  "looksPreviewBody": {
+    "message": "Votre plateau, vos pièces et vos sons, le temps d’une courte partie."
+  },
+  "looksPreviewPlay": {
+    "message": "Jouer la partie"
+  },
+  "settingsPageProfile": {
+    "message": "Personnalisation du profil"
+  },
+  "avatarTitle": {
+    "message": "Votre avatar"
+  },
+  "avatarBody": {
+    "message": "Visible uniquement par vous."
+  },
+  "avatarModeName": {
+    "message": "Mon nom"
+  },
+  "avatarModeCoach": {
+    "message": "Un coach"
+  },
+  "avatarModePicture": {
+    "message": "Une image"
+  },
+  "avatarNameNote": {
+    "message": "Le coach et la couleur que votre nom vous donne : ceux que tout le monde voit."
+  },
+  "avatarCoach": {
+    "message": "Coach"
+  },
+  "avatarColor": {
+    "message": "Couleur"
+  },
+  "avatarColorBlue": {
+    "message": "Bleu"
+  },
+  "avatarColorPurple": {
+    "message": "Violet"
+  },
+  "avatarColorPink": {
+    "message": "Rose"
+  },
+  "avatarColorRed": {
+    "message": "Rouge"
+  },
+  "avatarColorOrange": {
+    "message": "Orange"
+  },
+  "avatarColorGreen": {
+    "message": "Vert"
+  },
+  "avatarColorCyan": {
+    "message": "Cyan"
+  },
+  "avatarUpload": {
+    "message": "Choisir une image"
+  },
+  "avatarPictureNote": {
+    "message": "PNG, JPEG, WebP ou GIF. Recadrée en carré au centre, et gardée dans ce navigateur seulement."
+  },
+  "avatarPictureFailed": {
+    "message": "Cette image n’a pas pu être lue."
+  },
+  "avatarEdit": {
+    "message": "Changer d’avatar"
+  },
+  "nameTitle": {
+    "message": "Votre nom"
+  },
+  "nameBody": {
+    "message": "Visible uniquement par vous."
+  },
+  "nameSave": {
+    "message": "Enregistrer"
+  },
+  "nameReset": {
+    "message": "Reprendre mon pseudo"
+  },
+  "settingsPagePacks": {
+    "message": "Packs"
+  },
+  "settingsPageInterface": {
+    "message": "Interface"
+  },
+  "coachPickTitle": {
+    "message": "Votre coach"
+  },
+  "coachPickBody": {
+    "message": "Votre coach commente vos parties, vous encourage pendant les puzzles et vous lit le but des exercices."
+  },
+  "coachPickHello": {
+    "message": "Salut, moi c’est $1 ! Progressons ensemble aux échecs."
+  },
+  "coachPawn": {
+    "message": "Pion"
+  },
+  "coachFennec": {
+    "message": "Fennec"
+  },
+  "coachDino": {
+    "message": "Dino"
+  },
+  "coachAxolotl": {
+    "message": "Axolotl"
+  },
+  "coachFrog": {
+    "message": "Grenouille"
+  },
+  "coachBee": {
+    "message": "Abeille"
+  },
+  "coachOctopus": {
+    "message": "Poulpe"
+  },
+  "coachRobot": {
+    "message": "Robot"
   },
   "settingUiSounds": {
     "message": "Sons de l’interface"
@@ -30,7 +189,7 @@
     "message": "Packs"
   },
   "packsBody": {
-    "message": "Votre propre plateau, vos pièces ou vos sons, depuis un pack sur GitHub. Une fois importés, choisissez-les dans le menu utilisateur, sous l’onglet Extension de Plateau, Pièces ou Son."
+    "message": "Votre propre plateau, vos pièces ou vos sons, depuis un pack sur GitHub. Une fois importés, choisissez-les dans Plateau et sons, ou dans le menu utilisateur."
   },
   "packsEmpty": {
     "message": "Aucun pack importé pour l’instant."

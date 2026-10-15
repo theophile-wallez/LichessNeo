@@ -1,11 +1,13 @@
-import { avatarOf, userInHref } from '#shared/avatar.ts';
-import { queryAll, queryOne, setData } from '#shared/dom.ts';
+import { userInHref } from '#shared/avatar.ts';
+import { createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
+import { onOwnAvatar, ownAvatar, type OwnAvatar, userAvatar } from '#shared/own-avatar.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
 // Gives each user their own avatar (#shared/avatar.ts) where ours stands in for
 // a profile picture: the element that draws it gets the user's coach and color.
-// Anonymous players and the computer keep the default.
+// Anonymous players and the computer keep the default. The signed-in user's own
+// picture, if they picked one, is a variable of ours (styles/theme/avatars.css).
 
 interface Spot {
   readonly selector: string;
@@ -37,9 +39,25 @@ function userIn(spot: HTMLElement, link: string | undefined): string | undefined
 }
 
 export function markAvatar(element: HTMLElement, user: string | undefined): void {
-  const avatar = user === undefined ? null : avatarOf(user);
+  const avatar = user === undefined ? null : userAvatar(user);
   setData(element, 'lrExtAvatarCoach', avatar && String(avatar.coach));
   setData(element, 'lrExtAvatarColor', avatar && avatar.color);
+  setData(element, 'lrExtAvatarPicture', avatar?.picture ? '' : null);
+}
+
+const PICTURE_STYLE = 'lr-ext-own-avatar';
+
+// In a stylesheet of ours: a data: URL too long for <html>'s style attribute.
+function showPicture(avatar: OwnAvatar | null): void {
+  const rule =
+    avatar?.kind === 'picture' ? `:root{--lr-ext-avatar-own:url(${avatar.picture})}` : '';
+  let style = document.getElementById(PICTURE_STYLE);
+  if (!style && rule === '') return;
+  if (!style) {
+    style = createElement('style', { id: PICTURE_STYLE });
+    (document.head ?? document.documentElement).append(style);
+  }
+  if (style.textContent !== rule) style.textContent = rule;
 }
 
 export function syncAvatars(root: ParentNode = document): void {
@@ -50,5 +68,12 @@ export function syncAvatars(root: ParentNode = document): void {
 
 export const avatars: Feature = {
   name: 'avatars',
-  start: () => onEveryTick('avatars', () => syncAvatars()),
+  start: () => {
+    showPicture(ownAvatar());
+    onOwnAvatar(avatar => {
+      showPicture(avatar);
+      syncAvatars();
+    });
+    onEveryTick('avatars', () => syncAvatars());
+  },
 };

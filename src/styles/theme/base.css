@@ -79,9 +79,9 @@
 }
 
 :root {
-  /* Our board's squares (board/pieces.css), the same on either scheme. */
+  /* Our board's squares (board/pieces.css): white and the accent, or the custom board's. */
   --lr-ext-board-light: #f7f8f8;
-  --lr-ext-board-dark: #5e6ad2;
+  --lr-ext-board-dark: var(--lr-ext-accent);
   /* Lichess has no profile pictures: a user's is one of the coaches (avatars.css),
    * anyone else's this silhouette, the same on either scheme. A data URI can't
    * read a variable: its colors are written out. */

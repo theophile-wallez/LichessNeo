@@ -1,10 +1,11 @@
 import { createElement, setData, setStyleProperty } from '#shared/dom.ts';
 import { hasPart, type Pack, type PartKind } from '#shared/packs/pack.ts';
-import { SETTINGS_URL } from '#content/settings/address.ts';
+import { settingsUrl } from '#content/settings/address.ts';
 import type { Library } from './library.ts';
 import { familyItem, familyView, openFamily } from './family.ts';
 import { OPTION_ROWS } from './options.ts';
-import { FAMILIES, familyOf, THEMES, type Theme } from './themes.ts';
+import { showSquares } from './flat-boards.ts';
+import { FAMILIES, familyOf, themesOf, type Theme } from './themes.ts';
 
 // The Extension tab of a panel: the extension's themes for its part, a
 // family's under its one tile (family.ts), then the imported packs that have
@@ -50,18 +51,22 @@ function choiceItem({ kind, id, name, image }: Choice, library: Library): HTMLBu
   return item;
 }
 
-const themeItem = (kind: PartKind, { id, name }: Theme, library: Library): HTMLElement =>
-  choiceItem({ kind, id, name, image: null }, library);
+function themeItem(kind: PartKind, { id, name, colors }: Theme, library: Library): HTMLElement {
+  const item = choiceItem({ kind, id, name, image: null }, library);
+  const thumb = item.querySelector('.lr-ext-src-thumb');
+  if (colors && thumb instanceof HTMLElement) showSquares(thumb, colors);
+  return item;
+}
 
 const packItem = (kind: PartKind, pack: Pack, library: Library): HTMLElement =>
   choiceItem({ kind, id: pack.id, name: pack.name, image: thumbnail(kind, pack) }, library);
 
 // A family's tile stands where its first theme would.
 function themeItems(kind: PartKind, library: Library): HTMLElement[] {
-  return THEMES[kind].flatMap(theme => {
+  return themesOf(kind).flatMap(theme => {
     if (theme.family === undefined) return [themeItem(kind, theme, library)];
     const family = FAMILIES.find(entry => entry.id === theme.family);
-    const first = THEMES[kind].find(entry => entry.family === theme.family);
+    const first = themesOf(kind).find(entry => entry.family === theme.family);
     return family && first === theme ? [familyItem(kind, family)] : [];
   });
 }
@@ -97,10 +102,10 @@ export function choiceSection(kind: PartKind, library: Library): HTMLElement {
   const settings = createElement('a', {
     className: 'lr-ext-src-import-link',
     text: `Import a ${NOUNS[kind]}`,
-    attrs: { href: SETTINGS_URL },
+    attrs: { href: settingsUrl('packs') },
   });
   const families = FAMILIES.map(family => {
-    const themes = THEMES[kind].filter(theme => theme.family === family.id);
+    const themes = themesOf(kind).filter(theme => theme.family === family.id);
     return themes.length > 0
       ? familyView(
           family,
@@ -109,7 +114,7 @@ export function choiceSection(kind: PartKind, library: Library): HTMLElement {
       : null;
   }).filter(view => view !== null);
   section.append(choiceListing(kind, library), ...families);
-  section.append(...OPTION_ROWS[kind].map(row => row()));
+  section.append(...OPTION_ROWS[kind].map(row => row(library)));
   section.append(settings);
   openFamily(section, familyOf(kind, library.current(kind)));
   return section;

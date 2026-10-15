@@ -2,7 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ReadyStateSchema, setReadyState } from '#shared/testing/ready-state.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { assets } from './assets.ts';
-import { coachChoice } from './coach-choice.ts';
+import { COACH_COUNT, ROBOT_COACH } from '#shared/coach.ts';
+import { chooseCoach, coachChoice } from './coach-choice.ts';
 import { fontFaces, fonts } from './fonts.ts';
 import { reloadIfInjectedLate } from './late-reload.ts';
 // What the original script did in the same cases.
@@ -46,17 +47,36 @@ describe('fonts', () => {
   });
 });
 
+// The original had four coaches, there are COACH_COUNT now: a stored "5" is one of them, and
+// a new pick is drawn from them all.
+function nowExpected({ stored, random, dataset, storedAfter }: (typeof legacy.coach)[number]): {
+  readonly dataset: string;
+  readonly storedAfter: string;
+} {
+  if (stored === '5') return { dataset: '5', storedAfter: '5' };
+  if (storedAfter === stored) return { dataset, storedAfter };
+  const picked = String(1 + Math.floor(random * COACH_COUNT));
+  return { dataset: picked, storedAfter: picked };
+}
+
 describe('coach choice', () => {
-  it.each(legacy.coach)(
-    'reads $stored (random $random) as the original did',
-    ({ stored, random, dataset, storedAfter }) => {
-      vi.spyOn(Math, 'random').mockReturnValue(random);
-      if (stored !== null) localStorage.setItem('lr-ext-coach', stored);
-      coachChoice.start();
-      expect(document.documentElement.dataset['lrExtCoach']).toBe(dataset);
-      expect(localStorage.getItem('lr-ext-coach')).toBe(storedAfter);
-    },
-  );
+  it.each(legacy.coach)('reads $stored (random $random) as the original did', legacyCase => {
+    const { stored, random } = legacyCase;
+    const { dataset, storedAfter } = nowExpected(legacyCase);
+    vi.spyOn(Math, 'random').mockReturnValue(random);
+    if (stored !== null) localStorage.setItem('lr-ext-coach', stored);
+    coachChoice.start();
+    expect(document.documentElement.dataset['lrExtCoach']).toBe(dataset);
+    expect(localStorage.getItem('lr-ext-coach')).toBe(storedAfter);
+  });
+
+  it('shows the settings’ pick at once and keeps it', () => {
+    localStorage.setItem('lr-ext-coach', '2');
+    coachChoice.start();
+    chooseCoach(ROBOT_COACH);
+    expect(document.documentElement.dataset['lrExtCoach']).toBe(String(ROBOT_COACH));
+    expect(localStorage.getItem('lr-ext-coach')).toBe(String(ROBOT_COACH));
+  });
 });
 
 describe('late reload', () => {

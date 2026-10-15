@@ -1,0 +1,100 @@
+/* ---- The settings' links in the account menu (content/settings/menu.ts) --- */
+
+/* Ours, then a link for each of the settings' pages under it, always shown: each page is a
+ * click away from every account page. A page's tile is its link's, and its title's
+ * (menu-titles.css). */
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-link,
+main.account .lr-ext-settings {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
+  --lr-ext-nav-color: var(--lr-ext-accent);
+}
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink[data-lr-ext-page='personalization'],
+main.account .lr-ext-settings[data-lr-ext-page='personalization'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
+  --lr-ext-nav-color: var(--lr-ext-pink);
+}
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink[data-lr-ext-page='profile'],
+main.account .lr-ext-settings[data-lr-ext-page='profile'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg');
+  --lr-ext-nav-color: var(--lr-ext-yellow);
+}
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink[data-lr-ext-page='board'],
+main.account .lr-ext-settings[data-lr-ext-page='board'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
+  --lr-ext-nav-color: var(--lr-ext-green);
+}
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink[data-lr-ext-page='packs'],
+main.account .lr-ext-settings[data-lr-ext-page='packs'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
+  --lr-ext-nav-color: var(--lr-ext-purple);
+}
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink[data-lr-ext-page='interface'],
+main.account .lr-ext-settings[data-lr-ext-page='interface'] {
+  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sliders-horizontal.svg');
+  --lr-ext-nav-color: var(--lr-ext-cyan);
+}
+
+/* Open, our link heads its pages: bright, without the picked row's fill, which goes to the
+ * page's link. */
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-link[data-lr-ext-open] {
+  color: var(--lr-ext-text-strong) !important;
+}
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-link[data-lr-ext-open]::before {
+  background-color: color-mix(in srgb, var(--lr-ext-nav-color) 32%, transparent);
+}
+
+/* Indented under our link's tile, a line down from it. */
+.lr-ext-settings-sub__links {
+  position: relative;
+  padding-inline-start: 32px;
+}
+
+.lr-ext-settings-sub__links::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 22px;
+  inset-inline-start: 24px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--lr-ext-border);
+}
+
+/* Smaller than Lichess's links: a smaller tile, its glyph centered where theirs is. */
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink {
+  gap: 10px;
+  padding: 5px 12px 5px 8px !important;
+  font-size: 14px;
+}
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink::before {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink::after,
+.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-sublink.active::after {
+  width: 18px !important;
+  height: 18px !important;
+  margin: -9px 0 0;
+}
+
+/* Lichess's phone menu is a row that scrolls sideways: the pages' links join it. */
+@media (max-width: 800px) {
+  .lr-ext-settings-sub,
+  .lr-ext-settings-sub__links {
+    display: contents;
+  }
+
+  .lr-ext-settings-sub__links::before {
+    content: none;
+  }
+}

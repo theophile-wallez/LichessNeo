@@ -1,0 +1,357 @@
+/* ---- The settings' Board & sounds page (content/settings/looks-card.ts) --- */
+
+/* A card per part: the extension's looks, their settings, then Lichess's, each a tile with its
+ * name under it, the one shown ringed. Boards show their two top-left squares, as Lichess's
+ * thumbnails do; pieces their white knight; sounds are pills. The preview's board shows them
+ * all (content/settings/looks-preview.ts): above the cards, or beside them where there's room. */
+
+.lr-ext-settings__page[data-lr-ext-page='board'] {
+  container: lr-ext-looks-page / inline-size;
+}
+
+.lr-ext-looks-page,
+.lr-ext-looks-page__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.lr-ext-looks,
+.lr-ext-looks-preview {
+  --lr-ext-setting-color: var(--lr-ext-green);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 18px 20px;
+  border-radius: 14px;
+  background: var(--lr-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+}
+
+.lr-ext-looks[data-lr-ext-part='piece'] {
+  --lr-ext-setting-color: var(--lr-ext-purple);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn.svg');
+}
+
+.lr-ext-looks[data-lr-ext-part='sound'] {
+  --lr-ext-setting-color: var(--lr-ext-orange);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/music-note-01.svg');
+}
+
+.lr-ext-looks__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.lr-ext-looks:hover .lr-ext-looks__head .lr-ext-setting__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.lr-ext-looks__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+}
+
+.lr-ext-looks[data-lr-ext-part='piece'] .lr-ext-looks__grid {
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+}
+
+.lr-ext-looks[data-lr-ext-part='sound'] .lr-ext-looks__grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.lr-ext-looks__sub {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.lr-ext-looks__sub::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--lr-ext-lift-8);
+}
+
+/* A family's section stands apart from the tiles and settings above it. */
+.lr-ext-looks__sub:not(:nth-child(1 of .lr-ext-looks__sub)) {
+  margin-top: 8px !important;
+}
+
+.lr-ext-looks__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--lr-ext-text-dim);
+  font-size: 13.5px;
+}
+
+.lr-ext-looks__empty a {
+  color: var(--lr-ext-accent);
+  font-weight: 700;
+}
+
+/* ---- The preview: its board, drawn in the page world (page/looks/preview.ts) --- */
+
+.lr-ext-looks-preview {
+  --lr-ext-setting-color: var(--lr-ext-blue);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view.svg');
+
+  display: grid;
+  grid-template: 'board head' auto 'board play' 1fr / minmax(120px, 200px) minmax(0, 1fr);
+  gap: 14px 18px;
+}
+
+.lr-ext-looks-preview .lr-ext-looks__head {
+  grid-area: head;
+  margin: 0;
+}
+
+.lr-ext-looks-preview:hover .lr-ext-setting__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.lr-ext-looks-preview__board {
+  grid-area: board;
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.lr-ext-looks-preview__board .cg-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+/* Chessground's slide, as long as page/looks/preview.ts waits for it. */
+.lr-ext-looks-preview__board piece {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.lr-ext-looks-preview__play {
+  display: inline-flex;
+  grid-area: play;
+  align-self: start;
+  justify-self: start;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 18px 0 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: var(--lr-ext-white);
+  font: 700 14px var(--lr-ext-font);
+  cursor: pointer;
+}
+
+.lr-ext-looks-preview__play:hover {
+  background: var(--lr-ext-btn-primary-hover);
+}
+
+.lr-ext-looks-preview__play .lr-ext-hi {
+  width: 18px;
+  height: 18px;
+}
+
+/* On a phone, and beside the cards: the title, the board and the button, one under the other. */
+@container lr-ext-looks-page (max-width: 519px) {
+  .lr-ext-looks-preview {
+    grid-template: 'head' 'board' 'play' / minmax(0, 1fr);
+  }
+
+  .lr-ext-looks-preview__play {
+    justify-content: center;
+    justify-self: stretch;
+  }
+}
+
+@container lr-ext-looks-page (min-width: 700px) {
+  .lr-ext-looks-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 272px;
+    align-items: start;
+  }
+
+  .lr-ext-looks-page__cards {
+    grid-area: 1 / 1;
+  }
+
+  .lr-ext-looks-preview {
+    grid-area: 1 / 2;
+    grid-template: 'head' 'board' 'play' / minmax(0, 1fr);
+  }
+
+  .lr-ext-looks-preview__play {
+    justify-content: center;
+    justify-self: stretch;
+  }
+}
+
+/* Pinned under the page's title while the cards scroll: the stuck title is 100px high, from the
+ * window's edge (account-pinned.css). */
+@media (min-width: 1020px) {
+  @container lr-ext-looks-page (min-width: 700px) {
+    .lr-ext-looks-preview {
+      position: sticky;
+      top: calc(100px - var(--lr-ext-page-top));
+    }
+  }
+}
+
+/* ---- The tiles --- */
+
+.lr-ext-looks .lr-ext-src-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 7px 7px 8px;
+  border: none;
+  border-radius: 12px;
+  background: var(--lr-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text-dim);
+  font: 600 12.5px var(--lr-ext-font);
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    color 0.2s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-looks .lr-ext-src-item:hover {
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border-hover);
+  color: var(--lr-ext-text-strong);
+  transform: translateY(-2px);
+}
+
+.lr-ext-looks .lr-ext-src-item.active {
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+  color: var(--lr-ext-text-strong);
+}
+
+.lr-ext-looks .lr-ext-src-item:focus-visible {
+  outline: 2px solid var(--lr-ext-accent);
+  outline-offset: 2px;
+}
+
+.lr-ext-looks .lr-ext-src-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lr-ext-looks[data-lr-ext-part='sound'] .lr-ext-src-item {
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 13.5px;
+}
+
+.lr-ext-looks .lr-ext-src-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2;
+  border-radius: 6px;
+  background: center / cover no-repeat;
+  box-shadow: 0 1px 3px var(--lr-ext-shade-35);
+}
+
+/* ---- Their settings (content/packs/options.ts) --- */
+
+.lr-ext-looks .lr-ext-src-option-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.lr-ext-looks .lr-ext-src-option-row[hidden] {
+  display: none;
+}
+
+.lr-ext-looks__family {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lr-ext-looks__family[hidden] {
+  display: none;
+}
+
+.lr-ext-looks .lr-ext-src-option-label {
+  min-width: 96px;
+  color: var(--lr-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lr-ext-looks .lr-ext-src-options {
+  --lr-ext-tab-bg: var(--lr-ext-bg-raised);
+  --lr-ext-tab-radius: 8px;
+
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 11px;
+  background: var(--lr-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+}
+
+.lr-ext-looks .lr-ext-src-options button {
+  height: 32px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--lr-ext-text-dim);
+  font: 700 13px var(--lr-ext-font);
+  cursor: pointer;
+  transition: color 0.15s !important;
+}
+
+.lr-ext-looks .lr-ext-src-options button:hover,
+.lr-ext-looks .lr-ext-src-options button.active {
+  color: var(--lr-ext-text-strong);
+}
+
+.lr-ext-looks .lr-ext-src-options button.active {
+  background: var(--lr-ext-bg-raised);
+  box-shadow: 0 1px 3px var(--lr-ext-shade-40);
+}
+
+.lr-ext-looks .lr-ext-src-options[data-lr-ext-tabs] button.active {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* A phone's tiles: smaller, and the settings' pills across. */
+@media (max-width: 640px) {
+  .lr-ext-looks__grid {
+    grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  }
+
+  .lr-ext-looks .lr-ext-src-options {
+    flex: 1 1 100%;
+  }
+
+  .lr-ext-looks .lr-ext-src-options button {
+    flex: 1 1 0;
+    padding: 0 6px;
+  }
+}

@@ -1,5 +1,13 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { onCoachState, onPageReady, onSounds } from './protocol.ts';
+import {
+  onCoachState,
+  onLichessLook,
+  onLooksPreview,
+  onPageReady,
+  onSounds,
+  postLichessLook,
+  postLooksPreview,
+} from './protocol.ts';
 
 const stops: (() => void)[] = [];
 
@@ -47,6 +55,27 @@ describe('protocol', () => {
     receive({ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'stereo' } });
     receive({ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'surround' } });
     expect(received).toEqual([null, { place: 'stereo' }]);
+  });
+
+  it('carries a Lichess look’s pick across, and drops a part it doesn’t know', () => {
+    const post = vi.spyOn(window, 'postMessage').mockImplementation(() => {});
+    const picks: unknown[] = [];
+    stops.push(onLichessLook(pick => picks.push(pick)));
+    postLichessLook({ part: 'piece', id: 'merida' });
+    for (const [data] of post.mock.calls) receive(data);
+    receive({ type: 'lr-ext:lichess-look', part: 'clock', id: 'merida' });
+    expect(picks).toEqual([{ part: 'piece', id: 'merida' }]);
+  });
+
+  it('carries the preview board’s actions across, and drops others', () => {
+    const post = vi.spyOn(window, 'postMessage').mockImplementation(() => {});
+    const actions: unknown[] = [];
+    stops.push(onLooksPreview(action => actions.push(action)));
+    postLooksPreview('play');
+    postLooksPreview('step');
+    for (const [data] of post.mock.calls) receive(data);
+    receive({ type: 'lr-ext:looks-preview', action: 'pause' });
+    expect(actions).toEqual(['play', 'step']);
   });
 
   it('stops listening once told', () => {

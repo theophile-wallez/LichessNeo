@@ -1,4 +1,9 @@
-import { type BacklitSettings, readBacklitWords } from '#shared/backlit.ts';
+import {
+  type BacklitSettings,
+  DEFAULT_KEY_SHAPE,
+  keyBox,
+  readBacklitWords,
+} from '#shared/backlit.ts';
 import { wrapOrientation } from '#shared/chessground.ts';
 import type { Color } from '#shared/chess/types.ts';
 import type { Feature } from '#shared/features.ts';
@@ -8,11 +13,11 @@ import type { Spread } from './effects.ts';
 import { createScene, type Paint, type Scene } from './scene.ts';
 import { type Arrival, watchMoves } from './watch.ts';
 
-// The backlit board's light (#shared/backlit.ts), on the main board only:
-// mini boards keep its keys, unlit. Until the board is picked, this only
+// The backlit board's light (#shared/backlit.ts), on the main board and the
+// settings' preview only: mini boards keep its keys, unlit. Until the board is picked, this only
 // watches one attribute of <html>, so other boards cost nothing.
 
-const BOARD = '.is2d main .main-board cg-board';
+const BOARD = '.is2d main .main-board cg-board, .lr-ext-looks-preview__board cg-board';
 const CHECK_COLOR = '#ff4d5e';
 
 const readSettings = (): BacklitSettings | null =>
@@ -54,6 +59,7 @@ function startLight(): () => void {
       const settings = readSettings();
       return settings?.light === 'sides' ? layer.side(orientation()) : layer.glow();
     },
+    keyBox: () => keyBox(readSettings()?.shape ?? DEFAULT_KEY_SHAPE),
   });
   let tracked: { board: Element; stop: () => void } | null = null;
 

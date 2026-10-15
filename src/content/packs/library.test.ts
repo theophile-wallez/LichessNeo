@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi, type Mock } from 'vitest';
 import { fakePack } from '#shared/testing/packs.ts';
 import { createLibrary, LICHESS, storedPick, type Look, type Shown } from './library.ts';
 import type { Pack } from '#shared/packs/pack.ts';
+import { ACCENT_BOARD } from './themes.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
 const CLICKS = fakePack('ann/packs/main/clicks/', ['sound']);
@@ -50,7 +51,7 @@ afterEach(() => {
 describe('storedPick', () => {
   it('reads a pack’s id, a theme’s or Lichess’s, and anything older or missing as the default', () => {
     expect([storedPick('board'), storedPick('piece'), storedPick('sound')]).toEqual([
-      'blue',
+      ACCENT_BOARD,
       LICHESS,
       LICHESS,
     ]);
@@ -64,21 +65,24 @@ describe('storedPick', () => {
       LICHESS,
     ]);
     localStorage.setItem('lr-ext-board', 'brown');
-    expect(storedPick('board')).toBe('blue');
+    expect(storedPick('board')).toBe(ACCENT_BOARD);
     localStorage.setItem('lr-ext-board', LICHESS);
     expect(storedPick('board')).toBe(LICHESS);
+    // Our blue board became the accent's.
+    localStorage.setItem('lr-ext-board', 'blue');
+    expect(storedPick('board')).toBe(ACCENT_BOARD);
   });
 });
 
 describe('createLibrary', () => {
   it('shows the defaults until something is picked, then the pick', async () => {
     const { shown, library: packs } = await library([WOOD, CLICKS]);
-    expect(ids(shown.at(-1))).toEqual({ board: 'blue', piece: null, sound: null });
+    expect(ids(shown.at(-1))).toEqual({ board: ACCENT_BOARD, piece: null, sound: null });
     packs.choose('piece', WOOD.id);
     packs.choose('sound', CLICKS.id);
-    expect(ids(shown.at(-1))).toEqual({ board: 'blue', piece: WOOD.id, sound: CLICKS.id });
+    expect(ids(shown.at(-1))).toEqual({ board: ACCENT_BOARD, piece: WOOD.id, sound: CLICKS.id });
     expect(localStorage.getItem('lr-ext-pieces')).toBe(WOOD.id);
-    expect([packs.current('board'), packs.current('piece')]).toEqual(['blue', WOOD.id]);
+    expect([packs.current('board'), packs.current('piece')]).toEqual([ACCENT_BOARD, WOOD.id]);
     packs.choose('piece', LICHESS);
     packs.choose('board', LICHESS);
     expect(ids(shown.at(-1))).toEqual({ board: null, piece: null, sound: CLICKS.id });
@@ -88,8 +92,8 @@ describe('createLibrary', () => {
     localStorage.setItem('lr-ext-board', CLICKS.id);
     localStorage.setItem('lr-ext-pieces', 'ann/packs/main/gone/');
     const { shown, library: packs } = await library([WOOD, CLICKS]);
-    expect(ids(shown.at(-1))).toEqual({ board: 'blue', piece: null, sound: null });
-    expect(packs.current('board')).toBe('blue');
+    expect(ids(shown.at(-1))).toEqual({ board: ACCENT_BOARD, piece: null, sound: null });
+    expect(packs.current('board')).toBe(ACCENT_BOARD);
     // The pick is kept: a pack that failed to read this time may read the next.
     expect(localStorage.getItem('lr-ext-pieces')).toBe('ann/packs/main/gone/');
   });
@@ -120,8 +124,8 @@ describe('createLibrary', () => {
     await packs.remove(WOOD.id);
     expect(erase).toHaveBeenCalledWith(WOOD.id);
     expect(packs.packs()).toEqual([]);
-    expect(ids(shown.at(-1))).toEqual({ board: 'blue', piece: null, sound: null });
-    expect(localStorage.getItem('lr-ext-board')).toBe('blue');
+    expect(ids(shown.at(-1))).toEqual({ board: ACCENT_BOARD, piece: null, sound: null });
+    expect(localStorage.getItem('lr-ext-board')).toBe(ACCENT_BOARD);
     expect(localStorage.getItem('lr-ext-pieces')).toBe(LICHESS);
   });
 

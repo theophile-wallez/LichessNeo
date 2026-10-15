@@ -1,7 +1,7 @@
 import { z } from 'zod/mini';
 import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
 import { hasPart, PART_KINDS, type Pack, type PartKind } from '#shared/packs/pack.ts';
-import { isTheme } from './themes.ts';
+import { ACCENT_BOARD, isTheme } from './themes.ts';
 
 // The imported packs, and what each part shows: one of the extension's
 // themes, a pack, or Lichess's own. The picks are in localStorage, read at
@@ -10,9 +10,9 @@ import { isTheme } from './themes.ts';
 /** The pick that leaves a part to Lichess. */
 export const LICHESS = 'lichess';
 
-/** The extension's blue board; Lichess's pieces and sounds. */
+/** The extension's board in the accent; Lichess's pieces and sounds. */
 const DEFAULT_PICKS: Readonly<Record<PartKind, string>> = {
-  board: 'blue',
+  board: ACCENT_BOARD,
   piece: LICHESS,
   sound: LICHESS,
 };
@@ -27,10 +27,14 @@ const PICK_KEYS: Readonly<Record<PartKind, string>> = {
 // a bundled board or piece set of an older version.
 export const isPackId = (pick: string): boolean => pick.includes('/');
 
+// Our blue board became the accent's, which is that blue in the default color theme.
+const RENAMED: Readonly<Record<string, string>> = { blue: ACCENT_BOARD };
+
 /** The stored pick, before the packs are read: a pack's id, a theme's or LICHESS. */
 export function storedPick(kind: PartKind): string {
-  const pick = readStored(PICK_KEYS[kind], z.string());
-  if (pick === null) return DEFAULT_PICKS[kind];
+  const stored = readStored(PICK_KEYS[kind], z.string());
+  if (stored === null) return DEFAULT_PICKS[kind];
+  const pick = RENAMED[stored] ?? stored;
   return pick === LICHESS || isTheme(kind, pick) || isPackId(pick) ? pick : DEFAULT_PICKS[kind];
 }
 

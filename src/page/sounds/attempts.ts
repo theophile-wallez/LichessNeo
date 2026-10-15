@@ -1,6 +1,4 @@
 import type { Board, Square } from '#shared/chess/types.ts';
-import { queryOne } from '#shared/dom.ts';
-import { cgKey } from '#page/lichess/chessground.ts';
 import {
   boardOrientation,
   mainBoardWrap,
@@ -46,8 +44,7 @@ function watchAttempt(session: SoundSession, press: Press, isDrop: boolean): voi
 // Click-to-move: a piece is selected, and this click isn't on it or on
 // another piece of its side.
 function isClickToMove(board: Element, pieces: Board, square: Square): boolean {
-  const selectedSquare = queryOne(board, 'square.selected', Element);
-  const selected = selectedSquare ? cgKey(selectedSquare) : null;
+  const [selected] = markedSquares(board, 'selected');
   const piece = selected ? pieces.get(selected) : undefined;
   return piece !== undefined && square !== selected && pieces.get(square)?.color !== piece.color;
 }

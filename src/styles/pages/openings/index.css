@@ -4,6 +4,7 @@
  * its picture, the search and its filters, the openings as cards (a board, the name and the
  * move, the popularity and the results), and an opening's board, story and numbers. */
 @import './header.css';
+@import './title.css';
 @import './cards.css';
 @import './opening.css';
 @import './tree.css';

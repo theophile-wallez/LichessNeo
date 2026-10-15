@@ -23,15 +23,16 @@
   }
 }
 
+/* The stage list needs little room; the panel right of the board takes it, for its coach. */
 @media (min-width: 1259.3px) {
   .learn--run {
     grid-template-columns:
-      minmax(var(---col3-uniboard-side-min, 250px), 350px)
+      minmax(200px, 240px)
       min(
         var(---col3-uniboard-width),
         calc(var(--lr-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - 575px)
       )
-      minmax(240px, 400px) !important;
+      minmax(290px, 440px) !important;
   }
 }
 

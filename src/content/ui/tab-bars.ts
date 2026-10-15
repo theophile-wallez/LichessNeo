@@ -41,6 +41,8 @@ export const TAB_BARS: readonly TabBarKind[] = [
   ),
   kind('#dasher_app .lr-ext-src-tabs', 'button', '.active', 'pill'),
   kind('#dasher_app .lr-ext-src-options', 'button', '.active', 'pill'),
+  kind('.lr-ext-looks .lr-ext-src-options', 'button', '.active', 'pill'),
+  kind('.lr-ext-avatar-pick__modes', 'button', '.active', 'pill'),
   // Lichess's radio groups (preferences, coordinate trainer): each option a div with its radio.
   // The game setup's and the patron page's keep a look of their own; the openings' filters
   // are checkboxes, several picked at once.

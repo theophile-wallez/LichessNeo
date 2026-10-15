@@ -1,4 +1,5 @@
 import { squareAt, squareCoords } from '#shared/chess/squares.ts';
+import type { KeyBox } from '#shared/backlit.ts';
 import type { Color, Square } from '#shared/chess/types.ts';
 import { createElement } from '#shared/dom.ts';
 import { oncePerFrame } from '#shared/frame.ts';
@@ -29,6 +30,8 @@ export interface LayerOptions {
   readonly scene: Scene;
   /** The key under the pointer's color. */
   readonly hoverColor: () => string;
+  /** The keys' shape, as the board draws them. */
+  readonly keyBox: () => KeyBox;
 }
 
 const corner = (square: Square, orientation: Color): readonly [number, number] => {
@@ -76,10 +79,14 @@ interface Drawing {
   readonly canvas: HTMLCanvasElement;
   readonly scene: Scene;
   readonly board: () => Board | null;
+  readonly keyBox: () => KeyBox;
 }
 
 /** The draw loop: a frame while something is lit, then none until woken. */
-function createLoop({ canvas, scene, board }: Drawing): { wake: () => void; stop: () => void } {
+function createLoop({ canvas, scene, board, keyBox }: Drawing): {
+  wake: () => void;
+  stop: () => void;
+} {
   const context = canvas.getContext('2d');
   const sprites = createSprites();
   let frame = 0;
@@ -91,10 +98,15 @@ function createLoop({ canvas, scene, board }: Drawing): { wake: () => void; stop
     context.globalCompositeOperation = 'lighter';
     const size = canvas.width / 8;
     const orientation = shown.orientation();
+    const box = keyBox();
     for (const { square, level, color } of scene.lights(now)) {
       const [column, row] = corner(square, orientation);
       context.globalAlpha = level;
-      context.drawImage(sprites.key(color, size), (column - BLEED) * size, (row - BLEED) * size);
+      context.drawImage(
+        sprites.key(color, size, box),
+        (column - BLEED) * size,
+        (row - BLEED) * size,
+      );
     }
     context.globalAlpha = 1;
     if (scene.busy(now)) frame = requestAnimationFrame(draw);
@@ -110,12 +122,12 @@ function createLoop({ canvas, scene, board }: Drawing): { wake: () => void; stop
   };
 }
 
-export function createLayer({ scene, hoverColor }: LayerOptions): Layer {
+export function createLayer({ scene, hoverColor, keyBox }: LayerOptions): Layer {
   const canvas = createElement('canvas', { className: 'lr-ext-backlit' });
   let board: Board | null = null;
   let listening: AbortController | null = null;
   let pointer: Pointer = null;
-  const loop = createLoop({ canvas, scene, board: () => board });
+  const loop = createLoop({ canvas, scene, board: () => board, keyBox });
   const resize = fitCanvas(canvas, loop.wake);
 
   // At most once a frame, however fast the pointer moves.

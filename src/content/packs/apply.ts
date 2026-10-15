@@ -3,13 +3,15 @@ import type { SoundFiles } from '#shared/protocol.ts';
 import { SOUND_NAMES } from '#shared/sounds.ts';
 import { PIECE_NAMES, pieceVariable, type Pack } from '#shared/packs/pack.ts';
 import { dataUrlBytes } from '#shared/packs/sniff.ts';
+import { flatBoard, showFlatBoard } from './flat-boards.ts';
 import type { Look } from './library.ts';
 
 // Puts the picked looks on the page. A pack's images go in a stylesheet of
 // ours, as data: URLs too long for <html>'s style attribute, which other
 // features rewrite. Pieces override the variables Lichess draws its own from;
 // the board is named in `data-lr-ext-board` for styles/board/pieces.css: a theme
-// of ours, a pack's, or none for Lichess's.
+// of ours ('flat' for a two-tone board in set colors, beside them), a pack's, or
+// none for Lichess's.
 
 const STYLE_ID = 'lr-ext-packs';
 
@@ -22,7 +24,7 @@ export interface Shown {
 const packOf = (look: Look): Pack | null => (typeof look === 'string' ? null : look);
 
 function boardName(look: Look): string | null {
-  if (typeof look === 'string') return look;
+  if (typeof look === 'string') return flatBoard(look) ? 'flat' : look;
   return look?.board ? 'pack' : null;
 }
 
@@ -72,6 +74,7 @@ function packStyle(): HTMLStyleElement {
 
 export function showLooks(shown: Shown): void {
   setData(document.documentElement, 'lrExtBoard', boardName(shown.board));
+  showFlatBoard(typeof shown.board === 'string' ? flatBoard(shown.board) : undefined);
   const text = packRules(shown);
   const style = document.getElementById(STYLE_ID) ?? (text === '' ? null : packStyle());
   if (style && style.textContent !== text) style.textContent = text;

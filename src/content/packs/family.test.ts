@@ -87,7 +87,7 @@ describe('the backlit family', () => {
       queryAll(view ?? panel, '.lr-ext-src-option-label', HTMLElement).map(
         label => label.textContent,
       ),
-    ).toEqual(['Light', 'Wave', 'Waves on']);
+    ).toEqual(['Light', 'Wave', 'Waves on', 'Gap', 'Corners']);
     button(panel, '.lr-ext-src-back').click();
     expect(section(panel)?.dataset.lrExtOpen).toBeUndefined();
     expect(familyView(panel)?.hidden).toBe(true);
@@ -110,7 +110,7 @@ describe('the backlit family', () => {
     panel = await openPanel('board');
     expect(section(panel)?.dataset.lrExtOpen).toBe('backlit');
     button(panel, '.lr-ext-src-back').click();
-    button(panel, '[data-lr-ext-choice="blue"]').click();
+    button(panel, '[data-lr-ext-choice="accent"]').click();
     await flush();
     expect(familyTile(panel)?.classList.contains('active')).toBe(false);
   });

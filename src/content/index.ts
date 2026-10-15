@@ -33,6 +33,7 @@ import { coachMessage } from './game/coach-message.ts';
 import { boardInset } from './layout/board-inset.ts';
 import { evalGauge } from './analysis/eval-gauge.ts';
 import { puzzle } from './puzzle/index.ts';
+import { learnCoach } from './learn/coach.ts';
 import { extensionSettings } from './settings/index.ts';
 import { homeHero } from './pages/home-hero.ts';
 import { speedCards } from './pages/speed-cards/index.ts';
@@ -50,7 +51,9 @@ import { videoCountPill } from './pages/video-count.ts';
 import { openings } from './pages/openings.ts';
 import { gameMeta } from './game/game-meta.ts';
 import { avatars } from './ui/avatars.ts';
+import { ownNameFeature } from './ui/own-name.ts';
 import { profileMedals } from './profile/medals.ts';
+import { profileAvatarLink } from './profile/avatar-link.ts';
 import { powertip } from './ui/powertip.ts';
 import { tooltip } from './ui/tooltip.ts';
 import { tabs } from './ui/tabs.ts';
@@ -100,6 +103,7 @@ const FEATURES = [
   boardInset,
   evalGauge,
   puzzle,
+  learnCoach,
   extensionSettings,
   homeHero,
   speedCards,
@@ -117,7 +121,9 @@ const FEATURES = [
   openings,
   gameMeta,
   avatars,
+  ownNameFeature,
   profileMedals,
+  profileAvatarLink,
   powertip,
   tooltip,
   tabs,

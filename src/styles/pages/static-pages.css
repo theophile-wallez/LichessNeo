@@ -1,7 +1,7 @@
 /* ---- Static pages --- */
 
-/* About, FAQ, terms, variants, streamers, videos, current games…: Lichess's plain pages,
- * fixed only where they break the layout or clash with our look. */
+/* About, FAQ, the updates, terms, variants, streamers, videos, current games…: Lichess's
+ * plain pages, fixed only where they break the layout or clash with our look. */
 
 /* Side menus and titles stay put while the content scrolls (desktop only: below, Lichess's
  * top bar would cover them). Boxes use `clip`, as `hidden` would catch the sticky title. */
@@ -23,7 +23,7 @@
 
   /* `overflow: clip` loses a scroller's zero min-width: set it back so the box can shrink. */
   main.page-menu > .page-menu__content:is(.page.box-pad, .variants, .streamer-list),
-  main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad,
+  main.page-menu > .page-menu__content > :is(.faq, .lag, .daily-feed).box-pad,
   main.page-menu.video > .page-menu__content.box {
     min-width: 0;
     overflow: clip !important;
@@ -35,7 +35,8 @@
   main.page-menu.video > .page-menu__content.box > .box__top,
   /* ...these sit in their card's padding: pulled out to its edges, same 4vh. */
   main.page-menu > .page-menu__content.page.box-pad > .box__top,
-  main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad > h1.box__top {
+  main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad > h1.box__top,
+  main.page-menu > .page-menu__content > .daily-feed.box-pad > .box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 2;
@@ -45,7 +46,8 @@
   }
 
   main.page-menu > .page-menu__content.page.box-pad > .box__top,
-  main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad > h1.box__top {
+  main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad > h1.box__top,
+  main.page-menu > .page-menu__content > .daily-feed.box-pad > .box__top {
     margin: -4vh calc(-1 * var(---box-padding)) 0 !important;
     padding: 4vh var(---box-padding) !important;
   }
@@ -54,7 +56,8 @@
   main.page-menu > .page-menu__content:is(.variants, .page.box-pad) > .box__top::after,
   main.page-menu > .page-menu__content.streamer-list > .box__top::after,
   main.page-menu.video > .page-menu__content.box > .box__top::after,
-  main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad > h1.box__top::after {
+  main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad > h1.box__top::after,
+  main.page-menu > .page-menu__content > .daily-feed.box-pad > .box__top::after {
     content: '';
     position: absolute;
     top: 100%;
@@ -70,7 +73,8 @@
     main.page-menu > .page-menu__content:is(.variants, .page.box-pad) > .box__top::after,
     main.page-menu > .page-menu__content.streamer-list > .box__top::after,
     main.page-menu.video > .page-menu__content.box > .box__top::after,
-    main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad > h1.box__top::after {
+    main.page-menu > .page-menu__content > :is(.faq, .lag).box-pad > h1.box__top::after,
+    main.page-menu > .page-menu__content > .daily-feed.box-pad > .box__top::after {
       opacity: 1;
     }
   }

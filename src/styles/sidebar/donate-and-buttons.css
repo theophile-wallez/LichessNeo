@@ -159,6 +159,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 14px !important;
     font-weight: 700;
     color: var(--lr-ext-text) !important;
   }
@@ -175,7 +176,7 @@
 
   /* The rating's pill (account-rating.css) takes room at the end of the row. */
   html[data-lr-ext-account-perf] #top #user_tag {
-    padding-inline-end: 84px !important;
+    padding-inline-end: calc(var(--lr-ext-account-pill) + 12px) !important;
   }
 
   /* Before the first rating is known: the name alone, not an avatar the rating would replace. */

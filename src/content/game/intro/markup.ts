@@ -1,4 +1,5 @@
-import { avatarAttributes } from '#shared/avatar.ts';
+import { avatarAttributes } from '#shared/own-avatar.ts';
+import { shownName } from '#shared/own-name.ts';
 import { flagImageUrl } from '#shared/flag.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import type { BarPlayer } from '#shared/player-bar.ts';
@@ -22,7 +23,7 @@ function card(player: BarPlayer, side: Side): SafeHtml {
   return html`<div class="lr-ext-intro__card lr-ext-intro__card--${side}${kind}">
     <span class="lr-ext-intro__avatar"${avatarAttributes(player.user)}></span>
     <span class="lr-ext-intro__who">
-      <span class="lr-ext-intro__name">${title}<span class="lr-ext-intro__username">${player.name}</span></span>
+      <span class="lr-ext-intro__name">${title}<span class="lr-ext-intro__username">${player.user === undefined ? player.name : shownName(player.user, player.name)}</span></span>
       ${details}
     </span>
   </div>`;

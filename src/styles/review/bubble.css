@@ -1,5 +1,23 @@
 /* ---- Coach bubble --- */
 
+/* The coach types its words out one by one (shared/coach-voice.ts, review/view/stream.ts):
+   hidden words keep their place, then fade in. At every width: the Learn stages' coach
+   speaks on phones too. */
+.lr-ext-w--off {
+  visibility: hidden;
+}
+
+.lr-ext-w--in {
+  animation: lr-ext-w-in 0.28s ease-out;
+}
+
+@keyframes lr-ext-w-in {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
 @media (min-width: 1020px) {
   .lr-ext-bubble {
     position: relative;
@@ -139,23 +157,6 @@
     white-space: nowrap;
   }
 
-  /* The review types the comment out word by word: hidden words keep their place,
-     then fade in. */
-  .lr-ext-w--off {
-    visibility: hidden;
-  }
-
-  .lr-ext-w--in {
-    animation: lr-ext-w-in 0.28s ease-out;
-  }
-
-  @keyframes lr-ext-w-in {
-    from {
-      opacity: 0;
-      filter: blur(2px);
-    }
-  }
-
   .lr-ext-review__nav {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -276,9 +277,11 @@
   #lr-ext-review .lr-ext-coach {
     position: relative;
     align-items: flex-end;
-    gap: 12px;
+    /* Room for its arms at its sides (the fox's reach the farthest): the card cuts it only
+       at its feet and over its hops. */
+    gap: 18px;
     margin: 0 12px;
-    padding: 0 14px 0 8px;
+    padding: 0 14px 0 24px;
     overflow: hidden;
     border-radius: 12px;
     background: var(--lr-ext-bg-raised);

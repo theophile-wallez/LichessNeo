@@ -1,89 +1,73 @@
-import { closestTo, createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
-import { html, type SafeHtml, setHtml } from '#shared/html.ts';
+import { createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
+import { html, setHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import { packLibrary } from '#content/packs/index.ts';
 import { importSection } from '#content/packs/import-section.ts';
-import { buildAppearance } from './appearance.ts';
-import { onRatingChange, ratingRowMarkup, showRatingRow } from './rating-row.ts';
-import {
-  currentSettings,
-  onSettings,
-  saveSetting,
-  settingsRead,
-  type Settings,
-} from './settings.ts';
+import { PAGE_NAMES, SETTINGS_PAGES, type SettingsPage } from './address.ts';
+import { buildAppearance, showScheme } from './appearance.ts';
+import { buildAvatarCard } from './avatar-card.ts';
+import { buildNameCard } from './name-card.ts';
+import { buildCoachCard } from './coach-card.ts';
+import { buildInterfacePage } from './interface-page.ts';
+import { buildLooksPage } from './looks-page.ts';
+import { onSettings, settingsRead } from './settings.ts';
 
-// The account page's section for the extension: the appearance, a card per
-// setting, each with a switch or a menu, then the imported packs. A new setting is a field of the
-// schema (settings.ts) and a row here.
+// The account page's section for the extension: one of its pages
+// (address.ts) at a time, the one the menu's link picked (menu.ts), under its
+// name.
 
-type Toggle = { [K in keyof Settings]: Settings[K] extends boolean ? K : never }[keyof Settings];
-
-interface Row {
-  readonly key: Toggle;
-  readonly title: string;
-  readonly body: string;
+export interface SettingsSection {
+  readonly element: HTMLElement;
+  /** Shows `page`, or none while the section is closed. Cheap when nothing changed: it runs every tick. */
+  readonly show: (page: SettingsPage | null) => void;
 }
 
-const rows = (): readonly Row[] => [
-  { key: 'uiSounds', title: message('settingUiSounds'), body: message('settingUiSoundsBody') },
-];
-
-function rowMarkup({ key, title, body }: Row): SafeHtml {
-  const id = `lr-ext-setting-${key}`;
-  return html`<div class="lr-ext-setting" data-lr-ext-setting="${key}">
-    <span class="lr-ext-setting__icon" aria-hidden="true"></span>
-    <div class="lr-ext-setting__text">
-      <h2 class="lr-ext-setting__title" id="${id}">${title}</h2>
-      <p class="lr-ext-setting__body">${body}</p>
-    </div>
-    <button type="button" class="lr-ext-switch" role="switch" aria-checked="false" aria-labelledby="${id}">
-      <span class="lr-ext-switch__knob"></span>
-    </button>
-  </div>`;
-}
-
-const rowOf = (key: string | undefined): Row | undefined => rows().find(row => row.key === key);
-
-function showSettings(section: HTMLElement, settings: Settings): void {
-  // The switches wait for the stored settings, rather than flip from the defaults to them.
-  setData(section, 'lrExtPending', settingsRead() ? null : '');
-  showRatingRow(section, settings);
-  for (const element of queryAll(section, '.lr-ext-setting', HTMLElement)) {
-    const row = rowOf(element.dataset.lrExtSetting);
-    // A menu's card, always on.
-    if (!row) continue;
-    const on = settings[row.key];
-    setData(element, 'lrExtOn', on ? '' : null);
-    const button = queryOne(element, '.lr-ext-switch', HTMLButtonElement);
-    if (button?.getAttribute('aria-checked') !== String(on))
-      button?.setAttribute('aria-checked', String(on));
+function showPage(section: HTMLElement, page: SettingsPage | null): void {
+  // The title's tile is the page's link's (styles/pages/settings-menu.css).
+  setData(section, 'lrExtPage', page);
+  const title = queryOne(section, 'h1.box__top', HTMLElement);
+  const name = page ? message(PAGE_NAMES[page]) : '';
+  if (title && title.textContent !== name) title.textContent = name;
+  for (const panel of queryAll(section, '.lr-ext-settings__page', HTMLElement)) {
+    const hidden = panel.dataset.lrExtPage !== page;
+    if (panel.hidden !== hidden) panel.hidden = hidden;
   }
 }
 
-function onClick(event: MouseEvent): void {
-  if (!closestTo(event.target, '.lr-ext-switch', HTMLButtonElement)) return;
-  const row = rowOf(closestTo(event.target, '.lr-ext-setting', HTMLElement)?.dataset.lrExtSetting);
-  if (row) void saveSetting(row.key, !currentSettings()[row.key]);
-}
-
 /** The section, for the account page's content column, kept in step with the settings. */
-export function buildSection(): HTMLElement {
-  const section = createElement('div', { className: 'page-menu__content lr-ext-settings' });
+export function buildSection(): SettingsSection {
+  const element = createElement('div', { className: 'page-menu__content lr-ext-settings' });
   setHtml(
-    section,
+    element,
     html`<div class="box box-pad">
-      <h1 class="box__top">${message('settingsTitle')}</h1>
-      <p class="lr-ext-settings__intro">${message('settingsIntro')}</p>
-      <div class="lr-ext-settings__list">${rows().map(rowMarkup)}${ratingRowMarkup()}</div>
+      <h1 class="box__top"></h1>
+      ${SETTINGS_PAGES.map(page => html`<div class="lr-ext-settings__page" data-lr-ext-page="${page}" hidden></div>`)}
     </div>`,
   );
-  const list = section.querySelector('.lr-ext-settings__list');
-  list?.before(buildAppearance());
-  section.querySelector('.box')?.append(importSection(packLibrary()));
-  section.addEventListener('click', onClick);
-  section.addEventListener('change', onRatingChange);
-  showSettings(section, currentSettings());
-  onSettings(settings => showSettings(section, settings));
-  return section;
+  const coach = buildCoachCard();
+  const looks = buildLooksPage(packLibrary());
+  const pages: Readonly<Record<SettingsPage, readonly HTMLElement[]>> = {
+    personalization: [buildAppearance(), coach.element],
+    profile: [buildAvatarCard(), buildNameCard()],
+    board: looks.elements,
+    packs: [importSection(packLibrary())],
+    interface: [buildInterfacePage()],
+  };
+  for (const page of SETTINGS_PAGES)
+    queryOne(element, `.lr-ext-settings__page[data-lr-ext-page='${page}']`, HTMLElement)?.append(
+      ...pages[page],
+    );
+  // The switches wait for the stored settings, rather than flip from the defaults to them.
+  const showPending = (): void => setData(element, 'lrExtPending', settingsRead() ? null : '');
+  showPending();
+  onSettings(showPending);
+  return {
+    element,
+    show: page => {
+      showPage(element, page);
+      coach.show(page === 'personalization');
+      looks.show(page === 'board');
+      if (page === 'personalization') showScheme(element);
+    },
+  };
 }

@@ -31,7 +31,23 @@ const ColorSchemePickSchema = z.object({
   scheme: ColorSchemeSchema,
 });
 
+const LichessLookSchema = z.object({
+  type: z.literal(messageType('lichess-look')),
+  part: z.enum(['board', 'piece', 'sound']),
+  id: z.string(),
+});
+
+/** What the settings' preview board does: drawn, its game played through, or one move on. */
+const PreviewActionSchema = z.enum(['draw', 'play', 'step']);
+
+const LooksPreviewSchema = z.object({
+  type: z.literal(messageType('looks-preview')),
+  action: PreviewActionSchema,
+});
+
 export type ColorScheme = z.infer<typeof ColorSchemeSchema>;
+export type LichessLookPick = Omit<z.infer<typeof LichessLookSchema>, 'type'>;
+export type PreviewAction = z.infer<typeof PreviewActionSchema>;
 export type SoundFiles = z.infer<typeof SoundsSchema>['sounds'];
 export type SynthPick = NonNullable<z.infer<typeof SoundsSchema>['synth']>;
 export type CoachState = Omit<z.infer<typeof CoachStateSchema>, 'type'>;
@@ -75,3 +91,15 @@ export const postColorScheme = (scheme: ColorScheme): void =>
   post({ type: messageType('color-scheme'), scheme });
 export const onColorScheme = (handler: (scheme: ColorScheme) => void): (() => void) =>
   listen(ColorSchemePickSchema, message => handler(message.scheme));
+
+/** Content → page: one of Lichess's boards, piece sets or sound sets, picked in the settings. */
+export const postLichessLook = (pick: LichessLookPick): void =>
+  post({ type: messageType('lichess-look'), ...pick });
+export const onLichessLook = (handler: (pick: LichessLookPick) => void): (() => void) =>
+  listen(LichessLookSchema, ({ part, id }) => handler({ part, id }));
+
+/** Content → page: the settings' preview board, drawn or played in the page world. */
+export const postLooksPreview = (action: PreviewAction): void =>
+  post({ type: messageType('looks-preview'), action });
+export const onLooksPreview = (handler: (action: PreviewAction) => void): (() => void) =>
+  listen(LooksPreviewSchema, ({ action }) => handler(action));

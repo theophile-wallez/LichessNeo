@@ -6,9 +6,13 @@ import { watchDasher } from './dasher.ts';
 import { fakePack } from '#shared/testing/packs.ts';
 import { createLibrary, LICHESS, type Library } from './library.ts';
 import type { Pack } from '#shared/packs/pack.ts';
+import { PRESET_BOARDS } from './flat-boards.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
 const CLICKS = fakePack('ann/packs/main/clicks/', ['sound']);
+
+// The accent's board, a two-tone one per color theme, the user's own, and the backlit family.
+const BOARDS = ['Accent', ...PRESET_BOARDS.map(board => board.name), 'Custom', 'Backlit'];
 
 // Lichess's user menu, with one panel open, as snabbdom draws it.
 const PANELS = {
@@ -81,12 +85,12 @@ describe('the user menu’s panels', () => {
     expect(
       queryAll(board, '.lr-ext-src-tabs button', HTMLElement).map(button => button.textContent),
     ).toEqual(['Extension', 'Lichess']);
-    // Our blue board, then only the packs with a board, named in their tooltip only.
+    // Our boards, then only the packs with a board, named in their tooltip only.
     expect(board.dataset.lrExtView).toBe('extension');
-    expect(names(board)).toEqual(['Blue', 'Backlit', 'Pack ann/packs/main/wood/']);
+    expect(names(board)).toEqual([...BOARDS, 'Pack ann/packs/main/wood/']);
     expect(board.querySelector('.lr-ext-src-name')).toBeNull();
     expect(queryOne(board, '.lr-ext-src-item.active', HTMLElement)?.dataset.lrExtChoice).toBe(
-      'blue',
+      'accent',
     );
     const piece = openPanel('piece');
     await flush();
@@ -113,8 +117,8 @@ describe('the user menu’s panels', () => {
     expect(library.current('board')).toBe(LICHESS);
     expect(panel.dataset.lrExtSrcOn).toBe(LICHESS);
     tab(panel, 'extension')?.click();
-    queryOne(panel, '.lr-ext-src-item[data-lr-ext-choice="blue"]', HTMLElement)?.click();
-    expect(library.current('board')).toBe('blue');
+    queryOne(panel, '.lr-ext-src-item[data-lr-ext-choice="accent"]', HTMLElement)?.click();
+    expect(library.current('board')).toBe('accent');
   });
 
   it('list the sound packs beside the volume, and Lichess’s sets hand the sounds back', async () => {
@@ -140,7 +144,7 @@ describe('the user menu’s panels', () => {
     expect(names(panel)).toEqual(['Foley']);
     expect(
       queryOne(panel, '.lr-ext-src-import-link', HTMLAnchorElement)?.getAttribute('href'),
-    ).toBe('/account/profile#lr-ext-extension');
+    ).toBe('/account/profile#lr-ext-extension/packs');
     all.resolve([WOOD, CLICKS]);
     await flush();
     expect(names(panel)).toEqual([
@@ -159,7 +163,7 @@ describe('the user menu’s panels', () => {
     await start([], readAll);
     const panel = openPanel('board');
     await flush();
-    expect(names(panel)).toEqual(['Blue', 'Backlit']);
+    expect(names(panel)).toEqual(BOARDS);
     expect(panel.querySelector('.lr-ext-src-empty')?.textContent).toBe(
       'The imported packs could not be read.',
     );
@@ -170,7 +174,7 @@ describe('the user menu’s panels', () => {
     await flush();
     const again = openPanel('board');
     await flush();
-    expect(names(again)).toEqual(['Blue', 'Backlit', 'Pack ann/packs/main/wood/']);
+    expect(names(again)).toEqual([...BOARDS, 'Pack ann/packs/main/wood/']);
     expect(readAll).toHaveBeenCalledTimes(2);
   });
 

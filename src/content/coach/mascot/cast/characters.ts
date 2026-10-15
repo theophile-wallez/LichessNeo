@@ -11,7 +11,8 @@ import {
   tailGeometry,
 } from './shapes.ts';
 
-// The Game Review's seven coaches, in the order of their numbers (1 to 7).
+// The Game Review's seven animal coaches, in the order of their numbers (1 to 7); the eighth
+// is the computer's robot (robot.ts).
 
 const EGG: BodyLook = {
   geometry: () => bodyGeometry(),

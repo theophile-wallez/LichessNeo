@@ -4,6 +4,7 @@ import { trackListeners } from '#shared/testing/listeners.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { fakePack } from '#shared/testing/packs.ts';
 import { startPacks } from './index.ts';
+import type { Library } from './library.ts';
 import { FAMILY_ROWS, OPTION_ROWS } from './options.ts';
 import type { Pack } from '#shared/packs/pack.ts';
 import { readPack, readPacks } from './store.ts';
@@ -40,8 +41,12 @@ afterEach(() => {
 });
 
 /** Picks `value` in a settings row, as the user menu's does. */
-function choose(row: (() => HTMLElement) | undefined, value: string): void {
-  const option = row?.().querySelector(`[data-lr-ext-option="${value}"]`);
+function choose(
+  row: ((library: Library) => HTMLElement) | undefined,
+  value: string,
+  library: Library,
+): void {
+  const option = row?.(library).querySelector(`[data-lr-ext-option="${value}"]`);
   if (!(option instanceof HTMLElement)) throw new Error(`no ${value}`);
   option.click();
 }
@@ -81,7 +86,7 @@ describe('packs', () => {
     vi.mocked(readPack).mockResolvedValue(WOOD);
     startPacks();
     expect(root.dataset.lrExtLoading).toBeUndefined();
-    expect(root.dataset.lrExtBoard).toBe('blue');
+    expect(root.dataset.lrExtBoard).toBe('accent');
     expect(document.getElementById('lr-ext-packs')).toBeNull();
   });
 
@@ -98,7 +103,7 @@ describe('packs', () => {
     startPacks();
     await flush();
     expect(root.dataset.lrExtLoading).toBeUndefined();
-    expect(root.dataset.lrExtBoard).toBe('blue');
+    expect(root.dataset.lrExtBoard).toBe('accent');
     expect(error).toHaveBeenCalledWith(
       '[LichessReimagined] the imported packs could not be read',
       expect.any(Error),
@@ -150,7 +155,7 @@ describe('packs', () => {
     const library = startPacks();
     await library.ready;
     expect(posted()).toEqual([{ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'stereo' } }]);
-    choose(OPTION_ROWS.sound[0], 'none');
+    choose(OPTION_ROWS.sound[0], 'none', library);
     expect(posted().at(-1)).toEqual({
       type: 'lr-ext:sounds',
       sounds: {},
@@ -158,7 +163,7 @@ describe('packs', () => {
     });
     library.choose('sound', 'lichess');
     expect(posted().at(-1)).toEqual({ type: 'lr-ext:sounds', sounds: {} });
-    choose(OPTION_ROWS.sound[0], 'space');
+    choose(OPTION_ROWS.sound[0], 'space', library);
     expect(posted()).toHaveLength(3);
   });
 
@@ -167,12 +172,18 @@ describe('packs', () => {
     localStorage.setItem('lr-ext-backlit-waves', 'always');
     const library = startPacks();
     await library.ready;
-    expect(root.dataset.lrExtBacklit).toBe('accent short always');
-    choose(FAMILY_ROWS.backlit?.[0], 'sides');
-    expect(root.dataset.lrExtBacklit).toBe('sides short always');
-    library.choose('board', 'blue');
+    expect(root.dataset.lrExtBacklit).toBe('accent short always 5.5 9.6');
+    choose(FAMILY_ROWS.backlit?.[0], 'sides', library);
+    expect(root.dataset.lrExtBacklit).toBe('sides short always 5.5 9.6');
+    const gap = FAMILY_ROWS.backlit?.[3]?.().querySelector('input');
+    if (!gap) throw new Error('no gap slider');
+    gap.value = '2';
+    gap.dispatchEvent(new Event('input'));
+    expect(root.dataset.lrExtBacklit).toBe('sides short always 2 9.6');
+    expect(localStorage.getItem('lr-ext-backlit-gap')).toBe('2');
+    library.choose('board', 'accent');
     expect(root.dataset.lrExtBacklit).toBeUndefined();
-    choose(FAMILY_ROWS.backlit?.[1], 'wide');
+    choose(FAMILY_ROWS.backlit?.[1], 'wide', library);
     expect(root.dataset.lrExtBacklit).toBeUndefined();
   });
 });

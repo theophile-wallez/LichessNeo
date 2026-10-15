@@ -12,7 +12,9 @@
     grid-template-areas: 'main side' !important;
     gap: 24px !important;
     align-items: start;
-    margin: 8px 0 40px;
+    /* No top margin: the title and the side card would rest lower than where they stick,
+     * and jump up as the page scrolled. */
+    margin: 0 0 40px;
   }
 
   /* Level with the first row of cards, under the 72px title bar, stuck or not. */

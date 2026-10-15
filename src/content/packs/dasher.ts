@@ -1,7 +1,9 @@
 import { closestTo, onDomReady, queryOne } from '#shared/dom.ts';
 import { LICHESS, type Library } from './library.ts';
 import { PART_KINDS, type PartKind } from '#shared/packs/pack.ts';
+import { paintTiles } from './backlit-keys.ts';
 import { refreshListing } from './choices.ts';
+import { savedBoards } from './saved-boards.ts';
 import { dressPanel, markPanel, panelSelector, viewOf, type View } from './panel.ts';
 
 // The user menu (#dasher_app) and its Board, Piece set and Sound panels.
@@ -49,6 +51,7 @@ function syncPanels(states: readonly PanelState[], library: Library): void {
         state.view = view;
       },
     });
+    paintTiles(panel);
   }
 }
 
@@ -65,17 +68,22 @@ function onLichessPick(library: Library, target: EventTarget | null): void {
 export function watchDasher(library: Library): void {
   const states: PanelState[] = PART_KINDS.map(kind => ({ kind, open: false, view: 'extension' }));
   document.addEventListener('click', event => onLichessPick(library, event.target));
-  // New packs, or packs read at last, redraw our lists; a pick only moves the ring.
+  // New packs, or packs read at last, and boards saved or deleted redraw our lists; a pick
+  // only moves the ring.
   let listed = library.packs();
+  let boards = savedBoards();
   library.onChange(() => {
     const packs = library.packs();
+    const redraw = packs !== listed || boards !== savedBoards() || library.unreadable();
     for (const { kind } of states) {
       const panel = queryOne(document, panelSelector(kind), HTMLElement);
       if (!panel) continue;
-      if (packs !== listed || library.unreadable()) refreshListing(panel, kind, library);
+      if (redraw) refreshListing(panel, kind, library);
       markPanel(panel, kind, library);
+      paintTiles(panel);
     }
     listed = packs;
+    boards = savedBoards();
   });
   onDomReady(() => {
     const parent = document.getElementById('dasher_app')?.parentElement;

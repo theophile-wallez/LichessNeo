@@ -1,8 +1,8 @@
 /* ---- Coach's portrait --- */
 
 /* The coach's avatar wherever it shows (the review's bubble, a game's end card, the puzzles'
- * coach), at every width: its still, its live mascot over it, and the marks of its mood. Each
- * place sets --lr-ext-coach-h. */
+ * coach, the Learn stages'), at every width: its still, its live mascot over it, and the
+ * marks of its mood. Each place sets --lr-ext-coach-h. */
 
 /* The stills load from manifest CSS, which gets the extension id (the page world can't
    call chrome.runtime.getURL). A button: clicking it changes coach. */
@@ -57,6 +57,9 @@
 }
 .lr-ext-coach__avatar[data-lr-ext-coach-id='7'] .lr-ext-coach__face {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='8'] .lr-ext-coach__face {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
 }
 
 /* The live mascot (content/coach/): its canvas over the still, which it hides once drawn.

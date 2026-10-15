@@ -4,7 +4,7 @@ import { hugeicon } from '#shared/hugeicons.ts';
 import { html, setHtml } from '#shared/html.ts';
 import type { PartKind } from '#shared/packs/pack.ts';
 import { FAMILY_ROWS } from './options.ts';
-import { type Family, familyOf, THEMES } from './themes.ts';
+import { type Family, familyOf, themesOf } from './themes.ts';
 
 // A family of themes, such as the backlit boards: one tile in the panel's
 // list, which opens the family's view, its themes and the settings they
@@ -31,7 +31,7 @@ export function familyItem(kind: PartKind, family: Family): HTMLButtonElement {
       'aria-label': family.name,
     },
   });
-  const first = THEMES[kind].find(theme => theme.family === family.id);
+  const first = themesOf(kind).find(theme => theme.family === family.id);
   const thumb = createElement('span', { className: 'lr-ext-src-thumb' });
   if (first) setData(thumb, 'lrExtTheme', first.id);
   item.append(thumb);

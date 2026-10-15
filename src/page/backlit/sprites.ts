@@ -1,33 +1,32 @@
+import type { KeyBox } from '#shared/backlit.ts';
 import { createElement } from '#shared/dom.ts';
 
 // A lit key, drawn once for each color and size, then stamped on the board's
 // canvas at the level it shines with: a canvas blur on every key of every
-// frame would cost far more. Its glow spills past the key, over the gaps.
+// frame would cost far more. Its glow spills past the key, over the gaps. The
+// key is the shape the settings give the board's (content/packs/backlit-keys.ts).
 
-/** The key's inset in its square and its corners, as styles/board/backlit.css draws it. */
-export const KEY_INSET = 0.0275;
-const KEY_RADIUS = 0.096;
 /** How far the glow spills past the square, in squares. */
 export const BLEED = 0.3;
 const GLOW_BLUR = 0.28;
 
 export interface Sprites {
-  /** The lit key for `color`, its square `size` pixels wide. */
-  readonly key: (color: string, size: number) => HTMLCanvasElement;
+  /** The lit key for `color`, its square `size` pixels wide, in the shape `box`. */
+  readonly key: (color: string, size: number, box: KeyBox) => HTMLCanvasElement;
 }
 
-function drawKey(color: string, size: number): HTMLCanvasElement {
+function drawKey(color: string, size: number, box: KeyBox): HTMLCanvasElement {
   const canvas = createElement('canvas');
   const side = Math.ceil(size * (1 + 2 * BLEED));
   canvas.width = side;
   canvas.height = side;
   const context = canvas.getContext('2d');
   if (!context) return canvas;
-  const offset = size * (BLEED + KEY_INSET);
-  const keySize = size * (1 - 2 * KEY_INSET);
+  const offset = size * (BLEED + box.inset);
+  const keySize = size * box.size;
   const key = (): void => {
     context.beginPath();
-    context.roundRect(offset, offset, keySize, keySize, size * KEY_RADIUS);
+    context.roundRect(offset, offset, keySize, keySize, size * box.radius);
     context.fill();
   };
   context.shadowColor = color;
@@ -55,16 +54,17 @@ function drawKey(color: string, size: number): HTMLCanvasElement {
 
 export function createSprites(): Sprites {
   const drawn = new Map<string, HTMLCanvasElement>();
-  let drawnSize = 0;
+  let drawnFor = '';
   return {
-    key(color, size) {
-      if (size !== drawnSize) {
+    key(color, size, box) {
+      const shape = `${size} ${box.inset} ${box.radius}`;
+      if (shape !== drawnFor) {
         drawn.clear();
-        drawnSize = size;
+        drawnFor = shape;
       }
       let sprite = drawn.get(color);
       if (!sprite) {
-        sprite = drawKey(color, size);
+        sprite = drawKey(color, size, box);
         drawn.set(color, sprite);
       }
       return sprite;

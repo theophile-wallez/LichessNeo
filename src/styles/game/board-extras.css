@@ -128,8 +128,8 @@ main.round .lr-ext-board-tools__btn:is(:hover, .lr-ext-board-tools__btn--on) {
 
 main.round .lr-ext-board-tools__btn::before {
   content: '';
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   background: currentColor;
   mask: center / contain no-repeat;
 }

@@ -19,13 +19,225 @@
     "message": "Lichess Reimagined",
     "description": "The account menu's link to the extension's settings."
   },
-  "settingsTitle": {
-    "message": "Lichess Reimagined",
-    "description": "The title of the extension's settings, on the account page."
+  "settingsPagePersonalization": {
+    "message": "Personalization",
+    "description": "The settings' page for the color scheme, the color themes and the coach."
   },
-  "settingsIntro": {
-    "message": "The extension's settings. They follow you to every browser you sync with your Google account.",
-    "description": "Under the title of the extension's settings."
+  "settingsPageBoard": {
+    "message": "Board & sounds",
+    "description": "The settings' page for the board, the pieces and the sounds."
+  },
+  "looksBoard": {
+    "message": "Board",
+    "description": "The settings' card for the board."
+  },
+  "looksBoardBody": {
+    "message": "The board of your games, puzzles and analyses.",
+    "description": "What the board card is for."
+  },
+  "looksPieces": {
+    "message": "Pieces",
+    "description": "The settings' card for the piece set."
+  },
+  "looksPiecesBody": {
+    "message": "The pieces on every board.",
+    "description": "What the pieces card is for."
+  },
+  "looksSounds": {
+    "message": "Sounds",
+    "description": "The settings' card for the sound set."
+  },
+  "looksSoundsBody": {
+    "message": "The sounds of the moves and of the games.",
+    "description": "What the sounds card is for."
+  },
+  "looksOurs": {
+    "message": "Lichess Reimagined",
+    "description": "Over the extension's own boards, pieces or sounds, and the imported packs'."
+  },
+  "looksClassic": {
+    "message": "Classic",
+    "description": "Over the extension's plain boards and the packs', apart from the backlit ones."
+  },
+  "looksBacklit": {
+    "message": "Backlit",
+    "description": "Over the extension's backlit boards, whose squares light up around each move."
+  },
+  "looksLichess": {
+    "message": "Lichess",
+    "description": "Over Lichess's own boards, pieces or sounds."
+  },
+  "looksNoPieces": {
+    "message": "No piece set of the extension yet: import your own from a pack in",
+    "description": "The pieces card, with no pack of pieces; a link to the Packs page follows."
+  },
+  "looksLichessFailed": {
+    "message": "Lichess's list could not be loaded.",
+    "description": "In a card of the Board & sounds page, when Lichess doesn't answer."
+  },
+  "looksDeleteBoard": {
+    "message": "Delete $1",
+    "description": "The button on a saved board's tile that deletes it; $1 is its name."
+  },
+  "looksPreview": {
+    "message": "Preview",
+    "description": "The title of the Board & sounds page's preview board."
+  },
+  "looksPreviewBody": {
+    "message": "Your board, pieces and sounds, in a short game.",
+    "description": "Under the title of the Board & sounds page's preview board."
+  },
+  "looksPreviewPlay": {
+    "message": "Play the game",
+    "description": "The button that plays a short game on the preview board, to hear the sounds."
+  },
+  "settingsPageProfile": {
+    "message": "Profile customization",
+    "description": "The settings' page for the user's avatar and name, in the account menu and as its title."
+  },
+  "avatarTitle": {
+    "message": "Your avatar",
+    "description": "The title of the Avatar card."
+  },
+  "avatarBody": {
+    "message": "Only visible by you.",
+    "description": "Under the title of the Avatar card."
+  },
+  "avatarModeName": {
+    "message": "My name",
+    "description": "A way to pick the avatar: the one the user's name gives."
+  },
+  "avatarModeCoach": {
+    "message": "A coach",
+    "description": "A way to pick the avatar: a coach on a color, picked by the user."
+  },
+  "avatarModePicture": {
+    "message": "A picture",
+    "description": "A way to pick the avatar: a picture of the user's."
+  },
+  "avatarNameNote": {
+    "message": "The coach and the color your name gives you: the ones everyone sees.",
+    "description": "Under the Avatar card's pills, for the avatar of the user's name."
+  },
+  "avatarCoach": {
+    "message": "Coach",
+    "description": "Over the Avatar card's coaches."
+  },
+  "avatarColor": {
+    "message": "Color",
+    "description": "Over the Avatar card's colors."
+  },
+  "avatarColorBlue": {
+    "message": "Blue",
+    "description": "An avatar's color."
+  },
+  "avatarColorPurple": {
+    "message": "Purple",
+    "description": "An avatar's color."
+  },
+  "avatarColorPink": {
+    "message": "Pink",
+    "description": "An avatar's color."
+  },
+  "avatarColorRed": {
+    "message": "Red",
+    "description": "An avatar's color."
+  },
+  "avatarColorOrange": {
+    "message": "Orange",
+    "description": "An avatar's color."
+  },
+  "avatarColorGreen": {
+    "message": "Green",
+    "description": "An avatar's color."
+  },
+  "avatarColorCyan": {
+    "message": "Cyan",
+    "description": "An avatar's color."
+  },
+  "avatarUpload": {
+    "message": "Choose a picture",
+    "description": "The button that opens a picture for the avatar."
+  },
+  "avatarPictureNote": {
+    "message": "PNG, JPEG, WebP or GIF. Cropped to a square at its center, and kept in this browser only.",
+    "description": "Under the button that opens a picture for the avatar."
+  },
+  "avatarPictureFailed": {
+    "message": "This picture could not be read.",
+    "description": "When the picture picked for the avatar can't be read."
+  },
+  "avatarEdit": {
+    "message": "Change your avatar",
+    "description": "The tooltip of the avatar on the user's own profile, which leads to the Profile customization page."
+  },
+  "nameTitle": {
+    "message": "Your name",
+    "description": "The title of the Profile customization page's Name card."
+  },
+  "nameBody": {
+    "message": "Only visible by you.",
+    "description": "Under the title of the Name card."
+  },
+  "nameSave": {
+    "message": "Save",
+    "description": "The Name card's button that keeps the name typed."
+  },
+  "nameReset": {
+    "message": "Use my username",
+    "description": "The Name card's button that goes back to the user's Lichess username."
+  },
+  "settingsPagePacks": {
+    "message": "Packs",
+    "description": "The settings' tab for the imported packs."
+  },
+  "settingsPageInterface": {
+    "message": "Interface",
+    "description": "The settings' tab for the interface's sounds and the sidebar's rating."
+  },
+  "coachPickTitle": {
+    "message": "Your coach",
+    "description": "The title of the settings' coach page."
+  },
+  "coachPickBody": {
+    "message": "Your coach reviews your games, cheers you on in puzzles and reads you the practice drills' goals.",
+    "description": "What the settings' coach page is for."
+  },
+  "coachPickHello": {
+    "message": "Hi, I'm $1! Let's get better at chess together.",
+    "description": "The picked coach's hello in the settings; $1 is its name."
+  },
+  "coachPawn": {
+    "message": "Pawn",
+    "description": "A coach's name: a pawn."
+  },
+  "coachFennec": {
+    "message": "Fennec",
+    "description": "A coach's name: a fennec fox."
+  },
+  "coachDino": {
+    "message": "Dino",
+    "description": "A coach's name: a dinosaur."
+  },
+  "coachAxolotl": {
+    "message": "Axolotl",
+    "description": "A coach's name: an axolotl."
+  },
+  "coachFrog": {
+    "message": "Frog",
+    "description": "A coach's name: a frog."
+  },
+  "coachBee": {
+    "message": "Bee",
+    "description": "A coach's name: a bee."
+  },
+  "coachOctopus": {
+    "message": "Octopus",
+    "description": "A coach's name: an octopus."
+  },
+  "coachRobot": {
+    "message": "Robot",
+    "description": "A coach's name: the computer's robot, Stockfish's mascot."
   },
   "settingUiSounds": {
     "message": "Interface sounds",
@@ -40,7 +252,7 @@
     "description": "The title of the settings' card for the imported packs."
   },
   "packsBody": {
-    "message": "Your own board, pieces or sounds, from a pack on GitHub. Once imported, pick them in the user menu, in the Extension tab of Board, Piece set or Sound.",
+    "message": "Your own board, pieces or sounds, from a pack on GitHub. Once imported, pick them in Board & sounds, or in the user menu.",
     "description": "What the packs card is for."
   },
   "packsEmpty": {

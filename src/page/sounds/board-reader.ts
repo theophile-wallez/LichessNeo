@@ -26,7 +26,11 @@ const isKeyed = (square: Square | null): square is Square => square !== null;
 
 /** The squares chessground marks with `className` (`current-premove`, `selected`…). */
 export const markedSquares = (board: Element, className: string): Square[] =>
-  queryAll(board, `square.${className}`, Element).map(cgKey).filter(isKeyed);
+  queryAll(board, `square.${className}`, HTMLElement)
+    // Chessground hides the marks it no longer needs, keeping their old square, to reuse them.
+    .filter(square => square.style.display !== 'none')
+    .map(cgKey)
+    .filter(isKeyed);
 
 export function readBoard(wrap: Element | null): BoardState | null {
   const board = wrap?.querySelector('cg-board');

@@ -44,7 +44,7 @@ and a white knob, and a single big number in the state's color.
 
 | Page        | Path                   | Level | Next                                                                       |
 | ----------- | ---------------------- | ----- | -------------------------------------------------------------------------- |
-| Learn       | `/learn`               | 2     |                                                                            |
+| Learn       | `/learn`               | 2     | a stage's coach says its goal in the review's card; no signature yet       |
 | Practice    | `/practice`            | 2     | sets the tone for 2                                                        |
 | Coordinates | `/training/coordinate` | 1     | Lichess's text panel and tabs; a title with its tile, the score on a track |
 | Studies     | `/study`               | 2     |                                                                            |
@@ -83,11 +83,11 @@ and a white knob, and a single big number in the state's color.
 
 ## Account
 
-| Page           | Path                                  | Level | Next                            |
-| -------------- | ------------------------------------- | ----- | ------------------------------- |
-| Preferences    | `/account/preferences`                | 2     |                                 |
-| Our settings   | the account's Lichess Reimagined link | –     | not audited yet                 |
-| Page not found | any unknown path                      | 1     | Lichess's 404 and its mini-game |
+| Page           | Path                                | Level | Next                                                                                 |
+| -------------- | ----------------------------------- | ----- | ------------------------------------------------------------------------------------ |
+| Preferences    | `/account/preferences`              | 2     |                                                                                      |
+| Our settings   | `/account/profile#lr-ext-extension` | 2     | five pages in the account's menu, the board's over a preview board; no signature yet |
+| Page not found | any unknown path                    | 1     | Lichess's 404 and its mini-game                                                      |
 
 ## Seen while auditing
 

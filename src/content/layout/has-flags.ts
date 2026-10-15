@@ -42,6 +42,7 @@ const FLAGS: Readonly<Record<string, string>> = {
   'coach-list': 'main.coach-list',
   'team-list': 'main.team-list',
   'user-show': 'main.page-menu .user-show',
+  account: 'main.account:not(.dgt)',
   'perf-stat': 'main.page-menu > .perf-stat',
   'puzzle-themes': 'main.page-menu .puzzle-themes',
   'tournament-calendar': 'main.box > #tournament-calendar',

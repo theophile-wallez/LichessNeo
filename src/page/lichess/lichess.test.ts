@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
+import { isHashedAsset } from './assets.ts';
 import { cgKey } from './chessground.ts';
 import { method } from './method.ts';
 import { readMoveOptions, type SoundPlayer, soundPlayer, soundVolume } from './sound.ts';
@@ -61,6 +62,8 @@ describe('soundPlayer', () => {
     expect(soundPlayer()).toBeNull();
     Object.assign(window, { site: { sound: { ...player(), move: 'move' } } });
     expect(soundPlayer()).toBeNull();
+    Object.assign(window, { site: { sound: { ...player(), changeSet: 'piano' } } });
+    expect(soundPlayer()).toBeNull();
   });
 });
 
@@ -94,5 +97,16 @@ describe('readMoveOptions', () => {
     expect(readMoveOptions({ name: 'capture', san: null, ply: '3' })).toEqual({ name: 'capture' });
     expect(readMoveOptions(undefined)).toEqual({});
     expect(readMoveOptions(7)).toEqual({});
+  });
+});
+
+describe('isHashedAsset', () => {
+  it('tells the files Lichess’s manifest lists, and none without one', () => {
+    expect(isHashedAsset('piece/cburnett/wP.webp')).toBe(false);
+    Object.assign(window, { site: { manifest: { hashed: { 'piece/cburnett/wP.webp': 'a1b2' } } } });
+    expect(isHashedAsset('piece/cburnett/wP.webp')).toBe(true);
+    expect(isHashedAsset('piece/alpha/wP.webp')).toBe(false);
+    Object.assign(window, { site: { manifest: {} } });
+    expect(isHashedAsset('piece/cburnett/wP.webp')).toBe(false);
   });
 });

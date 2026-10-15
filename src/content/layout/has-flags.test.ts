@@ -26,12 +26,21 @@ describe('presentFlags, for flags the original lacked', () => {
     ],
     ['board-editor', '<main><div class="board-editor"><div class="main-board"></div></div></main>'],
     [
+      'account',
+      '<main class="account page-menu"><div class="page-menu__content box"></div></main>',
+    ],
+    [
       'analyse-training',
       '<main class="analyse"><div class="analyse__round-training"><div class="analyse__acpl"></div></div></main>',
     ],
   ])('reads %s', (flag, page) => {
     document.body.innerHTML = page;
     expect(presentFlags(document).split(' ')).toContain(flag);
+  });
+
+  it('leaves the DGT board’s pages out of the account’s', () => {
+    document.body.innerHTML = '<main class="account page-menu dgt"></main>';
+    expect(presentFlags(document).split(' ')).not.toContain('account');
   });
 
   it('leaves out an empty advice summary', () => {

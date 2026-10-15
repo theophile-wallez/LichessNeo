@@ -262,3 +262,8 @@
 #dasher_app .langs .help::before {
   color: inherit !important;
 }
+
+/* Lichess's roundness slider sets its own boxes' radius, which ours don't read. */
+#dasher_app .sub.theme .ui-roundness {
+  display: none !important;
+}

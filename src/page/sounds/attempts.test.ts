@@ -153,6 +153,26 @@ describe('move attempts', () => {
     await vi.advanceTimersByTimeAsync(150);
     expect(session.lastPieces?.size).toBe(3);
   });
+
+  // Chessground hides a selection's mark once the piece is let go, and keeps it to reuse.
+  it.each([
+    { selection: 'shown', display: '', played: [['play', 'lr-ext-premove', undefined]] },
+    { selection: 'hidden', display: 'none', played: [] },
+  ])('takes a click for a move only with a selection $selection', async ({ display, played }) => {
+    const { sound, calls } = fakeSoundPlayer();
+    const session = createSession();
+    hookSoundPlayer(sound, new Map(SOUND_NAMES.map(name => [name, `blob:${name}`])), session);
+    stop = watchMoveAttempts(session);
+    const board = placeBoard(
+      renderBoard({ placement: '4k3/8/8/8/8/8/4P3/4K3', orientation: 'white', selected: 'e2' }),
+    );
+    const selection = queryOne(board, 'square.selected', HTMLElement);
+    selection?.style.setProperty('display', display);
+    press('pointerdown', pointAt('e4', 'white'), board, 0);
+    addSquare(board, 'current-premove', 'e4');
+    await vi.advanceTimersByTimeAsync(150);
+    expect(calls).toEqual(played);
+  });
 });
 
 describe('squareFromPoint', () => {

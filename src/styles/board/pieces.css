@@ -1,5 +1,5 @@
 /* Board, pieces and highlights. `data-lr-ext-board` on <html> names the board the user picked
- * (content/packs/): one of ours ('blue'), an imported pack's ('pack', its image in
+ * (content/packs/): one of ours ('accent', 'custom', the backlit ones), an imported pack's ('pack', its image in
  * `--lr-ext-board-img`), or none for Lichess's. A pack's pieces override the variables Lichess
  * draws its own from. */
 
@@ -16,9 +16,24 @@
 
 /* ---- Board and pieces --- */
 
-/* Our blue board, the accent and white, drawn from the palette.
+/* Our two-tone boards: white and the color theme's accent (theme/base.css), the custom board
+ * the user colors (content/packs/custom-board.ts), or one in set colors, a preset's or a saved
+ * one's (flat-boards.ts).
  * A tile of 2×2 squares, light top left: a8 and h1 are light whichever side is down. */
-html[data-lr-ext-board='blue'] body .is2d cg-board::before {
+html[data-lr-ext-board='custom'] {
+  --lr-ext-board-light: var(--lr-ext-board-custom-light, #f7f8f8);
+  --lr-ext-board-dark: var(--lr-ext-board-custom-dark, #5e6ad2);
+}
+
+html[data-lr-ext-board='flat'] {
+  --lr-ext-board-light: var(--lr-ext-board-flat-light, #f7f8f8);
+  --lr-ext-board-dark: var(--lr-ext-board-flat-dark, #5e6ad2);
+}
+
+html:is([data-lr-ext-board='accent'], [data-lr-ext-board='custom'], [data-lr-ext-board='flat'])
+  body
+  .is2d
+  cg-board::before {
   background-image: repeating-conic-gradient(
     var(--lr-ext-board-dark) 0 25%,
     var(--lr-ext-board-light) 0 50%
@@ -30,11 +45,14 @@ html[data-lr-ext-board='blue'] body .is2d cg-board::before {
 
 /* Lichess's yellow turns olive on the accent: a pale cyan reads on both colors. Dracula's
  * cyan written out, as the palette's deepens on the light scheme and the board doesn't. */
-html[data-lr-ext-board='blue'] body {
+html:is([data-lr-ext-board='accent'], [data-lr-ext-board='flat']) body {
   --lr-ext-highlight: #8be9fd80;
 }
 
-html[data-lr-ext-board='blue'] body .is2d coords {
+html:is([data-lr-ext-board='accent'], [data-lr-ext-board='custom'], [data-lr-ext-board='flat'])
+  body
+  .is2d
+  coords {
   ---cg-ccw: var(--lr-ext-board-light) !important;
   ---cg-ccb: var(--lr-ext-board-dark) !important;
 }

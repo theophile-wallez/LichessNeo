@@ -31,6 +31,8 @@ const shown = (): [string | undefined, string] => [
   root.style.getPropertyValue('--lr-ext-account-rating'),
 ];
 
+const chars = (): string => root.style.getPropertyValue('--lr-ext-account-chars');
+
 let fetchUser: ReturnType<typeof vi.fn<(url: string) => Promise<Response>>>;
 
 beforeEach(() => {
@@ -84,6 +86,15 @@ describe('the account rating', () => {
     await flush();
     expect(fetchUser).not.toHaveBeenCalled();
     expect(shown()).toEqual([undefined, '']);
+  });
+
+  it('gives the pill the label’s length, its mark included', async () => {
+    signIn('eresy');
+    keep('eresy', Date.now() - MAX_AGE - 1);
+    accountRating.start();
+    expect(chars()).toBe('5');
+    await flush();
+    expect(chars()).toBe('4');
   });
 
   it('keeps the kept rating when Lichess fails', async () => {

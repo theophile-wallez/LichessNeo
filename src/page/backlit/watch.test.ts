@@ -114,6 +114,25 @@ describe('the backlit board’s moves', () => {
     expect(arrivals.map(({ to }) => to)).toEqual(['f3', 'f6']);
   });
 
+  it('lights the move shown, not the marks chessground hid to reuse', async () => {
+    const board = watch('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR');
+    show(board, {
+      placement: 'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',
+      lastMove: ['g1', 'f3'],
+    });
+    // The marks of 1…e5, hidden ahead of the new ones with their old squares.
+    const hidden = (['e7', 'e5'] as const).map(key => {
+      const mark = Object.assign(createCustomElement('square', { className: 'last-move' }), {
+        cgKey: key,
+      });
+      mark.style.display = 'none';
+      return mark;
+    });
+    board.prepend(...hidden);
+    await nextFrame();
+    expect(arrivals.map(({ from, to }) => `${from}${to}`)).toEqual(['g1f3']);
+  });
+
   it('stops once told', async () => {
     const board = watch();
     stop();

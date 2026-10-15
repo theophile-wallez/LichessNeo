@@ -19,7 +19,7 @@
  * the online dot can be placed against it however tall the row grows. */
 .user-show > .user-show__header::before {
   content: '';
-  grid-column: 1;
+  grid-area: 1 / 1;
   align-self: start;
   width: var(--lr-ext-pf-avatar);
   height: var(--lr-ext-pf-avatar);
@@ -28,6 +28,40 @@
   box-shadow:
     0 0 0 1px var(--lr-ext-lift-10),
     0 4px 12px var(--lr-ext-shade-25);
+}
+
+/* On the user's own profile, the avatar leads to the settings' Profile customization page
+ * (content/profile/avatar-link.ts): a pencil over it on hover. */
+.user-show > .user-show__header > .lr-ext-avatar-edit {
+  display: grid;
+  z-index: 1;
+  grid-area: 1 / 1;
+  place-items: center;
+  align-self: start;
+  width: var(--lr-ext-pf-avatar);
+  height: var(--lr-ext-pf-avatar);
+  border-radius: 12px;
+  color: var(--lr-ext-white);
+  transition: background-color 0.2s !important;
+}
+
+.user-show > .user-show__header > .lr-ext-avatar-edit .lr-ext-hi {
+  width: 30%;
+  height: 30%;
+  opacity: 0;
+  transform: scale(0.7);
+  transition:
+    opacity 0.2s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.user-show > .user-show__header > .lr-ext-avatar-edit:is(:hover, :focus-visible) {
+  background-color: color-mix(in srgb, var(--lr-ext-ink) 45%, transparent);
+}
+
+.user-show > .user-show__header > .lr-ext-avatar-edit:is(:hover, :focus-visible) .lr-ext-hi {
+  opacity: 1;
+  transform: none;
 }
 
 /* The online dot. .online is on the h1 for a patron, on the inner link otherwise. */
@@ -228,7 +262,8 @@ html[dir='rtl'] .user-show > .user-show__header .trophies .trophy.patron {
     grid-template-columns: var(--lr-ext-pf-avatar) minmax(0, 1fr);
   }
 
-  .user-show > .user-show__header::before {
+  .user-show > .user-show__header::before,
+  .user-show > .user-show__header > .lr-ext-avatar-edit {
     grid-row: 1 / span 2;
   }
 

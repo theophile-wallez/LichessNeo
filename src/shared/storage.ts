@@ -15,7 +15,17 @@ export const StorageKey = {
   backlitLight: prefixed('backlit-light'),
   backlitReach: prefixed('backlit-reach'),
   backlitWaves: prefixed('backlit-waves'),
+  backlitGap: prefixed('backlit-gap'),
+  backlitRadius: prefixed('backlit-radius'),
+  // The custom board's colors (content/packs/custom-board.ts).
+  customBoard: prefixed('custom-board'),
+  // The custom boards saved under a name (content/packs/saved-boards.ts).
+  savedBoards: prefixed('saved-boards'),
   coach: prefixed('coach'),
+  // The signed-in user's own avatar, picked in the settings (#shared/own-avatar.ts).
+  avatar: prefixed('avatar'),
+  // The name the signed-in user sees in place of theirs (#shared/own-name.ts).
+  name: prefixed('name'),
   // The home hero coach's last entrance, never played twice running (content/coach/mascot).
   coachEntrance: prefixed('coach-entrance'),
   boardZoom: prefixed('board-zoom'),

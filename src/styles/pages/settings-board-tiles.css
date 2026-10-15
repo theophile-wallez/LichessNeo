@@ -1,0 +1,138 @@
+/* ---- The settings' board tiles (content/settings/looks-card.ts): their four top-left squares --- */
+
+.lr-ext-looks[data-lr-ext-part='board'] .lr-ext-src-thumb {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+/* A pack's board, or one of Lichess's in SVG, is the whole board. */
+.lr-ext-looks .lr-ext-src-thumb[data-lr-ext-whole] {
+  background-position: 0 0;
+  background-size: 400% 400%;
+}
+
+/* Lichess's thumbnails are two squares, light then dark: on top, and flipped beneath, dark
+ * then light. */
+.lr-ext-looks .lr-ext-src-thumb[data-lr-ext-pair] {
+  background: var(--lr-ext-thumb-image) top / 100% 50% no-repeat;
+}
+
+.lr-ext-looks .lr-ext-src-thumb[data-lr-ext-pair]::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 0;
+  background: var(--lr-ext-thumb-image) center / 100% 100% no-repeat;
+  transform: scaleX(-1);
+}
+
+/* Our two-tone boards (sidebar/dasher-pickers.css): a tile of 2×2, light top left, in two rows
+ * (a conic gradient frays at its center). */
+.lr-ext-looks
+  .lr-ext-src-thumb:is(
+    [data-lr-ext-theme='accent'],
+    [data-lr-ext-theme='custom'],
+    [data-lr-ext-squares]
+  ) {
+  background:
+    linear-gradient(90deg, var(--lr-ext-thumb-light) 50%, var(--lr-ext-thumb-dark) 50%) top / 100%
+      50% no-repeat,
+    linear-gradient(90deg, var(--lr-ext-thumb-dark) 50%, var(--lr-ext-thumb-light) 50%) bottom /
+      100% 50% no-repeat;
+}
+
+/* A backlit board's four keys (board/backlit.css), each lit as the pointer comes over it,
+ * the first while it's elsewhere. */
+.lr-ext-looks .lr-ext-src-thumb[data-lr-ext-theme^='backlit'] {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  background: var(--lr-ext-backlit-keys) 0 0 / 100% 100%;
+}
+
+.lr-ext-src-key {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--lr-ext-backlit-tint) 85%, transparent) 0 18%,
+    color-mix(in srgb, var(--lr-ext-backlit-tint) 30%, transparent) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s !important;
+}
+
+.lr-ext-src-key:hover,
+.lr-ext-src-item:not(:hover) .lr-ext-src-key:first-child {
+  opacity: 1;
+  transition-duration: 0.08s !important;
+}
+
+.lr-ext-looks[data-lr-ext-part='piece'] .lr-ext-src-thumb {
+  width: 58px;
+  height: 58px;
+  aspect-ratio: auto;
+  object-fit: contain;
+  box-shadow: none;
+}
+
+/* A saved board's tile, its delete button in its corner on hover. */
+.lr-ext-src-saved {
+  position: relative;
+  display: grid;
+}
+
+.lr-ext-src-delete {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--lr-ext-btn-red);
+  box-shadow: 0 1px 4px var(--lr-ext-shade-40);
+  color: var(--lr-ext-white);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.7);
+  transition:
+    opacity 0.15s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-src-delete .lr-ext-hi {
+  width: 13px;
+  height: 13px;
+}
+
+.lr-ext-src-saved:is(:hover, :focus-within) .lr-ext-src-delete {
+  opacity: 1;
+  transform: none;
+}
+
+/* The custom board's brush, over its ring (sidebar/dasher-pickers.css). */
+.lr-ext-looks .lr-ext-src-thumb[data-lr-ext-theme='custom']::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-brush-04--ffffff.svg') center
+      / 56% no-repeat,
+    color-mix(in srgb, var(--lr-ext-ink) 62%, transparent);
+  box-shadow:
+    0 0 0 1px #ffffff2e,
+    0 2px 8px #00000059;
+  backdrop-filter: blur(4px);
+  translate: -50% -50%;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.lr-ext-looks .lr-ext-src-item:hover .lr-ext-src-thumb[data-lr-ext-theme='custom']::after {
+  transform: rotate(-8deg) scale(1.1);
+}

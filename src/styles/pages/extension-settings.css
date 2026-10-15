@@ -1,25 +1,19 @@
 /* ---- Extension settings --- */
 
 /* The account pages' section for the extension (content/settings): it takes the place of the
-   page's content while its link is picked, a card per setting with a switch. */
+   page's content while one of its links is picked (settings-menu.css), one page at a time.
+   The Interface page is a card per setting with a switch. */
 
 main.account:not([data-lr-ext-settings]) > .lr-ext-settings,
 main.account[data-lr-ext-settings] > .page-menu__content:not(.lr-ext-settings) {
   display: none !important;
 }
 
-/* Its link's tile in the menu (pages/headings-menus.css), and its title's. */
-.subnav[data-lr-ext-nav~='account'] a.lr-ext-settings-link,
-main.account .lr-ext-settings {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
-}
-
-.lr-ext-settings__intro {
-  margin: 0 0 22px;
-  color: var(--lr-ext-text-dim);
-  font-size: 14px;
-  line-height: 1.5;
+/* A page's cards, one under the other. */
+.lr-ext-settings__page:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .lr-ext-settings__list {
@@ -170,7 +164,6 @@ main.account .lr-ext-settings {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-top: 10px;
   padding: 16px 18px 18px;
   border-radius: 14px;
   background: var(--lr-ext-bg-panel);

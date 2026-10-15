@@ -223,12 +223,58 @@
   transition: transform 0.1s !important;
 }
 
-/* Our blue board's two top-left squares (styles/board/pieces.css). */
-#dasher_app .lr-ext-src-thumb[data-lr-ext-theme='blue'] {
-  background: linear-gradient(90deg, var(--lr-ext-board-light) 50%, var(--lr-ext-board-dark) 50%);
+/* Our two-tone boards' colors (styles/board/pieces.css), each its own whichever is picked: the
+ * accent's, the custom one's, or a preset's or a saved one's, set on the tile
+ * (content/packs/flat-boards.ts). Two squares here, four in the settings (pages/settings-looks.css). */
+.lr-ext-src-thumb[data-lr-ext-theme='accent'] {
+  --lr-ext-thumb-light: #f7f8f8;
+  --lr-ext-thumb-dark: var(--lr-ext-accent);
 }
 
-/* A backlit board's two top-left keys (styles/board/backlit-keys.css), the first one lit. */
+.lr-ext-src-thumb[data-lr-ext-theme='custom'] {
+  --lr-ext-thumb-light: var(--lr-ext-board-custom-light, #f7f8f8);
+  --lr-ext-thumb-dark: var(--lr-ext-board-custom-dark, #5e6ad2);
+}
+
+#dasher_app
+  .lr-ext-src-thumb:is(
+    [data-lr-ext-theme='accent'],
+    [data-lr-ext-theme='custom'],
+    [data-lr-ext-squares]
+  ) {
+  background: linear-gradient(90deg, var(--lr-ext-thumb-light) 50%, var(--lr-ext-thumb-dark) 50%);
+}
+
+/* The custom board stands apart from the ready ones: its squares, the user's colors, in a
+ * ring of every hue, and in the settings a brush on them (pages/settings-board-tiles.css). */
+.lr-ext-src-thumb[data-lr-ext-theme='custom'] {
+  position: relative;
+}
+
+.lr-ext-src-thumb[data-lr-ext-theme='custom']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 3px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 210deg,
+    var(--lr-ext-red),
+    var(--lr-ext-orange),
+    var(--lr-ext-yellow),
+    var(--lr-ext-green),
+    var(--lr-ext-cyan),
+    var(--lr-ext-blue),
+    var(--lr-ext-purple),
+    var(--lr-ext-pink),
+    var(--lr-ext-red)
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+/* A backlit board's two top-left keys (styles/board/backlit.css), the first one lit. */
 #dasher_app .lr-ext-src-thumb[data-lr-ext-theme^='backlit'] {
   background:
     radial-gradient(

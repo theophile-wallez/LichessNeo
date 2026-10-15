@@ -1,3 +1,4 @@
+import { DEFAULT_KEY_SHAPE, keyBox } from '#shared/backlit.ts';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Color, Square } from '#shared/chess/types.ts';
 import { createCustomElement } from '#shared/dom.ts';
@@ -32,7 +33,11 @@ beforeEach(() => {
     hovered.push(square);
     scene.hover(square, color, now);
   };
-  layer = createLayer({ scene: { ...scene, hover }, hoverColor: () => '#0f0' });
+  layer = createLayer({
+    scene: { ...scene, hover },
+    hoverColor: () => '#0f0',
+    keyBox: () => keyBox(DEFAULT_KEY_SHAPE),
+  });
 });
 
 afterEach(() => {

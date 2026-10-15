@@ -2,8 +2,16 @@ import { z } from 'zod/mini';
 import { readStored, StorageKey, writeStored } from './storage.ts';
 
 /** The Game Review's coaches: the 3D mascots of content/coach/mascot, a still of each in
- * public/img/coaches. An id kept from the four human coaches is one of the first four. */
-export const COACH_COUNT = 7;
+ * public/img/coaches. An id kept from the four human coaches is one of the first four. The
+ * seven animals come first, then the computer's robot. */
+export const COACH_COUNT = 8;
+/** The animals, the coaches users' avatars are drawn from. */
+export const ANIMAL_COACHES = 7;
+
+/** The robot's number as a coach, and the Stockfish level whose colors it wears: blue, as its
+ * stills are wherever no level is known. */
+export const ROBOT_COACH = 8;
+export const ROBOT_COACH_LEVEL = 3;
 
 export const CoachIdSchema = z.coerce.number().check(z.int(), z.minimum(1), z.maximum(COACH_COUNT));
 
@@ -28,6 +36,11 @@ export function pickCoach(): number {
   const stored = readStored(StorageKey.coach, CoachIdSchema);
   if (stored !== null) return stored;
   const coach = 1 + Math.floor(Math.random() * COACH_COUNT);
-  writeStored(StorageKey.coach, coach);
+  keepCoach(coach);
   return coach;
+}
+
+/** Keeps `coach` for every page that shows one, as the settings or the review pick it. */
+export function keepCoach(coach: number): void {
+  writeStored(StorageKey.coach, coach);
 }

@@ -1,5 +1,40 @@
 /* ---- Account pages: the menu and the titles stay put --- */
 
+/* The settings sit on the page itself, without Lichess's box behind them: their fields, bars and
+ * cards keep their own. Below 1020px the box's padding is the page's margin: it stays. */
+main.account > .page-menu__content.box,
+main.account > .page-menu__content > .box,
+main.account > .page-menu__content > .security > .box {
+  background: none !important;
+}
+
+/* The sessions' list pads its title, its header and its rows itself, 50px each. */
+@media (min-width: 1020px) {
+  main.account > .page-menu__content.box,
+  main.account > .page-menu__content > .box,
+  main.account > .page-menu__content.box > h1.box__top,
+  main.account > .page-menu__content > .box > h1.box__top,
+  main.account > .page-menu__content > .security > .box > :is(h1.box__top, .box__pad) {
+    padding-inline: 0 !important;
+  }
+
+  /* Its striped rows keep a little room inside. */
+  main.account > .page-menu__content > .security .slist td:first-child {
+    padding-inline-start: 12px !important;
+  }
+
+  main.account > .page-menu__content > .security .slist td:last-child {
+    padding-inline-end: 12px !important;
+  }
+}
+
+/* Below 1020px the page itself scrolls: its scrollbar's room is kept, as on desktop (below). */
+@media (max-width: 1019.98px) {
+  html[data-lr-ext-has~='account'] {
+    scrollbar-gutter: stable;
+  }
+}
+
 /* The settings scroll, as every page with a side menu does (AGENTS.md, "Only the content
  * scrolls"): the menu stays, scrolling on its own when taller than the window, from the
  * window's edge ("The top room"), and each page's title is pinned at the top of its card.
@@ -26,6 +61,13 @@
     overscroll-behavior: contain;
   }
 
+  /* A link's anchor lands below the pinned title (100px from the window's edge), not under it.
+   * The scrollbar's room is kept on every page, so a short one doesn't shift the content. */
+  html[data-lr-ext-has~='account'] #main-wrap {
+    scroll-padding-top: 112px;
+    scrollbar-gutter: stable;
+  }
+
   /* Lichess's box clips, which traps a sticky title. The DGT board's pages are the box
    * themselves; the settings' hold one. */
   main.account > .page-menu__content.box,
@@ -33,8 +75,15 @@
     overflow: visible !important;
   }
 
-  /* Stuck at the window's edge, the room above it its own padding: the card's look runs up
-   * to the edge, and the title keeps its place when it isn't stuck. */
+  /* The box's top padding would hold the title lower than where it sticks: it jumped up as
+   * the page scrolled. */
+  main.account > .page-menu__content.box,
+  main.account > .page-menu__content > .box {
+    padding-top: 0 !important;
+  }
+
+  /* Stuck at the window's edge, the room above it its own padding, from the start: it never
+   * moves, and its text lines up with the menu's first link (twice the top room down). */
   main.account > .page-menu__content.box > h1.box__top,
   main.account > .page-menu__content > .box > h1.box__top {
     container-type: scroll-state;
@@ -42,8 +91,8 @@
     z-index: 4;
     top: calc(-1 * var(--lr-ext-page-top));
     margin-top: calc(-1 * var(--lr-ext-page-top)) !important;
-    padding-top: var(--lr-ext-page-top) !important;
-    background: var(--lr-ext-bg-panel);
+    padding-top: calc(2 * var(--lr-ext-page-top)) !important;
+    background: var(--lr-ext-bg-page);
   }
 
   /* A fade under the stuck title, over what scrolls beneath it. */
@@ -54,7 +103,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-panel), transparent);
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s !important;

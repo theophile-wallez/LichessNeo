@@ -1,6 +1,6 @@
-import { CoachIdSchema, pickCoach } from '#shared/coach.ts';
 import { createElement, queryOne, setData } from '#shared/dom.ts';
 import { createOwnedElement } from '#shared/owned-element.ts';
+import { chosenCoach } from '#content/coach/chosen.ts';
 import { showCoach } from '#content/coach/index.ts';
 import { puzzleMood, readStep } from './mood.ts';
 
@@ -17,11 +17,6 @@ function buildAvatar(): HTMLElement {
   });
   avatar.append(createElement('span', { className: 'lr-ext-coach__face' }));
   return avatar;
-}
-
-function coachId(): number {
-  const parsed = CoachIdSchema.safeParse(document.documentElement.dataset.lrExtCoach);
-  return parsed.success ? parsed.data : pickCoach();
 }
 
 const ownAvatar = createOwnedElement(buildAvatar);
@@ -41,7 +36,7 @@ export function syncPuzzleCoach(): void {
     ) !== null;
   const mood = puzzleMood(step, solved);
   if (!isNew && avatar.dataset.lrExtMood === mood) return;
-  const coach = coachId();
+  const coach = chosenCoach();
   setData(avatar, 'lrExtCoachId', String(coach));
   setData(avatar, 'lrExtMood', mood);
   if (!isNew) {
