@@ -85,10 +85,17 @@
     width: min(300px, 86vw) !important;
     padding: 10px 0 24px !important;
     background: var(--lr-ext-bg-page) !important;
+    box-shadow: 1px 0 0 var(--lr-ext-sidebar-line) !important;
+    transition:
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s !important;
+  }
+
+  /* Closed, the drawer waits just off the left edge: its shadow would darken the page's. */
+  #top #tn-tg:checked ~ #topnav {
     box-shadow:
       1px 0 0 var(--lr-ext-sidebar-line),
       16px 0 40px var(--lr-ext-shade-50) !important;
-    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
   /* A phone's header has no room for the logo: it heads the drawer, as it heads the sidebar. */
