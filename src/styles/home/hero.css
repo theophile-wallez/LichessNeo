@@ -67,6 +67,24 @@ html[data-lr-ext-coach='7'] .lr-ext-hero__coach--still {
 html[data-lr-ext-coach='8'] .lr-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
 }
+html[data-lr-ext-coach='9'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
+}
+html[data-lr-ext-coach='10'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
+}
+html[data-lr-ext-coach='11'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
+}
+html[data-lr-ext-coach='12'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
+}
+html[data-lr-ext-coach='13'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
+}
+html[data-lr-ext-coach='14'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+}
 
 /* Live, its canvas spills past the sides so arms and tails show, and a click makes it react. */
 .lr-ext-hero__coach--live {

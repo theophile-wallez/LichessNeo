@@ -39,6 +39,7 @@ export class Stage {
   readonly #framing: Framing;
   readonly #shadow: Mesh<PlaneGeometry, MeshBasicMaterial> | null;
   #actor: Object3D | null = null;
+  #raise = 0;
 
   /** Throws without WebGL. */
   constructor(framing: Framing) {
@@ -64,17 +65,22 @@ export class Stage {
 
   #frame(): void {
     const [bottom, top] = FRAMINGS[this.#framing];
-    const middle = FEET + (bottom + top) / 2;
+    const middle = FEET + (bottom + top) / 2 + this.#raise;
     this.#camera.fov = MathUtils.radToDeg(2 * Math.atan((top - bottom) / 2 / DISTANCE));
     this.#camera.position.set(0, middle + 0.1, DISTANCE);
     this.#camera.lookAt(0, middle, 0);
     this.#camera.updateProjectionMatrix();
   }
 
-  show(actor: Object3D): void {
+  /** Puts `actor` on stage, a bust framed `raise` higher for a face off the egg's height. */
+  show(actor: Object3D, raise = 0): void {
     if (this.#actor) this.#ground.remove(this.#actor);
     this.#actor = actor;
     this.#ground.add(actor);
+    const raised = this.#framing === 'bust' ? raise : 0;
+    if (raised === this.#raise) return;
+    this.#raise = raised;
+    this.#frame();
   }
 
   /**

@@ -17,6 +17,7 @@
     "build": "node scripts/build.ts",
     "dev": "node scripts/build.ts --watch",
     "preview": "node scripts/build.ts --out \"$(git worktree list --porcelain | sed -n '1s/^worktree //p')/dist/chrome\"",
+    "playground": "node scripts/playground.ts",
     "package": "node scripts/package.ts",
     "store:render": "node scripts/store/render.ts",
     "icons": "node scripts/icons.ts",

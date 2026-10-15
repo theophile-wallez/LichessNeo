@@ -69,10 +69,11 @@ function pick(card: HTMLElement, coach: number): void {
 }
 
 describe('the settings’ coach card', () => {
-  it('names every coach, the robot last', () => {
+  it('names every coach, the robot after the animals', () => {
     expect(coachName(1)).toBe('coachPawn');
     expect(coachName(8)).toBe('coachRobot');
-    expect(coachName(9)).toBe('coachPawn');
+    expect(coachName(9)).toBe('coachMushroom');
+    expect(coachName(15)).toBe('coachPawn');
     const card = buildCoachCard().element;
     expect(
       queryAll(card, '.lr-ext-coach-choice__name', HTMLElement).map(name => name.textContent),
@@ -85,6 +86,12 @@ describe('the settings’ coach card', () => {
       'coachBee',
       'coachOctopus',
       'coachRobot',
+      'coachMushroom',
+      'coachSnail',
+      'coachGhost',
+      'coachCactus',
+      'coachToast',
+      'coachRook',
     ]);
   });
 

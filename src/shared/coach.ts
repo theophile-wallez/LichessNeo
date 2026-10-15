@@ -3,8 +3,8 @@ import { readStored, StorageKey, writeStored } from './storage.ts';
 
 /** The Game Review's coaches: the 3D mascots of content/coach/mascot, a still of each in
  * public/img/coaches. An id kept from the four human coaches is one of the first four. The
- * seven animals come first, then the computer's robot. */
-export const COACH_COUNT = 8;
+ * seven animals come first, then the computer's robot, then the coaches of other shapes. */
+export const COACH_COUNT = 14;
 /** The animals, the coaches users' avatars are drawn from. */
 export const ANIMAL_COACHES = 7;
 
@@ -15,8 +15,20 @@ export const ROBOT_COACH_LEVEL = 3;
 
 export const CoachIdSchema = z.coerce.number().check(z.int(), z.minimum(1), z.maximum(COACH_COUNT));
 
-/** The coach's expression for a move, set by its verdict (see the review's move classes). */
-export const CoachMoodSchema = z.enum(['neutral', 'happy', 'delight', 'doubt', 'worry', 'shock']);
+/** The coach's expressions: the review sets one by a move's verdict (see its move classes). */
+export const CoachMoodSchema = z.enum([
+  'neutral',
+  'happy',
+  'delight',
+  'doubt',
+  'worry',
+  'shock',
+  'surprise',
+  'sad',
+  'angry',
+  'proud',
+  'thinking',
+]);
 export type CoachMood = z.infer<typeof CoachMoodSchema>;
 export const COACH_MOODS: readonly CoachMood[] = CoachMoodSchema.options;
 

@@ -130,16 +130,22 @@
 
 /* ---- The coaches --- */
 
-/* All eight on a row, else four on two. */
+/* Two rows of seven, the animals over the robot and the other shapes, else rows of four. */
 .lr-ext-coach-pick__grid {
   display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 10px;
 }
 
 @container (max-width: 640px) {
   .lr-ext-coach-pick__grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* "Mushroom" and "Grenouille" fit a phone's tile. */
+  .lr-ext-coach-pick__grid .lr-ext-coach-choice {
+    padding-inline: 4px;
+    font-size: 12px;
   }
 }
 
@@ -226,6 +232,30 @@
 
 .lr-ext-coach-choice[data-lr-ext-coach-choice='8'] {
   --lr-ext-coach-color: var(--lr-ext-red);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='9'] {
+  --lr-ext-coach-color: var(--lr-ext-pink);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='10'] {
+  --lr-ext-coach-color: var(--lr-ext-orange);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='11'] {
+  --lr-ext-coach-color: var(--lr-ext-purple);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='12'] {
+  --lr-ext-coach-color: var(--lr-ext-green);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='13'] {
+  --lr-ext-coach-color: var(--lr-ext-yellow);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='14'] {
+  --lr-ext-coach-color: var(--lr-ext-blue);
 }
 
 /* A phone's stage: the bubble under the mascot. */

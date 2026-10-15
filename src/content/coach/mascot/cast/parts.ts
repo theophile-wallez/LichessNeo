@@ -99,18 +99,25 @@ const CREST: readonly Triple[] = [
 
 export function crest(rig: RigBuilder): void {
   const skin = new Mesh(bodyGeometry(48, 36));
-  const ray = new Raycaster();
   for (const [angle, side, size] of CREST) {
-    const outward = new Vector3(side, Math.cos(angle), -Math.sin(angle)).normalize();
-    ray.set(outward.clone().multiplyScalar(3), outward.clone().negate());
-    const [hit] = ray.intersectObject(skin);
-    if (!hit?.face) continue;
+    const hit = hitSkin(skin, new Vector3(side, Math.cos(angle), -Math.sin(angle)));
+    if (!hit) continue;
     const mesh = plate(rig, size);
-    mesh.position.copy(hit.point).addScaledVector(hit.face.normal, -0.03);
-    mesh.quaternion.setFromUnitVectors(UP, hit.face.normal);
+    mesh.position.copy(hit.point).addScaledVector(hit.normal, -0.03);
+    mesh.quaternion.setFromUnitVectors(UP, hit.normal);
     rig.body.add(mesh);
   }
   skin.geometry.dispose();
+}
+
+const ray = new Raycaster();
+
+/** Where `skin` is seen from far out along `outward`, and its normal there, or null if it isn't. */
+export function hitSkin(skin: Mesh, outward: Vector3): { point: Vector3; normal: Vector3 } | null {
+  const direction = outward.clone().normalize();
+  ray.set(direction.clone().multiplyScalar(4), direction.negate());
+  const [hit] = ray.intersectObject(skin);
+  return hit?.face ? { point: hit.point, normal: hit.face.normal } : null;
 }
 
 /** Plates along a tail's top: its +x is up once it's turned out to the side. */

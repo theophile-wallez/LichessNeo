@@ -1,5 +1,6 @@
 import type { BufferGeometry, Object3D } from 'three';
 import type { CoachMood } from '#shared/coach.ts';
+import type { Finish } from './finishes.ts';
 import type { FaceLook } from '#content/coach/mascot/face/face.ts';
 import type { Colors } from '#content/coach/mascot/fur/fur.ts';
 import type { ArmsLook, EarsLook, FeetLook, RigBuilder } from '#content/coach/mascot/rig/limbs.ts';
@@ -24,8 +25,8 @@ export interface PartMotion {
 
 export interface Character {
   readonly name: string;
-  /** Fur, or a robot's glossy plastic in the same colors (cast/shell.ts). */
-  readonly skin: 'fur' | 'shell';
+  /** Fur, or a solid finish in the same colors, as the robot's glossy plastic (cast/shell.ts). */
+  readonly skin: 'fur' | Finish;
   readonly colors: Colors;
   /** Where the front color starts on the body, at its bottom and at its top. */
   readonly frontMask: readonly [number, number];
@@ -36,5 +37,9 @@ export interface Character {
   readonly ears: EarsLook | null;
   readonly arms: ArmsLook | null;
   readonly feet: FeetLook | null;
+  /** How high one without feet floats over the ground, bobbing; none stands on it. */
+  readonly hover?: number;
+  /** How far up the bust framing moves for it, its face off the egg's height. */
+  readonly bust?: number;
   readonly extras: (rig: RigBuilder) => PartMotion | null;
 }

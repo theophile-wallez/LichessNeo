@@ -1,25 +1,14 @@
 // Shell fur: the same surface drawn as many shells, each pushed a little further
 // along the normal, keeping only the pixels that fall inside a strand
-// (fur.ts builds the material, strands.ts the strand texture).
+// (fur.ts builds the material, strands.ts the strand texture). The coat's
+// pattern is shared with the solid skins (cast/shell.ts).
 
-export const FUR_VERTEX = /* glsl */ `
-attribute float layer;
-uniform float uLength;
-uniform float uPuff;
-uniform vec3 uBend;
+/** Where a part takes which color (FurMode): the front's and the accent's, by position. */
+export const COAT_PATTERN = /* glsl */ `
 uniform int uMode;
-uniform vec2 uFace;
-uniform float uPalm;
-uniform vec2 uFaceSize;
 uniform vec2 uFront;
 uniform float uTipFrom;
 uniform vec3 uStripes;
-varying vec3 vBase;
-varying vec3 vNormalW;
-varying vec3 vPosW;
-varying float vLayer;
-varying float vCream;
-varying float vAccent;
 
 // How much of the front color a point takes: the body's belly and face, a tail's tip.
 float frontMask(vec3 p, vec3 n) {
@@ -30,6 +19,33 @@ float frontMask(vec3 p, vec3 n) {
   float threshold = mix(uFront.x, uFront.y, top);
   return smoothstep(threshold - 0.22, threshold + 0.14, n.z);
 }
+
+// How much of the accent color: an accent part's all of it, a bee's body its bands.
+float accentMask(vec3 p) {
+  if (uMode == 3) return 1.0;
+  if (uMode != 0 || uStripes.x <= 0.0) return 0.0;
+  float band = smoothstep(-0.2, 0.2, sin(p.y * uStripes.x * 6.2832 + 1.2));
+  float within = smoothstep(uStripes.y - 0.05, uStripes.y + 0.05, p.y)
+    * (1.0 - smoothstep(uStripes.z - 0.05, uStripes.z + 0.05, p.y));
+  return band * within;
+}
+`;
+
+export const FUR_VERTEX = /* glsl */ `
+attribute float layer;
+uniform float uLength;
+uniform float uPuff;
+uniform vec3 uBend;
+uniform vec2 uFace;
+uniform float uPalm;
+uniform vec2 uFaceSize;
+varying vec3 vBase;
+varying vec3 vNormalW;
+varying vec3 vPosW;
+varying float vLayer;
+varying float vCream;
+varying float vAccent;
+${COAT_PATTERN}
 
 void main() {
   vec3 n = normalize(normal);
@@ -55,14 +71,8 @@ void main() {
   vBase = position;
   vLayer = h;
   vCream = cream;
-  vAccent = uMode == 3 ? 1.0 : 0.0;
-  if (uMode == 0 && uStripes.x > 0.0) {
-    // A bee's bands, between two heights.
-    float band = smoothstep(-0.2, 0.2, sin(position.y * uStripes.x * 6.2832 + 1.2));
-    float within = smoothstep(uStripes.y - 0.05, uStripes.y + 0.05, position.y)
-      * (1.0 - smoothstep(uStripes.z - 0.05, uStripes.z + 0.05, position.y));
-    vAccent = band * within * (1.0 - face);
-  }
+  // No bands over the face.
+  vAccent = accentMask(position) * (1.0 - face);
   vec4 world = modelMatrix * vec4(p, 1.0);
   vPosW = world.xyz;
   vNormalW = normalize(mat3(modelMatrix) * n);

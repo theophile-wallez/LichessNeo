@@ -1,6 +1,13 @@
+import { ROBOT_COACH } from '#shared/coach.ts';
 import { FurMode } from '#content/coach/mascot/fur/fur.ts';
 import { antennae, eyeBumps, frogSurface, gills, tentacles, wings } from './appendages.ts';
+import { cactus } from './cactus.ts';
 import type { BodyLook, Character } from './character.ts';
+import { ghost } from './ghost.ts';
+import { mushroom } from './mushroom.ts';
+import { rook } from './rook.ts';
+import { snail } from './snail.ts';
+import { toast } from './toast.ts';
 import { collar, crest, tail, tailPlates, together } from './parts.ts';
 import {
   BODY_BOTTOM,
@@ -11,8 +18,8 @@ import {
   tailGeometry,
 } from './shapes.ts';
 
-// The Game Review's seven animal coaches, in the order of their numbers (1 to 7); the eighth
-// is the computer's robot (robot.ts).
+// The Game Review's coaches: the seven animals (1 to 7), the computer's robot (8, robot.ts),
+// then the coaches in other shapes than the egg (9 to 14), each in its own file.
 
 const EGG: BodyLook = {
   geometry: () => bodyGeometry(),
@@ -209,4 +216,27 @@ const octopus: Character = {
   extras: tentacles,
 };
 
-export const CAST: readonly Character[] = [pawn, fennec, dino, axolotl, frog, bee, octopus];
+/** Every coach but the robot, in the order of their numbers. */
+export const CAST: readonly Character[] = [
+  pawn,
+  fennec,
+  dino,
+  axolotl,
+  frog,
+  bee,
+  octopus,
+  mushroom,
+  snail,
+  ghost,
+  cactus,
+  toast,
+  rook,
+];
+
+/** The coach of number `coach`, the robot's aside: the ones after it come one place earlier. */
+export function coachCharacter(coach: number): Character {
+  const index = coach > ROBOT_COACH ? coach - 2 : coach - 1;
+  const character = CAST[index] ?? CAST[0];
+  if (!character) throw new Error('the cast is empty');
+  return character;
+}

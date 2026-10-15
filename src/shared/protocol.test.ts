@@ -34,7 +34,7 @@ describe('protocol', () => {
     const states: unknown[] = [];
     stops.push(onCoachState(state => states.push(state)));
     receive({ type: 'lr-ext:coach', coach: 2, mood: 'happy', talking: true });
-    receive({ type: 'lr-ext:coach', coach: 2, mood: 'angry', talking: true });
+    receive({ type: 'lr-ext:coach', coach: 2, mood: 'furious', talking: true });
     expect(states).toEqual([{ coach: 2, mood: 'happy', talking: true }]);
   });
 

@@ -73,7 +73,8 @@ describe('move classes', () => {
         return mood ? [[moveClass, mood]] : [];
       }),
     );
-    expect(moods).toEqual(sets.MOODS);
+    // A missed chance makes the coach sad, where the original's worried.
+    expect(moods).toEqual({ ...sets.MOODS, miss: 'sad' });
   });
 
   it('tell the errors apart', () => {

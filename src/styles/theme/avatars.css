@@ -42,6 +42,24 @@
 [data-lr-ext-avatar-coach='8'] {
   --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
 }
+[data-lr-ext-avatar-coach='9'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
+}
+[data-lr-ext-avatar-coach='10'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
+}
+[data-lr-ext-avatar-coach='11'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
+}
+[data-lr-ext-avatar-coach='12'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
+}
+[data-lr-ext-avatar-coach='13'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
+}
+[data-lr-ext-avatar-coach='14'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+}
 
 [data-lr-ext-avatar-color='blue'] {
   --lr-ext-avatar-from: #4f8dff;

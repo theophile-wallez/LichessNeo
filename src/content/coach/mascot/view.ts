@@ -2,7 +2,7 @@ import { z } from 'zod/mini';
 import { type CoachMood, ROBOT_COACH, ROBOT_COACH_LEVEL } from '#shared/coach.ts';
 import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
 import type { Character } from './cast/character.ts';
-import { CAST } from './cast/characters.ts';
+import { coachCharacter } from './cast/characters.ts';
 import { robotFor } from './cast/robot.ts';
 import { ENTRANCE_KINDS, nextEntrance } from './rig/entrance.ts';
 import { createFurLook } from './fur/fur.ts';
@@ -14,7 +14,7 @@ import { Stage, type Framing } from './stage.ts';
 // asks of it. Its eyes follow the pointer while it runs.
 
 export interface MascotView {
-  /** The coach's number, 1 to 8 (the robot). */
+  /** The coach's number, 1 to COACH_COUNT (the robot's is ROBOT_COACH). */
   readonly setCoach: (coach: number) => void;
   /** The computer's robot in place of a coach, in the colors of Stockfish's `level`, 1 to 8. */
   readonly setComputer: (level: number) => void;
@@ -31,12 +31,6 @@ const EntranceKindSchema = z.enum(ENTRANCE_KINDS);
 
 // How far past the canvas's edge it starts: just out of sight, arms and all.
 const OFF_STAGE = 1.15;
-
-function coachCharacter(coach: number): Character {
-  const character = CAST[(coach - 1 + CAST.length) % CAST.length] ?? CAST[0];
-  if (!character) throw new Error('the cast is empty');
-  return character;
-}
 
 function cast(character: Character): Mascot {
   const look = createFurLook(character.colors, character.frontMask, character.stripes);
@@ -119,7 +113,7 @@ class LiveMascot implements MascotView {
     mascot.setTalking(this.#talking);
     if (this.#greets) mascot.waveHello();
     this.#mascot = mascot;
-    this.#stage.show(mascot.root);
+    this.#stage.show(mascot.root, character.bust);
   }
 
   setMood(mood: CoachMood): void {

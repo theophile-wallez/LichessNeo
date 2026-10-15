@@ -101,7 +101,7 @@ const MOODS: Partial<Record<MoveClass, CoachMood>> = {
   excellent: 'happy',
   inaccuracy: 'doubt',
   mistake: 'worry',
-  miss: 'worry',
+  miss: 'sad',
   blunder: 'shock',
 };
 

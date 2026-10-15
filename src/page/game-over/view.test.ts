@@ -119,7 +119,7 @@ describe('the game over', () => {
     expect(bubble?.textContent).toBe('Well played! You played with 91.2% accuracy.');
     expect(posted.mock.calls.at(-1)?.[0]).toMatchObject({
       coach: 2,
-      mood: 'happy',
+      mood: 'proud',
       talking: false,
     });
   });

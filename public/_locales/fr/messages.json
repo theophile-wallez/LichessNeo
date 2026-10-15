@@ -179,6 +179,24 @@
   "coachRobot": {
     "message": "Robot"
   },
+  "coachMushroom": {
+    "message": "Champignon"
+  },
+  "coachSnail": {
+    "message": "Escargot"
+  },
+  "coachGhost": {
+    "message": "Fantôme"
+  },
+  "coachCactus": {
+    "message": "Cactus"
+  },
+  "coachToast": {
+    "message": "Tartine"
+  },
+  "coachRook": {
+    "message": "Tour"
+  },
   "settingUiSounds": {
     "message": "Sons de l’interface"
   },

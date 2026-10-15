@@ -9,6 +9,11 @@ describe('pickCoach', () => {
     expect(pickCoach()).toBe(ROBOT_COACH);
   });
 
+  it('keeps a stored coach of the other shapes, past the robot', () => {
+    localStorage.setItem('lr-ext-coach', String(COACH_COUNT));
+    expect(pickCoach()).toBe(COACH_COUNT);
+  });
+
   it('keeps the stored coach', () => {
     localStorage.setItem('lr-ext-coach', '4');
     const random = vi.spyOn(Math, 'random');
@@ -19,13 +24,13 @@ describe('pickCoach', () => {
 
   it('picks one at random the first time, and keeps it', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.3);
-    expect(pickCoach()).toBe(3);
-    expect(localStorage.getItem('lr-ext-coach')).toBe('3');
+    expect(pickCoach()).toBe(5);
+    expect(localStorage.getItem('lr-ext-coach')).toBe('5');
     vi.spyOn(Math, 'random').mockReturnValue(0.9);
-    expect(pickCoach()).toBe(3);
+    expect(pickCoach()).toBe(5);
   });
 
-  it.each(['0', '9', 'x', ''])('picks again over a stored "%s"', stored => {
+  it.each(['0', '15', 'x', ''])('picks again over a stored "%s"', stored => {
     localStorage.setItem('lr-ext-coach', stored);
     vi.spyOn(Math, 'random').mockReturnValue(0.99);
     expect(pickCoach()).toBe(COACH_COUNT);
@@ -34,8 +39,8 @@ describe('pickCoach', () => {
 
   it('picks again for a coach that isn’t a whole number (the original kept "2.5")', () => {
     localStorage.setItem('lr-ext-coach', '2.5');
-    vi.spyOn(Math, 'random').mockReturnValue(0.5);
-    expect(pickCoach()).toBe(5);
-    expect(localStorage.getItem('lr-ext-coach')).toBe('5');
+    vi.spyOn(Math, 'random').mockReturnValue(0.2);
+    expect(pickCoach()).toBe(3);
+    expect(localStorage.getItem('lr-ext-coach')).toBe('3');
   });
 });

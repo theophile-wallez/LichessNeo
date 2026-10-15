@@ -1,0 +1,134 @@
+/* The mascots' playground: the stage on the left, the panel on the right. */
+
+:root {
+  color-scheme: dark;
+  --panel: #1d1c1a;
+  --line: #34322e;
+  --text: #e8e6e3;
+  --dim: #9a968f;
+  --accent: #4f8cff;
+  font:
+    13px/1.4 system-ui,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--panel);
+}
+
+.theater {
+  display: grid;
+  place-items: center;
+  overflow: auto;
+  background: var(--stage-bg, #262421);
+}
+
+.stage {
+  position: relative;
+  cursor: pointer;
+}
+
+.stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.panel {
+  overflow-y: auto;
+  border-left: 1px solid var(--line);
+}
+
+.section {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section[hidden],
+.row[hidden] {
+  display: none;
+}
+
+h2 {
+  margin: 0 0 2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.choice {
+  display: grid;
+  gap: 6px;
+}
+
+.label {
+  color: var(--dim);
+}
+
+output {
+  min-width: 56px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--dim);
+}
+
+input[type='range'],
+select {
+  width: 100%;
+}
+
+input[type='color'] {
+  width: 100%;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: none;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+button,
+select {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+  color: var(--text);
+  background: #2a2926;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #33312d;
+}
+
+button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+}

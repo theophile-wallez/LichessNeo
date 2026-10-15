@@ -20,6 +20,12 @@ const NAMES = [
   'coachBee',
   'coachOctopus',
   'coachRobot',
+  'coachMushroom',
+  'coachSnail',
+  'coachGhost',
+  'coachCactus',
+  'coachToast',
+  'coachRook',
 ] as const satisfies { length: typeof COACH_COUNT };
 
 /** The name of the coach of number `coach`. */

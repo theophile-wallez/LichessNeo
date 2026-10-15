@@ -61,6 +61,24 @@
   html[data-lr-ext-coach='8'] main.analyse .analyse__underboard::before {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
   }
+  html[data-lr-ext-coach='9'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
+  }
+  html[data-lr-ext-coach='10'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
+  }
+  html[data-lr-ext-coach='11'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
+  }
+  html[data-lr-ext-coach='12'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
+  }
+  html[data-lr-ext-coach='13'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
+  }
+  html[data-lr-ext-coach='14'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+  }
 
   main.analyse .analyse__underboard .feedback {
     padding: 0 !important;

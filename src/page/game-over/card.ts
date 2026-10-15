@@ -26,10 +26,10 @@ export function cardClasses(counts: Readonly<Partial<Record<MoveClass, number>>>
   return [...GOOD, third];
 }
 
-/** The coach's face for a result: pleased with a win, sorry for a loss. */
+/** The coach's face for a result: proud of a win, sad for a loss. */
 export const RESULT_MOODS: Readonly<Record<Result, CoachMood>> = {
-  win: 'happy',
-  loss: 'worry',
+  win: 'proud',
+  loss: 'sad',
   draw: 'neutral',
 };
 

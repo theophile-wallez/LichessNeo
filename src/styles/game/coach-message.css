@@ -57,6 +57,24 @@ html[data-lr-ext-coach='7'] main.round .round__app .message::before {
 html[data-lr-ext-coach='8'] main.round .round__app .message::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
 }
+html[data-lr-ext-coach='9'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
+}
+html[data-lr-ext-coach='10'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
+}
+html[data-lr-ext-coach='11'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
+}
+html[data-lr-ext-coach='12'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
+}
+html[data-lr-ext-coach='13'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
+}
+html[data-lr-ext-coach='14'] main.round .round__app .message::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+}
 
 html[data-lr-ext-ai] main.round .round__app .message::before {
   background-image: var(--lr-ext-computer-portrait);

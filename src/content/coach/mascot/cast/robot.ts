@@ -1,31 +1,15 @@
-import { SphereGeometry, type BufferGeometry } from 'three';
+import type { BufferGeometry } from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { robotTier } from '#shared/coach.ts';
 import { FurMode } from '#content/coach/mascot/fur/fur.ts';
 import type { Character } from './character.ts';
 import { robotParts } from './robot-parts.ts';
-import { reshape } from './shapes.ts';
+import { softBox } from './shapes.ts';
 
 // The computer's mascot, for games against Stockfish: a glossy toy robot on
 // the coaches' rig, a big round head on a neck over a small chest. Its colors
 // tell Stockfish's level, one set for each two levels (styles/theme/base.css
 // gives its stills the same).
-
-type Triple = readonly [number, number, number];
-
-/** A sphere pushed toward a box's corners, |x|^p + |y|^p + |z|^p = 1, sized and raised by `y`. */
-function softBox(size: Triple, power: number, y: number, rows: number): BufferGeometry {
-  return reshape(new SphereGeometry(1, Math.round(rows * 1.4), rows), vertex => {
-    const reach =
-      (Math.abs(vertex.x) ** power + Math.abs(vertex.y) ** power + Math.abs(vertex.z) ** power) **
-      (-1 / power);
-    vertex.set(
-      vertex.x * reach * size[0],
-      vertex.y * reach * size[1] + y,
-      vertex.z * reach * size[2],
-    );
-  });
-}
 
 const HEAD = { size: [0.84, 0.6, 0.7], y: 0.55, power: 3.4 } as const;
 const BOTTOM = -1.08;
@@ -55,7 +39,7 @@ const LEVEL_COLORS: readonly RobotColors[] = [
 
 const robot = ({ accent, glow }: RobotColors): Character => ({
   name: 'Robot',
-  skin: 'shell',
+  skin: 'plastic',
   colors: { coat: '#f4f6fb', front: '#f4f6fb', accent, light: glow },
   frontMask: [0.5, 0.86],
   stripes: [0, 0, 0],

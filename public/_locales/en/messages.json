@@ -239,6 +239,30 @@
     "message": "Robot",
     "description": "A coach's name: the computer's robot, Stockfish's mascot."
   },
+  "coachMushroom": {
+    "message": "Mushroom",
+    "description": "A coach's name: a little mushroom."
+  },
+  "coachSnail": {
+    "message": "Snail",
+    "description": "A coach's name: a snail."
+  },
+  "coachGhost": {
+    "message": "Ghost",
+    "description": "A coach's name: a little ghost."
+  },
+  "coachCactus": {
+    "message": "Cactus",
+    "description": "A coach's name: a cactus in its pot."
+  },
+  "coachToast": {
+    "message": "Toast",
+    "description": "A coach's name: a slice of toast."
+  },
+  "coachRook": {
+    "message": "Rook",
+    "description": "A coach's name: a chess rook."
+  },
   "settingUiSounds": {
     "message": "Interface sounds",
     "description": "The setting that turns the extension's interface sounds on and off."

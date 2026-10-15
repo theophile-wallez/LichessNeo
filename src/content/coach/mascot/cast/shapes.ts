@@ -48,6 +48,31 @@ export function bodyGeometry(columns = 96, rows = 72): BufferGeometry {
 
 export const BODY_BOTTOM = -0.98;
 
+type Triple = readonly [number, number, number];
+
+/** A sphere pushed toward a box's corners, |x|^p + |y|^p + |z|^p = 1, sized and raised by `y`. */
+export function softBox(size: Triple, power: number, y: number, rows: number): BufferGeometry {
+  return reshape(new SphereGeometry(1, Math.round(rows * 1.4), rows), vertex => {
+    const reach =
+      (Math.abs(vertex.x) ** power + Math.abs(vertex.y) ** power + Math.abs(vertex.z) ** power) **
+      (-1 / power);
+    vertex.set(
+      vertex.x * reach * size[0],
+      vertex.y * reach * size[1] + y,
+      vertex.z * reach * size[2],
+    );
+  });
+}
+
+/** A lathe's outline: radius and height, from the bottom's middle to the top's. */
+export type Profile = readonly (readonly [number, number])[];
+
+/** A body turned around the y axis through `profile`, smoothed. */
+export function latheGeometry(profile: Profile, columns = 96): BufferGeometry {
+  const points = new SplineCurve(profile.map(([x, y]) => new Vector2(x, y))).getPoints(64);
+  return weld(new LatheGeometry(points, columns));
+}
+
 const PAWN_PROFILE: readonly (readonly [number, number])[] = [
   [0.001, -1],
   [0.6, -1],

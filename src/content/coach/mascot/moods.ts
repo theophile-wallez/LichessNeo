@@ -46,11 +46,20 @@ export const POSE_KEYS = [
   'slump',
 ] as const satisfies readonly (keyof Pose)[];
 
+/** How it takes a mood up: a hop's strength, and kicks to its lean, its fur and its height. */
+export interface Onset {
+  readonly hop?: number;
+  readonly lean?: number;
+  readonly puff?: number;
+  readonly squash?: number;
+}
+
 export interface Mood {
   readonly pose: Pose;
   readonly arms: { readonly left: Direction; readonly right: Direction };
   /** Where the eyes go, from -1 to 1 each way, or null to look around. */
   readonly look: { readonly x: number; readonly y: number } | null;
+  readonly onset?: Onset;
 }
 
 const NEUTRAL: Pose = {
@@ -80,11 +89,13 @@ export const MOODS: Readonly<Record<CoachMood, Mood>> = {
     pose: { ...NEUTRAL, smile: 0.95, open: 0.22, width: 0.2, squint: 0.35, ears: -0.3 },
     arms: { left: [-0.45, -0.87, 0.2], right: [0.45, -0.87, 0.2] },
     look: null,
+    onset: { hop: 2.2 },
   },
   delight: {
     pose: { ...NEUTRAL, smile: 1, open: 0.62, width: 0.23, joy: 1, ears: -0.6, puff: 0.12 },
     arms: { left: [-0.5, 0.85, 0.2], right: [0.5, 0.85, 0.2] },
     look: null,
+    onset: { hop: 4.2 },
   },
   doubt: {
     pose: {
@@ -101,6 +112,7 @@ export const MOODS: Readonly<Record<CoachMood, Mood>> = {
     },
     arms: { left: [-0.8, -0.5, 0.35], right: [0.8, -0.5, 0.35] },
     look: { x: 0.55, y: 0.55 },
+    onset: { lean: 0.6 },
   },
   worry: {
     pose: {
@@ -119,6 +131,7 @@ export const MOODS: Readonly<Record<CoachMood, Mood>> = {
     },
     arms: { left: [-0.12, -0.85, 0.5], right: [0.12, -0.85, 0.5] },
     look: null,
+    onset: { squash: -1.2 },
   },
   shock: {
     pose: {
@@ -136,6 +149,99 @@ export const MOODS: Readonly<Record<CoachMood, Mood>> = {
     },
     arms: { left: [-0.85, 0.35, 0.4], right: [0.85, 0.35, 0.4] },
     look: null,
+    onset: { hop: 2.6, lean: -2.2, puff: 5 },
+  },
+  // A milder start than shock's: eyes wide and an O of a mouth, arms opening.
+  surprise: {
+    pose: {
+      ...NEUTRAL,
+      smile: 0.3,
+      open: 0.45,
+      width: 0.1,
+      eyeScale: 1.25,
+      brow: 1,
+      browLeft: 0.8,
+      browRight: 0.8,
+      ears: -0.6,
+    },
+    arms: { left: [-0.7, 0.1, 0.4], right: [0.7, 0.1, 0.4] },
+    look: null,
+    onset: { hop: 1.6, lean: -1 },
+  },
+  sad: {
+    pose: {
+      ...NEUTRAL,
+      smile: -0.9,
+      width: 0.12,
+      squint: 0.25,
+      brow: 1,
+      browLeft: 0.1,
+      browRight: 0.1,
+      browTilt: 1,
+      tilt: 0.06,
+      lean: 0.05,
+      ears: 1,
+      slump: 1,
+    },
+    arms: { left: [-0.2, -0.95, 0.15], right: [0.2, -0.95, 0.15] },
+    look: { x: 0, y: -0.6 },
+    onset: { squash: -1.6 },
+  },
+  // Brows down at their inner ends, fur on end, leaning in.
+  angry: {
+    pose: {
+      ...NEUTRAL,
+      smile: -0.45,
+      width: 0.11,
+      squint: 0.4,
+      brow: 1,
+      browLeft: -0.2,
+      browRight: -0.2,
+      browTilt: -0.8,
+      lean: 0.06,
+      ears: 0.4,
+      puff: 0.25,
+    },
+    arms: { left: [-0.62, -0.75, 0.15], right: [0.62, -0.75, 0.15] },
+    look: { x: 0, y: 0.1 },
+    onset: { lean: 1, puff: 3 },
+  },
+  // Chin up and a smug smile, fists on its hips.
+  proud: {
+    pose: {
+      ...NEUTRAL,
+      smile: 0.8,
+      width: 0.19,
+      squint: 0.55,
+      brow: 1,
+      browLeft: 0.4,
+      browRight: 0.4,
+      tilt: -0.08,
+      lean: -0.07,
+      ears: -0.4,
+      puff: 0.15,
+    },
+    arms: { left: [-0.85, -0.45, -0.25], right: [0.85, -0.45, -0.25] },
+    look: { x: 0, y: 0.35 },
+    onset: { puff: 2 },
+  },
+  // Its right paw (the viewer's) to its chin, eyes up and away.
+  thinking: {
+    pose: {
+      ...NEUTRAL,
+      smile: 0.1,
+      width: 0.1,
+      skew: -0.4,
+      squint: 0.1,
+      brow: 1,
+      browLeft: -0.1,
+      browRight: 0.7,
+      tilt: -0.12,
+      ears: 0.1,
+    },
+    arms: { left: REST.left, right: [-0.72, 0.4, 0.58] },
+    look: { x: -0.5, y: 0.6 },
+    onset: { lean: 0.4 },
   },
 };
 

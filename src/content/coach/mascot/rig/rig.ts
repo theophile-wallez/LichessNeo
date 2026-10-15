@@ -49,13 +49,14 @@ export class Mascot implements RigBuilder {
   readonly #torso = new Group();
   readonly #look: FurLook;
   readonly #furs: FurPart[] = [];
-  /** A robot's plastic, in place of fur. */
+  /** A solid skin, as a robot's plastic, in place of fur. */
   readonly #shell: Shell | null;
   readonly #face: Face;
   readonly #ears: Ear[];
   readonly #arms: Arm[];
   readonly #feet: Foot[];
   readonly #extra: PartMotion | null;
+  readonly #hover: number;
   #pose: Pose = MOODS.neutral.pose;
   #time = 0;
   readonly #squash = new Spring(240, 11);
@@ -75,7 +76,8 @@ export class Mascot implements RigBuilder {
 
   constructor(character: Character, look: FurLook) {
     this.#look = look;
-    this.#shell = character.skin === 'shell' ? new Shell(character.colors) : null;
+    const { skin } = character;
+    this.#shell = skin === 'fur' ? null : new Shell(character.colors, skin, look);
     this.body.position.y = -character.body.bottom;
     this.root.add(this.#squashed);
     this.#squashed.add(this.#torso);
@@ -95,11 +97,17 @@ export class Mascot implements RigBuilder {
     this.#arms = buildArms(this, character.arms);
     this.#feet = buildFeet(this, this.#squashed, character.feet);
     this.#extra = character.extras(this);
+    this.#hover = character.hover ?? 0;
   }
 
-  /** How high it is off the ground, mid-hop. */
+  /** How high it is off the ground, mid-hop or floating. */
   get height(): number {
-    return this.#jumper.height;
+    return this.#jumper.height + this.#floating(this.#time);
+  }
+
+  /** Its float over the ground, bobbing slowly. */
+  #floating(time: number): number {
+    return this.#hover === 0 ? 0 : this.#hover * (1 + 0.18 * Math.sin(time * 1.6));
   }
 
   /** How far it is from its place, sideways, making its entrance. */
@@ -108,14 +116,14 @@ export class Mascot implements RigBuilder {
   }
 
   readonly fur = (geometry: BufferGeometry, options: FurOptions, probe?: Vector3): Mesh => {
-    if (this.#shell) return this.#shell.mesh(geometry, options.mode);
+    if (this.#shell) return this.#shell.mesh(geometry, options);
     const part = createFur(geometry, this.#look, options, probe);
     this.#furs.push(part);
     return part.mesh;
   };
 
   readonly lights = (): Lights => {
-    if (!this.#shell) throw new Error('only a robot has lights');
+    if (!this.#shell) throw new Error('only a solid skin has lights');
     return this.#shell.lights;
   };
 
@@ -137,19 +145,15 @@ export class Mascot implements RigBuilder {
     this.#given = mood;
   }
 
-  /** Takes up `mood` as it shows: a hop of joy, a start of shock. */
+  /** Takes up `mood` as it shows, as its onset says: a hop of joy, a start of shock. */
   #show(mood: CoachMood): void {
     if (mood === this.mood) return;
     this.mood = mood;
-    if (mood === 'happy') this.hop(2.2);
-    if (mood === 'delight') this.hop(4.2);
-    if (mood === 'shock') {
-      this.hop(2.6);
-      this.#lean.kick(-2.2);
-      this.#puff.kick(5);
-    }
-    if (mood === 'worry') this.#squash.kick(-1.2);
-    if (mood === 'doubt') this.#lean.kick(0.6);
+    const { hop = 0, lean = 0, puff = 0, squash = 0 } = MOODS[mood].onset ?? {};
+    if (hop > 0) this.hop(hop);
+    this.#lean.kick(lean);
+    this.#puff.kick(puff);
+    this.#squash.kick(squash);
   }
 
   setTalking(talking: boolean): void {
@@ -224,7 +228,7 @@ export class Mascot implements RigBuilder {
       Math.max(velocity, 0) * 0.02;
     const thin = 1 / Math.sqrt(Math.max(stretch, 0.5));
     this.#squashed.scale.set(thin, stretch, thin);
-    this.root.position.y = this.#jumper.height + Math.abs(this.#swing) * 0.05;
+    this.root.position.y = this.height + Math.abs(this.#swing) * 0.05;
 
     this.#lean.target = pose.lean;
     this.#torso.rotation.x = this.#lean.step(dt);
