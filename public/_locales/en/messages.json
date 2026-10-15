@@ -1010,5 +1010,9 @@
   "phistRetry": {
     "message": "Retry",
     "description": "Under a failed puzzle's board, its link."
+  },
+  "variationFolded": {
+    "message": "$1 moves",
+    "description": "A folded run of moves in an analysis variation, as a pill that opens it; $1 is how many (4 or more)."
   }
 }

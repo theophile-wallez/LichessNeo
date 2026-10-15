@@ -757,5 +757,8 @@
   },
   "phistRetry": {
     "message": "Retenter"
+  },
+  "variationFolded": {
+    "message": "$1 coups"
   }
 }

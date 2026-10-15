@@ -15,6 +15,12 @@ export function splitShortcut(title: string): Shortcut {
   return match ? { label: match[1] ?? '', key: match[2] ?? null } : { label: title, key: null };
 }
 
+/** The eval of a variation's move, from Lichess's title: "-0.2 · Depth 22" gives "−0.2". */
+export function evalOf(title: string): string {
+  const [score = title] = title.split(' · ');
+  return score.replace('-', '−');
+}
+
 export interface TooltipPlacement {
   readonly side: 'above' | 'below';
   readonly top: number;

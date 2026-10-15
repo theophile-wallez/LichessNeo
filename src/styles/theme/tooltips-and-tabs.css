@@ -47,6 +47,24 @@
   border-color: transparent transparent var(--lr-ext-neutral-14);
 }
 
+/* A variation's eval, over the move list: frosted glass, as the move's menu (#analyse-cm),
+ * without the arrow, which the blur can't reach. */
+.lr-ext-tooltip[data-lr-ext-look='glass'] {
+  padding: 4px 8px;
+  border: 1px solid var(--lr-ext-menu-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--lr-ext-menu-bg) 65%, transparent);
+  box-shadow: var(--lr-ext-menu-shadow);
+  color: var(--lr-ext-text-strong);
+  font-variant-numeric: tabular-nums;
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+}
+
+.lr-ext-tooltip[data-lr-ext-look='glass']::after {
+  content: none;
+}
+
 /* Lichess styles every <kbd> (light text, a border). */
 .lr-ext-tooltip kbd {
   margin-left: 6px;

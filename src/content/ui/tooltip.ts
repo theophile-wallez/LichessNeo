@@ -1,7 +1,7 @@
 import { closestTo, createElement, setData, setStyleProperty } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
-import { placeTooltip, splitShortcut } from './tooltip-layout.ts';
+import { evalOf, placeTooltip, splitShortcut } from './tooltip-layout.ts';
 
 // Styled tooltips on the page's buttons (styles/theme/tooltips-and-tabs.css),
 // instead of the browser's slow, unstyled `title`. On hover the title moves to
@@ -11,7 +11,8 @@ import { placeTooltip, splitShortcut } from './tooltip-layout.ts';
 // The board editor's analysis link is one of its tools (content/pages/editor-tools.ts); a
 // chat line's reply and report are Lichess's own `action` tags; an opening's popularity, its
 // results' parts and its way back to its parent say what they are in a title; a theme's
-// settings in the user menu say what each does.
+// settings in the user menu say what each does; a variation's move gives its eval, and a
+// move's glyph its name.
 const TARGETS = [
   'main :is(button:is([title], [data-lr-ext-tip]), a.tv-channel[data-lr-ext-tip]):not(#lr-ext-review *)',
   'main .board-editor__tools .actions > a[data-lr-ext-tip]',
@@ -20,11 +21,14 @@ const TARGETS = [
   'main.opening .opening__next__popularity > span:is([title], [data-lr-ext-tip])',
   'main.opening .result-bar > span:is([title], [data-lr-ext-tip])',
   'main.opening h1.opening__title > a:is([title], [data-lr-ext-tip])',
+  'main.analyse .tview2 move > :is(san, glyph):is([title], [data-lr-ext-tip])',
   '#dasher_app .lr-ext-src-options > button[data-lr-ext-tip]',
 ].join(', ');
 // Lichess's home start buttons carry an English title that only repeats their label:
 // adopted, so the browser's doesn't show either, but never shown.
 const NO_TIP = 'main.lobby .lobby__start__button';
+// A variation's move: its eval alone, on frosted glass over the list.
+const EVAL_TIP = 'main.analyse .tview2 move > san';
 const ON = 'lr-ext-tooltip--on';
 // A short wait before the first one, none when going from button to button.
 const FIRST_DELAY_MS = 250;
@@ -39,8 +43,9 @@ function hoverTarget(event: MouseEvent): HTMLElement | null {
 
 function adoptTitle(target: HTMLElement): void {
   if (!target.title) return;
-  setData(target, 'lrExtTip', target.title);
-  if (!target.hasAttribute('aria-label')) target.setAttribute('aria-label', target.title);
+  const tip = target.matches(EVAL_TIP) ? evalOf(target.title) : target.title;
+  setData(target, 'lrExtTip', tip);
+  if (!target.hasAttribute('aria-label')) target.setAttribute('aria-label', tip);
   target.removeAttribute('title');
 }
 
@@ -81,6 +86,7 @@ export class Tooltip {
     const tooltip = this.#element;
     const { label, key } = splitShortcut(target.dataset.lrExtTip ?? '');
     tooltip.textContent = label;
+    setData(tooltip, 'lrExtLook', target.matches(EVAL_TIP) ? 'glass' : null);
     if (key !== null) tooltip.append(createElement('kbd', { text: key }));
     if (!tooltip.isConnected) document.body.append(tooltip);
     const place = placeTooltip(

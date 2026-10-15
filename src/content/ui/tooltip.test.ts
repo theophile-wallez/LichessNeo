@@ -1,6 +1,6 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { rectAt } from '#shared/testing/layout.ts';
-import { splitShortcut } from './tooltip-layout.ts';
+import { evalOf, splitShortcut } from './tooltip-layout.ts';
 import { listenForTooltips, Tooltip } from './tooltip.ts';
 // The tooltips as the original placed them.
 import legacy from './fixtures/legacy-tooltip.json' with { type: 'json' };
@@ -12,6 +12,10 @@ interface BoxInput {
   readonly height: number;
 }
 const shown = (): Element | null => document.querySelector('.lr-ext-tooltip.lr-ext-tooltip--on');
+const look = (): string | undefined => {
+  const tooltip = shown();
+  return tooltip instanceof HTMLElement ? tooltip.dataset.lrExtLook : undefined;
+};
 
 function addButton(
   attrs: string,
@@ -200,6 +204,33 @@ describe('tooltips', () => {
     vi.advanceTimersByTime(250);
     expect(shown()?.textContent).toBe('Most of the board');
     document.getElementById('dasher_app')?.remove();
+  });
+
+  it('shows a variation’s move with its eval alone, on glass, and a glyph with its name', () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main class="analyse"><div class="tview2"><interrupt><lines><line><move p="ab">' +
+        '<san title="-0.2 · Depth 22">Nf6</san><glyph title="Mistake">?</glyph></move>' +
+        '</line></lines></interrupt></div></main>',
+    );
+    const san = document.querySelector('san');
+    const glyph = document.querySelector('glyph');
+    if (!san || !glyph) throw new Error('no move');
+    hover(san);
+    expect(san.getAttribute('aria-label')).toBe('−0.2');
+    vi.advanceTimersByTime(250);
+    expect(shown()?.textContent).toBe('−0.2');
+    expect(look()).toBe('glass');
+    hover(glyph);
+    vi.advanceTimersByTime(0);
+    expect(shown()?.textContent).toBe('Mistake');
+    expect(look()).toBeUndefined();
+  });
+
+  it('reads the eval off Lichess’s title', () => {
+    expect(evalOf('+1.5 · Depth 18')).toBe('+1.5');
+    expect(evalOf('-0.2')).toBe('−0.2');
+    expect(evalOf('#-3 · Depth 30')).toBe('#−3');
   });
 
   it('splits a shortcut off the label', () => {

@@ -22,6 +22,7 @@ import { movesExtrasHeight } from './layout/moves-extras-height.ts';
 import { analysisPlayers } from './analysis/players.ts';
 import { underboard } from './analysis/underboard.ts';
 import { activeMove } from './analysis/active-move.ts';
+import { variations } from './analysis/variations.ts';
 import { capturedPieces } from './game/captured.ts';
 import { boardTools } from './game/board-tools.ts';
 import { moveTimes } from './game/move-times.ts';
@@ -92,6 +93,7 @@ const FEATURES = [
   analysisPlayers,
   underboard,
   activeMove,
+  variations,
   capturedPieces,
   boardTools,
   moveTimes,
