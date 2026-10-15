@@ -154,7 +154,7 @@ export interface Session {
   readonly lines: LineLookups;
   readonly coach: AvatarState;
   readonly stream: Stream;
-  /** The desktop layout, the only one with room for the review (review.css). */
+  /** The desktop layout, the panel beside the board; below it, a column under it. */
   readonly wide: MediaQueryList;
   /** The element the tooltip points at. */
   tipFor: Element | null;

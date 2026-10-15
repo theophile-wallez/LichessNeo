@@ -45,7 +45,6 @@ export function createReview(analysis: Analysis): Session {
 // Called only for a page the review covers. Rendering on any other page (a
 // variant, a game without moves) would show an empty panel.
 function run(session: Session, mode: Mode): void {
-  document.documentElement.classList.toggle('lr-ext-review', true);
   setMode(session, mode);
   setInterval(() => render(session), RENDER_MS);
   let lastWidth = window.innerWidth;
@@ -57,8 +56,8 @@ function run(session: Session, mode: Mode): void {
   window.addEventListener('resize', () => {
     if (Math.abs(window.innerWidth - lastWidth) > RESIZE_SLACK) refit();
   });
-  // Draw again on leaving the mobile layout. The panel was hidden there, so the
-  // graph and the comment were laid out at zero size.
+  // Draw again on crossing 1020px: the panel moves between the board's side and
+  // the column under it, so the graph and the comment are laid out anew.
   session.wide.addEventListener('change', refit);
 }
 

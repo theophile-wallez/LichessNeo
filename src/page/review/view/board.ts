@@ -32,15 +32,12 @@ function renderBar(session: Session, analysis: Analysis, shown: JudgedMove | nul
   if (position) drawBar(session.elements, position, analysis.orientation());
 }
 
-// Below 1020px Lichess's mobile layout has no room for the panel (review.css
-// hides it), and so no way to close the review: the board stays Lichess's.
 function boardMove(
   session: Session,
   analysis: Analysis,
   shown: JudgedMove | null,
 ): JudgedMove | null {
   const { mode, retry } = session.view;
-  if (!session.wide.matches) return null;
   if (mode === 'live') return judgeAt(session.live, analysis, analysis.path);
   // Retrying, only the move tried gets a badge.
   if (retry)
@@ -78,8 +75,7 @@ function renderBadge(session: Session, analysis: Analysis, move: JudgedMove | nu
 function boardArrows(session: Session, analysis: Analysis, move: JudgedMove | null): ReviewArrow[] {
   const { view, live } = session;
   if (view.retry) return [];
-  const offGame =
-    session.wide.matches && view.mode !== 'normal' && view.review !== null && !analysis.onMainline;
+  const offGame = view.mode !== 'normal' && view.review !== null && !analysis.onMainline;
   const arrows = reviewArrowsFor({
     moveClass: move?.moveClass ?? null,
     best: move?.best ?? null,

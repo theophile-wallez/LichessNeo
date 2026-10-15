@@ -82,10 +82,19 @@ function follow(session: Session, analysis: Analysis): void {
   else view.retry = null;
 }
 
+// Kept on every pass: Lichess rewrites <html>'s class when its scheme follows
+// the device's, which dropped the review's own once it had started.
+function markMode(mode: Mode): void {
+  const root = document.documentElement;
+  root.classList.toggle('lr-ext-review', true);
+  for (const each of MODES) root.classList.toggle(`lr-ext-review-${each}`, each === mode);
+}
+
 export function render(session: Session, force = false): void {
   const analysis = pageAnalysis();
   if (!analysis || !attach(session.elements)) return;
   const { view } = session;
+  markMode(view.mode);
   if (view.mode === 'summary' && analysis.node.ply !== view.summaryPly) {
     setMode(session, 'moves');
     return;
@@ -108,7 +117,6 @@ export function setMode(session: Session, mode: Mode): void {
   view.summaryPly = analysis?.node.ply;
   if (mode !== 'moves') stopPlaying(session);
   if (mode === 'moves' && analysis) closeTools(analysis);
-  const root = document.documentElement;
-  for (const each of MODES) root.classList.toggle(`lr-ext-review-${each}`, each === mode);
+  markMode(mode);
   render(session, true);
 }
