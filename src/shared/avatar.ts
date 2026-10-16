@@ -1,4 +1,4 @@
-import { ANIMAL_COACHES } from './coach.ts';
+import { COACH_COUNT, ROBOT_COACH } from './coach.ts';
 
 // Lichess has no profile pictures: each user gets one of the coaches on a color,
 // picked from their name, so it's the same on every page and every computer.
@@ -8,8 +8,8 @@ import { ANIMAL_COACHES } from './coach.ts';
 export const AVATAR_COLORS = ['blue', 'purple', 'pink', 'red', 'orange', 'green', 'cyan'] as const;
 export type AvatarColor = (typeof AVATAR_COLORS)[number];
 
-// Where a coach's fur would melt into the color: the fox and the bee on orange,
-// the dino and the frog on green, the axolotl on pink or red, the blue one on cyan.
+// Where a coach would melt into the color: the orange, gold and yellow ones on
+// orange, the green ones on green, the purple ones on purple, and so on.
 const CLASHES: Readonly<Partial<Record<number, readonly AvatarColor[]>>> = {
   2: ['orange'],
   3: ['green'],
@@ -17,6 +17,19 @@ const CLASHES: Readonly<Partial<Record<number, readonly AvatarColor[]>>> = {
   5: ['green'],
   6: ['orange'],
   7: ['cyan'],
+  9: ['red'],
+  10: ['orange'],
+  12: ['green'],
+  13: ['orange'],
+  14: ['blue'],
+  15: ['purple'],
+  16: ['green'],
+  17: ['orange'],
+  18: ['purple'],
+  21: ['purple'],
+  23: ['orange'],
+  25: ['green', 'cyan'],
+  26: ['orange'],
 };
 
 export interface Avatar {
@@ -24,13 +37,18 @@ export interface Avatar {
   readonly color: AvatarColor;
 }
 
-// The animals only: the robot is the computer's, and one the user may pick for themselves.
-const AVATARS: readonly Avatar[] = Array.from({ length: ANIMAL_COACHES }, (_, i) => i + 1).flatMap(
-  coach =>
-    AVATAR_COLORS.filter(color => !CLASHES[coach]?.includes(color)).map(color => ({
-      coach,
-      color,
-    })),
+/** The coaches a name may get: all but the robot, which is the computer's (a user may still
+ * pick it for themselves). */
+export const AVATAR_COACHES: readonly number[] = Array.from(
+  { length: COACH_COUNT },
+  (_, i) => i + 1,
+).filter(coach => coach !== ROBOT_COACH);
+
+const AVATARS: readonly Avatar[] = AVATAR_COACHES.flatMap(coach =>
+  AVATAR_COLORS.filter(color => !CLASHES[coach]?.includes(color)).map(color => ({
+    coach,
+    color,
+  })),
 );
 
 const FIRST_AVATAR: Avatar = { coach: 1, color: 'blue' };

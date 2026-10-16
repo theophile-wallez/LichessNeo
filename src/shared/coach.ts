@@ -5,8 +5,6 @@ import { readStored, StorageKey, writeStored } from './storage.ts';
  * public/img/coaches. An id kept from the four human coaches is one of the first four. The
  * seven animals come first, then the computer's robot, then the coaches of other shapes. */
 export const COACH_COUNT = 26;
-/** The animals, the coaches users' avatars are drawn from. */
-export const ANIMAL_COACHES = 7;
 
 /** The robot's number as a coach, and the Stockfish level whose colors it wears: blue, as its
  * stills are wherever no level is known. */

@@ -75,7 +75,7 @@ describe('userAvatar', () => {
 describe('avatarAttributes', () => {
   it('names the coach and the color', () => {
     expect(avatarAttributes('Hikaru').value).toBe(
-      ' data-lr-ext-avatar-coach="2" data-lr-ext-avatar-color="cyan"',
+      ' data-lr-ext-avatar-coach="15" data-lr-ext-avatar-color="orange"',
     );
   });
 
@@ -83,7 +83,7 @@ describe('avatarAttributes', () => {
     document.body.dataset.user = 'hikaru';
     keepOwnAvatar(PICTURE_PICK);
     expect(avatarAttributes('Hikaru').value).toBe(
-      ' data-lr-ext-avatar-coach="2" data-lr-ext-avatar-color="cyan" data-lr-ext-avatar-picture',
+      ' data-lr-ext-avatar-coach="15" data-lr-ext-avatar-color="orange" data-lr-ext-avatar-picture',
     );
   });
 

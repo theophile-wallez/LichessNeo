@@ -474,8 +474,8 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   than the egg come after it (9 to 26, `CAST` in `cast/cast.ts`); a face
   off the egg's height moves the bust framing with it (`bust`), and a head
   turned three quarters looks the other way where it stands on the page's
-  right (`facingLeft`, the home's hero). The avatars are drawn from the seven animals only
-  (`ANIMAL_COACHES`). Try a mascot's change in `pnpm playground` first: it
+  right (`facingLeft`, the home's hero). The avatars are drawn from every coach but the
+  robot (`AVATAR_COACHES`, `#shared/avatar.ts`). Try a mascot's change in `pnpm playground` first: it
   drives the same rig with its own clock. The stills
   (`img/coaches/*.webp`) are the live mascots' first frame, looking straight
   ahead: the `bust` framing at 124 × 114, twice the pixels, read off the
