@@ -1,0 +1,41 @@
+/* ---- Preferences on a phone --- */
+
+/* Lichess's rows of choices (group.radio) wrap their last one or two onto a row of their
+ * own, as wide as the row. On a phone: up to four choices share one row, each its share
+ * of it, their words wrapping inside; five or more go two by two, an odd last one across.
+ * A group of checkboxes starts with an empty, hidden one. */
+@media (max-width: 639.98px) {
+  main.account group.radio {
+    flex-wrap: nowrap !important;
+  }
+
+  main.account group.radio > div {
+    flex: 1 1 0 !important;
+    min-width: 0;
+  }
+
+  main.account group.radio label {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 8px 6px !important;
+    line-height: 1.25 !important;
+    text-align: center;
+    white-space: normal !important;
+  }
+
+  main.account group.radio:has(> :nth-child(5)) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main.account
+    group.radio:has(> :nth-child(5))
+    > :first-child:not(:empty)
+    ~ :last-child:nth-child(odd),
+  main.account group.radio:has(> :nth-child(5)) > :first-child:empty ~ :last-child:nth-child(even) {
+    grid-column: 1 / -1;
+  }
+}

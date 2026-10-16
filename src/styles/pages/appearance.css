@@ -341,3 +341,25 @@
 .lr-ext-orb[aria-pressed='true'] .lr-ext-orb__badge {
   transform: scale(1);
 }
+
+/* A phone: two themes a row, their pearls smaller, rather than one a row down a long page. */
+@media (max-width: 640px) {
+  .lr-ext-themes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .lr-ext-theme {
+    gap: 10px;
+    padding: 14px 10px 8px;
+  }
+
+  .lr-ext-theme__orbs {
+    gap: 10px;
+  }
+
+  .lr-ext-orb {
+    width: 46px;
+    height: 46px;
+  }
+}

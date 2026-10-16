@@ -29,10 +29,10 @@
 
 /* ---- The stage --- */
 
-/* The mascot rises from the stage's floor, its bubble beside it. */
+/* The mascot rises from the stage's floor, its words beside it. */
 .lr-ext-coach-pick__stage {
   /* How far the mascot's arms reach past its still, either side: the fox's, waving, the
-   * furthest, 22px past a 124px still. The bubble keeps clear of them. */
+   * furthest, 22px past a 124px still. Its words keep clear of them. */
   --lr-ext-coach-pick-arms: 30px;
 
   display: flex;
@@ -85,37 +85,20 @@
   clip-path: inset(0);
 }
 
-/* A speech bubble, its tail toward the mascot. */
+/* Its words on the stage itself, beside it, as on the review's coach card
+ * (review/bubble.css): no bubble, no tail. */
 .lr-ext-coach-pick__bubble {
-  position: relative;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
+  min-width: 0;
   max-width: 360px;
   margin: 0 0 18px;
-  padding: 14px 18px;
-  border-radius: 16px;
-  background: var(--lr-ext-bg-raised);
-  box-shadow:
-    inset 0 1px #ffffff14,
-    0 4px 14px var(--lr-ext-shade-30);
   color: var(--lr-ext-text-strong);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.45;
 }
 
-.lr-ext-coach-pick__bubble::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -7px;
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
-  background: var(--lr-ext-bg-raised);
-  transform: translateY(-50%) rotate(45deg);
-}
-
-/* Each hello pops in, the bubble drawn anew for it. */
+/* Each hello pops in. */
 .lr-ext-coach-pick__bubble > span {
   display: block;
   animation: lr-ext-coach-pick-hello 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
@@ -258,29 +241,21 @@
   --lr-ext-coach-color: var(--lr-ext-blue);
 }
 
-/* A phone's stage: the bubble under the mascot. */
+/* A phone's stage: a smaller coach, still on the stage's edge with its words beside it. */
 @media (max-width: 640px) {
   .lr-ext-coach-pick__stage {
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 6px;
-    padding: 16px 16px 0;
+    --lr-ext-coach-pick-arms: 22px;
+
+    gap: 14px;
+    padding: 14px 14px 0 calc(8px + var(--lr-ext-coach-pick-arms));
   }
 
   .lr-ext-coach-pick__mascot {
-    align-self: center;
-    width: 140px;
+    width: 104px;
   }
 
   .lr-ext-coach-pick__bubble {
-    margin: 0;
-    text-align: center;
-  }
-
-  .lr-ext-coach-pick__bubble::before {
-    top: auto;
-    bottom: -7px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
+    margin: 0 0 14px;
+    font-size: 14px;
   }
 }
