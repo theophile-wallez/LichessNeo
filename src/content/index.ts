@@ -58,6 +58,7 @@ import { profileAvatarLink } from './profile/avatar-link.ts';
 import { powertip } from './ui/powertip.ts';
 import { tooltip } from './ui/tooltip.ts';
 import { tabs } from './ui/tabs.ts';
+import { notices } from './notices/index.ts';
 import { devReload } from './dev/reload.ts';
 import { radar } from './charts/radar/index.ts';
 import { puzzleDashboard } from './puzzle-dashboard/index.ts';
@@ -129,6 +130,7 @@ const FEATURES = [
   powertip,
   tooltip,
   tabs,
+  notices,
   devReload,
   radar,
   puzzleDashboard,

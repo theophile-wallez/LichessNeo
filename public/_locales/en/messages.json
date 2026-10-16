@@ -1062,5 +1062,13 @@
   "variationFolded": {
     "message": "$1 moves",
     "description": "A folded run of moves in an analysis variation, as a pill that opens it; $1 is how many (4 or more)."
+  },
+  "noticeBackOnline": {
+    "message": "Connected again",
+    "description": "The toast that says Lichess's connection is back, after it said \"Reconnecting\"."
+  },
+  "noticeClose": {
+    "message": "Close",
+    "description": "A toast's close button, read out by screen readers."
   }
 }

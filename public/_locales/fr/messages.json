@@ -796,5 +796,11 @@
   },
   "variationFolded": {
     "message": "$1 coups"
+  },
+  "noticeBackOnline": {
+    "message": "Connexion rétablie"
+  },
+  "noticeClose": {
+    "message": "Fermer"
   }
 }
