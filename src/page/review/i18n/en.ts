@@ -90,7 +90,10 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   coach: 'Change coach',
   intro: "Let's debrief this game!",
   engineError: 'The engine failed to start.',
-  liveIntro: 'Play a move and I’ll tell you what I think.',
+  liveIntro: {
+    title: 'Play a move.',
+    sub: 'I’ll tell you if it’s the best, an inaccuracy or a blunder.',
+  },
   thinking: 'Let me look at this move…',
   startPosition: 'Starting position',
   more: 'Show all moves',
@@ -98,6 +101,7 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   gameRating: 'Game Rating',
   gameRatingTip: 'An estimate of a player’s rating based on a single game.',
   bestWas: move => `${move} was best.`,
+  scoreChange: (before, after) => `Before the move: ${before}. After: ${after}.`,
   cost: percent => `−${percent}% winning chances`,
   lines: {
     best: line => `Best was ${line}.`,

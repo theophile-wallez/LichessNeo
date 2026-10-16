@@ -2,7 +2,7 @@ import { z } from 'zod/mini';
 import { type CoachMood, ROBOT_COACH, ROBOT_COACH_LEVEL } from '#shared/coach.ts';
 import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
 import type { Character } from './cast/character.ts';
-import { coachCharacter } from './cast/characters.ts';
+import { coachCharacter } from './cast/cast.ts';
 import { robotFor } from './cast/robot.ts';
 import { ENTRANCE_KINDS, nextEntrance } from './rig/entrance.ts';
 import { createFurLook } from './fur/fur.ts';
@@ -47,12 +47,14 @@ class LiveMascot implements MascotView {
   #mood: CoachMood = 'neutral';
   #talking = false;
   readonly #greets: boolean;
+  readonly #facing: Facing;
   #onDrawn: (() => void) | null;
 
   constructor(host: HTMLElement, stage: Stage, options: MascotOptions) {
     this.#stage = stage;
     this.#host = host;
     this.#greets = options.greets ?? true;
+    this.#facing = options.facing ?? 'right';
     this.#onDrawn = options.onDrawn ?? null;
     host.append(stage.canvas);
     // The canvas, not its host: a stylesheet may let it spill past the avatar's sides, and
@@ -83,6 +85,7 @@ class LiveMascot implements MascotView {
   #frame(dt: number): void {
     this.#mascot?.update(dt);
     this.#stage.lift(this.#mascot?.height ?? 0, this.#mascot?.x ?? 0);
+    this.#stage.open(this.#mascot?.hole ?? null);
     this.#stage.render();
     if (!this.#mascot || !this.#onDrawn) return;
     const drawn = this.#onDrawn;
@@ -108,7 +111,7 @@ class LiveMascot implements MascotView {
       return;
     }
     this.#mascot?.dispose();
-    const mascot = cast(character);
+    const mascot = cast(this.#facing === 'left' ? (character.facingLeft ?? character) : character);
     mascot.setMood(this.#mood);
     mascot.setTalking(this.#talking);
     if (this.#greets) mascot.waveHello();
@@ -155,7 +158,11 @@ export interface MascotOptions {
   readonly greets?: boolean;
   /** Called once its first mascot is drawn: a still under it may go then. */
   readonly onDrawn?: () => void;
+  /** Which way one turned three quarters looks: the right (the default), or the left. */
+  readonly facing?: Facing;
 }
+
+export type Facing = 'left' | 'right';
 
 /** A live mascot drawn in `host`, or null where the browser has no WebGL. */
 export function mountMascot(host: HTMLElement, options: MascotOptions = {}): MascotView | null {

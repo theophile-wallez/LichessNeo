@@ -10,7 +10,7 @@ import {
 // The solid skins a mascot may have in place of fur: the robot's glossy
 // plastic, and others, each a material in any of the mascot's colors.
 
-export const FINISHES = ['plastic', 'clay', 'velvet', 'metal', 'ceramic', 'toon'] as const;
+export const FINISHES = ['plastic', 'clay', 'velvet', 'metal', 'ceramic', 'toon', 'jelly'] as const;
 export type Finish = (typeof FINISHES)[number];
 
 export type SolidMaterial = MeshPhysicalMaterial | MeshToonMaterial;
@@ -45,6 +45,19 @@ const MAKERS: Readonly<Record<Finish, (color: string) => SolidMaterial>> = {
     toonSteps ??= toonGradient();
     return new MeshToonMaterial({ color, gradientMap: toonSteps });
   },
+  // Wet and glossy, its edges lit pale as light comes through them. Not transmission:
+  // over the transparent canvas that samples nothing and turns it dark.
+  jelly: color =>
+    new MeshPhysicalMaterial({
+      color,
+      roughness: 0.16,
+      clearcoat: 1,
+      clearcoatRoughness: 0.02,
+      sheen: 1,
+      sheenRoughness: 0.3,
+      sheenColor: '#ffffff',
+      ior: 1.4,
+    }),
 };
 
 export const solid = (finish: Finish, color: string): SolidMaterial => MAKERS[finish](color);

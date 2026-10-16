@@ -19,7 +19,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 
 // The renderer and its scene: a key light, a sky, a room for the eyes' gloss,
 // and a camera framed on the mascot's head and belly, like a portrait, or on
-// all of it standing over its shadow.
+// all of it standing over its shadow, or by the hole it leaps out of.
 
 const FEET = -1.25;
 const DISTANCE = 7.4;
@@ -38,6 +38,12 @@ export class Stage {
   readonly #environment: Texture;
   readonly #framing: Framing;
   readonly #shadow: Mesh<PlaneGeometry, MeshBasicMaterial> | null;
+  readonly #hole = groundSprite(holeTexture(), [2.1, 1.5], 0.004);
+  // The floor, drawn in depth only: what's under it, out of its hole, stays out of sight.
+  readonly #floor = new Mesh(
+    new PlaneGeometry(60, 60),
+    new MeshBasicMaterial({ colorWrite: false }),
+  );
   #actor: Object3D | null = null;
   #raise = 0;
 
@@ -60,6 +66,12 @@ export class Stage {
     // Its feet show only in full: there, it stands over a soft shadow.
     this.#shadow = framing === 'full' ? groundShadow() : null;
     if (this.#shadow) this.#ground.add(this.#shadow);
+    this.#floor.rotation.x = -Math.PI / 2;
+    this.#floor.renderOrder = -2;
+    this.#hole.renderOrder = -1;
+    this.#floor.visible = false;
+    this.#hole.visible = false;
+    this.#ground.add(this.#floor, this.#hole);
     this.#frame();
   }
 
@@ -107,9 +119,17 @@ export class Stage {
   lift(height: number, x: number): void {
     if (!this.#shadow) return;
     this.#shadow.position.x = x;
-    const lift = 1 / (1 + height * 1.6);
+    const lift = 1 / (1 + Math.max(0, height) * 1.6);
     this.#shadow.scale.setScalar(lift);
-    this.#shadow.material.opacity = lift;
+    // None under it while it's below the floor.
+    this.#shadow.material.opacity = height < 0 ? 0 : lift;
+  }
+
+  /** The hole in the floor it comes out of, `openness` from 0 to 1; null, the floor is whole. */
+  open(openness: number | null): void {
+    this.#floor.visible = openness !== null;
+    this.#hole.visible = openness !== null && openness > 0.01;
+    this.#hole.scale.setScalar(Math.max(openness ?? 0, 0.001));
   }
 
   render(): void {
@@ -117,9 +137,12 @@ export class Stage {
   }
 
   dispose(): void {
-    this.#shadow?.geometry.dispose();
-    this.#shadow?.material.map?.dispose();
-    this.#shadow?.material.dispose();
+    for (const mesh of [this.#shadow, this.#hole, this.#floor]) {
+      if (!mesh) continue;
+      mesh.geometry.dispose();
+      mesh.material.map?.dispose();
+      mesh.material.dispose();
+    }
     this.#environment.dispose();
     this.#renderer.dispose();
     // Browsers keep a few WebGL contexts per page: hand this one back now.
@@ -127,26 +150,51 @@ export class Stage {
   }
 }
 
-/** A round soft shadow on the ground, drawn once on a canvas. */
-function groundShadow(): Mesh<PlaneGeometry, MeshBasicMaterial> {
+/** A round gradient, drawn once on a canvas: `stops` from its center out. */
+function radialTexture(stops: readonly (readonly [number, string])[]): CanvasTexture {
   const canvas = document.createElement('canvas');
   canvas.width = 128;
   canvas.height = 128;
   const context = canvas.getContext('2d');
   if (context) {
     const gradient = context.createRadialGradient(64, 64, 0, 64, 64, 64);
-    gradient.addColorStop(0, 'rgba(0, 0, 0, 0.55)');
-    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    for (const [at, color] of stops) gradient.addColorStop(at, color);
     context.fillStyle = gradient;
     context.fillRect(0, 0, 128, 128);
   }
-  const material = new MeshBasicMaterial({
-    map: new CanvasTexture(canvas),
-    transparent: true,
-    depthWrite: false,
-  });
-  const shadow = new Mesh(new PlaneGeometry(2.6, 1.3), material);
-  shadow.rotation.x = -Math.PI / 2;
-  shadow.position.set(0, 0.002, 0.15);
-  return shadow;
+  return new CanvasTexture(canvas);
 }
+
+/** A soft shadow, dark in its middle. */
+const shadowTexture = (): CanvasTexture =>
+  radialTexture([
+    [0, 'rgba(0, 0, 0, 0.55)'],
+    [1, 'rgba(0, 0, 0, 0)'],
+  ]);
+
+/** A hole, deep in its middle, its rim lit, its edge soft. */
+const holeTexture = (): CanvasTexture =>
+  radialTexture([
+    [0, 'rgba(6, 5, 12, 1)'],
+    [0.7, 'rgba(18, 15, 30, 1)'],
+    [0.84, 'rgba(70, 64, 96, 0.95)'],
+    [0.92, 'rgba(18, 15, 30, 0.6)'],
+    [1, 'rgba(0, 0, 0, 0)'],
+  ]);
+
+/** `texture` laid flat on the ground, `size` wide and deep, `lift` over it. */
+function groundSprite(
+  texture: CanvasTexture,
+  [width, depth]: readonly [number, number],
+  lift: number,
+): Mesh<PlaneGeometry, MeshBasicMaterial> {
+  const material = new MeshBasicMaterial({ map: texture, transparent: true, depthWrite: false });
+  const sprite = new Mesh(new PlaneGeometry(width, depth), material);
+  sprite.rotation.x = -Math.PI / 2;
+  sprite.position.set(0, lift, 0.15);
+  return sprite;
+}
+
+/** A round soft shadow on the ground. */
+const groundShadow = (): Mesh<PlaneGeometry, MeshBasicMaterial> =>
+  groundSprite(shadowTexture(), [2.6, 1.3], 0.002);

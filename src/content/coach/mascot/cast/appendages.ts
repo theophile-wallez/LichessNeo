@@ -13,6 +13,7 @@ import type { RigBuilder } from '#content/coach/mascot/rig/limbs.ts';
 import type { PartMotion } from './character.ts';
 import { swaying, together } from './parts.ts';
 import { bodyGeometry, tailGeometry } from './shapes.ts';
+import { wingBeat } from './wing-beat.ts';
 
 // What sways on a mascot beside its tail: gills, antennae, wings, tentacles,
 // and the bumps a frog's eyes sit on.
@@ -65,9 +66,14 @@ const wingMaterial = new MeshPhysicalMaterial({
   side: DoubleSide,
 });
 
-/** A bee's wings behind its shoulders, fluttering. */
+// A bee's beats are a buzz: many, quick and short.
+const BUZZ = { seconds: 1.2, beats: 16, lift: 0.4 } as const;
+const FLUTTER = { seconds: 0.45, beats: 5, lift: 0.25 } as const;
+
+/** A bee's wings behind its shoulders, at rest until something stirs them. */
 export function wings(rig: RigBuilder): PartMotion {
-  const parts = SIDES.map(side => {
+  const beat = wingBeat(BUZZ, FLUTTER);
+  const pivots = SIDES.map(side => {
     const pivot = new Group();
     pivot.position.set(side * 0.45, 0.62, -0.45);
     pivot.rotation.set(0, side * 0.35, -side * 0.85);
@@ -76,9 +82,14 @@ export function wings(rig: RigBuilder): PartMotion {
     wing.position.y = 0.38;
     pivot.add(wing);
     rig.body.add(pivot);
-    return swaying(pivot, { axis: 'y', amount: 0.35, speed: 14, offset: side > 0 ? Math.PI : 0 });
+    return { pivot, side };
   });
-  return together(...parts);
+  return {
+    update: (time, mood) => {
+      beat.update(time, mood);
+      for (const { pivot, side } of pivots) pivot.rotation.y = side * (0.35 + beat.lift());
+    },
+  };
 }
 
 const BUMP_RADIUS = 0.25;

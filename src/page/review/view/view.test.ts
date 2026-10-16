@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
+import { flush } from '#shared/testing/timers.ts';
 import { z } from 'zod/mini';
 import type { Color } from '#shared/chess/types.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
@@ -6,7 +7,7 @@ import { StoredRecordCodec } from '#page/review/evaluation/stored.ts';
 import { CLASS_COLORS } from '#page/review/classes/classes.ts';
 import { en } from '#page/review/i18n/en.ts';
 import { UNIT_CASES } from '#page/review/fixtures/unit-cases.ts';
-import { builtSession } from '#page/review/fixtures/unit-review.ts';
+import { builtSession, newSession } from '#page/review/fixtures/unit-review.ts';
 import { MODES, ModeSchema } from '#page/review/session.ts';
 import { PanelActionSchema } from './actions.ts';
 import { badgeMarkup, landingSquare, reviewArrowsFor } from './board-badge.ts';
@@ -17,6 +18,7 @@ import { graphMarkup, knownRuns } from './graph-markup.ts';
 import { evalChip, header } from './markup.ts';
 import { openingMarkup } from './opening.ts';
 import { overflows } from './stream.ts';
+import { keepMarked } from './render.ts';
 import { playerName } from './summary-players.ts';
 import { tipPlacement } from './tooltip.ts';
 // What the original script drew for the same inputs.
@@ -269,6 +271,17 @@ describe('the coach', () => {
     expect(markup).toContain('lr-ext-coach__avatar--react');
     expect(markup).toContain('data-lr-ext-coach-id="2" data-lr-ext-mood="shock"');
   });
+
+  it('takes the mood it’s given while there’s no verdict, the verdict’s once there is', () => {
+    const waiting: AvatarInput = { coachId: 2, moveClass: null, react: false, label: 'Coach' };
+    expect(avatarMarkup(waiting).value).toContain('data-lr-ext-mood="neutral"');
+    expect(avatarMarkup({ ...waiting, idle: 'thinking' }).value).toContain(
+      'data-lr-ext-mood="thinking"',
+    );
+    expect(avatarMarkup({ ...waiting, moveClass: 'blunder', idle: 'thinking' }).value).toContain(
+      'data-lr-ext-mood="shock"',
+    );
+  });
 });
 
 describe('the buttons', () => {
@@ -278,5 +291,18 @@ describe('the buttons', () => {
       expect(PanelActionSchema.safeParse(action).success).toBe(true);
     expect(PanelActionSchema.safeParse('replay').success).toBe(false);
     expect(PanelActionSchema.safeParse(undefined).success).toBe(false);
+  });
+});
+
+describe('the page’s marks', () => {
+  it('come back as soon as Lichess rewrites <html>’s class', async () => {
+    const root = document.documentElement;
+    const session = newSession();
+    session.view.mode = 'moves';
+    keepMarked(session);
+    root.className = 'light';
+    await flush();
+    expect([...root.classList]).toEqual(['light', 'lr-ext-review', 'lr-ext-review-moves']);
+    root.className = '';
   });
 });

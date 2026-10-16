@@ -2,6 +2,7 @@ import type { CoachMood } from '#shared/coach.ts';
 import type { Character } from '#content/coach/mascot/cast/character.ts';
 import { createFurLook, type FurLook } from '#content/coach/mascot/fur/fur.ts';
 import type { EntranceKind } from '#content/coach/mascot/rig/entrance.ts';
+import type { ReactionKind } from '#content/coach/mascot/rig/reactions.ts';
 import { Mascot } from '#content/coach/mascot/rig/rig.ts';
 import { Stage, type Framing } from '#content/coach/mascot/stage.ts';
 import { tuneFur } from './fur-tuning.ts';
@@ -22,6 +23,8 @@ const PAINTED = ['uCoat', 'uFrontColor', 'uAccent', 'uCoatTip', 'uFrontTip', 'uA
 export class Theater {
   readonly #host: HTMLElement;
   #stage: Stage;
+  #framing: Framing;
+  #character: Character | null = null;
   #mascot: Mascot | null = null;
   #look: FurLook | null = null;
   #raise = 0;
@@ -36,6 +39,7 @@ export class Theater {
 
   constructor(host: HTMLElement, framing: Framing) {
     this.#host = host;
+    this.#framing = framing;
     this.#stage = this.#mount(framing);
     new ResizeObserver(() => this.#resize()).observe(host);
     window.addEventListener('pointermove', this.#pointTo, { passive: true });
@@ -66,15 +70,20 @@ export class Theater {
     this.#stage.dispose();
     this.#stage.canvas.remove();
     this.#stage = this.#mount(framing);
-    if (this.#mascot) this.#stage.show(this.#mascot.root, this.#raise);
+    this.#framing = framing;
+    if (this.#character?.facingLeft) this.play(this.#character, false);
+    else if (this.#mascot) this.#stage.show(this.#mascot.root, this.#raise);
     this.#resize();
   }
 
   /** Puts `character` on stage, a new mascot that keeps the mood and the fur's tuning. */
   play(character: Character, greets: boolean): void {
     this.#mascot?.dispose();
+    this.#character = character;
+    // Whole, as the home's hero shows it, one turned three quarters looks left.
+    const shown = this.#framing === 'full' ? (character.facingLeft ?? character) : character;
     const look = createFurLook(character.colors, character.frontMask, character.stripes);
-    const mascot = new Mascot(character, look);
+    const mascot = new Mascot(shown, look);
     mascot.setMood(this.#mood);
     mascot.setTalking(this.#talking);
     if (greets) mascot.waveHello();
@@ -117,6 +126,10 @@ export class Theater {
 
   poke(): void {
     this.#mascot?.poke();
+  }
+
+  react(kind: ReactionKind): void {
+    this.#mascot?.react(kind);
   }
 
   hop(strength: number): void {
@@ -172,6 +185,7 @@ export class Theater {
     const mascot = this.#mascot;
     mascot?.update(dt * this.#speed);
     this.#stage.lift(mascot?.height ?? 0, mascot?.x ?? 0);
+    this.#stage.open(mascot?.hole ?? null);
     this.#stage.render();
   }
 }

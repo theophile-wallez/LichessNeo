@@ -337,6 +337,11 @@
   color: var(--lr-ext-text-strong);
 }
 
+/* A title alone, not in a verdict's row, keeps its height, so the card centers it. */
+#lr-ext-review .lr-ext-bubble > .lr-ext-bubble__title {
+  flex: none;
+}
+
 #lr-ext-review .lr-ext-bubble__sub {
   color: var(--lr-ext-neutral-13);
 }

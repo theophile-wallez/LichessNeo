@@ -197,6 +197,42 @@
   "coachRook": {
     "message": "Tour"
   },
+  "coachKnight": {
+    "message": "Cavalier"
+  },
+  "coachBishop": {
+    "message": "Fou"
+  },
+  "coachKing": {
+    "message": "Roi"
+  },
+  "coachQueen": {
+    "message": "Dame"
+  },
+  "coachBunny": {
+    "message": "Lapin"
+  },
+  "coachCat": {
+    "message": "Chat"
+  },
+  "coachDragon": {
+    "message": "Dragon"
+  },
+  "coachBoiledEgg": {
+    "message": "Œuf"
+  },
+  "coachSoda": {
+    "message": "Soda"
+  },
+  "coachCloud": {
+    "message": "Nuage"
+  },
+  "coachSlime": {
+    "message": "Slime"
+  },
+  "coachStar": {
+    "message": "Étoile"
+  },
   "settingUiSounds": {
     "message": "Sons de l’interface"
   },

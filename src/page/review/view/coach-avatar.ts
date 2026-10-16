@@ -1,4 +1,4 @@
-import { COACH_COUNT, CoachMoodSchema, keepCoach } from '#shared/coach.ts';
+import { COACH_COUNT, type CoachMood, CoachMoodSchema, keepCoach } from '#shared/coach.ts';
 import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { postCoachState } from '#shared/protocol.ts';
@@ -24,13 +24,16 @@ export interface AvatarInput {
   /** The marks pop (see `takeReaction`). */
   readonly react: boolean;
   readonly label: string;
+  /** The mood without a verdict, neutral by default. */
+  readonly idle?: CoachMood;
 }
 
-export function avatarMarkup({ coachId, moveClass, react, label }: AvatarInput): SafeHtml {
+export function avatarMarkup(input: AvatarInput): SafeHtml {
+  const { coachId, moveClass, react, label, idle = 'neutral' } = input;
   const mood = moveClass ? classMood(moveClass) : null;
   const moodColor = mood && moveClass ? `--lr-ext-mood-c:${CLASS_COLORS[moveClass]}` : null;
   const style = moodColor === null ? '' : html` style="${moodColor}"`;
-  return html`<button class="lr-ext-coach__avatar${react ? ' lr-ext-coach__avatar--react' : ''}" data-lr-ext="coach" data-lr-ext-coach-id="${coachId}" data-lr-ext-mood="${mood ?? 'neutral'}"${style} data-lr-ext-tip="${label}" aria-label="${label}"><span class="lr-ext-coach__face"></span></button>`;
+  return html`<button class="lr-ext-coach__avatar${react ? ' lr-ext-coach__avatar--react' : ''}" data-lr-ext="coach" data-lr-ext-coach-id="${coachId}" data-lr-ext-mood="${mood ?? idle}"${style} data-lr-ext-tip="${label}" aria-label="${label}"><span class="lr-ext-coach__face"></span></button>`;
 }
 
 /** Tells the content script which coach shows, how it looks, and whether it talks. */

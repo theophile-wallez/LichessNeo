@@ -17,6 +17,7 @@ const SKIN_NAMES: Readonly<Record<'fur' | Finish, string>> = {
   metal: 'Métal',
   ceramic: 'Céramique',
   toon: 'Dessin animé',
+  jelly: 'Gelée',
 };
 
 /** The skin's section, and what refreshes it once another actor shows. */

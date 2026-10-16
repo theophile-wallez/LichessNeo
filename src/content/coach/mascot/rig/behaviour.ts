@@ -5,7 +5,7 @@ import { between, damp, type Spring } from '#content/coach/mascot/motion.ts';
 // `random` is injectable so tests can pin it.
 
 const BLINK_SECONDS = 0.17;
-const GRAVITY = 14;
+export const GRAVITY = 14;
 
 /** How open the eyes are, from 0 to 1: a blink every few seconds, now and then a double one. */
 export class Blinker {

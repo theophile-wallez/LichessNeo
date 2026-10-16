@@ -18,6 +18,9 @@ export interface BodyLook {
   readonly fur: number;
 }
 
+/** The colors it takes in some moods, in place of its own. */
+export type MoodColors = Partial<Readonly<Record<CoachMood, Colors>>>;
+
 /** A part that moves on its own, every frame. */
 export interface PartMotion {
   readonly update: (time: number, mood: CoachMood) => void;
@@ -42,4 +45,8 @@ export interface Character {
   /** How far up the bust framing moves for it, its face off the egg's height. */
   readonly bust?: number;
   readonly extras: (rig: RigBuilder) => PartMotion | null;
+  /** Colors a solid skin eases into in a mood: a slime going red when angry. */
+  readonly moodColors?: MoodColors;
+  /** One turned three quarters looks to the viewer's right; this is it looking left. */
+  readonly facingLeft?: Character;
 }

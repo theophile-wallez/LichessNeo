@@ -1,7 +1,8 @@
-import { MathUtils, Mesh, Object3D, Raycaster, Vector3, type BufferGeometry } from 'three';
+import { Group, MathUtils, Mesh, Object3D, Raycaster, Vector3, type BufferGeometry } from 'three';
 
 // Where the body's skin is in front of each point of the face, sampled once on
-// a grid so the features can slide over it every frame.
+// a grid so the features can slide over it every frame. A face turned from ahead
+// (a head in three quarters) samples the skin as seen from where it faces.
 
 const STEP = 0.05;
 
@@ -24,11 +25,19 @@ export class Surface {
   readonly #rows: number;
   readonly #samples: Sample[] = [];
 
-  /** Samples `skin` (a geometry, or meshes already placed) over the ranges the face can slide across. */
-  constructor(skin: BufferGeometry | Object3D, ranges: { readonly x: Range; readonly y: Range }) {
+  /**
+   * Samples `skin` (a geometry, or meshes already placed) over the ranges the face can slide
+   * across, facing `turn` radians about the vertical from ahead.
+   */
+  constructor(
+    skin: BufferGeometry | Object3D,
+    ranges: { readonly x: Range; readonly y: Range },
+    turn = 0,
+  ) {
     this.#x = ranges.x;
     this.#y = ranges.y;
-    const target = skin instanceof Object3D ? skin : new Mesh(skin);
+    const target = new Group().add(skin instanceof Object3D ? skin : new Mesh(skin));
+    target.rotation.y = -turn;
     target.updateMatrixWorld(true);
     const ray = new Raycaster();
     const forward = new Vector3(0, 0, -1);

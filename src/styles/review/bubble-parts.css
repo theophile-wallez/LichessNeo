@@ -37,22 +37,11 @@
     drop-shadow(0 1px 0 var(--lr-ext-text-dim)) drop-shadow(0 -1px 0 var(--lr-ext-text-dim));
 }
 
-/* How the score moved: the score before, dimmed, then after. */
+/* The score after the move; the one before is in its tooltip (view/verdict.ts). */
 .lr-ext-bubble__evals {
   flex: none;
   display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.lr-ext-bubble__evals > .lr-ext-bubble__eval:first-child {
-  opacity: 0.6;
-}
-
-.lr-ext-bubble__to {
-  color: var(--lr-ext-text-dim);
-  font-size: 12px;
-  font-weight: 800;
+  cursor: help;
 }
 
 /* A move of the comment that can be played: its arrow on hover, played on click. */
@@ -197,4 +186,54 @@
   padding: 0 14px;
   border-radius: 999px;
   font-size: 13px;
+}
+
+/* The coach waiting for the engine (view/markup.ts): a spinner where the class's icon goes (not
+   dots, the best move's), faint lines where the comment will, about its two lines' height, so
+   the verdict lands in place. */
+.lr-ext-bubble__spin {
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--lr-ext-lift-8);
+}
+
+.lr-ext-bubble__spin::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--lr-ext-lift-15);
+  border-top-color: var(--lr-ext-text-dim);
+  border-radius: 50%;
+  animation: lr-ext-spin 0.8s linear infinite;
+}
+
+.lr-ext-bubble__wait {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 11px;
+}
+
+.lr-ext-bubble__wait > span {
+  height: 9px;
+  border-radius: 5px;
+  background: var(--lr-ext-lift-8);
+  animation: lr-ext-wait 0.9s ease-in-out infinite alternate;
+}
+
+.lr-ext-bubble__wait > span:last-child {
+  width: 62%;
+}
+
+@keyframes lr-ext-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes lr-ext-wait {
+  to {
+    opacity: 0.45;
+  }
 }

@@ -278,7 +278,7 @@ features and its name: free analysis, open data, no ads.
   and over its hops. Leave room for the arms its canvas reaches past its
   avatar's box, the fox's the farthest: about a fifth of the coach's height
   before it (24px for the review's 114px coach, 40px for the puzzles' 140px)
-  and before the words. Check every coach (`lr-ext-coach` 1 to 14 in
+  and before the words. Check every coach (`lr-ext-coach` 1 to 26 in
   localStorage), a few frames apart, with the card's clip taken off.
 - **CSS first**, JS only for what CSS can't do (sounds, measuring, captured
   pieces, the review).
@@ -464,15 +464,17 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   in the content world: the page's CSP keeps the extension's bundle out of
   the page world. They're the ES chunk `coach-mascot.js`, loaded with
   `import()` only when a coach shows, and each draws only while on screen
-  in a visible tab (`VisibleLoop`). The fur is shells: their alpha blends
+  in a visible tab (`VisibleLoop`). Each wears a solid finish
+  (`cast/finishes.ts`), drawn in its fur's pattern (`cast/patterned.ts`):
+  clay for the animals and most others, glossy plastic for the computer's
+  robot. Fur is still a skin any mascot may take: shells whose alpha blends
   with `MaxEquation`, or the canvas shows holes. Without WebGL, the coach's
-  still (`img/coaches/mascot-<n>.webp`) stays. The computer's robot is the
-  same rig in glossy plastic instead of fur, one of the solid finishes
-  (`cast/finishes.ts`) any mascot may take, drawn in its fur's pattern
-  (`cast/patterned.ts`), and the eighth coach (`ROBOT_COACH`), in its level
-  3 blue. The coaches of other shapes than the egg come after it (9 to 14,
-  `CAST`); a face off the egg's height moves the bust framing with it
-  (`bust`). The avatars are drawn from the seven animals only
+  still (`img/coaches/mascot-<n>.webp`) stays. The robot is the eighth
+  coach (`ROBOT_COACH`), in its level 3 blue. The coaches of other shapes
+  than the egg come after it (9 to 26, `CAST` in `cast/cast.ts`); a face
+  off the egg's height moves the bust framing with it (`bust`), and a head
+  turned three quarters looks the other way where it stands on the page's
+  right (`facingLeft`, the home's hero). The avatars are drawn from the seven animals only
   (`ANIMAL_COACHES`). Try a mascot's change in `pnpm playground` first: it
   drives the same rig with its own clock. The stills
   (`img/coaches/*.webp`) are the live mascots' first frame, looking straight

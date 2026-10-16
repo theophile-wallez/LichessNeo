@@ -11,6 +11,17 @@ export const between = (min: number, max: number, random: () => number = Math.ra
 // Stepped at 120 Hz at least, so a long frame doesn't blow it up.
 const SUBSTEP = 1 / 120;
 
+/** An amount easing at `rate` toward the target it's given each frame, from 0. */
+export function easing(rate: number): (time: number, target: number) => number {
+  let amount = 0;
+  let last = 0;
+  return (time, target) => {
+    amount = damp(amount, target, rate, time - last);
+    last = time;
+    return amount;
+  };
+}
+
 /** A damped spring around `target`: kick it and it wobbles back. */
 export class Spring {
   value = 0;

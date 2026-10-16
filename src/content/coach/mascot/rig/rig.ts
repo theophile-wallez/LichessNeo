@@ -1,4 +1,4 @@
-import { BufferGeometry, Group, Matrix4, Mesh, Vector3 } from 'three';
+import { BufferGeometry, Group, Matrix4, Mesh, type Vector3 } from 'three';
 import type { CoachMood } from '#shared/coach.ts';
 import type { Character, PartMotion } from '#content/coach/mascot/cast/character.ts';
 import { Shell, type Lights } from '#content/coach/mascot/cast/shell.ts';
@@ -12,18 +12,20 @@ import {
   type FurOptions,
   type FurPart,
 } from '#content/coach/mascot/fur/fur.ts';
-import { easePose, MOODS, type Pose } from '#content/coach/mascot/moods.ts';
+import { MOODS } from '#content/coach/mascot/moods.ts';
+import { easePose, type Onset, type Pose } from '#content/coach/mascot/pose.ts';
 import { between, damp, Spring } from '#content/coach/mascot/motion.ts';
 import { Blinker, Glances, Jumper, Talker, type Gaze } from './behaviour.ts';
 import { Entrance, type EntranceKind } from './entrance.ts';
 import { bendFur } from './fur-lag.ts';
-import { Reactions } from './reactions.ts';
+import { REACTIONS, type ReactionKind, Reactions } from './reactions.ts';
 import {
+  aimArms,
   buildArms,
   buildEars,
   buildFeet,
-  palmForward,
   stepFeet,
+  swayEars,
   type Arm,
   type Ear,
   type Foot,
@@ -77,7 +79,8 @@ export class Mascot implements RigBuilder {
   constructor(character: Character, look: FurLook) {
     this.#look = look;
     const { skin } = character;
-    this.#shell = skin === 'fur' ? null : new Shell(character.colors, skin, look);
+    this.#shell =
+      skin === 'fur' ? null : new Shell(character.colors, skin, look, character.moodColors);
     this.body.position.y = -character.body.bottom;
     this.root.add(this.#squashed);
     this.#squashed.add(this.#torso);
@@ -91,7 +94,7 @@ export class Mascot implements RigBuilder {
       faceSize: face.size,
     };
     this.body.add(this.fur(body.geometry(), options));
-    this.#face = new Face(new Surface(body.surface(), face.slide), face);
+    this.#face = new Face(new Surface(body.surface(), face.slide, face.turn), face, !this.#shell);
     this.body.add(this.#face.group);
     this.#ears = buildEars(this, character.ears);
     this.#arms = buildArms(this, character.arms);
@@ -100,9 +103,14 @@ export class Mascot implements RigBuilder {
     this.#hover = character.hover ?? 0;
   }
 
-  /** How high it is off the ground, mid-hop or floating. */
+  /** How high it is off the ground, mid-hop or floating; below it, coming out of its hole. */
   get height(): number {
-    return this.#jumper.height + this.#floating(this.#time);
+    return this.#jumper.height + this.#floating(this.#time) + (this.#entrance?.sink ?? 0);
+  }
+
+  /** How open the hole it comes out of is, from 0 to 1, or null without one. */
+  get hole(): number | null {
+    return this.#entrance?.hole ?? null;
   }
 
   /** Its float over the ground, bobbing slowly. */
@@ -139,6 +147,7 @@ export class Mascot implements RigBuilder {
     });
     for (const part of this.#furs) part.material.dispose();
     this.#shell?.dispose();
+    this.#face.dispose();
   }
 
   setMood(mood: CoachMood): void {
@@ -149,7 +158,11 @@ export class Mascot implements RigBuilder {
   #show(mood: CoachMood): void {
     if (mood === this.mood) return;
     this.mood = mood;
-    const { hop = 0, lean = 0, puff = 0, squash = 0 } = MOODS[mood].onset ?? {};
+    this.#shell?.show(mood);
+    this.#kick(MOODS[mood].onset);
+  }
+
+  #kick({ hop = 0, lean = 0, puff = 0, squash = 0 }: Onset = {}): void {
     if (hop > 0) this.hop(hop);
     this.#lean.kick(lean);
     this.#puff.kick(puff);
@@ -160,13 +173,25 @@ export class Mascot implements RigBuilder {
     this.#talking = talking;
   }
 
-  /** A cute reaction to a click: a hop, a hello, a laugh or a twirl. */
+  /** A cute reaction to a click: a hop, a hello, a laugh, a twirl or a blush. */
   poke(): void {
     if (this.#entrance) return;
-    const kind = this.#reactions.start(this.#time);
-    if (kind === 'hop') this.hop(4);
+    this.#perform(this.#reactions.start(this.#time));
+  }
+
+  /** Plays the reaction `kind`, as a click would. */
+  react(kind: ReactionKind): void {
+    if (this.#entrance) return;
+    this.#reactions.play(kind, this.#time);
+    this.#perform(kind);
+  }
+
+  // What a reaction kicks off; the twirl's turn and the sways play over time (update).
+  #perform(kind: ReactionKind): void {
+    this.#kick(REACTIONS[kind].onset);
     if (kind === 'wave') this.waveHello();
-    if (kind === 'laugh') this.hop(2.4);
+    // Its paws go together, the hello's wave or not.
+    if (kind === 'shy') this.#waveUntil = 0;
   }
 
   hop(strength: number): void {
@@ -190,7 +215,8 @@ export class Mascot implements RigBuilder {
     this.#swing = Math.sin(motion.stride * Math.PI) * motion.gait;
     this.root.position.x = motion.x;
     stepFeet(this.#feet, motion.stride, motion.gait);
-    this.#squashed.rotation.y = motion.turn;
+    this.#squashed.rotation.y = motion.turn + motion.spin;
+    this.#squashed.rotation.z = motion.tilt;
     if (!motion.done) return;
     this.#entrance = null;
     this.#reactions.play('hello', time);
@@ -230,14 +256,22 @@ export class Mascot implements RigBuilder {
     this.#squashed.scale.set(thin, stretch, thin);
     this.root.position.y = this.height + Math.abs(this.#swing) * 0.05;
 
+    const sway = this.#reactions.sway(time);
     this.#lean.target = pose.lean;
-    this.#torso.rotation.x = this.#lean.step(dt);
+    // A fixed face looks by turning the whole mascot, up and down a little too.
+    const { fixed } = this.#face;
+    this.#torso.rotation.x = this.#lean.step(dt) - (fixed ? this.#glances.y * 0.12 : 0);
     // Without arms to wave, it says hello by wobbling.
     const wobble =
       (this.#arms.length > 0 ? 0 : Math.sin(time * 11) * 0.09 * this.#wave) + this.#swing * 0.1;
     this.#torso.rotation.z =
-      pose.tilt + wobble + Math.sin(time * 0.8) * 0.022 + Math.sin(time * 0.37) * 0.012;
-    this.#torso.rotation.y = this.#glances.x * 0.14 + this.#reactions.spin(time);
+      pose.tilt +
+      wobble +
+      sway.wiggle +
+      Math.sin(time * 0.8) * 0.022 +
+      Math.sin(time * 0.37) * 0.012;
+    this.#torso.rotation.y =
+      this.#glances.x * (fixed ? 0.35 : 0.14) + this.#reactions.spin(time) + sway.twist;
     this.#moveEars(time, dt);
     this.#moveArms(time, dt);
 
@@ -257,27 +291,12 @@ export class Mascot implements RigBuilder {
       this.#twitchAt = time + between(3.5, 9);
       this.#ears[Math.random() < 0.5 ? 0 : 1]?.twitch.kick(between(5, 8));
     }
-    for (const { pivot, side, tilt, twitch } of this.#ears) {
-      const droop = this.#pose.ears;
-      pivot.rotation.z = -side * (tilt + 0.5 * droop + twitch.step(dt) * 0.1);
-      pivot.rotation.x = -Math.max(droop, 0) * 0.45;
-    }
+    swayEars(this.#ears, this.#pose.ears, dt);
   }
 
   #moveArms(time: number, dt: number): void {
     this.#wave = damp(this.#wave, time < this.#waveUntil ? 1 : 0, 8, dt);
-    const { arms } = MOODS[this.mood];
-    const wanted = new Vector3();
-    for (const arm of this.#arms) {
-      wanted.fromArray(arm.side < 0 ? arms.left : arms.right);
-      if (this.mood === 'delight') wanted.x += Math.sin(time * 15 + arm.side) * 0.18;
-      wanted.z += arm.side * this.#swing * 0.4;
-      if (arm.side < 0 && this.#wave > 0.01) {
-        const angle = -0.5 + Math.sin(time * 11) * 0.32;
-        wanted.lerp(new Vector3(Math.sin(angle), Math.cos(angle), 0.25), this.#wave);
-      }
-      arm.direction.lerp(wanted.normalize(), 1 - Math.exp(-10 * dt)).normalize();
-      arm.pivot.quaternion.setFromRotationMatrix(palmForward(arm.direction, this.#armRotation));
-    }
+    const motion = { time, dt, mood: this.mood, wave: this.#wave, swing: this.#swing };
+    aimArms(this.#arms, motion, this.#armRotation);
   }
 }

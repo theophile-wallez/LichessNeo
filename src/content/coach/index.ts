@@ -15,7 +15,9 @@ import type { MascotView } from './mascot/index.ts';
 const LIVE_CLASS = 'lr-ext-coach__avatar--live';
 
 let wanted: CoachState = { coach: 0, mood: 'neutral', talking: false };
-let live: { readonly avatar: HTMLElement; readonly mascot: MascotView } | null = null;
+// Drawn: its first frame is in, over the still, which goes then.
+let live: { readonly avatar: HTMLElement; readonly mascot: MascotView; drawn: boolean } | null =
+  null;
 let mounting: HTMLElement | null = null;
 
 function apply(mascot: MascotView): void {
@@ -39,19 +41,28 @@ async function mount(avatar: HTMLElement): Promise<void> {
   if (mounting !== avatar) return;
   mounting = null;
   if (!mountMascot || !avatar.isConnected) return;
-  const mascot = mountMascot(face);
+  const mascot = mountMascot(face, { onDrawn: () => reveal(mascot) });
   if (!mascot) return;
   unmount();
-  live = { avatar, mascot };
-  avatar.classList.toggle(LIVE_CLASS, true);
-  apply(mascot);
+  live = { avatar, mascot, drawn: false };
+  // Neutral, as its still looks, until it's drawn over it.
+  mascot.setCoach(wanted.coach);
+}
+
+function reveal(mascot: MascotView | null): void {
+  if (!live || live.mascot !== mascot) return;
+  live.drawn = true;
+  live.avatar.classList.toggle(LIVE_CLASS, true);
+  apply(live.mascot);
 }
 
 function sync(): void {
   const avatar = queryOne(document, '.lr-ext-coach__avatar', HTMLElement);
   if (!avatar) return;
-  if (live?.avatar === avatar) apply(live.mascot);
-  else if (mounting !== avatar) void mount(avatar);
+  if (live?.avatar === avatar) {
+    if (live.drawn) apply(live.mascot);
+    else live.mascot.setCoach(wanted.coach);
+  } else if (mounting !== avatar) void mount(avatar);
 }
 
 /** Plays `state` on the page's coach: the review's, or the puzzle's (content/puzzle). */

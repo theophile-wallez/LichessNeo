@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { refresh } from '#page/review/game/work.ts';
 import { fakeGame, newSession, setDeep } from '#page/review/fixtures/unit-review.ts';
+import { formatEval } from '#page/review/evaluation/format.ts';
 import type { Session } from '#page/review/session.ts';
 import { commentOn, openingOf, timeTag, verdictMarkup } from './verdict.ts';
 
@@ -79,5 +80,22 @@ describe('a move’s time', () => {
 
   it('shows none without clocks', () => {
     expect(timeTag(session, { ...timed(27), timing: null })).toBe('');
+  });
+});
+
+describe('a verdict’s score', () => {
+  it('shows the score after the move, and how the move changed it in its tooltip', () => {
+    const session = judgedGame('opera');
+    const move = session.view.review?.moves.find(judged => judged?.moveClass === 'best');
+    if (!move) throw new Error('no best move');
+    const comment = commentOn(session, { move, gameId: 'opera', hint: [], timing: null });
+    document.body.innerHTML = verdictMarkup(session, comment).toString();
+    const score = document.querySelector('.lr-ext-bubble__evals');
+    if (!(score instanceof HTMLElement)) throw new Error('no score');
+    expect(score.querySelectorAll('.lr-ext-bubble__eval')).toHaveLength(1);
+    expect(score.textContent).toBe(formatEval(move.after));
+    expect(score.dataset.lrExtTip).toBe(
+      `Before the move: ${formatEval(move.before)}. After: ${formatEval(move.after)}.`,
+    );
   });
 });

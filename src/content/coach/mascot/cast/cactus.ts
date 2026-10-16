@@ -109,7 +109,7 @@ function pot(rig: RigBuilder): void {
 
 export const cactus: Character = {
   name: 'Cactus',
-  skin: 'fur',
+  skin: 'clay',
   colors: { coat: '#59c27a', front: '#9be0a8', accent: '#e07a4f' },
   frontMask: [0.7, 0.8],
   stripes: [0, 0, 0],

@@ -26,6 +26,18 @@ const NAMES = [
   'coachCactus',
   'coachToast',
   'coachRook',
+  'coachKnight',
+  'coachBishop',
+  'coachKing',
+  'coachQueen',
+  'coachBunny',
+  'coachCat',
+  'coachDragon',
+  'coachBoiledEgg',
+  'coachSoda',
+  'coachCloud',
+  'coachSlime',
+  'coachStar',
 ] as const satisfies { length: typeof COACH_COUNT };
 
 /** The name of the coach of number `coach`. */

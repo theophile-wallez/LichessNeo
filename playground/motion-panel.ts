@@ -1,6 +1,11 @@
 import { COACH_MOODS, type CoachMood } from '#shared/coach.ts';
 import { createElement } from '#shared/dom.ts';
-import { ENTRANCE_KINDS, type EntranceKind } from '#content/coach/mascot/rig/entrance.ts';
+import {
+  ENTRANCE_KINDS,
+  PICKED_ENTRANCES,
+  type EntranceKind,
+} from '#content/coach/mascot/rig/entrance.ts';
+import { REACTION_KINDS, type ReactionKind } from '#content/coach/mascot/rig/reactions.ts';
 import type { App } from './app.ts';
 import { button, buttons, choice, section, slider, toggle } from './controls.ts';
 
@@ -19,13 +24,41 @@ const MOOD_NAMES: Readonly<Record<CoachMood, string>> = {
   angry: 'Fâché',
   proud: 'Fier',
   thinking: 'Pensif',
+  shy: 'Gêné',
 };
 
 const ENTRANCE_NAMES: Readonly<Record<EntranceKind, string>> = {
   drop: 'Tombe du ciel',
   walk: 'Marche',
   hops: 'Sautille',
+  rise: 'Surgit du sol',
+  spin: 'Descend en toupie',
+  slide: 'Glisse et freine',
 };
+
+const REACTION_NAMES: Readonly<Record<ReactionKind, string>> = {
+  hop: 'Saut',
+  wave: 'Coucou',
+  laugh: 'Rire',
+  twirl: 'Pirouette',
+  hello: 'Bonjour',
+  jiggle: 'Gelée',
+  tickle: 'Chatouilles',
+  spinHop: 'Saut pirouette',
+  shy: 'Gêné',
+};
+
+// The reactions a click picks from, and the hello after an entrance; the others are new.
+const CLICKED: ReadonlySet<ReactionKind> = new Set([
+  'hop',
+  'wave',
+  'laugh',
+  'twirl',
+  'shy',
+  'hello',
+]);
+
+const marked = (name: string, tried: boolean): string => (tried ? name : `${name} (nouveau)`);
 
 export function moodPanel(panel: HTMLElement, app: App): void {
   const box = section(panel, 'Expression');
@@ -53,12 +86,17 @@ export function reactionsPanel(panel: HTMLElement, app: App): void {
   const box = section(panel, 'Réactions');
   const { theater } = app;
   const poke = buttons(button('Clic (une réaction au hasard)', () => theater.poke()));
+  const each = buttons(
+    ...REACTION_KINDS.map(kind =>
+      button(marked(REACTION_NAMES[kind], CLICKED.has(kind)), () => theater.react(kind)),
+    ),
+  );
   const moves = buttons(
     button('Petit saut', () => theater.hop(2.2)),
     button('Grand saut', () => theater.hop(4.2)),
     button('Coucou', () => theater.waveHello()),
   );
-  box.append(poke, moves);
+  box.append(poke, each, moves);
 }
 
 export function entrancesPanel(panel: HTMLElement, app: App): void {
@@ -69,7 +107,8 @@ export function entrancesPanel(panel: HTMLElement, app: App): void {
       button('← Gauche', () => app.theater.enter(kind, 'left')),
       button('Droite →', () => app.theater.enter(kind, 'right')),
     );
-    row.append(createElement('span', { className: 'label', text: ENTRANCE_NAMES[kind] }), sides);
+    const name = marked(ENTRANCE_NAMES[kind], PICKED_ENTRANCES.includes(kind));
+    row.append(createElement('span', { className: 'label', text: name }), sides);
     box.append(row);
   }
 }

@@ -58,7 +58,7 @@
   width: 168px;
   /* The stills' own (img/coaches): the live mascot lands on its still only in this box. */
   aspect-ratio: 124 / 114;
-  background: var(--lr-ext-avatar-coach) center bottom / contain no-repeat;
+  background: var(--lr-ext-avatar-coach) center bottom / auto 100% no-repeat;
   cursor: pointer;
 }
 
@@ -176,7 +176,7 @@
   aspect-ratio: 1;
   border-radius: 12px;
   background:
-    var(--lr-ext-avatar-coach) center bottom / 92% auto no-repeat,
+    var(--lr-ext-avatar-coach) center bottom / 138% auto no-repeat,
     color-mix(in srgb, var(--lr-ext-coach-color) 22%, transparent);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
@@ -239,6 +239,54 @@
 
 .lr-ext-coach-choice[data-lr-ext-coach-choice='14'] {
   --lr-ext-coach-color: var(--lr-ext-blue);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='15'] {
+  --lr-ext-coach-color: var(--lr-ext-purple);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='16'] {
+  --lr-ext-coach-color: var(--lr-ext-green);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='17'] {
+  --lr-ext-coach-color: var(--lr-ext-orange);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='18'] {
+  --lr-ext-coach-color: var(--lr-ext-pink);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='19'] {
+  --lr-ext-coach-color: var(--lr-ext-blue);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='20'] {
+  --lr-ext-coach-color: var(--lr-ext-cyan);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='21'] {
+  --lr-ext-coach-color: var(--lr-ext-purple);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='22'] {
+  --lr-ext-coach-color: var(--lr-ext-yellow);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='23'] {
+  --lr-ext-coach-color: var(--lr-ext-red);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='24'] {
+  --lr-ext-coach-color: var(--lr-ext-cyan);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='25'] {
+  --lr-ext-coach-color: var(--lr-ext-green);
+}
+
+.lr-ext-coach-choice[data-lr-ext-coach-choice='26'] {
+  --lr-ext-coach-color: var(--lr-ext-yellow);
 }
 
 /* A phone's stage: a smaller coach, still on the stage's edge with its words beside it. */

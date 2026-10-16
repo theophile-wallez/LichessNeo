@@ -84,7 +84,7 @@ main:is(.tour, .swiss) .podium .trophy::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--lr-ext-avatar-coach) center bottom / contain no-repeat;
+  background: var(--lr-ext-avatar-coach) center bottom / auto 100% no-repeat;
   mask-image: linear-gradient(#000 85%, transparent);
 }
 

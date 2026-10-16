@@ -108,7 +108,7 @@ html[data-lr-ext-pdash] .puzzle-dashboard .box__top h1 {
   width: 124px;
   /* The stills' own (img/coaches): the live mascot lands on its still only in this box. */
   aspect-ratio: 124 / 114;
-  background: var(--lr-ext-avatar-coach) center bottom / contain no-repeat;
+  background: var(--lr-ext-avatar-coach) center bottom / auto 100% no-repeat;
   cursor: pointer;
 }
 

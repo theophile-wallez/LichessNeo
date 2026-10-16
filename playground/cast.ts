@@ -1,12 +1,12 @@
 import { z } from 'zod/mini';
 import { COACH_COUNT, ROBOT_COACH, ROBOT_TIERS } from '#shared/coach.ts';
 import type { Character } from '#content/coach/mascot/cast/character.ts';
-import { coachCharacter } from '#content/coach/mascot/cast/characters.ts';
+import { coachCharacter } from '#content/coach/mascot/cast/cast.ts';
 import { FINISHES } from '#content/coach/mascot/cast/finishes.ts';
 import { robotFor } from '#content/coach/mascot/cast/robot.ts';
 
-// Who can step on the playground's stage: the coaches by their numbers, then
-// the robot in each of its colors, and what the panel may change about them.
+// Who can step on the playground's stage: the coaches by their numbers and the
+// robot in each of its colors, and what the panel may change about them.
 
 export interface Actor {
   readonly id: string;
@@ -54,8 +54,7 @@ export const EditsSchema = z.object({
 });
 export type Edits = z.infer<typeof EditsSchema>;
 
-/** The character with `edits` applied. */
-export function edited(character: Character, edits: Edits): Character {
+function editedLook(character: Character, edits: Edits): Character {
   const { colors } = character;
   // A robot's lights need a solid skin: one with lights never takes fur.
   const furless = edits.skin === 'fur' && colors.light !== undefined;
@@ -76,6 +75,13 @@ export function edited(character: Character, edits: Edits): Character {
       brows: { ...character.face.brows, color: edits.brows ?? character.face.brows.color },
     },
   };
+}
+
+/** The character with `edits` applied, both ways it may look. */
+export function edited(character: Character, edits: Edits): Character {
+  const one = editedLook(character, edits);
+  const { facingLeft } = character;
+  return facingLeft ? { ...one, facingLeft: editedLook(facingLeft, edits) } : one;
 }
 
 const round = (value: number): number => Math.round(value * 100) / 100;

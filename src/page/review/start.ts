@@ -6,7 +6,7 @@ import { createSession, type Mode, type Session } from './session.ts';
 import { watchChips } from './view/chips.ts';
 import { watchClicks } from './view/clicks.ts';
 import { createElements } from './view/elements.ts';
-import { render, setMode } from './view/render.ts';
+import { keepMarked, render, setMode } from './view/render.ts';
 import { refitStream } from './view/stream.ts';
 import { watchCostTips } from './view/cost-tip.ts';
 import { watchTips } from './view/tooltip.ts';
@@ -46,6 +46,7 @@ export function createReview(analysis: Analysis): Session {
 // variant, a game without moves) would show an empty panel.
 function run(session: Session, mode: Mode): void {
   setMode(session, mode);
+  keepMarked(session);
   setInterval(() => render(session), RENDER_MS);
   let lastWidth = window.innerWidth;
   const refit = (): void => {

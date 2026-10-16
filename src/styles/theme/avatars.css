@@ -4,7 +4,7 @@
 
 [data-lr-ext-avatar-coach] {
   --lr-ext-avatar:
-    var(--lr-ext-avatar-coach) center bottom / 100% auto no-repeat,
+    var(--lr-ext-avatar-coach) center bottom / 150% auto no-repeat,
     radial-gradient(circle at 22% 12%, #ffffff47, transparent 58%),
     linear-gradient(145deg, var(--lr-ext-avatar-from), var(--lr-ext-avatar-to));
 }
@@ -40,7 +40,7 @@
 }
 /* The computer's robot, in Stockfish's blue (#shared/coach.ts). */
 [data-lr-ext-avatar-coach='8'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
 }
 [data-lr-ext-avatar-coach='9'] {
   --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
@@ -59,6 +59,42 @@
 }
 [data-lr-ext-avatar-coach='14'] {
   --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+}
+[data-lr-ext-avatar-coach='15'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
+}
+[data-lr-ext-avatar-coach='16'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
+}
+[data-lr-ext-avatar-coach='17'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
+}
+[data-lr-ext-avatar-coach='18'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
+}
+[data-lr-ext-avatar-coach='19'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
+}
+[data-lr-ext-avatar-coach='20'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
+}
+[data-lr-ext-avatar-coach='21'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
+}
+[data-lr-ext-avatar-coach='22'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
+}
+[data-lr-ext-avatar-coach='23'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
+}
+[data-lr-ext-avatar-coach='24'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
+}
+[data-lr-ext-avatar-coach='25'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
+}
+[data-lr-ext-avatar-coach='26'] {
+  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
 }
 
 [data-lr-ext-avatar-color='blue'] {

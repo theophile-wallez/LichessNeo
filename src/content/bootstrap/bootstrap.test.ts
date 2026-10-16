@@ -60,6 +60,12 @@ function nowExpected({ stored, random, dataset, storedAfter }: (typeof legacy.co
 }
 
 describe('coach choice', () => {
+  beforeEach(() => {
+    vi.stubGlobal('chrome', {
+      runtime: { getURL: (path: string) => `chrome-extension://id/${path}` },
+    });
+  });
+
   it.each(legacy.coach)('reads $stored (random $random) as the original did', legacyCase => {
     const { stored, random } = legacyCase;
     const { dataset, storedAfter } = nowExpected(legacyCase);
@@ -76,6 +82,23 @@ describe('coach choice', () => {
     chooseCoach(ROBOT_COACH);
     expect(document.documentElement.dataset['lrExtCoach']).toBe(String(ROBOT_COACH));
     expect(localStorage.getItem('lr-ext-coach')).toBe(String(ROBOT_COACH));
+  });
+
+  it('decodes the coach’s still at once, so a card drawn later shows it in its first frame', () => {
+    const decoded: string[] = [];
+    vi.spyOn(HTMLImageElement.prototype, 'decode').mockImplementation(function (
+      this: HTMLImageElement,
+    ) {
+      decoded.push(this.src);
+      return Promise.resolve();
+    });
+    localStorage.setItem('lr-ext-coach', '12');
+    coachChoice.start();
+    chooseCoach(20);
+    expect(decoded).toEqual([
+      'chrome-extension://id/img/coaches/mascot-12.webp',
+      'chrome-extension://id/img/coaches/mascot-20.webp',
+    ]);
   });
 });
 

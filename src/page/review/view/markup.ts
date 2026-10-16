@@ -69,3 +69,9 @@ export const evalChip = (record: PositionRecord | null | undefined): SafeHtml =>
 
 export const bubbleTitle = (text: string): SafeHtml =>
   html`<p class="lr-ext-bubble__title">${text}</p>`;
+
+/** The coach waiting for the engine: the verdict's row, a spinner for its icon, lines for its comment. */
+export const thinkingMarkup = (text: string): SafeHtml =>
+  html`<div class="lr-ext-bubble__row"><span class="lr-ext-cls-icon lr-ext-bubble__spin" aria-hidden="true"></span>
+      <p class="lr-ext-bubble__title">${text}</p></div>
+    <div class="lr-ext-bubble__wait" aria-hidden="true"><span></span><span></span></div>`;

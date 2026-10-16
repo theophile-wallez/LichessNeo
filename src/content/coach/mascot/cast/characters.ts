@@ -1,13 +1,6 @@
-import { ROBOT_COACH } from '#shared/coach.ts';
 import { FurMode } from '#content/coach/mascot/fur/fur.ts';
 import { antennae, eyeBumps, frogSurface, gills, tentacles, wings } from './appendages.ts';
-import { cactus } from './cactus.ts';
 import type { BodyLook, Character } from './character.ts';
-import { ghost } from './ghost.ts';
-import { mushroom } from './mushroom.ts';
-import { rook } from './rook.ts';
-import { snail } from './snail.ts';
-import { toast } from './toast.ts';
 import { collar, crest, tail, tailPlates, together } from './parts.ts';
 import {
   BODY_BOTTOM,
@@ -18,8 +11,7 @@ import {
   tailGeometry,
 } from './shapes.ts';
 
-// The Game Review's coaches: the seven animals (1 to 7), the computer's robot (8, robot.ts),
-// then the coaches in other shapes than the egg (9 to 14), each in its own file.
+// The seven animals, the first coaches (cast.ts): eggs with ears, tails and arms of their own.
 
 const EGG: BodyLook = {
   geometry: () => bodyGeometry(),
@@ -36,7 +28,7 @@ const NO_STRIPES = [0, 0, 0] as const;
 
 const pawn: Character = {
   name: 'Pion',
-  skin: 'fur',
+  skin: 'clay',
   colors: { coat: '#f1e9da', front: '#fbf7ef', accent: '#ff7a5c' },
   frontMask: [0.5, 0.86],
   stripes: NO_STRIPES,
@@ -59,7 +51,7 @@ const pawn: Character = {
 
 const fennec: Character = {
   name: 'Fennec',
-  skin: 'fur',
+  skin: 'clay',
   colors: { coat: '#e9b679', front: '#fff4e4', accent: '#f2a99a' },
   frontMask: [0.5, 0.86],
   stripes: NO_STRIPES,
@@ -94,7 +86,7 @@ const fennec: Character = {
 
 const dino: Character = {
   name: 'Dino',
-  skin: 'fur',
+  skin: 'clay',
   colors: { coat: '#5ccf9c', front: '#fff1b5', accent: '#ff8a66' },
   frontMask: [0.42, 0.9],
   stripes: NO_STRIPES,
@@ -124,7 +116,7 @@ const dino: Character = {
 
 const axolotl: Character = {
   name: 'Axolotl',
-  skin: 'fur',
+  skin: 'clay',
   colors: { coat: '#ff8fbf', front: '#ffc7de', accent: '#d9307a' },
   frontMask: [0.55, 0.9],
   stripes: NO_STRIPES,
@@ -153,7 +145,7 @@ const axolotl: Character = {
 
 const frog: Character = {
   name: 'Grenouille',
-  skin: 'fur',
+  skin: 'clay',
   colors: { coat: '#7ad650', front: '#eef8b8', accent: '#ff6f91' },
   frontMask: [0.42, 0.9],
   stripes: NO_STRIPES,
@@ -176,7 +168,7 @@ const frog: Character = {
 
 const bee: Character = {
   name: 'Abeille',
-  skin: 'fur',
+  skin: 'clay',
   colors: { coat: '#ffc93c', front: '#ffe28c', accent: '#3b2a20' },
   frontMask: [0.5, 0.86],
   stripes: [2.6, -9, 0.26],
@@ -197,7 +189,7 @@ const bee: Character = {
 
 const octopus: Character = {
   name: 'Poulpe',
-  skin: 'fur',
+  skin: 'clay',
   colors: { coat: '#2bbfd4', front: '#9fe7ef', accent: '#ff8fb1' },
   frontMask: [0.55, 0.9],
   stripes: NO_STRIPES,
@@ -216,27 +208,5 @@ const octopus: Character = {
   extras: tentacles,
 };
 
-/** Every coach but the robot, in the order of their numbers. */
-export const CAST: readonly Character[] = [
-  pawn,
-  fennec,
-  dino,
-  axolotl,
-  frog,
-  bee,
-  octopus,
-  mushroom,
-  snail,
-  ghost,
-  cactus,
-  toast,
-  rook,
-];
-
-/** The coach of number `coach`, the robot's aside: the ones after it come one place earlier. */
-export function coachCharacter(coach: number): Character {
-  const index = coach > ROBOT_COACH ? coach - 2 : coach - 1;
-  const character = CAST[index] ?? CAST[0];
-  if (!character) throw new Error('the cast is empty');
-  return character;
-}
+/** The seven animals, coaches 1 to 7. */
+export const ANIMALS: readonly Character[] = [pawn, fennec, dino, axolotl, frog, bee, octopus];

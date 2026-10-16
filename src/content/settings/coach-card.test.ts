@@ -40,8 +40,11 @@ const i18n = vi.hoisted(() => {
   return messages;
 });
 
+// Picking a coach decodes its still (bootstrap/coach-choice.ts).
+const runtime = { getURL: (path: string): string => `chrome-extension://id/${path}` };
+
 beforeEach(() => {
-  vi.stubGlobal('chrome', { i18n });
+  vi.stubGlobal('chrome', { i18n, runtime });
   vi.stubGlobal('requestIdleCallback', (callback: () => void) => setTimeout(callback, 0));
   localStorage.setItem('lr-ext-coach', '3');
   mascot.shown.splice(0);
@@ -73,7 +76,7 @@ describe('the settings’ coach card', () => {
     expect(coachName(1)).toBe('coachPawn');
     expect(coachName(8)).toBe('coachRobot');
     expect(coachName(9)).toBe('coachMushroom');
-    expect(coachName(15)).toBe('coachPawn');
+    expect(coachName(27)).toBe('coachPawn');
     const card = buildCoachCard().element;
     expect(
       queryAll(card, '.lr-ext-coach-choice__name', HTMLElement).map(name => name.textContent),
@@ -92,6 +95,18 @@ describe('the settings’ coach card', () => {
       'coachCactus',
       'coachToast',
       'coachRook',
+      'coachKnight',
+      'coachBishop',
+      'coachKing',
+      'coachQueen',
+      'coachBunny',
+      'coachCat',
+      'coachDragon',
+      'coachBoiledEgg',
+      'coachSoda',
+      'coachCloud',
+      'coachSlime',
+      'coachStar',
     ]);
   });
 

@@ -39,7 +39,8 @@
   bottom: 16px;
   aspect-ratio: 250 / 270;
   max-width: 34%;
-  background: bottom center / contain no-repeat;
+  /* The still's middle, the avatar's box, across the width; its arms' room spills past it. */
+  background: bottom center / 150% auto no-repeat;
   pointer-events: none;
 }
 
@@ -65,7 +66,7 @@ html[data-lr-ext-coach='7'] .lr-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
 }
 html[data-lr-ext-coach='8'] .lr-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
 }
 html[data-lr-ext-coach='9'] .lr-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
@@ -84,6 +85,42 @@ html[data-lr-ext-coach='13'] .lr-ext-hero__coach--still {
 }
 html[data-lr-ext-coach='14'] .lr-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+}
+html[data-lr-ext-coach='15'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
+}
+html[data-lr-ext-coach='16'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
+}
+html[data-lr-ext-coach='17'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
+}
+html[data-lr-ext-coach='18'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
+}
+html[data-lr-ext-coach='19'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
+}
+html[data-lr-ext-coach='20'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
+}
+html[data-lr-ext-coach='21'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
+}
+html[data-lr-ext-coach='22'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
+}
+html[data-lr-ext-coach='23'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
+}
+html[data-lr-ext-coach='24'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
+}
+html[data-lr-ext-coach='25'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
+}
+html[data-lr-ext-coach='26'] .lr-ext-hero__coach--still {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
 }
 
 /* Live, its canvas spills past the sides so arms and tails show, and a click makes it react. */

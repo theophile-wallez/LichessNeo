@@ -12,7 +12,8 @@ const STILL_CLASS = 'lr-ext-hero__coach--still';
 export async function mountHeroCoach(host: HTMLElement): Promise<void> {
   const mountMascot = await loadMascots();
   if (!host.isConnected) return;
-  const mascot = mountMascot?.(host, { framing: 'full' });
+  // Large on the page's right, it looks into the page.
+  const mascot = mountMascot?.(host, { framing: 'full', facing: 'left' });
   if (!mascot) {
     host.classList.toggle(STILL_CLASS, true);
     return;

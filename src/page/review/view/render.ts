@@ -90,6 +90,19 @@ function markMode(mode: Mode): void {
   for (const each of MODES) root.classList.toggle(`lr-ext-review-${each}`, each === mode);
 }
 
+/** Marks <html> again as soon as Lichess rewrites its class (signed out, once it knows the
+ * device's scheme), before the frame is drawn rather than on the next pass. */
+export function keepMarked(session: Session): void {
+  const root = document.documentElement;
+  const marked = (): boolean =>
+    root.classList.contains('lr-ext-review') &&
+    root.classList.contains(`lr-ext-review-${session.view.mode}`);
+  // Marking changes the class too: only a rewrite that dropped the marks needs them again.
+  new MutationObserver(() => {
+    if (!marked()) markMode(session.view.mode);
+  }).observe(root, { attributes: true, attributeFilter: ['class'] });
+}
+
 export function render(session: Session, force = false): void {
   const analysis = pageAnalysis();
   if (!analysis || !attach(session.elements)) return;

@@ -1,5 +1,5 @@
 import type { Feature } from '#shared/features.ts';
-import { pollUntil } from '#shared/poll.ts';
+import { watchUntil } from '#shared/poll.ts';
 import { GAME_PAGE } from '#page/lichess/pages.ts';
 import { createReview, linksToMove, readyAnalysis, startReview } from './start.ts';
 
@@ -13,11 +13,13 @@ function start(): void {
   const { pathname } = location;
   if (!GAME_PAGE.test(pathname) && !ANALYSIS_BOARD.test(pathname)) return;
   const onMove = linksToMove();
-  // Lichess builds its analysis controller after our script starts.
-  pollUntil(readyAnalysis, analysis => startReview(createReview(analysis), analysis, onMove), {
-    intervalMs: 100,
-    giveUpMs: 30_000,
-  });
+  // Lichess builds its analysis controller after our script starts. The review
+  // starts as it draws, so its own panel never shows first.
+  watchUntil(
+    readyAnalysis,
+    analysis => startReview(createReview(analysis), analysis, onMove),
+    30_000,
+  );
 }
 
 export const review: Feature = { name: 'game review', start };

@@ -85,13 +85,16 @@ export interface InterfaceStrings {
   readonly coach: string;
   readonly intro: string;
   readonly engineError: string;
-  readonly liveIntro: string;
+  /** The free board's first words, before a move: a line, then what the coach will do. */
+  readonly liveIntro: { readonly title: string; readonly sub: string };
   readonly thinking: string;
   readonly startPosition: string;
   readonly more: string;
   readonly less: string;
   readonly gameRating: string;
   readonly gameRatingTip: string;
+  /** The verdict's score's tooltip: how the move changed it. */
+  readonly scoreChange: (before: string, after: string) => string;
   /** Explain's hint for a move that wasn't best. */
   readonly bestWas: (move: string) => string;
   /** A move's cost bar, by the share of the mover's winning chances it gave away. */

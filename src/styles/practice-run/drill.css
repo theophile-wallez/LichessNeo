@@ -33,7 +33,7 @@
     height: var(--lr-ext-coach-h);
     /* Longhands: the shorthand would reset the image set below. */
     background-position: bottom center;
-    background-size: contain;
+    background-size: auto 100%;
     background-repeat: no-repeat;
   }
 
@@ -59,7 +59,7 @@
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
   }
   html[data-lr-ext-coach='8'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
   }
   html[data-lr-ext-coach='9'] main.analyse .analyse__underboard::before {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
@@ -78,6 +78,42 @@
   }
   html[data-lr-ext-coach='14'] main.analyse .analyse__underboard::before {
     background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+  }
+  html[data-lr-ext-coach='15'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
+  }
+  html[data-lr-ext-coach='16'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
+  }
+  html[data-lr-ext-coach='17'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
+  }
+  html[data-lr-ext-coach='18'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
+  }
+  html[data-lr-ext-coach='19'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
+  }
+  html[data-lr-ext-coach='20'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
+  }
+  html[data-lr-ext-coach='21'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
+  }
+  html[data-lr-ext-coach='22'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
+  }
+  html[data-lr-ext-coach='23'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
+  }
+  html[data-lr-ext-coach='24'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
+  }
+  html[data-lr-ext-coach='25'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
+  }
+  html[data-lr-ext-coach='26'] main.analyse .analyse__underboard::before {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
   }
 
   main.analyse .analyse__underboard .feedback {

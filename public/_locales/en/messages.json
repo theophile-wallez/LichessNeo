@@ -263,6 +263,54 @@
     "message": "Rook",
     "description": "A coach's name: a chess rook."
   },
+  "coachKnight": {
+    "message": "Knight",
+    "description": "A coach's name: a chess knight, a horse."
+  },
+  "coachBishop": {
+    "message": "Bishop",
+    "description": "A coach's name: a chess bishop."
+  },
+  "coachKing": {
+    "message": "King",
+    "description": "A coach's name: a chess king."
+  },
+  "coachQueen": {
+    "message": "Queen",
+    "description": "A coach's name: a chess queen."
+  },
+  "coachBunny": {
+    "message": "Bunny",
+    "description": "A coach's name: a bunny."
+  },
+  "coachCat": {
+    "message": "Cat",
+    "description": "A coach's name: a cat."
+  },
+  "coachDragon": {
+    "message": "Dragon",
+    "description": "A coach's name: a little dragon."
+  },
+  "coachBoiledEgg": {
+    "message": "Egg",
+    "description": "A coach's name: a boiled egg in its cup."
+  },
+  "coachSoda": {
+    "message": "Soda",
+    "description": "A coach's name: a cup of soda."
+  },
+  "coachCloud": {
+    "message": "Cloud",
+    "description": "A coach's name: a little cloud."
+  },
+  "coachSlime": {
+    "message": "Slime",
+    "description": "A coach's name: a drop of slime."
+  },
+  "coachStar": {
+    "message": "Star",
+    "description": "A coach's name: a star."
+  },
   "settingUiSounds": {
     "message": "Interface sounds",
     "description": "The setting that turns the extension's interface sounds on and off."

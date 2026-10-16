@@ -109,6 +109,8 @@ export interface FurOptions {
   readonly tipFrom?: number;
   /** A paw whose palm is bare. */
   readonly palm?: boolean;
+  /** Its own accent, in place of the character's: the knight's mane. */
+  readonly accent?: string;
 }
 
 export interface FurPart {
@@ -157,6 +159,10 @@ export function createFur(
     defines: { STRAND_CELLS: STRAND_CELLS.toFixed(1), STRAND_RANGE: STRAND_RANGE.toFixed(2) },
     uniforms: {
       ...look,
+      ...(options.accent && {
+        uAccent: { value: new Color(options.accent) },
+        uAccentTip: { value: tint(options.accent, 0.35) },
+      }),
       uLength: { value: length },
       uPuff: puff,
       uBend: { value: bend },

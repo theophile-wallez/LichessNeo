@@ -1,3 +1,4 @@
+import type { CoachMood } from '#shared/coach.ts';
 import {
   Group,
   Mesh,
@@ -10,6 +11,7 @@ import {
 import { ARM_LENGTH, armGeometry, footGeometry } from '#content/coach/mascot/cast/shapes.ts';
 import type { Lights } from '#content/coach/mascot/cast/shell.ts';
 import { FurMode, type FurModeValue, type FurOptions } from '#content/coach/mascot/fur/fur.ts';
+import { MOODS } from '#content/coach/mascot/moods.ts';
 import { Spring } from '#content/coach/mascot/motion.ts';
 
 // The mascot's ears, arms and feet, built on its body.
@@ -25,6 +27,8 @@ export interface EarsLook {
   readonly fur: number;
   /** A pale inner ear. */
   readonly inner: boolean;
+  /** Where the head they stand on faces, in radians about the vertical: a head turned three quarters. */
+  readonly turn?: number;
 }
 
 export interface ArmsLook {
@@ -73,6 +77,9 @@ const SIDES = [-1, 1] as const;
 
 export function buildEars(rig: RigBuilder, ears: EarsLook | null): Ear[] {
   if (!ears) return [];
+  const head = new Group();
+  head.rotation.y = ears.turn ?? 0;
+  rig.body.add(head);
   return SIDES.map(side => {
     const pivot = new Group();
     const [x, y, z] = ears.position;
@@ -96,16 +103,17 @@ export function buildEars(rig: RigBuilder, ears: EarsLook | null): Ear[] {
       inner.position.set(0, ears.lift + 0.04, 0.05);
       pivot.add(inner);
     }
-    rig.body.add(pivot);
+    head.add(pivot);
     return { pivot, side, tilt: ears.tilt, twitch: new Spring(260, 9) };
   });
 }
 
+// In an arc round the pad's end: the middle toes farthest from it.
 const TOES: readonly (readonly [number, number])[] = [
-  [-0.075, -0.04],
-  [-0.026, -0.025],
-  [0.026, -0.025],
-  [0.075, -0.04],
+  [-0.075, -0.012],
+  [-0.026, -0.038],
+  [0.026, -0.038],
+  [0.075, -0.012],
 ];
 
 function paw(arm: Group, material: MeshStandardMaterial): void {
@@ -171,4 +179,40 @@ export function palmForward(direction: Vector3, into: Matrix4): Matrix4 {
   facing.addScaledVector(along, -facing.dot(along)).normalize();
   const side = new Vector3().crossVectors(along, facing);
   return into.makeBasis(side, along, facing);
+}
+
+/** Leans the ears out as they rest, drooped as the mood has them, a twitch springing back. */
+export function swayEars(ears: readonly Ear[], droop: number, dt: number): void {
+  for (const { pivot, side, tilt, twitch } of ears) {
+    pivot.rotation.z = -side * (tilt + 0.5 * droop + twitch.step(dt) * 0.1);
+    pivot.rotation.x = -Math.max(droop, 0) * 0.45;
+  }
+}
+
+export interface ArmsMotion {
+  readonly time: number;
+  readonly dt: number;
+  readonly mood: CoachMood;
+  /** How much the left arm waves hello, from 0 to 1. */
+  readonly wave: number;
+  /** The walk's sway, from -1 to 1. */
+  readonly swing: number;
+}
+
+/** Points the arms as the mood holds them, flapping with delight, swinging as it walks. */
+export function aimArms(arms: readonly Arm[], motion: ArmsMotion, rotation: Matrix4): void {
+  const { time, dt, mood, wave, swing } = motion;
+  const pose = MOODS[mood].arms;
+  const wanted = new Vector3();
+  for (const arm of arms) {
+    wanted.fromArray(arm.side < 0 ? pose.left : pose.right);
+    if (mood === 'delight') wanted.x += Math.sin(time * 15 + arm.side) * 0.18;
+    wanted.z += arm.side * swing * 0.4;
+    if (arm.side < 0 && wave > 0.01) {
+      const angle = -0.5 + Math.sin(time * 11) * 0.32;
+      wanted.lerp(new Vector3(Math.sin(angle), Math.cos(angle), 0.25), wave);
+    }
+    arm.direction.lerp(wanted.normalize(), 1 - Math.exp(-10 * dt)).normalize();
+    arm.pivot.quaternion.setFromRotationMatrix(palmForward(arm.direction, rotation));
+  }
 }

@@ -26,9 +26,17 @@
 .lr-ext-coach__face {
   position: absolute;
   inset: 0;
-  background: bottom center / contain no-repeat;
   transform-origin: 50% 100%;
   animation: lr-ext-breathe 3.5s ease-in-out infinite;
+}
+
+/* The still (img/coaches), a quarter of the avatar's width wider on each side for the arms,
+   which the live canvas shows too. */
+.lr-ext-coach__face::before {
+  content: '';
+  position: absolute;
+  inset: 0 -25%;
+  background: bottom center / auto 100% no-repeat;
 }
 
 @keyframes lr-ext-breathe {
@@ -37,47 +45,83 @@
   }
 }
 
-.lr-ext-coach__avatar[data-lr-ext-coach-id='1'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='1'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='2'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='2'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='3'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='3'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='4'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='4'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='5'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='5'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='6'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='6'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='7'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='7'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='8'] .lr-ext-coach__face {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
+.lr-ext-coach__avatar[data-lr-ext-coach-id='8'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='9'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='9'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='10'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='10'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='11'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='11'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='12'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='12'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='13'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='13'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
 }
-.lr-ext-coach__avatar[data-lr-ext-coach-id='14'] .lr-ext-coach__face {
+.lr-ext-coach__avatar[data-lr-ext-coach-id='14'] .lr-ext-coach__face::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='15'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='16'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='17'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='18'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='19'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='20'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='21'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='22'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='23'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='24'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='25'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
+}
+.lr-ext-coach__avatar[data-lr-ext-coach-id='26'] .lr-ext-coach__face::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
 }
 
 /* The live mascot (content/coach/): its canvas over the still, which it hides once drawn.
@@ -91,8 +135,11 @@
 }
 
 .lr-ext-coach__avatar--live .lr-ext-coach__face {
-  background-image: none !important;
   animation: none;
+}
+
+.lr-ext-coach__avatar--live .lr-ext-coach__face::before {
+  content: none;
 }
 
 /* The marks over the head (sparkles, "?", "!", a drop) in the class's color, popping in

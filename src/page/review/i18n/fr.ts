@@ -84,7 +84,10 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   coach: 'Changer de coach',
   intro: 'Débriefons cette partie !',
   engineError: "Le moteur n'a pas pu démarrer.",
-  liveIntro: 'Joue un coup, je te dirai ce que j’en pense.',
+  liveIntro: {
+    title: 'Joue un coup.',
+    sub: 'Je te dirai si c’est le meilleur, une imprécision ou une gaffe.',
+  },
   thinking: 'Voyons ce coup…',
   startPosition: 'Position de départ',
   more: 'Voir tous les coups',
@@ -92,6 +95,7 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   gameRating: 'Classement de la partie',
   gameRatingTip: 'Donne une estimation du classement d’un joueur d’après une seule partie.',
   bestWas: move => `Le meilleur coup était ${move}.`,
+  scoreChange: (before, after) => `Avant le coup\u00a0: ${before}. Après\u00a0: ${after}.`,
   cost: percent => `−${percent} % de chances de gain`,
   lines: {
     best: line => `La meilleure suite était ${line}.`,

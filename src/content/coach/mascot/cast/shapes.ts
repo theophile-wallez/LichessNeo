@@ -13,7 +13,7 @@ import { mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 // The mascots' shapes: spheres and lathes bent into bodies, ears, limbs and tails.
 
-const { smoothstep, clamp } = MathUtils;
+const { smoothstep, clamp, lerp } = MathUtils;
 
 // Welds the UV seam so normals, and the fur pushed along them, don't split.
 function weld(geometry: BufferGeometry): BufferGeometry {
@@ -21,6 +21,12 @@ function weld(geometry: BufferGeometry): BufferGeometry {
   const welded = mergeVertices(geometry, 1e-4);
   welded.computeVertexNormals();
   return welded;
+}
+
+/** A polynomial smooth minimum: the union of two distances, its crease rounded `melt` wide. */
+export function meltedMin(first: number, second: number, melt: number): number {
+  const overlap = Math.max(melt - Math.abs(first - second), 0) / melt;
+  return Math.min(first, second) - (overlap * overlap * melt) / 4;
 }
 
 /** Moves each vertex, then welds. */
@@ -71,6 +77,15 @@ export type Profile = readonly (readonly [number, number])[];
 export function latheGeometry(profile: Profile, columns = 96): BufferGeometry {
   const points = new SplineCurve(profile.map(([x, y]) => new Vector2(x, y))).getPoints(64);
   return weld(new LatheGeometry(points, columns));
+}
+
+/** How far `side`, points up a profile, is from its middle at height `y`: about where its curve
+ * passes, straight between its points. */
+export function profileRadius(side: Profile, y: number): number {
+  const above = side.findIndex(([, height]) => height >= y);
+  const [low, high] = [side[above - 1], side[above === -1 ? side.length - 1 : above]];
+  if (!low || !high || above === -1) return high?.[0] ?? 0;
+  return lerp(low[0], high[0], (y - low[1]) / (high[1] - low[1]));
 }
 
 const PAWN_PROFILE: readonly (readonly [number, number])[] = [

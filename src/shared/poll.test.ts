@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { pollUntil } from './poll.ts';
+import { flush } from './testing/timers.ts';
+import { pollUntil, watchUntil } from './poll.ts';
 
 beforeEach(() => vi.useFakeTimers({ now: 0, toFake: ['setTimeout', 'Date'] }));
 afterEach(() => vi.useRealTimers());
@@ -45,5 +46,46 @@ describe('pollUntil', () => {
     worthWaiting = false;
     vi.advanceTimersByTime(5000);
     expect(read).toHaveBeenCalledTimes(4);
+  });
+});
+
+// On real timers but where it gives up: the page's changes are seen a task later.
+describe('watchUntil', () => {
+  beforeEach(() => vi.useRealTimers());
+  afterEach(() => document.body.replaceChildren());
+
+  it('hands over a value there at once', () => {
+    const found = vi.fn<(value: string) => void>();
+    watchUntil(() => 'now', found, 1000);
+    expect(found).toHaveBeenCalledExactlyOnceWith('now');
+  });
+
+  it('reads again as the page changes, until the value comes, then stops', async () => {
+    const read = vi.fn<() => HTMLElement | null>(() => document.querySelector('main'));
+    const found = vi.fn<(value: HTMLElement) => void>();
+    watchUntil(read, found, 1000);
+    document.body.append(document.createElement('div'));
+    await flush();
+    expect(found).not.toHaveBeenCalled();
+    const main = document.createElement('main');
+    document.body.append(main);
+    await flush();
+    expect(found).toHaveBeenCalledExactlyOnceWith(main);
+    const reads = read.mock.calls.length;
+    document.body.append(document.createElement('div'));
+    await flush();
+    expect(read).toHaveBeenCalledTimes(reads);
+  });
+
+  it('gives up once the time is out', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout'] });
+    const read = vi.fn<() => null>(() => null);
+    watchUntil(read, () => {}, 1000);
+    vi.advanceTimersByTime(1000);
+    vi.useRealTimers();
+    const reads = read.mock.calls.length;
+    document.body.append(document.createElement('div'));
+    await flush();
+    expect(read).toHaveBeenCalledTimes(reads);
   });
 });

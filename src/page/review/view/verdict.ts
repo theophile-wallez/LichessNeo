@@ -13,7 +13,9 @@ import { explanation } from '#page/review/coach/explanation.ts';
 import { findings, type Theme, themesOf } from '#page/review/coach/fact.ts';
 import { type CommentPart, commentMarkup, streamFor } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
+import { formatEval } from '#page/review/evaluation/format.ts';
 import { forColor } from '#page/review/evaluation/score.ts';
+import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import { evalChip } from './markup.ts';
 
@@ -108,9 +110,11 @@ function tagsMarkup(session: Session, { move, themes }: CoachComment): SafeHtml 
   return tags.length > 0 ? html`<div class="lr-ext-bubble__tags">${tags}</div>` : html``;
 }
 
-/** How the score moved: before, then after the move. */
-const scoreChange = (move: JudgedMove): SafeHtml =>
-  html`<span class="lr-ext-bubble__evals">${evalChip(move.before)}<span class="lr-ext-bubble__to">→</span>${evalChip(move.after)}</span>`;
+/** The score after the move; how it moved in its tooltip. */
+function scoreChange(move: JudgedMove, language: ReviewLanguage): SafeHtml {
+  const tip = language.ui.scoreChange(formatEval(move.before), formatEval(move.after));
+  return html`<span class="lr-ext-bubble__evals" data-lr-ext-tip="${tip}" aria-label="${tip}">${evalChip(move.after)}</span>`;
+}
 
 /**
  * The verdict's bubble, its comment typed out as far as the typing has got.
@@ -126,7 +130,7 @@ export function verdictMarkup(
   const said = commentMarkup(parts, { stream: stream.state, language });
   return html`<div class="lr-ext-bubble__row">${classIcon(move.moveClass)}
       <p class="lr-ext-bubble__title">${verdictTitle(move.moveClass, move.san, language)}</p>
-      ${scoreChange(move)}</div>
+      ${scoreChange(move, language)}</div>
     <div class="lr-ext-bubble__body"><p class="lr-ext-bubble__sub">${said}</p>
       ${tagsMarkup(session, comment)}${actions}</div>`;
 }

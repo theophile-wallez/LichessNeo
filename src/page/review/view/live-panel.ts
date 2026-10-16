@@ -3,7 +3,7 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import type { Session } from '#page/review/session.ts';
 import { avatarMarkup, takeReaction } from './coach-avatar.ts';
-import { bubbleTitle } from './markup.ts';
+import { bubbleTitle, thinkingMarkup } from './markup.ts';
 import { type CoachComment, commentOn, followComment, verdictMarkup } from './verdict.ts';
 
 // The free analysis board: the coach judges the move on the board, over
@@ -12,8 +12,11 @@ import { type CoachComment, commentOn, followComment, verdictMarkup } from './ve
 function liveBubble(session: Session, analysis: Analysis, comment: CoachComment | null): SafeHtml {
   const { live, language } = session;
   if (live.error) return bubbleTitle(live.error);
-  if (!analysis.path) return bubbleTitle(language.ui.liveIntro);
-  if (!comment) return bubbleTitle(language.ui.thinking);
+  if (!analysis.path) {
+    const { title, sub } = language.ui.liveIntro;
+    return html`${bubbleTitle(title)}<p class="lr-ext-bubble__sub">${sub}</p>`;
+  }
+  if (!comment) return thinkingMarkup(language.ui.thinking);
   return verdictMarkup(session, comment);
 }
 
@@ -27,11 +30,14 @@ export function renderLive(session: Session, analysis: Analysis): void {
   if (comment) followComment(session, comment);
   const bubble = liveBubble(session, analysis, comment);
   const moveClass = live.error ? null : (move?.moveClass ?? null);
+  // While the engine judges the move, the coach thinks it over, as its words say.
+  const judging = !live.error && Boolean(analysis.path) && !comment;
   const avatar = avatarMarkup({
     coachId: session.coach.id,
     moveClass,
     react: takeReaction(session.coach, moveClass, analysis.path),
     label: language.ui.coach,
+    idle: judging ? 'thinking' : 'neutral',
   });
   setHtml(
     session.elements.panel,

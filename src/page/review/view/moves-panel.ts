@@ -12,7 +12,7 @@ import { avatarMarkup, takeReaction } from './coach-avatar.ts';
 import { explainHint } from './explain-hint.ts';
 import { movesGraph } from './graph.ts';
 import { momentsMarkup, momentsScroll, showMoment } from './moments.ts';
-import { bubbleTitle, evalChip, header, type IconName, svgIcon } from './markup.ts';
+import { bubbleTitle, evalChip, header, type IconName, svgIcon, thinkingMarkup } from './markup.ts';
 import { bestShown, lineShown, spokenMove, stepPath } from './navigation.ts';
 import { canRetry, type RetryOutcome, retryOutcome } from './retry.ts';
 import { retryBubble } from './retry-bubble.ts';
@@ -51,7 +51,7 @@ function bubbleMarkup(
     // No verdict yet: the move waits for the engine, as the game's own moves do
     // while the game's analysis runs.
     const error = analysis.onMainline ? view.error : live.error;
-    return bubbleTitle(error ?? ui.thinking);
+    return error === null ? thinkingMarkup(ui.thinking) : bubbleTitle(error);
   }
   return verdictMarkup(session, comment, actions);
 }

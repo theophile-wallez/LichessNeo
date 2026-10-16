@@ -6,6 +6,7 @@
     --lr-ext-gap: 24px;
     --lr-ext-bar: 0px;
     --lr-ext-coords-off: 0px;
+    --lr-ext-gauge-w: 26px;
     --lr-ext-gauge-gap: 10px;
     --lr-ext-v-room: 56px;
     /* Board sized as if the panel were at its minimum; the panel takes the rest, up to 500px. */
@@ -34,7 +35,11 @@
     --lr-ext-ctrl-h: var(--lr-ext-controls-h, 48px); /* content/layout/controls-height.ts */
 
     display: grid !important;
-    grid-template-columns: auto var(--lr-ext-board) calc(var(--lr-ext-panel-w) + var(--lr-ext-gap)) !important;
+    /* The eval bar's column is kept without one: turning the engine on doesn't move the board,
+       which chessground would go on reading where it was (it measures only on resize). */
+    grid-template-columns:
+      calc(var(--lr-ext-gauge-w) + var(--lr-ext-gauge-gap)) var(--lr-ext-board)
+      calc(var(--lr-ext-panel-w) + var(--lr-ext-gap)) !important;
     grid-template-rows:
       max(0px, calc(var(--lr-ext-stage) - var(--lr-ext-ctrl-h) - var(--lr-ext-chat-h)))
       var(--lr-ext-ctrl-h)
@@ -58,7 +63,6 @@
 
   /* Placed like the Game Review's bar (review/), which replaces it: level with the squares. */
   main.analyse .eval-gauge {
-    --lr-ext-gauge-w: 26px;
     grid-area: gauge !important;
     margin: calc(var(--lr-ext-bar) + var(--lr-ext-inset-t, 0px)) var(--lr-ext-gauge-gap)
       calc(var(--lr-ext-bar) + var(--lr-ext-coords-off) + var(--lr-ext-inset-b, 0px)) 0 !important;

@@ -1,23 +1,11 @@
-import { MathUtils, type BufferGeometry } from 'three';
 import { FurMode } from '#content/coach/mascot/fur/fur.ts';
 import type { Character } from './character.ts';
-import { reshape, softBox } from './shapes.ts';
+import { sliceGeometry, toastExtras } from './toast-parts.ts';
 
 // A slice of bread: a flat square with a domed top that overhangs its sides.
 // Its crust is the coat and its crumb the front, where the slice faces ahead.
 
-const { smoothstep } = MathUtils;
-
 const BOTTOM = -0.95;
-
-function sliceGeometry(rows = 64): BufferGeometry {
-  return reshape(softBox([0.8, 0.95, 0.36], 3.2, 0, rows), vertex => {
-    const top = smoothstep(vertex.y, 0.35, 0.95);
-    vertex.x *= 1 + 0.24 * top;
-    // The dip between the dome's two lobes.
-    vertex.y += 0.14 * top - 0.1 * top * Math.exp(-(vertex.x ** 2) / 0.04);
-  });
-}
 
 export const toast: Character = {
   name: 'Tartine',
@@ -44,5 +32,5 @@ export const toast: Character = {
   ears: null,
   arms: { position: [0.82, -0.05, 0.02], scale: 0.62, pads: null },
   feet: { position: [0.32, 0.06, 0.1], scale: 0.75, mode: FurMode.coat },
-  extras: () => null,
+  extras: toastExtras,
 };
