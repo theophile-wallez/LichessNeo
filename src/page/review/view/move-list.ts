@@ -60,13 +60,25 @@ function stripes(tree: Element): void {
 }
 
 // Marks the variations played here, which review.css shows while it hides
-// Lichess's computer lines. It's a class rather than a data attribute because
-// review.css reads it in a `:has()`, where an attribute selector slows every move.
+// Lichess's computer lines, and the computer lines they branch off, shown too as
+// the way to them. Classes rather than data attributes because review.css reads
+// `lr-ext-var` in a `:has()`, where an attribute selector slows every move.
 function ownVariations(tree: Element, analysis: Analysis): void {
-  for (const line of queryAll(tree, 'interrupt line', Element)) {
-    const path = line.querySelector('move[p]')?.getAttribute('p');
-    const own = Boolean(path) && !analysis.nodeAtPath(path ?? '').comp;
-    line.classList.toggle('lr-ext-var', own);
+  const lines = queryAll(tree, 'interrupt line', Element);
+  const own = new Set(
+    lines.filter(line => {
+      const path = line.querySelector('move[p]')?.getAttribute('p');
+      return Boolean(path) && !analysis.nodeAtPath(path ?? '').comp;
+    }),
+  );
+  const hosts = new Set<Element>();
+  for (const line of own) {
+    for (let up = line.parentElement?.closest('line'); up; up = up.parentElement?.closest('line'))
+      if (!own.has(up)) hosts.add(up);
+  }
+  for (const line of lines) {
+    line.classList.toggle('lr-ext-var', own.has(line));
+    line.classList.toggle('lr-ext-var-host', hosts.has(line));
   }
 }
 

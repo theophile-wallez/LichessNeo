@@ -20,8 +20,18 @@ html.lr-ext-review-moves
       ),
     interrupt:not(:has(line.lr-ext-var)) + index:has(+ move.empty)
   ),
-html.lr-ext-review-moves main.analyse .tview2 interrupt :is(comment, line:not(.lr-ext-var)) {
+html.lr-ext-review-moves
+  main.analyse
+  .tview2
+  interrupt
+  :is(comment, line:not(.lr-ext-var, .lr-ext-var-host)) {
   display: none !important;
+}
+
+/* A computer line that a variation of the user's branches off shows as the way to it, its
+   own moves dimmed: an empty card otherwise. */
+html.lr-ext-review-moves main.analyse .tview2 line.lr-ext-var-host > move {
+  color: var(--lr-ext-text-dim) !important;
 }
 
 /* With its comment hidden, a card keeps the neutral color, not the move's. */
