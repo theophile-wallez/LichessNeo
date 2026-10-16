@@ -17,16 +17,16 @@ and a white knob, and a single big number in the state's color.
 
 ## Play
 
-| Page              | Path          | Level | Next                                                                                                 |
-| ----------------- | ------------- | ----- | ---------------------------------------------------------------------------------------------------- |
-| Home              | `/`           | 2     | the lobby's table is still Lichess's rows; the speed cards could take the track for the day's rating |
-| Computer setup    | `/#ai`        | 3     | the reference                                                                                        |
-| Game setup        | `/#hook`      | 2     | tiles for the variant, the time control and the side over Lichess's controls; no signature yet       |
-| Game, playing     | `/<id>`       | –     | not audited yet                                                                                      |
-| Game over         | `/<id>`       | 2     | signature planned: the rating's change on the track, toward the next hundred                         |
-| Arena tournaments | `/tournament` | 2     | the leaderboard beside the schedule is a plain list                                                  |
-| Swiss tournaments | `/swiss`      | 2     |                                                                                                      |
-| Simuls            | `/simul`      | 2     | sets the tone for 2                                                                                  |
+| Page              | Path          | Level | Next                                                                                                                     |
+| ----------------- | ------------- | ----- | ------------------------------------------------------------------------------------------------------------------------ |
+| Home              | `/`           | 2     | the lobby's table is still Lichess's rows; the speed cards could take the track for the day's rating                     |
+| Computer setup    | `/#ai`        | 3     | the reference                                                                                                            |
+| Game setup        | `/#hook`      | 2     | tiles for the variant, the time control and the side over Lichess's controls, a bottom sheet on phones; no signature yet |
+| Game, playing     | `/<id>`       | –     | not audited yet                                                                                                          |
+| Game over         | `/<id>`       | 2     | signature planned: the rating's change on the track, toward the next hundred                                             |
+| Arena tournaments | `/tournament` | 2     | the leaderboard beside the schedule is a plain list                                                                      |
+| Swiss tournaments | `/swiss`      | 2     |                                                                                                                          |
+| Simuls            | `/simul`      | 2     | sets the tone for 2                                                                                                      |
 
 ## Puzzles
 
@@ -52,13 +52,13 @@ and a white knob, and a single big number in the state's color.
 
 ## Watch
 
-| Page          | Path         | Level | Next                                                                |
-| ------------- | ------------ | ----- | ------------------------------------------------------------------- |
-| Broadcasts    | `/broadcast` | 2     |                                                                     |
-| TV            | `/tv`        | 2     |                                                                     |
-| Current games | `/games`     | 1     | its channels are Lichess's list, in capitals: give them TV's column |
-| Streamers     | `/streamer`  | 2     |                                                                     |
-| Videos        | `/video`     | 2     | the tags are a long column of plain pills                           |
+| Page          | Path         | Level | Next                                                                                                  |
+| ------------- | ------------ | ----- | ----------------------------------------------------------------------------------------------------- |
+| Broadcasts    | `/broadcast` | 2     |                                                                                                       |
+| TV            | `/tv`        | 2     |                                                                                                       |
+| Current games | `/games`     | 1     | on a desktop its channels are Lichess's list, in capitals: give them TV's column (pills below 1020px) |
+| Streamers     | `/streamer`  | 2     |                                                                                                       |
+| Videos        | `/video`     | 2     | the tags are a long column of plain pills                                                             |
 
 ## Community
 

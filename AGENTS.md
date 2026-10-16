@@ -438,7 +438,8 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   are cross-origin isolated like analysis pages, so Lichess's Stockfish runs
   there too, but never before the game is over (Lichess's fair play rules).
   Lichess marks the kings with its own badges (`.cg-custom-svgs`), which ours
-  replace. In a scrolling grid, a track like `minmax(30px, auto)` never grows
+  replace. At a game's end Lichess leaves an empty `.crosstable` before the
+  new one: it's hidden, and the filled one measured. In a scrolling grid, a track like `minmax(30px, auto)` never grows
   past its minimum: put the minimum on the items.
 - **Two worlds.** `src/content` can't see page objects (`site`,
   chessground's `cgKey` expandos); `src/page` can, but can't call
@@ -697,6 +698,8 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   (sample frames with `requestAnimationFrame`, in the page), and emulate
   `dark` too. Playwright hides scrollbars in headless mode
   (`ignoreDefaultArgs: ['--hide-scrollbars']` brings them back).
+  Its phone emulation answers `hover: hover` where a phone answers `none`:
+  a hover a tap would leave stuck goes under `@media (hover: hover)`.
 - Signed in: `pnpm lichess:login` opens Playwright's Chromium on Lichess's
   sign-in page as a plain browser (its bot check fails one Playwright
   drives) for the user to sign in and close; `--cookie <lila2>` takes a
