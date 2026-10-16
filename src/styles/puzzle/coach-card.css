@@ -1,10 +1,10 @@
 /* ---- Coach card --- */
 
-/* In one panel the status card is the coach's (content/puzzle/coach.ts): the coach in its
-   bottom left corner, the badge and the words beside it, the buttons at the right. Lichess
-   redraws the card at each step, so the coach is a sibling sharing its cell of the panel's
-   grid. */
-@media (min-width: 1259.3px) {
+/* In one panel, and on phones and tablets (layout-narrow.css), the status card is the coach's
+   (content/puzzle/coach.ts): the coach in its bottom left corner, the badge and the words
+   beside it, the buttons at the right. Lichess redraws the card at each step, so the coach is
+   a sibling sharing its cell of the panel's grid. */
+@media (min-width: 1259.3px), (max-width: 1019.98px) {
   main.puzzle .puzzle__tools {
     --lr-ext-coach-h: 140px;
     --lr-ext-coach-w: calc(var(--lr-ext-coach-h) * 1.09);
@@ -175,7 +175,7 @@
   }
 }
 
-@media (max-width: 1259.29px) {
+@media (min-width: 1020px) and (max-width: 1259.29px) {
   main.puzzle .lr-ext-puzzle-coach {
     display: none;
   }

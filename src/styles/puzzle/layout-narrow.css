@@ -1,0 +1,151 @@
+/* ---- Below 1020px --- */
+
+/* Phones and tablets held upright: one column that scrolls, as on the game page
+   (game/layout-narrow.css). The board, the move buttons, the session's chips, then the panel
+   (the coach's card, the engine and the moves) and Lichess's side cards. The board leaves the
+   buttons and the coach's card on the first screen. */
+@media (max-width: 1019.98px) {
+  main.puzzle {
+    --lr-ext-board: min(
+      100vw - 16px,
+      max(280px, 100dvh - var(---site-header-height, 60px) - 264px)
+    );
+
+    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-rows: none !important;
+    grid-template-areas: 'board' 'controls' 'session' 'tools' 'side' 'kb-move' !important;
+    justify-content: center;
+    gap: 0 !important;
+    padding: 8px 0 32px;
+  }
+
+  main.puzzle .puzzle__board {
+    grid-area: board !important;
+  }
+
+  /* The engine's line gives the score: no room for a bar beside the board. */
+  main.puzzle .eval-gauge {
+    display: none !important;
+  }
+
+  /* The board takes the column's width here, whatever its handle says. */
+  main.puzzle cg-resize {
+    display: none;
+  }
+
+  main.puzzle .puzzle__controls {
+    gap: 8px;
+    margin-top: 8px !important;
+  }
+
+  main.puzzle .puzzle__controls .jumps {
+    flex: 1 1 auto;
+  }
+
+  /* The board's menu: a button like the jumps, a hamburger on it. */
+  main.puzzle .puzzle__controls > .fbt {
+    flex: 0 0 56px;
+    height: var(--lr-ext-jumps-h);
+    border: none !important;
+    border-radius: 8px !important;
+    background: var(--lr-ext-btn-grey) !important;
+    box-shadow: var(--lr-ext-btn-grey-shadow);
+    color: var(--lr-ext-neutral-12) !important;
+  }
+
+  /* The chips on one row that scrolls sideways (content/puzzle/session.ts keeps the latest in
+     view), on a card of their own. */
+  main.puzzle .puzzle__session {
+    flex-wrap: nowrap !important;
+    gap: 6px;
+    box-sizing: border-box;
+    min-width: 0;
+    margin: 12px 0 0 !important;
+    padding: 10px 12px;
+    overflow-x: auto;
+    border-radius: 12px;
+    background: var(--lr-ext-bg-panel);
+    scrollbar-width: none;
+  }
+
+  main.puzzle .puzzle__session:empty {
+    display: none;
+  }
+
+  main.puzzle .puzzle__session a {
+    flex: 0 0 auto !important;
+    min-width: 2.3em;
+    margin: 0 !important;
+  }
+
+  /* The panel as tall as it needs: Lichess sets it to the board's height from 800px. The card
+     first, next to the buttons; the moves scroll in a few rows under it. */
+  main.puzzle .puzzle__tools {
+    --lr-ext-coach-h: 114px;
+
+    grid-template-areas: 'card' 'ceval' 'moves' !important;
+    grid-template-rows: auto auto auto !important;
+    height: auto !important;
+    margin-top: 12px;
+  }
+
+  /* The review's coach, with the review's room for its arms (AGENTS.md, "The coach talks in a
+     card"). */
+  main.puzzle .lr-ext-puzzle-coach {
+    margin-left: 24px;
+  }
+
+  main.puzzle .puzzle__moves {
+    max-height: 210px;
+  }
+
+  main.puzzle .puzzle__side {
+    gap: 12px !important;
+    margin-top: 12px;
+  }
+}
+
+/* ---- On its side --- */
+
+/* A tablet or a phone on its side: the board as tall as the screen, the panel beside it with
+   the move buttons at its foot, the side cards under both. */
+@media (max-width: 1019.98px) and (orientation: landscape) {
+  main.puzzle {
+    --lr-ext-gap: 12px;
+    --lr-ext-board: max(
+      240px,
+      min(
+        100dvh - var(---site-header-height, 60px) - 16px,
+        100vw - 16px - var(--lr-ext-gap) - 340px
+      )
+    );
+    --lr-ext-panel-w: min(440px, 100vw - 16px - var(--lr-ext-gap) - var(--lr-ext-board));
+
+    grid-template-columns: var(--lr-ext-board) var(--lr-ext-gap) var(--lr-ext-panel-w) !important;
+    /* Rows of the board's height in all: left to the board, the second takes it whole. */
+    grid-template-rows:
+      calc(var(--lr-ext-board) - var(--lr-ext-jumps-h) - 8px) calc(var(--lr-ext-jumps-h) + 8px)
+      auto auto auto !important;
+    grid-template-areas:
+      'board . tools'
+      'board . controls'
+      'session session session'
+      'side side side'
+      'kb-move kb-move kb-move' !important;
+  }
+
+  main.puzzle .puzzle__tools {
+    grid-template-areas: 'ceval' 'moves' 'card' !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  main.puzzle .puzzle__moves {
+    max-height: none;
+  }
+
+  main.puzzle .puzzle__controls {
+    align-self: end;
+  }
+}
