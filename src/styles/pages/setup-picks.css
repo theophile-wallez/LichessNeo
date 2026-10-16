@@ -60,9 +60,11 @@
   display: none;
 }
 
-.lr-ext-setup__tile:hover {
-  background: var(--lr-ext-lift-6);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .lr-ext-setup__tile:hover {
+    background: var(--lr-ext-lift-6);
+    transform: translateY(-2px);
+  }
 }
 
 /* The dialog focuses its first tile as it opens: a ring that doesn't read as the pick. */
@@ -113,8 +115,10 @@
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-.lr-ext-setup__tile:hover .lr-ext-setup__icon {
-  transform: rotate(-6deg) scale(1.08);
+@media (hover: hover) {
+  .lr-ext-setup__tile:hover .lr-ext-setup__icon {
+    transform: rotate(-6deg) scale(1.08);
+  }
 }
 
 .lr-ext-setup__icon[data-icon]::before {

@@ -24,9 +24,11 @@
     color 0.15s !important;
 }
 
-.game-setup group.radio label:not(.disabled):hover {
-  background: var(--lr-ext-lift-4) !important;
-  color: var(--lr-ext-text-strong);
+@media (hover: hover) {
+  .game-setup group.radio label:not(.disabled):hover {
+    background: var(--lr-ext-lift-4) !important;
+    color: var(--lr-ext-text-strong);
+  }
 }
 
 .game-setup group.radio input:checked + label,
@@ -199,8 +201,10 @@
     box-shadow 0.15s !important;
 }
 
-.game-setup .color-cards label.card-radio:hover {
-  background: var(--lr-ext-bg-raised-hover) !important;
+@media (hover: hover) {
+  .game-setup .color-cards label.card-radio:hover {
+    background: var(--lr-ext-bg-raised-hover) !important;
+  }
 }
 
 .game-setup .color-cards input:checked + label.card-radio {
@@ -230,8 +234,10 @@
   font-size: 20px !important;
 }
 
-.game-setup .footer .lobby__start__button.button:not(.disabled):hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
+@media (hover: hover) {
+  .game-setup .footer .lobby__start__button.button:not(.disabled):hover {
+    background: var(--lr-ext-btn-primary-hover) !important;
+  }
 }
 
 dialog .game-setup .footer .lobby__start__button.button::before {
@@ -265,9 +271,11 @@ group.radio .label {
     color 0.15s !important;
 }
 
-group.radio label:not(.disabled):hover {
-  background: var(--lr-ext-lift-4) !important;
-  color: var(--lr-ext-text-strong) !important;
+@media (hover: hover) {
+  group.radio label:not(.disabled):hover {
+    background: var(--lr-ext-lift-4) !important;
+    color: var(--lr-ext-text-strong) !important;
+  }
 }
 
 /* Also on the account pages, where Lichess's own grey for it (`.account group.radio`) wins

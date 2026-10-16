@@ -164,8 +164,10 @@ dialog .help th p {
     color 0.15s !important;
 }
 
-.game-setup .time-control-tabs .tabs-horiz button:hover {
-  background: var(--lr-ext-lift-4);
+@media (hover: hover) {
+  .game-setup .time-control-tabs .tabs-horiz button:hover {
+    background: var(--lr-ext-lift-4);
+  }
 }
 
 .game-setup .time-control-tabs .tabs-horiz button.active {
@@ -229,10 +231,12 @@ dialog .help th p {
   transition: box-shadow 0.15s !important;
 }
 
-.game-setup input.range:hover::-webkit-slider-thumb {
-  box-shadow:
-    0 1px 3px var(--lr-ext-shade-50),
-    0 0 0 5px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
+@media (hover: hover) {
+  .game-setup input.range:hover::-webkit-slider-thumb {
+    box-shadow:
+      0 1px 3px var(--lr-ext-shade-50),
+      0 0 0 5px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
+  }
 }
 
 /* Presets: one row of chips sharing the width. */
@@ -258,4 +262,42 @@ dialog .help th p {
   background: var(--lr-ext-setup-tint) !important;
   box-shadow: var(--lr-ext-setup-chosen);
   color: var(--lr-ext-text-strong) !important;
+}
+
+/* ---- Phones --- */
+
+/* The game setup rises from the screen's bottom edge as a sheet, the screen's width, as a
+ * phone's own pickers do: centered, it left the page a sliver at its sides. */
+@media (max-width: 599.98px) {
+  dialog:has(> .scrollable > .game-setup) {
+    inset: auto 0 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    max-height: calc(100dvh - 16px) !important;
+    margin: 0 !important;
+    border-width: 1px 0 0 !important;
+    border-radius: 20px 20px 0 0 !important;
+    transform: none !important;
+    animation: lr-ext-sheet-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  dialog:has(> .scrollable > .game-setup) > .scrollable {
+    max-height: calc(100dvh - 16px) !important;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  dialog > .scrollable > .game-setup {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  dialog > .scrollable > .game-setup .setup-content {
+    padding-inline: 16px !important;
+  }
+}
+
+@keyframes lr-ext-sheet-in {
+  from {
+    translate: 0 100%;
+  }
 }
