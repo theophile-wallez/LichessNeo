@@ -11,6 +11,7 @@ import { header } from './markup.ts';
 import { movesMarkup } from './summary-moves.ts';
 import { playerName, playersMarkup, sideOrder, watchPlayerFocus } from './summary-players.ts';
 import { radarMarkup } from './summary-radar.ts';
+import { newGameMarkup } from './new-game.ts';
 
 // The summary: the graph and the two players over the moves and the
 // phases. It keeps its layout while the game is analyzed, filling in from
@@ -28,6 +29,8 @@ export interface SummaryInput {
   readonly language: ReviewLanguage;
   /** "Learn from your mistakes", when the exercise can start. */
   readonly learn: string | null;
+  /** The header's link to a new game like this one. */
+  readonly newGame: SafeHtml | '';
 }
 
 // The profiles stand on full-depth verdicts only, as the game rating does.
@@ -45,7 +48,7 @@ const namesOf = ({ players, language }: SummaryInput): Record<Color, string> => 
 function summaryMarkup(input: SummaryInput): SafeHtml {
   const { review, error, language, learn } = input;
   const canStart = review !== null && !error;
-  return html`${header(language.ui.review, 'normal', language)}
+  return html`${header(language.ui.review, 'normal', language, input.newGame)}
       <div class="lr-ext-review__top">
         ${error ? html`<p class="lr-ext-review__error">${error}</p>` : ''}
         <div class="lr-ext-review__graph lr-ext-summary-graph"></div>
@@ -71,6 +74,7 @@ export function renderSummary(session: Session, analysis: Analysis): void {
       winner: analysis.winner,
       language,
       learn: learnLabel(analysis),
+      newGame: newGameMarkup(analysis, 'lr-ext-review__new'),
     }),
   );
   watchPlayerFocus(elements.panel);

@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { syncNewGame } from './new-game.ts';
-import { newGameLabel } from './time-control.ts';
+import { newGameLabel } from '#shared/time-control.ts';
 // The original's labels, and what it did to each follow-up.
 import legacy from './fixtures/legacy-new-game.json' with { type: 'json' };
 

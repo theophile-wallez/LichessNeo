@@ -42,8 +42,16 @@ const BACK_ICON = hugeicon(ArrowLeft02Icon);
 const CLOSE_ICON = hugeicon(Cancel01Icon);
 export const CHEVRON_ICON = hugeicon(ArrowDown01Icon);
 
-/** The panel's header; `back` is the mode its back button returns to, null for none. */
-export function header(title: string, back: Mode | null, language: ReviewLanguage): SafeHtml {
+/**
+ * The panel's header; `back` is the mode its back button returns to, null for none. `action`
+ * goes before the close button: the new game's link (view/new-game.ts).
+ */
+export function header(
+  title: string,
+  back: Mode | null,
+  language: ReviewLanguage,
+  action: SafeHtml | '' = '',
+): SafeHtml {
   const { ui } = language;
   const backButton =
     back === null
@@ -52,7 +60,7 @@ export function header(title: string, back: Mode | null, language: ReviewLanguag
   return html`<div class="lr-ext-review__head">
       ${backButton}
       <div class="lr-ext-review__title">${title}</div>
-      <button class="lr-ext-review__close" data-lr-ext="normal" data-lr-ext-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button>
+      <div class="lr-ext-review__actions">${action}<button class="lr-ext-review__close" data-lr-ext="normal" data-lr-ext-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button></div>
     </div>`;
 }
 

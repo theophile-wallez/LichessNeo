@@ -163,7 +163,8 @@ html.lr-ext-review-normal #lr-ext-review {
 .lr-ext-review__head {
   flex: none;
   display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  /* Even sides keep the title centered, the new game's link beside the close button. */
+  grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
   align-items: center;
   height: 48px;
   padding: 0 4px;

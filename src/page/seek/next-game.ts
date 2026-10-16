@@ -15,13 +15,16 @@ export interface NextGame {
   readonly fallback: string;
 }
 
-const RoundSchema = z.object({
-  data: z.object({
-    game: z.object({ id: z.string().check(z.minLength(1)), source: z.optional(z.string()) }),
-    clock: z.optional(z.object({ initial: z.number(), increment: z.number() })),
-    opponent: z.optional(z.object({ user: z.optional(z.object({ id: z.string() })) })),
-  }),
+/** The game's data, as the round's and the analysis' controllers both have it. */
+export const GameSeekDataSchema = z.object({
+  game: z.object({ id: z.string().check(z.minLength(1)), source: z.optional(z.string()) }),
+  clock: z.optional(z.nullable(z.object({ initial: z.number(), increment: z.number() }))),
+  opponent: z.optional(z.object({ user: z.optional(z.object({ id: z.string() })) })),
 });
+
+type GameSeekData = z.infer<typeof GameSeekDataSchema>;
+
+const RoundSchema = z.object({ data: GameSeekDataSchema });
 
 const like = (gameId: string): NextGame => ({
   request: { kind: 'like', gameId },
@@ -34,8 +37,13 @@ const like = (gameId: string): NextGame => ({
  */
 export function nextGameOf(initData: string | null, signedIn: boolean): NextGame | null {
   const round = parseJson(initData, RoundSchema);
-  if (!round) return null;
-  const { game, clock, opponent } = round.data;
+  return round ? lichessNextGame(round.data, signedIn) : null;
+}
+
+function lichessNextGame(
+  { game, clock, opponent }: GameSeekData,
+  signedIn: boolean,
+): NextGame | null {
   if (game.source === 'lobby' || (game.source === 'pool' && !signedIn)) return like(game.id);
   if (game.source !== 'pool' || !clock) return null;
   const id = `${clock.initial / 60}+${clock.increment}`;
@@ -45,6 +53,16 @@ export function nextGameOf(initData: string | null, signedIn: boolean): NextGame
     request: { kind: 'pool', member },
     fallback: `/#pool/${id}${blocking === undefined ? '' : `/${blocking}`}`,
   };
+}
+
+/**
+ * What a new game like this one seeks, from its analysis: as Lichess's button would after it,
+ * else a lobby seek like it, as our "New 10 min" does (content/game/new-game.ts). A game
+ * without a clock has none.
+ */
+export function nextGameAfter(data: GameSeekData, signedIn: boolean): NextGame | null {
+  if (!data.clock) return null;
+  return lichessNextGame(data, signedIn) ?? like(data.game.id);
 }
 
 /** What a link to a next game seeks: a pool's, or a lobby seek like a game. */

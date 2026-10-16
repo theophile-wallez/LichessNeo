@@ -1,0 +1,46 @@
+/* A new game like the one reviewed (page/review/view/new-game.ts): a primary pill in the
+   header, beside the close button, and a button under the closed review's card. Seeking, it
+   takes the game page's look (game/game-over.css). */
+
+.lr-ext-review__head > :first-child {
+  justify-self: start;
+}
+
+.lr-ext-review__actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 4px;
+}
+
+.lr-ext-review__new {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: var(--lr-ext-btn-primary);
+  box-shadow: var(--lr-ext-btn-primary-shadow);
+  color: var(--lr-ext-white) !important;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  text-decoration: none !important;
+  text-shadow: 0 1px 1px #00000033;
+}
+
+.lr-ext-review__new:hover {
+  background: var(--lr-ext-btn-primary-hover);
+}
+
+.lr-ext-review__new[data-lr-ext-seek] {
+  background: var(--lr-ext-btn-grey);
+  color: var(--lr-ext-text-strong) !important;
+  text-shadow: none;
+}
+
+.lr-ext-end__foot .lr-ext-new-game {
+  color: var(--lr-ext-text-strong) !important;
+  white-space: nowrap;
+  text-decoration: none !important;
+}

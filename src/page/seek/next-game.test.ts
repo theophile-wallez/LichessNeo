@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { nextGameOf, nextGameOfLink } from './next-game.ts';
+import { GameSeekDataSchema, nextGameAfter, nextGameOf, nextGameOfLink } from './next-game.ts';
 
 // A game page's init data, as much of it as the next game needs (lila's round JSON).
 const round = (source: string, opponent?: string): string =>
@@ -33,6 +33,30 @@ describe('what Lichess’s "New opponent" seeks', () => {
     expect(nextGameOf(round('friend', 'bob'), true)).toBeNull();
     expect(nextGameOf(JSON.stringify({ data: {} }), true)).toBeNull();
     expect(nextGameOf(null, true)).toBeNull();
+  });
+});
+
+// An analysis controller's data, as much of it as a new game needs.
+const analysed = (source: string, clock: boolean) =>
+  GameSeekDataSchema.parse({
+    game: { id: 'abcd1234', source },
+    clock: clock ? { initial: 180, increment: 2 } : null,
+    opponent: { user: { id: 'bob' } },
+  });
+
+describe('what a new game after an analysed one seeks', () => {
+  it('does as Lichess’s "New opponent" would', () => {
+    expect(nextGameAfter(analysed('pool', true), true)?.fallback).toBe('/#pool/3+2/bob');
+    expect(nextGameAfter(analysed('lobby', true), true)?.fallback).toBe('/?hook_like=abcd1234');
+  });
+
+  it('seeks like the game in the lobby where Lichess wouldn’t, but never without a clock', () => {
+    expect(nextGameAfter(analysed('friend', true), true)).toEqual({
+      request: { kind: 'like', gameId: 'abcd1234' },
+      fallback: '/?hook_like=abcd1234',
+    });
+    expect(nextGameAfter(analysed('ai', true), false)?.fallback).toBe('/?hook_like=abcd1234');
+    expect(nextGameAfter(analysed('pool', false), true)).toBeNull();
   });
 });
 

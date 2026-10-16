@@ -25,6 +25,7 @@ the page world would crash on it.
 | `features.ts`, `frame.ts`, `poll.ts`           | starting features, once-per-frame work, waiting for Lichess's globals                                                                                |
 | `build-mode.ts`                                | whether this is a dev build, which reloads itself when rebuilt                                                                                       |
 | `lang.ts`, `text.ts`, `math.ts`, `geometry.ts` | the page's language, small text and number helpers, points and boxes                                                                                 |
+| `time-control.ts`                              | a time control in words, for a "New 10+5" button                                                                                                     |
 | `chess/`, `chessground.ts`, `piece-glyph.ts`   | chess basics (squares, FEN, piece letters and values, attacks), a board's pieces read from chessground's classes, a piece of ours in the board's set |
 | `charts/`, `coach.ts`, `sounds.ts`             | chart pieces, the coach's moods, the stored coach (`pickCoach`) and switches (`coachOptions`), the sounds a pack may have                            |
 | `packs/`                                       | packs: their `pack.json`, links, files and stored form, the download the worker runs, its messages                                                   |

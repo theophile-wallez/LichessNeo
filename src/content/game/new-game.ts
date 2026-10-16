@@ -3,7 +3,7 @@ import type { Feature } from '#shared/features.ts';
 import { isFrench } from '#shared/lang.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { finishedGame, type FinishedGame } from './move-times.ts';
-import { newGameLabel } from './time-control.ts';
+import { newGameLabel } from '#shared/time-control.ts';
 
 // A "New 10 min" button next to Rematch (styles/game/game-over.css). Lichess
 // only offers "New opponent" for lobby and pool games; elsewhere we add a

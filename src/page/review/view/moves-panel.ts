@@ -18,6 +18,7 @@ import { canRetry, type RetryOutcome, retryOutcome } from './retry.ts';
 import { retryBubble } from './retry-bubble.ts';
 import { timingAt } from './timing.ts';
 import { type CoachComment, commentOn, followComment, timeTag, verdictMarkup } from './verdict.ts';
+import { newGameMarkup } from './new-game.ts';
 
 // The move-by-move review: the graph and the game's key moments on top, then
 // the coach on the move on the board, the Explain / Best / Next buttons and
@@ -185,7 +186,7 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const scrolled = momentsScroll(elements.panel);
   setHtml(
     elements.panel,
-    html`${header(language.ui.review, 'summary', language)}
+    html`${header(language.ui.review, 'summary', language, newGameMarkup(analysis, 'lr-ext-review__new'))}
       <div class="lr-ext-review__graph-slot"></div>${moments}
       ${coachMarkup(session, analysis, spoken)}
       ${navMarkup(session, analysis, spoken)}`,

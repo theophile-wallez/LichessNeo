@@ -63,6 +63,12 @@ export class Analysis {
     return result.success ? result.data : null;
   }
 
+  /** `ctrl.data` read with `schema`, for a part of it this facade doesn't type: null if it's another shape. */
+  dataOf<T>(schema: z.ZodMiniType<T>): T | null {
+    const result = schema.safeParse(this.#controller.data);
+    return result.success ? result.data : null;
+  }
+
   get gameId(): string {
     return this.data?.game.id ?? '';
   }

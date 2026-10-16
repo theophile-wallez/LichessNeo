@@ -1,4 +1,10 @@
-import type { Clock } from './clock-times.ts';
+// A time control in a few words, for a "New 10+5" button: the game page's and the review's.
+
+// A game's clock, in seconds.
+export interface Clock {
+  readonly initial: number;
+  readonly increment: number;
+}
 
 const NO_BREAK_SPACE = '\u00a0';
 

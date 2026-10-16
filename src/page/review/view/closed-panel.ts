@@ -13,6 +13,7 @@ import {
 import { type Outcome, readOutcome } from '#page/game-over/outcome.ts';
 import { formatAccuracy, type GameOverTexts, gameOverTexts } from '#page/game-over/texts.ts';
 import type { Session } from '#page/review/session.ts';
+import { newGameMarkup } from './new-game.ts';
 
 // The review closed: the game over's card (page/game-over/card.ts), as the
 // game's page showed it at its end, over the ways back into the review: its
@@ -102,6 +103,7 @@ export function renderClosed(session: Session, analysis: Analysis): void {
     html`<div class="lr-ext-end__frame">${card}<div class="lr-ext-end__foot">
       <button class="lr-ext-btn" data-lr-ext="summary">${ui.summary}</button>
       <button class="lr-ext-btn lr-ext-btn--green" data-lr-ext="moves">${ui.review}</button>
+      ${newGameMarkup(analysis, 'lr-ext-btn')}
     </div></div>`,
   );
 }

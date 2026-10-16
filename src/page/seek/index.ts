@@ -7,13 +7,15 @@ import { seekNextGame, type LobbySeek, type Paired, type SeekRequest } from './l
 import { nextGameOf, nextGameOfLink, type NextGame } from './next-game.ts';
 import { rangeKey, waited, type PoolMember } from './pool-link.ts';
 
-// A game's "New opponent" (or our "New 10 min", content/game/new-game.ts)
-// seeks the next game right there, as the big apps do, rather than on the home
+// A game's "New opponent" (or our "New 10 min", content/game/new-game.ts, or the
+// review's) seeks the next game right there, as the big apps do, rather than on the home
 // page as Lichess does: the button shows a loader, then how long it has waited
 // and a cross, and a click stops it (styles/game/game-over.css). If our socket
 // fails, the button does what Lichess's does.
 
-const BUTTON = 'main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game)';
+// And the review's link to a new game like the one reviewed (page/review/view/new-game.ts).
+const BUTTON =
+  'main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game), #lr-ext-review .lr-ext-new-game';
 const SECOND_MS = 1000;
 
 interface Seeking {

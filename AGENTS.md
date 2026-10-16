@@ -663,6 +663,10 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   seek right there, on a lobby socket of its own (`/lobby/socket/v5`, lila's
   `ui/lib/src/socket.ts`: `p` and `0` pings, `poolIn` every 10s, `poolOut`,
   a `redirect` once paired), and falls back to Lichess's link if it fails.
+  So does the review's "New 2+1", in a finished game's analysis. The hero's
+  first button plays the pool last played: Lichess draws its start buttons
+  (`.lobby__start`) again once its lobby boots, so ours is put back at once,
+  and its "Create a game" stays hidden for the cards' "Custom game" to click.
 - **Picker names.** lila puts a picker's name in its `mselect`'s id
   (`#…__day-select`), not its class.
 - **Tournament podiums.** A finished Arena's and Swiss's `.podium` holds
