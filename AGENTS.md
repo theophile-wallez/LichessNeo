@@ -615,6 +615,11 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   section's own link fold its links open there instead of leaving.
 - **800px exactly.** Lichess's phone menu applies up to `max-width: 800px`:
   start desktop rules at `800.02px`, not `800px`.
+- **Boards on their side.** Lichess's puzzles, Storm, Racer, Learn and the
+  coordinate trainer take two columns from 799.3px or in any landscape
+  window, phones included: below 1020px our layouts go one column upright
+  and two under `(orientation: landscape)` (`styles/puzzle/layout-narrow.css`).
+  Size the rows a spanning board covers, or one of them grows to its height.
 - **A page column as wide as its content.** From 800px an arena's, a
   Swiss's and a simul's page set `---main-max-width: auto` on `#main-wrap`,
   whose page column then sizes to its content between two free ones: a short

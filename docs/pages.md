@@ -30,25 +30,25 @@ and a white knob, and a single big number in the state's color.
 
 ## Puzzles
 
-| Page             | Path                  | Level | Next                                                                                                                                            |
-| ---------------- | --------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Puzzles          | `/training`           | 2     | a solved puzzle has no moment of its own; the rating's change could                                                                             |
-| Puzzle themes    | `/training/themes`    | 2     |                                                                                                                                                 |
-| Puzzle dashboard | `/training/dashboard` | 3     | the numbers, a live coach's tips, every theme against its level; the improvement areas and strengths lead with their first theme and its mascot |
-| Puzzle history   | `/training/history`   | 3     | the week's number on the track with a live coach, the puzzles to retry; each session a card with its score, under its day                       |
-| Puzzle Streak    | `/streak`             | 2     | the streak's count doesn't show in the panel: a flame and the track, the best streak on it                                                      |
-| Puzzle Storm     | `/storm`              | 2     | signature planned: the combo on the track, its bonuses as stops; the panel is empty in the middle                                               |
-| Puzzle Racer     | `/racer`              | 2     |                                                                                                                                                 |
+| Page             | Path                  | Level | Next                                                                                                                                                    |
+| ---------------- | --------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Puzzles          | `/training`           | 2     | a solved puzzle has no moment of its own; the rating's change could; below 1020px, one column with the coach's card, two on a tablet on its side        |
+| Puzzle themes    | `/training/themes`    | 2     |                                                                                                                                                         |
+| Puzzle dashboard | `/training/dashboard` | 3     | the numbers, a live coach's tips, every theme against its level; the improvement areas and strengths lead with their first theme and its mascot         |
+| Puzzle history   | `/training/history`   | 3     | the week's number on the track with a live coach, the puzzles to retry; each session a card with its score, under its day                               |
+| Puzzle Streak    | `/streak`             | 2     | the streak's count doesn't show in the panel: a flame and the track, the best streak on it; below 1020px, as puzzles                                    |
+| Puzzle Storm     | `/storm`              | 2     | signature planned: the combo on the track, its bonuses as stops; the panel is empty in the middle; below 1020px, one column, the clock beside the title |
+| Puzzle Racer     | `/racer`              | 2     | below 1020px, a race in one column, the clock beside the title                                                                                          |
 
 ## Learn
 
-| Page        | Path                   | Level | Next                                                                       |
-| ----------- | ---------------------- | ----- | -------------------------------------------------------------------------- |
-| Learn       | `/learn`               | 2     | a stage's coach says its goal in the review's card; no signature yet       |
-| Practice    | `/practice`            | 2     | sets the tone for 2                                                        |
-| Coordinates | `/training/coordinate` | 1     | Lichess's text panel and tabs; a title with its tile, the score on a track |
-| Studies     | `/study`               | 2     |                                                                            |
-| Coaches     | `/coach`               | 2     |                                                                            |
+| Page        | Path                   | Level | Next                                                                                                                             |
+| ----------- | ---------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Learn       | `/learn`               | 2     | a stage's coach says its goal in the review's card; no signature yet; below 1020px, a stage in one column                        |
+| Practice    | `/practice`            | 2     | sets the tone for 2                                                                                                              |
+| Coordinates | `/training/coordinate` | 1     | Lichess's text panel and tabs on a desktop; a title with its tile, the score on a track; below 1020px, cards and segmented picks |
+| Studies     | `/study`               | 2     |                                                                                                                                  |
+| Coaches     | `/coach`               | 2     | on phones a card has its picture at its side                                                                                     |
 
 ## Watch
 
