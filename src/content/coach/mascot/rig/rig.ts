@@ -173,7 +173,7 @@ export class Mascot implements RigBuilder {
     this.#talking = talking;
   }
 
-  /** A cute reaction to a click: a hop, a hello, a laugh, a twirl or a blush. */
+  /** A cute reaction to a click, one of `reactions.ts`'s. */
   poke(): void {
     if (this.#entrance) return;
     this.#perform(this.#reactions.start(this.#time));

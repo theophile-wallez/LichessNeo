@@ -1,10 +1,6 @@
 import { COACH_MOODS, type CoachMood } from '#shared/coach.ts';
 import { createElement } from '#shared/dom.ts';
-import {
-  ENTRANCE_KINDS,
-  PICKED_ENTRANCES,
-  type EntranceKind,
-} from '#content/coach/mascot/rig/entrance.ts';
+import { ENTRANCE_KINDS, type EntranceKind } from '#content/coach/mascot/rig/entrance.ts';
 import { REACTION_KINDS, type ReactionKind } from '#content/coach/mascot/rig/reactions.ts';
 import type { App } from './app.ts';
 import { button, buttons, choice, section, slider, toggle } from './controls.ts';
@@ -48,18 +44,6 @@ const REACTION_NAMES: Readonly<Record<ReactionKind, string>> = {
   shy: 'Gêné',
 };
 
-// The reactions a click picks from, and the hello after an entrance; the others are new.
-const CLICKED: ReadonlySet<ReactionKind> = new Set([
-  'hop',
-  'wave',
-  'laugh',
-  'twirl',
-  'shy',
-  'hello',
-]);
-
-const marked = (name: string, tried: boolean): string => (tried ? name : `${name} (nouveau)`);
-
 export function moodPanel(panel: HTMLElement, app: App): void {
   const box = section(panel, 'Expression');
   const mood = choice({
@@ -87,9 +71,7 @@ export function reactionsPanel(panel: HTMLElement, app: App): void {
   const { theater } = app;
   const poke = buttons(button('Clic (une réaction au hasard)', () => theater.poke()));
   const each = buttons(
-    ...REACTION_KINDS.map(kind =>
-      button(marked(REACTION_NAMES[kind], CLICKED.has(kind)), () => theater.react(kind)),
-    ),
+    ...REACTION_KINDS.map(kind => button(REACTION_NAMES[kind], () => theater.react(kind))),
   );
   const moves = buttons(
     button('Petit saut', () => theater.hop(2.2)),
@@ -107,8 +89,7 @@ export function entrancesPanel(panel: HTMLElement, app: App): void {
       button('← Gauche', () => app.theater.enter(kind, 'left')),
       button('Droite →', () => app.theater.enter(kind, 'right')),
     );
-    const name = marked(ENTRANCE_NAMES[kind], PICKED_ENTRANCES.includes(kind));
-    row.append(createElement('span', { className: 'label', text: name }), sides);
+    row.append(createElement('span', { className: 'label', text: ENTRANCE_NAMES[kind] }), sides);
     box.append(row);
   }
 }

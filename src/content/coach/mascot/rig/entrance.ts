@@ -11,15 +11,12 @@ export const ENTRANCE_KINDS = ['drop', 'walk', 'hops', 'rise', 'spin', 'slide'] 
 
 export type EntranceKind = (typeof ENTRANCE_KINDS)[number];
 
-/** The ones the extension picks from: the others are tried in the playground first. */
-export const PICKED_ENTRANCES: readonly EntranceKind[] = ['drop', 'walk', 'hops'];
-
 /** An entrance other than `last`, at random. */
 export function nextEntrance(
   last: EntranceKind | null,
   random: () => number = Math.random,
 ): EntranceKind {
-  const others = PICKED_ENTRANCES.filter(kind => kind !== last);
+  const others = ENTRANCE_KINDS.filter(kind => kind !== last);
   return others[Math.floor(random() * others.length)] ?? 'drop';
 }
 

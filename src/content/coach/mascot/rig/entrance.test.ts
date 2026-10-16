@@ -1,13 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Spring } from '#content/coach/mascot/motion.ts';
 import { Jumper } from './behaviour.ts';
-import {
-  ENTRANCE_KINDS,
-  Entrance,
-  type EntranceKind,
-  nextEntrance,
-  PICKED_ENTRANCES,
-} from './entrance.ts';
+import { ENTRANCE_KINDS, Entrance, type EntranceKind, nextEntrance } from './entrance.ts';
 
 const FRAME = 1 / 60;
 
@@ -62,12 +56,14 @@ describe('Entrance', () => {
 });
 
 describe('nextEntrance', () => {
-  it('picks among the extension’s entrances, never the last one again', () => {
-    for (const last of PICKED_ENTRANCES)
-      for (const random of [0, 0.5, 0.99]) {
+  it('picks among every entrance, never the last one again', () => {
+    const picked = new Set<EntranceKind>();
+    for (const last of ENTRANCE_KINDS)
+      for (const random of [0, 0.25, 0.5, 0.75, 0.99]) {
         const next = nextEntrance(last, () => random);
-        expect(PICKED_ENTRANCES).toContain(next);
         expect(next).not.toBe(last);
+        picked.add(next);
       }
+    expect(picked).toEqual(new Set(ENTRANCE_KINDS));
   });
 });

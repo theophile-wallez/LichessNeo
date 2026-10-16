@@ -1,11 +1,11 @@
 import type { CoachMood } from '#shared/coach.ts';
 import type { Onset } from '#content/coach/mascot/pose.ts';
 
-// What a mascot does when it's clicked: a hop, a hello, a laugh, a twirl or a
-// shy blush, one at a time and never the same twice running. While one plays, the
-// mascot takes its mood, then goes back to the one it was given. It also says
-// hello once it has come on stage (rig/entrance.ts). A jelly wobble, a tickled
-// wiggle and a twirl in the air are tried in the playground first.
+// What a mascot does when it's clicked: a hop, a wave, a laugh, a twirl, a
+// jelly wobble, a tickled wiggle, a twirl in the air or a shy blush, one at a
+// time and never the same twice running. While one plays, the mascot takes its
+// mood, then goes back to the one it was given. It also says hello once it has
+// come on stage (rig/entrance.ts).
 
 export const REACTION_KINDS = [
   'hop',
@@ -42,8 +42,10 @@ export const REACTIONS: Readonly<Record<ReactionKind, Reaction>> = {
   shy: { mood: 'shy', seconds: 2.2, chatter: 0 },
 };
 
-// The ones a click picks from.
-const KINDS: readonly ReactionKind[] = ['hop', 'wave', 'laugh', 'twirl', 'shy'];
+// The ones a click picks from: all but the hello after an entrance.
+const KINDS = REACTION_KINDS.filter(kind => kind !== 'hello');
+// The ones that turn it all the way round: one never starts while another turns.
+const TURNS: ReadonlySet<ReactionKind> = new Set(['twirl', 'spinHop']);
 const TWIRL_SECONDS = 0.9;
 // A tickle's quick wiggle.
 const WIGGLE_RATE = 28;
@@ -74,10 +76,10 @@ export class Reactions {
     this.#random = random;
   }
 
-  /** Starts a reaction other than the last one, and not a twirl while one turns; says which. */
+  /** Starts a reaction other than the last one, and no turn while one turns; says which. */
   start(time: number): ReactionKind {
-    const twirling = this.spin(time) !== 0;
-    const others = KINDS.filter(kind => kind !== this.#kind && !(twirling && kind === 'twirl'));
+    const turning = this.spin(time) !== 0;
+    const others = KINDS.filter(kind => kind !== this.#kind && !(turning && TURNS.has(kind)));
     const kind = others[Math.floor(this.#random() * others.length)] ?? 'hop';
     this.play(kind, time);
     return kind;
@@ -86,7 +88,7 @@ export class Reactions {
   play(kind: ReactionKind, time: number): void {
     this.#kind = kind;
     this.#at = time;
-    if (kind === 'twirl' || kind === 'spinHop') this.#twirlAt = time;
+    if (TURNS.has(kind)) this.#twirlAt = time;
   }
 
   #playing(time: number): Reaction | null {
