@@ -200,3 +200,50 @@
   line-height: 1.6;
   vertical-align: 0.2em;
 }
+
+/* ---- Phones --- */
+
+/* One card a row: the picture at its side rather than over it, so a card isn't a screen
+ * tall. */
+@media (max-width: 599.98px) {
+  .coach-list__main .coach-widget,
+  .coach-list__main .coach-widget:nth-child(2n) {
+    flex-direction: row;
+  }
+
+  .coach-list__main .coach-widget .picture,
+  .coach-list__main .coach-widget:nth-child(2n) .picture {
+    flex: none;
+    align-self: stretch;
+    width: 112px;
+    height: auto;
+    min-height: 150px;
+    aspect-ratio: auto;
+  }
+
+  .coach-list__main .coach-widget .overview {
+    padding: 12px 14px;
+  }
+
+  .coach-list__main .coach-widget .coach-name {
+    font-size: 16px !important;
+  }
+
+  .coach-list__main .coach-widget .headline {
+    min-height: 0;
+    margin-bottom: 10px !important;
+    font-size: 13px !important;
+  }
+
+  .coach-list__main .coach-widget tbody {
+    gap: 4px;
+  }
+
+  .coach-list__main .coach-widget tr {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .coach-list__main .coach-widget tr.seen {
+    padding-top: 8px;
+  }
+}

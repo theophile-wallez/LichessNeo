@@ -28,7 +28,11 @@
 /* Lichess's mobile layout runs the list edge to edge; cards need a margin. */
 @media (max-width: 1019.98px) {
   main.coach-list.coach-full-page {
-    padding: 0 12px 24px;
+    padding: 0 8px 24px;
+  }
+
+  .coach-list__main .list {
+    gap: 12px;
   }
 
   main.coach-list .coach-side {
