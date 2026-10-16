@@ -1,0 +1,60 @@
+/* ---- A simul below 1020px --- */
+
+/* The boards' card first, under a title and the score as four tiles, then the info and the
+ * chat. */
+
+@media (max-width: 1019.98px) {
+  main.simul .simul__main > .box__top {
+    padding: 18px 16px 4px !important;
+  }
+
+  main.simul .simul__main > .box__top h1 {
+    font-size: 24px !important;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  main.simul .simul__main .results {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin: 12px 16px 0 !important;
+  }
+
+  main.simul .simul__main .results > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    padding: 10px 4px;
+    border-radius: 8px;
+    background: var(--lr-ext-bg-raised);
+  }
+
+  main.simul .simul__main .results .number {
+    color: var(--lr-ext-text-strong);
+    font-size: 24px !important;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  main.simul .simul__main .results .text {
+    overflow: hidden;
+    max-width: 100%;
+    color: var(--lr-ext-text-dim);
+    font-size: 11px !important;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  main.simul .simul__main .game-list {
+    margin: 16px 0 !important;
+    padding: 0 12px !important;
+  }
+
+  main.simul .simul__meta {
+    padding: 16px !important;
+  }
+}

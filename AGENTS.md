@@ -615,6 +615,12 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   section's own link fold its links open there instead of leaving.
 - **800px exactly.** Lichess's phone menu applies up to `max-width: 800px`:
   start desktop rules at `800.02px`, not `800px`.
+- **A page column as wide as its content.** From 800px an arena's, a
+  Swiss's and a simul's page set `---main-max-width: auto` on `#main-wrap`,
+  whose page column then sizes to its content between two free ones: a short
+  Swiss stood in the middle. A narrow layout sets it to `100%` behind its
+  `HAS` flag (`styles/events-narrow/layout.css`); a width on `main` can't
+  help, the track takes it as its minimum and overflows.
 - **Variants.** Crazyhouse's pockets are grid areas `mat-top` / `mat-bot`
   that the game grid must place (`styles/game`). Three-check's checks are
   kings in `.material`, which our bars hide: `content/game/captured.ts`

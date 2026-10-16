@@ -37,6 +37,8 @@ const FLAGS: Readonly<Record<string, string>> = {
   storm: 'main > .storm',
   'storm-play': 'main > .storm--play',
   swiss: 'main.swiss',
+  tour: 'main.tour',
+  simul: 'main.simul',
   'board-editor': 'main > .board-editor',
   lobby: 'main.lobby',
   'coach-list': 'main.coach-list',

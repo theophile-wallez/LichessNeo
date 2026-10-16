@@ -1,0 +1,131 @@
+/* ---- An arena below 1020px --- */
+
+/* The standings' card, the info, the chat, then the featured game and the top games side
+ * by side from 600px, under each other on a phone. A player's info and a finished arena's
+ * numbers take the featured game's place. */
+
+@media (max-width: 1019.98px) {
+  main.tour .tour__main__header {
+    gap: 12px;
+    min-height: 0 !important;
+    padding: 18px 16px !important;
+  }
+
+  main.tour .tour__main__header h1 {
+    font-size: 24px !important;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  main.tour .tour__controls {
+    padding-inline-end: 8px;
+  }
+
+  /* The waiting room's pull quote, inside the card's padding. */
+  main.tour .tour__main blockquote.pull-quote {
+    max-width: none;
+    margin: 16px !important;
+  }
+
+  /* ---- Featured game and top games --- */
+
+  main.tour .tour__table {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    min-width: 0;
+  }
+
+  main.tour .tour__table > :is(.tour__featured, .tour__duels) {
+    box-sizing: border-box;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 10px 12px;
+    border: 1px solid var(--lr-ext-card-border);
+    border-radius: 10px;
+    background: var(--lr-ext-bg-panel);
+  }
+
+  main.tour .tour__duels {
+    align-self: start;
+    padding-bottom: 4px !important;
+    text-shadow: none !important;
+  }
+
+  main.tour .tour__duels h2 {
+    margin: 2px 0 6px !important;
+    color: var(--lr-ext-text-strong);
+    font-size: 16px !important;
+    font-weight: 800;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  main.tour .tour__duels a {
+    margin-inline: -12px;
+    padding-inline: 12px !important;
+    border-top-color: var(--lr-ext-card-border) !important;
+  }
+
+  main.tour .tour__duels a:hover {
+    background: var(--lr-ext-lift-5) !important;
+  }
+
+  /* ---- The player's info and a finished arena's numbers --- */
+
+  main.tour :is(.tour__actor-info, .tour__stats) {
+    align-self: stretch !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  main.tour .tour__stats {
+    padding: 18px 0 !important;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1019.98px) {
+  main.tour .tour__table {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* ---- Phones' standings --- */
+
+/* A long arena's score sheet would wrap under the name: on one line, the latest games at
+ * its end and the first ones cut under a fade. */
+@media (max-width: 649.98px) {
+  main.tour .tour__standing {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  main.tour .tour__standing td {
+    box-sizing: border-box;
+  }
+
+  main.tour .tour__standing td.rank {
+    width: 36px;
+  }
+
+  main.tour .tour__standing td.player {
+    width: 48%;
+  }
+
+  main.tour .tour__standing td.total {
+    width: 56px;
+  }
+
+  /* Right to left, so the cut falls on the oldest games; inline, so the scores keep their
+   * order (an inline block is a neutral the direction would reverse). */
+  main.tour .tour__standing td.sheet {
+    overflow: hidden;
+    direction: rtl;
+    white-space: nowrap;
+    mask: linear-gradient(to right, transparent, #000 16px);
+  }
+
+  main.tour .tour__standing td.sheet > * {
+    display: inline !important;
+  }
+}

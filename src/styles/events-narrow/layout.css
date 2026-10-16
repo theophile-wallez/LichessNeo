@@ -1,0 +1,126 @@
+/* ---- Below 1020px --- */
+
+/* An arena's, a Swiss's and a simul's pages share Lichess's shape: the standings or the
+ * boards, the info and the chat beside them, the featured games. On phones and tablets
+ * they're one column of cards that scrolls, as on the game page (game/layout-narrow.css),
+ * where Lichess would squeeze two columns from 800px. The table (the featured games, or the
+ * player picked in the standings) comes right under the standings, where it's looked for. */
+
+@media (max-width: 1019.98px) {
+  main:is(.tour, .swiss, .simul) {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: none !important;
+    grid-template-areas: 'main' 'table' 'side' 'uchat' !important;
+    gap: 12px !important;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 8px 0 32px !important;
+  }
+
+  /* From 800px Lichess's page column is only as wide as its content, between two free ones:
+   * a short Swiss's stood in the middle. */
+  html:is([data-lr-ext-has~='tour'], [data-lr-ext-has~='swiss'], [data-lr-ext-has~='simul'])
+    #main-wrap {
+    ---main-max-width: 100%;
+  }
+
+  main:is(.tour, .swiss, .simul) > :is(.tour__main, .swiss__main, .simul__main) {
+    min-width: 0;
+    margin: 0 !important;
+  }
+
+  main:is(.tour, .swiss, .simul) > :is(.tour__side, .swiss__side, .simul__side) {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Lichess's columns sized the side from the window: here it's the column's. */
+  main:is(.tour, .swiss, .simul) :is(.tour__meta, .swiss__meta, .simul__meta) {
+    flex: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+  }
+
+  main:is(.tour, .swiss, .simul) > .chat__members {
+    margin: -4px 4px 0 !important;
+  }
+
+  /* ---- Cards --- */
+
+  main:is(.tour, .simul)
+    :is(
+      .tour__main > .box,
+      .tour__meta,
+      .tour__stats,
+      .tour__actor-info,
+      .tour__team-info,
+      .simul__main,
+      .simul__meta
+    ) {
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid var(--lr-ext-card-border);
+    border-radius: 10px !important;
+    background: var(--lr-ext-bg-panel) !important;
+    box-shadow: none !important;
+  }
+
+  /* ---- Chat --- */
+
+  /* A card of a fixed height, the input at its foot, as on the game page. */
+  main:is(.tour, .swiss, .simul) .mchat {
+    flex: none !important;
+    box-sizing: border-box;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    border: 1px solid var(--lr-ext-card-border);
+    border-radius: 10px !important;
+    background: var(--lr-ext-bg-panel) !important;
+    box-shadow: none !important;
+  }
+
+  main:is(.tour, .swiss, .simul) .mchat__content {
+    flex: none !important;
+    height: 320px;
+    background: none !important;
+  }
+
+  /* Switched off, the chat leaves its content empty: only the tab and its switch stay. */
+  main:is(.tour, .swiss, .simul) .mchat__content:empty {
+    display: none !important;
+  }
+
+  main:is(.tour, .swiss, .simul) .mchat__tabs {
+    margin-bottom: 8px !important;
+  }
+
+  main:is(.tour, .swiss, .simul) .mchat__messages {
+    flex: 1 1 0 !important;
+    min-height: 0;
+    max-height: none !important;
+  }
+}
+
+/* Below 800px the page has no margins of its own: Lichess's #main-wrap gives 1vw above. */
+@media (max-width: 799.98px) {
+  main:is(.tour, .swiss, .simul) {
+    padding-inline: 8px !important;
+  }
+}
+
+/* A Swiss's boards two by two on a phone: Lichess's half-width minimum leaves no room for
+ * our gap, which put one board in each row. */
+@media (max-width: 499.98px) {
+  main.swiss .swiss__boards {
+    ---np-min-width: calc(50% - 6px);
+  }
+}

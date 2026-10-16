@@ -1,0 +1,5 @@
+/* An arena's, a Swiss's and a simul's pages below 1020px: their shared column of cards and
+ * chat, then each one's own parts. After their desktop sheets, which they override. */
+@import './layout.css';
+@import './arena.css';
+@import './simul.css';

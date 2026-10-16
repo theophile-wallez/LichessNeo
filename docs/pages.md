@@ -24,9 +24,9 @@ and a white knob, and a single big number in the state's color.
 | Game setup        | `/#hook`      | 2     | tiles for the variant, the time control and the side over Lichess's controls, a bottom sheet on phones; no signature yet |
 | Game, playing     | `/<id>`       | –     | not audited yet                                                                                                          |
 | Game over         | `/<id>`       | 2     | signature planned: the rating's change on the track, toward the next hundred                                             |
-| Arena tournaments | `/tournament` | 2     | the leaderboard beside the schedule is a plain list                                                                      |
+| Arena tournaments | `/tournament` | 2     | the leaderboard beside the schedule is a plain list; a tournament's page is still Lichess's on a desktop                 |
 | Swiss tournaments | `/swiss`      | 2     |                                                                                                                          |
-| Simuls            | `/simul`      | 2     | sets the tone for 2                                                                                                      |
+| Simuls            | `/simul`      | 2     | sets the tone for 2; a simul's page is still Lichess's on a desktop                                                      |
 
 ## Puzzles
 
