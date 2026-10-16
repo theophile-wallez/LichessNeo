@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CoachMood } from '#shared/coach.ts';
 import { flush } from '#shared/testing/timers.ts';
 import type { MascotOptions, MascotView } from './mascot/index.ts';
-import { showCoach } from './index.ts';
+import { coach, showCoach } from './index.ts';
 
 // The mascots' bundle, standing in: what each mascot was asked to show, and its first frame
 // drawn on demand.
@@ -36,6 +36,11 @@ beforeEach(() => {
     '<button class="lr-ext-coach__avatar"><span class="lr-ext-coach__face"></span></button>';
 });
 
+afterEach(() => {
+  vi.unstubAllGlobals();
+  localStorage.clear();
+});
+
 const isLive = (): boolean => document.querySelector('.lr-ext-coach__avatar--live') !== null;
 
 describe('the coach', () => {
@@ -52,5 +57,29 @@ describe('the coach', () => {
     expect(played).toEqual([{ coach: 12, mood: 'sad' }]);
     showCoach({ coach: 12, mood: 'happy', talking: false });
     expect(played).toEqual([{ coach: 12, mood: 'happy' }]);
+  });
+
+  it('stays its still while the settings keep the coaches still, and keeps them so', async () => {
+    let answer: ((settings: unknown) => void) | undefined;
+    vi.stubGlobal('chrome', {
+      runtime: { id: 'test' },
+      storage: {
+        sync: {
+          get: (key: string) =>
+            new Promise(resolve => (answer = settings => resolve({ [key]: settings }))),
+        },
+        onChanged: { addListener: () => {} },
+      },
+    });
+    coach.start();
+    showCoach({ coach: 5, mood: 'happy', talking: false });
+    await flush();
+    drawn?.();
+    expect(isLive()).toBe(true);
+
+    answer?.({ coachMotion: false, analysisCoach: false });
+    await flush();
+    expect(isLive()).toBe(false);
+    expect(localStorage.getItem('lr-ext-coach-options')).toBe('{"motion":false,"analysis":false}');
   });
 });

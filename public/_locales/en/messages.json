@@ -319,6 +319,22 @@
     "message": "Little sounds as you use the extension's controls, like the notches of Stockfish's level slider. Lichess's sounds and your pack's don't change.",
     "description": "What the interface sounds setting covers."
   },
+  "settingCoachMotion": {
+    "message": "Animated coaches",
+    "description": "The setting that plays the coaches as 3D mascots, or keeps them still pictures."
+  },
+  "settingCoachMotionBody": {
+    "message": "Your coach moves in 3D and reacts to your moves and your clicks. Off, it stays a still picture, lighter on a modest computer.",
+    "description": "What the animated coaches setting covers."
+  },
+  "settingAnalysisCoach": {
+    "message": "Coach on the analysis board",
+    "description": "The setting that shows the coach on Lichess's free analysis board, or not."
+  },
+  "settingAnalysisCoachBody": {
+    "message": "On the analysis board, the coach judges each move you play. Off, the board is left to Lichess's engine. Your games' reviews keep their coach.",
+    "description": "What the analysis board's coach setting covers."
+  },
   "packsTitle": {
     "message": "Packs",
     "description": "The title of the settings' card for the imported packs."

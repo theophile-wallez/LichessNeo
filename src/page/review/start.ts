@@ -1,4 +1,4 @@
-import { pickCoach } from '#shared/coach.ts';
+import { coachOptions, pickCoach } from '#shared/coach.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import { analyseGame } from './game/analyse-game.ts';
 import { pageLanguage } from './i18n/language.ts';
@@ -13,7 +13,8 @@ import { watchTips } from './view/tooltip.ts';
 import { REVIEWED_VARIANTS } from './variants.ts';
 
 // Starts the review once Lichess's analysis controller is up: on a game's
-// analysis, the review of its moves; on the free analysis board, the coach.
+// analysis, the review of its moves; on the free analysis board, the coach,
+// unless the settings leave that board to Lichess's own panel.
 
 const RENDER_MS = 150;
 // A link to one of the game's moves (/<id>#46), which Lichess opens on that
@@ -66,7 +67,7 @@ function run(session: Session, mode: Mode): void {
 export function startReview(session: Session, analysis: Analysis, onMove = false): void {
   if (!REVIEWED_VARIANTS.has(analysis.data?.game.variant.key ?? '')) return;
   if (analysis.synthetic) {
-    run(session, 'live');
+    if (coachOptions().analysis) run(session, 'live');
     return;
   }
   if (!analysis.gameId || analysis.mainline.length < 2) return;

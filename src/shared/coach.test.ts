@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { COACH_COUNT, pickCoach, ROBOT_COACH } from './coach.ts';
+import { COACH_COUNT, coachOptions, keepCoachOptions, pickCoach, ROBOT_COACH } from './coach.ts';
 
 afterEach(() => localStorage.clear());
 
@@ -42,5 +42,21 @@ describe('pickCoach', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.1);
     expect(pickCoach()).toBe(3);
     expect(localStorage.getItem('lr-ext-coach')).toBe('3');
+  });
+});
+
+describe('coachOptions', () => {
+  it('is all on until the settings have been kept', () => {
+    expect(coachOptions()).toEqual({ motion: true, analysis: true });
+  });
+
+  it('reads back the switches kept', () => {
+    keepCoachOptions({ motion: false, analysis: true });
+    expect(coachOptions()).toEqual({ motion: false, analysis: true });
+  });
+
+  it('is all on over a stored value of another shape', () => {
+    localStorage.setItem('lr-ext-coach-options', '{"motion":"no"}');
+    expect(coachOptions()).toEqual({ motion: true, analysis: true });
   });
 });

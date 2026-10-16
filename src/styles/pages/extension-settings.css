@@ -43,6 +43,16 @@ main.account[data-lr-ext-settings] > .page-menu__content:not(.lr-ext-settings) {
   --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/volume-high.svg');
 }
 
+.lr-ext-setting[data-lr-ext-setting='coachMotion'] {
+  --lr-ext-setting-color: var(--lr-ext-purple);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/three-d-rotate.svg');
+}
+
+.lr-ext-setting[data-lr-ext-setting='analysisCoach'] {
+  --lr-ext-setting-color: var(--lr-ext-orange);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat.svg');
+}
+
 .lr-ext-setting[data-lr-ext-setting='sidebarRating'] {
   --lr-ext-setting-color: var(--lr-ext-green);
   --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');

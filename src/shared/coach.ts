@@ -1,5 +1,5 @@
 import { z } from 'zod/mini';
-import { readStored, StorageKey, writeStored } from './storage.ts';
+import { readStored, readStoredJson, StorageKey, writeStored, writeStoredJson } from './storage.ts';
 
 /** The Game Review's coaches: the 3D mascots of content/coach/mascot, a still of each in
  * public/img/coaches. An id kept from the four human coaches is one of the first four. The
@@ -55,4 +55,24 @@ export function pickCoach(): number {
 /** Keeps `coach` for every page that shows one, as the settings or the review pick it. */
 export function keepCoach(coach: number): void {
   writeStored(StorageKey.coach, coach);
+}
+
+const CoachOptionsSchema = z.object({
+  /** The coaches play as 3D mascots, or stay their still images. */
+  motion: z.boolean(),
+  /** The coach judges each move on the free analysis board. */
+  analysis: z.boolean(),
+});
+export type CoachOptions = z.infer<typeof CoachOptionsSchema>;
+
+const ALL_ON: CoachOptions = { motion: true, analysis: true };
+
+/** The settings' coach switches as last kept, for the page world and before the settings are read. */
+export function coachOptions(): CoachOptions {
+  return readStoredJson(StorageKey.coachOptions, CoachOptionsSchema) ?? ALL_ON;
+}
+
+/** Keeps the coach switches the settings say, for `coachOptions`. */
+export function keepCoachOptions(options: CoachOptions): void {
+  writeStoredJson(StorageKey.coachOptions, options);
 }

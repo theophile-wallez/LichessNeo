@@ -239,6 +239,18 @@
   "settingUiSoundsBody": {
     "message": "Les petits sons des commandes de l’extension, comme les crans du curseur de niveau de Stockfish. Les sons de Lichess et de votre pack ne changent pas."
   },
+  "settingCoachMotion": {
+    "message": "Coachs animés"
+  },
+  "settingCoachMotionBody": {
+    "message": "Votre coach bouge en 3D et réagit à vos coups et à vos clics. Désactivé, il reste une image fixe, plus légère pour un ordinateur modeste."
+  },
+  "settingAnalysisCoach": {
+    "message": "Coach sur l’échiquier d’analyse"
+  },
+  "settingAnalysisCoachBody": {
+    "message": "Sur l’échiquier d’analyse, le coach juge chaque coup que vous jouez. Désactivé, l’échiquier est laissé au moteur de Lichess. Les bilans de vos parties gardent leur coach."
+  },
   "packsTitle": {
     "message": "Packs"
   },

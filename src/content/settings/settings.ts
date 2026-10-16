@@ -14,6 +14,10 @@ export const MAX_CUSTOM_THEMES = 24;
 const SettingsSchema = z.object({
   /** The interface's own sounds (content/ui/sounds.ts), not Lichess's nor a pack's. */
   uiSounds: z.prefault(z.boolean(), true),
+  /** The coaches play as 3D mascots; off, they stay their still images (content/coach). */
+  coachMotion: z.prefault(z.boolean(), true),
+  /** The coach judging each move on the free analysis board; off, Lichess's own panel shows. */
+  analysisCoach: z.prefault(z.boolean(), true),
   /** The speed whose rating the sidebar shows beside the player's name (content/sidebar). */
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */

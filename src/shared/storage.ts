@@ -22,6 +22,9 @@ export const StorageKey = {
   // The custom boards saved under a name (content/packs/saved-boards.ts).
   savedBoards: prefixed('saved-boards'),
   coach: prefixed('coach'),
+  // The settings' coach switches, kept here too for the page world, and to be read before the
+  // settings are (#shared/coach.ts).
+  coachOptions: prefixed('coach-options'),
   // The signed-in user's own avatar, picked in the settings (#shared/own-avatar.ts).
   avatar: prefixed('avatar'),
   // The name the signed-in user sees in place of theirs (#shared/own-name.ts).

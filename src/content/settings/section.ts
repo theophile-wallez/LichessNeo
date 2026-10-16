@@ -7,7 +7,7 @@ import { PAGE_NAMES, SETTINGS_PAGES, type SettingsPage } from './address.ts';
 import { buildAppearance, showScheme } from './appearance.ts';
 import { buildAvatarCard } from './avatar-card.ts';
 import { buildNameCard } from './name-card.ts';
-import { buildCoachCard } from './coach-card.ts';
+import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
 import { buildInterfacePage } from './interface-page.ts';
 import { buildLooksPage } from './looks-page.ts';
 import { onSettings, settingsRead } from './settings.ts';
@@ -47,7 +47,7 @@ export function buildSection(): SettingsSection {
   const coach = buildCoachCard();
   const looks = buildLooksPage(packLibrary());
   const pages: Readonly<Record<SettingsPage, readonly HTMLElement[]>> = {
-    personalization: [buildAppearance(), coach.element],
+    personalization: [buildAppearance(), coach.element, buildCoachSwitches()],
     profile: [buildAvatarCard(), buildNameCard()],
     board: looks.elements,
     packs: [importSection(packLibrary())],

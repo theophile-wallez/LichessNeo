@@ -4,11 +4,14 @@ import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import { chooseCoach } from '#content/bootstrap/coach-choice.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
+import { currentSettings, onSettings } from './settings.ts';
+import { buildSwitchList } from './switch-list.ts';
 
 // The settings' Coach card, on the Personalization page, under Appearance
 // (styles/pages/settings-coach.css): the coach, live over its still, says
 // hello, over a tile for each coach. The pick is the one every coach shows
-// (#shared/coach.ts): the review, the puzzles, the drills.
+// (#shared/coach.ts): the review, the puzzles, the drills. Under it, the
+// coach's switches: its 3D, and its place on the analysis board.
 
 // The coaches' names, in the order of their numbers (content/coach/mascot/cast).
 const NAMES = [
@@ -110,6 +113,16 @@ export function buildCoachCard(): CoachCard {
     showPick(card, coach);
     spot.sync(visible ? mascot : null, 'neutral', { coach });
   };
+  // Taken off and put back as the 3D is switched: live, or its still.
+  let moving = currentSettings().coachMotion;
+  onSettings(({ coachMotion }) => {
+    if (coachMotion === moving) return;
+    moving = coachMotion;
+    if (!visible) return;
+    if (mascot) setData(mascot, 'lrExtLive', null);
+    spot.sync(null, 'neutral', { coach });
+    spot.sync(mascot, 'neutral', { coach });
+  });
   card.addEventListener('click', event => {
     const picked = CoachIdSchema.safeParse(
       closestTo(event.target, '.lr-ext-coach-choice', HTMLElement)?.dataset.lrExtCoachChoice,
@@ -124,3 +137,18 @@ export function buildCoachCard(): CoachCard {
   showPick(card, coach);
   return { element: card, show };
 }
+
+/** The coach's switches, under its card. */
+export const buildCoachSwitches = (): HTMLElement =>
+  buildSwitchList([
+    {
+      key: 'coachMotion',
+      title: message('settingCoachMotion'),
+      body: message('settingCoachMotionBody'),
+    },
+    {
+      key: 'analysisCoach',
+      title: message('settingAnalysisCoach'),
+      body: message('settingAnalysisCoachBody'),
+    },
+  ]);

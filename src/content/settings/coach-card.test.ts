@@ -3,7 +3,7 @@ import type { CoachMood } from '#shared/coach.ts';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { flush } from '#shared/testing/timers.ts';
 import type { MascotOptions } from '#content/coach/mascot/index.ts';
-import { buildCoachCard, coachName } from './coach-card.ts';
+import { buildCoachCard, buildCoachSwitches, coachName } from './coach-card.ts';
 
 // WebGL isn't in happy-dom: the mascots' bundle mounts a stand-in that keeps
 // what it was told to show, and draws when the test says so.
@@ -155,6 +155,58 @@ describe('the settings’ coach card', () => {
     expect(mascot.shown.at(-1)).toEqual({ coach: 8, mood: 'happy' });
     show(false);
     expect(live()).toBeNull();
+    expect(stage?.dataset.lrExtLive).toBeUndefined();
+  });
+});
+
+const switchOf = (list: HTMLElement, key: string): HTMLButtonElement | null =>
+  queryOne(list, `[data-lr-ext-setting='${key}'] .lr-ext-switch`, HTMLButtonElement);
+
+describe('the coach’s switches', () => {
+  // chrome.storage.sync, as the settings read and write it.
+  const synced = new Map<string, unknown>();
+
+  beforeEach(() => {
+    vi.stubGlobal('chrome', {
+      i18n,
+      runtime: { ...runtime, id: 'test' },
+      storage: {
+        sync: {
+          get: (key: string) => Promise.resolve({ [key]: synced.get(key) }),
+          set: (items: Record<string, unknown>) => {
+            for (const [key, value] of Object.entries(items)) synced.set(key, value);
+            return Promise.resolve();
+          },
+        },
+        onChanged: { addListener: () => {} },
+      },
+    });
+  });
+
+  it('turns the 3D and the analysis board’s coach on and off', async () => {
+    const list = buildCoachSwitches();
+    await flush();
+    expect(switchOf(list, 'coachMotion')?.getAttribute('aria-checked')).toBe('true');
+    expect(switchOf(list, 'analysisCoach')?.getAttribute('aria-checked')).toBe('true');
+    switchOf(list, 'analysisCoach')?.click();
+    expect(synced.get('lr-ext-settings')).toMatchObject({
+      coachMotion: true,
+      analysisCoach: false,
+    });
+    expect(switchOf(list, 'analysisCoach')?.getAttribute('aria-checked')).toBe('false');
+  });
+
+  it('takes the card’s live coach off as the 3D is switched off', async () => {
+    const { element, show } = buildCoachCard();
+    document.body.append(element);
+    const list = buildCoachSwitches();
+    show(true);
+    await flush();
+    await flush();
+    mascot.draw();
+    const stage = queryOne(element, '.lr-ext-coach-pick__mascot', HTMLElement);
+    expect(stage?.dataset.lrExtLive).toBe('');
+    switchOf(list, 'coachMotion')?.click();
     expect(stage?.dataset.lrExtLive).toBeUndefined();
   });
 });

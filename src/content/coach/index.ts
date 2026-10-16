@@ -1,6 +1,8 @@
+import { keepCoachOptions } from '#shared/coach.ts';
 import { queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onCoachState, type CoachState } from '#shared/protocol.ts';
+import { onSettings, type Settings } from '#content/settings/settings.ts';
 import { loadMascots } from './load.ts';
 import type { MascotView } from './mascot/index.ts';
 
@@ -10,7 +12,8 @@ import type { MascotView } from './mascot/index.ts';
 // The puzzle page's coach is drawn here and played the same way.
 // It runs here rather than in the page world because the mascots' bundle is
 // the extension's, which the page's CSP keeps out of reach. Until it's in, or
-// without WebGL, the avatar shows the coach's still image.
+// without WebGL or with the settings keeping the coaches still, the avatar
+// shows the coach's still image.
 
 const LIVE_CLASS = 'lr-ext-coach__avatar--live';
 
@@ -71,9 +74,17 @@ export function showCoach(state: CoachState): void {
   sync();
 }
 
+// Kept for the page world, which can't read the settings, and for the next page's first look.
+function followSettings({ coachMotion, analysisCoach }: Settings): void {
+  keepCoachOptions({ motion: coachMotion, analysis: analysisCoach });
+  if (coachMotion) sync();
+  else unmount();
+}
+
 export const coach: Feature = {
   name: 'coach',
   start: () => {
     onCoachState(showCoach);
+    onSettings(followSettings);
   },
 };
