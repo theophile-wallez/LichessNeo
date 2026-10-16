@@ -1,0 +1,147 @@
+/* ---- Below 1020px --- */
+
+/* Phones and tablets held upright: one column, the board and the panel on the first screen,
+   the highscores and the about link under them. The panel packs into a few rows: the title
+   (or the score) beside the clock, then the combo, then the buttons. */
+@media (max-width: 1019.98px) {
+  html[data-lr-ext-has~='storm-play'] #main-wrap > main {
+    --lr-ext-board: min(
+      100vw - 16px,
+      max(280px, 100dvh - var(---site-header-height, 60px) - 236px)
+    );
+
+    display: grid;
+    grid-template-columns: var(--lr-ext-board);
+    grid-template-areas: 'board' 'side' 'scores' 'high' 'about';
+    justify-content: center;
+    gap: 12px;
+    padding: 8px 0 32px;
+  }
+
+  main > .storm--play {
+    display: contents !important;
+  }
+
+  main > .storm--play .puz-board {
+    grid-area: board;
+  }
+
+  /* The board takes the column's width here, whatever its handle says. */
+  main > .storm--play cg-resize {
+    display: none;
+  }
+
+  main > .storm--play .puz-side {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'top clock' 'table table';
+    align-items: center;
+    gap: 14px 12px;
+    padding: 16px !important;
+  }
+
+  main > .storm--play .puz-side__top {
+    grid-area: top;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  main > .storm--play .puz-side__top::before {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 12px;
+    background-size: 34px, auto !important;
+  }
+
+  main > .storm--play .puz-side__start__text strong {
+    font-size: 21px !important;
+  }
+
+  main > .storm--play .puz-side__solved__text {
+    font-size: 44px !important;
+  }
+
+  main > .storm--play .puz-clock {
+    grid-area: clock;
+    justify-content: flex-end;
+    margin: 0;
+  }
+
+  main > .storm--play .puz-clock__time {
+    padding: 5px 12px 5px 10px;
+    font-size: 28px !important;
+  }
+
+  main > .storm--play .puz-clock__time::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* The combo first, the buttons at the right under it. */
+  main > .storm--play .puz-side__table {
+    grid-area: table;
+    flex-direction: column-reverse !important;
+    gap: 12px;
+    margin: 0;
+  }
+
+  main > .storm--play .puz-side__control {
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  html[data-lr-ext-has~='storm-play'] main > .storm-play-scores {
+    grid-area: scores;
+    margin: 0 !important;
+  }
+
+  html[data-lr-ext-has~='storm-play'] main > .storm-dashboard__high__periods {
+    grid-area: high;
+    margin: 0 !important;
+  }
+
+  html[data-lr-ext-has~='storm-play'] main > .storm__about__link {
+    grid-area: about;
+    margin: 0 !important;
+  }
+}
+
+/* ---- On its side --- */
+
+/* A tablet or a phone on its side: the panel beside a board as tall as the screen. */
+@media (max-width: 1019.98px) and (orientation: landscape) {
+  html[data-lr-ext-has~='storm-play'] #main-wrap > main {
+    --lr-ext-board: max(
+      240px,
+      min(100dvh - var(---site-header-height, 60px) - 16px, 100vw - 16px - 12px - 280px)
+    );
+
+    grid-template-columns: var(--lr-ext-board) minmax(280px, 400px);
+    grid-template-rows: 1fr repeat(3, auto);
+    grid-template-areas:
+      'board side'
+      'board scores'
+      'board high'
+      'board about';
+  }
+
+  /* The desktop's panel: the title at the top, the clock under it, the combo and the buttons
+     at its foot. */
+  main > .storm--play .puz-side {
+    display: flex !important;
+    align-items: stretch !important;
+  }
+
+  main > .storm--play .puz-clock {
+    justify-content: flex-start;
+  }
+
+  main > .storm--play .puz-side__table {
+    flex-direction: column !important;
+    margin-top: auto;
+  }
+
+  html[data-lr-ext-has~='storm-play'] main > .storm__about__link {
+    justify-self: start;
+  }
+}
