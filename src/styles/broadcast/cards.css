@@ -267,9 +267,15 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
   font-weight: 600;
 }
 
-/* Lichess's mobile layout runs the lists edge to edge: pad them. */
+/* Lichess's mobile layout runs the lists edge to edge: the page's margins, and the search
+ * across. */
 @media (max-width: 799.98px) {
   :is(.relay-index, .relay-calendar) .page-menu__content.box {
-    padding: 0 12px 24px !important;
+    padding: 0 8px 24px !important;
+  }
+
+  :is(.relay-index, .relay-calendar) .box__top :is(.search, .search input) {
+    flex: 1 1 100%;
+    width: 100%;
   }
 }

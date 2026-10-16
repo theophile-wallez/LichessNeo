@@ -283,15 +283,28 @@
 
 /* ---- Phones --- */
 
-@media (max-width: 640px) {
+/* No card around the list once it runs the window's width: the cards keep the page's
+ * margins (menu-narrow.css). */
+@media (max-width: 799.98px) {
+  .streamer-list.box {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .streamer-list > .box__top {
+    padding: 8px 0 16px !important;
+  }
+
   .streamer-list .list {
-    padding: 0 12px 20px !important;
+    padding: 0 0 20px !important;
   }
 
   .lr-ext-streamers__section {
-    margin-inline: 12px !important;
+    margin-inline: 0 !important;
   }
+}
 
+@media (max-width: 640px) {
   .streamer-list .streamer {
     grid-template:
       'picture title' auto

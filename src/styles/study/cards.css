@@ -348,6 +348,6 @@ main.page-menu[data-lr-ext-menu~='studies'][data-lr-ext-nav-active*='/blog/'] {
 /* Lichess's mobile layout runs the list edge to edge: give the cards a margin. */
 @media (max-width: 799.98px) {
   .study-index.box {
-    padding: 0 12px 24px !important;
+    padding: 0 8px 24px !important;
   }
 }

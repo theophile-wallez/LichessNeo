@@ -73,9 +73,12 @@ main.page-menu[data-lr-ext-menu~='about']
   content: none !important;
 }
 
-/* A phone's title tile: smaller, as its title is. */
+/* A phone's title tile: smaller, as its title is. A user's blog has none: "'s Blog" runs into
+ * its author's link. */
 @media (max-width: 640px) {
-  main.page-menu .page-menu__content :is(h1.box__top, .box__top > h1, .community__leaders > h2) {
+  main.page-menu
+    .page-menu__content
+    :is(h1.box__top, .box__top > h1, .community__leaders > h2):not(:has(.user-link)) {
     gap: 12px !important;
   }
 

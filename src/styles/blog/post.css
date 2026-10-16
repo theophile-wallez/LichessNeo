@@ -233,6 +233,15 @@
   }
 }
 
+/* No card either below 1020px. */
+@media (max-width: 1019.98px) {
+  .ublog-post.box {
+    padding-top: 4px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
 .ublog-post .ublog-post__markup :is(ul, ol) {
   margin: 0 0 1.1em !important;
   padding-inline-start: 1.4em;

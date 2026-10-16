@@ -69,15 +69,31 @@
   }
 }
 
-/* Lichess's mobile layout runs edge to edge: the cards need a margin. min-width: 0
- * keeps an unwrapped forum excerpt from widening the page now the box doesn't clip. */
+/* Lichess's mobile layout runs edge to edge: the cards need the page's margins, and 12px
+ * between them (the hero's two parts are one card). min-width: 0 keeps an unwrapped forum
+ * excerpt from widening the page now the box doesn't clip. */
 @media (max-width: 1019.98px) {
-  main.page-menu:has(.user-show) {
-    padding: 0 12px 24px;
+  html[data-lr-ext-has~='user-show'] main.page-menu {
+    row-gap: 0;
+    padding: 0 8px 24px;
   }
 
   main.page-menu > .page-menu__content.user-show {
     min-width: 0;
+  }
+
+  .user-show
+    > :is(
+      .user-show__social,
+      .note-zone,
+      #us_profile,
+      .user-show__blog,
+      .angles,
+      .flash,
+      .mod-zone,
+      .claim-title
+    ) {
+    margin-bottom: 12px !important;
   }
 }
 

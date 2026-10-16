@@ -61,7 +61,7 @@
 
 @media (max-width: 799.98px) {
   .study-topics.box {
-    padding: 0 12px 24px !important;
+    padding: 0 8px 24px !important;
   }
 }
 
@@ -208,6 +208,6 @@ main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a:hover {
 
 @media (max-width: 799.98px) {
   main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .page-menu__content.box {
-    padding: 0 12px 24px !important;
+    padding: 0 8px 24px !important;
   }
 }

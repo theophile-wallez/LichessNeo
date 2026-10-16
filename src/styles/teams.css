@@ -348,9 +348,14 @@ main.team-list .slist tbody tr > td:only-child {
   text-align: center;
 }
 
-/* Lichess's mobile layout runs edge to edge: give the cards a margin. */
+/* Lichess's mobile layout runs edge to edge: the page's margins, and the search across. */
 @media (max-width: 799.98px) {
   main.team-list .page-menu__content.box {
-    padding: 0 12px 24px !important;
+    padding: 0 8px 24px !important;
+  }
+
+  main.team-list .box__top :is(.search, .search input) {
+    flex: 1 1 100%;
+    width: 100%;
   }
 }

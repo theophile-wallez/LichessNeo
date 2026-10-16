@@ -1,0 +1,127 @@
+/* ---- Side menus below 1020px --- */
+
+/* From 800px Lichess keeps a page's side menu a column beside it: it stays put under the top
+ * bar while the page scrolls. Below, the menu is a strip of links over the page (its
+ * `.subnav__inner` scrolls, or the menu itself where it has none): it runs under the page's
+ * margins and fades out at an edge where more links are hidden. */
+
+/* How far each fade reaches: none where the strip doesn't scroll, or where scroll timelines
+ * aren't supported. */
+@property --lr-ext-menu-fade-start {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --lr-ext-menu-fade-end {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@media (min-width: 800.02px) and (max-width: 1019.98px) {
+  main.page-menu > .subnav {
+    position: sticky;
+    top: calc(var(---site-header-height, 60px) + 8px);
+    align-self: start;
+    box-sizing: border-box;
+    max-height: calc(100dvh - var(---site-header-height, 60px) - 16px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+}
+
+@media (max-width: 799.98px) {
+  main.page-menu {
+    row-gap: 12px;
+  }
+
+  /* The page's 8px margins, which Lichess's box gives 12px. */
+  main.page-menu > .page-menu__content {
+    padding-inline: 8px !important;
+  }
+
+  main.page-menu > .subnav {
+    margin: 8px 0 0 !important;
+    padding: 0 !important;
+    overflow: auto hidden !important;
+    border: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  :is(main.page-menu > .subnav, main.page-menu > .subnav > .subnav__inner) {
+    gap: 4px;
+    scroll-padding-inline: 8px;
+    scrollbar-width: none;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 var(--lr-ext-menu-fade-start),
+      #000 calc(100% - var(--lr-ext-menu-fade-end)),
+      transparent
+    );
+  }
+
+  main.page-menu > .subnav > .subnav__inner {
+    display: flex !important;
+    margin: 0 !important;
+    padding: 0 8px !important;
+  }
+
+  main.page-menu > .subnav a {
+    flex: none;
+    margin: 0 !important;
+    white-space: nowrap;
+  }
+
+  /* A menu without an inner strip: its first and last links keep the page's margins. */
+  main.page-menu > .subnav > a:first-child {
+    margin-inline-start: 8px !important;
+  }
+
+  main.page-menu > .subnav > a:last-child {
+    margin-inline-end: 8px !important;
+  }
+
+  /* Lichess's separators, a faint line across in the column, stand upright between links. */
+  main.page-menu > .subnav .sep {
+    flex: none;
+    align-self: center;
+    width: 1px;
+    height: 24px !important;
+    margin: 0 6px !important;
+    padding: 0 !important;
+    background: var(--lr-ext-border) !important;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (max-width: 799.98px) {
+    :is(main.page-menu > .subnav, main.page-menu > .subnav > .subnav__inner) {
+      animation: lr-ext-menu-fade linear both !important;
+      animation-timeline: scroll(self inline) !important;
+    }
+  }
+}
+
+@keyframes lr-ext-menu-fade {
+  from {
+    --lr-ext-menu-fade-start: 0px;
+    --lr-ext-menu-fade-end: 32px;
+  }
+
+  8% {
+    --lr-ext-menu-fade-start: 32px;
+  }
+
+  92% {
+    --lr-ext-menu-fade-end: 32px;
+  }
+
+  to {
+    --lr-ext-menu-fade-start: 32px;
+    --lr-ext-menu-fade-end: 0px;
+  }
+}

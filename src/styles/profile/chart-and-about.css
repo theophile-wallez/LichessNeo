@@ -158,8 +158,17 @@
   font-size: 13.5px;
 }
 
+/* Without a name or a bio above, the stats start the card. */
+.user-show > #us_profile .user-infos > .stats:first-child {
+  margin-top: 0;
+}
+
 .user-show > #us_profile .stats > * {
   margin: 0 !important;
+}
+
+.user-show > #us_profile .stats > .col2:empty {
+  display: none;
 }
 
 /* Below 1260px the about card goes under the chart: beside it the chart got 466px at

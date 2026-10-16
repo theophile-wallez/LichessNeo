@@ -144,3 +144,21 @@ main.team-show .team-show__tour td.text::before {
     align-self: start;
   }
 }
+
+/* Below 800px the page runs the window's width: no card around it, the page's margins. */
+@media (max-width: 799.98px) {
+  main.team-show.box {
+    padding-bottom: 24px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  main.team-show > .box__top {
+    padding: 20px 8px 12px !important;
+  }
+
+  main.team-show > .team-show__content {
+    margin-inline: 8px !important;
+  }
+}

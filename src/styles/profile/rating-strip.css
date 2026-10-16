@@ -23,13 +23,29 @@
     box-sizing: border-box;
     width: 100% !important;
     margin: 0 !important;
-    padding: 10px 12px !important;
+    padding: 10px 8px !important;
     overflow-x: auto;
     border: none !important;
     background: none !important;
     box-shadow: none !important;
     scrollbar-width: none;
     scroll-snap-type: x proximity;
+    scroll-padding-inline: 8px;
+    /* It fades out at an edge where more pills are hidden, as a side menu's strip does
+     * (pages/menu-narrow.css). */
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 var(--lr-ext-menu-fade-start),
+      #000 calc(100% - var(--lr-ext-menu-fade-end)),
+      transparent
+    );
+  }
+
+  /* A profile's: across the page's margins, to scroll under the window's edges. */
+  html[data-lr-ext-has~='user-show'] main.page-menu .page-menu__menu .side.sub-ratings {
+    width: calc(100% + 16px) !important;
+    margin: 0 -8px !important;
   }
 
   main.page-menu .page-menu__menu .side.sub-ratings::-webkit-scrollbar {
@@ -103,5 +119,14 @@
   /* The pill keeps the rating: its games, its last change, its rank and Lichess's arrow go. */
   .side.sub-ratings :is(rating > span, rating .rp, .rank, a > icon, hr) {
     display: none !important;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (max-width: 1019.98px) {
+    main.page-menu .page-menu__menu .side.sub-ratings {
+      animation: lr-ext-menu-fade linear both !important;
+      animation-timeline: scroll(self inline) !important;
+    }
   }
 }
