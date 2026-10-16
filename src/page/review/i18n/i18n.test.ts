@@ -78,8 +78,10 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
     );
   });
 
-  it('has the original’s remarks', () => {
-    expect(language.remarks).toEqual(original.remarks);
+  it('has the original’s remarks, and its own for a side’s first book move', () => {
+    const { firstMove, ...remarks } = language.remarks;
+    expect(remarks).toEqual(original.remarks);
+    expect(firstMove).toHaveLength(4);
   });
 });
 

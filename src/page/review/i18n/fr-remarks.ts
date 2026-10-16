@@ -166,4 +166,10 @@ export const remarksFr: RemarkPools = {
     'La dame sort trop tôt : elle va se faire chasser.',
   ],
   earlyKing: ['Bouger le roi si tôt coûte le roque.', 'Le roi ferait mieux de rester à l’abri.'],
+  firstMove: [
+    'Une façon classique de commencer.',
+    'Un premier coup très joué.',
+    'Un début solide.',
+    'Un premier coup que jouent aussi les grands maîtres.',
+  ],
 };

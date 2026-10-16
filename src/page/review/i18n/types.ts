@@ -120,7 +120,8 @@ export type Situation =
   | 'winning'
   | 'losing'
   | 'earlyQueen'
-  | 'earlyKing';
+  | 'earlyKing'
+  | 'firstMove';
 
 export type RemarkPools = Readonly<Record<MoveClass | Situation, readonly string[]>>;
 

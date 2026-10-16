@@ -39,12 +39,27 @@ describe('the coach’s comment', () => {
       const expected = texts[index]?.[lang] ?? [];
       for (const [i, move] of replay(game).entries()) {
         const said = expected[i];
-        expect(remark(move, context), `${game.name} ${move.ply}`).toBe(said?.remark);
+        // A side's first book move has its own remarks: the original's spoke of theory going on.
+        const first = move.moveClass === 'book' && move.position.ply <= 2;
+        const allowed = first ? LANGUAGES[lang].remarks.firstMove : [said?.remark];
+        expect(allowed, `${game.name} ${move.ply}`).toContain(remark(move, context));
         expect(explanation(move, context, game.opening), `${game.name} ${move.ply}`).toEqual(
           toParts(said?.parts ?? []),
         );
       }
     }
+  });
+
+  it('greets a side’s first book move as a start, and the next ones as theory', () => {
+    const game = fixtureGames().find(({ name }) => name === 'opera');
+    const moves = game ? replay(game) : [];
+    const context = { gameId: game?.id ?? '', coach: 1, language: en };
+    const [first, reply, second] = moves;
+    if (!first || !reply || !second) throw new Error('no opera game');
+    expect([first, reply, second].map(move => move.moveClass)).toEqual(['book', 'book', 'book']);
+    expect(en.remarks.firstMove).toContain(remark(first, context));
+    expect(en.remarks.firstMove).toContain(remark(reply, context));
+    expect(en.remarks.firstMove).not.toContain(remark(second, context));
   });
 
   it('names checkmate on its own', () => {

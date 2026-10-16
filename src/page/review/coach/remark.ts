@@ -5,8 +5,9 @@ import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { type CoachContext, moveSeed } from './context.ts';
 import { hash } from './hash.ts';
 
-// A short comment under the coach's verdict. Some situations (a mate…)
-// replace the class's pool; the others (castling, a capture…) mix with it.
+// A short comment under the coach's verdict. Some situations (a mate, a side's
+// first book move…) replace the class's pool; the others (castling, a capture…)
+// mix with it.
 
 function signedMate(record: MoveVerdict['before'], sign: number): number | null {
   return 'mate' in record ? record.mate * sign : null;
@@ -16,6 +17,7 @@ function overridingPool(move: MoveVerdict, pools: RemarkPools): readonly string[
   const sign = move.color === 'white' ? 1 : -1;
   const mateAfter = signedMate(move.after, sign);
   if (move.san.includes('#')) return pools.mate;
+  if (move.moveClass === 'book' && move.position.ply <= 2) return pools.firstMove;
   if (isError(move.moveClass) && mateAfter !== null && mateAfter < 0) return pools.allowsMate;
   if ((signedMate(move.before, sign) ?? 0) > 0)
     return (mateAfter ?? 0) > 0 ? pools.mating : pools.missedMate;
