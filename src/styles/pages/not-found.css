@@ -1,0 +1,113 @@
+/* ---- Page not found --- */
+
+/* Lichess's 404 (main.not-found): a giant grey "404", its words in capitals, and a
+ * mini-game in a frame. Ours: a card with a signpost on an orange tile, the number in the
+ * accent's gradient, then the game on a card of its own (Lichess shows it only with a mouse,
+ * from 500px). */
+
+main.not-found.box {
+  overflow: visible !important;
+  padding: 16px 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main.not-found > header {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  margin: 0 0 16px;
+  padding: 24px 32px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 16px;
+  background: var(--lr-ext-bg-panel);
+}
+
+main.not-found > header::before {
+  content: '';
+  flex: none;
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  /* The glyph at full strength over the tile at a quarter, in the scheme's orange (as the
+   * menus' titles, menu-titles.css). */
+  background: var(--lr-ext-orange);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/signpost.svg') center / 40px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
+}
+
+main.not-found > header h1 {
+  flex: none;
+  margin: 0 !important;
+  background: linear-gradient(135deg, var(--lr-ext-accent), var(--lr-ext-purple));
+  background-clip: text;
+  color: transparent !important;
+  font-size: 88px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1;
+}
+
+main.not-found > header strong {
+  display: block;
+  margin: 0 0 6px !important;
+  color: var(--lr-ext-text-strong) !important;
+  font-size: 26px !important;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: none !important;
+}
+
+main.not-found > header p {
+  margin: 0;
+  color: var(--lr-ext-text-dim);
+  font-size: 15px;
+}
+
+main.not-found > .game {
+  align-self: stretch;
+  box-sizing: border-box;
+  padding: 20px 24px 12px;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 16px;
+  background: var(--lr-ext-bg-panel);
+}
+
+main.not-found > .game iframe {
+  display: block;
+  margin: 0 auto 12px !important;
+  border-radius: 10px;
+}
+
+main.not-found > .game .credits {
+  margin: 0;
+  color: var(--lr-ext-text-dim);
+  font-size: 13px;
+}
+
+/* Below 800px the page runs the window's width: the page's margins, the card's parts in a
+ * column. */
+@media (max-width: 799.98px) {
+  main.not-found.box {
+    padding: 12px 8px 32px !important;
+  }
+
+  main.not-found > header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  main.not-found > header h1 {
+    font-size: 72px !important;
+  }
+
+  main.not-found > header strong {
+    font-size: 22px !important;
+  }
+}

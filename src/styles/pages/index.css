@@ -14,6 +14,8 @@
 @import './tournaments.css';
 @import './tournament-pages.css';
 @import './static-pages.css';
+@import './tool-forms.css';
+@import './not-found.css';
 @import './videos/index.css';
 @import './streamers.css';
 @import './streamer-list.css';

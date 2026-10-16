@@ -1,0 +1,327 @@
+/* ---- Import game and advanced search --- */
+
+/* /paste and /games/search: Lichess's one box, a form on it. Ours: the title with the
+ * sidebar's picture for the page, then the form on a card, its fields in our look
+ * (tabs-tables-forms.css). Below 640px the search's labels go over their fields. */
+
+main:is(.importer, .search).box {
+  overflow: visible !important;
+  padding: 0 0 40px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main:is(.importer, .search) > h1.box__top {
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 16px;
+  margin: 0 !important;
+  padding: 16px 0 !important;
+}
+
+main:is(.importer, .search) > h1.box__top::before {
+  content: '';
+  flex: none;
+  width: 52px;
+  height: 52px;
+  background: center / contain no-repeat;
+}
+
+main.importer > h1.box__top::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/import-game.webp');
+}
+
+main.search > h1.box__top::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/advanced-search.webp');
+}
+
+main:is(.importer, .search) :is(form.import, form.search__form, .search__status) {
+  box-sizing: border-box;
+  border: 1px solid var(--lr-ext-card-border);
+  border-radius: 12px;
+  background: var(--lr-ext-bg-panel);
+}
+
+main:is(.importer, .search) .form-label {
+  color: var(--lr-ext-text-strong);
+  font-weight: 700;
+}
+
+/* ---- Import --- */
+
+main.importer > .explanation {
+  margin: 0 0 16px !important;
+  color: var(--lr-ext-text-dim);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+main.importer form.import {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+}
+
+main.importer form.import .form-group {
+  margin: 0 !important;
+}
+
+main.importer form.import .form-label {
+  display: block;
+  margin: 0 0 8px !important;
+}
+
+main.importer form.import textarea {
+  box-sizing: border-box;
+  width: 100% !important;
+  height: 240px !important;
+  min-height: 140px;
+  padding: 12px 14px !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* The file picker as a drop zone across the card. */
+main.importer form.import .upload input[type='file'] {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 !important;
+  padding: 14px 16px 14px 48px;
+  border: 1.5px dashed var(--lr-ext-lift-20);
+  border-radius: 10px;
+  background: var(--lr-ext-lift-3)
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-upload--989795.svg') 14px
+    center / 22px no-repeat;
+  color: var(--lr-ext-text-dim);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+html[dir='rtl'] main.importer form.import .upload input[type='file'] {
+  padding: 14px 48px 14px 16px;
+  background-position: calc(100% - 16px) center;
+}
+
+main.importer form.import .upload input[type='file']:hover {
+  border-color: var(--lr-ext-accent);
+}
+
+main.importer form.import .form-check__container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+main.importer form.import .form-check .form-label {
+  margin: 0 !important;
+}
+
+main.importer form.import .form-help {
+  display: block;
+  margin-top: 6px;
+}
+
+main.importer form.import .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 !important;
+  padding: 20px 0 0 !important;
+  border-top: 1px solid var(--lr-ext-border) !important;
+}
+
+main.importer form.import .form-actions .button {
+  margin: 0 !important;
+  padding: 12px 28px !important;
+  font-size: 15px;
+}
+
+/* ---- Search --- */
+
+main.search form.search__form {
+  margin: 0 0 16px !important;
+  padding: 16px 24px 20px !important;
+}
+
+main.search form.search__form table {
+  border-collapse: collapse;
+}
+
+/* Lichess nests the duration's row in another, which leaves an empty one before it. */
+main.search form.search__form tr:empty {
+  display: none;
+}
+
+main.search form.search__form th {
+  width: 180px;
+  padding: 8px 16px 8px 0 !important;
+  color: var(--lr-ext-text);
+  font-weight: 700;
+  text-align: start;
+}
+
+main.search form.search__form td {
+  padding: 6px 0 !important;
+  text-align: start;
+}
+
+main.search form.search__form .two-columns {
+  gap: 8px 16px;
+}
+
+/* "From", "To" and the clock's two names: quiet labels before their fields. */
+main.search form.search__form .two-columns > div {
+  gap: 10px !important;
+  color: var(--lr-ext-text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Lichess's underlined "(?)": a quiet round mark, its help in the title. */
+main.search form.search__form span.help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: 4px;
+  border-radius: 50%;
+  background: var(--lr-ext-lift-10);
+  font-size: 0;
+  text-decoration: none;
+  vertical-align: -2px;
+}
+
+main.search form.search__form span.help::before {
+  content: '?';
+  color: var(--lr-ext-text-dim);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+main.search form.search__form td.action {
+  padding-top: 16px !important;
+  text-align: end;
+}
+
+main.search form.search__form td.action .button {
+  padding: 12px 32px !important;
+  font-size: 15px;
+}
+
+main.search .search__status {
+  margin: 0 0 12px;
+  padding: 12px 16px !important;
+  color: var(--lr-ext-text-dim);
+  font-size: 14px;
+}
+
+main.search .search__status strong {
+  color: var(--lr-ext-text-strong);
+}
+
+/* Desktop: the search's title stays put while the form and the games scroll (as in
+ * teams.css); the import fits the window. */
+@media (min-width: 1020px) {
+  main.search > h1.box__top {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background: var(--lr-ext-bg-page);
+    box-shadow:
+      var(--lr-ext-pin-cover-wide),
+      -12px 0 var(--lr-ext-bg-page),
+      12px 0 var(--lr-ext-bg-page);
+  }
+
+  main.search > h1.box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.search > h1.box__top::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* Below 800px the page runs the window's width: the page's margins. */
+@media (max-width: 799.98px) {
+  main:is(.importer, .search).box {
+    padding-inline: 8px !important;
+  }
+
+  main:is(.importer, .search) > h1.box__top {
+    gap: 12px;
+    padding: 12px 0 !important;
+    font-size: 1.6rem !important;
+  }
+
+  main:is(.importer, .search) > h1.box__top::before {
+    width: 40px;
+    height: 40px;
+  }
+
+  main.importer form.import {
+    padding: 16px;
+  }
+
+  main.importer form.import .form-actions .button {
+    flex: 1;
+  }
+}
+
+/* A phone: each label over its field, the search button across. */
+@media (max-width: 639.98px) {
+  main.search form.search__form {
+    padding: 12px 16px 16px !important;
+  }
+
+  main.search form.search__form tr {
+    display: block;
+    padding: 6px 0;
+  }
+
+  main.search form.search__form tr.none {
+    display: none;
+  }
+
+  main.search form.search__form :is(th, td) {
+    display: block;
+    width: auto;
+    padding: 0 !important;
+  }
+
+  main.search form.search__form th {
+    padding-bottom: 6px !important;
+  }
+
+  main.search form.search__form th:empty {
+    display: none;
+  }
+
+  /* "From" and "To" over their fields, as the rows' labels are. */
+  main.search form.search__form .two-columns > div {
+    flex-direction: column;
+    flex-basis: 0 !important;
+    align-items: stretch !important;
+    gap: 4px !important;
+    min-width: 0;
+  }
+
+  main.search form.search__form td.action .button {
+    width: 100%;
+  }
+}
