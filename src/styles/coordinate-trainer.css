@@ -1,0 +1,225 @@
+/* ---- Coordinate trainer below 1020px --- */
+
+/* Phones and tablets (/training/coordinate, main#trainer): one column that scrolls, the board
+   and the start button on the first screen, the explanation and the settings under them as
+   cards, the picks as segmented controls. While training, the score, the clock and the side
+   to find take the settings' place, the first two side by side. */
+@media (max-width: 1019.98px) {
+  main#trainer > .trainer {
+    --lr-ext-board: min(
+      100vw - 16px,
+      max(280px, 100dvh - var(---site-header-height, 60px) - 120px)
+    );
+
+    grid-template-columns: var(--lr-ext-board);
+    justify-content: center;
+    row-gap: 12px;
+    padding: 8px 0 32px;
+  }
+
+  /* The board takes the column's width here, whatever its handle says. */
+  main#trainer cg-resize {
+    display: none;
+  }
+
+  main#trainer .progress {
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--lr-ext-lift-8) !important;
+  }
+
+  main#trainer .progress__bar {
+    height: 8px !important;
+    border-radius: 999px;
+    background: var(--lr-ext-accent) !important;
+  }
+
+  main#trainer .wrong .progress__bar {
+    background: var(--lr-ext-red) !important;
+  }
+
+  main#trainer .table {
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  main#trainer .table:empty {
+    display: none;
+  }
+
+  main#trainer .table .start {
+    order: -1;
+    width: 100% !important;
+    margin: 0;
+  }
+
+  main#trainer :is(.explanation, .side > form, .side > .settings, .current-status) {
+    box-sizing: border-box;
+    margin: 0 !important;
+    border: none;
+    border-radius: 12px;
+    background: var(--lr-ext-bg-panel) !important;
+    box-shadow: none;
+  }
+
+  main#trainer .explanation {
+    padding: 16px !important;
+    color: var(--lr-ext-text-dim);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  main#trainer .explanation h1 {
+    margin: 0 0 8px !important;
+    color: var(--lr-ext-text-strong);
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  main#trainer .explanation :is(p, ul) {
+    margin: 0 0 8px;
+  }
+
+  main#trainer .explanation strong {
+    color: var(--lr-ext-text-strong);
+  }
+
+  main#trainer .side {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px !important;
+  }
+
+  main#trainer .side > :not(.current-status),
+  main#trainer .side > .current-status--color {
+    grid-column: 1 / -1;
+  }
+
+  /* ---- Picks --- */
+
+  main#trainer .side > form {
+    padding: 4px;
+  }
+
+  main#trainer .side group.radio {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 4px;
+    border: none !important;
+    background: none !important;
+  }
+
+  main#trainer .side group.radio > div {
+    flex: 1 1 0;
+    width: auto !important;
+    min-width: 0;
+  }
+
+  main#trainer .side group.radio label {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 44px;
+    border: none !important;
+    border-radius: 9px !important;
+    background: none !important;
+    color: var(--lr-ext-text-dim) !important;
+    font-size: 14px;
+    font-weight: 700;
+    transition:
+      background 0.15s,
+      color 0.15s !important;
+  }
+
+  main#trainer .side group.radio input:checked + label {
+    background: var(--lr-ext-bg-raised) !important;
+    box-shadow: 0 1px 3px var(--lr-ext-shade-20);
+    color: var(--lr-ext-text-strong) !important;
+  }
+
+  main#trainer .side .settings {
+    gap: 14px !important;
+    padding: 14px 16px !important;
+  }
+
+  /* ---- Training --- */
+
+  main#trainer .current-status {
+    gap: 4px;
+    padding: 12px !important;
+  }
+
+  main#trainer .current-status h1 {
+    margin: 0 !important;
+    color: var(--lr-ext-text-dim);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  main#trainer :is(.score, .timer) {
+    margin: 0 !important;
+    color: var(--lr-ext-text-strong);
+    font-size: 44px !important;
+    line-height: 1;
+  }
+
+  main#trainer .current-status--color {
+    gap: 10px;
+    padding: 8px 12px !important;
+  }
+
+  main#trainer .current-status--color icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  /* Name square: the files and ranks as buttons. */
+  main#trainer .files-ranks {
+    gap: 6px;
+  }
+
+  main#trainer .files-ranks button.file-rank {
+    height: 44px !important;
+    border: none;
+    border-radius: 8px;
+    background: var(--lr-ext-btn-grey) !important;
+    box-shadow: var(--lr-ext-btn-grey-shadow);
+    color: var(--lr-ext-text-strong);
+    font-size: 16px;
+    font-weight: 800;
+  }
+}
+
+/* A tablet or a phone on its side: the board as tall as the screen, the rest beside it. */
+@media (max-width: 1019.98px) and (orientation: landscape) {
+  main#trainer > .trainer {
+    --lr-ext-board: max(
+      240px,
+      min(100dvh - var(---site-header-height, 60px) - 40px, 100vw - 16px - 12px - 280px)
+    );
+
+    grid-template-columns: var(--lr-ext-board) minmax(280px, 400px);
+    grid-template-rows: auto auto 1fr auto;
+    /* Naming squares, the buttons beside the board, in view. */
+    grid-template-areas:
+      'board table'
+      'board side'
+      'board co-input'
+      'progress .';
+    column-gap: 12px;
+    align-content: start;
+  }
+
+  main#trainer :is(.side, .coordinate-input) {
+    align-self: start;
+  }
+
+  main#trainer .coordinate-input {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas: 'keyboard' 'voice' 'buttons' !important;
+  }
+}

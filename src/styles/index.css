@@ -31,6 +31,7 @@
 @import './practice-run/index.css';
 @import './learn/index.css';
 @import './puzzles/index.css';
+@import './coordinate-trainer.css';
 @import './dashboard/index.css';
 @import './broadcast/index.css';
 @import './swiss/index.css';
