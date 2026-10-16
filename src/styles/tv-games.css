@@ -41,4 +41,23 @@ main.tv-games .now-playing .mini-game__player {
   main.tv-games .now-playing .mini-game {
     padding: 6px !important;
   }
+
+  /* No room for the ratings beside the clocks: the names take it, cut short with an
+   * ellipsis rather than under the clock. */
+  main.tv-games .now-playing .mini-game__user {
+    display: block !important;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  main.tv-games .now-playing .mini-game__user .utitle {
+    display: inline !important;
+  }
+
+  main.tv-games .now-playing .mini-game__user .rating {
+    display: none !important;
+  }
 }

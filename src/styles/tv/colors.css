@@ -1,0 +1,74 @@
+/* ---- Channels' colors --- */
+
+/* The leaderboards' color for each mode (leaderboard/), on TV's channels and the current
+ * games' (tv-games.css), at every width. The class is the channel's key, which Lichess
+ * doesn't translate. */
+main:is(.round.tv-single, .tv-games) .tv-channel {
+  --lr-ext-tv: var(--lr-ext-accent);
+  --lr-ext-tv-2: var(--lr-ext-accent-dim);
+}
+
+main:is(.round.tv-single, .tv-games) .tv-channel.best {
+  --lr-ext-tv: var(--lr-ext-purple);
+  --lr-ext-tv-2: var(--lr-ext-purple-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.bullet {
+  --lr-ext-tv: #f5a93b;
+  --lr-ext-tv-2: var(--lr-ext-orange-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.blitz {
+  --lr-ext-tv: var(--lr-ext-yellow-dark);
+  --lr-ext-tv-2: var(--lr-ext-orange-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.rapid {
+  --lr-ext-tv: var(--lr-ext-accent);
+  --lr-ext-tv-2: var(--lr-ext-accent-dim);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.classical {
+  --lr-ext-tv: #45a3f5;
+  --lr-ext-tv-2: var(--lr-ext-cyan-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.ultraBullet {
+  --lr-ext-tv: #f06a4a;
+  --lr-ext-tv-2: var(--lr-ext-red-dark);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.crazyhouse {
+  --lr-ext-tv: var(--lr-ext-cyan-dark);
+  --lr-ext-tv-2: var(--lr-ext-cyan-deep);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.chess960 {
+  --lr-ext-tv: var(--lr-ext-orange-dark);
+  --lr-ext-tv-2: var(--lr-ext-orange-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.antichess {
+  --lr-ext-tv: var(--lr-ext-pink);
+  --lr-ext-tv-2: var(--lr-ext-pink-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.atomic {
+  --lr-ext-tv: var(--lr-ext-red);
+  --lr-ext-tv-2: var(--lr-ext-red-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.threeCheck {
+  --lr-ext-tv: var(--lr-ext-cyan-darker);
+  --lr-ext-tv-2: var(--lr-ext-cyan-deep);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.kingOfTheHill {
+  --lr-ext-tv: var(--lr-ext-orange-dark);
+  --lr-ext-tv-2: var(--lr-ext-orange-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.horde {
+  --lr-ext-tv: var(--lr-ext-cyan-dark);
+  --lr-ext-tv-2: var(--lr-ext-neutral-10);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.racingKings {
+  --lr-ext-tv: var(--lr-ext-cyan);
+  --lr-ext-tv-2: var(--lr-ext-cyan-dark);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.bot {
+  --lr-ext-tv: var(--lr-ext-purple-dark);
+  --lr-ext-tv-2: var(--lr-ext-purple-darker);
+}
+main:is(.round.tv-single, .tv-games) .tv-channel.computer {
+  --lr-ext-tv: var(--lr-ext-cyan-dark);
+  --lr-ext-tv-2: var(--lr-ext-cyan-darker);
+}
