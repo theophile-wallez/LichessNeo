@@ -50,6 +50,21 @@ describe('cardMarkup', () => {
     expect(root.querySelector('.lr-ext-end__title')?.textContent).toBe('Draw');
     expect(root.querySelector('.lr-ext-end__reason')).toBeNull();
   });
+
+  // The stylesheet draws a blank in its place while it's empty (game-end-stats.css).
+  it('leaves the accuracy empty until its figure comes', () => {
+    const root = render(
+      cardMarkup(
+        endCardInput({
+          outcome: { result: 'win', reason: 'resign', winner: 'white' },
+          texts,
+          coachId: 1,
+          opponent: 'bob',
+        }),
+      ),
+    );
+    expect(root.querySelector('.lr-ext-end__accuracy b')?.textContent).toBe('');
+  });
 });
 
 describe('cardClasses', () => {

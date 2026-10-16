@@ -93,13 +93,29 @@ main.round .rcontrols .follow-up > .lr-ext-end__card {
   }
 }
 
+/* A phone: a smaller coach leaves the words room. */
+@media (max-width: 1019.98px) {
+  @container (max-width: 360px) {
+    .lr-ext-end__card .lr-ext-end__glow {
+      --lr-ext-coach-h: 92px;
+    }
+
+    .lr-ext-end__card .lr-ext-end__title {
+      font-size: 20px;
+    }
+  }
+}
+
 /* ---- Coach --- */
 
 /* Lit in the result's color from under the coach, fading out behind the words. The coach
-   stands on its bottom edge, with room above for its hops: only the glow's edge cuts it. */
+   stands on its bottom edge, with room above for its hops and at its sides for its arms
+   (about a fifth of its height, the fox's reach the farthest): only the glow's edge cuts it,
+   at its feet. */
 .lr-ext-end__glow {
   display: flex;
-  gap: 6px;
+  gap: calc(var(--lr-ext-coach-h) / 6);
+  padding-inline-start: calc(var(--lr-ext-coach-h) / 5);
   min-height: calc(var(--lr-ext-coach-h) + 18px);
   overflow: hidden;
   border-radius: 12px;

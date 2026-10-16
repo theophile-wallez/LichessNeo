@@ -87,7 +87,7 @@ const CHIP = trustedHtml(
 );
 
 const emptyStats = (texts: GameOverTexts): SafeHtml =>
-  html`<p class="lr-ext-end__accuracy"><b>–</b><span>${texts.accuracy}</span></p>
+  html`<p class="lr-ext-end__accuracy"><b></b><span>${texts.accuracy}</span></p>
     <div class="lr-ext-end__counts">${Array.from({ length: CHIP_COUNT }, () => CHIP)}</div>`;
 
 /** The strip with the player's figures in, for a card drawn at once. */

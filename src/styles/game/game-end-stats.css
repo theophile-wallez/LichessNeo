@@ -31,6 +31,14 @@
   white-space: nowrap;
 }
 
+/* Until the figure comes (page/game-over/card.ts leaves it empty), a blank in its place. */
+.lr-ext-end__accuracy b:empty {
+  width: 88px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--lr-ext-lift-6);
+}
+
 .lr-ext-end__accuracy span {
   margin-top: 3px;
   color: var(--lr-ext-text-dim);
@@ -110,6 +118,37 @@ a.lr-ext-end__count[href]:hover .lr-ext-end__count-label {
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* A phone's card: the accuracy on a line of its own, its name beside it, so the counts get
+   the width for theirs. The card is the container (game-end-card.css). */
+@media (max-width: 1019.98px) {
+  @container (max-width: 360px) {
+    .lr-ext-end__stats {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .lr-ext-end__accuracy {
+      flex: 1 1 100%;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .lr-ext-end__accuracy b {
+      align-self: auto;
+      font-size: 30px;
+    }
+
+    .lr-ext-end__accuracy b:empty {
+      height: 30px;
+    }
+
+    .lr-ext-end__counts {
+      flex-basis: 100%;
+    }
+  }
 }
 
 /* While the closed review's analysis goes, in place of the figures. */
