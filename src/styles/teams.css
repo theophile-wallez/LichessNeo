@@ -223,21 +223,31 @@ main.team-list .slist .team-name.mine {
   color: var(--lr-ext-brag, var(--lr-ext-orange-dark)) !important;
 }
 
-/* Avatar: the group icon on a tile tinted by `--lr-ext-team`. */
+/* Avatar: the group icon on a tile tinted by `--lr-ext-team`. The icon is the name's glyph,
+ * masked to its Hugeicon (theme/hugeicons/), which would cut a tile drawn on it down to the
+ * icon: the tile is the cell's own. */
+main.team-list .slist td.subject::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  inset-inline-start: 16px;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--lr-ext-team) 22%, var(--lr-ext-bg-panel));
+}
+
 main.team-list .slist .team-name::before {
   position: absolute;
   top: 16px;
   inset-inline-start: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 46px;
   height: 46px;
   margin: 0 !important;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--lr-ext-team) 22%, var(--lr-ext-bg-panel));
   color: var(--lr-ext-team);
   font-size: 24px !important;
+  line-height: 46px;
+  text-align: center;
   opacity: 1 !important;
 }
 
