@@ -3,7 +3,7 @@
 /* Lichess's rows of choices (group.radio) wrap their last one or two onto a row of their
  * own, as wide as the row. On a phone: up to four choices share one row, each its share
  * of it, their words wrapping inside; five or more go two by two, an odd last one across.
- * A group of checkboxes starts with an empty, hidden one. */
+ * A group of checkboxes starts with a hidden one, without a label. */
 @media (max-width: 639.98px) {
   main.account group.radio {
     flex-wrap: nowrap !important;
@@ -33,9 +33,12 @@
 
   main.account
     group.radio:has(> :nth-child(5))
-    > :first-child:not(:empty)
+    > :first-child:has(> label)
     ~ :last-child:nth-child(odd),
-  main.account group.radio:has(> :nth-child(5)) > :first-child:empty ~ :last-child:nth-child(even) {
+  main.account
+    group.radio:has(> :nth-child(5))
+    > :first-child:not(:has(> label))
+    ~ :last-child:nth-child(even) {
     grid-column: 1 / -1;
   }
 }
