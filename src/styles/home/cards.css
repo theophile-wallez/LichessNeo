@@ -22,6 +22,11 @@ main.lobby
     0 10px 28px var(--lr-ext-shade-20) !important;
 }
 
+/* Signed in with nobody followed, Lichess leaves the timeline empty: no empty card. */
+main.lobby .lobby__timeline:has(> .entries:empty) {
+  display: none !important;
+}
+
 /* Card titles Lichess doesn't provide. */
 main.lobby :is(.lobby__tv, .lobby__blog, .lobby__feed, .lobby__streams)::before {
   display: block;
@@ -226,6 +231,13 @@ main.lobby .lobby__blog .carousel__controls button {
 main.lobby .lobby__blog .carousel__controls button:hover {
   background: var(--lr-ext-btn-grey-hover);
   color: var(--lr-ext-text-strong);
+}
+
+/* Lichess shows the arrows on hover only: a touch screen has none. */
+@media (hover: none) {
+  main.lobby .lobby__blog .carousel__controls {
+    opacity: 1 !important;
+  }
 }
 
 /* As tall as the featured game beside it (contain: size stops it growing the row), its

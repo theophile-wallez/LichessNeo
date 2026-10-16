@@ -78,6 +78,22 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
+
+  /* Lichess's label, as the featured game's card title (cards.css), so the boards line up. */
+  main.lobby .lobby__puzzle > a > .text:first-child {
+    display: block;
+    margin: 0 0 12px 2px;
+    color: var(--lr-ext-text-strong);
+    font-size: 17px;
+    font-weight: 800;
+    text-align: start;
+  }
+
+  /* Two by two where they fit; a lone one keeps the width. */
+  main.lobby .lobby__spotlights {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  }
 }
 
 /* A phone, or a narrow window: one column, the coach beside the title, the primary start

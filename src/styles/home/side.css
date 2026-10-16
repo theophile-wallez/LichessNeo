@@ -85,6 +85,30 @@ main.lobby .lobby__feed::after {
   }
 }
 
+/* Below, the page scrolls, and a list scrolling in it is awkward on a touch screen: the
+   latest updates, whole, and no fades. */
+@media (max-width: 1019.98px) {
+  main.lobby .lobby__feed {
+    max-height: none;
+    overflow: visible;
+  }
+
+  main.lobby .lobby__feed .daily-feed__update:nth-child(n + 4) {
+    display: none !important;
+  }
+
+  main.lobby .lobby__feed::before {
+    position: static;
+    margin: 0 !important;
+    padding: 18px 2px 10px;
+    background: none;
+  }
+
+  main.lobby .lobby__feed::after {
+    display: none;
+  }
+}
+
 /* ---- Side --- */
 
 /* A stack of cards (streams, spotlights, about) rather than one tall card with a hole.
