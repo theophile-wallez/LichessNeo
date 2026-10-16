@@ -179,7 +179,7 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  main.lobby .lobby__start__button--hook {
+  main.lobby :is(.lobby__start__button--hook, .lr-ext-play) {
     grid-column: 1 / -1;
   }
 

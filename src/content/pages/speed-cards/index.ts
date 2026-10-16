@@ -16,18 +16,22 @@ import {
   shownSeekingPool,
 } from './lobby-pools.ts';
 import { cardsMarkup, sectionMarkup } from './markup.ts';
-import { CARD_SPEEDS, poolLabel } from './pools.ts';
+import { createPlayButton } from './play-button.ts';
+import { FIRST_POOL, poolLabel, speedOfPool } from './pools.ts';
 import { fetchCards, keepLastPool, keptCards } from './store.ts';
 import { speedTexts, type SpeedTexts } from './texts.ts';
 
 // The home's quick pairing as a card per speed (styles/home/speed-cards.css),
 // under the hero, in place of Lichess's pools tab: signed in, each shows the
-// player's rating and its curve, and the pool last played as the primary.
+// player's rating and its curve, and the pool last played as the primary. That pool is also
+// the hero's first button (play-button.ts).
 
 interface State {
   readonly texts: SpeedTexts;
   readonly user: string | undefined;
   cards: Card[] | null;
+  /** The pool last played, of any speed. */
+  last: string | null;
   drawn: string | null;
   // The pool a card joined, while Lichess seeks a game there.
   seeking: string | null;
@@ -41,18 +45,22 @@ function draw(section: HTMLElement, state: State): void {
   setHtml(holder, cardsMarkup(state));
 }
 
+/** Joins the pool `id`, or leaves it if it's the one sought. */
+function pickPool(state: State, id: string): void {
+  const joining = state.seeking !== id;
+  state.seeking = joining ? id : null;
+  const speed = speedOfPool(id);
+  if (joining) state.last = id;
+  if (joining && state.user && speed)
+    state.cards = keepLastPool(state.user, speed, id) ?? state.cards;
+  void clickPool(id);
+}
+
 function onClick(event: MouseEvent, state: State): void {
   if (!(event.target instanceof Element)) return;
   if (closestTo(event.target, '.lr-ext-speeds__custom', HTMLElement)) return openCustomGame();
   const id = closestTo(event.target, '[data-lr-ext-pool]', HTMLElement)?.dataset.lrExtPool;
-  if (!id) return;
-  const joining = state.seeking !== id;
-  state.seeking = joining ? id : null;
-  const card = closestTo(event.target, '[data-lr-ext-speed]', HTMLElement)?.dataset.lrExtSpeed;
-  const speed = CARD_SPEEDS.find(candidate => candidate === card);
-  if (joining && state.user && speed)
-    state.cards = keepLastPool(state.user, speed, id) ?? state.cards;
-  void clickPool(id);
+  if (id) pickPool(state, id);
 }
 
 function buildSection(state: State): HTMLElement {
@@ -111,9 +119,11 @@ function sync(state: State): void {
 async function refresh(state: State, user: string): Promise<void> {
   const kept = keptCards(user);
   state.cards = kept?.cards ?? null;
+  state.last = kept?.last ?? null;
   if (kept && !kept.stale) return;
   // Offline, or Lichess busy: the kept cards stay.
   state.cards = (await fetchCards(user).catch(() => null)) ?? state.cards;
+  state.last = keptCards(user)?.last ?? state.last;
 }
 
 // Signed in, the header has the user's tag; body's id alone stays when signed out.
@@ -123,9 +133,26 @@ function signedInUser(): string | undefined {
 
 /** The home's cards for this player (none signed out): call it on every tick. */
 export function createSpeedCards(user: string | undefined, lang: string): () => void {
-  const state: State = { texts: speedTexts(lang), user, cards: null, drawn: null, seeking: null };
+  const state: State = {
+    texts: speedTexts(lang),
+    user,
+    cards: null,
+    last: null,
+    drawn: null,
+    seeking: null,
+  };
   if (user) void refresh(state, user);
-  return () => sync(state);
+  const play = createPlayButton(
+    () => {
+      const pool = state.last ?? FIRST_POOL;
+      return { pool, label: state.texts.play(poolLabel(pool)), seeking: state.seeking === pool };
+    },
+    pool => pickPool(state, pool),
+  );
+  return () => {
+    sync(state);
+    play();
+  };
 }
 
 export const speedCards: Feature = {

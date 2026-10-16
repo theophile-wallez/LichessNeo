@@ -62,6 +62,7 @@ describe('the kept cards', () => {
       last: '10+5',
     });
     expect(keptCards('eresy')?.cards).toEqual(cards);
+    expect(keptCards('eresy')?.last).toBe('10+5');
     // The sidebar's rating comes with them.
     expect(localStorage.getItem('lr-ext-account-rating')).toContain('"rating":1673');
   });
@@ -72,10 +73,12 @@ describe('the kept cards', () => {
     expect(keptCards('eresy')?.cards).toEqual([card]);
   });
 
-  it('take the pool just joined as its speed’s last', () => {
+  it('take the pool just joined as the last, and its speed’s', () => {
     keep('eresy', Date.now());
+    expect(keptCards('eresy')?.last).toBeUndefined();
     expect(keepLastPool('eresy', 'blitz', '5+3')?.[0]?.last).toBe('5+3');
     expect(keptCards('eresy')?.cards[0]?.last).toBe('5+3');
+    expect(keptCards('eresy')?.last).toBe('5+3');
     expect(keepLastPool('someone', 'blitz', '3+0')).toBeNull();
   });
 });

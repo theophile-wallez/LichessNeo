@@ -2,7 +2,7 @@ import { z } from 'zod/mini';
 import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
 import { keepAccountRating } from '#content/sidebar/account-rating.ts';
 import { UserSchema } from '#content/sidebar/top-rating.ts';
-import { CardSchema, cardsOf, HistorySchema, lastPools, type Card } from './data.ts';
+import { CardSchema, cardsOf, HistorySchema, lastPools, newestPool, type Card } from './data.ts';
 import { CARD_SPEEDS, type CardSpeed } from './pools.ts';
 
 // The signed-in player's cards, kept so the home draws them at once, then
@@ -11,15 +11,30 @@ import { CARD_SPEEDS, type CardSpeed } from './pools.ts';
 
 const MAX_AGE_MS = 30 * 1000;
 
-const KeptSchema = z.object({ user: z.string(), at: z.number(), cards: z.array(CardSchema) });
+const KeptSchema = z.object({
+  user: z.string(),
+  at: z.number(),
+  cards: z.array(CardSchema),
+  /** The pool of the player's most recent game in one, whatever its speed. */
+  last: z.optional(z.string()),
+});
 
-/** The kept cards of `user`, and whether they're due to be asked again. */
-export function keptCards(
-  user: string,
-): { readonly cards: Card[]; readonly stale: boolean } | null {
+interface Kept {
+  readonly cards: Card[];
+  /** The pool last played, if any. */
+  readonly last?: string;
+  /** Due to be asked again. */
+  readonly stale: boolean;
+}
+
+/** The kept cards of `user`, the pool they last played, and whether they're due again. */
+export function keptCards(user: string): Kept | null {
   const kept = readStoredJson(StorageKey.speedCards, KeptSchema);
   if (kept?.user !== user) return null;
-  return { cards: kept.cards, stale: Date.now() - kept.at >= MAX_AGE_MS };
+  const stale = Date.now() - kept.at >= MAX_AGE_MS;
+  return kept.last === undefined
+    ? { cards: kept.cards, stale }
+    : { cards: kept.cards, last: kept.last, stale };
 }
 
 async function json<T>(url: string, schema: z.ZodMiniType<T>): Promise<T | null> {
@@ -50,16 +65,17 @@ export async function fetchCards(user: string): Promise<Card[] | null> {
   // The sidebar's rating, fresh too.
   keepAccountRating(user, profile);
   const cards = cardsOf({ user: profile, history: history ?? [], last: lastPools(games) });
-  writeStoredJson(StorageKey.speedCards, { user, at: Date.now(), cards });
+  const last = newestPool(games);
+  writeStoredJson(StorageKey.speedCards, { user, at: Date.now(), cards, ...(last && { last }) });
   return cards;
 }
 
-/** Keeps the pool just joined as its speed's last, before Lichess's export knows it. */
+/** Keeps the pool just joined as the last, and its speed's, before Lichess's export knows it. */
 export function keepLastPool(user: string, speed: CardSpeed, pool: string): Card[] | null {
   const kept = readStoredJson(StorageKey.speedCards, KeptSchema);
   if (kept?.user !== user) return null;
   for (const card of kept.cards) if (card.speed === speed) card.last = pool;
-  writeStoredJson(StorageKey.speedCards, kept);
+  writeStoredJson(StorageKey.speedCards, { ...kept, last: pool });
   return kept.cards;
 }
 

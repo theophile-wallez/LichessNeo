@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { poolLabel, poolOfClock } from './pools.ts';
+import { poolLabel, poolOfClock, speedOfPool } from './pools.ts';
 
 describe('pools', () => {
   it('names a pool as its buttons do, minutes alone without an increment', () => {
@@ -15,5 +15,15 @@ describe('pools', () => {
     expect(poolOfClock(1800, 20)).toBe('30+20');
     expect(poolOfClock(240, 0)).toBeNull();
     expect(poolOfClock(45, 0)).toBeNull();
+  });
+
+  it('knows the speed of each pool', () => {
+    expect([
+      speedOfPool('2+1'),
+      speedOfPool('5+3'),
+      speedOfPool('10+0'),
+      speedOfPool('30+20'),
+    ]).toEqual(['bullet', 'blitz', 'rapid', 'classical']);
+    expect(speedOfPool('4+0')).toBeUndefined();
   });
 });

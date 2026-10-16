@@ -12,6 +12,8 @@ export interface SpeedTexts {
   /** While Lichess seeks a game in a pool, its label given. */
   readonly seeking: (pool: string) => string;
   readonly cancel: string;
+  /** The hero's first button, a game in a pool, its label given. */
+  readonly play: (pool: string) => string;
 }
 
 const ENGLISH: SpeedTexts = {
@@ -21,6 +23,7 @@ const ENGLISH: SpeedTexts = {
   custom: 'Custom game',
   seeking: pool => `Looking for a ${pool} opponent…`,
   cancel: 'Cancel',
+  play: pool => `Play a ${pool} game`,
 };
 
 const TEXTS: Readonly<Record<string, SpeedTexts>> = {
@@ -32,6 +35,7 @@ const TEXTS: Readonly<Record<string, SpeedTexts>> = {
     custom: 'Partie personnalisée',
     seeking: pool => `Recherche d’un adversaire en ${pool}…`,
     cancel: 'Annuler',
+    play: pool => `Jouer une partie ${pool}`,
   },
   de: {
     names: { bullet: 'Bullet', blitz: 'Blitz', rapid: 'Schnellschach', classical: 'Klassisch' },
@@ -40,6 +44,7 @@ const TEXTS: Readonly<Record<string, SpeedTexts>> = {
     custom: 'Eigene Partie',
     seeking: pool => `Suche nach einem Gegner (${pool})…`,
     cancel: 'Abbrechen',
+    play: pool => `Partie ${pool} spielen`,
   },
   es: {
     names: { bullet: 'Bullet', blitz: 'Blitz', rapid: 'Rápida', classical: 'Clásica' },
@@ -48,6 +53,7 @@ const TEXTS: Readonly<Record<string, SpeedTexts>> = {
     custom: 'Partida personalizada',
     seeking: pool => `Buscando rival (${pool})…`,
     cancel: 'Cancelar',
+    play: pool => `Jugar una partida ${pool}`,
   },
   pt: {
     names: { bullet: 'Bullet', blitz: 'Blitz', rapid: 'Rápida', classical: 'Clássico' },
@@ -56,6 +62,7 @@ const TEXTS: Readonly<Record<string, SpeedTexts>> = {
     custom: 'Partida personalizada',
     seeking: pool => `Procurando adversário (${pool})…`,
     cancel: 'Cancelar',
+    play: pool => `Jogar uma partida ${pool}`,
   },
 };
 

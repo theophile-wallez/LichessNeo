@@ -53,18 +53,25 @@ export const CardSchema = z.object({
 
 export type Card = z.infer<typeof CardSchema>;
 
+/** Each game of the export's lines played in a pool, newest first, with its speed. */
+function pooledGames(ndjson: string): { readonly speed: CardSpeed; readonly pool: string }[] {
+  return ndjson.split('\n').flatMap(line => {
+    const game = parseJson(line, GameSchema);
+    const speed = CARD_SPEEDS.find(candidate => candidate === game?.speed);
+    const pool = game?.clock ? poolOfClock(game.clock.initial, game.clock.increment) : null;
+    return speed && pool ? [{ speed, pool }] : [];
+  });
+}
+
 /** The pool of each speed's most recent game, from the export's lines, newest first. */
 export function lastPools(ndjson: string): Partial<Record<CardSpeed, string>> {
   const last: Partial<Record<CardSpeed, string>> = {};
-  for (const line of ndjson.split('\n')) {
-    const game = parseJson(line, GameSchema);
-    const speed = CARD_SPEEDS.find(candidate => candidate === game?.speed);
-    if (!speed || last[speed] || !game?.clock) continue;
-    const pool = poolOfClock(game.clock.initial, game.clock.increment);
-    if (pool) last[speed] = pool;
-  }
+  for (const { speed, pool } of pooledGames(ndjson)) last[speed] ??= pool;
   return last;
 }
+
+/** The pool of the most recent game played in one, from the export's lines, newest first. */
+export const newestPool = (ndjson: string): string | undefined => pooledGames(ndjson)[0]?.pool;
 
 interface CardSources {
   readonly user: z.infer<typeof UserSchema>;

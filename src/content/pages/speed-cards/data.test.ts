@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cardsOf, lastPools } from './data.ts';
+import { cardsOf, lastPools, newestPool } from './data.ts';
 
 const line = (speed: string, initial?: number, increment?: number): string =>
   JSON.stringify(initial === undefined ? { speed } : { speed, clock: { initial, increment } });
@@ -16,6 +16,19 @@ describe('lastPools', () => {
       '',
     ].join('\n');
     expect(lastPools(games)).toEqual({ blitz: '3+2', rapid: '10+5' });
+  });
+});
+
+describe('newestPool', () => {
+  it('is the pool of the newest game played in one, whatever its speed', () => {
+    const games = [
+      line('correspondence'),
+      line('blitz', 240, 0),
+      line('rapid', 600, 0),
+      line('blitz', 180, 2),
+    ];
+    expect(newestPool(games.join('\n'))).toBe('10+0');
+    expect(newestPool(line('correspondence'))).toBeUndefined();
   });
 });
 

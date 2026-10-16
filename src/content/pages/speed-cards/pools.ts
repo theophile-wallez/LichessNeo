@@ -12,6 +12,13 @@ export const POOLS: Readonly<Record<CardSpeed, readonly string[]>> = {
   classical: ['30+0', '30+20'],
 };
 
+/** The pool a player who never played one is offered first. */
+export const FIRST_POOL = '10+0';
+
+/** The speed of a pool's games. */
+export const speedOfPool = (id: string): CardSpeed | undefined =>
+  CARD_SPEEDS.find(speed => POOLS[speed].includes(id));
+
 /** "10 min" for 10+0, "2 + 1" for 2+1: a pool's label in any language. */
 export function poolLabel(id: string): string {
   const [minutes, increment] = id.split('+');

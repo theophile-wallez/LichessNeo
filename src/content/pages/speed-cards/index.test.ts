@@ -53,7 +53,9 @@ let custom: ReturnType<typeof vi.fn<() => void>>;
 beforeEach(() => {
   document.body.innerHTML = `<main class="lobby">
     <section class="lr-ext-hero"></section>
-    <div class="lobby__table"><button class="lobby__start__button--hook"></button></div>
+    <div class="lobby__table"><div class="lobby__start">
+      <button class="lobby__start__button lobby__start__button--hook">Create a game</button>
+    </div></div>
     <div class="lobby__app"></div>
   </main>`;
   custom = vi.fn<() => void>();
@@ -65,6 +67,9 @@ beforeEach(() => {
 afterEach(() => {
   localStorage.clear();
 });
+
+const play = (): HTMLButtonElement | null =>
+  queryOne(document, '.lobby__start > .lr-ext-play', HTMLButtonElement);
 
 const pool = (id: string): HTMLElement | null =>
   queryOne(document, `.lr-ext-speeds .lr-ext-speed__pool[data-lr-ext-pool='${id}']`, HTMLElement);
@@ -154,5 +159,55 @@ describe('the speed cards', () => {
     createSpeedCards(undefined, 'en')();
     queryOne(document, '.lr-ext-speeds__custom', HTMLElement)?.click();
     expect(custom).toHaveBeenCalledOnce();
+  });
+});
+
+describe('the hero’s play button', () => {
+  it('comes first among Lichess’s start buttons, ten minutes for a new player', () => {
+    createSpeedCards(undefined, 'fr')();
+    expect(document.querySelector('.lobby__start')?.firstElementChild).toBe(play());
+    expect(play()?.textContent).toBe('Jouer une partie 10 min');
+    expect(play()?.dataset.lrExtSpeed).toBe('rapid');
+  });
+
+  it('plays the pool last played, and follows the one picked since', async () => {
+    const cards = [{ speed: 'blitz', games: 25, rating: 1584, provisional: false, history: [] }];
+    localStorage.setItem(
+      'lr-ext-speed-cards',
+      JSON.stringify({ user: 'eresy', at: Date.now(), cards, last: '3+2' }),
+    );
+    const sync = createSpeedCards('eresy', 'en');
+    sync();
+    expect(play()?.textContent).toBe('Play a 3 + 2 game');
+    play()?.click();
+    await flush();
+    expect(lobby.member).toBe('3+2');
+    sync();
+    expect(play()?.classList.contains('lr-ext-play--seeking')).toBe(true);
+    pool('3+0')?.click();
+    await flush();
+    sync();
+    expect(play()?.textContent).toBe('Play a 3 min game');
+    expect(play()?.dataset.lrExtSpeed).toBe('blitz');
+  });
+
+  it('is off while Lichess’s own is', async () => {
+    const sync = createSpeedCards(undefined, 'en');
+    document.querySelector('.lobby__start__button--hook')?.classList.add('disabled');
+    sync();
+    expect(play()?.classList.contains('disabled')).toBe(true);
+    play()?.click();
+    await flush();
+    expect(lobby.member).toBeNull();
+  });
+
+  it('comes back at once when Lichess draws its start buttons again', async () => {
+    createSpeedCards(undefined, 'en')();
+    const start = document.createElement('div');
+    start.className = 'lobby__start';
+    document.querySelector('.lobby__start')?.replaceWith(start);
+    await flush();
+    expect(play()).not.toBeNull();
+    expect(start.firstElementChild).toBe(play());
   });
 });
