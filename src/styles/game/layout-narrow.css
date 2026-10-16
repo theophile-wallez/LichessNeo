@@ -62,27 +62,40 @@
     border-radius: 6px !important;
   }
 
-  /* No gutter beside a phone's board: the tools join the player's bar, before the clock, level
-   * with the name, clear of the captured pieces under it. */
+  /* No gutter beside a phone's board, and no room in the player's bar beside the name: the
+   * tools end the move buttons' row (move-list.css keeps it last in the moves), which leaves
+   * them room. */
   main.round > .lr-ext-board-tools {
-    grid-area: user-bot !important;
+    grid-area: moves !important;
     flex-direction: row !important;
-    align-self: start;
+    align-self: end;
     gap: 6px;
     width: auto !important;
-    margin: 2px 152px 0 0 !important;
+    /* Over the crosstable, which ends the moves too (moves-extras.css). */
+    margin: 0 0 calc(var(--lr-ext-crosstable-h, 0px) + 8px) !important;
+    margin-inline-end: 8px !important;
+  }
+
+  main.round :is(i5d, rm6) bo3 {
+    padding-inline-end: calc(8px + 2 * 44px + 6px) !important;
   }
 
   main.round .lr-ext-board-tools__btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
-    background: var(--lr-ext-bg-raised);
+    width: 44px;
+    height: 40px;
+    border-radius: 5px;
+    background: var(--lr-ext-btn-grey);
+    box-shadow: var(--lr-ext-btn-grey-shadow);
     color: var(--lr-ext-text);
   }
 
+  main.round .lr-ext-board-tools__btn::before {
+    width: 19px;
+    height: 19px;
+  }
+
   main.round .ruser-bottom {
-    --lr-ext-clock-room: 226px;
+    --lr-ext-clock-room: 152px;
   }
 
   /* A touch screen has no hover to reveal the flip button. */
@@ -145,6 +158,33 @@
     background: none !important;
   }
 
+  /* The result ends the row on one line, its words after it. */
+  main.round :is(i5d, rm6) .col1-moves .result-wrap {
+    display: flex !important;
+    flex: none;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 !important;
+    padding: 0 10px !important;
+    white-space: nowrap;
+  }
+
+  main.round :is(i5d, rm6) .col1-moves .result-wrap > p {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  main.round :is(i5d, rm6) .col1-moves .result-wrap .result {
+    color: var(--lr-ext-text-strong);
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  main.round :is(i5d, rm6) .col1-moves .result-wrap .status {
+    color: var(--lr-ext-text-dim);
+    font-size: 13px;
+  }
+
   /* The move times (game-over.css) need the list's column: none in a row. */
   main.round :is(i5d, rm6) .col1-moves [data-lr-ext-time]::before,
   main.round :is(i5d, rm6) .col1-moves [data-lr-ext-time]::after {
@@ -182,13 +222,26 @@
   main.round > .lr-ext-board-tools {
     grid-area: board !important;
     flex-direction: column !important;
+    align-self: start;
     width: 30px !important;
     margin: 0 -40px 0 0 !important;
+  }
+
+  main.round :is(i5d, rm6) bo3 {
+    padding-inline-end: 8px !important;
   }
 
   main.round .lr-ext-board-tools__btn {
     width: 30px;
     height: 30px;
+    border-radius: 7px;
+    background: var(--lr-ext-bg-raised);
+    box-shadow: none;
+  }
+
+  main.round .lr-ext-board-tools__btn::before {
+    width: 17px;
+    height: 17px;
   }
 
   main.round .ruser-bottom {
