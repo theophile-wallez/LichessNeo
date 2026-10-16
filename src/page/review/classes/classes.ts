@@ -102,7 +102,7 @@ const MOODS: Partial<Record<MoveClass, CoachMood>> = {
   inaccuracy: 'doubt',
   mistake: 'worry',
   miss: 'sad',
-  blunder: 'shock',
+  blunder: 'angry',
 };
 
 /** How the coach's face reacts to a verdict; null keeps it neutral. */

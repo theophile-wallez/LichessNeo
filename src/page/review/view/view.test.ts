@@ -269,7 +269,7 @@ describe('the coach', () => {
     const markup = avatarMarkup(input).value;
     expect(avatarMarkup(input).value).toBe(markup);
     expect(markup).toContain('lr-ext-coach__avatar--react');
-    expect(markup).toContain('data-lr-ext-coach-id="2" data-lr-ext-mood="shock"');
+    expect(markup).toContain('data-lr-ext-coach-id="2" data-lr-ext-mood="angry"');
   });
 
   it('takes the mood it’s given while there’s no verdict, the verdict’s once there is', () => {
@@ -279,7 +279,7 @@ describe('the coach', () => {
       'data-lr-ext-mood="thinking"',
     );
     expect(avatarMarkup({ ...waiting, moveClass: 'blunder', idle: 'thinking' }).value).toContain(
-      'data-lr-ext-mood="shock"',
+      'data-lr-ext-mood="angry"',
     );
   });
 });
