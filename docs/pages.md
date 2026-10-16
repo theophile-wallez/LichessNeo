@@ -47,28 +47,28 @@ and a white knob, and a single big number in the state's color.
 | Learn       | `/learn`               | 2     | a stage's coach says its goal in the review's card; no signature yet; below 1020px, a stage in one column                        |
 | Practice    | `/practice`            | 2     | sets the tone for 2                                                                                                              |
 | Coordinates | `/training/coordinate` | 1     | Lichess's text panel and tabs on a desktop; a title with its tile, the score on a track; below 1020px, cards and segmented picks |
-| Studies     | `/study`               | 2     |                                                                                                                                  |
+| Studies     | `/study`               | 2     | below 800px the menu is a strip of links that fades at its edges, as every side menu                                             |
 | Coaches     | `/coach`               | 2     | on phones a card has its picture at its side                                                                                     |
 
 ## Watch
 
 | Page          | Path         | Level | Next                                                                                                  |
 | ------------- | ------------ | ----- | ----------------------------------------------------------------------------------------------------- |
-| Broadcasts    | `/broadcast` | 2     |                                                                                                       |
+| Broadcasts    | `/broadcast` | 2     | below 800px the search runs across                                                                    |
 | TV            | `/tv`        | 2     |                                                                                                       |
 | Current games | `/games`     | 1     | on a desktop its channels are Lichess's list, in capitals: give them TV's column (pills below 1020px) |
-| Streamers     | `/streamer`  | 2     |                                                                                                       |
+| Streamers     | `/streamer`  | 2     | below 800px no card around the list, the cards at the page's margins                                  |
 | Videos        | `/video`     | 2     | the tags are a long column of plain pills                                                             |
 
 ## Community
 
-| Page    | Path        | Level | Next                                                                         |
-| ------- | ----------- | ----- | ---------------------------------------------------------------------------- |
-| Players | `/player`   | 2     |                                                                              |
-| Profile | `/@/<user>` | 2     | the medals under the chart                                                   |
-| Teams   | `/team`     | 1     | one bare card on an empty page: a team card and an empty state with a mascot |
-| Forum   | `/forum`    | 2     |                                                                              |
-| Blog    | `/blog`     | 2     |                                                                              |
+| Page    | Path        | Level | Next                                                                                                                                        |
+| ------- | ----------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Players | `/player`   | 2     |                                                                                                                                             |
+| Profile | `/@/<user>` | 2     | the medals under the chart; below 1020px one column of cards 12px apart, the ratings a strip that fades at its edges                        |
+| Teams   | `/team`     | 1     | one bare card on an empty page: a team card and an empty state with a mascot; a team's page is still Lichess's, without its box below 800px |
+| Forum   | `/forum`    | 2     |                                                                                                                                             |
+| Blog    | `/blog`     | 2     | below 1020px a post has no card around it                                                                                                   |
 
 ## Tools
 
@@ -78,16 +78,16 @@ and a white knob, and a single big number in the state's color.
 | Game review     | `/<id>` (finished) | 2     | signature planned: each side's accuracy on the track, in its grade's color; below 1020px, one column           |
 | Openings        | `/opening`         | 2     | the popularity chart is still Lichess's Chart.js canvas                                                        |
 | Board editor    | `/editor`          | 2     |                                                                                                                |
-| Import game     | `/paste`           | 1     | Lichess's form: no title tile, a bare text area, the browser's file picker                                     |
-| Advanced search | `/games/search`    | 1     | Lichess's form: no title tile, rows of empty selects                                                           |
+| Import game     | `/paste`           | 2     | the title with its picture, the form on a card, the file picker as a drop zone; no signature yet               |
+| Advanced search | `/games/search`    | 2     | the form on a card, its labels over its fields on phones; the results' game rows are still Lichess's           |
 
 ## Account
 
-| Page           | Path                                | Level | Next                                                                                 |
-| -------------- | ----------------------------------- | ----- | ------------------------------------------------------------------------------------ |
-| Preferences    | `/account/preferences`              | 2     |                                                                                      |
-| Our settings   | `/account/profile#lr-ext-extension` | 2     | five pages in the account's menu, the board's over a preview board; no signature yet |
-| Page not found | any unknown path                    | 1     | Lichess's 404 and its mini-game                                                      |
+| Page           | Path                                | Level | Next                                                                                                                                        |
+| -------------- | ----------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Preferences    | `/account/preferences`              | 2     | below 640px up to four choices share a row, more go two by two                                                                              |
+| Our settings   | `/account/profile#lr-ext-extension` | 2     | five pages in the account's menu, the board's over a preview board; the coach speaks on its stage as on the review's card; no signature yet |
+| Page not found | any unknown path                    | 2     | a card with a signpost and the number in the accent's gradient, Lichess's mini-game on a card of its own                                    |
 
 ## Seen while auditing
 

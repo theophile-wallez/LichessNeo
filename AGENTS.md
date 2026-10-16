@@ -615,6 +615,11 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   section's own link fold its links open there instead of leaving.
 - **800px exactly.** Lichess's phone menu applies up to `max-width: 800px`:
   start desktop rules at `800.02px`, not `800px`.
+- **Side menus below 1020px.** From 800px a `.subnav` stays a column beside
+  the page; below, it's a strip over it, whose `.subnav__inner` scrolls (or
+  the menu itself, when it has no inner one). `styles/pages/menu-narrow.css`
+  keeps the column put and fades the strip's edges; a page's content box
+  gets 8px margins there, so a page rule that pads it must too.
 - **Boards on their side.** Lichess's puzzles, Storm, Racer, Learn and the
   coordinate trainer take two columns from 799.3px or in any landscape
   window, phones included: below 1020px our layouts go one column upright
