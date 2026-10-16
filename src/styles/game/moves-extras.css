@@ -51,6 +51,11 @@ main.round .round__underboard > .crosstable {
   background: var(--lr-ext-bg-panel) !important;
 }
 
+/* At a game's end Lichess leaves an empty one before the new one. */
+main.round .round__underboard > .crosstable:empty {
+  display: none !important;
+}
+
 html[data-lr-ext-has~='round-crosstable'] main.round :is(i5d, rm6) {
   padding-bottom: var(--lr-ext-crosstable-h, 0px) !important;
 }

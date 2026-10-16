@@ -3,7 +3,7 @@ import { type FakeLayout, fakeLayout, rectBetween } from '#shared/testing/layout
 import { watchMovesExtras } from './moves-extras-height.ts';
 
 const GAME =
-  '<main class="round"><div class="round__app"><div id="voice-bar"></div></div><div class="round__underboard"><div class="crosstable"></div></div></main>';
+  '<main class="round"><div class="round__app"><div id="voice-bar"></div></div><div class="round__underboard"><div class="crosstable"><povs></povs></div></div></main>';
 
 function measureAs(selector: string, height: number): void {
   const element = document.querySelector(selector);
@@ -46,6 +46,18 @@ describe('watchMovesExtras', () => {
     tick();
     expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('80px');
     expect(main()?.style.getPropertyValue('--lr-ext-voice-h')).toBe('');
+  });
+
+  it('measures the filled crosstable, not the empty one Lichess leaves at a game end', () => {
+    document.body.innerHTML =
+      '<main class="round"><div class="round__underboard"><div class="crosstable"></div><div class="crosstable"><povs></povs></div></div></main>';
+    const [empty, filled] = document.querySelectorAll('.crosstable');
+    if (empty)
+      empty.getBoundingClientRect = () => rectBetween({ top: 0, left: 0, right: 10, bottom: 17 });
+    if (filled)
+      filled.getBoundingClientRect = () => rectBetween({ top: 0, left: 0, right: 10, bottom: 60 });
+    tick();
+    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('60px');
   });
 
   it('writes nothing while the heights stay', () => {

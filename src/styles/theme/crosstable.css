@@ -4,152 +4,150 @@
  * (analysis/underboard.css). Lichess's strip of columns, one per game, cuts the names short in
  * a narrow panel. Ours reads as two rows, one per player: the name, the last games as squares
  * (green for the winner), the current match's score, then the lifetime score. As many games
- * show as the width allows. */
+ * show as the width allows, at every width. */
 
-@media (min-width: 1020px) {
-  main:is(.round, .analyse) .crosstable {
+main:is(.round, .analyse) .crosstable {
+  display: flex !important;
+  gap: 3px;
+  box-sizing: border-box;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 8px 10px;
+  overflow: hidden;
+  box-shadow: none !important;
+  container-type: inline-size;
+  font-family: var(--lr-ext-font);
+  line-height: 20px;
+}
+
+main:is(.round, .analyse)
+  .crosstable
+  :is(povs, .crosstable__users, .crosstable__matchup, .crosstable__score) {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: none;
+  padding: 0;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+main:is(.round, .analyse) .crosstable > fill {
+  display: none !important;
+}
+
+main:is(.round, .analyse) .crosstable__users {
+  order: -1;
+  flex: 1 1 0;
+  min-width: 0;
+  margin-inline-end: 4px;
+}
+
+main:is(.round, .analyse) .crosstable__users a {
+  overflow: hidden;
+  padding: 0 !important;
+  color: var(--lr-ext-text) !important;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main:is(.round, .analyse) .crosstable__users a:hover {
+  color: var(--lr-ext-text-strong) !important;
+}
+
+main:is(.round, .analyse) .crosstable__users .uflair {
+  height: 14px;
+  vertical-align: -2px;
+}
+
+/* The names come first: three games in the narrowest panel, more as it widens. */
+main:is(.round, .analyse) .crosstable povs {
+  display: none !important;
+  flex: 0 0 20px;
+}
+
+main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 3) {
+  display: flex !important;
+}
+
+@container (min-width: 300px) {
+  main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 5) {
     display: flex !important;
-    gap: 3px;
-    box-sizing: border-box;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 8px 10px;
-    overflow: hidden;
-    box-shadow: none !important;
-    container-type: inline-size;
-    font-family: var(--lr-ext-font);
-    line-height: 20px;
   }
+}
 
-  main:is(.round, .analyse)
-    .crosstable
-    :is(povs, .crosstable__users, .crosstable__matchup, .crosstable__score) {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    max-width: none;
-    padding: 0;
-    background: none !important;
-    box-shadow: none !important;
-  }
-
-  main:is(.round, .analyse) .crosstable > fill {
-    display: none !important;
-  }
-
-  main:is(.round, .analyse) .crosstable__users {
-    order: -1;
-    flex: 1 1 0;
-    min-width: 0;
-    margin-inline-end: 4px;
-  }
-
-  main:is(.round, .analyse) .crosstable__users a {
-    overflow: hidden;
-    padding: 0 !important;
-    color: var(--lr-ext-text) !important;
-    font-size: 13px;
-    font-weight: 600;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  main:is(.round, .analyse) .crosstable__users a:hover {
-    color: var(--lr-ext-text-strong) !important;
-  }
-
-  main:is(.round, .analyse) .crosstable__users .uflair {
-    height: 14px;
-    vertical-align: -2px;
-  }
-
-  /* The names come first: three games in the narrowest panel, more as it widens. */
-  main:is(.round, .analyse) .crosstable povs {
-    display: none !important;
-    flex: 0 0 20px;
-  }
-
-  main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 3) {
+@container (min-width: 360px) {
+  main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 7) {
     display: flex !important;
   }
+}
 
-  @container (min-width: 300px) {
-    main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 5) {
-      display: flex !important;
-    }
+@container (min-width: 440px) {
+  main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 10) {
+    display: flex !important;
   }
+}
 
-  @container (min-width: 360px) {
-    main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 7) {
-      display: flex !important;
-    }
-  }
+main:is(.round, .analyse) .crosstable povs.sep {
+  margin-inline-start: 4px;
+  padding-inline-start: 4px;
+  border-inline-start: 1px solid var(--lr-ext-border);
+  border-radius: 0;
+}
 
-  @container (min-width: 440px) {
-    main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 10) {
-      display: flex !important;
-    }
-  }
+main:is(.round, .analyse) .crosstable povs a {
+  flex: 0 0 20px;
+  border-radius: 3px;
+  background: var(--lr-ext-bg-raised);
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  opacity: 1 !important;
+  transition: filter 0.15s;
+}
 
-  main:is(.round, .analyse) .crosstable povs.sep {
-    margin-inline-start: 4px;
-    padding-inline-start: 4px;
-    border-inline-start: 1px solid var(--lr-ext-border);
-    border-radius: 0;
-  }
+/* Dark on the bright green: white is hard to read there. */
+main:is(.round, .analyse) .crosstable povs a.win {
+  background: var(--lr-ext-good);
+  color: var(--lr-ext-ink) !important;
+}
 
-  main:is(.round, .analyse) .crosstable povs a {
-    flex: 0 0 20px;
-    border-radius: 3px;
-    background: var(--lr-ext-bg-raised);
-    color: var(--lr-ext-text-dim) !important;
-    font-size: 11px;
-    font-weight: 700;
-    text-align: center;
-    opacity: 1 !important;
-    transition: filter 0.15s;
-  }
+main:is(.round, .analyse) .crosstable povs a:hover {
+  filter: brightness(1.2);
+}
 
-  /* Dark on the bright green: white is hard to read there. */
-  main:is(.round, .analyse) .crosstable povs a.win {
-    background: var(--lr-ext-good);
-    color: var(--lr-ext-ink) !important;
-  }
+main:is(.round, .analyse) .crosstable povs.current a {
+  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+}
 
-  main:is(.round, .analyse) .crosstable povs a:hover {
-    filter: brightness(1.2);
-  }
+main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) {
+  flex: 0 0 auto;
+  margin-inline-start: 4px;
+  font-weight: 700;
+  text-align: end;
+}
 
-  main:is(.round, .analyse) .crosstable povs.current a {
-    box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
-  }
+/* Past the reset of the crosstable's parts above. */
+main:is(.round, .analyse) .crosstable .crosstable__matchup {
+  padding: 0 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--lr-ext-accent) 16%, transparent) !important;
+  font-size: 12px;
+}
 
-  main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) {
-    flex: 0 0 auto;
-    margin-inline-start: 4px;
-    font-weight: 700;
-    text-align: end;
-  }
+main:is(.round, .analyse) .crosstable__score {
+  min-width: 2.5ch;
+  font-size: 14px;
+}
 
-  /* Past the reset of the crosstable's parts above. */
-  main:is(.round, .analyse) .crosstable .crosstable__matchup {
-    padding: 0 6px;
-    border-radius: 4px;
-    background: color-mix(in srgb, var(--lr-ext-accent) 16%, transparent) !important;
-    font-size: 12px;
-  }
+main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) span {
+  padding: 0 !important;
+  color: var(--lr-ext-text-dim);
+}
 
-  main:is(.round, .analyse) .crosstable__score {
-    min-width: 2.5ch;
-    font-size: 14px;
-  }
-
-  main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) span {
-    padding: 0 !important;
-    color: var(--lr-ext-text-dim);
-  }
-
-  main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) .win {
-    color: var(--lr-ext-good);
-  }
+main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) .win {
+  color: var(--lr-ext-good);
 }
