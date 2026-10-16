@@ -1,0 +1,83 @@
+/* ---- Side panel below 1020px --- */
+
+/* Racer's and Storm's panel under the board on phones and tablets held upright: a few rows,
+   the title (or the score) beside the clock, then the rest at full width, the combo before
+   its buttons. On its side the panel is beside the board, laid out as on desktop. */
+@media (max-width: 1019.98px) {
+  :is(.racer, .storm) .puz-side {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px 12px;
+    padding: 16px !important;
+  }
+
+  :is(.racer, .storm) .puz-side > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  :is(.racer, .storm) .puz-side > .puz-side__top {
+    grid-column: 1;
+    grid-row: 1;
+    gap: 12px;
+  }
+
+  :is(.racer, .storm) .puz-side > .puz-clock {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+    margin: 0;
+  }
+
+  :is(.racer, .storm) .puz-side__top::before {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 12px;
+  }
+
+  :is(.racer, .storm) .puz-side__start__text strong {
+    font-size: 21px !important;
+  }
+
+  :is(.racer, .storm) .puz-side__solved__text {
+    font-size: 44px !important;
+  }
+
+  :is(.racer, .storm) .puz-clock__time {
+    padding: 5px 12px 5px 10px;
+    font-size: 28px !important;
+  }
+
+  :is(.racer, .storm) .puz-clock__time::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  :is(.racer, .storm) .puz-side__table {
+    flex-direction: column-reverse !important;
+    gap: 12px;
+    margin: 0;
+  }
+
+  :is(.racer, .storm) .puz-side__control {
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 1019.98px) and (orientation: landscape) {
+  :is(.racer, .storm) .puz-side {
+    display: flex !important;
+    align-items: stretch !important;
+  }
+
+  :is(.racer, .storm) .puz-side > .puz-clock {
+    justify-content: flex-start;
+  }
+
+  :is(.racer, .storm) .puz-side__table {
+    flex-direction: column !important;
+    margin-top: auto;
+  }
+}

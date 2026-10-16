@@ -1,0 +1,54 @@
+/* ---- Race below 1020px --- */
+
+/* Phones and tablets held upright: one column, the board, the track and the panel
+   (side-narrow.css) on the first screen as far as it goes, the race's puzzles under them. */
+@media (max-width: 1019.98px) {
+  main > .racer {
+    --lr-ext-race-h: calc(var(--lr-ext-lanes) * (var(--lr-ext-lane-h) + 5px) + 15px);
+    --lr-ext-board: min(
+      100vw - 16px,
+      max(280px, 100dvh - var(---site-header-height, 60px) - var(--lr-ext-race-h) - 240px)
+    );
+
+    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-rows: none !important;
+    grid-template-areas: 'board' 'race' 'side' 'history' !important;
+    justify-content: center;
+    gap: 12px !important;
+    padding: 8px 0 32px;
+  }
+
+  /* The board takes the column's width here, whatever its handle says. */
+  main > .racer cg-resize {
+    display: none;
+  }
+
+  main > .racer .racer__race {
+    margin: 0 !important;
+  }
+
+  .racer .puz-side__top::before {
+    padding-bottom: 12px;
+    font-size: 40px;
+  }
+}
+
+/* A tablet or a phone on its side: the panel beside the board, the track under both, as on
+   desktop. */
+@media (max-width: 1019.98px) and (orientation: landscape) {
+  main > .racer {
+    --lr-ext-board: max(
+      240px,
+      min(
+        100dvh - var(---site-header-height, 60px) - var(--lr-ext-race-h) - 28px,
+        100vw - 16px - 12px - 280px
+      )
+    );
+
+    grid-template-columns: var(--lr-ext-board) minmax(280px, 400px) !important;
+    grid-template-areas:
+      'board side'
+      'race race'
+      'history history' !important;
+  }
+}
