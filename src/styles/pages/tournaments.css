@@ -294,3 +294,89 @@
   color: var(--lr-ext-text-strong);
   font-weight: 700;
 }
+
+/* ---- Below 1020px --- */
+
+/* One column of cards: the schedule under its title, the links, the leaderboard and the
+ * coming tournaments, then the finished ones. From 600px each list but the finished one
+ * takes two columns. */
+@media (max-width: 1019.98px) {
+  main.tour-home {
+    gap: 12px !important;
+    padding: 8px 0 32px !important;
+  }
+
+  main.tour-home > :is(.tour-home__schedule, .arena-list) {
+    overflow: hidden;
+    border: 1px solid var(--lr-ext-card-border);
+    border-radius: 10px !important;
+    background: var(--lr-ext-bg-panel) !important;
+    box-shadow: none !important;
+  }
+
+  main.tour-home > .tour-home__schedule > .box__top {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin: 0 !important;
+    padding: 16px !important;
+  }
+
+  main.tour-home > .tour-home__schedule > .box__top h1 {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 24px !important;
+  }
+
+  /* The trophy, as on a desktop. */
+  main.tour-home > .tour-home__schedule > .box__top::before {
+    content: '';
+    flex: none;
+    width: 32px;
+    height: 32px;
+    background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp')
+      center / contain no-repeat;
+  }
+
+  main.tour-home > .tour-home__side {
+    margin: 0 !important;
+  }
+
+  main.tour-home .tour__links {
+    margin: 0 !important;
+    padding: 6px;
+    border: 1px solid var(--lr-ext-card-border);
+    border-radius: 10px;
+    background: var(--lr-ext-bg-panel);
+  }
+
+  main.tour-home .tour-home__side h2 {
+    margin-top: 20px !important;
+  }
+
+  main.tour-home .tour-home__side :is(.leaderboard, .scheduled) {
+    border: 1px solid var(--lr-ext-card-border);
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1019.98px) {
+  main.tour-home .tour__links,
+  main.tour-home .tour-home__side :is(.leaderboard, .scheduled) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 6px;
+  }
+
+  /* "More", a button at the list's foot. */
+  main.tour-home .tour-home__side .scheduled > .button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 799.98px) {
+  main.tour-home {
+    padding-inline: 8px !important;
+  }
+}
