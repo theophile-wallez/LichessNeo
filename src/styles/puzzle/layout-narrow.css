@@ -89,10 +89,14 @@
     margin-top: 12px;
   }
 
-  /* The review's coach, with the review's room for its arms (AGENTS.md, "The coach talks in a
-     card"). */
+  /* The review's coach, 34px in the card (which sits 10px in) for its arms: the fox waves
+     past the review's 24px (AGENTS.md, "The coach talks in a card"). */
   main.puzzle .lr-ext-puzzle-coach {
-    margin-left: 24px;
+    margin-left: 44px;
+  }
+
+  main.puzzle .puzzle__feedback:not(.after) {
+    padding-left: calc(var(--lr-ext-coach-w) + 36px) !important;
   }
 
   main.puzzle .puzzle__moves {
