@@ -2,201 +2,199 @@
 
 /* The bubble's parts around the comment (view/verdict.ts, view/retry-bubble.ts). */
 
-@media (min-width: 1020px) {
-  /* The comment, its tags and buttons, under the verdict: they scroll when they don't fit. */
-  .lr-ext-bubble__row {
-    flex: none;
-  }
+/* The comment, its tags and buttons, under the verdict: they scroll when they don't fit. */
+.lr-ext-bubble__row {
+  flex: none;
+}
 
-  /* Its top edge sits under the verdict, so a scrolled comment doesn't touch it. */
-  .lr-ext-bubble__body {
-    min-height: 0;
-    margin-top: 6px;
-    padding-bottom: 10px;
-    overflow-y: auto;
-    scrollbar-gutter: stable;
-  }
+/* Its top edge sits under the verdict, so a scrolled comment doesn't touch it. */
+.lr-ext-bubble__body {
+  min-height: 0;
+  margin-top: 6px;
+  padding-bottom: 10px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
 
-  .lr-ext-bubble__body > .lr-ext-bubble__sub {
-    margin-top: 0;
-  }
+.lr-ext-bubble__body > .lr-ext-bubble__sub {
+  margin-top: 0;
+}
 
-  /* A black piece named in the text vanishes on a dark card: a dim edge outlines it, as
-     the captured pieces' (playerbar.css). A chip's grey keeps its own visible. */
-  #lr-ext-review
-    .lr-ext-bubble__sub
-    .lr-ext-w
-    > .lr-ext-pc:is(
-      .lr-ext-pc-bp,
-      .lr-ext-pc-bn,
-      .lr-ext-pc-bb,
-      .lr-ext-pc-br,
-      .lr-ext-pc-bq,
-      .lr-ext-pc-bk
-    ) {
-    filter: drop-shadow(1px 0 0 var(--lr-ext-text-dim)) drop-shadow(-1px 0 0 var(--lr-ext-text-dim))
-      drop-shadow(0 1px 0 var(--lr-ext-text-dim)) drop-shadow(0 -1px 0 var(--lr-ext-text-dim));
-  }
+/* A black piece named in the text vanishes on a dark card: a dim edge outlines it, as
+   the captured pieces' (playerbar.css). A chip's grey keeps its own visible. */
+#lr-ext-review
+  .lr-ext-bubble__sub
+  .lr-ext-w
+  > .lr-ext-pc:is(
+    .lr-ext-pc-bp,
+    .lr-ext-pc-bn,
+    .lr-ext-pc-bb,
+    .lr-ext-pc-br,
+    .lr-ext-pc-bq,
+    .lr-ext-pc-bk
+  ) {
+  filter: drop-shadow(1px 0 0 var(--lr-ext-text-dim)) drop-shadow(-1px 0 0 var(--lr-ext-text-dim))
+    drop-shadow(0 1px 0 var(--lr-ext-text-dim)) drop-shadow(0 -1px 0 var(--lr-ext-text-dim));
+}
 
-  /* How the score moved: the score before, dimmed, then after. */
-  .lr-ext-bubble__evals {
-    flex: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
+/* How the score moved: the score before, dimmed, then after. */
+.lr-ext-bubble__evals {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
 
-  .lr-ext-bubble__evals > .lr-ext-bubble__eval:first-child {
-    opacity: 0.6;
-  }
+.lr-ext-bubble__evals > .lr-ext-bubble__eval:first-child {
+  opacity: 0.6;
+}
 
-  .lr-ext-bubble__to {
-    color: var(--lr-ext-text-dim);
-    font-size: 12px;
-    font-weight: 800;
-  }
+.lr-ext-bubble__to {
+  color: var(--lr-ext-text-dim);
+  font-size: 12px;
+  font-weight: 800;
+}
 
-  /* A move of the comment that can be played: its arrow on hover, played on click. */
-  #lr-ext-review .lr-ext-bubble .lr-ext-mv--play {
-    margin: 0;
-    border: none;
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.15s !important;
-  }
+/* A move of the comment that can be played: its arrow on hover, played on click. */
+#lr-ext-review .lr-ext-bubble .lr-ext-mv--play {
+  margin: 0;
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s !important;
+}
 
-  #lr-ext-review .lr-ext-bubble .lr-ext-mv--play:hover {
-    background: var(--lr-ext-neutral-9);
-  }
+#lr-ext-review .lr-ext-bubble .lr-ext-mv--play:hover {
+  background: var(--lr-ext-neutral-9);
+}
 
-  .lr-ext-bubble__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+.lr-ext-bubble__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
 
-  .lr-ext-bubble__actions:empty {
-    display: none;
-  }
+.lr-ext-bubble__actions:empty {
+  display: none;
+}
 
-  .lr-ext-bubble__actions .lr-ext-bubble__line {
-    margin-top: 8px;
-  }
+.lr-ext-bubble__actions .lr-ext-bubble__line {
+  margin-top: 8px;
+}
 
-  /* Retry stands out from Explain's line button: the player's own turn. */
-  #lr-ext-review .lr-ext-bubble__retry,
-  #lr-ext-review .lr-ext-bubble__retry:hover {
-    background: var(--lr-ext-btn-primary);
-    color: var(--lr-ext-white);
-  }
+/* Retry stands out from Explain's line button: the player's own turn. */
+#lr-ext-review .lr-ext-bubble__retry,
+#lr-ext-review .lr-ext-bubble__retry:hover {
+  background: var(--lr-ext-btn-primary);
+  color: var(--lr-ext-white);
+}
 
-  .lr-ext-bubble__row--retry .lr-ext-bubble__title {
-    font-size: 15px;
-  }
+.lr-ext-bubble__row--retry .lr-ext-bubble__title {
+  font-size: 15px;
+}
 
-  /* The tags: the tactic, the chances an error gave away; and the move's time, which the card
-   * shows over the coach (bubble.css). */
-  .lr-ext-bubble__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 8px;
-  }
+/* The tags: the tactic, the chances an error gave away; and the move's time, which the card
+ * shows over the coach (bubble.css). */
+.lr-ext-bubble__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
 
-  .lr-ext-tag {
-    --lr-ext-tag: var(--lr-ext-text-dim);
-    padding: 2px 8px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--lr-ext-tag) 16%, transparent);
-    color: var(--lr-ext-tag);
-    font-size: 11.5px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-  }
+.lr-ext-tag {
+  --lr-ext-tag: var(--lr-ext-text-dim);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lr-ext-tag) 16%, transparent);
+  color: var(--lr-ext-tag);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
 
-  .lr-ext-tag--fork,
-  .lr-ext-tag--sacrifice {
-    --lr-ext-tag: color-mix(in srgb, var(--lr-ext-purple) 80%, var(--lr-ext-text-strong));
-  }
+.lr-ext-tag--fork,
+.lr-ext-tag--sacrifice {
+  --lr-ext-tag: color-mix(in srgb, var(--lr-ext-purple) 80%, var(--lr-ext-text-strong));
+}
 
-  .lr-ext-tag--hanging,
-  .lr-ext-tag--cost {
-    --lr-ext-tag: color-mix(in srgb, var(--lr-ext-red) 80%, var(--lr-ext-text-strong));
-  }
+.lr-ext-tag--hanging,
+.lr-ext-tag--cost {
+  --lr-ext-tag: color-mix(in srgb, var(--lr-ext-red) 80%, var(--lr-ext-text-strong));
+}
 
-  .lr-ext-tag--mate {
-    --lr-ext-tag: var(--lr-ext-orange);
-  }
+.lr-ext-tag--mate {
+  --lr-ext-tag: var(--lr-ext-orange);
+}
 
-  /* The time, after a stopwatch; orange when rushed or short of time, green when it paid off. */
-  .lr-ext-tag--time {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
+/* The time, after a stopwatch; orange when rushed or short of time, green when it paid off. */
+.lr-ext-tag--time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
 
-  .lr-ext-tag--time::before {
-    content: '';
-    width: 13px;
-    height: 13px;
-    background: currentColor;
-    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/stop-watch.svg') center /
-      contain no-repeat;
-  }
+.lr-ext-tag--time::before {
+  content: '';
+  width: 13px;
+  height: 13px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/stop-watch.svg') center /
+    contain no-repeat;
+}
 
-  .lr-ext-tag--rushed,
-  .lr-ext-tag--timeTrouble {
-    --lr-ext-tag: var(--lr-ext-orange);
-  }
+.lr-ext-tag--rushed,
+.lr-ext-tag--timeTrouble {
+  --lr-ext-tag: var(--lr-ext-orange);
+}
 
-  .lr-ext-tag--paidOff {
-    --lr-ext-tag: var(--lr-ext-green);
-  }
+.lr-ext-tag--paidOff {
+  --lr-ext-tag: var(--lr-ext-green);
+}
 
-  /* ---- Brief --- */
+/* ---- Brief --- */
 
-  /* Before the first move (view/brief.ts): the errors of the bottom side's, then the way in. */
-  .lr-ext-brief {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-    margin-top: 8px;
-  }
+/* Before the first move (view/brief.ts): the errors of the bottom side's, then the way in. */
+.lr-ext-brief {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
 
-  .lr-ext-brief__chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    height: 26px;
-    padding: 0 10px;
-    border-radius: 999px;
-    background: var(--lr-ext-neutral-8);
-    color: var(--lr-ext-text-strong);
-    font-size: 12px;
-    font-weight: 600;
-  }
+.lr-ext-brief__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--lr-ext-neutral-8);
+  color: var(--lr-ext-text-strong);
+  font-size: 12px;
+  font-weight: 600;
+}
 
-  .lr-ext-brief__chip b {
-    font-weight: 800;
-  }
+.lr-ext-brief__chip b {
+  font-weight: 800;
+}
 
-  .lr-ext-brief__chip .lr-ext-cls-icon {
-    width: 15px;
-    height: 15px;
-  }
+.lr-ext-brief__chip .lr-ext-cls-icon {
+  width: 15px;
+  height: 15px;
+}
 
-  .lr-ext-brief__chip .lr-ext-cls-icon svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
+.lr-ext-brief__chip .lr-ext-cls-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
-  #lr-ext-review .lr-ext-brief__start {
-    height: 28px;
-    padding: 0 14px;
-    border-radius: 999px;
-    font-size: 13px;
-  }
+#lr-ext-review .lr-ext-brief__start {
+  height: 28px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 13px;
 }

@@ -7,3 +7,5 @@
 @import './bubble-parts.css';
 @import './move-list.css';
 @import './eval-bar.css';
+/* Last: it rearranges the parts above below 1020px. */
+@import './layout-narrow.css';

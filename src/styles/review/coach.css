@@ -1,72 +1,70 @@
 /* ---- Coach --- */
 
-@media (min-width: 1020px) {
-  /* The bubble's tail sits under the coach's mouth (--lr-ext-tip, 64% of the portrait's
-     height) and the bubble grows both ways from it; the review measures --lr-ext-bubble-h. */
+/* The bubble's tail sits under the coach's mouth (--lr-ext-tip, 64% of the portrait's
+   height) and the bubble grows both ways from it; the review measures --lr-ext-bubble-h. */
+.lr-ext-coach {
+  --lr-ext-coach-h: 114px;
+  --lr-ext-tip: calc(var(--lr-ext-coach-h) * 0.64);
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  /* Room for a two-line title over a two-line remark. */
+  height: 136px;
+  padding: 4px 16px 0 10px;
+  box-sizing: border-box;
+}
+
+/* Narrow panels wrap the bubble: a smaller coach gives it room, so two-line titles
+   still clear the nav. */
+@container lr-ext-review (max-width: 440px) {
   .lr-ext-coach {
-    --lr-ext-coach-h: 114px;
-    --lr-ext-tip: calc(var(--lr-ext-coach-h) * 0.64);
-    flex: none;
-    display: flex;
-    align-items: flex-start;
+    --lr-ext-coach-h: 100px;
+  }
+
+  .lr-ext-bubble .lr-ext-bubble__title {
+    font-size: 14px;
+  }
+}
+
+/* Narrowest panels (windows up to ~1380px): the title had ~45px and broke in three.
+   A smaller coach and tighter padding double that. */
+@container lr-ext-review (max-width: 360px) {
+  .lr-ext-coach {
+    --lr-ext-coach-h: 84px;
+    padding: 4px 10px 0 6px;
+  }
+
+  .lr-ext-coach .lr-ext-bubble {
+    padding: 8px 12px;
+  }
+
+  .lr-ext-bubble .lr-ext-bubble__row {
+    gap: 6px;
+  }
+
+  .lr-ext-bubble .lr-ext-bubble__eval {
+    padding: 2px 5px;
+    font-size: 12px;
+  }
+
+  .lr-ext-bubble .lr-ext-bubble__sub {
+    margin-top: 4px;
+  }
+
+  /* Three buttons of 84px: "Expliquer" and its bulb ran into the edges. */
+  #lr-ext-review .lr-ext-review__nav {
+    padding-inline: 10px;
+  }
+
+  #lr-ext-review .lr-ext-review__nav .lr-ext-btn {
     gap: 4px;
-    /* Room for a two-line title over a two-line remark. */
-    height: 136px;
-    padding: 4px 16px 0 10px;
-    box-sizing: border-box;
+    font-size: 13px;
   }
 
-  /* Narrow panels wrap the bubble: a smaller coach gives it room, so two-line titles
-     still clear the nav. */
-  @container lr-ext-review (max-width: 440px) {
-    .lr-ext-coach {
-      --lr-ext-coach-h: 100px;
-    }
-
-    .lr-ext-bubble .lr-ext-bubble__title {
-      font-size: 14px;
-    }
-  }
-
-  /* Narrowest panels (windows up to ~1380px): the title had ~45px and broke in three.
-     A smaller coach and tighter padding double that. */
-  @container lr-ext-review (max-width: 360px) {
-    .lr-ext-coach {
-      --lr-ext-coach-h: 84px;
-      padding: 4px 10px 0 6px;
-    }
-
-    .lr-ext-coach .lr-ext-bubble {
-      padding: 8px 12px;
-    }
-
-    .lr-ext-bubble .lr-ext-bubble__row {
-      gap: 6px;
-    }
-
-    .lr-ext-bubble .lr-ext-bubble__eval {
-      padding: 2px 5px;
-      font-size: 12px;
-    }
-
-    .lr-ext-bubble .lr-ext-bubble__sub {
-      margin-top: 4px;
-    }
-
-    /* Three buttons of 84px: "Expliquer" and its bulb ran into the edges. */
-    #lr-ext-review .lr-ext-review__nav {
-      padding-inline: 10px;
-    }
-
-    #lr-ext-review .lr-ext-review__nav .lr-ext-btn {
-      gap: 4px;
-      font-size: 13px;
-    }
-
-    #lr-ext-review .lr-ext-review__nav .lr-ext-i {
-      width: 18px;
-      height: 18px;
-    }
+  #lr-ext-review .lr-ext-review__nav .lr-ext-i {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -87,94 +85,92 @@
 
 /* The game's turning points under the graph (view/moments.ts): a card each, in a strip that
    scrolls sideways; the one on the board is ringed. */
-@media (min-width: 1020px) {
-  .lr-ext-moments {
-    flex: none;
-    display: flex;
-    gap: 8px;
-    height: var(--lr-ext-review-moments);
-    padding: 0 12px 10px;
-    box-sizing: border-box;
-    overflow-x: auto;
-    scrollbar-width: none;
-    /* Cards fade out at an edge only while there are more past it: each fade follows the
-       strip's scroll, none at its start or its end, none if nothing scrolls. */
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 var(--lr-ext-fade-start),
-      #000 calc(100% - var(--lr-ext-fade-end)),
-      transparent
-    );
-    animation: lr-ext-moments-fade linear both !important;
-    animation-timeline: scroll(self inline) !important;
-  }
+.lr-ext-moments {
+  flex: none;
+  display: flex;
+  gap: 8px;
+  height: var(--lr-ext-review-moments);
+  padding: 0 12px 10px;
+  box-sizing: border-box;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Cards fade out at an edge only while there are more past it: each fade follows the
+     strip's scroll, none at its start or its end, none if nothing scrolls. */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--lr-ext-fade-start),
+    #000 calc(100% - var(--lr-ext-fade-end)),
+    transparent
+  );
+  animation: lr-ext-moments-fade linear both !important;
+  animation-timeline: scroll(self inline) !important;
+}
 
-  @keyframes lr-ext-moments-fade {
-    0% {
-      --lr-ext-fade-start: 0px;
-      --lr-ext-fade-end: 36px;
-    }
-    10% {
-      --lr-ext-fade-start: 36px;
-    }
-    90% {
-      --lr-ext-fade-end: 36px;
-    }
-    100% {
-      --lr-ext-fade-start: 36px;
-      --lr-ext-fade-end: 0px;
-    }
+@keyframes lr-ext-moments-fade {
+  0% {
+    --lr-ext-fade-start: 0px;
+    --lr-ext-fade-end: 36px;
   }
+  10% {
+    --lr-ext-fade-start: 36px;
+  }
+  90% {
+    --lr-ext-fade-end: 36px;
+  }
+  100% {
+    --lr-ext-fade-start: 36px;
+    --lr-ext-fade-end: 0px;
+  }
+}
 
-  .lr-ext-moments::-webkit-scrollbar {
-    display: none;
-  }
+.lr-ext-moments::-webkit-scrollbar {
+  display: none;
+}
 
-  .lr-ext-moment {
-    flex: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3px;
-    min-width: 104px;
-    padding: 0 12px;
-    border: none;
-    border-radius: 10px;
-    background: var(--lr-ext-bg-raised);
-    box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
-    color: var(--lr-ext-text);
-    text-align: start;
-    transition: background-color 0.15s !important;
-  }
+.lr-ext-moment {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-width: 104px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--lr-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  color: var(--lr-ext-text);
+  text-align: start;
+  transition: background-color 0.15s !important;
+}
 
-  .lr-ext-moment:hover {
-    background: var(--lr-ext-bg-raised-hover);
-  }
+.lr-ext-moment:hover {
+  background: var(--lr-ext-bg-raised-hover);
+}
 
-  .lr-ext-moment--on {
-    box-shadow: inset 0 0 0 1.5px var(--lr-ext-accent);
-  }
+.lr-ext-moment--on {
+  box-shadow: inset 0 0 0 1.5px var(--lr-ext-accent);
+}
 
-  .lr-ext-moment__move {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
+.lr-ext-moment__move {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
 
-  .lr-ext-moment__move > :first-child {
-    flex: none;
-    width: 16px;
-    height: 16px;
-  }
+.lr-ext-moment__move > :first-child {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
 
-  .lr-ext-moment__class {
-    color: var(--lr-ext-class-color);
-    font-size: 11.5px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
+.lr-ext-moment__class {
+  color: var(--lr-ext-class-color);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
 }

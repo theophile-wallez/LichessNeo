@@ -121,128 +121,128 @@
   html.lr-ext-review:not(.lr-ext-review-normal) main.analyse .analyse__tools {
     border-radius: 0 !important;
   }
+}
 
-  /* ---- Panel --- */
+/* ---- Panel --- */
 
-  #lr-ext-review {
-    grid-area: rtop;
-    container: lr-ext-review / inline-size;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    margin-left: var(--lr-ext-gap);
-    overflow: hidden;
-    border-radius: 6px 6px 0 0;
-    background: var(--lr-ext-bg-panel);
-    color: var(--lr-ext-text);
-    font-family: var(--lr-ext-font);
-  }
+#lr-ext-review {
+  grid-area: rtop;
+  container: lr-ext-review / inline-size;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin-left: var(--lr-ext-gap);
+  overflow: hidden;
+  border-radius: 6px 6px 0 0;
+  background: var(--lr-ext-bg-panel);
+  color: var(--lr-ext-text);
+  font-family: var(--lr-ext-font);
+}
 
-  /* It holds the focus only for a button its redraw replaced (view/clicks.ts). */
-  #lr-ext-review:focus {
-    outline: none;
-  }
+/* It holds the focus only for a button its redraw replaced (view/clicks.ts). */
+#lr-ext-review:focus {
+  outline: none;
+}
 
-  html.lr-ext-review-summary #lr-ext-review {
-    border-radius: 6px;
-  }
+html.lr-ext-review-summary #lr-ext-review {
+  border-radius: 6px;
+}
 
-  #lr-ext-review button {
-    font-family: var(--lr-ext-font) !important;
-    cursor: pointer;
-  }
+#lr-ext-review button {
+  font-family: var(--lr-ext-font) !important;
+  cursor: pointer;
+}
 
-  html.lr-ext-review-normal #lr-ext-review {
-    justify-content: flex-end;
-    padding: 8px;
-    border-top: 1px solid var(--lr-ext-border);
-    border-radius: 0;
-  }
+html.lr-ext-review-normal #lr-ext-review {
+  justify-content: flex-end;
+  padding: 8px;
+  border-top: 1px solid var(--lr-ext-border);
+  border-radius: 0;
+}
 
-  .lr-ext-review__head {
-    flex: none;
-    display: grid;
-    grid-template-columns: 40px 1fr 40px;
-    align-items: center;
-    height: 48px;
-    padding: 0 4px;
-    background: var(--lr-ext-bg-panel-dark);
-  }
+.lr-ext-review__head {
+  flex: none;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  height: 48px;
+  padding: 0 4px;
+  background: var(--lr-ext-bg-panel-dark);
+}
 
-  .lr-ext-review__back,
-  .lr-ext-review__close {
-    display: grid;
-    place-items: center;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    border: none;
-    border-radius: 6px;
-    background: transparent;
-    color: var(--lr-ext-text-dim);
-    cursor: pointer;
-    transition:
-      background-color 0.15s,
-      color 0.15s !important;
-  }
+.lr-ext-review__back,
+.lr-ext-review__close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--lr-ext-text-dim);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
 
-  .lr-ext-review__back svg,
-  .lr-ext-review__close svg {
-    width: 22px;
-    height: 22px;
-    pointer-events: none;
-  }
+.lr-ext-review__back svg,
+.lr-ext-review__close svg {
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+}
 
-  .lr-ext-review__back:hover,
-  .lr-ext-review__close:hover {
-    background: var(--lr-ext-lift-7);
-    color: var(--lr-ext-text-strong);
-  }
+.lr-ext-review__back:hover,
+.lr-ext-review__close:hover {
+  background: var(--lr-ext-lift-7);
+  color: var(--lr-ext-text-strong);
+}
 
-  .lr-ext-review__title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--lr-ext-text-strong);
-    font-size: 17px;
-    font-weight: 800;
-  }
+.lr-ext-review__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lr-ext-text-strong);
+  font-size: 17px;
+  font-weight: 800;
+}
 
-  .lr-ext-review__body {
-    flex: 1 1 0;
-    min-height: 0;
-    overflow-y: auto;
-    padding: 12px 16px;
-  }
+.lr-ext-review__body {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 16px;
+}
 
-  /* The summary's graph and players stay above the scrolling moves and phases. The graph
-     sits where the move-by-move review has its own, at its size, 12px from the sides. */
-  .lr-ext-review__top {
-    flex: none;
-    overflow: hidden;
-    padding: 0 12px;
-  }
+/* The summary's graph and players stay above the scrolling moves and phases. The graph
+   sits where the move-by-move review has its own, at its size, 12px from the sides. */
+.lr-ext-review__top {
+  flex: none;
+  overflow: hidden;
+  padding: 0 12px;
+}
 
-  /* Engine failure, shown where the coach would speak. */
-  .lr-ext-review__error {
-    margin: 0 0 12px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    background: rgba(212, 50, 42, 0.15);
-    color: var(--lr-ext-text-strong);
-    font-size: 14px;
-    line-height: 1.4;
-  }
+/* Engine failure, shown where the coach would speak. */
+.lr-ext-review__error {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(212, 50, 42, 0.15);
+  color: var(--lr-ext-text-strong);
+  font-size: 14px;
+  line-height: 1.4;
+}
 
-  /* Its scrollbar (Lichess's, 0.5rem wide) takes from the right padding, so the cards end
-     where the graph does. */
-  .lr-ext-review__top + .lr-ext-review__body {
-    padding: 0 calc(12px - 0.5rem) 12px 12px;
-    scrollbar-gutter: stable;
-  }
+/* Its scrollbar (Lichess's, 0.5rem wide) takes from the right padding, so the cards end
+   where the graph does. */
+.lr-ext-review__top + .lr-ext-review__body {
+  padding: 0 calc(12px - 0.5rem) 12px 12px;
+  scrollbar-gutter: stable;
+}
 
-  .lr-ext-review__foot {
-    flex: none;
-    padding: 12px 12px 16px;
-  }
+.lr-ext-review__foot {
+  flex: none;
+  padding: 12px 12px 16px;
 }
