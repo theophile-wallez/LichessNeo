@@ -124,10 +124,3 @@
     background: var(--lr-ext-bg-panel);
   }
 }
-
-/* Lichess's mobile layout keeps its own board, without our player bars. */
-@media (max-width: 1019.98px) {
-  main.analyse > :is(.lr-ext-player, .lr-ext-captured) {
-    display: none !important;
-  }
-}

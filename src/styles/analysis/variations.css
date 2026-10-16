@@ -1,301 +1,299 @@
 /* ---- Variations --- */
 
-@media (min-width: 1020px) {
-  /* Comments and variations: a card under the move, outlined in its color, not a boxed tree. */
-  main.analyse .tview2-column > interrupt {
-    flex: 0 0 calc(100% - 16px) !important;
-    max-width: none !important;
-    box-sizing: border-box;
-    margin: 4px 8px 6px !important;
-    padding: 8px 10px !important;
-    border: 1px solid var(--lr-ext-note, var(--lr-ext-lift-10)) !important;
-    border-radius: 8px !important;
-    background: var(--lr-ext-bg-panel-dark) !important;
-    box-shadow: none !important;
-    font-family: var(--lr-ext-font) !important;
-  }
+/* Comments and variations: a card under the move, outlined in its color, not a boxed tree. */
+main.analyse .tview2-column > interrupt {
+  flex: 0 0 calc(100% - 16px) !important;
+  max-width: none !important;
+  box-sizing: border-box;
+  margin: 4px 8px 6px !important;
+  padding: 8px 10px !important;
+  border: 1px solid var(--lr-ext-note, var(--lr-ext-lift-10)) !important;
+  border-radius: 8px !important;
+  background: var(--lr-ext-bg-panel-dark) !important;
+  box-shadow: none !important;
+  font-family: var(--lr-ext-font) !important;
+}
 
-  main.analyse .tview2-column > interrupt:has(> comment.inaccuracy) {
-    --lr-ext-note: #53b2ea;
-  }
-  main.analyse .tview2-column > interrupt:has(> comment.mistake) {
-    --lr-ext-note: #e69d00;
-  }
-  main.analyse .tview2-column > interrupt:has(> comment.blunder) {
-    --lr-ext-note: #df5353;
-  }
+main.analyse .tview2-column > interrupt:has(> comment.inaccuracy) {
+  --lr-ext-note: #53b2ea;
+}
+main.analyse .tview2-column > interrupt:has(> comment.mistake) {
+  --lr-ext-note: #e69d00;
+}
+main.analyse .tview2-column > interrupt:has(> comment.blunder) {
+  --lr-ext-note: #df5353;
+}
 
-  main.analyse .tview2 interrupt comment {
-    display: block;
-    padding: 0 !important;
-    border: none !important;
-    color: var(--lr-ext-text) !important;
-    font-size: 13px !important;
-    line-height: 1.4 !important;
-  }
+main.analyse .tview2 interrupt comment {
+  display: block;
+  padding: 0 !important;
+  border: none !important;
+  color: var(--lr-ext-text) !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
 
-  main.analyse .tview2 interrupt comment:is(.inaccuracy, .mistake, .blunder) {
-    color: var(--lr-ext-note) !important;
-    font-weight: 700;
-  }
+main.analyse .tview2 interrupt comment:is(.inaccuracy, .mistake, .blunder) {
+  color: var(--lr-ext-note) !important;
+  font-weight: 700;
+}
 
-  main.analyse .tview2 interrupt lines {
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-  }
+main.analyse .tview2 interrupt lines {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
 
-  main.analyse .tview2 interrupt comment + lines,
-  main.analyse .tview2 interrupt lines + comment {
-    margin-top: 4px !important;
-  }
+main.analyse .tview2 interrupt comment + lines,
+main.analyse .tview2 interrupt lines + comment {
+  margin-top: 4px !important;
+}
 
-  main.analyse .tview2 interrupt line {
-    display: flex !important;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 2px 1px;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+main.analyse .tview2 interrupt line {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 1px;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
-  /* A move's variations, one per row; the branches under them are a tree (below). */
-  main.analyse .tview2 interrupt > lines > line + line {
-    margin-top: 2px !important;
-    padding-top: 2px !important;
-    border-top: 1px solid var(--lr-ext-lift-4) !important;
-  }
+/* A move's variations, one per row; the branches under them are a tree (below). */
+main.analyse .tview2 interrupt > lines > line + line {
+  margin-top: 2px !important;
+  padding-top: 2px !important;
+  border-top: 1px solid var(--lr-ext-lift-4) !important;
+}
 
-  main.analyse .tview2 interrupt branch {
-    display: none !important;
-  }
+main.analyse .tview2 interrupt branch {
+  display: none !important;
+}
 
-  main.analyse .tview2 interrupt line move {
-    margin: 0 !important;
-    padding: 0 3px !important;
-    line-height: 20px !important;
-    border-radius: 3px;
-    background: none !important;
-    color: var(--lr-ext-text-dim) !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-  }
+main.analyse .tview2 interrupt line move {
+  margin: 0 !important;
+  padding: 0 3px !important;
+  line-height: 20px !important;
+  border-radius: 3px;
+  background: none !important;
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
 
-  main.analyse .tview2 interrupt line move index {
-    margin-right: 2px;
-    padding: 0 !important;
-    color: var(--lr-ext-font-dimmer) !important;
-    font-weight: 400;
-  }
+main.analyse .tview2 interrupt line move index {
+  margin-right: 2px;
+  padding: 0 !important;
+  color: var(--lr-ext-font-dimmer) !important;
+  font-weight: 400;
+}
 
-  /* The first move of a line, where it leaves the one above, stands out. */
-  main.analyse .tview2 interrupt :is(line, inline) > move:first-of-type {
-    color: var(--lr-ext-text) !important;
-    font-weight: 700 !important;
-  }
+/* The first move of a line, where it leaves the one above, stands out. */
+main.analyse .tview2 interrupt :is(line, inline) > move:first-of-type {
+  color: var(--lr-ext-text) !important;
+  font-weight: 700 !important;
+}
 
-  main.analyse .tview2 interrupt line move:hover {
-    background: var(--lr-ext-lift-8) !important;
-    color: var(--lr-ext-text-strong) !important;
-  }
+main.analyse .tview2 interrupt line move:hover {
+  background: var(--lr-ext-lift-8) !important;
+  color: var(--lr-ext-text-strong) !important;
+}
 
-  main.analyse .tview2 interrupt line move.active {
-    background: var(--lr-ext-lift-15) !important;
-    color: var(--lr-ext-text-strong) !important;
-  }
+main.analyse .tview2 interrupt line move.active {
+  background: var(--lr-ext-lift-15) !important;
+  color: var(--lr-ext-text-strong) !important;
+}
 
-  /* The mainline's "..." where Black's cell waits for the card below: the first variation's
-     tile says it. Only its text goes, so the row keeps its stripe. */
-  main.analyse .tview2-column > move + move.empty {
-    color: transparent !important;
-  }
+/* The mainline's "..." where Black's cell waits for the card below: the first variation's
+   tile says it. Only its text goes, so the row keeps its stripe. */
+main.analyse .tview2-column > move + move.empty {
+  color: transparent !important;
+}
 
-  /* ---- Branches --- */
+/* ---- Branches --- */
 
-  /* Every variation opens on a branch tile. One off a variation hangs under it, as a tree:
-   * Lichess's nested lines, and the lone alternative it would write in parentheses (inline),
-   * each at the end of an elbow from the rail under the tile of the line it leaves. */
-  main.analyse .tview2 interrupt :is(lines > line, inline) {
-    --lr-ext-rail: var(--lr-ext-lift-12);
-    --lr-ext-branch-ink: var(--lr-ext-text-dim);
-    --lr-ext-branch-tile: var(--lr-ext-lift-6);
-    position: relative;
-  }
+/* Every variation opens on a branch tile. One off a variation hangs under it, as a tree:
+ * Lichess's nested lines, and the lone alternative it would write in parentheses (inline),
+ * each at the end of an elbow from the rail under the tile of the line it leaves. */
+main.analyse .tview2 interrupt :is(lines > line, inline) {
+  --lr-ext-rail: var(--lr-ext-lift-12);
+  --lr-ext-branch-ink: var(--lr-ext-text-dim);
+  --lr-ext-branch-tile: var(--lr-ext-lift-6);
+  position: relative;
+}
 
-  /* The rail runs below the tile of the line above. */
-  main.analyse .tview2 interrupt :is(line, inline) > :is(lines, inline) {
-    --lr-ext-branch-shift: -11.75px;
-    flex: 0 0 calc(100% - var(--lr-ext-branch-shift));
-    margin: 0 0 0 var(--lr-ext-branch-shift) !important;
-  }
+/* The rail runs below the tile of the line above. */
+main.analyse .tview2 interrupt :is(line, inline) > :is(lines, inline) {
+  --lr-ext-branch-shift: -11.75px;
+  flex: 0 0 calc(100% - var(--lr-ext-branch-shift));
+  margin: 0 0 0 var(--lr-ext-branch-shift) !important;
+}
 
-  main.analyse .tview2 interrupt :is(lines lines > line, inline) > :is(lines, inline) {
-    --lr-ext-branch-shift: -12px;
-  }
+main.analyse .tview2 interrupt :is(lines lines > line, inline) > :is(lines, inline) {
+  --lr-ext-branch-shift: -12px;
+}
 
-  main.analyse .tview2 interrupt :is(lines lines > line, inline) {
-    display: flex !important;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 2px 1px;
-    box-sizing: border-box;
-    padding: 0 0 0 34px !important;
-    border: none !important;
-    /* The elbow: down the rail, a rounded corner, then along to the tile. */
-    background:
-      linear-gradient(var(--lr-ext-rail) 0 0) 0 0 / 1.5px 4.75px no-repeat,
-      radial-gradient(
-          circle at 100% 0,
-          transparent 4.3px,
-          var(--lr-ext-rail) 4.6px 5.7px,
-          transparent 6px
-        )
-        0 4.75px / 6px 6px no-repeat,
-      linear-gradient(var(--lr-ext-rail) 0 0) 6px 9.25px / 6px 1.5px no-repeat !important;
-    font-size: inherit !important;
-    font-style: normal !important;
-    opacity: 1 !important;
-  }
+main.analyse .tview2 interrupt :is(lines lines > line, inline) {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 1px;
+  box-sizing: border-box;
+  padding: 0 0 0 34px !important;
+  border: none !important;
+  /* The elbow: down the rail, a rounded corner, then along to the tile. */
+  background:
+    linear-gradient(var(--lr-ext-rail) 0 0) 0 0 / 1.5px 4.75px no-repeat,
+    radial-gradient(
+        circle at 100% 0,
+        transparent 4.3px,
+        var(--lr-ext-rail) 4.6px 5.7px,
+        transparent 6px
+      )
+      0 4.75px / 6px 6px no-repeat,
+    linear-gradient(var(--lr-ext-rail) 0 0) 6px 9.25px / 6px 1.5px no-repeat !important;
+  font-size: inherit !important;
+  font-style: normal !important;
+  opacity: 1 !important;
+}
 
-  /* A branch with siblings below it: the rail goes on past its elbow. The rail is see-through,
-   * so no two strokes overlap, or the crossing shows brighter. */
-  main.analyse .tview2 interrupt lines lines > line:not(:last-child) {
-    background:
-      linear-gradient(var(--lr-ext-rail) 0 0) 0 0 / 1.5px 100% no-repeat,
-      linear-gradient(var(--lr-ext-rail) 0 0) 1.5px 9.25px / 10.5px 1.5px no-repeat !important;
-  }
+/* A branch with siblings below it: the rail goes on past its elbow. The rail is see-through,
+ * so no two strokes overlap, or the crossing shows brighter. */
+main.analyse .tview2 interrupt lines lines > line:not(:last-child) {
+  background:
+    linear-gradient(var(--lr-ext-rail) 0 0) 0 0 / 1.5px 100% no-repeat,
+    linear-gradient(var(--lr-ext-rail) 0 0) 1.5px 9.25px / 10.5px 1.5px no-repeat !important;
+}
 
-  /* The tile, then the icon on it (inline's own pseudo-elements were its parentheses). */
-  main.analyse .tview2 interrupt :is(lines > line, inline)::before,
-  main.analyse .tview2 interrupt :is(lines > line, inline)::after {
-    content: '' !important;
-    position: absolute;
-    margin: 0 !important;
-    opacity: 1 !important;
-  }
+/* The tile, then the icon on it (inline's own pseudo-elements were its parentheses). */
+main.analyse .tview2 interrupt :is(lines > line, inline)::before,
+main.analyse .tview2 interrupt :is(lines > line, inline)::after {
+  content: '' !important;
+  position: absolute;
+  margin: 0 !important;
+  opacity: 1 !important;
+}
 
-  main.analyse .tview2 interrupt :is(lines > line, inline)::before {
-    top: 1px;
-    left: 14px;
-    width: 18px;
-    height: 18px;
-    border-radius: 5px;
-    background: var(--lr-ext-branch-tile);
-  }
+main.analyse .tview2 interrupt :is(lines > line, inline)::before {
+  top: 1px;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: var(--lr-ext-branch-tile);
+}
 
-  main.analyse .tview2 interrupt :is(lines > line, inline)::after {
-    top: 4px;
-    left: 17px;
-    width: 12px;
-    height: 12px;
-    background: var(--lr-ext-branch-ink);
-    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/git-branch.svg') center /
-      contain no-repeat;
-  }
+main.analyse .tview2 interrupt :is(lines > line, inline)::after {
+  top: 4px;
+  left: 17px;
+  width: 12px;
+  height: 12px;
+  background: var(--lr-ext-branch-ink);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/git-branch.svg') center /
+    contain no-repeat;
+}
 
-  /* A move's own variations leave no rail: their tile starts the row. */
-  main.analyse .tview2 interrupt > lines > line {
-    padding-left: 20px !important;
-  }
-  main.analyse .tview2 interrupt > lines > line::before {
-    left: 0;
-  }
-  main.analyse .tview2 interrupt > lines > line::after {
-    left: 3px;
-  }
-  /* Below the separator's room. */
-  main.analyse .tview2 interrupt > lines > line + line::before {
-    top: 3px;
-  }
-  main.analyse .tview2 interrupt > lines > line + line::after {
-    top: 6px;
-  }
+/* A move's own variations leave no rail: their tile starts the row. */
+main.analyse .tview2 interrupt > lines > line {
+  padding-left: 20px !important;
+}
+main.analyse .tview2 interrupt > lines > line::before {
+  left: 0;
+}
+main.analyse .tview2 interrupt > lines > line::after {
+  left: 3px;
+}
+/* Below the separator's room. */
+main.analyse .tview2 interrupt > lines > line + line::before {
+  top: 3px;
+}
+main.analyse .tview2 interrupt > lines > line + line::after {
+  top: 6px;
+}
 
-  /* The branch the board is on (data-lr-ext-on), and one holding a costly move
-     (data-lr-ext-worst), both from content/analysis/variations.ts. */
-  main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-on] {
-    --lr-ext-branch-ink: var(--lr-ext-text-strong);
-    --lr-ext-branch-tile: var(--lr-ext-lift-12);
-  }
-  main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst='mistake'] {
-    --lr-ext-branch-ink: #e69d00;
-  }
-  main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst='miss'] {
-    --lr-ext-branch-ink: #de7cd3;
-  }
-  main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst='blunder'] {
-    --lr-ext-branch-ink: #df5353;
-  }
-  main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst] {
-    --lr-ext-branch-tile: color-mix(in srgb, var(--lr-ext-branch-ink) 16%, transparent);
-  }
-  main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst][data-lr-ext-on] {
-    --lr-ext-branch-tile: color-mix(in srgb, var(--lr-ext-branch-ink) 28%, transparent);
-  }
+/* The branch the board is on (data-lr-ext-on), and one holding a costly move
+   (data-lr-ext-worst), both from content/analysis/variations.ts. */
+main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-on] {
+  --lr-ext-branch-ink: var(--lr-ext-text-strong);
+  --lr-ext-branch-tile: var(--lr-ext-lift-12);
+}
+main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst='mistake'] {
+  --lr-ext-branch-ink: #e69d00;
+}
+main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst='miss'] {
+  --lr-ext-branch-ink: #de7cd3;
+}
+main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst='blunder'] {
+  --lr-ext-branch-ink: #df5353;
+}
+main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst] {
+  --lr-ext-branch-tile: color-mix(in srgb, var(--lr-ext-branch-ink) 16%, transparent);
+}
+main.analyse .tview2 interrupt :is(lines > line, inline)[data-lr-ext-worst][data-lr-ext-on] {
+  --lr-ext-branch-tile: color-mix(in srgb, var(--lr-ext-branch-ink) 28%, transparent);
+}
 
-  /* Lichess numbers a black move only where a line starts: after an alternative or a fold, its
-     number comes back, so the line can be followed; where a line starts, it loses its dots
-     (data-lr-ext-index, in place of Lichess's index). */
-  main.analyse .tview2 interrupt move[data-lr-ext-index] > index {
-    display: none !important;
-  }
+/* Lichess numbers a black move only where a line starts: after an alternative or a fold, its
+   number comes back, so the line can be followed; where a line starts, it loses its dots
+   (data-lr-ext-index, in place of Lichess's index). */
+main.analyse .tview2 interrupt move[data-lr-ext-index] > index {
+  display: none !important;
+}
 
-  main.analyse .tview2 interrupt move[data-lr-ext-index]::before {
-    content: attr(data-lr-ext-index);
-    margin-right: 2px;
-    color: var(--lr-ext-font-dimmer);
-    font-size: 90%;
-    font-weight: 400;
-  }
+main.analyse .tview2 interrupt move[data-lr-ext-index]::before {
+  content: attr(data-lr-ext-index);
+  margin-right: 2px;
+  color: var(--lr-ext-font-dimmer);
+  font-size: 90%;
+  font-weight: 400;
+}
 
-  /* A bare number has no dots to set it off from the move. */
-  main.analyse .tview2 interrupt :is(line, inline) > move:first-of-type[data-lr-ext-index]::before {
-    margin-right: 4px;
-  }
+/* A bare number has no dots to set it off from the move. */
+main.analyse .tview2 interrupt :is(line, inline) > move:first-of-type[data-lr-ext-index]::before {
+  margin-right: 4px;
+}
 
-  /* ---- Folds --- */
+/* ---- Folds --- */
 
-  /* A long run of moves keeps its first two and its last: the others fold into a pill, the
-     first of them drawn as one, which steps into the run and so unfolds it. */
-  main.analyse .tview2 interrupt move[data-lr-ext-fold='hidden'] {
-    display: none !important;
-  }
+/* A long run of moves keeps its first two and its last: the others fold into a pill, the
+   first of them drawn as one, which steps into the run and so unfolds it. */
+main.analyse .tview2 interrupt move[data-lr-ext-fold='hidden'] {
+  display: none !important;
+}
 
-  main.analyse .tview2 interrupt move[data-lr-ext-fold='pill'] {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    height: 20px;
-    margin: 0 3px !important;
-    padding: 0 8px 0 6px !important;
-    border-radius: 999px;
-    background: var(--lr-ext-lift-6) !important;
-    box-shadow: inset 0 0 0 1px var(--lr-ext-lift-8);
-    color: var(--lr-ext-text-dim) !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    line-height: 20px !important;
-  }
+main.analyse .tview2 interrupt move[data-lr-ext-fold='pill'] {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  margin: 0 3px !important;
+  padding: 0 8px 0 6px !important;
+  border-radius: 999px;
+  background: var(--lr-ext-lift-6) !important;
+  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-8);
+  color: var(--lr-ext-text-dim) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  line-height: 20px !important;
+}
 
-  main.analyse .tview2 interrupt move[data-lr-ext-fold='pill'] > * {
-    display: none !important;
-  }
+main.analyse .tview2 interrupt move[data-lr-ext-fold='pill'] > * {
+  display: none !important;
+}
 
-  main.analyse .tview2 interrupt move[data-lr-ext-fold='pill']::before {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background: currentColor;
-    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/more-horizontal.svg') center
-      / contain no-repeat;
-  }
+main.analyse .tview2 interrupt move[data-lr-ext-fold='pill']::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/more-horizontal.svg') center /
+    contain no-repeat;
+}
 
-  main.analyse .tview2 interrupt move[data-lr-ext-fold='pill']::after {
-    content: attr(data-lr-ext-fold-label);
-  }
+main.analyse .tview2 interrupt move[data-lr-ext-fold='pill']::after {
+  content: attr(data-lr-ext-fold-label);
+}
 
-  main.analyse .tview2 interrupt move[data-lr-ext-fold='pill']:hover {
-    background: var(--lr-ext-lift-10) !important;
-    color: var(--lr-ext-text-strong) !important;
-  }
+main.analyse .tview2 interrupt move[data-lr-ext-fold='pill']:hover {
+  background: var(--lr-ext-lift-10) !important;
+  color: var(--lr-ext-text-strong) !important;
 }

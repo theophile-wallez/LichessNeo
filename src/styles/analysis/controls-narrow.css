@@ -1,0 +1,124 @@
+/* ---- Controls below 1020px --- */
+
+/* One rounded bar under the board, as the desktop's (controls.css): the engine's switch and
+ * the explorer left, the four jumps, the menu right. Lichess wraps them in two rows here. */
+
+@media (max-width: 1019.98px) {
+  main.analyse .analyse__controls {
+    grid-area: controls !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    gap: 4px;
+    box-sizing: border-box;
+    height: auto !important;
+    margin: 8px 0 0 !important;
+    padding: 6px !important;
+    border-radius: 10px;
+    background: var(--lr-ext-bg-panel) !important;
+    box-shadow: none !important;
+  }
+
+  main.analyse .analyse__controls .jumps {
+    order: 1;
+    flex: 1;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    min-width: 0;
+    margin: 0 2px;
+  }
+
+  main.analyse .analyse__controls .fbt {
+    min-width: 0;
+    border: none !important;
+    border-radius: 6px;
+    color: var(--lr-ext-text) !important;
+  }
+
+  main.analyse .analyse__controls > .fbt {
+    flex: none;
+    display: grid !important;
+    place-items: center;
+    width: 40px;
+    height: 44px;
+    padding: 0 !important;
+    background: none !important;
+    color: var(--lr-ext-text-dim) !important;
+    font-size: 18px;
+  }
+
+  /* Lichess's mobile layout keeps its underboard in view: no button to open it. */
+  main.analyse .analyse__controls > .lr-ext-underboard {
+    display: none !important;
+  }
+
+  main.analyse .analyse__controls > .fbt[data-act='menu'] {
+    order: 2;
+  }
+
+  /* The engine's switch, Lichess's toggle, over its score or its settings' glyph, with its
+   * depth bar under them. */
+  main.analyse .analyse__controls > .fbt[data-act='engine-mode'] {
+    position: relative;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    width: 56px;
+    font-size: 13px;
+  }
+
+  main.analyse .analyse__controls > .fbt[data-act='engine-mode'] .cmn-toggle {
+    flex: none;
+  }
+
+  main.analyse .analyse__controls > .fbt[data-act='engine-mode'] eval {
+    color: var(--lr-ext-text-strong);
+    font-family: var(--lr-ext-font);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  main.analyse .analyse__controls > .fbt[data-act='engine-mode'] .bar {
+    position: absolute;
+    inset: auto 6px 4px;
+  }
+
+  /* Lichess fills an active toggle with its green, hiding the green icon: a faint tile instead. */
+  main.analyse .analyse__controls > .fbt.active {
+    background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
+    color: var(--lr-ext-accent) !important;
+  }
+
+  main.analyse .analyse__controls .jumps .fbt {
+    min-width: 0;
+    height: 44px;
+    padding: 0 !important;
+    background: var(--lr-ext-btn-grey) !important;
+    box-shadow: var(--lr-ext-btn-grey-shadow);
+    font-size: 20px;
+  }
+
+  main.analyse .analyse__controls .jumps .fbt:disabled {
+    opacity: 0.45;
+  }
+
+  /* The menu opens in place of the moves, as on the desktop. */
+  main.analyse .analyse__tools > .action-menu {
+    border: none !important;
+    background: var(--lr-ext-bg-panel) !important;
+  }
+
+  main.analyse .action-menu > .title {
+    padding: 14px 12px 6px !important;
+    background: none !important;
+    color: var(--lr-ext-text-dim) !important;
+    font-size: 12px !important;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.2 !important;
+    text-transform: uppercase;
+  }
+}

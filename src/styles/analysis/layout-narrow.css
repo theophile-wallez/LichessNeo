@@ -1,0 +1,161 @@
+/* ---- Below 1020px --- */
+
+/* Phones and tablets: one column that scrolls, as on the game page (game/layout-narrow.css).
+ * The players' bars and the board on the first screen with a row of controls, then the
+ * engine and the moves, the game's info, the tools and the chat, each a card. Lichess's
+ * coordinates stay on the board here. */
+
+@media (max-width: 1019.98px) {
+  /* Not a broadcast's page, which has no board (broadcast/). */
+  main.analyse:not(.has-relay-tour) {
+    --lr-ext-bar: 0px;
+    --lr-ext-coords-off: 0px;
+    --lr-ext-gap: 12px;
+    /* The review's eval strip over the board (review/layout-narrow.css). */
+    --lr-ext-strip: 0px;
+    /* As wide as the screen, but no taller than what leaves the bars and the controls in
+     * view on a tablet. */
+    --lr-ext-board: min(
+      100vw - 16px,
+      max(
+        280px,
+        100dvh - var(---site-header-height, 60px) - 2 * var(--lr-ext-bar) - var(--lr-ext-strip) -
+          84px
+      )
+    );
+
+    display: grid !important;
+    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-rows:
+      var(--lr-ext-strip) var(--lr-ext-bar) auto var(--lr-ext-bar) auto auto auto auto auto
+      auto auto auto auto auto !important;
+    grid-template-areas:
+      'gauge'
+      'user-top'
+      'board'
+      'user-bot'
+      'rctrl'
+      'controls'
+      'kb-move'
+      'rtop'
+      'tools'
+      'side'
+      'round-training'
+      'under'
+      'chat'
+      'uchat' !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 8px 0 32px !important;
+  }
+
+  main.analyse .analyse__board {
+    grid-area: board !important;
+  }
+
+  /* The board takes the column's width here, whatever its handle says. */
+  main.analyse cg-resize {
+    display: none;
+  }
+
+  /* ---- Players --- */
+
+  /* A game's bars over and under the board, as on the game page; Lichess's own clock strips
+   * would hang over the squares. */
+  html:is([data-lr-ext-has~='analyse-players'], [data-lr-ext-has~='analyse-clock']):not(
+      [data-lr-ext-has~='practice']
+    )
+    main.analyse {
+    --lr-ext-bar: 56px;
+  }
+
+  main.analyse > :is(.lr-ext-player, .lr-ext-captured) {
+    --lr-ext-off: 0px;
+  }
+
+  main.analyse > :is(.lr-ext-player--top, .lr-ext-captured--top) {
+    grid-area: user-top;
+  }
+
+  main.analyse > :is(.lr-ext-player--bottom, .lr-ext-captured--bottom) {
+    grid-area: user-bot;
+  }
+
+  html:is([data-lr-ext-has~='analyse-players'], [data-lr-ext-has~='analyse-clock'])
+    main.analyse
+    .analyse__player_strip {
+    display: none !important;
+  }
+
+  /* ---- Cards --- */
+
+  main.analyse:not(.has-relay-tour)
+    > :is(.analyse__tools, .analyse__side, .analyse__underboard, .analyse__round-training, .mchat) {
+    box-sizing: border-box;
+    width: 100% !important;
+    margin: 12px 0 0 !important;
+    border-radius: 10px !important;
+    background: var(--lr-ext-bg-panel) !important;
+    box-shadow: none !important;
+  }
+
+  /* The engine over the moves: as tall as they need, from a few rows to half the screen,
+   * where they scroll. */
+  main.analyse .analyse__tools {
+    grid-area: tools !important;
+    height: auto !important;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  main.analyse .analyse__moves {
+    flex: none !important;
+    min-height: 96px;
+    max-height: max(240px, 50dvh);
+    overflow-y: auto;
+  }
+
+  /* No move yet (the free board): a pawn where the moves will go, not an empty box. */
+  main.analyse .analyse__moves .tview2:empty {
+    height: 96px;
+    background: var(--lr-ext-lift-12) !important;
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn.svg') center /
+      28px no-repeat;
+  }
+
+  main.analyse .analyse__side {
+    grid-area: side !important;
+    gap: 12px;
+    padding: 12px !important;
+  }
+
+  /* The opening's wiki, before it has a page. */
+  main.analyse .analyse__side > .analyse__wiki.empty {
+    display: none !important;
+  }
+
+  /* The free board's variant: a picker of the page's size, not Lichess's large one. */
+  main.analyse .analyse__side .mselect__label {
+    height: 44px;
+    font-size: 15px !important;
+  }
+
+  /* Neither the side (the free board's variant picker, a game's info) nor the training
+   * need a card while they're empty. */
+  main.analyse > :is(.analyse__side, .analyse__round-training):empty {
+    display: none !important;
+  }
+
+  main.analyse .analyse__underboard {
+    grid-area: under !important;
+    padding: 12px !important;
+  }
+
+  main.analyse > .mchat {
+    grid-area: chat !important;
+    height: 360px !important;
+    overflow: hidden;
+  }
+}
