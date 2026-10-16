@@ -127,6 +127,8 @@
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
+  /* Lichess's box shadow, which in the light scheme drew a card with no room inside it. */
+  box-shadow: none !important;
 }
 
 .board-editor .board-editor__tools > select.positions {
