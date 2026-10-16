@@ -314,3 +314,20 @@ main.swiss .swiss__standing td.tieBreak {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
+
+/* A phone: the pager loses its first and last page buttons, so the join or sign-in button
+ * stays on its row rather than wrapping under it. */
+@media (max-width: 479.98px) {
+  main.swiss .swiss__controls {
+    flex-wrap: nowrap !important;
+  }
+
+  main.swiss .swiss__controls .pager > .fbt.is:is(:nth-child(2), :last-child) {
+    display: none !important;
+  }
+
+  main.swiss .swiss__controls > .fbt {
+    flex: none;
+    padding: 0 12px !important;
+  }
+}
