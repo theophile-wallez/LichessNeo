@@ -15,7 +15,7 @@ const SHAPE: StarShape = {
 
 export const star: Character = {
   name: 'Étoile',
-  skin: 'velvet',
+  skin: 'metal',
   colors: { coat: '#ffb62e', front: '#ffd65c', accent: '#ff9b5e' },
   frontMask: [0.7, 0.7],
   stripes: [0, 0, 0],
