@@ -72,14 +72,14 @@ and a white knob, and a single big number in the state's color.
 
 ## Tools
 
-| Page            | Path               | Level | Next                                                                                                                                   |
-| --------------- | ------------------ | ----- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Analysis board  | `/analysis`        | 2     | the panel is empty under the coach until a move is played; the variations' tree is drawn from 1020px only, Lichess's parentheses below |
-| Game review     | `/<id>` (finished) | 2     | signature planned: each side's accuracy on the track, in its grade's color                                                             |
-| Openings        | `/opening`         | 2     | the popularity chart is still Lichess's Chart.js canvas                                                                                |
-| Board editor    | `/editor`          | 2     |                                                                                                                                        |
-| Import game     | `/paste`           | 1     | Lichess's form: no title tile, a bare text area, the browser's file picker                                                             |
-| Advanced search | `/games/search`    | 1     | Lichess's form: no title tile, rows of empty selects                                                                                   |
+| Page            | Path               | Level | Next                                                                                                           |
+| --------------- | ------------------ | ----- | -------------------------------------------------------------------------------------------------------------- |
+| Analysis board  | `/analysis`        | 2     | the panel is empty under the coach until a move is played; below 1020px, one column even on a landscape tablet |
+| Game review     | `/<id>` (finished) | 2     | signature planned: each side's accuracy on the track, in its grade's color; below 1020px, one column           |
+| Openings        | `/opening`         | 2     | the popularity chart is still Lichess's Chart.js canvas                                                        |
+| Board editor    | `/editor`          | 2     |                                                                                                                |
+| Import game     | `/paste`           | 1     | Lichess's form: no title tile, a bare text area, the browser's file picker                                     |
+| Advanced search | `/games/search`    | 1     | Lichess's form: no title tile, rows of empty selects                                                           |
 
 ## Account
 

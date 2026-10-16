@@ -301,7 +301,8 @@ features and its name: free analysis, open data, no ads.
   overflows sideways). Leave no page half-done below 1020px. The game page
   shows how: its parts' look applies at every width, and only its grid
   changes, a column that scrolls below 1020px
-  (`styles/game/layout-narrow.css`).
+  (`styles/game/layout-narrow.css`, and so do `styles/analysis` and
+  `styles/review`).
 - **Playful pages:** a color per section, icons on gradient tiles, cards,
   pills, illustrations (pieces in the board's set, our sidebar's drawings,
   little boards), never emoji (see "No emoji").
@@ -602,7 +603,8 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   light (its Theme menu sets it, or the device for `system`, also on
   anonymous visitors and headless Chrome), anything else dark. Lichess
   rewrites `<html>`'s class when it changes: key on it, never add a class
-  there. Its own `.light …` rules still apply here and there: check both.
+  there (the review's, older, are put back on each of its passes,
+  `page/review/view/render.ts`). Its own `.light …` rules still apply here and there: check both.
   A Hugeicon file in a pastel color vanishes on a light tile: draw the glyph
   as a mask in its hue, as `styles/pages/menu-titles.css` does.
 - **The header below 1020px.** Lichess keeps its top bar there, and its
