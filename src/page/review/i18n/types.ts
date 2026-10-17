@@ -188,6 +188,8 @@ export interface ReviewLanguage {
   readonly classLabels: Readonly<Record<MoveClass, string>>;
   /** The verdict over the coach's comment; {m} marks the move. */
   readonly classSentences: Readonly<Record<MoveClass, string>>;
+  /** The verdict over a best move that mates, which needn't say it's best. */
+  readonly mateSentence: string;
   /** "3 Best", "3 meilleurs coups": the counts over the Game Review button. */
   readonly countLabel: (moveClass: CountedClass, count: number) => string;
   /** "Black’s blunders: 2": the summary's count, as its button's label. */

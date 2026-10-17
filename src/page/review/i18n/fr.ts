@@ -173,6 +173,7 @@ export const french = (viewer: Viewer): ReviewLanguage => ({
     miss: '{m} est un coup manqué',
     blunder: '{m} est une gaffe',
   },
+  mateSentence: '{m} est mat',
   countLabel: (moveClass, count) => {
     const [one, many] = COUNT_LABELS[moveClass];
     return `${count} ${count > 1 ? many : one}`;

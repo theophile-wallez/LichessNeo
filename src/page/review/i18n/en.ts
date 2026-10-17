@@ -164,6 +164,7 @@ export const english = (viewer: Viewer): ReviewLanguage => ({
     miss: '{m} is a miss',
     blunder: '{m} is a blunder',
   },
+  mateSentence: '{m} is checkmate',
   countLabel: (moveClass, count) => `${count} ${CLASS_LABELS[moveClass]}`,
   countTip: (color, moveClass, count) =>
     `${color === 'white' ? 'White' : 'Black'}’s ${CLASS_PLURALS[moveClass]}: ${count}`,

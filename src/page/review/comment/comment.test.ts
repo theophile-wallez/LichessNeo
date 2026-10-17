@@ -103,11 +103,20 @@ describe('streamFor', () => {
 
 describe('verdictTitle', () => {
   it('writes the verdicts as the original did', () => {
-    for (const [lang, key, san, html] of legacy.titles) {
+    // A best move that mates says so instead, a deliberate change.
+    for (const [lang, key, san, html] of legacy.titles.filter(
+      ([, legacyClass, san]) => !(legacyClass === 'best' && String(san).endsWith('#')),
+    )) {
       const moveClass = MOVE_CLASSES.find(candidate => candidate === key);
       if (!moveClass) throw new Error(`unknown class ${key}`);
       expect(verdictTitle(moveClass, String(san), languageOf(lang)).value).toBe(html);
     }
+  });
+
+  it('says a best move mates rather than that it’s best', () => {
+    const queen = '<span class="lr-ext-fig">♛</span>';
+    expect(verdictTitle('best', 'Qh5#', en).value).toBe(`${queen}h5# is checkmate`);
+    expect(verdictTitle('best', 'Qh5#', fr).value).toBe(`${queen}h5# est mat`);
   });
 });
 
