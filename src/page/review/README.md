@@ -76,6 +76,9 @@ Explain swaps the coach's comment for a book move's opening, or for the
 engine's lines around a move that wasn't best (`view/explain-hint.ts`); its
 button plays the best line on the board as a variation, while the coach still
 speaks of the move it stands for (`lineShown`, `view/navigation.ts`).
+Explain and Best fold away on a move they'd have nothing to add to, and Next
+grows into their room: their buttons are kept across the panel's renders so
+that they ease (`view/nav.ts`).
 
 The game's analysis runs on the page's engines (`engine-pool.ts`): up to
 three, on one thread each, as the device's cores and memory allow, each on a

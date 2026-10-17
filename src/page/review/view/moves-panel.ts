@@ -1,11 +1,10 @@
 import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
-import { GOOD } from '#page/review/classes/classes.ts';
 import { classIcon } from '#page/review/classes/icon-svg.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
 import { explainLines } from '#page/review/explain/lines.ts';
-import type { JudgedMove, LineShown, Session } from '#page/review/session.ts';
+import type { JudgedMove, Session } from '#page/review/session.ts';
 import type { PanelAction } from './actions.ts';
 import { briefMarkup } from './brief.ts';
 import { avatarMarkup, takeReaction } from './coach-avatar.ts';
@@ -13,12 +12,13 @@ import { explainHint } from './explain-hint.ts';
 import { movesGraph } from './graph.ts';
 import { momentsMarkup, momentsScroll, showMoment } from './moments.ts';
 import { bubbleTitle, evalChip, header, type IconName, svgIcon, thinkingMarkup } from './markup.ts';
-import { bestShown, lineShown, spokenMove, stepPath } from './navigation.ts';
-import { canRetry, type RetryOutcome, retryOutcome } from './retry.ts';
+import { bestShown, lineShown, spokenMove } from './navigation.ts';
+import { canRetry, retryOutcome } from './retry.ts';
 import { retryBubble } from './retry-bubble.ts';
 import { timingAt } from './timing.ts';
 import { type CoachComment, commentOn, followComment, timeTag, verdictMarkup } from './verdict.ts';
 import { newGameMarkup } from './new-game.ts';
+import { fillAroundNav, type NavInput, navState, syncNav } from './nav.ts';
 
 // The move-by-move review: the graph and the game's key moments on top, then
 // the coach on the move on the board, the Explain / Best / Next buttons and
@@ -117,14 +117,8 @@ function scrollMoveList(): void {
 }
 
 /** What the panel shows of the move on the board. */
-interface Spoken {
-  /** Explain's best line, when the board is along it. */
-  readonly line: LineShown | null;
-  readonly move: JudgedMove | null;
-  readonly shown: JudgedMove | null;
+interface Spoken extends NavInput {
   readonly comment: CoachComment | null;
-  /** Where a retry stands, while the player retries an error. */
-  readonly retried: RetryOutcome | null;
 }
 
 /** The coach's mood: the verdict on the board, or on the move tried. */
@@ -158,21 +152,6 @@ function coachMarkup(session: Session, analysis: Analysis, spoken: Spoken): Safe
   return html`<div class="lr-ext-coach">${avatar}${time}<div class="lr-ext-bubble">${bubble}</div></div>`;
 }
 
-function navMarkup(session: Session, analysis: Analysis, spoken: Spoken): SafeHtml {
-  const { view, language } = session;
-  const { ui } = language;
-  const { line, move, shown, retried } = spoken;
-  // Retrying, Next goes on with the game; Explain and Best would give the answer away.
-  const atEnd = !retried && !stepPath(session, analysis, 1);
-  const canBest =
-    !retried && !line && (shown !== null || (move?.best && !GOOD.has(move.moveClass)));
-  return html`<div class="lr-ext-review__nav">
-        <button class="lr-ext-btn${view.explain ? ' lr-ext-btn--on' : ''}" data-lr-ext="explain" ${retried ? 'disabled' : ''}>${svgIcon('bulb')}${ui.explain}</button>
-        <button class="lr-ext-btn${shown ? ' lr-ext-btn--on' : ''}" data-lr-ext="best" ${canBest ? '' : 'disabled'}>${svgIcon('star')}${ui.best}</button>
-        <button class="lr-ext-btn lr-ext-btn--green" data-lr-ext="next" ${atEnd ? 'disabled' : ''}>${svgIcon('arrow')}${ui.next}</button>
-      </div>`;
-}
-
 export function renderMoves(session: Session, analysis: Analysis): void {
   const { view, language, elements } = session;
   const line = lineShown(session, analysis);
@@ -184,13 +163,14 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const spoken = { line, move, shown, comment, retried };
   const moments = view.review ? momentsMarkup(view.review, analysis.node.ply, language) : '';
   const scrolled = momentsScroll(elements.panel);
-  setHtml(
+  fillAroundNav(
     elements.panel,
     html`${header(language.ui.review, 'summary', language, newGameMarkup(analysis, 'lr-ext-review__new'))}
       <div class="lr-ext-review__graph-slot"></div>${moments}
-      ${coachMarkup(session, analysis, spoken)}
-      ${navMarkup(session, analysis, spoken)}`,
+      ${coachMarkup(session, analysis, spoken)}`,
+    elements.nav,
   );
+  syncNav(elements.nav, navState(session, analysis, spoken), language.ui);
   // The graph is kept across renders (its listeners, its first draw): put it back in its slot.
   queryOne(elements.panel, '.lr-ext-review__graph-slot', HTMLElement)?.replaceWith(
     elements.graphBox,

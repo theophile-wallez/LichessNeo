@@ -156,19 +156,38 @@
   white-space: nowrap;
 }
 
+/* Equal thirds; Explain and Best fold away when they've nothing to do, and only
+   Next grows into their room. Margins, not a gap, so a folded button leaves none. */
 .lr-ext-review__nav {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  display: flex;
   padding: 14px 16px 12px;
 }
 
 .lr-ext-review__nav .lr-ext-btn {
+  flex: 1 1 0;
   min-width: 0;
   gap: 6px;
   overflow: hidden;
   font-size: 14px;
   white-space: nowrap;
+  transition:
+    flex-basis 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s,
+    background-color 0.15s !important;
+}
+
+.lr-ext-review__nav .lr-ext-btn:not(.lr-ext-btn--green) {
+  flex: 0 0 calc((100% - 16px) / 3);
+  margin-inline-end: 8px;
+}
+
+.lr-ext-review__nav .lr-ext-btn:not(.lr-ext-btn--green):disabled {
+  flex-basis: 0;
+  margin-inline-end: 0;
+  padding-inline: 0;
+  opacity: 0;
 }
 
 .lr-ext-review__nav .lr-ext-btn:not(.lr-ext-btn--green) .lr-ext-i {

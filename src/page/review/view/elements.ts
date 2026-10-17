@@ -6,6 +6,8 @@ import { createElement, queryOne } from '#shared/dom.ts';
 export interface ReviewElements {
   readonly panel: HTMLElement;
   readonly graphBox: HTMLElement;
+  /** The move-by-move panel's Explain / Best / Next, kept for their buttons to ease. */
+  readonly nav: HTMLElement;
   readonly controls: HTMLElement;
   readonly bar: HTMLElement;
   readonly barFill: HTMLElement;
@@ -24,6 +26,7 @@ export function createElements(): ReviewElements {
     // Focusable, to keep the focus of a button its redraw replaced.
     panel: createElement('div', { id: 'lr-ext-review', attrs: { tabindex: '-1' } }),
     graphBox: createElement('div', { id: 'lr-ext-review-graph' }),
+    nav: createElement('div', { className: 'lr-ext-review__nav' }),
     controls: createElement('div', { id: 'lr-ext-review-controls' }),
     bar,
     barFill,
