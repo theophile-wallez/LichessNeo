@@ -73,3 +73,16 @@ export function builtSession(build: BuildCase): Session {
   }
   return session;
 }
+
+/** The game `name`, judged at full depth, its opening from the export. */
+export function judgedGame(name: string): FakeGame & { readonly session: Session } {
+  const game = fakeGame(name);
+  const { fixture, facade } = game;
+  const session = newSession();
+  session.work.nodes = facade.mainline;
+  session.work.bookPly = fixture.bookPly;
+  session.view.openingName = fixture.opening;
+  for (const [i, record] of fixture.records.entries()) setDeep(session, i, record);
+  refresh(session, facade);
+  return { ...game, session };
+}

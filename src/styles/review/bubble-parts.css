@@ -108,8 +108,7 @@
   --lr-ext-tag: color-mix(in srgb, var(--lr-ext-purple) 80%, var(--lr-ext-text-strong));
 }
 
-.lr-ext-tag--hanging,
-.lr-ext-tag--cost {
+.lr-ext-tag--hanging {
   --lr-ext-tag: color-mix(in srgb, var(--lr-ext-red) 80%, var(--lr-ext-text-strong));
 }
 

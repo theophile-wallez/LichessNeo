@@ -19,10 +19,10 @@ import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import { evalChip } from './markup.ts';
 
-// The bubble for a judged move: its icon, the verdict and how the score
-// moved, then the coach's comment, typed out, and the tags: the tactic, the
-// chances an error gave away. The move's time is the card's (`timeTag`), the
-// coach's advice on it in its tooltip.
+// The bubble for a judged move: its icon, the verdict and the score, how it
+// moved and the chances an error gave away in its tooltip, then the coach's
+// comment, typed out, and the tactic's tags. The move's time is the card's
+// (`timeTag`), the coach's advice on it in its tooltip.
 
 const coachContext = (session: Session, gameId: string): CoachContext => ({
   gameId,
@@ -99,20 +99,21 @@ export function timeTag(session: Session, { timing, advice }: CoachComment): Saf
   return html`<span class="lr-ext-tag lr-ext-tag--time lr-ext-tag--${advice.note}" data-lr-ext-tip="${typography(advice.text)}">${spent}</span>`;
 }
 
-function tagsMarkup(session: Session, { move, themes }: CoachComment): SafeHtml {
+function tagsMarkup(session: Session, { themes }: CoachComment): SafeHtml {
   const { ui } = session.language;
   const tags = themes.map(
     theme => html`<span class="lr-ext-tag lr-ext-tag--${theme}">${ui.themes[theme]}</span>`,
   );
-  // A verdict from mate distances isn't about winning chances, which stay the same.
-  const lost = isError(move.moveClass) && !move.slower ? chancesLost(move) : 0;
-  if (lost > 0) tags.push(html`<span class="lr-ext-tag lr-ext-tag--cost">${ui.cost(lost)}</span>`);
   return tags.length > 0 ? html`<div class="lr-ext-bubble__tags">${tags}</div>` : html``;
 }
 
-/** The score after the move; how it moved in its tooltip. */
+/** The score after the move; how it moved in its tooltip, and what an error gave away. */
 function scoreChange(move: JudgedMove, language: ReviewLanguage): SafeHtml {
-  const tip = language.ui.scoreChange(formatEval(move.before), formatEval(move.after));
+  const { ui } = language;
+  const change = ui.scoreChange(formatEval(move.before), formatEval(move.after));
+  // A verdict from mate distances isn't about winning chances, which stay the same.
+  const lost = isError(move.moveClass) && !move.slower ? chancesLost(move) : 0;
+  const tip = lost > 0 ? `${change} ${ui.cost(lost)}.` : change;
   return html`<span class="lr-ext-bubble__evals" data-lr-ext-tip="${tip}" aria-label="${tip}">${evalChip(move.after)}</span>`;
 }
 

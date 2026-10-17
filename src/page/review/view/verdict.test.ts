@@ -1,29 +1,15 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { refresh } from '#page/review/game/work.ts';
-import { fakeGame, newSession, setDeep } from '#page/review/fixtures/unit-review.ts';
+import { judgedGame } from '#page/review/fixtures/unit-review.ts';
 import { formatEval } from '#page/review/evaluation/format.ts';
-import type { Session } from '#page/review/session.ts';
 import { commentOn, openingOf, timeTag, verdictMarkup } from './verdict.ts';
 
 afterEach(() => {
   Reflect.deleteProperty(window, 'site');
 });
 
-/** A session whose game, `name`, is judged at full depth, its opening from the export. */
-function judgedGame(name: string): Session {
-  const { fixture, facade } = fakeGame(name);
-  const session = newSession();
-  session.work.nodes = facade.mainline;
-  session.work.bookPly = fixture.bookPly;
-  session.view.openingName = fixture.opening;
-  for (const [i, record] of fixture.records.entries()) setDeep(session, i, record);
-  refresh(session, facade);
-  return session;
-}
-
 describe('a book move of the game', () => {
   it('names the export’s opening only on the move that reaches it', () => {
-    const session = judgedGame('opera');
+    const { session } = judgedGame('opera');
     const book = (session.view.review?.moves ?? []).filter(move => move?.moveClass === 'book');
     expect(book.map(move => move?.ply)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     const named = book.map(move => (move ? openingOf(session, move) : null));
@@ -34,7 +20,7 @@ describe('a book move of the game', () => {
   });
 
   it('keeps the name a move played off the game carries', () => {
-    const session = judgedGame('opera');
+    const { session } = judgedGame('opera');
     const first = session.view.review?.moves[0];
     if (!first) throw new Error('the first move is not judged');
     expect(openingOf(session, { ...first, opening: 'King’s Pawn Game' })).toBe('King’s Pawn Game');
@@ -50,7 +36,7 @@ function timeTagIn(markup: string): HTMLElement {
 }
 
 describe('a move’s time', () => {
-  const session = judgedGame('opera');
+  const { session } = judgedGame('opera');
   const move = session.view.review?.moves.find(judged => judged?.moveClass === 'best');
   if (!move) throw new Error('no best move');
   const timed = (spent: number) =>
@@ -85,7 +71,7 @@ describe('a move’s time', () => {
 
 describe('a verdict’s score', () => {
   it('shows the score after the move, and how the move changed it in its tooltip', () => {
-    const session = judgedGame('opera');
+    const { session } = judgedGame('opera');
     const move = session.view.review?.moves.find(judged => judged?.moveClass === 'best');
     if (!move) throw new Error('no best move');
     const comment = commentOn(session, { move, gameId: 'opera', hint: [], timing: null });
@@ -97,5 +83,20 @@ describe('a verdict’s score', () => {
     expect(score.dataset.lrExtTip).toBe(
       `Before the move: ${formatEval(move.before)}. After: ${formatEval(move.after)}.`,
     );
+  });
+
+  it('adds what an error gave away to the tooltip, not to the tags', () => {
+    const { session } = judgedGame('opera');
+    const move = session.view.review?.moves.find(judged => judged?.moveClass === 'mistake');
+    if (!move) throw new Error('no mistake');
+    const comment = commentOn(session, { move, gameId: 'opera', hint: [], timing: null });
+    document.body.innerHTML = verdictMarkup(session, comment).toString();
+    const score = document.querySelector('.lr-ext-bubble__evals');
+    if (!(score instanceof HTMLElement)) throw new Error('no score');
+    const change = `Before the move: ${formatEval(move.before)}. After: ${formatEval(move.after)}.`;
+    const tip = score.dataset.lrExtTip ?? '';
+    expect(tip.startsWith(`${change} `)).toBe(true);
+    expect(tip.slice(change.length)).toMatch(/^ −\d+% winning chances\.$/);
+    expect(document.body.textContent).not.toContain('winning chances');
   });
 });
