@@ -73,47 +73,22 @@
     box-shadow: 0 0 0 2px var(--accent);
   }
 
-  .pieces {
-    top: 546px;
-    left: 900px;
-    width: 360px;
-    transform: rotate(1.5deg);
-  }
-
-  .sounds {
-    top: 632px;
-    left: 896px;
-    width: 380px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 14px;
+  /* A few of the settings' color themes, each with its light and dark orbs. */
+  .themes {
+    top: 560px;
+    left: 902px;
+    display: grid;
+    grid-template-columns: repeat(3, 112px);
+    gap: 6px;
+    padding: 12px;
     border-radius: 16px;
-    background: #18181ce6;
+    background: #0e0e10f2;
     box-shadow: 0 0 0 1px #ffffff26, 0 26px 60px #000000b8, 0 8px 20px #00000080;
     transform: rotate(2deg);
   }
 
-  .sounds > span {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: #ffffff0d;
-    box-shadow: inset 0 0 0 1px #ffffff17;
-    font-size: 15px;
-    font-weight: 700;
-  }
-
-  .sounds > span:first-child {
-    box-shadow: inset 0 0 0 2px var(--accent);
-  }
-
-  .sounds .icon {
-    width: 16px;
-    height: 16px;
-    color: var(--orange);
+  .themes img {
+    width: 112px;
   }
 
   .fennec {
@@ -136,14 +111,14 @@
   <p class="sub" lang="en">Pick a look or build your own: it follows you on every page.</p>
   <p class="sub" lang="fr">Choisissez un style ou créez le vôtre : il vous suit sur chaque page.</p>
   <ul class="points" lang="en">
-    <li><span class="tile purple i-paint"></span><span>16 color themes<small>For light and dark, or make your own</small></span></li>
-    <li><span class="tile cyan i-grid"></span><span>Boards<small>22 of ours, all of Lichess’s, or draw yours</small></span></li>
-    <li><span class="tile orange i-music"></span><span>Pieces &amp; sounds<small>Lichess’s sets, our Foley sounds, or a pack from GitHub</small></span></li>
+    <li><span class="tile purple i-paint"></span><span>16 color themes<small>Each in light and dark, or make your own</small></span></li>
+    <li><span class="tile cyan i-grid"></span><span>Boards<small>Ours, Lichess’s, or one you draw</small></span></li>
+    <li><span class="tile orange i-music"></span><span>Pieces &amp; sounds<small>Lichess’s sets and sounds, or a pack you import</small></span></li>
   </ul>
   <ul class="points" lang="fr">
-    <li><span class="tile purple i-paint"></span><span>16 thèmes de couleur<small>Clairs et sombres, ou le vôtre</small></span></li>
-    <li><span class="tile cyan i-grid"></span><span>Plateaux<small>22 à nous, tous ceux de Lichess, ou le vôtre</small></span></li>
-    <li><span class="tile orange i-music"></span><span>Pièces et sons<small>Ceux de Lichess, nos sons Foley, ou un pack depuis GitHub</small></span></li>
+    <li><span class="tile purple i-paint"></span><span>16 thèmes de couleur<small>Chacun en clair et en sombre, ou le vôtre</small></span></li>
+    <li><span class="tile cyan i-grid"></span><span>Plateaux<small>Les nôtres, ceux de Lichess, ou celui que vous dessinez</small></span></li>
+    <li><span class="tile orange i-music"></span><span>Pièces et sons<small>Ceux de Lichess, ou un pack que vous importez</small></span></li>
   </ul>
 </header>
 
@@ -175,16 +150,14 @@
   <img src="shots/board-newspaper.webp">
   <img src="shots/board-plum.webp">
 </div>
-<img class="card pieces" src="shots/pieces.webp">
-<p class="sounds">
-  <span><i class="icon i-music"></i>Foley</span>
-  <span><i class="icon i-music"></i>Piano</span>
-  <span><i class="icon i-music"></i>NES</span>
-  <span><i class="icon i-music"></i>SFX</span>
-  <span><i class="icon i-music"></i>Futuristic</span>
-  <span><i class="icon i-music"></i>Robot</span>
-  <span><i class="icon i-package"></i><span lang="en">Your pack</span><span lang="fr">Votre pack</span></span>
-</p>
+<div class="themes">
+  <img src="shots/theme-neo.webp">
+  <img src="shots/theme-ember.webp">
+  <img src="shots/theme-grove.webp">
+  <img src="shots/theme-blossom.webp">
+  <img src="shots/theme-iris.webp">
+  <img src="shots/theme-aurora.webp">
+</div>
 
 <img class="coach fennec" src="coaches/coach-2-delight.webp">
 <img class="coach frog" src="coaches/coach-5-happy.webp">
