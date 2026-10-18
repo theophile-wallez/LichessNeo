@@ -25,22 +25,33 @@
     max-width: 820px;
   }
 
+  /* A bento of rounded shots: the home, then three pages at its right. */
+  .shot {
+    border-radius: 16px;
+  }
+
   .home {
     top: 246px;
     left: 48px;
-    width: 600px;
+    width: 620px;
   }
 
   .side {
     top: 246px;
-    left: 676px;
-    width: 370px;
+    left: 690px;
+    width: 542px;
+  }
+
+  .learn {
+    top: 602px;
+    left: 690px;
+    width: 264px;
   }
 
   .tournament {
-    top: 520px;
-    left: 676px;
-    width: 370px;
+    top: 602px;
+    left: 968px;
+    width: 264px;
   }
 
   .label {
@@ -58,27 +69,18 @@
   }
 
   .side-label {
-    top: 446px;
-    left: 690px;
+    top: 534px;
+    left: 706px;
+  }
+
+  .learn-label {
+    top: 720px;
+    left: 702px;
   }
 
   .tournament-label {
     top: 720px;
-    left: 690px;
-  }
-
-  .tablet {
-    top: 246px;
-    left: 1070px;
-    width: 176px;
-    transform: rotate(3deg);
-  }
-
-  .phone {
-    top: 470px;
-    left: 1112px;
-    width: 136px;
-    transform: rotate(-4deg);
+    left: 980px;
   }
 
   .octopus {
@@ -119,43 +121,26 @@
   <span class="pill"><span lang="en">The whole site</span><span lang="fr">Tout le site</span></span>
   <h1 lang="en">Every page, <em>redesigned</em></h1>
   <h1 lang="fr">Chaque page, <em>repensée</em></h1>
-  <p class="sub" lang="en">Home, puzzles, lessons, profiles, tournaments, the forum: modern and playful, on any screen.</p>
-  <p class="sub" lang="fr">Accueil, problèmes, leçons, profils, tournois, forum : modernes et ludiques, sur tous les écrans.</p>
+  <p class="sub" lang="en">Home, puzzles, lessons, profiles, tournaments, the forum: modern and playful.</p>
+  <p class="sub" lang="fr">Accueil, problèmes, leçons, profils, tournois, forum : modernes et ludiques.</p>
 </header>
 
-<div class="window home">
-  <p><span>lichess.org</span></p>
-  <img lang="en" src="shots/home-en.webp">
-  <img lang="fr" src="shots/home-fr.webp">
-</div>
+<img class="card shot home" lang="en" src="shots/home-en.webp">
+<img class="card shot home" lang="fr" src="shots/home-fr.webp">
 <p class="label home-label"><span lang="en">Home</span><span lang="fr">Accueil</span></p>
 
 <!-- Signed in, Lichess shows the account's language: the French page is one open to all. -->
-<div class="window side" lang="en">
-  <p><span>lichess.org<b>/training/dashboard</b></span></p>
-  <img src="shots/dashboard-en.webp">
-</div>
-<div class="window side" lang="fr">
-  <p><span>lichess.org<b>/practice</b></span></p>
-  <img src="shots/practice-fr.webp">
-</div>
+<img class="card shot side" lang="en" src="shots/dashboard-en.webp">
+<img class="card shot side" lang="fr" src="shots/practice-fr.webp">
 <p class="label side-label"><span lang="en">Puzzle dashboard</span><span lang="fr">Exercices</span></p>
 
-<div class="window tournament">
-  <p><span>lichess.org<b>/tournament</b></span></p>
-  <img lang="en" src="shots/tournament-en.webp">
-  <img lang="fr" src="shots/tournament-fr.webp">
-</div>
-<p class="label tournament-label"><span lang="en">Tournaments</span><span lang="fr">Tournois</span></p>
+<img class="card shot learn" lang="en" src="shots/learn-en.webp">
+<img class="card shot learn" lang="fr" src="shots/learn-fr.webp">
+<p class="label learn-label"><span lang="en">Learn</span><span lang="fr">Apprendre</span></p>
 
-<div class="tablet">
-  <img lang="en" src="shots/tablet-puzzle-en.webp">
-  <img lang="fr" src="shots/tablet-puzzle-fr.webp">
-</div>
-<div class="phone">
-  <img lang="en" src="shots/phone-home-en.webp">
-  <img lang="fr" src="shots/phone-home-fr.webp">
-</div>
+<img class="card shot tournament" lang="en" src="shots/tournament-en.webp">
+<img class="card shot tournament" lang="fr" src="shots/tournament-fr.webp">
+<p class="label tournament-label"><span lang="en">Tournaments</span><span lang="fr">Tournois</span></p>
 
 <img class="coach octopus" src="coaches/coach-7-happy.webp">
 <img class="coach egg" src="coaches/coach-22-happy.webp">
