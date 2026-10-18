@@ -43,26 +43,41 @@
     transform: rotate(5deg);
   }
 
-  .grove {
+  .backlit {
     top: 270px;
     left: 590px;
     width: 540px;
     transform: rotate(-1deg);
   }
 
-  /* The settings' pickers, cut out of their page. */
+  /* The settings' pickers, cut out of their page: a few of the boards, the custom one first. */
   .boards {
-    top: 600px;
-    left: 486px;
-    width: 383px;
-    transform: rotate(-3deg);
+    top: 586px;
+    left: 474px;
+    display: grid;
+    grid-template-columns: repeat(5, 70px);
+    gap: 6px;
+    padding: 12px;
+    border-radius: 16px;
+    background: #121214f2;
+    box-shadow: 0 0 0 1px #ffffff26, 0 26px 60px #000000b8, 0 8px 20px #00000080;
+    transform: rotate(-2deg);
+  }
+
+  .boards img {
+    width: 70px;
+    border-radius: 9px;
+  }
+
+  .boards img:first-child {
+    box-shadow: 0 0 0 2px var(--accent);
   }
 
   .pieces {
-    top: 708px;
-    left: 510px;
-    width: 379px;
-    transform: rotate(1deg);
+    top: 546px;
+    left: 900px;
+    width: 360px;
+    transform: rotate(1.5deg);
   }
 
   .sounds {
@@ -102,9 +117,9 @@
   }
 
   .fennec {
-    top: 410px;
-    left: 1118px;
-    height: 176px;
+    top: 372px;
+    left: 1124px;
+    height: 160px;
   }
 
   .frog {
@@ -142,13 +157,24 @@
   <img lang="en" src="shots/theme-home-ocean-en.webp">
   <img lang="fr" src="shots/theme-home-ocean-fr.webp">
 </div>
-<div class="window grove">
-  <p><span>lichess.org<b>/training</b></span></p>
-  <img lang="en" src="shots/theme-puzzle-grove-en.webp">
-  <img lang="fr" src="shots/theme-puzzle-grove-fr.webp">
+<div class="window backlit">
+  <p><span>lichess.org<b lang="en">/17ZV0Vk1</b><b lang="fr">/C3jhe2tN</b></span></p>
+  <img lang="en" src="shots/backlit-en.webp">
+  <img lang="fr" src="shots/backlit-fr.webp">
 </div>
 
-<img class="card boards" src="shots/boards.webp">
+<div class="boards">
+  <img src="shots/board-custom.webp">
+  <img src="shots/board-backlit-midnight.webp">
+  <img src="shots/board-wood.webp">
+  <img src="shots/board-ember.webp">
+  <img src="shots/board-blue-marble.webp">
+  <img src="shots/board-backlit-walnut.webp">
+  <img src="shots/board-horsey.webp">
+  <img src="shots/board-backlit-amethyst.webp">
+  <img src="shots/board-newspaper.webp">
+  <img src="shots/board-plum.webp">
+</div>
 <img class="card pieces" src="shots/pieces.webp">
 <p class="sounds">
   <span><i class="icon i-music"></i>Foley</span>
