@@ -1,6 +1,7 @@
-# The Chrome Web Store listing
+# The store listings
 
-What the developer dashboard asks for, ready to paste. The name and the
+What the Chrome Web Store's developer dashboard and Firefox Add-ons (AMO) ask
+for, ready to paste. The name and the
 summary come from the manifest (`extDescription` in `public/_locales`); the
 images are in `store/en` and `store/fr`, made from `store/templates`
 (`pnpm store:render`).
@@ -101,3 +102,48 @@ Lichess Neo est un projet de fan non officiel, sans lien avec Lichess.org.
   imports a pack.
 - **Certifications:** tick all three (no sale of data, no use unrelated to
   the single purpose, no use for credit).
+
+## Firefox Add-ons (AMO)
+
+### The packages
+
+`pnpm package` writes both: `dist/LichessNeo-v<version>-firefox.zip`, the
+add-on, and `dist/LichessNeo-v<version>-source.zip`, its sources. The add-on is
+bundled and minified, so AMO asks for the sources: answer yes and upload that
+zip. Check the add-on first with Mozilla's linter
+(`npx addons-linter dist/LichessNeo-v<version>-firefox.zip`): it should report
+no errors, and the warnings the notes below explain.
+
+### Listing
+
+- **Name:** Lichess Neo. **Slug:** `lichess-neo`.
+- **Summary:** the manifest's (`extDescription`), in English and French.
+- **Description:** the Chrome Web Store's above, in both languages.
+- **Categories:** Games & Entertainment, Appearance (on Android too: the
+  add-on runs on Firefox for Android 142 and later).
+- **Tags:** chess, lichess, theme, dark mode, game review.
+- **Support site:** https://github.com/theophile-wallez/LichessNeo/issues
+- **License:** MIT.
+- **Privacy policy:** none; the manifest declares no data collection
+  (`data_collection_permissions: none`).
+- **Screenshots:** the five 1280×800 images, with their captions:
+  "A game's Debrief", "Every move explained", "26 coaches",
+  "Your colors, board and sounds", "Every page redesigned".
+
+### Notes to the reviewer
+
+```text
+The add-on is built from the attached sources with Node 24 and pnpm (corepack enable picks the version in package.json):
+
+  pnpm install --frozen-lockfile
+  pnpm build --target firefox --release --version <this version>
+
+dist/firefox is then the submitted add-on, file for file. The README's "Building from the sources" says the same.
+
+About the linter's warnings:
+- innerHTML / insertAdjacentHTML: all markup is built with a tagged template (src/shared/html.ts) that escapes every interpolated value; constants only go through trustedHtml.
+- import() in content.js loads coach-mascot.js, a chunk of the add-on itself (runtime.getURL), only when a coach shows.
+- import() in page.js runs in the page's world, not the add-on's: it loads Lichess's own Stockfish build from lichess.org's assets, as Lichess's analysis board does, for the game review.
+
+No remote code runs in the add-on's context, and no data leaves the browser: the add-on only talks to lichess.org, and to GitHub when the user imports a pack (images, sounds and a JSON file).
+```
