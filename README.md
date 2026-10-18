@@ -8,7 +8,7 @@ game.
 Your Lichess account, your games and your friends don't change. Only the look
 and the sounds do.
 
-![A game on lichess.org with the extension, on a computer and on a phone](store/en/1-game.png)
+![A game's Debrief on lichess.org with the extension, on a computer and on a phone](store/en/1-game.png)
 
 ## What you get
 
