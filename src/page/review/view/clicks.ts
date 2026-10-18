@@ -1,10 +1,11 @@
 import { closestTo, queryOne } from '#shared/dom.ts';
+import { postCoachPicker } from '#shared/protocol.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import type { Session } from '#page/review/session.ts';
 import { type PanelAction, PanelActionSchema } from './actions.ts';
 import { playChip } from './chips.ts';
 import { jumpToClass } from './class-jump.ts';
-import { nextCoach } from './coach-avatar.ts';
+import { viewOf } from './graph-views.ts';
 import { learnFromMistakes } from './learn.ts';
 import {
   goTo,
@@ -36,8 +37,13 @@ function jumpToMoment(analysis: Analysis, card: HTMLElement): void {
 
 type ReviewCommand = Exclude<
   PanelAction,
-  'coach' | 'jump' | 'moment' | 'learn' | 'chip' | 'retry' | 'reveal'
+  'coach' | 'jump' | 'moment' | 'learn' | 'chip' | 'retry' | 'reveal' | 'graph' | 'share'
 >;
+
+function pickGraphView(session: Session, button: HTMLElement): void {
+  const view = viewOf(button);
+  if (view) session.view.graph = view;
+}
 
 /** Retry's button starts a retry of the move on the board, or ends the one going on. */
 function toggleRetry(session: Session, analysis: Analysis): void {
@@ -78,6 +84,8 @@ function dispatch(session: Session, analysis: Analysis, { action, button }: Clic
   if (action === 'jump') jumpToClass(session, analysis, button);
   else if (action === 'moment') jumpToMoment(analysis, button);
   else if (action === 'chip') playChip(session, analysis, button);
+  else if (action === 'graph') pickGraphView(session, button);
+  else if (action === 'share') session.view.sheet = !session.view.sheet;
   // Lichess's exercise, not the review's: it closes the review.
   else if (action === 'learn') learnFromMistakes(session, analysis);
   else if (action === 'retry') toggleRetry(session, analysis);
@@ -93,10 +101,9 @@ function onClick(session: Session, event: MouseEvent): void {
   const parsed = PanelActionSchema.safeParse(button.dataset.lrExt);
   if (!parsed.success) return;
   const action = parsed.data;
+  // The coaches are picked in the content script, which has their names (content/coach/picker.ts).
   if (action === 'coach') {
-    nextCoach(session, button);
-    // Each coach words the remarks their own way.
-    if (session.view.mode === 'moves' || session.view.mode === 'live') session.redraw(true);
+    postCoachPicker(session.coach.id);
     return;
   }
   const analysis = pageAnalysis();

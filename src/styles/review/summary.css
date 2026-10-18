@@ -60,11 +60,17 @@ html.light :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > rect {
 html.light :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > path {
   fill: var(--lr-ext-neutral-1);
 }
-/* In the move-by-move panel, under its header: the story of the game, large. */
-#lr-ext-review #lr-ext-review-graph {
+/* In the move-by-move panel, under its header: the story of the game, large. Its views'
+   toggle sits over its corner (graph-views.css). */
+#lr-ext-review .lr-ext-review__graph-box {
+  position: relative;
   flex: none;
-  height: var(--lr-ext-review-graph);
   margin: 0 12px 8px;
+}
+
+#lr-ext-review #lr-ext-review-graph {
+  height: var(--lr-ext-review-graph);
+  margin: 0;
   padding: 0;
   background: transparent;
 }
@@ -72,6 +78,11 @@ html.light :is(.lr-ext-summary-graph, #lr-ext-review-graph) svg > path {
 /* The graph draws itself from left to right the first time it shows. */
 .lr-ext-graph-reveal {
   animation: lr-ext-reveal 1.4s ease-out;
+}
+
+/* A change of view, at the pace of the toggle's pick (view/graph.ts). */
+.lr-ext-graph-switch {
+  animation: lr-ext-reveal 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes lr-ext-reveal {

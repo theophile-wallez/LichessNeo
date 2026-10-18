@@ -23,6 +23,16 @@ const CoachStateSchema = z.object({
   talking: z.boolean(),
 });
 
+const CoachPickerSchema = z.object({
+  type: z.literal(messageType('coach-picker')),
+  coach: z.int(),
+});
+
+const CoachPickedSchema = z.object({
+  type: z.literal(messageType('coach-picked')),
+  coach: z.int(),
+});
+
 /** Lichess's own color schemes, as its Theme menu offers them. */
 export const ColorSchemeSchema = z.enum(['system', 'light', 'dark']);
 
@@ -85,6 +95,18 @@ export const postCoachState = (state: CoachState): void =>
   post({ type: messageType('coach'), ...state });
 export const onCoachState = (handler: (state: CoachState) => void): (() => void) =>
   listen(CoachStateSchema, ({ coach, mood, talking }) => handler({ coach, mood, talking }));
+
+/** Page → content: the review's coach was clicked, open the coaches to pick one; `coach` shows now. */
+export const postCoachPicker = (coach: number): void =>
+  post({ type: messageType('coach-picker'), coach });
+export const onCoachPicker = (handler: (coach: number) => void): (() => void) =>
+  listen(CoachPickerSchema, message => handler(message.coach));
+
+/** Content → page: the coach picked in the coach picker, already kept. */
+export const postCoachPicked = (coach: number): void =>
+  post({ type: messageType('coach-picked'), coach });
+export const onCoachPicked = (handler: (coach: number) => void): (() => void) =>
+  listen(CoachPickedSchema, message => handler(message.coach));
 
 /** Content → page: the color scheme picked in the extension's settings, for Lichess to keep. */
 export const postColorScheme = (scheme: ColorScheme): void =>

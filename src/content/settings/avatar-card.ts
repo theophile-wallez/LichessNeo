@@ -8,7 +8,7 @@ import { keepOwnAvatar, onOwnAvatar, ownAvatar, type OwnAvatar } from '#shared/o
 import { onOwnName, ownName } from '#shared/own-name.ts';
 import { message } from '#content/platform/runtime.ts';
 import { pictureFrom } from './avatar-picture.ts';
-import { coachName } from './coach-card.ts';
+import { coachName } from '#content/coach/names.ts';
 
 // The Avatar card of the settings' Profile customization page
 // (styles/pages/settings-profile.css): the avatar of the user's name, one they

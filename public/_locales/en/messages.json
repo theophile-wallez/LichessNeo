@@ -1086,5 +1086,17 @@
   "noticeClose": {
     "message": "Close",
     "description": "A toast's close button, read out by screen readers."
+  },
+  "coachPickerTitle": {
+    "message": "Choose your coach",
+    "description": "The title of the Game Review's coach picker, opened by a click on the coach."
+  },
+  "coachPickerBody": {
+    "message": "Each coach words the review their own way. Your pick goes for the puzzles and the drills too.",
+    "description": "What the coach picker's pick does."
+  },
+  "coachPickerClose": {
+    "message": "Close",
+    "description": "The coach picker's close button, read out by screen readers."
   }
 }

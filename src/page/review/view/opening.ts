@@ -6,9 +6,10 @@ import { classImage } from '#page/review/classes/icon-svg.ts';
 import { openingAt } from '#page/review/live/judging.ts';
 import type { BookEntry, Session } from '#page/review/session.ts';
 
-// The opening's name over the free board's move list, from the masters
-// database (signed in only). Our element is appended to Lichess's panel and
-// placed above the moves by review.css, so Lichess's own children never move.
+// The opening's name over the move list: on the free board, from the masters
+// database (signed in only); in a game's review, the game's, from its export.
+// Our element is appended to Lichess's panel and placed above the moves by
+// review.css, so Lichess's own children never move.
 
 /** "Ruy Lopez: Morphy Defense": the family in bold, then the variation. */
 export function openingMarkup({ name, eco }: Pick<BookEntry, 'name' | 'eco'>): SafeHtml {
@@ -22,6 +23,9 @@ function shownOpening(
   session: Session,
   analysis: Analysis,
 ): Pick<BookEntry, 'name' | 'eco'> | null {
+  const { view } = session;
+  if (view.mode === 'moves')
+    return view.openingName ? { name: view.openingName, eco: view.openingEco } : null;
   if (!analysis.explorerSignedIn() || session.live.noBook) return null;
   if (analysis.path) return openingAt(session.live, analysis, analysis.path);
   return { name: translate('startPosition', session.language.ui.startPosition), eco: '' };

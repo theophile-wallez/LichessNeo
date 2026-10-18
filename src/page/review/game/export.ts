@@ -8,7 +8,13 @@ import type { PositionRecord } from '#page/review/evaluation/score.ts';
 // analysis when someone asked for one.
 
 const GameExportSchema = z.object({
-  opening: lenient(z.object({ ply: lenient(z.number()), name: lenient(z.string()) })),
+  opening: lenient(
+    z.object({
+      ply: lenient(z.number()),
+      name: lenient(z.string()),
+      eco: lenient(z.string()),
+    }),
+  ),
   // One entry per position after a move, White's view.
   analysis: lenient(z.array(z.object({ mate: lenient(z.number()), eval: lenient(z.number()) }))),
 });
@@ -17,6 +23,7 @@ export interface GameExport {
   /** The last book move's ply, 0 for none. */
   readonly bookPly: number;
   readonly openingName: string;
+  readonly openingEco: string;
   /** The server's records by position index, for the graph: no second line, no best move. */
   readonly rough: readonly (PositionRecord | undefined)[];
 }
@@ -51,6 +58,7 @@ export function readExport(text: string, positions: number): GameExport | null {
   return {
     bookPly: parsed.opening?.ply ?? 0,
     openingName: parsed.opening?.name ?? '',
+    openingEco: parsed.opening?.eco ?? '',
     rough,
   };
 }

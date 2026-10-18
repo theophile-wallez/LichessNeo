@@ -21,6 +21,8 @@ const CommandSchema = z.enum([
   'chip',
   'retry',
   'reveal',
+  'graph',
+  'share',
 ]);
 
 export const PanelActionSchema = z.union([ModeSchema, CommandSchema]);

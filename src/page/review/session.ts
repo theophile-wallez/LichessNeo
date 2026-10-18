@@ -65,6 +65,10 @@ export interface RetryState {
 
 export type GraphKind = 'summary' | 'moves';
 
+/** What the move-by-move graph draws: the winning chances, or each move's time. */
+export const GraphViewSchema = z.enum(['advantage', 'time']);
+export type GraphView = z.infer<typeof GraphViewSchema>;
+
 export interface ViewState {
   mode: Mode;
   review: Review | null;
@@ -79,6 +83,9 @@ export interface ViewState {
   playing: number | null;
   /** The graphs that have drawn themselves in once. */
   readonly revealed: Set<GraphKind>;
+  graph: GraphView;
+  /** The game's crosstable and export are open over the move-by-move panel. */
+  sheet: boolean;
   bestOf: BestShown | null;
   lineOf: LineShown | null;
   retry: RetryState | null;
@@ -91,6 +98,8 @@ export interface ViewState {
   drawnMode: Mode | null;
   /** The game’s opening, from its export: named on its last book move only. */
   openingName: string;
+  /** Its ECO code, '' when the export has none. */
+  openingEco: string;
   /** What the eval bar last showed during the review. */
   barPosition: PositionRecord | null;
   /** The board overlay's markup, as last drawn. */
@@ -188,6 +197,8 @@ export function createSession(options: SessionOptions): Session {
       explain: false,
       playing: null,
       revealed: new Set(),
+      graph: 'advantage',
+      sheet: false,
       bestOf: null,
       lineOf: null,
       retry: null,
@@ -196,6 +207,7 @@ export function createSession(options: SessionOptions): Session {
       summaryPly: undefined,
       drawnMode: null,
       openingName: '',
+      openingEco: '',
       barPosition: null,
       overlay: '',
     },

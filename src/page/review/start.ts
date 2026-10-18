@@ -5,6 +5,7 @@ import { pageLanguage } from './i18n/language.ts';
 import { createSession, type Mode, type Session } from './session.ts';
 import { watchChips } from './view/chips.ts';
 import { watchClicks } from './view/clicks.ts';
+import { watchCoachPicks } from './view/coach-avatar.ts';
 import { createElements } from './view/elements.ts';
 import { keepMarked, render, setMode } from './view/render.ts';
 import { refitStream } from './view/stream.ts';
@@ -37,6 +38,7 @@ export function createReview(analysis: Analysis): Session {
     setMode: mode => setMode(session, mode),
   });
   watchClicks(session);
+  watchCoachPicks(session);
   watchChips(session);
   watchTips(session);
   watchCostTips(session);

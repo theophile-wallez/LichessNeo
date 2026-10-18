@@ -814,5 +814,14 @@
   },
   "noticeClose": {
     "message": "Fermer"
+  },
+  "coachPickerTitle": {
+    "message": "Choisissez votre coach"
+  },
+  "coachPickerBody": {
+    "message": "Chaque coach commente la partie à sa façon. Votre choix vaut aussi pour les puzzles et les exercices."
+  },
+  "coachPickerClose": {
+    "message": "Fermer"
   }
 }

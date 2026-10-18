@@ -10,12 +10,21 @@ import { briefMarkup } from './brief.ts';
 import { avatarMarkup, takeReaction } from './coach-avatar.ts';
 import { explainHint } from './explain-hint.ts';
 import { movesGraph } from './graph.ts';
+import { syncGraphViews } from './graph-views.ts';
 import { momentsMarkup, momentsScroll, showMoment } from './moments.ts';
-import { bubbleTitle, evalChip, header, type IconName, svgIcon, thinkingMarkup } from './markup.ts';
+import {
+  bubbleTitle,
+  evalChip,
+  header,
+  type IconName,
+  shareButton,
+  svgIcon,
+  thinkingMarkup,
+} from './markup.ts';
 import { bestShown, lineShown, spokenMove } from './navigation.ts';
 import { canRetry, retryOutcome } from './retry.ts';
 import { retryBubble } from './retry-bubble.ts';
-import { timingAt } from './timing.ts';
+import { gameTimes, timingAt } from './timing.ts';
 import { type CoachComment, commentOn, followComment, timeTag, verdictMarkup } from './verdict.ts';
 import { newGameMarkup } from './new-game.ts';
 import { fillAroundNav, type NavInput, navState, syncNav } from './nav.ts';
@@ -43,7 +52,7 @@ function bubbleMarkup(
   const { view, live, language } = session;
   const { ui } = language;
   if (!view.review) return bubbleTitle(`${ui.analysing} ${Math.round(view.progress * 100)}%`);
-  if (!analysis.path) return briefMarkup(session, analysis, view.review);
+  if (!analysis.path) return briefMarkup(session, view.review);
   if (shown)
     return html`<div class="lr-ext-bubble__row">${classIcon('best')}
           <p class="lr-ext-bubble__title">${verdictTitle('best', analysis.node.san ?? '', language)}</p>
@@ -165,15 +174,25 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const scrolled = momentsScroll(elements.panel);
   fillAroundNav(
     elements.panel,
-    html`${header(language.ui.review, 'summary', language, newGameMarkup(analysis, 'lr-ext-review__new'))}
-      <div class="lr-ext-review__graph-slot"></div>${moments}
+    html`${header(language.ui.review, 'summary', language, html`${shareButton(view.sheet, language.ui)}${newGameMarkup(analysis, 'lr-ext-review__new')}`)}
+      <div class="lr-ext-review__graph-box"><div class="lr-ext-review__graph-slot"></div><div class="lr-ext-review__views-slot"></div></div>${moments}
       ${coachMarkup(session, analysis, spoken)}`,
     elements.nav,
   );
   syncNav(elements.nav, navState(session, analysis, spoken), language.ui);
-  // The graph is kept across renders (its listeners, its first draw): put it back in its slot.
+  // The graph and its views are kept across renders (its listeners, its first draw, their
+  // pick's slide): put them back in their slots.
   queryOne(elements.panel, '.lr-ext-review__graph-slot', HTMLElement)?.replaceWith(
     elements.graphBox,
+  );
+  queryOne(elements.panel, '.lr-ext-review__views-slot', HTMLElement)?.replaceWith(
+    elements.graphViews,
+  );
+  const hasTimes = gameTimes(analysis).length > 0;
+  syncGraphViews(
+    elements.graphViews,
+    { shown: hasTimes ? view.graph : 'advantage', hasTimes },
+    language.ui,
   );
   setHtml(elements.controls, controlsMarkup(view.playing !== null));
   movesGraph(session, analysis, true);

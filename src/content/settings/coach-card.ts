@@ -1,8 +1,9 @@
-import { type COACH_COUNT, CoachIdSchema, pickCoach } from '#shared/coach.ts';
+import { CoachIdSchema, pickCoach } from '#shared/coach.ts';
 import { closestTo, createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
-import { html, type SafeHtml, setHtml } from '#shared/html.ts';
+import { html, setHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import { chooseCoach } from '#content/bootstrap/coach-choice.ts';
+import { coachChoices, coachName } from '#content/coach/names.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
 import { currentSettings, onSettings } from './settings.ts';
 import { buildSwitchList } from './switch-list.ts';
@@ -12,45 +13,6 @@ import { buildSwitchList } from './switch-list.ts';
 // hello, over a tile for each coach. The pick is the one every coach shows
 // (#shared/coach.ts): the review, the puzzles, the drills. Under it, the
 // coach's switches: its 3D, and its place on the analysis board.
-
-// The coaches' names, in the order of their numbers (content/coach/mascot/cast).
-const NAMES = [
-  'coachPawn',
-  'coachFennec',
-  'coachDino',
-  'coachAxolotl',
-  'coachFrog',
-  'coachBee',
-  'coachOctopus',
-  'coachRobot',
-  'coachMushroom',
-  'coachSnail',
-  'coachGhost',
-  'coachCactus',
-  'coachToast',
-  'coachRook',
-  'coachKnight',
-  'coachBishop',
-  'coachKing',
-  'coachQueen',
-  'coachBunny',
-  'coachCat',
-  'coachDragon',
-  'coachBoiledEgg',
-  'coachSoda',
-  'coachCloud',
-  'coachSlime',
-  'coachStar',
-] as const satisfies { length: typeof COACH_COUNT };
-
-/** The name of the coach of number `coach`. */
-export const coachName = (coach: number): string => message(NAMES[coach - 1] ?? NAMES[0]);
-
-const choiceMarkup = (name: string, i: number): SafeHtml =>
-  html`<button type="button" class="lr-ext-coach-choice" data-lr-ext-coach-choice="${i + 1}" aria-pressed="false">
-    <span class="lr-ext-coach-choice__face" data-lr-ext-avatar-coach="${i + 1}"></span>
-    <span class="lr-ext-coach-choice__name">${message(name)}</span>
-  </button>`;
 
 const CARD = html`<div class="lr-ext-coach-pick__head">
     <span class="lr-ext-setting__icon" aria-hidden="true"></span>
@@ -63,7 +25,7 @@ const CARD = html`<div class="lr-ext-coach-pick__head">
     <span class="lr-ext-coach-pick__mascot" aria-hidden="true"></span>
     <p class="lr-ext-coach-pick__bubble" aria-live="polite"></p>
   </div>
-  <div class="lr-ext-coach-pick__grid">${NAMES.map(choiceMarkup)}</div>`;
+  <div class="lr-ext-coach-pick__grid">${coachChoices()}</div>`;
 
 export interface CoachCard {
   readonly element: HTMLElement;

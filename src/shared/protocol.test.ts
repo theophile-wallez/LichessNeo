@@ -1,10 +1,14 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
+  onCoachPicked,
+  onCoachPicker,
   onCoachState,
   onLichessLook,
   onLooksPreview,
   onPageReady,
   onSounds,
+  postCoachPicked,
+  postCoachPicker,
   postLichessLook,
   postLooksPreview,
 } from './protocol.ts';
@@ -13,6 +17,7 @@ const stops: (() => void)[] = [];
 
 afterEach(() => {
   for (const stop of stops.splice(0)) stop();
+  vi.restoreAllMocks();
 });
 
 const receive = (data: unknown, source: MessageEventSource | null = window): void => {
@@ -76,6 +81,21 @@ describe('protocol', () => {
     for (const [data] of post.mock.calls) receive(data);
     receive({ type: 'lr-ext:looks-preview', action: 'pause' });
     expect(actions).toEqual(['play', 'step']);
+  });
+
+  it('carries the coach picker’s opening and its pick across, each its own way', () => {
+    // happy-dom's messages come from its own window object, not the test's: hand them over.
+    vi.spyOn(window, 'postMessage').mockImplementation((data: unknown) => receive(data));
+    const opened: number[] = [];
+    const picked: number[] = [];
+    stops.push(onCoachPicker(coach => opened.push(coach)));
+    stops.push(onCoachPicked(coach => picked.push(coach)));
+    postCoachPicker(3);
+    postCoachPicked(5);
+    expect(opened).toEqual([3]);
+    expect(picked).toEqual([5]);
+    receive({ type: 'lr-ext:coach-picked', coach: 'fox' });
+    expect(picked).toEqual([5]);
   });
 
   it('stops listening once told', () => {

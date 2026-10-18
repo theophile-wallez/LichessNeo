@@ -17,11 +17,16 @@ function median(values: readonly number[]): number {
 const clockBefore = (time: MoveTime): number | null =>
   time.clock === null ? null : time.clock + time.seconds;
 
-/** The time of the game's move at `ply`, or null without clocks (an import, correspondence). */
-export function timingAt(analysis: Analysis, ply: number): MoveTiming | null {
+/** The game's move times, none without clocks (an import, correspondence). */
+export function gameTimes(analysis: Analysis): MoveTime[] {
   const course = analysis.course;
-  if (!course || analysis.data?.game.speed === 'correspondence') return null;
-  const times = moveTimes(analysis.mainline, course);
+  if (!course || analysis.data?.game.speed === 'correspondence') return [];
+  return moveTimes(analysis.mainline, course);
+}
+
+/** The time of the game's move at `ply`, or null without clocks. */
+export function timingAt(analysis: Analysis, ply: number): MoveTiming | null {
+  const times = gameTimes(analysis);
   const time = times.find(each => each.ply === ply);
   const clock = time && clockBefore(time);
   if (!time || clock === null || clock === undefined) return null;

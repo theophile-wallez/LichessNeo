@@ -49,9 +49,10 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
       return turning ? html`${found}: the game turned at ${turning}.` : html`${found}.`;
     },
     calm: 'No big error in this game: let’s go through it move by move.',
-    start: 'Start',
   },
   next: 'Next',
+  graphViews: { advantage: 'Advantage', time: 'Time' },
+  share: 'Share & export',
   explain: 'Explain',
   best: 'Best',
   analysing: 'Analyzing game…',
@@ -101,7 +102,6 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   gameRating: 'Game Rating',
   gameRatingTip: 'An estimate of a player’s rating based on a single game.',
   bestWas: move => `${move} was best.`,
-  scoreChange: (before, after) => `Before the move: ${before}. After: ${after}.`,
   cost: percent => `−${percent}% winning chances`,
   lines: {
     best: line => `Best was ${line}.`,

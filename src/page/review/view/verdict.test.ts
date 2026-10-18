@@ -70,7 +70,7 @@ describe('a move’s time', () => {
 });
 
 describe('a verdict’s score', () => {
-  it('shows the score after the move, and how the move changed it in its tooltip', () => {
+  it('shows the score after the move, with no tooltip on a move that gave nothing away', () => {
     const { session } = judgedGame('opera');
     const move = session.view.review?.moves.find(judged => judged?.moveClass === 'best');
     if (!move) throw new Error('no best move');
@@ -80,12 +80,10 @@ describe('a verdict’s score', () => {
     if (!(score instanceof HTMLElement)) throw new Error('no score');
     expect(score.querySelectorAll('.lr-ext-bubble__eval')).toHaveLength(1);
     expect(score.textContent).toBe(formatEval(move.after));
-    expect(score.dataset.lrExtTip).toBe(
-      `Before the move: ${formatEval(move.before)}. After: ${formatEval(move.after)}.`,
-    );
+    expect(score.dataset.lrExtTip).toBeUndefined();
   });
 
-  it('adds what an error gave away to the tooltip, not to the tags', () => {
+  it('says what an error gave away in its tooltip, not in the tags', () => {
     const { session } = judgedGame('opera');
     const move = session.view.review?.moves.find(judged => judged?.moveClass === 'mistake');
     if (!move) throw new Error('no mistake');
@@ -93,10 +91,7 @@ describe('a verdict’s score', () => {
     document.body.innerHTML = verdictMarkup(session, comment).toString();
     const score = document.querySelector('.lr-ext-bubble__evals');
     if (!(score instanceof HTMLElement)) throw new Error('no score');
-    const change = `Before the move: ${formatEval(move.before)}. After: ${formatEval(move.after)}.`;
-    const tip = score.dataset.lrExtTip ?? '';
-    expect(tip.startsWith(`${change} `)).toBe(true);
-    expect(tip.slice(change.length)).toMatch(/^ −\d+% winning chances\.$/);
+    expect(score.dataset.lrExtTip).toMatch(/^−\d+% winning chances$/);
     expect(document.body.textContent).not.toContain('winning chances');
   });
 });

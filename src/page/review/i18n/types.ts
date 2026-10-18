@@ -54,7 +54,6 @@ export interface BriefStrings {
   readonly moments: (count: number, turning: SafeHtml | null) => SafeHtml;
   /** For a game without a key moment. */
   readonly calm: string;
-  readonly start: string;
 }
 
 export interface InterfaceStrings {
@@ -93,8 +92,6 @@ export interface InterfaceStrings {
   readonly less: string;
   readonly gameRating: string;
   readonly gameRatingTip: string;
-  /** The verdict's score's tooltip: how the move changed it. */
-  readonly scoreChange: (before: string, after: string) => string;
   /** Explain's hint for a move that wasn't best. */
   readonly bestWas: (move: string) => string;
   /** A move's cost bar, by the share of the mover's winning chances it gave away. */
@@ -104,6 +101,10 @@ export interface InterfaceStrings {
   /** The bubble's tags: the tactic a move is about. */
   readonly themes: Readonly<Record<Theme, string>>;
   readonly clock: ClockStrings;
+  /** The move-by-move graph's two views. */
+  readonly graphViews: { readonly advantage: string; readonly time: string };
+  /** The header's button that opens the game's crosstable and export. */
+  readonly share: string;
 }
 
 /** The situations with remarks of their own, besides each class's. */

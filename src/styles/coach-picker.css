@@ -1,0 +1,116 @@
+/* ---- The coach picker (content/coach/picker.ts) --- */
+
+/* A click on the review's coach opens every coach over the page, in the settings' tiles
+ * (pages/settings-coach.css), the one shown now pressed. The dialog's frame and backdrop
+ * are every dialog's (pages/dialogs.css). */
+
+dialog.lr-ext-coach-picker {
+  --lr-ext-setting-color: var(--lr-ext-orange);
+  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mentoring.svg');
+
+  box-sizing: border-box;
+  width: min(760px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  /* The card is the dialog's whole box, so a click outside it is the backdrop's. */
+  padding: 0;
+  overflow: hidden;
+  color: var(--lr-ext-text);
+}
+
+.lr-ext-coach-picker__card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-sizing: border-box;
+  max-height: calc(100dvh - 34px);
+  padding: 20px 22px 22px;
+}
+
+/* Centered: every dialog's own rule (pages/dialogs.css) pins it to the top. */
+html dialog.lr-ext-coach-picker {
+  margin: auto !important;
+}
+
+.lr-ext-coach-picker__head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 16px;
+}
+
+.lr-ext-coach-picker__head > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.lr-ext-coach-picker__title {
+  margin: 0;
+  color: var(--lr-ext-text-strong);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.lr-ext-coach-picker__body {
+  margin: 4px 0 0;
+  color: var(--lr-ext-text-dim);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.lr-ext-coach-picker__close {
+  display: flex;
+  flex: none;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--lr-ext-text-dim);
+}
+
+.lr-ext-coach-picker__close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lr-ext-coach-picker__close:hover {
+  background: var(--lr-ext-lift-8);
+  color: var(--lr-ext-text-strong);
+}
+
+/* Rows of seven, the animals first, as in the settings; the grid scrolls on a short window. */
+.lr-ext-coach-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+  min-height: 0;
+  margin: -4px;
+  padding: 4px;
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  .lr-ext-coach-picker__card {
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .lr-ext-coach-picker__head .lr-ext-setting__icon {
+    display: none;
+  }
+
+  .lr-ext-coach-picker__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .lr-ext-coach-picker__grid .lr-ext-coach-choice {
+    padding-inline: 4px;
+    font-size: 12px;
+  }
+}

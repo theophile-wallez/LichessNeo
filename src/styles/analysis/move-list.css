@@ -128,74 +128,33 @@ main.analyse .tview2-column > move glyph {
   line-height: 1 !important;
 }
 
-/* The result as a scoreboard card: the score between both kings (it can't tell a win from a
- * draw), how it ended below. Two sibling lines, each drawing half the card. */
+/* The result as on the game page (game/game-over.css): the score, then how the game ended,
+ * on a strip under the moves. */
 main.analyse .analyse__moves .result {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin: 10px 10px 0 !important;
-  padding: 14px 12px 6px !important;
-  border: 1px solid var(--lr-ext-card-border) !important;
-  border-bottom: none !important;
-  border-radius: 12px 12px 0 0;
-  background: linear-gradient(var(--lr-ext-lift-7), var(--lr-ext-lift-4)) !important;
+  margin: 0 !important;
+  padding: 10px 16px 0 !important;
+  border: none !important;
+  border-top: 1px solid var(--lr-ext-border) !important;
+  background: none !important;
   color: var(--lr-ext-text-strong) !important;
   font-family: var(--lr-ext-font) !important;
-  font-size: 24px !important;
+  font-size: 20px !important;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.06em;
-  line-height: 1;
+  line-height: 1.2;
+  text-align: start !important;
   animation: lr-ext-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-main.analyse .analyse__moves .result::before,
-main.analyse .analyse__moves .result::after {
-  content: '';
-  flex: none;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background:
-    var(---white-king) center / 84% no-repeat,
-    var(--lr-ext-sq-light, var(--lr-ext-orange-light));
-  box-shadow:
-    inset 0 1px 0 #ffffff40,
-    inset 0 -3px 0 #00000026,
-    0 2px 6px var(--lr-ext-shade-25);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.analyse .analyse__moves .result::after {
-  background:
-    var(---black-king) center / 84% no-repeat,
-    var(--lr-ext-sq-dark, var(--lr-ext-orange-dark));
-}
-
-main.analyse .analyse__moves .result:hover::before {
-  transform: rotate(-6deg) scale(1.08);
-}
-
-main.analyse .analyse__moves .result:hover::after {
-  transform: rotate(6deg) scale(1.08);
-}
-
 main.analyse .analyse__moves .result + .status {
-  margin: 0 10px 12px !important;
-  padding: 6px 12px 14px !important;
-  border: 1px solid var(--lr-ext-card-border);
-  border-top: none;
-  border-radius: 0 0 12px 12px;
-  background: var(--lr-ext-lift-4) !important;
+  margin: 0 !important;
+  padding: 2px 16px 12px !important;
   color: var(--lr-ext-text-dim) !important;
   font-family: var(--lr-ext-font) !important;
   font-size: 13px !important;
   font-style: normal !important;
-  font-weight: 600;
   line-height: 1.35;
-  text-align: center;
+  text-align: start !important;
   animation: lr-ext-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 

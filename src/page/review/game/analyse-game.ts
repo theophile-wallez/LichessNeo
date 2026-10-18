@@ -33,6 +33,7 @@ async function applyExport(session: Session, analysis: Analysis): Promise<void> 
     if (!found) return;
     work.bookPly = found.bookPly;
     view.openingName = found.openingName;
+    view.openingEco = found.openingEco;
     for (const [i, record] of found.rough.entries()) if (record) work.rough[i] = record;
   } catch {
     // Offline, or no such game: the engine does it all.

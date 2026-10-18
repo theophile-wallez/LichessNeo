@@ -65,6 +65,7 @@ import { puzzleDashboard } from './puzzle-dashboard/index.ts';
 import { puzzleHistory } from './puzzle-dashboard/history/index.ts';
 import { ratingChart } from './charts/rating-chart/index.ts';
 import { coach } from './coach/index.ts';
+import { coachPicker } from './coach/picker.ts';
 import { computer } from './computer/index.ts';
 import { gameSetup } from './game-setup/index.ts';
 import { reloadIfInjectedLate } from './bootstrap/late-reload.ts';
@@ -137,6 +138,7 @@ const FEATURES = [
   puzzleHistory,
   ratingChart,
   coach,
+  coachPicker,
   computer,
   gameSetup,
 ] as const;

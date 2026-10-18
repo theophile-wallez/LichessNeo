@@ -144,19 +144,19 @@ html.lr-ext-review-moves main.analyse .tview2 interrupt move[data-lr-ext-badge] 
 /* ---- Opening --- */
 
 /* The review appends the opening's name to Lichess's panel (a flex column); order puts
-   it between the engine and the moves. Signed out, there's none. */
+   it between the engine and the moves. Signed out, the free board has none. */
 #lr-ext-opening {
   display: none;
 }
 
-html.lr-ext-review-live.lr-ext-opening-on
+html:is(.lr-ext-review-live, .lr-ext-review-moves).lr-ext-opening-on
   main.analyse
   .analyse__tools
   > :not(.ceval, .pv_box, #lr-ext-opening) {
   order: 2;
 }
 
-html.lr-ext-review-live.lr-ext-opening-on main.analyse #lr-ext-opening {
+html:is(.lr-ext-review-live, .lr-ext-review-moves).lr-ext-opening-on main.analyse #lr-ext-opening {
   order: 1;
   flex: none;
   display: flex;

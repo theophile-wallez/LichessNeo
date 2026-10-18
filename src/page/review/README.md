@@ -80,6 +80,24 @@ Explain and Best fold away on a move they'd have nothing to add to, and Next
 grows into their room: their buttons are kept across the panel's renders so
 that they ease (`view/nav.ts`).
 
+Before the first move, the coach's brief names the game's opening, its key
+moments and, as a button that goes to it, the move the game turned on
+(`view/brief.ts`). The move-by-move review then shows the game's opening and
+its ECO code over the move list, from the export (`view/opening.ts`).
+
+The move-by-move graph has two views, the advantage and, for a game with
+clocks, each move's time as a column (`view/graph-views.ts`,
+`view/graph-times.ts`): the toggle over its corner is kept across renders so
+that its pick slides. The header's share button opens Lichess's crosstable
+and "Share & export" over the panel (`lr-ext-review-sheet`,
+`styles/review/sheet.css`); changing modes closes them.
+
+A click on the coach opens the coach picker. It's a dialog of the content
+script (`content/coach/picker.ts`), which has the coaches' names: the page
+asks for it (`postCoachPicker`) and hears back the coach picked, already
+kept for every page (`onCoachPicked`, `watchCoachPicks`), whose words the
+comment is typed in again.
+
 The game's analysis runs on the page's engines (`engine-pool.ts`): up to
 three, on one thread each, as the device's cores and memory allow, each on a
 position of its own (`nextJob`), on Lichess's relaxed SIMD build where the

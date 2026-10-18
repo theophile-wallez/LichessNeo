@@ -13,15 +13,14 @@ import { explanation } from '#page/review/coach/explanation.ts';
 import { findings, type Theme, themesOf } from '#page/review/coach/fact.ts';
 import { type CommentPart, commentMarkup, streamFor } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
-import { formatEval } from '#page/review/evaluation/format.ts';
 import { forColor } from '#page/review/evaluation/score.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import { evalChip } from './markup.ts';
 
-// The bubble for a judged move: its icon, the verdict and the score, how it
-// moved and the chances an error gave away in its tooltip, then the coach's
-// comment, typed out, and the tactic's tags. The move's time is the card's
+// The bubble for a judged move: its icon, the verdict and the score, the
+// chances an error gave away in its tooltip, then the coach's comment, typed
+// out, and the tactic's tags. The move's time is the card's
 // (`timeTag`), the coach's advice on it in its tooltip.
 
 const coachContext = (session: Session, gameId: string): CoachContext => ({
@@ -107,13 +106,12 @@ function tagsMarkup(session: Session, { themes }: CoachComment): SafeHtml {
   return tags.length > 0 ? html`<div class="lr-ext-bubble__tags">${tags}</div>` : html``;
 }
 
-/** The score after the move; how it moved in its tooltip, and what an error gave away. */
-function scoreChange(move: JudgedMove, language: ReviewLanguage): SafeHtml {
-  const { ui } = language;
-  const change = ui.scoreChange(formatEval(move.before), formatEval(move.after));
+/** The score after the move; an error's tooltip says the winning chances it gave away. */
+function scoreMarkup(move: JudgedMove, language: ReviewLanguage): SafeHtml {
   // A verdict from mate distances isn't about winning chances, which stay the same.
   const lost = isError(move.moveClass) && !move.slower ? chancesLost(move) : 0;
-  const tip = lost > 0 ? `${change} ${ui.cost(lost)}.` : change;
+  if (lost <= 0) return html`<span class="lr-ext-bubble__evals">${evalChip(move.after)}</span>`;
+  const tip = language.ui.cost(lost);
   return html`<span class="lr-ext-bubble__evals" data-lr-ext-tip="${tip}" aria-label="${tip}">${evalChip(move.after)}</span>`;
 }
 
@@ -131,7 +129,7 @@ export function verdictMarkup(
   const said = commentMarkup(parts, { stream: stream.state, language });
   return html`<div class="lr-ext-bubble__row">${classIcon(move.moveClass)}
       <p class="lr-ext-bubble__title">${verdictTitle(move.moveClass, move.san, language)}</p>
-      ${scoreChange(move, language)}</div>
+      ${scoreMarkup(move, language)}</div>
     <div class="lr-ext-bubble__body"><p class="lr-ext-bubble__sub">${said}</p>
       ${tagsMarkup(session, comment)}${actions}</div>`;
 }

@@ -1,0 +1,80 @@
+/* ---- The game's sheet --- */
+
+/* The header's share button opens Lichess's crosstable and "Share & export" over the
+   move-by-move panel, under its header (page/review/view/render.ts sets
+   lr-ext-review-sheet). Below 1020px they're in the page's column already, under the
+   moves (analysis/layout-narrow.css): no button. */
+
+.lr-ext-review__share.active {
+  background: var(--lr-ext-bg-raised);
+  color: var(--lr-ext-text-strong);
+}
+
+@media (max-width: 1019.98px) {
+  .lr-ext-review__share {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1020px) {
+  html.lr-ext-review-moves.lr-ext-review-sheet main.analyse > .analyse__underboard {
+    grid-row: rtop-start / tools-end !important;
+    grid-column: rtop !important;
+    z-index: 4;
+    display: block !important;
+    box-sizing: border-box;
+    min-height: 0;
+    margin: 48px 0 0 var(--lr-ext-gap) !important;
+    padding: 12px;
+    overflow-y: auto;
+    border-top: 1px solid var(--lr-ext-border);
+    background: var(--lr-ext-bg-panel);
+    box-shadow: 0 -12px 24px -16px var(--lr-ext-shade-50);
+    animation: lr-ext-sheet-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* No tabs: the crosstable, then the export. The charts are the graph's views already. */
+  html.lr-ext-review-sheet main.analyse .analyse__underboard__menu,
+  html.lr-ext-review-sheet main.analyse .analyse__underboard__panels > :not(.ctable, .fen-pgn) {
+    display: none !important;
+  }
+
+  html.lr-ext-review-sheet main.analyse .analyse__underboard__panels {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Lichess cuts each panel at 240px and scrolls it: the sheet scrolls instead. */
+  html.lr-ext-review-sheet main.analyse .analyse__underboard__panels > :is(.ctable, .fen-pgn) {
+    display: block !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  html.lr-ext-review-sheet main.analyse .analyse__underboard__panels > .ctable {
+    order: -1;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  html.lr-ext-review-sheet main.analyse .analyse__underboard__panels > .ctable:empty {
+    display: none !important;
+  }
+
+  html.lr-ext-review-sheet main.analyse .analyse__underboard__panels > .fen-pgn {
+    padding: 12px;
+    border: 1px solid var(--lr-ext-card-border);
+    border-radius: 10px;
+    background: var(--lr-ext-bg-panel-dark);
+  }
+}
+
+@keyframes lr-ext-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}

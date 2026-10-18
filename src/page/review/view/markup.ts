@@ -10,12 +10,13 @@ import Idea01Icon from '@hugeicons/core-free-icons/Idea01Icon';
 import PauseIcon from '@hugeicons/core-free-icons/PauseIcon';
 import PlayIcon from '@hugeicons/core-free-icons/PlayIcon';
 import ReloadIcon from '@hugeicons/core-free-icons/ReloadIcon';
+import Share08Icon from '@hugeicons/core-free-icons/Share08Icon';
 import StarIcon from '@hugeicons/core-free-icons/StarIcon';
 import { hugeicon } from '#shared/hugeicons.ts';
 import { html, type SafeHtml, trustedHtml } from '#shared/html.ts';
 import { formatEval } from '#page/review/evaluation/format.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import type { ReviewLanguage } from '#page/review/i18n/types.ts';
+import type { InterfaceStrings, ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { Mode } from '#page/review/session.ts';
 
 // Markup the panel's modes share: icons, the header, the score chip.
@@ -41,6 +42,7 @@ export const svgIcon = (name: IconName): SafeHtml =>
 const BACK_ICON = hugeicon(ArrowLeft02Icon);
 const CLOSE_ICON = hugeicon(Cancel01Icon);
 export const CHEVRON_ICON = hugeicon(ArrowDown01Icon);
+const SHARE_ICON = hugeicon(Share08Icon);
 
 /**
  * The panel's header; `back` is the mode its back button returns to, null for none. `action`
@@ -63,6 +65,10 @@ export function header(
       <div class="lr-ext-review__actions">${action}<button class="lr-ext-review__close" data-lr-ext="normal" data-lr-ext-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button></div>
     </div>`;
 }
+
+/** The header's button that opens the game's crosstable and export over the panel, or closes them. */
+export const shareButton = (open: boolean, ui: InterfaceStrings): SafeHtml =>
+  html`<button class="lr-ext-review__share${open ? ' active' : ''}" data-lr-ext="share" data-lr-ext-tip="${ui.share}" aria-label="${ui.share}" aria-pressed="${String(open)}">${SHARE_ICON}</button>`;
 
 function blackIsBetter(record: PositionRecord | null | undefined): boolean {
   if (!record) return false;

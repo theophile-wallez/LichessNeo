@@ -3,7 +3,8 @@ import type { CoachMood } from '#shared/coach.ts';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { flush } from '#shared/testing/timers.ts';
 import type { MascotOptions } from '#content/coach/mascot/index.ts';
-import { buildCoachCard, buildCoachSwitches, coachName } from './coach-card.ts';
+import { coachName } from '#content/coach/names.ts';
+import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
 
 // WebGL isn't in happy-dom: the mascots' bundle mounts a stand-in that keeps
 // what it was told to show, and draws when the test says so.

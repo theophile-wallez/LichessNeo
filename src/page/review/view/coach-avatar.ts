@@ -1,7 +1,7 @@
-import { COACH_COUNT, type CoachMood, CoachMoodSchema, keepCoach } from '#shared/coach.ts';
+import { type CoachMood, CoachMoodSchema } from '#shared/coach.ts';
 import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
-import { postCoachState } from '#shared/protocol.ts';
+import { onCoachPicked, postCoachState } from '#shared/protocol.ts';
 import { CLASS_COLORS, classMood, type MoveClass } from '#page/review/classes/classes.ts';
 import type { AvatarState, Session } from '#page/review/session.ts';
 
@@ -73,11 +73,16 @@ export function keepAvatar(session: Session): void {
   tellCoach(session);
 }
 
-/** The next coach, kept for the next review; each words the remarks their own way. */
-export function nextCoach(session: Session, avatar: HTMLElement): void {
-  const coach = (session.coach.id % COACH_COUNT) + 1;
-  session.coach.id = coach;
-  keepCoach(coach);
-  avatar.dataset.lrExtCoachId = String(coach);
-  tellCoach(session);
+/** The coach picked in the content script's coach picker, already kept, shown here. */
+export function watchCoachPicks(session: Session): () => void {
+  return onCoachPicked(coach => {
+    if (coach === session.coach.id) return;
+    session.coach.id = coach;
+    const { avatar } = session.coach;
+    if (avatar) avatar.dataset.lrExtCoachId = String(coach);
+    tellCoach(session);
+    // Each coach words the remarks their own way.
+    const { mode } = session.view;
+    if (mode === 'moves' || mode === 'live') session.redraw(true);
+  });
 }

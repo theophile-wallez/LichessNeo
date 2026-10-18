@@ -113,14 +113,15 @@ describe('nextJob without a draft', () => {
 });
 
 describe('the game’s export', () => {
-  it('reads the opening and the server analysis, White’s view', () => {
+  it('reads the opening, its code and the server analysis, White’s view', () => {
     const text = JSON.stringify({
-      opening: { ply: 7, name: 'Italian Game' },
+      opening: { ply: 7, name: 'Italian Game', eco: 'C50' },
       analysis: [{ eval: 30 }, { mate: 2 }, { mate: -1 }, {}, { eval: -500 }],
     });
     const found = readExport(text, 5);
     expect(found?.bookPly).toBe(7);
     expect(found?.openingName).toBe('Italian Game');
+    expect(found?.openingEco).toBe('C50');
     expect(found?.rough[1]).toMatchObject({ cp: 30, secondLineWinChance: null, best: null });
     const noLine = { secondLineWinChance: null, best: null };
     expect(found?.rough[2]).toEqual({ mate: 2, whiteWinChance: 100, ...noLine });
@@ -134,6 +135,7 @@ describe('the game’s export', () => {
     expect(readExport('{"opening":{"ply":"3"},"analysis":7}', 10)).toEqual({
       bookPly: 0,
       openingName: '',
+      openingEco: '',
       rough: [],
     });
     expect(readExport('<!doctype html>', 10)).toBeNull();

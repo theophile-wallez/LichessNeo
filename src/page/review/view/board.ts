@@ -99,8 +99,7 @@ export function renderBoard(session: Session, analysis: Analysis): void {
   setData(document.documentElement, 'lrExtCls', move ? move.moveClass : '');
   renderBadge(session, analysis, move);
   renderArrows(session, analysis, move);
-  if (view.mode === 'live') {
-    liveBadges(live, analysis, treeMoves());
-    renderOpening(session, analysis);
-  } else if (view.review) reviewBadges(live, analysis, view.review);
+  if (view.mode === 'live') liveBadges(live, analysis, treeMoves());
+  else if (view.review) reviewBadges(live, analysis, view.review);
+  if (view.mode === 'live' || view.mode === 'moves') renderOpening(session, analysis);
 }

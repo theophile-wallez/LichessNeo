@@ -43,9 +43,10 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
       return turning ? html`${found} : la partie a basculé sur ${turning}.` : html`${found}.`;
     },
     calm: 'Pas de grosse erreur dans cette partie : voyons-la coup par coup.',
-    start: 'Commencer',
   },
   next: 'Suivant',
+  graphViews: { advantage: 'Avantage', time: 'Temps' },
+  share: 'Partager et exporter',
   explain: 'Expliquer',
   best: 'Meilleur',
   analysing: 'Analyse de la partie…',
@@ -95,7 +96,6 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   gameRating: 'Classement de la partie',
   gameRatingTip: 'Donne une estimation du classement d’un joueur d’après une seule partie.',
   bestWas: move => `Le meilleur coup était ${move}.`,
-  scoreChange: (before, after) => `Avant le coup\u00a0: ${before}. Après\u00a0: ${after}.`,
   cost: percent => `−${percent} % de chances de gain`,
   lines: {
     best: line => `La meilleure suite était ${line}.`,

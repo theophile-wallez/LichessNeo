@@ -2,7 +2,7 @@ import { queryAll } from '#shared/dom.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import { pumpLines } from '#page/review/explain/lines.ts';
 import { pump } from '#page/review/live/queue.ts';
-import { type Mode, MODES, type Session } from '#page/review/session.ts';
+import { type Mode, MODES, type Session, type ViewState } from '#page/review/session.ts';
 import { renderBoard } from './board.ts';
 import { fitBubble } from './bubble.ts';
 import { renderClosed } from './closed-panel.ts';
@@ -84,10 +84,11 @@ function follow(session: Session, analysis: Analysis): void {
 
 // Kept on every pass: Lichess rewrites <html>'s class when its scheme follows
 // the device's, which dropped the review's own once it had started.
-function markMode(mode: Mode): void {
+function markMode({ mode, sheet }: Pick<ViewState, 'mode' | 'sheet'>): void {
   const root = document.documentElement;
   root.classList.toggle('lr-ext-review', true);
   for (const each of MODES) root.classList.toggle(`lr-ext-review-${each}`, each === mode);
+  root.classList.toggle('lr-ext-review-sheet', mode === 'moves' && sheet);
 }
 
 /** Marks <html> again as soon as Lichess rewrites its class (signed out, once it knows the
@@ -99,7 +100,7 @@ export function keepMarked(session: Session): void {
     root.classList.contains(`lr-ext-review-${session.view.mode}`);
   // Marking changes the class too: only a rewrite that dropped the marks needs them again.
   new MutationObserver(() => {
-    if (!marked()) markMode(session.view.mode);
+    if (!marked()) markMode(session.view);
   }).observe(root, { attributes: true, attributeFilter: ['class'] });
 }
 
@@ -107,7 +108,7 @@ export function render(session: Session, force = false): void {
   const analysis = pageAnalysis();
   if (!analysis || !attach(session.elements)) return;
   const { view } = session;
-  markMode(view.mode);
+  markMode(view);
   if (view.mode === 'summary' && analysis.node.ply !== view.summaryPly) {
     setMode(session, 'moves');
     return;
@@ -128,8 +129,9 @@ export function setMode(session: Session, mode: Mode): void {
   const analysis = pageAnalysis();
   view.mode = mode;
   view.summaryPly = analysis?.node.ply;
+  view.sheet = false;
   if (mode !== 'moves') stopPlaying(session);
   if (mode === 'moves' && analysis) closeTools(analysis);
-  markMode(mode);
+  markMode(view);
   render(session, true);
 }
