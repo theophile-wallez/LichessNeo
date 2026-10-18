@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="size" content="440x280">
+<meta name="languages" content="en,fr">
+<script>document.documentElement.lang = location.hash.slice(1) || 'en';</script>
+<link rel="stylesheet" href="store.css">
+<style>
+  body {
+    --w: 440px;
+    --h: 280px;
+    --glow-x: 0%;
+    --glow-y: 0%;
+  }
+
+  body::before {
+    background-size: 40px 40px;
+  }
+
+  header {
+    top: 46px;
+    left: 28px;
+    width: 250px;
+    gap: 10px;
+  }
+
+  header img {
+    width: 64px;
+    height: 64px;
+    margin: -6px 0 0 -6px;
+  }
+
+  header b {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  header span {
+    color: var(--dim);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .robot {
+    top: 56px;
+    left: 262px;
+    height: 200px;
+  }
+</style>
+
+<header>
+  <img src="../../public/icons/icon128.png">
+  <b>Lichess Neo</b>
+  <span lang="en">Lichess, made modern</span>
+  <span lang="fr">Lichess, version moderne</span>
+</header>
+<img class="coach robot" src="coaches/robot-2-happy.webp">

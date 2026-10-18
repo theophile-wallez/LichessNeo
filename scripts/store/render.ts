@@ -1,10 +1,10 @@
 // Renders the pages in store/templates: public/icons/icon<n>.png for the icon's
-// page, store/<name>.png for any other. Needs
+// page, store/<lang>/<name>.png for the store's images. Needs
 // Playwright's Chromium (`pnpm exec playwright install chromium`).
 //
 //   node scripts/store/render.ts [name…]
 
-import { readdir, readFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from '@playwright/test';
@@ -24,8 +24,11 @@ try {
         viewport: shot.viewport,
         deviceScaleFactor: shot.deviceScaleFactor,
       });
-      await page.goto(pathToFileURL(file).href, { waitUntil: 'networkidle' });
+      const url = pathToFileURL(file);
+      if (shot.language) url.hash = shot.language;
+      await page.goto(url.href, { waitUntil: 'networkidle' });
       await page.evaluate('document.fonts.ready.then(() => true)');
+      await mkdir(path.dirname(shot.output), { recursive: true });
       await page.screenshot({ path: shot.output, omitBackground: shot.transparent });
       await page.close();
       console.log(`${path.relative(ROOT, shot.output)}  ${shot.size}`);

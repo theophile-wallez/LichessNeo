@@ -12,8 +12,17 @@ describe('planShots', () => {
         viewport: { width: 1280, height: 800 },
         deviceScaleFactor: 1,
         transparent: false,
+        language: null,
         size: '1280×800',
       },
+    ]);
+  });
+
+  it('draws a page once per language it lists, each in its folder', () => {
+    const html = '<meta name="size" content="1280x800">\n<meta name="languages" content="en,fr">';
+    expect(planShots('2-debrief', html, DIRS).map(shot => [shot.output, shot.language])).toEqual([
+      ['/repo/store/en/2-debrief.png', 'en'],
+      ['/repo/store/fr/2-debrief.png', 'fr'],
     ]);
   });
 

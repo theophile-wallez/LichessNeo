@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="size" content="1280x800">
+<meta name="languages" content="en,fr">
+<script>document.documentElement.lang = location.hash.slice(1) || 'en';</script>
+<link rel="stylesheet" href="store.css">
+<style>
+  body {
+    --w: 1280px;
+    --h: 800px;
+    --glow-x: 70%;
+    --glow-y: 0%;
+  }
+
+  header {
+    top: 92px;
+    left: 60px;
+    width: 420px;
+  }
+
+  .points {
+    margin-top: 14px;
+  }
+
+  .window {
+    top: 296px;
+    left: 548px;
+    width: 640px;
+  }
+
+  /* The graph, hovered on the move the window shows: 422×112 in the page. */
+  .graph {
+    top: 52px;
+    left: 492px;
+    width: 760px;
+    transform: rotate(-1.5deg);
+  }
+
+  .accuracy {
+    top: 252px;
+    left: 1078px;
+    width: 180px;
+    transform: rotate(3deg);
+  }
+
+  .comment {
+    top: 588px;
+    left: 806px;
+    width: 414px;
+    transform: rotate(-2deg);
+  }
+
+  .cloud {
+    top: 548px;
+    left: 586px;
+    height: 240px;
+  }
+</style>
+
+<header>
+  <span class="pill"><span lang="en">Debrief</span><span lang="fr">Débrief</span></span>
+  <h1 lang="en">Every game, <em>debriefed</em></h1>
+  <h1 lang="fr">Chaque partie, <em>débriefée</em></h1>
+  <p class="sub" lang="en">Not just an engine line: a coach tells you, in plain words, what each move did.</p>
+  <p class="sub" lang="fr">Pas juste une ligne de moteur : un coach vous dit, avec des mots simples, ce que chaque coup a fait.</p>
+  <ul class="points" lang="en">
+    <li><span class="tile green i-sparkles"></span><span>Every move classified<small>Brilliant, great, best… blunder</small></span></li>
+    <li><span class="tile blue i-chart"></span><span>The game at a glance<small>Each swing of the advantage, marked</small></span></li>
+    <li><span class="tile purple i-analytics"></span><span>Accuracy &amp; game rating<small>For each player, phase by phase</small></span></li>
+  </ul>
+  <ul class="points" lang="fr">
+    <li><span class="tile green i-sparkles"></span><span>Chaque coup classé<small>Brillant, excellent, meilleur… gaffe</small></span></li>
+    <li><span class="tile blue i-chart"></span><span>La partie d’un coup d’œil<small>Chaque bascule de l’avantage, marquée</small></span></li>
+    <li><span class="tile purple i-analytics"></span><span>Précision et niveau de jeu<small>Pour chaque joueur, phase par phase</small></span></li>
+  </ul>
+</header>
+
+<div class="window">
+  <p><span>lichess.org<b>/2uAlbTma/black</b></span></p>
+  <img lang="en" src="shots/review-brilliant-en.webp">
+  <img lang="fr" src="shots/review-brilliant-fr.webp">
+</div>
+
+<img class="card graph" lang="en" src="shots/graph-en.webp">
+<img class="card graph" lang="fr" src="shots/graph-fr.webp">
+<img class="card accuracy" lang="en" src="shots/accuracy-en.webp">
+<img class="card accuracy" lang="fr" src="shots/accuracy-fr.webp">
+<img class="card comment" lang="en" src="shots/coach-card-en.webp">
+<img class="card comment" lang="fr" src="shots/coach-card-fr.webp">
+<img class="coach cloud" src="coaches/coach-24-delight.webp">

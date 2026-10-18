@@ -1,7 +1,8 @@
 import path from 'node:path';
 
 // What each store page renders into. A page is drawn at the size its
-// <meta name="size"> gives and becomes store/<name>.png; a page with a
+// <meta name="size"> gives and becomes store/<name>.png, or store/<lang>/<name>.png
+// once per language its <meta name="languages"> lists; a page with a
 // <meta name="icons"> is the extension's icon instead, drawn once per size it
 // lists, with a transparent background.
 
@@ -10,6 +11,8 @@ export interface Shot {
   readonly viewport: { readonly width: number; readonly height: number };
   readonly deviceScaleFactor: number;
   readonly transparent: boolean;
+  /** The language the page shows, given in its URL's hash; null for a page in one. */
+  readonly language: string | null;
   /** The image's size in pixels, `128×128`. */
   readonly size: string;
 }
@@ -26,24 +29,34 @@ function readSize(name: string, html: string): { width: number; height: number }
   return { width: Number(match[1]), height: Number(match[2]) };
 }
 
-function readIconSizes(html: string): number[] | null {
-  const sizes = /<meta name="icons" content="([\d,]+)">/.exec(html)?.[1];
-  return sizes === undefined ? null : sizes.split(',').map(Number);
+function readList(html: string, meta: string): string[] | null {
+  const list = new RegExp(`<meta name="${meta}" content="([\\w,]+)">`).exec(html)?.[1];
+  return list === undefined ? null : list.split(',');
 }
 
 export function planShots(name: string, html: string, dirs: RenderDirs): Shot[] {
   const viewport = readSize(name, html);
-  const icons = readIconSizes(html);
-  return (icons ?? [viewport.width]).map(width => ({
-    output:
-      icons === null
-        ? path.join(dirs.store, `${name}.png`)
-        : path.join(dirs.icons, `icon${width}.png`),
+  const icons = readList(html, 'icons')?.map(Number);
+  if (icons)
+    return icons.map(width => ({
+      output: path.join(dirs.icons, `icon${width}.png`),
+      viewport,
+      deviceScaleFactor: width / viewport.width,
+      transparent: true,
+      language: null,
+      size: `${width}×${Math.round((viewport.height * width) / viewport.width)}`,
+    }));
+  const page = (output: string, language: string | null): Shot => ({
+    output,
     viewport,
-    deviceScaleFactor: width / viewport.width,
-    transparent: icons !== null,
-    size: `${width}×${Math.round((viewport.height * width) / viewport.width)}`,
-  }));
+    deviceScaleFactor: 1,
+    transparent: false,
+    language,
+    size: `${viewport.width}×${viewport.height}`,
+  });
+  const languages = readList(html, 'languages');
+  if (!languages) return [page(path.join(dirs.store, `${name}.png`), null)];
+  return languages.map(language => page(path.join(dirs.store, language, `${name}.png`), language));
 }
 
 /** The pages to render: every one, or those named. */

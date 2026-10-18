@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="size" content="1280x800">
+<meta name="languages" content="en,fr">
+<script>document.documentElement.lang = location.hash.slice(1) || 'en';</script>
+<link rel="stylesheet" href="store.css">
+<style>
+  body {
+    --w: 1280px;
+    --h: 800px;
+    --glow-x: 50%;
+    --glow-y: 0%;
+    --grid-x: 50%;
+    --grid-y: 0%;
+  }
+
+  header {
+    top: 44px;
+    left: 200px;
+    width: 880px;
+  }
+
+  .sub {
+    max-width: 720px;
+  }
+
+  .window {
+    top: 286px;
+    left: 150px;
+    width: 830px;
+  }
+
+  .phone {
+    top: 292px;
+    left: 940px;
+    width: 236px;
+    transform: rotate(4deg);
+  }
+
+  .dragon {
+    top: 548px;
+    left: 26px;
+    height: 252px;
+  }
+
+  .robot {
+    top: 600px;
+    left: 1128px;
+    height: 188px;
+  }
+
+  .board {
+    top: 420px;
+    left: 52px;
+    transform: rotate(-3deg);
+  }
+
+  .bars {
+    top: 740px;
+    left: 330px;
+    transform: rotate(-2deg);
+  }
+
+  .screens {
+    top: 236px;
+    left: 1000px;
+    transform: rotate(3deg);
+  }
+</style>
+
+<header class="centered">
+  <span class="pill"><span lang="en">Free · No ads · Open source</span><span lang="fr">Gratuit · Sans pub · Open source</span></span>
+  <h1 lang="en">Lichess, <em>made modern</em></h1>
+  <h1 lang="fr">Lichess, <em>version moderne</em></h1>
+  <p class="sub" lang="en">A roomy, modern layout, player bars with clocks, and a board that’s yours.</p>
+  <p class="sub" lang="fr">Une mise en page aérée et moderne, des barres de joueurs avec pendules, et un plateau à votre goût.</p>
+</header>
+
+<div class="window">
+  <p><span>lichess.org<b>/tv</b></span></p>
+  <img lang="en" src="shots/tv-en.webp">
+  <img lang="fr" src="shots/tv-fr.webp">
+</div>
+<div class="phone">
+  <img lang="en" src="shots/phone-tv-en.webp">
+  <img lang="fr" src="shots/phone-tv-fr.webp">
+</div>
+
+<img class="coach dragon" src="coaches/coach-21-proud.webp">
+<img class="coach robot" src="coaches/robot-2-happy.webp">
+
+<p class="chip board"><span class="tile cyan i-grid"></span><span lang="en">Your board, your pieces</span><span lang="fr">Votre plateau, vos pièces</span></p>
+<p class="chip bars"><span class="tile orange i-clock"></span><span lang="en">Player bars &amp; clocks</span><span lang="fr">Joueurs et pendules</span></p>
+<p class="chip screens"><span class="tile pink i-phone"></span><span lang="en">Tablet &amp; phone too</span><span lang="fr">Tablette et mobile aussi</span></p>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="size" content="1280x800">
+<meta name="languages" content="en,fr">
+<script>document.documentElement.lang = location.hash.slice(1) || 'en';</script>
+<link rel="stylesheet" href="store.css">
+<style>
+  body {
+    --w: 1280px;
+    --h: 800px;
+    --glow-x: 0%;
+    --glow-y: 40%;
+    --glow2-x: 80%;
+    --glow2-y: 10%;
+  }
+
+  header {
+    top: 80px;
+    left: 60px;
+    width: 430px;
+  }
+
+  h1 {
+    font-size: 54px;
+  }
+
+  .points {
+    margin-top: 12px;
+  }
+
+  .ember {
+    top: 40px;
+    left: 560px;
+    width: 500px;
+    transform: rotate(-6deg);
+  }
+
+  .ocean {
+    top: 56px;
+    left: 800px;
+    width: 460px;
+    transform: rotate(5deg);
+  }
+
+  .grove {
+    top: 270px;
+    left: 590px;
+    width: 540px;
+    transform: rotate(-1deg);
+  }
+
+  /* The settings' pickers, cut out of their page. */
+  .boards {
+    top: 600px;
+    left: 486px;
+    width: 383px;
+    transform: rotate(-3deg);
+  }
+
+  .pieces {
+    top: 708px;
+    left: 510px;
+    width: 379px;
+    transform: rotate(1deg);
+  }
+
+  .sounds {
+    top: 632px;
+    left: 896px;
+    width: 380px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 16px;
+    background: #18181ce6;
+    box-shadow: 0 0 0 1px #ffffff26, 0 26px 60px #000000b8, 0 8px 20px #00000080;
+    transform: rotate(2deg);
+  }
+
+  .sounds > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #ffffff0d;
+    box-shadow: inset 0 0 0 1px #ffffff17;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .sounds > span:first-child {
+    box-shadow: inset 0 0 0 2px var(--accent);
+  }
+
+  .sounds .icon {
+    width: 16px;
+    height: 16px;
+    color: var(--orange);
+  }
+
+  .fennec {
+    top: 410px;
+    left: 1118px;
+    height: 176px;
+  }
+
+  .frog {
+    top: 646px;
+    left: 60px;
+    height: 126px;
+  }
+</style>
+
+<header>
+  <span class="pill"><span lang="en">Make it yours</span><span lang="fr">À votre goût</span></span>
+  <h1 lang="en">Your colors, your board, <em>your sounds</em></h1>
+  <h1 lang="fr">Vos couleurs, votre plateau, <em>vos sons</em></h1>
+  <p class="sub" lang="en">Pick a look or build your own: it follows you on every page.</p>
+  <p class="sub" lang="fr">Choisissez un style ou créez le vôtre : il vous suit sur chaque page.</p>
+  <ul class="points" lang="en">
+    <li><span class="tile purple i-paint"></span><span>16 color themes<small>For light and dark, or make your own</small></span></li>
+    <li><span class="tile cyan i-grid"></span><span>Boards<small>22 of ours, all of Lichess’s, or draw yours</small></span></li>
+    <li><span class="tile orange i-music"></span><span>Pieces &amp; sounds<small>Lichess’s sets, our Foley sounds, or a pack from GitHub</small></span></li>
+  </ul>
+  <ul class="points" lang="fr">
+    <li><span class="tile purple i-paint"></span><span>16 thèmes de couleur<small>Clairs et sombres, ou le vôtre</small></span></li>
+    <li><span class="tile cyan i-grid"></span><span>Plateaux<small>22 à nous, tous ceux de Lichess, ou le vôtre</small></span></li>
+    <li><span class="tile orange i-music"></span><span>Pièces et sons<small>Ceux de Lichess, nos sons Foley, ou un pack depuis GitHub</small></span></li>
+  </ul>
+</header>
+
+<div class="window ember">
+  <p><span>lichess.org<b>/training</b></span></p>
+  <img lang="en" src="shots/theme-puzzle-ember-en.webp">
+  <img lang="fr" src="shots/theme-puzzle-ember-fr.webp">
+</div>
+<div class="window ocean">
+  <p><span>lichess.org</span></p>
+  <img lang="en" src="shots/theme-home-ocean-en.webp">
+  <img lang="fr" src="shots/theme-home-ocean-fr.webp">
+</div>
+<div class="window grove">
+  <p><span>lichess.org<b>/training</b></span></p>
+  <img lang="en" src="shots/theme-puzzle-grove-en.webp">
+  <img lang="fr" src="shots/theme-puzzle-grove-fr.webp">
+</div>
+
+<img class="card boards" src="shots/boards.webp">
+<img class="card pieces" src="shots/pieces.webp">
+<p class="sounds">
+  <span><i class="icon i-music"></i>Foley</span>
+  <span><i class="icon i-music"></i>Piano</span>
+  <span><i class="icon i-music"></i>NES</span>
+  <span><i class="icon i-music"></i>SFX</span>
+  <span><i class="icon i-music"></i>Futuristic</span>
+  <span><i class="icon i-music"></i>Robot</span>
+  <span><i class="icon i-package"></i><span lang="en">Your pack</span><span lang="fr">Votre pack</span></span>
+</p>
+
+<img class="coach fennec" src="coaches/coach-2-delight.webp">
+<img class="coach frog" src="coaches/coach-5-happy.webp">

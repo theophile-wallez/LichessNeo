@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="size" content="1400x560">
+<meta name="languages" content="en,fr">
+<script>document.documentElement.lang = location.hash.slice(1) || 'en';</script>
+<link rel="stylesheet" href="store.css">
+<style>
+  body {
+    --w: 1400px;
+    --h: 560px;
+    --glow-x: 0%;
+    --glow-y: 0%;
+    --grid-x: 20%;
+    --grid-y: 0%;
+  }
+
+  header {
+    top: 70px;
+    left: 70px;
+    width: 560px;
+  }
+
+  h1 {
+    font-size: 62px;
+  }
+
+  .chips {
+    top: 430px;
+    left: 70px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .note {
+    top: 510px;
+    left: 70px;
+  }
+
+  .window {
+    top: 56px;
+    left: 700px;
+    width: 760px;
+  }
+
+  .cloud {
+    top: 340px;
+    left: 600px;
+    height: 210px;
+  }
+</style>
+
+<header>
+  <p class="brand"><img src="../../public/icons/icon128.png">Lichess Neo</p>
+  <h1 lang="en">Lichess, <em>made modern</em></h1>
+  <h1 lang="fr">Lichess, <em>version moderne</em></h1>
+  <p class="sub" lang="en">A roomy layout, playful pages, a 3D coach and a Debrief for every game.</p>
+  <p class="sub" lang="fr">Une mise en page aérée, des pages ludiques, un coach en 3D et un débrief pour chaque partie.</p>
+</header>
+
+<div class="chips">
+  <p class="chip"><span class="tile green i-sparkles"></span><span lang="en">Debrief</span><span lang="fr">Débrief</span></p>
+  <p class="chip"><span class="tile pink i-happy"></span><span lang="en">26 coaches</span><span lang="fr">26 coachs</span></p>
+  <p class="chip"><span class="tile purple i-paint"></span><span lang="en">16 themes</span><span lang="fr">16 thèmes</span></p>
+</div>
+<p class="note" lang="en">An unofficial fan project, not affiliated with Lichess.</p>
+<p class="note" lang="fr">Un projet de fan non officiel, sans lien avec Lichess.</p>
+
+<div class="window">
+  <p><span>lichess.org<b>/2uAlbTma/black</b></span></p>
+  <img lang="en" src="shots/review-brilliant-en.webp">
+  <img lang="fr" src="shots/review-brilliant-fr.webp">
+</div>
+<img class="coach cloud" src="coaches/coach-24-delight.webp">

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="size" content="1280x800">
+<meta name="languages" content="en,fr">
+<script>document.documentElement.lang = location.hash.slice(1) || 'en';</script>
+<link rel="stylesheet" href="store.css">
+<style>
+  body {
+    --w: 1280px;
+    --h: 800px;
+    --glow-x: 10%;
+    --glow-y: 10%;
+    --glow2-x: 90%;
+    --glow2-y: 90%;
+  }
+
+  header {
+    top: 60px;
+    left: 60px;
+    width: 540px;
+  }
+
+  .points {
+    margin-top: 6px;
+  }
+
+  .puzzle {
+    top: 54px;
+    left: 700px;
+    width: 361px;
+    transform: rotate(-2deg);
+  }
+
+  .puzzle[lang='fr'] {
+    width: 335px;
+  }
+
+  .tips {
+    top: 340px;
+    left: 600px;
+    width: 534px;
+    transform: rotate(1.5deg);
+  }
+
+  .tips[lang='fr'] {
+    top: 336px;
+    left: 640px;
+    width: 528px;
+  }
+
+  .count {
+    top: 108px;
+    left: 1094px;
+    display: grid;
+    justify-items: center;
+    line-height: 1;
+  }
+
+  .count b {
+    font-size: 96px;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    background: linear-gradient(160deg, #a3aaff, #ff8fd0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .count span {
+    color: var(--dim);
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  /* The lineup, standing on the bottom edge, every other one in front. */
+  .coach {
+    bottom: 10px;
+    left: calc(var(--i) * 108px - 16px);
+    height: var(--height);
+    z-index: mod(var(--i), 2);
+  }
+</style>
+
+<header>
+  <span class="pill"><span lang="en">Your coach</span><span lang="fr">Votre coach</span></span>
+  <h1 lang="en">A coach <em>by your side</em></h1>
+  <h1 lang="fr">Un coach <em>à vos côtés</em></h1>
+  <p class="sub" lang="en">26 coaches in 3D, from a fennec to a dragon. Yours reviews your games, cheers you on in puzzles and reads you the lessons’ goals.</p>
+  <p class="sub" lang="fr">26 coachs en 3D, du fennec au dragon. Le vôtre débriefe vos parties, vous encourage dans les problèmes et vous lit le but des leçons.</p>
+  <ul class="points" lang="en">
+    <li><span class="tile pink i-happy"></span><span>Reacts to every move</span></li>
+    <li><span class="tile green i-puzzle"></span><span>In puzzles, lessons and the analysis board</span></li>
+    <li><span class="tile cyan i-user"></span><span>Make it your avatar</span></li>
+  </ul>
+  <ul class="points" lang="fr">
+    <li><span class="tile pink i-happy"></span><span>Réagit à chaque coup</span></li>
+    <li><span class="tile green i-puzzle"></span><span>Problèmes, leçons et échiquier d’analyse</span></li>
+    <li><span class="tile cyan i-user"></span><span>En avatar, si vous voulez</span></li>
+  </ul>
+</header>
+
+<img class="card puzzle" lang="en" src="shots/puzzle-card-en.webp">
+<img class="card puzzle" lang="fr" src="shots/puzzle-card-fr.webp">
+<img class="card tips" lang="en" src="shots/dashboard-tips-en.webp">
+<img class="card tips" lang="fr" src="shots/coach-card-wide-fr.webp">
+
+<p class="count"><b>26</b><span lang="en">coaches</span><span lang="fr">coachs</span></p>
+
+<img class="coach" style="--i: 0; --height: 176px" src="coaches/coach-21-proud.webp">
+<img class="coach" style="--i: 1; --height: 164px" src="coaches/coach-2-delight.webp">
+<img class="coach" style="--i: 2; --height: 186px" src="coaches/coach-15-happy.webp">
+<img class="coach" style="--i: 3; --height: 150px" src="coaches/coach-1-happy.webp">
+<img class="coach" style="--i: 4; --height: 170px" src="coaches/coach-4-happy.webp">
+<img class="coach" style="--i: 5; --height: 182px" src="coaches/robot-2-delight.webp">
+<img class="coach" style="--i: 6; --height: 150px" src="coaches/coach-24-delight.webp">
+<img class="coach" style="--i: 7; --height: 156px" src="coaches/coach-22-happy.webp">
+<img class="coach" style="--i: 8; --height: 150px" src="coaches/coach-26-delight.webp">
+<img class="coach" style="--i: 9; --height: 150px" src="coaches/coach-5-happy.webp">
+<img class="coach" style="--i: 10; --height: 160px" src="coaches/coach-20-delight.webp">
+<img class="coach" style="--i: 11; --height: 160px" src="coaches/coach-6-delight.webp">
