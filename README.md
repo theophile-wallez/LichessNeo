@@ -55,7 +55,7 @@ start from: [packs/example](packs/example).
 Home, puzzles, lessons, profiles, tournaments, the forum: every page gets the
 same treatment, on any screen.
 
-![The home page, the puzzle dashboard and tournaments, on a computer, a tablet and a phone](store/en/5-pages.png)
+![The home page, the puzzle dashboard, Learn and tournaments](store/en/5-pages.png)
 
 ## Install it
 
