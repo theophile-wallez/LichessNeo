@@ -48,11 +48,11 @@ function show(kept: Kept | null): void {
   shown = kept;
   const rating = kept && pickedRating(kept.top, kept.ratings, pick);
   const root = document.documentElement;
-  setData(root, 'lrExtAccountPerf', rating?.speed ?? null);
+  setData(root, 'lnExtAccountPerf', rating?.speed ?? null);
   const label = rating && ratingLabel(rating.rating, rating.provisional);
   // A CSS string, for the tag's `content`, and its length, which sizes its pill.
-  setStyleProperty(root, '--lr-ext-account-rating', label && JSON.stringify(label));
-  setStyleProperty(root, '--lr-ext-account-chars', label && String(label.length));
+  setStyleProperty(root, '--ln-ext-account-rating', label && JSON.stringify(label));
+  setStyleProperty(root, '--ln-ext-account-chars', label && String(label.length));
 }
 
 /** Keeps and shows the ratings of a profile just asked of Lichess. */

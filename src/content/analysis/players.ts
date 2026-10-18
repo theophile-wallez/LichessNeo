@@ -13,10 +13,10 @@ import { fillPlayerBar } from './player-bar.ts';
 /** A sync task keeping the two bars in step with the game info and the board's orientation. */
 export function createPlayersSync(): () => void {
   const ownTopBar = createOwnedElement(() =>
-    createElement('div', { className: 'lr-ext-player lr-ext-player--top' }),
+    createElement('div', { className: 'ln-ext-player ln-ext-player--top' }),
   );
   const ownBottomBar = createOwnedElement(() =>
-    createElement('div', { className: 'lr-ext-player lr-ext-player--bottom' }),
+    createElement('div', { className: 'ln-ext-player ln-ext-player--bottom' }),
   );
   let lastKey = '';
   return () => {

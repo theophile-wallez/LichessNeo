@@ -15,10 +15,10 @@ const PART_LABELS: Readonly<Record<PartKind, string>> = {
 };
 
 function preview(pack: Pack): HTMLElement {
-  const thumb = createElement('span', { className: 'lr-ext-pack__thumb' });
+  const thumb = createElement('span', { className: 'ln-ext-pack__thumb' });
   if (pack.board) setStyleProperty(thumb, 'background-image', `url("${pack.board.image}")`);
   if (pack.pieces) {
-    const knight = createElement('span', { className: 'lr-ext-pack__piece' });
+    const knight = createElement('span', { className: 'ln-ext-pack__piece' });
     setStyleProperty(knight, 'background-image', `url("${pack.pieces.wN}")`);
     thumb.append(knight);
   }
@@ -26,21 +26,21 @@ function preview(pack: Pack): HTMLElement {
 }
 
 function packRow(pack: Pack, library: Library): HTMLElement {
-  const row = createElement('div', { className: 'lr-ext-pack' });
+  const row = createElement('div', { className: 'ln-ext-pack' });
   const parts = PART_KINDS.filter(kind => hasPart(pack, kind)).map(kind =>
     message(PART_LABELS[kind]),
   );
-  const text = createElement('div', { className: 'lr-ext-pack__text' });
+  const text = createElement('div', { className: 'ln-ext-pack__text' });
   text.append(
     createElement('a', {
-      className: 'lr-ext-pack__name',
+      className: 'ln-ext-pack__name',
       text: pack.name,
       attrs: { href: pack.link, target: '_blank', rel: 'noopener', title: pack.link },
     }),
-    createElement('span', { className: 'lr-ext-pack__parts', text: parts.join(' · ') }),
+    createElement('span', { className: 'ln-ext-pack__parts', text: parts.join(' · ') }),
   );
   const remove = createElement('button', {
-    className: 'lr-ext-pack__remove',
+    className: 'ln-ext-pack__remove',
     text: message('packsRemove'),
     attrs: { type: 'button' },
   });
@@ -53,24 +53,24 @@ function packListing(library: Library): HTMLElement {
   const packs = library.packs();
   if (packs.length === 0) {
     const text = message(library.unreadable() ? 'packsUnreadable' : 'packsEmpty');
-    return createElement('p', { className: 'lr-ext-packs__empty', text });
+    return createElement('p', { className: 'ln-ext-packs__empty', text });
   }
-  const list = createElement('div', { className: 'lr-ext-packs__list' });
+  const list = createElement('div', { className: 'ln-ext-packs__list' });
   list.append(...packs.map(pack => packRow(pack, library)));
   return list;
 }
 
 /** The Packs card, kept in step with the library: it lists the packs once `loadAll` reads them. */
 export function importSection(library: Library): HTMLElement {
-  const section = createElement('section', { className: 'lr-ext-packs' });
-  const head = createElement('div', { className: 'lr-ext-packs__head' });
-  const heading = createElement('div', { className: 'lr-ext-packs__heading' });
+  const section = createElement('section', { className: 'ln-ext-packs' });
+  const head = createElement('div', { className: 'ln-ext-packs__head' });
+  const heading = createElement('div', { className: 'ln-ext-packs__heading' });
   heading.append(
-    createElement('h2', { className: 'lr-ext-setting__title', text: message('packsTitle') }),
-    createElement('p', { className: 'lr-ext-setting__body', text: message('packsBody') }),
+    createElement('h2', { className: 'ln-ext-setting__title', text: message('packsTitle') }),
+    createElement('p', { className: 'ln-ext-setting__body', text: message('packsBody') }),
   );
   head.append(
-    createElement('span', { className: 'lr-ext-setting__icon', attrs: { 'aria-hidden': 'true' } }),
+    createElement('span', { className: 'ln-ext-setting__icon', attrs: { 'aria-hidden': 'true' } }),
     heading,
   );
   let listing = packListing(library);

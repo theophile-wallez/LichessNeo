@@ -1,127 +1,127 @@
 /* A user's avatar (#shared/avatar.ts): a coach's still on a two-hue gradient picked
  * from their name, or by the user, with a glint at the top. Set on the element whose `::before` or
- * background draws --lr-ext-avatar. */
+ * background draws --ln-ext-avatar. */
 
-[data-lr-ext-avatar-coach] {
-  --lr-ext-avatar:
-    var(--lr-ext-avatar-coach) center bottom / 150% auto no-repeat,
+[data-ln-ext-avatar-coach] {
+  --ln-ext-avatar:
+    var(--ln-ext-avatar-coach) center bottom / 150% auto no-repeat,
     radial-gradient(circle at 22% 12%, #ffffff47, transparent 58%),
-    linear-gradient(145deg, var(--lr-ext-avatar-from), var(--lr-ext-avatar-to));
+    linear-gradient(145deg, var(--ln-ext-avatar-from), var(--ln-ext-avatar-to));
 }
 
 /* The signed-in user's own picture (#shared/own-avatar.ts), set on :root by content/ui/avatars.ts:
  * over the gradient, which shows through a transparent one. */
-[data-lr-ext-avatar-coach][data-lr-ext-avatar-picture] {
-  --lr-ext-avatar:
-    var(--lr-ext-avatar-own, var(--lr-ext-avatar-coach)) center / cover no-repeat,
-    linear-gradient(145deg, var(--lr-ext-avatar-from), var(--lr-ext-avatar-to));
+[data-ln-ext-avatar-coach][data-ln-ext-avatar-picture] {
+  --ln-ext-avatar:
+    var(--ln-ext-avatar-own, var(--ln-ext-avatar-coach)) center / cover no-repeat,
+    linear-gradient(145deg, var(--ln-ext-avatar-from), var(--ln-ext-avatar-to));
 }
 
-[data-lr-ext-avatar-coach='1'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
+[data-ln-ext-avatar-coach='1'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
 }
-[data-lr-ext-avatar-coach='2'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
+[data-ln-ext-avatar-coach='2'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
 }
-[data-lr-ext-avatar-coach='3'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
+[data-ln-ext-avatar-coach='3'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
 }
-[data-lr-ext-avatar-coach='4'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
+[data-ln-ext-avatar-coach='4'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
 }
-[data-lr-ext-avatar-coach='5'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
+[data-ln-ext-avatar-coach='5'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
 }
-[data-lr-ext-avatar-coach='6'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
+[data-ln-ext-avatar-coach='6'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
 }
-[data-lr-ext-avatar-coach='7'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
+[data-ln-ext-avatar-coach='7'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
 }
 /* The computer's robot, in Stockfish's blue (#shared/coach.ts). */
-[data-lr-ext-avatar-coach='8'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
+[data-ln-ext-avatar-coach='8'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
 }
-[data-lr-ext-avatar-coach='9'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
+[data-ln-ext-avatar-coach='9'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
 }
-[data-lr-ext-avatar-coach='10'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
+[data-ln-ext-avatar-coach='10'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
 }
-[data-lr-ext-avatar-coach='11'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
+[data-ln-ext-avatar-coach='11'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
 }
-[data-lr-ext-avatar-coach='12'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
+[data-ln-ext-avatar-coach='12'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
 }
-[data-lr-ext-avatar-coach='13'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
+[data-ln-ext-avatar-coach='13'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
 }
-[data-lr-ext-avatar-coach='14'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
+[data-ln-ext-avatar-coach='14'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
 }
-[data-lr-ext-avatar-coach='15'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
+[data-ln-ext-avatar-coach='15'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
 }
-[data-lr-ext-avatar-coach='16'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
+[data-ln-ext-avatar-coach='16'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
 }
-[data-lr-ext-avatar-coach='17'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
+[data-ln-ext-avatar-coach='17'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
 }
-[data-lr-ext-avatar-coach='18'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
+[data-ln-ext-avatar-coach='18'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
 }
-[data-lr-ext-avatar-coach='19'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
+[data-ln-ext-avatar-coach='19'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
 }
-[data-lr-ext-avatar-coach='20'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
+[data-ln-ext-avatar-coach='20'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
 }
-[data-lr-ext-avatar-coach='21'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
+[data-ln-ext-avatar-coach='21'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
 }
-[data-lr-ext-avatar-coach='22'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
+[data-ln-ext-avatar-coach='22'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
 }
-[data-lr-ext-avatar-coach='23'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
+[data-ln-ext-avatar-coach='23'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
 }
-[data-lr-ext-avatar-coach='24'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
+[data-ln-ext-avatar-coach='24'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
 }
-[data-lr-ext-avatar-coach='25'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
+[data-ln-ext-avatar-coach='25'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
 }
-[data-lr-ext-avatar-coach='26'] {
-  --lr-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
+[data-ln-ext-avatar-coach='26'] {
+  --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
 }
 
-[data-lr-ext-avatar-color='blue'] {
-  --lr-ext-avatar-from: #4f8dff;
-  --lr-ext-avatar-to: #7a5cff;
+[data-ln-ext-avatar-color='blue'] {
+  --ln-ext-avatar-from: #4f8dff;
+  --ln-ext-avatar-to: #7a5cff;
 }
-[data-lr-ext-avatar-color='purple'] {
-  --lr-ext-avatar-from: #a46cff;
-  --lr-ext-avatar-to: #e35bd0;
+[data-ln-ext-avatar-color='purple'] {
+  --ln-ext-avatar-from: #a46cff;
+  --ln-ext-avatar-to: #e35bd0;
 }
-[data-lr-ext-avatar-color='pink'] {
-  --lr-ext-avatar-from: #ff6fae;
-  --lr-ext-avatar-to: #ff9a72;
+[data-ln-ext-avatar-color='pink'] {
+  --ln-ext-avatar-from: #ff6fae;
+  --ln-ext-avatar-to: #ff9a72;
 }
-[data-lr-ext-avatar-color='red'] {
-  --lr-ext-avatar-from: #ff6161;
-  --lr-ext-avatar-to: #e8336f;
+[data-ln-ext-avatar-color='red'] {
+  --ln-ext-avatar-from: #ff6161;
+  --ln-ext-avatar-to: #e8336f;
 }
-[data-lr-ext-avatar-color='orange'] {
-  --lr-ext-avatar-from: #ffad4d;
-  --lr-ext-avatar-to: #ff6b3d;
+[data-ln-ext-avatar-color='orange'] {
+  --ln-ext-avatar-from: #ffad4d;
+  --ln-ext-avatar-to: #ff6b3d;
 }
-[data-lr-ext-avatar-color='green'] {
-  --lr-ext-avatar-from: #2fd68f;
-  --lr-ext-avatar-to: #12a8a0;
+[data-ln-ext-avatar-color='green'] {
+  --ln-ext-avatar-from: #2fd68f;
+  --ln-ext-avatar-to: #12a8a0;
 }
-[data-lr-ext-avatar-color='cyan'] {
-  --lr-ext-avatar-from: #3fd2ee;
-  --lr-ext-avatar-to: #3d7dff;
+[data-ln-ext-avatar-color='cyan'] {
+  --ln-ext-avatar-from: #3fd2ee;
+  --ln-ext-avatar-to: #3d7dff;
 }

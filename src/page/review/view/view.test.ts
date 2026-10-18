@@ -106,10 +106,10 @@ describe('markup', () => {
 
   it('names the opening’s family in bold, then its variation', () => {
     expect(openingMarkup({ name: 'Ruy Lopez: Morphy Defense: Norwegian', eco: 'C70' }).value).toBe(
-      '<i class="lr-ext-opening__icon"></i><span class="lr-ext-opening__eco">C70</span><span class="lr-ext-opening__name"><b>Ruy Lopez</b>: Morphy Defense: Norwegian</span>',
+      '<i class="ln-ext-opening__icon"></i><span class="ln-ext-opening__eco">C70</span><span class="ln-ext-opening__name"><b>Ruy Lopez</b>: Morphy Defense: Norwegian</span>',
     );
     expect(openingMarkup({ name: 'Start <position>', eco: '' }).value).toBe(
-      '<i class="lr-ext-opening__icon"></i><span class="lr-ext-opening__name"><b>Start &lt;position&gt;</b></span>',
+      '<i class="ln-ext-opening__icon"></i><span class="ln-ext-opening__name"><b>Start &lt;position&gt;</b></span>',
     );
   });
 });
@@ -148,12 +148,12 @@ describe('the board', () => {
     expect(landingSquare('e8a8', 'O-O-O+')).toBe('c8');
     expect(
       badgeMarkup({ moveClass: 'best', uci: 'g1f3', san: 'Nf3', orientation: 'white' }).value,
-    ).toMatch(/^<div class="lr-ext-badge" style="left:75%;top:62\.5%;[^"]*">/);
+    ).toMatch(/^<div class="ln-ext-badge" style="left:75%;top:62\.5%;[^"]*">/);
   });
 
   it('gives the badge its class’s color, for the base under the icon', () => {
     expect(badgeStyle('e2e4', 'white')).toMatch(
-      new RegExp(`;--lr-ext-badge-c:${CLASS_COLORS.best}$`),
+      new RegExp(`;--ln-ext-badge-c:${CLASS_COLORS.best}$`),
     );
   });
 
@@ -268,18 +268,18 @@ describe('the coach', () => {
     const input: AvatarInput = { coachId: 2, moveClass: 'blunder', react: true, label: 'Coach' };
     const markup = avatarMarkup(input).value;
     expect(avatarMarkup(input).value).toBe(markup);
-    expect(markup).toContain('lr-ext-coach__avatar--react');
-    expect(markup).toContain('data-lr-ext-coach-id="2" data-lr-ext-mood="angry"');
+    expect(markup).toContain('ln-ext-coach__avatar--react');
+    expect(markup).toContain('data-ln-ext-coach-id="2" data-ln-ext-mood="angry"');
   });
 
   it('takes the mood it’s given while there’s no verdict, the verdict’s once there is', () => {
     const waiting: AvatarInput = { coachId: 2, moveClass: null, react: false, label: 'Coach' };
-    expect(avatarMarkup(waiting).value).toContain('data-lr-ext-mood="neutral"');
+    expect(avatarMarkup(waiting).value).toContain('data-ln-ext-mood="neutral"');
     expect(avatarMarkup({ ...waiting, idle: 'thinking' }).value).toContain(
-      'data-lr-ext-mood="thinking"',
+      'data-ln-ext-mood="thinking"',
     );
     expect(avatarMarkup({ ...waiting, moveClass: 'blunder', idle: 'thinking' }).value).toContain(
-      'data-lr-ext-mood="angry"',
+      'data-ln-ext-mood="angry"',
     );
   });
 });
@@ -302,7 +302,7 @@ describe('the page’s marks', () => {
     keepMarked(session);
     root.className = 'light';
     await flush();
-    expect([...root.classList]).toEqual(['light', 'lr-ext-review', 'lr-ext-review-moves']);
+    expect([...root.classList]).toEqual(['light', 'ln-ext-review', 'ln-ext-review-moves']);
     root.className = '';
   });
 });

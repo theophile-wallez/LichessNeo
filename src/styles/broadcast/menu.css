@@ -4,64 +4,64 @@
 
 /* Side menu icons and tile colors (tiles in pages/; the FIDE pages share this menu).
    "My broadcasts" and another user's end with their name; the last two lists are admin-only. */
-.subnav[data-lr-ext-nav~='broadcast'] a[href$='/broadcast'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active$='/broadcast'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+.subnav[data-ln-ext-nav~='broadcast'] a[href$='/broadcast'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active$='/broadcast'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href*='/broadcast/by/'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active*='/broadcast/by/'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/video-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+.subnav[data-ln-ext-nav~='broadcast'] a[href*='/broadcast/by/'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active*='/broadcast/by/'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/video-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href$='/broadcast/subscribed'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active$='/broadcast/subscribed'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
-  --lr-ext-nav-color: var(--lr-ext-red);
+.subnav[data-ln-ext-nav~='broadcast'] a[href$='/broadcast/subscribed'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active$='/broadcast/subscribed'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+  --ln-ext-nav-color: var(--ln-ext-red);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href$='/broadcast/calendar'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active$='/broadcast/calendar'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='broadcast'] a[href$='/broadcast/calendar'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active$='/broadcast/calendar'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href$='/broadcast/help'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active$='/broadcast/help'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='broadcast'] a[href$='/broadcast/help'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active$='/broadcast/help'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href$='/broadcast/app'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active$='/broadcast/app'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='broadcast'] a[href$='/broadcast/app'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active$='/broadcast/app'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href$='/broadcast/all-private'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active$='/broadcast/all-private'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='broadcast'] a[href$='/broadcast/all-private'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active$='/broadcast/all-private'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href$='/broadcast/non-official'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active$='/broadcast/non-official'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view.svg');
-  --lr-ext-nav-color: var(--lr-ext-neutral-11);
+.subnav[data-ln-ext-nav~='broadcast'] a[href$='/broadcast/non-official'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active$='/broadcast/non-official'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view.svg');
+  --ln-ext-nav-color: var(--ln-ext-neutral-11);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href$='/fide'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active$='/fide'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='broadcast'] a[href$='/fide'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active$='/fide'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='broadcast'] a[href*='/fide/federation'],
-main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active*='/fide/federation'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='broadcast'] a[href*='/fide/federation'],
+main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active*='/fide/federation'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
 /* ---- Pinned --- */
@@ -69,7 +69,7 @@ main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active*='/fide/fed
 /* Only the lists scroll: the menu and the title with the search stay put.
    Desktop only: below 1020px Lichess's fixed top bar would cover them. */
 @media (min-width: 1020px) {
-  main.page-menu > .subnav[data-lr-ext-nav~='broadcast'] {
+  main.page-menu > .subnav[data-ln-ext-nav~='broadcast'] {
     position: sticky;
     top: 16px;
     align-self: start;
@@ -81,11 +81,11 @@ main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active*='/fide/fed
     position: sticky;
     z-index: 3;
     top: 0;
-    background: var(--lr-ext-bg-page);
+    background: var(--ln-ext-bg-page);
     box-shadow:
-      var(--lr-ext-pin-cover-wide),
-      -12px 0 var(--lr-ext-bg-page),
-      12px 0 var(--lr-ext-bg-page);
+      var(--ln-ext-pin-cover-wide),
+      -12px 0 var(--ln-ext-bg-page),
+      12px 0 var(--ln-ext-bg-page);
   }
 
   :is(.relay-index, .relay-calendar) .page-menu__content.box > .box__top::after {
@@ -94,7 +94,7 @@ main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active*='/fide/fed
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -112,11 +112,11 @@ main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active*='/fide/fed
 /* A broadcast's own page (overview, boards, players) is an analysis page without a board.
    It gets Lichess's two columns back, fluid beside our sidebar, and the page scrolls. */
 @media (min-width: 1020px) {
-  html[data-lr-ext-has~='relay-tour'] {
+  html[data-ln-ext-has~='relay-tour'] {
     overflow: visible !important;
   }
 
-  html[data-lr-ext-has~='relay-tour'] body {
+  html[data-ln-ext-has~='relay-tour'] body {
     height: auto !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
@@ -141,25 +141,25 @@ main.page-menu[data-lr-ext-menu~='broadcast'][data-lr-ext-nav-active*='/fide/fed
 /* Round games: the hovered or current one is a lighter row (Lichess tints it all green).
    Its green stays on the edge and number, as on a round's page (analysis/). */
 main.analyse.has-relay-tour .relay-tour__side .relay-game:hover {
-  background: var(--lr-ext-lift-6) !important;
+  background: var(--ln-ext-lift-6) !important;
 }
 
 main.analyse.has-relay-tour .relay-tour__side .relay-game--current {
-  background: var(--lr-ext-lift-8) !important;
+  background: var(--ln-ext-lift-8) !important;
 }
 
 /* Tour tabs: Lichess's gold outline slides to the picked tab ("Sliding tabs" in theme/),
    drawn over the tabs' own grey outlines. */
-.relay-tour__tabs[data-lr-ext-tabs] {
-  --lr-ext-tab-radius: var(---ui-roundness, 7px);
-  --lr-ext-tab-bg: transparent;
-  --lr-ext-tab-shadow: inset 0 0 0 1px var(--c-brag);
+.relay-tour__tabs[data-ln-ext-tabs] {
+  --ln-ext-tab-radius: var(---ui-roundness, 7px);
+  --ln-ext-tab-bg: transparent;
+  --ln-ext-tab-shadow: inset 0 0 0 1px var(--c-brag);
 }
 
-.relay-tour__tabs[data-lr-ext-tabs]::before {
+.relay-tour__tabs[data-ln-ext-tabs]::before {
   z-index: 1;
 }
 
-.relay-tour__tabs[data-lr-ext-tabs] button.active {
+.relay-tour__tabs[data-ln-ext-tabs] button.active {
   border-color: var(--c-border) !important;
 }

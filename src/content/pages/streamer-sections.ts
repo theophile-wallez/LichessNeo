@@ -7,7 +7,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // cards. Each list gets a title of ours before it (styles/pages/streamer-list.css):
 // "Live now", with how many, and "Offline", whose list grows as it scrolls.
 
-const SECTION = 'lr-ext-streamers__section';
+const SECTION = 'ln-ext-streamers__section';
 
 function sectionTitle(text: string, count: number | null): HTMLElement {
   const title = createElement('h2', { className: SECTION, text });

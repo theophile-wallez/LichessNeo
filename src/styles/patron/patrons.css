@@ -11,7 +11,7 @@ main.plan :is(.best_patrons, .recent-patrons) .user-link {
   display: block !important;
   overflow: hidden;
   min-width: 0;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px;
   font-weight: 700;
   line-height: 30px;
@@ -29,8 +29,8 @@ main.plan :is(.best_patrons, .recent-patrons) .user-link .line {
   margin-inline-end: 10px !important;
   vertical-align: top;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--lr-ext-paco) 16%, transparent);
-  color: var(--lr-ext-paco) !important;
+  background: color-mix(in srgb, var(--ln-ext-paco) 16%, transparent);
+  color: var(--ln-ext-paco) !important;
   font-size: 17px;
   opacity: 1 !important;
 }
@@ -48,8 +48,8 @@ main.plan :is(.best_patrons, .recent-patrons) .user-link.online .line.patron::af
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--lr-ext-good);
-  box-shadow: 0 0 0 2px var(--lr-ext-bg-panel);
+  background: var(--ln-ext-good);
+  box-shadow: 0 0 0 2px var(--ln-ext-bg-panel);
 }
 
 /* Lichess puts a no-break space after the title: that's its gap. */
@@ -73,8 +73,8 @@ main.plan .best_patrons h2 {
   justify-content: flex-start !important;
   gap: 12px;
   margin: 0 0 16px !important;
-  color: var(--lr-ext-text-strong);
-  font-family: var(--lr-ext-font);
+  color: var(--ln-ext-text-strong);
+  font-family: var(--ln-ext-font);
   font-size: 22px !important;
   font-weight: 800 !important;
   text-align: start !important;
@@ -86,7 +86,7 @@ main.plan .best_patrons h2::before {
   width: 38px;
   height: 38px;
   border-radius: 12px;
-  background: var(--lr-ext-orange);
+  background: var(--ln-ext-orange);
   mask:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sparkles.svg') center / 22px
       no-repeat,
@@ -101,10 +101,10 @@ main.plan .best_patrons .list {
 }
 
 main.plan .best_patrons .list > .paginated {
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px;
-  background: var(--lr-ext-bg-panel);
-  animation: lr-ext-plan-in 0.35s ease-out both;
+  background: var(--ln-ext-bg-panel);
+  animation: ln-ext-plan-in 0.35s ease-out both;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     border-color 0.15s,
@@ -113,9 +113,9 @@ main.plan .best_patrons .list > .paginated {
 }
 
 main.plan .best_patrons .list > .paginated:hover {
-  border-color: color-mix(in srgb, var(--lr-ext-paco) 55%, transparent);
-  background: var(--lr-ext-card-hover);
-  box-shadow: var(--lr-ext-card-shadow-hover);
+  border-color: color-mix(in srgb, var(--ln-ext-paco) 55%, transparent);
+  background: var(--ln-ext-card-hover);
+  box-shadow: var(--ln-ext-card-shadow-hover);
   transform: translateY(-2px);
 }
 
@@ -124,7 +124,7 @@ main.plan .best_patrons .list > .paginated > .user-link {
 }
 
 main.plan .best_patrons .list > .paginated > .user-link:hover {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* The next page's link, until infinite scroll loads it. */
@@ -138,18 +138,18 @@ main.plan .best_patrons .pager {
 main.plan .best_patrons .pager a {
   padding: 10px 22px;
   border-radius: 8px;
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text) !important;
   font-weight: 700;
 }
 
 main.plan .best_patrons .pager a:hover {
-  background: var(--lr-ext-btn-grey-hover);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey-hover);
+  color: var(--ln-ext-text-strong) !important;
 }
 
-@keyframes lr-ext-plan-in {
+@keyframes ln-ext-plan-in {
   from {
     opacity: 0;
     transform: translateY(6px);
@@ -165,13 +165,13 @@ main.plan .recent-patrons {
   align-self: start;
   display: none;
   flex-direction: column;
-  max-height: calc(var(--lr-ext-main-h, 100dvh) - 32px);
+  max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
   margin-top: 16px !important;
   padding: 0 !important;
   overflow: hidden;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 12px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
 }
 
 @media (min-width: 1020px) {
@@ -187,9 +187,9 @@ main.plan .recent-patrons h2 {
   gap: 10px;
   margin: 0 !important;
   padding: 16px 16px 12px;
-  border-bottom: 1px solid var(--lr-ext-border) !important;
-  color: var(--lr-ext-text-strong);
-  font-family: var(--lr-ext-font);
+  border-bottom: 1px solid var(--ln-ext-border) !important;
+  color: var(--ln-ext-text-strong);
+  font-family: var(--ln-ext-font);
   font-size: 17px !important;
   font-weight: 800 !important;
 }
@@ -200,7 +200,7 @@ main.plan .recent-patrons h2::before {
   width: 32px;
   height: 32px;
   border-radius: 9px;
-  background: var(--lr-ext-pink);
+  background: var(--ln-ext-pink);
   mask:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party.svg') center / 20px no-repeat,
     linear-gradient(#0000003d, #0000003d);
@@ -220,8 +220,8 @@ main.plan .recent-patrons .list > div > .user-link {
 }
 
 main.plan .recent-patrons .list > div > .user-link:hover {
-  background: var(--lr-ext-lift-5);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-5);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.plan .recent-patrons .user-link {
@@ -235,7 +235,7 @@ main.plan .recent-patrons .user-link .line {
 }
 
 main.plan .recent-patrons .user-link.online .line.patron::after {
-  box-shadow: 0 0 0 2px var(--lr-ext-bg-panel);
+  box-shadow: 0 0 0 2px var(--ln-ext-bg-panel);
 }
 
 /* ---- Your wings --- */
@@ -245,9 +245,9 @@ main.plan .patron-style-selector {
   gap: 20px !important;
   margin: 0 0 16px !important;
   padding: 24px !important;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 12px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
 }
 
 main.plan .pss__colors {
@@ -264,8 +264,8 @@ main.plan .pss__colors {
 
 main.plan .pss__color {
   border-radius: 12px !important;
-  background: var(--lr-ext-bg-raised) !important;
-  font-family: var(--lr-ext-font) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  font-family: var(--ln-ext-font) !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.15s !important;
@@ -286,13 +286,13 @@ main.plan .pss__color__tier-name {
 
 main.plan .patron-style-selector__info p {
   margin: 0;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 15px;
   line-height: 1.55;
 }
 
 main.plan .patron-style-selector__info .user-link {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 700;
 }
 

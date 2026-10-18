@@ -30,7 +30,7 @@ describe('move classes', () => {
       if (!moveClass) throw new Error(`unknown class ${key}`);
       expect(classSvg(moveClass).value).toBe(svg);
       expect(classImage(moveClass)).toBe(img);
-      expect(classIcon(moveClass).value).toBe(`<span class="lr-ext-cls-icon">${svg}</span>`);
+      expect(classIcon(moveClass).value).toBe(`<span class="ln-ext-cls-icon">${svg}</span>`);
     }
   });
 

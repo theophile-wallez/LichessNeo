@@ -8,14 +8,14 @@ import { puzzleMood, readStep } from './mood.ts';
 // (styles/puzzle/coach-card.css). Lichess redraws the card whole between
 // steps, so the coach is ours, at the end of the panel, laid over the card.
 
-const REACT = 'lr-ext-coach__avatar--react';
+const REACT = 'ln-ext-coach__avatar--react';
 
 function buildAvatar(): HTMLElement {
   const avatar = createElement('div', {
-    className: 'lr-ext-coach__avatar lr-ext-puzzle-coach',
+    className: 'ln-ext-coach__avatar ln-ext-puzzle-coach',
     attrs: { 'aria-hidden': 'true' },
   });
-  avatar.append(createElement('span', { className: 'lr-ext-coach__face' }));
+  avatar.append(createElement('span', { className: 'ln-ext-coach__face' }));
   return avatar;
 }
 
@@ -35,10 +35,10 @@ export function syncPuzzleCoach(): void {
       HTMLElement,
     ) !== null;
   const mood = puzzleMood(step, solved);
-  if (!isNew && avatar.dataset.lrExtMood === mood) return;
+  if (!isNew && avatar.dataset.lnExtMood === mood) return;
   const coach = chosenCoach();
-  setData(avatar, 'lrExtCoachId', String(coach));
-  setData(avatar, 'lrExtMood', mood);
+  setData(avatar, 'lnExtCoachId', String(coach));
+  setData(avatar, 'lnExtMood', mood);
   if (!isNew) {
     avatar.classList.toggle(REACT, false);
     // Reading the layout restarts the marks' animation.

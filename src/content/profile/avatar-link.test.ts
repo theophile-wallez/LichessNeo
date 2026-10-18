@@ -9,7 +9,7 @@ const PROFILE = (name: string): string =>
   '</div></div></main>';
 
 const links = (): HTMLAnchorElement[] =>
-  queryAll(document, '.user-show__header > a.lr-ext-avatar-edit', HTMLAnchorElement);
+  queryAll(document, '.user-show__header > a.ln-ext-avatar-edit', HTMLAnchorElement);
 
 beforeEach(() => {
   vi.stubGlobal('chrome', { i18n: { getMessage: (name: string) => `[${name}]` } });
@@ -29,7 +29,7 @@ describe('syncAvatarLink', () => {
     syncAvatarLink();
     const [link, ...more] = links();
     expect(more).toEqual([]);
-    expect(link?.getAttribute('href')).toBe('/account/profile#lr-ext-extension/profile');
+    expect(link?.getAttribute('href')).toBe('/account/profile#ln-ext-extension/profile');
     expect([link?.title, link?.getAttribute('aria-label')]).toEqual([
       '[avatarEdit]',
       '[avatarEdit]',

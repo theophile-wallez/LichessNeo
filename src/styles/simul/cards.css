@@ -3,15 +3,15 @@
 /* Tile (::before) and piece (::after), then name and time control, with host
  * and player count as the footer. The simul's link (its ::after) covers the card. */
 main.page-menu.simul-list .slist tbody tr:not(.create) {
-  --lr-ext-piece: var(---white-king);
+  --ln-ext-piece: var(---white-king);
   position: relative;
   isolation: isolate;
   display: grid;
   grid-template: 'tile head head' 1fr 'host host players' auto / 58px minmax(0, 1fr) auto;
   padding: 18px 16px 12px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 12px;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     border-color 0.15s,
@@ -20,27 +20,27 @@ main.page-menu.simul-list .slist tbody tr:not(.create) {
 }
 
 main.page-menu.simul-list .slist tbody tr:not(.create):hover {
-  border-color: color-mix(in srgb, var(--lr-ext-simul) 55%, transparent);
-  background: var(--lr-ext-card-hover) !important;
-  box-shadow: 0 6px 18px var(--lr-ext-shade-35);
+  border-color: color-mix(in srgb, var(--ln-ext-simul) 55%, transparent);
+  background: var(--ln-ext-card-hover) !important;
+  box-shadow: 0 6px 18px var(--ln-ext-shade-35);
   transform: translateY(-3px);
 }
 
 /* A different piece on each card, so a page of them looks like a set. */
 main.page-menu.simul-list .slist tbody tr:nth-child(6n + 2) {
-  --lr-ext-piece: var(---white-queen);
+  --ln-ext-piece: var(---white-queen);
 }
 main.page-menu.simul-list .slist tbody tr:nth-child(6n + 3) {
-  --lr-ext-piece: var(---white-knight);
+  --ln-ext-piece: var(---white-knight);
 }
 main.page-menu.simul-list .slist tbody tr:nth-child(6n + 4) {
-  --lr-ext-piece: var(---white-rook);
+  --ln-ext-piece: var(---white-rook);
 }
 main.page-menu.simul-list .slist tbody tr:nth-child(6n + 5) {
-  --lr-ext-piece: var(---white-bishop);
+  --ln-ext-piece: var(---white-bishop);
 }
 main.page-menu.simul-list .slist tbody tr:nth-child(6n + 6) {
-  --lr-ext-piece: var(---white-pawn);
+  --ln-ext-piece: var(---white-pawn);
 }
 
 /* A 4x4 board in the section's colors, two more stacked behind it that fan out
@@ -53,14 +53,14 @@ main.page-menu.simul-list .slist tbody tr:not(.create)::before {
   height: 50px;
   margin: 8px 0 0;
   border-radius: 9px;
-  background: repeating-conic-gradient(var(--lr-ext-simul) 0 25%, var(--lr-ext-simul-2) 0 50%) 0 0 /
+  background: repeating-conic-gradient(var(--ln-ext-simul) 0 25%, var(--ln-ext-simul-2) 0 50%) 0 0 /
     50% 50%;
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
-    4px -4px 0 -1px color-mix(in srgb, var(--lr-ext-simul-2) 70%, var(--lr-ext-neutral-2)),
-    8px -8px 0 -2px color-mix(in srgb, var(--lr-ext-simul-2) 40%, var(--lr-ext-neutral-2)),
-    0 4px 10px var(--lr-ext-shade-25);
+    4px -4px 0 -1px color-mix(in srgb, var(--ln-ext-simul-2) 70%, var(--ln-ext-neutral-2)),
+    8px -8px 0 -2px color-mix(in srgb, var(--ln-ext-simul-2) 40%, var(--ln-ext-neutral-2)),
+    0 4px 10px var(--ln-ext-shade-25);
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
@@ -70,9 +70,9 @@ main.page-menu.simul-list .slist tbody tr:not(.create):hover::before {
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
-    6px -6px 0 -1px color-mix(in srgb, var(--lr-ext-simul-2) 70%, var(--lr-ext-neutral-2)),
-    12px -12px 0 -2px color-mix(in srgb, var(--lr-ext-simul-2) 40%, var(--lr-ext-neutral-2)),
-    0 6px 14px var(--lr-ext-shade-35);
+    6px -6px 0 -1px color-mix(in srgb, var(--ln-ext-simul-2) 70%, var(--ln-ext-neutral-2)),
+    12px -12px 0 -2px color-mix(in srgb, var(--ln-ext-simul-2) 40%, var(--ln-ext-neutral-2)),
+    0 6px 14px var(--ln-ext-shade-35);
   transform: rotate(-5deg);
 }
 
@@ -85,16 +85,16 @@ main.page-menu.simul-list .slist tbody tr:not(.create)::after {
   inset-inline-start: 16px;
   width: 50px;
   height: 50px;
-  background: var(--lr-ext-piece) center / 78% no-repeat;
+  background: var(--ln-ext-piece) center / 78% no-repeat;
   filter: drop-shadow(0 2px 2px #00000080);
   pointer-events: none;
 }
 
 main.page-menu.simul-list .slist tbody tr:not(.create):hover::after {
-  animation: lr-ext-simul-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: ln-ext-simul-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes lr-ext-simul-hop {
+@keyframes ln-ext-simul-hop {
   40% {
     transform: translateY(-9px) rotate(-6deg);
   }
@@ -131,7 +131,7 @@ main.page-menu.simul-list .slist .name {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 16px !important;
   font-weight: 800;
   line-height: 1.3;
@@ -139,7 +139,7 @@ main.page-menu.simul-list .slist .name {
 
 main.page-menu.simul-list .slist .setup {
   overflow: hidden;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
   text-overflow: ellipsis;
@@ -169,14 +169,14 @@ main.page-menu.simul-list .slist td.host br {
 
 main.page-menu.simul-list .slist td.host .user-link {
   overflow: hidden;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 13px;
   font-weight: 700;
   text-overflow: ellipsis;
 }
 
 main.page-menu.simul-list .slist td.host .user-link:hover {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.page-menu.simul-list .slist td.host .uflair {
@@ -188,7 +188,7 @@ main.page-menu.simul-list .slist td.host .uflair {
 
 main.page-menu.simul-list .slist td.host strong {
   flex: none;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -210,8 +210,8 @@ main.page-menu.simul-list .slist td.players {
   margin-inline-start: 10px;
   padding: 3px 10px !important;
   border-radius: 999px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-strong);
   font-size: 13px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -219,7 +219,7 @@ main.page-menu.simul-list .slist td.players {
 
 main.page-menu.simul-list .slist td.players::before {
   margin: 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
 }
 
@@ -229,14 +229,14 @@ main.page-menu.simul-list .slist td.players::before {
 main.page-menu.simul-list .slist tr.create {
   display: block;
   grid-column: 1 / -1;
-  border: 2px dashed var(--lr-ext-lift-12);
+  border: 2px dashed var(--ln-ext-lift-12);
   border-radius: 12px;
   background: transparent !important;
   transition: border-color 0.15s !important;
 }
 
 main.page-menu.simul-list .slist tr.create:hover {
-  border-color: color-mix(in srgb, var(--lr-ext-accent) 60%, transparent);
+  border-color: color-mix(in srgb, var(--ln-ext-accent) 60%, transparent);
 }
 
 main.page-menu.simul-list .slist tr.create td {
@@ -254,11 +254,11 @@ main.page-menu.simul-list .slist tr.create td::before {
   height: 48px;
   background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp')
     center / contain no-repeat;
-  filter: drop-shadow(0 6px 10px var(--lr-ext-shade-40));
-  animation: lr-ext-simul-float 4s ease-in-out infinite;
+  filter: drop-shadow(0 6px 10px var(--ln-ext-shade-40));
+  animation: ln-ext-simul-float 4s ease-in-out infinite;
 }
 
-@keyframes lr-ext-simul-float {
+@keyframes ln-ext-simul-float {
   50% {
     transform: translateY(-5px) rotate(-3deg);
   }

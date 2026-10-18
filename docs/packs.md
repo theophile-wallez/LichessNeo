@@ -10,7 +10,7 @@ sound. A pack replaces any of the three with yours: a folder on GitHub
 holding a `pack.json` and the files it names.
 
 To import one, open the extension's settings (your account's settings, then
-**Lichess Reimagined**, or **Import** in a panel's Extension tab), paste the
+**Lichess Neo**, or **Import** in a panel's Extension tab), paste the
 link to the pack's folder under **Packs** and press **Import**. The extension
 downloads every file once and keeps them in the browser; it asks GitHub for
 nothing after that. An import shows every part the pack has; then each part is

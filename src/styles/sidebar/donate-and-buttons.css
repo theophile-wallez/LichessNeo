@@ -2,13 +2,13 @@
 
 @media (min-width: 1020px) {
   /* Lichess's own Donate link is missing for patrons and on zen pages (a game):
-   * content/sidebar/donate.ts copies the flyout's one into #lr-ext-donate, under Tools. */
+   * content/sidebar/donate.ts copies the flyout's one into #ln-ext-donate, under Tools. */
   #topnav div a.community-patron,
   #top .site-title-nav__donate {
     display: none !important;
   }
 
-  #lr-ext-donate {
+  #ln-ext-donate {
     display: flex !important;
     align-items: center;
     gap: 10px;
@@ -22,12 +22,12 @@
     line-height: 1;
     font-size: 14px;
     font-weight: 500;
-    color: var(--lr-ext-neutral-12) !important;
+    color: var(--ln-ext-neutral-12) !important;
     background: transparent;
     transition: background-color 0.15s !important;
   }
 
-  #lr-ext-donate::before {
+  #ln-ext-donate::before {
     content: '';
     flex: none;
     width: 20px;
@@ -36,9 +36,9 @@
       contain no-repeat;
   }
 
-  #lr-ext-donate:hover {
-    background: var(--lr-ext-sb-hover);
-    color: var(--lr-ext-text-strong) !important;
+  #ln-ext-donate:hover {
+    background: var(--ln-ext-sb-hover);
+    color: var(--ln-ext-text-strong) !important;
   }
 
   /* ---- Bottom buttons --- */
@@ -57,17 +57,17 @@
   }
 
   /* Notifications, the light / dark switch, Lichess's preferences, friends. The challenges
-   * (data-lr-ext-button, content/layout/marks.ts) give their place to the cog
+   * (data-ln-ext-button, content/layout/marks.ts) give their place to the cog
    * (content/sidebar/preferences-button.ts), and come back first while some wait. */
-  #top .site-buttons > [data-lr-ext-button='notifications'] {
+  #top .site-buttons > [data-ln-ext-button='notifications'] {
     order: 3;
   }
 
-  #top #lr-ext-scheme-toggle {
+  #top #ln-ext-scheme-toggle {
     order: 4;
   }
 
-  #top #lr-ext-preferences-button {
+  #top #ln-ext-preferences-button {
     order: 5;
   }
 
@@ -75,7 +75,7 @@
     order: 6;
   }
 
-  #top .site-buttons > [data-lr-ext-button='challenges'] {
+  #top .site-buttons > [data-ln-ext-button='challenges'] {
     display: none;
   }
 
@@ -85,15 +85,15 @@
     line-height: 30px !important;
     /* Five fit in a row, as when challenges wait; spread over it (space-between above). */
     padding: 0 3px !important;
-    color: var(--lr-ext-text-dim) !important;
+    color: var(--ln-ext-text-dim) !important;
   }
 
   #top .site-buttons .link:hover,
   #top .site-buttons .toggle:hover {
-    color: var(--lr-ext-text-strong) !important;
+    color: var(--ln-ext-text-strong) !important;
   }
 
-  #top :is(#lr-ext-scheme-toggle, #lr-ext-preferences-button) {
+  #top :is(#ln-ext-scheme-toggle, #ln-ext-preferences-button) {
     font-size: 18.5px;
   }
 
@@ -103,7 +103,7 @@
     height: 32px !important;
     align-items: center;
     border-radius: 8px;
-    box-shadow: inset 0 0 0 1px var(--lr-ext-lift-7);
+    box-shadow: inset 0 0 0 1px var(--ln-ext-lift-7);
   }
 
   #top #clinput input {
@@ -111,16 +111,16 @@
     padding: 0 4px !important;
     line-height: 32px !important;
     font-size: 13.5px;
-    color: var(--lr-ext-text) !important;
+    color: var(--ln-ext-text) !important;
   }
 
   #top #clinput input::placeholder {
-    color: var(--lr-ext-text-dim);
+    color: var(--ln-ext-text-dim);
   }
 
   #top #clinput:hover,
   #top #clinput:focus-within {
-    background: var(--lr-ext-sb-hover);
+    background: var(--ln-ext-sb-hover);
   }
 
   #top .signin-or-signup {
@@ -161,7 +161,7 @@
     text-overflow: ellipsis;
     font-size: 14px !important;
     font-weight: 700;
-    color: var(--lr-ext-text) !important;
+    color: var(--ln-ext-text) !important;
   }
 
   #top #user_tag::after {
@@ -175,23 +175,23 @@
   }
 
   /* The rating's pill (account-rating.css) takes room at the end of the row. */
-  html[data-lr-ext-account-perf] #top #user_tag {
-    padding-inline-end: calc(var(--lr-ext-account-pill) + 12px) !important;
+  html[data-ln-ext-account-perf] #top #user_tag {
+    padding-inline-end: calc(var(--ln-ext-account-pill) + 12px) !important;
   }
 
   /* Before the first rating is known: the name alone, not an avatar the rating would replace. */
-  html:not([data-lr-ext-account-perf], [data-lr-ext-sidebar='collapsed']) #top #user_tag {
+  html:not([data-ln-ext-account-perf], [data-ln-ext-sidebar='collapsed']) #top #user_tag {
     padding-inline-end: 10px !important;
   }
 
-  html:not([data-lr-ext-account-perf], [data-lr-ext-sidebar='collapsed']) #top #user_tag::after {
+  html:not([data-ln-ext-account-perf], [data-ln-ext-sidebar='collapsed']) #top #user_tag::after {
     display: none;
   }
 
   #top #user_tag:hover,
   #top .dasher.shown #user_tag {
-    background: var(--lr-ext-sb-hover) !important;
-    color: var(--lr-ext-text-strong) !important;
+    background: var(--ln-ext-sb-hover) !important;
+    color: var(--ln-ext-text-strong) !important;
   }
 
   /* Dropdowns (preferences, notifications, challenges) open beside the sidebar. */
@@ -200,12 +200,12 @@
     top: auto !important;
     right: auto !important;
     bottom: 12px !important;
-    left: calc(var(--lr-ext-sidebar-w) + 6px) !important;
+    left: calc(var(--ln-ext-sidebar-w) + 6px) !important;
     max-height: calc(100dvh - 24px);
     overflow-y: auto;
     border-radius: 6px;
-    background: var(--lr-ext-bg-panel) !important;
-    box-shadow: 0 6px 24px var(--lr-ext-shade-60) !important;
+    background: var(--ln-ext-bg-panel) !important;
+    box-shadow: 0 6px 24px var(--ln-ext-shade-60) !important;
   }
 
   /* Search suggestions too: under the search box they'd open off screen. */
@@ -213,7 +213,7 @@
     position: fixed !important;
     top: auto !important;
     bottom: 12px;
-    left: calc(var(--lr-ext-sidebar-w) + 6px);
+    left: calc(var(--ln-ext-sidebar-w) + 6px);
     width: 280px !important;
     max-height: calc(100dvh - 24px);
     overflow-y: auto !important;
@@ -226,53 +226,53 @@
 
 /* The light / dark switch (content/sidebar/scheme-toggle.ts), its icon the scheme on show, at
  * every width: in the sidebar, and in Lichess's top bar below 1020px. */
-#lr-ext-scheme-toggle {
+#ln-ext-scheme-toggle {
   display: inline-flex;
   align-items: center;
   border: none;
   background: none;
   /* Lichess's top bar glyphs' size and color; the sidebar's below. */
-  color: var(--lr-ext-neutral-13);
+  color: var(--ln-ext-neutral-13);
   font-size: 16px;
   cursor: pointer;
   transition: color 0.15s !important;
 }
 
-#lr-ext-scheme-toggle .lr-ext-hi {
+#ln-ext-scheme-toggle .ln-ext-hi {
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-#lr-ext-scheme-toggle:hover {
-  color: var(--lr-ext-text-strong);
+#ln-ext-scheme-toggle:hover {
+  color: var(--ln-ext-text-strong);
 }
 
-#lr-ext-scheme-toggle:hover .lr-ext-hi {
+#ln-ext-scheme-toggle:hover .ln-ext-hi {
   transform: rotate(-20deg) scale(1.1);
 }
 
-html.light #lr-ext-scheme-toggle .lr-ext-scheme-toggle__dark,
-html:not(.light) #lr-ext-scheme-toggle .lr-ext-scheme-toggle__light {
+html.light #ln-ext-scheme-toggle .ln-ext-scheme-toggle__dark,
+html:not(.light) #ln-ext-scheme-toggle .ln-ext-scheme-toggle__light {
   display: none;
 }
 
 /* The cog to Lichess's preferences (content/sidebar/preferences-button.ts), drawn as the
  * light / dark switch: in the sidebar, and in Lichess's top bar below 1020px. */
-#lr-ext-preferences-button {
+#ln-ext-preferences-button {
   display: inline-flex;
   align-items: center;
-  color: var(--lr-ext-neutral-13);
+  color: var(--ln-ext-neutral-13);
   font-size: 16px;
   transition: color 0.15s !important;
 }
 
-#lr-ext-preferences-button .lr-ext-hi {
+#ln-ext-preferences-button .ln-ext-hi {
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-#lr-ext-preferences-button:hover {
-  color: var(--lr-ext-text-strong);
+#ln-ext-preferences-button:hover {
+  color: var(--ln-ext-text-strong);
 }
 
-#lr-ext-preferences-button:hover .lr-ext-hi {
+#ln-ext-preferences-button:hover .ln-ext-hi {
   transform: rotate(60deg);
 }

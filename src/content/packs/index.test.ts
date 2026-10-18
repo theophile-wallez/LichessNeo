@@ -34,10 +34,10 @@ afterEach(() => {
   stopListeners();
   vi.restoreAllMocks();
   localStorage.clear();
-  document.getElementById('lr-ext-packs')?.remove();
-  delete root.dataset.lrExtBoard;
-  delete root.dataset.lrExtLoading;
-  delete root.dataset.lrExtBacklit;
+  document.getElementById('ln-ext-packs')?.remove();
+  delete root.dataset.lnExtBoard;
+  delete root.dataset.lnExtLoading;
+  delete root.dataset.lnExtBacklit;
 });
 
 /** Picks `value` in a settings row, as the user menu's does. */
@@ -46,88 +46,88 @@ function choose(
   value: string,
   library: Library,
 ): void {
-  const option = row?.(library).querySelector(`[data-lr-ext-option="${value}"]`);
+  const option = row?.(library).querySelector(`[data-ln-ext-option="${value}"]`);
   if (!(option instanceof HTMLElement)) throw new Error(`no ${value}`);
   option.click();
 }
 
 describe('packs', () => {
   it('hides a picked board and set until the packs are read, then shows them', async () => {
-    localStorage.setItem('lr-ext-board', WOOD.id);
-    localStorage.setItem('lr-ext-pieces', WOOD.id);
+    localStorage.setItem('ln-ext-board', WOOD.id);
+    localStorage.setItem('ln-ext-pieces', WOOD.id);
     const read = Promise.withResolvers<Pack | null>();
     vi.mocked(readPack).mockReturnValue(read.promise);
     startPacks();
-    expect(root.dataset.lrExtLoading).toBe('board pieces');
+    expect(root.dataset.lnExtLoading).toBe('board pieces');
     read.resolve(WOOD);
     await flush();
-    expect(root.dataset.lrExtLoading).toBeUndefined();
-    expect(root.dataset.lrExtBoard).toBe('pack');
-    expect(document.getElementById('lr-ext-packs')?.textContent).toContain('---white-king:url(');
+    expect(root.dataset.lnExtLoading).toBeUndefined();
+    expect(root.dataset.lnExtBoard).toBe('pack');
+    expect(document.getElementById('ln-ext-packs')?.textContent).toContain('---white-king:url(');
   });
 
   it('shows the default if the packs take too long to read, and the pack once they’re in', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
-    localStorage.setItem('lr-ext-board', WOOD.id);
+    localStorage.setItem('ln-ext-board', WOOD.id);
     const read = Promise.withResolvers<Pack | null>();
     vi.mocked(readPack).mockReturnValue(read.promise);
     startPacks();
     vi.advanceTimersByTime(1999);
-    expect(root.dataset.lrExtLoading).toBe('board');
+    expect(root.dataset.lnExtLoading).toBe('board');
     vi.advanceTimersByTime(1);
-    expect(root.dataset.lrExtLoading).toBeUndefined();
+    expect(root.dataset.lnExtLoading).toBeUndefined();
     vi.useRealTimers();
     read.resolve(WOOD);
     await flush();
-    expect(root.dataset.lrExtBoard).toBe('pack');
+    expect(root.dataset.lnExtBoard).toBe('pack');
   });
 
   it('hides nothing and shows our board at once while no pack is picked', () => {
     vi.mocked(readPack).mockResolvedValue(WOOD);
     startPacks();
-    expect(root.dataset.lrExtLoading).toBeUndefined();
-    expect(root.dataset.lrExtBoard).toBe('accent');
-    expect(document.getElementById('lr-ext-packs')).toBeNull();
+    expect(root.dataset.lnExtLoading).toBeUndefined();
+    expect(root.dataset.lnExtBoard).toBe('accent');
+    expect(document.getElementById('ln-ext-packs')).toBeNull();
   });
 
   it('leaves the board to Lichess when its own is picked', () => {
-    localStorage.setItem('lr-ext-board', 'lichess');
+    localStorage.setItem('ln-ext-board', 'lichess');
     startPacks();
-    expect(root.dataset.lrExtBoard).toBeUndefined();
+    expect(root.dataset.lnExtBoard).toBeUndefined();
   });
 
   it('shows the default when the packs can’t be read', async () => {
-    localStorage.setItem('lr-ext-board', WOOD.id);
+    localStorage.setItem('ln-ext-board', WOOD.id);
     vi.mocked(readPack).mockRejectedValue(new Error('blocked'));
     const error = vi.spyOn(console, 'error').mockImplementation(() => {});
     startPacks();
     await flush();
-    expect(root.dataset.lrExtLoading).toBeUndefined();
-    expect(root.dataset.lrExtBoard).toBe('accent');
+    expect(root.dataset.lnExtLoading).toBeUndefined();
+    expect(root.dataset.lnExtBoard).toBe('accent');
     expect(error).toHaveBeenCalledWith(
-      '[LichessReimagined] the imported packs could not be read',
+      '[LichessNeo] the imported packs could not be read',
       expect.any(Error),
     );
   });
 
   it('sends the picked sounds once read, and again when the page script asks', async () => {
-    localStorage.setItem('lr-ext-sounds', WOOD.id);
+    localStorage.setItem('ln-ext-sounds', WOOD.id);
     vi.mocked(readPack).mockResolvedValue(WOOD);
     startPacks();
     // Lichess's until the pack is read.
-    expect(posted()).toEqual([{ type: 'lr-ext:sounds', sounds: {} }]);
+    expect(posted()).toEqual([{ type: 'ln-ext:sounds', sounds: {} }]);
     await flush();
     const sent = posted().at(-1);
-    expect(sent).toMatchObject({ type: 'lr-ext:sounds' });
+    expect(sent).toMatchObject({ type: 'ln-ext:sounds' });
     expect(Object.keys(SentSoundsSchema.parse(sent).sounds)).toEqual(['capture']);
     window.dispatchEvent(
-      new MessageEvent('message', { data: { type: 'lr-ext:page-ready' }, source: window }),
+      new MessageEvent('message', { data: { type: 'ln-ext:page-ready' }, source: window }),
     );
     expect(posted().slice(1)).toEqual([sent, sent]);
   });
 
   it('sends the sounds again when the picked pack is imported anew', async () => {
-    localStorage.setItem('lr-ext-sounds', WOOD.id);
+    localStorage.setItem('ln-ext-sounds', WOOD.id);
     vi.mocked(readPack).mockResolvedValue(WOOD);
     const library = startPacks();
     await library.ready;
@@ -141,8 +141,8 @@ describe('packs', () => {
   });
 
   it('reads only the picked packs as the page starts, each once', async () => {
-    localStorage.setItem('lr-ext-board', WOOD.id);
-    localStorage.setItem('lr-ext-pieces', WOOD.id);
+    localStorage.setItem('ln-ext-board', WOOD.id);
+    localStorage.setItem('ln-ext-pieces', WOOD.id);
     vi.mocked(readPack).mockResolvedValue(WOOD);
     await startPacks().ready;
     expect(vi.mocked(readPack).mock.calls).toEqual([[WOOD.id]]);
@@ -150,40 +150,40 @@ describe('packs', () => {
   });
 
   it('sends the extension’s sound set with its placement, again as that changes, until left', async () => {
-    localStorage.setItem('lr-ext-sounds', 'foley');
-    localStorage.setItem('lr-ext-sound-place', 'stereo');
+    localStorage.setItem('ln-ext-sounds', 'foley');
+    localStorage.setItem('ln-ext-sound-place', 'stereo');
     const library = startPacks();
     await library.ready;
-    expect(posted()).toEqual([{ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'stereo' } }]);
+    expect(posted()).toEqual([{ type: 'ln-ext:sounds', sounds: {}, synth: { place: 'stereo' } }]);
     choose(OPTION_ROWS.sound[0], 'none', library);
     expect(posted().at(-1)).toEqual({
-      type: 'lr-ext:sounds',
+      type: 'ln-ext:sounds',
       sounds: {},
       synth: { place: 'none' },
     });
     library.choose('sound', 'lichess');
-    expect(posted().at(-1)).toEqual({ type: 'lr-ext:sounds', sounds: {} });
+    expect(posted().at(-1)).toEqual({ type: 'ln-ext:sounds', sounds: {} });
     choose(OPTION_ROWS.sound[0], 'space', library);
     expect(posted()).toHaveLength(3);
   });
 
   it('puts the backlit settings on <html> only while a backlit board shows', async () => {
-    localStorage.setItem('lr-ext-board', 'backlit-walnut');
-    localStorage.setItem('lr-ext-backlit-waves', 'always');
+    localStorage.setItem('ln-ext-board', 'backlit-walnut');
+    localStorage.setItem('ln-ext-backlit-waves', 'always');
     const library = startPacks();
     await library.ready;
-    expect(root.dataset.lrExtBacklit).toBe('accent short always 5.5 9.6');
+    expect(root.dataset.lnExtBacklit).toBe('accent short always 5.5 9.6');
     choose(FAMILY_ROWS.backlit?.[0], 'sides', library);
-    expect(root.dataset.lrExtBacklit).toBe('sides short always 5.5 9.6');
+    expect(root.dataset.lnExtBacklit).toBe('sides short always 5.5 9.6');
     const gap = FAMILY_ROWS.backlit?.[3]?.().querySelector('input');
     if (!gap) throw new Error('no gap slider');
     gap.value = '2';
     gap.dispatchEvent(new Event('input'));
-    expect(root.dataset.lrExtBacklit).toBe('sides short always 2 9.6');
-    expect(localStorage.getItem('lr-ext-backlit-gap')).toBe('2');
+    expect(root.dataset.lnExtBacklit).toBe('sides short always 2 9.6');
+    expect(localStorage.getItem('ln-ext-backlit-gap')).toBe('2');
     library.choose('board', 'accent');
-    expect(root.dataset.lrExtBacklit).toBeUndefined();
+    expect(root.dataset.lnExtBacklit).toBeUndefined();
     choose(FAMILY_ROWS.backlit?.[1], 'wide', library);
-    expect(root.dataset.lrExtBacklit).toBeUndefined();
+    expect(root.dataset.lnExtBacklit).toBeUndefined();
   });
 });

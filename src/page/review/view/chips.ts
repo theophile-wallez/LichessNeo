@@ -9,10 +9,10 @@ import { goTo, lineShown } from './navigation.ts';
 // arrow on the board, clicking plays it as a variation, from the position
 // before the move the coach speaks of, or after it.
 
-const CHIP = '.lr-ext-mv--play';
+const CHIP = '.ln-ext-mv--play';
 
 const ucisOf = (chip: HTMLElement): string[] =>
-  (chip.dataset.lrExtUcis ?? '').split(',').filter(uci => uci.length >= 4);
+  (chip.dataset.lnExtUcis ?? '').split(',').filter(uci => uci.length >= 4);
 
 /** The path of the move the coach speaks of: the one on the board, or the one Explain's line stands for. */
 const spokenPath = (session: Session, analysis: Analysis): string =>
@@ -23,7 +23,7 @@ export function playChip(session: Session, analysis: Analysis, chip: HTMLElement
   if (ucis.length === 0 || !analysis.canPlayUci) return;
   const path = spokenPath(session, analysis);
   session.view.hover = null;
-  goTo(analysis, chip.dataset.lrExtBase === 'a' ? path : parentPath(path));
+  goTo(analysis, chip.dataset.lnExtBase === 'a' ? path : parentPath(path));
   for (const uci of ucis) analysis.playUci(uci);
   analysis.redraw();
 }
@@ -33,7 +33,7 @@ function onPointer(session: Session, event: PointerEvent): void {
   const last = chip ? ucisOf(chip).at(-1) : undefined;
   const hover =
     last && chip
-      ? (arrow(last, chip.dataset.lrExtBase === 'a' ? 'threat' : 'best')[0] ?? null)
+      ? (arrow(last, chip.dataset.lnExtBase === 'a' ? 'threat' : 'best')[0] ?? null)
       : null;
   const { view } = session;
   if (JSON.stringify(hover) === JSON.stringify(view.hover)) return;

@@ -4,12 +4,12 @@
    first screen, the stage list under them. */
 @media (max-width: 1019.98px) {
   .learn--run {
-    --lr-ext-board: min(
+    --ln-ext-board: min(
       100vw - 16px,
       max(280px, 100dvh - var(---site-header-height, 60px) - 300px)
     );
 
-    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-columns: var(--ln-ext-board) !important;
     grid-template-rows: none !important;
     grid-template-areas: 'main' 'table' 'side' !important;
     justify-content: center;
@@ -26,12 +26,12 @@
 /* A tablet or a phone on its side: the coach card and the stage list beside the board. */
 @media (max-width: 1019.98px) and (orientation: landscape) {
   .learn--run {
-    --lr-ext-board: max(
+    --ln-ext-board: max(
       240px,
       min(100dvh - var(---site-header-height, 60px) - 16px, 100vw - 16px - 12px - 300px)
     );
 
-    grid-template-columns: var(--lr-ext-board) minmax(300px, 400px) !important;
+    grid-template-columns: var(--ln-ext-board) minmax(300px, 400px) !important;
     grid-template-rows: auto 1fr !important;
     grid-template-areas:
       'main table'

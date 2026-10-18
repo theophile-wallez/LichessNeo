@@ -48,25 +48,25 @@ afterEach(() => {
 });
 
 const visiblePages = (element: HTMLElement): (string | undefined)[] =>
-  queryAll(element, '.lr-ext-settings__page', HTMLElement)
+  queryAll(element, '.ln-ext-settings__page', HTMLElement)
     .filter(page => !page.hidden)
-    .map(page => page.dataset.lrExtPage);
+    .map(page => page.dataset.lnExtPage);
 
 const title = (element: HTMLElement): string | null | undefined =>
   queryOne(element, 'h1.box__top', HTMLElement)?.textContent;
 
 const pageHolds = (element: HTMLElement, page: string, selector: string): boolean =>
-  queryOne(element, `[data-lr-ext-page='${page}'] ${selector}`, HTMLElement) !== null;
+  queryOne(element, `[data-ln-ext-page='${page}'] ${selector}`, HTMLElement) !== null;
 
 describe('the settings’ section', () => {
   it('holds each page’s cards in its own panel', () => {
     const { element } = buildSection();
-    expect(pageHolds(element, 'personalization', '.lr-ext-coach-pick')).toBe(true);
-    expect(pageHolds(element, 'profile', '.lr-ext-avatar-pick:not(.lr-ext-name-pick)')).toBe(true);
-    expect(pageHolds(element, 'profile', '.lr-ext-name-pick')).toBe(true);
-    expect(pageHolds(element, 'board', '.lr-ext-looks-page')).toBe(true);
-    expect(pageHolds(element, 'packs', '.lr-ext-packs')).toBe(true);
-    expect(pageHolds(element, 'interface', '.lr-ext-settings__list')).toBe(true);
+    expect(pageHolds(element, 'personalization', '.ln-ext-coach-pick')).toBe(true);
+    expect(pageHolds(element, 'profile', '.ln-ext-avatar-pick:not(.ln-ext-name-pick)')).toBe(true);
+    expect(pageHolds(element, 'profile', '.ln-ext-name-pick')).toBe(true);
+    expect(pageHolds(element, 'board', '.ln-ext-looks-page')).toBe(true);
+    expect(pageHolds(element, 'packs', '.ln-ext-packs')).toBe(true);
+    expect(pageHolds(element, 'interface', '.ln-ext-settings__list')).toBe(true);
   });
 
   it('shows one page at a time, under its name', () => {
@@ -75,21 +75,21 @@ describe('the settings’ section', () => {
     section.show('board');
     expect(visiblePages(section.element)).toEqual(['board']);
     expect(title(section.element)).toBe('settingsPageBoard');
-    expect(section.element.dataset.lrExtPage).toBe('board');
+    expect(section.element.dataset.lnExtPage).toBe('board');
     section.show('profile');
     expect(visiblePages(section.element)).toEqual(['profile']);
     expect(title(section.element)).toBe('settingsPageProfile');
     section.show(null);
     expect(visiblePages(section.element)).toEqual([]);
     expect(title(section.element)).toBe('');
-    expect(section.element.dataset.lrExtPage).toBeUndefined();
+    expect(section.element.dataset.lnExtPage).toBeUndefined();
   });
 
   it('brings the coach in only while its page shows', () => {
     const section = buildSection();
     document.body.append(section.element);
     const live = (): boolean =>
-      pageHolds(section.element, 'personalization', '.lr-ext-coach-pick__mascot .lr-ext-mascot');
+      pageHolds(section.element, 'personalization', '.ln-ext-coach-pick__mascot .ln-ext-mascot');
     section.show('personalization');
     expect(live()).toBe(true);
     section.show('interface');
@@ -98,9 +98,9 @@ describe('the settings’ section', () => {
 
   it('marks its switches pending until the stored settings are read', async () => {
     const { element } = buildSection();
-    expect(element.dataset.lrExtPending).toBe('');
+    expect(element.dataset.lnExtPending).toBe('');
     for (const answer of answers.splice(0)) answer();
     await flush();
-    expect(element.dataset.lrExtPending).toBeUndefined();
+    expect(element.dataset.lnExtPending).toBeUndefined();
   });
 });

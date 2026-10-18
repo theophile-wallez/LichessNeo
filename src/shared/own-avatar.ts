@@ -92,6 +92,6 @@ export function avatarAttributes(user: string | undefined): SafeHtml {
   if (user === undefined) return html``;
   const { coach, color, picture } = userAvatar(user);
   return picture
-    ? html` data-lr-ext-avatar-coach="${coach}" data-lr-ext-avatar-color="${color}" data-lr-ext-avatar-picture`
-    : html` data-lr-ext-avatar-coach="${coach}" data-lr-ext-avatar-color="${color}"`;
+    ? html` data-ln-ext-avatar-coach="${coach}" data-ln-ext-avatar-color="${color}" data-ln-ext-avatar-picture`
+    : html` data-ln-ext-avatar-coach="${coach}" data-ln-ext-avatar-color="${color}"`;
 }

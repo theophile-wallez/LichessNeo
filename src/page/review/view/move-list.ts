@@ -11,13 +11,13 @@ import type { LiveState, Review } from '#page/review/session.ts';
 
 // A move that leads with a piece's figurine gets a little room after it (review/move-list.css).
 const markPiece = (element: HTMLElement, san: string): void =>
-  setData(element, 'lrExtPiece', /^[KQRBN]/.test(san) ? '' : null);
+  setData(element, 'lnExtPiece', /^[KQRBN]/.test(san) ? '' : null);
 
 function markClass(move: HTMLElement, moveClass: MoveClass, badge: boolean): void {
-  setData(move, 'lrExtCls', moveClass);
-  setStyleProperty(move, '--lr-ext-class-color', CLASS_COLORS[moveClass]);
-  setStyleProperty(move, '--lr-ext-class-icon', classImage(moveClass));
-  setData(move, 'lrExtBadge', badge ? '' : null);
+  setData(move, 'lnExtCls', moveClass);
+  setStyleProperty(move, '--ln-ext-class-color', CLASS_COLORS[moveClass]);
+  setStyleProperty(move, '--ln-ext-class-icon', classImage(moveClass));
+  setData(move, 'lnExtBadge', badge ? '' : null);
 }
 
 // A move giving away this much of the mover's win chance, or more, fills its bar.
@@ -28,9 +28,9 @@ const MIN_COST = 2;
 /** What a move gave away, as a bar beside it (review/move-list.css). */
 function markCost(element: HTMLElement, loss: number): void {
   const cost = loss >= MIN_COST ? Math.min(1, loss / FULL_COST).toFixed(2) : null;
-  setStyleProperty(element, '--lr-ext-cost', cost);
+  setStyleProperty(element, '--ln-ext-cost', cost);
   // Its tooltip says how much (view/cost-tip.ts).
-  setData(element, 'lrExtCost', cost === null ? null : String(Math.round(loss)));
+  setData(element, 'lnExtCost', cost === null ? null : String(Math.round(loss)));
 }
 
 /** The game's moves, from the review's draft; a book badge only on the last book move. */
@@ -43,7 +43,7 @@ function mainlineBadges(tree: Element, review: Review): void {
     markCost(element, move.loss);
     markPiece(element, move.san);
     // Skip a move whose verdict hasn't changed: its badge was set with it.
-    if (element.dataset.lrExtCls === move.moveClass) continue;
+    if (element.dataset.lnExtCls === move.moveClass) continue;
     const lastBook = !(move.moveClass === 'book' && review.draft[i + 1]?.moveClass === 'book');
     markClass(element, move.moveClass, LIST_BADGES.has(move.moveClass) && lastBook);
   }
@@ -55,14 +55,14 @@ function stripes(tree: Element): void {
   for (const child of tree.children) {
     if (!(child instanceof HTMLElement)) continue;
     if (child.tagName === 'INDEX') even = Number.parseInt(child.textContent, 10) % 2 === 0;
-    if (child.tagName !== 'INTERRUPT') setData(child, 'lrExtEven', even ? '' : null);
+    if (child.tagName !== 'INTERRUPT') setData(child, 'lnExtEven', even ? '' : null);
   }
 }
 
 // Marks the variations played here, which review.css shows while it hides
 // Lichess's computer lines, and the computer lines they branch off, shown too as
 // the way to them. Classes rather than data attributes because review.css reads
-// `lr-ext-var` in a `:has()`, where an attribute selector slows every move.
+// `ln-ext-var` in a `:has()`, where an attribute selector slows every move.
 function ownVariations(tree: Element, analysis: Analysis): void {
   const lines = queryAll(tree, 'interrupt line', Element);
   const own = new Set(
@@ -77,8 +77,8 @@ function ownVariations(tree: Element, analysis: Analysis): void {
       if (!own.has(up)) hosts.add(up);
   }
   for (const line of lines) {
-    line.classList.toggle('lr-ext-var', own.has(line));
-    line.classList.toggle('lr-ext-var-host', hosts.has(line));
+    line.classList.toggle('ln-ext-var', own.has(line));
+    line.classList.toggle('ln-ext-var-host', hosts.has(line));
   }
 }
 
@@ -93,14 +93,14 @@ export function liveBadges(
     const move = judgeAt(live, analysis, path);
     if (move) markPiece(element, move.san);
     if (!move) {
-      setData(element, 'lrExtCls', null);
-      setData(element, 'lrExtBadge', null);
+      setData(element, 'lnExtCls', null);
+      setData(element, 'lnExtBadge', null);
       continue;
     }
     const next = firstChild(analysis.nodeAtPath(path));
     const bookGoesOn = next !== null && bookAt(live, analysis, path + next.id) === true;
     const badge = LIST_BADGES.has(move.moveClass) && !(move.moveClass === 'book' && bookGoesOn);
-    if (element.dataset.lrExtCls === move.moveClass && 'lrExtBadge' in element.dataset === badge)
+    if (element.dataset.lnExtCls === move.moveClass && 'lnExtBadge' in element.dataset === badge)
       continue;
     markClass(element, move.moveClass, badge);
   }
@@ -116,5 +116,5 @@ export function reviewBadges(live: LiveState, analysis: Analysis, review: Review
   mainlineBadges(tree, review);
   stripes(tree);
   ownVariations(tree, analysis);
-  liveBadges(live, analysis, queryAll(tree, 'interrupt line.lr-ext-var move[p]', HTMLElement));
+  liveBadges(live, analysis, queryAll(tree, 'interrupt line.ln-ext-var move[p]', HTMLElement));
 }

@@ -20,12 +20,12 @@ main.puzzle .puzzle__themes__list__entry {
   margin: 0 !important;
   padding: 0 6px 0 12px;
   border-radius: 8px;
-  background: var(--lr-ext-lift-4) !important;
+  background: var(--ln-ext-lift-4) !important;
   transition: background 0.15s !important;
 }
 
 main.puzzle .puzzle__themes__list__entry:hover {
-  background: var(--lr-ext-lift-8) !important;
+  background: var(--ln-ext-lift-8) !important;
 }
 
 main.puzzle .puzzle__themes__list__entry a {
@@ -33,14 +33,14 @@ main.puzzle .puzzle__themes__list__entry a {
   min-width: 0;
   margin: 0 !important;
   padding: 9px 0;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.25;
 }
 
 main.puzzle .puzzle__themes__list__entry.strike a {
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
 }
 
 main.puzzle .puzzle__themes__votes {
@@ -51,7 +51,7 @@ main.puzzle .puzzle__themes__votes {
 main.puzzle .puzzle__themes__lock {
   flex: none !important;
   width: 28px;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 12px;
   opacity: 0.6 !important;
 }
@@ -61,8 +61,8 @@ main.puzzle .puzzle__themes__vote {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: var(--lr-ext-lift-5);
-  color: var(--lr-ext-text-dim) !important;
+  background: var(--ln-ext-lift-5);
+  color: var(--ln-ext-text-dim) !important;
   font-size: 12px;
   transition:
     background 0.15s,
@@ -70,13 +70,13 @@ main.puzzle .puzzle__themes__vote {
 }
 
 main.puzzle .puzzle__themes__vote.vote-up:is(:hover, .active) {
-  background: var(--lr-ext-btn-primary) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 main.puzzle .puzzle__themes__vote.vote-down:is(:hover, .active) {
-  background: var(--lr-ext-btn-red) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-red) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 main.puzzle .puzzle__themes__selector {
@@ -85,17 +85,17 @@ main.puzzle .puzzle__themes__selector {
 }
 
 main.puzzle .puzzle__themes__study {
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 12px;
   transition: color 0.15s !important;
 }
 
 main.puzzle .puzzle__themes__study:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__config {
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
 }
 
 /* Puzzles played this session: rounded green and red chips. */
@@ -107,28 +107,28 @@ main.puzzle .puzzle__session a {
 }
 
 main.puzzle .puzzle__session a.result-true {
-  background: var(--lr-ext-btn-primary) !important;
+  background: var(--ln-ext-btn-primary) !important;
 }
 
 main.puzzle .puzzle__session a.result-false {
-  background: var(--lr-ext-btn-red) !important;
+  background: var(--ln-ext-btn-red) !important;
 }
 
 main.puzzle .puzzle__session a.current {
-  box-shadow: 0 0 0 2px var(--lr-ext-text-strong);
+  box-shadow: 0 0 0 2px var(--ln-ext-text-strong);
 }
 
 /* Next puzzle: Lichess paints it in the link color (our accent), so it looked solved.
-   A grey chip with the dashboard's replay triangle (--lr-ext-play, dashboard/) instead. */
+   A grey chip with the dashboard's replay triangle (--ln-ext-play, dashboard/) instead. */
 main.puzzle .puzzle__session a.session-new {
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text) !important;
 }
 
 main.puzzle .puzzle__session a.session-new:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.puzzle .puzzle__session a.session-new::before {
@@ -136,6 +136,6 @@ main.puzzle .puzzle__session a.session-new::before {
   width: 10px;
   height: 10px;
   background: currentColor;
-  -webkit-mask: var(--lr-ext-play) center / contain no-repeat;
-  mask: var(--lr-ext-play) center / contain no-repeat;
+  -webkit-mask: var(--ln-ext-play) center / contain no-repeat;
+  mask: var(--ln-ext-play) center / contain no-repeat;
 }

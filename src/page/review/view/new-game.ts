@@ -13,5 +13,5 @@ export function newGameMarkup(analysis: Analysis, className: string): SafeHtml |
   const next = data && nextGameAfter(data, Boolean(document.body.dataset.user));
   if (!data?.clock || !next) return '';
   const label = newGameLabel(data.clock, isFrench());
-  return html`<a class="${className} lr-ext-new-game" href="${next.fallback}">${label}</a>`;
+  return html`<a class="${className} ln-ext-new-game" href="${next.fallback}">${label}</a>`;
 }

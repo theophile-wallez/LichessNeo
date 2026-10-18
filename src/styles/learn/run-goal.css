@@ -4,10 +4,10 @@
  * the board). */
 .learn__table .wrap {
   overflow: hidden;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--lr-ext-bg-panel) !important;
-  box-shadow: 0 10px 28px var(--lr-ext-shade-20) !important;
+  background: var(--ln-ext-bg-panel) !important;
+  box-shadow: 0 10px 28px var(--ln-ext-shade-20) !important;
 }
 
 .learn__table .title {
@@ -16,9 +16,9 @@
   position: relative;
   isolation: isolate;
   padding: 14px 16px !important;
-  border-bottom: 1px solid var(--lr-ext-card-border);
+  border-bottom: 1px solid var(--ln-ext-card-border);
   background: none !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* A separate tile: the filter that whitens the piece would whiten its own background too. */
@@ -32,11 +32,11 @@
   height: 52px;
   margin-top: -26px;
   border-radius: 14px;
-  background: var(--lr-ext-btn-primary);
+  background: var(--ln-ext-btn-primary);
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
-    0 4px 10px var(--lr-ext-shade-25);
+    0 4px 10px var(--ln-ext-shade-25);
 }
 
 .learn__table .title img {
@@ -59,7 +59,7 @@
 
 .learn__table .title .subtitle {
   margin: 3px 0 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
   line-height: 1.3;
@@ -70,7 +70,7 @@
   padding: 18px 16px !important;
   border: none !important;
   background: none !important;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.45;
@@ -80,23 +80,23 @@
 .learn__table .result {
   min-height: 120px !important;
   border: none !important;
-  border-top: 1px solid var(--lr-ext-card-border) !important;
+  border-top: 1px solid var(--ln-ext-card-border) !important;
   background: none !important;
   font-size: 20px !important;
   font-weight: 800;
 }
 
 .learn__table .result:hover {
-  background: var(--lr-ext-lift-3) !important;
+  background: var(--ln-ext-lift-3) !important;
   filter: none !important;
 }
 
 .learn__table .result.completed {
-  color: var(--lr-ext-good-hover) !important;
+  color: var(--ln-ext-good-hover) !important;
 }
 
 .learn__table .result.failed {
-  color: var(--lr-ext-red) !important;
+  color: var(--ln-ext-red) !important;
 }
 
 .learn__table .result h2 {
@@ -110,9 +110,9 @@
   padding: 8px 22px !important;
   border: none !important;
   border-radius: 8px !important;
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
+  color: var(--ln-ext-white) !important;
   font-size: 18px !important;
   font-weight: 800 !important;
   text-shadow: 0 1px 1px #00000033;
@@ -121,9 +121,9 @@
 }
 
 .learn__table .result.failed button {
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Level pills: the accent once done, the text's color for the current one. */
@@ -142,8 +142,8 @@
   height: 34px !important;
   border: none !important;
   border-radius: 8px;
-  background: var(--lr-ext-lift-7) !important;
-  color: var(--lr-ext-text-dim) !important;
+  background: var(--ln-ext-lift-7) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px !important;
   font-weight: 800;
   opacity: 1 !important;
@@ -153,20 +153,20 @@
 }
 
 .learn__table .progress a:hover {
-  background: var(--lr-ext-lift-12) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-12) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .learn__table .progress a.done {
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white) !important;
 }
 
 .learn__table .progress a.active {
-  background: var(--lr-ext-text-strong) !important;
-  box-shadow: 0 2px 6px var(--lr-ext-shade-35);
-  color: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-text-strong) !important;
+  box-shadow: 0 2px 6px var(--ln-ext-shade-35);
+  color: var(--ln-ext-bg-panel) !important;
 }
 
 /* Three stars don't fit a narrow pill (up to nine levels share the row): they wrap, one over two. */
@@ -182,20 +182,20 @@
 
 /* The stage's intro and outro screens. */
 .learn__screen {
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 16px !important;
-  background: var(--lr-ext-bg-panel) !important;
-  box-shadow: 0 16px 40px var(--lr-ext-shade-50) !important;
+  background: var(--ln-ext-bg-panel) !important;
+  box-shadow: 0 16px 40px var(--ln-ext-shade-50) !important;
 }
 
 .learn__screen h1 {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 24px !important;
   font-weight: 800 !important;
 }
 
 .learn__screen p {
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 15px;
   line-height: 1.5;
 }

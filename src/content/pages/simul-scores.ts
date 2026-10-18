@@ -6,7 +6,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // host's wins, draws and losses as colored numbers and a bar. Lichess writes them as one
 // text, "10 / 1 / 4"; the infinite scroll appends rows, hence every tick.
 
-const ROWS = 'main.page-small.simul-list tbody tr:not([data-lr-ext-score])';
+const ROWS = 'main.page-small.simul-list tbody tr:not([data-ln-ext-score])';
 
 export interface SimulScore {
   readonly wins: number;
@@ -32,18 +32,18 @@ const share = (part: number, total: number): string =>
 function markRow(row: HTMLTableRowElement, words: readonly string[] | null): void {
   const cell = row.cells[3];
   const score = cell ? parseScore(cell.textContent) : null;
-  setData(row, 'lrExtScore', score ? 'yes' : 'no');
+  setData(row, 'lnExtScore', score ? 'yes' : 'no');
   if (!cell || !score) return;
   const total = score.wins + score.draws + score.losses;
-  setStyleProperty(row, '--lr-ext-wins', share(score.wins, total));
-  setStyleProperty(row, '--lr-ext-draws', share(score.draws, total));
-  const numbers = createElement('span', { className: 'lr-ext-simul-score' });
+  setStyleProperty(row, '--ln-ext-wins', share(score.wins, total));
+  setStyleProperty(row, '--ln-ext-draws', share(score.draws, total));
+  const numbers = createElement('span', { className: 'ln-ext-simul-score' });
   for (const [i, value] of [score.wins, score.draws, score.losses].entries()) {
     const word = words?.[i];
     numbers.append(
       createElement('b', {
         text: String(value),
-        attrs: word ? { title: word, 'data-lr-ext-label': Array.from(word)[0] ?? '' } : {},
+        attrs: word ? { title: word, 'data-ln-ext-label': Array.from(word)[0] ?? '' } : {},
       }),
     );
   }

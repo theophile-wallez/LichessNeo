@@ -15,7 +15,7 @@ import { rangeKey, waited, type PoolMember } from './pool-link.ts';
 
 // And the review's link to a new game like the one reviewed (page/review/view/new-game.ts).
 const BUTTON =
-  'main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game), #lr-ext-review .lr-ext-new-game';
+  'main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game), #ln-ext-review .ln-ext-new-game';
 const SECOND_MS = 1000;
 
 interface Seeking {
@@ -46,9 +46,9 @@ function show(): void {
   if (!button) return;
   const openedAt = seeking?.openedAt ?? null;
   const phase = openedAt === null ? 'connecting' : 'seeking';
-  setData(button, 'lrExtSeek', seeking ? phase : null);
+  setData(button, 'lnExtSeek', seeking ? phase : null);
   const seconds = openedAt === null ? null : Math.floor((Date.now() - openedAt) / SECOND_MS);
-  setData(button, 'lrExtWaited', seconds === null ? null : waited(seconds));
+  setData(button, 'lnExtWaited', seconds === null ? null : waited(seconds));
 }
 
 function stop(): void {

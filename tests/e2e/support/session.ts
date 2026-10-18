@@ -10,10 +10,9 @@ import { launchWithExtension, type LaunchOptions } from './extension.ts';
 // `pnpm lichess:login`; its cookies are a live session, so it never goes in
 // the repo, and no test that CI runs needs it.
 
-/** Where the signed-in profile lives (`LR_EXT_LICHESS_PROFILE` to move it). */
+/** Where the signed-in profile lives (`LN_EXT_LICHESS_PROFILE` to move it). */
 export const SESSION_PROFILE = path.resolve(
-  process.env['LR_EXT_LICHESS_PROFILE'] ??
-    path.join(homedir(), '.lichess-reimagined', 'chromium-profile'),
+  process.env['LN_EXT_LICHESS_PROFILE'] ?? path.join(homedir(), '.lichess-neo', 'chromium-profile'),
 );
 
 export const hasSession = (): boolean => existsSync(SESSION_PROFILE);

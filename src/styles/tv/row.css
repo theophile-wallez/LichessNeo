@@ -5,13 +5,13 @@
  * one on air filled with it. The row fades out at an edge where more is hidden. */
 
 /* How far each fade reaches, 0 at an edge the row is scrolled to. */
-@property --lr-ext-tv-fade-start {
+@property --ln-ext-tv-fade-start {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
 }
 
-@property --lr-ext-tv-fade-end {
+@property --ln-ext-tv-fade-end {
   syntax: '<length>';
   inherits: false;
   initial-value: 24px;
@@ -41,8 +41,8 @@
     mask-image: linear-gradient(
       90deg,
       transparent,
-      #000 var(--lr-ext-tv-fade-start),
-      #000 calc(100% - var(--lr-ext-tv-fade-end)),
+      #000 var(--ln-ext-tv-fade-start),
+      #000 calc(100% - var(--ln-ext-tv-fade-end)),
       transparent
     );
   }
@@ -74,11 +74,11 @@
     height: 44px;
     margin: 0 !important;
     padding: 0 14px 0 6px !important;
-    border: 1px solid var(--lr-ext-card-border) !important;
+    border: 1px solid var(--ln-ext-card-border) !important;
     border-radius: 999px !important;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
     box-shadow: none !important;
-    color: var(--lr-ext-text) !important;
+    color: var(--ln-ext-text) !important;
     transition:
       background-color 0.18s,
       border-color 0.18s !important;
@@ -89,8 +89,8 @@
   }
 
   :is(main.round.tv-single, main.tv-games) .subnav .tv-channel.active {
-    border-color: color-mix(in srgb, var(--lr-ext-tv) 55%, transparent) !important;
-    background: color-mix(in srgb, var(--lr-ext-tv) 16%, var(--lr-ext-bg-panel)) !important;
+    border-color: color-mix(in srgb, var(--ln-ext-tv) 55%, transparent) !important;
+    background: color-mix(in srgb, var(--ln-ext-tv) 16%, var(--ln-ext-bg-panel)) !important;
   }
 
   :is(main.round.tv-single, main.tv-games) .tv-channel > span {
@@ -104,15 +104,15 @@
 
   /* Lichess's glyph, in the mode's color on a tile tinted with it. */
   :is(main.round.tv-single, main.tv-games) .tv-channel > span::before {
-    --lr-ext-mode-color: var(--lr-ext-tv);
+    --ln-ext-mode-color: var(--ln-ext-tv);
     order: -1 !important;
     flex: none;
     width: 32px !important;
     height: 32px !important;
     margin: 0 !important;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--lr-ext-tv) 18%, transparent);
-    color: var(--lr-ext-tv) !important;
+    background: color-mix(in srgb, var(--ln-ext-tv) 18%, transparent);
+    color: var(--ln-ext-tv) !important;
     font-size: 18px !important;
     line-height: 32px !important;
     text-align: center;
@@ -120,7 +120,7 @@
   }
 
   :is(main.round.tv-single, main.tv-games) .tv-channel.active > span::before {
-    background: color-mix(in srgb, var(--lr-ext-tv) 30%, transparent);
+    background: color-mix(in srgb, var(--ln-ext-tv) 30%, transparent);
   }
 
   /* The name, the champion and their rating under it. */
@@ -132,7 +132,7 @@
   }
 
   :is(main.round.tv-single, main.tv-games) .tv-channel strong {
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
     font-size: 13.5px !important;
     font-weight: 800 !important;
     line-height: 17px;
@@ -144,7 +144,7 @@
   :is(main.round.tv-single, main.tv-games) .tv-channel .champion {
     max-width: 150px;
     overflow: hidden;
-    color: var(--lr-ext-text-dim);
+    color: var(--ln-ext-text-dim);
     font-size: 11.5px !important;
     font-weight: 600;
     line-height: 15px;
@@ -159,7 +159,7 @@
 
 @media (max-width: 1019.98px) and (hover: hover) {
   :is(main.round.tv-single, main.tv-games) .subnav .tv-channel:not(.active):hover {
-    background: var(--lr-ext-card-hover) !important;
+    background: var(--ln-ext-card-hover) !important;
   }
 
   :is(main.round.tv-single, main.tv-games) .tv-channel:hover > span::before {
@@ -170,28 +170,28 @@
 @supports (animation-timeline: scroll()) {
   @media (max-width: 1019.98px) {
     :is(main.round.tv-single .round__side, main.tv-games > .page-menu__menu) > .subnav {
-      animation: lr-ext-tv-fade linear both !important;
+      animation: ln-ext-tv-fade linear both !important;
       animation-timeline: scroll(self inline) !important;
     }
   }
 }
 
-@keyframes lr-ext-tv-fade {
+@keyframes ln-ext-tv-fade {
   from {
-    --lr-ext-tv-fade-start: 0px;
-    --lr-ext-tv-fade-end: 24px;
+    --ln-ext-tv-fade-start: 0px;
+    --ln-ext-tv-fade-end: 24px;
   }
 
   8% {
-    --lr-ext-tv-fade-start: 24px;
+    --ln-ext-tv-fade-start: 24px;
   }
 
   92% {
-    --lr-ext-tv-fade-end: 24px;
+    --ln-ext-tv-fade-end: 24px;
   }
 
   to {
-    --lr-ext-tv-fade-start: 24px;
-    --lr-ext-tv-fade-end: 0px;
+    --ln-ext-tv-fade-start: 24px;
+    --ln-ext-tv-fade-end: 0px;
   }
 }

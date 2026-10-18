@@ -85,18 +85,18 @@ settings (`import-section.ts`, `import-form.ts`), all in `src/content/packs/`:
   hides a part whose pack is picked until it's read, 2 s at most. Only the
   picked packs are read then; the menu and the settings read the others when
   they open.
-- `apply.ts` names the board in `data-lr-ext-board` (a theme's id, `pack`, or
+- `apply.ts` names the board in `data-ln-ext-board` (a theme's id, `pack`, or
   none for Lichess's) and writes one stylesheet: a pack's pieces override the
-  variables Lichess draws its own from, its board comes as `--lr-ext-board-img`.
+  variables Lichess draws its own from, its board comes as `--ln-ext-board-img`.
   The sounds go to the page world as bytes
-  (`lr-ext:sounds`), where `src/page/sounds` puts them in Lichess's player. With
+  (`ln-ext:sounds`), where `src/page/sounds` puts them in Lichess's player. With
   no pack, Lichess's player is left alone.
 - A theme's settings are rows in its panel (`options.ts`: options,
   `option-row.ts`, sliders, `slider-row.ts`, colors, `color-row.ts`), kept in
   localStorage (`stored-option.ts`). The Foley set
   comes to the page in the same message, with no file and its placement, and
   `src/page/sounds/synth` plays it through Foley's Web Audio. A backlit board
-  puts its settings in `data-lr-ext-backlit` on `<html>`, only while it's
+  puts its settings in `data-ln-ext-backlit` on `<html>`, only while it's
   shown, and `src/page/backlit` lights the keys around each move on a canvas
   of its own, under the pieces, drawing only while something is lit. Their
   keys come in the shape picked (gap and corners, `keyBox` of
@@ -143,14 +143,14 @@ settings (`import-section.ts`, `import-form.ts`), all in `src/content/packs/`:
   (`src/shared/html.ts`): every interpolated value is escaped unless it's
   `html` output itself. `trustedHtml` is for constants only.
 - **Never move or remove Lichess's DOM nodes**: it renders with snabbdom,
-  which breaks if its nodes move. Add ours (`lr-ext-` prefixed) beside them,
+  which breaks if its nodes move. Add ours (`ln-ext-` prefixed) beside them,
   set attributes, and let CSS rearrange.
 - **Write only what changes**: `setData` and `setStyleProperty` skip
   unchanged values, as every write wakes the page's observers. Prefer
   `classList.toggle(name, force)` to `add`, which writes even when the class
   is there.
 - Everything of ours (classes, ids, data attributes, CSS variables, storage
-  keys, messages) starts with `lr-ext`, `PREFIX` in `src/shared/prefix.ts`.
+  keys, messages) starts with `ln-ext`, `PREFIX` in `src/shared/prefix.ts`.
   Storage keys live in `StorageKey` / `SessionKey`.
 
 ## Styles
@@ -166,7 +166,7 @@ Colors follow Lichess's scheme, light under `html.light`, dark otherwise.
 `theme/palette.css` writes them: a ramp of neutrals from the page's deepest
 background (1) to its strongest text (14) in either scheme, tinted by the
 color theme; the hues, deeper on light; the text's color and black at every
-strength (`--lr-ext-lift-N`, `--lr-ext-shade-N`). `theme/base.css` names
+strength (`--ln-ext-lift-N`, `--ln-ext-shade-N`). `theme/base.css` names
 their roles and points Lichess's `--c-*` variables at them. A color theme
 (`src/content/colors`) is a palette per scheme, three variables each:
 `apply.ts` writes the picked ones in a stylesheet of ours, from

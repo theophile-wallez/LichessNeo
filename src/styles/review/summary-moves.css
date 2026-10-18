@@ -3,23 +3,23 @@
 /* The summary's rows per move class and its phases' radar (view/summary-moves.ts,
    view/summary-radar.ts), the bars and shapes in the sides' colors (summary-players.css). */
 
-.lr-ext-sum-h {
+.ln-ext-sum-h {
   margin: 16px 0 10px;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 13px;
   font-weight: 800;
 }
 
-.lr-ext-sum-moves {
+.ln-ext-sum-moves {
   display: flex;
   flex-direction: column;
   padding: 4px 0 0;
   border-radius: 14px;
-  background: var(--lr-ext-lift-2);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  background: var(--ln-ext-lift-2);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
-.lr-ext-sum-move {
+.ln-ext-sum-move {
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr) 96px 64px;
   align-items: center;
@@ -27,35 +27,35 @@
   padding: 7px 14px;
 }
 
-.lr-ext-sum-move + .lr-ext-sum-move {
-  border-top: 1px solid var(--lr-ext-lift-3);
+.ln-ext-sum-move + .ln-ext-sum-move {
+  border-top: 1px solid var(--ln-ext-lift-3);
 }
 
-.lr-ext-sum-move__label {
+.ln-ext-sum-move__label {
   overflow: hidden;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 13.5px;
   font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.lr-ext-sum-split {
+.ln-ext-sum-split {
   display: flex;
   gap: 3px;
   height: 5px;
 }
 
-.lr-ext-sum-split > span {
+.ln-ext-sum-split > span {
   border-radius: 999px;
-  background: var(--lr-ext-side);
+  background: var(--ln-ext-side);
 }
 
-.lr-ext-sum-move--none :is(.lr-ext-sum-split, .lr-ext-sum-move__counts) {
+.ln-ext-sum-move--none :is(.ln-ext-sum-split, .ln-ext-sum-move__counts) {
   opacity: 0.35;
 }
 
-.lr-ext-sum-move__counts {
+.ln-ext-sum-move__counts {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -63,28 +63,28 @@
   white-space: nowrap;
 }
 
-.lr-ext-sum-move__counts i {
-  color: var(--lr-ext-text-dim);
+.ln-ext-sum-move__counts i {
+  color: var(--ln-ext-text-dim);
   font-style: normal;
   font-weight: 700;
 }
 
 /* A count that goes nowhere sits where a button's number would. */
-.lr-ext-t-num {
+.ln-ext-t-num {
   padding: 2px 4px;
-  color: var(--lr-ext-side);
+  color: var(--ln-ext-side);
   font-size: 15px;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
 }
 
 /* Draft counts, until every move is judged at full depth. */
-.lr-ext-sum-moves--loading .lr-ext-t-num {
+.ln-ext-sum-moves--loading .ln-ext-t-num {
   opacity: 0.6;
 }
 
 /* A count goes to its moves: it lights up under the pointer, as the chevron does. */
-.lr-ext-t-jump {
+.ln-ext-t-jump {
   margin: -2px -4px;
   padding: 2px 4px;
   border: 0;
@@ -96,17 +96,17 @@
   transition: background-color 0.15s !important;
 }
 
-.lr-ext-t-jump:hover {
-  background: var(--lr-ext-lift-8);
+.ln-ext-t-jump:hover {
+  background: var(--ln-ext-lift-8);
 }
 
-.lr-ext-t-jump:focus-visible {
+.ln-ext-t-jump:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 1px;
 }
 
 /* The chevron under the rows opens the rest of them. */
-.lr-ext-review__more {
+.ln-ext-review__more {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -118,80 +118,80 @@
   border: 0;
   border-radius: 6px;
   background: none;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   cursor: pointer;
   transition:
     color 0.15s,
     background-color 0.15s !important;
 }
 
-.lr-ext-review__more:hover {
-  background: var(--lr-ext-lift-8);
-  color: var(--lr-ext-text-strong);
+.ln-ext-review__more:hover {
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
 }
 
-.lr-ext-review__more svg {
+.ln-ext-review__more svg {
   width: 22px;
   height: 22px;
 }
 
-.lr-ext-review__more--open svg {
+.ln-ext-review__more--open svg {
   transform: rotate(180deg);
 }
 
 /* ---- Phases --- */
 
-.lr-ext-sum-radar {
+.ln-ext-sum-radar {
   display: flex;
   justify-content: center;
   padding: 10px 8px 4px;
   border-radius: 16px;
-  background: var(--lr-ext-lift-2);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  background: var(--ln-ext-lift-2);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
-.lr-ext-sum-radar svg {
+.ln-ext-sum-radar svg {
   max-width: 100%;
   height: auto;
 }
 
-.lr-ext-sum-radar__ring {
+.ln-ext-sum-radar__ring {
   fill: none;
-  stroke: var(--lr-ext-lift-7);
+  stroke: var(--ln-ext-lift-7);
   stroke-dasharray: 3 5;
 }
 
-.lr-ext-sum-radar__ring--edge {
-  stroke: var(--lr-ext-lift-15);
+.ln-ext-sum-radar__ring--edge {
+  stroke: var(--ln-ext-lift-15);
   stroke-dasharray: none;
 }
 
-.lr-ext-sum-radar__spoke {
-  stroke: var(--lr-ext-lift-6);
+.ln-ext-sum-radar__spoke {
+  stroke: var(--ln-ext-lift-6);
 }
 
-.lr-ext-sum-radar g polygon {
-  fill: color-mix(in srgb, var(--lr-ext-side) 24%, transparent);
-  stroke: var(--lr-ext-side);
+.ln-ext-sum-radar g polygon {
+  fill: color-mix(in srgb, var(--ln-ext-side) 24%, transparent);
+  stroke: var(--ln-ext-side);
   stroke-width: 2.5;
   stroke-linejoin: round;
 }
 
-.lr-ext-sum-radar g circle {
-  fill: var(--lr-ext-side);
+.ln-ext-sum-radar g circle {
+  fill: var(--ln-ext-side);
 }
 
 /* Only the names, the "?" and the corners' hit areas take the pointer: the shapes would
    cover the other side's corners. */
-.lr-ext-sum-radar :is(g polygon, g circle, .lr-ext-sum-radar__axis) {
+.ln-ext-sum-radar :is(g polygon, g circle, .ln-ext-sum-radar__axis) {
   pointer-events: none;
 }
 
-.lr-ext-sum-radar :is(.lr-ext-sum-radar__name, .lr-ext-sum-radar__how) {
+.ln-ext-sum-radar :is(.ln-ext-sum-radar__name, .ln-ext-sum-radar__how) {
   pointer-events: auto;
 }
 
-.lr-ext-sum-radar__axis {
+.ln-ext-sum-radar__axis {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -200,37 +200,37 @@
   height: 100%;
 }
 
-.lr-ext-sum-radar__name {
+.ln-ext-sum-radar__name {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: var(--lr-ext-neutral-13);
+  color: var(--ln-ext-neutral-13);
   font-size: 12.5px;
   font-weight: 800;
   line-height: 1;
 }
 
 /* How the score is worked out, in the tooltip. */
-.lr-ext-sum-radar__how {
+.ln-ext-sum-radar__how {
   display: inline-grid;
   place-items: center;
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--lr-ext-lift-8);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-15);
-  color: var(--lr-ext-text-dim);
+  background: var(--ln-ext-lift-8);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-15);
+  color: var(--ln-ext-text-dim);
   font-size: 9.5px;
   font-weight: 900;
   cursor: help;
 }
 
-.lr-ext-sum-radar__how:hover {
-  background: var(--lr-ext-lift-15);
-  color: var(--lr-ext-text-strong);
+.ln-ext-sum-radar__how:hover {
+  background: var(--ln-ext-lift-15);
+  color: var(--ln-ext-text-strong);
 }
 
-.lr-ext-sum-radar__scores {
+.ln-ext-sum-radar__scores {
   display: flex;
   gap: 8px;
   font-size: 15px;
@@ -238,12 +238,12 @@
   line-height: 1;
 }
 
-.lr-ext-sum-radar__scores b {
-  color: var(--lr-ext-side);
+.ln-ext-sum-radar__scores b {
+  color: var(--ln-ext-side);
   font-weight: 900;
 }
 
-.lr-ext-sum-radar__hit {
+.ln-ext-sum-radar__hit {
   width: 100%;
   height: 100%;
   border-radius: 50%;

@@ -35,7 +35,7 @@ export function readPlayer(bar: HTMLElement, computerRating: string | undefined)
     user: userInHref(bar.querySelector('a.user-link')?.getAttribute('href')),
     title: nonEmpty(bar.querySelector('.utitle')?.textContent.trim()),
     rating: computerRating ?? nonEmpty(bar.querySelector('rating')?.textContent.trim()),
-    flag: nonEmpty(bar.dataset.lrExtFlag),
+    flag: nonEmpty(bar.dataset.lnExtFlag),
     computer: computerRating !== undefined,
   };
 }

@@ -13,17 +13,17 @@ import {
 // account page.
 
 const DISPLAY = "a[href$='/preferences/display']";
-const LINK = 'lr-ext-settings-link';
-const SUB = 'lr-ext-settings-sub';
+const LINK = 'ln-ext-settings-link';
+const SUB = 'ln-ext-settings-sub';
 // Lichess's own link that was active, given back its look once the section closes.
-const WAS_ACTIVE = 'lrExtWasActive';
+const WAS_ACTIVE = 'lnExtWasActive';
 
 const pageLink = (page: SettingsPage): HTMLAnchorElement =>
   createElement('a', {
-    className: 'lr-ext-settings-sublink',
+    className: 'ln-ext-settings-sublink',
     text: message(PAGE_NAMES[page]),
     // The hash alone: from any account page, the section opens there without a reload.
-    attrs: { href: settingsHash(page), 'data-lr-ext-page': page },
+    attrs: { href: settingsHash(page), 'data-ln-ext-page': page },
   });
 
 /** Whether the menu is ready for our links: Display is in, which they go over. */
@@ -45,7 +45,7 @@ export function addLinks(menu: HTMLElement): HTMLAnchorElement {
   // preferences: ours get their own group.
   const display = queryOne(menu, DISPLAY, HTMLElement);
   const links = display?.parentElement ?? queryOne(menu, '.subnav__inner', HTMLElement) ?? menu;
-  for (const added of [link, sub, createElement('div', { className: 'sep lr-ext-settings-sep' })])
+  for (const added of [link, sub, createElement('div', { className: 'sep ln-ext-settings-sep' })])
     links.insertBefore(added, display);
   return link;
 }
@@ -53,7 +53,7 @@ export function addLinks(menu: HTMLElement): HTMLAnchorElement {
 function showLichessLinks(menu: HTMLElement, open: boolean): void {
   for (const other of queryAll(
     menu,
-    `a:not(.${LINK}):not(.lr-ext-settings-sublink)`,
+    `a:not(.${LINK}):not(.ln-ext-settings-sublink)`,
     HTMLElement,
   )) {
     if (open && other.classList.contains('active')) {
@@ -70,8 +70,8 @@ function showLichessLinks(menu: HTMLElement, open: boolean): void {
 export function showMenu(menu: HTMLElement, page: SettingsPage | null): void {
   const open = page !== null;
   const link = queryOne(menu, `.${LINK}`, HTMLElement);
-  if (link) setData(link, 'lrExtOpen', open ? '' : null);
+  if (link) setData(link, 'lnExtOpen', open ? '' : null);
   for (const pageLink of queryAll(menu, `.${SUB} a`, HTMLElement))
-    pageLink.classList.toggle('active', pageLink.dataset.lrExtPage === page);
+    pageLink.classList.toggle('active', pageLink.dataset.lnExtPage === page);
   showLichessLinks(menu, open);
 }

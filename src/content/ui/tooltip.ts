@@ -5,7 +5,7 @@ import { evalOf, placeTooltip, splitShortcut } from './tooltip-layout.ts';
 
 // Styled tooltips on the page's buttons (styles/theme/tooltips-and-tabs.css),
 // instead of the browser's slow, unstyled `title`. On hover the title moves to
-// `data-lr-ext-tip`, so the native one never shows. Snabbdom only sets the title
+// `data-ln-ext-tip`, so the native one never shows. Snabbdom only sets the title
 // again if it changes, and the next hover moves it again.
 
 // The board editor's analysis link is one of its tools (content/pages/editor-tools.ts); a
@@ -14,22 +14,22 @@ import { evalOf, placeTooltip, splitShortcut } from './tooltip-layout.ts';
 // settings in the user menu say what each does; a variation's move gives its eval, and a
 // move's glyph its name.
 const TARGETS = [
-  'main :is(button:is([title], [data-lr-ext-tip]), a.tv-channel[data-lr-ext-tip]):not(#lr-ext-review *)',
-  'main .board-editor__tools .actions > a[data-lr-ext-tip]',
-  'main .mchat__messages > li > action:is([title], [data-lr-ext-tip])',
-  'main .lr-ext-medal[data-lr-ext-tip]',
-  'main.opening .opening__next__popularity > span:is([title], [data-lr-ext-tip])',
-  'main.opening .result-bar > span:is([title], [data-lr-ext-tip])',
-  'main.opening h1.opening__title > a:is([title], [data-lr-ext-tip])',
-  'main.analyse .tview2 move > :is(san, glyph):is([title], [data-lr-ext-tip])',
-  '#dasher_app .lr-ext-src-options > button[data-lr-ext-tip]',
+  'main :is(button:is([title], [data-ln-ext-tip]), a.tv-channel[data-ln-ext-tip]):not(#ln-ext-review *)',
+  'main .board-editor__tools .actions > a[data-ln-ext-tip]',
+  'main .mchat__messages > li > action:is([title], [data-ln-ext-tip])',
+  'main .ln-ext-medal[data-ln-ext-tip]',
+  'main.opening .opening__next__popularity > span:is([title], [data-ln-ext-tip])',
+  'main.opening .result-bar > span:is([title], [data-ln-ext-tip])',
+  'main.opening h1.opening__title > a:is([title], [data-ln-ext-tip])',
+  'main.analyse .tview2 move > :is(san, glyph):is([title], [data-ln-ext-tip])',
+  '#dasher_app .ln-ext-src-options > button[data-ln-ext-tip]',
 ].join(', ');
 // Lichess's home start buttons carry an English title that only repeats their label:
 // adopted, so the browser's doesn't show either, but never shown.
 const NO_TIP = 'main.lobby .lobby__start__button';
 // A variation's move: its eval alone, on frosted glass over the list.
 const EVAL_TIP = 'main.analyse .tview2 move > san';
-const ON = 'lr-ext-tooltip--on';
+const ON = 'ln-ext-tooltip--on';
 // A short wait before the first one, none when going from button to button.
 const FIRST_DELAY_MS = 250;
 const CHAIN_MS = 400;
@@ -44,14 +44,14 @@ function hoverTarget(event: MouseEvent): HTMLElement | null {
 function adoptTitle(target: HTMLElement): void {
   if (!target.title) return;
   const tip = target.matches(EVAL_TIP) ? evalOf(target.title) : target.title;
-  setData(target, 'lrExtTip', tip);
+  setData(target, 'lnExtTip', tip);
   if (!target.hasAttribute('aria-label')) target.setAttribute('aria-label', tip);
   target.removeAttribute('title');
 }
 
 export class Tooltip {
   readonly #element = createElement('div', {
-    className: 'lr-ext-tooltip',
+    className: 'ln-ext-tooltip',
     attrs: { 'aria-hidden': 'true' },
   });
   #target: HTMLElement | null = null;
@@ -71,7 +71,7 @@ export class Tooltip {
     this.hide();
     if (!target) return;
     adoptTitle(target);
-    if (!target.dataset.lrExtTip || target.matches(NO_TIP)) return;
+    if (!target.dataset.lnExtTip || target.matches(NO_TIP)) return;
     this.#target = target;
     const delay = Date.now() - this.#hiddenAt < CHAIN_MS ? 0 : FIRST_DELAY_MS;
     this.#timer = setTimeout(() => this.#show(target), delay);
@@ -84,9 +84,9 @@ export class Tooltip {
 
   #show(target: HTMLElement): void {
     const tooltip = this.#element;
-    const { label, key } = splitShortcut(target.dataset.lrExtTip ?? '');
+    const { label, key } = splitShortcut(target.dataset.lnExtTip ?? '');
     tooltip.textContent = label;
-    setData(tooltip, 'lrExtLook', target.matches(EVAL_TIP) ? 'glass' : null);
+    setData(tooltip, 'lnExtLook', target.matches(EVAL_TIP) ? 'glass' : null);
     if (key !== null) tooltip.append(createElement('kbd', { text: key }));
     if (!tooltip.isConnected) document.body.append(tooltip);
     const place = placeTooltip(
@@ -97,7 +97,7 @@ export class Tooltip {
     setData(tooltip, 'side', place.side);
     tooltip.style.top = `${place.top}px`;
     tooltip.style.left = `${place.left}px`;
-    setStyleProperty(tooltip, '--lr-ext-tooltip-arrow', `${place.arrow}px`);
+    setStyleProperty(tooltip, '--ln-ext-tooltip-arrow', `${place.arrow}px`);
     tooltip.classList.toggle(ON, true);
   }
 }

@@ -2,48 +2,48 @@
   {
     "name": "a game that just started",
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1234\",\"status\":{\"id\":20,\"name\":\"started\"},\"turns\":0},\"player\":{\"color\":\"white\"}}}",
-    "played": [["play", "lr-ext-game-start", null]],
-    "stored": ["lr-ext-started:abcd1234"]
+    "played": [["play", "ln-ext-game-start", null]],
+    "stored": ["ln-ext-started:abcd1234"]
   },
   {
     "name": "a game one move in",
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1235\",\"status\":{\"name\":\"started\"},\"turns\":1},\"player\":{\"color\":\"black\"}}}",
-    "played": [["play", "lr-ext-game-start", null]],
-    "stored": ["lr-ext-started:abcd1234", "lr-ext-started:abcd1235"]
+    "played": [["play", "ln-ext-game-start", null]],
+    "stored": ["ln-ext-started:abcd1234", "ln-ext-started:abcd1235"]
   },
   {
     "name": "a game two moves in",
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1236\",\"status\":{\"name\":\"started\"},\"turns\":2},\"player\":{\"color\":\"white\"}}}",
     "played": null,
-    "stored": ["lr-ext-started:abcd1234", "lr-ext-started:abcd1235"]
+    "stored": ["ln-ext-started:abcd1234", "ln-ext-started:abcd1235"]
   },
   {
     "name": "a game just created",
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1237\",\"status\":{\"name\":\"created\"}},\"player\":{\"color\":\"white\"}}}",
-    "played": [["play", "lr-ext-game-start", null]],
-    "stored": ["lr-ext-started:abcd1234", "lr-ext-started:abcd1235", "lr-ext-started:abcd1237"]
+    "played": [["play", "ln-ext-game-start", null]],
+    "stored": ["ln-ext-started:abcd1234", "ln-ext-started:abcd1235", "ln-ext-started:abcd1237"]
   },
   {
     "name": "a finished game",
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1238\",\"status\":{\"name\":\"mate\"},\"turns\":1},\"player\":{\"color\":\"white\"}}}",
     "played": null,
-    "stored": ["lr-ext-started:abcd1234", "lr-ext-started:abcd1235", "lr-ext-started:abcd1237"]
+    "stored": ["ln-ext-started:abcd1234", "ln-ext-started:abcd1235", "ln-ext-started:abcd1237"]
   },
   {
     "name": "a spectator",
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1239\",\"status\":{\"name\":\"started\"},\"turns\":0},\"player\":{\"color\":\"white\",\"spectator\":true}}}",
     "played": null,
-    "stored": ["lr-ext-started:abcd1234", "lr-ext-started:abcd1235", "lr-ext-started:abcd1237"]
+    "stored": ["ln-ext-started:abcd1234", "ln-ext-started:abcd1235", "ln-ext-started:abcd1237"]
   },
   {
     "name": "a player who is not a spectator",
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1240\",\"status\":{\"name\":\"started\"},\"turns\":0},\"player\":{\"color\":\"white\",\"spectator\":false}}}",
-    "played": [["play", "lr-ext-game-start", null]],
+    "played": [["play", "ln-ext-game-start", null]],
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   },
   {
@@ -51,10 +51,10 @@
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1241\",\"status\":{\"name\":\"started\"},\"turns\":0}}}",
     "played": null,
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   },
   {
@@ -62,10 +62,10 @@
     "text": "{\"data\":{\"game\":{\"status\":{\"name\":\"started\"},\"turns\":0},\"player\":{}}}",
     "played": null,
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   },
   {
@@ -73,10 +73,10 @@
     "text": "{\"data\":{\"game\":{\"id\":\"\",\"status\":{\"name\":\"started\"},\"turns\":0},\"player\":{}}}",
     "played": null,
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   },
   {
@@ -84,10 +84,10 @@
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1242\",\"turns\":0},\"player\":{}}}",
     "played": null,
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   },
   {
@@ -95,10 +95,10 @@
     "text": "{\"game\":{\"id\":\"abcd1243\",\"status\":{\"name\":\"started\"},\"turns\":0},\"player\":{}}",
     "played": null,
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   },
   {
@@ -106,10 +106,10 @@
     "text": "{\"data\":{\"puzzle\":{\"id\":\"x\"}}}",
     "played": null,
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   },
   {
@@ -117,10 +117,10 @@
     "text": "{\"data\": {\"game\": ",
     "played": null,
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   },
   {
@@ -128,10 +128,10 @@
     "text": "{\"data\":{\"game\":{\"id\":\"abcd1234\",\"status\":{\"name\":\"started\"},\"turns\":0},\"player\":{\"color\":\"white\"}}}",
     "played": null,
     "stored": [
-      "lr-ext-started:abcd1234",
-      "lr-ext-started:abcd1235",
-      "lr-ext-started:abcd1237",
-      "lr-ext-started:abcd1240"
+      "ln-ext-started:abcd1234",
+      "ln-ext-started:abcd1235",
+      "ln-ext-started:abcd1237",
+      "ln-ext-started:abcd1240"
     ]
   }
 ]

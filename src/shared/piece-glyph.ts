@@ -6,4 +6,4 @@ import { html, type SafeHtml } from './html.ts';
 
 /** `code` is the color's letter and the role's, as FEN writes it: wp, bn… */
 export const pieceGlyph = (code: string): SafeHtml =>
-  html`<i class="lr-ext-pc lr-ext-pc-${code}"></i>`;
+  html`<i class="ln-ext-pc ln-ext-pc-${code}"></i>`;

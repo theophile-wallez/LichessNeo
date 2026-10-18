@@ -11,9 +11,9 @@ main.opening .opening__tree {
 main.opening .opening__tree > :is(details, div) {
   margin: 0 !important;
   padding: 0 !important;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 14px;
-  background: var(--lr-ext-card-bg) !important;
+  background: var(--ln-ext-card-bg) !important;
 }
 
 main.opening .opening__tree details > summary {
@@ -37,7 +37,7 @@ main.opening .opening__tree details > summary::before {
   width: 18px;
   height: 18px;
   margin-inline: auto 14px;
-  background: var(--lr-ext-text-dim);
+  background: var(--ln-ext-text-dim);
   -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg')
     center / contain no-repeat;
   mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg') center /
@@ -51,18 +51,18 @@ main.opening .opening__tree details[open] > summary::before {
 
 main.opening .opening__tree a {
   display: block;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14.5px !important;
   font-weight: 600;
 }
 
 main.opening .opening__tree a:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 main.opening .opening__tree > :is(details, div) > :is(summary, a),
 main.opening .opening__tree > :is(details, div) > summary > a {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 16px !important;
   font-weight: 800;
 }
@@ -83,7 +83,7 @@ main.opening .opening__tree details > :is(div, details) {
   margin: 0 16px 0 28px !important;
   padding: 0 0 0 12px !important;
   border: 0 !important;
-  border-inline-start: 1px solid var(--lr-ext-card-border) !important;
+  border-inline-start: 1px solid var(--ln-ext-card-border) !important;
   background: none !important;
 }
 

@@ -83,35 +83,35 @@ export const endCardInput = ({ outcome, texts, coachId, opponent }: EndInput): C
 
 // Links once they know where they lead (chips.ts): to the review, on the class's first move.
 const CHIP = trustedHtml(
-  '<a class="lr-ext-end__count"><span class="lr-ext-end__count-top"><span class="lr-ext-end__count-icon"></span><b></b></span><span class="lr-ext-end__count-label"></span></a>',
+  '<a class="ln-ext-end__count"><span class="ln-ext-end__count-top"><span class="ln-ext-end__count-icon"></span><b></b></span><span class="ln-ext-end__count-label"></span></a>',
 );
 
 const emptyStats = (texts: GameOverTexts): SafeHtml =>
-  html`<p class="lr-ext-end__accuracy"><b></b><span>${texts.accuracy}</span></p>
-    <div class="lr-ext-end__counts">${Array.from({ length: CHIP_COUNT }, () => CHIP)}</div>`;
+  html`<p class="ln-ext-end__accuracy"><b></b><span>${texts.accuracy}</span></p>
+    <div class="ln-ext-end__counts">${Array.from({ length: CHIP_COUNT }, () => CHIP)}</div>`;
 
 /** The strip with the player's figures in, for a card drawn at once. */
 export function statsMarkup(summary: PlayerSummary, texts: GameOverTexts): SafeHtml {
   const accuracy = summary.accuracy === null ? '–' : formatAccuracy(summary.accuracy);
   const chips = cardClasses(summary.counts).map(moveClass => {
     const count = summary.counts[moveClass] ?? 0;
-    return html`<a class="lr-ext-end__count" style="--lr-ext-count-c:${CLASS_COLORS[moveClass]}"><span class="lr-ext-end__count-top"><span class="lr-ext-end__count-icon">${classSvg(moveClass)}</span><b>${count}</b></span><span class="lr-ext-end__count-label">${texts.countLabel(moveClass, count)}</span></a>`;
+    return html`<a class="ln-ext-end__count" style="--ln-ext-count-c:${CLASS_COLORS[moveClass]}"><span class="ln-ext-end__count-top"><span class="ln-ext-end__count-icon">${classSvg(moveClass)}</span><b>${count}</b></span><span class="ln-ext-end__count-label">${texts.countLabel(moveClass, count)}</span></a>`;
   });
-  return html`<p class="lr-ext-end__accuracy"><b>${accuracy}</b><span>${texts.accuracy}</span></p>
-    <div class="lr-ext-end__counts">${chips}</div>`;
+  return html`<p class="ln-ext-end__accuracy"><b>${accuracy}</b><span>${texts.accuracy}</span></p>
+    <div class="ln-ext-end__counts">${chips}</div>`;
 }
 
 export function cardMarkup(input: CardInput): SafeHtml {
   const { result, heading, words, mood, coachId, texts } = input;
-  const tag = heading.tag === '' ? '' : html`<p class="lr-ext-end__reason">${heading.tag}</p>`;
-  return html`<section class="lr-ext-end__card lr-ext-end__card--${result}" aria-labelledby="lr-ext-end-title">
-    <div class="lr-ext-end__glow">
-      <span class="lr-ext-coach__avatar" data-lr-ext-coach-id="${coachId}" data-lr-ext-mood="${mood}"><span class="lr-ext-coach__face"></span></span>
-      <div class="lr-ext-end__main">
-        ${tag}<h2 class="lr-ext-end__title" id="lr-ext-end-title">${heading.title}</h2>
-        <p class="lr-ext-end__bubble">${words}</p>
+  const tag = heading.tag === '' ? '' : html`<p class="ln-ext-end__reason">${heading.tag}</p>`;
+  return html`<section class="ln-ext-end__card ln-ext-end__card--${result}" aria-labelledby="ln-ext-end-title">
+    <div class="ln-ext-end__glow">
+      <span class="ln-ext-coach__avatar" data-ln-ext-coach-id="${coachId}" data-ln-ext-mood="${mood}"><span class="ln-ext-coach__face"></span></span>
+      <div class="ln-ext-end__main">
+        ${tag}<h2 class="ln-ext-end__title" id="ln-ext-end-title">${heading.title}</h2>
+        <p class="ln-ext-end__bubble">${words}</p>
       </div>
     </div>
-    <div class="lr-ext-end__stats">${input.stats ?? emptyStats(texts)}</div>
+    <div class="ln-ext-end__stats">${input.stats ?? emptyStats(texts)}</div>
   </section>`;
 }

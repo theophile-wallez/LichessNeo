@@ -24,7 +24,7 @@ afterEach(() => vi.unstubAllGlobals());
 
 const sections = (): HTMLElement[] => queryAll(document, '#topnav > section', HTMLElement);
 const opened = (): boolean[] =>
-  sections().map(section => section.classList.contains('lr-ext-open'));
+  sections().map(section => section.classList.contains('ln-ext-open'));
 
 function tap(index: number): boolean {
   const link = sections()[index]?.querySelector('a');

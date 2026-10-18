@@ -9,8 +9,8 @@ import type { Feature } from '#shared/features.ts';
 export function addDonateItem(): void {
   const nav = document.getElementById('topnav');
   const patron = nav && queryOne(nav, 'a.community-patron', HTMLAnchorElement);
-  if (!nav || !patron || document.getElementById('lr-ext-donate')) return;
-  const item = createElement('a', { id: 'lr-ext-donate', text: patron.textContent.trim() });
+  if (!nav || !patron || document.getElementById('ln-ext-donate')) return;
+  const item = createElement('a', { id: 'ln-ext-donate', text: patron.textContent.trim() });
   item.href = patron.href;
   nav.after(item);
 }

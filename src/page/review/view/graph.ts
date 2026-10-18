@@ -133,15 +133,15 @@ export function mountGraph(
     shown === 'time'
       ? timesMarkup({ times, last: lastIndex(review), ply }, box)
       : graphMarkup(review, ply, box);
-  setHtml(container, html`${svg}<span class="lr-ext-graph-tip"></span>`);
+  setHtml(container, html`${svg}<span class="ln-ext-graph-tip"></span>`);
   // The first time each graph shows, it draws itself from left to right; on a change of
   // view, faster, as the toggle's pick slides.
   const previous = drawn.get(container);
   if (!view.revealed.has(kind)) {
     view.revealed.add(kind);
-    container.firstElementChild?.classList.add('lr-ext-graph-reveal');
+    container.firstElementChild?.classList.add('ln-ext-graph-reveal');
   } else if (previous && previous.shown !== shown)
-    container.firstElementChild?.classList.add('lr-ext-graph-switch');
+    container.firstElementChild?.classList.add('ln-ext-graph-switch');
   const tip = container.lastElementChild;
   if (!(tip instanceof HTMLElement)) return;
   const pick = (index: number): void => {
@@ -170,7 +170,7 @@ export function movesGraph(session: Session, analysis: Analysis, force = false):
     graphBox.replaceChildren();
     return;
   }
-  if (!force && graphBox.dataset.lrExtVersion === String(version)) return;
-  setData(graphBox, 'lrExtVersion', String(version));
+  if (!force && graphBox.dataset.lnExtVersion === String(version)) return;
+  setData(graphBox, 'lnExtVersion', String(version));
   mountGraph(session, analysis, { container: graphBox, kind: 'moves' });
 }

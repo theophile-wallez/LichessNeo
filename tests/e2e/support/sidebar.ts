@@ -3,7 +3,7 @@ import { boxOf } from './layout.ts';
 
 // Lichess's top header, drawn as a fixed left sidebar from 1020px wide.
 
-// `--lr-ext-sidebar-w` in styles/sidebar/layout.css.
+// `--ln-ext-sidebar-w` in styles/sidebar/layout.css.
 const SIDEBAR_WIDTH = 176;
 
 export async function expectSidebar(page: Page): Promise<void> {
@@ -17,14 +17,14 @@ export async function expectSidebar(page: Page): Promise<void> {
   // The page makes room for it.
   await expect(page.locator('#main-wrap')).toHaveCSS('margin-left', `${SIDEBAR_WIDTH}px`);
   // Our Donate item, copied from Lichess's menu once the page is parsed.
-  await expect(page.locator('#top #lr-ext-donate')).toBeVisible();
+  await expect(page.locator('#top #ln-ext-donate')).toBeVisible();
   await expectIconsLoad(page);
 }
 
 /** Every link's icon, flyouts' included, comes from the extension and decodes. */
 async function expectIconsLoad(page: Page): Promise<void> {
   const icons = await page.evaluate(async () => {
-    const links = document.querySelectorAll('#topnav section a, #lr-ext-donate');
+    const links = document.querySelectorAll('#topnav section a, #ln-ext-donate');
     const urls = new Set<string>();
     for (const link of links) {
       const image = getComputedStyle(link, '::before').backgroundImage;

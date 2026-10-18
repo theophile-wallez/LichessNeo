@@ -11,10 +11,10 @@ interface BoxInput {
   readonly width: number;
   readonly height: number;
 }
-const shown = (): Element | null => document.querySelector('.lr-ext-tooltip.lr-ext-tooltip--on');
+const shown = (): Element | null => document.querySelector('.ln-ext-tooltip.ln-ext-tooltip--on');
 const look = (): string | undefined => {
   const tooltip = shown();
-  return tooltip instanceof HTMLElement ? tooltip.dataset.lrExtLook : undefined;
+  return tooltip instanceof HTMLElement ? tooltip.dataset.lnExtLook : undefined;
 };
 
 function addButton(
@@ -59,7 +59,7 @@ afterEach(() => {
 describe('tooltips', () => {
   it.each(legacy.scenarios)('places it as the original did: $name', ({ tip, box, html }) => {
     const button = addButton('', box);
-    button.dataset.lrExtTip = tip;
+    button.dataset.lnExtTip = tip;
     hover(button);
     vi.advanceTimersByTime(250);
     expect(shown()?.outerHTML).toBe(html);
@@ -68,7 +68,7 @@ describe('tooltips', () => {
   it('moves the title out of the way, keeping it as the label', () => {
     const button = addButton('title="Resign"');
     hover(button);
-    expect(button.outerHTML).toBe('<button data-lr-ext-tip="Resign" aria-label="Resign"></button>');
+    expect(button.outerHTML).toBe('<button data-ln-ext-tip="Resign" aria-label="Resign"></button>');
   });
 
   it("shows none on the home's start buttons, nor the browser's", () => {
@@ -126,7 +126,7 @@ describe('tooltips', () => {
     vi.stubGlobal('matchMedia', () => ({ matches: false }));
     document.body.insertAdjacentHTML(
       'beforeend',
-      '<main><a class="tv-channel" data-lr-ext-tip="Blitz"></a></main>',
+      '<main><a class="tv-channel" data-ln-ext-tip="Blitz"></a></main>',
     );
     const channel = document.querySelector('a.tv-channel');
     if (!channel) throw new Error('no channel');
@@ -143,7 +143,7 @@ describe('tooltips', () => {
     vi.stubGlobal('matchMedia', () => ({ matches: false }));
     document.body.insertAdjacentHTML(
       'beforeend',
-      '<main><div class="board-editor__tools"><div class="actions"><a data-lr-ext-tip="Analysis board (a)"></a></div></div><a class="plain" data-lr-ext-tip="Elsewhere"></a></main>',
+      '<main><div class="board-editor__tools"><div class="actions"><a data-ln-ext-tip="Analysis board (a)"></a></div></div><a class="plain" data-ln-ext-tip="Elsewhere"></a></main>',
     );
     const link = document.querySelector('.actions > a');
     const plain = document.querySelector('a.plain');
@@ -194,11 +194,11 @@ describe('tooltips', () => {
   it('shows what each of a theme’s settings in the user menu does, outside the page’s main', () => {
     document.body.insertAdjacentHTML(
       'beforeend',
-      '<div id="dasher_app"><div class="lr-ext-src-options">' +
-        '<button data-lr-ext-option="wide" data-lr-ext-tip="Most of the board">Wide</button>' +
+      '<div id="dasher_app"><div class="ln-ext-src-options">' +
+        '<button data-ln-ext-option="wide" data-ln-ext-tip="Most of the board">Wide</button>' +
         '</div></div>',
     );
-    const option = document.querySelector('[data-lr-ext-option]');
+    const option = document.querySelector('[data-ln-ext-option]');
     if (!option) throw new Error('no option');
     hover(option);
     vi.advanceTimersByTime(250);

@@ -23,11 +23,11 @@ export function syncRounds(): void {
   const counts = '.swiss-home .swisses .rounds, main.swiss .swiss__meta__round';
   for (const rounds of queryAll(document, counts, HTMLElement)) {
     const text = rounds.textContent;
-    if (rounds.dataset.lrExtRounds === text) continue;
-    setData(rounds, 'lrExtRounds', text);
+    if (rounds.dataset.lnExtRounds === text) continue;
+    setData(rounds, 'lnExtRounds', text);
     const progress = roundsProgress(text);
     const bar = rounds.matches('.swiss__meta__round') ? rounds.parentElement : rounds;
-    if (progress !== null && bar) setStyleProperty(bar, '--lr-ext-progress', progress);
+    if (progress !== null && bar) setStyleProperty(bar, '--ln-ext-progress', progress);
   }
 }
 
@@ -37,7 +37,7 @@ export function syncRounds(): void {
 export function syncMedals(): void {
   for (const rank of queryAll(document, 'main.swiss .swiss__standing td.rank', HTMLElement)) {
     const text = rank.textContent.trim();
-    setData(rank, 'lrExtMedal', MEDALS.has(text) ? text : null);
+    setData(rank, 'lnExtMedal', MEDALS.has(text) ? text : null);
   }
 }
 

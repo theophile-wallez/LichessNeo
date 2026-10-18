@@ -60,7 +60,7 @@ async function quickLook(game: PlayedGame, finished: FinishedGame): Promise<Quic
     });
     return { summary, engine: booted };
   } catch (error) {
-    console.warn('[LichessReimagined] game over analysis', error);
+    console.warn('[LichessNeo] game over analysis', error);
     engine?.quit();
     return null;
   }

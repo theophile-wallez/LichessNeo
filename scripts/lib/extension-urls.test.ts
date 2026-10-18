@@ -11,7 +11,7 @@ describe('extensionFiles', () => {
   it('lists each file named by extension URL once, whatever the quotes', () => {
     const css = [
       `.a { background: url('${BASE}img/icons/b.svg') center / contain; }`,
-      `.b { --lr-ext-icon: url("${BASE}img/sidebar/a.webp"); }`,
+      `.b { --ln-ext-icon: url("${BASE}img/sidebar/a.webp"); }`,
       `.c { mask: url(${BASE}img/icons/b.svg); }`,
       ".d { background: url('https://lichess1.org/assets/flair/img/x.webp'); }",
     ].join('\n');

@@ -27,8 +27,8 @@ export function timesMarkup(
     const length = Math.max(1, timeShare(time.seconds, longest) * (middle - 2));
     const top = time.color === 'white' ? middle - length : middle;
     const x = (time.ply / span) * width - barWidth / 2;
-    const now = time.ply === ply ? ' lr-ext-graph-bar--now' : '';
-    return html`<rect class="lr-ext-graph-bar lr-ext-graph-bar--${time.color}${now}" x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${length.toFixed(1)}" rx="${Math.min(2, barWidth / 2).toFixed(1)}"/>`;
+    const now = time.ply === ply ? ' ln-ext-graph-bar--now' : '';
+    return html`<rect class="ln-ext-graph-bar ln-ext-graph-bar--${time.color}${now}" x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${length.toFixed(1)}" rx="${Math.min(2, barWidth / 2).toFixed(1)}"/>`;
   });
   const marker =
     ply > 0

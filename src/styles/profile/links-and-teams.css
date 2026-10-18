@@ -16,7 +16,7 @@
 .user-show > #us_profile .col2 > strong {
   flex: 0 0 100% !important;
   margin: 6px 0 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -28,8 +28,8 @@
   max-width: 100%;
   padding: 5px 11px;
   border-radius: 999px;
-  background: var(--lr-ext-lift-6);
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-lift-6);
+  color: var(--ln-ext-text) !important;
   font-size: 12.5px;
   font-weight: 600;
   white-space: nowrap;
@@ -38,8 +38,8 @@
 }
 
 .user-show > #us_profile .col2 > a:hover {
-  background: var(--lr-ext-lift-15);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-15);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Some players are in dozens of teams: the list scrolls in place under its heading, with a
@@ -58,7 +58,7 @@
   top: 0;
   margin: 0 !important;
   padding: 6px 0 4px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
 }
 
 .user-show > #us_profile .teams.col2 > strong::after,
@@ -74,7 +74,7 @@
   top: 100%;
   inset-inline: 0;
   height: 14px;
-  background: linear-gradient(var(--lr-ext-bg-panel), transparent);
+  background: linear-gradient(var(--ln-ext-bg-panel), transparent);
 }
 
 .user-show > #us_profile .teams.col2::after {
@@ -83,7 +83,7 @@
   flex: 0 0 100%;
   height: 32px;
   margin-top: -38px;
-  background: linear-gradient(transparent, var(--lr-ext-bg-panel));
+  background: linear-gradient(transparent, var(--ln-ext-bg-panel));
 }
 
 @container scroll-state(scrollable: top) {

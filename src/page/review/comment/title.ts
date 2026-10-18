@@ -13,7 +13,7 @@ function sanMarkup(san: string): SafeHtml {
     .split(/([KQRBN])/)
     .map((text, i) =>
       i % 2 === 1
-        ? html`<span class="lr-ext-fig">${FIGURINES[text] ?? text}</span>`
+        ? html`<span class="ln-ext-fig">${FIGURINES[text] ?? text}</span>`
         : html`${text}`,
     );
   return html`${pieces}`;

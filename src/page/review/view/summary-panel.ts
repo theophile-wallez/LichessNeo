@@ -49,13 +49,13 @@ function summaryMarkup(input: SummaryInput): SafeHtml {
   const { review, error, language, learn } = input;
   const canStart = review !== null && !error;
   return html`${header(language.ui.review, 'normal', language, input.newGame)}
-      <div class="lr-ext-review__top">
-        ${error ? html`<p class="lr-ext-review__error">${error}</p>` : ''}
-        <div class="lr-ext-review__graph lr-ext-summary-graph"></div>
+      <div class="ln-ext-review__top">
+        ${error ? html`<p class="ln-ext-review__error">${error}</p>` : ''}
+        <div class="ln-ext-review__graph ln-ext-summary-graph"></div>
         ${playersMarkup(input)}
       </div>
-      <div class="lr-ext-review__body">${movesMarkup(input)}${radarMarkup({ profiles: profilesOf(review), names: namesOf(input), language, order: input.order })}</div>
-      <div class="lr-ext-review__foot"><button class="lr-ext-btn lr-ext-btn--green" data-lr-ext="moves" ${canStart ? '' : 'disabled'}>${language.ui.start}</button>${learn === null ? '' : html`<button class="lr-ext-btn lr-ext-review__learn" data-lr-ext="learn">${learn}</button>`}</div>`;
+      <div class="ln-ext-review__body">${movesMarkup(input)}${radarMarkup({ profiles: profilesOf(review), names: namesOf(input), language, order: input.order })}</div>
+      <div class="ln-ext-review__foot"><button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="moves" ${canStart ? '' : 'disabled'}>${language.ui.start}</button>${learn === null ? '' : html`<button class="ln-ext-btn ln-ext-review__learn" data-ln-ext="learn">${learn}</button>`}</div>`;
 }
 
 export function renderSummary(session: Session, analysis: Analysis): void {
@@ -74,16 +74,16 @@ export function renderSummary(session: Session, analysis: Analysis): void {
       winner: analysis.winner,
       language,
       learn: learnLabel(analysis),
-      newGame: newGameMarkup(analysis, 'lr-ext-review__new'),
+      newGame: newGameMarkup(analysis, 'ln-ext-review__new'),
     }),
   );
   watchPlayerFocus(elements.panel);
-  const graph = queryOne(elements.panel, '.lr-ext-summary-graph', HTMLElement);
+  const graph = queryOne(elements.panel, '.ln-ext-summary-graph', HTMLElement);
   if (!graph) return;
   if (review) mountGraph(session, analysis, { container: graph, kind: 'summary' });
   if (!review?.complete && !error)
     graph.insertAdjacentHTML(
       'afterbegin',
-      html`<span class="lr-ext-summary-pct">${Math.round(view.progress * 100)}%</span>`.value,
+      html`<span class="ln-ext-summary-pct">${Math.round(view.progress * 100)}%</span>`.value,
     );
 }

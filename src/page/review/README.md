@@ -89,7 +89,7 @@ The move-by-move graph has two views, the advantage and, for a game with
 clocks, each move's time as a column (`view/graph-views.ts`,
 `view/graph-times.ts`): the toggle over its corner is kept across renders so
 that its pick slides. The header's share button opens Lichess's crosstable
-and "Share & export" over the panel (`lr-ext-review-sheet`,
+and "Share & export" over the panel (`ln-ext-review-sheet`,
 `styles/review/sheet.css`); changing modes closes them.
 
 A click on the coach opens the coach picker. It's a dialog of the content
@@ -111,8 +111,8 @@ the analysis page adds the export, the draft and the move on the board first
 (`game/analyse-game.ts`); the game page, once the game is over, runs it at
 full depth only and ends its engines when done, or as soon as the tab is
 hidden (the review takes up the progress saved). Its records are saved as they
-come in (`lr-ext-review-progress:*`), then under the finished game's key
-(`lr-ext-review:*`); an index (`lr-ext-review-index`) keeps the 200 games analysed
+come in (`ln-ext-review-progress:*`), then under the finished game's key
+(`ln-ext-review:*`); an index (`ln-ext-review-index`) keeps the 200 games analysed
 last, on either page, and drops the others (`game/cache.ts`).
 
 The summary's "Learn from your mistakes" hands over to Lichess's own

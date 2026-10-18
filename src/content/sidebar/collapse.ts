@@ -8,12 +8,12 @@ import { message } from '#content/platform/runtime.ts';
 // kept and read at document_start, so a page never shows the other width first.
 // Folded, a section's flyout is all that names it: it gets the section's label.
 
-const TOGGLE_ID = 'lr-ext-sidebar-toggle';
+const TOGGLE_ID = 'ln-ext-sidebar-toggle';
 
 const isCollapsed = (): boolean => readStored(StorageKey.sidebarCollapsed, z.literal('1')) !== null;
 
 function show(collapsed: boolean): void {
-  setData(document.documentElement, 'lrExtSidebar', collapsed ? 'collapsed' : null);
+  setData(document.documentElement, 'lnExtSidebar', collapsed ? 'collapsed' : null);
   const toggle = document.getElementById(TOGGLE_ID);
   if (!toggle) return;
   const label = message(collapsed ? 'sidebarExpand' : 'sidebarCollapse');
@@ -24,7 +24,7 @@ function show(collapsed: boolean): void {
 
 // The width animates only on a toggle, never as a page loads: the transition
 // is on while this mark is.
-const MOVING = 'lrExtSidebarMoving';
+const MOVING = 'lnExtSidebarMoving';
 const MOVE_MS = 400;
 let settling = 0;
 
@@ -54,10 +54,10 @@ export function dressSidebar(): void {
   for (const section of queryAll(document, '#topnav section', HTMLElement)) {
     const link = queryOne(section, ':scope > a', HTMLAnchorElement);
     const flyout = queryOne(section, ':scope > div', HTMLElement);
-    if (link && flyout) setData(flyout, 'lrExtLabel', link.textContent.trim());
+    if (link && flyout) setData(flyout, 'lnExtLabel', link.textContent.trim());
   }
-  const donate = document.getElementById('lr-ext-donate');
-  if (donate) setData(donate, 'lrExtLabel', donate.textContent.trim());
+  const donate = document.getElementById('ln-ext-donate');
+  if (donate) setData(donate, 'lnExtLabel', donate.textContent.trim());
   show(isCollapsed());
 }
 

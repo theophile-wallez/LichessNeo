@@ -46,7 +46,7 @@ describe('arrowsMarkup', () => {
     const host = document.createElement('div');
     setHtml(host, arrowsMarkup([{ from, to, color: '255,170,0', opacity: 0.8 }]));
     expect(host.innerHTML).toBe(
-      parsed(`<svg class="lr-ext-shapes__arrows" viewBox="0 0 8 8">${markup}</svg>`),
+      parsed(`<svg class="ln-ext-shapes__arrows" viewBox="0 0 8 8">${markup}</svg>`),
     );
   });
 

@@ -6,11 +6,11 @@ import { createFlagsSync } from './flags.ts';
 import legacy from './fixtures/legacy-flags.json' with { type: 'json' };
 
 const readFlags = (): (string | null)[] =>
-  queryAll(document, '.ruser, a.user-link', HTMLElement).map(bar => bar.dataset.lrExtFlag ?? null);
+  queryAll(document, '.ruser, a.user-link', HTMLElement).map(bar => bar.dataset.lnExtFlag ?? null);
 
 const readImages = (): string[] =>
   queryAll(document, '.ruser, a.user-link', HTMLElement).map(bar =>
-    bar.style.getPropertyValue('--lr-ext-flag'),
+    bar.style.getPropertyValue('--ln-ext-flag'),
   );
 
 // The original showed emoji, which Windows draws as two letters: the codes

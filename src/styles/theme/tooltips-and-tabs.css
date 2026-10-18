@@ -2,17 +2,17 @@
 
 /* Our tooltip (content/ui/tooltip.ts), in place of the browser's title on buttons.
  * Above the button unless there's no room; a shortcut key gets a key cap. */
-.lr-ext-tooltip {
+.ln-ext-tooltip {
   position: fixed;
   z-index: 10000;
   max-width: 240px;
   padding: 6px 9px;
   border-radius: 5px;
   /* The text's color, as a bubble that stands out on either scheme. */
-  background: var(--lr-ext-neutral-14);
-  box-shadow: 0 2px 8px var(--lr-ext-shade-40);
-  color: var(--lr-ext-neutral-4);
-  font: 600 12px / 16px var(--lr-ext-font);
+  background: var(--ln-ext-neutral-14);
+  box-shadow: 0 2px 8px var(--ln-ext-shade-40);
+  color: var(--ln-ext-neutral-4);
+  font: 600 12px / 16px var(--ln-ext-font);
   text-align: center;
   pointer-events: none;
   opacity: 0;
@@ -22,57 +22,57 @@
     translate 0.12s ease-out !important;
 }
 
-.lr-ext-tooltip[data-side='below'] {
+.ln-ext-tooltip[data-side='below'] {
   translate: 0 -3px;
 }
 
-.lr-ext-tooltip.lr-ext-tooltip--on {
+.ln-ext-tooltip.ln-ext-tooltip--on {
   opacity: 1;
   translate: 0 0;
 }
 
-.lr-ext-tooltip::after {
+.ln-ext-tooltip::after {
   content: '';
   position: absolute;
-  left: var(--lr-ext-tooltip-arrow, 50%);
+  left: var(--ln-ext-tooltip-arrow, 50%);
   top: 100%;
   border: 5px solid transparent;
-  border-top-color: var(--lr-ext-neutral-14);
+  border-top-color: var(--ln-ext-neutral-14);
   translate: -50% 0;
 }
 
-.lr-ext-tooltip[data-side='below']::after {
+.ln-ext-tooltip[data-side='below']::after {
   top: auto;
   bottom: 100%;
-  border-color: transparent transparent var(--lr-ext-neutral-14);
+  border-color: transparent transparent var(--ln-ext-neutral-14);
 }
 
 /* A variation's eval, over the move list: frosted glass, as the move's menu (#analyse-cm),
  * without the arrow, which the blur can't reach. */
-.lr-ext-tooltip[data-lr-ext-look='glass'] {
+.ln-ext-tooltip[data-ln-ext-look='glass'] {
   padding: 4px 8px;
-  border: 1px solid var(--lr-ext-menu-border);
+  border: 1px solid var(--ln-ext-menu-border);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--lr-ext-menu-bg) 65%, transparent);
-  box-shadow: var(--lr-ext-menu-shadow);
-  color: var(--lr-ext-text-strong);
+  background: color-mix(in srgb, var(--ln-ext-menu-bg) 65%, transparent);
+  box-shadow: var(--ln-ext-menu-shadow);
+  color: var(--ln-ext-text-strong);
   font-variant-numeric: tabular-nums;
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
   backdrop-filter: blur(20px) saturate(1.6);
 }
 
-.lr-ext-tooltip[data-lr-ext-look='glass']::after {
+.ln-ext-tooltip[data-ln-ext-look='glass']::after {
   content: none;
 }
 
 /* Lichess styles every <kbd> (light text, a border). */
-.lr-ext-tooltip kbd {
+.ln-ext-tooltip kbd {
   margin-left: 6px;
   padding: 0 5px !important;
   border: none !important;
   border-radius: 3px !important;
-  background: color-mix(in srgb, var(--lr-ext-neutral-4) 10%, transparent) !important;
-  box-shadow: inset 0 -1px color-mix(in srgb, var(--lr-ext-neutral-4) 20%, transparent) !important;
+  background: color-mix(in srgb, var(--ln-ext-neutral-4) 10%, transparent) !important;
+  box-shadow: inset 0 -1px color-mix(in srgb, var(--ln-ext-neutral-4) 20%, transparent) !important;
   color: inherit !important;
   font: inherit !important;
   font-size: 11px !important;
@@ -81,29 +81,29 @@
 /* ---- Sliding tabs --- */
 
 /* One highlight per tab bar, sliding to the picked tab. content/ui/tab-bar.ts sets
- * data-lr-ext-tabs (pill or line), --lr-ext-tab-{x,y,w,h}, and data-lr-ext-tabs-still on
- * a reflow. Each bar's CSS styles it (--lr-ext-tab-bg, -shadow, -radius, -line). */
-[data-lr-ext-tabs] {
+ * data-ln-ext-tabs (pill or line), --ln-ext-tab-{x,y,w,h}, and data-ln-ext-tabs-still on
+ * a reflow. Each bar's CSS styles it (--ln-ext-tab-bg, -shadow, -radius, -line). */
+[data-ln-ext-tabs] {
   position: relative;
 }
 
-[data-lr-ext-tabs='pill'] {
+[data-ln-ext-tabs='pill'] {
   isolation: isolate;
 }
 
-[data-lr-ext-tabs]::before {
+[data-ln-ext-tabs]::before {
   content: '' !important;
   position: absolute !important;
   top: 0;
   left: 0;
   z-index: -1;
   box-sizing: border-box;
-  width: var(--lr-ext-tab-w);
-  height: var(--lr-ext-tab-h);
-  border-radius: var(--lr-ext-tab-radius, 7px);
-  background: var(--lr-ext-tab-bg, var(--lr-ext-bg-raised));
-  box-shadow: var(--lr-ext-tab-shadow, 0 1px 3px var(--lr-ext-shade-50));
-  transform: translate(var(--lr-ext-tab-x), var(--lr-ext-tab-y));
+  width: var(--ln-ext-tab-w);
+  height: var(--ln-ext-tab-h);
+  border-radius: var(--ln-ext-tab-radius, 7px);
+  background: var(--ln-ext-tab-bg, var(--ln-ext-bg-raised));
+  box-shadow: var(--ln-ext-tab-shadow, 0 1px 3px var(--ln-ext-shade-50));
+  transform: translate(var(--ln-ext-tab-x), var(--ln-ext-tab-y));
   pointer-events: none;
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
@@ -112,18 +112,18 @@
 }
 
 /* An underline runs along the tab's bottom edge, over the tabs. */
-[data-lr-ext-tabs='line']::before {
+[data-ln-ext-tabs='line']::before {
   z-index: 1;
-  height: var(--lr-ext-tab-line, 2px);
-  border-radius: var(--lr-ext-tab-radius, 0);
-  background: var(--lr-ext-tab-bg, var(--lr-ext-text-strong));
+  height: var(--ln-ext-tab-line, 2px);
+  border-radius: var(--ln-ext-tab-radius, 0);
+  background: var(--ln-ext-tab-bg, var(--ln-ext-text-strong));
   box-shadow: none;
   transform: translate(
-    var(--lr-ext-tab-x),
-    calc(var(--lr-ext-tab-y) + var(--lr-ext-tab-h) - var(--lr-ext-tab-line, 2px))
+    var(--ln-ext-tab-x),
+    calc(var(--ln-ext-tab-y) + var(--ln-ext-tab-h) - var(--ln-ext-tab-line, 2px))
   );
 }
 
-[data-lr-ext-tabs-still]::before {
+[data-ln-ext-tabs-still]::before {
   transition: none !important;
 }

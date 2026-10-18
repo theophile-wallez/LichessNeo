@@ -59,7 +59,7 @@ async function addMedals(profile: HTMLElement, name: string): Promise<void> {
   const user = await profileUser(name);
   if (!user) return;
   const list = medals(user, Date.now());
-  const section = createElement('section', { className: 'lr-ext-medals' });
+  const section = createElement('section', { className: 'ln-ext-medals' });
   setHtml(section, medalsMarkup(list, takeFresh(name, list)));
   profile.after(section);
 }
@@ -67,12 +67,12 @@ async function addMedals(profile: HTMLElement, name: string): Promise<void> {
 export function syncMedals(): void {
   const profile = queryOne(
     document,
-    '.user-show > #us_profile:not([data-lr-ext-medals])',
+    '.user-show > #us_profile:not([data-ln-ext-medals])',
     HTMLElement,
   );
   const name = profile && profileName();
   if (!profile || !name) return;
-  setData(profile, 'lrExtMedals', '');
+  setData(profile, 'lnExtMedals', '');
   void addMedals(profile, name);
 }
 

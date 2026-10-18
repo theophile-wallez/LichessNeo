@@ -20,23 +20,23 @@ export const infoParts = (text: string): string[] =>
     .filter(part => part !== '');
 
 function splitParts(line: HTMLElement): void {
-  setData(line, 'lrExtParts', '');
+  setData(line, 'lnExtParts', '');
   // A copy: replacing a node changes the live list.
   for (const node of Array.from(line.childNodes)) {
     if (!(node instanceof Text)) continue;
     const parts = infoParts(node.data).map(text =>
-      createElement('span', { className: 'lr-ext-part', text }),
+      createElement('span', { className: 'ln-ext-part', text }),
     );
     node.replaceWith(...parts);
   }
 }
 
 function wrapName(link: HTMLElement): void {
-  setData(link, 'lrExtName', '');
+  setData(link, 'lnExtName', '');
   for (const node of Array.from(link.childNodes)) {
     const name = node instanceof Text ? node.data.trim() : '';
     if (name !== '')
-      node.replaceWith(createElement('span', { className: 'lr-ext-meta-name', text: name }));
+      node.replaceWith(createElement('span', { className: 'ln-ext-meta-name', text: name }));
   }
   const rating = queryOne(link, '.rating', HTMLElement);
   if (!rating) return;
@@ -77,16 +77,16 @@ export function readResult(text: string): Result | null {
 function markResult(meta: HTMLElement): void {
   const line = queryOne(document, 'main.round .result-wrap > .result', HTMLElement);
   const result = line ? readResult(line.textContent) : null;
-  setData(meta, 'lrExtWinner', result?.winner ?? null);
-  setStyleProperty(meta, '--lr-ext-meta-score', result ? `"${result.score}"` : null);
+  setData(meta, 'lnExtWinner', result?.winner ?? null);
+  setStyleProperty(meta, '--ln-ext-meta-score', result ? `"${result.score}"` : null);
 }
 
 export function syncGameMeta(ratings: ReadonlyMap<Color, string>): void {
   const meta = queryOne(document, 'main.round .round__side > .game__meta', HTMLElement);
   if (!meta) return;
-  const lines = ':is(.setup, section.status):not([data-lr-ext-parts])';
+  const lines = ':is(.setup, section.status):not([data-ln-ext-parts])';
   for (const line of queryAll(meta, lines, HTMLElement)) splitParts(line);
-  const links = '.game__meta__players .user-link:not([data-lr-ext-name])';
+  const links = '.game__meta__players .user-link:not([data-ln-ext-name])';
   for (const link of queryAll(meta, links, HTMLElement)) wrapName(link);
   addComputerRatings(meta, ratings);
   markResult(meta);

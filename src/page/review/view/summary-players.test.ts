@@ -40,17 +40,17 @@ describe('the summary’s players', () => {
     document.body.dataset.user = 'eresy';
     expect(playerName(ERESY, en)).toBe('Captain Kitty');
     expect(playerName(HIKARU, en)).toBe('Hikaru');
-    const names = queryAll(summary(), '.lr-ext-sum-player__name', HTMLElement);
+    const names = queryAll(summary(), '.ln-ext-sum-player__name', HTMLElement);
     expect(names.map(name => name.textContent)).toEqual(['Captain Kitty', 'Hikaru']);
   });
 
   it('give the signed-in user their own avatar', () => {
     document.body.dataset.user = 'eresy';
     keepOwnAvatar({ kind: 'picture', picture: IMAGE });
-    const [own, other] = queryAll(summary(), '.lr-ext-avatar', HTMLElement);
-    expect(own?.dataset.lrExtAvatarPicture).toBe('');
-    expect(own?.dataset.lrExtAvatarCoach).toBe(String(avatarOf('Eresy').coach));
-    expect(other?.dataset.lrExtAvatarPicture).toBeUndefined();
-    expect(other?.dataset.lrExtAvatarCoach).toBe(String(avatarOf('Hikaru').coach));
+    const [own, other] = queryAll(summary(), '.ln-ext-avatar', HTMLElement);
+    expect(own?.dataset.lnExtAvatarPicture).toBe('');
+    expect(own?.dataset.lnExtAvatarCoach).toBe(String(avatarOf('Eresy').coach));
+    expect(other?.dataset.lnExtAvatarPicture).toBeUndefined();
+    expect(other?.dataset.lnExtAvatarCoach).toBe(String(avatarOf('Hikaru').coach));
   });
 });

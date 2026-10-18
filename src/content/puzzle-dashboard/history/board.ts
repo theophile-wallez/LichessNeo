@@ -39,7 +39,7 @@ export function boardMarkup({ fen, orientation, lastMove }: BoardState): SafeHtm
   const squares = lastMove.map(
     square => html`<square class="last-move" style="${place(square, orientation)}"></square>`,
   );
-  return html`<span class="lr-ext-phist__board cg-wrap is2d orientation-${orientation}">
+  return html`<span class="ln-ext-phist__board cg-wrap is2d orientation-${orientation}">
     <cg-container><cg-board>${squares}${pieces}</cg-board></cg-container>
   </span>`;
 }

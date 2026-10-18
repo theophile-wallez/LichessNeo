@@ -39,7 +39,7 @@ interface State {
 
 function draw(section: HTMLElement, state: State): void {
   const key = JSON.stringify(state.cards);
-  const holder = queryOne(section, '.lr-ext-speeds__cards', HTMLElement);
+  const holder = queryOne(section, '.ln-ext-speeds__cards', HTMLElement);
   if (!holder || key === state.drawn) return;
   state.drawn = key;
   setHtml(holder, cardsMarkup(state));
@@ -58,13 +58,13 @@ function pickPool(state: State, id: string): void {
 
 function onClick(event: MouseEvent, state: State): void {
   if (!(event.target instanceof Element)) return;
-  if (closestTo(event.target, '.lr-ext-speeds__custom', HTMLElement)) return openCustomGame();
-  const id = closestTo(event.target, '[data-lr-ext-pool]', HTMLElement)?.dataset.lrExtPool;
+  if (closestTo(event.target, '.ln-ext-speeds__custom', HTMLElement)) return openCustomGame();
+  const id = closestTo(event.target, '[data-ln-ext-pool]', HTMLElement)?.dataset.lnExtPool;
   if (id) pickPool(state, id);
 }
 
 function buildSection(state: State): HTMLElement {
-  const section = createElement('section', { className: 'lr-ext-speeds' });
+  const section = createElement('section', { className: 'ln-ext-speeds' });
   setHtml(section, sectionMarkup(state.texts));
   section.addEventListener('click', event => onClick(event, state));
   return section;
@@ -75,11 +75,11 @@ function buildSection(state: State): HTMLElement {
 // The heading says which pool Lichess seeks a game in, with a button to stop: a game's "New
 // opponent" lands here seeking.
 function syncBanner(section: HTMLElement, state: State): void {
-  const text = queryOne(section, '.lr-ext-speeds__seeking-text', HTMLElement);
-  const cancel = queryOne(section, '.lr-ext-speeds__cancel', HTMLElement);
+  const text = queryOne(section, '.ln-ext-speeds__seeking-text', HTMLElement);
+  const cancel = queryOne(section, '.ln-ext-speeds__cancel', HTMLElement);
   const label = state.seeking === null ? '' : state.texts.seeking(poolLabel(state.seeking));
   if (text && text.textContent !== label) text.textContent = label;
-  if (cancel) setData(cancel, 'lrExtPool', state.seeking ?? '');
+  if (cancel) setData(cancel, 'lnExtPool', state.seeking ?? '');
 }
 
 function syncSeeking(section: HTMLElement, state: State): void {
@@ -89,12 +89,12 @@ function syncSeeking(section: HTMLElement, state: State): void {
     else if (!seekingElsewhere()) state.seeking = null;
     leavePoolsTab();
   }
-  section.classList.toggle('lr-ext-speeds--seeking', state.seeking !== null);
+  section.classList.toggle('ln-ext-speeds--seeking', state.seeking !== null);
   syncBanner(section, state);
-  for (const button of queryAll(section, '.lr-ext-speed__pool', HTMLElement)) {
+  for (const button of queryAll(section, '.ln-ext-speed__pool', HTMLElement)) {
     button.classList.toggle(
-      'lr-ext-speed__pool--seeking',
-      button.dataset.lrExtPool === state.seeking,
+      'ln-ext-speed__pool--seeking',
+      button.dataset.lnExtPool === state.seeking,
     );
   }
 }
@@ -102,14 +102,14 @@ function syncSeeking(section: HTMLElement, state: State): void {
 function sync(state: State): void {
   const main = queryOne(document, 'main.lobby', HTMLElement);
   if (!main) return;
-  let section = queryOne(main, ':scope > .lr-ext-speeds', HTMLElement);
+  let section = queryOne(main, ':scope > .ln-ext-speeds', HTMLElement);
   if (!section) {
     section = buildSection(state);
-    const hero = main.querySelector(':scope > .lr-ext-hero');
+    const hero = main.querySelector(':scope > .ln-ext-hero');
     if (hero) hero.after(section);
     else main.prepend(section);
   }
-  const title = queryOne(section, '.lr-ext-speeds__title', HTMLElement);
+  const title = queryOne(section, '.ln-ext-speeds__title', HTMLElement);
   const name = quickPairingName();
   if (title && name && title.textContent !== name) title.textContent = name;
   draw(section, state);

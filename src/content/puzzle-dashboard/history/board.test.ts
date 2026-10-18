@@ -37,8 +37,8 @@ describe('a history board', () => {
       'white pawn transform: translate(400%, 600%)',
       'white king transform: translate(400%, 700%)',
     ]);
-    expect(document.querySelector('.lr-ext-phist__board')?.className).toBe(
-      'lr-ext-phist__board cg-wrap is2d orientation-white',
+    expect(document.querySelector('.ln-ext-phist__board')?.className).toBe(
+      'ln-ext-phist__board cg-wrap is2d orientation-white',
     );
   });
 

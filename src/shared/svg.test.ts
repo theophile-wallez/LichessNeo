@@ -6,10 +6,10 @@ const SVG_NS = 'http://www.w3.org/2000/svg';
 
 describe('createSvgElement', () => {
   it('makes the element in the SVG namespace, its attributes in order', () => {
-    const svg = createSvgElement('svg', { class: 'lr-ext-marks', viewBox: '0 0 8 8' });
+    const svg = createSvgElement('svg', { class: 'ln-ext-marks', viewBox: '0 0 8 8' });
     expect(svg).toBeInstanceOf(SVGSVGElement);
     expect(svg.namespaceURI).toBe(SVG_NS);
-    expect(svg.outerHTML).toBe('<svg class="lr-ext-marks" viewBox="0 0 8 8"></svg>');
+    expect(svg.outerHTML).toBe('<svg class="ln-ext-marks" viewBox="0 0 8 8"></svg>');
   });
 });
 

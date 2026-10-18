@@ -28,13 +28,13 @@ export const flatBoard = (id: string): FlatBoard | undefined =>
 
 export function showFlatBoard(board: SquareColors | undefined): void {
   const root = document.documentElement;
-  setStyleProperty(root, '--lr-ext-board-flat-light', board?.light ?? null);
-  setStyleProperty(root, '--lr-ext-board-flat-dark', board?.dark ?? null);
+  setStyleProperty(root, '--ln-ext-board-flat-light', board?.light ?? null);
+  setStyleProperty(root, '--ln-ext-board-flat-dark', board?.dark ?? null);
 }
 
 /** Gives a tile's thumbnail a two-tone board's colors, which its stylesheet draws as squares. */
 export function showSquares(thumb: HTMLElement, { light, dark }: SquareColors): void {
-  setData(thumb, 'lrExtSquares', '');
-  setStyleProperty(thumb, '--lr-ext-thumb-light', light);
-  setStyleProperty(thumb, '--lr-ext-thumb-dark', dark);
+  setData(thumb, 'lnExtSquares', '');
+  setStyleProperty(thumb, '--ln-ext-thumb-light', light);
+  setStyleProperty(thumb, '--ln-ext-thumb-dark', dark);
 }

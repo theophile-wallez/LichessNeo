@@ -15,8 +15,8 @@ describe('analysis player bars', () => {
     const sync = createPlayersSync();
     document.body.innerHTML = html;
     sync();
-    expect(inner('main > .lr-ext-player--top')).toBe(top);
-    expect(inner('main > .lr-ext-player--bottom')).toBe(bottom);
+    expect(inner('main > .ln-ext-player--top')).toBe(top);
+    expect(inner('main > .ln-ext-player--bottom')).toBe(bottom);
   });
 
   it('swaps them when the board flips', () => {
@@ -26,16 +26,16 @@ describe('analysis player bars', () => {
     sync();
     document.querySelector('.cg-wrap')?.classList.replace('orientation-white', 'orientation-black');
     sync();
-    expect(inner('main > .lr-ext-player--top')).toBe(flipped?.top);
-    expect(document.querySelectorAll('.lr-ext-player')).toHaveLength(2);
+    expect(inner('main > .ln-ext-player--top')).toBe(flipped?.top);
+    expect(document.querySelectorAll('.ln-ext-player')).toHaveLength(2);
   });
 
   it('leaves the bars alone while nothing changed', () => {
     const sync = createPlayersSync();
     document.body.innerHTML = legacy[0]?.html ?? '';
     sync();
-    const link = document.querySelector('.lr-ext-player--top > a');
+    const link = document.querySelector('.ln-ext-player--top > a');
     sync();
-    expect(document.querySelector('.lr-ext-player--top > a')).toBe(link);
+    expect(document.querySelector('.ln-ext-player--top > a')).toBe(link);
   });
 });

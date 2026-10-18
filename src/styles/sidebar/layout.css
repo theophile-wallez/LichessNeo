@@ -2,7 +2,7 @@
  * Below that, its header stays, its hamburger opening the nav as a drawer (drawer.css). */
 
 /* A length, so it can be animated when the sidebar folds (collapsed.css). 0 below 1020px. */
-@property --lr-ext-sidebar-w {
+@property --ln-ext-sidebar-w {
   syntax: '<length>';
   inherits: true;
   initial-value: 0px;
@@ -11,33 +11,33 @@
 /* Lichess's horse, a mask over the text's color: the sidebar's logo and the phone header's
  * (drawer.css). */
 :root {
-  --lr-ext-logo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' d='M38.956.5c-3.53.418-6.452.902-9.286 2.984C5.534 1.786-.692 18.533.68 29.364 3.493 50.214 31.918 55.785 41.329 41.7c-7.444 7.696-19.276 8.752-28.323 3.084S-.506 27.392 4.683 17.567C9.873 7.742 18.996 4.535 29.03 6.405c2.43-1.418 5.225-3.22 7.655-3.187l-1.694 4.86 12.752 21.37c-.439 5.654-5.459 6.112-5.459 6.112-.574-1.47-1.634-2.942-4.842-6.036-3.207-3.094-17.465-10.177-15.788-16.207-2.001 6.967 10.311 14.152 14.04 17.663 3.73 3.51 5.426 6.04 5.795 6.756 0 0 9.392-2.504 7.838-8.927L37.4 7.171z'/%3E%3C/svg%3E");
+  --ln-ext-logo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' d='M38.956.5c-3.53.418-6.452.902-9.286 2.984C5.534 1.786-.692 18.533.68 29.364 3.493 50.214 31.918 55.785 41.329 41.7c-7.444 7.696-19.276 8.752-28.323 3.084S-.506 27.392 4.683 17.567C9.873 7.742 18.996 4.535 29.03 6.405c2.43-1.418 5.225-3.22 7.655-3.187l-1.694 4.86 12.752 21.37c-.439 5.654-5.459 6.112-5.459 6.112-.574-1.47-1.634-2.942-4.842-6.036-3.207-3.094-17.465-10.177-15.788-16.207-2.001 6.967 10.311 14.152 14.04 17.663 3.73 3.51 5.426 6.04 5.795 6.756 0 0 9.392-2.504 7.838-8.927L37.4 7.171z'/%3E%3C/svg%3E");
 }
 
 /* Our Donate item (content/sidebar/donate.ts) belongs to the desktop sidebar only. */
-#lr-ext-donate {
+#ln-ext-donate {
   display: none;
 }
 
 @media (min-width: 1020px) {
   :root {
-    --lr-ext-sidebar-w: 168px;
+    --ln-ext-sidebar-w: 168px;
   }
 
   /* What the content leaves to a page that fits the window. On body, where zen mode drops
    * the sidebar. */
   body {
-    --lr-ext-main-w: calc(100vw - var(--lr-ext-sidebar-w));
-    --lr-ext-main-h: 100dvh;
+    --ln-ext-main-w: calc(100vw - var(--ln-ext-sidebar-w));
+    --ln-ext-main-h: 100dvh;
     /* The room over the content, which scrolls away with it (#main-wrap below). */
-    --lr-ext-page-top: 16px;
+    --ln-ext-page-top: 16px;
     ---site-header-height: 44px !important;
     ---site-header-margin: 0px !important;
   }
 
   /* Row hover: a faint wash of the text's color. */
   #top {
-    --lr-ext-sb-hover: var(--lr-ext-lift-5);
+    --ln-ext-sb-hover: var(--ln-ext-lift-5);
   }
 
   /* Only the content scrolls. That also drops the ~40px Lichess's hidden hover cards
@@ -48,7 +48,7 @@
   }
 
   html {
-    background: var(--lr-ext-bg-page) !important;
+    background: var(--ln-ext-bg-page) !important;
   }
 
   #top,
@@ -56,7 +56,7 @@
   #top.scrolled {
     position: fixed !important;
     inset: 0 auto 0 0 !important;
-    width: var(--lr-ext-sidebar-w) !important;
+    width: var(--ln-ext-sidebar-w) !important;
     max-width: none !important;
     height: auto !important;
     margin: 0 !important;
@@ -85,22 +85,22 @@
    * own stacking context, or what Lichess draws behind the page (the clock faces) would go
    * under its fill. The top room is padding, so the content scrolls up to the window's edge;
    * but sticky things stick below it, and what scrolls shows above them: a pinned title
-   * covers that strip (`--lr-ext-pin-cover`), a column that scrolls in place starts at the
+   * covers that strip (`--ln-ext-pin-cover`), a column that scrolls in place starts at the
    * edge (see "The top room" in AGENTS.md). */
   #main-wrap {
-    --lr-ext-pin-cover: 0 calc(-1 * var(--lr-ext-page-top)) var(--lr-ext-bg-page);
+    --ln-ext-pin-cover: 0 calc(-1 * var(--ln-ext-page-top)) var(--ln-ext-bg-page);
     /* For a title widened by 12px side shadows. */
-    --lr-ext-pin-cover-wide: 0 calc(-1 * var(--lr-ext-page-top)) 0 12px var(--lr-ext-bg-page);
+    --ln-ext-pin-cover-wide: 0 calc(-1 * var(--ln-ext-page-top)) 0 12px var(--ln-ext-bg-page);
     box-sizing: border-box;
-    height: var(--lr-ext-main-h);
-    margin: 0 0 0 var(--lr-ext-sidebar-w) !important;
-    padding-top: var(--lr-ext-page-top);
+    height: var(--ln-ext-main-h);
+    margin: 0 0 0 var(--ln-ext-sidebar-w) !important;
+    padding-top: var(--ln-ext-page-top);
     overflow: hidden auto;
     overscroll-behavior: contain;
     align-content: start;
     isolation: isolate;
-    background: var(--lr-ext-bg-page);
-    box-shadow: -1px 0 0 var(--lr-ext-sidebar-line);
+    background: var(--ln-ext-bg-page);
+    box-shadow: -1px 0 0 var(--ln-ext-sidebar-line);
   }
 
   /* ---- Logo --- */
@@ -115,12 +115,12 @@
     border-radius: 8px;
     transform: none !important;
     font-size: 0 !important;
-    color: var(--lr-ext-text-strong) !important;
+    color: var(--ln-ext-text-strong) !important;
     transition: background-color 0.15s !important;
   }
 
   #top .site-title:hover {
-    background: var(--lr-ext-sb-hover);
+    background: var(--ln-ext-sb-hover);
   }
 
   #top .site-title > * {
@@ -132,8 +132,8 @@
     flex: none;
     width: 22px;
     height: 22px;
-    background: var(--lr-ext-text-strong);
-    mask: var(--lr-ext-logo) center / contain no-repeat;
+    background: var(--ln-ext-text-strong);
+    mask: var(--ln-ext-logo) center / contain no-repeat;
   }
 
   #top .site-title::after {
@@ -141,13 +141,13 @@
     min-width: 0;
     font-size: 16px;
     font-weight: 600;
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   #top .site-title:hover::after {
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
   }
 }

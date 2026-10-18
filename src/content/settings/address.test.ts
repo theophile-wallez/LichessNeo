@@ -3,11 +3,11 @@ import { SETTINGS_PAGES, settingsHash, settingsPageOf, settingsUrl } from './add
 
 describe('the settings’ address', () => {
   it('gives the first page the section’s own hash, the others theirs', () => {
-    expect(settingsHash()).toBe('#lr-ext-extension');
-    expect(settingsHash('personalization')).toBe('#lr-ext-extension');
-    expect(settingsHash('board')).toBe('#lr-ext-extension/board');
-    expect(settingsUrl()).toBe('/account/profile#lr-ext-extension');
-    expect(settingsUrl('packs')).toBe('/account/profile#lr-ext-extension/packs');
+    expect(settingsHash()).toBe('#ln-ext-extension');
+    expect(settingsHash('personalization')).toBe('#ln-ext-extension');
+    expect(settingsHash('board')).toBe('#ln-ext-extension/board');
+    expect(settingsUrl()).toBe('/account/profile#ln-ext-extension');
+    expect(settingsUrl('packs')).toBe('/account/profile#ln-ext-extension/packs');
   });
 
   it('reads back the page of every hash it makes', () => {
@@ -15,13 +15,13 @@ describe('the settings’ address', () => {
   });
 
   it('opens the first page for a page it doesn’t know', () => {
-    expect(settingsPageOf('#lr-ext-extension/gone')).toBe('personalization');
-    expect(settingsPageOf('#lr-ext-extension/')).toBe('personalization');
+    expect(settingsPageOf('#ln-ext-extension/gone')).toBe('personalization');
+    expect(settingsPageOf('#ln-ext-extension/')).toBe('personalization');
   });
 
   it('leaves any other hash to Lichess', () => {
     expect(settingsPageOf('')).toBeNull();
-    expect(settingsPageOf('#lr-ext-extensions')).toBeNull();
+    expect(settingsPageOf('#ln-ext-extensions')).toBeNull();
     expect(settingsPageOf('#board')).toBeNull();
   });
 });

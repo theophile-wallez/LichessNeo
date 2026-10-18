@@ -29,12 +29,12 @@ function readBar(bar: HTMLElement, step: string): Record<string, string | null> 
   const variable = (name: string): string | null => bar.style.getPropertyValue(name) || null;
   return {
     step,
-    tabs: bar.dataset.lrExtTabs ?? null,
-    still: bar.dataset.lrExtTabsStill ?? null,
-    x: variable('--lr-ext-tab-x'),
-    y: variable('--lr-ext-tab-y'),
-    w: variable('--lr-ext-tab-w'),
-    h: variable('--lr-ext-tab-h'),
+    tabs: bar.dataset.lnExtTabs ?? null,
+    still: bar.dataset.lnExtTabsStill ?? null,
+    x: variable('--ln-ext-tab-x'),
+    y: variable('--ln-ext-tab-y'),
+    w: variable('--ln-ext-tab-w'),
+    h: variable('--ln-ext-tab-h'),
   };
 }
 
@@ -116,18 +116,18 @@ describe('sliding tabs', () => {
     layOut(signUp, () => ({ top: 0, left: 100, width: 100, height: 40 }));
     const bars = createTabBars();
     bars.sync();
-    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('0px');
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('0px');
     const click = new MouseEvent('click', { bubbles: true, cancelable: true });
     Object.defineProperty(click, 'target', { value: signUp });
     bars.onClick(click);
     await nextFrame();
-    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('100px');
-    expect(bar.dataset.lrExtTabsStill).toBeUndefined();
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('100px');
+    expect(bar.dataset.lnExtTabsStill).toBeUndefined();
     const back = new PageTransitionEvent('pageshow');
     Object.defineProperty(back, 'persisted', { value: true });
     bars.onPageShow(back);
     await nextFrame();
-    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('0px');
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('0px');
   });
 
   it('forgets a bar Lichess removed, and starts afresh if it comes back', () => {
@@ -148,8 +148,8 @@ describe('sliding tabs', () => {
     document.body.append(bar);
     bars.sync();
     // A first placement: nothing to slide from.
-    expect(bar.dataset.lrExtTabsStill).toBe('');
-    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('100px');
+    expect(bar.dataset.lnExtTabsStill).toBe('');
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('100px');
   });
 
   it('slides to the tab an opening’s panels mark selected', async () => {
@@ -164,29 +164,29 @@ describe('sliding tabs', () => {
     layOut(games, () => ({ top: 0, left: 0, width: 100, height: 40 }));
     layOut(moves, () => ({ top: 0, left: 100, width: 100, height: 40 }));
     createTabBars().sync();
-    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('0px');
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('0px');
     games.setAttribute('aria-selected', 'false');
     moves.setAttribute('aria-selected', 'true');
     await nextFrame();
-    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('100px');
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('100px');
   });
 
   it('slides to the option a theme’s setting picks in the user menu', async () => {
     document.body.innerHTML =
-      '<div id="dasher_app"><div class="lr-ext-src-options">' +
+      '<div id="dasher_app"><div class="ln-ext-src-options">' +
       '<button class="active">Short</button><button>Wide</button></div></div>';
-    const [bar] = elements('.lr-ext-src-options');
-    const [short, wide] = elements('.lr-ext-src-options > button');
+    const [bar] = elements('.ln-ext-src-options');
+    const [short, wide] = elements('.ln-ext-src-options > button');
     if (!bar || !short || !wide) throw new Error('no bar');
     layOut(bar, () => ({ top: 0, left: 0, width: 160, height: 30 }));
     layOut(short, () => ({ top: 0, left: 0, width: 80, height: 30 }));
     layOut(wide, () => ({ top: 0, left: 80, width: 80, height: 30 }));
     createTabBars().sync();
-    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('0px');
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('0px');
     short.classList.remove('active');
     wide.classList.add('active');
     await nextFrame();
-    expect(bar.style.getPropertyValue('--lr-ext-tab-x')).toBe('80px');
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('80px');
   });
 });
 

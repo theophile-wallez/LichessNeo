@@ -4,9 +4,9 @@
  * (pages/settings-coach.css), the one shown now pressed. The dialog's frame and backdrop
  * are every dialog's (pages/dialogs.css). */
 
-dialog.lr-ext-coach-picker {
-  --lr-ext-setting-color: var(--lr-ext-orange);
-  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mentoring.svg');
+dialog.ln-ext-coach-picker {
+  --ln-ext-setting-color: var(--ln-ext-orange);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mentoring.svg');
 
   box-sizing: border-box;
   width: min(760px, calc(100vw - 32px));
@@ -15,10 +15,10 @@ dialog.lr-ext-coach-picker {
   /* The card is the dialog's whole box, so a click outside it is the backdrop's. */
   padding: 0;
   overflow: hidden;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
 }
 
-.lr-ext-coach-picker__card {
+.ln-ext-coach-picker__card {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -28,37 +28,37 @@ dialog.lr-ext-coach-picker {
 }
 
 /* Centered: every dialog's own rule (pages/dialogs.css) pins it to the top. */
-html dialog.lr-ext-coach-picker {
+html dialog.ln-ext-coach-picker {
   margin: auto !important;
 }
 
-.lr-ext-coach-picker__head {
+.ln-ext-coach-picker__head {
   display: flex;
   flex: none;
   align-items: center;
   gap: 16px;
 }
 
-.lr-ext-coach-picker__head > div {
+.ln-ext-coach-picker__head > div {
   flex: 1;
   min-width: 0;
 }
 
-.lr-ext-coach-picker__title {
+.ln-ext-coach-picker__title {
   margin: 0;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 20px;
   font-weight: 800;
 }
 
-.lr-ext-coach-picker__body {
+.ln-ext-coach-picker__body {
   margin: 4px 0 0;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 14px;
   line-height: 1.4;
 }
 
-.lr-ext-coach-picker__close {
+.ln-ext-coach-picker__close {
   display: flex;
   flex: none;
   align-self: flex-start;
@@ -70,21 +70,21 @@ html dialog.lr-ext-coach-picker {
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
-.lr-ext-coach-picker__close svg {
+.ln-ext-coach-picker__close svg {
   width: 20px;
   height: 20px;
 }
 
-.lr-ext-coach-picker__close:hover {
-  background: var(--lr-ext-lift-8);
-  color: var(--lr-ext-text-strong);
+.ln-ext-coach-picker__close:hover {
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
 }
 
 /* Rows of seven, the animals first, as in the settings; the grid scrolls on a short window. */
-.lr-ext-coach-picker__grid {
+.ln-ext-coach-picker__grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 10px;
@@ -95,21 +95,21 @@ html dialog.lr-ext-coach-picker {
 }
 
 @media (max-width: 640px) {
-  .lr-ext-coach-picker__card {
+  .ln-ext-coach-picker__card {
     gap: 14px;
     padding: 16px;
   }
 
-  .lr-ext-coach-picker__head .lr-ext-setting__icon {
+  .ln-ext-coach-picker__head .ln-ext-setting__icon {
     display: none;
   }
 
-  .lr-ext-coach-picker__grid {
+  .ln-ext-coach-picker__grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
   }
 
-  .lr-ext-coach-picker__grid .lr-ext-coach-choice {
+  .ln-ext-coach-picker__grid .ln-ext-coach-choice {
     padding-inline: 4px;
     font-size: 12px;
   }

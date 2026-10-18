@@ -14,7 +14,7 @@ import { readSaying } from './saying.ts';
 // Lichess redraws the panel, so the coach is ours, at its end, laid out in
 // its place by the stylesheet.
 
-const REACT = 'lr-ext-coach__avatar--react';
+const REACT = 'ln-ext-coach__avatar--react';
 // The coach starts once the panel has settled.
 const TYPE_DELAY_MS = 150;
 
@@ -26,24 +26,24 @@ interface LearnCoach {
 }
 
 function build(): LearnCoach {
-  const root = createElement('div', { className: 'lr-ext-learn-coach' });
+  const root = createElement('div', { className: 'ln-ext-learn-coach' });
   const avatar = createElement('span', {
-    className: 'lr-ext-coach__avatar',
+    className: 'ln-ext-coach__avatar',
     attrs: { 'aria-hidden': 'true' },
   });
-  avatar.append(createElement('span', { className: 'lr-ext-coach__face' }));
-  const words = createElement('p', { className: 'lr-ext-bubble__title' });
-  const bubble = createElement('div', { className: 'lr-ext-bubble' });
+  avatar.append(createElement('span', { className: 'ln-ext-coach__face' }));
+  const words = createElement('p', { className: 'ln-ext-bubble__title' });
+  const bubble = createElement('div', { className: 'ln-ext-bubble' });
   bubble.append(words);
   root.append(avatar, bubble);
   const coach = chosenCoach();
-  setData(avatar, 'lrExtCoachId', String(coach));
-  setData(avatar, 'lrExtMood', 'neutral');
+  setData(avatar, 'lnExtCoachId', String(coach));
+  setData(avatar, 'lnExtMood', 'neutral');
   const talk = (mood: CoachMood, talking: boolean): void => {
-    setData(avatar, 'lrExtMood', mood);
+    setData(avatar, 'lnExtMood', mood);
     showCoach({ coach, mood, talking });
   };
-  const voice = createVoice(words, { talk, emptyClass: 'lr-ext-bubble__title--empty' });
+  const voice = createVoice(words, { talk, emptyClass: 'ln-ext-bubble__title--empty' });
   return { root, avatar, voice, said: '' };
 }
 
@@ -69,7 +69,7 @@ function sync(): void {
   const coach = coaches.get(ownRoot(table).element);
   if (!coach || coach.said === saying.key) return;
   coach.said = saying.key;
-  setData(table, 'lrExtLearnCoach', '');
+  setData(table, 'lnExtLearnCoach', '');
   coach.voice.typeOut(saying.text, saying.mood, TYPE_DELAY_MS);
   if (saying.mood !== 'neutral') react(coach.avatar);
 }

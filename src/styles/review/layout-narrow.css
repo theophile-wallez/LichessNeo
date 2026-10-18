@@ -5,126 +5,126 @@
    summary, or the coach over the graph), the moves after it. */
 
 @media (max-width: 1019.98px) {
-  html.lr-ext-review main.analyse {
-    --lr-ext-review-graph: 96px;
-    --lr-ext-review-moments: 58px;
+  html.ln-ext-review main.analyse {
+    --ln-ext-review-graph: 96px;
+    --ln-ext-review-moments: 58px;
   }
 
   /* ---- Eval strip --- */
 
-  html.lr-ext-evalbar-on main.analyse {
-    --lr-ext-strip: 22px;
+  html.ln-ext-evalbar-on main.analyse {
+    --ln-ext-strip: 22px;
   }
 
   /* The desktop's bar turned on its side: it stays one box, which the review fills as it
      does upright, laid out tall and turned a quarter. White's share from the left. */
-  #lr-ext-evalbar {
-    --lr-ext-strip-h: 16px;
+  #ln-ext-evalbar {
+    --ln-ext-strip-h: 16px;
     justify-self: start;
     align-self: start;
-    width: var(--lr-ext-strip-h);
-    height: var(--lr-ext-board);
+    width: var(--ln-ext-strip-h);
+    height: var(--ln-ext-board);
     margin: 0;
     border-radius: 4px;
     transform-origin: 0 0;
-    transform: translateY(var(--lr-ext-strip-h)) rotate(-90deg);
+    transform: translateY(var(--ln-ext-strip-h)) rotate(-90deg);
   }
 
-  #lr-ext-evalbar .lr-ext-evalbar__fill {
+  #ln-ext-evalbar .ln-ext-evalbar__fill {
     top: 0;
     bottom: auto;
   }
 
   /* Upright again once turned. */
-  #lr-ext-evalbar .lr-ext-evalbar__label {
+  #ln-ext-evalbar .ln-ext-evalbar__label {
     left: 0;
     right: 0;
-    line-height: var(--lr-ext-strip-h);
+    line-height: var(--ln-ext-strip-h);
     writing-mode: vertical-rl;
   }
 
-  #lr-ext-evalbar .lr-ext-evalbar__label--white {
+  #ln-ext-evalbar .ln-ext-evalbar__label--white {
     top: 6px;
     bottom: auto;
   }
 
-  #lr-ext-evalbar .lr-ext-evalbar__label--black {
+  #ln-ext-evalbar .ln-ext-evalbar__label--black {
     top: auto;
     bottom: 6px;
   }
 
   /* ---- Panel --- */
 
-  #lr-ext-review {
+  #ln-ext-review {
     grid-area: rtop;
     margin: 12px 0 0;
     overflow: visible;
     border-radius: 10px;
   }
 
-  html.lr-ext-review-normal #lr-ext-review {
+  html.ln-ext-review-normal #ln-ext-review {
     border-top: none;
     border-radius: 10px;
   }
 
-  #lr-ext-review .lr-ext-review__head {
+  #ln-ext-review .ln-ext-review__head {
     border-radius: 10px 10px 0 0;
   }
 
   /* The page scrolls, not the panel's parts. */
-  #lr-ext-review .lr-ext-review__body {
+  #ln-ext-review .ln-ext-review__body {
     flex: none;
     overflow: visible;
   }
 
-  .lr-ext-review__top + .lr-ext-review__body {
+  .ln-ext-review__top + .ln-ext-review__body {
     padding: 0 12px 12px;
   }
 
   /* The summary's buttons stay at the screen's foot while the summary is in view. */
-  html.lr-ext-review-summary #lr-ext-review .lr-ext-review__foot {
+  html.ln-ext-review-summary #ln-ext-review .ln-ext-review__foot {
     position: sticky;
     bottom: 0;
     z-index: 2;
     border-radius: 0 0 10px 10px;
-    background: var(--lr-ext-bg-panel);
-    box-shadow: 0 -8px 16px -12px var(--lr-ext-shade-50);
+    background: var(--ln-ext-bg-panel);
+    box-shadow: 0 -8px 16px -12px var(--ln-ext-shade-50);
   }
 
   /* The coach's card grows to its words rather than scroll them: the page scrolls. The
      coach still stands on its bottom edge. */
-  #lr-ext-review .lr-ext-coach {
+  #ln-ext-review .ln-ext-coach {
     height: auto;
     min-height: 136px;
   }
 
   /* A phone's card leaves the verdict a third of its width: the scores go under it. */
-  @container lr-ext-review (max-width: 440px) {
-    #lr-ext-review .lr-ext-bubble__row {
+  @container ln-ext-review (max-width: 440px) {
+    #ln-ext-review .ln-ext-bubble__row {
       flex-wrap: wrap;
       row-gap: 6px;
     }
 
-    #lr-ext-review .lr-ext-bubble__title {
+    #ln-ext-review .ln-ext-bubble__title {
       flex-basis: calc(100% - 30px);
     }
   }
 
   /* The review hides what it takes the place of, as on the desktop (layout.css). */
-  html.lr-ext-review-summary main.analyse > :is(.analyse__tools, .analyse__controls, .mchat),
-  html.lr-ext-review-moves main.analyse > :is(.analyse__controls, .mchat),
-  html.lr-ext-review-moves
+  html.ln-ext-review-summary main.analyse > :is(.analyse__tools, .analyse__controls, .mchat),
+  html.ln-ext-review-moves main.analyse > :is(.analyse__controls, .mchat),
+  html.ln-ext-review-moves
     main.analyse
     .analyse__tools
     > :is(.ceval, .pv_box, .explorer-box, .analyse__fork),
-  html.lr-ext-review:not(.lr-ext-review-moves) :is(#lr-ext-review-graph, #lr-ext-review-controls) {
+  html.ln-ext-review:not(.ln-ext-review-moves) :is(#ln-ext-review-graph, #ln-ext-review-controls) {
     display: none !important;
   }
 
   /* ---- Controls --- */
 
   /* Right under the board, in thumb's reach, as Lichess's are. */
-  #lr-ext-review-controls {
+  #ln-ext-review-controls {
     grid-area: rctrl;
     gap: 6px;
     height: 60px;
@@ -132,6 +132,6 @@
     padding: 6px;
     border-top: none;
     border-radius: 10px;
-    background: var(--lr-ext-bg-panel);
+    background: var(--ln-ext-bg-panel);
   }
 }

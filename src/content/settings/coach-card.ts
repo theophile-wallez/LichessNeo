@@ -14,18 +14,18 @@ import { buildSwitchList } from './switch-list.ts';
 // (#shared/coach.ts): the review, the puzzles, the drills. Under it, the
 // coach's switches: its 3D, and its place on the analysis board.
 
-const CARD = html`<div class="lr-ext-coach-pick__head">
-    <span class="lr-ext-setting__icon" aria-hidden="true"></span>
+const CARD = html`<div class="ln-ext-coach-pick__head">
+    <span class="ln-ext-setting__icon" aria-hidden="true"></span>
     <div>
-      <h2 class="lr-ext-setting__title">${message('coachPickTitle')}</h2>
-      <p class="lr-ext-setting__body">${message('coachPickBody')}</p>
+      <h2 class="ln-ext-setting__title">${message('coachPickTitle')}</h2>
+      <p class="ln-ext-setting__body">${message('coachPickBody')}</p>
     </div>
   </div>
-  <div class="lr-ext-coach-pick__stage">
-    <span class="lr-ext-coach-pick__mascot" aria-hidden="true"></span>
-    <p class="lr-ext-coach-pick__bubble" aria-live="polite"></p>
+  <div class="ln-ext-coach-pick__stage">
+    <span class="ln-ext-coach-pick__mascot" aria-hidden="true"></span>
+    <p class="ln-ext-coach-pick__bubble" aria-live="polite"></p>
   </div>
-  <div class="lr-ext-coach-pick__grid">${coachChoices()}</div>`;
+  <div class="ln-ext-coach-pick__grid">${coachChoices()}</div>`;
 
 export interface CoachCard {
   readonly element: HTMLElement;
@@ -34,15 +34,15 @@ export interface CoachCard {
 }
 
 function showPick(card: HTMLElement, coach: number): void {
-  const mascot = queryOne(card, '.lr-ext-coach-pick__mascot', HTMLElement);
-  if (mascot) setData(mascot, 'lrExtAvatarCoach', String(coach));
-  for (const choice of queryAll(card, '.lr-ext-coach-choice', HTMLElement)) {
-    const pressed = String(choice.dataset.lrExtCoachChoice === String(coach));
+  const mascot = queryOne(card, '.ln-ext-coach-pick__mascot', HTMLElement);
+  if (mascot) setData(mascot, 'lnExtAvatarCoach', String(coach));
+  for (const choice of queryAll(card, '.ln-ext-coach-choice', HTMLElement)) {
+    const pressed = String(choice.dataset.lnExtCoachChoice === String(coach));
     if (choice.getAttribute('aria-pressed') !== pressed)
       choice.setAttribute('aria-pressed', pressed);
   }
   // A new bubble each time, so it pops in again.
-  const bubble = queryOne(card, '.lr-ext-coach-pick__bubble', HTMLElement);
+  const bubble = queryOne(card, '.ln-ext-coach-pick__bubble', HTMLElement);
   bubble?.replaceChildren(
     createElement('span', { text: message('coachPickHello', coachName(coach)) }),
   );
@@ -50,19 +50,19 @@ function showPick(card: HTMLElement, coach: number): void {
 
 /** The card, its coach live only while its page shows. */
 export function buildCoachCard(): CoachCard {
-  const card = createElement('section', { className: 'lr-ext-coach-pick' });
+  const card = createElement('section', { className: 'ln-ext-coach-pick' });
   setHtml(card, CARD);
-  const mascot = queryOne(card, '.lr-ext-coach-pick__mascot', HTMLElement);
+  const mascot = queryOne(card, '.ln-ext-coach-pick__mascot', HTMLElement);
   let coach = pickCoach();
   let visible = false;
   // It comes in neutral, as its still looks, and smiles once drawn: the swap never shows.
   const spot = new MascotSpot({
-    className: 'lr-ext-coach-pick__live',
+    className: 'ln-ext-coach-pick__live',
     framing: 'bust',
     // Under the themes, it never holds up the page.
     whenIdle: true,
     onDrawn: holder => {
-      setData(holder, 'lrExtLive', '');
+      setData(holder, 'lnExtLive', '');
       spot.sync(holder, 'happy', { coach });
     },
   });
@@ -71,7 +71,7 @@ export function buildCoachCard(): CoachCard {
     visible = next;
     // The review may have changed the coach since, in this tab or another.
     if (visible) coach = pickCoach();
-    if (mascot && !visible) setData(mascot, 'lrExtLive', null);
+    if (mascot && !visible) setData(mascot, 'lnExtLive', null);
     showPick(card, coach);
     spot.sync(visible ? mascot : null, 'neutral', { coach });
   };
@@ -81,13 +81,13 @@ export function buildCoachCard(): CoachCard {
     if (coachMotion === moving) return;
     moving = coachMotion;
     if (!visible) return;
-    if (mascot) setData(mascot, 'lrExtLive', null);
+    if (mascot) setData(mascot, 'lnExtLive', null);
     spot.sync(null, 'neutral', { coach });
     spot.sync(mascot, 'neutral', { coach });
   });
   card.addEventListener('click', event => {
     const picked = CoachIdSchema.safeParse(
-      closestTo(event.target, '.lr-ext-coach-choice', HTMLElement)?.dataset.lrExtCoachChoice,
+      closestTo(event.target, '.ln-ext-coach-choice', HTMLElement)?.dataset.lnExtCoachChoice,
     );
     if (!picked.success || picked.data === coach) return;
     coach = picked.data;

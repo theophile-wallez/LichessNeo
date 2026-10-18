@@ -40,7 +40,7 @@ function addOverview(global: HTMLElement, data: Dashboard): void {
     queryOne(global, 'a.puzzle-dashboard__metric--fix[href]', HTMLAnchorElement)?.getAttribute(
       'href',
     ) ?? null;
-  const section = createElement('section', { className: 'lr-ext-pdash' });
+  const section = createElement('section', { className: 'ln-ext-pdash' });
   setHtml(section, html`${summaryMarkup({ view, tips, coachId, replayHref })}${chartMarkup(view)}`);
   global.after(section);
   startCoach(section, tips, coachId);
@@ -54,12 +54,12 @@ function addAreas(box: HTMLElement, data: Dashboard, shown: Shown): void {
   const kind = shown.view === 'strengths' ? 'strong' : 'weak';
   const coachId = pickCoach();
   const section = createElement('section', {
-    className: 'lr-ext-pdash lr-ext-pdash--areas',
-    attrs: { 'data-lr-ext-areas': kind },
+    className: 'ln-ext-pdash ln-ext-pdash--areas',
+    attrs: { 'data-ln-ext-areas': kind },
   });
   setHtml(section, areasMarkup(themes, kind, coachId));
   last.after(section);
-  const mascot = queryOne(section, '.lr-ext-pdash__mascot', HTMLElement);
+  const mascot = queryOne(section, '.ln-ext-pdash__mascot', HTMLElement);
   if (mascot) liveMascot(mascot, coachId, () => (kind === 'strong' ? 'happy' : 'doubt'));
   markIn();
 }

@@ -87,7 +87,7 @@ jobs:
         with:
           name: packages
           path: packages
-      - run: mkdir -p dist && unzip -q packages/LichessReimagined-v*[0-9].zip -d dist/chrome
+      - run: mkdir -p dist && unzip -q packages/LichessNeo-v*[0-9].zip -d dist/chrome
       - run: pnpm test:e2e
 
       - uses: actions/upload-artifact@v7
@@ -113,7 +113,7 @@ jobs:
         with:
           name: packages
           path: packages
-      - run: mkdir -p dist && unzip -q packages/LichessReimagined-v*-firefox.zip -d dist/firefox
+      - run: mkdir -p dist && unzip -q packages/LichessNeo-v*-firefox.zip -d dist/firefox
       # Downloads Firefox's current release, then loads the extension into it.
       - run: pnpm test:firefox
 

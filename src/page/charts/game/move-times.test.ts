@@ -34,7 +34,7 @@ describe('the move times', () => {
         { width: 200, height: 118 },
       ),
     );
-    const [white, black] = [...root.querySelectorAll('.lr-ext-gchart__bar')];
+    const [white, black] = [...root.querySelectorAll('.ln-ext-gchart__bar')];
     const middle = 18 + 50;
     expect(Number(white?.getAttribute('y')) + Number(white?.getAttribute('height'))).toBe(middle);
     expect(Number(black?.getAttribute('y'))).toBe(middle);

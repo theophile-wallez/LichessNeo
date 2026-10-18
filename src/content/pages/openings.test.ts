@@ -21,11 +21,11 @@ afterEach(() => {
 
 const shares = (): string[] =>
   queryAll(document, '.result-bar > span', HTMLElement).map(part =>
-    part.style.getPropertyValue('--lr-ext-share'),
+    part.style.getPropertyValue('--ln-ext-share'),
   );
 
 const names = (): (string | undefined)[] =>
-  queryAll(document, '.opening__next__name', HTMLElement).map(name => name.dataset.lrExtName);
+  queryAll(document, '.opening__next__name', HTMLElement).map(name => name.dataset.lnExtName);
 
 describe('a result bar’s share', () => {
   it.each([

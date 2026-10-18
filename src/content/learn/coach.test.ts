@@ -12,14 +12,14 @@ const TICK_MS = 250;
 
 beforeAll(() => {
   vi.useFakeTimers();
-  document.documentElement.dataset.lrExtCoach = '3';
+  document.documentElement.dataset.lnExtCoach = '3';
   learnCoach.start();
   startSyncLoop();
 });
 
 afterAll(() => {
   vi.useRealTimers();
-  delete document.documentElement.dataset.lrExtCoach;
+  delete document.documentElement.dataset.lnExtCoach;
 });
 
 beforeEach(() => {
@@ -37,10 +37,10 @@ const panel = (): HTMLElement => {
 };
 
 const avatarOf = (coach: Element | null): HTMLElement | null =>
-  coach && queryOne(coach, '.lr-ext-coach__avatar', HTMLElement);
+  coach && queryOne(coach, '.ln-ext-coach__avatar', HTMLElement);
 
 const words = (): string =>
-  [...panel().querySelectorAll('.lr-ext-w--in')].map(word => word.textContent).join('');
+  [...panel().querySelectorAll('.ln-ext-w--in')].map(word => word.textContent).join('');
 
 /** Lets the coach start and type `text` out. */
 function waitForWords(text: string): void {
@@ -50,17 +50,17 @@ function waitForWords(text: string): void {
 describe('the Learn coach', () => {
   it('says the level’s goal in its card, at the panel’s end, in the coach picked', () => {
     waitForWords('Grab the star!');
-    const coach = panel().querySelector('.lr-ext-learn-coach');
+    const coach = panel().querySelector('.ln-ext-learn-coach');
     expect(panel().lastElementChild).toBe(coach);
-    expect(panel().dataset.lrExtLearnCoach).toBe('');
-    expect(avatarOf(coach)?.dataset.lrExtCoachId).toBe('3');
+    expect(panel().dataset.lnExtLearnCoach).toBe('');
+    expect(avatarOf(coach)?.dataset.lnExtCoachId).toBe('3');
     expect(words()).toBe('Grab the star!');
     expect(showCoach).toHaveBeenCalledWith({ coach: 3, mood: 'neutral', talking: true });
   });
 
   it('types once per saying, again when the level ends, with the mood it ends in', () => {
     waitForWords('Grab the star!');
-    const coach = panel().querySelector('.lr-ext-learn-coach');
+    const coach = panel().querySelector('.ln-ext-learn-coach');
     vi.mocked(showCoach).mockClear();
     vi.advanceTimersByTime(TICK_MS * 4);
     expect(showCoach).not.toHaveBeenCalled();
@@ -69,16 +69,16 @@ describe('the Learn coach', () => {
       .querySelector('.wrap')
       ?.insertAdjacentHTML('beforeend', '<div class="result failed"><h2>Puzzle failed!</h2></div>');
     waitForWords('Puzzle failed!');
-    expect(panel().querySelector('.lr-ext-learn-coach')).toBe(coach);
+    expect(panel().querySelector('.ln-ext-learn-coach')).toBe(coach);
     expect(words()).toBe('Puzzle failed!');
     const avatar = avatarOf(coach);
-    expect(avatar?.dataset.lrExtMood).toBe('worry');
-    expect(avatar?.classList.contains('lr-ext-coach__avatar--react')).toBe(true);
+    expect(avatar?.dataset.lnExtMood).toBe('worry');
+    expect(avatar?.classList.contains('ln-ext-coach__avatar--react')).toBe(true);
   });
 
   it('stays off the other pages', () => {
     document.body.innerHTML = '<div class="learn__table"><div class="goal">Hi</div></div>';
     vi.advanceTimersByTime(TICK_MS * 2);
-    expect(document.querySelector('.lr-ext-learn-coach')).toBeNull();
+    expect(document.querySelector('.ln-ext-learn-coach')).toBeNull();
   });
 });

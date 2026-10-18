@@ -10,7 +10,7 @@ import { scoreMarkup } from './view.ts';
 // score beside its title, and a heading over each day's first one. Lichess
 // adds sessions as the page scrolls; those get theirs on the next tick.
 
-const NEW_SESSION = `${SESSION}:not([data-lr-ext-day])`;
+const NEW_SESSION = `${SESSION}:not([data-ln-ext-day])`;
 
 // The session before, past our headings; null for the first.
 function previousSession(session: HTMLElement): HTMLElement | null {
@@ -29,9 +29,9 @@ function decorate(session: HTMLElement, now: Date): void {
     if (score.firstElementChild) title.append(score.firstElementChild);
   }
   const day = at ? dayHeading(at, now, pageLocale()) : '';
-  if (day && previousSession(session)?.dataset.lrExtDay !== day)
-    session.before(createElement('h3', { className: 'lr-ext-phist__day', text: day }));
-  setData(session, 'lrExtDay', day);
+  if (day && previousSession(session)?.dataset.lnExtDay !== day)
+    session.before(createElement('h3', { className: 'ln-ext-phist__day', text: day }));
+  setData(session, 'lnExtDay', day);
 }
 
 /** Gives the sessions not seen yet their score and heading. */

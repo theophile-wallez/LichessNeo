@@ -51,7 +51,7 @@ function reviewIn(mode: Mode): { session: Session; redraws: () => number } {
 
 const pick = (coach: number): void => {
   window.dispatchEvent(
-    new MessageEvent('message', { data: { type: 'lr-ext:coach-picked', coach }, source: window }),
+    new MessageEvent('message', { data: { type: 'ln-ext:coach-picked', coach }, source: window }),
   );
 };
 
@@ -59,8 +59,8 @@ describe('the review’s coach', () => {
   it('opens the coach picker on a click, on the coach that shows', () => {
     const posted = relayMessages();
     const { session } = reviewIn('moves');
-    queryOne(session.elements.panel, '.lr-ext-coach__avatar', HTMLElement)?.click();
-    expect(posted).toContainEqual({ type: 'lr-ext:coach-picker', coach: 1 });
+    queryOne(session.elements.panel, '.ln-ext-coach__avatar', HTMLElement)?.click();
+    expect(posted).toContainEqual({ type: 'ln-ext:coach-picker', coach: 1 });
     expect(session.coach.id).toBe(1);
   });
 
@@ -69,9 +69,9 @@ describe('the review’s coach', () => {
     const { session, redraws } = reviewIn('moves');
     pick(4);
     expect(session.coach.id).toBe(4);
-    expect(session.coach.avatar?.dataset.lrExtCoachId).toBe('4');
+    expect(session.coach.avatar?.dataset.lnExtCoachId).toBe('4');
     expect(redraws()).toBe(1);
-    expect(posted).toContainEqual(expect.objectContaining({ type: 'lr-ext:coach', coach: 4 }));
+    expect(posted).toContainEqual(expect.objectContaining({ type: 'ln-ext:coach', coach: 4 }));
   });
 
   it('draws nothing again for the coach it already shows, nor in the summary', () => {

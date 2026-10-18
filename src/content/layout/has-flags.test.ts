@@ -10,7 +10,7 @@ describe('presentFlags', () => {
     document.body.innerHTML = page;
     expect(presentFlags(document)).toBe(has);
     syncHasFlags();
-    expect(root.dataset['lrExtHas']).toBe(has);
+    expect(root.dataset['lnExtHas']).toBe(has);
   });
 });
 
@@ -61,7 +61,7 @@ describe('hasFlags', () => {
     document.body.innerHTML =
       '<main class="round"><div class="cg-wrap"><cg-container></cg-container></div><div class="rclock"><div class="time"></div></div></main>';
     hasFlags.start();
-    expect(root.dataset['lrExtHas']).toBe('round');
+    expect(root.dataset['lnExtHas']).toBe('round');
 
     document.querySelector('cg-container')?.append(document.createElement('piece'));
     document.querySelector('.time')?.classList.add('hurry');
@@ -74,8 +74,8 @@ describe('hasFlags', () => {
     document.querySelector('main')?.classList.add('tv-single');
     await Promise.resolve();
     expect(frames).toHaveLength(1);
-    expect(root.dataset['lrExtHas']).toBe('round');
+    expect(root.dataset['lnExtHas']).toBe('round');
     for (const frame of frames.splice(0)) frame(0);
-    expect(root.dataset['lrExtHas']).toBe('round pocket');
+    expect(root.dataset['lnExtHas']).toBe('round pocket');
   });
 });

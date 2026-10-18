@@ -8,18 +8,18 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // editing it is safe.
 
 function labelCounts(table: HTMLTableElement): void {
-  setData(table, 'lrExtLabels', '');
+  setData(table, 'lnExtLabels', '');
   const names = [...(table.tHead?.rows[0]?.cells ?? [])].map(cell => cell.textContent.trim());
   for (const row of table.tBodies[0]?.rows ?? []) {
     for (const cell of row.cells) {
       const name = names[cell.cellIndex];
-      if (name) setData(cell, 'lrExtLabel', name);
+      if (name) setData(cell, 'lnExtLabel', name);
     }
   }
 }
 
 export function syncForumLabels(): void {
-  const tables = 'main.forum table.categs:not([data-lr-ext-labels])';
+  const tables = 'main.forum table.categs:not([data-ln-ext-labels])';
   for (const table of queryAll(document, tables, HTMLTableElement)) labelCounts(table);
 }
 

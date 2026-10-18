@@ -7,7 +7,7 @@ import { readStored, removeStored, StorageKey, writeStored } from '#shared/stora
 // unless the user resizes it (styles/board/pieces.css). Lichess's own zoom pref
 // may date from its old layout, so we ignore it: a drag on the board's handle
 // starts from our size, and the `---zoom` it sets on <body> is copied to
-// `--lr-ext-zoom` and stored under our own key. Dragging back to full size removes the key.
+// `--ln-ext-zoom` and stored under our own key. Dragging back to full size removes the key.
 
 const FULL = 100;
 
@@ -15,7 +15,7 @@ const FULL = 100;
 const StoredZoomSchema = z.pipe(z.string(), z.coerce.number());
 
 function setZoom(zoom: number): void {
-  setStyleProperty(document.documentElement, '--lr-ext-zoom', zoom >= FULL ? null : String(zoom));
+  setStyleProperty(document.documentElement, '--ln-ext-zoom', zoom >= FULL ? null : String(zoom));
 }
 
 function followDrag(): void {
@@ -33,7 +33,7 @@ let drag: MutationObserver | null = null;
 function startDrag(event: Event): void {
   if (drag || !closestTo(event.target, 'cg-resize', Element)) return;
   // In the capture phase, so it runs before Lichess's handler reads the zoom to start from.
-  const current = getComputedStyle(document.documentElement).getPropertyValue('--lr-ext-zoom');
+  const current = getComputedStyle(document.documentElement).getPropertyValue('--ln-ext-zoom');
   document.body.style.setProperty('---zoom', current === '' ? String(FULL) : current);
   const observer = new MutationObserver(followDrag);
   observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });

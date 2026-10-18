@@ -3,29 +3,29 @@
 
 /* A color per category, for the map and the stage list; "what next" (links out) in the accent. */
 #learn-app .categ {
-  --lr-ext-practice: var(--lr-ext-accent);
-  --lr-ext-practice-2: var(--lr-ext-accent-dim);
+  --ln-ext-practice: var(--ln-ext-accent);
+  --ln-ext-practice-2: var(--ln-ext-accent-dim);
 }
 
 #learn-app .categ:nth-of-type(5n + 1) {
-  --lr-ext-practice: #f06a4a;
-  --lr-ext-practice-2: var(--lr-ext-red-dark);
+  --ln-ext-practice: #f06a4a;
+  --ln-ext-practice-2: var(--ln-ext-red-dark);
 }
 #learn-app .categ:nth-of-type(5n + 2) {
-  --lr-ext-practice: #45a3f5;
-  --lr-ext-practice-2: var(--lr-ext-cyan-darker);
+  --ln-ext-practice: #45a3f5;
+  --ln-ext-practice-2: var(--ln-ext-cyan-darker);
 }
 #learn-app .categ:nth-of-type(5n + 3) {
-  --lr-ext-practice: #a98bf0;
-  --lr-ext-practice-2: var(--lr-ext-purple-dark);
+  --ln-ext-practice: #a98bf0;
+  --ln-ext-practice-2: var(--ln-ext-purple-dark);
 }
 #learn-app .categ:nth-of-type(5n + 4) {
-  --lr-ext-practice: #f5a93b;
-  --lr-ext-practice-2: var(--lr-ext-orange-darker);
+  --ln-ext-practice: #f5a93b;
+  --ln-ext-practice-2: var(--ln-ext-orange-darker);
 }
 #learn-app .categ.what_next {
-  --lr-ext-practice: var(--lr-ext-accent);
-  --lr-ext-practice-2: var(--lr-ext-accent-dim);
+  --ln-ext-practice: var(--ln-ext-accent);
+  --ln-ext-practice-2: var(--ln-ext-accent-dim);
 }
 
 /* ---- Side --- */
@@ -33,9 +33,9 @@
 .learn__side-home {
   gap: 14px !important;
   padding: 20px !important;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
 }
 
 /* The sidebar's Chess basics picture instead of Lichess's grey helmet, floating like
@@ -44,8 +44,8 @@
   content: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/chess-basics.webp');
   width: 96px !important;
   opacity: 1 !important;
-  filter: drop-shadow(0 8px 16px var(--lr-ext-shade-40)) !important;
-  animation: lr-ext-float 4s ease-in-out infinite !important;
+  filter: drop-shadow(0 8px 16px var(--ln-ext-shade-40)) !important;
+  animation: ln-ext-float 4s ease-in-out infinite !important;
 }
 
 .learn__side-home__header {
@@ -54,7 +54,7 @@
 
 .learn__side-home h1 {
   margin: 0 !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 30px !important;
   font-weight: 800 !important;
   line-height: 1.1;
@@ -62,7 +62,7 @@
 
 .learn__side-home h2 {
   margin: 4px 0 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 15px !important;
   font-weight: 600 !important;
 }
@@ -81,15 +81,15 @@
   height: 30px !important;
   border: none !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-lift-7) !important;
-  box-shadow: inset 0 1px 2px var(--lr-ext-shade-40) !important;
+  background: var(--ln-ext-lift-7) !important;
+  box-shadow: inset 0 1px 2px var(--ln-ext-shade-40) !important;
 }
 
 .learn__side-home .progress .bar {
   min-width: 30px;
   border-radius: 999px !important;
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: inset 0 1px 0 var(--lr-ext-accent);
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: inset 0 1px 0 var(--ln-ext-accent);
 }
 
 /* No progress yet: an empty track, not a min-width blob. */
@@ -99,10 +99,10 @@
 
 .learn__side-home .progress .text {
   line-height: 30px !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 800;
-  text-shadow: 0 1px 1px var(--lr-ext-shade-40);
+  text-shadow: 0 1px 1px var(--ln-ext-shade-40);
 }
 
 /* "Reset my progress": a quiet grey button, not a bare link. */
@@ -111,9 +111,9 @@
   padding: 8px 12px !important;
   border: none !important;
   border-radius: 7px !important;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   opacity: 1 !important;
@@ -121,8 +121,8 @@
 }
 
 .learn__side-home .actions .confirm:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* ---- Categories --- */
@@ -133,7 +133,7 @@
   align-items: center;
   gap: 10px;
   margin: 8px 0 0 !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 22px !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
@@ -148,8 +148,8 @@
   width: 12px;
   height: 12px;
   border-radius: 4px;
-  background: linear-gradient(135deg, var(--lr-ext-practice), var(--lr-ext-practice-2));
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-practice) 22%, transparent);
+  background: linear-gradient(135deg, var(--ln-ext-practice), var(--ln-ext-practice-2));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ln-ext-practice) 22%, transparent);
 }
 
 .learn-stages .categ_stages {
@@ -160,7 +160,7 @@
 
 .learn-stages .what_next > p {
   margin: 6px 0 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 15px !important;
   text-align: start !important;
   text-shadow: none !important;

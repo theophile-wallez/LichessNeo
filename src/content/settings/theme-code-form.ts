@@ -12,23 +12,23 @@ export interface CodeForm {
 }
 
 export function createCodeForm(onAdd: (theme: SharedTheme) => void): CodeForm {
-  const element = createElement('form', { className: 'lr-ext-theme-code' });
+  const element = createElement('form', { className: 'ln-ext-theme-code' });
   element.hidden = true;
   setHtml(
     element,
     html`<input
         type="text"
-        class="lr-ext-theme-code__field"
+        class="ln-ext-theme-code__field"
         spellcheck="false"
         autocomplete="off"
         placeholder="${message('themeCodePlaceholder')}"
         aria-label="${message('themeCodePlaceholder')}"
       />
       <button type="submit" class="button">${message('themeCodeAdd')}</button>
-      <p class="lr-ext-theme-code__error" hidden>${message('themeCodeInvalid')}</p>`,
+      <p class="ln-ext-theme-code__error" hidden>${message('themeCodeInvalid')}</p>`,
   );
-  const field = queryOne(element, '.lr-ext-theme-code__field', HTMLInputElement);
-  const error = queryOne(element, '.lr-ext-theme-code__error', HTMLElement);
+  const field = queryOne(element, '.ln-ext-theme-code__field', HTMLInputElement);
+  const error = queryOne(element, '.ln-ext-theme-code__error', HTMLElement);
   const close = (): void => {
     element.hidden = true;
     if (field) field.value = '';

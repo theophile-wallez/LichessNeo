@@ -11,7 +11,7 @@
 
 .board-editor .castling > strong {
   grid-column: 1 / -1;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -30,8 +30,8 @@
   height: 32px;
   margin: 0 !important;
   border-radius: 8px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text-dim);
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
@@ -42,17 +42,17 @@
 }
 
 .board-editor .castling label:hover {
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
 }
 
 .board-editor .castling label:has(> input:checked) {
-  background: color-mix(in srgb, var(--lr-ext-accent) 22%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 60%, transparent);
-  color: var(--lr-ext-text-strong);
+  background: color-mix(in srgb, var(--ln-ext-accent) 22%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 60%, transparent);
+  color: var(--ln-ext-text-strong);
 }
 
 .board-editor .castling label:has(> input:focus-visible) {
-  outline: 2px solid var(--lr-ext-accent);
+  outline: 2px solid var(--ln-ext-accent);
   outline-offset: 2px;
 }
 
@@ -72,7 +72,7 @@
   justify-content: space-between;
   gap: 10px;
   margin: 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 700;
 }
@@ -89,7 +89,7 @@
   gap: 10px;
   margin: 0 !important;
   padding: 12px 16px 14px !important;
-  border-top: 1px solid var(--lr-ext-border);
+  border-top: 1px solid var(--ln-ext-border);
   border-radius: 0 0 12px 12px;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .board-editor .copyables strong {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -135,11 +135,11 @@
 .board-editor .copyables > a {
   align-self: flex-start;
   margin-inline-start: 46px;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 12px;
   font-weight: 700;
 }
 
 .board-editor .copyables > a:hover {
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
 }

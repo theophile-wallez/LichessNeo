@@ -6,7 +6,7 @@ import { sameOffset, tabOffset, type TabBarKind, type TabOffset } from './tab-ba
 const BORDER_BOX: ResizeObserverOptions = { box: 'border-box' };
 
 // One tab bar. Its active tab's highlight is the bar's ::before, placed in
-// `--lr-ext-tab-{x,y,w,h}`; the bar is only marked once it's placed, so until
+// `--ln-ext-tab-{x,y,w,h}`; the bar is only marked once it's placed, so until
 // then (and with no active tab) the tab keeps its own highlight. It's placed
 // again when the bar or a child resizes, scrolls, or changes a tab, a radio's
 // check included (a property, which no observer sees).
@@ -63,7 +63,7 @@ export class TabBar {
       ? this.leaving
       : tabs.find(tab => tab.matches(this.kind.active));
     if (!item) {
-      setData(this.element, 'lrExtTabs', null);
+      setData(this.element, 'lnExtTabs', null);
       this.#item = null;
       return;
     }
@@ -79,12 +79,12 @@ export class TabBar {
     const [x, y, width, height] = offset;
     // Picking another tab slides; the same tab moved or resized jumps there.
     const slides = this.#item !== null && item !== this.#item;
-    setData(this.element, 'lrExtTabsStill', slides ? null : '');
-    setStyleProperty(this.element, '--lr-ext-tab-x', `${x}px`);
-    setStyleProperty(this.element, '--lr-ext-tab-y', `${y}px`);
-    setStyleProperty(this.element, '--lr-ext-tab-w', `${width}px`);
-    setStyleProperty(this.element, '--lr-ext-tab-h', `${height}px`);
-    setData(this.element, 'lrExtTabs', this.kind.look);
+    setData(this.element, 'lnExtTabsStill', slides ? null : '');
+    setStyleProperty(this.element, '--ln-ext-tab-x', `${x}px`);
+    setStyleProperty(this.element, '--ln-ext-tab-y', `${y}px`);
+    setStyleProperty(this.element, '--ln-ext-tab-w', `${width}px`);
+    setStyleProperty(this.element, '--ln-ext-tab-h', `${height}px`);
+    setData(this.element, 'lnExtTabs', this.kind.look);
     this.#item = item;
     this.#offset = offset;
   }

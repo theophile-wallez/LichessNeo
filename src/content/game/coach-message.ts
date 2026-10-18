@@ -8,15 +8,15 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // pieces. It's your turn!"), said by the coach in the Game Review's bubble
 // (styles/game/coach-message.css), or by the computer's robot in a game against
 // it. The stylesheet shows its still at once; the live one, built once the
-// page is idle, takes its place when first drawn (`data-lr-ext-live`). The
+// page is idle, takes its place when first drawn (`data-ln-ext-live`). The
 // message goes with the first move, and the mascot with it.
 
 const spot = new MascotSpot({
-  className: 'lr-ext-message-coach',
+  className: 'ln-ext-message-coach',
   framing: 'bust',
   greets: false,
   whenIdle: true,
-  onDrawn: message => setData(message, 'lrExtLive', ''),
+  onDrawn: message => setData(message, 'lnExtLive', ''),
 });
 let coach: number | null = null;
 
@@ -27,7 +27,7 @@ function sync(): void {
     return;
   }
   // Set by ai-players.ts in a game against the computer.
-  const level = Number(document.documentElement.dataset.lrExtAiLevel ?? 0);
+  const level = Number(document.documentElement.dataset.lnExtAiLevel ?? 0);
   coach ??= pickCoach();
   // Neutral, as its still: a happy mascot hops.
   spot.sync(message, 'neutral', level > 0 ? { computer: level } : { coach });

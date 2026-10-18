@@ -25,7 +25,7 @@ describe('home hero', () => {
     document.documentElement.lang = 'de';
     document.body.innerHTML = '<main class="lobby"></main>';
     homeHero.start();
-    expect(document.querySelector('.lr-ext-hero__title')?.textContent).toBe(
+    expect(document.querySelector('.ln-ext-hero__title')?.textContent).toBe(
       'Schach online spielen',
     );
   });

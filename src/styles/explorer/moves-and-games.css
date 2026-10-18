@@ -8,10 +8,10 @@
 .explorer-box .moves th {
   height: 28px;
   padding: 0 0 0 12px !important;
-  border-bottom: 1px solid var(--lr-ext-border);
+  border-bottom: 1px solid var(--ln-ext-border);
   background: none !important;
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 12px !important;
   font-weight: 600;
   line-height: 28px !important;
@@ -30,19 +30,19 @@
 .explorer-box .moves td:first-child {
   min-width: 36px;
   padding-left: 12px !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 15px;
   font-weight: 700;
   line-height: 36px !important;
 }
 
 .explorer-box .moves td:nth-child(2) {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px !important;
 }
 
 .explorer-box .moves td:nth-child(3) {
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 12px !important;
   font-weight: 700;
 }
@@ -53,17 +53,17 @@
 
 /* The total, on the header's darker shade. */
 .explorer-box .moves tbody tr.sum {
-  background: var(--lr-ext-bg-panel-dark) !important;
+  background: var(--ln-ext-bg-panel-dark) !important;
   font-weight: 700;
 }
 
 .explorer-box .moves tbody tr.sum td {
-  border-top: 1px solid var(--lr-ext-border);
+  border-top: 1px solid var(--ln-ext-border);
   backdrop-filter: none !important;
 }
 
 .explorer-box .moves tbody tr.sum td:first-child {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
 /* One rounded bar, split in three, the share written inside. */
@@ -72,7 +72,7 @@
   height: 20px;
   overflow: hidden;
   border-radius: 4px;
-  box-shadow: 0 1px 2px var(--lr-ext-shade-35);
+  box-shadow: 0 1px 2px var(--ln-ext-shade-35);
 }
 
 .explorer-box .bar span {
@@ -90,18 +90,18 @@
 }
 
 .explorer-box .bar .white {
-  background: var(--lr-ext-ex-white) !important;
-  color: var(--lr-ext-ink) !important;
+  background: var(--ln-ext-ex-white) !important;
+  color: var(--ln-ext-ink) !important;
 }
 
 .explorer-box .bar .draws {
-  background: var(--lr-ext-ex-draw) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-ex-draw) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 .explorer-box .bar .black {
-  background: var(--lr-ext-ex-black) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-ex-black) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 /* ---- Games --- */
@@ -126,7 +126,7 @@
 
 .explorer-box .games td.game-rating {
   width: 36px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
@@ -137,7 +137,7 @@
   align-items: center;
   gap: 7px;
   overflow: hidden;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-weight: 600;
   text-overflow: ellipsis;
 }
@@ -148,18 +148,18 @@
   width: 9px;
   height: 9px;
   border-radius: 2px;
-  background: var(--lr-ext-white);
+  background: var(--ln-ext-white);
   box-shadow: inset 0 0 0 1px #00000026;
 }
 
 .explorer-box .games td:not([class]) > span + span::before {
-  background: var(--lr-ext-ink);
+  background: var(--ln-ext-ink);
   box-shadow: inset 0 0 0 1px #ffffff33;
 }
 
 .explorer-box .games td.game-date {
   width: 58px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
   text-align: end;
@@ -187,35 +187,35 @@
 }
 
 .explorer-box :is(.games, .tablebase) result.white {
-  background: var(--lr-ext-ex-white) !important;
-  box-shadow: 0 1px 2px var(--lr-ext-shade-35) !important;
-  color: var(--lr-ext-ink) !important;
+  background: var(--ln-ext-ex-white) !important;
+  box-shadow: 0 1px 2px var(--ln-ext-shade-35) !important;
+  color: var(--ln-ext-ink) !important;
 }
 
 .explorer-box :is(.games, .tablebase) result.draws {
-  background: var(--lr-ext-ex-draw) !important;
-  box-shadow: 0 1px 2px var(--lr-ext-shade-35) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-ex-draw) !important;
+  box-shadow: 0 1px 2px var(--ln-ext-shade-35) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 .explorer-box :is(.games, .tablebase) result.black {
-  background: var(--lr-ext-ex-black) !important;
+  background: var(--ln-ext-ex-black) !important;
   box-shadow:
     inset 0 0 0 1px #ffffff14,
-    0 1px 2px var(--lr-ext-shade-35) !important;
-  color: var(--lr-ext-white) !important;
+    0 1px 2px var(--ln-ext-shade-35) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 /* In a study, a game opens a menu in its row: a card, not a green strip. */
 .explorer-box .game_menu {
   padding: 8px !important;
-  border-left: 3px solid var(--lr-ext-accent);
-  background: var(--lr-ext-bg-panel-dark) !important;
+  border-left: 3px solid var(--ln-ext-accent);
+  background: var(--ln-ext-bg-panel-dark) !important;
 }
 
 .explorer-box .game_menu .game_title {
   margin: 0 0 6px !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 700;
 }
 
@@ -229,16 +229,16 @@
   justify-content: center;
   padding: 6px 8px !important;
   border-radius: 5px;
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text) !important;
   font-weight: 700;
   text-align: center;
 }
 
 .explorer-box .game_menu .menu a:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* ---- Tablebase --- */
@@ -249,7 +249,7 @@
 }
 
 .explorer-box .tablebase td:first-child {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 15px !important;
   font-weight: 700;
 }

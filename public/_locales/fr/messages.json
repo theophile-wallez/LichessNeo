@@ -12,7 +12,7 @@
     "message": "Détails et réglages du puzzle"
   },
   "settingsLink": {
-    "message": "Lichess Reimagined"
+    "message": "Lichess Neo"
   },
   "settingsPagePersonalization": {
     "message": "Personnalisation"
@@ -39,7 +39,7 @@
     "message": "Les sons des coups et des parties."
   },
   "looksOurs": {
-    "message": "Lichess Reimagined"
+    "message": "Lichess Neo"
   },
   "looksClassic": {
     "message": "Classiques"
@@ -332,8 +332,8 @@
   "themeForDark": {
     "message": "$1, pour le mode sombre"
   },
-  "themeReimagined": {
-    "message": "Reimagined"
+  "themeNeo": {
+    "message": "Neo"
   },
   "themeLichess": {
     "message": "Lichess"

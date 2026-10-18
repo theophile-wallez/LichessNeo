@@ -15,7 +15,7 @@ export function cleanRatings(card: HTMLElement): void {
   for (const rating of queryAll(card, '.upt__info__ratings > span', HTMLElement)) {
     const text = ratingText(rating.textContent);
     if (rating.textContent !== text) rating.textContent = text;
-    setData(rating, 'lrExtRating', ratingState(text));
+    setData(rating, 'lnExtRating', ratingState(text));
   }
 }
 

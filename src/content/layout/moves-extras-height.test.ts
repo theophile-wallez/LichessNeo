@@ -32,8 +32,8 @@ describe('watchMovesExtras', () => {
     measureAs('#voice-bar', 38.4);
     measureAs('.crosstable', 61);
     tick();
-    expect(main()?.style.getPropertyValue('--lr-ext-voice-h')).toBe('39px');
-    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('61px');
+    expect(main()?.style.getPropertyValue('--ln-ext-voice-h')).toBe('39px');
+    expect(main()?.style.getPropertyValue('--ln-ext-crosstable-h')).toBe('61px');
   });
 
   it('follows a crosstable that grows, and drops what Lichess removed', () => {
@@ -44,8 +44,8 @@ describe('watchMovesExtras', () => {
     layout.resize();
     document.querySelector('#voice-bar')?.remove();
     tick();
-    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('80px');
-    expect(main()?.style.getPropertyValue('--lr-ext-voice-h')).toBe('');
+    expect(main()?.style.getPropertyValue('--ln-ext-crosstable-h')).toBe('80px');
+    expect(main()?.style.getPropertyValue('--ln-ext-voice-h')).toBe('');
   });
 
   it('measures the filled crosstable, not the empty one Lichess leaves at a game end', () => {
@@ -57,7 +57,7 @@ describe('watchMovesExtras', () => {
     if (filled)
       filled.getBoundingClientRect = () => rectBetween({ top: 0, left: 0, right: 10, bottom: 60 });
     tick();
-    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('60px');
+    expect(main()?.style.getPropertyValue('--ln-ext-crosstable-h')).toBe('60px');
   });
 
   it('writes nothing while the heights stay', () => {
@@ -79,10 +79,10 @@ describe('watchMovesExtras', () => {
     tick();
     measureAs('.crosstable', 80);
     tick();
-    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('58px');
+    expect(main()?.style.getPropertyValue('--ln-ext-crosstable-h')).toBe('58px');
     layout.resize();
     tick();
-    expect(main()?.style.getPropertyValue('--lr-ext-crosstable-h')).toBe('80px');
+    expect(main()?.style.getPropertyValue('--ln-ext-crosstable-h')).toBe('80px');
   });
 
   it('leaves other pages alone', () => {

@@ -16,7 +16,7 @@
     "description": "The puzzle page's cog, which opens the puzzle's details, its theme and the settings."
   },
   "settingsLink": {
-    "message": "Lichess Reimagined",
+    "message": "Lichess Neo",
     "description": "The account menu's link to the extension's settings."
   },
   "settingsPagePersonalization": {
@@ -52,7 +52,7 @@
     "description": "What the sounds card is for."
   },
   "looksOurs": {
-    "message": "Lichess Reimagined",
+    "message": "Lichess Neo",
     "description": "Over the extension's own boards, pieces or sounds, and the imported packs'."
   },
   "looksClassic": {
@@ -443,8 +443,8 @@
     "message": "$1, for the dark scheme",
     "description": "A theme's dark side, a button; $1 is the theme's name."
   },
-  "themeReimagined": {
-    "message": "Reimagined",
+  "themeNeo": {
+    "message": "Neo",
     "description": "The default color theme: neutral greys and a blue accent."
   },
   "themeLichess": {

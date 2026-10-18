@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { bundleCss } from './css-bundle.ts';
 import { tempDirs, writeFiles } from './testing.ts';
 
-const newDir = tempDirs('lr-ext-css-');
+const newDir = tempDirs('ln-ext-css-');
 
 async function fixture(files: Record<string, string>): Promise<string> {
   const dir = await newDir();

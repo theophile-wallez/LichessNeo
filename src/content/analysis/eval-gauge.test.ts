@@ -13,13 +13,13 @@ describe('eval gauge', () => {
     document.body.innerHTML = `<main class="puzzle"><div class="eval-gauge"></div><div class="ceval"><pearl>${score}</pearl></div></main>`;
     syncEvalGauge();
     const gauge = queryOne(document, '.eval-gauge', HTMLElement);
-    expect(gauge?.dataset.lrExtEval ?? null).toBe(label);
-    expect(gauge?.dataset.lrExtLead).toBe(lead);
+    expect(gauge?.dataset.lnExtEval ?? null).toBe(label);
+    expect(gauge?.dataset.lnExtLead).toBe(lead);
   });
 
   it('clears a label once the engine line is gone', () => {
     document.body.innerHTML =
-      '<main class="analyse"><div class="eval-gauge" data-lr-ext-eval="3.1" data-lr-ext-lead="black"></div></main>';
+      '<main class="analyse"><div class="eval-gauge" data-ln-ext-eval="3.1" data-ln-ext-lead="black"></div></main>';
     syncEvalGauge();
     expect(document.querySelector('.eval-gauge')?.outerHTML).toBe(legacy.cleared);
   });

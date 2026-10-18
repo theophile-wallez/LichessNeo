@@ -10,20 +10,20 @@ import type { BarPlayer } from '#shared/player-bar.ts';
 type Side = 'top' | 'bottom';
 
 function card(player: BarPlayer, side: Side): SafeHtml {
-  const kind = player.computer ? ' lr-ext-intro__card--computer' : '';
+  const kind = player.computer ? ' ln-ext-intro__card--computer' : '';
   const title =
     player.title === undefined
       ? ''
-      : html`<span class="lr-ext-intro__title">${player.title}</span>`;
+      : html`<span class="ln-ext-intro__title">${player.title}</span>`;
   const flag = flagImageUrl(player.flag);
   const details =
     player.rating === undefined && flag === undefined
       ? ''
-      : html`<span class="lr-ext-intro__details">${player.rating}${flag === undefined ? '' : html`<img class="lr-ext-intro__flag" src="${flag}" alt="">`}</span>`;
-  return html`<div class="lr-ext-intro__card lr-ext-intro__card--${side}${kind}">
-    <span class="lr-ext-intro__avatar"${avatarAttributes(player.user)}></span>
-    <span class="lr-ext-intro__who">
-      <span class="lr-ext-intro__name">${title}<span class="lr-ext-intro__username">${player.user === undefined ? player.name : shownName(player.user, player.name)}</span></span>
+      : html`<span class="ln-ext-intro__details">${player.rating}${flag === undefined ? '' : html`<img class="ln-ext-intro__flag" src="${flag}" alt="">`}</span>`;
+  return html`<div class="ln-ext-intro__card ln-ext-intro__card--${side}${kind}">
+    <span class="ln-ext-intro__avatar"${avatarAttributes(player.user)}></span>
+    <span class="ln-ext-intro__who">
+      <span class="ln-ext-intro__name">${title}<span class="ln-ext-intro__username">${player.user === undefined ? player.name : shownName(player.user, player.name)}</span></span>
       ${details}
     </span>
   </div>`;
@@ -35,9 +35,9 @@ export interface BarPlayers {
 }
 
 export const introMarkup = ({ top, bottom }: BarPlayers): SafeHtml =>
-  html`<div class="lr-ext-intro__drop">${card(top, 'top')}</div>
-    <div class="lr-ext-intro__stay">${card(bottom, 'bottom')}</div>
-    <span class="lr-ext-intro__vs"><span class="lr-ext-intro__swords"></span><span class="lr-ext-intro__versus">VS</span></span>`;
+  html`<div class="ln-ext-intro__drop">${card(top, 'top')}</div>
+    <div class="ln-ext-intro__stay">${card(bottom, 'bottom')}</div>
+    <span class="ln-ext-intro__vs"><span class="ln-ext-intro__swords"></span><span class="ln-ext-intro__versus">VS</span></span>`;
 
 // The dropped board's squares, light then dark, in colors no board of
 // Lichess's has, so it stands out from the one under it.

@@ -23,12 +23,12 @@ const size = { width: 640, height: 360 };
 // The element sizes used when the original's output was recorded.
 function stubLayout() {
   return fakeLayout((element, metric) => {
-    const plot = element.matches('.lr-ext-dist__plot');
+    const plot = element.matches('.ln-ext-dist__plot');
     if (metric === 'clientWidth') return plot ? size.width : 0;
     if (metric === 'clientHeight') return plot ? size.height : 0;
     if (metric !== 'offsetWidth') return 0;
-    if (element.matches('.lr-ext-rchart__tip')) return 120;
-    return element.matches('.lr-ext-dist__mark') ? 60 + 5 * element.textContent.length : 0;
+    if (element.matches('.ln-ext-rchart__tip')) return 120;
+    return element.matches('.ln-ext-dist__mark') ? 60 + 5 * element.textContent.length : 0;
   });
 }
 
@@ -147,7 +147,7 @@ describe('the distribution chart', () => {
     },
   );
 
-  it('prefixes its data attributes and CSS variables with lr-ext', () => {
+  it('prefixes its data attributes and CSS variables with ln-ext', () => {
     const [scenario] = legacyChart.scenarios;
     if (!scenario) throw new Error('no scenario');
     const { resize } = stubLayout();
@@ -157,24 +157,24 @@ describe('the distribution chart', () => {
     document
       .querySelector('#rating_distribution svg')
       ?.dispatchEvent(new PointerEvent('pointermove', { clientX: 300 }));
-    const chart = document.querySelector('.lr-ext-dist');
+    const chart = document.querySelector('.ln-ext-dist');
     if (!chart) throw new Error('no chart');
     expect(unprefixedNames(chart)).toEqual([]);
     // The stylesheets and chart.ts read these names: check they're on the right elements.
-    const bars = queryAll(chart, '.lr-ext-dist__bar', SVGElement);
+    const bars = queryAll(chart, '.ln-ext-dist__bar', SVGElement);
     expect(bars.length).toBe(scenario.json.freq.length);
     for (const [i, bar] of bars.entries()) {
-      expect(bar.dataset.lrExtBar).toBe(String(i));
-      expect(bar.getAttribute('style')).toBe(`--lr-ext-bar-index:${i}`);
+      expect(bar.dataset.lnExtBar).toBe(String(i));
+      expect(bar.getAttribute('style')).toBe(`--ln-ext-bar-index:${i}`);
     }
-    const markers = chart.querySelectorAll('.lr-ext-dist__mline, .lr-ext-dist__mark');
+    const markers = chart.querySelectorAll('.ln-ext-dist__mline, .ln-ext-dist__mark');
     expect(markers).toHaveLength(4);
     for (const marker of markers)
-      expect(marker.getAttribute('style')).toMatch(/^--lr-ext-marker-color: ?#[0-9a-f]{6}\b/);
-    const series = chart.querySelectorAll('.lr-ext-dist__chip, .lr-ext-rchart__tiprow');
+      expect(marker.getAttribute('style')).toMatch(/^--ln-ext-marker-color: ?#[0-9a-f]{6}\b/);
+    const series = chart.querySelectorAll('.ln-ext-dist__chip, .ln-ext-rchart__tiprow');
     expect(series).toHaveLength(4);
     for (const element of series)
-      expect(element.getAttribute('style')).toMatch(/^--lr-ext-series-color:#[0-9a-f]{6}$/);
+      expect(element.getAttribute('style')).toMatch(/^--ln-ext-series-color:#[0-9a-f]{6}$/);
   });
 
   it.each(legacy.rejected.map(page => [page.name, page]))(

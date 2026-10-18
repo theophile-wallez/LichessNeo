@@ -81,5 +81,5 @@
       "lead": "white"
     }
   ],
-  "cleared": "<div class=\"eval-gauge\" data-lr-ext-eval=\"\" data-lr-ext-lead=\"white\"></div>"
+  "cleared": "<div class=\"eval-gauge\" data-ln-ext-eval=\"\" data-ln-ext-lead=\"white\"></div>"
 }

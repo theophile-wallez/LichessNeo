@@ -18,18 +18,18 @@ main.forum-topic .forum-post {
   align-content: start;
   column-gap: 16px;
   padding: 18px 20px 14px !important;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 14px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
   font-size: 15px !important;
-  animation: lr-ext-forum-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation: ln-ext-forum-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   animation-delay: calc(min(sibling-index(), 8) * 40ms);
 }
 
 /* Target of a link (#postId): a glow in the category's color. */
 main.forum-topic .forum-post:target {
-  border-color: color-mix(in srgb, var(--lr-ext-fc) 60%, transparent) !important;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-fc) 18%, transparent);
+  border-color: color-mix(in srgb, var(--ln-ext-fc) 60%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ln-ext-fc) 18%, transparent);
 }
 
 main.forum-topic .forum-post > * {
@@ -45,14 +45,14 @@ main.forum-topic .forum-post::before {
   width: 48px;
   height: 48px;
   border-radius: 8px;
-  background: var(--lr-ext-avatar);
+  background: var(--ln-ext-avatar);
 }
 
 /* The topic's author: a ring in the category's color. */
 main.forum-topic .forum-post:has(.author--op)::before {
   box-shadow:
-    0 0 0 2px var(--lr-ext-bg-panel),
-    0 0 0 4px var(--lr-ext-fc);
+    0 0 0 2px var(--ln-ext-bg-panel),
+    0 0 0 4px var(--ln-ext-fc);
 }
 
 main.forum-topic .forum-post.erased::before {
@@ -72,19 +72,19 @@ main.forum-topic .forum-post__metas .author {
   margin: 0 !important;
   padding: 0 !important;
   background: none !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 16px !important;
   font-weight: 800 !important;
 }
 
 main.forum-topic .forum-post__metas .author:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 main.forum-topic .forum-post__metas a.author--op {
   padding: 1px 9px !important;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-fc) 18%, transparent) !important;
+  background: color-mix(in srgb, var(--ln-ext-fc) 18%, transparent) !important;
 }
 
 main.forum-topic .forum-post__metas .author .uflair {
@@ -108,9 +108,9 @@ main.forum-topic .forum-post__metas .author.online .line {
   width: 14px;
   height: 14px;
   margin: 0 !important;
-  border: 2px solid var(--lr-ext-bg-panel);
+  border: 2px solid var(--ln-ext-bg-panel);
   border-radius: 50%;
-  background: var(--lr-ext-good);
+  background: var(--ln-ext-good);
   font-size: 0;
 }
 
@@ -121,12 +121,12 @@ main.forum-topic .forum-post__metas .author.online .line::before {
 /* The post's date (and "edited"), then the buttons pushed to the end. */
 main.forum-topic .forum-post__metas > div > a:not(.author) {
   margin-inline-end: auto;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px;
 }
 
 main.forum-topic .forum-post__metas > div > a:not(.author):hover {
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
 }
 
 main.forum-topic .forum-post__metas time {
@@ -152,9 +152,9 @@ main.forum-topic .button.forum-post__button {
   height: 30px;
   padding: 0 10px !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-lift-4) !important;
+  background: var(--ln-ext-lift-4) !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
 }
@@ -164,26 +164,26 @@ main.forum-topic .button.forum-post__button::before {
 }
 
 main.forum-topic .button.forum-post__button:hover {
-  background: var(--lr-ext-bg-raised) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.forum-topic .button.forum-post__button.delete:hover,
 main.forum-topic .button.forum-post__button.report:hover {
-  color: var(--lr-ext-red) !important;
+  color: var(--ln-ext-red) !important;
 }
 
 /* ---- Message --- */
 
 main.forum-topic .forum-post__message {
   margin: 6px 0 8px !important;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 15px !important;
   line-height: 1.6;
 }
 
 main.forum-topic .forum-post.erased .forum-post__message {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   text-align: start;
 }
 
@@ -191,7 +191,7 @@ main.forum-topic .forum-post__message :is(h1, h2, h3, h4) {
   margin: 0.9em 0 0.35em !important;
   padding: 0 !important;
   border: none !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 800 !important;
   line-height: 1.3;
 }
@@ -222,7 +222,7 @@ main.forum-topic .forum-post__message p + p {
 }
 
 main.forum-topic .forum-post__message a {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
   font-weight: 600;
 }
 
@@ -234,10 +234,10 @@ main.forum-topic .forum-post__message blockquote {
   margin: 0.6em 0 !important;
   padding: 10px 16px !important;
   border: none !important;
-  border-inline-start: 3px solid var(--lr-ext-fc) !important;
+  border-inline-start: 3px solid var(--ln-ext-fc) !important;
   border-radius: 0 10px 10px 0;
-  background: var(--lr-ext-lift-3);
-  color: var(--lr-ext-neutral-13);
+  background: var(--ln-ext-lift-3);
+  color: var(--ln-ext-neutral-13);
 }
 
 html[dir='rtl'] main.forum-topic .forum-post__message blockquote {
@@ -245,20 +245,20 @@ html[dir='rtl'] main.forum-topic .forum-post__message blockquote {
 }
 
 main.forum-topic .forum-post__message blockquote blockquote {
-  background: var(--lr-ext-lift-3);
+  background: var(--ln-ext-lift-3);
 }
 
 main.forum-topic .forum-post__message :not(pre) > code {
   padding: 2px 6px;
   border-radius: 4px;
-  background: var(--lr-ext-lift-7);
+  background: var(--ln-ext-lift-7);
   font-size: 0.9em;
 }
 
 main.forum-topic .forum-post__message pre {
   padding: 12px 14px;
   border-radius: 8px;
-  background: var(--lr-ext-bg-panel-dark);
+  background: var(--ln-ext-bg-panel-dark);
 }
 
 main.forum-topic .forum-post__message :is(ul, ol) {
@@ -267,7 +267,7 @@ main.forum-topic .forum-post__message :is(ul, ol) {
 }
 
 main.forum-topic .forum-post__message li::marker {
-  color: var(--lr-ext-fc);
+  color: var(--ln-ext-fc);
 }
 
 main.forum-topic .forum-post__message img {
@@ -277,7 +277,7 @@ main.forum-topic .forum-post__message img {
 main.forum-topic .forum-post__message hr {
   margin: 1.2em 0;
   border: none;
-  border-top: 1px solid var(--lr-ext-lift-8);
+  border-top: 1px solid var(--ln-ext-lift-8);
 }
 
 /* Markdown tables come with bare cells: give them rows, and let a wide table
@@ -294,18 +294,18 @@ main.forum-topic .forum-post__message table {
 
 main.forum-topic .forum-post__message :is(th, td) {
   padding: 8px 14px;
-  border-bottom: 1px solid var(--lr-ext-lift-8);
+  border-bottom: 1px solid var(--ln-ext-lift-8);
   text-align: start;
 }
 
 main.forum-topic .forum-post__message th {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 700;
 }
 
 main.forum-topic .forum-post__message tbody tr:nth-child(2n) {
-  background: var(--lr-ext-lift-2);
+  background: var(--ln-ext-lift-2);
 }
 
 main.forum-topic .forum-post__blocked > button {
@@ -316,7 +316,7 @@ main.forum-topic .forum-post__blocked > button {
    board room for them, or they overlap the player below and get cut off. */
 @media (min-width: 1020px) {
   body:is(.coords-in, .coords-out) main.forum-topic .forum-post__message .lpv__board {
-    padding: 0 0 calc(1.2 * var(--lr-ext-coords-size) + 10px)
-      calc(0.6 * var(--lr-ext-coords-size) + 16px);
+    padding: 0 0 calc(1.2 * var(--ln-ext-coords-size) + 10px)
+      calc(0.6 * var(--ln-ext-coords-size) + 16px);
   }
 }

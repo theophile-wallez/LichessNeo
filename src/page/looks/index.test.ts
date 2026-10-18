@@ -82,8 +82,8 @@ describe('a Lichess look picked in the settings', () => {
     pickLichessLook({ part: 'board', id: 'brown' });
     await flush();
     expect(warn).toHaveBeenCalledTimes(2);
-    expect(warn).toHaveBeenCalledWith('[LichessReimagined] theme unsaved', 403);
-    expect(warn).toHaveBeenCalledWith('[LichessReimagined] theme unsaved', offline);
+    expect(warn).toHaveBeenCalledWith('[LichessNeo] theme unsaved', 403);
+    expect(warn).toHaveBeenCalledWith('[LichessNeo] theme unsaved', offline);
     expect(document.body.dataset.board).toBe('brown');
   });
 });
@@ -106,16 +106,16 @@ describe('the looks feature', () => {
   });
 
   it('applies the picks the content script posts', () => {
-    receive({ type: 'lr-ext:lichess-look', part: 'board', id: 'wood' });
-    receive({ type: 'lr-ext:lichess-look', part: 'pieces', id: 'merida' });
+    receive({ type: 'ln-ext:lichess-look', part: 'board', id: 'wood' });
+    receive({ type: 'ln-ext:lichess-look', part: 'pieces', id: 'merida' });
     expect(document.body.dataset.board).toBe('wood');
     expect(posted()).toEqual(['POST /pref/theme theme=wood XMLHttpRequest']);
   });
 
   it('draws the settings’ preview board when asked', () => {
-    const host = createElement('div', { className: 'lr-ext-looks-preview__board' });
+    const host = createElement('div', { className: 'ln-ext-looks-preview__board' });
     document.body.append(host);
-    receive({ type: 'lr-ext:looks-preview', action: 'draw' });
+    receive({ type: 'ln-ext:looks-preview', action: 'draw' });
     expect(queryAll(host, 'cg-board > piece', HTMLElement)).toHaveLength(32);
   });
 });

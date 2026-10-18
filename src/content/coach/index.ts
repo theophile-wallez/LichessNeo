@@ -15,7 +15,7 @@ import type { MascotView } from './mascot/index.ts';
 // without WebGL or with the settings keeping the coaches still, the avatar
 // shows the coach's still image.
 
-const LIVE_CLASS = 'lr-ext-coach__avatar--live';
+const LIVE_CLASS = 'ln-ext-coach__avatar--live';
 
 let wanted: CoachState = { coach: 0, mood: 'neutral', talking: false };
 // Drawn: its first frame is in, over the still, which goes then.
@@ -37,7 +37,7 @@ function unmount(): void {
 }
 
 async function mount(avatar: HTMLElement): Promise<void> {
-  const face = queryOne(avatar, '.lr-ext-coach__face', HTMLElement);
+  const face = queryOne(avatar, '.ln-ext-coach__face', HTMLElement);
   if (!face) return;
   mounting = avatar;
   const mountMascot = await loadMascots();
@@ -60,7 +60,7 @@ function reveal(mascot: MascotView | null): void {
 }
 
 function sync(): void {
-  const avatar = queryOne(document, '.lr-ext-coach__avatar', HTMLElement);
+  const avatar = queryOne(document, '.ln-ext-coach__avatar', HTMLElement);
   if (!avatar) return;
   if (live?.avatar === avatar) {
     if (live.drawn) apply(live.mascot);

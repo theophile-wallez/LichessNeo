@@ -148,8 +148,8 @@ export function keysImage(keys: SchemeKeys, box: KeyBox): string {
 function paintKeys(element: HTMLElement, id: BacklitBoardId, box: KeyBox): void {
   for (const scheme of ['dark', 'light'] as const) {
     const keys = KEYS[id][scheme];
-    setStyleProperty(element, `--lr-ext-backlit-keys-${scheme}`, keysImage(keys, box));
-    setStyleProperty(element, `--lr-ext-backlit-tint-${scheme}`, keys.tint);
+    setStyleProperty(element, `--ln-ext-backlit-keys-${scheme}`, keysImage(keys, box));
+    setStyleProperty(element, `--ln-ext-backlit-tint-${scheme}`, keys.tint);
   }
 }
 
@@ -157,9 +157,9 @@ function paintKeys(element: HTMLElement, id: BacklitBoardId, box: KeyBox): void 
 export function showKeys(id: BacklitBoardId, box: KeyBox): void {
   const root = document.documentElement;
   paintKeys(root, id, box);
-  setStyleProperty(root, '--lr-ext-backlit-inset', `${box.inset * 100}%`);
+  setStyleProperty(root, '--ln-ext-backlit-inset', `${box.inset * 100}%`);
   // A percentage of the outline's own box, which is the key.
-  setStyleProperty(root, '--lr-ext-backlit-radius', `${(box.radius / box.size) * 100}%`);
+  setStyleProperty(root, '--ln-ext-backlit-radius', `${(box.radius / box.size) * 100}%`);
 }
 
 /** Paints the backlit tiles under `root` (the user menu's, the settings') not yet in the shape picked. */
@@ -168,13 +168,13 @@ export function paintTiles(root: ParentNode = document): void {
   const shape = `${box.inset} ${box.radius}`;
   for (const thumb of queryAll(
     root,
-    ".lr-ext-src-thumb[data-lr-ext-theme^='backlit']",
+    ".ln-ext-src-thumb[data-ln-ext-theme^='backlit']",
     HTMLElement,
   )) {
-    const id = thumb.dataset.lrExtTheme ?? '';
+    const id = thumb.dataset.lnExtTheme ?? '';
     const painted = `${id} ${shape}`;
-    if (!isBacklitBoard(id) || thumb.dataset.lrExtPainted === painted) continue;
+    if (!isBacklitBoard(id) || thumb.dataset.lnExtPainted === painted) continue;
     paintKeys(thumb, id, box);
-    setData(thumb, 'lrExtPainted', painted);
+    setData(thumb, 'lnExtPainted', painted);
   }
 }

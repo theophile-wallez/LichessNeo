@@ -83,12 +83,12 @@ describe('settings', () => {
 });
 
 // A stand-in for stockfish-web: it answers each search with one line.
-const FAKE_MODULE = `export default async options => globalThis.lrExtFakeStockfish(options);`;
+const FAKE_MODULE = `export default async options => globalThis.lnExtFakeStockfish(options);`;
 
 describe('Stockfish', () => {
   afterEach(() => {
     Reflect.deleteProperty(window, 'site');
-    Reflect.deleteProperty(globalThis, 'lrExtFakeStockfish');
+    Reflect.deleteProperty(globalThis, 'lnExtFakeStockfish');
   });
 
   it('boots Lichess’s build and runs one search at a time', async () => {
@@ -109,7 +109,7 @@ describe('Stockfish', () => {
       };
       return module;
     });
-    Reflect.set(globalThis, 'lrExtFakeStockfish', factory);
+    Reflect.set(globalThis, 'lnExtFakeStockfish', factory);
     window.site = {
       asset: {
         url: (path: string, options?: { documentOrigin: boolean }) => {
@@ -175,7 +175,7 @@ async function bootSilent(): Promise<Silent> {
     getRecommendedNnue: (): string => '',
     setNnueBuffer: (): void => {},
   };
-  Reflect.set(globalThis, 'lrExtFakeStockfish', () => module);
+  Reflect.set(globalThis, 'lnExtFakeStockfish', () => module);
   window.site = {
     asset: {
       url: (path: string) =>
@@ -194,7 +194,7 @@ describe('Stockfish that stops answering', () => {
   afterEach(() => {
     vi.useRealTimers();
     Reflect.deleteProperty(window, 'site');
-    Reflect.deleteProperty(globalThis, 'lrExtFakeStockfish');
+    Reflect.deleteProperty(globalThis, 'lnExtFakeStockfish');
   });
 
   it('ends an engine that says nothing for a while, failing the searches queued behind', async () => {

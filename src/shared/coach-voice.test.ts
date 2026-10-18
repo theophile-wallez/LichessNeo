@@ -11,7 +11,7 @@ afterEach(() => {
 });
 
 const shown = (bubble: HTMLElement): string =>
-  [...bubble.querySelectorAll('.lr-ext-w--in')].map(word => word.textContent).join('');
+  [...bubble.querySelectorAll('.ln-ext-w--in')].map(word => word.textContent).join('');
 
 type Talk = (mood: CoachMood, talking: boolean) => void;
 

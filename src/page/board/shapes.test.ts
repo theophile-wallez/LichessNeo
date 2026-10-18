@@ -5,7 +5,7 @@ import { shapes } from './index.ts';
 import { setReviewArrows } from './review-arrows.ts';
 import labels from './fixtures/legacy-label.json' with { type: 'json' };
 
-const layer = (): HTMLElement | null => queryOne(document, '#lr-ext-shapes', HTMLElement);
+const layer = (): HTMLElement | null => queryOne(document, '#ln-ext-shapes', HTMLElement);
 async function nextFrame(): Promise<void> {
   await vi.advanceTimersByTimeAsync(20);
 }
@@ -56,7 +56,7 @@ describe('shapes', () => {
     expect(layer()).toBeNull();
     await nextFrame();
     expect(layer()?.parentElement?.tagName).toBe('CG-CONTAINER');
-    expect(document.querySelector('cg-container > svg.lr-ext-marks')).not.toBeNull();
+    expect(document.querySelector('cg-container > svg.ln-ext-marks')).not.toBeNull();
   });
 
   it('draws the review’s arrows as soon as they change', async () => {
@@ -85,11 +85,11 @@ describe('shapes', () => {
     showMate();
     renderBoard({ orientation: 'white', shapes: [] });
     await untilDrawn();
-    expect(layer()?.querySelector('.lr-ext-mate__badge')).not.toBeNull();
-    expect(layer()?.querySelector('.lr-ext-mate__label')).toBeNull();
+    expect(layer()?.querySelector('.ln-ext-mate__badge')).not.toBeNull();
+    expect(layer()?.querySelector('.ln-ext-mate__label')).toBeNull();
     // The label is due 2.5 s after the mate was first drawn, and drawn on the next frame.
     await vi.advanceTimersByTimeAsync(2500);
     await nextFrame();
-    expect(layer()?.querySelector('.lr-ext-mate__label')?.textContent).toBe(labels.fr);
+    expect(layer()?.querySelector('.ln-ext-mate__label')?.textContent).toBe(labels.fr);
   });
 });

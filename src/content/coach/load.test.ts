@@ -25,7 +25,7 @@ afterEach(() => {
 
 describe('coachesMove', () => {
   it('follows the switch last kept, then the settings once read', async () => {
-    localStorage.setItem('lr-ext-coach-options', '{"motion":false,"analysis":true}');
+    localStorage.setItem('ln-ext-coach-options', '{"motion":false,"analysis":true}');
     expect(coachesMove()).toBe(false);
     answer({ coachMotion: true });
     await flush();
@@ -35,7 +35,7 @@ describe('coachesMove', () => {
 
 describe('loadMascots', () => {
   it('doesn’t load the mascots’ bundle while the coaches are kept still', async () => {
-    localStorage.setItem('lr-ext-coach-options', '{"motion":false,"analysis":true}');
+    localStorage.setItem('ln-ext-coach-options', '{"motion":false,"analysis":true}');
     // Settings not read yet: the switch last kept says.
     vi.resetModules();
     const fresh = await import('./load.ts');

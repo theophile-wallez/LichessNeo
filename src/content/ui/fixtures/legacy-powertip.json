@@ -1,6 +1,6 @@
 {
-  "ratings": "<div class=\"upt__info\"><div class=\"upt__info__ratings\"><span data-icon=\"\">&nbsp;&nbsp;1500</span><span data-icon=\"\">&nbsp;&nbsp;&nbsp;?</span><span> -</span><span>2100?</span><span data-lr-ext-rating=\"none\">1800</span></div></div>",
-  "cleaned": "<div class=\"upt__info\"><div class=\"upt__info__ratings\"><span data-icon=\"\" data-lr-ext-rating=\"rated\">1500</span><span data-icon=\"\" data-lr-ext-rating=\"none\">?</span><span data-lr-ext-rating=\"none\">-</span><span data-lr-ext-rating=\"rated\">2100?</span><span data-lr-ext-rating=\"rated\">1800</span></div></div>",
+  "ratings": "<div class=\"upt__info\"><div class=\"upt__info__ratings\"><span data-icon=\"\">&nbsp;&nbsp;1500</span><span data-icon=\"\">&nbsp;&nbsp;&nbsp;?</span><span> -</span><span>2100?</span><span data-ln-ext-rating=\"none\">1800</span></div></div>",
+  "cleaned": "<div class=\"upt__info\"><div class=\"upt__info__ratings\"><span data-icon=\"\" data-ln-ext-rating=\"rated\">1500</span><span data-icon=\"\" data-ln-ext-rating=\"none\">?</span><span data-ln-ext-rating=\"none\">-</span><span data-ln-ext-rating=\"rated\">2100?</span><span data-ln-ext-rating=\"rated\">1800</span></div></div>",
   "viewport": {
     "width": 1000,
     "height": 800

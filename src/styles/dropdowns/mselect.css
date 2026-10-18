@@ -2,18 +2,18 @@
  * autocomplete lists in native-select.css. Flat trigger, chevron, floating menu, accent check. */
 
 :root {
-  --lr-ext-chevron: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg');
-  --lr-ext-check: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02.svg');
+  --ln-ext-chevron: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg');
+  --ln-ext-check: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02.svg');
 }
 
 /* ---- mselect --- */
 
 .mselect__label {
-  border: 1px solid var(--lr-ext-neutral-7) !important;
+  border: 1px solid var(--ln-ext-neutral-7) !important;
   border-radius: 8px !important;
-  background: var(--lr-ext-bg-raised) !important;
+  background: var(--ln-ext-bg-raised) !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 600;
   text-shadow: none !important;
   transition:
@@ -23,11 +23,11 @@
 
 .mselect__label:hover,
 .mselect__toggle:checked ~ .mselect__label {
-  background: var(--lr-ext-bg-raised-hover) !important;
+  background: var(--ln-ext-bg-raised-hover) !important;
 }
 
 .mselect__toggle:checked ~ .mselect__label {
-  border-color: var(--lr-ext-neutral-9) !important;
+  border-color: var(--ln-ext-neutral-9) !important;
 }
 
 /* Lichess's green triangle becomes a dim chevron. */
@@ -37,10 +37,10 @@
   width: 14px;
   height: 14px;
   margin-inline: 2px 0 !important;
-  background: var(--lr-ext-text-dim);
+  background: var(--ln-ext-text-dim);
   opacity: 1 !important;
-  -webkit-mask: var(--lr-ext-chevron) center / contain no-repeat;
-  mask: var(--lr-ext-chevron) center / contain no-repeat;
+  -webkit-mask: var(--ln-ext-chevron) center / contain no-repeat;
+  mask: var(--ln-ext-chevron) center / contain no-repeat;
   transition:
     transform 0.15s ease,
     background-color 0.15s !important;
@@ -48,7 +48,7 @@
 
 .mselect__label:hover::after,
 .mselect__toggle:checked ~ .mselect__label::after {
-  background: var(--lr-ext-text-strong);
+  background: var(--ln-ext-text-strong);
 }
 
 .mselect__toggle:checked ~ .mselect__label::after {
@@ -58,10 +58,10 @@
 .mselect__list {
   box-sizing: border-box;
   padding: 4px;
-  border: 1px solid var(--lr-ext-menu-border);
+  border: 1px solid var(--ln-ext-menu-border);
   border-radius: 8px !important;
-  background: var(--lr-ext-menu-bg) !important;
-  box-shadow: var(--lr-ext-menu-shadow) !important;
+  background: var(--ln-ext-menu-bg) !important;
+  box-shadow: var(--ln-ext-menu-shadow) !important;
   scrollbar-width: thin;
 }
 
@@ -72,7 +72,7 @@
 
 .mselect__item:hover,
 .mselect__item.current:hover {
-  background: var(--lr-ext-menu-hover) !important;
+  background: var(--ln-ext-menu-hover) !important;
 }
 
 /* Desktop: the menu drops below its button instead of unrolling over it. From 800.02px, as
@@ -128,7 +128,7 @@
 .mselect__item {
   border: none !important;
   border-radius: 5px;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
 }
@@ -144,20 +144,20 @@ div.mselect__item {
 
 .mselect__item:hover,
 .mselect__item:focus-visible {
-  background: var(--lr-ext-menu-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-menu-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
   outline: none !important;
 }
 
 .mselect__item.current {
   background: transparent !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 700;
 }
 
 .mselect__item::before {
   margin: 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
 /* A check at the end of the current choice's row. */
@@ -170,9 +170,9 @@ div.mselect__item.current::after {
   height: 14px;
   margin-inline-start: auto;
   padding-inline-start: 12px;
-  background: var(--lr-ext-accent);
-  -webkit-mask: var(--lr-ext-check) right center / 14px no-repeat;
-  mask: var(--lr-ext-check) right center / 14px no-repeat;
+  background: var(--ln-ext-accent);
+  -webkit-mask: var(--ln-ext-check) right center / 14px no-repeat;
+  mask: var(--ln-ext-check) right center / 14px no-repeat;
 }
 
 /* The setup dialog scrolls, which clipped the variant menu to a few rows. */
@@ -226,28 +226,28 @@ dialog .scrollable:has(.game-setup .mselect__toggle:checked) {
 
 .game-setup .mselect__item:hover td,
 .game-setup .mselect__item:focus-visible td {
-  background: var(--lr-ext-menu-hover) !important;
+  background: var(--ln-ext-menu-hover) !important;
 }
 
 .game-setup .mselect__item.current td {
-  background: color-mix(in srgb, var(--lr-ext-accent) 12%, transparent) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 12%, transparent) !important;
 }
 
 .game-setup .mselect__item .icon span {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 20px;
   line-height: 1;
 }
 
 .game-setup .mselect__item.current .icon span {
-  color: var(--lr-ext-accent);
+  color: var(--ln-ext-accent);
 }
 
 .game-setup .mselect__item .desc {
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-weight: 400;
 }
 
 .game-setup .mselect__label .icon {
-  color: var(--lr-ext-accent);
+  color: var(--ln-ext-accent);
 }

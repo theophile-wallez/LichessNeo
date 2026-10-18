@@ -29,7 +29,7 @@ import { mock, themeMarkup, themeName } from './theme-cards.ts';
 // The settings' Appearance card: Lichess's color scheme, as its own Theme menu
 // sets it, over the color themes, one picked for each scheme, built-in or the
 // user's own (theme-editor.ts). Every preview is drawn by the palette itself
-// (`data-lr-ext-palette`), from the theme it shows.
+// (`data-ln-ext-palette`), from the theme it shows.
 
 const SCHEME_NAMES: Readonly<Record<ColorScheme, string>> = {
   system: 'schemeSystem',
@@ -42,9 +42,9 @@ function schemeMarkup(scheme: ColorScheme): SafeHtml {
     scheme === 'system'
       ? [mock('light', 'picked'), mock('dark', 'picked')]
       : [mock(scheme, 'picked')];
-  return html`<button type="button" class="lr-ext-scheme" data-lr-ext-scheme="${scheme}" aria-pressed="false">
-    <span class="lr-ext-scheme__preview">${previews}</span>
-    <span class="lr-ext-scheme__name">${message(SCHEME_NAMES[scheme])}</span>
+  return html`<button type="button" class="ln-ext-scheme" data-ln-ext-scheme="${scheme}" aria-pressed="false">
+    <span class="ln-ext-scheme__preview">${previews}</span>
+    <span class="ln-ext-scheme__name">${message(SCHEME_NAMES[scheme])}</span>
   </button>`;
 }
 
@@ -52,7 +52,7 @@ const schemeOf = (scheme: string | undefined): Scheme | null =>
   scheme === 'light' || scheme === 'dark' ? scheme : null;
 
 const themeOf = (element: Element | null, settings: Settings): ColorTheme | undefined => {
-  const id = closestTo(element, '.lr-ext-theme', HTMLElement)?.dataset.lrExtTheme;
+  const id = closestTo(element, '.ln-ext-theme', HTMLElement)?.dataset.lnExtTheme;
   return allThemes(settings.customThemes).find(theme => theme.id === id);
 };
 
@@ -64,12 +64,12 @@ function setPressed(button: HTMLElement, pressed: boolean): void {
 function showThemes(card: HTMLElement, settings: Settings): void {
   const { colorThemes, customThemes } = settings;
   const palettes = palettesOf(colorThemes, customThemes);
-  for (const preview of queryAll(card, "[data-lr-ext-mock='picked']", HTMLElement)) {
-    const scheme = schemeOf(preview.dataset.lrExtPalette);
+  for (const preview of queryAll(card, "[data-ln-ext-mock='picked']", HTMLElement)) {
+    const scheme = schemeOf(preview.dataset.lnExtPalette);
     if (scheme) setPalette(preview, palettes[scheme]);
   }
-  for (const orb of queryAll(card, '.lr-ext-orb', HTMLElement)) {
-    const scheme = schemeOf(orb.dataset.lrExtOrb);
+  for (const orb of queryAll(card, '.ln-ext-orb', HTMLElement)) {
+    const scheme = schemeOf(orb.dataset.lnExtOrb);
     const theme = themeOf(orb, settings);
     if (!scheme || !theme) continue;
     setPalette(orb, theme[scheme]);
@@ -78,10 +78,10 @@ function showThemes(card: HTMLElement, settings: Settings): void {
   const full = !canAddTheme(settings);
   for (const button of queryAll(
     card,
-    '[data-lr-ext-themes-action], .lr-ext-theme__action',
+    '[data-ln-ext-themes-action], .ln-ext-theme__action',
     HTMLButtonElement,
   ))
-    button.disabled = full && button.dataset.lrExtThemeAction !== 'edit';
+    button.disabled = full && button.dataset.lnExtThemeAction !== 'edit';
 }
 
 // The grid is drawn again only when the user's themes change.
@@ -89,7 +89,7 @@ function themesShower(card: HTMLElement): (settings: Settings) => void {
   let drawn: string | null = null;
   return settings => {
     const key = JSON.stringify(settings.customThemes);
-    const grid = queryOne(card, '.lr-ext-themes', HTMLElement);
+    const grid = queryOne(card, '.ln-ext-themes', HTMLElement);
     if (grid && key !== drawn) {
       setHtml(grid, html`${allThemes(settings.customThemes).map(themeMarkup)}`);
       drawn = key;
@@ -107,8 +107,8 @@ export function lichessScheme(): ColorScheme {
 /** Marks the scheme Lichess shows: it may change from its own menu, so this runs every tick. */
 export function showScheme(card: HTMLElement): void {
   const current = lichessScheme();
-  for (const button of queryAll(card, '.lr-ext-scheme', HTMLElement))
-    setPressed(button, button.dataset.lrExtScheme === current);
+  for (const button of queryAll(card, '.ln-ext-scheme', HTMLElement))
+    setPressed(button, button.dataset.lnExtScheme === current);
 }
 
 interface Tools {
@@ -134,16 +134,16 @@ function onClick(event: MouseEvent, tools: Tools): void {
   const settings = currentSettings();
   const target = event.target instanceof Element ? event.target : null;
   const scheme = ColorSchemeSchema.safeParse(
-    closestTo(target, '.lr-ext-scheme', HTMLElement)?.dataset.lrExtScheme,
+    closestTo(target, '.ln-ext-scheme', HTMLElement)?.dataset.lnExtScheme,
   );
   if (scheme.success) return postColorScheme(scheme.data);
-  const tool = closestTo(target, '[data-lr-ext-themes-action]', HTMLElement);
-  if (tool) return onToolAction(tool.dataset.lrExtThemesAction, tools);
+  const tool = closestTo(target, '[data-ln-ext-themes-action]', HTMLElement);
+  if (tool) return onToolAction(tool.dataset.lnExtThemesAction, tools);
   const theme = themeOf(target, settings);
   if (!theme) return;
-  const action = closestTo(target, '.lr-ext-theme__action', HTMLElement);
-  if (action) return onThemeAction(action.dataset.lrExtThemeAction, theme, tools);
-  const orbScheme = schemeOf(closestTo(target, '.lr-ext-orb', HTMLElement)?.dataset.lrExtOrb);
+  const action = closestTo(target, '.ln-ext-theme__action', HTMLElement);
+  if (action) return onThemeAction(action.dataset.lnExtThemeAction, theme, tools);
+  const orbScheme = schemeOf(closestTo(target, '.ln-ext-orb', HTMLElement)?.dataset.lnExtOrb);
   if (orbScheme)
     void saveSetting('colorThemes', { ...settings.colorThemes, [orbScheme]: theme.id });
 }
@@ -152,31 +152,31 @@ const addShared = (theme: SharedTheme): void =>
   void updateSettings(settings => withTheme(settings, { id: newThemeId(), ...theme }, true));
 
 const toolMarkup = (action: string, icon: SafeHtml, label: string): SafeHtml =>
-  html`<button type="button" class="lr-ext-appearance__tool" data-lr-ext-themes-action="${action}">${icon}<span>${label}</span></button>`;
+  html`<button type="button" class="ln-ext-appearance__tool" data-ln-ext-themes-action="${action}">${icon}<span>${label}</span></button>`;
 
 /** The card, kept in step with the settings. */
 export function buildAppearance(): HTMLElement {
-  const card = createElement('section', { className: 'lr-ext-appearance' });
+  const card = createElement('section', { className: 'ln-ext-appearance' });
   setHtml(
     card,
-    html`<div class="lr-ext-appearance__head">
-        <span class="lr-ext-setting__icon" aria-hidden="true"></span>
+    html`<div class="ln-ext-appearance__head">
+        <span class="ln-ext-setting__icon" aria-hidden="true"></span>
         <div>
-          <h2 class="lr-ext-setting__title">${message('appearanceTitle')}</h2>
-          <p class="lr-ext-setting__body">${message('appearanceBody')}</p>
+          <h2 class="ln-ext-setting__title">${message('appearanceTitle')}</h2>
+          <p class="ln-ext-setting__body">${message('appearanceBody')}</p>
         </div>
       </div>
-      <h3 class="lr-ext-appearance__label">${message('colorSchemeTitle')}</h3>
-      <div class="lr-ext-schemes">${ColorSchemeSchema.options.map(schemeMarkup)}</div>
-      <div class="lr-ext-appearance__row">
-        <h3 class="lr-ext-appearance__label">${message('themesTitle')}</h3>
+      <h3 class="ln-ext-appearance__label">${message('colorSchemeTitle')}</h3>
+      <div class="ln-ext-schemes">${ColorSchemeSchema.options.map(schemeMarkup)}</div>
+      <div class="ln-ext-appearance__row">
+        <h3 class="ln-ext-appearance__label">${message('themesTitle')}</h3>
         ${toolMarkup('create', hugeicon(PaintBrush04Icon), message('themeCreate'))}
         ${toolMarkup('add', hugeicon(Add01Icon), message('themeAdd'))}
       </div>
-      <div class="lr-ext-themes"></div>`,
+      <div class="ln-ext-themes"></div>`,
   );
   const tools: Tools = { editor: createEditor(), codeForm: createCodeForm(addShared) };
-  queryOne(card, '.lr-ext-appearance__row', HTMLElement)?.after(tools.codeForm.element);
+  queryOne(card, '.ln-ext-appearance__row', HTMLElement)?.after(tools.codeForm.element);
   card.append(tools.editor.element);
   card.addEventListener('click', event => onClick(event, tools));
   const showAll = themesShower(card);

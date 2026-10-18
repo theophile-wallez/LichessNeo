@@ -2,49 +2,49 @@
 
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css). Signed in, it
  * also has the friends' posts and the user's own blog (`/@/<user>/blog`), its drafts there. */
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/community'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/community'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+.subnav[data-ln-ext-nav~='blog'] a[href$='/blog/community'],
+main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/blog/community'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/monthly'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/monthly'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='blog'] a[href$='/blog/monthly'],
+main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/blog/monthly'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/topic'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/topic'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='blog'] a[href$='/blog/topic'],
+main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/blog/topic'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tag-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='blog'] a[href$='/@/lichess/blog'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/@/lichess/blog'] {
-  --lr-ext-nav-glyph: url('https://lichess1.org/assets/logo/lichess.svg');
-  --lr-ext-nav-color: var(--lr-ext-text-dim);
+.subnav[data-ln-ext-nav~='blog'] a[href$='/@/lichess/blog'],
+main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/@/lichess/blog'] {
+  --ln-ext-nav-glyph: url('https://lichess1.org/assets/logo/lichess.svg');
+  --ln-ext-nav-color: var(--ln-ext-text-dim);
 }
 
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/friends'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/friends'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
-  --lr-ext-nav-color: var(--lr-ext-green);
+.subnav[data-ln-ext-nav~='blog'] a[href$='/blog/friends'],
+main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/blog/friends'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+  --ln-ext-nav-color: var(--ln-ext-green);
 }
 
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pen-tool-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+.subnav[data-ln-ext-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pen-tool-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/drafts'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/drafts'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='blog'] a[href$='/blog/drafts'],
+main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/blog/drafts'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-edit.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='blog'] a[href$='/blog/liked'],
-main.page-menu[data-lr-ext-menu~='blog'][data-lr-ext-nav-active$='/blog/liked'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
-  --lr-ext-nav-color: var(--lr-ext-red);
+.subnav[data-ln-ext-nav~='blog'] a[href$='/blog/liked'],
+main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/blog/liked'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+  --ln-ext-nav-color: var(--ln-ext-red);
 }

@@ -87,26 +87,26 @@ function startHooked(): ReturnType<typeof fakeSoundPlayer> {
 describe('sounds', () => {
   it('asks for the sounds, then hooks Lichess’s player once some are posted', () => {
     const { sound, calls } = startHooked();
-    expect(window.postMessage).toHaveBeenCalledWith({ type: 'lr-ext:page-ready' }, location.origin);
-    post({ type: 'lr-ext:sounds', sounds: {} });
-    expect(sound.lrExtHooked).toBeUndefined();
-    post({ type: 'lr-ext:sounds', sounds: { capture: new ArrayBuffer(1) } });
-    expect([...sound.paths.keys()]).toEqual(['lr-ext-capture']);
-    expect(sound.lrExtHooked).toBe(true);
+    expect(window.postMessage).toHaveBeenCalledWith({ type: 'ln-ext:page-ready' }, location.origin);
+    post({ type: 'ln-ext:sounds', sounds: {} });
+    expect(sound.lnExtHooked).toBeUndefined();
+    post({ type: 'ln-ext:sounds', sounds: { capture: new ArrayBuffer(1) } });
+    expect([...sound.paths.keys()]).toEqual(['ln-ext-capture']);
+    expect(sound.lnExtHooked).toBe(true);
     sound.play('capture');
     sound.play('berserk');
     expect(calls).toEqual([
-      ['play', 'lr-ext-capture', 1],
+      ['play', 'ln-ext-capture', 1],
       ['play', 'berserk', 1],
     ]);
   });
 
   it('plays the sounds of each new pick, and Lichess’s own once none are left', () => {
     const { sound, calls } = startHooked();
-    post({ type: 'lr-ext:sounds', sounds: { capture: new ArrayBuffer(1) } });
-    post({ type: 'lr-ext:sounds', sounds: { castle: new ArrayBuffer(1) } });
-    expect([...sound.paths.keys()]).toEqual(['lr-ext-castle']);
-    post({ type: 'lr-ext:sounds', sounds: {} });
+    post({ type: 'ln-ext:sounds', sounds: { capture: new ArrayBuffer(1) } });
+    post({ type: 'ln-ext:sounds', sounds: { castle: new ArrayBuffer(1) } });
+    expect([...sound.paths.keys()]).toEqual(['ln-ext-castle']);
+    post({ type: 'ln-ext:sounds', sounds: {} });
     expect([...sound.paths]).toEqual([]);
     sound.play('capture');
     sound.move({ name: 'move' });
@@ -118,11 +118,11 @@ describe('sounds', () => {
 
   it('plays the extension’s set while it’s picked, with no files, then Lichess’s again', () => {
     const { sound, calls } = startHooked();
-    post({ type: 'lr-ext:sounds', sounds: {}, synth: { place: 'none' } });
-    expect(sound.lrExtHooked).toBe(true);
+    post({ type: 'ln-ext:sounds', sounds: {}, synth: { place: 'none' } });
+    expect(sound.lnExtHooked).toBe(true);
     sound.play('genericNotify');
     expect(vi.mocked(play).mock.calls).toEqual([['ready', { volume: 0.7 }]]);
-    post({ type: 'lr-ext:sounds', sounds: {} });
+    post({ type: 'ln-ext:sounds', sounds: {} });
     sound.play('genericNotify');
     expect(calls).toEqual([['play', 'genericNotify', 1]]);
     expect(play).toHaveBeenCalledTimes(1);

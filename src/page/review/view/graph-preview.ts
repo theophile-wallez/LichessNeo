@@ -40,14 +40,14 @@ export function boardMarkup({ fen, lastMove }: PreviewPosition, orientation: Col
   const lit = [lastMove?.slice(0, 2), lastMove?.slice(2, 4)].flatMap(text => {
     const square = text === undefined ? null : parseSquare(text);
     return square
-      ? [html`<span class="lr-ext-mini__lit" style="${cell(square, orientation)}"></span>`]
+      ? [html`<span class="ln-ext-mini__lit" style="${cell(square, orientation)}"></span>`]
       : [];
   });
   const pieces = [...board].map(([square, { color, role }]) => {
     const code = `${colorLetter(color)}${ROLE_LETTERS[role]}`;
-    return html`<i class="lr-ext-pc lr-ext-pc-${code}" style="${cell(square, orientation)}"></i>`;
+    return html`<i class="ln-ext-pc ln-ext-pc-${code}" style="${cell(square, orientation)}"></i>`;
   });
-  return html`<div class="lr-ext-mini">${lit}${pieces}</div>`;
+  return html`<div class="ln-ext-mini">${lit}${pieces}</div>`;
 }
 
 // The board's own background, whichever it is: ours, a pack's or Lichess's.
@@ -68,12 +68,12 @@ export function showPreview(
   orientation: Color,
   at: { readonly x: number; readonly graph: DOMRect },
 ): void {
-  preview ??= createElement('div', { id: 'lr-ext-graph-board', attrs: { 'aria-hidden': 'true' } });
+  preview ??= createElement('div', { id: 'ln-ext-graph-board', attrs: { 'aria-hidden': 'true' } });
   const key = `${position.fen}|${position.lastMove ?? ''}|${orientation}`;
   if (key !== shown) {
     shown = key;
     setHtml(preview, boardMarkup(position, orientation));
-    copyBoardBackground(queryOne(preview, '.lr-ext-mini', HTMLElement));
+    copyBoardBackground(queryOne(preview, '.ln-ext-mini', HTMLElement));
   }
   if (!preview.isConnected) document.body.append(preview);
   const width = preview.offsetWidth;

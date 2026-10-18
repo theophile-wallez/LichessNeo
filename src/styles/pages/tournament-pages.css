@@ -9,28 +9,28 @@
 
 /* Signed in, the tournaments the user created come first. */
 .tour__links a[href$='/tournaments/created'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-star-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-green);
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-star-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-green);
 }
 
 .tour__links a[href$='/tournament/calendar'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
 .tour__links a[href$='/tournament/history'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
 .tour__links a[href$='/tournament/help'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
 .tour__links a[href$='/page/leagues-and-battles'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sword-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-red);
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sword-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-red);
 }
 
 main.tour-home .tour__links a {
@@ -50,7 +50,7 @@ main.tour-home .tour__links a::before {
   border-radius: 8px;
   background: color-mix(
     in srgb,
-    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 16%,
+    var(--ln-ext-nav-color, var(--ln-ext-text-strong)) 16%,
     transparent
   );
   box-shadow: inset 0 1px #ffffff14;
@@ -67,10 +67,10 @@ main.tour-home .tour__links a::after {
   margin-top: -10px;
   background: color-mix(
     in srgb,
-    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 80%,
-    var(--lr-ext-text-strong)
+    var(--ln-ext-nav-color, var(--ln-ext-text-strong)) 80%,
+    var(--ln-ext-text-strong)
   );
-  mask: var(--lr-ext-nav-glyph) center / contain no-repeat;
+  mask: var(--ln-ext-nav-glyph) center / contain no-repeat;
   pointer-events: none;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
@@ -84,86 +84,86 @@ main.tour-home .tour__links a:hover::after {
 
 /* A tile per kind, in its tiles' color (tournaments.css); the open kind's in the title. */
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/diamond.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/diamond.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/marathon'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/marathon'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/running-shoes.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/marathon'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/marathon'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/running-shoes.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/shield'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/shield'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-neutral-11);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/shield'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/shield'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-neutral-11);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/yearly'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/yearly'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/yearly'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/yearly'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/monthly'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/monthly'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-red);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/monthly'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/monthly'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-red);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/weekend'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/weekend'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/weekend'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/weekend'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/weekly'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/weekly'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/weekly'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/weekly'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/daily'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/daily'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sun-03.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/daily'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/daily'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sun-03.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/eastern'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/eastern'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sunrise.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/eastern'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/eastern'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sunrise.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='arena-history'] a[href$='/tournament/history/hourly'],
-main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tournament/history/hourly'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+.subnav[data-ln-ext-nav~='arena-history'] a[href$='/tournament/history/hourly'],
+main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tournament/history/hourly'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
 /* ---- Pinned titles --- */
 
 @media (min-width: 1020px) {
   /* Lichess's boxes clip, which would catch the titles: `clip` doesn't. */
-  html[data-lr-ext-has~='tournament-calendar'] main.box,
+  html[data-ln-ext-has~='tournament-calendar'] main.box,
   main.page-small.box-pad.page,
   main.arena-history > .page-menu__content.box {
     min-width: 0;
     overflow: clip !important;
   }
 
-  html[data-lr-ext-has~='tournament-calendar'] main.box > h1.box__top,
+  html[data-ln-ext-has~='tournament-calendar'] main.box > h1.box__top,
   main.page-small.box-pad.page > .box__top:has(+ .body),
   main.arena-history > .page-menu__content > .box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 3;
     top: 0;
-    background: var(--lr-ext-bg-panel);
-    box-shadow: var(--lr-ext-pin-cover);
+    background: var(--ln-ext-bg-panel);
+    box-shadow: var(--ln-ext-pin-cover);
   }
 
   /* A plain page's title sits in its card's padding: pulled out to its edges, as on the
@@ -174,7 +174,7 @@ main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tour
     padding: 4vh var(---box-padding) !important;
   }
 
-  html[data-lr-ext-has~='tournament-calendar'] main.box > h1.box__top::after,
+  html[data-ln-ext-has~='tournament-calendar'] main.box > h1.box__top::after,
   main.page-small.box-pad.page > .box__top:has(+ .body)::after,
   main.arena-history > .page-menu__content > .box__top::after {
     content: '';
@@ -182,14 +182,14 @@ main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tour
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
   }
 
   @container scroll-state(stuck: top) {
-    html[data-lr-ext-has~='tournament-calendar'] main.box > h1.box__top::after,
+    html[data-ln-ext-has~='tournament-calendar'] main.box > h1.box__top::after,
     main.page-small.box-pad.page > .box__top:has(+ .body)::after,
     main.arena-history > .page-menu__content > .box__top::after {
       opacity: 1;
@@ -201,7 +201,7 @@ main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tour
     position: sticky;
     top: 16px;
     align-self: start;
-    max-height: calc(var(--lr-ext-main-h, 100dvh) - 32px);
+    max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
     overflow-y: auto;
     scrollbar-width: thin;
   }
@@ -211,35 +211,35 @@ main.page-menu[data-lr-ext-menu~='arena-history'][data-lr-ext-nav-active$='/tour
 
 /* The tile of the link that leads there: the calendar's, the FAQ's and the leagues' from the
  * home's links (the history's is its menu's, menu-titles.css). */
-html[data-lr-ext-has~='tournament-calendar'] main.box > h1.box__top {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+html[data-ln-ext-has~='tournament-calendar'] main.box > h1.box__top {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-html[data-lr-ext-has~='leagues-page'] main.page > h1.box__top {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sword-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-red);
+html[data-ln-ext-has~='leagues-page'] main.page > h1.box__top {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sword-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-red);
 }
 
 /* The FAQ's: after Lichess's link back to the tournaments, which its title starts with. */
 main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
   display: inline-flex;
   align-items: center;
   gap: 16px;
 }
 
-html[data-lr-ext-has~='tournament-calendar'] main.box > h1.box__top,
-html[data-lr-ext-has~='leagues-page'] main.page > h1.box__top {
+html[data-ln-ext-has~='tournament-calendar'] main.box > h1.box__top,
+html[data-ln-ext-has~='leagues-page'] main.page > h1.box__top {
   display: flex !important;
   justify-content: flex-start !important;
   align-items: center;
   gap: 16px;
 }
 
-html[data-lr-ext-has~='tournament-calendar'] main.box > h1.box__top::before,
-html[data-lr-ext-has~='leagues-page'] main.page > h1.box__top::before,
+html[data-ln-ext-has~='tournament-calendar'] main.box > h1.box__top::before,
+html[data-ln-ext-has~='leagues-page'] main.page > h1.box__top::before,
 main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child::after {
   content: '';
   flex: none;
@@ -247,8 +247,8 @@ main.page-small.page > .box__top > h1 > a[href$='/tournament']:first-child::afte
   height: 52px;
   border-radius: 13px;
   /* The glyph at full strength over the tile at a quarter: both in the link's color. */
-  background: var(--lr-ext-nav-color, var(--lr-ext-text-dim));
+  background: var(--ln-ext-nav-color, var(--ln-ext-text-dim));
   mask:
-    var(--lr-ext-nav-glyph, linear-gradient(#0000, #0000)) center / 30px 30px no-repeat,
+    var(--ln-ext-nav-glyph, linear-gradient(#0000, #0000)) center / 30px 30px no-repeat,
     linear-gradient(#0000003d, #0000003d);
 }

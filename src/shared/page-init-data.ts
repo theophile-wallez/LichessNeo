@@ -35,7 +35,7 @@ function watch(): void {
         try {
           read(text);
         } catch (error) {
-          console.error('[LichessReimagined] page init data reader failed', error);
+          console.error('[LichessNeo] page init data reader failed', error);
         }
       }
     },

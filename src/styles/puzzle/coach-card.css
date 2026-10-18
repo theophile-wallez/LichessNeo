@@ -6,8 +6,8 @@
    a sibling sharing its cell of the panel's grid. */
 @media (min-width: 1259.3px), (max-width: 1019.98px) {
   main.puzzle .puzzle__tools {
-    --lr-ext-coach-h: 140px;
-    --lr-ext-coach-w: calc(var(--lr-ext-coach-h) * 1.09);
+    --ln-ext-coach-h: 140px;
+    --ln-ext-coach-w: calc(var(--ln-ext-coach-h) * 1.09);
 
     display: grid !important;
     grid-template-rows: auto minmax(0, 1fr) auto;
@@ -27,13 +27,13 @@
 
   main.puzzle .puzzle__feedback {
     grid-area: card;
-    min-height: calc(var(--lr-ext-coach-h) + 16px);
-    box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+    min-height: calc(var(--ln-ext-coach-h) + 16px);
+    box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
   }
 
   main.puzzle .puzzle__feedback:not(.after) {
     /* The mascot is narrower than its box: the words start over the box's empty edge. */
-    padding: 16px 16px 16px calc(var(--lr-ext-coach-w) + 20px) !important;
+    padding: 16px 16px 16px calc(var(--ln-ext-coach-w) + 20px) !important;
   }
 
   /* Over the coach, whose arms reach past its box. */
@@ -83,7 +83,7 @@
   main.puzzle .puzzle__feedback:is(.good, .fail) .icon {
     box-shadow:
       inset 0 1px 0 #ffffff40,
-      0 0 0 4px color-mix(in srgb, var(--lr-ext-feedback) 18%, transparent);
+      0 0 0 4px color-mix(in srgb, var(--ln-ext-feedback) 18%, transparent);
     font-size: 19px !important;
     line-height: 34px !important;
   }
@@ -104,8 +104,8 @@
 
   /* The coach stands on the card's bottom edge, which cuts it; its sides never are, room left
      for its arms (AGENTS.md, "The coach talks in a card"). */
-  main.puzzle .lr-ext-puzzle-coach {
-    --lr-ext-mood-c: var(--lr-ext-good-hover);
+  main.puzzle .ln-ext-puzzle-coach {
+    --ln-ext-mood-c: var(--ln-ext-good-hover);
 
     z-index: 0;
     grid-area: card;
@@ -117,11 +117,11 @@
     pointer-events: none;
   }
 
-  main.puzzle .lr-ext-puzzle-coach:hover {
+  main.puzzle .ln-ext-puzzle-coach:hover {
     transform: none;
   }
 
-  main.puzzle .lr-ext-puzzle-coach .lr-ext-coach__face canvas {
+  main.puzzle .ln-ext-puzzle-coach .ln-ext-coach__face canvas {
     left: -40%;
     width: 180%;
   }
@@ -130,7 +130,7 @@
      the row of smaller buttons. */
   main.puzzle .puzzle__feedback.after {
     display: grid !important;
-    grid-template-columns: calc(var(--lr-ext-coach-w) + 4px) minmax(0, 1fr);
+    grid-template-columns: calc(var(--ln-ext-coach-w) + 4px) minmax(0, 1fr);
     grid-template-areas:
       '. title'
       '. next'
@@ -146,7 +146,7 @@
     align-items: flex-start;
     justify-content: center;
     /* With the next button and the gap, as tall as the coach over the card's padding. */
-    min-height: calc(var(--lr-ext-coach-h) - 70px);
+    min-height: calc(var(--ln-ext-coach-h) - 70px);
     text-align: start;
   }
 
@@ -167,7 +167,7 @@
     grid-area: more;
   }
 
-  main.puzzle .puzzle__feedback.after ~ .lr-ext-puzzle-coach {
+  main.puzzle .puzzle__feedback.after ~ .ln-ext-puzzle-coach {
     align-self: start;
     margin-top: 10px;
     clip-path: inset(-60% -60% 0);
@@ -176,7 +176,7 @@
 }
 
 @media (min-width: 1020px) and (max-width: 1259.29px) {
-  main.puzzle .lr-ext-puzzle-coach {
+  main.puzzle .ln-ext-puzzle-coach {
     display: none;
   }
 }

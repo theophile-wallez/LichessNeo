@@ -2,40 +2,40 @@
  * over the opponent's half with their card, a "VS" pops over crossed swords on the middle line and
  * the player's card on their half, then the board lifts. That board is drawn on cg-board::after,
  * under the pieces (z-index 2); the cards are ours, over the board, and let every click through.
- * The timeline's shares are of `--lr-ext-intro-ms`: in 24%, a second's hold, out from 78%. */
+ * The timeline's shares are of `--ln-ext-intro-ms`: in 24%, a second's hold, out from 78%. */
 
 /* Clips the dropped board to the squares. A `clip-path` animated beside the `transform` falls
  * out of step with it in Chrome, which runs the two on different threads. */
-.is2d main.round[data-lr-ext-intro] cg-board {
+.is2d main.round[data-ln-ext-intro] cg-board {
   overflow: hidden;
 }
 
-.is2d main.round[data-lr-ext-intro] cg-board::after {
+.is2d main.round[data-ln-ext-intro] cg-board::after {
   content: '';
   position: absolute;
   inset: 0 0 50%;
   z-index: 1;
   border-radius: 4px 4px 0 0;
-  background: var(--lr-ext-intro-board) top / 100% 200% no-repeat;
+  background: var(--ln-ext-intro-board) top / 100% 200% no-repeat;
   pointer-events: none;
-  animation: lr-ext-intro-slide var(--lr-ext-intro-ms) both !important;
+  animation: ln-ext-intro-slide var(--ln-ext-intro-ms) both !important;
 }
 
-main.round > .lr-ext-intro {
+main.round > .ln-ext-intro {
   grid-area: board;
   position: relative;
   z-index: 3;
-  margin: var(--lr-ext-inset-t, 0px) var(--lr-ext-inset-r, 0px) var(--lr-ext-inset-b, 0px)
-    var(--lr-ext-inset-l, 0px);
+  margin: var(--ln-ext-inset-t, 0px) var(--ln-ext-inset-r, 0px) var(--ln-ext-inset-b, 0px)
+    var(--ln-ext-inset-l, 0px);
   overflow: hidden;
   border-radius: 4px;
   container-type: size;
   pointer-events: none;
-  font-family: var(--lr-ext-font);
+  font-family: var(--ln-ext-font);
 }
 
-main.round .lr-ext-intro__drop,
-main.round .lr-ext-intro__stay {
+main.round .ln-ext-intro__drop,
+main.round .ln-ext-intro__stay {
   position: absolute;
   inset-inline: 0;
   display: flex;
@@ -44,16 +44,16 @@ main.round .lr-ext-intro__stay {
 }
 
 /* The dropped half carries the opponent's card and casts the board's shadow. */
-main.round .lr-ext-intro__drop {
+main.round .ln-ext-intro__drop {
   top: 0;
   align-items: flex-end;
   padding-bottom: 10cqh;
   box-sizing: border-box;
   box-shadow: 0 1cqh 3cqh #00000059;
-  animation: lr-ext-intro-slide var(--lr-ext-intro-ms) both !important;
+  animation: ln-ext-intro-slide var(--ln-ext-intro-ms) both !important;
 }
 
-main.round .lr-ext-intro__stay {
+main.round .ln-ext-intro__stay {
   bottom: 0;
   align-items: flex-start;
   padding-top: 10cqh;
@@ -62,35 +62,35 @@ main.round .lr-ext-intro__stay {
 
 /* One size for both, whatever the names' lengths; a long one ends in an ellipsis. Over the
  * board, the cards keep their colors in either scheme. */
-main.round .lr-ext-intro__card {
+main.round .ln-ext-intro__card {
   display: flex;
   align-items: stretch;
   width: 56cqw;
   height: 12.5cqh;
   overflow: hidden;
   border-radius: 0.8cqh;
-  background: var(--lr-ext-white);
-  color: var(--lr-ext-ink);
+  background: var(--ln-ext-white);
+  color: var(--ln-ext-ink);
   box-shadow: 0 0.6cqh 2cqh #00000059;
 }
 
-main.round .lr-ext-intro__card--bottom {
-  background: var(--lr-ext-ink);
-  color: var(--lr-ext-white);
-  animation: lr-ext-intro-rise var(--lr-ext-intro-ms) both !important;
+main.round .ln-ext-intro__card--bottom {
+  background: var(--ln-ext-ink);
+  color: var(--ln-ext-white);
+  animation: ln-ext-intro-rise var(--ln-ext-intro-ms) both !important;
 }
 
-main.round .lr-ext-intro__avatar {
+main.round .ln-ext-intro__avatar {
   flex: none;
   aspect-ratio: 1;
-  background: var(--lr-ext-avatar);
+  background: var(--ln-ext-avatar);
 }
 
-main.round .lr-ext-intro__card--computer .lr-ext-intro__avatar {
-  background: var(--lr-ext-computer-avatar);
+main.round .ln-ext-intro__card--computer .ln-ext-intro__avatar {
+  background: var(--ln-ext-computer-avatar);
 }
 
-main.round .lr-ext-intro__who {
+main.round .ln-ext-intro__who {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,7 +99,7 @@ main.round .lr-ext-intro__who {
   padding: 0 3cqw;
 }
 
-main.round .lr-ext-intro__name {
+main.round .ln-ext-intro__name {
   overflow: hidden;
   font-size: 3.6cqh;
   font-weight: 800;
@@ -108,18 +108,18 @@ main.round .lr-ext-intro__name {
   text-overflow: ellipsis;
 }
 
-main.round .lr-ext-intro__title {
+main.round .ln-ext-intro__title {
   margin-right: 1cqw;
   padding: 0 0.6cqw;
   border-radius: 0.5cqh;
-  background: var(--lr-ext-title-bg);
-  color: var(--lr-ext-white);
+  background: var(--ln-ext-title-bg);
+  color: var(--ln-ext-white);
   font-size: 2.6cqh;
   vertical-align: 0.4cqh;
 }
 
 /* The rating, then the flag. */
-main.round .lr-ext-intro__details {
+main.round .ln-ext-intro__details {
   display: flex;
   align-items: center;
   gap: 0.4em;
@@ -130,45 +130,45 @@ main.round .lr-ext-intro__details {
   opacity: 0.6;
 }
 
-main.round .lr-ext-intro__flag {
+main.round .ln-ext-intro__flag {
   width: 1.2em;
   height: 1.2em;
 }
 
 /* The "VS" badge over crossed swords, both centered on the middle line. */
-main.round .lr-ext-intro__vs {
+main.round .ln-ext-intro__vs {
   position: absolute;
   top: 50%;
   left: 50%;
   display: grid;
   place-items: center;
   translate: -50% -50%;
-  animation: lr-ext-intro-pop var(--lr-ext-intro-ms) both !important;
+  animation: ln-ext-intro-pop var(--ln-ext-intro-ms) both !important;
 }
 
-main.round .lr-ext-intro__vs > * {
+main.round .ln-ext-intro__vs > * {
   grid-area: 1 / 1;
 }
 
-main.round .lr-ext-intro__swords {
+main.round .ln-ext-intro__swords {
   width: 15cqh;
   height: 15cqh;
   background: var(
-      --lr-ext-intro-swords,
+      --ln-ext-intro-swords,
       url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/swords--ffc689.svg')
     )
     center / contain no-repeat;
   filter: drop-shadow(0 0.4cqh 0.8cqh #00000073);
-  animation: lr-ext-intro-clash var(--lr-ext-intro-ms) both !important;
+  animation: ln-ext-intro-clash var(--ln-ext-intro-ms) both !important;
 }
 
 /* Positioned, or the swords (a stacking context for their filter and animation) paint over it. */
-main.round .lr-ext-intro__versus {
+main.round .ln-ext-intro__versus {
   position: relative;
   padding: 1.6cqh 2.6cqh;
   border-radius: 0.8cqh;
-  background: color-mix(in srgb, var(--lr-ext-ink) 88%, var(--lr-ext-white));
-  color: var(--lr-ext-white);
+  background: color-mix(in srgb, var(--ln-ext-ink) 88%, var(--ln-ext-white));
+  color: var(--ln-ext-white);
   font-size: 4.6cqh;
   font-weight: 800;
   line-height: 1;
@@ -177,7 +177,7 @@ main.round .lr-ext-intro__versus {
 
 /* The board and the opponent's card move as one. No overshoot on landing: its top edge would
  * leave the board's and show the squares under it. */
-@keyframes lr-ext-intro-slide {
+@keyframes ln-ext-intro-slide {
   0% {
     transform: translateY(-100%);
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -194,7 +194,7 @@ main.round .lr-ext-intro__versus {
   }
 }
 
-@keyframes lr-ext-intro-rise {
+@keyframes ln-ext-intro-rise {
   0%,
   10% {
     opacity: 0;
@@ -213,7 +213,7 @@ main.round .lr-ext-intro__versus {
   }
 }
 
-@keyframes lr-ext-intro-pop {
+@keyframes ln-ext-intro-pop {
   0%,
   18% {
     opacity: 0;
@@ -233,7 +233,7 @@ main.round .lr-ext-intro__versus {
 }
 
 /* The swords spin in from behind the badge just after it, and settle square. */
-@keyframes lr-ext-intro-clash {
+@keyframes ln-ext-intro-clash {
   0%,
   22% {
     scale: 0.3;

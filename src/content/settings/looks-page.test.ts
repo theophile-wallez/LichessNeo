@@ -44,11 +44,11 @@ const previews = (): unknown[] =>
     .mocked(window.postMessage)
     .mock.calls.map(([message]): unknown => message)
     .filter(message => JSON.stringify(message).includes('looks-preview'));
-const preview = (action: string): unknown => ({ type: 'lr-ext:looks-preview', action });
+const preview = (action: string): unknown => ({ type: 'ln-ext:looks-preview', action });
 
 const lichessTiles = (layout: HTMLElement, part: string): (string | undefined)[] =>
-  queryAll(layout, `[data-lr-ext-part='${part}'] [data-lr-ext-lichess]`, HTMLElement).map(
-    tile => tile.dataset.lrExtLichess,
+  queryAll(layout, `[data-ln-ext-part='${part}'] [data-ln-ext-lichess]`, HTMLElement).map(
+    tile => tile.dataset.lnExtLichess,
   );
 
 beforeEach(() => {
@@ -72,7 +72,7 @@ describe('the settings’ Board & sounds page', () => {
     const { layout, show } = page();
     show(true);
     await flush();
-    expect(queryOne(layout, '.lr-ext-looks__empty', HTMLElement)?.textContent).toBe(
+    expect(queryOne(layout, '.ln-ext-looks__empty', HTMLElement)?.textContent).toBe(
       'looksLichessFailed',
     );
     fetchDasher.mockResolvedValue(Response.json(DASHER));
@@ -101,18 +101,18 @@ describe('the settings’ Board & sounds page', () => {
     // The set the move sounds in: the one kept as the preview hears of it.
     const heard: (string | null)[] = [];
     vi.mocked(window.postMessage).mockImplementation(() => {
-      heard.push(localStorage.getItem('lr-ext-sounds'));
+      heard.push(localStorage.getItem('ln-ext-sounds'));
     });
     queryOne(
       layout,
-      `[data-lr-ext-part='sound'] [data-lr-ext-choice='${SYNTH_SET}']`,
+      `[data-ln-ext-part='sound'] [data-ln-ext-choice='${SYNTH_SET}']`,
       HTMLElement,
     )?.click();
     expect(previews()).toEqual([preview('step')]);
     expect(heard).toEqual([SYNTH_SET]);
     queryOne(
       layout,
-      "[data-lr-ext-part='board'] [data-lr-ext-choice='accent']",
+      "[data-ln-ext-part='board'] [data-ln-ext-choice='accent']",
       HTMLElement,
     )?.click();
     expect(previews()).toEqual([preview('step')]);
@@ -122,8 +122,8 @@ describe('the settings’ Board & sounds page', () => {
     const { library, layout } = page();
     library.choose('board', 'custom');
     expect(
-      queryAll(layout, "[data-lr-ext-part='board'] .lr-ext-src-item.active", HTMLElement).map(
-        item => item.dataset.lrExtChoice,
+      queryAll(layout, "[data-ln-ext-part='board'] .ln-ext-src-item.active", HTMLElement).map(
+        item => item.dataset.lnExtChoice,
       ),
     ).toEqual(['custom']);
   });

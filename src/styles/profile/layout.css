@@ -5,15 +5,15 @@
 
 :root {
   /* Icons for "member since", "time spent" and "time on TV", drawn on a 24x24 grid. */
-  --lr-ext-pf-calendar: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
-  --lr-ext-pf-clock: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
-  --lr-ext-pf-tv: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tv-01.svg');
+  --ln-ext-pf-calendar: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --ln-ext-pf-clock: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+  --ln-ext-pf-tv: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tv-01.svg');
 }
 
 /* ---- Layout --- */
 
 @media (min-width: 1020px) {
-  html[data-lr-ext-has~='user-show'] #main-wrap {
+  html[data-ln-ext-has~='user-show'] #main-wrap {
     ---main-max-width: 1300px !important;
   }
 
@@ -73,7 +73,7 @@
  * between them (the hero's two parts are one card). min-width: 0 keeps an unwrapped forum
  * excerpt from widening the page now the box doesn't clip. */
 @media (max-width: 1019.98px) {
-  html[data-lr-ext-has~='user-show'] main.page-menu {
+  html[data-ln-ext-has~='user-show'] main.page-menu {
     row-gap: 0;
     padding: 0 8px 24px;
   }
@@ -100,9 +100,9 @@
 /* The box is only a wrapper, each block is its own card. It holds the hero's
  * sizes, shared by the header and the social bar. */
 .page-menu__content.box.user-show {
-  --lr-ext-pf-avatar: 96px;
-  --lr-ext-pf-pad: 24px;
-  --lr-ext-pf-gap: 20px;
+  --ln-ext-pf-avatar: 96px;
+  --ln-ext-pf-pad: 24px;
+  --ln-ext-pf-gap: 20px;
 
   min-height: 0 !important;
   padding: 0 !important;

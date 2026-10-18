@@ -59,19 +59,19 @@ export function fillAroundNav(panel: HTMLElement, markup: SafeHtml, nav: HTMLEle
 type NavButton = keyof NavState;
 
 function button(nav: HTMLElement, name: NavButton): HTMLButtonElement | null {
-  return queryOne(nav, `[data-lr-ext="${name}"]`, HTMLButtonElement);
+  return queryOne(nav, `[data-ln-ext="${name}"]`, HTMLButtonElement);
 }
 
 /** Draws the buttons once per language, then only changes what changed. */
 export function syncNav(nav: HTMLElement, state: NavState, ui: InterfaceStrings): void {
   const labels = [ui.explain, ui.best, ui.next].join('|');
-  if (nav.dataset.lrExtLabels !== labels) {
-    nav.dataset.lrExtLabels = labels;
+  if (nav.dataset.lnExtLabels !== labels) {
+    nav.dataset.lnExtLabels = labels;
     setHtml(
       nav,
-      html`<button class="lr-ext-btn" data-lr-ext="explain">${svgIcon('bulb')}${ui.explain}</button>
-        <button class="lr-ext-btn" data-lr-ext="best">${svgIcon('star')}${ui.best}</button>
-        <button class="lr-ext-btn lr-ext-btn--green" data-lr-ext="next">${svgIcon('arrow')}${ui.next}</button>`,
+      html`<button class="ln-ext-btn" data-ln-ext="explain">${svgIcon('bulb')}${ui.explain}</button>
+        <button class="ln-ext-btn" data-ln-ext="best">${svgIcon('star')}${ui.best}</button>
+        <button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="next">${svgIcon('arrow')}${ui.next}</button>`,
     );
   }
   for (const name of ['explain', 'best', 'next'] as const) {
@@ -79,6 +79,6 @@ export function syncNav(nav: HTMLElement, state: NavState, ui: InterfaceStrings)
     if (!element) continue;
     const { enabled } = state[name];
     if (element.disabled === enabled) element.disabled = !enabled;
-    if (name !== 'next') element.classList.toggle('lr-ext-btn--on', state[name].on);
+    if (name !== 'next') element.classList.toggle('ln-ext-btn--on', state[name].on);
   }
 }

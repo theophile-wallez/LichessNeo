@@ -4,16 +4,16 @@ import { fakePack, IMAGE, SOUND } from '#shared/testing/packs.ts';
 import { deleteBoard, saveBoard } from './saved-boards.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
-const style = (): HTMLStyleElement | null => document.querySelector('style#lr-ext-packs');
+const style = (): HTMLStyleElement | null => document.querySelector('style#ln-ext-packs');
 const flatColors = (): string[] =>
-  ['--lr-ext-board-flat-light', '--lr-ext-board-flat-dark'].map(name =>
+  ['--ln-ext-board-flat-light', '--ln-ext-board-flat-dark'].map(name =>
     document.documentElement.style.getPropertyValue(name),
   );
 
 afterEach(() => {
   style()?.remove();
-  delete document.documentElement.dataset.lrExtBoard;
-  delete document.documentElement.dataset.lrExtLoading;
+  delete document.documentElement.dataset.lnExtBoard;
+  delete document.documentElement.dataset.lnExtLoading;
   document.documentElement.removeAttribute('style');
   localStorage.clear();
 });
@@ -57,12 +57,12 @@ describe('packRules', () => {
 
   it('gives the board its image, and the coordinates its colors when it has them', () => {
     expect(packRules({ board: WOOD, pieces: null })).toBe(
-      `:root{--lr-ext-board-img:url("${IMAGE}");--lr-ext-sq-light:#eeeeee;--lr-ext-sq-dark:#333333}\n` +
+      `:root{--ln-ext-board-img:url("${IMAGE}");--ln-ext-sq-light:#eeeeee;--ln-ext-sq-dark:#333333}\n` +
         'html body .is2d coords{---cg-ccw:#eeeeee !important;---cg-ccb:#333333 !important}',
     );
     const colorless = { ...WOOD, board: { image: IMAGE } };
     expect(packRules({ board: colorless, pieces: null })).toBe(
-      `:root{--lr-ext-board-img:url("${IMAGE}")}`,
+      `:root{--ln-ext-board-img:url("${IMAGE}")}`,
     );
   });
 });
@@ -72,24 +72,24 @@ describe('showLooks', () => {
     showLooks({ board: null, pieces: null });
     expect(style()).toBeNull();
     showLooks({ board: WOOD, pieces: WOOD });
-    expect(document.documentElement.dataset.lrExtBoard).toBe('pack');
+    expect(document.documentElement.dataset.lnExtBoard).toBe('pack');
     expect(style()?.textContent).toBe(packRules({ board: WOOD, pieces: WOOD }));
     showLooks({ board: null, pieces: null });
-    expect(document.documentElement.dataset.lrExtBoard).toBeUndefined();
+    expect(document.documentElement.dataset.lnExtBoard).toBeUndefined();
     expect(style()?.textContent).toBe('');
   });
 
   it('names a two-tone board flat, its colors on <html>, and another board by its id', () => {
     showLooks({ board: 'tone-ocean', pieces: null });
-    expect(document.documentElement.dataset.lrExtBoard).toBe('flat');
+    expect(document.documentElement.dataset.lnExtBoard).toBe('flat');
     expect(flatColors()).toEqual(['#f7f8f8', '#2f9bea']);
     const saved = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
     showLooks({ board: saved, pieces: null });
-    expect(document.documentElement.dataset.lrExtBoard).toBe('flat');
+    expect(document.documentElement.dataset.lnExtBoard).toBe('flat');
     expect(flatColors()).toEqual(['#ffffff', '#123456']);
     deleteBoard(saved);
     showLooks({ board: 'accent', pieces: null });
-    expect(document.documentElement.dataset.lrExtBoard).toBe('accent');
+    expect(document.documentElement.dataset.lnExtBoard).toBe('accent');
     expect(flatColors()).toEqual(['', '']);
     showLooks({ board: WOOD, pieces: null });
     expect(flatColors()).toEqual(['', '']);
@@ -108,8 +108,8 @@ describe('soundFiles', () => {
 describe('setLoading', () => {
   it('names what the page hides, and clears it', () => {
     setLoading(['board', 'pieces']);
-    expect(document.documentElement.dataset.lrExtLoading).toBe('board pieces');
+    expect(document.documentElement.dataset.lnExtLoading).toBe('board pieces');
     setLoading([]);
-    expect(document.documentElement.dataset.lrExtLoading).toBeUndefined();
+    expect(document.documentElement.dataset.lnExtLoading).toBeUndefined();
   });
 });

@@ -27,12 +27,12 @@ export function syncGraphViews(
       element,
       html`${GraphViewSchema.options.map(
         view =>
-          html`<button type="button" data-lr-ext="graph" data-lr-ext-view="${view}">${hugeicon(ICONS[view], { className: 'lr-ext-i' })}${ui.graphViews[view]}</button>`,
+          html`<button type="button" data-ln-ext="graph" data-ln-ext-view="${view}">${hugeicon(ICONS[view], { className: 'ln-ext-i' })}${ui.graphViews[view]}</button>`,
       )}`,
     );
   if (element.hidden === hasTimes) element.hidden = !hasTimes;
   for (const button of queryAll(element, 'button', HTMLButtonElement)) {
-    const picked = button.dataset.lrExtView === shown;
+    const picked = button.dataset.lnExtView === shown;
     button.classList.toggle('active', picked);
     if (button.getAttribute('aria-pressed') !== String(picked))
       button.setAttribute('aria-pressed', String(picked));
@@ -41,6 +41,6 @@ export function syncGraphViews(
 
 /** The view a button of the toggle stands for. */
 export function viewOf(button: HTMLElement): GraphView | null {
-  const parsed = GraphViewSchema.safeParse(button.dataset.lrExtView);
+  const parsed = GraphViewSchema.safeParse(button.dataset.lnExtView);
   return parsed.success ? parsed.data : null;
 }

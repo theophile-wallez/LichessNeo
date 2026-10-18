@@ -20,7 +20,7 @@ const SoundPlayerSchema = z.object({
   getVolume: z.optional(method<[]>()),
   enabled: z.optional(method<[]>()),
   // Set once our hooks are in, so another copy of the page script leaves them be.
-  lrExtHooked: z.optional(z.boolean()),
+  lnExtHooked: z.optional(z.boolean()),
 });
 
 export type SoundPlayer = z.infer<typeof SoundPlayerSchema>;

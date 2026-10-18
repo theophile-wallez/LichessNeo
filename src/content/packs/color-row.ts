@@ -40,51 +40,51 @@ const LABELS: Readonly<Record<SquareShade, string>> = {
 function markRow(row: HTMLElement, shade: SquareShade): void {
   const color = readCustomBoard()[shade];
   let matched = false;
-  for (const swatch of queryAll(row, '[data-lr-ext-color]', HTMLElement)) {
-    const on = swatch.dataset.lrExtColor === color;
+  for (const swatch of queryAll(row, '[data-ln-ext-color]', HTMLElement)) {
+    const on = swatch.dataset.lnExtColor === color;
     matched ||= on;
     swatch.classList.toggle('active', on);
   }
-  for (const own of queryAll(row, '.lr-ext-src-color-own', HTMLElement)) {
+  for (const own of queryAll(row, '.ln-ext-src-color-own', HTMLElement)) {
     own.classList.toggle('active', !matched);
-    setStyleProperty(own, '--lr-ext-src-color', color);
+    setStyleProperty(own, '--ln-ext-src-color', color);
   }
   for (const input of queryAll(row, 'input', HTMLInputElement))
     if (input.value !== color) input.value = color;
-  for (const code of queryAll(row, '.lr-ext-src-color-code', HTMLElement))
+  for (const code of queryAll(row, '.ln-ext-src-color-code', HTMLElement))
     if (code.textContent !== color) code.textContent = color;
 }
 
 function swatchButton({ color, name }: Swatch): HTMLButtonElement {
   const button = createElement('button', {
-    className: 'lr-ext-src-color',
+    className: 'ln-ext-src-color',
     attrs: {
       type: 'button',
-      'data-lr-ext-color': color,
-      'data-lr-ext-tip': name,
+      'data-ln-ext-color': color,
+      'data-ln-ext-tip': name,
       'aria-label': name,
     },
   });
-  setStyleProperty(button, '--lr-ext-src-color', color);
+  setStyleProperty(button, '--ln-ext-src-color', color);
   return button;
 }
 
 // Any color: the input's own swatch, in a pill with the color's code.
 function ownColor(shade: SquareShade): HTMLElement {
-  const own = createElement('label', { className: 'lr-ext-src-color-own' });
+  const own = createElement('label', { className: 'ln-ext-src-color-own' });
   const input = createElement('input', { attrs: { type: 'color', 'aria-label': LABELS[shade] } });
   // While the picker is dragged, the board follows.
   input.addEventListener('input', () => {
     if (isHexColor(input.value)) chooseSquareColor(shade, input.value);
   });
-  own.append(input, createElement('span', { className: 'lr-ext-src-color-code' }));
+  own.append(input, createElement('span', { className: 'ln-ext-src-color-code' }));
   return own;
 }
 
 function row(label: string): HTMLElement {
-  const element = createElement('div', { className: 'lr-ext-src-option-row lr-ext-src-color-row' });
-  setData(element, 'lrExtFor', CUSTOM_BOARD);
-  element.append(createElement('span', { className: 'lr-ext-src-option-label', text: label }));
+  const element = createElement('div', { className: 'ln-ext-src-option-row ln-ext-src-color-row' });
+  setData(element, 'lnExtFor', CUSTOM_BOARD);
+  element.append(createElement('span', { className: 'ln-ext-src-option-label', text: label }));
   return element;
 }
 
@@ -92,12 +92,12 @@ function row(label: string): HTMLElement {
 export function colorRow(shade: SquareShade): HTMLElement {
   const element = row(LABELS[shade]);
   const group = createElement('div', {
-    className: 'lr-ext-src-colors',
+    className: 'ln-ext-src-colors',
     attrs: { role: 'group', 'aria-label': LABELS[shade] },
   });
   group.append(...SWATCHES[shade].map(swatchButton), ownColor(shade));
   group.addEventListener('click', event => {
-    const color = event.target instanceof HTMLElement ? event.target.dataset.lrExtColor : undefined;
+    const color = event.target instanceof HTMLElement ? event.target.dataset.lnExtColor : undefined;
     if (color !== undefined) chooseSquareColor(shade, color);
   });
   element.append(group);
@@ -110,7 +110,7 @@ export function colorRow(shade: SquareShade): HTMLElement {
 /** The row that saves the custom board under a name, and shows that board at once. */
 export function saveRow(library: Library): HTMLElement {
   const element = row('Save as');
-  const form = createElement('form', { className: 'lr-ext-src-save' });
+  const form = createElement('form', { className: 'ln-ext-src-save' });
   const input = createElement('input', {
     attrs: {
       type: 'text',

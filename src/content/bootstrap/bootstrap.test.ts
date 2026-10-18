@@ -12,7 +12,7 @@ import legacy from './fixtures/legacy.json' with { type: 'json' };
 beforeEach(() => {
   localStorage.clear();
   sessionStorage.clear();
-  delete document.documentElement.dataset['lrExtCoach'];
+  delete document.documentElement.dataset['lnExtCoach'];
 });
 afterEach(() => setReadyState('complete'));
 
@@ -22,8 +22,8 @@ describe('assets', () => {
       runtime: { getURL: (path: string) => `chrome-extension://id/${path}` },
     });
     assets.start();
-    expect(document.documentElement.dataset.lrExtAssets).toBe('chrome-extension://id/');
-    delete document.documentElement.dataset.lrExtAssets;
+    expect(document.documentElement.dataset.lnExtAssets).toBe('chrome-extension://id/');
+    delete document.documentElement.dataset.lnExtAssets;
   });
 });
 
@@ -70,18 +70,18 @@ describe('coach choice', () => {
     const { stored, random } = legacyCase;
     const { dataset, storedAfter } = nowExpected(legacyCase);
     vi.spyOn(Math, 'random').mockReturnValue(random);
-    if (stored !== null) localStorage.setItem('lr-ext-coach', stored);
+    if (stored !== null) localStorage.setItem('ln-ext-coach', stored);
     coachChoice.start();
-    expect(document.documentElement.dataset['lrExtCoach']).toBe(dataset);
-    expect(localStorage.getItem('lr-ext-coach')).toBe(storedAfter);
+    expect(document.documentElement.dataset['lnExtCoach']).toBe(dataset);
+    expect(localStorage.getItem('ln-ext-coach')).toBe(storedAfter);
   });
 
   it('shows the settings’ pick at once and keeps it', () => {
-    localStorage.setItem('lr-ext-coach', '2');
+    localStorage.setItem('ln-ext-coach', '2');
     coachChoice.start();
     chooseCoach(ROBOT_COACH);
-    expect(document.documentElement.dataset['lrExtCoach']).toBe(String(ROBOT_COACH));
-    expect(localStorage.getItem('lr-ext-coach')).toBe(String(ROBOT_COACH));
+    expect(document.documentElement.dataset['lnExtCoach']).toBe(String(ROBOT_COACH));
+    expect(localStorage.getItem('ln-ext-coach')).toBe(String(ROBOT_COACH));
   });
 
   it('decodes the coach’s still at once, so a card drawn later shows it in its first frame', () => {
@@ -92,7 +92,7 @@ describe('coach choice', () => {
       decoded.push(this.src);
       return Promise.resolve();
     });
-    localStorage.setItem('lr-ext-coach', '12');
+    localStorage.setItem('ln-ext-coach', '12');
     coachChoice.start();
     chooseCoach(20);
     expect(decoded).toEqual([
@@ -109,11 +109,11 @@ describe('late reload', () => {
       const reload = vi.fn<() => void>();
       vi.stubGlobal('location', { reload });
       vi.spyOn(Date, 'now').mockReturnValue(now);
-      if (stored !== null) sessionStorage.setItem('lr-ext-late-reload', stored);
+      if (stored !== null) sessionStorage.setItem('ln-ext-late-reload', stored);
       setReadyState(ReadyStateSchema.parse(readyState));
       expect(reloadIfInjectedLate()).toBe(reloaded);
       expect(reload).toHaveBeenCalledTimes(reloads);
-      expect(sessionStorage.getItem('lr-ext-late-reload')).toBe(storedAfter);
+      expect(sessionStorage.getItem('ln-ext-late-reload')).toBe(storedAfter);
     },
   );
 });

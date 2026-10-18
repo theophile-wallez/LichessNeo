@@ -18,11 +18,11 @@ const SUFFIXES: Record<PackageKind, string> = {
 
 // The names every release has had: the README's install steps point to them.
 export function packageName(kind: PackageKind, version: string): string {
-  return `LichessReimagined-v${version}${SUFFIXES[kind]}.zip`;
+  return `LichessNeo-v${version}${SUFFIXES[kind]}.zip`;
 }
 
 export function isPackageName(name: string): boolean {
-  return /^LichessReimagined-v\d[\w.-]*\.zip$/.test(name);
+  return /^LichessNeo-v\d[\w.-]*\.zip$/.test(name);
 }
 
 // Source maps are for local debugging only, and the rest are files the OS leaves behind.

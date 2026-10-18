@@ -1,29 +1,29 @@
 /* ---- Events --- */
 
 /* An offer, its answer or more time, in a pill of its tone with Lichess's glyph for its
- * topic, in the page's language (page/chat sets `data-lr-ext-topic`, `-tone`, `-label`). */
-.mchat .mchat__messages > li[data-lr-ext-topic] {
-  --lr-ext-event-c: var(--lr-ext-accent-hover);
+ * topic, in the page's language (page/chat sets `data-ln-ext-topic`, `-tone`, `-label`). */
+.mchat .mchat__messages > li[data-ln-ext-topic] {
+  --ln-ext-event-c: var(--ln-ext-accent-hover);
   flex-direction: row;
   gap: 6px;
   width: fit-content;
   margin: 12px auto 4px;
   padding: 4px 11px 4px 9px !important;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-event-c) 13%, transparent) !important;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-event-c) 24%, transparent);
-  color: var(--lr-ext-event-c);
+  background: color-mix(in srgb, var(--ln-ext-event-c) 13%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-event-c) 24%, transparent);
+  color: var(--ln-ext-event-c);
   font-size: 12px;
   font-weight: 600;
-  animation: lr-ext-chat-event 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+  animation: ln-ext-chat-event 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-topic] > t {
+.mchat .mchat__messages > li[data-ln-ext-topic] > t {
   display: none;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-topic]::before {
-  content: var(--lr-ext-event-icon);
+.mchat .mchat__messages > li[data-ln-ext-topic]::before {
+  content: var(--ln-ext-event-icon);
   font-family: lichess;
   font-size: 13px;
   font-weight: 400;
@@ -35,48 +35,48 @@
 .mchat
   .mchat__messages
   > li:is(
-    [data-lr-ext-topic='rematch'],
-    [data-lr-ext-topic='takeback'],
-    [data-lr-ext-topic='time']
+    [data-ln-ext-topic='rematch'],
+    [data-ln-ext-topic='takeback'],
+    [data-ln-ext-topic='time']
   )::before {
   -webkit-text-fill-color: transparent;
   background: currentColor;
-  mask: var(--lr-ext-event-mask) center / 1em 1em no-repeat;
+  mask: var(--ln-ext-event-mask) center / 1em 1em no-repeat;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-topic]::after {
-  content: attr(data-lr-ext-label);
+.mchat .mchat__messages > li[data-ln-ext-topic]::after {
+  content: attr(data-ln-ext-label);
 }
 
-.mchat .mchat__messages > li[data-lr-ext-topic='rematch'] {
-  --lr-ext-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/reload.svg');
-  --lr-ext-event-icon: '\e078';
+.mchat .mchat__messages > li[data-ln-ext-topic='rematch'] {
+  --ln-ext-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/reload.svg');
+  --ln-ext-event-icon: '\e078';
 }
-.mchat .mchat__messages > li[data-lr-ext-topic='draw'] {
-  --lr-ext-event-icon: '\e076';
+.mchat .mchat__messages > li[data-ln-ext-topic='draw'] {
+  --ln-ext-event-icon: '\e076';
 }
-.mchat .mchat__messages > li[data-lr-ext-topic='takeback'] {
-  --lr-ext-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-turn-backward.svg');
-  --lr-ext-event-icon: '\e047';
+.mchat .mchat__messages > li[data-ln-ext-topic='takeback'] {
+  --ln-ext-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-turn-backward.svg');
+  --ln-ext-event-icon: '\e047';
 }
-.mchat .mchat__messages > li[data-lr-ext-topic='time'] {
-  --lr-ext-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
-  --lr-ext-event-icon: '\e04e';
-}
-
-.mchat .mchat__messages > li[data-lr-ext-tone='accept'] {
-  --lr-ext-event-c: var(--lr-ext-good);
+.mchat .mchat__messages > li[data-ln-ext-topic='time'] {
+  --ln-ext-event-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+  --ln-ext-event-icon: '\e04e';
 }
 
-.mchat .mchat__messages > li[data-lr-ext-tone='decline'] {
-  --lr-ext-event-c: var(--lr-ext-bad);
+.mchat .mchat__messages > li[data-ln-ext-tone='accept'] {
+  --ln-ext-event-c: var(--ln-ext-good);
 }
 
-.mchat .mchat__messages > li[data-lr-ext-tone='cancel'] {
-  --lr-ext-event-c: var(--lr-ext-text-dim);
+.mchat .mchat__messages > li[data-ln-ext-tone='decline'] {
+  --ln-ext-event-c: var(--ln-ext-bad);
 }
 
-@keyframes lr-ext-chat-event {
+.mchat .mchat__messages > li[data-ln-ext-tone='cancel'] {
+  --ln-ext-event-c: var(--ln-ext-text-dim);
+}
+
+@keyframes ln-ext-chat-event {
   from {
     opacity: 0;
     scale: 0.8;

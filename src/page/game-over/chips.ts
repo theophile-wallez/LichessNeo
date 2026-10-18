@@ -42,7 +42,7 @@ function linkChip(chip: HTMLElement, ply: number | undefined): void {
 }
 
 const part = (chip: HTMLElement, name: string): HTMLElement | null =>
-  queryOne(chip, `.lr-ext-end__count-${name}`, HTMLElement);
+  queryOne(chip, `.ln-ext-end__count-${name}`, HTMLElement);
 
 /** Gives each chip its class, icon, label and count; their numbers, for the roll. */
 function show(
@@ -56,13 +56,13 @@ function show(
     const moveClass = classes[i];
     if (!moveClass) continue;
     const count = summary.counts[moveClass] ?? 0;
-    setStyleProperty(chip, '--lr-ext-count-c', CLASS_COLORS[moveClass]);
-    setStyleProperty(chip, '--lr-ext-count-i', String(i));
+    setStyleProperty(chip, '--ln-ext-count-c', CLASS_COLORS[moveClass]);
+    setStyleProperty(chip, '--ln-ext-count-i', String(i));
     const icon = part(chip, 'icon');
     if (icon) setHtml(icon, classSvg(moveClass));
     const label = part(chip, 'label');
     if (label) label.textContent = texts.countLabel(moveClass, count);
-    chip.dataset.lrExtCount = String(count);
+    chip.dataset.lnExtCount = String(count);
     linkChip(chip, summary.firstPlies[moveClass]);
     numbers.push(chip.querySelector('b'));
   }
@@ -70,13 +70,13 @@ function show(
 }
 
 export function createChips(root: HTMLElement): Chips {
-  const chips = queryAll(root, '.lr-ext-end__count', HTMLElement);
+  const chips = queryAll(root, '.ln-ext-end__count', HTMLElement);
   let spinning = 0;
   let rolling = 0;
   const stop = (): void => {
     clearInterval(spinning);
     clearInterval(rolling);
-    root.classList.toggle('lr-ext-end__counts--spinning', false);
+    root.classList.toggle('ln-ext-end__counts--spinning', false);
   };
   const spinOnce = (): void => {
     for (const chip of chips) {
@@ -88,19 +88,19 @@ export function createChips(root: HTMLElement): Chips {
   return {
     spin: () => {
       stop();
-      root.classList.toggle('lr-ext-end__counts--spinning', true);
+      root.classList.toggle('ln-ext-end__counts--spinning', true);
       spinOnce();
       spinning = window.setInterval(spinOnce, SPIN_MS);
     },
     reveal: (summary, texts) => {
       stop();
       const numbers = show(chips, summary, texts);
-      root.classList.toggle('lr-ext-end__counts--revealed', true);
+      root.classList.toggle('ln-ext-end__counts--revealed', true);
       const started = Date.now();
       const roll = (): void => {
         const elapsed = Date.now() - started;
         for (const [i, number] of numbers.entries()) {
-          const target = Number(chips[i]?.dataset.lrExtCount ?? 0);
+          const target = Number(chips[i]?.dataset.lnExtCount ?? 0);
           if (number) number.textContent = String(rolled(target, elapsed - i * CHIP_STAGGER_MS));
         }
         if (elapsed >= ROLL_MS + CHIP_STAGGER_MS * numbers.length) clearInterval(rolling);
@@ -111,7 +111,7 @@ export function createChips(root: HTMLElement): Chips {
     update: (summary, texts) => {
       stop();
       for (const [i, number] of show(chips, summary, texts).entries())
-        if (number) number.textContent = chips[i]?.dataset.lrExtCount ?? '0';
+        if (number) number.textContent = chips[i]?.dataset.lnExtCount ?? '0';
     },
     stop,
   };

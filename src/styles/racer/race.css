@@ -2,77 +2,77 @@
 
 /* Your vehicle and its color, for the side panel's tile. Your lane is always first. */
 .racer {
-  --lr-ext-car: var(--lr-ext-purple-dark);
-  --lr-ext-car-glyph: '0';
-  --lr-ext-lane-h: 34px;
-  --lr-ext-lanes: 1;
+  --ln-ext-car: var(--ln-ext-purple-dark);
+  --ln-ext-car-glyph: '0';
+  --ln-ext-lane-h: 34px;
+  --ln-ext-lanes: 1;
 }
 
 .racer:has(.racer__race__track--me .car-1) {
-  --lr-ext-car: var(--lr-ext-purple-dark);
+  --ln-ext-car: var(--ln-ext-purple-dark);
 }
 .racer:has(.racer__race__track--me .car-2) {
-  --lr-ext-car: var(--lr-ext-green-darker);
+  --ln-ext-car: var(--ln-ext-green-darker);
 }
 .racer:has(.racer__race__track--me .car-3) {
-  --lr-ext-car: var(--lr-ext-red-dark);
+  --ln-ext-car: var(--ln-ext-red-dark);
 }
 .racer:has(.racer__race__track--me .car-4) {
-  --lr-ext-car: var(--lr-ext-orange-dark);
+  --ln-ext-car: var(--ln-ext-orange-dark);
 }
 .racer:has(.racer__race__track--me .car-5) {
-  --lr-ext-car: var(--lr-ext-accent-dim);
+  --ln-ext-car: var(--ln-ext-accent-dim);
 }
 .racer:has(.racer__race__track--me .car-6) {
-  --lr-ext-car: var(--lr-ext-orange-dark);
+  --ln-ext-car: var(--ln-ext-orange-dark);
 }
 .racer:has(.racer__race__track--me .car-7) {
-  --lr-ext-car: var(--lr-ext-green-darker);
+  --ln-ext-car: var(--ln-ext-green-darker);
 }
 .racer:has(.racer__race__track--me .car-8) {
-  --lr-ext-car: var(--lr-ext-orange-darker);
+  --ln-ext-car: var(--ln-ext-orange-darker);
 }
 .racer:has(.racer__race__track--me .car-9) {
-  --lr-ext-car: var(--lr-ext-orange-darker);
+  --ln-ext-car: var(--ln-ext-orange-darker);
 }
 
 .racer:has(.racer__race__track--me .vehicle1) {
-  --lr-ext-car-glyph: '1';
+  --ln-ext-car-glyph: '1';
 }
 .racer:has(.racer__race__track--me .vehicle2) {
-  --lr-ext-car-glyph: '2';
+  --ln-ext-car-glyph: '2';
 }
 .racer:has(.racer__race__track--me .vehicle3) {
-  --lr-ext-car-glyph: '3';
+  --ln-ext-car-glyph: '3';
 }
 
 /* The number of lanes, so the board leaves the track room (up to ten racers). */
 .racer:has(.racer__race__track:nth-child(2)) {
-  --lr-ext-lanes: 2;
+  --ln-ext-lanes: 2;
 }
 .racer:has(.racer__race__track:nth-child(3)) {
-  --lr-ext-lanes: 3;
+  --ln-ext-lanes: 3;
 }
 .racer:has(.racer__race__track:nth-child(4)) {
-  --lr-ext-lanes: 4;
+  --ln-ext-lanes: 4;
 }
 .racer:has(.racer__race__track:nth-child(5)) {
-  --lr-ext-lanes: 5;
+  --ln-ext-lanes: 5;
 }
 .racer:has(.racer__race__track:nth-child(6)) {
-  --lr-ext-lanes: 6;
+  --ln-ext-lanes: 6;
 }
 .racer:has(.racer__race__track:nth-child(7)) {
-  --lr-ext-lanes: 7;
+  --ln-ext-lanes: 7;
 }
 .racer:has(.racer__race__track:nth-child(8)) {
-  --lr-ext-lanes: 8;
+  --ln-ext-lanes: 8;
 }
 .racer:has(.racer__race__track:nth-child(9)) {
-  --lr-ext-lanes: 9;
+  --ln-ext-lanes: 9;
 }
 .racer:has(.racer__race__track:nth-child(10)) {
-  --lr-ext-lanes: 10;
+  --ln-ext-lanes: 10;
 }
 
 /* Lichess sizes the board from the whole window, sidebar included, and ignores the
@@ -80,27 +80,27 @@
  * panel leave, and by what the track leaves below. */
 @media (min-width: 1020px) {
   main > .racer {
-    --lr-ext-coords-l: 0px;
-    --lr-ext-race-h: calc(var(--lr-ext-lanes) * (var(--lr-ext-lane-h) + 5px) + 15px);
+    --ln-ext-coords-l: 0px;
+    --ln-ext-race-h: calc(var(--ln-ext-lanes) * (var(--ln-ext-lane-h) + 5px) + 15px);
 
     grid-template-columns:
       min(
         var(---col2-uniboard-width),
         calc(
-          var(--lr-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--lr-ext-coords-l) -
+          var(--ln-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--ln-ext-coords-l) -
             275px
         ),
         calc(
-          var(--lr-ext-main-h, 100dvh) - 80px - var(---block-gap, 16px) - var(--lr-ext-race-h) -
-            var(--lr-ext-coords-off, 0px)
+          var(--ln-ext-main-h, 100dvh) - 80px - var(---block-gap, 16px) - var(--ln-ext-race-h) -
+            var(--ln-ext-coords-off, 0px)
         )
       )
       minmax(240px, 400px) !important;
-    margin-left: var(--lr-ext-coords-l);
+    margin-left: var(--ln-ext-coords-l);
   }
 
   body:is(.coords-in, .coords-out) main > .racer {
-    --lr-ext-coords-l: calc(0.6 * var(--lr-ext-coords-size, 13px) + 10px);
+    --ln-ext-coords-l: calc(0.6 * var(--ln-ext-coords-size, 13px) + 10px);
   }
 }
 
@@ -117,9 +117,9 @@
   justify-content: flex-start !important;
   gap: 20px;
   padding: 20px !important;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
@@ -131,7 +131,7 @@
 
 /* Your vehicle, white on a tile in its color. */
 .racer .puz-side__top::before {
-  content: var(--lr-ext-car-glyph) !important;
+  content: var(--ln-ext-car-glyph) !important;
   display: flex;
   flex: none;
   align-items: flex-end;
@@ -144,13 +144,13 @@
   border-radius: 14px;
   background: linear-gradient(
     160deg,
-    color-mix(in srgb, var(--lr-ext-car) 65%, #fff),
-    var(--lr-ext-car)
+    color-mix(in srgb, var(--ln-ext-car) 65%, #fff),
+    var(--ln-ext-car)
   ) !important;
   box-shadow:
     inset 0 1px 0 #ffffff4d,
     inset 0 -2px 0 #0000002e;
-  color: var(--lr-ext-white);
+  color: var(--ln-ext-white);
   font: 400 52px / 0.5 racer-car;
   text-shadow: 0 2px 4px #0000004d;
 }
@@ -166,7 +166,7 @@
 }
 
 :is(.racer, .storm) .puz-side__start__text strong {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 26px !important;
   font-weight: 800 !important;
   line-height: 1.1;
@@ -179,7 +179,7 @@
   gap: 7px;
   padding: 4px 11px 4px 9px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-orange-dark) 14%, transparent);
+  background: color-mix(in srgb, var(--ln-ext-orange-dark) 14%, transparent);
   color: var(--c-brag);
   font-size: 13px !important;
   font-weight: 700 !important;
@@ -201,8 +201,8 @@
 
 :is(.racer, .storm) .puz-side__solved__text {
   margin: 0 !important;
-  color: var(--lr-ext-text-strong) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 60px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -210,24 +210,24 @@
 }
 
 :is(.racer, .storm) .puz-side__start__text span::before {
-  animation: lr-ext-racer-beat 1.2s ease-in-out infinite;
+  animation: ln-ext-racer-beat 1.2s ease-in-out infinite;
 }
 
 /* A solved puzzle bumps the score. */
 :is(.racer, .storm).puz-mod-puzzle .puz-side__solved__text {
-  animation: lr-ext-racer-bump 0.4s ease-out;
+  animation: ln-ext-racer-bump 0.4s ease-out;
 }
 
-@keyframes lr-ext-racer-beat {
+@keyframes ln-ext-racer-beat {
   50% {
     opacity: 0.35;
     transform: scale(0.7);
   }
 }
 
-@keyframes lr-ext-racer-bump {
+@keyframes ln-ext-racer-bump {
   30% {
-    color: var(--lr-ext-good-hover);
+    color: var(--ln-ext-good-hover);
     transform: scale(1.15);
   }
 }
@@ -247,7 +247,7 @@
 .racer .puz-side__link p,
 .racer .racer__pre__message__text p {
   margin: 0 0 8px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 14px;
 }
 
@@ -268,8 +268,8 @@
   margin: 0 !important;
   padding: 6px 12px 6px 8px;
   border-radius: 999px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text) !important;
   font-size: 13px;
   font-weight: 700;
 }

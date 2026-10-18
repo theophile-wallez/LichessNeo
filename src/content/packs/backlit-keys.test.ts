@@ -70,36 +70,36 @@ describe('showKeys', () => {
   it('puts the board’s keys and light on <html>, for both schemes', () => {
     showKeys('backlit-forest', keyBox(DEFAULT_KEY_SHAPE));
     const style = root.style;
-    expect(frameOf(style.getPropertyValue('--lr-ext-backlit-keys-dark'))).toBe('#0a100c');
-    expect(frameOf(style.getPropertyValue('--lr-ext-backlit-keys-light'))).toBe('#7d9d85');
-    expect(style.getPropertyValue('--lr-ext-backlit-tint-dark')).toBe('#8be9b0');
-    expect(style.getPropertyValue('--lr-ext-backlit-tint-light')).toBe('#16904c');
+    expect(frameOf(style.getPropertyValue('--ln-ext-backlit-keys-dark'))).toBe('#0a100c');
+    expect(frameOf(style.getPropertyValue('--ln-ext-backlit-keys-light'))).toBe('#7d9d85');
+    expect(style.getPropertyValue('--ln-ext-backlit-tint-dark')).toBe('#8be9b0');
+    expect(style.getPropertyValue('--ln-ext-backlit-tint-light')).toBe('#16904c');
   });
 
   it('gives the last move’s outline the keys’ shape, its corners a share of the key', () => {
     showKeys('backlit', keyBox({ gap: 0, radius: 25 }));
-    expect(root.style.getPropertyValue('--lr-ext-backlit-inset')).toBe('0%');
-    expect(root.style.getPropertyValue('--lr-ext-backlit-radius')).toBe('25%');
+    expect(root.style.getPropertyValue('--ln-ext-backlit-inset')).toBe('0%');
+    expect(root.style.getPropertyValue('--ln-ext-backlit-radius')).toBe('25%');
     showKeys('backlit', keyBox({ gap: 16, radius: 0 }));
-    expect(root.style.getPropertyValue('--lr-ext-backlit-inset')).toBe('8%');
-    expect(root.style.getPropertyValue('--lr-ext-backlit-radius')).toBe('0%');
+    expect(root.style.getPropertyValue('--ln-ext-backlit-inset')).toBe('8%');
+    expect(root.style.getPropertyValue('--ln-ext-backlit-radius')).toBe('0%');
   });
 });
 
 const tile = (theme: string): string =>
-  `<button class="lr-ext-src-item"><span class="lr-ext-src-thumb" data-lr-ext-theme="${theme}"></span></button>`;
+  `<button class="ln-ext-src-item"><span class="ln-ext-src-thumb" data-ln-ext-theme="${theme}"></span></button>`;
 const thumb = (theme: string): HTMLElement => {
-  const found = queryOne(document, `[data-lr-ext-theme="${theme}"]`, HTMLElement);
+  const found = queryOne(document, `[data-ln-ext-theme="${theme}"]`, HTMLElement);
   if (!found) throw new Error(`no ${theme}`);
   return found;
 };
 const keys = (theme: string): string =>
-  thumb(theme).style.getPropertyValue('--lr-ext-backlit-keys-dark');
+  thumb(theme).style.getPropertyValue('--ln-ext-backlit-keys-dark');
 
 describe('paintTiles', () => {
   it('paints the backlit tiles only, in the shape the settings give', () => {
     document.body.innerHTML = tile('backlit-walnut') + tile('backlit-neon') + tile('accent');
-    localStorage.setItem('lr-ext-backlit-gap', '0');
+    localStorage.setItem('ln-ext-backlit-gap', '0');
     paintTiles();
     expect(frameOf(keys('backlit-walnut'))).toBe('#120c08');
     expect(placeOf(keysOf(svgOf(keys('backlit-walnut')))[0])).toEqual([
@@ -109,10 +109,10 @@ describe('paintTiles', () => {
       '9.6',
       'url(#l)',
     ]);
-    expect(thumb('backlit-walnut').style.getPropertyValue('--lr-ext-backlit-tint-light')).toBe(
+    expect(thumb('backlit-walnut').style.getPropertyValue('--ln-ext-backlit-tint-light')).toBe(
       '#d96c00',
     );
-    expect(thumb('backlit-walnut').dataset.lrExtPainted).toBe('backlit-walnut 0 0.096');
+    expect(thumb('backlit-walnut').dataset.lnExtPainted).toBe('backlit-walnut 0 0.096');
     expect(thumb('backlit-neon').getAttribute('style')).toBeNull();
     expect(thumb('accent').getAttribute('style')).toBeNull();
   });
@@ -123,9 +123,9 @@ describe('paintTiles', () => {
     thumb('backlit-panda').removeAttribute('style');
     paintTiles(document.body);
     expect(keys('backlit-panda')).toBe('');
-    localStorage.setItem('lr-ext-backlit-radius', '50');
+    localStorage.setItem('ln-ext-backlit-radius', '50');
     paintTiles(document.body);
-    expect(thumb('backlit-panda').dataset.lrExtPainted).toBe('backlit-panda 0.0275 0.4725');
+    expect(thumb('backlit-panda').dataset.lnExtPainted).toBe('backlit-panda 0.0275 0.4725');
     expect(placeOf(keysOf(svgOf(keys('backlit-panda')))[0])?.[3]).toBe('47.25');
   });
 });

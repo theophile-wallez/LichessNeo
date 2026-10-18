@@ -18,9 +18,9 @@ main.page-menu.video .subnav a {
   margin: 0 !important;
   padding: 0 12px 0 10px !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-bg-raised) !important;
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  color: var(--ln-ext-text) !important;
   font-size: 13.5px;
   font-weight: 650;
   white-space: nowrap;
@@ -30,14 +30,14 @@ main.page-menu.video .subnav a {
 }
 
 main.page-menu.video .subnav a:hover {
-  background: var(--lr-ext-bg-raised-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.page-menu.video .subnav a.checked {
-  background: color-mix(in srgb, var(--lr-ext-accent) 22%, var(--lr-ext-bg-raised)) !important;
-  box-shadow: inset 0 0 0 1px var(--lr-ext-accent);
-  color: var(--lr-ext-text-strong) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 22%, var(--ln-ext-bg-raised)) !important;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-accent);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.page-menu.video .subnav a > span {
@@ -61,7 +61,7 @@ main.page-menu.video .subnav a.checked > span::before {
 
 main.page-menu.video .subnav a > em {
   display: inline !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 11.5px;
   font-style: normal;
   font-weight: 700;

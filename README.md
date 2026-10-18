@@ -1,4 +1,4 @@
-# Lichess Reimagined
+# Lichess Neo
 
 Lichess is free, open source and has no ads. This Chrome extension gives it
 a modern look and feel: a roomy layout, playful pages, a coach by your side,
@@ -61,8 +61,8 @@ same treatment, on any screen.
 
 If you want to install it directly from GitHub:
 
-1. Download `LichessReimagined-v….zip` from the
-   [latest release](https://github.com/theophile-wallez/LichessReimagined/releases/latest)
+1. Download `LichessNeo-v….zip` from the
+   [latest release](https://github.com/theophile-wallez/LichessNeo/releases/latest)
    and unzip it into a folder you'll keep.
 2. In Chrome, open `chrome://extensions`.
 3. Turn on **Developer mode**, top right.
@@ -77,8 +77,8 @@ from their own extensions page. Safari isn't supported.
 
 Firefox 140 or later. It has its own package:
 
-1. Download `LichessReimagined-v…-firefox.zip` from the
-   [latest release](https://github.com/theophile-wallez/LichessReimagined/releases/latest).
+1. Download `LichessNeo-v…-firefox.zip` from the
+   [latest release](https://github.com/theophile-wallez/LichessNeo/releases/latest).
 2. In Firefox, open `about:debugging#/runtime/this-firefox`.
 3. Click **Load Temporary Add-on…** and choose the ZIP.
 4. Open [lichess.org](https://lichess.org).
@@ -126,7 +126,7 @@ lichess.org (after `pnpm build`), which CI runs on every push. How the code is o
 ### Building from the sources
 
 `pnpm package` also zips the sources each version is built from,
-`LichessReimagined-v<version>-source.zip`. To rebuild the add-on from them, with
+`LichessNeo-v<version>-source.zip`. To rebuild the add-on from them, with
 Node.js 24 and pnpm, in the unzipped folder:
 
 ```bash
@@ -151,7 +151,7 @@ Lichess's own board, pieces and sounds come from lichess.org itself. A pack you
 import is yours: share only what you may share.
 
 If you own something used here and want it gone, please
-[open an issue](https://github.com/theophile-wallez/LichessReimagined/issues) and it will be removed promptly.
+[open an issue](https://github.com/theophile-wallez/LichessNeo/issues) and it will be removed promptly.
 
 The extension only changes how Lichess looks and sounds in your browser. It
 doesn't touch your account, and it gives no help during a game you're

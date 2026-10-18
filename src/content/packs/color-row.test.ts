@@ -17,7 +17,7 @@ async function load(): Promise<Modules> {
 }
 
 const root = document.documentElement;
-const stored = (): unknown => JSON.parse(localStorage.getItem('lr-ext-custom-board') ?? 'null');
+const stored = (): unknown => JSON.parse(localStorage.getItem('ln-ext-custom-board') ?? 'null');
 
 function find<T extends Element>(parent: ParentNode, selector: string, type: new () => T): T {
   const found = queryOne(parent, selector, type);
@@ -27,7 +27,7 @@ function find<T extends Element>(parent: ParentNode, selector: string, type: new
 
 const active = (row: HTMLElement): (string | undefined)[] =>
   queryAll(row, '.active', HTMLElement).map(
-    element => element.dataset.lrExtColor ?? element.className,
+    element => element.dataset.lnExtColor ?? element.className,
   );
 
 // In the page, as in an open panel: a row taken out stops following the board.
@@ -52,7 +52,7 @@ describe('the custom board’s color rows', () => {
     const shown = inPage(colorRow('light'));
     const gone = inPage(colorRow('light'));
     gone.remove();
-    find(shown, '[data-lr-ext-tip="Ivory"]', HTMLElement).click();
+    find(shown, '[data-ln-ext-tip="Ivory"]', HTMLElement).click();
     expect(active(shown)).toEqual(['#f0ead8']);
     expect(active(gone)).toEqual(['#f7f8f8']);
   });
@@ -61,30 +61,30 @@ describe('the custom board’s color rows', () => {
     const { colorRow } = await load();
     const row = inPage(colorRow('light'));
     expect(
-      queryAll(row, '[data-lr-ext-color]', HTMLElement).map(swatch => swatch.dataset.lrExtTip),
+      queryAll(row, '[data-ln-ext-color]', HTMLElement).map(swatch => swatch.dataset.lnExtTip),
     ).toEqual(['White', 'Ivory', 'Mist', 'Lilac']);
     expect(active(row)).toEqual(['#f7f8f8']);
     expect(find(row, 'input', HTMLInputElement).value).toBe('#f7f8f8');
-    find(row, '[data-lr-ext-tip="Ivory"]', HTMLElement).click();
+    find(row, '[data-ln-ext-tip="Ivory"]', HTMLElement).click();
     expect(stored()).toEqual({ light: '#f0ead8', dark: '#5e6ad2' });
-    expect(root.style.getPropertyValue('--lr-ext-board-custom-light')).toBe('#f0ead8');
+    expect(root.style.getPropertyValue('--ln-ext-board-custom-light')).toBe('#f0ead8');
     expect(active(row)).toEqual(['#f0ead8']);
   });
 
   it('take any color from the picker as it’s dragged, its code beside it', async () => {
     const { colorRow } = await load();
     const row = inPage(colorRow('dark'));
-    expect(queryAll(row, '[data-lr-ext-color]', HTMLElement)).toEqual([]);
-    expect(active(row)).toEqual(['lr-ext-src-color-own active']);
-    expect(find(row, '.lr-ext-src-color-code', HTMLElement).textContent).toBe('#5e6ad2');
+    expect(queryAll(row, '[data-ln-ext-color]', HTMLElement)).toEqual([]);
+    expect(active(row)).toEqual(['ln-ext-src-color-own active']);
+    expect(find(row, '.ln-ext-src-color-code', HTMLElement).textContent).toBe('#5e6ad2');
     const input = find(row, 'input', HTMLInputElement);
     input.value = '#ABCDEF';
     input.dispatchEvent(new Event('input'));
     expect(stored()).toEqual({ light: '#f7f8f8', dark: '#abcdef' });
-    expect(root.style.getPropertyValue('--lr-ext-board-custom-dark')).toBe('#abcdef');
-    expect(find(row, '.lr-ext-src-color-code', HTMLElement).textContent).toBe('#abcdef');
-    const own = find(row, '.lr-ext-src-color-own', HTMLElement);
-    expect(own.style.getPropertyValue('--lr-ext-src-color')).toBe('#abcdef');
+    expect(root.style.getPropertyValue('--ln-ext-board-custom-dark')).toBe('#abcdef');
+    expect(find(row, '.ln-ext-src-color-code', HTMLElement).textContent).toBe('#abcdef');
+    const own = find(row, '.ln-ext-src-color-own', HTMLElement);
+    expect(own.style.getPropertyValue('--ln-ext-src-color')).toBe('#abcdef');
   });
 
   it('ring the picker for a color off the swatches, in every row shown', async () => {
@@ -95,7 +95,7 @@ describe('the custom board’s color rows', () => {
     input.value = '#123456';
     input.dispatchEvent(new Event('input'));
     for (const row of [menu, settings]) {
-      expect(active(row)).toEqual(['lr-ext-src-color-own active']);
+      expect(active(row)).toEqual(['ln-ext-src-color-own active']);
       expect(find(row, 'input', HTMLInputElement).value).toBe('#123456');
     }
   });
@@ -127,7 +127,7 @@ async function start(): Promise<{
 describe('the custom board’s save row', () => {
   it('saves the custom board under its name and shows that board', async () => {
     localStorage.setItem(
-      'lr-ext-custom-board',
+      'ln-ext-custom-board',
       JSON.stringify({ light: '#e6dcf2', dark: '#202020' }),
     );
     const { library, form, name, loaded } = await start();
@@ -149,7 +149,7 @@ describe('the custom board’s save row', () => {
       light: '#ffffff',
       dark: '#000000',
     }));
-    localStorage.setItem('lr-ext-saved-boards', JSON.stringify(full));
+    localStorage.setItem('ln-ext-saved-boards', JSON.stringify(full));
     const { library, form, name, loaded } = await start();
     name.value = 'Night';
     form.dispatchEvent(new Event('submit', { cancelable: true }));

@@ -3,14 +3,14 @@
 /* Phones and tablets held upright: one column, the board and the panel (racer/side-narrow.css)
    on the first screen, the highscores and the about link under them. */
 @media (max-width: 1019.98px) {
-  html[data-lr-ext-has~='storm-play'] #main-wrap > main {
-    --lr-ext-board: min(
+  html[data-ln-ext-has~='storm-play'] #main-wrap > main {
+    --ln-ext-board: min(
       100vw - 16px,
       max(280px, 100dvh - var(---site-header-height, 60px) - 236px)
     );
 
     display: grid;
-    grid-template-columns: var(--lr-ext-board);
+    grid-template-columns: var(--ln-ext-board);
     grid-template-areas: 'board' 'side' 'scores' 'high' 'about';
     justify-content: center;
     gap: 12px;
@@ -38,17 +38,17 @@
     background-size: 34px, auto !important;
   }
 
-  html[data-lr-ext-has~='storm-play'] main > .storm-play-scores {
+  html[data-ln-ext-has~='storm-play'] main > .storm-play-scores {
     grid-area: scores;
     margin: 0 !important;
   }
 
-  html[data-lr-ext-has~='storm-play'] main > .storm-dashboard__high__periods {
+  html[data-ln-ext-has~='storm-play'] main > .storm-dashboard__high__periods {
     grid-area: high;
     margin: 0 !important;
   }
 
-  html[data-lr-ext-has~='storm-play'] main > .storm__about__link {
+  html[data-ln-ext-has~='storm-play'] main > .storm__about__link {
     grid-area: about;
     margin: 0 !important;
   }
@@ -58,13 +58,13 @@
 
 /* A tablet or a phone on its side: the panel beside a board as tall as the screen. */
 @media (max-width: 1019.98px) and (orientation: landscape) {
-  html[data-lr-ext-has~='storm-play'] #main-wrap > main {
-    --lr-ext-board: max(
+  html[data-ln-ext-has~='storm-play'] #main-wrap > main {
+    --ln-ext-board: max(
       240px,
       min(100dvh - var(---site-header-height, 60px) - 16px, 100vw - 16px - 12px - 280px)
     );
 
-    grid-template-columns: var(--lr-ext-board) minmax(280px, 400px);
+    grid-template-columns: var(--ln-ext-board) minmax(280px, 400px);
     grid-template-rows: 1fr repeat(3, auto);
     grid-template-areas:
       'board side'
@@ -73,7 +73,7 @@
       'board about';
   }
 
-  html[data-lr-ext-has~='storm-play'] main > .storm__about__link {
+  html[data-ln-ext-has~='storm-play'] main > .storm__about__link {
     justify-self: start;
   }
 }

@@ -52,7 +52,7 @@ describe('commentMarkup', () => {
     for (const [kind, value, html] of legacy.tokens) {
       const word = `[[${kind}:${value}]]`;
       expect(markup([say(word)])).toBe(
-        `<span class="lr-ext-say"><span class="lr-ext-w">${withPieceGlyphs(html ?? '')}</span> </span>`,
+        `<span class="ln-ext-say"><span class="ln-ext-w">${withPieceGlyphs(html ?? '')}</span> </span>`,
       );
     }
   });
@@ -66,23 +66,23 @@ describe('commentMarkup', () => {
 
   it('keeps a numbered move’s number with its chip', () => {
     expect(markup([say('[[n:12...:b:Qb6]]')])).toBe(
-      `<span class="lr-ext-say"><span class="lr-ext-w"><span class="lr-ext-num">12... <span class="lr-ext-mv"><i class="lr-ext-pc lr-ext-pc-bq"></i>b6</span></span></span> </span>`,
+      `<span class="ln-ext-say"><span class="ln-ext-w"><span class="ln-ext-num">12... <span class="ln-ext-mv"><i class="ln-ext-pc ln-ext-pc-bq"></i>b6</span></span></span> </span>`,
     );
   });
 
   it('escapes the text around the tokens', () => {
     expect(markup([say('a<b [[s:e4]]&')])).toBe(
-      '<span class="lr-ext-say"><span class="lr-ext-w">a&lt;b </span><span class="lr-ext-w"><b class="lr-ext-sq">e4</b>&amp;</span> </span>',
+      '<span class="ln-ext-say"><span class="ln-ext-w">a&lt;b </span><span class="ln-ext-w"><b class="ln-ext-sq">e4</b>&amp;</span> </span>',
     );
   });
 
   it('hides the words not typed yet, and leaves a dropped sentence out', () => {
     const parts = [say('one two', true), say('three')];
     expect(markup(parts, { shown: 1 })).toContain(
-      '<span class="lr-ext-w">one </span><span class="lr-ext-w lr-ext-w--off">two</span>',
+      '<span class="ln-ext-w">one </span><span class="ln-ext-w ln-ext-w--off">two</span>',
     );
     expect(markup(parts, { dropped: true })).toBe(
-      '<span class="lr-ext-say"><span class="lr-ext-w">three</span> </span>',
+      '<span class="ln-ext-say"><span class="ln-ext-w">three</span> </span>',
     );
   });
 });
@@ -114,7 +114,7 @@ describe('verdictTitle', () => {
   });
 
   it('says a best move mates rather than that it’s best', () => {
-    const queen = '<span class="lr-ext-fig">♛</span>';
+    const queen = '<span class="ln-ext-fig">♛</span>';
     expect(verdictTitle('best', 'Qh5#', en).value).toBe(`${queen}h5# is checkmate`);
     expect(verdictTitle('best', 'Qh5#', fr).value).toBe(`${queen}h5# est mat`);
   });

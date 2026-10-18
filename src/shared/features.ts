@@ -10,7 +10,7 @@ export function startFeatures(features: readonly Feature[]): void {
     try {
       feature.start();
     } catch (error) {
-      console.error(`[LichessReimagined] ${feature.name} failed to start`, error);
+      console.error(`[LichessNeo] ${feature.name} failed to start`, error);
     }
   }
 }

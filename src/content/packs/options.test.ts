@@ -23,11 +23,11 @@ describe('the backlit boards’ settings', () => {
   });
 
   it('read the keys’ shape picked, and the default for a value out of range', () => {
-    localStorage.setItem('lr-ext-backlit-gap', '0');
-    localStorage.setItem('lr-ext-backlit-radius', '50');
+    localStorage.setItem('ln-ext-backlit-gap', '0');
+    localStorage.setItem('ln-ext-backlit-radius', '50');
     expect(readBacklit().shape).toEqual({ gap: 0, radius: 50 });
-    localStorage.setItem('lr-ext-backlit-gap', '17');
-    localStorage.setItem('lr-ext-backlit-radius', '-1');
+    localStorage.setItem('ln-ext-backlit-gap', '17');
+    localStorage.setItem('ln-ext-backlit-radius', '-1');
     expect(readBacklit().shape).toEqual({ gap: 5.5, radius: 9.6 });
   });
 
@@ -59,6 +59,6 @@ describe('the board panel’s rows', () => {
       'Dark squares',
       'Save as',
     ]);
-    expect(rows.map(row => row.dataset.lrExtFor)).toEqual(['custom', 'custom', 'custom']);
+    expect(rows.map(row => row.dataset.lnExtFor)).toEqual(['custom', 'custom', 'custom']);
   });
 });

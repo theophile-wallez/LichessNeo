@@ -27,9 +27,9 @@ async function saveScheme(background: string): Promise<void> {
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
       body: new URLSearchParams({ bg: background }),
     });
-    if (!response.ok) console.warn('[LichessReimagined] color scheme unsaved', response.status);
+    if (!response.ok) console.warn('[LichessNeo] color scheme unsaved', response.status);
   } catch (error) {
-    console.warn('[LichessReimagined] color scheme unsaved', error);
+    console.warn('[LichessNeo] color scheme unsaved', error);
   }
 }
 

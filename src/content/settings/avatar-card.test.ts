@@ -37,7 +37,7 @@ afterEach(() => {
   localStorage.clear();
 });
 
-const stored = (): unknown => JSON.parse(localStorage.getItem('lr-ext-avatar') ?? 'null');
+const stored = (): unknown => JSON.parse(localStorage.getItem('ln-ext-avatar') ?? 'null');
 
 function click(card: HTMLElement, selector: string): void {
   const target = queryOne(card, selector, HTMLElement);
@@ -56,14 +56,14 @@ async function upload(card: HTMLElement, file: File): Promise<void> {
 }
 
 const shownPanel = (card: HTMLElement): (string | undefined)[] =>
-  queryAll(card, '.lr-ext-avatar-pick__panel', HTMLElement)
+  queryAll(card, '.ln-ext-avatar-pick__panel', HTMLElement)
     .filter(panel => !panel.hidden)
-    .map(panel => panel.dataset.lrExtAvatarMode);
+    .map(panel => panel.dataset.lnExtAvatarMode);
 const preview = (card: HTMLElement): DOMStringMap | undefined =>
-  queryOne(card, '.lr-ext-avatar-pick__preview', HTMLElement)?.dataset;
+  queryOne(card, '.ln-ext-avatar-pick__preview', HTMLElement)?.dataset;
 const pressed = (card: HTMLElement): (string | undefined)[] =>
   queryAll(card, '[aria-pressed=true]', HTMLElement).map(
-    tile => tile.dataset.lrExtPickCoach ?? tile.dataset.lrExtPickColor,
+    tile => tile.dataset.lnExtPickCoach ?? tile.dataset.lnExtPickColor,
   );
 
 describe('the settings’ avatar card', () => {
@@ -71,28 +71,28 @@ describe('the settings’ avatar card', () => {
     keepOwnName('Captain');
     const card = buildAvatarCard();
     expect(shownPanel(card)).toEqual(['name']);
-    expect(preview(card)?.lrExtAvatarCoach).toBe(String(NAMED.coach));
-    expect(preview(card)?.lrExtAvatarColor).toBe(NAMED.color);
-    expect(queryOne(card, '.lr-ext-avatar-pick__name', HTMLElement)?.textContent).toBe('Captain');
+    expect(preview(card)?.lnExtAvatarCoach).toBe(String(NAMED.coach));
+    expect(preview(card)?.lnExtAvatarColor).toBe(NAMED.color);
+    expect(queryOne(card, '.ln-ext-avatar-pick__name', HTMLElement)?.textContent).toBe('Captain');
   });
 
   it('makes one of the name’s coach and color, then of the coach and color picked', () => {
     const card = buildAvatarCard();
-    click(card, "button[data-lr-ext-avatar-mode='coach']");
+    click(card, "button[data-ln-ext-avatar-mode='coach']");
     expect(stored()).toEqual({ kind: 'coach', coach: NAMED.coach, color: NAMED.color });
     expect(shownPanel(card)).toEqual(['coach']);
-    click(card, "[data-lr-ext-pick-coach='8']");
-    click(card, "[data-lr-ext-pick-color='pink']");
+    click(card, "[data-ln-ext-pick-coach='8']");
+    click(card, "[data-ln-ext-pick-color='pink']");
     expect(stored()).toEqual({ kind: 'coach', coach: 8, color: 'pink' });
     expect(pressed(card)).toEqual(['8', 'pink']);
-    expect(preview(card)?.lrExtAvatarCoach).toBe('8');
+    expect(preview(card)?.lnExtAvatarCoach).toBe('8');
   });
 
   it('goes back to the name’s avatar', () => {
     keepOwnAvatar({ kind: 'coach', coach: 2, color: 'green' });
     const card = buildAvatarCard();
     expect(shownPanel(card)).toEqual(['coach']);
-    click(card, "button[data-lr-ext-avatar-mode='name']");
+    click(card, "button[data-ln-ext-avatar-mode='name']");
     expect(stored()).toBeNull();
     expect(pressed(card)).toEqual([]);
   });
@@ -100,33 +100,33 @@ describe('the settings’ avatar card', () => {
   it('waits for a picture before it changes the pick, and keeps a good one', async () => {
     keepOwnAvatar({ kind: 'coach', coach: 2, color: 'green' });
     const card = buildAvatarCard();
-    click(card, "button[data-lr-ext-avatar-mode='picture']");
+    click(card, "button[data-ln-ext-avatar-mode='picture']");
     expect(shownPanel(card)).toEqual(['picture']);
     expect(stored()).toEqual({ kind: 'coach', coach: 2, color: 'green' });
     vi.mocked(pictureFrom).mockResolvedValue(PICTURE);
     await upload(card, new File(['x'], 'me.png', { type: 'image/png' }));
     expect(stored()).toEqual({ kind: 'picture', picture: PICTURE });
-    expect(preview(card)?.lrExtAvatarPicture).toBe('');
-    expect(queryOne(card, '.lr-ext-avatar-pick__error', HTMLElement)?.hidden).toBe(true);
+    expect(preview(card)?.lnExtAvatarPicture).toBe('');
+    expect(queryOne(card, '.ln-ext-avatar-pick__error', HTMLElement)?.hidden).toBe(true);
   });
 
   it('says so when the file isn’t a picture, and keeps the pick', async () => {
     const card = buildAvatarCard();
-    click(card, "button[data-lr-ext-avatar-mode='picture']");
+    click(card, "button[data-ln-ext-avatar-mode='picture']");
     vi.mocked(pictureFrom).mockResolvedValue(null);
     await upload(card, new File(['x'], 'notes.txt', { type: 'text/plain' }));
     expect(stored()).toBeNull();
-    expect(queryOne(card, '.lr-ext-avatar-pick__error', HTMLElement)?.hidden).toBe(false);
+    expect(queryOne(card, '.ln-ext-avatar-pick__error', HTMLElement)?.hidden).toBe(false);
     expect(shownPanel(card)).toEqual(['picture']);
   });
 
   it('follows a pick made in another tab', () => {
     const card = buildAvatarCard();
     localStorage.setItem(
-      'lr-ext-avatar',
+      'ln-ext-avatar',
       JSON.stringify({ kind: 'coach', coach: 5, color: 'cyan' }),
     );
-    window.dispatchEvent(new StorageEvent('storage', { key: 'lr-ext-avatar' }));
+    window.dispatchEvent(new StorageEvent('storage', { key: 'ln-ext-avatar' }));
     expect(shownPanel(card)).toEqual(['coach']);
     expect(pressed(card)).toEqual(['5', 'cyan']);
   });

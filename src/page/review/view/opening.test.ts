@@ -17,9 +17,9 @@ describe('the opening over the move list', () => {
     renderOpening(session, facade);
     const { opening } = session.elements;
     expect(opening.parentElement?.className).toBe('analyse__tools');
-    expect(opening.querySelector('.lr-ext-opening__eco')?.textContent).toBe('B90');
+    expect(opening.querySelector('.ln-ext-opening__eco')?.textContent).toBe('B90');
     expect(opening.title).toBe('Sicilian Defense: Najdorf Variation');
-    expect(document.documentElement.classList.contains('lr-ext-opening-on')).toBe(true);
+    expect(document.documentElement.classList.contains('ln-ext-opening-on')).toBe(true);
   });
 
   it('shows nothing for a game its export names no opening for', () => {
@@ -29,6 +29,6 @@ describe('the opening over the move list', () => {
     session.view.openingName = '';
     renderOpening(session, facade);
     expect(session.elements.opening.childElementCount).toBe(0);
-    expect(document.documentElement.classList.contains('lr-ext-opening-on')).toBe(false);
+    expect(document.documentElement.classList.contains('ln-ext-opening-on')).toBe(false);
   });
 });

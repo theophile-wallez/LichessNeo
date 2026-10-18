@@ -4,104 +4,104 @@
  * light, transparent) re-skins most pages. */
 
 :root,
-[data-lr-ext-palette] {
+[data-ln-ext-palette] {
   /* The hairline between the sidebar and the content. */
-  --lr-ext-sidebar-line: var(--lr-ext-lift-6);
-  --lr-ext-bg-page: var(--lr-ext-neutral-4);
-  --lr-ext-bg-panel: var(--lr-ext-neutral-3);
-  --lr-ext-bg-panel-dark: var(--lr-ext-neutral-2);
+  --ln-ext-sidebar-line: var(--ln-ext-lift-6);
+  --ln-ext-bg-page: var(--ln-ext-neutral-4);
+  --ln-ext-bg-panel: var(--ln-ext-neutral-3);
+  --ln-ext-bg-panel-dark: var(--ln-ext-neutral-2);
   /* Between the panels and the page: zebra rows, a hovered card. */
-  --lr-ext-bg-mid: color-mix(in srgb, var(--lr-ext-neutral-3) 50%, var(--lr-ext-neutral-4));
-  --lr-ext-bg-raised: var(--lr-ext-neutral-6);
-  --lr-ext-bg-raised-hover: var(--lr-ext-neutral-7);
-  --lr-ext-border: var(--lr-ext-neutral-6);
-  --lr-ext-text: color-mix(in srgb, var(--lr-ext-neutral-14) 88%, transparent);
-  --lr-ext-text-strong: var(--lr-ext-neutral-14);
-  --lr-ext-text-dim: var(--lr-ext-neutral-11);
+  --ln-ext-bg-mid: color-mix(in srgb, var(--ln-ext-neutral-3) 50%, var(--ln-ext-neutral-4));
+  --ln-ext-bg-raised: var(--ln-ext-neutral-6);
+  --ln-ext-bg-raised-hover: var(--ln-ext-neutral-7);
+  --ln-ext-border: var(--ln-ext-neutral-6);
+  --ln-ext-text: color-mix(in srgb, var(--ln-ext-neutral-14) 88%, transparent);
+  --ln-ext-text-strong: var(--ln-ext-neutral-14);
+  --ln-ext-text-dim: var(--ln-ext-neutral-11);
   /* Tertiary text (move numbers, unrated chips): still 3:1 on the panels. */
-  --lr-ext-font-dimmer: var(--lr-ext-neutral-10);
+  --ln-ext-font-dimmer: var(--ln-ext-neutral-10);
   /* Links, picks, focus rings, primary buttons: the theme's accent. */
-  --lr-ext-accent-hover: color-mix(in srgb, var(--lr-ext-accent) 80%, #fff);
-  --lr-ext-accent-dim: color-mix(in srgb, var(--lr-ext-accent) 80%, #000);
-  --lr-ext-accent-shadow: color-mix(in srgb, var(--lr-ext-accent) 60%, #000);
+  --ln-ext-accent-hover: color-mix(in srgb, var(--ln-ext-accent) 80%, #fff);
+  --ln-ext-accent-dim: color-mix(in srgb, var(--ln-ext-accent) 80%, #000);
+  --ln-ext-accent-shadow: color-mix(in srgb, var(--ln-ext-accent) 60%, #000);
   /* A win, a good move, someone online; and their opposite. */
-  --lr-ext-good: var(--lr-ext-green);
-  --lr-ext-good-hover: var(--lr-ext-green-light);
-  --lr-ext-bad: var(--lr-ext-red);
+  --ln-ext-good: var(--ln-ext-green);
+  --ln-ext-good-hover: var(--ln-ext-green-light);
+  --ln-ext-bad: var(--ln-ext-red);
   /* Menus are lighter than cards, and outlined: on a dark UI a shadow alone
    * doesn't separate them. */
-  --lr-ext-menu-bg: var(--lr-ext-neutral-6);
-  --lr-ext-menu-border: var(--lr-ext-lift-15);
-  --lr-ext-menu-hover: var(--lr-ext-lift-8);
-  --lr-ext-menu-shadow:
-    0 0 0 1px var(--lr-ext-shade-55), 0 16px 40px var(--lr-ext-shade-70),
-    0 4px 12px var(--lr-ext-shade-50);
+  --ln-ext-menu-bg: var(--ln-ext-neutral-6);
+  --ln-ext-menu-border: var(--ln-ext-lift-15);
+  --ln-ext-menu-hover: var(--ln-ext-lift-8);
+  --ln-ext-menu-shadow:
+    0 0 0 1px var(--ln-ext-shade-55), 0 16px 40px var(--ln-ext-shade-70),
+    0 4px 12px var(--ln-ext-shade-50);
   /* Buttons: flat, a hairline edge on the grey ones. */
-  --lr-ext-btn-primary: var(--lr-ext-accent);
-  --lr-ext-btn-primary-hover: var(--lr-ext-accent-hover);
-  --lr-ext-btn-primary-shadow: 0 1px 2px var(--lr-ext-shade-30);
-  --lr-ext-btn-grey: var(--lr-ext-neutral-6);
-  --lr-ext-btn-grey-hover: var(--lr-ext-neutral-7);
-  --lr-ext-btn-grey-shadow: inset 0 0 0 1px var(--lr-ext-lift-6);
-  --lr-ext-btn-red: var(--lr-ext-red-dark);
-  --lr-ext-btn-red-hover: var(--lr-ext-red);
-  --lr-ext-btn-red-shadow: 0 1px 2px var(--lr-ext-shade-30);
+  --ln-ext-btn-primary: var(--ln-ext-accent);
+  --ln-ext-btn-primary-hover: var(--ln-ext-accent-hover);
+  --ln-ext-btn-primary-shadow: 0 1px 2px var(--ln-ext-shade-30);
+  --ln-ext-btn-grey: var(--ln-ext-neutral-6);
+  --ln-ext-btn-grey-hover: var(--ln-ext-neutral-7);
+  --ln-ext-btn-grey-shadow: inset 0 0 0 1px var(--ln-ext-lift-6);
+  --ln-ext-btn-red: var(--ln-ext-red-dark);
+  --ln-ext-btn-red-hover: var(--ln-ext-red);
+  --ln-ext-btn-red-shadow: 0 1px 2px var(--ln-ext-shade-30);
   /* Cards: a faint edge keeps neighbours apart. The hover fill stays darker than
    * the page, or the card melts into it. */
   /* A card standing on the page rather than in a panel: a faint lift on dark. */
-  --lr-ext-card-bg: var(--lr-ext-lift-3);
-  --lr-ext-card-border: var(--lr-ext-lift-6);
-  --lr-ext-card-border-hover: var(--lr-ext-lift-18);
-  --lr-ext-card-hover: var(--lr-ext-bg-mid);
-  --lr-ext-card-shadow-hover: 0 4px 12px var(--lr-ext-shade-25);
+  --ln-ext-card-bg: var(--ln-ext-lift-3);
+  --ln-ext-card-border: var(--ln-ext-lift-6);
+  --ln-ext-card-border-hover: var(--ln-ext-lift-18);
+  --ln-ext-card-hover: var(--ln-ext-bg-mid);
+  --ln-ext-card-shadow-hover: 0 4px 12px var(--ln-ext-shade-25);
   /* Title badge (GM, IM...). */
-  --lr-ext-title-bg: var(--lr-ext-red-deep);
+  --ln-ext-title-bg: var(--ln-ext-red-deep);
   /* Behind a dialog. */
-  --lr-ext-page-mask: var(--lr-ext-shade-70);
+  --ln-ext-page-mask: var(--ln-ext-shade-70);
 }
 
 /* On white, menus are white and a shadow does separate them; cards lift
  * rather than darken. */
 :root.light,
-[data-lr-ext-palette='light'] {
-  --lr-ext-menu-bg: var(--lr-ext-neutral-1);
-  --lr-ext-menu-border: var(--lr-ext-lift-10);
-  --lr-ext-menu-hover: var(--lr-ext-lift-6);
-  --lr-ext-card-bg: var(--lr-ext-neutral-1);
-  --lr-ext-card-border: var(--lr-ext-lift-8);
-  --lr-ext-card-border-hover: var(--lr-ext-lift-20);
-  --lr-ext-card-hover: var(--lr-ext-neutral-1);
-  --lr-ext-btn-grey-shadow: inset 0 0 0 1px var(--lr-ext-lift-8);
-  --lr-ext-title-bg: var(--lr-ext-red);
-  --lr-ext-page-mask: var(--lr-ext-shade-50);
+[data-ln-ext-palette='light'] {
+  --ln-ext-menu-bg: var(--ln-ext-neutral-1);
+  --ln-ext-menu-border: var(--ln-ext-lift-10);
+  --ln-ext-menu-hover: var(--ln-ext-lift-6);
+  --ln-ext-card-bg: var(--ln-ext-neutral-1);
+  --ln-ext-card-border: var(--ln-ext-lift-8);
+  --ln-ext-card-border-hover: var(--ln-ext-lift-20);
+  --ln-ext-card-hover: var(--ln-ext-neutral-1);
+  --ln-ext-btn-grey-shadow: inset 0 0 0 1px var(--ln-ext-lift-8);
+  --ln-ext-title-bg: var(--ln-ext-red);
+  --ln-ext-page-mask: var(--ln-ext-shade-50);
   /* As text, a lighter green fades on white. */
-  --lr-ext-good-hover: var(--lr-ext-green-dark);
+  --ln-ext-good-hover: var(--ln-ext-green-dark);
 }
 
 :root {
   /* Our board's squares (board/pieces.css): white and the accent, or the custom board's. */
-  --lr-ext-board-light: #f7f8f8;
-  --lr-ext-board-dark: var(--lr-ext-accent);
+  --ln-ext-board-light: #f7f8f8;
+  --ln-ext-board-dark: var(--ln-ext-accent);
   /* Lichess has no profile pictures: a user's is one of the coaches (avatars.css),
    * anyone else's this silhouette, the same on either scheme. A data URI can't
    * read a variable: its colors are written out. */
-  --lr-ext-avatar:
+  --ln-ext-avatar:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='15.5' r='7' fill='%23b6bbd4'/%3E%3Cpath fill='%23b6bbd4' d='M5 40c0-8.3 6.7-14 15-14s15 5.7 15 14z'/%3E%3C/svg%3E")
       center / cover no-repeat,
     #424246;
   /* The computer's robot from the chest up, rendered from the live one (content/computer), in
      the colors of levels 3–4 until a game says which (below). */
-  --lr-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-2.webp');
-  --lr-ext-computer-bg: linear-gradient(160deg, #6a9cff, #2f56b8);
+  --ln-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-2.webp');
+  --ln-ext-computer-bg: linear-gradient(160deg, #6a9cff, #2f56b8);
   /* Its still in the coaches' framing, head and chest (game/coach-message.css). */
-  --lr-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
+  --ln-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
   /* The computer's avatar, on the robot's own color. */
-  --lr-ext-computer-avatar:
-    var(--lr-ext-computer) center / cover no-repeat, var(--lr-ext-computer-bg);
+  --ln-ext-computer-avatar:
+    var(--ln-ext-computer) center / cover no-repeat, var(--ln-ext-computer-bg);
   /* A white speech bubble's tail, a horn pointing left (review/bubble.css). */
-  --lr-ext-bubble-tail: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 69'%3E%3Cpath fill='%23fff' d='M49 0A49 42 0 0 1 0 42A49 27 0 0 0 49 69H50V0z'/%3E%3C/svg%3E");
-  --lr-ext-font:
-    'LR Ext Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  --ln-ext-bubble-tail: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 69'%3E%3Cpath fill='%23fff' d='M49 0A49 42 0 0 1 0 42A49 27 0 0 0 49 69H50V0z'/%3E%3C/svg%3E");
+  --ln-ext-font:
+    'LN Ext Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif;
 }
 
@@ -110,89 +110,89 @@
 :root.dark,
 :root.transp,
 :root.transp.light {
-  --c-bg: var(--lr-ext-bg-panel) !important;
-  --c-bg-box: var(--lr-ext-bg-panel) !important;
-  --c-bg-high: var(--lr-ext-bg-panel) !important;
-  --c-bg-opaque: var(--lr-ext-bg-panel) !important;
-  --c-bg-page: var(--lr-ext-bg-page) !important;
-  --c-bg-mid: var(--lr-ext-bg-mid) !important;
-  --c-bg-low: var(--lr-ext-bg-raised) !important;
-  --c-bg-popup: var(--lr-ext-bg-panel) !important;
-  --c-bg-header-dropdown: var(--lr-ext-bg-panel) !important;
-  --c-bg-zebra: var(--lr-ext-bg-mid) !important;
-  --c-bg-zebra2: var(--lr-ext-neutral-5) !important;
-  --c-bg-input: var(--lr-ext-bg-raised) !important;
-  --c-page-input: var(--lr-ext-bg-raised) !important;
-  --c-bg-variation: var(--lr-ext-bg-mid) !important;
-  --c-body-gradient: var(--lr-ext-bg-page) !important;
-  --c-font: var(--lr-ext-neutral-13) !important;
-  --c-font-dim: var(--lr-ext-text-dim) !important;
-  --c-font-dimmer: var(--lr-ext-font-dimmer) !important;
-  --c-font-clear: var(--lr-ext-neutral-14) !important;
-  --c-font-clearer: var(--lr-ext-text-strong) !important;
-  --c-font-page: var(--lr-ext-text-dim) !important;
+  --c-bg: var(--ln-ext-bg-panel) !important;
+  --c-bg-box: var(--ln-ext-bg-panel) !important;
+  --c-bg-high: var(--ln-ext-bg-panel) !important;
+  --c-bg-opaque: var(--ln-ext-bg-panel) !important;
+  --c-bg-page: var(--ln-ext-bg-page) !important;
+  --c-bg-mid: var(--ln-ext-bg-mid) !important;
+  --c-bg-low: var(--ln-ext-bg-raised) !important;
+  --c-bg-popup: var(--ln-ext-bg-panel) !important;
+  --c-bg-header-dropdown: var(--ln-ext-bg-panel) !important;
+  --c-bg-zebra: var(--ln-ext-bg-mid) !important;
+  --c-bg-zebra2: var(--ln-ext-neutral-5) !important;
+  --c-bg-input: var(--ln-ext-bg-raised) !important;
+  --c-page-input: var(--ln-ext-bg-raised) !important;
+  --c-bg-variation: var(--ln-ext-bg-mid) !important;
+  --c-body-gradient: var(--ln-ext-bg-page) !important;
+  --c-font: var(--ln-ext-neutral-13) !important;
+  --c-font-dim: var(--ln-ext-text-dim) !important;
+  --c-font-dimmer: var(--ln-ext-font-dimmer) !important;
+  --c-font-clear: var(--ln-ext-neutral-14) !important;
+  --c-font-clearer: var(--ln-ext-text-strong) !important;
+  --c-font-page: var(--ln-ext-text-dim) !important;
   --c-font-shadow: transparent !important;
-  --c-header-dropdown: var(--lr-ext-text) !important;
-  --c-border: var(--lr-ext-border) !important;
-  --c-border-page: var(--lr-ext-border) !important;
-  --c-border-light: var(--lr-ext-neutral-9) !important;
-  --c-shade: var(--lr-ext-neutral-7) !important;
-  --c-dark: var(--lr-ext-neutral-2) !important;
-  --c-dimmer: var(--lr-ext-neutral-1) !important;
-  --c-clearer: var(--lr-ext-neutral-14) !important;
-  --c-over: var(--lr-ext-white) !important;
-  --c-primary: var(--lr-ext-accent) !important;
-  --c-primary-dim: var(--lr-ext-accent-dim) !important;
-  --c-primary-clear: var(--lr-ext-accent-hover) !important;
-  --c-secondary: var(--lr-ext-accent) !important;
-  --c-secondary-dim: var(--lr-ext-accent-dim) !important;
-  --c-secondary-dimmer: var(--lr-ext-accent-shadow) !important;
-  --c-link: var(--lr-ext-accent) !important;
-  --c-link-dim: var(--lr-ext-accent-dim) !important;
-  --c-link-clear: var(--lr-ext-accent-hover) !important;
-  --c-link-hover: var(--lr-ext-accent-hover) !important;
-  --c-good: var(--lr-ext-good) !important;
-  --c-bad: var(--lr-ext-bad) !important;
-  --c-accent: var(--lr-ext-accent) !important;
-  --c-future: var(--lr-ext-neutral-7) !important;
-  --c-brag: var(--lr-ext-orange) !important;
-  --c-metal-top: var(--lr-ext-bg-raised) !important;
-  --c-metal-bottom: var(--lr-ext-bg-raised) !important;
-  --c-metal-top-hover: var(--lr-ext-bg-raised-hover) !important;
-  --c-metal-bottom-hover: var(--lr-ext-bg-raised-hover) !important;
-  --c-page-mask: var(--lr-ext-page-mask) !important;
-  --c-chat-host-bg: color-mix(in srgb, var(--lr-ext-accent) 20%, transparent) !important;
-  --c-chat-mention-bg: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
-  --c-paper: var(--lr-ext-bg-panel) !important;
+  --c-header-dropdown: var(--ln-ext-text) !important;
+  --c-border: var(--ln-ext-border) !important;
+  --c-border-page: var(--ln-ext-border) !important;
+  --c-border-light: var(--ln-ext-neutral-9) !important;
+  --c-shade: var(--ln-ext-neutral-7) !important;
+  --c-dark: var(--ln-ext-neutral-2) !important;
+  --c-dimmer: var(--ln-ext-neutral-1) !important;
+  --c-clearer: var(--ln-ext-neutral-14) !important;
+  --c-over: var(--ln-ext-white) !important;
+  --c-primary: var(--ln-ext-accent) !important;
+  --c-primary-dim: var(--ln-ext-accent-dim) !important;
+  --c-primary-clear: var(--ln-ext-accent-hover) !important;
+  --c-secondary: var(--ln-ext-accent) !important;
+  --c-secondary-dim: var(--ln-ext-accent-dim) !important;
+  --c-secondary-dimmer: var(--ln-ext-accent-shadow) !important;
+  --c-link: var(--ln-ext-accent) !important;
+  --c-link-dim: var(--ln-ext-accent-dim) !important;
+  --c-link-clear: var(--ln-ext-accent-hover) !important;
+  --c-link-hover: var(--ln-ext-accent-hover) !important;
+  --c-good: var(--ln-ext-good) !important;
+  --c-bad: var(--ln-ext-bad) !important;
+  --c-accent: var(--ln-ext-accent) !important;
+  --c-future: var(--ln-ext-neutral-7) !important;
+  --c-brag: var(--ln-ext-orange) !important;
+  --c-metal-top: var(--ln-ext-bg-raised) !important;
+  --c-metal-bottom: var(--ln-ext-bg-raised) !important;
+  --c-metal-top-hover: var(--ln-ext-bg-raised-hover) !important;
+  --c-metal-bottom-hover: var(--ln-ext-bg-raised-hover) !important;
+  --c-page-mask: var(--ln-ext-page-mask) !important;
+  --c-chat-host-bg: color-mix(in srgb, var(--ln-ext-accent) 20%, transparent) !important;
+  --c-chat-mention-bg: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent) !important;
+  --c-paper: var(--ln-ext-bg-panel) !important;
 
-  background: var(--lr-ext-bg-page) !important;
+  background: var(--ln-ext-bg-page) !important;
 }
 
-/* The robot of the level a game is played against (data-lr-ext-ai-level, from
+/* The robot of the level a game is played against (data-ln-ext-ai-level, from
    content/game/ai-players.ts), one for each two levels, as content/coach/mascot/cast/robot.ts
    colors it. */
-:root:is([data-lr-ext-ai-level='1'], [data-lr-ext-ai-level='2']) {
-  --lr-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-1.webp');
-  --lr-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-1.webp');
-  --lr-ext-computer-bg: linear-gradient(160deg, #5fe0a3, #1f8f5c);
+:root:is([data-ln-ext-ai-level='1'], [data-ln-ext-ai-level='2']) {
+  --ln-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-1.webp');
+  --ln-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-1.webp');
+  --ln-ext-computer-bg: linear-gradient(160deg, #5fe0a3, #1f8f5c);
 }
 
-:root:is([data-lr-ext-ai-level='5'], [data-lr-ext-ai-level='6']) {
-  --lr-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-3.webp');
-  --lr-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-3.webp');
-  --lr-ext-computer-bg: linear-gradient(160deg, #b28cff, #5b34b8);
+:root:is([data-ln-ext-ai-level='5'], [data-ln-ext-ai-level='6']) {
+  --ln-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-3.webp');
+  --ln-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-3.webp');
+  --ln-ext-computer-bg: linear-gradient(160deg, #b28cff, #5b34b8);
 }
 
-:root:is([data-lr-ext-ai-level='7'], [data-lr-ext-ai-level='8']) {
-  --lr-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-4.webp');
-  --lr-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-4.webp');
-  --lr-ext-computer-bg: linear-gradient(160deg, #ff8a8e, #b3262d);
+:root:is([data-ln-ext-ai-level='7'], [data-ln-ext-ai-level='8']) {
+  --ln-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-4.webp');
+  --ln-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-4.webp');
+  --ln-ext-computer-bg: linear-gradient(160deg, #ff8a8e, #b3262d);
 }
 
 /* Paint html, not body: Lichess draws some things behind the page with a
  * negative z-index (the clock faces), which a painted body hides. */
 html {
-  background: var(--lr-ext-bg-page) !important;
+  background: var(--ln-ext-bg-page) !important;
   background-image: none !important;
 }
 
@@ -207,7 +207,7 @@ input,
 button,
 textarea,
 select {
-  font-family: var(--lr-ext-font) !important;
+  font-family: var(--ln-ext-font) !important;
 }
 
 /* Lichess's transparent theme hangs a wallpaper on html::before. */
@@ -218,14 +218,14 @@ html.transp::before {
 /* ---- Buttons --- */
 
 .button {
-  background: var(--lr-ext-btn-primary) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  color: var(--ln-ext-white) !important;
   border: none !important;
   border-radius: 7px !important;
   text-transform: none !important;
   font-weight: 800 !important;
   text-shadow: 0 1px 1px #00000033 !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
   filter: none !important;
   transition:
     filter 0.1s,
@@ -233,7 +233,7 @@ html.transp::before {
 }
 
 .button:not(.disabled):hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
+  background: var(--ln-ext-btn-primary-hover) !important;
 }
 
 .button:not(.disabled):active {
@@ -249,27 +249,27 @@ html.light :is(.button.active, .btn-rack__btn.active) {
 .button.button-empty,
 .button.button-metal,
 .button.button-inverse {
-  background: var(--lr-ext-btn-grey) !important;
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  color: var(--ln-ext-text) !important;
   text-shadow: none !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
 }
 
 .button.button-empty:not(.disabled):hover,
 .button.button-metal:not(.disabled):hover,
 .button.button-inverse:not(.disabled):hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .button.button-red {
-  background: var(--lr-ext-btn-red) !important;
-  color: var(--lr-ext-white) !important;
-  box-shadow: var(--lr-ext-btn-red-shadow) !important;
+  background: var(--ln-ext-btn-red) !important;
+  color: var(--ln-ext-white) !important;
+  box-shadow: var(--ln-ext-btn-red-shadow) !important;
 }
 
 .button.button-red:not(.disabled):hover {
-  background: var(--lr-ext-btn-red-hover) !important;
+  background: var(--ln-ext-btn-red-hover) !important;
 }
 
 /* ---- Boxes --- */
@@ -291,7 +291,7 @@ select {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--lr-ext-neutral-7);
+  background: var(--ln-ext-neutral-7);
   border-radius: 4px;
 }
 
@@ -299,7 +299,7 @@ select {
  * would switch off the rules above. */
 @supports (-moz-appearance: none) {
   html {
-    scrollbar-color: var(--lr-ext-neutral-7) transparent;
+    scrollbar-color: var(--ln-ext-neutral-7) transparent;
   }
 }
 
@@ -313,8 +313,8 @@ select {
   margin-inline-end: 0.15em;
   padding: 0 0.3em;
   border-radius: 0.25em;
-  background: var(--lr-ext-title-bg);
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-title-bg);
+  color: var(--ln-ext-white) !important;
   font-size: 0.72em;
   font-weight: 800 !important;
   letter-spacing: 0;

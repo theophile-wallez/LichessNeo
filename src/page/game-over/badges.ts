@@ -49,8 +49,8 @@ export interface BoardCell {
 }
 
 const EDGES: ReadonlyMap<number, string> = new Map([
-  [0, ' lr-ext-end__king--start'],
-  [7, ' lr-ext-end__king--end'],
+  [0, ' ln-ext-end__king--start'],
+  [7, ' ln-ext-end__king--end'],
 ]);
 
 export function badgesMarkup(
@@ -63,11 +63,11 @@ export function badgesMarkup(
     const { kind, icon, label } = badges[color];
     // The label goes under the square on the top row, and is held in on the side
     // files, where it would leave the board.
-    const below = cell.row === 0 ? ' lr-ext-end__king--below' : '';
+    const below = cell.row === 0 ? ' ln-ext-end__king--below' : '';
     const edge = EDGES.get(cell.column) ?? '';
-    return html`<div class="lr-ext-end__king lr-ext-end__king--${kind}${below}${edge}" style="--column:${cell.column};--row:${cell.row}">
-      <span class="lr-ext-end__king-icon">${ICONS[icon]}</span>
-      <span class="lr-ext-end__king-label">${label}</span>
+    return html`<div class="ln-ext-end__king ln-ext-end__king--${kind}${below}${edge}" style="--column:${cell.column};--row:${cell.row}">
+      <span class="ln-ext-end__king-icon">${ICONS[icon]}</span>
+      <span class="ln-ext-end__king-label">${label}</span>
     </div>`;
   });
   return html`${items}`;

@@ -85,8 +85,8 @@ const lineOf = (san: string): Element | null | undefined =>
 describe('reviewBadges', () => {
   it('marks the variations played, and the computer lines they branch off', () => {
     reviewBadges(emptyLive(), page(), EMPTY_REVIEW);
-    expect(lineOf('Nc3')?.className).toBe('lr-ext-var');
-    expect(lineOf('d5')?.className).toBe('lr-ext-var-host');
+    expect(lineOf('Nc3')?.className).toBe('ln-ext-var');
+    expect(lineOf('d5')?.className).toBe('ln-ext-var-host');
     expect(lineOf('c5')?.className).toBe('');
   });
 });

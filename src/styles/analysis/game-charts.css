@@ -2,117 +2,117 @@
 
 /* The advantage and the move times in the analysis' tools, drawn in SVG by page/charts/game in
  * the rating chart's look (ratingchart.css: grid, guide, dot, tooltip, entrance). Lichess's
- * canvas is hidden only once ours is in (.lr-ext-gchart-on on its container). */
+ * canvas is hidden only once ours is in (.ln-ext-gchart-on on its container). */
 
-:is(#acpl-chart-container, #movetimes-chart-container).lr-ext-gchart-on > canvas {
+:is(#acpl-chart-container, #movetimes-chart-container).ln-ext-gchart-on > canvas {
   display: none !important;
 }
 
-:is(#acpl-chart-container, #movetimes-chart-container).lr-ext-gchart-on {
+:is(#acpl-chart-container, #movetimes-chart-container).ln-ext-gchart-on {
   height: auto !important;
 }
 
-.lr-ext-gchart {
+.ln-ext-gchart {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-family: var(--lr-ext-font);
+  font-family: var(--ln-ext-font);
 }
 
-.lr-ext-gchart__legend {
+.ln-ext-gchart__legend {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.lr-ext-gchart__legend:empty {
+.ln-ext-gchart__legend:empty {
   display: none;
 }
 
-.lr-ext-gchart__chip {
+.ln-ext-gchart__chip {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   height: 28px;
   padding: 0 12px 0 10px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 999px;
-  background: var(--lr-ext-lift-3);
-  color: var(--lr-ext-text);
-  font: 600 12.5px/1 var(--lr-ext-font);
+  background: var(--ln-ext-lift-3);
+  color: var(--ln-ext-text);
+  font: 600 12.5px/1 var(--ln-ext-font);
 }
 
-.lr-ext-gchart .lr-ext-rchart__plot {
+.ln-ext-gchart .ln-ext-rchart__plot {
   border-radius: 8px;
-  background: var(--lr-ext-bg-panel-dark);
+  background: var(--ln-ext-bg-panel-dark);
 }
 
 /* The areas end flush with the plot's rounded corners; the tooltip, outside the SVG, isn't cut. */
-.lr-ext-gchart .lr-ext-rchart__svg {
+.ln-ext-gchart .ln-ext-rchart__svg {
   overflow: hidden;
   border-radius: 8px;
 }
 
 /* Lichess's game duration, under the move times rather than over them. */
-#movetimes-chart-container.lr-ext-gchart-on > .game-duration {
+#movetimes-chart-container.ln-ext-gchart-on > .game-duration {
   position: static !important;
   margin-top: 6px;
-  color: var(--lr-ext-text-dim);
-  font: 600 12px var(--lr-ext-font);
+  color: var(--ln-ext-text-dim);
+  font: 600 12px var(--ln-ext-font);
   text-align: end;
 }
 
-.lr-ext-gchart .lr-ext-rchart__hit {
+.ln-ext-gchart .ln-ext-rchart__hit {
   cursor: pointer;
 }
 
-.lr-ext-gchart__area {
-  fill: url('#lr-ext-gchart-white');
+.ln-ext-gchart__area {
+  fill: url('#ln-ext-gchart-white');
 }
 
-.lr-ext-gchart__line {
+.ln-ext-gchart__line {
   fill: none;
-  stroke: var(--lr-ext-side-white);
+  stroke: var(--ln-ext-side-white);
   stroke-width: 1.5;
   stroke-linejoin: round;
 }
 
 /* An even game, over the area as on the review's graph. */
-.lr-ext-gchart__even {
-  stroke: var(--lr-ext-neutral-10);
+.ln-ext-gchart__even {
+  stroke: var(--ln-ext-neutral-10);
   stroke-opacity: 0.6;
 }
 
-.lr-ext-gchart__bar--white {
-  fill: var(--lr-ext-side-white);
+.ln-ext-gchart__bar--white {
+  fill: var(--ln-ext-side-white);
 }
 
-.lr-ext-gchart__bar--black {
-  fill: var(--lr-ext-side-black);
+.ln-ext-gchart__bar--black {
+  fill: var(--ln-ext-side-black);
 }
 
-.lr-ext-gchart__phase {
-  stroke: var(--lr-ext-lift-20);
+.ln-ext-gchart__phase {
+  stroke: var(--ln-ext-lift-20);
   stroke-dasharray: 3 4;
 }
 
-.lr-ext-gchart__phase-name {
-  fill: var(--lr-ext-text-dim);
-  font: 700 10.5px var(--lr-ext-font);
+.ln-ext-gchart__phase-name {
+  fill: var(--ln-ext-text-dim);
+  font: 700 10.5px var(--ln-ext-font);
 }
 
 /* The move on the board, in the accent. */
-.lr-ext-gchart__ply {
+.ln-ext-gchart__ply {
   display: none;
-  stroke: var(--lr-ext-accent);
+  stroke: var(--ln-ext-accent);
   stroke-width: 2;
 }
 
-.lr-ext-gchart__ply--on {
+.ln-ext-gchart__ply--on {
   display: inline;
 }
 
-.lr-ext-gchart .lr-ext-rchart__dot {
-  --lr-ext-series-color: var(--lr-ext-side-white);
-  stroke: var(--lr-ext-bg-panel-dark);
+.ln-ext-gchart .ln-ext-rchart__dot {
+  --ln-ext-series-color: var(--ln-ext-side-white);
+  stroke: var(--ln-ext-bg-panel-dark);
 }

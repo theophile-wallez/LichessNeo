@@ -4,44 +4,44 @@
  * coach saying the level's goal in the Game Review's coach card, how the level ended, the
  * levels. Lichess's card gives way to it, so the coach, drawn at the panel's end, sits in
  * between. */
-.learn__table[data-lr-ext-learn-coach] {
-  container: lr-ext-learn / inline-size;
+.learn__table[data-ln-ext-learn-coach] {
+  container: ln-ext-learn / inline-size;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 12px;
-  background: var(--lr-ext-bg-panel);
-  box-shadow: 0 10px 28px var(--lr-ext-shade-20);
+  background: var(--ln-ext-bg-panel);
+  box-shadow: 0 10px 28px var(--ln-ext-shade-20);
 }
 
-.learn__table[data-lr-ext-learn-coach] .wrap {
+.learn__table[data-ln-ext-learn-coach] .wrap {
   display: contents;
 }
 
-.learn__table[data-lr-ext-learn-coach] .title {
+.learn__table[data-ln-ext-learn-coach] .title {
   order: 1;
 }
 
-.lr-ext-learn-coach {
+.ln-ext-learn-coach {
   order: 2;
 }
 
-.learn__table[data-lr-ext-learn-coach] .result {
+.learn__table[data-ln-ext-learn-coach] .result {
   order: 3;
 }
 
-.learn__table[data-lr-ext-learn-coach] .progress {
+.learn__table[data-ln-ext-learn-coach] .progress {
   order: 4;
 }
 
 /* The coach says the goal, and how the level ended: Lichess's own words would repeat it. */
-.learn__table[data-lr-ext-learn-coach] :is(.goal, .result h2) {
+.learn__table[data-ln-ext-learn-coach] :is(.goal, .result h2) {
   display: none !important;
 }
 
 /* What's left of the end: the next or retry button, or the level's stars. */
-.learn__table[data-lr-ext-learn-coach] .result {
+.learn__table[data-ln-ext-learn-coach] .result {
   min-height: 0 !important;
   margin: 12px 12px 0;
   padding: 10px !important;
@@ -51,9 +51,9 @@
 
 /* As in the Game Review (review/bubble.css): the coach stands on the card's bottom edge, its
  * words beside it, no bubble. */
-.lr-ext-learn-coach {
-  --lr-ext-coach-h: 96px;
-  --lr-ext-mood-c: var(--lr-ext-good-hover);
+.ln-ext-learn-coach {
+  --ln-ext-coach-h: 96px;
+  --ln-ext-mood-c: var(--ln-ext-good-hover);
 
   position: relative;
   display: flex;
@@ -61,50 +61,50 @@
   gap: 18px;
   box-sizing: border-box;
   /* Room over its head for its hops. */
-  min-height: calc(var(--lr-ext-coach-h) + 16px);
+  min-height: calc(var(--ln-ext-coach-h) + 16px);
   margin: 12px 12px 0;
   /* Room for its arms at its sides, as in the review: the card cuts it only at its feet and
      over its hops. */
   padding: 0 14px 0 24px;
   overflow: hidden;
   border-radius: 12px;
-  background: var(--lr-ext-bg-raised);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  background: var(--ln-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
-.learn__table[data-lr-ext-learn-coach] .progress {
+.learn__table[data-ln-ext-learn-coach] .progress {
   padding-top: 12px !important;
 }
 
 /* A wide panel gets a larger coach. */
-@container lr-ext-learn (min-width: 380px) {
-  .lr-ext-learn-coach {
-    --lr-ext-coach-h: 112px;
+@container ln-ext-learn (min-width: 380px) {
+  .ln-ext-learn-coach {
+    --ln-ext-coach-h: 112px;
   }
 }
 
-.lr-ext-learn-coach .lr-ext-coach__avatar[data-lr-ext-mood='worry'] {
-  --lr-ext-mood-c: var(--lr-ext-red);
+.ln-ext-learn-coach .ln-ext-coach__avatar[data-ln-ext-mood='worry'] {
+  --ln-ext-mood-c: var(--ln-ext-red);
 }
 
 /* Not a button here: it doesn't change coach. */
-.lr-ext-learn-coach .lr-ext-coach__avatar {
+.ln-ext-learn-coach .ln-ext-coach__avatar {
   cursor: default;
 }
 
-.lr-ext-learn-coach .lr-ext-coach__avatar:hover {
+.ln-ext-learn-coach .ln-ext-coach__avatar:hover {
   transform: none;
 }
 
 /* Its canvas spills past the avatar, so its arms and hops show: only the card cuts it. */
-.lr-ext-learn-coach .lr-ext-coach__face canvas {
+.ln-ext-learn-coach .ln-ext-coach__face canvas {
   top: -50%;
   left: -40%;
   width: 180%;
   height: 150%;
 }
 
-.lr-ext-learn-coach .lr-ext-bubble {
+.ln-ext-learn-coach .ln-ext-bubble {
   flex: 1;
   align-self: stretch;
   display: flex;
@@ -115,29 +115,29 @@
   margin: 0;
   padding: 10px 0;
   background: transparent;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   /* Lichess centers the panel's text. */
   text-align: start;
 }
 
-.lr-ext-learn-coach .lr-ext-bubble::before {
+.ln-ext-learn-coach .ln-ext-bubble::before {
   display: none;
 }
 
-.lr-ext-learn-coach .lr-ext-bubble__title {
+.ln-ext-learn-coach .ln-ext-bubble__title {
   /* The review's grows to its row (review/bubble.css): here it's centered on the card. */
   flex: none;
   margin: 0;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.35;
 }
 
 /* A narrow panel (tablets): the words over the coach, who still stands on the edge. */
-@container lr-ext-learn (max-width: 279.98px) {
-  .lr-ext-learn-coach {
-    --lr-ext-coach-h: 76px;
+@container ln-ext-learn (max-width: 279.98px) {
+  .ln-ext-learn-coach {
+    --ln-ext-coach-h: 76px;
 
     flex-direction: column-reverse;
     align-items: center;
@@ -145,13 +145,13 @@
     padding: 0 10px;
   }
 
-  .lr-ext-learn-coach .lr-ext-bubble {
+  .ln-ext-learn-coach .ln-ext-bubble {
     align-self: stretch;
     padding: 12px 0 0;
     text-align: center;
   }
 
-  .lr-ext-learn-coach .lr-ext-bubble__title {
+  .ln-ext-learn-coach .ln-ext-bubble__title {
     font-size: 14px;
   }
 }

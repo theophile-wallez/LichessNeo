@@ -30,7 +30,7 @@ main.account > .page-menu__content > .security > .box {
 
 /* Below 1020px the page itself scrolls: its scrollbar's room is kept, as on desktop (below). */
 @media (max-width: 1019.98px) {
-  html[data-lr-ext-has~='account'] {
+  html[data-ln-ext-has~='account'] {
     scrollbar-gutter: stable;
   }
 }
@@ -51,19 +51,19 @@ main.account > .page-menu__content > .security > .box {
   main.account > .subnav {
     min-width: 296px;
     position: sticky;
-    top: calc(-1 * var(--lr-ext-page-top));
+    top: calc(-1 * var(--ln-ext-page-top));
     align-self: start;
     box-sizing: border-box;
-    max-height: var(--lr-ext-main-h, 100dvh);
-    margin-top: calc(-1 * var(--lr-ext-page-top));
-    padding-top: calc(2 * var(--lr-ext-page-top));
+    max-height: var(--ln-ext-main-h, 100dvh);
+    margin-top: calc(-1 * var(--ln-ext-page-top));
+    padding-top: calc(2 * var(--ln-ext-page-top));
     overflow-y: auto;
     overscroll-behavior: contain;
   }
 
   /* A link's anchor lands below the pinned title (100px from the window's edge), not under it.
    * The scrollbar's room is kept on every page, so a short one doesn't shift the content. */
-  html[data-lr-ext-has~='account'] #main-wrap {
+  html[data-ln-ext-has~='account'] #main-wrap {
     scroll-padding-top: 112px;
     scrollbar-gutter: stable;
   }
@@ -89,10 +89,10 @@ main.account > .page-menu__content > .security > .box {
     container-type: scroll-state;
     position: sticky;
     z-index: 4;
-    top: calc(-1 * var(--lr-ext-page-top));
-    margin-top: calc(-1 * var(--lr-ext-page-top)) !important;
-    padding-top: calc(2 * var(--lr-ext-page-top)) !important;
-    background: var(--lr-ext-bg-page);
+    top: calc(-1 * var(--ln-ext-page-top));
+    margin-top: calc(-1 * var(--ln-ext-page-top)) !important;
+    padding-top: calc(2 * var(--ln-ext-page-top)) !important;
+    background: var(--ln-ext-bg-page);
   }
 
   /* A fade under the stuck title, over what scrolls beneath it. */
@@ -103,7 +103,7 @@ main.account > .page-menu__content > .security > .box {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s !important;

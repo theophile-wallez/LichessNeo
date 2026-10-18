@@ -45,14 +45,14 @@ function addHead(box: HTMLElement, week: Week | null): void {
       now,
       pageLocale(),
     );
-  const head = createElement('div', { className: 'lr-ext-phist' });
+  const head = createElement('div', { className: 'ln-ext-phist' });
   setHtml(
     head,
     html`${week && word && heroMarkup(week, word, coachId)}${retry.length > 0 && shelfMarkup(retry)}`,
   );
   if (!head.firstElementChild) return;
   title.after(head);
-  const mascot = queryOne(head, '.lr-ext-pdash__mascot', HTMLElement);
+  const mascot = queryOne(head, '.ln-ext-pdash__mascot', HTMLElement);
   if (mascot && word) liveMascot(mascot, coachId, () => word.mood);
 }
 

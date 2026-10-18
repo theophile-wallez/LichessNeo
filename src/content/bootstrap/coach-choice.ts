@@ -10,7 +10,7 @@ import { extensionUrl } from '#content/platform/runtime.ts';
 let still: HTMLImageElement | null = null;
 
 function showChoice(coach: number): void {
-  setData(document.documentElement, 'lrExtCoach', String(coach));
+  setData(document.documentElement, 'lnExtCoach', String(coach));
   still = new Image();
   still.src = extensionUrl(`img/coaches/mascot-${coach}.webp`);
   // A still that fails to decode is only not ready early: the card loads it as before.

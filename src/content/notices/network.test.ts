@@ -21,9 +21,9 @@ function goOnline(): void {
 }
 
 const front = (): HTMLElement | undefined =>
-  queryAll(document, '.lr-ext-toast:not([data-lr-ext-removed])', HTMLElement)[0];
+  queryAll(document, '.ln-ext-toast:not([data-ln-ext-removed])', HTMLElement)[0];
 const title = (): string =>
-  queryOne(document, '.lr-ext-toast__title', HTMLElement)?.textContent ?? '';
+  queryOne(document, '.ln-ext-toast__title', HTMLElement)?.textContent ?? '';
 
 describe('the connection’s toast', () => {
   it('says Lichess’s words while it reconnects, then that it’s back', () => {
@@ -32,11 +32,11 @@ describe('the connection’s toast', () => {
     expect(front()).toBeUndefined();
     goOffline('Reconnecting');
     sync();
-    expect(front()?.dataset.lrExtKind).toBe('loading');
+    expect(front()?.dataset.lnExtKind).toBe('loading');
     expect(title()).toBe('Reconnecting');
     goOnline();
     sync();
-    expect(front()?.dataset.lrExtKind).toBe('success');
+    expect(front()?.dataset.lnExtKind).toBe('success');
     expect(title()).toBe('Connected again');
   });
 
@@ -45,7 +45,7 @@ describe('the connection’s toast', () => {
     const sync = createNetworkSync(new Toaster('Close'), 'Connected again');
     goOffline('Offline');
     sync();
-    expect(front()?.dataset.lrExtKind).toBe('error');
+    expect(front()?.dataset.lnExtKind).toBe('error');
   });
 
   it('stays away once swiped off, until the connection is back', () => {

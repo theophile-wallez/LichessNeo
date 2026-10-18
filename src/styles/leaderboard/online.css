@@ -14,7 +14,7 @@
 }
 
 .community h2 {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   letter-spacing: normal !important;
 }
 
@@ -35,9 +35,9 @@
   align-self: start;
   min-width: 0;
   padding: 16px 0 8px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 12px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
 }
 
 .community__online > h2 {
@@ -55,18 +55,18 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--lr-ext-good);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--lr-ext-accent) 70%, transparent);
-  animation: lr-ext-online-pulse 1.6s ease-out infinite;
+  background: var(--ln-ext-good);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
+  animation: ln-ext-online-pulse 1.6s ease-out infinite;
 }
 
-@keyframes lr-ext-online-pulse {
+@keyframes ln-ext-online-pulse {
   70% {
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--lr-ext-accent) 0%, transparent);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--ln-ext-accent) 0%, transparent);
   }
 
   100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--lr-ext-accent) 0%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-accent) 0%, transparent);
   }
 }
 
@@ -85,19 +85,19 @@
 }
 
 .community__online li:hover {
-  background: var(--lr-ext-lift-5);
+  background: var(--ln-ext-lift-5);
 }
 
 .community .user-top .user-link {
   min-width: 0;
   margin: 0 !important;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px;
   font-weight: 700;
 }
 
 .community .user-top li:hover .user-link {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* The rating as a chip, its time control's icon in front. */
@@ -108,8 +108,8 @@
   gap: 5px;
   padding: 2px 9px 2px 7px;
   border-radius: 999px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-strong);
   font-size: 13px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -129,7 +129,7 @@
   .community__online {
     position: sticky;
     top: 16px;
-    max-height: calc(var(--lr-ext-main-h, 100dvh) - 32px);
+    max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
   }
 
   .community__online .user-top {

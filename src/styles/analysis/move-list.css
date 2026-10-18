@@ -3,13 +3,13 @@
 /* 30px rows, "8." numbers, a box on the current move, its eval dim on the right. Stripes go
  * by move number, so comments in between don't shift them. */
 main.analyse .analyse__moves {
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
 }
 
 main.analyse .tview2-column {
   padding-bottom: 8px;
   background: none !important;
-  font-family: var(--lr-ext-font) !important;
+  font-family: var(--ln-ext-font) !important;
 }
 
 main.analyse .tview2-column > index {
@@ -20,7 +20,7 @@ main.analyse .tview2-column > index {
   padding-left: 12px !important;
   border: none !important;
   background: transparent !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px !important;
   font-weight: 700;
   line-height: 30px !important;
@@ -40,17 +40,17 @@ main.analyse .tview2-column > move {
   padding: 0 10px 0 0 !important;
   border: none !important;
   background: transparent !important;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   line-height: 30px !important;
 }
 
 /* The review's list has its own stripes (review/). */
-html:not(.lr-ext-review-moves) main.analyse .tview2-column > index:nth-of-type(even),
-html:not(.lr-ext-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move,
-html:not(.lr-ext-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move + move {
-  background: var(--lr-ext-neutral-3) !important;
+html:not(.ln-ext-review-moves) main.analyse .tview2-column > index:nth-of-type(even),
+html:not(.ln-ext-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move,
+html:not(.ln-ext-review-moves) main.analyse .tview2-column > index:nth-of-type(even) + move + move {
+  background: var(--ln-ext-neutral-3) !important;
 }
 
 main.analyse .tview2-column > move san {
@@ -60,18 +60,18 @@ main.analyse .tview2-column > move san {
 }
 
 main.analyse .tview2-column > move:hover san {
-  background: var(--lr-ext-lift-8);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
 }
 
 main.analyse .tview2-column > move.active san {
-  background: var(--lr-ext-lift-15);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-lift-15);
+  color: var(--ln-ext-text-strong);
 }
 
 main.analyse .tview2-column > move.empty {
   padding-left: 5px !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-weight: 400 !important;
 }
 
@@ -79,7 +79,7 @@ main.analyse .tview2-column > move eval {
   flex: none;
   margin-left: auto;
   padding: 0 !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 11px !important;
   font-weight: 400;
   opacity: 0.8;
@@ -87,26 +87,26 @@ main.analyse .tview2-column > move eval {
 
 /* Annotated moves take the Debrief's colors; the glyph is a chip tinted with it before the move. */
 main.analyse .tview2 move.brilliant {
-  --lr-ext-glyph: #21c43a;
+  --ln-ext-glyph: #21c43a;
 }
 main.analyse .tview2 move.good {
-  --lr-ext-glyph: #77ba2c;
+  --ln-ext-glyph: #77ba2c;
 }
 main.analyse .tview2 move.interesting {
-  --lr-ext-glyph: var(--lr-ext-neutral-11);
+  --ln-ext-glyph: var(--ln-ext-neutral-11);
 }
 main.analyse .tview2 move.inaccuracy {
-  --lr-ext-glyph: #53b2ea;
+  --ln-ext-glyph: #53b2ea;
 }
 main.analyse .tview2 move.mistake {
-  --lr-ext-glyph: #e69d00;
+  --ln-ext-glyph: #e69d00;
 }
 main.analyse .tview2 move.blunder {
-  --lr-ext-glyph: #df5353;
+  --ln-ext-glyph: #df5353;
 }
 
 main.analyse .tview2 move:is(.brilliant, .good, .interesting, .inaccuracy, .mistake, .blunder) {
-  color: var(--lr-ext-glyph) !important;
+  color: var(--ln-ext-glyph) !important;
 }
 
 main.analyse .tview2-column > move glyph {
@@ -119,9 +119,9 @@ main.analyse .tview2-column > move glyph {
   height: 18px;
   margin: 0 -1px 0 0 !important;
   border-radius: 25%;
-  background: color-mix(in srgb, var(--lr-ext-glyph, var(--lr-ext-neutral-10)) 18%, transparent);
-  color: var(--lr-ext-glyph, var(--lr-ext-neutral-10)) !important;
-  font-family: var(--lr-ext-font) !important;
+  background: color-mix(in srgb, var(--ln-ext-glyph, var(--ln-ext-neutral-10)) 18%, transparent);
+  color: var(--ln-ext-glyph, var(--ln-ext-neutral-10)) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 10px !important;
   font-weight: 900;
   letter-spacing: -0.5px;
@@ -134,31 +134,31 @@ main.analyse .analyse__moves .result {
   margin: 0 !important;
   padding: 10px 16px 0 !important;
   border: none !important;
-  border-top: 1px solid var(--lr-ext-border) !important;
+  border-top: 1px solid var(--ln-ext-border) !important;
   background: none !important;
-  color: var(--lr-ext-text-strong) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 20px !important;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
   text-align: start !important;
-  animation: lr-ext-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: ln-ext-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 main.analyse .analyse__moves .result + .status {
   margin: 0 !important;
   padding: 2px 16px 12px !important;
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 13px !important;
   font-style: normal !important;
   line-height: 1.35;
   text-align: start !important;
-  animation: lr-ext-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: ln-ext-result-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes lr-ext-result-in {
+@keyframes ln-ext-result-in {
   from {
     opacity: 0;
     transform: translateY(6px);
@@ -172,25 +172,25 @@ main.analyse .analyse__moves button.next {
   margin: 8px !important;
   padding: 10px !important;
   border-radius: 5px !important;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text) !important;
-  font-family: var(--lr-ext-font) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text) !important;
+  font-family: var(--ln-ext-font) !important;
   font-weight: 700;
 }
 
 main.analyse .analyse__moves button.next.highlighted {
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white) !important;
   text-shadow: 0 1px 1px #00000033;
 }
 
 main.analyse .analyse__moves button.next:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.analyse .analyse__moves button.next.highlighted:hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
+  background: var(--ln-ext-btn-primary-hover) !important;
 }

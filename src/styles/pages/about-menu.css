@@ -4,98 +4,98 @@
  * headings-menus.css), and the open page's in its title. The database's link goes to
  * another site, so it never is the open page. */
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/about'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/about'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+.subnav[data-ln-ext-nav~='about'] a[href$='/about'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/about'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/feed'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/feed'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='about'] a[href$='/feed'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/feed'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/faq'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/faq'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+.subnav[data-ln-ext-nav~='about'] a[href$='/faq'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/faq'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/contact'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/contact'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='about'] a[href$='/contact'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/contact'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mail-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/terms-of-service'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/terms-of-service'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='about'] a[href$='/terms-of-service'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/terms-of-service'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/privacy'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/privacy'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='about'] a[href$='/privacy'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/privacy'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/verify-title'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/verify-title'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/checkmark-badge-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='about'] a[href$='/verify-title'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/verify-title'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/checkmark-badge-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/source'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/source'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/source-code.svg');
-  --lr-ext-nav-color: var(--lr-ext-neutral-11);
+.subnav[data-ln-ext-nav~='about'] a[href$='/source'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/source'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/source-code.svg');
+  --ln-ext-nav-color: var(--ln-ext-neutral-11);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/help/contribute'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/help/contribute'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='about'] a[href$='/help/contribute'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/help/contribute'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/agreement-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/changelog'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/changelog'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/note-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-neutral-11);
+.subnav[data-ln-ext-nav~='about'] a[href$='/changelog'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/changelog'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/note-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-neutral-11);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/thanks'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/thanks'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
-  --lr-ext-nav-color: var(--lr-ext-red);
+.subnav[data-ln-ext-nav~='about'] a[href$='/thanks'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/thanks'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+  --ln-ext-nav-color: var(--ln-ext-red);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/developers'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/developers'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/code.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='about'] a[href$='/developers'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/developers'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/code.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href*='database.lichess.org'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active*='database.lichess.org'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/database.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+.subnav[data-ln-ext-nav~='about'] a[href*='database.lichess.org'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active*='database.lichess.org'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/database.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/api'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/api'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/api.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+.subnav[data-ln-ext-nav~='about'] a[href$='/api'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/api'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/api.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/lag'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/lag'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/flash.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='about'] a[href$='/lag'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/lag'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/flash.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='about'] a[href$='/ads'],
-main.page-menu[data-lr-ext-menu~='about'][data-lr-ext-nav-active$='/ads'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/unavailable.svg');
-  --lr-ext-nav-color: var(--lr-ext-red);
+.subnav[data-ln-ext-nav~='about'] a[href$='/ads'],
+main.page-menu[data-ln-ext-menu~='about'][data-ln-ext-nav-active$='/ads'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/unavailable.svg');
+  --ln-ext-nav-color: var(--ln-ext-red);
 }

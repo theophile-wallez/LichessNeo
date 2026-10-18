@@ -7,14 +7,14 @@
 .board-editor .spare {
   display: flex !important;
   box-sizing: border-box;
-  height: var(--lr-ext-spare-h) !important;
+  height: var(--ln-ext-spare-h) !important;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
   border-radius: 10px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   /* Its edge drawn inside, not a border, which would shift the cells off the files. */
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border) !important;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border) !important;
 }
 
 .board-editor .spare .no-square {
@@ -29,15 +29,15 @@
 .board-editor .spare .no-square > div {
   position: relative;
   box-sizing: border-box;
-  width: var(--lr-ext-spare-h) !important;
-  height: var(--lr-ext-spare-h) !important;
+  width: var(--ln-ext-spare-h) !important;
+  height: var(--ln-ext-spare-h) !important;
   padding: 0 !important;
   border-radius: 8px;
   transition: background-color 0.15s !important;
 }
 
 .board-editor .spare .no-square:hover > div {
-  background: var(--lr-ext-bg-raised);
+  background: var(--ln-ext-bg-raised);
 }
 
 .board-editor .spare .no-square > div > piece {
@@ -56,7 +56,7 @@
 }
 
 .board-editor .spare .no-square:is(.pointer, .trash) > div {
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
 }
 
 /* Lichess's hand and bin, as Hugeicons. */
@@ -75,6 +75,6 @@
 }
 
 .board-editor .spare .no-square.selected-square > div {
-  background: color-mix(in srgb, var(--lr-ext-accent) 30%, transparent);
-  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+  background: color-mix(in srgb, var(--ln-ext-accent) 30%, transparent);
+  box-shadow: inset 0 0 0 2px var(--ln-ext-accent);
 }

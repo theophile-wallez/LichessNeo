@@ -6,7 +6,7 @@
 h1,
 .box__top h1,
 .page-menu__content h1 {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 800 !important;
   letter-spacing: -0.02em !important;
 }
@@ -31,7 +31,7 @@ h3 {
 
 .learn-stages .categ > h2,
 .practice-app section > h2 {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 1.5em !important;
   font-weight: 800 !important;
   text-align: left !important;
@@ -64,8 +64,8 @@ h3 {
   margin-bottom: 2px;
   padding: 10px 14px !important;
   border-radius: 6px !important;
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 15px;
   font-weight: 600;
   text-shadow: none !important;
@@ -75,13 +75,13 @@ h3 {
 }
 
 .subnav a:hover {
-  background: var(--lr-ext-lift-5) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-5) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .subnav a.active {
-  background: var(--lr-ext-lift-10) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-10) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 700;
 }
 
@@ -89,27 +89,27 @@ h3 {
   display: none !important;
 }
 
-/* Menus with an icon tile per link; each page sets `--lr-ext-nav-color` and
- * `--lr-ext-nav-glyph`, a Hugeicon painted in that color over the tile (`::after`).
- * content/layout/marks.ts tags the menu (`data-lr-ext-nav`), as a `:has()` here slowed every
+/* Menus with an icon tile per link; each page sets `--ln-ext-nav-color` and
+ * `--ln-ext-nav-glyph`, a Hugeicon painted in that color over the tile (`::after`).
+ * content/layout/marks.ts tags the menu (`data-ln-ext-nav`), as a `:has()` here slowed every
  * board move. */
 .subnav:is(
-    [data-lr-ext-nav~='bots'],
-    [data-lr-ext-nav~='broadcast'],
-    [data-lr-ext-nav~='puzzles'],
-    [data-lr-ext-nav~='account'],
-    [data-lr-ext-nav~='dgt'],
-    [data-lr-ext-nav~='about'],
-    [data-lr-ext-nav~='streamers'],
-    [data-lr-ext-nav~='studies'],
-    [data-lr-ext-nav~='teams'],
-    [data-lr-ext-nav~='blog'],
-    [data-lr-ext-nav~='arena-history']
+    [data-ln-ext-nav~='bots'],
+    [data-ln-ext-nav~='broadcast'],
+    [data-ln-ext-nav~='puzzles'],
+    [data-ln-ext-nav~='account'],
+    [data-ln-ext-nav~='dgt'],
+    [data-ln-ext-nav~='about'],
+    [data-ln-ext-nav~='streamers'],
+    [data-ln-ext-nav~='studies'],
+    [data-ln-ext-nav~='teams'],
+    [data-ln-ext-nav~='blog'],
+    [data-ln-ext-nav~='arena-history']
   )
   a {
   /* The open link's variables also sit on <main> (menu-titles.css): not inherited here. */
-  --lr-ext-nav-glyph: initial;
-  --lr-ext-nav-color: initial;
+  --ln-ext-nav-glyph: initial;
+  --ln-ext-nav-color: initial;
   position: relative;
   display: flex !important;
   align-items: center;
@@ -118,17 +118,17 @@ h3 {
 }
 
 .subnav:is(
-    [data-lr-ext-nav~='bots'],
-    [data-lr-ext-nav~='broadcast'],
-    [data-lr-ext-nav~='puzzles'],
-    [data-lr-ext-nav~='account'],
-    [data-lr-ext-nav~='dgt'],
-    [data-lr-ext-nav~='about'],
-    [data-lr-ext-nav~='streamers'],
-    [data-lr-ext-nav~='studies'],
-    [data-lr-ext-nav~='teams'],
-    [data-lr-ext-nav~='blog'],
-    [data-lr-ext-nav~='arena-history']
+    [data-ln-ext-nav~='bots'],
+    [data-ln-ext-nav~='broadcast'],
+    [data-ln-ext-nav~='puzzles'],
+    [data-ln-ext-nav~='account'],
+    [data-ln-ext-nav~='dgt'],
+    [data-ln-ext-nav~='about'],
+    [data-ln-ext-nav~='streamers'],
+    [data-ln-ext-nav~='studies'],
+    [data-ln-ext-nav~='teams'],
+    [data-ln-ext-nav~='blog'],
+    [data-ln-ext-nav~='arena-history']
   )
   a::before {
   content: '';
@@ -141,7 +141,7 @@ h3 {
   -webkit-text-fill-color: initial;
   background: color-mix(
     in srgb,
-    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 16%,
+    var(--ln-ext-nav-color, var(--ln-ext-text-strong)) 16%,
     transparent
   );
   box-shadow: inset 0 1px #ffffff14;
@@ -152,17 +152,17 @@ h3 {
 }
 
 .subnav:is(
-    [data-lr-ext-nav~='bots'],
-    [data-lr-ext-nav~='broadcast'],
-    [data-lr-ext-nav~='puzzles'],
-    [data-lr-ext-nav~='account'],
-    [data-lr-ext-nav~='dgt'],
-    [data-lr-ext-nav~='about'],
-    [data-lr-ext-nav~='streamers'],
-    [data-lr-ext-nav~='studies'],
-    [data-lr-ext-nav~='teams'],
-    [data-lr-ext-nav~='blog'],
-    [data-lr-ext-nav~='arena-history']
+    [data-ln-ext-nav~='bots'],
+    [data-ln-ext-nav~='broadcast'],
+    [data-ln-ext-nav~='puzzles'],
+    [data-ln-ext-nav~='account'],
+    [data-ln-ext-nav~='dgt'],
+    [data-ln-ext-nav~='about'],
+    [data-ln-ext-nav~='streamers'],
+    [data-ln-ext-nav~='studies'],
+    [data-ln-ext-nav~='teams'],
+    [data-ln-ext-nav~='blog'],
+    [data-ln-ext-nav~='arena-history']
   )
   a::after {
   content: '' !important;
@@ -176,58 +176,58 @@ h3 {
   border: none;
   background: color-mix(
     in srgb,
-    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 80%,
-    var(--lr-ext-text-strong)
+    var(--ln-ext-nav-color, var(--ln-ext-text-strong)) 80%,
+    var(--ln-ext-text-strong)
   );
   /* Without a glyph, a mask that hides it all. */
-  mask: var(--lr-ext-nav-glyph, linear-gradient(#0000, #0000)) center / contain no-repeat;
+  mask: var(--ln-ext-nav-glyph, linear-gradient(#0000, #0000)) center / contain no-repeat;
   pointer-events: none;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 .subnav:is(
-    [data-lr-ext-nav~='bots'],
-    [data-lr-ext-nav~='broadcast'],
-    [data-lr-ext-nav~='puzzles'],
-    [data-lr-ext-nav~='account'],
-    [data-lr-ext-nav~='dgt'],
-    [data-lr-ext-nav~='about'],
-    [data-lr-ext-nav~='streamers'],
-    [data-lr-ext-nav~='studies'],
-    [data-lr-ext-nav~='teams'],
-    [data-lr-ext-nav~='blog'],
-    [data-lr-ext-nav~='arena-history']
+    [data-ln-ext-nav~='bots'],
+    [data-ln-ext-nav~='broadcast'],
+    [data-ln-ext-nav~='puzzles'],
+    [data-ln-ext-nav~='account'],
+    [data-ln-ext-nav~='dgt'],
+    [data-ln-ext-nav~='about'],
+    [data-ln-ext-nav~='streamers'],
+    [data-ln-ext-nav~='studies'],
+    [data-ln-ext-nav~='teams'],
+    [data-ln-ext-nav~='blog'],
+    [data-ln-ext-nav~='arena-history']
   )
   a:hover::before,
 .subnav:is(
-    [data-lr-ext-nav~='bots'],
-    [data-lr-ext-nav~='broadcast'],
-    [data-lr-ext-nav~='puzzles'],
-    [data-lr-ext-nav~='account'],
-    [data-lr-ext-nav~='dgt'],
-    [data-lr-ext-nav~='about'],
-    [data-lr-ext-nav~='streamers'],
-    [data-lr-ext-nav~='studies'],
-    [data-lr-ext-nav~='teams'],
-    [data-lr-ext-nav~='blog'],
-    [data-lr-ext-nav~='arena-history']
+    [data-ln-ext-nav~='bots'],
+    [data-ln-ext-nav~='broadcast'],
+    [data-ln-ext-nav~='puzzles'],
+    [data-ln-ext-nav~='account'],
+    [data-ln-ext-nav~='dgt'],
+    [data-ln-ext-nav~='about'],
+    [data-ln-ext-nav~='streamers'],
+    [data-ln-ext-nav~='studies'],
+    [data-ln-ext-nav~='teams'],
+    [data-ln-ext-nav~='blog'],
+    [data-ln-ext-nav~='arena-history']
   )
   a:hover::after {
   transform: translateY(-2px) rotate(-8deg) scale(1.08);
 }
 
 .subnav:is(
-    [data-lr-ext-nav~='bots'],
-    [data-lr-ext-nav~='broadcast'],
-    [data-lr-ext-nav~='puzzles'],
-    [data-lr-ext-nav~='account'],
-    [data-lr-ext-nav~='dgt'],
-    [data-lr-ext-nav~='about'],
-    [data-lr-ext-nav~='streamers'],
-    [data-lr-ext-nav~='studies'],
-    [data-lr-ext-nav~='teams'],
-    [data-lr-ext-nav~='blog'],
-    [data-lr-ext-nav~='arena-history']
+    [data-ln-ext-nav~='bots'],
+    [data-ln-ext-nav~='broadcast'],
+    [data-ln-ext-nav~='puzzles'],
+    [data-ln-ext-nav~='account'],
+    [data-ln-ext-nav~='dgt'],
+    [data-ln-ext-nav~='about'],
+    [data-ln-ext-nav~='streamers'],
+    [data-ln-ext-nav~='studies'],
+    [data-ln-ext-nav~='teams'],
+    [data-ln-ext-nav~='blog'],
+    [data-ln-ext-nav~='arena-history']
   )
   a.active::after {
   /* Below 800px Lichess underlines the open link with its ::after, a bar 4px high across the
@@ -236,41 +236,41 @@ h3 {
   height: 24px !important;
   background: color-mix(
     in srgb,
-    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 80%,
-    var(--lr-ext-text-strong)
+    var(--ln-ext-nav-color, var(--ln-ext-text-strong)) 80%,
+    var(--ln-ext-text-strong)
   ) !important;
   transform: none !important;
 }
 
 .subnav:is(
-    [data-lr-ext-nav~='bots'],
-    [data-lr-ext-nav~='broadcast'],
-    [data-lr-ext-nav~='puzzles'],
-    [data-lr-ext-nav~='account'],
-    [data-lr-ext-nav~='dgt'],
-    [data-lr-ext-nav~='about'],
-    [data-lr-ext-nav~='streamers'],
-    [data-lr-ext-nav~='studies'],
-    [data-lr-ext-nav~='teams'],
-    [data-lr-ext-nav~='blog'],
-    [data-lr-ext-nav~='arena-history']
+    [data-ln-ext-nav~='bots'],
+    [data-ln-ext-nav~='broadcast'],
+    [data-ln-ext-nav~='puzzles'],
+    [data-ln-ext-nav~='account'],
+    [data-ln-ext-nav~='dgt'],
+    [data-ln-ext-nav~='about'],
+    [data-ln-ext-nav~='streamers'],
+    [data-ln-ext-nav~='studies'],
+    [data-ln-ext-nav~='teams'],
+    [data-ln-ext-nav~='blog'],
+    [data-ln-ext-nav~='arena-history']
   )
   a.active::before {
   background-color: color-mix(
     in srgb,
-    var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 32%,
+    var(--ln-ext-nav-color, var(--ln-ext-text-strong)) 32%,
     transparent
   );
   box-shadow:
     inset 0 1px #ffffff26,
     0 0 0 1px
-      color-mix(in srgb, var(--lr-ext-nav-color, var(--lr-ext-text-strong)) 45%, transparent);
+      color-mix(in srgb, var(--ln-ext-nav-color, var(--ln-ext-text-strong)) 45%, transparent);
 }
 
 /* A settings page's title: the text's color rather than Lichess's green, after its link's tile
  * (menu-titles.css). */
 main.account .page-menu__content h1 {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Two-factor's "enabled" title has its own green check; the tile replaces it. */
@@ -280,20 +280,20 @@ main.account .page-menu__content .twofactor h1 > .is-green {
 
 /* Lichess's separators are blank gaps: draw a faint line. */
 .subnav:is(
-    [data-lr-ext-nav~='bots'],
-    [data-lr-ext-nav~='broadcast'],
-    [data-lr-ext-nav~='puzzles'],
-    [data-lr-ext-nav~='account'],
-    [data-lr-ext-nav~='dgt'],
-    [data-lr-ext-nav~='about'],
-    [data-lr-ext-nav~='streamers'],
-    [data-lr-ext-nav~='studies'],
-    [data-lr-ext-nav~='teams'],
-    [data-lr-ext-nav~='blog'],
-    [data-lr-ext-nav~='arena-history']
+    [data-ln-ext-nav~='bots'],
+    [data-ln-ext-nav~='broadcast'],
+    [data-ln-ext-nav~='puzzles'],
+    [data-ln-ext-nav~='account'],
+    [data-ln-ext-nav~='dgt'],
+    [data-ln-ext-nav~='about'],
+    [data-ln-ext-nav~='streamers'],
+    [data-ln-ext-nav~='studies'],
+    [data-ln-ext-nav~='teams'],
+    [data-ln-ext-nav~='blog'],
+    [data-ln-ext-nav~='arena-history']
   )
   .sep {
   height: 1px;
   margin: 8px 14px !important;
-  background: var(--lr-ext-border);
+  background: var(--ln-ext-border);
 }

@@ -8,11 +8,11 @@ vi.hoisted(() => vi.stubGlobal('chrome', { i18n: { getMessage: (name: string) =>
 
 const actions = (): unknown[] =>
   vi.mocked(window.postMessage).mock.calls.map(([message]): unknown => message);
-const preview = (action: string): unknown => ({ type: 'lr-ext:looks-preview', action });
+const preview = (action: string): unknown => ({ type: 'ln-ext:looks-preview', action });
 
 const pageReady = (): void => {
   window.dispatchEvent(
-    new MessageEvent('message', { data: { type: 'lr-ext:page-ready' }, source: window }),
+    new MessageEvent('message', { data: { type: 'ln-ext:page-ready' }, source: window }),
   );
 };
 
@@ -25,7 +25,7 @@ describe('the Board & sounds page’s preview', () => {
   it('asks the page world to draw it, play its game, or play a move', () => {
     const { element, show, step } = buildLooksPreview();
     show();
-    queryOne(element, '.lr-ext-looks-preview__play', HTMLElement)?.click();
+    queryOne(element, '.ln-ext-looks-preview__play', HTMLElement)?.click();
     step();
     expect(actions()).toEqual([preview('draw'), preview('play'), preview('step')]);
   });

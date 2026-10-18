@@ -28,8 +28,8 @@ export function readCustomBoard(): SquareColors {
 export function showCustomBoard(): void {
   const { light, dark } = readCustomBoard();
   const root = document.documentElement;
-  setStyleProperty(root, '--lr-ext-board-custom-light', light);
-  setStyleProperty(root, '--lr-ext-board-custom-dark', dark);
+  setStyleProperty(root, '--ln-ext-board-custom-light', light);
+  setStyleProperty(root, '--ln-ext-board-custom-dark', dark);
 }
 
 export function chooseSquareColor(shade: SquareShade, color: string): void {

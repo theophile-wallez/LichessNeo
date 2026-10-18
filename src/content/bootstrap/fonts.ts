@@ -2,13 +2,13 @@ import { createElement, onHeadParsed } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 
 // Lichess sets light (300) weights on Roboto and Noto Sans all over the site.
-// We point those families (and our own 'LR Ext Sans') at the system UI font, so
+// We point those families (and our own 'LN Ext Sans') at the system UI font, so
 // light weights render as regular. The faces must come after Lichess's own to
 // win, so they're added to <head> rather than put in the manifest CSS: as soon
 // as it's parsed, so the first paint has them (at DOMContentLoaded, the text
 // was laid out in Lichess's font first, and side menus shrank a frame later).
 
-const FAMILIES = ['Roboto', 'Noto Sans', 'LR Ext Sans'];
+const FAMILIES = ['Roboto', 'Noto Sans', 'LN Ext Sans'];
 
 const WEIGHTS: readonly (readonly [range: string, sources: readonly string[]])[] = [
   ['100 450', ['Segoe UI', 'SegoeUI', 'Helvetica Neue', 'Roboto']],
@@ -30,6 +30,6 @@ export const fonts: Feature = {
   name: 'fonts',
   start: () =>
     onHeadParsed(() => {
-      document.head.append(createElement('style', { id: 'lr-ext-fonts', text: fontFaces() }));
+      document.head.append(createElement('style', { id: 'ln-ext-fonts', text: fontFaces() }));
     }),
 };

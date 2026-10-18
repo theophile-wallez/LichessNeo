@@ -47,27 +47,27 @@ const runtime = { getURL: (path: string): string => `chrome-extension://id/${pat
 beforeEach(() => {
   vi.stubGlobal('chrome', { i18n, runtime });
   vi.stubGlobal('requestIdleCallback', (callback: () => void) => setTimeout(callback, 0));
-  localStorage.setItem('lr-ext-coach', '3');
+  localStorage.setItem('ln-ext-coach', '3');
   mascot.shown.splice(0);
 });
 
 afterEach(() => {
   document.body.innerHTML = '';
   localStorage.clear();
-  delete document.documentElement.dataset.lrExtCoach;
+  delete document.documentElement.dataset.lnExtCoach;
 });
 
 const pressed = (card: HTMLElement): (string | undefined)[] =>
-  queryAll(card, '.lr-ext-coach-choice[aria-pressed=true]', HTMLElement).map(
-    choice => choice.dataset.lrExtCoachChoice,
+  queryAll(card, '.ln-ext-coach-choice[aria-pressed=true]', HTMLElement).map(
+    choice => choice.dataset.lnExtCoachChoice,
   );
 const bubble = (card: HTMLElement): string | null | undefined =>
-  queryOne(card, '.lr-ext-coach-pick__bubble', HTMLElement)?.textContent;
+  queryOne(card, '.ln-ext-coach-pick__bubble', HTMLElement)?.textContent;
 
 function pick(card: HTMLElement, coach: number): void {
   queryOne(
     card,
-    `[data-lr-ext-coach-choice='${coach}'] .lr-ext-coach-choice__name`,
+    `[data-ln-ext-coach-choice='${coach}'] .ln-ext-coach-choice__name`,
     HTMLElement,
   )?.click();
 }
@@ -80,7 +80,7 @@ describe('the settings’ coach card', () => {
     expect(coachName(27)).toBe('coachPawn');
     const card = buildCoachCard().element;
     expect(
-      queryAll(card, '.lr-ext-coach-choice__name', HTMLElement).map(name => name.textContent),
+      queryAll(card, '.ln-ext-coach-choice__name', HTMLElement).map(name => name.textContent),
     ).toEqual([
       'coachPawn',
       'coachFennec',
@@ -120,12 +120,12 @@ describe('the settings’ coach card', () => {
   it('keeps the coach picked for every page, the robot too', () => {
     const card = buildCoachCard().element;
     pick(card, 8);
-    expect(localStorage.getItem('lr-ext-coach')).toBe('8');
-    expect(document.documentElement.dataset.lrExtCoach).toBe('8');
+    expect(localStorage.getItem('ln-ext-coach')).toBe('8');
+    expect(document.documentElement.dataset.lnExtCoach).toBe('8');
     expect(pressed(card)).toEqual(['8']);
     expect(bubble(card)).toBe('coachPickHello:coachRobot');
     expect(
-      queryOne(card, '.lr-ext-coach-pick__mascot', HTMLElement)?.dataset.lrExtAvatarCoach,
+      queryOne(card, '.ln-ext-coach-pick__mascot', HTMLElement)?.dataset.lnExtAvatarCoach,
     ).toBe('8');
   });
 
@@ -133,7 +133,7 @@ describe('the settings’ coach card', () => {
     const { element, show } = buildCoachCard();
     show(true);
     show(false);
-    localStorage.setItem('lr-ext-coach', '5');
+    localStorage.setItem('ln-ext-coach', '5');
     show(true);
     expect(pressed(element)).toEqual(['5']);
   });
@@ -142,26 +142,26 @@ describe('the settings’ coach card', () => {
     const { element, show } = buildCoachCard();
     document.body.append(element);
     const live = (): HTMLElement | null =>
-      queryOne(element, '.lr-ext-coach-pick__mascot > .lr-ext-mascot', HTMLElement);
+      queryOne(element, '.ln-ext-coach-pick__mascot > .ln-ext-mascot', HTMLElement);
     show(true);
     expect(live()).not.toBeNull();
     await flush();
     await flush();
     expect(mascot.shown).toEqual([{ coach: 3, mood: 'neutral' }]);
     mascot.draw();
-    const stage = queryOne(element, '.lr-ext-coach-pick__mascot', HTMLElement);
-    expect(stage?.dataset.lrExtLive).toBe('');
+    const stage = queryOne(element, '.ln-ext-coach-pick__mascot', HTMLElement);
+    expect(stage?.dataset.lnExtLive).toBe('');
     expect(mascot.shown.at(-1)).toEqual({ coach: 3, mood: 'happy' });
     pick(element, 8);
     expect(mascot.shown.at(-1)).toEqual({ coach: 8, mood: 'happy' });
     show(false);
     expect(live()).toBeNull();
-    expect(stage?.dataset.lrExtLive).toBeUndefined();
+    expect(stage?.dataset.lnExtLive).toBeUndefined();
   });
 });
 
 const switchOf = (list: HTMLElement, key: string): HTMLButtonElement | null =>
-  queryOne(list, `[data-lr-ext-setting='${key}'] .lr-ext-switch`, HTMLButtonElement);
+  queryOne(list, `[data-ln-ext-setting='${key}'] .ln-ext-switch`, HTMLButtonElement);
 
 describe('the coach’s switches', () => {
   // chrome.storage.sync, as the settings read and write it.
@@ -190,7 +190,7 @@ describe('the coach’s switches', () => {
     expect(switchOf(list, 'coachMotion')?.getAttribute('aria-checked')).toBe('true');
     expect(switchOf(list, 'analysisCoach')?.getAttribute('aria-checked')).toBe('true');
     switchOf(list, 'analysisCoach')?.click();
-    expect(synced.get('lr-ext-settings')).toMatchObject({
+    expect(synced.get('ln-ext-settings')).toMatchObject({
       coachMotion: true,
       analysisCoach: false,
     });
@@ -205,9 +205,9 @@ describe('the coach’s switches', () => {
     await flush();
     await flush();
     mascot.draw();
-    const stage = queryOne(element, '.lr-ext-coach-pick__mascot', HTMLElement);
-    expect(stage?.dataset.lrExtLive).toBe('');
+    const stage = queryOne(element, '.ln-ext-coach-pick__mascot', HTMLElement);
+    expect(stage?.dataset.lnExtLive).toBe('');
     switchOf(list, 'coachMotion')?.click();
-    expect(stage?.dataset.lrExtLive).toBeUndefined();
+    expect(stage?.dataset.lnExtLive).toBeUndefined();
   });
 });

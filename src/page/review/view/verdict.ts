@@ -94,25 +94,25 @@ export function timeTag(session: Session, { timing, advice }: CoachComment): Saf
   if (!timing) return '';
   const { ui, typography } = session.language;
   const spent = spentTime(timing.spent, ui.clock);
-  if (!advice) return html`<span class="lr-ext-tag lr-ext-tag--time">${spent}</span>`;
-  return html`<span class="lr-ext-tag lr-ext-tag--time lr-ext-tag--${advice.note}" data-lr-ext-tip="${typography(advice.text)}">${spent}</span>`;
+  if (!advice) return html`<span class="ln-ext-tag ln-ext-tag--time">${spent}</span>`;
+  return html`<span class="ln-ext-tag ln-ext-tag--time ln-ext-tag--${advice.note}" data-ln-ext-tip="${typography(advice.text)}">${spent}</span>`;
 }
 
 function tagsMarkup(session: Session, { themes }: CoachComment): SafeHtml {
   const { ui } = session.language;
   const tags = themes.map(
-    theme => html`<span class="lr-ext-tag lr-ext-tag--${theme}">${ui.themes[theme]}</span>`,
+    theme => html`<span class="ln-ext-tag ln-ext-tag--${theme}">${ui.themes[theme]}</span>`,
   );
-  return tags.length > 0 ? html`<div class="lr-ext-bubble__tags">${tags}</div>` : html``;
+  return tags.length > 0 ? html`<div class="ln-ext-bubble__tags">${tags}</div>` : html``;
 }
 
 /** The score after the move; an error's tooltip says the winning chances it gave away. */
 function scoreMarkup(move: JudgedMove, language: ReviewLanguage): SafeHtml {
   // A verdict from mate distances isn't about winning chances, which stay the same.
   const lost = isError(move.moveClass) && !move.slower ? chancesLost(move) : 0;
-  if (lost <= 0) return html`<span class="lr-ext-bubble__evals">${evalChip(move.after)}</span>`;
+  if (lost <= 0) return html`<span class="ln-ext-bubble__evals">${evalChip(move.after)}</span>`;
   const tip = language.ui.cost(lost);
-  return html`<span class="lr-ext-bubble__evals" data-lr-ext-tip="${tip}" aria-label="${tip}">${evalChip(move.after)}</span>`;
+  return html`<span class="ln-ext-bubble__evals" data-ln-ext-tip="${tip}" aria-label="${tip}">${evalChip(move.after)}</span>`;
 }
 
 /**
@@ -127,9 +127,9 @@ export function verdictMarkup(
   const { language, stream } = session;
   const { move, parts } = comment;
   const said = commentMarkup(parts, { stream: stream.state, language });
-  return html`<div class="lr-ext-bubble__row">${classIcon(move.moveClass)}
-      <p class="lr-ext-bubble__title">${verdictTitle(move.moveClass, move.san, language)}</p>
+  return html`<div class="ln-ext-bubble__row">${classIcon(move.moveClass)}
+      <p class="ln-ext-bubble__title">${verdictTitle(move.moveClass, move.san, language)}</p>
       ${scoreMarkup(move, language)}</div>
-    <div class="lr-ext-bubble__body"><p class="lr-ext-bubble__sub">${said}</p>
+    <div class="ln-ext-bubble__body"><p class="ln-ext-bubble__sub">${said}</p>
       ${tagsMarkup(session, comment)}${actions}</div>`;
 }

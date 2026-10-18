@@ -3,12 +3,12 @@
 /* The bubble's parts around the comment (view/verdict.ts, view/retry-bubble.ts). */
 
 /* The comment, its tags and buttons, under the verdict: they scroll when they don't fit. */
-.lr-ext-bubble__row {
+.ln-ext-bubble__row {
   flex: none;
 }
 
 /* Its top edge sits under the verdict, so a scrolled comment doesn't touch it. */
-.lr-ext-bubble__body {
+.ln-ext-bubble__body {
   min-height: 0;
   margin-top: 6px;
   padding-bottom: 10px;
@@ -16,36 +16,36 @@
   scrollbar-gutter: stable;
 }
 
-.lr-ext-bubble__body > .lr-ext-bubble__sub {
+.ln-ext-bubble__body > .ln-ext-bubble__sub {
   margin-top: 0;
 }
 
 /* A black piece named in the text vanishes on a dark card: a dim edge outlines it, as
    the captured pieces' (playerbar.css). A chip's grey keeps its own visible. */
-#lr-ext-review
-  .lr-ext-bubble__sub
-  .lr-ext-w
-  > .lr-ext-pc:is(
-    .lr-ext-pc-bp,
-    .lr-ext-pc-bn,
-    .lr-ext-pc-bb,
-    .lr-ext-pc-br,
-    .lr-ext-pc-bq,
-    .lr-ext-pc-bk
+#ln-ext-review
+  .ln-ext-bubble__sub
+  .ln-ext-w
+  > .ln-ext-pc:is(
+    .ln-ext-pc-bp,
+    .ln-ext-pc-bn,
+    .ln-ext-pc-bb,
+    .ln-ext-pc-br,
+    .ln-ext-pc-bq,
+    .ln-ext-pc-bk
   ) {
-  filter: drop-shadow(1px 0 0 var(--lr-ext-text-dim)) drop-shadow(-1px 0 0 var(--lr-ext-text-dim))
-    drop-shadow(0 1px 0 var(--lr-ext-text-dim)) drop-shadow(0 -1px 0 var(--lr-ext-text-dim));
+  filter: drop-shadow(1px 0 0 var(--ln-ext-text-dim)) drop-shadow(-1px 0 0 var(--ln-ext-text-dim))
+    drop-shadow(0 1px 0 var(--ln-ext-text-dim)) drop-shadow(0 -1px 0 var(--ln-ext-text-dim));
 }
 
 /* The score after the move; the one before is in its tooltip (view/verdict.ts). */
-.lr-ext-bubble__evals {
+.ln-ext-bubble__evals {
   flex: none;
   display: inline-flex;
   cursor: help;
 }
 
 /* A move of the comment that can be played: its arrow on hover, played on click. */
-#lr-ext-review .lr-ext-bubble .lr-ext-mv--play {
+#ln-ext-review .ln-ext-bubble .ln-ext-mv--play {
   margin: 0;
   border: none;
   font: inherit;
@@ -54,76 +54,76 @@
   transition: background-color 0.15s !important;
 }
 
-#lr-ext-review .lr-ext-bubble .lr-ext-mv--play:hover {
-  background: var(--lr-ext-neutral-9);
+#ln-ext-review .ln-ext-bubble .ln-ext-mv--play:hover {
+  background: var(--ln-ext-neutral-9);
 }
 
-.lr-ext-bubble__actions {
+.ln-ext-bubble__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.lr-ext-bubble__actions:empty {
+.ln-ext-bubble__actions:empty {
   display: none;
 }
 
-.lr-ext-bubble__actions .lr-ext-bubble__line {
+.ln-ext-bubble__actions .ln-ext-bubble__line {
   margin-top: 8px;
 }
 
 /* Retry stands out from Explain's line button: the player's own turn. */
-#lr-ext-review .lr-ext-bubble__retry,
-#lr-ext-review .lr-ext-bubble__retry:hover {
-  background: var(--lr-ext-btn-primary);
-  color: var(--lr-ext-white);
+#ln-ext-review .ln-ext-bubble__retry,
+#ln-ext-review .ln-ext-bubble__retry:hover {
+  background: var(--ln-ext-btn-primary);
+  color: var(--ln-ext-white);
 }
 
-.lr-ext-bubble__row--retry .lr-ext-bubble__title {
+.ln-ext-bubble__row--retry .ln-ext-bubble__title {
   font-size: 15px;
 }
 
 /* The tags: the tactic, the chances an error gave away; and the move's time, which the card
  * shows over the coach (bubble.css). */
-.lr-ext-bubble__tags {
+.ln-ext-bubble__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
   margin-top: 8px;
 }
 
-.lr-ext-tag {
-  --lr-ext-tag: var(--lr-ext-text-dim);
+.ln-ext-tag {
+  --ln-ext-tag: var(--ln-ext-text-dim);
   padding: 2px 8px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-tag) 16%, transparent);
-  color: var(--lr-ext-tag);
+  background: color-mix(in srgb, var(--ln-ext-tag) 16%, transparent);
+  color: var(--ln-ext-tag);
   font-size: 11.5px;
   font-weight: 800;
   letter-spacing: 0.02em;
 }
 
-.lr-ext-tag--fork,
-.lr-ext-tag--sacrifice {
-  --lr-ext-tag: color-mix(in srgb, var(--lr-ext-purple) 80%, var(--lr-ext-text-strong));
+.ln-ext-tag--fork,
+.ln-ext-tag--sacrifice {
+  --ln-ext-tag: color-mix(in srgb, var(--ln-ext-purple) 80%, var(--ln-ext-text-strong));
 }
 
-.lr-ext-tag--hanging {
-  --lr-ext-tag: color-mix(in srgb, var(--lr-ext-red) 80%, var(--lr-ext-text-strong));
+.ln-ext-tag--hanging {
+  --ln-ext-tag: color-mix(in srgb, var(--ln-ext-red) 80%, var(--ln-ext-text-strong));
 }
 
-.lr-ext-tag--mate {
-  --lr-ext-tag: var(--lr-ext-orange);
+.ln-ext-tag--mate {
+  --ln-ext-tag: var(--ln-ext-orange);
 }
 
 /* The time, after a stopwatch; orange when rushed or short of time, green when it paid off. */
-.lr-ext-tag--time {
+.ln-ext-tag--time {
   display: inline-flex;
   align-items: center;
   gap: 4px;
 }
 
-.lr-ext-tag--time::before {
+.ln-ext-tag--time::before {
   content: '';
   width: 13px;
   height: 13px;
@@ -132,19 +132,19 @@
     contain no-repeat;
 }
 
-.lr-ext-tag--rushed,
-.lr-ext-tag--timeTrouble {
-  --lr-ext-tag: var(--lr-ext-orange);
+.ln-ext-tag--rushed,
+.ln-ext-tag--timeTrouble {
+  --ln-ext-tag: var(--ln-ext-orange);
 }
 
-.lr-ext-tag--paidOff {
-  --lr-ext-tag: var(--lr-ext-green);
+.ln-ext-tag--paidOff {
+  --ln-ext-tag: var(--ln-ext-green);
 }
 
 /* ---- Brief --- */
 
 /* The move the game turned on, in the brief's sentence: its number and chip, a link to it. */
-#lr-ext-review .lr-ext-brief__turn {
+#ln-ext-review .ln-ext-brief__turn {
   display: inline;
   margin: 0;
   padding: 0;
@@ -156,60 +156,60 @@
   cursor: pointer;
 }
 
-#lr-ext-review .lr-ext-brief__turn .lr-ext-mv {
+#ln-ext-review .ln-ext-brief__turn .ln-ext-mv {
   margin-left: 0.25em;
   transition: background-color 0.15s !important;
 }
 
-#lr-ext-review .lr-ext-brief__turn:hover .lr-ext-mv {
-  background: var(--lr-ext-neutral-9);
+#ln-ext-review .ln-ext-brief__turn:hover .ln-ext-mv {
+  background: var(--ln-ext-neutral-9);
 }
 
 /* The coach waiting for the engine (view/markup.ts): a spinner where the class's icon goes (not
    dots, the best move's), faint lines where the comment will, about its two lines' height, so
    the verdict lands in place. */
-.lr-ext-bubble__spin {
+.ln-ext-bubble__spin {
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  background: var(--lr-ext-lift-8);
+  background: var(--ln-ext-lift-8);
 }
 
-.lr-ext-bubble__spin::before {
+.ln-ext-bubble__spin::before {
   content: '';
   width: 10px;
   height: 10px;
-  border: 2px solid var(--lr-ext-lift-15);
-  border-top-color: var(--lr-ext-text-dim);
+  border: 2px solid var(--ln-ext-lift-15);
+  border-top-color: var(--ln-ext-text-dim);
   border-radius: 50%;
-  animation: lr-ext-spin 0.8s linear infinite;
+  animation: ln-ext-spin 0.8s linear infinite;
 }
 
-.lr-ext-bubble__wait {
+.ln-ext-bubble__wait {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 11px;
 }
 
-.lr-ext-bubble__wait > span {
+.ln-ext-bubble__wait > span {
   height: 9px;
   border-radius: 5px;
-  background: var(--lr-ext-lift-8);
-  animation: lr-ext-wait 0.9s ease-in-out infinite alternate;
+  background: var(--ln-ext-lift-8);
+  animation: ln-ext-wait 0.9s ease-in-out infinite alternate;
 }
 
-.lr-ext-bubble__wait > span:last-child {
+.ln-ext-bubble__wait > span:last-child {
   width: 62%;
 }
 
-@keyframes lr-ext-spin {
+@keyframes ln-ext-spin {
   to {
     transform: rotate(1turn);
   }
 }
 
-@keyframes lr-ext-wait {
+@keyframes ln-ext-wait {
   to {
     opacity: 0.45;
   }

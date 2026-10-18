@@ -5,10 +5,10 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // Lichess gives each practice study's icon as `---icon-bg-image:
 // url(../hashed/…)`, relative to its own stylesheet: read from ours, the URL
 // would point into the extension. Each icon gets it absolute, in
-// `--lr-ext-practice-icon`, for styles/practice.css to paint as a mask.
+// `--ln-ext-practice-icon`, for styles/practice.css to paint as a mask.
 
 const ICONS = '.practice-app .study icon, .practice__side__title icon';
-const VARIABLE = '--lr-ext-practice-icon';
+const VARIABLE = '--ln-ext-practice-icon';
 
 /** `url(../hashed/x.svg)`, made absolute from the stylesheet that wrote it; null if it isn't one. */
 export function absoluteIconUrl(value: string, sheet: string): string | null {

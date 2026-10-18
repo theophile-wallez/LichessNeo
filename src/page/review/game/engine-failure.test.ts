@@ -12,17 +12,14 @@ afterEach(() => {
 it('says the engine failed to start, rather than analyzing forever', async () => {
   const { advance } = setUp({ game: 'passant', lang: 'en', cached: false, steps: [] });
   // A browser refusing the engine's shared memory, say.
-  Reflect.set(globalThis, 'lrExtFakeStockfish', () => {
+  Reflect.set(globalThis, 'lnExtFakeStockfish', () => {
     throw new RangeError('no shared memory');
   });
   const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
   review.start();
   await advance(3000);
-  const error = document.querySelector('#lr-ext-review .lr-ext-review__error');
+  const error = document.querySelector('#ln-ext-review .ln-ext-review__error');
   expect(error?.textContent).toBe(en.ui.engineError);
-  expect(document.querySelector('#lr-ext-review .lr-ext-summary-pct')).toBeNull();
-  expect(logged).toHaveBeenCalledWith(
-    '[LichessReimagined] engine boot failed',
-    expect.any(RangeError),
-  );
+  expect(document.querySelector('#ln-ext-review .ln-ext-summary-pct')).toBeNull();
+  expect(logged).toHaveBeenCalledWith('[LichessNeo] engine boot failed', expect.any(RangeError));
 });

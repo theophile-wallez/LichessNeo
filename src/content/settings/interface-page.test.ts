@@ -4,7 +4,7 @@ import { flush } from '#shared/testing/timers.ts';
 import { buildInterfacePage } from './interface-page.ts';
 
 // chrome.storage.sync, as the settings read and write it, starting with the sounds off.
-const synced = new Map<string, unknown>([['lr-ext-settings', { uiSounds: false }]]);
+const synced = new Map<string, unknown>([['ln-ext-settings', { uiSounds: false }]]);
 
 beforeEach(() => {
   vi.stubGlobal('chrome', {
@@ -28,27 +28,27 @@ afterEach(() => {
 });
 
 const row = (page: HTMLElement, key: string): HTMLElement | null =>
-  queryOne(page, `[data-lr-ext-setting='${key}']`, HTMLElement);
+  queryOne(page, `[data-ln-ext-setting='${key}']`, HTMLElement);
 const switchOf = (page: HTMLElement): HTMLButtonElement | null =>
-  queryOne(page, "[data-lr-ext-setting='uiSounds'] .lr-ext-switch", HTMLButtonElement);
-const storedSettings = (): unknown => synced.get('lr-ext-settings');
+  queryOne(page, "[data-ln-ext-setting='uiSounds'] .ln-ext-switch", HTMLButtonElement);
+const storedSettings = (): unknown => synced.get('ln-ext-settings');
 
 describe('the settings’ Interface page', () => {
   it('shows the stored settings once read, and flips a switch', async () => {
     const page = buildInterfacePage();
     await flush();
     expect(switchOf(page)?.getAttribute('aria-checked')).toBe('false');
-    expect(row(page, 'uiSounds')?.dataset.lrExtOn).toBeUndefined();
+    expect(row(page, 'uiSounds')?.dataset.lnExtOn).toBeUndefined();
     switchOf(page)?.click();
     expect(storedSettings()).toMatchObject({ uiSounds: true });
     expect(switchOf(page)?.getAttribute('aria-checked')).toBe('true');
-    expect(row(page, 'uiSounds')?.dataset.lrExtOn).toBe('');
+    expect(row(page, 'uiSounds')?.dataset.lnExtOn).toBe('');
   });
 
   it('keeps the rating the sidebar shows, from its menu', async () => {
     const page = buildInterfacePage();
     await flush();
-    const select = queryOne(page, '.lr-ext-setting__select', HTMLSelectElement);
+    const select = queryOne(page, '.ln-ext-setting__select', HTMLSelectElement);
     if (!select) throw new Error('no menu');
     select.value = 'blitz';
     select.dispatchEvent(new Event('change', { bubbles: true }));
@@ -59,7 +59,7 @@ describe('the settings’ Interface page', () => {
     const page = buildInterfacePage();
     await flush();
     const before = storedSettings();
-    queryOne(page, "[data-lr-ext-setting='uiSounds'] .lr-ext-setting__title", HTMLElement)?.click();
+    queryOne(page, "[data-ln-ext-setting='uiSounds'] .ln-ext-setting__title", HTMLElement)?.click();
     expect(storedSettings()).toBe(before);
   });
 });

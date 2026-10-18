@@ -11,9 +11,9 @@
 
 :is(.ublog-index, .ublog-post) .ublog-post-card {
   overflow: hidden;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 10px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
   transition:
     background-color 0.15s,
@@ -22,18 +22,18 @@
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card--link:hover {
-  border-color: var(--lr-ext-card-border-hover) !important;
-  background: var(--lr-ext-card-hover) !important;
-  box-shadow: var(--lr-ext-card-shadow-hover) !important;
+  border-color: var(--ln-ext-card-border-hover) !important;
+  background: var(--ln-ext-card-hover) !important;
+  box-shadow: var(--ln-ext-card-shadow-hover) !important;
 }
 
 /* Lichess's own posts: a gold edge instead of a thick gold frame. */
 :is(.ublog-index, .ublog-post) .ublog-post-card--by-lichess {
-  border-color: color-mix(in srgb, var(--lr-ext-orange-dark) 40%, transparent) !important;
+  border-color: color-mix(in srgb, var(--ln-ext-orange-dark) 40%, transparent) !important;
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card--by-lichess:hover {
-  border-color: color-mix(in srgb, var(--lr-ext-orange-dark) 70%, transparent) !important;
+  border-color: color-mix(in srgb, var(--ln-ext-orange-dark) 70%, transparent) !important;
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card__image {
@@ -46,7 +46,7 @@
   padding: 3px 8px !important;
   border-radius: 6px !important;
   background: #000000a6 !important;
-  color: var(--lr-ext-white) !important;
+  color: var(--ln-ext-white) !important;
   font-size: 12px;
   font-weight: 700;
   text-shadow: none !important;
@@ -66,7 +66,7 @@
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card__title {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 16px !important;
   font-weight: 800 !important;
   line-height: 1.3;
@@ -74,7 +74,7 @@
 
 :is(.ublog-index, .ublog-post) .ublog-post-card__intro {
   margin-top: 6px !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px;
   line-height: 1.45;
 }
@@ -97,7 +97,7 @@
 }
 
 .ublog-index .box__top h1 {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
 }
 
 /* A user's blog: "Blog of" runs into the author's link. Other titles keep their tile's gap
@@ -107,7 +107,7 @@
 }
 
 .ublog-index .box__top h1 .user-link {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .ublog-index .box__top__actions {
@@ -119,19 +119,19 @@
   height: 40px;
   justify-content: center;
   border-radius: 8px;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 20px !important;
 }
 
 .ublog-index .box__top .atom:hover {
-  background: var(--lr-ext-lift-6);
-  color: var(--lr-ext-orange-dark) !important;
+  background: var(--ln-ext-lift-6);
+  color: var(--ln-ext-orange-dark) !important;
 }
 
 /* "Show best / all", "Sort likes / date": segmented controls, as the chat's tabs. */
 .ublog-index .filter-and-sort {
   gap: 16px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 14px;
   font-weight: 600;
 }
@@ -146,8 +146,8 @@
   gap: 2px;
   padding: 3px;
   border-radius: 9px !important;
-  background: var(--lr-ext-bg-panel-dark) !important;
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border) !important;
+  background: var(--ln-ext-bg-panel-dark) !important;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border) !important;
 }
 
 .ublog-index .btn-rack__btn {
@@ -160,7 +160,7 @@
   border-radius: 6px !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 600;
   text-shadow: none !important;
@@ -168,13 +168,13 @@
 }
 
 .ublog-index .btn-rack__btn:hover {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .ublog-index .btn-rack__btn.active {
-  background: var(--lr-ext-bg-raised) !important;
-  box-shadow: 0 1px 2px var(--lr-ext-shade-55) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  box-shadow: 0 1px 2px var(--ln-ext-shade-55) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* The sort's direction: a chevron instead of Lichess's triangle, turned for the oldest first. */
@@ -184,7 +184,7 @@
   height: 12px;
   margin: 0 !important;
   background: currentColor;
-  mask: var(--lr-ext-chevron) center / contain no-repeat;
+  mask: var(--ln-ext-chevron) center / contain no-repeat;
 }
 
 .ublog-index .btn-rack__btn.ascending::after {
@@ -192,13 +192,13 @@
 }
 
 /* The raised pill slides (see "Sliding tabs" in theme/). */
-.ublog-index .btn-rack[data-lr-ext-tabs] {
-  --lr-ext-tab-radius: 6px;
-  --lr-ext-tab-bg: var(--lr-ext-bg-raised);
-  --lr-ext-tab-shadow: 0 1px 2px var(--lr-ext-shade-55);
+.ublog-index .btn-rack[data-ln-ext-tabs] {
+  --ln-ext-tab-radius: 6px;
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised);
+  --ln-ext-tab-shadow: 0 1px 2px var(--ln-ext-shade-55);
 }
 
-.ublog-index .btn-rack[data-lr-ext-tabs] .btn-rack__btn.active {
+.ublog-index .btn-rack[data-ln-ext-tabs] .btn-rack__btn.active {
   background: transparent !important;
   box-shadow: none !important;
 }
@@ -217,13 +217,13 @@
   height: 40px;
   justify-content: center;
   border-radius: 8px;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 18px !important;
 }
 
 .ublog-index .calendar-mselect > a:hover {
-  background: var(--lr-ext-lift-6);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-6);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .ublog-index .calendar-mselect .mselect__label {
@@ -251,8 +251,8 @@
      * bit wider to cover their shadows, but within the page's 1vw gutter. */
     margin: -16px calc(-1 * min(12px, 1vw)) -8px !important;
     padding: 16px min(12px, 1vw) 8px !important;
-    background: var(--lr-ext-bg-page);
-    box-shadow: var(--lr-ext-pin-cover);
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
   }
 
   .ublog-index .box__top::after {
@@ -261,7 +261,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -294,9 +294,9 @@
 
 .ublog-topics__topic {
   padding: 16px !important;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
   transition:
     background-color 0.15s,
     border-color 0.15s,
@@ -304,9 +304,9 @@
 }
 
 .ublog-topics__topic:hover {
-  border-color: var(--lr-ext-card-border-hover);
-  background: var(--lr-ext-card-hover);
-  box-shadow: var(--lr-ext-card-shadow-hover);
+  border-color: var(--ln-ext-card-border-hover);
+  background: var(--ln-ext-card-hover);
+  box-shadow: var(--ln-ext-card-shadow-hover);
 }
 
 .ublog-topics__topic h2 {
@@ -315,13 +315,13 @@
   justify-content: space-between;
   gap: 12px;
   margin: 0 0 12px !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 20px !important;
   font-weight: 800 !important;
 }
 
 .ublog-topics__topic__nb {
-  color: var(--lr-ext-accent) !important;
+  color: var(--ln-ext-accent) !important;
   font-size: 13px !important;
   font-weight: 700;
   white-space: nowrap;
@@ -352,7 +352,7 @@
   margin: 8px 0 0 !important;
   padding: 0 !important;
   background: none !important;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   line-height: 1.35;

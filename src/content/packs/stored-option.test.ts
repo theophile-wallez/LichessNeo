@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { z } from 'zod/mini';
 import { storedNumber, storedOption } from './stored-option.ts';
 
-const KEY = 'lr-ext-test-option';
+const KEY = 'ln-ext-test-option';
 
 afterEach(() => {
   localStorage.clear();

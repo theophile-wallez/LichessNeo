@@ -4,22 +4,22 @@
 
 .explorer-box {
   /* The sides' colors, the same on either scheme. */
-  --lr-ext-ex-white: linear-gradient(
-    var(--lr-ext-white),
-    color-mix(in srgb, var(--lr-ext-white) 84%, var(--lr-ext-ink))
+  --ln-ext-ex-white: linear-gradient(
+    var(--ln-ext-white),
+    color-mix(in srgb, var(--ln-ext-white) 84%, var(--ln-ext-ink))
   );
-  --lr-ext-ex-draw: color-mix(in srgb, var(--lr-ext-white) 35%, var(--lr-ext-ink));
-  --lr-ext-ex-black: linear-gradient(
-    color-mix(in srgb, var(--lr-ext-white) 8%, var(--lr-ext-ink)),
-    color-mix(in srgb, var(--lr-ext-white) 5%, var(--lr-ext-ink))
+  --ln-ext-ex-draw: color-mix(in srgb, var(--ln-ext-white) 35%, var(--ln-ext-ink));
+  --ln-ext-ex-black: linear-gradient(
+    color-mix(in srgb, var(--ln-ext-white) 8%, var(--ln-ext-ink)),
+    color-mix(in srgb, var(--ln-ext-white) 5%, var(--ln-ext-ink))
   );
-  --lr-ext-ex-row-hover: var(--lr-ext-lift-6);
+  --ln-ext-ex-row-hover: var(--ln-ext-lift-6);
 
   /* Lichess underlines the box (.sub-box) in green. */
   border: none !important;
-  background: var(--lr-ext-bg-panel) !important;
-  color: var(--lr-ext-text) !important;
-  font-family: var(--lr-ext-font) !important;
+  background: var(--ln-ext-bg-panel) !important;
+  color: var(--ln-ext-text) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 13px !important;
 }
 
@@ -28,11 +28,11 @@
 }
 
 .explorer-box tr:nth-child(even) {
-  background: var(--lr-ext-lift-2) !important;
+  background: var(--ln-ext-lift-2) !important;
 }
 
 .explorer-box tbody tr:hover {
-  background: var(--lr-ext-ex-row-hover) !important;
+  background: var(--ln-ext-ex-row-hover) !important;
 }
 
 .explorer-box.loading tbody {
@@ -47,8 +47,8 @@
   box-sizing: border-box;
   height: 44px;
   padding: 0 6px 0 8px !important;
-  border-bottom: 1px solid var(--lr-ext-border);
-  background: var(--lr-ext-bg-panel-dark) !important;
+  border-bottom: 1px solid var(--ln-ext-border);
+  background: var(--ln-ext-bg-panel-dark) !important;
   backdrop-filter: none !important;
   font-size: 13px !important;
   line-height: 1 !important;
@@ -66,8 +66,8 @@
   border: none !important;
   border-radius: 5px;
   background: none !important;
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 13px !important;
   font-weight: 700;
   line-height: 1 !important;
@@ -75,17 +75,17 @@
 }
 
 .explorer-box .explorer-title > button.button-link:hover {
-  background: var(--lr-ext-lift-8) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-8) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* The chosen database: a raised grey tab. */
 .explorer-box .explorer-title > .active {
   flex: 0 1 auto;
   min-width: 0;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 400;
   white-space: nowrap;
 }
@@ -93,7 +93,7 @@
 .explorer-box .explorer-title > .active::before {
   flex: none;
   margin: 0 !important;
-  color: var(--lr-ext-accent);
+  color: var(--ln-ext-accent);
   font-size: 15px;
 }
 
@@ -126,7 +126,7 @@
 }
 
 .explorer-box .explorer-title > .active.player:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
 }
 
 .explorer-box .explorer-title .ddloader {
@@ -145,7 +145,7 @@
   padding: 0 !important;
   border-radius: 5px;
   background: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 18px !important;
   opacity: 1 !important;
 }
@@ -156,8 +156,8 @@
 }
 
 .explorer-box .explorer-title > .toconf:hover {
-  background: var(--lr-ext-lift-8) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-8) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* ---- Titles --- */
@@ -169,9 +169,9 @@
   gap: 10px;
   margin: 8px 8px 4px;
   padding: 8px 10px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 6px;
-  background: var(--lr-ext-bg-panel-dark);
+  background: var(--ln-ext-bg-panel-dark);
 }
 
 .explorer-box .data > .title:has(> a)::before {
@@ -182,23 +182,23 @@
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: var(--lr-ext-btn-primary);
-  box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: var(--lr-ext-white);
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white);
   font-family: 'lichess';
   font-size: 15px;
   line-height: 1;
 }
 
 /* The Game Review (page/review/) already names the line over the move list. */
-html.lr-ext-opening-on main.analyse .explorer-box .data > .title:has(> a) {
+html.ln-ext-opening-on main.analyse .explorer-box .data > .title:has(> a) {
   display: none !important;
 }
 
 .explorer-box .data > .title > a {
   min-width: 0;
   overflow: hidden;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.3;
@@ -207,14 +207,14 @@ html.lr-ext-opening-on main.analyse .explorer-box .data > .title:has(> a) {
 }
 
 .explorer-box .data > .title > a:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 /* Other titles head lists: "Top games", "Winning", "Game over". */
 .explorer-box :is(.data > .title:not(:has(> a)), th.title) {
   padding: 14px 12px 6px !important;
   background: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 12px !important;
   font-weight: 700 !important;
   letter-spacing: 0.04em;

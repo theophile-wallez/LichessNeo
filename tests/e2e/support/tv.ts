@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test';
 
 // Lichess TV, which can switch to another game in the middle of a test.
 
-const PAGE_MARK = 'lrExtTestPageMark';
+const PAGE_MARK = 'lnExtTestPageMark';
 const ATTEMPTS = 3;
 
 /** Marks the page's window, which a reload replaces; false if it can't be reached. */

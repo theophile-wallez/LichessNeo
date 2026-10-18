@@ -20,7 +20,7 @@ export const fideOffset: Feature = {
     const offset = fideRankOffset(location.pathname, location.search);
     if (offset === null) return;
     const root = document.documentElement;
-    setData(root, 'lrExtFideSkip', String(offset));
-    setStyleProperty(root, '--lr-ext-fide-skip', String(offset));
+    setData(root, 'lnExtFideSkip', String(offset));
+    setStyleProperty(root, '--ln-ext-fide-skip', String(offset));
   },
 };

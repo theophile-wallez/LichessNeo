@@ -6,18 +6,18 @@
 
 @media (max-width: 1019.98px) {
   main.round {
-    --lr-ext-bar: 56px;
-    --lr-ext-coords-off: 0px;
-    --lr-ext-gap: 12px;
-    --lr-ext-board: calc(100vw - 16px);
-    --lr-ext-bar-bot: var(--lr-ext-bar);
-    --lr-ext-chat-h: 360px;
+    --ln-ext-bar: 56px;
+    --ln-ext-coords-off: 0px;
+    --ln-ext-gap: 12px;
+    --ln-ext-board: calc(100vw - 16px);
+    --ln-ext-bar-bot: var(--ln-ext-bar);
+    --ln-ext-chat-h: 360px;
 
     display: grid !important;
-    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-columns: var(--ln-ext-board) !important;
     /* TV's channels first (tv.css); a row with nothing in it takes no room. */
     grid-template-rows:
-      auto var(--lr-ext-bar) auto var(--lr-ext-board) auto var(--lr-ext-bar-bot)
+      auto var(--ln-ext-bar) auto var(--ln-ext-board) auto var(--ln-ext-bar-bot)
       auto auto auto auto !important;
     grid-template-areas:
       'tv'
@@ -56,7 +56,7 @@
   }
 
   main.round .mchat {
-    height: var(--lr-ext-chat-h);
+    height: var(--ln-ext-chat-h);
     margin-top: 12px !important;
     border-top: 0;
     border-radius: 6px !important;
@@ -65,14 +65,14 @@
   /* No gutter beside a phone's board, and no room in the player's bar beside the name: the
    * tools end the move buttons' row (move-list.css keeps it last in the moves), which leaves
    * them room. */
-  main.round > .lr-ext-board-tools {
+  main.round > .ln-ext-board-tools {
     grid-area: moves !important;
     flex-direction: row !important;
     align-self: end;
     gap: 6px;
     width: auto !important;
     /* Over the crosstable, which ends the moves too (moves-extras.css). */
-    margin: 0 0 calc(var(--lr-ext-crosstable-h, 0px) + 8px) !important;
+    margin: 0 0 calc(var(--ln-ext-crosstable-h, 0px) + 8px) !important;
     margin-inline-end: 8px !important;
   }
 
@@ -80,26 +80,26 @@
     padding-inline-end: calc(8px + 2 * 44px + 6px) !important;
   }
 
-  main.round .lr-ext-board-tools__btn {
+  main.round .ln-ext-board-tools__btn {
     width: 44px;
     height: 40px;
     border-radius: 5px;
-    background: var(--lr-ext-btn-grey);
-    box-shadow: var(--lr-ext-btn-grey-shadow);
-    color: var(--lr-ext-text);
+    background: var(--ln-ext-btn-grey);
+    box-shadow: var(--ln-ext-btn-grey-shadow);
+    color: var(--ln-ext-text);
   }
 
-  main.round .lr-ext-board-tools__btn::before {
+  main.round .ln-ext-board-tools__btn::before {
     width: 19px;
     height: 19px;
   }
 
   main.round .ruser-bottom {
-    --lr-ext-clock-room: 152px;
+    --ln-ext-clock-room: 152px;
   }
 
   /* A touch screen has no hover to reveal the flip button. */
-  main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-tools__btn--flip {
+  main.round .ln-ext-board-tools:not(.ln-ext-board-tools--hover) .ln-ext-board-tools__btn--flip {
     visibility: visible;
     opacity: 1;
   }
@@ -109,7 +109,7 @@
     flex-direction: row;
     justify-self: center;
     width: auto !important;
-    height: calc(var(--lr-ext-board) * 0.09375);
+    height: calc(var(--ln-ext-board) * 0.09375);
     margin: 4px 0 !important;
   }
 
@@ -175,26 +175,26 @@
   }
 
   main.round :is(i5d, rm6) .col1-moves .result-wrap .result {
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
     font-size: 15px;
     font-weight: 800;
   }
 
   main.round :is(i5d, rm6) .col1-moves .result-wrap .status {
-    color: var(--lr-ext-text-dim);
+    color: var(--ln-ext-text-dim);
     font-size: 13px;
   }
 
   /* The move times (game-over.css) need the list's column: none in a row. */
-  main.round :is(i5d, rm6) .col1-moves [data-lr-ext-time]::before,
-  main.round :is(i5d, rm6) .col1-moves [data-lr-ext-time]::after {
+  main.round :is(i5d, rm6) .col1-moves [data-ln-ext-time]::before,
+  main.round :is(i5d, rm6) .col1-moves [data-ln-ext-time]::after {
     content: none !important;
   }
 
   main.round :is(i5d, rm6) .col1-moves :is(Z7yx, kwdb):is(.a1t, .active) {
     border-radius: 6px;
-    background: var(--lr-ext-accent) !important;
-    color: var(--lr-ext-white) !important;
+    background: var(--ln-ext-accent) !important;
+    color: var(--ln-ext-white) !important;
   }
 }
 
@@ -204,10 +204,10 @@
  * for the tools, as on desktop; the moves scroll in their own list. */
 @media (min-width: 600px) and (max-width: 1019.98px) {
   main.round {
-    --lr-ext-gap: 24px;
-    --lr-ext-board: min(
+    --ln-ext-gap: 24px;
+    --ln-ext-board: min(
       100vw - 96px,
-      100dvh - var(---site-header-height, 50px) - 2 * var(--lr-ext-bar) - 88px
+      100dvh - var(---site-header-height, 50px) - 2 * var(--ln-ext-bar) - 88px
     );
   }
 
@@ -219,7 +219,7 @@
     min-height: 180px;
   }
 
-  main.round > .lr-ext-board-tools {
+  main.round > .ln-ext-board-tools {
     grid-area: board !important;
     flex-direction: column !important;
     align-self: start;
@@ -231,27 +231,27 @@
     padding-inline-end: 8px !important;
   }
 
-  main.round .lr-ext-board-tools__btn {
+  main.round .ln-ext-board-tools__btn {
     width: 30px;
     height: 30px;
     border-radius: 7px;
-    background: var(--lr-ext-bg-raised);
+    background: var(--ln-ext-bg-raised);
     box-shadow: none;
   }
 
-  main.round .lr-ext-board-tools__btn::before {
+  main.round .ln-ext-board-tools__btn::before {
     width: 17px;
     height: 17px;
   }
 
   main.round .ruser-bottom {
-    --lr-ext-clock-room: 152px;
+    --ln-ext-clock-room: 152px;
   }
 }
 
 /* A phone on its side: the board as tall as the screen, its bars above and under it. */
 @media (max-width: 1019.98px) and (max-height: 599.98px) {
   main.round {
-    --lr-ext-board: min(100vw - 96px, 100dvh - 16px);
+    --ln-ext-board: min(100vw - 96px, 100dvh - 16px);
   }
 }

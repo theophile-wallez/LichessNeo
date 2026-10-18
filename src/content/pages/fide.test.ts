@@ -6,8 +6,8 @@ import legacy from './fixtures/legacy-start.json' with { type: 'json' };
 const root = document.documentElement;
 
 afterEach(() => {
-  delete root.dataset.lrExtFideSkip;
-  root.style.removeProperty('--lr-ext-fide-skip');
+  delete root.dataset.lnExtFideSkip;
+  root.style.removeProperty('--ln-ext-fide-skip');
   history.replaceState(null, '', '/');
 });
 
@@ -17,8 +17,8 @@ describe('FIDE rank offset', () => {
     ({ path, search, skip, variable }) => {
       history.replaceState(null, '', path + search);
       fideOffset.start();
-      expect(root.dataset.lrExtFideSkip ?? null).toBe(skip);
-      expect(root.style.getPropertyValue('--lr-ext-fide-skip') || null).toBe(variable);
+      expect(root.dataset.lnExtFideSkip ?? null).toBe(skip);
+      expect(root.style.getPropertyValue('--ln-ext-fide-skip') || null).toBe(variable);
     },
   );
 

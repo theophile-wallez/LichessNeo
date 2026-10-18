@@ -3,7 +3,7 @@
 main.puzzle .puzzle__feedback {
   margin: 10px;
   border-radius: 12px;
-  background: var(--lr-ext-bg-raised) !important;
+  background: var(--ln-ext-bg-raised) !important;
   transition: background 0.2s !important;
 }
 
@@ -28,7 +28,7 @@ main.puzzle .puzzle__feedback .no-square {
   box-sizing: border-box;
   padding: 4px;
   border-radius: 12px;
-  background: var(--lr-ext-lift-8);
+  background: var(--ln-ext-lift-8);
 }
 
 /* The black king paints its own light tile with a spread shadow: a :has(piece) restyled
@@ -54,46 +54,46 @@ main.puzzle .puzzle__feedback .instruction em {
 
 /* Your turn: the same card for either side; Lichess's white card was the page's brightest spot. */
 main.puzzle .puzzle__feedback.play {
-  background: var(--lr-ext-bg-raised) !important;
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  color: var(--ln-ext-text) !important;
 }
 
 main.puzzle .puzzle__feedback.play strong {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
 }
 
 /* Right or wrong: the card keeps its color, only the badge and the title take the verdict's. */
 main.puzzle .puzzle__feedback:is(.good, .fail) {
-  background: var(--lr-ext-bg-raised) !important;
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  color: var(--ln-ext-text) !important;
 }
 
 main.puzzle .puzzle__feedback.good {
-  --lr-ext-feedback: var(--lr-ext-good-hover);
-  --lr-ext-feedback-badge: var(--lr-ext-btn-primary);
+  --ln-ext-feedback: var(--ln-ext-good-hover);
+  --ln-ext-feedback-badge: var(--ln-ext-btn-primary);
 }
 
 main.puzzle .puzzle__feedback.fail {
-  --lr-ext-feedback: var(--lr-ext-red);
-  --lr-ext-feedback-badge: var(--lr-ext-btn-red);
+  --ln-ext-feedback: var(--ln-ext-red);
+  --ln-ext-feedback-badge: var(--ln-ext-btn-red);
 }
 
 main.puzzle .puzzle__feedback:is(.good, .fail) strong {
-  color: var(--lr-ext-feedback) !important;
+  color: var(--ln-ext-feedback) !important;
 }
 
 main.puzzle .puzzle__feedback:is(.good, .fail) em {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   opacity: 1;
 }
 
 main.puzzle .puzzle__feedback:is(.good, .fail) .icon {
   border-radius: 50%;
-  background: var(--lr-ext-feedback-badge);
+  background: var(--ln-ext-feedback-badge);
   box-shadow:
     inset 0 1px 0 #ffffff40,
-    0 0 0 5px color-mix(in srgb, var(--lr-ext-feedback) 18%, transparent);
-  color: var(--lr-ext-white) !important;
+    0 0 0 5px color-mix(in srgb, var(--ln-ext-feedback) 18%, transparent);
+  color: var(--ln-ext-white) !important;
   font-size: 30px !important;
   font-weight: 800;
   line-height: 56px !important;
@@ -118,9 +118,9 @@ main.puzzle .puzzle__feedback .view_solution .button {
   padding: 6px 12px !important;
   border: none !important;
   border-radius: 8px !important;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   line-height: 1.15;
@@ -129,7 +129,7 @@ main.puzzle .puzzle__feedback .view_solution .button {
 }
 
 main.puzzle .puzzle__feedback .view_solution .button:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
 }
 
 /* Color pictures before the labels. The streak's lone skip button gets none. */
@@ -146,15 +146,15 @@ main.puzzle .puzzle__feedback .view_solution:not(.skip) .button::before {
   width: 20px;
   height: 20px;
   background: currentColor;
-  mask: var(--lr-ext-hint-icon) center / contain no-repeat;
+  mask: var(--ln-ext-hint-icon) center / contain no-repeat;
 }
 
 main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:first-child {
-  --lr-ext-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01.svg');
+  --ln-ext-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01.svg');
 }
 
 main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:nth-child(2) {
-  --lr-ext-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
+  --ln-ext-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/help-circle.svg');
 }
 
 /* The streak's "skip" comes lowercase from Lichess (its uppercase buttons used to hide it). */
@@ -164,9 +164,9 @@ main.puzzle .puzzle__feedback .view_solution.skip .button::first-letter {
 
 /* The hint once shown: pressed in, not a call to action. */
 main.puzzle .puzzle__feedback .view_solution .button:not(.button-empty) {
-  background: var(--lr-ext-neutral-3) !important;
-  box-shadow: inset 0 2px 5px var(--lr-ext-shade-50) !important;
-  color: var(--lr-ext-text-dim) !important;
+  background: var(--ln-ext-neutral-3) !important;
+  box-shadow: inset 0 2px 5px var(--ln-ext-shade-50) !important;
+  color: var(--ln-ext-text-dim) !important;
 }
 
 main.puzzle .puzzle__feedback .view_solution:not(.skip) .button:not(.button-empty)::before {
@@ -182,7 +182,7 @@ main.puzzle .puzzle__feedback.after {
 main.puzzle .puzzle__feedback.after .complete {
   flex: none !important;
   padding: 0 !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 22px;
   font-weight: 800;
   text-align: center;
@@ -198,7 +198,7 @@ main.puzzle .puzzle__feedback.after .complete .game-over {
 }
 
 main.puzzle .puzzle__feedback.after .complete .game-over + span {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 16px;
   font-weight: 700;
 }
@@ -207,16 +207,16 @@ main.puzzle .puzzle__feedback.after .continue {
   gap: 10px;
   padding: 16px !important;
   border-radius: 10px;
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white) !important;
   font-size: 18px !important;
   font-weight: 800;
   text-transform: none !important;
 }
 
 main.puzzle .puzzle__feedback.after .continue:hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
+  background: var(--ln-ext-btn-primary-hover) !important;
 }
 
 main.puzzle .puzzle__feedback.after .continue icon::before {
@@ -251,33 +251,33 @@ main.puzzle .puzzle__feedback.after .puzzle__vote__help {
   flex: 0 0 100%;
   order: -1;
   margin: 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   text-align: center;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button {
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.vote-up:is(:hover, .active) {
-  color: var(--lr-ext-good-hover) !important;
+  color: var(--ln-ext-good-hover) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.vote-down:is(:hover, .active) {
-  color: var(--lr-ext-red) !important;
+  color: var(--ln-ext-red) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__vote .button.active {
-  background: var(--lr-ext-neutral-3) !important;
-  box-shadow: inset 0 2px 5px var(--lr-ext-shade-50) !important;
+  background: var(--ln-ext-neutral-3) !important;
+  box-shadow: inset 0 2px 5px var(--ln-ext-shade-50) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__more .button {
   border: none !important;
   border-radius: 8px !important;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__more .button::before {
@@ -285,5 +285,5 @@ main.puzzle .puzzle__feedback.after .puzzle__more .button::before {
 }
 
 main.puzzle .puzzle__feedback.after .puzzle__more .button:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
 }

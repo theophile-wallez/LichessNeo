@@ -21,7 +21,7 @@ export function turningMove(moments: readonly JudgedMove[]): JudgedMove | null {
 
 /** The move the game turned on, as its number and chip; a click goes to it, as a key moment's card does. */
 const turningButton = (move: JudgedMove): SafeHtml =>
-  html`<button class="lr-ext-brief__turn" data-lr-ext="moment" data-lr-ext-ply="${move.ply}"><b>${Math.ceil(move.ply / 2)}${move.ply % 2 === 1 ? '.' : '…'}</b>${moveChip(`${move.color.charAt(0)}:${move.san}`)}</button>`;
+  html`<button class="ln-ext-brief__turn" data-ln-ext="moment" data-ln-ext-ply="${move.ply}"><b>${Math.ceil(move.ply / 2)}${move.ply % 2 === 1 ? '.' : '…'}</b>${moveChip(`${move.color.charAt(0)}:${move.san}`)}</button>`;
 
 export function briefMarkup(session: Session, review: Review): SafeHtml {
   const { ui } = session.language;
@@ -34,7 +34,7 @@ export function briefMarkup(session: Session, review: Review): SafeHtml {
       ? html`${brief.calm}`
       : brief.moments(moments.length, turning && turningButton(turning));
   return html`${bubbleTitle(ui.intro)}
-    <div class="lr-ext-bubble__body">
-      <p class="lr-ext-bubble__sub">${opening === '' ? '' : html`${brief.opening(html`${opening}`)} `}${found}</p>
+    <div class="ln-ext-bubble__body">
+      <p class="ln-ext-bubble__sub">${opening === '' ? '' : html`${brief.opening(html`${opening}`)} `}${found}</p>
     </div>`;
 }

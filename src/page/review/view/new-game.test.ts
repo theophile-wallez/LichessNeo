@@ -18,7 +18,7 @@ function analysed(data: Record<string, unknown>): Analysis {
 }
 
 const markup = (analysis: Analysis): string => {
-  const made = newGameMarkup(analysis, 'lr-ext-review__new');
+  const made = newGameMarkup(analysis, 'ln-ext-review__new');
   return made === '' ? '' : made.value;
 };
 
@@ -31,7 +31,7 @@ describe('the review’s new game', () => {
       opponent: { color: 'black', user: { id: 'bob' } },
     });
     expect(markup(analysis)).toBe(
-      '<a class="lr-ext-review__new lr-ext-new-game" href="/#pool/2+1/bob">New 2+1</a>',
+      '<a class="ln-ext-review__new ln-ext-new-game" href="/#pool/2+1/bob">New 2+1</a>',
     );
   });
 

@@ -25,10 +25,7 @@ describe('startFeatures', () => {
       { name: 'last', start: () => started.push('last') },
     ]);
     expect(started).toEqual(['first', 'last']);
-    expect(error).toHaveBeenCalledWith(
-      '[LichessReimagined] broken failed to start',
-      expect.any(Error),
-    );
+    expect(error).toHaveBeenCalledWith('[LichessNeo] broken failed to start', expect.any(Error));
   });
 });
 
@@ -95,7 +92,7 @@ describe('readPageInitData', () => {
     expect(broken).toHaveBeenCalledExactlyOnceWith('{"c":3}');
     expect(next).toHaveBeenCalledExactlyOnceWith('{"c":3}');
     expect(error).toHaveBeenCalledExactlyOnceWith(
-      '[LichessReimagined] page init data reader failed',
+      '[LichessNeo] page init data reader failed',
       expect.any(Error),
     );
   });

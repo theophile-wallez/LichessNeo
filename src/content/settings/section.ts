@@ -24,24 +24,24 @@ export interface SettingsSection {
 
 function showPage(section: HTMLElement, page: SettingsPage | null): void {
   // The title's tile is the page's link's (styles/pages/settings-menu.css).
-  setData(section, 'lrExtPage', page);
+  setData(section, 'lnExtPage', page);
   const title = queryOne(section, 'h1.box__top', HTMLElement);
   const name = page ? message(PAGE_NAMES[page]) : '';
   if (title && title.textContent !== name) title.textContent = name;
-  for (const panel of queryAll(section, '.lr-ext-settings__page', HTMLElement)) {
-    const hidden = panel.dataset.lrExtPage !== page;
+  for (const panel of queryAll(section, '.ln-ext-settings__page', HTMLElement)) {
+    const hidden = panel.dataset.lnExtPage !== page;
     if (panel.hidden !== hidden) panel.hidden = hidden;
   }
 }
 
 /** The section, for the account page's content column, kept in step with the settings. */
 export function buildSection(): SettingsSection {
-  const element = createElement('div', { className: 'page-menu__content lr-ext-settings' });
+  const element = createElement('div', { className: 'page-menu__content ln-ext-settings' });
   setHtml(
     element,
     html`<div class="box box-pad">
       <h1 class="box__top"></h1>
-      ${SETTINGS_PAGES.map(page => html`<div class="lr-ext-settings__page" data-lr-ext-page="${page}" hidden></div>`)}
+      ${SETTINGS_PAGES.map(page => html`<div class="ln-ext-settings__page" data-ln-ext-page="${page}" hidden></div>`)}
     </div>`,
   );
   const coach = buildCoachCard();
@@ -54,11 +54,11 @@ export function buildSection(): SettingsSection {
     interface: [buildInterfacePage()],
   };
   for (const page of SETTINGS_PAGES)
-    queryOne(element, `.lr-ext-settings__page[data-lr-ext-page='${page}']`, HTMLElement)?.append(
+    queryOne(element, `.ln-ext-settings__page[data-ln-ext-page='${page}']`, HTMLElement)?.append(
       ...pages[page],
     );
   // The switches wait for the stored settings, rather than flip from the defaults to them.
-  const showPending = (): void => setData(element, 'lrExtPending', settingsRead() ? null : '');
+  const showPending = (): void => setData(element, 'lnExtPending', settingsRead() ? null : '');
   showPending();
   onSettings(showPending);
   return {

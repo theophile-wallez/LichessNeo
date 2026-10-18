@@ -23,7 +23,7 @@ beforeEach(() => {
   });
   document.body.dataset.user = 'eresy';
   localStorage.setItem(
-    'lr-ext-speed-cards',
+    'ln-ext-speed-cards',
     JSON.stringify({ user: 'eresy', at: Date.now(), cards: [] }),
   );
 });
@@ -36,7 +36,7 @@ afterEach(() => {
 });
 
 const keptAt = (): number | undefined =>
-  readStoredJson('lr-ext-speed-cards', z.object({ at: z.number() }))?.at;
+  readStoredJson('ln-ext-speed-cards', z.object({ at: z.number() }))?.at;
 
 describe('after a game', () => {
   it("asks for the player's rating again, once, and has the cards asked for on the next visit", async () => {
@@ -45,7 +45,7 @@ describe('after a game', () => {
     await refreshAfterGame();
     await flush();
     expect(fetches).toEqual(['/api/user/eresy']);
-    expect(localStorage.getItem('lr-ext-account-rating')).toContain('"rating":1508');
+    expect(localStorage.getItem('ln-ext-account-rating')).toContain('"rating":1508');
     expect(keptAt()).toBe(0);
     await refreshAfterGame();
     expect(fetches).toHaveLength(1);

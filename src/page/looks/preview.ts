@@ -16,7 +16,7 @@ import { LINE, type PreviewMove, slidesOf, START } from './line.ts';
 // as chessground draws its own, squares in `cgKey` and all, so that the sounds
 // and the backlit light (#page/backlit) follow its moves as they follow a game's.
 
-const PREVIEW_HOST = '.lr-ext-looks-preview__board';
+const PREVIEW_HOST = '.ln-ext-looks-preview__board';
 const STEP_MS = 1000;
 // Before the first move of a game started again: long enough to see it start.
 const PAUSE_MS = 450;

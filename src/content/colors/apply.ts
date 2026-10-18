@@ -6,12 +6,12 @@ import type { Palette, Palettes } from './themes.ts';
 // :root.light. In a stylesheet of ours, which comes after content.css and so
 // wins over its defaults.
 
-const STYLE_ID = 'lr-ext-palettes';
+const STYLE_ID = 'ln-ext-palettes';
 
 const PROPERTIES = {
-  hue: '--lr-ext-tint-hue',
-  chroma: '--lr-ext-tint-chroma',
-  accent: '--lr-ext-accent',
+  hue: '--ln-ext-tint-hue',
+  chroma: '--ln-ext-tint-chroma',
+  accent: '--ln-ext-accent',
 } as const satisfies Record<keyof Palette, string>;
 
 const declarations = (palette: Palette): string =>
@@ -32,7 +32,7 @@ export function showPalettes(palettes: Palettes): void {
   if (style.textContent !== text) style.textContent = text;
 }
 
-/** Gives an element of ours (a `[data-lr-ext-palette]` preview) a palette of its own. */
+/** Gives an element of ours (a `[data-ln-ext-palette]` preview) a palette of its own. */
 export function setPalette(element: HTMLElement, palette: Palette): void {
   setStyleProperty(element, PROPERTIES.hue, String(palette.hue));
   setStyleProperty(element, PROPERTIES.chroma, String(palette.chroma));

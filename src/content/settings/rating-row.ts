@@ -19,20 +19,20 @@ const SPEED_NAMES: Readonly<Record<Speed, string>> = {
 const pickName = (pick: RatingPick): string =>
   message(pick === 'mostPlayed' ? 'ratingMostPlayed' : SPEED_NAMES[pick]);
 
-const SELECT = '.lr-ext-setting__select';
+const SELECT = '.ln-ext-setting__select';
 
 export function ratingRowMarkup(): SafeHtml {
-  const id = 'lr-ext-setting-sidebarRating';
+  const id = 'ln-ext-setting-sidebarRating';
   const options = RatingPickSchema.options.map(
     pick => html`<option value="${pick}">${pickName(pick)}</option>`,
   );
-  return html`<div class="lr-ext-setting" data-lr-ext-setting="sidebarRating" data-lr-ext-on="">
-    <span class="lr-ext-setting__icon" aria-hidden="true"></span>
-    <div class="lr-ext-setting__text">
-      <h2 class="lr-ext-setting__title" id="${id}">${message('settingSidebarRating')}</h2>
-      <p class="lr-ext-setting__body">${message('settingSidebarRatingBody')}</p>
+  return html`<div class="ln-ext-setting" data-ln-ext-setting="sidebarRating" data-ln-ext-on="">
+    <span class="ln-ext-setting__icon" aria-hidden="true"></span>
+    <div class="ln-ext-setting__text">
+      <h2 class="ln-ext-setting__title" id="${id}">${message('settingSidebarRating')}</h2>
+      <p class="ln-ext-setting__body">${message('settingSidebarRatingBody')}</p>
     </div>
-    <select class="lr-ext-setting__select" aria-labelledby="${id}">${options}</select>
+    <select class="ln-ext-setting__select" aria-labelledby="${id}">${options}</select>
   </div>`;
 }
 

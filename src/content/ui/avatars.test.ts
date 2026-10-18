@@ -18,9 +18,9 @@ const SPOTS = [
   {
     name: 'the analysis board’s bar',
     markup:
-      '<main class="analyse"><div class="lr-ext-player lr-ext-player--top">' +
+      '<main class="analyse"><div class="ln-ext-player ln-ext-player--top">' +
       '<a class="user-link" href="/@/tjychess">tjychess</a></div></main>',
-    avatar: '.lr-ext-player',
+    avatar: '.ln-ext-player',
   },
   {
     name: 'a player of the game info',
@@ -47,7 +47,7 @@ const SPOTS = [
   {
     name: 'a list of players',
     markup:
-      '<main class="box page-small" data-lr-ext-list="players"><table class="slist"><tbody><tr>' +
+      '<main class="box page-small" data-ln-ext-list="players"><table class="slist"><tbody><tr>' +
       '<td><a class="user-link ulpt" href="/@/tjychess">tjychess</a></td><td>2400</td>' +
       '</tr></tbody></table></main>',
     avatar: 'tr',
@@ -87,13 +87,13 @@ function avatarIn(selector: string): HTMLElement {
 }
 
 const pictureRule = (): string | null =>
-  document.getElementById('lr-ext-own-avatar')?.textContent ?? null;
+  document.getElementById('ln-ext-own-avatar')?.textContent ?? null;
 
 afterEach(() => {
   keepOwnAvatar(null);
   document.body.innerHTML = '';
   delete document.body.dataset.user;
-  document.getElementById('lr-ext-own-avatar')?.remove();
+  document.getElementById('ln-ext-own-avatar')?.remove();
 });
 
 describe('syncAvatars', () => {
@@ -103,8 +103,8 @@ describe('syncAvatars', () => {
     document.body.innerHTML = markup;
     syncAvatars();
     const element = avatarIn(avatar);
-    expect(element.dataset.lrExtAvatarCoach).toBe(String(coach));
-    expect(element.dataset.lrExtAvatarColor).toBe(color);
+    expect(element.dataset.lnExtAvatarCoach).toBe(String(coach));
+    expect(element.dataset.lnExtAvatarColor).toBe(color);
   });
 
   it('leaves the computer and anonymous players the default', () => {
@@ -113,7 +113,7 @@ describe('syncAvatars', () => {
       '<div class="ruser-bottom ruser"><name>Anonymous</name></div></main>';
     syncAvatars();
     for (const bar of document.querySelectorAll('.ruser'))
-      expect(bar.getAttributeNames().filter(name => name.startsWith('data-lr-ext-avatar'))).toEqual(
+      expect(bar.getAttributeNames().filter(name => name.startsWith('data-ln-ext-avatar'))).toEqual(
         [],
       );
   });
@@ -126,14 +126,14 @@ describe('syncAvatars', () => {
     const next = avatarOf('Hikaru');
     bar.innerHTML = '<a class="user-link" href="/@/Hikaru">Hikaru</a>';
     syncAvatars();
-    expect([bar.dataset.lrExtAvatarCoach, bar.dataset.lrExtAvatarColor]).toEqual([
+    expect([bar.dataset.lnExtAvatarCoach, bar.dataset.lnExtAvatarColor]).toEqual([
       String(next.coach),
       next.color,
     ]);
     bar.innerHTML = '<name>Anonymous</name>';
     syncAvatars();
-    expect(bar.dataset.lrExtAvatarCoach).toBeUndefined();
-    expect(bar.dataset.lrExtAvatarColor).toBeUndefined();
+    expect(bar.dataset.lnExtAvatarCoach).toBeUndefined();
+    expect(bar.dataset.lnExtAvatarColor).toBeUndefined();
   });
 });
 
@@ -145,12 +145,12 @@ describe('the signed-in user’s own avatar', () => {
     document.body.innerHTML = BAR;
     keepOwnAvatar({ kind: 'coach', coach: 8, color: 'pink' });
     syncAvatars();
-    expect(avatarIn('.ruser').dataset.lrExtAvatarCoach).toBe(String(avatarOf('tjychess').coach));
+    expect(avatarIn('.ruser').dataset.lnExtAvatarCoach).toBe(String(avatarOf('tjychess').coach));
     document.body.dataset.user = 'tjychess';
     syncAvatars();
     const bar = avatarIn('.ruser');
-    expect([bar.dataset.lrExtAvatarCoach, bar.dataset.lrExtAvatarColor]).toEqual(['8', 'pink']);
-    expect(bar.dataset.lrExtAvatarPicture).toBeUndefined();
+    expect([bar.dataset.lnExtAvatarCoach, bar.dataset.lnExtAvatarColor]).toEqual(['8', 'pink']);
+    expect(bar.dataset.lnExtAvatarPicture).toBeUndefined();
   });
 
   it('marks the user’s picture over their name’s coach, and drops the mark with the pick', () => {
@@ -159,17 +159,17 @@ describe('the signed-in user’s own avatar', () => {
     keepOwnAvatar({ kind: 'picture', picture: IMAGE });
     syncAvatars();
     const bar = avatarIn('.ruser');
-    expect(bar.dataset.lrExtAvatarPicture).toBe('');
-    expect(bar.dataset.lrExtAvatarCoach).toBe(String(avatarOf('tjychess').coach));
+    expect(bar.dataset.lnExtAvatarPicture).toBe('');
+    expect(bar.dataset.lnExtAvatarCoach).toBe(String(avatarOf('tjychess').coach));
     keepOwnAvatar(null);
     syncAvatars();
-    expect(bar.dataset.lrExtAvatarPicture).toBeUndefined();
+    expect(bar.dataset.lnExtAvatarPicture).toBeUndefined();
   });
 
   it('shows a picture kept before the page loaded', () => {
     keepOwnAvatar({ kind: 'picture', picture: IMAGE });
     avatars.start();
-    expect(pictureRule()).toBe(`:root{--lr-ext-avatar-own:url(${IMAGE})}`);
+    expect(pictureRule()).toBe(`:root{--ln-ext-avatar-own:url(${IMAGE})}`);
   });
 
   it('puts the picture in a stylesheet of ours, and follows the pick at once', () => {
@@ -178,10 +178,10 @@ describe('the signed-in user’s own avatar', () => {
     avatars.start();
     expect(pictureRule()).toBeNull();
     keepOwnAvatar({ kind: 'picture', picture: IMAGE });
-    expect(pictureRule()).toBe(`:root{--lr-ext-avatar-own:url(${IMAGE})}`);
-    expect(avatarIn('.ruser').dataset.lrExtAvatarPicture).toBe('');
+    expect(pictureRule()).toBe(`:root{--ln-ext-avatar-own:url(${IMAGE})}`);
+    expect(avatarIn('.ruser').dataset.lnExtAvatarPicture).toBe('');
     keepOwnAvatar({ kind: 'coach', coach: 3, color: 'blue' });
     expect(pictureRule()).toBe('');
-    expect(avatarIn('.ruser').dataset.lrExtAvatarCoach).toBe('3');
+    expect(avatarIn('.ruser').dataset.lnExtAvatarCoach).toBe('3');
   });
 });

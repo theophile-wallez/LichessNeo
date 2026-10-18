@@ -49,12 +49,12 @@ export async function fetchDashboard(count: number): Promise<Dashboard | null> {
   return response.ok ? (DashboardSchema.safeParse(await response.json()).data ?? null) : null;
 }
 
-export const markLoading = (): void => setData(document.documentElement, 'lrExtPdash', 'loading');
+export const markLoading = (): void => setData(document.documentElement, 'lnExtPdash', 'loading');
 
-export const markIn = (): void => setData(document.documentElement, 'lrExtPdash', 'in');
+export const markIn = (): void => setData(document.documentElement, 'lnExtPdash', 'in');
 
 /** Lichess's blocks show again: ours won't come. */
-export const giveUp = (): void => setData(document.documentElement, 'lrExtPdash', null);
+export const giveUp = (): void => setData(document.documentElement, 'lnExtPdash', null);
 
 function tabsMarkup(current: number, href: string): SafeHtml {
   const tabs = TABS.map(count => {
@@ -66,7 +66,7 @@ function tabsMarkup(current: number, href: string): SafeHtml {
 
 /** The period's tabs, before Lichess's picker, which stays for the other periods. */
 export function addTabs(box: HTMLElement, count: number, href: string): void {
-  const tabs = createElement('nav', { className: 'lr-ext-pdash__days' });
+  const tabs = createElement('nav', { className: 'ln-ext-pdash__days' });
   setHtml(tabs, tabsMarkup(count, href));
   queryOne(box, ':scope > .box__top > .mselect', HTMLElement)?.before(tabs);
 }

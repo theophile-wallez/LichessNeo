@@ -24,7 +24,7 @@ const NOW = new Date(2026, 9, 12, 12);
 
 function hero(week: Week): HTMLElement {
   setHtml(document.body, heroMarkup(week, coachWord(week, null, NOW), 3));
-  const section = queryOne(document, '.lr-ext-phist__hero', HTMLElement);
+  const section = queryOne(document, '.ln-ext-phist__hero', HTMLElement);
   if (!section) throw new Error('no hero');
   return section;
 }
@@ -38,15 +38,15 @@ const links = (root: ParentNode): string[] =>
 describe('the week over the history', () => {
   it('shows the puzzles solved first try on a track, in the week’s color, and its coach', () => {
     const section = hero({ puzzles: 8, firstWins: 6, toReplay: 2 });
-    expect(section.dataset.lrExtTier).toBe('up');
-    expect(section.querySelector('.lr-ext-phist__big')?.textContent.replace(/\s+/g, ' ')).toBe(
+    expect(section.dataset.lnExtTier).toBe('up');
+    expect(section.querySelector('.ln-ext-phist__big')?.textContent.replace(/\s+/g, ' ')).toBe(
       ' 6 phistSolved:8 ',
     );
-    const track = queryOne(section, '.lr-ext-phist__track', HTMLElement);
-    expect(track?.style.getPropertyValue('--lr-ext-phist-p')).toBe('0.750');
+    const track = queryOne(section, '.ln-ext-phist__track', HTMLElement);
+    expect(track?.style.getPropertyValue('--ln-ext-phist-p')).toBe('0.750');
     expect(section.querySelector('p')?.textContent).toBe('phistSharp phistMissedMany:2');
-    const mascot = queryOne(section, '.lr-ext-pdash__mascot', HTMLElement);
-    expect(mascot?.dataset.lrExtAvatarCoach).toBe('3');
+    const mascot = queryOne(section, '.ln-ext-pdash__mascot', HTMLElement);
+    expect(mascot?.dataset.lnExtAvatarCoach).toBe('3');
   });
 
   it('leads to the week’s replay while some are left, else to more puzzles', () => {
@@ -76,7 +76,7 @@ describe('the puzzles to retry', () => {
   it('are a board each, linked to its puzzle, the first few only', () => {
     const rounds = Array.from({ length: SHELF_SIZE + 3 }, (_, index) => round(index));
     setHtml(document.body, shelfMarkup(rounds));
-    const redos = queryAll(document, '.lr-ext-phist__redo', HTMLAnchorElement);
+    const redos = queryAll(document, '.ln-ext-phist__redo', HTMLAnchorElement);
     expect(redos).toHaveLength(SHELF_SIZE);
     expect(redos[0]?.getAttribute('href')).toBe('/training/p0');
     expect(redos[0]?.querySelectorAll('piece')).toHaveLength(3);

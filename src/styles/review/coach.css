@@ -1,10 +1,10 @@
 /* ---- Coach --- */
 
-/* The bubble's tail sits under the coach's mouth (--lr-ext-tip, 64% of the portrait's
-   height) and the bubble grows both ways from it; the review measures --lr-ext-bubble-h. */
-.lr-ext-coach {
-  --lr-ext-coach-h: 114px;
-  --lr-ext-tip: calc(var(--lr-ext-coach-h) * 0.64);
+/* The bubble's tail sits under the coach's mouth (--ln-ext-tip, 64% of the portrait's
+   height) and the bubble grows both ways from it; the review measures --ln-ext-bubble-h. */
+.ln-ext-coach {
+  --ln-ext-coach-h: 114px;
+  --ln-ext-tip: calc(var(--ln-ext-coach-h) * 0.64);
   flex: none;
   display: flex;
   align-items: flex-start;
@@ -17,52 +17,52 @@
 
 /* Narrow panels wrap the bubble: a smaller coach gives it room, so two-line titles
    still clear the nav. */
-@container lr-ext-review (max-width: 440px) {
-  .lr-ext-coach {
-    --lr-ext-coach-h: 100px;
+@container ln-ext-review (max-width: 440px) {
+  .ln-ext-coach {
+    --ln-ext-coach-h: 100px;
   }
 
-  .lr-ext-bubble .lr-ext-bubble__title {
+  .ln-ext-bubble .ln-ext-bubble__title {
     font-size: 14px;
   }
 }
 
 /* Narrowest panels (windows up to ~1380px): the title had ~45px and broke in three.
    A smaller coach and tighter padding double that. */
-@container lr-ext-review (max-width: 360px) {
-  .lr-ext-coach {
-    --lr-ext-coach-h: 84px;
+@container ln-ext-review (max-width: 360px) {
+  .ln-ext-coach {
+    --ln-ext-coach-h: 84px;
     padding: 4px 10px 0 6px;
   }
 
-  .lr-ext-coach .lr-ext-bubble {
+  .ln-ext-coach .ln-ext-bubble {
     padding: 8px 12px;
   }
 
-  .lr-ext-bubble .lr-ext-bubble__row {
+  .ln-ext-bubble .ln-ext-bubble__row {
     gap: 6px;
   }
 
-  .lr-ext-bubble .lr-ext-bubble__eval {
+  .ln-ext-bubble .ln-ext-bubble__eval {
     padding: 2px 5px;
     font-size: 12px;
   }
 
-  .lr-ext-bubble .lr-ext-bubble__sub {
+  .ln-ext-bubble .ln-ext-bubble__sub {
     margin-top: 4px;
   }
 
   /* Three buttons of 84px: "Expliquer" and its bulb ran into the edges. */
-  #lr-ext-review .lr-ext-review__nav {
+  #ln-ext-review .ln-ext-review__nav {
     padding-inline: 10px;
   }
 
-  #lr-ext-review .lr-ext-review__nav .lr-ext-btn {
+  #ln-ext-review .ln-ext-review__nav .ln-ext-btn {
     gap: 4px;
     font-size: 13px;
   }
 
-  #lr-ext-review .lr-ext-review__nav .lr-ext-i {
+  #ln-ext-review .ln-ext-review__nav .ln-ext-i {
     width: 18px;
     height: 18px;
   }
@@ -71,13 +71,13 @@
 /* ---- Key moments --- */
 
 /* The strip's fades (below), lengths so they can be animated. */
-@property --lr-ext-fade-start {
+@property --ln-ext-fade-start {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
 }
 
-@property --lr-ext-fade-end {
+@property --ln-ext-fade-end {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
@@ -85,11 +85,11 @@
 
 /* The game's turning points under the graph (view/moments.ts): a card each, in a strip that
    scrolls sideways; the one on the board is ringed. */
-.lr-ext-moments {
+.ln-ext-moments {
   flex: none;
   display: flex;
   gap: 8px;
-  height: var(--lr-ext-review-moments);
+  height: var(--ln-ext-review-moments);
   padding: 0 12px 10px;
   box-sizing: border-box;
   overflow-x: auto;
@@ -99,36 +99,36 @@
   mask-image: linear-gradient(
     to right,
     transparent,
-    #000 var(--lr-ext-fade-start),
-    #000 calc(100% - var(--lr-ext-fade-end)),
+    #000 var(--ln-ext-fade-start),
+    #000 calc(100% - var(--ln-ext-fade-end)),
     transparent
   );
-  animation: lr-ext-moments-fade linear both !important;
+  animation: ln-ext-moments-fade linear both !important;
   animation-timeline: scroll(self inline) !important;
 }
 
-@keyframes lr-ext-moments-fade {
+@keyframes ln-ext-moments-fade {
   0% {
-    --lr-ext-fade-start: 0px;
-    --lr-ext-fade-end: 36px;
+    --ln-ext-fade-start: 0px;
+    --ln-ext-fade-end: 36px;
   }
   10% {
-    --lr-ext-fade-start: 36px;
+    --ln-ext-fade-start: 36px;
   }
   90% {
-    --lr-ext-fade-end: 36px;
+    --ln-ext-fade-end: 36px;
   }
   100% {
-    --lr-ext-fade-start: 36px;
-    --lr-ext-fade-end: 0px;
+    --ln-ext-fade-start: 36px;
+    --ln-ext-fade-end: 0px;
   }
 }
 
-.lr-ext-moments::-webkit-scrollbar {
+.ln-ext-moments::-webkit-scrollbar {
   display: none;
 }
 
-.lr-ext-moment {
+.ln-ext-moment {
   flex: none;
   display: flex;
   flex-direction: column;
@@ -138,22 +138,22 @@
   padding: 0 12px;
   border: none;
   border-radius: 10px;
-  background: var(--lr-ext-bg-raised);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
-  color: var(--lr-ext-text);
+  background: var(--ln-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  color: var(--ln-ext-text);
   text-align: start;
   transition: background-color 0.15s !important;
 }
 
-.lr-ext-moment:hover {
-  background: var(--lr-ext-bg-raised-hover);
+.ln-ext-moment:hover {
+  background: var(--ln-ext-bg-raised-hover);
 }
 
-.lr-ext-moment--on {
-  box-shadow: inset 0 0 0 1.5px var(--lr-ext-accent);
+.ln-ext-moment--on {
+  box-shadow: inset 0 0 0 1.5px var(--ln-ext-accent);
 }
 
-.lr-ext-moment__move {
+.ln-ext-moment__move {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -162,14 +162,14 @@
   white-space: nowrap;
 }
 
-.lr-ext-moment__move > :first-child {
+.ln-ext-moment__move > :first-child {
   flex: none;
   width: 16px;
   height: 16px;
 }
 
-.lr-ext-moment__class {
-  color: var(--lr-ext-class-color);
+.ln-ext-moment__class {
+  color: var(--ln-ext-class-color);
   font-size: 11.5px;
   font-weight: 600;
   white-space: nowrap;

@@ -4,13 +4,13 @@
   display: block;
   padding: 8px 12px;
   border-radius: 6px;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-weight: 600;
 }
 
 .tour__links a:hover {
-  background: var(--lr-ext-lift-5);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-5);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .tour__links br {
@@ -26,14 +26,14 @@
 }
 
 .tour-home__side h2 a {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .tour-home__side .leaderboard,
 .tour-home__side .scheduled {
   padding: 6px;
   border-radius: 8px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
 }
 
 .tour-home__side .leaderboard li {
@@ -42,7 +42,7 @@
 }
 
 .tour-home__side .leaderboard li:hover {
-  background: var(--lr-ext-lift-5);
+  background: var(--ln-ext-lift-5);
 }
 
 .tour-home__side .scheduled a {
@@ -50,7 +50,7 @@
 }
 
 .tour-home__side .scheduled a:hover {
-  background: var(--lr-ext-lift-5) !important;
+  background: var(--ln-ext-lift-5) !important;
 }
 
 /* The side column stays in view and scrolls on its own, from the window's top edge, its
@@ -58,11 +58,11 @@
 @media (min-width: 1020px) {
   main.tour-home > .tour-home__side {
     position: sticky;
-    top: calc(-1 * var(--lr-ext-page-top));
+    top: calc(-1 * var(--ln-ext-page-top));
     align-self: start;
-    max-height: var(--lr-ext-main-h, 100dvh);
-    margin-top: calc(-1 * var(--lr-ext-page-top));
-    padding-top: calc(2 * var(--lr-ext-page-top));
+    max-height: var(--ln-ext-main-h, 100dvh);
+    margin-top: calc(-1 * var(--ln-ext-page-top));
+    padding-top: calc(2 * var(--ln-ext-page-top));
     overflow-y: auto;
     scrollbar-width: thin;
   }
@@ -88,8 +88,8 @@
     gap: 12px;
     margin: 0 !important;
     padding: 16px 0 !important;
-    background: var(--lr-ext-bg-page);
-    box-shadow: var(--lr-ext-pin-cover);
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
   }
 
   /* The trophy, as in the sidebar's Arena tournaments entry. */
@@ -108,7 +108,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -133,36 +133,36 @@
 }
 
 .tour-chart .timeheader {
-  border-inline-start-color: var(--lr-ext-lift-6) !important;
-  color: var(--lr-ext-text-dim);
+  border-inline-start-color: var(--ln-ext-lift-6) !important;
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
 }
 
 .tour-chart .timeheader.hour {
-  border-inline-start-color: var(--lr-ext-lift-15) !important;
-  color: var(--lr-ext-text-strong);
+  border-inline-start-color: var(--ln-ext-lift-15) !important;
+  color: var(--ln-ext-text-strong);
   font-weight: 800;
 }
 
 /* Tournament tiles: plain cards with their kind's color on the edge and icon, instead of
  * Lichess's saturated, grainy blocks. */
 .tsht {
-  --lr-ext-tsht: var(--lr-ext-neutral-9);
-  border-inline-start: 3px solid var(--lr-ext-tsht) !important;
+  --ln-ext-tsht: var(--ln-ext-neutral-9);
+  border-inline-start: 3px solid var(--ln-ext-tsht) !important;
   border-radius: 8px !important;
-  background: var(--lr-ext-bg-raised) !important;
+  background: var(--ln-ext-bg-raised) !important;
   background-image: none !important;
   box-shadow: none !important;
   /* Lichess writes them white, for its saturated blocks. */
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   letter-spacing: normal !important;
   text-shadow: none !important;
   transition: background-color 0.15s !important;
 }
 
 .tsht:hover {
-  background: var(--lr-ext-bg-raised-hover) !important;
+  background: var(--ln-ext-bg-raised-hover) !important;
   filter: none !important;
 }
 
@@ -171,12 +171,12 @@
 }
 
 .tsht icon {
-  color: color-mix(in srgb, var(--lr-ext-tsht) 70%, var(--lr-ext-text-strong));
+  color: color-mix(in srgb, var(--ln-ext-tsht) 70%, var(--ln-ext-text-strong));
 }
 
 /* The tile's color beats the mode icon's own (theme/). */
 .tsht icon::before {
-  --lr-ext-mode-color: currentColor;
+  --ln-ext-mode-color: currentColor;
 }
 
 .tsht .name {
@@ -184,47 +184,47 @@
 }
 
 .tsht .infos {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
 }
 
 .tsht-hourly {
-  --lr-ext-tsht: var(--lr-ext-accent);
+  --ln-ext-tsht: var(--ln-ext-accent);
 }
 
 .tsht-daily,
 .tsht-eastern {
-  --lr-ext-tsht: var(--lr-ext-cyan-dark);
+  --ln-ext-tsht: var(--ln-ext-cyan-dark);
 }
 
 .tsht-weekly {
-  --lr-ext-tsht: var(--lr-ext-orange-dark);
+  --ln-ext-tsht: var(--ln-ext-orange-dark);
 }
 
 .tsht-monthly {
-  --lr-ext-tsht: var(--lr-ext-red-dark);
+  --ln-ext-tsht: var(--ln-ext-red-dark);
 }
 
 .tsht-yearly,
 .tsht-weekend,
 .tsht-unique {
-  --lr-ext-tsht: var(--lr-ext-orange-dark);
+  --ln-ext-tsht: var(--ln-ext-orange-dark);
 }
 
 .tsht-marathon {
-  --lr-ext-tsht: var(--lr-ext-purple-dark);
+  --ln-ext-tsht: var(--ln-ext-purple-dark);
 }
 
 .tsht-max-rating {
-  --lr-ext-tsht: var(--lr-ext-purple-dark);
+  --ln-ext-tsht: var(--ln-ext-purple-dark);
 }
 
 .tsht-variant {
-  --lr-ext-tsht: var(--lr-ext-orange-dark);
+  --ln-ext-tsht: var(--ln-ext-orange-dark);
 }
 
 .tsht-user-created {
-  --lr-ext-tsht: var(--lr-ext-accent-dim);
+  --ln-ext-tsht: var(--ln-ext-accent-dim);
 }
 
 /* The calendar draws the same tiles as bars. Its dates hang into the page's left margin,
@@ -236,12 +236,12 @@
 }
 
 #tournament-calendar .tournament {
-  --lr-ext-tsht: var(--lr-ext-neutral-9);
-  border-inline-start: 3px solid var(--lr-ext-tsht);
+  --ln-ext-tsht: var(--ln-ext-neutral-9);
+  border-inline-start: 3px solid var(--ln-ext-tsht);
   border-radius: 6px !important;
-  background: var(--lr-ext-bg-raised) !important;
+  background: var(--ln-ext-bg-raised) !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 700;
   letter-spacing: normal !important;
   text-shadow: none !important;
@@ -249,39 +249,39 @@
 }
 
 #tournament-calendar .tournament:hover {
-  background: var(--lr-ext-bg-raised-hover) !important;
+  background: var(--ln-ext-bg-raised-hover) !important;
 }
 
 #tournament-calendar .tournament .icon {
-  color: color-mix(in srgb, var(--lr-ext-tsht) 70%, var(--lr-ext-text-strong));
+  color: color-mix(in srgb, var(--ln-ext-tsht) 70%, var(--ln-ext-text-strong));
 }
 
 #tournament-calendar .tournament .icon::before {
-  --lr-ext-mode-color: currentColor;
+  --ln-ext-mode-color: currentColor;
 }
 
 #tournament-calendar .tournament.weekly {
-  --lr-ext-tsht: var(--lr-ext-orange-dark);
+  --ln-ext-tsht: var(--ln-ext-orange-dark);
 }
 
 #tournament-calendar .tournament.monthly {
-  --lr-ext-tsht: var(--lr-ext-red-dark);
+  --ln-ext-tsht: var(--ln-ext-red-dark);
 }
 
 #tournament-calendar .tournament:is(.yearly, .weekend, .unique) {
-  --lr-ext-tsht: var(--lr-ext-orange-dark);
+  --ln-ext-tsht: var(--ln-ext-orange-dark);
 }
 
 #tournament-calendar .tournament.marathon {
-  --lr-ext-tsht: var(--lr-ext-purple-dark);
+  --ln-ext-tsht: var(--ln-ext-purple-dark);
 }
 
 #tournament-calendar .tournament.shield {
-  --lr-ext-tsht: var(--lr-ext-neutral-11);
+  --ln-ext-tsht: var(--ln-ext-neutral-11);
 }
 
 #tournament-calendar date {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-weight: 700;
 }
 
@@ -291,7 +291,7 @@
 }
 
 .arena-list .slist .name {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 700;
 }
 
@@ -308,9 +308,9 @@
 
   main.tour-home > :is(.tour-home__schedule, .arena-list) {
     overflow: hidden;
-    border: 1px solid var(--lr-ext-card-border);
+    border: 1px solid var(--ln-ext-card-border);
     border-radius: 10px !important;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
@@ -345,9 +345,9 @@
   main.tour-home .tour__links {
     margin: 0 !important;
     padding: 6px;
-    border: 1px solid var(--lr-ext-card-border);
+    border: 1px solid var(--ln-ext-card-border);
     border-radius: 10px;
-    background: var(--lr-ext-bg-panel);
+    background: var(--ln-ext-bg-panel);
   }
 
   main.tour-home .tour-home__side h2 {
@@ -355,7 +355,7 @@
   }
 
   main.tour-home .tour-home__side :is(.leaderboard, .scheduled) {
-    border: 1px solid var(--lr-ext-card-border);
+    border: 1px solid var(--ln-ext-card-border);
     border-radius: 10px;
   }
 }

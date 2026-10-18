@@ -3,59 +3,59 @@
 /* Stockfish's level (content/computer/level-slider.ts): the robot, a thick pill track in the
    color of the level's robot, filled up to a big white knob, a dot per level and sparkles in
    the fill, then the level and its rating. Lichess's buttons stay, hidden, and keep it. */
-.game-setup group.radio[data-lr-ext-slid] {
+.game-setup group.radio[data-ln-ext-slid] {
   display: none !important;
 }
 
-.lr-ext-level {
-  --lr-ext-tier: #4f8cff;
-  --lr-ext-knob: 34px;
+.ln-ext-level {
+  --ln-ext-tier: #4f8cff;
+  --ln-ext-knob: 34px;
   /* The first level sits this far in, so the fill shows even there; the last is at the end. */
-  --lr-ext-pad: 26px;
+  --ln-ext-pad: 26px;
   /* Where a level sits along the track, from 0 to 1, as the native range puts its knob. */
-  --lr-ext-at: calc(
-    var(--lr-ext-pad) + var(--lr-ext-knob) / 2 + (100% - var(--lr-ext-pad) - var(--lr-ext-knob)) *
-      var(--lr-ext-level-p, 0)
+  --ln-ext-at: calc(
+    var(--ln-ext-pad) + var(--ln-ext-knob) / 2 + (100% - var(--ln-ext-pad) - var(--ln-ext-knob)) *
+      var(--ln-ext-level-p, 0)
   );
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.lr-ext-level[data-lr-ext-tier='1'] {
-  --lr-ext-tier: #3fcf8e;
+.ln-ext-level[data-ln-ext-tier='1'] {
+  --ln-ext-tier: #3fcf8e;
 }
 
-.lr-ext-level[data-lr-ext-tier='1'] .lr-ext-level__robot {
+.ln-ext-level[data-ln-ext-tier='1'] .ln-ext-level__robot {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-1.webp');
 }
 
-.lr-ext-level[data-lr-ext-tier='2'] {
-  --lr-ext-tier: #4f8cff;
+.ln-ext-level[data-ln-ext-tier='2'] {
+  --ln-ext-tier: #4f8cff;
 }
 
-.lr-ext-level[data-lr-ext-tier='2'] .lr-ext-level__robot {
+.ln-ext-level[data-ln-ext-tier='2'] .ln-ext-level__robot {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
 }
 
-.lr-ext-level[data-lr-ext-tier='3'] {
-  --lr-ext-tier: #9b6dff;
+.ln-ext-level[data-ln-ext-tier='3'] {
+  --ln-ext-tier: #9b6dff;
 }
 
-.lr-ext-level[data-lr-ext-tier='3'] .lr-ext-level__robot {
+.ln-ext-level[data-ln-ext-tier='3'] .ln-ext-level__robot {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-3.webp');
 }
 
-.lr-ext-level[data-lr-ext-tier='4'] {
-  --lr-ext-tier: #ff5a5f;
+.ln-ext-level[data-ln-ext-tier='4'] {
+  --ln-ext-tier: #ff5a5f;
 }
 
-.lr-ext-level[data-lr-ext-tier='4'] .lr-ext-level__robot {
+.ln-ext-level[data-ln-ext-tier='4'] .ln-ext-level__robot {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-4.webp');
 }
 
 /* Its still at once, in the coaches' framing; the live one, drawn over it, hides it. */
-.lr-ext-level__robot {
+.ln-ext-level__robot {
   position: relative;
   flex: none;
   height: 76px;
@@ -65,16 +65,16 @@
   cursor: pointer;
 }
 
-.lr-ext-level__robot[data-lr-ext-live] {
+.ln-ext-level__robot[data-ln-ext-live] {
   background-image: none !important;
 }
 
-.lr-ext-level__robot .lr-ext-level__live {
+.ln-ext-level__robot .ln-ext-level__live {
   position: absolute;
   inset: 0;
 }
 
-.lr-ext-level__slider {
+.ln-ext-level__slider {
   position: relative;
   flex: 1;
   min-width: 0;
@@ -83,11 +83,11 @@
 
 /* The native range, invisible, on top: it takes the pointer and the keys. Inset as the levels
    are, its knob is where ours is drawn. */
-.lr-ext-level__input {
+.ln-ext-level__input {
   position: absolute;
   z-index: 1;
-  inset: 0 0 0 var(--lr-ext-pad);
-  width: calc(100% - var(--lr-ext-pad));
+  inset: 0 0 0 var(--ln-ext-pad);
+  width: calc(100% - var(--ln-ext-pad));
   height: 100%;
   margin: 0;
   opacity: 0;
@@ -95,67 +95,67 @@
   appearance: none;
 }
 
-.lr-ext-level__input::-webkit-slider-thumb {
-  width: var(--lr-ext-knob);
+.ln-ext-level__input::-webkit-slider-thumb {
+  width: var(--ln-ext-knob);
   height: 44px;
   appearance: none;
 }
 
-.lr-ext-level__input::-moz-range-thumb {
-  width: var(--lr-ext-knob);
+.ln-ext-level__input::-moz-range-thumb {
+  width: var(--ln-ext-knob);
   height: 44px;
   border: 0;
 }
 
-.lr-ext-level__track {
+.ln-ext-level__track {
   position: absolute;
   inset: 6px 0;
   border-radius: 999px;
-  background: var(--lr-ext-lift-6);
-  box-shadow: inset 0 1px 3px var(--lr-ext-shade-50);
+  background: var(--ln-ext-lift-6);
+  box-shadow: inset 0 1px 3px var(--ln-ext-shade-50);
 }
 
-.lr-ext-level__fill {
+.ln-ext-level__fill {
   position: absolute;
   inset: 0 auto 0 0;
-  width: var(--lr-ext-at);
+  width: var(--ln-ext-at);
   /* Square at its end, the knob's middle: a rounded end would show through the knob's halo. */
   border-radius: 999px 0 0 999px;
   background:
     radial-gradient(
       circle at 75% 40%,
-      color-mix(in srgb, var(--lr-ext-tier) 55%, #fff),
+      color-mix(in srgb, var(--ln-ext-tier) 55%, #fff),
       transparent 60%
     ),
-    linear-gradient(90deg, color-mix(in srgb, var(--lr-ext-tier) 55%, #000), var(--lr-ext-tier));
-  box-shadow: 0 0 18px color-mix(in srgb, var(--lr-ext-tier) 45%, transparent);
+    linear-gradient(90deg, color-mix(in srgb, var(--ln-ext-tier) 55%, #000), var(--ln-ext-tier));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ln-ext-tier) 45%, transparent);
   transition:
     width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.3s !important;
 }
 
 /* Sparkles at fixed spots across the whole track, cut to the fill: the fuller, the more show. */
-.lr-ext-level__glints {
+.ln-ext-level__glints {
   position: absolute;
   inset: 0;
-  clip-path: inset(0 calc(100% - var(--lr-ext-at)) 0 0 round 999px);
+  clip-path: inset(0 calc(100% - var(--ln-ext-at)) 0 0 round 999px);
   pointer-events: none;
   transition: clip-path 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
-.lr-ext-level__sparkle {
+.ln-ext-level__sparkle {
   position: absolute;
-  top: var(--lr-ext-y);
-  left: var(--lr-ext-x);
+  top: var(--ln-ext-y);
+  left: var(--ln-ext-x);
   width: 3px;
   height: 3px;
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 0 4px #fff;
-  animation: lr-ext-level-twinkle 2.4s ease-in-out var(--lr-ext-delay) infinite both !important;
+  animation: ln-ext-level-twinkle 2.4s ease-in-out var(--ln-ext-delay) infinite both !important;
 }
 
-@keyframes lr-ext-level-twinkle {
+@keyframes ln-ext-level-twinkle {
   0%,
   100% {
     opacity: 0.15;
@@ -168,44 +168,44 @@
 }
 
 /* A dot per level, where the knob stops. */
-.lr-ext-level__dot {
+.ln-ext-level__dot {
   position: absolute;
   top: 50%;
   left: calc(
-    var(--lr-ext-pad) + var(--lr-ext-knob) / 2 + (100% - var(--lr-ext-pad) - var(--lr-ext-knob)) *
-      var(--lr-ext-i) / 7
+    var(--ln-ext-pad) + var(--ln-ext-knob) / 2 + (100% - var(--ln-ext-pad) - var(--ln-ext-knob)) *
+      var(--ln-ext-i) / 7
   );
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--lr-ext-lift-35);
+  background: var(--ln-ext-lift-35);
   translate: -50% -50%;
   pointer-events: none;
 }
 
-.lr-ext-level__thumb {
+.ln-ext-level__thumb {
   position: absolute;
   top: 50%;
-  left: var(--lr-ext-at);
-  width: var(--lr-ext-knob);
-  height: var(--lr-ext-knob);
+  left: var(--ln-ext-at);
+  width: var(--ln-ext-knob);
+  height: var(--ln-ext-knob);
   border-radius: 50%;
-  background: var(--lr-ext-white);
+  background: var(--ln-ext-white);
   box-shadow:
-    0 2px 8px var(--lr-ext-shade-50),
-    0 0 0 6px color-mix(in srgb, var(--lr-ext-tier) 28%, transparent);
+    0 2px 8px var(--ln-ext-shade-50),
+    0 0 0 6px color-mix(in srgb, var(--ln-ext-tier) 28%, transparent);
   translate: -50% -50%;
   transition:
     left 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.3s !important;
 }
 
-.lr-ext-level__input:focus-visible + .lr-ext-level__track .lr-ext-level__thumb {
-  outline: 2px solid var(--lr-ext-text-strong);
+.ln-ext-level__input:focus-visible + .ln-ext-level__track .ln-ext-level__thumb {
+  outline: 2px solid var(--ln-ext-text-strong);
   outline-offset: 3px;
 }
 
-.lr-ext-level__value {
+.ln-ext-level__value {
   display: flex;
   flex: none;
   flex-direction: column;
@@ -214,17 +214,17 @@
   font-variant-numeric: tabular-nums;
 }
 
-.lr-ext-level__value b {
-  color: var(--lr-ext-tier);
+.ln-ext-level__value b {
+  color: var(--ln-ext-tier);
   font-size: 30px;
   font-weight: 900;
   line-height: 1;
   transition: color 0.3s !important;
 }
 
-.lr-ext-level__value span {
+.ln-ext-level__value span {
   margin-top: 3px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 700;
 }

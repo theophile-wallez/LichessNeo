@@ -266,12 +266,12 @@
     {
       "name": "a player: our button goes first",
       "html": "<div class=\"follow-up\"><button class=\"fbt rematch\">Rematch</button><a class=\"fbt\" href=\"/analysis\">Analysis board</a></div>",
-      "after": "<a class=\"fbt lr-ext-new-game\" href=\"/?hook_like=abcdefgh\">New 3+2</a><button class=\"fbt rematch\">Rematch</button><a class=\"fbt\" href=\"/analysis\">Analysis board</a>"
+      "after": "<a class=\"fbt ln-ext-new-game\" href=\"/?hook_like=abcdefgh\">New 3+2</a><button class=\"fbt rematch\">Rematch</button><a class=\"fbt\" href=\"/analysis\">Analysis board</a>"
     },
     {
       "name": "Lichess has its own New opponent",
       "html": "<div class=\"follow-up\"><button class=\"fbt rematch\">Rematch</button><a class=\"fbt new-opponent\" href=\"/?hook_like=abcdefgh\">New opponent</a></div>",
-      "after": "<button class=\"fbt rematch\">Rematch</button><a class=\"fbt new-opponent\" href=\"/?hook_like=abcdefgh\" data-lr-ext-label=\"New 3+2\">New opponent</a>"
+      "after": "<button class=\"fbt rematch\">Rematch</button><a class=\"fbt new-opponent\" href=\"/?hook_like=abcdefgh\" data-ln-ext-label=\"New 3+2\">New opponent</a>"
     },
     {
       "name": "a spectator has no rematch",

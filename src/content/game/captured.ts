@@ -63,10 +63,10 @@ function createPiecesWatch(): (board: Element) => boolean {
 /** A sync task drawing the captured pieces. */
 export function createCapturedSync(): () => void {
   const ownTopRow = createOwnedElement(() =>
-    createElement('div', { className: 'lr-ext-captured lr-ext-captured--top' }),
+    createElement('div', { className: 'ln-ext-captured ln-ext-captured--top' }),
   );
   const ownBottomRow = createOwnedElement(() =>
-    createElement('div', { className: 'lr-ext-captured lr-ext-captured--bottom' }),
+    createElement('div', { className: 'ln-ext-captured ln-ext-captured--bottom' }),
   );
   const piecesChanged = createPiecesWatch();
   let lastKey = '';
@@ -78,7 +78,7 @@ export function createCapturedSync(): () => void {
     const board = wrap?.querySelector('cg-board');
     if (!main || !wrap || !board) return;
     // On the analysis board, only under the players of a game.
-    if (main.matches('.analyse') && !main.querySelector(':scope > .lr-ext-player')) return;
+    if (main.matches('.analyse') && !main.querySelector(':scope > .ln-ext-player')) return;
     const variant = readVariant(main);
     const bottomColor = wrapOrientation(wrap);
     const checks = variant === 'threeCheck' ? readChecks(main) : { top: 0, bottom: 0 };

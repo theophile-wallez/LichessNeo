@@ -10,8 +10,8 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // it over the engine and the moves (styles/analysis/underboard.css), with the
 // advice summary and its "Learn from your mistakes" over the chat.
 
-export const OPEN = 'lr-ext-underboard-open';
-const BUTTON = 'lr-ext-underboard';
+export const OPEN = 'ln-ext-underboard-open';
+const BUTTON = 'ln-ext-underboard';
 // Lichess's tools glyph.
 const ICON = '';
 // Lichess's own "Tools" (i18n.site.tools), which the page world copies onto
@@ -41,11 +41,11 @@ function buildButton(): HTMLButtonElement {
 
 const ownButton = createOwnedElement(buildButton);
 
-// Our tooltips read data-lr-ext-tip.
+// Our tooltips read data-ln-ext-tip.
 function setLabel(button: HTMLButtonElement): void {
-  const label = document.documentElement.dataset.lrExtToolsLabel ?? FALLBACK_LABEL;
-  if (button.dataset.lrExtTip === label) return;
-  setData(button, 'lrExtTip', label);
+  const label = document.documentElement.dataset.lnExtToolsLabel ?? FALLBACK_LABEL;
+  if (button.dataset.lnExtTip === label) return;
+  setData(button, 'lnExtTip', label);
   button.setAttribute('aria-label', label);
 }
 

@@ -9,48 +9,48 @@ main.round :is(i5d, rm6) :is(qZM, i5z)::after {
 /* Move times (content/game/move-times.ts): a bar growing left, then the time; White's above,
  * Black's below.
  * Absolute against the list so they scroll with it; with no `top`, each stays on its row. */
-main.round :is(i5d, rm6) :is(aPp, l4x)[data-lr-ext-times] {
+main.round :is(i5d, rm6) :is(aPp, l4x)[data-ln-ext-times] {
   position: relative;
   grid-template-columns: 48px minmax(0, 104px) minmax(0, 104px) minmax(84px, 1fr);
 }
 
-main.round :is(aPp, l4x)[data-lr-ext-times] > :is(Z7yx, kwdb)[data-lr-ext-time] {
+main.round :is(aPp, l4x)[data-ln-ext-times] > :is(Z7yx, kwdb)[data-ln-ext-time] {
   position: static !important;
 }
 
-main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::before,
-main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::after {
+main.round :is(aPp, l4x)[data-ln-ext-times] > [data-ln-ext-time]::before,
+main.round :is(aPp, l4x)[data-ln-ext-times] > [data-ln-ext-time]::after {
   position: absolute;
   translate: 0 -6px;
   pointer-events: none;
 }
 
-main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::before {
+main.round :is(aPp, l4x)[data-ln-ext-times] > [data-ln-ext-time]::before {
   content: '';
   right: 52px;
-  width: max(2px, calc(var(--lr-ext-time, 0) * 44px));
+  width: max(2px, calc(var(--ln-ext-time, 0) * 44px));
   height: 9px;
   border-radius: 1px;
-  background: var(--lr-ext-text-strong);
+  background: var(--ln-ext-text-strong);
 }
 
-main.round :is(aPp, l4x)[data-lr-ext-times] > [data-lr-ext-time]::after {
-  content: attr(data-lr-ext-time);
+main.round :is(aPp, l4x)[data-ln-ext-times] > [data-ln-ext-time]::after {
+  content: attr(data-ln-ext-time);
   left: calc(100% - 48px);
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 11px;
   font-weight: 400;
   line-height: 12px;
 }
 
 /* Black's move: the second one after its number. */
-main.round :is(aPp, l4x)[data-lr-ext-times] > :is(qZM, i5z) + * + [data-lr-ext-time]::before,
-main.round :is(aPp, l4x)[data-lr-ext-times] > :is(qZM, i5z) + * + [data-lr-ext-time]::after {
+main.round :is(aPp, l4x)[data-ln-ext-times] > :is(qZM, i5z) + * + [data-ln-ext-time]::before,
+main.round :is(aPp, l4x)[data-ln-ext-times] > :is(qZM, i5z) + * + [data-ln-ext-time]::after {
   translate: 0 7px;
 }
 
-main.round :is(aPp, l4x)[data-lr-ext-times] > :is(qZM, i5z) + * + [data-lr-ext-time]::before {
-  background: var(--lr-ext-neutral-10);
+main.round :is(aPp, l4x)[data-ln-ext-times] > :is(qZM, i5z) + * + [data-ln-ext-time]::before {
+  background: var(--ln-ext-neutral-10);
 }
 
 /* The result on one line: the score, then how the game ended. */
@@ -60,20 +60,20 @@ main.round :is(i5d, rm6) .result-wrap {
   align-items: baseline;
   column-gap: 10px;
   padding: 10px 16px 12px !important;
-  border-top: 1px solid var(--lr-ext-border);
-  background: var(--lr-ext-bg-panel);
+  border-top: 1px solid var(--ln-ext-border);
+  background: var(--ln-ext-bg-panel);
   text-align: start !important;
 }
 
 main.round :is(i5d, rm6) .result {
   margin: 0 !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 20px;
   font-weight: 800;
 }
 
 main.round :is(i5d, rm6) .status {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-style: normal !important;
 }
@@ -100,8 +100,8 @@ main.round .rcontrols .follow-up .fbt {
   padding: 0 8px !important;
   border-radius: 8px !important;
   overflow: hidden;
-  background: var(--lr-ext-btn-grey) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14px !important;
   font-weight: 800;
   line-height: 40px !important;
@@ -110,20 +110,20 @@ main.round .rcontrols .follow-up .fbt {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-shadow: none !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
 }
 
 main.round .rcontrols .follow-up .fbt:hover:not(.disabled, :disabled) {
-  background: var(--lr-ext-btn-grey-hover) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
 }
 
 /* Game Review: Lichess's analysis link, always the last button, first in the row. It opens
  * the analysis page, where page/review/ starts the review. */
 html {
-  --lr-ext-t-review: 'Debrief';
+  --ln-ext-t-review: 'Debrief';
 }
 html[lang^='fr'] {
-  --lr-ext-t-review: 'Débrief';
+  --ln-ext-t-review: 'Débrief';
 }
 
 main.round
@@ -132,17 +132,17 @@ main.round
   > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']) {
   order: -2;
   flex-grow: 1.4;
-  background: var(--lr-ext-btn-primary) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  color: var(--ln-ext-white) !important;
   font-size: 0 !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
 }
 
 main.round
   .rcontrols
   .follow-up
   > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/'])::after {
-  content: var(--lr-ext-t-review);
+  content: var(--ln-ext-t-review);
   font-size: 14px;
 }
 
@@ -150,11 +150,11 @@ main.round
   .rcontrols
   .follow-up
   > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']):hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
+  background: var(--ln-ext-btn-primary-hover) !important;
 }
 
 /* "New 16 min" (Lichess's "New opponent" or ours), then Rematch. */
-main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .lr-ext-new-game) {
+main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .ln-ext-new-game) {
   display: flex !important;
   align-items: center;
   /* A label too long for the button wraps, rather than losing its end. */
@@ -163,37 +163,37 @@ main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .lr-ext-new-game) 
   white-space: normal;
 }
 
-main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game) {
+main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game) {
   order: -1;
 }
 
 /* The time control replaces Lichess's "New opponent". */
-main.round .rcontrols .follow-up .new-opponent[data-lr-ext-label] {
+main.round .rcontrols .follow-up .new-opponent[data-ln-ext-label] {
   font-size: 0 !important;
 }
 
-main.round .rcontrols .follow-up .new-opponent[data-lr-ext-label]::after {
-  content: attr(data-lr-ext-label);
+main.round .rcontrols .follow-up .new-opponent[data-ln-ext-label]::after {
+  content: attr(data-ln-ext-label);
   font-size: 14px;
 }
 
 /* Seeking the next game from here, or from the review (page/seek): a loader while the socket connects, then
  * how long it has waited and a cross that stops it. */
 :is(
-  main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game),
-  #lr-ext-review .lr-ext-new-game
-)[data-lr-ext-seek] {
+  main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
+  #ln-ext-review .ln-ext-new-game
+)[data-ln-ext-seek] {
   gap: 8px;
   font-size: 0 !important;
   box-shadow:
-    inset 0 0 0 2px var(--lr-ext-accent),
-    var(--lr-ext-btn-grey-shadow) !important;
+    inset 0 0 0 2px var(--ln-ext-accent),
+    var(--ln-ext-btn-grey-shadow) !important;
 }
 
 :is(
-    main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game),
-    #lr-ext-review .lr-ext-new-game
-  )[data-lr-ext-seek]::before {
+    main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
+    #ln-ext-review .ln-ext-new-game
+  )[data-ln-ext-seek]::before {
   content: '';
   flex: none;
   box-sizing: border-box;
@@ -202,34 +202,34 @@ main.round .rcontrols .follow-up .new-opponent[data-lr-ext-label]::after {
 }
 
 :is(
-    main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game),
-    #lr-ext-review .lr-ext-new-game
-  )[data-lr-ext-seek='connecting']::before {
-  border: 2px solid var(--lr-ext-lift-20);
-  border-top-color: var(--lr-ext-text-strong);
+    main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
+    #ln-ext-review .ln-ext-new-game
+  )[data-ln-ext-seek='connecting']::before {
+  border: 2px solid var(--ln-ext-lift-20);
+  border-top-color: var(--ln-ext-text-strong);
   border-radius: 50%;
-  animation: lr-ext-seek-spin 0.7s linear infinite !important;
+  animation: ln-ext-seek-spin 0.7s linear infinite !important;
 }
 
 :is(
-    main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game),
-    #lr-ext-review .lr-ext-new-game
-  )[data-lr-ext-seek='seeking']::before {
+    main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
+    #ln-ext-review .ln-ext-new-game
+  )[data-ln-ext-seek='seeking']::before {
   background: currentColor;
   mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg') center /
     contain no-repeat;
 }
 
 :is(
-    main.round .rcontrols .follow-up :is(.new-opponent, .lr-ext-new-game),
-    #lr-ext-review .lr-ext-new-game
-  )[data-lr-ext-seek='seeking']::after {
-  content: attr(data-lr-ext-waited);
+    main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
+    #ln-ext-review .ln-ext-new-game
+  )[data-ln-ext-seek='seeking']::after {
+  content: attr(data-ln-ext-waited);
   font-size: 14px;
   font-variant-numeric: tabular-nums;
 }
 
-@keyframes lr-ext-seek-spin {
+@keyframes ln-ext-seek-spin {
   to {
     rotate: 1turn;
   }
@@ -237,13 +237,13 @@ main.round .rcontrols .follow-up .new-opponent[data-lr-ext-label]::after {
 
 /* A rematch offer turns the button primary, hover included. */
 main.round .rcontrols .follow-up .rematch.glowing {
-  background: var(--lr-ext-btn-primary) !important;
-  color: var(--lr-ext-white) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  color: var(--ln-ext-white) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
 }
 
 main.round .rcontrols .follow-up .rematch.glowing:hover:not(.disabled, :disabled) {
-  background: var(--lr-ext-btn-primary-hover) !important;
+  background: var(--ln-ext-btn-primary-hover) !important;
 }
 
 /* Lichess turns the glowing button's ::before into a pulsing overlay: the ring
@@ -265,14 +265,14 @@ main.round .rcontrols .follow-up .rematch-decline {
   padding: 0;
   border-radius: 8px !important;
   opacity: 1 !important;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
   color: var(--c-bad) !important;
   font-size: 18px;
 }
 
 main.round .rcontrols .follow-up .rematch-decline:hover {
-  background: var(--lr-ext-btn-red) !important;
-  box-shadow: var(--lr-ext-btn-red-shadow) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-red) !important;
+  box-shadow: var(--ln-ext-btn-red-shadow) !important;
+  color: var(--ln-ext-white) !important;
 }

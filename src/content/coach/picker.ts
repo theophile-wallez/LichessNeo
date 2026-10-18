@@ -13,33 +13,33 @@ import { coachChoices } from './names.ts';
 // opens every coach in a dialog (styles/coach-picker.css), rather than skipping to
 // the next. It's here because the coaches' names are the extension's messages.
 
-const TITLE_ID = 'lr-ext-coach-picker-title';
+const TITLE_ID = 'ln-ext-coach-picker-title';
 
 function buildDialog(): HTMLDialogElement {
   const dialog = createElement('dialog', {
-    className: 'lr-ext-coach-picker',
+    className: 'ln-ext-coach-picker',
     attrs: { 'aria-labelledby': TITLE_ID },
   });
   setHtml(
     dialog,
-    html`<div class="lr-ext-coach-picker__card">
-      <div class="lr-ext-coach-picker__head">
-        <span class="lr-ext-setting__icon" aria-hidden="true"></span>
+    html`<div class="ln-ext-coach-picker__card">
+      <div class="ln-ext-coach-picker__head">
+        <span class="ln-ext-setting__icon" aria-hidden="true"></span>
         <div>
-          <h2 class="lr-ext-coach-picker__title" id="${TITLE_ID}">${message('coachPickerTitle')}</h2>
-          <p class="lr-ext-coach-picker__body">${message('coachPickerBody')}</p>
+          <h2 class="ln-ext-coach-picker__title" id="${TITLE_ID}">${message('coachPickerTitle')}</h2>
+          <p class="ln-ext-coach-picker__body">${message('coachPickerBody')}</p>
         </div>
-        <button type="button" class="lr-ext-coach-picker__close" aria-label="${message('coachPickerClose')}">${hugeicon(Cancel01Icon)}</button>
+        <button type="button" class="ln-ext-coach-picker__close" aria-label="${message('coachPickerClose')}">${hugeicon(Cancel01Icon)}</button>
       </div>
-      <div class="lr-ext-coach-picker__grid">${coachChoices()}</div>
+      <div class="ln-ext-coach-picker__grid">${coachChoices()}</div>
     </div>`,
   );
   dialog.addEventListener('click', event => {
     // A click on the backdrop lands on the dialog itself, outside its card.
     const close =
-      event.target === dialog || closestTo(event.target, '.lr-ext-coach-picker__close', Element);
+      event.target === dialog || closestTo(event.target, '.ln-ext-coach-picker__close', Element);
     const picked = CoachIdSchema.safeParse(
-      closestTo(event.target, '.lr-ext-coach-choice', HTMLElement)?.dataset.lrExtCoachChoice,
+      closestTo(event.target, '.ln-ext-coach-choice', HTMLElement)?.dataset.lnExtCoachChoice,
     );
     if (picked.success) {
       chooseCoach(picked.data);
@@ -56,10 +56,10 @@ let dialog: HTMLDialogElement | null = null;
 export function openCoachPicker(coach: number): void {
   dialog ??= buildDialog();
   if (!dialog.isConnected) document.body.append(dialog);
-  for (const choice of queryAll(dialog, '.lr-ext-coach-choice', HTMLElement))
-    choice.setAttribute('aria-pressed', String(choice.dataset.lrExtCoachChoice === String(coach)));
+  for (const choice of queryAll(dialog, '.ln-ext-coach-choice', HTMLElement))
+    choice.setAttribute('aria-pressed', String(choice.dataset.lnExtCoachChoice === String(coach)));
   if (!dialog.open) dialog.showModal();
-  queryOne(dialog, '.lr-ext-coach-choice[aria-pressed="true"]', HTMLElement)?.focus();
+  queryOne(dialog, '.ln-ext-coach-choice[aria-pressed="true"]', HTMLElement)?.focus();
 }
 
 export const coachPicker: Feature = {

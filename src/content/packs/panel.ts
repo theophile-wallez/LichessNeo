@@ -26,25 +26,25 @@ export const panelSelector = (kind: PartKind): string => `#dasher_app .sub.${kin
  */
 export function markPanel(panel: HTMLElement, kind: PartKind, library: Library): void {
   const current = library.current(kind);
-  setData(panel, 'lrExtSrcOn', viewOf(current));
-  for (const item of queryAll(panel, '.lr-ext-src-item[data-lr-ext-choice]', HTMLElement))
-    item.classList.toggle('active', item.dataset.lrExtChoice === current);
+  setData(panel, 'lnExtSrcOn', viewOf(current));
+  for (const item of queryAll(panel, '.ln-ext-src-item[data-ln-ext-choice]', HTMLElement))
+    item.classList.toggle('active', item.dataset.lnExtChoice === current);
   markFamilies(panel, kind, current);
   showOptionRows(panel, current);
 }
 
 function showView(panel: HTMLElement, view: View): void {
-  setData(panel, 'lrExtView', view);
-  for (const tab of queryAll(panel, '.lr-ext-src-tabs button', HTMLElement))
-    tab.classList.toggle('active', tab.dataset.lrExtTab === view);
+  setData(panel, 'lnExtView', view);
+  for (const tab of queryAll(panel, '.ln-ext-src-tabs button', HTMLElement))
+    tab.classList.toggle('active', tab.dataset.lnExtTab === view);
 }
 
 function tabBar(onTab: (view: View) => void): HTMLElement {
-  const bar = createElement('div', { className: 'lr-ext-src-tabs' });
+  const bar = createElement('div', { className: 'ln-ext-src-tabs' });
   for (const [view, label] of TABS) {
     const tab = createElement('button', {
       text: label,
-      attrs: { type: 'button', class: '', 'data-lr-ext-tab': view },
+      attrs: { type: 'button', class: '', 'data-ln-ext-tab': view },
     });
     tab.addEventListener('click', () => onTab(view));
     bar.append(tab);
@@ -66,7 +66,7 @@ export interface DressOptions {
  */
 export function dressPanel(panel: HTMLElement, options: DressOptions): void {
   const { kind, library, view } = options;
-  for (const ours of queryAll(panel, '.lr-ext-src-tabs, .lr-ext-src-choices', HTMLElement))
+  for (const ours of queryAll(panel, '.ln-ext-src-tabs, .ln-ext-src-choices', HTMLElement))
     ours.remove();
   const tabs = tabBar(next => {
     options.onTab(next);

@@ -19,7 +19,7 @@
   left: 17px;
   width: 2px;
   border-radius: 1px;
-  background: var(--lr-ext-lift-7);
+  background: var(--ln-ext-lift-7);
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update {
@@ -34,86 +34,86 @@
 /* Each update's icon: Lichess picks a flair (an emoji) per update, drawn here as the closest
  * Hugeicon in a palette color, a news one for any other. */
 :is(main.lobby, .daily-feed) .daily-feed__update__marker {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
-  --lr-ext-feed-color: var(--lr-ext-accent);
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--7e88db.svg');
+  --ln-ext-feed-color: var(--ln-ext-accent);
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/activity.lichess.webp'] {
-  --lr-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
-  --lr-ext-feed-color: var(--lr-ext-neutral-11);
+  --ln-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess-white.svg');
+  --ln-ext-feed-color: var(--ln-ext-neutral-11);
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/activity.party-popper.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg');
-  --lr-ext-feed-color: var(--lr-ext-pink);
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--ff94d1.svg');
+  --ln-ext-feed-color: var(--ln-ext-pink);
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/objects.megaphone.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--ffc689.svg');
-  --lr-ext-feed-color: var(--lr-ext-orange);
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--ffc689.svg');
+  --ln-ext-feed-color: var(--ln-ext-orange);
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/objects.studio-microphone.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--caa9fa.svg');
-  --lr-ext-feed-color: var(--lr-ext-purple);
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--caa9fa.svg');
+  --ln-ext-feed-color: var(--ln-ext-purple);
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/objects.hammer-and-wrench.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--a2edfd.svg');
-  --lr-ext-feed-color: var(--lr-ext-cyan);
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--a2edfd.svg');
+  --ln-ext-feed-color: var(--ln-ext-cyan);
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/objects.camera.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--a2edfd.svg');
-  --lr-ext-feed-color: var(--lr-ext-cyan);
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--a2edfd.svg');
+  --ln-ext-feed-color: var(--ln-ext-cyan);
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/activity.puzzle-piece.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--73fb95.svg');
-  --lr-ext-feed-color: var(--lr-ext-green);
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--73fb95.svg');
+  --ln-ext-feed-color: var(--ln-ext-green);
 }
 
 /* An <img> holds no mask over a tile: on light, the icons are files in the deeper hues. */
 html.light :is(main.lobby, .daily-feed) .daily-feed__update__marker {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--5e6ad2.svg');
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news--5e6ad2.svg');
 }
 
 html.light
   :is(main.lobby, .daily-feed)
   .daily-feed__update__marker[src*='/activity.party-popper.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--e0479e.svg');
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/party--e0479e.svg');
 }
 
 html.light
   :is(main.lobby, .daily-feed)
   .daily-feed__update__marker[src*='/objects.megaphone.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--e3700d.svg');
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/megaphone-01--e3700d.svg');
 }
 
 html.light
   :is(main.lobby, .daily-feed)
   .daily-feed__update__marker[src*='/objects.studio-microphone.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--8b5cf6.svg');
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01--8b5cf6.svg');
 }
 
 html.light
   :is(main.lobby, .daily-feed)
   .daily-feed__update__marker[src*='/objects.hammer-and-wrench.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--0a97bb.svg');
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/wrench-01--0a97bb.svg');
 }
 
 html.light :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/objects.camera.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--0a97bb.svg');
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/camera-01--0a97bb.svg');
 }
 
 html.light
   :is(main.lobby, .daily-feed)
   .daily-feed__update__marker[src*='/activity.puzzle-piece.webp'] {
-  --lr-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--1e9e50.svg');
+  --ln-ext-feed-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle--1e9e50.svg');
 }
 
 html.light :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/activity.lichess.webp'] {
-  --lr-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess.svg');
+  --ln-ext-feed-icon: url('https://lichess1.org/assets/logo/lichess.svg');
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__marker {
@@ -127,11 +127,11 @@ html.light :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/activ
   border: none !important;
   border-radius: 10px !important;
   background:
-    var(--lr-ext-feed-icon) center / 20px no-repeat,
-    color-mix(in srgb, var(--lr-ext-feed-color) 20%, var(--lr-ext-bg-panel)) !important;
+    var(--ln-ext-feed-icon) center / 20px no-repeat,
+    color-mix(in srgb, var(--ln-ext-feed-color) 20%, var(--ln-ext-bg-panel)) !important;
   box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-feed-color) 35%, transparent),
-    0 0 0 4px var(--lr-ext-bg-panel);
+    inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-feed-color) 35%, transparent),
+    0 0 0 4px var(--ln-ext-bg-panel);
   /* Lichess lifts its ringed marker 5px, which set it above its date's middle. */
   transform: none !important;
 }
@@ -140,7 +140,7 @@ html.light :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/activ
   display: inline-flex !important;
   align-items: center;
   min-height: 36px;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   text-transform: uppercase;
@@ -149,19 +149,19 @@ html.light :is(main.lobby, .daily-feed) .daily-feed__update__marker[src*='/activ
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update__day:hover {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 :is(main.lobby, .daily-feed) .daily-feed__update p {
   margin: -7px 0 0;
-  color: var(--lr-ext-neutral-12);
+  color: var(--ln-ext-neutral-12);
   font-size: 14.5px;
   line-height: 1.55;
 }
 
 /* The last entry is the "All updates" link. */
 :is(main.lobby, .daily-feed) .daily-feed__update a.daily-feed__update__day[href$='/feed'] {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
   text-transform: none;
   letter-spacing: 0;
   font-size: 14px !important;

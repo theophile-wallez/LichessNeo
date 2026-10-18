@@ -13,7 +13,7 @@ function page(lines: readonly string[], rematch: string): void {
 
 const labels = (): (string | undefined)[] =>
   [...document.querySelectorAll<HTMLElement>('.mchat__messages > li')].map(
-    line => line.dataset['lrExtLabel'],
+    line => line.dataset['lnExtLabel'],
   );
 
 const settle = (): Promise<void> => new Promise(done => setTimeout(done, 0));

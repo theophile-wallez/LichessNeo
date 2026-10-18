@@ -2,22 +2,22 @@
   "marks": [
     {
       "page": "<main class=\"page-menu\"><nav class=\"subnav\"><a href=\"/player\">Leaderboard</a><a class=\"active\" href=\"/fr/player/bots\">Bots</a><a href=\"/training/themes\">Themes</a><a href=\"/thanks-not\">x</a></nav><div class=\"page-menu__content\"></div></main>",
-      "marked": "<main class=\"page-menu\" data-lr-ext-nav-active=\"/fr/player/bots\"><nav class=\"subnav\" data-lr-ext-nav=\"bots puzzles\"><a href=\"/player\">Leaderboard</a><a class=\"active\" href=\"/fr/player/bots\">Bots</a><a href=\"/training/themes\">Themes</a><a href=\"/thanks-not\">x</a></nav><div class=\"page-menu__content\"></div></main>"
+      "marked": "<main class=\"page-menu\" data-ln-ext-nav-active=\"/fr/player/bots\"><nav class=\"subnav\" data-ln-ext-nav=\"bots puzzles\"><a href=\"/player\">Leaderboard</a><a class=\"active\" href=\"/fr/player/bots\">Bots</a><a href=\"/training/themes\">Themes</a><a href=\"/thanks-not\">x</a></nav><div class=\"page-menu__content\"></div></main>"
     },
     {
-      "page": "<main class=\"page-menu\" data-lr-ext-nav-active=\"/stale\"><nav class=\"subnav\" data-lr-ext-nav=\"stale\"><a href=\"/somewhere\">x</a></nav></main>",
+      "page": "<main class=\"page-menu\" data-ln-ext-nav-active=\"/stale\"><nav class=\"subnav\" data-ln-ext-nav=\"stale\"><a href=\"/somewhere\">x</a></nav></main>",
       "marked": "<main class=\"page-menu\"><nav class=\"subnav\"><a href=\"/somewhere\">x</a></nav></main>"
     },
     {
       "page": "<main class=\"page-menu\"><nav class=\"subnav\"><a href=\"/account/kid\">Kid</a><a href=\"/variant/chess960\">960</a><a class=\"active\" href=\"/streamer/edit\">Edit</a><a href=\"/broadcast/calendar\">Cal</a><a href=\"/thanks\">Thanks</a></nav></main>",
-      "marked": "<main class=\"page-menu\" data-lr-ext-nav-active=\"/streamer/edit\"><nav class=\"subnav\" data-lr-ext-nav=\"broadcast account about variants streamers\"><a href=\"/account/kid\">Kid</a><a href=\"/variant/chess960\">960</a><a class=\"active\" href=\"/streamer/edit\">Edit</a><a href=\"/broadcast/calendar\">Cal</a><a href=\"/thanks\">Thanks</a></nav></main>"
+      "marked": "<main class=\"page-menu\" data-ln-ext-nav-active=\"/streamer/edit\"><nav class=\"subnav\" data-ln-ext-nav=\"broadcast account about variants streamers\"><a href=\"/account/kid\">Kid</a><a href=\"/variant/chess960\">960</a><a class=\"active\" href=\"/streamer/edit\">Edit</a><a href=\"/broadcast/calendar\">Cal</a><a href=\"/thanks\">Thanks</a></nav></main>"
     },
     {
       "page": "<main class=\"round\"><div class=\"game__meta\"><section><div class=\"game__meta__infos\" data-icon=\"&#xe008;\"><div>Blitz</div></div></section></div></main>",
-      "marked": "<main class=\"round\"><div class=\"game__meta\" data-lr-ext-icon=\"\"><section><div class=\"game__meta__infos\" data-icon=\"\"><div>Blitz</div></div></section></div></main>"
+      "marked": "<main class=\"round\"><div class=\"game__meta\" data-ln-ext-icon=\"\"><section><div class=\"game__meta__infos\" data-icon=\"\"><div>Blitz</div></div></section></div></main>"
     },
     {
-      "page": "<main class=\"round\"><div class=\"game__meta\" data-lr-ext-icon=\"old\"><section></section></div></main>",
+      "page": "<main class=\"round\"><div class=\"game__meta\" data-ln-ext-icon=\"old\"><section></section></div></main>",
       "marked": "<main class=\"round\"><div class=\"game__meta\"><section></section></div></main>"
     },
     {
@@ -26,27 +26,27 @@
     },
     {
       "page": "<div class=\"community\"><div class=\"user-top\"><h2 data-icon=\"&#xe032;\">Bullet</h2></div><div class=\"user-top\"><h2>No icon</h2></div><div class=\"user-top\"><div><h2 data-icon=\"x\">Nested</h2></div></div></div>",
-      "marked": "<div class=\"community\"><div class=\"user-top\" data-lr-ext-icon=\"\"><h2 data-icon=\"\">Bullet</h2></div><div class=\"user-top\"><h2>No icon</h2></div><div class=\"user-top\"><div><h2 data-icon=\"x\">Nested</h2></div></div></div>"
+      "marked": "<div class=\"community\"><div class=\"user-top\" data-ln-ext-icon=\"\"><h2 data-icon=\"\">Bullet</h2></div><div class=\"user-top\"><h2>No icon</h2></div><div class=\"user-top\"><div><h2 data-icon=\"x\">Nested</h2></div></div></div>"
     },
     {
       "page": "<div class=\"tournament-leaderboards\"><div class=\"tournament-leaderboards__item\"><h2 data-icon=\"&#xe002;\">Rapid</h2></div></div>",
-      "marked": "<div class=\"tournament-leaderboards\"><div class=\"tournament-leaderboards__item\" data-lr-ext-icon=\"\"><h2 data-icon=\"\">Rapid</h2></div></div>"
+      "marked": "<div class=\"tournament-leaderboards\"><div class=\"tournament-leaderboards__item\" data-ln-ext-icon=\"\"><h2 data-icon=\"\">Rapid</h2></div></div>"
     },
     {
       "page": "<div class=\"tournament-shields\"><div class=\"tournament-shields__item\"><h2><a href=\"/tournament/shields/blitz\">Blitz</a></h2></div><div class=\"tournament-shields__item\"><h2>x</h2></div></div>",
-      "marked": "<div class=\"tournament-shields\"><div class=\"tournament-shields__item\" data-lr-ext-href=\"/tournament/shields/blitz\"><h2><a href=\"/tournament/shields/blitz\">Blitz</a></h2></div><div class=\"tournament-shields__item\"><h2>x</h2></div></div>"
+      "marked": "<div class=\"tournament-shields\"><div class=\"tournament-shields__item\" data-ln-ext-href=\"/tournament/shields/blitz\"><h2><a href=\"/tournament/shields/blitz\">Blitz</a></h2></div><div class=\"tournament-shields__item\"><h2>x</h2></div></div>"
     },
     {
       "page": "<main class=\"forum\"><table class=\"categs\"><tbody><tr><td><h2><a href=\"/forum/general-chess-discussion\">General</a></h2></td></tr><tr><td>none</td></tr></tbody></table></main>",
-      "marked": "<main class=\"forum\"><table class=\"categs\"><tbody><tr data-lr-ext-href=\"/forum/general-chess-discussion\"><td><h2><a href=\"/forum/general-chess-discussion\">General</a></h2></td></tr><tr><td>none</td></tr></tbody></table></main>"
+      "marked": "<main class=\"forum\"><table class=\"categs\"><tbody><tr data-ln-ext-href=\"/forum/general-chess-discussion\"><td><h2><a href=\"/forum/general-chess-discussion\">General</a></h2></td></tr><tr><td>none</td></tr></tbody></table></main>"
     },
     {
       "page": "<main class=\"forum forum-categ\"><div class=\"box__top\"><h1><a href=\"/forum\" data-icon=\"x\"></a>General</h1></div><table><tbody><tr><td class=\"subject\"><a href=\"/forum/general-chess-discussion/abc\">Topic</a></td></tr></tbody></table></main>",
-      "marked": "<main class=\"forum forum-categ\" data-lr-ext-href=\"/forum/general-chess-discussion/abc\" data-lr-ext-back=\"/forum\"><div class=\"box__top\"><h1><a href=\"/forum\" data-icon=\"x\"></a>General</h1></div><table><tbody><tr><td class=\"subject\"><a href=\"/forum/general-chess-discussion/abc\">Topic</a></td></tr></tbody></table></main>"
+      "marked": "<main class=\"forum forum-categ\" data-ln-ext-href=\"/forum/general-chess-discussion/abc\" data-ln-ext-back=\"/forum\"><div class=\"box__top\"><h1><a href=\"/forum\" data-icon=\"x\"></a>General</h1></div><table><tbody><tr><td class=\"subject\"><a href=\"/forum/general-chess-discussion/abc\">Topic</a></td></tr></tbody></table></main>"
     },
     {
       "page": "<main class=\"forum forum-topic\"><div class=\"box__top\"><h1><a href=\"/forum/general-chess-discussion\"></a>Topic</h1></div></main>",
-      "marked": "<main class=\"forum forum-topic\" data-lr-ext-back=\"/forum/general-chess-discussion\"><div class=\"box__top\"><h1><a href=\"/forum/general-chess-discussion\"></a>Topic</h1></div></main>"
+      "marked": "<main class=\"forum forum-topic\" data-ln-ext-back=\"/forum/general-chess-discussion\"><div class=\"box__top\"><h1><a href=\"/forum/general-chess-discussion\"></a>Topic</h1></div></main>"
     },
     {
       "page": "<main class=\"forum forum-topic\"><div class=\"box__top\"><h1><span><a href=\"/nested\"></a></span>Topic</h1></div></main>",
@@ -54,7 +54,7 @@
     },
     {
       "page": "<main class=\"search\"><div class=\"box__top\"><form class=\"search\" action=\"/forum/search\"><input></form></div></main>",
-      "marked": "<main class=\"search\" data-lr-ext-search=\"/forum/search\"><div class=\"box__top\"><form class=\"search\" action=\"/forum/search\"><input></form></div></main>"
+      "marked": "<main class=\"search\" data-ln-ext-search=\"/forum/search\"><div class=\"box__top\"><form class=\"search\" action=\"/forum/search\"><input></form></div></main>"
     },
     {
       "page": "<main class=\"search\"><div class=\"box__top\"><form action=\"/other\"></form></div></main>",
@@ -62,14 +62,14 @@
     },
     {
       "page": "<main class=\"box page-small\"><table class=\"slist-invert\"><tbody><tr><td><a class=\"user-link\" href=\"/@/a\">a</a></td><td>x</td></tr></tbody></table></main>",
-      "marked": "<main class=\"box page-small\" data-lr-ext-list=\"players\"><table class=\"slist-invert\"><tbody><tr><td><a class=\"user-link\" href=\"/@/a\">a</a></td><td>x</td></tr></tbody></table></main>"
+      "marked": "<main class=\"box page-small\" data-ln-ext-list=\"players\"><table class=\"slist-invert\"><tbody><tr><td><a class=\"user-link\" href=\"/@/a\">a</a></td><td>x</td></tr></tbody></table></main>"
     },
     {
       "page": "<main class=\"box page-small\"><table class=\"slist-invert\"><tbody><tr><td>Nobody here.</td></tr></tbody></table></main>",
-      "marked": "<main class=\"box page-small\" data-lr-ext-list=\"players\"><table class=\"slist-invert\"><tbody><tr><td>Nobody here.</td></tr></tbody></table></main>"
+      "marked": "<main class=\"box page-small\" data-ln-ext-list=\"players\"><table class=\"slist-invert\"><tbody><tr><td>Nobody here.</td></tr></tbody></table></main>"
     },
     {
-      "page": "<main class=\"box page-small\" data-lr-ext-list=\"players\"><table class=\"slist-invert\"><tbody><tr><td>a</td><td>b</td></tr><tr><td>c</td></tr></tbody></table></main>",
+      "page": "<main class=\"box page-small\" data-ln-ext-list=\"players\"><table class=\"slist-invert\"><tbody><tr><td>a</td><td>b</td></tr><tr><td>c</td></tr></tbody></table></main>",
       "marked": "<main class=\"box page-small\"><table class=\"slist-invert\"><tbody><tr><td>a</td><td>b</td></tr><tr><td>c</td></tr></tbody></table></main>"
     }
   ],
@@ -87,7 +87,7 @@
       "has": "round tv-channels clock-extras-top clock-extras-bottom"
     },
     {
-      "page": "<main class=\"analyse has-relay-tour\"><div class=\"analyse__side\"><div class=\"study__side\"></div></div><div class=\"analyse__board main-board\"><div class=\"cg-wrap orientation-white\"></div></div><div class=\"analyse__clock\"></div><section class=\"mchat\"></section><div class=\"lr-ext-player\"></div><div class=\"keyboard-move\"></div></main>",
+      "page": "<main class=\"analyse has-relay-tour\"><div class=\"analyse__side\"><div class=\"study__side\"></div></div><div class=\"analyse__board main-board\"><div class=\"cg-wrap orientation-white\"></div></div><div class=\"analyse__clock\"></div><section class=\"mchat\"></section><div class=\"ln-ext-player\"></div><div class=\"keyboard-move\"></div></main>",
       "has": "analyse analyse-chat analyse-players analyse-clock analyse-white relay-tour study-side keyboard-move"
     },
     {

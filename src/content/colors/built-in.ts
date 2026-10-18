@@ -4,15 +4,15 @@ import type { BuiltInTheme } from './themes.ts';
 // 3:1 at least, and reads as a link on the page, on its own scheme.
 
 /** Near-neutral greys and our blue: palette.css's own values. */
-export const REIMAGINED: BuiltInTheme = {
-  id: 'reimagined',
-  message: 'themeReimagined',
+export const NEO: BuiltInTheme = {
+  id: 'neo',
+  message: 'themeNeo',
   light: { hue: 286, chroma: 0.006, accent: '#5e6ad2' },
   dark: { hue: 286, chroma: 0.004, accent: '#5e6ad2' },
 };
 
 export const BUILT_IN_THEMES: readonly BuiltInTheme[] = [
-  REIMAGINED,
+  NEO,
   {
     id: 'lichess',
     message: 'themeLichess',

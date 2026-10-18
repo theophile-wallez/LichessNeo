@@ -7,13 +7,13 @@
 
 /* How far each fade reaches: none where the strip doesn't scroll, or where scroll timelines
  * aren't supported. */
-@property --lr-ext-menu-fade-start {
+@property --ln-ext-menu-fade-start {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
 }
 
-@property --lr-ext-menu-fade-end {
+@property --ln-ext-menu-fade-end {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
@@ -58,8 +58,8 @@
     mask-image: linear-gradient(
       90deg,
       transparent,
-      #000 var(--lr-ext-menu-fade-start),
-      #000 calc(100% - var(--lr-ext-menu-fade-end)),
+      #000 var(--ln-ext-menu-fade-start),
+      #000 calc(100% - var(--ln-ext-menu-fade-end)),
       transparent
     );
   }
@@ -93,35 +93,35 @@
     height: 24px !important;
     margin: 0 6px !important;
     padding: 0 !important;
-    background: var(--lr-ext-border) !important;
+    background: var(--ln-ext-border) !important;
   }
 }
 
 @supports (animation-timeline: scroll()) {
   @media (max-width: 799.98px) {
     :is(main.page-menu > .subnav, main.page-menu > .subnav > .subnav__inner) {
-      animation: lr-ext-menu-fade linear both !important;
+      animation: ln-ext-menu-fade linear both !important;
       animation-timeline: scroll(self inline) !important;
     }
   }
 }
 
-@keyframes lr-ext-menu-fade {
+@keyframes ln-ext-menu-fade {
   from {
-    --lr-ext-menu-fade-start: 0px;
-    --lr-ext-menu-fade-end: 32px;
+    --ln-ext-menu-fade-start: 0px;
+    --ln-ext-menu-fade-end: 32px;
   }
 
   8% {
-    --lr-ext-menu-fade-start: 32px;
+    --ln-ext-menu-fade-start: 32px;
   }
 
   92% {
-    --lr-ext-menu-fade-end: 32px;
+    --ln-ext-menu-fade-end: 32px;
   }
 
   to {
-    --lr-ext-menu-fade-start: 32px;
-    --lr-ext-menu-fade-end: 0px;
+    --ln-ext-menu-fade-start: 32px;
+    --ln-ext-menu-fade-end: 0px;
   }
 }

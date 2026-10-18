@@ -20,10 +20,10 @@ interface Parts {
 }
 
 function findParts(root: HTMLElement): Parts | null {
-  const plot = queryOne(root, '.lr-ext-dist__plot', HTMLElement);
+  const plot = queryOne(root, '.ln-ext-dist__plot', HTMLElement);
   const svg = queryOne(root, 'svg', SVGSVGElement);
-  const marks = queryOne(root, '.lr-ext-dist__marks', HTMLElement);
-  const tip = queryOne(root, '.lr-ext-dist__tip', HTMLElement);
+  const marks = queryOne(root, '.ln-ext-dist__marks', HTMLElement);
+  const tip = queryOne(root, '.ln-ext-dist__tip', HTMLElement);
   return plot && svg && marks && tip ? { root, plot, svg, marks, tip } : null;
 }
 
@@ -63,8 +63,8 @@ class DistributionChart {
     setHtml(parts.svg, plotMarkup({ geometry, players, markers, lit: this.#lit, color, formats }));
     setHtml(parts.marks, marksMarkup(markers, formats));
     this.#placeMarks(geometry);
-    parts.svg.classList.toggle('lr-ext-dist__svg--intro', animate);
-    parts.root.classList.toggle('lr-ext-dist--intro', animate);
+    parts.svg.classList.toggle('ln-ext-dist__svg--intro', animate);
+    parts.root.classList.toggle('ln-ext-dist--intro', animate);
   }
 
   // A pill's width depends on its text, so it can only be centered once filled.
@@ -93,13 +93,13 @@ class DistributionChart {
     const { binWidth } = geometry;
     const last = players.counts.length - 1;
     const bin = clamp(Math.floor((pointerX(event, parts.svg) - PADDING.left) / binWidth), 0, last);
-    parts.svg.classList.toggle('lr-ext-dist__svg--hover', true);
+    parts.svg.classList.toggle('ln-ext-dist__svg--hover', true);
     for (const bar of this.#bars()) {
-      const index = Number(bar.dataset.lrExtBar);
-      bar.classList.toggle('lr-ext-dist__bar--on', index === bin);
-      bar.classList.toggle('lr-ext-dist__bar--dim', index > bin);
+      const index = Number(bar.dataset.lnExtBar);
+      bar.classList.toggle('ln-ext-dist__bar--on', index === bin);
+      bar.classList.toggle('ln-ext-dist__bar--dim', index > bin);
     }
-    const dot = queryOne(parts.svg, '.lr-ext-dist__dot', SVGElement);
+    const dot = queryOne(parts.svg, '.ln-ext-dist__dot', SVGElement);
     if (dot) {
       const x = geometry.x(MIN_RATING + (bin + 1) * BIN_SIZE);
       setAttributes(dot, { cx: x, cy: geometry.yShare(players.shares[bin] ?? 0) });
@@ -115,16 +115,16 @@ class DistributionChart {
 
   leave(): void {
     const { parts } = this.#setup;
-    parts.svg.classList.toggle('lr-ext-dist__svg--hover', false);
+    parts.svg.classList.toggle('ln-ext-dist__svg--hover', false);
     hideTip(parts.tip);
     for (const bar of this.#bars()) {
-      bar.classList.toggle('lr-ext-dist__bar--on', false);
-      bar.classList.toggle('lr-ext-dist__bar--dim', Number(bar.dataset.lrExtBar) > this.#lit);
+      bar.classList.toggle('ln-ext-dist__bar--on', false);
+      bar.classList.toggle('ln-ext-dist__bar--dim', Number(bar.dataset.lnExtBar) > this.#lit);
     }
   }
 
   #bars(): SVGElement[] {
-    return queryAll(this.#setup.parts.svg, '.lr-ext-dist__bar', SVGElement);
+    return queryAll(this.#setup.parts.svg, '.ln-ext-dist__bar', SVGElement);
   }
 }
 
@@ -146,15 +146,15 @@ export function mountDistribution(host: HTMLElement, data: DistributionData): vo
   const color = gameRatingColor(perfKey());
   const markers = markersOf(data, yourRatingLabel());
   const formats = numberFormats(pageLocale());
-  const root = createElement('div', { className: 'lr-ext-dist' });
-  setStyleProperty(root, '--lr-ext-series-color', color);
+  const root = createElement('div', { className: 'ln-ext-dist' });
+  setStyleProperty(root, '--ln-ext-series-color', color);
   const total = formats.count.format(players.total);
   setHtml(root, chartShell({ color, names: seriesNames(), total }));
   host.append(root);
   // Lichess's canvas is hidden from here on (styles/distribution.css).
-  host.classList.toggle('lr-ext-dist-on', true);
+  host.classList.toggle('ln-ext-dist-on', true);
   const page = closestTo(host, '.rating-stats', HTMLElement);
-  if (page) setStyleProperty(page, '--lr-ext-dist-c', color);
+  if (page) setStyleProperty(page, '--ln-ext-dist-c', color);
   const parts = findParts(root);
   if (!parts) return;
   const chart = new DistributionChart({ parts, players, markers, color, formats });

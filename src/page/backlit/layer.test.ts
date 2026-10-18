@@ -49,7 +49,7 @@ afterEach(() => {
 describe('the backlit layer', () => {
   it('lies under the pieces, in chessground’s container, until removed', () => {
     const container = attach();
-    expect(container.firstElementChild?.matches('canvas.lr-ext-backlit')).toBe(true);
+    expect(container.firstElementChild?.matches('canvas.ln-ext-backlit')).toBe(true);
     layer.remove();
     expect(container.querySelector('canvas')).toBeNull();
   });
@@ -57,8 +57,8 @@ describe('the backlit layer', () => {
   it('reads each side’s light off the stylesheet', () => {
     const container = attach();
     const canvas = container.querySelector('canvas');
-    canvas?.style.setProperty('--lr-ext-backlit-white', '#abcdef');
-    canvas?.style.setProperty('--lr-ext-backlit-black', '#123456');
+    canvas?.style.setProperty('--ln-ext-backlit-white', '#abcdef');
+    canvas?.style.setProperty('--ln-ext-backlit-black', '#123456');
     expect(layer.side('white')).toBe('#abcdef');
     expect(layer.side('black')).toBe('#123456');
   });

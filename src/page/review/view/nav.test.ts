@@ -69,18 +69,18 @@ describe('the kept nav', () => {
   it('changes its buttons in place, and draws them again only for another language', () => {
     const nav = document.createElement('div');
     syncNav(nav, state(true), en.ui);
-    const explain = nav.querySelector('[data-lr-ext="explain"]');
+    const explain = nav.querySelector('[data-ln-ext="explain"]');
     syncNav(nav, state(false), en.ui);
-    expect(nav.querySelector('[data-lr-ext="explain"]')).toBe(explain);
+    expect(nav.querySelector('[data-ln-ext="explain"]')).toBe(explain);
     const buttons = [...nav.querySelectorAll('button')];
     expect(buttons.map(button => button.disabled)).toEqual([true, true, false]);
-    expect(buttons.map(button => button.classList.contains('lr-ext-btn--on'))).toEqual([
+    expect(buttons.map(button => button.classList.contains('ln-ext-btn--on'))).toEqual([
       true,
       false,
       false,
     ]);
     syncNav(nav, state(false), fr.ui);
-    expect(nav.querySelector('[data-lr-ext="explain"]')).not.toBe(explain);
+    expect(nav.querySelector('[data-ln-ext="explain"]')).not.toBe(explain);
     expect(nav.textContent).toContain(fr.ui.next);
   });
 });

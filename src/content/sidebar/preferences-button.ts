@@ -10,7 +10,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // (styles/sidebar/donate-and-buttons.css): a link to Lichess's preferences,
 // which only a signed-in user has.
 
-const BUTTON_ID = 'lr-ext-preferences-button';
+const BUTTON_ID = 'ln-ext-preferences-button';
 const PREFERENCES_URL = '/account/preferences/display';
 
 function syncButton(): void {

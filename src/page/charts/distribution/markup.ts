@@ -19,7 +19,7 @@ const CUMULATIVE_COLOR = '#f1f1f0';
 
 function chip(color: string, name: string, value: string): SafeHtml {
   const strong = value === '' ? '' : html`<strong>${value}</strong>`;
-  return html`<span class="lr-ext-rchart__chip lr-ext-dist__chip" style="--lr-ext-series-color:${color}">${chipLabel(name)}${strong}</span>`;
+  return html`<span class="ln-ext-rchart__chip ln-ext-dist__chip" style="--ln-ext-series-color:${color}">${chipLabel(name)}${strong}</span>`;
 }
 
 interface Shell {
@@ -32,7 +32,7 @@ interface Shell {
 /** The chart's frame, filled in by each draw. */
 export function chartShell({ color, names, total }: Shell): SafeHtml {
   const legend = html`${chip(color, names.players, total)}${chip(CUMULATIVE_COLOR, names.cumulative, '')}`;
-  return html`<div class="lr-ext-dist__legend">${legend}</div><div class="lr-ext-dist__plot"><svg class="lr-ext-dist__svg" aria-hidden="true"></svg><div class="lr-ext-dist__marks"></div><div class="lr-ext-rchart__tip lr-ext-dist__tip"></div></div>`;
+  return html`<div class="ln-ext-dist__legend">${legend}</div><div class="ln-ext-dist__plot"><svg class="ln-ext-dist__svg" aria-hidden="true"></svg><div class="ln-ext-dist__marks"></div><div class="ln-ext-rchart__tip ln-ext-dist__tip"></div></div>`;
 }
 
 function axis(geometry: Geometry, players: Players, formats: NumberFormats): SafeHtml {
@@ -49,30 +49,30 @@ function axis(geometry: Geometry, players: Players, formats: NumberFormats): Saf
       left: PADDING.left,
       right: width - PADDING.right,
       label: count === 0 ? 0 : formats.compact.format(count),
-      extraClass: count === 0 ? ' lr-ext-dist__base' : '',
+      extraClass: count === 0 ? ' ln-ext-dist__base' : '',
     }),
   );
   const shares = [0.25, 0.5, 0.75, 1].map(
     share =>
-      html`<text class="lr-ext-dist__slabel" x="${width - PADDING.right + 10}" y="${yShare(share)}">${formats.wholePercent.format(share)}</text>`,
+      html`<text class="ln-ext-dist__slabel" x="${width - PADDING.right + 10}" y="${yShare(share)}">${formats.wholePercent.format(share)}</text>`,
   );
-  return html`<g class="lr-ext-rchart__axis">${grid}${ratings}${shares}</g>`;
+  return html`<g class="ln-ext-rchart__axis">${grid}${ratings}${shares}</g>`;
 }
 
 function columns(geometry: Geometry, players: Players, lit: number): SafeHtml {
   const { binWidth, bottom } = geometry;
   const gap = binWidth > 6 ? Math.min(3, binWidth * 0.22) : 0.5;
   const bars = players.counts.map((count, i) => {
-    const dim = i > lit ? ' lr-ext-dist__bar--dim' : '';
+    const dim = i > lit ? ' ln-ext-dist__bar--dim' : '';
     const path = columnPath({
       x: PADDING.left + i * binWidth + gap / 2,
       y: geometry.yCount(count),
       width: Math.max(0.5, binWidth - gap),
       bottom,
     });
-    return html`<path class="lr-ext-dist__bar${dim}" data-lr-ext-bar="${i}" style="--lr-ext-bar-index:${i}" d="${path}"/>`;
+    return html`<path class="ln-ext-dist__bar${dim}" data-ln-ext-bar="${i}" style="--ln-ext-bar-index:${i}" d="${path}"/>`;
   });
-  return html`<g class="lr-ext-dist__bars">${bars}</g>`;
+  return html`<g class="ln-ext-dist__bars">${bars}</g>`;
 }
 
 function cumulativeCurve(geometry: Geometry, players: Players): string {
@@ -98,20 +98,20 @@ interface Chart {
 
 export function plotMarkup({ geometry, players, markers, lit, color, formats }: Chart): SafeHtml {
   const { top, bottom } = geometry;
-  const gradient = html`<linearGradient id="lr-ext-dist-g" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="${top}" y2="${bottom}"><stop offset="0" stop-color="${color}"/><stop offset="1" stop-color="${color}" stop-opacity="0.35"/></linearGradient>`;
+  const gradient = html`<linearGradient id="ln-ext-dist-g" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="${top}" y2="${bottom}"><stop offset="0" stop-color="${color}"/><stop offset="1" stop-color="${color}" stop-opacity="0.35"/></linearGradient>`;
   const lines = markers.map(({ color: markerColor, rating }, k) => {
     const x = geometry.x(onChart(rating, players));
-    return html`<line class="lr-ext-dist__mline" style="--lr-ext-marker-color:${markerColor}" x1="${x}" x2="${x}" y1="${k * MARKER_ROW + 24}" y2="${bottom}"/>`;
+    return html`<line class="ln-ext-dist__mline" style="--ln-ext-marker-color:${markerColor}" x1="${x}" x2="${x}" y1="${k * MARKER_ROW + 24}" y2="${bottom}"/>`;
   });
   const hit = hitArea({ x: PADDING.left, y: top, width: geometry.plotWidth, height: bottom - top });
-  return html`<defs>${gradient}</defs>${axis(geometry, players, formats)}${columns(geometry, players, lit)}${lines}<path class="lr-ext-dist__cumul" pathLength="1" d="${cumulativeCurve(geometry, players)}"/><circle class="lr-ext-dist__dot" r="4.5"/>${hit}`;
+  return html`<defs>${gradient}</defs>${axis(geometry, players, formats)}${columns(geometry, players, lit)}${lines}<path class="ln-ext-dist__cumul" pathLength="1" d="${cumulativeCurve(geometry, players)}"/><circle class="ln-ext-dist__dot" r="4.5"/>${hit}`;
 }
 
 /** The markers' pills, in HTML over the top of their lines. */
 export function marksMarkup(markers: readonly Marker[], formats: NumberFormats): SafeHtml {
   const marks = markers.map(
     ({ kind, color, label, rating }) =>
-      html`<span class="lr-ext-dist__mark lr-ext-dist__mark--${kind}" style="--lr-ext-marker-color:${color}">${label} <strong>${formats.count.format(rating)}</strong></span>`,
+      html`<span class="ln-ext-dist__mark ln-ext-dist__mark--${kind}" style="--ln-ext-marker-color:${color}">${label} <strong>${formats.count.format(rating)}</strong></span>`,
   );
   return html`${marks}`;
 }

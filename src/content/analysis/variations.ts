@@ -56,24 +56,24 @@ function foldRun(run: readonly HTMLElement[]): void {
   const hidden = fold ? fold.end - fold.start : 0;
   for (const [i, move] of run.entries()) {
     const state = foldState(fold, i);
-    setData(move, 'lrExtFold', state);
+    setData(move, 'lnExtFold', state);
     setData(
       move,
-      'lrExtFoldLabel',
+      'lnExtFoldLabel',
       state === 'pill' ? message('variationFolded', `${hidden}`) : null,
     );
-    setData(move, 'lrExtIndex', state === null ? numberOf(move, i === fold?.end) : null);
+    setData(move, 'lnExtIndex', state === null ? numberOf(move, i === fold?.end) : null);
   }
 }
 
 // The review's verdict on a move, and Lichess's annotation glyphs, as classes.
 const moveClasses = (move: HTMLElement): string[] =>
-  move.dataset.lrExtCls ? [move.dataset.lrExtCls, ...move.classList] : [...move.classList];
+  move.dataset.lnExtCls ? [move.dataset.lnExtCls, ...move.classList] : [...move.classList];
 
 function markLine(line: HTMLElement): void {
   const moves = [...line.children].filter(isMove);
-  setData(line, 'lrExtOn', moves.some(isActive) ? '' : null);
-  setData(line, 'lrExtWorst', worstClass(moves.flatMap(moveClasses)));
+  setData(line, 'lnExtOn', moves.some(isActive) ? '' : null);
+  setData(line, 'lnExtWorst', worstClass(moves.flatMap(moveClasses)));
   for (const run of moveRuns(line)) foldRun(run);
 }
 
@@ -99,7 +99,7 @@ function sync(): void {
   observer.observe(tree, {
     subtree: true,
     childList: true,
-    attributeFilter: ['class', 'data-lr-ext-cls'],
+    attributeFilter: ['class', 'data-ln-ext-cls'],
   });
   markTree(tree);
 }

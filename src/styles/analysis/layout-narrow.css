@@ -8,26 +8,26 @@
 @media (max-width: 1019.98px) {
   /* Not a broadcast's page, which has no board (broadcast/). */
   main.analyse:not(.has-relay-tour) {
-    --lr-ext-bar: 0px;
-    --lr-ext-coords-off: 0px;
-    --lr-ext-gap: 12px;
+    --ln-ext-bar: 0px;
+    --ln-ext-coords-off: 0px;
+    --ln-ext-gap: 12px;
     /* The review's eval strip over the board (review/layout-narrow.css). */
-    --lr-ext-strip: 0px;
+    --ln-ext-strip: 0px;
     /* As wide as the screen, but no taller than what leaves the bars and the controls in
      * view on a tablet. */
-    --lr-ext-board: min(
+    --ln-ext-board: min(
       100vw - 16px,
       max(
         280px,
-        100dvh - var(---site-header-height, 60px) - 2 * var(--lr-ext-bar) - var(--lr-ext-strip) -
+        100dvh - var(---site-header-height, 60px) - 2 * var(--ln-ext-bar) - var(--ln-ext-strip) -
           84px
       )
     );
 
     display: grid !important;
-    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-columns: var(--ln-ext-board) !important;
     grid-template-rows:
-      var(--lr-ext-strip) var(--lr-ext-bar) auto var(--lr-ext-bar) auto auto auto auto auto
+      var(--ln-ext-strip) var(--ln-ext-bar) auto var(--ln-ext-bar) auto auto auto auto auto
       auto auto auto auto auto !important;
     grid-template-areas:
       'gauge'
@@ -64,26 +64,26 @@
 
   /* A game's bars over and under the board, as on the game page; Lichess's own clock strips
    * would hang over the squares. */
-  html:is([data-lr-ext-has~='analyse-players'], [data-lr-ext-has~='analyse-clock']):not(
-      [data-lr-ext-has~='practice']
+  html:is([data-ln-ext-has~='analyse-players'], [data-ln-ext-has~='analyse-clock']):not(
+      [data-ln-ext-has~='practice']
     )
     main.analyse {
-    --lr-ext-bar: 56px;
+    --ln-ext-bar: 56px;
   }
 
-  main.analyse > :is(.lr-ext-player, .lr-ext-captured) {
-    --lr-ext-off: 0px;
+  main.analyse > :is(.ln-ext-player, .ln-ext-captured) {
+    --ln-ext-off: 0px;
   }
 
-  main.analyse > :is(.lr-ext-player--top, .lr-ext-captured--top) {
+  main.analyse > :is(.ln-ext-player--top, .ln-ext-captured--top) {
     grid-area: user-top;
   }
 
-  main.analyse > :is(.lr-ext-player--bottom, .lr-ext-captured--bottom) {
+  main.analyse > :is(.ln-ext-player--bottom, .ln-ext-captured--bottom) {
     grid-area: user-bot;
   }
 
-  html:is([data-lr-ext-has~='analyse-players'], [data-lr-ext-has~='analyse-clock'])
+  html:is([data-ln-ext-has~='analyse-players'], [data-ln-ext-has~='analyse-clock'])
     main.analyse
     .analyse__player_strip {
     display: none !important;
@@ -97,7 +97,7 @@
     width: 100% !important;
     margin: 12px 0 0 !important;
     border-radius: 10px !important;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
@@ -120,7 +120,7 @@
   /* No move yet (the free board): a pawn where the moves will go, not an empty box. */
   main.analyse .analyse__moves .tview2:empty {
     height: 96px;
-    background: var(--lr-ext-lift-12) !important;
+    background: var(--ln-ext-lift-12) !important;
     mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn.svg') center /
       28px no-repeat;
   }

@@ -20,8 +20,8 @@ describe('color themes', () => {
 
   it('writes the dark palette on :root and the light one on :root.light', () => {
     expect(paletteRules({ light: mine.light, dark: mine.dark })).toBe(
-      ':root{--lr-ext-tint-hue:200;--lr-ext-tint-chroma:0.03;--lr-ext-accent:#1b8fb5}\n' +
-        ':root.light{--lr-ext-tint-hue:190;--lr-ext-tint-chroma:0.012;--lr-ext-accent:#0a7fd4}',
+      ':root{--ln-ext-tint-hue:200;--ln-ext-tint-chroma:0.03;--ln-ext-accent:#1b8fb5}\n' +
+        ':root.light{--ln-ext-tint-hue:190;--ln-ext-tint-chroma:0.012;--ln-ext-accent:#0a7fd4}',
     );
   });
 

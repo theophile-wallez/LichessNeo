@@ -21,7 +21,7 @@ describe('the extension’s themes', () => {
     const { saveBoard, themesOf } = await load();
     const before = themesOf('board').map(theme => theme.id);
     expect(before[0]).toBe('accent');
-    expect(before[1]).toBe('tone-reimagined');
+    expect(before[1]).toBe('tone-neo');
     expect(before.slice(-7)).toEqual(['custom', ...BACKLIT_BOARDS.map(board => board.id)]);
     const id = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
     const after = themesOf('board');

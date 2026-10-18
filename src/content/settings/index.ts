@@ -44,7 +44,7 @@ function showPage(main: HTMLElement, menu: HTMLElement, page: SettingsPage | nul
   // The packs are read as the section opens: again only if that failed.
   if (open && !wasOpen) void packLibrary().loadAll();
   wasOpen = open;
-  setData(main, 'lrExtSettings', open ? '' : null);
+  setData(main, 'lnExtSettings', open ? '' : null);
   showMenu(menu, page);
   section?.show(page);
   if (page !== shown && open) scrollToTop();

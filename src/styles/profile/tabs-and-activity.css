@@ -9,9 +9,9 @@
 
 .user-show > .user-show__blog .ublog-post-card {
   overflow: hidden;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
   transition:
     background-color 0.15s,
@@ -20,9 +20,9 @@
 }
 
 .user-show > .user-show__blog .ublog-post-card--link:hover {
-  border-color: var(--lr-ext-card-border-hover) !important;
-  background: var(--lr-ext-card-hover) !important;
-  box-shadow: var(--lr-ext-card-shadow-hover) !important;
+  border-color: var(--ln-ext-card-border-hover) !important;
+  background: var(--ln-ext-card-hover) !important;
+  box-shadow: var(--ln-ext-card-shadow-hover) !important;
 }
 
 .user-show > .user-show__blog .ublog-post-card__image {
@@ -38,9 +38,9 @@
   box-sizing: border-box;
   height: auto !important;
   padding: 5px !important;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 12px;
-  background: var(--lr-ext-neutral-1) !important;
+  background: var(--ln-ext-neutral-1) !important;
   background-image: none !important;
   box-shadow: none !important;
   font-size: inherit !important;
@@ -57,8 +57,8 @@
   border: none !important;
   border-radius: 8px !important;
   background: transparent !important;
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 15px;
   font-weight: 700;
   text-transform: none;
@@ -68,22 +68,22 @@
 }
 
 .user-show > .angles .nm-item:hover {
-  background: var(--lr-ext-lift-4) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-4) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .user-show > .angles .nm-item.active {
-  background: var(--lr-ext-bg-raised) !important;
-  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  box-shadow: 0 1px 3px var(--ln-ext-shade-50);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* The raised tab slides (see "Sliding tabs" in theme/). */
-.user-show > .angles[data-lr-ext-tabs] {
-  --lr-ext-tab-radius: 8px;
+.user-show > .angles[data-ln-ext-tabs] {
+  --ln-ext-tab-radius: 8px;
 }
 
-.user-show > .angles[data-lr-ext-tabs] .nm-item.active {
+.user-show > .angles[data-ln-ext-tabs] .nm-item.active {
   background: transparent !important;
   box-shadow: none;
 }
@@ -93,8 +93,8 @@
   margin-inline-start: 8px !important;
   padding: 1px 6px;
   border-radius: 999px;
-  background: var(--lr-ext-accent);
-  color: var(--lr-ext-white);
+  background: var(--ln-ext-accent);
+  color: var(--ln-ext-white);
   font-size: 11px;
   font-weight: 800;
   text-align: center;
@@ -102,9 +102,9 @@
 
 .user-show > .angle-content {
   box-sizing: border-box;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 14px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
   overflow: hidden;
 }
 
@@ -128,15 +128,15 @@
 }
 
 .user-show .activity section + section {
-  border-top: 1px solid var(--lr-ext-border);
+  border-top: 1px solid var(--ln-ext-border);
   margin-top: 6px !important;
   padding-top: 18px !important;
 }
 
 .user-show .activity section h2 {
   margin: 0 0 12px !important;
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 12px !important;
   font-weight: 800 !important;
   letter-spacing: 0.07em;
@@ -162,14 +162,14 @@
   margin: 0 !important;
   padding: 11px 12px !important;
   border-radius: 10px;
-  background: var(--lr-ext-lift-2);
-  color: var(--lr-ext-text);
+  background: var(--ln-ext-lift-2);
+  color: var(--ln-ext-text);
   line-height: 1.4;
   transition: background-color 0.15s !important;
 }
 
 .user-show .activity .entry:hover {
-  background: var(--lr-ext-lift-6);
+  background: var(--ln-ext-lift-6);
 }
 
 .user-show .activity .entry > icon {
@@ -183,8 +183,8 @@
   margin: 0 !important;
   border: none !important;
   border-radius: 9px !important;
-  background-color: var(--lr-ext-lift-6) !important;
-  color: var(--lr-ext-text-dim) !important;
+  background-color: var(--ln-ext-lift-6) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 19px !important;
   line-height: 1 !important;
 }
@@ -203,20 +203,20 @@
   display: block;
   width: 24px;
   height: 24px;
-  background: var(--lr-ext-puzzle-icon) center / contain no-repeat;
+  background: var(--ln-ext-puzzle-icon) center / contain no-repeat;
 }
 
 .user-show .activity .entry > icon[data-icon='\e00c'] {
-  --lr-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
+  --ln-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzles.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e05a'] {
-  --lr-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
+  --ln-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e00b'] {
-  --lr-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
+  --ln-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-racer.webp');
 }
 .user-show .activity .entry > icon[data-icon='\e06f'] {
-  --lr-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
+  --ln-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
 }
 
 /* Take the rest of the row: sized to content, a long line wrapped under the icon. The first
@@ -242,12 +242,12 @@
 }
 
 .user-show .activity .entry a {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 700;
 }
 
 .user-show .activity .entry a:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 /* The rating reached, as a chip. */
@@ -255,9 +255,9 @@
   margin-inline-start: 8px !important;
   padding: 1px 7px;
   border-radius: 5px;
-  background: var(--lr-ext-lift-6);
-  color: var(--lr-ext-text-dim);
-  font-family: var(--lr-ext-font) !important;
+  background: var(--ln-ext-lift-6);
+  color: var(--ln-ext-text-dim);
+  font-family: var(--ln-ext-font) !important;
   font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -267,7 +267,7 @@
 /* Sub-entries (the tournaments, studies and teams behind a line). */
 .user-show .activity .sub {
   margin: 6px 0 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px !important;
 }
 
@@ -281,7 +281,7 @@
 
 .user-show .activity .sub .is-gold,
 .user-show .activity .sub .is-gold a {
-  color: var(--lr-ext-orange-dark) !important;
+  color: var(--ln-ext-orange-dark) !important;
 }
 
 .user-show .activity .sub [data-icon]::before {
@@ -294,7 +294,7 @@
   gap: 10px;
   margin-inline-start: auto;
   padding-inline-start: 12px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px !important;
 }
 
@@ -311,8 +311,8 @@
   min-width: 22px;
   padding: 2px 6px !important;
   border-radius: 5px !important;
-  background: color-mix(in srgb, var(--lr-ext-score) 18%, transparent);
-  color: var(--lr-ext-score);
+  background: color-mix(in srgb, var(--ln-ext-score) 18%, transparent);
+  color: var(--ln-ext-score);
   font-size: 12px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -321,15 +321,15 @@
 
 /* Tinted, not filled: a full green pill glared on the card. */
 .user-show .activity win strong {
-  --lr-ext-score: var(--lr-ext-good);
+  --ln-ext-score: var(--ln-ext-good);
 }
 
 .user-show .activity draw strong {
-  --lr-ext-score: var(--lr-ext-neutral-12);
+  --ln-ext-score: var(--ln-ext-neutral-12);
 }
 
 .user-show .activity loss strong {
-  --lr-ext-score: var(--lr-ext-red);
+  --ln-ext-score: var(--ln-ext-red);
 }
 
 /* Phones: the score goes under the text. */

@@ -66,7 +66,7 @@ describe('the tooltip', () => {
 describe('markup', () => {
   it('escapes names', () => {
     expect(chipLabel('<b>').value).toBe(
-      '<span class="lr-ext-rchart__swatch"></span><span class="lr-ext-rchart__name">&lt;b&gt;</span>',
+      '<span class="ln-ext-rchart__swatch"></span><span class="ln-ext-rchart__name">&lt;b&gt;</span>',
     );
     expect(tipRow({ color: '#fff', name: 'A & B', value: 3 }).value).toContain(
       '<span>A &amp; B</span>',
@@ -75,7 +75,7 @@ describe('markup', () => {
 
   it('puts the grid label 10px left of the line', () => {
     expect(gridLine({ y: 5, left: 46, right: 626, label: 1500 }).value).toBe(
-      '<line class="lr-ext-rchart__grid" x1="46" x2="626" y1="5" y2="5"/><text class="lr-ext-rchart__ylabel" x="36" y="5">1500</text>',
+      '<line class="ln-ext-rchart__grid" x1="46" x2="626" y1="5" y2="5"/><text class="ln-ext-rchart__ylabel" x="36" y="5">1500</text>',
     );
   });
 });

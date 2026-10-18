@@ -10,15 +10,15 @@ import { message } from '#content/platform/runtime.ts';
 // draws and plays it (page/looks/preview.ts), as Lichess's sounds and the
 // backlit light live there.
 
-const CARD = html`<div class="lr-ext-looks__head">
-    <span class="lr-ext-setting__icon" aria-hidden="true"></span>
+const CARD = html`<div class="ln-ext-looks__head">
+    <span class="ln-ext-setting__icon" aria-hidden="true"></span>
     <div>
-      <h2 class="lr-ext-setting__title">${message('looksPreview')}</h2>
-      <p class="lr-ext-setting__body">${message('looksPreviewBody')}</p>
+      <h2 class="ln-ext-setting__title">${message('looksPreview')}</h2>
+      <p class="ln-ext-setting__body">${message('looksPreviewBody')}</p>
     </div>
   </div>
-  <div class="lr-ext-looks-preview__board is2d" aria-hidden="true"></div>
-  <button type="button" class="lr-ext-looks-preview__play">
+  <div class="ln-ext-looks-preview__board is2d" aria-hidden="true"></div>
+  <button type="button" class="ln-ext-looks-preview__play">
     ${hugeicon(PlayIcon)}<span>${message('looksPreviewPlay')}</span>
   </button>`;
 
@@ -31,9 +31,9 @@ export interface LooksPreview {
 }
 
 export function buildLooksPreview(): LooksPreview {
-  const card = createElement('section', { className: 'lr-ext-looks-preview' });
+  const card = createElement('section', { className: 'ln-ext-looks-preview' });
   setHtml(card, CARD);
-  queryOne(card, '.lr-ext-looks-preview__play', HTMLElement)?.addEventListener('click', () => {
+  queryOne(card, '.ln-ext-looks-preview__play', HTMLElement)?.addEventListener('click', () => {
     postLooksPreview('play');
   });
   // The page script may start after the page shows: it says so, and draws the board then.

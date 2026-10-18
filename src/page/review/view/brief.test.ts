@@ -21,9 +21,9 @@ describe('the coach’s brief', () => {
     panel.innerHTML = briefMarkup(session, review).value;
     document.body.append(panel);
     watchClicks(session);
-    const button = queryOne(panel, '.lr-ext-brief__turn', HTMLButtonElement);
-    expect(button?.dataset.lrExt).toBe('moment');
-    expect(button?.dataset.lrExtPly).toBe(String(turning.ply));
+    const button = queryOne(panel, '.ln-ext-brief__turn', HTMLButtonElement);
+    expect(button?.dataset.lnExt).toBe('moment');
+    expect(button?.dataset.lnExtPly).toBe(String(turning.ply));
     button?.click();
     expect(facade.node.ply).toBe(turning.ply);
   });
@@ -33,7 +33,7 @@ describe('the coach’s brief', () => {
     const { review } = session.view;
     if (!review) throw new Error('no review');
     document.body.innerHTML = briefMarkup(session, review).value;
-    expect(document.querySelector('.lr-ext-brief__chip')).toBeNull();
-    expect(document.querySelector('[data-lr-ext="next"]')).toBeNull();
+    expect(document.querySelector('.ln-ext-brief__chip')).toBeNull();
+    expect(document.querySelector('[data-ln-ext="next"]')).toBeNull();
   });
 });

@@ -6,8 +6,8 @@ import { loadMascots } from '#content/coach/load.ts';
 // still shows only if the mascots' bundle won't load or there's no WebGL
 // (styles/home/hero.css): before, it would flash and vanish as it came in.
 
-const LIVE_CLASS = 'lr-ext-hero__coach--live';
-const STILL_CLASS = 'lr-ext-hero__coach--still';
+const LIVE_CLASS = 'ln-ext-hero__coach--live';
+const STILL_CLASS = 'ln-ext-hero__coach--still';
 
 export async function mountHeroCoach(host: HTMLElement): Promise<void> {
   const mountMascot = await loadMascots();

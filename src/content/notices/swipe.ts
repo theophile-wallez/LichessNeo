@@ -22,23 +22,23 @@ export function makeSwipeable(toast: HTMLElement, onThrown: () => void): void {
       const dy = event.clientY - down.clientY;
       axis ??= lockAxis(dx, dy);
       if (!axis) return;
-      setData(toast, 'lrExtSwiping', '');
+      setData(toast, 'lnExtSwiping', '');
       offset = swipeOffset(axis, axis === 'x' ? dx : dy);
-      setStyleProperty(toast, `--lr-ext-swipe-${axis}`, `${offset}px`);
+      setStyleProperty(toast, `--ln-ext-swipe-${axis}`, `${offset}px`);
     };
     const end = (event: PointerEvent): void => {
       toast.removeEventListener('pointermove', move);
       toast.removeEventListener('pointerup', end);
       toast.removeEventListener('pointercancel', end);
-      setData(toast, 'lrExtSwiping', null);
+      setData(toast, 'lnExtSwiping', null);
       if (!axis) return;
       if (event.type === 'pointerup' && isThrown(axis, offset, event.timeStamp - down.timeStamp)) {
         // On out of the window, the way it went: its own size further.
         const out = offset < 0 ? '-100%' : '100%';
-        setStyleProperty(toast, `--lr-ext-swipe-${axis}`, `calc(${offset}px + ${out})`);
+        setStyleProperty(toast, `--ln-ext-swipe-${axis}`, `calc(${offset}px + ${out})`);
         onThrown();
       } else {
-        setStyleProperty(toast, `--lr-ext-swipe-${axis}`, null);
+        setStyleProperty(toast, `--ln-ext-swipe-${axis}`, null);
       }
     };
     toast.addEventListener('pointermove', move);

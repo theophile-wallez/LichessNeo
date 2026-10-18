@@ -170,7 +170,7 @@ export function mountMascot(host: HTMLElement, options: MascotOptions = {}): Mas
   try {
     stage = new Stage(options.framing ?? 'bust');
   } catch (error) {
-    console.warn('[LichessReimagined] no WebGL for the coach', error);
+    console.warn('[LichessNeo] no WebGL for the coach', error);
     return null;
   }
   return new LiveMascot(host, stage, options);

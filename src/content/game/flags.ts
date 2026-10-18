@@ -13,7 +13,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // The names' links, so that the flag can come between the name and its flair.
 const BARS = [
   'main.round .ruser > a.user-link',
-  'main.analyse > .lr-ext-player > a.user-link',
+  'main.analyse > .ln-ext-player > a.user-link',
   'main.round .game__meta__players a.user-link',
 ].join(', ');
 
@@ -84,8 +84,8 @@ export function createFlagsSync(): () => void {
       const name = names[i];
       const flag = (name === undefined ? undefined : flags.get(name)) ?? '';
       const url = flagImageUrl(flag);
-      setDataText(bar, 'lrExtFlag', url === undefined ? '' : flag);
-      setStyleProperty(bar, '--lr-ext-flag', url === undefined ? null : `url("${url}")`);
+      setDataText(bar, 'lnExtFlag', url === undefined ? '' : flag);
+      setStyleProperty(bar, '--ln-ext-flag', url === undefined ? null : `url("${url}")`);
     }
   };
 }

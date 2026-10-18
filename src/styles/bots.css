@@ -27,7 +27,7 @@
   align-items: center;
   gap: 12px;
   margin: 0 !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 28px !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
@@ -35,13 +35,13 @@
 
 /* Each category's Hugeicon on a tile tinted with its color: a robot, a crown for the featured. */
 .bots__categ > .box__top > h1 {
-  --lr-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
-  --lr-ext-bots-color: var(--lr-ext-purple);
+  --ln-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
+  --ln-ext-bots-color: var(--ln-ext-purple);
 }
 
 .bots__categ:has(.bots__featured) > .box__top > h1 {
-  --lr-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
-  --lr-ext-bots-color: var(--lr-ext-orange);
+  --ln-ext-bots-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
+  --ln-ext-bots-color: var(--ln-ext-orange);
 }
 
 .bots__categ > .box__top > h1::before {
@@ -51,9 +51,9 @@
   height: 40px;
   border-radius: 11px;
   /* The glyph at full strength over the tile at a quarter, as menu-titles.css draws them. */
-  background: var(--lr-ext-bots-color);
+  background: var(--ln-ext-bots-color);
   mask:
-    var(--lr-ext-bots-icon) center / 24px no-repeat,
+    var(--ln-ext-bots-icon) center / 24px no-repeat,
     linear-gradient(#0000003d, #0000003d);
 }
 
@@ -62,8 +62,8 @@
   flex: none;
   padding: 7px 14px;
   border-radius: 999px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text) !important;
   font-size: 13px;
   font-weight: 700;
   transition:
@@ -72,13 +72,13 @@
 }
 
 .bots__categ > .box__top > a:hover {
-  background: var(--lr-ext-bg-raised-hover);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised-hover);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .bots__categ > p {
   margin: 0 0 18px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 15px;
 }
 
@@ -92,47 +92,47 @@
 
 /* Five colors and six pieces: a color and piece pair repeats only every 30 cards. */
 .bots__list__entry {
-  --lr-ext-bot: var(--lr-ext-accent);
-  --lr-ext-bot-2: var(--lr-ext-accent-dim);
-  --lr-ext-bot-piece: var(---white-knight);
+  --ln-ext-bot: var(--ln-ext-accent);
+  --ln-ext-bot-2: var(--ln-ext-accent-dim);
+  --ln-ext-bot-piece: var(---white-knight);
 }
 
 .bots__list__entry:nth-child(5n + 2) {
-  --lr-ext-bot: #45a3f5;
-  --lr-ext-bot-2: var(--lr-ext-cyan-darker);
+  --ln-ext-bot: #45a3f5;
+  --ln-ext-bot-2: var(--ln-ext-cyan-darker);
 }
 .bots__list__entry:nth-child(5n + 3) {
-  --lr-ext-bot: #a98bf0;
-  --lr-ext-bot-2: var(--lr-ext-purple-dark);
+  --ln-ext-bot: #a98bf0;
+  --ln-ext-bot-2: var(--ln-ext-purple-dark);
 }
 .bots__list__entry:nth-child(5n + 4) {
-  --lr-ext-bot: #f5a93b;
-  --lr-ext-bot-2: var(--lr-ext-orange-darker);
+  --ln-ext-bot: #f5a93b;
+  --ln-ext-bot-2: var(--ln-ext-orange-darker);
 }
 .bots__list__entry:nth-child(5n + 5) {
-  --lr-ext-bot: var(--lr-ext-red);
-  --lr-ext-bot-2: var(--lr-ext-red-darker);
+  --ln-ext-bot: var(--ln-ext-red);
+  --ln-ext-bot-2: var(--ln-ext-red-darker);
 }
 
 .bots__list__entry:nth-child(6n + 2) {
-  --lr-ext-bot-piece: var(---white-bishop);
+  --ln-ext-bot-piece: var(---white-bishop);
 }
 .bots__list__entry:nth-child(6n + 3) {
-  --lr-ext-bot-piece: var(---white-rook);
+  --ln-ext-bot-piece: var(---white-rook);
 }
 .bots__list__entry:nth-child(6n + 4) {
-  --lr-ext-bot-piece: var(---white-queen);
+  --ln-ext-bot-piece: var(---white-queen);
 }
 .bots__list__entry:nth-child(6n + 5) {
-  --lr-ext-bot-piece: var(---white-king);
+  --ln-ext-bot-piece: var(---white-king);
 }
 .bots__list__entry:nth-child(6n + 6) {
-  --lr-ext-bot-piece: var(---white-pawn);
+  --ln-ext-bot-piece: var(---white-pawn);
 }
 
 .bots__featured .bots__list__entry {
-  --lr-ext-bot: var(--lr-ext-orange-dark);
-  --lr-ext-bot-2: var(--lr-ext-orange-darker);
+  --ln-ext-bot: var(--ln-ext-orange-dark);
+  --ln-ext-bot-2: var(--ln-ext-orange-darker);
 }
 
 /* ---- Card --- */
@@ -145,26 +145,26 @@
     'play play' auto / 52px minmax(0, 1fr);
   gap: 12px 14px !important;
   padding: 16px;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 12px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   overflow: visible !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     border-color 0.15s,
     box-shadow 0.15s !important;
-  animation: lr-ext-bot-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation: ln-ext-bot-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   /* Stagger only the first cards; the hundreds below come in at once. */
   animation-delay: calc(min(sibling-index(), 12) * 35ms);
 }
 
 .bots__list__entry:hover {
-  border-color: color-mix(in srgb, var(--lr-ext-bot) 55%, transparent) !important;
-  box-shadow: 0 6px 18px var(--lr-ext-shade-35);
+  border-color: color-mix(in srgb, var(--ln-ext-bot) 55%, transparent) !important;
+  box-shadow: 0 6px 18px var(--ln-ext-shade-35);
   transform: translateY(-3px);
 }
 
-@keyframes lr-ext-bot-in {
+@keyframes ln-ext-bot-in {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -179,12 +179,12 @@
   height: 52px;
   border-radius: 12px;
   background:
-    var(--lr-ext-bot-piece) center / 80% no-repeat,
-    linear-gradient(145deg, var(--lr-ext-bot), var(--lr-ext-bot-2));
+    var(--ln-ext-bot-piece) center / 80% no-repeat,
+    linear-gradient(145deg, var(--ln-ext-bot), var(--ln-ext-bot-2));
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
-    0 4px 10px var(--lr-ext-shade-25);
+    0 4px 10px var(--ln-ext-shade-25);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
@@ -202,9 +202,9 @@
   width: 16px;
   height: 16px;
   margin: 0 -4px -4px 0;
-  border: 3px solid var(--lr-ext-bg-panel);
+  border: 3px solid var(--ln-ext-bg-panel);
   border-radius: 50%;
-  background: var(--lr-ext-good);
+  background: var(--ln-ext-good);
 }
 
 .bots__list__entry__head {
@@ -218,7 +218,7 @@
 .bots__list__entry__head .user-link {
   display: block;
   overflow: hidden;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 800;
   line-height: 1.2;
@@ -227,12 +227,12 @@
 }
 
 .bots__list__entry__head .user-link:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 .bots__list__entry__head .user-link .line {
   margin-inline-end: 2px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
 .bots__list__entry__head .user-link .uflair {
@@ -258,8 +258,8 @@
   gap: 5px;
   padding: 2px 9px 2px 7px;
   border-radius: 999px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-strong);
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -274,7 +274,7 @@
   grid-area: bio;
   -webkit-line-clamp: 3 !important;
   padding: 0 !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px !important;
   line-height: 1.45;
   overflow-wrap: anywhere;
@@ -286,22 +286,22 @@
   height: 40px;
   padding: 0 !important;
   border-radius: 8px;
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white) !important;
   font-size: 15px !important;
   font-weight: 800;
   text-shadow: 0 1px 1px #0000004d;
 }
 
 .bots__list__entry__play:hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary-hover) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 .bots__list__entry__play::before {
   margin: 0 !important;
-  color: var(--lr-ext-white);
+  color: var(--ln-ext-white);
   font-size: 17px;
 }
 
@@ -328,11 +328,11 @@
     top: 0;
     /* Side shadows hide the cards' shadows passing under; margins would widen the page. */
     padding-bottom: 14px !important;
-    background: var(--lr-ext-bg-page);
+    background: var(--ln-ext-bg-page);
     box-shadow:
-      var(--lr-ext-pin-cover-wide),
-      -12px 0 var(--lr-ext-bg-page),
-      12px 0 var(--lr-ext-bg-page);
+      var(--ln-ext-pin-cover-wide),
+      -12px 0 var(--ln-ext-bg-page),
+      12px 0 var(--ln-ext-bg-page);
   }
 
   .bots__categ > .box__top::after {
@@ -341,7 +341,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

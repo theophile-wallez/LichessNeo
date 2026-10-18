@@ -2,36 +2,36 @@
 
 /* The settings' card with a menu rather than a switch (content/settings/rating-row.ts): a grey
  * button; its chevron and list are every select's (dropdowns/native-select.css). */
-.lr-ext-setting__select {
+.ln-ext-setting__select {
   flex: none;
   min-width: 150px;
   height: 36px;
   padding: 0 12px !important;
   border: none !important;
   border-radius: 9px !important;
-  background-color: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text-strong) !important;
-  font: 600 13.5px var(--lr-ext-font);
+  background-color: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong) !important;
+  font: 600 13.5px var(--ln-ext-font);
   cursor: pointer;
 }
 
-.lr-ext-setting__select:hover {
-  background-color: var(--lr-ext-btn-grey-hover) !important;
+.ln-ext-setting__select:hover {
+  background-color: var(--ln-ext-btn-grey-hover) !important;
 }
 
-.lr-ext-setting__select:focus-visible {
-  outline: 2px solid var(--lr-ext-accent);
+.ln-ext-setting__select:focus-visible {
+  outline: 2px solid var(--ln-ext-accent);
   outline-offset: 2px;
 }
 
 /* On a phone the menu takes a row of its own, under the text. */
 @media (max-width: 640px) {
-  .lr-ext-setting {
+  .ln-ext-setting {
     flex-wrap: wrap;
   }
 
-  .lr-ext-setting__select {
+  .ln-ext-setting__select {
     flex: 1 0 100%;
   }
 }

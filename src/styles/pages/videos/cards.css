@@ -33,7 +33,7 @@ main.page-menu.video .list .card .img {
   border-radius: 12px;
   background-position: center !important;
   background-size: 133% auto !important;
-  box-shadow: 0 0 0 1px var(--lr-ext-card-border);
+  box-shadow: 0 0 0 1px var(--ln-ext-card-border);
   transition:
     background-size 0.35s ease,
     box-shadow 0.2s !important;
@@ -42,8 +42,8 @@ main.page-menu.video .list .card .img {
 main.page-menu.video .list .card:hover .img {
   background-size: 140% auto !important;
   box-shadow:
-    0 0 0 1px var(--lr-ext-card-border-hover),
-    var(--lr-ext-card-shadow-hover);
+    0 0 0 1px var(--ln-ext-card-border-hover),
+    var(--ln-ext-card-shadow-hover);
 }
 
 /* A play button on hover: its disc, then its Hugeicon. Over a picture, the same on either
@@ -72,7 +72,7 @@ main.page-menu.video .list .card .img::before {
 main.page-menu.video .list .card .img::after {
   width: 24px;
   height: 24px;
-  background: var(--lr-ext-white);
+  background: var(--ln-ext-white);
   mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/play.svg') center / contain
     no-repeat;
 }
@@ -111,7 +111,7 @@ main.page-menu.video .list .card .full-title {
   display: -webkit-box;
   grid-area: title;
   overflow: hidden;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14.5px !important;
   font-weight: 700 !important;
   line-height: 1.35 !important;
@@ -122,7 +122,7 @@ main.page-menu.video .list .card .full-title {
 main.page-menu.video .list .card .author {
   grid-area: author;
   overflow: hidden;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 12.5px !important;
   font-weight: 600;
   text-overflow: ellipsis;
@@ -138,8 +138,8 @@ main.page-menu.video .list .card .target__box {
   padding: 2px 8px !important;
   border: none !important;
   border-radius: 99px !important;
-  background: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent) !important;
-  color: color-mix(in srgb, var(--lr-ext-accent) 70%, var(--lr-ext-text-strong)) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent) !important;
+  color: color-mix(in srgb, var(--ln-ext-accent) 70%, var(--ln-ext-text-strong)) !important;
   font-size: 11px !important;
   font-weight: 700 !important;
   text-transform: capitalize;
@@ -158,9 +158,9 @@ main.page-menu.video .list > .not_much {
   /* The button's room on the right, where it stays however many rows the tags take. */
   padding: 16px 170px 16px 18px !important;
   border-radius: 14px;
-  background: var(--lr-ext-card-bg);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
-  color: var(--lr-ext-text-dim) !important;
+  background: var(--ln-ext-card-bg);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  color: var(--ln-ext-text-dim) !important;
   font-size: 14px !important;
   font-weight: 600;
 }
@@ -177,9 +177,9 @@ main.page-menu.video .list > .not_much .tag {
   margin: 0;
   padding: 0 11px 0 9px;
   border-radius: 999px;
-  background: var(--lr-ext-bg-raised);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  color: var(--ln-ext-text) !important;
   font-size: 13px;
   font-weight: 650;
   line-height: 1;
@@ -188,13 +188,13 @@ main.page-menu.video .list > .not_much .tag {
 }
 
 main.page-menu.video .list > .not_much .tag:hover {
-  background: var(--lr-ext-bg-raised-hover);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised-hover);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.page-menu.video .list > .not_much .tag::before {
   font-size: 14px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
 main.page-menu.video .list > .not_much .button {
@@ -204,14 +204,14 @@ main.page-menu.video .list > .not_much .button {
   translate: 0 -50%;
   height: 38px;
   padding: 0 18px !important;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 13.5px;
   line-height: 38px;
   text-shadow: none !important;
 }
 
 main.page-menu.video .list > .not_much .button:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
 }

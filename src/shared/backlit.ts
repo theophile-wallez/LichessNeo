@@ -5,7 +5,7 @@ import { z } from 'zod/mini';
 // under one tile, with the settings they share (content/packs/options.ts):
 // the light's, and the keys' shape, which their keys (content/packs/backlit-keys.ts)
 // and their light are drawn in. Lit in the page (page/backlit), which reads
-// those from `data-lr-ext-backlit` on <html>, set only while one of them is shown.
+// those from `data-ln-ext-backlit` on <html>, set only while one of them is shown.
 
 /** The family's name, which each of its boards' ids starts with (styles/board/backlit.css). */
 export const BACKLIT = 'backlit';

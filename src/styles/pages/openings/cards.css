@@ -25,9 +25,9 @@ main.opening :is(.opening__next, .opening__search__result) {
   margin: 0 !important;
   padding: 10px 10px 12px !important;
   overflow: visible !important;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 18px !important;
-  background: var(--lr-ext-card-bg) !important;
+  background: var(--ln-ext-card-bg) !important;
   box-shadow: none !important;
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -36,8 +36,8 @@ main.opening :is(.opening__next, .opening__search__result) {
 }
 
 main.opening :is(.opening__next, .opening__search__result):hover {
-  border-color: var(--lr-ext-card-border-hover) !important;
-  box-shadow: var(--lr-ext-card-shadow-hover) !important;
+  border-color: var(--ln-ext-card-border-hover) !important;
+  box-shadow: var(--ln-ext-card-shadow-hover) !important;
   transform: translateY(-3px);
 }
 
@@ -68,7 +68,7 @@ main.opening .opening__next__name {
   flex: 1 1 auto;
   min-width: 0;
   overflow: hidden;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 15px !important;
   font-weight: 800 !important;
   text-overflow: ellipsis;
@@ -77,15 +77,15 @@ main.opening .opening__next__name {
 
 /* A move that keeps its opening's name has none on Lichess: content/pages/openings.ts puts
  * the opening's there, dimmed. */
-main.opening .opening__next__name[data-lr-ext-name]::before {
-  content: attr(data-lr-ext-name);
-  color: var(--lr-ext-text-dim);
+main.opening .opening__next__name[data-ln-ext-name]::before {
+  content: attr(data-ln-ext-name);
+  color: var(--ln-ext-text-dim);
 }
 
 /* A search result: the family, its variation under it. */
 main.opening .opening__search__result__title {
   display: block !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 15px;
   font-weight: 800;
   line-height: 1.35;
@@ -94,7 +94,7 @@ main.opening .opening__search__result__title {
 main.opening .opening__search__result__title > .opening-name__variation {
   display: block;
   overflow: hidden;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 13px !important;
@@ -114,15 +114,15 @@ main.opening .opening__next__san {
   margin: 0 !important;
   padding: 4px 9px;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent);
-  color: var(--lr-ext-opening-san, var(--lr-ext-accent-hover)) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+  color: var(--ln-ext-opening-san, var(--ln-ext-accent-hover)) !important;
   font-size: 14px !important;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
 }
 
 html.light main.opening {
-  --lr-ext-opening-san: var(--lr-ext-accent);
+  --ln-ext-opening-san: var(--ln-ext-accent);
 }
 
 /* The popularity: a chip, its flame in ink on the orange. */
@@ -143,8 +143,8 @@ main.opening .opening__next__popularity > span {
   height: auto !important;
   padding: 5px 9px 5px 7px !important;
   border-radius: 999px;
-  background: var(--lr-ext-orange) !important;
-  color: var(--lr-ext-ink) !important;
+  background: var(--ln-ext-orange) !important;
+  color: var(--ln-ext-ink) !important;
   font-size: 12px !important;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
@@ -169,7 +169,7 @@ main.opening .opening__next__result {
 /* ---- The results bar --- */
 
 /* White's wins, the draws, Black's, across: Lichess stacks them up, as heights that
- * content/pages/openings.ts copies into --lr-ext-share. */
+ * content/pages/openings.ts copies into --ln-ext-share. */
 main.opening .result-bar {
   display: flex !important;
   flex-direction: row !important;
@@ -177,12 +177,12 @@ main.opening .result-bar {
   height: 20px !important;
   overflow: hidden;
   border-radius: 7px;
-  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-8);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-8);
 }
 
 main.opening .result-bar > span {
   display: flex !important;
-  flex: var(--lr-ext-share, 1) 1 0 !important;
+  flex: var(--ln-ext-share, 1) 1 0 !important;
   justify-content: center;
   align-items: center;
   min-width: 0;
@@ -197,19 +197,19 @@ main.opening .result-bar > span {
 
 main.opening .result-bar > .white {
   order: 1;
-  background: var(--lr-ext-white) !important;
-  color: var(--lr-ext-ink) !important;
+  background: var(--ln-ext-white) !important;
+  color: var(--ln-ext-ink) !important;
 }
 
 main.opening .result-bar > .draws {
   order: 2;
-  background: var(--lr-ext-neutral-10) !important;
+  background: var(--ln-ext-neutral-10) !important;
 }
 
 main.opening .result-bar > .black {
   order: 3;
-  background: var(--lr-ext-ink) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-ink) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 @media (max-width: 1259.98px) {

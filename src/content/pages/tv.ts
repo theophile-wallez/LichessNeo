@@ -26,7 +26,7 @@ function isReload(): boolean {
 export function markStillIntro(): void {
   if (!TV_PATH.test(location.pathname)) return;
   if (comesFromTv(document.referrer) || isReload())
-    document.documentElement.classList.toggle('lr-ext-tv-still', true);
+    document.documentElement.classList.toggle('ln-ext-tv-still', true);
 }
 
 /** A channel's tooltip, shown where only its tile is (below 1260px). */
@@ -41,16 +41,16 @@ export function channelTip(name: string | undefined, champion: string | undefine
 export function syncChannels(): void {
   const list = queryOne(
     document,
-    'main.tv-single .subnav__inner:not([data-lr-ext-tv])',
+    'main.tv-single .subnav__inner:not([data-ln-ext-tv])',
     HTMLElement,
   );
   if (!list || list.clientHeight === 0) return;
-  setData(list, 'lrExtTv', '');
+  setData(list, 'lnExtTv', '');
   for (const channel of queryAll(list, 'a.tv-channel', HTMLElement)) {
     const name = channel.querySelector('strong')?.textContent.trim();
     const champion = channel.querySelector('.champion')?.textContent.replace(/\s+/g, ' ').trim();
     const tip = channelTip(name, champion);
-    if (tip !== null) setData(channel, 'lrExtTip', tip);
+    if (tip !== null) setData(channel, 'lnExtTip', tip);
   }
   const active = queryOne(list, 'a.tv-channel.active', HTMLElement);
   if (active) list.scrollTop = active.offsetTop - (list.clientHeight - active.offsetHeight) / 2;

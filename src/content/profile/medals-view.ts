@@ -47,22 +47,22 @@ export function tipText({ id, metal, next }: Medal): string {
 }
 
 const medalMarkup = (medal: Medal, fresh: boolean): SafeHtml =>
-  html`<div class="lr-ext-medal" data-lr-ext-medal="${medal.id}"
-      data-lr-ext-metal="${medal.metal ?? 'none'}" ${fresh && html`data-lr-ext-new`}
-      data-lr-ext-tip="${tipText(medal)}" style="--lr-ext-medal-p: ${medal.progress.toFixed(3)}">
-    <span class="lr-ext-medal__coin" aria-hidden="true"><span class="lr-ext-medal__icon"></span></span>
-    <b class="lr-ext-medal__name">${message(NAMES[medal.id])}</b>
-    <span class="lr-ext-medal__count">${countText(medal)}</span>
-    ${fresh && html`<span class="lr-ext-medal__new">${message('medalNew')}</span>`}
+  html`<div class="ln-ext-medal" data-ln-ext-medal="${medal.id}"
+      data-ln-ext-metal="${medal.metal ?? 'none'}" ${fresh && html`data-ln-ext-new`}
+      data-ln-ext-tip="${tipText(medal)}" style="--ln-ext-medal-p: ${medal.progress.toFixed(3)}">
+    <span class="ln-ext-medal__coin" aria-hidden="true"><span class="ln-ext-medal__icon"></span></span>
+    <b class="ln-ext-medal__name">${message(NAMES[medal.id])}</b>
+    <span class="ln-ext-medal__count">${countText(medal)}</span>
+    ${fresh && html`<span class="ln-ext-medal__new">${message('medalNew')}</span>`}
   </div>`;
 
 /** The section's markup; `fresh` holds the medals won since the user last looked. */
 export function medalsMarkup(list: readonly Medal[], fresh: ReadonlySet<MedalId>): SafeHtml {
   const { won, of } = stepsWon(list);
-  return html`<div class="lr-ext-medals__head">
-      <span class="lr-ext-medals__tile" aria-hidden="true"></span>
+  return html`<div class="ln-ext-medals__head">
+      <span class="ln-ext-medals__tile" aria-hidden="true"></span>
       <h2>${message('medalsTitle')}</h2>
-      <span class="lr-ext-medals__won">${won} / ${of}</span>
+      <span class="ln-ext-medals__won">${won} / ${of}</span>
     </div>
-    <div class="lr-ext-medals__row">${list.map(medal => medalMarkup(medal, fresh.has(medal.id)))}</div>`;
+    <div class="ln-ext-medals__row">${list.map(medal => medalMarkup(medal, fresh.has(medal.id)))}</div>`;
 }

@@ -33,7 +33,7 @@ describe('servePackDownloads', () => {
     fakeGithub({ repo: 'ann/packs', files });
     const respond = vi.fn<(answer: unknown) => void>();
     const message = {
-      type: 'lr-ext:download-pack',
+      type: 'ln-ext:download-pack',
       link: 'https://github.com/ann/packs',
       token: '',
     };
@@ -46,7 +46,7 @@ describe('servePackDownloads', () => {
 
   it('leaves other messages to other listeners', () => {
     const respond = vi.fn<(answer: unknown) => void>();
-    expect(serve()({ type: 'lr-ext:dev-check' }, {}, respond)).toBeUndefined();
+    expect(serve()({ type: 'ln-ext:dev-check' }, {}, respond)).toBeUndefined();
     expect(respond).not.toHaveBeenCalled();
   });
 
@@ -56,7 +56,7 @@ describe('servePackDownloads', () => {
     vi.stubGlobal('fetch', () => answered.promise);
     const respond = vi.fn<(answer: unknown) => void>();
     const message = {
-      type: 'lr-ext:download-pack',
+      type: 'ln-ext:download-pack',
       link: 'https://github.com/ann/packs',
       token: '',
     };

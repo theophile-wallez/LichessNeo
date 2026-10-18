@@ -7,7 +7,7 @@
       "shapes": [],
       "marks": "",
       "layer": "",
-      "htmlClass": "lr-ext-shapes"
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "a right-clicked square",
@@ -28,7 +28,7 @@
       ],
       "marks": "<rect x=\"4\" y=\"4\" width=\"1\" height=\"1\" fill=\"rgba(235,97,80,0.8)\"></rect>",
       "layer": "",
-      "htmlClass": "lr-ext-shapes"
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "squares in every brush",
@@ -109,7 +109,7 @@
       ],
       "marks": "<rect x=\"0\" y=\"0\" width=\"1\" height=\"1\" fill=\"rgba(255,170,0,0.8)\"></rect><rect x=\"1\" y=\"7\" width=\"1\" height=\"1\" fill=\"rgba(72,193,249,0.8)\"></rect><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\" fill=\"rgba(159,207,63,0.8)\"></rect><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\" fill=\"rgba(235,97,80,0.8)\"></rect><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\" fill=\"rgba(255,255,255,0.5)\"></rect><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\" fill=\"rgba(170,110,210,0.8)\"></rect>",
       "layer": "",
-      "htmlClass": "lr-ext-shapes"
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "a straight arrow",
@@ -131,8 +131,8 @@
         }
       ],
       "marks": "",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
-      "htmlClass": "lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "a diagonal arrow and a sideways one",
@@ -168,8 +168,8 @@
         }
       ],
       "marks": "",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"0.825,7.330 6.337,1.818 6.443,1.924 6.500,1.500 6.076,1.557 6.182,1.663 0.670,7.175\" fill=\"rgba(248,85,63,0.8)\"></polygon><polygon points=\"1.850,0.610 5.160,0.610 5.160,0.760 5.500,0.500 5.160,0.240 5.160,0.390 1.850,0.390\" fill=\"rgba(200,200,200,0.8)\"></polygon></svg>",
-      "htmlClass": "lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"0.825,7.330 6.337,1.818 6.443,1.924 6.500,1.500 6.076,1.557 6.182,1.663 0.670,7.175\" fill=\"rgba(248,85,63,0.8)\"></polygon><polygon points=\"1.850,0.610 5.160,0.610 5.160,0.760 5.500,0.500 5.160,0.240 5.160,0.390 1.850,0.390\" fill=\"rgba(200,200,200,0.8)\"></polygon></svg>",
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "knight arrows",
@@ -233,8 +233,8 @@
         }
       ],
       "marks": "",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"6.610,7.150 6.610,5.390 5.840,5.390 5.840,5.240 5.500,5.500 5.840,5.760 5.840,5.610 6.390,5.610 6.390,7.150\" fill=\"rgba(255,170,0,0.8)\"></polygon><polygon points=\"1.850,7.610 3.610,7.610 3.610,6.840 3.760,6.840 3.500,6.500 3.240,6.840 3.390,6.840 3.390,7.390 1.850,7.390\" fill=\"rgba(72,193,249,0.8)\"></polygon><polygon points=\"5.390,1.850 5.390,3.610 6.160,3.610 6.160,3.760 6.500,3.500 6.160,3.240 6.160,3.390 5.610,3.390 5.610,1.850\" fill=\"rgba(238,32,128,0.8)\"></polygon><polygon points=\"3.150,4.390 1.610,4.390 1.610,3.840 1.760,3.840 1.500,3.500 1.240,3.840 1.390,3.840 1.390,4.610 3.150,4.610\" fill=\"rgba(170,110,210,0.8)\"></polygon></svg>",
-      "htmlClass": "lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"6.610,7.150 6.610,5.390 5.840,5.390 5.840,5.240 5.500,5.500 5.840,5.760 5.840,5.610 6.390,5.610 6.390,7.150\" fill=\"rgba(255,170,0,0.8)\"></polygon><polygon points=\"1.850,7.610 3.610,7.610 3.610,6.840 3.760,6.840 3.500,6.500 3.240,6.840 3.390,6.840 3.390,7.390 1.850,7.390\" fill=\"rgba(72,193,249,0.8)\"></polygon><polygon points=\"5.390,1.850 5.390,3.610 6.160,3.610 6.160,3.760 6.500,3.500 6.160,3.240 6.160,3.390 5.610,3.390 5.610,1.850\" fill=\"rgba(238,32,128,0.8)\"></polygon><polygon points=\"3.150,4.390 1.610,4.390 1.610,3.840 1.760,3.840 1.500,3.500 1.240,3.840 1.390,3.840 1.390,4.610 3.150,4.610\" fill=\"rgba(170,110,210,0.8)\"></polygon></svg>",
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "an arrow being drawn",
@@ -272,8 +272,8 @@
         }
       ],
       "marks": "",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"3.610,6.150 3.610,4.840 3.760,4.840 3.500,4.500 3.240,4.840 3.390,4.840 3.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
-      "htmlClass": "lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"3.610,6.150 3.610,4.840 3.760,4.840 3.500,4.500 3.240,4.840 3.390,4.840 3.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "pale engine arrows outside the review",
@@ -307,13 +307,13 @@
         }
       ],
       "marks": "<rect x=\"5\" y=\"5\" width=\"1\" height=\"1\" fill=\"rgba(235,97,80,0.5)\"></rect>",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(72,193,249,0.5)\"></polygon></svg>",
-      "htmlClass": "lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(72,193,249,0.5)\"></polygon></svg>",
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "pale engine arrows during the review",
       "orientation": "white",
-      "review": "lr-ext-review-moves",
+      "review": "ln-ext-review-moves",
       "shapes": [
         {
           "tag": "line",
@@ -357,13 +357,13 @@
         }
       ],
       "marks": "",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"3.610,6.150 3.610,4.840 3.760,4.840 3.500,4.500 3.240,4.840 3.390,4.840 3.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
-      "htmlClass": "lr-ext-review-moves lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"3.610,6.150 3.610,4.840 3.760,4.840 3.500,4.500 3.240,4.840 3.390,4.840 3.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
+      "htmlClass": "ln-ext-review-moves ln-ext-shapes"
     },
     {
       "name": "the review arrows",
       "orientation": "white",
-      "review": "lr-ext-review-summary",
+      "review": "ln-ext-review-summary",
       "shapes": [],
       "reviewArrows": [
         {
@@ -378,13 +378,13 @@
         }
       ],
       "marks": "",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(159,207,63,0.8)\"></polygon><polygon points=\"6.390,0.850 6.390,2.390 5.840,2.390 5.840,2.240 5.500,2.500 5.840,2.760 5.840,2.610 6.610,2.610 6.610,0.850\" fill=\"rgba(72,193,249,0.5)\"></polygon></svg>",
-      "htmlClass": "lr-ext-review-summary lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(159,207,63,0.8)\"></polygon><polygon points=\"6.390,0.850 6.390,2.390 5.840,2.390 5.840,2.240 5.500,2.500 5.840,2.760 5.840,2.610 6.610,2.610 6.610,0.850\" fill=\"rgba(72,193,249,0.5)\"></polygon></svg>",
+      "htmlClass": "ln-ext-review-summary ln-ext-shapes"
     },
     {
       "name": "the review arrows, board flipped",
       "orientation": "black",
-      "review": "lr-ext-review-moves",
+      "review": "ln-ext-review-moves",
       "shapes": [
         {
           "tag": "line",
@@ -414,8 +414,8 @@
         }
       ],
       "marks": "",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon><polygon points=\"6.390,0.850 6.390,2.390 5.840,2.390 5.840,2.240 5.500,2.500 5.840,2.760 5.840,2.610 6.610,2.610 6.610,0.850\" fill=\"rgba(159,207,63,0.8)\"></polygon><polygon points=\"0.610,6.150 0.610,4.840 0.760,4.840 0.500,4.500 0.240,4.840 0.390,4.840 0.390,6.150\" fill=\"rgba(72,193,249,0.5)\"></polygon></svg>",
-      "htmlClass": "lr-ext-review-moves lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon><polygon points=\"6.390,0.850 6.390,2.390 5.840,2.390 5.840,2.240 5.500,2.500 5.840,2.760 5.840,2.610 6.610,2.610 6.610,0.850\" fill=\"rgba(159,207,63,0.8)\"></polygon><polygon points=\"0.610,6.150 0.610,4.840 0.760,4.840 0.500,4.500 0.240,4.840 0.390,4.840 0.390,6.150\" fill=\"rgba(72,193,249,0.5)\"></polygon></svg>",
+      "htmlClass": "ln-ext-review-moves ln-ext-shapes"
     },
     {
       "name": "a missing viewBox",
@@ -450,8 +450,8 @@
         }
       ],
       "marks": "<rect x=\"4\" y=\"4\" width=\"1\" height=\"1\" fill=\"rgba(235,97,80,0.8)\"></rect>",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
-      "htmlClass": "lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "odd attributes",
@@ -476,8 +476,8 @@
         }
       ],
       "marks": "<rect x=\"4\" y=\"4\" width=\"1\" height=\"1\" fill=\"rgba(235,97,80,0.5)\"></rect>",
-      "layer": "<svg class=\"lr-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
-      "htmlClass": "lr-ext-shapes"
+      "layer": "<svg class=\"ln-ext-shapes__arrows\" viewBox=\"0 0 8 8\"><polygon points=\"4.610,6.150 4.610,4.840 4.760,4.840 4.500,4.500 4.240,4.840 4.390,4.840 4.390,6.150\" fill=\"rgba(255,170,0,0.8)\"></polygon></svg>",
+      "htmlClass": "ln-ext-shapes"
     },
     {
       "name": "checkmate, first moments",
@@ -492,8 +492,8 @@
         "children": []
       },
       "marks": "",
-      "layer": "<div class=\"lr-ext-mate__badge\" style=\"left:62.5%;top:0%\"><svg viewBox=\"0 0 24 24\"><g fill=\"#000\">\n    <path d=\"M3 8.5h1.5v9H3zM5.8 8.5h1.5v9H5.8zM1.5 10.6h7.3v1.5H1.5zM1.5 13.9h7.3v1.5H1.5z\"></path>\n    <path d=\"M15.1 2h1.8v5h-1.8zM13.5 3.3h5v1.7h-5z\"></path>\n    <path d=\"M9.6 12.6c0-2.5 2.6-3.6 4.6-2.3.8.5 1.4 1.3 1.8 2.1.4-.8 1-1.6 1.8-2.1 2-1.3 4.6-.2 4.6 2.3 0 2.6-2.2 4.8-2.9 5.5h-7c-.7-.7-2.9-2.9-2.9-5.5z\"></path>\n    <rect x=\"12.1\" y=\"18.8\" width=\"7.8\" height=\"2.4\" rx=\"0.8\"></rect></g></svg></div>",
-      "htmlClass": "lr-ext-shapes lr-ext-mate"
+      "layer": "<div class=\"ln-ext-mate__badge\" style=\"left:62.5%;top:0%\"><svg viewBox=\"0 0 24 24\"><g fill=\"#000\">\n    <path d=\"M3 8.5h1.5v9H3zM5.8 8.5h1.5v9H5.8zM1.5 10.6h7.3v1.5H1.5zM1.5 13.9h7.3v1.5H1.5z\"></path>\n    <path d=\"M15.1 2h1.8v5h-1.8zM13.5 3.3h5v1.7h-5z\"></path>\n    <path d=\"M9.6 12.6c0-2.5 2.6-3.6 4.6-2.3.8.5 1.4 1.3 1.8 2.1.4-.8 1-1.6 1.8-2.1 2-1.3 4.6-.2 4.6 2.3 0 2.6-2.2 4.8-2.9 5.5h-7c-.7-.7-2.9-2.9-2.9-5.5z\"></path>\n    <rect x=\"12.1\" y=\"18.8\" width=\"7.8\" height=\"2.4\" rx=\"0.8\"></rect></g></svg></div>",
+      "htmlClass": "ln-ext-shapes ln-ext-mate"
     },
     {
       "name": "checkmate, after the delay",
@@ -509,8 +509,8 @@
       },
       "laterMs": 3000,
       "marks": "",
-      "layer": "<div class=\"lr-ext-mate__square\" style=\"left:50%;top:0%\"><div class=\"lr-ext-mate__icon\"><svg viewBox=\"0 0 24 24\"><g fill=\"#000\">\n    <path d=\"M3 8.5h1.5v9H3zM5.8 8.5h1.5v9H5.8zM1.5 10.6h7.3v1.5H1.5zM1.5 13.9h7.3v1.5H1.5z\"></path>\n    <path d=\"M15.1 2h1.8v5h-1.8zM13.5 3.3h5v1.7h-5z\"></path>\n    <path d=\"M9.6 12.6c0-2.5 2.6-3.6 4.6-2.3.8.5 1.4 1.3 1.8 2.1.4-.8 1-1.6 1.8-2.1 2-1.3 4.6-.2 4.6 2.3 0 2.6-2.2 4.8-2.9 5.5h-7c-.7-.7-2.9-2.9-2.9-5.5z\"></path>\n    <rect x=\"12.1\" y=\"18.8\" width=\"7.8\" height=\"2.4\" rx=\"0.8\"></rect></g></svg></div></div>\n             <div class=\"lr-ext-mate__label\" style=\"left:56.25%;top:1.1%\">Checkmate</div>",
-      "htmlClass": "lr-ext-shapes lr-ext-mate"
+      "layer": "<div class=\"ln-ext-mate__square\" style=\"left:50%;top:0%\"><div class=\"ln-ext-mate__icon\"><svg viewBox=\"0 0 24 24\"><g fill=\"#000\">\n    <path d=\"M3 8.5h1.5v9H3zM5.8 8.5h1.5v9H5.8zM1.5 10.6h7.3v1.5H1.5zM1.5 13.9h7.3v1.5H1.5z\"></path>\n    <path d=\"M15.1 2h1.8v5h-1.8zM13.5 3.3h5v1.7h-5z\"></path>\n    <path d=\"M9.6 12.6c0-2.5 2.6-3.6 4.6-2.3.8.5 1.4 1.3 1.8 2.1.4-.8 1-1.6 1.8-2.1 2-1.3 4.6-.2 4.6 2.3 0 2.6-2.2 4.8-2.9 5.5h-7c-.7-.7-2.9-2.9-2.9-5.5z\"></path>\n    <rect x=\"12.1\" y=\"18.8\" width=\"7.8\" height=\"2.4\" rx=\"0.8\"></rect></g></svg></div></div>\n             <div class=\"ln-ext-mate__label\" style=\"left:56.25%;top:1.1%\">Checkmate</div>",
+      "htmlClass": "ln-ext-shapes ln-ext-mate"
     },
     {
       "name": "white checkmated, board flipped",
@@ -525,8 +525,8 @@
         "children": []
       },
       "marks": "",
-      "layer": "<div class=\"lr-ext-mate__badge\" style=\"left:50%;top:0%\"><svg viewBox=\"0 0 24 24\"><g fill=\"#000\">\n    <path d=\"M3 8.5h1.5v9H3zM5.8 8.5h1.5v9H5.8zM1.5 10.6h7.3v1.5H1.5zM1.5 13.9h7.3v1.5H1.5z\"></path>\n    <path d=\"M15.1 2h1.8v5h-1.8zM13.5 3.3h5v1.7h-5z\"></path>\n    <path d=\"M9.6 12.6c0-2.5 2.6-3.6 4.6-2.3.8.5 1.4 1.3 1.8 2.1.4-.8 1-1.6 1.8-2.1 2-1.3 4.6-.2 4.6 2.3 0 2.6-2.2 4.8-2.9 5.5h-7c-.7-.7-2.9-2.9-2.9-5.5z\"></path>\n    <rect x=\"12.1\" y=\"18.8\" width=\"7.8\" height=\"2.4\" rx=\"0.8\"></rect></g></svg></div>",
-      "htmlClass": "lr-ext-shapes lr-ext-mate"
+      "layer": "<div class=\"ln-ext-mate__badge\" style=\"left:50%;top:0%\"><svg viewBox=\"0 0 24 24\"><g fill=\"#000\">\n    <path d=\"M3 8.5h1.5v9H3zM5.8 8.5h1.5v9H5.8zM1.5 10.6h7.3v1.5H1.5zM1.5 13.9h7.3v1.5H1.5z\"></path>\n    <path d=\"M15.1 2h1.8v5h-1.8zM13.5 3.3h5v1.7h-5z\"></path>\n    <path d=\"M9.6 12.6c0-2.5 2.6-3.6 4.6-2.3.8.5 1.4 1.3 1.8 2.1.4-.8 1-1.6 1.8-2.1 2-1.3 4.6-.2 4.6 2.3 0 2.6-2.2 4.8-2.9 5.5h-7c-.7-.7-2.9-2.9-2.9-5.5z\"></path>\n    <rect x=\"12.1\" y=\"18.8\" width=\"7.8\" height=\"2.4\" rx=\"0.8\"></rect></g></svg></div>",
+      "htmlClass": "ln-ext-shapes ln-ext-mate"
     },
     {
       "name": "white checkmated, board flipped, after the delay",
@@ -555,8 +555,8 @@
       },
       "laterMs": 3000,
       "marks": "<rect x=\"4\" y=\"4\" width=\"1\" height=\"1\" fill=\"rgba(235,97,80,0.8)\"></rect>",
-      "layer": "<div class=\"lr-ext-mate__square\" style=\"left:37.5%;top:0%\"><div class=\"lr-ext-mate__icon\"><svg viewBox=\"0 0 24 24\"><g fill=\"#000\">\n    <path d=\"M3 8.5h1.5v9H3zM5.8 8.5h1.5v9H5.8zM1.5 10.6h7.3v1.5H1.5zM1.5 13.9h7.3v1.5H1.5z\"></path>\n    <path d=\"M15.1 2h1.8v5h-1.8zM13.5 3.3h5v1.7h-5z\"></path>\n    <path d=\"M9.6 12.6c0-2.5 2.6-3.6 4.6-2.3.8.5 1.4 1.3 1.8 2.1.4-.8 1-1.6 1.8-2.1 2-1.3 4.6-.2 4.6 2.3 0 2.6-2.2 4.8-2.9 5.5h-7c-.7-.7-2.9-2.9-2.9-5.5z\"></path>\n    <rect x=\"12.1\" y=\"18.8\" width=\"7.8\" height=\"2.4\" rx=\"0.8\"></rect></g></svg></div></div>\n             <div class=\"lr-ext-mate__label\" style=\"left:43.75%;top:1.1%\">Checkmate</div>",
-      "htmlClass": "lr-ext-shapes lr-ext-mate"
+      "layer": "<div class=\"ln-ext-mate__square\" style=\"left:37.5%;top:0%\"><div class=\"ln-ext-mate__icon\"><svg viewBox=\"0 0 24 24\"><g fill=\"#000\">\n    <path d=\"M3 8.5h1.5v9H3zM5.8 8.5h1.5v9H5.8zM1.5 10.6h7.3v1.5H1.5zM1.5 13.9h7.3v1.5H1.5z\"></path>\n    <path d=\"M15.1 2h1.8v5h-1.8zM13.5 3.3h5v1.7h-5z\"></path>\n    <path d=\"M9.6 12.6c0-2.5 2.6-3.6 4.6-2.3.8.5 1.4 1.3 1.8 2.1.4-.8 1-1.6 1.8-2.1 2-1.3 4.6-.2 4.6 2.3 0 2.6-2.2 4.8-2.9 5.5h-7c-.7-.7-2.9-2.9-2.9-5.5z\"></path>\n    <rect x=\"12.1\" y=\"18.8\" width=\"7.8\" height=\"2.4\" rx=\"0.8\"></rect></g></svg></div></div>\n             <div class=\"ln-ext-mate__label\" style=\"left:43.75%;top:1.1%\">Checkmate</div>",
+      "htmlClass": "ln-ext-shapes ln-ext-mate"
     },
     {
       "name": "a check that is not mate",
@@ -572,7 +572,7 @@
       },
       "marks": "",
       "layer": "",
-      "htmlClass": "lr-ext-shapes"
+      "htmlClass": "ln-ext-shapes"
     }
   ],
   "arrows": [

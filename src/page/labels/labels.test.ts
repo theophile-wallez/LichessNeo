@@ -12,11 +12,11 @@ afterEach(() => {
   vi.useRealTimers();
   setReadyState('complete');
   Reflect.deleteProperty(window, 'i18n');
-  delete dataset.lrExtFlipLabel;
-  delete dataset.lrExtToolsLabel;
-  delete dataset.lrExtPointsLabel;
-  delete dataset.lrExtVariantLabel;
-  delete dataset.lrExtTimeControlLabel;
+  delete dataset.lnExtFlipLabel;
+  delete dataset.lnExtToolsLabel;
+  delete dataset.lnExtPointsLabel;
+  delete dataset.lnExtVariantLabel;
+  delete dataset.lnExtTimeControlLabel;
   document.body.replaceChildren();
 });
 
@@ -26,25 +26,25 @@ describe('labels', () => {
       i18n: { site: { flipBoard: 'Tourner l’échiquier', tools: 'Outils' } },
     });
     labels.start();
-    expect(dataset.lrExtFlipLabel).toBe('Tourner l’échiquier');
-    expect(dataset.lrExtToolsLabel).toBe('Outils');
+    expect(dataset.lnExtFlipLabel).toBe('Tourner l’échiquier');
+    expect(dataset.lnExtToolsLabel).toBe('Outils');
   });
 
   it('leaves out a label Lichess doesn’t have', () => {
     Object.assign(window, { i18n: { site: { tools: 'Werkzeuge' } } });
     labels.start();
-    expect(dataset.lrExtToolsLabel).toBe('Werkzeuge');
-    expect(dataset.lrExtFlipLabel).toBeUndefined();
+    expect(dataset.lnExtToolsLabel).toBe('Werkzeuge');
+    expect(dataset.lnExtFlipLabel).toBeUndefined();
   });
 
   it('waits for the translations while the page parses', () => {
     setReadyState('loading');
     labels.start();
     vi.advanceTimersByTime(500);
-    expect(dataset.lrExtFlipLabel).toBeUndefined();
+    expect(dataset.lnExtFlipLabel).toBeUndefined();
     Object.assign(window, { i18n: { site: { flipBoard: 'Flip board' } } });
     vi.advanceTimersByTime(250);
-    expect(dataset.lrExtFlipLabel).toBe('Flip board');
+    expect(dataset.lnExtFlipLabel).toBe('Flip board');
   });
 
   it.each([
@@ -56,7 +56,7 @@ describe('labels', () => {
     vi.advanceTimersByTime(29_000);
     Object.assign(window, { i18n: { site: { tools: 'Tools' } } });
     vi.advanceTimersByTime(250);
-    expect(dataset.lrExtToolsLabel).toBe('Tools');
+    expect(dataset.lnExtToolsLabel).toBe('Tools');
   });
 
   it('keeps waiting on a tournament page, for the podium’s scores', () => {
@@ -65,7 +65,7 @@ describe('labels', () => {
     vi.advanceTimersByTime(1000);
     Object.assign(window, { i18n: { site: { points: 'Punkte' } } });
     vi.advanceTimersByTime(250);
-    expect(dataset.lrExtPointsLabel).toBe('Punkte');
+    expect(dataset.lnExtPointsLabel).toBe('Punkte');
   });
 
   it('keeps waiting on the home page, for the game setup’s captions', () => {
@@ -74,8 +74,8 @@ describe('labels', () => {
     vi.advanceTimersByTime(1000);
     Object.assign(window, { i18n: { site: { variant: 'Variante', timeControl: 'Cadence' } } });
     vi.advanceTimersByTime(250);
-    expect(dataset.lrExtVariantLabel).toBe('Variante');
-    expect(dataset.lrExtTimeControlLabel).toBe('Cadence');
+    expect(dataset.lnExtVariantLabel).toBe('Variante');
+    expect(dataset.lnExtTimeControlLabel).toBe('Cadence');
   });
 
   it('gives up after 30 seconds', () => {
@@ -84,13 +84,13 @@ describe('labels', () => {
     vi.advanceTimersByTime(30_000);
     Object.assign(window, { i18n: { site: { flipBoard: 'Flip board' } } });
     vi.advanceTimersByTime(1000);
-    expect(dataset.lrExtFlipLabel).toBeUndefined();
+    expect(dataset.lnExtFlipLabel).toBeUndefined();
   });
 
   it('gives up at once on a parsed page with no game', () => {
     labels.start();
     Object.assign(window, { i18n: { site: { flipBoard: 'Flip board' } } });
     vi.advanceTimersByTime(1000);
-    expect(dataset.lrExtFlipLabel).toBeUndefined();
+    expect(dataset.lnExtFlipLabel).toBeUndefined();
   });
 });

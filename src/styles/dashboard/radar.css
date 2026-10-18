@@ -1,93 +1,93 @@
 /* ---- Radar --- */
 
 /* Hidden only once ours is in: if the data moves, Lichess's chart beats an empty panel. */
-.puzzle-dashboard__global:has(.lr-ext-radar) > .puzzle-dashboard__radar {
+.puzzle-dashboard__global:has(.ln-ext-radar) > .puzzle-dashboard__radar {
   display: none !important;
 }
 
 /* Room for the labels: ~110px past the rim sideways, three wrapped lines above and below. */
-.lr-ext-radar {
+.ln-ext-radar {
   padding: 58px clamp(18px, 12%, 130px);
   border-radius: 12px;
   /* A vignette on the plot: the panel is much wider than the chart. */
   background: radial-gradient(
     circle at 50% 52%,
-    var(--lr-ext-neutral-4),
-    var(--lr-ext-bg-panel) 65%
+    var(--ln-ext-neutral-4),
+    var(--ln-ext-bg-panel) 65%
   );
-  box-shadow: inset 0 1px 0 var(--lr-ext-lift-6);
+  box-shadow: inset 0 1px 0 var(--ln-ext-lift-6);
 }
 
-.lr-ext-radar__plot {
+.ln-ext-radar__plot {
   position: relative;
   width: min(100%, 560px);
   margin-inline: auto;
   aspect-ratio: 1;
 }
 
-.lr-ext-radar__chart {
+.ln-ext-radar__chart {
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
 }
 
-.lr-ext-radar__rings polygon {
+.ln-ext-radar__rings polygon {
   fill: none;
-  stroke: var(--lr-ext-lift-7);
+  stroke: var(--ln-ext-lift-7);
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;
 }
 
-.lr-ext-radar__rings polygon:last-child {
-  stroke: var(--lr-ext-lift-15);
+.ln-ext-radar__rings polygon:last-child {
+  stroke: var(--ln-ext-lift-15);
 }
 
-.lr-ext-radar__spokes line {
-  stroke: var(--lr-ext-lift-7);
+.ln-ext-radar__spokes line {
+  stroke: var(--ln-ext-lift-7);
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;
 }
 
-.lr-ext-radar__area {
-  fill: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent);
-  stroke: var(--lr-ext-accent);
+.ln-ext-radar__area {
+  fill: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+  stroke: var(--ln-ext-accent);
   stroke-width: 2px;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--lr-ext-accent) 25%, transparent));
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--ln-ext-accent) 25%, transparent));
 }
 
-.lr-ext-radar__dots circle {
-  fill: var(--lr-ext-accent-hover);
-  stroke: var(--lr-ext-bg-panel);
+.ln-ext-radar__dots circle {
+  fill: var(--ln-ext-accent-hover);
+  stroke: var(--ln-ext-bg-panel);
   stroke-width: 2px;
   vector-effect: non-scaling-stroke;
 }
 
-/* Each label sits on its spoke (`--lr-ext-x` / `--lr-ext-y`), pushed out by half its own box to clear
+/* Each label sits on its spoke (`--ln-ext-x` / `--ln-ext-y`), pushed out by half its own box to clear
  * the rim. */
-.lr-ext-radar__label {
+.ln-ext-radar__label {
   position: absolute;
-  top: var(--lr-ext-y);
-  left: var(--lr-ext-x);
+  top: var(--ln-ext-y);
+  left: var(--ln-ext-x);
   width: max-content;
   max-width: 13ch;
-  translate: calc(-50% + var(--lr-ext-ox) * (50% + 9px)) calc(-50% + var(--lr-ext-oy) * (50% + 9px));
+  translate: calc(-50% + var(--ln-ext-ox) * (50% + 9px)) calc(-50% + var(--ln-ext-oy) * (50% + 9px));
   text-align: center;
 }
 
-.lr-ext-radar__name {
+.ln-ext-radar__name {
   display: block;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 13px;
   font-weight: 700;
   line-height: 1.25;
 }
 
-.lr-ext-radar__value {
+.ln-ext-radar__value {
   display: block;
-  color: var(--lr-ext-accent-hover);
+  color: var(--ln-ext-accent-hover);
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -95,34 +95,34 @@
 
 /* Narrower labels, still ~72px beside the rim. */
 @media (max-width: 1100px) {
-  .lr-ext-radar {
+  .ln-ext-radar {
     padding-inline: 72px;
   }
 
-  .lr-ext-radar__label {
+  .ln-ext-radar__label {
     max-width: 11ch;
   }
 
-  .lr-ext-radar__name {
+  .ln-ext-radar__name {
     font-size: 12px;
   }
 }
 
 /* Phones: side labels reach ~85px past the rim and ran off the screen. */
 @media (max-width: 649.98px) {
-  .lr-ext-radar {
+  .ln-ext-radar {
     padding: 52px 64px;
   }
 
-  .lr-ext-radar__label {
+  .ln-ext-radar__label {
     max-width: 9ch;
   }
 
-  .lr-ext-radar__name {
+  .ln-ext-radar__name {
     font-size: 11px;
   }
 
-  .lr-ext-radar__value {
+  .ln-ext-radar__value {
     font-size: 11px;
   }
 }

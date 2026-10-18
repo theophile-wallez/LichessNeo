@@ -46,7 +46,7 @@
       },
       {
         "call": "play",
-        "args": ["lr-ext-notify", 0.2]
+        "args": ["ln-ext-notify", 0.2]
       },
       {
         "call": "play",
@@ -86,35 +86,35 @@
       }
     ],
     "paths": [
-      ["lr-ext-move-self", "blob:move-self"],
-      ["lr-ext-move-opponent", "blob:move-opponent"],
-      ["lr-ext-move-check", "blob:move-check"],
-      ["lr-ext-capture", "blob:capture"],
-      ["lr-ext-castle", "blob:castle"],
-      ["lr-ext-promote", "blob:promote"],
-      ["lr-ext-premove", "blob:premove"],
-      ["lr-ext-illegal", "blob:illegal"],
-      ["lr-ext-notify", "blob:notify"],
-      ["lr-ext-tenseconds", "blob:tenseconds"],
-      ["lr-ext-game-start", "blob:game-start"],
-      ["lr-ext-game-end", "blob:game-end"]
+      ["ln-ext-move-self", "blob:move-self"],
+      ["ln-ext-move-opponent", "blob:move-opponent"],
+      ["ln-ext-move-check", "blob:move-check"],
+      ["ln-ext-capture", "blob:capture"],
+      ["ln-ext-castle", "blob:castle"],
+      ["ln-ext-promote", "blob:promote"],
+      ["ln-ext-premove", "blob:premove"],
+      ["ln-ext-illegal", "blob:illegal"],
+      ["ln-ext-notify", "blob:notify"],
+      ["ln-ext-tenseconds", "blob:tenseconds"],
+      ["ln-ext-game-start", "blob:game-start"],
+      ["ln-ext-game-end", "blob:game-end"]
     ],
     "hooked": true,
     "calls": [
-      ["play", "lr-ext-capture", 1],
-      ["play", "lr-ext-game-end", 0.5],
-      ["play", "lr-ext-game-end", 1],
-      ["play", "lr-ext-game-end", 1],
+      ["play", "ln-ext-capture", 1],
+      ["play", "ln-ext-game-end", 0.5],
+      ["play", "ln-ext-game-end", 1],
+      ["play", "ln-ext-game-end", 1],
       ["play", "berserk", 1],
-      ["play", "lr-ext-notify", 0.2],
-      ["play", "lr-ext-tenseconds", 1],
-      ["play", "lr-ext-game-start", 1],
-      ["play", "lr-ext-illegal", 0.3],
-      ["play", "lr-ext-notify", 1],
-      ["play", "lr-ext-notify", 1],
-      ["play", "lr-ext-notify", 1],
-      ["play", "lr-ext-notify", 1],
-      ["play", "lr-ext-move-self", 1],
+      ["play", "ln-ext-notify", 0.2],
+      ["play", "ln-ext-tenseconds", 1],
+      ["play", "ln-ext-game-start", 1],
+      ["play", "ln-ext-illegal", 0.3],
+      ["play", "ln-ext-notify", 1],
+      ["play", "ln-ext-notify", 1],
+      ["play", "ln-ext-notify", 1],
+      ["play", "ln-ext-notify", 1],
+      ["play", "ln-ext-move-self", 1],
       ["play", 42, 1]
     ],
     "results": [
@@ -175,16 +175,16 @@
       }
     ],
     "paths": [
-      ["lr-ext-capture", "blob:capture"],
-      ["lr-ext-notify", "blob:notify"]
+      ["ln-ext-capture", "blob:capture"],
+      ["ln-ext-notify", "blob:notify"]
     ],
     "hooked": true,
     "calls": [
       ["play", "lowTime", 0.6],
       ["play", "victory", 1],
-      ["play", "lr-ext-capture", 1],
+      ["play", "ln-ext-capture", 1],
       ["play", "move", 0.7],
-      ["play", "lr-ext-capture", 1]
+      ["play", "ln-ext-capture", 1]
     ],
     "results": ["promise", "promise", "promise", "promise", "promise"]
   },
@@ -266,26 +266,26 @@
       }
     ],
     "paths": [
-      ["lr-ext-move-self", "blob:move-self"],
-      ["lr-ext-move-opponent", "blob:move-opponent"],
-      ["lr-ext-move-check", "blob:move-check"],
-      ["lr-ext-capture", "blob:capture"],
-      ["lr-ext-castle", "blob:castle"],
-      ["lr-ext-promote", "blob:promote"],
-      ["lr-ext-premove", "blob:premove"],
-      ["lr-ext-illegal", "blob:illegal"],
-      ["lr-ext-notify", "blob:notify"],
-      ["lr-ext-tenseconds", "blob:tenseconds"],
-      ["lr-ext-game-start", "blob:game-start"],
-      ["lr-ext-game-end", "blob:game-end"]
+      ["ln-ext-move-self", "blob:move-self"],
+      ["ln-ext-move-opponent", "blob:move-opponent"],
+      ["ln-ext-move-check", "blob:move-check"],
+      ["ln-ext-capture", "blob:capture"],
+      ["ln-ext-castle", "blob:castle"],
+      ["ln-ext-promote", "blob:promote"],
+      ["ln-ext-premove", "blob:premove"],
+      ["ln-ext-illegal", "blob:illegal"],
+      ["ln-ext-notify", "blob:notify"],
+      ["ln-ext-tenseconds", "blob:tenseconds"],
+      ["ln-ext-game-start", "blob:game-start"],
+      ["ln-ext-game-end", "blob:game-end"]
     ],
     "hooked": true,
     "calls": [
-      ["play", "lr-ext-move-self", 0.7],
-      ["play", "lr-ext-move-opponent", 1],
-      ["play", "lr-ext-move-check", 1],
-      ["play", "lr-ext-castle", 1],
-      ["play", "lr-ext-promote", 1],
+      ["play", "ln-ext-move-self", 0.7],
+      ["play", "ln-ext-move-opponent", 1],
+      ["play", "ln-ext-move-check", 1],
+      ["play", "ln-ext-castle", 1],
+      ["play", "ln-ext-promote", 1],
       [
         "move",
         {
@@ -378,18 +378,18 @@
       }
     ],
     "paths": [
-      ["lr-ext-move-self", "blob:move-self"],
-      ["lr-ext-move-opponent", "blob:move-opponent"],
-      ["lr-ext-move-check", "blob:move-check"],
-      ["lr-ext-capture", "blob:capture"],
-      ["lr-ext-castle", "blob:castle"],
-      ["lr-ext-promote", "blob:promote"],
-      ["lr-ext-premove", "blob:premove"],
-      ["lr-ext-illegal", "blob:illegal"],
-      ["lr-ext-notify", "blob:notify"],
-      ["lr-ext-tenseconds", "blob:tenseconds"],
-      ["lr-ext-game-start", "blob:game-start"],
-      ["lr-ext-game-end", "blob:game-end"]
+      ["ln-ext-move-self", "blob:move-self"],
+      ["ln-ext-move-opponent", "blob:move-opponent"],
+      ["ln-ext-move-check", "blob:move-check"],
+      ["ln-ext-capture", "blob:capture"],
+      ["ln-ext-castle", "blob:castle"],
+      ["ln-ext-promote", "blob:promote"],
+      ["ln-ext-premove", "blob:premove"],
+      ["ln-ext-illegal", "blob:illegal"],
+      ["ln-ext-notify", "blob:notify"],
+      ["ln-ext-tenseconds", "blob:tenseconds"],
+      ["ln-ext-game-start", "blob:game-start"],
+      ["ln-ext-game-end", "blob:game-end"]
     ],
     "hooked": true,
     "calls": [
@@ -401,7 +401,7 @@
           "ply": 9
         }
       ],
-      ["play", "lr-ext-castle", 1],
+      ["play", "ln-ext-castle", 1],
       [
         "move",
         {
@@ -410,7 +410,7 @@
           "ply": 12
         }
       ],
-      ["play", "lr-ext-capture", 0.5],
+      ["play", "ln-ext-capture", 0.5],
       [
         "move",
         {
@@ -419,8 +419,8 @@
           "ply": 1
         }
       ],
-      ["play", "lr-ext-move-opponent", 1],
-      ["play", "lr-ext-move-self", 1]
+      ["play", "ln-ext-move-opponent", 1],
+      ["play", "ln-ext-move-self", 1]
     ],
     "results": ["promise", "promise", "promise", "promise", "promise", "promise", "promise"]
   },
@@ -484,31 +484,31 @@
       }
     ],
     "paths": [
-      ["lr-ext-move-self", "blob:move-self"],
-      ["lr-ext-move-opponent", "blob:move-opponent"],
-      ["lr-ext-move-check", "blob:move-check"],
-      ["lr-ext-capture", "blob:capture"],
-      ["lr-ext-castle", "blob:castle"],
-      ["lr-ext-promote", "blob:promote"],
-      ["lr-ext-premove", "blob:premove"],
-      ["lr-ext-illegal", "blob:illegal"],
-      ["lr-ext-notify", "blob:notify"],
-      ["lr-ext-tenseconds", "blob:tenseconds"],
-      ["lr-ext-game-start", "blob:game-start"],
-      ["lr-ext-game-end", "blob:game-end"]
+      ["ln-ext-move-self", "blob:move-self"],
+      ["ln-ext-move-opponent", "blob:move-opponent"],
+      ["ln-ext-move-check", "blob:move-check"],
+      ["ln-ext-capture", "blob:capture"],
+      ["ln-ext-castle", "blob:castle"],
+      ["ln-ext-promote", "blob:promote"],
+      ["ln-ext-premove", "blob:premove"],
+      ["ln-ext-illegal", "blob:illegal"],
+      ["ln-ext-notify", "blob:notify"],
+      ["ln-ext-tenseconds", "blob:tenseconds"],
+      ["ln-ext-game-start", "blob:game-start"],
+      ["ln-ext-game-end", "blob:game-end"]
     ],
     "hooked": true,
     "calls": [
-      ["play", "lr-ext-move-self", 1],
-      ["play", "lr-ext-castle", 1],
-      ["play", "lr-ext-capture", 0.9],
+      ["play", "ln-ext-move-self", 1],
+      ["play", "ln-ext-castle", 1],
+      ["play", "ln-ext-capture", 0.9],
       [
         "move",
         {
           "name": "explosion"
         }
       ],
-      ["play", "lr-ext-move-self", 1]
+      ["play", "ln-ext-move-self", 1]
     ],
     "results": ["promise", "promise", "promise", "promise", "promise"]
   },
@@ -558,18 +558,18 @@
       }
     ],
     "paths": [
-      ["lr-ext-move-self", "blob:move-self"],
-      ["lr-ext-move-opponent", "blob:move-opponent"],
-      ["lr-ext-move-check", "blob:move-check"],
-      ["lr-ext-capture", "blob:capture"],
-      ["lr-ext-castle", "blob:castle"],
-      ["lr-ext-promote", "blob:promote"],
-      ["lr-ext-premove", "blob:premove"],
-      ["lr-ext-illegal", "blob:illegal"],
-      ["lr-ext-notify", "blob:notify"],
-      ["lr-ext-tenseconds", "blob:tenseconds"],
-      ["lr-ext-game-start", "blob:game-start"],
-      ["lr-ext-game-end", "blob:game-end"]
+      ["ln-ext-move-self", "blob:move-self"],
+      ["ln-ext-move-opponent", "blob:move-opponent"],
+      ["ln-ext-move-check", "blob:move-check"],
+      ["ln-ext-capture", "blob:capture"],
+      ["ln-ext-castle", "blob:castle"],
+      ["ln-ext-promote", "blob:promote"],
+      ["ln-ext-premove", "blob:premove"],
+      ["ln-ext-illegal", "blob:illegal"],
+      ["ln-ext-notify", "blob:notify"],
+      ["ln-ext-tenseconds", "blob:tenseconds"],
+      ["ln-ext-game-start", "blob:game-start"],
+      ["ln-ext-game-end", "blob:game-end"]
     ],
     "hooked": true,
     "calls": [
@@ -587,7 +587,7 @@
           "name": "capture"
         }
       ],
-      ["play", "lr-ext-capture", 1]
+      ["play", "ln-ext-capture", 1]
     ],
     "results": ["promise", "promise", "promise", "promise"]
   }

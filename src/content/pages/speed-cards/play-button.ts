@@ -12,15 +12,15 @@ export interface PlayButton {
 }
 
 function button(start: HTMLElement, onClick: (pool: string) => void): HTMLButtonElement {
-  const found = queryOne(start, ':scope > .lr-ext-play', HTMLButtonElement);
+  const found = queryOne(start, ':scope > .ln-ext-play', HTMLButtonElement);
   if (found) return found;
   // Lichess's classes, for its buttons' look and the tooltips they go without.
   const created = createElement('button', {
-    className: 'button button-metal lobby__start__button lr-ext-play',
+    className: 'button button-metal lobby__start__button ln-ext-play',
     attrs: { type: 'button' },
   });
   created.addEventListener('click', () => {
-    const pool = created.dataset.lrExtPool;
+    const pool = created.dataset.lnExtPool;
     if (pool && !created.classList.contains('disabled')) onClick(pool);
   });
   start.prepend(created);
@@ -30,9 +30,9 @@ function button(start: HTMLElement, onClick: (pool: string) => void): HTMLButton
 function draw(start: HTMLElement, play: PlayButton, onClick: (pool: string) => void): void {
   const element = button(start, onClick);
   if (element.textContent !== play.label) element.textContent = play.label;
-  setData(element, 'lrExtPool', play.pool);
-  setData(element, 'lrExtSpeed', speedOfPool(play.pool) ?? null);
-  element.classList.toggle('lr-ext-play--seeking', play.seeking);
+  setData(element, 'lnExtPool', play.pool);
+  setData(element, 'lnExtSpeed', speedOfPool(play.pool) ?? null);
+  element.classList.toggle('ln-ext-play--seeking', play.seeking);
   // Lichess's own is off while the player can't seek a game: one going on, a playban.
   const hook = queryOne(start, '.lobby__start__button--hook', HTMLElement);
   element.classList.toggle('disabled', hook?.classList.contains('disabled') === true);

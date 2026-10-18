@@ -42,23 +42,23 @@ function scoreOf(place: HTMLElement, scores: ReadonlyMap<string, number>): numbe
 function drawScore(place: HTMLElement, score: number, label: string): void {
   const text = new Intl.NumberFormat(pageLocale()).format(score);
   const shown = `${text} ${label}`.trim();
-  let element = queryOne(place, ':scope > .lr-ext-podium__score', HTMLElement);
-  if (element?.dataset.lrExtShown === shown) return;
+  let element = queryOne(place, ':scope > .ln-ext-podium__score', HTMLElement);
+  if (element?.dataset.lnExtShown === shown) return;
   if (!element) {
-    element = createElement('span', { className: 'lr-ext-podium__score' });
+    element = createElement('span', { className: 'ln-ext-podium__score' });
     place.append(element);
   }
   element.replaceChildren(createElement('b', { text }), label ? ` ${label}` : '');
-  setData(element, 'lrExtShown', shown);
+  setData(element, 'lnExtShown', shown);
 }
 
 /** Puts each player's score in their place on the podium. */
 export function syncPodium(scores: ReadonlyMap<string, number>): void {
-  const label = document.documentElement.dataset.lrExtPointsLabel ?? '';
+  const label = document.documentElement.dataset.lnExtPointsLabel ?? '';
   for (const place of queryAll(document, PLACES, HTMLElement)) {
     const score = scoreOf(place, scores);
     if (score === undefined)
-      queryOne(place, ':scope > .lr-ext-podium__score', HTMLElement)?.remove();
+      queryOne(place, ':scope > .ln-ext-podium__score', HTMLElement)?.remove();
     else drawScore(place, score, label);
   }
 }

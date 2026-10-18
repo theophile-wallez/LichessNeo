@@ -22,7 +22,7 @@ import { hideTip } from './tooltip.ts';
 // marks on every pass.
 
 // Not the comment's move chips: the same move may be named twice.
-const KEPT_BUTTONS = 'button[data-lr-ext]:not([data-lr-ext="coach"], [data-lr-ext="chip"])';
+const KEPT_BUTTONS = 'button[data-ln-ext]:not([data-ln-ext="coach"], [data-ln-ext="chip"])';
 
 const classOf = (element: Element): string => element.getAttribute('class') ?? '';
 
@@ -86,9 +86,9 @@ function follow(session: Session, analysis: Analysis): void {
 // the device's, which dropped the review's own once it had started.
 function markMode({ mode, sheet }: Pick<ViewState, 'mode' | 'sheet'>): void {
   const root = document.documentElement;
-  root.classList.toggle('lr-ext-review', true);
-  for (const each of MODES) root.classList.toggle(`lr-ext-review-${each}`, each === mode);
-  root.classList.toggle('lr-ext-review-sheet', mode === 'moves' && sheet);
+  root.classList.toggle('ln-ext-review', true);
+  for (const each of MODES) root.classList.toggle(`ln-ext-review-${each}`, each === mode);
+  root.classList.toggle('ln-ext-review-sheet', mode === 'moves' && sheet);
 }
 
 /** Marks <html> again as soon as Lichess rewrites its class (signed out, once it knows the
@@ -96,8 +96,8 @@ function markMode({ mode, sheet }: Pick<ViewState, 'mode' | 'sheet'>): void {
 export function keepMarked(session: Session): void {
   const root = document.documentElement;
   const marked = (): boolean =>
-    root.classList.contains('lr-ext-review') &&
-    root.classList.contains(`lr-ext-review-${session.view.mode}`);
+    root.classList.contains('ln-ext-review') &&
+    root.classList.contains(`ln-ext-review-${session.view.mode}`);
   // Marking changes the class too: only a rewrite that dropped the marks needs them again.
   new MutationObserver(() => {
     if (!marked()) markMode(session.view);

@@ -59,10 +59,10 @@ function heading(outcome: Outcome | null, side: Side, fallback: string): Heading
 /** The figures once the analysis is done; until then, how far it's got. */
 function stats(session: Session, color: Color, texts: GameOverTexts): SafeHtml {
   const { view, language } = session;
-  if (view.error) return html`<p class="lr-ext-end__progress">${view.error}</p>`;
+  if (view.error) return html`<p class="ln-ext-end__progress">${view.error}</p>`;
   const { review } = view;
   if (!review?.complete)
-    return html`<p class="lr-ext-end__progress">${language.ui.analysing} ${Math.round(view.progress * 100)}%</p>`;
+    return html`<p class="ln-ext-end__progress">${language.ui.analysing} ${Math.round(view.progress * 100)}%</p>`;
   // Here the review is the page's own: its chips lead nowhere.
   const summary = {
     accuracy: review.accuracy[color],
@@ -100,10 +100,10 @@ export function renderClosed(session: Session, analysis: Analysis): void {
   });
   setHtml(
     session.elements.panel,
-    html`<div class="lr-ext-end__frame">${card}<div class="lr-ext-end__foot">
-      <button class="lr-ext-btn" data-lr-ext="summary">${ui.summary}</button>
-      <button class="lr-ext-btn lr-ext-btn--green" data-lr-ext="moves">${ui.review}</button>
-      ${newGameMarkup(analysis, 'lr-ext-btn')}
+    html`<div class="ln-ext-end__frame">${card}<div class="ln-ext-end__foot">
+      <button class="ln-ext-btn" data-ln-ext="summary">${ui.summary}</button>
+      <button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="moves">${ui.review}</button>
+      ${newGameMarkup(analysis, 'ln-ext-btn')}
     </div></div>`,
   );
 }

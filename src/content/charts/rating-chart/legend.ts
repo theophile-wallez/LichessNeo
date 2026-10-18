@@ -28,8 +28,8 @@ export function legendMarkup({ rows, hidden, single }: Legend): SafeHtml {
     const ratings = values.filter(value => value !== null);
     const now = ratings.at(-1) ?? 0;
     const change = now - (ratings[0] ?? 0);
-    const off = hidden.has(index) ? ' lr-ext-rchart__chip--off' : '';
-    return html`<button type="button" class="lr-ext-rchart__chip${off}" data-lr-ext-series="${index}" style="--lr-ext-series-color:${color}"${single ? html` disabled` : ''}>${chipLabel(name)}<strong>${now}</strong><span class="lr-ext-rchart__diff lr-ext-rchart__diff--${trend(change)}">${signedChange(change)}</span></button>`;
+    const off = hidden.has(index) ? ' ln-ext-rchart__chip--off' : '';
+    return html`<button type="button" class="ln-ext-rchart__chip${off}" data-ln-ext-series="${index}" style="--ln-ext-series-color:${color}"${single ? html` disabled` : ''}>${chipLabel(name)}<strong>${now}</strong><span class="ln-ext-rchart__diff ln-ext-rchart__diff--${trend(change)}">${signedChange(change)}</span></button>`;
   });
   return html`${chips}`;
 }

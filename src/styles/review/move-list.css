@@ -1,62 +1,62 @@
 /* ---- Move list --- */
 
-/* Stripes per move number (data-lr-ext-even, from the review): the comment cards in
+/* Stripes per move number (data-ln-ext-even, from the review): the comment cards in
    between vary in height. */
-html.lr-ext-review-moves main.analyse .tview2-column > [data-lr-ext-even] {
-  background: var(--lr-ext-neutral-3) !important;
+html.ln-ext-review-moves main.analyse .tview2-column > [data-ln-ext-even] {
+  background: var(--ln-ext-neutral-3) !important;
 }
 
 /* Hide Lichess's comments and computer lines, and the "..." fillers around them, but keep
-   the one of a game starting with Black and those around our variations (.lr-ext-var). */
-html.lr-ext-review-moves
+   the one of a game starting with Black and those around our variations (.ln-ext-var). */
+html.ln-ext-review-moves
   main.analyse
   .tview2-column
   > :is(
-    interrupt:not(:has(line.lr-ext-var)),
+    interrupt:not(:has(line.ln-ext-var)),
     move.empty:not(
         :nth-child(2),
-        :has(+ interrupt line.lr-ext-var),
-        interrupt:has(line.lr-ext-var) + index + move.empty
+        :has(+ interrupt line.ln-ext-var),
+        interrupt:has(line.ln-ext-var) + index + move.empty
       ),
-    interrupt:not(:has(line.lr-ext-var)) + index:has(+ move.empty)
+    interrupt:not(:has(line.ln-ext-var)) + index:has(+ move.empty)
   ),
-html.lr-ext-review-moves
+html.ln-ext-review-moves
   main.analyse
   .tview2
   interrupt
-  :is(comment, line:not(.lr-ext-var, .lr-ext-var-host)) {
+  :is(comment, line:not(.ln-ext-var, .ln-ext-var-host)) {
   display: none !important;
 }
 
 /* A computer line that a variation of the user's branches off shows as the way to it, its
    own moves dimmed: an empty card otherwise. */
-html.lr-ext-review-moves main.analyse .tview2 line.lr-ext-var-host > move {
-  color: var(--lr-ext-text-dim) !important;
+html.ln-ext-review-moves main.analyse .tview2 line.ln-ext-var-host > move {
+  color: var(--ln-ext-text-dim) !important;
 }
 
 /* With its comment hidden, a card keeps the neutral color, not the move's. */
-html.lr-ext-review-moves main.analyse .tview2-column > interrupt {
-  --lr-ext-note: var(--lr-ext-neutral-9) !important;
+html.ln-ext-review-moves main.analyse .tview2-column > interrupt {
+  --ln-ext-note: var(--ln-ext-neutral-9) !important;
 }
 
-html.lr-ext-review-moves main.analyse .tview2-column > index {
+html.ln-ext-review-moves main.analyse .tview2-column > index {
   flex: 0 0 40px !important;
   justify-content: flex-start !important;
   height: 30px;
   padding-left: 10px;
   box-sizing: border-box;
   background: transparent !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 700;
   line-height: 30px !important;
 }
 
-html.lr-ext-review-moves main.analyse .tview2-column > index::after {
+html.ln-ext-review-moves main.analyse .tview2-column > index::after {
   content: '.';
 }
 
-html.lr-ext-review-moves main.analyse .tview2-column > move {
+html.ln-ext-review-moves main.analyse .tview2-column > move {
   position: relative;
   flex: 0 0 26% !important;
   align-items: center;
@@ -64,99 +64,99 @@ html.lr-ext-review-moves main.analyse .tview2-column > move {
   padding: 0 0 0 26px !important;
   box-sizing: border-box;
   background: transparent !important;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   line-height: 30px !important;
 }
 
-html.lr-ext-review-moves main.analyse .tview2-column > move san {
+html.ln-ext-review-moves main.analyse .tview2-column > move san {
   padding: 0 4px;
   border-radius: 3px;
   line-height: 22px;
 }
 
-html.lr-ext-review-moves main.analyse .tview2-column > move:hover san {
-  background: var(--lr-ext-lift-8);
+html.ln-ext-review-moves main.analyse .tview2-column > move:hover san {
+  background: var(--ln-ext-lift-8);
 }
 
-html.lr-ext-review-moves main.analyse .tview2-column > move.active san {
-  background: var(--lr-ext-lift-15);
-  color: var(--lr-ext-text-strong);
+html.ln-ext-review-moves main.analyse .tview2-column > move.active san {
+  background: var(--ln-ext-lift-15);
+  color: var(--ln-ext-text-strong);
 }
 
 /* A piece's figurine (Lichess's chess font) sat flush against its square: a hair of room,
-   on the moves that lead with a piece (data-lr-ext-piece, view/move-list.ts), not a pawn's file. */
-html:is(.lr-ext-review-moves, .lr-ext-review-live)
+   on the moves that lead with a piece (data-ln-ext-piece, view/move-list.ts), not a pawn's file. */
+html:is(.ln-ext-review-moves, .ln-ext-review-live)
   main.analyse
   .tview2
-  move[data-lr-ext-piece]
+  move[data-ln-ext-piece]
   san {
   display: inline-block;
 }
 
-html:is(.lr-ext-review-moves, .lr-ext-review-live)
+html:is(.ln-ext-review-moves, .ln-ext-review-live)
   main.analyse
   .tview2
-  move[data-lr-ext-piece]
+  move[data-ln-ext-piece]
   san::first-letter {
   margin-right: 2px;
 }
 
 /* No Lichess glyphs or per-move engine evals: the badges replace them. */
-html.lr-ext-review-moves main.analyse .tview2 > move :is(glyph, eval) {
+html.ln-ext-review-moves main.analyse .tview2 > move :is(glyph, eval) {
   display: none !important;
 }
 
-html.lr-ext-review-moves main.analyse .tview2 > move[data-lr-ext-badge]::before {
+html.ln-ext-review-moves main.analyse .tview2 > move[data-ln-ext-badge]::before {
   content: '';
   position: absolute;
   left: 6px;
   top: 6px;
   width: 18px;
   height: 18px;
-  background: var(--lr-ext-class-icon) center / contain no-repeat;
+  background: var(--ln-ext-class-icon) center / contain no-repeat;
 }
 
 /* A badged move takes its color (the last book move too). */
-html.lr-ext-review-moves main.analyse .tview2 > move[data-lr-ext-badge] {
-  color: var(--lr-ext-class-color) !important;
+html.ln-ext-review-moves main.analyse .tview2 > move[data-ln-ext-badge] {
+  color: var(--ln-ext-class-color) !important;
 }
 
 /* The free board keeps Lichess's list, variations included: the badge goes inline
    before the move, as in the review's variations. */
-html.lr-ext-review-live main.analyse .tview2 move[data-lr-ext-badge] san::before,
-html.lr-ext-review-moves main.analyse .tview2 interrupt move[data-lr-ext-badge] san::before {
+html.ln-ext-review-live main.analyse .tview2 move[data-ln-ext-badge] san::before,
+html.ln-ext-review-moves main.analyse .tview2 interrupt move[data-ln-ext-badge] san::before {
   content: '';
   display: inline-block;
   width: 16px;
   height: 16px;
   margin-right: 4px;
   vertical-align: -3px;
-  background: var(--lr-ext-class-icon) center / contain no-repeat;
+  background: var(--ln-ext-class-icon) center / contain no-repeat;
 }
 
-html.lr-ext-review-live main.analyse .tview2 move[data-lr-ext-badge],
-html.lr-ext-review-moves main.analyse .tview2 interrupt move[data-lr-ext-badge] {
-  color: var(--lr-ext-class-color) !important;
+html.ln-ext-review-live main.analyse .tview2 move[data-ln-ext-badge],
+html.ln-ext-review-moves main.analyse .tview2 interrupt move[data-ln-ext-badge] {
+  color: var(--ln-ext-class-color) !important;
 }
 
 /* ---- Opening --- */
 
 /* The review appends the opening's name to Lichess's panel (a flex column); order puts
    it between the engine and the moves. Signed out, the free board has none. */
-#lr-ext-opening {
+#ln-ext-opening {
   display: none;
 }
 
-html:is(.lr-ext-review-live, .lr-ext-review-moves).lr-ext-opening-on
+html:is(.ln-ext-review-live, .ln-ext-review-moves).ln-ext-opening-on
   main.analyse
   .analyse__tools
-  > :not(.ceval, .pv_box, #lr-ext-opening) {
+  > :not(.ceval, .pv_box, #ln-ext-opening) {
   order: 2;
 }
 
-html:is(.lr-ext-review-live, .lr-ext-review-moves).lr-ext-opening-on main.analyse #lr-ext-opening {
+html:is(.ln-ext-review-live, .ln-ext-review-moves).ln-ext-opening-on main.analyse #ln-ext-opening {
   order: 1;
   flex: none;
   display: flex;
@@ -165,23 +165,23 @@ html:is(.lr-ext-review-live, .lr-ext-review-moves).lr-ext-opening-on main.analys
   box-sizing: border-box;
   height: 36px;
   padding: 0 12px;
-  border-bottom: 1px solid var(--lr-ext-border);
-  background: var(--lr-ext-bg-panel);
-  color: var(--lr-ext-text);
-  font-family: var(--lr-ext-font);
+  border-bottom: 1px solid var(--ln-ext-border);
+  background: var(--ln-ext-bg-panel);
+  color: var(--ln-ext-text);
+  font-family: var(--ln-ext-font);
   font-size: 13px;
   line-height: 1;
 }
 
-#lr-ext-opening .lr-ext-opening__icon {
+#ln-ext-opening .ln-ext-opening__icon {
   flex: none;
   width: 18px;
   height: 18px;
-  background: var(--lr-ext-class-icon) center / contain no-repeat;
+  background: var(--ln-ext-class-icon) center / contain no-repeat;
 }
 
 /* The ECO code as a small book-colored pill. */
-#lr-ext-opening .lr-ext-opening__eco {
+#ln-ext-opening .ln-ext-opening__eco {
   flex: none;
   padding: 3px 6px;
   border-radius: 4px;
@@ -192,27 +192,27 @@ html:is(.lr-ext-review-live, .lr-ext-review-moves).lr-ext-opening-on main.analys
   letter-spacing: 0.02em;
 }
 
-#lr-ext-opening .lr-ext-opening__name {
+#ln-ext-opening .ln-ext-opening__name {
   min-width: 0;
   overflow: hidden;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-#lr-ext-opening .lr-ext-opening__name b {
-  color: var(--lr-ext-text-strong);
+#ln-ext-opening .ln-ext-opening__name b {
+  color: var(--ln-ext-text-strong);
   font-weight: 700;
 }
 
 /* Two even columns, each with room for its moves' cost bars. */
-html.lr-ext-review-moves main.analyse .tview2-column > move {
+html.ln-ext-review-moves main.analyse .tview2-column > move {
   flex-basis: calc(50% - 20px) !important;
 }
 
-/* What a move gave away (data-lr-ext-cost, --lr-ext-cost from 0 to 1, view/move-list.ts), as a
+/* What a move gave away (data-ln-ext-cost, --ln-ext-cost from 0 to 1, view/move-list.ts), as a
    bar in its class's color at the end of its cell. */
-html.lr-ext-review-moves main.analyse .tview2-column > move[data-lr-ext-cost]::after {
+html.ln-ext-review-moves main.analyse .tview2-column > move[data-ln-ext-cost]::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -223,7 +223,7 @@ html.lr-ext-review-moves main.analyse .tview2-column > move[data-lr-ext-cost]::a
   border-radius: 2px;
   background: linear-gradient(
     to right,
-    var(--lr-ext-class-color, var(--lr-ext-text-dim)) calc(var(--lr-ext-cost) * 100%),
-    var(--lr-ext-lift-8) 0
+    var(--ln-ext-class-color, var(--ln-ext-text-dim)) calc(var(--ln-ext-cost) * 100%),
+    var(--ln-ext-lift-8) 0
   );
 }

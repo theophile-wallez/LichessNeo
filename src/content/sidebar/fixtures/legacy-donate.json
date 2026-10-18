@@ -2,7 +2,7 @@
   {
     "name": "the flyout has a patron link",
     "html": "<header id=\"top\"><nav id=\"topnav\"><section><a href=\"/patron\" class=\"community-patron\">  Donate  </a></section></nav><div class=\"site-buttons\"></div></header>",
-    "after": "<header id=\"top\"><nav id=\"topnav\"><section><a href=\"/patron\" class=\"community-patron\">  Donate  </a></section></nav><a id=\"lr-ext-donate\" href=\"<origin>/patron\">Donate</a><div class=\"site-buttons\"></div></header>"
+    "after": "<header id=\"top\"><nav id=\"topnav\"><section><a href=\"/patron\" class=\"community-patron\">  Donate  </a></section></nav><a id=\"ln-ext-donate\" href=\"<origin>/patron\">Donate</a><div class=\"site-buttons\"></div></header>"
   },
   {
     "name": "no patron link (kids)",
@@ -11,7 +11,7 @@
   },
   {
     "name": "already there",
-    "html": "<header id=\"top\"><nav id=\"topnav\"><a href=\"/patron\" class=\"community-patron\">Donate</a></nav><a id=\"lr-ext-donate\" href=\"/x\">Old</a></header>",
-    "after": "<header id=\"top\"><nav id=\"topnav\"><a href=\"/patron\" class=\"community-patron\">Donate</a></nav><a id=\"lr-ext-donate\" href=\"/x\">Old</a></header>"
+    "html": "<header id=\"top\"><nav id=\"topnav\"><a href=\"/patron\" class=\"community-patron\">Donate</a></nav><a id=\"ln-ext-donate\" href=\"/x\">Old</a></header>",
+    "after": "<header id=\"top\"><nav id=\"topnav\"><a href=\"/patron\" class=\"community-patron\">Donate</a></nav><a id=\"ln-ext-donate\" href=\"/x\">Old</a></header>"
   }
 ]

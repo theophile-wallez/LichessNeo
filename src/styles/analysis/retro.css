@@ -5,10 +5,10 @@
 
 main.analyse .retro-box {
   border: none !important;
-  border-top: 1px solid var(--lr-ext-border) !important;
-  background: var(--lr-ext-bg-panel) !important;
-  color: var(--lr-ext-text);
-  font-family: var(--lr-ext-font) !important;
+  border-top: 1px solid var(--ln-ext-border) !important;
+  background: var(--ln-ext-bg-panel) !important;
+  color: var(--ln-ext-text);
+  font-family: var(--ln-ext-font) !important;
 }
 
 main.analyse .retro-box > .title {
@@ -17,9 +17,9 @@ main.analyse .retro-box > .title {
   box-sizing: border-box;
   height: 40px;
   padding: 0 6px 0 14px !important;
-  border-bottom: 1px solid var(--lr-ext-border);
-  background: var(--lr-ext-bg-panel-dark) !important;
-  color: var(--lr-ext-text-strong) !important;
+  border-bottom: 1px solid var(--ln-ext-border);
+  background: var(--ln-ext-bg-panel-dark) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14px !important;
   font-weight: 800;
   text-transform: none !important;
@@ -28,7 +28,7 @@ main.analyse .retro-box > .title {
 /* The count, before the close button. */
 main.analyse .retro-box > .title > span + span {
   margin-left: auto;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 700;
 }
@@ -39,12 +39,12 @@ main.analyse .retro-box > .title > .fbt {
   padding: 0 !important;
   border-radius: 6px;
   background: transparent !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
 }
 
 main.analyse .retro-box > .title > .fbt:hover {
-  background: var(--lr-ext-lift-7) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-7) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.analyse .retro-box .feedback {
@@ -65,7 +65,7 @@ main.analyse .retro-box :is(.no-square, .icon) {
   margin: 0 !important;
   padding: 4px;
   border-radius: 12px;
-  background: var(--lr-ext-lift-8);
+  background: var(--ln-ext-lift-8);
   font-size: 28px !important;
   line-height: 40px !important;
 }
@@ -85,18 +85,18 @@ main.analyse .retro-box .no-square > piece.black {
 }
 
 main.analyse .retro-box .win .icon:not(.off) {
-  color: var(--lr-ext-good) !important;
+  color: var(--ln-ext-good) !important;
 }
 
 main.analyse .retro-box .instruction > strong {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 16px !important;
   font-weight: 800 !important;
   line-height: 1.25;
 }
 
 main.analyse .retro-box .instruction > em {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13.5px;
   font-style: normal;
   font-weight: 600;
@@ -112,8 +112,8 @@ main.analyse .retro-box .choices {
 main.analyse .retro-box .choices a {
   padding: 3px 10px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-accent) 18%, transparent);
-  color: var(--lr-ext-accent-hover) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+  color: var(--ln-ext-accent-hover) !important;
   font-size: 12.5px;
   font-weight: 800;
   line-height: 1.6;
@@ -121,8 +121,8 @@ main.analyse .retro-box .choices a {
 }
 
 main.analyse .retro-box .choices a:hover {
-  background: color-mix(in srgb, var(--lr-ext-accent) 28%, transparent);
-  color: var(--lr-ext-text-strong) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 28%, transparent);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* "Next": Lichess's blue slab becomes our primary button. */
@@ -130,8 +130,8 @@ main.analyse .retro-box .continue {
   margin: 0 14px 12px;
   min-height: 44px;
   border-radius: 6px;
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow);
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow);
   font-size: 16px !important;
   font-weight: 800;
   text-shadow: 0 1px 1px #00000033;
@@ -140,7 +140,7 @@ main.analyse .retro-box .continue {
 }
 
 main.analyse .retro-box .continue:hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
+  background: var(--ln-ext-btn-primary-hover) !important;
 }
 
 main.analyse .retro-box .continue icon::before {
@@ -155,5 +155,5 @@ main.analyse .retro-box .progress {
 }
 
 main.analyse .retro-box .progress div {
-  background: var(--lr-ext-accent) !important;
+  background: var(--ln-ext-accent) !important;
 }

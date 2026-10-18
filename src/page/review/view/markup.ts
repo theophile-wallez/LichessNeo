@@ -37,7 +37,7 @@ const ICONS = {
 export type IconName = keyof typeof ICONS;
 
 export const svgIcon = (name: IconName): SafeHtml =>
-  hugeicon(ICONS[name], { className: 'lr-ext-i' });
+  hugeicon(ICONS[name], { className: 'ln-ext-i' });
 
 const BACK_ICON = hugeicon(ArrowLeft02Icon);
 const CLOSE_ICON = hugeicon(Cancel01Icon);
@@ -58,17 +58,17 @@ export function header(
   const backButton =
     back === null
       ? trustedHtml('<span></span>')
-      : html`<button class="lr-ext-review__back" data-lr-ext="${back}" aria-label="${ui.back}">${BACK_ICON}</button>`;
-  return html`<div class="lr-ext-review__head">
+      : html`<button class="ln-ext-review__back" data-ln-ext="${back}" aria-label="${ui.back}">${BACK_ICON}</button>`;
+  return html`<div class="ln-ext-review__head">
       ${backButton}
-      <div class="lr-ext-review__title">${title}</div>
-      <div class="lr-ext-review__actions">${action}<button class="lr-ext-review__close" data-lr-ext="normal" data-lr-ext-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button></div>
+      <div class="ln-ext-review__title">${title}</div>
+      <div class="ln-ext-review__actions">${action}<button class="ln-ext-review__close" data-ln-ext="normal" data-ln-ext-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button></div>
     </div>`;
 }
 
 /** The header's button that opens the game's crosstable and export over the panel, or closes them. */
 export const shareButton = (open: boolean, ui: InterfaceStrings): SafeHtml =>
-  html`<button class="lr-ext-review__share${open ? ' active' : ''}" data-lr-ext="share" data-lr-ext-tip="${ui.share}" aria-label="${ui.share}" aria-pressed="${String(open)}">${SHARE_ICON}</button>`;
+  html`<button class="ln-ext-review__share${open ? ' active' : ''}" data-ln-ext="share" data-ln-ext-tip="${ui.share}" aria-label="${ui.share}" aria-pressed="${String(open)}">${SHARE_ICON}</button>`;
 
 function blackIsBetter(record: PositionRecord | null | undefined): boolean {
   if (!record) return false;
@@ -79,13 +79,13 @@ function blackIsBetter(record: PositionRecord | null | undefined): boolean {
 
 /** The score, dark when Black is better. */
 export const evalChip = (record: PositionRecord | null | undefined): SafeHtml =>
-  html`<span class="lr-ext-bubble__eval${blackIsBetter(record) ? ' lr-ext-bubble__eval--black' : ''}">${formatEval(record)}</span>`;
+  html`<span class="ln-ext-bubble__eval${blackIsBetter(record) ? ' ln-ext-bubble__eval--black' : ''}">${formatEval(record)}</span>`;
 
 export const bubbleTitle = (text: string): SafeHtml =>
-  html`<p class="lr-ext-bubble__title">${text}</p>`;
+  html`<p class="ln-ext-bubble__title">${text}</p>`;
 
 /** The coach waiting for the engine: the verdict's row, a spinner for its icon, lines for its comment. */
 export const thinkingMarkup = (text: string): SafeHtml =>
-  html`<div class="lr-ext-bubble__row"><span class="lr-ext-cls-icon lr-ext-bubble__spin" aria-hidden="true"></span>
-      <p class="lr-ext-bubble__title">${text}</p></div>
-    <div class="lr-ext-bubble__wait" aria-hidden="true"><span></span><span></span></div>`;
+  html`<div class="ln-ext-bubble__row"><span class="ln-ext-cls-icon ln-ext-bubble__spin" aria-hidden="true"></span>
+      <p class="ln-ext-bubble__title">${text}</p></div>
+    <div class="ln-ext-bubble__wait" aria-hidden="true"><span></span><span></span></div>`;

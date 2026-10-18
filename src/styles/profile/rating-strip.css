@@ -7,7 +7,7 @@
 @media (max-width: 1019.98px) {
   /* The strip over the page, whose own width it mustn't set: Lichess puts the menu in a
      column beside the page from 800px, and sizes the column to its content. */
-  html:is([data-lr-ext-has~='perf-stat'], [data-lr-ext-has~='user-show']) main.page-menu {
+  html:is([data-ln-ext-has~='perf-stat'], [data-ln-ext-has~='user-show']) main.page-menu {
     grid-template-columns: minmax(0, 1fr) !important;
     grid-template-areas: 'menu' 'content' !important;
   }
@@ -36,14 +36,14 @@
     mask-image: linear-gradient(
       90deg,
       transparent,
-      #000 var(--lr-ext-menu-fade-start),
-      #000 calc(100% - var(--lr-ext-menu-fade-end)),
+      #000 var(--ln-ext-menu-fade-start),
+      #000 calc(100% - var(--ln-ext-menu-fade-end)),
       transparent
     );
   }
 
   /* A profile's: across the page's margins, to scroll under the window's edges. */
-  html[data-lr-ext-has~='user-show'] main.page-menu .page-menu__menu .side.sub-ratings {
+  html[data-ln-ext-has~='user-show'] main.page-menu .page-menu__menu .side.sub-ratings {
     width: calc(100% + 16px) !important;
     margin: 0 -8px !important;
   }
@@ -62,17 +62,17 @@
     padding: 0 14px 0 10px !important;
     border: none !important;
     border-radius: 999px !important;
-    background: var(--lr-ext-bg-panel) !important;
-    box-shadow: inset 0 0 0 1px var(--lr-ext-card-border) !important;
-    color: var(--lr-ext-text) !important;
+    background: var(--ln-ext-bg-panel) !important;
+    box-shadow: inset 0 0 0 1px var(--ln-ext-card-border) !important;
+    color: var(--ln-ext-text) !important;
     white-space: nowrap;
     text-shadow: none !important;
     scroll-snap-align: start;
   }
 
   .side.sub-ratings a.active {
-    background: var(--lr-ext-card-hover) !important;
-    box-shadow: inset 0 0 0 2px var(--lr-ext-accent) !important;
+    background: var(--ln-ext-card-hover) !important;
+    box-shadow: inset 0 0 0 2px var(--ln-ext-accent) !important;
   }
 
   .side.sub-ratings a.empty {
@@ -96,7 +96,7 @@
   .side.sub-ratings h3 {
     display: block !important;
     margin: 0 !important;
-    color: var(--lr-ext-text-dim);
+    color: var(--ln-ext-text-dim);
     font-size: 13px !important;
     font-weight: 700 !important;
     letter-spacing: 0 !important;
@@ -110,7 +110,7 @@
   }
 
   .side.sub-ratings rating strong {
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
     font-size: 14px !important;
     font-weight: 800 !important;
     font-variant-numeric: tabular-nums;
@@ -125,7 +125,7 @@
 @supports (animation-timeline: scroll()) {
   @media (max-width: 1019.98px) {
     main.page-menu .page-menu__menu .side.sub-ratings {
-      animation: lr-ext-menu-fade linear both !important;
+      animation: ln-ext-menu-fade linear both !important;
       animation-timeline: scroll(self inline) !important;
     }
   }

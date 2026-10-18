@@ -14,7 +14,7 @@ export const FINISHED_GAME = { id: 'tKlG0mrQ', path: '/tKlG0mrQ/black' };
 export async function openLichess(page: Page, path: string): Promise<void> {
   await goToLichess(page, path);
   await expect(page.locator('html')).toHaveAttribute(
-    'data-lr-ext-assets',
+    'data-ln-ext-assets',
     /^chrome-extension:\/\//,
   );
 }

@@ -24,7 +24,7 @@
   align-items: center;
   gap: 12px;
   margin: 0 !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 28px !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
@@ -70,7 +70,7 @@
   border-spacing: 0 6px;
   margin-top: -6px;
   /* Rows before this page, when the list opens on a later one (content/pages/fide.ts). */
-  counter-reset: lr-ext-fide var(--lr-ext-fide-skip, 0);
+  counter-reset: ln-ext-fide var(--ln-ext-fide-skip, 0);
 }
 
 .fide-players-table thead {
@@ -81,7 +81,7 @@
 .fide-players-table thead th {
   padding: 0 10px 8px !important;
   border: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px !important;
   font-weight: 700;
   text-transform: none;
@@ -92,7 +92,7 @@
 /* Only the FIDE list's and a federation's columns: a broadcast's players tab reuses the table
  * with other columns and keeps Lichess's look. */
 :is(.fide-players, .fide-federation) .fide-players-table thead th {
-  background: var(--lr-ext-bg-page);
+  background: var(--ln-ext-bg-page);
 }
 
 :is(.fide-players, .fide-federation) .fide-players-table thead th:first-child {
@@ -114,7 +114,7 @@
   padding: 5px 12px;
   border-radius: 999px;
   background: transparent !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-weight: 700;
   white-space: nowrap;
   transition:
@@ -123,14 +123,14 @@
 }
 
 .fide-players-table thead th > a[href]:hover {
-  background: var(--lr-ext-bg-raised) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .fide-players-table thead th > a.active {
-  background: var(--lr-ext-bg-raised) !important;
-  box-shadow: inset 0 1px 0 var(--lr-ext-lift-8);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  box-shadow: inset 0 1px 0 var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Each rating's time-control glyph (Lichess's font) in its color. */
@@ -138,18 +138,18 @@
   .fide-players-table
   thead
   th:is(:nth-child(2), :nth-child(3), :nth-child(4)) {
-  --lr-ext-mode-icon: var(--lr-ext-mode-classical);
-  --lr-ext-mode-color: var(--lr-ext-mode-classical-color);
+  --ln-ext-mode-icon: var(--ln-ext-mode-classical);
+  --ln-ext-mode-color: var(--ln-ext-mode-classical-color);
 }
 
 :is(.fide-players, .fide-federation) .fide-players-table thead th:nth-child(3) {
-  --lr-ext-mode-icon: var(--lr-ext-mode-rapid);
-  --lr-ext-mode-color: var(--lr-ext-accent);
+  --ln-ext-mode-icon: var(--ln-ext-mode-rapid);
+  --ln-ext-mode-color: var(--ln-ext-accent);
 }
 
 :is(.fide-players, .fide-federation) .fide-players-table thead th:nth-child(4) {
-  --lr-ext-mode-icon: var(--lr-ext-mode-blitz);
-  --lr-ext-mode-color: var(--lr-ext-yellow-dark);
+  --ln-ext-mode-icon: var(--ln-ext-mode-blitz);
+  --ln-ext-mode-color: var(--ln-ext-yellow-dark);
 }
 
 :is(.fide-players, .fide-federation)
@@ -161,10 +161,10 @@
   .fide-players-table:not(.fide-players-table--sortable)
   thead
   th:is(:nth-child(2), :nth-child(3), :nth-child(4))::before {
-  content: var(--lr-ext-mode-icon);
+  content: var(--ln-ext-mode-icon);
   flex: none;
   display: inline-block;
-  color: var(--lr-ext-mode-color);
+  color: var(--ln-ext-mode-color);
   font-family: lichess;
   font-size: 14px;
   font-weight: 400;

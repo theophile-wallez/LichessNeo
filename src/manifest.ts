@@ -11,7 +11,7 @@ export type Target = 'chrome' | 'chrome-store' | 'firefox';
  */
 export const BASE_VERSION = '0.2';
 
-const GECKO_ID = 'lichess-reimagined@theophile-wallez.github.io';
+const GECKO_ID = 'lichess-neo@theophile-wallez.github.io';
 const LICHESS = ['https://lichess.org/*'];
 
 const ContentScriptSchema = z.strictObject({
@@ -65,7 +65,7 @@ export const OUTPUT = {
 export function createManifest(target: Target, version: string): Manifest {
   const manifest: Manifest = {
     manifest_version: 3,
-    name: 'Lichess Reimagined',
+    name: 'Lichess Neo',
     version,
     description: '__MSG_extDescription__',
     default_locale: 'en',

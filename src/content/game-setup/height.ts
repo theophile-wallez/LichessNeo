@@ -30,12 +30,12 @@ function ease(dialog: HTMLDialogElement): void {
   heights.set(dialog, to);
   const picked = performance.now() - pickedAt < PICK_MS;
   if (from === undefined || !picked || !dialog.open || Math.abs(from - to) < 1) return;
-  setData(dialog, 'lrExtEasing', '');
+  setData(dialog, 'lnExtEasing', '');
   const easing = dialog.animate([{ height: `${from}px` }, { height: `${to}px` }], EASING);
   easings.set(dialog, easing);
   easing.addEventListener('finish', () => {
     easings.delete(dialog);
-    setData(dialog, 'lrExtEasing', null);
+    setData(dialog, 'lnExtEasing', null);
   });
 }
 

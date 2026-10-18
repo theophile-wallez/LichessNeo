@@ -55,17 +55,17 @@ const open = (hash: string): void => {
 
 const main = (): HTMLElement | null => queryOne(document, 'main', HTMLElement);
 const shownPages = (): (string | undefined)[] =>
-  queryAll(document, '.lr-ext-settings__page', HTMLElement)
+  queryAll(document, '.ln-ext-settings__page', HTMLElement)
     .filter(page => !page.hidden)
-    .map(page => page.dataset.lrExtPage);
+    .map(page => page.dataset.lnExtPage);
 
 describe('the extension’s settings on the account pages', () => {
   it('adds its links and its section once, closed on Lichess’s own page', () => {
     open('');
     syncSettings();
-    expect(queryAll(document, '.lr-ext-settings-link', HTMLElement)).toHaveLength(1);
-    expect(queryAll(document, 'main > .lr-ext-settings', HTMLElement)).toHaveLength(1);
-    expect(main()?.dataset.lrExtSettings).toBeUndefined();
+    expect(queryAll(document, '.ln-ext-settings-link', HTMLElement)).toHaveLength(1);
+    expect(queryAll(document, 'main > .ln-ext-settings', HTMLElement)).toHaveLength(1);
+    expect(main()?.dataset.lnExtSettings).toBeUndefined();
     expect(shownPages()).toEqual([]);
     expect(queryOne(document, '.subnav a.active', HTMLElement)?.getAttribute('href')).toBe(
       '/account/profile',
@@ -73,16 +73,16 @@ describe('the extension’s settings on the account pages', () => {
   });
 
   it('opens the page its hash names, and marks it in the menu', () => {
-    open('#lr-ext-extension/board');
-    expect(main()?.dataset.lrExtSettings).toBe('');
+    open('#ln-ext-extension/board');
+    expect(main()?.dataset.lnExtSettings).toBe('');
     expect(shownPages()).toEqual(['board']);
     expect(
-      queryAll(document, '.subnav a.active', HTMLElement).map(link => link.dataset.lrExtPage),
+      queryAll(document, '.subnav a.active', HTMLElement).map(link => link.dataset.lnExtPage),
     ).toEqual(['board']);
-    open('#lr-ext-extension');
+    open('#ln-ext-extension');
     expect(shownPages()).toEqual(['personalization']);
     open('#something-else');
-    expect(main()?.dataset.lrExtSettings).toBeUndefined();
+    expect(main()?.dataset.lnExtSettings).toBeUndefined();
     expect(shownPages()).toEqual([]);
   });
 
@@ -90,24 +90,24 @@ describe('the extension’s settings on the account pages', () => {
     const wrap = document.getElementById('main-wrap');
     if (!wrap) throw new Error('no #main-wrap');
     wrap.scrollTop = 400;
-    open('#lr-ext-extension/packs');
+    open('#ln-ext-extension/packs');
     expect(wrap.scrollTop).toBe(0);
     wrap.scrollTop = 120;
     syncSettings();
     expect(wrap.scrollTop).toBe(120);
-    open('#lr-ext-extension/interface');
+    open('#ln-ext-extension/interface');
     expect(wrap.scrollTop).toBe(0);
   });
 
   it('builds them again on the next account page, and stays off the DGT board’s', () => {
-    open('#lr-ext-extension/profile');
+    open('#ln-ext-extension/profile');
     document.body.innerHTML = accountPage();
     syncSettings();
-    expect(queryAll(document, 'main > .lr-ext-settings', HTMLElement)).toHaveLength(1);
+    expect(queryAll(document, 'main > .ln-ext-settings', HTMLElement)).toHaveLength(1);
     expect(shownPages()).toEqual(['profile']);
     document.body.innerHTML = accountPage('account page-menu dgt');
     syncSettings();
-    expect(queryOne(document, '.lr-ext-settings-link', HTMLElement)).toBeNull();
-    expect(queryOne(document, '.lr-ext-settings', HTMLElement)).toBeNull();
+    expect(queryOne(document, '.ln-ext-settings-link', HTMLElement)).toBeNull();
+    expect(queryOne(document, '.ln-ext-settings', HTMLElement)).toBeNull();
   });
 });

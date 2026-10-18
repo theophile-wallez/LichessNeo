@@ -17,13 +17,13 @@ interface Spot {
 
 const SPOTS: readonly Spot[] = [
   // The game page's player bars, and ours on the analysis board.
-  { selector: 'main.round .ruser, main.analyse > .lr-ext-player', link: ':scope > a.user-link' },
+  { selector: 'main.round .ruser, main.analyse > .ln-ext-player', link: ':scope > a.user-link' },
   // The game info's players, without a chat.
   { selector: 'main.round .game__meta__players > .player', link: ':scope > a.user-link' },
   { selector: '#powerTip .upt__info', link: '.upt__info__top > a.user-link' },
   { selector: '#friend_box .content a.user-link' },
   {
-    selector: "main.box.page-small[data-lr-ext-list='players'] > table.slist > tbody > tr",
+    selector: "main.box.page-small[data-ln-ext-list='players'] > table.slist > tbody > tr",
     link: ':scope > td:first-child > .user-link',
   },
   { selector: 'main.forum-topic .forum-post', link: '.forum-post__metas > a.author' },
@@ -40,17 +40,17 @@ function userIn(spot: HTMLElement, link: string | undefined): string | undefined
 
 export function markAvatar(element: HTMLElement, user: string | undefined): void {
   const avatar = user === undefined ? null : userAvatar(user);
-  setData(element, 'lrExtAvatarCoach', avatar && String(avatar.coach));
-  setData(element, 'lrExtAvatarColor', avatar && avatar.color);
-  setData(element, 'lrExtAvatarPicture', avatar?.picture ? '' : null);
+  setData(element, 'lnExtAvatarCoach', avatar && String(avatar.coach));
+  setData(element, 'lnExtAvatarColor', avatar && avatar.color);
+  setData(element, 'lnExtAvatarPicture', avatar?.picture ? '' : null);
 }
 
-const PICTURE_STYLE = 'lr-ext-own-avatar';
+const PICTURE_STYLE = 'ln-ext-own-avatar';
 
 // In a stylesheet of ours: a data: URL too long for <html>'s style attribute.
 function showPicture(avatar: OwnAvatar | null): void {
   const rule =
-    avatar?.kind === 'picture' ? `:root{--lr-ext-avatar-own:url(${avatar.picture})}` : '';
+    avatar?.kind === 'picture' ? `:root{--ln-ext-avatar-own:url(${avatar.picture})}` : '';
   let style = document.getElementById(PICTURE_STYLE);
   if (!style && rule === '') return;
   if (!style) {

@@ -10,7 +10,7 @@ import {
 
 const root = document.documentElement;
 const shown = (): string[] =>
-  ['--lr-ext-board-custom-light', '--lr-ext-board-custom-dark'].map(name =>
+  ['--ln-ext-board-custom-light', '--ln-ext-board-custom-dark'].map(name =>
     root.style.getPropertyValue(name),
   );
 
@@ -31,7 +31,7 @@ describe('the custom board', () => {
     onCustomBoardChange(changed);
     chooseSquareColor('dark', '#1A2B3C');
     expect(readCustomBoard()).toEqual({ light: DEFAULT_CUSTOM_BOARD.light, dark: '#1a2b3c' });
-    expect(JSON.parse(localStorage.getItem('lr-ext-custom-board') ?? '')).toEqual({
+    expect(JSON.parse(localStorage.getItem('ln-ext-custom-board') ?? '')).toEqual({
       light: '#f7f8f8',
       dark: '#1a2b3c',
     });
@@ -49,9 +49,9 @@ describe('the custom board', () => {
   });
 
   it('reads damaged colors as the default', () => {
-    localStorage.setItem('lr-ext-custom-board', JSON.stringify({ light: 'red', dark: '#000000' }));
+    localStorage.setItem('ln-ext-custom-board', JSON.stringify({ light: 'red', dark: '#000000' }));
     expect(readCustomBoard()).toEqual(DEFAULT_CUSTOM_BOARD);
-    localStorage.setItem('lr-ext-custom-board', '{');
+    localStorage.setItem('ln-ext-custom-board', '{');
     expect(readCustomBoard()).toEqual(DEFAULT_CUSTOM_BOARD);
   });
 

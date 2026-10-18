@@ -13,7 +13,7 @@ async function answer(link: string, token: string): Promise<DownloadResponse> {
   try {
     return await downloadPack(link, token);
   } catch (error) {
-    console.error('[LichessReimagined] pack download failed', error);
+    console.error('[LichessNeo] pack download failed', error);
     return { error: 'The pack could not be downloaded.' };
   } finally {
     clearInterval(awake);

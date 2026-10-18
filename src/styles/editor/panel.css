@@ -6,8 +6,8 @@
 .board-editor .board-editor__tools,
 .board-editor .copyables {
   box-sizing: border-box;
-  border: 1px solid var(--lr-ext-card-border);
-  background: var(--lr-ext-bg-panel) !important;
+  border: 1px solid var(--ln-ext-card-border);
+  background: var(--ln-ext-bg-panel) !important;
 }
 
 .board-editor .board-editor__tools {
@@ -56,9 +56,9 @@
   padding: 0 !important;
   border: 0 !important;
   border-radius: 10px !important;
-  background: var(--lr-ext-bg-raised) !important;
+  background: var(--ln-ext-bg-raised) !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 0 !important;
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -90,13 +90,13 @@
 
 /* "From image" draws Lichess's eye: an image says it better. */
 .board-editor .board-editor__tools .actions [data-icon='\e054']::before {
-  --lr-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/image-upload.svg');
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/image-upload.svg');
 }
 
 .board-editor .board-editor__tools .actions > :is(button, a):hover,
 .board-editor .board-editor__tools .actions > form > button:hover {
-  background: var(--lr-ext-bg-raised-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
   transform: translateY(-2px);
 }
 

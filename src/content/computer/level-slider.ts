@@ -37,37 +37,37 @@ function pick(level: number): void {
 /** Spread over the whole track at fixed spots, so the fill uncovers more as it grows. */
 function sparkles(): HTMLElement[] {
   return Array.from({ length: SPARKLES }, (_, i) => {
-    const sparkle = createElement('span', { className: 'lr-ext-level__sparkle' });
-    setStyleProperty(sparkle, '--lr-ext-x', `${((i * 37) % 97) + 1.5}%`);
-    setStyleProperty(sparkle, '--lr-ext-y', `${20 + ((i * 53) % 60)}%`);
-    setStyleProperty(sparkle, '--lr-ext-delay', `${((i * 0.43) % 2.4).toFixed(2)}s`);
+    const sparkle = createElement('span', { className: 'ln-ext-level__sparkle' });
+    setStyleProperty(sparkle, '--ln-ext-x', `${((i * 37) % 97) + 1.5}%`);
+    setStyleProperty(sparkle, '--ln-ext-y', `${20 + ((i * 53) % 60)}%`);
+    setStyleProperty(sparkle, '--ln-ext-delay', `${((i * 0.43) % 2.4).toFixed(2)}s`);
     return sparkle;
   });
 }
 
 function build(pane: HTMLElement): Parts {
-  const root = createElement('div', { className: 'lr-ext-level' });
-  const robot = createElement('div', { className: 'lr-ext-level__robot' });
-  const slider = createElement('div', { className: 'lr-ext-level__slider' });
+  const root = createElement('div', { className: 'ln-ext-level' });
+  const robot = createElement('div', { className: 'ln-ext-level__robot' });
+  const slider = createElement('div', { className: 'ln-ext-level__slider' });
   const label = queryOne(pane, '.label', HTMLElement)?.textContent.trim() ?? '';
   const input = createElement('input', {
-    className: 'lr-ext-level__input',
+    className: 'ln-ext-level__input',
     attrs: { type: 'range', min: '1', max: String(AI_LEVELS), step: '1', 'aria-label': label },
   });
-  const track = createElement('div', { className: 'lr-ext-level__track' });
-  const glints = createElement('span', { className: 'lr-ext-level__glints' });
+  const track = createElement('div', { className: 'ln-ext-level__track' });
+  const glints = createElement('span', { className: 'ln-ext-level__glints' });
   glints.append(...sparkles());
-  track.append(createElement('span', { className: 'lr-ext-level__fill' }), glints);
+  track.append(createElement('span', { className: 'ln-ext-level__fill' }), glints);
   for (let i = 0; i < AI_LEVELS; i++) {
-    const dot = createElement('span', { className: 'lr-ext-level__dot' });
-    setStyleProperty(dot, '--lr-ext-i', String(i));
+    const dot = createElement('span', { className: 'ln-ext-level__dot' });
+    setStyleProperty(dot, '--ln-ext-i', String(i));
     track.append(dot);
   }
-  track.append(createElement('span', { className: 'lr-ext-level__thumb' }));
+  track.append(createElement('span', { className: 'ln-ext-level__thumb' }));
   slider.append(input, track);
   const number = createElement('b');
   const rating = createElement('span');
-  const value = createElement('div', { className: 'lr-ext-level__value' });
+  const value = createElement('div', { className: 'ln-ext-level__value' });
   value.append(number, rating);
   root.append(robot, slider, value);
   pane.append(root);
@@ -85,8 +85,8 @@ function build(pane: HTMLElement): Parts {
 
 function show(parts: Parts, level: number): void {
   const { root, input, number, rating } = parts;
-  setData(root, 'lrExtTier', String(robotTier(level)));
-  setStyleProperty(root, '--lr-ext-level-p', String((level - 1) / (AI_LEVELS - 1)));
+  setData(root, 'lnExtTier', String(robotTier(level)));
+  setStyleProperty(root, '--ln-ext-level-p', String((level - 1) / (AI_LEVELS - 1)));
   if (input.value !== String(level)) input.value = String(level);
   if (number.textContent !== String(level)) number.textContent = String(level);
   const elo = AI_RATINGS[level - 1] ?? '';
@@ -99,8 +99,8 @@ export function syncLevelSlider(): LevelSlider | null {
   const group = checked?.closest('group');
   const pane = group?.parentElement;
   if (!checked || !(group instanceof HTMLElement) || !pane) return null;
-  setData(group, 'lrExtSlid', '');
-  const existing = queryOne(pane, ':scope > .lr-ext-level', HTMLElement);
+  setData(group, 'lnExtSlid', '');
+  const existing = queryOne(pane, ':scope > .ln-ext-level', HTMLElement);
   const parts = (existing && built.get(existing)) ?? build(pane);
   const level = Number(checked.value);
   show(parts, level);

@@ -39,40 +39,40 @@ html[dir='rtl'] main.team-list .box__top .search input {
 
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css); signed in, it
  * has the user's teams and their news, those they lead, the requests and a new team. */
-.subnav[data-lr-ext-nav~='teams'] a[href$='/team/all'],
-main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/all'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+.subnav[data-ln-ext-nav~='teams'] a[href$='/team/all'],
+main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/all'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
-.subnav[data-lr-ext-nav~='teams'] a[href$='/team/me'],
-main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/me'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='teams'] a[href$='/team/me'],
+main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/me'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
-.subnav[data-lr-ext-nav~='teams'] a[href$='/team/updates'],
-main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/updates'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
-  --lr-ext-nav-color: var(--lr-ext-green);
+.subnav[data-ln-ext-nav~='teams'] a[href$='/team/updates'],
+main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/updates'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
+  --ln-ext-nav-color: var(--ln-ext-green);
 }
 
-.subnav[data-lr-ext-nav~='teams'] a[href$='/team/leader'],
-main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/leader'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='teams'] a[href$='/team/leader'],
+main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/leader'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='teams'] a[href$='/team/requests'],
-main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/requests'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/inbox.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+.subnav[data-ln-ext-nav~='teams'] a[href$='/team/requests'],
+main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/requests'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/inbox.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='teams'] a[href$='/team/new'],
-main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/new'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-circle.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='teams'] a[href$='/team/new'],
+main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/new'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-circle.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
 /* Desktop only (Lichess's top bar holds the top edge below 1020px): the menu and title bar stay
@@ -86,8 +86,8 @@ main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/new'] {
     z-index: 3;
     margin-inline: -8px !important;
     padding-inline: 8px !important;
-    background: var(--lr-ext-bg-page);
-    box-shadow: var(--lr-ext-pin-cover);
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
   }
 
   main.team-list .box__top::after {
@@ -96,7 +96,7 @@ main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/new'] {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -115,7 +115,7 @@ main.page-menu[data-lr-ext-menu~='teams'][data-lr-ext-nav-active$='/team/new'] {
   }
 
   /* Focused elements scroll to below the bar. */
-  html[data-lr-ext-has~='team-list'] {
+  html[data-ln-ext-has~='team-list'] {
     scroll-padding-top: 90px;
   }
 }
@@ -137,7 +137,7 @@ main.team-list .slist tbody {
 
 main.team-list .slist tbody tr,
 main.team-list .slist tbody tr:nth-child(2n) {
-  --lr-ext-team: var(--lr-ext-accent);
+  --ln-ext-team: var(--ln-ext-accent);
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -146,9 +146,9 @@ main.team-list .slist tbody tr:nth-child(2n) {
   align-items: end;
   column-gap: 12px;
   padding: 16px 16px 14px 76px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   transition:
     background-color 0.15s,
     border-color 0.15s,
@@ -160,26 +160,26 @@ html[dir='rtl'] main.team-list .slist tbody tr {
 }
 
 main.team-list .slist tbody tr:hover {
-  border-color: var(--lr-ext-card-border-hover);
-  background: var(--lr-ext-card-hover) !important;
-  box-shadow: var(--lr-ext-card-shadow-hover);
+  border-color: var(--ln-ext-card-border-hover);
+  background: var(--ln-ext-card-hover) !important;
+  box-shadow: var(--ln-ext-card-shadow-hover);
 }
 
 /* Lichess has no team pictures: vary the avatar tints down the list. */
 main.team-list .slist tbody tr:nth-child(6n + 2) {
-  --lr-ext-team: var(--lr-ext-cyan-dark);
+  --ln-ext-team: var(--ln-ext-cyan-dark);
 }
 main.team-list .slist tbody tr:nth-child(6n + 3) {
-  --lr-ext-team: var(--lr-ext-orange-dark);
+  --ln-ext-team: var(--ln-ext-orange-dark);
 }
 main.team-list .slist tbody tr:nth-child(6n + 4) {
-  --lr-ext-team: var(--lr-ext-purple-dark);
+  --ln-ext-team: var(--ln-ext-purple-dark);
 }
 main.team-list .slist tbody tr:nth-child(6n + 5) {
-  --lr-ext-team: var(--lr-ext-red-dark);
+  --ln-ext-team: var(--ln-ext-red-dark);
 }
 main.team-list .slist tbody tr:nth-child(6n + 6) {
-  --lr-ext-team: var(--lr-ext-cyan-darker);
+  --ln-ext-team: var(--ln-ext-cyan-darker);
 }
 
 main.team-list .slist td,
@@ -202,7 +202,7 @@ main.team-list .slist td.subject {
 main.team-list .slist .team-name {
   display: block !important;
   overflow: hidden;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 16px !important;
   font-weight: 800;
   line-height: 1.35;
@@ -220,10 +220,10 @@ main.team-list .slist .team-name::after {
 
 /* Teams you're in keep Lichess's gold name. */
 main.team-list .slist .team-name.mine {
-  color: var(--lr-ext-brag, var(--lr-ext-orange-dark)) !important;
+  color: var(--ln-ext-brag, var(--ln-ext-orange-dark)) !important;
 }
 
-/* Avatar: the group icon on a tile tinted by `--lr-ext-team`. The icon is the name's glyph,
+/* Avatar: the group icon on a tile tinted by `--ln-ext-team`. The icon is the name's glyph,
  * masked to its Hugeicon (theme/hugeicons/), which would cut a tile drawn on it down to the
  * icon: the tile is the cell's own. */
 main.team-list .slist td.subject::before {
@@ -234,7 +234,7 @@ main.team-list .slist td.subject::before {
   width: 46px;
   height: 46px;
   border-radius: 10px;
-  background: color-mix(in srgb, var(--lr-ext-team) 22%, var(--lr-ext-bg-panel));
+  background: color-mix(in srgb, var(--ln-ext-team) 22%, var(--ln-ext-bg-panel));
 }
 
 main.team-list .slist .team-name::before {
@@ -244,7 +244,7 @@ main.team-list .slist .team-name::before {
   width: 46px;
   height: 46px;
   margin: 0 !important;
-  color: var(--lr-ext-team);
+  color: var(--ln-ext-team);
   font-size: 24px !important;
   line-height: 46px;
   text-align: center;
@@ -269,8 +269,8 @@ main.team-list .slist .team-name em {
   margin-inline-start: 8px !important;
   padding: 1px 6px !important;
   border-radius: 4px !important;
-  background: color-mix(in srgb, var(--lr-ext-accent) 20%, transparent) !important;
-  color: var(--lr-ext-accent-hover) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 20%, transparent) !important;
+  color: var(--ln-ext-accent-hover) !important;
   font-size: 11px !important;
   font-style: normal;
   font-weight: 800;
@@ -283,7 +283,7 @@ main.team-list .slist .team-name + span {
   overflow: hidden;
   min-height: 2.8em;
   margin-top: 4px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   line-height: 1.4;
   overflow-wrap: anywhere;
@@ -301,7 +301,7 @@ main.team-list .slist td.info p {
   align-items: center;
   gap: 6px;
   margin: 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
   text-align: start !important;
@@ -344,7 +344,7 @@ main.team-list .slist tbody tr:has(> td:only-child) {
 }
 
 main.team-list .slist tbody tr > td:only-child {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   text-align: center;
 }
 

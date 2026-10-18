@@ -15,22 +15,22 @@ interface PublicPage {
 }
 
 const PAGES: readonly PublicPage[] = [
-  { name: 'home', path: '/', ours: 'main.lobby > .lr-ext-hero + .lr-ext-speeds' },
+  { name: 'home', path: '/', ours: 'main.lobby > .ln-ext-hero + .ln-ext-speeds' },
   {
     name: 'a finished game’s analysis',
     path: FINISHED_GAME.path,
-    ours: 'main.analyse > #lr-ext-review',
+    ours: 'main.analyse > #ln-ext-review',
   },
-  { name: 'the free analysis board', path: '/analysis', ours: '#lr-ext-review .lr-ext-coach' },
-  { name: 'TV', path: '/tv', ours: 'main.round > .lr-ext-board-tools' },
-  { name: 'a profile', path: '/@/DrNykterstein', ours: 'html[data-lr-ext-has~="user-show"]' },
-  { name: 'puzzles', path: '/training', ours: 'html[data-lr-ext-has~="puzzle"]' },
+  { name: 'the free analysis board', path: '/analysis', ours: '#ln-ext-review .ln-ext-coach' },
+  { name: 'TV', path: '/tv', ours: 'main.round > .ln-ext-board-tools' },
+  { name: 'a profile', path: '/@/DrNykterstein', ours: 'html[data-ln-ext-has~="user-show"]' },
+  { name: 'puzzles', path: '/training', ours: 'html[data-ln-ext-has~="puzzle"]' },
   {
     name: 'a practice lesson',
     path: '/practice/checkmates/piece-checkmates-i/BJy6fEDf',
-    ours: 'html[data-lr-ext-has~="practice"]',
+    ours: 'html[data-ln-ext-has~="practice"]',
   },
-  { name: 'the forum', path: '/forum', ours: 'main.forum .categs tr[data-lr-ext-href]' },
+  { name: 'the forum', path: '/forum', ours: 'main.forum .categs tr[data-ln-ext-href]' },
 ];
 
 // Lichess's panels and page, recolored by styles/theme.
@@ -40,7 +40,7 @@ const PAGE_BACKGROUND = 'rgb(48, 46, 43)';
 for (const { name, path, ours } of PAGES) {
   test(`${name} gets the extension`, async ({ page, extensionErrors }) => {
     await openLichess(page, path);
-    expect(await rootVariable(page, '--lr-ext-bg-panel')).toBe(PANEL_COLOR);
+    expect(await rootVariable(page, '--ln-ext-bg-panel')).toBe(PANEL_COLOR);
     await expectSidebar(page);
     await expect(page.locator(ours).first()).toBeAttached();
     // The page script is in too: headless Chrome asks for reduced motion, which
@@ -62,7 +62,7 @@ test.describe('in Lichess’s light theme', () => {
     await openLichess(page, '/');
     await expect(page.locator('html')).toHaveClass(/\blight\b/);
     await expect(page.locator('html')).toHaveCSS('background-color', PAGE_BACKGROUND);
-    expect(await rootVariable(page, '--lr-ext-bg-panel')).toBe(PANEL_COLOR);
+    expect(await rootVariable(page, '--ln-ext-bg-panel')).toBe(PANEL_COLOR);
     await expectSidebar(page);
   });
 });

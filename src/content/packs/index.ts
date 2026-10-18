@@ -62,7 +62,7 @@ function createBacklitSwitch(): (shown: Shown) => void {
   const show = (): void => {
     const settings = readBacklit();
     if (board !== null) showKeys(board, keyBox(settings.shape));
-    setData(document.documentElement, 'lrExtBacklit', board && backlitWords(settings));
+    setData(document.documentElement, 'lnExtBacklit', board && backlitWords(settings));
   };
   onBacklitChange(() => {
     show();

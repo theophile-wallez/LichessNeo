@@ -28,14 +28,14 @@ const ARENA_PODIUM = `<main class="tour"><div class="podium">${place('second', '
 
 const scoresShown = (): (string | null)[] =>
   Array.from(document.querySelectorAll('.podium > div'), div => {
-    const score = div.querySelector(':scope > .lr-ext-podium__score');
+    const score = div.querySelector(':scope > .ln-ext-podium__score');
     return score ? score.textContent : null;
   });
 
 afterEach(() => {
   document.body.innerHTML = '';
   document.documentElement.lang = '';
-  delete document.documentElement.dataset.lrExtPointsLabel;
+  delete document.documentElement.dataset.lnExtPointsLabel;
 });
 
 describe('podium scores', () => {
@@ -61,10 +61,10 @@ describe('podium scores', () => {
 describe('the podium', () => {
   it('shows each player’s score with Lichess’s word for it', () => {
     document.body.innerHTML = ARENA_PODIUM;
-    document.documentElement.dataset.lrExtPointsLabel = 'Punkte';
+    document.documentElement.dataset.lnExtPointsLabel = 'Punkte';
     syncPodium(podiumScores(ARENA_INIT));
     expect(scoresShown()).toEqual(['36 Punkte', '36 Punkte', '34 Punkte']);
-    const score = document.querySelector('.first > .lr-ext-podium__score');
+    const score = document.querySelector('.first > .ln-ext-podium__score');
     expect(score?.querySelector('b')?.textContent).toBe('36');
     expect(score?.previousElementSibling?.matches('table.stats')).toBe(true);
   });
@@ -74,11 +74,11 @@ describe('the podium', () => {
     document.documentElement.lang = 'fr';
     const scores = podiumScores(SWISS_INIT);
     syncPodium(scores);
-    const score = document.querySelector('.lr-ext-podium__score');
+    const score = document.querySelector('.ln-ext-podium__score');
     expect(score?.textContent).toBe('7,5');
     syncPodium(scores);
-    expect(document.querySelector('.lr-ext-podium__score')).toBe(score);
-    expect(document.querySelectorAll('.lr-ext-podium__score')).toHaveLength(1);
+    expect(document.querySelector('.ln-ext-podium__score')).toBe(score);
+    expect(document.querySelectorAll('.ln-ext-podium__score')).toHaveLength(1);
   });
 
   it('adds the word once Lichess’s translations are in', () => {
@@ -86,7 +86,7 @@ describe('the podium', () => {
     const scores = podiumScores(ARENA_INIT);
     syncPodium(scores);
     expect(scoresShown()).toEqual(['36', '36', '34']);
-    document.documentElement.dataset.lrExtPointsLabel = 'Points';
+    document.documentElement.dataset.lnExtPointsLabel = 'Points';
     syncPodium(scores);
     expect(scoresShown()).toEqual(['36 Points', '36 Points', '34 Points']);
   });

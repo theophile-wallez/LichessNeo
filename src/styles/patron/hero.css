@@ -33,37 +33,37 @@ main.plan > .page-menu__content > .box__pad {
 /* Lichess only colors the icon (pacoN class): put the wing color on the whole chip
    for its tile and hover. Lapsed patrons, still on the list, get grey. */
 main.plan :is(.best_patrons, .recent-patrons) .list > div {
-  --lr-ext-paco: var(--lr-ext-text-dim);
+  --ln-ext-paco: var(--ln-ext-text-dim);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco1) {
-  --lr-ext-paco: var(--c-patron-1);
+  --ln-ext-paco: var(--c-patron-1);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco2) {
-  --lr-ext-paco: var(--c-patron-2);
+  --ln-ext-paco: var(--c-patron-2);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco3) {
-  --lr-ext-paco: var(--c-patron-3);
+  --ln-ext-paco: var(--c-patron-3);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco4) {
-  --lr-ext-paco: var(--c-patron-4);
+  --ln-ext-paco: var(--c-patron-4);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco5) {
-  --lr-ext-paco: var(--c-patron-5);
+  --ln-ext-paco: var(--c-patron-5);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco6) {
-  --lr-ext-paco: var(--c-patron-6);
+  --ln-ext-paco: var(--c-patron-6);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco7) {
-  --lr-ext-paco: var(--c-patron-7);
+  --ln-ext-paco: var(--c-patron-7);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco8) {
-  --lr-ext-paco: var(--c-patron-8);
+  --ln-ext-paco: var(--c-patron-8);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco9) {
-  --lr-ext-paco: var(--c-patron-9);
+  --ln-ext-paco: var(--c-patron-9);
 }
 main.plan :is(.best_patrons, .recent-patrons) .list > div:has(.paco10) {
-  --lr-ext-paco: var(--c-patron-10);
+  --ln-ext-paco: var(--c-patron-10);
 }
 
 /* ---- Hero --- */
@@ -80,21 +80,21 @@ main.plan .banner {
   margin: 0 0 16px !important;
   padding: 28px 24px !important;
   overflow: hidden;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 14px !important;
   background:
     radial-gradient(
       circle at 9% 55%,
-      color-mix(in srgb, var(--lr-ext-orange-dark) 18%, transparent),
+      color-mix(in srgb, var(--ln-ext-orange-dark) 18%, transparent),
       transparent 26%
     ),
     radial-gradient(
       circle at 91% 55%,
-      color-mix(in srgb, var(--lr-ext-orange-dark) 18%, transparent),
+      color-mix(in srgb, var(--ln-ext-orange-dark) 18%, transparent),
       transparent 26%
     ),
-    var(--lr-ext-bg-panel) !important;
-  color: var(--lr-ext-text) !important;
+    var(--ln-ext-bg-panel) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 17px !important;
   line-height: 1.5;
   text-align: center;
@@ -109,8 +109,8 @@ main.plan .banner::before {
   background: linear-gradient(
     90deg,
     transparent,
-    var(--lr-ext-orange-dark) 30%,
-    var(--lr-ext-orange-dark) 70%,
+    var(--ln-ext-orange-dark) 30%,
+    var(--ln-ext-orange-dark) 70%,
     transparent
   );
   opacity: 0.8;
@@ -125,8 +125,8 @@ main.plan .banner h1.box__top {
   display: block !important;
   margin: 0 0 8px !important;
   padding: 0 !important;
-  color: var(--lr-ext-text-strong) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 34px !important;
   line-height: 1.15;
   text-wrap: balance;
@@ -134,36 +134,36 @@ main.plan .banner h1.box__top {
 
 main.plan .banner p {
   margin: 0;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 17px;
   font-weight: 600;
 }
 
 /* Gold wings flapping from where they attach (the inner bottom corner). The right
-   one is Lichess's mirror of the left, so --lr-ext-wing mirrors its flap too. */
+   one is Lichess's mirror of the left, so --ln-ext-wing mirrors its flap too. */
 main.plan .banner > icon {
-  --lr-ext-wing: none;
+  --ln-ext-wing: none;
   flex: none;
   margin: 0 !important;
   font-size: 104px !important;
   line-height: 1;
   transform-origin: 50% 85%;
-  transform: var(--lr-ext-wing) translateX(32%) rotate(0deg) translateX(-32%);
-  filter: drop-shadow(0 6px 14px var(--lr-ext-shade-50));
-  animation: lr-ext-plan-flap 3.2s ease-in-out infinite;
+  transform: var(--ln-ext-wing) translateX(32%) rotate(0deg) translateX(-32%);
+  filter: drop-shadow(0 6px 14px var(--ln-ext-shade-50));
+  animation: ln-ext-plan-flap 3.2s ease-in-out infinite;
 }
 
 main.plan .banner > icon:last-child {
-  --lr-ext-wing: scaleX(-1);
+  --ln-ext-wing: scaleX(-1);
 }
 
 main.plan .banner > icon::before {
   background: linear-gradient(
     150deg,
-    var(--lr-ext-orange-light) 10%,
-    var(--lr-ext-orange-dark) 35%,
-    var(--lr-ext-orange-dark) 60%,
-    var(--lr-ext-orange-darker) 95%
+    var(--ln-ext-orange-light) 10%,
+    var(--ln-ext-orange-dark) 35%,
+    var(--ln-ext-orange-dark) 60%,
+    var(--ln-ext-orange-darker) 95%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -171,13 +171,13 @@ main.plan .banner > icon::before {
   opacity: 1 !important;
 }
 
-@keyframes lr-ext-plan-flap {
+@keyframes ln-ext-plan-flap {
   45% {
-    transform: var(--lr-ext-wing) translateX(32%) rotate(-9deg) translateX(-32%);
+    transform: var(--ln-ext-wing) translateX(32%) rotate(-9deg) translateX(-32%);
   }
 
   60% {
-    transform: var(--lr-ext-wing) translateX(32%) rotate(-7deg) translateX(-32%);
+    transform: var(--ln-ext-wing) translateX(32%) rotate(-7deg) translateX(-32%);
   }
 }
 
@@ -223,9 +223,9 @@ main.plan .wrapper > :is(.text, .content) {
   justify-content: center;
   margin: 0 !important;
   padding: 24px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 12px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
 }
 
 /* The pitch: a heart on a pink tile, then the two paragraphs. */
@@ -239,7 +239,7 @@ main.plan .wrapper > .text::before {
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background: var(--lr-ext-pink);
+  background: var(--ln-ext-pink);
   mask:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg') center / 28px
       no-repeat,
@@ -248,13 +248,13 @@ main.plan .wrapper > .text::before {
 
 main.plan .wrapper > .text p {
   margin: 0;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 15px;
   line-height: 1.6;
 }
 
 main.plan .wrapper > .text p:first-of-type {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 18px;
   font-weight: 700;
   line-height: 1.45;
@@ -277,18 +277,18 @@ main.plan .plan_checkout:not(:has(group))::before {
   width: 84px;
   height: 84px;
   border-radius: 22px;
-  background: var(--lr-ext-pink);
+  background: var(--ln-ext-pink);
   mask:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/gift.svg') center / 44px no-repeat,
     linear-gradient(#0000003d, #0000003d);
-  animation: lr-ext-plan-float 4s ease-in-out infinite;
+  animation: ln-ext-plan-float 4s ease-in-out infinite;
 }
 
 main.plan .plan_checkout:not(:has(group)) .service {
   width: 100%;
 }
 
-@keyframes lr-ext-plan-float {
+@keyframes ln-ext-plan-float {
   50% {
     transform: translateY(-6px) rotate(-4deg);
   }

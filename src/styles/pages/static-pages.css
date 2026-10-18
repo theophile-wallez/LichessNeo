@@ -8,15 +8,15 @@
 @media (min-width: 1020px) {
   main.page-menu
     > .subnav:is(
-      [data-lr-ext-nav~='about'],
-      [data-lr-ext-nav~='variants'],
-      [data-lr-ext-nav~='streamers']
+      [data-ln-ext-nav~='about'],
+      [data-ln-ext-nav~='variants'],
+      [data-ln-ext-nav~='streamers']
     ),
   main.page-menu:is(.video, .tv-games) > .page-menu__menu {
     position: sticky;
     top: 16px;
     align-self: start;
-    max-height: calc(var(--lr-ext-main-h, 100dvh) - 32px);
+    max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
     overflow-y: auto;
     scrollbar-width: thin;
   }
@@ -41,8 +41,8 @@
     position: sticky;
     z-index: 2;
     top: 0;
-    background: var(--lr-ext-bg-panel);
-    box-shadow: var(--lr-ext-pin-cover);
+    background: var(--ln-ext-bg-panel);
+    box-shadow: var(--ln-ext-pin-cover);
   }
 
   main.page-menu > .page-menu__content.page.box-pad > .box__top,
@@ -63,7 +63,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -93,8 +93,8 @@
     top: 0;
     margin: 0 !important;
     padding: 16px 0 !important;
-    background: var(--lr-ext-bg-page);
-    box-shadow: var(--lr-ext-pin-cover);
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
   }
 
   main.page-menu > .page-menu__content.page > section.box:first-child > h1.box__top::after {
@@ -103,7 +103,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -157,7 +157,7 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
   height: 52px;
   border-radius: 13px;
   /* The glyph at full strength over the tile at a quarter, as menu-titles.css draws them. */
-  background: var(--lr-ext-purple);
+  background: var(--ln-ext-purple);
   mask:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dice.svg') center / 30px 30px
       no-repeat,
@@ -167,18 +167,18 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
 /* Lichess rules each section off in its gold: a quiet line instead. */
 .page .body h2,
 .cms-preview h2 {
-  border-bottom-color: var(--lr-ext-border) !important;
+  border-bottom-color: var(--ln-ext-border) !important;
 }
 
 /* Variants: bold headings instead of thin spaced-out capitals, and a grey hover
  * instead of Lichess's green tint on the whole row. */
 .page-menu__content.variants .variant:hover {
-  background: var(--lr-ext-lift-4) !important;
+  background: var(--ln-ext-lift-4) !important;
 }
 
 .page-menu__content.variants .variant h2 {
-  color: var(--lr-ext-text-strong);
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-strong);
+  font-family: var(--ln-ext-font) !important;
   font-size: 20px !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
@@ -187,14 +187,14 @@ main.page-menu > .page-menu__content.variants > h1.box__top::before {
 
 .page-menu__content.variants .variant h3 {
   margin-top: 2px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 14px;
   font-style: normal !important;
   font-weight: 600 !important;
 }
 
 .page-menu__content.variant .headline {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-style: normal !important;
   font-weight: 600 !important;
 }

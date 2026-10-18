@@ -5,7 +5,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 import { createSizeWatch } from './size-watch.ts';
 
 // Chessground shrinks the board to whole pixels per square and leaves the rest
-// as an inset inside its wrapper. `--lr-ext-inset-{t,r,b,l}` let the player bars
+// as an inset inside its wrapper. `--ln-ext-inset-{t,r,b,l}` let the player bars
 // and the eval bar line up with the squares rather than the wrapper.
 
 type Edges = Pick<Box, 'top' | 'right' | 'bottom' | 'left'>;
@@ -40,7 +40,7 @@ function findBoard(): BoardParts | null {
 function setInset({ main, container, wrapper }: BoardParts): void {
   const inset = squaresInset(container.getBoundingClientRect(), wrapper.getBoundingClientRect());
   for (const [side, pixels] of Object.entries(inset))
-    setStyleProperty(main, `--lr-ext-inset-${side}`, `${pixels}px`);
+    setStyleProperty(main, `--ln-ext-inset-${side}`, `${pixels}px`);
 }
 
 export function syncBoardInset(): void {

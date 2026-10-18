@@ -15,7 +15,7 @@
     margin: 8px 0 0 !important;
     padding: 6px !important;
     border-radius: 10px;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
@@ -33,7 +33,7 @@
     min-width: 0;
     border: none !important;
     border-radius: 6px;
-    color: var(--lr-ext-text) !important;
+    color: var(--ln-ext-text) !important;
   }
 
   main.analyse .analyse__controls > .fbt {
@@ -44,12 +44,12 @@
     height: 44px;
     padding: 0 !important;
     background: none !important;
-    color: var(--lr-ext-text-dim) !important;
+    color: var(--ln-ext-text-dim) !important;
     font-size: 18px;
   }
 
   /* Lichess's mobile layout keeps its underboard in view: no button to open it. */
-  main.analyse .analyse__controls > .lr-ext-underboard {
+  main.analyse .analyse__controls > .ln-ext-underboard {
     display: none !important;
   }
 
@@ -74,8 +74,8 @@
   }
 
   main.analyse .analyse__controls > .fbt[data-act='engine-mode'] eval {
-    color: var(--lr-ext-text-strong);
-    font-family: var(--lr-ext-font);
+    color: var(--ln-ext-text-strong);
+    font-family: var(--ln-ext-font);
     font-size: 13px;
     font-weight: 800;
     line-height: 1;
@@ -88,16 +88,16 @@
 
   /* Lichess fills an active toggle with its green, hiding the green icon: a faint tile instead. */
   main.analyse .analyse__controls > .fbt.active {
-    background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
-    color: var(--lr-ext-accent) !important;
+    background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent) !important;
+    color: var(--ln-ext-accent) !important;
   }
 
   main.analyse .analyse__controls .jumps .fbt {
     min-width: 0;
     height: 44px;
     padding: 0 !important;
-    background: var(--lr-ext-btn-grey) !important;
-    box-shadow: var(--lr-ext-btn-grey-shadow);
+    background: var(--ln-ext-btn-grey) !important;
+    box-shadow: var(--ln-ext-btn-grey-shadow);
     font-size: 20px;
   }
 
@@ -108,13 +108,13 @@
   /* The menu opens in place of the moves, as on the desktop. */
   main.analyse .analyse__tools > .action-menu {
     border: none !important;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
   }
 
   main.analyse .action-menu > .title {
     padding: 14px 12px 6px !important;
     background: none !important;
-    color: var(--lr-ext-text-dim) !important;
+    color: var(--ln-ext-text-dim) !important;
     font-size: 12px !important;
     font-weight: 700;
     letter-spacing: 0.04em;

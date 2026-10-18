@@ -88,48 +88,48 @@ const ENDGAME = lichessTheme('/training/endgame', 'The end.', null);
 describe('the areas’ page', () => {
   it('puts the first theme in its own card, with the mascot, its numbers and its links', () => {
     const body = drawn('weak', SACRIFICE, FORK);
-    const hero = queryOne(body, '.lr-ext-pdash__hero', HTMLElement);
+    const hero = queryOne(body, '.ln-ext-pdash__hero', HTMLElement);
     if (!hero) throw new Error('no card');
     expect(text(hero, 'small')).toBe('pdashStartHere');
     expect(text(hero, 'h2')).toBe('Sacrifice');
     expect(text(hero, 'p')).toBe('Give up.');
-    expect(queryOne(hero, '.lr-ext-pdash__mascot', HTMLElement)?.dataset.lrExtAvatarCoach).toBe(
+    expect(queryOne(hero, '.ln-ext-pdash__mascot', HTMLElement)?.dataset.lnExtAvatarCoach).toBe(
       '3',
     );
     expect(
-      queryOne(hero, '.lr-ext-pdash__ring', HTMLElement)?.style.getPropertyValue(
-        '--lr-ext-pdash-p',
+      queryOne(hero, '.ln-ext-pdash__ring', HTMLElement)?.style.getPropertyValue(
+        '--ln-ext-pdash-p',
       ),
     ).toBe('0.250');
-    expect(text(hero, '.lr-ext-pdash__fact b')).toBe('1,864 −300');
-    expect(queryOne(hero, '.lr-ext-pdash__train', HTMLAnchorElement)?.getAttribute('href')).toBe(
+    expect(text(hero, '.ln-ext-pdash__fact b')).toBe('1,864 −300');
+    expect(queryOne(hero, '.ln-ext-pdash__train', HTMLAnchorElement)?.getAttribute('href')).toBe(
       '/training/sacrifice',
     );
-    expect(text(hero, '.lr-ext-pdash__again')).toBe('pdashReplayCount:3');
+    expect(text(hero, '.ln-ext-pdash__again')).toBe('pdashReplayCount:3');
   });
 
   it('lists the others under it, each with its gap, its level and its links', () => {
     const body = drawn('weak', SACRIFICE, FORK, ENDGAME);
-    const rows = queryAll(body, '.lr-ext-pdash__area', HTMLElement);
-    expect(text(body, '.lr-ext-pdash__list h2')).toBe('pdashThenThese');
-    expect(rows.map(row => text(row, '.lr-ext-pdash__theme b'))).toEqual(['Fork', 'Endgame']);
-    expect(text(rows[0] ?? body, '.lr-ext-pdash__theme small')).toBe('±0 pdashAgainst:2,089');
-    expect(text(rows[0] ?? body, '.lr-ext-pdash__again')).toBe('3');
-    expect(text(rows[0] ?? body, '.lr-ext-pdash__go')).toBe('pdashTrain');
+    const rows = queryAll(body, '.ln-ext-pdash__area', HTMLElement);
+    expect(text(body, '.ln-ext-pdash__list h2')).toBe('pdashThenThese');
+    expect(rows.map(row => text(row, '.ln-ext-pdash__theme b'))).toEqual(['Fork', 'Endgame']);
+    expect(text(rows[0] ?? body, '.ln-ext-pdash__theme small')).toBe('±0 pdashAgainst:2,089');
+    expect(text(rows[0] ?? body, '.ln-ext-pdash__again')).toBe('3');
+    expect(text(rows[0] ?? body, '.ln-ext-pdash__go')).toBe('pdashTrain');
     // Without Lichess's link, no replay.
-    expect(queryOne(rows[1] ?? body, '.lr-ext-pdash__again', HTMLElement)).toBeNull();
+    expect(queryOne(rows[1] ?? body, '.ln-ext-pdash__again', HTMLElement)).toBeNull();
   });
 
   it('words the strengths as strengths', () => {
     const body = drawn('strong', SACRIFICE, FORK);
-    expect(text(body, '.lr-ext-pdash__hero small')).toBe('pdashBestWeapon');
-    expect(text(body, '.lr-ext-pdash__train')).toBe('pdashKeepSharp');
-    expect(text(body, '.lr-ext-pdash__list h2')).toBe('pdashAlsoStrong');
-    expect(text(body, '.lr-ext-pdash__go')).toBe('pdashKeep');
+    expect(text(body, '.ln-ext-pdash__hero small')).toBe('pdashBestWeapon');
+    expect(text(body, '.ln-ext-pdash__train')).toBe('pdashKeepSharp');
+    expect(text(body, '.ln-ext-pdash__list h2')).toBe('pdashAlsoStrong');
+    expect(text(body, '.ln-ext-pdash__go')).toBe('pdashKeep');
   });
 
   it('has no list for a single theme, and nothing at all for none', () => {
-    expect(queryOne(drawn('weak', SACRIFICE), '.lr-ext-pdash__list', HTMLElement)).toBeNull();
+    expect(queryOne(drawn('weak', SACRIFICE), '.ln-ext-pdash__list', HTMLElement)).toBeNull();
     expect(drawn('weak').innerHTML.trim()).toBe('');
   });
 
@@ -138,6 +138,6 @@ describe('the areas’ page', () => {
       <h3><a href="/training/exposedKing">Exposed king</a></h3>
       <a class="puzzle-dashboard__metric--fix" href="/training/replay/30/exposedKing"></a>
     </div>`);
-    expect(queryOne(drawn('strong', solved), '.lr-ext-pdash__again', HTMLElement)).toBeNull();
+    expect(queryOne(drawn('strong', solved), '.ln-ext-pdash__again', HTMLElement)).toBeNull();
   });
 });

@@ -6,28 +6,28 @@
 
 /* ---- Frame --- */
 
-main.round .rcontrols .follow-up[data-lr-ext-end-card],
-.lr-ext-end__frame {
+main.round .rcontrols .follow-up[data-ln-ext-end-card],
+.ln-ext-end__frame {
   margin: 10px 0 8px;
   padding: 10px !important;
   border-radius: 16px;
-  background: var(--lr-ext-neutral-5);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-8);
+  background: var(--ln-ext-neutral-5);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-8);
 }
 
-.lr-ext-end__frame {
+.ln-ext-end__frame {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin: 0;
 }
 
-.lr-ext-end__foot {
+.ln-ext-end__foot {
   display: flex;
   gap: 6px;
 }
 
-.lr-ext-end__foot .lr-ext-btn {
+.ln-ext-end__foot .ln-ext-btn {
   flex: 1 1 0;
   min-width: 0;
   height: 40px;
@@ -35,41 +35,41 @@ main.round .rcontrols .follow-up[data-lr-ext-end-card],
   font-size: 14px;
 }
 
-.lr-ext-end__foot .lr-ext-btn--green {
+.ln-ext-end__foot .ln-ext-btn--green {
   flex-grow: 1.4;
 }
 
 /* ---- Card --- */
 
-.lr-ext-end__card {
-  --lr-ext-coach-h: 140px;
-  --lr-ext-tag-c: var(--lr-ext-good);
+.ln-ext-end__card {
+  --ln-ext-coach-h: 140px;
+  --ln-ext-tag-c: var(--ln-ext-good);
   display: flex;
   flex-direction: column;
   gap: 10px;
   container-type: inline-size;
-  color: var(--lr-ext-text-strong);
-  font-family: var(--lr-ext-font);
+  color: var(--ln-ext-text-strong);
+  font-family: var(--ln-ext-font);
   text-align: start;
 }
 
-.lr-ext-end__card--loss {
-  --lr-ext-tag-c: var(--lr-ext-bad);
+.ln-ext-end__card--loss {
+  --ln-ext-tag-c: var(--ln-ext-bad);
 }
 
-.lr-ext-end__card--draw {
-  --lr-ext-tag-c: var(--lr-ext-text-dim);
+.ln-ext-end__card--draw {
+  --ln-ext-tag-c: var(--ln-ext-text-dim);
 }
 
 /* At a game's end it comes in once; the closed review draws it again as its analysis goes. */
-main.round .rcontrols .follow-up > .lr-ext-end__card {
+main.round .rcontrols .follow-up > .ln-ext-end__card {
   order: -3;
   flex-basis: 100%;
   margin-bottom: 2px;
-  animation: lr-ext-end-card 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+  animation: ln-ext-end-card 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
 }
 
-@keyframes lr-ext-end-card {
+@keyframes ln-ext-end-card {
   from {
     opacity: 0;
     translate: 0 8px;
@@ -78,17 +78,17 @@ main.round .rcontrols .follow-up > .lr-ext-end__card {
 
 /* Short windows and narrow panels: the moves keep their room, the words theirs. */
 @media (max-height: 820px) {
-  .lr-ext-end__card {
-    --lr-ext-coach-h: 112px;
+  .ln-ext-end__card {
+    --ln-ext-coach-h: 112px;
   }
 }
 
 @container (max-width: 400px) {
-  .lr-ext-end__card .lr-ext-end__glow {
-    --lr-ext-coach-h: 108px;
+  .ln-ext-end__card .ln-ext-end__glow {
+    --ln-ext-coach-h: 108px;
   }
 
-  .lr-ext-end__card .lr-ext-end__title {
+  .ln-ext-end__card .ln-ext-end__title {
     font-size: 22px;
   }
 }
@@ -96,11 +96,11 @@ main.round .rcontrols .follow-up > .lr-ext-end__card {
 /* A phone: a smaller coach leaves the words room. */
 @media (max-width: 1019.98px) {
   @container (max-width: 360px) {
-    .lr-ext-end__card .lr-ext-end__glow {
-      --lr-ext-coach-h: 92px;
+    .ln-ext-end__card .ln-ext-end__glow {
+      --ln-ext-coach-h: 92px;
     }
 
-    .lr-ext-end__card .lr-ext-end__title {
+    .ln-ext-end__card .ln-ext-end__title {
       font-size: 20px;
     }
   }
@@ -112,39 +112,39 @@ main.round .rcontrols .follow-up > .lr-ext-end__card {
    stands on its bottom edge, with room above for its hops and at its sides for its arms
    (about a fifth of its height, the fox's reach the farthest): only the glow's edge cuts it,
    at its feet. */
-.lr-ext-end__glow {
+.ln-ext-end__glow {
   display: flex;
-  gap: calc(var(--lr-ext-coach-h) / 6);
-  padding-inline-start: calc(var(--lr-ext-coach-h) / 5);
-  min-height: calc(var(--lr-ext-coach-h) + 18px);
+  gap: calc(var(--ln-ext-coach-h) / 6);
+  padding-inline-start: calc(var(--ln-ext-coach-h) / 5);
+  min-height: calc(var(--ln-ext-coach-h) + 18px);
   overflow: hidden;
   border-radius: 12px;
   background:
     radial-gradient(
       70% 140% at 18% 125%,
-      color-mix(in srgb, var(--lr-ext-tag-c) 55%, transparent),
+      color-mix(in srgb, var(--ln-ext-tag-c) 55%, transparent),
       transparent 70%
     ),
     linear-gradient(
       100deg,
-      color-mix(in srgb, var(--lr-ext-tag-c) 22%, transparent),
+      color-mix(in srgb, var(--ln-ext-tag-c) 22%, transparent),
       transparent 85%
     );
 }
 
-.lr-ext-end__card .lr-ext-coach__avatar {
+.ln-ext-end__card .ln-ext-coach__avatar {
   align-self: flex-end;
   cursor: default;
 }
 
-.lr-ext-end__card .lr-ext-coach__avatar:hover {
+.ln-ext-end__card .ln-ext-coach__avatar:hover {
   transform: none;
 }
 
 /* The canvas spills past the avatar's sides, so its arms show, and above it, into the room
    for its hops. The framing stays the avatar's (content/coach/mascot/stage.ts). The id
    outweighs the review's own rule for its coach's canvas (review/bubble.css). */
-:is(#lr-ext-review, main.round) .lr-ext-end__card .lr-ext-coach__face canvas {
+:is(#ln-ext-review, main.round) .ln-ext-end__card .ln-ext-coach__face canvas {
   top: -13%;
   left: -60%;
   width: 220%;
@@ -153,7 +153,7 @@ main.round .rcontrols .follow-up > .lr-ext-end__card {
 
 /* ---- Words --- */
 
-.lr-ext-end__main {
+.ln-ext-end__main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -161,16 +161,16 @@ main.round .rcontrols .follow-up > .lr-ext-end__card {
   padding: 14px 14px 14px 0;
 }
 
-.lr-ext-end__reason {
+.ln-ext-end__reason {
   margin: 0;
-  color: var(--lr-ext-tag-c);
+  color: var(--ln-ext-tag-c);
   font-size: 11.5px;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.lr-ext-end__title {
+.ln-ext-end__title {
   margin: 2px 0 0;
   font-size: 26px;
   font-weight: 900;
@@ -179,10 +179,10 @@ main.round .rcontrols .follow-up > .lr-ext-end__card {
 }
 
 /* The coach's words, typed out as it speaks: two lines kept, so the card keeps its height. */
-.lr-ext-end__bubble {
+.ln-ext-end__bubble {
   min-height: 2.9em;
   margin: 4px 0 0;
-  color: var(--lr-ext-neutral-12);
+  color: var(--ln-ext-neutral-12);
   font-size: 14px;
   line-height: 1.45;
 }

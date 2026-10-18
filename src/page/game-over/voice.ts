@@ -9,5 +9,5 @@ export type { Voice };
 export const createVoice = (bubble: HTMLElement, coachId: number): Voice =>
   createCoachVoice(bubble, {
     talk: (mood, talking) => postCoachState({ coach: coachId, mood, talking }),
-    emptyClass: 'lr-ext-end__bubble--empty',
+    emptyClass: 'ln-ext-end__bubble--empty',
   });

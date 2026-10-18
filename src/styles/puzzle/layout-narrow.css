@@ -6,12 +6,12 @@
    buttons and the coach's card on the first screen. */
 @media (max-width: 1019.98px) {
   main.puzzle {
-    --lr-ext-board: min(
+    --ln-ext-board: min(
       100vw - 16px,
       max(280px, 100dvh - var(---site-header-height, 60px) - 264px)
     );
 
-    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-columns: var(--ln-ext-board) !important;
     grid-template-rows: none !important;
     grid-template-areas: 'board' 'controls' 'session' 'tools' 'side' 'kb-move' !important;
     justify-content: center;
@@ -45,12 +45,12 @@
   /* The board's menu: a button like the jumps, a hamburger on it. */
   main.puzzle .puzzle__controls > .fbt {
     flex: 0 0 56px;
-    height: var(--lr-ext-jumps-h);
+    height: var(--ln-ext-jumps-h);
     border: none !important;
     border-radius: 8px !important;
-    background: var(--lr-ext-btn-grey) !important;
-    box-shadow: var(--lr-ext-btn-grey-shadow);
-    color: var(--lr-ext-neutral-12) !important;
+    background: var(--ln-ext-btn-grey) !important;
+    box-shadow: var(--ln-ext-btn-grey-shadow);
+    color: var(--ln-ext-neutral-12) !important;
   }
 
   /* The chips on one row that scrolls sideways (content/puzzle/session.ts keeps the latest in
@@ -64,7 +64,7 @@
     padding: 10px 12px;
     overflow-x: auto;
     border-radius: 12px;
-    background: var(--lr-ext-bg-panel);
+    background: var(--ln-ext-bg-panel);
     scrollbar-width: none;
   }
 
@@ -81,7 +81,7 @@
   /* The panel as tall as it needs: Lichess sets it to the board's height from 800px. The card
      first, next to the buttons; the moves scroll in a few rows under it. */
   main.puzzle .puzzle__tools {
-    --lr-ext-coach-h: 114px;
+    --ln-ext-coach-h: 114px;
 
     grid-template-areas: 'card' 'ceval' 'moves' !important;
     grid-template-rows: auto auto auto !important;
@@ -91,12 +91,12 @@
 
   /* The review's coach, 34px in the card (which sits 10px in) for its arms: the fox waves
      past the review's 24px (AGENTS.md, "The coach talks in a card"). */
-  main.puzzle .lr-ext-puzzle-coach {
+  main.puzzle .ln-ext-puzzle-coach {
     margin-left: 44px;
   }
 
   main.puzzle .puzzle__feedback:not(.after) {
-    padding-left: calc(var(--lr-ext-coach-w) + 36px) !important;
+    padding-left: calc(var(--ln-ext-coach-w) + 36px) !important;
   }
 
   main.puzzle .puzzle__moves {
@@ -115,20 +115,20 @@
    the move buttons at its foot, the side cards under both. */
 @media (max-width: 1019.98px) and (orientation: landscape) {
   main.puzzle {
-    --lr-ext-gap: 12px;
-    --lr-ext-board: max(
+    --ln-ext-gap: 12px;
+    --ln-ext-board: max(
       240px,
       min(
         100dvh - var(---site-header-height, 60px) - 16px,
-        100vw - 16px - var(--lr-ext-gap) - 340px
+        100vw - 16px - var(--ln-ext-gap) - 340px
       )
     );
-    --lr-ext-panel-w: min(440px, 100vw - 16px - var(--lr-ext-gap) - var(--lr-ext-board));
+    --ln-ext-panel-w: min(440px, 100vw - 16px - var(--ln-ext-gap) - var(--ln-ext-board));
 
-    grid-template-columns: var(--lr-ext-board) var(--lr-ext-gap) var(--lr-ext-panel-w) !important;
+    grid-template-columns: var(--ln-ext-board) var(--ln-ext-gap) var(--ln-ext-panel-w) !important;
     /* Rows of the board's height in all: left to the board, the second takes it whole. */
     grid-template-rows:
-      calc(var(--lr-ext-board) - var(--lr-ext-jumps-h) - 8px) calc(var(--lr-ext-jumps-h) + 8px)
+      calc(var(--ln-ext-board) - var(--ln-ext-jumps-h) - 8px) calc(var(--ln-ext-jumps-h) + 8px)
       auto auto auto !important;
     grid-template-areas:
       'board . tools'

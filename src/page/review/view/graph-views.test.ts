@@ -35,12 +35,12 @@ function movesPanel(clocks: boolean): Session {
 const viewButton = (session: Session, view: string): HTMLElement | null =>
   queryOne(
     session.elements.panel,
-    `[data-lr-ext="graph"][data-lr-ext-view="${view}"]`,
+    `[data-ln-ext="graph"][data-ln-ext-view="${view}"]`,
     HTMLElement,
   );
 
 const columns = (session: Session): SVGElement[] =>
-  queryAll(session.elements.graphBox, '.lr-ext-graph-bar', SVGElement);
+  queryAll(session.elements.graphBox, '.ln-ext-graph-bar', SVGElement);
 
 const y = (bar: SVGElement): number => Number(bar.getAttribute('y'));
 const height = (bar: SVGElement): number => Number(bar.getAttribute('height'));
@@ -65,12 +65,12 @@ describe('the move-by-move graph’s views', () => {
     expect(viewButton(session, 'time')?.getAttribute('aria-pressed')).toBe('true');
     const bars = columns(session);
     expect(bars).toHaveLength(session.view.review?.moves.length ?? 0);
-    expect(bars.slice(0, 2).map(bar => bar.classList.contains('lr-ext-graph-bar--white'))).toEqual([
+    expect(bars.slice(0, 2).map(bar => bar.classList.contains('ln-ext-graph-bar--white'))).toEqual([
       true,
       false,
     ]);
     // The tenth move's.
-    expect(bars.findIndex(bar => bar.classList.contains('lr-ext-graph-bar--now'))).toBe(9);
+    expect(bars.findIndex(bar => bar.classList.contains('ln-ext-graph-bar--now'))).toBe(9);
   });
 
   it('put White’s columns above the middle and Black’s below, the longest the tallest', () => {
@@ -82,12 +82,12 @@ describe('the move-by-move graph’s views', () => {
       { times, last: 2, ply: 2 },
       { width: 200, height: 84 },
     ).value;
-    const [white, black] = queryAll(document.body, '.lr-ext-graph-bar', SVGElement);
+    const [white, black] = queryAll(document.body, '.ln-ext-graph-bar', SVGElement);
     if (!white || !black) throw new Error('no columns');
     expect(y(white) + height(white)).toBeCloseTo(42, 1);
     expect(y(black)).toBeCloseTo(42, 1);
     expect(height(black)).toBeGreaterThan(height(white));
-    expect(black.classList.contains('lr-ext-graph-bar--now')).toBe(true);
+    expect(black.classList.contains('ln-ext-graph-bar--now')).toBe(true);
   });
 
   it('keep their buttons across redraws, for the pick to slide, and ease the graph in', () => {
@@ -96,10 +96,10 @@ describe('the move-by-move graph’s views', () => {
     time?.click();
     expect(viewButton(session, 'time')).toBe(time);
     const graph = session.elements.graphBox.firstElementChild;
-    expect(graph?.classList.contains('lr-ext-graph-switch')).toBe(true);
+    expect(graph?.classList.contains('ln-ext-graph-switch')).toBe(true);
     session.redraw();
     expect(session.elements.graphBox.firstElementChild?.classList).not.toContain(
-      'lr-ext-graph-switch',
+      'ln-ext-graph-switch',
     );
   });
 
@@ -117,7 +117,7 @@ describe('the game’s sheet', () => {
   it('opens over the panel from the header’s share button, and closes from it', () => {
     const session = movesPanel(false);
     const share = (): HTMLElement | null =>
-      queryOne(session.elements.panel, '[data-lr-ext="share"]', HTMLElement);
+      queryOne(session.elements.panel, '[data-ln-ext="share"]', HTMLElement);
     expect(share()?.getAttribute('aria-pressed')).toBe('false');
     share()?.click();
     expect(session.view.sheet).toBe(true);
@@ -133,10 +133,10 @@ describe('the game’s sheet', () => {
     keepMarked(session);
     root.className = 'light';
     await flush();
-    expect(root.classList.contains('lr-ext-review-sheet')).toBe(true);
+    expect(root.classList.contains('ln-ext-review-sheet')).toBe(true);
     session.view.mode = 'summary';
     root.className = 'light';
     await flush();
-    expect(root.classList.contains('lr-ext-review-sheet')).toBe(false);
+    expect(root.classList.contains('ln-ext-review-sheet')).toBe(false);
   });
 });

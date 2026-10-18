@@ -17,7 +17,7 @@ const ROUND =
 const WIN: Outcome = { result: 'win', reason: 'resign', winner: 'white' };
 
 const shownCounts = (): string[] =>
-  queryAll(document, '.lr-ext-end__count b', HTMLElement).map(number => number.textContent);
+  queryAll(document, '.ln-ext-end__count b', HTMLElement).map(number => number.textContent);
 
 function mount(outcome: Outcome, live = true): ReturnType<typeof mountGameOver> {
   const main = queryOne(document, 'main.round', HTMLElement);
@@ -52,11 +52,11 @@ describe('the game over', () => {
   it('badges each king on its square, over Lichess’s own badges', () => {
     mount(WIN);
     const main = queryOne(document, 'main.round', HTMLElement);
-    expect(main?.dataset.lrExtEnd).toBe('');
-    const kings = queryAll(document, 'main.round > .lr-ext-end .lr-ext-end__king', HTMLElement);
+    expect(main?.dataset.lnExtEnd).toBe('');
+    const kings = queryAll(document, 'main.round > .ln-ext-end .ln-ext-end__king', HTMLElement);
     expect(kings.map(king => [king.className, king.getAttribute('style')])).toEqual([
-      ['lr-ext-end__king lr-ext-end__king--win', '--column:4;--row:7'],
-      ['lr-ext-end__king lr-ext-end__king--loss lr-ext-end__king--below', '--column:6;--row:0'],
+      ['ln-ext-end__king ln-ext-end__king--win', '--column:4;--row:7'],
+      ['ln-ext-end__king ln-ext-end__king--loss ln-ext-end__king--below', '--column:6;--row:0'],
     ]);
   });
 
@@ -64,33 +64,33 @@ describe('the game over', () => {
     mount(WIN);
     document.querySelector('.cg-wrap')?.classList.replace('orientation-white', 'orientation-black');
     vi.advanceTimersByTime(250);
-    const white = document.querySelector('.lr-ext-end__king--win');
+    const white = document.querySelector('.ln-ext-end__king--win');
     expect(white?.getAttribute('style')).toBe('--column:3;--row:0');
   });
 
   it('throws confetti for the winner only', () => {
     mount(WIN);
-    expect(document.querySelectorAll('.lr-ext-confetti__piece').length).toBeGreaterThan(0);
+    expect(document.querySelectorAll('.ln-ext-confetti__piece').length).toBeGreaterThan(0);
     vi.advanceTimersByTime(5000);
-    expect(document.querySelector('.lr-ext-confetti')).toBeNull();
+    expect(document.querySelector('.ln-ext-confetti')).toBeNull();
     document.body.innerHTML = ROUND;
     mount({ result: 'loss', reason: 'mate', winner: 'black' });
-    expect(document.querySelector('.lr-ext-confetti')).toBeNull();
+    expect(document.querySelector('.ln-ext-confetti')).toBeNull();
   });
 
   it('throws none on a game opened once over', () => {
     mount(WIN, false);
-    expect(document.querySelector('.lr-ext-end__kings')).not.toBeNull();
-    expect(document.querySelector('.lr-ext-confetti')).toBeNull();
+    expect(document.querySelector('.ln-ext-end__kings')).not.toBeNull();
+    expect(document.querySelector('.ln-ext-confetti')).toBeNull();
   });
 
   it('shows the large badges a moment, then the card as they shrink to pips', async () => {
     mount(WIN);
-    const layer = document.querySelector('main.round > .lr-ext-end');
-    expect(layer?.classList.contains('lr-ext-end--settled')).toBe(false);
+    const layer = document.querySelector('main.round > .ln-ext-end');
+    expect(layer?.classList.contains('ln-ext-end--settled')).toBe(false);
     await vi.advanceTimersByTimeAsync(SETTLE_MS);
-    expect(layer?.classList.contains('lr-ext-end--settled')).toBe(true);
-    expect(document.querySelector('.lr-ext-end__title')?.textContent).toBe('You beat bob!');
+    expect(layer?.classList.contains('ln-ext-end--settled')).toBe(true);
+    expect(document.querySelector('.ln-ext-end__title')?.textContent).toBe('You beat bob!');
   });
 
   it('has the coach spin the counts, then count the moves and speak', async () => {
@@ -102,17 +102,17 @@ describe('the game over', () => {
       counts: { best: 12, excellent: 3, mistake: 1 },
       firstPlies: {},
     });
-    const bubble = document.querySelector('.lr-ext-end__bubble');
-    const counts = document.querySelector('.lr-ext-end__counts');
+    const bubble = document.querySelector('.ln-ext-end__bubble');
+    const counts = document.querySelector('.ln-ext-end__counts');
     expect(bubble?.textContent).toBe('');
     await vi.advanceTimersByTimeAsync(SETTLE_MS);
     expect(bubble?.textContent).toBe('One moment while your Debrief loads…');
-    expect(counts?.classList.contains('lr-ext-end__counts--spinning')).toBe(true);
+    expect(counts?.classList.contains('ln-ext-end__counts--spinning')).toBe(true);
     // The moves were counted at once, yet the counts spin a moment.
     await vi.advanceTimersByTimeAsync(MIN_SPIN_MS);
-    expect(counts?.classList.contains('lr-ext-end__counts--revealed')).toBe(true);
+    expect(counts?.classList.contains('ln-ext-end__counts--revealed')).toBe(true);
     await vi.advanceTimersByTimeAsync(3000);
-    const numbers = queryAll(document, '.lr-ext-end__count b', HTMLElement).map(
+    const numbers = queryAll(document, '.ln-ext-end__count b', HTMLElement).map(
       number => number.textContent,
     );
     expect(numbers).toEqual(['12', '3', '1']);
@@ -134,7 +134,7 @@ describe('the game over', () => {
       firstPlies: {},
     });
     await vi.advanceTimersByTimeAsync(SETTLE_MS + MIN_SPIN_MS + 3000);
-    const bubble = document.querySelector('.lr-ext-end__bubble');
+    const bubble = document.querySelector('.ln-ext-end__bubble');
     // Figures that read the same leave the card, and the coach, alone.
     const said = posted.mock.calls.length;
     view.refine({ accuracy: 91.2, counts: { best: 12, excellent: 3, mistake: 1 }, firstPlies: {} });
@@ -151,24 +151,24 @@ describe('the game over', () => {
     view.analysing();
     view.failed();
     await vi.advanceTimersByTimeAsync(SETTLE_MS + MIN_SPIN_MS);
-    expect(document.querySelector('.lr-ext-end__counts')).toBeNull();
-    expect(document.querySelector('.lr-ext-end__bubble')?.textContent).toBe(gameOverTexts().failed);
+    expect(document.querySelector('.ln-ext-end__counts')).toBeNull();
+    expect(document.querySelector('.ln-ext-end__bubble')?.textContent).toBe(gameOverTexts().failed);
   });
 
   it('leads to the review and presses Lichess’s buttons', () => {
     mount(WIN);
-    const review = document.querySelector('.lr-ext-end__review');
+    const review = document.querySelector('.ln-ext-end__review');
     expect(review?.getAttribute('href')).toBe('/abcd1234/white#9');
     const rematch = vi.fn<() => void>();
     document.querySelector('.follow-up .rematch')?.addEventListener('click', rematch);
-    queryOne(document, '.lr-ext-end__btn[data-lr-ext-end="rematch"]', HTMLElement)?.click();
+    queryOne(document, '.ln-ext-end__btn[data-ln-ext-end="rematch"]', HTMLElement)?.click();
     expect(rematch).toHaveBeenCalledOnce();
   });
 
   it('closes the card and keeps the badges', () => {
     mount(WIN);
-    queryOne(document, '.lr-ext-end__close', HTMLElement)?.click();
-    expect(document.querySelector('.lr-ext-end__card')).toBeNull();
-    expect(document.querySelectorAll('.lr-ext-end__king')).toHaveLength(2);
+    queryOne(document, '.ln-ext-end__close', HTMLElement)?.click();
+    expect(document.querySelector('.ln-ext-end__card')).toBeNull();
+    expect(document.querySelectorAll('.ln-ext-end__king')).toHaveLength(2);
   });
 });

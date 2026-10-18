@@ -20,12 +20,12 @@ export interface PlyChartSpec {
 }
 
 const HEIGHT = 170;
-const ON = 'lr-ext-rchart__dot--on';
+const ON = 'ln-ext-rchart__dot--on';
 
-const shell = html`<div class="lr-ext-gchart__legend"></div><div class="lr-ext-rchart__plot"><svg class="lr-ext-rchart__svg"></svg><div class="lr-ext-rchart__tip"></div></div>`;
+const shell = html`<div class="ln-ext-gchart__legend"></div><div class="ln-ext-rchart__plot"><svg class="ln-ext-rchart__svg"></svg><div class="ln-ext-rchart__tip"></div></div>`;
 
 export class PlyChart {
-  readonly root = createElement('div', { className: 'lr-ext-gchart' });
+  readonly root = createElement('div', { className: 'ln-ext-gchart' });
   readonly #onPick: (ply: number) => void;
   #spec: PlyChartSpec | null = null;
   #size: PlotSize = { width: 0, height: HEIGHT };
@@ -38,18 +38,18 @@ export class PlyChart {
     setHtml(this.root, shell);
     container.prepend(this.root);
     // Lichess's canvas is hidden from here on (styles/analysis/game-charts.css).
-    container.classList.toggle('lr-ext-gchart-on', true);
+    container.classList.toggle('ln-ext-gchart-on', true);
     const svg = this.#svg();
     svg?.addEventListener('pointermove', event => this.#hover(event));
     svg?.addEventListener('pointerleave', () => this.#leave());
     svg?.addEventListener('click', event => this.#pick(event));
-    const plot = queryOne(this.root, '.lr-ext-rchart__plot', HTMLElement);
+    const plot = queryOne(this.root, '.ln-ext-rchart__plot', HTMLElement);
     if (plot) new ResizeObserver(() => this.#redraw()).observe(plot);
   }
 
   show(spec: PlyChartSpec): void {
     this.#spec = spec;
-    const legend = queryOne(this.root, '.lr-ext-gchart__legend', HTMLElement);
+    const legend = queryOne(this.root, '.ln-ext-gchart__legend', HTMLElement);
     if (legend) setHtml(legend, spec.legend ?? html``);
     this.#size = { width: 0, height: HEIGHT };
     this.#redraw();
@@ -64,9 +64,9 @@ export class PlyChart {
 
   #mark(): void {
     const ply = this.#followed;
-    const marker = queryOne(this.root, '.lr-ext-gchart__ply', Element);
+    const marker = queryOne(this.root, '.ln-ext-gchart__ply', Element);
     if (!marker) return;
-    marker.classList.toggle('lr-ext-gchart__ply--on', ply !== null && ply > 0);
+    marker.classList.toggle('ln-ext-gchart__ply--on', ply !== null && ply > 0);
     if (ply !== null) setAttributes(marker, { x1: this.#scale.x(ply), x2: this.#scale.x(ply) });
   }
 
@@ -78,7 +78,7 @@ export class PlyChart {
   // chart would have no width. Only the first draw comes in animated.
   #redraw(): void {
     const svg = this.#svg();
-    const plot = queryOne(this.root, '.lr-ext-rchart__plot', HTMLElement);
+    const plot = queryOne(this.root, '.ln-ext-rchart__plot', HTMLElement);
     const spec = this.#spec;
     const width = Math.round(plot?.clientWidth ?? 0);
     if (!svg || !spec || width === 0 || width === this.#size.width) return;
@@ -86,7 +86,7 @@ export class PlyChart {
     this.#scale = plyScale(spec.lastPly, width);
     sizeSvg(svg, width, HEIGHT);
     setHtml(svg, spec.draw(this.#size));
-    svg.classList.toggle('lr-ext-rchart__svg--intro', !this.#drawn);
+    svg.classList.toggle('ln-ext-rchart__svg--intro', !this.#drawn);
     this.#drawn = true;
     this.#mark();
   }
@@ -99,14 +99,14 @@ export class PlyChart {
   #hover(event: MouseEvent): void {
     const svg = this.#svg();
     const ply = this.#plyAt(event);
-    const tip = queryOne(this.root, '.lr-ext-rchart__tip', HTMLElement);
+    const tip = queryOne(this.root, '.ln-ext-rchart__tip', HTMLElement);
     const markup = ply === null ? null : this.#spec?.tip(ply);
     if (!svg || !tip || ply === null || !markup) return;
     const x = this.#scale.x(ply);
-    svg.classList.toggle('lr-ext-rchart__svg--hover', true);
-    const guide = queryOne(svg, '.lr-ext-rchart__guide', Element);
+    svg.classList.toggle('ln-ext-rchart__svg--hover', true);
+    const guide = queryOne(svg, '.ln-ext-rchart__guide', Element);
     if (guide) setAttributes(guide, { x1: x, x2: x });
-    const dot = queryOne(svg, '.lr-ext-rchart__dot', Element);
+    const dot = queryOne(svg, '.ln-ext-rchart__dot', Element);
     const dotY = this.#spec?.dotY(ply, this.#size) ?? null;
     dot?.classList.toggle(ON, dotY !== null);
     if (dot && dotY !== null) setAttributes(dot, { cx: x, cy: dotY });
@@ -114,8 +114,8 @@ export class PlyChart {
   }
 
   #leave(): void {
-    this.#svg()?.classList.toggle('lr-ext-rchart__svg--hover', false);
-    const tip = queryOne(this.root, '.lr-ext-rchart__tip', HTMLElement);
+    this.#svg()?.classList.toggle('ln-ext-rchart__svg--hover', false);
+    const tip = queryOne(this.root, '.ln-ext-rchart__tip', HTMLElement);
     if (tip) hideTip(tip);
   }
 

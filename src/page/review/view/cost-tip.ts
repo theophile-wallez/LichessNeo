@@ -12,7 +12,7 @@ const BAR_WIDTH = 40;
 // A little room around it, so a pointer just off the bar still counts.
 const SLACK = 6;
 
-const COSTED = 'main.analyse .tview2 move[data-lr-ext-cost]';
+const COSTED = 'main.analyse .tview2 move[data-ln-ext-cost]';
 
 function onPointer(session: Session, event: PointerEvent): void {
   const move = closestTo(event.target, COSTED, HTMLElement);
@@ -24,8 +24,8 @@ function onPointer(session: Session, event: PointerEvent): void {
   }
   if (session.tipFor === move) return;
   const { classLabels, ui } = session.language;
-  const moveClass = MOVE_CLASSES.find(each => each === move.dataset.lrExtCls);
-  const cost = ui.cost(Number(move.dataset.lrExtCost));
+  const moveClass = MOVE_CLASSES.find(each => each === move.dataset.lnExtCls);
+  const cost = ui.cost(Number(move.dataset.lnExtCost));
   const text = moveClass ? `${classLabels[moveClass]} · ${cost}` : cost;
   showTip(session, move, {
     text,

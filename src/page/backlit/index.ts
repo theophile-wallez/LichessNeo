@@ -17,11 +17,11 @@ import { type Arrival, watchMoves } from './watch.ts';
 // settings' preview only: mini boards keep its keys, unlit. Until the board is picked, this only
 // watches one attribute of <html>, so other boards cost nothing.
 
-const BOARD = '.is2d main .main-board cg-board, .lr-ext-looks-preview__board cg-board';
+const BOARD = '.is2d main .main-board cg-board, .ln-ext-looks-preview__board cg-board';
 const CHECK_COLOR = '#ff4d5e';
 
 const readSettings = (): BacklitSettings | null =>
-  readBacklitWords(document.documentElement.dataset.lrExtBacklit);
+  readBacklitWords(document.documentElement.dataset.lnExtBacklit);
 
 function paintFor(settings: BacklitSettings, mover: Color, layer: Layer): Paint {
   if (settings.light === 'rainbow') return 'rainbow';
@@ -98,7 +98,7 @@ function start(): void {
   };
   new MutationObserver(sync).observe(document.documentElement, {
     attributes: true,
-    attributeFilter: ['data-lr-ext-backlit'],
+    attributeFilter: ['data-ln-ext-backlit'],
   });
   sync();
 }

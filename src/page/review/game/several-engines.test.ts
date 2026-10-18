@@ -32,7 +32,7 @@ it('analyzes a game with several engines at once, each position once, with its m
   // One engine takes 30 ms and 150 ms per position: 4.5 s for this game's 25.
   await advance(2500);
   const nodes = ctrl.mainline;
-  expect(localStorage.getItem(`lr-ext-review:passanta:${nodes.length}:v1`)).not.toBeNull();
+  expect(localStorage.getItem(`ln-ext-review:passanta:${nodes.length}:v1`)).not.toBeNull();
   expect(repeated).toBe(false);
   // Each position searched goes with the moves since its last irreversible one.
   const expected = new Map(

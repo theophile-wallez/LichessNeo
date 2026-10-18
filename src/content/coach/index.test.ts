@@ -33,7 +33,7 @@ vi.mock(import('./load.ts'), () => ({ loadMascots: () => Promise.resolve(mountMa
 beforeEach(() => {
   played.length = 0;
   document.body.innerHTML =
-    '<button class="lr-ext-coach__avatar"><span class="lr-ext-coach__face"></span></button>';
+    '<button class="ln-ext-coach__avatar"><span class="ln-ext-coach__face"></span></button>';
 });
 
 afterEach(() => {
@@ -41,7 +41,7 @@ afterEach(() => {
   localStorage.clear();
 });
 
-const isLive = (): boolean => document.querySelector('.lr-ext-coach__avatar--live') !== null;
+const isLive = (): boolean => document.querySelector('.ln-ext-coach__avatar--live') !== null;
 
 describe('the coach', () => {
   it('stays its still, neutral as the still looks, until its first frame is drawn', async () => {
@@ -80,6 +80,6 @@ describe('the coach', () => {
     answer?.({ coachMotion: false, analysisCoach: false });
     await flush();
     expect(isLive()).toBe(false);
-    expect(localStorage.getItem('lr-ext-coach-options')).toBe('{"motion":false,"analysis":false}');
+    expect(localStorage.getItem('ln-ext-coach-options')).toBe('{"motion":false,"analysis":false}');
   });
 });

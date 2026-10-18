@@ -24,16 +24,16 @@ describe('cardMarkup', () => {
         }),
       ),
     );
-    expect(root.querySelector('.lr-ext-end__card--win .lr-ext-end__title')?.textContent).toBe(
+    expect(root.querySelector('.ln-ext-end__card--win .ln-ext-end__title')?.textContent).toBe(
       'You beat <i>bob</i>!',
     );
-    expect(root.querySelectorAll('.lr-ext-end__counts > .lr-ext-end__count')).toHaveLength(
+    expect(root.querySelectorAll('.ln-ext-end__counts > .ln-ext-end__count')).toHaveLength(
       CHIP_COUNT,
     );
-    expect(root.querySelector('.lr-ext-end__reason')?.textContent).toBe('by checkmate');
-    const avatar = queryOne(root, '.lr-ext-coach__avatar', HTMLElement);
-    expect(avatar?.dataset.lrExtCoachId).toBe('3');
-    expect(avatar?.querySelector('.lr-ext-coach__face')).not.toBeNull();
+    expect(root.querySelector('.ln-ext-end__reason')?.textContent).toBe('by checkmate');
+    const avatar = queryOne(root, '.ln-ext-coach__avatar', HTMLElement);
+    expect(avatar?.dataset.lnExtCoachId).toBe('3');
+    expect(avatar?.querySelector('.ln-ext-coach__face')).not.toBeNull();
   });
 
   it('leaves the reason out when the status doesn’t say', () => {
@@ -47,8 +47,8 @@ describe('cardMarkup', () => {
         }),
       ),
     );
-    expect(root.querySelector('.lr-ext-end__title')?.textContent).toBe('Draw');
-    expect(root.querySelector('.lr-ext-end__reason')).toBeNull();
+    expect(root.querySelector('.ln-ext-end__title')?.textContent).toBe('Draw');
+    expect(root.querySelector('.ln-ext-end__reason')).toBeNull();
   });
 
   // The stylesheet draws a blank in its place while it's empty (game-end-stats.css).
@@ -63,7 +63,7 @@ describe('cardMarkup', () => {
         }),
       ),
     );
-    expect(root.querySelector('.lr-ext-end__accuracy b')?.textContent).toBe('');
+    expect(root.querySelector('.ln-ext-end__accuracy b')?.textContent).toBe('');
   });
 });
 

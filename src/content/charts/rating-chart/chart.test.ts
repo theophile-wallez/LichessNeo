@@ -24,9 +24,9 @@ let plotWidth = 640;
 // The element sizes used when the original's output was recorded.
 function stubLayout() {
   return fakeLayout((element, metric) => {
-    const range = element.dataset.lrExtRange;
-    if (metric === 'clientWidth') return element.matches('.lr-ext-rchart__plot') ? plotWidth : 0;
-    if (metric === 'offsetWidth' && element.matches('.lr-ext-rchart__tip')) return 120;
+    const range = element.dataset.lnExtRange;
+    if (metric === 'clientWidth') return element.matches('.ln-ext-rchart__plot') ? plotWidth : 0;
+    if (metric === 'offsetWidth' && element.matches('.ln-ext-rchart__tip')) return 120;
     if (range === undefined) return 0;
     if (metric === 'offsetWidth') return 30 + 4 * range.length;
     if (metric === 'offsetHeight') return 28;
@@ -40,7 +40,7 @@ function click(root: Element, selector: string): void {
 }
 
 function act(action: Action, host: Element, resize: () => void): void {
-  const root = queryOne(host, '.lr-ext-rchart', HTMLElement);
+  const root = queryOne(host, '.ln-ext-rchart', HTMLElement);
   const svg = root?.querySelector('svg');
   if (!root || !svg) throw new Error('no chart');
   switch (action.type) {
@@ -51,10 +51,10 @@ function act(action: Action, host: Element, resize: () => void): void {
       resize();
       return;
     case 'range':
-      click(root, `[data-lr-ext-range="${action.key}"]`);
+      click(root, `[data-ln-ext-range="${action.key}"]`);
       return;
     case 'chip':
-      click(root, `.lr-ext-rchart__chip[data-lr-ext-series="${action.i}"]`);
+      click(root, `.ln-ext-rchart__chip[data-ln-ext-series="${action.i}"]`);
       return;
     case 'hover':
       svg.dispatchEvent(new PointerEvent('pointermove', { clientX: action.clientX }));
@@ -112,30 +112,30 @@ describe('the rating chart', () => {
     },
   );
 
-  it('prefixes its data attributes and CSS variables with lr-ext', () => {
+  it('prefixes its data attributes and CSS variables with ln-ext', () => {
     const [scenario] = legacy.scenarios;
     if (!scenario) throw new Error('no scenario');
     const { host, resize } = mount(scenario);
     act({ type: 'resize', width: 640 }, host, resize);
     act({ type: 'hover', clientX: 300 }, host, resize);
-    const chart = host.querySelector('.lr-ext-rchart');
+    const chart = host.querySelector('.ln-ext-rchart');
     if (!chart) throw new Error('no chart');
     expect(unprefixedNames(chart)).toEqual([]);
     // The stylesheet and chart.ts read these names: check they're on the right elements.
     const series = [
-      ...queryAll(chart, '.lr-ext-rchart__chip', HTMLElement),
-      ...queryAll(chart, '.lr-ext-rchart__series, .lr-ext-rchart__dot', SVGElement),
+      ...queryAll(chart, '.ln-ext-rchart__chip', HTMLElement),
+      ...queryAll(chart, '.ln-ext-rchart__series, .ln-ext-rchart__dot', SVGElement),
     ];
     expect(series.length).toBeGreaterThan(0);
     for (const element of series) {
-      expect(element.getAttribute('style')).toMatch(/^--lr-ext-series-color:#[0-9a-f]{6}$/);
-      expect(element.dataset.lrExtSeries).toMatch(/^\d+$/);
+      expect(element.getAttribute('style')).toMatch(/^--ln-ext-series-color:#[0-9a-f]{6}$/);
+      expect(element.dataset.lnExtSeries).toMatch(/^\d+$/);
     }
-    const tipRows = chart.querySelectorAll('.lr-ext-rchart__tiprow');
+    const tipRows = chart.querySelectorAll('.ln-ext-rchart__tiprow');
     expect(tipRows.length).toBeGreaterThan(0);
     for (const row of tipRows)
-      expect(row.getAttribute('style')).toMatch(/^--lr-ext-series-color:#[0-9a-f]{6}$/);
-    const ranges = queryAll(chart, '.lr-ext-rchart__ranges button', HTMLElement);
-    expect(ranges.map(button => button.dataset.lrExtRange)).toEqual(RANGE_KEYS);
+      expect(row.getAttribute('style')).toMatch(/^--ln-ext-series-color:#[0-9a-f]{6}$/);
+    const ranges = queryAll(chart, '.ln-ext-rchart__ranges button', HTMLElement);
+    expect(ranges.map(button => button.dataset.lnExtRange)).toEqual(RANGE_KEYS);
   });
 });

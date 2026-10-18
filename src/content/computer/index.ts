@@ -11,9 +11,9 @@ import { levelMood } from './moods.ts';
 
 // Over its still, which the stylesheet shows at once.
 const setup = new MascotSpot({
-  className: 'lr-ext-level__live',
+  className: 'ln-ext-level__live',
   framing: 'bust',
-  onDrawn: slot => setData(slot, 'lrExtLive', ''),
+  onDrawn: slot => setData(slot, 'lnExtLive', ''),
 });
 let pickedLevel = 0;
 

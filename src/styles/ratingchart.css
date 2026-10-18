@@ -1,32 +1,32 @@
 /* The rating history chart, drawn in SVG by content/charts/rating-chart/ (profile,
  * rating stats page). Lichess's chart, the inner container, is hidden only once
- * ours is in (.lr-ext-rchart-on on the outer one). */
+ * ours is in (.ln-ext-rchart-on on the outer one). */
 
-.rating-history-container.lr-ext-rchart-on > .rating-history-container {
+.rating-history-container.ln-ext-rchart-on > .rating-history-container {
   display: none !important;
 }
 
 /* No history to draw (a rating never played): no empty box. */
-.rating-history-container.lr-ext-rchart-none {
+.rating-history-container.ln-ext-rchart-none {
   display: none !important;
 }
 
 /* On the stats page the container isn't a card, unlike the profile's. */
-.perf-stat > .rating-history-container.lr-ext-rchart-on {
+.perf-stat > .rating-history-container.ln-ext-rchart-on {
   height: auto !important;
   margin: 0 var(--box-padding, 20px) 8px;
 }
 
-.lr-ext-rchart {
+.ln-ext-rchart {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-family: var(--lr-ext-font);
+  font-family: var(--ln-ext-font);
 }
 
 /* ---- Top --- */
 
-.lr-ext-rchart__top {
+.ln-ext-rchart__top {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -34,192 +34,192 @@
   gap: 10px 16px;
 }
 
-.lr-ext-rchart__legend,
-.lr-ext-rchart__ranges {
+.ln-ext-rchart__legend,
+.ln-ext-rchart__ranges {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
 /* The chips wrap onto more lines; the range pills stay top right. */
-.lr-ext-rchart__legend {
+.ln-ext-rchart__legend {
   flex: 1 1 300px;
   min-width: 0;
 }
 
-.lr-ext-rchart__ranges {
+.ln-ext-rchart__ranges {
   position: relative;
   isolation: isolate;
   padding: 3px;
   border-radius: 9px;
-  background: var(--lr-ext-lift-4);
+  background: var(--ln-ext-lift-4);
 }
 
 /* The active range's pill: one element that slides, placed by rating-chart/thumb.ts. */
-.lr-ext-rchart__thumb {
+.ln-ext-rchart__thumb {
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
   border-radius: 7px;
-  background: var(--lr-ext-bg-raised);
+  background: var(--ln-ext-bg-raised);
   box-shadow:
-    0 1px 2px var(--lr-ext-shade-35),
-    inset 0 1px 0 var(--lr-ext-lift-8);
+    0 1px 2px var(--ln-ext-shade-35),
+    inset 0 1px 0 var(--ln-ext-lift-8);
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     width 0.35s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
-.lr-ext-rchart__thumb--still {
+.ln-ext-rchart__thumb--still {
   transition: none !important;
 }
 
-.lr-ext-rchart__ranges button {
+.ln-ext-rchart__ranges button {
   height: 28px;
   padding: 0 11px;
   border: none;
   border-radius: 7px;
   background: none;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   cursor: pointer;
-  font: 700 12px/1 var(--lr-ext-font);
+  font: 700 12px/1 var(--ln-ext-font);
   letter-spacing: 0.03em;
   transition:
     background-color 0.15s,
     color 0.15s !important;
 }
 
-.lr-ext-rchart__ranges button:hover {
-  color: var(--lr-ext-text-strong);
+.ln-ext-rchart__ranges button:hover {
+  color: var(--ln-ext-text-strong);
 }
 
-.lr-ext-rchart__ranges button.active {
-  color: var(--lr-ext-text-strong);
+.ln-ext-rchart__ranges button.active {
+  color: var(--ln-ext-text-strong);
 }
 
 /* A rating's chip: its color, name, current value and change over the range. */
-.lr-ext-rchart__chip {
+.ln-ext-rchart__chip {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   height: 34px;
   padding: 0 12px 0 10px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 999px;
-  background: var(--lr-ext-lift-3);
-  color: var(--lr-ext-text);
+  background: var(--ln-ext-lift-3);
+  color: var(--ln-ext-text);
   cursor: pointer;
-  font: 600 13px/1 var(--lr-ext-font);
+  font: 600 13px/1 var(--ln-ext-font);
   transition:
     background-color 0.15s,
     border-color 0.15s,
     opacity 0.15s !important;
 }
 
-.lr-ext-rchart__chip:hover {
-  border-color: color-mix(in srgb, var(--lr-ext-series-color) 55%, transparent);
-  background: color-mix(in srgb, var(--lr-ext-series-color) 10%, transparent);
+.ln-ext-rchart__chip:hover {
+  border-color: color-mix(in srgb, var(--ln-ext-series-color) 55%, transparent);
+  background: color-mix(in srgb, var(--ln-ext-series-color) 10%, transparent);
 }
 
-.lr-ext-rchart__chip:disabled {
+.ln-ext-rchart__chip:disabled {
   cursor: default;
 }
 
-.lr-ext-rchart__chip:disabled:hover {
-  border-color: var(--lr-ext-card-border);
-  background: var(--lr-ext-lift-3);
+.ln-ext-rchart__chip:disabled:hover {
+  border-color: var(--ln-ext-card-border);
+  background: var(--ln-ext-lift-3);
 }
 
-.lr-ext-rchart__chip strong {
-  color: var(--lr-ext-text-strong);
+.ln-ext-rchart__chip strong {
+  color: var(--ln-ext-text-strong);
   font-size: 14px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-.lr-ext-rchart__chip--off {
+.ln-ext-rchart__chip--off {
   opacity: 0.45;
 }
 
-.lr-ext-rchart__chip--off .lr-ext-rchart__swatch {
+.ln-ext-rchart__chip--off .ln-ext-rchart__swatch {
   background: none;
-  box-shadow: inset 0 0 0 2px var(--lr-ext-series-color);
+  box-shadow: inset 0 0 0 2px var(--ln-ext-series-color);
 }
 
-.lr-ext-rchart__swatch {
+.ln-ext-rchart__swatch {
   flex: none;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--lr-ext-series-color);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-series-color) 22%, transparent);
+  background: var(--ln-ext-series-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ln-ext-series-color) 22%, transparent);
 }
 
-.lr-ext-rchart__diff {
+.ln-ext-rchart__diff {
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-.lr-ext-rchart__diff--up {
-  color: var(--lr-ext-good-hover);
+.ln-ext-rchart__diff--up {
+  color: var(--ln-ext-good-hover);
 }
-.lr-ext-rchart__diff--down {
-  color: var(--lr-ext-red);
+.ln-ext-rchart__diff--down {
+  color: var(--ln-ext-red);
 }
-.lr-ext-rchart__diff--flat {
-  color: var(--lr-ext-text-dim);
+.ln-ext-rchart__diff--flat {
+  color: var(--ln-ext-text-dim);
 }
 
 /* ---- Plot --- */
 
 /* The SVG is drawn at the plot's width, so it must not size the plot: on a
  * phone it held the page wider than the window. */
-.lr-ext-rchart__plot {
+.ln-ext-rchart__plot {
   position: relative;
   min-width: 0;
   contain: inline-size;
 }
 
-.lr-ext-rchart__svg {
+.ln-ext-rchart__svg {
   display: block;
   overflow: visible;
   touch-action: pan-y;
 }
 
-.lr-ext-rchart__grid {
-  stroke: var(--lr-ext-lift-7);
+.ln-ext-rchart__grid {
+  stroke: var(--ln-ext-lift-7);
   stroke-dasharray: 3 4;
 }
 
-.lr-ext-rchart__ylabel,
-.lr-ext-rchart__xlabel {
-  fill: var(--lr-ext-text-dim);
-  font: 600 11px var(--lr-ext-font);
+.ln-ext-rchart__ylabel,
+.ln-ext-rchart__xlabel {
+  fill: var(--ln-ext-text-dim);
+  font: 600 11px var(--ln-ext-font);
   font-variant-numeric: tabular-nums;
 }
 
-.lr-ext-rchart__ylabel {
+.ln-ext-rchart__ylabel {
   text-anchor: end;
   dominant-baseline: middle;
 }
 
-.lr-ext-rchart__xlabel {
+.ln-ext-rchart__xlabel {
   text-anchor: middle;
 }
 
 /* `d` is a CSS property, so the new scale after toggling a rating morphs the curves. */
-.lr-ext-rchart__line,
-.lr-ext-rchart__area {
+.ln-ext-rchart__line,
+.ln-ext-rchart__area {
   transition:
     d 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.3s !important;
 }
 
-.lr-ext-rchart__line {
+.ln-ext-rchart__line {
   fill: none;
-  stroke: var(--lr-ext-series-color);
+  stroke: var(--ln-ext-series-color);
   stroke-width: 2.25;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -227,36 +227,36 @@
 
 /* The series' colors (#shared/charts/colors.ts) are pastels picked for the dark scheme: on
    light, deepened toward black. */
-html.light .lr-ext-rchart__line {
-  stroke: color-mix(in srgb, var(--lr-ext-series-color) 72%, #000);
+html.light .ln-ext-rchart__line {
+  stroke: color-mix(in srgb, var(--ln-ext-series-color) 72%, #000);
 }
 
-html.light .lr-ext-rchart__chip:not(.lr-ext-rchart__chip--off) .lr-ext-rchart__swatch {
-  background: color-mix(in srgb, var(--lr-ext-series-color) 72%, #000);
+html.light .ln-ext-rchart__chip:not(.ln-ext-rchart__chip--off) .ln-ext-rchart__swatch {
+  background: color-mix(in srgb, var(--ln-ext-series-color) 72%, #000);
 }
 
-html.light .lr-ext-rchart__dot {
-  fill: color-mix(in srgb, var(--lr-ext-series-color) 72%, #000);
+html.light .ln-ext-rchart__dot {
+  fill: color-mix(in srgb, var(--ln-ext-series-color) 72%, #000);
 }
 
-.lr-ext-rchart__series--hidden {
+.ln-ext-rchart__series--hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.lr-ext-rchart__series--hidden path {
+.ln-ext-rchart__series--hidden path {
   transition: opacity 0.3s !important;
 }
 
 /* A new range: one widening clip reveals curves and fills together. Drawing each
  * line along its length would run each at its own pace. */
-.lr-ext-rchart__svg--intro .lr-ext-rchart__wipe {
+.ln-ext-rchart__svg--intro .ln-ext-rchart__wipe {
   transform-box: fill-box;
   transform-origin: left;
-  animation: lr-ext-rchart-wipe 1.2s cubic-bezier(0.45, 0, 0.2, 1) both;
+  animation: ln-ext-rchart-wipe 1.2s cubic-bezier(0.45, 0, 0.2, 1) both;
 }
 
-@keyframes lr-ext-rchart-wipe {
+@keyframes ln-ext-rchart-wipe {
   from {
     transform: scaleX(0);
   }
@@ -267,52 +267,52 @@ html.light .lr-ext-rchart__dot {
 
 /* ---- Hover --- */
 
-.lr-ext-rchart__hit {
+.ln-ext-rchart__hit {
   fill: transparent;
   cursor: crosshair;
 }
 
-.lr-ext-rchart__hover {
+.ln-ext-rchart__hover {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s !important;
 }
 
-.lr-ext-rchart__svg--hover .lr-ext-rchart__hover {
+.ln-ext-rchart__svg--hover .ln-ext-rchart__hover {
   opacity: 1;
 }
 
-.lr-ext-rchart__guide {
-  stroke: var(--lr-ext-lift-25);
+.ln-ext-rchart__guide {
+  stroke: var(--ln-ext-lift-25);
   stroke-width: 1;
   stroke-dasharray: 3 3;
 }
 
-.lr-ext-rchart__dot {
+.ln-ext-rchart__dot {
   display: none;
-  fill: var(--lr-ext-series-color);
-  stroke: var(--lr-ext-bg-panel);
+  fill: var(--ln-ext-series-color);
+  stroke: var(--ln-ext-bg-panel);
   stroke-width: 2.5;
 }
 
-.lr-ext-rchart__dot--on {
+.ln-ext-rchart__dot--on {
   display: inline;
 }
 
-.lr-ext-rchart__tip {
+.ln-ext-rchart__tip {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
   min-width: 150px;
   padding: 9px 11px;
-  border: 1px solid var(--lr-ext-lift-12);
+  border: 1px solid var(--ln-ext-lift-12);
   border-radius: 10px;
   /* Frosted glass: the blurred curves show through. */
-  background: color-mix(in srgb, var(--lr-ext-neutral-1) 55%, transparent);
+  background: color-mix(in srgb, var(--ln-ext-neutral-1) 55%, transparent);
   box-shadow:
-    inset 0 1px 0 var(--lr-ext-lift-8),
-    0 10px 28px var(--lr-ext-shade-45);
+    inset 0 1px 0 var(--ln-ext-lift-8),
+    0 10px 28px var(--ln-ext-shade-45);
   -webkit-backdrop-filter: blur(14px) saturate(1.5);
   backdrop-filter: blur(14px) saturate(1.5);
   opacity: 0;
@@ -322,37 +322,37 @@ html.light .lr-ext-rchart__dot {
     transform 0.12s ease-out !important;
 }
 
-.lr-ext-rchart__tip--on {
+.ln-ext-rchart__tip--on {
   opacity: 1;
 }
 
-.lr-ext-rchart__tipdate {
+.ln-ext-rchart__tipdate {
   margin-bottom: 6px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 700;
 }
 
-.lr-ext-rchart__tiprow {
+.ln-ext-rchart__tiprow {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 13px;
   font-weight: 600;
   line-height: 1.7;
 }
 
-.lr-ext-rchart__tiprow .lr-ext-rchart__swatch {
+.ln-ext-rchart__tiprow .ln-ext-rchart__swatch {
   width: 8px;
   height: 8px;
   box-shadow: none;
 }
 
-.lr-ext-rchart__tiprow strong {
+.ln-ext-rchart__tiprow strong {
   margin-inline-start: auto;
   padding-inline-start: 14px;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }

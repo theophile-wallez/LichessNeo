@@ -30,7 +30,7 @@ describe('a book move of the game', () => {
 /** The time tag `markup` draws. */
 function timeTagIn(markup: string): HTMLElement {
   document.body.innerHTML = markup;
-  const found = document.querySelector('.lr-ext-tag--time');
+  const found = document.querySelector('.ln-ext-tag--time');
   if (!(found instanceof HTMLElement)) throw new Error('no time tag');
   return found;
 }
@@ -51,8 +51,8 @@ describe('a move’s time', () => {
     const comment = timed(27);
     const time = timeTagIn(timeTag(session, comment).toString());
     expect(time.textContent).toBe('27 s');
-    expect(time.classList.contains('lr-ext-tag--paidOff')).toBe(true);
-    expect(time.dataset.lrExtTip).toMatch(/spent 27 s on this move, and it was worth it\.$/);
+    expect(time.classList.contains('ln-ext-tag--paidOff')).toBe(true);
+    expect(time.dataset.lnExtTip).toMatch(/spent 27 s on this move, and it was worth it\.$/);
     const bubble = verdictMarkup(session, comment).value;
     expect(bubble).not.toContain('worth it');
   });
@@ -60,8 +60,8 @@ describe('a move’s time', () => {
   it('shows a plain time when the coach has nothing to say of it', () => {
     const time = timeTagIn(timeTag(session, timed(2)).toString());
     expect(time.textContent).toBe('2 s');
-    expect(time.className).toBe('lr-ext-tag lr-ext-tag--time');
-    expect(time.dataset.lrExtTip).toBeUndefined();
+    expect(time.className).toBe('ln-ext-tag ln-ext-tag--time');
+    expect(time.dataset.lnExtTip).toBeUndefined();
   });
 
   it('shows none without clocks', () => {
@@ -76,11 +76,11 @@ describe('a verdict’s score', () => {
     if (!move) throw new Error('no best move');
     const comment = commentOn(session, { move, gameId: 'opera', hint: [], timing: null });
     document.body.innerHTML = verdictMarkup(session, comment).toString();
-    const score = document.querySelector('.lr-ext-bubble__evals');
+    const score = document.querySelector('.ln-ext-bubble__evals');
     if (!(score instanceof HTMLElement)) throw new Error('no score');
-    expect(score.querySelectorAll('.lr-ext-bubble__eval')).toHaveLength(1);
+    expect(score.querySelectorAll('.ln-ext-bubble__eval')).toHaveLength(1);
     expect(score.textContent).toBe(formatEval(move.after));
-    expect(score.dataset.lrExtTip).toBeUndefined();
+    expect(score.dataset.lnExtTip).toBeUndefined();
   });
 
   it('says what an error gave away in its tooltip, not in the tags', () => {
@@ -89,9 +89,9 @@ describe('a verdict’s score', () => {
     if (!move) throw new Error('no mistake');
     const comment = commentOn(session, { move, gameId: 'opera', hint: [], timing: null });
     document.body.innerHTML = verdictMarkup(session, comment).toString();
-    const score = document.querySelector('.lr-ext-bubble__evals');
+    const score = document.querySelector('.ln-ext-bubble__evals');
     if (!(score instanceof HTMLElement)) throw new Error('no score');
-    expect(score.dataset.lrExtTip).toMatch(/^−\d+% winning chances$/);
+    expect(score.dataset.lnExtTip).toMatch(/^−\d+% winning chances$/);
     expect(document.body.textContent).not.toContain('winning chances');
   });
 });

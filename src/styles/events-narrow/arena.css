@@ -41,9 +41,9 @@
     min-width: 0;
     margin: 0 !important;
     padding: 10px 12px;
-    border: 1px solid var(--lr-ext-card-border);
+    border: 1px solid var(--ln-ext-card-border);
     border-radius: 10px;
-    background: var(--lr-ext-bg-panel);
+    background: var(--ln-ext-bg-panel);
   }
 
   main.tour .tour__duels {
@@ -54,7 +54,7 @@
 
   main.tour .tour__duels h2 {
     margin: 2px 0 6px !important;
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
     font-size: 16px !important;
     font-weight: 800;
     letter-spacing: normal !important;
@@ -64,11 +64,11 @@
   main.tour .tour__duels a {
     margin-inline: -12px;
     padding-inline: 12px !important;
-    border-top-color: var(--lr-ext-card-border) !important;
+    border-top-color: var(--ln-ext-card-border) !important;
   }
 
   main.tour .tour__duels a:hover {
-    background: var(--lr-ext-lift-5) !important;
+    background: var(--ln-ext-lift-5) !important;
   }
 
   /* ---- The player's info and a finished arena's numbers --- */

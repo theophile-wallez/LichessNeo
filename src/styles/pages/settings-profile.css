@@ -3,31 +3,31 @@
 /* The avatar shown, big, with the user's name and the three ways to pick it, over the panel of
  * the one picked: a word on the name's, a tile per coach and a swatch per color, or a picture. */
 
-.lr-ext-avatar-pick {
-  --lr-ext-setting-color: var(--lr-ext-yellow);
-  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg');
+.ln-ext-avatar-pick {
+  --ln-ext-setting-color: var(--ln-ext-yellow);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg');
 
-  container: lr-ext-avatar-pick / inline-size;
+  container: ln-ext-avatar-pick / inline-size;
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 16px 18px 20px;
   border-radius: 14px;
-  background: var(--lr-ext-bg-panel);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  background: var(--ln-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
-.lr-ext-avatar-pick__head {
+.ln-ext-avatar-pick__head {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.lr-ext-avatar-pick:hover .lr-ext-avatar-pick__head .lr-ext-setting__icon {
+.ln-ext-avatar-pick:hover .ln-ext-avatar-pick__head .ln-ext-setting__icon {
   transform: rotate(-6deg) scale(1.08);
 }
 
-.lr-ext-avatar-pick__stage {
+.ln-ext-avatar-pick__stage {
   display: flex;
   align-items: center;
   gap: 22px;
@@ -36,26 +36,26 @@
   background:
     radial-gradient(
       120% 90% at 12% 50%,
-      color-mix(in srgb, var(--lr-ext-yellow) 12%, transparent),
+      color-mix(in srgb, var(--ln-ext-yellow) 12%, transparent),
       transparent 70%
     ),
-    var(--lr-ext-bg-panel-dark);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+    var(--ln-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
 /* As the profile draws it (styles/profile/hero.css). */
-.lr-ext-avatar-pick__preview {
+.ln-ext-avatar-pick__preview {
   flex: none;
   width: 112px;
   height: 112px;
   border-radius: 18px;
-  background: var(--lr-ext-avatar);
+  background: var(--ln-ext-avatar);
   box-shadow:
-    0 0 0 1px var(--lr-ext-lift-10),
-    0 6px 18px var(--lr-ext-shade-30);
+    0 0 0 1px var(--ln-ext-lift-10),
+    0 6px 18px var(--ln-ext-shade-30);
 }
 
-.lr-ext-avatar-pick__who {
+.ln-ext-avatar-pick__who {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -63,10 +63,10 @@
   min-width: 0;
 }
 
-.lr-ext-avatar-pick__name {
+.ln-ext-avatar-pick__name {
   max-width: 100%;
   overflow: hidden;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 24px;
   font-weight: 800;
   text-overflow: ellipsis;
@@ -75,137 +75,137 @@
 
 /* ---- The ways to pick it: pills, their highlight sliding (content/ui/tab-bars.ts) --- */
 
-.lr-ext-avatar-pick__modes {
-  --lr-ext-tab-bg: var(--lr-ext-bg-raised);
-  --lr-ext-tab-radius: 8px;
-  --lr-ext-tab-shadow: 0 1px 3px var(--lr-ext-shade-40);
+.ln-ext-avatar-pick__modes {
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised);
+  --ln-ext-tab-radius: 8px;
+  --ln-ext-tab-shadow: 0 1px 3px var(--ln-ext-shade-40);
 
   display: flex;
   flex-wrap: wrap;
   gap: 2px;
   padding: 3px;
   border-radius: 11px;
-  background: var(--lr-ext-bg-panel);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  background: var(--ln-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
-.lr-ext-avatar-pick__modes button {
+.ln-ext-avatar-pick__modes button {
   height: 34px;
   padding: 0 16px;
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: var(--lr-ext-text-dim);
-  font: 700 13.5px var(--lr-ext-font);
+  color: var(--ln-ext-text-dim);
+  font: 700 13.5px var(--ln-ext-font);
   cursor: pointer;
   transition: color 0.15s !important;
 }
 
-.lr-ext-avatar-pick__modes button:hover,
-.lr-ext-avatar-pick__modes button.active {
-  color: var(--lr-ext-text-strong);
+.ln-ext-avatar-pick__modes button:hover,
+.ln-ext-avatar-pick__modes button.active {
+  color: var(--ln-ext-text-strong);
 }
 
-.lr-ext-avatar-pick__modes button.active {
-  background: var(--lr-ext-bg-raised);
-  box-shadow: 0 1px 3px var(--lr-ext-shade-40);
+.ln-ext-avatar-pick__modes button.active {
+  background: var(--ln-ext-bg-raised);
+  box-shadow: 0 1px 3px var(--ln-ext-shade-40);
 }
 
-.lr-ext-avatar-pick__modes[data-lr-ext-tabs] button.active {
+.ln-ext-avatar-pick__modes[data-ln-ext-tabs] button.active {
   background: transparent;
   box-shadow: none;
 }
 
 /* ---- The panels --- */
 
-.lr-ext-avatar-pick__panel {
+.ln-ext-avatar-pick__panel {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.lr-ext-avatar-pick__panel[hidden] {
+.ln-ext-avatar-pick__panel[hidden] {
   display: none;
 }
 
-.lr-ext-avatar-pick__note {
+.ln-ext-avatar-pick__note {
   margin: 0;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13.5px;
 }
 
-.lr-ext-avatar-pick__error {
+.ln-ext-avatar-pick__error {
   margin: 0;
-  color: var(--lr-ext-bad);
+  color: var(--ln-ext-bad);
   font-size: 13.5px;
   font-weight: 700;
 }
 
-.lr-ext-avatar-pick__error[hidden] {
+.ln-ext-avatar-pick__error[hidden] {
   display: none;
 }
 
 /* Each coach in the color picked: the avatar it would make. */
-.lr-ext-avatar-pick__coaches {
+.ln-ext-avatar-pick__coaches {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
   gap: 10px;
 }
 
-.lr-ext-avatar-pick__coach {
+.ln-ext-avatar-pick__coach {
   aspect-ratio: 1;
   padding: 0;
   border: none;
   border-radius: 14px;
-  background: var(--lr-ext-avatar);
-  box-shadow: 0 0 0 1px var(--lr-ext-lift-10);
+  background: var(--ln-ext-avatar);
+  box-shadow: 0 0 0 1px var(--ln-ext-lift-10);
   cursor: pointer;
   transition:
     box-shadow 0.2s,
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-.lr-ext-avatar-pick__colors {
+.ln-ext-avatar-pick__colors {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.lr-ext-avatar-pick__color {
+.ln-ext-avatar-pick__color {
   width: 38px;
   height: 38px;
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: linear-gradient(145deg, var(--lr-ext-avatar-from), var(--lr-ext-avatar-to));
-  box-shadow: 0 0 0 1px var(--lr-ext-lift-10);
+  background: linear-gradient(145deg, var(--ln-ext-avatar-from), var(--ln-ext-avatar-to));
+  box-shadow: 0 0 0 1px var(--ln-ext-lift-10);
   cursor: pointer;
   transition:
     box-shadow 0.2s,
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-.lr-ext-avatar-pick__coach:hover,
-.lr-ext-avatar-pick__color:hover {
+.ln-ext-avatar-pick__coach:hover,
+.ln-ext-avatar-pick__color:hover {
   transform: translateY(-2px) scale(1.04);
 }
 
-.lr-ext-avatar-pick__coach[aria-pressed='true'],
-.lr-ext-avatar-pick__color[aria-pressed='true'] {
+.ln-ext-avatar-pick__coach[aria-pressed='true'],
+.ln-ext-avatar-pick__color[aria-pressed='true'] {
   box-shadow:
-    0 0 0 2px var(--lr-ext-bg-panel),
-    0 0 0 4px var(--lr-ext-accent);
+    0 0 0 2px var(--ln-ext-bg-panel),
+    0 0 0 4px var(--ln-ext-accent);
 }
 
-.lr-ext-avatar-pick__coach:focus-visible,
-.lr-ext-avatar-pick__color:focus-visible,
-.lr-ext-avatar-pick__upload:focus-within {
-  outline: 2px solid var(--lr-ext-accent);
+.ln-ext-avatar-pick__coach:focus-visible,
+.ln-ext-avatar-pick__color:focus-visible,
+.ln-ext-avatar-pick__upload:focus-within {
+  outline: 2px solid var(--ln-ext-accent);
   outline-offset: 3px;
 }
 
 /* The file input, hidden in its label, which looks like a button. */
-.lr-ext-avatar-pick__upload {
+.ln-ext-avatar-pick__upload {
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
@@ -213,23 +213,23 @@
   height: 38px;
   padding: 0 18px 0 14px;
   border-radius: 8px;
-  background: var(--lr-ext-btn-primary);
-  box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: var(--lr-ext-white);
-  font: 700 14px var(--lr-ext-font);
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white);
+  font: 700 14px var(--ln-ext-font);
   cursor: pointer;
 }
 
-.lr-ext-avatar-pick__upload:hover {
-  background: var(--lr-ext-btn-primary-hover);
+.ln-ext-avatar-pick__upload:hover {
+  background: var(--ln-ext-btn-primary-hover);
 }
 
-.lr-ext-avatar-pick__upload .lr-ext-hi {
+.ln-ext-avatar-pick__upload .ln-ext-hi {
   width: 18px;
   height: 18px;
 }
 
-.lr-ext-avatar-pick__upload input {
+.ln-ext-avatar-pick__upload input {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -239,87 +239,87 @@
 
 /* ---- The Name card: the name, its button, and one to drop it --- */
 
-.lr-ext-name-pick {
-  --lr-ext-setting-color: var(--lr-ext-pink);
-  --lr-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/text-font.svg');
+.ln-ext-name-pick {
+  --ln-ext-setting-color: var(--ln-ext-pink);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/text-font.svg');
 }
 
-.lr-ext-name-pick__form {
+.ln-ext-name-pick__form {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin: 0;
 }
 
-.lr-ext-name-pick__form input {
+.ln-ext-name-pick__form input {
   box-sizing: border-box;
   flex: 1 1 220px;
   min-width: 0;
   height: 38px;
   padding: 0 12px;
-  border: 1px solid var(--lr-ext-lift-12);
+  border: 1px solid var(--ln-ext-lift-12);
   border-radius: 8px;
-  background: var(--lr-ext-shade-25);
-  color: var(--lr-ext-text-strong);
-  font: 600 14px var(--lr-ext-font);
+  background: var(--ln-ext-shade-25);
+  color: var(--ln-ext-text-strong);
+  font: 600 14px var(--ln-ext-font);
 }
 
-.lr-ext-name-pick__form input:focus {
-  border-color: var(--lr-ext-accent);
+.ln-ext-name-pick__form input:focus {
+  border-color: var(--ln-ext-accent);
   outline: none;
 }
 
-.lr-ext-name-pick__form button {
+.ln-ext-name-pick__form button {
   height: 38px;
   padding: 0 18px;
   border: none;
   border-radius: 8px;
-  color: var(--lr-ext-white);
-  font: 700 14px var(--lr-ext-font);
+  color: var(--ln-ext-white);
+  font: 700 14px var(--ln-ext-font);
   cursor: pointer;
 }
 
-.lr-ext-name-pick__save {
-  background: var(--lr-ext-btn-primary);
-  box-shadow: var(--lr-ext-btn-primary-shadow);
+.ln-ext-name-pick__save {
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
 }
 
-.lr-ext-name-pick__save:hover {
-  background: var(--lr-ext-btn-primary-hover);
+.ln-ext-name-pick__save:hover {
+  background: var(--ln-ext-btn-primary-hover);
 }
 
-.lr-ext-name-pick__reset {
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
+.ln-ext-name-pick__reset {
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
 }
 
-.lr-ext-name-pick__reset:hover {
-  background: var(--lr-ext-btn-grey-hover);
+.ln-ext-name-pick__reset:hover {
+  background: var(--ln-ext-btn-grey-hover);
 }
 
-.lr-ext-name-pick__reset[hidden] {
+.ln-ext-name-pick__reset[hidden] {
   display: none;
 }
 
 /* A narrow card (a phone, a tablet's column beside the menu): the avatar over the name and the
  * pills, the pills across. */
-@container lr-ext-avatar-pick (max-width: 520px) {
-  .lr-ext-avatar-pick__stage {
+@container ln-ext-avatar-pick (max-width: 520px) {
+  .ln-ext-avatar-pick__stage {
     flex-direction: column;
     text-align: center;
   }
 
-  .lr-ext-avatar-pick__who {
+  .ln-ext-avatar-pick__who {
     align-items: stretch;
     width: 100%;
   }
 
-  .lr-ext-avatar-pick__modes button {
+  .ln-ext-avatar-pick__modes button {
     flex: 1 1 0;
     padding: 0 6px;
   }
 
-  .lr-ext-avatar-pick__coaches {
+  .ln-ext-avatar-pick__coaches {
     grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
   }
 }

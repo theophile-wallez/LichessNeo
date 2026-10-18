@@ -28,7 +28,7 @@ main.opening h1.opening__title {
   align-items: center;
   gap: 14px;
   margin: 0 !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 30px !important;
   font-weight: 800 !important;
   letter-spacing: -0.01em;
@@ -60,15 +60,15 @@ main.opening .box__top__actions a {
   margin: 0 !important;
   padding: 0 14px;
   border-radius: 10px;
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 700;
 }
 
 main.opening .box__top__actions a:hover {
-  background: var(--lr-ext-btn-grey-hover);
+  background: var(--ln-ext-btn-grey-hover);
 }
 
 main.opening .box__top__actions a::before {
@@ -76,20 +76,20 @@ main.opening .box__top__actions a::before {
   width: 16px;
   height: 16px;
   background: currentColor;
-  -webkit-mask: var(--lr-ext-opening-link) center / contain no-repeat;
-  mask: var(--lr-ext-opening-link) center / contain no-repeat;
+  -webkit-mask: var(--ln-ext-opening-link) center / contain no-repeat;
+  mask: var(--ln-ext-opening-link) center / contain no-repeat;
 }
 
 main.opening .box__top__actions a[href$='/opening/tree'] {
-  --lr-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/left-to-right-list-bullet.svg');
+  --ln-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/left-to-right-list-bullet.svg');
 }
 
 main.opening .box__top__actions a[href$='/opening'] {
-  --lr-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-view.svg');
+  --ln-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-view.svg');
 }
 
 main.opening .box__top__actions a[href$='#explorer'] {
-  --lr-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
+  --ln-ext-opening-link: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
 }
 
 /* An opening's: the way back to its parent, then its name. */
@@ -104,14 +104,14 @@ main.opening h1.opening__title > a {
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong) !important;
   font-size: 0 !important;
 }
 
 main.opening h1.opening__title > a:hover {
-  background: var(--lr-ext-btn-grey-hover);
+  background: var(--ln-ext-btn-grey-hover);
 }
 
 main.opening h1.opening__title > a::before {
@@ -147,13 +147,13 @@ main.opening .opening__name a {
     top: 0;
     z-index: 4;
     padding-block: 8px !important;
-    background: var(--lr-ext-bg-page);
+    background: var(--ln-ext-bg-page);
     /* Side shadows hide the cards' borders and shadows passing under; margins would widen
        the page. */
     box-shadow:
-      var(--lr-ext-pin-cover-wide),
-      -12px 0 var(--lr-ext-bg-page),
-      12px 0 var(--lr-ext-bg-page);
+      var(--ln-ext-pin-cover-wide),
+      -12px 0 var(--ln-ext-bg-page),
+      12px 0 var(--ln-ext-bg-page);
   }
 
   main.opening > .box__top::after,
@@ -163,7 +163,7 @@ main.opening .opening__name a {
     top: 100%;
     inset-inline: -12px;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

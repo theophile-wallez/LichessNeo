@@ -5,7 +5,7 @@ import { createSizeWatch } from './size-watch.ts';
 
 // The right-hand panel stacks the moves, the controls and the chat in fixed
 // grid rows (styles/game/layout.css, styles/analysis/layout.css), so the
-// controls' row needs a definite height: `--lr-ext-controls-h`.
+// controls' row needs a definite height: `--ln-ext-controls-h`.
 
 interface Panel {
   readonly main: HTMLElement;
@@ -19,7 +19,7 @@ function findPanel(): Panel | null {
 
 function setHeight({ main, controls }: Panel): void {
   const height = controls ? Math.ceil(controls.getBoundingClientRect().height) : 0;
-  setStyleProperty(main, '--lr-ext-controls-h', `${height}px`);
+  setStyleProperty(main, '--ln-ext-controls-h', `${height}px`);
 }
 
 export function syncControlsHeight(): void {

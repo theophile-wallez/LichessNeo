@@ -91,7 +91,7 @@ const idOf = (look: Look): string => {
   return typeof look === 'string' ? look : look.id;
 };
 
-const UNREADABLE = '[LichessReimagined] the imported packs could not be read';
+const UNREADABLE = '[LichessNeo] the imported packs could not be read';
 
 const shownFrom = (packs: readonly Pack[]): Shown => ({
   board: lookOf('board', packs),

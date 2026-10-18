@@ -63,22 +63,22 @@ interface Layer {
 }
 
 function buildLayer(input: GameOverInput): Layer {
-  const root = createElement('div', { className: 'lr-ext-end' });
-  const kings = createElement('div', { className: 'lr-ext-end__kings' });
+  const root = createElement('div', { className: 'ln-ext-end' });
+  const kings = createElement('div', { className: 'ln-ext-end__kings' });
   root.append(kings);
   if (input.outcome.result === 'win' && input.live) addConfetti(root);
   const holder = createElement('div');
   setHtml(holder, cardMarkup(endCardInput(input)));
-  const card = queryOne(holder, '.lr-ext-end__card', HTMLElement);
+  const card = queryOne(holder, '.ln-ext-end__card', HTMLElement);
   const part = (name: string): HTMLElement | null =>
-    card ? queryOne(card, `.lr-ext-end__${name}`, HTMLElement) : null;
+    card ? queryOne(card, `.ln-ext-end__${name}`, HTMLElement) : null;
   const [bubble, counts] = [part('bubble'), part('counts')];
   return {
     root,
     kings,
     card,
     stats: part('stats'),
-    accuracy: card ? queryOne(card, '.lr-ext-end__accuracy b', HTMLElement) : null,
+    accuracy: card ? queryOne(card, '.ln-ext-end__accuracy b', HTMLElement) : null,
     voice: bubble ? createVoice(bubble, input.coachId) : null,
     chips: counts ? createChips(counts) : null,
   };
@@ -99,7 +99,7 @@ function followPage(layer: Layer, input: GameOverInput): void {
     const followUp = queryOne(input.main, FOLLOW_UP, HTMLElement);
     if (!followUp || !layer.card || layer.card.parentElement === followUp) return;
     followUp.prepend(layer.card);
-    setData(followUp, 'lrExtEndCard', '');
+    setData(followUp, 'lnExtEndCard', '');
   };
   sync();
   const timer = setInterval(() => {
@@ -196,16 +196,16 @@ function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): G
 
 export function mountGameOver(input: GameOverInput): GameOverView {
   // A dev preview shows it again: the last one goes, its card too.
-  input.main.querySelector(':scope > .lr-ext-end')?.remove();
-  input.main.querySelector('.lr-ext-end__card')?.remove();
+  input.main.querySelector(':scope > .ln-ext-end')?.remove();
+  input.main.querySelector('.ln-ext-end__card')?.remove();
   const layer = buildLayer(input);
-  setData(input.main, 'lrExtEnd', '');
+  setData(input.main, 'lnExtEnd', '');
   input.main.append(layer.root);
   followPage(layer, input);
   // What the card shows waits for the badges to settle.
   const settled = new Promise<void>(resolve => {
     setTimeout(() => {
-      layer.root.classList.toggle('lr-ext-end--settled', true);
+      layer.root.classList.toggle('ln-ext-end--settled', true);
       resolve();
     }, SETTLE_MS);
   });

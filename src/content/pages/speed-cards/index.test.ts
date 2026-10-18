@@ -52,7 +52,7 @@ let custom: ReturnType<typeof vi.fn<() => void>>;
 
 beforeEach(() => {
   document.body.innerHTML = `<main class="lobby">
-    <section class="lr-ext-hero"></section>
+    <section class="ln-ext-hero"></section>
     <div class="lobby__table"><div class="lobby__start">
       <button class="lobby__start__button lobby__start__button--hook">Create a game</button>
     </div></div>
@@ -69,28 +69,28 @@ afterEach(() => {
 });
 
 const play = (): HTMLButtonElement | null =>
-  queryOne(document, '.lobby__start > .lr-ext-play', HTMLButtonElement);
+  queryOne(document, '.lobby__start > .ln-ext-play', HTMLButtonElement);
 
 const pool = (id: string): HTMLElement | null =>
-  queryOne(document, `.lr-ext-speeds .lr-ext-speed__pool[data-lr-ext-pool='${id}']`, HTMLElement);
+  queryOne(document, `.ln-ext-speeds .ln-ext-speed__pool[data-ln-ext-pool='${id}']`, HTMLElement);
 
 describe('the speed cards', () => {
   it("go under the hero, headed by Lichess's quick pairing tab", () => {
     const sync = createSpeedCards(undefined, 'fr');
     sync();
     sync();
-    expect(document.querySelectorAll('.lr-ext-speeds')).toHaveLength(1);
-    expect(document.querySelector('.lr-ext-hero')?.nextElementSibling?.className).toBe(
-      'lr-ext-speeds',
+    expect(document.querySelectorAll('.ln-ext-speeds')).toHaveLength(1);
+    expect(document.querySelector('.ln-ext-hero')?.nextElementSibling?.className).toBe(
+      'ln-ext-speeds',
     );
-    expect(document.querySelector('.lr-ext-speeds__title')?.textContent).toBe('Appariement rapide');
-    const names = [...document.querySelectorAll('.lr-ext-speed__name')].map(
+    expect(document.querySelector('.ln-ext-speeds__title')?.textContent).toBe('Appariement rapide');
+    const names = [...document.querySelectorAll('.ln-ext-speed__name')].map(
       name => name.textContent,
     );
     expect(names).toEqual(['Bullet', 'Blitz', 'Rapide', 'Classique']);
     // Signed out: the pools only.
-    expect(document.querySelector('.lr-ext-speed__rating')).toBeNull();
-    expect(document.querySelectorAll('.lr-ext-speed__pool')).toHaveLength(11);
+    expect(document.querySelector('.ln-ext-speed__rating')).toBeNull();
+    expect(document.querySelectorAll('.ln-ext-speed__pool')).toHaveLength(11);
   });
 
   it("show the player's kept numbers, the last pool as the primary", () => {
@@ -99,23 +99,23 @@ describe('the speed cards', () => {
       { speed: 'blitz', games: 25, rating: 1584, provisional: true, history, last: '3+2' },
     ];
     localStorage.setItem(
-      'lr-ext-speed-cards',
+      'ln-ext-speed-cards',
       JSON.stringify({ user: 'eresy', at: Date.now(), cards }),
     );
     createSpeedCards('eresy', 'en')();
-    const blitz = document.querySelector("[data-lr-ext-speed='blitz']");
-    expect(blitz?.querySelector('.lr-ext-speed__rating')?.textContent).toMatch(/1,584\s*\?/);
+    const blitz = document.querySelector("[data-ln-ext-speed='blitz']");
+    expect(blitz?.querySelector('.ln-ext-speed__rating')?.textContent).toMatch(/1,584\s*\?/);
     // Provisional: a question mark, its word for whoever asks.
-    expect(blitz?.querySelector('.lr-ext-speed__provisional')?.getAttribute('title')).toBe(
+    expect(blitz?.querySelector('.ln-ext-speed__provisional')?.getAttribute('title')).toBe(
       'provisional',
     );
-    expect(blitz?.querySelector('.lr-ext-speed__games')?.textContent).toBe('25 games');
+    expect(blitz?.querySelector('.ln-ext-speed__games')?.textContent).toBe('25 games');
     // Both lead to the speed's stats page.
     const links = [...(blitz?.querySelectorAll('a') ?? [])].map(link => link.getAttribute('href'));
     expect(links).toEqual(['/@/eresy/perf/blitz', '/@/eresy/perf/blitz']);
-    expect(blitz?.querySelector('.lr-ext-speed__line')?.getAttribute('d')).toMatch(/^M0,27C/);
-    expect(pool('3+2')?.classList.contains('lr-ext-speed__pool--last')).toBe(true);
-    expect(document.querySelector("[data-lr-ext-speed='bullet'] .lr-ext-speed__games")).toBeNull();
+    expect(blitz?.querySelector('.ln-ext-speed__line')?.getAttribute('d')).toMatch(/^M0,27C/);
+    expect(pool('3+2')?.classList.contains('ln-ext-speed__pool--last')).toBe(true);
+    expect(document.querySelector("[data-ln-ext-speed='bullet'] .ln-ext-speed__games")).toBeNull();
   });
 
   it("join Lichess's pool from the lobby's tab, and leave it on a second click", async () => {
@@ -125,15 +125,15 @@ describe('the speed cards', () => {
     await flush();
     expect(lobby).toEqual({ tab: 'real_time', member: '3+2' });
     sync();
-    expect(pool('3+2')?.classList.contains('lr-ext-speed__pool--seeking')).toBe(true);
+    expect(pool('3+2')?.classList.contains('ln-ext-speed__pool--seeking')).toBe(true);
     expect(
-      document.querySelector('.lr-ext-speeds')?.classList.contains('lr-ext-speeds--seeking'),
+      document.querySelector('.ln-ext-speeds')?.classList.contains('ln-ext-speeds--seeking'),
     ).toBe(true);
     // The heading says so, with a button to stop.
-    expect(document.querySelector('.lr-ext-speeds__seeking-text')?.textContent).toBe(
+    expect(document.querySelector('.ln-ext-speeds__seeking-text')?.textContent).toBe(
       'Looking for a 3 + 2 opponent…',
     );
-    queryOne(document, '.lr-ext-speeds__cancel', HTMLElement)?.click();
+    queryOne(document, '.ln-ext-speeds__cancel', HTMLElement)?.click();
     await flush();
     expect(lobby).toEqual({ tab: 'real_time', member: null });
     pool('3+2')?.click();
@@ -144,7 +144,7 @@ describe('the speed cards', () => {
     await flush();
     expect(lobby).toEqual({ tab: 'real_time', member: null });
     sync();
-    expect(document.querySelector('.lr-ext-speed__pool--seeking')).toBeNull();
+    expect(document.querySelector('.ln-ext-speed__pool--seeking')).toBeNull();
   });
 
   it("follow a pool Lichess joined itself, and leave its pools tab for the lobby's", () => {
@@ -152,12 +152,12 @@ describe('the speed cards', () => {
     drawLobby(lobby);
     createSpeedCards(undefined, 'en')();
     expect(lobby.tab).toBe('real_time');
-    expect(pool('3+0')?.classList.contains('lr-ext-speed__pool--seeking')).toBe(true);
+    expect(pool('3+0')?.classList.contains('ln-ext-speed__pool--seeking')).toBe(true);
   });
 
   it("open Lichess's game setup from the custom game's pill", () => {
     createSpeedCards(undefined, 'en')();
-    queryOne(document, '.lr-ext-speeds__custom', HTMLElement)?.click();
+    queryOne(document, '.ln-ext-speeds__custom', HTMLElement)?.click();
     expect(custom).toHaveBeenCalledOnce();
   });
 });
@@ -167,13 +167,13 @@ describe('the hero’s play button', () => {
     createSpeedCards(undefined, 'fr')();
     expect(document.querySelector('.lobby__start')?.firstElementChild).toBe(play());
     expect(play()?.textContent).toBe('Jouer une partie 10 min');
-    expect(play()?.dataset.lrExtSpeed).toBe('rapid');
+    expect(play()?.dataset.lnExtSpeed).toBe('rapid');
   });
 
   it('plays the pool last played, and follows the one picked since', async () => {
     const cards = [{ speed: 'blitz', games: 25, rating: 1584, provisional: false, history: [] }];
     localStorage.setItem(
-      'lr-ext-speed-cards',
+      'ln-ext-speed-cards',
       JSON.stringify({ user: 'eresy', at: Date.now(), cards, last: '3+2' }),
     );
     const sync = createSpeedCards('eresy', 'en');
@@ -183,12 +183,12 @@ describe('the hero’s play button', () => {
     await flush();
     expect(lobby.member).toBe('3+2');
     sync();
-    expect(play()?.classList.contains('lr-ext-play--seeking')).toBe(true);
+    expect(play()?.classList.contains('ln-ext-play--seeking')).toBe(true);
     pool('3+0')?.click();
     await flush();
     sync();
     expect(play()?.textContent).toBe('Play a 3 min game');
-    expect(play()?.dataset.lrExtSpeed).toBe('blitz');
+    expect(play()?.dataset.lnExtSpeed).toBe('blitz');
   });
 
   it('is off while Lichess’s own is', async () => {

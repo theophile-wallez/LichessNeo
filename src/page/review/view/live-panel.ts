@@ -14,7 +14,7 @@ function liveBubble(session: Session, analysis: Analysis, comment: CoachComment 
   if (live.error) return bubbleTitle(live.error);
   if (!analysis.path) {
     const { title, sub } = language.ui.liveIntro;
-    return html`${bubbleTitle(title)}<p class="lr-ext-bubble__sub">${sub}</p>`;
+    return html`${bubbleTitle(title)}<p class="ln-ext-bubble__sub">${sub}</p>`;
   }
   if (!comment) return thinkingMarkup(language.ui.thinking);
   return verdictMarkup(session, comment);
@@ -41,6 +41,6 @@ export function renderLive(session: Session, analysis: Analysis): void {
   });
   setHtml(
     session.elements.panel,
-    html`<div class="lr-ext-coach">${avatar}<div class="lr-ext-bubble">${bubble}</div></div>`,
+    html`<div class="ln-ext-coach">${avatar}<div class="ln-ext-bubble">${bubble}</div></div>`,
   );
 }

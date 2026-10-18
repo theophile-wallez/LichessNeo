@@ -13,7 +13,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // styles/profile/hero.css) leads to the settings' Profile customization page, to pick another.
 
 const HEADER = '.user-show > .user-show__header';
-const LINK = 'lr-ext-avatar-edit';
+const LINK = 'ln-ext-avatar-edit';
 
 function buildLink(): HTMLAnchorElement {
   const label = message('avatarEdit');

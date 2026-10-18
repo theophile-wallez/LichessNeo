@@ -26,20 +26,20 @@ function card(): { card: HTMLElement; input: HTMLInputElement; reset: HTMLElemen
   const built = buildNameCard();
   document.body.append(built);
   const input = queryOne(built, 'input', HTMLInputElement);
-  const reset = queryOne(built, '.lr-ext-name-pick__reset', HTMLElement);
+  const reset = queryOne(built, '.ln-ext-name-pick__reset', HTMLElement);
   if (!input || !reset) throw new Error('no field');
   return { card: built, input, reset };
 }
 
 const save = (built: HTMLElement): void =>
-  queryOne(built, '.lr-ext-name-pick__save', HTMLElement)?.click();
+  queryOne(built, '.ln-ext-name-pick__save', HTMLElement)?.click();
 
-const stored = (): string | null => localStorage.getItem('lr-ext-name');
+const stored = (): string | null => localStorage.getItem('ln-ext-name');
 
 // Another tab's pick, which this one hears of as a storage event.
 function pickElsewhere(name: string): void {
-  localStorage.setItem('lr-ext-name', name);
-  window.dispatchEvent(new StorageEvent('storage', { key: 'lr-ext-name' }));
+  localStorage.setItem('ln-ext-name', name);
+  window.dispatchEvent(new StorageEvent('storage', { key: 'ln-ext-name' }));
 }
 
 describe('the settings’ name card', () => {

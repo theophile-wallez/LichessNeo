@@ -2,16 +2,16 @@
 
 main.swiss .swiss__stats {
   padding: 20px !important;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
 main.swiss .swiss__stats h2 {
   margin: 0 0 12px !important;
-  color: var(--lr-ext-text-strong);
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-strong);
+  font-family: var(--ln-ext-font) !important;
   font-size: 18px !important;
   font-weight: 800 !important;
   text-align: start !important;
@@ -24,12 +24,12 @@ main.swiss .swiss__stats table {
 }
 
 main.swiss .swiss__stats tr {
-  box-shadow: inset 0 -1px 0 var(--lr-ext-card-border);
+  box-shadow: inset 0 -1px 0 var(--ln-ext-card-border);
 }
 
 main.swiss .swiss__stats th {
   padding: 9px 0;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
   text-align: start;
@@ -37,7 +37,7 @@ main.swiss .swiss__stats th {
 
 main.swiss .swiss__stats td {
   padding: 9px 0 !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 14px;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
@@ -64,7 +64,7 @@ main.swiss .swiss__stats__links a {
   margin: 0 !important;
   padding: 8px 10px;
   border-radius: 6px;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 13px;
   font-weight: 600;
   transition:
@@ -73,26 +73,26 @@ main.swiss .swiss__stats__links a {
 }
 
 main.swiss .swiss__stats__links a:hover {
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.swiss .swiss__stats__links a::before {
   margin: 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
 main.swiss .swiss__stats__links a:first-child {
   justify-content: center;
   margin-bottom: 10px !important;
   padding: 10px;
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong) !important;
   font-size: 14px;
   font-weight: 800;
 }
 
 main.swiss .swiss__stats__links a:first-child:hover {
-  background: var(--lr-ext-btn-grey-hover);
+  background: var(--ln-ext-btn-grey-hover);
 }

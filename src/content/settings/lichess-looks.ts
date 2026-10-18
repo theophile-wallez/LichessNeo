@@ -85,7 +85,7 @@ async function fetchLooks(): Promise<LichessLooks | null> {
 /** Lichess's lists, read once; null if they can't be, and read again next time. */
 export function readLichessLooks(): Promise<LichessLooks | null> {
   loading ??= fetchLooks().catch((error: unknown) => {
-    console.warn('[LichessReimagined] Lichess’s boards and sounds', error);
+    console.warn('[LichessNeo] Lichess’s boards and sounds', error);
     return null;
   });
   const read = loading;

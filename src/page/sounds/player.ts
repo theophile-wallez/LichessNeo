@@ -156,8 +156,8 @@ export function hookSoundPlayer(
   synth: () => Synth | null = () => null,
 ): boolean {
   for (const [name, url] of urls) sound.paths.set(NAME_PREFIX + name, url);
-  if (sound.lrExtHooked) return false;
-  sound.lrExtHooked = true;
+  if (sound.lnExtHooked) return false;
+  sound.lnExtHooked = true;
   const playLichess = sound.play.bind(sound);
   const playOurs: PlayOurs = (name, volume) => {
     const live = synth();

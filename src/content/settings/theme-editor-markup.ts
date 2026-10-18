@@ -12,45 +12,45 @@ export const MAX_CHROMA_STEP = 60;
 
 function schemeFields(scheme: Scheme): SafeHtml {
   const title = message(scheme === 'light' ? 'schemeLight' : 'schemeDark');
-  return html`<fieldset class="lr-ext-editor__scheme" data-lr-ext-editor-scheme="${scheme}">
-    <legend class="lr-ext-editor__legend">${BADGES[scheme]}<span>${title}</span></legend>
-    <span class="lr-ext-editor__preview">${mock(scheme, 'editor')}</span>
-    <label class="lr-ext-editor__field">
+  return html`<fieldset class="ln-ext-editor__scheme" data-ln-ext-editor-scheme="${scheme}">
+    <legend class="ln-ext-editor__legend">${BADGES[scheme]}<span>${title}</span></legend>
+    <span class="ln-ext-editor__preview">${mock(scheme, 'editor')}</span>
+    <label class="ln-ext-editor__field">
       <span>${message('editorTint')}</span>
-      <input type="range" class="lr-ext-editor__hue" min="0" max="360" step="1" data-lr-ext-field="hue" />
+      <input type="range" class="ln-ext-editor__hue" min="0" max="360" step="1" data-ln-ext-field="hue" />
     </label>
-    <label class="lr-ext-editor__field">
+    <label class="ln-ext-editor__field">
       <span>${message('editorStrength')}</span>
-      <input type="range" class="lr-ext-editor__chroma" min="0" max="${MAX_CHROMA_STEP}" step="1" data-lr-ext-field="chroma" />
+      <input type="range" class="ln-ext-editor__chroma" min="0" max="${MAX_CHROMA_STEP}" step="1" data-ln-ext-field="chroma" />
     </label>
-    <label class="lr-ext-editor__field lr-ext-editor__field--accent">
+    <label class="ln-ext-editor__field ln-ext-editor__field--accent">
       <span>${message('editorAccent')}</span>
-      <input type="color" class="lr-ext-editor__accent" data-lr-ext-field="accent" />
-      <code class="lr-ext-editor__hex"></code>
+      <input type="color" class="ln-ext-editor__accent" data-ln-ext-field="accent" />
+      <code class="ln-ext-editor__hex"></code>
     </label>
-    <p class="lr-ext-editor__warning" hidden>${message('editorLowContrast')}</p>
+    <p class="ln-ext-editor__warning" hidden>${message('editorLowContrast')}</p>
   </fieldset>`;
 }
 
 const action = (name: string, className: string, text: string): SafeHtml =>
-  html`<button type="button" class="button ${className}" data-lr-ext-editor-action="${name}">${text}</button>`;
+  html`<button type="button" class="button ${className}" data-ln-ext-editor-action="${name}">${text}</button>`;
 
 export const editorMarkup = (): SafeHtml =>
-  html`<div class="lr-ext-editor__top">
-      <h3 class="lr-ext-appearance__label lr-ext-editor__title"></h3>
+  html`<div class="ln-ext-editor__top">
+      <h3 class="ln-ext-appearance__label ln-ext-editor__title"></h3>
       <input
         type="text"
-        class="lr-ext-editor__name"
+        class="ln-ext-editor__name"
         maxlength="${MAX_NAME}"
         placeholder="${message('editorUntitled')}"
         aria-label="${message('editorName')}"
       />
     </div>
-    <div class="lr-ext-editor__schemes">${SCHEMES.map(schemeFields)}</div>
-    <div class="lr-ext-editor__actions">
-      ${action('delete', 'button-red lr-ext-editor__delete', message('editorDelete'))}
+    <div class="ln-ext-editor__schemes">${SCHEMES.map(schemeFields)}</div>
+    <div class="ln-ext-editor__actions">
+      ${action('delete', 'button-red ln-ext-editor__delete', message('editorDelete'))}
       ${action('share', 'button-empty', message('editorShare'))}
-      <span class="lr-ext-editor__spacer"></span>
+      <span class="ln-ext-editor__spacer"></span>
       ${action('cancel', 'button-empty', message('editorCancel'))}
       ${action('save', '', message('editorSave'))}
     </div>`;

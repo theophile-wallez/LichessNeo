@@ -43,9 +43,9 @@ it('gives the review’s figures when the quick look’s engine never answers', 
   const ended = onGameEnd({ gameId: GAME.id, color: 'white', live: true }, main);
   await advance(60_000);
   await ended;
-  expect(warned).toHaveBeenCalledWith('[LichessReimagined] game over analysis', expect.any(Error));
-  const bubble = queryOne(document, '.lr-ext-end__bubble', HTMLElement);
+  expect(warned).toHaveBeenCalledWith('[LichessNeo] game over analysis', expect.any(Error));
+  const bubble = queryOne(document, '.ln-ext-end__bubble', HTMLElement);
   expect(bubble?.textContent).toMatch(/You played with [\d.]+% accuracy/);
   expect(bubble?.textContent).not.toBe(gameOverTexts().failed);
-  expect(localStorage.getItem(`lr-ext-review:${GAME.id}:${GAME.nodes.length}:v1`)).not.toBeNull();
+  expect(localStorage.getItem(`ln-ext-review:${GAME.id}:${GAME.nodes.length}:v1`)).not.toBeNull();
 });

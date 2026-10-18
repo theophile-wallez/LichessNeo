@@ -2,7 +2,7 @@
    our hero (hero.css) and speed cards. Below 1020px, compact.css lays them out. */
 
 @media (min-width: 1020px) {
-  html[data-lr-ext-has~='lobby'] #main-wrap {
+  html[data-ln-ext-has~='lobby'] #main-wrap {
     ---main-max-width: 1260px !important;
   }
 
@@ -26,7 +26,7 @@
 
   /* The hero over the start buttons, the speed cards, then the lobby by the featured game and
      the news by the puzzle. */
-  .lr-ext-hero {
+  .ln-ext-hero {
     grid-column: 1 / -1 !important;
     grid-row: 1 / 3;
   }
@@ -34,7 +34,7 @@
     grid-column: 1 / 9 !important;
     grid-row: 2 !important;
   }
-  .lr-ext-speeds {
+  .ln-ext-speeds {
     grid-row: 3;
   }
   main.lobby .lobby__app {

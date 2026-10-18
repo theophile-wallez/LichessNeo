@@ -75,7 +75,7 @@ export function startReview(session: Session, analysis: Analysis, onMove = false
   if (!analysis.gameId || analysis.mainline.length < 2) return;
   run(session, onMove ? 'moves' : 'summary');
   analyseGame(session, analysis).catch((error: unknown) => {
-    console.error('[LichessReimagined] game analysis failed', error);
+    console.error('[LichessNeo] game analysis failed', error);
   });
 }
 

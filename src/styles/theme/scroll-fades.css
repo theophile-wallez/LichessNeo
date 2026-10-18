@@ -3,13 +3,13 @@
 /* The fades at a scrolling list's edges (the lobby's, the home feed's), driven by a scroll
    timeline: in over a list's first pixels, out over its last. */
 
-@keyframes lr-ext-scroll-fade-in {
+@keyframes ln-ext-scroll-fade-in {
   to {
     opacity: 1;
   }
 }
 
-@keyframes lr-ext-scroll-fade-out {
+@keyframes ln-ext-scroll-fade-out {
   from {
     opacity: 1;
   }

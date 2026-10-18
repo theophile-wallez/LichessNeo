@@ -26,7 +26,7 @@ export function arrowsMarkup(arrows: readonly Arrow[]): SafeHtml {
     ({ from, to, color, opacity }) =>
       html`<polygon points="${arrowOutline(arrowPath(from, to))}" fill="rgba(${color},${opacity})"/>`,
   );
-  return html`<svg class="lr-ext-shapes__arrows" viewBox="0 0 8 8">${polygons}</svg>`;
+  return html`<svg class="ln-ext-shapes__arrows" viewBox="0 0 8 8">${polygons}</svg>`;
 }
 
 export interface Mate {
@@ -42,7 +42,7 @@ export function mateMarkup({ king, phase, whiteAtBottom, label }: Mate): SafeHtm
   const x = column * 12.5;
   const y = row * 12.5;
   if (phase === 'badge') {
-    return html`<div class="lr-ext-mate__badge" style="left:${x + 12.5}%;top:${y}%">${MATE_ICON}</div>`;
+    return html`<div class="ln-ext-mate__badge" style="left:${x + 12.5}%;top:${y}%">${MATE_ICON}</div>`;
   }
-  return html`<div class="lr-ext-mate__square" style="left:${x}%;top:${y}%"><div class="lr-ext-mate__icon">${MATE_ICON}</div></div><div class="lr-ext-mate__label" style="left:${x + 6.25}%;top:${y + 1.1}%">${label}</div>`;
+  return html`<div class="ln-ext-mate__square" style="left:${x}%;top:${y}%"><div class="ln-ext-mate__icon">${MATE_ICON}</div></div><div class="ln-ext-mate__label" style="left:${x + 6.25}%;top:${y + 1.1}%">${label}</div>`;
 }

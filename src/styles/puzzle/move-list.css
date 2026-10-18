@@ -7,7 +7,7 @@
    Lichess hides the list on phones held upright. */
 main.puzzle .puzzle__moves {
   overflow-x: hidden;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
 }
 
 main.puzzle .tview2-column {
@@ -18,7 +18,7 @@ main.puzzle .tview2-column {
   padding-bottom: 8px;
   overflow-x: clip;
   background: none !important;
-  font-family: var(--lr-ext-font) !important;
+  font-family: var(--ln-ext-font) !important;
 }
 
 main.puzzle .tview2-column > index {
@@ -31,7 +31,7 @@ main.puzzle .tview2-column > index {
   padding-left: 12px !important;
   border: none !important;
   background: transparent !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px !important;
   font-weight: 700;
 }
@@ -45,7 +45,7 @@ main.puzzle .tview2-column > index:nth-of-type(even)::before {
   position: absolute;
   z-index: -1;
   inset: 0 -100vw 0 0;
-  background: var(--lr-ext-neutral-3);
+  background: var(--ln-ext-neutral-3);
 }
 
 main.puzzle .tview2-column > move {
@@ -59,46 +59,46 @@ main.puzzle .tview2-column > move {
   border: none !important;
   border-radius: 3px;
   background: transparent !important;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   line-height: 24px !important;
 }
 
 main.puzzle .tview2-column > move:hover {
-  background: var(--lr-ext-lift-8) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-8) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.puzzle .tview2-column > move.active {
-  background: var(--lr-ext-lift-15) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-15) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Where the puzzle starts. */
 main.puzzle .tview2-column > move.current {
-  box-shadow: inset 0 0 0 1px var(--lr-ext-lift-25);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-25);
 }
 
 main.puzzle .tview2-column > move.empty {
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-weight: 400 !important;
 }
 
 /* Right and wrong moves take their color, the verdict a badge before them. */
 main.puzzle .tview2 move:is(.good, .win) {
-  --lr-ext-glyph: var(--lr-ext-green-dark);
+  --ln-ext-glyph: var(--ln-ext-green-dark);
 
-  color: var(--lr-ext-good-hover) !important;
+  color: var(--ln-ext-good-hover) !important;
 }
 
 main.puzzle .tview2 move.fail {
-  --lr-ext-glyph: var(--lr-ext-red);
+  --ln-ext-glyph: var(--ln-ext-red);
 
-  color: var(--lr-ext-red) !important;
+  color: var(--ln-ext-red) !important;
 }
 
-main.puzzle :is(.tview2-column > move, interrupt[data-lr-ext-tries] move) glyph {
+main.puzzle :is(.tview2-column > move, interrupt[data-ln-ext-tries] move) glyph {
   order: -1;
   flex: none;
   display: flex;
@@ -108,10 +108,10 @@ main.puzzle :is(.tview2-column > move, interrupt[data-lr-ext-tries] move) glyph 
   height: 18px;
   margin: 0 !important;
   border-radius: 50%;
-  background: var(--lr-ext-glyph, var(--lr-ext-neutral-10));
-  box-shadow: 0 1px 0 var(--lr-ext-shade-30);
-  color: var(--lr-ext-white) !important;
-  font-family: var(--lr-ext-font) !important;
+  background: var(--ln-ext-glyph, var(--ln-ext-neutral-10));
+  box-shadow: 0 1px 0 var(--ln-ext-shade-30);
+  color: var(--ln-ext-white) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 11px !important;
   font-weight: 900;
   line-height: 1 !important;
@@ -120,7 +120,7 @@ main.puzzle :is(.tview2-column > move, interrupt[data-lr-ext-tries] move) glyph 
 main.puzzle .tview2-column > move eval {
   flex: none;
   padding: 0 0 0 2px !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 11px !important;
   font-weight: 400;
 }
@@ -133,9 +133,9 @@ main.puzzle .tview2-column > interrupt {
   margin: 4px 8px 6px !important;
   padding: 8px 10px !important;
   border: none !important;
-  border-left: 3px solid var(--lr-ext-neutral-9) !important;
+  border-left: 3px solid var(--ln-ext-neutral-9) !important;
   border-radius: 5px !important;
-  background: var(--lr-ext-bg-panel-dark) !important;
+  background: var(--ln-ext-bg-panel-dark) !important;
   box-shadow: none !important;
 }
 
@@ -164,7 +164,7 @@ main.puzzle .tview2 interrupt line move {
   padding: 0 3px !important;
   border-radius: 3px;
   background: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   line-height: 20px !important;
@@ -173,48 +173,48 @@ main.puzzle .tview2 interrupt line move {
 main.puzzle .tview2 interrupt line move index {
   margin-right: 2px;
   padding: 0 !important;
-  color: var(--lr-ext-lift-35) !important;
+  color: var(--ln-ext-lift-35) !important;
   font-weight: 400;
 }
 
 main.puzzle .tview2 interrupt line move:is(:hover, .active) {
-  background: var(--lr-ext-lift-15) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-15) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Wrong tries (content/puzzle/attempts.ts): one row under the move, each marked like a
    right move, with a red badge. */
-main.puzzle .tview2-column > interrupt[data-lr-ext-tries] {
+main.puzzle .tview2-column > interrupt[data-ln-ext-tries] {
   margin: 0 0 2px !important;
   padding: 0 10px 0 44px !important;
   border: none !important;
   background: none !important;
 }
 
-main.puzzle .tview2 interrupt[data-lr-ext-tries] > lines {
+main.puzzle .tview2 interrupt[data-ln-ext-tries] > lines {
   display: flex !important;
   flex-wrap: wrap;
   gap: 2px 8px;
 }
 
-main.puzzle .tview2 interrupt[data-lr-ext-tries] line {
+main.puzzle .tview2 interrupt[data-ln-ext-tries] line {
   display: contents !important;
 }
 
-main.puzzle .tview2 interrupt[data-lr-ext-tries] move.fail {
-  --lr-ext-glyph: var(--lr-ext-red);
+main.puzzle .tview2 interrupt[data-ln-ext-tries] move.fail {
+  --ln-ext-glyph: var(--ln-ext-red);
 
   display: flex !important;
   align-items: center;
   gap: 4px;
   height: 26px;
   padding: 0 5px !important;
-  color: var(--lr-ext-red) !important;
+  color: var(--ln-ext-red) !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   line-height: 26px !important;
 }
 
-main.puzzle .tview2 interrupt[data-lr-ext-tries] move.fail index {
+main.puzzle .tview2 interrupt[data-ln-ext-tries] move.fail index {
   display: none !important;
 }

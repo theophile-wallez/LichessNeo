@@ -65,9 +65,9 @@ jobs:
             exit 0
           fi
           gh release create "v$VERSION" \
-            "LichessReimagined-v$VERSION.zip" \
-            "LichessReimagined-v$VERSION-store.zip" \
-            "LichessReimagined-v$VERSION-firefox.zip" \
+            "LichessNeo-v$VERSION.zip" \
+            "LichessNeo-v$VERSION-store.zip" \
+            "LichessNeo-v$VERSION-firefox.zip" \
             --target "$GITHUB_SHA" \
-            --title "Lichess Reimagined $VERSION" \
+            --title "Lichess Neo $VERSION" \
             --generate-notes

@@ -12,7 +12,7 @@ main.round :is(i5d, rm6) {
   margin: 0 !important;
   overflow: hidden;
   border-radius: 6px 6px 0 0;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
@@ -39,7 +39,7 @@ main.round :is(i5d, rm6) :is(aPp, l4x) {
   background: repeating-linear-gradient(
       to bottom,
       transparent 0 30px,
-      var(--lr-ext-neutral-3) 30px 60px
+      var(--ln-ext-neutral-3) 30px 60px
     )
     local !important;
   box-shadow: none !important;
@@ -58,8 +58,8 @@ main.round :is(i5d, rm6) :is(qZM, i5z) {
   justify-content: flex-start !important;
   padding: 0 0 0 12px !important;
   background: none !important;
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
 }
@@ -73,20 +73,20 @@ main.round :is(i5d, rm6) :is(Z7yx, kwdb) {
   height: 24px;
   padding: 0 5px !important;
   border-radius: 3px;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   background: none !important;
 }
 
 main.round :is(i5d, rm6) :is(Z7yx, kwdb):hover {
-  background: var(--lr-ext-lift-8) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-8) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.round :is(i5d, rm6) :is(Z7yx, kwdb):is(.a1t, .active) {
-  background: var(--lr-ext-lift-15) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-15) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.round :is(i5d, rm6) .result-wrap {
@@ -95,12 +95,12 @@ main.round :is(i5d, rm6) .result-wrap {
 
 main.round :is(i5d, rm6) .result {
   border: none !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 16px !important;
 }
 
 main.round :is(i5d, rm6) .status {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
 /* The navigation buttons stay at the bottom, even before the first move. */
@@ -121,15 +121,15 @@ main.round :is(i5d, rm6) bo3 .noop {
   height: 40px !important;
   line-height: 40px !important;
   border-radius: 5px;
-  background: var(--lr-ext-btn-grey) !important;
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 18px;
-  box-shadow: var(--lr-ext-btn-grey-shadow);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
 }
 
 main.round :is(i5d, rm6) bo3 .fbt:hover:not(.disabled) {
-  background: var(--lr-ext-btn-grey-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* No analysis button while playing: the arrows take the bar (the menu is right of the

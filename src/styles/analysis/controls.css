@@ -10,7 +10,7 @@
     /* Lichess's 3rem left our buttons no room. */
     height: auto !important;
     padding: 8px !important;
-    border-top: 1px solid var(--lr-ext-border);
+    border-top: 1px solid var(--ln-ext-border);
   }
 
   main.analyse .analyse__controls .jumps {
@@ -27,14 +27,14 @@
     width: 34px;
     height: 44px;
     padding: 0 !important;
-    color: var(--lr-ext-text-dim) !important;
+    color: var(--ln-ext-text-dim) !important;
     font-size: 17px;
   }
 
   /* Lichess fills an active toggle with its green, hiding the green icon: a faint tile instead. */
   main.analyse .analyse__controls > .fbt.active {
-    background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
-    color: var(--lr-ext-accent) !important;
+    background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent) !important;
+    color: var(--ln-ext-accent) !important;
   }
 
   main.analyse .analyse__controls > .fbt[data-act='menu'] {
@@ -45,13 +45,13 @@
     height: 44px;
     padding: 0 !important;
     border-radius: 5px;
-    background: var(--lr-ext-btn-grey) !important;
-    box-shadow: var(--lr-ext-btn-grey-shadow);
+    background: var(--ln-ext-btn-grey) !important;
+    box-shadow: var(--ln-ext-btn-grey-shadow);
     font-size: 20px;
   }
 
   main.analyse .analyse__controls .jumps .fbt:hover:not(.disabled, :disabled) {
-    background: var(--lr-ext-btn-grey-hover) !important;
+    background: var(--ln-ext-btn-grey-hover) !important;
   }
 
   main.analyse .analyse__controls .jumps .fbt:disabled {
@@ -66,13 +66,13 @@
     min-height: 0;
     overflow-y: auto;
     border: none !important;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
   }
 
   main.analyse .action-menu > .title {
     padding: 14px 12px 6px !important;
     background: none !important;
-    color: var(--lr-ext-text-dim) !important;
+    color: var(--ln-ext-text-dim) !important;
     font-size: 12px !important;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -82,13 +82,13 @@
 
   /* No chat (the free analysis board): the tools take the whole panel. A study keeps its
    * chapter list's row, even without a chat (a gamebook has none). */
-  html:not([data-lr-ext-has~='analyse-chat'], [data-lr-ext-has~='study-side']) main.analyse {
+  html:not([data-ln-ext-has~='analyse-chat'], [data-ln-ext-has~='study-side']) main.analyse {
     grid-template-rows:
-      max(0px, calc(var(--lr-ext-stage) - var(--lr-ext-ctrl-h)))
-      var(--lr-ext-ctrl-h) !important;
+      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-ctrl-h)))
+      var(--ln-ext-ctrl-h) !important;
   }
 
-  html:not([data-lr-ext-has~='analyse-chat'], [data-lr-ext-has~='study-side'])
+  html:not([data-ln-ext-has~='analyse-chat'], [data-ln-ext-has~='study-side'])
     main.analyse
     .analyse__controls {
     border-radius: 0 0 6px 6px;
@@ -99,13 +99,13 @@
   /* The page never scrolls: the underboard, game info and the advice summary go, and the
    * keyboard-move input sits at the bottom of the tools. The underboard and the advice summary
    * open in the panel instead (underboard.css). */
-  html[data-lr-ext-has~='analyse'],
-  html[data-lr-ext-has~='analyse'] body,
-  html[data-lr-ext-has~='analyse'] #main-wrap {
+  html[data-ln-ext-has~='analyse'],
+  html[data-ln-ext-has~='analyse'] body,
+  html[data-ln-ext-has~='analyse'] #main-wrap {
     overflow: hidden !important;
   }
 
-  html[data-lr-ext-has~='analyse'] body {
+  html[data-ln-ext-has~='analyse'] body {
     height: 100dvh;
     margin: 0 !important;
     padding: 0 !important;
@@ -119,8 +119,8 @@
     grid-area: tools !important;
     align-self: end;
     z-index: 3;
-    margin: 0 0 0 var(--lr-ext-gap) !important;
+    margin: 0 0 0 var(--ln-ext-gap) !important;
     padding: 6px 8px;
-    background: var(--lr-ext-bg-panel);
+    background: var(--ln-ext-bg-panel);
   }
 }

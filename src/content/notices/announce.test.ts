@@ -26,9 +26,9 @@ function announce(message: string, date: string): void {
 }
 
 const shown = (): HTMLElement[] =>
-  queryAll(document, '.lr-ext-toast:not([data-lr-ext-removed])', HTMLElement);
+  queryAll(document, '.ln-ext-toast:not([data-ln-ext-removed])', HTMLElement);
 const part = (name: string): string =>
-  queryOne(shown()[0] ?? document, `.lr-ext-toast__${name}`, HTMLElement)?.textContent ?? '';
+  queryOne(shown()[0] ?? document, `.ln-ext-toast__${name}`, HTMLElement)?.textContent ?? '';
 
 describe('the announcement’s toast', () => {
   it('says the message, and counts down to its date', () => {
@@ -47,7 +47,7 @@ describe('the announcement’s toast', () => {
     const sync = createAnnounceSync(new Toaster('Close'));
     announce('Lichess will restart. ', '2026-10-16T12:01:30Z');
     sync();
-    queryOne(document, '.lr-ext-toast__close', HTMLButtonElement)?.click();
+    queryOne(document, '.ln-ext-toast__close', HTMLButtonElement)?.click();
     expect(document.getElementById('announce')).toBeNull();
     expect(shown()).toEqual([]);
   });

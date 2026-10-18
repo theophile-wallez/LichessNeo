@@ -2,26 +2,26 @@
 
 /* Streamers' side menu: an icon tile per link (tiles in headings-menus.css). The streamer
  * kit's link goes to the about page. */
-.subnav[data-lr-ext-nav~='streamers'] a[href$='/streamer'],
-main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/streamer'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+.subnav[data-ln-ext-nav~='streamers'] a[href$='/streamer'],
+main.page-menu[data-ln-ext-menu~='streamers'][data-ln-ext-nav-active$='/streamer'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='streamers'] a[href$='/streamer/edit'],
-main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/streamer/edit'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+.subnav[data-ln-ext-nav~='streamers'] a[href$='/streamer/edit'],
+main.page-menu[data-ln-ext-menu~='streamers'][data-ln-ext-nav-active$='/streamer/edit'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-edit-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='streamers'] a[href*='/blog/'],
-main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active*='/blog/'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+.subnav[data-ln-ext-nav~='streamers'] a[href*='/blog/'],
+main.page-menu[data-ln-ext-menu~='streamers'][data-ln-ext-nav-active*='/blog/'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-lr-ext-nav~='streamers'] a[href$='/about'],
-main.page-menu[data-lr-ext-menu~='streamers'][data-lr-ext-nav-active$='/about'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='streamers'] a[href$='/about'],
+main.page-menu[data-ln-ext-menu~='streamers'][data-ln-ext-nav-active$='/about'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }

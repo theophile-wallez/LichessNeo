@@ -19,12 +19,12 @@ it('reviews on a phone: its state stays on <html>, its badge on the board', asyn
   // What Lichess does when its scheme follows the device's.
   root.className = 'dark';
   await advance(200);
-  expect(root.classList.contains('lr-ext-review')).toBe(true);
-  expect(root.classList.contains('lr-ext-review-summary')).toBe(true);
+  expect(root.classList.contains('ln-ext-review')).toBe(true);
+  expect(root.classList.contains('ln-ext-review-summary')).toBe(true);
 
   ctrl.jumpToMain(3);
   ctrl.redraw();
   await advance(800);
-  expect(root.classList.contains('lr-ext-review-moves')).toBe(true);
-  expect(document.querySelector('#lr-ext-board-overlay .lr-ext-badge')).not.toBeNull();
+  expect(root.classList.contains('ln-ext-review-moves')).toBe(true);
+  expect(document.querySelector('#ln-ext-board-overlay .ln-ext-badge')).not.toBeNull();
 });

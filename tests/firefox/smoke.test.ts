@@ -17,7 +17,7 @@ import { launch, type Browser, type Page } from 'puppeteer-core';
 // WebDriver BiDi, into a stock Firefox it downloads once into ~/.cache/puppeteer.
 
 const EXTENSION_DIR = path.resolve(
-  process.env['LR_EXT_FIREFOX_EXTENSION_DIR'] ??
+  process.env['LN_EXT_FIREFOX_EXTENSION_DIR'] ??
     path.join(import.meta.dirname, '..', '..', 'dist', 'firefox'),
 );
 const CACHE_DIR = path.join(homedir(), '.cache', 'puppeteer');
@@ -25,8 +25,7 @@ const TIMEOUT_MS = 30_000;
 const PANEL_COLOR = '#262522';
 // From GitHub itself: Firefox runs the download in the background script,
 // whose requests a page's interception never sees.
-const EXAMPLE_LINK =
-  'https://github.com/theophile-wallez/LichessReimagined/tree/main/packs/example';
+const EXAMPLE_LINK = 'https://github.com/theophile-wallez/LichessNeo/tree/main/packs/example';
 
 /** Firefox's current release, downloaded unless it's already in the cache. */
 async function firefoxPath(): Promise<string> {
@@ -46,8 +45,8 @@ async function openLichess(browser: Browser, pathname: string): Promise<Page> {
 /** What the content script sets on <html>: the theme's colors, the extension's base URL. */
 function contentScriptMarks(page: Page): Promise<{ panel: string; assets: string }> {
   return page.evaluate(() => ({
-    panel: getComputedStyle(document.documentElement).getPropertyValue('--lr-ext-bg-panel').trim(),
-    assets: document.documentElement.dataset.lrExtAssets ?? '',
+    panel: getComputedStyle(document.documentElement).getPropertyValue('--ln-ext-bg-panel').trim(),
+    assets: document.documentElement.dataset.lnExtAssets ?? '',
   }));
 }
 
@@ -71,14 +70,14 @@ async function importExamplePack(page: Page): Promise<void> {
     for (const item of document.querySelectorAll('#dasher_app .subs > button.sub'))
       if (item.textContent === 'Board' && item instanceof HTMLElement) item.click();
   });
-  const tab = '#dasher_app div.sub.board .lr-ext-src-tabs button[data-lr-ext-tab="packs"]';
+  const tab = '#dasher_app div.sub.board .ln-ext-src-tabs button[data-ln-ext-tab="packs"]';
   await page.waitForSelector(tab, { timeout: TIMEOUT_MS });
   await page.click(tab);
-  await page.type('#dasher_app .lr-ext-src-import input[type="url"]', EXAMPLE_LINK);
-  await page.click('#dasher_app .lr-ext-src-import button');
+  await page.type('#dasher_app .ln-ext-src-import input[type="url"]', EXAMPLE_LINK);
+  await page.click('#dasher_app .ln-ext-src-import button');
   await page.waitForFunction(
     () =>
-      document.querySelector('#dasher_app .lr-ext-src-status')?.textContent?.startsWith('Imported'),
+      document.querySelector('#dasher_app .ln-ext-src-status')?.textContent?.startsWith('Imported'),
     { timeout: TIMEOUT_MS },
   );
 }
@@ -115,7 +114,7 @@ await test('the Firefox build', async suite => {
     const marks = await contentScriptMarks(page);
     assert.equal(marks.panel, PANEL_COLOR);
     assert.match(marks.assets, /^moz-extension:\/\//);
-    await page.waitForSelector('main.lobby > .lr-ext-hero', { timeout: TIMEOUT_MS });
+    await page.waitForSelector('main.lobby > .ln-ext-hero', { timeout: TIMEOUT_MS });
     assert.equal(await pageScriptIsIn(page), true);
     await page.close();
   });
@@ -137,7 +136,7 @@ await test('the Firefox build', async suite => {
     const page = await openLichess(browser, '/analysis');
     assert.equal((await contentScriptMarks(page)).panel, PANEL_COLOR);
     // The page script adds the coach's panel, the content script its face over the portrait.
-    await page.waitForSelector('#lr-ext-review .lr-ext-coach .lr-ext-coach__rig svg', {
+    await page.waitForSelector('#ln-ext-review .ln-ext-coach .ln-ext-coach__rig svg', {
       timeout: TIMEOUT_MS,
     });
     await page.close();

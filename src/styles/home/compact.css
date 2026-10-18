@@ -2,7 +2,7 @@
 
 /* Below 1020px: the desktop's blocks in two columns on a tablet, one on a phone, in the
    same order (grid.css places them on a desktop). The start buttons still lie over the
-   hero's bottom, so the hero reserves their height (--lr-ext-hero-foot). */
+   hero's bottom, so the hero reserves their height (--ln-ext-hero-foot). */
 
 @media (max-width: 1019.98px) {
   main.lobby {
@@ -14,7 +14,7 @@
     gap: 16px !important;
     margin: 0 !important;
     padding: 16px !important;
-    --lr-ext-hero-foot: 136px;
+    --ln-ext-hero-foot: 136px;
   }
 
   main.lobby > * {
@@ -24,10 +24,10 @@
     margin: 0 !important;
   }
 
-  main.lobby > .lr-ext-hero {
+  main.lobby > .ln-ext-hero {
     grid-row: 1 / 3 !important;
     min-height: 0;
-    padding: 32px 28px calc(var(--lr-ext-hero-foot) + 24px);
+    padding: 32px 28px calc(var(--ln-ext-hero-foot) + 24px);
   }
 
   main.lobby > .lobby__table {
@@ -36,8 +36,8 @@
   }
 
   /* The start buttons span the hero here: the coach stands above them. */
-  .lr-ext-hero__coach {
-    bottom: calc(var(--lr-ext-hero-foot) + 4px);
+  .ln-ext-hero__coach {
+    bottom: calc(var(--ln-ext-hero-foot) + 4px);
   }
 
   main.lobby .lobby__app {
@@ -74,7 +74,7 @@
     order: 8;
   }
 
-  .lr-ext-speeds__cards {
+  .ln-ext-speeds__cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
@@ -83,7 +83,7 @@
   main.lobby .lobby__puzzle > a > .text:first-child {
     display: block;
     margin: 0 0 12px 2px;
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
     font-size: 17px;
     font-weight: 800;
     text-align: start;
@@ -103,7 +103,7 @@
     grid-template-columns: minmax(0, 1fr) !important;
     gap: 14px !important;
     padding: 12px !important;
-    --lr-ext-hero-foot: 176px;
+    --ln-ext-hero-foot: 176px;
   }
 
   main.lobby :is(.lobby__tv, .lobby__puzzle) {
@@ -111,7 +111,7 @@
   }
 
   /* The coach beside the title, whole, and no blurb: the speeds show in the first screen. */
-  .lr-ext-hero {
+  .ln-ext-hero {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
@@ -119,28 +119,28 @@
       'title coach';
     align-items: center;
     column-gap: 8px;
-    padding: 16px 18px calc(var(--lr-ext-hero-foot) + 14px);
+    padding: 16px 18px calc(var(--ln-ext-hero-foot) + 14px);
   }
 
-  .lr-ext-hero__eyebrow {
+  .ln-ext-hero__eyebrow {
     grid-area: eyebrow;
     justify-self: start;
     margin: 0;
     font-size: 12px;
   }
 
-  .lr-ext-hero__title {
+  .ln-ext-hero__title {
     grid-area: title;
     max-width: none;
     margin: 0;
     font-size: 25px;
   }
 
-  .lr-ext-hero__sub {
+  .ln-ext-hero__sub {
     display: none;
   }
 
-  .lr-ext-hero__coach {
+  .ln-ext-hero__coach {
     position: relative;
     inset: auto;
     grid-area: coach;
@@ -179,7 +179,7 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  main.lobby :is(.lobby__start__button--hook, .lr-ext-play) {
+  main.lobby :is(.lobby__start__button--hook, .ln-ext-play) {
     grid-column: 1 / -1;
   }
 
@@ -194,23 +194,23 @@
     margin: 0 0 14px !important;
   }
 
-  .lr-ext-speeds__title {
+  .ln-ext-speeds__title {
     font-size: 16px;
   }
 
-  .lr-ext-speeds__custom {
+  .ln-ext-speeds__custom {
     gap: 6px;
     height: 30px;
     padding: 0 8px 0 10px;
     font-size: 12.5px;
   }
 
-  .lr-ext-speeds__custom .lr-ext-hi {
+  .ln-ext-speeds__custom .ln-ext-hi {
     width: 14px;
     height: 14px;
   }
 
-  .lr-ext-speeds__custom > span {
+  .ln-ext-speeds__custom > span {
     max-width: 42vw;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -218,12 +218,12 @@
   }
 
   /* A card a row: the speed, its rating and curve on one line, the pools under them. */
-  .lr-ext-speeds__cards {
+  .ln-ext-speeds__cards {
     grid-template-columns: minmax(0, 1fr);
     gap: 10px;
   }
 
-  .lr-ext-speed {
+  .ln-ext-speed {
     display: grid;
     grid-template-columns: auto auto minmax(0, 1fr);
     align-items: center;
@@ -231,39 +231,39 @@
     padding: 12px;
   }
 
-  .lr-ext-speed__top,
-  .lr-ext-speed__stats {
+  .ln-ext-speed__top,
+  .ln-ext-speed__stats {
     display: contents;
   }
 
-  .lr-ext-speed__games {
+  .ln-ext-speed__games {
     display: none;
   }
 
-  .lr-ext-speed__rating {
+  .ln-ext-speed__rating {
     font-size: 16px;
   }
 
-  .lr-ext-speed__rating {
+  .ln-ext-speed__rating {
     gap: 6px;
   }
 
-  .lr-ext-speed__provisional {
+  .ln-ext-speed__provisional {
     width: 18px;
     height: 18px;
     font-size: 12px;
   }
 
-  .lr-ext-speed__curve {
+  .ln-ext-speed__curve {
     height: 28px;
   }
 
-  .lr-ext-speed__curve--empty {
+  .ln-ext-speed__curve--empty {
     height: 14px;
     margin-bottom: 14px;
   }
 
-  .lr-ext-speed__pools {
+  .ln-ext-speed__pools {
     grid-column: 1 / -1;
   }
 }

@@ -42,7 +42,7 @@ const EXIT_MS = 400;
 
 export class Toaster {
   readonly #list = createElement('ol', {
-    className: 'lr-ext-toaster',
+    className: 'ln-ext-toaster',
     attrs: { 'aria-live': 'polite' },
   });
   /** The newest first. */
@@ -69,7 +69,7 @@ export class Toaster {
     if (!toast) return;
     clearTimeout(toast.timer);
     this.#toasts = this.#toasts.filter(shown => shown !== toast);
-    setData(toast.element, 'lrExtRemoved', '');
+    setData(toast.element, 'lnExtRemoved', '');
     toast.element.removeAttribute('role');
     setTimeout(() => toast.element.remove(), EXIT_MS);
     if (this.#toasts.length === 0) this.#hovered = false;
@@ -78,16 +78,16 @@ export class Toaster {
 
   #add(id: string, content: ToastContent): void {
     if (!this.#list.isConnected) document.body.append(this.#list);
-    const element = createElement('li', { className: 'lr-ext-toast', attrs: { role: 'status' } });
-    const body = createElement('div', { className: 'lr-ext-toast__body' });
-    const title = createElement('span', { className: 'lr-ext-toast__title' });
-    const chip = createElement('span', { className: 'lr-ext-toast__chip' });
+    const element = createElement('li', { className: 'ln-ext-toast', attrs: { role: 'status' } });
+    const body = createElement('div', { className: 'ln-ext-toast__body' });
+    const title = createElement('span', { className: 'ln-ext-toast__title' });
+    const chip = createElement('span', { className: 'ln-ext-toast__chip' });
     const close = createElement('button', {
-      className: 'lr-ext-toast__close',
+      className: 'ln-ext-toast__close',
       attrs: { type: 'button', 'aria-label': this.#closeLabel },
     });
     setHtml(close, hugeicon(Cancel01Icon));
-    body.append(createElement('span', { className: 'lr-ext-toast__icon' }), title, chip, close);
+    body.append(createElement('span', { className: 'ln-ext-toast__icon' }), title, chip, close);
     element.append(body);
     const toast: Toast = {
       id,
@@ -109,7 +109,7 @@ export class Toaster {
     this.#arm(toast);
     // The layout reads the heights, which sets the toast below the window before it slides in.
     this.#layout();
-    setData(element, 'lrExtMounted', '');
+    setData(element, 'lnExtMounted', '');
   }
 
   #update(toast: Toast, content: ToastContent): void {
@@ -122,10 +122,10 @@ export class Toaster {
 
   /** Writes only what changed since `before`: the countdown's toast is shown again every tick. */
   #render(toast: Toast, content: ToastContent, before: ToastContent | null): void {
-    setData(toast.element, 'lrExtKind', content.kind);
+    setData(toast.element, 'lnExtKind', content.kind);
     if (content.icon !== before?.icon) {
       // A new tile rather than a new icon in the old one, so it pops in again.
-      const icon = createElement('span', { className: 'lr-ext-toast__icon' });
+      const icon = createElement('span', { className: 'ln-ext-toast__icon' });
       setHtml(icon, hugeicon(content.icon));
       toast.body.firstElementChild?.replaceWith(icon);
     }
@@ -174,7 +174,7 @@ export class Toaster {
 
   #hover(hovered: boolean): void {
     this.#hovered = hovered && this.#toasts.length > 0;
-    setData(this.#list, 'lrExtExpanded', this.#hovered ? '' : null);
+    setData(this.#list, 'lnExtExpanded', this.#hovered ? '' : null);
     this.#holdTimers();
     this.#layout();
   }
@@ -189,14 +189,14 @@ export class Toaster {
     for (const [i, toast] of this.#toasts.entries()) {
       const place = places[i];
       if (!place) continue;
-      setStyleProperty(toast.element, '--lr-ext-toast-y', `${place.y}px`);
-      setStyleProperty(toast.element, '--lr-ext-toast-scale', String(place.scale));
-      setStyleProperty(toast.element, '--lr-ext-toast-w', `${place.size.width}px`);
-      setStyleProperty(toast.element, '--lr-ext-toast-h', `${place.size.height}px`);
+      setStyleProperty(toast.element, '--ln-ext-toast-y', `${place.y}px`);
+      setStyleProperty(toast.element, '--ln-ext-toast-scale', String(place.scale));
+      setStyleProperty(toast.element, '--ln-ext-toast-w', `${place.size.width}px`);
+      setStyleProperty(toast.element, '--ln-ext-toast-h', `${place.size.height}px`);
       // The newest is added first in the list: it's drawn over the others all the same.
       setStyleProperty(toast.element, 'z-index', String(this.#toasts.length - i));
-      setData(toast.element, 'lrExtFront', i === 0 ? '' : null);
-      setData(toast.element, 'lrExtHidden', place.hidden ? '' : null);
+      setData(toast.element, 'lnExtFront', i === 0 ? '' : null);
+      setData(toast.element, 'lnExtHidden', place.hidden ? '' : null);
     }
   }
 }

@@ -156,7 +156,7 @@ describe('move attempts', () => {
 
   // Chessground hides a selection's mark once the piece is let go, and keeps it to reuse.
   it.each([
-    { selection: 'shown', display: '', played: [['play', 'lr-ext-premove', undefined]] },
+    { selection: 'shown', display: '', played: [['play', 'ln-ext-premove', undefined]] },
     { selection: 'hidden', display: 'none', played: [] },
   ])('takes a click for a move only with a selection $selection', async ({ display, played }) => {
     const { sound, calls } = fakeSoundPlayer();

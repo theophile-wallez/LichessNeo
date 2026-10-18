@@ -4,13 +4,13 @@
    (side-narrow.css) on the first screen as far as it goes, the race's puzzles under them. */
 @media (max-width: 1019.98px) {
   main > .racer {
-    --lr-ext-race-h: calc(var(--lr-ext-lanes) * (var(--lr-ext-lane-h) + 5px) + 15px);
-    --lr-ext-board: min(
+    --ln-ext-race-h: calc(var(--ln-ext-lanes) * (var(--ln-ext-lane-h) + 5px) + 15px);
+    --ln-ext-board: min(
       100vw - 16px,
-      max(280px, 100dvh - var(---site-header-height, 60px) - var(--lr-ext-race-h) - 240px)
+      max(280px, 100dvh - var(---site-header-height, 60px) - var(--ln-ext-race-h) - 240px)
     );
 
-    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-columns: var(--ln-ext-board) !important;
     grid-template-rows: none !important;
     grid-template-areas: 'board' 'race' 'side' 'history' !important;
     justify-content: center;
@@ -37,15 +37,15 @@
    desktop. */
 @media (max-width: 1019.98px) and (orientation: landscape) {
   main > .racer {
-    --lr-ext-board: max(
+    --ln-ext-board: max(
       240px,
       min(
-        100dvh - var(---site-header-height, 60px) - var(--lr-ext-race-h) - 28px,
+        100dvh - var(---site-header-height, 60px) - var(--ln-ext-race-h) - 28px,
         100vw - 16px - 12px - 280px
       )
     );
 
-    grid-template-columns: var(--lr-ext-board) minmax(280px, 400px) !important;
+    grid-template-columns: var(--ln-ext-board) minmax(280px, 400px) !important;
     grid-template-areas:
       'board side'
       'race race'

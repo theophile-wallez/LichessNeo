@@ -50,16 +50,16 @@ const PLAYER_ROWS =
 
 const MARKS: readonly Mark[] = [
   // Which side menu, and which of its pages this is (its active link).
-  { selector: '.subnav', key: 'lrExtNav', read: navsOf },
+  { selector: '.subnav', key: 'lnExtNav', read: navsOf },
   {
     selector: 'main.page-menu',
-    key: 'lrExtNavActive',
+    key: 'lnExtNavActive',
     read: main => hrefIn(main, '.subnav a.active'),
   },
   // Which side menu the page has, for its title's tile (styles/pages/static-pages.css).
   {
     selector: 'main.page-menu',
-    key: 'lrExtMenu',
+    key: 'lnExtMenu',
     read: main => {
       const menu = main.querySelector(':scope > .subnav');
       return menu ? navsOf(menu) : null;
@@ -68,13 +68,13 @@ const MARKS: readonly Mark[] = [
   // A game's mode, by its info's icon (styles/game/game-info.css).
   {
     selector: 'main.round .game__meta',
-    key: 'lrExtIcon',
+    key: 'lnExtIcon',
     read: meta => iconIn(meta, '.game__meta__infos'),
   },
   // A rating's stats page: its title takes the glyph of its card in the menu (styles/profile/).
   {
     selector: 'main.page-menu > .perf-stat > .box__top h1',
-    key: 'lrExtIcon',
+    key: 'lnExtIcon',
     read: title => {
       const main = title.closest('main');
       return main ? iconIn(main, ':scope > .page-menu__menu a.active') : null;
@@ -83,34 +83,34 @@ const MARKS: readonly Mark[] = [
   // A leaderboard by its title's icon, a shield by its title's link (styles/leaderboard/).
   {
     selector: '.community .user-top, .tournament-leaderboards__item',
-    key: 'lrExtIcon',
+    key: 'lnExtIcon',
     read: board => iconIn(board, ':scope > h2'),
   },
   {
     selector: '.tournament-shields__item',
-    key: 'lrExtHref',
+    key: 'lnExtHref',
     read: shield => hrefIn(shield, ':scope > h2 > a'),
   },
   // A forum category (styles/forum/): the index links to it, a category page to
   // its topics, a topic back to it, and so does a team's board.
-  { selector: 'main.forum .categs tr', key: 'lrExtHref', read: row => hrefIn(row, 'h2 a') },
-  { selector: 'main.forum-categ', key: 'lrExtHref', read: main => hrefIn(main, 'td.subject a') },
+  { selector: 'main.forum .categs tr', key: 'lnExtHref', read: row => hrefIn(row, 'h2 a') },
+  { selector: 'main.forum-categ', key: 'lnExtHref', read: main => hrefIn(main, 'td.subject a') },
   {
     selector: 'main.forum:is(.forum-categ, .forum-topic)',
-    key: 'lrExtBack',
+    key: 'lnExtBack',
     read: main => hrefIn(main, '.box__top h1 > a'),
   },
   // The forum's search results, by where the search form goes (styles/forum/).
   {
     selector: 'main.search',
-    key: 'lrExtSearch',
+    key: 'lnExtSearch',
     read: main => main.querySelector(':scope > .box__top form.search')?.getAttribute('action'),
   },
   // The sidebar's bottom buttons Lichess wraps in a bare div, for their order
   // (styles/sidebar/donate-and-buttons.css): the challenges show only while some wait.
   {
     selector: '#top .site-buttons > div',
-    key: 'lrExtButton',
+    key: 'lnExtButton',
     read: wrapper => {
       if (wrapper.querySelector(':scope > #notify-toggle')) return 'notifications';
       const count = queryOne(wrapper, ':scope > #challenge-toggle > span', HTMLElement)?.dataset
@@ -123,7 +123,7 @@ const MARKS: readonly Mark[] = [
   // row of one cell when it's empty.
   {
     selector: 'main.box.page-small',
-    key: 'lrExtList',
+    key: 'lnExtList',
     read: main => (main.querySelector(PLAYER_ROWS) ? 'players' : null),
   },
 ];

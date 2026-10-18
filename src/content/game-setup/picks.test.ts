@@ -72,7 +72,7 @@ const SETUPS = {
 function open(markup: string): HTMLElement {
   document.body.innerHTML = `<dialog open><div class="game-setup"><div class="setup-content">${markup}</div></div></dialog>`;
   syncPicks();
-  const root = queryOne(document, '.setup-content > .lr-ext-setup', HTMLElement);
+  const root = queryOne(document, '.setup-content > .ln-ext-setup', HTMLElement);
   if (!root) throw new Error('no tiles');
   return root;
 }
@@ -80,7 +80,7 @@ function open(markup: string): HTMLElement {
 /** Lichess redraws the content in place: its own nodes anew, ours kept. */
 function redraw(markup: string): void {
   const content = queryOne(document, '.setup-content', HTMLElement);
-  const root = queryOne(document, '.lr-ext-setup', HTMLElement);
+  const root = queryOne(document, '.ln-ext-setup', HTMLElement);
   if (!content || !root) throw new Error('no setup');
   content.innerHTML = markup;
   content.prepend(root);
@@ -88,7 +88,7 @@ function redraw(markup: string): void {
 }
 
 const tile = (part: string): HTMLElement => {
-  const found = queryOne(document, `.lr-ext-setup__tile[data-lr-ext-part="${part}"]`, HTMLElement);
+  const found = queryOne(document, `.ln-ext-setup__tile[data-ln-ext-part="${part}"]`, HTMLElement);
   if (!found) throw new Error(`no ${part} tile`);
   return found;
 };
@@ -97,29 +97,29 @@ const shown = (part: string) => {
   const found = tile(part);
   return {
     hidden: found.hidden,
-    glyph: queryOne(found, '.lr-ext-setup__icon', HTMLElement)?.dataset.icon,
-    pick: queryOne(found, '.lr-ext-setup__icon', HTMLElement)?.dataset.lrExtPick,
-    caption: queryOne(found, '.lr-ext-setup__caption', HTMLElement)?.textContent,
-    value: queryOne(found, '.lr-ext-setup__value', HTMLElement)?.textContent,
+    glyph: queryOne(found, '.ln-ext-setup__icon', HTMLElement)?.dataset.icon,
+    pick: queryOne(found, '.ln-ext-setup__icon', HTMLElement)?.dataset.lnExtPick,
+    caption: queryOne(found, '.ln-ext-setup__caption', HTMLElement)?.textContent,
+    value: queryOne(found, '.ln-ext-setup__value', HTMLElement)?.textContent,
   };
 };
 
 const partsMarked = (): (string | undefined)[] =>
-  queryAll(document, '[data-lr-ext-setup-part]', HTMLElement).map(
-    element => element.dataset.lrExtSetupPart,
+  queryAll(document, '[data-ln-ext-setup-part]', HTMLElement).map(
+    element => element.dataset.lnExtSetupPart,
   );
 
 const { dataset } = document.documentElement;
 
 beforeEach(() => {
-  dataset.lrExtVariantLabel = 'Variant';
-  dataset.lrExtTimeControlLabel = 'Time control';
+  dataset.lnExtVariantLabel = 'Variant';
+  dataset.lnExtTimeControlLabel = 'Time control';
 });
 
 afterEach(() => {
   document.body.replaceChildren();
-  delete dataset.lrExtVariantLabel;
-  delete dataset.lrExtTimeControlLabel;
+  delete dataset.lnExtVariantLabel;
+  delete dataset.lnExtTimeControlLabel;
 });
 
 describe('the game setup’s tiles', () => {
@@ -162,8 +162,8 @@ describe('the game setup’s tiles', () => {
     open(SETUPS.friend(TIME.realTime));
     expect(shown('time')).toMatchObject({ glyph: '\ue008', pick: undefined, value: '3+2' });
     const presets = queryAll(document, '.preset-btn', HTMLElement).map(preset => [
-      preset.dataset.lrExtSpeed,
-      preset.dataset.lrExtFirst,
+      preset.dataset.lnExtSpeed,
+      preset.dataset.lnExtFirst,
     ]);
     expect(presets).toEqual([
       ['bullet', ''],
@@ -185,40 +185,40 @@ describe('the game setup’s tiles', () => {
     open(SETUPS.friend());
     redraw(SETUPS.friend(TIME.realTime));
     expect(shown('time').value).toBe('3+2');
-    expect(queryAll(document, '.lr-ext-setup', HTMLElement)).toHaveLength(1);
+    expect(queryAll(document, '.ln-ext-setup', HTMLElement)).toHaveLength(1);
   });
 });
 
 describe('the panel under the tiles', () => {
   it('opens on the time control', () => {
     const root = open(SETUPS.friend());
-    expect(root.dataset.lrExtOpen).toBe('time');
-    expect(tile('time').dataset.lrExtExpanded).toBe('');
+    expect(root.dataset.lnExtOpen).toBe('time');
+    expect(tile('time').dataset.lnExtExpanded).toBe('');
     expect(tile('time').ariaExpanded).toBe('true');
-    expect(tile('side').dataset.lrExtExpanded).toBeUndefined();
+    expect(tile('side').dataset.lnExtExpanded).toBeUndefined();
     expect(tile('side').ariaExpanded).toBe('false');
-    expect(root.dataset.lrExtSwitched).toBeUndefined();
+    expect(root.dataset.lnExtSwitched).toBeUndefined();
   });
 
   it('switches to the side, and back, each sliding in', () => {
     const root = open(SETUPS.friend());
     tile('side').click();
     syncPicks();
-    expect(root.dataset.lrExtOpen).toBe('side');
-    expect(root.dataset.lrExtSwitched).toBe('side');
+    expect(root.dataset.lnExtOpen).toBe('side');
+    expect(root.dataset.lnExtSwitched).toBe('side');
     expect(tile('side').ariaExpanded).toBe('true');
     expect(tile('time').ariaExpanded).toBe('false');
     tile('time').click();
-    expect(root.dataset.lrExtOpen).toBe('time');
-    expect(root.dataset.lrExtSwitched).toBe('time');
+    expect(root.dataset.lnExtOpen).toBe('time');
+    expect(root.dataset.lnExtSwitched).toBe('time');
   });
 
   it('can’t be closed: its own tile does nothing', () => {
     const root = open(SETUPS.friend());
     tile('time').click();
     syncPicks();
-    expect(root.dataset.lrExtOpen).toBe('time');
-    expect(root.dataset.lrExtSwitched).toBeUndefined();
+    expect(root.dataset.lnExtOpen).toBe('time');
+    expect(root.dataset.lnExtSwitched).toBeUndefined();
   });
 
   it('stays on the side as a side is picked', () => {
@@ -227,14 +227,14 @@ describe('the panel under the tiles', () => {
     redraw(
       SETUPS.friend().replace(' checked><label class="card-radio" for="color-picker-black"', '>'),
     );
-    expect(root.dataset.lrExtOpen).toBe('side');
+    expect(root.dataset.lnExtOpen).toBe('side');
   });
 
   it('goes back to the time control once the side is gone', () => {
     const root = open(SETUPS.friend());
     tile('side').click();
     redraw(SETUPS.hook());
-    expect(root.dataset.lrExtOpen).toBe('time');
+    expect(root.dataset.lnExtOpen).toBe('time');
   });
 
   it('marks the variant’s tile while its menu is open, the panel still there', () => {
@@ -242,7 +242,7 @@ describe('the panel under the tiles', () => {
     const toggle = queryOne(document, '.mselect__toggle', HTMLInputElement);
     if (toggle) toggle.checked = true;
     syncPicks();
-    expect(tile('variant').dataset.lrExtExpanded).toBe('');
-    expect(root.dataset.lrExtOpen).toBe('time');
+    expect(tile('variant').dataset.lnExtExpanded).toBe('');
+    expect(root.dataset.lnExtOpen).toBe('time');
   });
 });

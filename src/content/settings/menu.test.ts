@@ -44,22 +44,22 @@ describe('the settings’ menu links', () => {
   it('go over Display, the section’s link and one per page, in their own group', () => {
     const nav = menu();
     const link = addLinks(nav);
-    expect(link.getAttribute('href')).toBe('/account/profile#lr-ext-extension');
+    expect(link.getAttribute('href')).toBe('/account/profile#ln-ext-extension');
     expect(link.textContent).toBe('settingsLink');
     expect(hrefs(nav)).toEqual([
       '/account/profile',
       '/account/passwd',
-      '/account/profile#lr-ext-extension',
-      '#lr-ext-extension',
-      '#lr-ext-extension/profile',
-      '#lr-ext-extension/board',
-      '#lr-ext-extension/packs',
-      '#lr-ext-extension/interface',
+      '/account/profile#ln-ext-extension',
+      '#ln-ext-extension',
+      '#ln-ext-extension/profile',
+      '#ln-ext-extension/board',
+      '#ln-ext-extension/packs',
+      '#ln-ext-extension/interface',
       '/account/preferences/display',
       '/account/preferences/game-display',
     ]);
     expect(
-      queryAll(nav, '.lr-ext-settings-sublink', HTMLElement).map(sub => sub.textContent),
+      queryAll(nav, '.ln-ext-settings-sublink', HTMLElement).map(sub => sub.textContent),
     ).toEqual([
       'settingsPagePersonalization',
       'settingsPageProfile',
@@ -67,7 +67,7 @@ describe('the settings’ menu links', () => {
       'settingsPagePacks',
       'settingsPageInterface',
     ]);
-    expect(queryOne(nav, '.lr-ext-settings-sep + a', HTMLElement)?.textContent).toBe('Display');
+    expect(queryOne(nav, '.ln-ext-settings-sep + a', HTMLElement)?.textContent).toBe('Display');
   });
 
   it('go at the end of the links when the menu has no Display', () => {
@@ -77,19 +77,19 @@ describe('the settings’ menu links', () => {
     addLinks(nav);
     const inner = queryOne(nav, '.subnav__inner', HTMLElement);
     expect(inner?.firstElementChild?.getAttribute('href')).toBe('/x');
-    expect(inner?.lastElementChild?.classList.contains('lr-ext-settings-sep')).toBe(true);
+    expect(inner?.lastElementChild?.classList.contains('ln-ext-settings-sep')).toBe(true);
   });
 
   it('mark the page shown, and give Lichess’s page its mark back once closed', () => {
     const nav = menu();
     const link = addLinks(nav);
     showMenu(nav, 'board');
-    expect(link.dataset.lrExtOpen).toBe('');
-    expect(active(nav)).toEqual(['#lr-ext-extension/board']);
+    expect(link.dataset.lnExtOpen).toBe('');
+    expect(active(nav)).toEqual(['#ln-ext-extension/board']);
     showMenu(nav, 'interface');
-    expect(active(nav)).toEqual(['#lr-ext-extension/interface']);
+    expect(active(nav)).toEqual(['#ln-ext-extension/interface']);
     showMenu(nav, null);
-    expect(link.dataset.lrExtOpen).toBeUndefined();
+    expect(link.dataset.lnExtOpen).toBeUndefined();
     expect(active(nav)).toEqual(['/account/profile']);
   });
 });

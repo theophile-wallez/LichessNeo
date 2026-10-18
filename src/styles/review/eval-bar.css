@@ -1,81 +1,81 @@
 /* ---- Eval bar --- */
 
-#lr-ext-evalbar {
+#ln-ext-evalbar {
   grid-area: gauge;
   display: none;
   position: relative;
   width: 26px;
-  margin-right: var(--lr-ext-gauge-gap, 10px);
+  margin-right: var(--ln-ext-gauge-gap, 10px);
   /* Level with the squares, between the player bars if any. */
-  margin-top: calc(var(--lr-ext-bar, 0px) + var(--lr-ext-inset-t, 0px));
+  margin-top: calc(var(--ln-ext-bar, 0px) + var(--ln-ext-inset-t, 0px));
   margin-bottom: calc(
-    var(--lr-ext-bar, 0px) + var(--lr-ext-coords-off, 0px) + var(--lr-ext-inset-b, 0px)
+    var(--ln-ext-bar, 0px) + var(--ln-ext-coords-off, 0px) + var(--ln-ext-inset-b, 0px)
   );
   overflow: hidden;
   border-radius: 3px;
   background: #3a393e;
 }
 
-html.lr-ext-evalbar-on #lr-ext-evalbar {
+html.ln-ext-evalbar-on #ln-ext-evalbar {
   display: block;
 }
 
-html.lr-ext-evalbar-on main.analyse .eval-gauge {
+html.ln-ext-evalbar-on main.analyse .eval-gauge {
   display: none !important;
 }
 
-.lr-ext-evalbar__fill {
+.ln-ext-evalbar__fill {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--lr-ext-white);
+  background: var(--ln-ext-white);
   transition: height 0.3s ease !important;
 }
 
-.lr-ext-evalbar--flip .lr-ext-evalbar__fill {
+.ln-ext-evalbar--flip .ln-ext-evalbar__fill {
   top: 0;
   bottom: auto;
 }
 
-.lr-ext-evalbar__label {
+.ln-ext-evalbar__label {
   position: absolute;
   left: 0;
   right: 0;
   text-align: center;
-  font-family: var(--lr-ext-font);
+  font-family: var(--ln-ext-font);
   font-size: 10px;
   font-weight: 700;
   z-index: 1;
 }
 
-.lr-ext-evalbar__label--white {
+.ln-ext-evalbar__label--white {
   bottom: 5px;
   color: #3a393e;
 }
-.lr-ext-evalbar__label--black {
+.ln-ext-evalbar__label--black {
   top: 5px;
-  color: var(--lr-ext-white);
+  color: var(--ln-ext-white);
 }
-.lr-ext-evalbar--flip .lr-ext-evalbar__label--white {
+.ln-ext-evalbar--flip .ln-ext-evalbar__label--white {
   top: 5px;
   bottom: auto;
 }
-.lr-ext-evalbar--flip .lr-ext-evalbar__label--black {
+.ln-ext-evalbar--flip .ln-ext-evalbar__label--black {
   bottom: 5px;
   top: auto;
 }
 
 /* ---- Board overlay --- */
 
-#lr-ext-board-overlay {
+#ln-ext-board-overlay {
   position: absolute;
   inset: 0;
   z-index: 5;
   pointer-events: none;
 }
 
-.lr-ext-badge {
+.ln-ext-badge {
   position: absolute;
   width: 4.8%;
   aspect-ratio: 1;
@@ -83,47 +83,47 @@ html.lr-ext-evalbar-on main.analyse .eval-gauge {
 }
 
 /* The chip is translucent: a dark base under it keeps it readable on any square. */
-.lr-ext-badge svg {
+.ln-ext-badge svg {
   width: 100%;
   height: 100%;
   border-radius: 25%;
-  background: color-mix(in srgb, var(--lr-ext-badge-c, transparent) 14%, #1a1820);
+  background: color-mix(in srgb, var(--ln-ext-badge-c, transparent) 14%, #1a1820);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Last-move squares take an annotated move's color (the free board's too); a best, excellent,
    good or book move keeps Lichess's own. */
-html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='brilliant']
+html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='brilliant']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(33, 196, 58, 0.5) !important;
 }
-html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='great']
+html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='great']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(119, 186, 44, 0.5) !important;
 }
-html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='inaccuracy']
+html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='inaccuracy']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(83, 178, 234, 0.5) !important;
 }
-html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='mistake']
+html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='mistake']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(230, 157, 0, 0.5) !important;
 }
-html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='miss']
+html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='miss']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(222, 124, 211, 0.5) !important;
 }
-html:is(.lr-ext-review-moves, .lr-ext-review-live)[data-lr-ext-cls='blunder']
+html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='blunder']
   main.analyse
   cg-board
   square.last-move {

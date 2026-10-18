@@ -6,18 +6,18 @@
   min-width: 240px;
   padding: 0 !important;
   overflow: hidden;
-  font-family: var(--lr-ext-font);
+  font-family: var(--ln-ext-font);
   font-size: 13px;
 }
 
 #friend_box .friend_box_count {
   padding: 12px 14px 10px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-weight: 600;
 }
 
 #friend_box .friend_box_count strong {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
@@ -27,7 +27,7 @@
 #friend_box .content {
   max-height: min(60vh, 420px) !important;
   padding: 6px;
-  border-top: 1px solid var(--lr-ext-menu-border) !important;
+  border-top: 1px solid var(--ln-ext-menu-border) !important;
 }
 
 #friend_box .content:empty {
@@ -42,7 +42,7 @@
 }
 
 #friend_box .content > div:hover {
-  background: var(--lr-ext-menu-hover) !important;
+  background: var(--ln-ext-menu-hover) !important;
 }
 
 /* A block, not a flexbox, so a long name still ends in an ellipsis. */
@@ -53,12 +53,12 @@
   max-width: none !important;
   padding: 6px 8px !important;
   line-height: 28px;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 600;
 }
 
 #friend_box .content a.user-link:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 /* Lichess has no profile pictures: everyone gets the default avatar. */
@@ -70,7 +70,7 @@
   width: 28px;
   height: 28px;
   border-radius: 4px;
-  background: var(--lr-ext-avatar);
+  background: var(--ln-ext-avatar);
 }
 
 /* The online mark (a line, or patron wings) becomes a dot on the avatar's corner. */
@@ -82,15 +82,15 @@
   width: 12px;
   height: 12px;
   margin: 0 !important;
-  border: 2px solid var(--lr-ext-menu-bg);
+  border: 2px solid var(--ln-ext-menu-bg);
   border-radius: 50%;
-  background: var(--lr-ext-good);
+  background: var(--ln-ext-good);
   font-size: 0;
   transition: border-color 0.15s !important;
 }
 
 #friend_box .content > div:hover a.user-link .line {
-  border-color: var(--lr-ext-neutral-7);
+  border-color: var(--ln-ext-neutral-7);
 }
 
 #friend_box .content a.user-link .line::before {
@@ -107,9 +107,9 @@
   margin-inline-end: 6px;
   padding: 0 !important;
   border-radius: 50%;
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text-dim) !important;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-dim) !important;
   font-size: 14px;
   transition:
     background 0.15s,
@@ -117,8 +117,8 @@
 }
 
 #friend_box .content a.tv:hover {
-  background: var(--lr-ext-btn-grey-hover);
-  color: var(--lr-ext-accent-hover) !important;
+  background: var(--ln-ext-btn-grey-hover);
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 #friend_box .content a.tv::before {

@@ -38,7 +38,7 @@ describe('syncPracticeIcons', () => {
     syncPracticeIcons();
     expect(
       queryAll(document, 'icon', HTMLElement).map(icon =>
-        icon.style.getPropertyValue('--lr-ext-practice-icon'),
+        icon.style.getPropertyValue('--ln-ext-practice-icon'),
       ),
     ).toEqual([
       'url("https://lichess1.org/assets/hashed/stone-pile.svg")',

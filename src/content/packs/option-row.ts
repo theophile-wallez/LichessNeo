@@ -21,20 +21,20 @@ export interface OptionRowSpec<T extends string> {
 
 function markOptions(group: HTMLElement, value: string): void {
   for (const button of queryAll(group, 'button', HTMLElement))
-    button.classList.toggle('active', button.dataset.lrExtOption === value);
+    button.classList.toggle('active', button.dataset.lnExtOption === value);
 }
 
 export function optionRow<T extends string>(spec: OptionRowSpec<T>): HTMLElement {
-  const row = createElement('div', { className: 'lr-ext-src-option-row' });
-  if (spec.theme !== undefined) setData(row, 'lrExtFor', spec.theme);
+  const row = createElement('div', { className: 'ln-ext-src-option-row' });
+  if (spec.theme !== undefined) setData(row, 'lnExtFor', spec.theme);
   const group = createElement('div', {
-    className: 'lr-ext-src-options',
+    className: 'ln-ext-src-options',
     attrs: { role: 'group', 'aria-label': spec.label },
   });
   for (const { value, label, tip } of spec.options) {
     const button = createElement('button', {
       text: label,
-      attrs: { type: 'button', 'data-lr-ext-option': value, 'data-lr-ext-tip': tip },
+      attrs: { type: 'button', 'data-ln-ext-option': value, 'data-ln-ext-tip': tip },
     });
     button.addEventListener('click', () => {
       spec.setting.choose(value);
@@ -43,7 +43,7 @@ export function optionRow<T extends string>(spec: OptionRowSpec<T>): HTMLElement
     group.append(button);
   }
   row.append(
-    createElement('span', { className: 'lr-ext-src-option-label', text: spec.label }),
+    createElement('span', { className: 'ln-ext-src-option-label', text: spec.label }),
     group,
   );
   markOptions(group, spec.setting.read());
@@ -52,6 +52,6 @@ export function optionRow<T extends string>(spec: OptionRowSpec<T>): HTMLElement
 
 /** Shows the rows of the theme picked, hides the other themes'. */
 export function showOptionRows(panel: HTMLElement, current: string): void {
-  for (const row of queryAll(panel, '.lr-ext-src-option-row[data-lr-ext-for]', HTMLElement))
-    row.hidden = row.dataset.lrExtFor !== current;
+  for (const row of queryAll(panel, '.ln-ext-src-option-row[data-ln-ext-for]', HTMLElement))
+    row.hidden = row.dataset.lnExtFor !== current;
 }

@@ -42,12 +42,12 @@ describe('game info', () => {
       '<div class="result-wrap"><p class="result">0-1</p></div></main>';
     syncGameMeta(ratings);
     const meta = queryOne(document, '.game__meta', HTMLElement);
-    expect(meta?.dataset.lrExtWinner).toBe('black');
-    expect(meta?.style.getPropertyValue('--lr-ext-meta-score')).toBe('"0 – 1"');
+    expect(meta?.dataset.lnExtWinner).toBe('black');
+    expect(meta?.style.getPropertyValue('--ln-ext-meta-score')).toBe('"0 – 1"');
     document.querySelector('.result-wrap')?.remove();
     syncGameMeta(ratings);
-    expect(meta?.dataset.lrExtWinner).toBeUndefined();
-    expect(meta?.style.getPropertyValue('--lr-ext-meta-score')).toBe('');
+    expect(meta?.dataset.lnExtWinner).toBeUndefined();
+    expect(meta?.style.getPropertyValue('--ln-ext-meta-score')).toBe('');
   });
 });
 

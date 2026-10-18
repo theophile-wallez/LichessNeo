@@ -25,9 +25,9 @@ function addRow(score: string): void {
 }
 
 const numbers = (row: Element | undefined): (string | null | undefined)[][] =>
-  [...(row?.querySelectorAll<HTMLElement>('.lr-ext-simul-score > b') ?? [])].map(number => [
+  [...(row?.querySelectorAll<HTMLElement>('.ln-ext-simul-score > b') ?? [])].map(number => [
     number.textContent,
-    number.dataset['lrExtLabel'],
+    number.dataset['lnExtLabel'],
     number.getAttribute('title'),
   ]);
 
@@ -52,9 +52,9 @@ describe('a host’s simul scores', () => {
       ['1', 'D', 'Draws'],
       ['4', 'L', 'Losses'],
     ]);
-    expect(row?.style.getPropertyValue('--lr-ext-wins')).toBe('66.7%');
-    expect(row?.style.getPropertyValue('--lr-ext-draws')).toBe('6.7%');
-    expect(row?.dataset['lrExtScore']).toBe('yes');
+    expect(row?.style.getPropertyValue('--ln-ext-wins')).toBe('66.7%');
+    expect(row?.style.getPropertyValue('--ln-ext-draws')).toBe('6.7%');
+    expect(row?.dataset['lnExtScore']).toBe('yes');
   });
 
   it('marks each row once, and the rows the infinite scroll adds', () => {
@@ -64,9 +64,9 @@ describe('a host’s simul scores', () => {
     addRow('0 / 0 / 0');
     syncScores();
     const rows = [...document.querySelectorAll<HTMLElement>('tr.paginated')];
-    expect(rows.map(row => row.querySelectorAll('.lr-ext-simul-score').length)).toEqual([1, 1]);
-    expect(rows[0]?.style.getPropertyValue('--lr-ext-wins')).toBe('0%');
-    expect(document.querySelector<HTMLElement>('tr.pager')?.dataset['lrExtScore']).toBe('no');
+    expect(rows.map(row => row.querySelectorAll('.ln-ext-simul-score').length)).toEqual([1, 1]);
+    expect(rows[0]?.style.getPropertyValue('--ln-ext-wins')).toBe('0%');
+    expect(document.querySelector<HTMLElement>('tr.pager')?.dataset['lnExtScore']).toBe('no');
   });
 
   it('leaves out the initials when the head can’t be split, and the home’s list alone', () => {
@@ -81,7 +81,7 @@ describe('a host’s simul scores', () => {
     addRow('5 / 0 / 0');
     syncScores();
     expect(
-      document.querySelector<HTMLElement>('tr.paginated')?.dataset['lrExtScore'],
+      document.querySelector<HTMLElement>('tr.paginated')?.dataset['lnExtScore'],
     ).toBeUndefined();
   });
 });

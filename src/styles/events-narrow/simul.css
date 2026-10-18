@@ -28,11 +28,11 @@
     min-width: 0;
     padding: 10px 4px;
     border-radius: 8px;
-    background: var(--lr-ext-bg-raised);
+    background: var(--ln-ext-bg-raised);
   }
 
   main.simul .simul__main .results .number {
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
     font-size: 24px !important;
     font-weight: 800;
     line-height: 1.1;
@@ -41,7 +41,7 @@
   main.simul .simul__main .results .text {
     overflow: hidden;
     max-width: 100%;
-    color: var(--lr-ext-text-dim);
+    color: var(--ln-ext-text-dim);
     font-size: 11px !important;
     font-weight: 700;
     letter-spacing: 0.03em;

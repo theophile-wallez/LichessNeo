@@ -9,21 +9,21 @@ main.puzzle .puzzle__tools {
   box-sizing: border-box;
   border: none !important;
   border-radius: 12px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow:
-    inset 0 1px 0 var(--lr-ext-lift-5),
-    0 10px 28px var(--lr-ext-shade-20) !important;
+    inset 0 1px 0 var(--ln-ext-lift-5),
+    0 10px 28px var(--ln-ext-shade-20) !important;
 }
 
 main.puzzle .puzzle__side > * {
   padding: 14px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   line-height: 1.45;
 }
 
 main.puzzle .puzzle__side strong {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
 }
 
 /* Puzzle and game info: the theme picture and perf icon as tiles. */
@@ -40,21 +40,21 @@ main.puzzle .puzzle__side__metas .infos::before {
   margin: 0 !important;
   padding: 6px;
   border-radius: 12px;
-  background: var(--lr-ext-bg-raised);
+  background: var(--ln-ext-bg-raised);
 }
 
 main.puzzle .puzzle__side__metas .infos::before {
   display: grid;
   place-items: center;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 26px !important;
 }
 
 /* The puzzle's picture on a tile in the puzzles' color, like the sidebar's links. */
 main.puzzle .puzzle__side__metas .infos__angle-img {
   padding: 7px;
-  background: color-mix(in srgb, var(--lr-ext-orange) 16%, transparent);
-  box-shadow: inset 0 1px var(--lr-ext-lift-8);
+  background: color-mix(in srgb, var(--ln-ext-orange) 16%, transparent);
+  box-shadow: inset 0 1px var(--ln-ext-lift-8);
 }
 
 /* The "mix" theme has no picture, just a grey target: the sidebar's puzzle piece instead. */
@@ -65,11 +65,11 @@ main.puzzle .puzzle__side__metas .infos__angle-img[src*='/mix.'] {
 main.puzzle .puzzle__side__metas .infos.puzzle {
   margin-bottom: 10px !important;
   padding-bottom: 10px !important;
-  border-bottom: 1px solid var(--lr-ext-lift-8) !important;
+  border-bottom: 1px solid var(--ln-ext-lift-8) !important;
 }
 
 main.puzzle .puzzle__side__metas .infos.puzzle p:first-child {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 15px;
   font-weight: 800;
 }
@@ -102,14 +102,14 @@ main.puzzle .puzzle__side__metas .players .user-link {
 
 /* The rating hidden until solved: dim but readable. */
 main.puzzle .puzzle__side__metas .hidden {
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
 }
 
 /* Your puzzle rating, big, after the puzzle icon. */
 main.puzzle .puzzle__side__user__rating strong {
   flex-wrap: nowrap !important;
   gap: 12px;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: clamp(34px, 2.8vw, 44px) !important;
   white-space: nowrap;
   font-weight: 800;
@@ -130,7 +130,7 @@ main.puzzle .puzzle__side__user__rating strong::before {
    it (digits ~2.4em, icon 1em, change, gaps and padding 134px). */
 @media (min-width: 1259.3px) {
   main.puzzle .puzzle__side__user__rating strong {
-    font-size: clamp(24px, calc((var(--lr-ext-panel-w) - 134px) / 3.4), 44px) !important;
+    font-size: clamp(24px, calc((var(--ln-ext-panel-w) - 134px) / 3.4), 44px) !important;
   }
 }
 
@@ -151,14 +151,14 @@ main.puzzle .puzzle__side__user > a.button {
 /* The theme, as the card's title. */
 main.puzzle .puzzle__side__theme__back {
   margin-bottom: 6px !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 800;
   transition: color 0.15s !important;
 }
 
 main.puzzle .puzzle__side__theme__back:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__theme > p {
@@ -168,32 +168,32 @@ main.puzzle .puzzle__side__theme > p {
 /* Replaying failed puzzles (from the dashboard): the title like a theme's, over a progress bar. */
 main.puzzle .puzzle__side__replay > a {
   margin-bottom: 10px !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 800 !important;
   transition: color 0.15s !important;
 }
 
 main.puzzle .puzzle__side__replay > a:hover {
-  color: var(--lr-ext-accent-hover) !important;
+  color: var(--ln-ext-accent-hover) !important;
 }
 
 main.puzzle .puzzle__side__replay__bar {
   height: 30px !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-lift-7) !important;
-  box-shadow: inset 0 1px 2px var(--lr-ext-shade-40);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-lift-7) !important;
+  box-shadow: inset 0 1px 2px var(--ln-ext-shade-40);
+  color: var(--ln-ext-text-strong);
   font-size: 14px;
   font-weight: 800 !important;
-  text-shadow: 0 1px 1px var(--lr-ext-shade-40);
+  text-shadow: 0 1px 1px var(--ln-ext-shade-40);
 }
 
 main.puzzle .puzzle__side__replay__bar::before {
   min-width: 30px;
   border-radius: 999px;
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: inset 0 1px 0 var(--lr-ext-accent);
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: inset 0 1px 0 var(--ln-ext-accent);
 }
 
 /* Daily puzzle: a plain title like any theme's, not a box in Lichess's accent color. */

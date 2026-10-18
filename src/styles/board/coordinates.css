@@ -62,15 +62,15 @@ coords {
  * shows, so they jumped in and out between moves. Layouts leave room for both classes. */
 @media (min-width: 1020px) {
   body:is(.coords-in, .coords-out) {
-    --lr-ext-coords-size: clamp(13px, 1.7vh, 16px);
+    --ln-ext-coords-size: clamp(13px, 1.7vh, 16px);
   }
 
   body:is(.coords-in, .coords-out) coords {
-    font-size: var(--lr-ext-coords-size) !important;
+    font-size: var(--ln-ext-coords-size) !important;
   }
 
   body:is(.coords-in, .coords-out) .is2d coords coord {
-    color: var(--lr-ext-text-dim) !important;
+    color: var(--ln-ext-text-dim) !important;
   }
 
   body:is(.coords-in, .coords-out) coords.ranks {
@@ -120,13 +120,13 @@ coords {
 
 .eval-gauge {
   box-sizing: border-box;
-  width: var(--lr-ext-gauge-w, 15px) !important;
+  width: var(--ln-ext-gauge-w, 15px) !important;
   overflow: hidden;
   border-radius: 3px !important;
   background: linear-gradient(
     to bottom,
     #3a393e var(--eval-percent),
-    var(--lr-ext-white) var(--eval-percent)
+    var(--ln-ext-white) var(--eval-percent)
   ) !important;
   transition: --eval-percent 0.3s ease !important;
 }
@@ -136,7 +136,7 @@ coords {
   background: linear-gradient(
     to top,
     #3a393e var(--eval-percent),
-    var(--lr-ext-white) var(--eval-percent)
+    var(--ln-ext-white) var(--eval-percent)
   ) !important;
 }
 
@@ -145,13 +145,13 @@ coords {
 }
 
 .eval-gauge::after {
-  content: attr(data-lr-ext-eval) !important;
+  content: attr(data-ln-ext-eval) !important;
   inset: auto 0 !important;
   bottom: 5px !important;
   box-shadow: none !important;
   border-radius: 0 !important;
   color: #3a393e;
-  font-family: var(--lr-ext-font);
+  font-family: var(--ln-ext-font);
   font-size: 10px;
   font-weight: 700;
   line-height: 1;
@@ -159,13 +159,13 @@ coords {
 }
 
 .eval-gauge:is(
-    [data-lr-ext-lead='black']:not(.reverse),
-    [data-lr-ext-lead='white'].reverse
+    [data-ln-ext-lead='black']:not(.reverse),
+    [data-ln-ext-lead='white'].reverse
   )::after {
   top: 5px !important;
   bottom: auto !important;
 }
 
-.eval-gauge[data-lr-ext-lead='black']::after {
-  color: var(--lr-ext-white);
+.eval-gauge[data-ln-ext-lead='black']::after {
+  color: var(--ln-ext-white);
 }

@@ -10,8 +10,8 @@ const TOOLS = `<main><div class="board-editor"><div class="board-editor__tools">
 </div></div></div></main>`;
 
 const tips = (): (string | undefined)[][] =>
-  [...document.querySelectorAll<HTMLElement>('[data-lr-ext-tip]')].map(tool => [
-    tool.dataset['lrExtTip'],
+  [...document.querySelectorAll<HTMLElement>('[data-ln-ext-tip]')].map(tool => [
+    tool.dataset['lnExtTip'],
     tool.getAttribute('aria-label') ?? undefined,
     tool.getAttribute('title') ?? undefined,
   ]);
@@ -42,12 +42,12 @@ describe('the board editor’s tools', () => {
     document.body.innerHTML = TOOLS;
     syncEditorTools();
     syncEditorTools();
-    expect(document.querySelector<HTMLElement>('a')?.dataset['lrExtTip']).toBe(
+    expect(document.querySelector<HTMLElement>('a')?.dataset['lnExtTip']).toBe(
       'Analysis board (a)',
     );
     const study = document.querySelector('form');
     if (study) study.innerHTML = '<button data-icon="">Study</button>';
     syncEditorTools();
-    expect(document.querySelector<HTMLElement>('form > button')?.dataset['lrExtTip']).toBe('Study');
+    expect(document.querySelector<HTMLElement>('form > button')?.dataset['lnExtTip']).toBe('Study');
   });
 });

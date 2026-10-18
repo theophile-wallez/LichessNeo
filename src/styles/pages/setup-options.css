@@ -4,9 +4,9 @@
 .game-setup group.radio {
   gap: 4px;
   padding: 4px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 11px !important;
-  background: var(--lr-ext-setup-track);
+  background: var(--ln-ext-setup-track);
   overflow: visible !important;
 }
 
@@ -16,7 +16,7 @@
   border: none !important;
   border-radius: 7px;
   background: transparent !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 14px;
   font-weight: 700;
   transition:
@@ -26,22 +26,22 @@
 
 @media (hover: hover) {
   .game-setup group.radio label:not(.disabled):hover {
-    background: var(--lr-ext-lift-4) !important;
-    color: var(--lr-ext-text-strong);
+    background: var(--ln-ext-lift-4) !important;
+    color: var(--ln-ext-text-strong);
   }
 }
 
 .game-setup group.radio input:checked + label,
 .game-setup group.radio input:checked + label:not(.disabled):hover {
-  background: var(--lr-ext-setup-tint) !important;
-  box-shadow: var(--lr-ext-setup-chosen) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-setup-tint) !important;
+  box-shadow: var(--ln-ext-setup-chosen) !important;
+  color: var(--ln-ext-text-strong) !important;
   /* Lichess shades the picked one's text for white on its green: ours is the text's color. */
   text-shadow: none !important;
 }
 
 .game-setup group.radio input:focus-visible + label {
-  outline: 2px solid var(--lr-ext-text-strong) !important;
+  outline: 2px solid var(--ln-ext-text-strong) !important;
   outline-offset: -2px;
 }
 
@@ -75,8 +75,8 @@
 }
 
 .game-setup group.radio label[for^='sf_level_']::after {
-  content: var(--lr-ext-level-elo, none);
-  color: var(--lr-ext-text-dim);
+  content: var(--ln-ext-level-elo, none);
+  color: var(--ln-ext-text-dim);
   font-size: 11px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -84,39 +84,39 @@
 }
 
 .game-setup group.radio input:checked + label[for^='sf_level_']::after {
-  color: var(--lr-ext-accent-hover);
+  color: var(--ln-ext-accent-hover);
 }
 
 .game-setup label[for='sf_level_1'] {
-  --lr-ext-level-elo: var(--lr-ext-ai-level-1);
+  --ln-ext-level-elo: var(--ln-ext-ai-level-1);
 }
 
 .game-setup label[for='sf_level_2'] {
-  --lr-ext-level-elo: var(--lr-ext-ai-level-2);
+  --ln-ext-level-elo: var(--ln-ext-ai-level-2);
 }
 
 .game-setup label[for='sf_level_3'] {
-  --lr-ext-level-elo: var(--lr-ext-ai-level-3);
+  --ln-ext-level-elo: var(--ln-ext-ai-level-3);
 }
 
 .game-setup label[for='sf_level_4'] {
-  --lr-ext-level-elo: var(--lr-ext-ai-level-4);
+  --ln-ext-level-elo: var(--ln-ext-ai-level-4);
 }
 
 .game-setup label[for='sf_level_5'] {
-  --lr-ext-level-elo: var(--lr-ext-ai-level-5);
+  --ln-ext-level-elo: var(--ln-ext-ai-level-5);
 }
 
 .game-setup label[for='sf_level_6'] {
-  --lr-ext-level-elo: var(--lr-ext-ai-level-6);
+  --ln-ext-level-elo: var(--ln-ext-ai-level-6);
 }
 
 .game-setup label[for='sf_level_7'] {
-  --lr-ext-level-elo: var(--lr-ext-ai-level-7);
+  --ln-ext-level-elo: var(--ln-ext-ai-level-7);
 }
 
 .game-setup label[for='sf_level_8'] {
-  --lr-ext-level-elo: var(--lr-ext-ai-level-8);
+  --ln-ext-level-elo: var(--ln-ext-ai-level-8);
 }
 
 /* Phones: four levels a row (eight left a lone eighth), and time tabs sized by their
@@ -153,7 +153,7 @@
   align-items: center;
   gap: 5px;
   margin-top: -8px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 14px;
 }
 
@@ -162,12 +162,12 @@
   align-items: center;
   gap: 4px;
   margin: 0 !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
 }
 
 .game-setup .setup-content > div.disabled {
   opacity: 1 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   line-height: 1.45;
   text-align: center;
@@ -180,7 +180,7 @@
 }
 
 .game-setup .rating-range :is(.rating-min, .rating-max) {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
 }
 
 /* White / random / black: separate cards, off the segmented track. */
@@ -195,7 +195,7 @@
 .game-setup .color-cards label.card-radio {
   border: none !important;
   border-radius: 10px !important;
-  background: var(--lr-ext-bg-raised) !important;
+  background: var(--ln-ext-bg-raised) !important;
   transition:
     background-color 0.15s,
     box-shadow 0.15s !important;
@@ -203,13 +203,13 @@
 
 @media (hover: hover) {
   .game-setup .color-cards label.card-radio:hover {
-    background: var(--lr-ext-bg-raised-hover) !important;
+    background: var(--ln-ext-bg-raised-hover) !important;
   }
 }
 
 .game-setup .color-cards input:checked + label.card-radio {
-  background: var(--lr-ext-setup-tint) !important;
-  box-shadow: var(--lr-ext-setup-chosen) !important;
+  background: var(--ln-ext-setup-tint) !important;
+  box-shadow: var(--ln-ext-setup-chosen) !important;
   text-shadow: none !important;
 }
 
@@ -228,20 +228,20 @@
   height: 56px !important;
   border: none !important;
   border-radius: 10px !important;
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
+  color: var(--ln-ext-white) !important;
   font-size: 20px !important;
 }
 
 @media (hover: hover) {
   .game-setup .footer .lobby__start__button.button:not(.disabled):hover {
-    background: var(--lr-ext-btn-primary-hover) !important;
+    background: var(--ln-ext-btn-primary-hover) !important;
   }
 }
 
 dialog .game-setup .footer .lobby__start__button.button::before {
-  color: var(--lr-ext-white) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 /* ---- Radio groups --- */
@@ -251,9 +251,9 @@ dialog .game-setup .footer .lobby__start__button.button::before {
 group.radio {
   gap: 4px;
   padding: 4px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 11px !important;
-  background: var(--lr-ext-neutral-1);
+  background: var(--ln-ext-neutral-1);
   box-shadow: none !important;
 }
 
@@ -263,7 +263,7 @@ group.radio .label {
   border-radius: 8px !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-weight: 700;
   text-shadow: none !important;
   transition:
@@ -273,8 +273,8 @@ group.radio .label {
 
 @media (hover: hover) {
   group.radio label:not(.disabled):hover {
-    background: var(--lr-ext-lift-4) !important;
-    color: var(--lr-ext-text-strong) !important;
+    background: var(--ln-ext-lift-4) !important;
+    color: var(--ln-ext-text-strong) !important;
   }
 }
 
@@ -283,30 +283,30 @@ group.radio .label {
 group.radio input:checked + label,
 group.radio input:checked + label:not(.disabled):hover,
 main.account group.radio input:checked + label {
-  background: var(--lr-ext-bg-raised) !important;
-  box-shadow: 0 1px 3px var(--lr-ext-shade-50) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  box-shadow: 0 1px 3px var(--ln-ext-shade-50) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Once content/ui/tabs.ts slides a highlight under the picked option, the option's own fill
  * goes (theme/tooltips-and-tabs.css). */
 group.radio {
-  --lr-ext-tab-bg: var(--lr-ext-bg-raised);
-  --lr-ext-tab-radius: 8px;
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised);
+  --ln-ext-tab-radius: 8px;
 }
 
-group.radio[data-lr-ext-tabs] input:checked + label,
-main.account group.radio[data-lr-ext-tabs] input:checked + label {
+group.radio[data-ln-ext-tabs] input:checked + label,
+main.account group.radio[data-ln-ext-tabs] input:checked + label {
   background: transparent !important;
   box-shadow: none !important;
 }
 
 /* Range sliders (time controls). */
 input.range::-webkit-slider-runnable-track {
-  background: var(--lr-ext-bg-raised-hover) !important;
+  background: var(--ln-ext-bg-raised-hover) !important;
 }
 
 input.range::-webkit-slider-thumb {
   border: none !important;
-  background: var(--lr-ext-accent) !important;
+  background: var(--ln-ext-accent) !important;
 }

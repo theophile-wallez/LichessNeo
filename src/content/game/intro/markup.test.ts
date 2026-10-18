@@ -35,19 +35,19 @@ describe('introMarkup', () => {
       player('Stockfish level 1', { rating: '~400', computer: true }),
       player('alice', { title: 'IM', rating: '2400', flag: 'FR' }),
     );
-    const top = queryOne(root, '.lr-ext-intro__drop > .lr-ext-intro__card--top', HTMLElement);
-    const bottom = queryOne(root, '.lr-ext-intro__stay > .lr-ext-intro__card--bottom', HTMLElement);
-    expect(top?.classList.contains('lr-ext-intro__card--computer')).toBe(true);
-    expect(top?.querySelector('.lr-ext-intro__details')?.textContent).toBe('~400');
-    expect(bottom?.classList.contains('lr-ext-intro__card--computer')).toBe(false);
-    expect(bottom?.querySelector('.lr-ext-intro__title')?.textContent).toBe('IM');
-    expect(bottom?.querySelector('.lr-ext-intro__username')?.textContent).toBe('alice');
-    expect(bottom?.querySelector('.lr-ext-intro__details')?.textContent).toBe('2400');
+    const top = queryOne(root, '.ln-ext-intro__drop > .ln-ext-intro__card--top', HTMLElement);
+    const bottom = queryOne(root, '.ln-ext-intro__stay > .ln-ext-intro__card--bottom', HTMLElement);
+    expect(top?.classList.contains('ln-ext-intro__card--computer')).toBe(true);
+    expect(top?.querySelector('.ln-ext-intro__details')?.textContent).toBe('~400');
+    expect(bottom?.classList.contains('ln-ext-intro__card--computer')).toBe(false);
+    expect(bottom?.querySelector('.ln-ext-intro__title')?.textContent).toBe('IM');
+    expect(bottom?.querySelector('.ln-ext-intro__username')?.textContent).toBe('alice');
+    expect(bottom?.querySelector('.ln-ext-intro__details')?.textContent).toBe('2400');
     expect(
-      bottom?.querySelector('.lr-ext-intro__details > img.lr-ext-intro__flag')?.getAttribute('src'),
+      bottom?.querySelector('.ln-ext-intro__details > img.ln-ext-intro__flag')?.getAttribute('src'),
     ).toBe('/assets/flags/FR.webp');
     expect(
-      root.querySelector('.lr-ext-intro__vs > .lr-ext-intro__swords + .lr-ext-intro__versus')
+      root.querySelector('.ln-ext-intro__vs > .ln-ext-intro__swords + .ln-ext-intro__versus')
         ?.textContent,
     ).toBe('VS');
   });
@@ -57,10 +57,10 @@ describe('introMarkup', () => {
       player('Stockfish level 1', { computer: true }),
       player('alice', { user: 'alice' }),
     );
-    const [top, bottom] = queryAll(root, '.lr-ext-intro__avatar', HTMLElement);
-    expect(top?.dataset.lrExtAvatarCoach).toBeUndefined();
+    const [top, bottom] = queryAll(root, '.ln-ext-intro__avatar', HTMLElement);
+    expect(top?.dataset.lnExtAvatarCoach).toBeUndefined();
     const { coach, color } = avatarOf('alice');
-    expect([bottom?.dataset.lrExtAvatarCoach, bottom?.dataset.lrExtAvatarColor]).toEqual([
+    expect([bottom?.dataset.lnExtAvatarCoach, bottom?.dataset.lnExtAvatarColor]).toEqual([
       String(coach),
       color,
     ]);
@@ -71,11 +71,11 @@ describe('introMarkup', () => {
     keepOwnName('<i>Ali</i>');
     keepOwnAvatar({ kind: 'coach', coach: 5, color: 'blue' });
     const root = render(player('bob', { user: 'bob' }), player('alice', { user: 'alice' }));
-    const names = queryAll(root, '.lr-ext-intro__username', HTMLElement);
+    const names = queryAll(root, '.ln-ext-intro__username', HTMLElement);
     expect(names.map(name => name.textContent)).toEqual(['bob', '<i>Ali</i>']);
-    const [top, bottom] = queryAll(root, '.lr-ext-intro__avatar', HTMLElement);
-    expect(top?.dataset.lrExtAvatarCoach).toBe(String(avatarOf('bob').coach));
-    expect([bottom?.dataset.lrExtAvatarCoach, bottom?.dataset.lrExtAvatarColor]).toEqual([
+    const [top, bottom] = queryAll(root, '.ln-ext-intro__avatar', HTMLElement);
+    expect(top?.dataset.lnExtAvatarCoach).toBe(String(avatarOf('bob').coach));
+    expect([bottom?.dataset.lnExtAvatarCoach, bottom?.dataset.lnExtAvatarColor]).toEqual([
       '5',
       'blue',
     ]);
@@ -83,9 +83,9 @@ describe('introMarkup', () => {
 
   it('leaves out what a player lacks, and escapes names', () => {
     const root = render(player('<b>x</b>'), player('Anonymous'));
-    expect(queryAll(root, '.lr-ext-intro__title, .lr-ext-intro__details', HTMLElement)).toEqual([]);
+    expect(queryAll(root, '.ln-ext-intro__title, .ln-ext-intro__details', HTMLElement)).toEqual([]);
     expect(root.querySelector('b')).toBeNull();
-    expect(root.querySelector('.lr-ext-intro__username')?.textContent).toBe('<b>x</b>');
+    expect(root.querySelector('.ln-ext-intro__username')?.textContent).toBe('<b>x</b>');
   });
 });
 

@@ -123,7 +123,7 @@ function createLoop({ canvas, scene, board, keyBox }: Drawing): {
 }
 
 export function createLayer({ scene, hoverColor, keyBox }: LayerOptions): Layer {
-  const canvas = createElement('canvas', { className: 'lr-ext-backlit' });
+  const canvas = createElement('canvas', { className: 'ln-ext-backlit' });
   let board: Board | null = null;
   let listening: AbortController | null = null;
   let pointer: Pointer = null;
@@ -162,6 +162,6 @@ export function createLayer({ scene, hoverColor, keyBox }: LayerOptions): Layer 
       board = null;
     },
     glow: () => getComputedStyle(canvas).color,
-    side: color => getComputedStyle(canvas).getPropertyValue(`--lr-ext-backlit-${color}`).trim(),
+    side: color => getComputedStyle(canvas).getPropertyValue(`--ln-ext-backlit-${color}`).trim(),
   };
 }

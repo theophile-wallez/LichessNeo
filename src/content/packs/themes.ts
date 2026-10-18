@@ -6,7 +6,7 @@ import { PRESET_BOARDS } from './flat-boards.ts';
 import { savedBoards } from './saved-boards.ts';
 
 // The extension's own looks for each part: its boards, drawn by its CSS from
-// `data-lr-ext-board` on <html> (styles/board/), the backlit ones lit up in the
+// `data-ln-ext-board` on <html> (styles/board/), the backlit ones lit up in the
 // page (page/backlit), and its sound set, synthesized in the page
 // (page/sounds/synth). A part's pick is one of these,
 // an imported pack or Lichess's own.

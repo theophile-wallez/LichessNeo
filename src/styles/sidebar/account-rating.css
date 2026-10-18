@@ -4,45 +4,45 @@
  * avatar glyph, which never shows (content/sidebar/account-rating.ts puts them on <html>
  * before the page is drawn). At every width: the sidebar (donate-and-buttons.css) and the
  * header below 1020px (drawer.css) each leave it room at the end of the name. */
-html[data-lr-ext-account-perf='ultraBullet'] #top #user_tag {
-  --lr-ext-account-glyph: var(--lr-ext-mode-ultrabullet);
-  --lr-ext-account-color: var(--lr-ext-mode-bullet-color);
+html[data-ln-ext-account-perf='ultraBullet'] #top #user_tag {
+  --ln-ext-account-glyph: var(--ln-ext-mode-ultrabullet);
+  --ln-ext-account-color: var(--ln-ext-mode-bullet-color);
 }
 
-html[data-lr-ext-account-perf='bullet'] #top #user_tag {
-  --lr-ext-account-glyph: var(--lr-ext-mode-bullet);
-  --lr-ext-account-color: var(--lr-ext-mode-bullet-color);
+html[data-ln-ext-account-perf='bullet'] #top #user_tag {
+  --ln-ext-account-glyph: var(--ln-ext-mode-bullet);
+  --ln-ext-account-color: var(--ln-ext-mode-bullet-color);
 }
 
-html[data-lr-ext-account-perf='blitz'] #top #user_tag {
-  --lr-ext-account-glyph: var(--lr-ext-mode-blitz);
-  --lr-ext-account-color: var(--lr-ext-mode-blitz-color);
+html[data-ln-ext-account-perf='blitz'] #top #user_tag {
+  --ln-ext-account-glyph: var(--ln-ext-mode-blitz);
+  --ln-ext-account-color: var(--ln-ext-mode-blitz-color);
 }
 
-html[data-lr-ext-account-perf='rapid'] #top #user_tag {
-  --lr-ext-account-glyph: var(--lr-ext-mode-rapid);
-  --lr-ext-account-color: var(--lr-ext-mode-rapid-color);
+html[data-ln-ext-account-perf='rapid'] #top #user_tag {
+  --ln-ext-account-glyph: var(--ln-ext-mode-rapid);
+  --ln-ext-account-color: var(--ln-ext-mode-rapid-color);
 }
 
-html[data-lr-ext-account-perf='classical'] #top #user_tag {
-  --lr-ext-account-glyph: var(--lr-ext-mode-classical);
-  --lr-ext-account-color: var(--lr-ext-mode-rapid-color);
+html[data-ln-ext-account-perf='classical'] #top #user_tag {
+  --ln-ext-account-glyph: var(--ln-ext-mode-classical);
+  --ln-ext-account-color: var(--ln-ext-mode-rapid-color);
 }
 
-html[data-lr-ext-account-perf='correspondence'] #top #user_tag {
-  --lr-ext-account-glyph: var(--lr-ext-mode-correspondence);
-  --lr-ext-account-color: var(--lr-ext-mode-correspondence-color);
+html[data-ln-ext-account-perf='correspondence'] #top #user_tag {
+  --ln-ext-account-glyph: var(--ln-ext-mode-correspondence);
+  --ln-ext-account-color: var(--ln-ext-mode-correspondence-color);
 }
 
 /* The pill holds the rating, and the glyph is laid over its start: in one string, the
  * glyph's font set the line and the digits sat 2px low. As wide as the rating's characters
  * (content/sidebar/account-rating.ts), so the glyph knows where the pill starts. */
-html[data-lr-ext-account-perf] #top #user_tag {
-  --lr-ext-account-pill: calc(27px + var(--lr-ext-account-chars, 4) * 7px);
+html[data-ln-ext-account-perf] #top #user_tag {
+  --ln-ext-account-pill: calc(27px + var(--ln-ext-account-chars, 4) * 7px);
 }
 
-html[data-lr-ext-account-perf] #top #user_tag::after {
-  content: var(--lr-ext-account-rating);
+html[data-ln-ext-account-perf] #top #user_tag::after {
+  content: var(--ln-ext-account-rating);
   /* Lichess hides its avatar glyph on phones. */
   display: block !important;
   position: absolute;
@@ -52,12 +52,12 @@ html[data-lr-ext-account-perf] #top #user_tag::after {
   line-height: 1;
   transform: translateY(-50%);
   box-sizing: border-box;
-  width: var(--lr-ext-account-pill);
+  width: var(--ln-ext-account-pill);
   padding: 3px 7px 3px 0;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-account-color) 16%, transparent);
-  color: var(--lr-ext-account-color) !important;
-  font-family: var(--lr-ext-font);
+  background: color-mix(in srgb, var(--ln-ext-account-color) 16%, transparent);
+  color: var(--ln-ext-account-color) !important;
+  font-family: var(--ln-ext-font);
   font-size: 12px !important;
   text-align: end;
   font-weight: 800;
@@ -65,12 +65,12 @@ html[data-lr-ext-account-perf] #top #user_tag::after {
   opacity: 1;
 }
 
-html[data-lr-ext-account-perf] #top #user_tag::before {
-  content: var(--lr-ext-account-glyph);
+html[data-ln-ext-account-perf] #top #user_tag::before {
+  content: var(--ln-ext-account-glyph);
   position: absolute;
   top: 50%;
-  right: calc(6px + var(--lr-ext-account-pill) - 7px - 12px);
-  color: var(--lr-ext-account-color);
+  right: calc(6px + var(--ln-ext-account-pill) - 7px - 12px);
+  color: var(--ln-ext-account-color);
   font-family: lichess;
   font-size: 12px;
   line-height: 1;

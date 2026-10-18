@@ -4,54 +4,54 @@
 
 @media (min-width: 1020px) {
   main.round {
-    --lr-ext-bar: 56px;
-    --lr-ext-coords-off: 0px;
-    --lr-ext-gap: 24px;
+    --ln-ext-bar: 56px;
+    --ln-ext-coords-off: 0px;
+    --ln-ext-gap: 24px;
     /* The board is sized as if the panel were at its minimum; the panel then takes the
      * rest, up to 500px (as in analysis/). */
-    --lr-ext-panel-min: 300px;
+    --ln-ext-panel-min: 300px;
     /* As big as the window allows, times the resize handle's scale (board/). `dvh`, as
-     * `100vh` overshoots on phones and the Meta Quest. `--lr-ext-lead-w` is TV's left column. */
-    --lr-ext-board: max(
+     * `100vh` overshoots on phones and the Meta Quest. `--ln-ext-lead-w` is TV's left column. */
+    --ln-ext-board: max(
       320px,
       calc(
         min(
             calc(
-              var(--lr-ext-main-h, 100dvh) - 32px - 2 * var(--lr-ext-bar) - var(--lr-ext-coords-off)
+              var(--ln-ext-main-h, 100dvh) - 32px - 2 * var(--ln-ext-bar) - var(--ln-ext-coords-off)
             ),
             calc(
-              var(--lr-ext-main-w, 100vw) - var(--lr-ext-lead-w, 0px) - var(--lr-ext-panel-min) -
-                var(--lr-ext-gap) - 48px
+              var(--ln-ext-main-w, 100vw) - var(--ln-ext-lead-w, 0px) - var(--ln-ext-panel-min) -
+                var(--ln-ext-gap) - 48px
             )
           ) *
-          var(--lr-ext-board-scale, 1)
+          var(--ln-ext-board-scale, 1)
       )
     );
-    --lr-ext-panel-w: clamp(
-      var(--lr-ext-panel-min),
+    --ln-ext-panel-w: clamp(
+      var(--ln-ext-panel-min),
       calc(
-        var(--lr-ext-main-w, 100vw) - var(--lr-ext-lead-w, 0px) - var(--lr-ext-board) -
-          var(--lr-ext-gap) - 48px
+        var(--ln-ext-main-w, 100vw) - var(--ln-ext-lead-w, 0px) - var(--ln-ext-board) -
+          var(--ln-ext-gap) - 48px
       ),
       500px
     );
-    --lr-ext-bar-bot: calc(var(--lr-ext-bar) + var(--lr-ext-coords-off));
-    --lr-ext-chat-h: min(clamp(180px, 32vh, 340px), calc(var(--lr-ext-board) * 0.45));
-    --lr-ext-ctrl-h: var(--lr-ext-controls-h, 48px); /* content/layout/controls-height.ts */
+    --ln-ext-bar-bot: calc(var(--ln-ext-bar) + var(--ln-ext-coords-off));
+    --ln-ext-chat-h: min(clamp(180px, 32vh, 340px), calc(var(--ln-ext-board) * 0.45));
+    --ln-ext-ctrl-h: var(--ln-ext-controls-h, 48px); /* content/layout/controls-height.ts */
 
     display: grid !important;
-    grid-template-columns: var(--lr-ext-board) var(--lr-ext-panel-w) !important;
+    grid-template-columns: var(--ln-ext-board) var(--ln-ext-panel-w) !important;
     grid-template-rows:
-      var(--lr-ext-bar)
+      var(--ln-ext-bar)
       max(
         0px,
         calc(
-          var(--lr-ext-board) + var(--lr-ext-bar-bot) - var(--lr-ext-ctrl-h) - var(--lr-ext-chat-h)
+          var(--ln-ext-board) + var(--ln-ext-bar-bot) - var(--ln-ext-ctrl-h) - var(--ln-ext-chat-h)
         )
       )
-      var(--lr-ext-ctrl-h)
-      max(0px, calc(var(--lr-ext-chat-h) - var(--lr-ext-bar-bot)))
-      var(--lr-ext-bar-bot) !important;
+      var(--ln-ext-ctrl-h)
+      max(0px, calc(var(--ln-ext-chat-h) - var(--ln-ext-bar-bot)))
+      var(--ln-ext-bar-bot) !important;
     grid-auto-rows: auto !important;
     grid-template-areas:
       'user-top moves'
@@ -59,14 +59,14 @@
       'board    controls'
       'board    chat'
       'user-bot chat' !important;
-    column-gap: var(--lr-ext-gap) !important;
+    column-gap: var(--ln-ext-gap) !important;
     row-gap: 0 !important;
     justify-content: center !important;
     align-content: start !important;
   }
 
   body:is(.coords-in, .coords-out) main.round {
-    --lr-ext-coords-off: calc(1.2 * var(--lr-ext-coords-size, 13px) + 8px);
+    --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
   }
 }
 
@@ -91,14 +91,14 @@ main.round .round__app__board {
 
 /* ---- Player bars --- */
 
-/* Which bar each part goes in, and its offset from the bar's top (`--lr-ext-off`).
+/* Which bar each part goes in, and its offset from the bar's top (`--ln-ext-off`).
  * playerbar.css draws them. */
 main.round .ruser-top,
 main.round .rclock-top,
 main.round .material-top,
 main.round .expiration-top {
   grid-area: user-top !important;
-  --lr-ext-off: var(--lr-ext-inset-t, 0px);
+  --ln-ext-off: var(--ln-ext-inset-t, 0px);
 }
 
 main.round .ruser-bottom,
@@ -106,7 +106,7 @@ main.round .rclock-bottom,
 main.round .material-bottom,
 main.round .expiration-bottom {
   grid-area: user-bot !important;
-  --lr-ext-off: calc(var(--lr-ext-coords-off) - var(--lr-ext-inset-b, 0px));
+  --ln-ext-off: calc(var(--ln-ext-coords-off) - var(--ln-ext-inset-b, 0px));
 }
 
 /* The bars show captured pieces instead of Lichess's material difference. */
@@ -114,13 +114,13 @@ main.round .material {
   display: none !important;
 }
 
-main.round .lr-ext-captured--top {
+main.round .ln-ext-captured--top {
   grid-area: user-top;
-  --lr-ext-off: var(--lr-ext-inset-t, 0px);
+  --ln-ext-off: var(--ln-ext-inset-t, 0px);
 }
-main.round .lr-ext-captured--bottom {
+main.round .ln-ext-captured--bottom {
   grid-area: user-bot;
-  --lr-ext-off: calc(var(--lr-ext-coords-off) - var(--lr-ext-inset-b, 0px));
+  --ln-ext-off: calc(var(--ln-ext-coords-off) - var(--ln-ext-inset-b, 0px));
 }
 
 /* The first-move countdown goes under the name, where captured pieces will be:
@@ -129,7 +129,7 @@ main.round .expiration {
   justify-self: start;
   align-self: start;
   height: 18px;
-  margin: calc(var(--lr-ext-off) + 30px) 0 0 calc(50px + var(--lr-ext-inset-l, 0px)) !important;
+  margin: calc(var(--ln-ext-off) + 30px) 0 0 calc(50px + var(--ln-ext-inset-l, 0px)) !important;
   padding: 0 8px;
   border-radius: 4px !important;
   font-size: 12px !important;
@@ -151,8 +151,8 @@ main.round .rclock {
   align-items: center;
   gap: 6px;
   /* Level with the avatar, which is as tall as the clock. */
-  margin-top: calc(var(--lr-ext-off) + 8px) !important;
-  margin-right: var(--lr-ext-inset-r, 0px) !important;
+  margin-top: calc(var(--ln-ext-off) + 8px) !important;
+  margin-right: var(--ln-ext-inset-r, 0px) !important;
 }
 
 main.round .rclock .bar {
@@ -165,11 +165,11 @@ main.round .rclock > :not(.time, .bar) {
   order: -1;
 }
 
-/* Keyed on `data-lr-ext-has` (content/layout/has-flags.ts): a `:has()` here would rerun on
+/* Keyed on `data-ln-ext-has` (content/layout/has-flags.ts): a `:has()` here would rerun on
  * every move. */
-html[data-lr-ext-has~='clock-extras-top'] main.round .ruser-top,
-html[data-lr-ext-has~='clock-extras-bottom'] main.round .ruser-bottom {
-  --lr-ext-clock-room: 212px;
+html[data-ln-ext-has~='clock-extras-top'] main.round .ruser-top,
+html[data-ln-ext-has~='clock-extras-bottom'] main.round .ruser-bottom {
+  --ln-ext-clock-room: 212px;
 }
 
 /* Streamer mode shifts the bottom clock down a board's height, which here pushed it

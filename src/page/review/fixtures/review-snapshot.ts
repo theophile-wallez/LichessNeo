@@ -13,20 +13,20 @@ export const hashOf = (text: string | null): string | null =>
 const ICON = /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" viewBox="0 0 20 20">[\s\S]*?<\/svg>/g;
 const ICON_URL = /url\((?:&quot;|")?data:image\/svg\+xml,.*?%3C%2Fsvg%3E(?:&quot;|")?\)/g;
 
-// The names the port gave the `lr-ext` prefix, back to the original's, as the
+// The names the port gave the `ln-ext` prefix, back to the original's, as the
 // recordings have them.
 const RENAMED: readonly (readonly [string, string])[] = [
-  ['--lr-ext-class-color:', '--c:'],
-  ['--lr-ext-class-icon:', '--i:'],
-  ['data-lr-ext-version=', 'data-v='],
-  ['data-lr-ext-opening=', 'data-key='],
-  ['data-lr-ext-coach-id=', 'data-coach='],
-  ['data-lr-ext-mood=', 'data-mood='],
+  ['--ln-ext-class-color:', '--c:'],
+  ['--ln-ext-class-icon:', '--i:'],
+  ['data-ln-ext-version=', 'data-v='],
+  ['data-ln-ext-opening=', 'data-key='],
+  ['data-ln-ext-coach-id=', 'data-coach='],
+  ['data-ln-ext-mood=', 'data-mood='],
 ];
 
 // What the port added, which the original didn't have: the summary's counts
 // as buttons that go to their moves, where it wrote the bare number.
-const COUNT_BUTTON = /<button class="lr-ext-t-jump"[^>]*>(\d+)<\/button>/g;
+const COUNT_BUTTON = /<button class="ln-ext-t-jump"[^>]*>(\d+)<\/button>/g;
 
 export function compact(markup: string): string {
   return RENAMED.reduce((text, [port, original]) => text.replaceAll(port, original), markup)
@@ -51,13 +51,13 @@ const inner = (selector: string): string | null => {
 /** Where each of the review's elements sits, by its parent's class or tag. */
 function placement(): string {
   return [
-    '#lr-ext-review',
-    '#lr-ext-review-graph',
-    '#lr-ext-review-controls',
-    '#lr-ext-evalbar',
-    '#lr-ext-board-overlay',
-    '#lr-ext-opening',
-    '#lr-ext-tip',
+    '#ln-ext-review',
+    '#ln-ext-review-graph',
+    '#ln-ext-review-controls',
+    '#ln-ext-evalbar',
+    '#ln-ext-board-overlay',
+    '#ln-ext-opening',
+    '#ln-ext-tip',
   ]
     .map(selector => {
       const parent = document.querySelector(selector)?.parentElement;
@@ -79,16 +79,16 @@ export interface SnapshotExtras {
 export function snapshotReview(extras: SnapshotExtras): ReviewSnapshot {
   const root = document.documentElement;
   return {
-    html: [...root.classList].filter(name => name.startsWith('lr-ext')).join(' '),
-    cls: root.dataset.lrExtCls ?? null,
+    html: [...root.classList].filter(name => name.startsWith('ln-ext')).join(' '),
+    cls: root.dataset.lnExtCls ?? null,
     placement: placement(),
-    panel: inner('#lr-ext-review'),
-    graph: outer('#lr-ext-review-graph'),
-    controls: inner('#lr-ext-review-controls'),
-    bar: outer('#lr-ext-evalbar'),
-    overlay: inner('#lr-ext-board-overlay'),
-    opening: outer('#lr-ext-opening'),
-    tip: outer('#lr-ext-tip'),
+    panel: inner('#ln-ext-review'),
+    graph: outer('#ln-ext-review-graph'),
+    controls: inner('#ln-ext-review-controls'),
+    bar: outer('#ln-ext-evalbar'),
+    overlay: inner('#ln-ext-board-overlay'),
+    opening: outer('#ln-ext-opening'),
+    tip: outer('#ln-ext-tip'),
     moves: inner('.tview2'),
     ...extras,
   };

@@ -6,7 +6,7 @@ import type { Feature } from '#shared/features.ts';
 // one section at a time, and the drawer opens on the page's section.
 
 const NARROW = '(max-width: 1019.98px)';
-const OPEN = 'lr-ext-open';
+const OPEN = 'ln-ext-open';
 const SECTION = '#topnav > section';
 
 /** Opens this section of the drawer, and closes the others. */

@@ -6,213 +6,213 @@
  * once reads on both: the neutrals run from the page's deepest background (1)
  * to its strongest text (14) in either scheme, and the hues deepen on the
  * light one to read on white. A theme (content/colors) only sets
- * --lr-ext-tint-hue, --lr-ext-tint-chroma and --lr-ext-accent per scheme.
+ * --ln-ext-tint-hue, --ln-ext-tint-chroma and --ln-ext-accent per scheme.
  *
  * White and black overlays on a fill, a picture or the board (#ffffff14,
  * #00000040) shade whatever is under them, and stay as they are.
  *
- * A [data-lr-ext-palette] element gets the whole palette again from its own
+ * A [data-ln-ext-palette] element gets the whole palette again from its own
  * theme variables: the settings' previews show a theme that isn't on. */
 
-/* The default theme, Reimagined: near-neutral greys and a blue accent. */
+/* The default theme, Neo: near-neutral greys and a blue accent. */
 :root {
-  --lr-ext-tint-hue: 286;
-  --lr-ext-tint-chroma: 0.004;
-  --lr-ext-accent: #5e6ad2;
+  --ln-ext-tint-hue: 286;
+  --ln-ext-tint-chroma: 0.004;
+  --ln-ext-accent: #5e6ad2;
 }
 
 :root.light {
-  --lr-ext-tint-chroma: 0.006;
+  --ln-ext-tint-chroma: 0.006;
 }
 
 :root,
-[data-lr-ext-palette] {
+[data-ln-ext-palette] {
   /* Lightness steps measured off the original greys, near black as on Linear. */
-  --lr-ext-neutral-1: oklch(14% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-2: oklch(15.5% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-3: oklch(17.3% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-4: oklch(19.2% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-5: oklch(21.4% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-6: oklch(24% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-7: oklch(26.9% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-8: oklch(30.2% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-9: oklch(38.1% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-10: oklch(49.1% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-11: oklch(64.9% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-12: oklch(77.6% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-13: oklch(87.9% calc(var(--lr-ext-tint-chroma) / 2) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-14: oklch(97.8% calc(var(--lr-ext-tint-chroma) / 2) var(--lr-ext-tint-hue));
+  --ln-ext-neutral-1: oklch(14% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-2: oklch(15.5% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-3: oklch(17.3% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-4: oklch(19.2% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-5: oklch(21.4% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-6: oklch(24% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-7: oklch(26.9% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-8: oklch(30.2% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-9: oklch(38.1% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-10: oklch(49.1% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-11: oklch(64.9% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-12: oklch(77.6% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-13: oklch(87.9% calc(var(--ln-ext-tint-chroma) / 2) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-14: oklch(97.8% calc(var(--ln-ext-tint-chroma) / 2) var(--ln-ext-tint-hue));
 
   /* Dracula's hues (draculatheme.com) for the sections, and our blue. */
-  --lr-ext-blue: #5e6ad2;
-  --lr-ext-red: #ff5555;
-  --lr-ext-orange: #ffb86c;
-  --lr-ext-yellow: #f1fa8c;
-  --lr-ext-green: #50fa7b;
-  --lr-ext-cyan: #8be9fd;
-  --lr-ext-purple: #bd93f9;
-  --lr-ext-pink: #ff79c6;
+  --ln-ext-blue: #5e6ad2;
+  --ln-ext-red: #ff5555;
+  --ln-ext-orange: #ffb86c;
+  --ln-ext-yellow: #f1fa8c;
+  --ln-ext-green: #50fa7b;
+  --ln-ext-cyan: #8be9fd;
+  --ln-ext-purple: #bd93f9;
+  --ln-ext-pink: #ff79c6;
 
   /* The players in a game's charts and bars: White's lighter, Black's darker. */
-  --lr-ext-side-white: #ebeae8;
-  --lr-ext-side-black: #8b8987;
+  --ln-ext-side-white: #ebeae8;
+  --ln-ext-side-black: #8b8987;
 
   /* Shadows and the wells sunk into a surface. */
-  --lr-ext-shade-2: #00000005;
-  --lr-ext-shade-3: #00000008;
-  --lr-ext-shade-4: #0000000a;
-  --lr-ext-shade-5: #0000000d;
-  --lr-ext-shade-6: #0000000f;
-  --lr-ext-shade-7: #00000012;
-  --lr-ext-shade-8: #00000014;
-  --lr-ext-shade-10: #0000001a;
-  --lr-ext-shade-12: #0000001f;
-  --lr-ext-shade-15: #00000026;
-  --lr-ext-shade-18: #0000002e;
-  --lr-ext-shade-20: #00000033;
-  --lr-ext-shade-25: #00000040;
-  --lr-ext-shade-30: #0000004d;
-  --lr-ext-shade-35: #00000059;
-  --lr-ext-shade-40: #00000066;
-  --lr-ext-shade-45: #00000073;
-  --lr-ext-shade-50: #0000007f;
-  --lr-ext-shade-55: #0000008c;
-  --lr-ext-shade-60: #00000099;
-  --lr-ext-shade-65: #000000a6;
-  --lr-ext-shade-70: #000000b3;
-  --lr-ext-shade-80: #000000cc;
-  --lr-ext-shade-85: #000000d9;
-  --lr-ext-shade-90: #000000e5;
+  --ln-ext-shade-2: #00000005;
+  --ln-ext-shade-3: #00000008;
+  --ln-ext-shade-4: #0000000a;
+  --ln-ext-shade-5: #0000000d;
+  --ln-ext-shade-6: #0000000f;
+  --ln-ext-shade-7: #00000012;
+  --ln-ext-shade-8: #00000014;
+  --ln-ext-shade-10: #0000001a;
+  --ln-ext-shade-12: #0000001f;
+  --ln-ext-shade-15: #00000026;
+  --ln-ext-shade-18: #0000002e;
+  --ln-ext-shade-20: #00000033;
+  --ln-ext-shade-25: #00000040;
+  --ln-ext-shade-30: #0000004d;
+  --ln-ext-shade-35: #00000059;
+  --ln-ext-shade-40: #00000066;
+  --ln-ext-shade-45: #00000073;
+  --ln-ext-shade-50: #0000007f;
+  --ln-ext-shade-55: #0000008c;
+  --ln-ext-shade-60: #00000099;
+  --ln-ext-shade-65: #000000a6;
+  --ln-ext-shade-70: #000000b3;
+  --ln-ext-shade-80: #000000cc;
+  --ln-ext-shade-85: #000000d9;
+  --ln-ext-shade-90: #000000e5;
 
   color-scheme: dark;
 }
 
 :root.light,
-[data-lr-ext-palette='light'] {
+[data-ln-ext-palette='light'] {
   /* Text keeps 4.5:1 on the page from step 11, and 3:1 from step 10. */
-  --lr-ext-neutral-1: oklch(100% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-2: oklch(99.3% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-3: oklch(98.5% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-4: oklch(96.8% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-5: oklch(95.4% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-6: oklch(93.4% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-7: oklch(91.2% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-8: oklch(88.6% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-9: oklch(80% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-10: oklch(63% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-11: oklch(54% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-12: oklch(44% var(--lr-ext-tint-chroma) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-13: oklch(30% calc(var(--lr-ext-tint-chroma) / 2) var(--lr-ext-tint-hue));
-  --lr-ext-neutral-14: oklch(18% calc(var(--lr-ext-tint-chroma) / 2) var(--lr-ext-tint-hue));
+  --ln-ext-neutral-1: oklch(100% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-2: oklch(99.3% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-3: oklch(98.5% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-4: oklch(96.8% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-5: oklch(95.4% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-6: oklch(93.4% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-7: oklch(91.2% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-8: oklch(88.6% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-9: oklch(80% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-10: oklch(63% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-11: oklch(54% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-12: oklch(44% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-13: oklch(30% calc(var(--ln-ext-tint-chroma) / 2) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-14: oklch(18% calc(var(--ln-ext-tint-chroma) / 2) var(--ln-ext-tint-hue));
 
   /* Dracula's hues read on dark only: these keep about 3:1 on white. */
-  --lr-ext-red: #e5484d;
-  --lr-ext-orange: #e3700d;
-  --lr-ext-yellow: #b98a0c;
-  --lr-ext-green: #1e9e50;
-  --lr-ext-cyan: #0a97bb;
-  --lr-ext-purple: #8b5cf6;
-  --lr-ext-pink: #e0479e;
+  --ln-ext-red: #e5484d;
+  --ln-ext-orange: #e3700d;
+  --ln-ext-yellow: #b98a0c;
+  --ln-ext-green: #1e9e50;
+  --ln-ext-cyan: #0a97bb;
+  --ln-ext-purple: #8b5cf6;
+  --ln-ext-pink: #e0479e;
 
   /* White itself would vanish on the page. */
-  --lr-ext-side-white: var(--lr-ext-neutral-9);
-  --lr-ext-side-black: var(--lr-ext-neutral-12);
+  --ln-ext-side-white: var(--ln-ext-neutral-9);
+  --ln-ext-side-black: var(--ln-ext-neutral-12);
 
   /* Half as strong as on dark, in the text's tint rather than black. */
-  --lr-ext-shade-2: color-mix(in srgb, var(--lr-ext-neutral-14) 1%, transparent);
-  --lr-ext-shade-3: color-mix(in srgb, var(--lr-ext-neutral-14) 1.5%, transparent);
-  --lr-ext-shade-4: color-mix(in srgb, var(--lr-ext-neutral-14) 2%, transparent);
-  --lr-ext-shade-5: color-mix(in srgb, var(--lr-ext-neutral-14) 2.5%, transparent);
-  --lr-ext-shade-6: color-mix(in srgb, var(--lr-ext-neutral-14) 3%, transparent);
-  --lr-ext-shade-7: color-mix(in srgb, var(--lr-ext-neutral-14) 3.5%, transparent);
-  --lr-ext-shade-8: color-mix(in srgb, var(--lr-ext-neutral-14) 4%, transparent);
-  --lr-ext-shade-10: color-mix(in srgb, var(--lr-ext-neutral-14) 5%, transparent);
-  --lr-ext-shade-12: color-mix(in srgb, var(--lr-ext-neutral-14) 6%, transparent);
-  --lr-ext-shade-15: color-mix(in srgb, var(--lr-ext-neutral-14) 7.5%, transparent);
-  --lr-ext-shade-18: color-mix(in srgb, var(--lr-ext-neutral-14) 9%, transparent);
-  --lr-ext-shade-20: color-mix(in srgb, var(--lr-ext-neutral-14) 10%, transparent);
-  --lr-ext-shade-25: color-mix(in srgb, var(--lr-ext-neutral-14) 12.5%, transparent);
-  --lr-ext-shade-30: color-mix(in srgb, var(--lr-ext-neutral-14) 15%, transparent);
-  --lr-ext-shade-35: color-mix(in srgb, var(--lr-ext-neutral-14) 17.5%, transparent);
-  --lr-ext-shade-40: color-mix(in srgb, var(--lr-ext-neutral-14) 20%, transparent);
-  --lr-ext-shade-45: color-mix(in srgb, var(--lr-ext-neutral-14) 22.5%, transparent);
-  --lr-ext-shade-50: color-mix(in srgb, var(--lr-ext-neutral-14) 25%, transparent);
-  --lr-ext-shade-55: color-mix(in srgb, var(--lr-ext-neutral-14) 27.5%, transparent);
-  --lr-ext-shade-60: color-mix(in srgb, var(--lr-ext-neutral-14) 30%, transparent);
-  --lr-ext-shade-65: color-mix(in srgb, var(--lr-ext-neutral-14) 32.5%, transparent);
-  --lr-ext-shade-70: color-mix(in srgb, var(--lr-ext-neutral-14) 35%, transparent);
-  --lr-ext-shade-80: color-mix(in srgb, var(--lr-ext-neutral-14) 40%, transparent);
-  --lr-ext-shade-85: color-mix(in srgb, var(--lr-ext-neutral-14) 42.5%, transparent);
-  --lr-ext-shade-90: color-mix(in srgb, var(--lr-ext-neutral-14) 45%, transparent);
+  --ln-ext-shade-2: color-mix(in srgb, var(--ln-ext-neutral-14) 1%, transparent);
+  --ln-ext-shade-3: color-mix(in srgb, var(--ln-ext-neutral-14) 1.5%, transparent);
+  --ln-ext-shade-4: color-mix(in srgb, var(--ln-ext-neutral-14) 2%, transparent);
+  --ln-ext-shade-5: color-mix(in srgb, var(--ln-ext-neutral-14) 2.5%, transparent);
+  --ln-ext-shade-6: color-mix(in srgb, var(--ln-ext-neutral-14) 3%, transparent);
+  --ln-ext-shade-7: color-mix(in srgb, var(--ln-ext-neutral-14) 3.5%, transparent);
+  --ln-ext-shade-8: color-mix(in srgb, var(--ln-ext-neutral-14) 4%, transparent);
+  --ln-ext-shade-10: color-mix(in srgb, var(--ln-ext-neutral-14) 5%, transparent);
+  --ln-ext-shade-12: color-mix(in srgb, var(--ln-ext-neutral-14) 6%, transparent);
+  --ln-ext-shade-15: color-mix(in srgb, var(--ln-ext-neutral-14) 7.5%, transparent);
+  --ln-ext-shade-18: color-mix(in srgb, var(--ln-ext-neutral-14) 9%, transparent);
+  --ln-ext-shade-20: color-mix(in srgb, var(--ln-ext-neutral-14) 10%, transparent);
+  --ln-ext-shade-25: color-mix(in srgb, var(--ln-ext-neutral-14) 12.5%, transparent);
+  --ln-ext-shade-30: color-mix(in srgb, var(--ln-ext-neutral-14) 15%, transparent);
+  --ln-ext-shade-35: color-mix(in srgb, var(--ln-ext-neutral-14) 17.5%, transparent);
+  --ln-ext-shade-40: color-mix(in srgb, var(--ln-ext-neutral-14) 20%, transparent);
+  --ln-ext-shade-45: color-mix(in srgb, var(--ln-ext-neutral-14) 22.5%, transparent);
+  --ln-ext-shade-50: color-mix(in srgb, var(--ln-ext-neutral-14) 25%, transparent);
+  --ln-ext-shade-55: color-mix(in srgb, var(--ln-ext-neutral-14) 27.5%, transparent);
+  --ln-ext-shade-60: color-mix(in srgb, var(--ln-ext-neutral-14) 30%, transparent);
+  --ln-ext-shade-65: color-mix(in srgb, var(--ln-ext-neutral-14) 32.5%, transparent);
+  --ln-ext-shade-70: color-mix(in srgb, var(--ln-ext-neutral-14) 35%, transparent);
+  --ln-ext-shade-80: color-mix(in srgb, var(--ln-ext-neutral-14) 40%, transparent);
+  --ln-ext-shade-85: color-mix(in srgb, var(--ln-ext-neutral-14) 42.5%, transparent);
+  --ln-ext-shade-90: color-mix(in srgb, var(--ln-ext-neutral-14) 45%, transparent);
 
   color-scheme: light;
 }
 
 :root,
-[data-lr-ext-palette] {
+[data-ln-ext-palette] {
   /* On a fill of the accent or a deep hue, and on a bright hue (green, yellow,
    * cyan, orange, pink), where white can't be read. Both fixed. */
-  --lr-ext-white: #fff;
-  --lr-ext-ink: #0c0c0d;
+  --ln-ext-white: #fff;
+  --ln-ext-ink: #0c0c0d;
 
   /* The text color over a surface, from a hairline to a hover: white on dark,
    * ink on light. */
-  --lr-ext-lift-2: color-mix(in srgb, var(--lr-ext-neutral-14) 2%, transparent);
-  --lr-ext-lift-3: color-mix(in srgb, var(--lr-ext-neutral-14) 3%, transparent);
-  --lr-ext-lift-4: color-mix(in srgb, var(--lr-ext-neutral-14) 4%, transparent);
-  --lr-ext-lift-5: color-mix(in srgb, var(--lr-ext-neutral-14) 5%, transparent);
-  --lr-ext-lift-6: color-mix(in srgb, var(--lr-ext-neutral-14) 6%, transparent);
-  --lr-ext-lift-7: color-mix(in srgb, var(--lr-ext-neutral-14) 7%, transparent);
-  --lr-ext-lift-8: color-mix(in srgb, var(--lr-ext-neutral-14) 8%, transparent);
-  --lr-ext-lift-10: color-mix(in srgb, var(--lr-ext-neutral-14) 10%, transparent);
-  --lr-ext-lift-12: color-mix(in srgb, var(--lr-ext-neutral-14) 12%, transparent);
-  --lr-ext-lift-15: color-mix(in srgb, var(--lr-ext-neutral-14) 15%, transparent);
-  --lr-ext-lift-18: color-mix(in srgb, var(--lr-ext-neutral-14) 18%, transparent);
-  --lr-ext-lift-20: color-mix(in srgb, var(--lr-ext-neutral-14) 20%, transparent);
-  --lr-ext-lift-25: color-mix(in srgb, var(--lr-ext-neutral-14) 25%, transparent);
-  --lr-ext-lift-30: color-mix(in srgb, var(--lr-ext-neutral-14) 30%, transparent);
-  --lr-ext-lift-35: color-mix(in srgb, var(--lr-ext-neutral-14) 35%, transparent);
-  --lr-ext-lift-40: color-mix(in srgb, var(--lr-ext-neutral-14) 40%, transparent);
-  --lr-ext-lift-45: color-mix(in srgb, var(--lr-ext-neutral-14) 45%, transparent);
-  --lr-ext-lift-50: color-mix(in srgb, var(--lr-ext-neutral-14) 50%, transparent);
-  --lr-ext-lift-55: color-mix(in srgb, var(--lr-ext-neutral-14) 55%, transparent);
-  --lr-ext-lift-60: color-mix(in srgb, var(--lr-ext-neutral-14) 60%, transparent);
-  --lr-ext-lift-65: color-mix(in srgb, var(--lr-ext-neutral-14) 65%, transparent);
-  --lr-ext-lift-70: color-mix(in srgb, var(--lr-ext-neutral-14) 70%, transparent);
-  --lr-ext-lift-80: color-mix(in srgb, var(--lr-ext-neutral-14) 80%, transparent);
-  --lr-ext-lift-85: color-mix(in srgb, var(--lr-ext-neutral-14) 85%, transparent);
-  --lr-ext-lift-90: color-mix(in srgb, var(--lr-ext-neutral-14) 90%, transparent);
+  --ln-ext-lift-2: color-mix(in srgb, var(--ln-ext-neutral-14) 2%, transparent);
+  --ln-ext-lift-3: color-mix(in srgb, var(--ln-ext-neutral-14) 3%, transparent);
+  --ln-ext-lift-4: color-mix(in srgb, var(--ln-ext-neutral-14) 4%, transparent);
+  --ln-ext-lift-5: color-mix(in srgb, var(--ln-ext-neutral-14) 5%, transparent);
+  --ln-ext-lift-6: color-mix(in srgb, var(--ln-ext-neutral-14) 6%, transparent);
+  --ln-ext-lift-7: color-mix(in srgb, var(--ln-ext-neutral-14) 7%, transparent);
+  --ln-ext-lift-8: color-mix(in srgb, var(--ln-ext-neutral-14) 8%, transparent);
+  --ln-ext-lift-10: color-mix(in srgb, var(--ln-ext-neutral-14) 10%, transparent);
+  --ln-ext-lift-12: color-mix(in srgb, var(--ln-ext-neutral-14) 12%, transparent);
+  --ln-ext-lift-15: color-mix(in srgb, var(--ln-ext-neutral-14) 15%, transparent);
+  --ln-ext-lift-18: color-mix(in srgb, var(--ln-ext-neutral-14) 18%, transparent);
+  --ln-ext-lift-20: color-mix(in srgb, var(--ln-ext-neutral-14) 20%, transparent);
+  --ln-ext-lift-25: color-mix(in srgb, var(--ln-ext-neutral-14) 25%, transparent);
+  --ln-ext-lift-30: color-mix(in srgb, var(--ln-ext-neutral-14) 30%, transparent);
+  --ln-ext-lift-35: color-mix(in srgb, var(--ln-ext-neutral-14) 35%, transparent);
+  --ln-ext-lift-40: color-mix(in srgb, var(--ln-ext-neutral-14) 40%, transparent);
+  --ln-ext-lift-45: color-mix(in srgb, var(--ln-ext-neutral-14) 45%, transparent);
+  --ln-ext-lift-50: color-mix(in srgb, var(--ln-ext-neutral-14) 50%, transparent);
+  --ln-ext-lift-55: color-mix(in srgb, var(--ln-ext-neutral-14) 55%, transparent);
+  --ln-ext-lift-60: color-mix(in srgb, var(--ln-ext-neutral-14) 60%, transparent);
+  --ln-ext-lift-65: color-mix(in srgb, var(--ln-ext-neutral-14) 65%, transparent);
+  --ln-ext-lift-70: color-mix(in srgb, var(--ln-ext-neutral-14) 70%, transparent);
+  --ln-ext-lift-80: color-mix(in srgb, var(--ln-ext-neutral-14) 80%, transparent);
+  --ln-ext-lift-85: color-mix(in srgb, var(--ln-ext-neutral-14) 85%, transparent);
+  --ln-ext-lift-90: color-mix(in srgb, var(--ln-ext-neutral-14) 90%, transparent);
 
   /* Each hue's shades are mixed from it, so changing a hue re-tints all of them. */
-  --lr-ext-blue-light: color-mix(in srgb, var(--lr-ext-blue) 80%, #fff);
-  --lr-ext-blue-dark: color-mix(in srgb, var(--lr-ext-blue) 80%, #000);
-  --lr-ext-blue-darker: color-mix(in srgb, var(--lr-ext-blue) 60%, #000);
-  --lr-ext-red-light: color-mix(in srgb, var(--lr-ext-red) 60%, #fff);
-  --lr-ext-red-dark: color-mix(in srgb, var(--lr-ext-red) 80%, #000);
-  --lr-ext-red-darker: color-mix(in srgb, var(--lr-ext-red) 60%, #000);
-  --lr-ext-red-deep: color-mix(in srgb, var(--lr-ext-red) 40%, #000);
-  --lr-ext-orange-light: color-mix(in srgb, var(--lr-ext-orange) 60%, #fff);
-  --lr-ext-orange-dark: color-mix(in srgb, var(--lr-ext-orange) 80%, #000);
-  --lr-ext-orange-darker: color-mix(in srgb, var(--lr-ext-orange) 60%, #000);
-  --lr-ext-orange-deep: color-mix(in srgb, var(--lr-ext-orange) 40%, #000);
-  --lr-ext-yellow-light: color-mix(in srgb, var(--lr-ext-yellow) 60%, #fff);
-  --lr-ext-yellow-dark: color-mix(in srgb, var(--lr-ext-yellow) 80%, #000);
-  --lr-ext-yellow-darker: color-mix(in srgb, var(--lr-ext-yellow) 60%, #000);
-  --lr-ext-yellow-deep: color-mix(in srgb, var(--lr-ext-yellow) 40%, #000);
-  --lr-ext-green-light: color-mix(in srgb, var(--lr-ext-green) 60%, #fff);
-  --lr-ext-green-dark: color-mix(in srgb, var(--lr-ext-green) 80%, #000);
-  --lr-ext-green-darker: color-mix(in srgb, var(--lr-ext-green) 60%, #000);
-  --lr-ext-green-deep: color-mix(in srgb, var(--lr-ext-green) 40%, #000);
-  --lr-ext-cyan-light: color-mix(in srgb, var(--lr-ext-cyan) 60%, #fff);
-  --lr-ext-cyan-dark: color-mix(in srgb, var(--lr-ext-cyan) 80%, #000);
-  --lr-ext-cyan-darker: color-mix(in srgb, var(--lr-ext-cyan) 60%, #000);
-  --lr-ext-cyan-deep: color-mix(in srgb, var(--lr-ext-cyan) 40%, #000);
-  --lr-ext-purple-light: color-mix(in srgb, var(--lr-ext-purple) 60%, #fff);
-  --lr-ext-purple-dark: color-mix(in srgb, var(--lr-ext-purple) 80%, #000);
-  --lr-ext-purple-darker: color-mix(in srgb, var(--lr-ext-purple) 60%, #000);
-  --lr-ext-purple-deep: color-mix(in srgb, var(--lr-ext-purple) 40%, #000);
-  --lr-ext-pink-light: color-mix(in srgb, var(--lr-ext-pink) 60%, #fff);
-  --lr-ext-pink-dark: color-mix(in srgb, var(--lr-ext-pink) 80%, #000);
-  --lr-ext-pink-darker: color-mix(in srgb, var(--lr-ext-pink) 60%, #000);
-  --lr-ext-pink-deep: color-mix(in srgb, var(--lr-ext-pink) 40%, #000);
+  --ln-ext-blue-light: color-mix(in srgb, var(--ln-ext-blue) 80%, #fff);
+  --ln-ext-blue-dark: color-mix(in srgb, var(--ln-ext-blue) 80%, #000);
+  --ln-ext-blue-darker: color-mix(in srgb, var(--ln-ext-blue) 60%, #000);
+  --ln-ext-red-light: color-mix(in srgb, var(--ln-ext-red) 60%, #fff);
+  --ln-ext-red-dark: color-mix(in srgb, var(--ln-ext-red) 80%, #000);
+  --ln-ext-red-darker: color-mix(in srgb, var(--ln-ext-red) 60%, #000);
+  --ln-ext-red-deep: color-mix(in srgb, var(--ln-ext-red) 40%, #000);
+  --ln-ext-orange-light: color-mix(in srgb, var(--ln-ext-orange) 60%, #fff);
+  --ln-ext-orange-dark: color-mix(in srgb, var(--ln-ext-orange) 80%, #000);
+  --ln-ext-orange-darker: color-mix(in srgb, var(--ln-ext-orange) 60%, #000);
+  --ln-ext-orange-deep: color-mix(in srgb, var(--ln-ext-orange) 40%, #000);
+  --ln-ext-yellow-light: color-mix(in srgb, var(--ln-ext-yellow) 60%, #fff);
+  --ln-ext-yellow-dark: color-mix(in srgb, var(--ln-ext-yellow) 80%, #000);
+  --ln-ext-yellow-darker: color-mix(in srgb, var(--ln-ext-yellow) 60%, #000);
+  --ln-ext-yellow-deep: color-mix(in srgb, var(--ln-ext-yellow) 40%, #000);
+  --ln-ext-green-light: color-mix(in srgb, var(--ln-ext-green) 60%, #fff);
+  --ln-ext-green-dark: color-mix(in srgb, var(--ln-ext-green) 80%, #000);
+  --ln-ext-green-darker: color-mix(in srgb, var(--ln-ext-green) 60%, #000);
+  --ln-ext-green-deep: color-mix(in srgb, var(--ln-ext-green) 40%, #000);
+  --ln-ext-cyan-light: color-mix(in srgb, var(--ln-ext-cyan) 60%, #fff);
+  --ln-ext-cyan-dark: color-mix(in srgb, var(--ln-ext-cyan) 80%, #000);
+  --ln-ext-cyan-darker: color-mix(in srgb, var(--ln-ext-cyan) 60%, #000);
+  --ln-ext-cyan-deep: color-mix(in srgb, var(--ln-ext-cyan) 40%, #000);
+  --ln-ext-purple-light: color-mix(in srgb, var(--ln-ext-purple) 60%, #fff);
+  --ln-ext-purple-dark: color-mix(in srgb, var(--ln-ext-purple) 80%, #000);
+  --ln-ext-purple-darker: color-mix(in srgb, var(--ln-ext-purple) 60%, #000);
+  --ln-ext-purple-deep: color-mix(in srgb, var(--ln-ext-purple) 40%, #000);
+  --ln-ext-pink-light: color-mix(in srgb, var(--ln-ext-pink) 60%, #fff);
+  --ln-ext-pink-dark: color-mix(in srgb, var(--ln-ext-pink) 80%, #000);
+  --ln-ext-pink-darker: color-mix(in srgb, var(--ln-ext-pink) 60%, #000);
+  --ln-ext-pink-deep: color-mix(in srgb, var(--ln-ext-pink) 40%, #000);
 }

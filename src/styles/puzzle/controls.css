@@ -1,7 +1,7 @@
 /* ---- Controls --- */
 
 main.puzzle {
-  --lr-ext-jumps-h: 48px;
+  --ln-ext-jumps-h: 48px;
 }
 
 /* Lichess puts the move buttons in a row under the panel, which made the page scroll.
@@ -11,7 +11,7 @@ main.puzzle {
      Filling the cell keeps the buttons' 10px inset equal to the banner's. */
   main.puzzle .puzzle__tools {
     height: auto !important;
-    padding-bottom: calc(var(--lr-ext-jumps-h) + 10px) !important;
+    padding-bottom: calc(var(--ln-ext-jumps-h) + 10px) !important;
   }
 
   main.puzzle .puzzle__controls {
@@ -34,36 +34,36 @@ main.puzzle .puzzle__controls .jumps {
 
 main.puzzle .puzzle__controls .jumps .fbt {
   flex: 1 1 0 !important;
-  height: var(--lr-ext-jumps-h);
+  height: var(--ln-ext-jumps-h);
   border-radius: 8px !important;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-neutral-12) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-neutral-12) !important;
   text-shadow: none !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt:hover:not(.disabled, [disabled]) {
-  background: var(--lr-ext-btn-grey-hover) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt:is(.disabled, [disabled]) {
-  background: linear-gradient(var(--lr-ext-neutral-3), var(--lr-ext-neutral-3)) !important;
-  box-shadow: 0 1px 2px var(--lr-ext-shade-20);
-  color: var(--lr-ext-neutral-9) !important;
+  background: linear-gradient(var(--ln-ext-neutral-3), var(--ln-ext-neutral-3)) !important;
+  box-shadow: 0 1px 2px var(--ln-ext-shade-20);
+  color: var(--ln-ext-neutral-9) !important;
   opacity: 1 !important;
 }
 
 main.puzzle .puzzle__controls .jumps .fbt.glowing {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   box-shadow:
-    var(--lr-ext-btn-grey-shadow),
-    0 0 0 2px var(--lr-ext-accent);
+    var(--ln-ext-btn-grey-shadow),
+    0 0 0 2px var(--ln-ext-accent);
 }
 
 /* ---- Eval bar --- */
 
-/* The eval bar is drawn in board/; its width is --lr-ext-gauge-w from the layout. */
+/* The eval bar is drawn in board/; its width is --ln-ext-gauge-w from the layout. */
 main.puzzle .eval-gauge {
-  margin-left: var(--lr-ext-gap, 0px);
+  margin-left: var(--ln-ext-gap, 0px);
 }

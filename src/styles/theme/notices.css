@@ -8,43 +8,43 @@
   display: none !important;
 }
 
-.lr-ext-toaster {
-  --lr-ext-toaster-w: 360px;
+.ln-ext-toaster {
+  --ln-ext-toaster-w: 360px;
   /* Softer than a menu's: a toast floats over the page, nothing to separate it from. */
-  --lr-ext-toast-bg: color-mix(in srgb, var(--lr-ext-menu-bg) 70%, transparent);
-  --lr-ext-toast-shadow: 0 8px 24px var(--lr-ext-shade-40), 0 2px 6px var(--lr-ext-shade-25);
+  --ln-ext-toast-bg: color-mix(in srgb, var(--ln-ext-menu-bg) 70%, transparent);
+  --ln-ext-toast-shadow: 0 8px 24px var(--ln-ext-shade-40), 0 2px 6px var(--ln-ext-shade-25);
   position: fixed;
   inset-inline-end: 16px;
   bottom: calc(16px + env(safe-area-inset-bottom));
   z-index: 9000;
-  width: var(--lr-ext-toaster-w);
+  width: var(--ln-ext-toaster-w);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 /* On white, the page shows through more, and the shadow is only a haze. */
-:root.light .lr-ext-toaster {
-  --lr-ext-toast-bg: color-mix(in srgb, var(--lr-ext-menu-bg) 62%, transparent);
-  --lr-ext-toast-shadow: 0 6px 20px var(--lr-ext-shade-12), 0 1px 4px var(--lr-ext-shade-8);
+:root.light .ln-ext-toaster {
+  --ln-ext-toast-bg: color-mix(in srgb, var(--ln-ext-menu-bg) 62%, transparent);
+  --ln-ext-toast-shadow: 0 6px 20px var(--ln-ext-shade-12), 0 1px 4px var(--ln-ext-shade-8);
 }
 
 /* Each sits on the stack's bottom edge, as wide as its words need, moved up to its place
  * (content/notices/stack.ts) and scaled from its top, so the ones behind peek out over the front
  * one. */
-.lr-ext-toast {
-  --lr-ext-toast-hue: var(--lr-ext-blue);
+.ln-ext-toast {
+  --ln-ext-toast-hue: var(--ln-ext-blue);
   position: absolute;
   inset-inline: auto 0;
   bottom: 0;
   box-sizing: border-box;
-  width: var(--lr-ext-toast-w, max-content);
-  height: var(--lr-ext-toast-h, auto);
-  border: 1px solid var(--lr-ext-menu-border);
+  width: var(--ln-ext-toast-w, max-content);
+  height: var(--ln-ext-toast-h, auto);
+  border: 1px solid var(--ln-ext-menu-border);
   border-radius: 14px;
-  background: var(--lr-ext-toast-bg);
-  box-shadow: var(--lr-ext-toast-shadow);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-toast-bg);
+  box-shadow: var(--ln-ext-toast-shadow);
+  color: var(--ln-ext-text-strong);
   font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
@@ -54,10 +54,10 @@
   backdrop-filter: blur(20px) saturate(1.6);
   transform-origin: center top;
   transform: translate(
-      var(--lr-ext-swipe-x, 0px),
-      calc(var(--lr-ext-toast-y, 0px) + var(--lr-ext-swipe-y, 0px))
+      var(--ln-ext-swipe-x, 0px),
+      calc(var(--ln-ext-toast-y, 0px) + var(--ln-ext-swipe-y, 0px))
     )
-    scale(var(--lr-ext-toast-scale, 1));
+    scale(var(--ln-ext-toast-scale, 1));
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
@@ -65,20 +65,20 @@
     opacity 0.4s ease !important;
 }
 
-.lr-ext-toast[data-lr-ext-kind='loading'] {
-  --lr-ext-toast-hue: var(--lr-ext-orange);
+.ln-ext-toast[data-ln-ext-kind='loading'] {
+  --ln-ext-toast-hue: var(--ln-ext-orange);
 }
 
-.lr-ext-toast[data-lr-ext-kind='error'] {
-  --lr-ext-toast-hue: var(--lr-ext-red);
+.ln-ext-toast[data-ln-ext-kind='error'] {
+  --ln-ext-toast-hue: var(--ln-ext-red);
 }
 
-.lr-ext-toast[data-lr-ext-kind='success'] {
-  --lr-ext-toast-hue: var(--lr-ext-green);
+.ln-ext-toast[data-ln-ext-kind='success'] {
+  --ln-ext-toast-hue: var(--ln-ext-green);
 }
 
 /* Spread out, the gaps between toasts still count as the stack's, so it doesn't fold back. */
-.lr-ext-toast::after {
+.ln-ext-toast::after {
   content: '';
   position: absolute;
   top: 100%;
@@ -87,36 +87,36 @@
   height: 12px;
 }
 
-.lr-ext-toast:not([data-lr-ext-mounted]) {
+.ln-ext-toast:not([data-ln-ext-mounted]) {
   opacity: 0;
   transform: translateY(100%);
 }
 
-.lr-ext-toast[data-lr-ext-swiping] {
+.ln-ext-toast[data-ln-ext-swiping] {
   transition: opacity 0.4s ease !important;
 }
 
-.lr-ext-toast:is([data-lr-ext-removed], [data-lr-ext-hidden]) {
+.ln-ext-toast:is([data-ln-ext-removed], [data-ln-ext-hidden]) {
   opacity: 0;
   pointer-events: none;
 }
 
-.lr-ext-toast[data-lr-ext-removed] {
+.ln-ext-toast[data-ln-ext-removed] {
   transform: translate(
-      var(--lr-ext-swipe-x, 0px),
-      calc(var(--lr-ext-toast-y, 0px) + var(--lr-ext-swipe-y, 12px))
+      var(--ln-ext-swipe-x, 0px),
+      calc(var(--ln-ext-toast-y, 0px) + var(--ln-ext-swipe-y, 12px))
     )
-    scale(calc(var(--lr-ext-toast-scale, 1) * 0.96));
+    scale(calc(var(--ln-ext-toast-scale, 1) * 0.96));
 }
 
 /* Sized by its content alone, whatever the toast's size: it's what the stack measures. */
-.lr-ext-toast__body {
+.ln-ext-toast__body {
   display: flex;
   align-items: center;
   gap: 10px;
   box-sizing: border-box;
   width: max-content;
-  max-width: var(--lr-ext-toaster-w);
+  max-width: var(--ln-ext-toaster-w);
   min-height: 46px;
   padding-block: 7px;
   padding-inline: 8px 14px;
@@ -124,47 +124,47 @@
 }
 
 /* Collapsed, a toast behind shows only its edge. */
-.lr-ext-toaster:not([data-lr-ext-expanded])
-  .lr-ext-toast:not([data-lr-ext-front])
-  > .lr-ext-toast__body {
+.ln-ext-toaster:not([data-ln-ext-expanded])
+  .ln-ext-toast:not([data-ln-ext-front])
+  > .ln-ext-toast__body {
   opacity: 0;
   pointer-events: none;
 }
 
-.lr-ext-toast__icon {
+.ln-ext-toast__icon {
   display: grid;
   flex: none;
   place-items: center;
   width: 30px;
   height: 30px;
   border-radius: 9px;
-  background: color-mix(in srgb, var(--lr-ext-toast-hue) 18%, transparent);
-  color: var(--lr-ext-toast-hue);
+  background: color-mix(in srgb, var(--ln-ext-toast-hue) 18%, transparent);
+  color: var(--ln-ext-toast-hue);
   font-size: 16px;
-  animation: lr-ext-toast-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: ln-ext-toast-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.lr-ext-toast[data-lr-ext-kind='loading'] .lr-ext-toast__icon .lr-ext-hi {
-  animation: lr-ext-toast-spin 1s linear infinite;
+.ln-ext-toast[data-ln-ext-kind='loading'] .ln-ext-toast__icon .ln-ext-hi {
+  animation: ln-ext-toast-spin 1s linear infinite;
 }
 
-.lr-ext-toast__title {
+.ln-ext-toast__title {
   flex: 1;
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
-.lr-ext-toast__chip {
+.ln-ext-toast__chip {
   flex: none;
   padding: 3px 9px;
   border-radius: 999px;
-  background: var(--lr-ext-lift-8);
-  color: var(--lr-ext-text-dim);
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
 
-.lr-ext-toast__close {
+.ln-ext-toast__close {
   display: grid;
   flex: none;
   place-items: center;
@@ -177,7 +177,7 @@
   border: 0;
   border-radius: 50%;
   background: none;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 14px;
   cursor: pointer;
   transition:
@@ -185,23 +185,23 @@
     color 0.15s ease !important;
 }
 
-.lr-ext-toast__close:hover {
-  background: var(--lr-ext-lift-10);
-  color: var(--lr-ext-text-strong);
+.ln-ext-toast__close:hover {
+  background: var(--ln-ext-lift-10);
+  color: var(--ln-ext-text-strong);
 }
 
-.lr-ext-toast :is(.lr-ext-toast__chip, .lr-ext-toast__close)[hidden] {
+.ln-ext-toast :is(.ln-ext-toast__chip, .ln-ext-toast__close)[hidden] {
   display: none;
 }
 
-@keyframes lr-ext-toast-pop {
+@keyframes ln-ext-toast-pop {
   from {
     opacity: 0;
     transform: scale(0.6);
   }
 }
 
-@keyframes lr-ext-toast-spin {
+@keyframes ln-ext-toast-spin {
   to {
     transform: rotate(1turn);
   }
@@ -209,14 +209,14 @@
 
 /* Tablets and phones: across the screen's bottom, clear of its edges and its home bar. */
 @media (max-width: 1019.98px) {
-  .lr-ext-toaster {
-    --lr-ext-toaster-w: min(420px, 100vw - 24px);
+  .ln-ext-toaster {
+    --ln-ext-toaster-w: min(420px, 100vw - 24px);
     inset-inline: 12px;
     bottom: calc(12px + env(safe-area-inset-bottom));
     width: auto;
   }
 
-  .lr-ext-toast {
+  .ln-ext-toast {
     inset-inline: 0;
     margin-inline: auto;
   }

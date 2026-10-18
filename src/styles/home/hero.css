@@ -3,7 +3,7 @@
 /* Our hero card (content/pages/home-hero.ts), the start buttons and counters of Lichess's
    .lobby__table laid over its bottom. */
 
-.lr-ext-hero {
+.ln-ext-hero {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
@@ -14,23 +14,23 @@
   border-radius: 18px;
   /* A card like the others (the accent is for buttons and badges), glowing behind the coach. */
   background:
-    radial-gradient(circle at 88% 18%, var(--lr-ext-lift-10), transparent 52%),
-    radial-gradient(circle at 10% 110%, var(--lr-ext-lift-3), transparent 45%),
+    radial-gradient(circle at 88% 18%, var(--ln-ext-lift-10), transparent 52%),
+    radial-gradient(circle at 10% 110%, var(--ln-ext-lift-3), transparent 45%),
     linear-gradient(
       135deg,
-      var(--lr-ext-neutral-4) 0%,
-      var(--lr-ext-neutral-2) 50%,
-      var(--lr-ext-neutral-1) 100%
+      var(--ln-ext-neutral-4) 0%,
+      var(--ln-ext-neutral-2) 50%,
+      var(--ln-ext-neutral-1) 100%
     );
   box-shadow:
-    inset 0 1px 0 var(--lr-ext-lift-7),
-    0 12px 32px var(--lr-ext-shade-25);
+    inset 0 1px 0 var(--ln-ext-lift-7),
+    0 12px 32px var(--ln-ext-shade-25);
 }
 
 /* The user's coach, big and whole, as the hero illustration (content/pages/hero-coach.ts).
    The live one makes an entrance, so the corner stays empty until it's in: its still (the
    number set by content/bootstrap/coach-choice.ts) shows only if it can't load. */
-.lr-ext-hero__coach {
+.ln-ext-hero__coach {
   position: absolute;
   top: 4px;
   right: 24px;
@@ -44,93 +44,93 @@
   pointer-events: none;
 }
 
-html[data-lr-ext-coach='1'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='1'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
 }
-html[data-lr-ext-coach='2'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='2'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
 }
-html[data-lr-ext-coach='3'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='3'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
 }
-html[data-lr-ext-coach='4'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='4'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
 }
-html[data-lr-ext-coach='5'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='5'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
 }
-html[data-lr-ext-coach='6'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='6'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
 }
-html[data-lr-ext-coach='7'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='7'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
 }
-html[data-lr-ext-coach='8'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='8'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
 }
-html[data-lr-ext-coach='9'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='9'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
 }
-html[data-lr-ext-coach='10'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='10'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
 }
-html[data-lr-ext-coach='11'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='11'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
 }
-html[data-lr-ext-coach='12'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='12'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
 }
-html[data-lr-ext-coach='13'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='13'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
 }
-html[data-lr-ext-coach='14'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='14'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
 }
-html[data-lr-ext-coach='15'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='15'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
 }
-html[data-lr-ext-coach='16'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='16'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
 }
-html[data-lr-ext-coach='17'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='17'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
 }
-html[data-lr-ext-coach='18'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='18'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
 }
-html[data-lr-ext-coach='19'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='19'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
 }
-html[data-lr-ext-coach='20'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='20'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
 }
-html[data-lr-ext-coach='21'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='21'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
 }
-html[data-lr-ext-coach='22'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='22'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
 }
-html[data-lr-ext-coach='23'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='23'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
 }
-html[data-lr-ext-coach='24'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='24'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
 }
-html[data-lr-ext-coach='25'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='25'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
 }
-html[data-lr-ext-coach='26'] .lr-ext-hero__coach--still {
+html[data-ln-ext-coach='26'] .ln-ext-hero__coach--still {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
 }
 
 /* Live, its canvas spills past the sides so arms and tails show, and a click makes it react. */
-.lr-ext-hero__coach--live {
+.ln-ext-hero__coach--live {
   pointer-events: auto;
   cursor: pointer;
 }
 
 /* Only the coach's own box takes the click, not the canvas's clear sides over the title. */
-.lr-ext-hero__coach canvas {
+.ln-ext-hero__coach canvas {
   position: absolute;
   top: 0;
   left: -30%;
@@ -140,62 +140,62 @@ html[data-lr-ext-coach='26'] .lr-ext-hero__coach--still {
 }
 
 /* Right to left, the coach and its glow move to the other corner, clear of the text. */
-html[dir='rtl'] .lr-ext-hero {
+html[dir='rtl'] .ln-ext-hero {
   background:
-    radial-gradient(circle at 12% 18%, var(--lr-ext-lift-10), transparent 52%),
-    radial-gradient(circle at 90% 110%, var(--lr-ext-lift-3), transparent 45%),
+    radial-gradient(circle at 12% 18%, var(--ln-ext-lift-10), transparent 52%),
+    radial-gradient(circle at 90% 110%, var(--ln-ext-lift-3), transparent 45%),
     linear-gradient(
       225deg,
-      var(--lr-ext-neutral-4) 0%,
-      var(--lr-ext-neutral-2) 50%,
-      var(--lr-ext-neutral-1) 100%
+      var(--ln-ext-neutral-4) 0%,
+      var(--ln-ext-neutral-2) 50%,
+      var(--ln-ext-neutral-1) 100%
     );
 }
 
-html[dir='rtl'] .lr-ext-hero__coach {
+html[dir='rtl'] .ln-ext-hero__coach {
   right: auto;
   left: 24px;
 }
 
-.lr-ext-hero__eyebrow {
+.ln-ext-hero__eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin: 0 0 16px;
   padding: 5px 12px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
-  color: var(--lr-ext-accent-hover);
+  background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent);
+  color: var(--ln-ext-accent-hover);
   font-size: 13px;
   font-weight: 800;
 }
 
-.lr-ext-hero__eyebrow::before {
+.ln-ext-hero__eyebrow::before {
   content: '';
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--lr-ext-accent-hover);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
+  background: var(--ln-ext-accent-hover);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ln-ext-accent) 20%, transparent);
 }
 
 /* A signed-in title holds the username (up to 20 letters): it breaks rather than run
    under the coach. */
-.lr-ext-hero__title {
+.ln-ext-hero__title {
   max-width: 62%;
   margin: 0 0 14px;
   overflow-wrap: anywhere;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: clamp(34px, 3.4vw, 50px);
   font-weight: 800 !important;
   line-height: 1.04;
   letter-spacing: -0.03em !important;
 }
 
-.lr-ext-hero__sub {
+.ln-ext-hero__sub {
   max-width: 55%;
   margin: 0;
-  color: var(--lr-ext-neutral-12);
+  color: var(--ln-ext-neutral-12);
   font-size: 17px;
   line-height: 1.45;
 }
@@ -243,7 +243,7 @@ main.lobby .lobby__start__button::before {
 /* Below 1260px the labels wrapped to four or five lines in French or German: smaller
    type, icons and gutters keep them to three. */
 @media (min-width: 1020px) and (max-width: 1259.29px) {
-  .lr-ext-hero {
+  .ln-ext-hero {
     padding-inline: 28px;
   }
 
@@ -296,7 +296,7 @@ main.lobby .lobby__counters a {
   align-items: center;
   gap: 8px;
   overflow: visible !important; /* Lichess clips it, cutting the dot's ring */
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 14px;
 }
 
@@ -305,11 +305,11 @@ main.lobby .lobby__counters a::before {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--lr-ext-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
+  background: var(--ln-ext-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ln-ext-accent) 20%, transparent);
 }
 
 main.lobby .lobby__counters strong {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 800;
 }

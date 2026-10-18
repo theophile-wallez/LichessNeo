@@ -39,7 +39,7 @@ export function hideTip(session: Session): void {
   session.tipFor = null;
 }
 
-/** What a tooltip says and points at, when it's not its target's `data-lr-ext-tip` and box. */
+/** What a tooltip says and points at, when it's not its target's `data-ln-ext-tip` and box. */
 export interface TipContent {
   readonly text: string;
   readonly anchor: TipInput['anchor'];
@@ -48,7 +48,7 @@ export interface TipContent {
 export function showTip(session: Session, target: HTMLElement, content?: TipContent): void {
   const { tip } = session.elements;
   session.tipFor = target;
-  tip.textContent = content?.text ?? target.dataset.lrExtTip ?? '';
+  tip.textContent = content?.text ?? target.dataset.lnExtTip ?? '';
   document.body.append(tip);
   const { left, top, tail, below } = tipPlacement({
     anchor: content?.anchor ?? target.getBoundingClientRect(),
@@ -58,18 +58,18 @@ export function showTip(session: Session, target: HTMLElement, content?: TipCont
   });
   setStyleProperty(tip, 'left', `${left}px`);
   setStyleProperty(tip, 'top', `${top}px`);
-  setStyleProperty(tip, '--lr-ext-tip-x', `${tail}px`);
-  setData(tip, 'lrExtBelow', below ? '' : null);
+  setStyleProperty(tip, '--ln-ext-tip-x', `${tail}px`);
+  setData(tip, 'lnExtBelow', below ? '' : null);
 }
 
 export function watchTips(session: Session): void {
   const { panel } = session.elements;
   panel.addEventListener('pointerover', event => {
-    const target = closestTo(event.target, '[data-lr-ext-tip]', HTMLElement);
+    const target = closestTo(event.target, '[data-ln-ext-tip]', HTMLElement);
     if (target) showTip(session, target);
   });
   panel.addEventListener('pointerout', event => {
-    const target = closestTo(event.target, '[data-lr-ext-tip]', HTMLElement);
+    const target = closestTo(event.target, '[data-ln-ext-tip]', HTMLElement);
     const into = event.relatedTarget instanceof Node ? event.relatedTarget : null;
     if (target && !target.contains(into)) hideTip(session);
   });

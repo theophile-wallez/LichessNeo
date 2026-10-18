@@ -24,9 +24,9 @@ async function savePref(field: string, id: string): Promise<void> {
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
       body: new URLSearchParams({ [field]: id }),
     });
-    if (!response.ok) console.warn(`[LichessReimagined] ${field} unsaved`, response.status);
+    if (!response.ok) console.warn(`[LichessNeo] ${field} unsaved`, response.status);
   } catch (error) {
-    console.warn(`[LichessReimagined] ${field} unsaved`, error);
+    console.warn(`[LichessNeo] ${field} unsaved`, error);
   }
 }
 

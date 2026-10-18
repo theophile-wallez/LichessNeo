@@ -5,7 +5,7 @@
  * each for solved or missed, and a heading over each day. The box is bare, as the dashboard's:
  * the cards are the panels. */
 
-main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__content.box {
+main.page-menu[data-ln-ext-nav-active$='/training/history'] > .page-menu__content.box {
   /* `overflow: visible` loses a scroller's zero min-width: set it back so the box can shrink. */
   min-width: 0;
   padding: 0 !important;
@@ -15,12 +15,12 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
 
 /* Lichess's phone layout puts the box against the screen's edges: its padding was the room. */
 @media (max-width: 800px) {
-  main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__content.box {
+  main.page-menu[data-ln-ext-nav-active$='/training/history'] > .page-menu__content.box {
     padding-inline: 12px !important;
   }
 }
 
-main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__content > .box__top {
+main.page-menu[data-ln-ext-nav-active$='/training/history'] > .page-menu__content > .box__top {
   margin: 0 0 18px !important;
   padding: 14px 0 0 !important;
   border: none !important;
@@ -33,9 +33,9 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
 .puzzle-history .puzzle-history__session {
   margin: 0 0 12px !important;
   padding: 14px 16px 16px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 14px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
 }
 
 /* Its tile, its name over its time, and its score (content/…/history/sessions.ts) on the right. */
@@ -58,7 +58,7 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
   height: 36px;
   border-radius: 10px;
   /* The glyph at full strength over the tile at a quarter, as the menus' tiles. */
-  background: var(--lr-ext-green);
+  background: var(--ln-ext-green);
   mask:
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle.svg') center / 20px 20px
       no-repeat,
@@ -68,7 +68,7 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
 .puzzle-history .puzzle-history__session__title strong {
   grid-area: name;
   overflow: hidden;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 700;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -76,19 +76,19 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
 
 .puzzle-history .puzzle-history__session__title time {
   grid-area: time;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 500;
 }
 
-.lr-ext-phist__score {
+.ln-ext-phist__score {
   grid-area: score;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.lr-ext-phist__dots {
+.ln-ext-phist__dots {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -96,38 +96,38 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
   max-width: 130px;
 }
 
-.lr-ext-phist__dots > i {
+.ln-ext-phist__dots > i {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--lr-ext-red);
+  background: var(--ln-ext-red);
 }
 
 /* Dimmed: a bright green on the dark panel looks bigger than the red beside it. */
-.lr-ext-phist__dots > i[data-lr-ext-solved] {
-  background: color-mix(in srgb, var(--lr-ext-green) 70%, transparent);
+.ln-ext-phist__dots > i[data-ln-ext-solved] {
+  background: color-mix(in srgb, var(--ln-ext-green) 70%, transparent);
 }
 
-.lr-ext-phist__score b {
+.ln-ext-phist__score b {
   padding: 3px 10px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-phist-tone) 14%, transparent);
-  color: var(--lr-ext-phist-tone);
+  background: color-mix(in srgb, var(--ln-ext-phist-tone) 14%, transparent);
+  color: var(--ln-ext-phist-tone);
   font-size: 13px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-:is(.lr-ext-phist__hero, .lr-ext-phist__score)[data-lr-ext-tier='up'] {
-  --lr-ext-phist-tone: var(--lr-ext-green);
+:is(.ln-ext-phist__hero, .ln-ext-phist__score)[data-ln-ext-tier='up'] {
+  --ln-ext-phist-tone: var(--ln-ext-green);
 }
 
-:is(.lr-ext-phist__hero, .lr-ext-phist__score)[data-lr-ext-tier='even'] {
-  --lr-ext-phist-tone: var(--lr-ext-orange);
+:is(.ln-ext-phist__hero, .ln-ext-phist__score)[data-ln-ext-tier='even'] {
+  --ln-ext-phist-tone: var(--ln-ext-orange);
 }
 
-:is(.lr-ext-phist__hero, .lr-ext-phist__score)[data-lr-ext-tier='down'] {
-  --lr-ext-phist-tone: var(--lr-ext-red);
+:is(.ln-ext-phist__hero, .ln-ext-phist__score)[data-ln-ext-tier='down'] {
+  --ln-ext-phist-tone: var(--ln-ext-red);
 }
 
 /* ---- Its boards --- */
@@ -152,7 +152,7 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
 }
 
 .puzzle-history .puzzle-history__round:hover {
-  box-shadow: 0 8px 18px var(--lr-ext-shade-40);
+  box-shadow: 0 8px 18px var(--ln-ext-shade-40);
   transform: translateY(-3px);
 }
 
@@ -175,15 +175,15 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
   right: -6px;
   width: 24px;
   height: 24px;
-  border: 2px solid var(--lr-ext-bg-panel);
+  border: 2px solid var(--ln-ext-bg-panel);
   border-radius: 50%;
-  background: var(--lr-ext-red)
+  background: var(--ln-ext-red)
     url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01--ffffff.svg') center /
     14px no-repeat;
 }
 
 .puzzle-history .puzzle-history__round.good::after {
-  background-color: var(--lr-ext-green);
+  background-color: var(--ln-ext-green);
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02--0c0c0d.svg');
 }
 
@@ -205,9 +205,9 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
 
 /* ---- The days --- */
 
-.lr-ext-phist__day {
+.ln-ext-phist__day {
   margin: 24px 0 10px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -219,27 +219,27 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
 /* Only the sessions scroll: the menu stays put and the title stays pinned. Desktop only: below
  * 1020px Lichess's top bar holds the top edge. */
 @media (min-width: 1020px) {
-  main.page-menu[data-lr-ext-nav-active$='/training/history'] .page-menu__menu {
+  main.page-menu[data-ln-ext-nav-active$='/training/history'] .page-menu__menu {
     position: sticky;
     top: 16px;
-    max-height: calc(var(--lr-ext-main-h, 100dvh) - 32px);
+    max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
     overflow-y: auto;
     scrollbar-width: thin;
   }
 
-  main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__content > .box__top {
+  main.page-menu[data-ln-ext-nav-active$='/training/history'] > .page-menu__content > .box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 3;
     top: 0;
     padding-bottom: 12px !important;
     margin-bottom: 6px !important;
-    background: var(--lr-ext-bg-page);
-    box-shadow: var(--lr-ext-pin-cover);
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
   }
 
   /* Once stuck, a fade under it, over the cards passing beneath. */
-  main.page-menu[data-lr-ext-nav-active$='/training/history']
+  main.page-menu[data-ln-ext-nav-active$='/training/history']
     > .page-menu__content
     > .box__top::after {
     content: '';
@@ -247,14 +247,14 @@ main.page-menu[data-lr-ext-nav-active$='/training/history'] > .page-menu__conten
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
   }
 
   @container scroll-state(stuck: top) {
-    main.page-menu[data-lr-ext-nav-active$='/training/history']
+    main.page-menu[data-ln-ext-nav-active$='/training/history']
       > .page-menu__content
       > .box__top::after {
       opacity: 1;

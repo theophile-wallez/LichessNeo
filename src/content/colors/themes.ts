@@ -1,5 +1,5 @@
 import { z } from 'zod/mini';
-import { BUILT_IN_THEMES, REIMAGINED } from './built-in.ts';
+import { BUILT_IN_THEMES, NEO } from './built-in.ts';
 
 // The color themes: each a palette for Lichess's light scheme and one for its
 // dark scheme, picked apart. A palette is what styles/theme/palette.css builds
@@ -48,7 +48,7 @@ export type ColorTheme = BuiltInTheme | CustomTheme;
 
 export const isCustom = (theme: ColorTheme): theme is CustomTheme => 'name' in theme;
 
-export const DEFAULT_THEME = REIMAGINED.id;
+export const DEFAULT_THEME = NEO.id;
 
 /** Every theme to pick from: the built-in ones, then the user's. */
 export const allThemes = (custom: readonly CustomTheme[]): readonly ColorTheme[] => [
@@ -58,7 +58,7 @@ export const allThemes = (custom: readonly CustomTheme[]): readonly ColorTheme[]
 
 /** The theme of this id, or the default for an unknown one (a theme since removed). */
 export function themeById(id: string, custom: readonly CustomTheme[]): ColorTheme {
-  return allThemes(custom).find(theme => theme.id === id) ?? REIMAGINED;
+  return allThemes(custom).find(theme => theme.id === id) ?? NEO;
 }
 
 export const ThemePicksSchema = z.object({ light: z.string(), dark: z.string() });

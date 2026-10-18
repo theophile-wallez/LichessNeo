@@ -2,7 +2,7 @@
 
 /* The others' on the left, the player's on the right in the accent, as on a phone. A run
  * of one author's lines shares the name, shown over its first, and the tail, on its last
- * (page/chat marks `data-lr-ext-mine`, `-follows`, `-followed`). */
+ * (page/chat marks `data-ln-ext-mine`, `-follows`, `-followed`). */
 .mchat .mchat__messages {
   padding: 6px 12px 4px !important;
   font-size: 13px !important;
@@ -20,18 +20,18 @@
   line-height: 1.35;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-follows] {
+.mchat .mchat__messages > li[data-ln-ext-follows] {
   margin-top: 2px;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine] {
+.mchat .mchat__messages > li[data-ln-ext-mine] {
   align-items: flex-end;
 }
 
 .mchat .mchat__messages > li > :is(.user-link, .color) {
   margin: 0 0 3px 12px;
   padding: 0 !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0 !important;
@@ -39,7 +39,7 @@
 
 .mchat
   .mchat__messages
-  > li:is([data-lr-ext-mine], [data-lr-ext-follows])
+  > li:is([data-ln-ext-mine], [data-ln-ext-follows])
   > :is(.user-link, .color) {
   display: none !important;
 }
@@ -49,53 +49,53 @@
   max-width: 82%;
   padding: 6px 11px;
   border-radius: 17px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-strong);
   overflow-wrap: anywhere;
   user-select: text;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine] > t {
-  background: var(--lr-ext-accent);
-  color: var(--lr-ext-white);
+.mchat .mchat__messages > li[data-ln-ext-mine] > t {
+  background: var(--ln-ext-accent);
+  color: var(--ln-ext-white);
 }
 
 .mchat .mchat__messages > li.mentioned > t {
-  box-shadow: inset 0 0 0 1.5px var(--lr-ext-accent);
+  box-shadow: inset 0 0 0 1.5px var(--ln-ext-accent);
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine] > t a {
+.mchat .mchat__messages > li[data-ln-ext-mine] > t a {
   color: inherit !important;
   text-decoration: underline;
 }
 
 /* Inside a run, the corners on the run's side tighten. */
-.mchat .mchat__messages > li:not(.system, [data-lr-ext-mine])[data-lr-ext-follows] > t {
+.mchat .mchat__messages > li:not(.system, [data-ln-ext-mine])[data-ln-ext-follows] > t {
   border-top-left-radius: 5px;
 }
 
-.mchat .mchat__messages > li:not(.system, [data-lr-ext-mine])[data-lr-ext-followed] > t {
+.mchat .mchat__messages > li:not(.system, [data-ln-ext-mine])[data-ln-ext-followed] > t {
   border-bottom-left-radius: 5px;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine][data-lr-ext-follows] > t {
+.mchat .mchat__messages > li[data-ln-ext-mine][data-ln-ext-follows] > t {
   border-top-right-radius: 5px;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine][data-lr-ext-followed] > t {
+.mchat .mchat__messages > li[data-ln-ext-mine][data-ln-ext-followed] > t {
   border-bottom-right-radius: 5px;
 }
 
 /* The tail on a run's last bubble: a curl off its bottom corner, which tightens to meet it. */
-.mchat .mchat__messages > li:not(.system, [data-lr-ext-mine], [data-lr-ext-followed]) > t {
+.mchat .mchat__messages > li:not(.system, [data-ln-ext-mine], [data-ln-ext-followed]) > t {
   border-bottom-left-radius: 4px;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine]:not([data-lr-ext-followed]) > t {
+.mchat .mchat__messages > li[data-ln-ext-mine]:not([data-ln-ext-followed]) > t {
   border-bottom-right-radius: 4px;
 }
 
-.mchat .mchat__messages > li:not(.system, [data-lr-ext-followed]) > t::before {
+.mchat .mchat__messages > li:not(.system, [data-ln-ext-followed]) > t::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -106,7 +106,7 @@
   mask: radial-gradient(ellipse 100% 100% at 0 0, #0000 98%, #000);
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine]:not([data-lr-ext-followed]) > t::before {
+.mchat .mchat__messages > li[data-ln-ext-mine]:not([data-ln-ext-followed]) > t::before {
   right: -9px;
   left: auto;
   mask: radial-gradient(ellipse 100% 100% at 100% 0, #0000 98%, #000);
@@ -141,11 +141,11 @@
 }
 
 /* Yours on the right: the buttons on the bubble's left. */
-.mchat .mchat__messages > li[data-lr-ext-mine] {
+.mchat .mchat__messages > li[data-ln-ext-mine] {
   grid-template-columns: minmax(0, 1fr) auto auto fit-content(82%);
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine] > t {
+.mchat .mchat__messages > li[data-ln-ext-mine] > t {
   grid-area: 2 / 4;
   justify-self: end;
 }
@@ -157,7 +157,7 @@
   height: 26px;
   margin: 0 0 0 4px;
   border-radius: 7px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 14px;
   line-height: 26px;
   text-align: center;
@@ -167,7 +167,7 @@
     color 0.15s !important;
 }
 
-.mchat .mchat__messages > li[data-lr-ext-mine] > action {
+.mchat .mchat__messages > li[data-ln-ext-mine] > action {
   margin: 0 4px 0 0;
 }
 
@@ -183,19 +183,19 @@
 }
 
 .mchat .mchat__messages > li > action:hover {
-  background: var(--lr-ext-lift-8);
-  color: var(--lr-ext-text);
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text);
 }
 
 .mchat .mchat__messages > li > action.flag:hover {
-  color: var(--lr-ext-bad);
+  color: var(--ln-ext-bad);
 }
 
 /* The chat's own notices (welcome, rules) read as small centered captions. */
 .mchat .mchat__messages > li.system {
   align-items: center;
   margin: 12px 0 4px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 11.5px;
   font-style: normal;
   opacity: 1;

@@ -7,9 +7,9 @@ main.round .mchat {
   min-height: 0 !important;
   margin: 0 !important;
   overflow: hidden;
-  border-top: 1px solid var(--lr-ext-border);
+  border-top: 1px solid var(--ln-ext-border);
   border-radius: 0 0 6px 6px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
@@ -28,13 +28,13 @@ main.round .mchat__messages {
   /* The page never scrolls: what Lichess puts beside the board (game info) is hidden, the
    * crosstable joins the moves (moves-extras.css), and the keyboard-move input sits over the
    * chat. */
-  html[data-lr-ext-has~='round'],
-  html[data-lr-ext-has~='round'] body,
-  html[data-lr-ext-has~='round'] #main-wrap {
+  html[data-ln-ext-has~='round'],
+  html[data-ln-ext-has~='round'] body,
+  html[data-ln-ext-has~='round'] #main-wrap {
     overflow: hidden !important;
   }
 
-  html[data-lr-ext-has~='round'] body {
+  html[data-ln-ext-has~='round'] body {
     height: 100dvh;
     margin: 0 !important;
     padding: 0 !important;
@@ -50,27 +50,27 @@ main.round .mchat__messages {
     z-index: 3;
     margin: 0 !important;
     padding: 6px 8px;
-    background: var(--lr-ext-bg-panel);
+    background: var(--ln-ext-bg-panel);
   }
 
   /* No chat (TV, games against the computer): the game info takes its place, as tall as
    * it needs, and the moves the rest. Hence a definite grid height for their `1fr`. */
-  html:not([data-lr-ext-has~='round-chat']) main.round {
-    height: calc(var(--lr-ext-bar) + var(--lr-ext-board) + var(--lr-ext-bar-bot));
+  html:not([data-ln-ext-has~='round-chat']) main.round {
+    height: calc(var(--ln-ext-bar) + var(--ln-ext-board) + var(--ln-ext-bar-bot));
     grid-template-rows:
-      var(--lr-ext-bar)
+      var(--ln-ext-bar)
       minmax(0, 1fr)
-      var(--lr-ext-ctrl-h)
+      var(--ln-ext-ctrl-h)
       auto
-      var(--lr-ext-bar-bot) !important;
+      var(--ln-ext-bar-bot) !important;
   }
 
-  html:not([data-lr-ext-has~='round-chat']) main.round .round__side > .game__meta {
+  html:not([data-ln-ext-has~='round-chat']) main.round .round__side > .game__meta {
     display: block !important;
     grid-area: chat !important;
-    max-height: var(--lr-ext-chat-h);
+    max-height: var(--ln-ext-chat-h);
     margin: 0 !important;
-    border-top: 1px solid var(--lr-ext-border);
+    border-top: 1px solid var(--ln-ext-border);
     border-radius: 0 0 6px 6px;
     overflow-y: auto;
   }

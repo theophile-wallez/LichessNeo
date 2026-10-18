@@ -35,19 +35,19 @@ const isRematchOffer = (found: ChatEvent | null): boolean =>
 // Only the latest offer can be the pending one. Once known, whose it is stays on the line:
 // the button forgets once the offer is answered.
 function offererOf(line: HTMLElement, latestOffer: boolean): Offerer | null {
-  const kept = line.dataset['lrExtOfferer'];
+  const kept = line.dataset['lnExtOfferer'];
   if (kept === 'me' || kept === 'opponent') return kept;
   const pending = latestOffer ? pendingRematch() : null;
-  setData(line, 'lrExtOfferer', pending);
+  setData(line, 'lnExtOfferer', pending);
   return pending;
 }
 
 function markEvent(line: HTMLElement, found: ChatEvent | null, latestOffer: boolean): void {
   const text = line.querySelector(':scope > t')?.textContent.trim() ?? '';
   const offerer = isRematchOffer(found) ? offererOf(line, latestOffer) : null;
-  setData(line, 'lrExtTopic', found?.topic ?? null);
-  setData(line, 'lrExtTone', found?.tone ?? null);
-  setData(line, 'lrExtLabel', found ? translate(eventKey(found, offerer) ?? '', text) : null);
+  setData(line, 'lnExtTopic', found?.topic ?? null);
+  setData(line, 'lnExtTone', found?.tone ?? null);
+  setData(line, 'lnExtLabel', found ? translate(eventKey(found, offerer) ?? '', text) : null);
 }
 
 const eventOf = (line: HTMLElement): ChatEvent | null =>
@@ -64,9 +64,9 @@ function markLines(chat: HTMLElement): void {
   const latestOffer = events.findLastIndex(isRematchOffer);
   for (const [i, line] of lines.entries()) {
     const author = authors[i] ?? null;
-    setData(line, 'lrExtMine', isMine(line, author) ? '' : null);
-    setData(line, 'lrExtFollows', author !== null && authors[i - 1] === author ? '' : null);
-    setData(line, 'lrExtFollowed', author !== null && authors[i + 1] === author ? '' : null);
+    setData(line, 'lnExtMine', isMine(line, author) ? '' : null);
+    setData(line, 'lnExtFollows', author !== null && authors[i - 1] === author ? '' : null);
+    setData(line, 'lnExtFollowed', author !== null && authors[i + 1] === author ? '' : null);
     markEvent(line, events[i] ?? null, i === latestOffer);
   }
 }

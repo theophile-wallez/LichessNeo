@@ -3,45 +3,45 @@
 /* The side menu these pages share with the rating stats, bots and FIDE players: each link's
  * icon and color (the tiles are in pages/). */
 .subnav a[href$='/player'],
-main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active$='/player'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+main.page-menu[data-ln-ext-menu~='bots'][data-ln-ext-nav-active$='/player'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
 .subnav a[href*='/stat/rating/distribution'],
-main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active*='/stat/rating/distribution'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+main.page-menu[data-ln-ext-menu~='bots'][data-ln-ext-nav-active*='/stat/rating/distribution'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-histogram.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
 .subnav a[href$='/tournament/leaderboard'],
-main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active$='/tournament/leaderboard'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-orange);
+main.page-menu[data-ln-ext-menu~='bots'][data-ln-ext-nav-active$='/tournament/leaderboard'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/award-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
 .subnav a[href$='/tournament/shields'],
-main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active$='/tournament/shields'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-accent);
+main.page-menu[data-ln-ext-menu~='bots'][data-ln-ext-nav-active$='/tournament/shields'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shield-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
 .subnav a[href$='/player/bots'],
-main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active$='/player/bots'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
-  --lr-ext-nav-color: var(--lr-ext-purple);
+main.page-menu[data-ln-ext-menu~='bots'][data-ln-ext-nav-active$='/player/bots'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
-.subnav[data-lr-ext-nav~='bots'] a[href*='/fide'],
-main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active*='/fide'] {
-  --lr-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
-  --lr-ext-nav-color: var(--lr-ext-cyan);
+.subnav[data-ln-ext-nav~='bots'] a[href*='/fide'],
+main.page-menu[data-ln-ext-menu~='bots'][data-ln-ext-nav-active*='/fide'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/globe-02.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
 /* Desktop only (Lichess's fixed top bar would cover them): the menu and the leaderboard's title
  * stay put; the title's shadow shows once stuck. */
 @media (min-width: 1020px) {
-  main.page-menu > .subnav[data-lr-ext-nav~='bots'] {
+  main.page-menu > .subnav[data-ln-ext-nav~='bots'] {
     position: sticky;
     top: 16px;
     align-self: start;
@@ -55,11 +55,11 @@ main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active*='/fide'] {
     /* Into the box's top padding, so it sticks where it stands. */
     margin: -16px 0 8px !important;
     padding: 16px 0 10px;
-    background: var(--lr-ext-bg-page);
+    background: var(--ln-ext-bg-page);
     box-shadow:
-      var(--lr-ext-pin-cover-wide),
-      -12px 0 var(--lr-ext-bg-page),
-      12px 0 var(--lr-ext-bg-page);
+      var(--ln-ext-pin-cover-wide),
+      -12px 0 var(--ln-ext-bg-page),
+      12px 0 var(--ln-ext-bg-page);
   }
 
   .community__leaders > h2::after {
@@ -68,7 +68,7 @@ main.page-menu[data-lr-ext-menu~='bots'][data-lr-ext-nav-active*='/fide'] {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

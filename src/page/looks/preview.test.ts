@@ -16,7 +16,7 @@ let calls: PlayerCall[];
 let host: HTMLElement;
 
 function addHost(): HTMLElement {
-  const added = createElement('div', { className: 'lr-ext-looks-preview__board' });
+  const added = createElement('div', { className: 'ln-ext-looks-preview__board' });
   document.body.append(added);
   return added;
 }

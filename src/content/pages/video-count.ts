@@ -9,7 +9,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // (styles/pages/videos.css). The count is the intro's only number, whatever
 // its language; without one, the intro stays.
 
-const PILL = 'lr-ext-video-count';
+const PILL = 'ln-ext-video-count';
 
 /** The one number in Lichess's intro, its digits run together ("1,547" is 1547). */
 export function videoCount(intro: string): number | null {
@@ -34,7 +34,7 @@ export function syncVideoCount(): void {
     new Intl.NumberFormat(document.documentElement.lang || undefined).format(count),
   );
   title.after(createElement('span', { className: PILL, text }));
-  setData(intro, 'lrExtCounted', '');
+  setData(intro, 'lnExtCounted', '');
 }
 
 export const videoCountPill: Feature = {

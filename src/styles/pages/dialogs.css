@@ -3,17 +3,17 @@
 /* Modals: blurred backdrop, rounded card, close button inside the corner. */
 dialog::backdrop,
 .snab-modal-mask {
-  background: var(--lr-ext-shade-45) !important;
+  background: var(--ln-ext-shade-45) !important;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
 dialog {
-  border: 1px solid var(--lr-ext-lift-8) !important;
+  border: 1px solid var(--ln-ext-lift-8) !important;
   border-radius: 12px !important;
-  background: var(--lr-ext-bg-panel) !important;
-  box-shadow: 0 24px 64px var(--lr-ext-shade-60) !important;
-  animation: lr-ext-dialog-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  background: var(--ln-ext-bg-panel) !important;
+  box-shadow: 0 24px 64px var(--ln-ext-shade-60) !important;
+  animation: ln-ext-dialog-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Lichess moves dialogs 16px down to fit its close button above them. Ours is inside,
@@ -24,7 +24,7 @@ dialog:not(.touch-scroll) {
 
 /* A rise, not a zoom: `scale` grows from a dialog's untranslated center, so the ones
  * Lichess centers with `translate(-50%, -50%)` came in from the right. */
-@keyframes lr-ext-dialog-in {
+@keyframes ln-ext-dialog-in {
   from {
     opacity: 0;
     translate: 0 24px;
@@ -39,7 +39,7 @@ dialog:not(.touch-scroll) button.close-button {
   border-radius: 6px !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   transform: none !important;
 }
 
@@ -49,8 +49,8 @@ html[dir='rtl'] dialog:not(.touch-scroll) button.close-button {
 }
 
 dialog:not(.touch-scroll) button.close-button:hover {
-  background: var(--lr-ext-lift-8) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-8) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* The dialog frame is enough: no second border on alerts. */
@@ -71,7 +71,7 @@ dialog .dialog-content.alert {
   max-width: 100%;
   gap: 20px !important;
   padding: 24px !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 15px !important;
   line-height: 1.5;
 }
@@ -82,7 +82,7 @@ dialog .dialog-content.alert::before {
   height: 44px;
   margin-bottom: -4px;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--lr-ext-accent) 16%, transparent);
+  background: color-mix(in srgb, var(--ln-ext-accent) 16%, transparent);
 }
 
 dialog .dialog-content.alert::after {
@@ -92,7 +92,7 @@ dialog .dialog-content.alert::after {
   left: 35px;
   width: 22px;
   height: 22px;
-  background: var(--lr-ext-accent);
+  background: var(--ln-ext-accent);
   mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alert-circle.svg') center /
     contain no-repeat;
 }
@@ -123,7 +123,7 @@ dialog .dialog-content.alert input {
 }
 
 dialog .dialog-content > h2 {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 24px !important;
   font-weight: 800 !important;
 }
@@ -132,9 +132,9 @@ dialog .dialog-content > h2 {
 dialog .help th p {
   margin: 1.2em 0 0.4em !important;
   padding: 12px 0 0 !important;
-  border-top: 1px solid var(--lr-ext-border);
+  border-top: 1px solid var(--ln-ext-border);
   background: transparent !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 16px;
   font-weight: 800 !important;
 }
@@ -144,9 +144,9 @@ dialog .help th p {
 /* Create a game, challenge a friend, play the computer: segments on a track,
  * and one look for any choice (an accent ring on an accent tint). */
 .game-setup {
-  --lr-ext-setup-track: var(--lr-ext-neutral-1);
-  --lr-ext-setup-chosen: inset 0 0 0 2px var(--lr-ext-accent);
-  --lr-ext-setup-tint: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
+  --ln-ext-setup-track: var(--ln-ext-neutral-1);
+  --ln-ext-setup-chosen: inset 0 0 0 2px var(--ln-ext-accent);
+  --ln-ext-setup-tint: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent);
 }
 
 .game-setup h2 {
@@ -173,7 +173,7 @@ dialog .help th p {
 
 .game-setup :is(.config-group, .radio-pane) > .label {
   margin: 0 !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13px;
   font-weight: 700 !important;
   text-align: start;
@@ -208,9 +208,9 @@ dialog .help th p {
   gap: 4px;
   margin: 0 0 18px !important;
   padding: 4px;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 11px;
-  background: var(--lr-ext-setup-track);
+  background: var(--ln-ext-setup-track);
 }
 
 .game-setup .time-control-tabs .tabs-horiz button {
@@ -229,17 +229,17 @@ dialog .help th p {
 
 @media (hover: hover) {
   .game-setup .time-control-tabs .tabs-horiz button:hover {
-    background: var(--lr-ext-lift-4);
+    background: var(--ln-ext-lift-4);
   }
 }
 
 .game-setup .time-control-tabs .tabs-horiz button.active {
-  background: var(--lr-ext-bg-raised) !important;
-  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  box-shadow: 0 1px 3px var(--ln-ext-shade-50);
+  color: var(--ln-ext-text-strong) !important;
 }
 
-.game-setup .time-control-tabs .tabs-horiz[data-lr-ext-tabs] button.active {
+.game-setup .time-control-tabs .tabs-horiz[data-ln-ext-tabs] button.active {
   background: transparent !important;
   box-shadow: none;
 }
@@ -252,7 +252,7 @@ dialog .help th p {
 .game-setup .time-control-tabs .time-panel .slider-container .label-row {
   align-items: baseline !important;
   margin-bottom: 10px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   font-weight: 600;
 }
@@ -260,7 +260,7 @@ dialog .help th p {
 .game-setup .time-control-tabs .time-panel .slider-container .label-row .val-box {
   padding: 0 !important;
   background: transparent !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 20px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -269,7 +269,7 @@ dialog .help th p {
 
 .game-setup .time-control-tabs .time-panel .slider-separator {
   align-self: start;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 18px;
   font-weight: 700;
   line-height: 20px !important;
@@ -290,15 +290,15 @@ dialog .help th p {
   height: 18px !important;
   margin-top: -6px;
   border-radius: 50% !important;
-  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
+  box-shadow: 0 1px 3px var(--ln-ext-shade-50);
   transition: box-shadow 0.15s !important;
 }
 
 @media (hover: hover) {
   .game-setup input.range:hover::-webkit-slider-thumb {
     box-shadow:
-      0 1px 3px var(--lr-ext-shade-50),
-      0 0 0 5px color-mix(in srgb, var(--lr-ext-accent) 20%, transparent);
+      0 1px 3px var(--ln-ext-shade-50),
+      0 0 0 5px color-mix(in srgb, var(--ln-ext-accent) 20%, transparent);
   }
 }
 
@@ -312,7 +312,7 @@ dialog .help th p {
   flex: 1 0 auto;
   height: 36px;
   padding: 0 6px !important;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   border-radius: 8px !important;
   font-size: 14px !important;
   font-variant-numeric: tabular-nums;
@@ -322,9 +322,9 @@ dialog .help th p {
 }
 
 .game-setup .time-control-tabs .time-panel .presets .preset-btn.active {
-  background: var(--lr-ext-setup-tint) !important;
-  box-shadow: var(--lr-ext-setup-chosen);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-setup-tint) !important;
+  box-shadow: var(--ln-ext-setup-chosen);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* ---- Phones --- */
@@ -341,7 +341,7 @@ dialog .help th p {
     border-width: 1px 0 0 !important;
     border-radius: 20px 20px 0 0 !important;
     transform: none !important;
-    animation: lr-ext-sheet-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: ln-ext-sheet-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   dialog:has(> .scrollable > .game-setup) > .scrollable {
@@ -359,7 +359,7 @@ dialog .help th p {
   }
 }
 
-@keyframes lr-ext-sheet-in {
+@keyframes ln-ext-sheet-in {
   from {
     translate: 0 100%;
   }

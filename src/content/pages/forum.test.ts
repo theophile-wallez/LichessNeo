@@ -20,8 +20,8 @@ describe('forum labels', () => {
     syncForumLabels();
     const cell = queryOne(document, 'td.right', HTMLElement);
     if (!cell) throw new Error('no count cell');
-    delete cell.dataset.lrExtLabel;
+    delete cell.dataset.lnExtLabel;
     syncForumLabels();
-    expect(cell.dataset.lrExtLabel).toBeUndefined();
+    expect(cell.dataset.lnExtLabel).toBeUndefined();
   });
 });

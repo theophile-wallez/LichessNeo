@@ -49,36 +49,36 @@ function packImage(kind: PartKind, pack: Pack): string | null {
 function thumbnail(kind: PartKind, { id, image, whole, colors }: Tile): HTMLElement {
   if (kind === 'piece' && image !== null)
     return createElement('img', {
-      className: 'lr-ext-src-thumb',
+      className: 'ln-ext-src-thumb',
       attrs: { src: image, alt: '', loading: 'lazy' },
     });
-  const thumb = createElement('span', { className: 'lr-ext-src-thumb' });
-  if (image === null) setData(thumb, 'lrExtTheme', id);
+  const thumb = createElement('span', { className: 'ln-ext-src-thumb' });
+  if (image === null) setData(thumb, 'lnExtTheme', id);
   else if (whole) {
     setStyleProperty(thumb, 'background-image', `url("${image}")`);
-    setData(thumb, 'lrExtWhole', '');
+    setData(thumb, 'lnExtWhole', '');
   } else {
     // Lichess's thumbnail is two squares: the stylesheet draws it again, flipped, under them.
-    setStyleProperty(thumb, '--lr-ext-thumb-image', `url("${image}")`);
-    setData(thumb, 'lrExtPair', '');
+    setStyleProperty(thumb, '--ln-ext-thumb-image', `url("${image}")`);
+    setData(thumb, 'lnExtPair', '');
   }
   if (colors) showSquares(thumb, colors);
   // A backlit board's four keys, each lit as the pointer comes over it.
   if (isBacklitBoard(id) && image === null)
     thumb.append(
-      ...Array.from({ length: 4 }, () => createElement('span', { className: 'lr-ext-src-key' })),
+      ...Array.from({ length: 4 }, () => createElement('span', { className: 'ln-ext-src-key' })),
     );
   return thumb;
 }
 
 function tileButton(kind: PartKind, tile: Tile, data: string): HTMLButtonElement {
   const button = createElement('button', {
-    className: 'lr-ext-src-item',
+    className: 'ln-ext-src-item',
     attrs: { type: 'button', [data]: tile.id, title: tile.name },
   });
   // Sounds have no picture: a pill with the name.
   if (kind !== 'sound') button.append(thumbnail(kind, tile));
-  button.append(createElement('span', { className: 'lr-ext-src-name', text: tile.name }));
+  button.append(createElement('span', { className: 'ln-ext-src-name', text: tile.name }));
   return button;
 }
 
@@ -91,14 +91,14 @@ function onPieceError(event: Event): void {
 
 // A saved board's tile, with a button to delete it.
 function savedTile(kind: PartKind, tile: Tile): HTMLElement {
-  const wrap = createElement('div', { className: 'lr-ext-src-saved' });
+  const wrap = createElement('div', { className: 'ln-ext-src-saved' });
   const label = message('looksDeleteBoard', tile.name);
   const remove = createElement('button', {
-    className: 'lr-ext-src-delete',
-    attrs: { type: 'button', 'data-lr-ext-delete': tile.id, 'aria-label': label, title: label },
+    className: 'ln-ext-src-delete',
+    attrs: { type: 'button', 'data-ln-ext-delete': tile.id, 'aria-label': label, title: label },
   });
   setHtml(remove, hugeicon(Cancel01Icon));
-  wrap.append(tileButton(kind, tile, 'data-lr-ext-choice'), remove);
+  wrap.append(tileButton(kind, tile, 'data-ln-ext-choice'), remove);
   return wrap;
 }
 
@@ -108,7 +108,7 @@ function themeTiles(kind: PartKind): HTMLElement[] {
     .filter(theme => theme.family === undefined)
     .map(({ id, name, colors, saved }) => {
       const tile: Tile = { id, name, image: null, ...(colors && { colors }) };
-      return saved ? savedTile(kind, tile) : tileButton(kind, tile, 'data-lr-ext-choice');
+      return saved ? savedTile(kind, tile) : tileButton(kind, tile, 'data-ln-ext-choice');
     });
 }
 
@@ -121,11 +121,11 @@ function oursMarkup(kind: PartKind, library: Library): HTMLElement[] {
       tileButton(
         kind,
         { id: pack.id, name: pack.name, image: packImage(kind, pack), whole: kind === 'board' },
-        'data-lr-ext-choice',
+        'data-ln-ext-choice',
       ),
     );
   if (themes.length + packs.length > 0) return [...themes, ...packs];
-  const note = createElement('p', { className: 'lr-ext-looks__empty' });
+  const note = createElement('p', { className: 'ln-ext-looks__empty' });
   note.append(
     message('looksNoPieces'),
     ' ',
@@ -149,27 +149,27 @@ export interface LooksCard {
 function markCard(card: HTMLElement, kind: PartKind, library: Library): void {
   const current = library.current(kind);
   const lichess = current === LICHESS ? lichessCurrent(kind) : undefined;
-  for (const item of queryAll(card, '.lr-ext-src-item', HTMLElement)) {
-    const { lrExtChoice, lrExtLichess } = item.dataset;
-    const on = lrExtChoice === current || (lrExtLichess !== undefined && lrExtLichess === lichess);
+  for (const item of queryAll(card, '.ln-ext-src-item', HTMLElement)) {
+    const { lnExtChoice, lnExtLichess } = item.dataset;
+    const on = lnExtChoice === current || (lnExtLichess !== undefined && lnExtLichess === lichess);
     item.classList.toggle('active', on);
   }
   showOptionRows(card, current);
   const family = familyOf(kind, current);
-  for (const rows of queryAll(card, '.lr-ext-looks__family', HTMLElement))
-    rows.hidden = rows.dataset.lrExtFamily !== family;
+  for (const rows of queryAll(card, '.ln-ext-looks__family', HTMLElement))
+    rows.hidden = rows.dataset.lnExtFamily !== family;
 }
 
 function cardHead(kind: PartKind): HTMLElement {
   const [title, body] = TEXTS[kind];
-  const head = createElement('div', { className: 'lr-ext-looks__head' });
+  const head = createElement('div', { className: 'ln-ext-looks__head' });
   const heading = createElement('div');
   heading.append(
-    createElement('h2', { className: 'lr-ext-setting__title', text: message(title) }),
-    createElement('p', { className: 'lr-ext-setting__body', text: message(body) }),
+    createElement('h2', { className: 'ln-ext-setting__title', text: message(title) }),
+    createElement('p', { className: 'ln-ext-setting__body', text: message(body) }),
   );
   head.append(
-    createElement('span', { className: 'lr-ext-setting__icon', attrs: { 'aria-hidden': 'true' } }),
+    createElement('span', { className: 'ln-ext-setting__icon', attrs: { 'aria-hidden': 'true' } }),
     heading,
   );
   return head;
@@ -179,7 +179,7 @@ function pickLichess(kind: PartKind, library: Library, item: HTMLElement, id: st
   if (library.current(kind) !== LICHESS) library.choose(kind, LICHESS);
   postLichessLook({ part: kind, id });
   // The page world names it on <body> in a moment: ring it now.
-  for (const other of queryAll(item.parentElement ?? item, '.lr-ext-src-item', HTMLElement))
+  for (const other of queryAll(item.parentElement ?? item, '.ln-ext-src-item', HTMLElement))
     other.classList.toggle('active', other === item);
 }
 
@@ -191,26 +191,26 @@ function deleteSaved(kind: PartKind, library: Library, id: string): void {
 }
 
 function onCardClick(kind: PartKind, library: Library, event: Event): void {
-  const removed = closestTo(event.target, '[data-lr-ext-delete]', HTMLElement)?.dataset.lrExtDelete;
+  const removed = closestTo(event.target, '[data-ln-ext-delete]', HTMLElement)?.dataset.lnExtDelete;
   if (removed !== undefined) {
     deleteSaved(kind, library, removed);
     return;
   }
-  const item = closestTo(event.target, '.lr-ext-src-item', HTMLElement);
-  const { lrExtChoice, lrExtLichess } = item?.dataset ?? {};
-  if (lrExtChoice !== undefined) library.choose(kind, lrExtChoice);
-  if (item && lrExtLichess !== undefined) pickLichess(kind, library, item, lrExtLichess);
+  const item = closestTo(event.target, '.ln-ext-src-item', HTMLElement);
+  const { lnExtChoice, lnExtLichess } = item?.dataset ?? {};
+  if (lnExtChoice !== undefined) library.choose(kind, lnExtChoice);
+  if (item && lnExtLichess !== undefined) pickLichess(kind, library, item, lnExtLichess);
 }
 
 const label = (text: string): HTMLElement =>
-  createElement('h3', { className: 'lr-ext-appearance__label', text });
+  createElement('h3', { className: 'ln-ext-appearance__label', text });
 
 /** The card for `kind`, its list of ours drawn again as packs and saved boards come and go. */
 export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
-  const card = createElement('section', { className: 'lr-ext-looks' });
-  setData(card, 'lrExtPart', kind);
-  const ours = createElement('div', { className: 'lr-ext-looks__grid' });
-  const lichess = createElement('div', { className: 'lr-ext-looks__grid' });
+  const card = createElement('section', { className: 'ln-ext-looks' });
+  setData(card, 'lnExtPart', kind);
+  const ours = createElement('div', { className: 'ln-ext-looks__grid' });
+  const lichess = createElement('div', { className: 'ln-ext-looks__grid' });
   card.append(
     cardHead(kind),
     label(message('looksOurs')),
@@ -218,7 +218,7 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
     ours,
     ...OPTION_ROWS[kind].map(row => row(library)),
     ...familySections(kind, ({ id, name }) =>
-      tileButton(kind, { id, name, image: null }, 'data-lr-ext-choice'),
+      tileButton(kind, { id, name, image: null }, 'data-ln-ext-choice'),
     ),
     label(message('looksLichess')),
     lichess,
@@ -240,11 +240,11 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
   return {
     element: card,
     showLichess: looks => {
-      const items = looks?.map(look => tileButton(kind, look, 'data-lr-ext-lichess'));
+      const items = looks?.map(look => tileButton(kind, look, 'data-ln-ext-lichess'));
       lichess.replaceChildren(
         ...(items ?? [
           createElement('p', {
-            className: 'lr-ext-looks__empty',
+            className: 'ln-ext-looks__empty',
             text: message('looksLichessFailed'),
           }),
         ]),

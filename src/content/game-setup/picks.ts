@@ -107,8 +107,8 @@ function captionOf(part: Part, element: HTMLElement): string {
   const own = textOf(element, ':scope > .label');
   if (own) return own;
   const { dataset } = document.documentElement;
-  if (part === 'variant') return dataset.lrExtVariantLabel ?? '';
-  return part === 'time' ? (dataset.lrExtTimeControlLabel ?? '') : '';
+  if (part === 'variant') return dataset.lnExtVariantLabel ?? '';
+  return part === 'time' ? (dataset.lnExtTimeControlLabel ?? '') : '';
 }
 
 function buildTile(part: Part): Tile {
@@ -117,25 +117,25 @@ function buildTile(part: Part): Tile {
     part === 'variant'
       ? createElement('label', { attrs: { for: 'mselect-variant' } })
       : createElement('button', { attrs: { type: 'button', 'aria-expanded': 'false' } });
-  root.className = 'lr-ext-setup__tile';
-  setData(root, 'lrExtPart', part);
-  const icon = createElement('span', { className: 'lr-ext-setup__icon' });
-  const caption = createElement('span', { className: 'lr-ext-setup__caption' });
-  const value = createElement('span', { className: 'lr-ext-setup__value' });
+  root.className = 'ln-ext-setup__tile';
+  setData(root, 'lnExtPart', part);
+  const icon = createElement('span', { className: 'ln-ext-setup__icon' });
+  const caption = createElement('span', { className: 'ln-ext-setup__caption' });
+  const value = createElement('span', { className: 'ln-ext-setup__value' });
   root.append(icon, caption, value);
   return { root, icon, caption, value };
 }
 
 function build(content: HTMLElement): Picks {
-  const root = createElement('div', { className: 'lr-ext-setup' });
+  const root = createElement('div', { className: 'ln-ext-setup' });
   const tiles = new Map(PARTS.map(part => [part, buildTile(part)]));
   root.append(...[...tiles.values()].map(tile => tile.root));
   root.addEventListener('click', event => {
-    const part = closestTo(event.target, '[data-lr-ext-part]', HTMLElement)?.dataset.lrExtPart;
-    if ((part !== 'time' && part !== 'side') || root.dataset.lrExtOpen === part) return;
-    setData(root, 'lrExtOpen', part);
+    const part = closestTo(event.target, '[data-ln-ext-part]', HTMLElement)?.dataset.lnExtPart;
+    if ((part !== 'time' && part !== 'side') || root.dataset.lnExtOpen === part) return;
+    setData(root, 'lnExtOpen', part);
     // The panel shown as the setup opens comes in still; one switched to slides in.
-    setData(root, 'lrExtSwitched', part);
+    setData(root, 'lnExtSwitched', part);
   });
   content.prepend(root);
   const picks = { root, tiles };
@@ -148,7 +148,7 @@ function showTile(tile: Tile, part: Part, element: HTMLElement | undefined): voi
   if (!element) return;
   const shown = shownOf(part, element);
   setData(tile.icon, 'icon', shown.glyph);
-  setData(tile.icon, 'lrExtPick', shown.pick);
+  setData(tile.icon, 'lnExtPick', shown.pick);
   const caption = captionOf(part, element);
   if (tile.caption.textContent !== caption) tile.caption.textContent = caption;
   if (tile.value.textContent !== shown.value) tile.value.textContent = shown.value;
@@ -159,21 +159,21 @@ function markPresets(time: HTMLElement | undefined): void {
   let previous: string | null = null;
   for (const preset of time ? queryAll(time, '.presets .preset-btn', HTMLElement) : []) {
     const speed = presetSpeed(preset.textContent);
-    setData(preset, 'lrExtSpeed', speed);
-    setData(preset, 'lrExtFirst', speed !== previous ? '' : null);
+    setData(preset, 'lnExtSpeed', speed);
+    setData(preset, 'lnExtFirst', speed !== previous ? '' : null);
     previous = speed;
   }
 }
 
 /** The open tile, the variant's while its menu is; the time control's if the side's is gone. */
 function markOpen(content: HTMLElement, root: HTMLElement, tiles: ReadonlyMap<Part, Tile>): void {
-  const shown = root.dataset.lrExtOpen;
+  const shown = root.dataset.lnExtOpen;
   const open = shown === 'side' && tiles.get('side')?.root.hidden === false ? shown : DEFAULT_PANEL;
-  setData(root, 'lrExtOpen', open);
+  setData(root, 'lnExtOpen', open);
   const menu = queryOne(content, '.mselect__toggle', HTMLInputElement)?.checked === true;
   for (const [part, tile] of tiles) {
     const expanded = part === 'variant' ? menu : open === part;
-    setData(tile.root, 'lrExtExpanded', expanded ? '' : null);
+    setData(tile.root, 'lnExtExpanded', expanded ? '' : null);
     if (tile.root instanceof HTMLButtonElement && tile.root.ariaExpanded !== String(expanded)) {
       tile.root.ariaExpanded = String(expanded);
     }
@@ -184,10 +184,10 @@ function markOpen(content: HTMLElement, root: HTMLElement, tiles: ReadonlyMap<Pa
 export function syncPicks(): void {
   const content = queryOne(document, 'dialog .game-setup > .setup-content', HTMLElement);
   if (!content) return;
-  const existing = queryOne(content, ':scope > .lr-ext-setup', HTMLElement);
+  const existing = queryOne(content, ':scope > .ln-ext-setup', HTMLElement);
   const { root, tiles } = (existing && built.get(existing)) ?? build(content);
   const parts = findParts(content);
-  for (const [part, element] of parts) setData(element, 'lrExtSetupPart', part);
+  for (const [part, element] of parts) setData(element, 'lnExtSetupPart', part);
   for (const [part, tile] of tiles) showTile(tile, part, parts.get(part));
   markOpen(content, root, tiles);
   markPresets(parts.get('time'));

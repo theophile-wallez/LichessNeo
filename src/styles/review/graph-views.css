@@ -2,10 +2,10 @@
 
 /* Advantage or move times (page/review/view/graph-views.ts), a frosted pill over the
    graph's top left corner; its pick slides (content/ui/tab-bars.ts). */
-#lr-ext-review .lr-ext-graph-views {
-  --lr-ext-tab-bg: var(--lr-ext-bg-raised-hover);
-  --lr-ext-tab-radius: 6px;
-  --lr-ext-tab-shadow: 0 1px 2px var(--lr-ext-shade-40);
+#ln-ext-review .ln-ext-graph-views {
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised-hover);
+  --ln-ext-tab-radius: 6px;
+  --ln-ext-tab-shadow: 0 1px 2px var(--ln-ext-shade-40);
 
   position: absolute;
   top: 6px;
@@ -15,16 +15,16 @@
   gap: 2px;
   padding: 2px;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--lr-ext-bg-panel-dark) 82%, transparent);
-  box-shadow: 0 1px 4px var(--lr-ext-shade-30);
+  background: color-mix(in srgb, var(--ln-ext-bg-panel-dark) 82%, transparent);
+  box-shadow: 0 1px 4px var(--ln-ext-shade-30);
   backdrop-filter: blur(6px);
 }
 
-#lr-ext-review .lr-ext-graph-views[hidden] {
+#ln-ext-review .ln-ext-graph-views[hidden] {
   display: none;
 }
 
-#lr-ext-review .lr-ext-graph-views button {
+#ln-ext-review .ln-ext-graph-views button {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -33,49 +33,49 @@
   border: none;
   border-radius: 6px;
   background: transparent;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 11.5px;
   font-weight: 700;
   transition: color 0.15s !important;
 }
 
-#lr-ext-review .lr-ext-graph-views .lr-ext-i {
+#ln-ext-review .ln-ext-graph-views .ln-ext-i {
   width: 13px;
   height: 13px;
 }
 
-#lr-ext-review .lr-ext-graph-views button:hover,
-#lr-ext-review .lr-ext-graph-views button.active {
-  color: var(--lr-ext-text-strong);
+#ln-ext-review .ln-ext-graph-views button:hover,
+#ln-ext-review .ln-ext-graph-views button.active {
+  color: var(--ln-ext-text-strong);
 }
 
-#lr-ext-review .lr-ext-graph-views:not([data-lr-ext-tabs]) button.active {
-  background: var(--lr-ext-tab-bg);
-  box-shadow: var(--lr-ext-tab-shadow);
+#ln-ext-review .ln-ext-graph-views:not([data-ln-ext-tabs]) button.active {
+  background: var(--ln-ext-tab-bg);
+  box-shadow: var(--ln-ext-tab-shadow);
 }
 
 /* ---- Move times --- */
 
 /* White's columns in White's color on the graph, Black's dimmer, the move on the board's
    in the accent, as the line that marks it (page/review/view/graph-times.ts). */
-#lr-ext-review-graph .lr-ext-graph-bar--white {
-  fill: var(--lr-ext-neutral-13);
+#ln-ext-review-graph .ln-ext-graph-bar--white {
+  fill: var(--ln-ext-neutral-13);
 }
 
-#lr-ext-review-graph .lr-ext-graph-bar--black {
-  fill: var(--lr-ext-neutral-10);
+#ln-ext-review-graph .ln-ext-graph-bar--black {
+  fill: var(--ln-ext-neutral-10);
 }
 
-html.light #lr-ext-review-graph .lr-ext-graph-bar--white {
-  fill: var(--lr-ext-neutral-1);
+html.light #ln-ext-review-graph .ln-ext-graph-bar--white {
+  fill: var(--ln-ext-neutral-1);
 }
 
 /* Over the light scheme's White's. */
-html #lr-ext-review-graph .lr-ext-graph-bar.lr-ext-graph-bar--now {
-  fill: var(--lr-ext-accent);
+html #ln-ext-review-graph .ln-ext-graph-bar.ln-ext-graph-bar--now {
+  fill: var(--ln-ext-accent);
 }
 
 /* The tip goes over the toggle, which sits on its row. */
-#lr-ext-review-graph .lr-ext-graph-tip {
+#ln-ext-review-graph .ln-ext-graph-tip {
   z-index: 2;
 }

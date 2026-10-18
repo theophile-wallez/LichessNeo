@@ -5,7 +5,7 @@
 
 const SPEED_UP_MS = 450;
 const SLOW_DOWN_MS = 900;
-const ROAD = 'lr-ext-racer-road';
+const ROAD = 'ln-ext-racer-road';
 
 /** The road's speed, 0 to 1, `elapsed` ms closer to `target`. */
 export function nextSpeed(speed: number, target: number, elapsed: number): number {

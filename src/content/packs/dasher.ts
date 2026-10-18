@@ -41,7 +41,7 @@ function syncPanels(states: readonly PanelState[], library: Library): void {
       void library.loadAll();
     }
     state.open = true;
-    const dressed = panel.querySelector(':scope > .lr-ext-src-tabs') !== null;
+    const dressed = panel.querySelector(':scope > .ln-ext-src-tabs') !== null;
     if (!isDressable(panel, state.kind) || dressed) continue;
     dressPanel(panel, {
       kind: state.kind,

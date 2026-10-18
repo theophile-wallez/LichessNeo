@@ -8,14 +8,14 @@
   padding: 3px;
   border: none !important;
   border-radius: 9px;
-  background: var(--lr-ext-bg-panel-dark) !important;
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  background: var(--ln-ext-bg-panel-dark) !important;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
-.mchat .mchat__tabs[data-lr-ext-tabs] {
-  --lr-ext-tab-radius: 6px;
-  --lr-ext-tab-bg: var(--lr-ext-bg-raised);
-  --lr-ext-tab-shadow: 0 1px 2px var(--lr-ext-shade-55);
+.mchat .mchat__tabs[data-ln-ext-tabs] {
+  --ln-ext-tab-radius: 6px;
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised);
+  --ln-ext-tab-shadow: 0 1px 2px var(--ln-ext-shade-55);
 }
 
 .mchat .mchat__tab {
@@ -26,23 +26,23 @@
   border: none !important;
   border-radius: 6px !important;
   background: transparent !important;
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 12.5px;
   font-weight: 600 !important;
   transition: color 0.15s !important;
 }
 
 .mchat .mchat__tab:hover {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .mchat .mchat__tab-active {
-  background: var(--lr-ext-bg-raised) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised) !important;
+  color: var(--ln-ext-text-strong) !important;
   box-shadow: none !important;
 }
 
-.mchat .mchat__tabs[data-lr-ext-tabs] .mchat__tab-active {
+.mchat .mchat__tabs[data-ln-ext-tabs] .mchat__tab-active {
   background: transparent !important;
 }

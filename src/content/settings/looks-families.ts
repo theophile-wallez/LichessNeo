@@ -15,15 +15,15 @@ export const hasFamilies = (kind: PartKind): boolean =>
   themesOf(kind).some(theme => theme.family !== undefined);
 
 export const subLabel = (text: string): HTMLElement =>
-  createElement('h4', { className: 'lr-ext-looks__sub', text });
+  createElement('h4', { className: 'ln-ext-looks__sub', text });
 
 function familySection(kind: PartKind, family: string, tile: (theme: Theme) => HTMLElement) {
   const themes = themesOf(kind).filter(theme => theme.family === family);
   if (themes.length === 0) return [];
-  const grid = createElement('div', { className: 'lr-ext-looks__grid' });
+  const grid = createElement('div', { className: 'ln-ext-looks__grid' });
   grid.append(...themes.map(tile));
-  const rows = createElement('div', { className: 'lr-ext-looks__family' });
-  setData(rows, 'lrExtFamily', family);
+  const rows = createElement('div', { className: 'ln-ext-looks__family' });
+  setData(rows, 'lnExtFamily', family);
   rows.append(...(FAMILY_ROWS[family] ?? []).map(row => row()));
   const name = NAMES[family];
   return [subLabel(name === undefined ? family : message(name)), grid, rows];

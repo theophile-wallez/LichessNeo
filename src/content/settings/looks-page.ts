@@ -24,10 +24,10 @@ export function buildLooksPage(library: Library): LooksPage {
   // After the card's own listener: the set is picked when the move sounds.
   const sounds = cards[PART_KINDS.indexOf('sound')]?.element;
   sounds?.addEventListener('click', event => {
-    if (closestTo(event.target, '.lr-ext-src-item', HTMLElement)) preview.step();
+    if (closestTo(event.target, '.ln-ext-src-item', HTMLElement)) preview.step();
   });
-  const layout = createElement('div', { className: 'lr-ext-looks-page' });
-  const column = createElement('div', { className: 'lr-ext-looks-page__cards' });
+  const layout = createElement('div', { className: 'ln-ext-looks-page' });
+  const column = createElement('div', { className: 'ln-ext-looks-page__cards' });
   column.append(...cards.map(card => card.element));
   layout.append(preview.element, column);
   let shown = false;

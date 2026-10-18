@@ -13,9 +13,9 @@
   box-sizing: border-box;
   margin-bottom: 10px;
   padding: 5px;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 12px;
-  background: var(--lr-ext-neutral-1);
+  background: var(--ln-ext-neutral-1);
 }
 
 .lobby__app > .tabs-horiz > button,
@@ -31,7 +31,7 @@
   border: none !important;
   border-radius: 8px;
   background: transparent;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 15px;
   font-weight: 700;
   white-space: nowrap;
@@ -41,14 +41,14 @@
 }
 
 .lobby__app > .tabs-horiz > button:hover {
-  background: var(--lr-ext-lift-4);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-4);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .lobby__app > .tabs-horiz > button.active {
-  background: var(--lr-ext-bg-raised);
-  box-shadow: 0 1px 3px var(--lr-ext-shade-50);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised);
+  box-shadow: 0 1px 3px var(--ln-ext-shade-50);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Lichess's phone layout: four tabs signed in, on a narrow screen. */
@@ -71,36 +71,36 @@
   padding: 0 !important;
   overflow: hidden;
   border-radius: 50%;
-  background: var(--lr-ext-accent-hover);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-ext-accent) 25%, transparent) !important;
+  background: var(--ln-ext-accent-hover);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ln-ext-accent) 25%, transparent) !important;
   font-size: 0;
 }
 
 .lpools {
-  font-family: var(--lr-ext-font) !important;
+  font-family: var(--ln-ext-font) !important;
 }
 
 .lpool {
   border: none !important;
   border-radius: 8px !important;
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: var(--lr-ext-btn-grey-shadow) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+  color: var(--ln-ext-text-strong) !important;
   opacity: 1 !important;
 }
 
 .lpool:hover {
-  background: var(--lr-ext-btn-grey-hover) !important;
+  background: var(--ln-ext-btn-grey-hover) !important;
 }
 
 .lpool .clock {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 800;
   letter-spacing: 0 !important;
 }
 
 .lpool .perf {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-weight: 600;
 }
 
@@ -110,14 +110,14 @@
 .lreal_time {
   padding: 0 8px !important;
   scrollbar-width: thin;
-  scrollbar-color: var(--lr-ext-lift-15) transparent;
+  scrollbar-color: var(--ln-ext-lift-15) transparent;
 }
 
 .hooks__list {
   margin-bottom: 8px;
   border-collapse: separate;
   border-spacing: 0;
-  font-family: var(--lr-ext-font);
+  font-family: var(--ln-ext-font);
 }
 
 .hooks__list th {
@@ -126,9 +126,9 @@
   z-index: 1;
   height: 48px;
   padding: 0 12px !important;
-  background: var(--lr-ext-bg-panel);
-  color: var(--lr-ext-text-dim);
-  font-family: var(--lr-ext-font) !important;
+  background: var(--ln-ext-bg-panel);
+  color: var(--ln-ext-text-dim);
+  font-family: var(--ln-ext-font) !important;
   font-size: 13px;
   font-weight: 700 !important;
   text-align: left;
@@ -139,7 +139,7 @@
 }
 
 .hooks__list th.sortable:hover {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
 }
 
 /* The lobby's lists fade out in the card's color at an edge where more is hidden: under the
@@ -148,8 +148,8 @@
    too short to scroll (its timeline is inactive: the base, no fade, shows), nor where scroll
    timelines aren't (Firefox). */
 .lobby__app__content {
-  --lr-ext-lobby-bg: var(--lr-ext-bg-panel);
-  --lr-ext-lobby-fade: 40px;
+  --ln-ext-lobby-bg: var(--ln-ext-bg-panel);
+  --ln-ext-lobby-fade: 40px;
 }
 
 .hooks__list th::after,
@@ -157,14 +157,14 @@
 .lobby__app__content::after {
   content: '';
   display: block;
-  height: var(--lr-ext-lobby-fade);
+  height: var(--ln-ext-lobby-fade);
   pointer-events: none;
 }
 
 .hooks__list th::after {
   position: absolute;
   inset: 100% 0 auto;
-  background: linear-gradient(var(--lr-ext-lobby-bg), transparent);
+  background: linear-gradient(var(--ln-ext-lobby-bg), transparent);
   opacity: 0;
 }
 
@@ -173,8 +173,8 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  margin-bottom: calc(-1 * var(--lr-ext-lobby-fade));
-  background: linear-gradient(var(--lr-ext-lobby-bg), transparent);
+  margin-bottom: calc(-1 * var(--ln-ext-lobby-fade));
+  background: linear-gradient(var(--ln-ext-lobby-bg), transparent);
   opacity: 0;
 }
 
@@ -182,23 +182,23 @@
   position: sticky;
   bottom: 0;
   z-index: 1;
-  margin-top: calc(-1 * var(--lr-ext-lobby-fade));
-  background: linear-gradient(transparent, var(--lr-ext-lobby-bg));
+  margin-top: calc(-1 * var(--ln-ext-lobby-fade));
+  background: linear-gradient(transparent, var(--ln-ext-lobby-bg));
   opacity: 0;
 }
 
 @supports (animation-timeline: scroll()) {
   .hooks__list th::after,
   .lobby__app__content::before {
-    animation: lr-ext-scroll-fade-in linear both !important;
+    animation: ln-ext-scroll-fade-in linear both !important;
     animation-timeline: scroll(nearest) !important;
-    animation-range: 0 var(--lr-ext-lobby-fade) !important;
+    animation-range: 0 var(--ln-ext-lobby-fade) !important;
   }
 
   .lobby__app__content::after {
-    animation: lr-ext-scroll-fade-out linear both !important;
+    animation: ln-ext-scroll-fade-out linear both !important;
     animation-timeline: scroll(nearest) !important;
-    animation-range: calc(100% - var(--lr-ext-lobby-fade)) 100% !important;
+    animation-range: calc(100% - var(--ln-ext-lobby-fade)) 100% !important;
   }
 }
 
@@ -207,7 +207,7 @@
   padding: 0 12px !important;
   border: none !important;
   background: none !important;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 14px;
   font-variant-numeric: tabular-nums;
 }
@@ -215,7 +215,7 @@
 .hooks__list td:first-child {
   padding-inline-start: 14px !important;
   border-radius: 6px 0 0 6px;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-weight: 700;
 }
 
@@ -224,19 +224,19 @@
 }
 
 .hooks__list td:last-child ::before {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 1.35em !important;
   opacity: 1 !important;
   vertical-align: -3px;
 }
 
 .hooks__list tr.join:not(.disabled):hover td {
-  background: var(--lr-ext-lift-7) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-7) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 .hooks__list tr.join:not(.disabled):hover td:last-child ::before {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
 }
 
 /* Seeks you can't join (rating range, rated while anonymous). */
@@ -246,13 +246,13 @@
 
 /* Your own seek. */
 .hooks__list tr.cancel td {
-  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent) !important;
 }
 
 .hooks__list tr.variants td {
   height: auto;
   padding: 16px 12px 6px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 700;
   cursor: default;
@@ -282,33 +282,33 @@
   margin: 0 6px;
   padding: 0 !important;
   border-radius: 6px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 18px !important;
 }
 
 .lobby__app .toggle:hover {
-  background: var(--lr-ext-lift-7);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-lift-7);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* The hero's first button, a game in the pool last played (content/pages/speed-cards/
  * play-button.ts), in place of "Create a game", which the cards' "Custom game" still clicks. */
-.lr-ext-play ~ .lobby__start__button--hook {
+.ln-ext-play ~ .lobby__start__button--hook {
   display: none !important;
 }
 
 /* The big primary Play button: ours, or "Create a game" without it. The doubled class beats the
  * metal-button hover in theme/; the icon stays white where Lichess tints it green. */
-:is(.lobby__start__button--hook, .lr-ext-play).button.button-metal {
-  background: var(--lr-ext-btn-primary) !important;
-  color: var(--lr-ext-white) !important;
+:is(.lobby__start__button--hook, .ln-ext-play).button.button-metal {
+  background: var(--ln-ext-btn-primary) !important;
+  color: var(--ln-ext-white) !important;
   text-shadow: 0 1px 1px #00000033 !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
 }
 
-:is(.lobby__start__button--hook, .lr-ext-play).button.button-metal:not(.disabled):hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
-  color: var(--lr-ext-white) !important;
+:is(.lobby__start__button--hook, .ln-ext-play).button.button-metal:not(.disabled):hover {
+  background: var(--ln-ext-btn-primary-hover) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 .lobby__start__button.button::before {
@@ -316,43 +316,43 @@
   text-shadow: none !important;
 }
 
-:is(.lobby__start__button--hook, .lr-ext-play).button.button-metal::before {
-  color: var(--lr-ext-white) !important;
+:is(.lobby__start__button--hook, .ln-ext-play).button.button-metal::before {
+  color: var(--ln-ext-white) !important;
 }
 
 /* Its speed's glyph, as the time controls have it everywhere. */
-.lr-ext-play.button::before {
-  content: var(--lr-ext-mode-rapid);
+.ln-ext-play.button::before {
+  content: var(--ln-ext-mode-rapid);
   font-family: lichess;
   font-weight: normal;
 }
 
-.lr-ext-play[data-lr-ext-speed='bullet'].button::before {
-  content: var(--lr-ext-mode-bullet);
+.ln-ext-play[data-ln-ext-speed='bullet'].button::before {
+  content: var(--ln-ext-mode-bullet);
 }
 
-.lr-ext-play[data-lr-ext-speed='blitz'].button::before {
-  content: var(--lr-ext-mode-blitz);
+.ln-ext-play[data-ln-ext-speed='blitz'].button::before {
+  content: var(--ln-ext-mode-blitz);
 }
 
-.lr-ext-play[data-lr-ext-speed='classical'].button::before {
-  content: var(--lr-ext-mode-classical);
+.ln-ext-play[data-ln-ext-speed='classical'].button::before {
+  content: var(--ln-ext-mode-classical);
 }
 
 /* Seeking a game there, as the cards' pool is: ringed, a cross to cancel. */
-.lr-ext-play.lr-ext-play--seeking.button.button-metal,
-.lr-ext-play.lr-ext-play--seeking.button.button-metal:not(.disabled):hover {
-  background: var(--lr-ext-btn-grey) !important;
-  box-shadow: inset 0 0 0 2px var(--lr-ext-accent) !important;
-  color: var(--lr-ext-text-strong) !important;
+.ln-ext-play.ln-ext-play--seeking.button.button-metal,
+.ln-ext-play.ln-ext-play--seeking.button.button-metal:not(.disabled):hover {
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: inset 0 0 0 2px var(--ln-ext-accent) !important;
+  color: var(--ln-ext-text-strong) !important;
   text-shadow: none !important;
 }
 
-.lr-ext-play.lr-ext-play--seeking.button.button-metal::before {
-  color: var(--lr-ext-accent) !important;
+.ln-ext-play.ln-ext-play--seeking.button.button-metal::before {
+  color: var(--ln-ext-accent) !important;
 }
 
-.lr-ext-play--seeking::after {
+.ln-ext-play--seeking::after {
   content: '';
   flex: none;
   width: 16px;
@@ -381,5 +381,5 @@
 }
 
 .lobby__start__button--ai.button::before {
-  background-image: var(--lr-ext-computer);
+  background-image: var(--ln-ext-computer);
 }

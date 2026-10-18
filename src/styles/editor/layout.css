@@ -5,36 +5,36 @@
 /* ---- Desktop --- */
 
 @media (min-width: 1020px) {
-  html[data-lr-ext-has~='board-editor'],
-  html[data-lr-ext-has~='board-editor'] body,
-  html[data-lr-ext-has~='board-editor'] #main-wrap {
+  html[data-ln-ext-has~='board-editor'],
+  html[data-ln-ext-has~='board-editor'] body,
+  html[data-ln-ext-has~='board-editor'] #main-wrap {
     overflow: hidden !important;
   }
 
   .board-editor {
-    --lr-ext-gap: 24px;
-    --lr-ext-panel-w: 360px;
-    --lr-ext-coords-off: calc(1.2 * var(--lr-ext-coords-size, 13px) + 8px);
+    --ln-ext-gap: 24px;
+    --ln-ext-panel-w: 360px;
+    --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
     /* The spare rows are a square tall, so their pieces match the board's: the board and its
      * two rows take 10 squares of height, plus 8px between each row and the board. */
-    --lr-ext-board-room: max(
+    --ln-ext-board-room: max(
       320px,
       min(
-        (var(--lr-ext-main-h, 100dvh) - 32px - 16px - var(--lr-ext-coords-off)) * 0.8,
-        var(--lr-ext-main-w, 100vw) - var(--lr-ext-panel-w) - var(--lr-ext-gap) - 64px
+        (var(--ln-ext-main-h, 100dvh) - 32px - 16px - var(--ln-ext-coords-off)) * 0.8,
+        var(--ln-ext-main-w, 100vw) - var(--ln-ext-panel-w) - var(--ln-ext-gap) - 64px
       )
     );
     /* All of the room until the handle is dragged (board/pieces.css). Whole pixels per square,
      * as chessground draws them, so the pieces line up with the files. */
-    --lr-ext-board: round(
+    --ln-ext-board: round(
       down,
-      max(200px, var(--lr-ext-board-room) * var(--lr-ext-board-scale, 1)),
+      max(200px, var(--ln-ext-board-room) * var(--ln-ext-board-scale, 1)),
       8px
     );
-    --lr-ext-spare-h: calc(var(--lr-ext-board) / 8);
-    --lr-ext-spare-room: calc(var(--lr-ext-spare-h) + 8px);
+    --ln-ext-spare-h: calc(var(--ln-ext-board) / 8);
+    --ln-ext-spare-room: calc(var(--ln-ext-spare-h) + 8px);
     /* What a smaller board leaves, half over it and half under it: the panel keeps its height. */
-    --lr-ext-board-slack: calc((var(--lr-ext-board-room) - var(--lr-ext-board)) * 0.625);
+    --ln-ext-board-slack: calc((var(--ln-ext-board-room) - var(--ln-ext-board)) * 0.625);
 
     display: grid !important;
     grid-template-areas:
@@ -44,26 +44,26 @@
       'board copyables'
       'spare-bottom copyables'
       '. copyables' !important;
-    grid-template-columns: var(--lr-ext-board) var(--lr-ext-panel-w) !important;
+    grid-template-columns: var(--ln-ext-board) var(--ln-ext-panel-w) !important;
     /* The board spans the middle rows: the panel's settings take what the FEN leaves. */
     grid-template-rows:
-      var(--lr-ext-board-slack) var(--lr-ext-spare-room) minmax(0, 1fr) auto
+      var(--ln-ext-board-slack) var(--ln-ext-spare-room) minmax(0, 1fr) auto
       calc(
-        var(--lr-ext-spare-room) + var(--lr-ext-coords-off)
-      ) var(--lr-ext-board-slack) !important;
+        var(--ln-ext-spare-room) + var(--ln-ext-coords-off)
+      ) var(--ln-ext-board-slack) !important;
     justify-content: center;
-    gap: 0 var(--lr-ext-gap) !important;
-    height: calc(1.25 * var(--lr-ext-board-room) + 16px + var(--lr-ext-coords-off)) !important;
+    gap: 0 var(--ln-ext-gap) !important;
+    height: calc(1.25 * var(--ln-ext-board-room) + 16px + var(--ln-ext-coords-off)) !important;
     margin: 0 auto !important;
   }
 
   .board-editor .main-board {
-    width: var(--lr-ext-board) !important;
-    height: var(--lr-ext-board) !important;
+    width: var(--ln-ext-board) !important;
+    height: var(--ln-ext-board) !important;
   }
 
   .board-editor .spare {
-    width: var(--lr-ext-board) !important;
+    width: var(--ln-ext-board) !important;
   }
 
   .board-editor .spare-top {
@@ -94,8 +94,8 @@
 /* A small window: a narrower panel, so the board keeps its room. */
 @media (min-width: 1020px) and (max-width: 1259.98px) {
   .board-editor {
-    --lr-ext-panel-w: 300px;
-    --lr-ext-gap: 18px;
+    --ln-ext-panel-w: 300px;
+    --ln-ext-gap: 18px;
   }
 }
 
@@ -104,8 +104,8 @@
 /* One column that scrolls: the board between its spare pieces, then the panel. */
 @media (max-width: 1019.98px) {
   .board-editor {
-    --lr-ext-board: round(down, min(100vw - 16px, 640px), 8px);
-    --lr-ext-spare-h: calc(var(--lr-ext-board) / 8);
+    --ln-ext-board: round(down, min(100vw - 16px, 640px), 8px);
+    --ln-ext-spare-h: calc(var(--ln-ext-board) / 8);
 
     display: grid !important;
     grid-template-areas:
@@ -114,7 +114,7 @@
       'spare-bottom'
       'tools'
       'copyables' !important;
-    grid-template-columns: var(--lr-ext-board) !important;
+    grid-template-columns: var(--ln-ext-board) !important;
     grid-template-rows: auto !important;
     justify-content: center;
     gap: 8px 0 !important;
@@ -123,8 +123,8 @@
   }
 
   .board-editor .main-board {
-    width: var(--lr-ext-board) !important;
-    height: var(--lr-ext-board) !important;
+    width: var(--ln-ext-board) !important;
+    height: var(--ln-ext-board) !important;
   }
 
   .board-editor .spare,

@@ -24,10 +24,10 @@ export const overflows = ({ scrollHeight, clientHeight, lineHeight }: Fit): bool
 
 function tick(session: Session): void {
   const { stream } = session;
-  const words = queryAll(session.elements.panel, '.lr-ext-bubble__sub .lr-ext-w', HTMLElement);
+  const words = queryAll(session.elements.panel, '.ln-ext-bubble__sub .ln-ext-w', HTMLElement);
   const word = words[stream.state.shown];
   stream.state = { ...stream.state, shown: stream.state.shown + 1 };
-  if (word) word.className = 'lr-ext-w lr-ext-w--in';
+  if (word) word.className = 'ln-ext-w ln-ext-w--in';
   if (stream.state.shown >= words.length) {
     clearInterval(stream.timer);
     stream.timer = 0;
@@ -41,11 +41,11 @@ function tick(session: Session): void {
  */
 export function startStream(session: Session): void {
   const { panel } = session.elements;
-  const sub = queryOne(panel, '.lr-ext-bubble__sub', HTMLElement);
+  const sub = queryOne(panel, '.ln-ext-bubble__sub', HTMLElement);
   if (!sub) return;
-  const room = queryOne(panel, '.lr-ext-bubble__body', HTMLElement) ?? sub;
+  const room = queryOne(panel, '.ln-ext-bubble__body', HTMLElement) ?? sub;
   const { stream } = session;
-  const drop = queryOne(sub, '.lr-ext-say--drop', HTMLElement);
+  const drop = queryOne(sub, '.ln-ext-say--drop', HTMLElement);
   const fit = (): Fit => ({
     scrollHeight: room.scrollHeight,
     clientHeight: room.clientHeight,
@@ -57,10 +57,10 @@ export function startStream(session: Session): void {
     const shown =
       stream.state.shown === Infinity
         ? Infinity
-        : sub.querySelectorAll('.lr-ext-w:not(.lr-ext-w--off)').length;
+        : sub.querySelectorAll('.ln-ext-w:not(.ln-ext-w--off)').length;
     stream.state = { ...stream.state, dropped: true, shown };
   }
-  if (stream.state.shown < sub.querySelectorAll('.lr-ext-w').length && stream.timer === 0) {
+  if (stream.state.shown < sub.querySelectorAll('.ln-ext-w').length && stream.timer === 0) {
     stream.timer = setInterval(() => tick(session), WORD_MS);
     tellCoach(session);
   }

@@ -8,11 +8,11 @@ main.swiss .swiss__meta {
   display: flex;
   flex-direction: column;
   padding: 18px !important;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
 }
 
 /* Time control, rounds and pause, beside the mode tile. The glyph is a mask (a
@@ -22,7 +22,7 @@ main.swiss .swiss__meta section[data-icon]:first-child {
   margin-bottom: 12px !important;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52'%3E%3Crect width='52' height='52' rx='12' fill='%233c3a37'/%3E%3C/svg%3E")
     no-repeat left center / 52px 52px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
   line-height: 1.4;
@@ -53,13 +53,13 @@ main.swiss .swiss__meta section[data-icon]:first-child > div {
 
 main.swiss .swiss__meta section[data-icon]:first-child p:first-child {
   margin-bottom: 3px !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 16px;
   font-weight: 800;
 }
 
 main.swiss .swiss__meta__round {
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 13px;
   font-weight: 700;
 }
@@ -69,11 +69,11 @@ main.swiss .swiss__meta section[data-icon]:first-child p + p {
 }
 
 main.swiss .swiss__meta section[data-icon]:first-child p + p a {
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
 }
 
-/* The rounds as a progress bar; content/pages/swiss.ts sets --lr-ext-progress. */
-main.swiss .swiss__meta p[style*='--lr-ext-progress']::after {
+/* The rounds as a progress bar; content/pages/swiss.ts sets --ln-ext-progress. */
+main.swiss .swiss__meta p[style*='--ln-ext-progress']::after {
   content: '';
   display: block;
   height: 4px;
@@ -81,28 +81,28 @@ main.swiss .swiss__meta p[style*='--lr-ext-progress']::after {
   border-radius: 2px;
   background: linear-gradient(
     to right,
-    var(--lr-ext-accent) var(--lr-ext-progress),
-    var(--lr-ext-lift-8) 0
+    var(--ln-ext-accent) var(--ln-ext-progress),
+    var(--ln-ext-lift-8) 0
   );
 }
 
-html[dir='rtl'] main.swiss .swiss__meta p[style*='--lr-ext-progress']::after {
+html[dir='rtl'] main.swiss .swiss__meta p[style*='--ln-ext-progress']::after {
   background: linear-gradient(
     to left,
-    var(--lr-ext-accent) var(--lr-ext-progress),
-    var(--lr-ext-lift-8) 0
+    var(--ln-ext-accent) var(--ln-ext-progress),
+    var(--ln-ext-lift-8) 0
   );
 }
 
 main.swiss .swiss__meta .description {
   margin-bottom: 12px !important;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 14px;
   line-height: 1.5;
 }
 
 main.swiss .swiss__meta .description a {
-  color: var(--lr-ext-accent) !important;
+  color: var(--ln-ext-accent) !important;
 }
 
 /* The team as a chip. */
@@ -115,20 +115,20 @@ main.swiss .swiss__meta > a.text[href^='/team/'] {
   margin-bottom: 12px;
   padding: 5px 12px;
   border-radius: 999px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-strong) !important;
   font-size: 13px;
   font-weight: 700;
   transition: background-color 0.15s !important;
 }
 
 main.swiss .swiss__meta > a.text[href^='/team/']:hover {
-  background: var(--lr-ext-bg-raised-hover);
+  background: var(--ln-ext-bg-raised-hover);
 }
 
 main.swiss .swiss__meta > a.text[href^='/team/']::before {
   margin: 0 !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
 main.swiss .swiss__meta > a.text[href^='/team/'] .uflair {
@@ -153,7 +153,7 @@ main.swiss .swiss__meta section.conditions > div {
 }
 
 main.swiss .swiss__meta section.conditions p:not(.condition) {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 700;
 }
@@ -161,31 +161,31 @@ main.swiss .swiss__meta section.conditions p:not(.condition) {
 main.swiss .swiss__meta section.conditions .condition {
   padding: 7px 12px;
   border-radius: 6px;
-  background: var(--lr-ext-bg-raised);
-  color: var(--lr-ext-text);
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text);
   font-size: 13px;
   font-weight: 600;
 }
 
 main.swiss .swiss__meta section.conditions .condition.accepted {
-  color: var(--lr-ext-good) !important;
+  color: var(--ln-ext-good) !important;
 }
 
 main.swiss .swiss__meta section.conditions .condition.refused {
-  color: var(--lr-ext-red-dark) !important;
+  color: var(--ln-ext-red-dark) !important;
 }
 
 /* Creator and start date: a quiet footer. */
 main.swiss .swiss__meta > small {
   padding-top: 12px;
-  border-top: 1px solid var(--lr-ext-card-border);
-  color: var(--lr-ext-text-dim);
+  border-top: 1px solid var(--ln-ext-card-border);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
 }
 
 main.swiss .swiss__meta > small .user-link {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-weight: 700;
 }
 
@@ -199,7 +199,7 @@ main.swiss .swiss__meta > small {
 
 main.swiss .swiss__meta > time {
   margin-top: 3px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
 }
@@ -208,9 +208,9 @@ main.swiss .swiss__meta > time {
 
 main.swiss .swiss__side .mchat {
   overflow: hidden;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
@@ -219,7 +219,7 @@ main.swiss .mchat__content {
 }
 
 main.swiss .chat__members {
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12px;
   font-weight: 600;
 }

@@ -26,15 +26,15 @@ async function boardSection(): Promise<HTMLElement> {
 }
 
 function thumb(section: HTMLElement, id: string): HTMLElement {
-  const found = queryOne(section, `[data-lr-ext-choice="${id}"] .lr-ext-src-thumb`, HTMLElement);
+  const found = queryOne(section, `[data-ln-ext-choice="${id}"] .ln-ext-src-thumb`, HTMLElement);
   if (!found) throw new Error(`no ${id}`);
   return found;
 }
 
 const squares = (element: HTMLElement): (string | undefined)[] => [
-  element.dataset.lrExtSquares,
-  element.style.getPropertyValue('--lr-ext-thumb-light'),
-  element.style.getPropertyValue('--lr-ext-thumb-dark'),
+  element.dataset.lnExtSquares,
+  element.style.getPropertyValue('--ln-ext-thumb-light'),
+  element.style.getPropertyValue('--ln-ext-thumb-dark'),
 ];
 
 beforeEach(() => {
@@ -51,17 +51,17 @@ describe('the board panel’s tiles', () => {
     expect(squares(thumb(section, 'tone-iris'))).toEqual(['', '#f7f8f8', '#8467ec']);
     expect(squares(thumb(section, 'accent'))).toEqual([undefined, '', '']);
     expect(squares(thumb(section, 'custom'))).toEqual([undefined, '', '']);
-    expect(thumb(section, 'accent').dataset.lrExtTheme).toBe('accent');
+    expect(thumb(section, 'accent').dataset.lnExtTheme).toBe('accent');
   });
 
   it('list the boards the user saved, in their colors, before the custom one', async () => {
     const { saveBoard } = await load();
     const id = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
     const section = await boardSection();
-    const tile = queryOne(section, `[data-lr-ext-choice="${id}"]`, HTMLElement);
+    const tile = queryOne(section, `[data-ln-ext-choice="${id}"]`, HTMLElement);
     expect(tile?.getAttribute('aria-label')).toBe('Sea');
     expect(
-      queryOne(section, `[data-lr-ext-choice="${id}"] + *`, HTMLElement)?.dataset.lrExtChoice,
+      queryOne(section, `[data-ln-ext-choice="${id}"] + *`, HTMLElement)?.dataset.lnExtChoice,
     ).toBe('custom');
     expect(squares(thumb(section, id))).toEqual(['', '#ffffff', '#123456']);
   });

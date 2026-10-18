@@ -13,13 +13,13 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   visibility: hidden;
 }
 
-.lr-ext-speeds {
+.ln-ext-speeds {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.lr-ext-speeds__head {
+.ln-ext-speeds__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,23 +28,23 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   padding-inline-start: 4px;
 }
 
-.lr-ext-speeds__title {
+.ln-ext-speeds__title {
   margin: 0;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 17px;
   font-weight: 800;
 }
 
-.lr-ext-speeds__custom {
+.ln-ext-speeds__custom {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   height: 34px;
   padding: 0 10px 0 12px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 999px;
-  background: var(--lr-ext-bg-panel);
-  color: var(--lr-ext-neutral-13);
+  background: var(--ln-ext-bg-panel);
+  color: var(--ln-ext-neutral-13);
   font: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -54,24 +54,24 @@ main.lobby .lobby__app-pools > .lobby__app__content {
     border-color 0.15s !important;
 }
 
-.lr-ext-speeds__custom:hover {
-  border-color: var(--lr-ext-card-border-hover);
-  background: var(--lr-ext-btn-grey);
-  color: var(--lr-ext-text-strong);
+.ln-ext-speeds__custom:hover {
+  border-color: var(--ln-ext-card-border-hover);
+  background: var(--ln-ext-btn-grey);
+  color: var(--ln-ext-text-strong);
 }
 
-.lr-ext-speeds__custom .lr-ext-hi {
+.ln-ext-speeds__custom .ln-ext-hi {
   width: 16px;
   height: 16px;
 }
 
-.lr-ext-speeds__custom .lr-ext-hi:last-child {
-  color: var(--lr-ext-text-dim);
+.ln-ext-speeds__custom .ln-ext-hi:last-child {
+  color: var(--ln-ext-text-dim);
 }
 
 /* While Lichess seeks a game in a pool: which one, and a button to stop, in the custom
    game's place. */
-.lr-ext-speeds__seeking {
+.ln-ext-speeds__seeking {
   display: none;
   align-items: center;
   gap: 10px;
@@ -79,66 +79,66 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   height: 34px;
   padding: 0 4px 0 14px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-accent) 16%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-accent) 40%, transparent);
-  color: var(--lr-ext-text-strong);
+  background: color-mix(in srgb, var(--ln-ext-accent) 16%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 40%, transparent);
+  color: var(--ln-ext-text-strong);
   font-size: 14px;
   font-weight: 700;
 }
 
-.lr-ext-speeds--seeking .lr-ext-speeds__seeking {
+.ln-ext-speeds--seeking .ln-ext-speeds__seeking {
   display: inline-flex;
 }
 
-.lr-ext-speeds--seeking .lr-ext-speeds__custom {
+.ln-ext-speeds--seeking .ln-ext-speeds__custom {
   display: none;
 }
 
-.lr-ext-speeds__seeking-text {
+.ln-ext-speeds__seeking-text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.lr-ext-speeds__cancel {
+.ln-ext-speeds__cancel {
   flex: none;
   height: 26px;
   padding: 0 12px;
   border: none;
   border-radius: 999px;
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong);
   font: inherit;
   font-size: 13px;
   cursor: pointer;
   transition: background-color 0.15s !important;
 }
 
-.lr-ext-speeds__cancel:hover {
-  background: var(--lr-ext-btn-grey-hover);
+.ln-ext-speeds__cancel:hover {
+  background: var(--ln-ext-btn-grey-hover);
 }
 
-.lr-ext-speeds__cards {
+.ln-ext-speeds__cards {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
 
-.lr-ext-speed {
+.ln-ext-speed {
   display: flex;
   flex-direction: column;
   gap: 8px;
   box-sizing: border-box;
   padding: 16px;
   border-radius: 16px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
   box-shadow:
-    inset 0 1px 0 var(--lr-ext-lift-5),
-    0 10px 28px var(--lr-ext-shade-20);
+    inset 0 1px 0 var(--ln-ext-lift-5),
+    0 10px 28px var(--ln-ext-shade-20);
 }
 
-.lr-ext-speed__top {
+.ln-ext-speed__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -146,82 +146,82 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   min-width: 0;
 }
 
-.lr-ext-speed__name {
+.ln-ext-speed__name {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-width: 0;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 16px;
   font-weight: 700;
   white-space: nowrap;
 }
 
-.lr-ext-speed__name > span {
+.ln-ext-speed__name > span {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 /* The speed's Lichess glyph, in its rating's color. */
-.lr-ext-speed__name::before {
+.ln-ext-speed__name::before {
   flex: none;
-  color: var(--lr-ext-speed-color);
+  color: var(--ln-ext-speed-color);
   font-family: lichess;
   font-size: 18px;
   font-weight: 400;
   line-height: 1;
 }
 
-.lr-ext-speed[data-lr-ext-speed='bullet'] .lr-ext-speed__name::before {
-  content: var(--lr-ext-mode-bullet);
+.ln-ext-speed[data-ln-ext-speed='bullet'] .ln-ext-speed__name::before {
+  content: var(--ln-ext-mode-bullet);
 }
-.lr-ext-speed[data-lr-ext-speed='blitz'] .lr-ext-speed__name::before {
-  content: var(--lr-ext-mode-blitz);
+.ln-ext-speed[data-ln-ext-speed='blitz'] .ln-ext-speed__name::before {
+  content: var(--ln-ext-mode-blitz);
 }
-.lr-ext-speed[data-lr-ext-speed='rapid'] .lr-ext-speed__name::before {
-  content: var(--lr-ext-mode-rapid);
+.ln-ext-speed[data-ln-ext-speed='rapid'] .ln-ext-speed__name::before {
+  content: var(--ln-ext-mode-rapid);
 }
-.lr-ext-speed[data-lr-ext-speed='classical'] .lr-ext-speed__name::before {
-  content: var(--lr-ext-mode-classical);
+.ln-ext-speed[data-ln-ext-speed='classical'] .ln-ext-speed__name::before {
+  content: var(--ln-ext-mode-classical);
 }
 
-.lr-ext-speed__games {
+.ln-ext-speed__games {
   flex: none;
   padding: 2px 9px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
-  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, var(--lr-ext-text-strong)) !important;
+  background: color-mix(in srgb, var(--ln-ext-speed-color) 16%, transparent);
+  color: color-mix(in srgb, var(--ln-ext-speed-color) 80%, var(--ln-ext-text-strong)) !important;
   font-size: 12.5px;
   font-weight: 800;
   white-space: nowrap;
   transition: background-color 0.15s !important;
 }
 
-.lr-ext-speed__games:hover {
-  background: color-mix(in srgb, var(--lr-ext-speed-color) 28%, transparent);
+.ln-ext-speed__games:hover {
+  background: color-mix(in srgb, var(--ln-ext-speed-color) 28%, transparent);
 }
 
 /* The rating and its curve, a link to the speed's stats. */
-.lr-ext-speed__stats {
+.ln-ext-speed__stats {
   display: flex;
   flex-direction: column;
   gap: 8px;
   color: inherit !important;
 }
 
-.lr-ext-speed__stats .lr-ext-speed__rating {
+.ln-ext-speed__stats .ln-ext-speed__rating {
   transition: color 0.15s !important;
 }
 
-.lr-ext-speed__stats:hover .lr-ext-speed__rating {
-  color: color-mix(in srgb, var(--lr-ext-speed-color) 45%, var(--lr-ext-text-strong));
+.ln-ext-speed__stats:hover .ln-ext-speed__rating {
+  color: color-mix(in srgb, var(--ln-ext-speed-color) 45%, var(--ln-ext-text-strong));
 }
 
-.lr-ext-speed__rating {
+.ln-ext-speed__rating {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 30px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -230,15 +230,15 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 }
 
 /* A provisional rating, as Lichess marks one: a question mark, on a badge in the speed's color. */
-.lr-ext-speed__provisional {
+.ln-ext-speed__provisional {
   display: grid;
   place-items: center;
   align-self: center;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--lr-ext-speed-color) 16%, transparent);
-  color: color-mix(in srgb, var(--lr-ext-speed-color) 80%, var(--lr-ext-text-strong));
+  background: color-mix(in srgb, var(--ln-ext-speed-color) 16%, transparent);
+  color: color-mix(in srgb, var(--ln-ext-speed-color) 80%, var(--ln-ext-text-strong));
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0;
@@ -246,11 +246,11 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   cursor: help;
 }
 
-.lr-ext-speed__rating--none {
-  color: var(--lr-ext-neutral-10);
+.ln-ext-speed__rating--none {
+  color: var(--ln-ext-neutral-10);
 }
 
-.lr-ext-speed__curve {
+.ln-ext-speed__curve {
   display: block;
   width: 100%;
   height: 40px;
@@ -258,37 +258,37 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 }
 
 /* No rating history yet: a faint dashed line where the curve would be. */
-.lr-ext-speed__curve--empty {
+.ln-ext-speed__curve--empty {
   box-sizing: border-box;
   height: 28px;
   margin-bottom: 12px;
-  border-bottom: 1px dashed var(--lr-ext-lift-12);
+  border-bottom: 1px dashed var(--ln-ext-lift-12);
 }
 
-.lr-ext-speed__line {
+.ln-ext-speed__line {
   fill: none;
-  stroke: var(--lr-ext-speed-color);
+  stroke: var(--ln-ext-speed-color);
   stroke-width: 2px;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
 }
 
-.lr-ext-speed__stop {
-  stop-color: var(--lr-ext-speed-color);
+.ln-ext-speed__stop {
+  stop-color: var(--ln-ext-speed-color);
   stop-opacity: 0.32;
 }
 
-.lr-ext-speed__stop--end {
+.ln-ext-speed__stop--end {
   stop-opacity: 0;
 }
 
-.lr-ext-speed__pools {
+.ln-ext-speed__pools {
   display: flex;
   gap: 6px;
   margin-top: auto;
 }
 
-.lr-ext-speed__pool {
+.ln-ext-speed__pool {
   display: inline-flex;
   flex: 1 1 0;
   align-items: center;
@@ -299,9 +299,9 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   padding: 0 4px;
   border: none;
   border-radius: 8px;
-  background: var(--lr-ext-btn-grey);
-  box-shadow: var(--lr-ext-btn-grey-shadow);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong);
   font: inherit;
   font-size: 14.5px;
   font-weight: 700;
@@ -312,33 +312,33 @@ main.lobby .lobby__app-pools > .lobby__app__content {
     opacity 0.15s !important;
 }
 
-.lr-ext-speed__pool:hover {
-  background: var(--lr-ext-btn-grey-hover);
+.ln-ext-speed__pool:hover {
+  background: var(--ln-ext-btn-grey-hover);
 }
 
 /* The pool last played at this speed: one click to play it again. */
-.lr-ext-speed__pool--last {
-  background: var(--lr-ext-btn-primary);
-  box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: var(--lr-ext-white);
+.ln-ext-speed__pool--last {
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white);
 }
 
-.lr-ext-speed__pool--last:hover {
-  background: var(--lr-ext-btn-primary-hover);
+.ln-ext-speed__pool--last:hover {
+  background: var(--ln-ext-btn-primary-hover);
 }
 
 /* Seeking: the pool ringed, a cross to cancel, the others faded. */
-.lr-ext-speeds--seeking .lr-ext-speed__pool:not(.lr-ext-speed__pool--seeking) {
+.ln-ext-speeds--seeking .ln-ext-speed__pool:not(.ln-ext-speed__pool--seeking) {
   opacity: 0.4;
 }
 
-.lr-ext-speed__pool--seeking,
-.lr-ext-speed__pool--seeking:hover {
-  background: var(--lr-ext-btn-grey);
-  box-shadow: inset 0 0 0 2px var(--lr-ext-accent);
+.ln-ext-speed__pool--seeking,
+.ln-ext-speed__pool--seeking:hover {
+  background: var(--ln-ext-btn-grey);
+  box-shadow: inset 0 0 0 2px var(--ln-ext-accent);
 }
 
-.lr-ext-speed__pool--seeking::after {
+.ln-ext-speed__pool--seeking::after {
   content: '';
   width: 14px;
   height: 14px;
@@ -350,33 +350,33 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 /* Four cards in what the sidebar leaves of a 1024px window: tighter, so the names and the
    blitz's four pools still fit. */
 @media (max-width: 1259.29px) {
-  .lr-ext-speeds__cards {
+  .ln-ext-speeds__cards {
     gap: 12px;
   }
 
-  .lr-ext-speed {
+  .ln-ext-speed {
     padding: 14px 12px 12px;
   }
 
-  .lr-ext-speed__name {
+  .ln-ext-speed__name {
     gap: 6px;
     font-size: 15px;
   }
 
-  .lr-ext-speed__games {
+  .ln-ext-speed__games {
     padding: 1px 7px;
     font-size: 11.5px;
   }
 
-  .lr-ext-speed__rating {
+  .ln-ext-speed__rating {
     font-size: 26px;
   }
 
-  .lr-ext-speed__pools {
+  .ln-ext-speed__pools {
     gap: 4px;
   }
 
-  .lr-ext-speed__pool {
+  .ln-ext-speed__pool {
     padding: 0 2px;
     font-size: 13px;
   }

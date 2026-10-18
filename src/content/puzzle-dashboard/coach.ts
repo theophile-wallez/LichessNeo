@@ -20,11 +20,11 @@ export function liveMascot(
   mood: () => CoachMood,
 ): MascotSpot {
   const spot = new MascotSpot({
-    className: 'lr-ext-pdash__live',
+    className: 'ln-ext-pdash__live',
     framing: 'bust',
     whenIdle: true,
     onDrawn: drawn => {
-      setData(drawn, 'lrExtLive', '');
+      setData(drawn, 'lnExtLive', '');
       spot.sync(holder, mood(), { coach: coachId });
     },
   });
@@ -39,22 +39,22 @@ export const turned = (at: number, turn: Turn, count: number): number =>
   (at + (turn === 'next' ? 1 : -1) + count) % count;
 
 function slide(text: HTMLElement, tip: Tip, turn: Turn): void {
-  for (const old of queryAll(text, ':scope > .lr-ext-pdash__say', HTMLElement)) {
-    setData(old, 'lrExtLeave', turn);
+  for (const old of queryAll(text, ':scope > .ln-ext-pdash__say', HTMLElement)) {
+    setData(old, 'lnExtLeave', turn);
     old.addEventListener('animationend', () => old.remove(), { once: true });
   }
   const holder = document.createElement('div');
   setHtml(holder, tipMarkup(tip));
   const said = holder.firstElementChild;
   if (!(said instanceof HTMLElement)) return;
-  setData(said, 'lrExtEnter', turn);
+  setData(said, 'lnExtEnter', turn);
   text.append(said);
 }
 
 export function startCoach(section: HTMLElement, tips: readonly Tip[], coachId: number): void {
-  const mascot = queryOne(section, '.lr-ext-pdash__mascot', HTMLElement);
-  const text = queryOne(section, '.lr-ext-pdash__tip', HTMLElement);
-  const dots = queryAll(section, '.lr-ext-pdash__dots > i', HTMLElement);
+  const mascot = queryOne(section, '.ln-ext-pdash__mascot', HTMLElement);
+  const text = queryOne(section, '.ln-ext-pdash__tip', HTMLElement);
+  const dots = queryAll(section, '.ln-ext-pdash__dots > i', HTMLElement);
   const first = tips[0];
   if (!mascot || !text || !first) return;
   let at = 0;
@@ -64,14 +64,14 @@ export function startCoach(section: HTMLElement, tips: readonly Tip[], coachId: 
     const tip = tips[at];
     if (!tip) return;
     slide(text, tip, to);
-    for (const [i, dot] of dots.entries()) setData(dot, 'lrExtOn', i === at ? '' : null);
+    for (const [i, dot] of dots.entries()) setData(dot, 'lnExtOn', i === at ? '' : null);
     spot.sync(mascot, tip.mood, { coach: coachId });
   };
   // The mascot pokes itself on a click (MascotSpot); the arrows ask it to.
   if (tips.length > 1) mascot.addEventListener('click', () => turn('next'));
-  for (const button of queryAll(section, '.lr-ext-pdash__turn', HTMLButtonElement)) {
+  for (const button of queryAll(section, '.ln-ext-pdash__turn', HTMLButtonElement)) {
     button.addEventListener('click', () => {
-      turn(button.dataset.lrExtTurn === 'back' ? 'back' : 'next');
+      turn(button.dataset.lnExtTurn === 'back' ? 'back' : 'next');
       spot.poke();
     });
   }

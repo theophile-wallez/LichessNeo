@@ -16,11 +16,11 @@ it('leaves the free board to Lichess’s panel when the settings switch its coac
     synthetic: true,
     steps: [],
   });
-  localStorage.setItem('lr-ext-coach-options', '{"motion":true,"analysis":false}');
+  localStorage.setItem('ln-ext-coach-options', '{"motion":true,"analysis":false}');
   review.start();
   await advance(500);
   ctrl.playUci('e2e4');
   ctrl.redraw();
   await advance(3000);
-  expect(document.getElementById('lr-ext-review')).toBeNull();
+  expect(document.getElementById('ln-ext-review')).toBeNull();
 });

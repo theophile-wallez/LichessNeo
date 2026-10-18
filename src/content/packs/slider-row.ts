@@ -18,9 +18,9 @@ export interface SliderRowSpec {
 
 export function sliderRow(spec: SliderRowSpec): HTMLElement {
   const { label, setting, min, max, step, fallback } = spec;
-  const row = createElement('div', { className: 'lr-ext-src-option-row lr-ext-src-slider-row' });
+  const row = createElement('div', { className: 'ln-ext-src-option-row ln-ext-src-slider-row' });
   const input = createElement('input', {
-    className: 'lr-ext-src-slider',
+    className: 'ln-ext-src-slider',
     attrs: {
       type: 'range',
       min: String(min),
@@ -29,10 +29,10 @@ export function sliderRow(spec: SliderRowSpec): HTMLElement {
       'aria-label': label,
     },
   });
-  const value = createElement('output', { className: 'lr-ext-src-slider-value' });
+  const value = createElement('output', { className: 'ln-ext-src-slider-value' });
   const reset = createElement('button', {
-    className: 'lr-ext-src-slider-reset',
-    attrs: { type: 'button', 'aria-label': 'Default', 'data-lr-ext-tip': 'Default' },
+    className: 'ln-ext-src-slider-reset',
+    attrs: { type: 'button', 'aria-label': 'Default', 'data-ln-ext-tip': 'Default' },
   });
   setHtml(reset, hugeicon(ArrowTurnBackwardIcon));
   const show = (shown: number): void => {
@@ -40,7 +40,7 @@ export function sliderRow(spec: SliderRowSpec): HTMLElement {
     value.textContent = `${shown}%`;
     reset.disabled = shown === fallback;
     // The track is filled up to the thumb.
-    setStyleProperty(input, '--lr-ext-slider-fill', `${((shown - min) / (max - min)) * 100}%`);
+    setStyleProperty(input, '--ln-ext-slider-fill', `${((shown - min) / (max - min)) * 100}%`);
   };
   const choose = (chosen: number): void => {
     setting.choose(chosen);
@@ -49,7 +49,7 @@ export function sliderRow(spec: SliderRowSpec): HTMLElement {
   input.addEventListener('input', () => choose(input.valueAsNumber));
   reset.addEventListener('click', () => choose(fallback));
   row.append(
-    createElement('span', { className: 'lr-ext-src-option-label', text: label }),
+    createElement('span', { className: 'ln-ext-src-option-label', text: label }),
     input,
     value,
     reset,

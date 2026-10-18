@@ -4,38 +4,38 @@
  * row over and under it: layout-narrow.css). Lichess's `mat-top` / `mat-bot` areas aren't in
  * this grid: they'd get tracks of their own. */
 @media (min-width: 1020px) {
-  html[data-lr-ext-has~='pocket'] main.round {
-    --lr-ext-pocket-gap: 8px;
-    --lr-ext-pocket-sq: calc(var(--lr-ext-board) * 0.09375);
-    --lr-ext-board: max(
+  html[data-ln-ext-has~='pocket'] main.round {
+    --ln-ext-pocket-gap: 8px;
+    --ln-ext-pocket-sq: calc(var(--ln-ext-board) * 0.09375);
+    --ln-ext-board: max(
       320px,
       calc(
         min(
             calc(
-              var(--lr-ext-main-h, 100dvh) - 32px - 2 * var(--lr-ext-bar) - var(--lr-ext-coords-off)
+              var(--ln-ext-main-h, 100dvh) - 32px - 2 * var(--ln-ext-bar) - var(--ln-ext-coords-off)
             ),
             calc(
-              (var(--lr-ext-main-w, 100vw) - var(--lr-ext-lead-w, 0px) - var(--lr-ext-panel-min) -
-                  var(--lr-ext-gap) - var(--lr-ext-pocket-gap) - 48px) /
+              (var(--ln-ext-main-w, 100vw) - var(--ln-ext-lead-w, 0px) - var(--ln-ext-panel-min) -
+                  var(--ln-ext-gap) - var(--ln-ext-pocket-gap) - 48px) /
                 1.09375
             )
           ) *
-          var(--lr-ext-board-scale, 1)
+          var(--ln-ext-board-scale, 1)
       )
     );
-    --lr-ext-panel-w: clamp(
-      var(--lr-ext-panel-min),
+    --ln-ext-panel-w: clamp(
+      var(--ln-ext-panel-min),
       calc(
-        var(--lr-ext-main-w, 100vw) - var(--lr-ext-lead-w, 0px) - var(--lr-ext-board) -
-          var(--lr-ext-pocket-gap) - var(--lr-ext-pocket-sq) - var(--lr-ext-gap) - 48px
+        var(--ln-ext-main-w, 100vw) - var(--ln-ext-lead-w, 0px) - var(--ln-ext-board) -
+          var(--ln-ext-pocket-gap) - var(--ln-ext-pocket-sq) - var(--ln-ext-gap) - 48px
       ),
       500px
     );
 
     grid-template-columns:
-      var(--lr-ext-board)
-      calc(var(--lr-ext-pocket-gap) + var(--lr-ext-pocket-sq) + var(--lr-ext-gap))
-      var(--lr-ext-panel-w) !important;
+      var(--ln-ext-board)
+      calc(var(--ln-ext-pocket-gap) + var(--ln-ext-pocket-sq) + var(--ln-ext-gap))
+      var(--ln-ext-panel-w) !important;
     grid-template-areas:
       'user-top .      moves'
       'board    pocket moves'
@@ -49,22 +49,22 @@
 main.round .pocket {
   grid-area: pocket !important;
   flex-direction: column;
-  width: var(--lr-ext-pocket-sq) !important;
-  margin: 0 0 0 var(--lr-ext-pocket-gap) !important;
+  width: var(--ln-ext-pocket-sq) !important;
+  margin: 0 0 0 var(--ln-ext-pocket-gap) !important;
   overflow: hidden;
   border-radius: 4px !important;
-  background: var(--lr-ext-bg-panel) !important;
+  background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
 }
 
 main.round .pocket-top {
   align-self: start;
-  margin-top: var(--lr-ext-inset-t, 0px) !important;
+  margin-top: var(--ln-ext-inset-t, 0px) !important;
 }
 
 main.round .pocket-bottom {
   align-self: end;
-  margin-bottom: var(--lr-ext-inset-b, 0px) !important;
+  margin-bottom: var(--ln-ext-inset-b, 0px) !important;
 }
 
 main.round .pocket-c1 {
@@ -74,7 +74,7 @@ main.round .pocket-c1 {
 
 /* Lichess's light grey hover was made for its grey strip. */
 main.round .pocket.usable piece:hover {
-  background-color: var(--lr-ext-lift-10) !important;
+  background-color: var(--ln-ext-lift-10) !important;
 }
 
 /* ---- Board tools --- */
@@ -86,25 +86,25 @@ main.round :is(i5d, rm6) bo3 .board-menu-toggle-btn {
   display: none !important;
 }
 
-main.round > .lr-ext-board-tools {
+main.round > .ln-ext-board-tools {
   grid-area: board;
   justify-self: end;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  width: var(--lr-ext-gap);
-  margin-inline-end: calc(-1 * var(--lr-ext-gap));
+  width: var(--ln-ext-gap);
+  margin-inline-end: calc(-1 * var(--ln-ext-gap));
   z-index: 2;
 }
 
 /* Crazyhouse: the tools go after the pockets' strip. */
-html[data-lr-ext-has~='pocket'] main.round > .lr-ext-board-tools {
+html[data-ln-ext-has~='pocket'] main.round > .ln-ext-board-tools {
   grid-area: pocket;
   margin-inline-end: 0;
 }
 
-main.round .lr-ext-board-tools__btn {
+main.round .ln-ext-board-tools__btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,7 +114,7 @@ main.round .lr-ext-board-tools__btn {
   border: 0;
   border-radius: 4px;
   background: none;
-  color: var(--lr-ext-neutral-10);
+  color: var(--ln-ext-neutral-10);
   cursor: pointer;
   transition:
     color 0.15s,
@@ -122,11 +122,11 @@ main.round .lr-ext-board-tools__btn {
     visibility 0.2s !important;
 }
 
-main.round .lr-ext-board-tools__btn:is(:hover, .lr-ext-board-tools__btn--on) {
-  color: var(--lr-ext-text-strong);
+main.round .ln-ext-board-tools__btn:is(:hover, .ln-ext-board-tools__btn--on) {
+  color: var(--ln-ext-text-strong);
 }
 
-main.round .lr-ext-board-tools__btn::before {
+main.round .ln-ext-board-tools__btn::before {
   content: '';
   width: 17px;
   height: 17px;
@@ -135,15 +135,15 @@ main.round .lr-ext-board-tools__btn::before {
 }
 
 /* The cog and the flip arrows. */
-main.round .lr-ext-board-tools__btn--menu::before {
+main.round .ln-ext-board-tools__btn--menu::before {
   mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
 }
 
-main.round .lr-ext-board-tools__btn--flip::before {
+main.round .ln-ext-board-tools__btn--flip::before {
   mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-reload-vertical.svg');
 }
 
-main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-tools__btn--flip {
+main.round .ln-ext-board-tools:not(.ln-ext-board-tools--hover) .ln-ext-board-tools__btn--flip {
   visibility: hidden;
   opacity: 0;
 }
@@ -162,7 +162,7 @@ main.round .lr-ext-board-tools:not(.lr-ext-board-tools--hover) .lr-ext-board-too
 /* Lichess's light theme gives the phone's move strip fixed colors of its own. */
 @media (max-width: 799.29px) and (orientation: portrait) {
   html.light main.round :is(i5d, rm6) :is(aPp, l4x) {
-    box-shadow: inset 0 4px 16px var(--lr-ext-shade-40) !important;
+    box-shadow: inset 0 4px 16px var(--ln-ext-shade-40) !important;
   }
 
   html.light main.round :is(i5d, rm6) :is(Z7yx, kwdb):is(.a1t, .active, :hover) {

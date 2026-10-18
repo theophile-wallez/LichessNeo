@@ -52,15 +52,15 @@ export function phasesMarkup(
   const lines = starts.flatMap(([ply, name]) => (ply === null ? [] : [{ x: scale.x(ply), name }]));
   const marks = lines.map(
     ({ x }) =>
-      html`<line class="lr-ext-gchart__phase" x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${PLOT_TOP}" y2="${size.height}"/>`,
+      html`<line class="ln-ext-gchart__phase" x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${PLOT_TOP}" y2="${size.height}"/>`,
   );
   const labels = phaseLabels(lines).map(
     ({ x, name, anchor }) =>
-      html`<text class="lr-ext-gchart__phase-name" x="${x.toFixed(1)}" y="12" text-anchor="${anchor}">${name}</text>`,
+      html`<text class="ln-ext-gchart__phase-name" x="${x.toFixed(1)}" y="12" text-anchor="${anchor}">${name}</text>`,
   );
   return [...marks, ...labels];
 }
 
 /** The move on the board, moved by `followPly`; the guide and the dot, by the hover. */
 export const overlayMarkup = ({ height }: PlotSize): SafeHtml =>
-  html`<line class="lr-ext-gchart__ply" x1="0" x2="0" y1="${PLOT_TOP}" y2="${height}"/><g class="lr-ext-rchart__hover"><line class="lr-ext-rchart__guide" x1="0" x2="0" y1="${PLOT_TOP}" y2="${height}"/><circle class="lr-ext-rchart__dot" r="4.5" cx="0" cy="0"/></g>`;
+  html`<line class="ln-ext-gchart__ply" x1="0" x2="0" y1="${PLOT_TOP}" y2="${height}"/><g class="ln-ext-rchart__hover"><line class="ln-ext-rchart__guide" x1="0" x2="0" y1="${PLOT_TOP}" y2="${height}"/><circle class="ln-ext-rchart__dot" r="4.5" cx="0" cy="0"/></g>`;

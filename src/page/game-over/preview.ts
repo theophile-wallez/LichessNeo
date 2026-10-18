@@ -14,10 +14,10 @@ import { mountGameOver } from './view.ts';
 // engine: on a game page, or a finished game's analysis board (where its page
 // lands once reloaded), Alt+Shift+E shows it as the game really ended for the
 // board's bottom side (a win while it goes on), then each other result at each
-// press; `?lr-ext-end=win` (or loss, draw) shows it as the page opens. The card
+// press; `?ln-ext-end=win` (or loss, draw) shows it as the page opens. The card
 // shows on a game page only, where Lichess's follow-up buttons are.
 
-const PARAM = 'lr-ext-end';
+const PARAM = 'ln-ext-end';
 const RESULTS: readonly Result[] = ['win', 'loss', 'draw'];
 const NEXT: Readonly<Record<Result, Result>> = { win: 'loss', loss: 'draw', draw: 'win' };
 const WATCH_MS = 250;
@@ -29,7 +29,7 @@ const SAMPLE: PlayerSummary = {
   firstPlies: { best: 9, excellent: 15, mistake: 21 },
 };
 
-/** The result `?lr-ext-end=` asks for, or null. */
+/** The result `?ln-ext-end=` asks for, or null. */
 export function previewResult(search: string): Result | null {
   const asked = new URLSearchParams(search).get(PARAM);
   return RESULTS.find(result => result === asked) ?? null;

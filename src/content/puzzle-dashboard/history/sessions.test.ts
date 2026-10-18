@@ -18,10 +18,10 @@ afterEach(() => {
 
 // The headings and the sessions' scores, in the page's order.
 const shown = (box: HTMLElement): string[] =>
-  queryAll(box, '.lr-ext-phist__day, .lr-ext-phist__score', HTMLElement).map(element =>
-    element.matches('.lr-ext-phist__day')
+  queryAll(box, '.ln-ext-phist__day, .ln-ext-phist__score', HTMLElement).map(element =>
+    element.matches('.ln-ext-phist__day')
       ? `# ${element.textContent}`
-      : `${element.dataset.lrExtTier} ${element.querySelector('b')?.textContent}`,
+      : `${element.dataset.lnExtTier} ${element.querySelector('b')?.textContent}`,
   );
 
 describe('the history’s sessions', () => {
@@ -39,8 +39,8 @@ describe('the history’s sessions', () => {
     );
     decorateSessions(box, NOW);
     expect(shown(box)).toEqual(['# Today', 'up 2/2', 'down 0/1', '# Yesterday', 'even 1/2']);
-    const dots = queryAll(box, '.lr-ext-phist__dots > i', HTMLElement);
-    expect(dots.map(dot => dot.dataset.lrExtSolved !== undefined)).toEqual([
+    const dots = queryAll(box, '.ln-ext-phist__dots > i', HTMLElement);
+    expect(dots.map(dot => dot.dataset.lnExtSolved !== undefined)).toEqual([
       true,
       true,
       false,

@@ -3,22 +3,22 @@
 /* The coach types its words out one by one (shared/coach-voice.ts, review/view/stream.ts):
    hidden words keep their place, then fade in. At every width: the Learn stages' coach
    speaks on phones too. */
-.lr-ext-w--off {
+.ln-ext-w--off {
   visibility: hidden;
 }
 
-.lr-ext-w--in {
-  animation: lr-ext-w-in 0.28s ease-out;
+.ln-ext-w--in {
+  animation: ln-ext-w-in 0.28s ease-out;
 }
 
-@keyframes lr-ext-w-in {
+@keyframes ln-ext-w-in {
   from {
     opacity: 0;
     filter: blur(2px);
   }
 }
 
-.lr-ext-bubble {
+.ln-ext-bubble {
   position: relative;
   flex: 1;
   min-width: 0;
@@ -26,73 +26,73 @@
   flex-direction: column;
   justify-content: center;
   min-height: 56px;
-  margin-top: max(0px, var(--lr-ext-tip) - var(--lr-ext-bubble-h, 56px) / 2);
+  margin-top: max(0px, var(--ln-ext-tip) - var(--ln-ext-bubble-h, 56px) / 2);
   box-sizing: border-box;
   padding: 10px 14px;
   border-radius: 12px;
-  background: var(--lr-ext-white);
-  color: var(--lr-ext-ink);
+  background: var(--ln-ext-white);
+  color: var(--ln-ext-ink);
 }
 
 /* The tail: a horn from the bubble's left edge, overlapping it by 1px so there's no
    seam. The bubble's min-height keeps it clear of the rounded corners. */
-.lr-ext-bubble::before {
+.ln-ext-bubble::before {
   content: '';
   position: absolute;
   left: -17px;
-  top: calc(min(50%, var(--lr-ext-tip)) - 15px);
+  top: calc(min(50%, var(--ln-ext-tip)) - 15px);
   width: 18px;
   height: 25px;
-  background: var(--lr-ext-bubble-tail) center / 100% 100% no-repeat;
+  background: var(--ln-ext-bubble-tail) center / 100% 100% no-repeat;
 }
 
-.lr-ext-bubble__row {
+.ln-ext-bubble__row {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.lr-ext-bubble__title {
+.ln-ext-bubble__title {
   flex: 1;
   margin: 0;
-  color: var(--lr-ext-ink);
+  color: var(--ln-ext-ink);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.3;
 }
 
-.lr-ext-fig {
+.ln-ext-fig {
   margin-right: 2px;
-  font-family: 'Noto Chess', var(--lr-ext-font);
+  font-family: 'Noto Chess', var(--ln-ext-font);
   font-size: 1.15em;
   font-weight: 400;
   line-height: 1;
 }
 
-.lr-ext-bubble__eval {
+.ln-ext-bubble__eval {
   flex: none;
   padding: 3px 7px;
   border-radius: 4px;
-  background: color-mix(in srgb, var(--lr-ext-ink) 12%, var(--lr-ext-white));
-  color: var(--lr-ext-ink);
+  background: color-mix(in srgb, var(--ln-ext-ink) 12%, var(--ln-ext-white));
+  color: var(--ln-ext-ink);
   font-size: 13px;
   font-weight: 800;
 }
 
-.lr-ext-bubble__eval--black {
-  background: var(--lr-ext-ink);
-  color: var(--lr-ext-white);
+.ln-ext-bubble__eval--black {
+  background: var(--ln-ext-ink);
+  color: var(--ln-ext-white);
 }
 
-.lr-ext-bubble__sub {
+.ln-ext-bubble__sub {
   margin: 6px 0 0;
-  color: var(--lr-ext-ink);
+  color: var(--ln-ext-ink);
   font-size: 14px;
   line-height: 1.35;
 }
 
 /* Explain's button under its lines, which plays the best one on the board. */
-.lr-ext-bubble__line {
+.ln-ext-bubble__line {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
@@ -101,18 +101,18 @@
   padding: 4px 10px 4px 6px;
   border: none;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-ink) 12%, var(--lr-ext-white));
-  color: var(--lr-ext-ink);
+  background: color-mix(in srgb, var(--ln-ext-ink) 12%, var(--ln-ext-white));
+  color: var(--ln-ext-ink);
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
 }
 
-.lr-ext-bubble__line:hover {
-  background: color-mix(in srgb, var(--lr-ext-ink) 12%, var(--lr-ext-white));
+.ln-ext-bubble__line:hover {
+  background: color-mix(in srgb, var(--ln-ext-ink) 12%, var(--ln-ext-white));
 }
 
-.lr-ext-bubble__line .lr-ext-i {
+.ln-ext-bubble__line .ln-ext-i {
   width: 16px;
   height: 16px;
 }
@@ -120,7 +120,7 @@
 /* Pieces are drawn in the board's set, moves as chips led by the moving piece. Negative
    margins keep the pieces from pushing the lines apart; the piece's foot sits on the
    text's baseline. */
-.lr-ext-pc {
+.ln-ext-pc {
   display: inline-block;
   width: 1.3em;
   height: 1.3em;
@@ -130,40 +130,40 @@
 
 /* A chip's pieces are sized to its line. Inline, its padding doesn't push the lines
    apart, and a period after it can't wrap alone as it could after an inline-block. */
-.lr-ext-mv {
+.ln-ext-mv {
   display: inline;
   padding: 0.05em 0.3em 0.05em 0.1em;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--lr-ext-ink) 12%, var(--lr-ext-white));
+  background: color-mix(in srgb, var(--ln-ext-ink) 12%, var(--ln-ext-white));
   font-weight: 700;
   line-height: 1.3;
   vertical-align: -0.05em;
   white-space: nowrap;
 }
 
-.lr-ext-mv .lr-ext-pc {
+.ln-ext-mv .ln-ext-pc {
   width: 1.3em;
   height: 1.3em;
   margin: 0 0.05em 0 0;
   vertical-align: top;
 }
 
-.lr-ext-sq {
+.ln-ext-sq {
   font-weight: 700;
 }
 
-.lr-ext-num {
+.ln-ext-num {
   white-space: nowrap;
 }
 
 /* Equal thirds; Explain and Best fold away when they've nothing to do, and only
    Next grows into their room. Margins, not a gap, so a folded button leaves none. */
-.lr-ext-review__nav {
+.ln-ext-review__nav {
   display: flex;
   padding: 14px 16px 12px;
 }
 
-.lr-ext-review__nav .lr-ext-btn {
+.ln-ext-review__nav .ln-ext-btn {
   flex: 1 1 0;
   min-width: 0;
   gap: 6px;
@@ -178,23 +178,23 @@
     background-color 0.15s !important;
 }
 
-.lr-ext-review__nav .lr-ext-btn:not(.lr-ext-btn--green) {
+.ln-ext-review__nav .ln-ext-btn:not(.ln-ext-btn--green) {
   flex: 0 0 calc((100% - 16px) / 3);
   margin-inline-end: 8px;
 }
 
-.lr-ext-review__nav .lr-ext-btn:not(.lr-ext-btn--green):disabled {
+.ln-ext-review__nav .ln-ext-btn:not(.ln-ext-btn--green):disabled {
   flex-basis: 0;
   margin-inline-end: 0;
   padding-inline: 0;
   opacity: 0;
 }
 
-.lr-ext-review__nav .lr-ext-btn:not(.lr-ext-btn--green) .lr-ext-i {
-  color: var(--lr-ext-text-dim);
+.ln-ext-review__nav .ln-ext-btn:not(.ln-ext-btn--green) .ln-ext-i {
+  color: var(--ln-ext-text-dim);
 }
 
-.lr-ext-btn {
+.ln-ext-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -203,85 +203,85 @@
   text-align: center;
   border: none;
   border-radius: 6px;
-  background: var(--lr-ext-btn-grey);
-  color: var(--lr-ext-text-strong);
+  background: var(--ln-ext-btn-grey);
+  color: var(--ln-ext-text-strong);
   font-size: 15px;
   font-weight: 800;
-  box-shadow: var(--lr-ext-btn-grey-shadow);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
 }
 
-.lr-ext-btn:hover:not(:disabled) {
-  background: var(--lr-ext-btn-grey-hover);
+.ln-ext-btn:hover:not(:disabled) {
+  background: var(--ln-ext-btn-grey-hover);
 }
 
-.lr-ext-btn--green {
-  background: var(--lr-ext-btn-primary);
-  color: var(--lr-ext-white);
+.ln-ext-btn--green {
+  background: var(--ln-ext-btn-primary);
+  color: var(--ln-ext-white);
   text-shadow: 0 1px 1px #00000033;
-  box-shadow: var(--lr-ext-btn-primary-shadow);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
 }
 
-.lr-ext-btn--green:hover:not(:disabled) {
-  background: var(--lr-ext-btn-primary-hover);
+.ln-ext-btn--green:hover:not(:disabled) {
+  background: var(--ln-ext-btn-primary-hover);
 }
 
-.lr-ext-btn:disabled {
+.ln-ext-btn:disabled {
   opacity: 0.5;
   cursor: default !important;
 }
 
-.lr-ext-btn .lr-ext-i {
+.ln-ext-btn .ln-ext-i {
   width: 20px;
   height: 20px;
   flex: none;
 }
 
-.lr-ext-btn--on .lr-ext-i {
-  color: var(--lr-ext-orange-dark) !important;
+.ln-ext-btn--on .ln-ext-i {
+  color: var(--ln-ext-orange-dark) !important;
 }
 
-.lr-ext-review__foot {
+.ln-ext-review__foot {
   display: flex;
   gap: 10px;
 }
 
-.lr-ext-review__foot .lr-ext-btn {
+.ln-ext-review__foot .ln-ext-btn {
   flex: 1.4;
   height: 52px;
   font-size: 18px;
 }
 
 /* Lichess's "Learn from your mistakes", beside Start Debrief. */
-.lr-ext-review__foot .lr-ext-btn.lr-ext-review__learn {
+.ln-ext-review__foot .ln-ext-btn.ln-ext-review__learn {
   flex: 1;
   padding-inline: 14px;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 14px;
   line-height: 1.2;
 }
 
 /* ---- Controls --- */
 
-#lr-ext-review-controls {
+#ln-ext-review-controls {
   grid-area: rctrl;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
-  margin-left: var(--lr-ext-gap);
+  margin-left: var(--ln-ext-gap);
   padding: 10px 8px;
   box-sizing: border-box;
-  border-top: 1px solid var(--lr-ext-border);
+  border-top: 1px solid var(--ln-ext-border);
   border-radius: 0 0 6px 6px;
-  background: var(--lr-ext-bg-panel-dark);
+  background: var(--ln-ext-bg-panel-dark);
 }
 
-#lr-ext-review-controls .lr-ext-btn {
+#ln-ext-review-controls .ln-ext-btn {
   height: 100%;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   cursor: pointer;
 }
 
-#lr-ext-review-controls .lr-ext-i {
+#ln-ext-review-controls .ln-ext-i {
   width: 26px;
   height: 26px;
 }
@@ -290,7 +290,7 @@
 
 /* The coach and its remark share one card, the coach standing on its bottom edge, the
    remark beside it: no white bubble, no tail. */
-#lr-ext-review .lr-ext-coach {
+#ln-ext-review .ln-ext-coach {
   position: relative;
   align-items: flex-end;
   /* Room for its arms at its sides (the fox's reach the farthest): the card cuts it only
@@ -300,14 +300,14 @@
   padding: 0 14px 0 24px;
   overflow: hidden;
   border-radius: 12px;
-  background: var(--lr-ext-bg-raised);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  background: var(--ln-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
 /* The live coach's canvas spills past the avatar's sides, so its arms and tail show, and
    above its head, so its hops do: only the card cuts it. The framing stays the avatar's
    (mascot/stage.ts). */
-#lr-ext-review .lr-ext-coach__face canvas {
+#ln-ext-review .ln-ext-coach__face canvas {
   top: -50%;
   left: -40%;
   width: 180%;
@@ -316,64 +316,64 @@
 
 /* The move's time, in the card's corner over the coach's head; the coach's advice on it,
    when there's some, in its tooltip (view/verdict.ts). */
-#lr-ext-review .lr-ext-coach > .lr-ext-tag--time {
+#ln-ext-review .ln-ext-coach > .ln-ext-tag--time {
   position: absolute;
   top: 10px;
   left: 10px;
   z-index: 2;
-  background: color-mix(in srgb, var(--lr-ext-tag) 16%, var(--lr-ext-bg-raised));
+  background: color-mix(in srgb, var(--ln-ext-tag) 16%, var(--ln-ext-bg-raised));
   pointer-events: none;
 }
 
-#lr-ext-review .lr-ext-coach > .lr-ext-tag--time[data-lr-ext-tip] {
+#ln-ext-review .ln-ext-coach > .ln-ext-tag--time[data-ln-ext-tip] {
   cursor: help;
   pointer-events: auto;
 }
 
 /* The verdict stays on top, the rest scrolls under it once the review has dropped the
    trajectory (view/stream.ts). Short, the bubble is centered on the card. */
-#lr-ext-review .lr-ext-bubble {
+#ln-ext-review .ln-ext-bubble {
   align-self: stretch;
   justify-content: safe center;
   min-height: 0;
   margin-top: 0;
   padding: 10px 0 0;
   background: transparent;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
 }
 
 /* The bottom gap is the scrolling part's own (bubble-parts.css), so it scrolls to the
    card's edge; a bubble without one keeps it. */
-#lr-ext-review .lr-ext-bubble > :last-child:not(.lr-ext-bubble__body) {
+#ln-ext-review .ln-ext-bubble > :last-child:not(.ln-ext-bubble__body) {
   margin-bottom: 10px;
 }
 
-#lr-ext-review .lr-ext-bubble::before {
+#ln-ext-review .ln-ext-bubble::before {
   display: none;
 }
 
-#lr-ext-review .lr-ext-bubble__title {
-  color: var(--lr-ext-text-strong);
+#ln-ext-review .ln-ext-bubble__title {
+  color: var(--ln-ext-text-strong);
 }
 
 /* A title alone, not in a verdict's row, keeps its height, so the card centers it. */
-#lr-ext-review .lr-ext-bubble > .lr-ext-bubble__title {
+#ln-ext-review .ln-ext-bubble > .ln-ext-bubble__title {
   flex: none;
 }
 
-#lr-ext-review .lr-ext-bubble__sub {
-  color: var(--lr-ext-neutral-13);
+#ln-ext-review .ln-ext-bubble__sub {
+  color: var(--ln-ext-neutral-13);
 }
 
-#lr-ext-review .lr-ext-bubble .lr-ext-mv,
-#lr-ext-review .lr-ext-bubble__line,
-#lr-ext-review .lr-ext-bubble__line:hover {
-  background: var(--lr-ext-neutral-8);
-  color: var(--lr-ext-text-strong);
+#ln-ext-review .ln-ext-bubble .ln-ext-mv,
+#ln-ext-review .ln-ext-bubble__line,
+#ln-ext-review .ln-ext-bubble__line:hover {
+  background: var(--ln-ext-neutral-8);
+  color: var(--ln-ext-text-strong);
 }
 
 /* On the card, White's chip stays pale and Black's dark one gets an edge. */
-#lr-ext-review .lr-ext-bubble__eval--black {
-  background: var(--lr-ext-ink);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border-hover);
+#ln-ext-review .ln-ext-bubble__eval--black {
+  background: var(--ln-ext-ink);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border-hover);
 }

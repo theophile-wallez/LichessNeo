@@ -3,7 +3,7 @@
 /* Under the scene (home.css), cards of ours (content/pages/racer-home.ts): the race's rules
  * on Hugeicon tiles, then links to the other puzzle challenges in the sidebar's pictures. */
 
-.lr-ext-racer-about {
+.ln-ext-racer-about {
   display: flex;
   grid-area: more;
   flex-direction: column;
@@ -11,45 +11,45 @@
   margin-top: 22px;
 }
 
-.lr-ext-racer-steps,
-.lr-ext-racer-more {
+.ln-ext-racer-steps,
+.ln-ext-racer-more {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
-.lr-ext-racer-more__title {
+.ln-ext-racer-more__title {
   margin: 6px 0 -4px !important;
   padding: 0 !important;
   border: none !important;
-  color: var(--lr-ext-text-dim) !important;
-  font: 700 13px var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font: 700 13px var(--ln-ext-font) !important;
   letter-spacing: normal !important;
   text-transform: none !important;
 }
 
-.lr-ext-racer-more__title::after {
+.ln-ext-racer-more__title::after {
   content: none !important;
 }
 
-.lr-ext-racer-card {
+.ln-ext-racer-card {
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 16px;
   border-radius: 14px;
-  background: var(--lr-ext-card-bg);
-  box-shadow: inset 0 0 0 1px var(--lr-ext-card-border);
+  background: var(--ln-ext-card-bg);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.2s !important;
 }
 
-.lr-ext-racer-steps .lr-ext-racer-card {
+.ln-ext-racer-steps .ln-ext-racer-card {
   align-items: flex-start;
 }
 
-.lr-ext-racer-card__icon {
+.ln-ext-racer-card__icon {
   flex: none;
   width: 42px;
   height: 42px;
@@ -58,78 +58,78 @@
 }
 
 /* A step's Hugeicon at full strength over its tile at a quarter (pages/menu-titles.css). */
-.lr-ext-racer-steps .lr-ext-racer-card__icon {
-  background: var(--lr-ext-racer-color);
+.ln-ext-racer-steps .ln-ext-racer-card__icon {
+  background: var(--ln-ext-racer-color);
   mask:
-    var(--lr-ext-racer-glyph) center / 24px no-repeat,
+    var(--ln-ext-racer-glyph) center / 24px no-repeat,
     linear-gradient(#0000003d, #0000003d);
 }
 
-.lr-ext-racer-card[data-lr-ext-racer='same'] {
-  --lr-ext-racer-color: var(--lr-ext-cyan);
-  --lr-ext-racer-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle.svg');
+.ln-ext-racer-card[data-ln-ext-racer='same'] {
+  --ln-ext-racer-color: var(--ln-ext-cyan);
+  --ln-ext-racer-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/puzzle.svg');
 }
 
-.lr-ext-racer-card[data-lr-ext-racer='time'] {
-  --lr-ext-racer-color: var(--lr-ext-orange);
-  --lr-ext-racer-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+.ln-ext-racer-card[data-ln-ext-racer='time'] {
+  --ln-ext-racer-color: var(--ln-ext-orange);
+  --ln-ext-racer-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
 }
 
-.lr-ext-racer-card[data-lr-ext-racer='combo'] {
-  --lr-ext-racer-color: var(--lr-ext-pink);
-  --lr-ext-racer-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/fire.svg');
+.ln-ext-racer-card[data-ln-ext-racer='combo'] {
+  --ln-ext-racer-color: var(--ln-ext-pink);
+  --ln-ext-racer-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/fire.svg');
 }
 
 /* The other challenges in the sidebar's pictures (AGENTS.md, "One picture per page"). */
-.lr-ext-racer-more .lr-ext-racer-card__icon {
-  background: var(--lr-ext-racer-picture) center / contain no-repeat;
+.ln-ext-racer-more .ln-ext-racer-card__icon {
+  background: var(--ln-ext-racer-picture) center / contain no-repeat;
 }
 
-.lr-ext-racer-card[data-lr-ext-racer='storm'] {
-  --lr-ext-racer-picture: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
+.ln-ext-racer-card[data-ln-ext-racer='storm'] {
+  --ln-ext-racer-picture: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-storm.webp');
 }
 
-.lr-ext-racer-card[data-lr-ext-racer='streak'] {
-  --lr-ext-racer-picture: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
+.ln-ext-racer-card[data-ln-ext-racer='streak'] {
+  --ln-ext-racer-picture: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
 }
 
-.lr-ext-racer-card[data-lr-ext-racer='themes'] {
-  --lr-ext-racer-picture: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
+.ln-ext-racer-card[data-ln-ext-racer='themes'] {
+  --ln-ext-racer-picture: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-themes.webp');
 }
 
-a.lr-ext-racer-card:hover {
+a.ln-ext-racer-card:hover {
   box-shadow:
-    inset 0 0 0 1px var(--lr-ext-card-border-hover),
-    var(--lr-ext-card-shadow-hover);
+    inset 0 0 0 1px var(--ln-ext-card-border-hover),
+    var(--ln-ext-card-shadow-hover);
   transform: translateY(-2px);
 }
 
-a.lr-ext-racer-card:hover .lr-ext-racer-card__icon {
+a.ln-ext-racer-card:hover .ln-ext-racer-card__icon {
   transform: rotate(-6deg) scale(1.08);
 }
 
-.lr-ext-racer-card__text {
+.ln-ext-racer-card__text {
   display: flex;
   flex-direction: column;
   gap: 3px;
   min-width: 0;
 }
 
-.lr-ext-racer-card__text b {
-  color: var(--lr-ext-text-strong);
+.ln-ext-racer-card__text b {
+  color: var(--ln-ext-text-strong);
   font-size: 15px;
   font-weight: 800;
 }
 
-.lr-ext-racer-card__text span {
-  color: var(--lr-ext-text-dim);
+.ln-ext-racer-card__text span {
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   line-height: 1.45;
 }
 
 @media (max-width: 799.29px) {
-  .lr-ext-racer-steps,
-  .lr-ext-racer-more {
+  .ln-ext-racer-steps,
+  .ln-ext-racer-more {
     grid-template-columns: minmax(0, 1fr);
   }
 }

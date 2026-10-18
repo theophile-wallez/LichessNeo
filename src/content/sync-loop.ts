@@ -24,7 +24,7 @@ function tick(): void {
       task.run();
     } catch (error) {
       // Report a broken task once, not four times a second.
-      if (!failed.has(task.name)) console.error(`[LichessReimagined] ${task.name} failed`, error);
+      if (!failed.has(task.name)) console.error(`[LichessNeo] ${task.name} failed`, error);
       failed.add(task.name);
     }
   }

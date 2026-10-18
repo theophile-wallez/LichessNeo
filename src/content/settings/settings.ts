@@ -4,7 +4,7 @@ import { isConnected, onSyncedChange, readSynced, writeSynced } from '#content/p
 import { CustomThemeSchema, DEFAULT_THEME, ThemePicksSchema } from '#content/colors/themes.ts';
 import { RatingPickSchema } from '#content/sidebar/top-rating.ts';
 
-// The extension's settings (the account page's Lichess Reimagined section),
+// The extension's settings (the account page's Lichess Neo section),
 // kept in chrome.storage.sync so they follow the user to their other
 // browsers. Read once, then kept up to date as they change in any tab.
 
@@ -50,7 +50,7 @@ async function readSettings(): Promise<void> {
   try {
     stored = parseSettings(await readSynced(StorageKey.settings));
   } catch (error) {
-    console.warn('[LichessReimagined] settings unread', error);
+    console.warn('[LichessNeo] settings unread', error);
   }
   read = true;
   update(stored);

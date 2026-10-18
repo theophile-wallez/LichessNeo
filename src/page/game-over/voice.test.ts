@@ -17,9 +17,9 @@ describe('the card’s voice', () => {
     const bubble = document.createElement('p');
     const voice = createVoice(bubble, 4);
     voice.typeOut('Well played!', 'happy', 500);
-    expect(bubble.classList.contains('lr-ext-end__bubble--empty')).toBe(true);
+    expect(bubble.classList.contains('ln-ext-end__bubble--empty')).toBe(true);
     vi.advanceTimersByTime(500);
-    expect(bubble.classList.contains('lr-ext-end__bubble--empty')).toBe(false);
+    expect(bubble.classList.contains('ln-ext-end__bubble--empty')).toBe(false);
     expect(posted.mock.calls.at(-1)?.[0]).toMatchObject({ coach: 4, mood: 'happy', talking: true });
     vi.advanceTimersByTime(WORD_MS * 2);
     expect(posted.mock.calls.at(-1)?.[0]).toMatchObject({

@@ -7,7 +7,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // whose path is the longest start of the page's is the one; the home link only
 // for the home page. Lichess navigates some pages in place, hence the tick.
 
-const LINKS = '#topnav section a[href], #lr-ext-donate';
+const LINKS = '#topnav section a[href], #ln-ext-donate';
 
 /** The path without a language prefix (/fr/training), which some of Lichess's pages carry. */
 export const canonicalPath = (path: string): string =>

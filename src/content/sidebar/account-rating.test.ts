@@ -3,7 +3,7 @@ import { flush } from '#shared/testing/timers.ts';
 import { accountRating } from './account-rating.ts';
 
 const root = document.documentElement;
-const KEY = 'lr-ext-account-rating';
+const KEY = 'ln-ext-account-rating';
 const MAX_AGE = 5 * 60 * 1000;
 
 const apiUser = {
@@ -27,11 +27,11 @@ const keep = (user: string, at: number): void =>
   );
 
 const shown = (): [string | undefined, string] => [
-  root.dataset.lrExtAccountPerf,
-  root.style.getPropertyValue('--lr-ext-account-rating'),
+  root.dataset.lnExtAccountPerf,
+  root.style.getPropertyValue('--ln-ext-account-rating'),
 ];
 
-const chars = (): string => root.style.getPropertyValue('--lr-ext-account-chars');
+const chars = (): string => root.style.getPropertyValue('--ln-ext-account-chars');
 
 let fetchUser: ReturnType<typeof vi.fn<(url: string) => Promise<Response>>>;
 
@@ -45,7 +45,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals();
   localStorage.clear();
-  delete root.dataset.lrExtAccountPerf;
+  delete root.dataset.lnExtAccountPerf;
   root.removeAttribute('style');
   signIn(null);
 });

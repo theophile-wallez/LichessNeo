@@ -14,27 +14,27 @@ export interface SwitchRow {
 }
 
 function rowMarkup({ key, title, body }: SwitchRow): SafeHtml {
-  const id = `lr-ext-setting-${key}`;
-  return html`<div class="lr-ext-setting" data-lr-ext-setting="${key}">
-    <span class="lr-ext-setting__icon" aria-hidden="true"></span>
-    <div class="lr-ext-setting__text">
-      <h2 class="lr-ext-setting__title" id="${id}">${title}</h2>
-      <p class="lr-ext-setting__body">${body}</p>
+  const id = `ln-ext-setting-${key}`;
+  return html`<div class="ln-ext-setting" data-ln-ext-setting="${key}">
+    <span class="ln-ext-setting__icon" aria-hidden="true"></span>
+    <div class="ln-ext-setting__text">
+      <h2 class="ln-ext-setting__title" id="${id}">${title}</h2>
+      <p class="ln-ext-setting__body">${body}</p>
     </div>
-    <button type="button" class="lr-ext-switch" role="switch" aria-checked="false" aria-labelledby="${id}">
-      <span class="lr-ext-switch__knob"></span>
+    <button type="button" class="ln-ext-switch" role="switch" aria-checked="false" aria-labelledby="${id}">
+      <span class="ln-ext-switch__knob"></span>
     </button>
   </div>`;
 }
 
 function showSwitches(list: HTMLElement, rows: readonly SwitchRow[], settings: Settings): void {
-  for (const element of queryAll(list, '.lr-ext-setting', HTMLElement)) {
-    const row = rows.find(({ key }) => key === element.dataset.lrExtSetting);
+  for (const element of queryAll(list, '.ln-ext-setting', HTMLElement)) {
+    const row = rows.find(({ key }) => key === element.dataset.lnExtSetting);
     // Another kind of card, always on.
     if (!row) continue;
     const on = settings[row.key];
-    setData(element, 'lrExtOn', on ? '' : null);
-    const button = queryOne(element, '.lr-ext-switch', HTMLButtonElement);
+    setData(element, 'lnExtOn', on ? '' : null);
+    const button = queryOne(element, '.ln-ext-switch', HTMLButtonElement);
     if (button?.getAttribute('aria-checked') !== String(on))
       button?.setAttribute('aria-checked', String(on));
   }
@@ -42,12 +42,12 @@ function showSwitches(list: HTMLElement, rows: readonly SwitchRow[], settings: S
 
 /** The cards of `rows`, then `others`, their switches kept in step with the settings. */
 export function buildSwitchList(rows: readonly SwitchRow[], others?: SafeHtml): HTMLElement {
-  const list = createElement('div', { className: 'lr-ext-settings__list' });
+  const list = createElement('div', { className: 'ln-ext-settings__list' });
   setHtml(list, html`${rows.map(rowMarkup)}${others ?? ''}`);
   list.addEventListener('click', event => {
-    if (!closestTo(event.target, '.lr-ext-switch', HTMLButtonElement)) return;
-    const card = closestTo(event.target, '.lr-ext-setting', HTMLElement);
-    const row = rows.find(({ key }) => key === card?.dataset.lrExtSetting);
+    if (!closestTo(event.target, '.ln-ext-switch', HTMLButtonElement)) return;
+    const card = closestTo(event.target, '.ln-ext-setting', HTMLElement);
+    const row = rows.find(({ key }) => key === card?.dataset.lnExtSetting);
     if (row) void saveSetting(row.key, !currentSettings()[row.key]);
   });
   showSwitches(list, rows, currentSettings());

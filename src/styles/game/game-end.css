@@ -1,43 +1,43 @@
 /* The end of a game the player watched end (page/game-over): the kings' badges and the winner's
  * confetti, in a layer over the board that lets every click through; the result's card is in the
  * right-hand panel (game-end-card.css). Lichess's own badges on the kings give way to ours. The
- * badges show large, then `.lr-ext-end--settled` shrinks them to pips on the kings' corners as the
+ * badges show large, then `.ln-ext-end--settled` shrinks them to pips on the kings' corners as the
  * coach starts speaking. */
 
-main:is(.round, .analyse)[data-lr-ext-end] .cg-custom-svgs {
+main:is(.round, .analyse)[data-ln-ext-end] .cg-custom-svgs {
   display: none !important;
 }
 
-main:is(.round, .analyse) > .lr-ext-end {
+main:is(.round, .analyse) > .ln-ext-end {
   grid-area: board;
   position: relative;
-  /* Over the review's badges on the board (#lr-ext-board-overlay, review/eval-bar.css). */
+  /* Over the review's badges on the board (#ln-ext-board-overlay, review/eval-bar.css). */
   z-index: 6;
-  margin: var(--lr-ext-inset-t, 0px) var(--lr-ext-inset-r, 0px) var(--lr-ext-inset-b, 0px)
-    var(--lr-ext-inset-l, 0px);
+  margin: var(--ln-ext-inset-t, 0px) var(--ln-ext-inset-r, 0px) var(--ln-ext-inset-b, 0px)
+    var(--ln-ext-inset-l, 0px);
   container-type: size;
   pointer-events: none;
-  font-family: var(--lr-ext-font);
+  font-family: var(--ln-ext-font);
 }
 
 /* The analysis board's area also holds its player bars: the layer is the board's square,
    under the top bar. Only a dev build shows it there (page/game-over/preview.ts). */
-main.analyse > .lr-ext-end {
+main.analyse > .ln-ext-end {
   align-self: start;
   aspect-ratio: 1;
-  margin-top: calc(var(--lr-ext-bar, 0px) + var(--lr-ext-inset-t, 0px));
+  margin-top: calc(var(--ln-ext-bar, 0px) + var(--ln-ext-inset-t, 0px));
 }
 
 /* ---- Kings --- */
 
-main:is(.round, .analyse) .lr-ext-end__kings {
+main:is(.round, .analyse) .ln-ext-end__kings {
   position: absolute;
   inset: 0;
 }
 
-main:is(.round, .analyse) .lr-ext-end__king {
+main:is(.round, .analyse) .ln-ext-end__king {
   /* A fixed grey: the board looks the same in either scheme. */
-  --lr-ext-king-c: color-mix(in srgb, var(--lr-ext-ink) 65%, var(--lr-ext-white));
+  --ln-ext-king-c: color-mix(in srgb, var(--ln-ext-ink) 65%, var(--ln-ext-white));
   position: absolute;
   top: calc(var(--row) * 12.5%);
   left: calc(var(--column) * 12.5%);
@@ -45,16 +45,16 @@ main:is(.round, .analyse) .lr-ext-end__king {
   height: 12.5%;
 }
 
-main:is(.round, .analyse) .lr-ext-end__king--win {
-  --lr-ext-king-c: var(--lr-ext-accent);
+main:is(.round, .analyse) .ln-ext-end__king--win {
+  --ln-ext-king-c: var(--ln-ext-accent);
 }
 
-main:is(.round, .analyse) .lr-ext-end__king--loss {
-  --lr-ext-king-c: var(--lr-ext-red-dark);
+main:is(.round, .analyse) .ln-ext-end__king--loss {
+  --ln-ext-king-c: var(--ln-ext-red-dark);
 }
 
 /* The square in the badge's color, the king showing faintly through it; then a pip. */
-main:is(.round, .analyse) .lr-ext-end__king-icon {
+main:is(.round, .analyse) .ln-ext-end__king-icon {
   position: absolute;
   top: 0;
   right: 0;
@@ -63,10 +63,10 @@ main:is(.round, .analyse) .lr-ext-end__king-icon {
   place-items: center;
   width: 100%;
   height: 100%;
-  background: color-mix(in srgb, var(--lr-ext-king-c) 88%, transparent);
+  background: color-mix(in srgb, var(--ln-ext-king-c) 88%, transparent);
   /* The icons are drawn in the text's color. */
-  color: var(--lr-ext-white);
-  animation: lr-ext-end-square 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+  color: var(--ln-ext-white);
+  animation: ln-ext-end-square 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
   transition:
     top 0.4s,
     right 0.4s,
@@ -77,79 +77,79 @@ main:is(.round, .analyse) .lr-ext-end__king-icon {
     box-shadow 0.4s !important;
 }
 
-main:is(.round, .analyse) .lr-ext-end--settled .lr-ext-end__king-icon {
+main:is(.round, .analyse) .ln-ext-end--settled .ln-ext-end__king-icon {
   top: -10%;
   right: -10%;
   width: 38%;
   height: 38%;
   border-radius: 50%;
-  background-color: var(--lr-ext-king-c);
+  background-color: var(--ln-ext-king-c);
   box-shadow: 0 0.3cqh 0.8cqh #00000059;
 }
 
-main:is(.round, .analyse) .lr-ext-end--settled .lr-ext-end__king-icon svg {
+main:is(.round, .analyse) .ln-ext-end--settled .ln-ext-end__king-icon svg {
   width: 62%;
   height: 62%;
 }
 
-main:is(.round, .analyse) .lr-ext-end--settled .lr-ext-end__king-label {
-  animation: lr-ext-end-label-out 0.25s both !important;
+main:is(.round, .analyse) .ln-ext-end--settled .ln-ext-end__king-label {
+  animation: ln-ext-end-label-out 0.25s both !important;
 }
 
-main:is(.round, .analyse) .lr-ext-end__king-icon svg {
+main:is(.round, .analyse) .ln-ext-end__king-icon svg {
   width: 52%;
   height: 52%;
   filter: drop-shadow(0 0.3cqh 0.4cqh #00000040);
 }
 
-main:is(.round, .analyse) .lr-ext-end__king-label {
+main:is(.round, .analyse) .ln-ext-end__king-label {
   position: absolute;
   bottom: 80%;
   left: 50%;
   translate: -50% 0;
   padding: 0.6cqh 1.6cqh;
   border-radius: 999px;
-  background: var(--lr-ext-white);
-  color: var(--lr-ext-king-c);
+  background: var(--ln-ext-white);
+  color: var(--ln-ext-king-c);
   font-size: 2.3cqh;
   font-weight: 800;
   line-height: 1.2;
   white-space: nowrap;
   box-shadow: 0 0.4cqh 1.2cqh #00000040;
-  animation: lr-ext-end-label 0.4s 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+  animation: ln-ext-end-label 0.4s 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
 }
 
-main:is(.round, .analyse) .lr-ext-end__king--below .lr-ext-end__king-label {
+main:is(.round, .analyse) .ln-ext-end__king--below .ln-ext-end__king-label {
   top: 80%;
   bottom: auto;
 }
 
-main:is(.round, .analyse) .lr-ext-end__king--start .lr-ext-end__king-label {
+main:is(.round, .analyse) .ln-ext-end__king--start .ln-ext-end__king-label {
   left: 0.6cqh;
   translate: none;
 }
 
-main:is(.round, .analyse) .lr-ext-end__king--end .lr-ext-end__king-label {
+main:is(.round, .analyse) .ln-ext-end__king--end .ln-ext-end__king-label {
   right: 0.6cqh;
   left: auto;
   translate: none;
 }
 
-@keyframes lr-ext-end-square {
+@keyframes ln-ext-end-square {
   from {
     opacity: 0;
     scale: 0.4;
   }
 }
 
-@keyframes lr-ext-end-label {
+@keyframes ln-ext-end-label {
   from {
     opacity: 0;
     scale: 0.6;
   }
 }
 
-@keyframes lr-ext-end-label-out {
+@keyframes ln-ext-end-label-out {
   to {
     opacity: 0;
     scale: 0.6;
@@ -160,14 +160,14 @@ main:is(.round, .analyse) .lr-ext-end__king--end .lr-ext-end__king-label {
 
 /* Each piece falls from above the board with its own drift, spin, size and pace
  * (page/game-over/confetti.ts), then is gone. */
-main:is(.round, .analyse) .lr-ext-confetti {
+main:is(.round, .analyse) .ln-ext-confetti {
   position: absolute;
   inset: 0;
   overflow: hidden;
   border-radius: 4px;
 }
 
-main:is(.round, .analyse) .lr-ext-confetti__piece {
+main:is(.round, .analyse) .ln-ext-confetti__piece {
   position: absolute;
   top: 0;
   left: calc(var(--x) * 1%);
@@ -177,17 +177,17 @@ main:is(.round, .analyse) .lr-ext-confetti__piece {
   background: var(--c);
   box-shadow: 0 0.2cqh 0.4cqh #00000026;
   opacity: 0;
-  animation: lr-ext-confetti-fall var(--fall) var(--delay) cubic-bezier(0.25, 0.4, 0.55, 1) both !important;
+  animation: ln-ext-confetti-fall var(--fall) var(--delay) cubic-bezier(0.25, 0.4, 0.55, 1) both !important;
 }
 
-main:is(.round, .analyse) .lr-ext-confetti__piece--dot {
+main:is(.round, .analyse) .ln-ext-confetti__piece--dot {
   height: calc(var(--size) * 1.3cqh);
   width: calc(var(--size) * 1.3cqh);
   border-radius: 50%;
 }
 
 /* A ribbon: a quarter of a ring, as a curled strip reads. */
-main:is(.round, .analyse) .lr-ext-confetti__piece--curl {
+main:is(.round, .analyse) .ln-ext-confetti__piece--curl {
   width: calc(var(--size) * 4cqh);
   height: calc(var(--size) * 4cqh);
   border: calc(var(--size) * 0.9cqh) solid var(--c);
@@ -197,7 +197,7 @@ main:is(.round, .analyse) .lr-ext-confetti__piece--curl {
   box-shadow: none;
 }
 
-@keyframes lr-ext-confetti-fall {
+@keyframes ln-ext-confetti-fall {
   0% {
     opacity: 1;
     transform: translate(0, -12cqh) rotate(0turn);

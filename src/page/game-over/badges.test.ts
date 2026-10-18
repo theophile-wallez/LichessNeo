@@ -45,22 +45,22 @@ describe('badgesMarkup', () => {
       root,
       badgesMarkup(badges, { white: { column: 0, row: 7 }, black: { column: 4, row: 0 } }),
     );
-    const [white, black] = queryAll(root, '.lr-ext-end__king', HTMLElement);
+    const [white, black] = queryAll(root, '.ln-ext-end__king', HTMLElement);
     expect(white?.className).toBe(
-      'lr-ext-end__king lr-ext-end__king--loss lr-ext-end__king--start',
+      'ln-ext-end__king ln-ext-end__king--loss ln-ext-end__king--start',
     );
     expect(white?.getAttribute('style')).toBe('--column:0;--row:7');
     expect(white?.textContent.trim()).toBe('Resigned');
-    expect(black?.className).toBe('lr-ext-end__king lr-ext-end__king--win lr-ext-end__king--below');
-    expect(black?.querySelector('.lr-ext-end__king-icon svg')).not.toBeNull();
+    expect(black?.className).toBe('ln-ext-end__king ln-ext-end__king--win ln-ext-end__king--below');
+    expect(black?.querySelector('.ln-ext-end__king-icon svg')).not.toBeNull();
   });
 
   it('leaves out a king it can’t find', () => {
     const badges = kingBadges({ result: 'draw', reason: 'draw', winner: null }, texts);
     const root = document.createElement('div');
     setHtml(root, badgesMarkup(badges, { white: { column: 7, row: 3 } }));
-    expect(queryAll(root, '.lr-ext-end__king', HTMLElement).map(king => king.className)).toEqual([
-      'lr-ext-end__king lr-ext-end__king--draw lr-ext-end__king--end',
+    expect(queryAll(root, '.ln-ext-end__king', HTMLElement).map(king => king.className)).toEqual([
+      'ln-ext-end__king ln-ext-end__king--draw ln-ext-end__king--end',
     ]);
   });
 });

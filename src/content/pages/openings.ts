@@ -16,13 +16,13 @@ export function syncOpenings(): void {
   const main = queryOne(document, 'main.opening', HTMLElement);
   if (!main) return;
   for (const part of queryAll(main, '.result-bar > span', HTMLElement)) {
-    setStyleProperty(part, '--lr-ext-share', shareOf(part.style.height));
+    setStyleProperty(part, '--ln-ext-share', shareOf(part.style.height));
   }
   const sections = queryAll(main, 'h1.opening__title .opening__name__section', HTMLElement);
   const opening = sections.at(-1)?.textContent.trim() ?? '';
   for (const name of queryAll(main, '.opening__next__name', HTMLElement)) {
     const unnamed = name.textContent.trim() === '' && opening !== '';
-    setData(name, 'lrExtName', unnamed ? opening : null);
+    setData(name, 'lnExtName', unnamed ? opening : null);
   }
 }
 

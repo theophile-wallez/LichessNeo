@@ -11,7 +11,7 @@ async function load(): Promise<typeof FlatBoards & typeof SavedBoards> {
 const root = document.documentElement;
 const shown = (element: HTMLElement, names: readonly string[]): string[] =>
   names.map(name => element.style.getPropertyValue(name));
-const FLAT = ['--lr-ext-board-flat-light', '--lr-ext-board-flat-dark'];
+const FLAT = ['--ln-ext-board-flat-light', '--ln-ext-board-flat-dark'];
 
 beforeEach(() => {
   vi.resetModules();
@@ -27,7 +27,7 @@ describe('the two-tone boards', () => {
     const { PRESET_BOARDS } = await load();
     expect(PRESET_BOARDS).toHaveLength(BUILT_IN_THEMES.length);
     expect(PRESET_BOARDS.slice(0, 3)).toEqual([
-      { id: 'tone-reimagined', name: 'Reimagined', light: '#f7f8f8', dark: '#5e6ad2' },
+      { id: 'tone-neo', name: 'Neo', light: '#f7f8f8', dark: '#5e6ad2' },
       { id: 'tone-lichess', name: 'Lichess', light: '#f7f8f8', dark: '#3692e7' },
       { id: 'tone-ocean', name: 'Ocean', light: '#f7f8f8', dark: '#2f9bea' },
     ]);
@@ -54,8 +54,8 @@ describe('the two-tone boards', () => {
     const { showSquares } = await load();
     const thumb = document.createElement('span');
     showSquares(thumb, { light: '#eeeeee', dark: '#333333' });
-    expect(thumb.dataset.lrExtSquares).toBe('');
-    expect(shown(thumb, ['--lr-ext-thumb-light', '--lr-ext-thumb-dark'])).toEqual([
+    expect(thumb.dataset.lnExtSquares).toBe('');
+    expect(shown(thumb, ['--ln-ext-thumb-light', '--ln-ext-thumb-dark'])).toEqual([
       '#eeeeee',
       '#333333',
     ]);

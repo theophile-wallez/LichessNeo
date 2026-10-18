@@ -20,24 +20,24 @@ export interface ReviewElements {
 }
 
 export function createElements(): ReviewElements {
-  const bar = createElement('div', { id: 'lr-ext-evalbar' });
-  const barFill = createElement('div', { className: 'lr-ext-evalbar__fill' });
-  const barLabel = createElement('span', { className: 'lr-ext-evalbar__label' });
+  const bar = createElement('div', { id: 'ln-ext-evalbar' });
+  const barFill = createElement('div', { className: 'ln-ext-evalbar__fill' });
+  const barLabel = createElement('span', { className: 'ln-ext-evalbar__label' });
   bar.append(barFill, barLabel);
   return {
     // Focusable, to keep the focus of a button its redraw replaced.
-    panel: createElement('div', { id: 'lr-ext-review', attrs: { tabindex: '-1' } }),
-    graphBox: createElement('div', { id: 'lr-ext-review-graph' }),
-    graphViews: createElement('div', { className: 'lr-ext-graph-views' }),
-    nav: createElement('div', { className: 'lr-ext-review__nav' }),
-    controls: createElement('div', { id: 'lr-ext-review-controls' }),
+    panel: createElement('div', { id: 'ln-ext-review', attrs: { tabindex: '-1' } }),
+    graphBox: createElement('div', { id: 'ln-ext-review-graph' }),
+    graphViews: createElement('div', { className: 'ln-ext-graph-views' }),
+    nav: createElement('div', { className: 'ln-ext-review__nav' }),
+    controls: createElement('div', { id: 'ln-ext-review-controls' }),
     bar,
     barFill,
     barLabel,
-    overlay: createElement('div', { id: 'lr-ext-board-overlay' }),
-    opening: createElement('div', { id: 'lr-ext-opening' }),
+    overlay: createElement('div', { id: 'ln-ext-board-overlay' }),
+    opening: createElement('div', { id: 'ln-ext-opening' }),
     // Put on <body>, because the panel's rows scroll and would clip it.
-    tip: createElement('div', { id: 'lr-ext-tip', attrs: { role: 'tooltip' } }),
+    tip: createElement('div', { id: 'ln-ext-tip', attrs: { role: 'tooltip' } }),
   };
 }
 

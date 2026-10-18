@@ -4,55 +4,55 @@
  * count, the performance and the best theme against their level, then the puzzles to replay
  * as its foot, a link across it. */
 
-.lr-ext-pdash__numbers {
+.ln-ext-pdash__numbers {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
 }
 
-.lr-ext-pdash__lead,
-.lr-ext-pdash__cell {
+.ln-ext-pdash__lead,
+.ln-ext-pdash__cell {
   display: flex;
   min-width: 0;
   padding: 18px 26px;
 }
 
-.lr-ext-pdash__lead {
+.ln-ext-pdash__lead {
   align-items: center;
   gap: 16px;
   padding-inline-start: 22px;
 }
 
-.lr-ext-pdash__lead > div,
-.lr-ext-pdash__cell {
+.ln-ext-pdash__lead > div,
+.ln-ext-pdash__cell {
   flex-direction: column;
 }
 
-.lr-ext-pdash__lead > div {
+.ln-ext-pdash__lead > div {
   display: flex;
 }
 
-.lr-ext-pdash__cell {
+.ln-ext-pdash__cell {
   align-self: stretch;
   justify-content: center;
-  border-inline-start: 1px solid var(--lr-ext-card-border);
-  color: var(--lr-ext-text) !important;
+  border-inline-start: 1px solid var(--ln-ext-card-border);
+  color: var(--ln-ext-text) !important;
   text-decoration: none !important;
 }
 
-a.lr-ext-pdash__cell:hover .lr-ext-pdash__name {
+a.ln-ext-pdash__cell:hover .ln-ext-pdash__name {
   text-decoration: underline;
 }
 
-.lr-ext-pdash__label {
+.ln-ext-pdash__label {
   margin-bottom: 4px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12.5px;
   font-weight: 600;
 }
 
-.lr-ext-pdash__numbers strong {
-  color: var(--lr-ext-text-strong);
+.ln-ext-pdash__numbers strong {
+  color: var(--ln-ext-text-strong);
   font-size: 30px;
   font-weight: 800;
   line-height: 1.15;
@@ -60,84 +60,84 @@ a.lr-ext-pdash__cell:hover .lr-ext-pdash__name {
   font-variant-numeric: tabular-nums;
 }
 
-.lr-ext-pdash__lead strong,
-.lr-ext-pdash__numbers .lr-ext-pdash__name {
+.ln-ext-pdash__lead strong,
+.ln-ext-pdash__numbers .ln-ext-pdash__name {
   overflow: hidden;
   font-size: 22px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.lr-ext-pdash__sub {
+.ln-ext-pdash__sub {
   margin-top: 4px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 12.5px;
   font-weight: 600;
 }
 
-.lr-ext-pdash__pill {
+.ln-ext-pdash__pill {
   display: inline-block;
   margin-inline-end: 1px;
   padding: 1px 8px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-pdash-sign) 14%, transparent);
-  color: var(--lr-ext-pdash-sign);
+  background: color-mix(in srgb, var(--ln-ext-pdash-sign) 14%, transparent);
+  color: var(--ln-ext-pdash-sign);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
 /* The share in a ring drawn in the text's color, the lists' rings writ large. */
-.lr-ext-pdash__ring.lr-ext-pdash__ring--big {
-  --lr-ext-pdash-sign: var(--lr-ext-text-strong);
+.ln-ext-pdash__ring.ln-ext-pdash__ring--big {
+  --ln-ext-pdash-sign: var(--ln-ext-text-strong);
   flex: none;
   width: 86px;
   height: 86px;
 }
 
-.lr-ext-pdash__ring.lr-ext-pdash__ring--big > span {
+.ln-ext-pdash__ring.ln-ext-pdash__ring--big > span {
   width: 72px;
   height: 72px;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 20px;
 }
 
-.lr-ext-pdash__foot {
+.ln-ext-pdash__foot {
   display: flex;
   grid-column: 1 / -1;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 12px 22px;
-  border-top: 1px solid var(--lr-ext-card-border);
+  border-top: 1px solid var(--ln-ext-card-border);
   border-radius: 0 0 14px 14px;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 13.5px;
   font-weight: 700;
   text-decoration: none !important;
   transition: background-color 0.15s !important;
 }
 
-.lr-ext-pdash__foot b {
-  color: var(--lr-ext-text-strong);
+.ln-ext-pdash__foot b {
+  color: var(--ln-ext-text-strong);
 }
 
-div.lr-ext-pdash__foot {
-  color: var(--lr-ext-text-dim) !important;
+div.ln-ext-pdash__foot {
+  color: var(--ln-ext-text-dim) !important;
 }
 
-a.lr-ext-pdash__foot:hover {
-  background: var(--lr-ext-lift-4);
+a.ln-ext-pdash__foot:hover {
+  background: var(--ln-ext-lift-4);
 }
 
-.lr-ext-pdash__go-replay {
+.ln-ext-pdash__go-replay {
   display: inline-flex;
   flex: none;
   align-items: center;
   gap: 6px;
-  color: var(--lr-ext-accent-hover);
+  color: var(--ln-ext-accent-hover);
 }
 
-.lr-ext-pdash__go-replay::after {
+.ln-ext-pdash__go-replay::after {
   content: '';
   width: 16px;
   height: 16px;
@@ -148,47 +148,47 @@ a.lr-ext-pdash__foot:hover {
 
 /* Narrower: the ring over the whole width, the two cells side by side under it. */
 @container (max-width: 760px) {
-  .lr-ext-pdash__numbers {
+  .ln-ext-pdash__numbers {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .lr-ext-pdash__lead {
+  .ln-ext-pdash__lead {
     grid-column: 1 / -1;
-    border-bottom: 1px solid var(--lr-ext-card-border);
+    border-bottom: 1px solid var(--ln-ext-card-border);
   }
 
-  .lr-ext-pdash__numbers > .lr-ext-pdash__cell:nth-child(2) {
+  .ln-ext-pdash__numbers > .ln-ext-pdash__cell:nth-child(2) {
     border-inline-start: none;
   }
 }
 
 /* A phone: tighter, the ring smaller. */
 @container (max-width: 520px) {
-  .lr-ext-pdash :is(.lr-ext-pdash__lead, .lr-ext-pdash__cell) {
+  .ln-ext-pdash :is(.ln-ext-pdash__lead, .ln-ext-pdash__cell) {
     padding: 14px;
   }
 
-  .lr-ext-pdash__numbers strong {
+  .ln-ext-pdash__numbers strong {
     font-size: 24px;
   }
 
-  .lr-ext-pdash__lead strong,
-  .lr-ext-pdash__numbers .lr-ext-pdash__name {
+  .ln-ext-pdash__lead strong,
+  .ln-ext-pdash__numbers .ln-ext-pdash__name {
     font-size: 18px;
   }
 
-  .lr-ext-pdash__ring.lr-ext-pdash__ring--big {
+  .ln-ext-pdash__ring.ln-ext-pdash__ring--big {
     width: 68px;
     height: 68px;
   }
 
-  .lr-ext-pdash__ring.lr-ext-pdash__ring--big > span {
+  .ln-ext-pdash__ring.ln-ext-pdash__ring--big > span {
     width: 56px;
     height: 56px;
     font-size: 16px;
   }
 
-  .lr-ext-pdash__foot {
+  .ln-ext-pdash__foot {
     padding: 12px 14px;
   }
 }

@@ -1,6 +1,6 @@
 {
   "html": "<main class=\"round\"><div class=\"round__app\"><div class=\"round__app__board main-board\"><div class=\"cg-wrap\"></div></div><button class=\"fbt board-menu-toggle-btn\" title=\"Board menu\"></button></div></main>",
   "flipLabel": "Flip board",
-  "tools": "<div class=\"lr-ext-board-tools\"><button type=\"button\" class=\"lr-ext-board-tools__btn lr-ext-board-tools__btn--menu\" data-lr-ext-tip=\"Board menu\" aria-label=\"Board menu\"></button><button type=\"button\" class=\"lr-ext-board-tools__btn lr-ext-board-tools__btn--flip\" data-lr-ext-tip=\"Flip board\" aria-label=\"Flip board\"></button></div>",
-  "active": "<div class=\"lr-ext-board-tools\"><button type=\"button\" class=\"lr-ext-board-tools__btn lr-ext-board-tools__btn--menu lr-ext-board-tools__btn--on\" data-lr-ext-tip=\"Board menu\" aria-label=\"Board menu\"></button><button type=\"button\" class=\"lr-ext-board-tools__btn lr-ext-board-tools__btn--flip\" data-lr-ext-tip=\"Flip board\" aria-label=\"Flip board\"></button></div>"
+  "tools": "<div class=\"ln-ext-board-tools\"><button type=\"button\" class=\"ln-ext-board-tools__btn ln-ext-board-tools__btn--menu\" data-ln-ext-tip=\"Board menu\" aria-label=\"Board menu\"></button><button type=\"button\" class=\"ln-ext-board-tools__btn ln-ext-board-tools__btn--flip\" data-ln-ext-tip=\"Flip board\" aria-label=\"Flip board\"></button></div>",
+  "active": "<div class=\"ln-ext-board-tools\"><button type=\"button\" class=\"ln-ext-board-tools__btn ln-ext-board-tools__btn--menu ln-ext-board-tools__btn--on\" data-ln-ext-tip=\"Board menu\" aria-label=\"Board menu\"></button><button type=\"button\" class=\"ln-ext-board-tools__btn ln-ext-board-tools__btn--flip\" data-ln-ext-tip=\"Flip board\" aria-label=\"Flip board\"></button></div>"
 }

@@ -39,9 +39,9 @@ const NAMES = [
 export const coachName = (coach: number): string => message(NAMES[coach - 1] ?? NAMES[0]);
 
 const choiceMarkup = (name: string, i: number): SafeHtml =>
-  html`<button type="button" class="lr-ext-coach-choice" data-lr-ext-coach-choice="${i + 1}" aria-pressed="false">
-    <span class="lr-ext-coach-choice__face" data-lr-ext-avatar-coach="${i + 1}"></span>
-    <span class="lr-ext-coach-choice__name">${message(name)}</span>
+  html`<button type="button" class="ln-ext-coach-choice" data-ln-ext-coach-choice="${i + 1}" aria-pressed="false">
+    <span class="ln-ext-coach-choice__face" data-ln-ext-avatar-coach="${i + 1}"></span>
+    <span class="ln-ext-coach-choice__name">${message(name)}</span>
   </button>`;
 
 /** A tile for each coach, in their numbers' order, none pressed. */

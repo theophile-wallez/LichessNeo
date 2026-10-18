@@ -12,11 +12,11 @@ import { translate } from '#page/lichess/globals.ts';
 
 /** Each label's `i18n.site` key, by the data attribute it goes into. */
 const LABELS = {
-  lrExtFlipLabel: 'flipBoard',
-  lrExtToolsLabel: 'tools',
-  lrExtPointsLabel: 'points',
-  lrExtVariantLabel: 'variant',
-  lrExtTimeControlLabel: 'timeControl',
+  lnExtFlipLabel: 'flipBoard',
+  lnExtToolsLabel: 'tools',
+  lnExtPointsLabel: 'points',
+  lnExtVariantLabel: 'variant',
+  lnExtTimeControlLabel: 'timeControl',
 };
 
 // All come in the same table: once one is in, they all are.

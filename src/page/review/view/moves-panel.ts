@@ -54,8 +54,8 @@ function bubbleMarkup(
   if (!view.review) return bubbleTitle(`${ui.analysing} ${Math.round(view.progress * 100)}%`);
   if (!analysis.path) return briefMarkup(session, view.review);
   if (shown)
-    return html`<div class="lr-ext-bubble__row">${classIcon('best')}
-          <p class="lr-ext-bubble__title">${verdictTitle('best', analysis.node.san ?? '', language)}</p>
+    return html`<div class="ln-ext-bubble__row">${classIcon('best')}
+          <p class="ln-ext-bubble__title">${verdictTitle('best', analysis.node.san ?? '', language)}</p>
           ${evalChip(shown.before)}</div>`;
   if (!comment) {
     // No verdict yet: the move waits for the engine, as the game's own moves do
@@ -88,20 +88,20 @@ function lineButton(session: Session, analysis: Analysis, move: JudgedMove | nul
   const label = onLine
     ? html`${svgIcon('prev')}${language.ui.back}`
     : html`${svgIcon('play')}${language.ui.lines.show}`;
-  return html`<button class="lr-ext-bubble__line" data-lr-ext="line">${label}</button>`;
+  return html`<button class="ln-ext-bubble__line" data-ln-ext="line">${label}</button>`;
 }
 
 /** Under an error's comment, the button that has the player look for a better move. */
 const retryButton = (session: Session, analysis: Analysis, move: JudgedMove | null): SafeHtml =>
   canRetry(move, analysis)
-    ? html`<button class="lr-ext-bubble__line lr-ext-bubble__retry" data-lr-ext="retry">${svgIcon('retry')}${session.language.ui.retry.button}</button>`
+    ? html`<button class="ln-ext-bubble__line ln-ext-bubble__retry" data-ln-ext="retry">${svgIcon('retry')}${session.language.ui.retry.button}</button>`
     : html``;
 
 function actionsMarkup(session: Session, analysis: Analysis, move: JudgedMove | null): SafeHtml {
   const line = lineButton(session, analysis, move);
   const retry = retryButton(session, analysis, move);
   return line.value || retry.value
-    ? html`<div class="lr-ext-bubble__actions">${retry}${line}</div>`
+    ? html`<div class="ln-ext-bubble__actions">${retry}${line}</div>`
     : html``;
 }
 
@@ -111,7 +111,7 @@ const CONTROLS: readonly (PanelAction & IconName)[] = ['first', 'prev', 'play', 
 function controlsMarkup(playing: boolean): SafeHtml {
   const buttons = CONTROLS.map(action => {
     const icon: IconName = action === 'play' && playing ? 'pause' : action;
-    return html`<button class="lr-ext-btn" data-lr-ext="${action}">${svgIcon(icon)}</button>`;
+    return html`<button class="ln-ext-btn" data-ln-ext="${action}">${svgIcon(icon)}</button>`;
   });
   return html`${buttons}`;
 }
@@ -158,7 +158,7 @@ function coachMarkup(session: Session, analysis: Analysis, spoken: Spoken): Safe
           actions: comment ? actionsMarkup(session, analysis, move) : html``,
         });
   const time = comment && !(retry && retried) ? timeTag(session, comment) : '';
-  return html`<div class="lr-ext-coach">${avatar}${time}<div class="lr-ext-bubble">${bubble}</div></div>`;
+  return html`<div class="ln-ext-coach">${avatar}${time}<div class="ln-ext-bubble">${bubble}</div></div>`;
 }
 
 export function renderMoves(session: Session, analysis: Analysis): void {
@@ -174,18 +174,18 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const scrolled = momentsScroll(elements.panel);
   fillAroundNav(
     elements.panel,
-    html`${header(language.ui.review, 'summary', language, html`${shareButton(view.sheet, language.ui)}${newGameMarkup(analysis, 'lr-ext-review__new')}`)}
-      <div class="lr-ext-review__graph-box"><div class="lr-ext-review__graph-slot"></div><div class="lr-ext-review__views-slot"></div></div>${moments}
+    html`${header(language.ui.review, 'summary', language, html`${shareButton(view.sheet, language.ui)}${newGameMarkup(analysis, 'ln-ext-review__new')}`)}
+      <div class="ln-ext-review__graph-box"><div class="ln-ext-review__graph-slot"></div><div class="ln-ext-review__views-slot"></div></div>${moments}
       ${coachMarkup(session, analysis, spoken)}`,
     elements.nav,
   );
   syncNav(elements.nav, navState(session, analysis, spoken), language.ui);
   // The graph and its views are kept across renders (its listeners, its first draw, their
   // pick's slide): put them back in their slots.
-  queryOne(elements.panel, '.lr-ext-review__graph-slot', HTMLElement)?.replaceWith(
+  queryOne(elements.panel, '.ln-ext-review__graph-slot', HTMLElement)?.replaceWith(
     elements.graphBox,
   );
-  queryOne(elements.panel, '.lr-ext-review__views-slot', HTMLElement)?.replaceWith(
+  queryOne(elements.panel, '.ln-ext-review__views-slot', HTMLElement)?.replaceWith(
     elements.graphViews,
   );
   const hasTimes = gameTimes(analysis).length > 0;

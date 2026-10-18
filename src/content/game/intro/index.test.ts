@@ -54,7 +54,7 @@ afterEach(() => {
 });
 
 const main = (): HTMLElement | null => queryOne(document, 'main.round', HTMLElement);
-const intro = (): Element | null => document.querySelector('main.round > .lr-ext-intro');
+const intro = (): Element | null => document.querySelector('main.round > .ln-ext-intro');
 
 describe('the game intro', () => {
   it('drops once its images are decoded, faces the players, and leaves on time', async () => {
@@ -66,24 +66,24 @@ describe('the game intro', () => {
     vi.useFakeTimers();
     syncIntro();
     expect(
-      intro()?.querySelector('.lr-ext-intro__card--top .lr-ext-intro__username')?.textContent,
+      intro()?.querySelector('.ln-ext-intro__card--top .ln-ext-intro__username')?.textContent,
     ).toBe('alice');
     expect(
-      intro()?.querySelector('.lr-ext-intro__card--bottom .lr-ext-intro__username')?.textContent,
+      intro()?.querySelector('.ln-ext-intro__card--bottom .ln-ext-intro__username')?.textContent,
     ).toBe('Anonymous');
-    expect(main()?.dataset.lrExtIntro).toBe('');
-    expect(main()?.style.getPropertyValue('--lr-ext-intro-board')).toMatch(
+    expect(main()?.dataset.lnExtIntro).toBe('');
+    expect(main()?.style.getPropertyValue('--ln-ext-intro-board')).toMatch(
       /^url\("data:image\/svg\+xml,%3Csvg%20/,
     );
-    expect(main()?.style.getPropertyValue('--lr-ext-intro-swords')).toBe(
+    expect(main()?.style.getPropertyValue('--ln-ext-intro-swords')).toBe(
       "url('chrome-extension://id/img/hugeicons/swords--ffc689.svg')",
     );
     expect(sessionStorage.getItem(SessionKey.gameIntro(GAME_ID))).toBe('1');
     vi.advanceTimersByTime(INTRO_MS);
     expect(intro()).toBeNull();
-    expect(main()?.dataset.lrExtIntro).toBeUndefined();
-    expect(main()?.style.getPropertyValue('--lr-ext-intro-board')).toBe('');
-    expect(main()?.style.getPropertyValue('--lr-ext-intro-swords')).toBe('');
+    expect(main()?.dataset.lnExtIntro).toBeUndefined();
+    expect(main()?.style.getPropertyValue('--ln-ext-intro-board')).toBe('');
+    expect(main()?.style.getPropertyValue('--ln-ext-intro-swords')).toBe('');
     // Once only.
     syncIntro();
     expect(intro()).toBeNull();

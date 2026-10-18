@@ -19,7 +19,7 @@
 
 .study-topics h2 {
   margin: 0 0 12px !important;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 18px !important;
   font-weight: 800 !important;
 }
@@ -32,19 +32,19 @@
   gap: 8px;
   margin: 0 !important;
   padding: 20px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
   line-height: normal !important;
 }
 
 .study-topics .topic-list a {
   margin: 0 !important;
   padding: 8px 14px !important;
-  border: 1px solid var(--lr-ext-lift-8);
+  border: 1px solid var(--ln-ext-lift-8);
   border-radius: 999px !important;
-  background: var(--lr-ext-lift-4) !important;
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-lift-4) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
   transition:
@@ -54,9 +54,9 @@
 }
 
 .study-topics .topic-list a:hover {
-  border-color: color-mix(in srgb, var(--lr-ext-accent) 50%, transparent);
-  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent) !important;
-  color: var(--lr-ext-text-strong) !important;
+  border-color: color-mix(in srgb, var(--ln-ext-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 @media (max-width: 799.98px) {
@@ -71,13 +71,13 @@
    Each heading and its list form one card, and a column never breaks between them. */
 
 /* Lichess's overflow: hidden would make the box the title's scroller: it would never stick. */
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .page-menu__content.box {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .page-menu__content.box {
   overflow: visible !important;
   padding: 0 !important;
   background: transparent !important;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] h1.box__top {
   display: flex;
   justify-content: flex-start !important;
   align-items: center;
@@ -86,59 +86,59 @@ main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top {
   padding: 16px 0 12px !important;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body {
   columns: 2 340px;
   column-gap: 16px;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > p {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > p {
   column-span: all;
   margin: 0 0 20px !important;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
   font-size: 15px;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > h2 {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > h2 {
   margin: 0 !important;
   padding: 14px 16px 12px !important;
-  border: 1px solid var(--lr-ext-card-border);
-  border-bottom-color: var(--lr-ext-lift-6);
+  border: 1px solid var(--ln-ext-card-border);
+  border-bottom-color: var(--ln-ext-lift-6);
   border-radius: 10px 10px 0 0;
-  background: var(--lr-ext-bg-panel);
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-bg-panel);
+  color: var(--ln-ext-text-strong) !important;
   font-size: 17px !important;
   font-weight: 800 !important;
   break-after: avoid;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > h2 strong {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > h2 strong {
   font-weight: inherit;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > ul {
   margin: 0 0 16px !important;
   padding: 6px !important;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-top: none;
   border-radius: 0 0 10px 10px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
   list-style: none;
   break-before: avoid;
   break-inside: avoid;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul li {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > ul li {
   margin: 0 !important;
 }
 
 /* Each row: Lichess's study icon, then the title. */
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > ul a {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
   border-radius: 6px;
-  color: var(--lr-ext-text) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
@@ -147,7 +147,7 @@ main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a {
     color 0.1s !important;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a::before {
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > ul a::before {
   content: '\e012';
   flex: none;
   display: flex;
@@ -156,58 +156,58 @@ main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a::before {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--lr-ext-accent) 15%, transparent);
-  color: var(--lr-ext-accent);
+  background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent);
+  color: var(--ln-ext-accent);
   font-family: lichess;
   font-size: 15px;
   font-weight: 400;
 }
 
-main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .body > ul a:hover {
-  background: var(--lr-ext-menu-hover);
-  color: var(--lr-ext-text-strong) !important;
+main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > ul a:hover {
+  background: var(--ln-ext-menu-hover);
+  color: var(--ln-ext-text-strong) !important;
 }
 
 /* Only the picks scroll: the menu and title stay put, as on the study lists. */
 @media (min-width: 1020px) {
-  main.page-menu[data-lr-ext-nav-active$='/staff-picks'] > .subnav {
+  main.page-menu[data-ln-ext-nav-active$='/staff-picks'] > .subnav {
     position: sticky;
     top: 16px;
     align-self: start;
   }
 
-  main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top {
+  main.page-menu[data-ln-ext-nav-active$='/staff-picks'] h1.box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 3;
     top: 0;
     margin-inline: calc(-1 * min(12px, 1vw)) !important;
     padding-inline: min(12px, 1vw) !important;
-    background: var(--lr-ext-bg-page);
-    box-shadow: var(--lr-ext-pin-cover);
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
   }
 
-  main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top::after {
+  main.page-menu[data-ln-ext-nav-active$='/staff-picks'] h1.box__top::after {
     content: '';
     position: absolute;
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
   }
 
   @container scroll-state(stuck: top) {
-    main.page-menu[data-lr-ext-nav-active$='/staff-picks'] h1.box__top::after {
+    main.page-menu[data-ln-ext-nav-active$='/staff-picks'] h1.box__top::after {
       opacity: 1;
     }
   }
 }
 
 @media (max-width: 799.98px) {
-  main.page-menu[data-lr-ext-nav-active$='/staff-picks'] .page-menu__content.box {
+  main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .page-menu__content.box {
     padding: 0 8px 24px !important;
   }
 }

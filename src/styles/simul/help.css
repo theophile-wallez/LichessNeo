@@ -3,30 +3,30 @@
 /* Level with the title's icon. Stays put while the list scrolls, and scrolls in
  * place on a short window. */
 main.simul-list .simul-list__help {
-  counter-reset: lr-ext-simul-rule;
+  counter-reset: ln-ext-simul-rule;
   position: sticky;
   top: 16px;
   align-self: start;
-  max-height: calc(var(--lr-ext-main-h, 100dvh) - 32px);
+  max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
   margin-top: 16px !important;
   overflow-y: auto;
   scrollbar-width: thin;
   padding: 20px 20px 8px;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 12px;
-  background: var(--lr-ext-bg-panel);
+  background: var(--ln-ext-bg-panel);
   text-shadow: none !important;
 }
 
 main.simul-list .simul-list__help > p {
   margin: 0 0 16px;
-  color: var(--lr-ext-text);
+  color: var(--ln-ext-text);
   font-size: 14px;
   line-height: 1.55;
 }
 
 main.simul-list .simul-list__help > p:first-child {
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 16px;
   font-weight: 700;
   line-height: 1.45;
@@ -38,10 +38,10 @@ main.simul-list .simul-list__help > img {
   display: block;
   padding: 8px 8px 22px;
   border-radius: 4px !important;
-  background: var(--lr-ext-orange-light);
+  background: var(--ln-ext-orange-light);
   box-shadow:
-    0 6px 14px var(--lr-ext-shade-50),
-    0 2px 4px var(--lr-ext-shade-40);
+    0 6px 14px var(--ln-ext-shade-50),
+    0 2px 4px var(--ln-ext-shade-40);
   transform: rotate(-2.5deg);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
@@ -53,15 +53,15 @@ main.simul-list .simul-list__help > img:hover {
 main.simul-list .simul-list__help > em {
   margin: 16px 0 20px !important;
   padding-inline-start: 12px;
-  border-inline-start: 3px solid var(--lr-ext-orange-dark);
-  color: var(--lr-ext-text-dim);
+  border-inline-start: 3px solid var(--ln-ext-orange-dark);
+  color: var(--ln-ext-text-dim);
   font-size: 13px;
   line-height: 1.5;
 }
 
 /* The rules as numbered steps, each badge in its own color. */
 main.simul-list .simul-list__help > em ~ p {
-  counter-increment: lr-ext-simul-rule;
+  counter-increment: ln-ext-simul-rule;
   display: grid;
   grid-template-columns: 26px minmax(0, 1fr);
   gap: 12px;
@@ -69,7 +69,7 @@ main.simul-list .simul-list__help > em ~ p {
 }
 
 main.simul-list .simul-list__help > em ~ p::before {
-  content: counter(lr-ext-simul-rule);
+  content: counter(ln-ext-simul-rule);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,25 +78,25 @@ main.simul-list .simul-list__help > em ~ p::before {
   border-radius: 50%;
   background: linear-gradient(
     145deg,
-    var(--lr-ext-rule, #45a3f5),
-    var(--lr-ext-rule-2, var(--lr-ext-cyan-darker))
+    var(--ln-ext-rule, #45a3f5),
+    var(--ln-ext-rule-2, var(--ln-ext-cyan-darker))
   );
   box-shadow:
     inset 0 1px 0 #ffffff40,
     inset 0 -2px 0 #00000026;
-  color: var(--lr-ext-white);
+  color: var(--ln-ext-white);
   font-size: 13px;
   font-weight: 800;
   text-shadow: 0 1px 1px #0000004d;
 }
 
 main.simul-list .simul-list__help > em ~ p:nth-of-type(3) {
-  --lr-ext-rule: var(--lr-ext-accent);
-  --lr-ext-rule-2: var(--lr-ext-accent-dim);
+  --ln-ext-rule: var(--ln-ext-accent);
+  --ln-ext-rule-2: var(--ln-ext-accent-dim);
 }
 main.simul-list .simul-list__help > em ~ p:nth-of-type(4) {
-  --lr-ext-rule: #f5a93b;
-  --lr-ext-rule-2: var(--lr-ext-orange-darker);
+  --ln-ext-rule: #f5a93b;
+  --ln-ext-rule-2: var(--ln-ext-orange-darker);
 }
 
 /* ---- Sticky title --- */
@@ -111,11 +111,11 @@ main.simul-list .simul-list__help > em ~ p:nth-of-type(4) {
     top: 0;
     /* Side shadows widen it over the cards' shadows; margins would widen the
      * page on a narrow window. */
-    background: var(--lr-ext-bg-page);
+    background: var(--ln-ext-bg-page);
     box-shadow:
-      var(--lr-ext-pin-cover-wide),
-      -12px 0 var(--lr-ext-bg-page),
-      12px 0 var(--lr-ext-bg-page);
+      var(--ln-ext-pin-cover-wide),
+      -12px 0 var(--ln-ext-bg-page),
+      12px 0 var(--ln-ext-bg-page);
   }
 
   main.simul-list h1.box__top::after {
@@ -124,7 +124,7 @@ main.simul-list .simul-list__help > em ~ p:nth-of-type(4) {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

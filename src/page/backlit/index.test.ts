@@ -4,7 +4,7 @@ import { renderBoard } from '#page/sounds/fixtures/boards.ts';
 import { backlit } from './index.ts';
 
 const root = document.documentElement;
-const canvas = (): Element | null => document.querySelector('cg-container > canvas.lr-ext-backlit');
+const canvas = (): Element | null => document.querySelector('cg-container > canvas.ln-ext-backlit');
 
 /** Lets the observers' callbacks run, then the frame they look for a board in. */
 async function nextFrame(): Promise<void> {
@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  delete root.dataset.lrExtBacklit;
+  delete root.dataset.lnExtBacklit;
   vi.useRealTimers();
   document.body.replaceChildren();
   document.body.classList.remove('is2d');
@@ -32,16 +32,16 @@ describe('the backlit board', () => {
     renderBoard({ placement: '8/8/8/8/8/8/8/8', orientation: 'white' });
     await nextFrame();
     expect(canvas()).toBeNull();
-    root.dataset.lrExtBacklit = 'accent short captures 5.5 9.6';
+    root.dataset.lnExtBacklit = 'accent short captures 5.5 9.6';
     await nextFrame();
     expect(canvas()).not.toBeNull();
-    delete root.dataset.lrExtBacklit;
+    delete root.dataset.lnExtBacklit;
     await nextFrame();
     expect(canvas()).toBeNull();
   });
 
   it('moves to the next board once the one it lit is gone', async () => {
-    root.dataset.lrExtBacklit = 'accent short captures 5.5 9.6';
+    root.dataset.lnExtBacklit = 'accent short captures 5.5 9.6';
     await nextFrame();
     const first = renderBoard({ placement: '8/8/8/8/8/8/8/8', orientation: 'white' });
     await nextFrame();
@@ -53,8 +53,8 @@ describe('the backlit board', () => {
   });
 
   it('lights the settings’ preview board, which is in no game’s layout', async () => {
-    root.dataset.lrExtBacklit = 'sides wide always 2 50';
-    const host = createElement('div', { className: 'lr-ext-looks-preview__board' });
+    root.dataset.lnExtBacklit = 'sides wide always 2 50';
+    const host = createElement('div', { className: 'ln-ext-looks-preview__board' });
     const container = createCustomElement('cg-container');
     container.append(createCustomElement('cg-board'));
     host.append(container);

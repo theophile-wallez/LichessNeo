@@ -1,15 +1,15 @@
 /* ---- Collapsed --- */
 
 /* The toggle beside the logo, and the sidebar folded to its icons
- * (content/sidebar/collapse.ts sets data-lr-ext-sidebar on <html>). Folded, a flyout
+ * (content/sidebar/collapse.ts sets data-ln-ext-sidebar on <html>). Folded, a flyout
  * opens under its section's label, and the search box floats out of its icon. */
 
-#lr-ext-sidebar-toggle {
+#ln-ext-sidebar-toggle {
   display: none;
 }
 
 @media (min-width: 1020px) {
-  #lr-ext-sidebar-toggle {
+  #ln-ext-sidebar-toggle {
     position: absolute;
     top: 16px;
     right: 8px;
@@ -22,7 +22,7 @@
     border: none;
     border-radius: 6px;
     background: transparent;
-    color: var(--lr-ext-text-dim);
+    color: var(--ln-ext-text-dim);
     cursor: pointer;
     transition: background-color 0.15s !important;
   }
@@ -33,7 +33,7 @@
   }
 
   /* A window with its side panel. */
-  #lr-ext-sidebar-toggle::before {
+  #ln-ext-sidebar-toggle::before {
     content: '';
     width: 16px;
     height: 16px;
@@ -42,23 +42,23 @@
       contain no-repeat;
   }
 
-  #lr-ext-sidebar-toggle:hover {
-    background: var(--lr-ext-sb-hover);
-    color: var(--lr-ext-text-strong);
+  #ln-ext-sidebar-toggle:hover {
+    background: var(--ln-ext-sb-hover);
+    color: var(--ln-ext-text-strong);
   }
 
-  html[data-lr-ext-sidebar='collapsed'] {
-    --lr-ext-sidebar-w: 56px;
+  html[data-ln-ext-sidebar='collapsed'] {
+    --ln-ext-sidebar-w: 56px;
   }
 
   /* While it folds or unfolds (content/sidebar/collapse.ts), everything follows the width:
    * labels fade and get clipped, icons barely move, the page resizes along. */
-  html[data-lr-ext-sidebar-moving] {
-    transition: --lr-ext-sidebar-w 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  html[data-ln-ext-sidebar-moving] {
+    transition: --ln-ext-sidebar-w 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
-  html[data-lr-ext-sidebar-moving]
-    :is(#topnav section > a, #lr-ext-donate, #top .site-title, #lr-ext-sidebar-toggle, #topnav) {
+  html[data-ln-ext-sidebar-moving]
+    :is(#topnav section > a, #ln-ext-donate, #top .site-title, #ln-ext-sidebar-toggle, #topnav) {
     transition:
       background-color 0.15s,
       color 0.2s,
@@ -69,47 +69,47 @@
       right 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
-  html[data-lr-ext-sidebar-moving] #top .site-title::after {
+  html[data-ln-ext-sidebar-moving] #top .site-title::after {
     transition: color 0.2s !important;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #top .site-title {
+  html[data-ln-ext-sidebar='collapsed'] #top .site-title {
     margin: 12px 11px 6px !important;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #top .site-title::after {
+  html[data-ln-ext-sidebar='collapsed'] #top .site-title::after {
     color: transparent;
   }
 
   /* Under the logo, folded. */
-  html[data-lr-ext-sidebar='collapsed'] #lr-ext-sidebar-toggle {
+  html[data-ln-ext-sidebar='collapsed'] #ln-ext-sidebar-toggle {
     top: 52px;
     right: 15px;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #topnav {
+  html[data-ln-ext-sidebar='collapsed'] #topnav {
     margin-top: 36px !important;
   }
 
   /* Icons only: the labels go transparent and get clipped, so links keep their names. The
    * hover rule is named too, as it sets the color as well. */
-  html[data-lr-ext-sidebar='collapsed'] :is(#topnav section > a, #lr-ext-donate) {
+  html[data-ln-ext-sidebar='collapsed'] :is(#topnav section > a, #ln-ext-donate) {
     height: 40px !important;
     margin: 2px 8px !important;
     padding: 0 10px !important;
   }
 
-  html[data-lr-ext-sidebar='collapsed']
-    :is(#topnav section > a, #lr-ext-donate, #lr-ext-donate:hover),
-  html[data-lr-ext-sidebar='collapsed'] #topnav section:hover > a {
+  html[data-ln-ext-sidebar='collapsed']
+    :is(#topnav section > a, #ln-ext-donate, #ln-ext-donate:hover),
+  html[data-ln-ext-sidebar='collapsed'] #topnav section:hover > a {
     color: transparent !important;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #topnav section > div::before {
-    content: attr(data-lr-ext-label);
+  html[data-ln-ext-sidebar='collapsed'] #topnav section > div::before {
+    content: attr(data-ln-ext-label);
     display: block;
     padding: 6px 8px 4px;
-    color: var(--lr-ext-text-dim);
+    color: var(--ln-ext-text-dim);
     font-size: 11.5px;
     font-weight: 600;
     letter-spacing: 0.04em;
@@ -117,49 +117,49 @@
   }
 
   /* Donate has no flyout: its label shows beside it, in the flyouts' look. */
-  html[data-lr-ext-sidebar='collapsed'] #lr-ext-donate {
+  html[data-ln-ext-sidebar='collapsed'] #ln-ext-donate {
     position: relative;
     overflow: visible;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #lr-ext-donate::after {
-    content: attr(data-lr-ext-label);
+  html[data-ln-ext-sidebar='collapsed'] #ln-ext-donate::after {
+    content: attr(data-ln-ext-label);
     position: absolute;
     top: 50%;
     left: calc(100% + 8px);
     display: none;
     padding: 7px 10px;
     border-radius: 8px;
-    background: var(--lr-ext-neutral-5);
+    background: var(--ln-ext-neutral-5);
     box-shadow:
-      inset 0 0 0 1px var(--lr-ext-lift-8),
-      0 12px 32px var(--lr-ext-shade-50);
-    color: var(--lr-ext-neutral-13);
+      inset 0 0 0 1px var(--ln-ext-lift-8),
+      0 12px 32px var(--ln-ext-shade-50);
+    color: var(--ln-ext-neutral-13);
     font-size: 13px;
     white-space: nowrap;
     transform: translateY(-50%);
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #lr-ext-donate:hover::after {
+  html[data-ln-ext-sidebar='collapsed'] #ln-ext-donate:hover::after {
     display: block;
   }
 
   /* ---- Bottom buttons, folded --- */
 
-  html[data-lr-ext-sidebar='collapsed'] #top .site-buttons {
+  html[data-ln-ext-sidebar='collapsed'] #top .site-buttons {
     justify-content: center;
     padding-inline: 8px !important;
   }
 
   /* Lichess focuses the search on hover and drops it on leaving the box: the field floats
    * flush against the icon, inside the box, so the pointer can reach it. */
-  html[data-lr-ext-sidebar='collapsed'] #top #clinput {
+  html[data-ln-ext-sidebar='collapsed'] #top #clinput {
     position: relative;
     justify-content: center;
     box-shadow: none;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #top #clinput input {
+  html[data-ln-ext-sidebar='collapsed'] #top #clinput input {
     position: absolute;
     top: 0;
     left: 100%;
@@ -169,29 +169,29 @@
     opacity: 0;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] body.clinput #top #clinput input {
+  html[data-ln-ext-sidebar='collapsed'] body.clinput #top #clinput input {
     width: 260px !important;
     padding: 0 10px !important;
     border-radius: 8px;
-    background: var(--lr-ext-neutral-5) !important;
+    background: var(--ln-ext-neutral-5) !important;
     box-shadow:
-      inset 0 0 0 1px var(--lr-ext-lift-8),
-      0 12px 32px var(--lr-ext-shade-50);
+      inset 0 0 0 1px var(--ln-ext-lift-8),
+      0 12px 32px var(--ln-ext-shade-50);
     opacity: 1;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #top .signin-or-signup .signup {
+  html[data-ln-ext-sidebar='collapsed'] #top .signin-or-signup .signup {
     display: none !important;
   }
 
   /* Sign in as Lichess's user glyph. */
-  html[data-lr-ext-sidebar='collapsed'] #top .signin-or-signup .signin {
+  html[data-ln-ext-sidebar='collapsed'] #top .signin-or-signup .signin {
     height: 34px;
     padding: 0 !important;
     font-size: 0 !important;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #top .signin-or-signup .signin::before {
+  html[data-ln-ext-sidebar='collapsed'] #top .signin-or-signup .signin::before {
     content: '\e050';
     font-family: lichess;
     font-size: 17px;
@@ -204,25 +204,25 @@
   }
 
   /* Signed in: the avatar alone. */
-  html[data-lr-ext-sidebar='collapsed'] #top #user_tag {
+  html[data-ln-ext-sidebar='collapsed'] #top #user_tag {
     height: 40px;
     padding: 0 !important;
     font-size: 0 !important;
   }
 
-  html[data-lr-ext-sidebar='collapsed'] #top #user_tag::after {
+  html[data-ln-ext-sidebar='collapsed'] #top #user_tag::after {
     right: 50%;
     transform: translate(50%, -50%);
   }
 
   /* With a rating, its speed's glyph alone, in the pill's place. */
-  html[data-lr-ext-sidebar='collapsed'] #top #user_tag::before {
+  html[data-ln-ext-sidebar='collapsed'] #top #user_tag::before {
     display: none;
   }
 
   /* With a rating, its speed's glyph alone. */
-  html[data-lr-ext-sidebar='collapsed'][data-lr-ext-account-perf] #top #user_tag::after {
-    content: var(--lr-ext-account-glyph);
+  html[data-ln-ext-sidebar='collapsed'][data-ln-ext-account-perf] #top #user_tag::after {
+    content: var(--ln-ext-account-glyph);
     width: auto;
     padding: 0;
     background: none;

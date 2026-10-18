@@ -13,7 +13,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // own Theme preference, as the settings' Appearance card does, so a device
 // scheme ("system") becomes the other one for good.
 
-const TOGGLE_ID = 'lr-ext-scheme-toggle';
+const TOGGLE_ID = 'ln-ext-scheme-toggle';
 
 const isLight = (): boolean => document.documentElement.classList.contains('light');
 
@@ -41,9 +41,9 @@ function syncToggle(): void {
     });
     setHtml(
       button,
-      html`${hugeicon(Sun03Icon, { className: 'lr-ext-scheme-toggle__light' })}${hugeicon(
+      html`${hugeicon(Sun03Icon, { className: 'ln-ext-scheme-toggle__light' })}${hugeicon(
         Moon02Icon,
-        { className: 'lr-ext-scheme-toggle__dark' },
+        { className: 'ln-ext-scheme-toggle__dark' },
       )}`,
     );
     button.addEventListener('click', toggleScheme);

@@ -20,10 +20,10 @@
   margin: 0 !important;
   padding: 6px 16px 6px 12px;
   border-radius: 8px;
-  background: var(--lr-ext-white);
-  box-shadow: 0 2px 6px var(--lr-ext-shade-30);
-  color: var(--lr-ext-ink) !important;
-  font-family: var(--lr-ext-font) !important;
+  background: var(--ln-ext-white);
+  box-shadow: 0 2px 6px var(--ln-ext-shade-30);
+  color: var(--ln-ext-ink) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 34px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -90,8 +90,8 @@
 :is(.racer, .storm) .puz-combo__counter__value {
   width: auto !important;
   margin: 0 !important;
-  color: var(--lr-ext-text-strong);
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-strong);
+  font-family: var(--ln-ext-font) !important;
   font-size: 34px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -99,15 +99,15 @@
 }
 
 :is(.racer, .storm) .puz-combo__counter__combo {
-  color: var(--lr-ext-text-dim) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 11px !important;
   font-weight: 800 !important;
   letter-spacing: 0.08em !important;
 }
 
 :is(.racer, .storm).puz-mod-move .puz-combo__counter__value {
-  color: var(--lr-ext-good-hover);
+  color: var(--ln-ext-good-hover);
 }
 
 :is(.racer, .storm) .puz-combo__bars {
@@ -120,22 +120,22 @@
   flex: 0 0 16px !important;
   border: none !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-neutral-1) !important;
-  box-shadow: inset 0 1px 3px var(--lr-ext-shade-50);
+  background: var(--ln-ext-neutral-1) !important;
+  box-shadow: inset 0 1px 3px var(--ln-ext-shade-50);
   overflow: hidden;
 }
 
 :is(.racer, .storm) .puz-combo__bar__in {
   border-radius: 999px !important;
-  background: var(--lr-ext-btn-primary) !important;
+  background: var(--ln-ext-btn-primary) !important;
   box-shadow:
     inset 0 1px 0 #ffffff4d,
-    0 0 12px color-mix(in srgb, var(--lr-ext-accent) 60%, transparent) !important;
+    0 0 12px color-mix(in srgb, var(--ln-ext-accent) 60%, transparent) !important;
 }
 
 :is(.racer, .storm) .puz-combo__bar__in-full {
   border-radius: 999px !important;
-  background: var(--lr-ext-good-hover) !important;
+  background: var(--ln-ext-good-hover) !important;
 }
 
 /* The bonus levels: pills instead of skewed tabs. */
@@ -150,9 +150,9 @@
   margin: 0 !important;
   border: none !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-bg-raised) !important;
+  background: var(--ln-ext-bg-raised) !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
   font-size: 12px !important;
   font-weight: 800 !important;
   line-height: 24px !important;
@@ -164,9 +164,9 @@
 }
 
 :is(.racer, .storm) .puz-combo__level.active {
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 /* ---- After the race --- */
@@ -182,7 +182,7 @@
   align-items: center;
   gap: 10px;
   margin: 0;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 22px;
   font-weight: 800;
 }
@@ -195,13 +195,13 @@
   height: 24px;
   border-radius: 5px;
   background: conic-gradient(
-      var(--lr-ext-white) 25%,
-      var(--lr-ext-ink) 0 50%,
-      var(--lr-ext-white) 0 75%,
-      var(--lr-ext-ink) 0
+      var(--ln-ext-white) 25%,
+      var(--ln-ext-ink) 0 50%,
+      var(--ln-ext-white) 0 75%,
+      var(--ln-ext-ink) 0
     )
     0 0 / 12px 12px;
-  box-shadow: 0 0 0 1px var(--lr-ext-lift-25);
+  box-shadow: 0 0 0 1px var(--ln-ext-lift-25);
 }
 
 /* "Your rank: 1/2", on a gold pill with a trophy, dark on the gold (white can't be read there). */
@@ -212,18 +212,18 @@
   gap: 8px;
   padding: 6px 14px 6px 8px;
   border-radius: 999px;
-  background: linear-gradient(var(--lr-ext-orange-dark), var(--lr-ext-orange-darker));
+  background: linear-gradient(var(--ln-ext-orange-dark), var(--ln-ext-orange-darker));
   box-shadow:
     inset 0 1px 0 #ffffff66,
-    0 1px 4px var(--lr-ext-shade-35);
-  color: var(--lr-ext-ink);
+    0 1px 4px var(--ln-ext-shade-35);
+  color: var(--ln-ext-ink);
   font-size: 15px;
   font-weight: 800;
 }
 
 /* The light scheme's darker orange shades are too deep for dark text. */
 html.light .racer .race__post__rank {
-  background: linear-gradient(var(--lr-ext-orange), var(--lr-ext-orange-dark));
+  background: linear-gradient(var(--ln-ext-orange), var(--ln-ext-orange-dark));
 }
 
 .racer .race__post__rank::before {
@@ -258,10 +258,10 @@ html.light .racer .race__post__rank {
 .racer .racer__countdown {
   gap: 24px;
   padding: 24px 32px !important;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 18px !important;
-  background: color-mix(in srgb, var(--lr-ext-bg-panel-dark) 92%, transparent) !important;
-  box-shadow: 0 16px 40px var(--lr-ext-shade-70) !important;
+  background: color-mix(in srgb, var(--ln-ext-bg-panel-dark) 92%, transparent) !important;
+  box-shadow: 0 16px 40px var(--ln-ext-shade-70) !important;
   backdrop-filter: blur(6px);
 }
 
@@ -272,8 +272,8 @@ html.light .racer .race__post__rank {
   margin: 0 !important;
   padding: 10px;
   border-radius: 999px !important;
-  background: var(--lr-ext-neutral-1) !important;
-  box-shadow: inset 0 2px 6px var(--lr-ext-shade-90);
+  background: var(--ln-ext-neutral-1) !important;
+  box-shadow: inset 0 2px 6px var(--ln-ext-shade-90);
 }
 
 .racer .racer__countdown__lights light {
@@ -281,15 +281,15 @@ html.light .racer .race__post__rank {
 }
 
 .racer .racer__countdown__lights light.green {
-  background: var(--lr-ext-good-hover) !important;
+  background: var(--ln-ext-good-hover) !important;
 }
 
 .racer .racer__countdown__seconds {
   min-width: 1.2ch;
   justify-content: center;
   margin: 0 !important;
-  color: var(--lr-ext-text-strong) !important;
-  font-family: var(--lr-ext-font) !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 110px !important;
   font-weight: 800;
   font-variant-numeric: tabular-nums;

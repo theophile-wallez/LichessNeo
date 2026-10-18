@@ -34,7 +34,7 @@ describe('the user’s themes', () => {
     });
     const after = withoutTheme(before, 'custom-a');
     expect(after.customThemes).toEqual([]);
-    expect(after.colorThemes).toEqual({ light: 'reimagined', dark: 'iris' });
+    expect(after.colorThemes).toEqual({ light: 'neo', dark: 'iris' });
   });
 
   it('drops unreadable themes without losing the other settings', () => {

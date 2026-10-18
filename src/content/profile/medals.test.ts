@@ -41,13 +41,13 @@ afterEach(() => {
 });
 
 const shown = (): string[] =>
-  queryAll(document, '.lr-ext-medal', HTMLElement).map(
-    medal => `${medal.dataset.lrExtMedal}:${medal.dataset.lrExtMetal}`,
+  queryAll(document, '.ln-ext-medal', HTMLElement).map(
+    medal => `${medal.dataset.lnExtMedal}:${medal.dataset.lnExtMetal}`,
   );
 
 const fresh = (): string[] =>
-  queryAll(document, '.lr-ext-medal[data-lr-ext-new]', HTMLElement).map(
-    medal => medal.dataset.lrExtMedal ?? '',
+  queryAll(document, '.ln-ext-medal[data-ln-ext-new]', HTMLElement).map(
+    medal => medal.dataset.lnExtMedal ?? '',
   );
 
 async function openProfile(name: string): Promise<void> {
@@ -62,7 +62,7 @@ describe('the medals', () => {
     syncMedals();
     await flush();
     expect(fetches).toEqual(['/api/user/eresy']);
-    const section = document.querySelector('#us_profile + section.lr-ext-medals');
+    const section = document.querySelector('#us_profile + section.ln-ext-medals');
     expect(section?.nextElementSibling?.className).toBe('angles');
     expect(shown()).toEqual([
       'veteran:gold',
@@ -79,15 +79,15 @@ describe('the medals', () => {
 
   it('give their count against the next step, and the metal in their tooltip', async () => {
     await openProfile('Eresy');
-    const games = document.querySelector<HTMLElement>("[data-lr-ext-medal='games']");
-    expect(games?.querySelector('.lr-ext-medal__count')?.textContent).toBe('237 / 1,000');
-    expect(games?.dataset.lrExtTip).toBe('medalGames · medalBronze · medalNext:1,000');
+    const games = document.querySelector<HTMLElement>("[data-ln-ext-medal='games']");
+    expect(games?.querySelector('.ln-ext-medal__count')?.textContent).toBe('237 / 1,000');
+    expect(games?.dataset.lnExtTip).toBe('medalGames · medalBronze · medalNext:1,000');
   });
 
   it('show nothing when Lichess can’t say', async () => {
     vi.stubGlobal('fetch', () => Promise.resolve(new Response('Not found', { status: 404 })));
     await openProfile('closed');
-    expect(document.querySelector('.lr-ext-medals')).toBeNull();
+    expect(document.querySelector('.ln-ext-medals')).toBeNull();
   });
 });
 
@@ -99,7 +99,7 @@ describe('on the player’s own profile', () => {
   it('mark none new the first time, only remember them', async () => {
     await openProfile('Eresy');
     expect(fresh()).toEqual([]);
-    expect(JSON.parse(localStorage.getItem('lr-ext-medals-seen') ?? 'null')).toEqual({
+    expect(JSON.parse(localStorage.getItem('ln-ext-medals-seen') ?? 'null')).toEqual({
       user: 'eresy',
       metals: { veteran: 'gold', games: 'bronze', wins: 'bronze', peak: 'bronze' },
     });
@@ -107,13 +107,13 @@ describe('on the player’s own profile', () => {
 
   it('mark new the ones won, or won in a better metal, since last time', async () => {
     const seen = { user: 'eresy', metals: { veteran: 'silver', games: 'bronze' } };
-    localStorage.setItem('lr-ext-medals-seen', JSON.stringify(seen));
+    localStorage.setItem('ln-ext-medals-seen', JSON.stringify(seen));
     await openProfile('Eresy');
     expect(fresh()).toEqual(['veteran', 'peak', 'wins']);
   });
 
   it('leave another player’s medals alone', async () => {
-    localStorage.setItem('lr-ext-medals-seen', JSON.stringify({ user: 'eresy', metals: {} }));
+    localStorage.setItem('ln-ext-medals-seen', JSON.stringify({ user: 'eresy', metals: {} }));
     await openProfile('DrNykterstein');
     expect(fresh()).toEqual([]);
   });

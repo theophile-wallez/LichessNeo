@@ -49,7 +49,7 @@ export function createVoice(bubble: HTMLElement, { talk, emptyClass }: VoiceOpti
         const words = text.match(/\S+\s*/g) ?? [];
         setHtml(
           bubble,
-          html`${words.map(word => html`<span class="lr-ext-w lr-ext-w--off">${word}</span>`)}`,
+          html`${words.map(word => html`<span class="ln-ext-w ln-ext-w--off">${word}</span>`)}`,
         );
         bubble.classList.toggle(emptyClass, false);
         talk(mood, true);
@@ -57,7 +57,7 @@ export function createVoice(bubble: HTMLElement, { talk, emptyClass }: VoiceOpti
         let shown = 0;
         timer = window.setInterval(() => {
           const word = spans[shown++];
-          if (word) word.className = 'lr-ext-w lr-ext-w--in';
+          if (word) word.className = 'ln-ext-w ln-ext-w--in';
           if (shown < spans.length) return;
           clearInterval(timer);
           talk(mood, false);

@@ -132,7 +132,7 @@ const files = (): Record<string, string> => ({
 async function startWorker(options: FakeOptions): Promise<Fake> {
   const fake = fakeChrome(options);
   // The original told a store install by its update_url; a release build now.
-  vi.stubGlobal('LR_EXT_DEV_BUILD', !('update_url' in options.manifest));
+  vi.stubGlobal('LN_EXT_DEV_BUILD', !('update_url' in options.manifest));
   vi.resetModules();
   await import('./index.ts');
   return fake;
@@ -149,7 +149,7 @@ describe('the background worker', () => {
     const manifest = { ...CHROME_MANIFEST, update_url: 'https://x' };
     const fake = await startWorker({ manifest, files: files() });
     for (const listener of fake.listeners.installed) await listener({ reason: 'install' });
-    const answer = await ask(fake, { type: 'lr-ext:dev-check' });
+    const answer = await ask(fake, { type: 'ln-ext:dev-check' });
     const expected = legacy.scenarios.find(scenario => scenario.name === name);
     expect({ name, listeners: count(fake), answer, log: fake.log }).toEqual(
       expected && withPackListener(expected),
@@ -161,7 +161,7 @@ describe('the background worker', () => {
     vi.resetModules();
     await import('./index.ts');
     expect(count(fake)).toEqual({ installed: 1, startup: 0, message: PACK_LISTENERS });
-    expect(await ask(fake, { type: 'lr-ext:dev-check' })).toEqual({ responses: [] });
+    expect(await ask(fake, { type: 'ln-ext:dev-check' })).toEqual({ responses: [] });
   });
 
   it('unpacked: reloads once the files change, as the original', async () => {
@@ -175,14 +175,14 @@ describe('the background worker', () => {
     const reloads = (): number => fake.log.filter(entry => entry.event === 'reload').length;
     steps.push({ step: 'other message', ...(await ask(fake, { type: 'other' })) });
     steps.push({ step: 'no message', ...(await ask(fake, undefined)) });
-    steps.push({ step: 'unchanged', ...(await ask(fake, { type: 'lr-ext:dev-check' })) });
+    steps.push({ step: 'unchanged', ...(await ask(fake, { type: 'ln-ext:dev-check' })) });
     disk['content.js'] = 'js v2';
-    steps.push({ step: 'changed', ...(await ask(fake, { type: 'lr-ext:dev-check' })) });
+    steps.push({ step: 'changed', ...(await ask(fake, { type: 'ln-ext:dev-check' })) });
     vi.advanceTimersByTime(49);
     steps.push({ step: 'reloads after 49 ms', reloads: reloads() });
     vi.advanceTimersByTime(1);
     steps.push({ step: 'reloads after 50 ms', reloads: reloads() });
-    steps.push({ step: 'while reloading', ...(await ask(fake, { type: 'lr-ext:dev-check' })) });
+    steps.push({ step: 'while reloading', ...(await ask(fake, { type: 'ln-ext:dev-check' })) });
     vi.advanceTimersByTime(100);
     expect({ listeners, loaded, steps, log: fake.log }).toEqual(withPackListener(legacy.unpacked));
   });
@@ -196,14 +196,14 @@ describe('the background worker', () => {
     // Half-way through the swap: the manifest is gone, a script has changed.
     disk['manifest.json'] = undefined;
     disk['content.js'] = 'js v2';
-    const midSwap = await ask(fake, { type: 'lr-ext:dev-check' });
+    const midSwap = await ask(fake, { type: 'ln-ext:dev-check' });
     vi.advanceTimersByTime(100);
     expect({ midSwap, reloads: reloads() }).toEqual({
       midSwap: { kept: true, responses: [{ reload: false }] },
       reloads: 0,
     });
     disk['manifest.json'] = '{}';
-    const swapped = await ask(fake, { type: 'lr-ext:dev-check' });
+    const swapped = await ask(fake, { type: 'ln-ext:dev-check' });
     vi.advanceTimersByTime(100);
     expect({ swapped, reloads: reloads() }).toEqual({
       swapped: { kept: true, responses: [{ reload: true }] },
@@ -219,7 +219,7 @@ describe('the background worker', () => {
     const steps = [
       {
         step: 'stale stored fingerprint',
-        ...(await ask(fake, { type: 'lr-ext:dev-check', extra: 1 })),
+        ...(await ask(fake, { type: 'ln-ext:dev-check', extra: 1 })),
       },
     ];
     vi.advanceTimersByTime(100);

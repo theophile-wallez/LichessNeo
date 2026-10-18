@@ -3,14 +3,14 @@
  * the board. Below 1020px they're a row of pills (row.css). */
 
 @media (min-width: 1020px) {
-  html[data-lr-ext-has~='tv-channels'] main.round.tv-single {
-    --lr-ext-tv-w: 62px;
-    --lr-ext-lead-w: calc(var(--lr-ext-tv-w) + var(--lr-ext-gap));
+  html[data-ln-ext-has~='tv-channels'] main.round.tv-single {
+    --ln-ext-tv-w: 62px;
+    --ln-ext-lead-w: calc(var(--ln-ext-tv-w) + var(--ln-ext-gap));
     /* TV has no chat: a slimmer panel gives the board back what the channels take. */
-    --lr-ext-panel-min: clamp(260px, 20vw, 360px);
-    --lr-ext-panel-w: var(--lr-ext-panel-min);
+    --ln-ext-panel-min: clamp(260px, 20vw, 360px);
+    --ln-ext-panel-w: var(--ln-ext-panel-min);
 
-    grid-template-columns: var(--lr-ext-tv-w) var(--lr-ext-board) var(--lr-ext-panel-w) !important;
+    grid-template-columns: var(--ln-ext-tv-w) var(--ln-ext-board) var(--ln-ext-panel-w) !important;
     grid-template-areas:
       'tv user-top moves'
       'tv board    moves'
@@ -21,12 +21,12 @@
 
   /* Crazyhouse: pockets after the board and no column gap, as in game/; the channels'
    * column carries its own gap. */
-  html[data-lr-ext-has~='tv-channels'][data-lr-ext-has~='pocket'] main.round.tv-single {
+  html[data-ln-ext-has~='tv-channels'][data-ln-ext-has~='pocket'] main.round.tv-single {
     grid-template-columns:
-      var(--lr-ext-lead-w)
-      var(--lr-ext-board)
-      calc(var(--lr-ext-pocket-gap) + var(--lr-ext-pocket-sq) + var(--lr-ext-gap))
-      var(--lr-ext-panel-w) !important;
+      var(--ln-ext-lead-w)
+      var(--ln-ext-board)
+      calc(var(--ln-ext-pocket-gap) + var(--ln-ext-pocket-sq) + var(--ln-ext-gap))
+      var(--ln-ext-panel-w) !important;
     grid-template-areas:
       'tv user-top .      moves'
       'tv board    pocket moves'
@@ -37,12 +37,12 @@
 
   /* Zen mode hides the side, channels included (game/). */
   body.zenable.zen main.round.tv-single {
-    --lr-ext-tv-w: 0px !important;
-    --lr-ext-lead-w: 0px !important;
+    --ln-ext-tv-w: 0px !important;
+    --ln-ext-lead-w: 0px !important;
   }
 
-  html[data-lr-ext-has~='pocket'] main.round.tv-single > .round__side > .subnav {
-    margin-inline-end: var(--lr-ext-gap) !important;
+  html[data-ln-ext-has~='pocket'] main.round.tv-single > .round__side > .subnav {
+    margin-inline-end: var(--ln-ext-gap) !important;
   }
 
   /* ---- Column --- */
@@ -56,9 +56,9 @@
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden;
-    border: 1px solid var(--lr-ext-card-border);
+    border: 1px solid var(--ln-ext-card-border);
     border-radius: 8px;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
@@ -73,7 +73,7 @@
     padding: 6px !important;
     overflow: hidden auto !important;
     scrollbar-width: thin;
-    scrollbar-color: var(--lr-ext-lift-15) transparent;
+    scrollbar-color: var(--ln-ext-lift-15) transparent;
   }
 
   /* ---- Channel --- */
@@ -89,19 +89,19 @@
     padding: 6px !important;
     border-radius: 8px !important;
     background: transparent !important;
-    color: var(--lr-ext-text) !important;
+    color: var(--ln-ext-text) !important;
     transition: background-color 0.18s ease-out !important;
-    animation: lr-ext-tv-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+    animation: ln-ext-tv-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
     animation-delay: calc(min(sibling-index(), 16) * 25ms);
   }
 
   /* Only when TV opens, not on a channel change or the reload for the next game
    * (content/pages/tv.ts). */
-  html.lr-ext-tv-still main.round.tv-single .subnav .tv-channel {
+  html.ln-ext-tv-still main.round.tv-single .subnav .tv-channel {
     animation: none !important;
   }
 
-  @keyframes lr-ext-tv-in {
+  @keyframes ln-ext-tv-in {
     from {
       opacity: 0;
       transform: translateX(-10px);
@@ -109,12 +109,12 @@
   }
 
   main.round.tv-single .subnav .tv-channel:hover {
-    background: var(--lr-ext-lift-5) !important;
+    background: var(--ln-ext-lift-5) !important;
   }
 
   main.round.tv-single .subnav .tv-channel.active {
-    background: var(--lr-ext-lift-8) !important;
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lr-ext-tv) 30%, transparent);
+    background: var(--ln-ext-lift-8) !important;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-tv) 30%, transparent);
   }
 
   /* The tile, behind the icon (the span's ::before). */
@@ -127,11 +127,11 @@
     width: 38px;
     height: 38px;
     border-radius: 10px;
-    background: linear-gradient(145deg, var(--lr-ext-tv), var(--lr-ext-tv-2));
+    background: linear-gradient(145deg, var(--ln-ext-tv), var(--ln-ext-tv-2));
     box-shadow:
       inset 0 1px 0 #ffffff40,
       inset 0 -3px 0 #00000026,
-      0 3px 8px var(--lr-ext-shade-25);
+      0 3px 8px var(--ln-ext-shade-25);
     filter: saturate(0.75) brightness(0.85);
     transition:
       transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -151,20 +151,20 @@
     inset-inline-start: 37px;
     width: 10px;
     height: 10px;
-    border: 2px solid var(--lr-ext-bg-panel);
+    border: 2px solid var(--ln-ext-bg-panel);
     border-radius: 50%;
-    background: var(--lr-ext-red-dark);
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--lr-ext-red-dark) 70%, transparent);
-    animation: lr-ext-tv-live 1.6s ease-out infinite;
+    background: var(--ln-ext-red-dark);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-red-dark) 70%, transparent);
+    animation: ln-ext-tv-live 1.6s ease-out infinite;
   }
 
-  @keyframes lr-ext-tv-live {
+  @keyframes ln-ext-tv-live {
     70% {
-      box-shadow: 0 0 0 6px color-mix(in srgb, var(--lr-ext-red-dark) 0%, transparent);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--ln-ext-red-dark) 0%, transparent);
     }
 
     100% {
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--lr-ext-red-dark) 0%, transparent);
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-red-dark) 0%, transparent);
     }
   }
 
@@ -177,13 +177,13 @@
 
   /* Lichess's glyph, white on the tile. */
   main.round.tv-single .tv-channel > span::before {
-    --lr-ext-mode-color: var(--lr-ext-white);
+    --ln-ext-mode-color: var(--ln-ext-white);
     order: 0 !important;
     flex: none;
     width: 24px !important;
     height: 24px !important;
     margin: 0 7px !important;
-    color: var(--lr-ext-white) !important;
+    color: var(--ln-ext-white) !important;
     font-size: 22px !important;
     line-height: 24px !important;
     text-align: center;
@@ -205,7 +205,7 @@
 
   main.round.tv-single .tv-channel strong {
     overflow: hidden;
-    color: var(--lr-ext-text);
+    color: var(--ln-ext-text);
     font-size: 14px;
     font-weight: 800 !important;
     line-height: 18px;
@@ -216,13 +216,13 @@
   }
 
   main.round.tv-single .tv-channel:is(:hover, .active) strong {
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
   }
 
   main.round.tv-single .tv-channel .champion {
     overflow: hidden;
     padding-inline-end: 40px;
-    color: var(--lr-ext-text-dim);
+    color: var(--ln-ext-text-dim);
     font-size: 12px !important;
     font-weight: 600;
     line-height: 16px;
@@ -237,8 +237,8 @@
     height: 16px;
     padding: 0 6px;
     border-radius: 999px;
-    background: var(--lr-ext-lift-6);
-    color: var(--lr-ext-text);
+    background: var(--ln-ext-lift-6);
+    color: var(--ln-ext-text);
     font-size: 11px;
     font-weight: 800;
     line-height: 16px;
@@ -249,8 +249,8 @@
   }
 
   main.round.tv-single .tv-channel:is(:hover, .active) .champion rating {
-    background: color-mix(in srgb, var(--lr-ext-tv) 24%, transparent);
-    color: var(--lr-ext-text-strong);
+    background: color-mix(in srgb, var(--ln-ext-tv) 24%, transparent);
+    color: var(--ln-ext-text-strong);
   }
 
   body.no-rating main.round.tv-single .tv-channel .champion {
@@ -260,8 +260,8 @@
 
 /* Wide enough for the names: full rows. */
 @media (min-width: 1260px) {
-  html[data-lr-ext-has~='tv-channels'] main.round.tv-single {
-    --lr-ext-tv-w: clamp(200px, 14vw, 250px);
+  html[data-ln-ext-has~='tv-channels'] main.round.tv-single {
+    --ln-ext-tv-w: clamp(200px, 14vw, 250px);
   }
 }
 

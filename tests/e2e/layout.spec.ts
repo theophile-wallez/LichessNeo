@@ -78,11 +78,11 @@ test('a game’s analysis fits the window, its bars, clocks and eval bar in line
   await openLichess(page, FINISHED_GAME.path);
   await expect(page.locator(BOARD)).toBeVisible();
   await expectFitted(page, 'main.analyse');
-  const evalBar = page.locator('#lr-ext-evalbar');
+  const evalBar = page.locator('#ln-ext-evalbar');
   await expect(evalBar).toBeVisible();
   await expectLinedUp(page.locator(BOARD), [
     ...barsAndClocks(page, {
-      bar: side => `main.analyse > .lr-ext-player--${side}`,
+      bar: side => `main.analyse > .ln-ext-player--${side}`,
       clock: side => `main.analyse .analyse__clock.${side}`,
     }),
     { name: 'the eval bar', locator: evalBar, edges: ['top', 'bottom'], side: 'left' },
@@ -95,7 +95,7 @@ test.describe('on a phone', () => {
   // That it scrolls also shows the scroll probe can see a page that does.
   test('the home scrolls, and nothing overflows sideways', async ({ page }) => {
     await openLichess(page, '/');
-    await expect(page.locator('.lr-ext-speed')).toHaveCount(4);
+    await expect(page.locator('.ln-ext-speed')).toHaveCount(4);
     expect(await horizontalOverflow(page)).toBe(0);
     expect(await wheelScroll(page)).toBeGreaterThan(0);
   });

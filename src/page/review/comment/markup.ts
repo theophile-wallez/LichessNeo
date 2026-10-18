@@ -57,18 +57,18 @@ export function moveChip(token: string): SafeHtml {
       ? html`${san}`
       : html`${san.slice(0, promotion.index)}=${pieceGlyph(color + (promotion[1] ?? '').toLowerCase())}${san.slice(promotion.index + promotion[0].length)}`;
   const chip = html`${pieceGlyph(color + movedRole(value.slice(2)))}${text}`;
-  if (play === undefined) return html`<span class="lr-ext-mv">${chip}</span>`;
+  if (play === undefined) return html`<span class="ln-ext-mv">${chip}</span>`;
   const [base = '', ucis = ''] = play.split(':');
-  return html`<button class="lr-ext-mv lr-ext-mv--play" data-lr-ext="chip" data-lr-ext-base="${base}" data-lr-ext-ucis="${ucis}">${chip}</button>`;
+  return html`<button class="ln-ext-mv ln-ext-mv--play" data-ln-ext="chip" data-ln-ext-base="${base}" data-ln-ext-ucis="${ucis}">${chip}</button>`;
 }
 
 function tokenMarkup(kind: string, value: string): SafeHtml {
   if (kind === 'p') return pieceGlyph(value);
-  if (kind === 's') return html`<b class="lr-ext-sq">${value}</b>`;
+  if (kind === 's') return html`<b class="ln-ext-sq">${value}</b>`;
   if (kind === 'n') {
     // A line's numbered move: the number never ends a line without its move.
     const [number = '', move = ''] = value.split(/:(.*)/);
-    return html`<span class="lr-ext-num">${number} ${moveChip(move)}</span>`;
+    return html`<span class="ln-ext-num">${number} ${moveChip(move)}</span>`;
   }
   return moveChip(value);
 }
@@ -96,9 +96,9 @@ export function commentMarkup(parts: readonly CommentPart[], options: CommentOpt
       const words = language.typography(part.text).match(/\S+\s*/g) ?? [];
       const spans = words.map(word => {
         const hidden = index++ >= stream.shown;
-        return html`<span class="lr-ext-w${hidden ? ' lr-ext-w--off' : ''}">${wordMarkup(word)}</span>`;
+        return html`<span class="ln-ext-w${hidden ? ' ln-ext-w--off' : ''}">${wordMarkup(word)}</span>`;
       });
-      return html`<span class="lr-ext-say${part.droppable ? ' lr-ext-say--drop' : ''}">${spans} </span>`;
+      return html`<span class="ln-ext-say${part.droppable ? ' ln-ext-say--drop' : ''}">${spans} </span>`;
     });
   return html`${sentences}`;
 }

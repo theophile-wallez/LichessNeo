@@ -22,7 +22,7 @@
 
   /* From 800px Lichess's page column is only as wide as its content, between two free ones:
    * a short Swiss's stood in the middle. */
-  html:is([data-lr-ext-has~='tour'], [data-lr-ext-has~='swiss'], [data-lr-ext-has~='simul'])
+  html:is([data-ln-ext-has~='tour'], [data-ln-ext-has~='swiss'], [data-ln-ext-has~='simul'])
     #main-wrap {
     ---main-max-width: 100%;
   }
@@ -67,9 +67,9 @@
     ) {
     box-sizing: border-box;
     overflow: hidden;
-    border: 1px solid var(--lr-ext-card-border);
+    border: 1px solid var(--ln-ext-card-border);
     border-radius: 10px !important;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
@@ -82,9 +82,9 @@
     min-height: 0 !important;
     margin: 0 !important;
     overflow: hidden;
-    border: 1px solid var(--lr-ext-card-border);
+    border: 1px solid var(--ln-ext-card-border);
     border-radius: 10px !important;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 

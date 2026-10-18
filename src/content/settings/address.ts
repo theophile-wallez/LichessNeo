@@ -21,7 +21,7 @@ export const PAGE_NAMES: Readonly<Record<SettingsPage, string>> = {
   interface: 'settingsPageInterface',
 };
 
-const SETTINGS_HASH = '#lr-ext-extension';
+const SETTINGS_HASH = '#ln-ext-extension';
 
 /** The hash of `page`; the first page's is the section's own. */
 export const settingsHash = (page: SettingsPage = 'personalization'): string =>

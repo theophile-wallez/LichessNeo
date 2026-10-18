@@ -5,15 +5,15 @@
     grid-area: side !important;
     min-height: 0;
     overflow: hidden !important;
-    border: 1px solid var(--lr-ext-card-border) !important;
+    border: 1px solid var(--ln-ext-card-border) !important;
     border-radius: 12px !important;
-    background: var(--lr-ext-bg-panel) !important;
+    background: var(--ln-ext-bg-panel) !important;
     box-shadow: none !important;
   }
 
   .practice__side__chapters {
     /* Number the steps: Lichess's grey checkmark on every chapter reads as "done". */
-    counter-reset: lr-ext-step;
+    counter-reset: ln-ext-step;
     min-height: 0;
     padding: 8px !important;
     /* Snap to a step, not mid-title. */
@@ -22,14 +22,14 @@
   }
 
   .ps__chapter {
-    counter-increment: lr-ext-step;
+    counter-increment: ln-ext-step;
     scroll-snap-align: start;
     gap: 10px;
     align-items: center !important;
     padding: 6px 10px 6px 6px !important;
     border: none !important;
     border-radius: 9px;
-    color: var(--lr-ext-text) !important;
+    color: var(--ln-ext-text) !important;
     transition:
       background-color 0.15s,
       box-shadow 0.15s !important;
@@ -46,8 +46,8 @@
     flex: 0 0 26px !important;
     height: 26px;
     border-radius: 50%;
-    background: var(--lr-ext-lift-7);
-    color: var(--lr-ext-text-dim) !important;
+    background: var(--ln-ext-lift-7);
+    color: var(--ln-ext-text-dim) !important;
     font-size: 13px !important;
     font-weight: 800;
     transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
@@ -57,9 +57,9 @@
    * (theme/hugeicons): a step's number takes its place, unmasked, and the done step's check
    * gets a whole 1em box, which the narrower glyph's would crop. */
   .ps__chapter .status:not(.done)::before {
-    content: counter(lr-ext-step);
+    content: counter(ln-ext-step);
     background: none;
-    font-family: var(--lr-ext-font);
+    font-family: var(--ln-ext-font);
     mask: none;
     -webkit-text-fill-color: currentColor;
   }
@@ -71,11 +71,11 @@
   }
 
   .ps__chapter:hover {
-    background: var(--lr-ext-lift-6) !important;
+    background: var(--ln-ext-lift-6) !important;
   }
 
   .ps__chapter:hover h3 {
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
   }
 
   .ps__chapter:hover .status {
@@ -84,31 +84,31 @@
 
   /* The current step: a lighter row, its number on the accent badge. */
   .ps__chapter.active {
-    background: var(--lr-ext-lift-8) !important;
-    box-shadow: inset 0 0 0 1px var(--lr-ext-lift-10);
+    background: var(--ln-ext-lift-8) !important;
+    box-shadow: inset 0 0 0 1px var(--ln-ext-lift-10);
   }
 
   .ps__chapter.active h3 {
-    color: var(--lr-ext-text-strong);
+    color: var(--ln-ext-text-strong);
   }
 
   .ps__chapter.active .status {
-    background: var(--lr-ext-btn-primary) !important;
-    box-shadow: var(--lr-ext-btn-primary-shadow);
-    color: var(--lr-ext-white) !important;
+    background: var(--ln-ext-btn-primary) !important;
+    box-shadow: var(--ln-ext-btn-primary-shadow);
+    color: var(--ln-ext-white) !important;
   }
 
   .ps__chapter .status.done {
-    background: color-mix(in srgb, var(--lr-ext-good) 20%, transparent);
-    color: var(--lr-ext-good-hover) !important;
+    background: color-mix(in srgb, var(--ln-ext-good) 20%, transparent);
+    color: var(--ln-ext-good-hover) !important;
   }
 
   /* Footer: back to the practice list, and the lesson picker. */
   .practice__side .finally {
     gap: 8px;
     padding: 10px !important;
-    border-top: 1px solid var(--lr-ext-card-border);
-    background: var(--lr-ext-bg-panel-dark) !important;
+    border-top: 1px solid var(--ln-ext-card-border);
+    background: var(--ln-ext-bg-panel-dark) !important;
     font-size: 14px !important;
   }
 
@@ -120,15 +120,15 @@
     height: 34px;
     margin: 0 !important;
     border-radius: 8px;
-    background: var(--lr-ext-btn-grey);
-    box-shadow: var(--lr-ext-btn-grey-shadow);
-    color: var(--lr-ext-text) !important;
+    background: var(--ln-ext-btn-grey);
+    box-shadow: var(--ln-ext-btn-grey-shadow);
+    color: var(--ln-ext-text) !important;
     font-size: 15px !important;
   }
 
   .practice__side .finally .back:hover {
-    background: var(--lr-ext-btn-grey-hover);
-    color: var(--lr-ext-text-strong) !important;
+    background: var(--ln-ext-btn-grey-hover);
+    color: var(--ln-ext-text-strong) !important;
   }
 
   .practice__side .finally select {

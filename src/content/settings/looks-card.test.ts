@@ -34,8 +34,8 @@ async function card(
 }
 
 const ringed = (root: HTMLElement): (string | undefined)[] =>
-  queryAll(root, '.lr-ext-src-item.active', HTMLElement).map(
-    item => item.dataset.lrExtChoice ?? item.dataset.lrExtLichess,
+  queryAll(root, '.ln-ext-src-item.active', HTMLElement).map(
+    item => item.dataset.lnExtChoice ?? item.dataset.lnExtLichess,
   );
 
 function click(root: HTMLElement, selector: string): void {
@@ -64,34 +64,34 @@ describe('a Board & sounds card', () => {
   it('rings the part’s pick, and the new one once picked', async () => {
     const { library, looks } = await card('board');
     expect(ringed(looks.element)).toEqual(['accent']);
-    click(looks.element, "[data-lr-ext-choice='custom']");
+    click(looks.element, "[data-ln-ext-choice='custom']");
     expect(library.current('board')).toBe('custom');
-    expect(localStorage.getItem('lr-ext-board')).toBe('custom');
+    expect(localStorage.getItem('ln-ext-board')).toBe('custom');
     expect(ringed(looks.element)).toEqual(['custom']);
   });
 
   it('shows a family’s settings only while one of its boards is picked', async () => {
     const { looks } = await card('board');
     const family = (): HTMLElement['hidden'] | undefined =>
-      queryOne(looks.element, "[data-lr-ext-family='backlit']", HTMLElement)?.hidden;
+      queryOne(looks.element, "[data-ln-ext-family='backlit']", HTMLElement)?.hidden;
     expect(family()).toBe(true);
-    click(looks.element, "[data-lr-ext-choice='backlit-forest']");
+    click(looks.element, "[data-ln-ext-choice='backlit-forest']");
     expect(family()).toBe(false);
-    click(looks.element, "[data-lr-ext-choice='accent']");
+    click(looks.element, "[data-ln-ext-choice='accent']");
     expect(family()).toBe(true);
   });
 
   it('lists the packs that have the part, or leads to the packs’ page', async () => {
     const pieces = await card('piece', [WOOD, CLICKS]);
     expect(
-      queryAll(pieces.looks.element, 'img.lr-ext-src-thumb', HTMLImageElement).map(image =>
+      queryAll(pieces.looks.element, 'img.ln-ext-src-thumb', HTMLImageElement).map(image =>
         image.getAttribute('src'),
       ),
     ).toEqual([WOOD.pieces?.wN]);
     document.body.innerHTML = '';
     const none = await card('piece');
-    const empty = queryOne(none.looks.element, '.lr-ext-looks__empty a', HTMLElement);
-    expect(empty?.getAttribute('href')).toBe('#lr-ext-extension/packs');
+    const empty = queryOne(none.looks.element, '.ln-ext-looks__empty a', HTMLElement);
+    expect(empty?.getAttribute('href')).toBe('#ln-ext-extension/packs');
   });
 
   it('picks one of Lichess’s own, and tells the page world', async () => {
@@ -100,10 +100,10 @@ describe('a Board & sounds card', () => {
     looks.showLichess(LICHESS_BOARDS);
     // Not ringed while the extension shows its own board.
     expect(ringed(looks.element)).toEqual(['accent']);
-    click(looks.element, "[data-lr-ext-lichess='brown']");
+    click(looks.element, "[data-ln-ext-lichess='brown']");
     expect(library.current('board')).toBe(LICHESS);
     expect(window.postMessage).toHaveBeenLastCalledWith(
-      { type: 'lr-ext:lichess-look', part: 'board', id: 'brown' },
+      { type: 'ln-ext:lichess-look', part: 'board', id: 'brown' },
       location.origin,
     );
     expect(ringed(looks.element)).toEqual(['brown']);
@@ -126,11 +126,11 @@ describe('a Board & sounds card', () => {
   it('deletes a saved board, leaving the accent’s if it was shown', async () => {
     const id = saveBoard('Mine', { light: '#eeeeee', dark: '#333333' });
     const { library, looks } = await card('board');
-    click(looks.element, `[data-lr-ext-choice='${id}']`);
-    click(looks.element, `[data-lr-ext-delete='${id}']`);
+    click(looks.element, `[data-ln-ext-choice='${id}']`);
+    click(looks.element, `[data-ln-ext-delete='${id}']`);
     expect(savedBoards()).toEqual([]);
     expect(library.current('board')).toBe('accent');
-    expect(queryOne(looks.element, `[data-lr-ext-choice='${id}']`, HTMLElement)).toBeNull();
+    expect(queryOne(looks.element, `[data-ln-ext-choice='${id}']`, HTMLElement)).toBeNull();
   });
 
   it('falls back to a piece set’s WebP where it has no SVG', async () => {

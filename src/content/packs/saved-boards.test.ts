@@ -3,7 +3,7 @@ import type * as SavedBoards from './saved-boards.ts';
 
 // The list is cached in the module: each test imports a fresh copy.
 const load = (): Promise<typeof SavedBoards> => import('./saved-boards.ts');
-const KEY = 'lr-ext-saved-boards';
+const KEY = 'ln-ext-saved-boards';
 const COLORS = { light: '#f7f8f8', dark: '#123456' };
 
 beforeEach(() => {
@@ -76,7 +76,7 @@ describe('the saved boards', () => {
     expect(savedBoards()).toEqual([]);
     const boards = [{ id: 'saved-a', name: 'Sea', ...COLORS }];
     localStorage.setItem(KEY, JSON.stringify(boards));
-    window.dispatchEvent(new StorageEvent('storage', { key: 'lr-ext-board' }));
+    window.dispatchEvent(new StorageEvent('storage', { key: 'ln-ext-board' }));
     expect(savedBoards()).toEqual([]);
     window.dispatchEvent(new StorageEvent('storage', { key: KEY }));
     expect(changed).toHaveBeenCalledOnce();

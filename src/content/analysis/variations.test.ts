@@ -29,8 +29,8 @@ function tree(...lines: string[]): HTMLElement {
 }
 
 const moves = (): HTMLElement[] => queryAll(document, 'interrupt move', HTMLElement);
-const folds = (): string[] => moves().map(each => each.dataset.lrExtFold ?? '-');
-const numbers = (): string[] => moves().map(each => each.dataset.lrExtIndex ?? '-');
+const folds = (): string[] => moves().map(each => each.dataset.lnExtFold ?? '-');
+const numbers = (): string[] => moves().map(each => each.dataset.lnExtIndex ?? '-');
 
 beforeEach(() => {
   vi.stubGlobal('chrome', {
@@ -42,8 +42,8 @@ describe('the variations’ folds', () => {
   it('folds a long run behind a pill that counts its moves, keeping its ends', () => {
     markTree(tree(run(2, 9)));
     expect(folds()).toEqual(['-', '-', 'pill', ...Array<string>(5).fill('hidden'), '-']);
-    expect(moves()[2]?.dataset.lrExtFoldLabel).toBe('6 moves');
-    expect(moves()[8]?.dataset.lrExtIndex).toBe('5...');
+    expect(moves()[2]?.dataset.lnExtFoldLabel).toBe('6 moves');
+    expect(moves()[8]?.dataset.lnExtIndex).toBe('5...');
   });
 
   it('leaves a run alone that would hide fewer than four moves', () => {
@@ -76,11 +76,11 @@ describe('the variations’ numbers', () => {
 describe('the variations’ branches', () => {
   it('marks the branch the board is on, and the one holding a costly move', () => {
     const blunder = `<lines><line>${move('Nc3', '2.', 'blunder')}</line></lines>`;
-    const mistake = `<lines><line><move data-lr-ext-cls="mistake"><index>2.</index><san>d4</san></move></line></lines>`;
+    const mistake = `<lines><line><move data-ln-ext-cls="mistake"><index>2.</index><san>d4</san></move></line></lines>`;
     markTree(tree(`${run(2, 2, 1)}${blunder}`, `${run(2, 1)}${mistake}`));
     const lines = queryAll(document, 'interrupt line', HTMLElement);
-    expect(lines.map(line => line.dataset.lrExtOn ?? '-')).toEqual(['', '-', '-', '-']);
-    expect(lines.map(line => line.dataset.lrExtWorst ?? '-')).toEqual([
+    expect(lines.map(line => line.dataset.lnExtOn ?? '-')).toEqual(['', '-', '-', '-']);
+    expect(lines.map(line => line.dataset.lnExtWorst ?? '-')).toEqual([
       '-',
       'blunder',
       '-',

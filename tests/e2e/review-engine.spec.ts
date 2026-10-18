@@ -27,14 +27,14 @@ test(
     test.setTimeout(ANALYSIS_MS + 60_000);
     const { panel, start } = reviewParts(page);
     await openLichess(page, FINISHED_GAME.path);
-    const percent = panel.locator('.lr-ext-summary-graph .lr-ext-summary-pct');
+    const percent = panel.locator('.ln-ext-summary-graph .ln-ext-summary-pct');
     await expect(percent).toHaveText(/^\d+%$/);
     const started = await progress(percent);
     await expect.poll(() => progress(percent), { timeout: ANALYSIS_MS }).toBeGreaterThan(started);
     // The quick pass drafts the review within seconds: it can start before the end.
     await expect(start).toBeEnabled();
     await expect(percent).toHaveCount(0, { timeout: ANALYSIS_MS });
-    await expect(panel.locator('.lr-ext-review__top .lr-ext-acc--w')).toHaveText(/^\d{1,3}\.\d$/);
+    await expect(panel.locator('.ln-ext-review__top .ln-ext-acc--w')).toHaveText(/^\d{1,3}\.\d$/);
 
     await expect.poll(() => storedReview(page, FINISHED_GAME.id)).not.toBeNull();
     const stored = await storedReview(page, FINISHED_GAME.id);
@@ -44,7 +44,7 @@ test(
       return;
     }
     // A new key (the cache's version bumped) leaves the other tests without a cache.
-    expect(stored.storageKey, 'the key changed: record again with LR_EXT_RECORD_REVIEW=1').toBe(
+    expect(stored.storageKey, 'the key changed: record again with LN_EXT_RECORD_REVIEW=1').toBe(
       REVIEW_CACHE.storageKey,
     );
     expect(stored.records).toHaveLength(REVIEW_CACHE.records.length);

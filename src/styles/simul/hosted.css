@@ -6,9 +6,9 @@
 /* ---- Page --- */
 
 main.page-small.simul-list {
-  --lr-ext-simul-win: color-mix(in srgb, var(--lr-ext-green) 55%, var(--lr-ext-neutral-10));
-  --lr-ext-simul-draw: var(--lr-ext-neutral-10);
-  --lr-ext-simul-loss: color-mix(in srgb, var(--lr-ext-red) 60%, var(--lr-ext-neutral-10));
+  --ln-ext-simul-win: color-mix(in srgb, var(--ln-ext-green) 55%, var(--ln-ext-neutral-10));
+  --ln-ext-simul-draw: var(--ln-ext-neutral-10);
+  --ln-ext-simul-loss: color-mix(in srgb, var(--ln-ext-red) 60%, var(--ln-ext-neutral-10));
   max-width: 1180px;
   overflow: visible !important;
   padding: 0 0 40px !important;
@@ -62,7 +62,7 @@ main.page-small.simul-list .slist thead h1 {
   gap: 14px;
   margin: 0 !important;
   overflow: hidden;
-  color: var(--lr-ext-text-strong);
+  color: var(--ln-ext-text-strong);
   font-size: 28px !important;
   font-weight: 800;
   text-overflow: ellipsis;
@@ -85,7 +85,7 @@ main.page-small.simul-list .slist thead h1 .user-link {
   align-items: center;
   gap: 8px;
   margin-inline-end: -0.3em;
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.page-small.simul-list .slist thead h1 .user-link .line {
@@ -95,8 +95,8 @@ main.page-small.simul-list .slist thead h1 .user-link .line {
 main.page-small.simul-list .slist thead h1 .utitle {
   padding: 2px 7px;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--lr-ext-orange) 18%, transparent);
-  color: var(--lr-ext-orange) !important;
+  background: color-mix(in srgb, var(--ln-ext-orange) 18%, transparent);
+  color: var(--ln-ext-orange) !important;
   font-size: 15px;
   font-weight: 800;
 }
@@ -107,9 +107,9 @@ main.page-small.simul-list .slist thead th.count {
   gap: 7px;
   padding: 6px 12px 6px 10px !important;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--lr-ext-purple) 16%, transparent) !important;
-  color: var(--lr-ext-purple) !important;
-  font-family: var(--lr-ext-font) !important;
+  background: color-mix(in srgb, var(--ln-ext-purple) 16%, transparent) !important;
+  color: var(--ln-ext-purple) !important;
+  font-family: var(--ln-ext-font) !important;
   font-size: 14px !important;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums;
@@ -134,8 +134,8 @@ main.page-small.simul-list .slist thead th.count::before {
     position: sticky;
     z-index: 3;
     top: 0;
-    background: var(--lr-ext-bg-page) !important;
-    box-shadow: var(--lr-ext-pin-cover) !important;
+    background: var(--ln-ext-bg-page) !important;
+    box-shadow: var(--ln-ext-pin-cover) !important;
   }
 
   main.page-small.simul-list .slist thead::after {
@@ -144,7 +144,7 @@ main.page-small.simul-list .slist thead th.count::before {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--lr-ext-bg-page), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

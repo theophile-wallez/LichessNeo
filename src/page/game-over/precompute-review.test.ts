@@ -49,7 +49,7 @@ it('leaves the analysis page a whole review to show, with no search of its own',
   await done;
   expect(searches).toBeGreaterThan(0);
   // The key is the analysis page's: its mainline's length, the start's position counted.
-  const key = `lr-ext-review:${GAME.id}:${ctrl.mainline.length}:v1`;
+  const key = `ln-ext-review:${GAME.id}:${ctrl.mainline.length}:v1`;
   expect(finished.treeParts).toHaveLength(ctrl.mainline.length);
   expect(localStorage.getItem(key)).not.toBeNull();
 
@@ -57,9 +57,9 @@ it('leaves the analysis page a whole review to show, with no search of its own',
   review.start();
   await advance(1000);
   expect(searches).toBe(0);
-  const panel = document.querySelector('#lr-ext-review');
-  expect(panel?.querySelector('.lr-ext-summary-pct')).toBeNull();
-  expect(panel?.querySelector('.lr-ext-review__top .lr-ext-acc--w')?.textContent).toMatch(
+  const panel = document.querySelector('#ln-ext-review');
+  expect(panel?.querySelector('.ln-ext-summary-pct')).toBeNull();
+  expect(panel?.querySelector('.ln-ext-review__top .ln-ext-acc--w')?.textContent).toMatch(
     /^\d{1,3}\.\d$/,
   );
 });

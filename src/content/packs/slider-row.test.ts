@@ -4,7 +4,7 @@ import { KeyGapSchema } from '#shared/backlit.ts';
 import { sliderRow } from './slider-row.ts';
 import { storedNumber } from './stored-option.ts';
 
-const KEY = 'lr-ext-backlit-gap';
+const KEY = 'ln-ext-backlit-gap';
 
 function gapRow(): { slider: HTMLInputElement; value: HTMLElement; reset: HTMLButtonElement } {
   const row = sliderRow({
@@ -19,12 +19,12 @@ function gapRow(): { slider: HTMLInputElement; value: HTMLElement; reset: HTMLBu
   const value = queryOne(row, 'output', HTMLElement);
   const reset = queryOne(row, 'button', HTMLButtonElement);
   if (!slider || !value || !reset) throw new Error('no slider');
-  expect(queryOne(row, '.lr-ext-src-option-label', HTMLElement)?.textContent).toBe('Gap');
+  expect(queryOne(row, '.ln-ext-src-option-label', HTMLElement)?.textContent).toBe('Gap');
   return { slider, value, reset };
 }
 
 const fill = (slider: HTMLInputElement): string =>
-  slider.style.getPropertyValue('--lr-ext-slider-fill');
+  slider.style.getPropertyValue('--ln-ext-slider-fill');
 
 afterEach(() => {
   localStorage.clear();

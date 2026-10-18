@@ -25,15 +25,15 @@ main.opening .opening__search-form__input {
   width: 100%;
   height: 46px !important;
   padding: 0 16px 0 46px !important;
-  border: 1px solid var(--lr-ext-card-border) !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 14px !important;
-  background: var(--lr-ext-card-bg) !important;
-  color: var(--lr-ext-text-strong) !important;
+  background: var(--ln-ext-card-bg) !important;
+  color: var(--ln-ext-text-strong) !important;
   font-size: 15px !important;
 }
 
 main.opening .opening__search-form__input:focus {
-  border-color: var(--lr-ext-accent) !important;
+  border-color: var(--ln-ext-accent) !important;
 }
 
 /* The search button is the field's magnifier, on its left. */
@@ -47,7 +47,7 @@ main.opening .opening__search-form > button {
   border: 0 !important;
   background: none !important;
   box-shadow: none !important;
-  color: var(--lr-ext-text-dim) !important;
+  color: var(--ln-ext-text-dim) !important;
 }
 
 /* The filters: a pill that drops its form below. */
@@ -67,10 +67,10 @@ main.opening .opening__config__summary {
   box-sizing: border-box;
   height: 46px;
   padding: 0 16px !important;
-  border: 1px solid var(--lr-ext-card-border);
+  border: 1px solid var(--ln-ext-card-border);
   border-radius: 14px;
-  background: var(--lr-ext-card-bg);
-  color: var(--lr-ext-text-dim) !important;
+  background: var(--ln-ext-card-bg);
+  color: var(--ln-ext-text-dim) !important;
   font-size: 13.5px;
   font-weight: 700;
   list-style: none;
@@ -83,7 +83,7 @@ main.opening .opening__config__summary::-webkit-details-marker {
 
 main.opening .opening__config__summary:hover,
 main.opening .opening__config[open] > .opening__config__summary {
-  border-color: var(--lr-ext-card-border-hover);
+  border-color: var(--ln-ext-card-border-hover);
 }
 
 main.opening .opening__config__summary::before {
@@ -112,13 +112,13 @@ main.opening .opening__config__summary__large {
 }
 
 main.opening .opening__config__summary__large span {
-  color: var(--lr-ext-text-strong) !important;
+  color: var(--ln-ext-text-strong) !important;
 }
 
 main.opening .opening__config__summary__speed::after {
   content: '·';
   margin: 0 8px;
-  color: var(--lr-ext-text-dim);
+  color: var(--ln-ext-text-dim);
 }
 
 main.opening .opening__config__form {
@@ -133,10 +133,10 @@ main.opening .opening__config__form {
   width: max-content;
   max-width: min(560px, calc(100vw - 32px));
   padding: 16px !important;
-  border: 1px solid var(--lr-ext-menu-border);
+  border: 1px solid var(--ln-ext-menu-border);
   border-radius: 16px;
-  background: var(--lr-ext-menu-bg);
-  box-shadow: var(--lr-ext-menu-shadow);
+  background: var(--ln-ext-menu-bg);
+  box-shadow: var(--ln-ext-menu-shadow);
 }
 
 /* The speeds and the ratings are ranges, several picked at once: chips, each lit when in. */
@@ -158,25 +158,25 @@ main.opening .opening__config__form group.radio label {
   display: block;
   padding: 7px 12px !important;
   border-radius: 999px !important;
-  background: var(--lr-ext-lift-6) !important;
-  color: var(--lr-ext-text) !important;
+  background: var(--ln-ext-lift-6) !important;
+  color: var(--ln-ext-text) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   cursor: pointer;
 }
 
 main.opening .opening__config__form group.radio label:hover {
-  background: var(--lr-ext-lift-12) !important;
+  background: var(--ln-ext-lift-12) !important;
 }
 
 main.opening .opening__config__form group.radio input:checked + label {
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow);
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white) !important;
 }
 
 main.opening .opening__config__form group.radio input:checked + label:hover {
-  background: var(--lr-ext-btn-primary-hover) !important;
+  background: var(--ln-ext-btn-primary-hover) !important;
 }
 
 main.opening .opening__config__form__submit .button {
@@ -185,9 +185,9 @@ main.opening .opening__config__form__submit .button {
   margin: 0 !important;
   border: 0 !important;
   border-radius: 10px !important;
-  background: var(--lr-ext-btn-primary) !important;
-  box-shadow: var(--lr-ext-btn-primary-shadow) !important;
-  color: var(--lr-ext-white) !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
+  color: var(--ln-ext-white) !important;
 }
 
 @media (max-width: 599.98px) {
