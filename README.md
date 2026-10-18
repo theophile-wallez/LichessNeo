@@ -1,42 +1,61 @@
 # Lichess Reimagined
 
 Lichess is free, open source and has no ads. This Chrome extension gives it
-a modern look and feel: a dark, roomy layout, playful pages, the board, pieces
-and sounds of your choice, and a Debrief after every game.
+a modern look and feel: a roomy layout, playful pages, a coach by your side,
+the colors, board, pieces and sounds of your choice, and a Debrief after every
+game.
 
 Your Lichess account, your games and your friends don't change. Only the look
 and the sounds do.
+
+![A game on lichess.org with the extension, on a computer and on a phone](store/en/1-game.png)
 
 ## What you get
 
 ### A roomy layout
 
-A sidebar on the left, player bars with the clocks above and below the board,
-and one panel on the right for the moves and the chat. A game fits on your
-screen, so there's nothing to scroll.
+A sidebar on the left, player bars with avatars and clocks above and below
+the board, and one panel on the right for the moves and the chat. It's laid
+out for tablets and phones too.
 
 ### A Debrief after every game
 
-Open any finished game and you get a full debrief: each player's accuracy, a
-rating for how well they played, and every move marked brilliant, great, best,
-mistake, blunder… A coach then takes you through the game move by move.
+Open any finished game and you get a full debrief: a graph of the advantage
+with its turning points marked, each player's accuracy, a rating for how well
+they played, and every move marked brilliant, great, best, mistake, blunder…
+A coach then takes you through the game move by move, in plain words.
 
-The engine runs on your own computer, so it's free and there's no daily limit.
+![The Debrief: the advantage graph, the accuracy and the coach on a brilliant move](store/en/2-debrief.png)
 
-### Your board, your pieces, your sounds
+### A coach by your side
 
-The extension's blue board, the board, pieces and sounds of Lichess's
-settings, or your own: put them in a folder on GitHub with a `pack.json`,
-paste its link in the extension's settings (**Packs**), pick them in the user
-menu (Board, Piece set or Sound, under **Extension**), and they're yours on
-every page. Private repositories work too, with a token. How to make
-one: [docs/packs.md](docs/packs.md), and a pack to start from:
-[packs/example](packs/example).
+Pick one of 26 coaches in 3D, from a fennec to a dragon. Yours reviews your
+games, cheers you on in puzzles and reads you the lessons' goals, and it can
+be your avatar too.
+
+![The coaches, in puzzles and on the puzzle dashboard](store/en/3-coach.png)
+
+### Your colors, your board, your sounds
+
+16 color themes, for Lichess's light and dark modes, or one you make in the
+settings' theme editor. Boards: 22 of the extension's, all of Lichess's, or
+one you draw. Pieces and sounds: Lichess's sets or the extension's Foley
+sounds.
+
+Or bring your own: put them in a folder on GitHub with a `pack.json`, paste
+its link in the extension's settings (**Packs**), pick them in **Board &
+sounds**, and they're yours on every page. Private repositories work too,
+with a token. How to make one: [docs/packs.md](docs/packs.md), and a pack to
+start from: [packs/example](packs/example).
+
+![Color themes, boards, pieces and sounds](store/en/4-looks.png)
 
 ### The rest of the site too
 
 Home, puzzles, lessons, profiles, tournaments, the forum: every page gets the
-same treatment.
+same treatment, on any screen.
+
+![The home page, the puzzle dashboard and tournaments, on a computer, a tablet and a phone](store/en/5-pages.png)
 
 ## Install it
 
@@ -78,8 +97,7 @@ Lichess tab.
 
 ## Good to know
 
-- It's made for computers. In a narrow window or on a tablet you get Lichess's
-  usual mobile layout, with the new colors, board and pieces.
+- It fits every screen: a computer's, a tablet's or a phone's.
 - Its images come with it: it loads nothing from other sites, except the
   packs you import, once, from GitHub.
 - Nothing is tracked or collected.
