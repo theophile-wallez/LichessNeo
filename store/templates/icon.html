@@ -14,45 +14,76 @@
 
   /* Chrome's guidelines: 96px of art in the 128px icon, the rest clear.
      The small ones have no room to spare, so they fill theirs. */
-  svg {
-    display: block;
+  .icon {
+    position: relative;
     width: 96px;
     height: 96px;
     margin: 16px;
+    overflow: hidden;
+    border-radius: 22%;
+  }
+
+  .icon > * {
+    position: absolute;
+  }
+
+  svg {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* The Pion, the first coach, as the playground draws it: its bust, cut by
+     the tile's bottom edge. */
+  .bust {
+    left: 7%;
+    bottom: 0;
+    width: 86%;
+    filter: drop-shadow(0 2px 3px #1c145080);
+  }
+
+  /* At 16px a face is a smudge: the whole Pion reads as a pawn. Its size and
+     place put its eyes on whole pixels, both alike. */
+  .full {
+    display: none;
+    left: 22%;
+    bottom: 8%;
+    width: 56%;
   }
 
   @media (resolution < 0.5dppx) {
-    svg {
+    .icon {
       width: 128px;
       height: 128px;
       margin: 0;
     }
   }
+
+  @media (resolution < 0.2dppx) {
+    .bust {
+      display: none;
+    }
+
+    .full {
+      display: block;
+    }
+  }
 </style>
 
-<svg viewBox="0 0 100 100">
-  <defs>
-    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7b6cff"/>
-      <stop offset="0.55" stop-color="#5a4ce0"/>
-      <stop offset="1" stop-color="#3f33b8"/>
-    </linearGradient>
-    <clipPath id="clip"><rect width="100" height="100" rx="22"/></clipPath>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
-      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#1c1450" flood-opacity="0.5"/>
-    </filter>
-  </defs>
-
-  <g clip-path="url(#clip)">
+<div class="icon">
+  <svg viewBox="0 0 100 100">
+    <defs>
+      <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#7b6cff"/>
+        <stop offset="0.55" stop-color="#5a4ce0"/>
+        <stop offset="1" stop-color="#3f33b8"/>
+      </linearGradient>
+    </defs>
     <rect width="100" height="100" fill="url(#tile)"/>
     <!-- the tile's lit top edge and dark bottom one -->
-    <rect x="0" y="0" width="100" height="100" rx="22" fill="none" stroke="#b3a9ff" stroke-opacity="0.55" stroke-width="3" transform="translate(0 1.5)" clip-path="url(#clip)"/>
+    <rect x="0" y="1.5" width="100" height="100" rx="22" fill="none" stroke="#b3a9ff" stroke-opacity="0.55" stroke-width="3"/>
     <rect x="0" y="-3" width="100" height="100" rx="22" fill="none" stroke="#2a2080" stroke-opacity="0.5" stroke-width="3"/>
-  </g>
-
-  <!-- a corner of a board, three squares a side, tilted -->
-  <g filter="url(#shadow)" transform="rotate(-10 50 50)">
-    <rect x="20" y="20" width="60" height="60" rx="9" fill="#fff" fill-opacity="0.32"/>
-    <path fill="#fff" d="M20 29a9 9 0 0 1 9-9h11v20H20zM60 20h11a9 9 0 0 1 9 9v11H60zM40 40h20v20H40zM20 60h20v20H29a9 9 0 0 1-9-9zM60 60h20v11a9 9 0 0 1-9 9H60z"/>
-  </g>
-</svg>
+  </svg>
+  <img class="bust" src="coaches/icon-pion-bust.webp">
+  <img class="full" src="coaches/icon-pion-full.webp">
+</div>
