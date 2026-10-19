@@ -33,9 +33,11 @@ const PAGES: readonly PublicPage[] = [
   { name: 'the forum', path: '/forum', ours: 'main.forum .categs tr[data-ln-ext-href]' },
 ];
 
-// Lichess's panels and page, recolored by styles/theme.
-const PANEL_COLOR = '#262522';
-const PAGE_BACKGROUND = 'rgb(48, 46, 43)';
+// Lichess's panels and page, recolored by styles/theme in the default color
+// theme: neutral steps 3 and 4 of each scheme's palette.
+const PANEL_COLOR = 'oklch(17.3% 0.004 286)';
+const LIGHT_PANEL_COLOR = 'oklch(98.5% 0.006 286)';
+const LIGHT_PAGE_BACKGROUND = 'oklch(0.968 0.006 286)';
 
 for (const { name, path, ours } of PAGES) {
   test(`${name} gets the extension`, async ({ page, extensionErrors }) => {
@@ -54,15 +56,15 @@ for (const { name, path, ours } of PAGES) {
 }
 
 // A visitor on a light OS gets Lichess's light theme, whose own rules still
-// apply here and there: our colors must hold over it.
+// apply here and there: our light palette must hold over it.
 test.describe('in Lichess’s light theme', () => {
   test.use({ colorScheme: 'light' });
 
-  test('the home keeps our colors', async ({ page }) => {
+  test('the home gets our light colors', async ({ page }) => {
     await openLichess(page, '/');
     await expect(page.locator('html')).toHaveClass(/\blight\b/);
-    await expect(page.locator('html')).toHaveCSS('background-color', PAGE_BACKGROUND);
-    expect(await rootVariable(page, '--ln-ext-bg-panel')).toBe(PANEL_COLOR);
+    await expect(page.locator('html')).toHaveCSS('background-color', LIGHT_PAGE_BACKGROUND);
+    expect(await rootVariable(page, '--ln-ext-bg-panel')).toBe(LIGHT_PANEL_COLOR);
     await expectSidebar(page);
   });
 });

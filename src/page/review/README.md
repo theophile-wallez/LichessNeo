@@ -133,5 +133,6 @@ Besides each folder's unit tests, `golden/` drives the review through
 scripts of steps on a fake analysis page (`fixtures/review-script.ts`,
 `fixtures/review-scenarios.ts`: a fake controller, move list and Stockfish,
 fake timers) and checks that after each step it shows exactly what the
-original script showed (`golden/fixtures/legacy-*.json`). One scenario per
+original script showed (`golden/fixtures/legacy-*.json`), but for the
+deliberate changes since, written into the recordings. One scenario per
 test file: a started review can't be stopped, so each needs its own window.

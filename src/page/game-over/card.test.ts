@@ -30,13 +30,13 @@ describe('cardMarkup', () => {
     expect(root.querySelectorAll('.ln-ext-end__counts > .ln-ext-end__count')).toHaveLength(
       CHIP_COUNT,
     );
-    expect(root.querySelector('.ln-ext-end__reason')?.textContent).toBe('by checkmate');
+    expect(root.querySelector('.ln-ext-end__reason')?.textContent).toBe('Victory · by checkmate');
     const avatar = queryOne(root, '.ln-ext-coach__avatar', HTMLElement);
     expect(avatar?.dataset.lnExtCoachId).toBe('3');
     expect(avatar?.querySelector('.ln-ext-coach__face')).not.toBeNull();
   });
 
-  it('leaves the reason out when the status doesn’t say', () => {
+  it('names the result alone when the status doesn’t say how it came', () => {
     const root = render(
       cardMarkup(
         endCardInput({
@@ -48,7 +48,7 @@ describe('cardMarkup', () => {
       ),
     );
     expect(root.querySelector('.ln-ext-end__title')?.textContent).toBe('Draw');
-    expect(root.querySelector('.ln-ext-end__reason')).toBeNull();
+    expect(root.querySelector('.ln-ext-end__reason')?.textContent).toBe('Draw');
   });
 
   // The stylesheet draws a blank in its place while it's empty (game-end-stats.css).

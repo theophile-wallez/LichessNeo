@@ -22,7 +22,8 @@ const EXTENSION_DIR = path.resolve(
 );
 const CACHE_DIR = path.join(homedir(), '.cache', 'puppeteer');
 const TIMEOUT_MS = 30_000;
-const PANEL_COLOR = '#262522';
+// The default color theme's panels, in each scheme: headless Firefox may answer either.
+const PANEL_COLORS = { dark: 'oklch(17.3% 0.004 286)', light: 'oklch(98.5% 0.006 286)' };
 // From GitHub itself: Firefox runs the download in the background script,
 // whose requests a page's interception never sees.
 const EXAMPLE_LINK = 'https://github.com/theophile-wallez/LichessNeo/tree/main/packs/example';
@@ -42,12 +43,26 @@ async function openLichess(browser: Browser, pathname: string): Promise<Page> {
   return page;
 }
 
+interface ContentScriptMarks {
+  readonly panel: string;
+  readonly expectedPanel: string;
+  readonly assets: string;
+}
+
 /** What the content script sets on <html>: the theme's colors, the extension's base URL. */
-function contentScriptMarks(page: Page): Promise<{ panel: string; assets: string }> {
-  return page.evaluate(() => ({
-    panel: getComputedStyle(document.documentElement).getPropertyValue('--ln-ext-bg-panel').trim(),
-    assets: document.documentElement.dataset.lnExtAssets ?? '',
-  }));
+function contentScriptMarks(page: Page): Promise<ContentScriptMarks> {
+  return page.evaluate(
+    colors => ({
+      panel: getComputedStyle(document.documentElement)
+        .getPropertyValue('--ln-ext-bg-panel')
+        .trim(),
+      expectedPanel: document.documentElement.classList.contains('light')
+        ? colors.light
+        : colors.dark,
+      assets: document.documentElement.dataset.lnExtAssets ?? '',
+    }),
+    PANEL_COLORS,
+  );
 }
 
 /**
@@ -112,7 +127,7 @@ await test('the Firefox build', async suite => {
   await suite.test('the home page gets the theme, the hero and the page script', async () => {
     const page = await openLichess(browser, '/');
     const marks = await contentScriptMarks(page);
-    assert.equal(marks.panel, PANEL_COLOR);
+    assert.equal(marks.panel, marks.expectedPanel);
     assert.match(marks.assets, /^moz-extension:\/\//);
     await page.waitForSelector('main.lobby > .ln-ext-hero', { timeout: TIMEOUT_MS });
     assert.equal(await pageScriptIsIn(page), true);
@@ -134,7 +149,8 @@ await test('the Firefox build', async suite => {
 
   await suite.test('the free analysis board gets the coach, and its face', async () => {
     const page = await openLichess(browser, '/analysis');
-    assert.equal((await contentScriptMarks(page)).panel, PANEL_COLOR);
+    const marks = await contentScriptMarks(page);
+    assert.equal(marks.panel, marks.expectedPanel);
     // The page script adds the coach's panel, the content script its face over the portrait.
     await page.waitForSelector('#ln-ext-review .ln-ext-coach .ln-ext-coach__rig svg', {
       timeout: TIMEOUT_MS,

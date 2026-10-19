@@ -1,8 +1,12 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { flush } from '#shared/testing/timers.ts';
 import { heroText } from './hero-texts.ts';
 import { addHero, homeHero } from './home-hero.ts';
 // The hero as the original drew it, per language and player.
 import legacy from './fixtures/legacy-home-hero.json' with { type: 'json' };
+
+// The extension's APIs aren't here, nor WebGL: the mascots' bundle won't load.
+vi.mock('#content/coach/load.ts', () => ({ loadMascots: () => Promise.resolve(null) }));
 
 afterEach(() => {
   document.body.innerHTML = '';
@@ -28,5 +32,12 @@ describe('home hero', () => {
     expect(document.querySelector('.ln-ext-hero__title')?.textContent).toBe(
       'Schach online spielen',
     );
+  });
+
+  it('shows the coach’s still when the mascots won’t load', async () => {
+    document.body.innerHTML = '<main class="lobby"></main>';
+    addHero(heroText('en'));
+    await flush();
+    expect(document.querySelector('.ln-ext-hero__coach--still')).not.toBeNull();
   });
 });

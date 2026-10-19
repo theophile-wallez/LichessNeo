@@ -67,7 +67,9 @@ function play(
   return played;
 }
 
-describe('every coach', () => {
+// Each case builds a whole mascot twice, its skin and face shaped and sampled
+// as on the page, and plays 1,080 frames: up to 3.5 s alone, far more on CI.
+describe('every coach', { timeout: 30_000 }, () => {
   it.each(
     [...CAST, robotFor(ROBOT_COACH_LEVEL)].map(character => [character.name, character] as const),
   )('%s takes every mood, every point of it where it should be', (_, character) => {

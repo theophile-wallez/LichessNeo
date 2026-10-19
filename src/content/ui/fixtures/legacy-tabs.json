@@ -2,7 +2,7 @@
   "steps": [
     {
       "step": "first placement",
-      "tabs": "line",
+      "tabs": "pill",
       "still": "",
       "x": "89.5px",
       "y": "4px",
@@ -11,7 +11,7 @@
     },
     {
       "step": "another tab picked",
-      "tabs": "line",
+      "tabs": "pill",
       "still": null,
       "x": "4px",
       "y": "4px",
@@ -20,7 +20,7 @@
     },
     {
       "step": "the same tab resized",
-      "tabs": "line",
+      "tabs": "pill",
       "still": "",
       "x": "4px",
       "y": "4px",
@@ -29,7 +29,7 @@
     },
     {
       "step": "the bar scrolled",
-      "tabs": "line",
+      "tabs": "pill",
       "still": "",
       "x": "43px",
       "y": "8px",
@@ -38,7 +38,7 @@
     },
     {
       "step": "nothing moved",
-      "tabs": "line",
+      "tabs": "pill",
       "still": "",
       "x": "43px",
       "y": "8px",
@@ -47,7 +47,7 @@
     },
     {
       "step": "the picked tab is hidden",
-      "tabs": "line",
+      "tabs": "pill",
       "still": "",
       "x": "43px",
       "y": "8px",

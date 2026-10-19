@@ -37,7 +37,8 @@ it('gives the review’s figures when the quick look’s engine never answers', 
     url === `/${GAME.id}` ? new Response(finishedPage()) : network(url),
   );
   const warned = vi.spyOn(console, 'warn').mockImplementation(() => {});
-  document.body.innerHTML = '<main class="round"><div class="result-wrap"></div></main>';
+  document.body.innerHTML =
+    '<main class="round"><div class="result-wrap"></div><div class="rcontrols"><div class="follow-up"></div></div></main>';
   const main = queryOne(document, 'main.round', HTMLElement);
   if (!main) throw new Error('no game page');
   const ended = onGameEnd({ gameId: GAME.id, color: 'white', live: true }, main);

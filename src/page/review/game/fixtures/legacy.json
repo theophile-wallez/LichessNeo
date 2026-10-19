@@ -1104,7 +1104,7 @@
         },
         {
           "ply": 46,
-          "cls": "blunder",
+          "cls": "miss",
           "loss": 21.73433015075466,
           "accuracy": 36.879322965876156,
           "best": null,
@@ -1116,7 +1116,7 @@
           "loss": 0,
           "accuracy": 99.9999,
           "best": null,
-          "previous": [46, "blunder"]
+          "previous": [46, "miss"]
         }
       ],
       "total": 48,
@@ -1183,7 +1183,15 @@
           "good": 3,
           "blunder": 2
         },
-        "b": { "book": 1, "great": 3, "best": 10, "inaccuracy": 3, "mistake": 4, "blunder": 2 }
+        "b": {
+          "book": 1,
+          "great": 3,
+          "best": 10,
+          "inaccuracy": 3,
+          "mistake": 4,
+          "blunder": 1,
+          "miss": 1
+        }
       },
       "rating": null,
       "progress": 0.4375,
@@ -1299,7 +1307,7 @@
         },
         {
           "ply": 14,
-          "cls": "blunder",
+          "cls": "miss",
           "loss": 43.68235823566406,
           "accuracy": 12.233865535508018,
           "best": null,
@@ -1311,7 +1319,7 @@
           "loss": 32.17438484799918,
           "accuracy": 22.2515269019718,
           "best": "d3h7",
-          "previous": [14, "blunder"]
+          "previous": [14, "miss"]
         },
         {
           "ply": 16,
@@ -1418,7 +1426,7 @@
       "accuracy": { "w": 66.38753374270136, "b": 58.30274707511694 },
       "counts": {
         "w": { "inaccuracy": 1, "best": 7, "blunder": 2, "great": 1, "mistake": 1 },
-        "b": { "mistake": 2, "inaccuracy": 2, "best": 5, "blunder": 2, "miss": 1 }
+        "b": { "mistake": 2, "inaccuracy": 2, "best": 5, "blunder": 1, "miss": 2 }
       },
       "rating": null,
       "progress": 0.52,
@@ -1806,7 +1814,7 @@
         },
         {
           "ply": 49,
-          "cls": "blunder",
+          "cls": "miss",
           "loss": 30.39691009303752,
           "accuracy": 24.29681366887504,
           "best": "c2f5",
@@ -1818,7 +1826,7 @@
           "loss": 0,
           "accuracy": 99.9999,
           "best": null,
-          "previous": [49, "blunder"]
+          "previous": [49, "miss"]
         },
         {
           "ply": 51,
@@ -2281,7 +2289,7 @@
         },
         {
           "ply": 49,
-          "cls": "blunder",
+          "cls": "miss",
           "loss": 30.39691009303752,
           "accuracy": 24.29681366887504,
           "best": "c2f5",
@@ -2293,7 +2301,7 @@
           "loss": 0,
           "accuracy": 99.9999,
           "best": null,
-          "previous": [49, "blunder"]
+          "previous": [49, "miss"]
         },
         {
           "ply": 51,
@@ -2451,7 +2459,7 @@
           "excellent": 6,
           "inaccuracy": 1,
           "brilliant": 1,
-          "blunder": 1
+          "miss": 1
         },
         "b": {
           "book": 4,

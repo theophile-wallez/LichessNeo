@@ -155,20 +155,23 @@ describe('the game over', () => {
     expect(document.querySelector('.ln-ext-end__bubble')?.textContent).toBe(gameOverTexts().failed);
   });
 
-  it('leads to the review and presses Lichess’s buttons', () => {
+  it('heads Lichess’s follow-up buttons, which stay its foot', () => {
     mount(WIN);
-    const review = document.querySelector('.ln-ext-end__review');
-    expect(review?.getAttribute('href')).toBe('/abcd1234/white#9');
-    const rematch = vi.fn<() => void>();
-    document.querySelector('.follow-up .rematch')?.addEventListener('click', rematch);
-    queryOne(document, '.ln-ext-end__btn[data-ln-ext-end="rematch"]', HTMLElement)?.click();
-    expect(rematch).toHaveBeenCalledOnce();
+    const followUp = queryOne(document, '.follow-up', HTMLElement);
+    expect(followUp?.dataset.lnExtEndCard).toBe('');
+    expect(Array.from(followUp?.children ?? [], child => child.className)).toEqual([
+      'ln-ext-end__card ln-ext-end__card--win',
+      'fbt rematch white',
+      'fbt',
+    ]);
   });
 
-  it('closes the card and keeps the badges', () => {
+  it('puts the card back when Lichess draws its buttons again', () => {
     mount(WIN);
-    queryOne(document, '.ln-ext-end__close', HTMLElement)?.click();
-    expect(document.querySelector('.ln-ext-end__card')).toBeNull();
-    expect(document.querySelectorAll('.ln-ext-end__king')).toHaveLength(2);
+    const rcontrols = queryOne(document, '.rcontrols', HTMLElement);
+    if (rcontrols)
+      rcontrols.innerHTML = '<div class="follow-up"><button class="fbt">Rematch</button></div>';
+    vi.advanceTimersByTime(250);
+    expect(document.querySelector('.follow-up > .ln-ext-end__card:first-child')).not.toBeNull();
   });
 });

@@ -182,7 +182,7 @@
       {
         "remark": "This is winning. Stay focused.",
         "parts": [
-          ["It wins a [[p:br]]rook for a [[p:wb]]bishop."],
+          ["A fork: it attacks the [[p:bk]]king and the [[p:bq]]queen at once."],
           ["White still has a winning position.", true]
         ]
       },
@@ -397,7 +397,7 @@
       {
         "remark": "C’est gagnant. Reste concentré.",
         "parts": [
-          ["Il gagne une [[p:br]]tour contre un [[p:wb]]fou."],
+          ["Une fourchette : il attaque à la fois le [[p:bk]]roi et la [[p:bq]]dame."],
           ["Les Blancs ont toujours une position gagnante.", true]
         ]
       },
@@ -504,7 +504,10 @@
       },
       {
         "remark": "That’s the most accurate move.",
-        "parts": [["That’s the most accurate move."], ["White keeps a clear advantage.", true]]
+        "parts": [
+          ["A fork: it attacks the [[p:wb]]bishop and the [[p:wn]]knight at once."],
+          ["White keeps a clear advantage.", true]
+        ]
       },
       {
         "remark": "Just right. Keep it up!",
@@ -776,7 +779,10 @@
       },
       {
         "remark": "C’est le coup le plus précis.",
-        "parts": [["C’est le coup le plus précis."], ["Les Blancs gardent un net avantage.", true]]
+        "parts": [
+          ["Une fourchette : il attaque à la fois le [[p:wb]]fou et le [[p:wn]]cavalier."],
+          ["Les Blancs gardent un net avantage.", true]
+        ]
       },
       {
         "remark": "Parfait. Continue comme ça !",
@@ -1265,10 +1271,12 @@
         ]
       },
       {
-        "remark": "Check the opponent’s replies first.",
+        "remark": "That lets the opponent off the hook.",
         "parts": [
           ["Black had a clear advantage; now it’s only a slight edge.", true],
-          ["White answers [[m:w:fxe7]] and wins the [[p:bn]]knight on [[s:e7]]."]
+          [
+            "White’s earlier mistake was still there to punish: [[m:b:Kd8]] would have finished the job."
+          ]
         ]
       },
       {
@@ -1587,10 +1595,10 @@
         ]
       },
       {
-        "remark": "Vérifie d’abord les réponses de l’adversaire.",
+        "remark": "L’adversaire s’en tire à bon compte.",
         "parts": [
           ["Les Noirs avaient un net avantage, il ne leur reste qu’un léger avantage.", true],
-          ["Les Blancs répondent [[m:w:fxe7]] et gagnent le [[p:bn]]cavalier en [[s:e7]]."]
+          ["L’erreur précédente des Blancs restait à punir : [[m:b:Kd8]] aurait conclu."]
         ]
       },
       {
@@ -1630,10 +1638,12 @@
         ]
       },
       {
-        "remark": "Check for threats before moving.",
+        "remark": "So close! The chance was right there.",
         "parts": [
           ["White had a clear advantage; now it’s only a slight edge.", true],
-          ["[[m:w:Bd3]] was the better move."]
+          [
+            "Black’s earlier mistake was still there to punish: [[m:w:Bd3]] would have finished the job."
+          ]
         ]
       },
       {
@@ -1791,10 +1801,10 @@
         ]
       },
       {
-        "remark": "Cherche les menaces avant de jouer.",
+        "remark": "Si près ! L’occasion était sous tes yeux.",
         "parts": [
           ["Les Blancs avaient un net avantage, il ne leur reste qu’un léger avantage.", true],
-          ["Il fallait jouer [[m:w:Bd3]]."]
+          ["L’erreur précédente des Noirs restait à punir : [[m:w:Bd3]] aurait conclu."]
         ]
       },
       {
@@ -1996,7 +2006,9 @@
         "remark": "Grabbing material here is risky.",
         "parts": [
           ["White had a clear advantage, but now Black has a clear advantage.", true],
-          ["[[m:w:Bxa7]] was the better move."]
+          [
+            "Black’s earlier mistake was still there to punish: [[m:w:Bxa7]] would have finished the job."
+          ]
         ]
       },
       {
@@ -2052,7 +2064,7 @@
       {
         "remark": "Couldn’t have done better.",
         "parts": [
-          ["It wins a [[p:wp]]pawn for free."],
+          ["A fork: it attacks the [[p:wq]]queen and the [[p:wr]]rook at once."],
           ["White had a slight edge, but the game is now balanced.", true]
         ]
       },
@@ -2382,7 +2394,7 @@
             "Les Blancs avaient un net avantage, mais maintenant les Noirs ont un net avantage.",
             true
           ],
-          ["Il fallait jouer [[m:w:Bxa7]]."]
+          ["L’erreur précédente des Noirs restait à punir : [[m:w:Bxa7]] aurait conclu."]
         ]
       },
       {
@@ -2444,7 +2456,7 @@
       {
         "remark": "Impossible de faire mieux.",
         "parts": [
-          ["Il gagne un [[p:wp]]pion sans contrepartie."],
+          ["Une fourchette : il attaque à la fois la [[p:wq]]dame et la [[p:wr]]tour."],
           ["Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée.", true]
         ]
       },
@@ -3119,7 +3131,10 @@
       },
       {
         "remark": "One step closer to checkmate.",
-        "parts": [["The check forces Black to respond."], ["White still has a mate in 8.", true]]
+        "parts": [
+          ["A fork: it attacks the [[p:bk]]king and the [[p:bb]]bishop at once."],
+          ["White still has a mate in 8.", true]
+        ]
       },
       {
         "remark": "Strong and simple.",
@@ -3147,10 +3162,12 @@
         ]
       },
       {
-        "remark": "This changes the evaluation a lot.",
+        "remark": "The opponent’s mistake goes unpunished.",
         "parts": [
           ["Black had a clear advantage, but the game is now balanced.", true],
-          ["[[m:b:gxf6]] was the better move."]
+          [
+            "White’s earlier mistake was still there to punish: [[m:b:gxf6]] would have finished the job."
+          ]
         ]
       }
     ],
@@ -3482,7 +3499,7 @@
       {
         "remark": "Encore un pas vers le mat.",
         "parts": [
-          ["L’échec force les Noirs à réagir."],
+          ["Une fourchette : il attaque à la fois le [[p:bk]]roi et le [[p:bb]]fou."],
           ["Les Blancs ont toujours un mat en 8.", true]
         ]
       },
@@ -3512,10 +3529,10 @@
         ]
       },
       {
-        "remark": "Ça change beaucoup l’évaluation.",
+        "remark": "L’erreur de l’adversaire reste impunie.",
         "parts": [
           ["Les Noirs avaient un net avantage, mais la partie est maintenant équilibrée.", true],
-          ["Il fallait jouer [[m:b:gxf6]]."]
+          ["L’erreur précédente des Blancs restait à punir : [[m:b:gxf6]] aurait conclu."]
         ]
       }
     ]
@@ -4319,7 +4336,7 @@
       {
         "remark": "Just right. Keep it up!",
         "parts": [
-          ["It wins a [[p:wn]]knight for free."],
+          ["A fork: it attacks the [[p:wk]]king and the [[p:wr]]rook at once."],
           ["Black goes from a slight edge to a clear advantage.", true]
         ]
       },
@@ -4507,8 +4524,13 @@
         "parts": [["It wins a [[p:br]]rook for free."], ["Black keeps a clear advantage.", true]]
       },
       {
-        "remark": "A mistake that hands over a real advantage.",
-        "parts": [["Black still has a clear advantage.", true], ["[[m:b:f6]] was the better move."]]
+        "remark": "The opponent slipped, but it goes unpunished.",
+        "parts": [
+          ["Black still has a clear advantage.", true],
+          [
+            "White’s earlier mistake was still there to punish: [[m:b:f6]] would have finished the job."
+          ]
+        ]
       },
       {
         "remark": "That’s the most accurate move.",
@@ -4651,7 +4673,7 @@
       {
         "remark": "Parfait. Continue comme ça !",
         "parts": [
-          ["Il gagne un [[p:wn]]cavalier sans contrepartie."],
+          ["Une fourchette : il attaque à la fois le [[p:wk]]roi et la [[p:wr]]tour."],
           ["Les Noirs passent d’un léger avantage à un net avantage.", true]
         ]
       },
@@ -4857,10 +4879,10 @@
         ]
       },
       {
-        "remark": "Une erreur, qui donne un vrai avantage à l’adversaire.",
+        "remark": "L’adversaire s’est trompé, mais ce n’est pas puni.",
         "parts": [
           ["Les Noirs ont toujours un net avantage.", true],
-          ["Il fallait jouer [[m:b:f6]]."]
+          ["L’erreur précédente des Blancs restait à punir : [[m:b:f6]] aurait conclu."]
         ]
       },
       {
@@ -5187,10 +5209,12 @@
         ]
       },
       {
-        "remark": "Check for threats before moving.",
+        "remark": "So close! The chance was right there.",
         "parts": [
           ["Black had a clear advantage, but now White has a clear advantage.", true],
-          ["[[m:b:e5]] was the better move."]
+          [
+            "White’s earlier mistake was still there to punish: [[m:b:e5]] would have finished the job."
+          ]
         ]
       },
       {
@@ -5579,13 +5603,13 @@
         ]
       },
       {
-        "remark": "Cherche les menaces avant de jouer.",
+        "remark": "Si près ! L’occasion était sous tes yeux.",
         "parts": [
           [
             "Les Noirs avaient un net avantage, mais maintenant les Blancs ont un net avantage.",
             true
           ],
-          ["Il fallait jouer [[m:b:e5]]."]
+          ["L’erreur précédente des Blancs restait à punir : [[m:b:e5]] aurait conclu."]
         ]
       },
       {
@@ -7319,7 +7343,10 @@
       },
       {
         "remark": "Strong and simple.",
-        "parts": [["It wins a [[p:bq]]queen for free."], ["Black keeps a winning position.", true]]
+        "parts": [
+          ["A fork: it attacks the [[p:bk]]king and the [[p:bb]]bishop at once."],
+          ["Black keeps a winning position.", true]
+        ]
       },
       {
         "remark": "The position is winning now.",
@@ -7700,7 +7727,7 @@
       {
         "remark": "Simple et fort.",
         "parts": [
-          ["Il gagne une [[p:bq]]dame sans contrepartie."],
+          ["Une fourchette : il attaque à la fois le [[p:bk]]roi et le [[p:bb]]fou."],
           ["Les Noirs gardent une position gagnante.", true]
         ]
       },
@@ -8303,7 +8330,7 @@
         "parts": [["Nothing better here."], ["White keeps a clear advantage.", true]]
       },
       {
-        "remark": "That’s a serious error.",
+        "remark": "There was a much stronger punishment.",
         "parts": [["White had a clear advantage, but the game is now balanced."]]
       },
       {
@@ -8701,7 +8728,7 @@
         "parts": [["Rien de mieux ici."], ["Les Blancs gardent un net avantage.", true]]
       },
       {
-        "remark": "C’est une grosse erreur.",
+        "remark": "Il y avait une punition bien plus forte.",
         "parts": [["Les Blancs avaient un net avantage, mais la partie est maintenant équilibrée."]]
       },
       {

@@ -1,13 +1,15 @@
 import { z } from 'zod/mini';
 import { describe, expect, it } from 'vitest';
+import type { CommentPart } from '#page/review/comment/markup.ts';
 import { StoredRecordCodec } from '#page/review/evaluation/stored.ts';
 import { fixtureGames, replay } from '#page/review/fixtures/replay.ts';
 import { en } from '#page/review/i18n/en.ts';
 import { fr } from '#page/review/i18n/fr.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import { judge } from '#page/review/judge/judge.ts';
+import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { explanation } from './explanation.ts';
-import { fact } from './fact.ts';
+import { fact, findings } from './fact.ts';
 import { hash } from './hash.ts';
 import { remark } from './remark.ts';
 import { advantageName, evaluationLevel, trajectory, type TrajectoryInput } from './trajectory.ts';
@@ -30,6 +32,23 @@ const toParts = (parts: z.infer<typeof LegacyPartsSchema>) =>
 
 const langs: readonly ('en' | 'fr')[] = ['en', 'fr'];
 
+// The port's move chips carry the moves they play ([[m:w:Nf3@b:g1f3]]), and an
+// error's comment ends on the reply it lets in: the original had neither. Both
+// are taken off, so the recordings stay the reference.
+const PLAY = /@[ab]:[^\]]*/g;
+const withoutPlay = (text: string): string => text.replace(PLAY, '');
+
+function asRecorded(
+  parts: readonly CommentPart[],
+  move: MoveVerdict,
+  language: ReviewLanguage,
+): CommentPart[] {
+  const threat = findings(move, language.facts).threat?.text;
+  return parts
+    .filter(part => part.text !== threat)
+    .map(({ text, droppable }) => ({ text: withoutPlay(text), droppable }));
+}
+
 describe('the coach’s comment', () => {
   const texts = GameTextsSchema.parse(legacy);
 
@@ -39,13 +58,20 @@ describe('the coach’s comment', () => {
       const expected = texts[index]?.[lang] ?? [];
       for (const [i, move] of replay(game).entries()) {
         const said = expected[i];
-        // A side's first book move has its own remarks: the original's spoke of theory going on.
+        const remarked = remark(move, context);
+        // A side's first book move has its own remarks, which open its comment: the
+        // original's spoke of theory going on.
         const first = move.moveClass === 'book' && move.position.ply <= 2;
         const allowed = first ? LANGUAGES[lang].remarks.firstMove : [said?.remark];
-        expect(allowed, `${game.name} ${move.ply}`).toContain(remark(move, context));
-        expect(explanation(move, context, game.opening), `${game.name} ${move.ply}`).toEqual(
-          toParts(said?.parts ?? []),
-        );
+        expect(allowed, `${game.name} ${move.ply}`).toContain(remarked);
+        const recorded = toParts(said?.parts ?? []).map(({ text, droppable }, k) => ({
+          text: first && k === 0 ? remarked : text,
+          droppable,
+        }));
+        expect(
+          asRecorded(explanation(move, context, game.opening), move, LANGUAGES[lang]),
+          `${game.name} ${move.ply}`,
+        ).toEqual(recorded);
       }
     }
   });
@@ -107,8 +133,11 @@ describe('rarer moves', () => {
     expect(move).toMatchObject({ moveClass: said.cls, slower: said.slower });
     for (const lang of langs) {
       const context = { gameId: 'crafted1', coach: 2, language: LANGUAGES[lang] };
-      expect(fact(move, LANGUAGES[lang].facts)).toBe(said[lang].fact);
-      expect(explanation(move, context, '')).toEqual(toParts(said[lang].parts));
+      const found = fact(move, LANGUAGES[lang].facts);
+      expect(found === null ? null : withoutPlay(found)).toBe(said[lang].fact);
+      expect(asRecorded(explanation(move, context, ''), move, LANGUAGES[lang])).toEqual(
+        toParts(said[lang].parts),
+      );
     }
   });
 });

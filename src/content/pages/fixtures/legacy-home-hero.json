@@ -4,223 +4,223 @@
     "user": "signed out",
     "header": null,
     "bodyUser": null,
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Play chess online</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Play chess online</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "en",
     "user": "header name",
     "header": "  MagnusCarlsen ",
     "bodyUser": "magnuscarlsen",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "en",
     "user": "body only",
     "header": null,
     "bodyUser": "alice",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, alice?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, alice?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "en",
     "user": "empty header",
     "header": " ",
     "bodyUser": "bob",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, bob?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, bob?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "fr",
     "user": "signed out",
     "header": null,
     "bodyUser": null,
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratuit · Sans publicité · Open source</p><h1 class=\"ln-ext-hero__title\">Jouer aux échecs en ligne</h1><p class=\"ln-ext-hero__sub\">Affrontez des milliers de joueurs du monde entier, résolvez des problèmes et progressez, entièrement gratuitement.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratuit · Sans publicité · Open source</p><h1 class=\"ln-ext-hero__title\">Jouer aux échecs en ligne</h1><p class=\"ln-ext-hero__sub\">Affrontez des milliers de joueurs du monde entier, résolvez des problèmes et progressez, entièrement gratuitement.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "fr",
     "user": "header name",
     "header": "  MagnusCarlsen ",
     "bodyUser": "magnuscarlsen",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratuit · Sans publicité · Open source</p><h1 class=\"ln-ext-hero__title\">Prêt pour une partie, MagnusCarlsen ?</h1><p class=\"ln-ext-hero__sub\">Affrontez des milliers de joueurs du monde entier, résolvez des problèmes et progressez, entièrement gratuitement.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratuit · Sans publicité · Open source</p><h1 class=\"ln-ext-hero__title\">Prêt pour une partie, MagnusCarlsen ?</h1><p class=\"ln-ext-hero__sub\">Affrontez des milliers de joueurs du monde entier, résolvez des problèmes et progressez, entièrement gratuitement.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "fr",
     "user": "body only",
     "header": null,
     "bodyUser": "alice",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratuit · Sans publicité · Open source</p><h1 class=\"ln-ext-hero__title\">Prêt pour une partie, alice ?</h1><p class=\"ln-ext-hero__sub\">Affrontez des milliers de joueurs du monde entier, résolvez des problèmes et progressez, entièrement gratuitement.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratuit · Sans publicité · Open source</p><h1 class=\"ln-ext-hero__title\">Prêt pour une partie, alice ?</h1><p class=\"ln-ext-hero__sub\">Affrontez des milliers de joueurs du monde entier, résolvez des problèmes et progressez, entièrement gratuitement.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "fr",
     "user": "empty header",
     "header": " ",
     "bodyUser": "bob",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratuit · Sans publicité · Open source</p><h1 class=\"ln-ext-hero__title\">Prêt pour une partie, bob ?</h1><p class=\"ln-ext-hero__sub\">Affrontez des milliers de joueurs du monde entier, résolvez des problèmes et progressez, entièrement gratuitement.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratuit · Sans publicité · Open source</p><h1 class=\"ln-ext-hero__title\">Prêt pour une partie, bob ?</h1><p class=\"ln-ext-hero__sub\">Affrontez des milliers de joueurs du monde entier, résolvez des problèmes et progressez, entièrement gratuitement.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "de",
     "user": "signed out",
     "header": null,
     "bodyUser": null,
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Kostenlos · Werbefrei · Open Source</p><h1 class=\"ln-ext-hero__title\">Schach online spielen</h1><p class=\"ln-ext-hero__sub\">Spiele gegen Tausende Gegner aus aller Welt, löse Aufgaben und werde besser, völlig kostenlos.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Kostenlos · Werbefrei · Open Source</p><h1 class=\"ln-ext-hero__title\">Schach online spielen</h1><p class=\"ln-ext-hero__sub\">Spiele gegen Tausende Gegner aus aller Welt, löse Aufgaben und werde besser, völlig kostenlos.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "de",
     "user": "header name",
     "header": "  MagnusCarlsen ",
     "bodyUser": "magnuscarlsen",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Kostenlos · Werbefrei · Open Source</p><h1 class=\"ln-ext-hero__title\">Bereit für eine Partie, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Spiele gegen Tausende Gegner aus aller Welt, löse Aufgaben und werde besser, völlig kostenlos.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Kostenlos · Werbefrei · Open Source</p><h1 class=\"ln-ext-hero__title\">Bereit für eine Partie, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Spiele gegen Tausende Gegner aus aller Welt, löse Aufgaben und werde besser, völlig kostenlos.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "de",
     "user": "body only",
     "header": null,
     "bodyUser": "alice",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Kostenlos · Werbefrei · Open Source</p><h1 class=\"ln-ext-hero__title\">Bereit für eine Partie, alice?</h1><p class=\"ln-ext-hero__sub\">Spiele gegen Tausende Gegner aus aller Welt, löse Aufgaben und werde besser, völlig kostenlos.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Kostenlos · Werbefrei · Open Source</p><h1 class=\"ln-ext-hero__title\">Bereit für eine Partie, alice?</h1><p class=\"ln-ext-hero__sub\">Spiele gegen Tausende Gegner aus aller Welt, löse Aufgaben und werde besser, völlig kostenlos.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "de",
     "user": "empty header",
     "header": " ",
     "bodyUser": "bob",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Kostenlos · Werbefrei · Open Source</p><h1 class=\"ln-ext-hero__title\">Bereit für eine Partie, bob?</h1><p class=\"ln-ext-hero__sub\">Spiele gegen Tausende Gegner aus aller Welt, löse Aufgaben und werde besser, völlig kostenlos.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Kostenlos · Werbefrei · Open Source</p><h1 class=\"ln-ext-hero__title\">Bereit für eine Partie, bob?</h1><p class=\"ln-ext-hero__sub\">Spiele gegen Tausende Gegner aus aller Welt, löse Aufgaben und werde besser, völlig kostenlos.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "es",
     "user": "signed out",
     "header": null,
     "bodyUser": null,
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratis · Sin anuncios · Código abierto</p><h1 class=\"ln-ext-hero__title\">Juega al ajedrez en línea</h1><p class=\"ln-ext-hero__sub\">Enfréntate a miles de jugadores de todo el mundo, resuelve problemas y mejora, totalmente gratis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratis · Sin anuncios · Código abierto</p><h1 class=\"ln-ext-hero__title\">Juega al ajedrez en línea</h1><p class=\"ln-ext-hero__sub\">Enfréntate a miles de jugadores de todo el mundo, resuelve problemas y mejora, totalmente gratis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "es",
     "user": "header name",
     "header": "  MagnusCarlsen ",
     "bodyUser": "magnuscarlsen",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratis · Sin anuncios · Código abierto</p><h1 class=\"ln-ext-hero__title\">¿Listo para jugar, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Enfréntate a miles de jugadores de todo el mundo, resuelve problemas y mejora, totalmente gratis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratis · Sin anuncios · Código abierto</p><h1 class=\"ln-ext-hero__title\">¿Listo para jugar, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Enfréntate a miles de jugadores de todo el mundo, resuelve problemas y mejora, totalmente gratis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "es",
     "user": "body only",
     "header": null,
     "bodyUser": "alice",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratis · Sin anuncios · Código abierto</p><h1 class=\"ln-ext-hero__title\">¿Listo para jugar, alice?</h1><p class=\"ln-ext-hero__sub\">Enfréntate a miles de jugadores de todo el mundo, resuelve problemas y mejora, totalmente gratis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratis · Sin anuncios · Código abierto</p><h1 class=\"ln-ext-hero__title\">¿Listo para jugar, alice?</h1><p class=\"ln-ext-hero__sub\">Enfréntate a miles de jugadores de todo el mundo, resuelve problemas y mejora, totalmente gratis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "es",
     "user": "empty header",
     "header": " ",
     "bodyUser": "bob",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratis · Sin anuncios · Código abierto</p><h1 class=\"ln-ext-hero__title\">¿Listo para jugar, bob?</h1><p class=\"ln-ext-hero__sub\">Enfréntate a miles de jugadores de todo el mundo, resuelve problemas y mejora, totalmente gratis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Gratis · Sin anuncios · Código abierto</p><h1 class=\"ln-ext-hero__title\">¿Listo para jugar, bob?</h1><p class=\"ln-ext-hero__sub\">Enfréntate a miles de jugadores de todo el mundo, resuelve problemas y mejora, totalmente gratis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "pt",
     "user": "signed out",
     "header": null,
     "bodyUser": null,
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Jogue xadrez online</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Jogue xadrez online</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "pt",
     "user": "header name",
     "header": "  MagnusCarlsen ",
     "bodyUser": "magnuscarlsen",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "pt",
     "user": "body only",
     "header": null,
     "bodyUser": "alice",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, alice?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, alice?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "pt",
     "user": "empty header",
     "header": " ",
     "bodyUser": "bob",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, bob?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, bob?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "pt-BR",
     "user": "signed out",
     "header": null,
     "bodyUser": null,
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Jogue xadrez online</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Jogue xadrez online</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "pt-BR",
     "user": "header name",
     "header": "  MagnusCarlsen ",
     "bodyUser": "magnuscarlsen",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "pt-BR",
     "user": "body only",
     "header": null,
     "bodyUser": "alice",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, alice?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, alice?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "pt-BR",
     "user": "empty header",
     "header": " ",
     "bodyUser": "bob",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, bob?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Grátis · Sem anúncios · Código aberto</p><h1 class=\"ln-ext-hero__title\">Pronto para jogar, bob?</h1><p class=\"ln-ext-hero__sub\">Enfrente milhares de jogadores do mundo todo, resolva problemas e evolua, totalmente grátis.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "it",
     "user": "signed out",
     "header": null,
     "bodyUser": null,
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Play chess online</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Play chess online</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "it",
     "user": "header name",
     "header": "  MagnusCarlsen ",
     "bodyUser": "magnuscarlsen",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "it",
     "user": "body only",
     "header": null,
     "bodyUser": "alice",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, alice?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, alice?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "it",
     "user": "empty header",
     "header": " ",
     "bodyUser": "bob",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, bob?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, bob?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "",
     "user": "signed out",
     "header": null,
     "bodyUser": null,
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Play chess online</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Play chess online</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "",
     "user": "header name",
     "header": "  MagnusCarlsen ",
     "bodyUser": "magnuscarlsen",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, MagnusCarlsen?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "",
     "user": "body only",
     "header": null,
     "bodyUser": "alice",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, alice?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, alice?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   },
   {
     "lang": "",
     "user": "empty header",
     "header": " ",
     "bodyUser": "bob",
-    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, bob?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p></section><div class=\"lobby__app\"></div>"
+    "main": "<section class=\"ln-ext-hero\"><p class=\"ln-ext-hero__eyebrow\">Free · No ads · Open source</p><h1 class=\"ln-ext-hero__title\">Ready to play, bob?</h1><p class=\"ln-ext-hero__sub\">Take on thousands of players worldwide, solve puzzles and improve, completely free.</p><div class=\"ln-ext-hero__coach\" aria-hidden=\"true\"></div></section><div class=\"lobby__app\"></div>"
   }
 ]

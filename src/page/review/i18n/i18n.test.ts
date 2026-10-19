@@ -30,9 +30,10 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
 
   it('has the original’s interface strings', () => {
     const { T } = original;
-    // Explain's lines, the summary's profile, the graph's views and the share button are
-    // new: the original had none. Its phase and player labels went with its table, and the
-    // free board's first words are a title over a line now.
+    // Explain's lines, the summary's profile, the graph's views, the share button, the cost
+    // bars, Retry, the tactics' tags, the clock's advice, the brief and the closed review's
+    // way back to the summary are new: the original had none. Its phase and player labels
+    // went with its table, and the free board's first words are a title over a line now.
     const {
       bestWas,
       liveIntro: _liveIntro,
@@ -43,6 +44,12 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
       profile: _profile,
       graphViews: _graphViews,
       share: _share,
+      cost: _cost,
+      retry: _retry,
+      themes: _themes,
+      clock: _clock,
+      brief: _brief,
+      summary: _summary,
       ...ui
     } = language.ui;
     const {

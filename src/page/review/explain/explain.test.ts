@@ -47,7 +47,7 @@ it('writes the lines around a mistake, and plays the best one on the board', asy
   expect(text('.ln-ext-bubble__sub')).toBe(
     'Best was 7... c5 8. a3 a6 9. a4. e7 allows 8. d1 a6 9. a3. ',
   );
-  expect(text('.ln-ext-bubble__line')).toBe('Show line');
+  expect(text('[data-ln-ext="line"]')).toBe('Show line');
 
   click('[data-ln-ext="line"]');
   await advance(0);
@@ -56,7 +56,7 @@ it('writes the lines around a mistake, and plays the best one on the board', asy
   expect(playedSince(ctrl, parentPath(move))).toEqual(['f8c5', 'a2a3', 'a7a6', 'a3a4']);
   // The coach still speaks of the move the line stands for.
   expect(text('.ln-ext-bubble__title')).toBe(title);
-  expect(text('.ln-ext-bubble__line')).toBe('Back');
+  expect(text('[data-ln-ext="line"]')).toBe('Back');
   expect(
     document.querySelector('#ln-ext-review [data-ln-ext="best"]')?.hasAttribute('disabled'),
   ).toBe(true);
@@ -70,5 +70,5 @@ it('writes the lines around a mistake, and plays the best one on the board', asy
   click('[data-ln-ext="explain"]');
   await advance(3000);
   expect(ctrl.path).toBe(move);
-  expect(document.querySelector('#ln-ext-review .ln-ext-bubble__line')).toBeNull();
+  expect(document.querySelector('#ln-ext-review [data-ln-ext="line"]')).toBeNull();
 }, 30_000);
