@@ -232,8 +232,8 @@ main.search > .box__top form.search[action$='/forum/search'] input {
   padding: 0 16px 0 42px !important;
   border-radius: 999px !important;
   background: var(--ln-ext-bg-panel)
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--989795.svg') 15px center
-    / 18px no-repeat !important;
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--989795.svg') 15px
+    center / 18px no-repeat !important;
   font-size: 15px;
   transition:
     border-color 0.15s,

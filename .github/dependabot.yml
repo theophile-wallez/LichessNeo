@@ -8,6 +8,10 @@ updates:
     # pnpm refuses packages published less than a day ago.
     cooldown:
       default-days: 2
+    # Node's types follow the Node the extension is built with (.nvmrc).
+    ignore:
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
     groups:
       dev-tooling:
         dependency-type: development

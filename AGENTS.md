@@ -331,7 +331,7 @@ features and its name: free analysis, open data, no ads.
   it instead.
 - **Hover feels the same everywhere:** a card lifts and its icon tile hops,
   `rotate(-6deg) scale(1.08)` on cards, `translateY(-2px) rotate(-8deg)
-scale(1.08)` on menu links, both
+  scale(1.08)` on menu links, both
   `transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)`.
 - **Tabs slide:** a tab bar's highlight is one piece that slides to the tab
   picked (`0.35s cubic-bezier(0.22, 1, 0.36, 1)`). Register the bar in
@@ -393,7 +393,7 @@ Learned the hard way. Check here before touching the area concerned.
   host permission. Other cross-origin data would need one.
 - **Lichess's piece variables.** Lichess draws its pieces from
   `---white-pawn` … `---black-king` (`.is2d .pawn.white { background-image:
-var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
+  var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   menu changes the board or the set: a pack overrides them on both
   (`content/packs/apply.ts`), and our own pieces (`#shared/piece-glyph.ts`)
   read them. Before drawing a board Lichess decodes each one, slicing
@@ -757,7 +757,7 @@ Don't open a PR.
    characters, in the imperative: "Fix the eval bar on flipped boards"; a
    body only when the why isn't obvious), without a `Co-Authored-By`
    trailer. Rebase onto `origin/main` (`git fetch origin &&
-git rebase origin/main`, never a merge: `main` stays a straight line) and
+   git rebase origin/main`, never a merge: `main` stays a straight line) and
    push as a fast-forward (`git push origin HEAD:main`). If `main` moved,
    fetch, rebase and push again.
 2. In the main checkout, `git pull --ff-only`, then

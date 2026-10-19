@@ -15,8 +15,10 @@
               var(--ln-ext-main-h, 100dvh) - 32px - 2 * var(--ln-ext-bar) - var(--ln-ext-coords-off)
             ),
             calc(
-              (var(--ln-ext-main-w, 100vw) - var(--ln-ext-lead-w, 0px) - var(--ln-ext-panel-min) -
-                  var(--ln-ext-gap) - var(--ln-ext-pocket-gap) - 48px) /
+              (
+                  var(--ln-ext-main-w, 100vw) - var(--ln-ext-lead-w, 0px) -
+                    var(--ln-ext-panel-min) - var(--ln-ext-gap) - var(--ln-ext-pocket-gap) - 48px
+                ) /
                 1.09375
             )
           ) *

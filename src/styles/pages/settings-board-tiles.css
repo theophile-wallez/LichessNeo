@@ -122,8 +122,8 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background:
-    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-brush-04--ffffff.svg') center
-      / 56% no-repeat,
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-brush-04--ffffff.svg')
+      center / 56% no-repeat,
     color-mix(in srgb, var(--ln-ext-ink) 62%, transparent);
   box-shadow:
     0 0 0 1px #ffffff2e,

@@ -40,7 +40,7 @@ opening's name and the page's asset URL.
 - `GameRatingInput` → `rateGame` → `GameRating`: per color, `{ elo, phases }`,
   or null for a player without a move.
 - `CoachContext` (`gameId`, `coach`, `language`) → `explanation(move, context,
-opening)` → `CommentPart[]`: sentences, the droppable one going when the
+  opening)` → `CommentPart[]`: sentences, the droppable one going when the
   bubble lacks room.
 - `StreamState` (`key`, `shown`, `dropped`): the typing's progress, kept by
   the UI. `streamFor(state, parts)` starts it over for a new comment;

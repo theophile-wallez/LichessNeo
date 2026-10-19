@@ -1,3 +1,7 @@
+/**
+ * The sheets' copies load from data: URLs, which happy-dom loads only when told to.
+ * @vitest-environment-options { "settings": { "enableCSSFileLoading": true } }
+ */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { z } from 'zod/mini';
 import { queryAll } from '#shared/dom.ts';
