@@ -26,7 +26,9 @@ export interface Step {
 const element = (selector: string): Element | null => document.querySelector(selector);
 
 function dispatch(selector: string, type: string, clientX = 0): void {
-  element(selector)?.dispatchEvent(new MouseEvent(type, { bubbles: true, clientX }));
+  const target = element(selector);
+  if (!target) throw new Error(`No element matches ${selector}`);
+  target.dispatchEvent(new MouseEvent(type, { bubbles: true, clientX }));
 }
 
 /** Clicks what `selector` finds, then lets the page run for `wait` ms. */

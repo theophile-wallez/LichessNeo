@@ -28,7 +28,7 @@ function gameSteps({ correct, offGame }: GamePlies): Step[] {
   return [
     wait('summary', 500),
     click('more rows', '[data-ln-ext="rows"]'),
-    hover('rating tip', '.ln-ext-t-rating [data-ln-ext-tip]'),
+    hover('rows tip', '[data-ln-ext="rows"]'),
     click('fewer rows', '[data-ln-ext="rows"]'),
     hover('summary graph', '.ln-ext-summary-graph', 150),
     click('start', '[data-ln-ext="moves"]', 1500),
