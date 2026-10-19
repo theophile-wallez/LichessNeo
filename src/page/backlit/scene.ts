@@ -2,6 +2,7 @@ import type { BacklitReach } from '#shared/backlit.ts';
 import { squareAt, squareCoords } from '#shared/chess/squares.ts';
 import type { Square } from '#shared/chess/types.ts';
 import {
+  distance,
   PULSE_END_MS,
   pulseLevel,
   type Spread,
@@ -97,9 +98,8 @@ function hoverLevel({ from, at, target }: Hover, now: number): number {
 
 function waveLights(wave: PaintedWave, now: number): Light[] {
   const lights: Light[] = [];
-  const [file, rank] = squareCoords(wave.square);
   for (const key of KEYS) {
-    const level = waveLevel(wave, Math.hypot(key.file - file, key.rank - rank), now - wave.start);
+    const level = waveLevel(wave, distance(wave.square, key.square), now - wave.start);
     if (level < MIN_LEVEL) continue;
     const color = wave.paint === 'rainbow' ? rainbowColor(wave.square, key, now) : wave.paint.color;
     lights.push({ square: key.square, level, color });
