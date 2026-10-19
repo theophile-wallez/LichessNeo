@@ -1,4 +1,8 @@
-import { DownloadResponseSchema, type DownloadResponse } from '#shared/packs/messages.ts';
+import {
+  type DownloadRequest,
+  DownloadResponseSchema,
+  type DownloadResponse,
+} from '#shared/packs/messages.ts';
 import { PIECE_NAMES, type Pack } from '#shared/packs/pack.ts';
 import { askWorker } from '#content/platform/runtime.ts';
 import { messageType } from '#shared/prefix.ts';
@@ -37,9 +41,10 @@ const NO_ANSWER = 'The extension did not answer: try again.';
 
 /** Downloads the pack a link points at, with a private repository's token ('' for none). */
 export async function fetchPack(link: string, token: string): Promise<DownloadResponse> {
+  const request: DownloadRequest = { type: messageType('download-pack'), link, token };
   let answer: unknown;
   try {
-    answer = await askWorker({ type: messageType('download-pack'), link, token });
+    answer = await askWorker(request);
   } catch (error) {
     // Chrome says so when the extension was updated or reloaded under this page.
     const updated = error instanceof Error && error.message.includes('context invalidated');
