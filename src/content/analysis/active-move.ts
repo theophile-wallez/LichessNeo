@@ -10,7 +10,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 const MOVES = 'main.analyse .analyse__moves';
 
 /** Scrolls `list` so its active move shows, centered, if it's out of view. */
-export function revealActive(list: HTMLElement): void {
+function revealActive(list: HTMLElement): void {
   const active = queryOne(list, 'move.active', HTMLElement);
   if (!active || active.offsetParent !== list) return;
   const top = active.offsetTop;

@@ -19,7 +19,7 @@ import { reshape } from './shapes.ts';
 
 type Triple = readonly [number, number, number];
 
-export interface ShellLook {
+interface ShellLook {
   readonly position: Triple;
   /** Its turn about the vertical: 0 shows the spiral head-on. */
   readonly turn: number;
@@ -31,7 +31,7 @@ export interface ShellLook {
   readonly grooveWidth: number;
 }
 
-export interface StalksLook {
+interface StalksLook {
   readonly y: number;
   /** How far apart, and how much they lean out. */
   readonly spread: number;
@@ -40,7 +40,7 @@ export interface StalksLook {
   readonly knob: number;
 }
 
-export interface FootLook {
+interface FootLook {
   readonly position: Triple;
   readonly turn: number;
   readonly length: number;

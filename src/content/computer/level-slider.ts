@@ -11,7 +11,7 @@ import { playUiSound } from '#content/ui/sounds.ts';
 const SPARKLES = 14;
 
 /** The notch's tick, a whole tone higher per level: semitones from Foley's, the middle level at 0. */
-export const tickPitch = (level: number): number => 2 * (level - Math.ceil(AI_LEVELS / 2));
+const tickPitch = (level: number): number => 2 * (level - Math.ceil(AI_LEVELS / 2));
 
 export interface LevelSlider {
   /** Where the robot goes. */

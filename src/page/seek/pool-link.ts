@@ -7,7 +7,7 @@ import { z } from 'zod/mini';
 const POOL_LINK = /#pool\/(\d+\+\d+)(?:\/([\w-]+))?$/;
 
 /** What the lobby's socket takes to seek in a pool (lila's ui/lobby/src/interfaces.ts). */
-export const PoolMemberSchema = z.object({
+const PoolMemberSchema = z.object({
   id: z.string(),
   range: z.optional(z.string()),
   blocking: z.optional(z.string()),

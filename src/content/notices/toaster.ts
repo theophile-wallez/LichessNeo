@@ -8,7 +8,7 @@ import { makeSwipeable } from './swipe.ts';
 // Toasts in Sonner's way (styles/theme/notices.css): stacked in the window's corner, the newest
 // in front, spread out under the pointer, which also holds their timers, and swiped away.
 
-export type ToastKind = 'loading' | 'error' | 'success' | 'info';
+type ToastKind = 'loading' | 'error' | 'success' | 'info';
 
 export interface ToastContent {
   readonly kind: ToastKind;

@@ -11,7 +11,7 @@ import type { CountedClass, MoveClass } from '#page/review/classes/classes.ts';
 export type Viewer = Color | null;
 
 /** Explain's engine lines, written out as numbered [[…]] moves. */
-export interface LineStrings {
+interface LineStrings {
   /** The line from the move that was best. */
   readonly best: (line: string) => string;
   /** The line that punishes an error. */
@@ -47,7 +47,7 @@ export interface ClockStrings {
 }
 
 /** The coach's brief before the first move. */
-export interface BriefStrings {
+interface BriefStrings {
   /** The game's opening, named. */
   readonly opening: (name: SafeHtml) => SafeHtml;
   /** How many key moments the review found, and the move the game turned on, if one did. */
@@ -108,7 +108,7 @@ export interface InterfaceStrings {
 }
 
 /** The situations with remarks of their own, besides each class's. */
-export type Situation =
+type Situation =
   | 'mate'
   | 'allowsMate'
   | 'missedMate'
@@ -146,7 +146,7 @@ export interface TrajectorySentences {
 }
 
 /** A piece lost or won on a square, and the move that takes it. */
-export interface PieceWon {
+interface PieceWon {
   readonly piece: Piece;
   readonly square: string;
   readonly reply: string;

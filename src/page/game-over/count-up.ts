@@ -4,7 +4,7 @@
 const COUNT_MS = 900;
 
 /** The figure `progress` (0 to 1) of the way from `from` to `to`, slowing at the end. */
-export const countAt = (from: number, to: number, progress: number): number =>
+const countAt = (from: number, to: number, progress: number): number =>
   from + (to - from) * (1 - (1 - Math.min(1, Math.max(0, progress))) ** 3);
 
 const counting = new WeakMap<Element, number>();

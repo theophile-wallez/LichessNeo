@@ -9,7 +9,7 @@ import type { GameOverTexts } from './texts.ts';
 // crown and "Winner", the loser's red under how they lost, both grey for a
 // draw (styles/game/game-end.css).
 
-export type BadgeKind = 'win' | 'loss' | 'draw';
+type BadgeKind = 'win' | 'loss' | 'draw';
 
 export interface KingBadge {
   readonly kind: BadgeKind;

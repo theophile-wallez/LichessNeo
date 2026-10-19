@@ -7,7 +7,7 @@ import { arrowColor, squareColor } from './colors.ts';
 // with the orientation applied, and a game page has no other source (it
 // exposes no controller, so no `state.drawable`).
 
-export interface Shape {
+interface Shape {
   /** "r,g,b" */
   readonly color: string;
   readonly opacity: number;

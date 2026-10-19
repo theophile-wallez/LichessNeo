@@ -27,7 +27,7 @@ export interface RadarInput {
 }
 
 /** The point `reach` of the way out along axis `i` of `count`, the first straight up. */
-export function radarPoint(i: number, count: number, reach: number): { x: number; y: number } {
+function radarPoint(i: number, count: number, reach: number): { x: number; y: number } {
   const angle = -Math.PI / 2 + (i * 2 * Math.PI) / count;
   return {
     x: CENTER.x + Math.cos(angle) * RADIUS * reach,

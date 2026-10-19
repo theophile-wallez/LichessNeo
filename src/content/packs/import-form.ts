@@ -7,7 +7,7 @@ import type { Library } from './library.ts';
 // settings, and in the user menu's panels when signed out. A private repository's token is used for that import and never
 // kept: the page's storage is Lichess's to read.
 
-export const HELP_URL = 'https://github.com/theophile-wallez/LichessNeo/blob/main/docs/packs.md';
+const HELP_URL = 'https://github.com/theophile-wallez/LichessNeo/blob/main/docs/packs.md';
 
 /** What the last import said, shown again in a section drawn anew. */
 interface ImportState {

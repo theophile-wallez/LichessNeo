@@ -228,7 +228,7 @@ export interface ScenarioHooks {
 }
 
 /** Runs the script, and what the review shows after each step, by the step's name. */
-export async function runScenario(
+async function runScenario(
   scenario: Scenario,
   { boot, arrows }: ScenarioHooks,
 ): Promise<Record<string, ReviewSnapshot>> {

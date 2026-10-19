@@ -41,7 +41,7 @@ function cheekGeometry(style: CheekStyle): BufferGeometry {
 }
 
 /** Where it is on the face, slid with it, and how wide and tall, as a share of its rest. */
-export interface CheekLay {
+interface CheekLay {
   readonly x: number;
   readonly y: number;
   readonly width: number;

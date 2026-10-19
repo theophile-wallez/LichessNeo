@@ -7,7 +7,7 @@ import { solid, type Finish, type SolidMaterial } from './finishes.ts';
 // a tail's pale tip, drawn by the fur's own GLSL (fur/shaders.ts) over three's
 // material for the finish.
 
-export interface Palette {
+interface Palette {
   readonly coat: Color;
   readonly front: Color;
   readonly accent: Color;

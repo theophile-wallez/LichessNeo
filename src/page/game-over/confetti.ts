@@ -3,7 +3,7 @@ import { html, type SafeHtml } from '#shared/html.ts';
 // The winner's confetti: a one-off shower over the board, each piece its own
 // CSS animation (styles/game/game-end.css) from the numbers drawn here.
 
-export type ConfettiShape = 'strip' | 'dot' | 'curl';
+type ConfettiShape = 'strip' | 'dot' | 'curl';
 
 export interface ConfettiPiece {
   readonly shape: ConfettiShape;

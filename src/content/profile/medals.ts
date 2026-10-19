@@ -27,7 +27,7 @@ const rank = (metal: string | undefined): number =>
   metal === undefined ? -1 : METALS.findIndex(each => each === metal);
 
 /** The medals whose metal beats the one last seen; none the first time. */
-export function freshMedals(list: readonly Medal[], seen: Seen | null): Set<MedalId> {
+function freshMedals(list: readonly Medal[], seen: Seen | null): Set<MedalId> {
   if (!seen) return new Set();
   const fresh = list.filter(medal => rank(medal.metal ?? undefined) > rank(seen.metals[medal.id]));
   return new Set(fresh.map(medal => medal.id));

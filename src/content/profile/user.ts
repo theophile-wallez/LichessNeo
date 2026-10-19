@@ -25,7 +25,7 @@ export const VARIANTS = [
 
 const optionalPerf = z.optional(PerfSchema);
 
-export const ProfileUserSchema = z.object({
+const ProfileUserSchema = z.object({
   username: z.string(),
   title: z.optional(z.string()),
   createdAt: z.number(),

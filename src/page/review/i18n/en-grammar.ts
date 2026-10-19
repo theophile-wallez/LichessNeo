@@ -46,7 +46,7 @@ export const capitalize = (text: string): string =>
   text.length === 0 ? text : text.charAt(0).toUpperCase() + text.slice(1);
 
 /** "[knight]", the piece drawn before its name. */
-export const pieceName = (piece: Piece): string => pieceToken(piece) + ROLE_NAMES[piece.role];
+const pieceName = (piece: Piece): string => pieceToken(piece) + ROLE_NAMES[piece.role];
 
 /** "a [knight]". */
 export const indefinite = (piece: Piece): string => `a ${pieceName(piece)}`;

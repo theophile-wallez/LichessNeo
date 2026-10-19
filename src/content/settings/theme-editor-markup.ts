@@ -8,7 +8,7 @@ import { BADGES, mock } from './theme-cards.ts';
 
 /** The strength slider's steps, in thousandths of OKLCH chroma. */
 export const CHROMA_STEPS = 1000;
-export const MAX_CHROMA_STEP = 60;
+const MAX_CHROMA_STEP = 60;
 
 function schemeFields(scheme: Scheme): SafeHtml {
   const title = message(scheme === 'light' ? 'schemeLight' : 'schemeDark');

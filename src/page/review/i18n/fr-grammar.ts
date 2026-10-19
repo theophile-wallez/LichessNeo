@@ -22,8 +22,7 @@ const isFeminine = ({ role }: Piece): boolean => role === 'rook' || role === 'qu
 const pieceName = (piece: Piece): string => pieceToken(piece) + ROLE_NAMES[piece.role];
 
 /** "la [dame]", "le [fou]". */
-export const definite = (piece: Piece): string =>
-  `${isFeminine(piece) ? 'la' : 'le'} ${pieceName(piece)}`;
+const definite = (piece: Piece): string => `${isFeminine(piece) ? 'la' : 'le'} ${pieceName(piece)}`;
 
 /** "la [dame]", or whose it is when the reader played: "ta [dame]", "la [dame] adverse". */
 export function owned(viewer: Viewer, piece: Piece): string {

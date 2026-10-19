@@ -22,7 +22,7 @@ export const DashboardSchema = z.object({
 export type Dashboard = z.infer<typeof DashboardSchema>;
 
 /** Fewer puzzles than this say nothing about a theme. */
-export const MIN_PUZZLES = 3;
+const MIN_PUZZLES = 3;
 /** How many themes each list shows. */
 const LISTED = 4;
 

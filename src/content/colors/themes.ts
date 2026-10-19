@@ -9,7 +9,7 @@ import { BUILT_IN_THEMES, NEO } from './built-in.ts';
 
 const HexColorSchema = z.string().check(z.regex(/^#[0-9a-f]{6}$/i));
 
-export const PaletteSchema = z.object({
+const PaletteSchema = z.object({
   /** The neutrals' tint, an OKLCH hue in degrees. */
   hue: z.number().check(z.gte(0), z.lte(360)),
   /** How strong the tint is, in OKLCH chroma: 0 is grey. */

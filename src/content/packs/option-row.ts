@@ -5,7 +5,7 @@ import type { StoredOption } from './stored-option.ts';
 // while that theme is picked, or a family's, in the family's own view
 // (family.ts). Its pill slides (content/ui/tab-bars.ts).
 
-export interface RowOption<T extends string> {
+interface RowOption<T extends string> {
   readonly value: T;
   readonly label: string;
   readonly tip: string;

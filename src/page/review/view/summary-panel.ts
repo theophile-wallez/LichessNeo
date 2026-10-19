@@ -18,7 +18,7 @@ import { newGameMarkup } from './new-game.ts';
 // the quick pass's draft, then at full depth. Each side has a color
 // (styles/review/summary.css) its card, bars and radar shape share.
 
-export interface SummaryInput {
+interface SummaryInput {
   /** The sides from left to right: the signed-in user's own first. */
   readonly order: readonly Color[];
   readonly review: Review | null;

@@ -12,7 +12,7 @@ import { roughOf, type UNIT_CASES } from './unit-cases.ts';
 // Test support: a review session over a fake game, for the unit tests.
 
 /** Takes a full-depth record, unless the position has one, as the analysis does. */
-export function setDeep(session: Session, index: number, record: PositionRecord): void {
+function setDeep(session: Session, index: number, record: PositionRecord): void {
   if (session.work.deep[index]) return;
   session.work.deep[index] = record;
   seeDeep(session, index, record);

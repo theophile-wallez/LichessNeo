@@ -7,7 +7,7 @@ import type { Box } from '#shared/geometry.ts';
 // tabs and the explorer's databases.
 
 /** The highlight's look: a raised pill or an underline. */
-export type TabLook = 'pill' | 'line';
+type TabLook = 'pill' | 'line';
 
 export interface TabBarKind {
   readonly bar: string;

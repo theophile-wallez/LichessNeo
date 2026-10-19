@@ -38,7 +38,7 @@ function userIn(spot: HTMLElement, link: string | undefined): string | undefined
   return userInHref(anchor?.getAttribute('href') ?? anchor?.dataset.href);
 }
 
-export function markAvatar(element: HTMLElement, user: string | undefined): void {
+function markAvatar(element: HTMLElement, user: string | undefined): void {
   const avatar = user === undefined ? null : userAvatar(user);
   setData(element, 'lnExtAvatarCoach', avatar && String(avatar.coach));
   setData(element, 'lnExtAvatarColor', avatar && avatar.color);

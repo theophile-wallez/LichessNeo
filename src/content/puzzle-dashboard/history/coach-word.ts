@@ -28,7 +28,7 @@ export interface Word {
 const SHARP = 0.65;
 const TOUGH = 0.4;
 /** A shorter run isn't worth a word. */
-export const RUN_WORTH = 3;
+const RUN_WORTH = 3;
 
 const line = (name: string, ...values: string[]): Line => ({ name, values });
 

@@ -24,7 +24,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 const FEET = -1.25;
 const DISTANCE = 7.4;
 /** What the camera shows, from the ground up: head and belly, or all of it, ears and antennae too. */
-export const FRAMINGS = { bust: [0.55, 2.45], full: [-0.2, 2.75] } as const;
+const FRAMINGS = { bust: [0.55, 2.45], full: [-0.2, 2.75] } as const;
 export type Framing = keyof typeof FRAMINGS;
 // Sharper than that costs more than it shows at the avatar's size.
 const MAX_PIXEL_RATIO = 2;

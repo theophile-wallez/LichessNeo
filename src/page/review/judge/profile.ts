@@ -27,7 +27,7 @@ export type ProfileMove = Pick<
 >;
 
 /** Under this share of winning chances the mover defends; over 100 minus it, they convert. */
-export const WORSE_OFF = 35;
+const WORSE_OFF = 35;
 
 const FOUND = new Set(['brilliant', 'great']);
 

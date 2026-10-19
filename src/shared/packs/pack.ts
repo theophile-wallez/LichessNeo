@@ -7,7 +7,7 @@ import { SoundNameSchema } from '#shared/sounds.ts';
 // sounds as data: URLs, so it needs nothing from GitHub again.
 
 /** Each piece as Lichess names its images (public/piece/<set>/wK.svg). */
-export const PieceNameSchema = z.enum([
+const PieceNameSchema = z.enum([
   'wK',
   'wQ',
   'wR',

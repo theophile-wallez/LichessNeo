@@ -12,7 +12,7 @@ export const pause = (milliseconds: number): Promise<void> =>
     setTimeout(resolve, milliseconds);
   });
 
-export const whenVisible = (): Promise<void> =>
+const whenVisible = (): Promise<void> =>
   new Promise(resolve => {
     if (!document.hidden) {
       resolve();

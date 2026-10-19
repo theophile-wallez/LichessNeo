@@ -10,7 +10,7 @@ const OPEN = 'ln-ext-open';
 const SECTION = '#topnav > section';
 
 /** Opens this section of the drawer, and closes the others. */
-export function openSection(section: HTMLElement | null): void {
+function openSection(section: HTMLElement | null): void {
   for (const each of queryAll(document, SECTION, HTMLElement)) {
     each.classList.toggle(OPEN, each === section);
   }

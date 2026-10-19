@@ -32,7 +32,7 @@ export type FurTuning = z.infer<typeof FurTuningSchema>;
 
 export const PLAIN_FUR: FurTuning = { length: 1, density: 1, layers: 1 };
 
-export const DEFAULTS: Settings = {
+const DEFAULTS: Settings = {
   actor: 'coach-1',
   framing: 'bust',
   mood: 'neutral',

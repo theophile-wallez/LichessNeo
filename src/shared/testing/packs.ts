@@ -6,7 +6,7 @@ export const IMAGE = 'data:image/png;base64,iVBORw0KGgo=';
 export const SOUND = 'data:audio/mpeg;base64,SUQz';
 
 /** Twelve SVGs, each naming its pack and piece. */
-export const pieceImages = (tag: string): NonNullable<Pack['pieces']> =>
+const pieceImages = (tag: string): NonNullable<Pack['pieces']> =>
   PiecesSchema.parse(
     Object.fromEntries(
       PIECE_NAMES.map(name => [

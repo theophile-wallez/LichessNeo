@@ -16,7 +16,7 @@ function sectionTitle(text: string, count: number | null): HTMLElement {
   return title;
 }
 
-export function syncStreamerSections(): void {
+function syncStreamerSections(): void {
   const lists = queryAll(document, '.streamer-list > .list', HTMLElement);
   for (const list of lists) {
     if (list.previousElementSibling?.classList.contains(SECTION)) continue;

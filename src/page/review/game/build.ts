@@ -7,7 +7,7 @@ import type { Review, JudgedMove } from '#page/review/session.ts';
 
 // The game's review, rebuilt from what's known of its positions.
 
-export interface BuildInput {
+interface BuildInput {
   readonly nodes: readonly GamePosition[];
   readonly deep: readonly (PositionRecord | undefined)[];
   readonly rough: readonly (PositionRecord | undefined)[];

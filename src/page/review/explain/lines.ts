@@ -28,7 +28,7 @@ export const bestRequest = (move: JudgedMove): LineRequest | null =>
     : null;
 
 /** The line after an error, starting with the engine's best reply. */
-export const punishmentRequest = (move: JudgedMove): LineRequest | null =>
+const punishmentRequest = (move: JudgedMove): LineRequest | null =>
   isError(move.moveClass) && move.after.best
     ? { fen: move.position.fen, first: move.after.best }
     : null;

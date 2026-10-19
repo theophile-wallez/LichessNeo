@@ -25,7 +25,7 @@ import { evaluationLevel } from './trajectory.ts';
 /** The tactic a fact is about, which the bubble names on a tag. */
 export type Theme = 'fork' | 'hanging' | 'mate' | 'sacrifice';
 
-export interface Fact {
+interface Fact {
   readonly text: string;
   readonly theme: Theme | null;
 }

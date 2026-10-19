@@ -19,7 +19,7 @@ import { mouthOutline, type MouthShape } from './mouth-outline.ts';
 // The face's features: glossy black beads (eyes, nose, mouth) sitting on the
 // fur, and brows that only show when the mood needs them.
 
-export const gloss = new MeshPhysicalMaterial({
+const gloss = new MeshPhysicalMaterial({
   color: '#0c0b12',
   roughness: 0.22,
   clearcoat: 1,

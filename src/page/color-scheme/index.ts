@@ -7,7 +7,7 @@ import { onColorScheme, type ColorScheme } from '#shared/protocol.ts';
 // stays on.
 
 /** Lichess's `bg` preference for the scheme: `transp` keeps the background picture. */
-export function backgroundOf(scheme: ColorScheme, current: string): string {
+function backgroundOf(scheme: ColorScheme, current: string): string {
   return current.includes('transp') ? `transp ${scheme}` : scheme;
 }
 

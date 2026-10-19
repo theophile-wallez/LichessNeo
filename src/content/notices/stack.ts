@@ -2,11 +2,11 @@
 // (emilkowal.ski/ui/building-a-toast-component), apart from the DOM.
 
 /** The toasts shown at once; older ones wait, hidden, behind them. */
-export const VISIBLE_TOASTS = 3;
+const VISIBLE_TOASTS = 3;
 /** How far each toast behind peeks out over the one in front, collapsed. */
 const PEEK = 10;
 /** Between two toasts, expanded. */
-export const TOAST_GAP = 12;
+const TOAST_GAP = 12;
 const SHRINK = 0.05;
 
 export interface Size {

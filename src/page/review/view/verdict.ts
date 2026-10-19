@@ -55,7 +55,7 @@ export interface CoachComment {
   readonly advice: Advice | null;
 }
 
-export interface Advice {
+interface Advice {
   readonly note: ClockNote;
   readonly text: string;
 }

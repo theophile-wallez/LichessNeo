@@ -14,7 +14,7 @@ export const keyMoments = (review: Pick<Review, 'draft'>): JudgedMove[] =>
   review.draft.flatMap(move => (move && GRAPH_DOTS.has(move.moveClass) ? [move] : []));
 
 /** "16. h5" for White, "16… h5" for Black. */
-export const moveLabel = ({ ply, san }: Pick<JudgedMove, 'ply' | 'san'>): string =>
+const moveLabel = ({ ply, san }: Pick<JudgedMove, 'ply' | 'san'>): string =>
   `${Math.ceil(ply / 2)}${ply % 2 === 1 ? '.' : '…'} ${san}`;
 
 export function momentsMarkup(review: Review, ply: number, language: ReviewLanguage): SafeHtml {

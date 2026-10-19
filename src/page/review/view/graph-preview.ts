@@ -35,7 +35,7 @@ function cell(square: Square, orientation: Color): string {
   return `--x:${white ? file : 7 - file};--y:${white ? 7 - rank : rank}`;
 }
 
-export function boardMarkup({ fen, lastMove }: PreviewPosition, orientation: Color): SafeHtml {
+function boardMarkup({ fen, lastMove }: PreviewPosition, orientation: Color): SafeHtml {
   const board = parsePlacement(fen.split(' ')[0] ?? '');
   const lit = [lastMove?.slice(0, 2), lastMove?.slice(2, 4)].flatMap(text => {
     const square = text === undefined ? null : parseSquare(text);

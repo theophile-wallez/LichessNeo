@@ -45,7 +45,7 @@ function toggle(): void {
 }
 
 /** Adds the toggle after the logo, and each section's label to its flyout. */
-export function dressSidebar(): void {
+function dressSidebar(): void {
   const title = queryOne(document, '#top .site-title', HTMLElement);
   if (!title || document.getElementById(TOGGLE_ID)) return;
   const button = createElement('button', { id: TOGGLE_ID, attrs: { type: 'button' } });

@@ -51,7 +51,7 @@ const BOTTOM = -0.9;
 const LEVEL = 0.42;
 
 /** What a mood does to the soda; each eases in. */
-export interface Brew {
+interface Brew {
   /** The soda's height, off its rest. */
   readonly level: number;
   /** How far it sloshes from side to side, and how fast. */

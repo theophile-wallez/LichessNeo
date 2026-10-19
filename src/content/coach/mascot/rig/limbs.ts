@@ -173,7 +173,7 @@ const FORWARD = new Vector3(0, 0, 1);
 const UP = new Vector3(0, 1, 0);
 
 /** The arm's rotation along `direction`, its palm turned to the viewer as far as it can. */
-export function palmForward(direction: Vector3, into: Matrix4): Matrix4 {
+function palmForward(direction: Vector3, into: Matrix4): Matrix4 {
   const along = direction.clone().negate();
   const facing = Math.abs(along.dot(FORWARD)) > 0.9 ? UP.clone() : FORWARD.clone();
   facing.addScaledVector(along, -facing.dot(along)).normalize();

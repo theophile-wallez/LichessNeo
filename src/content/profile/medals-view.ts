@@ -35,12 +35,12 @@ const count = (id: MedalId, value: number): string =>
   new Intl.NumberFormat(pageLocale(), UNITS[id]).format(value);
 
 /** The count against the next step, the unit once: "7 / 10 years". */
-export function countText({ id, value, next }: Medal): string {
+function countText({ id, value, next }: Medal): string {
   if (next === null) return count(id, value);
   return `${new Intl.NumberFormat(pageLocale()).format(value)} / ${count(id, next)}`;
 }
 
-export function tipText({ id, metal, next }: Medal): string {
+function tipText({ id, metal, next }: Medal): string {
   const won = message(metal === null ? 'medalLocked' : METAL_NAMES[metal]);
   const step = next === null ? message('medalTop') : message('medalNext', count(id, next));
   return `${message(NAMES[id])} · ${won} · ${step}`;

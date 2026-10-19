@@ -127,7 +127,7 @@ export interface LiveState {
 }
 
 /** Explain's engine lines, by position and first move (explain/lines.ts). */
-export interface LineLookups {
+interface LineLookups {
   readonly found: Map<string, readonly string[]>;
   busy: boolean;
 }
@@ -148,7 +148,7 @@ export interface AvatarState {
   avatar: HTMLElement | null;
 }
 
-export interface Stream {
+interface Stream {
   state: StreamState;
   /** The typing's interval, 0 when idle. */
   timer: number;

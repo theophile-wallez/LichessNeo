@@ -30,7 +30,7 @@ const SAMPLE: PlayerSummary = {
 };
 
 /** The result `?ln-ext-end=` asks for, or null. */
-export function previewResult(search: string): Result | null {
+function previewResult(search: string): Result | null {
   const asked = new URLSearchParams(search).get(PARAM);
   return RESULTS.find(result => result === asked) ?? null;
 }

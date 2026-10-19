@@ -12,16 +12,9 @@ import { isTactical } from './tactical.ts';
 // rating; the estimate is the posterior's mean. Without a rating (an
 // anonymous player, the AI) the population is the prior.
 
-export type PhaseVerdict =
-  | 'book'
-  | 'best'
-  | 'excellent'
-  | 'good'
-  | 'inaccuracy'
-  | 'mistake'
-  | 'blunder';
+type PhaseVerdict = 'book' | 'best' | 'excellent' | 'good' | 'inaccuracy' | 'mistake' | 'blunder';
 
-export interface PlayerRating {
+interface PlayerRating {
   readonly elo: number;
   /** Null for a phase the player made no move in. */
   readonly phases: Readonly<Record<Phase, PhaseVerdict | null>>;
@@ -29,7 +22,7 @@ export interface PlayerRating {
 
 export type GameRating = Readonly<Record<Color, PlayerRating | null>>;
 
-export type RatedMove = Pick<
+type RatedMove = Pick<
   MoveVerdict,
   'color' | 'moveClass' | 'ply' | 'loss' | 'before' | 'previousPosition'
 >;

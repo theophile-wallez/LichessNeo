@@ -24,7 +24,7 @@ const RedirectSchema = z.object({
 
 const MessageSchema = z.object({ t: z.string() });
 
-export type PairingCookie = z.infer<typeof CookieSchema>;
+type PairingCookie = z.infer<typeof CookieSchema>;
 
 export interface Paired {
   readonly url: string;
@@ -37,7 +37,7 @@ export type SeekRequest =
   | { readonly kind: 'like'; readonly gameId: string };
 
 /** What the seek uses of a WebSocket. */
-export interface LobbySocket {
+interface LobbySocket {
   readonly readyState: number;
   send(data: string): void;
   close(): void;

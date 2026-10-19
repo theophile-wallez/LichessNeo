@@ -13,7 +13,7 @@ import { CHROMA_STEPS, editorMarkup } from './theme-editor-markup.ts';
 // one, or one of the user's to change. While it's open the whole page shows
 // the theme as it's made; closing without saving gives back the picked ones.
 
-export interface Draft {
+interface Draft {
   /** The user's theme being changed, or null for a new one. */
   readonly id: string | null;
   readonly name: string;

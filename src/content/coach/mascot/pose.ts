@@ -1,6 +1,6 @@
 // A mascot's pose: its face's, its body's and its arms' numbers, which each mood sets.
 
-export type Direction = readonly [number, number, number];
+type Direction = readonly [number, number, number];
 
 export interface Pose {
   readonly smile: number;
@@ -26,7 +26,7 @@ export interface Pose {
 }
 
 /** The pose's numbers, which ease from one mood to the next. */
-export const POSE_KEYS = [
+const POSE_KEYS = [
   'smile',
   'open',
   'width',

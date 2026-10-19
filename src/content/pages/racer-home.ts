@@ -67,7 +67,7 @@ function part(className: string, markup: SafeHtml): HTMLElement {
   return element;
 }
 
-export function syncRacerHome(): void {
+function syncRacerHome(): void {
   const main = queryOne(document, 'main.racer-home', HTMLElement);
   if (!main) return;
   let scene = queryOne(main, `:scope > .${SCENE}`, HTMLElement);

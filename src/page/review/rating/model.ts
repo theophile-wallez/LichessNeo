@@ -4,7 +4,7 @@ import modelData from './model.json' with { type: 'json' };
 // The game rating's model, fitted on Lichess's own games by
 // tools/game-rating/fit.py, which writes model.json.
 
-export const SpeedSchema = z.enum(['bullet', 'blitz', 'rapid', 'classical']);
+const SpeedSchema = z.enum(['bullet', 'blitz', 'rapid', 'classical']);
 export type Speed = z.infer<typeof SpeedSchema>;
 
 /** The model's phase keys: opening, tactics, strategy, endgame. */

@@ -99,7 +99,7 @@ function themesShower(card: HTMLElement): (settings: Settings) => void {
 }
 
 /** Lichess's scheme, from what its Theme menu last set (`transp …` with a background picture). */
-export function lichessScheme(): ColorScheme {
+function lichessScheme(): ColorScheme {
   const background = document.body.dataset.theme ?? '';
   return ColorSchemeSchema.options.find(scheme => background.includes(scheme)) ?? 'dark';
 }

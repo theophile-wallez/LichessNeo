@@ -44,7 +44,7 @@ export function gaugeScore(pearl: string): GaugeScore {
 }
 
 /** White's win chances, 0 to 100, from the pearl; a mate is all or nothing. */
-export function whiteShare(pearl: string): number | null {
+function whiteShare(pearl: string): number | null {
   const score = readPearl(pearl);
   if (!score) return null;
   if (score.mate) return score.lead === 'white' ? 100 : 0;

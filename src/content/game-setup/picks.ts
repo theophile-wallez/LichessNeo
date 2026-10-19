@@ -7,15 +7,15 @@ import { CORRESPONDENCE_GLYPH, parseMinutes, presetSpeed, SPEED_GLYPHS, speedOf 
 // always shown, the time control's first; the variant's opens its menu, as Lichess's
 // own button did. The game mode stays Lichess's own control, over the row.
 
-export const PARTS = ['variant', 'time', 'side'] as const;
-export type Part = (typeof PARTS)[number];
+const PARTS = ['variant', 'time', 'side'] as const;
+type Part = (typeof PARTS)[number];
 /** Lichess's sections of the setup: the tiles' parts, the game mode and the computer's level. */
-export type Section = Part | 'mode' | 'level';
+type Section = Part | 'mode' | 'level';
 type Panel = 'time' | 'side';
 const DEFAULT_PANEL: Panel = 'time';
 
 /** What a tile shows: Lichess's glyph or a pick our stylesheet draws, and the pick's name. */
-export interface Shown {
+interface Shown {
   readonly glyph: string | null;
   readonly pick: string | null;
   readonly value: string;
@@ -39,7 +39,7 @@ const textOf = (root: ParentNode, selector: string): string =>
   queryOne(root, selector, HTMLElement)?.textContent.trim() ?? '';
 
 /** Lichess's sections of the setup, by the part each is. */
-export function findParts(content: HTMLElement): Map<Section, HTMLElement> {
+function findParts(content: HTMLElement): Map<Section, HTMLElement> {
   const parts = new Map<Section, HTMLElement>();
   const add = (part: Section, element: HTMLElement | null | undefined): void => {
     if (element) parts.set(part, element);
@@ -91,7 +91,7 @@ function checkedShown(part: HTMLElement): Shown {
 }
 
 /** What a part's tile shows, read off Lichess's control. */
-export function shownOf(part: Part, element: HTMLElement): Shown {
+function shownOf(part: Part, element: HTMLElement): Shown {
   if (part === 'time') return timeShown(element);
   if (part === 'side') return checkedShown(element);
   const icon = queryOne(element, '.mselect__label .icon', HTMLElement);

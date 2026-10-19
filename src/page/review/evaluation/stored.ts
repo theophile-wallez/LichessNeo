@@ -17,7 +17,7 @@ export const StoredRecordSchema = z.union([
   z.object({ cp: z.number(), ...StoredFields }),
   z.object({ mate: z.number(), ...StoredFields }),
 ]);
-export type StoredRecord = z.infer<typeof StoredRecordSchema>;
+type StoredRecord = z.infer<typeof StoredRecordSchema>;
 
 function decode(stored: StoredRecord): PositionRecord {
   const fields = { whiteWinChance: stored.wp, secondLineWinChance: stored.wp2, best: stored.best };

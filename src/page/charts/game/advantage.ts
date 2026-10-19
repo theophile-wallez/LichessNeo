@@ -10,7 +10,7 @@ import type { AdvantagePoint, Phases } from './series.ts';
 // The server analysis' chart, as the review's graph reads: White's winning
 // chances as an area in White's color, rising as White gets ahead.
 
-export const WHITE = 'var(--ln-ext-side-white)';
+const WHITE = 'var(--ln-ext-side-white)';
 
 export interface AdvantageChart {
   readonly points: readonly AdvantagePoint[];

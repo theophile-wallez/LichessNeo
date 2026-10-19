@@ -14,7 +14,7 @@ export interface IconOptions {
 }
 
 // Thicker than the package's 1.5: ours show at 14 to 24px, beside bold text.
-export const STROKE_WIDTH = 2;
+const STROKE_WIDTH = 2;
 
 const TAGS: ReadonlySet<string> = new Set([
   'path',

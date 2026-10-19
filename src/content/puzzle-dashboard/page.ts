@@ -16,7 +16,7 @@ const DAYS_IN = /\/dashboard\/(\d+)\//;
 const PAGE = /\/training\/dashboard(?:\/(\d+)\/(dashboard|improvementAreas|strengths))?\/?$/;
 const DEFAULT_DAYS = 30;
 
-export type View = 'dashboard' | 'improvementAreas' | 'strengths';
+type View = 'dashboard' | 'improvementAreas' | 'strengths';
 
 export interface Shown {
   readonly days: number;

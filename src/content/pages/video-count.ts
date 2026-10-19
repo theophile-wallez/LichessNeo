@@ -19,7 +19,7 @@ export function videoCount(intro: string): number | null {
   return Number.isSafeInteger(count) ? count : null;
 }
 
-export function syncVideoCount(): void {
+function syncVideoCount(): void {
   const title = queryOne(
     document,
     'main.video > .page-menu__content > .box__top > h1',

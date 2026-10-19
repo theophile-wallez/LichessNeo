@@ -7,7 +7,7 @@ const channel = (value: number): number => {
 };
 
 /** The relative luminance of a `#rrggbb` color. */
-export function luminance(hex: string): number {
+function luminance(hex: string): number {
   const [red, green, blue] = [1, 3, 5].map(start =>
     channel(Number.parseInt(hex.slice(start, start + 2), 16)),
   );

@@ -2,8 +2,8 @@
 // player's language (round's Messenger translates with the default language), so each
 // is known by that text, with the `i18n.site` key that says it in the page's language.
 
-export type ChatTopic = 'rematch' | 'draw' | 'takeback' | 'time';
-export type ChatTone = 'offer' | 'accept' | 'decline' | 'cancel';
+type ChatTopic = 'rematch' | 'draw' | 'takeback' | 'time';
+type ChatTone = 'offer' | 'accept' | 'decline' | 'cancel';
 
 export interface ChatEvent {
   readonly topic: ChatTopic;

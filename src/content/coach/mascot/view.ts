@@ -164,7 +164,7 @@ export interface MascotOptions {
   readonly facing?: Facing;
 }
 
-export type Facing = 'left' | 'right';
+type Facing = 'left' | 'right';
 
 /** A live mascot drawn in `host`, or null where the browser has no WebGL. */
 export function mountMascot(host: HTMLElement, options: MascotOptions = {}): MascotView | null {

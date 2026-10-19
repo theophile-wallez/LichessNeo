@@ -10,7 +10,7 @@ import { BLEED, createSprites } from './sprites.ts';
 // board's keys and under its pieces (styles/board/backlit.css). It draws only
 // while something is lit, then stops: a board at rest costs nothing.
 
-export interface Board {
+interface Board {
   readonly container: HTMLElement;
   readonly orientation: () => Color;
 }

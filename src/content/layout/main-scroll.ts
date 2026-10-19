@@ -9,7 +9,7 @@ import type { Feature } from '#shared/features.ts';
 
 const desktop = window.matchMedia('(min-width: 1020px)');
 
-export function relayMainScroll(event: Event): void {
+function relayMainScroll(event: Event): void {
   if (event.target instanceof HTMLElement && event.target.id === 'main-wrap') {
     window.dispatchEvent(new Event('scroll'));
   } else if (event.target === document && desktop.matches && window.scrollY !== 0) {

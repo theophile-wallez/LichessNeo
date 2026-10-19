@@ -9,7 +9,7 @@ import type { Toaster } from './toaster.ts';
 
 const ID = 'announce';
 
-export const announcementText = (announce: Element): string =>
+const announcementText = (announce: Element): string =>
   [...announce.childNodes]
     .filter(node => node.nodeType === Node.TEXT_NODE)
     .map(node => node.textContent)

@@ -57,10 +57,7 @@ const FORCED = 5;
  * class, not its loss: the engine's move can read a few points down at another depth),
  * the opponent's move between all but forced.
  */
-export function inPunishment(
-  previousMove: MoveVerdict | null | undefined,
-  before: number,
-): boolean {
+function inPunishment(previousMove: MoveVerdict | null | undefined, before: number): boolean {
   if (!previousMove || before < AHEAD) return false;
   if (previousMove.loss >= PUNISHABLE) return true;
   const own = previousMove.previousMove;

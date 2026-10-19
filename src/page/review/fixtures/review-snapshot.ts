@@ -28,7 +28,7 @@ const RENAMED: readonly (readonly [string, string])[] = [
 // as buttons that go to their moves, where it wrote the bare number.
 const COUNT_BUTTON = /<button class="ln-ext-t-jump"[^>]*>(\d+)<\/button>/g;
 
-export function compact(markup: string): string {
+function compact(markup: string): string {
   return RENAMED.reduce((text, [port, original]) => text.replaceAll(port, original), markup)
     .replace(COUNT_BUTTON, '$1')
     .replace(

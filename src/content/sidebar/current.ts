@@ -10,11 +10,10 @@ import { onEveryTick } from '#content/sync-loop.ts';
 const LINKS = '#topnav section a[href], #ln-ext-donate';
 
 /** The path without a language prefix (/fr/training), which some of Lichess's pages carry. */
-export const canonicalPath = (path: string): string =>
-  path.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?(?=\/)/, '');
+const canonicalPath = (path: string): string => path.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?(?=\/)/, '');
 
 /** How well a link's path matches the page's: its length, or -1 if it doesn't. */
-export function matchLength(linkPath: string, pagePath: string): number {
+function matchLength(linkPath: string, pagePath: string): number {
   if (linkPath === '/') return pagePath === '/' ? 1 : -1;
   const matches = pagePath === linkPath || pagePath.startsWith(`${linkPath}/`);
   return matches ? linkPath.length : -1;

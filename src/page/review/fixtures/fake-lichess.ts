@@ -15,7 +15,7 @@ export interface FakeNode {
   children: FakeNode[];
 }
 
-export interface FakePosition {
+interface FakePosition {
   readonly ply: number;
   readonly fen: string;
   readonly uci?: string | undefined;
