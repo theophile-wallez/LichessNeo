@@ -10,17 +10,23 @@ main.round .rcontrols {
 }
 
 /* While playing: equal big grey buttons, resign first, then abort or takeback, then draw.
- * Lichess's analysis link and menu stay hidden, as on its own desktop layout. */
+ * Lichess's analysis link and menu stay hidden, as on its own desktop layout.
+ * Margins, not a gap, so a folded button leaves none: the row reaches 8px past its box.
+ * Lichess centers the row: once cancel is gone, resign would jump to the middle. */
 main.round .rcontrols .ricons {
   display: flex !important;
-  gap: 8px;
+  justify-content: flex-start !important;
   margin: 4px 0 0 !important;
+  margin-inline-end: -8px !important;
 }
 
 main.round .rcontrols .ricons .fbt:is(.analysis, .board-menu-toggle-btn) {
   display: none !important;
 }
 
+/* Each button's width is capped at its share, so the caps add up to the row and a
+ * button folding gives its room to the one opening, as the review's nav (bubble.css).
+ * A button coming back gets its room first, then fades in: it's never seen squeezed. */
 main.round .rcontrols .ricons .fbt {
   position: static !important;
   flex: 1 1 0;
@@ -29,8 +35,13 @@ main.round .rcontrols .ricons .fbt {
   justify-content: center;
   box-sizing: border-box;
   width: auto !important;
+  min-width: 0;
+  max-width: calc(100% / 3 - 8px);
   height: 48px;
+  margin: 0 !important;
+  margin-inline-end: 8px !important;
   padding: 0 !important;
+  overflow: hidden;
   border: 0 !important;
   border-radius: 8px !important;
   background: var(--ln-ext-btn-grey) !important;
@@ -41,7 +52,12 @@ main.round .rcontrols .ricons .fbt {
   visibility: visible !important;
   transform: none !important;
   filter: none !important;
-  transition: background 0.15s !important;
+  transition:
+    max-width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease-out 0.2s,
+    transform 0.2s ease-out 0.2s,
+    background-color 0.15s !important;
 }
 
 main.round .rcontrols .ricons .fbt:hover:not(:disabled) {
@@ -54,17 +70,43 @@ main.round .rcontrols .ricons .fbt:disabled {
   cursor: default;
 }
 
-main.round .rcontrols .ricons :is(.resign, .act-confirm) {
+/* A resignation's confirm and cancel stay where resign was; a draw's, where draw was. */
+main.round
+  .rcontrols
+  .ricons
+  :is(.resign, .act-confirm .yes:not(.draw-yes), .act-confirm .yes:not(.draw-yes) + .no) {
   order: -1;
 }
 
-/* Confirming a resignation or a draw offer: only confirm (red or primary) and cancel. */
+/* Confirming a resignation or a draw offer: Lichess swaps that button for confirm (red or
+ * primary) and cancel. The others fade out where they are, then their room folds away
+ * while the pair opens out to halves. */
 main.round .rcontrols .ricons.confirm > .fbt {
-  display: none !important;
+  max-width: 0;
+  margin-inline-end: 0 !important;
+  opacity: 0;
+  visibility: hidden !important;
+  transform: scale(0.85) !important;
+  transition:
+    opacity 0.12s ease-in,
+    transform 0.12s ease-in,
+    max-width 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.12s,
+    margin 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.12s,
+    visibility 0s 0.12s !important;
 }
 
 main.round .rcontrols .ricons .act-confirm {
   display: contents;
+}
+
+main.round .rcontrols .ricons .act-confirm .fbt {
+  max-width: calc(50% - 8px);
+  transition:
+    max-width 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.12s,
+    margin 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.12s,
+    opacity 0.2s ease-out 0.27s,
+    transform 0.2s ease-out 0.27s,
+    background-color 0.2s !important;
 }
 
 main.round .rcontrols .ricons .act-confirm .yes {
@@ -84,6 +126,28 @@ main.round .rcontrols .ricons .act-confirm .yes.draw-yes {
 
 main.round .rcontrols .ricons .act-confirm .yes.draw-yes:hover {
   background: var(--ln-ext-btn-primary-hover) !important;
+}
+
+/* The pair is drawn anew: confirm starts as the grey button it replaces, cancel folded
+ * and faded out, to fade in once it has most of its room.
+ * Cancelling draws that button anew too, from the confirm's half; on a page's first draw
+ * its share is narrower than that, so it doesn't move. */
+@starting-style {
+  main.round .rcontrols .ricons .act-confirm > .fbt.yes {
+    max-width: calc(100% / 3 - 8px);
+    background-color: var(--ln-ext-btn-grey) !important;
+  }
+
+  main.round .rcontrols .ricons .act-confirm > .fbt.no {
+    max-width: 0;
+    margin-inline-end: 0 !important;
+    opacity: 0;
+    transform: scale(0.85) !important;
+  }
+
+  main.round .rcontrols .ricons > .fbt:is(.resign, .draw-yes) {
+    max-width: calc(50% - 8px);
+  }
 }
 
 /* A draw or takeback offer: the question between a grey decline and a primary accept. */
