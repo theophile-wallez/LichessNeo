@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { queryAll } from '#shared/dom.ts';
 import { fakeLayout, rectAt } from '#shared/testing/layout.ts';
+import { nextFrame } from '#shared/testing/timers.ts';
 import { leavesPage, tabOffset } from './tab-bars.ts';
 import { createTabBars } from './tabs.ts';
 // Where the original put a chat bar's highlight, step by step.
@@ -41,11 +42,6 @@ function readBar(bar: HTMLElement, step: string): Record<string, string | null> 
 const elements = (selector: string): HTMLElement[] => queryAll(document, selector, HTMLElement);
 
 /** Lets the observers' callbacks run, then the frame they queue a placement for. */
-async function nextFrame(): Promise<void> {
-  await Promise.resolve();
-  await new Promise(resolve => requestAnimationFrame(resolve));
-}
-
 afterEach(() => {
   document.body.innerHTML = '';
 });

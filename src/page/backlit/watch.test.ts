@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { parsePlacement } from '#shared/chess/fen.ts';
 import type { Square } from '#shared/chess/types.ts';
 import { createCustomElement } from '#shared/dom.ts';
+import { nextFakeFrame } from '#shared/testing/timers.ts';
 import { addSquare, renderBoard } from '#page/sounds/fixtures/boards.ts';
 import { type Arrival, watchMoves } from './watch.ts';
 
@@ -28,11 +29,6 @@ function show(board: Element, { placement, lastMove, check, sliding }: Shown): v
 }
 
 /** Lets the observer's callback run, then the frame it reads the board in. */
-async function nextFrame(): Promise<void> {
-  await Promise.resolve();
-  vi.advanceTimersToNextFrame();
-}
-
 let arrivals: Arrival[];
 let stop: () => void;
 
@@ -63,35 +59,35 @@ describe('the backlit board’s moves', () => {
       lastMove: ['e2', 'e4'],
     } as const;
     show(board, moved);
-    await nextFrame();
+    await nextFakeFrame();
     expect(arrivals).toEqual([
       { role: 'pawn', color: 'white', from: 'e2', to: 'e4', strong: false, check: null },
     ]);
     show(board, moved);
-    await nextFrame();
+    await nextFakeFrame();
     expect(arrivals).toHaveLength(1);
   });
 
   it('makes a capture and a promotion strong', async () => {
     const board = watch('4k3/1P6/8/3p4/4P3/8/8/4K3');
     show(board, { placement: '4k3/1P6/8/3P4/8/8/8/4K3', lastMove: ['e4', 'd5'] });
-    await nextFrame();
+    await nextFakeFrame();
     show(board, { placement: '4k3/1P6/3P4/8/8/8/8/4K3', lastMove: ['d5', 'd6'] });
-    await nextFrame();
+    await nextFakeFrame();
     show(board, { placement: '1N2k3/8/3P4/8/8/8/8/4K3', lastMove: ['b7', 'b8'] });
-    await nextFrame();
+    await nextFakeFrame();
     expect(arrivals.map(({ strong }) => strong)).toEqual([true, false, true]);
   });
 
   it('reads a check off the position, not off the mark Lichess leaves behind', async () => {
     const board = watch('4k3/8/8/8/8/8/8/R3K3');
     show(board, { placement: 'R3k3/8/8/8/8/8/8/4K3', lastMove: ['a1', 'a8'], check: 'e8' });
-    await nextFrame();
+    await nextFakeFrame();
     // The king steps away; Lichess's game and TV pages keep the mark on e8.
     show(board, { placement: 'R7/5k2/8/8/8/8/8/4K3', lastMove: ['e8', 'f7'], check: 'e8' });
-    await nextFrame();
+    await nextFakeFrame();
     show(board, { placement: '8/R4k2/8/8/8/8/8/4K3', lastMove: ['a8', 'a7'], check: 'e8' });
-    await nextFrame();
+    await nextFakeFrame();
     expect(arrivals.map(({ check }) => check)).toEqual(['e8', null, 'f7']);
   });
 
@@ -99,17 +95,17 @@ describe('the backlit board’s moves', () => {
     const board = watch();
     const placement = 'rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R';
     show(board, { placement, lastMove: ['g1', 'f3'], sliding: 'f3' });
-    await nextFrame();
+    await nextFakeFrame();
     expect(arrivals).toEqual([]);
     board.querySelector('piece.anim')?.classList.remove('anim');
-    await nextFrame();
+    await nextFakeFrame();
     expect(arrivals.map(({ to }) => to)).toEqual(['f3']);
     show(board, {
       placement: 'rnbqkb1r/pppppppp/5n2/8/8/5N2/PPPPPPPP/RNBQKB1R',
       lastMove: ['g8', 'f6'],
       sliding: 'f6',
     });
-    await nextFrame();
+    await nextFakeFrame();
     vi.advanceTimersByTime(800);
     expect(arrivals.map(({ to }) => to)).toEqual(['f3', 'f6']);
   });
@@ -129,7 +125,7 @@ describe('the backlit board’s moves', () => {
       return mark;
     });
     board.prepend(...hidden);
-    await nextFrame();
+    await nextFakeFrame();
     expect(arrivals.map(({ from, to }) => `${from}${to}`)).toEqual(['g1f3']);
   });
 
@@ -140,7 +136,7 @@ describe('the backlit board’s moves', () => {
       placement: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR',
       lastMove: ['e2', 'e4'],
     });
-    await nextFrame();
+    await nextFakeFrame();
     expect(arrivals).toEqual([]);
   });
 });

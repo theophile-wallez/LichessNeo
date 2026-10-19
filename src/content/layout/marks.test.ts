@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 import { setReadyState } from '#shared/testing/ready-state.ts';
-import { flush } from '#shared/testing/timers.ts';
+import { flush, nextFrame } from '#shared/testing/timers.ts';
 import { marks, syncMarks } from './marks.ts';
 // What the original script marked on the same pages.
 import legacy from './fixtures/legacy.json' with { type: 'json' };
@@ -14,11 +14,6 @@ const withoutNewMarks = (markup: string): string =>
   markup.replaceAll(/ data-ln-ext-menu="[^"]*"/g, '');
 
 /** Lets the observer's callback run, then the frame it asks for. */
-async function nextFrame(): Promise<void> {
-  await Promise.resolve();
-  await new Promise(resolve => requestAnimationFrame(resolve));
-}
-
 afterEach(() => {
   setReadyState('complete');
   document.body.innerHTML = '';
