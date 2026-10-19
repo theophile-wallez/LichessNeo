@@ -24,7 +24,9 @@ def knock(pitch, length=0.09, noise=0.35, decay=55.0):
     for i in range(int(RATE * length)):
         t = i / RATE
         tone = math.sin(2 * math.pi * pitch * t) + 0.5 * math.sin(2 * math.pi * pitch * 2.7 * t)
-        samples.append((0.6 * tone + noise * rng.uniform(-1, 1) * math.exp(-t * 400)) * math.exp(-t * decay))
+        samples.append(
+            (0.6 * tone + noise * rng.uniform(-1, 1) * math.exp(-t * 400)) * math.exp(-t * decay)
+        )
     return samples
 
 
@@ -37,7 +39,9 @@ def chime(start, end, length):
         pitch = start + (end - start) * min(1.0, t / (length * 0.4))
         phase += 2 * math.pi * pitch / RATE
         attack = min(1.0, t * 200)
-        samples.append(0.5 * (math.sin(phase) + 0.3 * math.sin(2 * phase)) * attack * math.exp(-t * 7))
+        samples.append(
+            0.5 * (math.sin(phase) + 0.3 * math.sin(2 * phase)) * attack * math.exp(-t * 7)
+        )
     return samples
 
 

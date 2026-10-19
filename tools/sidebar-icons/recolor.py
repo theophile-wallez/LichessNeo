@@ -27,11 +27,15 @@ SIZE = 96
 COVERAGE = 0.5
 BANDS = {
     # People's blue hair, in the drawings that map it: elsewhere it's shading.
-    'hair': lambda h, s, l: 218 <= h < 242 and 0.25 <= s < 0.62 and l < 0.75,
-    'slate': lambda h, s, l: 205 <= h < 245 and s < 0.45 and l < 0.55,
-    'purple': lambda h, s, l: 205 <= h < 292 and s >= 0.12,
-    'pink': lambda h, s, l: (h >= 292 or h < 8) and s >= 0.3,
-    'cyan': lambda h, s, l: 160 <= h < 205 and s >= 0.25,
+    'hair': lambda hue, saturation, lightness: (
+        218 <= hue < 242 and 0.25 <= saturation < 0.62 and lightness < 0.75
+    ),
+    'slate': lambda hue, saturation, lightness: (
+        205 <= hue < 245 and saturation < 0.45 and lightness < 0.55
+    ),
+    'purple': lambda hue, saturation, lightness: 205 <= hue < 292 and saturation >= 0.12,
+    'pink': lambda hue, saturation, lightness: (hue >= 292 or hue < 8) and saturation >= 0.3,
+    'cyan': lambda hue, saturation, lightness: 160 <= hue < 205 and saturation >= 0.25,
 }
 # The icons' colors: each a main one for the drawing's purple and two
 # supporting ones for its pink and its cyan. A band left out keeps its color;
@@ -105,15 +109,15 @@ for name, color in LINKS.items():
 
 def hls(pixel):
     r, g, b, _ = pixel
-    h, l, s = colorsys.rgb_to_hls(r / 255, g / 255, b / 255)
-    return h * 360, s, l
+    hue, lightness, saturation = colorsys.rgb_to_hls(r / 255, g / 255, b / 255)
+    return hue * 360, saturation, lightness
 
 
-def band_of(h, s, l, mapping):
+def band_of(hue, saturation, lightness, mapping):
     for name, test in BANDS.items():
         if name == 'hair' and name not in mapping:
             continue
-        if test(h, s, l):
+        if test(hue, saturation, lightness):
             return name if name != 'slate' or 'slate' in mapping else 'purple'
     return None
 
@@ -126,18 +130,18 @@ def recolor(image, mapping):
         for x in range(width):
             if pixels[x, y][3] < 16:
                 continue
-            h, s, l = hls(pixels[x, y])
-            band = band_of(h, s, l, mapping)
+            hue, saturation, lightness = hls(pixels[x, y])
+            band = band_of(hue, saturation, lightness, mapping)
             if band in mapping:
-                bands.setdefault(band, []).append((x, y, s, l))
+                bands.setdefault(band, []).append((x, y, saturation, lightness))
     for band, points in bands.items():
         target = mapping[band].lstrip('#')
-        th, tl, ts = colorsys.rgb_to_hls(*(int(target[i:i + 2], 16) / 255 for i in (0, 2, 4)))
+        th, tl, ts = colorsys.rgb_to_hls(*(int(target[i : i + 2], 16) / 255 for i in (0, 2, 4)))
         mid_l = statistics.median(p[3] for p in points)
         mid_s = statistics.median(p[2] for p in points)
-        for x, y, s, l in points:
-            new_l = min(0.97, max(0.04, tl + (l - mid_l) * 0.9))
-            new_s = min(1, ts * min(1.3, max(0.5, s / mid_s)))
+        for x, y, saturation, lightness in points:
+            new_l = min(0.97, max(0.04, tl + (lightness - mid_l) * 0.9))
+            new_s = min(1, ts * min(1.3, max(0.5, saturation / mid_s)))
             r, g, b = colorsys.hls_to_rgb(th, new_l, new_s)
             pixels[x, y] = (round(r * 255), round(g * 255), round(b * 255), pixels[x, y][3])
     return image
@@ -148,7 +152,7 @@ def normalize(image):
     left, top, right, bottom = alpha.getbbox()
     drawing = image.crop((left, top, right, bottom))
     side = max(drawing.size)
-    covered = sum(1 for a in drawing.getchannel('A').get_flattened_data() if a > 24) / side ** 2
+    covered = sum(1 for a in drawing.getchannel('A').get_flattened_data() if a > 24) / side**2
     # A dense drawing (a bag, a puzzle piece) shrinks to look as big as a sparse one (tools).
     scale = min(0.98, (COVERAGE / covered) ** 0.5)
     canvas_side = round(side / scale)
@@ -164,7 +168,9 @@ def main(source):
         return recolor(image.resize((512, 512), Image.LANCZOS), mapping)
 
     for name, mapping in SECTIONS.items():
-        normalize(drawing(name, mapping)).save(OUT / f'{name}.webp', 'WEBP', quality=90, alpha_quality=100, method=6)
+        normalize(drawing(name, mapping)).save(
+            OUT / f'{name}.webp', 'WEBP', quality=90, alpha_quality=100, method=6
+        )
         print(OUT.relative_to(ROOT) / f'{name}.webp')
 
 
