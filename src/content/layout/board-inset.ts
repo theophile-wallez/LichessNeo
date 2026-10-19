@@ -43,19 +43,17 @@ function setInset({ main, container, wrapper }: BoardParts): void {
     setStyleProperty(main, `--ln-ext-inset-${side}`, `${pixels}px`);
 }
 
-export function syncBoardInset(): void {
-  const board = findBoard();
-  if (board) setInset(board);
+/** A tick that measures the inset when the board is new or resized, never otherwise. */
+export function watchBoardInset(): () => void {
+  const watch = createSizeWatch();
+  return () => {
+    const board = findBoard();
+    // The squares only move inside the wrapper when one of the two resizes.
+    if (board && watch.changed([board.main, board.container, board.wrapper])) setInset(board);
+  };
 }
 
 export const boardInset: Feature = {
   name: 'board inset',
-  start: () => {
-    const watch = createSizeWatch();
-    onEveryTick('board inset', () => {
-      const board = findBoard();
-      // The squares only move inside the wrapper when one of the two resizes.
-      if (board && watch.changed([board.main, board.container, board.wrapper])) setInset(board);
-    });
-  },
+  start: () => onEveryTick('board inset', watchBoardInset()),
 };

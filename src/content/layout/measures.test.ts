@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { rectBetween } from '#shared/testing/layout.ts';
-import { squaresInset, syncBoardInset } from './board-inset.ts';
-import { syncControlsHeight } from './controls-height.ts';
+import { squaresInset, watchBoardInset } from './board-inset.ts';
+import { watchControlsHeight } from './controls-height.ts';
 // What the original script measured on the same pages.
 import legacy from './fixtures/legacy-measures.json' with { type: 'json' };
 
@@ -38,43 +38,44 @@ describe('squaresInset', () => {
   });
 });
 
-describe('syncBoardInset', () => {
+describe('watchBoardInset', () => {
   it.each(legacy.insets)('sets what the original set', ({ page, container, wrap, style }) => {
     document.body.innerHTML = page;
     measureAs('cg-container', container);
     measureAs('.cg-wrap', wrap);
-    syncBoardInset();
+    watchBoardInset()();
     expect(mainStyle()).toBe(style);
   });
 
   it.each(legacy.noBoard)('leaves $page alone', ({ page, style }) => {
     document.body.innerHTML = page;
-    syncBoardInset();
+    watchBoardInset()();
     expect(mainStyle()).toBe(style);
   });
 });
 
-describe('syncControlsHeight', () => {
+describe('watchControlsHeight', () => {
   it.each(legacy.heights)('sets $height as the original did', ({ page, height, style }) => {
     document.body.innerHTML = page;
     measureAs('.rcontrols, .analyse__controls', { top: 0, left: 0, right: 10, bottom: height });
-    syncControlsHeight();
+    watchControlsHeight()();
     expect(mainStyle()).toBe(style);
   });
 
   it.each(legacy.noControls)('handles $page as the original did', ({ page, style }) => {
     document.body.innerHTML = page;
-    syncControlsHeight();
+    watchControlsHeight()();
     expect(mainStyle()).toBe(style);
   });
 
   it('writes nothing while the height stays', () => {
     document.body.innerHTML = '<main class="analyse"><div class="analyse__controls"></div></main>';
     measureAs('.analyse__controls', { top: 0, left: 0, right: 10, bottom: 40 });
-    syncControlsHeight();
+    const tick = watchControlsHeight();
+    tick();
     const observer = new MutationObserver(() => {});
     observer.observe(document.body, { attributes: true, subtree: true });
-    syncControlsHeight();
+    tick();
     expect(observer.takeRecords()).toEqual([]);
     observer.disconnect();
   });

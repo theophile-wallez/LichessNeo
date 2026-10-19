@@ -22,20 +22,18 @@ function setHeight({ main, controls }: Panel): void {
   setStyleProperty(main, '--ln-ext-controls-h', `${height}px`);
 }
 
-export function syncControlsHeight(): void {
-  const panel = findPanel();
-  if (panel) setHeight(panel);
+/** A tick that measures the controls when they're new or resized, never otherwise. */
+export function watchControlsHeight(): () => void {
+  const watch = createSizeWatch();
+  return () => {
+    const panel = findPanel();
+    if (!panel) return;
+    const watched = panel.controls ? [panel.main, panel.controls] : [panel.main];
+    if (watch.changed(watched)) setHeight(panel);
+  };
 }
 
 export const controlsHeight: Feature = {
   name: 'controls height',
-  start: () => {
-    const watch = createSizeWatch();
-    onEveryTick('controls height', () => {
-      const panel = findPanel();
-      if (!panel) return;
-      const watched = panel.controls ? [panel.main, panel.controls] : [panel.main];
-      if (watch.changed(watched)) setHeight(panel);
-    });
-  },
+  start: () => onEveryTick('controls height', watchControlsHeight()),
 };
