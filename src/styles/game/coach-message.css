@@ -41,6 +41,8 @@ main.round .round__app .message::before {
   background: bottom center / auto 100% no-repeat;
   /* Lichess dims its icon: the still must look as the live one will. */
   opacity: 1 !important;
+  /* Its glyph is drawn as a Hugeicon's mask (theme/hugeicons/paint.css), which hid the still. */
+  mask: none;
 }
 
 html[data-ln-ext-coach='1'] main.round .round__app .message::before {
@@ -122,7 +124,9 @@ html[data-ln-ext-coach='26'] main.round .round__app .message::before {
   background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
 }
 
+/* The robot's still has room above its framing, for its antennas (theme/base.css). */
 html[data-ln-ext-ai] main.round .round__app .message::before {
+  height: calc(var(--ln-ext-coach-h) * 1.5);
   background-image: var(--ln-ext-computer-portrait);
 }
 

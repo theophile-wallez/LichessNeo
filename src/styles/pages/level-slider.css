@@ -60,7 +60,8 @@
   flex: none;
   height: 76px;
   aspect-ratio: 124 / 114;
-  background: bottom center / contain no-repeat;
+  /* Its still has room above the framing and at its sides (theme/base.css): the box cuts it. */
+  background: bottom center / auto 150% no-repeat;
   mask-image: linear-gradient(#000 74%, transparent);
   cursor: pointer;
 }

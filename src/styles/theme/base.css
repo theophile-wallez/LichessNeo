@@ -93,7 +93,8 @@
      the colors of levels 3–4 until a game says which (below). */
   --ln-ext-computer: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-bust-2.webp');
   --ln-ext-computer-bg: linear-gradient(160deg, #6a9cff, #2f56b8);
-  /* Its still in the coaches' framing, head and chest (game/coach-message.css). */
+  /* Its still, the live bust's first frame: the framing at 124 × 114 with half its height above
+     and a quarter of its width at each side, as game/coach-message.css spills its canvas. */
   --ln-ext-computer-portrait: url('chrome-extension://__MSG_@@extension_id__/img/coaches/robot-portrait-2.webp');
   /* The computer's avatar, on the robot's own color. */
   --ln-ext-computer-avatar:
