@@ -9,12 +9,13 @@ import { mountGraph } from './graph.ts';
 import { learnLabel } from './learn.ts';
 import { header } from './markup.ts';
 import { movesMarkup } from './summary-moves.ts';
+import { phasesMarkup } from './summary-phases.ts';
 import { playerName, playersMarkup, sideOrder, watchPlayerFocus } from './summary-players.ts';
 import { radarMarkup } from './summary-radar.ts';
 import { newGameMarkup } from './new-game.ts';
 
-// The summary: the graph and the two players over the moves and the
-// phases. It keeps its layout while the game is analyzed, filling in from
+// The summary: the graph and the two players over the moves, the phases'
+// verdicts and the profile. It keeps its layout while the game is analyzed, filling in from
 // the quick pass's draft, then at full depth. Each side has a color
 // (styles/review/summary.css) its card, bars and radar shape share.
 
@@ -54,7 +55,7 @@ function summaryMarkup(input: SummaryInput): SafeHtml {
         <div class="ln-ext-review__graph ln-ext-summary-graph"></div>
         ${playersMarkup(input)}
       </div>
-      <div class="ln-ext-review__body">${movesMarkup(input)}${radarMarkup({ profiles: profilesOf(review), names: namesOf(input), language, order: input.order })}</div>
+      <div class="ln-ext-review__body">${movesMarkup(input)}${phasesMarkup({ rating: review?.rating ?? null, language, order: input.order })}${radarMarkup({ profiles: profilesOf(review), names: namesOf(input), language, order: input.order })}</div>
       <div class="ln-ext-review__foot"><button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="moves" ${canStart ? '' : 'disabled'}>${language.ui.start}</button>${learn === null ? '' : html`<button class="ln-ext-btn ln-ext-review__learn" data-ln-ext="learn">${learn}</button>`}</div>`;
 }
 

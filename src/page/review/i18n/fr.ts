@@ -45,6 +45,25 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   best: 'Meilleur',
   analysing: 'Analyse de la partie…',
   moves: 'Coups',
+  phasesTitle: 'Phases',
+  phases: {
+    opening: {
+      name: 'Ouverture',
+      how: 'Les coups avant le milieu de partie, hors théorie, face à ce qu’on attend au classement du joueur.',
+    },
+    tactics: {
+      name: 'Positions tactiques',
+      how: 'Les coups du milieu de partie avec une tactique en jeu (un échec, une pièce en prise, une erreur à punir), face à ce qu’on attend au classement du joueur.',
+    },
+    strategy: {
+      name: 'Positions calmes',
+      how: 'Les autres coups du milieu de partie, face à ce qu’on attend au classement du joueur.',
+    },
+    endgame: {
+      name: 'Finale',
+      how: 'Les coups une fois qu’il reste six pièces ou moins, rois et pions à part, face à ce qu’on attend au classement du joueur.',
+    },
+  },
   profileTitle: 'Profil de jeu',
   profile: {
     opening: {

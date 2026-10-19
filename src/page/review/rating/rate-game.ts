@@ -12,7 +12,14 @@ import { isTactical } from './tactical.ts';
 // rating; the estimate is the posterior's mean. Without a rating (an
 // anonymous player, the AI) the population is the prior.
 
-type PhaseVerdict = 'book' | 'best' | 'excellent' | 'good' | 'inaccuracy' | 'mistake' | 'blunder';
+export type PhaseVerdict =
+  | 'book'
+  | 'best'
+  | 'excellent'
+  | 'good'
+  | 'inaccuracy'
+  | 'mistake'
+  | 'blunder';
 
 interface PlayerRating {
   readonly elo: number;

@@ -210,8 +210,8 @@
   line-height: 1;
 }
 
-/* How the score is worked out, in the tooltip. */
-.ln-ext-sum-radar__how {
+/* How the score is worked out, in the tooltip; the phases' rows have one too. */
+:is(.ln-ext-sum-radar__how, .ln-ext-sum-how) {
   display: inline-grid;
   place-items: center;
   width: 14px;
@@ -225,7 +225,7 @@
   cursor: help;
 }
 
-.ln-ext-sum-radar__how:hover {
+:is(.ln-ext-sum-radar__how, .ln-ext-sum-how):hover {
   background: var(--ln-ext-lift-15);
   color: var(--ln-ext-text-strong);
 }

@@ -32,15 +32,18 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
     const { T } = original;
     // Explain's lines, the summary's profile, the graph's views, the share button, the cost
     // bars, Retry, the tactics' tags, the clock's advice, the brief and the closed review's
-    // way back to the summary are new: the original had none. Its phase and player labels
-    // went with its table, its game rating's title and tip with its card, and the free
-    // board's first words are a title over a line now.
+    // way back to the summary are new: the original had none. Its phases are named for
+    // what they hold now, each with a tip; its player labels went with its table, its game
+    // rating's title and tip with its card, and the free board's first words are a title
+    // over a line now.
     const {
       bestWas,
       liveIntro: _liveIntro,
       lines: _lines,
       playedLike: _playedLike,
       moves: _moves,
+      phasesTitle: _phasesTitle,
+      phases: ourPhases,
       profileTitle: _profileTitle,
       profile: _profile,
       graphViews: _graphViews,
@@ -63,6 +66,7 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
       ...originalUi
     } = T;
     expect(ui).toEqual(originalUi);
+    expect([ourPhases.opening.name, ourPhases.endgame.name]).toEqual([T.phases.o, T.phases.e]);
     expect(bestWas('[[m:w:Nf3]]')).toBe(originalBestWas.replace('{m}', '[[m:w:Nf3]]'));
   });
 

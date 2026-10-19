@@ -1,5 +1,6 @@
 import type { SafeHtml } from '#shared/html.ts';
 import type { ProfileAxis } from '#page/review/judge/profile.ts';
+import type { Phase } from '#page/review/rating/phases.ts';
 import type { Theme } from '#page/review/coach/fact.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
@@ -71,8 +72,11 @@ export interface InterfaceStrings {
    * their accuracy, null while it's unknown.
    */
   readonly playedLike: (side: Color, elo: number | null) => readonly [string, string];
-  /** The summary's sections: the move classes, the phases' radar. */
+  /** The summary's sections: the move classes, the phases' verdicts, the profile's radar. */
   readonly moves: string;
+  readonly phasesTitle: string;
+  /** The verdicts' phases (rating/phases.ts): a name, and which moves it holds. */
+  readonly phases: Readonly<Record<Phase, { readonly name: string; readonly how: string }>>;
   readonly profileTitle: string;
   /** The profile radar's axes: a name, and how its score is worked out. */
   readonly profile: Readonly<Record<ProfileAxis, { readonly name: string; readonly how: string }>>;

@@ -38,7 +38,8 @@ opening's name and the page's asset URL.
   immutable. The UI's `JudgedMove` (`session.ts`) is one that may also name
   its opening.
 - `GameRatingInput` → `rateGame` → `GameRating`: per color, `{ elo, phases }`,
-  or null for a player without a move.
+  or null for a player without a move. The summary shows the phases' verdicts
+  as move classes (`view/summary-phases.ts`).
 - `CoachContext` (`gameId`, `coach`, `language`) → `explanation(move, context,
   opening)` → `CommentPart[]`: sentences, the droppable one going when the
   bubble lacks room.

@@ -57,6 +57,25 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   best: 'Best',
   analysing: 'Analyzing game…',
   moves: 'Moves',
+  phasesTitle: 'Phases',
+  phases: {
+    opening: {
+      name: 'Opening',
+      how: 'The moves before the middlegame, out of book, against what’s expected at the player’s rating.',
+    },
+    tactics: {
+      name: 'Tactical positions',
+      how: 'The middlegame’s moves with a tactic on the board (a check, a hanging piece, a mistake to punish), against what’s expected at the player’s rating.',
+    },
+    strategy: {
+      name: 'Quiet positions',
+      how: 'The middlegame’s other moves, against what’s expected at the player’s rating.',
+    },
+    endgame: {
+      name: 'Endgame',
+      how: 'The moves once six pieces or fewer are left, kings and pawns aside, against what’s expected at the player’s rating.',
+    },
+  },
   profileTitle: 'Profile',
   profile: {
     opening: {
