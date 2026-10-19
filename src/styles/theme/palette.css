@@ -58,16 +58,8 @@
   --ln-ext-side-black: #8b8987;
 
   /* Shadows and the wells sunk into a surface. */
-  --ln-ext-shade-2: #00000005;
-  --ln-ext-shade-3: #00000008;
-  --ln-ext-shade-4: #0000000a;
-  --ln-ext-shade-5: #0000000d;
-  --ln-ext-shade-6: #0000000f;
-  --ln-ext-shade-7: #00000012;
   --ln-ext-shade-8: #00000014;
-  --ln-ext-shade-10: #0000001a;
   --ln-ext-shade-12: #0000001f;
-  --ln-ext-shade-15: #00000026;
   --ln-ext-shade-18: #0000002e;
   --ln-ext-shade-20: #00000033;
   --ln-ext-shade-25: #00000040;
@@ -80,8 +72,6 @@
   --ln-ext-shade-60: #00000099;
   --ln-ext-shade-65: #000000a6;
   --ln-ext-shade-70: #000000b3;
-  --ln-ext-shade-80: #000000cc;
-  --ln-ext-shade-85: #000000d9;
   --ln-ext-shade-90: #000000e5;
 
   color-scheme: dark;
@@ -119,16 +109,8 @@
   --ln-ext-side-black: var(--ln-ext-neutral-12);
 
   /* Half as strong as on dark, in the text's tint rather than black. */
-  --ln-ext-shade-2: color-mix(in srgb, var(--ln-ext-neutral-14) 1%, transparent);
-  --ln-ext-shade-3: color-mix(in srgb, var(--ln-ext-neutral-14) 1.5%, transparent);
-  --ln-ext-shade-4: color-mix(in srgb, var(--ln-ext-neutral-14) 2%, transparent);
-  --ln-ext-shade-5: color-mix(in srgb, var(--ln-ext-neutral-14) 2.5%, transparent);
-  --ln-ext-shade-6: color-mix(in srgb, var(--ln-ext-neutral-14) 3%, transparent);
-  --ln-ext-shade-7: color-mix(in srgb, var(--ln-ext-neutral-14) 3.5%, transparent);
   --ln-ext-shade-8: color-mix(in srgb, var(--ln-ext-neutral-14) 4%, transparent);
-  --ln-ext-shade-10: color-mix(in srgb, var(--ln-ext-neutral-14) 5%, transparent);
   --ln-ext-shade-12: color-mix(in srgb, var(--ln-ext-neutral-14) 6%, transparent);
-  --ln-ext-shade-15: color-mix(in srgb, var(--ln-ext-neutral-14) 7.5%, transparent);
   --ln-ext-shade-18: color-mix(in srgb, var(--ln-ext-neutral-14) 9%, transparent);
   --ln-ext-shade-20: color-mix(in srgb, var(--ln-ext-neutral-14) 10%, transparent);
   --ln-ext-shade-25: color-mix(in srgb, var(--ln-ext-neutral-14) 12.5%, transparent);
@@ -141,8 +123,6 @@
   --ln-ext-shade-60: color-mix(in srgb, var(--ln-ext-neutral-14) 30%, transparent);
   --ln-ext-shade-65: color-mix(in srgb, var(--ln-ext-neutral-14) 32.5%, transparent);
   --ln-ext-shade-70: color-mix(in srgb, var(--ln-ext-neutral-14) 35%, transparent);
-  --ln-ext-shade-80: color-mix(in srgb, var(--ln-ext-neutral-14) 40%, transparent);
-  --ln-ext-shade-85: color-mix(in srgb, var(--ln-ext-neutral-14) 42.5%, transparent);
   --ln-ext-shade-90: color-mix(in srgb, var(--ln-ext-neutral-14) 45%, transparent);
 
   color-scheme: light;
@@ -172,21 +152,8 @@
   --ln-ext-lift-25: color-mix(in srgb, var(--ln-ext-neutral-14) 25%, transparent);
   --ln-ext-lift-30: color-mix(in srgb, var(--ln-ext-neutral-14) 30%, transparent);
   --ln-ext-lift-35: color-mix(in srgb, var(--ln-ext-neutral-14) 35%, transparent);
-  --ln-ext-lift-40: color-mix(in srgb, var(--ln-ext-neutral-14) 40%, transparent);
-  --ln-ext-lift-45: color-mix(in srgb, var(--ln-ext-neutral-14) 45%, transparent);
-  --ln-ext-lift-50: color-mix(in srgb, var(--ln-ext-neutral-14) 50%, transparent);
-  --ln-ext-lift-55: color-mix(in srgb, var(--ln-ext-neutral-14) 55%, transparent);
-  --ln-ext-lift-60: color-mix(in srgb, var(--ln-ext-neutral-14) 60%, transparent);
-  --ln-ext-lift-65: color-mix(in srgb, var(--ln-ext-neutral-14) 65%, transparent);
-  --ln-ext-lift-70: color-mix(in srgb, var(--ln-ext-neutral-14) 70%, transparent);
-  --ln-ext-lift-80: color-mix(in srgb, var(--ln-ext-neutral-14) 80%, transparent);
-  --ln-ext-lift-85: color-mix(in srgb, var(--ln-ext-neutral-14) 85%, transparent);
-  --ln-ext-lift-90: color-mix(in srgb, var(--ln-ext-neutral-14) 90%, transparent);
 
   /* Each hue's shades are mixed from it, so changing a hue re-tints all of them. */
-  --ln-ext-blue-light: color-mix(in srgb, var(--ln-ext-blue) 80%, #fff);
-  --ln-ext-blue-dark: color-mix(in srgb, var(--ln-ext-blue) 80%, #000);
-  --ln-ext-blue-darker: color-mix(in srgb, var(--ln-ext-blue) 60%, #000);
   --ln-ext-red-light: color-mix(in srgb, var(--ln-ext-red) 60%, #fff);
   --ln-ext-red-dark: color-mix(in srgb, var(--ln-ext-red) 80%, #000);
   --ln-ext-red-darker: color-mix(in srgb, var(--ln-ext-red) 60%, #000);
@@ -195,24 +162,15 @@
   --ln-ext-orange-dark: color-mix(in srgb, var(--ln-ext-orange) 80%, #000);
   --ln-ext-orange-darker: color-mix(in srgb, var(--ln-ext-orange) 60%, #000);
   --ln-ext-orange-deep: color-mix(in srgb, var(--ln-ext-orange) 40%, #000);
-  --ln-ext-yellow-light: color-mix(in srgb, var(--ln-ext-yellow) 60%, #fff);
   --ln-ext-yellow-dark: color-mix(in srgb, var(--ln-ext-yellow) 80%, #000);
-  --ln-ext-yellow-darker: color-mix(in srgb, var(--ln-ext-yellow) 60%, #000);
-  --ln-ext-yellow-deep: color-mix(in srgb, var(--ln-ext-yellow) 40%, #000);
   --ln-ext-green-light: color-mix(in srgb, var(--ln-ext-green) 60%, #fff);
   --ln-ext-green-dark: color-mix(in srgb, var(--ln-ext-green) 80%, #000);
   --ln-ext-green-darker: color-mix(in srgb, var(--ln-ext-green) 60%, #000);
-  --ln-ext-green-deep: color-mix(in srgb, var(--ln-ext-green) 40%, #000);
   --ln-ext-cyan-light: color-mix(in srgb, var(--ln-ext-cyan) 60%, #fff);
   --ln-ext-cyan-dark: color-mix(in srgb, var(--ln-ext-cyan) 80%, #000);
   --ln-ext-cyan-darker: color-mix(in srgb, var(--ln-ext-cyan) 60%, #000);
   --ln-ext-cyan-deep: color-mix(in srgb, var(--ln-ext-cyan) 40%, #000);
-  --ln-ext-purple-light: color-mix(in srgb, var(--ln-ext-purple) 60%, #fff);
   --ln-ext-purple-dark: color-mix(in srgb, var(--ln-ext-purple) 80%, #000);
   --ln-ext-purple-darker: color-mix(in srgb, var(--ln-ext-purple) 60%, #000);
-  --ln-ext-purple-deep: color-mix(in srgb, var(--ln-ext-purple) 40%, #000);
-  --ln-ext-pink-light: color-mix(in srgb, var(--ln-ext-pink) 60%, #fff);
-  --ln-ext-pink-dark: color-mix(in srgb, var(--ln-ext-pink) 80%, #000);
   --ln-ext-pink-darker: color-mix(in srgb, var(--ln-ext-pink) 60%, #000);
-  --ln-ext-pink-deep: color-mix(in srgb, var(--ln-ext-pink) 40%, #000);
 }
