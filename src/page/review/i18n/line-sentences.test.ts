@@ -82,10 +82,12 @@ describe('the tactic', () => {
 
 describe('a quiet move’s plan', () => {
   it('is said in both languages', () => {
-    expect(en.facts.develops(white('knight'))).toBe('It develops the [[p:wn]]knight.');
-    expect(fr.facts.develops(white('knight'))).toBe('Il développe le [[p:wn]]cavalier.');
-    expect(en.facts.openFile(true)).toBe('The rook takes the half-open file.');
-    expect(fr.facts.passedPawn(true)).toBe('Il crée un pion passé.');
+    expect(en.facts.develops(white('knight'))).toContain('The [[p:wn]]knight comes into play.');
+    expect(fr.facts.develops(white('knight'))).toContain('Le [[p:wn]]cavalier entre en jeu.');
+    expect(en.facts.openFile(true)).toContain(
+      'The rook takes the half-open file, where it belongs.',
+    );
+    expect(fr.facts.passedPawn(true)).toContain('Un pion passé est né.');
   });
 });
 
@@ -93,9 +95,21 @@ describe('a line’s gain', () => {
   const LINE = '13. [[m:w:Qe4]] [[m:b:g6]] 14. [[m:w:Qxa8]]';
 
   it('says who wins what after the line', () => {
-    expect(en.facts.losesMaterial('white', 'a rook', LINE, false)).toBe(
-      `After ${LINE}, White wins a rook.`,
+    const gain = { material: 'a rook', line: LINE, moves: 2 };
+    expect(en.facts.losesMaterial('white', gain, false)[0]).toBe(
+      `White wins a rook in two moves: ${LINE}.`,
     );
-    expect(fr.facts.wouldHaveWon(LINE, 'une tour')).toBe(`${LINE} aurait gagné une tour.`);
+    expect(en.facts.losesMaterial('white', { ...gain, moves: 1 }, false)[0]).toBe(
+      `White wins a rook on the next move: ${LINE}.`,
+    );
+    expect(en.facts.winsAlong({ ...gain, moves: 1 })[0]).toBe(
+      `This wins a rook right away: ${LINE}.`,
+    );
+    expect(fr.facts.winsAlong({ ...gain, material: 'une tour', moves: 1 })[0]).toBe(
+      `De quoi gagner une tour tout de suite : ${LINE}.`,
+    );
+    expect(fr.facts.wouldHaveWon('black', { ...gain, material: 'une tour' })[0]).toBe(
+      `Le mieux était de gagner une tour en deux coups : ${LINE}.`,
+    );
   });
 });

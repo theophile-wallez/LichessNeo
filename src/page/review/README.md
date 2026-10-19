@@ -43,7 +43,10 @@ opening's name and the page's asset URL.
   as move classes (`view/summary-phases.ts`).
 - `CoachContext` (`gameId`, `coach`, `language`) → `explanation(move, context,
   { opening, threats })` → `CommentPart[]`: sentences, the droppable one going
-  when the bubble lacks room. `threats` are the engine's searches of the
+  when the bubble lacks room, and said only when the advantage changes (from
+  before the error, for a move that punishes one). The languages give a
+  fact several ways to be said, and the coach picks one per move (`oneOf`,
+  `coach/said.ts`). `threats` are the engine's searches of the
   positions around the move with the other side to move (a null move), which
   the UI makes as the move shows (`explain/threats.ts`).
 - `StreamState` (`key`, `shown`, `dropped`): the typing's progress, kept by

@@ -60,6 +60,13 @@ export function definite(viewer: Viewer, piece: Piece): string {
 
 const COUNTS: readonly string[] = ['', '', 'two', 'three', 'four'];
 
+/** "on the next move", "in two moves": how soon a line gets there. */
+export const within = (moves: number): string =>
+  moves <= 1 ? 'on the next move' : `in ${COUNTS[moves] ?? moves} moves`;
+
+/** "right away", "in two moves": how soon a line that starts now gets there. */
+export const soon = (moves: number): string => (moves <= 1 ? 'right away' : within(moves));
+
 /** "a [knight] for a [pawn]", "two [pawn]pawns", "the exchange": what a side wins. */
 export const materialEn = (material: Material): string | null =>
   materialPhrase(material, {

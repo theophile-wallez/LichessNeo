@@ -2,11 +2,11 @@ import { isError } from '#page/review/classes/classes.ts';
 import type { CommentPart } from '#page/review/comment/markup.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { type CoachContext, moveSeed } from './context.ts';
-import { findings } from './fact.ts';
+import { findings, punishes } from './fact.ts';
 import { hash } from './hash.ts';
 import { remark } from './remark.ts';
 import type { Threats } from './threat-facts.ts';
-import { trajectory } from './trajectory.ts';
+import { evaluationLevel, trajectory } from './trajectory.ts';
 
 const say = (text: string, droppable = false): CommentPart => ({ text, droppable });
 
@@ -22,7 +22,8 @@ export interface MoveContext {
  * The coach's comment on a move: how the evaluation moved, and one fact from
  * the board and the engine, or a remark when a good move has nothing concrete
  * to say; after an error, the reply it lets in or the move to play instead. The trajectory
- * is what's dropped when the bubble lacks room.
+ * is what's dropped when the bubble lacks room, and is said only when the
+ * advantage changes, unless it's all an error has to say.
  */
 export function explanation(
   move: MoveVerdict,
@@ -39,13 +40,15 @@ export function explanation(
   const found = fact?.text ?? null;
   if (move.san.includes('#')) return [say(found ?? '')];
   const seed = hash(`${moveSeed(move, context)}:t`);
-  const course = trajectory(
-    { before: move.before, after: move.after, mover: move.color, seed },
-    language,
-  );
+  // The error a move punishes only offers the advantage: the move takes it, so
+  // the game is told from before the error.
+  const before = (punishes(move) ? move.previousMove?.before : null) ?? move.before;
+  const course = trajectory({ before, after: move.after, mover: move.color, seed }, language);
+  const changed = evaluationLevel(before) !== evaluationLevel(move.after);
+  const told = changed ? [say(course, true)] : [];
   if (isError(move.moveClass)) {
     if (found === null) return [say(course)];
-    return [say(course, true), say(found), ...(followUp ? [say(followUp.text)] : [])];
+    return [...told, say(found), ...(followUp ? [say(followUp.text)] : [])];
   }
-  return [say(found ?? remark(move, context)), say(course, true)];
+  return [say(found ?? remark(move, context)), ...told];
 }

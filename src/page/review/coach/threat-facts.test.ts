@@ -95,16 +95,16 @@ const makesRoom = move({
 describe('parriedFact', () => {
   it('says the piece threatened steps away', () => {
     expect(parriedFact(input(knightEscapes), TAKES_KNIGHT)?.text).toBe(
-      'The [[p:wn]]knight gets out of the way of [[n:1...:b:Bxa4]].',
+      'The [[p:wn]]knight gets out of the way of [[m:b:Bxa4]].',
     );
     expect(parriedFact(input(knightEscapes, fr), TAKES_KNIGHT)?.text).toBe(
-      'Le [[p:wn]]cavalier se met à l’abri de [[n:1...:b:Bxa4]].',
+      'Le [[p:wn]]cavalier se met à l’abri de [[m:b:Bxa4]].',
     );
   });
 
   it('says what a defense stops, and what it would have won', () => {
     expect(parriedFact(input(pawnDefends), TAKES_KNIGHT)?.text).toBe(
-      'It stops [[n:1...:b:Bxa4]], which would have won a [[p:wn]]knight.',
+      'That stops [[m:b:Bxa4]], which would have won a [[p:wn]]knight.',
     );
   });
 
@@ -119,10 +119,10 @@ describe('parriedFact', () => {
 
   it('plays out a short mate it stops, and names a long one by its first move', () => {
     const mate = threat(BACK_RANK, { mate: -1 }, ['a8a1']);
-    expect(parriedFact(input(makesRoom), mate)?.text).toBe('It stops the mate: [[n:1...:b:Ra1#]].');
+    expect(parriedFact(input(makesRoom), mate)?.text).toBe('The mate is stopped: [[m:b:Ra1#]].');
     const long = threat(BACK_RANK, { mate: -4 }, ['a8a1']);
     expect(parriedFact(input(makesRoom), long)?.text).toBe(
-      'It stops a mate in 4, starting with [[n:1...:b:Ra1+]].',
+      'That stops a mate in 4, starting with [[m:b:Ra1+]].',
     );
   });
 });
@@ -142,10 +142,10 @@ describe('threatensFact', () => {
   it('says what a quiet move threatens to win', () => {
     const aimed = threat(bishopAims.position.fen, { cp: 300 }, ['d2b4', 'g8f8', 'g1f1']);
     expect(threatensFact(input(bishopAims), aimed)?.text).toBe(
-      'It threatens [[n:2.:w:Bxb4]], which would win a [[p:bn]]knight.',
+      'The threat is [[m:w:Bxb4]] on the next move, winning a [[p:bn]]knight.',
     );
     expect(threatensFact(input(bishopAims, fr), aimed)?.text).toBe(
-      'Il menace [[n:2.:w:Bxb4]], qui gagnerait un [[p:bn]]cavalier.',
+      'La menace : [[m:w:Bxb4]] au coup suivant, qui gagnerait un [[p:bn]]cavalier.',
     );
   });
 
@@ -172,7 +172,7 @@ describe('threatensFact', () => {
     });
     const mate = threat(rookSwings.position.fen, { mate: 1 }, ['d1d8']);
     expect(threatensFact(input(rookSwings), mate)?.text).toBe(
-      'It threatens mate, starting with [[n:2.:w:Rd8+]].',
+      'Mate is threatened on the next move: [[m:w:Rd8+]].',
     );
   });
 });

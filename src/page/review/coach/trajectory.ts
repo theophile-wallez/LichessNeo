@@ -58,14 +58,15 @@ export function trajectory(input: TrajectoryInput, language: ReviewLanguage): st
     side: sideOf(levelAfter),
     advantage: advantageName(levelAfter, input.after, language),
   };
-  if (levelBefore === levelAfter) {
-    const same = levelAfter === 0 ? sentences.stillBalanced : sentences.stillAhead(after);
-    return same[input.seed % same.length] ?? '';
-  }
-  if (levelBefore === 0) return sentences.wasBalanced(after, after.side === input.mover);
-  if (levelAfter === 0) return sentences.nowBalanced(before);
-  if (after.side !== before.side) return sentences.swings(before, after);
-  return Math.abs(levelAfter) > Math.abs(levelBefore)
-    ? sentences.grows(after.side, before.advantage, after.advantage)
-    : sentences.shrinks(after.side, before.advantage, after.advantage);
+  const pick = (ways: readonly string[]): string => ways[input.seed % ways.length] ?? '';
+  if (levelBefore === levelAfter)
+    return pick(levelAfter === 0 ? sentences.stillBalanced : sentences.stillAhead(after));
+  if (levelBefore === 0) return pick(sentences.wasBalanced(after, after.side === input.mover));
+  if (levelAfter === 0) return pick(sentences.nowBalanced(before));
+  if (after.side !== before.side) return pick(sentences.swings(before, after));
+  return pick(
+    Math.abs(levelAfter) > Math.abs(levelBefore)
+      ? sentences.grows(after.side, before.advantage, after.advantage)
+      : sentences.shrinks(after.side, before.advantage, after.advantage),
+  );
 }

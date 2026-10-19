@@ -18,7 +18,7 @@ import { PUNISHABLE } from '#page/review/judge/judge.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { bestGainFact, gainFact, lossFact, mateLine } from './line-facts.ts';
 import { planFact } from './plan.ts';
-import { type Fact, said, type Theme } from './said.ts';
+import { type Fact, oneOf, said, type Theme } from './said.ts';
 import {
   letsThrough,
   NO_THREATS,
@@ -59,6 +59,14 @@ interface FactInput {
 
 const PUNISHERS: ReadonlySet<MoveClass> = new Set<MoveClass>(['brilliant', 'great', 'best']);
 const PUNISHED: ReadonlySet<MoveClass> = new Set<MoveClass>(['mistake', 'blunder', 'miss']);
+
+/** Whether the move punishes the opponent's error just before it. */
+export function punishes(move: MoveVerdict): boolean {
+  const previousClass = move.previousMove?.moveClass;
+  return (
+    PUNISHERS.has(move.moveClass) && previousClass !== undefined && PUNISHED.has(previousClass)
+  );
+}
 const THREATENED: ReadonlySet<MoveClass> = new Set<MoveClass>(['mistake', 'blunder']);
 
 /** Whether the side of `sign` has a mate on the board. */
@@ -114,15 +122,20 @@ function bestFact(input: FactInput): Fact | null {
   const taken = pieceOn(before, move.best.slice(2, 4));
   if (taken?.color === them && taken.role !== 'pawn')
     return said(facts.strongerCapture(best, taken));
-  return said(move.moveClass === 'inaccuracy' ? facts.morePrecise(best) : facts.betterMove(best));
+  return said(
+    move.moveClass === 'inaccuracy'
+      ? oneOf(facts.morePrecise(best), move)
+      : oneOf(facts.betterMove(best), move),
+  );
 }
 
 /** What the reply does, for an error whose fact doesn't name it. */
 function threatFact({ move, facts, them, reply }: FactInput): Fact | null {
   if (!THREATENED.has(move.moveClass) || !move.after.best || !reply) return null;
   const forked = forkedBy(move.position.fen, move.after.best);
-  if (forked[0] && forked[1]) return said(facts.allowsFork(reply, forked[0], forked[1]), 'fork');
-  return said(facts.canPlay(them, reply));
+  if (forked[0] && forked[1])
+    return said(oneOf(facts.allowsFork(reply, forked[0], forked[1]), move), 'fork');
+  return said(oneOf(facts.canPlay(them, reply), move));
 }
 
 function errorFindings(input: FactInput): Findings {
@@ -147,11 +160,11 @@ function captureFact(input: FactInput, moved: Piece, dest: string): Fact | null 
   const victim: Piece = { role: before.get(square)?.role ?? 'pawn', color: them };
   const previous = move.previousPosition;
   if (previous.san?.includes('x') && previous.uci?.slice(2, 4) === dest)
-    return said(facts.takesBack(squareToken(dest)));
+    return said(oneOf(facts.takesBack(squareToken(dest)), move));
   if (attackers(before, square, them).length === 0)
-    return said(facts.winsForFree(victim), 'hanging');
+    return said(oneOf(facts.winsForFree(victim), move), 'hanging');
   if (PIECE_VALUES[victim.role] > PIECE_VALUES[moved.role])
-    return said(facts.winsMaterial(victim, { role: moved.role, color: me }));
+    return said(oneOf(facts.winsMaterial(victim, { role: moved.role, color: me }), move));
   return null;
 }
 
@@ -165,14 +178,14 @@ function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
   const quiet = !sacrifice && !/[x+]/.test(move.san);
   const threat = quiet ? quietThreatFact(input) : null;
   if (threat !== null) return threat;
-  const previousClass = move.previousMove?.moveClass;
-  if (PUNISHERS.has(move.moveClass) && previousClass !== undefined && PUNISHED.has(previousClass))
-    return said(facts.punishesAtOnce(them));
+  if (punishes(move)) return said(oneOf(facts.punishesAtOnce(them), move));
   if (move.moveClass === 'brilliant' && moved)
     return said(facts.offered({ role: moved.role, color: me }, them), 'sacrifice');
   if (move.moveClass === 'great')
     return said(
-      evaluationLevel(move.after) * sign >= 2 ? facts.keepsAdvantage : facts.holdsPosition(me),
+      evaluationLevel(move.after) * sign >= 2
+        ? oneOf(facts.keepsAdvantage, move)
+        : oneOf(facts.holdsPosition(me), move),
     );
   return null;
 }
@@ -193,11 +206,11 @@ function goodFact(input: FactInput): Fact | null {
   if (forked[0] && forked[1]) return said(facts.forks(forked[0], forked[1]), 'fork');
   const promotion = roleOfLetter(/=([QRBN])/.exec(move.san)?.[1] ?? '');
   if (promotion) return said(facts.promotes({ role: promotion, color: me }));
-  if (move.san.startsWith('O-O')) return said(facts.castles);
+  if (move.san.startsWith('O-O')) return said(oneOf(facts.castles, move));
   const capture = moved && move.san.includes('x') ? captureFact(input, moved, dest) : null;
   if (capture !== null) return capture;
-  if (move.san.includes('+')) return said(facts.checkForces(them));
-  if (move.moveClass === 'good' && best) return said(facts.littleMorePrecise(best));
+  if (move.san.includes('+')) return said(oneOf(facts.checkForces(them), move));
+  if (move.moveClass === 'good' && best) return said(oneOf(facts.littleMorePrecise(best), move));
   return planFact({ move, sentences: facts, before: input.before, after });
 }
 

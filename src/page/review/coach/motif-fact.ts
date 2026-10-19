@@ -1,7 +1,7 @@
 import type { Color } from '#shared/chess/index.ts';
 import { lineMotif, type MotifKind } from '#page/review/chess/motifs.ts';
 import { playLine, type Ply } from '#page/review/chess/played-line.ts';
-import { lineMoveToken } from '#page/review/comment/tokens.ts';
+import { moveToken } from '#page/review/comment/tokens.ts';
 import type { FactSentences } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { type Fact, said, type Theme } from './said.ts';
@@ -51,7 +51,9 @@ export function withMotif(text: string, line: MotifLine, facts: FactSentences): 
   const motif = lineMotif(plies, winner, upTo);
   if (!motif || motif.ply < offset) return said(text);
   const played = plies.slice(offset, motif.ply + 1);
-  const move = lineMoveToken(played, { base, ucis: played.map(ply => ply.uci) });
+  const last = played.at(-1);
+  if (!last) return said(text);
+  const move = moveToken(last.san, last.color, { base, ucis: played.map(ply => ply.uci) });
   const named = facts.motif(motif.kind, move, motif.pieces);
   return said(named ? `${text} ${named}` : text, THEMES[motif.kind]);
 }

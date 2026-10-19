@@ -10,7 +10,7 @@ import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { pieceOn } from '#page/review/chess/material.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { lineOf, type LineFactInput, mateLine } from './line-facts.ts';
-import { type Fact, said } from './said.ts';
+import { type Fact, oneOf, said } from './said.ts';
 import { type Menace, menaceOf, stillThreatens, type Threat } from './threat.ts';
 
 // What a move does about threats (coach/threat.ts): a good quiet one stops the
@@ -65,9 +65,9 @@ function stopsText(input: LineFactInput, threat: Threat, menace: Menace): string
     ply => ply.captured && ply.uci.slice(2, 4) === move.uci.slice(0, 2),
   );
   const piece = pieceOn(menace.plies[0]?.before ?? new Map(), move.uci.slice(0, 2));
-  if (escapes && piece) return facts.escapes(piece, first);
+  if (escapes && piece) return oneOf(facts.escapes(piece, first), move);
   const material = menace.won && facts.material(menace.won);
-  return material ? facts.stopsThreat(first, material) : null;
+  return material ? oneOf(facts.stopsThreat(first, material), move) : null;
 }
 
 /** What a good quiet move stops: the mate or the material the opponent threatened. */
@@ -104,9 +104,9 @@ export function threatensFact({ move, facts, me }: LineFactInput, threat: Threat
   const menace = realMenace(threat, move.after, me);
   const first = menace && lineOf(menace.plies.slice(0, 1), null);
   if (!menace || !first || wasThere(move, menace)) return null;
-  if (menace.mate !== null) return said(facts.threatensMate(first));
+  if (menace.mate !== null) return said(facts.threatensMate(first, menace.mate));
   const material = menace.won && facts.material(menace.won);
-  return material ? said(facts.threatens(first, material)) : null;
+  return material ? said(oneOf(facts.threatens(first, material), move)) : null;
 }
 
 /** Whether an error lets through what the opponent threatened: its reply is the threat. */

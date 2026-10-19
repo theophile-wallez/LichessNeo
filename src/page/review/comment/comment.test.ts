@@ -13,7 +13,7 @@ import {
   streamFor,
 } from './markup.ts';
 import { verdictTitle } from './title.ts';
-import { moveToken, numberedMoveToken, pieceToken, squareToken } from './tokens.ts';
+import { moveToken, movesToken, numberedMoveToken, pieceToken, squareToken } from './tokens.ts';
 // What the original script drew for these comments, tokens and verdicts.
 import legacyStreams from './fixtures/legacy-stream.json' with { type: 'json' };
 import legacy from './fixtures/legacy-units.json' with { type: 'json' };
@@ -126,5 +126,18 @@ describe('the languages’ helpers', () => {
       expect(fr.typography(String(text))).toBe(french);
       expect(en.typography(String(text))).toBe(english);
     }
+  });
+});
+
+describe('movesToken', () => {
+  it('writes a line unnumbered, each chip playing the line up to itself', () => {
+    const moves = [
+      { san: 'Nc2+', color: 'black', number: 30 },
+      { san: 'Kd2', color: 'white', number: 31 },
+    ] as const;
+    expect(movesToken(moves)).toBe('[[m:b:Nc2+]] [[m:w:Kd2]]');
+    expect(movesToken(moves, { base: 'a', ucis: ['d4c2', 'e1d2'] })).toBe(
+      '[[m:b:Nc2+@a:d4c2]] [[m:w:Kd2@a:d4c2,e1d2]]',
+    );
   });
 });

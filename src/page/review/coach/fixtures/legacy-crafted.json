@@ -14,17 +14,11 @@
     "slower": false,
     "en": {
       "fact": "The pawn promotes to a [[p:wq]]queen.",
-      "parts": [
-        ["The pawn promotes to a [[p:wq]]queen."],
-        ["White still has a winning position.", true]
-      ]
+      "parts": [["The pawn promotes to a [[p:wq]]queen."]]
     },
     "fr": {
       "fact": "Le pion devient une [[p:wq]]dame.",
-      "parts": [
-        ["Le pion devient une [[p:wq]]dame."],
-        ["Les Blancs ont toujours une position gagnante.", true]
-      ]
+      "parts": [["Le pion devient une [[p:wq]]dame."]]
     }
   },
   {
@@ -37,17 +31,11 @@
     "slower": false,
     "en": {
       "fact": "The pawn promotes to a [[p:wn]]knight.",
-      "parts": [
-        ["The pawn promotes to a [[p:wn]]knight."],
-        ["White keeps a clear advantage.", true]
-      ]
+      "parts": [["The pawn promotes to a [[p:wn]]knight."]]
     },
     "fr": {
       "fact": "Le pion devient un [[p:wn]]cavalier.",
-      "parts": [
-        ["Le pion devient un [[p:wn]]cavalier."],
-        ["Les Blancs gardent un net avantage.", true]
-      ]
+      "parts": [["Le pion devient un [[p:wn]]cavalier."]]
     }
   },
   {
@@ -58,16 +46,10 @@
     "b": { "mate": -2, "wp": 0, "wp2": null, "best": "a8b8" },
     "cls": "inaccuracy",
     "slower": true,
-    "en": {
-      "fact": "[[m:w:Rh2]] held out longer.",
-      "parts": [["Black still has a mate in 2.", true], ["[[m:w:Rh2]] held out longer."]]
-    },
+    "en": { "fact": "[[m:w:Rh2]] held out longer.", "parts": [["[[m:w:Rh2]] held out longer."]] },
     "fr": {
       "fact": "[[m:w:Rh2]] tenait plus longtemps.",
-      "parts": [
-        ["Les Noirs ont toujours un mat en 2.", true],
-        ["[[m:w:Rh2]] tenait plus longtemps."]
-      ]
+      "parts": [["[[m:w:Rh2]] tenait plus longtemps."]]
     }
   },
   {
@@ -78,14 +60,8 @@
     "b": { "mate": 5, "wp": 100, "wp2": null, "best": "a8b8" },
     "cls": "good",
     "slower": true,
-    "en": {
-      "fact": "[[m:w:Rh8]] mated in 2.",
-      "parts": [["[[m:w:Rh8]] mated in 2."], ["White still has a mate in 5.", true]]
-    },
-    "fr": {
-      "fact": "[[m:w:Rh8]] matait en 2.",
-      "parts": [["[[m:w:Rh8]] matait en 2."], ["Les Blancs ont toujours un mat en 5.", true]]
-    }
+    "en": { "fact": "[[m:w:Rh8]] mated in 2.", "parts": [["[[m:w:Rh8]] mated in 2."]] },
+    "fr": { "fact": "[[m:w:Rh8]] matait en 2.", "parts": [["[[m:w:Rh8]] matait en 2."]] }
   },
   {
     "name": "black slower mate",
@@ -95,14 +71,8 @@
     "b": { "mate": -4, "wp": 0, "wp2": null, "best": "a1b1" },
     "cls": "good",
     "slower": true,
-    "en": {
-      "fact": "[[m:b:Rh1]] mated in 1.",
-      "parts": [["[[m:b:Rh1]] mated in 1."], ["Black still has a mate in 4.", true]]
-    },
-    "fr": {
-      "fact": "[[m:b:Rh1]] matait en 1.",
-      "parts": [["[[m:b:Rh1]] matait en 1."], ["Les Noirs ont toujours un mat en 4.", true]]
-    }
+    "en": { "fact": "[[m:b:Rh1]] mated in 1.", "parts": [["[[m:b:Rh1]] mated in 1."]] },
+    "fr": { "fact": "[[m:b:Rh1]] matait en 1.", "parts": [["[[m:b:Rh1]] matait en 1."]] }
   },
   {
     "name": "en passant",
@@ -122,8 +92,8 @@
     "b": { "cp": 62, "wp": 55.68256609665036, "wp2": null, "best": "g8f6" },
     "cls": "best",
     "slower": false,
-    "en": { "fact": null, "parts": [["A good capture."], ["The game stays balanced.", true]] },
-    "fr": { "fact": null, "parts": [["Une bonne prise."], ["La partie reste équilibrée.", true]] }
+    "en": { "fact": null, "parts": [["A good capture."]] },
+    "fr": { "fact": null, "parts": [["Une bonne prise."]] }
   },
   {
     "name": "free pawn",
@@ -143,8 +113,8 @@
     "b": { "cp": 62, "wp": 55.68256609665036, "wp2": null, "best": "d8d5" },
     "cls": "best",
     "slower": false,
-    "en": { "fact": null, "parts": [["A good capture."], ["It’s still an even game.", true]] },
-    "fr": { "fact": null, "parts": [["Une bonne prise."], ["L’équilibre tient toujours.", true]] }
+    "en": { "fact": null, "parts": [["A good capture."]] },
+    "fr": { "fact": null, "parts": [["Une bonne prise."]] }
   },
   {
     "name": "black great",
@@ -161,17 +131,11 @@
     "slower": false,
     "en": {
       "fact": "Every other move would have let the advantage slip.",
-      "parts": [
-        ["Every other move would have let the advantage slip."],
-        ["Black still has a clear advantage.", true]
-      ]
+      "parts": [["Every other move would have let the advantage slip."]]
     },
     "fr": {
       "fact": "Tout autre coup laissait filer l’avantage.",
-      "parts": [
-        ["Tout autre coup laissait filer l’avantage."],
-        ["Les Noirs ont toujours un net avantage.", true]
-      ]
+      "parts": [["Tout autre coup laissait filer l’avantage."]]
     }
   }
 ]

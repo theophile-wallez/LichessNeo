@@ -66,7 +66,7 @@ describe('lossFact', () => {
     const move = verdict(INTO_FORK);
     expect(move.moveClass).toBe('blunder');
     expect(text(lossFact(input(move)))).toBe(
-      'After [[n:30...:b:Nc2+]] [[n:31.:w:Kd2]] [[m:b:Nxa1]], Black wins a [[p:wr]]rook. [[n:30...:b:Nc2+]] forks the [[p:wk]]king and the [[p:wr]]rook.',
+      '[[m:b:Nc2+]] [[m:w:Kd2]] [[m:b:Nxa1]]: Black wins a [[p:wr]]rook in two moves. [[m:b:Nc2+]] forks the [[p:wk]]king and the [[p:wr]]rook.',
     );
     expect(lossFact(input(move))?.theme).toBe('fork');
   });
@@ -94,7 +94,7 @@ const MISSED_FORK: Played = {
 describe('bestGainFact', () => {
   it('plays out what the best move would have won', () => {
     expect(text(bestGainFact(input(verdict(MISSED_FORK))))).toBe(
-      '[[n:30...:b:Nc2+]] [[n:31.:w:Kd2]] [[m:b:Nxa1]] would have won a [[p:wr]]rook. [[n:30...:b:Nc2+]] forks the [[p:wk]]king and the [[p:wr]]rook.',
+      'Better was to win a [[p:wr]]rook in two moves: [[m:b:Nc2+]] [[m:w:Kd2]] [[m:b:Nxa1]]. [[m:b:Nc2+]] forks the [[p:wk]]king and the [[p:wr]]rook.',
     );
   });
 });
@@ -112,7 +112,7 @@ const FORK: Played = {
 describe('gainFact', () => {
   it('plays out what a good move wins, and the tactic', () => {
     expect(text(gainFact(input(verdict(FORK))))).toBe(
-      'It wins a [[p:br]]rook: [[n:30.:w:Nc7+]] [[m:b:Kd7]] [[n:31.:w:Nxa8]]. [[n:30.:w:Nc7+]] forks the [[p:bk]]king and the [[p:br]]rook.',
+      'That nets a [[p:br]]rook in two moves: [[m:w:Nc7+]] [[m:b:Kd7]] [[m:w:Nxa8]]. [[m:w:Nc7+]] forks the [[p:bk]]king and the [[p:br]]rook.',
     );
   });
 
@@ -127,7 +127,7 @@ describe('mateLine', () => {
 
   it('writes a sure mate move by move, its last marked', () => {
     const mate = record({ mate: -1, whiteWinChance: 0, line: 'a8a1' });
-    expect(mateLine(mate, BACK_RANK, null)).toBe('[[n:30...:b:Ra1#]]');
+    expect(mateLine(mate, BACK_RANK, null)).toBe('[[m:b:Ra1#]]');
   });
 
   it('says nothing of a mate too long to be sure of, or a line short of it', () => {

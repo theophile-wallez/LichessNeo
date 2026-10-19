@@ -7,15 +7,12 @@ import {
   materialEn,
   partyOf,
   type Party,
+  soon,
+  within,
 } from './en-grammar.ts';
 import { motifEn } from './en-motifs.ts';
-import type {
-  FactSentences,
-  LineFacts,
-  PlanSentences,
-  TrajectorySentences,
-  Viewer,
-} from './types.ts';
+import { plansEn } from './en-plans.ts';
+import type { FactSentences, LineFacts, TrajectorySentences, Viewer } from './types.ts';
 
 /** "You", "The opponent", "White": a side at the start of a sentence. */
 const subject = (party: Party): string => capitalize(party.name);
@@ -36,19 +33,37 @@ export function trajectoryEn(viewer: Viewer): TrajectorySentences {
     },
     wasBalanced: (after, forMover) => {
       const ahead = party(after.side, 'balanced', after.advantage);
-      return `The game was balanced, ${forMover ? 'and' : 'but'} now ${ahead.name} ${agree(ahead, 'has', 'have')} ${after.advantage}.`;
+      const has = `${ahead.name} ${agree(ahead, 'has', 'have')} ${after.advantage}`;
+      return [
+        `The game was balanced, ${forMover ? 'and' : 'but'} now ${has}.`,
+        `The balance tips: now ${has}.`,
+      ];
     },
-    nowBalanced: before =>
+    nowBalanced: before => [
       `${subject(party(before.side, 'now', before.advantage))} had ${before.advantage}, but the game is now balanced.`,
+      'The game is level again.',
+    ],
     grows: (color, from, to) => {
       const ahead = party(color, from, to);
-      return `${subject(ahead)} ${agree(ahead, 'goes', 'go')} from ${from} to ${to}.`;
+      return [
+        `${subject(ahead)} ${agree(ahead, 'goes', 'go')} from ${from} to ${to}.`,
+        `${subject(ahead)} ${agree(ahead, 'pulls', 'pull')} further ahead: now ${ahead.name} ${agree(ahead, 'has', 'have')} ${to}.`,
+      ];
     },
-    shrinks: (color, from, to) =>
-      `${subject(party(color, to, from))} had ${from}; now it’s only ${to}.`,
+    shrinks: (color, from, to) => {
+      const ahead = party(color, to, from);
+      return [
+        `${subject(ahead)} had ${from}; now it’s only ${to}.`,
+        `${capitalize(ahead.possessive)} advantage shrinks to ${to}.`,
+      ];
+    },
     swings: (before, after) => {
       const ahead = party(after.side, 'swings', after.advantage);
-      return `${subject(party(before.side, 'swung', before.advantage))} had ${before.advantage}, but now ${ahead.name} ${agree(ahead, 'has', 'have')} ${after.advantage}.`;
+      const has = `${ahead.name} ${agree(ahead, 'has', 'have')} ${after.advantage}`;
+      return [
+        `${subject(party(before.side, 'swung', before.advantage))} had ${before.advantage}, but now ${has}.`,
+        `The tables turn: now ${has}.`,
+      ];
     },
   };
 }
@@ -56,18 +71,6 @@ export function trajectoryEn(viewer: Viewer): TrajectorySentences {
 // The pieces a fork hits: "the [rook] and the [queen]", or whose they are.
 const both = (viewer: Viewer, first: Piece, second: Piece): string =>
   `${definite(viewer, first)} and ${definite(viewer, second)}`;
-
-// What a quiet move does for the position.
-function plansEn(viewer: Viewer): PlanSentences {
-  const the = (piece: Piece): string => definite(viewer, piece);
-  return {
-    develops: piece => `It develops ${the(piece)}.`,
-    outpost: piece => `${capitalize(the(piece))} lands on an outpost: no pawn can chase it away.`,
-    openFile: halfOpen => `The rook takes the ${halfOpen ? 'half-open' : 'open'} file.`,
-    passedPawn: made => (made ? 'It makes a passed pawn.' : 'It pushes the passed pawn on.'),
-    centralKing: 'The king heads for the center, where it counts in an endgame.',
-  };
-}
 
 // The sentences read off the engine's lines.
 function lineFactsEn(viewer: Viewer): LineFacts {
@@ -78,19 +81,115 @@ function lineFactsEn(viewer: Viewer): LineFacts {
     motif: motifEn(viewer),
     material: materialEn,
     forcesMate: (color, line) => `${subject(party(color, line))} can now force mate: ${line}.`,
-    losesMaterial: (color, material, line, threatened) => {
+    losesMaterial: (color, { material, line, moves }, threatened) => {
       const winner = party(color, material, line);
-      const after = `after ${line}, ${winner.name} ${agree(winner, 'wins', 'win')} ${material}.`;
-      return threatened ? `It doesn’t stop the threat: ${after}` : capitalize(after);
+      const wins = `${winner.name} ${agree(winner, 'wins', 'win')} ${material} ${within(moves)}`;
+      if (threatened) return [`The threat is still there, and ${wins}: ${line}.`];
+      return [`${capitalize(wins)}: ${line}.`, `${line}: ${wins}.`];
     },
-    wouldHaveWon: (line, material) => `${line} would have won ${material}.`,
-    winsAlong: (material, line) => `It wins ${material}: ${line}.`,
-    stopsThreat: (threat, material) => `It stops ${threat}, which would have won ${material}.`,
-    stopsMate: line => `It stops the mate: ${line}.`,
-    stopsLongMate: (moves, first) => `It stops a mate in ${moves}, starting with ${first}.`,
-    escapes: (piece, threat) => `${capitalize(the(piece))} gets out of the way of ${threat}.`,
-    threatens: (threat, material) => `It threatens ${threat}, which would win ${material}.`,
-    threatensMate: threat => `It threatens mate, starting with ${threat}.`,
+    wouldHaveWon: (color, { material, line, moves }) => {
+      const mover = party(color, 'won', line);
+      return [
+        `Better was to win ${material} ${soon(moves)}: ${line}.`,
+        `${subject(mover)} could have won ${material} ${soon(moves)}: ${line}.`,
+      ];
+    },
+    winsAlong: ({ material, line, moves }) => [
+      `This wins ${material} ${soon(moves)}: ${line}.`,
+      `${capitalize(material)} won ${soon(moves)}: ${line}.`,
+      `That nets ${material} ${soon(moves)}: ${line}.`,
+    ],
+    stopsThreat: (threat, material) => [
+      `That stops ${threat}, which would have won ${material}.`,
+      `No more ${threat}, which would have won ${material}.`,
+      `${threat} is off the table now: it would have won ${material}.`,
+    ],
+    stopsMate: line => `The mate is stopped: ${line}.`,
+    stopsLongMate: (moves, first) => `That stops a mate in ${moves}, starting with ${first}.`,
+    escapes: (piece, threat) => [
+      `${capitalize(the(piece))} gets out of the way of ${threat}.`,
+      `${capitalize(the(piece))} steps out of reach of ${threat}.`,
+    ],
+    threatens: (threat, material) => [
+      `The threat is ${threat} on the next move, winning ${material}.`,
+      `Next it threatens ${threat}, which would win ${material}.`,
+    ],
+    threatensMate: (threat, moves) =>
+      moves <= 1
+        ? `Mate is threatened on the next move: ${threat}.`
+        : `Mate is threatened ${within(moves)}, starting with ${threat}.`,
+  };
+}
+
+// What a good move does: the error it punishes, the material it wins, the check.
+type GoodMoveSentences = Pick<
+  FactSentences,
+  | 'punishesAtOnce'
+  | 'offered'
+  | 'keepsAdvantage'
+  | 'holdsPosition'
+  | 'promotes'
+  | 'castles'
+  | 'takesBack'
+  | 'winsForFree'
+  | 'winsMaterial'
+  | 'checkForces'
+  | 'littleMorePrecise'
+>;
+
+function goodMovesEn(viewer: Viewer): GoodMoveSentences {
+  const party = (color: Color, ...seed: readonly string[]): Party =>
+    partyOf(viewer, color, seed.join('|'));
+  const the = (piece: Piece): string => definite(viewer, piece);
+  return {
+    punishesAtOnce: color => {
+      const whose = party(color, 'punishes').possessive;
+      return [
+        `${capitalize(whose)} mistake is punished right away.`,
+        `That makes ${whose} mistake pay at once.`,
+        `Straight to the point: ${whose} mistake doesn’t go unpunished.`,
+      ];
+    },
+    offered: (piece, color) =>
+      `${capitalize(the(piece))} is offered, and ${party(color, piece.role).name} can’t safely take it.`,
+    keepsAdvantage: [
+      'Every other move would have let the advantage slip.',
+      'The only way to keep the advantage, and it was found.',
+    ],
+    holdsPosition: color => {
+      const holder = party(color, 'holds').name;
+      return [
+        `Every other move would have left ${holder} worse off.`,
+        `The only move that didn’t leave ${holder} worse off.`,
+      ];
+    },
+    promotes: piece => `The pawn promotes to ${indefinite(piece)}.`,
+    castles: [
+      'The king is safe, and the rook joins the game.',
+      'Castled: the king tucked away, the rook ready for action.',
+    ],
+    takesBack: square => [`A recapture on ${square}.`, `Taking back on ${square}, as expected.`],
+    winsForFree: piece => [
+      `${capitalize(indefinite(piece))} for free.`,
+      `That wins ${indefinite(piece)} for free.`,
+      `Free material: ${indefinite(piece)} with nothing in return.`,
+    ],
+    winsMaterial: (won, given) => [
+      `That wins ${indefinite(won)} for ${indefinite(given)}.`,
+      `${capitalize(indefinite(won))} won for ${indefinite(given)}: a good trade.`,
+    ],
+    checkForces: color => {
+      const checked = party(color, 'check');
+      return [
+        `The check forces ${checked.name} to respond.`,
+        `Check! ${subject(checked)} ${agree(checked, 'has', 'have')} to respond.`,
+      ];
+    },
+    littleMorePrecise: best => [
+      `${best} was a little more precise.`,
+      `${best} was slightly better.`,
+      `${best} was a touch more accurate.`,
+    ],
   };
 }
 
@@ -117,28 +216,21 @@ export function factsEn(viewer: Viewer): FactSentences {
       return `${subject(taker)} ${agree(taker, 'answers', 'answer')} ${reply} and ${agree(taker, 'wins', 'win')} ${the(piece)} on ${square}.`;
     },
     strongerCapture: (best, piece) => `${best}, taking ${the(piece)}, was stronger.`,
-    morePrecise: best => `${best} was more precise.`,
-    betterMove: best => `${best} was the better move.`,
-    punishesAtOnce: color =>
-      `It punishes ${party(color, 'punishes').possessive} mistake right away.`,
-    offered: (piece, color) =>
-      `${capitalize(the(piece))} is offered, and ${party(color, piece.role).name} can’t safely take it.`,
-    keepsAdvantage: 'Every other move would have let the advantage slip.',
-    holdsPosition: color =>
-      `Every other move would have left ${party(color, 'holds').name} worse off.`,
-    promotes: piece => `The pawn promotes to ${indefinite(piece)}.`,
-    castles: 'The king is safe, and the rook joins the game.',
-    takesBack: square => `It takes back on ${square}.`,
-    winsForFree: piece => `It wins ${indefinite(piece)} for free.`,
-    winsMaterial: (won, given) => `It wins ${indefinite(won)} for ${indefinite(given)}.`,
-    checkForces: color => `The check forces ${party(color, 'check').name} to respond.`,
-    littleMorePrecise: best => `${best} was a little more precise.`,
+    morePrecise: best => [`${best} was more precise.`, `${best} was better here.`],
+    betterMove: best => [`${best} was the better move.`, `Better was ${best}.`],
+    ...goodMovesEn(viewer),
     forks: (first, second) => `A fork: it attacks ${both(viewer, first, second)} at once.`,
     missedFork: (best, first, second) =>
       `${best} was a fork, attacking ${both(viewer, first, second)}.`,
-    allowsFork: (reply, first, second) =>
-      `It allows ${reply}, a fork of ${both(viewer, first, second)}.`,
-    canPlay: (color, reply) => `It lets ${party(color, reply).name} play ${reply}.`,
+    allowsFork: (reply, first, second) => [
+      `That allows ${reply}, a fork of ${both(viewer, first, second)}.`,
+      `Now ${reply} forks ${both(viewer, first, second)}.`,
+    ],
+    canPlay: (color, reply) => [
+      `That lets ${party(color, reply).name} play ${reply}.`,
+      `${reply} becomes possible.`,
+      `Now ${party(color, 'now', reply).name} can play ${reply}.`,
+    ],
     ...lineFactsEn(viewer),
     ...plansEn(viewer),
   };

@@ -103,6 +103,13 @@ export const ownedBy = (party: Party, mine: string, theirs: string): string =>
 
 const COUNTS: readonly string[] = ['', '', 'deux', 'trois', 'quatre'];
 
+/** « au coup suivant », « en deux coups » : how soon a line gets there. */
+export const within = (moves: number): string =>
+  moves <= 1 ? 'au coup suivant' : `en ${COUNTS[moves] ?? moves} coups`;
+
+/** « tout de suite », « en deux coups » : how soon a line that starts now gets there. */
+export const soon = (moves: number): string => (moves <= 1 ? 'tout de suite' : within(moves));
+
 /** "un [cavalier] contre un [pion]", "deux [pion]pions", "la qualité": what a side wins. */
 export const materialFr = (material: Material): string | null =>
   materialPhrase(material, {

@@ -56,8 +56,13 @@ export const lineToken = (moves: readonly LineMove[], play?: ChipPlay): string =
     )
     .join(' ');
 
-/** The last of `moves` alone, numbered as a line's first; with `play`, it plays the line up to it. */
-export function lineMoveToken(moves: readonly LineMove[], play?: ChipPlay): string {
-  const move = moves.at(-1);
-  return move ? numbered(move, true, play) : '';
-}
+/**
+ * "Nf3 Qd7 O-O" as tokens: a line as the coach says it, its moves unnumbered,
+ * each chip playing the line up to itself with `play`.
+ */
+export const movesToken = (moves: readonly LineMove[], play?: ChipPlay): string =>
+  moves
+    .map((move, i) =>
+      moveToken(move.san, move.color, play && { base: play.base, ucis: play.ucis.slice(0, i + 1) }),
+    )
+    .join(' ');

@@ -10,7 +10,7 @@ import {
 } from '#shared/chess/index.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import type { PlanSentences } from '#page/review/i18n/types.ts';
-import { type Fact, said } from './said.ts';
+import { type Fact, oneOf, said } from './said.ts';
 
 // What a quiet move does for the position when it wins or stops nothing: it
 // develops a piece, takes an open file, settles on an outpost, makes or pushes
@@ -91,16 +91,19 @@ function pieceFact({ move, sentences, after }: PlanInput, from: Square, to: Squa
   if (!piece) return null;
   const opening = move.ply <= OPENING_PLIES && BACK_SQUARES[piece.color].includes(from);
   if (opening && (piece.role === 'knight' || piece.role === 'bishop'))
-    return said(sentences.develops(piece));
-  if (piece.role === 'knight' && isOutpost(after, to, piece)) return said(sentences.outpost(piece));
+    return said(oneOf(sentences.develops(piece), move));
+  if (piece.role === 'knight' && isOutpost(after, to, piece))
+    return said(oneOf(sentences.outpost(piece), move));
   const [file] = squareCoords(to);
   if (piece.role === 'rook' && pawnsOn(after, file, piece.color).length === 0)
-    return said(sentences.openFile(pawnsOn(after, file, opposite(piece.color)).length > 0));
+    return said(
+      oneOf(sentences.openFile(pawnsOn(after, file, opposite(piece.color)).length > 0), move),
+    );
   // An endgame: few pieces, the queens gone.
   const endgame =
     pieceCount(after) <= 6 && ![...after.values()].some(({ role }) => role === 'queen');
   if (piece.role === 'king' && endgame && centerDistance(to) < centerDistance(from))
-    return said(sentences.centralKing);
+    return said(oneOf(sentences.centralKing, move));
   return null;
 }
 
@@ -114,6 +117,6 @@ export function planFact(input: PlanInput): Fact | null {
   if ('mate' in move.before || 'mate' in move.after) return null;
   const pawn = after.get(to);
   if (pawn?.role === 'pawn' && isPassed(after, to, pawn.color))
-    return said(sentences.passedPawn(!isPassed(before, from, pawn.color)));
+    return said(oneOf(sentences.passedPawn(!isPassed(before, from, pawn.color)), move));
   return pieceFact(input, from, to);
 }

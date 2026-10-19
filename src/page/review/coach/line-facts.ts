@@ -1,12 +1,12 @@
 import type { Color } from '#shared/chess/index.ts';
 import { playLine, type Ply } from '#page/review/chess/played-line.ts';
-import { lineToken } from '#page/review/comment/tokens.ts';
+import { movesToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import type { FactSentences } from '#page/review/i18n/types.ts';
 import { SURE_MATE } from '#page/review/judge/mate.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { afterLastMove, withMotif } from './motif-fact.ts';
-import type { Fact } from './said.ts';
+import { type Fact, oneOf } from './said.ts';
 import {
   finalNet,
   gives,
@@ -46,7 +46,11 @@ function scoreDrops({ before, after, color }: MoveVerdict, pawns: number): boole
 
 /** A line as tokens, playable from before the move ('b') or after it ('a'); null for one that can't be played. */
 export const lineOf = (plies: readonly Ply[], base: 'a' | 'b' | null): string =>
-  lineToken(plies, base ? { base, ucis: plies.map(ply => ply.uci) } : undefined);
+  movesToken(plies, base ? { base, ucis: plies.map(ply => ply.uci) } : undefined);
+
+/** How many of `color`'s moves `plies` hold. */
+const movesOf = (plies: readonly Ply[], color: Color): number =>
+  plies.filter(ply => ply.color === color).length;
 
 interface Lines {
   /** The move, then the engine's line after it. */
@@ -85,7 +89,8 @@ export function lossFact({ move, facts, them }: LineFactInput, threatened = fals
   const material = facts.material(won);
   const replies = lines.played.slice(1, won.plies);
   if (material === null || replies.length === 0) return null;
-  const text = facts.losesMaterial(them, material, lineOf(replies, 'a'), threatened);
+  const gain = { material, line: lineOf(replies, 'a'), moves: movesOf(replies, them) };
+  const text = oneOf(facts.losesMaterial(them, gain, threatened), move);
   const motifLine = {
     plies: lines.played,
     offset: 1,
@@ -105,7 +110,9 @@ export function bestGainFact({ move, facts, me, them }: LineFactInput): Fact | n
   if (gap < 1 || !scoreDrops(move, gap) || gives(lines.best, them, [0, won.plies])) return null;
   const material = facts.material(won);
   if (material === null) return null;
-  const text = facts.wouldHaveWon(lineOf(lines.best.slice(0, won.plies), 'b'), material);
+  const best = lines.best.slice(0, won.plies);
+  const gain = { material, line: lineOf(best, 'b'), moves: movesOf(best, me) };
+  const text = oneOf(facts.wouldHaveWon(me, gain), move);
   const around = afterLastMove(move, move.before.line ?? []);
   const upTo = won.plies + around.offset;
   return withMotif(text, { ...around, winner: me, upTo, base: 'b' }, facts);
@@ -152,7 +159,9 @@ export function gainFact({ move, facts, me, them }: LineFactInput): Fact | null 
     return null;
   const material = facts.material(won);
   if (material === null) return null;
-  const text = facts.winsAlong(material, lineOf(plies.slice(from, won.plies), 'b'));
+  const own = plies.slice(from, won.plies);
+  const gain = { material, line: lineOf(own, 'b'), moves: movesOf(own, me) };
+  const text = oneOf(facts.winsAlong(gain), move);
   const around = afterLastMove(move, [move.uci, ...(move.after.line ?? [])]);
   const upTo = won.plies - from + around.offset;
   return withMotif(text, { ...around, winner: me, upTo, base: 'b' }, facts);
