@@ -15,7 +15,7 @@
   background: linear-gradient(180deg, var(--ln-ext-neutral-4), var(--ln-ext-bg-panel)) !important;
 }
 
-/* Lichess has no profile pictures: the default avatar. Pinned to the top so
+/* Lichess has no profile pictures: the user's avatar (content/ui/avatars.ts). Pinned to the top so
  * the online dot can be placed against it however tall the row grows. */
 .user-show > .user-show__header::before {
   content: '';

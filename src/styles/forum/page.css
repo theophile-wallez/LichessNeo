@@ -3,8 +3,9 @@
 
 /* ---- Colors --- */
 
-/* A color and a Hugeicon per category, the icon masking a tile of that color. Slugs aren't localized, so rules key on the links content/layout/marks.ts copies
-   onto rows and pages (data-ln-ext-href, data-ln-ext-back, data-ln-ext-search). */
+/* A color and a Hugeicon per category, the icon masking a tile of that color. Slugs aren't
+   localized, so rules key on the links content/layout/marks.ts copies onto rows and pages
+   (data-ln-ext-href, data-ln-ext-back, data-ln-ext-search). */
 main.forum,
 main.forum .categs tr {
   --ln-ext-fc: var(--ln-ext-accent);

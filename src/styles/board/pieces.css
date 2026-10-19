@@ -1,7 +1,7 @@
 /* Board, pieces and highlights. `data-ln-ext-board` on <html> names the board the user picked
- * (content/packs/): one of ours ('accent', 'custom', the backlit ones), an imported pack's ('pack', its image in
- * `--ln-ext-board-img`), or none for Lichess's. A pack's pieces override the variables Lichess
- * draws its own from. */
+ * (content/packs/): one of ours ('accent', 'flat', 'custom', the backlit ones), an imported
+ * pack's ('pack', its image in `--ln-ext-board-img`), or none for Lichess's. A pack's pieces
+ * override the variables Lichess draws its own from. */
 
 :root {
   --ln-ext-highlight: rgba(255, 255, 51, 0.5);
@@ -18,7 +18,7 @@
 
 /* Our two-tone boards: white and the color theme's accent (theme/base.css), the custom board
  * the user colors (content/packs/custom-board.ts), or one in set colors, a preset's or a saved
- * one's (flat-boards.ts).
+ * one's (content/packs/flat-boards.ts).
  * A tile of 2×2 squares, light top left: a8 and h1 are light whichever side is down. */
 html[data-ln-ext-board='custom'] {
   --ln-ext-board-light: var(--ln-ext-board-custom-light, #f7f8f8);

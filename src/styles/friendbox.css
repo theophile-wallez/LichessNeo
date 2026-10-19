@@ -61,7 +61,7 @@
   color: var(--ln-ext-accent-hover) !important;
 }
 
-/* Lichess has no profile pictures: everyone gets the default avatar. */
+/* Lichess has no profile pictures: each friend gets their avatar (content/ui/avatars.ts). */
 #friend_box .content a.user-link::before {
   content: '';
   display: inline-block;

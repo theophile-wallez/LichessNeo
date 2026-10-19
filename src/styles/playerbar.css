@@ -35,7 +35,7 @@
   background: var(--ln-ext-avatar);
 }
 
-/* The computer's side (data-ln-ext-ai, from content/game/ai-players.ts) gets the monitor avatar. */
+/* The computer's side (data-ln-ext-ai, from content/game/ai-players.ts) gets the robot's avatar. */
 html[data-ln-ext-ai~='white']:not([data-ln-ext-has~='round-black'])
   main.round
   .ruser-bottom::before,

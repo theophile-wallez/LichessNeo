@@ -84,7 +84,7 @@ main.box.page-small[data-ln-ext-list='players'] {
     box-shadow: var(--ln-ext-card-shadow-hover);
   }
 
-  /* Lichess has no profile pictures: a default avatar. */
+  /* Lichess has no profile pictures: each player's avatar (content/ui/avatars.ts). */
   & > table.slist > tbody > tr::before {
     content: '';
     position: absolute;

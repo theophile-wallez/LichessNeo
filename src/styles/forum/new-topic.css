@@ -1,7 +1,7 @@
 /* ---- New topic --- */
 
 /* Lichess's red warning box as one of our cards: "Important" on a badge, the four tips
-   as tiles with their emoji. */
+   as tiles with their icons. */
 main.forum-topic.topic-form .warning {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
@@ -44,7 +44,7 @@ main.forum-topic.topic-form .warning h2::before {
 }
 
 /* A block, not flex: the text and its link are separate boxes that must stay one
-   paragraph. The emoji tile sits in the padding. */
+   paragraph. The icon's tile sits in the padding. */
 main.forum-topic.topic-form .warning p {
   position: relative;
   display: block;

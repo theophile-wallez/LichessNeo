@@ -1,7 +1,7 @@
 /* ---- Rematch offers --- */
 
 /* Ours, waiting: Lichess leaves only a spinner, and says in the title that it's sent (an
- * aria-label once ui/tooltips takes it). A click takes it back, so on hover the spinner
+ * aria-label once content/ui/tooltip.ts takes it). A click takes it back, so on hover the spinner
  * becomes a cross. */
 main.round .rcontrols .follow-up .rematch.me {
   background: color-mix(in srgb, var(--ln-ext-accent) 16%, var(--ln-ext-bg-raised)) !important;

@@ -50,7 +50,7 @@
   width: 40px;
   height: 40px;
   border-radius: 11px;
-  /* The glyph at full strength over the tile at a quarter, as menu-titles.css draws them. */
+  /* The glyph at full strength over the tile at a quarter, as pages/menu-titles.css draws them. */
   background: var(--ln-ext-bots-color);
   mask:
     var(--ln-ext-bots-icon) center / 24px no-repeat,

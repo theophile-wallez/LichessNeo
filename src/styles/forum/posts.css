@@ -37,7 +37,7 @@ main.forum-topic .forum-post > * {
   min-width: 0;
 }
 
-/* Lichess has no profile pictures: everyone gets the default avatar. */
+/* Lichess has no profile pictures: each author gets their avatar (content/ui/avatars.ts). */
 main.forum-topic .forum-post::before {
   content: '';
   grid-column: 1;

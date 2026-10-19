@@ -37,7 +37,7 @@
   overflow: visible !important;
 }
 
-/* The default avatar (Lichess has none). Its silhouette fills the square, so no circle crop. */
+/* The user's avatar (Lichess has none: content/ui/avatars.ts). It fills the square, so no circle crop. */
 #powerTip .upt__info::before {
   content: '';
   grid-column: 1;
