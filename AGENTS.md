@@ -745,7 +745,7 @@ Learned the hard way. Check here before touching the area concerned.
   compare runs from the same `ln-ext-review:*` cache entry, which skips the
   engine, or against that spread.
 - Firefox: Puppeteer loads `dist/firefox` over WebDriver BiDi
-  (`puppeteer.launch({ browser: 'firefox' })`, then
+  (puppeteer-core's `launch({ browser: 'firefox' })`, then
   `browser.installExtension(path)`); the dev auto-reload drops its session.
 
 ## Shipping
