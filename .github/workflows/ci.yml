@@ -1,20 +1,18 @@
-# Checks, packages and tests every push and pull request. On main the release
-# workflow calls it, then publishes the zips it packaged.
+# Checks, packages and tests a branch. It runs only when asked, never on a
+# push or a pull request, to spare the Actions minutes: started by hand
+# (`gh workflow run ci.yml --ref <branch>`, or `/ci` in Claude Code), or
+# called by the release workflow, which then publishes the zips it packaged.
 name: CI
 
 on:
-  pull_request:
-  push:
-    branches-ignore: [main]
+  workflow_dispatch:
   workflow_call:
 
 permissions:
   contents: read
 
 concurrency:
-  # One run per branch: a push to a branch with an open pull request would
-  # otherwise run twice at once, and lichess.org rate-limits the end-to-end
-  # tests. When the release calls it, github.workflow is the release's, so its
+  # One run per branch: lichess.org rate-limits the end-to-end tests. When the release calls it, github.workflow is the release's, so its
   # runs never share a group with these.
   group: ci-${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true

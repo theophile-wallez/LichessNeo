@@ -94,7 +94,8 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
   `tests/e2e` is a dozen smoke tests on lichess.org, one per main page, for
   what happy-dom can't see (Lichess's markup today, the layout, both
   scripts, the engine). Don't add to it for a feature: its unit tests cover
-  it. Don't run it locally either, it loads the machine: CI does.
+  it. Don't run it locally either, it loads the machine: CI does, when
+  started (`/ci`).
 - See each new test fail once before trusting it: a test that can't fail is
   not a test. Assert on real outputs, not on a mock's own answers.
 - `fixtures/legacy*.json` are outputs recorded from the original code. They
@@ -130,8 +131,10 @@ must be short. A change goes in two steps.
    tests, then meet the [Definition of done](#definition-of-done) and ship.
 
 A one-line fix the user doesn't need to see (a typo, a doc, a script) can
-skip the draft. CI runs the whole suite, end-to-end tests included, on every
-push: its results are looked at afterwards, not waited for.
+skip the draft. CI runs the whole suite, end-to-end tests included, but no
+push starts it, to spare the Actions minutes: only the user does, by hand on
+GitHub or with `/ci` (`.claude/skills/ci`). Don't start it unasked; its
+results are looked at afterwards, not waited for.
 
 ## Definition of done
 
@@ -161,6 +164,7 @@ hold:
 | `pnpm check:fast`               | the same, but only the unit tests of files changed since `origin/main`           |
 | `pnpm test` / `pnpm test:watch` | unit tests                                                                       |
 | `pnpm test:e2e`                 | end-to-end smoke tests on lichess.org (build first), run by CI                   |
+| `/ci` / `/ci release`           | (Claude Code) starts the CI on the current branch, or the release of `main`      |
 | `pnpm test:e2e:fast`            | the same, without the `@slow` ones (the engine's)                                |
 | `pnpm test:firefox`             | Firefox smoke test of `dist/firefox` (after `pnpm build --target firefox`)       |
 | `pnpm lichess:login`            | signs a kept Chromium profile in to lichess.org, by hand, for signed-in checks   |
@@ -777,8 +781,9 @@ Don't open a PR.
    only for a big change: that commit is `.0`, the next ones `.1`, `.2`…
 5. Finish with a short summary of what was done.
 
-Each push to `main` makes a GitHub release with its zips, but doesn't reach
-the stores. Send a version there only when the user asks (each store reviews
+A push to `main` makes no release: `/ci release` (or the Release workflow,
+run by hand on `main`) runs the CI, then makes a GitHub release with its
+zips, but doesn't reach the stores. Start it only when the user asks. Send a version there only when the user asks (each store reviews
 it, and the Chrome Web Store refuses a new version while one is in review):
 tag the commit of `main` with the version it gets.
 

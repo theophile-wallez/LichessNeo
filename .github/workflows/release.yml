@@ -1,7 +1,9 @@
-# Each push to main runs the CI, zips the extension (for Chrome, the Chrome
-# Web Store and Firefox) and publishes the zips as a GitHub release. The
+# Started by hand on main (`gh workflow run release.yml --ref main`, or
+# `/ci release` in Claude Code), it runs the CI, zips the extension (for
+# Chrome, the Chrome Web Store and Firefox) and publishes the zips as a GitHub
+# release. A push alone runs nothing, to spare the Actions minutes. The
 # manifest keeps only `<major>.<minor>`: the version adds the number of
-# commits since that last changed, so each push gets a new, higher one and
+# commits since that last changed, so each release gets a new, higher one and
 # nobody changes it by hand.
 #
 # A `store-<version>` tag on a commit of main (`store-0.1.295`: the version
@@ -13,14 +15,13 @@ name: Release
 
 on:
   push:
-    branches: [main]
     tags: ['store-*']
   workflow_dispatch:
 
 permissions: {}
 
 concurrency:
-  # A tag gets its own group: a push to main would otherwise cancel it while
+  # A tag gets its own group: a release of main would otherwise cancel it while
   # it waits.
   group: ${{ github.ref_type == 'tag' && github.ref || 'release' }}
   cancel-in-progress: false
@@ -46,9 +47,9 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      # The version counts the commits on main, so it only means something there.
+      # The version counts the commits on main, so it only means something
+      # there: a release started from another branch stops here.
       - name: On main
-        if: github.ref_type == 'tag'
         run: |
           if ! git merge-base --is-ancestor HEAD origin/main; then
             echo "::error::$GITHUB_REF_NAME is not on main: push the commit to main first."
@@ -69,7 +70,7 @@ jobs:
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
-  # A tag only goes to the stores: the push to main makes the release.
+  # A tag only goes to the stores: a run started on main makes the release.
   release:
     needs: version
     if: github.ref_type != 'tag'
