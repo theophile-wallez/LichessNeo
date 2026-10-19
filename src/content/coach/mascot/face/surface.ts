@@ -1,4 +1,5 @@
-import { Group, MathUtils, Mesh, Object3D, Raycaster, Vector3, type BufferGeometry } from 'three';
+import { Group, MathUtils, Mesh, Object3D, Vector3, type BufferGeometry } from 'three';
+import { skinHits } from './skin-hits.ts';
 
 // Where the body's skin is in front of each point of the face, sampled once on
 // a grid so the features can slide over it every frame. A face turned from ahead
@@ -39,19 +40,16 @@ export class Surface {
     const target = new Group().add(skin instanceof Object3D ? skin : new Mesh(skin));
     target.rotation.y = -turn;
     target.updateMatrixWorld(true);
-    const ray = new Raycaster();
-    const forward = new Vector3(0, 0, -1);
     this.#columns = Math.round((this.#x[1] - this.#x[0]) / STEP) + 1;
     this.#rows = Math.round((this.#y[1] - this.#y[0]) / STEP) + 1;
-    for (let row = 0; row < this.#rows; row++)
-      for (let column = 0; column < this.#columns; column++) {
-        ray.set(new Vector3(this.#x[0] + column * STEP, this.#y[0] + row * STEP, 3), forward);
-        const [hit] = ray.intersectObject(target, true);
-        const normal = hit?.face?.normal.clone().transformDirection(hit.object.matrixWorld);
-        // Past the head's edge, keep the sample below: the face never goes there anyway.
-        const below = this.#samples.at(-this.#columns) ?? { z: 0, normal: new Vector3(0, 0, 1) };
-        this.#samples.push(hit && normal ? { z: hit.point.z, normal } : below);
-      }
+    const xs = Array.from({ length: this.#columns }, (_, column) => this.#x[0] + column * STEP);
+    const ys = Array.from({ length: this.#rows }, (_, row) => this.#y[0] + row * STEP);
+    for (const hit of skinHits(target, { xs, ys, z: 3 })) {
+      const normal = hit?.face?.normal.clone().transformDirection(hit.object.matrixWorld);
+      // Past the head's edge, keep the sample below: the face never goes there anyway.
+      const below = this.#samples.at(-this.#columns) ?? { z: 0, normal: new Vector3(0, 0, 1) };
+      this.#samples.push(hit && normal ? { z: hit.point.z, normal } : below);
+    }
   }
 
   #sample(column: number, row: number): Sample {

@@ -7,52 +7,55 @@ export const STRAND_CELLS = 8;
 /** The distance a byte of 255 stands for, in cells. */
 export const STRAND_RANGE = 1.25;
 
-type Point = readonly [number, number, number, number];
+const POINT_COUNT = STRAND_CELLS ** 3;
 
 const wrap = (cell: number): number => (cell + STRAND_CELLS) % STRAND_CELLS;
 
-function nearest(points: readonly Point[], x: number, y: number, z: number): [number, number] {
-  const [cellX, cellY, cellZ] = [Math.floor(x), Math.floor(y), Math.floor(z)];
+// The nearest feature point's distance and seed, written over for each texel: this runs for
+// each of the 262,144 as a coach appears, so it allocates nothing.
+const found = { distance: 0, seed: 0 };
+
+function nearest(points: Float64Array, x: number, y: number, z: number): void {
+  const cellX = Math.floor(x);
+  const cellY = Math.floor(y);
+  const cellZ = Math.floor(z);
   let best = Infinity;
   let seed = 0;
-  for (let k = -1; k <= 1; k++)
-    for (let j = -1; j <= 1; j++)
+  for (let k = -1; k <= 1; k++) {
+    const layer = STRAND_CELLS * wrap(cellZ + k);
+    for (let j = -1; j <= 1; j++) {
+      const row = STRAND_CELLS * (wrap(cellY + j) + layer);
       for (let i = -1; i <= 1; i++) {
-        const index =
-          wrap(cellX + i) + STRAND_CELLS * (wrap(cellY + j) + STRAND_CELLS * wrap(cellZ + k));
-        const [px, py, pz, value] = points[index] ?? [0, 0, 0, 0];
-        const distance =
-          (cellX + i + px - x) ** 2 + (cellY + j + py - y) ** 2 + (cellZ + k + pz - z) ** 2;
+        const index = 4 * (wrap(cellX + i) + row);
+        const distanceX = cellX + i + (points[index] ?? 0) - x;
+        const distanceY = cellY + j + (points[index + 1] ?? 0) - y;
+        const distanceZ = cellZ + k + (points[index + 2] ?? 0) - z;
+        const distance = distanceX * distanceX + distanceY * distanceY + distanceZ * distanceZ;
         if (distance < best) {
           best = distance;
-          seed = value;
+          seed = points[index + 3] ?? 0;
         }
       }
-  return [Math.sqrt(best), seed];
+    }
+  }
+  found.distance = Math.sqrt(best);
+  found.seed = seed;
 }
 
 /** Two bytes per texel, x fastest: the distance (scaled by STRAND_RANGE) and the seed. */
 export function strandData(random: () => number = Math.random): Uint8Array {
-  const points: Point[] = Array.from({ length: STRAND_CELLS ** 3 }, () => [
-    random(),
-    random(),
-    random(),
-    random(),
-  ]);
+  // Each cell's feature point (x, y, z in the cell) and its random number.
+  const points = new Float64Array(POINT_COUNT * 4);
+  for (let index = 0; index < points.length; index++) points[index] = random();
   const data = new Uint8Array(STRAND_TEXELS ** 3 * 2);
   const scale = STRAND_CELLS / STRAND_TEXELS;
   let offset = 0;
   for (let z = 0; z < STRAND_TEXELS; z++)
     for (let y = 0; y < STRAND_TEXELS; y++)
       for (let x = 0; x < STRAND_TEXELS; x++) {
-        const [distance, seed] = nearest(
-          points,
-          (x + 0.5) * scale,
-          (y + 0.5) * scale,
-          (z + 0.5) * scale,
-        );
-        data[offset++] = Math.min(255, Math.round((distance / STRAND_RANGE) * 255));
-        data[offset++] = Math.round(seed * 255);
+        nearest(points, (x + 0.5) * scale, (y + 0.5) * scale, (z + 0.5) * scale);
+        data[offset++] = Math.min(255, Math.round((found.distance / STRAND_RANGE) * 255));
+        data[offset++] = Math.round(found.seed * 255);
       }
   return data;
 }
