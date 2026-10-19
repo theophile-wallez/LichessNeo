@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import {
   CLASS_COLORS,
   classMood,
-  COUNTED,
   GOOD,
   GRAPH_DOTS,
   isError,
@@ -61,7 +60,6 @@ describe('move classes', () => {
 
   it('keep the original’s sets', () => {
     const { sets } = legacy;
-    expect(COUNTED).toEqual(sets.COUNTED);
     expect([...SUMMARY_ROWS]).toEqual(sets.SUMMARY_ROWS);
     expect([...GRAPH_DOTS]).toEqual(sets.GRAPH_DOTS);
     expect([...LIST_BADGES]).toEqual(sets.LIST_BADGES);

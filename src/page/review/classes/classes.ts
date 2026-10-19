@@ -55,10 +55,6 @@ export const RANK: readonly MoveClass[] = [
   'blunder',
 ];
 
-/** The counts shown over the Game Review button. */
-export type CountedClass = 'brilliant' | 'great' | 'best';
-export const COUNTED: readonly CountedClass[] = ['brilliant', 'great', 'best'];
-
 /** The summary's rows before its chevron is opened; a brilliant move joins them when there is one. */
 export const SUMMARY_ROWS: ReadonlySet<MoveClass> = new Set<MoveClass>([
   'great',

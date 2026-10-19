@@ -3,7 +3,7 @@ import type { Color } from '#shared/chess/types.ts';
 import { factsFr, trajectoryFr } from './fr-comment.ts';
 import { capitalize, conjugate, partyOf, typography } from './fr-grammar.ts';
 import { remarksFr } from './fr-remarks.ts';
-import type { CountedClass, MoveClass } from '#page/review/classes/classes.ts';
+import type { MoveClass } from '#page/review/classes/classes.ts';
 import type {
   ClockStrings,
   InterfaceStrings,
@@ -11,12 +11,6 @@ import type {
   ReviewLanguage,
   Viewer,
 } from './types.ts';
-
-const COUNT_LABELS: Readonly<Record<CountedClass, readonly [string, string]>> = {
-  brilliant: ['coup brillant', 'coups brillants'],
-  great: ['excellent coup', 'excellents coups'],
-  best: ['meilleur coup', 'meilleurs coups'],
-};
 
 const CLASS_PLURALS: Readonly<Record<MoveClass, string>> = {
   brilliant: 'Coups brillants',
@@ -93,8 +87,6 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   startPosition: 'Position de départ',
   more: 'Voir tous les coups',
   less: 'Voir moins',
-  gameRating: 'Classement de la partie',
-  gameRatingTip: 'Donne une estimation du classement d’un joueur d’après une seule partie.',
   bestWas: move => `Le meilleur coup était ${move}.`,
   cost: percent => `−${percent} % de chances de gain`,
   lines: {
@@ -174,10 +166,6 @@ export const french = (viewer: Viewer): ReviewLanguage => ({
     blunder: '{m} est une gaffe',
   },
   mateSentence: '{m} est mat',
-  countLabel: (moveClass, count) => {
-    const [one, many] = COUNT_LABELS[moveClass];
-    return `${count} ${count > 1 ? many : one}`;
-  },
   countTip: (color, moveClass, count) =>
     `${CLASS_PLURALS[moveClass]} des ${color === 'white' ? 'Blancs' : 'Noirs'}\u00a0: ${count}`,
   typography,

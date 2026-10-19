@@ -121,17 +121,10 @@ describe('verdictTitle', () => {
 });
 
 describe('the languages’ helpers', () => {
-  it('punctuate and count as the original did', () => {
+  it('punctuate as the original did', () => {
     for (const [text, french, english] of legacy.typos) {
       expect(fr.typography(String(text))).toBe(french);
       expect(en.typography(String(text))).toBe(english);
-    }
-    for (const [lang, moveClass, count, label] of legacy.counts) {
-      const counted =
-        moveClass === 'brilliant' || moveClass === 'great' || moveClass === 'best'
-          ? moveClass
-          : 'best';
-      expect(languageOf(lang).countLabel(counted, Number(count))).toBe(label);
     }
   });
 });

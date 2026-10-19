@@ -2,7 +2,7 @@ import type { SafeHtml } from '#shared/html.ts';
 import type { ProfileAxis } from '#page/review/judge/profile.ts';
 import type { Theme } from '#page/review/coach/fact.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
-import type { CountedClass, MoveClass } from '#page/review/classes/classes.ts';
+import type { MoveClass } from '#page/review/classes/classes.ts';
 
 // What the review says, per language. Moves, pieces and squares go into the
 // coach's sentences as [[…]] tokens (comment/tokens.ts), already built.
@@ -90,8 +90,6 @@ export interface InterfaceStrings {
   readonly startPosition: string;
   readonly more: string;
   readonly less: string;
-  readonly gameRating: string;
-  readonly gameRatingTip: string;
   /** Explain's hint for a move that wasn't best. */
   readonly bestWas: (move: string) => string;
   /** A move's cost bar, by the share of the mover's winning chances it gave away. */
@@ -191,8 +189,6 @@ export interface ReviewLanguage {
   readonly classSentences: Readonly<Record<MoveClass, string>>;
   /** The verdict over a best move that mates, which needn't say it's best. */
   readonly mateSentence: string;
-  /** "3 Best", "3 meilleurs coups": the counts over the Game Review button. */
-  readonly countLabel: (moveClass: CountedClass, count: number) => string;
   /** "Black’s blunders: 2": the summary's count, as its button's label. */
   readonly countTip: (color: Color, moveClass: MoveClass, count: number) => string;
   /** The language's typographic rules, applied to the coach's text. */

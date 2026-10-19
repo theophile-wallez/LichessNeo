@@ -33,7 +33,8 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
     // Explain's lines, the summary's profile, the graph's views, the share button, the cost
     // bars, Retry, the tactics' tags, the clock's advice, the brief and the closed review's
     // way back to the summary are new: the original had none. Its phase and player labels
-    // went with its table, and the free board's first words are a title over a line now.
+    // went with its table, its game rating's title and tip with its card, and the free
+    // board's first words are a title over a line now.
     const {
       bestWas,
       liveIntro: _liveIntro,
@@ -55,6 +56,8 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
     const {
       phases: _phases,
       players: _players,
+      gameRating: _gameRating,
+      gameRatingTip: _gameRatingTip,
       bestWas: originalBestWas,
       liveIntro: _originalLiveIntro,
       ...originalUi

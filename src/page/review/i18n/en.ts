@@ -99,8 +99,6 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   startPosition: 'Starting position',
   more: 'Show all moves',
   less: 'Show less',
-  gameRating: 'Game Rating',
-  gameRatingTip: 'An estimate of a player’s rating based on a single game.',
   bestWas: move => `${move} was best.`,
   cost: percent => `−${percent}% winning chances`,
   lines: {
@@ -165,7 +163,6 @@ export const english = (viewer: Viewer): ReviewLanguage => ({
     blunder: '{m} is a blunder',
   },
   mateSentence: '{m} is checkmate',
-  countLabel: (moveClass, count) => `${count} ${CLASS_LABELS[moveClass]}`,
   countTip: (color, moveClass, count) =>
     `${color === 'white' ? 'White' : 'Black'}’s ${CLASS_PLURALS[moveClass]}: ${count}`,
   typography: text => text,
