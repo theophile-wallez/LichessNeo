@@ -1,5 +1,5 @@
-/* The ticket (content/game/intro/ticket.ts): a ticket lands on the board, a stamp thumps on it,
- * it tears along its perforation and each half flies into its player's avatar, which swells. */
+/* The ticket (content/game/intro/ticket.ts): a ticket lands on the board, then
+ * tears along its perforation and each half flies into its player's avatar, which swells. */
 
 .ln-ext-intro-fx[data-ln-ext-intro='ticket'] {
   --ln-ext-intro-scrim: 0.5;
@@ -15,9 +15,7 @@
   margin: auto;
   color: var(--ln-ext-ink);
   filter: drop-shadow(0 4cqw 7cqw #00000080);
-  animation:
-    ln-ext-intro-ticket-in 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
-    ln-ext-intro-ticket-thump 220ms cubic-bezier(0.22, 1, 0.36, 1) 840ms !important;
+  animation: ln-ext-intro-ticket-in 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
 }
 
 /* Notched on the perforation, whose dashes are the bottom half's. */
@@ -78,6 +76,7 @@
   width: 12.7cqw;
   aspect-ratio: 1;
   border-radius: 3.3cqw;
+  background-color: var(--ln-ext-intro-avatar-color);
   background-image: var(--ln-ext-intro-avatar-image);
   background-size: var(--ln-ext-intro-avatar-size);
   background-position: var(--ln-ext-intro-avatar-position);
@@ -147,48 +146,10 @@
   font-size: 1.2em;
 }
 
-/* Stamped over the half, as a real one, rather than taking room from the name. */
-.ln-ext-intro-ticket__stamp {
-  position: absolute;
-  right: 4.3cqw;
-  top: calc(50% - 3cqw);
-  padding: 1.3cqw 2cqw;
-  border: 0.7cqw solid var(--ln-ext-accent);
-  border-radius: 2cqw;
-  background: #ffffffd9;
-  color: var(--ln-ext-accent);
-  font-size: 2.9cqw;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  opacity: 0;
-  rotate: -10deg;
-  animation: ln-ext-intro-ticket-stamp 200ms cubic-bezier(0.55, 0, 1, 0.45) 640ms both !important;
-}
-
 @keyframes ln-ext-intro-ticket-in {
   from {
     opacity: 0;
     transform: translateY(12cqw) rotate(-7deg) scale(0.82);
-  }
-}
-
-@keyframes ln-ext-intro-ticket-thump {
-  50% {
-    scale: 0.965;
-  }
-}
-
-@keyframes ln-ext-intro-ticket-stamp {
-  from {
-    opacity: 0;
-    scale: 2.4;
-  }
-  to {
-    opacity: 1;
-    scale: 1;
   }
 }
 

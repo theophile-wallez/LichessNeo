@@ -659,10 +659,6 @@
     "message": "Opponent",
     "description": "The name of the opponent on the settings' preview of the game intro."
   },
-  "introGoodGame": {
-    "message": "Have a good game!",
-    "description": "Wished to the player as their game begins."
-  },
   "ratingMostPlayed": {
     "message": "Most played",
     "description": "The default pick: the speed with the most games."

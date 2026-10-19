@@ -1,6 +1,5 @@
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
-import { message } from '#content/platform/runtime.ts';
 import {
   addPart,
   addScrim,
@@ -15,9 +14,7 @@ import {
 } from './stage.ts';
 
 // The ticket: a ticket for the game lands on the board, the opponent on its top
-// half with the time control, the player on its bottom one. A "Have a good
-// game!" stamp thumps down on it, then it tears along its perforation, and
-// each half flies into its player's avatar (styles/game/intro/ticket.css).
+// half with the time control, the player on its bottom one. It tears along its perforation, and each half flies into its player's avatar (styles/game/intro/ticket.css).
 
 function who(side: Side): SafeHtml {
   const { title, rating } = side.player;
@@ -43,7 +40,7 @@ function play(stage: Stage): void {
   setHtml(
     ticket,
     html`<div class="ln-ext-intro-ticket__half ln-ext-intro-ticket__half--top">${who(stage.top)}${setupMarkup(stage.setup)}</div>
-      <div class="ln-ext-intro-ticket__half ln-ext-intro-ticket__half--bottom">${who(stage.bottom)}<span class="ln-ext-intro-ticket__stamp">${message('introGoodGame')}</span></div>`,
+      <div class="ln-ext-intro-ticket__half ln-ext-intro-ticket__half--bottom">${who(stage.bottom)}</div>`,
   );
   const halves = queryAll(ticket, '.ln-ext-intro-ticket__half', HTMLElement);
   for (const [index, side] of [stage.top, stage.bottom].entries()) {

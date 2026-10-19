@@ -86,25 +86,6 @@
   --ln-ext-intro-ring: var(--ln-ext-avatar-from, var(--ln-ext-orange));
 }
 
-/* A white pill of words, centered across the board at the `top` it's given. */
-.ln-ext-intro-fx__pill {
-  left: 50%;
-  display: flex;
-  align-items: center;
-  gap: 2cqw;
-  padding: 2.6cqw 4.4cqw;
-  border-radius: 999px;
-  background: var(--ln-ext-white);
-  color: var(--ln-ext-ink);
-  font-size: max(12px, 4.2cqw);
-  font-weight: 750;
-  line-height: 1.2;
-  white-space: nowrap;
-  box-shadow: 0 2.6cqw 6.5cqw #00000066;
-  translate: -50% -50%;
-  opacity: 0;
-}
-
 /* An avatar in its bar swells as what flew there lands. */
 @keyframes ln-ext-intro-avatar-pop {
   50% {

@@ -51,6 +51,13 @@ const layer = (): HTMLElement | null => queryOne(document, '.ln-ext-intro-fx', H
 const texts = (selector: string): string[] =>
   queryAll(document, selector, HTMLElement).map(element => element.textContent.trim());
 
+// A part's place over the squares, as its style sets it.
+const left = (selector: string): number =>
+  Number.parseFloat(queryOne(document, selector, HTMLElement)?.style.left ?? '');
+const width = (selector: string): number =>
+  Number.parseFloat(queryOne(document, selector, HTMLElement)?.style.width ?? '');
+const middle = (selector: string): number => left(selector) + width(selector) / 2;
+
 beforeEach(() => {
   vi.useFakeTimers();
   vi.stubGlobal('chrome', {
@@ -103,19 +110,38 @@ describe('an intro', () => {
     expect(shown.root.dataset.lnExtIntro).toBe('salute');
   });
 
-  it('brings both avatars to the board for the salute, with their coach', () => {
+  it('brings both avatars to the board for the salute, with their coach, and crosses swords', () => {
     playIntro(scene(), 'salute');
     const mascots = queryAll(document, '.ln-ext-intro-salute', HTMLElement);
     expect(mascots.map(mascot => mascot.dataset.lnExtAvatarCoach)).toEqual(['9', undefined]);
-    expect(texts('.ln-ext-intro-fx__pill')).toEqual(['introGoodGame']);
+    const swords = queryAll(document, '.ln-ext-intro-salute__sword', HTMLElement);
+    expect(swords.map(sword => sword.querySelector('svg') !== null)).toEqual([true, true]);
     expect(queryAll(document, '.ln-ext-intro-salute__spark', HTMLElement)).toHaveLength(10);
+    expect(document.querySelector('.ln-ext-intro-fx__pill')).toBeNull();
+  });
+
+  it('crosses the swords between the avatars, level with them', () => {
+    const shown = scene();
+    vi.spyOn(shown.board, 'getBoundingClientRect').mockReturnValue(
+      DOMRect.fromRect({ x: 0, y: 0, width: 400, height: 400 }),
+    );
+    playIntro(shown, 'salute');
+    const sparks = queryOne(document, '.ln-ext-intro-salute__sparks', HTMLElement);
+    expect(sparks?.style.left).toBe('200px');
+    expect(sparks?.style.top).toBe('200px');
+    expect(
+      middle('.ln-ext-intro-salute__sword--top') + middle('.ln-ext-intro-salute__sword--bottom'),
+    ).toBeCloseTo(400);
+    // Room for the swords between the avatars, and on either side of them.
+    const avatar = width('.ln-ext-intro-salute--top');
+    const gap = left('.ln-ext-intro-salute--bottom') - left('.ln-ext-intro-salute--top') - avatar;
+    expect(gap).toBeGreaterThan(avatar / 2);
   });
 
   it('writes both players and the game’s setup on the ticket', () => {
     playIntro(scene(), 'ticket');
     expect(texts('.ln-ext-intro-ticket__who b')).toEqual(['alice', 'bob']);
     expect(texts('.ln-ext-intro-ticket__setup em')).toEqual(['Rated · Blitz']);
-    expect(texts('.ln-ext-intro-ticket__stamp')).toEqual(['introGoodGame']);
   });
 
   it('runs the names across the board for the credits, the setup between them', () => {

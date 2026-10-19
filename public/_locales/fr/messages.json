@@ -494,9 +494,6 @@
   "introPreviewOpponent": {
     "message": "Adversaire"
   },
-  "introGoodGame": {
-    "message": "Bonne partie !"
-  },
   "ratingMostPlayed": {
     "message": "La plus jouée"
   },

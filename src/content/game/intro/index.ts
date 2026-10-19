@@ -9,6 +9,7 @@ import { freshGameId } from '#shared/round-init.ts';
 import { readStored, SessionKey, writeStored } from '#shared/storage.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { computerRatings } from '#content/game/ai-players.ts';
+import { syncAvatars } from '#content/ui/avatars.ts';
 import { currentSettings, settingsRead } from '#content/settings/settings.ts';
 import { decodeFaceoff, faceoffBoard } from './faceoff.ts';
 import { playIntro, type Scene } from './play.ts';
@@ -52,6 +53,8 @@ function readScene(): Scene | null {
   const top = main && queryOne(main, '.ruser-top', HTMLElement);
   const bottom = main && queryOne(main, '.ruser-bottom', HTMLElement);
   if (!main || !wrap || !board || !top || !bottom) return null;
+  // The avatars' task runs after ours: a bar just drawn has no avatar yet.
+  syncAvatars(main);
   const bottomColor = wrapOrientation(wrap);
   const ratings = computerRatings();
   const side = (bar: HTMLElement, color: Color): Side => ({

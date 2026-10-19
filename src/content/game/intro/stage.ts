@@ -167,6 +167,8 @@ export function copyAvatar(element: HTMLElement, side: Side): void {
   copyAvatarData(element, side);
   const avatar = getComputedStyle(side.bar, '::before');
   setStyleProperty(element, '--ln-ext-intro-avatar-image', avatar.backgroundImage);
+  // The silhouette's tile is its color, under the image.
+  setStyleProperty(element, '--ln-ext-intro-avatar-color', avatar.backgroundColor);
   setStyleProperty(element, '--ln-ext-intro-avatar-size', avatar.backgroundSize);
   setStyleProperty(element, '--ln-ext-intro-avatar-position', avatar.backgroundPosition);
   setStyleProperty(element, '--ln-ext-intro-avatar-repeat', avatar.backgroundRepeat);

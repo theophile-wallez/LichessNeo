@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
+import { userAvatar } from '#shared/own-avatar.ts';
 import { SessionKey } from '#shared/storage.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { FACEOFF_MS } from './faceoff.ts';
@@ -145,6 +146,16 @@ describe('the game intro', () => {
     vi.runAllTimers();
     expect(document.querySelector('.ln-ext-intro-fx')).toBeNull();
     expect(main()?.dataset.lnExtIntro).toBeUndefined();
+  });
+
+  it('gives each avatar it flies its player’s, though the avatars’ task has yet to mark the bar', async () => {
+    settings.gameIntro = 'salute';
+    prepareIntro(initData(false));
+    decoded();
+    await flush();
+    syncIntro();
+    const mascot = queryOne(document, '.ln-ext-intro-salute--top', HTMLElement);
+    expect(mascot?.dataset.lnExtAvatarCoach).toBe(String(userAvatar('alice').coach));
   });
 
   it('plays none when the settings say so, nor later', async () => {

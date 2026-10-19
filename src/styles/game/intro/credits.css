@@ -73,6 +73,7 @@
   width: 6.7cqw;
   height: 6.7cqw;
   border-radius: 2cqw;
+  background-color: var(--ln-ext-intro-avatar-color);
   background-image: var(--ln-ext-intro-avatar-image);
   background-size: var(--ln-ext-intro-avatar-size);
   background-position: var(--ln-ext-intro-avatar-position);
