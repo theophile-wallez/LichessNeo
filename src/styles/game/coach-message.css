@@ -1,21 +1,33 @@
 /* ---- Coach's word before the first move --- */
 
 /* Lichess's message over the moves ("You play the white pieces"), said by the coach, or the
-   computer's robot (content/game/coach-message.ts), in the review's white bubble
-   (review/bubble.css). Its icon's place shows the mascot's still from the first paint; the
-   live one, drawn over it once built, hides it (`data-ln-ext-live`). */
+   computer's robot (content/game/coach-message.ts), in the Game Review's coach card
+   (review/bubble.css): the coach standing on its bottom edge, its words beside it. Its icon's
+   place shows the mascot's still from the first paint; the live one, drawn over it once built,
+   hides it (`data-ln-ext-live`). */
 .ln-ext-message-coach {
   display: none;
 }
 
 main.round .round__app .message {
+  --ln-ext-coach-h: 114px;
   position: relative;
   display: flex !important;
-  align-items: center;
+  align-items: flex-end;
+  /* Room for its arms at its sides (the fox's reach the farthest): the card cuts it only at
+     its feet and over its hops. */
   gap: 18px;
-  margin: 0 !important;
-  padding: 16px 14px !important;
-  background: none !important;
+  height: 136px;
+  box-sizing: border-box;
+  /* Lichess gives it a basis of its own, shorter. */
+  flex: none !important;
+  /* In from the panel's sides as its controls are. */
+  margin: 8px 8px 0 !important;
+  padding: 0 14px 0 24px !important;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--ln-ext-bg-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
 }
 
 /* The still: the coach picked at boot (data-ln-ext-coach), or the robot of the game's level. */
@@ -23,14 +35,12 @@ main.round .round__app .message::before {
   content: '' !important;
   flex: none;
   /* The stills' own shape (124 × 114), so the live one lands on its still exactly. */
-  width: calc(84px * 124 / 114);
-  height: 84px;
+  width: calc(var(--ln-ext-coach-h) * 124 / 114);
+  height: var(--ln-ext-coach-h);
   margin: 0 !important;
   background: bottom center / auto 100% no-repeat;
   /* Lichess dims its icon: the still must look as the live one will. */
   opacity: 1 !important;
-  /* Its bust fades out rather than end on a straight cut. */
-  mask-image: linear-gradient(#000 72%, transparent);
 }
 
 html[data-ln-ext-coach='1'] main.round .round__app .message::before {
@@ -120,43 +130,51 @@ main.round .round__app .message[data-ln-ext-live]::before {
   background-image: none !important;
 }
 
-/* The live one, exactly over the still. */
+/* The live one, exactly over the still. Its canvas spills past the still's sides, for the arms
+   the still cuts, and above it, for its hops, as the review's (review/bubble.css), but comes in
+   cut as the still is, then opens out. */
 main.round .round__app .message > .ln-ext-message-coach {
   position: absolute;
-  top: 50%;
-  left: 14px;
+  bottom: 0;
+  left: 24px;
   display: block;
-  width: calc(84px * 124 / 114);
-  height: 84px;
-  translate: 0 -50%;
-  mask-image: linear-gradient(#000 72%, transparent);
+  width: calc(var(--ln-ext-coach-h) * 124 / 114);
+  height: var(--ln-ext-coach-h);
 }
 
+main.round .round__app .message > .ln-ext-message-coach canvas {
+  top: -50%;
+  left: -40%;
+  width: 180%;
+  height: 150%;
+  clip-path: inset(calc(100% / 3) calc(100% * 2 / 9) 0);
+  transition: clip-path 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.1s !important;
+}
+
+main.round .round__app .message[data-ln-ext-live] > .ln-ext-message-coach canvas {
+  clip-path: inset(0);
+}
+
+/* Its words, as the review's remark on the card. */
 main.round .round__app .message > div:not(.ln-ext-mascot) {
-  position: relative;
   flex: 1;
   min-width: 0;
-  box-sizing: border-box;
-  min-height: 56px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background: var(--ln-ext-white);
-  color: color-mix(in srgb, var(--ln-ext-ink) 88%, var(--ln-ext-white));
-  font-size: 15px;
-  line-height: 1.4;
-}
-
-main.round .round__app .message > div:not(.ln-ext-mascot)::before {
-  content: '';
-  position: absolute;
-  left: -17px;
-  top: calc(50% - 12px);
-  width: 18px;
-  height: 25px;
-  background: var(--ln-ext-bubble-tail) center / 100% 100% no-repeat;
+  align-self: center;
+  color: var(--ln-ext-neutral-13);
+  font-size: 14px;
+  line-height: 1.35;
 }
 
 main.round .round__app .message strong {
-  color: var(--ln-ext-ink);
-  font-weight: 800;
+  display: block;
+  /* Lichess's mobile layout sets it apart from the line before. */
+  margin: 2px 0 0 !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+main.round .round__app .message br {
+  display: none;
 }
