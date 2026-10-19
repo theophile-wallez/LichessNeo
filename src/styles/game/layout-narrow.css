@@ -15,7 +15,7 @@
 
     display: grid !important;
     grid-template-columns: var(--ln-ext-board) !important;
-    /* TV's channels first (tv.css); a row with nothing in it takes no room. */
+    /* TV's channels first (styles/tv); a row with nothing in it takes no room. */
     grid-template-rows:
       auto var(--ln-ext-bar) auto var(--ln-ext-board) auto var(--ln-ext-bar-bot)
       auto auto auto auto !important;

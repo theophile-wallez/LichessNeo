@@ -1,7 +1,7 @@
 import { queryOne, setStyleProperty } from '#shared/dom.ts';
 
 // The coach's bubble is centered on its tail, which stays at the coach's
-// chin (review.css). CSS can't read an element's height, so it's handed
+// chin (styles/review/bubble.css). CSS can't read an element's height, so it's handed
 // over; it only moves the bubble, never resizes it, so it can't loop.
 
 let sizes: ResizeObserver | null = null;

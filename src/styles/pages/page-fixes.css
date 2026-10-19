@@ -34,7 +34,7 @@
   font-weight: 700;
 }
 
-/* Coordinate trainer: its board capped as storm.css caps Storm's, or the explanation and
+/* Coordinate trainer: its board capped as storm/run.css caps Storm's, or the explanation and
  * Start button ran past the window. The ranks get a gutter only when shown. */
 @media (min-width: 1020px) {
   main#trainer > .trainer {

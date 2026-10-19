@@ -76,7 +76,7 @@ main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/new'] {
 }
 
 /* Desktop only (Lichess's top bar holds the top edge below 1020px): the menu and title bar stay
- * put while the cards scroll, the bar's shadow showing once stuck (as in simul.css). */
+ * put while the cards scroll, the bar's shadow showing once stuck (as in styles/simul). */
 @media (min-width: 1020px) {
   /* Widened to cover the shadows of cards passing under it; no more, the menu is 10px away. */
   main.team-list .box__top {

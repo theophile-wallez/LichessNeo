@@ -61,6 +61,6 @@ export function phasesMarkup(
   return [...marks, ...labels];
 }
 
-/** The move on the board, moved by `followPly`; the guide and the dot, by the hover. */
+/** The move on the board, moved by `PlyChart.follow`; the guide and the dot, by the hover. */
 export const overlayMarkup = ({ height }: PlotSize): SafeHtml =>
   html`<line class="ln-ext-gchart__ply" x1="0" x2="0" y1="${PLOT_TOP}" y2="${height}"/><g class="ln-ext-rchart__hover"><line class="ln-ext-rchart__guide" x1="0" x2="0" y1="${PLOT_TOP}" y2="${height}"/><circle class="ln-ext-rchart__dot" r="4.5" cx="0" cy="0"/></g>`;

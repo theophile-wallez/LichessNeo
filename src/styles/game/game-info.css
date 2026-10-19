@@ -1,7 +1,7 @@
 /* ---- Game info --- */
 
 /* Without a chat, the game info is a match card: a line with the time control, its mode's
- * tile (TV channel colors, tv.css) and pills (content/game/game-meta.ts splits "3+0 • Rated •
+ * tile (TV channel colors, tv/colors.css) and pills (content/game/game-meta.ts splits "3+0 • Rated •
  * Blitz"), then the players face to face (players.css). */
 main.round .round__side > .game__meta {
   --ln-ext-meta: var(--ln-ext-accent);

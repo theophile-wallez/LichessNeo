@@ -70,7 +70,7 @@
 
 /* ---- Title --- */
 
-/* Pinned over the chart and the list while they scroll, as on the other pages (simul.css):
+/* Pinned over the chart and the list while they scroll, as on the other pages (styles/simul):
  * its box lets it out into the page's grid (`display: contents`), and the chart keeps the
  * box's look. Desktop only: below 1020px Lichess's top bar holds the top edge. */
 @media (min-width: 1020px) {

@@ -36,7 +36,7 @@ const CHAIN_MS = 400;
 
 function hoverTarget(event: MouseEvent): HTMLElement | null {
   const target = closestTo(event.target, TARGETS, HTMLElement);
-  // TV's channels only need theirs while their names are hidden (styles/tv.css).
+  // TV's channels only need theirs while their names are hidden (styles/tv/column.css).
   if (target?.matches('a.tv-channel') && !matchMedia('(max-width: 1259.98px)').matches) return null;
   return target;
 }

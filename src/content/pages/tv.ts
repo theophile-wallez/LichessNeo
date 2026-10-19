@@ -2,7 +2,7 @@ import { queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
-// Lichess TV (styles/tv.css).
+// Lichess TV (styles/tv).
 
 const TV_PATH = /\/tv(\/|$)/;
 

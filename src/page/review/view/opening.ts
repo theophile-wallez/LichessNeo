@@ -9,7 +9,7 @@ import type { BookEntry, Session } from '#page/review/session.ts';
 // The opening's name over the move list: on the free board, from the masters
 // database (signed in only); in a game's review, the game's, from its export.
 // Our element is appended to Lichess's panel and placed above the moves by
-// review.css, so Lichess's own children never move.
+// styles/review/move-list.css, so Lichess's own children never move.
 
 /** "Ruy Lopez: Morphy Defense": the family in bold, then the variation. */
 export function openingMarkup({ name, eco }: Pick<BookEntry, 'name' | 'eco'>): SafeHtml {

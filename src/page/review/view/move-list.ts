@@ -7,7 +7,7 @@ import { bookAt, judgeAt } from '#page/review/live/judging.ts';
 import type { LiveState, Review } from '#page/review/session.ts';
 
 // Badges and cost bars in Lichess's move list. We only set attributes on its
-// moves and lines (snabbdom owns them); review.css draws the rest.
+// moves and lines (snabbdom owns them); styles/review/move-list.css draws the rest.
 
 // A move that leads with a piece's figurine gets a little room after it (review/move-list.css).
 const markPiece = (element: HTMLElement, san: string): void =>
@@ -59,9 +59,9 @@ function stripes(tree: Element): void {
   }
 }
 
-// Marks the variations played here, which review.css shows while it hides
+// Marks the variations played here, which review/move-list.css shows while it hides
 // Lichess's computer lines, and the computer lines they branch off, shown too as
-// the way to them. Classes rather than data attributes because review.css reads
+// the way to them. Classes rather than data attributes because that stylesheet reads
 // `ln-ext-var` in a `:has()`, where an attribute selector slows every move.
 function ownVariations(tree: Element, analysis: Analysis): void {
   const lines = queryAll(tree, 'interrupt line', Element);

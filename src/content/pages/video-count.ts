@@ -6,7 +6,7 @@ import { onEveryTick } from '#content/sync-loop.ts';
 
 // The video library's intro says, in three lines, that its videos are free
 // and how many there are: a pill beside the title says both instead
-// (styles/pages/videos.css). The count is the intro's only number, whatever
+// (styles/pages/videos/layout.css). The count is the intro's only number, whatever
 // its language; without one, the intro stays.
 
 const PILL = 'ln-ext-video-count';
