@@ -21,7 +21,7 @@ export interface ConfettiPiece {
 
 export const CONFETTI_COUNT = 70;
 
-// Mostly white, as on the board of the site it's modelled on, with a few warm ones.
+// Mostly white, with a few warm ones.
 const COLORS: readonly string[] = [
   '#ffffff',
   '#ffffff',

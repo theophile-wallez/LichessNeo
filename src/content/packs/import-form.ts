@@ -4,8 +4,9 @@ import { fetchPack } from './import.ts';
 import type { Library } from './library.ts';
 
 // The form that imports a pack from a GitHub link, in the extension's
-// settings, and in the user menu's panels when signed out. A private repository's token is used for that import and never
-// kept: the page's storage is Lichess's to read.
+// settings, and in the user menu's panels when signed out. A private
+// repository's token is used for that import and never kept: the page's
+// storage is Lichess's to read.
 
 const HELP_URL = 'https://github.com/theophile-wallez/LichessNeo/blob/main/docs/packs.md';
 

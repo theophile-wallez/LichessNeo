@@ -9,7 +9,7 @@ import legacy from './fixtures/legacy.json' with { type: 'json' };
 const navOf = (): string | undefined =>
   queryOne(document, '.subnav', HTMLElement)?.dataset['lnExtNav'];
 
-// A mark the original didn't set: the page's side menu, on its <main> (static-pages.css).
+// A mark the original didn't set: the page's side menu, on its <main> (menu-titles.css).
 const withoutNewMarks = (markup: string): string =>
   markup.replaceAll(/ data-ln-ext-menu="[^"]*"/g, '');
 

@@ -70,10 +70,9 @@ function buildSection(state: State): HTMLElement {
   return section;
 }
 
-// Lichess's own state wins: it may have left the pool (Esc, a game found) or
-// joined one itself (a game's "New opponent" opens /#pool/<id>).
-// The heading says which pool Lichess seeks a game in, with a button to stop: a game's "New
-// opponent" lands here seeking.
+// The heading says which pool Lichess seeks a game in, with a button to stop. Lichess's own
+// state wins: it may have left the pool (Esc, a game found) or joined one itself (a game's
+// "New opponent" opens /#pool/<id> and lands here seeking).
 function syncBanner(section: HTMLElement, state: State): void {
   const text = queryOne(section, '.ln-ext-speeds__seeking-text', HTMLElement);
   const cancel = queryOne(section, '.ln-ext-speeds__cancel', HTMLElement);

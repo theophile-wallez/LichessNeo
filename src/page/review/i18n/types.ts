@@ -66,10 +66,9 @@ export interface InterfaceStrings {
   readonly explain: string;
   readonly best: string;
   readonly analysing: string;
-  /** Over the game rating, under a player's accuracy. */
   /**
-   * "You played like an [1850] Elo": the words around a player's game
-   * rating, null while it's unknown.
+   * "You played like an [1850] Elo": the words around a player's game rating, under
+   * their accuracy, null while it's unknown.
    */
   readonly playedLike: (side: Color, elo: number | null) => readonly [string, string];
   /** The summary's sections: the move classes, the phases' radar. */

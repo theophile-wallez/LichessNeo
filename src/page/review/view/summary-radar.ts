@@ -5,8 +5,9 @@ import { PROFILE_AXES, type Profile, type ProfileAxis } from '#page/review/judge
 
 // Each player's profile (judge/profile.ts) as a radar, one shape per side in
 // its color. Every axis has its name, a "?" telling how its score is worked
-// out, and both scores out of 100 in the sides' colors. The panel's tooltips (view/tooltip.ts) only
-// take HTML, so the labels and the corners' hit areas are HTML in the SVG.
+// out, and both scores out of 100 in the sides' colors. The panel's tooltips
+// (view/tooltip.ts) only take HTML, so the labels and the corners' hit areas
+// are HTML in the SVG.
 
 const SIZE = 300;
 const RADIUS = 92;

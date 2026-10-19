@@ -25,7 +25,7 @@ import {
 // beside their name, or the one the settings pick, in place of Lichess's
 // avatar glyph (styles/sidebar/donate-and-buttons.css). The last ratings are
 // kept, with the pick, and put on <html> from document_start, so they're there
-// with the sidebar's first frame;
+// with the sidebar's first frame.
 // Lichess is asked again once it's 5 minutes old, and the home page's speed
 // cards bring it a fresh one each time they're drawn.
 

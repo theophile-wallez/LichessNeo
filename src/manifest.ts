@@ -103,8 +103,8 @@ export function createManifest(target: Target, version: string): Manifest {
   return {
     ...manifest,
     browser_specific_settings: {
-      // Firefox keeps an extension's storage under its id. 140 is the first desktop version with the data collection field,
-      // 142 on Android.
+      // Firefox keeps an extension's storage under its id. 140 is the first desktop
+      // version with the data collection field, 142 on Android.
       gecko: {
         id: GECKO_ID,
         strict_min_version: '140.0',

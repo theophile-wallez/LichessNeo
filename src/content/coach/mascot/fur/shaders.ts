@@ -1,7 +1,7 @@
 // Shell fur: the same surface drawn as many shells, each pushed a little further
 // along the normal, keeping only the pixels that fall inside a strand
 // (fur.ts builds the material, strands.ts the strand texture). The coat's
-// pattern is shared with the solid skins (cast/shell.ts).
+// pattern is shared with the solid skins (cast/patterned.ts).
 
 /** Where a part takes which color (FurMode): the front's and the accent's, by position. */
 export const COAT_PATTERN = /* glsl */ `

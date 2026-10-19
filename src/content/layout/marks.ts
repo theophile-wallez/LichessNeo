@@ -56,7 +56,7 @@ const MARKS: readonly Mark[] = [
     key: 'lnExtNavActive',
     read: main => hrefIn(main, '.subnav a.active'),
   },
-  // Which side menu the page has, for its title's tile (styles/pages/static-pages.css).
+  // Which side menu the page has, for its title's tile (styles/pages/menu-titles.css).
   {
     selector: 'main.page-menu',
     key: 'lnExtMenu',

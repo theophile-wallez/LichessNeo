@@ -14,8 +14,8 @@ import { createScene, type Paint, type Scene } from './scene.ts';
 import { type Arrival, watchMoves } from './watch.ts';
 
 // The backlit board's light (#shared/backlit.ts), on the main board and the
-// settings' preview only: mini boards keep its keys, unlit. Until the board is picked, this only
-// watches one attribute of <html>, so other boards cost nothing.
+// settings' preview only: mini boards keep its keys, unlit. Until the board is
+// picked, this only watches one attribute of <html>, so other boards cost nothing.
 
 const BOARD = '.is2d main .main-board cg-board, .ln-ext-looks-preview__board cg-board';
 const CHECK_COLOR = '#ff4d5e';
