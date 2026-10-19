@@ -464,7 +464,8 @@ Learned the hard way. Check here before touching the area concerned.
   in the content world: the page's CSP keeps the extension's bundle out of
   the page world. They're the ES chunk `coach-mascot.js`, loaded with
   `import()` only when a coach shows, and each draws only while on screen
-  in a visible tab (`VisibleLoop`). Each wears a solid finish
+  in a visible tab (`VisibleLoop`). Its first frame waits for the stage's light and
+  shaders (`Stage.ready`), so its build is spread over two tasks. Each wears a solid finish
   (`cast/finishes.ts`), drawn in its fur's pattern (`cast/patterned.ts`):
   clay for the animals and most others, glossy plastic for the computer's
   robot. Fur is still a skin any mascot may take: shells whose alpha blends

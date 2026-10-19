@@ -83,6 +83,8 @@ class LiveMascot implements MascotView {
   };
 
   #frame(dt: number): void {
+    // Its first frame waits for the stage: the still under it shows meanwhile.
+    if (!this.#stage.ready()) return;
     this.#mascot?.update(dt);
     this.#stage.lift(this.#mascot?.height ?? 0, this.#mascot?.x ?? 0);
     this.#stage.open(this.#mascot?.hole ?? null);

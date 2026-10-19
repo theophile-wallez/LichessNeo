@@ -35,7 +35,9 @@ export class Stage {
   readonly #scene = new Scene();
   readonly #camera = new PerspectiveCamera(14.6, 124 / 114, 0.1, 50);
   readonly #ground = new Group();
-  readonly #environment: Texture;
+  #environment: Texture | null = null;
+  #compiled = false;
+  #compiling = false;
   readonly #framing: Framing;
   readonly #shadow: Mesh<PlaneGeometry, MeshBasicMaterial> | null;
   readonly #hole = groundSprite(holeTexture(), [2.1, 1.5], 0.004);
@@ -53,10 +55,6 @@ export class Stage {
     this.#renderer = new WebGLRenderer({ antialias: true, alpha: true });
     this.#renderer.toneMapping = NeutralToneMapping;
     this.canvas = this.#renderer.domElement;
-    const generator = new PMREMGenerator(this.#renderer);
-    this.#environment = generator.fromScene(new RoomEnvironment(), 0.04).texture;
-    generator.dispose();
-    this.#scene.environment = this.#environment;
     this.#scene.environmentIntensity = 0.7;
     const key = new DirectionalLight('#fff6ea', 2.4);
     key.position.set(-2.5, 4, 3);
@@ -132,7 +130,36 @@ export class Stage {
     this.#hole.scale.setScalar(Math.max(openness ?? 0, 0.001));
   }
 
+  // The room, its light blurred for each roughness: built as the first frame is, not with the
+  // stage, which is built in the same task as the mascot.
+  #light(): void {
+    if (this.#environment) return;
+    const generator = new PMREMGenerator(this.#renderer);
+    this.#environment = generator.fromScene(new RoomEnvironment(), 0.04).texture;
+    generator.dispose();
+    this.#scene.environment = this.#environment;
+  }
+
+  /**
+   * Whether a frame can be drawn without a freeze. The first time, it lights the stage and
+   * compiles the shaders of what's on it, off the main thread where the browser can.
+   */
+  ready(): boolean {
+    if (this.#compiled || this.#compiling) return this.#compiled;
+    this.#compiling = true;
+    this.#light();
+    // A failed compile leaves it to the first frame, as it would be otherwise.
+    void this.#renderer
+      .compileAsync(this.#scene, this.#camera)
+      .catch((error: unknown) => console.warn('[LichessNeo] the coach’s shaders', error))
+      .finally(() => {
+        this.#compiled = true;
+      });
+    return false;
+  }
+
   render(): void {
+    this.#light();
     this.#renderer.render(this.#scene, this.#camera);
   }
 
@@ -143,7 +170,7 @@ export class Stage {
       mesh.material.map?.dispose();
       mesh.material.dispose();
     }
-    this.#environment.dispose();
+    this.#environment?.dispose();
     this.#renderer.dispose();
     // Browsers keep a few WebGL contexts per page: hand this one back now.
     this.#renderer.forceContextLoss();
