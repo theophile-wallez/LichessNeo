@@ -80,7 +80,7 @@
 }
 
 [data-icon='\e01f']::before {
-  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/microscope.svg');
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ai-search-01.svg');
 }
 
 [data-icon='\e020']::before {
