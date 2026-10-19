@@ -9,6 +9,8 @@ const StoredFields = {
   wp: z.number(),
   wp2: z.nullable(z.number()),
   best: z.nullable(z.string()),
+  // The line, its moves joined by spaces: new to this script.
+  pv: z.optional(z.string()),
 };
 
 // Zod writes an object's keys in its shape's order, the original's here: a
@@ -20,12 +22,22 @@ export const StoredRecordSchema = z.union([
 type StoredRecord = z.infer<typeof StoredRecordSchema>;
 
 function decode(stored: StoredRecord): PositionRecord {
-  const fields = { whiteWinChance: stored.wp, secondLineWinChance: stored.wp2, best: stored.best };
+  const fields = {
+    whiteWinChance: stored.wp,
+    secondLineWinChance: stored.wp2,
+    best: stored.best,
+    ...(stored.pv === undefined ? {} : { line: stored.pv.split(' ') }),
+  };
   return 'mate' in stored ? { mate: stored.mate, ...fields } : { cp: stored.cp, ...fields };
 }
 
 function encode(record: PositionRecord): StoredRecord {
-  const fields = { wp: record.whiteWinChance, wp2: record.secondLineWinChance, best: record.best };
+  const fields = {
+    wp: record.whiteWinChance,
+    wp2: record.secondLineWinChance,
+    best: record.best,
+    ...(record.line === undefined ? {} : { pv: record.line.join(' ') }),
+  };
   return 'mate' in record ? { mate: record.mate, ...fields } : { cp: record.cp, ...fields };
 }
 

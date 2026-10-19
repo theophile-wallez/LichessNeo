@@ -1,8 +1,15 @@
 import { queryAll } from '#shared/dom.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import { pumpLines } from '#page/review/explain/lines.ts';
+import { pumpThreats, THREATS_AHEAD } from '#page/review/explain/threats.ts';
 import { pump } from '#page/review/live/queue.ts';
-import { type Mode, MODES, type Session, type ViewState } from '#page/review/session.ts';
+import {
+  type JudgedMove,
+  type Mode,
+  MODES,
+  type Session,
+  type ViewState,
+} from '#page/review/session.ts';
 import { renderBoard } from './board.ts';
 import { fitBubble } from './bubble.ts';
 import { renderClosed } from './closed-panel.ts';
@@ -71,13 +78,21 @@ function redrawPanel(session: Session, analysis: Analysis): void {
   fitBubble(panel);
 }
 
+/** The move the coach speaks of, then the game's next ones, whose threats are searched ahead. */
+function movesFrom(session: Session, move: JudgedMove): JudgedMove[] {
+  const moves = session.view.review?.moves ?? [];
+  if (moves[move.ply - 1] !== move) return [move];
+  return moves.slice(move.ply - 1, move.ply + THREATS_AHEAD).filter(next => next !== undefined);
+}
+
 /** What runs on its own as the board moves: the engines' lookups, a retry. */
 function follow(session: Session, analysis: Analysis): void {
   const { view } = session;
   // Off the game's moves, the review judges them like the free board.
   if (view.mode === 'live' || (view.mode === 'moves' && view.review)) pump(session, analysis);
-  const explained = view.mode === 'moves' && view.explain ? spokenMove(session, analysis) : null;
-  if (explained) pumpLines(session, analysis, explained);
+  const spoken = view.mode === 'moves' ? spokenMove(session, analysis) : null;
+  if (spoken && view.explain) pumpLines(session, analysis, spoken);
+  if (spoken) pumpThreats(session, analysis, movesFrom(session, spoken));
   if (view.mode === 'moves') followRetry(session, analysis);
   else view.retry = null;
 }

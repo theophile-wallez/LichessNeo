@@ -1,7 +1,8 @@
 import type { Color, Piece, Role } from '#shared/chess/index.ts';
 import { hash } from '#page/review/coach/hash.ts';
 import { pieceToken } from '#page/review/comment/tokens.ts';
-import type { Viewer } from './types.ts';
+import { materialPhrase } from './material.ts';
+import type { Material, Viewer } from './types.ts';
 
 // English grammar for the coach's sentences, from the reader's side: "you"
 // and "the opponent" (or their color, for a change) when the reader played
@@ -56,3 +57,18 @@ export function definite(viewer: Viewer, piece: Piece): string {
   if (viewer === null) return `the ${pieceName(piece)}`;
   return `${partyOf(viewer, piece.color, piece.role).possessive} ${pieceName(piece)}`;
 }
+
+const COUNTS: readonly string[] = ['', '', 'two', 'three', 'four'];
+
+/** "a [knight] for a [pawn]", "two [pawn]pawns", "the exchange": what a side wins. */
+export const materialEn = (material: Material): string | null =>
+  materialPhrase(material, {
+    one: indefinite,
+    many: (piece, count) => {
+      const number = COUNTS[count];
+      return number === undefined ? null : `${number} ${pieceName(piece)}s`;
+    },
+    and: 'and',
+    for: 'for',
+    exchange: 'the exchange',
+  });

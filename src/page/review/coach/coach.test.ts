@@ -8,7 +8,8 @@ import { fr } from '#page/review/i18n/fr.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import { judge } from '#page/review/judge/judge.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
-import { explanation } from './explanation.ts';
+import { explanation, type MoveContext } from './explanation.ts';
+import { NO_THREATS } from './threat-facts.ts';
 import { findings } from './fact.ts';
 import { hash } from './hash.ts';
 import { remark } from './remark.ts';
@@ -32,6 +33,8 @@ const toParts = (parts: z.infer<typeof LegacyPartsSchema>) =>
 
 const langs: readonly ('en' | 'fr')[] = ['en', 'fr'];
 
+const NO_CONTEXT: MoveContext = { opening: '', threats: NO_THREATS };
+
 // The port's move chips carry the moves they play ([[m:w:Nf3@b:g1f3]]), and an
 // error's comment ends on the reply it lets in: the original had neither. Both
 // are taken off, so the recordings stay the reference.
@@ -47,9 +50,9 @@ function asRecorded(
   move: MoveVerdict,
   language: ReviewLanguage,
 ): CommentPart[] {
-  const threat = findings(move, language.facts).threat?.text;
+  const followUp = findings(move, language.facts).followUp?.text;
   return parts
-    .filter(part => part.text !== threat)
+    .filter(part => part.text !== followUp)
     .map(({ text, droppable }) => ({ text: withoutPlay(text), droppable }));
 }
 
@@ -73,7 +76,11 @@ describe('the coach’s comment', () => {
           droppable,
         }));
         expect(
-          asRecorded(explanation(move, context, game.opening), move, LANGUAGES[lang]),
+          asRecorded(
+            explanation(move, context, { opening: game.opening, threats: NO_THREATS }),
+            move,
+            LANGUAGES[lang],
+          ),
           `${game.name} ${move.ply}`,
         ).toEqual(recorded);
       }
@@ -97,7 +104,7 @@ describe('the coach’s comment', () => {
     const mate = game ? replay(game).at(-1) : undefined;
     if (!game || !mate) throw new Error('no opera game');
     expect(fact(mate, en.facts)).toBe('Checkmate: the black king has nowhere to go.');
-    expect(explanation(mate, { gameId: game.id, coach: 1, language: fr }, '')).toEqual([
+    expect(explanation(mate, { gameId: game.id, coach: 1, language: fr }, NO_CONTEXT)).toEqual([
       { text: 'Échec et mat\u00a0: le roi noir n’a plus aucune case.', droppable: false },
     ]);
   });
@@ -139,7 +146,7 @@ describe('rarer moves', () => {
       const context = { gameId: 'crafted1', coach: 2, language: LANGUAGES[lang] };
       const found = fact(move, LANGUAGES[lang].facts);
       expect(found === null ? null : withoutPlay(found)).toBe(said[lang].fact);
-      expect(asRecorded(explanation(move, context, ''), move, LANGUAGES[lang])).toEqual(
+      expect(asRecorded(explanation(move, context, NO_CONTEXT), move, LANGUAGES[lang])).toEqual(
         toParts(said[lang].parts),
       );
     }

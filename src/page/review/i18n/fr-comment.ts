@@ -4,6 +4,7 @@ import {
   capitalize,
   conjugate,
   indefinite,
+  materialFr,
   owned,
   ownedBy,
   partyOf,
@@ -11,7 +12,14 @@ import {
   pronoun,
   withDe,
 } from './fr-grammar.ts';
-import type { FactSentences, TrajectorySentences, Viewer } from './types.ts';
+import { motifFr } from './fr-motifs.ts';
+import type {
+  FactSentences,
+  LineFacts,
+  PlanSentences,
+  TrajectorySentences,
+  Viewer,
+} from './types.ts';
 
 /** "Tu as", "L’adversaire a", "Les Blancs ont": a side and its verb, at the start of a sentence. */
 const says = (party: Party, tu: string, il: string, ils: string): string =>
@@ -59,6 +67,45 @@ export function trajectoryFr(viewer: Viewer): TrajectorySentences {
 /** "te met", "met l’adversaire": a verb with the party as its object. */
 const putting = (party: Party, verb: string): string =>
   party.object === null ? `te ${verb}` : `${verb} ${party.object}`;
+
+// What a quiet move does for the position.
+function plansFr(viewer: Viewer): PlanSentences {
+  const the = (piece: Piece): string => owned(viewer, piece);
+  return {
+    develops: piece => `Il développe ${the(piece)}.`,
+    outpost: piece =>
+      `${capitalize(the(piece))} s’installe sur un avant-poste : aucun pion ne peut ${pronoun(piece)} chasser.`,
+    openFile: halfOpen => `La tour prend la colonne ${halfOpen ? 'semi-ouverte' : 'ouverte'}.`,
+    passedPawn: made => (made ? 'Il crée un pion passé.' : 'Il pousse le pion passé.'),
+    centralKing: 'Le roi rejoint le centre, où il compte en finale.',
+  };
+}
+
+// The sentences read off the engine's lines.
+function lineFactsFr(viewer: Viewer): LineFacts {
+  const party = (color: Color, ...seed: readonly string[]): Party =>
+    partyOf(viewer, color, seed.join('|'));
+  const the = (piece: Piece): string => owned(viewer, piece);
+  return {
+    motif: motifFr(viewer),
+    material: materialFr,
+    forcesMate: (color, line) =>
+      `${says(party(color, line), 'peux', 'peut', 'peuvent')} maintenant forcer le mat : ${line}.`,
+    losesMaterial: (color, material, line, threatened) => {
+      const winner = party(color, material, line);
+      const after = `après ${line}, ${winner.subject} ${conjugate(winner, 'gagnes', 'gagne', 'gagnent')} ${material}.`;
+      return threatened ? `Il ne pare pas la menace : ${after}` : capitalize(after);
+    },
+    wouldHaveWon: (line, material) => `${line} aurait gagné ${material}.`,
+    winsAlong: (material, line) => `Il gagne ${material} : ${line}.`,
+    stopsThreat: (threat, material) => `Il empêche ${threat}, qui aurait gagné ${material}.`,
+    stopsMate: line => `Il empêche le mat : ${line}.`,
+    stopsLongMate: (moves, first) => `Il empêche un mat en ${moves}, qui commence par ${first}.`,
+    escapes: (piece, threat) => `${capitalize(the(piece))} se met à l’abri de ${threat}.`,
+    threatens: (threat, material) => `Il menace ${threat}, qui gagnerait ${material}.`,
+    threatensMate: threat => `Il menace de mater, à commencer par ${threat}.`,
+  };
+}
 
 // Two sentences carry their no-break space already, as the original did.
 export function factsFr(viewer: Viewer): FactSentences {
@@ -117,5 +164,7 @@ export function factsFr(viewer: Viewer): FactSentences {
         ? `Il te permet de jouer ${reply}.`
         : `Il permet ${player.to} de jouer ${reply}.`;
     },
+    ...lineFactsFr(viewer),
+    ...plansFr(viewer),
   };
 }

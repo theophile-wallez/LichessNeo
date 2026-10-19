@@ -1,7 +1,8 @@
 import type { Color, Piece, Role } from '#shared/chess/index.ts';
 import { hash } from '#page/review/coach/hash.ts';
 import { pieceToken } from '#page/review/comment/tokens.ts';
-import type { Viewer } from './types.ts';
+import { materialPhrase } from './material.ts';
+import type { Material, Viewer } from './types.ts';
 
 // French grammar for the coach's sentences: a piece's gender picks its
 // articles and agreements, and the reader's side its persons: "tu" and
@@ -37,6 +38,9 @@ export const indefinite = (piece: Piece): string =>
 
 /** The object pronoun standing for the piece: "la", "le". */
 export const pronoun = (piece: Piece): string => (isFeminine(piece) ? 'la' : 'le');
+
+/** The subject pronoun standing for the piece: "elle", "il". */
+export const subjectPronoun = (piece: Piece): string => (isFeminine(piece) ? 'elle' : 'il');
 
 /** A past participle's agreement: "défendue", "défendu". */
 export const agreement = (piece: Piece): string => (isFeminine(piece) ? 'e' : '');
@@ -96,3 +100,18 @@ export function conjugate(party: Party, tu: string, il: string, ils: string): st
 /** "ton dernier coup", "le dernier coup des Blancs": `mine` for the reader, else `theirs` and its owner. */
 export const ownedBy = (party: Party, mine: string, theirs: string): string =>
   party.of === null ? mine : `${theirs} ${party.of}`;
+
+const COUNTS: readonly string[] = ['', '', 'deux', 'trois', 'quatre'];
+
+/** "un [cavalier] contre un [pion]", "deux [pion]pions", "la qualité": what a side wins. */
+export const materialFr = (material: Material): string | null =>
+  materialPhrase(material, {
+    one: indefinite,
+    many: (piece, count) => {
+      const number = COUNTS[count];
+      return number === undefined ? null : `${number} ${pieceName(piece)}s`;
+    },
+    and: 'et',
+    for: 'contre',
+    exchange: 'la qualité',
+  });

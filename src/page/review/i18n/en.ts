@@ -125,7 +125,18 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
     allows: (move, line) => `${move} allows ${line}.`,
     show: 'Show line',
   },
-  themes: { fork: 'Fork', hanging: 'Hanging piece', mate: 'Checkmate', sacrifice: 'Sacrifice' },
+  themes: {
+    fork: 'Fork',
+    pin: 'Pin',
+    skewer: 'Skewer',
+    discovered: 'Discovered attack',
+    doubleCheck: 'Double check',
+    defender: 'Removing the defender',
+    trapped: 'Trapped piece',
+    hanging: 'Hanging piece',
+    mate: 'Checkmate',
+    sacrifice: 'Sacrifice',
+  },
 };
 
 /** "an 1850", "an 800", "a 1500": the article as the number is said ("eighteen fifty"). */

@@ -1,5 +1,6 @@
 import { z } from 'zod/mini';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { LINE_PLIES, type PositionRecord } from '#page/review/evaluation/score.ts';
 import { StoredRecordCodec } from '#page/review/evaluation/stored.ts';
 import { CloudEvalSchema, fromCloud } from './cloud.ts';
 import { toRecord } from './record.ts';
@@ -18,9 +19,15 @@ const ResultSchema = z.object({ lines: z.array(LineSchema) });
 const SamplesSchema = z.array(
   z.object({ fen: z.string(), result: ResultSchema, record: StoredRecordCodec }),
 );
-// A record as the original wrote it.
-const stored = (record: z.infer<typeof StoredRecordCodec>): string =>
+// A record as the original wrote it: it kept no line.
+const stored = ({ line: _line, ...record }: PositionRecord): string =>
   JSON.stringify(z.encode(StoredRecordCodec, record));
+
+// The line a record keeps from an engine result: its best line, cut, when it's more than a move.
+const keptLine = (result: z.infer<typeof ResultSchema>): string[] | undefined => {
+  const pv = result.lines[0]?.pv ?? [];
+  return pv.length > 1 ? pv.slice(0, LINE_PLIES) : undefined;
+};
 
 describe('UCI output', () => {
   it('collects the lines the original collected', () => {
@@ -48,7 +55,9 @@ describe('toRecord', () => {
     for (const { fen, result, record } of samples) {
       // Through JSON, as the fixtures went (and as the cache stores records):
       // -0 and 0 alike.
-      expect(stored(toRecord(fen, result))).toBe(stored(record));
+      const port = toRecord(fen, result);
+      expect(stored(port)).toBe(stored(record));
+      expect(port.line).toEqual(keptLine(result));
     }
   });
 });
@@ -59,7 +68,9 @@ describe('fromCloud', () => {
       const lines = fromCloud(fen, CloudEvalSchema.parse(payload));
       expect(lines).toEqual(result);
       if (!lines) throw new Error(`no lines for ${fen}`);
-      expect(toRecord(fen, lines)).toEqual(StoredRecordCodec.parse(record));
+      const { line, ...port } = toRecord(fen, lines);
+      expect(port).toEqual(StoredRecordCodec.parse(record));
+      expect(line).toEqual(keptLine(result));
     }
   });
 

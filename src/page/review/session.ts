@@ -1,6 +1,7 @@
 import { z } from 'zod/mini';
 import type { Color } from '#shared/chess/types.ts';
 import type { TreeNode } from '#page/lichess/tree.ts';
+import type { Threat } from './coach/threat.ts';
 import type { StreamState } from './comment/markup.ts';
 import type { EnginePool } from './engine/pool.ts';
 import type { RecordsWork } from './game/records.ts';
@@ -126,9 +127,9 @@ export interface LiveState {
   error: string | null;
 }
 
-/** Explain's engine lines, by position and first move (explain/lines.ts). */
-interface LineLookups {
-  readonly found: Map<string, readonly string[]>;
+/** The engine's searches the board's moves ask for, by key, one at a time. */
+interface Lookups<T> {
+  readonly found: Map<string, T>;
   busy: boolean;
 }
 
@@ -160,7 +161,10 @@ export interface Session {
   readonly view: ViewState;
   readonly live: LiveState;
   readonly work: GameWork;
-  readonly lines: LineLookups;
+  /** Explain's lines, by position and first move (explain/lines.ts). */
+  readonly lines: Lookups<readonly string[]>;
+  /** The threats around the moves, by passed position; null for a failed search (explain/threats.ts). */
+  readonly threats: Lookups<Threat | null>;
   readonly coach: AvatarState;
   readonly stream: Stream;
   /** The desktop layout, the panel beside the board; below it, a column under it. */
@@ -231,6 +235,7 @@ export function createSession(options: SessionOptions): Session {
       searched: 0,
     },
     lines: { found: new Map(), busy: false },
+    threats: { found: new Map(), busy: false },
     coach: { id: coach, reacted: '', avatar: null },
     stream: { state: { key: '', shown: 0, dropped: false }, timer: 0 },
     wide: matchMedia('(min-width: 1020px)'),

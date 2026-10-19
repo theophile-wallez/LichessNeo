@@ -16,24 +16,29 @@ import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import type { FactSentences } from '#page/review/i18n/types.ts';
 import { PUNISHABLE } from '#page/review/judge/judge.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
+import { bestGainFact, gainFact, lossFact, mateLine } from './line-facts.ts';
+import { planFact } from './plan.ts';
+import { type Fact, said, type Theme } from './said.ts';
+import {
+  letsThrough,
+  NO_THREATS,
+  parriedFact,
+  type Threats,
+  threatensFact,
+} from './threat-facts.ts';
 import { evaluationLevel } from './trajectory.ts';
 
 // One concrete thing the board or the engine shows about a move: a piece left
 // hanging, a mate allowed or missed, a fork, the better move, what a capture
-// won. After a mistake or a blunder, also the reply that punishes it.
+// or a line wins. After a mistake or a blunder, also the reply that punishes
+// it, or the move to play instead.
 
-/** The tactic a fact is about, which the bubble names on a tag. */
-export type Theme = 'fork' | 'hanging' | 'mate' | 'sacrifice';
-
-interface Fact {
-  readonly text: string;
-  readonly theme: Theme | null;
-}
+export type { Theme } from './said.ts';
 
 export interface Findings {
   readonly fact: Fact | null;
-  /** The reply that punishes a mistake or a blunder, when the fact doesn't name it. */
-  readonly threat: Fact | null;
+  /** A second fact, when the first doesn't say it: what punishes an error, or what to play instead. */
+  readonly followUp: Fact | null;
 }
 
 interface FactInput {
@@ -49,13 +54,12 @@ interface FactInput {
   readonly best: string;
   /** The engine's reply, as a token, or '' without one. */
   readonly reply: string;
+  readonly threats: Threats;
 }
 
 const PUNISHERS: ReadonlySet<MoveClass> = new Set<MoveClass>(['brilliant', 'great', 'best']);
 const PUNISHED: ReadonlySet<MoveClass> = new Set<MoveClass>(['mistake', 'blunder', 'miss']);
 const THREATENED: ReadonlySet<MoveClass> = new Set<MoveClass>(['mistake', 'blunder']);
-
-const said = (text: string, theme: Theme | null = null): Fact => ({ text, theme });
 
 /** Whether the side of `sign` has a mate on the board. */
 const mates = (record: PositionRecord, sign: number): boolean =>
@@ -80,10 +84,14 @@ function lostPieceFact(input: FactInput): Fact | null {
 // A mate the move let in, or missed.
 function mateFact(input: FactInput): Fact | null {
   const { move, facts, them, sign, best, reply } = input;
-  if (mates(move.after, -sign) && !mates(move.before, -sign) && reply)
-    return said(facts.canForceMate(them, reply), 'mate');
-  if (mates(move.before, sign) && !mates(move.after, sign) && best)
-    return said(facts.wouldForceMate(best, Math.abs(mateDistance(move.before))), 'mate');
+  if (mates(move.after, -sign) && !mates(move.before, -sign) && reply) {
+    const line = mateLine(move.after, move.position.fen, 'a');
+    return said(line ? facts.forcesMate(them, line) : facts.canForceMate(them, reply), 'mate');
+  }
+  if (mates(move.before, sign) && !mates(move.after, sign) && best) {
+    const line = mateLine(move.before, move.previousPosition.fen, 'b') ?? best;
+    return said(facts.wouldForceMate(line, Math.abs(mateDistance(move.before))), 'mate');
+  }
   return null;
 }
 
@@ -120,11 +128,15 @@ function threatFact({ move, facts, them, reply }: FactInput): Fact | null {
 function errorFindings(input: FactInput): Findings {
   const { move, best } = input;
   const mate = mateFact(input);
-  if (mate !== null) return { fact: mate, threat: null };
-  if (move.moveClass === 'miss' && best) return { fact: missFact(input), threat: null };
+  if (mate !== null) return { fact: mate, followUp: null };
+  if (move.moveClass === 'miss' && best) return { fact: missFact(input), followUp: null };
   const lost = lostPieceFact(input);
-  if (lost !== null) return { fact: lost, threat: null };
-  return { fact: bestFact(input), threat: threatFact(input) };
+  if (lost !== null) return { fact: lost, followUp: null };
+  const gain = bestGainFact(input);
+  const { before: threat } = input.threats;
+  const loss = lossFact(input, threat !== null && letsThrough(input, threat));
+  if (loss !== null) return { fact: loss, followUp: gain ?? bestFact(input) };
+  return { fact: gain ?? bestFact(input), followUp: threatFact(input) };
 }
 
 function captureFact(input: FactInput, moved: Piece, dest: string): Fact | null {
@@ -143,9 +155,16 @@ function captureFact(input: FactInput, moved: Piece, dest: string): Fact | null 
   return null;
 }
 
-// What stands out in a move that needs no correction.
+// What stands out in a move that needs no correction: what its line wins (a
+// sacrifice aside, which says what it offers), an error punished, the only move.
 function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
   const { move, facts, me, them, sign } = input;
+  const sacrifice = move.moveClass === 'brilliant';
+  const gain = sacrifice ? null : gainFact(input);
+  if (gain !== null) return gain;
+  const quiet = !sacrifice && !/[x+]/.test(move.san);
+  const threat = quiet ? quietThreatFact(input) : null;
+  if (threat !== null) return threat;
   const previousClass = move.previousMove?.moveClass;
   if (PUNISHERS.has(move.moveClass) && previousClass !== undefined && PUNISHED.has(previousClass))
     return said(facts.punishesAtOnce(them));
@@ -156,6 +175,12 @@ function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
       evaluationLevel(move.after) * sign >= 2 ? facts.keepsAdvantage : facts.holdsPosition(me),
     );
   return null;
+}
+
+// A quiet move's point is often the threat it stops, else the one it makes.
+function quietThreatFact(input: FactInput): Fact | null {
+  const { before, after } = input.threats;
+  return (before && parriedFact(input, before)) ?? (after && threatensFact(input, after));
 }
 
 function goodFact(input: FactInput): Fact | null {
@@ -172,15 +197,23 @@ function goodFact(input: FactInput): Fact | null {
   const capture = moved && move.san.includes('x') ? captureFact(input, moved, dest) : null;
   if (capture !== null) return capture;
   if (move.san.includes('+')) return said(facts.checkForces(them));
-  return move.moveClass === 'good' && best ? said(facts.littleMorePrecise(best)) : null;
+  if (move.moveClass === 'good' && best) return said(facts.littleMorePrecise(best));
+  return planFact({ move, sentences: facts, before: input.before, after });
 }
 
-/** What the coach finds about the move: one fact, and the reply to fear after an error. */
-export function findings(move: MoveVerdict, facts: FactSentences): Findings {
+/**
+ * What the coach finds about the move: one fact, and after an error, the
+ * reply to fear or the move to play, read with the threats around it.
+ */
+export function findings(
+  move: MoveVerdict,
+  facts: FactSentences,
+  threats: Threats = NO_THREATS,
+): Findings {
   const me = move.color;
   const them = opposite(me);
   const sign = me === 'white' ? 1 : -1;
-  if (move.san.includes('#')) return { fact: said(facts.checkmate(them), 'mate'), threat: null };
+  if (move.san.includes('#')) return { fact: said(facts.checkmate(them), 'mate'), followUp: null };
   const best =
     move.bestSan && move.best
       ? moveToken(move.bestSan, me, { base: 'b', ucis: [move.best] })
@@ -191,7 +224,7 @@ export function findings(move: MoveVerdict, facts: FactSentences): Findings {
     const text = mates(move.before, sign)
       ? facts.matedIn(best, mateDistance(move.before) * sign)
       : facts.heldOutLonger(best);
-    return { fact: said(text, 'mate'), threat: null };
+    return { fact: said(text, 'mate'), followUp: null };
   }
   const replyUci = move.after.best;
   const reply = replyUci
@@ -199,13 +232,13 @@ export function findings(move: MoveVerdict, facts: FactSentences): Findings {
     : '';
   const before = parseFen(move.previousPosition.fen).board;
   const after = parseFen(move.position.fen).board;
-  const input: FactInput = { move, facts, me, them, sign, before, after, best, reply };
-  return isError(move.moveClass) ? errorFindings(input) : { fact: goodFact(input), threat: null };
+  const input: FactInput = { move, facts, me, them, sign, before, after, best, reply, threats };
+  return isError(move.moveClass) ? errorFindings(input) : { fact: goodFact(input), followUp: null };
 }
 
 /** The tactics the coach's findings are about, for the bubble's tags. */
-export function themesOf({ fact: found, threat }: Findings): Theme[] {
-  const themes = [found?.theme, threat?.theme].filter(
+export function themesOf({ fact: found, followUp }: Findings): Theme[] {
+  const themes = [found?.theme, followUp?.theme].filter(
     theme => theme !== null && theme !== undefined,
   );
   return [...new Set(themes)];

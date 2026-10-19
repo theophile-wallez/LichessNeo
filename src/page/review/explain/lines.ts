@@ -4,9 +4,10 @@ import { engineFor } from '#page/review/engine-pool.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 
 // Explain's lines: the engine's line from the move that was best and, for an
-// error, the line that punishes it. The cache keeps only each position's best
-// move, so the engine plays a line out when Explain first asks for it,
-// searching from that move alone so the line matches the verdict.
+// error, the line that punishes it. Records keep their line, but those cached
+// before kept only the best move: then the engine plays a line out when
+// Explain first asks for it, searching from that move alone so the line
+// matches the verdict.
 
 /** The best line's plies Explain writes and plays on the board. */
 export const BEST_PLIES = 4;
@@ -17,6 +18,8 @@ export interface LineRequest {
   readonly fen: string;
   /** The line's first move, a record's best, in the engine's notation. */
   readonly first: string;
+  /** The record's own line, when it kept one. */
+  readonly kept: readonly string[] | undefined;
 }
 
 const keyOf = ({ fen, first }: LineRequest): string => `${fen} ${first}`;
@@ -24,20 +27,21 @@ const keyOf = ({ fen, first }: LineRequest): string => `${fen} ${first}`;
 /** For a move that wasn't the best, the line from its position before, starting with the best. */
 export const bestRequest = (move: JudgedMove): LineRequest | null =>
   move.best && !GOOD.has(move.moveClass)
-    ? { fen: move.previousPosition.fen, first: move.best }
+    ? { fen: move.previousPosition.fen, first: move.best, kept: move.before.line }
     : null;
 
 /** The line after an error, starting with the engine's best reply. */
 const punishmentRequest = (move: JudgedMove): LineRequest | null =>
   isError(move.moveClass) && move.after.best
-    ? { fen: move.position.fen, first: move.after.best }
+    ? { fen: move.position.fen, first: move.after.best, kept: move.after.line }
     : null;
 
 /** The line asked for, once the engine has played it out. */
 export const foundLine = (
   session: Session,
   request: LineRequest | null,
-): readonly string[] | null => (request && session.lines.found.get(keyOf(request))) ?? null;
+): readonly string[] | null =>
+  (request && (request.kept ?? session.lines.found.get(keyOf(request)))) ?? null;
 
 export interface ExplainLines {
   readonly best: readonly string[];
@@ -81,7 +85,7 @@ export function pumpLines(session: Session, analysis: Analysis, move: JudgedMove
   const { lines } = session;
   if (lines.busy) return;
   const request = [bestRequest(move), punishmentRequest(move)].find(
-    candidate => candidate !== null && !lines.found.has(keyOf(candidate)),
+    candidate => candidate !== null && !candidate.kept && !lines.found.has(keyOf(candidate)),
   );
   if (request) void lookUp(session, analysis, request);
 }

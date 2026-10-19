@@ -1,5 +1,5 @@
 import { fenTurn, winPercent } from '#shared/chess/index.ts';
-import type { PositionRecord } from '#page/review/evaluation/score.ts';
+import { LINE_PLIES, type PositionRecord } from '#page/review/evaluation/score.ts';
 import type { EngineLine, EngineResult } from './uci.ts';
 
 type WhiteScore =
@@ -27,8 +27,13 @@ export function toRecord(fen: string, result: EngineResult): PositionRecord {
   const secondLineWinChance = second ? whiteScore(second, whiteToMove).whiteWinChance : null;
   // No line at all: stalemate, or no legal move.
   const score = first ? whiteScore(first, whiteToMove) : { cp: 0, whiteWinChance: 50 };
-  const { whiteWinChance } = score;
-  return 'mate' in score
-    ? { mate: score.mate, whiteWinChance, secondLineWinChance, best }
-    : { cp: score.cp, whiteWinChance, secondLineWinChance, best };
+  // A line of one move says no more than `best`.
+  const pv = first?.pv ?? [];
+  const fields = {
+    whiteWinChance: score.whiteWinChance,
+    secondLineWinChance,
+    best,
+    ...(pv.length > 1 ? { line: pv.slice(0, LINE_PLIES) } : {}),
+  };
+  return 'mate' in score ? { mate: score.mate, ...fields } : { cp: score.cp, ...fields };
 }

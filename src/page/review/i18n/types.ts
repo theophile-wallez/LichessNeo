@@ -1,7 +1,8 @@
 import type { SafeHtml } from '#shared/html.ts';
 import type { ProfileAxis } from '#page/review/judge/profile.ts';
 import type { Phase } from '#page/review/rating/phases.ts';
-import type { Theme } from '#page/review/coach/fact.ts';
+import type { Theme } from '#page/review/coach/said.ts';
+import type { MotifKind } from '#page/review/chess/motifs.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 
@@ -153,7 +154,56 @@ interface PieceWon {
   readonly reply: string;
 }
 
-export interface FactSentences {
+/** What a side wins: the other side's pieces, for its own it gives (trades left out). */
+export interface Material {
+  readonly won: readonly Piece[];
+  readonly lost: readonly Piece[];
+}
+
+/** What names a motif: its kind, its move as a token, and the pieces it hits. */
+export type MotifNamer = (kind: MotifKind, move: string, pieces: readonly Piece[]) => string | null;
+
+/** The facts read off the engine's lines, written out as numbered moves. */
+export interface LineFacts {
+  /** "a [knight] for a [pawn]", "the exchange"; null when it's too much to say. */
+  readonly material: (material: Material) => string | null;
+  /** The tactic that wins it, after its move: "16. Qc7+ forks the king and the rook." */
+  readonly motif: MotifNamer;
+  /** The mate an error lets in, move by move. */
+  readonly forcesMate: (side: Color, line: string) => string;
+  /** What an error lets `side` win, and the line that wins it: what `side` threatened, maybe. */
+  readonly losesMaterial: (
+    side: Color,
+    material: string,
+    line: string,
+    threatened: boolean,
+  ) => string;
+  readonly wouldHaveWon: (line: string, material: string) => string;
+  /** What a move wins along its line, the move first. */
+  readonly winsAlong: (material: string, line: string) => string;
+  /** The threat a move stops, and what it would have won. */
+  readonly stopsThreat: (threat: string, material: string) => string;
+  readonly stopsMate: (line: string) => string;
+  readonly stopsLongMate: (moves: number, first: string) => string;
+  /** A piece that moves out of the threat's way. */
+  readonly escapes: (piece: Piece, threat: string) => string;
+  /** What a move threatens, were the opponent to pass. */
+  readonly threatens: (threat: string, material: string) => string;
+  readonly threatensMate: (threat: string) => string;
+}
+
+/** What a quiet move does for the position (coach/plan.ts). */
+export interface PlanSentences {
+  readonly develops: (piece: Piece) => string;
+  readonly outpost: (piece: Piece) => string;
+  /** A rook on a file without pawns, or `halfOpen`, the other side's only. */
+  readonly openFile: (halfOpen: boolean) => string;
+  /** A pawn pushed with nothing to stop it: `made` passed by the push. */
+  readonly passedPawn: (made: boolean) => string;
+  readonly centralKing: string;
+}
+
+export interface FactSentences extends LineFacts, PlanSentences {
   readonly checkmate: (king: Color) => string;
   readonly matedIn: (best: string, moves: number) => string;
   readonly heldOutLonger: (best: string) => string;

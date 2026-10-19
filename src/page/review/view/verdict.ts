@@ -14,6 +14,7 @@ import { findings, type Theme, themesOf } from '#page/review/coach/fact.ts';
 import { type CommentPart, commentMarkup, streamFor } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
 import { forColor } from '#page/review/evaluation/score.ts';
+import { threatsAround } from '#page/review/explain/threats.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import { evalChip } from './markup.ts';
@@ -64,7 +65,8 @@ interface Advice {
 export function commentOn(session: Session, input: VerdictInput): CoachComment {
   const { move, gameId, hint, timing } = input;
   const { language } = session;
-  const themes = themesOf(findings(move, language.facts));
+  const threats = threatsAround(session, move);
+  const themes = themesOf(findings(move, language.facts, threats));
   const note = timing && clockNote(move.moveClass, timing);
   const advice =
     timing && note
@@ -73,7 +75,10 @@ export function commentOn(session: Session, input: VerdictInput): CoachComment {
   const parts =
     hint.length > 0
       ? hint
-      : explanation(move, coachContext(session, gameId), openingOf(session, move));
+      : explanation(move, coachContext(session, gameId), {
+          opening: openingOf(session, move),
+          threats,
+        });
   return { move, parts, themes, timing, advice };
 }
 

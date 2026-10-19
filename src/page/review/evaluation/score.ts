@@ -12,7 +12,13 @@ const RecordFields = {
   secondLineWinChance: z.nullable(z.number()),
   // The engine's best move, in its own notation.
   best: z.nullable(z.string()),
+  // Its line from here, the best move first, cut to LINE_PLIES; caches written
+  // before lines were kept have none.
+  line: z.optional(z.array(z.string())),
 };
+
+/** The plies of a line a record keeps: enough for the trades and tactics the coach reads off it. */
+export const LINE_PLIES = 8;
 
 /** What the review knows of a position, from White's view (the cache's format is stored.ts). */
 export const PositionRecordSchema = z.union([

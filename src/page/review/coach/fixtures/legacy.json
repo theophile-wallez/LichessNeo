@@ -98,7 +98,7 @@
       },
       {
         "remark": "That’s the most accurate move.",
-        "parts": [["That’s the most accurate move."], ["The balance holds.", true]]
+        "parts": [["It develops the [[p:wn]]knight."], ["The balance holds.", true]]
       },
       {
         "remark": "Exactly what the engine wanted.",
@@ -107,7 +107,7 @@
       {
         "remark": "Clean and precise.",
         "parts": [
-          ["Clean and precise."],
+          ["It develops the [[p:wb]]bishop."],
           ["The game was balanced, and now White has a clear advantage.", true]
         ]
       },
@@ -139,7 +139,7 @@
       {
         "remark": "Exactly what the engine wanted.",
         "parts": [
-          ["Exactly what the engine wanted."],
+          ["It develops the [[p:bn]]knight."],
           ["White still has a winning position.", true]
         ]
       },
@@ -152,7 +152,7 @@
       },
       {
         "remark": "Spot on.",
-        "parts": [["Spot on."], ["White still has a winning position.", true]]
+        "parts": [["The rook takes the open file."], ["White still has a winning position.", true]]
       },
       {
         "remark": "Not every capture is a good one.",
@@ -310,7 +310,7 @@
       },
       {
         "remark": "C’est le coup le plus précis.",
-        "parts": [["C’est le coup le plus précis."], ["Les chances restent égales.", true]]
+        "parts": [["Il développe le [[p:wn]]cavalier."], ["Les chances restent égales.", true]]
       },
       {
         "remark": "Exactement ce que voulait le moteur.",
@@ -319,7 +319,7 @@
       {
         "remark": "Propre et précis.",
         "parts": [
-          ["Propre et précis."],
+          ["Il développe le [[p:wb]]fou."],
           ["La partie était équilibrée, et maintenant les Blancs ont un net avantage.", true]
         ]
       },
@@ -354,7 +354,7 @@
       {
         "remark": "Exactement ce que voulait le moteur.",
         "parts": [
-          ["Exactement ce que voulait le moteur."],
+          ["Il développe le [[p:bn]]cavalier."],
           ["Les Blancs ont toujours une position gagnante.", true]
         ]
       },
@@ -367,7 +367,10 @@
       },
       {
         "remark": "Dans le mille.",
-        "parts": [["Dans le mille."], ["Les Blancs ont toujours une position gagnante.", true]]
+        "parts": [
+          ["La tour prend la colonne ouverte."],
+          ["Les Blancs ont toujours une position gagnante.", true]
+        ]
       },
       {
         "remark": "Toutes les prises ne sont pas bonnes.",
@@ -1097,7 +1100,7 @@
       {
         "remark": "Nothing better here.",
         "parts": [
-          ["Nothing better here."],
+          ["It develops the [[p:bn]]knight."],
           ["White had a slight edge, but the game is now balanced.", true]
         ]
       },
@@ -1412,7 +1415,7 @@
       {
         "remark": "Rien de mieux ici.",
         "parts": [
-          ["Rien de mieux ici."],
+          ["Il développe le [[p:bn]]cavalier."],
           ["Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée.", true]
         ]
       },
@@ -1677,14 +1680,14 @@
       {
         "remark": "Spot on.",
         "parts": [
-          ["Spot on."],
+          ["It develops the [[p:bb]]bishop."],
           ["White had a winning position; now it’s only a clear advantage.", true]
         ]
       },
       {
         "remark": "Strong and simple.",
         "parts": [
-          ["Strong and simple."],
+          ["It develops the [[p:wb]]bishop."],
           ["White had a clear advantage; now it’s only a slight edge.", true]
         ]
       },
@@ -1736,10 +1739,7 @@
       },
       {
         "remark": "The engine’s top move. Well played.",
-        "parts": [
-          ["The engine’s top move. Well played."],
-          ["Black still has a clear advantage.", true]
-        ]
+        "parts": [["It develops the [[p:wb]]bishop."], ["Black still has a clear advantage.", true]]
       },
       {
         "remark": "Precise. Nothing else holds here.",
@@ -1838,14 +1838,14 @@
       {
         "remark": "Dans le mille.",
         "parts": [
-          ["Dans le mille."],
+          ["Il développe le [[p:bb]]fou."],
           ["Les Blancs avaient une position gagnante, il ne leur reste qu’un net avantage.", true]
         ]
       },
       {
         "remark": "Simple et fort.",
         "parts": [
-          ["Simple et fort."],
+          ["Il développe le [[p:wb]]fou."],
           ["Les Blancs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -1898,7 +1898,7 @@
       {
         "remark": "Le coup du moteur. Bien joué.",
         "parts": [
-          ["Le coup du moteur. Bien joué."],
+          ["Il développe le [[p:wb]]fou."],
           ["Les Noirs ont toujours un net avantage.", true]
         ]
       },
@@ -2170,7 +2170,7 @@
       {
         "remark": "Just right. Keep it up!",
         "parts": [
-          ["Just right. Keep it up!"],
+          ["The rook takes the open file."],
           ["White had a clear advantage; now it’s only a slight edge.", true]
         ]
       },
@@ -2571,7 +2571,7 @@
       {
         "remark": "Parfait. Continue comme ça !",
         "parts": [
-          ["Parfait. Continue comme ça !"],
+          ["La tour prend la colonne ouverte."],
           ["Les Blancs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -3014,7 +3014,7 @@
       {
         "remark": "That’s the most accurate move.",
         "parts": [
-          ["That’s the most accurate move."],
+          ["The rook takes the half-open file."],
           ["Black goes from a slight edge to a clear advantage.", true]
         ]
       },
@@ -3056,7 +3056,10 @@
       },
       {
         "remark": "Now just convert calmly.",
-        "parts": [["Now just convert calmly."], ["White still has a winning position.", true]]
+        "parts": [
+          ["The king heads for the center, where it counts in an endgame."],
+          ["White still has a winning position.", true]
+        ]
       },
       {
         "remark": "Taking is right here.",
@@ -3372,7 +3375,7 @@
       {
         "remark": "C’est le coup le plus précis.",
         "parts": [
-          ["C’est le coup le plus précis."],
+          ["La tour prend la colonne semi-ouverte."],
           ["Les Noirs passent d’un léger avantage à un net avantage.", true]
         ]
       },
@@ -3421,7 +3424,7 @@
       {
         "remark": "Il ne reste qu’à conclure calmement.",
         "parts": [
-          ["Il ne reste qu’à conclure calmement."],
+          ["Le roi rejoint le centre, où il compte en finale."],
           ["Les Blancs ont toujours une position gagnante.", true]
         ]
       },
@@ -4343,7 +4346,7 @@
       {
         "remark": "Just right. Keep it up!",
         "parts": [
-          ["Just right. Keep it up!"],
+          ["It develops the [[p:wb]]bishop."],
           ["Black had a clear advantage, but the game is now balanced.", true]
         ]
       },
@@ -4680,7 +4683,7 @@
       {
         "remark": "Parfait. Continue comme ça !",
         "parts": [
-          ["Parfait. Continue comme ça !"],
+          ["Il développe le [[p:wb]]fou."],
           ["Les Noirs avaient un net avantage, mais la partie est maintenant équilibrée.", true]
         ]
       },
@@ -5019,7 +5022,10 @@
       },
       {
         "remark": "Spot on.",
-        "parts": [["Spot on."], ["The game was balanced, and now Black has a slight edge.", true]]
+        "parts": [
+          ["It develops the [[p:bn]]knight."],
+          ["The game was balanced, and now Black has a slight edge.", true]
+        ]
       },
       {
         "remark": "Just right. Keep it up!",
@@ -5396,7 +5402,7 @@
       {
         "remark": "Dans le mille.",
         "parts": [
-          ["Dans le mille."],
+          ["Il développe le [[p:bn]]cavalier."],
           ["La partie était équilibrée, et maintenant les Noirs ont un léger avantage.", true]
         ]
       },
@@ -6011,12 +6017,12 @@
       },
       {
         "remark": "Just right. Keep it up!",
-        "parts": [["Just right. Keep it up!"], ["The game stays balanced.", true]]
+        "parts": [["It pushes the passed pawn on."], ["The game stays balanced.", true]]
       },
       {
         "remark": "Nothing better here.",
         "parts": [
-          ["Nothing better here."],
+          ["The rook takes the open file."],
           ["The game was balanced, and now Black has a slight edge.", true]
         ]
       },
@@ -6367,12 +6373,12 @@
       },
       {
         "remark": "Parfait. Continue comme ça !",
-        "parts": [["Parfait. Continue comme ça !"], ["La partie reste équilibrée.", true]]
+        "parts": [["Il pousse le pion passé."], ["La partie reste équilibrée.", true]]
       },
       {
         "remark": "Rien de mieux ici.",
         "parts": [
-          ["Rien de mieux ici."],
+          ["La tour prend la colonne ouverte."],
           ["La partie était équilibrée, et maintenant les Noirs ont un léger avantage.", true]
         ]
       },
@@ -7453,7 +7459,10 @@
       },
       {
         "remark": "That’s the most accurate move.",
-        "parts": [["That’s the most accurate move."], ["White keeps a clear advantage.", true]]
+        "parts": [
+          ["The king heads for the center, where it counts in an endgame."],
+          ["White keeps a clear advantage.", true]
+        ]
       },
       {
         "remark": "Now there’s a mate coming against this king.",
@@ -7515,7 +7524,7 @@
       {
         "remark": "That’s the most accurate move.",
         "parts": [
-          ["That’s the most accurate move."],
+          ["The king heads for the center, where it counts in an endgame."],
           ["White had a clear advantage; now it’s only a slight edge.", true]
         ]
       },
@@ -7854,7 +7863,10 @@
       },
       {
         "remark": "C’est le coup le plus précis.",
-        "parts": [["C’est le coup le plus précis."], ["Les Blancs gardent un net avantage.", true]]
+        "parts": [
+          ["Le roi rejoint le centre, où il compte en finale."],
+          ["Les Blancs gardent un net avantage.", true]
+        ]
       },
       {
         "remark": "Un mat se prépare maintenant contre ce roi.",
@@ -7921,7 +7933,7 @@
       {
         "remark": "C’est le coup le plus précis.",
         "parts": [
-          ["C’est le coup le plus précis."],
+          ["Le roi rejoint le centre, où il compte en finale."],
           ["Les Blancs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -8049,7 +8061,10 @@
       },
       {
         "remark": "Spot on.",
-        "parts": [["Spot on."], ["White still has a winning position.", true]]
+        "parts": [
+          ["The rook takes the half-open file."],
+          ["White still has a winning position.", true]
+        ]
       },
       {
         "remark": "This loosens the grip a little.",
@@ -8286,7 +8301,7 @@
       {
         "remark": "Nothing better here.",
         "parts": [
-          ["Nothing better here."],
+          ["The rook takes the open file."],
           ["The game was balanced, but now White has a slight edge.", true]
         ]
       },
@@ -8426,7 +8441,10 @@
       },
       {
         "remark": "Dans le mille.",
-        "parts": [["Dans le mille."], ["Les Blancs ont toujours une position gagnante.", true]]
+        "parts": [
+          ["La tour prend la colonne semi-ouverte."],
+          ["Les Blancs ont toujours une position gagnante.", true]
+        ]
       },
       {
         "remark": "L’emprise se relâche un peu.",
@@ -8684,7 +8702,7 @@
       {
         "remark": "Rien de mieux ici.",
         "parts": [
-          ["Rien de mieux ici."],
+          ["La tour prend la colonne ouverte."],
           ["La partie était équilibrée, mais maintenant les Blancs ont un léger avantage.", true]
         ]
       },
@@ -8820,7 +8838,7 @@
       },
       {
         "remark": "Nicely done, the position stays healthy.",
-        "parts": [["Nicely done, the position stays healthy."], ["The game stays balanced.", true]]
+        "parts": [["It develops the [[p:wb]]bishop."], ["The game stays balanced.", true]]
       },
       {
         "remark": "Seeing that far ahead, impressive.",
@@ -8995,7 +9013,7 @@
       {
         "remark": "The engine’s top move. Well played.",
         "parts": [
-          ["The engine’s top move. Well played."],
+          ["The rook takes the open file."],
           ["White goes from a slight edge to a winning position.", true]
         ]
       },
@@ -9146,7 +9164,7 @@
       },
       {
         "remark": "Bien joué, la position reste saine.",
-        "parts": [["Bien joué, la position reste saine."], ["La partie reste équilibrée.", true]]
+        "parts": [["Il développe le [[p:wb]]fou."], ["La partie reste équilibrée.", true]]
       },
       {
         "remark": "Voir aussi loin, chapeau.",
@@ -9349,7 +9367,7 @@
       {
         "remark": "Le coup du moteur. Bien joué.",
         "parts": [
-          ["Le coup du moteur. Bien joué."],
+          ["La tour prend la colonne ouverte."],
           ["Les Blancs passent d’un léger avantage à une position gagnante.", true]
         ]
       },

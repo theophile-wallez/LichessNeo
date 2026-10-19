@@ -48,5 +48,5 @@ it('gives the review’s figures when the quick look’s engine never answers', 
   const bubble = queryOne(document, '.ln-ext-end__bubble', HTMLElement);
   expect(bubble?.textContent).toMatch(/You played with [\d.]+% accuracy/);
   expect(bubble?.textContent).not.toBe(gameOverTexts().failed);
-  expect(localStorage.getItem(`ln-ext-review:${GAME.id}:${GAME.nodes.length}:v1`)).not.toBeNull();
+  expect(localStorage.getItem(`ln-ext-review:${GAME.id}:${GAME.nodes.length}:v2`)).not.toBeNull();
 });

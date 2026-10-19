@@ -17,7 +17,7 @@ const targetValue = (piece: Piece): number =>
   piece.role === 'king' ? 100 : PIECE_VALUES[piece.role];
 
 /** The pieces the piece on `square` forks, the most valuable first; none when it forks nothing. */
-function forkedFrom(board: Board, square: string): Piece[] {
+export function forkedFrom(board: Board, square: string): Piece[] {
   const from = parseSquare(square);
   const piece = from ? board.get(from) : undefined;
   // A forker taken for less than it's worth forks nothing.

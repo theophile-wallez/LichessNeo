@@ -47,9 +47,16 @@ describe('StoredRecordCodec', () => {
     );
   });
 
+  it('keeps a record’s line, its moves joined by spaces', () => {
+    const stored = { cp: 35, wp: 53, wp2: 50, best: 'g1f3', pv: 'g1f3 g8f6 c2c4' };
+    const record = StoredRecordCodec.parse(stored);
+    expect(record.line).toEqual(['g1f3', 'g8f6', 'c2c4']);
+    expect(z.encode(StoredRecordCodec, record)).toEqual(stored);
+  });
+
   it('writes records back in the stored format and order', () => {
     const stored =
-      '[{"cp":0,"wp":50,"wp2":48,"best":"e2e4"},{"mate":3,"wp":100,"wp2":null,"best":null}]';
+      '[{"cp":0,"wp":50,"wp2":48,"best":"e2e4"},{"mate":3,"wp":100,"wp2":null,"best":"c4f7","pv":"c4f7 e8e7 c3d5"}]';
     const records = z.array(StoredRecordCodec).parse(JSON.parse(stored));
     expect(JSON.stringify(z.encode(z.array(StoredRecordCodec), records))).toBe(stored);
   });

@@ -65,6 +65,19 @@ export function attackers(board: Board, target: Square, by: Color): Role[] {
 export const isAttacked = (board: Board, target: Square, by: Color): boolean =>
   attackers(board, target, by).length > 0;
 
+/** Where `color`'s king stands, or null for a board without one. */
+export function kingSquare(board: Board, color: Color): Square | null {
+  for (const [square, piece] of board)
+    if (piece.role === 'king' && piece.color === color) return square;
+  return null;
+}
+
+/** Whether `color`'s king is attacked. */
+export function isInCheck(board: Board, color: Color): boolean {
+  const king = kingSquare(board, color);
+  return king !== null && isAttacked(board, king, color === 'white' ? 'black' : 'white');
+}
+
 /** The squares the piece on `from` attacks, pins ignored; a slider stops at the first piece. */
 export function attackedSquares(board: Board, from: Square): Square[] {
   const piece = board.get(from);

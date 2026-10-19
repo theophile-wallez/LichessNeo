@@ -5,6 +5,8 @@ import {
   COLORS,
   fenTurn,
   isAttacked,
+  isInCheck,
+  kingSquare,
   parseFen,
   parsePlacement,
   parseSquare,
@@ -102,5 +104,15 @@ describe('attackers', () => {
     expect(attackers(board, 'e6', 'white')).toEqual(['knight']);
     expect(attackers(board, 'd1', 'white').toSorted()).toEqual(['king', 'queen']);
     expect(attackers(board, 'd3', 'white')).toEqual(['king']);
+  });
+});
+
+describe('checks', () => {
+  it('finds the king and whether it is attacked', () => {
+    const board = parsePlacement('4k3/8/8/8/8/8/8/4R1K1');
+    expect(kingSquare(board, 'black')).toBe('e8');
+    expect(isInCheck(board, 'black')).toBe(true);
+    expect(isInCheck(board, 'white')).toBe(false);
+    expect(isInCheck(parsePlacement('8/8/8/8/8/8/8/4R3'), 'black')).toBe(false);
   });
 });

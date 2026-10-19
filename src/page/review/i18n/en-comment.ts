@@ -1,6 +1,21 @@
 import type { Color, Piece } from '#shared/chess/index.ts';
-import { agree, capitalize, definite, indefinite, partyOf, type Party } from './en-grammar.ts';
-import type { FactSentences, TrajectorySentences, Viewer } from './types.ts';
+import {
+  agree,
+  capitalize,
+  definite,
+  indefinite,
+  materialEn,
+  partyOf,
+  type Party,
+} from './en-grammar.ts';
+import { motifEn } from './en-motifs.ts';
+import type {
+  FactSentences,
+  LineFacts,
+  PlanSentences,
+  TrajectorySentences,
+  Viewer,
+} from './types.ts';
 
 /** "You", "The opponent", "White": a side at the start of a sentence. */
 const subject = (party: Party): string => capitalize(party.name);
@@ -41,6 +56,43 @@ export function trajectoryEn(viewer: Viewer): TrajectorySentences {
 // The pieces a fork hits: "the [rook] and the [queen]", or whose they are.
 const both = (viewer: Viewer, first: Piece, second: Piece): string =>
   `${definite(viewer, first)} and ${definite(viewer, second)}`;
+
+// What a quiet move does for the position.
+function plansEn(viewer: Viewer): PlanSentences {
+  const the = (piece: Piece): string => definite(viewer, piece);
+  return {
+    develops: piece => `It develops ${the(piece)}.`,
+    outpost: piece => `${capitalize(the(piece))} lands on an outpost: no pawn can chase it away.`,
+    openFile: halfOpen => `The rook takes the ${halfOpen ? 'half-open' : 'open'} file.`,
+    passedPawn: made => (made ? 'It makes a passed pawn.' : 'It pushes the passed pawn on.'),
+    centralKing: 'The king heads for the center, where it counts in an endgame.',
+  };
+}
+
+// The sentences read off the engine's lines.
+function lineFactsEn(viewer: Viewer): LineFacts {
+  const party = (color: Color, ...seed: readonly string[]): Party =>
+    partyOf(viewer, color, seed.join('|'));
+  const the = (piece: Piece): string => definite(viewer, piece);
+  return {
+    motif: motifEn(viewer),
+    material: materialEn,
+    forcesMate: (color, line) => `${subject(party(color, line))} can now force mate: ${line}.`,
+    losesMaterial: (color, material, line, threatened) => {
+      const winner = party(color, material, line);
+      const after = `after ${line}, ${winner.name} ${agree(winner, 'wins', 'win')} ${material}.`;
+      return threatened ? `It doesn’t stop the threat: ${after}` : capitalize(after);
+    },
+    wouldHaveWon: (line, material) => `${line} would have won ${material}.`,
+    winsAlong: (material, line) => `It wins ${material}: ${line}.`,
+    stopsThreat: (threat, material) => `It stops ${threat}, which would have won ${material}.`,
+    stopsMate: line => `It stops the mate: ${line}.`,
+    stopsLongMate: (moves, first) => `It stops a mate in ${moves}, starting with ${first}.`,
+    escapes: (piece, threat) => `${capitalize(the(piece))} gets out of the way of ${threat}.`,
+    threatens: (threat, material) => `It threatens ${threat}, which would win ${material}.`,
+    threatensMate: threat => `It threatens mate, starting with ${threat}.`,
+  };
+}
 
 export function factsEn(viewer: Viewer): FactSentences {
   const party = (color: Color, ...seed: readonly string[]): Party =>
@@ -87,5 +139,7 @@ export function factsEn(viewer: Viewer): FactSentences {
     allowsFork: (reply, first, second) =>
       `It allows ${reply}, a fork of ${both(viewer, first, second)}.`,
     canPlay: (color, reply) => `It lets ${party(color, reply).name} play ${reply}.`,
+    ...lineFactsEn(viewer),
+    ...plansEn(viewer),
   };
 }

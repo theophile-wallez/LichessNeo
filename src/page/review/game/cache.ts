@@ -15,8 +15,8 @@ import { prefixed } from '#shared/prefix.ts';
 // under another key, so a reload doesn't start the analysis over. It's
 // Lichess's storage too: only the games analysed last are kept.
 
-/** Bump to drop every cached review, when the records' meaning changes. */
-const CACHE_VERSION = 1;
+/** Bump to drop every cached review, when the records' meaning changes (2: with their lines). */
+const CACHE_VERSION = 2;
 /** Cached games kept, finished or not. */
 const MAX_GAMES = 200;
 
@@ -36,7 +36,10 @@ const isCurrent = (key: string): boolean => key.endsWith(`:v${CACHE_VERSION}`);
 /** The index as stored, or, the first time, built from the caches already there. */
 function readIndex(): string[] {
   const index = readStoredJson(StorageKey.reviewIndex, IndexSchema);
-  if (index) return index;
+  if (index) {
+    for (const key of index.filter(key => !isCurrent(key))) removeStored(key);
+    return index.filter(isCurrent);
+  }
   const cached = [
     ...storedKeys(`${prefixed('review')}:`),
     ...storedKeys(`${prefixed('review-progress')}:`),

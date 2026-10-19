@@ -55,3 +55,9 @@ export const lineToken = (moves: readonly LineMove[], play?: ChipPlay): string =
       numbered(move, i === 0, play && { base: play.base, ucis: play.ucis.slice(0, i + 1) }),
     )
     .join(' ');
+
+/** The last of `moves` alone, numbered as a line's first; with `play`, it plays the line up to it. */
+export function lineMoveToken(moves: readonly LineMove[], play?: ChipPlay): string {
+  const move = moves.at(-1);
+  return move ? numbered(move, true, play) : '';
+}

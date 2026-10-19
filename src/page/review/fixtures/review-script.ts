@@ -172,13 +172,13 @@ export function setUp(scenario: Scenario): Driver {
   const root = document.documentElement;
   root.lang = scenario.lang;
   localStorage.clear();
-  // The original's storage keys and format, spelled out rather than taken from
-  // the port: a change to them would orphan the caches users have.
+  // The storage keys and format, spelled out rather than taken from the port: a
+  // change to them orphans the caches users have (v2 left the original's v1 behind).
   localStorage.setItem('ln-ext-coach', String(game.coach));
   const positions = scenario.synthetic ? game.nodes.slice(0, 1) : game.nodes;
   if (scenario.cached)
     localStorage.setItem(
-      `ln-ext-review:${game.id}:${positions.length}:v1`,
+      `ln-ext-review:${game.id}:${positions.length}:v2`,
       JSON.stringify(z.encode(z.array(StoredRecordCodec), [...game.records])),
     );
   const id = scenario.synthetic ? 'synthetic' : game.id;
@@ -247,7 +247,7 @@ async function runScenario(
     await step.run(driver);
     const key =
       cacheKey ??
-      `ln-ext-review:${fixtureGame(scenario.game).id}:${driver.ctrl.mainline.length}:v1`;
+      `ln-ext-review:${fixtureGame(scenario.game).id}:${driver.ctrl.mainline.length}:v2`;
     snapshots[step.name] = snapshotReview({
       arrows: arrows(),
       coach: `${posted.length} ${posted.at(-1) ?? ''}`,

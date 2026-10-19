@@ -1,4 +1,4 @@
-import { attackers, opposite, parseFen } from '#shared/chess/index.ts';
+import { isInCheck, parseFen } from '#shared/chess/index.ts';
 import { isHanging } from '#page/review/chess/material.ts';
 
 /**
@@ -9,8 +9,7 @@ import { isHanging } from '#page/review/chess/material.ts';
 export function isTactical(fen: string, previousLoss: number): boolean {
   const { board, turn } = parseFen(fen);
   if (previousLoss >= 10) return true;
-  const king = [...board].find(([, piece]) => piece.role === 'king' && piece.color === turn)?.[0];
-  if (king && attackers(board, king, opposite(turn)).length > 0) return true;
+  if (isInCheck(board, turn)) return true;
   return [...board].some(
     ([square, piece]) =>
       piece.role !== 'pawn' && piece.role !== 'king' && isHanging(board, square, piece),

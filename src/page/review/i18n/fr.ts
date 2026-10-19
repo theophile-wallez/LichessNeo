@@ -113,7 +113,18 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
     allows: (move, line) => `${move} permet ${line}.`,
     show: 'Voir la ligne',
   },
-  themes: { fork: 'Fourchette', hanging: 'Pièce en prise', mate: 'Mat', sacrifice: 'Sacrifice' },
+  themes: {
+    fork: 'Fourchette',
+    pin: 'Clouage',
+    skewer: 'Enfilade',
+    discovered: 'Attaque à la découverte',
+    doubleCheck: 'Échec double',
+    defender: 'Élimination du défenseur',
+    trapped: 'Pièce piégée',
+    hanging: 'Pièce en prise',
+    mate: 'Mat',
+    sacrifice: 'Sacrifice',
+  },
 };
 
 const playedLike = (viewer: Viewer, color: Color, elo: number | null): [string, string] => {

@@ -18,5 +18,5 @@ it('carries on when one engine of several stops answering', async () => {
   await advance(30_000);
   expect(logged).not.toHaveBeenCalled();
   expect(document.querySelector('#ln-ext-review .ln-ext-review__error')).toBeNull();
-  expect(localStorage.getItem(`ln-ext-review:passanta:${ctrl.mainline.length}:v1`)).not.toBeNull();
+  expect(localStorage.getItem(`ln-ext-review:passanta:${ctrl.mainline.length}:v2`)).not.toBeNull();
 });

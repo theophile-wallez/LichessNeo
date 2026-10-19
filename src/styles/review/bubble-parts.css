@@ -104,11 +104,17 @@
 }
 
 .ln-ext-tag--fork,
+.ln-ext-tag--pin,
+.ln-ext-tag--skewer,
+.ln-ext-tag--discovered,
+.ln-ext-tag--doubleCheck,
+.ln-ext-tag--defender,
 .ln-ext-tag--sacrifice {
   --ln-ext-tag: color-mix(in srgb, var(--ln-ext-purple) 80%, var(--ln-ext-text-strong));
 }
 
-.ln-ext-tag--hanging {
+.ln-ext-tag--hanging,
+.ln-ext-tag--trapped {
   --ln-ext-tag: color-mix(in srgb, var(--ln-ext-red) 80%, var(--ln-ext-text-strong));
 }
 
