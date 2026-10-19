@@ -1,3 +1,4 @@
+import { START_PLACEMENT } from '#shared/chess/fen.ts';
 import type { Square } from '#shared/chess/types.ts';
 
 // The game the settings' preview board plays (preview.ts): an Italian opening
@@ -11,7 +12,7 @@ export interface PreviewMove {
   readonly rook?: readonly [from: Square, to: Square];
 }
 
-export const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+export const START = START_PLACEMENT;
 
 export const LINE: readonly PreviewMove[] = [
   { from: 'e2', to: 'e4', san: 'e4' },

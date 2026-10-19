@@ -1,0 +1,113 @@
+/* What every intro but the face-off plays on (content/game/intro/stage.ts): a layer fixed over
+ * the page, letting every click through, and a box over the board's squares, whose parts are
+ * sized in its units. Each intro's stylesheet sets its parts' timing, in milliseconds from its
+ * start. Over the board, they keep their colors in either scheme. */
+
+.ln-ext-intro-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  pointer-events: none;
+  font-family: var(--ln-ext-font);
+}
+
+/* In the settings' preview, over it alone. */
+.ln-ext-intro-fx--inline {
+  position: absolute;
+  z-index: 5;
+}
+
+.ln-ext-intro-fx__board {
+  position: absolute;
+  container-type: size;
+}
+
+.ln-ext-intro-fx__board > * {
+  position: absolute;
+}
+
+/* A veil over the board, as an intro takes the stage: `--ln-ext-intro-scrim` dark, lifted at
+ * `--ln-ext-intro-scrim-out`. Darkened by its fill, lifted by itself: two animations of one
+ * element's opacity would keep both off the compositor, so off the main thread's way. */
+.ln-ext-intro-fx__scrim {
+  inset: 0;
+  animation: ln-ext-intro-scrim-out 380ms var(--ln-ext-intro-scrim-out, 1900ms) forwards !important;
+}
+
+.ln-ext-intro-fx__scrim > i {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: #0b0c10;
+  opacity: 0;
+  animation: ln-ext-intro-scrim-in 280ms forwards !important;
+}
+
+@keyframes ln-ext-intro-scrim-in {
+  to {
+    opacity: var(--ln-ext-intro-scrim, 0.5);
+  }
+}
+
+@keyframes ln-ext-intro-scrim-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* A ring spreading from an avatar or a piece, at `--ln-ext-intro-delay`, in `--ln-ext-intro-ring`. */
+.ln-ext-intro-fx__ring {
+  box-sizing: border-box;
+  border: 2.5px solid var(--ln-ext-intro-ring, var(--ln-ext-yellow));
+  border-radius: 50%;
+  opacity: 0;
+  animation: ln-ext-intro-ring 620ms cubic-bezier(0.2, 0.8, 0.3, 1) var(--ln-ext-intro-delay, 0ms)
+    forwards !important;
+}
+
+@keyframes ln-ext-intro-ring {
+  from {
+    opacity: 0.9;
+    scale: 0.45;
+  }
+  to {
+    opacity: 0;
+    scale: 1.7;
+  }
+}
+
+/* The ring around each player's avatar takes their avatar's first hue. */
+.ln-ext-intro-fx__ring--top {
+  --ln-ext-intro-ring: var(--ln-ext-avatar-from, var(--ln-ext-pink));
+}
+
+.ln-ext-intro-fx__ring--bottom {
+  --ln-ext-intro-ring: var(--ln-ext-avatar-from, var(--ln-ext-orange));
+}
+
+/* A white pill of words, centered across the board at the `top` it's given. */
+.ln-ext-intro-fx__pill {
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+  padding: 2.6cqw 4.4cqw;
+  border-radius: 999px;
+  background: var(--ln-ext-white);
+  color: var(--ln-ext-ink);
+  font-size: max(12px, 4.2cqw);
+  font-weight: 750;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 2.6cqw 6.5cqw #00000066;
+  translate: -50% -50%;
+  opacity: 0;
+}
+
+/* An avatar in its bar swells as what flew there lands. */
+@keyframes ln-ext-intro-avatar-pop {
+  50% {
+    scale: 1.28;
+  }
+}

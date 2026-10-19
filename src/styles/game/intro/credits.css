@@ -1,0 +1,173 @@
+/* The credits (content/game/intro/credits.ts): over a dark veil, the opponent's name, outlined,
+ * drifts left across the board's top and the player's, filled, right across its bottom, each
+ * over a caption with their avatar, rating and color; the game's setup spreads out between them.
+ * The names are `--ln-ext-intro-size` high, both as wide; all fade in and out. */
+
+.ln-ext-intro-credits {
+  inset: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.ln-ext-intro-credits > * {
+  position: absolute;
+}
+
+.ln-ext-intro-credits__veil {
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 50%, #101118f0, #0a0b0ff7);
+  opacity: 0;
+  animation: ln-ext-intro-credits-veil 2570ms linear both !important;
+}
+
+.ln-ext-intro-credits__name,
+.ln-ext-intro-credits__caption {
+  left: 0;
+  white-space: nowrap;
+  opacity: 0;
+  animation: ln-ext-intro-credits-drift 2350ms linear both !important;
+}
+
+.ln-ext-intro-credits__name {
+  font-size: var(--ln-ext-intro-size);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.ln-ext-intro-credits__name--top {
+  top: 15%;
+  color: transparent;
+  -webkit-text-stroke: max(1px, 0.5cqw) #fff;
+}
+
+.ln-ext-intro-credits__name--bottom {
+  top: 60%;
+  animation-duration: 2200ms !important;
+  animation-delay: 150ms !important;
+}
+
+.ln-ext-intro-credits__caption {
+  display: flex;
+  align-items: center;
+  gap: 2.3cqw;
+  color: #b9bac2;
+  font-size: 4cqw;
+  font-weight: 700;
+}
+
+.ln-ext-intro-credits__caption--top {
+  top: calc(15% + var(--ln-ext-intro-size) * 1.08);
+  animation-duration: 2230ms !important;
+  animation-delay: 120ms !important;
+}
+
+.ln-ext-intro-credits__caption--bottom {
+  top: calc(60% + var(--ln-ext-intro-size) * 1.08);
+  animation-duration: 2080ms !important;
+  animation-delay: 270ms !important;
+}
+
+.ln-ext-intro-credits__avatar {
+  width: 6.7cqw;
+  height: 6.7cqw;
+  border-radius: 2cqw;
+  background-image: var(--ln-ext-intro-avatar-image);
+  background-size: var(--ln-ext-intro-avatar-size);
+  background-position: var(--ln-ext-intro-avatar-position);
+  background-repeat: var(--ln-ext-intro-avatar-repeat);
+}
+
+.ln-ext-intro-credits__chip {
+  width: 3.3cqw;
+  height: 3.3cqw;
+  border-radius: 1cqw;
+  background: #f7f8f8;
+}
+
+.ln-ext-intro-credits__chip--black {
+  background: #2b2d36;
+  box-shadow: inset 0 0 0 max(1px, 0.4cqw) #ffffff59;
+}
+
+/* The game's setup on the middle line, between two rules. */
+.ln-ext-intro-credits__setup {
+  inset-inline: 0;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4cqw;
+  color: var(--ln-ext-yellow);
+  font-size: 3.7cqw;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  translate: 0 -50%;
+  opacity: 0;
+  animation: ln-ext-intro-credits-spread 1870ms linear 380ms both !important;
+}
+
+.ln-ext-intro-credits__setup > span {
+  width: 14.7cqw;
+  height: max(1px, 0.5cqw);
+  background: currentColor;
+  animation: ln-ext-intro-credits-rule 600ms cubic-bezier(0.22, 1, 0.36, 1) 520ms both !important;
+}
+
+/* In for 300ms, out from 2150ms. */
+@keyframes ln-ext-intro-credits-veil {
+  0% {
+    opacity: 0;
+  }
+  11.7%,
+  83.7% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* In fast, a slow drift, out. No blur: a filter's animation runs on the main thread. */
+@keyframes ln-ext-intro-credits-drift {
+  0% {
+    opacity: 0;
+    transform: translateX(var(--ln-ext-intro-from));
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.3, 1);
+  }
+  15%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(var(--ln-ext-intro-to));
+  }
+}
+
+/* Spread out to its place in 700ms, out from 1570ms. */
+@keyframes ln-ext-intro-credits-spread {
+  0% {
+    opacity: 0;
+    scale: 1.35 1;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  37.4%,
+  84% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 1;
+  }
+}
+
+@keyframes ln-ext-intro-credits-rule {
+  from {
+    scale: 0 1;
+  }
+}

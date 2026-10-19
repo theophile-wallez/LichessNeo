@@ -461,6 +461,42 @@
   "settingSidebarRatingBody": {
     "message": "Le classement affiché à côté de votre nom. Par défaut, la cadence que vous jouez le plus."
   },
+  "settingGameIntro": {
+    "message": "Intro de partie"
+  },
+  "settingGameIntroBody": {
+    "message": "L’animation qui ouvre chacune de vos parties, une fois les joueurs installés."
+  },
+  "introOff": {
+    "message": "Aucune animation"
+  },
+  "introSalute": {
+    "message": "Le salut"
+  },
+  "introSetup": {
+    "message": "La mise en place"
+  },
+  "introTicket": {
+    "message": "Le billet"
+  },
+  "introCamps": {
+    "message": "Les deux camps"
+  },
+  "introCredits": {
+    "message": "Le générique"
+  },
+  "introFaceOff": {
+    "message": "Le face-à-face"
+  },
+  "introPreviewPlay": {
+    "message": "Lancer"
+  },
+  "introPreviewOpponent": {
+    "message": "Adversaire"
+  },
+  "introGoodGame": {
+    "message": "Bonne partie !"
+  },
   "ratingMostPlayed": {
     "message": "La plus jouée"
   },

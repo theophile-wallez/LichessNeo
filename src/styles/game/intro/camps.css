@@ -1,0 +1,118 @@
+/* The two camps (content/game/intro/camps.ts): each half of the board washes in its player's
+ * avatar's hue, a line of light runs out from the middle in both hues as the halves meet, with a
+ * flash, then each side's pieces hop and the washes fade. */
+
+.ln-ext-intro-camps__wash {
+  --ln-ext-intro-hue: var(--ln-ext-avatar-from, var(--ln-ext-pink));
+  inset: 0 0 50%;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ln-ext-intro-hue) 82%, transparent),
+    color-mix(in srgb, var(--ln-ext-intro-hue) 33%, transparent) 60%,
+    transparent
+  );
+  transform-origin: 50% 0;
+  animation: ln-ext-intro-camps-wash 1860ms linear 60ms both !important;
+}
+
+.ln-ext-intro-camps__wash--bottom {
+  --ln-ext-intro-hue: var(--ln-ext-avatar-from, var(--ln-ext-orange));
+  inset: 50% 0 0;
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--ln-ext-intro-hue) 82%, transparent),
+    color-mix(in srgb, var(--ln-ext-intro-hue) 33%, transparent) 60%,
+    transparent
+  );
+  transform-origin: 50% 100%;
+}
+
+/* Half the line each, the opponent's on the left, white where they meet. */
+.ln-ext-intro-camps__line {
+  --ln-ext-intro-hue: var(--ln-ext-avatar-from, var(--ln-ext-pink));
+  left: 0;
+  top: calc(50% - 0.5cqw);
+  width: 50%;
+  height: 1cqw;
+  border-radius: 1cqw 0 0 1cqw;
+  background: linear-gradient(90deg, var(--ln-ext-intro-hue), #fff);
+  box-shadow: 0 0 4.7cqw #fff;
+  transform-origin: 100% 50%;
+  scale: 0 1;
+  animation:
+    ln-ext-intro-camps-line 420ms cubic-bezier(0.22, 1, 0.36, 1) 500ms forwards,
+    ln-ext-intro-camps-fade 420ms 1400ms forwards !important;
+}
+
+.ln-ext-intro-camps__line--bottom {
+  --ln-ext-intro-hue: var(--ln-ext-avatar-from, var(--ln-ext-orange));
+  left: 50%;
+  border-radius: 0 1cqw 1cqw 0;
+  background: linear-gradient(90deg, #fff, var(--ln-ext-intro-hue));
+  transform-origin: 0 50%;
+}
+
+.ln-ext-intro-camps__flash {
+  inset: 0;
+  border-radius: 4px;
+  background: #fff;
+  opacity: 0;
+  animation: ln-ext-intro-camps-flash 340ms 520ms forwards !important;
+}
+
+:is(.is2d [data-ln-ext-intro='camps'], [data-ln-ext-intro='camps'] .is2d) cg-board piece {
+  transform-origin: var(--ln-ext-intro-origin, 50% 88%);
+  animation: ln-ext-intro-camps-hop 440ms cubic-bezier(0.22, 1, 0.36, 1)
+    var(--ln-ext-intro-delay, 0ms) !important;
+}
+
+/* Out from its edge to the middle in 540ms, faded from 1300ms. */
+@keyframes ln-ext-intro-camps-wash {
+  0% {
+    scale: 1 0;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  29%,
+  66.7% {
+    opacity: 1;
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  100% {
+    opacity: 0;
+    scale: 1;
+  }
+}
+
+@keyframes ln-ext-intro-camps-fade {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ln-ext-intro-camps-line {
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes ln-ext-intro-camps-flash {
+  50% {
+    opacity: 0.38;
+  }
+}
+
+@keyframes ln-ext-intro-camps-hop {
+  40% {
+    translate: 0 -16%;
+    scale: 1.06;
+  }
+}
+
+.ln-ext-intro-fx[data-ln-ext-intro='camps'] .ln-ext-intro-fx__ring {
+  --ln-ext-intro-delay: 250ms;
+}
+
+[data-ln-ext-intro='camps'] :is(.ruser, .ln-ext-intro-preview__bar)::before {
+  animation: ln-ext-intro-avatar-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 250ms !important;
+}

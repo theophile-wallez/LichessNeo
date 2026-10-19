@@ -1,0 +1,226 @@
+/* The ticket (content/game/intro/ticket.ts): a ticket lands on the board, a stamp thumps on it,
+ * it tears along its perforation and each half flies into its player's avatar, which swells. */
+
+.ln-ext-intro-fx[data-ln-ext-intro='ticket'] {
+  --ln-ext-intro-scrim: 0.5;
+  --ln-ext-intro-scrim-out: 1350ms;
+}
+
+.ln-ext-intro-ticket {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  width: 90cqw;
+  height: fit-content;
+  margin: auto;
+  color: var(--ln-ext-ink);
+  filter: drop-shadow(0 4cqw 7cqw #00000080);
+  animation:
+    ln-ext-intro-ticket-in 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    ln-ext-intro-ticket-thump 220ms cubic-bezier(0.22, 1, 0.36, 1) 840ms !important;
+}
+
+/* Notched on the perforation, whose dashes are the bottom half's. */
+.ln-ext-intro-ticket__half {
+  --ln-ext-intro-dir: -1;
+  --ln-ext-intro-notch: 2.7cqw;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3.3cqw;
+  padding: 3.7cqw 4.3cqw;
+  border-radius: 4.7cqw 4.7cqw 0 0;
+  background: var(--ln-ext-white);
+  mask:
+    radial-gradient(
+        circle at 0 100%,
+        transparent var(--ln-ext-intro-notch),
+        #000 calc(var(--ln-ext-intro-notch) + 0.5px)
+      )
+      0 0 / 51% 100% no-repeat,
+    radial-gradient(
+        circle at 100% 100%,
+        transparent var(--ln-ext-intro-notch),
+        #000 calc(var(--ln-ext-intro-notch) + 0.5px)
+      )
+      100% 0 / 51% 100% no-repeat;
+  animation: ln-ext-intro-ticket-fly 640ms cubic-bezier(0.65, 0, 0.35, 1) 1180ms forwards !important;
+}
+
+.ln-ext-intro-ticket__half--bottom {
+  --ln-ext-intro-dir: 1;
+  border-radius: 0 0 4.7cqw 4.7cqw;
+  mask:
+    radial-gradient(
+        circle at 0 0,
+        transparent var(--ln-ext-intro-notch),
+        #000 calc(var(--ln-ext-intro-notch) + 0.5px)
+      )
+      0 0 / 51% 100% no-repeat,
+    radial-gradient(
+        circle at 100% 0,
+        transparent var(--ln-ext-intro-notch),
+        #000 calc(var(--ln-ext-intro-notch) + 0.5px)
+      )
+      100% 0 / 51% 100% no-repeat;
+  animation-delay: 1240ms !important;
+}
+
+.ln-ext-intro-ticket__half--bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0 4.7cqw auto;
+  border-top: max(1.5px, 0.6cqw) dashed #cfd1d8;
+}
+
+.ln-ext-intro-ticket__avatar {
+  flex: none;
+  width: 12.7cqw;
+  aspect-ratio: 1;
+  border-radius: 3.3cqw;
+  background-image: var(--ln-ext-intro-avatar-image);
+  background-size: var(--ln-ext-intro-avatar-size);
+  background-position: var(--ln-ext-intro-avatar-position);
+  background-repeat: var(--ln-ext-intro-avatar-repeat);
+}
+
+.ln-ext-intro-ticket__who {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.5cqw;
+  min-width: 0;
+}
+
+.ln-ext-intro-ticket__who b {
+  overflow: hidden;
+  font-size: 4.7cqw;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ln-ext-intro-ticket__who small {
+  color: #6b6d76;
+  font-size: 3.8cqw;
+  font-weight: 600;
+}
+
+.ln-ext-intro-ticket__title {
+  margin-right: 1.3cqw;
+  padding: 0 1cqw;
+  border-radius: 1cqw;
+  background: var(--ln-ext-title-bg);
+  color: var(--ln-ext-white);
+  font-size: 3.4cqw;
+  vertical-align: 0.5cqw;
+}
+
+/* The time control, then the rest of the game's setup, on the right. */
+.ln-ext-intro-ticket__setup {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.7cqw;
+  margin-left: auto;
+  color: #3b3d45;
+  font-size: 3.7cqw;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ln-ext-intro-ticket__setup > span {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+}
+
+.ln-ext-intro-ticket__setup em {
+  color: #8a8c95;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.ln-ext-intro-ticket__speed::before {
+  font-size: 1.2em;
+}
+
+/* Stamped over the half, as a real one, rather than taking room from the name. */
+.ln-ext-intro-ticket__stamp {
+  position: absolute;
+  right: 4.3cqw;
+  top: calc(50% - 3cqw);
+  padding: 1.3cqw 2cqw;
+  border: 0.7cqw solid var(--ln-ext-accent);
+  border-radius: 2cqw;
+  background: #ffffffd9;
+  color: var(--ln-ext-accent);
+  font-size: 2.9cqw;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  rotate: -10deg;
+  animation: ln-ext-intro-ticket-stamp 200ms cubic-bezier(0.55, 0, 1, 0.45) 640ms both !important;
+}
+
+@keyframes ln-ext-intro-ticket-in {
+  from {
+    opacity: 0;
+    transform: translateY(12cqw) rotate(-7deg) scale(0.82);
+  }
+}
+
+@keyframes ln-ext-intro-ticket-thump {
+  50% {
+    scale: 0.965;
+  }
+}
+
+@keyframes ln-ext-intro-ticket-stamp {
+  from {
+    opacity: 0;
+    scale: 2.4;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* A tug from the other half, then off into the avatar. */
+@keyframes ln-ext-intro-ticket-fly {
+  22% {
+    opacity: 1;
+    transform: translateY(calc(var(--ln-ext-intro-dir) * 2.7cqw))
+      rotate(calc(var(--ln-ext-intro-dir) * 4deg));
+  }
+  86% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(var(--ln-ext-intro-dx), var(--ln-ext-intro-dy))
+      rotate(calc(var(--ln-ext-intro-dir) * 10deg)) scale(var(--ln-ext-intro-to));
+  }
+}
+
+.ln-ext-intro-fx[data-ln-ext-intro='ticket'] .ln-ext-intro-fx__ring--top {
+  --ln-ext-intro-delay: 1760ms;
+}
+
+.ln-ext-intro-fx[data-ln-ext-intro='ticket'] .ln-ext-intro-fx__ring--bottom {
+  --ln-ext-intro-delay: 1820ms;
+}
+
+[data-ln-ext-intro='ticket'] :is(.ruser-top, .ln-ext-intro-preview__bar--top)::before {
+  animation: ln-ext-intro-avatar-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 1760ms !important;
+}
+
+[data-ln-ext-intro='ticket'] :is(.ruser-bottom, .ln-ext-intro-preview__bar--bottom)::before {
+  animation: ln-ext-intro-avatar-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 1820ms !important;
+}

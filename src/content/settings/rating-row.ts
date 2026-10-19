@@ -19,7 +19,7 @@ const SPEED_NAMES: Readonly<Record<Speed, string>> = {
 const pickName = (pick: RatingPick): string =>
   message(pick === 'mostPlayed' ? 'ratingMostPlayed' : SPEED_NAMES[pick]);
 
-const SELECT = '.ln-ext-setting__select';
+const SELECT = "[data-ln-ext-setting='sidebarRating'] .ln-ext-setting__select";
 
 export function ratingRowMarkup(): SafeHtml {
   const id = 'ln-ext-setting-sidebarRating';

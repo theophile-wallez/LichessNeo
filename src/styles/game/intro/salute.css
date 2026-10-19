@@ -1,0 +1,180 @@
+/* The salute (content/game/intro/salute.ts): both avatars fly from their bars to the middle
+ * line, the opponent's on the left, high-five in a burst of sparks under a "Have a good game!"
+ * pill, and fly home. A coach's avatar leaves its tile behind on the way, so the coach stands
+ * free; a picture, the computer's robot or a guest's silhouette keeps its tile. Each element
+ * and property has one animation, all through: two in a row on one property would keep both off
+ * the compositor, and the page is busy as a game opens. */
+
+.ln-ext-intro-fx[data-ln-ext-intro='salute'] {
+  --ln-ext-intro-scrim: 0.5;
+  --ln-ext-intro-scrim-out: 1950ms;
+}
+
+/* The bars' avatars are on the board meanwhile: the intro ends as they land back. */
+[data-ln-ext-intro='salute'] :is(.ruser, .ln-ext-intro-preview__bar)::before {
+  opacity: 0;
+}
+
+.ln-ext-intro-salute {
+  --ln-ext-intro-dir: 1;
+  animation: ln-ext-intro-salute-trip 2460ms linear both !important;
+}
+
+.ln-ext-intro-salute--bottom {
+  --ln-ext-intro-dir: -1;
+}
+
+.ln-ext-intro-salute > * {
+  position: absolute;
+  inset: 0;
+}
+
+.ln-ext-intro-salute__tile {
+  border-radius: 22%;
+  background-image: var(--ln-ext-intro-avatar-image);
+  background-size: var(--ln-ext-intro-avatar-size);
+  background-position: var(--ln-ext-intro-avatar-position);
+  background-repeat: var(--ln-ext-intro-avatar-repeat);
+  box-shadow: 0 2cqw 5cqw #00000059;
+}
+
+.ln-ext-intro-salute__face {
+  transform-origin: 50% 100%;
+  animation: ln-ext-intro-salute-five 1300ms cubic-bezier(0.45, 0, 0.3, 1) 620ms both !important;
+}
+
+/* A coach's: its tile is its hues, the coach drawn apart, over it. */
+.ln-ext-intro-salute[data-ln-ext-avatar-coach]:not([data-ln-ext-avatar-picture])
+  .ln-ext-intro-salute__tile {
+  background:
+    radial-gradient(circle at 22% 12%, #ffffff47, transparent 58%),
+    linear-gradient(145deg, var(--ln-ext-avatar-from), var(--ln-ext-avatar-to));
+  animation: ln-ext-intro-salute-tile 2440ms linear both !important;
+}
+
+.ln-ext-intro-salute[data-ln-ext-avatar-coach]:not([data-ln-ext-avatar-picture])
+  .ln-ext-intro-salute__face {
+  background: var(--ln-ext-avatar-coach) center bottom / 150% auto no-repeat;
+}
+
+/* Out of the bar in 560ms, home from 2000ms. */
+@keyframes ln-ext-intro-salute-trip {
+  0% {
+    transform: translate(var(--ln-ext-intro-dx), var(--ln-ext-intro-dy))
+      scale(var(--ln-ext-intro-to));
+    animation-timing-function: cubic-bezier(0.34, 1.35, 0.64, 1);
+  }
+  22.8% {
+    transform: none;
+  }
+  81.3% {
+    opacity: 1;
+    transform: none;
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  98.5% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--ln-ext-intro-dx), var(--ln-ext-intro-dy))
+      scale(var(--ln-ext-intro-to));
+  }
+}
+
+/* Gone from 120ms to 400ms, back from 2180ms. */
+@keyframes ln-ext-intro-salute-tile {
+  4.9% {
+    opacity: 1;
+  }
+  16.4%,
+  89.3% {
+    opacity: 0;
+  }
+}
+
+/* A hop, a lean into the other with the hand up, the clap, and a hop. */
+@keyframes ln-ext-intro-salute-five {
+  14% {
+    translate: 0 -14%;
+    rotate: 0deg;
+  }
+  28% {
+    translate: 0 0;
+  }
+  48% {
+    translate: calc(var(--ln-ext-intro-dir) * 16%) 0;
+    rotate: calc(var(--ln-ext-intro-dir) * 14deg);
+  }
+  60% {
+    translate: calc(var(--ln-ext-intro-dir) * 5%) 0;
+    rotate: calc(var(--ln-ext-intro-dir) * 4deg);
+  }
+  78% {
+    translate: 0 -10%;
+    rotate: 0deg;
+  }
+}
+
+/* The sparks, from the point the hands meet, each at its `--ln-ext-intro-angle`. */
+.ln-ext-intro-salute__spark {
+  position: absolute;
+  left: -2cqw;
+  top: -0.65cqw;
+  width: 4cqw;
+  height: 1.3cqw;
+  border-radius: 1cqw;
+  background: var(--ln-ext-yellow);
+  opacity: 0;
+  --ln-ext-intro-reach: 10cqw;
+  animation: ln-ext-intro-spark 540ms cubic-bezier(0.2, 0.8, 0.3, 1) 1240ms forwards !important;
+}
+
+.ln-ext-intro-salute__spark:nth-child(even) {
+  --ln-ext-intro-reach: 14cqw;
+}
+
+.ln-ext-intro-salute__spark:nth-child(4n + 2) {
+  background: var(--ln-ext-purple);
+}
+
+.ln-ext-intro-salute__spark:nth-child(4n + 3) {
+  background: var(--ln-ext-green);
+}
+
+.ln-ext-intro-salute__spark:nth-child(4n) {
+  background: var(--ln-ext-pink);
+}
+
+@keyframes ln-ext-intro-spark {
+  from {
+    opacity: 1;
+    transform: rotate(var(--ln-ext-intro-angle)) translateX(2.7cqw) scaleX(0.3);
+  }
+  to {
+    opacity: 0;
+    transform: rotate(var(--ln-ext-intro-angle)) translateX(var(--ln-ext-intro-reach)) scaleX(1);
+  }
+}
+
+.ln-ext-intro-fx[data-ln-ext-intro='salute'] .ln-ext-intro-fx__pill {
+  animation: ln-ext-intro-salute-pill 880ms linear 1260ms both !important;
+}
+
+/* In for 420ms, out from 640ms. */
+@keyframes ln-ext-intro-salute-pill {
+  0% {
+    opacity: 0;
+    scale: 0.6;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  47.7%,
+  72.7% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 1;
+  }
+}

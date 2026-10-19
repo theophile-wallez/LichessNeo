@@ -24,7 +24,9 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  vi.useRealTimers();
   document.body.innerHTML = '';
+  delete document.body.dataset.user;
 });
 
 const row = (page: HTMLElement, key: string): HTMLElement | null =>
@@ -32,6 +34,8 @@ const row = (page: HTMLElement, key: string): HTMLElement | null =>
 const switchOf = (page: HTMLElement): HTMLButtonElement | null =>
   queryOne(page, "[data-ln-ext-setting='uiSounds'] .ln-ext-switch", HTMLButtonElement);
 const storedSettings = (): unknown => synced.get('ln-ext-settings');
+const SELECT = "[data-ln-ext-setting='gameIntro'] .ln-ext-setting__select";
+const PLAY = '.ln-ext-intro-preview__play';
 
 describe('the settings’ Interface page', () => {
   it('shows the stored settings once read, and flips a switch', async () => {
@@ -48,7 +52,11 @@ describe('the settings’ Interface page', () => {
   it('keeps the rating the sidebar shows, from its menu', async () => {
     const page = buildInterfacePage();
     await flush();
-    const select = queryOne(page, '.ln-ext-setting__select', HTMLSelectElement);
+    const select = queryOne(
+      page,
+      "[data-ln-ext-setting='sidebarRating'] .ln-ext-setting__select",
+      HTMLSelectElement,
+    );
     if (!select) throw new Error('no menu');
     select.value = 'blitz';
     select.dispatchEvent(new Event('change', { bubbles: true }));
@@ -61,5 +69,52 @@ describe('the settings’ Interface page', () => {
     const before = storedSettings();
     queryOne(page, "[data-ln-ext-setting='uiSounds'] .ln-ext-setting__title", HTMLElement)?.click();
     expect(storedSettings()).toBe(before);
+  });
+
+  it('offers no animation first and the salute by default, and plays the one picked', async () => {
+    document.body.dataset.user = 'eresy';
+    document.body.innerHTML = '<a id="user_tag">Eresy</a>';
+    const page = buildInterfacePage();
+    document.body.append(page);
+    await flush();
+    const select = queryOne(page, SELECT, HTMLSelectElement);
+    if (!select) throw new Error('no menu');
+    expect([...select.options].map(option => option.value)).toEqual([
+      'off',
+      'salute',
+      'setup',
+      'ticket',
+      'camps',
+      'credits',
+      'faceoff',
+    ]);
+    expect(select.value).toBe('salute');
+    expect(page.querySelector('.ln-ext-intro-preview__bar--bottom b')?.textContent).toBe('Eresy');
+    vi.useFakeTimers();
+    select.value = 'ticket';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+    expect(storedSettings()).toMatchObject({ gameIntro: 'ticket' });
+    const scene = queryOne(page, '.ln-ext-intro-preview__scene', HTMLElement);
+    expect(scene?.dataset.lnExtIntro).toBe('ticket');
+    expect(scene?.querySelector(':scope > .ln-ext-intro-fx--inline')).not.toBeNull();
+    // The button plays it again from its start.
+    queryOne(page, PLAY, HTMLButtonElement)?.click();
+    expect(scene?.querySelectorAll('.ln-ext-intro-fx')).toHaveLength(1);
+    vi.runAllTimers();
+    expect(scene?.dataset.lnExtIntro).toBeUndefined();
+    expect(scene?.querySelector('.ln-ext-intro-fx')).toBeNull();
+  });
+
+  it('greys the intro’s card and its button out with no animation picked', async () => {
+    const page = buildInterfacePage();
+    await flush();
+    const select = queryOne(page, SELECT, HTMLSelectElement);
+    if (!select) throw new Error('no menu');
+    select.value = 'off';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+    expect(storedSettings()).toMatchObject({ gameIntro: 'off' });
+    expect(row(page, 'gameIntro')?.dataset.lnExtOn).toBeUndefined();
+    expect(queryOne(page, PLAY, HTMLButtonElement)?.disabled).toBe(true);
+    expect(page.querySelector('.ln-ext-intro-fx')).toBeNull();
   });
 });

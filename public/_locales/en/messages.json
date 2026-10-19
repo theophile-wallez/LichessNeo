@@ -615,6 +615,54 @@
     "message": "The rating beside your name. By default, the speed you play the most.",
     "description": "What the sidebar rating setting covers."
   },
+  "settingGameIntro": {
+    "message": "Game intro",
+    "description": "The setting of the players' intro at the start of a game."
+  },
+  "settingGameIntroBody": {
+    "message": "The animation that opens each game you play, once its players are in.",
+    "description": "What the game intro setting covers."
+  },
+  "introOff": {
+    "message": "No animation",
+    "description": "No intro at the start of a game."
+  },
+  "introSalute": {
+    "message": "The salute",
+    "description": "An intro: the two players' avatars meet on the board and high-five."
+  },
+  "introSetup": {
+    "message": "The setup",
+    "description": "An intro: the board's squares and pieces are laid out one by one."
+  },
+  "introTicket": {
+    "message": "The ticket",
+    "description": "An intro: a ticket with both players tears in two."
+  },
+  "introCamps": {
+    "message": "The two camps",
+    "description": "An intro: each half of the board lights up in its player's color."
+  },
+  "introCredits": {
+    "message": "The credits",
+    "description": "An intro: the players' names cross the board, as a film's credits."
+  },
+  "introFaceOff": {
+    "message": "The face-off",
+    "description": "An intro: the opponent's card drops on a board of other colors and faces the player's."
+  },
+  "introPreviewPlay": {
+    "message": "Play",
+    "description": "Plays the picked game intro on the settings' preview board."
+  },
+  "introPreviewOpponent": {
+    "message": "Opponent",
+    "description": "The name of the opponent on the settings' preview of the game intro."
+  },
+  "introGoodGame": {
+    "message": "Have a good game!",
+    "description": "Wished to the player as their game begins."
+  },
   "ratingMostPlayed": {
     "message": "Most played",
     "description": "The default pick: the speed with the most games."

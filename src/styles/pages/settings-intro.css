@@ -1,0 +1,128 @@
+/* ---- The game intro's preview (content/settings/intro-preview.ts) --- */
+
+/* In the intro's card, under its title and menu: a little game page, the opponent's bar, the
+ * board and the user's, which the intro picked plays over (styles/game/intro). */
+.ln-ext-setting[data-ln-ext-setting='gameIntro'] {
+  flex-wrap: wrap;
+}
+
+.ln-ext-intro-preview {
+  display: flex;
+  flex: 1 0 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px 16px;
+  border-radius: 12px;
+  background: var(--ln-ext-bg-panel-dark);
+}
+
+/* The bars and the board as a game page's grid has them, so the face-off finds its area. */
+.ln-ext-intro-preview__scene {
+  position: relative;
+  display: grid;
+  grid-template: 'top' auto 'board' auto 'bottom' auto / minmax(0, 1fr);
+  width: min(320px, 100%);
+  gap: 8px;
+  font-family: var(--ln-ext-font);
+}
+
+.ln-ext-intro-preview__board {
+  grid-area: board;
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.ln-ext-intro-preview__board .cg-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+/* A bar: the avatar, the name, the rating, then the clock. */
+.ln-ext-intro-preview__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 30px;
+  padding-left: 38px;
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+}
+
+.ln-ext-intro-preview__bar--top {
+  grid-area: top;
+}
+
+.ln-ext-intro-preview__bar--bottom {
+  grid-area: bottom;
+}
+
+.ln-ext-intro-preview__bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: var(--ln-ext-avatar);
+}
+
+.ln-ext-intro-preview__bar b {
+  overflow: hidden;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ln-ext-intro-preview__bar span {
+  color: var(--ln-ext-text-dim);
+}
+
+.ln-ext-intro-preview__bar i {
+  margin-left: auto;
+  padding: 5px 9px;
+  border-radius: 7px;
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-dim);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-ext-intro-preview__bar--bottom i {
+  background: var(--ln-ext-white);
+  color: var(--ln-ext-ink);
+}
+
+.ln-ext-intro-preview__play {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 18px 0 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white);
+  font: 700 14px var(--ln-ext-font);
+  cursor: pointer;
+}
+
+.ln-ext-intro-preview__play:hover {
+  background: var(--ln-ext-btn-primary-hover);
+}
+
+.ln-ext-intro-preview__play:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ln-ext-intro-preview__play .ln-ext-hi {
+  width: 18px;
+  height: 18px;
+}

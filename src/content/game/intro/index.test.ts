@@ -2,7 +2,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 import { SessionKey } from '#shared/storage.ts';
 import { flush } from '#shared/testing/timers.ts';
-import { INTRO_MS, prepareIntro, syncIntro } from './index.ts';
+import { FACEOFF_MS } from './faceoff.ts';
+import { prepareIntro, syncIntro } from './index.ts';
+
+// The intro the settings pick, and whether they're read yet.
+const settings = vi.hoisted(() => ({ gameIntro: 'faceoff', read: true }));
+
+vi.mock('#content/settings/settings.ts', () => ({
+  currentSettings: () => settings,
+  settingsRead: () => settings.read,
+}));
 
 const GAME_ID = 'abcd1234';
 
@@ -31,6 +40,7 @@ const decoded = (): void => {
 beforeEach(() => {
   sessionStorage.clear();
   vi.stubGlobal('chrome', {
+    i18n: { getMessage: (name: string) => name },
     runtime: { getURL: (path: string) => `chrome-extension://id/${path}` },
   });
   // The swords' image, decoded when the test says so.
@@ -48,6 +58,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  Object.assign(settings, { gameIntro: 'faceoff', read: true });
   vi.useRealTimers();
   vi.unstubAllGlobals();
   document.body.innerHTML = '';
@@ -71,7 +82,7 @@ describe('the game intro', () => {
     expect(
       intro()?.querySelector('.ln-ext-intro__card--bottom .ln-ext-intro__username')?.textContent,
     ).toBe('Anonymous');
-    expect(main()?.dataset.lnExtIntro).toBe('');
+    expect(main()?.dataset.lnExtIntro).toBe('faceoff');
     expect(main()?.style.getPropertyValue('--ln-ext-intro-board')).toMatch(
       /^url\("data:image\/svg\+xml,%3Csvg%20/,
     );
@@ -79,7 +90,7 @@ describe('the game intro', () => {
       "url('chrome-extension://id/img/hugeicons/swords--ffc689.svg')",
     );
     expect(sessionStorage.getItem(SessionKey.gameIntro(GAME_ID))).toBe('1');
-    vi.advanceTimersByTime(INTRO_MS);
+    vi.advanceTimersByTime(FACEOFF_MS);
     expect(intro()).toBeNull();
     expect(main()?.dataset.lnExtIntro).toBeUndefined();
     expect(main()?.style.getPropertyValue('--ln-ext-intro-board')).toBe('');
@@ -116,5 +127,60 @@ describe('the game intro', () => {
     visibility.mockReturnValue('visible');
     syncIntro();
     expect(intro()).not.toBeNull();
+  });
+
+  it('plays the intro the settings pick, once they are read', async () => {
+    Object.assign(settings, { gameIntro: 'ticket', read: false });
+    prepareIntro(initData(false));
+    decoded();
+    await flush();
+    vi.useFakeTimers();
+    syncIntro();
+    expect(document.querySelector('.ln-ext-intro-fx')).toBeNull();
+    settings.read = true;
+    syncIntro();
+    expect(queryOne(document, '.ln-ext-intro-fx', HTMLElement)?.dataset.lnExtIntro).toBe('ticket');
+    expect(main()?.dataset.lnExtIntro).toBe('ticket');
+    expect(document.querySelector('.ln-ext-intro-ticket__who b')?.textContent).toBe('alice');
+    vi.runAllTimers();
+    expect(document.querySelector('.ln-ext-intro-fx')).toBeNull();
+    expect(main()?.dataset.lnExtIntro).toBeUndefined();
+  });
+
+  it('plays none when the settings say so, nor later', async () => {
+    settings.gameIntro = 'off';
+    prepareIntro(initData(false));
+    decoded();
+    await flush();
+    syncIntro();
+    settings.gameIntro = 'salute';
+    syncIntro();
+    expect(document.querySelector('.ln-ext-intro-fx, .ln-ext-intro')).toBeNull();
+    expect(sessionStorage.getItem(SessionKey.gameIntro(GAME_ID))).toBeNull();
+  });
+
+  it('keeps the face-off to our desktop layout, but not the others', async () => {
+    const narrow = vi.spyOn(window, 'matchMedia').mockReturnValue(
+      Object.assign(new EventTarget(), {
+        matches: false,
+        media: '',
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+      }),
+    );
+    prepareIntro(initData(false));
+    decoded();
+    await flush();
+    syncIntro();
+    expect(intro()).toBeNull();
+    sessionStorage.clear();
+    settings.gameIntro = 'salute';
+    prepareIntro(initData(false));
+    decoded();
+    await flush();
+    syncIntro();
+    expect(document.querySelector('.ln-ext-intro-fx')).not.toBeNull();
+    narrow.mockRestore();
   });
 });

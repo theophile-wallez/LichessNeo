@@ -1,0 +1,103 @@
+/* The setup (content/game/intro/setup.ts): the top bar comes in, the squares pop up from the
+ * middle out, the pawns drop in a wave and the back ranks after them, rooks first, kings last,
+ * each with a squash as it lands; a ring hails each king, then the player's bar comes in. */
+
+[data-ln-ext-intro='setup'] :is(.ruser-top, .rclock-top, .ln-ext-intro-preview__bar--top) {
+  animation: ln-ext-intro-setup-bar 450ms cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+[data-ln-ext-intro='setup'] :is(.ruser-bottom, .rclock-bottom, .ln-ext-intro-preview__bar--bottom) {
+  --ln-ext-intro-from: 8px;
+  animation: ln-ext-intro-setup-bar 450ms cubic-bezier(0.22, 1, 0.36, 1) 1450ms both !important;
+}
+
+@keyframes ln-ext-intro-setup-bar {
+  from {
+    opacity: 0;
+    translate: 0 var(--ln-ext-intro-from, -8px);
+  }
+}
+
+/* Over the board's drawing until each square of ours covers its own, then gone. */
+.ln-ext-intro-squares {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--ln-ext-bg-page);
+  pointer-events: none;
+}
+
+.ln-ext-intro-squares__square {
+  position: absolute;
+  left: calc(var(--ln-ext-intro-x) * 12.5%);
+  top: calc(var(--ln-ext-intro-y) * 12.5%);
+  width: 12.5%;
+  height: 12.5%;
+  overflow: hidden;
+  animation: ln-ext-intro-setup-square 460ms cubic-bezier(0.34, 1.56, 0.64, 1)
+    var(--ln-ext-intro-delay) both !important;
+}
+
+/* The whole board's drawing, shifted so the square shows its own part of it. */
+.ln-ext-intro-squares__square > i {
+  position: absolute;
+  left: calc(var(--ln-ext-intro-x) * -100%);
+  top: calc(var(--ln-ext-intro-y) * -100%);
+  width: 800%;
+  height: 800%;
+  background-image: var(--ln-ext-intro-board-image);
+  background-size: var(--ln-ext-intro-board-size);
+  background-position: var(--ln-ext-intro-board-position);
+  background-repeat: var(--ln-ext-intro-board-repeat);
+  filter: var(--ln-ext-intro-board-filter);
+}
+
+@keyframes ln-ext-intro-setup-square {
+  from {
+    rotate: -45deg;
+    scale: 0;
+  }
+}
+
+/* Each piece, at its `--ln-ext-intro-delay`: a fall, a squash on the square, a little bounce. */
+:is(.is2d [data-ln-ext-intro='setup'], [data-ln-ext-intro='setup'] .is2d) cg-board piece {
+  transform-origin: var(--ln-ext-intro-origin, 50% 88%);
+  animation: ln-ext-intro-setup-drop 540ms linear var(--ln-ext-intro-delay, 0ms) both !important;
+}
+
+@keyframes ln-ext-intro-setup-drop {
+  0% {
+    opacity: 0;
+    translate: 0 -120%;
+    scale: 0.6;
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  45% {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1.12 0.84;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  72% {
+    translate: 0 -12%;
+    scale: 0.96 1.05;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.7, 0.4);
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+.ln-ext-intro-fx__ring--king-white {
+  --ln-ext-intro-ring: var(--ln-ext-yellow);
+  --ln-ext-intro-delay: 1600ms;
+}
+
+.ln-ext-intro-fx__ring--king-black {
+  --ln-ext-intro-ring: var(--ln-ext-purple);
+  --ln-ext-intro-delay: 1600ms;
+}

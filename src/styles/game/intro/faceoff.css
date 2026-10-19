@@ -1,4 +1,4 @@
-/* The players' intro at the start of a game (content/game/intro): a board in other colors drops
+/* The face-off (content/game/intro/faceoff.ts): a board in other colors drops
  * over the opponent's half with their card, a "VS" pops over crossed swords on the middle line and
  * the player's card on their half, then the board lifts. That board is drawn on cg-board::after,
  * under the pieces (z-index 2); the cards are ours, over the board, and let every click through.
@@ -6,11 +6,11 @@
 
 /* Clips the dropped board to the squares. A `clip-path` animated beside the `transform` falls
  * out of step with it in Chrome, which runs the two on different threads. */
-.is2d main.round[data-ln-ext-intro] cg-board {
+:is(.is2d [data-ln-ext-intro='faceoff'], [data-ln-ext-intro='faceoff'] .is2d) cg-board {
   overflow: hidden;
 }
 
-.is2d main.round[data-ln-ext-intro] cg-board::after {
+:is(.is2d [data-ln-ext-intro='faceoff'], [data-ln-ext-intro='faceoff'] .is2d) cg-board::after {
   content: '';
   position: absolute;
   inset: 0 0 50%;
@@ -21,7 +21,7 @@
   animation: ln-ext-intro-slide var(--ln-ext-intro-ms) both !important;
 }
 
-main.round > .ln-ext-intro {
+.ln-ext-intro {
   grid-area: board;
   position: relative;
   z-index: 3;
@@ -34,8 +34,8 @@ main.round > .ln-ext-intro {
   font-family: var(--ln-ext-font);
 }
 
-main.round .ln-ext-intro__drop,
-main.round .ln-ext-intro__stay {
+.ln-ext-intro__drop,
+.ln-ext-intro__stay {
   position: absolute;
   inset-inline: 0;
   display: flex;
@@ -44,7 +44,7 @@ main.round .ln-ext-intro__stay {
 }
 
 /* The dropped half carries the opponent's card and casts the board's shadow. */
-main.round .ln-ext-intro__drop {
+.ln-ext-intro__drop {
   top: 0;
   align-items: flex-end;
   padding-bottom: 10cqh;
@@ -53,7 +53,7 @@ main.round .ln-ext-intro__drop {
   animation: ln-ext-intro-slide var(--ln-ext-intro-ms) both !important;
 }
 
-main.round .ln-ext-intro__stay {
+.ln-ext-intro__stay {
   bottom: 0;
   align-items: flex-start;
   padding-top: 10cqh;
@@ -62,7 +62,7 @@ main.round .ln-ext-intro__stay {
 
 /* One size for both, whatever the names' lengths; a long one ends in an ellipsis. Over the
  * board, the cards keep their colors in either scheme. */
-main.round .ln-ext-intro__card {
+.ln-ext-intro__card {
   display: flex;
   align-items: stretch;
   width: 56cqw;
@@ -74,23 +74,23 @@ main.round .ln-ext-intro__card {
   box-shadow: 0 0.6cqh 2cqh #00000059;
 }
 
-main.round .ln-ext-intro__card--bottom {
+.ln-ext-intro__card--bottom {
   background: var(--ln-ext-ink);
   color: var(--ln-ext-white);
   animation: ln-ext-intro-rise var(--ln-ext-intro-ms) both !important;
 }
 
-main.round .ln-ext-intro__avatar {
+.ln-ext-intro__avatar {
   flex: none;
   aspect-ratio: 1;
   background: var(--ln-ext-avatar);
 }
 
-main.round .ln-ext-intro__card--computer .ln-ext-intro__avatar {
+.ln-ext-intro__card--computer .ln-ext-intro__avatar {
   background: var(--ln-ext-computer-avatar);
 }
 
-main.round .ln-ext-intro__who {
+.ln-ext-intro__who {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,7 +99,7 @@ main.round .ln-ext-intro__who {
   padding: 0 3cqw;
 }
 
-main.round .ln-ext-intro__name {
+.ln-ext-intro__name {
   overflow: hidden;
   font-size: 3.6cqh;
   font-weight: 800;
@@ -108,7 +108,7 @@ main.round .ln-ext-intro__name {
   text-overflow: ellipsis;
 }
 
-main.round .ln-ext-intro__title {
+.ln-ext-intro__title {
   margin-right: 1cqw;
   padding: 0 0.6cqw;
   border-radius: 0.5cqh;
@@ -119,7 +119,7 @@ main.round .ln-ext-intro__title {
 }
 
 /* The rating, then the flag. */
-main.round .ln-ext-intro__details {
+.ln-ext-intro__details {
   display: flex;
   align-items: center;
   gap: 0.4em;
@@ -130,13 +130,13 @@ main.round .ln-ext-intro__details {
   opacity: 0.6;
 }
 
-main.round .ln-ext-intro__flag {
+.ln-ext-intro__flag {
   width: 1.2em;
   height: 1.2em;
 }
 
 /* The "VS" badge over crossed swords, both centered on the middle line. */
-main.round .ln-ext-intro__vs {
+.ln-ext-intro__vs {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -146,11 +146,11 @@ main.round .ln-ext-intro__vs {
   animation: ln-ext-intro-pop var(--ln-ext-intro-ms) both !important;
 }
 
-main.round .ln-ext-intro__vs > * {
+.ln-ext-intro__vs > * {
   grid-area: 1 / 1;
 }
 
-main.round .ln-ext-intro__swords {
+.ln-ext-intro__swords {
   width: 15cqh;
   height: 15cqh;
   background: var(
@@ -163,7 +163,7 @@ main.round .ln-ext-intro__swords {
 }
 
 /* Positioned, or the swords (a stacking context for their filter and animation) paint over it. */
-main.round .ln-ext-intro__versus {
+.ln-ext-intro__versus {
   position: relative;
   padding: 1.6cqh 2.6cqh;
   border-radius: 0.8cqh;

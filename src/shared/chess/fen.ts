@@ -2,6 +2,9 @@ import { roleOfLetter } from './pieces.ts';
 import { squareAt } from './squares.ts';
 import type { Color, Piece, Square } from './types.ts';
 
+/** The standard start position's placement field. */
+export const START_PLACEMENT = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+
 /**
  * The pieces of a FEN's placement field ("rnbqkbnr/pppppppp/8/…"). Crazyhouse
  * adds a `~` after a promoted piece, and its pockets in brackets: both are skipped.

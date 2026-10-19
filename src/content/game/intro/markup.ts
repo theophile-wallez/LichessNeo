@@ -4,7 +4,7 @@ import { flagImageUrl } from '#shared/flag.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import type { BarPlayer } from '#shared/player-bar.ts';
 
-// The intro's cards over the board (styles/game/intro.css): the opponent's
+// The intro's cards over the board (styles/game/intro/faceoff.css): the opponent's
 // rides down on another board, the player's waits on their own half.
 
 type Side = 'top' | 'bottom';

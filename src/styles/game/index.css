@@ -10,7 +10,7 @@
 @import './info-sections.css';
 @import './board-extras.css';
 @import './zen.css';
-@import './intro.css';
+@import './intro/index.css';
 @import './coach-message.css';
 @import './game-end.css';
 @import './game-end-card.css';

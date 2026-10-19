@@ -3,6 +3,7 @@ import { StorageKey } from '#shared/storage.ts';
 import { isConnected, onSyncedChange, readSynced, writeSynced } from '#content/platform/runtime.ts';
 import { CustomThemeSchema, DEFAULT_THEME, ThemePicksSchema } from '#content/colors/themes.ts';
 import { RatingPickSchema } from '#content/sidebar/top-rating.ts';
+import { DEFAULT_INTRO, IntroKindSchema } from '#content/game/intro/kinds.ts';
 
 // The extension's settings (the account page's Lichess Neo section),
 // kept in chrome.storage.sync so they follow the user to their other
@@ -20,6 +21,8 @@ const SettingsSchema = z.object({
   analysisCoach: z.prefault(z.boolean(), true),
   /** The speed whose rating the sidebar shows beside the player's name (content/sidebar). */
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
+  /** The players' intro at a game's start, or none (content/game/intro). */
+  gameIntro: z.catch(IntroKindSchema, DEFAULT_INTRO),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */
   colorThemes: z.prefault(ThemePicksSchema, { light: DEFAULT_THEME, dark: DEFAULT_THEME }),
   /** The themes the user made. Unreadable, they're dropped rather than every setting. */
