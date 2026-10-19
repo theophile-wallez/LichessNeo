@@ -3,17 +3,26 @@
 # manifest keeps only `<major>.<minor>`: the version adds the number of
 # commits since that last changed, so each push gets a new, higher one and
 # nobody changes it by hand.
+#
+# A `store-<version>` tag on a commit of main (`store-0.1.295`: the version
+# this commit gets) packages that commit the same way and sends it, for
+# review, to both stores: the store zip to the Chrome Web Store, the Firefox
+# zip and its sources to Firefox Add-ons (AMO). Each store has its own job:
+# one failing doesn't hold the other.
 name: Release
 
 on:
   push:
     branches: [main]
+    tags: ['store-*']
   workflow_dispatch:
 
 permissions: {}
 
 concurrency:
-  group: release
+  # A tag gets its own group: a push to main would otherwise cancel it while
+  # it waits.
+  group: ${{ github.ref_type == 'tag' && github.ref || 'release' }}
   cancel-in-progress: false
 
 jobs:
@@ -37,14 +46,33 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      # The version counts the commits on main, so it only means something there.
+      - name: On main
+        if: github.ref_type == 'tag'
+        run: |
+          if ! git merge-base --is-ancestor HEAD origin/main; then
+            echo "::error::$GITHUB_REF_NAME is not on main: push the commit to main first."
+            exit 1
+          fi
+
       - uses: ./.github/actions/setup
 
       - name: Version
         id: version
-        run: echo "version=$(node scripts/version.ts)" >> "$GITHUB_OUTPUT"
+        run: |
+          version=$(node scripts/version.ts)
+          # A store tag names the version it sends, so a tag on the wrong
+          # commit stops here.
+          if [ "$GITHUB_REF_TYPE" = tag ] && [ "$GITHUB_REF_NAME" != "store-$version" ]; then
+            echo "::error::this commit is $version: its tag must be store-$version, not $GITHUB_REF_NAME."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
+  # A tag only goes to the stores: the push to main makes the release.
   release:
     needs: version
+    if: github.ref_type != 'tag'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -71,3 +99,66 @@ jobs:
             --target "$GITHUB_SHA" \
             --title "Lichess Neo $VERSION" \
             --generate-notes
+
+  store:
+    needs: version
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: packages
+          path: dist
+
+      - name: Chrome Web Store
+        env:
+          CWS_SERVICE_ACCOUNT: ${{ secrets.CWS_SERVICE_ACCOUNT }}
+          CWS_PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+          VERSION: ${{ needs.version.outputs.version }}
+        run: node scripts/store/publish-chrome.ts "dist/LichessNeo-v$VERSION-store.zip" "$VERSION"
+
+  amo:
+    needs: version
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: packages
+
+      # Submits the version to the add-on's AMO listing and ends there, as the
+      # Chrome Web Store job does: Mozilla signs and publishes it once
+      # reviewed. The add-on must exist on AMO already (its first version is
+      # submitted by hand, with the listing): web-ext only adds versions. The
+      # scripts are bundled, so AMO asks for the sources they're built from.
+      - name: Firefox Add-ons
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+          VERSION: ${{ needs.version.outputs.version }}
+        run: |
+          if [ -z "$AMO_JWT_ISSUER" ] || [ -z "$AMO_JWT_SECRET" ]; then
+            echo "::error::the AMO_JWT_ISSUER and AMO_JWT_SECRET secrets must be set"
+            exit 1
+          fi
+          mkdir firefox
+          unzip -q "LichessNeo-v$VERSION-firefox.zip" -d firefox
+          npx --yes web-ext@10 sign \
+            --source-dir firefox \
+            --channel listed \
+            --api-key "$AMO_JWT_ISSUER" \
+            --api-secret "$AMO_JWT_SECRET" \
+            --approval-timeout 0 \
+            --upload-source-code "LichessNeo-v$VERSION-source.zip"
