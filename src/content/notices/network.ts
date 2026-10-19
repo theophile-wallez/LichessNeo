@@ -14,6 +14,8 @@ export function createNetworkSync(toaster: Toaster, backOnline: string): () => v
   let lost = false;
   let closed = false;
   return () => {
+    // The sync loop starts before <body> is parsed.
+    if (!document.body) return;
     if (document.body.classList.contains('offline')) {
       const words = document.getElementById('network-status')?.textContent.trim();
       if (!words || closed) return;

@@ -40,6 +40,17 @@ describe('the connection’s toast', () => {
     expect(title()).toBe('Connected again');
   });
 
+  it('waits for <body>, which the first ticks can come before', () => {
+    const sync = createNetworkSync(new Toaster('Close'), 'Connected again');
+    const body = document.body;
+    body.remove();
+    try {
+      expect(sync).not.toThrow();
+    } finally {
+      document.documentElement.append(body);
+    }
+  });
+
   it('shows the browser offline as an error', () => {
     vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false);
     const sync = createNetworkSync(new Toaster('Close'), 'Connected again');
