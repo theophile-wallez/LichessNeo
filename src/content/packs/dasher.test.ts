@@ -3,7 +3,9 @@ import { queryAll, queryOne } from '#shared/dom.ts';
 import { trackListeners } from '#shared/testing/listeners.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { watchDasher } from './dasher.ts';
+import { fakeGithub } from '#shared/testing/github.ts';
 import { fakePack } from '#shared/testing/packs.ts';
+import { fakeWorker } from '#shared/testing/worker.ts';
 import { createLibrary, LICHESS, type Library } from './library.ts';
 import type { Pack } from '#shared/packs/pack.ts';
 import { PRESET_BOARDS } from './flat-boards.ts';
@@ -66,6 +68,7 @@ beforeEach(() => {
   stopListeners = trackListeners(document);
   document.body.innerHTML =
     '<div id="top"><div class="dasher"><div id="dasher_app"></div></div></div>';
+  document.body.dataset.user = 'ann';
 });
 
 afterEach(() => {
@@ -73,6 +76,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
   localStorage.clear();
   document.body.innerHTML = '';
+  delete document.body.dataset.user;
 });
 
 describe('the user menu’s panels', () => {
@@ -152,6 +156,27 @@ describe('the user menu’s panels', () => {
       'Pack ann/packs/main/wood/',
       'Pack ann/packs/main/clicks/',
     ]);
+  });
+
+  it('import a pack right there when signed out, the settings out of reach', async () => {
+    delete document.body.dataset.user;
+    fakeWorker();
+    vi.stubGlobal('chrome', { ...chrome, i18n: { getMessage: (name: string) => name } });
+    const files = new Map([
+      ['pack.json', new TextEncoder().encode('{"name":"Clicks","sounds":{"capture":"c.mp3"}}')],
+      ['c.mp3', new Uint8Array([0x49, 0x44, 0x33, 4])],
+    ]);
+    fakeGithub({ repo: 'ann/packs', files });
+    const library = await start([]);
+    const panel = openPanel('sound');
+    await flush();
+    expect(panel.querySelector('.ln-ext-src-import-link')).toBeNull();
+    const link = queryOne(panel, '.ln-ext-packs__row input', HTMLInputElement);
+    if (!link) throw new Error('no link field');
+    link.value = 'https://github.com/ann/packs';
+    queryOne(panel, '.ln-ext-packs__row button', HTMLButtonElement)?.click();
+    await vi.waitFor(() => expect(names(panel)).toEqual(['Foley', 'Clicks']));
+    expect(library.current('sound')).toBe('ann/packs/HEAD/');
   });
 
   it('say so when the packs can’t be read, and try again on the next opening', async () => {

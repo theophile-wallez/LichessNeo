@@ -60,12 +60,14 @@ beforeEach(() => {
   stopListeners = trackListeners(document);
   document.body.innerHTML =
     '<div id="top"><div class="dasher"><div id="dasher_app"></div></div></div>';
+  document.body.dataset.user = 'ann';
 });
 
 afterEach(() => {
   stopListeners();
   localStorage.clear();
   document.body.innerHTML = '';
+  delete document.body.dataset.user;
 });
 
 describe('the backlit family', () => {

@@ -2,6 +2,7 @@ import { createElement, setData, setStyleProperty } from '#shared/dom.ts';
 import { hasPart, type Pack, type PartKind } from '#shared/packs/pack.ts';
 import { settingsUrl } from '#content/settings/address.ts';
 import type { Library } from './library.ts';
+import { importForm } from './import-form.ts';
 import { familyItem, familyView, openFamily } from './family.ts';
 import { OPTION_ROWS } from './options.ts';
 import { showSquares } from './flat-boards.ts';
@@ -10,7 +11,8 @@ import { FAMILIES, familyOf, themesOf, type Theme } from './themes.ts';
 // The Extension tab of a panel: the extension's themes for its part, a
 // family's under its one tile (family.ts), then the imported packs that have
 // it, and the themes' settings. Packs are imported and removed in the
-// extension's settings, which a link at the foot leads to.
+// extension's settings, which a link at the foot leads to; signed out, they're
+// imported right there.
 
 const NOUNS: Readonly<Record<PartKind, string>> = {
   board: 'board',
@@ -96,14 +98,20 @@ export function refreshListing(panel: HTMLElement, kind: PartKind, library: Libr
     ?.replaceWith(choiceListing(kind, library));
 }
 
-/** The Extension tab's content for a panel's part. */
-export function choiceSection(kind: PartKind, library: Library): HTMLElement {
-  const section = createElement('div', { className: 'ln-ext-src-choices' });
-  const settings = createElement('a', {
+// Signed out, the account pages, and the settings with them, are out of
+// reach: the import form comes here instead.
+function importFoot(kind: PartKind, library: Library): HTMLElement {
+  if (!document.body.dataset.user) return importForm(library);
+  return createElement('a', {
     className: 'ln-ext-src-import-link',
     text: `Import a ${NOUNS[kind]}`,
     attrs: { href: settingsUrl('packs') },
   });
+}
+
+/** The Extension tab's content for a panel's part. */
+export function choiceSection(kind: PartKind, library: Library): HTMLElement {
+  const section = createElement('div', { className: 'ln-ext-src-choices' });
   const families = FAMILIES.map(family => {
     const themes = themesOf(kind).filter(theme => theme.family === family.id);
     return themes.length > 0
@@ -115,7 +123,7 @@ export function choiceSection(kind: PartKind, library: Library): HTMLElement {
   }).filter(view => view !== null);
   section.append(choiceListing(kind, library), ...families);
   section.append(...OPTION_ROWS[kind].map(row => row(library)));
-  section.append(settings);
+  section.append(importFoot(kind, library));
   openFamily(section, familyOf(kind, library.current(kind)));
   return section;
 }

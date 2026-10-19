@@ -214,6 +214,33 @@
   color: var(--ln-ext-text-strong) !important;
 }
 
+/* Signed out, the import form itself (pages/extension-settings.css), the link
+ * over its button: the Sound panel leaves it little room beside the slider. */
+#dasher_app .ln-ext-src-choices > .ln-ext-packs__import {
+  margin: 10px 2px 4px;
+}
+
+#dasher_app .ln-ext-packs__row {
+  flex-direction: column;
+}
+
+#dasher_app .ln-ext-packs__row input {
+  flex: none;
+}
+
+/* Lichess's menu buttons are left-aligned rows in its own colors. */
+#top #dasher_app .ln-ext-packs__row button {
+  display: block !important;
+  margin: 0 !important;
+  background: var(--ln-ext-btn-primary) !important;
+  color: var(--ln-ext-white) !important;
+  text-align: center;
+}
+
+#top #dasher_app .ln-ext-packs__row button:hover {
+  background: var(--ln-ext-btn-primary-hover) !important;
+}
+
 /* A board's two top-left squares, as Lichess's thumbnails show them: a quarter of its width. */
 #dasher_app .ln-ext-src-thumb {
   width: 64px;

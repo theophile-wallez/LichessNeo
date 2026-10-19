@@ -39,10 +39,12 @@ const squares = (element: HTMLElement): (string | undefined)[] => [
 
 beforeEach(() => {
   vi.resetModules();
+  document.body.dataset.user = 'ann';
 });
 
 afterEach(() => {
   localStorage.clear();
+  delete document.body.dataset.user;
 });
 
 describe('the board panel’s tiles', () => {

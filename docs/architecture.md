@@ -71,7 +71,8 @@ Foley sound set), a pack the user imported
 from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
 menu's own panels, under an Extension and a Lichess tab (`dasher.ts`,
 `panel.ts`, `choices.ts`); packs are imported and removed in the extension's
-settings (`import-section.ts`, `import-form.ts`), all in `src/content/packs/`:
+settings (`import-section.ts`, `import-form.ts`), or, signed out, in the
+panels themselves, all in `src/content/packs/`:
 
 - `src/shared/packs/download.ts` reads the pack's `pack.json` and files from
   GitHub's raw host, or through its API with a token for a private

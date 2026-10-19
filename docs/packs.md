@@ -11,7 +11,9 @@ holding a `pack.json` and the files it names.
 
 To import one, open the extension's settings (your account's settings, then
 **Lichess Neo**, or **Import** in a panel's Extension tab), paste the
-link to the pack's folder under **Packs** and press **Import**. The extension
+link to the pack's folder under **Packs** and press **Import**. Signed out,
+the account's settings are out of reach: the form is in each panel's Extension
+tab of the user menu instead. The extension
 downloads every file once and keeps them in the browser; it asks GitHub for
 nothing after that. An import shows every part the pack has; then each part is
 picked on its own: a pack's pieces with Lichess's board, say. The settings also
