@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { z } from 'zod/mini';
-import { SquareSchema } from '#shared/chess/square-schema.ts';
+import { SquareSchema } from '#shared/testing/square-schema.ts';
 import { squareCoords } from '#shared/chess/squares.ts';
 import type { Color, Square } from '#shared/chess/types.ts';
 import { queryOne } from '#shared/dom.ts';

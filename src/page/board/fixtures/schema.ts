@@ -1,5 +1,5 @@
 import { z } from 'zod/mini';
-import { SquareSchema } from '#shared/chess/square-schema.ts';
+import { SquareSchema } from '#shared/testing/square-schema.ts';
 
 // The shape of fixtures/legacy.json: what the original script drew.
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { z } from 'zod/mini';
 import { isAttacked } from '#shared/chess/attacks.ts';
 import { parsePlacement } from '#shared/chess/fen.ts';
-import { SquareSchema } from '#shared/chess/square-schema.ts';
+import { SquareSchema } from '#shared/testing/square-schema.ts';
 import { boardOrientation, mainBoardWrap, readBoard } from './board-reader.ts';
 import {
   castled,
