@@ -2,8 +2,9 @@
 
 A pack to import into the extension, and to copy when making one: its
 `pack.json` uses every field (see [docs/packs.md](../../docs/packs.md)). To
-try it, paste this folder's link in the user menu's Board, Piece set or Sound
-panel, under Imported:
+try it, paste this folder's link under Packs in the extension's settings (or,
+signed out, in the Extension tab of the user menu's Board, Piece set or Sound
+panel):
 
     https://github.com/theophile-wallez/LichessNeo/tree/main/packs/example
 
