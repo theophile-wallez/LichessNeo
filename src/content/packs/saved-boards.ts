@@ -26,7 +26,6 @@ const SavedBoardsSchema = z.catch(
 
 let cached: readonly SavedBoard[] | null = null;
 let listening = false;
-const listeners = new Set<() => void>();
 
 // Another tab's save or delete: read the list again.
 function listenToOtherTabs(): void {
@@ -35,7 +34,6 @@ function listenToOtherTabs(): void {
   window.addEventListener('storage', event => {
     if (event.key !== StorageKey.savedBoards) return;
     cached = null;
-    for (const listener of listeners) listener();
   });
 }
 
@@ -50,7 +48,6 @@ export function savedBoards(): readonly SavedBoard[] {
 function write(boards: readonly SavedBoard[]): void {
   writeStoredJson(StorageKey.savedBoards, boards);
   cached = boards;
-  for (const listener of listeners) listener();
 }
 
 /** Saves `colors` as a board named `name`; its id, or null once the list is full. */
@@ -65,7 +62,3 @@ export function saveBoard(name: string, colors: SquareColors): string | null {
 export function deleteBoard(id: string): void {
   write(savedBoards().filter(board => board.id !== id));
 }
-
-export const onSavedBoardsChange = (listener: () => void): void => {
-  listeners.add(listener);
-};

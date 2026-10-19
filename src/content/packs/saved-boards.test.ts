@@ -45,16 +45,13 @@ describe('the saved boards', () => {
     expect(savedBoards()).toHaveLength(MAX_SAVED_BOARDS);
   });
 
-  it('deletes a board, and tells the lists each time one is saved or deleted', async () => {
-    const { deleteBoard, onSavedBoardsChange, saveBoard, savedBoards } = await load();
-    const changed = vi.fn<() => void>();
-    onSavedBoardsChange(changed);
+  it('deletes a board, into a new list', async () => {
+    const { deleteBoard, saveBoard, savedBoards } = await load();
     const id = saveBoard('Sea', COLORS) ?? '';
     const before = savedBoards();
     deleteBoard(id);
     expect(savedBoards()).toEqual([]);
     expect(savedBoards()).not.toBe(before);
-    expect(changed).toHaveBeenCalledTimes(2);
     expect(localStorage.getItem(KEY)).toBe('[]');
   });
 
@@ -69,22 +66,16 @@ describe('the saved boards', () => {
     expect((await load()).savedBoards()).toEqual([]);
   });
 
-  it('reads the list again when another tab changes it', async () => {
-    const { onSavedBoardsChange, savedBoards } = await load();
-    const changed = vi.fn<() => void>();
-    onSavedBoardsChange(changed);
+  it('reads the list again when another tab changes it, listening once', async () => {
+    const listen = vi.spyOn(window, 'addEventListener');
+    const { savedBoards } = await load();
     expect(savedBoards()).toEqual([]);
     const boards = [{ id: 'saved-a', name: 'Sea', ...COLORS }];
     localStorage.setItem(KEY, JSON.stringify(boards));
     window.dispatchEvent(new StorageEvent('storage', { key: 'ln-ext-board' }));
     expect(savedBoards()).toEqual([]);
     window.dispatchEvent(new StorageEvent('storage', { key: KEY }));
-    expect(changed).toHaveBeenCalledOnce();
     expect(savedBoards()).toEqual(boards);
-    // Read again, the list doesn't listen twice.
-    window.dispatchEvent(new StorageEvent('storage', { key: KEY }));
-    savedBoards();
-    window.dispatchEvent(new StorageEvent('storage', { key: KEY }));
-    expect(changed).toHaveBeenCalledTimes(3);
+    expect(listen.mock.calls.filter(([type]) => type === 'storage')).toHaveLength(1);
   });
 });
