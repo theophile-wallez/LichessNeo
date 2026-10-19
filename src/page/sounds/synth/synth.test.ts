@@ -1,7 +1,7 @@
 import { play, playSpec, set } from '@foleyjs/core';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Color, Square } from '#shared/chess/types.ts';
-import { renderBoard } from '#page/sounds/fixtures/boards.ts';
+import { renderBoard } from '#shared/testing/boards.ts';
 import { CHECK, IMPACT, PIECE_SPECS } from './specs.ts';
 import { createSynth } from './synth.ts';
 

@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { z } from 'zod/mini';
 import { SquareSchema } from '#shared/testing/square-schema.ts';
 import { type SoundName, SoundNameSchema } from '#shared/sounds.ts';
-import { ColorSchema, renderBoard } from './fixtures/boards.ts';
+import { ColorSchema, renderBoard } from '#shared/testing/boards.ts';
 import { fakeSoundPlayer, type PlayerCall } from './fixtures/sound-player.ts';
 import { hookSoundPlayer } from './player.ts';
 import { createSession } from './session.ts';

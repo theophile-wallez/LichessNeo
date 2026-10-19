@@ -1,7 +1,7 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createCustomElement, createElement } from '#shared/dom.ts';
 import { nextFakeFrame } from '#shared/testing/timers.ts';
-import { renderBoard } from '#page/sounds/fixtures/boards.ts';
+import { renderBoard } from '#shared/testing/boards.ts';
 import { backlit } from './index.ts';
 
 const root = document.documentElement;

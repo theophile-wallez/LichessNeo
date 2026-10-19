@@ -3,7 +3,7 @@ import { parsePlacement } from '#shared/chess/fen.ts';
 import type { Square } from '#shared/chess/types.ts';
 import { createCustomElement } from '#shared/dom.ts';
 import { nextFakeFrame } from '#shared/testing/timers.ts';
-import { addSquare, renderBoard } from '#page/sounds/fixtures/boards.ts';
+import { addSquare, renderBoard } from '#shared/testing/boards.ts';
 import { type Arrival, watchMoves } from './watch.ts';
 
 const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';

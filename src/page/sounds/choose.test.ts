@@ -12,7 +12,7 @@ import {
   soundFromSan,
   soundOfShownMove,
 } from './choose.ts';
-import { ColorSchema, renderBoard } from './fixtures/boards.ts';
+import { ColorSchema, renderBoard } from '#shared/testing/boards.ts';
 // What the original script chose for each case.
 import legacy from './fixtures/legacy-choices.json' with { type: 'json' };
 

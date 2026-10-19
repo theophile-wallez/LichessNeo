@@ -3,7 +3,7 @@ import type { Square } from '#shared/chess/types.ts';
 import { queryAll } from '#shared/dom.ts';
 import { cgKey } from '#page/lichess/chessground.ts';
 import { markedSquares, readBoard } from './board-reader.ts';
-import { addSquare, renderBoard } from './fixtures/boards.ts';
+import { addSquare, renderBoard } from '#shared/testing/boards.ts';
 
 /** Hides the mark on `square`, as chessground does with one it keeps to reuse. */
 function hideMark(board: Element, className: string, square: Square): void {

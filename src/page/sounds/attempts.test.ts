@@ -6,7 +6,7 @@ import type { Color, Square } from '#shared/chess/types.ts';
 import { queryOne } from '#shared/dom.ts';
 import { SOUND_NAMES } from '#shared/sounds.ts';
 import { watchMoveAttempts } from './attempts.ts';
-import { addSquare, ColorSchema, renderBoard } from './fixtures/boards.ts';
+import { addSquare, ColorSchema, renderBoard } from '#shared/testing/boards.ts';
 import { fakeSoundPlayer } from './fixtures/sound-player.ts';
 import { hookSoundPlayer } from './player.ts';
 import { squareFromPoint } from './pointer-square.ts';
