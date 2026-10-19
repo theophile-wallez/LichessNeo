@@ -173,7 +173,7 @@ hold:
 | `pnpm store:render`             | renders the store images and the extension icons from `store/templates`          |
 | `pnpm icons`                    | writes `public/img/hugeicons`, the Hugeicons the CSS names                       |
 | `/ci`                           | (Claude Code) starts the release of `main`: the CI, then a GitHub release        |
-| `/store`                        | (Claude Code) tags `main` `store-<version>`, which sends it to the stores        |
+| `/ci store`                     | (Claude Code) tags `main` `store-<version>`, which sends it to the stores        |
 
 ## Where things go
 
@@ -787,7 +787,7 @@ A push to `main` makes no release: `/ci` (or the Release workflow, run by
 hand on `main`) runs the CI, then makes a GitHub release with its zips, but
 doesn't reach the stores. Start it only when the user asks. Send a version there only when the user asks (each store reviews
 it, and the Chrome Web Store refuses a new version while one is in review):
-tag the commit of `main` with the version it gets (`/store` does it, after
+tag the commit of `main` with the version it gets (`/ci store` does it, after
 checking the stores' secrets).
 
 ```bash
