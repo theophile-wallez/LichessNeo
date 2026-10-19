@@ -1,5 +1,5 @@
-# Started by hand on main (`gh workflow run release.yml --ref main`, or
-# `/ci release` in Claude Code), it runs the CI, zips the extension (for
+# Started by hand on main (`gh workflow run release.yml --ref main`, or `/ci`
+# in Claude Code), it runs the CI, zips the extension (for
 # Chrome, the Chrome Web Store and Firefox) and publishes the zips as a GitHub
 # release. A push alone runs nothing, to spare the Actions minutes. The
 # manifest keeps only `<major>.<minor>`: the version adds the number of
@@ -10,7 +10,7 @@
 # this commit gets) packages that commit the same way and sends it, for
 # review, to both stores: the store zip to the Chrome Web Store, the Firefox
 # zip and its sources to Firefox Add-ons (AMO). Each store has its own job:
-# one failing doesn't hold the other.
+# one failing doesn't hold the other. `/store` in Claude Code pushes that tag.
 name: Release
 
 on:

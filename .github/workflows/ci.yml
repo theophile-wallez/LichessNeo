@@ -1,7 +1,7 @@
 # Checks, packages and tests a branch. It runs only when asked, never on a
 # push or a pull request, to spare the Actions minutes: started by hand
-# (`gh workflow run ci.yml --ref <branch>`, or `/ci` in Claude Code), or
-# called by the release workflow, which then publishes the zips it packaged.
+# (`gh workflow run ci.yml --ref <branch>`), or called by the release
+# workflow, which then publishes the zips it packaged.
 name: CI
 
 on:
