@@ -90,8 +90,9 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
 - Every change ships with tests, written once the user has validated it
   (see [How a change goes](#how-a-change-goes)). Unit tests sit next to the
   code (`name.test.ts`, vitest in happy-dom): logic through its exports, DOM
-  features by building the markup Lichess serves and checking what we add.
-  `tests/e2e` is a dozen smoke tests on lichess.org, one per main page, for
+  features by building the markup Lichess serves and checking what we add,
+  a stylesheet's rule that must beat Lichess's by computing the style under
+  both (`styles/game/game-info.test.ts`). `tests/e2e` is a dozen smoke tests on lichess.org, one per main page, for
   what happy-dom can't see (Lichess's markup today, the layout, both
   scripts, the engine). Don't add to it for a feature: its unit tests cover
   it. Don't run it locally either, it loads the machine: CI does, when

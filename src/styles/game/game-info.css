@@ -132,15 +132,13 @@ main.round .game__meta .header {
   flex: 1 1 auto;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px 8px;
+  gap: 4px 5px;
   min-width: 0;
 }
 
+/* Its parts join the header's line, so the bookmark star can go before the time. */
 main.round .game__meta .setup {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 5px;
+  display: contents;
 }
 
 main.round .game__meta .setup > .ln-ext-part:first-of-type {
@@ -178,13 +176,35 @@ main.round .game__meta .setup > a.variant-link:hover {
 }
 
 main.round .game__meta .header time {
+  order: 2;
   margin-inline-start: auto;
   color: var(--ln-ext-text-dim);
   font-size: 12px;
   white-space: nowrap;
 }
 
+/* Lichess pins its bookmark star over the line's end, where our time is: it follows the pills
+ * instead. Where there's a hover, it keeps its room while hidden, so nothing wraps as it shows. */
 main.round .game__meta .bookmark {
-  top: 0;
+  display: block;
+  position: static;
+  order: 1;
+  line-height: 20px;
   color: var(--ln-ext-text-dim) !important;
+  transition: color 0.15s !important;
+}
+
+main.round .game__meta .bookmark:hover,
+main.round .game__meta .bookmark.bookmarked {
+  color: var(--ln-ext-yellow) !important;
+}
+
+@media (hover: hover) {
+  main.round .game__meta .bookmark {
+    visibility: hidden;
+  }
+
+  main.round .game__meta:hover .bookmark {
+    visibility: visible;
+  }
 }

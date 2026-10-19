@@ -10,6 +10,7 @@ const PROJECTS = [
   'src/content',
   'src/page',
   'src/background',
+  'src/styles',
   'scripts',
   'tests',
   'playground',
