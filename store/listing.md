@@ -90,8 +90,8 @@ Lichess Neo est un projet de fan non officiel, sans lien avec Lichess.org.
 
 - **Single purpose:** Restyles lichess.org with a modern layout and adds a
   Debrief of each game, explained by a coach.
-- **`storage`:** Keeps the extension's settings (color theme, board, coach,
-  imported packs), synced across the user's browsers.
+- **`storage`:** Keeps the extension's settings (color themes, the coach's
+  switches, the interface's sounds), synced across the user's browsers.
 - **Host access (`https://lichess.org/*`, the content scripts):** The
   extension changes the look of lichess.org and adds its features to its
   pages; it runs on no other site.
