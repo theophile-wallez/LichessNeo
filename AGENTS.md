@@ -544,7 +544,9 @@ var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
   `loadEsm('chart.ratingHistory', …)`), and Lichess removes the element once
   read. Capture the node while the page parses (`#shared/page-init-data.ts`);
   its text stays readable after removal.
-- **Profiles.** Logged out, a profile's rating chart and activity feed are
+- **Profiles.** Headless browsers get a bot check (Cloudflare's "Just a
+  moment…", a 403) on every `/@/…` page, so the end-to-end tests can't reach
+  one. Logged out, a profile's rating chart and activity feed are
   empty: to style them, inject plausible markup into
   `.angle-content .activity` and `#us_profile` (see lila's `ActivityUi.scala`
   and `PerfStatUi.ratingHistoryContainer`). The awards are

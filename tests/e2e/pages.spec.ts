@@ -6,7 +6,8 @@ import { expectSidebar } from './support/sidebar.ts';
 // The main pages get the extension: the theme, the sidebar, both of its
 // scripts, and no error from them. `ours` is something the extension adds on
 // that page only. A smoke test, on lichess.org as it is today: what we add is
-// tested in detail by the unit tests beside the code.
+// tested in detail by the unit tests beside the code. Profiles are left out:
+// Lichess puts them behind a bot check that headless browsers don't pass.
 
 interface PublicPage {
   readonly name: string;
@@ -23,7 +24,6 @@ const PAGES: readonly PublicPage[] = [
   },
   { name: 'the free analysis board', path: '/analysis', ours: '#ln-ext-review .ln-ext-coach' },
   { name: 'TV', path: '/tv', ours: 'main.round > .ln-ext-board-tools' },
-  { name: 'a profile', path: '/@/DrNykterstein', ours: 'html[data-ln-ext-has~="user-show"]' },
   { name: 'puzzles', path: '/training', ours: 'html[data-ln-ext-has~="puzzle"]' },
   {
     name: 'a practice lesson',
