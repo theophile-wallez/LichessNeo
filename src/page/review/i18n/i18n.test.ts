@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { MOVE_CLASSES } from '#page/review/classes/classes.ts';
-import { en } from './en.ts';
-import { fr } from './fr.ts';
+import { en, english } from './en.ts';
+import { fr, french } from './fr.ts';
 import { pageLanguage } from './language.ts';
 import type { ReviewLanguage } from './types.ts';
 // The original script's strings, per language.
@@ -19,6 +19,8 @@ const EXPLAINED = {
     '[[m:w:Bg5]] permet 12. [[m:w:Nf3]] [[m:b:Qd7]].',
   ],
 };
+
+const CASHED_IN = { en: 'Cashing in. Well spotted.', fr: 'Du matériel encaissé. Bien vu.' };
 
 const COUNT_TIPS = {
   en: ['Black’s blunders: 2', 'White’s inaccuracies: 1'],
@@ -93,10 +95,34 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
     );
   });
 
-  it('has the original’s remarks, and its own for a side’s first book move', () => {
-    const { firstMove, ...remarks } = language.remarks;
-    expect(remarks).toEqual(original.remarks);
-    expect(firstMove).toHaveLength(4);
+  it('has the original’s remarks first, and its own where it says something else', () => {
+    // A capture may be a trade, so not "cashing in"; a winning or a lost position gets advice.
+    const { firstMove, defending, winning, capture, ...remarks } = language.remarks('white');
+    const { winning: _winning, capture: originalCapture, ...rest } = original.remarks;
+    const originals: Readonly<Record<string, readonly string[]>> = rest;
+    const firstOnes = Object.entries(remarks).map(([situation, pool]) => [
+      situation,
+      pool.slice(0, originals[situation]?.length),
+    ]);
+    expect(Object.fromEntries(firstOnes)).toEqual(originals);
+    expect(capture).not.toContain(CASHED_IN[lang]);
+    expect(capture).toEqual(
+      expect.arrayContaining(originalCapture.filter(said => said !== CASHED_IN[lang])),
+    );
+    expect([firstMove, winning, defending].map(pool => pool.length)).toEqual([4, 5, 5]);
+  });
+});
+
+describe('the remarks', () => {
+  it('speak of the opponent’s moves in words of their own, and of every move alike when watching', () => {
+    for (const language of [english, french]) {
+      const reader = language('white');
+      expect(reader.remarks('black')).not.toEqual(reader.remarks('white'));
+      expect(Object.keys(reader.remarks('black'))).toEqual(Object.keys(reader.remarks('white')));
+      const watcher = language(null);
+      expect(watcher.remarks('black')).toEqual(reader.remarks('white'));
+      expect(language('black').remarks('black')).toEqual(reader.remarks('white'));
+    }
   });
 });
 

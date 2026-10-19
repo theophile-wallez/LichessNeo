@@ -24,6 +24,10 @@ export interface Fact {
 
 export const said = (text: string, theme: Theme | null = null): Fact => ({ text, theme });
 
+/** One of the ways to say a fact, picked by `seed`: the same each time it's shown. */
+export const pickBy = (ways: Ways, seed: string): string =>
+  ways[hash(seed) % ways.length] ?? ways[0];
+
 /** One of the ways to say a fact, picked by its move: the same each time the move is shown. */
 export const oneOf = (ways: Ways, move: MoveVerdict): string =>
-  ways[hash(`${move.previousPosition.fen}|${move.uci}`) % ways.length] ?? ways[0];
+  pickBy(ways, `${move.previousPosition.fen}|${move.uci}`);

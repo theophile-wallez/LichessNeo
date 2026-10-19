@@ -30,10 +30,17 @@ function topClass(input: JudgeInput, { before, after, loss, second }: Standing):
     isSacrifice(previousPosition.fen, position.fen, position.uci)
   )
     return 'brilliant';
-  // The only good move: the second best was far worse.
-  if (second !== null && before - second >= 15 && before < 97 && after > 25) return 'great';
-  return 'best';
+  // The only good move: the second best was far worse. Taking back is always
+  // the only move, and never hard to find.
+  const onlyMove = second !== null && before - second >= 15 && before < 97 && after > 25;
+  return onlyMove && !takesBack(input) ? 'great' : 'best';
 }
+
+/** Whether the move takes on the square the opponent just took on. */
+const takesBack = ({ previousPosition, position }: JudgeInput): boolean =>
+  Boolean(previousPosition.san?.includes('x')) &&
+  position.san.includes('x') &&
+  previousPosition.uci?.slice(2, 4) === position.uci.slice(2, 4);
 
 /** The mover had a mate too long to judge by distance, and doesn't reach it sooner. */
 function keepsLongMate({ before, after, previousPosition }: JudgeInput): boolean {

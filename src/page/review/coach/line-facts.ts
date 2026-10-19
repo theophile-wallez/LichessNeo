@@ -101,15 +101,32 @@ export function lossFact({ move, facts, them }: LineFactInput, threatened = fals
   return withMotif(text, motifLine, facts);
 }
 
-/** After an error, the material the best line would have won. */
-export function bestGainFact({ move, facts, me, them }: LineFactInput): Fact | null {
+interface BestGain {
+  readonly lines: Lines;
+  readonly won: Swing;
+  readonly material: string;
+}
+
+// What the best line wins over the played one, soon and kept.
+function bestGain({ move, facts, me, them }: LineFactInput): BestGain | null {
   const lines = errorLines(move);
   const won = lines && securedSwing(lines.best, me);
   if (!lines || !won || !worthSaying(won) || won.plies > BEST_WINS_WITHIN) return null;
   const gap = won.net - finalNet(lines.played, me);
   if (gap < 1 || !scoreDrops(move, gap) || gives(lines.best, them, [0, won.plies])) return null;
   const material = facts.material(won);
-  if (material === null) return null;
+  return material === null ? null : { lines, won, material };
+}
+
+/** After an error, the material the best line would have won, written out. */
+export const bestWins = (input: LineFactInput): string | null => bestGain(input)?.material ?? null;
+
+/** After an error, the material the best line would have won, and the line. */
+export function bestGainFact(input: LineFactInput): Fact | null {
+  const { move, facts, me } = input;
+  const gained = bestGain(input);
+  if (!gained) return null;
+  const { lines, won, material } = gained;
   const best = lines.best.slice(0, won.plies);
   const gain = { material, line: lineOf(best, 'b'), moves: movesOf(best, me) };
   const text = oneOf(facts.wouldHaveWon(me, gain), move);

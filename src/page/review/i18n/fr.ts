@@ -1,8 +1,10 @@
 import { html } from '#shared/html.ts';
 import type { Color } from '#shared/chess/types.ts';
-import { factsFr, trajectoryFr } from './fr-comment.ts';
+import { factsFr } from './fr-comment.ts';
 import { capitalize, conjugate, partyOf, typography } from './fr-grammar.ts';
 import { remarksFr } from './fr-remarks.ts';
+import { theirRemarksFr } from './fr-their-remarks.ts';
+import { trajectoryFr } from './fr-trajectory.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import type {
   ClockStrings,
@@ -127,8 +129,8 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
   },
 };
 
-const playedLike = (viewer: Viewer, color: Color, elo: number | null): [string, string] => {
-  const player = partyOf(viewer, color, String(elo));
+const playedLike = (viewer: Viewer, color: Color): [string, string] => {
+  const player = partyOf(viewer, color);
   return [
     `${capitalize(player.subject)} ${conjugate(player, 'as', 'a', 'ont')} joué comme un`,
     'Elo',
@@ -140,7 +142,7 @@ const retryStrings = (viewer: Viewer): RetryStrings => ({
   prompt: color =>
     viewer === color
       ? 'Trouve un meilleur coup.'
-      : `Trouve un meilleur coup pour ${partyOf(viewer, color, 'retry').subject}.`,
+      : `Trouve un meilleur coup pour ${partyOf(viewer, color).subject}.`,
   checking: 'Voyons voir…',
   found: move => `Oui ! ${move} est le bon coup.`,
   alsoGood: move => `${move} marche aussi. Bien vu !`,
@@ -152,12 +154,12 @@ const retryStrings = (viewer: Viewer): RetryStrings => ({
 
 const clockStrings = (viewer: Viewer): ClockStrings => ({
   rushed: (color, spent, clock) => {
-    const player = partyOf(viewer, color, spent);
+    const player = partyOf(viewer, color);
     return `${capitalize(player.subject)} ${conjugate(player, 'as', 'a', 'ont')} joué ce coup en ${spent} avec ${clock} restantes à la pendule : un peu plus de réflexion aurait payé ici.`;
   },
   timeTrouble: clock => `Avec seulement ${clock} à la pendule, c’était dur à trouver.`,
   paidOff: (color, spent) => {
-    const player = partyOf(viewer, color, spent);
+    const player = partyOf(viewer, color);
     return `${capitalize(player.subject)} ${conjugate(player, 'as', 'a', 'ont')} réfléchi ${spent} sur ce coup, et ça en valait la peine.`;
   },
   seconds: seconds => `${String(seconds).replace('.', ',')} s`,
@@ -167,7 +169,7 @@ const clockStrings = (viewer: Viewer): ClockStrings => ({
 export const french = (viewer: Viewer): ReviewLanguage => ({
   ui: {
     ...INTERFACE,
-    playedLike: (color, elo) => playedLike(viewer, color, elo),
+    playedLike: color => playedLike(viewer, color),
     retry: retryStrings(viewer),
     clock: clockStrings(viewer),
   },
@@ -199,8 +201,14 @@ export const french = (viewer: Viewer): ReviewLanguage => ({
   countTip: (color, moveClass, count) =>
     `${CLASS_PLURALS[moveClass]} des ${color === 'white' ? 'Blancs' : 'Noirs'}\u00a0: ${count}`,
   typography,
-  openingLine: name => `Ouverture: ${name}.`,
-  remarks: remarksFr,
+  openingLine: name => [
+    `Ouverture: ${name}.`,
+    `Ouverture jouée : ${name}.`,
+    `Au programme : ${name}.`,
+  ],
+  viewer,
+  // Watching a game, the coach speaks to whoever moved.
+  remarks: mover => (viewer === null || mover === viewer ? remarksFr : theirRemarksFr),
   trajectory: trajectoryFr(viewer),
   facts: factsFr(viewer),
 });

@@ -45,31 +45,31 @@ describe('the tactic', () => {
   const MOVE = '16. [[m:w:Qc7+]]';
 
   it('names a fork, two of a kind counted', () => {
-    expect(en.facts.motif('fork', MOVE, [black('king'), black('rook')])).toBe(
+    expect(en.facts.motif('fork', MOVE, [black('king'), black('rook')])).toContain(
       `${MOVE} forks the [[p:bk]]king and the [[p:br]]rook.`,
     );
-    expect(en.facts.motif('fork', MOVE, [black('rook'), black('rook')])).toBe(
+    expect(en.facts.motif('fork', MOVE, [black('rook'), black('rook')])).toContain(
       `${MOVE} forks two [[p:br]]rooks.`,
     );
-    expect(fr.facts.motif('fork', MOVE, [black('rook'), black('rook')])).toBe(
+    expect(fr.facts.motif('fork', MOVE, [black('rook'), black('rook')])).toContain(
       `${MOVE} fait une fourchette sur deux [[p:br]]tours.`,
     );
   });
 
   it('says what a pinned piece is pinned to, agreed in French', () => {
-    expect(en.facts.motif('pin', MOVE, [black('queen'), black('king')])).toBe(
+    expect(en.facts.motif('pin', MOVE, [black('queen'), black('king')])).toContain(
       'The [[p:bq]]queen is pinned to the [[p:bk]]king.',
     );
-    expect(fr.facts.motif('pin', MOVE, [black('queen'), black('king')])).toBe(
+    expect(fr.facts.motif('pin', MOVE, [black('queen'), black('king')])).toContain(
       'La [[p:bq]]dame est clouée au [[p:bk]]roi.',
     );
   });
 
   it('speaks of the viewer’s own pieces as theirs', () => {
-    expect(english('black').facts.motif('trappedPiece', MOVE, [black('bishop')])).toBe(
+    expect(english('black').facts.motif('trappedPiece', MOVE, [black('bishop')])).toContain(
       'Your [[p:bb]]bishop is trapped: it has nowhere to go.',
     );
-    expect(french('black').facts.motif('trappedPiece', MOVE, [black('bishop')])).toBe(
+    expect(french('black').facts.motif('trappedPiece', MOVE, [black('bishop')])).toContain(
       'Ton [[p:bb]]fou est pris au piège : il n’a plus de case.',
     );
   });

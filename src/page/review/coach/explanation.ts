@@ -1,9 +1,11 @@
 import { isError } from '#page/review/classes/classes.ts';
 import type { CommentPart } from '#page/review/comment/markup.ts';
+import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { type CoachContext, moveSeed } from './context.ts';
 import { findings, punishes } from './fact.ts';
 import { hash } from './hash.ts';
+import { oneOf } from './said.ts';
 import { remark } from './remark.ts';
 import type { Threats } from './threat-facts.ts';
 import { evaluationLevel, trajectory } from './trajectory.ts';
@@ -16,6 +18,28 @@ export interface MoveContext {
   readonly opening: string;
   /** The threats around it, each once searched. */
   readonly threats: Threats;
+  /** The error the game turned on, the brief's. */
+  readonly turning: boolean;
+}
+
+interface Course {
+  /** How the evaluation moved. */
+  readonly course: string;
+  /** Whether it moved to another level, which the comment then says. */
+  readonly changed: boolean;
+}
+
+// The error a move punishes only offers the advantage: the move takes it, so
+// the game is told from before the error, unless the error's comment already
+// said where the game stands now.
+function courseOf(move: MoveVerdict, language: ReviewLanguage, seed: number): Course {
+  const punished = punishes(move) ? move.previousMove : null;
+  const before = punished?.before ?? move.before;
+  const course = trajectory({ before, after: move.after, mover: move.color, seed }, language);
+  const level = evaluationLevel(move.after);
+  const changed =
+    level !== evaluationLevel(before) && (!punished || level !== evaluationLevel(punished.after));
+  return { course, changed };
 }
 
 /**
@@ -23,32 +47,29 @@ export interface MoveContext {
  * the board and the engine, or a remark when a good move has nothing concrete
  * to say; after an error, the reply it lets in or the move to play instead. The trajectory
  * is what's dropped when the bubble lacks room, and is said only when the
- * advantage changes, unless it's all an error has to say.
+ * advantage changes, unless it's all an error has to say. The error the game
+ * turned on says so.
  */
 export function explanation(
   move: MoveVerdict,
   context: CoachContext,
-  { opening, threats }: MoveContext,
+  { opening, threats, turning }: MoveContext,
 ): CommentPart[] {
   const { language } = context;
   if (move.moveClass === 'book')
     return [
       say(remark(move, context)),
-      ...(opening ? [say(language.openingLine(opening), true)] : []),
+      ...(opening ? [say(oneOf(language.openingLine(opening), move), true)] : []),
     ];
-  const { fact, followUp } = findings(move, language.facts, threats);
+  const { fact, followUp } = findings(move, language, threats);
   const found = fact?.text ?? null;
   if (move.san.includes('#')) return [say(found ?? '')];
-  const seed = hash(`${moveSeed(move, context)}:t`);
-  // The error a move punishes only offers the advantage: the move takes it, so
-  // the game is told from before the error.
-  const before = (punishes(move) ? move.previousMove?.before : null) ?? move.before;
-  const course = trajectory({ before, after: move.after, mover: move.color, seed }, language);
-  const changed = evaluationLevel(before) !== evaluationLevel(move.after);
+  const { course, changed } = courseOf(move, language, hash(`${moveSeed(move, context)}:t`));
   const told = changed ? [say(course, true)] : [];
   if (isError(move.moveClass)) {
-    if (found === null) return [say(course)];
-    return [...told, say(found), ...(followUp ? [say(followUp.text)] : [])];
+    const turned = turning ? [say(oneOf(language.trajectory.turningPoint, move), true)] : [];
+    if (found === null) return [say(course), ...turned];
+    return [...told, ...turned, say(found), ...(followUp ? [say(followUp.text)] : [])];
   }
   return [say(found ?? remark(move, context)), ...told];
 }

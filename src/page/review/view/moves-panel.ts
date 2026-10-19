@@ -6,12 +6,12 @@ import { verdictTitle } from '#page/review/comment/title.ts';
 import { explainLines } from '#page/review/explain/lines.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import type { PanelAction } from './actions.ts';
-import { briefMarkup } from './brief.ts';
+import { briefMarkup, turningMove } from './brief.ts';
 import { avatarMarkup, takeReaction } from './coach-avatar.ts';
 import { explainHint } from './explain-hint.ts';
 import { movesGraph } from './graph.ts';
 import { syncGraphViews } from './graph-views.ts';
-import { momentsMarkup, momentsScroll, showMoment } from './moments.ts';
+import { keyMoments, momentsMarkup, momentsScroll, showMoment } from './moments.ts';
 import {
   bubbleTitle,
   evalChip,
@@ -75,8 +75,10 @@ function movesComment(
   const { review, explain } = session.view;
   if (!review || shown || !move) return null;
   const hint = explain ? explainHint(session, move) : [];
-  const timing = review.moves[move.ply - 1] === move ? timingAt(analysis, move.ply) : null;
-  return commentOn(session, { move, gameId: analysis.gameId, hint, timing });
+  const played = review.moves[move.ply - 1] === move;
+  const timing = played ? timingAt(analysis, move.ply) : null;
+  const turning = played && turningMove(keyMoments(review))?.ply === move.ply;
+  return commentOn(session, { move, gameId: analysis.gameId, hint, timing, turning });
 }
 
 /** Under Explain's lines, the button that plays the best one on the board, or goes back. */

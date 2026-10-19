@@ -45,6 +45,7 @@ describe('a move’s time', () => {
       gameId: 'opera',
       hint: [],
       timing: { spent, clock: 170, initial: 180, usual: 3 },
+      turning: false,
     });
 
   it('puts the coach’s advice in the time’s tooltip, not in the bubble', () => {
@@ -74,7 +75,13 @@ describe('a verdict’s score', () => {
     const { session } = judgedGame('opera');
     const move = session.view.review?.moves.find(judged => judged?.moveClass === 'best');
     if (!move) throw new Error('no best move');
-    const comment = commentOn(session, { move, gameId: 'opera', hint: [], timing: null });
+    const comment = commentOn(session, {
+      move,
+      gameId: 'opera',
+      hint: [],
+      timing: null,
+      turning: false,
+    });
     document.body.innerHTML = verdictMarkup(session, comment).toString();
     const score = document.querySelector('.ln-ext-bubble__evals');
     if (!(score instanceof HTMLElement)) throw new Error('no score');
@@ -87,7 +94,13 @@ describe('a verdict’s score', () => {
     const { session } = judgedGame('opera');
     const move = session.view.review?.moves.find(judged => judged?.moveClass === 'mistake');
     if (!move) throw new Error('no mistake');
-    const comment = commentOn(session, { move, gameId: 'opera', hint: [], timing: null });
+    const comment = commentOn(session, {
+      move,
+      gameId: 'opera',
+      hint: [],
+      timing: null,
+      turning: false,
+    });
     document.body.innerHTML = verdictMarkup(session, comment).toString();
     const score = document.querySelector('.ln-ext-bubble__evals');
     if (!(score instanceof HTMLElement)) throw new Error('no score');

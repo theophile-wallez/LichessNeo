@@ -56,9 +56,9 @@ function stopsText(input: LineFactInput, threat: Threat, menace: Menace): string
   const { facts, move } = input;
   const first = lineOf(menace.plies.slice(0, 1), null);
   if (menace.mate !== null) {
-    if (menace.mate > MATE_SHOWN) return facts.stopsLongMate(menace.mate, first);
+    if (menace.mate > MATE_SHOWN) return oneOf(facts.stopsLongMate(menace.mate, first), move);
     const line = mateLine(threat.record, threat.fen, null);
-    return line && facts.stopsMate(line);
+    return line && oneOf(facts.stopsMate(line), move);
   }
   // The piece that moves away from the threat, rather than its defense.
   const escapes = menace.plies.some(
@@ -104,7 +104,7 @@ export function threatensFact({ move, facts, me }: LineFactInput, threat: Threat
   const menace = realMenace(threat, move.after, me);
   const first = menace && lineOf(menace.plies.slice(0, 1), null);
   if (!menace || !first || wasThere(move, menace)) return null;
-  if (menace.mate !== null) return said(facts.threatensMate(first, menace.mate));
+  if (menace.mate !== null) return said(oneOf(facts.threatensMate(first, menace.mate), move));
   const material = menace.won && facts.material(menace.won);
   return material ? said(oneOf(facts.threatens(first, material), move)) : null;
 }

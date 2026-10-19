@@ -1,13 +1,12 @@
 import type { Color, Piece, Role } from '#shared/chess/index.ts';
-import { hash } from '#page/review/coach/hash.ts';
 import { pieceToken } from '#page/review/comment/tokens.ts';
 import { materialPhrase } from './material.ts';
 import type { Material, Viewer } from './types.ts';
 
 // French grammar for the coach's sentences: a piece's gender picks its
 // articles and agreements, and the reader's side its persons: "tu" and
-// "l’adversaire" (or its color, for a change) when the reader played the
-// game, "les Blancs" and "les Noirs" when they watch it.
+// "l’adversaire" when the reader played the game, "les Blancs" and "les
+// Noirs" when they watch it.
 
 const ROLE_NAMES: Readonly<Record<Role, string>> = {
   pawn: 'pion',
@@ -67,13 +66,10 @@ export interface Party {
   readonly person: 'tu' | 'il' | 'ils';
 }
 
-/**
- * The side of `color`. The reader's opponent goes by "l’adversaire", or now and then by its
- * color, picked from `seed`, so a sentence reads the same on every redraw.
- */
-export function partyOf(viewer: Viewer, color: Color, seed = ''): Party {
+/** The side of `color`. The reader's opponent always goes by "l’adversaire": by its color too, a comment would seem to name two. */
+export function partyOf(viewer: Viewer, color: Color): Party {
   if (viewer === color) return { subject: 'tu', object: null, of: null, to: null, person: 'tu' };
-  if (viewer !== null && hash(seed) % 3 !== 0)
+  if (viewer !== null)
     return {
       subject: 'l’adversaire',
       object: 'l’adversaire',
@@ -122,3 +118,18 @@ export const materialFr = (material: Material): string | null =>
     for: 'contre',
     exchange: 'la qualité',
   });
+
+/** "Tu as", "L’adversaire a", "Les Blancs ont": a side and its verb, at the start of a sentence. */
+export const says = (party: Party, tu: string, il: string, ils: string): string =>
+  `${capitalize(party.subject)} ${conjugate(party, tu, il, ils)}`;
+
+/** "tu as", "l’adversaire a". */
+export const has = (party: Party): string =>
+  `${party.subject} ${conjugate(party, 'as', 'a', 'ont')}`;
+
+/** "Tu avais", "L’adversaire avait". */
+export const had = (party: Party): string => says(party, 'avais', 'avait', 'avaient');
+
+/** "te met", "met l’adversaire": a verb with the party as its object. */
+export const putting = (party: Party, verb: string): string =>
+  party.object === null ? `te ${verb}` : `${verb} ${party.object}`;

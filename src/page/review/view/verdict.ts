@@ -44,6 +44,8 @@ export interface VerdictInput {
   readonly hint: readonly CommentPart[];
   /** The move's time, for a game's move with clocks. */
   readonly timing: MoveTiming | null;
+  /** The error the game turned on, the brief's. */
+  readonly turning: boolean;
 }
 
 /** A judged move, and what the coach says of it. */
@@ -63,10 +65,10 @@ interface Advice {
 
 /** The coach's comment on a move, or Explain's hint in its place. */
 export function commentOn(session: Session, input: VerdictInput): CoachComment {
-  const { move, gameId, hint, timing } = input;
+  const { move, gameId, hint, timing, turning } = input;
   const { language } = session;
   const threats = threatsAround(session, move);
-  const themes = themesOf(findings(move, language.facts, threats));
+  const themes = themesOf(findings(move, language, threats));
   const note = timing && clockNote(move.moveClass, timing);
   const advice =
     timing && note
@@ -78,6 +80,7 @@ export function commentOn(session: Session, input: VerdictInput): CoachComment {
       : explanation(move, coachContext(session, gameId), {
           opening: openingOf(session, move),
           threats,
+          turning,
         });
   return { move, parts, themes, timing, advice };
 }

@@ -4,7 +4,7 @@ import { playLine, type Ply } from '#page/review/chess/played-line.ts';
 import { moveToken } from '#page/review/comment/tokens.ts';
 import type { FactSentences } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
-import { type Fact, said, type Theme } from './said.ts';
+import { type Fact, pickBy, said, type Theme } from './said.ts';
 
 // The tactic that wins what a line wins (chess/motifs.ts), named after the
 // line's sentence, and tagged on the bubble.
@@ -54,6 +54,7 @@ export function withMotif(text: string, line: MotifLine, facts: FactSentences): 
   const last = played.at(-1);
   if (!last) return said(text);
   const move = moveToken(last.san, last.color, { base, ucis: played.map(ply => ply.uci) });
-  const named = facts.motif(motif.kind, move, motif.pieces);
-  return said(named ? `${text} ${named}` : text, THEMES[motif.kind]);
+  // Picked by the fact it follows, which its move already picked.
+  const ways = facts.motif(motif.kind, move, motif.pieces);
+  return said(ways ? `${text} ${pickBy(ways, text)}` : text, THEMES[motif.kind]);
 }

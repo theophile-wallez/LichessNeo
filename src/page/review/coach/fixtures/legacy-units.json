@@ -37,13 +37,13 @@
   ],
   "trajectories": [
     [0, 0, "w", 0, "The game stays balanced.", "La partie reste équilibrée."],
-    [0, 0, "w", 2, "The balance holds.", "Les chances restent égales."],
+    [0, 0, "w", 2, "Still level.", "Les chances restent égales."],
     [0, 0, "b", 0, "The game stays balanced.", "La partie reste équilibrée."],
-    [0, 0, "b", 2, "The balance holds.", "Les chances restent égales."],
-    [0, 1, "w", 1, "It’s still an even game.", "L’équilibre tient toujours."],
-    [0, 1, "w", 7, "It’s still an even game.", "L’équilibre tient toujours."],
-    [0, 1, "b", 1, "It’s still an even game.", "L’équilibre tient toujours."],
-    [0, 1, "b", 7, "It’s still an even game.", "L’équilibre tient toujours."],
+    [0, 0, "b", 2, "Still level.", "Les chances restent égales."],
+    [0, 1, "w", 1, "The balance holds.", "L’équilibre tient toujours."],
+    [0, 1, "w", 7, "Still level.", "Les chances restent égales."],
+    [0, 1, "b", 1, "The balance holds.", "L’équilibre tient toujours."],
+    [0, 1, "b", 7, "Still level.", "Les chances restent égales."],
     [
       0,
       2,
@@ -57,8 +57,8 @@
       2,
       "w",
       2,
-      "The game was balanced, and now White has a slight edge.",
-      "La partie était équilibrée, et maintenant les Blancs ont un léger avantage."
+      "No longer level: White has a slight edge.",
+      "Fini l’égalité : les Blancs ont un léger avantage."
     ],
     [
       0,
@@ -73,8 +73,8 @@
       2,
       "b",
       2,
-      "The game was balanced, but now White has a slight edge.",
-      "La partie était équilibrée, mais maintenant les Blancs ont un léger avantage."
+      "No longer level: White has a slight edge.",
+      "Fini l’égalité : les Blancs ont un léger avantage."
     ],
     [
       0,
@@ -89,8 +89,8 @@
       3,
       "w",
       7,
-      "The balance tips: now White has a clear advantage.",
-      "L’équilibre est rompu : maintenant les Blancs ont un net avantage."
+      "The scales tip, and White has a clear advantage.",
+      "La balance penche : les Blancs ont un net avantage."
     ],
     [
       0,
@@ -105,8 +105,8 @@
       3,
       "b",
       7,
-      "The balance tips: now White has a clear advantage.",
-      "L’équilibre est rompu : maintenant les Blancs ont un net avantage."
+      "The scales tip, and White has a clear advantage.",
+      "La balance penche : les Blancs ont un net avantage."
     ],
     [
       0,
@@ -121,8 +121,8 @@
       4,
       "w",
       2,
-      "The game was balanced, and now White has a winning position.",
-      "La partie était équilibrée, et maintenant les Blancs ont une position gagnante."
+      "No longer level: White has a winning position.",
+      "Fini l’égalité : les Blancs ont une position gagnante."
     ],
     [
       0,
@@ -137,8 +137,8 @@
       4,
       "b",
       2,
-      "The game was balanced, but now White has a winning position.",
-      "La partie était équilibrée, mais maintenant les Blancs ont une position gagnante."
+      "No longer level: White has a winning position.",
+      "Fini l’égalité : les Blancs ont une position gagnante."
     ],
     [
       0,
@@ -153,8 +153,8 @@
       5,
       "w",
       7,
-      "The balance tips: now Black has a slight edge.",
-      "L’équilibre est rompu : maintenant les Noirs ont un léger avantage."
+      "The scales tip, and Black has a slight edge.",
+      "La balance penche : les Noirs ont un léger avantage."
     ],
     [
       0,
@@ -169,8 +169,8 @@
       5,
       "b",
       7,
-      "The balance tips: now Black has a slight edge.",
-      "L’équilibre est rompu : maintenant les Noirs ont un léger avantage."
+      "The scales tip, and Black has a slight edge.",
+      "La balance penche : les Noirs ont un léger avantage."
     ],
     [
       0,
@@ -185,8 +185,8 @@
       6,
       "w",
       2,
-      "The game was balanced, but now Black has a clear advantage.",
-      "La partie était équilibrée, mais maintenant les Noirs ont un net avantage."
+      "No longer level: Black has a clear advantage.",
+      "Fini l’égalité : les Noirs ont un net avantage."
     ],
     [
       0,
@@ -201,8 +201,8 @@
       6,
       "b",
       2,
-      "The game was balanced, and now Black has a clear advantage.",
-      "La partie était équilibrée, et maintenant les Noirs ont un net avantage."
+      "No longer level: Black has a clear advantage.",
+      "Fini l’égalité : les Noirs ont un net avantage."
     ],
     [
       0,
@@ -217,8 +217,8 @@
       7,
       "w",
       7,
-      "The balance tips: now Black has a winning position.",
-      "L’équilibre est rompu : maintenant les Noirs ont une position gagnante."
+      "The scales tip, and Black has a winning position.",
+      "La balance penche : les Noirs ont une position gagnante."
     ],
     [
       0,
@@ -233,8 +233,8 @@
       7,
       "b",
       7,
-      "The balance tips: now Black has a winning position.",
-      "L’équilibre est rompu : maintenant les Noirs ont une position gagnante."
+      "The scales tip, and Black has a winning position.",
+      "La balance penche : les Noirs ont une position gagnante."
     ],
     [
       0,
@@ -249,8 +249,8 @@
       8,
       "w",
       2,
-      "The game was balanced, and now White has a mate in 3.",
-      "La partie était équilibrée, et maintenant les Blancs ont un mat en 3."
+      "No longer level: White has a mate in 3.",
+      "Fini l’égalité : les Blancs ont un mat en 3."
     ],
     [
       0,
@@ -265,8 +265,8 @@
       8,
       "b",
       2,
-      "The game was balanced, but now White has a mate in 3.",
-      "La partie était équilibrée, mais maintenant les Blancs ont un mat en 3."
+      "No longer level: White has a mate in 3.",
+      "Fini l’égalité : les Blancs ont un mat en 3."
     ],
     [
       0,
@@ -281,8 +281,8 @@
       9,
       "w",
       7,
-      "The balance tips: now Black has a mate in 2.",
-      "L’équilibre est rompu : maintenant les Noirs ont un mat en 2."
+      "The scales tip, and Black has a mate in 2.",
+      "La balance penche : les Noirs ont un mat en 2."
     ],
     [
       0,
@@ -297,8 +297,8 @@
       9,
       "b",
       7,
-      "The balance tips: now Black has a mate in 2.",
-      "L’équilibre est rompu : maintenant les Noirs ont un mat en 2."
+      "The scales tip, and Black has a mate in 2.",
+      "La balance penche : les Noirs ont un mat en 2."
     ],
     [
       0,
@@ -313,8 +313,8 @@
       10,
       "w",
       2,
-      "The game was balanced, but now Black has a forced mate.",
-      "La partie était équilibrée, mais maintenant les Noirs ont un mat forcé."
+      "No longer level: Black has a forced mate.",
+      "Fini l’égalité : les Noirs ont un mat forcé."
     ],
     [
       0,
@@ -329,8 +329,8 @@
       10,
       "b",
       2,
-      "The game was balanced, and now Black has a forced mate.",
-      "La partie était équilibrée, et maintenant les Noirs ont un mat forcé."
+      "No longer level: Black has a forced mate.",
+      "Fini l’égalité : les Noirs ont un mat forcé."
     ],
     [
       0,
@@ -345,8 +345,8 @@
       11,
       "w",
       7,
-      "The balance tips: now White has a forced mate.",
-      "L’équilibre est rompu : maintenant les Blancs ont un mat forcé."
+      "The scales tip, and White has a forced mate.",
+      "La balance penche : les Blancs ont un mat forcé."
     ],
     [
       0,
@@ -361,8 +361,8 @@
       11,
       "b",
       7,
-      "The balance tips: now White has a forced mate.",
-      "L’équilibre est rompu : maintenant les Blancs ont un mat forcé."
+      "The scales tip, and White has a forced mate.",
+      "La balance penche : les Blancs ont un mat forcé."
     ],
     [
       0,
@@ -377,8 +377,8 @@
       12,
       "w",
       2,
-      "The game was balanced, and now White has a slight edge.",
-      "La partie était équilibrée, et maintenant les Blancs ont un léger avantage."
+      "No longer level: White has a slight edge.",
+      "Fini l’égalité : les Blancs ont un léger avantage."
     ],
     [
       0,
@@ -393,8 +393,8 @@
       12,
       "b",
       2,
-      "The game was balanced, but now White has a slight edge.",
-      "La partie était équilibrée, mais maintenant les Blancs ont un léger avantage."
+      "No longer level: White has a slight edge.",
+      "Fini l’égalité : les Blancs ont un léger avantage."
     ],
     [
       0,
@@ -409,8 +409,8 @@
       13,
       "w",
       7,
-      "The balance tips: now Black has a slight edge.",
-      "L’équilibre est rompu : maintenant les Noirs ont un léger avantage."
+      "The scales tip, and Black has a slight edge.",
+      "La balance penche : les Noirs ont un léger avantage."
     ],
     [
       0,
@@ -425,8 +425,8 @@
       13,
       "b",
       7,
-      "The balance tips: now Black has a slight edge.",
-      "L’équilibre est rompu : maintenant les Noirs ont un léger avantage."
+      "The scales tip, and Black has a slight edge.",
+      "La balance penche : les Noirs ont un léger avantage."
     ],
     [
       0,
@@ -441,8 +441,8 @@
       14,
       "w",
       2,
-      "The game was balanced, and now White has a winning position.",
-      "La partie était équilibrée, et maintenant les Blancs ont une position gagnante."
+      "No longer level: White has a winning position.",
+      "Fini l’égalité : les Blancs ont une position gagnante."
     ],
     [
       0,
@@ -457,8 +457,8 @@
       14,
       "b",
       2,
-      "The game was balanced, but now White has a winning position.",
-      "La partie était équilibrée, mais maintenant les Blancs ont une position gagnante."
+      "No longer level: White has a winning position.",
+      "Fini l’égalité : les Blancs ont une position gagnante."
     ],
     [
       0,
@@ -473,8 +473,8 @@
       15,
       "w",
       7,
-      "The balance tips: now Black has a winning position.",
-      "L’équilibre est rompu : maintenant les Noirs ont une position gagnante."
+      "The scales tip, and Black has a winning position.",
+      "La balance penche : les Noirs ont une position gagnante."
     ],
     [
       0,
@@ -489,17 +489,17 @@
       15,
       "b",
       7,
-      "The balance tips: now Black has a winning position.",
-      "L’équilibre est rompu : maintenant les Noirs ont une position gagnante."
+      "The scales tip, and Black has a winning position.",
+      "La balance penche : les Noirs ont une position gagnante."
     ],
-    [1, 0, "w", 1, "It’s still an even game.", "L’équilibre tient toujours."],
-    [1, 0, "w", 7, "It’s still an even game.", "L’équilibre tient toujours."],
-    [1, 0, "b", 1, "It’s still an even game.", "L’équilibre tient toujours."],
-    [1, 0, "b", 7, "It’s still an even game.", "L’équilibre tient toujours."],
+    [1, 0, "w", 1, "The balance holds.", "L’équilibre tient toujours."],
+    [1, 0, "w", 7, "Still level.", "Les chances restent égales."],
+    [1, 0, "b", 1, "The balance holds.", "L’équilibre tient toujours."],
+    [1, 0, "b", 7, "Still level.", "Les chances restent égales."],
     [1, 1, "w", 0, "The game stays balanced.", "La partie reste équilibrée."],
-    [1, 1, "w", 2, "The balance holds.", "Les chances restent égales."],
+    [1, 1, "w", 2, "Still level.", "Les chances restent égales."],
     [1, 1, "b", 0, "The game stays balanced.", "La partie reste équilibrée."],
-    [1, 1, "b", 2, "The balance holds.", "Les chances restent égales."],
+    [1, 1, "b", 2, "Still level.", "Les chances restent égales."],
     [
       1,
       2,
@@ -513,8 +513,8 @@
       2,
       "w",
       7,
-      "The balance tips: now White has a slight edge.",
-      "L’équilibre est rompu : maintenant les Blancs ont un léger avantage."
+      "The scales tip, and White has a slight edge.",
+      "La balance penche : les Blancs ont un léger avantage."
     ],
     [
       1,
@@ -529,8 +529,8 @@
       2,
       "b",
       7,
-      "The balance tips: now White has a slight edge.",
-      "L’équilibre est rompu : maintenant les Blancs ont un léger avantage."
+      "The scales tip, and White has a slight edge.",
+      "La balance penche : les Blancs ont un léger avantage."
     ],
     [
       1,
@@ -545,8 +545,8 @@
       3,
       "w",
       2,
-      "The game was balanced, and now White has a clear advantage.",
-      "La partie était équilibrée, et maintenant les Blancs ont un net avantage."
+      "No longer level: White has a clear advantage.",
+      "Fini l’égalité : les Blancs ont un net avantage."
     ],
     [
       1,
@@ -561,8 +561,8 @@
       3,
       "b",
       2,
-      "The game was balanced, but now White has a clear advantage.",
-      "La partie était équilibrée, mais maintenant les Blancs ont un net avantage."
+      "No longer level: White has a clear advantage.",
+      "Fini l’égalité : les Blancs ont un net avantage."
     ],
     [
       1,
@@ -577,8 +577,8 @@
       4,
       "w",
       7,
-      "The balance tips: now White has a winning position.",
-      "L’équilibre est rompu : maintenant les Blancs ont une position gagnante."
+      "The scales tip, and White has a winning position.",
+      "La balance penche : les Blancs ont une position gagnante."
     ],
     [
       1,
@@ -593,8 +593,8 @@
       4,
       "b",
       7,
-      "The balance tips: now White has a winning position.",
-      "L’équilibre est rompu : maintenant les Blancs ont une position gagnante."
+      "The scales tip, and White has a winning position.",
+      "La balance penche : les Blancs ont une position gagnante."
     ],
     [
       1,
@@ -609,8 +609,8 @@
       5,
       "w",
       2,
-      "The game was balanced, but now Black has a slight edge.",
-      "La partie était équilibrée, mais maintenant les Noirs ont un léger avantage."
+      "No longer level: Black has a slight edge.",
+      "Fini l’égalité : les Noirs ont un léger avantage."
     ],
     [
       1,
@@ -625,8 +625,8 @@
       5,
       "b",
       2,
-      "The game was balanced, and now Black has a slight edge.",
-      "La partie était équilibrée, et maintenant les Noirs ont un léger avantage."
+      "No longer level: Black has a slight edge.",
+      "Fini l’égalité : les Noirs ont un léger avantage."
     ],
     [
       1,
@@ -641,8 +641,8 @@
       6,
       "w",
       7,
-      "The balance tips: now Black has a clear advantage.",
-      "L’équilibre est rompu : maintenant les Noirs ont un net avantage."
+      "The scales tip, and Black has a clear advantage.",
+      "La balance penche : les Noirs ont un net avantage."
     ],
     [
       1,
@@ -657,8 +657,8 @@
       6,
       "b",
       7,
-      "The balance tips: now Black has a clear advantage.",
-      "L’équilibre est rompu : maintenant les Noirs ont un net avantage."
+      "The scales tip, and Black has a clear advantage.",
+      "La balance penche : les Noirs ont un net avantage."
     ],
     [
       1,
@@ -673,8 +673,8 @@
       7,
       "w",
       2,
-      "The game was balanced, but now Black has a winning position.",
-      "La partie était équilibrée, mais maintenant les Noirs ont une position gagnante."
+      "No longer level: Black has a winning position.",
+      "Fini l’égalité : les Noirs ont une position gagnante."
     ],
     [
       1,
@@ -689,8 +689,8 @@
       7,
       "b",
       2,
-      "The game was balanced, and now Black has a winning position.",
-      "La partie était équilibrée, et maintenant les Noirs ont une position gagnante."
+      "No longer level: Black has a winning position.",
+      "Fini l’égalité : les Noirs ont une position gagnante."
     ],
     [
       1,
@@ -705,8 +705,8 @@
       8,
       "w",
       7,
-      "The balance tips: now White has a mate in 3.",
-      "L’équilibre est rompu : maintenant les Blancs ont un mat en 3."
+      "The scales tip, and White has a mate in 3.",
+      "La balance penche : les Blancs ont un mat en 3."
     ],
     [
       1,
@@ -721,8 +721,8 @@
       8,
       "b",
       7,
-      "The balance tips: now White has a mate in 3.",
-      "L’équilibre est rompu : maintenant les Blancs ont un mat en 3."
+      "The scales tip, and White has a mate in 3.",
+      "La balance penche : les Blancs ont un mat en 3."
     ],
     [
       1,
@@ -737,8 +737,8 @@
       9,
       "w",
       2,
-      "The game was balanced, but now Black has a mate in 2.",
-      "La partie était équilibrée, mais maintenant les Noirs ont un mat en 2."
+      "No longer level: Black has a mate in 2.",
+      "Fini l’égalité : les Noirs ont un mat en 2."
     ],
     [
       1,
@@ -753,8 +753,8 @@
       9,
       "b",
       2,
-      "The game was balanced, and now Black has a mate in 2.",
-      "La partie était équilibrée, et maintenant les Noirs ont un mat en 2."
+      "No longer level: Black has a mate in 2.",
+      "Fini l’égalité : les Noirs ont un mat en 2."
     ],
     [
       1,
@@ -769,8 +769,8 @@
       10,
       "w",
       7,
-      "The balance tips: now Black has a forced mate.",
-      "L’équilibre est rompu : maintenant les Noirs ont un mat forcé."
+      "The scales tip, and Black has a forced mate.",
+      "La balance penche : les Noirs ont un mat forcé."
     ],
     [
       1,
@@ -785,8 +785,8 @@
       10,
       "b",
       7,
-      "The balance tips: now Black has a forced mate.",
-      "L’équilibre est rompu : maintenant les Noirs ont un mat forcé."
+      "The scales tip, and Black has a forced mate.",
+      "La balance penche : les Noirs ont un mat forcé."
     ],
     [
       1,
@@ -801,8 +801,8 @@
       11,
       "w",
       2,
-      "The game was balanced, and now White has a forced mate.",
-      "La partie était équilibrée, et maintenant les Blancs ont un mat forcé."
+      "No longer level: White has a forced mate.",
+      "Fini l’égalité : les Blancs ont un mat forcé."
     ],
     [
       1,
@@ -817,8 +817,8 @@
       11,
       "b",
       2,
-      "The game was balanced, but now White has a forced mate.",
-      "La partie était équilibrée, mais maintenant les Blancs ont un mat forcé."
+      "No longer level: White has a forced mate.",
+      "Fini l’égalité : les Blancs ont un mat forcé."
     ],
     [
       1,
@@ -833,8 +833,8 @@
       12,
       "w",
       7,
-      "The balance tips: now White has a slight edge.",
-      "L’équilibre est rompu : maintenant les Blancs ont un léger avantage."
+      "The scales tip, and White has a slight edge.",
+      "La balance penche : les Blancs ont un léger avantage."
     ],
     [
       1,
@@ -849,8 +849,8 @@
       12,
       "b",
       7,
-      "The balance tips: now White has a slight edge.",
-      "L’équilibre est rompu : maintenant les Blancs ont un léger avantage."
+      "The scales tip, and White has a slight edge.",
+      "La balance penche : les Blancs ont un léger avantage."
     ],
     [
       1,
@@ -865,8 +865,8 @@
       13,
       "w",
       2,
-      "The game was balanced, but now Black has a slight edge.",
-      "La partie était équilibrée, mais maintenant les Noirs ont un léger avantage."
+      "No longer level: Black has a slight edge.",
+      "Fini l’égalité : les Noirs ont un léger avantage."
     ],
     [
       1,
@@ -881,8 +881,8 @@
       13,
       "b",
       2,
-      "The game was balanced, and now Black has a slight edge.",
-      "La partie était équilibrée, et maintenant les Noirs ont un léger avantage."
+      "No longer level: Black has a slight edge.",
+      "Fini l’égalité : les Noirs ont un léger avantage."
     ],
     [
       1,
@@ -897,8 +897,8 @@
       14,
       "w",
       7,
-      "The balance tips: now White has a winning position.",
-      "L’équilibre est rompu : maintenant les Blancs ont une position gagnante."
+      "The scales tip, and White has a winning position.",
+      "La balance penche : les Blancs ont une position gagnante."
     ],
     [
       1,
@@ -913,8 +913,8 @@
       14,
       "b",
       7,
-      "The balance tips: now White has a winning position.",
-      "L’équilibre est rompu : maintenant les Blancs ont une position gagnante."
+      "The scales tip, and White has a winning position.",
+      "La balance penche : les Blancs ont une position gagnante."
     ],
     [
       1,
@@ -929,8 +929,8 @@
       15,
       "w",
       2,
-      "The game was balanced, but now Black has a winning position.",
-      "La partie était équilibrée, mais maintenant les Noirs ont une position gagnante."
+      "No longer level: Black has a winning position.",
+      "Fini l’égalité : les Noirs ont une position gagnante."
     ],
     [
       1,
@@ -945,8 +945,8 @@
       15,
       "b",
       2,
-      "The game was balanced, and now Black has a winning position.",
-      "La partie était équilibrée, et maintenant les Noirs ont une position gagnante."
+      "No longer level: Black has a winning position.",
+      "Fini l’égalité : les Noirs ont une position gagnante."
     ],
     [
       2,
@@ -956,14 +956,7 @@
       "White had a slight edge, but the game is now balanced.",
       "Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      2,
-      0,
-      "w",
-      2,
-      "White had a slight edge, but the game is now balanced.",
-      "Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée."
-    ],
+    [2, 0, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       2,
       0,
@@ -972,53 +965,60 @@
       "White had a slight edge, but the game is now balanced.",
       "Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      2,
-      0,
-      "b",
-      2,
-      "White had a slight edge, but the game is now balanced.",
-      "Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée."
-    ],
+    [2, 0, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [2, 1, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [2, 1, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [2, 1, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [2, 1, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [2, 1, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [2, 1, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [2, 2, "w", 0, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
-    [2, 2, "w", 2, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
+    [
+      2,
+      2,
+      "w",
+      2,
+      "Nothing changes: White has a slight edge.",
+      "Rien ne change : les Blancs ont toujours un léger avantage."
+    ],
     [2, 2, "b", 0, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
-    [2, 2, "b", 2, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
+    [
+      2,
+      2,
+      "b",
+      2,
+      "Nothing changes: White has a slight edge.",
+      "Rien ne change : les Blancs ont toujours un léger avantage."
+    ],
     [
       2,
       3,
       "w",
       1,
-      "White pulls further ahead: now White has a clear advantage.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un net avantage."
+      "The gap widens: now White has a clear advantage.",
+      "L’écart se creuse : maintenant les Blancs ont un net avantage."
     ],
     [
       2,
       3,
       "w",
       7,
-      "White pulls further ahead: now White has a clear advantage.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un net avantage."
+      "Even better for White: a clear advantage now.",
+      "Encore mieux pour les Blancs : un net avantage désormais."
     ],
     [
       2,
       3,
       "b",
       1,
-      "White pulls further ahead: now White has a clear advantage.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un net avantage."
+      "The gap widens: now White has a clear advantage.",
+      "L’écart se creuse : maintenant les Blancs ont un net avantage."
     ],
     [
       2,
       3,
       "b",
       7,
-      "White pulls further ahead: now White has a clear advantage.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un net avantage."
+      "Even better for White: a clear advantage now.",
+      "Encore mieux pour les Blancs : un net avantage désormais."
     ],
     [
       2,
@@ -1033,8 +1033,8 @@
       4,
       "w",
       2,
-      "White goes from a slight edge to a winning position.",
-      "Les Blancs passent d’un léger avantage à une position gagnante."
+      "White’s lead grows: a winning position now.",
+      "L’avantage grandit : les Blancs ont maintenant une position gagnante."
     ],
     [
       2,
@@ -1049,8 +1049,8 @@
       4,
       "b",
       2,
-      "White goes from a slight edge to a winning position.",
-      "Les Blancs passent d’un léger avantage à une position gagnante."
+      "White’s lead grows: a winning position now.",
+      "L’avantage grandit : les Blancs ont maintenant une position gagnante."
     ],
     [
       2,
@@ -1065,8 +1065,8 @@
       5,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       2,
@@ -1081,8 +1081,8 @@
       5,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       2,
@@ -1097,8 +1097,8 @@
       6,
       "w",
       2,
-      "White had a slight edge, but now Black has a clear advantage.",
-      "Les Blancs avaient un léger avantage, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       2,
@@ -1113,8 +1113,8 @@
       6,
       "b",
       2,
-      "White had a slight edge, but now Black has a clear advantage.",
-      "Les Blancs avaient un léger avantage, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       2,
@@ -1129,8 +1129,8 @@
       7,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       2,
@@ -1145,8 +1145,8 @@
       7,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       2,
@@ -1161,8 +1161,8 @@
       8,
       "w",
       2,
-      "White goes from a slight edge to a mate in 3.",
-      "Les Blancs passent d’un léger avantage à un mat en 3."
+      "White’s lead grows: a mate in 3 now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat en 3."
     ],
     [
       2,
@@ -1177,8 +1177,8 @@
       8,
       "b",
       2,
-      "White goes from a slight edge to a mate in 3.",
-      "Les Blancs passent d’un léger avantage à un mat en 3."
+      "White’s lead grows: a mate in 3 now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat en 3."
     ],
     [
       2,
@@ -1193,8 +1193,8 @@
       9,
       "w",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       2,
@@ -1209,8 +1209,8 @@
       9,
       "b",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       2,
@@ -1225,8 +1225,8 @@
       10,
       "w",
       2,
-      "White had a slight edge, but now Black has a forced mate.",
-      "Les Blancs avaient un léger avantage, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       2,
@@ -1241,45 +1241,59 @@
       10,
       "b",
       2,
-      "White had a slight edge, but now Black has a forced mate.",
-      "Les Blancs avaient un léger avantage, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       2,
       11,
       "w",
       1,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "The gap widens: now White has a forced mate.",
+      "L’écart se creuse : maintenant les Blancs ont un mat forcé."
     ],
     [
       2,
       11,
       "w",
       7,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "Even better for White: a forced mate now.",
+      "Encore mieux pour les Blancs : un mat forcé désormais."
     ],
     [
       2,
       11,
       "b",
       1,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "The gap widens: now White has a forced mate.",
+      "L’écart se creuse : maintenant les Blancs ont un mat forcé."
     ],
     [
       2,
       11,
       "b",
       7,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "Even better for White: a forced mate now.",
+      "Encore mieux pour les Blancs : un mat forcé désormais."
     ],
     [2, 12, "w", 0, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
-    [2, 12, "w", 2, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
+    [
+      2,
+      12,
+      "w",
+      2,
+      "Nothing changes: White has a slight edge.",
+      "Rien ne change : les Blancs ont toujours un léger avantage."
+    ],
     [2, 12, "b", 0, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
-    [2, 12, "b", 2, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
+    [
+      2,
+      12,
+      "b",
+      2,
+      "Nothing changes: White has a slight edge.",
+      "Rien ne change : les Blancs ont toujours un léger avantage."
+    ],
     [
       2,
       13,
@@ -1293,8 +1307,8 @@
       13,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       2,
@@ -1309,8 +1323,8 @@
       13,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       2,
@@ -1325,8 +1339,8 @@
       14,
       "w",
       2,
-      "White goes from a slight edge to a winning position.",
-      "Les Blancs passent d’un léger avantage à une position gagnante."
+      "White’s lead grows: a winning position now.",
+      "L’avantage grandit : les Blancs ont maintenant une position gagnante."
     ],
     [
       2,
@@ -1341,8 +1355,8 @@
       14,
       "b",
       2,
-      "White goes from a slight edge to a winning position.",
-      "Les Blancs passent d’un léger avantage à une position gagnante."
+      "White’s lead grows: a winning position now.",
+      "L’avantage grandit : les Blancs ont maintenant une position gagnante."
     ],
     [
       2,
@@ -1357,8 +1371,8 @@
       15,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       2,
@@ -1373,13 +1387,13 @@
       15,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [3, 0, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [3, 0, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [3, 0, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [3, 0, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [3, 0, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [3, 0, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       3,
       1,
@@ -1388,14 +1402,7 @@
       "White had a clear advantage, but the game is now balanced.",
       "Les Blancs avaient un net avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      3,
-      1,
-      "w",
-      2,
-      "White had a clear advantage, but the game is now balanced.",
-      "Les Blancs avaient un net avantage, mais la partie est maintenant équilibrée."
-    ],
+    [3, 1, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       3,
       1,
@@ -1404,14 +1411,7 @@
       "White had a clear advantage, but the game is now balanced.",
       "Les Blancs avaient un net avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      3,
-      1,
-      "b",
-      2,
-      "White had a clear advantage, but the game is now balanced.",
-      "Les Blancs avaient un net avantage, mais la partie est maintenant équilibrée."
-    ],
+    [3, 1, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [
       3,
       2,
@@ -1425,7 +1425,7 @@
       2,
       "w",
       7,
-      "White’s advantage shrinks to a slight edge.",
+      "Down from a clear advantage to a slight edge for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -1441,7 +1441,7 @@
       2,
       "b",
       7,
-      "White’s advantage shrinks to a slight edge.",
+      "Down from a clear advantage to a slight edge for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -1457,8 +1457,8 @@
       3,
       "w",
       2,
-      "White still has a clear advantage.",
-      "Les Blancs ont toujours un net avantage."
+      "Nothing changes: White has a clear advantage.",
+      "Rien ne change : les Blancs ont toujours un net avantage."
     ],
     [
       3,
@@ -1473,40 +1473,40 @@
       3,
       "b",
       2,
-      "White still has a clear advantage.",
-      "Les Blancs ont toujours un net avantage."
+      "Nothing changes: White has a clear advantage.",
+      "Rien ne change : les Blancs ont toujours un net avantage."
     ],
     [
       3,
       4,
       "w",
       1,
-      "White pulls further ahead: now White has a winning position.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont une position gagnante."
+      "The gap widens: now White has a winning position.",
+      "L’écart se creuse : maintenant les Blancs ont une position gagnante."
     ],
     [
       3,
       4,
       "w",
       7,
-      "White pulls further ahead: now White has a winning position.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont une position gagnante."
+      "Even better for White: a winning position now.",
+      "Encore mieux pour les Blancs : une position gagnante désormais."
     ],
     [
       3,
       4,
       "b",
       1,
-      "White pulls further ahead: now White has a winning position.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont une position gagnante."
+      "The gap widens: now White has a winning position.",
+      "L’écart se creuse : maintenant les Blancs ont une position gagnante."
     ],
     [
       3,
       4,
       "b",
       7,
-      "White pulls further ahead: now White has a winning position.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont une position gagnante."
+      "Even better for White: a winning position now.",
+      "Encore mieux pour les Blancs : une position gagnante désormais."
     ],
     [
       3,
@@ -1521,8 +1521,8 @@
       5,
       "w",
       2,
-      "White had a clear advantage, but now Black has a slight edge.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont un léger avantage."
+      "A complete turnaround: now Black has a slight edge.",
+      "Retournement complet : maintenant les Noirs ont un léger avantage."
     ],
     [
       3,
@@ -1537,8 +1537,8 @@
       5,
       "b",
       2,
-      "White had a clear advantage, but now Black has a slight edge.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont un léger avantage."
+      "A complete turnaround: now Black has a slight edge.",
+      "Retournement complet : maintenant les Noirs ont un léger avantage."
     ],
     [
       3,
@@ -1553,8 +1553,8 @@
       6,
       "w",
       7,
-      "The tables turn: now Black has a clear advantage.",
-      "La partie bascule : maintenant les Noirs ont un net avantage."
+      "Everything changes: now Black has a clear advantage.",
+      "Tout change : les Noirs ont un net avantage."
     ],
     [
       3,
@@ -1569,8 +1569,8 @@
       6,
       "b",
       7,
-      "The tables turn: now Black has a clear advantage.",
-      "La partie bascule : maintenant les Noirs ont un net avantage."
+      "Everything changes: now Black has a clear advantage.",
+      "Tout change : les Noirs ont un net avantage."
     ],
     [
       3,
@@ -1585,8 +1585,8 @@
       7,
       "w",
       2,
-      "White had a clear advantage, but now Black has a winning position.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont une position gagnante."
+      "A complete turnaround: now Black has a winning position.",
+      "Retournement complet : maintenant les Noirs ont une position gagnante."
     ],
     [
       3,
@@ -1601,40 +1601,40 @@
       7,
       "b",
       2,
-      "White had a clear advantage, but now Black has a winning position.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont une position gagnante."
+      "A complete turnaround: now Black has a winning position.",
+      "Retournement complet : maintenant les Noirs ont une position gagnante."
     ],
     [
       3,
       8,
       "w",
       1,
-      "White pulls further ahead: now White has a mate in 3.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat en 3."
+      "The gap widens: now White has a mate in 3.",
+      "L’écart se creuse : maintenant les Blancs ont un mat en 3."
     ],
     [
       3,
       8,
       "w",
       7,
-      "White pulls further ahead: now White has a mate in 3.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat en 3."
+      "Even better for White: a mate in 3 now.",
+      "Encore mieux pour les Blancs : un mat en 3 désormais."
     ],
     [
       3,
       8,
       "b",
       1,
-      "White pulls further ahead: now White has a mate in 3.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat en 3."
+      "The gap widens: now White has a mate in 3.",
+      "L’écart se creuse : maintenant les Blancs ont un mat en 3."
     ],
     [
       3,
       8,
       "b",
       7,
-      "White pulls further ahead: now White has a mate in 3.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat en 3."
+      "Even better for White: a mate in 3 now.",
+      "Encore mieux pour les Blancs : un mat en 3 désormais."
     ],
     [
       3,
@@ -1649,8 +1649,8 @@
       9,
       "w",
       2,
-      "White had a clear advantage, but now Black has a mate in 2.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont un mat en 2."
+      "A complete turnaround: now Black has a mate in 2.",
+      "Retournement complet : maintenant les Noirs ont un mat en 2."
     ],
     [
       3,
@@ -1665,8 +1665,8 @@
       9,
       "b",
       2,
-      "White had a clear advantage, but now Black has a mate in 2.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont un mat en 2."
+      "A complete turnaround: now Black has a mate in 2.",
+      "Retournement complet : maintenant les Noirs ont un mat en 2."
     ],
     [
       3,
@@ -1681,8 +1681,8 @@
       10,
       "w",
       7,
-      "The tables turn: now Black has a forced mate.",
-      "La partie bascule : maintenant les Noirs ont un mat forcé."
+      "Everything changes: now Black has a forced mate.",
+      "Tout change : les Noirs ont un mat forcé."
     ],
     [
       3,
@@ -1697,8 +1697,8 @@
       10,
       "b",
       7,
-      "The tables turn: now Black has a forced mate.",
-      "La partie bascule : maintenant les Noirs ont un mat forcé."
+      "Everything changes: now Black has a forced mate.",
+      "Tout change : les Noirs ont un mat forcé."
     ],
     [
       3,
@@ -1713,8 +1713,8 @@
       11,
       "w",
       2,
-      "White goes from a clear advantage to a forced mate.",
-      "Les Blancs passent d’un net avantage à un mat forcé."
+      "White’s lead grows: a forced mate now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat forcé."
     ],
     [
       3,
@@ -1729,8 +1729,8 @@
       11,
       "b",
       2,
-      "White goes from a clear advantage to a forced mate.",
-      "Les Blancs passent d’un net avantage à un mat forcé."
+      "White’s lead grows: a forced mate now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat forcé."
     ],
     [
       3,
@@ -1745,7 +1745,7 @@
       12,
       "w",
       7,
-      "White’s advantage shrinks to a slight edge.",
+      "Down from a clear advantage to a slight edge for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -1761,7 +1761,7 @@
       12,
       "b",
       7,
-      "White’s advantage shrinks to a slight edge.",
+      "Down from a clear advantage to a slight edge for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -1777,8 +1777,8 @@
       13,
       "w",
       2,
-      "White had a clear advantage, but now Black has a slight edge.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont un léger avantage."
+      "A complete turnaround: now Black has a slight edge.",
+      "Retournement complet : maintenant les Noirs ont un léger avantage."
     ],
     [
       3,
@@ -1793,40 +1793,40 @@
       13,
       "b",
       2,
-      "White had a clear advantage, but now Black has a slight edge.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont un léger avantage."
+      "A complete turnaround: now Black has a slight edge.",
+      "Retournement complet : maintenant les Noirs ont un léger avantage."
     ],
     [
       3,
       14,
       "w",
       1,
-      "White pulls further ahead: now White has a winning position.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont une position gagnante."
+      "The gap widens: now White has a winning position.",
+      "L’écart se creuse : maintenant les Blancs ont une position gagnante."
     ],
     [
       3,
       14,
       "w",
       7,
-      "White pulls further ahead: now White has a winning position.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont une position gagnante."
+      "Even better for White: a winning position now.",
+      "Encore mieux pour les Blancs : une position gagnante désormais."
     ],
     [
       3,
       14,
       "b",
       1,
-      "White pulls further ahead: now White has a winning position.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont une position gagnante."
+      "The gap widens: now White has a winning position.",
+      "L’écart se creuse : maintenant les Blancs ont une position gagnante."
     ],
     [
       3,
       14,
       "b",
       7,
-      "White pulls further ahead: now White has a winning position.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont une position gagnante."
+      "Even better for White: a winning position now.",
+      "Encore mieux pour les Blancs : une position gagnante désormais."
     ],
     [
       3,
@@ -1841,8 +1841,8 @@
       15,
       "w",
       2,
-      "White had a clear advantage, but now Black has a winning position.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont une position gagnante."
+      "A complete turnaround: now Black has a winning position.",
+      "Retournement complet : maintenant les Noirs ont une position gagnante."
     ],
     [
       3,
@@ -1857,8 +1857,8 @@
       15,
       "b",
       2,
-      "White had a clear advantage, but now Black has a winning position.",
-      "Les Blancs avaient un net avantage, mais maintenant les Noirs ont une position gagnante."
+      "A complete turnaround: now Black has a winning position.",
+      "Retournement complet : maintenant les Noirs ont une position gagnante."
     ],
     [
       4,
@@ -1868,14 +1868,7 @@
       "White had a winning position, but the game is now balanced.",
       "Les Blancs avaient une position gagnante, mais la partie est maintenant équilibrée."
     ],
-    [
-      4,
-      0,
-      "w",
-      2,
-      "White had a winning position, but the game is now balanced.",
-      "Les Blancs avaient une position gagnante, mais la partie est maintenant équilibrée."
-    ],
+    [4, 0, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       4,
       0,
@@ -1884,18 +1877,11 @@
       "White had a winning position, but the game is now balanced.",
       "Les Blancs avaient une position gagnante, mais la partie est maintenant équilibrée."
     ],
-    [
-      4,
-      0,
-      "b",
-      2,
-      "White had a winning position, but the game is now balanced.",
-      "Les Blancs avaient une position gagnante, mais la partie est maintenant équilibrée."
-    ],
+    [4, 0, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [4, 1, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [4, 1, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [4, 1, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [4, 1, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [4, 1, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [4, 1, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       4,
       2,
@@ -1909,8 +1895,8 @@
       2,
       "w",
       2,
-      "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       4,
@@ -1925,8 +1911,8 @@
       2,
       "b",
       2,
-      "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       4,
@@ -1941,7 +1927,7 @@
       3,
       "w",
       7,
-      "White’s advantage shrinks to a clear advantage.",
+      "Down from a winning position to a clear advantage for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -1957,7 +1943,7 @@
       3,
       "b",
       7,
-      "White’s advantage shrinks to a clear advantage.",
+      "Down from a winning position to a clear advantage for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -1973,8 +1959,8 @@
       4,
       "w",
       2,
-      "White still has a winning position.",
-      "Les Blancs ont toujours une position gagnante."
+      "Nothing changes: White has a winning position.",
+      "Rien ne change : les Blancs ont toujours une position gagnante."
     ],
     [
       4,
@@ -1989,8 +1975,8 @@
       4,
       "b",
       2,
-      "White still has a winning position.",
-      "Les Blancs ont toujours une position gagnante."
+      "Nothing changes: White has a winning position.",
+      "Rien ne change : les Blancs ont toujours une position gagnante."
     ],
     [
       4,
@@ -2005,8 +1991,8 @@
       5,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       4,
@@ -2021,8 +2007,8 @@
       5,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       4,
@@ -2037,8 +2023,8 @@
       6,
       "w",
       2,
-      "White had a winning position, but now Black has a clear advantage.",
-      "Les Blancs avaient une position gagnante, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       4,
@@ -2053,8 +2039,8 @@
       6,
       "b",
       2,
-      "White had a winning position, but now Black has a clear advantage.",
-      "Les Blancs avaient une position gagnante, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       4,
@@ -2069,8 +2055,8 @@
       7,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       4,
@@ -2085,8 +2071,8 @@
       7,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       4,
@@ -2101,8 +2087,8 @@
       8,
       "w",
       2,
-      "White goes from a winning position to a mate in 3.",
-      "Les Blancs passent d’une position gagnante à un mat en 3."
+      "White’s lead grows: a mate in 3 now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat en 3."
     ],
     [
       4,
@@ -2117,8 +2103,8 @@
       8,
       "b",
       2,
-      "White goes from a winning position to a mate in 3.",
-      "Les Blancs passent d’une position gagnante à un mat en 3."
+      "White’s lead grows: a mate in 3 now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat en 3."
     ],
     [
       4,
@@ -2133,8 +2119,8 @@
       9,
       "w",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       4,
@@ -2149,8 +2135,8 @@
       9,
       "b",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       4,
@@ -2165,8 +2151,8 @@
       10,
       "w",
       2,
-      "White had a winning position, but now Black has a forced mate.",
-      "Les Blancs avaient une position gagnante, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       4,
@@ -2181,40 +2167,40 @@
       10,
       "b",
       2,
-      "White had a winning position, but now Black has a forced mate.",
-      "Les Blancs avaient une position gagnante, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       4,
       11,
       "w",
       1,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "The gap widens: now White has a forced mate.",
+      "L’écart se creuse : maintenant les Blancs ont un mat forcé."
     ],
     [
       4,
       11,
       "w",
       7,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "Even better for White: a forced mate now.",
+      "Encore mieux pour les Blancs : un mat forcé désormais."
     ],
     [
       4,
       11,
       "b",
       1,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "The gap widens: now White has a forced mate.",
+      "L’écart se creuse : maintenant les Blancs ont un mat forcé."
     ],
     [
       4,
       11,
       "b",
       7,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "Even better for White: a forced mate now.",
+      "Encore mieux pour les Blancs : un mat forcé désormais."
     ],
     [
       4,
@@ -2229,8 +2215,8 @@
       12,
       "w",
       2,
-      "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       4,
@@ -2245,8 +2231,8 @@
       12,
       "b",
       2,
-      "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       4,
@@ -2261,8 +2247,8 @@
       13,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       4,
@@ -2277,8 +2263,8 @@
       13,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       4,
@@ -2293,8 +2279,8 @@
       14,
       "w",
       2,
-      "White still has a winning position.",
-      "Les Blancs ont toujours une position gagnante."
+      "Nothing changes: White has a winning position.",
+      "Rien ne change : les Blancs ont toujours une position gagnante."
     ],
     [
       4,
@@ -2309,8 +2295,8 @@
       14,
       "b",
       2,
-      "White still has a winning position.",
-      "Les Blancs ont toujours une position gagnante."
+      "Nothing changes: White has a winning position.",
+      "Rien ne change : les Blancs ont toujours une position gagnante."
     ],
     [
       4,
@@ -2325,8 +2311,8 @@
       15,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       4,
@@ -2341,13 +2327,13 @@
       15,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [5, 0, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [5, 0, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [5, 0, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [5, 0, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [5, 0, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [5, 0, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       5,
       1,
@@ -2356,14 +2342,7 @@
       "Black had a slight edge, but the game is now balanced.",
       "Les Noirs avaient un léger avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      5,
-      1,
-      "w",
-      2,
-      "Black had a slight edge, but the game is now balanced.",
-      "Les Noirs avaient un léger avantage, mais la partie est maintenant équilibrée."
-    ],
+    [5, 1, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       5,
       1,
@@ -2372,14 +2351,7 @@
       "Black had a slight edge, but the game is now balanced.",
       "Les Noirs avaient un léger avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      5,
-      1,
-      "b",
-      2,
-      "Black had a slight edge, but the game is now balanced.",
-      "Les Noirs avaient un léger avantage, mais la partie est maintenant équilibrée."
-    ],
+    [5, 1, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [
       5,
       2,
@@ -2393,8 +2365,8 @@
       2,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       5,
@@ -2409,8 +2381,8 @@
       2,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       5,
@@ -2425,8 +2397,8 @@
       3,
       "w",
       2,
-      "Black had a slight edge, but now White has a clear advantage.",
-      "Les Noirs avaient un léger avantage, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       5,
@@ -2441,8 +2413,8 @@
       3,
       "b",
       2,
-      "Black had a slight edge, but now White has a clear advantage.",
-      "Les Noirs avaient un léger avantage, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       5,
@@ -2457,8 +2429,8 @@
       4,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       5,
@@ -2473,44 +2445,58 @@
       4,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [5, 5, "w", 0, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
-    [5, 5, "w", 2, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
+    [
+      5,
+      5,
+      "w",
+      2,
+      "Nothing changes: Black has a slight edge.",
+      "Rien ne change : les Noirs ont toujours un léger avantage."
+    ],
     [5, 5, "b", 0, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
-    [5, 5, "b", 2, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
+    [
+      5,
+      5,
+      "b",
+      2,
+      "Nothing changes: Black has a slight edge.",
+      "Rien ne change : les Noirs ont toujours un léger avantage."
+    ],
     [
       5,
       6,
       "w",
       1,
-      "Black pulls further ahead: now Black has a clear advantage.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un net avantage."
+      "The gap widens: now Black has a clear advantage.",
+      "L’écart se creuse : maintenant les Noirs ont un net avantage."
     ],
     [
       5,
       6,
       "w",
       7,
-      "Black pulls further ahead: now Black has a clear advantage.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un net avantage."
+      "Even better for Black: a clear advantage now.",
+      "Encore mieux pour les Noirs : un net avantage désormais."
     ],
     [
       5,
       6,
       "b",
       1,
-      "Black pulls further ahead: now Black has a clear advantage.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un net avantage."
+      "The gap widens: now Black has a clear advantage.",
+      "L’écart se creuse : maintenant les Noirs ont un net avantage."
     ],
     [
       5,
       6,
       "b",
       7,
-      "Black pulls further ahead: now Black has a clear advantage.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un net avantage."
+      "Even better for Black: a clear advantage now.",
+      "Encore mieux pour les Noirs : un net avantage désormais."
     ],
     [
       5,
@@ -2525,8 +2511,8 @@
       7,
       "w",
       2,
-      "Black goes from a slight edge to a winning position.",
-      "Les Noirs passent d’un léger avantage à une position gagnante."
+      "Black’s lead grows: a winning position now.",
+      "L’avantage grandit : les Noirs ont maintenant une position gagnante."
     ],
     [
       5,
@@ -2541,8 +2527,8 @@
       7,
       "b",
       2,
-      "Black goes from a slight edge to a winning position.",
-      "Les Noirs passent d’un léger avantage à une position gagnante."
+      "Black’s lead grows: a winning position now.",
+      "L’avantage grandit : les Noirs ont maintenant une position gagnante."
     ],
     [
       5,
@@ -2557,8 +2543,8 @@
       8,
       "w",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       5,
@@ -2573,8 +2559,8 @@
       8,
       "b",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       5,
@@ -2589,8 +2575,8 @@
       9,
       "w",
       2,
-      "Black goes from a slight edge to a mate in 2.",
-      "Les Noirs passent d’un léger avantage à un mat en 2."
+      "Black’s lead grows: a mate in 2 now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat en 2."
     ],
     [
       5,
@@ -2605,40 +2591,40 @@
       9,
       "b",
       2,
-      "Black goes from a slight edge to a mate in 2.",
-      "Les Noirs passent d’un léger avantage à un mat en 2."
+      "Black’s lead grows: a mate in 2 now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat en 2."
     ],
     [
       5,
       10,
       "w",
       1,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "The gap widens: now Black has a forced mate.",
+      "L’écart se creuse : maintenant les Noirs ont un mat forcé."
     ],
     [
       5,
       10,
       "w",
       7,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "Even better for Black: a forced mate now.",
+      "Encore mieux pour les Noirs : un mat forcé désormais."
     ],
     [
       5,
       10,
       "b",
       1,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "The gap widens: now Black has a forced mate.",
+      "L’écart se creuse : maintenant les Noirs ont un mat forcé."
     ],
     [
       5,
       10,
       "b",
       7,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "Even better for Black: a forced mate now.",
+      "Encore mieux pour les Noirs : un mat forcé désormais."
     ],
     [
       5,
@@ -2653,8 +2639,8 @@
       11,
       "w",
       2,
-      "Black had a slight edge, but now White has a forced mate.",
-      "Les Noirs avaient un léger avantage, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       5,
@@ -2669,8 +2655,8 @@
       11,
       "b",
       2,
-      "Black had a slight edge, but now White has a forced mate.",
-      "Les Noirs avaient un léger avantage, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       5,
@@ -2685,8 +2671,8 @@
       12,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       5,
@@ -2701,13 +2687,27 @@
       12,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [5, 13, "w", 0, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
-    [5, 13, "w", 2, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
+    [
+      5,
+      13,
+      "w",
+      2,
+      "Nothing changes: Black has a slight edge.",
+      "Rien ne change : les Noirs ont toujours un léger avantage."
+    ],
     [5, 13, "b", 0, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
-    [5, 13, "b", 2, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
+    [
+      5,
+      13,
+      "b",
+      2,
+      "Nothing changes: Black has a slight edge.",
+      "Rien ne change : les Noirs ont toujours un léger avantage."
+    ],
     [
       5,
       14,
@@ -2721,8 +2721,8 @@
       14,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       5,
@@ -2737,8 +2737,8 @@
       14,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       5,
@@ -2753,8 +2753,8 @@
       15,
       "w",
       2,
-      "Black goes from a slight edge to a winning position.",
-      "Les Noirs passent d’un léger avantage à une position gagnante."
+      "Black’s lead grows: a winning position now.",
+      "L’avantage grandit : les Noirs ont maintenant une position gagnante."
     ],
     [
       5,
@@ -2769,8 +2769,8 @@
       15,
       "b",
       2,
-      "Black goes from a slight edge to a winning position.",
-      "Les Noirs passent d’un léger avantage à une position gagnante."
+      "Black’s lead grows: a winning position now.",
+      "L’avantage grandit : les Noirs ont maintenant une position gagnante."
     ],
     [
       6,
@@ -2780,14 +2780,7 @@
       "Black had a clear advantage, but the game is now balanced.",
       "Les Noirs avaient un net avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      6,
-      0,
-      "w",
-      2,
-      "Black had a clear advantage, but the game is now balanced.",
-      "Les Noirs avaient un net avantage, mais la partie est maintenant équilibrée."
-    ],
+    [6, 0, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       6,
       0,
@@ -2796,18 +2789,11 @@
       "Black had a clear advantage, but the game is now balanced.",
       "Les Noirs avaient un net avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      6,
-      0,
-      "b",
-      2,
-      "Black had a clear advantage, but the game is now balanced.",
-      "Les Noirs avaient un net avantage, mais la partie est maintenant équilibrée."
-    ],
+    [6, 0, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [6, 1, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [6, 1, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [6, 1, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [6, 1, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [6, 1, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [6, 1, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       6,
       2,
@@ -2821,8 +2807,8 @@
       2,
       "w",
       2,
-      "Black had a clear advantage, but now White has a slight edge.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont un léger avantage."
+      "A complete turnaround: now White has a slight edge.",
+      "Retournement complet : maintenant les Blancs ont un léger avantage."
     ],
     [
       6,
@@ -2837,8 +2823,8 @@
       2,
       "b",
       2,
-      "Black had a clear advantage, but now White has a slight edge.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont un léger avantage."
+      "A complete turnaround: now White has a slight edge.",
+      "Retournement complet : maintenant les Blancs ont un léger avantage."
     ],
     [
       6,
@@ -2853,8 +2839,8 @@
       3,
       "w",
       7,
-      "The tables turn: now White has a clear advantage.",
-      "La partie bascule : maintenant les Blancs ont un net avantage."
+      "Everything changes: now White has a clear advantage.",
+      "Tout change : les Blancs ont un net avantage."
     ],
     [
       6,
@@ -2869,8 +2855,8 @@
       3,
       "b",
       7,
-      "The tables turn: now White has a clear advantage.",
-      "La partie bascule : maintenant les Blancs ont un net avantage."
+      "Everything changes: now White has a clear advantage.",
+      "Tout change : les Blancs ont un net avantage."
     ],
     [
       6,
@@ -2885,8 +2871,8 @@
       4,
       "w",
       2,
-      "Black had a clear advantage, but now White has a winning position.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont une position gagnante."
+      "A complete turnaround: now White has a winning position.",
+      "Retournement complet : maintenant les Blancs ont une position gagnante."
     ],
     [
       6,
@@ -2901,8 +2887,8 @@
       4,
       "b",
       2,
-      "Black had a clear advantage, but now White has a winning position.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont une position gagnante."
+      "A complete turnaround: now White has a winning position.",
+      "Retournement complet : maintenant les Blancs ont une position gagnante."
     ],
     [
       6,
@@ -2917,7 +2903,7 @@
       5,
       "w",
       7,
-      "Black’s advantage shrinks to a slight edge.",
+      "Down from a clear advantage to a slight edge for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -2933,44 +2919,58 @@
       5,
       "b",
       7,
-      "Black’s advantage shrinks to a slight edge.",
+      "Down from a clear advantage to a slight edge for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un léger avantage."
     ],
     [6, 6, "w", 0, "Black still has a clear advantage.", "Les Noirs ont toujours un net avantage."],
-    [6, 6, "w", 2, "Black still has a clear advantage.", "Les Noirs ont toujours un net avantage."],
+    [
+      6,
+      6,
+      "w",
+      2,
+      "Nothing changes: Black has a clear advantage.",
+      "Rien ne change : les Noirs ont toujours un net avantage."
+    ],
     [6, 6, "b", 0, "Black still has a clear advantage.", "Les Noirs ont toujours un net avantage."],
-    [6, 6, "b", 2, "Black still has a clear advantage.", "Les Noirs ont toujours un net avantage."],
+    [
+      6,
+      6,
+      "b",
+      2,
+      "Nothing changes: Black has a clear advantage.",
+      "Rien ne change : les Noirs ont toujours un net avantage."
+    ],
     [
       6,
       7,
       "w",
       1,
-      "Black pulls further ahead: now Black has a winning position.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont une position gagnante."
+      "The gap widens: now Black has a winning position.",
+      "L’écart se creuse : maintenant les Noirs ont une position gagnante."
     ],
     [
       6,
       7,
       "w",
       7,
-      "Black pulls further ahead: now Black has a winning position.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont une position gagnante."
+      "Even better for Black: a winning position now.",
+      "Encore mieux pour les Noirs : une position gagnante désormais."
     ],
     [
       6,
       7,
       "b",
       1,
-      "Black pulls further ahead: now Black has a winning position.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont une position gagnante."
+      "The gap widens: now Black has a winning position.",
+      "L’écart se creuse : maintenant les Noirs ont une position gagnante."
     ],
     [
       6,
       7,
       "b",
       7,
-      "Black pulls further ahead: now Black has a winning position.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont une position gagnante."
+      "Even better for Black: a winning position now.",
+      "Encore mieux pour les Noirs : une position gagnante désormais."
     ],
     [
       6,
@@ -2985,8 +2985,8 @@
       8,
       "w",
       2,
-      "Black had a clear advantage, but now White has a mate in 3.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont un mat en 3."
+      "A complete turnaround: now White has a mate in 3.",
+      "Retournement complet : maintenant les Blancs ont un mat en 3."
     ],
     [
       6,
@@ -3001,40 +3001,40 @@
       8,
       "b",
       2,
-      "Black had a clear advantage, but now White has a mate in 3.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont un mat en 3."
+      "A complete turnaround: now White has a mate in 3.",
+      "Retournement complet : maintenant les Blancs ont un mat en 3."
     ],
     [
       6,
       9,
       "w",
       1,
-      "Black pulls further ahead: now Black has a mate in 2.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat en 2."
+      "The gap widens: now Black has a mate in 2.",
+      "L’écart se creuse : maintenant les Noirs ont un mat en 2."
     ],
     [
       6,
       9,
       "w",
       7,
-      "Black pulls further ahead: now Black has a mate in 2.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat en 2."
+      "Even better for Black: a mate in 2 now.",
+      "Encore mieux pour les Noirs : un mat en 2 désormais."
     ],
     [
       6,
       9,
       "b",
       1,
-      "Black pulls further ahead: now Black has a mate in 2.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat en 2."
+      "The gap widens: now Black has a mate in 2.",
+      "L’écart se creuse : maintenant les Noirs ont un mat en 2."
     ],
     [
       6,
       9,
       "b",
       7,
-      "Black pulls further ahead: now Black has a mate in 2.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat en 2."
+      "Even better for Black: a mate in 2 now.",
+      "Encore mieux pour les Noirs : un mat en 2 désormais."
     ],
     [
       6,
@@ -3049,8 +3049,8 @@
       10,
       "w",
       2,
-      "Black goes from a clear advantage to a forced mate.",
-      "Les Noirs passent d’un net avantage à un mat forcé."
+      "Black’s lead grows: a forced mate now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat forcé."
     ],
     [
       6,
@@ -3065,8 +3065,8 @@
       10,
       "b",
       2,
-      "Black goes from a clear advantage to a forced mate.",
-      "Les Noirs passent d’un net avantage à un mat forcé."
+      "Black’s lead grows: a forced mate now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat forcé."
     ],
     [
       6,
@@ -3081,8 +3081,8 @@
       11,
       "w",
       7,
-      "The tables turn: now White has a forced mate.",
-      "La partie bascule : maintenant les Blancs ont un mat forcé."
+      "Everything changes: now White has a forced mate.",
+      "Tout change : les Blancs ont un mat forcé."
     ],
     [
       6,
@@ -3097,8 +3097,8 @@
       11,
       "b",
       7,
-      "The tables turn: now White has a forced mate.",
-      "La partie bascule : maintenant les Blancs ont un mat forcé."
+      "Everything changes: now White has a forced mate.",
+      "Tout change : les Blancs ont un mat forcé."
     ],
     [
       6,
@@ -3113,8 +3113,8 @@
       12,
       "w",
       2,
-      "Black had a clear advantage, but now White has a slight edge.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont un léger avantage."
+      "A complete turnaround: now White has a slight edge.",
+      "Retournement complet : maintenant les Blancs ont un léger avantage."
     ],
     [
       6,
@@ -3129,8 +3129,8 @@
       12,
       "b",
       2,
-      "Black had a clear advantage, but now White has a slight edge.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont un léger avantage."
+      "A complete turnaround: now White has a slight edge.",
+      "Retournement complet : maintenant les Blancs ont un léger avantage."
     ],
     [
       6,
@@ -3145,7 +3145,7 @@
       13,
       "w",
       7,
-      "Black’s advantage shrinks to a slight edge.",
+      "Down from a clear advantage to a slight edge for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -3161,7 +3161,7 @@
       13,
       "b",
       7,
-      "Black’s advantage shrinks to a slight edge.",
+      "Down from a clear advantage to a slight edge for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -3177,8 +3177,8 @@
       14,
       "w",
       2,
-      "Black had a clear advantage, but now White has a winning position.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont une position gagnante."
+      "A complete turnaround: now White has a winning position.",
+      "Retournement complet : maintenant les Blancs ont une position gagnante."
     ],
     [
       6,
@@ -3193,45 +3193,45 @@
       14,
       "b",
       2,
-      "Black had a clear advantage, but now White has a winning position.",
-      "Les Noirs avaient un net avantage, mais maintenant les Blancs ont une position gagnante."
+      "A complete turnaround: now White has a winning position.",
+      "Retournement complet : maintenant les Blancs ont une position gagnante."
     ],
     [
       6,
       15,
       "w",
       1,
-      "Black pulls further ahead: now Black has a winning position.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont une position gagnante."
+      "The gap widens: now Black has a winning position.",
+      "L’écart se creuse : maintenant les Noirs ont une position gagnante."
     ],
     [
       6,
       15,
       "w",
       7,
-      "Black pulls further ahead: now Black has a winning position.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont une position gagnante."
+      "Even better for Black: a winning position now.",
+      "Encore mieux pour les Noirs : une position gagnante désormais."
     ],
     [
       6,
       15,
       "b",
       1,
-      "Black pulls further ahead: now Black has a winning position.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont une position gagnante."
+      "The gap widens: now Black has a winning position.",
+      "L’écart se creuse : maintenant les Noirs ont une position gagnante."
     ],
     [
       6,
       15,
       "b",
       7,
-      "Black pulls further ahead: now Black has a winning position.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont une position gagnante."
+      "Even better for Black: a winning position now.",
+      "Encore mieux pour les Noirs : une position gagnante désormais."
     ],
     [7, 0, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [7, 0, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [7, 0, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [7, 0, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [7, 0, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [7, 0, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       7,
       1,
@@ -3240,14 +3240,7 @@
       "Black had a winning position, but the game is now balanced.",
       "Les Noirs avaient une position gagnante, mais la partie est maintenant équilibrée."
     ],
-    [
-      7,
-      1,
-      "w",
-      2,
-      "Black had a winning position, but the game is now balanced.",
-      "Les Noirs avaient une position gagnante, mais la partie est maintenant équilibrée."
-    ],
+    [7, 1, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       7,
       1,
@@ -3256,14 +3249,7 @@
       "Black had a winning position, but the game is now balanced.",
       "Les Noirs avaient une position gagnante, mais la partie est maintenant équilibrée."
     ],
-    [
-      7,
-      1,
-      "b",
-      2,
-      "Black had a winning position, but the game is now balanced.",
-      "Les Noirs avaient une position gagnante, mais la partie est maintenant équilibrée."
-    ],
+    [7, 1, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [
       7,
       2,
@@ -3277,8 +3263,8 @@
       2,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       7,
@@ -3293,8 +3279,8 @@
       2,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       7,
@@ -3309,8 +3295,8 @@
       3,
       "w",
       2,
-      "Black had a winning position, but now White has a clear advantage.",
-      "Les Noirs avaient une position gagnante, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       7,
@@ -3325,8 +3311,8 @@
       3,
       "b",
       2,
-      "Black had a winning position, but now White has a clear advantage.",
-      "Les Noirs avaient une position gagnante, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       7,
@@ -3341,8 +3327,8 @@
       4,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       7,
@@ -3357,8 +3343,8 @@
       4,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       7,
@@ -3373,8 +3359,8 @@
       5,
       "w",
       2,
-      "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       7,
@@ -3389,8 +3375,8 @@
       5,
       "b",
       2,
-      "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       7,
@@ -3405,7 +3391,7 @@
       6,
       "w",
       7,
-      "Black’s advantage shrinks to a clear advantage.",
+      "Down from a winning position to a clear advantage for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -3421,7 +3407,7 @@
       6,
       "b",
       7,
-      "Black’s advantage shrinks to a clear advantage.",
+      "Down from a winning position to a clear advantage for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -3437,8 +3423,8 @@
       7,
       "w",
       2,
-      "Black still has a winning position.",
-      "Les Noirs ont toujours une position gagnante."
+      "Nothing changes: Black has a winning position.",
+      "Rien ne change : les Noirs ont toujours une position gagnante."
     ],
     [
       7,
@@ -3453,8 +3439,8 @@
       7,
       "b",
       2,
-      "Black still has a winning position.",
-      "Les Noirs ont toujours une position gagnante."
+      "Nothing changes: Black has a winning position.",
+      "Rien ne change : les Noirs ont toujours une position gagnante."
     ],
     [
       7,
@@ -3469,8 +3455,8 @@
       8,
       "w",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       7,
@@ -3485,8 +3471,8 @@
       8,
       "b",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       7,
@@ -3501,8 +3487,8 @@
       9,
       "w",
       2,
-      "Black goes from a winning position to a mate in 2.",
-      "Les Noirs passent d’une position gagnante à un mat en 2."
+      "Black’s lead grows: a mate in 2 now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat en 2."
     ],
     [
       7,
@@ -3517,40 +3503,40 @@
       9,
       "b",
       2,
-      "Black goes from a winning position to a mate in 2.",
-      "Les Noirs passent d’une position gagnante à un mat en 2."
+      "Black’s lead grows: a mate in 2 now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat en 2."
     ],
     [
       7,
       10,
       "w",
       1,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "The gap widens: now Black has a forced mate.",
+      "L’écart se creuse : maintenant les Noirs ont un mat forcé."
     ],
     [
       7,
       10,
       "w",
       7,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "Even better for Black: a forced mate now.",
+      "Encore mieux pour les Noirs : un mat forcé désormais."
     ],
     [
       7,
       10,
       "b",
       1,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "The gap widens: now Black has a forced mate.",
+      "L’écart se creuse : maintenant les Noirs ont un mat forcé."
     ],
     [
       7,
       10,
       "b",
       7,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "Even better for Black: a forced mate now.",
+      "Encore mieux pour les Noirs : un mat forcé désormais."
     ],
     [
       7,
@@ -3565,8 +3551,8 @@
       11,
       "w",
       2,
-      "Black had a winning position, but now White has a forced mate.",
-      "Les Noirs avaient une position gagnante, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       7,
@@ -3581,8 +3567,8 @@
       11,
       "b",
       2,
-      "Black had a winning position, but now White has a forced mate.",
-      "Les Noirs avaient une position gagnante, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       7,
@@ -3597,8 +3583,8 @@
       12,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       7,
@@ -3613,8 +3599,8 @@
       12,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       7,
@@ -3629,8 +3615,8 @@
       13,
       "w",
       2,
-      "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       7,
@@ -3645,8 +3631,8 @@
       13,
       "b",
       2,
-      "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       7,
@@ -3661,8 +3647,8 @@
       14,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       7,
@@ -3677,8 +3663,8 @@
       14,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       7,
@@ -3693,8 +3679,8 @@
       15,
       "w",
       2,
-      "Black still has a winning position.",
-      "Les Noirs ont toujours une position gagnante."
+      "Nothing changes: Black has a winning position.",
+      "Rien ne change : les Noirs ont toujours une position gagnante."
     ],
     [
       7,
@@ -3709,8 +3695,8 @@
       15,
       "b",
       2,
-      "Black still has a winning position.",
-      "Les Noirs ont toujours une position gagnante."
+      "Nothing changes: Black has a winning position.",
+      "Rien ne change : les Noirs ont toujours une position gagnante."
     ],
     [
       8,
@@ -3720,14 +3706,7 @@
       "White had a mate in 3, but the game is now balanced.",
       "Les Blancs avaient un mat en 3, mais la partie est maintenant équilibrée."
     ],
-    [
-      8,
-      0,
-      "w",
-      2,
-      "White had a mate in 3, but the game is now balanced.",
-      "Les Blancs avaient un mat en 3, mais la partie est maintenant équilibrée."
-    ],
+    [8, 0, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       8,
       0,
@@ -3736,18 +3715,11 @@
       "White had a mate in 3, but the game is now balanced.",
       "Les Blancs avaient un mat en 3, mais la partie est maintenant équilibrée."
     ],
-    [
-      8,
-      0,
-      "b",
-      2,
-      "White had a mate in 3, but the game is now balanced.",
-      "Les Blancs avaient un mat en 3, mais la partie est maintenant équilibrée."
-    ],
+    [8, 0, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [8, 1, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [8, 1, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [8, 1, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [8, 1, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [8, 1, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [8, 1, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       8,
       2,
@@ -3761,8 +3733,8 @@
       2,
       "w",
       2,
-      "White had a mate in 3; now it’s only a slight edge.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       8,
@@ -3777,8 +3749,8 @@
       2,
       "b",
       2,
-      "White had a mate in 3; now it’s only a slight edge.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       8,
@@ -3793,7 +3765,7 @@
       3,
       "w",
       7,
-      "White’s advantage shrinks to a clear advantage.",
+      "Down from a mate in 3 to a clear advantage for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -3809,7 +3781,7 @@
       3,
       "b",
       7,
-      "White’s advantage shrinks to a clear advantage.",
+      "Down from a mate in 3 to a clear advantage for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -3825,8 +3797,8 @@
       4,
       "w",
       2,
-      "White had a mate in 3; now it’s only a winning position.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’une position gagnante."
+      "Some of White’s advantage slips away: only a winning position left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’une position gagnante."
     ],
     [
       8,
@@ -3841,8 +3813,8 @@
       4,
       "b",
       2,
-      "White had a mate in 3; now it’s only a winning position.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’une position gagnante."
+      "Some of White’s advantage slips away: only a winning position left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’une position gagnante."
     ],
     [
       8,
@@ -3857,8 +3829,8 @@
       5,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       8,
@@ -3873,8 +3845,8 @@
       5,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       8,
@@ -3889,8 +3861,8 @@
       6,
       "w",
       2,
-      "White had a mate in 3, but now Black has a clear advantage.",
-      "Les Blancs avaient un mat en 3, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       8,
@@ -3905,8 +3877,8 @@
       6,
       "b",
       2,
-      "White had a mate in 3, but now Black has a clear advantage.",
-      "Les Blancs avaient un mat en 3, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       8,
@@ -3921,8 +3893,8 @@
       7,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       8,
@@ -3937,13 +3909,27 @@
       7,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [8, 8, "w", 0, "White still has a mate in 3.", "Les Blancs ont toujours un mat en 3."],
-    [8, 8, "w", 2, "White still has a mate in 3.", "Les Blancs ont toujours un mat en 3."],
+    [
+      8,
+      8,
+      "w",
+      2,
+      "Nothing changes: White has a mate in 3.",
+      "Rien ne change : les Blancs ont toujours un mat en 3."
+    ],
     [8, 8, "b", 0, "White still has a mate in 3.", "Les Blancs ont toujours un mat en 3."],
-    [8, 8, "b", 2, "White still has a mate in 3.", "Les Blancs ont toujours un mat en 3."],
+    [
+      8,
+      8,
+      "b",
+      2,
+      "Nothing changes: White has a mate in 3.",
+      "Rien ne change : les Blancs ont toujours un mat en 3."
+    ],
     [
       8,
       9,
@@ -3957,8 +3943,8 @@
       9,
       "w",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       8,
@@ -3973,8 +3959,8 @@
       9,
       "b",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       8,
@@ -3989,8 +3975,8 @@
       10,
       "w",
       2,
-      "White had a mate in 3, but now Black has a forced mate.",
-      "Les Blancs avaient un mat en 3, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       8,
@@ -4005,8 +3991,8 @@
       10,
       "b",
       2,
-      "White had a mate in 3, but now Black has a forced mate.",
-      "Les Blancs avaient un mat en 3, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [8, 11, "w", 1, "White keeps a forced mate.", "Les Blancs gardent un mat forcé."],
     [8, 11, "w", 7, "White keeps a forced mate.", "Les Blancs gardent un mat forcé."],
@@ -4025,8 +4011,8 @@
       12,
       "w",
       2,
-      "White had a mate in 3; now it’s only a slight edge.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       8,
@@ -4041,8 +4027,8 @@
       12,
       "b",
       2,
-      "White had a mate in 3; now it’s only a slight edge.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       8,
@@ -4057,8 +4043,8 @@
       13,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       8,
@@ -4073,8 +4059,8 @@
       13,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       8,
@@ -4089,8 +4075,8 @@
       14,
       "w",
       2,
-      "White had a mate in 3; now it’s only a winning position.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’une position gagnante."
+      "Some of White’s advantage slips away: only a winning position left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’une position gagnante."
     ],
     [
       8,
@@ -4105,8 +4091,8 @@
       14,
       "b",
       2,
-      "White had a mate in 3; now it’s only a winning position.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’une position gagnante."
+      "Some of White’s advantage slips away: only a winning position left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’une position gagnante."
     ],
     [
       8,
@@ -4121,8 +4107,8 @@
       15,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       8,
@@ -4137,13 +4123,13 @@
       15,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [9, 0, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [9, 0, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [9, 0, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [9, 0, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [9, 0, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [9, 0, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       9,
       1,
@@ -4152,14 +4138,7 @@
       "Black had a mate in 2, but the game is now balanced.",
       "Les Noirs avaient un mat en 2, mais la partie est maintenant équilibrée."
     ],
-    [
-      9,
-      1,
-      "w",
-      2,
-      "Black had a mate in 2, but the game is now balanced.",
-      "Les Noirs avaient un mat en 2, mais la partie est maintenant équilibrée."
-    ],
+    [9, 1, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       9,
       1,
@@ -4168,14 +4147,7 @@
       "Black had a mate in 2, but the game is now balanced.",
       "Les Noirs avaient un mat en 2, mais la partie est maintenant équilibrée."
     ],
-    [
-      9,
-      1,
-      "b",
-      2,
-      "Black had a mate in 2, but the game is now balanced.",
-      "Les Noirs avaient un mat en 2, mais la partie est maintenant équilibrée."
-    ],
+    [9, 1, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [
       9,
       2,
@@ -4189,8 +4161,8 @@
       2,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       9,
@@ -4205,8 +4177,8 @@
       2,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       9,
@@ -4221,8 +4193,8 @@
       3,
       "w",
       2,
-      "Black had a mate in 2, but now White has a clear advantage.",
-      "Les Noirs avaient un mat en 2, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       9,
@@ -4237,8 +4209,8 @@
       3,
       "b",
       2,
-      "Black had a mate in 2, but now White has a clear advantage.",
-      "Les Noirs avaient un mat en 2, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       9,
@@ -4253,8 +4225,8 @@
       4,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       9,
@@ -4269,8 +4241,8 @@
       4,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       9,
@@ -4285,8 +4257,8 @@
       5,
       "w",
       2,
-      "Black had a mate in 2; now it’s only a slight edge.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       9,
@@ -4301,8 +4273,8 @@
       5,
       "b",
       2,
-      "Black had a mate in 2; now it’s only a slight edge.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       9,
@@ -4317,7 +4289,7 @@
       6,
       "w",
       7,
-      "Black’s advantage shrinks to a clear advantage.",
+      "Down from a mate in 2 to a clear advantage for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -4333,7 +4305,7 @@
       6,
       "b",
       7,
-      "Black’s advantage shrinks to a clear advantage.",
+      "Down from a mate in 2 to a clear advantage for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -4349,8 +4321,8 @@
       7,
       "w",
       2,
-      "Black had a mate in 2; now it’s only a winning position.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’une position gagnante."
+      "Some of Black’s advantage slips away: only a winning position left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’une position gagnante."
     ],
     [
       9,
@@ -4365,8 +4337,8 @@
       7,
       "b",
       2,
-      "Black had a mate in 2; now it’s only a winning position.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’une position gagnante."
+      "Some of Black’s advantage slips away: only a winning position left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’une position gagnante."
     ],
     [
       9,
@@ -4381,8 +4353,8 @@
       8,
       "w",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       9,
@@ -4397,13 +4369,27 @@
       8,
       "b",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [9, 9, "w", 0, "Black still has a mate in 2.", "Les Noirs ont toujours un mat en 2."],
-    [9, 9, "w", 2, "Black still has a mate in 2.", "Les Noirs ont toujours un mat en 2."],
+    [
+      9,
+      9,
+      "w",
+      2,
+      "Nothing changes: Black has a mate in 2.",
+      "Rien ne change : les Noirs ont toujours un mat en 2."
+    ],
     [9, 9, "b", 0, "Black still has a mate in 2.", "Les Noirs ont toujours un mat en 2."],
-    [9, 9, "b", 2, "Black still has a mate in 2.", "Les Noirs ont toujours un mat en 2."],
+    [
+      9,
+      9,
+      "b",
+      2,
+      "Nothing changes: Black has a mate in 2.",
+      "Rien ne change : les Noirs ont toujours un mat en 2."
+    ],
     [9, 10, "w", 1, "Black keeps a forced mate.", "Les Noirs gardent un mat forcé."],
     [9, 10, "w", 7, "Black keeps a forced mate.", "Les Noirs gardent un mat forcé."],
     [9, 10, "b", 1, "Black keeps a forced mate.", "Les Noirs gardent un mat forcé."],
@@ -4421,8 +4407,8 @@
       11,
       "w",
       2,
-      "Black had a mate in 2, but now White has a forced mate.",
-      "Les Noirs avaient un mat en 2, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       9,
@@ -4437,8 +4423,8 @@
       11,
       "b",
       2,
-      "Black had a mate in 2, but now White has a forced mate.",
-      "Les Noirs avaient un mat en 2, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       9,
@@ -4453,8 +4439,8 @@
       12,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       9,
@@ -4469,8 +4455,8 @@
       12,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       9,
@@ -4485,8 +4471,8 @@
       13,
       "w",
       2,
-      "Black had a mate in 2; now it’s only a slight edge.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       9,
@@ -4501,8 +4487,8 @@
       13,
       "b",
       2,
-      "Black had a mate in 2; now it’s only a slight edge.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       9,
@@ -4517,8 +4503,8 @@
       14,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       9,
@@ -4533,8 +4519,8 @@
       14,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       9,
@@ -4549,8 +4535,8 @@
       15,
       "w",
       2,
-      "Black had a mate in 2; now it’s only a winning position.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’une position gagnante."
+      "Some of Black’s advantage slips away: only a winning position left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’une position gagnante."
     ],
     [
       9,
@@ -4565,8 +4551,8 @@
       15,
       "b",
       2,
-      "Black had a mate in 2; now it’s only a winning position.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’une position gagnante."
+      "Some of Black’s advantage slips away: only a winning position left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’une position gagnante."
     ],
     [
       10,
@@ -4576,14 +4562,7 @@
       "Black had a forced mate, but the game is now balanced.",
       "Les Noirs avaient un mat forcé, mais la partie est maintenant équilibrée."
     ],
-    [
-      10,
-      0,
-      "w",
-      2,
-      "Black had a forced mate, but the game is now balanced.",
-      "Les Noirs avaient un mat forcé, mais la partie est maintenant équilibrée."
-    ],
+    [10, 0, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       10,
       0,
@@ -4592,18 +4571,11 @@
       "Black had a forced mate, but the game is now balanced.",
       "Les Noirs avaient un mat forcé, mais la partie est maintenant équilibrée."
     ],
-    [
-      10,
-      0,
-      "b",
-      2,
-      "Black had a forced mate, but the game is now balanced.",
-      "Les Noirs avaient un mat forcé, mais la partie est maintenant équilibrée."
-    ],
+    [10, 0, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [10, 1, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [10, 1, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [10, 1, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [10, 1, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [10, 1, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [10, 1, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       10,
       2,
@@ -4617,8 +4589,8 @@
       2,
       "w",
       2,
-      "Black had a forced mate, but now White has a slight edge.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont un léger avantage."
+      "A complete turnaround: now White has a slight edge.",
+      "Retournement complet : maintenant les Blancs ont un léger avantage."
     ],
     [
       10,
@@ -4633,8 +4605,8 @@
       2,
       "b",
       2,
-      "Black had a forced mate, but now White has a slight edge.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont un léger avantage."
+      "A complete turnaround: now White has a slight edge.",
+      "Retournement complet : maintenant les Blancs ont un léger avantage."
     ],
     [
       10,
@@ -4649,8 +4621,8 @@
       3,
       "w",
       7,
-      "The tables turn: now White has a clear advantage.",
-      "La partie bascule : maintenant les Blancs ont un net avantage."
+      "Everything changes: now White has a clear advantage.",
+      "Tout change : les Blancs ont un net avantage."
     ],
     [
       10,
@@ -4665,8 +4637,8 @@
       3,
       "b",
       7,
-      "The tables turn: now White has a clear advantage.",
-      "La partie bascule : maintenant les Blancs ont un net avantage."
+      "Everything changes: now White has a clear advantage.",
+      "Tout change : les Blancs ont un net avantage."
     ],
     [
       10,
@@ -4681,8 +4653,8 @@
       4,
       "w",
       2,
-      "Black had a forced mate, but now White has a winning position.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont une position gagnante."
+      "A complete turnaround: now White has a winning position.",
+      "Retournement complet : maintenant les Blancs ont une position gagnante."
     ],
     [
       10,
@@ -4697,8 +4669,8 @@
       4,
       "b",
       2,
-      "Black had a forced mate, but now White has a winning position.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont une position gagnante."
+      "A complete turnaround: now White has a winning position.",
+      "Retournement complet : maintenant les Blancs ont une position gagnante."
     ],
     [
       10,
@@ -4713,7 +4685,7 @@
       5,
       "w",
       7,
-      "Black’s advantage shrinks to a slight edge.",
+      "Down from a forced mate to a slight edge for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -4729,7 +4701,7 @@
       5,
       "b",
       7,
-      "Black’s advantage shrinks to a slight edge.",
+      "Down from a forced mate to a slight edge for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -4745,8 +4717,8 @@
       6,
       "w",
       2,
-      "Black had a forced mate; now it’s only a clear advantage.",
-      "Les Noirs avaient un mat forcé, il ne leur reste qu’un net avantage."
+      "Some of Black’s advantage slips away: only a clear advantage left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un net avantage."
     ],
     [
       10,
@@ -4761,8 +4733,8 @@
       6,
       "b",
       2,
-      "Black had a forced mate; now it’s only a clear advantage.",
-      "Les Noirs avaient un mat forcé, il ne leur reste qu’un net avantage."
+      "Some of Black’s advantage slips away: only a clear advantage left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un net avantage."
     ],
     [
       10,
@@ -4777,7 +4749,7 @@
       7,
       "w",
       7,
-      "Black’s advantage shrinks to a winning position.",
+      "Down from a forced mate to a winning position for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’une position gagnante."
     ],
     [
@@ -4793,7 +4765,7 @@
       7,
       "b",
       7,
-      "Black’s advantage shrinks to a winning position.",
+      "Down from a forced mate to a winning position for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’une position gagnante."
     ],
     [
@@ -4809,8 +4781,8 @@
       8,
       "w",
       2,
-      "Black had a forced mate, but now White has a mate in 3.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont un mat en 3."
+      "A complete turnaround: now White has a mate in 3.",
+      "Retournement complet : maintenant les Blancs ont un mat en 3."
     ],
     [
       10,
@@ -4825,17 +4797,31 @@
       8,
       "b",
       2,
-      "Black had a forced mate, but now White has a mate in 3.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont un mat en 3."
+      "A complete turnaround: now White has a mate in 3.",
+      "Retournement complet : maintenant les Blancs ont un mat en 3."
     ],
     [10, 9, "w", 1, "Black keeps a mate in 2.", "Les Noirs gardent un mat en 2."],
     [10, 9, "w", 7, "Black keeps a mate in 2.", "Les Noirs gardent un mat en 2."],
     [10, 9, "b", 1, "Black keeps a mate in 2.", "Les Noirs gardent un mat en 2."],
     [10, 9, "b", 7, "Black keeps a mate in 2.", "Les Noirs gardent un mat en 2."],
     [10, 10, "w", 0, "Black still has a forced mate.", "Les Noirs ont toujours un mat forcé."],
-    [10, 10, "w", 2, "Black still has a forced mate.", "Les Noirs ont toujours un mat forcé."],
+    [
+      10,
+      10,
+      "w",
+      2,
+      "Nothing changes: Black has a forced mate.",
+      "Rien ne change : les Noirs ont toujours un mat forcé."
+    ],
     [10, 10, "b", 0, "Black still has a forced mate.", "Les Noirs ont toujours un mat forcé."],
-    [10, 10, "b", 2, "Black still has a forced mate.", "Les Noirs ont toujours un mat forcé."],
+    [
+      10,
+      10,
+      "b",
+      2,
+      "Nothing changes: Black has a forced mate.",
+      "Rien ne change : les Noirs ont toujours un mat forcé."
+    ],
     [
       10,
       11,
@@ -4849,8 +4835,8 @@
       11,
       "w",
       7,
-      "The tables turn: now White has a forced mate.",
-      "La partie bascule : maintenant les Blancs ont un mat forcé."
+      "Everything changes: now White has a forced mate.",
+      "Tout change : les Blancs ont un mat forcé."
     ],
     [
       10,
@@ -4865,8 +4851,8 @@
       11,
       "b",
       7,
-      "The tables turn: now White has a forced mate.",
-      "La partie bascule : maintenant les Blancs ont un mat forcé."
+      "Everything changes: now White has a forced mate.",
+      "Tout change : les Blancs ont un mat forcé."
     ],
     [
       10,
@@ -4881,8 +4867,8 @@
       12,
       "w",
       2,
-      "Black had a forced mate, but now White has a slight edge.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont un léger avantage."
+      "A complete turnaround: now White has a slight edge.",
+      "Retournement complet : maintenant les Blancs ont un léger avantage."
     ],
     [
       10,
@@ -4897,8 +4883,8 @@
       12,
       "b",
       2,
-      "Black had a forced mate, but now White has a slight edge.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont un léger avantage."
+      "A complete turnaround: now White has a slight edge.",
+      "Retournement complet : maintenant les Blancs ont un léger avantage."
     ],
     [
       10,
@@ -4913,7 +4899,7 @@
       13,
       "w",
       7,
-      "Black’s advantage shrinks to a slight edge.",
+      "Down from a forced mate to a slight edge for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -4929,7 +4915,7 @@
       13,
       "b",
       7,
-      "Black’s advantage shrinks to a slight edge.",
+      "Down from a forced mate to a slight edge for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -4945,8 +4931,8 @@
       14,
       "w",
       2,
-      "Black had a forced mate, but now White has a winning position.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont une position gagnante."
+      "A complete turnaround: now White has a winning position.",
+      "Retournement complet : maintenant les Blancs ont une position gagnante."
     ],
     [
       10,
@@ -4961,8 +4947,8 @@
       14,
       "b",
       2,
-      "Black had a forced mate, but now White has a winning position.",
-      "Les Noirs avaient un mat forcé, mais maintenant les Blancs ont une position gagnante."
+      "A complete turnaround: now White has a winning position.",
+      "Retournement complet : maintenant les Blancs ont une position gagnante."
     ],
     [
       10,
@@ -4977,7 +4963,7 @@
       15,
       "w",
       7,
-      "Black’s advantage shrinks to a winning position.",
+      "Down from a forced mate to a winning position for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’une position gagnante."
     ],
     [
@@ -4993,13 +4979,13 @@
       15,
       "b",
       7,
-      "Black’s advantage shrinks to a winning position.",
+      "Down from a forced mate to a winning position for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’une position gagnante."
     ],
     [11, 0, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [11, 0, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [11, 0, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [11, 0, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [11, 0, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [11, 0, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       11,
       1,
@@ -5008,14 +4994,7 @@
       "White had a forced mate, but the game is now balanced.",
       "Les Blancs avaient un mat forcé, mais la partie est maintenant équilibrée."
     ],
-    [
-      11,
-      1,
-      "w",
-      2,
-      "White had a forced mate, but the game is now balanced.",
-      "Les Blancs avaient un mat forcé, mais la partie est maintenant équilibrée."
-    ],
+    [11, 1, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       11,
       1,
@@ -5024,14 +5003,7 @@
       "White had a forced mate, but the game is now balanced.",
       "Les Blancs avaient un mat forcé, mais la partie est maintenant équilibrée."
     ],
-    [
-      11,
-      1,
-      "b",
-      2,
-      "White had a forced mate, but the game is now balanced.",
-      "Les Blancs avaient un mat forcé, mais la partie est maintenant équilibrée."
-    ],
+    [11, 1, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [
       11,
       2,
@@ -5045,7 +5017,7 @@
       2,
       "w",
       7,
-      "White’s advantage shrinks to a slight edge.",
+      "Down from a forced mate to a slight edge for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -5061,7 +5033,7 @@
       2,
       "b",
       7,
-      "White’s advantage shrinks to a slight edge.",
+      "Down from a forced mate to a slight edge for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -5077,8 +5049,8 @@
       3,
       "w",
       2,
-      "White had a forced mate; now it’s only a clear advantage.",
-      "Les Blancs avaient un mat forcé, il ne leur reste qu’un net avantage."
+      "Some of White’s advantage slips away: only a clear advantage left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un net avantage."
     ],
     [
       11,
@@ -5093,8 +5065,8 @@
       3,
       "b",
       2,
-      "White had a forced mate; now it’s only a clear advantage.",
-      "Les Blancs avaient un mat forcé, il ne leur reste qu’un net avantage."
+      "Some of White’s advantage slips away: only a clear advantage left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un net avantage."
     ],
     [
       11,
@@ -5109,7 +5081,7 @@
       4,
       "w",
       7,
-      "White’s advantage shrinks to a winning position.",
+      "Down from a forced mate to a winning position for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’une position gagnante."
     ],
     [
@@ -5125,7 +5097,7 @@
       4,
       "b",
       7,
-      "White’s advantage shrinks to a winning position.",
+      "Down from a forced mate to a winning position for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’une position gagnante."
     ],
     [
@@ -5141,8 +5113,8 @@
       5,
       "w",
       2,
-      "White had a forced mate, but now Black has a slight edge.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont un léger avantage."
+      "A complete turnaround: now Black has a slight edge.",
+      "Retournement complet : maintenant les Noirs ont un léger avantage."
     ],
     [
       11,
@@ -5157,8 +5129,8 @@
       5,
       "b",
       2,
-      "White had a forced mate, but now Black has a slight edge.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont un léger avantage."
+      "A complete turnaround: now Black has a slight edge.",
+      "Retournement complet : maintenant les Noirs ont un léger avantage."
     ],
     [
       11,
@@ -5173,8 +5145,8 @@
       6,
       "w",
       7,
-      "The tables turn: now Black has a clear advantage.",
-      "La partie bascule : maintenant les Noirs ont un net avantage."
+      "Everything changes: now Black has a clear advantage.",
+      "Tout change : les Noirs ont un net avantage."
     ],
     [
       11,
@@ -5189,8 +5161,8 @@
       6,
       "b",
       7,
-      "The tables turn: now Black has a clear advantage.",
-      "La partie bascule : maintenant les Noirs ont un net avantage."
+      "Everything changes: now Black has a clear advantage.",
+      "Tout change : les Noirs ont un net avantage."
     ],
     [
       11,
@@ -5205,8 +5177,8 @@
       7,
       "w",
       2,
-      "White had a forced mate, but now Black has a winning position.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont une position gagnante."
+      "A complete turnaround: now Black has a winning position.",
+      "Retournement complet : maintenant les Noirs ont une position gagnante."
     ],
     [
       11,
@@ -5221,8 +5193,8 @@
       7,
       "b",
       2,
-      "White had a forced mate, but now Black has a winning position.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont une position gagnante."
+      "A complete turnaround: now Black has a winning position.",
+      "Retournement complet : maintenant les Noirs ont une position gagnante."
     ],
     [11, 8, "w", 1, "White keeps a mate in 3.", "Les Blancs gardent un mat en 3."],
     [11, 8, "w", 7, "White keeps a mate in 3.", "Les Blancs gardent un mat en 3."],
@@ -5241,8 +5213,8 @@
       9,
       "w",
       2,
-      "White had a forced mate, but now Black has a mate in 2.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont un mat en 2."
+      "A complete turnaround: now Black has a mate in 2.",
+      "Retournement complet : maintenant les Noirs ont un mat en 2."
     ],
     [
       11,
@@ -5257,8 +5229,8 @@
       9,
       "b",
       2,
-      "White had a forced mate, but now Black has a mate in 2.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont un mat en 2."
+      "A complete turnaround: now Black has a mate in 2.",
+      "Retournement complet : maintenant les Noirs ont un mat en 2."
     ],
     [
       11,
@@ -5273,8 +5245,8 @@
       10,
       "w",
       7,
-      "The tables turn: now Black has a forced mate.",
-      "La partie bascule : maintenant les Noirs ont un mat forcé."
+      "Everything changes: now Black has a forced mate.",
+      "Tout change : les Noirs ont un mat forcé."
     ],
     [
       11,
@@ -5289,13 +5261,27 @@
       10,
       "b",
       7,
-      "The tables turn: now Black has a forced mate.",
-      "La partie bascule : maintenant les Noirs ont un mat forcé."
+      "Everything changes: now Black has a forced mate.",
+      "Tout change : les Noirs ont un mat forcé."
     ],
     [11, 11, "w", 0, "White still has a forced mate.", "Les Blancs ont toujours un mat forcé."],
-    [11, 11, "w", 2, "White still has a forced mate.", "Les Blancs ont toujours un mat forcé."],
+    [
+      11,
+      11,
+      "w",
+      2,
+      "Nothing changes: White has a forced mate.",
+      "Rien ne change : les Blancs ont toujours un mat forcé."
+    ],
     [11, 11, "b", 0, "White still has a forced mate.", "Les Blancs ont toujours un mat forcé."],
-    [11, 11, "b", 2, "White still has a forced mate.", "Les Blancs ont toujours un mat forcé."],
+    [
+      11,
+      11,
+      "b",
+      2,
+      "Nothing changes: White has a forced mate.",
+      "Rien ne change : les Blancs ont toujours un mat forcé."
+    ],
     [
       11,
       12,
@@ -5309,7 +5295,7 @@
       12,
       "w",
       7,
-      "White’s advantage shrinks to a slight edge.",
+      "Down from a forced mate to a slight edge for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -5325,7 +5311,7 @@
       12,
       "b",
       7,
-      "White’s advantage shrinks to a slight edge.",
+      "Down from a forced mate to a slight edge for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un léger avantage."
     ],
     [
@@ -5341,8 +5327,8 @@
       13,
       "w",
       2,
-      "White had a forced mate, but now Black has a slight edge.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont un léger avantage."
+      "A complete turnaround: now Black has a slight edge.",
+      "Retournement complet : maintenant les Noirs ont un léger avantage."
     ],
     [
       11,
@@ -5357,8 +5343,8 @@
       13,
       "b",
       2,
-      "White had a forced mate, but now Black has a slight edge.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont un léger avantage."
+      "A complete turnaround: now Black has a slight edge.",
+      "Retournement complet : maintenant les Noirs ont un léger avantage."
     ],
     [
       11,
@@ -5373,7 +5359,7 @@
       14,
       "w",
       7,
-      "White’s advantage shrinks to a winning position.",
+      "Down from a forced mate to a winning position for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’une position gagnante."
     ],
     [
@@ -5389,7 +5375,7 @@
       14,
       "b",
       7,
-      "White’s advantage shrinks to a winning position.",
+      "Down from a forced mate to a winning position for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’une position gagnante."
     ],
     [
@@ -5405,8 +5391,8 @@
       15,
       "w",
       2,
-      "White had a forced mate, but now Black has a winning position.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont une position gagnante."
+      "A complete turnaround: now Black has a winning position.",
+      "Retournement complet : maintenant les Noirs ont une position gagnante."
     ],
     [
       11,
@@ -5421,8 +5407,8 @@
       15,
       "b",
       2,
-      "White had a forced mate, but now Black has a winning position.",
-      "Les Blancs avaient un mat forcé, mais maintenant les Noirs ont une position gagnante."
+      "A complete turnaround: now Black has a winning position.",
+      "Retournement complet : maintenant les Noirs ont une position gagnante."
     ],
     [
       12,
@@ -5432,14 +5418,7 @@
       "White had a slight edge, but the game is now balanced.",
       "Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      12,
-      0,
-      "w",
-      2,
-      "White had a slight edge, but the game is now balanced.",
-      "Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée."
-    ],
+    [12, 0, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       12,
       0,
@@ -5448,53 +5427,60 @@
       "White had a slight edge, but the game is now balanced.",
       "Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      12,
-      0,
-      "b",
-      2,
-      "White had a slight edge, but the game is now balanced.",
-      "Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée."
-    ],
+    [12, 0, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [12, 1, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [12, 1, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [12, 1, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [12, 1, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [12, 1, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [12, 1, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [12, 2, "w", 0, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
-    [12, 2, "w", 2, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
+    [
+      12,
+      2,
+      "w",
+      2,
+      "Nothing changes: White has a slight edge.",
+      "Rien ne change : les Blancs ont toujours un léger avantage."
+    ],
     [12, 2, "b", 0, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
-    [12, 2, "b", 2, "White still has a slight edge.", "Les Blancs ont toujours un léger avantage."],
+    [
+      12,
+      2,
+      "b",
+      2,
+      "Nothing changes: White has a slight edge.",
+      "Rien ne change : les Blancs ont toujours un léger avantage."
+    ],
     [
       12,
       3,
       "w",
       1,
-      "White pulls further ahead: now White has a clear advantage.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un net avantage."
+      "The gap widens: now White has a clear advantage.",
+      "L’écart se creuse : maintenant les Blancs ont un net avantage."
     ],
     [
       12,
       3,
       "w",
       7,
-      "White pulls further ahead: now White has a clear advantage.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un net avantage."
+      "Even better for White: a clear advantage now.",
+      "Encore mieux pour les Blancs : un net avantage désormais."
     ],
     [
       12,
       3,
       "b",
       1,
-      "White pulls further ahead: now White has a clear advantage.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un net avantage."
+      "The gap widens: now White has a clear advantage.",
+      "L’écart se creuse : maintenant les Blancs ont un net avantage."
     ],
     [
       12,
       3,
       "b",
       7,
-      "White pulls further ahead: now White has a clear advantage.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un net avantage."
+      "Even better for White: a clear advantage now.",
+      "Encore mieux pour les Blancs : un net avantage désormais."
     ],
     [
       12,
@@ -5509,8 +5495,8 @@
       4,
       "w",
       2,
-      "White goes from a slight edge to a winning position.",
-      "Les Blancs passent d’un léger avantage à une position gagnante."
+      "White’s lead grows: a winning position now.",
+      "L’avantage grandit : les Blancs ont maintenant une position gagnante."
     ],
     [
       12,
@@ -5525,8 +5511,8 @@
       4,
       "b",
       2,
-      "White goes from a slight edge to a winning position.",
-      "Les Blancs passent d’un léger avantage à une position gagnante."
+      "White’s lead grows: a winning position now.",
+      "L’avantage grandit : les Blancs ont maintenant une position gagnante."
     ],
     [
       12,
@@ -5541,8 +5527,8 @@
       5,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       12,
@@ -5557,8 +5543,8 @@
       5,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       12,
@@ -5573,8 +5559,8 @@
       6,
       "w",
       2,
-      "White had a slight edge, but now Black has a clear advantage.",
-      "Les Blancs avaient un léger avantage, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       12,
@@ -5589,8 +5575,8 @@
       6,
       "b",
       2,
-      "White had a slight edge, but now Black has a clear advantage.",
-      "Les Blancs avaient un léger avantage, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       12,
@@ -5605,8 +5591,8 @@
       7,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       12,
@@ -5621,8 +5607,8 @@
       7,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       12,
@@ -5637,8 +5623,8 @@
       8,
       "w",
       2,
-      "White goes from a slight edge to a mate in 3.",
-      "Les Blancs passent d’un léger avantage à un mat en 3."
+      "White’s lead grows: a mate in 3 now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat en 3."
     ],
     [
       12,
@@ -5653,8 +5639,8 @@
       8,
       "b",
       2,
-      "White goes from a slight edge to a mate in 3.",
-      "Les Blancs passent d’un léger avantage à un mat en 3."
+      "White’s lead grows: a mate in 3 now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat en 3."
     ],
     [
       12,
@@ -5669,8 +5655,8 @@
       9,
       "w",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       12,
@@ -5685,8 +5671,8 @@
       9,
       "b",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       12,
@@ -5701,8 +5687,8 @@
       10,
       "w",
       2,
-      "White had a slight edge, but now Black has a forced mate.",
-      "Les Blancs avaient un léger avantage, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       12,
@@ -5717,40 +5703,40 @@
       10,
       "b",
       2,
-      "White had a slight edge, but now Black has a forced mate.",
-      "Les Blancs avaient un léger avantage, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       12,
       11,
       "w",
       1,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "The gap widens: now White has a forced mate.",
+      "L’écart se creuse : maintenant les Blancs ont un mat forcé."
     ],
     [
       12,
       11,
       "w",
       7,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "Even better for White: a forced mate now.",
+      "Encore mieux pour les Blancs : un mat forcé désormais."
     ],
     [
       12,
       11,
       "b",
       1,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "The gap widens: now White has a forced mate.",
+      "L’écart se creuse : maintenant les Blancs ont un mat forcé."
     ],
     [
       12,
       11,
       "b",
       7,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "Even better for White: a forced mate now.",
+      "Encore mieux pour les Blancs : un mat forcé désormais."
     ],
     [
       12,
@@ -5765,8 +5751,8 @@
       12,
       "w",
       2,
-      "White still has a slight edge.",
-      "Les Blancs ont toujours un léger avantage."
+      "Nothing changes: White has a slight edge.",
+      "Rien ne change : les Blancs ont toujours un léger avantage."
     ],
     [
       12,
@@ -5781,8 +5767,8 @@
       12,
       "b",
       2,
-      "White still has a slight edge.",
-      "Les Blancs ont toujours un léger avantage."
+      "Nothing changes: White has a slight edge.",
+      "Rien ne change : les Blancs ont toujours un léger avantage."
     ],
     [
       12,
@@ -5797,8 +5783,8 @@
       13,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       12,
@@ -5813,8 +5799,8 @@
       13,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       12,
@@ -5829,8 +5815,8 @@
       14,
       "w",
       2,
-      "White goes from a slight edge to a winning position.",
-      "Les Blancs passent d’un léger avantage à une position gagnante."
+      "White’s lead grows: a winning position now.",
+      "L’avantage grandit : les Blancs ont maintenant une position gagnante."
     ],
     [
       12,
@@ -5845,8 +5831,8 @@
       14,
       "b",
       2,
-      "White goes from a slight edge to a winning position.",
-      "Les Blancs passent d’un léger avantage à une position gagnante."
+      "White’s lead grows: a winning position now.",
+      "L’avantage grandit : les Blancs ont maintenant une position gagnante."
     ],
     [
       12,
@@ -5861,8 +5847,8 @@
       15,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       12,
@@ -5877,13 +5863,13 @@
       15,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [13, 0, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [13, 0, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [13, 0, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [13, 0, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [13, 0, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [13, 0, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       13,
       1,
@@ -5892,14 +5878,7 @@
       "Black had a slight edge, but the game is now balanced.",
       "Les Noirs avaient un léger avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      13,
-      1,
-      "w",
-      2,
-      "Black had a slight edge, but the game is now balanced.",
-      "Les Noirs avaient un léger avantage, mais la partie est maintenant équilibrée."
-    ],
+    [13, 1, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       13,
       1,
@@ -5908,14 +5887,7 @@
       "Black had a slight edge, but the game is now balanced.",
       "Les Noirs avaient un léger avantage, mais la partie est maintenant équilibrée."
     ],
-    [
-      13,
-      1,
-      "b",
-      2,
-      "Black had a slight edge, but the game is now balanced.",
-      "Les Noirs avaient un léger avantage, mais la partie est maintenant équilibrée."
-    ],
+    [13, 1, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [
       13,
       2,
@@ -5929,8 +5901,8 @@
       2,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       13,
@@ -5945,8 +5917,8 @@
       2,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       13,
@@ -5961,8 +5933,8 @@
       3,
       "w",
       2,
-      "Black had a slight edge, but now White has a clear advantage.",
-      "Les Noirs avaient un léger avantage, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       13,
@@ -5977,8 +5949,8 @@
       3,
       "b",
       2,
-      "Black had a slight edge, but now White has a clear advantage.",
-      "Les Noirs avaient un léger avantage, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       13,
@@ -5993,8 +5965,8 @@
       4,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       13,
@@ -6009,44 +5981,58 @@
       4,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [13, 5, "w", 0, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
-    [13, 5, "w", 2, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
+    [
+      13,
+      5,
+      "w",
+      2,
+      "Nothing changes: Black has a slight edge.",
+      "Rien ne change : les Noirs ont toujours un léger avantage."
+    ],
     [13, 5, "b", 0, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
-    [13, 5, "b", 2, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
+    [
+      13,
+      5,
+      "b",
+      2,
+      "Nothing changes: Black has a slight edge.",
+      "Rien ne change : les Noirs ont toujours un léger avantage."
+    ],
     [
       13,
       6,
       "w",
       1,
-      "Black pulls further ahead: now Black has a clear advantage.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un net avantage."
+      "The gap widens: now Black has a clear advantage.",
+      "L’écart se creuse : maintenant les Noirs ont un net avantage."
     ],
     [
       13,
       6,
       "w",
       7,
-      "Black pulls further ahead: now Black has a clear advantage.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un net avantage."
+      "Even better for Black: a clear advantage now.",
+      "Encore mieux pour les Noirs : un net avantage désormais."
     ],
     [
       13,
       6,
       "b",
       1,
-      "Black pulls further ahead: now Black has a clear advantage.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un net avantage."
+      "The gap widens: now Black has a clear advantage.",
+      "L’écart se creuse : maintenant les Noirs ont un net avantage."
     ],
     [
       13,
       6,
       "b",
       7,
-      "Black pulls further ahead: now Black has a clear advantage.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un net avantage."
+      "Even better for Black: a clear advantage now.",
+      "Encore mieux pour les Noirs : un net avantage désormais."
     ],
     [
       13,
@@ -6061,8 +6047,8 @@
       7,
       "w",
       2,
-      "Black goes from a slight edge to a winning position.",
-      "Les Noirs passent d’un léger avantage à une position gagnante."
+      "Black’s lead grows: a winning position now.",
+      "L’avantage grandit : les Noirs ont maintenant une position gagnante."
     ],
     [
       13,
@@ -6077,8 +6063,8 @@
       7,
       "b",
       2,
-      "Black goes from a slight edge to a winning position.",
-      "Les Noirs passent d’un léger avantage à une position gagnante."
+      "Black’s lead grows: a winning position now.",
+      "L’avantage grandit : les Noirs ont maintenant une position gagnante."
     ],
     [
       13,
@@ -6093,8 +6079,8 @@
       8,
       "w",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       13,
@@ -6109,8 +6095,8 @@
       8,
       "b",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       13,
@@ -6125,8 +6111,8 @@
       9,
       "w",
       2,
-      "Black goes from a slight edge to a mate in 2.",
-      "Les Noirs passent d’un léger avantage à un mat en 2."
+      "Black’s lead grows: a mate in 2 now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat en 2."
     ],
     [
       13,
@@ -6141,40 +6127,40 @@
       9,
       "b",
       2,
-      "Black goes from a slight edge to a mate in 2.",
-      "Les Noirs passent d’un léger avantage à un mat en 2."
+      "Black’s lead grows: a mate in 2 now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat en 2."
     ],
     [
       13,
       10,
       "w",
       1,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "The gap widens: now Black has a forced mate.",
+      "L’écart se creuse : maintenant les Noirs ont un mat forcé."
     ],
     [
       13,
       10,
       "w",
       7,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "Even better for Black: a forced mate now.",
+      "Encore mieux pour les Noirs : un mat forcé désormais."
     ],
     [
       13,
       10,
       "b",
       1,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "The gap widens: now Black has a forced mate.",
+      "L’écart se creuse : maintenant les Noirs ont un mat forcé."
     ],
     [
       13,
       10,
       "b",
       7,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "Even better for Black: a forced mate now.",
+      "Encore mieux pour les Noirs : un mat forcé désormais."
     ],
     [
       13,
@@ -6189,8 +6175,8 @@
       11,
       "w",
       2,
-      "Black had a slight edge, but now White has a forced mate.",
-      "Les Noirs avaient un léger avantage, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       13,
@@ -6205,8 +6191,8 @@
       11,
       "b",
       2,
-      "Black had a slight edge, but now White has a forced mate.",
-      "Les Noirs avaient un léger avantage, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       13,
@@ -6221,8 +6207,8 @@
       12,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       13,
@@ -6237,13 +6223,27 @@
       12,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [13, 13, "w", 0, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
-    [13, 13, "w", 2, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
+    [
+      13,
+      13,
+      "w",
+      2,
+      "Nothing changes: Black has a slight edge.",
+      "Rien ne change : les Noirs ont toujours un léger avantage."
+    ],
     [13, 13, "b", 0, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
-    [13, 13, "b", 2, "Black still has a slight edge.", "Les Noirs ont toujours un léger avantage."],
+    [
+      13,
+      13,
+      "b",
+      2,
+      "Nothing changes: Black has a slight edge.",
+      "Rien ne change : les Noirs ont toujours un léger avantage."
+    ],
     [
       13,
       14,
@@ -6257,8 +6257,8 @@
       14,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       13,
@@ -6273,8 +6273,8 @@
       14,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       13,
@@ -6289,8 +6289,8 @@
       15,
       "w",
       2,
-      "Black goes from a slight edge to a winning position.",
-      "Les Noirs passent d’un léger avantage à une position gagnante."
+      "Black’s lead grows: a winning position now.",
+      "L’avantage grandit : les Noirs ont maintenant une position gagnante."
     ],
     [
       13,
@@ -6305,8 +6305,8 @@
       15,
       "b",
       2,
-      "Black goes from a slight edge to a winning position.",
-      "Les Noirs passent d’un léger avantage à une position gagnante."
+      "Black’s lead grows: a winning position now.",
+      "L’avantage grandit : les Noirs ont maintenant une position gagnante."
     ],
     [
       14,
@@ -6316,14 +6316,7 @@
       "White had a winning position, but the game is now balanced.",
       "Les Blancs avaient une position gagnante, mais la partie est maintenant équilibrée."
     ],
-    [
-      14,
-      0,
-      "w",
-      2,
-      "White had a winning position, but the game is now balanced.",
-      "Les Blancs avaient une position gagnante, mais la partie est maintenant équilibrée."
-    ],
+    [14, 0, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       14,
       0,
@@ -6332,18 +6325,11 @@
       "White had a winning position, but the game is now balanced.",
       "Les Blancs avaient une position gagnante, mais la partie est maintenant équilibrée."
     ],
-    [
-      14,
-      0,
-      "b",
-      2,
-      "White had a winning position, but the game is now balanced.",
-      "Les Blancs avaient une position gagnante, mais la partie est maintenant équilibrée."
-    ],
+    [14, 0, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [14, 1, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [14, 1, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [14, 1, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [14, 1, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [14, 1, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [14, 1, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       14,
       2,
@@ -6357,8 +6343,8 @@
       2,
       "w",
       2,
-      "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       14,
@@ -6373,8 +6359,8 @@
       2,
       "b",
       2,
-      "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       14,
@@ -6389,7 +6375,7 @@
       3,
       "w",
       7,
-      "White’s advantage shrinks to a clear advantage.",
+      "Down from a winning position to a clear advantage for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -6405,7 +6391,7 @@
       3,
       "b",
       7,
-      "White’s advantage shrinks to a clear advantage.",
+      "Down from a winning position to a clear advantage for White.",
       "L’avantage des Blancs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -6421,8 +6407,8 @@
       4,
       "w",
       2,
-      "White still has a winning position.",
-      "Les Blancs ont toujours une position gagnante."
+      "Nothing changes: White has a winning position.",
+      "Rien ne change : les Blancs ont toujours une position gagnante."
     ],
     [
       14,
@@ -6437,8 +6423,8 @@
       4,
       "b",
       2,
-      "White still has a winning position.",
-      "Les Blancs ont toujours une position gagnante."
+      "Nothing changes: White has a winning position.",
+      "Rien ne change : les Blancs ont toujours une position gagnante."
     ],
     [
       14,
@@ -6453,8 +6439,8 @@
       5,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       14,
@@ -6469,8 +6455,8 @@
       5,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       14,
@@ -6485,8 +6471,8 @@
       6,
       "w",
       2,
-      "White had a winning position, but now Black has a clear advantage.",
-      "Les Blancs avaient une position gagnante, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       14,
@@ -6501,8 +6487,8 @@
       6,
       "b",
       2,
-      "White had a winning position, but now Black has a clear advantage.",
-      "Les Blancs avaient une position gagnante, mais maintenant les Noirs ont un net avantage."
+      "A complete turnaround: now Black has a clear advantage.",
+      "Retournement complet : maintenant les Noirs ont un net avantage."
     ],
     [
       14,
@@ -6517,8 +6503,8 @@
       7,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       14,
@@ -6533,8 +6519,8 @@
       7,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       14,
@@ -6549,8 +6535,8 @@
       8,
       "w",
       2,
-      "White goes from a winning position to a mate in 3.",
-      "Les Blancs passent d’une position gagnante à un mat en 3."
+      "White’s lead grows: a mate in 3 now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat en 3."
     ],
     [
       14,
@@ -6565,8 +6551,8 @@
       8,
       "b",
       2,
-      "White goes from a winning position to a mate in 3.",
-      "Les Blancs passent d’une position gagnante à un mat en 3."
+      "White’s lead grows: a mate in 3 now.",
+      "L’avantage grandit : les Blancs ont maintenant un mat en 3."
     ],
     [
       14,
@@ -6581,8 +6567,8 @@
       9,
       "w",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       14,
@@ -6597,8 +6583,8 @@
       9,
       "b",
       7,
-      "The tables turn: now Black has a mate in 2.",
-      "La partie bascule : maintenant les Noirs ont un mat en 2."
+      "Everything changes: now Black has a mate in 2.",
+      "Tout change : les Noirs ont un mat en 2."
     ],
     [
       14,
@@ -6613,8 +6599,8 @@
       10,
       "w",
       2,
-      "White had a winning position, but now Black has a forced mate.",
-      "Les Blancs avaient une position gagnante, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       14,
@@ -6629,40 +6615,40 @@
       10,
       "b",
       2,
-      "White had a winning position, but now Black has a forced mate.",
-      "Les Blancs avaient une position gagnante, mais maintenant les Noirs ont un mat forcé."
+      "A complete turnaround: now Black has a forced mate.",
+      "Retournement complet : maintenant les Noirs ont un mat forcé."
     ],
     [
       14,
       11,
       "w",
       1,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "The gap widens: now White has a forced mate.",
+      "L’écart se creuse : maintenant les Blancs ont un mat forcé."
     ],
     [
       14,
       11,
       "w",
       7,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "Even better for White: a forced mate now.",
+      "Encore mieux pour les Blancs : un mat forcé désormais."
     ],
     [
       14,
       11,
       "b",
       1,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "The gap widens: now White has a forced mate.",
+      "L’écart se creuse : maintenant les Blancs ont un mat forcé."
     ],
     [
       14,
       11,
       "b",
       7,
-      "White pulls further ahead: now White has a forced mate.",
-      "Les Blancs creusent l’écart : maintenant les Blancs ont un mat forcé."
+      "Even better for White: a forced mate now.",
+      "Encore mieux pour les Blancs : un mat forcé désormais."
     ],
     [
       14,
@@ -6677,8 +6663,8 @@
       12,
       "w",
       2,
-      "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       14,
@@ -6693,8 +6679,8 @@
       12,
       "b",
       2,
-      "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of White’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage."
     ],
     [
       14,
@@ -6709,8 +6695,8 @@
       13,
       "w",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       14,
@@ -6725,8 +6711,8 @@
       13,
       "b",
       7,
-      "The tables turn: now Black has a slight edge.",
-      "La partie bascule : maintenant les Noirs ont un léger avantage."
+      "Everything changes: now Black has a slight edge.",
+      "Tout change : les Noirs ont un léger avantage."
     ],
     [
       14,
@@ -6741,8 +6727,8 @@
       14,
       "w",
       2,
-      "White still has a winning position.",
-      "Les Blancs ont toujours une position gagnante."
+      "Nothing changes: White has a winning position.",
+      "Rien ne change : les Blancs ont toujours une position gagnante."
     ],
     [
       14,
@@ -6757,8 +6743,8 @@
       14,
       "b",
       2,
-      "White still has a winning position.",
-      "Les Blancs ont toujours une position gagnante."
+      "Nothing changes: White has a winning position.",
+      "Rien ne change : les Blancs ont toujours une position gagnante."
     ],
     [
       14,
@@ -6773,8 +6759,8 @@
       15,
       "w",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [
       14,
@@ -6789,13 +6775,13 @@
       15,
       "b",
       7,
-      "The tables turn: now Black has a winning position.",
-      "La partie bascule : maintenant les Noirs ont une position gagnante."
+      "Everything changes: now Black has a winning position.",
+      "Tout change : les Noirs ont une position gagnante."
     ],
     [15, 0, "w", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [15, 0, "w", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [15, 0, "w", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [15, 0, "b", 1, "The game is level again.", "La partie redevient équilibrée."],
-    [15, 0, "b", 7, "The game is level again.", "La partie redevient équilibrée."],
+    [15, 0, "b", 7, "Equality is restored.", "L’équilibre est rétabli."],
     [
       15,
       1,
@@ -6804,14 +6790,7 @@
       "Black had a winning position, but the game is now balanced.",
       "Les Noirs avaient une position gagnante, mais la partie est maintenant équilibrée."
     ],
-    [
-      15,
-      1,
-      "w",
-      2,
-      "Black had a winning position, but the game is now balanced.",
-      "Les Noirs avaient une position gagnante, mais la partie est maintenant équilibrée."
-    ],
+    [15, 1, "w", 2, "Back to equal.", "Retour à l’égalité."],
     [
       15,
       1,
@@ -6820,14 +6799,7 @@
       "Black had a winning position, but the game is now balanced.",
       "Les Noirs avaient une position gagnante, mais la partie est maintenant équilibrée."
     ],
-    [
-      15,
-      1,
-      "b",
-      2,
-      "Black had a winning position, but the game is now balanced.",
-      "Les Noirs avaient une position gagnante, mais la partie est maintenant équilibrée."
-    ],
+    [15, 1, "b", 2, "Back to equal.", "Retour à l’égalité."],
     [
       15,
       2,
@@ -6841,8 +6813,8 @@
       2,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       15,
@@ -6857,8 +6829,8 @@
       2,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       15,
@@ -6873,8 +6845,8 @@
       3,
       "w",
       2,
-      "Black had a winning position, but now White has a clear advantage.",
-      "Les Noirs avaient une position gagnante, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       15,
@@ -6889,8 +6861,8 @@
       3,
       "b",
       2,
-      "Black had a winning position, but now White has a clear advantage.",
-      "Les Noirs avaient une position gagnante, mais maintenant les Blancs ont un net avantage."
+      "A complete turnaround: now White has a clear advantage.",
+      "Retournement complet : maintenant les Blancs ont un net avantage."
     ],
     [
       15,
@@ -6905,8 +6877,8 @@
       4,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       15,
@@ -6921,8 +6893,8 @@
       4,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       15,
@@ -6937,8 +6909,8 @@
       5,
       "w",
       2,
-      "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       15,
@@ -6953,8 +6925,8 @@
       5,
       "b",
       2,
-      "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       15,
@@ -6969,7 +6941,7 @@
       6,
       "w",
       7,
-      "Black’s advantage shrinks to a clear advantage.",
+      "Down from a winning position to a clear advantage for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -6985,7 +6957,7 @@
       6,
       "b",
       7,
-      "Black’s advantage shrinks to a clear advantage.",
+      "Down from a winning position to a clear advantage for Black.",
       "L’avantage des Noirs fond : il ne leur reste qu’un net avantage."
     ],
     [
@@ -7001,8 +6973,8 @@
       7,
       "w",
       2,
-      "Black still has a winning position.",
-      "Les Noirs ont toujours une position gagnante."
+      "Nothing changes: Black has a winning position.",
+      "Rien ne change : les Noirs ont toujours une position gagnante."
     ],
     [
       15,
@@ -7017,8 +6989,8 @@
       7,
       "b",
       2,
-      "Black still has a winning position.",
-      "Les Noirs ont toujours une position gagnante."
+      "Nothing changes: Black has a winning position.",
+      "Rien ne change : les Noirs ont toujours une position gagnante."
     ],
     [
       15,
@@ -7033,8 +7005,8 @@
       8,
       "w",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       15,
@@ -7049,8 +7021,8 @@
       8,
       "b",
       7,
-      "The tables turn: now White has a mate in 3.",
-      "La partie bascule : maintenant les Blancs ont un mat en 3."
+      "Everything changes: now White has a mate in 3.",
+      "Tout change : les Blancs ont un mat en 3."
     ],
     [
       15,
@@ -7065,8 +7037,8 @@
       9,
       "w",
       2,
-      "Black goes from a winning position to a mate in 2.",
-      "Les Noirs passent d’une position gagnante à un mat en 2."
+      "Black’s lead grows: a mate in 2 now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat en 2."
     ],
     [
       15,
@@ -7081,40 +7053,40 @@
       9,
       "b",
       2,
-      "Black goes from a winning position to a mate in 2.",
-      "Les Noirs passent d’une position gagnante à un mat en 2."
+      "Black’s lead grows: a mate in 2 now.",
+      "L’avantage grandit : les Noirs ont maintenant un mat en 2."
     ],
     [
       15,
       10,
       "w",
       1,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "The gap widens: now Black has a forced mate.",
+      "L’écart se creuse : maintenant les Noirs ont un mat forcé."
     ],
     [
       15,
       10,
       "w",
       7,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "Even better for Black: a forced mate now.",
+      "Encore mieux pour les Noirs : un mat forcé désormais."
     ],
     [
       15,
       10,
       "b",
       1,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "The gap widens: now Black has a forced mate.",
+      "L’écart se creuse : maintenant les Noirs ont un mat forcé."
     ],
     [
       15,
       10,
       "b",
       7,
-      "Black pulls further ahead: now Black has a forced mate.",
-      "Les Noirs creusent l’écart : maintenant les Noirs ont un mat forcé."
+      "Even better for Black: a forced mate now.",
+      "Encore mieux pour les Noirs : un mat forcé désormais."
     ],
     [
       15,
@@ -7129,8 +7101,8 @@
       11,
       "w",
       2,
-      "Black had a winning position, but now White has a forced mate.",
-      "Les Noirs avaient une position gagnante, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       15,
@@ -7145,8 +7117,8 @@
       11,
       "b",
       2,
-      "Black had a winning position, but now White has a forced mate.",
-      "Les Noirs avaient une position gagnante, mais maintenant les Blancs ont un mat forcé."
+      "A complete turnaround: now White has a forced mate.",
+      "Retournement complet : maintenant les Blancs ont un mat forcé."
     ],
     [
       15,
@@ -7161,8 +7133,8 @@
       12,
       "w",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       15,
@@ -7177,8 +7149,8 @@
       12,
       "b",
       7,
-      "The tables turn: now White has a slight edge.",
-      "La partie bascule : maintenant les Blancs ont un léger avantage."
+      "Everything changes: now White has a slight edge.",
+      "Tout change : les Blancs ont un léger avantage."
     ],
     [
       15,
@@ -7193,8 +7165,8 @@
       13,
       "w",
       2,
-      "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       15,
@@ -7209,8 +7181,8 @@
       13,
       "b",
       2,
-      "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Some of Black’s advantage slips away: only a slight edge left.",
+      "L’écart se réduit pour les Noirs : il ne leur reste qu’un léger avantage."
     ],
     [
       15,
@@ -7225,8 +7197,8 @@
       14,
       "w",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       15,
@@ -7241,8 +7213,8 @@
       14,
       "b",
       7,
-      "The tables turn: now White has a winning position.",
-      "La partie bascule : maintenant les Blancs ont une position gagnante."
+      "Everything changes: now White has a winning position.",
+      "Tout change : les Blancs ont une position gagnante."
     ],
     [
       15,
@@ -7257,8 +7229,8 @@
       15,
       "w",
       2,
-      "Black still has a winning position.",
-      "Les Noirs ont toujours une position gagnante."
+      "Nothing changes: Black has a winning position.",
+      "Rien ne change : les Noirs ont toujours une position gagnante."
     ],
     [
       15,
@@ -7273,8 +7245,8 @@
       15,
       "b",
       2,
-      "Black still has a winning position.",
-      "Les Noirs ont toujours une position gagnante."
+      "Nothing changes: Black has a winning position.",
+      "Rien ne change : les Noirs ont toujours une position gagnante."
     ]
   ],
   "hashes": [

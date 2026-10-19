@@ -142,10 +142,10 @@ describe('threatensFact', () => {
   it('says what a quiet move threatens to win', () => {
     const aimed = threat(bishopAims.position.fen, { cp: 300 }, ['d2b4', 'g8f8', 'g1f1']);
     expect(threatensFact(input(bishopAims), aimed)?.text).toBe(
-      'The threat is [[m:w:Bxb4]] on the next move, winning a [[p:bn]]knight.',
+      'Next comes [[m:w:Bxb4]], winning a [[p:bn]]knight.',
     );
     expect(threatensFact(input(bishopAims, fr), aimed)?.text).toBe(
-      'La menace : [[m:w:Bxb4]] au coup suivant, qui gagnerait un [[p:bn]]cavalier.',
+      '[[m:w:Bxb4]] se prépare, et gagnerait un [[p:bn]]cavalier.',
     );
   });
 
@@ -172,7 +172,7 @@ describe('threatensFact', () => {
     });
     const mate = threat(rookSwings.position.fen, { mate: 1 }, ['d1d8']);
     expect(threatensFact(input(rookSwings), mate)?.text).toBe(
-      'Mate is threatened on the next move: [[m:w:Rd8+]].',
+      'A mate in one is threatened: [[m:w:Rd8+]].',
     );
   });
 });

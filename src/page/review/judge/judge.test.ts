@@ -86,6 +86,21 @@ describe('judge', () => {
     expect(longMateMove({ uci: 'e2e4', san: 'e4', best: null }).moveClass).toBe('best');
   });
 
+  it('calls an only move great, but never taking back', () => {
+    const exd5 = 'rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2';
+    const only = (uci: string, san: string): MoveVerdict =>
+      judge({
+        previousPosition: { ply: 3, fen: exd5, uci: 'e4d5', san: 'exd5' },
+        position: { ply: 4, fen: START, uci, san },
+        before: record(50, uci, 75),
+        after: record(50),
+        book: false,
+        chess960: false,
+      });
+    expect(only('g8f6', 'Nf6').moveClass).toBe('great');
+    expect(only('d8d5', 'Qxd5').moveClass).toBe('best');
+  });
+
   it('calls a book move book, at full accuracy', () => {
     const move = judge({
       previousPosition: { ply: 0, fen: START },

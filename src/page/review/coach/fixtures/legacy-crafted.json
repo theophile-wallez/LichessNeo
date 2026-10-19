@@ -13,12 +13,12 @@
     "cls": "best",
     "slower": false,
     "en": {
-      "fact": "The pawn promotes to a [[p:wq]]queen.",
-      "parts": [["The pawn promotes to a [[p:wq]]queen."]]
+      "fact": "Promotion: the pawn turns into a [[p:wq]]queen.",
+      "parts": [["Promotion: the pawn turns into a [[p:wq]]queen."]]
     },
     "fr": {
-      "fact": "Le pion devient une [[p:wq]]dame.",
-      "parts": [["Le pion devient une [[p:wq]]dame."]]
+      "fact": "Promotion : le pion se transforme en une [[p:wq]]dame.",
+      "parts": [["Promotion : le pion se transforme en une [[p:wq]]dame."]]
     }
   },
   {
@@ -30,12 +30,12 @@
     "cls": "best",
     "slower": false,
     "en": {
-      "fact": "The pawn promotes to a [[p:wn]]knight.",
-      "parts": [["The pawn promotes to a [[p:wn]]knight."]]
+      "fact": "The pawn reaches the last rank and becomes a [[p:wn]]knight.",
+      "parts": [["The pawn reaches the last rank and becomes a [[p:wn]]knight."]]
     },
     "fr": {
-      "fact": "Le pion devient un [[p:wn]]cavalier.",
-      "parts": [["Le pion devient un [[p:wn]]cavalier."]]
+      "fact": "Le pion atteint la dernière rangée et devient un [[p:wn]]cavalier.",
+      "parts": [["Le pion atteint la dernière rangée et devient un [[p:wn]]cavalier."]]
     }
   },
   {
@@ -46,11 +46,11 @@
     "b": { "mate": -2, "wp": 0, "wp2": null, "best": "a8b8" },
     "cls": "inaccuracy",
     "slower": true,
-    "en": { "fact": "[[m:w:Rh2]] held out longer.", "parts": [["[[m:w:Rh2]] held out longer."]] },
-    "fr": {
-      "fact": "[[m:w:Rh2]] tenait plus longtemps.",
-      "parts": [["[[m:w:Rh2]] tenait plus longtemps."]]
-    }
+    "en": {
+      "fact": "[[m:w:Rh2]] would have delayed the mate.",
+      "parts": [["[[m:w:Rh2]] would have delayed the mate."]]
+    },
+    "fr": { "fact": "[[m:w:Rh2]] retardait le mat.", "parts": [["[[m:w:Rh2]] retardait le mat."]] }
   },
   {
     "name": "slower mate",
@@ -60,8 +60,11 @@
     "b": { "mate": 5, "wp": 100, "wp2": null, "best": "a8b8" },
     "cls": "good",
     "slower": true,
-    "en": { "fact": "[[m:w:Rh8]] mated in 2.", "parts": [["[[m:w:Rh8]] mated in 2."]] },
-    "fr": { "fact": "[[m:w:Rh8]] matait en 2.", "parts": [["[[m:w:Rh8]] matait en 2."]] }
+    "en": { "fact": "[[m:w:Rh8]] was mate in 2.", "parts": [["[[m:w:Rh8]] was mate in 2."]] },
+    "fr": {
+      "fact": "[[m:w:Rh8]] donnait un mat en 2.",
+      "parts": [["[[m:w:Rh8]] donnait un mat en 2."]]
+    }
   },
   {
     "name": "black slower mate",
@@ -71,8 +74,11 @@
     "b": { "mate": -4, "wp": 0, "wp2": null, "best": "a1b1" },
     "cls": "good",
     "slower": true,
-    "en": { "fact": "[[m:b:Rh1]] mated in 1.", "parts": [["[[m:b:Rh1]] mated in 1."]] },
-    "fr": { "fact": "[[m:b:Rh1]] matait en 1.", "parts": [["[[m:b:Rh1]] matait en 1."]] }
+    "en": { "fact": "[[m:b:Rh1]] was mate in 1.", "parts": [["[[m:b:Rh1]] was mate in 1."]] },
+    "fr": {
+      "fact": "[[m:b:Rh1]] donnait un mat en 1.",
+      "parts": [["[[m:b:Rh1]] donnait un mat en 1."]]
+    }
   },
   {
     "name": "en passant",

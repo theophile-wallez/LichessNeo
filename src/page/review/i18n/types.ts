@@ -1,6 +1,7 @@
 import type { SafeHtml } from '#shared/html.ts';
 import type { ProfileAxis } from '#page/review/judge/profile.ts';
 import type { Phase } from '#page/review/rating/phases.ts';
+import type { Reason } from '#page/review/coach/idea.ts';
 import type { Theme } from '#page/review/coach/said.ts';
 import type { MotifKind } from '#page/review/chess/motifs.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
@@ -122,6 +123,7 @@ type Situation =
   | 'badCapture'
   | 'winning'
   | 'losing'
+  | 'defending'
   | 'earlyQueen'
   | 'earlyKing'
   | 'firstMove';
@@ -145,6 +147,8 @@ export interface TrajectorySentences {
   readonly grows: (side: Color, from: string, to: string) => Ways;
   readonly shrinks: (side: Color, from: string, to: string) => Ways;
   readonly swings: (before: Standing, after: Standing) => Ways;
+  /** The error the game turned on, the brief's. */
+  readonly turningPoint: Ways;
 }
 
 /** A piece lost or won on a square, and the move that takes it. */
@@ -161,7 +165,7 @@ export interface Material {
 }
 
 /** What names a motif: its kind, its move as a token, and the pieces it hits. */
-export type MotifNamer = (kind: MotifKind, move: string, pieces: readonly Piece[]) => string | null;
+export type MotifNamer = (kind: MotifKind, move: string, pieces: readonly Piece[]) => Ways | null;
 
 /** The ways to say the same thing, of which the coach picks one per move. */
 export type Ways = readonly [string, ...string[]];
@@ -180,7 +184,7 @@ export interface LineFacts {
   /** The tactic that wins it, after its move: "Qc7+ forks the king and the rook." */
   readonly motif: MotifNamer;
   /** The mate an error lets in, move by move. */
-  readonly forcesMate: (side: Color, line: string) => string;
+  readonly forcesMate: (side: Color, line: string) => Ways;
   /** What an error lets `side` win, and the line that wins it: what `side` threatened, maybe. */
   readonly losesMaterial: (side: Color, gain: LineGain, threatened: boolean) => Ways;
   readonly wouldHaveWon: (side: Color, gain: LineGain) => Ways;
@@ -188,13 +192,13 @@ export interface LineFacts {
   readonly winsAlong: (gain: LineGain) => Ways;
   /** The threat a move stops, and what it would have won. */
   readonly stopsThreat: (threat: string, material: string) => Ways;
-  readonly stopsMate: (line: string) => string;
-  readonly stopsLongMate: (moves: number, first: string) => string;
+  readonly stopsMate: (line: string) => Ways;
+  readonly stopsLongMate: (moves: number, first: string) => Ways;
   /** A piece that moves out of the threat's way. */
   readonly escapes: (piece: Piece, threat: string) => Ways;
   /** What a move threatens, were the opponent to pass. */
   readonly threatens: (threat: string, material: string) => Ways;
-  readonly threatensMate: (threat: string, moves: number) => string;
+  readonly threatensMate: (threat: string, moves: number) => Ways;
 }
 
 /** What a quiet move does for the position (coach/plan.ts). */
@@ -203,38 +207,51 @@ export interface PlanSentences {
   readonly outpost: (piece: Piece) => Ways;
   /** A rook on a file without pawns, or `halfOpen`, the other side's only. */
   readonly openFile: (halfOpen: boolean) => Ways;
+  readonly doublesRooks: Ways;
+  readonly seventhRank: Ways;
+  readonly connectsRooks: Ways;
   /** A pawn pushed with nothing to stop it: `made` passed by the push. */
   readonly passedPawn: (made: boolean) => Ways;
   readonly centralKing: Ways;
+  readonly center: Ways;
+  /** A piece attacked, which has to move. */
+  readonly chases: (piece: Piece) => Ways;
+  readonly pins: (piece: Piece, behind: Piece) => Ways;
+  /** What the better move did, said after it: "developing your knight", « sortait ton cavalier ». */
+  readonly why: (reason: Reason) => string;
 }
 
 export interface FactSentences extends LineFacts, PlanSentences {
-  readonly checkmate: (king: Color) => string;
-  readonly matedIn: (best: string, moves: number) => string;
-  readonly heldOutLonger: (best: string) => string;
-  readonly canForceMate: (side: Color, reply: string) => string;
-  readonly wouldForceMate: (best: string, moves: number) => string;
-  readonly missedPunishment: (side: Color, best: string) => string;
+  readonly checkmate: (king: Color) => Ways;
+  readonly matedIn: (best: string, moves: number) => Ways;
+  readonly heldOutLonger: (best: string) => Ways;
+  readonly canForceMate: (side: Color, reply: string) => Ways;
+  readonly wouldForceMate: (best: string, moves: number) => Ways;
+  /** A miss: `side`'s error, and `best`, which punished it, and what it did. */
+  readonly missedPunishment: (side: Color, best: string, why: string | null) => Ways;
   /** A miss in the middle of punishing an error from a move before. */
-  readonly unfinishedPunishment: (side: Color, best: string) => string;
-  readonly leftUndefended: (lost: PieceWon) => string;
-  readonly answersAndWins: (side: Color, lost: PieceWon) => string;
-  readonly strongerCapture: (best: string, piece: Piece) => string;
-  readonly morePrecise: (best: string) => Ways;
-  readonly betterMove: (best: string) => Ways;
+  readonly unfinishedPunishment: (side: Color, best: string) => Ways;
+  readonly leftUndefended: (lost: PieceWon) => Ways;
+  readonly answersAndWins: (side: Color, lost: PieceWon) => Ways;
+  readonly strongerCapture: (best: string, piece: Piece) => Ways;
+  /** The better move, and what it did. */
+  readonly morePrecise: (best: string, why: string | null) => Ways;
+  readonly betterMove: (best: string, why: string | null) => Ways;
   readonly punishesAtOnce: (side: Color) => Ways;
-  readonly offered: (piece: Piece, side: Color) => string;
+  readonly offered: (piece: Piece, side: Color) => Ways;
   readonly keepsAdvantage: Ways;
   readonly holdsPosition: (side: Color) => Ways;
-  readonly promotes: (piece: Piece) => string;
+  readonly promotes: (piece: Piece) => Ways;
   readonly castles: Ways;
   readonly takesBack: (square: string) => Ways;
   readonly winsForFree: (piece: Piece) => Ways;
   readonly winsMaterial: (won: Piece, given: Piece) => Ways;
   readonly checkForces: (side: Color) => Ways;
-  readonly littleMorePrecise: (best: string) => Ways;
-  readonly forks: (first: Piece, second: Piece) => string;
-  readonly missedFork: (best: string, first: Piece, second: Piece) => string;
+  readonly littleMorePrecise: (best: string, why: string | null) => Ways;
+  /** An even trade, of `taken`; `ahead` for a side ahead in material. */
+  readonly trades: (taken: Piece, ahead: boolean) => Ways;
+  readonly forks: (first: Piece, second: Piece) => Ways;
+  readonly missedFork: (best: string, first: Piece, second: Piece) => Ways;
   readonly allowsFork: (reply: string, first: Piece, second: Piece) => Ways;
   /** The reply an error lets in. */
   readonly canPlay: (side: Color, reply: string) => Ways;
@@ -252,8 +269,11 @@ export interface ReviewLanguage {
   /** The language's typographic rules, applied to the coach's text. */
   readonly typography: (text: string) => string;
   /** The line naming a book move's opening. */
-  readonly openingLine: (name: string) => string;
-  readonly remarks: RemarkPools;
+  readonly openingLine: (name: string) => Ways;
+  /** The side the coach calls "you". */
+  readonly viewer: Viewer;
+  /** The remarks on `mover`'s moves: the reader's own, or another side's. */
+  readonly remarks: (mover: Color) => RemarkPools;
   readonly trajectory: TrajectorySentences;
   readonly facts: FactSentences;
 }

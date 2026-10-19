@@ -5,9 +5,10 @@ import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { type CoachContext, moveSeed } from './context.ts';
 import { hash } from './hash.ts';
 
-// A short comment under the coach's verdict. Some situations (a mate, a side's
-// first book move…) replace the class's pool; the others (castling, a capture…)
-// mix with it.
+// A short comment under the coach's verdict, in the words for its mover: the
+// reader, or another side. Some situations (a mate, a side's first book move…)
+// replace the class's pool; the others (castling, a capture, a won or lost
+// game…) mix with it.
 
 function signedMate(record: MoveVerdict['before'], sign: number): number | null {
   return 'mate' in record ? record.mate * sign : null;
@@ -34,6 +35,7 @@ function situationPool(move: MoveVerdict, pools: RemarkPools): string[] {
     if (san.includes('+')) pool.push(...pools.check);
     if (san.includes('x')) pool.push(...pools.capture);
     if (winChance >= 90) pool.push(...pools.winning);
+    if (winChance <= 10) pool.push(...pools.defending);
     return pool;
   }
   if (san.includes('x')) pool.push(...pools.badCapture);
@@ -44,11 +46,12 @@ function situationPool(move: MoveVerdict, pools: RemarkPools): string[] {
 }
 
 export function remark(move: MoveVerdict, context: CoachContext): string {
-  const { remarks, typography } = context.language;
+  const { language } = context;
+  const remarks = language.remarks(move.color);
   const seed = moveSeed(move, context);
   const situations = situationPool(move, remarks);
   const pool =
     overridingPool(move, remarks) ??
     (situations.length > 0 && hash(`${seed}:ctx`) % 2 === 1 ? situations : remarks[move.moveClass]);
-  return typography(pool[hash(seed) % pool.length] ?? '');
+  return language.typography(pool[hash(seed) % pool.length] ?? '');
 }

@@ -78,6 +78,32 @@ describe('planFact', () => {
     expect(planOf({ fen: queens, uci: 'g1f2', san: 'Kf2' })).toBeNull();
   });
 
+  it('sees a central pawn take the center in the opening', () => {
+    expect(en.facts.center).toContain(planOf({ fen: START, uci: 'e2e4', san: 'e4', ply: 1 }));
+    expect(planOf({ fen: START, uci: 'e2e4', san: 'e4', ply: 41 })).toBeNull();
+  });
+
+  it('sees a piece chase one worth more, and pin one to what stands behind it', () => {
+    const rook = { role: 'rook', color: 'black' } as const;
+    const chased = '4k3/8/8/3r4/8/8/8/1N2K3 w - - 0 1';
+    expect(en.facts.chases(rook)).toContain(planOf({ fen: chased, uci: 'b1c3', san: 'Nc3' }));
+    const pinned = '4k3/8/2n5/8/8/8/8/4KB2 w - - 0 1';
+    const knight = { role: 'knight', color: 'black' } as const;
+    const king = { role: 'king', color: 'black' } as const;
+    expect(en.facts.pins(knight, king)).toContain(planOf({ fen: pinned, uci: 'f1b5', san: 'Bb5' }));
+  });
+
+  it('sees a rook reach the seventh rank, and rooks doubled or connected', () => {
+    const seventh = '4k3/1p6/8/8/8/8/8/R3K3 w - - 0 1';
+    expect(en.facts.seventhRank).toContain(planOf({ fen: seventh, uci: 'a1a7', san: 'Ra7' }));
+    const doubled = '4k3/8/8/8/8/8/R7/3RK3 w - - 0 1';
+    expect(en.facts.doublesRooks).toContain(planOf({ fen: doubled, uci: 'a2d2', san: 'Rd2' }));
+    const connected = 'r5k1/8/8/8/8/8/8/R2Q1RK1 w - - 0 1';
+    expect(en.facts.connectsRooks).toContain(
+      planOf({ fen: connected, uci: 'd1d3', san: 'Qd3', ply: 41 }),
+    );
+  });
+
   it('leaves the point of a move by a mate to the mate', () => {
     expect(planOf({ fen: START, uci: 'g1f3', san: 'Nf3', ply: 1, mate: true })).toBeNull();
   });

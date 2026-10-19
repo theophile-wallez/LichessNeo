@@ -13,9 +13,10 @@ import { roleOfLetter, uciToSan } from '#page/review/chess/notation.ts';
 import { isError, type MoveClass } from '#page/review/classes/classes.ts';
 import { moveToken, squareToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import type { FactSentences } from '#page/review/i18n/types.ts';
-import { PUNISHABLE } from '#page/review/judge/judge.ts';
+import type { FactSentences, ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
+import { bestFact, littleBetterFact, missFact } from './best-fact.ts';
+import { captureFact } from './capture-fact.ts';
 import { bestGainFact, gainFact, lossFact, mateLine } from './line-facts.ts';
 import { planFact } from './plan.ts';
 import { type Fact, oneOf, said, type Theme } from './said.ts';
@@ -41,7 +42,7 @@ export interface Findings {
   readonly followUp: Fact | null;
 }
 
-interface FactInput {
+export interface FactInput {
   readonly move: MoveVerdict;
   readonly facts: FactSentences;
   readonly me: Color;
@@ -55,6 +56,8 @@ interface FactInput {
   /** The engine's reply, as a token, or '' without one. */
   readonly reply: string;
   readonly threats: Threats;
+  /** The move isn't the reader's: what it threatens comes first. */
+  readonly theirs: boolean;
 }
 
 const PUNISHERS: ReadonlySet<MoveClass> = new Set<MoveClass>(['brilliant', 'great', 'best']);
@@ -83,9 +86,10 @@ function lostPieceFact(input: FactInput): Fact | null {
   if (!square || !victim || victim.color !== me || victim.role === 'king') return null;
   if (move.loss < 10 || PIECE_VALUES[victim.role] < 3) return null;
   const lost = { piece: victim, square: squareToken(square), reply };
-  if (attackers(after, square, me).length === 0) return said(facts.leftUndefended(lost), 'hanging');
+  if (attackers(after, square, me).length === 0)
+    return said(oneOf(facts.leftUndefended(lost), move), 'hanging');
   if (Math.min(...attackerValues(after, square, them)) < PIECE_VALUES[victim.role])
-    return said(facts.answersAndWins(them, lost), 'hanging');
+    return said(oneOf(facts.answersAndWins(them, lost), move), 'hanging');
   return null;
 }
 
@@ -94,39 +98,17 @@ function mateFact(input: FactInput): Fact | null {
   const { move, facts, them, sign, best, reply } = input;
   if (mates(move.after, -sign) && !mates(move.before, -sign) && reply) {
     const line = mateLine(move.after, move.position.fen, 'a');
-    return said(line ? facts.forcesMate(them, line) : facts.canForceMate(them, reply), 'mate');
+    const ways = line ? facts.forcesMate(them, line) : facts.canForceMate(them, reply);
+    return said(oneOf(ways, move), 'mate');
   }
   if (mates(move.before, sign) && !mates(move.after, sign) && best) {
     const line = mateLine(move.before, move.previousPosition.fen, 'b') ?? best;
-    return said(facts.wouldForceMate(line, Math.abs(mateDistance(move.before))), 'mate');
+    return said(
+      oneOf(facts.wouldForceMate(line, Math.abs(mateDistance(move.before))), move),
+      'mate',
+    );
   }
   return null;
-}
-
-// The error a miss fails to punish: the opponent's last move, or the one before it, the
-// punishment under way (judge.ts).
-function missFact({ move, facts, them, best }: FactInput): Fact {
-  return said(
-    (move.previousMove?.loss ?? 0) >= PUNISHABLE
-      ? facts.missedPunishment(them, best)
-      : facts.unfinishedPunishment(them, best),
-  );
-}
-
-// The better move, a fork or a capture when it was one.
-function bestFact(input: FactInput): Fact | null {
-  const { move, facts, them, before, best } = input;
-  if (!best || !move.best) return null;
-  const forked = forkedBy(move.previousPosition.fen, move.best);
-  if (forked[0] && forked[1]) return said(facts.missedFork(best, forked[0], forked[1]), 'fork');
-  const taken = pieceOn(before, move.best.slice(2, 4));
-  if (taken?.color === them && taken.role !== 'pawn')
-    return said(facts.strongerCapture(best, taken));
-  return said(
-    move.moveClass === 'inaccuracy'
-      ? oneOf(facts.morePrecise(best), move)
-      : oneOf(facts.betterMove(best), move),
-  );
 }
 
 /** What the reply does, for an error whose fact doesn't name it. */
@@ -152,22 +134,6 @@ function errorFindings(input: FactInput): Findings {
   return { fact: gain ?? bestFact(input), followUp: threatFact(input) };
 }
 
-function captureFact(input: FactInput, moved: Piece, dest: string): Fact | null {
-  const { move, facts, me, them, before } = input;
-  const square = parseSquare(dest);
-  if (!square) return null;
-  // Nothing on the square: en passant.
-  const victim: Piece = { role: before.get(square)?.role ?? 'pawn', color: them };
-  const previous = move.previousPosition;
-  if (previous.san?.includes('x') && previous.uci?.slice(2, 4) === dest)
-    return said(oneOf(facts.takesBack(squareToken(dest)), move));
-  if (attackers(before, square, them).length === 0)
-    return said(oneOf(facts.winsForFree(victim), move), 'hanging');
-  if (PIECE_VALUES[victim.role] > PIECE_VALUES[moved.role])
-    return said(oneOf(facts.winsMaterial(victim, { role: moved.role, color: me }), move));
-  return null;
-}
-
 // What stands out in a move that needs no correction: what its line wins (a
 // sacrifice aside, which says what it offers), an error punished, the only move.
 function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
@@ -175,12 +141,13 @@ function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
   const sacrifice = move.moveClass === 'brilliant';
   const gain = sacrifice ? null : gainFact(input);
   if (gain !== null) return gain;
-  const quiet = !sacrifice && !/[x+]/.test(move.san);
-  const threat = quiet ? quietThreatFact(input) : null;
+  // The opponent's move is read for what it threatens first, even a capture or a check.
+  const threatFirst = !sacrifice && (input.theirs || !/[x+]/.test(move.san));
+  const threat = threatFirst ? threatsFact(input) : null;
   if (threat !== null) return threat;
   if (punishes(move)) return said(oneOf(facts.punishesAtOnce(them), move));
   if (move.moveClass === 'brilliant' && moved)
-    return said(facts.offered({ role: moved.role, color: me }, them), 'sacrifice');
+    return said(oneOf(facts.offered({ role: moved.role, color: me }, them), move), 'sacrifice');
   if (move.moveClass === 'great')
     return said(
       evaluationLevel(move.after) * sign >= 2
@@ -191,27 +158,40 @@ function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
 }
 
 // A quiet move's point is often the threat it stops, else the one it makes.
-function quietThreatFact(input: FactInput): Fact | null {
+function threatsFact(input: FactInput): Fact | null {
   const { before, after } = input.threats;
   return (before && parriedFact(input, before)) ?? (after && threatensFact(input, after));
 }
 
 function goodFact(input: FactInput): Fact | null {
-  const { move, facts, me, them, after, best } = input;
+  const { move, facts, me, them, after } = input;
   const dest = move.uci.slice(2, 4);
   const moved = pieceOn(after, dest);
   const standout = standoutFact(input, moved);
   if (standout !== null) return standout;
   const forked = forkedBy(move.previousPosition.fen, move.uci);
-  if (forked[0] && forked[1]) return said(facts.forks(forked[0], forked[1]), 'fork');
+  if (forked[0] && forked[1]) return said(oneOf(facts.forks(forked[0], forked[1]), move), 'fork');
   const promotion = roleOfLetter(/=([QRBN])/.exec(move.san)?.[1] ?? '');
-  if (promotion) return said(facts.promotes({ role: promotion, color: me }));
+  if (promotion) return said(oneOf(facts.promotes({ role: promotion, color: me }), move));
   if (move.san.startsWith('O-O')) return said(oneOf(facts.castles, move));
   const capture = moved && move.san.includes('x') ? captureFact(input, moved, dest) : null;
   if (capture !== null) return capture;
   if (move.san.includes('+')) return said(oneOf(facts.checkForces(them), move));
-  if (move.moveClass === 'good' && best) return said(oneOf(facts.littleMorePrecise(best), move));
-  return planFact({ move, sentences: facts, before: input.before, after });
+  return quietFact(input);
+}
+
+// The plies of the opening, where what a move does matters more than a slightly better one.
+const OPENING_PLIES = 20;
+
+/** Whether the game is decided: a winning position, or a mate, for either side. */
+const decided = (move: MoveVerdict): boolean => Math.abs(evaluationLevel(move.after)) >= 3;
+
+// What a quiet good move does, or the move a little better, unless the game is decided.
+function quietFact(input: FactInput): Fact | null {
+  const { move, facts, before, after } = input;
+  const plan = planFact({ move, sentences: facts, before, after });
+  const better = move.moveClass === 'good' && !decided(move) ? littleBetterFact(input) : null;
+  return move.ply <= OPENING_PLIES ? (plan ?? better) : (better ?? plan);
 }
 
 /**
@@ -220,13 +200,14 @@ function goodFact(input: FactInput): Fact | null {
  */
 export function findings(
   move: MoveVerdict,
-  facts: FactSentences,
+  { facts, viewer }: Pick<ReviewLanguage, 'facts' | 'viewer'>,
   threats: Threats = NO_THREATS,
 ): Findings {
   const me = move.color;
   const them = opposite(me);
   const sign = me === 'white' ? 1 : -1;
-  if (move.san.includes('#')) return { fact: said(facts.checkmate(them), 'mate'), followUp: null };
+  if (move.san.includes('#'))
+    return { fact: said(oneOf(facts.checkmate(them), move), 'mate'), followUp: null };
   const best =
     move.bestSan && move.best
       ? moveToken(move.bestSan, me, { base: 'b', ucis: [move.best] })
@@ -237,7 +218,7 @@ export function findings(
     const text = mates(move.before, sign)
       ? facts.matedIn(best, mateDistance(move.before) * sign)
       : facts.heldOutLonger(best);
-    return { fact: said(text, 'mate'), followUp: null };
+    return { fact: said(oneOf(text, move), 'mate'), followUp: null };
   }
   const replyUci = move.after.best;
   const reply = replyUci
@@ -245,7 +226,20 @@ export function findings(
     : '';
   const before = parseFen(move.previousPosition.fen).board;
   const after = parseFen(move.position.fen).board;
-  const input: FactInput = { move, facts, me, them, sign, before, after, best, reply, threats };
+  const theirs = viewer !== null && viewer !== me;
+  const input: FactInput = {
+    move,
+    facts,
+    me,
+    them,
+    sign,
+    before,
+    after,
+    best,
+    reply,
+    threats,
+    theirs,
+  };
   return isError(move.moveClass) ? errorFindings(input) : { fact: goodFact(input), followUp: null };
 }
 

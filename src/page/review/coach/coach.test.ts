@@ -33,7 +33,7 @@ const toParts = (parts: z.infer<typeof LegacyPartsSchema>) =>
 
 const langs: readonly ('en' | 'fr')[] = ['en', 'fr'];
 
-const NO_CONTEXT: MoveContext = { opening: '', threats: NO_THREATS };
+const NO_CONTEXT: MoveContext = { opening: '', threats: NO_THREATS, turning: false };
 
 // The port's move chips carry the moves they play ([[m:w:Nf3@b:g1f3]]), and an
 // error's comment ends on the reply it lets in: the original had neither. Both
@@ -42,15 +42,15 @@ const PLAY = /@[ab]:[^\]]*/g;
 const withoutPlay = (text: string): string => text.replace(PLAY, '');
 
 /** The fact the coach states about a move, null for none. */
-const fact = (move: MoveVerdict, facts: ReviewLanguage['facts']): string | null =>
-  findings(move, facts).fact?.text ?? null;
+const fact = (move: MoveVerdict, language: ReviewLanguage): string | null =>
+  findings(move, language).fact?.text ?? null;
 
 function asRecorded(
   parts: readonly CommentPart[],
   move: MoveVerdict,
   language: ReviewLanguage,
 ): CommentPart[] {
-  const followUp = findings(move, language.facts).followUp?.text;
+  const followUp = findings(move, language).followUp?.text;
   return parts
     .filter(part => part.text !== followUp)
     .map(({ text, droppable }) => ({ text: withoutPlay(text), droppable }));
@@ -69,7 +69,7 @@ describe('the coach’s comment', () => {
         // A side's first book move has its own remarks, which open its comment: the
         // original's spoke of theory going on.
         const first = move.moveClass === 'book' && move.position.ply <= 2;
-        const allowed = first ? LANGUAGES[lang].remarks.firstMove : [said?.remark];
+        const allowed = first ? LANGUAGES[lang].remarks(move.color).firstMove : [said?.remark];
         expect(allowed, `${game.name} ${move.ply}`).toContain(remarked);
         const recorded = toParts(said?.parts ?? []).map(({ text, droppable }, k) => ({
           text: first && k === 0 ? remarked : text,
@@ -77,7 +77,11 @@ describe('the coach’s comment', () => {
         }));
         expect(
           asRecorded(
-            explanation(move, context, { opening: game.opening, threats: NO_THREATS }),
+            explanation(move, context, {
+              opening: game.opening,
+              threats: NO_THREATS,
+              turning: false,
+            }),
             move,
             LANGUAGES[lang],
           ),
@@ -94,18 +98,18 @@ describe('the coach’s comment', () => {
     const [first, reply, second] = moves;
     if (!first || !reply || !second) throw new Error('no opera game');
     expect([first, reply, second].map(move => move.moveClass)).toEqual(['book', 'book', 'book']);
-    expect(en.remarks.firstMove).toContain(remark(first, context));
-    expect(en.remarks.firstMove).toContain(remark(reply, context));
-    expect(en.remarks.firstMove).not.toContain(remark(second, context));
+    expect(en.remarks('white').firstMove).toContain(remark(first, context));
+    expect(en.remarks('white').firstMove).toContain(remark(reply, context));
+    expect(en.remarks('white').firstMove).not.toContain(remark(second, context));
   });
 
   it('names checkmate on its own', () => {
     const game = fixtureGames().find(({ name }) => name === 'opera');
     const mate = game ? replay(game).at(-1) : undefined;
     if (!game || !mate) throw new Error('no opera game');
-    expect(fact(mate, en.facts)).toBe('Checkmate: the black king has nowhere to go.');
+    expect(fact(mate, en)).toBe('Mate! The black king is caught.');
     expect(explanation(mate, { gameId: game.id, coach: 1, language: fr }, NO_CONTEXT)).toEqual([
-      { text: 'Échec et mat\u00a0: le roi noir n’a plus aucune case.', droppable: false },
+      { text: 'Mat ! Le roi noir est pris au piège.', droppable: false },
     ]);
   });
 });
@@ -144,7 +148,7 @@ describe('rarer moves', () => {
     expect(move).toMatchObject({ moveClass: said.cls, slower: said.slower });
     for (const lang of langs) {
       const context = { gameId: 'crafted1', coach: 2, language: LANGUAGES[lang] };
-      const found = fact(move, LANGUAGES[lang].facts);
+      const found = fact(move, LANGUAGES[lang]);
       expect(found === null ? null : withoutPlay(found)).toBe(said[lang].fact);
       expect(asRecorded(explanation(move, context, NO_CONTEXT), move, LANGUAGES[lang])).toEqual(
         toParts(said[lang].parts),
