@@ -203,10 +203,6 @@ export function findings(move: MoveVerdict, facts: FactSentences): Findings {
   return isError(move.moveClass) ? errorFindings(input) : { fact: goodFact(input), threat: null };
 }
 
-/** One fact about the move, or null when there's nothing concrete to say. */
-export const fact = (move: MoveVerdict, facts: FactSentences): string | null =>
-  findings(move, facts).fact?.text ?? null;
-
 /** The tactics the coach's findings are about, for the bubble's tags. */
 export function themesOf({ fact: found, threat }: Findings): Theme[] {
   const themes = [found?.theme, threat?.theme].filter(

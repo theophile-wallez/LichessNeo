@@ -9,7 +9,7 @@ import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import { judge } from '#page/review/judge/judge.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { explanation } from './explanation.ts';
-import { fact, findings } from './fact.ts';
+import { findings } from './fact.ts';
 import { hash } from './hash.ts';
 import { remark } from './remark.ts';
 import { advantageName, evaluationLevel, trajectory, type TrajectoryInput } from './trajectory.ts';
@@ -37,6 +37,10 @@ const langs: readonly ('en' | 'fr')[] = ['en', 'fr'];
 // are taken off, so the recordings stay the reference.
 const PLAY = /@[ab]:[^\]]*/g;
 const withoutPlay = (text: string): string => text.replace(PLAY, '');
+
+/** The fact the coach states about a move, null for none. */
+const fact = (move: MoveVerdict, facts: ReviewLanguage['facts']): string | null =>
+  findings(move, facts).fact?.text ?? null;
 
 function asRecorded(
   parts: readonly CommentPart[],
