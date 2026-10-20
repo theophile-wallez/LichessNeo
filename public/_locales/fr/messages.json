@@ -465,7 +465,7 @@
     "message": "Classement dans la barre latérale"
   },
   "settingSidebarRatingBody": {
-    "message": "Le classement affiché à côté de votre nom. Par défaut, la cadence que vous jouez le plus."
+    "message": "Le classement affiché à côté de votre nom, ou aucun. Par défaut, la cadence que vous jouez le plus."
   },
   "settingGameIntro": {
     "message": "Intro de partie"
@@ -511,6 +511,9 @@
   },
   "ratingMostPlayed": {
     "message": "La plus jouée"
+  },
+  "ratingHidden": {
+    "message": "Masqué"
   },
   "speedUltraBullet": {
     "message": "UltraBullet"
@@ -871,5 +874,165 @@
   },
   "coachPickerClose": {
     "message": "Fermer"
+  },
+  "settingsPagePairing": {
+    "message": "Partie rapide",
+    "description": "The settings' page for the home's quick pairing cards."
+  },
+  "pairingCardsTitle": {
+    "message": "Vos cartes d’accueil",
+    "description": "The title of the list of the home's quick pairing cards."
+  },
+  "pairingCardsBody": {
+    "message": "La partie rapide de l’accueil les montre dans cet ordre. Un clic sur la cadence d’une carte cherche cette partie.",
+    "description": "What the home cards' list is."
+  },
+  "pairingReset": {
+    "message": "Rétablir les cartes de base",
+    "description": "The button that puts back the four speed cards, as they first were."
+  },
+  "pairingMoveUp": {
+    "message": "Monter",
+    "description": "A card's button that moves it one place up, read out by screen readers."
+  },
+  "pairingMoveDown": {
+    "message": "Descendre",
+    "description": "A card's button that moves it one place down, read out by screen readers."
+  },
+  "pairingRemove": {
+    "message": "Retirer",
+    "description": "A card's button that takes it off the home, read out by screen readers."
+  },
+  "pairingSuggestionsTitle": {
+    "message": "Suggestions",
+    "description": "The title of the cards suggested from the player's recent games."
+  },
+  "pairingSuggestionsBody": {
+    "message": "Ce que vous avez le plus joué ces derniers temps, et qui n’a pas encore sa carte.",
+    "description": "Where the suggestions come from."
+  },
+  "pairingSuggestionsLoading": {
+    "message": "Lecture de vos dernières parties…",
+    "description": "While the player's recent games are fetched for the suggestions."
+  },
+  "pairingSuggestionsNone": {
+    "message": "Tout ce que vous jouez souvent a déjà sa carte.",
+    "description": "No suggestion left."
+  },
+  "pairingGames": {
+    "message": "$1 parties récentes",
+    "description": "How many of the player's recent games a suggestion stands for; $1 is the number."
+  },
+  "pairingDefaultCard": {
+    "message": "Une carte de base",
+    "description": "A suggestion that puts back one of the four speed cards."
+  },
+  "pairingAdd": {
+    "message": "Ajouter",
+    "description": "The button that adds a suggested or made card to the home."
+  },
+  "pairingCreateTitle": {
+    "message": "Créer une carte",
+    "description": "The title of the form that makes a card of the player's own."
+  },
+  "pairingCreateBody": {
+    "message": "Une variante et jusqu’à quatre cadences de votre choix, classées ou non.",
+    "description": "What the form makes."
+  },
+  "pairingVariant": {
+    "message": "Variante",
+    "description": "The form's variant menu."
+  },
+  "pairingMinutes": {
+    "message": "Minutes par joueur",
+    "description": "The form's menu of the clock's minutes."
+  },
+  "pairingIncrement": {
+    "message": "Incrément en secondes",
+    "description": "The form's menu of the clock's increment."
+  },
+  "pairingMode": {
+    "message": "Mode",
+    "description": "The form's menu of rated or casual."
+  },
+  "pairingRated": {
+    "message": "Classée",
+    "description": "A game that counts for the rating."
+  },
+  "pairingCasual": {
+    "message": "Amicale",
+    "description": "A game that doesn't count for the rating."
+  },
+  "pairingFull": {
+    "message": "$1 cartes au plus : retirez-en une pour en ajouter une autre.",
+    "description": "Why nothing can be added; $1 is the most cards the home shows."
+  },
+  "pairingThere": {
+    "message": "Cette partie a déjà sa carte.",
+    "description": "Why the made card can't be added."
+  },
+  "variantStandard": {
+    "message": "Standard",
+    "description": "A chess variant: the usual rules."
+  },
+  "variantChess960": {
+    "message": "Chess960",
+    "description": "A chess variant."
+  },
+  "variantCrazyhouse": {
+    "message": "Crazyhouse",
+    "description": "A chess variant."
+  },
+  "variantKingOfTheHill": {
+    "message": "Roi de la colline",
+    "description": "A chess variant."
+  },
+  "variantThreeCheck": {
+    "message": "Trois échecs",
+    "description": "A chess variant."
+  },
+  "variantAntichess": {
+    "message": "Qui perd gagne",
+    "description": "A chess variant."
+  },
+  "variantAtomic": {
+    "message": "Atomique",
+    "description": "A chess variant."
+  },
+  "variantHorde": {
+    "message": "Horde",
+    "description": "A chess variant."
+  },
+  "variantRacingKings": {
+    "message": "Course de rois",
+    "description": "A chess variant."
+  },
+  "pairingAddClock": {
+    "message": "Ajouter une cadence",
+    "description": "The form's button for another time control on the card, four at most."
+  },
+  "pairingRemoveClock": {
+    "message": "Retirer cette cadence",
+    "description": "The cross that takes a time control off the made card, read out by screen readers."
+  },
+  "pairingEdit": {
+    "message": "Modifier",
+    "description": "A card's button that opens it in the form, read out by screen readers."
+  },
+  "pairingEditTitle": {
+    "message": "Modifier une carte",
+    "description": "The title of the form while it changes one of the home cards."
+  },
+  "pairingEditBody": {
+    "message": "Sa variante, son mode et jusqu’à quatre cadences, à votre goût.",
+    "description": "What the form changes on a card."
+  },
+  "pairingSave": {
+    "message": "Enregistrer",
+    "description": "The button that puts the card changed in the form in its place on the home."
+  },
+  "pairingCancel": {
+    "message": "Annuler",
+    "description": "The button that leaves a card as it was and empties the form."
   }
 }

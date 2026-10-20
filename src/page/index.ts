@@ -10,6 +10,7 @@ import { gameCharts } from './charts/game/index.ts';
 import { gameOver } from './game-over/index.ts';
 import { chat } from './chat/index.ts';
 import { nextGameSeek } from './seek/index.ts';
+import { customSeek } from './seek/custom-seek.ts';
 import { colorScheme } from './color-scheme/index.ts';
 import { lichessLooks } from './looks/index.ts';
 
@@ -29,6 +30,7 @@ startFeatures([
   gameOver,
   chat,
   nextGameSeek,
+  customSeek,
   colorScheme,
   lichessLooks,
 ]);

@@ -4,7 +4,7 @@ import { fetchCards, keepLastPool, keptCards } from './store.ts';
 const KEY = 'ln-ext-speed-cards';
 const MAX_AGE = 30 * 1000;
 
-const card = { speed: 'blitz', games: 25, rating: 1584, provisional: true, history: [1500] };
+const card = { perf: 'blitz', games: 25, rating: 1584, provisional: true, history: [1500] };
 
 const keep = (user: string, at: number): void =>
   localStorage.setItem(KEY, JSON.stringify({ user, at, cards: [card] }));
@@ -52,8 +52,8 @@ describe('the kept cards', () => {
     expect(requests.find(url => url.startsWith('/api/games/'))).toContain(
       'perfType=bullet,blitz,rapid,classical',
     );
-    expect(cards?.find(played => played.speed === 'rapid')).toEqual({
-      speed: 'rapid',
+    expect(cards?.find(played => played.perf === 'rapid')).toEqual({
+      perf: 'rapid',
       games: 78,
       rating: 1673,
       provisional: false,

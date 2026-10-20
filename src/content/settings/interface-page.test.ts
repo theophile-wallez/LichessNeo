@@ -58,9 +58,37 @@ describe('the settings’ Interface page', () => {
       HTMLSelectElement,
     );
     if (!select) throw new Error('no menu');
+    expect([...select.options].map(option => option.value)).toEqual([
+      'hidden',
+      'mostPlayed',
+      'ultraBullet',
+      'bullet',
+      'blitz',
+      'rapid',
+      'classical',
+      'correspondence',
+    ]);
     select.value = 'blitz';
     select.dispatchEvent(new Event('change', { bubbles: true }));
     expect(storedSettings()).toMatchObject({ sidebarRating: 'blitz' });
+    select.value = 'hidden';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+    expect(storedSettings()).toMatchObject({ sidebarRating: 'hidden' });
+  });
+
+  it('draws each rating’s option with its icon, a speed’s glyph in its color', async () => {
+    const page = buildInterfacePage();
+    await flush();
+    const icon = (value: string): HTMLElement | null =>
+      queryOne(page, `option[value='${value}'] .ln-ext-setting__option-icon`, HTMLElement);
+    expect(icon('hidden')?.dataset.lnExtPick).toBe('hidden');
+    expect(icon('hidden')?.querySelector('svg')).not.toBeNull();
+    expect(icon('mostPlayed')?.querySelector('svg')).not.toBeNull();
+    expect(icon('rapid')?.dataset.lnExtSpeed).toBe('rapid');
+    expect(icon('rapid')?.style.getPropertyValue('--ln-ext-speed-color')).not.toBe('');
+    expect(queryOne(page, "option[value='rapid'] span:last-child", HTMLElement)?.textContent).toBe(
+      'speedRapid',
+    );
   });
 
   it('leaves the settings alone on a click beside the switch', async () => {

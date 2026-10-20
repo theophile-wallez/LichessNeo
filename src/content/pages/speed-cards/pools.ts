@@ -1,3 +1,5 @@
+import { clockLabel } from '#shared/custom-seek.ts';
+
 // Lichess's quick pairing pools (lila's PoolList), by speed: the cards'
 // buttons, which join the pool of the same id.
 
@@ -21,8 +23,8 @@ export const speedOfPool = (id: string): CardSpeed | undefined =>
 
 /** "10 min" for 10+0, "2 + 1" for 2+1: a pool's label in any language. */
 export function poolLabel(id: string): string {
-  const [minutes, increment] = id.split('+');
-  return increment === '0' ? `${minutes} min` : `${minutes} + ${increment}`;
+  const [minutes = 0, increment = 0] = id.split('+').map(Number);
+  return clockLabel(minutes, increment);
 }
 
 /** The pool of a clock in seconds, if Lichess has one. */

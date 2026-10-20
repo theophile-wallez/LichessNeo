@@ -3,7 +3,8 @@ import { closestTo, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
 import { readStored } from '#shared/storage.ts';
-import { seekNextGame, type LobbySeek, type Paired, type SeekRequest } from './lobby-seek.ts';
+import { openGame, socketUrl } from './connection.ts';
+import { seekNextGame, type LobbySeek, type SeekRequest } from './lobby-seek.ts';
 import { nextGameOf, nextGameOfLink, type NextGame } from './next-game.ts';
 import { rangeKey, waited, type PoolMember } from './pool-link.ts';
 
@@ -30,15 +31,6 @@ let seeking: Seeking | null = null;
 let roundNext: NextGame | null = null;
 
 const signedIn = (): boolean => Boolean(document.body.dataset.user);
-
-function socketUrl(): string | null {
-  const domains = document.body.dataset.socketDomains?.split(',').filter(Boolean) ?? [];
-  const domain = domains[Math.floor(Math.random() * domains.length)];
-  if (!domain) return null;
-  // A socket of its own, beside the game's.
-  const sri = Math.random().toString(36).slice(2, 12);
-  return `wss://${domain}/lobby/socket/v5?sri=${sri}&from=website`;
-}
 
 // Snabbdom may draw the button anew: the state goes on whichever one is there.
 function show(): void {
@@ -68,15 +60,6 @@ function withRange(member: PoolMember): PoolMember {
 
 const ranged = (request: SeekRequest): SeekRequest =>
   request.kind === 'pool' ? { kind: 'pool', member: withRange(request.member) } : request;
-
-// As Lichess's own redirect does (lila's ui/site/src/reload.ts): an anonymous player owns the
-// game through the cookie it comes with.
-function openGame({ url, cookie }: Paired): void {
-  if (cookie) {
-    document.cookie = `${encodeURIComponent(cookie.name)}=${cookie.value}; max-age=${cookie.maxAge}; path=/; domain=${location.hostname}`;
-  }
-  location.assign(`/${url.replace(/^\//, '')}`);
-}
 
 function start({ request, fallback }: NextGame): void {
   const url = socketUrl();

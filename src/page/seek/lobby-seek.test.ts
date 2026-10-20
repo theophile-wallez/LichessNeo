@@ -47,6 +47,10 @@ function seek(request: SeekRequest = POOL): ReturnType<typeof seekNextGame> {
       hooks.push(`${sri} ${gameId}`);
       return Promise.resolve(hookAccepted);
     },
+    hook: (sri, { variant, minutes, increment }) => {
+      hooks.push(`${sri} ${variant} ${minutes}+${increment}`);
+      return Promise.resolve(hookAccepted);
+    },
   };
   return seekNextGame(options);
 }
@@ -146,5 +150,30 @@ describe('a seek like a game', () => {
     await vi.advanceTimersByTimeAsync(0);
     expect(events).toEqual(['open', 'failed']);
     expect(socket.closed).toBe(true);
+  });
+});
+
+describe('a seek of its own', () => {
+  const HOOK: SeekRequest = {
+    kind: 'hook',
+    seek: { variant: 'atomic', minutes: 3, increment: 2, rated: true },
+  };
+
+  it('asks the lobby for it once the socket opens, for this socket, and cancels it', () => {
+    const own = seek(HOOK);
+    expect(hooks).toEqual([]);
+    socket.open();
+    expect(hooks).toEqual(['abc123 atomic 3+2']);
+    own.cancel();
+    expect(socket.sent).toEqual(['p', '{"t":"cancel"}']);
+    expect(socket.closed).toBe(true);
+  });
+
+  it('fails when the lobby refuses it', async () => {
+    hookAccepted = false;
+    seek(HOOK);
+    socket.open();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(events).toEqual(['open', 'failed']);
   });
 });

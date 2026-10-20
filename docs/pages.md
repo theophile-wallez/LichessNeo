@@ -83,11 +83,11 @@ and a white knob, and a single big number in the state's color.
 
 ## Account
 
-| Page           | Path                                | Level | Next                                                                                                                                        |
-| -------------- | ----------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Preferences    | `/account/preferences`              | 2     | below 640px up to four choices share a row, more go two by two                                                                              |
-| Our settings   | `/account/profile#ln-ext-extension` | 2     | five pages in the account's menu, the board's over a preview board; the coach speaks on its stage as on the review's card; no signature yet |
-| Page not found | any unknown path                    | 2     | a card with a signpost and the number in the accent's gradient, Lichess's mini-game on a card of its own                                    |
+| Page           | Path                                | Level | Next                                                                                                                                       |
+| -------------- | ----------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Preferences    | `/account/preferences`              | 2     | below 640px up to four choices share a row, more go two by two                                                                             |
+| Our settings   | `/account/profile#ln-ext-extension` | 2     | six pages in the account's menu, the board's over a preview board; the coach speaks on its stage as on the review's card; no signature yet |
+| Page not found | any unknown path                    | 2     | a card with a signpost and the number in the accent's gradient, Lichess's mini-game on a card of its own                                   |
 
 ## Seen while auditing
 

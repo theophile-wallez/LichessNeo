@@ -7,6 +7,7 @@ export const SETTINGS_PAGES = [
   'profile',
   'board',
   'packs',
+  'pairing',
   'interface',
 ] as const;
 
@@ -18,6 +19,7 @@ export const PAGE_NAMES: Readonly<Record<SettingsPage, string>> = {
   profile: 'settingsPageProfile',
   board: 'settingsPageBoard',
   packs: 'settingsPagePacks',
+  pairing: 'settingsPagePairing',
   interface: 'settingsPageInterface',
 };
 

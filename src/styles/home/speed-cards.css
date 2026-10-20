@@ -35,7 +35,13 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   font-weight: 800;
 }
 
-.ln-ext-speeds__custom {
+.ln-ext-speeds__tools {
+  display: flex;
+  gap: 8px;
+}
+
+/* The settings' page of the cards, and Lichess's game setup: two pills. */
+:is(.ln-ext-speeds__edit, .ln-ext-speeds__custom) {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -48,19 +54,24 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   font: inherit;
   font-size: 14px;
   font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
   transition:
     background-color 0.15s,
     border-color 0.15s !important;
 }
 
-.ln-ext-speeds__custom:hover {
+.ln-ext-speeds__edit {
+  padding-inline-end: 14px;
+}
+
+:is(.ln-ext-speeds__edit, .ln-ext-speeds__custom):hover {
   border-color: var(--ln-ext-card-border-hover);
   background: var(--ln-ext-btn-grey);
   color: var(--ln-ext-text-strong);
 }
 
-.ln-ext-speeds__custom .ln-ext-hi {
+:is(.ln-ext-speeds__edit, .ln-ext-speeds__custom) .ln-ext-hi {
   width: 16px;
   height: 16px;
 }
@@ -90,7 +101,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   display: inline-flex;
 }
 
-.ln-ext-speeds--seeking .ln-ext-speeds__custom {
+.ln-ext-speeds--seeking .ln-ext-speeds__tools {
   display: none;
 }
 
@@ -162,27 +173,15 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   text-overflow: ellipsis;
 }
 
-/* The speed's Lichess glyph, in its rating's color. */
+/* The rating's glyph, in its color. */
 .ln-ext-speed__name::before {
   flex: none;
+  content: var(--ln-ext-perf-glyph, '');
   color: var(--ln-ext-speed-color);
   font-family: lichess;
   font-size: 18px;
   font-weight: 400;
   line-height: 1;
-}
-
-.ln-ext-speed[data-ln-ext-speed='bullet'] .ln-ext-speed__name::before {
-  content: var(--ln-ext-mode-bullet);
-}
-.ln-ext-speed[data-ln-ext-speed='blitz'] .ln-ext-speed__name::before {
-  content: var(--ln-ext-mode-blitz);
-}
-.ln-ext-speed[data-ln-ext-speed='rapid'] .ln-ext-speed__name::before {
-  content: var(--ln-ext-mode-rapid);
-}
-.ln-ext-speed[data-ln-ext-speed='classical'] .ln-ext-speed__name::before {
-  content: var(--ln-ext-mode-classical);
 }
 
 .ln-ext-speed__games {
@@ -316,15 +315,27 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   background: var(--ln-ext-btn-grey-hover);
 }
 
-/* The pool last played at this speed: one click to play it again. */
-.ln-ext-speed__pool--last {
+/* The pool last played at this speed: one click to play it again. On a card of the player's
+   own, its first time control's, its main game. */
+:is(.ln-ext-speed__pool--last, .ln-ext-speed__pool--main) {
   background: var(--ln-ext-btn-primary);
   box-shadow: var(--ln-ext-btn-primary-shadow);
   color: var(--ln-ext-white);
 }
 
-.ln-ext-speed__pool--last:hover {
+:is(.ln-ext-speed__pool--last, .ln-ext-speed__pool--main):hover {
   background: var(--ln-ext-btn-primary-hover);
+}
+
+/* A card of the player's own whose games don't count for the rating, beside its name. */
+.ln-ext-speed__casual {
+  flex: none;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  font-weight: 700;
 }
 
 /* Seeking: the pool ringed, a cross to cancel, the others faded. */

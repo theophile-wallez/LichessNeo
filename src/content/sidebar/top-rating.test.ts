@@ -51,4 +51,8 @@ describe('pickedRating', () => {
     expect(pickedRating(top, ratingsOf(profile), 'classical')).toEqual(top);
     expect(pickedRating(top, undefined, 'blitz')).toEqual(top);
   });
+
+  it('shows none once hidden', () => {
+    expect(pickedRating(top, ratingsOf(profile), 'hidden')).toBeNull();
+  });
 });

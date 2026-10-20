@@ -620,7 +620,7 @@
     "description": "The setting of which speed's rating shows beside the player's name in the sidebar."
   },
   "settingSidebarRatingBody": {
-    "message": "The rating beside your name. By default, the speed you play the most.",
+    "message": "The rating beside your name, or none. By default, the speed you play the most.",
     "description": "What the sidebar rating setting covers."
   },
   "settingGameIntro": {
@@ -682,6 +682,10 @@
   "ratingMostPlayed": {
     "message": "Most played",
     "description": "The default pick: the speed with the most games."
+  },
+  "ratingHidden": {
+    "message": "Hidden",
+    "description": "The pick that shows no rating beside the name."
   },
   "speedUltraBullet": {
     "message": "UltraBullet",
@@ -1162,5 +1166,165 @@
   "coachPickerClose": {
     "message": "Close",
     "description": "The coach picker's close button, read out by screen readers."
+  },
+  "settingsPagePairing": {
+    "message": "Quick pairing",
+    "description": "The settings' page for the home's quick pairing cards."
+  },
+  "pairingCardsTitle": {
+    "message": "Your home cards",
+    "description": "The title of the list of the home's quick pairing cards."
+  },
+  "pairingCardsBody": {
+    "message": "The home's quick pairing shows them in this order. One click on a card's time control seeks that game.",
+    "description": "What the home cards' list is."
+  },
+  "pairingReset": {
+    "message": "Restore the defaults",
+    "description": "The button that puts back the four speed cards, as they first were."
+  },
+  "pairingMoveUp": {
+    "message": "Move up",
+    "description": "A card's button that moves it one place up, read out by screen readers."
+  },
+  "pairingMoveDown": {
+    "message": "Move down",
+    "description": "A card's button that moves it one place down, read out by screen readers."
+  },
+  "pairingRemove": {
+    "message": "Remove",
+    "description": "A card's button that takes it off the home, read out by screen readers."
+  },
+  "pairingSuggestionsTitle": {
+    "message": "Suggestions",
+    "description": "The title of the cards suggested from the player's recent games."
+  },
+  "pairingSuggestionsBody": {
+    "message": "What you've played the most lately, and doesn't have its card yet.",
+    "description": "Where the suggestions come from."
+  },
+  "pairingSuggestionsLoading": {
+    "message": "Reading your recent games…",
+    "description": "While the player's recent games are fetched for the suggestions."
+  },
+  "pairingSuggestionsNone": {
+    "message": "Everything you play often already has its card.",
+    "description": "No suggestion left."
+  },
+  "pairingGames": {
+    "message": "$1 recent games",
+    "description": "How many of the player's recent games a suggestion stands for; $1 is the number."
+  },
+  "pairingDefaultCard": {
+    "message": "A default card",
+    "description": "A suggestion that puts back one of the four speed cards."
+  },
+  "pairingAdd": {
+    "message": "Add",
+    "description": "The button that adds a suggested or made card to the home."
+  },
+  "pairingCreateTitle": {
+    "message": "Make your own card",
+    "description": "The title of the form that makes a card of the player's own."
+  },
+  "pairingCreateBody": {
+    "message": "A variant and up to four time controls of your choice, rated or not.",
+    "description": "What the form makes."
+  },
+  "pairingVariant": {
+    "message": "Variant",
+    "description": "The form's variant menu."
+  },
+  "pairingMinutes": {
+    "message": "Minutes per side",
+    "description": "The form's menu of the clock's minutes."
+  },
+  "pairingIncrement": {
+    "message": "Increment in seconds",
+    "description": "The form's menu of the clock's increment."
+  },
+  "pairingMode": {
+    "message": "Mode",
+    "description": "The form's menu of rated or casual."
+  },
+  "pairingRated": {
+    "message": "Rated",
+    "description": "A game that counts for the rating."
+  },
+  "pairingCasual": {
+    "message": "Casual",
+    "description": "A game that doesn't count for the rating."
+  },
+  "pairingFull": {
+    "message": "$1 cards at most: remove one to add another.",
+    "description": "Why nothing can be added; $1 is the most cards the home shows."
+  },
+  "pairingThere": {
+    "message": "This game already has its card.",
+    "description": "Why the made card can't be added."
+  },
+  "variantStandard": {
+    "message": "Standard",
+    "description": "A chess variant: the usual rules."
+  },
+  "variantChess960": {
+    "message": "Chess960",
+    "description": "A chess variant."
+  },
+  "variantCrazyhouse": {
+    "message": "Crazyhouse",
+    "description": "A chess variant."
+  },
+  "variantKingOfTheHill": {
+    "message": "King of the Hill",
+    "description": "A chess variant."
+  },
+  "variantThreeCheck": {
+    "message": "Three-check",
+    "description": "A chess variant."
+  },
+  "variantAntichess": {
+    "message": "Antichess",
+    "description": "A chess variant."
+  },
+  "variantAtomic": {
+    "message": "Atomic",
+    "description": "A chess variant."
+  },
+  "variantHorde": {
+    "message": "Horde",
+    "description": "A chess variant."
+  },
+  "variantRacingKings": {
+    "message": "Racing Kings",
+    "description": "A chess variant."
+  },
+  "pairingAddClock": {
+    "message": "Add a time control",
+    "description": "The form's button for another time control on the card, four at most."
+  },
+  "pairingRemoveClock": {
+    "message": "Remove this time control",
+    "description": "The cross that takes a time control off the made card, read out by screen readers."
+  },
+  "pairingEdit": {
+    "message": "Edit",
+    "description": "A card's button that opens it in the form, read out by screen readers."
+  },
+  "pairingEditTitle": {
+    "message": "Edit a card",
+    "description": "The title of the form while it changes one of the home cards."
+  },
+  "pairingEditBody": {
+    "message": "Its variant, its mode and up to four time controls, as you like.",
+    "description": "What the form changes on a card."
+  },
+  "pairingSave": {
+    "message": "Save",
+    "description": "The button that puts the card changed in the form in its place on the home."
+  },
+  "pairingCancel": {
+    "message": "Cancel",
+    "description": "The button that leaves a card as it was and empties the form."
   }
 }

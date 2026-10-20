@@ -205,7 +205,19 @@
     font-size: 12.5px;
   }
 
-  .ln-ext-speeds__custom .ln-ext-hi {
+  /* The settings' link as its pencil alone, its name still read out. */
+  .ln-ext-speeds__edit {
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+  }
+
+  .ln-ext-speeds__edit > span {
+    display: none;
+  }
+
+  :is(.ln-ext-speeds__edit, .ln-ext-speeds__custom) .ln-ext-hi {
     width: 14px;
     height: 14px;
   }

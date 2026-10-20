@@ -25,6 +25,43 @@
   outline-offset: 2px;
 }
 
+/* An option's icon (content/settings/rating-row.ts): a rating's glyph in its color, or a
+ * Hugeicon. Chrome's customizable select shows it, in the list and in the button. */
+.ln-ext-setting__option-icon {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+.ln-ext-setting__option-icon::before {
+  content: var(--ln-ext-perf-glyph, none);
+  color: var(--ln-ext-speed-color);
+  font-family: lichess;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.ln-ext-setting__option-icon .ln-ext-hi {
+  width: 17px;
+  height: 17px;
+}
+
+.ln-ext-setting__option-icon[data-ln-ext-pick='mostPlayed'] {
+  color: var(--ln-ext-yellow);
+}
+
+.ln-ext-setting__option-icon[data-ln-ext-pick='hidden'] {
+  color: var(--ln-ext-text-dim);
+}
+
+.ln-ext-setting__select selectedcontent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* On a phone the menu takes a row of its own, under the text. */
 @media (max-width: 640px) {
   .ln-ext-setting {

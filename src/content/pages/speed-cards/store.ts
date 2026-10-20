@@ -1,8 +1,15 @@
 import { z } from 'zod/mini';
 import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
 import { keepAccountRating } from '#content/sidebar/account-rating.ts';
-import { UserSchema } from '#content/sidebar/top-rating.ts';
-import { CardSchema, cardsOf, HistorySchema, lastPools, newestPool, type Card } from './data.ts';
+import {
+  CardSchema,
+  cardsOf,
+  CardUserSchema,
+  HistorySchema,
+  lastPools,
+  newestPool,
+  type Card,
+} from './data.ts';
 import { CARD_SPEEDS, type CardSpeed } from './pools.ts';
 
 // The signed-in player's cards, kept so the home draws them at once, then
@@ -57,7 +64,7 @@ async function lastGames(user: string): Promise<string> {
 export async function fetchCards(user: string): Promise<Card[] | null> {
   const name = encodeURIComponent(user);
   const [profile, history, games] = await Promise.all([
-    json(`/api/user/${name}`, UserSchema),
+    json(`/api/user/${name}`, CardUserSchema),
     json(`/api/user/${name}/rating-history`, HistorySchema),
     lastGames(name),
   ]);
@@ -74,7 +81,7 @@ export async function fetchCards(user: string): Promise<Card[] | null> {
 export function keepLastPool(user: string, speed: CardSpeed, pool: string): Card[] | null {
   const kept = readStoredJson(StorageKey.speedCards, KeptSchema);
   if (kept?.user !== user) return null;
-  for (const card of kept.cards) if (card.speed === speed) card.last = pool;
+  for (const card of kept.cards) if (card.perf === speed) card.last = pool;
   writeStoredJson(StorageKey.speedCards, { ...kept, last: pool });
   return kept.cards;
 }

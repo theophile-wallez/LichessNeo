@@ -10,6 +10,7 @@ import { buildNameCard } from './name-card.ts';
 import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
 import { buildInterfacePage } from './interface-page.ts';
 import { buildLooksPage } from './looks-page.ts';
+import { buildPairingPage } from './pairing-page.ts';
 import { onSettings, settingsRead } from './settings.ts';
 
 // The account page's section for the extension: one of its pages
@@ -46,11 +47,13 @@ export function buildSection(): SettingsSection {
   );
   const coach = buildCoachCard();
   const looks = buildLooksPage(packLibrary());
+  const pairing = buildPairingPage();
   const pages: Readonly<Record<SettingsPage, readonly HTMLElement[]>> = {
     personalization: [buildAppearance(), coach.element, buildCoachSwitches()],
     profile: [buildAvatarCard(), buildNameCard()],
     board: looks.elements,
     packs: [importSection(packLibrary())],
+    pairing: [pairing.element],
     interface: [buildInterfacePage()],
   };
   for (const page of SETTINGS_PAGES)
@@ -67,6 +70,7 @@ export function buildSection(): SettingsSection {
       showPage(element, page);
       coach.show(page === 'personalization');
       looks.show(page === 'board');
+      pairing.show(page === 'pairing');
       if (page === 'personalization') showScheme(element);
     },
   };

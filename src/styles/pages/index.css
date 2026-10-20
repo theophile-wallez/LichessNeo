@@ -29,6 +29,8 @@
 @import './settings-board-tiles.css';
 @import './setting-menu.css';
 @import './settings-intro.css';
+@import './settings-pairing.css';
+@import './settings-pairing-form.css';
 @import './appearance.css';
 @import './theme-editor.css';
 @import './menu-titles.css';

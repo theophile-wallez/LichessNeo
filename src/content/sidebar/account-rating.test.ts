@@ -105,4 +105,13 @@ describe('the account rating', () => {
     await flush();
     expect(shown()).toEqual(['blitz', '"1600?"']);
   });
+
+  it('shows none once hidden in the settings', async () => {
+    signIn('eresy');
+    keep('eresy', Date.now());
+    localStorage.setItem('ln-ext-sidebar-rating', 'hidden');
+    accountRating.start();
+    expect(shown()).toEqual([undefined, '']);
+    expect(chars()).toBe('');
+  });
 });

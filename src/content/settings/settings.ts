@@ -4,6 +4,7 @@ import { isConnected, onSyncedChange, readSynced, writeSynced } from '#content/p
 import { CustomThemeSchema, DEFAULT_THEME, ThemePicksSchema } from '#content/colors/themes.ts';
 import { RatingPickSchema } from '#content/sidebar/top-rating.ts';
 import { DEFAULT_INTRO, IntroKindSchema } from '#content/game/intro/kinds.ts';
+import { CardPicksSchema } from '#content/pages/speed-cards/picks.ts';
 
 // The extension's settings (the account page's Lichess Neo section),
 // kept in chrome.storage.sync so they follow the user to their other
@@ -23,6 +24,8 @@ const SettingsSchema = z.object({
   coachBoard: z.prefault(z.boolean(), true),
   /** The speed whose rating the sidebar shows beside the player's name (content/sidebar). */
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
+  /** The home's quick pairing cards, in their order (content/pages/speed-cards). */
+  quickPairing: CardPicksSchema,
   /** The players' intro at a game's start, or none (content/game/intro). */
   gameIntro: z.catch(IntroKindSchema, DEFAULT_INTRO),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */
@@ -75,10 +78,13 @@ export function currentSettings(): Settings {
   return current;
 }
 
-/** Whether the storage has answered (or failed to): until then, the settings are the defaults. */
+/**
+ * Whether the storage has answered (or failed to, or can't be reached): until then, the
+ * settings are the defaults.
+ */
 export function settingsRead(): boolean {
   load();
-  return read;
+  return read || !isConnected();
 }
 
 /** Calls `listener` with the settings each time they're read or changed. */

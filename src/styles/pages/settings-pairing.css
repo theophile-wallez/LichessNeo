@@ -1,0 +1,313 @@
+/* ---- The settings' Quick pairing page (content/settings/pairing-page.ts) --- */
+
+/* Three cards in the Packs card's look: the home's cards, the suggestions, the form. Each card
+   of the home is a row: its rating's glyph on a tile in its color (home/speed-cards.css), its
+   name and time controls, its buttons. */
+
+.ln-ext-pairing {
+  --ln-ext-setting-color: var(--ln-ext-orange);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layout-grid.svg');
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px 18px;
+  border-radius: 14px;
+  background: var(--ln-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  /* Its rows' lines, which don't wrap, never widen the page's column: below 1020px that
+     column takes its content's width, past the window's. */
+  contain: inline-size;
+}
+
+.ln-ext-pairing[data-ln-ext-pairing='suggestions'] {
+  --ln-ext-setting-color: var(--ln-ext-yellow);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01.svg');
+}
+
+.ln-ext-pairing[data-ln-ext-pairing='create'] {
+  --ln-ext-setting-color: var(--ln-ext-cyan);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dashboard-square-add.svg');
+}
+
+.ln-ext-pairing__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ln-ext-pairing:hover .ln-ext-setting__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+:is(.ln-ext-pairing__reset, .ln-ext-pairing__cancel) {
+  flex: none;
+  height: 34px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 9px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong);
+  font: 600 13.5px var(--ln-ext-font);
+  cursor: pointer;
+}
+
+.ln-ext-pairing__reset:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+:is(.ln-ext-pairing__reset, .ln-ext-pairing__cancel):hover:not(:disabled) {
+  background: var(--ln-ext-btn-grey-hover);
+}
+
+.ln-ext-pairing__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ln-ext-pairing__rows:empty {
+  display: none;
+}
+
+.ln-ext-pairing__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--ln-ext-shade-18);
+}
+
+/* The card the form changes. */
+.ln-ext-pairing__row--editing {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--ln-ext-accent) 75%, transparent);
+}
+
+.ln-ext-pairing__glyph {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ln-ext-speed-color) 20%, transparent);
+  box-shadow: inset 0 1px #ffffff1a;
+}
+
+.ln-ext-pairing__glyph::before {
+  content: var(--ln-ext-perf-glyph, '');
+  color: var(--ln-ext-speed-color);
+  font-family: lichess;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.ln-ext-pairing__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ln-ext-pairing__name {
+  overflow: hidden;
+  color: var(--ln-ext-text-strong);
+  font-size: 14.5px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ln-ext-pairing__detail {
+  overflow: hidden;
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* How much the player plays it, in its rating's color. */
+.ln-ext-pairing__games {
+  flex: none;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-speed-color) 16%, transparent);
+  color: color-mix(in srgb, var(--ln-ext-speed-color) 80%, var(--ln-ext-text-strong));
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.ln-ext-pairing__actions {
+  display: flex;
+  flex: none;
+  gap: 4px;
+}
+
+.ln-ext-pairing__action {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong);
+  cursor: pointer;
+}
+
+.ln-ext-pairing__action:hover:not(:disabled) {
+  background: var(--ln-ext-btn-grey-hover);
+}
+
+.ln-ext-pairing__action[data-ln-ext-action='remove']:hover:not(:disabled) {
+  background: var(--ln-ext-btn-red);
+  box-shadow: var(--ln-ext-btn-red-shadow);
+  color: var(--ln-ext-white);
+}
+
+.ln-ext-pairing__cancel {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.ln-ext-pairing__action .ln-ext-hi {
+  width: 17px;
+  height: 17px;
+}
+
+:is(.ln-ext-pairing__action, .ln-ext-pairing__add):disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.ln-ext-pairing__add {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px 0 9px;
+  border: none;
+  border-radius: 8px;
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white);
+  font: 700 13px var(--ln-ext-font);
+  cursor: pointer;
+}
+
+.ln-ext-pairing__add:hover:not(:disabled) {
+  background: var(--ln-ext-btn-primary-hover);
+}
+
+.ln-ext-pairing__add .ln-ext-hi {
+  width: 16px;
+  height: 16px;
+}
+
+.ln-ext-pairing__note {
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 13.5px;
+}
+
+.ln-ext-pairing__note:empty {
+  display: none;
+}
+
+/* While the recent games are read: the suggestions' shapes, a light sweeping over them. */
+.ln-ext-pairing__row--skeleton .ln-ext-pairing__glyph,
+.ln-ext-pairing__bone {
+  background: linear-gradient(100deg, transparent 30%, var(--ln-ext-lift-12) 50%, transparent 70%)
+    var(--ln-ext-lift-6) 0 0 / 300% 100%;
+  box-shadow: none;
+  animation: ln-ext-pairing-shimmer 1.4s linear infinite;
+}
+
+.ln-ext-pairing__row--skeleton .ln-ext-pairing__text {
+  gap: 7px;
+}
+
+.ln-ext-pairing__bone {
+  display: block;
+  flex: none;
+  width: 90px;
+  height: 13px;
+  border-radius: 6px;
+}
+
+.ln-ext-pairing__bone--short {
+  width: 130px;
+  height: 10px;
+}
+
+.ln-ext-pairing__bone--pill {
+  width: 112px;
+  height: 22px;
+  border-radius: 999px;
+}
+
+.ln-ext-pairing__bone--button {
+  width: 74px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+@keyframes ln-ext-pairing-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* On a phone a row keeps its name and its buttons on one line while they fit; a suggestion's
+   count and button go under it otherwise, on its right. */
+@media (max-width: 640px) {
+  .ln-ext-pairing__head {
+    flex-wrap: wrap;
+  }
+
+  .ln-ext-pairing__head .ln-ext-setting__text {
+    flex: 1 1 200px;
+  }
+
+  .ln-ext-pairing__reset {
+    margin-inline-start: 62px;
+  }
+
+  .ln-ext-pairing__row {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .ln-ext-pairing__text {
+    flex: 1 1 100px;
+  }
+
+  .ln-ext-pairing__actions {
+    margin-inline-start: auto;
+  }
+
+  .ln-ext-pairing__row--noted .ln-ext-pairing__text {
+    flex-basis: calc(100% - 52px);
+  }
+
+  .ln-ext-pairing__games {
+    margin-inline-start: 52px;
+  }
+}

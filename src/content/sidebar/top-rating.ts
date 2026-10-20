@@ -51,8 +51,8 @@ export const RatingsSchema = z.partialRecord(
 
 export type Ratings = z.infer<typeof RatingsSchema>;
 
-/** What the sidebar shows: the most played speed's rating, or one speed's. */
-export const RatingPickSchema = z.enum(['mostPlayed', ...SPEEDS]);
+/** What the sidebar shows: none, the most played speed's rating, or one speed's. */
+export const RatingPickSchema = z.enum(['hidden', 'mostPlayed', ...SPEEDS]);
 
 export type RatingPick = z.infer<typeof RatingPickSchema>;
 
@@ -82,12 +82,13 @@ export function ratingsOf({ perfs }: z.infer<typeof UserSchema>): Ratings {
   return ratings;
 }
 
-/** The rating picked, or the most played one for a speed the player has none in. */
+/** The rating picked, or the most played one for a speed the player has none in; null if hidden. */
 export function pickedRating(
   top: TopRating | null,
   ratings: Ratings | undefined,
   pick: RatingPick,
 ): TopRating | null {
+  if (pick === 'hidden') return null;
   if (pick === 'mostPlayed') return top;
   const rating = ratings?.[pick];
   return rating ? { speed: pick, ...rating } : top;

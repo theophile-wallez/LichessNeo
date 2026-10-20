@@ -1,0 +1,55 @@
+/* ---- Rating glyphs --- */
+
+/* Each rating's glyph, on the home's cards (home/speed-cards.css) and in the settings'
+   (pages/settings-pairing.css, pages/setting-menu.css): Lichess's, or a Hugeicon where it only has a full-color
+   picture, as in game-modes.css. */
+[data-ln-ext-speed='ultraBullet'] {
+  --ln-ext-perf-glyph: var(--ln-ext-mode-ultrabullet);
+}
+[data-ln-ext-speed='bullet'] {
+  --ln-ext-perf-glyph: var(--ln-ext-mode-bullet);
+}
+[data-ln-ext-speed='blitz'] {
+  --ln-ext-perf-glyph: var(--ln-ext-mode-blitz);
+}
+[data-ln-ext-speed='rapid'] {
+  --ln-ext-perf-glyph: var(--ln-ext-mode-rapid);
+}
+[data-ln-ext-speed='classical'] {
+  --ln-ext-perf-glyph: var(--ln-ext-mode-classical);
+}
+[data-ln-ext-speed='correspondence'] {
+  --ln-ext-perf-glyph: var(--ln-ext-mode-correspondence);
+}
+[data-ln-ext-speed='chess960'] {
+  --ln-ext-perf-glyph: '\e006';
+}
+[data-ln-ext-speed='crazyhouse'] {
+  --ln-ext-perf-glyph: '\e066';
+}
+[data-ln-ext-speed='kingOfTheHill'] {
+  --ln-ext-perf-glyph: '\e007';
+}
+[data-ln-ext-speed='threeCheck'] {
+  --ln-ext-perf-glyph: '\e00d';
+}
+[data-ln-ext-speed='racingKings'] {
+  --ln-ext-perf-glyph: '\e065';
+}
+[data-ln-ext-speed='atomic'] {
+  --ln-ext-perf-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/atom-01.svg');
+}
+[data-ln-ext-speed='antichess'] {
+  --ln-ext-perf-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/exchange-01.svg');
+}
+[data-ln-ext-speed='horde'] {
+  --ln-ext-perf-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+}
+
+:is([data-ln-ext-speed='atomic'], [data-ln-ext-speed='antichess'], [data-ln-ext-speed='horde'])
+  :is(.ln-ext-speed__name, .ln-ext-pairing__glyph)::before {
+  width: 1em;
+  height: 1em;
+  background: var(--ln-ext-speed-color);
+  mask: var(--ln-ext-perf-icon) center / contain no-repeat;
+}

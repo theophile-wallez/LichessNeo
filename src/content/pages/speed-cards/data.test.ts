@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { SEEK_PERFS } from '#shared/custom-seek.ts';
 import { cardsOf, lastPools, newestPool } from './data.ts';
 
 const line = (speed: string, initial?: number, increment?: number): string =>
@@ -55,31 +56,32 @@ describe('cardsOf', () => {
       ],
       last: { rapid: '10+0' },
     });
-    expect(cards.map(card => card.speed)).toEqual(['bullet', 'blitz', 'rapid', 'classical']);
-    expect(cards[0]).toEqual({
-      speed: 'bullet',
+    expect(cards.map(card => card.perf)).toEqual([...SEEK_PERFS]);
+    const [bullet, blitz, rapid] = cards.slice(1);
+    expect(bullet).toEqual({
+      perf: 'bullet',
       games: 0,
       rating: 1500,
       provisional: false,
       history: [],
     });
     // No point written yet: from where every rating starts to the current one.
-    expect(cards[1]).toMatchObject({
+    expect(blitz).toMatchObject({
       games: 25,
       rating: 1584,
       provisional: true,
       history: [1500, 1584],
     });
     // A point a day, the last ones, then the current rating.
-    expect(cards[2]?.history).toHaveLength(30);
-    expect(cards[2]?.history.at(0)).toBe(1511);
-    expect(cards[2]?.history.at(-2)).toBe(1539);
-    expect(cards[2]?.history.at(-1)).toBe(1673);
-    expect(cards[2]?.last).toBe('10+0');
+    expect(rapid?.history).toHaveLength(30);
+    expect(rapid?.history.at(0)).toBe(1511);
+    expect(rapid?.history.at(-2)).toBe(1539);
+    expect(rapid?.history.at(-1)).toBe(1673);
+    expect(rapid?.last).toBe('10+0');
   });
 
   it('reads the series by name whatever its case', () => {
-    const [, blitz] = cardsOf({
+    const [, , blitz] = cardsOf({
       user,
       history: [
         {
@@ -96,11 +98,30 @@ describe('cardsOf', () => {
   });
 
   it('draws a first day from where every rating starts', () => {
-    const [, blitz] = cardsOf({
+    const [, , blitz] = cardsOf({
       user,
       history: [{ name: 'blitz', points: [[2026, 9, 9, 1584]] }],
       last: {},
     });
     expect(blitz?.history).toEqual([1500, 1584]);
+  });
+});
+
+describe("a variant's card", () => {
+  it('reads its rating and its series by key, and has no pool', () => {
+    const cards = cardsOf({
+      user: { perfs: { kingOfTheHill: { games: 4, rating: 1720, prov: true } } },
+      history: [{ name: 'kingOfTheHill', points: [[2026, 9, 9, 1700]] }],
+      last: { blitz: '3+2' },
+    });
+    const hill = cards.find(card => card.perf === 'kingOfTheHill');
+    expect(hill).toEqual({
+      perf: 'kingOfTheHill',
+      games: 4,
+      rating: 1720,
+      provisional: true,
+      history: [1700, 1720],
+    });
+    expect(cards.find(card => card.perf === 'blitz')?.last).toBe('3+2');
   });
 });

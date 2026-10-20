@@ -1,5 +1,7 @@
 import { z } from 'zod/mini';
+import type { CustomSeek } from '#shared/custom-seek.ts';
 import { parseJson } from '#shared/json.ts';
+import { postHook, postHookLike } from './hook-post.ts';
 import type { PoolMember } from './pool-link.ts';
 
 // The next game sought from any page, on a connection to Lichess's lobby
@@ -7,7 +9,7 @@ import type { PoolMember } from './pool-link.ts';
 // ui/lobby/src/socket.ts): a ping 2.5s after each pong. In a pool, the pool
 // is joined again every 10s and left on cancel. Otherwise the lobby gets a
 // seek like a game (as its `/?hook_like=<id>` does), bound to the socket's
-// sri, and cancelled with it. Paired, the server sends the game's address,
+// sri, and cancelled with it, or a seek of its own (a home card's). Paired, the server sends the game's address,
 // and for an anonymous player the cookie that makes them its owner.
 
 const PING_MS = 2500;
@@ -31,10 +33,11 @@ export interface Paired {
   readonly cookie: PairingCookie | null;
 }
 
-/** A pool to join, or a game whose like to seek in the lobby. */
+/** A pool to join, a game whose like to seek in the lobby, or a seek of its own there. */
 export type SeekRequest =
   | { readonly kind: 'pool'; readonly member: PoolMember }
-  | { readonly kind: 'like'; readonly gameId: string };
+  | { readonly kind: 'like'; readonly gameId: string }
+  | { readonly kind: 'hook'; readonly seek: CustomSeek };
 
 /** What the seek uses of a WebSocket. */
 interface LobbySocket {
@@ -57,24 +60,12 @@ export interface LobbySeekOptions {
   readonly connect?: (url: string) => LobbySocket;
   /** Asks the lobby for a seek like the game, for the socket `sri`; true once it's in. */
   readonly hookLike?: (sri: string, gameId: string) => Promise<boolean>;
+  /** Asks the lobby for the seek, for the socket `sri`; true once it's in. */
+  readonly hook?: (sri: string, seek: CustomSeek) => Promise<boolean>;
 }
 
 export interface LobbySeek {
   readonly cancel: () => void;
-}
-
-// lila's controllers.Setup.like, as the lobby posts it.
-async function postHookLike(sri: string, gameId: string): Promise<boolean> {
-  try {
-    const path = `/setup/hook/${encodeURIComponent(sri)}/like/${encodeURIComponent(gameId)}`;
-    const response = await fetch(path, {
-      method: 'POST',
-      headers: { 'X-Requested-With': 'XMLHttpRequest' },
-    });
-    return response.ok;
-  } catch {
-    return false;
-  }
 }
 
 function pairedOf(data: string): Paired | null {
@@ -135,7 +126,11 @@ function join(options: LobbySeekOptions, send: Send, fail: () => void): Joined {
     };
   }
   const sri = new URL(options.url).searchParams.get('sri') ?? '';
-  void (options.hookLike ?? postHookLike)(sri, request.gameId).then(ok => {
+  const posted =
+    request.kind === 'like'
+      ? (options.hookLike ?? postHookLike)(sri, request.gameId)
+      : (options.hook ?? postHook)(sri, request.seek);
+  void posted.then(ok => {
     if (!ok) fail();
     return ok;
   });

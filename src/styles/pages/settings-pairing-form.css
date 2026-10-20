@@ -1,0 +1,96 @@
+/* ---- The settings' Quick pairing form (content/settings/pairing-form.ts) ---- */
+
+/* The form: its variant and mode side by side, then a row per time control, a cross to take
+   one off while there are two. */
+.ln-ext-pairing__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.ln-ext-pairing__form [hidden] {
+  display: none !important;
+}
+
+.ln-ext-pairing__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ln-ext-pairing__clocks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ln-ext-pairing__clock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px;
+}
+
+/* The menus' names once, over the first row; still read out on the others. */
+.ln-ext-pairing__clock + .ln-ext-pairing__clock .ln-ext-pairing__field > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.ln-ext-pairing__clock .ln-ext-pairing__action {
+  height: 36px;
+}
+
+.ln-ext-pairing__field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.ln-ext-pairing__field .ln-ext-setting__select {
+  flex: none;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Another time control: a quiet button under the rows, the accent's. */
+.ln-ext-pairing__more {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px 0 9px;
+  border: 1px dashed color-mix(in srgb, var(--ln-ext-accent) 55%, transparent);
+  border-radius: 8px;
+  background: transparent;
+  color: color-mix(in srgb, var(--ln-ext-accent) 70%, var(--ln-ext-text-strong));
+  font: 700 13px var(--ln-ext-font);
+  cursor: pointer;
+  transition: background-color 0.15s !important;
+}
+
+.ln-ext-pairing__more:hover {
+  background: color-mix(in srgb, var(--ln-ext-accent) 12%, transparent);
+}
+
+.ln-ext-pairing__more .ln-ext-hi {
+  width: 16px;
+  height: 16px;
+}
+
+.ln-ext-pairing__made {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

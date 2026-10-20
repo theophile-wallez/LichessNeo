@@ -96,7 +96,7 @@ describe('the speed cards', () => {
   it("show the player's kept numbers, the last pool as the primary", () => {
     const history = [1500, 1584];
     const cards = [
-      { speed: 'blitz', games: 25, rating: 1584, provisional: true, history, last: '3+2' },
+      { perf: 'blitz', games: 25, rating: 1584, provisional: true, history, last: '3+2' },
     ];
     localStorage.setItem(
       'ln-ext-speed-cards',
@@ -131,7 +131,7 @@ describe('the speed cards', () => {
     ).toBe(true);
     // The heading says so, with a button to stop.
     expect(document.querySelector('.ln-ext-speeds__seeking-text')?.textContent).toBe(
-      'Looking for a 3 + 2 opponent…',
+      'Looking for an opponent (3 + 2)…',
     );
     queryOne(document, '.ln-ext-speeds__cancel', HTMLElement)?.click();
     await flush();
@@ -171,7 +171,7 @@ describe('the hero’s play button', () => {
   });
 
   it('plays the pool last played, and follows the one picked since', async () => {
-    const cards = [{ speed: 'blitz', games: 25, rating: 1584, provisional: false, history: [] }];
+    const cards = [{ perf: 'blitz', games: 25, rating: 1584, provisional: false, history: [] }];
     localStorage.setItem(
       'ln-ext-speed-cards',
       JSON.stringify({ user: 'eresy', at: Date.now(), cards, last: '3+2' }),

@@ -1,5 +1,6 @@
 import { z } from 'zod/mini';
 import { CoachMoodSchema } from './coach.ts';
+import { CustomSeekSchema, type CustomSeek } from './custom-seek.ts';
 import { SoundNameSchema, SoundPlaceSchema } from './sounds.ts';
 import { messageType } from './prefix.ts';
 
@@ -53,6 +54,16 @@ const PreviewActionSchema = z.enum(['draw', 'play', 'step']);
 const LooksPreviewSchema = z.object({
   type: z.literal(messageType('looks-preview')),
   action: PreviewActionSchema,
+});
+
+const CustomSeekRequestSchema = z.object({
+  type: z.literal(messageType('custom-seek')),
+  seek: z.nullable(CustomSeekSchema),
+});
+
+const CustomSeekStateSchema = z.object({
+  type: z.literal(messageType('custom-seek-state')),
+  seeking: z.boolean(),
 });
 
 export type ColorScheme = z.infer<typeof ColorSchemeSchema>;
@@ -125,3 +136,15 @@ export const postLooksPreview = (action: PreviewAction): void =>
   post({ type: messageType('looks-preview'), action });
 export const onLooksPreview = (handler: (action: PreviewAction) => void): (() => void) =>
   listen(LooksPreviewSchema, ({ action }) => handler(action));
+
+/** Content → page: a home card's game to seek in the lobby, or null to stop seeking it. */
+export const postCustomSeek = (seek: CustomSeek | null): void =>
+  post({ type: messageType('custom-seek'), seek });
+export const onCustomSeek = (handler: (seek: CustomSeek | null) => void): (() => void) =>
+  listen(CustomSeekRequestSchema, ({ seek }) => handler(seek));
+
+/** Page → content: whether that game is still sought; false once it stopped or failed. */
+export const postCustomSeekState = (seeking: boolean): void =>
+  post({ type: messageType('custom-seek-state'), seeking });
+export const onCustomSeekState = (handler: (seeking: boolean) => void): (() => void) =>
+  listen(CustomSeekStateSchema, ({ seeking }) => handler(seeking));

@@ -1,10 +1,10 @@
 import { z } from 'zod/mini';
+import { SEEK_PERFS } from '#shared/custom-seek.ts';
 import { parseJson } from '#shared/json.ts';
-import type { UserSchema } from '#content/sidebar/top-rating.ts';
 import { CARD_SPEEDS, poolOfClock, type CardSpeed } from './pools.ts';
 
-// What the home's speed cards show, from Lichess's public API: each speed's
-// rating and games (`/api/user/<name>`), its recent ratings
+// What the home's cards show, from Lichess's public API: each rating's
+// (a speed's or a variant's) value and games (`/api/user/<name>`), its recent ratings
 // (`/api/user/<name>/rating-history`) and the pool of its last game
 // (`/api/games/user/<name>`, one game a line).
 
@@ -40,14 +40,42 @@ const GameSchema = z.object({
   clock: z.optional(z.object({ initial: z.number(), increment: z.number() })),
 });
 
+const PerfSchema = z.object({
+  games: z.number(),
+  rating: z.number(),
+  prov: z.optional(z.boolean()),
+});
+
+const optionalPerf = z.optional(PerfSchema);
+
+export const CardUserSchema = z.object({
+  perfs: z.object({
+    ultraBullet: optionalPerf,
+    bullet: optionalPerf,
+    blitz: optionalPerf,
+    rapid: optionalPerf,
+    classical: optionalPerf,
+    correspondence: optionalPerf,
+    chess960: optionalPerf,
+    crazyhouse: optionalPerf,
+    kingOfTheHill: optionalPerf,
+    threeCheck: optionalPerf,
+    antichess: optionalPerf,
+    atomic: optionalPerf,
+    horde: optionalPerf,
+    racingKings: optionalPerf,
+  }),
+});
+
 export const CardSchema = z.object({
-  speed: z.enum(CARD_SPEEDS),
+  /** The rating: a speed's, or a variant's. */
+  perf: z.enum(SEEK_PERFS),
   games: z.number(),
   rating: z.number(),
   provisional: z.boolean(),
   /** The last ratings, oldest first: the card's curve. */
   history: z.array(z.number()),
-  /** The pool of the speed's last game, if it was one. */
+  /** For a speed, the pool of its last game, if it was one. */
   last: z.optional(z.string()),
 });
 
@@ -74,28 +102,32 @@ export function lastPools(ndjson: string): Partial<Record<CardSpeed, string>> {
 export const newestPool = (ndjson: string): string | undefined => pooledGames(ndjson)[0]?.pool;
 
 interface CardSources {
-  readonly user: z.infer<typeof UserSchema>;
+  readonly user: z.infer<typeof CardUserSchema>;
   readonly history: z.infer<typeof HistorySchema>;
   readonly last: Partial<Record<CardSpeed, string>>;
 }
 
-/** One card per speed, in the cards' order. */
+const speedOf = (perf: string): CardSpeed | undefined => CARD_SPEEDS.find(speed => speed === perf);
+
+/** The numbers of every rating a card can show, speeds first. */
 export function cardsOf({ user, history, last }: CardSources): Card[] {
-  return CARD_SPEEDS.map(speed => {
-    const perf = user.perfs[speed];
+  return SEEK_PERFS.map(key => {
+    const perf = user.perfs[key];
     // Its series are named by their key (`blitz`); Lichess's docs show them capitalized.
-    const points = history.find(entry => entry.name.toLowerCase() === speed)?.points ?? [];
+    const points =
+      history.find(entry => entry.name.toLowerCase() === key.toLowerCase())?.points ?? [];
     const games = perf?.games ?? 0;
     const rating = perf?.rating ?? START_RATING;
     const card: Card = {
-      speed,
+      perf: key,
       games,
       rating,
       provisional: perf?.prov === true,
       history: curveOf(points, games, rating),
     };
-    const pool = last[speed];
-    if (pool !== undefined) card.last = pool;
+    const speed = speedOf(key);
+    const pool = speed && last[speed];
+    if (pool) card.last = pool;
     return card;
   });
 }

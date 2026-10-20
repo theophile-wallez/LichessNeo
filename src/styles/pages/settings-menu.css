@@ -34,6 +34,12 @@ main.account .ln-ext-settings[data-ln-ext-page='packs'] {
   --ln-ext-nav-color: var(--ln-ext-purple);
 }
 
+.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='pairing'],
+main.account .ln-ext-settings[data-ln-ext-page='pairing'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/flash.svg');
+  --ln-ext-nav-color: var(--ln-ext-orange);
+}
+
 .subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='interface'],
 main.account .ln-ext-settings[data-ln-ext-page='interface'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sliders-horizontal.svg');
