@@ -6,7 +6,7 @@ import { type Fact, oneOf, said } from './said.ts';
 import { materialBalance } from './swing.ts';
 
 // What a good capture does: take back, win a piece for free or for less, or
-// trade, which a side ahead in material is glad to.
+// trade, which a side ahead in material is glad to, pieces rather than pawns.
 
 // Two pawns' worth ahead: enough for trades to help.
 const AHEAD = 2;
@@ -25,6 +25,8 @@ export function captureFact(input: FactInput, moved: Piece, dest: string): Fact 
   const [taken, given] = [PIECE_VALUES[victim.role], PIECE_VALUES[moved.role]];
   if (taken > given)
     return said(oneOf(facts.winsMaterial(victim, { role: moved.role, color: me }), move));
-  if (taken < given || victim.role === 'pawn') return null;
-  return said(oneOf(facts.trades(victim, materialBalance(before, me) >= AHEAD), move));
+  if (taken < given) return null;
+  // Ahead, trade pieces, not pawns.
+  const ahead = victim.role !== 'pawn' && materialBalance(before, me) >= AHEAD;
+  return said(oneOf(facts.trades(victim, ahead), move));
 }

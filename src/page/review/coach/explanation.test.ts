@@ -12,6 +12,9 @@ const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 const AFTER_E4 = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1';
 const AFTER_F6 = 'rnbqkbnr/ppppp1pp/5p2/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2';
 const AFTER_D4 = 'rnbqkbnr/ppppp1pp/5p2/8/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2';
+// The fool's mate: 1. f3 e5, then 2. g4?? lets Qh4 mate.
+const AFTER_E5 = 'rnbqkbnr/pppp1ppp/8/4p3/8/5P2/PPPPP1PP/RNBQKBNR w KQkq - 0 2';
+const AFTER_G4 = 'rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq - 0 2';
 
 const record = (whiteWinChance: number, best: string | null): PositionRecord => ({
   cp: Math.round((whiteWinChance - 50) * 20),
@@ -120,5 +123,19 @@ describe('the comment', () => {
     const good = e4(record(52, 'd2d4'), record(49, 'e7e5'));
     expect(good.moveClass).toBe('good');
     expect(en.facts.center).toContain(said(good)[0]?.text);
+  });
+
+  it('leaves the course to a fact that speaks of the mate', () => {
+    const blunder = judge({
+      previousPosition: { ply: 2, fen: AFTER_E5, uci: 'e7e5', san: 'e5' },
+      position: { ply: 3, fen: AFTER_G4, uci: 'g2g4', san: 'g4' },
+      before: record(40, 'b1c3'),
+      after: { mate: -1, whiteWinChance: 0, secondLineWinChance: null, best: 'd8h4' },
+      book: false,
+      chess960: false,
+    });
+    expect(said(blunder)).toEqual([
+      { text: 'Nothing stops [[m:b:Qh4@a:d8h4]], and it’s mate.', droppable: false },
+    ]);
   });
 });

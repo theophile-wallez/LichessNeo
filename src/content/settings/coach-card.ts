@@ -12,7 +12,8 @@ import { buildSwitchList } from './switch-list.ts';
 // (styles/pages/settings-coach.css): the coach, live over its still, says
 // hello, over a tile for each coach. The pick is the one every coach shows
 // (#shared/coach.ts): the review, the puzzles, the drills. Under it, the
-// coach's switches: its 3D, and its place on the analysis board.
+// coach's switches: its 3D, its place on the analysis board, and its drawings
+// on the board.
 
 const CARD = html`<div class="ln-ext-coach-pick__head">
     <span class="ln-ext-setting__icon" aria-hidden="true"></span>
@@ -112,5 +113,10 @@ export const buildCoachSwitches = (): HTMLElement =>
       key: 'analysisCoach',
       title: message('settingAnalysisCoach'),
       body: message('settingAnalysisCoachBody'),
+    },
+    {
+      key: 'coachBoard',
+      title: message('settingCoachBoard'),
+      body: message('settingCoachBoardBody'),
     },
   ]);

@@ -53,6 +53,16 @@ export function definite(viewer: Viewer, piece: Piece): string {
   return `${partyOf(viewer, piece.color).possessive} ${pieceName(piece)}`;
 }
 
+/** "the [bishop] and the [queen]", or "both [knight]knights" when they're alike: a fork's pieces. */
+export function pairOf(viewer: Viewer, first: Piece, second: Piece): string {
+  if (first.role !== second.role)
+    return `${definite(viewer, first)} and ${definite(viewer, second)}`;
+  const plural = `${pieceName(first)}s`;
+  return viewer === null
+    ? `both ${plural}`
+    : `both ${partyOf(viewer, first.color).possessive} ${plural}`;
+}
+
 const COUNTS: readonly string[] = ['', '', 'two', 'three', 'four'];
 
 /** "on the next move", "in two moves": how soon a line gets there. */

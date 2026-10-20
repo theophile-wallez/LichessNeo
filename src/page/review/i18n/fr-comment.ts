@@ -6,6 +6,7 @@ import {
   indefinite,
   owned,
   ownedBy,
+  pairOf,
   partyOf,
   type Party,
   pronoun,
@@ -16,13 +17,26 @@ import { betterMovesFr } from './fr-better.ts';
 import { capturesFr } from './fr-captures.ts';
 import { lineFactsFr } from './fr-lines.ts';
 import { plansFr } from './fr-plans.ts';
-import type { FactSentences, Viewer } from './types.ts';
+import type { FactSentences, Viewer, Ways } from './types.ts';
 
 // A mate given, let in, slowed down or missed.
 type MateSentences = Pick<
   FactSentences,
-  'checkmate' | 'matedIn' | 'heldOutLonger' | 'canForceMate' | 'wouldForceMate'
+  | 'checkmate'
+  | 'matedIn'
+  | 'heldOutLonger'
+  | 'canForceMate'
+  | 'matesNow'
+  | 'wouldForceMate'
+  | 'mateInOne'
 >;
+
+// A mate in one, missed.
+const inOne = (best: string): Ways => [
+  `${best} était mat en un coup.`,
+  `Il y avait mat en un avec ${best}.`,
+  `${best} matait sur-le-champ.`,
+];
 
 function matesFr(viewer: Viewer): MateSentences {
   const king = (color: Color): string => {
@@ -35,11 +49,14 @@ function matesFr(viewer: Viewer): MateSentences {
       `Mat ! ${capitalize(king(mated))} est pris au piège.`,
       'Échec et mat, la partie est finie.',
     ],
-    matedIn: (best, moves) => [
-      `${best} matait en ${moves}.`,
-      `${best} donnait un mat en ${moves}.`,
-      `Un mat en ${moves} commençait par ${best}.`,
-    ],
+    matedIn: (best, moves) =>
+      moves === 1
+        ? inOne(best)
+        : [
+            `${best} matait en ${moves}.`,
+            `${best} donnait un mat en ${moves}.`,
+            `Un mat en ${moves} commençait par ${best}.`,
+          ],
     heldOutLonger: best => [
       `${best} tenait plus longtemps.`,
       `${best} retardait le mat.`,
@@ -50,11 +67,17 @@ function matesFr(viewer: Viewer): MateSentences {
       `Ça permet un mat forcé, qui commence par ${reply}.`,
       `${reply} lance maintenant un mat forcé.`,
     ],
+    matesNow: reply => [
+      `Ça permet ${reply}, et c’est mat.`,
+      `Désormais ${reply} fait mat tout de suite.`,
+      `Plus rien n’arrête ${reply}, et c’est mat.`,
+    ],
     wouldForceMate: (best, moves) => [
       `${best} forçait le mat en ${moves}.`,
       `Un mat en ${moves} était là, à commencer par ${best}.`,
       `${best} menait à un mat forcé en ${moves}.`,
     ],
+    mateInOne: inOne,
   };
 }
 
@@ -67,7 +90,7 @@ type LossSentences = Pick<
 function lossesFr(viewer: Viewer): LossSentences {
   const party = (color: Color): Party => partyOf(viewer, color);
   const the = (piece: Piece): string => owned(viewer, piece);
-  const both = (first: Piece, second: Piece): string => `${the(first)} et ${the(second)}`;
+  const both = (first: Piece, second: Piece): string => pairOf(viewer, first, second);
   return {
     leftUndefended: ({ piece, square, reply }) => [
       `${capitalize(the(piece))} en ${square} n’est plus défendu${agreement(piece)} : ${reply} ${pronoun(piece)} gagne.`,
@@ -87,14 +110,17 @@ function lossesFr(viewer: Viewer): LossSentences {
       `Désormais ${reply} fait une fourchette sur ${both(first, second)}.`,
       `Ça tombe dans ${reply}, une fourchette sur ${both(first, second)}.`,
     ],
-    canPlay: (color, reply) => {
+    canPlay: (color, reply, why) => {
       const player = party(color);
-      const lets =
-        player.to === null
-          ? `Ça te permet de jouer ${reply}.`
-          : `Ça permet ${player.to} de jouer ${reply}.`;
+      const lets = player.to === null ? 'Ça te permet' : `Ça permet ${player.to}`;
+      if (why)
+        return [
+          `${lets} de jouer ${reply}, qui ${why}.`,
+          `Désormais ${reply} arrive, et ${why}.`,
+          `Ça ouvre la porte à ${reply}, qui ${why}.`,
+        ];
       return [
-        lets,
+        `${lets} de jouer ${reply}.`,
         `${reply} devient possible.`,
         `Ça ouvre la porte à ${reply}.`,
         `Désormais ${reply} est jouable.`,
@@ -150,9 +176,9 @@ function goodMovesFr(viewer: Viewer): GoodMoveSentences {
       ];
     },
     forks: (first, second) => [
-      `Une fourchette : ${the(first)} et ${the(second)} sont attaqué${agreement(first) && agreement(second) ? 'es' : 's'} à la fois.`,
-      `Une fourchette, sur ${the(first)} et ${the(second)}.`,
-      `Fourchette ! ${capitalize(the(first))} et ${the(second)} sont pris en même temps.`,
+      `Une fourchette : ${pairOf(viewer, first, second)} sont attaqué${agreement(first) && agreement(second) ? 'es' : 's'} à la fois.`,
+      `Une fourchette, sur ${pairOf(viewer, first, second)}.`,
+      `Fourchette ! ${capitalize(pairOf(viewer, first, second))} sont pris en même temps.`,
     ],
   };
 }

@@ -19,6 +19,8 @@ const SettingsSchema = z.object({
   coachMotion: z.prefault(z.boolean(), true),
   /** The coach judging each move on the free analysis board; off, Lichess's own panel shows. */
   analysisCoach: z.prefault(z.boolean(), true),
+  /** The coach drawing what it explains on the board (a pawn's square); off, it only says it. */
+  coachBoard: z.prefault(z.boolean(), true),
   /** The speed whose rating the sidebar shows beside the player's name (content/sidebar). */
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
   /** The players' intro at a game's start, or none (content/game/intro). */

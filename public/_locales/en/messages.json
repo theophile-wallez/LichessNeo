@@ -335,6 +335,14 @@
     "message": "On the analysis board, the coach judges each move you play. Off, the board is left to Lichess's engine. Your games' reviews keep their coach.",
     "description": "What the analysis board's coach setting covers."
   },
+  "settingCoachBoard": {
+    "message": "Coach’s drawings on the board",
+    "description": "The setting that has the coach draw its explanations on the board, or not."
+  },
+  "settingCoachBoardBody": {
+    "message": "When the coach explains a move, it also shows it on the board, such as a passed pawn’s square for the rule of the square. Off, it only says it.",
+    "description": "What the coach's drawings setting covers."
+  },
   "packsTitle": {
     "message": "Packs",
     "description": "The title of the settings' card for the imported packs."

@@ -53,6 +53,11 @@ main.account[data-ln-ext-settings] > .page-menu__content:not(.ln-ext-settings) {
   --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat.svg');
 }
 
+.ln-ext-setting[data-ln-ext-setting='coachBoard'] {
+  --ln-ext-setting-color: var(--ln-ext-cyan);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/drawing-mode.svg');
+}
+
 .ln-ext-setting[data-ln-ext-setting='sidebarRating'] {
   --ln-ext-setting-color: var(--ln-ext-green);
   --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');

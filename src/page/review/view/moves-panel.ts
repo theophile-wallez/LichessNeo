@@ -4,6 +4,7 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { classIcon } from '#page/review/classes/icon-svg.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
 import { explainLines } from '#page/review/explain/lines.ts';
+import { threatsReady } from '#page/review/explain/threats.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import type { PanelAction } from './actions.ts';
 import { briefMarkup, turningMove } from './brief.ts';
@@ -75,6 +76,8 @@ function movesComment(
   const { review, explain } = session.view;
   if (!review || shown || !move) return null;
   const hint = explain ? explainHint(session, move) : [];
+  // The coach thinks until it knows the threats around the move: then it says all it will.
+  if (hint.length === 0 && !threatsReady(session, move)) return null;
   const played = review.moves[move.ply - 1] === move;
   const timing = played ? timingAt(analysis, move.ply) : null;
   const turning = played && turningMove(keyMoments(review))?.ply === move.ply;
@@ -171,8 +174,9 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const retried = retryOutcome(session, analysis);
   const comment = retried ? null : movesComment(session, analysis, { move, shown });
   if (comment) followComment(session, comment);
+  view.drawing = { path: analysis.path, marks: comment?.drawing ?? [] };
   const spoken = { line, move, shown, comment, retried };
-  const moments = view.review ? momentsMarkup(view.review, analysis.node.ply, language) : '';
+  const moments = view.review ? momentsMarkup(view.review, language) : '';
   const scrolled = momentsScroll(elements.panel);
   fillAroundNav(
     elements.panel,
@@ -198,6 +202,6 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   );
   setHtml(elements.controls, controlsMarkup(view.playing !== null));
   movesGraph(session, analysis, true);
-  showMoment(elements.panel, scrolled);
+  showMoment(elements.panel, analysis.node.ply, scrolled);
   requestAnimationFrame(scrollMoveList);
 }

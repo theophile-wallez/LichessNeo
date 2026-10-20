@@ -48,6 +48,9 @@ export const StorageKey = {
     `${prefixed('review')}:${gameId}:${positions}:v${version}`,
   reviewProgress: (gameId: string, positions: number, version: number): string =>
     `${prefixed('review-progress')}:${gameId}:${positions}:v${version}`,
+  // The threats the coach reads around a game's moves, kept with its records.
+  reviewThreats: (gameId: string, positions: number, version: number): string =>
+    `${prefixed('review-threats')}:${gameId}:${positions}:v${version}`,
   // The review caches, least recently opened first.
   reviewIndex: prefixed('review-index'),
   // The extension's settings, in chrome.storage.sync rather than the page's (content/settings).

@@ -45,20 +45,28 @@ export function startStream(session: Session): void {
   if (!sub) return;
   const room = queryOne(panel, '.ln-ext-bubble__body', HTMLElement) ?? sub;
   const { stream } = session;
-  const drop = queryOne(sub, '.ln-ext-say--drop', HTMLElement);
   const fit = (): Fit => ({
     scrollHeight: room.scrollHeight,
     clientHeight: room.clientHeight,
     lineHeight: getComputedStyle(sub).lineHeight,
   });
-  if (drop && overflows(fit())) {
+  // The droppable sentences go one by one, the first first, until the rest fits.
+  let dropped = 0;
+  for (
+    let drop = queryOne(sub, '.ln-ext-say--drop', HTMLElement);
+    drop && overflows(fit());
+    drop = queryOne(sub, '.ln-ext-say--drop', HTMLElement)
+  ) {
     drop.remove();
-    // Recount the words typed so far, now that the dropped sentence is gone.
+    dropped++;
+  }
+  if (dropped > 0) {
+    // Recount the words typed so far, now that the dropped sentences are gone.
     const shown =
       stream.state.shown === Infinity
         ? Infinity
         : sub.querySelectorAll('.ln-ext-w:not(.ln-ext-w--off)').length;
-    stream.state = { ...stream.state, dropped: true, shown };
+    stream.state = { ...stream.state, dropped: stream.state.dropped + dropped, shown };
   }
   if (stream.state.shown < sub.querySelectorAll('.ln-ext-w').length && stream.timer === 0) {
     stream.timer = setInterval(() => tick(session), WORD_MS);
@@ -74,5 +82,5 @@ export function startStream(session: Session): void {
 export function refitStream(session: Session): void {
   const { stream } = session;
   if (stream.timer !== 0) return;
-  stream.state = { ...stream.state, dropped: false, shown: Infinity };
+  stream.state = { ...stream.state, dropped: 0, shown: Infinity };
 }

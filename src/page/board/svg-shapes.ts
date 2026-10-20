@@ -1,6 +1,6 @@
 import { queryAll } from '#shared/dom.ts';
 import type { Point } from '#shared/geometry.ts';
-import { arrowColor, squareColor } from './colors.ts';
+import { arrowColor, squareColor, VARIATION_COLOR, VARIATION_PICKED_COLOR } from './colors.ts';
 
 // Chessground's own shapes, read back from its svg: a circle per marked
 // square, a line per arrow. Their coordinates are already in square units
@@ -39,19 +39,48 @@ export interface ReadOptions {
   readonly reviewing: boolean;
 }
 
-export function readShapes(
-  svg: Element,
-  { reviewing }: ReadOptions,
-): { fills: SquareFill[]; arrows: Arrow[] } {
+type Center = (element: Element, xName: string, yName: string) => Point;
+
+// An arrow's ends are pulled in from the square centers: round back to them.
+function centerIn(svg: Element): Center {
   const viewBox = svg.getAttribute('viewBox') ?? '';
   const [originX = 0, originY = 0] = (viewBox === '' ? DEFAULT_VIEW_BOX : viewBox)
     .split(/\s+/)
     .map(Number);
-  // An arrow's ends are pulled in from the square centers: round back to them.
-  const center = (element: Element, xName: string, yName: string): Point => [
+  return (element, xName, yName) => [
     Math.floor(Number(element.getAttribute(xName)) - originX) + 0.5,
     Math.floor(Number(element.getAttribute(yName)) - originY) + 0.5,
   ];
+}
+
+// Lichess's variation arrows, one per move that follows when there are
+// several, under the pieces: white over an outline in the branch's color,
+// blue for the one picked (its hash's hilite), grey for the others.
+const PICKED_BRANCH = '#3291ff';
+
+function variationColor(hash: string, stroke: string | null): string {
+  const [, , , , , brush, hilite] = hash.split(',');
+  if (brush !== 'variation') return arrowColor(stroke);
+  return hilite === PICKED_BRANCH ? VARIATION_PICKED_COLOR : VARIATION_COLOR;
+}
+
+/** The arrows of chessground's layer under the pieces, Lichess's variation arrows, in our colors. */
+export function readVariations(svg: Element): Arrow[] {
+  const center = centerIn(svg);
+  return queryAll(svg, 'g[cgHash]', Element).flatMap(group => {
+    // The white body comes last, over its outline.
+    const body = queryAll(group, 'line', Element).at(-1);
+    if (!body) return [];
+    const color = variationColor(group.getAttribute('cgHash') ?? '', body.getAttribute('stroke'));
+    return [{ from: center(body, 'x1', 'y1'), to: center(body, 'x2', 'y2'), color, opacity: 0.6 }];
+  });
+}
+
+export function readShapes(
+  svg: Element,
+  { reviewing }: ReadOptions,
+): { fills: SquareFill[]; arrows: Arrow[] } {
+  const center = centerIn(svg);
   const isEngineShape = (element: Element): boolean => reviewing && opacityOf(element) < 0.8;
 
   const fills = queryAll(svg, 'circle', Element)

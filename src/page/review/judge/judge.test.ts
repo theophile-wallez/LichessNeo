@@ -30,6 +30,17 @@ const record = (
   best,
 });
 
+// White's e4 from `cp`, letting in a mate in one; the win probabilities are the formula's for these scores.
+const letIn = (cp: number, whiteWinChance: number, best = 'd2d4'): MoveVerdict =>
+  judge({
+    previousPosition: { ply: 0, fen: START },
+    position: { ply: 1, fen: AFTER_E4, uci: 'e2e4', san: 'e4' },
+    before: { cp, whiteWinChance, ...NO_LINE, best },
+    after: { mate: -1, whiteWinChance: 0, ...NO_LINE },
+    book: false,
+    chess960: false,
+  });
+
 describe('judge', () => {
   it('judges every fixture move as the original did', () => {
     for (const [index, game] of fixtureGames().entries()) {
@@ -99,6 +110,14 @@ describe('judge', () => {
       });
     expect(only('g8f6', 'Nf6').moveClass).toBe('great');
     expect(only('d8d5', 'Qxd5').moveClass).toBe('best');
+  });
+
+  it('calls a mate let in a blunder from a game still on, as Lichess does', () => {
+    expect(letIn(-600, 9.9).moveClass).toBe('blunder');
+    expect(letIn(-900, 3.5).moveClass).toBe('mistake');
+    expect(letIn(-1200, 1.2).moveClass).toBe('inaccuracy');
+    expect(letIn(-600, 9.9).slower).toBe(false);
+    expect(letIn(-600, 9.9, 'e2e4').moveClass).not.toBe('blunder');
   });
 
   it('calls a book move book, at full accuracy', () => {

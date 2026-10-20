@@ -61,14 +61,18 @@ function stripes(tree: Element): void {
 
 // Marks the variations played here, which review/move-list.css shows while it hides
 // Lichess's computer lines, and the computer lines they branch off, shown too as
-// the way to them. Classes rather than data attributes because that stylesheet reads
-// `ln-ext-var` in a `:has()`, where an attribute selector slows every move.
-function ownVariations(tree: Element, analysis: Analysis): void {
+// the way to them. A move the computer line has already doesn't make a new one:
+// Lichess steps into it, which is then the user's. Classes rather than data
+// attributes because that stylesheet reads `ln-ext-var` in a `:has()`, where an
+// attribute selector slows every move.
+function ownVariations(tree: Element, analysis: Analysis, entered: Set<string>): void {
   const lines = queryAll(tree, 'interrupt line', Element);
   const own = new Set(
     lines.filter(line => {
       const path = line.querySelector('move[p]')?.getAttribute('p');
-      return Boolean(path) && !analysis.nodeAtPath(path ?? '').comp;
+      if (!path) return false;
+      if (analysis.path.startsWith(path)) entered.add(path);
+      return entered.has(path) || !analysis.nodeAtPath(path).comp;
     }),
   );
   const hosts = new Set<Element>();
@@ -115,6 +119,6 @@ export function reviewBadges(live: LiveState, analysis: Analysis, review: Review
   if (!tree) return;
   mainlineBadges(tree, review);
   stripes(tree);
-  ownVariations(tree, analysis);
+  ownVariations(tree, analysis, live.entered);
   liveBadges(live, analysis, queryAll(tree, 'interrupt line.ln-ext-var move[p]', HTMLElement));
 }

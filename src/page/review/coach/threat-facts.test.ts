@@ -6,6 +6,7 @@ import { fr } from '#page/review/i18n/fr.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import { judge } from '#page/review/judge/judge.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
+import { findings } from './fact.ts';
 import type { LineFactInput } from './line-facts.ts';
 import { letsThrough, parriedFact, threatensFact } from './threat-facts.ts';
 import { passedFen, type Threat } from './threat.ts';
@@ -95,16 +96,16 @@ const makesRoom = move({
 describe('parriedFact', () => {
   it('says the piece threatened steps away', () => {
     expect(parriedFact(input(knightEscapes), TAKES_KNIGHT)?.text).toBe(
-      'The [[p:wn]]knight gets out of the way of [[m:b:Bxa4]].',
+      'The [[p:wn]]knight steps out of reach of [[m:b:Bxa4]].',
     );
     expect(parriedFact(input(knightEscapes, fr), TAKES_KNIGHT)?.text).toBe(
-      'Le [[p:wn]]cavalier se met à l’abri de [[m:b:Bxa4]].',
+      'Le [[p:wn]]cavalier échappe à [[m:b:Bxa4]].',
     );
   });
 
   it('says what a defense stops, and what it would have won', () => {
     expect(parriedFact(input(pawnDefends), TAKES_KNIGHT)?.text).toBe(
-      'That stops [[m:b:Bxa4]], which would have won a [[p:wn]]knight.',
+      'No more [[m:b:Bxa4]], which would have won a [[p:wn]]knight.',
     );
   });
 
@@ -119,10 +120,12 @@ describe('parriedFact', () => {
 
   it('plays out a short mate it stops, and names a long one by its first move', () => {
     const mate = threat(BACK_RANK, { mate: -1 }, ['a8a1']);
-    expect(parriedFact(input(makesRoom), mate)?.text).toBe('The mate is stopped: [[m:b:Ra1#]].');
+    expect(parriedFact(input(makesRoom), mate)?.text).toBe(
+      'That parries the mating threat: [[m:b:Ra1#]].',
+    );
     const long = threat(BACK_RANK, { mate: -4 }, ['a8a1']);
     expect(parriedFact(input(makesRoom), long)?.text).toBe(
-      'That stops a mate in 4, starting with [[m:b:Ra1+]].',
+      'That parries a mate in 4, which began with [[m:b:Ra1+]].',
     );
   });
 });
@@ -142,10 +145,10 @@ describe('threatensFact', () => {
   it('says what a quiet move threatens to win', () => {
     const aimed = threat(bishopAims.position.fen, { cp: 300 }, ['d2b4', 'g8f8', 'g1f1']);
     expect(threatensFact(input(bishopAims), aimed)?.text).toBe(
-      'Next comes [[m:w:Bxb4]], winning a [[p:bn]]knight.',
+      'Now [[m:w:Bxb4]] is threatened, winning a [[p:bn]]knight.',
     );
     expect(threatensFact(input(bishopAims, fr), aimed)?.text).toBe(
-      '[[m:w:Bxb4]] se prépare, et gagnerait un [[p:bn]]cavalier.',
+      'Au coup suivant, [[m:w:Bxb4]] gagnerait un [[p:bn]]cavalier.',
     );
   });
 
@@ -171,9 +174,104 @@ describe('threatensFact', () => {
       after: [{ cp: 600 }, ['h7h6', 'd1d8']],
     });
     const mate = threat(rookSwings.position.fen, { mate: 1 }, ['d1d8']);
-    expect(threatensFact(input(rookSwings), mate)?.text).toBe(
-      'A mate in one is threatened: [[m:w:Rd8+]].',
+    expect(threatensFact(input(rookSwings), mate)?.text).toBe('[[m:w:Rd8#]] would be mate next.');
+  });
+});
+
+// HazZkamE, moves 22 to 24: White's rook swings to h3, and Qxh7 mates
+// until Black gives up its bishop, then its queen. A quick search keeps a
+// mate in one's move alone.
+const ROOK_ON_F3 = 'r2q1r1k/p4p1p/1p1p1b2/4p2Q/5P2/1P3R2/PB4PP/n5K1 w - - 0 22';
+const ROOK_ON_H3 = 'r2q1r1k/p4p1p/1p1p1b2/4p2Q/5P2/1P5R/PB4PP/n5K1 b - - 1 22';
+const BISHOP_ON_H4 = 'r2q1r1k/p4p1p/1p1p4/4p2Q/5P1b/1P5R/PB4PP/n5K1 w - - 2 23';
+const ROOK_TAKES = 'r2q1r1k/p4p1p/1p1p4/4p2Q/5P1R/1P6/PB4PP/n5K1 b - - 0 23';
+const QUEEN_TAKES = 'r4r1k/p4p1p/1p1p4/4p2Q/5P1q/1P6/PB4PP/n5K1 w - - 0 24';
+
+function mateInOne(fen: string, best: string): Threat {
+  const passed = passedFen(fen);
+  if (passed === null) throw new Error(`can’t pass in ${fen}`);
+  const sign = fen.includes(' b ') ? 1 : -1;
+  return {
+    fen: passed,
+    record: { mate: sign, whiteWinChance: 50, secondLineWinChance: null, best },
+  };
+}
+
+const ROOK_SWINGS: MoveCase = {
+  from: ROOK_ON_F3,
+  uci: 'f3h3',
+  san: 'Rh3',
+  to: ROOK_ON_H3,
+  before: { cp: 480 },
+  after: [{ cp: 495 }, ['f6h4', 'h3h4', 'd8h4']],
+};
+
+describe('the mate threats of a game', () => {
+  const rookSwings = move(ROOK_SWINGS);
+  const bishopBlocks = move({
+    from: ROOK_ON_H3,
+    uci: 'f6h4',
+    san: 'Bh4',
+    to: BISHOP_ON_H4,
+    before: { cp: 495 },
+    after: [{ cp: 436 }, ['h3h4', 'd8h4', 'h5h4']],
+  });
+  const rookTakes = move({
+    from: BISHOP_ON_H4,
+    uci: 'h3h4',
+    san: 'Rxh4',
+    to: ROOK_TAKES,
+    before: { cp: 436 },
+    after: [{ cp: 516 }, ['d8h4', 'h5h4']],
+  });
+  const queenTakes = move({
+    from: ROOK_TAKES,
+    uci: 'd8h4',
+    san: 'Qxh4',
+    to: QUEEN_TAKES,
+    before: { cp: 516 },
+    after: [{ cp: 519 }, ['h5h4', 'f8g8']],
+  });
+
+  it('says a move threatens mate, though its piece could take before', () => {
+    expect(threatensFact(input(rookSwings), mateInOne(ROOK_ON_H3, 'h5h7'))?.text).toBe(
+      '[[m:w:Qxh7#]] would be mate next.',
     );
+  });
+
+  it('says what stopping a mate gives up', () => {
+    const mate = mateInOne(ROOK_ON_H3, 'h5h7');
+    expect(parriedFact(input(bishopBlocks), mate)?.text).toBe(
+      'That stops the mate, [[m:w:Qxh7#]], giving up the [[p:bb]]bishop.',
+    );
+    expect(parriedFact(input(bishopBlocks, fr), mate)?.text).toBe(
+      'Ça empêche le mat, [[m:w:Qxh7#]], en sacrifiant le [[p:bb]]fou.',
+    );
+    const queen = parriedFact(input(queenTakes), mateInOne(ROOK_TAKES, 'h5h7'), true);
+    expect(queen?.text).toContain('[[p:bq]]queen');
+  });
+
+  it('says a capture threatens mate, but no material', () => {
+    const mate = mateInOne(ROOK_TAKES, 'h5h7');
+    expect(threatensFact(input(rookTakes), mate, true)?.text).toBe(
+      'That takes the [[p:bb]]bishop and threatens mate: [[m:w:Qxh7#]].',
+    );
+    expect(threatensFact(input(rookTakes, fr), mate, true)?.text).toBe(
+      'Ça prend le [[p:bb]]fou et menace de mat : [[m:w:Qxh7#]].',
+    );
+    const bishop = '6k1/5ppp/8/8/1n6/8/3B1PPP/6K1 b - - 1 1';
+    const material = threat(bishop, { cp: 900 }, ['d2b4', 'g8f8', 'g1f1']);
+    expect(threatensFact(input(rookTakes), material, true)).toBeNull();
+  });
+
+  it('reads a capture for the mate it threatens', () => {
+    const threats = { before: null, after: mateInOne(ROOK_TAKES, 'h5h7') };
+    expect(findings(rookTakes, en, threats).fact?.text).toContain('threatens mate');
+  });
+
+  it('says nothing of a mate the mover had already', () => {
+    const already = move({ ...ROOK_SWINGS, before: { mate: 3 } });
+    expect(threatensFact(input(already), mateInOne(ROOK_ON_H3, 'h5h7'))).toBeNull();
   });
 });
 

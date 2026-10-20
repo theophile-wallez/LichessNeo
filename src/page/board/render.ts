@@ -9,11 +9,14 @@ export const fillsMarkup = (fills: readonly SquareFill[]): SafeHtml =>
       html`<rect x="${x - 0.5}" y="${y - 0.5}" width="1" height="1" fill="rgba(${color},${opacity})"/>`,
   )}`;
 
-export function arrowsMarkup(arrows: readonly Arrow[]): SafeHtml {
-  if (arrows.length === 0) return html``;
-  const polygons = arrows.map(
+/** The arrows' shapes, for either layer. */
+export const arrowPolygons = (arrows: readonly Arrow[]): SafeHtml =>
+  html`${arrows.map(
     ({ from, to, color, opacity }) =>
       html`<polygon points="${arrowOutline(arrowPath(from, to))}" fill="rgba(${color},${opacity})"/>`,
-  );
-  return html`<svg class="ln-ext-shapes__arrows" viewBox="0 0 8 8">${polygons}</svg>`;
+  )}`;
+
+export function arrowsMarkup(arrows: readonly Arrow[]): SafeHtml {
+  if (arrows.length === 0) return html``;
+  return html`<svg class="ln-ext-shapes__arrows" viewBox="0 0 8 8">${arrowPolygons(arrows)}</svg>`;
 }

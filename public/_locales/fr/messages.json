@@ -251,6 +251,12 @@
   "settingAnalysisCoachBody": {
     "message": "Sur l’échiquier d’analyse, le coach juge chaque coup que vous jouez. Désactivé, l’échiquier est laissé au moteur de Lichess. Les bilans de vos parties gardent leur coach."
   },
+  "settingCoachBoard": {
+    "message": "Dessins du coach sur l’échiquier"
+  },
+  "settingCoachBoardBody": {
+    "message": "Quand le coach explique un coup, il le montre aussi sur l’échiquier, comme le carré d’un pion pour la règle du carré. Désactivé, il se contente de l’écrire."
+  },
   "packsTitle": {
     "message": "Packs"
   },

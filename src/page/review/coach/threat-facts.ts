@@ -7,7 +7,7 @@ import {
   type Square,
 } from '#shared/chess/index.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import { pieceOn } from '#page/review/chess/material.ts';
+import { pieceOn, PIECE_VALUES } from '#page/review/chess/material.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { lineOf, type LineFactInput, mateLine } from './line-facts.ts';
 import { type Fact, oneOf, said } from './said.ts';
@@ -52,13 +52,24 @@ function realMenace(threat: Threat, actual: PositionRecord, by: Color): Menace |
 // which read as nonsense: it's named by its first move.
 const MATE_SHOWN = 2;
 
+/** The piece the move gives up: the reply takes it, and it's worth more than what it took. */
+function givenUp(move: MoveVerdict): Piece | null {
+  const to = move.uci.slice(2, 4);
+  if (move.after.best?.slice(2, 4) !== to) return null;
+  const piece = pieceOn(parseFen(move.position.fen).board, to);
+  const taken = pieceOn(parseFen(move.previousPosition.fen).board, to);
+  if (!piece || piece.role === 'king') return null;
+  return PIECE_VALUES[piece.role] > (taken ? PIECE_VALUES[taken.role] : 0) ? piece : null;
+}
+
 function stopsText(input: LineFactInput, threat: Threat, menace: Menace): string | null {
   const { facts, move } = input;
   const first = lineOf(menace.plies.slice(0, 1), null);
   if (menace.mate !== null) {
-    if (menace.mate > MATE_SHOWN) return oneOf(facts.stopsLongMate(menace.mate, first), move);
+    const cost = givenUp(move);
+    if (menace.mate > MATE_SHOWN) return oneOf(facts.stopsLongMate(menace.mate, first, cost), move);
     const line = mateLine(threat.record, threat.fen, null);
-    return line && oneOf(facts.stopsMate(line), move);
+    return line && oneOf(facts.stopsMate(line, cost), move);
   }
   // The piece that moves away from the threat, rather than its defense.
   const escapes = menace.plies.some(
@@ -70,10 +81,14 @@ function stopsText(input: LineFactInput, threat: Threat, menace: Menace): string
   return material ? oneOf(facts.stopsThreat(first, material), move) : null;
 }
 
-/** What a good quiet move stops: the mate or the material the opponent threatened. */
-export function parriedFact(input: LineFactInput, threat: Threat): Fact | null {
+/**
+ * What a good move stops: the mate or the material the opponent threatened.
+ * A capture's point is its capture, but for a mate.
+ */
+export function parriedFact(input: LineFactInput, threat: Threat, matesOnly = false): Fact | null {
   const menace = realMenace(threat, input.move.before, input.them);
-  if (!menace || stillThreatens(input.move, menace, input.them)) return null;
+  if (!menace || (matesOnly && menace.mate === null)) return null;
+  if (stillThreatens(input.move, menace, input.them)) return null;
   const text = stopsText(input, threat, menace);
   return text === null ? null : said(text);
 }
@@ -99,12 +114,39 @@ function wasThere(move: MoveVerdict, menace: Menace): boolean {
   );
 }
 
-/** What a good quiet move threatens, were the opponent to pass: mate, or material, new with it. */
-export function threatensFact({ move, facts, me }: LineFactInput, threat: Threat): Fact | null {
+// Whether the mover could mate already: then the threat isn't the move's doing.
+const matedAlready = ({ before }: MoveVerdict, me: Color): boolean =>
+  'mate' in before && before.mate * (me === 'white' ? 1 : -1) > 0;
+
+function mateThreatText({ move, facts, me }: LineFactInput, first: string, mate: number): string {
+  const taken = move.san.includes('x')
+    ? pieceOn(parseFen(move.previousPosition.fen).board, move.uci.slice(2, 4))
+    : undefined;
+  return taken && taken.color !== me
+    ? oneOf(facts.takesAndThreatensMate(taken, first, mate), move)
+    : oneOf(facts.threatensMate(first, mate), move);
+}
+
+/**
+ * What a good move threatens, were the opponent to pass: mate, or material,
+ * new with it. A capture's point is its capture, but for a mate.
+ */
+export function threatensFact(
+  input: LineFactInput,
+  threat: Threat,
+  matesOnly = false,
+): Fact | null {
+  const { move, facts, me } = input;
   const menace = realMenace(threat, move.after, me);
   const first = menace && lineOf(menace.plies.slice(0, 1), null);
-  if (!menace || !first || wasThere(move, menace)) return null;
-  if (menace.mate !== null) return said(oneOf(facts.threatensMate(first, menace.mate), move));
+  if (!menace || !first) return null;
+  // A piece that could take before may still not have mated.
+  if (menace.mate !== null) {
+    if (matedAlready(move, me)) return null;
+    const mate = menace.mate === 1 ? mateLine(threat.record, threat.fen, null) : null;
+    return said(mateThreatText(input, mate ?? first, menace.mate));
+  }
+  if (matesOnly || wasThere(move, menace)) return null;
   const material = menace.won && facts.material(menace.won);
   return material ? said(oneOf(facts.threatens(first, material), move)) : null;
 }

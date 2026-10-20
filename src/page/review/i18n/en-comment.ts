@@ -1,23 +1,40 @@
 import type { Color, Piece } from '#shared/chess/index.ts';
-import { agree, capitalize, definite, indefinite, partyOf, type Party } from './en-grammar.ts';
+import {
+  agree,
+  capitalize,
+  definite,
+  indefinite,
+  pairOf,
+  partyOf,
+  type Party,
+} from './en-grammar.ts';
 import { betterMovesEn } from './en-better.ts';
 import { capturesEn } from './en-captures.ts';
 import { lineFactsEn } from './en-lines.ts';
 import { plansEn } from './en-plans.ts';
-import type { FactSentences, Viewer } from './types.ts';
+import type { FactSentences, Viewer, Ways } from './types.ts';
 
 /** "You", "The opponent", "White": a side at the start of a sentence. */
 const subject = (party: Party): string => capitalize(party.name);
 
-// The pieces a fork hits: "the [rook] and the [queen]", or whose they are.
-const both = (viewer: Viewer, first: Piece, second: Piece): string =>
-  `${definite(viewer, first)} and ${definite(viewer, second)}`;
-
 // A mate given, let in, slowed down or missed.
 type MateSentences = Pick<
   FactSentences,
-  'checkmate' | 'matedIn' | 'heldOutLonger' | 'canForceMate' | 'wouldForceMate'
+  | 'checkmate'
+  | 'matedIn'
+  | 'heldOutLonger'
+  | 'canForceMate'
+  | 'matesNow'
+  | 'wouldForceMate'
+  | 'mateInOne'
 >;
+
+// A mate in one, missed.
+const inOne = (best: string): Ways => [
+  `${best} was mate in one.`,
+  `There was mate in one with ${best}.`,
+  `${best} mated on the spot.`,
+];
 
 function matesEn(viewer: Viewer): MateSentences {
   return {
@@ -30,11 +47,14 @@ function matesEn(viewer: Viewer): MateSentences {
         'Checkmate, and the game is over.',
       ];
     },
-    matedIn: (best, moves) => [
-      `${best} mated in ${moves}.`,
-      `${best} was mate in ${moves}.`,
-      `A mate in ${moves} started with ${best}.`,
-    ],
+    matedIn: (best, moves) =>
+      moves === 1
+        ? inOne(best)
+        : [
+            `${best} mated in ${moves}.`,
+            `${best} was mate in ${moves}.`,
+            `A mate in ${moves} started with ${best}.`,
+          ],
     heldOutLonger: best => [
       `${best} held out longer.`,
       `${best} would have delayed the mate.`,
@@ -45,11 +65,17 @@ function matesEn(viewer: Viewer): MateSentences {
       `That allows a forced mate, beginning with ${reply}.`,
       `${reply} starts a forced mate now.`,
     ],
+    matesNow: reply => [
+      `That allows ${reply}, and it’s mate.`,
+      `Now ${reply} mates on the spot.`,
+      `Nothing stops ${reply}, and it’s mate.`,
+    ],
     wouldForceMate: (best, moves) => [
       `${best} would have forced mate in ${moves}.`,
       `Mate in ${moves} was there, starting with ${best}.`,
       `${best} led to a forced mate in ${moves}.`,
     ],
+    mateInOne: inOne,
   };
 }
 
@@ -77,16 +103,23 @@ function lossesEn(viewer: Viewer): LossSentences {
       ];
     },
     allowsFork: (reply, first, second) => [
-      `That allows ${reply}, a fork of ${both(viewer, first, second)}.`,
-      `Now ${reply} forks ${both(viewer, first, second)}.`,
-      `That walks into ${reply}, forking ${both(viewer, first, second)}.`,
+      `That allows ${reply}, a fork of ${pairOf(viewer, first, second)}.`,
+      `Now ${reply} forks ${pairOf(viewer, first, second)}.`,
+      `That walks into ${reply}, forking ${pairOf(viewer, first, second)}.`,
     ],
-    canPlay: (color, reply) => [
-      `That lets ${party(color).name} play ${reply}.`,
-      `${reply} becomes possible.`,
-      `Now ${party(color).name} can play ${reply}.`,
-      `That opens the door to ${reply}.`,
-    ],
+    canPlay: (color, reply, why) =>
+      why
+        ? [
+            `That lets ${party(color).name} play ${reply}, ${why}.`,
+            `Now ${reply} comes, ${why}.`,
+            `That allows ${reply}, ${why}.`,
+          ]
+        : [
+            `That lets ${party(color).name} play ${reply}.`,
+            `${reply} becomes possible.`,
+            `Now ${party(color).name} can play ${reply}.`,
+            `That opens the door to ${reply}.`,
+          ],
   };
 }
 
@@ -133,9 +166,9 @@ function goodMovesEn(viewer: Viewer): GoodMoveSentences {
       ];
     },
     forks: (first, second) => [
-      `A fork: ${both(viewer, first, second)} are attacked at once.`,
-      `A fork on ${both(viewer, first, second)}.`,
-      `Fork! ${capitalize(both(viewer, first, second))} are both hit.`,
+      `A fork: ${pairOf(viewer, first, second)} are attacked at once.`,
+      `A fork on ${pairOf(viewer, first, second)}.`,
+      `Fork! ${capitalize(pairOf(viewer, first, second))} are hit together.`,
     ],
   };
 }

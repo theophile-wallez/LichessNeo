@@ -41,15 +41,15 @@ function changesEn(viewer: Viewer): Changes {
         `${subject(ahead)} ${agree(ahead, 'goes', 'go')} from ${from} to ${to}.`,
         `The gap widens: now ${holds(ahead, to)}.`,
         `${capitalize(ahead.possessive)} lead grows: ${to} now.`,
-        `Even better for ${ahead.name}: ${to} now.`,
+        `Even better for ${ahead.name}: ${to}.`,
       ];
     },
     shrinks: (color, from, to) => {
       const ahead = party(color);
       return [
         `${subject(ahead)} had ${from}; now it’s only ${to}.`,
-        `${capitalize(ahead.possessive)} advantage shrinks to ${to}.`,
-        `Some of ${ahead.possessive} advantage slips away: only ${to} left.`,
+        `${capitalize(ahead.possessive)} lead shrinks to ${to}.`,
+        `${capitalize(ahead.possessive)} lead slips: only ${to} left.`,
         `Down from ${from} to ${to} for ${ahead.name}.`,
       ];
     },
@@ -70,7 +70,16 @@ export function trajectoryEn(viewer: Viewer): TrajectorySentences {
   return {
     ...changesEn(viewer),
     advantages: ['', 'a slight edge', 'a clear advantage', 'a winning position', 'a forced mate'],
-    mateIn: moves => `a mate in ${moves}`,
+    mateIn: moves => (moves === 1 ? 'a mate in one' : `a mate in ${moves}`),
+    mates: (side, moves) => {
+      const ahead = party(side);
+      const mate = moves === null ? 'a forced mate' : `mate in ${moves === 1 ? 'one' : moves}`;
+      return [
+        `Now ${holds(ahead, mate)}.`,
+        `It’s more than an edge now: ${holds(ahead, mate)}.`,
+        `The game is decided: ${holds(ahead, mate)}.`,
+      ];
+    },
     stillBalanced: [
       'The game stays balanced.',
       'The balance holds.',

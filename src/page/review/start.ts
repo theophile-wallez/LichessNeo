@@ -1,5 +1,6 @@
 import { coachOptions, pickCoach } from '#shared/coach.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
+import { onJump } from '#page/lichess/jumps.ts';
 import { analyseGame } from './game/analyse-game.ts';
 import { pageLanguage } from './i18n/language.ts';
 import { createSession, type Mode, type Session } from './session.ts';
@@ -17,6 +18,8 @@ import { REVIEWED_VARIANTS } from './variants.ts';
 // analysis, the review of its moves; on the free analysis board, the coach,
 // unless the settings leave that board to Lichess's own panel.
 
+// The panel looks again this often, for what changes on its own (the analysis,
+// the engines); a move of the board draws it at once (onJump).
 const RENDER_MS = 150;
 // A link to one of the game's moves (/<id>#46), which Lichess opens on that
 // move: the review opens on the coach there rather than on the summary.
@@ -51,6 +54,7 @@ function run(session: Session, mode: Mode): void {
   setMode(session, mode);
   keepMarked(session);
   setInterval(() => render(session), RENDER_MS);
+  onJump(() => render(session));
   let lastWidth = window.innerWidth;
   const refit = (): void => {
     lastWidth = window.innerWidth;

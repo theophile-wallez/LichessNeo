@@ -197,6 +197,15 @@ describe('the coach’s switches', () => {
     expect(switchOf(list, 'analysisCoach')?.getAttribute('aria-checked')).toBe('false');
   });
 
+  it('turns the coach’s drawings on the board on and off', async () => {
+    const list = buildCoachSwitches();
+    await flush();
+    expect(switchOf(list, 'coachBoard')?.getAttribute('aria-checked')).toBe('true');
+    switchOf(list, 'coachBoard')?.click();
+    expect(synced.get('ln-ext-settings')).toMatchObject({ coachBoard: false });
+    expect(switchOf(list, 'coachBoard')?.getAttribute('aria-checked')).toBe('false');
+  });
+
   it('takes the card’s live coach off as the 3D is switched off', async () => {
     const { element, show } = buildCoachCard();
     document.body.append(element);

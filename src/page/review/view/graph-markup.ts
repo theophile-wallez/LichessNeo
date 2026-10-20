@@ -32,6 +32,9 @@ export function knownRuns(positions: GraphReview['positions']): number[][] {
   return runs;
 }
 
+/** The cursor's color, which finds it again to move it (view/graph.ts). */
+export const CURSOR_COLOR = '#81b64c';
+
 export function graphMarkup(
   review: GraphReview,
   ply: number,
@@ -57,7 +60,7 @@ export function graphMarkup(
   );
   const marker =
     ply > 0
-      ? html`<line x1="${x(ply)}" x2="${x(ply)}" y1="0" y2="${height}" stroke="#81b64c" stroke-width="2"/>`
+      ? html`<line x1="${x(ply)}" x2="${x(ply)}" y1="0" y2="${height}" stroke="${CURSOR_COLOR}" stroke-width="2"/>`
       : '';
   return html`<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
       <rect width="${width}" height="${height}" fill="#403d39"/>

@@ -112,3 +112,31 @@ export function checkers(board: Board, color: Color): Square[] {
   const king = [...board].find(([, piece]) => piece.role === 'king' && piece.color === color);
   return king ? attackersOn(board, king[0], opposite(color)) : [];
 }
+
+export interface Battery {
+  /** The piece of its own the slider stands behind. */
+  readonly screen: Square;
+  readonly target: Square;
+}
+
+/**
+ * The line from the slider on `square` through a piece of its own to the
+ * other side's king, or queen, which that piece's move would open.
+ */
+export function batteryOf(board: Board, square: Square): Battery | null {
+  const piece = board.get(square);
+  if (!piece || piece.role === 'pawn' || piece.role === 'knight' || piece.role === 'king')
+    return null;
+  for (const direction of DIRECTIONS) {
+    if (!slidesAlong(piece, direction)) continue;
+    const screen = firstPiece(board, square, direction);
+    // A pawn mostly can't step off the line: only a capture takes it off a file.
+    if (screen?.piece.color !== piece.color || screen.piece.role === 'pawn') continue;
+    const target = firstPiece(board, screen.square, direction);
+    if (target?.piece.color !== opposite(piece.color)) continue;
+    const { role } = target.piece;
+    if (role === 'king' || (role === 'queen' && piece.role !== 'queen'))
+      return { screen: screen.square, target: target.square };
+  }
+  return null;
+}

@@ -80,3 +80,21 @@ export function takesCenter(to: Square, color: Color): boolean {
   const [file] = squareCoords(to);
   return (file === 3 || file === 4) && ownRank(to, color) === 3;
 }
+
+/** A pawn on its fourth rank beside the center, at a central square: c4 and f4 for White. */
+export function fightsCenter(to: Square, color: Color): boolean {
+  const [file] = squareCoords(to);
+  return (file === 2 || file === 5) && ownRank(to, color) === 3;
+}
+
+/** A pawn come to defend a central pawn of its own that no pawn defended. */
+export function supportsCenter(before: Board, after: Board, to: Square, color: Color): boolean {
+  const central = (board: Board, square: Square): boolean =>
+    takesCenter(square, color) && board.get(square)?.role === 'pawn';
+  return attackedSquares(after, to).some(
+    square =>
+      central(after, square) &&
+      after.get(square)?.color === color &&
+      !attackers(before, square, color).includes('pawn'),
+  );
+}

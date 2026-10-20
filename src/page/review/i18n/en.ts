@@ -51,6 +51,8 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
       return turning ? html`${found}: the game turned at ${turning}.` : html`${found}.`;
     },
     calm: 'No big error in this game: let’s go through it move by move.',
+    theme: (name, count, yours) =>
+      html`One theme keeps coming back in ${yours ? 'your' : 'the'} errors: <b>${name}</b>, ${count} times.`,
   },
   next: 'Next',
   graphViews: { advantage: 'Advantage', time: 'Time' },

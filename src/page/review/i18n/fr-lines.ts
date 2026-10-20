@@ -1,5 +1,6 @@
 import type { Color, Piece } from '#shared/chess/index.ts';
 import {
+  agreement,
   capitalize,
   conjugate,
   materialFr,
@@ -53,9 +54,11 @@ function gainsFr(viewer: Viewer): GainSentences {
   };
 }
 
-type ThreatSentences = Pick<
+type ThreatSentences = Pick<LineFacts, 'stopsThreat' | 'escapes' | 'threatens'>;
+
+type MateThreatSentences = Pick<
   LineFacts,
-  'stopsThreat' | 'stopsMate' | 'stopsLongMate' | 'escapes' | 'threatens' | 'threatensMate'
+  'stopsMate' | 'stopsLongMate' | 'threatensMate' | 'takesAndThreatensMate'
 >;
 
 function threatsFr(viewer: Viewer): ThreatSentences {
@@ -66,16 +69,6 @@ function threatsFr(viewer: Viewer): ThreatSentences {
       `Plus de ${threat}, qui aurait gagné ${material}.`,
       `La menace ${threat} est écartée : elle aurait gagné ${material}.`,
       `Bien vu : ${threat} aurait gagné ${material}.`,
-    ],
-    stopsMate: line => [
-      `Le mat est paré : ${line}.`,
-      `La menace de mat est écartée : ${line}.`,
-      `Ça empêche le mat : ${line}.`,
-    ],
-    stopsLongMate: (moves, first) => [
-      `Ça pare un mat en ${moves}, qui commence par ${first}.`,
-      `Fini le mat en ${moves} qui commençait par ${first}.`,
-      `Un mat en ${moves} se préparait, à commencer par ${first} : le voilà paré.`,
     ],
     escapes: (piece, threat) => [
       `${the(piece)} se met à l’abri de ${threat}.`,
@@ -89,6 +82,38 @@ function threatsFr(viewer: Viewer): ThreatSentences {
       `${threat} se prépare, et gagnerait ${material}.`,
       `En vue : ${threat}, pour gagner ${material}.`,
     ],
+  };
+}
+
+// A mate stopped, maybe at a cost, or threatened, maybe by a capture.
+function mateThreatsFr(viewer: Viewer): MateThreatSentences {
+  const the = (piece: Piece): string => owned(viewer, piece);
+  const given = (piece: Piece): string =>
+    `${capitalize(the(piece))} est sacrifié${agreement(piece)}`;
+  return {
+    stopsMate: (line, cost) =>
+      cost
+        ? [
+            `Ça empêche le mat, ${line}, en sacrifiant ${the(cost)}.`,
+            `${given(cost)} pour parer le mat : ${line}.`,
+            `Le mat menaçait, ${line} : le parer coûte ${the(cost)}.`,
+          ]
+        : [
+            `Le mat est paré : ${line}.`,
+            `La menace de mat est écartée : ${line}.`,
+            `Ça empêche le mat : ${line}.`,
+          ],
+    stopsLongMate: (moves, first, cost) =>
+      cost
+        ? [
+            `Ça pare un mat en ${moves}, qui commence par ${first}, en sacrifiant ${the(cost)}.`,
+            `${given(cost)} pour parer un mat en ${moves}, qui commençait par ${first}.`,
+          ]
+        : [
+            `Ça pare un mat en ${moves}, qui commence par ${first}.`,
+            `Fini le mat en ${moves} qui commençait par ${first}.`,
+            `Un mat en ${moves} se préparait, à commencer par ${first} : le voilà paré.`,
+          ],
     threatensMate: (threat, moves) =>
       moves <= 1
         ? [
@@ -101,6 +126,16 @@ function threatsFr(viewer: Viewer): ThreatSentences {
             `Un mat ${within(moves)} se prépare, à commencer par ${threat}.`,
             `L’attaque menace un mat ${within(moves)}, avec ${threat} pour commencer.`,
           ],
+    takesAndThreatensMate: (piece, threat, moves) =>
+      moves <= 1
+        ? [
+            `Ça prend ${the(piece)} et menace de mat : ${threat}.`,
+            `${capitalize(the(piece))} tombe, et ${threat} serait mat au coup suivant.`,
+          ]
+        : [
+            `Ça prend ${the(piece)} et menace de mat ${within(moves)}, à commencer par ${threat}.`,
+            `${capitalize(the(piece))} tombe, et un mat ${within(moves)} se prépare, à commencer par ${threat}.`,
+          ],
   };
 }
 
@@ -109,4 +144,5 @@ export const lineFactsFr = (viewer: Viewer): LineFacts => ({
   material: materialFr,
   ...gainsFr(viewer),
   ...threatsFr(viewer),
+  ...mateThreatsFr(viewer),
 });

@@ -51,7 +51,11 @@ export function bookGap(live: LiveState, analysis: Analysis, path: string): stri
   return null;
 }
 
-function nextBookGap(live: LiveState, analysis: Analysis): string | null {
+function nextBookGap(
+  live: LiveState,
+  analysis: Analysis,
+  movePaths: readonly string[],
+): string | null {
   const line =
     analysis.path +
     lineAfter(analysis.node)
@@ -61,26 +65,45 @@ function nextBookGap(live: LiveState, analysis: Analysis): string | null {
     .slice(1)
     .map(node => node.id)
     .join('');
-  for (const path of [line, mainline, ...treeMovePaths()]) {
+  for (const path of [line, mainline, ...movePaths]) {
     const fen = bookGap(live, analysis, path);
     if (fen) return fen;
   }
   return null;
 }
 
+// What the queue last found nothing to do for: the same again has nothing either.
+const idle = new WeakMap<LiveState, string>();
+
 /** Starts the next lookups the moves on the board wait for, if none is running. */
 export function pump(session: Session, analysis: Analysis): void {
   const { live, work } = session;
+  const movePaths = treeMovePaths();
+  const key = [
+    analysis.path,
+    movePaths.length,
+    live.evals.size,
+    live.books.size,
+    live.busy,
+    live.bookBusy,
+    live.error,
+    live.noBook,
+  ].join('|');
+  if (idle.get(live) === key) return;
+  let started = false;
   if (!live.busy && live.error === null) {
     // Skip the game's own positions: the game's analysis evaluates those.
     const game = analysis.synthetic ? null : new Set(work.nodes.map(node => node.fen));
-    const node = wanted(analysis, treeMovePaths()).find(
+    const node = wanted(analysis, movePaths).find(
       candidate => !live.evals.has(candidate.fen) && !game?.has(candidate.fen),
     );
     if (node) void analyseLive(session, analysis, node.fen);
+    started = Boolean(node);
   }
   if (!live.bookBusy && !live.noBook) {
-    const fen = nextBookGap(live, analysis);
+    const fen = nextBookGap(live, analysis, movePaths);
     if (fen) void lookUpBook(session, analysis, fen);
+    started ||= Boolean(fen);
   }
+  if (!started) idle.set(live, key);
 }

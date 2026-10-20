@@ -104,9 +104,14 @@ function findFen(node: FakeNode, fen: string): FakeNode | undefined {
   return undefined;
 }
 
-/** The FEN `moves` (in the engine's notation) reach from the tree's position `fen`, for the fake engine. */
+/**
+ * The FEN `moves` (in the engine's notation) reach from the tree's position
+ * `fen`, for the fake engine. A position sent alone needs no tree: the
+ * threats' searches send positions of the game with the turn passed.
+ */
 export function fenAfter(root: FakeNode, fen: string, moves: readonly string[]): string {
   let node = findFen(root, fen);
+  if (!node && moves.length === 0) return fen;
   for (const uci of moves)
     // Chess960 keeps Lichess's king-takes-rook castling: either notation matches.
     node = node?.children.find(

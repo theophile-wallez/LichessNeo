@@ -1,5 +1,5 @@
 import type { Color, Piece } from '#shared/chess/index.ts';
-import { capitalize, owned, ownedBy, partyOf, type Party } from './fr-grammar.ts';
+import { capitalize, owned, ownedBy, pairOf, partyOf, type Party } from './fr-grammar.ts';
 import type { FactSentences, Viewer } from './types.ts';
 
 // The move that was better than the one played, and what it did, after « qui » :
@@ -45,7 +45,7 @@ function missesFr(
 
 export function betterMovesFr(viewer: Viewer): BetterMoveSentences {
   const the = (piece: Piece): string => owned(viewer, piece);
-  const both = (first: Piece, second: Piece): string => `${the(first)} et ${the(second)}`;
+  const both = (first: Piece, second: Piece): string => pairOf(viewer, first, second);
   return {
     ...missesFr(viewer),
     strongerCapture: (best, piece) => [

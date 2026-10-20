@@ -6,7 +6,7 @@ import { createShapeDrawer } from './draw.ts';
 import { onReviewArrowsChange } from './review-arrows.ts';
 
 // Our shapes on any main board: right-clicked squares filled rather than
-// ringed, thick arrows (L-shaped for a knight), the Game Review's arrows,
+// ringed, thick arrows (L-shaped for a knight), the Game Review's arrows and its coach's drawings,
 // and checkmate.
 
 function start(): void {

@@ -107,10 +107,14 @@ describe('the coach’s comment', () => {
     const game = fixtureGames().find(({ name }) => name === 'opera');
     const mate = game ? replay(game).at(-1) : undefined;
     if (!game || !mate) throw new Error('no opera game');
-    expect(fact(mate, en)).toBe('Mate! The black king is caught.');
-    expect(explanation(mate, { gameId: game.id, coach: 1, language: fr }, NO_CONTEXT)).toEqual([
-      { text: 'Mat ! Le roi noir est pris au piège.', droppable: false },
-    ]);
+    expect(en.facts.checkmate('black')).toContain(fact(mate, en));
+    const [said, ...more] = explanation(
+      mate,
+      { gameId: game.id, coach: 1, language: fr },
+      NO_CONTEXT,
+    );
+    expect(fr.facts.checkmate('black')).toContain(said?.text);
+    expect(more).toEqual([]);
   });
 });
 

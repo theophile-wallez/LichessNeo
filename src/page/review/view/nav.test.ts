@@ -66,6 +66,21 @@ describe('the kept nav', () => {
     expect(panel.lastElementChild).toBe(nav);
   });
 
+  it('keeps a part drawn the same, and draws again only the parts that changed', () => {
+    const panel = document.createElement('div');
+    const nav = document.createElement('div');
+    fillAroundNav(panel, html`<header>title</header><p>one</p><p>two</p>`, nav);
+    const [header, one, two] = panel.children;
+    fillAroundNav(panel, html`<header>title</header><p>three</p>`, nav);
+    const [keptHeader, three, last] = panel.children;
+    expect(keptHeader).toBe(header);
+    expect(three).not.toBe(one);
+    expect(three?.textContent).toBe('three');
+    expect(last).toBe(nav);
+    expect(two?.isConnected).toBe(false);
+    expect(panel.children).toHaveLength(3);
+  });
+
   it('changes its buttons in place, and draws them again only for another language', () => {
     const nav = document.createElement('div');
     syncNav(nav, state(true), en.ui);

@@ -11,7 +11,7 @@ import type { ClassCounts } from './judge/summary.ts';
 import type { MoveVerdict } from './judge/types.ts';
 import type { GameRating } from './rating/rate-game.ts';
 import type { ReviewElements } from './view/elements.ts';
-import type { ReviewArrow } from '#page/board/review-arrows.ts';
+import type { Mark, ReviewArrow } from '#page/board/review-arrows.ts';
 
 // Everything the review keeps while a page is open, shared by its parts.
 
@@ -92,6 +92,8 @@ export interface ViewState {
   retry: RetryState | null;
   /** The arrow of the comment's move under the pointer (view/chips.ts). */
   hover: ReviewArrow | null;
+  /** The coach's drawing of its comment on the move at `path`. */
+  drawing: { readonly path: string; readonly marks: readonly Mark[] };
   /** The summary's chevron is open. */
   allRows: boolean;
   /** The ply the summary was opened on. Moving to another ply opens the move-by-move review. */
@@ -125,6 +127,8 @@ export interface LiveState {
   /** The masters database can't be reached (signed out): no move is book. */
   noBook: boolean;
   error: string | null;
+  /** The computer lines the user stepped into, by their first move's path: theirs from then on. */
+  readonly entered: Set<string>;
 }
 
 /** The engine's searches the board's moves ask for, by key, one at a time. */
@@ -186,6 +190,17 @@ export interface SessionOptions {
   readonly setMode: (mode: Mode) => void;
 }
 
+const emptyLive = (): LiveState => ({
+  evals: new Map(),
+  books: new Map(),
+  judged: new Map(),
+  busy: false,
+  bookBusy: false,
+  noBook: false,
+  error: null,
+  entered: new Set(),
+});
+
 export function createSession(options: SessionOptions): Session {
   const { language, coach, elements, redraw, setMode } = options;
   return {
@@ -207,6 +222,7 @@ export function createSession(options: SessionOptions): Session {
       lineOf: null,
       retry: null,
       hover: null,
+      drawing: { path: '', marks: [] },
       allRows: false,
       summaryPly: undefined,
       drawnMode: null,
@@ -215,15 +231,7 @@ export function createSession(options: SessionOptions): Session {
       barPosition: null,
       overlay: '',
     },
-    live: {
-      evals: new Map(),
-      books: new Map(),
-      judged: new Map(),
-      busy: false,
-      bookBusy: false,
-      noBook: false,
-      error: null,
-    },
+    live: emptyLive(),
     work: {
       nodes: [],
       deep: [],
@@ -237,7 +245,7 @@ export function createSession(options: SessionOptions): Session {
     lines: { found: new Map(), busy: false },
     threats: { found: new Map(), busy: false },
     coach: { id: coach, reacted: '', avatar: null },
-    stream: { state: { key: '', shown: 0, dropped: false }, timer: 0 },
+    stream: { state: { key: '', shown: 0, dropped: 0 }, timer: 0 },
     wide: matchMedia('(min-width: 1020px)'),
     tipFor: null,
     engine: null,

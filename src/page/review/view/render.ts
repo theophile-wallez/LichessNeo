@@ -78,11 +78,18 @@ function redrawPanel(session: Session, analysis: Analysis): void {
   fitBubble(panel);
 }
 
-/** The move the coach speaks of, then the game's next ones, whose threats are searched ahead. */
-function movesFrom(session: Session, move: JudgedMove): JudgedMove[] {
-  const moves = session.view.review?.moves ?? [];
-  if (moves[move.ply - 1] !== move) return [move];
-  return moves.slice(move.ply - 1, move.ply + THREATS_AHEAD).filter(next => next !== undefined);
+/**
+ * The moves whose threats to search, in turn: the one the coach speaks of and
+ * the game's next ones, then, once the game is analysed, all of its moves.
+ */
+function threatsToSearch(session: Session, move: JudgedMove | null): JudgedMove[] {
+  const review = session.view.review;
+  const moves = review?.moves ?? [];
+  const all = review?.complete ? moves.filter(each => each !== undefined) : [];
+  if (!move) return all;
+  if (moves[move.ply - 1] !== move) return [move, ...all];
+  const ahead = moves.slice(move.ply - 1, move.ply + THREATS_AHEAD);
+  return [...ahead.filter(each => each !== undefined), ...all];
 }
 
 /** What runs on its own as the board moves: the engines' lookups, a retry. */
@@ -92,7 +99,8 @@ function follow(session: Session, analysis: Analysis): void {
   if (view.mode === 'live' || (view.mode === 'moves' && view.review)) pump(session, analysis);
   const spoken = view.mode === 'moves' ? spokenMove(session, analysis) : null;
   if (spoken && view.explain) pumpLines(session, analysis, spoken);
-  if (spoken) pumpThreats(session, analysis, movesFrom(session, spoken));
+  if (view.mode === 'moves' || view.mode === 'summary')
+    pumpThreats(session, analysis, threatsToSearch(session, spoken));
   if (view.mode === 'moves') followRetry(session, analysis);
   else view.retry = null;
 }

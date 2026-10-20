@@ -39,6 +39,8 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
       return turning ? html`${found} : la partie a basculé sur ${turning}.` : html`${found}.`;
     },
     calm: 'Pas de grosse erreur dans cette partie : voyons-la coup par coup.',
+    theme: (name, count, yours) =>
+      html`Un thème revient dans ${yours ? 'tes' : 'les'} erreurs : <b>${name}</b>, ${count} fois.`,
   },
   next: 'Suivant',
   graphViews: { advantage: 'Avantage', time: 'Temps' },

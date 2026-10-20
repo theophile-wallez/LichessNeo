@@ -1,5 +1,6 @@
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { engineFor } from '#page/review/engine-pool.ts';
+import { seedThreats } from '#page/review/explain/threats.ts';
 import type { GameWork, Mode, Session } from '#page/review/session.ts';
 import { analyseRecords } from './analyse-records.ts';
 import { fetchExport } from './export.ts';
@@ -49,6 +50,7 @@ function engineFailed(session: Session, what: string, error: unknown): void {
 export async function analyseGame(session: Session, analysis: Analysis): Promise<void> {
   const { work } = session;
   work.nodes = analysis.mainline;
+  seedThreats(session, analysis.gameId);
   await applyExport(session, analysis);
   seedBooks(session, analysis);
   const engine = await analyseRecords({

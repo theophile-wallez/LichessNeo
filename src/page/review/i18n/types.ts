@@ -57,6 +57,8 @@ interface BriefStrings {
   readonly moments: (count: number, turning: SafeHtml | null) => SafeHtml;
   /** For a game without a key moment. */
   readonly calm: string;
+  /** The tactic that comes back in the errors, `yours` the reader's, and how often. */
+  readonly theme: (name: string, count: number, yours: boolean) => SafeHtml;
 }
 
 export interface InterfaceStrings {
@@ -147,6 +149,8 @@ export interface TrajectorySentences {
   readonly grows: (side: Color, from: string, to: string) => Ways;
   readonly shrinks: (side: Color, from: string, to: string) => Ways;
   readonly swings: (before: Standing, after: Standing) => Ways;
+  /** A forced mate come on the board for `side`, in `moves` when sure of them. */
+  readonly mates: (side: Color, moves: number | null) => Ways;
   /** The error the game turned on, the brief's. */
   readonly turningPoint: Ways;
 }
@@ -192,13 +196,16 @@ export interface LineFacts {
   readonly winsAlong: (gain: LineGain) => Ways;
   /** The threat a move stops, and what it would have won. */
   readonly stopsThreat: (threat: string, material: string) => Ways;
-  readonly stopsMate: (line: string) => Ways;
-  readonly stopsLongMate: (moves: number, first: string) => Ways;
+  /** A mate stopped, and the piece given up to stop it, if one is. */
+  readonly stopsMate: (line: string, cost: Piece | null) => Ways;
+  readonly stopsLongMate: (moves: number, first: string, cost: Piece | null) => Ways;
   /** A piece that moves out of the threat's way. */
   readonly escapes: (piece: Piece, threat: string) => Ways;
   /** What a move threatens, were the opponent to pass. */
   readonly threatens: (threat: string, material: string) => Ways;
   readonly threatensMate: (threat: string, moves: number) => Ways;
+  /** A capture that threatens mate too. */
+  readonly takesAndThreatensMate: (piece: Piece, threat: string, moves: number) => Ways;
 }
 
 /** What a quiet move does for the position (coach/plan.ts). */
@@ -214,11 +221,35 @@ export interface PlanSentences {
   readonly passedPawn: (made: boolean) => Ways;
   readonly centralKing: Ways;
   readonly center: Ways;
+  readonly fightsCenter: Ways;
+  readonly supportsCenter: Ways;
   /** A piece attacked, which has to move. */
   readonly chases: (piece: Piece) => Ways;
   readonly pins: (piece: Piece, behind: Piece) => Ways;
-  /** What the better move did, said after it: "developing your knight", « sortait ton cavalier ». */
-  readonly why: (reason: Reason) => string;
+  /** The piece moved, out of danger. */
+  readonly saves: (piece: Piece) => Ways;
+  /** A piece in danger, now defended. */
+  readonly guards: (piece: Piece) => Ways;
+  readonly centralizes: (piece: Piece) => Ways;
+  /** A rook behind its passed pawn. */
+  readonly behindPasser: Ways;
+  /** A square for the king off the back rank. */
+  readonly luft: Ways;
+  /** A pawn to the fifth rank. */
+  readonly space: Ways;
+  /** A king's step into the opposition. */
+  readonly opposition: Ways;
+  /** A passed pawn out of the square of `king`, which can't catch it. */
+  readonly outruns: (king: Piece) => Ways;
+  /** `king` stepping into a passed pawn's square, just in time. */
+  readonly entersSquare: (king: Piece) => Ways;
+  /** `slider` lined up behind `screen` on `target`: a discovery for `screen` to make. */
+  readonly discovery: (slider: Piece, screen: Piece, target: Piece) => Ways;
+  /**
+   * What a move did, said after it: "developing your knight", « sortait ton
+   * cavalier »; `now` for a move still to come, « sort ton cavalier ».
+   */
+  readonly why: (reason: Reason, now?: boolean) => string;
 }
 
 export interface FactSentences extends LineFacts, PlanSentences {
@@ -226,7 +257,11 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly matedIn: (best: string, moves: number) => Ways;
   readonly heldOutLonger: (best: string) => Ways;
   readonly canForceMate: (side: Color, reply: string) => Ways;
+  /** A mate in one let in. */
+  readonly matesNow: (reply: string) => Ways;
   readonly wouldForceMate: (best: string, moves: number) => Ways;
+  /** A mate in one missed. */
+  readonly mateInOne: (best: string) => Ways;
   /** A miss: `side`'s error, and `best`, which punished it, and what it did. */
   readonly missedPunishment: (side: Color, best: string, why: string | null) => Ways;
   /** A miss in the middle of punishing an error from a move before. */
@@ -253,8 +288,8 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly forks: (first: Piece, second: Piece) => Ways;
   readonly missedFork: (best: string, first: Piece, second: Piece) => Ways;
   readonly allowsFork: (reply: string, first: Piece, second: Piece) => Ways;
-  /** The reply an error lets in. */
-  readonly canPlay: (side: Color, reply: string) => Ways;
+  /** The reply an error lets in, and what it does. */
+  readonly canPlay: (side: Color, reply: string, why: string | null) => Ways;
 }
 
 export interface ReviewLanguage {

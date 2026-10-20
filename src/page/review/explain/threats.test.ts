@@ -4,12 +4,14 @@ import { EnginePool, type PoolEngine } from '#page/review/engine/pool.ts';
 import type { EngineSearch } from '#page/review/engine/stockfish.ts';
 import type { EngineResult } from '#page/review/engine/uci.ts';
 import { judgedGame } from '#page/review/fixtures/unit-review.ts';
+import { cacheThreats, type CachedThreat, readCachedThreats } from '#page/review/game/cache.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
-import { pumpThreats, threatsAround } from './threats.ts';
+import { pumpThreats, seedThreats, threatsAround, threatsReady } from './threats.ts';
 
 afterEach(() => {
   document.body.innerHTML = '';
   Reflect.deleteProperty(window, 'site');
+  localStorage.clear();
 });
 
 /** An engine whose searches answer when the test says. */
@@ -33,6 +35,8 @@ function heldEngine() {
 }
 
 const THREAT: EngineResult = { lines: [{ cp: -250, pv: ['d7a4', 'g1f1'] }] };
+// Before 10… dxe5, with White to move: Qxf7+, a check the coach would speak of.
+const MATE_THREAT: EngineResult = { lines: [{ mate: 3, pv: ['f3f7', 'e8d7'] }] };
 
 const withLine = (move: JudgedMove): JudgedMove => ({
   ...move,
@@ -151,5 +155,69 @@ describe('threatsAround', () => {
     session.threats.found.set(fen, { fen, record: shown.before });
     expect(threatsAround(session, shown).before).not.toBeNull();
     expect(threatsAround(session, bare)).toEqual({ before: null, after: null });
+  });
+});
+
+describe('threatsReady', () => {
+  it('waits for the positions before and after the move to be searched', () => {
+    const { session, played, book, bare } = setUp();
+    const [shown] = played;
+    if (!shown || !bare) throw new Error('no move');
+    expect(threatsReady(session, shown)).toBe(false);
+    session.threats.found.set(passedFen(shown.previousPosition.fen) ?? '', null);
+    expect(threatsReady(session, shown)).toBe(false);
+    session.threats.found.set(passedFen(shown.position.fen) ?? '', null);
+    expect(threatsReady(session, shown)).toBe(true);
+    // Nothing to wait for where nothing is searched.
+    expect([threatsReady(session, book), threatsReady(session, bare)]).toEqual([true, true]);
+  });
+});
+
+/** The index of the game's position `fen`. */
+const indexOf = (session: Session, fen: string): number =>
+  session.work.nodes.findIndex(node => node.fen === fen);
+
+describe('the threats kept with the game', () => {
+  it('keeps a threat the coach would speak of as its record, others as none', async () => {
+    const { session, facade, held, played } = setUp();
+    const [shown] = played;
+    if (!shown) throw new Error('no move');
+    pumpThreats(session, facade, [shown]);
+    await vi.waitFor(() => {
+      expect(held.searches).toHaveLength(1);
+    });
+    held.answer(MATE_THREAT);
+    await answered(session);
+    pumpThreats(session, facade, [shown]);
+    await vi.waitFor(() => {
+      expect(held.searches).toHaveLength(2);
+    });
+    held.answer(THREAT);
+    await answered(session);
+    const kept = readCachedThreats(facade.gameId, session.work.nodes.length);
+    expect(kept[indexOf(session, shown.previousPosition.fen)]).toMatchObject({
+      mate: 3,
+      best: 'f3f7',
+    });
+    expect(kept[indexOf(session, shown.position.fen)]).toBe(false);
+    expect(kept.filter(entry => entry !== null && entry !== false)).toHaveLength(1);
+    expect(kept.filter(entry => entry === null).length).toBeGreaterThan(0);
+  });
+
+  it('takes the threats kept back in, and searches only the others', () => {
+    const { session, facade, held, played } = setUp();
+    const [shown, next] = played;
+    if (!shown || !next) throw new Error('no moves');
+    const kept: CachedThreat[] = session.work.nodes.map(() => null);
+    kept[indexOf(session, shown.previousPosition.fen)] = { ...shown.before, line: ['f3f7'] };
+    kept[indexOf(session, shown.position.fen)] = false;
+    cacheThreats(facade.gameId, kept);
+    seedThreats(session, facade.gameId);
+    const { before, after } = threatsAround(session, shown);
+    expect(before?.record.line).toEqual(['f3f7']);
+    expect(after).toBeNull();
+    expect([threatsReady(session, shown), threatsReady(session, next)]).toEqual([true, false]);
+    pumpThreats(session, facade, [shown]);
+    expect(held.searches).toHaveLength(0);
   });
 });

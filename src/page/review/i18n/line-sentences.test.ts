@@ -44,15 +44,18 @@ describe('the material won', () => {
 describe('the tactic', () => {
   const MOVE = '16. [[m:w:Qc7+]]';
 
-  it('names a fork, two of a kind counted', () => {
+  it('names a fork, two of a kind as a pair', () => {
     expect(en.facts.motif('fork', MOVE, [black('king'), black('rook')])).toContain(
       `${MOVE} forks the [[p:bk]]king and the [[p:br]]rook.`,
     );
     expect(en.facts.motif('fork', MOVE, [black('rook'), black('rook')])).toContain(
-      `${MOVE} forks two [[p:br]]rooks.`,
+      `${MOVE} forks both [[p:br]]rooks.`,
     );
     expect(fr.facts.motif('fork', MOVE, [black('rook'), black('rook')])).toContain(
-      `${MOVE} fait une fourchette sur deux [[p:br]]tours.`,
+      `${MOVE} fait une fourchette sur les deux [[p:br]]tours.`,
+    );
+    expect(french('white').facts.motif('fork', MOVE, [black('rook'), black('rook')])).toContain(
+      `${MOVE} fait une fourchette sur les deux [[p:br]]tours adverses.`,
     );
   });
 
@@ -74,6 +77,15 @@ describe('the tactic', () => {
     );
   });
 
+  it('names the piece a pin holds without saying whose it is again', () => {
+    expect(english('white').facts.motif('pin', MOVE, [black('queen'), black('king')])).toContain(
+      'The opponent’s [[p:bq]]queen is pinned to the [[p:bk]]king.',
+    );
+    expect(french('black').facts.motif('pin', MOVE, [black('queen'), black('king')])).toContain(
+      'Ta [[p:bq]]dame est clouée au [[p:bk]]roi.',
+    );
+  });
+
   it('needs the piece a check wins to name it', () => {
     expect(en.facts.motif('doubleCheck', MOVE, [black('king')])).toBeNull();
     expect(fr.facts.motif('discoveredCheck', MOVE, [black('king')])).toBeNull();
@@ -81,6 +93,68 @@ describe('the tactic', () => {
 });
 
 describe('a quiet move’s plan', () => {
+  const discovery = {
+    kind: 'discovery',
+    slider: white('queen'),
+    screen: white('knight'),
+    target: black('king'),
+  } as const;
+
+  it('says a discovery set up, a check or an attack', () => {
+    expect(
+      english('white').facts.discovery(white('queen'), white('knight'), black('king')),
+    ).toContain(
+      'Your [[p:wq]]queen lines up behind your [[p:wn]]knight on the opponent’s [[p:bk]]king: once your [[p:wn]]knight moves, that’s a discovered check.',
+    );
+    expect(fr.facts.discovery(white('bishop'), white('rook'), black('queen'))).toContain(
+      'Le [[p:wb]]fou se place derrière la [[p:wr]]tour, braqué sur la [[p:bq]]dame : dès qu’elle bougera, ce sera une attaque à la découverte.',
+    );
+  });
+
+  it('says why a move was played, a discovery and two plans at once', () => {
+    const queen = { ...discovery, target: black('queen') };
+    const both = {
+      kind: 'both',
+      first: { kind: 'guards', piece: white('knight') },
+      second: discovery,
+    } as const;
+    expect([discovery, queen, both].map(reason => english('white').facts.why(reason))).toEqual([
+      'setting up a discovered check',
+      'setting up a discovered attack on the opponent’s [[p:bq]]queen',
+      'defending your [[p:wn]]knight and setting up a discovered check',
+    ]);
+    expect([discovery, queen, both].map(reason => french('white').facts.why(reason))).toEqual([
+      'préparait un échec à la découverte',
+      'préparait une attaque à la découverte sur la [[p:bq]]dame adverse',
+      'protégeait ton [[p:wn]]cavalier et préparait un échec à la découverte',
+    ]);
+    expect(fr.facts.why(both, true)).toBe(
+      'protège le [[p:wn]]cavalier et prépare un échec à la découverte',
+    );
+  });
+
+  it('says a double threat, mate and a piece at once', () => {
+    const threat = { kind: 'doubleThreat', target: black('rook') } as const;
+    expect(english('white').facts.why(threat)).toBe(
+      'threatening mate and the opponent’s [[p:br]]rook at once, and only one can be saved',
+    );
+    expect(french('white').facts.why(threat)).toBe(
+      'menaçait à la fois le mat et la [[p:br]]tour adverse, et un seul des deux pouvait être paré',
+    );
+  });
+
+  it('says a pin without naming twice whose the pieces are', () => {
+    expect(english('white').facts.pins(black('knight'), black('king'))).toContain(
+      'The opponent’s [[p:bn]]knight is pinned to the [[p:bk]]king.',
+    );
+    expect(french('white').facts.pins(black('knight'), black('king'))).toContain(
+      'Le [[p:bn]]cavalier adverse est cloué sur le [[p:bk]]roi.',
+    );
+    expect(
+      french('black').facts.why({ kind: 'pins', piece: black('knight'), behind: black('king') }),
+    ).toBe('clouait ton [[p:bn]]cavalier sur le [[p:bk]]roi');
+  });
+
   it('is said in both languages', () => {
     expect(en.facts.develops(white('knight'))).toContain('The [[p:wn]]knight comes into play.');
     expect(fr.facts.develops(white('knight'))).toContain('Le [[p:wn]]cavalier entre en jeu.');

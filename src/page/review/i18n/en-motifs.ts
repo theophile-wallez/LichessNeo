@@ -1,7 +1,10 @@
 import type { Piece } from '#shared/chess/index.ts';
 import type { MotifKind } from '#page/review/chess/motifs.ts';
-import { capitalize, definite, materialEn } from './en-grammar.ts';
+import { capitalize, definite, pairOf } from './en-grammar.ts';
 import type { MotifNamer, Viewer, Ways } from './types.ts';
+
+// The piece a pin holds is its own side's: named once whose they are, not twice.
+const bare = (piece: Piece): string => definite(null, piece);
 
 // The tactic that wins the material along a line, named after its move:
 // "16. Qc7+ forks the king and the rook."
@@ -18,10 +21,7 @@ function attacksEn(
   return {
     fork: (move, first, second) => {
       if (!second) return null;
-      // Two of a kind: "forks two rooks".
-      const both =
-        (first.role === second.role ? materialEn({ won: [first, second], lost: [] }) : null) ??
-        `${the(first)} and ${the(second)}`;
+      const both = pairOf(viewer, first, second);
       return [
         `${move} forks ${both}.`,
         `${move} is a fork, on ${both}.`,
@@ -32,8 +32,8 @@ function attacksEn(
     pin: (_move, first, second) =>
       second
         ? [
-            `${The(first)} is pinned to ${the(second)}.`,
-            `${The(first)} is stuck, pinned to ${the(second)}.`,
+            `${The(first)} is pinned to ${bare(second)}.`,
+            `${The(first)} is stuck, pinned to ${bare(second)}.`,
           ]
         : null,
     skewer: (move, first, second) =>

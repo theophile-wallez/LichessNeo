@@ -14,6 +14,11 @@ html.ln-ext-mate main.analyse .main-board .cg-custom-svgs {
   display: none;
 }
 
+/* The crown lands on the mating piece's corner, where the review's verdict badge sits. */
+html.ln-ext-mate #ln-ext-board-overlay .ln-ext-badge {
+  display: none;
+}
+
 /* The analysis board's layer for it, over the arrows' (page/board). */
 #ln-ext-mate {
   position: absolute;

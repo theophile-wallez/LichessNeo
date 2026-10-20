@@ -13,12 +13,12 @@
     "cls": "best",
     "slower": false,
     "en": {
-      "fact": "Promotion: the pawn turns into a [[p:wq]]queen.",
-      "parts": [["Promotion: the pawn turns into a [[p:wq]]queen."]]
+      "fact": "The pawn reaches the last rank and becomes a [[p:wq]]queen.",
+      "parts": [["The pawn reaches the last rank and becomes a [[p:wq]]queen."]]
     },
     "fr": {
-      "fact": "Promotion : le pion se transforme en une [[p:wq]]dame.",
-      "parts": [["Promotion : le pion se transforme en une [[p:wq]]dame."]]
+      "fact": "Le pion atteint la dernière rangée et devient une [[p:wq]]dame.",
+      "parts": [["Le pion atteint la dernière rangée et devient une [[p:wq]]dame."]]
     }
   },
   {
@@ -47,10 +47,13 @@
     "cls": "inaccuracy",
     "slower": true,
     "en": {
-      "fact": "[[m:w:Rh2]] would have delayed the mate.",
-      "parts": [["[[m:w:Rh2]] would have delayed the mate."]]
+      "fact": "With [[m:w:Rh2]], the king would have lasted longer.",
+      "parts": [["With [[m:w:Rh2]], the king would have lasted longer."]]
     },
-    "fr": { "fact": "[[m:w:Rh2]] retardait le mat.", "parts": [["[[m:w:Rh2]] retardait le mat."]] }
+    "fr": {
+      "fact": "Avec [[m:w:Rh2]], le roi résistait plus longtemps.",
+      "parts": [["Avec [[m:w:Rh2]], le roi résistait plus longtemps."]]
+    }
   },
   {
     "name": "slower mate",
@@ -60,10 +63,13 @@
     "b": { "mate": 5, "wp": 100, "wp2": null, "best": "a8b8" },
     "cls": "good",
     "slower": true,
-    "en": { "fact": "[[m:w:Rh8]] was mate in 2.", "parts": [["[[m:w:Rh8]] was mate in 2."]] },
+    "en": {
+      "fact": "A mate in 2 started with [[m:w:Rh8]].",
+      "parts": [["A mate in 2 started with [[m:w:Rh8]]."]]
+    },
     "fr": {
-      "fact": "[[m:w:Rh8]] donnait un mat en 2.",
-      "parts": [["[[m:w:Rh8]] donnait un mat en 2."]]
+      "fact": "Un mat en 2 commençait par [[m:w:Rh8]].",
+      "parts": [["Un mat en 2 commençait par [[m:w:Rh8]]."]]
     }
   },
   {
@@ -74,10 +80,13 @@
     "b": { "mate": -4, "wp": 0, "wp2": null, "best": "a1b1" },
     "cls": "good",
     "slower": true,
-    "en": { "fact": "[[m:b:Rh1]] was mate in 1.", "parts": [["[[m:b:Rh1]] was mate in 1."]] },
+    "en": {
+      "fact": "There was mate in one with [[m:b:Rh1]].",
+      "parts": [["There was mate in one with [[m:b:Rh1]]."]]
+    },
     "fr": {
-      "fact": "[[m:b:Rh1]] donnait un mat en 1.",
-      "parts": [["[[m:b:Rh1]] donnait un mat en 1."]]
+      "fact": "Il y avait mat en un avec [[m:b:Rh1]].",
+      "parts": [["Il y avait mat en un avec [[m:b:Rh1]]."]]
     }
   },
   {
@@ -98,8 +107,14 @@
     "b": { "cp": 62, "wp": 55.68256609665036, "wp2": null, "best": "g8f6" },
     "cls": "best",
     "slower": false,
-    "en": { "fact": null, "parts": [["A good capture."]] },
-    "fr": { "fact": null, "parts": [["Une bonne prise."]] }
+    "en": {
+      "fact": "A fair trade: the [[p:bp]]pawn comes off.",
+      "parts": [["A fair trade: the [[p:bp]]pawn comes off."]]
+    },
+    "fr": {
+      "fact": "Un échange équitable : le [[p:bp]]pion disparaît.",
+      "parts": [["Un échange équitable : le [[p:bp]]pion disparaît."]]
+    }
   },
   {
     "name": "free pawn",
@@ -119,8 +134,14 @@
     "b": { "cp": 62, "wp": 55.68256609665036, "wp2": null, "best": "d8d5" },
     "cls": "best",
     "slower": false,
-    "en": { "fact": null, "parts": [["A good capture."]] },
-    "fr": { "fact": null, "parts": [["Une bonne prise."]] }
+    "en": {
+      "fact": "A fair trade: the [[p:bp]]pawn comes off.",
+      "parts": [["A fair trade: the [[p:bp]]pawn comes off."]]
+    },
+    "fr": {
+      "fact": "Un échange équitable : le [[p:bp]]pion disparaît.",
+      "parts": [["Un échange équitable : le [[p:bp]]pion disparaît."]]
+    }
   },
   {
     "name": "black great",
@@ -136,12 +157,12 @@
     "cls": "great",
     "slower": false,
     "en": {
-      "fact": "Every other move would have let the advantage slip.",
-      "parts": [["Every other move would have let the advantage slip."]]
+      "fact": "The one move that kept the edge.",
+      "parts": [["The one move that kept the edge."]]
     },
     "fr": {
-      "fact": "Tout autre coup laissait filer l’avantage.",
-      "parts": [["Tout autre coup laissait filer l’avantage."]]
+      "fact": "Le seul coup qui gardait l’avantage.",
+      "parts": [["Le seul coup qui gardait l’avantage."]]
     }
   }
 ]

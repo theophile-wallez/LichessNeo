@@ -1,5 +1,5 @@
 import type { Color } from '#shared/chess/index.ts';
-import { forColor, type PositionRecord } from '#page/review/evaluation/score.ts';
+import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 
 /**
@@ -25,8 +25,37 @@ function slowerMate(movesLost: number): MateVerdict | null {
   return movesLost <= 5 ? 'good' : 'inaccuracy';
 }
 
-/** Under this share of winning chances, the mover was lost already. */
-const LOST = 5;
+// Lichess's ladder for a mate let in where there was none, by the mover's
+// score before it: from a game still on, a blunder; nearly lost, a mistake.
+const STILL_ON = -700;
+const NEARLY_LOST = -1000;
+
+/** How many moves the mover is mated in after a move that lets a mate in, from no mate before. */
+function matedIn(before: PositionRecord, after: PositionRecord, color: Color): number | null {
+  const mate = mateOf(after);
+  if (mateOf(before) !== undefined || mate === undefined) return null;
+  const moves = -mate * (color === 'white' ? 1 : -1);
+  return moves > 0 ? moves : null;
+}
+
+/** The mover's score before the move, in centipawns, when it was one. */
+const ownScore = (before: PositionRecord, color: Color): number | null =>
+  'cp' in before ? before.cp * (color === 'white' ? 1 : -1) : null;
+
+/**
+ * The least a move that lets in a mate where there was none costs: the win
+ * probability barely sees it from a bad position (+6 against is a few points).
+ */
+export function letInMateClass(
+  before: PositionRecord,
+  after: PositionRecord,
+  color: Color,
+): Extract<MoveClass, 'mistake' | 'blunder'> | null {
+  const score = ownScore(before, color);
+  if (score === null || matedIn(before, after, color) === null) return null;
+  if (score >= STILL_ON) return 'blunder';
+  return score >= NEARLY_LOST ? 'mistake' : null;
+}
 
 /**
  * A lost position's move that lets in a sure mate where there was none: it
@@ -34,19 +63,20 @@ const LOST = 5;
  */
 function letInMate(
   before: PositionRecord,
-  mateAfter: number | undefined,
+  after: PositionRecord,
   color: Color,
 ): MateVerdict | null {
-  const chances = forColor(before.whiteWinChance, color);
-  const matedIn = -(mateAfter ?? 0) * (color === 'white' ? 1 : -1);
-  return chances < LOST && matedIn > 0 && matedIn <= SURE_MATE ? soonerMate(matedIn) : null;
+  const moves = matedIn(before, after, color);
+  const score = ownScore(before, color);
+  const lost = score !== null && score < NEARLY_LOST;
+  return lost && moves !== null && moves <= SURE_MATE ? soonerMate(moves) : null;
 }
 
 /**
  * The verdict a move deserves from mate distances, which the win probability
  * can't see (a slower mate is 100% all the same). The winner of a sure mate
  * is judged by the moves given away; the loser, when a sure mate comes
- * clearly sooner or is let in where there was none, by how soon. Never worse
+ * clearly sooner or is let in from a lost position, by how soon. Never worse
  * than an inaccuracy: the result stays the same.
  */
 export function mateVerdict(
@@ -57,7 +87,7 @@ export function mateVerdict(
   const mateBefore = mateOf(before);
   const mateAfter = mateOf(after);
   const sign = color === 'white' ? 1 : -1;
-  if (mateBefore === undefined) return letInMate(before, mateAfter, color);
+  if (mateBefore === undefined) return letInMate(before, after, color);
   if (!mateBefore || mateAfter === 0) return null;
   const own = mateBefore * sign;
   const ownAfter = mateAfter === undefined ? mateLost(own) : mateAfter * sign;

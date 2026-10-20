@@ -1,6 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import { cacheProgress, cacheRecords, readCachedRecords } from './cache.ts';
+import {
+  type CachedThreat,
+  cacheProgress,
+  cacheRecords,
+  cacheThreats,
+  readCachedRecords,
+  readCachedThreats,
+} from './cache.ts';
 
 const RECORD: PositionRecord = {
   cp: 20,
@@ -55,5 +62,28 @@ describe('the cache', () => {
     cacheRecords('abcdefgh', 1, [RECORD]);
     expect(reviewKeys()).toEqual(['ln-ext-review-index', 'ln-ext-review:abcdefgh:1:v2']);
     expect(localStorage.getItem('ln-ext-review-index')).toBe('["ln-ext-review:abcdefgh:1:v2"]');
+  });
+
+  it('keeps a game’s threats by position: a record, none, or not searched yet', () => {
+    const threats: CachedThreat[] = [RECORD, false, null];
+    cacheThreats('abcdefgh', threats);
+    expect(localStorage.getItem('ln-ext-review-threats:abcdefgh:3:v2')).toBe(
+      '[{"cp":20,"wp":51.8,"wp2":50,"best":"e2e4"},false,null]',
+    );
+    expect(readCachedThreats('abcdefgh', 3)).toEqual(threats);
+    expect(readCachedThreats('abcdefgh', 4)).toEqual([]);
+    // An entry that doesn't cover every position is read as none.
+    localStorage.setItem('ln-ext-review-threats:abcdefgh:4:v2', '[false,null]');
+    expect(readCachedThreats('abcdefgh', 4)).toEqual([]);
+  });
+
+  it('drops a game’s threats with its records', () => {
+    cacheRecords('game0000', 1, [RECORD]);
+    cacheThreats('game0000', [RECORD]);
+    cacheThreats('another1', [RECORD]);
+    for (let i = 1; i <= 200; i++) cacheRecords(`game${String(i).padStart(4, '0')}`, 1, [RECORD]);
+    expect(readCachedRecords('game0000', 1)).toBeNull();
+    expect(readCachedThreats('game0000', 1)).toEqual([]);
+    expect(readCachedThreats('another1', 1)).toEqual([RECORD]);
   });
 });

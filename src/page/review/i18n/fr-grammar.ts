@@ -31,6 +31,14 @@ export function owned(viewer: Viewer, piece: Piece): string {
   return `${definite(piece)} adverse`;
 }
 
+/** "le [fou] et la [dame]", or "les deux [cavalier]cavaliers" when they're alike: a fork's pieces. */
+export function pairOf(viewer: Viewer, first: Piece, second: Piece): string {
+  if (first.role !== second.role) return `${owned(viewer, first)} et ${owned(viewer, second)}`;
+  const plural = `deux ${pieceName(first)}s`;
+  if (viewer === null) return `les ${plural}`;
+  return viewer === first.color ? `tes ${plural}` : `les ${plural} adverses`;
+}
+
 /** "une [tour]", "un [cavalier]". */
 export const indefinite = (piece: Piece): string =>
   `${isFeminine(piece) ? 'une' : 'un'} ${pieceName(piece)}`;

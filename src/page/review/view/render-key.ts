@@ -2,10 +2,11 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { judgeAt, liveDigest } from '#page/review/live/judging.ts';
 import type { Session } from '#page/review/session.ts';
 import { learnLabel } from './learn.ts';
-import { reviewMove } from './navigation.ts';
+import { threatsReady } from '#page/review/explain/threats.ts';
+import { reviewMove, spokenMove } from './navigation.ts';
 
 // What the panel shows, as one string: it's drawn again only when that
-// changes (the render runs every 150 ms).
+// changes (the render runs every 150 ms, and after each jump of the board).
 
 // The summary and the closed panel show the analysis's progress, which counts
 // in steps: each twentieth of the graph known, each percent at full depth. The
@@ -20,6 +21,11 @@ function progressKey(session: Session, analysis: Analysis): string {
     Math.round((known / analysis.mainline.length) * 20),
     Boolean(review?.complete),
   ].join(',');
+}
+
+function spokenReady(session: Session, analysis: Analysis): boolean {
+  const move = session.view.mode === 'moves' ? spokenMove(session, analysis) : null;
+  return move === null || threatsReady(session, move);
 }
 
 export function renderKey(session: Session, analysis: Analysis): string {
@@ -45,6 +51,8 @@ export function renderKey(session: Session, analysis: Analysis): string {
     // Retry's misses and answer.
     view.retry ? `${view.retry.misses}:${view.retry.revealed}` : '',
     liveDigest(reviewMove(session, analysis)),
+    // The comment waits for the threats around its move.
+    spokenReady(session, analysis),
     live.error ?? '',
   ].join('|');
 }

@@ -62,10 +62,12 @@ const CoachOptionsSchema = z.object({
   motion: z.boolean(),
   /** The coach judges each move on the free analysis board. */
   analysis: z.boolean(),
+  /** The coach draws what it explains on the board. Kept before it was a switch: on. */
+  board: z.prefault(z.boolean(), true),
 });
 export type CoachOptions = z.infer<typeof CoachOptionsSchema>;
 
-const ALL_ON: CoachOptions = { motion: true, analysis: true };
+const ALL_ON: CoachOptions = { motion: true, analysis: true, board: true };
 
 /** The settings' coach switches as last kept, for the page world and before the settings are read. */
 export function coachOptions(): CoachOptions {

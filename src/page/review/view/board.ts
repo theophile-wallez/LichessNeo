@@ -1,8 +1,15 @@
+import { coachOptions } from '#shared/coach.ts';
 import { setData } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { parentPath } from '#page/lichess/tree.ts';
-import { type ReviewArrow, reviewArrows, setReviewArrows } from '#page/board/review-arrows.ts';
+import {
+  type ReviewArrow,
+  reviewArrows,
+  reviewDrawing,
+  setReviewArrows,
+  setReviewDrawing,
+} from '#page/board/review-arrows.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import { badgeMarkup, reviewArrowsFor } from './board-badge.ts';
@@ -91,6 +98,15 @@ function renderArrows(session: Session, analysis: Analysis, move: JudgedMove | n
   if (!sameArrows(reviewArrows(), arrows)) setReviewArrows(arrows);
 }
 
+// What the comment speaks of, drawn while its move is on the board, unless the
+// settings keep the coach's drawings off. A retry draws none, as for the arrows.
+function renderDrawing({ view }: Session, analysis: Analysis): void {
+  const { drawing, mode, retry } = view;
+  const shown = mode === 'moves' && !retry && drawing.path === analysis.path;
+  const marks = shown && coachOptions().board ? drawing.marks : [];
+  if (JSON.stringify(marks) !== JSON.stringify(reviewDrawing())) setReviewDrawing(marks);
+}
+
 export function renderBoard(session: Session, analysis: Analysis): void {
   const { view, live } = session;
   const shown = view.mode === 'live' ? null : bestShown(session, analysis);
@@ -99,6 +115,7 @@ export function renderBoard(session: Session, analysis: Analysis): void {
   setData(document.documentElement, 'lnExtCls', move ? move.moveClass : '');
   renderBadge(session, analysis, move);
   renderArrows(session, analysis, move);
+  renderDrawing(session, analysis);
   if (view.mode === 'live') liveBadges(live, analysis, treeMoves());
   else if (view.review) reviewBadges(live, analysis, view.review);
   if (view.mode === 'live' || view.mode === 'moves') renderOpening(session, analysis);

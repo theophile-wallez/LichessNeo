@@ -75,8 +75,8 @@ export function showCoach(state: CoachState): void {
 }
 
 // Kept for the page world, which can't read the settings, and for the next page's first look.
-function followSettings({ coachMotion, analysisCoach }: Settings): void {
-  keepCoachOptions({ motion: coachMotion, analysis: analysisCoach });
+function followSettings({ coachMotion, analysisCoach, coachBoard }: Settings): void {
+  keepCoachOptions({ motion: coachMotion, analysis: analysisCoach, board: coachBoard });
   if (coachMotion) sync();
   else unmount();
 }

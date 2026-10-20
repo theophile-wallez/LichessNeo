@@ -7,7 +7,7 @@ import {
   writeStoredJson,
 } from '#shared/storage.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import { StoredRecordCodec } from '#page/review/evaluation/stored.ts';
+import { StoredRecordCodec, StoredRecordSchema } from '#page/review/evaluation/stored.ts';
 import { prefixed } from '#shared/prefix.ts';
 
 // Each game's records at full depth: kept once its analysis is complete, so
@@ -26,6 +26,8 @@ const WrittenSchema = z.array(z.optional(StoredRecordCodec));
 const ProgressSchema = z.array(z.nullable(StoredRecordCodec));
 const IndexSchema = z.array(z.string());
 
+const threatsKey = (gameId: string, positions: number): string =>
+  StorageKey.reviewThreats(gameId, positions, CACHE_VERSION);
 const cacheKey = (gameId: string, positions: number): string =>
   StorageKey.reviewCache(gameId, positions, CACHE_VERSION);
 const progressKey = (gameId: string, positions: number): string =>
@@ -48,12 +50,19 @@ function readIndex(): string[] {
   return cached.filter(isCurrent);
 }
 
+// A game's threats go with its records, under the same game and positions.
+function dropGame(key: string): void {
+  removeStored(key);
+  const [, gameId, positions] = key.split(':');
+  if (gameId && positions) removeStored(threatsKey(gameId, Number(positions)));
+}
+
 /** Marks `key` as opened last, dropping `dropped` and the games past the cap. */
 function remember(key: string, dropped?: string): void {
   try {
     const index = readIndex().filter(known => known !== key && known !== dropped);
     index.push(key);
-    for (const old of index.splice(0, Math.max(0, index.length - MAX_GAMES))) removeStored(old);
+    for (const old of index.splice(0, Math.max(0, index.length - MAX_GAMES))) dropGame(old);
     writeStoredJson(StorageKey.reviewIndex, index);
   } catch {
     // A blocked storage: nothing is cached anyway.
@@ -99,4 +108,23 @@ export function cacheRecords(
   removeStored(progress);
   writeStoredJson(cacheKey(gameId, positions), z.encode(WrittenSchema, [...records]));
   remember(cacheKey(gameId, positions), progress);
+}
+
+// By position: the threat with the other side to move, false when there's none
+// worth reading (or nothing to search), null when it isn't searched yet.
+const ThreatsSchema = z.array(z.union([z.literal(false), z.null(), StoredRecordSchema]));
+
+export type CachedThreat = PositionRecord | false | null;
+
+/** The threats searched around a game's positions, by position. */
+export function readCachedThreats(gameId: string, positions: number): CachedThreat[] {
+  const stored = readStoredJson(threatsKey(gameId, positions), ThreatsSchema);
+  if (stored?.length !== positions) return [];
+  return stored.map(entry => (entry ? z.decode(StoredRecordCodec, entry) : entry));
+}
+
+/** Keeps the threats searched so far around a game's positions. */
+export function cacheThreats(gameId: string, threats: readonly CachedThreat[]): void {
+  const written = threats.map(entry => (entry ? z.encode(StoredRecordCodec, entry) : entry));
+  writeStoredJson(threatsKey(gameId, threats.length), written);
 }

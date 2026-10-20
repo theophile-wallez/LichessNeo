@@ -38,5 +38,10 @@ export const squareColor = (stroke: string | null): string =>
 export const REVIEW_COLOR = '159,207,63';
 /** The reply that punishes an error, in red. */
 export const THREAT_COLOR = '235,88,72';
+/** The coach's drawing of a plan, in amber: it stands out on blue boards and brown ones alike. */
+export const PLAN_COLOR = '250,180,40';
+/** The variation the analysis board follows, among several, in our blue; the others in grey. */
+export const VARIATION_PICKED_COLOR = '72,193,249';
+export const VARIATION_COLOR = '200,200,200';
 /** The engine's move after one played off the game, in Lichess's pale blue. */
 export const ENGINE_COLOR = '72,193,249';

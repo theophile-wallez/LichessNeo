@@ -29,6 +29,29 @@
   text-shadow: 0 1px 1px #00000033;
 }
 
+/* The 300px panel from 1020px: tighter buttons leave the title its room, */
+@container (max-width: 320px) {
+  .ln-ext-review__actions {
+    gap: 2px;
+  }
+
+  .ln-ext-review__new {
+    padding: 0 9px;
+  }
+
+  .ln-ext-review__head :is(.ln-ext-review__back, .ln-ext-review__share, .ln-ext-review__close) {
+    width: 32px;
+  }
+}
+
+/* and the title takes all the room between them rather than stay centered on the header and
+   be cut. The header can't query itself: the panel stands for it. */
+@container ln-ext-review (max-width: 320px) {
+  .ln-ext-review__head {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+}
+
 .ln-ext-review__new:hover {
   background: var(--ln-ext-btn-primary-hover);
 }

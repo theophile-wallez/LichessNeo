@@ -10,6 +10,7 @@ import {
 } from '#page/review/coach/clock.ts';
 import type { CoachContext } from '#page/review/coach/context.ts';
 import { explanation } from '#page/review/coach/explanation.ts';
+import type { Mark } from '#page/board/review-arrows.ts';
 import { findings, type Theme, themesOf } from '#page/review/coach/fact.ts';
 import { type CommentPart, commentMarkup, streamFor } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
@@ -53,6 +54,8 @@ export interface CoachComment {
   readonly move: JudgedMove;
   readonly parts: readonly CommentPart[];
   readonly themes: readonly Theme[];
+  /** What the comment speaks of, drawn on the board: its fact's drawing, else its follow-up's. */
+  readonly drawing: readonly Mark[];
   readonly timing: MoveTiming | null;
   /** What the coach makes of the move's time, in the time's tooltip. */
   readonly advice: Advice | null;
@@ -68,7 +71,8 @@ export function commentOn(session: Session, input: VerdictInput): CoachComment {
   const { move, gameId, hint, timing, turning } = input;
   const { language } = session;
   const threats = threatsAround(session, move);
-  const themes = themesOf(findings(move, language, threats));
+  const found = findings(move, language, threats);
+  const themes = themesOf(found);
   const note = timing && clockNote(move.moveClass, timing);
   const advice =
     timing && note
@@ -82,7 +86,9 @@ export function commentOn(session: Session, input: VerdictInput): CoachComment {
           threats,
           turning,
         });
-  return { move, parts, themes, timing, advice };
+  // Explain's sentences say other things.
+  const drawing = hint.length > 0 ? [] : (found.fact?.drawing ?? found.followUp?.drawing ?? []);
+  return { move, parts, themes, drawing, timing, advice };
 }
 
 /** Keeps the typing going through the renders of one comment; a new comment starts it over. */

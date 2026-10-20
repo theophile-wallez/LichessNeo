@@ -34,7 +34,7 @@ const StreamSchema = z.array(
 const say = (text: string, droppable = false): CommentPart => ({ text, droppable });
 
 function markup(parts: readonly CommentPart[], stream: Partial<StreamState> = {}): string {
-  const state = { key: commentKey(parts), shown: Infinity, dropped: false, ...stream };
+  const state = { key: commentKey(parts), shown: Infinity, dropped: 0, ...stream };
   return commentMarkup(parts, { stream: state, language: en }).value;
 }
 
@@ -42,7 +42,12 @@ describe('commentMarkup', () => {
   it('draws the comments as the original did', () => {
     for (const { lang, parts, shown, dropped, html } of StreamSchema.parse(legacyStreams)) {
       const comment = parts.map(([text, droppable]) => say(text, droppable ?? false));
-      const stream = { key: commentKey(comment), shown: shown ?? Infinity, dropped };
+      // The original dropped its one droppable sentence, or kept it.
+      const stream = {
+        key: commentKey(comment),
+        shown: shown ?? Infinity,
+        dropped: dropped ? 1 : 0,
+      };
       const options = { stream, language: languageOf(lang) };
       expect(commentMarkup(comment, options).value).toBe(withPieceGlyphs(html));
     }
@@ -81,21 +86,28 @@ describe('commentMarkup', () => {
     expect(markup(parts, { shown: 1 })).toContain(
       '<span class="ln-ext-w">one </span><span class="ln-ext-w ln-ext-w--off">two</span>',
     );
-    expect(markup(parts, { dropped: true })).toBe(
+    expect(markup(parts, { dropped: 1 })).toBe(
       '<span class="ln-ext-say"><span class="ln-ext-w">three</span> </span>',
     );
+  });
+
+  it('leaves out as many droppable sentences as were dropped, the first first', () => {
+    const parts = [say('one', true), say('two'), say('three', true)];
+    const words = (dropped: number): string[] =>
+      [...markup(parts, { dropped }).matchAll(/ln-ext-w">(\w+)/g)].map(([, word]) => word ?? '');
+    expect([0, 1, 2].map(words)).toEqual([['one', 'two', 'three'], ['two', 'three'], ['two']]);
   });
 });
 
 describe('streamFor', () => {
   it('starts over for a new comment only', () => {
     const parts = [say('Hello there.')];
-    const typing: StreamState = { key: commentKey(parts), shown: 2, dropped: true };
+    const typing: StreamState = { key: commentKey(parts), shown: 2, dropped: 1 };
     expect(streamFor(typing, parts)).toBe(typing);
     expect(streamFor(typing, [say('Something else.')])).toEqual({
       key: 'Something else.',
       shown: 0,
-      dropped: false,
+      dropped: 0,
     });
     expect(commentKey([say('a'), say('b', true)])).toBe('a|b');
   });

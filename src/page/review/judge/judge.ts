@@ -3,7 +3,7 @@ import { isSacrifice } from '#page/review/chess/material.ts';
 import { normalizeUci, uciToSan } from '#page/review/chess/notation.ts';
 import { isError, type MoveClass, RANK } from '#page/review/classes/classes.ts';
 import { forColor, moveAccuracy } from '#page/review/evaluation/score.ts';
-import { mateVerdict, SURE_MATE } from './mate.ts';
+import { letInMateClass, mateVerdict, SURE_MATE } from './mate.ts';
 import type { JudgeInput, MoveVerdict } from './types.ts';
 
 interface Standing {
@@ -120,6 +120,10 @@ export function judge(input: JudgeInput): MoveVerdict {
   let moveClass = baseClass(input, { before, after, loss, second }, isBest);
   const mated = isBest || input.book ? null : mateVerdict(recordBefore, recordAfter, color);
   if (mated && RANK.indexOf(moveClass) < RANK.indexOf(mated)) moveClass = mated;
+  const letIn = isBest || input.book ? null : letInMateClass(recordBefore, recordAfter, color);
+  // A miss is an error already, and says what was let go.
+  if (letIn && moveClass !== 'miss' && RANK.indexOf(moveClass) < RANK.indexOf(letIn))
+    moveClass = letIn;
   return {
     ply: position.ply,
     san: position.san,

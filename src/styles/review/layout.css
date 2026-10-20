@@ -163,12 +163,15 @@ html.ln-ext-review-normal #ln-ext-review {
 .ln-ext-review__head {
   flex: none;
   display: grid;
-  /* Even sides keep the title centered, the new game's link beside the close button. */
-  grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
+  /* Even sides keep the title centered, the new game's link beside the close button. Where the
+     buttons need more than half the room left, the title gives way rather than go under them. */
+  grid-template-columns: minmax(40px, 1fr) auto minmax(max-content, 1fr);
+  gap: 8px;
   align-items: center;
   height: 48px;
   padding: 0 4px;
   background: var(--ln-ext-bg-panel-dark);
+  container-type: inline-size;
 }
 
 .ln-ext-review__back,
@@ -205,9 +208,10 @@ html.ln-ext-review-normal #ln-ext-review {
 }
 
 .ln-ext-review__title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--ln-ext-text-strong);
   font-size: 17px;
   font-weight: 800;

@@ -34,7 +34,7 @@ function changesFr(viewer: Viewer): Changes {
         `${says(ahead, 'passes', 'passe', 'passent')} ${withDe(from)} à ${to}.`,
         `L’écart se creuse : maintenant ${has(ahead)} ${to}.`,
         `L’avantage grandit : ${has(ahead)} maintenant ${to}.`,
-        `Encore mieux pour ${ahead.object ?? 'toi'} : ${to} désormais.`,
+        `Encore mieux pour ${ahead.object ?? 'toi'} : ${to} à présent.`,
       ];
     },
     shrinks: (color, from, to) => {
@@ -42,9 +42,7 @@ function changesFr(viewer: Viewer): Changes {
       const left = `il ne ${conjugate(ahead, 'te', 'lui', 'leur')} reste qu’${to}`;
       return [
         `${had(ahead)} ${from}, ${left}.`,
-        ahead.of === null
-          ? `Ton avantage fond : il ne te reste qu’${to}.`
-          : `L’avantage ${ahead.of} fond : ${left}.`,
+        `${says(ahead, 'perds', 'perd', 'perdent')} du terrain : ${left}.`,
         `L’écart se réduit pour ${ahead.object ?? 'toi'} : ${left}.`,
       ];
     },
@@ -71,7 +69,16 @@ export function trajectoryFr(viewer: Viewer): TrajectorySentences {
       'une position gagnante',
       'un mat forcé',
     ],
-    mateIn: moves => `un mat en ${moves}`,
+    mateIn: moves => `un mat en ${moves === 1 ? 'un' : moves}`,
+    mates: (side, moves) => {
+      const mate = moves === null ? 'un mat forcé' : `un mat en ${moves === 1 ? 'un' : moves}`;
+      const ahead = `${has(party(side))} ${mate}`;
+      return [
+        `Désormais, ${ahead}.`,
+        `Bien plus qu’un avantage : ${ahead}.`,
+        `La partie est jouée : ${ahead}.`,
+      ];
+    },
     stillBalanced: [
       'La partie reste équilibrée.',
       'L’équilibre tient toujours.',

@@ -47,6 +47,7 @@ const emptyLive = (): LiveState => ({
   bookBusy: false,
   noBook: false,
   error: null,
+  entered: new Set(),
 });
 
 /**
@@ -88,5 +89,16 @@ describe('reviewBadges', () => {
     expect(lineOf('Nc3')?.className).toBe('ln-ext-var');
     expect(lineOf('d5')?.className).toBe('ln-ext-var-host');
     expect(lineOf('c5')?.className).toBe('');
+  });
+
+  it('takes a computer line the user stepped into as theirs, once left too', () => {
+    const live = emptyLive();
+    const analysis = page();
+    analysis.userJump(at('e2e4', 'c7c5'));
+    reviewBadges(live, analysis, EMPTY_REVIEW);
+    expect(lineOf('c5')?.className).toBe('ln-ext-var');
+    analysis.userJump(at('e2e4', 'e7e5'));
+    reviewBadges(live, analysis, EMPTY_REVIEW);
+    expect(lineOf('c5')?.className).toBe('ln-ext-var');
   });
 });

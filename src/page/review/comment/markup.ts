@@ -18,8 +18,8 @@ export interface StreamState {
   readonly key: string;
   /** Words shown so far; Infinity for all of them. */
   readonly shown: number;
-  /** The droppable sentence didn't fit, so every redraw of this comment leaves it out. */
-  readonly dropped: boolean;
+  /** The droppable sentences, from the first, that didn't fit: every redraw of this comment leaves them out. */
+  readonly dropped: number;
 }
 
 export const commentKey = (parts: readonly CommentPart[]): string =>
@@ -28,7 +28,7 @@ export const commentKey = (parts: readonly CommentPart[]): string =>
 /** The stream for `parts`: the same one, or a fresh one for a new comment. */
 export function streamFor(stream: StreamState, parts: readonly CommentPart[]): StreamState {
   const key = commentKey(parts);
-  return key === stream.key ? stream : { key, shown: 0, dropped: false };
+  return key === stream.key ? stream : { key, shown: 0, dropped: 0 };
 }
 
 const TOKEN = /\[\[(\w):(.+?)\]\]/g;
@@ -90,8 +90,10 @@ function wordMarkup(word: string): SafeHtml {
 export function commentMarkup(parts: readonly CommentPart[], options: CommentOptions): SafeHtml {
   const { stream, language } = options;
   let index = 0;
+  const droppable = parts.filter(part => part.droppable);
+  const left = new Set(droppable.slice(0, stream.dropped));
   const sentences = parts
-    .filter(part => !(part.droppable && stream.dropped))
+    .filter(part => !left.has(part))
     .map(part => {
       const words = language.typography(part.text).match(/\S+\s*/g) ?? [];
       const spans = words.map(word => {

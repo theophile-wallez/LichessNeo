@@ -1,7 +1,10 @@
 import type { Piece } from '#shared/chess/index.ts';
 import type { MotifKind } from '#page/review/chess/motifs.ts';
-import { agreement, capitalize, materialFr, owned, subjectPronoun } from './fr-grammar.ts';
+import { agreement, capitalize, owned, pairOf, subjectPronoun } from './fr-grammar.ts';
 import type { MotifNamer, Viewer, Ways } from './types.ts';
+
+// The piece a pin holds is its own side's: named once whose they are, not twice.
+const bare = (piece: Piece): string => owned(null, piece);
 
 // The tactic that wins the material along a line, named after its move:
 // « 16. Dc7+ fait une fourchette sur le roi et la tour. »
@@ -22,10 +25,7 @@ function attacksFr(
   return {
     fork: (move, first, second) => {
       if (!second) return null;
-      // Two of a kind: "deux tours".
-      const both =
-        (first.role === second.role ? materialFr({ won: [first, second], lost: [] }) : null) ??
-        `${the(first)} et ${the(second)}`;
+      const both = pairOf(viewer, first, second);
       return [
         `${move} fait une fourchette sur ${both}.`,
         `Fourchette avec ${move}, sur ${both}.`,
@@ -35,8 +35,8 @@ function attacksFr(
     pin: (_move, first, second) =>
       second
         ? [
-            `${The(first)} est cloué${agreement(first)} ${toThe(the(second))}.`,
-            `${The(first)} ne peut plus bouger : ${the(second)} est derrière.`,
+            `${The(first)} est cloué${agreement(first)} ${toThe(bare(second))}.`,
+            `${The(first)} ne peut plus bouger : ${bare(second)} est derrière.`,
           ]
         : null,
     skewer: (move, first, second) =>

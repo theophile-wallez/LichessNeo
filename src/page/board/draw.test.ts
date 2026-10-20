@@ -1,9 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
+import { VARIATION_COLOR, VARIATION_PICKED_COLOR } from './colors.ts';
 import { createShapeDrawer } from './draw.ts';
 import { renderBoard } from './fixtures/board-markup.ts';
 import { LegacySchema } from './fixtures/schema.ts';
-import { setReviewArrows } from './review-arrows.ts';
+import { setReviewArrows, setReviewDrawing } from './review-arrows.ts';
 // What the original script drew for each frame, in this order.
 import legacyJson from './fixtures/legacy.json' with { type: 'json' };
 
@@ -32,6 +33,11 @@ const SCHOLAR_MATE = {
   children: [],
 };
 
+/** A variation arrow as Lichess draws it: an outline in the branch's color, a white body. */
+const variation = (hash: string, hilite: string, [x1, y1, x2, y2]: number[]): string =>
+  `<g cgHash="${hash}"><g opacity="0.5"><g><line stroke="${hilite}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"></line></g>` +
+  `<line stroke="white" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"></line></g></g>`;
+
 beforeEach(() => {
   vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'Date'] });
 });
@@ -39,6 +45,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.useRealTimers();
   setReviewArrows([]);
+  setReviewDrawing([]);
   Reflect.deleteProperty(window, 'site');
   document.documentElement.className = '';
   document.body.replaceChildren();
@@ -134,5 +141,40 @@ describe('createShapeDrawer', () => {
     draw();
     observer.disconnect();
     expect(records.concat(observer.takeRecords())).toEqual([]);
+  });
+
+  it('draws the coach’s drawing under the pieces, written again only when it changes', () => {
+    const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
+    renderBoard({ orientation: 'white' });
+    setReviewDrawing([{ kind: 'ring', square: 'e4', tone: 'plan' }]);
+    draw();
+    const drawing = queryOne(document, 'svg.ln-ext-marks .ln-ext-drawing', SVGElement);
+    expect(drawing?.innerHTML).toContain('ln-ext-drawing__ring');
+    setReviewArrows([{ orig: 'e2', dest: 'e4', brush: 'best' }]);
+    draw();
+    expect(queryOne(document, 'svg.ln-ext-marks .ln-ext-drawing', SVGElement)).toBe(drawing);
+    expect(layer()).not.toBe('');
+    setReviewDrawing([]);
+    draw();
+    expect(marks()).not.toContain('ln-ext-drawing');
+  });
+
+  it('draws Lichess’s variation arrows under the pieces in our colors, but not in the review', () => {
+    const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
+    renderBoard({ orientation: 'white' });
+    // As Lichess draws them after 25…dxe5 of lichess.org/HazZkamE: the game's Bxe5+ picked, Qf6+ beside it.
+    const below = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    below.setAttribute('class', 'cg-shapes-below');
+    below.setAttribute('viewBox', '-4 -4 8 8');
+    below.innerHTML = `<g>${variation('728,728,1,b2,e5,variation,#3291ff,below', '#3291ff', [-2.5, 2.5, 0.39, -0.39])}${variation('728,728,1,h4,f6,variation,#aaa,below', '#aaa', [3.5, 0.5, 1.6, -1.4])}</g>`;
+    queryOne(document, 'cg-container', Element)?.append(below);
+    draw();
+    const fills = [...document.querySelectorAll('svg.ln-ext-marks polygon')].map(polygon =>
+      polygon.getAttribute('fill'),
+    );
+    expect(fills).toEqual([`rgba(${VARIATION_PICKED_COLOR},0.6)`, `rgba(${VARIATION_COLOR},0.6)`]);
+    document.documentElement.classList.add('ln-ext-review-moves');
+    draw();
+    expect(document.querySelectorAll('svg.ln-ext-marks polygon')).toHaveLength(0);
   });
 });

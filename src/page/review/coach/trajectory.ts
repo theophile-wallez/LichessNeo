@@ -1,5 +1,6 @@
 import type { Color } from '#shared/chess/index.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
+import { SURE_MATE } from '#page/review/judge/mate.ts';
 import type { ReviewLanguage, Standing } from '#page/review/i18n/types.ts';
 
 // How a move changed the game: "The game was balanced, but now Black has a
@@ -24,6 +25,22 @@ export function evaluationLevel(record: PositionRecord): number {
   return winLevel(record.whiteWinChance) - lossLevel(record.whiteWinChance);
 }
 
+/** The moves to a mate, when the engine is sure of them: longer ones come out long. */
+function sureMate(record: PositionRecord): number | null {
+  const moves = 'mate' in record ? Math.abs(record.mate) : 0;
+  return moves > 0 && moves <= SURE_MATE ? moves : null;
+}
+
+/**
+ * The level the coach tells of: a mate too long to be sure of is a winning
+ * position, else it would come and go from one move to the next.
+ */
+export function toldLevel(record: PositionRecord): number {
+  const level = evaluationLevel(record);
+  const unsure = Math.abs(level) === 4 && 'mate' in record && Math.abs(record.mate) > SURE_MATE;
+  return unsure ? Math.sign(level) * 3 : level;
+}
+
 /** "a clear advantage", or "a mate in 3" when there's a mate to count. */
 export function advantageName(
   level: number,
@@ -31,9 +48,8 @@ export function advantageName(
   language: ReviewLanguage,
 ): string {
   const { advantages, mateIn } = language.trajectory;
-  if (Math.abs(level) === 4 && 'mate' in record && record.mate !== 0)
-    return mateIn(Math.abs(record.mate));
-  return advantages[Math.abs(level)] ?? '';
+  const moves = Math.abs(level) === 4 ? sureMate(record) : null;
+  return moves === null ? (advantages[Math.abs(level)] ?? '') : mateIn(moves);
 }
 
 export interface TrajectoryInput {
@@ -48,8 +64,8 @@ const sideOf = (level: number): Color => (level > 0 ? 'white' : 'black');
 
 export function trajectory(input: TrajectoryInput, language: ReviewLanguage): string {
   const sentences = language.trajectory;
-  const levelBefore = evaluationLevel(input.before);
-  const levelAfter = evaluationLevel(input.after);
+  const levelBefore = toldLevel(input.before);
+  const levelAfter = toldLevel(input.after);
   const before: Standing = {
     side: sideOf(levelBefore),
     advantage: advantageName(levelBefore, input.before, language),
@@ -61,6 +77,8 @@ export function trajectory(input: TrajectoryInput, language: ReviewLanguage): st
   const pick = (ways: readonly string[]): string => ways[input.seed % ways.length] ?? '';
   if (levelBefore === levelAfter)
     return pick(levelAfter === 0 ? sentences.stillBalanced : sentences.stillAhead(after));
+  // A mate is more than a bigger lead.
+  if (Math.abs(levelAfter) === 4) return pick(sentences.mates(after.side, sureMate(input.after)));
   if (levelBefore === 0) return pick(sentences.wasBalanced(after, after.side === input.mover));
   if (levelAfter === 0) return pick(sentences.nowBalanced(before));
   if (after.side !== before.side) return pick(sentences.swings(before, after));

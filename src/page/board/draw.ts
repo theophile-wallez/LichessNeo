@@ -8,14 +8,16 @@ import { createSvgElement } from '#shared/svg.ts';
 import { currentNode } from '#page/lichess/analysis.ts';
 import { ENGINE_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
 import { squareCenter } from './geometry.ts';
-import { arrowsMarkup, fillsMarkup } from './render.ts';
-import { reviewArrows, type ReviewArrow } from './review-arrows.ts';
-import { readShapes, type Arrow } from './svg-shapes.ts';
+import { clearOfArrows, drawingMarkup } from './drawing.ts';
+import { arrowPolygons, arrowsMarkup, fillsMarkup } from './render.ts';
+import { reviewArrows, type ReviewArrow, reviewDrawing } from './review-arrows.ts';
+import { readShapes, readVariations, type Arrow } from './svg-shapes.ts';
 
-// Our shapes on the main board: fills under the pieces (.ln-ext-marks), arrows
-// over them (#ln-ext-shapes), and checkmate over those (#ln-ext-mate), apart so
-// that an arrow drawn doesn't replay its animation. Chessground's own are hidden
-// by the stylesheet once html.ln-ext-shapes is set.
+// Our shapes on the main board: fills, Lichess's variation arrows and the
+// coach's drawing under the pieces (.ln-ext-marks), arrows over them
+// (#ln-ext-shapes), and checkmate over those (#ln-ext-mate), apart so that an
+// arrow drawn doesn't replay its animation, nor the drawing its entrance.
+// Chessground's own are hidden by the stylesheet once html.ln-ext-shapes is set.
 
 export interface DrawOptions {
   readonly mateLabel: string;
@@ -67,7 +69,11 @@ export function createShapeDrawer({ mateLabel }: DrawOptions): () => void {
     const wrap = container.closest('.cg-wrap');
     const bottom = wrap ? wrapOrientation(wrap) : 'white';
     const whiteAtBottom = bottom === 'white';
-    const { fills, arrows } = readShapes(svg, { reviewing: isReviewing(root) });
+    const reviewing = isReviewing(root);
+    const { fills, arrows } = readShapes(svg, { reviewing });
+    // In the review, its own arrows say where the game goes.
+    const below = reviewing ? null : queryOne(container, 'svg.cg-shapes-below', Element);
+    const variations = below ? readVariations(below) : [];
     arrows.push(...reviewArrows().map(arrow => reviewArrow(arrow, whiteAtBottom)));
     const mate = checkmate(currentNode());
     root.classList.toggle('ln-ext-mate', mate !== null);
@@ -78,8 +84,10 @@ export function createShapeDrawer({ mateLabel }: DrawOptions): () => void {
           label: mateLabel,
         })
       : html``;
+    const drawing = clearOfArrows(reviewDrawing(), reviewArrows());
+    const under = html`${fillsMarkup(fills)}${arrowPolygons(variations)}${drawingMarkup(drawing, whiteAtBottom)}`;
     drawn = {
-      under: redrawn(marks, fillsMarkup(fills), drawn.under),
+      under: redrawn(marks, under, drawn.under),
       over: redrawn(layer, arrowsMarkup(arrows), drawn.over),
       mate: redrawn(mateLayer, badge, drawn.mate),
     };

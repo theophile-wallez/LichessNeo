@@ -54,9 +54,11 @@ function gainsEn(viewer: Viewer): GainSentences {
   };
 }
 
-type ThreatSentences = Pick<
+type ThreatSentences = Pick<LineFacts, 'stopsThreat' | 'escapes' | 'threatens'>;
+
+type MateThreatSentences = Pick<
   LineFacts,
-  'stopsThreat' | 'stopsMate' | 'stopsLongMate' | 'escapes' | 'threatens' | 'threatensMate'
+  'stopsMate' | 'stopsLongMate' | 'threatensMate' | 'takesAndThreatensMate'
 >;
 
 function threatsEn(viewer: Viewer): ThreatSentences {
@@ -67,16 +69,6 @@ function threatsEn(viewer: Viewer): ThreatSentences {
       `No more ${threat}, which would have won ${material}.`,
       `${threat} is off the table now: it would have won ${material}.`,
       `Well defended: ${threat} would have won ${material}.`,
-    ],
-    stopsMate: line => [
-      `The mate is stopped: ${line}.`,
-      `That parries the mating threat: ${line}.`,
-      `Mate was coming, and that stops it: ${line}.`,
-    ],
-    stopsLongMate: (moves, first) => [
-      `That stops a mate in ${moves}, starting with ${first}.`,
-      `That parries a mate in ${moves}, which began with ${first}.`,
-      `A mate in ${moves} was coming, starting with ${first}: no longer.`,
     ],
     escapes: (piece, threat) => [
       `${the(piece)} gets out of the way of ${threat}.`,
@@ -90,6 +82,36 @@ function threatsEn(viewer: Viewer): ThreatSentences {
       `Next comes ${threat}, winning ${material}.`,
       `${threat} is in the air, and would win ${material}.`,
     ],
+  };
+}
+
+// A mate stopped, maybe at a cost, or threatened, maybe by a capture.
+function mateThreatsEn(viewer: Viewer): MateThreatSentences {
+  const the = (piece: Piece): string => definite(viewer, piece);
+  return {
+    stopsMate: (line, cost) =>
+      cost
+        ? [
+            `That stops the mate, ${line}, giving up ${the(cost)}.`,
+            `${capitalize(the(cost))} is given up to stop the mate: ${line}.`,
+            `Mate was coming, ${line}: stopping it costs ${the(cost)}.`,
+          ]
+        : [
+            `The mate is stopped: ${line}.`,
+            `That parries the mating threat: ${line}.`,
+            `Mate was coming, and that stops it: ${line}.`,
+          ],
+    stopsLongMate: (moves, first, cost) =>
+      cost
+        ? [
+            `That stops a mate in ${moves}, starting with ${first}, giving up ${the(cost)}.`,
+            `${capitalize(the(cost))} is given up to parry a mate in ${moves}, which began with ${first}.`,
+          ]
+        : [
+            `That stops a mate in ${moves}, starting with ${first}.`,
+            `That parries a mate in ${moves}, which began with ${first}.`,
+            `A mate in ${moves} was coming, starting with ${first}: no longer.`,
+          ],
     threatensMate: (threat, moves) =>
       moves <= 1
         ? [
@@ -102,6 +124,16 @@ function threatsEn(viewer: Viewer): ThreatSentences {
             `A mate ${within(moves)} is in the air, starting with ${threat}.`,
             `The attack threatens mate ${within(moves)}, with ${threat} first.`,
           ],
+    takesAndThreatensMate: (piece, threat, moves) =>
+      moves <= 1
+        ? [
+            `That takes ${the(piece)} and threatens mate: ${threat}.`,
+            `${capitalize(the(piece))} falls, and ${threat} would be mate next.`,
+          ]
+        : [
+            `That takes ${the(piece)} and threatens mate ${within(moves)}, starting with ${threat}.`,
+            `${capitalize(the(piece))} falls, and a mate ${within(moves)} is in the air, starting with ${threat}.`,
+          ],
   };
 }
 
@@ -110,4 +142,5 @@ export const lineFactsEn = (viewer: Viewer): LineFacts => ({
   material: materialEn,
   ...gainsEn(viewer),
   ...threatsEn(viewer),
+  ...mateThreatsEn(viewer),
 });

@@ -1,4 +1,5 @@
 import { afterEach, expect, it, vi } from 'vitest';
+import { passedFen } from '#page/review/coach/threat.ts';
 import { bootEngine } from '#page/review/engine-pool.ts';
 import {
   fixtureGame,
@@ -31,9 +32,11 @@ const finishedPage = (): string =>
 
 it('leaves the analysis page a whole review to show, with no search of its own', async () => {
   const { ctrl, advance } = setUp({ game: 'passant', lang: 'en', cached: false, steps: [] });
+  // The coach's threats are the analysis page's own: positions of the game with the turn passed.
+  const threats = new Set(ctrl.mainline.map(node => passedFen(node.fen)));
   let searches = 0;
   useFakeEngine(ctrl, search => {
-    searches++;
+    if (!threats.has(search.fen)) searches++;
     return SCRIPT_DELAY(search);
   });
   const finished = readFinishedGame(finishedPage());

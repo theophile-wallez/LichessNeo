@@ -82,6 +82,14 @@ html.ln-ext-evalbar-on main.analyse .eval-gauge {
   transform: translate(-72%, -28%);
 }
 
+/* Lichess draws its server analysis's glyph (?!, ??) on the same corner of the same square:
+   the review's badge stands for it. */
+html:is(.ln-ext-review-summary, .ln-ext-review-moves, .ln-ext-review-live)
+  main.analyse
+  .cg-custom-svgs {
+  display: none;
+}
+
 /* The chip is translucent: a dark base under it keeps it readable on any square. */
 .ln-ext-badge svg {
   width: 100%;

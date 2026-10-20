@@ -4,6 +4,7 @@ import type { RemarkPools } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { type CoachContext, moveSeed } from './context.ts';
 import { hash } from './hash.ts';
+import { turnStep } from './said.ts';
 
 // A short comment under the coach's verdict, in the words for its mover: the
 // reader, or another side. Some situations (a mate, a side's first book move…)
@@ -53,5 +54,7 @@ export function remark(move: MoveVerdict, context: CoachContext): string {
   const pool =
     overridingPool(move, remarks) ??
     (situations.length > 0 && hash(`${seed}:ctx`) % 2 === 1 ? situations : remarks[move.moveClass]);
-  return language.typography(pool[hash(seed) % pool.length] ?? '');
+  // Stepped through by the turns, so that moves in a row don't say the same.
+  const pick = hash(`${context.gameId}:${context.coach}:${move.moveClass}`) + turnStep(move);
+  return language.typography(pool[pick % pool.length] ?? '');
 }

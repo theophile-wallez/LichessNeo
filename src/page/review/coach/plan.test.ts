@@ -42,12 +42,14 @@ describe('planFact', () => {
   });
 
   it('sees a knight settle where no pawn can chase it', () => {
+    // Short of an outpost (no pawn holds it, or one can chase it), the knight just takes the center.
+    const central = en.facts.centralizes(KNIGHT);
     const fen = '4k3/p6p/8/8/3P4/2N5/8/4K3 w - - 0 1';
-    expect(planOf({ fen, uci: 'c3e4', san: 'Ne4' })).toBeNull();
+    expect(central).toContain(planOf({ fen, uci: 'c3e4', san: 'Ne4' }));
     const chased = '4k3/p4p2/8/8/3P4/5N2/8/4K3 w - - 0 1';
-    expect(planOf({ fen: chased, uci: 'f3e5', san: 'Ne5' })).toBeNull();
+    expect(central).toContain(planOf({ fen: chased, uci: 'f3e5', san: 'Ne5' }));
     const held = '4k3/p6p/8/3P4/8/5N2/8/4K3 w - - 0 1';
-    expect(planOf({ fen: held, uci: 'f3e5', san: 'Ne5' })).toBeNull();
+    expect(central).toContain(planOf({ fen: held, uci: 'f3e5', san: 'Ne5' }));
     const outpost = '4k3/p6p/8/8/3P4/5N2/8/4K3 w - - 0 1';
     expect(en.facts.outpost(KNIGHT)).toContain(planOf({ fen: outpost, uci: 'f3e5', san: 'Ne5' }));
   });

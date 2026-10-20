@@ -10,4 +10,9 @@ describe('the settings', () => {
       uiSounds: false,
     });
   });
+
+  it('have the coach draw on the board unless switched off', () => {
+    expect(parseSettings({}).coachBoard).toBe(true);
+    expect(parseSettings({ coachBoard: false }).coachBoard).toBe(false);
+  });
 });

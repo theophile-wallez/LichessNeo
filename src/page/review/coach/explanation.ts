@@ -2,13 +2,13 @@ import { isError } from '#page/review/classes/classes.ts';
 import type { CommentPart } from '#page/review/comment/markup.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
-import { type CoachContext, moveSeed } from './context.ts';
-import { findings, punishes } from './fact.ts';
+import type { CoachContext } from './context.ts';
+import { type Findings, findings, punishes } from './fact.ts';
 import { hash } from './hash.ts';
-import { oneOf } from './said.ts';
+import { oneOf, turnStep } from './said.ts';
 import { remark } from './remark.ts';
 import type { Threats } from './threat-facts.ts';
-import { evaluationLevel, trajectory } from './trajectory.ts';
+import { toldLevel, trajectory } from './trajectory.ts';
 
 const say = (text: string, droppable = false): CommentPart => ({ text, droppable });
 
@@ -36,11 +36,14 @@ function courseOf(move: MoveVerdict, language: ReviewLanguage, seed: number): Co
   const punished = punishes(move) ? move.previousMove : null;
   const before = punished?.before ?? move.before;
   const course = trajectory({ before, after: move.after, mover: move.color, seed }, language);
-  const level = evaluationLevel(move.after);
-  const changed =
-    level !== evaluationLevel(before) && (!punished || level !== evaluationLevel(punished.after));
+  const level = toldLevel(move.after);
+  const changed = level !== toldLevel(before) && (!punished || level !== toldLevel(punished.after));
   return { course, changed };
 }
+
+// A mate the comment speaks of says more than how the advantage moved.
+const speaksOfMate = ({ fact, followUp }: Findings): boolean =>
+  [fact, followUp].some(said => said?.theme === 'mate');
 
 /**
  * The coach's comment on a move: how the evaluation moved, and one fact from
@@ -64,8 +67,12 @@ export function explanation(
   const { fact, followUp } = findings(move, language, threats);
   const found = fact?.text ?? null;
   if (move.san.includes('#')) return [say(found ?? '')];
-  const { course, changed } = courseOf(move, language, hash(`${moveSeed(move, context)}:t`));
-  const told = changed ? [say(course, true)] : [];
+  const { course, changed } = courseOf(
+    move,
+    language,
+    hash(`${context.gameId}:${context.coach}:t`) + turnStep(move),
+  );
+  const told = changed && !speaksOfMate({ fact, followUp }) ? [say(course, true)] : [];
   if (isError(move.moveClass)) {
     const turned = turning ? [say(oneOf(language.trajectory.turningPoint, move), true)] : [];
     if (found === null) return [say(course), ...turned];

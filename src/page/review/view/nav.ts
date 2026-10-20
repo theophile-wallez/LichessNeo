@@ -46,14 +46,31 @@ export function navState(session: Session, analysis: Analysis, input: NavInput):
   };
 }
 
-/** Fills the panel but for its kept nav, left in place, last, for its buttons to ease. */
+// The markup each part of the panel was drawn from: a part drawn the same is kept.
+const drawnFrom = new WeakMap<Element, string>();
+
+/**
+ * Fills the panel but for its kept nav, left in place, last, for its buttons
+ * to ease. A part whose markup didn't change stays as it is (the header, the
+ * key moments): only what changed is laid out again.
+ */
 export function fillAroundNav(panel: HTMLElement, markup: SafeHtml, nav: HTMLElement): void {
   const template = document.createElement('template');
   setHtml(template, markup);
   if (nav.parentNode !== panel) panel.replaceChildren(nav);
-  while (nav.previousSibling) nav.previousSibling.remove();
   while (nav.nextSibling) nav.nextSibling.remove();
-  nav.before(template.content);
+  for (const node of panel.childNodes) if (!(node instanceof Element)) node.remove();
+  const drawn = [...panel.children].filter(child => child !== nav);
+  const parts = [...template.content.children];
+  for (const [i, part] of parts.entries()) {
+    const source = part.outerHTML;
+    const old = drawn[i];
+    if (old && drawnFrom.get(old) === source) continue;
+    drawnFrom.set(part, source);
+    if (old) old.replaceWith(part);
+    else nav.before(part);
+  }
+  for (const extra of drawn.slice(parts.length)) extra.remove();
 }
 
 type NavButton = keyof NavState;

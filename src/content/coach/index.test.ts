@@ -80,6 +80,26 @@ describe('the coach', () => {
     answer?.({ coachMotion: false, analysisCoach: false });
     await flush();
     expect(isLive()).toBe(false);
-    expect(localStorage.getItem('ln-ext-coach-options')).toBe('{"motion":false,"analysis":false}');
+    expect(localStorage.getItem('ln-ext-coach-options')).toBe(
+      '{"motion":false,"analysis":false,"board":true}',
+    );
+  });
+
+  it('keeps the switch of the coach’s drawings for the page world', async () => {
+    vi.stubGlobal('chrome', {
+      runtime: { id: 'test' },
+      storage: {
+        sync: { get: (key: string) => Promise.resolve({ [key]: { coachBoard: false } }) },
+        onChanged: { addListener: () => {} },
+      },
+    });
+    // The settings are read once per content script: a fresh one reads these.
+    vi.resetModules();
+    const fresh = await import('./index.ts');
+    fresh.coach.start();
+    await flush();
+    expect(localStorage.getItem('ln-ext-coach-options')).toBe(
+      '{"motion":true,"analysis":true,"board":false}',
+    );
   });
 });

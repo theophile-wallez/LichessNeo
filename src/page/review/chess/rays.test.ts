@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { parseFen } from '#shared/chess/index.ts';
-import { between, checkers, isDefended, isInBadSpot, pinOf } from './rays.ts';
+import { batteryOf, between, checkers, isDefended, isInBadSpot, pinOf } from './rays.ts';
 
 const board = (fen: string) => parseFen(fen).board;
 
@@ -56,5 +56,35 @@ describe('checkers', () => {
       'e1',
       'f6',
     ]);
+  });
+});
+
+describe('batteryOf', () => {
+  it('finds a slider behind a piece of its own, on the other king', () => {
+    expect(batteryOf(board('k7/8/8/8/N7/8/8/R3K3 w - - 0 1'), 'a1')).toEqual({
+      screen: 'a4',
+      target: 'a8',
+    });
+  });
+
+  it('finds none behind a pawn, which mostly can’t step off the line', () => {
+    expect(batteryOf(board('k7/8/8/8/P7/8/8/R3K3 w - - 0 1'), 'a1')).toBeNull();
+  });
+
+  it('aims at a queen, but not with a queen, nor at a rook', () => {
+    expect(batteryOf(board('4k3/8/8/6q1/8/4N3/8/2B1K3 w - - 0 1'), 'c1')).toEqual({
+      screen: 'e3',
+      target: 'g5',
+    });
+    expect(batteryOf(board('4k3/8/8/6q1/8/4N3/8/2Q1K3 w - - 0 1'), 'c1')).toBeNull();
+    expect(batteryOf(board('8/8/8/6k1/8/4N3/8/2Q1K3 w - - 0 1'), 'c1')).toEqual({
+      screen: 'e3',
+      target: 'g5',
+    });
+    expect(batteryOf(board('4k3/8/8/6r1/8/4N3/8/2B1K3 w - - 0 1'), 'c1')).toBeNull();
+  });
+
+  it('finds none from a piece that doesn’t slide', () => {
+    expect(batteryOf(board('k7/8/8/8/N7/8/8/K7 w - - 0 1'), 'a1')).toBeNull();
   });
 });

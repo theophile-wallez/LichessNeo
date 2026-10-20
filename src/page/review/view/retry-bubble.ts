@@ -8,7 +8,7 @@ import type { RetryOutcome } from './retry.ts';
 
 // What the coach says while the player retries an error, and the retry's buttons.
 
-const SHOWN = { key: '', shown: Infinity, dropped: false };
+const SHOWN = { key: '', shown: Infinity, dropped: 0 };
 
 /** A line of the coach's, its moves drawn as chips. */
 function said(session: Session, text: string): SafeHtml {

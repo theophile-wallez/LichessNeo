@@ -1,6 +1,6 @@
 import type { Color } from '#shared/chess/index.ts';
 import { playLine, type Ply } from '#page/review/chess/played-line.ts';
-import { movesToken } from '#page/review/comment/tokens.ts';
+import { moveToken, movesToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import type { FactSentences } from '#page/review/i18n/types.ts';
 import { SURE_MATE } from '#page/review/judge/mate.ts';
@@ -48,6 +48,19 @@ function scoreDrops({ before, after, color }: MoveVerdict, pawns: number): boole
 export const lineOf = (plies: readonly Ply[], base: 'a' | 'b' | null): string =>
   movesToken(plies, base ? { base, ucis: plies.map(ply => ply.uci) } : undefined);
 
+/**
+ * A line that wins material, past four moves as its first and its last,
+ * whose chip plays it all: what matters is how it starts and what it takes.
+ */
+function gainLineOf(plies: readonly Ply[], base: 'a' | 'b'): string {
+  const [first] = plies;
+  const last = plies.at(-1);
+  if (plies.length <= 4 || !first || !last) return lineOf(plies, base);
+  const ucis = plies.map(ply => ply.uci);
+  const start = moveToken(first.san, first.color, { base, ucis: ucis.slice(0, 1) });
+  return `${start} … ${moveToken(last.san, last.color, { base, ucis })}`;
+}
+
 /** How many of `color`'s moves `plies` hold. */
 const movesOf = (plies: readonly Ply[], color: Color): number =>
   plies.filter(ply => ply.color === color).length;
@@ -89,7 +102,7 @@ export function lossFact({ move, facts, them }: LineFactInput, threatened = fals
   const material = facts.material(won);
   const replies = lines.played.slice(1, won.plies);
   if (material === null || replies.length === 0) return null;
-  const gain = { material, line: lineOf(replies, 'a'), moves: movesOf(replies, them) };
+  const gain = { material, line: gainLineOf(replies, 'a'), moves: movesOf(replies, them) };
   const text = oneOf(facts.losesMaterial(them, gain, threatened), move);
   const motifLine = {
     plies: lines.played,
@@ -128,7 +141,7 @@ export function bestGainFact(input: LineFactInput): Fact | null {
   if (!gained) return null;
   const { lines, won, material } = gained;
   const best = lines.best.slice(0, won.plies);
-  const gain = { material, line: lineOf(best, 'b'), moves: movesOf(best, me) };
+  const gain = { material, line: gainLineOf(best, 'b'), moves: movesOf(best, me) };
   const text = oneOf(facts.wouldHaveWon(me, gain), move);
   const around = afterLastMove(move, move.before.line ?? []);
   const upTo = won.plies + around.offset;
@@ -177,7 +190,7 @@ export function gainFact({ move, facts, me, them }: LineFactInput): Fact | null 
   const material = facts.material(won);
   if (material === null) return null;
   const own = plies.slice(from, won.plies);
-  const gain = { material, line: lineOf(own, 'b'), moves: movesOf(own, me) };
+  const gain = { material, line: gainLineOf(own, 'b'), moves: movesOf(own, me) };
   const text = oneOf(facts.winsAlong(gain), move);
   const around = afterLastMove(move, [move.uci, ...(move.after.line ?? [])]);
   const upTo = won.plies - from + around.offset;
@@ -193,9 +206,11 @@ export function mateLine(
   fen: string,
   base: 'a' | 'b' | null,
 ): string | null {
-  if (!('mate' in record) || !record.line) return null;
+  if (!('mate' in record)) return null;
+  // A quick search's mate in one may keep its move alone.
+  const moves = record.line ?? (record.best ? [record.best] : []);
   const length = 2 * Math.abs(record.mate) - 1;
-  const plies = playLine(fen, record.line.slice(0, length));
+  const plies = playLine(fen, moves.slice(0, length));
   const last = plies.at(-1);
   if (Math.abs(record.mate) > SURE_MATE || plies.length < length || !last) return null;
   const mated = { ...last, san: last.san.replace(/\+?$/, '#') };
