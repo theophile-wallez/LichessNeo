@@ -2491,7 +2491,7 @@
         ]
       },
       {
-        "remark": "This allows a forced checkmate.",
+        "remark": "Careful: the king is in a mating net now.",
         "parts": [["White can now force mate, starting with [[m:w:Ne2]]."]]
       },
       { "remark": "No escape for the king now.", "parts": [["No escape for the king now."]] },
@@ -2796,7 +2796,7 @@
         ]
       },
       {
-        "remark": "Ça permet un mat forcé.",
+        "remark": "Attention : le roi est pris dans un filet de mat.",
         "parts": [["Les Blancs peuvent maintenant forcer le mat, à commencer par [[m:w:Ne2]]."]]
       },
       {
@@ -7338,7 +7338,7 @@
         "parts": [["Strong and simple."], ["The scales tip, and White has a slight edge.", true]]
       },
       {
-        "remark": "This allows a forced checkmate.",
+        "remark": "Careful: the king is in a mating net now.",
         "parts": [["That allows a forced mate, beginning with [[m:b:Rff8]]."]]
       },
       {
@@ -7606,7 +7606,7 @@
         ]
       },
       {
-        "remark": "Ça permet un mat forcé.",
+        "remark": "Attention : le roi est pris dans un filet de mat.",
         "parts": [["Ça permet un mat forcé, qui commence par [[m:b:Rff8]]."]]
       },
       {

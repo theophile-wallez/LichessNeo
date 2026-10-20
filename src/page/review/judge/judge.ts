@@ -96,10 +96,11 @@ function baseClass(input: JudgeInput, standing: Standing, isBest: boolean): Move
 /**
  * The move as a miss, if its error fails to punish the opponent's: for a move judged
  * before the moves it answers were linked, which `judge` couldn't see then. A verdict
- * from mate distances stands.
+ * from mate distances stands, and so does a blunder that lets a mate in.
  */
 export function withMiss<T extends MoveVerdict>(move: T): T {
   if (move.slower || !isMistake(move.moveClass)) return move;
+  if (letInMateClass(move.before, move.after, move.color) === 'blunder') return move;
   const before = forColor(move.before.whiteWinChance, move.color);
   return inPunishment(move.previousMove, before) ? { ...move, moveClass: 'miss' } : move;
 }
@@ -121,9 +122,8 @@ export function judge(input: JudgeInput): MoveVerdict {
   const mated = isBest || input.book ? null : mateVerdict(recordBefore, recordAfter, color);
   if (mated && RANK.indexOf(moveClass) < RANK.indexOf(mated)) moveClass = mated;
   const letIn = isBest || input.book ? null : letInMateClass(recordBefore, recordAfter, color);
-  // A miss is an error already, and says what was let go.
-  if (letIn && moveClass !== 'miss' && RANK.indexOf(moveClass) < RANK.indexOf(letIn))
-    moveClass = letIn;
+  // A mate let in from a game still on is a blunder, even when it also lets a punishment go.
+  if (letIn && RANK.indexOf(moveClass) < RANK.indexOf(letIn)) moveClass = letIn;
   return {
     ply: position.ply,
     san: position.san,
