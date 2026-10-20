@@ -44,7 +44,7 @@ describe('serveRecordedSounds', () => {
     expect(answer).toMatchObject({
       sounds: { castle: Array.from({ length: 4 }, () => 'data:audio/ogg;base64,T2dnUw==') },
     });
-    expect(fetch).toHaveBeenCalledWith('chrome-extension://id/sounds/naturel/castle-1.ogg');
+    expect(fetch).toHaveBeenCalledWith('chrome-extension://id/sounds/boxwood/castle-1.ogg');
     const count = Object.values(RECORDED_TAKES).reduce((sum, takes) => sum + takes, 0);
     expect(fetch).toHaveBeenCalledTimes(count);
     await ask(listener);

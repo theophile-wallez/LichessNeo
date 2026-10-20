@@ -5,7 +5,7 @@ import {
   type RecordedSoundsResponse,
 } from '#shared/recorded-sounds.ts';
 
-// Reads the Naturel set's files for the content script, which can't load them
+// Reads the Boxwood set's files for the content script, which can't load them
 // in Firefox (it holds a content script's fetch to the page's CSP). Read once
 // per worker: they never change while it runs.
 

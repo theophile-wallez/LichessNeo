@@ -2,12 +2,12 @@ import { z } from 'zod/mini';
 import { messageType } from './prefix.ts';
 import { SOUND_NAMES, SoundNameSchema, type SoundName } from './sounds.ts';
 
-// Naturel, the extension's recorded sound set: wooden pieces on a board, cut
-// out of one microphone recording by tools/naturel-sounds/cut.py into
-// public/sounds/naturel. The page's CSP keeps it from loading them, so the
+// Boxwood, the extension's recorded sound set: wooden pieces on a board, cut
+// out of one microphone recording by tools/boxwood-sounds/cut.py into
+// public/sounds/boxwood. The page's CSP keeps it from loading them, so the
 // content script asks the background worker for them, as data: URLs.
 
-export const RECORDED_SET = 'naturel';
+export const RECORDED_SET = 'boxwood';
 
 /** How many takes each sound has, `<name>-<n>.ogg`; a slide's, three per reach, shortest first. */
 export const RECORDED_TAKES: Readonly<Partial<Record<SoundName, number>>> = {
@@ -35,7 +35,7 @@ export function recordedTakePaths(): ReadonlyMap<SoundName, readonly string[]> {
     if (count > 0)
       paths.set(
         name,
-        Array.from({ length: count }, (_, i) => `sounds/naturel/${name}-${i + 1}.ogg`),
+        Array.from({ length: count }, (_, i) => `sounds/boxwood/${name}-${i + 1}.ogg`),
       );
   }
   return paths;

@@ -19,7 +19,7 @@ vi.mock('./store.ts', () => ({
   deletePack: vi.fn<(id: string) => Promise<void>>(() => Promise.resolve()),
 }));
 
-// Naturel's takes come from the background worker.
+// Boxwood's takes come from the background worker.
 vi.mock('./recorded.ts', () => ({
   recordedSounds: vi.fn<() => Promise<SoundFiles>>(() => Promise.resolve({})),
 }));
@@ -176,11 +176,11 @@ describe('packs', () => {
     expect(posted()).toHaveLength(3);
   });
 
-  it('sends Naturel’s takes once read, unless another set was picked meanwhile', async () => {
+  it('sends Boxwood’s takes once read, unless another set was picked meanwhile', async () => {
     const takes = { capture: [new ArrayBuffer(1), new ArrayBuffer(2)] };
     const read = Promise.withResolvers<SoundFiles>();
     vi.mocked(recordedSounds).mockReturnValue(read.promise);
-    localStorage.setItem('ln-ext-sounds', 'naturel');
+    localStorage.setItem('ln-ext-sounds', 'boxwood');
     const library = startPacks();
     await library.ready;
     expect(posted()).toEqual([]);
@@ -190,7 +190,7 @@ describe('packs', () => {
     const slow = Promise.withResolvers<SoundFiles>();
     vi.mocked(recordedSounds).mockReturnValue(slow.promise);
     library.choose('sound', 'lichess');
-    library.choose('sound', 'naturel');
+    library.choose('sound', 'boxwood');
     library.choose('sound', 'foley');
     slow.resolve(takes);
     await flush();

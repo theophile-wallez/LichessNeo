@@ -8,7 +8,7 @@ import { messageType } from '#shared/prefix.ts';
 import { SOUND_NAMES } from '#shared/sounds.ts';
 import { askWorker } from '#content/platform/runtime.ts';
 
-// The Naturel set's takes, from the background worker (background/recorded-sounds.ts),
+// The Boxwood set's takes, from the background worker (background/recorded-sounds.ts),
 // asked for once per page and only once it's picked.
 
 let loading: Promise<SoundFiles> | null = null;

@@ -9,7 +9,7 @@ import { savedBoards } from './saved-boards.ts';
 // The extension's own looks for each part: its boards, drawn by its CSS from
 // `data-ln-ext-board` on <html> (styles/board/), the backlit ones lit up in the
 // page (page/backlit), and its sound sets: Ascent, synthesized in the page
-// (page/sounds/synth), and Naturel, recorded (#shared/recorded-sounds.ts). A part's pick is one of these,
+// (page/sounds/synth), and Boxwood, recorded (#shared/recorded-sounds.ts). A part's pick is one of these,
 // an imported pack or Lichess's own.
 
 export interface Theme {
@@ -54,7 +54,7 @@ const THEMES: Readonly<Record<Exclude<PartKind, 'board'>, readonly Theme[]>> = {
   piece: [],
   sound: [
     { id: SYNTH_SET, name: 'Ascent' },
-    { id: RECORDED_SET, name: 'Naturel' },
+    { id: RECORDED_SET, name: 'Boxwood' },
   ],
 };
 

@@ -35,7 +35,7 @@ async function readPicked(): Promise<Pack[]> {
 
 // The page script may start before or after the packs are read: each side
 // sends when it's ready, and every new sound pick is sent again, as is a new
-// place for the extension's own set; Naturel's once read. A pack imported again keeps its id but
+// place for the extension's own set; Boxwood's once read. A pack imported again keeps its id but
 // not its sounds: the pack itself is compared.
 function createSoundSender(): (shown: Shown) => void {
   let files: SoundFiles = {};

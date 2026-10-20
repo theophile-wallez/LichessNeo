@@ -12,10 +12,10 @@ describe('assertRecordedTakes', () => {
 
   it('fails on a take missing, or a file no sound counts', () => {
     expect(() => assertRecordedTakes(files.filter(file => file !== 'castle-4.ogg'))).toThrow(
-      'recorded takes missing: sounds/naturel/castle-4.ogg',
+      'recorded takes missing: sounds/boxwood/castle-4.ogg',
     );
     expect(() => assertRecordedTakes([...files, 'castle-5.ogg'])).toThrow(
-      'files not in RECORDED_TAKES: sounds/naturel/castle-5.ogg',
+      'files not in RECORDED_TAKES: sounds/boxwood/castle-5.ogg',
     );
   });
 });

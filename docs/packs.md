@@ -6,7 +6,7 @@ you pick others in the user menu's Board, Piece set and Sound panels: the
 Lichess's. The extension's own are its blue board, its backlit boards (one
 **Backlit** tile, which opens onto the six of them and how they light up),
 its **Ascent** sound set, played live, with where it puts each move's
-sound, and its **Naturel** set, wooden pieces recorded on a board, several
+sound, and its **Boxwood** set, wooden pieces recorded on a board, several
 takes of each sound. A pack replaces any of the three with yours: a folder on GitHub
 holding a `pack.json` and the files it names.
 

@@ -1,11 +1,11 @@
-"""Cuts the Naturel sound set, public/sounds/naturel/<name>-<n>.ogg, out of
+"""Cuts the Boxwood sound set, public/sounds/boxwood/<name>-<n>.ogg, out of
 recording.mp3, the author's own microphone recording of wooden pieces on a board: each take is a gesture
 of the recording, picked by ear and by its spectrum (the lists below, in
 seconds), then evened in loudness so no take stands out, and encoded as Opus.
 
 Run it again after changing a take. Needs ffmpeg, numpy and scipy.
 
-  python3 tools/naturel-sounds/cut.py tools/naturel-sounds/recording.mp3
+  python3 tools/boxwood-sounds/cut.py tools/boxwood-sounds/recording.mp3
 
 Each sound's number of takes is in RECORDED_TAKES (src/shared/recorded-sounds.ts):
 the build fails if the folder doesn't match it.
@@ -19,7 +19,7 @@ from pathlib import Path
 import numpy as np
 from scipy.io import wavfile
 
-OUT = Path(__file__).resolve().parents[2] / 'public/sounds/naturel'
+OUT = Path(__file__).resolve().parents[2] / 'public/sounds/boxwood'
 BITRATE = '128k'
 RATE = 48000
 PRE_ROLL = 0.012

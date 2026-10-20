@@ -1,6 +1,6 @@
 import { RECORDED_SET, recordedTakePaths } from '#shared/recorded-sounds.ts';
 
-// The Naturel set's takes are named by count (RECORDED_TAKES), not listed: a
+// The Boxwood set's takes are named by count (RECORDED_TAKES), not listed: a
 // take missing from the build would only fail in the background worker, and a
 // stray one would weigh on it for nothing. The build fails on either instead.
 

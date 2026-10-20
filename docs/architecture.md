@@ -70,7 +70,7 @@ themes (`themes.ts`: our board in the color theme's accent, the default,
 two-tone boards in each color theme's accent and those the user saved,
 `flat-boards.ts` and `saved-boards.ts`, the one they color, `custom-board.ts`,
 the backlit boards, listed as a family under one tile, `family.ts`, and the
-Ascent and Naturel sound sets), a pack the user imported
+Ascent and Boxwood sound sets), a pack the user imported
 from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
 menu's own panels, under an Extension and a Lichess tab (`dasher.ts`,
 `panel.ts`, `choices.ts`); packs are imported and removed in the extension's
@@ -99,8 +99,8 @@ panels themselves, all in `src/content/packs/`:
   `option-row.ts`, sliders, `slider-row.ts`, colors, `color-row.ts`), kept in
   localStorage (`stored-option.ts`). The Ascent set
   comes to the page in the same message, with no file and its placement, and
-  `src/page/sounds/synth` plays it through Foley's Web Audio. Naturel's
-  recorded takes (`public/sounds/naturel`, `#shared/recorded-sounds.ts`) are
+  `src/page/sounds/synth` plays it through Foley's Web Audio. Boxwood's
+  recorded takes (`public/sounds/boxwood`, `#shared/recorded-sounds.ts`) are
   read by the background worker, which no page CSP holds, and come to the page
   as a pack's do, several takes a sound: each time, one at random
   (`page/sounds/takes.ts`), a slide's by how far the piece went

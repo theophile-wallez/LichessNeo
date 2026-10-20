@@ -6,10 +6,10 @@ describe('recordedTakePaths', () => {
     const paths = recordedTakePaths();
     expect([...paths.keys()].slice(0, 3)).toEqual(['move-self', 'move-opponent', 'move-check']);
     expect(paths.get('castle')).toEqual([
-      'sounds/naturel/castle-1.ogg',
-      'sounds/naturel/castle-2.ogg',
-      'sounds/naturel/castle-3.ogg',
-      'sounds/naturel/castle-4.ogg',
+      'sounds/boxwood/castle-1.ogg',
+      'sounds/boxwood/castle-2.ogg',
+      'sounds/boxwood/castle-3.ogg',
+      'sounds/boxwood/castle-4.ogg',
     ]);
     expect(paths.get('move-slide')).toHaveLength(18);
     expect(paths.has('notify')).toBe(false);
