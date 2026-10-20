@@ -130,6 +130,16 @@ describe('mateLine', () => {
     expect(mateLine(mate, BACK_RANK, null)).toBe('[[m:b:Ra1#]]');
   });
 
+  it('writes it from the side mated too, a move longer, and short as its first and last', () => {
+    const toMove = 'r5k1/5ppp/8/8/8/8/1P3PPP/6K1 w - - 0 30';
+    const mate = record({ mate: -1, whiteWinChance: 0, line: 'b2b3 a8a1' });
+    expect(mateLine(mate, toMove, null)).toBe('[[m:w:b3]] [[m:b:Ra1#]]');
+    const longer = record({ mate: -3, whiteWinChance: 0, line: 'b2b3 h7h6 b3b4 h6h5 b4b5 a8a1' });
+    expect(mateLine(longer, toMove, 'a', { short: true })).toMatch(
+      /^\[\[m:w:b3@a:b2b3\]\] … \[\[m:b:Ra1#@a:[^\]]*\]\]$/,
+    );
+  });
+
   it('says nothing of a mate too long to be sure of, or a line short of it', () => {
     const shuffles = 'g8f8 g1f1 f8g8 f1g1 g8f8 g1f1 f8g8 f1g1 g8f8 g1f1 a8a1';
     const long = record({ mate: -6, whiteWinChance: 0, line: shuffles });

@@ -27,6 +27,10 @@ const playSuffix = (play: ChipPlay | undefined): string =>
 export const moveToken = (san: string, color: Color, play?: ChipPlay): string =>
   `[[m:${colorLetter(color)}:${san}${playSuffix(play)}]]`;
 
+/** [[o:bp:d5]]: a piece on its square, drawn then in bold, as one word. */
+export const pieceOnToken = ({ color, role }: Piece, square: string): string =>
+  `[[o:${colorLetter(color)}${ROLE_LETTERS[role]}:${square}]]`;
+
 /** [[s:e4]]: a square, in bold. */
 export const squareToken = (square: string): string => `[[s:${square}]]`;
 

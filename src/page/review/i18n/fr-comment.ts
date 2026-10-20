@@ -16,6 +16,7 @@ import {
 import { betterMovesFr } from './fr-better.ts';
 import { capturesFr } from './fr-captures.ts';
 import { lineFactsFr } from './fr-lines.ts';
+import { pinsFr } from './fr-pins.ts';
 import { plansFr } from './fr-plans.ts';
 import type { FactSentences, Viewer, Ways } from './types.ts';
 
@@ -27,6 +28,8 @@ type MateSentences = Pick<
   | 'heldOutLonger'
   | 'canForceMate'
   | 'matesNow'
+  | 'mateFollows'
+  | 'mateUnstoppable'
   | 'wouldForceMate'
   | 'mateInOne'
 >;
@@ -76,6 +79,11 @@ function matesFr(viewer: Viewer): MateSentences {
       `${best} forçait le mat en ${moves}.`,
       `Un mat en ${moves} était là, à commencer par ${best}.`,
       `${best} menait à un mat forcé en ${moves}.`,
+    ],
+    mateFollows: line => [`Le mat suit de force : ${line}.`, `Le mat est en route : ${line}.`],
+    mateUnstoppable: line => [
+      `Plus rien n’arrête le mat : ${line}.`,
+      `Le mat ne peut plus être évité : ${line}.`,
     ],
     mateInOne: inOne,
   };
@@ -132,7 +140,7 @@ function lossesFr(viewer: Viewer): LossSentences {
 // What a good move does: the error it punishes, the sacrifice, the only move, the fork.
 type GoodMoveSentences = Pick<
   FactSentences,
-  'punishesAtOnce' | 'offered' | 'keepsAdvantage' | 'holdsPosition' | 'forks'
+  'punishesAtOnce' | 'offered' | 'offeredFor' | 'keepsAdvantage' | 'holdsPosition' | 'forks'
 >;
 
 function goodMovesFr(viewer: Viewer): GoodMoveSentences {
@@ -154,6 +162,13 @@ function goodMovesFr(viewer: Viewer): GoodMoveSentences {
         `${capitalize(the(piece))} est offert${agreement(piece)}, et ${taker.subject} ne ${conjugate(taker, 'peux', 'peut', 'peuvent')} pas ${pronoun(piece)} prendre sans risque.`,
         `${capitalize(the(piece))} est laissé${agreement(piece)} en prise exprès : ${pronoun(piece)} prendre coûterait cher.`,
         `Un sacrifice : ${the(piece)} est à prendre, mais pas gratuitement.`,
+      ];
+    },
+    offeredFor: (piece, taken, color) => {
+      const taker = party(color);
+      return [
+        `${capitalize(the(piece))} se donne pour ${the(taken)}, exprès : ${pronoun(piece)} reprendre coûterait cher.`,
+        `Un sacrifice : ${the(piece)} contre ${the(taken)}, et ${taker.subject} ne ${conjugate(taker, 'peux', 'peut', 'peuvent')} pas ${pronoun(piece)} reprendre sans risque.`,
       ];
     },
     keepsAdvantage: [
@@ -219,4 +234,5 @@ export const factsFr = (viewer: Viewer): FactSentences => ({
   ...betterMovesFr(viewer),
   ...lineFactsFr(viewer),
   ...plansFr(viewer),
+  ...pinsFr(viewer),
 });

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { parseFen } from '#shared/chess/index.ts';
 import { fixtureGames } from '#page/review/fixtures/replay.ts';
 import { attackerValues, isHanging, isSacrifice } from './material.ts';
-import { normalizeUci, uciToSan } from './notation.ts';
+import { normalizeUci, sanOf, uciToSan } from './notation.ts';
 // What the original script wrote for these moves.
 import legacy from './fixtures/legacy.json' with { type: 'json' };
 
@@ -17,6 +17,20 @@ describe('uciToSan', () => {
     expect(uciToSan(fen, 'e1h1')).toBe('O-O');
     expect(uciToSan(fen, 'e1c1')).toBe('O-O-O');
     expect(uciToSan(fen, 'e1f1')).toBe('Kf1');
+  });
+});
+
+describe('sanOf', () => {
+  it('tells a piece from another like it by its file, else its rank', () => {
+    expect(sanOf('6k1/8/8/8/8/8/8/R4RK1 w - - 0 1', 'f1d1')).toBe('Rfd1');
+    expect(sanOf('R7/7k/8/8/8/8/8/R5K1 w - - 0 1', 'a1a4')).toBe('R1a4');
+    expect(sanOf('6k1/8/8/8/8/8/8/R5K1 w - - 0 1', 'a1a4')).toBe('Ra4');
+  });
+
+  it('marks a check, which the original’s notation leaves out', () => {
+    const fen = '6k1/8/8/8/8/8/8/R5K1 w - - 0 1';
+    expect(sanOf(fen, 'a1a8')).toBe('Ra8+');
+    expect(uciToSan(fen, 'a1a8')).toBe('Ra8');
   });
 });
 

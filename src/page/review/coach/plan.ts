@@ -4,6 +4,7 @@ import {
   opposite,
   parseFen,
   parseSquare,
+  type Role,
   type Square,
 } from '#shared/chess/index.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
@@ -24,7 +25,7 @@ import { discoveryOf } from './discovery.ts';
 import { reasonMarks } from './drawing.ts';
 import { takesOpposition } from './opposition.ts';
 import { entersSquare, outOfReach, outruns } from './pawn-square.ts';
-import { behindPasser, centralSquare, makesLuft, safetyPlan } from './safety.ts';
+import { behindPasser, centralSquare, makesLuft, pawnGuards, safetyPlan } from './safety.ts';
 import { type Fact, oneOf, said } from './said.ts';
 import { centerDistance, isEndgame, isOutpost, isPassed, ownRank } from './structure.ts';
 import { evaluationLevel } from './trajectory.ts';
@@ -102,8 +103,29 @@ function pawnPlan(play: Play, from: Square, to: Square): Plan | null {
   if (play.ply <= CENTER_PLIES && fightsCenter(to, color)) return { kind: 'fightsCenter' };
   if (play.ply <= OPENING_PLIES && supportsCenter(before, after, to, color))
     return { kind: 'supportsCenter' };
-  if (makesLuft(before, [from, to], color)) return { kind: 'luft' };
-  // A pawn on the fifth rank cramps the other side, before the endgame.
+  return null;
+}
+
+const HEAVY: ReadonlySet<Role> = new Set<Role>(['rook', 'queen']);
+
+// A back rank a rook or queen of the other side's could mate on: none of the
+// side's own guards it.
+function weakBackRank(board: Board, color: Color): boolean {
+  const heavy = [...board].filter(([, piece]) => HEAVY.has(piece.role));
+  const guarded = heavy.some(
+    ([square, piece]) => piece.color === color && ownRank(square, color) === 0,
+  );
+  return !guarded && heavy.some(([, piece]) => piece.color !== color);
+}
+
+// What a pawn's move does once it attacks nothing: a piece or pawn of its own
+// defended; a hole for the king, past the opening and on a weak back rank; a
+// pawn on the fifth rank that cramps the other side.
+function pawnShape({ before, after, color, ply }: Play, from: Square, to: Square): Plan | null {
+  const guards = pawnGuards(before, after, to);
+  if (guards) return guards;
+  const weak = ply > OPENING_PLIES && weakBackRank(after, color);
+  if (weak && makesLuft(before, [from, to], color)) return { kind: 'luft' };
   return ownRank(to, color) === 4 && !isEndgame(after) ? { kind: 'space' } : null;
 }
 
@@ -112,11 +134,15 @@ export function planOf(play: Play): Plan | null {
   const from = parseSquare(play.uci.slice(0, 2));
   const to = parseSquare(play.uci.slice(2, 4));
   if (!from || !to || /[x+]/.test(play.san) || play.san.startsWith('O-O')) return null;
-  const pawn = play.after.get(to)?.role === 'pawn';
-  const quiet = pawn ? pawnPlan(play, from, to) : null;
-  if (quiet) return quiet;
+  // A pawn that attacks a piece does so before it does anything for the king.
+  if (play.after.get(to)?.role === 'pawn')
+    return (
+      pawnPlan(play, from, to) ??
+      pressureOf(play.after, to, play.color) ??
+      pawnShape(play, from, to)
+    );
   const pressure = pressureOf(play.after, to, play.color);
-  if (pressure || pawn) return pressure;
+  if (pressure) return pressure;
   return (
     discoveryOf(play.before, play.after, [from, to]) ??
     piecePlan(play, from, to) ??
@@ -158,6 +184,8 @@ export function reasonOf(play: Play): Reason | null {
 export function planWays(plan: Plan, sentences: PlanSentences): Ways {
   if (isPlain(plan)) return sentences[plan.kind];
   if (plan.kind === 'attacksPawn') return sentences.attacksPawn(plan.piece, plan.square);
+  if (plan.kind === 'chases' || plan.kind === 'guards')
+    return sentences[plan.kind](plan.piece, plan.square ?? null);
   if ('piece' in plan && plan.kind !== 'pins') return sentences[plan.kind](plan.piece);
   if (plan.kind === 'openFile') return sentences.openFile(plan.halfOpen, plan.contested);
   if (plan.kind === 'fileBattery')

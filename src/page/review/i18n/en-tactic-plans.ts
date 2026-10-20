@@ -35,11 +35,14 @@ export function tacticPlansEn(
       `${capitalize(the(mover))} and ${the(partner)} form a battery aimed at ${the(target)}.`,
       `${capitalize(the(mover))} joins ${the(partner)} on the diagonal, both aimed at ${the(target)}.`,
     ],
-    chases: piece => [
-      `${capitalize(the(piece))} is under attack and has to move.`,
-      `That hits ${the(piece)}, gaining time.`,
-      `${capitalize(the(piece))} has to move: that gains a tempo.`,
-    ],
+    chases: (piece, square) => {
+      const target = square === null ? the(piece) : `${the(piece)} on ${square}`;
+      return [
+        `${capitalize(target)} is under attack and has to move.`,
+        `That hits ${target}, gaining time.`,
+        `${capitalize(target)} has to move: that gains a tempo.`,
+      ];
+    },
     pins: (piece, behind) => [
       `${capitalize(the(piece))} is pinned to ${bare(behind)}.`,
       `A pin: ${the(piece)} can’t move without exposing ${bare(behind)}.`,

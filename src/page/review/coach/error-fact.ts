@@ -1,12 +1,21 @@
-import { attackers, type Board, type Color, parseSquare } from '#shared/chess/index.ts';
+import {
+  attackers,
+  type Board,
+  type Color,
+  parseSquare,
+  type Piece,
+  type Square,
+} from '#shared/chess/index.ts';
 import { boardAfter } from '#page/review/chess/line.ts';
 import { forkedBy } from '#page/review/chess/fork.ts';
 import { attackerValues, PIECE_VALUES, pieceOn } from '#page/review/chess/material.ts';
-import { uciToSan } from '#page/review/chess/notation.ts';
+import { sanOf } from '#page/review/chess/notation.ts';
+import { checkers } from '#page/review/chess/rays.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import { squareToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import { bestFact, missFact } from './best-fact.ts';
+import { bestFact, bestReason, missFact } from './best-fact.ts';
+import { takesReason } from './which-one.ts';
 import type { FactInput, Findings } from './fact.ts';
 import type { Reason } from './idea.ts';
 import { bestGainFact, lossFact, mateLine } from './line-facts.ts';
@@ -28,6 +37,15 @@ export const mates = (record: PositionRecord, sign: number): boolean =>
 export const mateDistance = (record: PositionRecord): number =>
   'mate' in record ? record.mate : 0;
 
+// A piece worth telling of, lost by a move that cost something: not one taken
+// back where it took as much, a trade.
+function worthTelling({ move, before }: FactInput, square: Square, victim: Piece): boolean {
+  if (move.loss < 10 || PIECE_VALUES[victim.role] < 3) return false;
+  const took = pieceOn(before, move.uci.slice(2, 4));
+  const there = move.uci.slice(2, 4) === square;
+  return !there || took === undefined || PIECE_VALUES[took.role] < PIECE_VALUES[victim.role];
+}
+
 // A piece of the mover's that the engine's reply wins.
 function lostPieceFact(input: FactInput): Fact | null {
   const { move, facts, me, them, after, reply } = input;
@@ -35,7 +53,7 @@ function lostPieceFact(input: FactInput): Fact | null {
   const square = parseSquare(move.after.best?.slice(2, 4) ?? '');
   const victim = square ? after.get(square) : undefined;
   if (!taker || !square || !victim || victim.color !== me || victim.role === 'king') return null;
-  if (move.loss < 10 || PIECE_VALUES[victim.role] < 3) return null;
+  if (!worthTelling(input, square, victim)) return null;
   const lost = { piece: victim, square: squareToken(square), reply };
   const drawing = hangingMarks(after, square, taker);
   if (attackers(after, square, me).length === 0)
@@ -76,8 +94,8 @@ function mateFact(input: FactInput): Fact | null {
 /** What the reply does: what it takes, the plan to watch out for, its check. */
 function replyReason({ move, me, them, after }: FactInput, uci: string): Reason | null {
   const taken = pieceOn(after, uci.slice(2, 4));
-  if (taken?.color === me) return { kind: 'takes', piece: taken };
-  const san = uciToSan(move.position.fen, uci);
+  if (taken?.color === me) return takesReason(after, uci.slice(2, 4), taken);
+  const san = sanOf(move.position.fen, uci);
   const plan = planOf({
     color: them,
     ply: move.ply + 1,
@@ -87,11 +105,17 @@ function replyReason({ move, me, them, after }: FactInput, uci: string): Reason 
     after: boardAfter(after, uci),
   });
   if (plan && watched(plan)) return plan;
-  return san.includes('+') ? { kind: 'checks' } : null;
+  if (!san.includes('+')) return null;
+  const uncovered = checkers(boardAfter(after, uci), me).some(square => square !== uci.slice(2, 4));
+  return uncovered ? { kind: 'discoveredCheck' } : { kind: 'checks' };
 }
 
-/** What the reply does, for an error whose fact doesn't name it; `wins` when it takes or forks. */
-function threatFact(input: FactInput): { fact: Fact; wins: boolean } | null {
+/**
+ * What the reply does, for an error whose fact doesn't name it; `leads` when
+ * it says why the move was an error: it takes or forks, or it says what it
+ * does and the better move doesn't say what it did.
+ */
+function threatFact(input: FactInput): { fact: Fact; leads: boolean } | null {
   const { move, facts, them, reply } = input;
   const uci = move.after.best;
   if (!THREATENED.has(move.moveClass) || !uci || !reply) return null;
@@ -102,19 +126,22 @@ function threatFact(input: FactInput): { fact: Fact; wins: boolean } | null {
   if (first && second) {
     const drawing = marks({ kind: 'fork', first, second });
     const fact = said(oneOf(facts.allowsFork(reply, first, second), move), 'fork', drawing);
-    return { fact, wins: true };
+    return { fact, leads: true };
   }
+  // Taking back what the move took wins nothing, and says nothing of the error.
+  if (move.san.includes('x') && move.uci.slice(2, 4) === uci.slice(2, 4)) return null;
   const reason = replyReason(input, uci);
   const why = reason && facts.why(reason, true);
-  // Taking back what the move took wins nothing.
-  const takesBack = move.san.includes('x') && move.uci.slice(2, 4) === uci.slice(2, 4);
-  const wins = reason?.kind === 'takes' && !takesBack;
-  return { fact: said(oneOf(facts.canPlay(them, reply, why), move), null, marks(reason)), wins };
+  // A reply that does nothing the coach can name says nothing of the error,
+  // and an answer to the move's check is forced: no news.
+  if (why === null) return null;
+  const fact = said(oneOf(facts.canPlay(them, reply, why), move), null, marks(reason));
+  return { fact, leads: reason?.kind === 'takes' || bestReason(input) === null };
 }
 
 /**
- * What an error did. The reply that wins something comes first, the better
- * move after it; else the better move, and what the reply does.
+ * What an error did. The reply that says why comes first, the better move
+ * after it; else the better move, and what the reply does.
  */
 export function errorFindings(input: FactInput): Findings {
   const { move, best } = input;
@@ -129,6 +156,6 @@ export function errorFindings(input: FactInput): Findings {
   if (loss !== null) return { fact: loss, followUp: gain ?? bestFact(input) };
   const better = gain ?? bestFact(input);
   const reply = threatFact(input);
-  if (reply?.wins) return { fact: reply.fact, followUp: better };
+  if (reply?.leads) return { fact: reply.fact, followUp: better };
   return { fact: better, followUp: reply?.fact ?? null };
 }

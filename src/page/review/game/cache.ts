@@ -15,8 +15,8 @@ import { prefixed } from '#shared/prefix.ts';
 // under another key, so a reload doesn't start the analysis over. It's
 // Lichess's storage too: only the games analysed last are kept.
 
-/** Bump to drop every cached review, when the records' meaning changes (2: with their lines). */
-const CACHE_VERSION = 2;
+/** Bump to drop every cached review, when the records' meaning changes (2: with their lines, 3: longer). */
+const CACHE_VERSION = 3;
 /** Cached games kept, finished or not. */
 const MAX_GAMES = 200;
 

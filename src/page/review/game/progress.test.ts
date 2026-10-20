@@ -14,9 +14,9 @@ it('saves the analysis’s progress before it’s complete', async () => {
   // One engine: a quick pass of 25 × 30 ms, then 150 ms a position at full depth.
   await advance(2500);
   const positions = ctrl.mainline.length;
-  expect(localStorage.getItem(`ln-ext-review:passanta:${positions}:v2`)).toBeNull();
+  expect(localStorage.getItem(`ln-ext-review:passanta:${positions}:v3`)).toBeNull();
   const saved: unknown = JSON.parse(
-    localStorage.getItem(`ln-ext-review-progress:passanta:${positions}:v2`) ?? '[]',
+    localStorage.getItem(`ln-ext-review-progress:passanta:${positions}:v3`) ?? '[]',
   );
   expect(
     Array.isArray(saved) && saved.filter(record => record !== null).length,

@@ -9,7 +9,7 @@ import {
   type Square,
 } from '#shared/chess/index.ts';
 import { boardAfter } from './line.ts';
-import { isHanging, PIECE_VALUES } from './material.ts';
+import { attackerValues, isHanging, PIECE_VALUES } from './material.ts';
 
 // A fork: one piece attacking two of the other side's at once, each worth
 // more than it, or left undefended, or the king.
@@ -21,9 +21,11 @@ const targetValue = (piece: Piece): number =>
 export function forkTargets(board: Board, square: string): Square[] {
   const from = parseSquare(square);
   const piece = from ? board.get(from) : undefined;
-  // A forker taken for less than it's worth forks nothing.
-  if (!from || !piece || piece.role === 'king' || isHanging(board, from, piece)) return [];
+  if (!from || !piece || piece.role === 'king') return [];
   const them = opposite(piece.color);
+  // A forker taken for less than it's worth, or traded off for a piece like it, forks nothing.
+  const traded = attackerValues(board, from, them).some(value => value <= PIECE_VALUES[piece.role]);
+  if (traded || isHanging(board, from, piece)) return [];
   return attackedSquares(board, from).filter(target => {
     const victim = board.get(target);
     if (!victim || victim.color !== them || victim.role === 'pawn') return false;

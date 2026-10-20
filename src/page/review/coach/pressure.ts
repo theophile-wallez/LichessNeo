@@ -4,6 +4,7 @@ import {
   type Board,
   type Color,
   opposite,
+  type Piece,
   PIECE_VALUES,
   type Square,
   squareCoords,
@@ -12,11 +13,18 @@ import { between, firstPiece, isInBadSpot, pinOf } from '#page/review/chess/rays
 import { batteryPlan, FILE_STEPS } from './battery.ts';
 import type { Plan } from './idea.ts';
 import { ownRank, pawnsOn } from './structure.ts';
+import { whichOne } from './which-one.ts';
 
 // What a move does to the other side's pieces, and what a rook's does on its
 // file or rank.
 
 /** A piece of the other side's the move pins, or newly attacks when it's worth more or undefended. */
+// The piece attacked, by its square when its side has more than one like it.
+function chases(board: Board, square: Square, piece: Piece): Plan {
+  const which = whichOne(board, square, piece);
+  return which === null ? { kind: 'chases', piece } : { kind: 'chases', piece, square: which };
+}
+
 export function pressureOf(after: Board, to: Square, color: Color): Plan | null {
   const them = opposite(color);
   for (const [square, piece] of after) {
@@ -25,16 +33,35 @@ export function pressureOf(after: Board, to: Square, color: Color): Plan | null 
     const behind = pin?.pinner === to ? after.get(pin.behind) : undefined;
     if (behind) return { kind: 'pins', piece, behind };
   }
-  const mover = after.get(to);
-  if (!mover) return null;
-  for (const square of attackedSquares(after, to)) {
-    const piece = after.get(square);
-    if (piece?.color !== them || piece.role === 'king' || piece.role === 'pawn') continue;
-    const loose = attackers(after, square, them).length === 0;
-    if (PIECE_VALUES[piece.role] > PIECE_VALUES[mover.role] || loose)
-      return { kind: 'chases', piece };
-  }
-  return null;
+  const square = attackedSquares(after, to).find(target => threatened(after, target, to));
+  const piece = square && after.get(square);
+  return square && piece ? chases(after, square, piece) : null;
+}
+
+// Whether the piece on `square` can take its attacker on `to`, worth as much
+// or more: no chase, a trade offered.
+function tradesOff(
+  board: Board,
+  square: Square,
+  to: Square,
+  [piece, mover]: [Piece, Piece],
+): boolean {
+  return (
+    attackedSquares(board, square).includes(to) &&
+    PIECE_VALUES[mover.role] >= PIECE_VALUES[piece.role]
+  );
+}
+
+// A piece of the other side's, not a pawn nor the king, that the piece on `to`
+// threatens to win: worth more, or defended by nothing, and unable to trade
+// itself off for it. The king takes only the latter.
+function threatened(board: Board, square: Square, to: Square): boolean {
+  const piece = board.get(square);
+  const mover = board.get(to);
+  if (!mover || !piece || piece.color === mover.color || piece.role === 'king') return false;
+  if (piece.role === 'pawn' || tradesOff(board, square, to, [piece, mover])) return false;
+  if (attackers(board, square, piece.color).length === 0) return true;
+  return mover.role !== 'king' && PIECE_VALUES[piece.role] > PIECE_VALUES[mover.role];
 }
 
 /**
@@ -88,7 +115,8 @@ const onSeventh = (after: Board, to: Square, color: Color): boolean =>
 export function rookPlan(after: Board, [from, to]: [Square, Square], color: Color): Plan | null {
   if (onSeventh(after, to, color)) return { kind: 'seventhRank' };
   const [file] = squareCoords(to);
-  if (pawnsOn(after, file, color).length > 0) return null;
+  // Along its own file, the rook was on it already.
+  if (squareCoords(from)[0] === file || pawnsOn(after, file, color).length > 0) return null;
   const partner = rooksOf(after, color).find(
     square => square !== to && squareCoords(square)[0] === file,
   );

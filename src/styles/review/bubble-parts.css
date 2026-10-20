@@ -7,8 +7,15 @@
   flex: none;
 }
 
-/* Its top edge sits under the verdict, so a scrolled comment doesn't touch it. */
+/* Its top edge sits under the verdict, so a scrolled comment doesn't touch it. Under the
+   comment, its tags and its buttons share a row while they fit, the buttons on the right,
+   to keep the comment's room. */
 .ln-ext-bubble__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  gap: 8px;
   min-height: 0;
   margin-top: 6px;
   padding-bottom: 10px;
@@ -17,14 +24,25 @@
 }
 
 .ln-ext-bubble__body > .ln-ext-bubble__sub {
+  flex: 1 0 100%;
   margin-top: 0;
+}
+
+.ln-ext-bubble__body > .ln-ext-bubble__tags,
+.ln-ext-bubble__sub ~ .ln-ext-bubble__actions .ln-ext-bubble__line {
+  margin-top: 0;
+}
+
+.ln-ext-bubble__sub ~ .ln-ext-bubble__actions {
+  justify-content: flex-end;
+  margin-left: auto;
 }
 
 /* A black piece named in the text vanishes on a dark card: a dim edge outlines it, as
    the captured pieces' (playerbar.css). A chip's grey keeps its own visible. */
 #ln-ext-review
   .ln-ext-bubble__sub
-  .ln-ext-w
+  :is(.ln-ext-w, .ln-ext-on)
   > .ln-ext-pc:is(
     .ln-ext-pc-bp,
     .ln-ext-pc-bn,

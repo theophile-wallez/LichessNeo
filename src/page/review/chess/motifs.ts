@@ -3,15 +3,24 @@ import {
   type Board,
   type Color,
   opposite,
-  parseSquare,
   type Piece,
   PIECE_VALUES,
   type Square,
 } from '#shared/chess/index.ts';
 import { forkedFrom } from './fork.ts';
 import { boardAfter } from './line.ts';
+import { type Move, retakes, type Win, winOf } from './line-win.ts';
 import type { Ply } from './played-line.ts';
-import { attackersOn, between, checkers, isDefended, isInBadSpot, pinOf } from './rays.ts';
+import {
+  attackersOn,
+  between,
+  checkers,
+  isDefended,
+  isInBadSpot,
+  pinnedTaker,
+  type PinnedTaker,
+  pinOf,
+} from './rays.ts';
 
 // The tactic that wins the material along a line, for the coach to name:
 // what the winner's moves do to the piece the line ends up taking. Each rule
@@ -21,6 +30,7 @@ import { attackersOn, between, checkers, isDefended, isInBadSpot, pinOf } from '
 export type MotifKind =
   | 'fork'
   | 'pin'
+  | 'pinnedDefender'
   | 'skewer'
   | 'discoveredAttack'
   | 'discoveredCheck'
@@ -35,25 +45,12 @@ export interface Motif {
   readonly ply: number;
   /**
    * What it hits: the forked pieces, the most valuable first; the pinned or
-   * skewered piece and the one behind it; the king, then the piece won.
+   * skewered piece and the one behind it; the king, then the piece won; a
+   * pinned defender, its pinner and the piece behind it.
    */
   readonly pieces: readonly Piece[];
-}
-
-interface Move {
-  readonly ply: Ply;
-  readonly from: Square;
-  readonly to: Square;
-}
-
-interface Win {
-  readonly moves: readonly Move[];
-  readonly winner: Color;
-  /** The index of the capture that wins the material. */
-  readonly capture: number;
-  readonly target: Piece;
-  /** Where the target stood before each ply up to its capture, null before it got there. */
-  readonly squares: readonly (Square | null)[];
+  /** A pinned defender's pin, which the sentence names the squares of. */
+  readonly pin?: PinnedTaker;
 }
 
 type Detector = (win: Win, i: number) => Motif | null;
@@ -61,47 +58,6 @@ type Detector = (win: Win, i: number) => Motif | null;
 const KING = (color: Color): Piece => ({ role: 'king', color });
 // As a target the king outweighs everything.
 const value = (piece: Piece): number => (piece.role === 'king' ? 100 : PIECE_VALUES[piece.role]);
-
-function movesOf(plies: readonly Ply[]): Move[] | null {
-  const moves: Move[] = [];
-  for (const ply of plies) {
-    const [from, to] = [parseSquare(ply.uci), parseSquare(ply.uci.slice(2, 4))];
-    if (!from || !to) return null;
-    moves.push({ ply, from, to });
-  }
-  return moves;
-}
-
-function targetSquares(moves: readonly Move[], capture: number, winner: Color): (Square | null)[] {
-  let at: Square | null = moves[capture]?.to ?? null;
-  const squares: (Square | null)[] = [at];
-  for (let j = capture - 1; j >= 0; j--) {
-    const move = moves[j];
-    if (at && move?.to === at) at = move.ply.color === winner ? null : move.from;
-    squares.unshift(at);
-  }
-  return squares;
-}
-
-/** Taking back a piece that took one worth as much only ends a trade. */
-function retakes(before: Move | undefined, move: Move): boolean {
-  const [taken, retaken] = [before?.ply.captured, move.ply.captured];
-  if (!before || !taken || !retaken || before.to !== move.to) return false;
-  return PIECE_VALUES[taken.role] >= PIECE_VALUES[retaken.role];
-}
-
-/** The winner's last capture in the first `upTo` plies that isn't a trade's end, else its last. */
-function winOf(plies: readonly Ply[], winner: Color, upTo: number): Win | null {
-  const moves = movesOf(plies);
-  if (!moves) return null;
-  const takes = (move: Move, i: number): boolean =>
-    i < upTo && move.ply.color === winner && move.ply.captured !== null;
-  const opening = moves.findLastIndex((move, i) => takes(move, i) && !retakes(moves[i - 1], move));
-  const capture = opening >= 0 ? opening : moves.findLastIndex(takes);
-  const target = moves[capture]?.ply.captured;
-  if (!target) return null;
-  return { moves, winner, capture, target, squares: targetSquares(moves, capture, winner) };
-}
 
 /** The winner's move `i` forks the target with something else. */
 const fork: Detector = ({ moves, capture, target, squares }, i) => {
@@ -189,6 +145,23 @@ const pinnedAttacker: Detector = ({ moves, winner, capture }, i) => {
   return null;
 };
 
+/**
+ * The winner's capture `i` takes a piece whose only defender is pinned to one
+ * worth more: taking back would give up what stood behind it.
+ */
+const pinnedDefender: Detector = ({ moves, winner, capture }, i) => {
+  const move = moves[i];
+  const board = move?.ply.after;
+  const pin = move && board && i === capture ? pinnedTaker(board, move.to, opposite(winner)) : null;
+  if (!move || !board || !pin) return null;
+  const [moved, pinned, pinner, behind] = [move.to, pin.taker, pin.pinner, pin.behind].map(at =>
+    board.get(at),
+  );
+  if (!moved || !pinned || !pinner || !behind) return null;
+  const pays = value(moved) > value(pinned) || !isDefended(board, move.to, winner);
+  return pays ? { kind: 'pinnedDefender', ply: i, pieces: [pinned, pinner, behind], pin } : null;
+};
+
 /** No check around the winner's capture `i`, then another piece takes the target, undefended. */
 function quietlyLeftBare({ moves, winner, capture, target }: Win, i: number): boolean {
   const [taking, reply, last] = [moves[i], moves[i + 1], moves[capture]];
@@ -264,6 +237,7 @@ const DETECTORS: readonly Detector[] = [
   capturingDefender,
   pinnedTarget,
   pinnedAttacker,
+  pinnedDefender,
   trappedPiece,
 ];
 

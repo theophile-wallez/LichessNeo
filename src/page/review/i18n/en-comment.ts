@@ -11,6 +11,7 @@ import {
 import { betterMovesEn } from './en-better.ts';
 import { capturesEn } from './en-captures.ts';
 import { lineFactsEn } from './en-lines.ts';
+import { pinsEn } from './en-pins.ts';
 import { plansEn } from './en-plans.ts';
 import type { FactSentences, Viewer, Ways } from './types.ts';
 
@@ -25,6 +26,8 @@ type MateSentences = Pick<
   | 'heldOutLonger'
   | 'canForceMate'
   | 'matesNow'
+  | 'mateFollows'
+  | 'mateUnstoppable'
   | 'wouldForceMate'
   | 'mateInOne'
 >;
@@ -74,6 +77,11 @@ function matesEn(viewer: Viewer): MateSentences {
       `${best} would have forced mate in ${moves}.`,
       `Mate in ${moves} was there, starting with ${best}.`,
       `${best} led to a forced mate in ${moves}.`,
+    ],
+    mateFollows: line => [`Mate follows by force: ${line}.`, `The mate is on its way: ${line}.`],
+    mateUnstoppable: line => [
+      `Nothing stops the mate now: ${line}.`,
+      `Mate can no longer be avoided: ${line}.`,
     ],
     mateInOne: inOne,
   };
@@ -126,7 +134,7 @@ function lossesEn(viewer: Viewer): LossSentences {
 // What a good move does: the error it punishes, the sacrifice, the only move, the fork.
 type GoodMoveSentences = Pick<
   FactSentences,
-  'punishesAtOnce' | 'offered' | 'keepsAdvantage' | 'holdsPosition' | 'forks'
+  'punishesAtOnce' | 'offered' | 'offeredFor' | 'keepsAdvantage' | 'holdsPosition' | 'forks'
 >;
 
 function goodMovesEn(viewer: Viewer): GoodMoveSentences {
@@ -148,6 +156,13 @@ function goodMovesEn(viewer: Viewer): GoodMoveSentences {
         `${capitalize(the(piece))} is offered, and ${taker} can’t safely take it.`,
         `${capitalize(the(piece))} is left hanging on purpose: taking it would cost ${taker} dearly.`,
         `A sacrifice: ${the(piece)} is there for the taking, but not for free.`,
+      ];
+    },
+    offeredFor: (piece, taken, color) => {
+      const taker = party(color).name;
+      return [
+        `${capitalize(the(piece))} goes for ${the(taken)} on purpose: taking it back would cost ${taker} dearly.`,
+        `A sacrifice: ${the(piece)} for ${the(taken)}, and ${taker} can’t safely take it back.`,
       ];
     },
     keepsAdvantage: [
@@ -209,4 +224,5 @@ export const factsEn = (viewer: Viewer): FactSentences => ({
   ...betterMovesEn(viewer),
   ...lineFactsEn(viewer),
   ...plansEn(viewer),
+  ...pinsEn(viewer),
 });

@@ -52,7 +52,7 @@ it('leaves the analysis page a whole review to show, with no search of its own',
   await done;
   expect(searches).toBeGreaterThan(0);
   // The key is the analysis page's: its mainline's length, the start's position counted.
-  const key = `ln-ext-review:${GAME.id}:${ctrl.mainline.length}:v2`;
+  const key = `ln-ext-review:${GAME.id}:${ctrl.mainline.length}:v3`;
   expect(finished.treeParts).toHaveLength(ctrl.mainline.length);
   expect(localStorage.getItem(key)).not.toBeNull();
 

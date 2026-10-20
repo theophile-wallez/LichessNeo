@@ -1,15 +1,27 @@
-import { kingSquare, parseSquare, type Square, squareCoords } from '#shared/chess/index.ts';
+import {
+  type Board,
+  type Color,
+  kingSquare,
+  parseSquare,
+  type Piece,
+  type Square,
+  squareCoords,
+} from '#shared/chess/index.ts';
+import { squareToken } from '#page/review/comment/tokens.ts';
 import type { Mark } from '#page/board/review-arrows.ts';
 import { boardAfter } from '#page/review/chess/line.ts';
 import { forkedBy } from '#page/review/chess/fork.ts';
 import { pieceOn } from '#page/review/chess/material.ts';
+import { sanOf } from '#page/review/chess/notation.ts';
 import { PUNISHABLE } from '#page/review/judge/judge.ts';
 import type { FactInput } from './fact.ts';
 import type { Reason } from './idea.ts';
+import { takesReason } from './which-one.ts';
 import { bestWins } from './line-facts.ts';
 import { doubleThreatOf } from './double-threat.ts';
 import { reasonMarks, withMove } from './drawing.ts';
 import { reasonOf } from './plan.ts';
+import { isEndgame } from './structure.ts';
 import { type Fact, oneOf, said } from './said.ts';
 
 // The move that was better than the one played, and what it did: the fork it
@@ -28,30 +40,41 @@ function near(first: Square, second: Square): boolean {
 
 // What the engine's capture, or check, did: what to take with, where the move
 // played took too; the attack on the king; what it took.
-function captureReason(
-  { move, them, before }: FactInput,
-  best: string,
-  san: string,
-): Reason | null {
+// The other piece to take with, by its square when the move played took with one like it.
+function takesWith({ move, before }: FactInput, best: string, taker: Piece): Reason {
+  const same = pieceOn(before, move.uci.slice(0, 2))?.role === taker.role;
+  return same
+    ? { kind: 'takesWith', piece: taker, square: squareToken(best.slice(0, 2)) }
+    : { kind: 'takesWith', piece: taker };
+}
+
+function captureReason(input: FactInput, best: string, san: string): Reason | null {
+  const { move, them, before } = input;
   const target = best.slice(2, 4);
   const taken = pieceOn(before, target);
   const taker = pieceOn(before, best.slice(0, 2));
   if (taken?.color === them && taker && move.uci.slice(2, 4) === target)
-    return { kind: 'takesWith', piece: taker };
+    return takesWith(input, best, taker);
   const small = !taken || taken.role === 'pawn';
-  const king = kingSquare(before, them);
-  const square = parseSquare(target);
-  const nextToKing = taken !== undefined && king !== null && square !== null && near(square, king);
-  const atKing = san.includes('+') || nextToKing;
+  const atKing = san.includes('+') || (taken !== undefined && nextToKing(before, target, them));
   if (small && atKing && move.loss >= ATTACK_LOSS)
     return { kind: 'attacksKing', king: { role: 'king', color: them } };
-  return taken?.color === them ? { kind: 'takes', piece: taken } : null;
+  return taken?.color === them ? takesReason(before, target, taken) : null;
+}
+
+// A capture by `color`'s king, before the endgame, where kings come out and a
+// pawn by one is only a pawn.
+function nextToKing(board: Board, target: string, color: Color): boolean {
+  const king = isEndgame(board) ? null : kingSquare(board, color);
+  const square = parseSquare(target);
+  return king !== null && square !== null && near(square, king);
 }
 
 /** What the engine's move did, if the board shows it. */
 export function bestReason(input: FactInput): Reason | null {
   const { move, before } = input;
-  const { best, bestSan: san } = move;
+  const { best } = move;
+  const san = sanOf(move.previousPosition.fen, best);
   if (!best || !san) return null;
   const [first, second] = forkedBy(move.previousPosition.fen, best);
   if (first && second) return { kind: 'fork', first, second };
@@ -77,7 +100,10 @@ export function bestMarks(input: FactInput, reason: Reason | null): Mark[] | nul
 /** What the engine's move did, said after it, and drawn. */
 function whyBest(input: FactInput): { why: string | null; drawing: Mark[] | null } {
   const reason = bestReason(input);
-  return { why: reason && input.facts.why(reason), drawing: bestMarks(input, reason) };
+  // The move played moved the same piece out of danger: the better move didn't do more there.
+  const same = input.move.best?.slice(0, 2) === input.move.uci.slice(0, 2);
+  const told = reason?.kind === 'saves' && same ? null : reason;
+  return { why: told && input.facts.why(told), drawing: bestMarks(input, reason) };
 }
 
 /** The better move, a fork or a capture when it was one, else what it did. */

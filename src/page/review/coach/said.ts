@@ -23,6 +23,8 @@ export interface Fact {
   readonly theme: Theme | null;
   /** What the fact speaks of, drawn on the board. */
   readonly drawing?: readonly Mark[];
+  /** The technical side of it, the moves and squares, said below the rest. */
+  readonly detail?: string;
 }
 
 export const said = (
@@ -30,6 +32,9 @@ export const said = (
   theme: Theme | null = null,
   drawing: readonly Mark[] | null = null,
 ): Fact => (drawing && drawing.length > 0 ? { text, theme, drawing } : { text, theme });
+
+/** `fact`, its technical side said below the rest. */
+export const withDetail = (fact: Fact, detail: string): Fact => ({ ...fact, detail });
 
 /** One of the ways to say a fact, picked by `seed`: the same each time it's shown. */
 export const pickBy = (ways: Ways, seed: string): string =>

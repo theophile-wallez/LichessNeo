@@ -17,8 +17,11 @@ const RecordFields = {
   line: z.optional(z.array(z.string())),
 };
 
-/** The plies of a line a record keeps: enough for the trades and tactics the coach reads off it. */
-export const LINE_PLIES = 8;
+/**
+ * The plies of a line a record keeps: enough for the trades and tactics the
+ * coach reads off it, and for a pawn taken to be won back a few moves on.
+ */
+export const LINE_PLIES = 12;
 
 /** What the review knows of a position, from White's view (the cache's format is stored.ts). */
 export const PositionRecordSchema = z.union([

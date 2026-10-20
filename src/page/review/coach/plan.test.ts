@@ -90,7 +90,7 @@ describe('planFact', () => {
   it('sees a piece chase one worth more, and pin one to what stands behind it', () => {
     const rook = { role: 'rook', color: 'black' } as const;
     const chased = '4k3/8/8/3r4/8/8/8/1N2K3 w - - 0 1';
-    expect(en.facts.chases(rook)).toContain(planOf({ fen: chased, uci: 'b1c3', san: 'Nc3' }));
+    expect(en.facts.chases(rook, null)).toContain(planOf({ fen: chased, uci: 'b1c3', san: 'Nc3' }));
     const pinned = '4k3/8/2n5/8/8/8/8/4KB2 w - - 0 1';
     const knight = { role: 'knight', color: 'black' } as const;
     const king = { role: 'king', color: 'black' } as const;
@@ -106,6 +106,49 @@ describe('planFact', () => {
     expect(en.facts.connectsRooks).toContain(
       planOf({ fen: connected, uci: 'd1d3', san: 'Qd3', ply: 41 }),
     );
+  });
+
+  it('sees a rook take a file it wasn’t on already', () => {
+    const fen = '4k3/1p6/8/8/8/8/1P6/R3K3 w - - 0 1';
+    expect(en.facts.openFile(false, false)).not.toContain(planOf({ fen, uci: 'a1a3', san: 'Ra3' }));
+  });
+
+  it('sees a pawn defend a piece, by its square when its side has two like it', () => {
+    const fen = '2r1k3/p7/8/8/2N5/8/1P6/4K2N w - - 0 1';
+    const knight = { role: 'knight', color: 'white' } as const;
+    expect(en.facts.guards(knight, '[[s:c4]]')).toContain(planOf({ fen, uci: 'b2b3', san: 'b3' }));
+  });
+
+  it('sees luft made past the opening, on a back rank nothing guards', () => {
+    const fen = 'r5k1/5ppp/8/8/8/8/5PPP/6K1 w - - 0 1';
+    expect(en.facts.luft).toContain(planOf({ fen, uci: 'h2h3', san: 'h3', ply: 41 }));
+    expect(planOf({ fen, uci: 'h2h3', san: 'h3', ply: 21 })).toBeNull();
+    const guarded = 'r5k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1';
+    expect(planOf({ fen: guarded, uci: 'h2h3', san: 'h3', ply: 41 })).toBeNull();
+    // A pawn that attacks a piece does that first.
+    const bishop = { role: 'bishop', color: 'black' } as const;
+    const chasing = 'r5k1/5ppp/8/8/6b1/8/5PPP/6K1 w - - 0 1';
+    expect(en.facts.chases(bishop, null)).toContain(
+      planOf({ fen: chasing, uci: 'h2h3', san: 'h3', ply: 41 }),
+    );
+  });
+
+  it('sees the king chase only a piece nothing defends', () => {
+    const knight = { role: 'knight', color: 'black' } as const;
+    const loose = '8/8/4k3/8/3n4/8/2K5/8 w - - 0 1';
+    expect(en.facts.chases(knight, null)).toContain(
+      planOf({ fen: loose, uci: 'c2c3', san: 'Kc3' }),
+    );
+    const defended = '8/8/4k3/4p3/3n4/8/2K5/8 w - - 0 1';
+    expect(en.facts.chases(knight, null)).not.toContain(
+      planOf({ fen: defended, uci: 'c2c3', san: 'Kc3' }),
+    );
+  });
+
+  it('sees no chase in a piece offered for one of the same worth', () => {
+    const queen = { role: 'queen', color: 'black' } as const;
+    const fen = '4k3/8/8/4q3/8/8/8/Q2RK3 w - - 0 1';
+    expect(en.facts.chases(queen, null)).not.toContain(planOf({ fen, uci: 'a1d4', san: 'Qd4' }));
   });
 
   it('leaves the point of a move by a mate to the mate', () => {

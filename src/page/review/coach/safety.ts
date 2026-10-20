@@ -12,6 +12,7 @@ import { isHanging } from '#page/review/chess/material.ts';
 import { between } from '#page/review/chess/rays.ts';
 import type { Plan } from './idea.ts';
 import { isPassed, ownRank } from './structure.ts';
+import { whichOne } from './which-one.ts';
 
 // What a move does for the mover's own pieces: one taken out of danger, one
 // defended, a rook behind a passed pawn, a knight to the center, a square for
@@ -41,6 +42,29 @@ export function safetyPlan(before: Board, after: Board, [from, to]: [Square, Squ
     .toSorted((first, second) => PIECE_VALUES[second.role] - PIECE_VALUES[first.role]);
   const [most] = guarded;
   return most ? { kind: 'guards', piece: most } : null;
+}
+
+/**
+ * What a pawn's move defends: the most valuable piece or pawn of its own it
+ * now covers that was there to be won, by its square when it's one of several.
+ */
+export function pawnGuards(before: Board, after: Board, to: Square): Plan | null {
+  const pawn = after.get(to);
+  if (!pawn) return null;
+  const covered = attackedSquares(after, to)
+    .flatMap(square => {
+      const piece = after.get(square);
+      if (piece?.color !== pawn.color || piece.role === 'king') return [];
+      const won = isHanging(before, square, piece) && !isHanging(after, square, piece);
+      return won ? [{ square, piece }] : [];
+    })
+    .toSorted((first, second) => PIECE_VALUES[second.piece.role] - PIECE_VALUES[first.piece.role]);
+  const [most] = covered;
+  if (!most) return null;
+  const which = whichOne(after, most.square, most.piece);
+  return which === null
+    ? { kind: 'guards', piece: most.piece }
+    : { kind: 'guards', piece: most.piece, square: which };
 }
 
 /** A rook come behind a passed pawn of its own, nothing between them. */

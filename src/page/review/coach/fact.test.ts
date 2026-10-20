@@ -134,7 +134,9 @@ describe('the opponent’s move', () => {
   };
 
   it('is read for its threat before its capture', () => {
-    expect(en.facts.winsForFree(black('pawn'))).toContain(textOf(takes, threats, english('white')));
+    expect(en.facts.winsForFree(black('pawn'), '[[s:d2]]')).toContain(
+      textOf(takes, threats, english('white')),
+    );
     expect(textOf(takes, threats, english('black'))).toMatch(/Bxb4/);
   });
 });

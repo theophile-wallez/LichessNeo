@@ -7,10 +7,14 @@ import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 // bubble has its final size at once. The UI owns the typing's timer; this
 // only draws a given moment of it.
 
-/** A sentence of the comment. A droppable one is left out when the bubble lacks room. */
+/**
+ * A sentence of the comment. A droppable one is left out when the bubble lacks
+ * room; a detail, the technical side of the rest, goes below it.
+ */
 export interface CommentPart {
   readonly text: string;
   readonly droppable: boolean;
+  readonly detail?: boolean;
 }
 
 export interface StreamState {
@@ -65,6 +69,10 @@ export function moveChip(token: string): SafeHtml {
 function tokenMarkup(kind: string, value: string): SafeHtml {
   if (kind === 'p') return pieceGlyph(value);
   if (kind === 's') return html`<b class="ln-ext-sq">${value}</b>`;
+  if (kind === 'o') {
+    const [piece = '', square = ''] = value.split(':');
+    return html`<span class="ln-ext-on">${pieceGlyph(piece)}<b class="ln-ext-sq">${square}</b></span>`;
+  }
   if (kind === 'n') {
     // A line's numbered move: the number never ends a line without its move.
     const [number = '', move = ''] = value.split(/:(.*)/);
@@ -100,7 +108,8 @@ export function commentMarkup(parts: readonly CommentPart[], options: CommentOpt
         const hidden = index++ >= stream.shown;
         return html`<span class="ln-ext-w${hidden ? ' ln-ext-w--off' : ''}">${wordMarkup(word)}</span>`;
       });
-      return html`<span class="ln-ext-say${part.droppable ? ' ln-ext-say--drop' : ''}">${spans} </span>`;
+      const kind = `${part.droppable ? ' ln-ext-say--drop' : ''}${part.detail ? ' ln-ext-say--detail' : ''}`;
+      return html`<span class="ln-ext-say${kind}">${spans} </span>`;
     });
   return html`${sentences}`;
 }

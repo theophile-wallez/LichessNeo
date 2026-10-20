@@ -1,8 +1,8 @@
-import type { Color } from '#shared/chess/index.ts';
+import { type Color, fenTurn } from '#shared/chess/index.ts';
 import { playLine, type Ply } from '#page/review/chess/played-line.ts';
 import { moveToken, movesToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import type { FactSentences } from '#page/review/i18n/types.ts';
+import type { FactSentences, LineGain } from '#page/review/i18n/types.ts';
 import { SURE_MATE } from '#page/review/judge/mate.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { afterLastMove, withMotif } from './motif-fact.ts';
@@ -197,22 +197,46 @@ export function gainFact({ move, facts, me, them }: LineFactInput): Fact | null 
   return withMotif(text, { ...around, winner: me, upTo, base: 'b' }, facts);
 }
 
+// How far the line after a capture may go to win its worth back: six moves
+// each, as giving a pawn back often takes a few quiet moves first.
+const WON_BACK_WITHIN = 12;
+
+/**
+ * After a capture worth `worth` pawns, the engine's line by which the opponent
+ * wins as much back, once its trades are over.
+ */
+export function wonBack({ move, facts, them }: LineFactInput, worth: number): LineGain | null {
+  if (!move.after.line) return null;
+  const plies = playLine(move.position.fen, move.after.line.slice(0, WON_BACK_WITHIN));
+  const won = securedSwing(plies, them);
+  const material = won && won.net >= worth ? facts.material(won) : null;
+  if (!won || material === null) return null;
+  const line = plies.slice(0, won.plies);
+  return { material, line: gainLineOf(line, 'a'), moves: movesOf(line, them) };
+}
+
 /**
  * The mate a record's line plays out, written from `fen`, when it's short
- * enough to be sure of and the line reaches it.
+ * enough to be sure of and the line reaches it: from the side that mates, or
+ * from the side mated, a move longer; `short`, its first move and its last.
  */
 export function mateLine(
   record: PositionRecord,
   fen: string,
   base: 'a' | 'b' | null,
+  { short = false }: { readonly short?: boolean } = {},
 ): string | null {
-  if (!('mate' in record)) return null;
+  if (!('mate' in record) || record.mate === 0) return null;
+  const mating: Color = record.mate > 0 ? 'white' : 'black';
   // A quick search's mate in one may keep its move alone.
   const moves = record.line ?? (record.best ? [record.best] : []);
-  const length = 2 * Math.abs(record.mate) - 1;
+  const length = 2 * Math.abs(record.mate) - (fenTurn(fen) === mating ? 1 : 0);
   const plies = playLine(fen, moves.slice(0, length));
   const last = plies.at(-1);
-  if (Math.abs(record.mate) > SURE_MATE || plies.length < length || !last) return null;
+  if (Math.abs(record.mate) > SURE_MATE || plies.length < length || last?.color !== mating)
+    return null;
   const mated = { ...last, san: last.san.replace(/\+?$/, '#') };
-  return lineOf([...plies.slice(0, -1), mated], base);
+  const played = [...plies.slice(0, -1), mated];
+  // Short, a line past four moves is its first and its last, as a gain's.
+  return short && base ? gainLineOf(played, base) : lineOf(played, base);
 }

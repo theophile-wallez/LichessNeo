@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { playLine } from './played-line.ts';
+import { playLine, playOn } from './played-line.ts';
 
 const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -43,5 +43,16 @@ describe('playLine', () => {
     expect(playLine(START, ['e2e4', 'e2e4', 'g1f3'])).toHaveLength(1);
     // A line of another position: White moving on Black's turn.
     expect(playLine(START, ['e2e4', 'd2d4'])).toHaveLength(1);
+  });
+});
+
+describe('playOn', () => {
+  it('plays on from after a ply, the next side to move, numbered on', () => {
+    const [, reply] = playLine(START, ['e2e4', 'e7e5']);
+    const plies = reply ? playOn(reply, ['g1f3', 'b8c6']) : [];
+    expect(plies.map(({ san, color, number }) => [san, color, number])).toEqual([
+      ['Nf3', 'white', 2],
+      ['Nc6', 'black', 2],
+    ]);
   });
 });

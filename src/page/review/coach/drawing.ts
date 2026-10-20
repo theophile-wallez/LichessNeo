@@ -18,6 +18,7 @@ import type { Reason } from './idea.ts';
 import { oppositionMarks } from './opposition.ts';
 import { pathOf, squareMarks } from './pawn-square.ts';
 import { ownRank } from './structure.ts';
+import { pinLine } from './tactic-marks.ts';
 
 // What the coach draws on the board of what a move does (page/board/drawing.ts):
 // the lines of a fork or a pin, a passed pawn's road, a rook's file, the square
@@ -54,8 +55,7 @@ const hits = (from: Square, targets: readonly Square[], tone: MarkTone): Mark[] 
 function pinMarks(after: Board, pinner: Square): Mark[] | null {
   for (const square of after.keys()) {
     const pin = pinOf(after, square, true);
-    if (pin?.pinner === pinner)
-      return [link(pinner, pin.behind, 'attack'), ring(square, 'attack'), ring(pin.behind, 'plan')];
+    if (pin?.pinner === pinner) return pinLine(pinner, square, pin.behind);
   }
   return null;
 }

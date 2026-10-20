@@ -178,7 +178,7 @@ export function setUp(scenario: Scenario): Driver {
   const positions = scenario.synthetic ? game.nodes.slice(0, 1) : game.nodes;
   if (scenario.cached)
     localStorage.setItem(
-      `ln-ext-review:${game.id}:${positions.length}:v2`,
+      `ln-ext-review:${game.id}:${positions.length}:v3`,
       JSON.stringify(z.encode(z.array(StoredRecordCodec), [...game.records])),
     );
   const id = scenario.synthetic ? 'synthetic' : game.id;
@@ -247,7 +247,7 @@ async function runScenario(
     await step.run(driver);
     const key =
       cacheKey ??
-      `ln-ext-review:${fixtureGame(scenario.game).id}:${driver.ctrl.mainline.length}:v2`;
+      `ln-ext-review:${fixtureGame(scenario.game).id}:${driver.ctrl.mainline.length}:v3`;
     snapshots[step.name] = snapshotReview({
       arrows: arrows(),
       coach: `${posted.length} ${posted.at(-1) ?? ''}`,

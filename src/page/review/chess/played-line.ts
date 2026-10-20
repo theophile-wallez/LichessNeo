@@ -1,5 +1,6 @@
 import {
   type Board,
+  type Color,
   fenTurn,
   isInCheck,
   opposite,
@@ -10,7 +11,7 @@ import {
 } from '#shared/chess/index.ts';
 import { boardAfter, type LineMove } from './line.ts';
 import { pieceOn } from './material.ts';
-import { sanOn } from './notation.ts';
+import { sanAfter } from './notation.ts';
 
 // An engine line played out on the board, ply by ply, for the coach to read
 // what happens along it: what each move takes, promotes to, or checks.
@@ -36,11 +37,26 @@ function capturedOn(board: Board, uci: string, piece: Piece): Piece | null {
   return enPassant ? { role: 'pawn', color: opposite(piece.color) } : null;
 }
 
+interface Start {
+  readonly board: Board;
+  readonly color: Color;
+  readonly number: number;
+}
+
 /** `ucis` played from `fen`, up to a move the board doesn't allow (a line of another position). */
 export function playLine(fen: string, ucis: readonly string[]): Ply[] {
-  let board: Board = parseFen(fen).board;
-  let color = fenTurn(fen);
-  let number = Number(fen.split(' ')[5]) || 1;
+  const number = Number(fen.split(' ')[5]) || 1;
+  return playFrom({ board: parseFen(fen).board, color: fenTurn(fen), number }, ucis);
+}
+
+/** `ucis` played on from after `ply`. */
+export function playOn(ply: Ply, ucis: readonly string[]): Ply[] {
+  const number = ply.color === 'black' ? ply.number + 1 : ply.number;
+  return playFrom({ board: ply.after, color: opposite(ply.color), number }, ucis);
+}
+
+function playFrom(start: Start, ucis: readonly string[]): Ply[] {
+  let { board, color, number } = start;
   const plies: Ply[] = [];
   for (const uci of ucis) {
     const piece = pieceOn(board, uci.slice(0, 2));
@@ -49,7 +65,7 @@ export function playLine(fen: string, ucis: readonly string[]): Ply[] {
     const check = isInCheck(after, opposite(color));
     plies.push({
       uci,
-      san: `${sanOn(board, uci)}${check ? '+' : ''}`,
+      san: sanAfter(board, uci),
       color,
       number,
       piece,

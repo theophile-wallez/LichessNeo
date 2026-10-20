@@ -64,12 +64,12 @@
     "cls": "good",
     "slower": true,
     "en": {
-      "fact": "A mate in 2 started with [[m:w:Rh8]].",
-      "parts": [["A mate in 2 started with [[m:w:Rh8]]."]]
+      "fact": "A mate in 2 started with [[m:w:Rh8+]].",
+      "parts": [["A mate in 2 started with [[m:w:Rh8+]]."]]
     },
     "fr": {
-      "fact": "Un mat en 2 commençait par [[m:w:Rh8]].",
-      "parts": [["Un mat en 2 commençait par [[m:w:Rh8]]."]]
+      "fact": "Un mat en 2 commençait par [[m:w:Rh8+]].",
+      "parts": [["Un mat en 2 commençait par [[m:w:Rh8+]]."]]
     }
   },
   {
@@ -81,12 +81,12 @@
     "cls": "good",
     "slower": true,
     "en": {
-      "fact": "There was mate in one with [[m:b:Rh1]].",
-      "parts": [["There was mate in one with [[m:b:Rh1]]."]]
+      "fact": "There was mate in one with [[m:b:Rh1#]].",
+      "parts": [["There was mate in one with [[m:b:Rh1#]]."]]
     },
     "fr": {
-      "fact": "Il y avait mat en un avec [[m:b:Rh1]].",
-      "parts": [["Il y avait mat en un avec [[m:b:Rh1]]."]]
+      "fact": "Il y avait mat en un avec [[m:b:Rh1#]].",
+      "parts": [["Il y avait mat en un avec [[m:b:Rh1#]]."]]
     }
   },
   {

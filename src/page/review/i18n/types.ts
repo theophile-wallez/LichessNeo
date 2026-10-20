@@ -166,6 +166,20 @@ interface PieceWon {
 export interface Material {
   readonly won: readonly Piece[];
   readonly lost: readonly Piece[];
+  /** The one piece won's square, as a token, when its side had more than one like it. */
+  readonly square?: string | null;
+}
+
+/** A piece that can't take, pinned to one worth more, and the moves by which taking loses that one. */
+export interface PinnedTake {
+  readonly pinned: Piece;
+  readonly pinner: Piece;
+  readonly behind: Piece;
+  /** Where each stands. */
+  readonly squares: { readonly pinned: string; readonly pinner: string; readonly behind: string };
+  /** The pinned piece's capture, then the pinner's, as tokens. */
+  readonly take: string;
+  readonly punish: string;
 }
 
 /** What names a motif: its kind, its move as a token, and the pieces it hits. */
@@ -175,6 +189,12 @@ export type MotifNamer = (kind: MotifKind, move: string, pieces: readonly Piece[
 export type Ways = readonly [string, ...string[]];
 
 /** What a line wins: the material, its moves as tokens, and how many of the winner's they are. */
+/** A piece, and its square as a token when its side has more than one like it. */
+export interface Named {
+  readonly piece: Piece;
+  readonly square: string | null;
+}
+
 export interface LineGain {
   readonly material: string;
   readonly line: string;
@@ -228,14 +248,15 @@ export interface PlanSentences {
   readonly fightsCenter: Ways;
   readonly supportsCenter: Ways;
   /** A piece attacked, which has to move. */
-  readonly chases: (piece: Piece) => Ways;
+  /** A piece attacked, on `square` when its side has more than one like it. */
+  readonly chases: (piece: Piece, square: string | null) => Ways;
   /** A pawn attacked that nothing defends. */
   readonly attacksPawn: (pawn: Piece, square: Square) => Ways;
   readonly pins: (piece: Piece, behind: Piece) => Ways;
   /** The piece moved, out of danger. */
   readonly saves: (piece: Piece) => Ways;
   /** A piece in danger, now defended. */
-  readonly guards: (piece: Piece) => Ways;
+  readonly guards: (piece: Piece, square: string | null) => Ways;
   readonly centralizes: (piece: Piece) => Ways;
   /** A rook behind its passed pawn. */
   readonly behindPasser: Ways;
@@ -265,6 +286,9 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly canForceMate: (side: Color, reply: string) => Ways;
   /** A mate in one let in. */
   readonly matesNow: (reply: string) => Ways;
+  /** A sure mate under way, and its moves after the move: for its side, then for the side mated. */
+  readonly mateFollows: (line: string) => Ways;
+  readonly mateUnstoppable: (line: string) => Ways;
   readonly wouldForceMate: (best: string, moves: number) => Ways;
   /** A mate in one missed. */
   readonly mateInOne: (best: string) => Ways;
@@ -280,13 +304,27 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly betterMove: (best: string, why: string | null) => Ways;
   readonly punishesAtOnce: (side: Color) => Ways;
   readonly offered: (piece: Piece, side: Color) => Ways;
+  /** A sacrifice that takes `taken` first: `side` can't safely take `piece` back. */
+  readonly offeredFor: (piece: Piece, taken: Piece, side: Color) => Ways;
+  /** A sacrifice's piece that can't be taken: its only taker is pinned. */
+  readonly offeredPinned: (piece: Named, pinned: Named) => Ways;
+  /** A piece whose defender can't take back, as it's pinned: said plainly, with no move. */
+  readonly pinnedGuard: (lost: Named, pinned: Named) => Ways;
+  /** The pin, square by square, and the moves by which taking loses. */
+  readonly pinLine: (pin: PinnedTake) => Ways;
   readonly keepsAdvantage: Ways;
   readonly holdsPosition: (side: Color) => Ways;
   readonly promotes: (piece: Piece) => Ways;
   readonly castles: Ways;
   readonly takesBack: (square: string) => Ways;
-  readonly winsForFree: (piece: Piece) => Ways;
-  readonly winsMaterial: (won: Piece, given: Piece) => Ways;
+  /** A piece taken with nothing taken back, on `square` when the side had more than one. */
+  readonly winsForFree: (piece: Piece, square: string | null) => Ways;
+  /** A piece taken for one worth less, on `square` when the side had more than one. */
+  readonly winsMaterial: (won: Piece, given: Piece, square: string | null) => Ways;
+  /** A piece taken, on `square` when there were more, whose worth `side` wins back: said plainly. */
+  readonly givenBack: (piece: Piece, square: string | null, side: Color) => Ways;
+  /** A piece taken, on `square` when there were more, for which `side` gets play: the score shows no gain. */
+  readonly compensation: (piece: Piece, square: string | null, side: Color) => Ways;
   readonly checkForces: (side: Color) => Ways;
   readonly littleMorePrecise: (best: string, why: string | null) => Ways;
   /** An even trade, of `taken`; `ahead` for a side ahead in material. */

@@ -35,11 +35,14 @@ export function tacticPlansFr(
       `${capitalize(the(mover))} et ${the(partner)} forment une batterie braquée sur ${the(target)}.`,
       `${capitalize(the(mover))} rejoint ${the(partner)} sur la diagonale, tous deux braqués sur ${the(target)}.`,
     ],
-    chases: piece => [
-      `${capitalize(the(piece))} est attaqué${agreement(piece)} et doit bouger.`,
-      `Ça attaque ${the(piece)}, avec gain de temps.`,
-      `${capitalize(the(piece))} doit bouger : du temps de gagné.`,
-    ],
+    chases: (piece, square) => {
+      const target = square === null ? the(piece) : `${the(piece)} en ${square}`;
+      return [
+        `${capitalize(target)} est attaqué${agreement(piece)} et doit bouger.`,
+        `Ça attaque ${target}, avec gain de temps.`,
+        `${capitalize(target)} doit bouger : du temps de gagné.`,
+      ];
+    },
     pins: (piece, behind) => [
       `${capitalize(the(piece))} est cloué${agreement(piece)} sur ${bare(behind)}.`,
       `Un clouage : ${the(piece)} ne peut plus bouger sans exposer ${bare(behind)}.`,

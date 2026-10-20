@@ -1,5 +1,7 @@
 import { type Board, type Color, type Piece, PIECE_VALUES } from '#shared/chess/index.ts';
+import { pieceOn } from '#page/review/chess/material.ts';
 import type { Ply } from '#page/review/chess/played-line.ts';
+import { whichOne } from './which-one.ts';
 
 // What a line does to the material: the pieces each side takes until the
 // trades are over, as the coach puts it ("wins a knight for a pawn").
@@ -13,6 +15,8 @@ export interface Swing {
   readonly net: number;
   /** The plies it takes. */
   readonly plies: number;
+  /** The one piece won's square, as a token, when its side had more than one like it. */
+  readonly square: string | null;
 }
 
 const worth = (piece: Piece): number => PIECE_VALUES[piece.role];
@@ -55,13 +59,26 @@ function withoutTrades(won: readonly Piece[], lost: readonly Piece[]): [Piece[],
   return [kept.toSorted(byWorth), left.toSorted(byWorth)];
 }
 
+// Where the one piece won was taken, said as "the c6 pawn": not when the line
+// takes more than one like it, nor en passant, the pawn not on the square taken.
+function wonOn(taken: readonly Ply[], won: readonly Piece[], side: Color): string | null {
+  const [piece] = won;
+  if (!piece || won.length > 1) return null;
+  const takes = taken.filter(ply => ply.color === side && ply.captured?.role === piece.role);
+  const [take] = takes;
+  const square = take?.uci.slice(2, 4) ?? '';
+  if (!take || takes.length > 1 || !pieceOn(take.before, square)) return null;
+  return whichOne(take.before, square, piece);
+}
+
 function swingAfter(plies: readonly Ply[], count: number, side: Color): Swing {
   const taken = plies.slice(0, count).filter(ply => ply.captured !== null);
   const [won, lost] = withoutTrades(
     taken.flatMap(ply => (ply.color === side && ply.captured ? [ply.captured] : [])),
     taken.flatMap(ply => (ply.color !== side && ply.captured ? [ply.captured] : [])),
   );
-  return { won, lost, net: netAfter(plies, count, side), plies: count };
+  const square = wonOn(taken, won, side);
+  return { won, lost, net: netAfter(plies, count, side), plies: count, square };
 }
 
 /**

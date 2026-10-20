@@ -1,16 +1,18 @@
 import { type Board, type Color, opposite, parseFen, type Piece } from '#shared/chess/index.ts';
 import { forkedBy } from '#page/review/chess/fork.ts';
 import { pieceOn } from '#page/review/chess/material.ts';
-import { roleOfLetter, uciToSan } from '#page/review/chess/notation.ts';
+import { roleOfLetter, sanOf } from '#page/review/chess/notation.ts';
 import { isError, type MoveClass } from '#page/review/classes/classes.ts';
 import { moveToken } from '#page/review/comment/tokens.ts';
 import type { FactSentences, ReviewLanguage } from '#page/review/i18n/types.ts';
+import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { littleBetterFact } from './best-fact.ts';
 import { captureFact } from './capture-fact.ts';
 import { reasonMarks } from './drawing.ts';
 import { errorFindings, mateDistance, mates } from './error-fact.ts';
-import { gainFact } from './line-facts.ts';
+import { gainFact, mateLine } from './line-facts.ts';
+import { pinnedOfferFact } from './pinned-take.ts';
 import { planFact, raceFact } from './plan.ts';
 import { type Fact, oneOf, said, type Theme } from './said.ts';
 import { NO_THREATS, parriedFact, type Threats, threatensFact } from './threat-facts.ts';
@@ -59,9 +61,10 @@ export function punishes(move: MoveVerdict): boolean {
 }
 
 // What stands out in a move that needs no correction: what its line wins (a
-// sacrifice aside, which says what it offers), an error punished, the only move.
+// sacrifice aside, which says what it offers, or the pin that keeps it from
+// being taken), the only move.
 function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
-  const { move, facts, me, them, sign } = input;
+  const { move, facts, me, them } = input;
   const sacrifice = move.moveClass === 'brilliant';
   const gain = sacrifice ? null : gainFact(input);
   if (gain !== null) return gain;
@@ -72,16 +75,23 @@ function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
   // the reader's capture or check, for a mate it stops or threatens only.
   const threat = sacrifice ? null : threatsFact(input, !input.theirs && /[x+]/.test(move.san));
   if (threat !== null) return threat;
-  if (punishes(move)) return said(oneOf(facts.punishesAtOnce(them), move));
-  if (move.moveClass === 'brilliant' && moved)
-    return said(oneOf(facts.offered({ role: moved.role, color: me }, them), move), 'sacrifice');
-  if (move.moveClass === 'great')
-    return said(
-      evaluationLevel(move.after) * sign >= 2
-        ? oneOf(facts.keepsAdvantage, move)
-        : oneOf(facts.holdsPosition(me), move),
-    );
-  return null;
+  const pinned = sacrifice ? pinnedOfferFact(input) : null;
+  if (pinned !== null) return pinned;
+  if (move.moveClass === 'brilliant' && moved) {
+    const piece: Piece = { role: moved.role, color: me };
+    const taken = pieceOn(before, move.uci.slice(2, 4));
+    const ways = taken ? facts.offeredFor(piece, taken, them) : facts.offered(piece, them);
+    return said(oneOf(ways, move), 'sacrifice');
+  }
+  return onlyMoveFact(input);
+}
+
+// The only move, unless it takes back, which the capture says: a recapture is no feat.
+function onlyMoveFact({ move, facts, me, sign }: FactInput): Fact | null {
+  const retakes = move.previousPosition.uci?.slice(2, 4) === move.uci.slice(2, 4);
+  if (move.moveClass !== 'great' || (retakes && move.san.includes('x'))) return null;
+  const ahead = evaluationLevel(move.after) * sign >= 2;
+  return said(ahead ? oneOf(facts.keepsAdvantage, move) : oneOf(facts.holdsPosition(me), move));
 }
 
 // A quiet move's point is often the threat it stops, else the one it makes.
@@ -93,26 +103,59 @@ function threatsFact(input: FactInput, matesOnly: boolean): Fact | null {
   );
 }
 
-function goodFact(input: FactInput): Fact | null {
+const alone = (fact: Fact | null): Findings => ({ fact, followUp: null });
+
+// A sure mate under way after the move, move by move: the mover's, or the one it can't stop.
+function mateUnderWay({ move, facts, sign }: FactInput): Fact | null {
+  const line = mateLine(move.after, move.position.fen, 'a', { short: true });
+  if (line === null) return null;
+  const ways = mates(move.after, sign) ? facts.mateFollows(line) : facts.mateUnstoppable(line);
+  return said(oneOf(ways, move), 'mate');
+}
+
+// An error punished, said when nothing more concrete is (a recapture says it
+// takes back, a quiet move what it does), and only when it leaves the punisher
+// better off.
+function punishedFact({ move, facts, them, sign }: FactInput): Fact | null {
+  // An answer to a check is forced, not a punishment.
+  const forced = move.previousPosition.san?.includes('+') ?? false;
+  const better = !forced && evaluationLevel(move.after) * sign >= 1;
+  return punishes(move) && better ? said(oneOf(facts.punishesAtOnce(them), move)) : null;
+}
+
+// A mate under way, what stands out, else the fork the move makes.
+function tacticFact(input: FactInput, moved: Piece | undefined): Fact | null {
+  const { move, facts, them, after } = input;
+  const standout = mateUnderWay(input) ?? standoutFact(input, moved);
+  if (standout !== null) return standout;
+  const [first, second] = forkedBy(move.previousPosition.fen, move.uci);
+  if (!first || !second) return null;
+  const scene = { uci: move.uci, before: input.before, after, shown: after, toMove: them };
+  const drawing = reasonMarks({ kind: 'fork', first, second }, scene);
+  return said(oneOf(facts.forks(first, second), move), 'fork', drawing);
+}
+
+function goodFindings(input: FactInput): Findings {
   const { move, facts, me, them, after } = input;
   const dest = move.uci.slice(2, 4);
   const moved = pieceOn(after, dest);
-  const standout = standoutFact(input, moved);
-  if (standout !== null) return standout;
-  const [first, second] = forkedBy(move.previousPosition.fen, move.uci);
-  if (first && second) {
-    const scene = { uci: move.uci, before: input.before, after, shown: after, toMove: them };
-    const drawing = reasonMarks({ kind: 'fork', first, second }, scene);
-    return said(oneOf(facts.forks(first, second), move), 'fork', drawing);
-  }
+  const tactic = tacticFact(input, moved);
+  if (tactic !== null) return alone(tactic);
   const promotion = roleOfLetter(/=([QRBN])/.exec(move.san)?.[1] ?? '');
-  if (promotion) return said(oneOf(facts.promotes({ role: promotion, color: me }), move));
+  if (promotion) return alone(said(oneOf(facts.promotes({ role: promotion, color: me }), move)));
   // The opponent's castling is theirs to care about: a remark says it.
-  if (move.san.startsWith('O-O')) return input.theirs ? null : said(oneOf(facts.castles, move));
+  if (move.san.startsWith('O-O'))
+    return alone(input.theirs ? null : said(oneOf(facts.castles, move)));
   const capture = moved && move.san.includes('x') ? captureFact(input, moved, dest) : null;
-  if (capture !== null) return capture;
-  if (move.san.includes('+')) return said(oneOf(facts.checkForces(them), move));
-  return quietFact(input);
+  // A capture short of the best says the move a little better too.
+  const short = move.moveClass === 'good' || move.moveClass === 'excellent';
+  if (capture !== null) return { fact: capture, followUp: short ? littleBetterFact(input) : null };
+  // What the move does says more than that it punishes an error.
+  const quiet = quietFact(input);
+  if (quiet !== null) return alone(quiet);
+  const punished = punishedFact(input);
+  if (punished !== null) return alone(punished);
+  return alone(move.san.includes('+') ? said(oneOf(facts.checkForces(them), move)) : null);
 }
 
 // The plies of the opening, where what a move does matters more than a slightly better one.
@@ -125,6 +168,12 @@ function quietFact(input: FactInput): Fact | null {
   const plan = planFact({ move, sentences: facts, before, after, theirs });
   const better = move.moveClass === 'good' ? littleBetterFact(input) : null;
   return move.ply <= OPENING_PLIES ? (plan ?? better) : (better ?? plan);
+}
+
+/** The engine's move from `fen` in SAN, its check a mate when its record mates in one. */
+function mateMarked(fen: string, uci: string, record: PositionRecord): string {
+  const san = sanOf(fen, uci);
+  return 'mate' in record && Math.abs(record.mate) === 1 ? san.replace(/\+$/, '#') : san;
 }
 
 /**
@@ -143,7 +192,10 @@ export function findings(
     return { fact: said(oneOf(facts.checkmate(them), move), 'mate'), followUp: null };
   const best =
     move.bestSan && move.best
-      ? moveToken(move.bestSan, me, { base: 'b', ucis: [move.best] })
+      ? moveToken(mateMarked(move.previousPosition.fen, move.best, move.before), me, {
+          base: 'b',
+          ucis: [move.best],
+        })
       : move.bestSan && moveToken(move.bestSan, me);
   // A sure mate slowed down, or one let in sooner. The defense's length isn't
   // stated, because the engine reports long mates as longer than they are.
@@ -155,7 +207,10 @@ export function findings(
   }
   const replyUci = move.after.best;
   const reply = replyUci
-    ? moveToken(uciToSan(move.position.fen, replyUci), them, { base: 'a', ucis: [replyUci] })
+    ? moveToken(mateMarked(move.position.fen, replyUci, move.after), them, {
+        base: 'a',
+        ucis: [replyUci],
+      })
     : '';
   const before = parseFen(move.previousPosition.fen).board;
   const after = parseFen(move.position.fen).board;
@@ -173,7 +228,7 @@ export function findings(
     threats,
     theirs,
   };
-  return isError(move.moveClass) ? errorFindings(input) : { fact: goodFact(input), followUp: null };
+  return isError(move.moveClass) ? errorFindings(input) : goodFindings(input);
 }
 
 /** The tactics the coach's findings are about, for the bubble's tags. */

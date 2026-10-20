@@ -9,12 +9,12 @@ const bare = (piece: Piece): string => owned(null, piece);
 // The tactic that wins the material along a line, named after its move:
 // « 16. Dc7+ fait une fourchette sur le roi et la tour. »
 
-type MotifSentence = (move: string, first: Piece, second: Piece | undefined) => Ways | null;
-type MotifSentences = Readonly<Record<MotifKind, MotifSentence>>;
-
 /** "au roi", "à la dame", "à ta tour". */
 const toThe = (named: string): string =>
   named.startsWith('le ') ? `au ${named.slice(3)}` : `à ${named}`;
+
+type MotifSentence = (move: string, first: Piece, second: Piece | undefined) => Ways | null;
+type MotifSentences = Readonly<Record<Exclude<MotifKind, 'pinnedDefender'>, MotifSentence>>;
 
 // Tactics that attack: a fork, a pin, a skewer, a discovered attack.
 function attacksFr(
@@ -95,6 +95,8 @@ function strikesFr(
 export function motifFr(viewer: Viewer): MotifNamer {
   const sentences: MotifSentences = { ...attacksFr(viewer), ...strikesFr(viewer) };
   return (kind, move, pieces) => {
+    // Said apart, plainly then square by square (coach/motif-fact.ts).
+    if (kind === 'pinnedDefender') return null;
     const [first, second] = pieces;
     return first ? sentences[kind](move, first, second) : null;
   };

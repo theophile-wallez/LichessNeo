@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
+import { played, record as engineRecord } from '#page/review/fixtures/played.ts';
 import { en } from '#page/review/i18n/en.ts';
 import { judge } from '#page/review/judge/judge.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
@@ -135,7 +136,24 @@ describe('the comment', () => {
       chess960: false,
     });
     expect(said(blunder)).toEqual([
-      { text: 'Nothing stops [[m:b:Qh4@a:d8h4]], and it’s mate.', droppable: false },
+      { text: 'Nothing stops [[m:b:Qh4#@a:d8h4]], and it’s mate.', droppable: false },
     ]);
+  });
+
+  it('says a good capture, the better move, then the line below the rest', () => {
+    // 20.Qxc6: the pawn falls, but Black wins it back; 20.Bf4 was a little better.
+    const fen = '1r1q1rk1/5pbp/b1p1p1p1/p1Qp4/P2P4/4B1P1/1P2PPBP/2R1R1K1 w - - 1 20';
+    const back = 'a6c4 c1c2 d8b6 c6b6 b8b6 e3d2 g7d4 d2a5 b6b2 c2b2 d4b2 a5b6'.split(' ');
+    const good = played({
+      fen,
+      uci: 'c5c6',
+      before: engineRecord(51, ['e3f4', 'b8b2']),
+      after: engineRecord(49, back),
+    });
+    const parts = said(good);
+    expect(parts[0]?.text).toMatch(/falls|wins nothing/);
+    expect(parts[1]?.text).toMatch(/Bf4/);
+    expect(parts.at(-1)?.detail).toBe(true);
+    expect(parts.at(-1)?.text).toMatch(/Bxb2/);
   });
 });

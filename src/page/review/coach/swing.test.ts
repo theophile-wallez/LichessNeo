@@ -20,7 +20,19 @@ const TRADE = '4k3/8/4p3/3n4/8/5B2/8/4K3 w - - 0 1';
 describe('securedSwing', () => {
   it('is what a side takes once the trades are over', () => {
     const won = securedSwing(line(FORK, 'd5c7 e8d7 c7a8 d7c8'), 'white');
-    expect(won).toEqual({ won: [{ role: 'rook', color: 'black' }], lost: [], net: 5, plies: 3 });
+    expect(won).toEqual({
+      won: [{ role: 'rook', color: 'black' }],
+      lost: [],
+      net: 5,
+      plies: 3,
+      square: null,
+    });
+  });
+
+  it('says where the piece won was, when its side had more than one like it', () => {
+    const pawns = '4k3/8/8/3p4/4P3/8/p7/4K3 w - - 0 1';
+    expect(securedSwing(line(pawns, 'e4d5 e8e7'), 'white')?.square).toBe('[[s:d5]]');
+    expect(securedSwing(line(FORK, 'd5c7 e8d7 c7a8 d7c8'), 'white')?.square).toBeNull();
   });
 
   it('leaves out a trade of pieces of the same worth', () => {
@@ -68,9 +80,11 @@ describe('worthSaying', () => {
   it('wants more than a pawn from a trade of unlike pieces', () => {
     const knight = { role: 'knight', color: 'black' } as const;
     const pawn = { role: 'pawn', color: 'white' } as const;
-    expect(worthSaying({ won: [knight], lost: [], net: 3, plies: 2 })).toBe(true);
-    expect(worthSaying({ won: [pawn], lost: [], net: 1, plies: 2 })).toBe(true);
-    expect(worthSaying({ won: [knight, knight], lost: [pawn], net: 1, plies: 4 })).toBe(false);
+    expect(worthSaying({ won: [knight], lost: [], net: 3, plies: 2, square: null })).toBe(true);
+    expect(worthSaying({ won: [pawn], lost: [], net: 1, plies: 2, square: null })).toBe(true);
+    expect(
+      worthSaying({ won: [knight, knight], lost: [pawn], net: 1, plies: 4, square: null }),
+    ).toBe(false);
   });
 });
 

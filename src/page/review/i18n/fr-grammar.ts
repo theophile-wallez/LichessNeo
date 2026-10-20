@@ -1,7 +1,7 @@
 import type { Color, Piece, Role } from '#shared/chess/index.ts';
 import { pieceToken } from '#page/review/comment/tokens.ts';
 import { materialPhrase } from './material.ts';
-import type { Material, Viewer } from './types.ts';
+import type { Material, Named, Viewer } from './types.ts';
 
 // French grammar for the coach's sentences: a piece's gender picks its
 // articles and agreements, and the reader's side its persons: "tu" and
@@ -31,6 +31,14 @@ export function owned(viewer: Viewer, piece: Piece): string {
   return `${definite(piece)} adverse`;
 }
 
+/** `owned`, by its square when there's one: « ton [fou] c4 », « le [pion] d5 adverse ». */
+export function ownedOn(viewer: Viewer, { piece, square }: Named): string {
+  if (square === null) return owned(viewer, piece);
+  if (viewer === piece.color)
+    return `${isFeminine(piece) ? 'ta' : 'ton'} ${pieceName(piece)} ${square}`;
+  return `${definite(piece)} ${square}${viewer === null ? '' : ' adverse'}`;
+}
+
 /** "le [fou] et la [dame]", or "les deux [cavalier]cavaliers" when they're alike: a fork's pieces. */
 export function pairOf(viewer: Viewer, first: Piece, second: Piece): string {
   if (first.role !== second.role) return `${owned(viewer, first)} et ${owned(viewer, second)}`;
@@ -42,6 +50,12 @@ export function pairOf(viewer: Viewer, first: Piece, second: Piece): string {
 /** "une [tour]", "un [cavalier]". */
 export const indefinite = (piece: Piece): string =>
   `${isFeminine(piece) ? 'une' : 'un'} ${pieceName(piece)}`;
+
+/** `indefinite`, or by its square when there's one: « le [pion] c6 ». */
+export const indefiniteOn = (piece: Piece, square: string | null): string =>
+  square === null
+    ? indefinite(piece)
+    : `${isFeminine(piece) ? 'la' : 'le'} ${pieceName(piece)} ${square}`;
 
 /** The object pronoun standing for the piece: "la", "le". */
 export const pronoun = (piece: Piece): string => (isFeminine(piece) ? 'la' : 'le');
@@ -117,7 +131,7 @@ export const soon = (moves: number): string => (moves <= 1 ? 'tout de suite' : w
 /** "un [cavalier] contre un [pion]", "deux [pion]pions", "la qualité": what a side wins. */
 export const materialFr = (material: Material): string | null =>
   materialPhrase(material, {
-    one: indefinite,
+    one: indefiniteOn,
     many: (piece, count) => {
       const number = COUNTS[count];
       return number === undefined ? null : `${number} ${pieceName(piece)}s`;

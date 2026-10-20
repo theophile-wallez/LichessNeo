@@ -10,7 +10,7 @@ const bare = (piece: Piece): string => definite(null, piece);
 // "16. Qc7+ forks the king and the rook."
 
 type MotifSentence = (move: string, first: Piece, second: Piece | undefined) => Ways | null;
-type MotifSentences = Readonly<Record<MotifKind, MotifSentence>>;
+type MotifSentences = Readonly<Record<Exclude<MotifKind, 'pinnedDefender'>, MotifSentence>>;
 
 // Tactics that attack: a fork, a pin, a skewer, a discovered attack.
 function attacksEn(
@@ -91,7 +91,9 @@ function strikesEn(
 
 export function motifEn(viewer: Viewer): MotifNamer {
   const sentences: MotifSentences = { ...attacksEn(viewer), ...strikesEn(viewer) };
-  return (kind: MotifKind, move: string, pieces: readonly Piece[]): Ways | null => {
+  return (kind, move, pieces) => {
+    // Said apart, plainly then square by square (coach/motif-fact.ts).
+    if (kind === 'pinnedDefender') return null;
     const [first, second] = pieces;
     return first ? sentences[kind](move, first, second) : null;
   };

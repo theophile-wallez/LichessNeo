@@ -13,7 +13,14 @@ import {
   streamFor,
 } from './markup.ts';
 import { verdictTitle } from './title.ts';
-import { moveToken, movesToken, numberedMoveToken, pieceToken, squareToken } from './tokens.ts';
+import {
+  moveToken,
+  movesToken,
+  numberedMoveToken,
+  pieceOnToken,
+  pieceToken,
+  squareToken,
+} from './tokens.ts';
 // What the original script drew for these comments, tokens and verdicts.
 import legacyStreams from './fixtures/legacy-stream.json' with { type: 'json' };
 import legacy from './fixtures/legacy-units.json' with { type: 'json' };
@@ -67,6 +74,16 @@ describe('commentMarkup', () => {
     expect(moveToken('Qxf7#', 'white')).toBe('[[m:w:Qxf7#]]');
     expect(squareToken('e4')).toBe('[[s:e4]]');
     expect(numberedMoveToken('12...', 'Qb6', 'black')).toBe('[[n:12...:b:Qb6]]');
+    expect(pieceOnToken({ color: 'black', role: 'pawn' }, 'd5')).toBe('[[o:bp:d5]]');
+  });
+
+  it('draws a piece on its square as one word, and a detail apart from the rest', () => {
+    const detail = { text: '[[o:bp:d5]]', droppable: false, detail: true };
+    expect(markup([say('one'), detail])).toBe(
+      '<span class="ln-ext-say"><span class="ln-ext-w">one</span> </span>' +
+        '<span class="ln-ext-say ln-ext-say--detail"><span class="ln-ext-w"><span class="ln-ext-on">' +
+        '<i class="ln-ext-pc ln-ext-pc-bp"></i><b class="ln-ext-sq">d5</b></span></span> </span>',
+    );
   });
 
   it('keeps a numbered move’s number with its chip', () => {

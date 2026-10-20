@@ -9,10 +9,11 @@ import {
   squareAt,
   squareCoords,
 } from '#shared/chess/index.ts';
+import { boardAfter } from './line.ts';
 import { attackerValues } from './material.ts';
 
 // The board's lines, as the motifs read them: what stands between two
-// squares, what pins a piece, and what defends one.
+// squares, what pins a piece, what a pin keeps from taking, and what defends one.
 
 const DIRECTIONS: readonly (readonly [number, number])[] = [
   [1, 0],
@@ -85,6 +86,31 @@ export function pinOf(board: Board, square: Square, relative = false): Pin | nul
     if (shields) return { pinner: ahead.square, behind: behind.square };
   }
   return null;
+}
+
+export interface PinnedTaker extends Pin {
+  /** The pinned piece, the only one that could take. */
+  readonly taker: Square;
+}
+
+/** Whether the piece on `taker` takes on `at` off the line its pin holds it on. */
+const offLine = (at: Square, pin: Pin): boolean =>
+  at !== pin.pinner && !between(pin.pinner, pin.behind).includes(at);
+
+/**
+ * The only piece of `side`'s that can take on `at`, when it's pinned off that
+ * line to a piece worth more than it would take, counting the pinner taken
+ * in turn: taking would give up what stood behind it.
+ */
+export function pinnedTaker(board: Board, at: Square, side: Color): PinnedTaker | null {
+  const [taker, ...others] = attackersOn(board, at, side);
+  const pin = taker && others.length === 0 ? pinOf(board, taker, true) : null;
+  if (!taker || !pin || !offLine(at, pin)) return null;
+  const [target, pinner, behind] = [at, pin.pinner, pin.behind].map(square => board.get(square));
+  if (!target || !pinner || !behind || behind.role === 'king') return null;
+  const taken = boardAfter(board, `${taker}${at}`);
+  const back = isDefended(taken, pin.behind, side) ? PIECE_VALUES[pinner.role] : 0;
+  return PIECE_VALUES[target.role] + back > PIECE_VALUES[behind.role] ? null : { taker, ...pin };
 }
 
 /** The squares of `by`'s pieces that attack `target`, pins ignored. */

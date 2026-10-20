@@ -10,7 +10,7 @@ import type { Mark, MarkTone } from '#page/board/review-arrows.ts';
 import { attackersOn, checkers } from '#page/review/chess/rays.ts';
 
 // What the coach draws of an error's material and mates: the piece left
-// hanging between its attackers and defenders, the king a mate nets.
+// hanging between its attackers and defenders, a pin, the king a mate nets.
 
 const lineTo =
   (to: Square, tone: MarkTone) =>
@@ -35,6 +35,13 @@ export function hangingMarks(board: Board, square: Square, taker: Square): Mark[
     { kind: 'ring', square, tone: 'attack' },
   ];
 }
+
+/** The pinner's line to the piece behind, the pinned piece ringed on it. */
+export const pinLine = (pinner: Square, pinned: Square, behind: Square): Mark[] => [
+  lineTo(behind, 'attack')(pinner),
+  { kind: 'ring', square: pinned, tone: 'attack' },
+  { kind: 'ring', square: behind, tone: 'plan' },
+];
 
 /** `color`'s king mated on `board`: its checkers' lines, and its flight squares barred. */
 export function mateMarks(board: Board, color: Color): Mark[] {

@@ -35,14 +35,14 @@ describe('the cache', () => {
   it('drops the progress once the analysis is complete', () => {
     cacheProgress('abcdefgh', 2, [RECORD]);
     cacheRecords('abcdefgh', 2, [RECORD, RECORD]);
-    expect(reviewKeys()).toEqual(['ln-ext-review-index', 'ln-ext-review:abcdefgh:2:v2']);
+    expect(reviewKeys()).toEqual(['ln-ext-review-index', 'ln-ext-review:abcdefgh:2:v3']);
     expect(readCachedRecords('abcdefgh', 2)).toEqual([RECORD, RECORD]);
   });
 
   it('keeps the games opened last, and drops another version’s', () => {
     localStorage.setItem('ln-ext-review:oldgame1:2:v0', '[]');
     localStorage.setItem(
-      'ln-ext-review:kept0001:1:v2',
+      'ln-ext-review:kept0001:1:v3',
       '[{"cp":0,"wp":50,"wp2":null,"best":null}]',
     );
     for (let i = 0; i < 200; i++) cacheRecords(`game${String(i).padStart(4, '0')}`, 1, [RECORD]);
@@ -60,20 +60,20 @@ describe('the cache', () => {
     localStorage.setItem('ln-ext-review:oldgame1:2:v1', '[]');
     localStorage.setItem('ln-ext-review-index', '["ln-ext-review:oldgame1:2:v1"]');
     cacheRecords('abcdefgh', 1, [RECORD]);
-    expect(reviewKeys()).toEqual(['ln-ext-review-index', 'ln-ext-review:abcdefgh:1:v2']);
-    expect(localStorage.getItem('ln-ext-review-index')).toBe('["ln-ext-review:abcdefgh:1:v2"]');
+    expect(reviewKeys()).toEqual(['ln-ext-review-index', 'ln-ext-review:abcdefgh:1:v3']);
+    expect(localStorage.getItem('ln-ext-review-index')).toBe('["ln-ext-review:abcdefgh:1:v3"]');
   });
 
   it('keeps a game’s threats by position: a record, none, or not searched yet', () => {
     const threats: CachedThreat[] = [RECORD, false, null];
     cacheThreats('abcdefgh', threats);
-    expect(localStorage.getItem('ln-ext-review-threats:abcdefgh:3:v2')).toBe(
+    expect(localStorage.getItem('ln-ext-review-threats:abcdefgh:3:v3')).toBe(
       '[{"cp":20,"wp":51.8,"wp2":50,"best":"e2e4"},false,null]',
     );
     expect(readCachedThreats('abcdefgh', 3)).toEqual(threats);
     expect(readCachedThreats('abcdefgh', 4)).toEqual([]);
     // An entry that doesn't cover every position is read as none.
-    localStorage.setItem('ln-ext-review-threats:abcdefgh:4:v2', '[false,null]');
+    localStorage.setItem('ln-ext-review-threats:abcdefgh:4:v3', '[false,null]');
     expect(readCachedThreats('abcdefgh', 4)).toEqual([]);
   });
 

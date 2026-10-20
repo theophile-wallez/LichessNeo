@@ -17,6 +17,7 @@ describe('the material won', () => {
       { won: [black('rook'), black('pawn')], lost: [] },
       { won: [black('queen')], lost: [white('rook')] },
       { won: [black('rook')], lost: [white('bishop')] },
+      { won: [black('pawn')], lost: [], square: '[[s:d4]]' },
     ];
     expect(cases.map(en.facts.material)).toEqual([
       'a [[p:bn]]knight',
@@ -24,6 +25,7 @@ describe('the material won', () => {
       'a [[p:br]]rook and a [[p:bp]]pawn',
       'a [[p:bq]]queen for a [[p:wr]]rook',
       'the exchange',
+      'the [[s:d4]] [[p:bp]]pawn',
     ]);
     expect(cases.map(fr.facts.material)).toEqual([
       'un [[p:bn]]cavalier',
@@ -31,6 +33,7 @@ describe('the material won', () => {
       'une [[p:br]]tour et un [[p:bp]]pion',
       'une [[p:bq]]dame contre une [[p:wr]]tour',
       'la qualité',
+      'le [[p:bp]]pion [[s:d4]]',
     ]);
   });
 

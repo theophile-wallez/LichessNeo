@@ -31,7 +31,7 @@ describe('lineMoves', () => {
     const fen = 'r3k2r/pppq1ppp/8/8/8/8/PPPQ1PPP/R3K2R w KQkq - 0 9';
     // The rook reaches d1 from f1, where the castle put it.
     const moves = lineMoves(fen, ['e1g1', 'd7d2', 'f1d1']);
-    expect(moves.map(move => move.san)).toEqual(['O-O', 'Qxd2', 'Rd1']);
+    expect(moves.map(move => move.san)).toEqual(['O-O', 'Qxd2', 'Rfd1']);
   });
 });
 

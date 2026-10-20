@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { parseFen } from '#shared/chess/index.ts';
-import { batteryOf, between, checkers, isDefended, isInBadSpot, pinOf } from './rays.ts';
+import {
+  batteryOf,
+  between,
+  checkers,
+  isDefended,
+  isInBadSpot,
+  pinnedTaker,
+  pinOf,
+} from './rays.ts';
 
 const board = (fen: string) => parseFen(fen).board;
 
@@ -32,6 +40,24 @@ describe('pinOf', () => {
 
   it('finds none when the slider can’t move along the line', () => {
     expect(pinOf(board('5k2/8/5n2/8/8/8/8/5B1K b - - 0 1'), 'f6')).toBeNull();
+  });
+});
+
+describe('pinnedTaker', () => {
+  // White's rook took on c4, which only the d5 pawn could take back: Bg2 pins it to the a8 rook.
+  const taken = 'r5k1/5p1p/1B2p1p1/P2p4/2R5/6P1/3bPPBP/6K1 b - - 0 29';
+
+  it('finds the only taker pinned off the line to a piece worth more', () => {
+    expect(pinnedTaker(board(taken), 'c4', 'black')).toEqual({
+      taker: 'd5',
+      pinner: 'g2',
+      behind: 'a8',
+    });
+  });
+
+  it('finds none when taking still pays, or when the king is behind', () => {
+    expect(pinnedTaker(board(taken.replace('r5k1', 'n5k1')), 'c4', 'black')).toBeNull();
+    expect(pinnedTaker(board('k7/8/8/3p4/2R5/8/6B1/6K1 b - - 0 1'), 'c4', 'black')).toBeNull();
   });
 });
 

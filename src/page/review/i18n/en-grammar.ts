@@ -1,7 +1,7 @@
 import type { Color, Piece, Role } from '#shared/chess/index.ts';
 import { pieceToken } from '#page/review/comment/tokens.ts';
 import { materialPhrase } from './material.ts';
-import type { Material, Viewer } from './types.ts';
+import type { Material, Named, Viewer } from './types.ts';
 
 // English grammar for the coach's sentences, from the reader's side: "you"
 // and "the opponent" when the reader played the game, "White" and "Black"
@@ -47,10 +47,21 @@ export const pieceName = (piece: Piece): string => pieceToken(piece) + ROLE_NAME
 /** "a [knight]". */
 export const indefinite = (piece: Piece): string => `a ${pieceName(piece)}`;
 
+/** "a [knight]", or by its square when there's one: "the c6 [pawn]". */
+export const indefiniteOn = (piece: Piece, square: string | null): string =>
+  square === null ? indefinite(piece) : `the ${square} ${pieceName(piece)}`;
+
 /** "the [knight]", or whose it is when the reader played: "your [knight]", "the opponent’s [knight]". */
 export function definite(viewer: Viewer, piece: Piece): string {
   if (viewer === null) return `the ${pieceName(piece)}`;
   return `${partyOf(viewer, piece.color).possessive} ${pieceName(piece)}`;
+}
+
+/** `definite`, by its square when there's one: "your c4 [bishop]", "the opponent’s d5 [pawn]". */
+export function definiteOn(viewer: Viewer, { piece, square }: Named): string {
+  if (square === null) return definite(viewer, piece);
+  const owner = viewer === null ? 'the' : partyOf(viewer, piece.color).possessive;
+  return `${owner} ${square} ${pieceName(piece)}`;
 }
 
 /** "the [bishop] and the [queen]", or "both [knight]knights" when they're alike: a fork's pieces. */
@@ -75,7 +86,7 @@ export const soon = (moves: number): string => (moves <= 1 ? 'right away' : with
 /** "a [knight] for a [pawn]", "two [pawn]pawns", "the exchange": what a side wins. */
 export const materialEn = (material: Material): string | null =>
   materialPhrase(material, {
-    one: indefinite,
+    one: indefiniteOn,
     many: (piece, count) => {
       const number = COUNTS[count];
       return number === undefined ? null : `${number} ${pieceName(piece)}s`;

@@ -14,6 +14,10 @@ describe('forkedSquares', () => {
     ]);
   });
 
+  it('lists none when the forker is traded off for a piece like it', () => {
+    expect(forkedSquares(board('r3k3/2N5/8/1n6/8/8/8/4K3 b - - 0 1'), 'c7')).toEqual([]);
+  });
+
   it('lists none for a single target, or a forker taken for free', () => {
     expect(forkedSquares(board('4k3/2N5/8/8/8/8/8/4K3 b - - 0 1'), 'c7')).toEqual([]);
     expect(forkedSquares(board('r2qk3/2N5/8/8/8/8/8/4K3 b - - 0 1'), 'c7')).toEqual([]);

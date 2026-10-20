@@ -12,6 +12,12 @@ import { toldLevel, trajectory } from './trajectory.ts';
 
 const say = (text: string, droppable = false): CommentPart => ({ text, droppable });
 
+/** The findings' technical sides, said last, below the rest. */
+const detailsOf = ({ fact, followUp }: Findings): CommentPart[] =>
+  [fact?.detail, followUp?.detail].flatMap(detail =>
+    detail ? [{ text: detail, droppable: false, detail: true }] : [],
+  );
+
 /** What the coach knows of a move beyond its verdict. */
 export interface MoveContext {
   /** A book move's opening ('' for none). */
@@ -64,8 +70,10 @@ export function explanation(
       say(remark(move, context)),
       ...(opening ? [say(oneOf(language.openingLine(opening), move), true)] : []),
     ];
-  const { fact, followUp } = findings(move, language, threats);
+  const all = findings(move, language, threats);
+  const { fact, followUp } = all;
   const found = fact?.text ?? null;
+  const details = detailsOf(all);
   if (move.san.includes('#')) return [say(found ?? '')];
   const { course, changed } = courseOf(
     move,
@@ -76,7 +84,8 @@ export function explanation(
   if (isError(move.moveClass)) {
     const turned = turning ? [say(oneOf(language.trajectory.turningPoint, move), true)] : [];
     if (found === null) return [say(course), ...turned];
-    return [...told, ...turned, say(found), ...(followUp ? [say(followUp.text)] : [])];
+    return [...told, ...turned, say(found), ...(followUp ? [say(followUp.text)] : []), ...details];
   }
-  return [say(found ?? remark(move, context)), ...told];
+  const better = followUp ? [say(followUp.text)] : [];
+  return [say(found ?? remark(move, context)), ...better, ...told, ...details];
 }

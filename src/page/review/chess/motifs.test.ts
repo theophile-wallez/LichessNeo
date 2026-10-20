@@ -105,4 +105,14 @@ describe('lineMotif', () => {
   it('finds nothing in a line where the winner takes nothing', () => {
     expect(motifOf('r3k3/8/8/3N4/8/8/8/4K3 w - - 0 1', 'd5c7 e8d7')).toBeNull();
   });
+
+  it('finds a defender pinned off the line, which can’t take back', () => {
+    const fen = 'r5k1/5p1p/1B2p1p1/P2p4/2b5/2b3P1/4PPBP/2R3K1 b - - 0 28';
+    const plies = playLine(fen, ['c3d2', 'c1c4', 'd2a5', 'b6a5', 'a8a5']);
+    expect(lineMotif(plies, 'white', 3)).toMatchObject({
+      kind: 'pinnedDefender',
+      ply: 1,
+      pin: { taker: 'd5', pinner: 'g2', behind: 'a8' },
+    });
+  });
 });

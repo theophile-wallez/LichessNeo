@@ -28,6 +28,7 @@ const PLAIN_REASONS: Readonly<Record<PlainReason, string>> = {
   space: 'gaining space',
   opposition: 'taking the opposition',
   checks: 'with check',
+  discoveredCheck: 'with a discovered check',
 };
 
 type PieceReason = Extract<Reason, { readonly piece: Piece }>;
@@ -36,14 +37,21 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string): string {
   const piece = the(reason.piece);
   if (reason.kind === 'develops') return `developing ${piece}`;
   if (reason.kind === 'outpost') return `planting ${piece} on an outpost`;
-  if (reason.kind === 'chases') return `attacking ${piece}`;
+  if (reason.kind === 'chases')
+    return reason.square ? `attacking ${piece} on ${reason.square}` : `attacking ${piece}`;
   if (reason.kind === 'attacksPawn')
     return `attacking the undefended ${pieceName(reason.piece)} on ${squareToken(reason.square)}`;
   if (reason.kind === 'pins') return `pinning ${piece} to ${bare(reason.behind)}`;
   if (reason.kind === 'saves') return `getting ${piece} out of danger`;
-  if (reason.kind === 'guards') return `defending ${piece}`;
+  if (reason.kind === 'guards')
+    return reason.square ? `defending ${piece} on ${reason.square}` : `defending ${piece}`;
   if (reason.kind === 'centralizes') return `centralizing ${piece}`;
-  if (reason.kind === 'takesWith') return `taking with ${piece} instead`;
+  if (reason.kind === 'takesWith')
+    return reason.square
+      ? `taking with the ${pieceName(reason.piece)} on ${reason.square} instead`
+      : `taking with ${piece} instead`;
+  if (reason.kind === 'takes' && reason.square)
+    return `taking the ${reason.square} ${pieceName(reason.piece)}`;
   return `taking ${piece}`;
 }
 
@@ -208,11 +216,14 @@ export function plansEn(viewer: Viewer): PlanSentences {
       `${capitalize(the(piece))} steps out of harm’s way.`,
       `${capitalize(the(piece))} retreats to safety.`,
     ],
-    guards: piece => [
-      `That defends ${the(piece)}.`,
-      `${capitalize(the(piece))} is protected now.`,
-      `A timely guard for ${the(piece)}.`,
-    ],
+    guards: (piece, square) => {
+      const target = square === null ? the(piece) : `${the(piece)} on ${square}`;
+      return [
+        `That defends ${target}.`,
+        `${capitalize(target)} is protected now.`,
+        `A timely guard for ${target}.`,
+      ];
+    },
     centralizes: piece => [
       `${capitalize(the(piece))} heads for the center.`,
       `${capitalize(the(piece))} takes a central square.`,

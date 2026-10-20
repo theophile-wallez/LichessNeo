@@ -39,7 +39,8 @@ export type Plan =
   /** A pawn come to defend a central pawn. */
   | { readonly kind: 'supportsCenter' }
   /** A piece of the other side's newly attacked, worth more than the attacker or undefended. */
-  | { readonly kind: 'chases'; readonly piece: Piece }
+  /** A piece attacked; `square`, as a token, when its side has more than one like it. */
+  | { readonly kind: 'chases'; readonly piece: Piece; readonly square?: string }
   /** A pawn of the other side's on `square`, newly attacked, which nothing defends. */
   | { readonly kind: 'attacksPawn'; readonly piece: Piece; readonly square: Square }
   /** A piece of the other side's newly pinned to `behind`. */
@@ -47,7 +48,8 @@ export type Plan =
   /** The piece moved, attacked where it stood, safe where it goes. */
   | { readonly kind: 'saves'; readonly piece: Piece }
   /** A piece of the mover's, attacked, now defended by the piece moved. */
-  | { readonly kind: 'guards'; readonly piece: Piece }
+  /** A piece defended; `square`, as a token, when its side has more than one like it. */
+  | { readonly kind: 'guards'; readonly piece: Piece; readonly square?: string }
   /** A knight to one of the four center squares. */
   | { readonly kind: 'centralizes'; readonly piece: Piece }
   /** A rook behind a passed pawn of its own, on its file. */
@@ -82,11 +84,17 @@ export type Reason =
   /** A threat of mate and one on `target` at once: the mate parried, `target` falls. */
   | { readonly kind: 'doubleThreat'; readonly target: Piece }
   | { readonly kind: 'castles' }
-  | { readonly kind: 'takes'; readonly piece: Piece }
-  /** A capture on the square the move played took on too, with `piece` instead. */
-  | { readonly kind: 'takesWith'; readonly piece: Piece }
+  /** A capture; `square`, as a token, when the side had more than one piece like it. */
+  | { readonly kind: 'takes'; readonly piece: Piece; readonly square?: string }
+  /**
+   * A capture on the square the move played took on too, with `piece` instead;
+   * `square`, as a token, the taker's, when the move played took with one like it.
+   */
+  | { readonly kind: 'takesWith'; readonly piece: Piece; readonly square?: string }
   /** A reply that gives check. */
   | { readonly kind: 'checks' }
+  /** A reply whose check is another piece's, uncovered as it moves. */
+  | { readonly kind: 'discoveredCheck' }
   /** Material won along the engine's line, written out. */
   | { readonly kind: 'wins'; readonly material: string }
   /** A check, or a sacrifice, worth far more than what it takes: the attack on `king`. */
@@ -113,6 +121,7 @@ const PLAIN: ReadonlySet<string> = new Set([
   'space',
   'opposition',
   'checks',
+  'discoveredCheck',
 ]);
 
 /** The reasons that need nothing more to be said. */
@@ -129,7 +138,8 @@ export type PlainReason =
   | 'luft'
   | 'space'
   | 'opposition'
-  | 'checks';
+  | 'checks'
+  | 'discoveredCheck';
 
 /** The reasons about the line a piece moved to: an open file, a battery. */
 export type LineReason = Extract<
