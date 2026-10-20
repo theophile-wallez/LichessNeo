@@ -131,7 +131,7 @@ describe('the user menu’s panels', () => {
     await flush();
     expect(panel.querySelector('.content > .ln-ext-src-choices')).not.toBeNull();
     expect(names(panel)).toEqual([
-      'Foley',
+      'Ascent',
       'Pack ann/packs/main/wood/',
       'Pack ann/packs/main/clicks/',
     ]);
@@ -145,14 +145,14 @@ describe('the user menu’s panels', () => {
     await start([], () => all.promise);
     const panel = openPanel('sound');
     await flush();
-    expect(names(panel)).toEqual(['Foley']);
+    expect(names(panel)).toEqual(['Ascent']);
     expect(
       queryOne(panel, '.ln-ext-src-import-link', HTMLAnchorElement)?.getAttribute('href'),
     ).toBe('/account/profile#ln-ext-extension/packs');
     all.resolve([WOOD, CLICKS]);
     await flush();
     expect(names(panel)).toEqual([
-      'Foley',
+      'Ascent',
       'Pack ann/packs/main/wood/',
       'Pack ann/packs/main/clicks/',
     ]);
@@ -175,7 +175,7 @@ describe('the user menu’s panels', () => {
     if (!link) throw new Error('no link field');
     link.value = 'https://github.com/ann/packs';
     queryOne(panel, '.ln-ext-packs__row button', HTMLButtonElement)?.click();
-    await vi.waitFor(() => expect(names(panel)).toEqual(['Foley', 'Clicks']));
+    await vi.waitFor(() => expect(names(panel)).toEqual(['Ascent', 'Clicks']));
     expect(library.current('sound')).toBe('ann/packs/HEAD/');
   });
 
@@ -208,6 +208,6 @@ describe('the user menu’s panels', () => {
     const panel = openPanel('sound');
     await flush();
     await library.remove(WOOD.id);
-    expect(names(panel)).toEqual(['Foley', 'Pack ann/packs/main/clicks/']);
+    expect(names(panel)).toEqual(['Ascent', 'Pack ann/packs/main/clicks/']);
   });
 });

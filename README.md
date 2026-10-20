@@ -39,7 +39,7 @@ be your avatar too.
 
 16 color themes, for Lichess's light and dark modes, or one you make in the
 settings' theme editor. Boards: the extension's, all of Lichess's, or one
-you draw. Pieces and sounds: Lichess's sets or the extension's Foley
+you draw. Pieces and sounds: Lichess's sets or the extension's Ascent
 sounds.
 
 Or bring your own: put them in a folder on GitHub with a `pack.json`, paste

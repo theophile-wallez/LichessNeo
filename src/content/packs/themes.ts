@@ -51,7 +51,7 @@ const BOARDS_AFTER: readonly Theme[] = [
 
 const THEMES: Readonly<Record<Exclude<PartKind, 'board'>, readonly Theme[]>> = {
   piece: [],
-  sound: [{ id: SYNTH_SET, name: 'Foley' }],
+  sound: [{ id: SYNTH_SET, name: 'Ascent' }],
 };
 
 /** The part's themes, in their order: the boards the user saved come after the presets. */

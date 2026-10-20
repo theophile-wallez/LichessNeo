@@ -97,7 +97,7 @@ panels themselves, all in `src/content/packs/`:
   no pack, Lichess's player is left alone.
 - A theme's settings are rows in its panel (`options.ts`: options,
   `option-row.ts`, sliders, `slider-row.ts`, colors, `color-row.ts`), kept in
-  localStorage (`stored-option.ts`). The Foley set
+  localStorage (`stored-option.ts`). The Ascent set
   comes to the page in the same message, with no file and its placement, and
   `src/page/sounds/synth` plays it through Foley's Web Audio. A backlit board
   puts its settings in `data-ln-ext-backlit` on `<html>`, only while it's
