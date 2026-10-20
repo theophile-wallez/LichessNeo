@@ -1896,7 +1896,7 @@
         "remark": "Not a disaster, but not ideal either.",
         "parts": [
           ["White had a winning position; now it’s only a clear advantage.", true],
-          ["More precise was [[m:w:Ne5]], centralizing the [[p:wn]]knight."]
+          ["More precise was [[m:w:Ne5]], attacking the [[p:bb]]bishop."]
         ]
       },
       {
@@ -2243,7 +2243,7 @@
         "remark": "Pas une catastrophe, mais pas idéal non plus.",
         "parts": [
           ["Les Blancs avaient une position gagnante, il ne leur reste qu’un net avantage.", true],
-          ["Plus précis : [[m:w:Ne5]], qui centralisait le [[p:wn]]cavalier."]
+          ["Plus précis : [[m:w:Ne5]], qui attaquait le [[p:bb]]fou."]
         ]
       },
       {
@@ -2422,7 +2422,7 @@
       { "remark": "Spot on.", "parts": [["The [[s:g4]] [[p:wp]]pawn for free."]] },
       {
         "remark": "Safe, if a bit passive.",
-        "parts": [["[[m:w:Nxd4]] was slightly better, taking the [[s:d4]] [[p:bp]]pawn."]]
+        "parts": [["That hits the [[p:bn]]knight on [[s:g4]], gaining time."]]
       },
       {
         "remark": "Wow! Giving up material for a winning attack.",
@@ -2722,9 +2722,7 @@
       { "remark": "Dans le mille.", "parts": [["Le [[p:wp]]pion [[s:g4]], gratuit."]] },
       {
         "remark": "Sûr, quoiqu’un peu passif.",
-        "parts": [
-          ["[[m:w:Nxd4]] était un peu plus précis : ce coup prenait le [[p:bp]]pion [[s:d4]]."]
-        ]
+        "parts": [["Ça attaque le [[p:bn]]cavalier en [[s:g4]], avec gain de temps."]]
       },
       {
         "remark": "Waouh ! Du matériel donné pour une attaque gagnante.",

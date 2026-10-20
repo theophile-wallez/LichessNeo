@@ -51,6 +51,14 @@ describe('reasonMarks', () => {
     expect(marks(chased, '4k3/8/8/8/8/8/8/1N2K3 w - - 0 1', 'b1c3')).toBeNull();
   });
 
+  it('draws a discovered attack’s line from the piece whose line the move opened', () => {
+    const uncovered = { kind: 'chases', piece: black('queen'), by: 'e2' } as const;
+    expect(marks(uncovered, '6k1/8/8/7q/8/5N2/4B3/6K1 w - - 0 1', 'f3e5')).toEqual([
+      { kind: 'link', from: 'e2', to: 'h5', tone: 'attack' },
+      { kind: 'ring', square: 'h5', tone: 'attack' },
+    ]);
+  });
+
   it('rings a piece saved, and a knight on its outpost with the pawn holding it', () => {
     expect(
       marks({ kind: 'saves', piece: white('bishop') }, '4k3/8/8/8/8/8/8/2B1K3 w - - 0 1', 'c1d2'),

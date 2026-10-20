@@ -19,6 +19,7 @@ import {
   rooksConnected,
   supportsCenter,
   takesCenter,
+  uncoveredOf,
 } from './pressure.ts';
 import { batteryPlan, batteryReady } from './battery.ts';
 import { discoveryOf } from './discovery.ts';
@@ -129,6 +130,10 @@ function pawnShape({ before, after, color, ply }: Play, from: Square, to: Square
   return ownRank(to, color) === 4 && !isEndgame(after) ? { kind: 'space' } : null;
 }
 
+// A piece pinned or chased, by the piece moved or a line it opened.
+const attackOf = ({ before, after, color }: Play, to: Square): Plan | null =>
+  pressureOf(after, to, color) ?? uncoveredOf(before, after, to);
+
 /** What the move does for the position, if it's one of the plans the coach names. */
 export function planOf(play: Play): Plan | null {
   const from = parseSquare(play.uci.slice(0, 2));
@@ -136,12 +141,8 @@ export function planOf(play: Play): Plan | null {
   if (!from || !to || /[x+]/.test(play.san) || play.san.startsWith('O-O')) return null;
   // A pawn that attacks a piece does so before it does anything for the king.
   if (play.after.get(to)?.role === 'pawn')
-    return (
-      pawnPlan(play, from, to) ??
-      pressureOf(play.after, to, play.color) ??
-      pawnShape(play, from, to)
-    );
-  const pressure = pressureOf(play.after, to, play.color);
+    return pawnPlan(play, from, to) ?? attackOf(play, to) ?? pawnShape(play, from, to);
+  const pressure = attackOf(play, to);
   if (pressure) return pressure;
   return (
     discoveryOf(play.before, play.after, [from, to]) ??

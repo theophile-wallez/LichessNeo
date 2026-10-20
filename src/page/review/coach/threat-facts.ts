@@ -88,7 +88,10 @@ function stopsText(input: LineFactInput, threat: Threat, menace: Menace): string
 export function parriedFact(input: LineFactInput, threat: Threat, matesOnly = false): Fact | null {
   const menace = realMenace(threat, input.move.before, input.them);
   if (!menace || (matesOnly && menace.mate === null)) return null;
-  if (stillThreatens(input.move, menace, input.them)) return null;
+  // A capture the reply still makes isn't stopped: the move answers it another way.
+  const [first] = menace.plies;
+  const played = first?.captured && first.uci === input.move.after.best;
+  if (played || stillThreatens(input.move, menace, input.them)) return null;
   const text = stopsText(input, threat, menace);
   return text === null ? null : said(text);
 }
@@ -134,14 +137,13 @@ function mateThreatText({ move, facts, me }: LineFactInput, first: string, mate:
     : oneOf(facts.threatensMate(first, mate), move);
 }
 
-// Whether the threat is a quiet move's piece taking one the reply moves away:
-// a piece chased, which the move's plan says, not a threat to win it. A
-// capture's plan isn't said, so its threat is.
-function stepsAway({ uci, san, after }: MoveVerdict, menace: Menace): boolean {
+// Whether the threat takes a piece of a quiet move's that the reply moves away:
+// a piece chased, by the piece moved or a line it opened, which the move's
+// plan says, not a threat to win it. A capture's plan isn't said, so its threat is.
+function stepsAway({ san, after }: MoveVerdict, menace: Menace): boolean {
   const [first] = menace.plies;
   if (san.includes('x') || !first?.captured || first.captured.role === 'pawn') return false;
-  const target = first.uci.slice(2, 4);
-  return first.uci.slice(0, 2) === uci.slice(2, 4) && after.best?.slice(0, 2) === target;
+  return after.best?.slice(0, 2) === first.uci.slice(2, 4);
 }
 
 /**

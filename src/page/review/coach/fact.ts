@@ -72,8 +72,9 @@ function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
   const race = raceFact({ move, sentences, before, after, theirs });
   if (race !== null) return race;
   // The opponent's move is read for what it threatens first, even a capture or a check;
-  // the reader's capture or check, for a mate it stops or threatens only.
-  const threat = sacrifice ? null : threatsFact(input, !input.theirs && /[x+]/.test(move.san));
+  // the reader's capture or check, and any promotion, for a mate it stops or threatens only.
+  const matesOnly = move.san.includes('=') || (!input.theirs && /[x+]/.test(move.san));
+  const threat = sacrifice ? null : threatsFact(input, matesOnly);
   if (threat !== null) return threat;
   const pinned = sacrifice ? pinnedOfferFact(input) : null;
   if (pinned !== null) return pinned;

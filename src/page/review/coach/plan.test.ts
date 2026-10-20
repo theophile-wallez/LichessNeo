@@ -145,6 +145,12 @@ describe('planFact', () => {
     );
   });
 
+  it('sees a chase by a line the move opens: a discovered attack', () => {
+    const queen = { role: 'queen', color: 'black' } as const;
+    const fen = '6k1/5ppp/8/7q/8/5N2/4B1PP/6K1 w - - 0 1';
+    expect(en.facts.chases(queen, null)).toContain(planOf({ fen, uci: 'f3e5', san: 'Ne5' }));
+  });
+
   it('sees no chase in a piece offered for one of the same worth', () => {
     const queen = { role: 'queen', color: 'black' } as const;
     const fen = '4k3/8/8/4q3/8/8/8/Q2RK3 w - - 0 1';

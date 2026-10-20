@@ -6,6 +6,7 @@ import {
   opposite,
   type Piece,
   PIECE_VALUES,
+  type Role,
   type Square,
   squareCoords,
 } from '#shared/chess/index.ts';
@@ -18,13 +19,13 @@ import { whichOne } from './which-one.ts';
 // What a move does to the other side's pieces, and what a rook's does on its
 // file or rank.
 
-/** A piece of the other side's the move pins, or newly attacks when it's worth more or undefended. */
 // The piece attacked, by its square when its side has more than one like it.
-function chases(board: Board, square: Square, piece: Piece): Plan {
+function chases(board: Board, square: Square, piece: Piece, by?: Square): Plan {
   const which = whichOne(board, square, piece);
-  return which === null ? { kind: 'chases', piece } : { kind: 'chases', piece, square: which };
+  return { kind: 'chases', piece, ...(which === null ? {} : { square: which }), ...(by && { by }) };
 }
 
+/** A piece of the other side's the move pins, or newly attacks when it's worth more or undefended. */
 export function pressureOf(after: Board, to: Square, color: Color): Plan | null {
   const them = opposite(color);
   for (const [square, piece] of after) {
@@ -36,6 +37,26 @@ export function pressureOf(after: Board, to: Square, color: Color): Plan | null 
   const square = attackedSquares(after, to).find(target => threatened(after, target, to));
   const piece = square && after.get(square);
   return square && piece ? chases(after, square, piece) : null;
+}
+
+const SLIDERS: ReadonlySet<Role> = new Set<Role>(['bishop', 'rook', 'queen']);
+
+/**
+ * A piece of the other side's that a slider of the mover's, its line opened by
+ * the move to `to`, newly attacks when it's worth more or undefended.
+ */
+export function uncoveredOf(before: Board, after: Board, to: Square): Plan | null {
+  const color = after.get(to)?.color;
+  for (const [square, slider] of after) {
+    if (square === to || slider.color !== color || !SLIDERS.has(slider.role)) continue;
+    const was = attackedSquares(before, square);
+    const target = attackedSquares(after, square).find(
+      attacked => !was.includes(attacked) && threatened(after, attacked, square),
+    );
+    const piece = target && after.get(target);
+    if (target && piece) return chases(after, target, piece, square);
+  }
+  return null;
 }
 
 // Whether the piece on `square` can take its attacker on `to`, worth as much

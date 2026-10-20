@@ -38,9 +38,17 @@ export type Plan =
   | { readonly kind: 'fightsCenter' }
   /** A pawn come to defend a central pawn. */
   | { readonly kind: 'supportsCenter' }
-  /** A piece of the other side's newly attacked, worth more than the attacker or undefended. */
-  /** A piece attacked; `square`, as a token, when its side has more than one like it. */
-  | { readonly kind: 'chases'; readonly piece: Piece; readonly square?: string }
+  /**
+   * A piece of the other side's newly attacked, worth more than the attacker or
+   * undefended; `square`, as a token, when its side has more than one like it,
+   * and `by`, the attacker's, when the move opened its line: a discovered attack.
+   */
+  | {
+      readonly kind: 'chases';
+      readonly piece: Piece;
+      readonly square?: string;
+      readonly by?: Square;
+    }
   /** A pawn of the other side's on `square`, newly attacked, which nothing defends. */
   | { readonly kind: 'attacksPawn'; readonly piece: Piece; readonly square: Square }
   /** A piece of the other side's newly pinned to `behind`. */

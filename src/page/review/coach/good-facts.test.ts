@@ -138,3 +138,66 @@ describe('a piece attacked that steps away', () => {
     expect(said).toBe('The [[p:bb]]bishop on [[s:b5]] has to move: that gains a tempo.');
   });
 });
+
+// The threat after a pass, the engine's line there, as the review searches it.
+const passedThreat = (fen: string, line: { readonly cp: number; readonly pv: string[] }) => {
+  const passed = passedFen(fen) ?? '';
+  return { fen: passed, record: toRecord(passed, { lines: [line] }) };
+};
+
+describe('a piece a line opened onto that steps away', () => {
+  // E00Edpmx, 11.Ne5 opens the e2 bishop's line onto the queen, which goes to h4.
+  const before: Analysed = {
+    fen: 'rnb2rk1/ppp1bppp/4p3/7q/2PP4/5N2/PP1BBPPP/R2Q1RK1 w - - 5 11',
+    lines: [{ cp: 136, pv: ['f1e1', 'b8c6', 'a2a3', 'h5f5', 'd2c3'] }],
+  };
+  const after: Analysed = {
+    fen: 'rnb2rk1/ppp1bppp/4p3/4N2q/2PP4/8/PP1BBPPP/R2Q1RK1 b - - 6 11',
+    lines: [{ cp: -136, pv: ['h5h4', 'e5f3', 'h4h5', 'f1e1', 'a7a5'] }],
+  };
+  const threat = passedThreat(after.fen, { cp: 611, pv: ['e2h5', 'b8d7', 'e5d7', 'c8d7'] });
+
+  it('is said to be chased, not threatened', () => {
+    const move = playedBetween([21, before, after], 'f3e5');
+    const said = findings(move, en, { before: null, after: threat }).fact?.text;
+    expect(said).toBe('The [[p:bq]]queen has to move: that gains a tempo.');
+  });
+});
+
+describe('a capture the move lets the opponent make', () => {
+  // E00Edpmx, 50...a3 leaves the h7 bishop to Bxh7, for a pawn that queens.
+  const before: Analysed = {
+    fen: '8/7b/5p1P/5B2/pk3K2/8/8/8 b - - 0 50',
+    lines: [{ cp: 502, pv: ['a4a3', 'f5h7', 'a3a2', 'h7g8', 'a2a1q'] }],
+  };
+  const after: Analysed = {
+    fen: '8/7b/5p1P/5B2/1k3K2/p7/8/8 w - - 0 51',
+    lines: [{ cp: -544, pv: ['f5h7', 'a3a2', 'f4f5', 'a2a1q', 'f5g6'] }],
+  };
+  const threat = passedThreat(before.fen, { cp: 651, pv: ['f5h7', 'b4b5', 'h7g8', 'b5a5'] });
+
+  it('isn’t said to stop it', () => {
+    const move = playedBetween([100, before, after], 'a4a3');
+    const said = findings(move, en, { before: threat, after: null }).fact?.text ?? '';
+    expect(said).not.toContain('Bxh7');
+  });
+});
+
+describe('a promotion', () => {
+  // 2QY43jLk, 46...f1=Q, which would then check on f7, winning the g7 pawn.
+  const before: Analysed = {
+    fen: '8/6P1/8/7K/p3k3/P7/5p2/8 b - - 0 46',
+    lines: [{ cp: 693, pv: ['f2f1q', 'g7g8q', 'f1h1', 'h5g6', 'h1g1'] }],
+  };
+  const after: Analysed = {
+    fen: '8/6P1/8/7K/p3k3/P7/8/5q2 w - - 0 47',
+    lines: [{ cp: -735, pv: ['g7g8r', 'f1h3', 'h5g6', 'h3e6', 'g6h7'] }],
+  };
+  const threat = passedThreat(after.fen, { cp: 1475, pv: ['f1f7', 'h5g4', 'f7g7', 'g4h3'] });
+
+  it('is said for itself, before what it threatens', () => {
+    const move = playedBetween([92, before, after], 'f2f1q');
+    const said = findings(move, en, { before: null, after: threat }).fact?.text;
+    expect(en.facts.promotes({ role: 'queen', color: 'black' })).toContain(said);
+  });
+});

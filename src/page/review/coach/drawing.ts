@@ -109,10 +109,11 @@ function pieceMarks(reason: Reason, { after, shown }: Scene, to: Square): Mark[]
   if (reason.kind === 'doubleThreat') return doubleThreatMarks(after, to, reason.target);
   if (reason.kind === 'pins') return pinMarks(after, to);
   if (reason.kind === 'chases' || reason.kind === 'guards') {
-    const target = attackedOne(after, to, reason.piece);
+    const by = reason.kind === 'chases' ? (reason.by ?? to) : to;
+    const target = attackedOne(after, by, reason.piece);
     if (!target) return null;
     // A line to the piece defended would read as the move going on there: its ring alone.
-    return reason.kind === 'chases' ? hits(to, [target], 'attack') : [ring(target, 'defense')];
+    return reason.kind === 'chases' ? hits(by, [target], 'attack') : [ring(target, 'defense')];
   }
   if (reason.kind === 'attacksPawn') return hits(to, [reason.square], 'attack');
   if (reason.kind === 'saves') return [ring(to, 'defense')];

@@ -56,8 +56,10 @@ opening's name and the page's asset URL.
   analysed, for all of its moves (`explain/threats.ts`); the coach thinks until
   its move's are in, so a comment says the same every time. A quiet move is
   read for the threat it stops or makes, not one whose piece the reply takes
-  (that's a trade); a capture or a check for a mate only,
-  and what stopping one gives up (`coach/threat-facts.ts`).
+  (that's a trade), nor a piece attacked that the reply moves away (its plan
+  says it's chased), nor a capture the reply still makes; a capture, a check
+  or a promotion for a mate only, and what stopping one gives up
+  (`coach/threat-facts.ts`).
 - `StreamState` (`key`, `shown`, `dropped`): the typing's progress, kept by
   the UI. `streamFor(state, parts)` starts it over for a new comment;
   `commentMarkup(parts, { stream, assets, language })` draws the words.
