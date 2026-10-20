@@ -28,7 +28,14 @@ const ScenarioSchema = z.object({
   results: z.array(z.string()),
 });
 
-const scenarios = z.array(ScenarioSchema).parse(legacy);
+// Changed on purpose since: one of ours, picked over Lichess's Pentatonic (its 'music'
+// theme), plays in its place, rather than leaving the moves to it.
+const CHANGED = new Set(['leaves the music theme alone']);
+
+const scenarios = z
+  .array(ScenarioSchema)
+  .parse(legacy)
+  .filter(scenario => !CHANGED.has(scenario.name));
 
 const describeResult = (value: unknown): string => {
   if (value === undefined) return 'undefined';
@@ -202,13 +209,18 @@ describe('hookSoundPlayer', () => {
       expect(played(calls)).toEqual(['ln-ext-move-self']);
     });
 
-    it('leaves the music theme to Lichess', async () => {
+    it('plays ours over Lichess’s Pentatonic, and none of its notes', async () => {
       const { sound, calls } = hooked();
       sound.theme = 'music';
-      renderBoard({ placement: '4k3/8/8/8/8/8/8/4K3', orientation: 'white' });
-      sound.saySan?.('Kd2', true);
+      renderBoard({ placement: '4k3/8/8/8/8/5n2/8/4K3', orientation: 'white' });
+      sound.saySan?.('Nf3', true);
       await vi.advanceTimersByTimeAsync(20);
-      expect(played(calls)).toEqual([]);
+      expect(played(calls)).toEqual(['ln-ext-move-opponent']);
+      sound.move({ san: 'Kd2', ply: 1, filter: 'music' });
+      sound.move({ san: 'Kd2', ply: 1 });
+      await vi.advanceTimersByTimeAsync(20);
+      expect(played(calls)).toEqual(['ln-ext-move-opponent', 'ln-ext-move-self']);
+      expect(calls.filter(call => call[0] === 'move')).toEqual([]);
     });
   });
 });

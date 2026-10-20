@@ -112,7 +112,10 @@ function hookMove(hook: Hook): void {
     // just before chessground asks for the board sound: SAN says exactly what it was.
     if (move.filter === 'music' && move.san)
       serverMove = { san: move.san, ply: move.ply, at: Date.now() };
-    if (move.filter === 'music' || sound.theme === 'music') return moveLichess(options);
+    // Pentatonic, Lichess's 'music' theme, plays its notes on these, which ours replace; the
+    // other themes play nothing on them.
+    if (move.filter === 'music')
+      return sound.theme === 'music' ? Promise.resolve() : moveLichess(options);
     const volume = move.volume ?? 1;
     if (move.san) return playSan(move.san, move.ply, volume);
     if (!move.name || move.name === 'move' || move.name === 'capture')
@@ -127,8 +130,7 @@ function hookSaySan({ sound, active, jumps }: Hook): void {
   if (!saySan) return;
   const sayLichess = saySan.bind(sound);
   sound.saySan = (san, cut, force): unknown => {
-    if (cut === true && sound.theme !== 'music' && active())
-      jumps.jumped(typeof san === 'string' ? san : undefined);
+    if (cut === true && active()) jumps.jumped(typeof san === 'string' ? san : undefined);
     return sayLichess(san, cut, force);
   };
 }
