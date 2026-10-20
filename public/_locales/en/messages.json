@@ -635,6 +635,18 @@
     "message": "The setup",
     "description": "An intro: the board's squares and pieces are laid out one by one."
   },
+  "introMarch": {
+    "message": "The march",
+    "description": "An intro: each army marches onto the board from its own edge."
+  },
+  "introWeave": {
+    "message": "The weave",
+    "description": "An intro: the board's ranks slide in one by one, from alternate sides, with their pieces."
+  },
+  "introWave": {
+    "message": "The wave",
+    "description": "An intro: a band of light runs up the board rank by rank, and the pieces hop as it passes."
+  },
   "introTicket": {
     "message": "The ticket",
     "description": "An intro: a ticket with both players tears in two."

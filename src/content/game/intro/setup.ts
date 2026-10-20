@@ -1,7 +1,8 @@
 import type { Role } from '#shared/chess/types.ts';
-import { createElement, setStyleProperty } from '#shared/dom.ts';
+import { setStyleProperty } from '#shared/dom.ts';
 import { timePieces } from './pieces.ts';
 import { ring, type Intro, type Stage } from './stage.ts';
+import { addUnderPieces, addWindow, copyDrawing } from './under-pieces.ts';
 
 // The setup: the board is laid out before the player's eyes. Its squares pop
 // up from the middle out, the pawns drop in a wave across the files, then the
@@ -19,31 +20,17 @@ const BACK_RANK: Readonly<Record<Exclude<Role, 'pawn'>, number>> = {
 
 const RANKS = 8;
 
-/** The squares, ours, each a window on the board's own drawing (cg-board::before). */
+/** The squares, ours, each a window on the board's own drawing. */
 function addSquares(stage: Stage): void {
-  const container = stage.board.parentElement;
-  if (!container) return;
-  const squares = createElement('div', { className: 'ln-ext-intro-squares' });
-  const drawing = getComputedStyle(stage.board, '::before');
-  setStyleProperty(squares, '--ln-ext-intro-board-image', drawing.backgroundImage);
-  setStyleProperty(squares, '--ln-ext-intro-board-size', drawing.backgroundSize);
-  setStyleProperty(squares, '--ln-ext-intro-board-position', drawing.backgroundPosition);
-  setStyleProperty(squares, '--ln-ext-intro-board-repeat', drawing.backgroundRepeat);
-  // Lichess's brightness and hue settings, on its own boards.
-  setStyleProperty(squares, '--ln-ext-intro-board-filter', drawing.filter);
+  const squares = addUnderPieces(stage, 'ln-ext-intro-squares');
+  if (!squares) return;
+  copyDrawing(stage, squares);
   for (let y = 0; y < RANKS; y++)
     for (let x = 0; x < RANKS; x++) {
-      const square = createElement('i', { className: 'ln-ext-intro-squares__square' });
-      square.append(createElement('i'));
-      setStyleProperty(square, '--ln-ext-intro-x', String(x));
-      setStyleProperty(square, '--ln-ext-intro-y', String(y));
+      const square = addWindow(squares, 'ln-ext-intro-squares__square', x, y);
       const distance = Math.hypot(x - 3.5, y - 3.5);
       setStyleProperty(square, '--ln-ext-intro-delay', `${Math.round(40 + distance * 70)}ms`);
-      squares.append(square);
     }
-  // First in the container, as page/backlit's canvas: over the board, under the pieces.
-  container.prepend(squares);
-  stage.onEnd(() => squares.remove());
 }
 
 function dropPieces(stage: Stage): void {

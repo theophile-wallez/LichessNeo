@@ -476,6 +476,15 @@
   "introSetup": {
     "message": "La mise en place"
   },
+  "introMarch": {
+    "message": "La marche des armées"
+  },
+  "introWeave": {
+    "message": "Le tissage"
+  },
+  "introWave": {
+    "message": "La ola"
+  },
   "introTicket": {
     "message": "Le billet"
   },

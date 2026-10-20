@@ -3,10 +3,13 @@ import { camps } from './camps.ts';
 import { credits } from './credits.ts';
 import { FACEOFF_MS, faceoffBoard, playFaceoff } from './faceoff.ts';
 import type { IntroKind } from './kinds.ts';
+import { march } from './march.ts';
 import { salute } from './salute.ts';
 import { setup } from './setup.ts';
 import { boxOf, type GameSetup, type Intro, type Side, type Stage } from './stage.ts';
 import { ticket } from './ticket.ts';
+import { wave } from './wave.ts';
+import { weave } from './weave.ts';
 
 // Plays an intro over a board and its players' bars: the game page's, or the
 // settings' preview of it (content/settings/intro-preview.ts).
@@ -16,6 +19,9 @@ export type ShownKind = Exclude<IntroKind, 'off'>;
 const INTROS: Readonly<Record<Exclude<ShownKind, 'faceoff'>, Intro>> = {
   salute,
   setup,
+  march,
+  weave,
+  wave,
   ticket,
   camps,
   credits,

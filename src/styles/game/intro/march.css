@@ -1,0 +1,47 @@
+/* The march (content/game/intro/march.ts): each army comes on from its own edge, cut by the
+ * board's, two squares in two steps with a squash on each, then its player's avatar pops. */
+
+:is(.is2d [data-ln-ext-intro='march'], [data-ln-ext-intro='march'] .is2d) cg-board {
+  overflow: hidden !important;
+}
+
+/* `--ln-ext-intro-side` is -1 for the top army, which comes down, 1 for the bottom one. */
+:is(.is2d [data-ln-ext-intro='march'], [data-ln-ext-intro='march'] .is2d) cg-board piece {
+  transform-origin: var(--ln-ext-intro-origin, 50% 88%);
+  animation: ln-ext-intro-march 720ms linear var(--ln-ext-intro-delay, 0ms) both !important;
+}
+
+@keyframes ln-ext-intro-march {
+  0% {
+    translate: 0 calc(var(--ln-ext-intro-side, 1) * 200%);
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.3, 0, 0.3, 1);
+  }
+  36% {
+    translate: 0 calc(var(--ln-ext-intro-side, 1) * 100%);
+    scale: 1.08 0.9;
+    animation-timing-function: ease-out;
+  }
+  48% {
+    translate: 0 calc(var(--ln-ext-intro-side, 1) * 100%);
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.3, 0, 0.3, 1);
+  }
+  84% {
+    translate: 0 0;
+    scale: 1.08 0.9;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+[data-ln-ext-intro='march'] :is(.ruser-bottom, .ln-ext-intro-preview__bar--bottom)::before {
+  animation: ln-ext-intro-avatar-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 620ms !important;
+}
+
+[data-ln-ext-intro='march'] :is(.ruser-top, .ln-ext-intro-preview__bar--top)::before {
+  animation: ln-ext-intro-avatar-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 720ms !important;
+}

@@ -1,0 +1,52 @@
+/* The wave (content/game/intro/wave.ts): a band of light runs up the board, rank by rank, under
+ * the pieces, which hop as it passes; the player's avatar pops as it sets off, the opponent's as
+ * it arrives. */
+
+.ln-ext-intro-wave {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Two ranks high, soft at its edges, on its own rank's middle. A pale cyan, written out as the
+ * board's own colors are: white would vanish on the light squares. */
+.ln-ext-intro-wave > i {
+  position: absolute;
+  left: 0;
+  top: calc(var(--ln-ext-intro-y) * 12.5% - 6.25%);
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(transparent, #8be9fd 35% 65%, transparent);
+  opacity: 0;
+  animation: ln-ext-intro-wave-light 380ms ease-out var(--ln-ext-intro-delay) !important;
+}
+
+:is(.is2d [data-ln-ext-intro='wave'], [data-ln-ext-intro='wave'] .is2d) cg-board piece {
+  transform-origin: var(--ln-ext-intro-origin, 50% 88%);
+  animation: ln-ext-intro-wave-hop 420ms cubic-bezier(0.22, 1, 0.36, 1)
+    var(--ln-ext-intro-delay, 0ms) !important;
+}
+
+@keyframes ln-ext-intro-wave-light {
+  30% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes ln-ext-intro-wave-hop {
+  40% {
+    translate: 0 -18%;
+    scale: 1.06;
+  }
+}
+
+[data-ln-ext-intro='wave'] :is(.ruser-bottom, .ln-ext-intro-preview__bar--bottom)::before {
+  animation: ln-ext-intro-avatar-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 60ms !important;
+}
+
+[data-ln-ext-intro='wave'] :is(.ruser-top, .ln-ext-intro-preview__bar--top)::before {
+  animation: ln-ext-intro-avatar-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 640ms !important;
+}

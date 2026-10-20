@@ -20,8 +20,15 @@ export interface BoardPiece {
 const cellOf = (offset: number, size: number): number =>
   size > 0 ? Math.min(7, Math.max(0, Math.round((offset / size) * 8))) : 0;
 
-/** Times each piece of the board at `delayOf` its place, in milliseconds. */
-export function timePieces(stage: Stage, delayOf: (piece: BoardPiece) => number): void {
+/**
+ * Times each piece of the board at `delayOf` its place, in milliseconds, and sends it `sideOf`
+ * it, -1 or 1, for the intros that bring it from off the board.
+ */
+export function timePieces(
+  stage: Stage,
+  delayOf: (piece: BoardPiece) => number,
+  sideOf?: (piece: BoardPiece) => number,
+): void {
   if (!stage.board.closest('.is2d')) return;
   const { squares } = stage;
   for (const element of queryAll(stage.board, 'piece', HTMLElement)) {
@@ -39,10 +46,13 @@ export function timePieces(stage: Stage, delayOf: (piece: BoardPiece) => number)
       '--ln-ext-intro-origin',
       `calc(${left}px + 50%) calc(${top}px + 88%)`,
     );
-    setStyleProperty(element, '--ln-ext-intro-delay', `${delayOf({ piece, box, x, y })}ms`);
+    const boardPiece = { piece, box, x, y };
+    setStyleProperty(element, '--ln-ext-intro-delay', `${delayOf(boardPiece)}ms`);
+    if (sideOf) setStyleProperty(element, '--ln-ext-intro-side', String(sideOf(boardPiece)));
     stage.onEnd(() => {
       setStyleProperty(element, '--ln-ext-intro-origin', null);
       setStyleProperty(element, '--ln-ext-intro-delay', null);
+      setStyleProperty(element, '--ln-ext-intro-side', null);
     });
   }
 }

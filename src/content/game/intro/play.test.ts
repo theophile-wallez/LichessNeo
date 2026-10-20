@@ -58,6 +58,29 @@ const width = (selector: string): number =>
   Number.parseFloat(queryOne(document, selector, HTMLElement)?.style.width ?? '');
 const middle = (selector: string): number => left(selector) + width(selector) / 2;
 
+// The scene's pieces' squares, on a board 400px wide: e8, a7, a2 and e1.
+const FILES = [4, 0, 0, 4];
+const RANKS = [0, 1, 6, 7];
+
+const putAt = (element: Element, x: number, y: number, size: number): void => {
+  vi.spyOn(element, 'getBoundingClientRect').mockReturnValue(
+    DOMRect.fromRect({ x: x * 50, y: y * 50, width: size, height: size }),
+  );
+};
+
+function placePieces(shown: Scene): void {
+  putAt(shown.board, 0, 0, 400);
+  for (const [i, piece] of queryAll(shown.board, 'piece', HTMLElement).entries()) {
+    putAt(piece, FILES[i] ?? 0, RANKS[i] ?? 0, 50);
+  }
+}
+
+// What an intro set on each of `parent`'s `selector`, in the order of the markup.
+const timings = (parent: ParentNode, selector: string, name: 'delay' | 'side'): number[] =>
+  queryAll(parent, selector, HTMLElement).map(element =>
+    Number.parseInt(element.style.getPropertyValue(`--ln-ext-intro-${name}`), 10),
+  );
+
 beforeEach(() => {
   vi.useFakeTimers();
   vi.stubGlobal('chrome', {
@@ -76,6 +99,9 @@ describe('an intro', () => {
   it.each<[ShownKind, number]>([
     ['salute', 2460],
     ['setup', 2250],
+    ['march', 1150],
+    ['weave', 1050],
+    ['wave', 1150],
     ['ticket', 2450],
     ['camps', 2000],
     ['credits', 2650],
@@ -170,12 +196,63 @@ describe('an intro', () => {
     expect(queryAll(shown.board, 'piece[style*="--ln-ext-intro"]', HTMLElement)).toEqual([]);
   });
 
-  it('leaves a 3D board’s pieces where they stand', () => {
+  it.each<ShownKind>(['setup', 'march', 'weave', 'wave'])(
+    'leaves a 3D board’s pieces where they stand for %s',
+    kind => {
+      const shown = scene();
+      queryOne(document, '.is2d', HTMLElement)?.classList.remove('is2d');
+      playIntro(shown, kind);
+      expect(document.querySelector('cg-container > div')).toBeNull();
+      expect(queryAll(shown.board, 'piece[style*="--ln-ext-intro"]', HTMLElement)).toEqual([]);
+    },
+  );
+
+  it('marches each army in from its own edge, file by file, the player’s first', () => {
     const shown = scene();
-    queryOne(document, '.is2d', HTMLElement)?.classList.remove('is2d');
-    playIntro(shown, 'setup');
-    expect(document.querySelector('.ln-ext-intro-squares')).toBeNull();
+    placePieces(shown);
+    playIntro(shown, 'march');
+    expect(timings(shown.board, 'piece', 'side')).toEqual([-1, -1, 1, 1]);
+    const [blackKing = 0, blackPawn = 0, whitePawn = 0, whiteKing = 0] = timings(
+      shown.board,
+      'piece',
+      'delay',
+    );
+    expect(whitePawn).toBeLessThan(whiteKing);
+    expect(blackPawn).toBeLessThan(blackKing);
+    expect(whitePawn).toBeLessThan(blackPawn);
+    expect(whiteKing).toBeLessThan(blackKing);
+    vi.runAllTimers();
     expect(queryAll(shown.board, 'piece[style*="--ln-ext-intro"]', HTMLElement)).toEqual([]);
+  });
+
+  it('weaves the board rank by rank, from alternate sides, each piece with its rank', () => {
+    const shown = scene();
+    placePieces(shown);
+    playIntro(shown, 'weave');
+    const ranks = '.ln-ext-intro-squares > .ln-ext-intro-squares__rank';
+    expect(timings(document, ranks, 'side')).toEqual([-1, 1, -1, 1, -1, 1, -1, 1]);
+    const rankDelays = timings(document, ranks, 'delay');
+    expect(rankDelays).toEqual(rankDelays.toSorted((first, second) => first - second));
+    expect(timings(shown.board, 'piece', 'delay')).toEqual(RANKS.map(y => rankDelays[y]));
+    expect(timings(shown.board, 'piece', 'side')).toEqual([-1, 1, -1, 1]);
+    vi.runAllTimers();
+    expect(document.querySelector('.ln-ext-intro-squares')).toBeNull();
+  });
+
+  it('runs the wave up from the player’s side, each piece hopping after its rank lights', () => {
+    const shown = scene();
+    placePieces(shown);
+    playIntro(shown, 'wave');
+    const lightDelays = timings(document, '.ln-ext-intro-wave > i', 'delay');
+    expect(lightDelays).toHaveLength(8);
+    expect(lightDelays).toEqual(lightDelays.toSorted((first, second) => second - first));
+    const pieceDelays = timings(shown.board, 'piece', 'delay');
+    for (const [i, y] of RANKS.entries()) {
+      expect(pieceDelays[i]).toBeGreaterThan(lightDelays[y] ?? Infinity);
+      expect(pieceDelays[i]).toBeLessThan(lightDelays[y - 1] ?? Infinity);
+    }
+    vi.runAllTimers();
+    expect(document.querySelector('.ln-ext-intro-wave')).toBeNull();
   });
 
   it('washes each half in its player’s hue for the two camps', () => {

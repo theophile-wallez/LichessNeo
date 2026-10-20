@@ -1,0 +1,49 @@
+/* The weave (content/game/intro/weave.ts): each rank of the board slides in from one side, the
+ * next from the other, carrying its pieces, from the top down. The ranks are windows of the
+ * setup's layer onto the board's drawing (setup.css), the pieces cut by the board's edge. */
+
+.ln-ext-intro-squares__rank {
+  position: absolute;
+  left: 0;
+  top: calc(var(--ln-ext-intro-y) * 12.5%);
+  width: 100%;
+  height: 12.5%;
+  overflow: hidden;
+  animation: ln-ext-intro-weave-rank 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--ln-ext-intro-delay)
+    both !important;
+}
+
+.ln-ext-intro-squares__rank > i {
+  position: absolute;
+  left: 0;
+  top: calc(var(--ln-ext-intro-y) * -100%);
+  width: 100%;
+  height: 800%;
+  background-image: var(--ln-ext-intro-board-image);
+  background-size: var(--ln-ext-intro-board-size);
+  background-position: var(--ln-ext-intro-board-position);
+  background-repeat: var(--ln-ext-intro-board-repeat);
+  filter: var(--ln-ext-intro-board-filter);
+}
+
+:is(.is2d [data-ln-ext-intro='weave'], [data-ln-ext-intro='weave'] .is2d) cg-board {
+  overflow: hidden !important;
+}
+
+/* A piece is a square wide, its rank eight: with the same easing, they move as one. */
+:is(.is2d [data-ln-ext-intro='weave'], [data-ln-ext-intro='weave'] .is2d) cg-board piece {
+  animation: ln-ext-intro-weave-piece 560ms cubic-bezier(0.22, 1, 0.36, 1)
+    var(--ln-ext-intro-delay, 0ms) both !important;
+}
+
+@keyframes ln-ext-intro-weave-rank {
+  from {
+    translate: calc(var(--ln-ext-intro-side, 1) * 100%) 0;
+  }
+}
+
+@keyframes ln-ext-intro-weave-piece {
+  from {
+    translate: calc(var(--ln-ext-intro-side, 1) * 800%) 0;
+  }
+}
