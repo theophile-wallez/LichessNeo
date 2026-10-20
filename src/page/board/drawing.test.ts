@@ -16,6 +16,12 @@ const layers = (element: SVGElement): string[][] =>
     [...layer.children].map(stroke => stroke.getAttribute('class') ?? ''),
   );
 
+/** The points of a line's mask and dots. */
+const linePoints = (link: Mark, whiteAtBottom = true): string[] =>
+  [...svg([link], whiteAtBottom).querySelectorAll('.ln-ext-drawing__link polyline')].map(
+    line => line.getAttribute('points') ?? '',
+  );
+
 describe('drawingMarkup', () => {
   it('draws nothing of no marks', () => {
     expect(drawingMarkup([], true).value).toBe('');
@@ -119,12 +125,21 @@ describe('the coach’s lines', () => {
       '.ln-ext-drawing__link',
     );
     const reveal = link?.querySelector('mask .ln-ext-drawing__reveal');
-    const dots = link?.querySelector(':scope > line');
+    const dots = link?.querySelector(':scope > polyline');
     expect(reveal?.getAttribute('pathLength')).toBe('1');
     expect(reveal?.getAttribute('stroke-linecap')).toBe('round');
     expect(dots?.getAttribute('mask')).toBe(`url(#${link?.querySelector('mask')?.id})`);
-    expect(dots?.getAttribute('stroke-dasharray')).toBe('0.001 0.24');
+    expect(dots?.getAttribute('stroke-dasharray')).toBe('0.001 0.249');
     expect(dots?.getAttribute('stroke')).toBe(`rgb(${THREAT_COLOR})`);
+  });
+
+  it('bends a knight’s line as its arrow, the long leg first, and keeps others straight', () => {
+    const knight: Mark = { kind: 'link', from: 'g1', to: 'f3', tone: 'attack' };
+    expect(linePoints(knight)).toEqual(Array(2).fill('6.5,7.5 6.5,5.5 5.5,5.5'));
+    expect(linePoints(knight, false)).toEqual(Array(2).fill('1.5,0.5 1.5,2.5 2.5,2.5'));
+    expect(linePoints({ kind: 'link', from: 'b2', to: 'e5', tone: 'attack' })).toEqual(
+      Array(2).fill('1.5,6.5 4.5,3.5'),
+    );
   });
 
   it('gives each line a mask of its own', () => {

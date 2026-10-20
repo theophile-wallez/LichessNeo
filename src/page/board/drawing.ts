@@ -2,7 +2,7 @@ import type { Square } from '#shared/chess/types.ts';
 import type { Point } from '#shared/geometry.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { PLAN_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
-import { squareCenter, squareOnScreen } from './geometry.ts';
+import { arrowPath, squareCenter, squareOnScreen } from './geometry.ts';
 import type { Mark, MarkTone, ReviewArrow } from './review-arrows.ts';
 import { runMarkup } from './run.ts';
 
@@ -42,13 +42,19 @@ function cellsMarkup(squares: readonly Square[], color: string, whiteAtBottom: b
 }
 
 // Dots, as an arrow's solid stroke is a move: a line of attack is no move.
-// A solid line under a mask draws them in from the start, its round caps
-// keeping the end dots whole.
+// A knight's turns as its arrow does, and a quarter square apart, a dot sits
+// on the corner. A solid line under a mask draws them in from the start, its
+// round caps keeping the end dots whole.
 function linkMarkup(link: Link, id: number, whiteAtBottom: boolean): SafeHtml {
-  const [x1, y1] = squareCenter(link.from, whiteAtBottom);
-  const [x2, y2] = squareCenter(link.to, whiteAtBottom);
+  const { from, corner, tip } = arrowPath(
+    squareCenter(link.from, whiteAtBottom),
+    squareCenter(link.to, whiteAtBottom),
+  );
+  const points = (corner ? [from, corner, tip] : [from, tip])
+    .map(([x, y]) => `${x},${y}`)
+    .join(' ');
   const mask = `ln-ext-drawing-link-${id}`;
-  return html`<g class="ln-ext-drawing__link"><mask id="${mask}" maskUnits="userSpaceOnUse"><line class="ln-ext-drawing__reveal" pathLength="1" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#fff" stroke-width="0.4" stroke-linecap="round"/></mask><line mask="url(#${mask})" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgb(${TONES[link.tone]})" stroke-width="0.14" stroke-linecap="round" stroke-dasharray="0.001 0.24"/></g>`;
+  return html`<g class="ln-ext-drawing__link"><mask id="${mask}" maskUnits="userSpaceOnUse"><polyline class="ln-ext-drawing__reveal" pathLength="1" points="${points}" fill="none" stroke="#fff" stroke-width="0.4" stroke-linecap="round" stroke-linejoin="round"/></mask><polyline mask="url(#${mask})" points="${points}" fill="none" stroke="rgb(${TONES[link.tone]})" stroke-width="0.14" stroke-linecap="round" stroke-dasharray="0.001 0.249"/></g>`;
 }
 
 // Fine diagonal stripes over the square: a zone the king can't enter, which
