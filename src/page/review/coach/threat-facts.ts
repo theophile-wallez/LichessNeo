@@ -134,6 +134,16 @@ function mateThreatText({ move, facts, me }: LineFactInput, first: string, mate:
     : oneOf(facts.threatensMate(first, mate), move);
 }
 
+// Whether the threat is a quiet move's piece taking one the reply moves away:
+// a piece chased, which the move's plan says, not a threat to win it. A
+// capture's plan isn't said, so its threat is.
+function stepsAway({ uci, san, after }: MoveVerdict, menace: Menace): boolean {
+  const [first] = menace.plies;
+  if (san.includes('x') || !first?.captured || first.captured.role === 'pawn') return false;
+  const target = first.uci.slice(2, 4);
+  return first.uci.slice(0, 2) === uci.slice(2, 4) && after.best?.slice(0, 2) === target;
+}
+
 /**
  * What a good move threatens, were the opponent to pass: mate, or material,
  * new with it. A capture's point is its capture, but for a mate.
@@ -153,7 +163,7 @@ export function threatensFact(
     const mate = menace.mate === 1 ? mateLine(threat.record, threat.fen, null) : null;
     return said(mateThreatText(input, mate ?? first, menace.mate));
   }
-  if (matesOnly || wasThere(move, menace)) return null;
+  if (matesOnly || wasThere(move, menace) || stepsAway(move, menace)) return null;
   const material = menace.won && facts.material(menace.won);
   return material ? said(oneOf(facts.threatens(first, material), move)) : null;
 }

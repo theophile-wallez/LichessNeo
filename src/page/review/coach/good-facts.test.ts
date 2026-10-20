@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { type Analysed, playedBetween } from '#page/review/fixtures/played.ts';
 import { en } from '#page/review/i18n/en.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
+import { toRecord } from '#page/review/engine/record.ts';
 import { findings } from './fact.ts';
+import { passedFen } from './threat.ts';
 
 // What a good move is said to do, read off real games' positions and the
 // engine's lines there: the tactic before the error it punishes, a mate under
@@ -111,5 +113,28 @@ describe('a mate under way', () => {
   it('is played out for the side mated, whose move can’t stop it', () => {
     const answer = playedBetween([57, check, fled], 'g1f1');
     expect(en.facts.mateUnstoppable('[[m:b:Nd2#]]')).toContain(textOf(answer));
+  });
+});
+
+describe('a piece attacked that steps away', () => {
+  // 17.a4 attacks the bishop on b5, which goes to a6: it's chased, not won.
+  const before: Analysed = {
+    fen: 'r2q1rk1/3n1pbp/2p1p1p1/pbNp4/3P4/4B1P1/PP2PPBP/2RQR1K1 w - - 10 17',
+    lines: [{ cp: 21, pv: ['a2a4', 'b5a6', 'c5a6', 'a8a6', 'e3f4'] }],
+  };
+  const after: Analysed = {
+    fen: 'r2q1rk1/3n1pbp/2p1p1p1/pbNp4/P2P4/4B1P1/1P2PPBP/2RQR1K1 b - - 0 17',
+    lines: [{ cp: -13, pv: ['b5a6', 'c5a6', 'a8a6', 'e3f4', 'd8b6'] }],
+  };
+  const passed = passedFen(after.fen) ?? '';
+  const threat = {
+    fen: passed,
+    record: toRecord(passed, { lines: [{ cp: 250, pv: ['a4b5', 'c6b5', 'e3f4'] }] }),
+  };
+
+  it('is said to be chased, not threatened', () => {
+    const move = playedBetween([33, before, after], 'a2a4');
+    const said = findings(move, en, { before: null, after: threat }).fact?.text;
+    expect(said).toBe('The [[p:bb]]bishop on [[s:b5]] has to move: that gains a tempo.');
   });
 });

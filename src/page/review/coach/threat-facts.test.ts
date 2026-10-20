@@ -150,17 +150,22 @@ describe('threatensFact', () => {
     uci: 'c1d2',
     san: 'Bd2',
     to: '6k1/5ppp/8/8/1n6/8/3B1PPP/6K1 b - - 1 1',
-    after: [{ cp: 0 }, ['b4c6', 'g1f1']],
+    after: [{ cp: 0 }, ['g8f8', 'g1f1']],
   });
+  const aimed = threat(bishopAims.position.fen, { cp: 300 }, ['d2b4', 'g8f8', 'g1f1']);
 
   it('says what a quiet move threatens to win', () => {
-    const aimed = threat(bishopAims.position.fen, { cp: 300 }, ['d2b4', 'g8f8', 'g1f1']);
     expect(threatensFact(input(bishopAims), aimed)?.text).toBe(
       'Now [[m:w:Bxb4]] is threatened, winning a [[p:bn]]knight.',
     );
     expect(threatensFact(input(bishopAims, fr), aimed)?.text).toBe(
       'Au coup suivant, [[m:w:Bxb4]] gagnerait un [[p:bn]]cavalier.',
     );
+  });
+
+  it('says nothing of a piece that steps away: the plan says it’s chased', () => {
+    const chased = { ...bishopAims, after: record({ cp: 0 }, ['b4c6', 'g1f1']) };
+    expect(threatensFact(input(chased), aimed)).toBeNull();
   });
 
   it('says nothing of a threat that was already there', () => {
