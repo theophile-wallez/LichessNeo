@@ -40,6 +40,9 @@ export const REVIEW_COLOR = '159,207,63';
 export const THREAT_COLOR = '235,88,72';
 /** The coach's drawing of a plan, in amber: it stands out on blue boards and brown ones alike. */
 export const PLAN_COLOR = '250,180,40';
+/** The coach's runs along a line: the computer level slider's blue (styles/pages/level-slider.css) at the piece, our purple at the ends. */
+export const RUN_COLOR = '79,140,255';
+export const RUN_END_COLOR = '139,92,246';
 /** The variation the analysis board follows, among several, in our blue; the others in grey. */
 export const VARIATION_PICKED_COLOR = '72,193,249';
 export const VARIATION_COLOR = '200,200,200';

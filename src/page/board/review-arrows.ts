@@ -19,6 +19,13 @@ export type Mark =
   /** A passed pawn's square, grown from its corner `from` to `to`, on the queening rank. */
   | { readonly kind: 'area'; readonly from: Square; readonly to: Square }
   | { readonly kind: 'cells'; readonly squares: readonly Square[]; readonly tone: MarkTone }
+  /** Squares in a line out from the piece on `from`, on either side: a rook's file, a pawn's road. */
+  | {
+      readonly kind: 'run';
+      readonly from: Square;
+      readonly squares: readonly Square[];
+      readonly tone: MarkTone;
+    }
   | { readonly kind: 'ring'; readonly square: Square; readonly tone: MarkTone }
   /** A line between two squares' centers: an attack, a defense, a pin. */
   | { readonly kind: 'link'; readonly from: Square; readonly to: Square; readonly tone: MarkTone }

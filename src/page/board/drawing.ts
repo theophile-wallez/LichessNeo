@@ -4,6 +4,7 @@ import { html, type SafeHtml } from '#shared/html.ts';
 import { PLAN_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
 import { squareCenter, squareOnScreen } from './geometry.ts';
 import type { Mark, MarkTone, ReviewArrow } from './review-arrows.ts';
+import { runMarkup } from './run.ts';
 
 // The coach's drawing, under the pieces, in square units from the board's top
 // left corner as shown. Each stroke comes in after the one before it
@@ -18,7 +19,7 @@ const TONES: Readonly<Record<MarkTone, string>> = {
 type Link = Extract<Mark, { readonly kind: 'link' }>;
 
 // Drawn in this order, the rings over the lines they end on.
-const LAYERS: readonly Mark['kind'][] = ['area', 'cells', 'link', 'barred', 'ring'];
+const LAYERS: readonly Mark['kind'][] = ['area', 'cells', 'run', 'link', 'barred', 'ring'];
 
 const at = (square: Square, whiteAtBottom: boolean): Point => squareOnScreen(square, whiteAtBottom);
 
@@ -90,6 +91,7 @@ function markMarkup(mark: Mark, whiteAtBottom: boolean, index: number): SafeHtml
   if (mark.kind === 'area') return areaMarkup(mark.from, mark.to, whiteAtBottom);
   const color = TONES[mark.tone];
   if (mark.kind === 'cells') return cellsMarkup(mark.squares, color, whiteAtBottom);
+  if (mark.kind === 'run') return runMarkup(mark, whiteAtBottom, index);
   if (mark.kind === 'link') return linkMarkup(mark, index, whiteAtBottom);
   if (mark.kind === 'barred') return barredMarkup(mark.square, color, whiteAtBottom, index);
   return ringMarkup(mark.square, color, whiteAtBottom);

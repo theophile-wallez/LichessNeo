@@ -16,7 +16,7 @@ import { discoveryMarks } from './discovery.ts';
 import { doubleThreatMarks } from './double-threat.ts';
 import type { Reason } from './idea.ts';
 import { oppositionMarks } from './opposition.ts';
-import { kingDistance, pathOf, squareMarks } from './pawn-square.ts';
+import { pathOf, squareMarks } from './pawn-square.ts';
 import { ownRank } from './structure.ts';
 
 // What the coach draws on the board of what a move does (page/board/drawing.ts):
@@ -66,16 +66,15 @@ const fileOf = (square: Square): Square[] =>
 const rankOf = (square: Square): Square[] =>
   Array.from({ length: 8 }, (_, file) => squareAt(file, squareCoords(square)[1]) ?? []).flat();
 
-/** The squares of a rook's file or rank but its own, nearest first: the dots come in from the rook. */
-const outFrom = (rook: Square, squares: readonly Square[]): Square[] =>
-  squares
-    .filter(square => square !== rook)
-    .toSorted((first, second) => kingDistance(rook, first) - kingDistance(rook, second));
+/** A rook's file or rank, which lights up each way out from the rook. */
+const runFrom = (rook: Square, line: readonly Square[]): Mark[] => [
+  { kind: 'run', from: rook, squares: line.filter(square => square !== rook), tone: 'plan' },
+];
 
 /** A passed pawn's road to queening, from the pawn on `pawn`. */
 function roadMarks(board: Board, pawn: Square): Mark[] {
   const color = board.get(pawn)?.color;
-  return color ? [{ kind: 'cells', squares: pathOf(pawn, color), tone: 'plan' }] : [];
+  return color ? [{ kind: 'run', from: pawn, squares: pathOf(pawn, color), tone: 'plan' }] : [];
 }
 
 // The rook's passed pawn: the first pawn of its own ahead of it on its file.
@@ -160,10 +159,8 @@ export function reasonMarks(reason: Reason | null, scene: Scene): Mark[] | null 
   if (reason.kind === 'opposition') return oppositionMarks(scene.after);
   if (reason.kind === 'passedPawn') return roadMarks(scene.after, to);
   if (reason.kind === 'behindPasser') return behindMarks(scene.after, to);
-  if (ON_FILE.has(reason.kind))
-    return [{ kind: 'cells', squares: outFrom(to, fileOf(to)), tone: 'plan' }];
-  if (reason.kind === 'seventhRank')
-    return [{ kind: 'cells', squares: outFrom(to, rankOf(to)), tone: 'plan' }];
+  if (ON_FILE.has(reason.kind)) return runFrom(to, fileOf(to));
+  if (reason.kind === 'seventhRank') return runFrom(to, rankOf(to));
   if (reason.kind === 'luft') return [{ kind: 'cells', squares: [from], tone: 'defense' }];
   return pieceMarks(reason, scene, to);
 }

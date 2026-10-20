@@ -27,11 +27,13 @@ describe('drawingMarkup', () => {
       { kind: 'link', from: 'b2', to: 'e5', tone: 'attack' },
       { kind: 'barred', square: 'f8', tone: 'attack' },
       { kind: 'cells', squares: ['b7', 'b8'], tone: 'plan' },
+      { kind: 'run', from: 'd1', squares: ['d2', 'd3'], tone: 'plan' },
       { kind: 'area', from: 'a5', to: 'd8' },
     ]);
     expect(layers(drawn)).toEqual([
       ['ln-ext-drawing__area'],
       ['ln-ext-drawing__cell', 'ln-ext-drawing__cell'],
+      ['ln-ext-drawing__run'],
       ['ln-ext-drawing__link'],
       ['ln-ext-drawing__barred'],
       ['ln-ext-drawing__ring'],

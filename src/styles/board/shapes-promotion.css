@@ -48,7 +48,7 @@ svg.ln-ext-marks {
 }
 
 /* The coach's drawing (page/board/drawing.ts): its layers come in one after the other, the pawn's
- * square at once, the dots one after the other, the lines drawn from their start. */
+ * square at once, the dots one after the other, the runs' squares and the lines from their start. */
 .ln-ext-drawing__layer {
   --ln-ext-delay: calc(var(--ln-ext-step) * 0.15s);
 }
@@ -73,6 +73,75 @@ svg.ln-ext-marks {
   transform-box: fill-box;
   transform-origin: center;
   animation: ln-ext-drawing-pop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) var(--ln-ext-delay) both;
+}
+
+/* A run (page/board/run.ts): the rail comes in, and on each side the knob runs out from the
+ * piece on the slider's easing, filling the rail behind it and lighting each notch it passes;
+ * then the rail and the knobs go and the notches stay. */
+.ln-ext-drawing__rail {
+  animation:
+    ln-ext-fade 0.15s ease-out var(--ln-ext-delay) both,
+    ln-ext-drawing-out 0.3s ease-in calc(var(--ln-ext-delay) + var(--ln-ext-rest)) forwards;
+}
+
+.ln-ext-drawing__fill {
+  stroke-dasharray: 1;
+  animation:
+    ln-ext-drawing-stroke var(--ln-ext-run) cubic-bezier(0.22, 1, 0.36, 1) var(--ln-ext-delay) both,
+    ln-ext-drawing-out 0.3s ease-in calc(var(--ln-ext-delay) + var(--ln-ext-rest)) forwards;
+}
+
+.ln-ext-drawing__knob {
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0.03px 0.06px rgba(0, 0, 0, 0.5));
+  animation:
+    ln-ext-drawing-run var(--ln-ext-run) cubic-bezier(0.22, 1, 0.36, 1) var(--ln-ext-delay) both,
+    ln-ext-drawing-off 0.2s ease-in calc(var(--ln-ext-delay) + var(--ln-ext-run) * 0.8) forwards;
+}
+
+.ln-ext-drawing__notch {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ln-ext-drawing-notch 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+    calc(var(--ln-ext-delay) + var(--ln-ext-lit)) both;
+}
+
+@keyframes ln-ext-drawing-run {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: var(--ln-ext-dx) var(--ln-ext-dy);
+  }
+}
+
+@keyframes ln-ext-drawing-off {
+  from {
+    translate: var(--ln-ext-dx) var(--ln-ext-dy);
+  }
+  to {
+    opacity: 0;
+    translate: var(--ln-ext-dx) var(--ln-ext-dy);
+    scale: 0.3;
+  }
+}
+
+@keyframes ln-ext-drawing-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ln-ext-drawing-notch {
+  from {
+    opacity: 0.3;
+    scale: 0.5;
+  }
+  60% {
+    opacity: 1;
+    scale: 1.5;
+  }
 }
 
 @keyframes ln-ext-drawing-stroke {

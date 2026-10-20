@@ -65,25 +65,31 @@ describe('reasonMarks', () => {
   it('marks a passed pawn’s road, and the rook come behind it', () => {
     expect(
       marks({ kind: 'passedPawn', made: false }, '4k3/8/8/1P6/8/8/8/4K3 w - - 0 1', 'b5b6'),
-    ).toEqual([{ kind: 'cells', squares: ['b7', 'b8'], tone: 'plan' }]);
+    ).toEqual([{ kind: 'run', from: 'b6', squares: ['b7', 'b8'], tone: 'plan' }]);
     expect(marks({ kind: 'behindPasser' }, '4k3/8/1P6/8/8/8/8/R3K3 w - - 0 1', 'a1b1')).toEqual([
       { kind: 'link', from: 'b1', to: 'b6', tone: 'defense' },
-      { kind: 'cells', squares: ['b7', 'b8'], tone: 'plan' },
+      { kind: 'run', from: 'b6', squares: ['b7', 'b8'], tone: 'plan' },
     ]);
   });
 
   it('marks a rook’s file or rank out from the rook, and the square a pawn leaves the king', () => {
-    const file = ['d3', 'd5', 'd2', 'd6', 'd1', 'd7', 'd8'];
     expect(
       marks(
         { kind: 'openFile', halfOpen: false, contested: false },
         '4k3/8/8/8/R7/8/8/4K3 w - - 0 1',
         'a4d4',
       ),
-    ).toEqual([{ kind: 'cells', squares: file, tone: 'plan' }]);
+    ).toEqual([
+      {
+        kind: 'run',
+        from: 'd4',
+        squares: ['d1', 'd2', 'd3', 'd5', 'd6', 'd7', 'd8'],
+        tone: 'plan',
+      },
+    ]);
     const rank = ['b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7'];
     expect(marks({ kind: 'seventhRank' }, '4k3/8/8/8/8/8/8/R3K3 w - - 0 1', 'a1a7')).toEqual([
-      { kind: 'cells', squares: rank, tone: 'plan' },
+      { kind: 'run', from: 'a7', squares: rank, tone: 'plan' },
     ]);
     expect(marks({ kind: 'luft' }, '6k1/8/8/8/8/8/5PPP/6K1 w - - 0 1', 'h2h3')).toEqual([
       { kind: 'cells', squares: ['h2'], tone: 'defense' },
@@ -143,7 +149,12 @@ describe('reasonMarks', () => {
   it('marks the file a battery is made ready on', () => {
     const ready = { kind: 'preparesBattery', partner: white('rook'), halfOpen: false } as const;
     expect(marks(ready, '4k3/8/8/8/8/8/8/1Q2KR2 w - - 0 1', 'b1b7')).toEqual([
-      { kind: 'cells', squares: ['b6', 'b8', 'b5', 'b4', 'b3', 'b2', 'b1'], tone: 'plan' },
+      {
+        kind: 'run',
+        from: 'b7',
+        squares: ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b8'],
+        tone: 'plan',
+      },
     ]);
   });
 
