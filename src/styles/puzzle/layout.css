@@ -48,7 +48,7 @@
   main.puzzle {
     --ln-ext-gap: 16px;
     --ln-ext-panel-min: 340px;
-    --ln-ext-gauge-w: 26px;
+    --ln-ext-gauge-w: 22px;
     --ln-ext-coords-l: 0px;
     --ln-ext-coords-off: 0px;
     /* The eval bar shows once the puzzle ends: its column is kept from the start, so the

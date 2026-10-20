@@ -6,7 +6,7 @@
     --ln-ext-gap: 24px;
     --ln-ext-bar: 0px;
     --ln-ext-coords-off: 0px;
-    --ln-ext-gauge-w: 26px;
+    --ln-ext-gauge-w: 22px;
     --ln-ext-gauge-gap: 10px;
     --ln-ext-v-room: 56px;
     /* Board sized as if the panel were at its minimum; the panel takes the rest, up to 500px. */

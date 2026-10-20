@@ -111,7 +111,7 @@ coords {
 
 /* Lichess's eval bar drawn like the Game Review's, the score from content/analysis/eval-gauge.ts.
  * Registered so it slides. Lichess flips it for Black, which would flip the score: turn the
- * gradient instead. */
+ * fill instead. */
 @property --eval-percent {
   syntax: '<percentage>';
   inherits: true;
@@ -122,22 +122,26 @@ coords {
   box-sizing: border-box;
   width: var(--ln-ext-gauge-w, 15px) !important;
   overflow: hidden;
-  border-radius: 3px !important;
-  background: linear-gradient(
-    to bottom,
-    #3a393e var(--eval-percent),
-    var(--ln-ext-white) var(--eval-percent)
-  ) !important;
+  border-radius: 6px !important;
+  background: #3a393e !important;
   transition: --eval-percent 0.3s ease !important;
+}
+
+/* White's share, rounded at the frontier too. */
+.eval-gauge::before {
+  content: '';
+  position: absolute;
+  inset: var(--eval-percent) 0 0;
+  border-radius: 6px;
+  background: var(--ln-ext-white);
 }
 
 .eval-gauge.reverse {
   transform: none !important;
-  background: linear-gradient(
-    to top,
-    #3a393e var(--eval-percent),
-    var(--ln-ext-white) var(--eval-percent)
-  ) !important;
+}
+
+.eval-gauge.reverse::before {
+  inset: 0 0 var(--eval-percent);
 }
 
 .eval-gauge tick {

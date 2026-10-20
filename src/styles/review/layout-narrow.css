@@ -33,6 +33,7 @@
   #ln-ext-evalbar .ln-ext-evalbar__fill {
     top: 0;
     bottom: auto;
+    border-radius: 4px;
   }
 
   /* Upright again once turned. */
