@@ -48,6 +48,12 @@ const LichessLookSchema = z.object({
   id: z.string(),
 });
 
+const LichessLookPreviewSchema = z.object({
+  type: z.literal(messageType('lichess-look-preview')),
+  part: z.enum(['board', 'piece']),
+  id: z.nullable(z.string()),
+});
+
 /** What the settings' preview board does: drawn, its game played through, or one move on. */
 const PreviewActionSchema = z.enum(['draw', 'play', 'step']);
 
@@ -68,6 +74,7 @@ const CustomSeekStateSchema = z.object({
 
 export type ColorScheme = z.infer<typeof ColorSchemeSchema>;
 export type LichessLookPick = Omit<z.infer<typeof LichessLookSchema>, 'type'>;
+export type LichessLookPreview = Omit<z.infer<typeof LichessLookPreviewSchema>, 'type'>;
 export type PreviewAction = z.infer<typeof PreviewActionSchema>;
 export type SoundFiles = z.infer<typeof SoundsSchema>['sounds'];
 export type SynthPick = NonNullable<z.infer<typeof SoundsSchema>['synth']>;
@@ -130,6 +137,16 @@ export const postLichessLook = (pick: LichessLookPick): void =>
   post({ type: messageType('lichess-look'), ...pick });
 export const onLichessLook = (handler: (pick: LichessLookPick) => void): (() => void) =>
   listen(LichessLookSchema, ({ part, id }) => handler({ part, id }));
+
+/**
+ * Content → page: one of Lichess's boards or piece sets shown a moment, unsaved, while its tile
+ * in the settings is hovered; null puts the one picked back.
+ */
+export const postLichessLookPreview = (preview: LichessLookPreview): void =>
+  post({ type: messageType('lichess-look-preview'), ...preview });
+export const onLichessLookPreview = (
+  handler: (preview: LichessLookPreview) => void,
+): (() => void) => listen(LichessLookPreviewSchema, ({ part, id }) => handler({ part, id }));
 
 /** Content → page: the settings' preview board, drawn or played in the page world. */
 export const postLooksPreview = (action: PreviewAction): void =>

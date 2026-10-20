@@ -3,7 +3,7 @@ import { createElement, queryAll } from '#shared/dom.ts';
 import { fakeSoundPlayer } from '#page/sounds/fixtures/sound-player.ts';
 import { trackListeners } from '#shared/testing/listeners.ts';
 import { flush } from '#shared/testing/timers.ts';
-import { lichessLooks, pickLichessLook } from './index.ts';
+import { lichessLooks, pickLichessLook, previewLichessLook } from './index.ts';
 
 const ASSETS = 'https://lichess1.org/assets/';
 
@@ -88,6 +88,38 @@ describe('a Lichess look picked in the settings', () => {
   });
 });
 
+describe('a Lichess look hovered in the settings', () => {
+  it('shows a board a moment, unsaved, then the one picked again', () => {
+    document.body.dataset.board = 'green';
+    previewLichessLook({ part: 'board', id: 'maple' });
+    previewLichessLook({ part: 'board', id: 'wood4' });
+    expect(document.body.dataset.board).toBe('wood4');
+    previewLichessLook({ part: 'board', id: null });
+    expect(document.body.dataset.board).toBe('green');
+    expect(posted()).toEqual([]);
+  });
+
+  it('shows a piece set, then none of its own where the page had none', () => {
+    previewLichessLook({ part: 'piece', id: 'alpha' });
+    expect(pieceImage('---white-pawn')).toBe(`url(${ASSETS}piece/alpha/wP.svg)`);
+    previewLichessLook({ part: 'piece', id: null });
+    expect(document.body.dataset.pieceSet).toBeUndefined();
+    expect(pieceImage('---white-pawn')).toBe('');
+  });
+
+  it('keeps one picked while hovered, and puts a part back as another is hovered', () => {
+    document.body.dataset.board = 'green';
+    document.body.dataset.pieceSet = 'cburnett';
+    previewLichessLook({ part: 'board', id: 'maple' });
+    previewLichessLook({ part: 'piece', id: 'alpha' });
+    expect(document.body.dataset.board).toBe('green');
+    pickLichessLook({ part: 'piece', id: 'alpha' });
+    previewLichessLook({ part: 'piece', id: null });
+    expect(document.body.dataset.pieceSet).toBe('alpha');
+    expect(pieceImage('---white-pawn')).toBe(`url(${ASSETS}piece/alpha/wP.svg)`);
+  });
+});
+
 let stopListening = (): void => {};
 
 const receive = (data: unknown): void => {
@@ -110,6 +142,13 @@ describe('the looks feature', () => {
     receive({ type: 'ln-ext:lichess-look', part: 'pieces', id: 'merida' });
     expect(document.body.dataset.board).toBe('wood');
     expect(posted()).toEqual(['POST /pref/theme theme=wood XMLHttpRequest']);
+  });
+
+  it('shows the looks hovered in the settings', () => {
+    receive({ type: 'ln-ext:lichess-look-preview', part: 'board', id: 'maple' });
+    expect(document.body.dataset.board).toBe('maple');
+    receive({ type: 'ln-ext:lichess-look-preview', part: 'board', id: null });
+    expect(document.body.dataset.board).toBeUndefined();
   });
 
   it('draws the settings’ preview board when asked', () => {

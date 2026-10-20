@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import type { Pack, PartKind } from '#shared/packs/pack.ts';
 import { fakePack } from '#shared/testing/packs.ts';
-import { createLibrary, LICHESS, type Library } from '#content/packs/library.ts';
+import { createLibrary, LICHESS, type Library, type Shown } from '#content/packs/library.ts';
 import { saveBoard, savedBoards } from '#content/packs/saved-boards.ts';
 import { buildLooksCard, type LooksCard } from './looks-card.ts';
 
@@ -17,20 +17,21 @@ const LICHESS_BOARDS = [
 async function card(
   kind: PartKind,
   packs: readonly Pack[] = [],
-): Promise<{ readonly library: Library; readonly looks: LooksCard }> {
+): Promise<{ readonly library: Library; readonly looks: LooksCard; readonly shown: Shown[] }> {
+  const shown: Shown[] = [];
   const library = createLibrary({
     readPicked: () => Promise.resolve([]),
     readAll: () => Promise.resolve(packs),
     save: () => Promise.resolve(),
     erase: () => Promise.resolve(),
-    show: () => undefined,
+    show: next => shown.push(next),
   });
   await library.loadAll();
   const looks = buildLooksCard(kind, library);
   // As the Board & sounds page does.
   library.onChange(looks.mark);
   document.body.append(looks.element);
-  return { library, looks };
+  return { library, looks, shown };
 }
 
 const ringed = (root: HTMLElement): (string | undefined)[] =>
@@ -139,5 +140,73 @@ describe('a Board & sounds card', () => {
     const image = queryOne(looks.element, 'img', HTMLImageElement);
     image?.dispatchEvent(new Event('error'));
     expect(image?.getAttribute('src')).toBe('https://lichess1.org/pixel/wN.webp');
+  });
+});
+
+function point(target: Element | null, type: string, pointerType = 'mouse'): void {
+  target?.dispatchEvent(new PointerEvent(type, { bubbles: type === 'pointerover', pointerType }));
+}
+
+const shownBoard = (shown: readonly Shown[]): unknown => shown.at(-1)?.board;
+
+describe('a Board & sounds card hovered', () => {
+  it('shows the tile under the pointer, unsaved, across its grid’s gaps', async () => {
+    const { library, looks, shown } = await card('board');
+    const tile = queryOne(looks.element, "[data-ln-ext-choice='tone-ocean']", HTMLElement);
+    point(tile, 'pointerover');
+    expect(shownBoard(shown)).toBe('tone-ocean');
+    point(tile?.closest('.ln-ext-looks__grid') ?? null, 'pointerover');
+    expect(shownBoard(shown)).toBe('tone-ocean');
+    expect(library.current('board')).toBe('accent');
+    expect(localStorage.getItem('ln-ext-board')).toBeNull();
+  });
+
+  it('shows the pick again once the pointer leaves the grid or the card', async () => {
+    const { looks, shown } = await card('board');
+    const tile = queryOne(looks.element, "[data-ln-ext-choice='tone-ocean']", HTMLElement);
+    point(tile, 'pointerover');
+    point(queryOne(looks.element, '.ln-ext-looks__head', HTMLElement), 'pointerover');
+    expect(shownBoard(shown)).toBe('accent');
+    point(tile, 'pointerover');
+    point(looks.element, 'pointerleave');
+    expect(shownBoard(shown)).toBe('accent');
+  });
+
+  it('keeps the tile clicked once the pointer leaves', async () => {
+    const { looks, shown } = await card('board');
+    const tile = queryOne(looks.element, "[data-ln-ext-choice='tone-ocean']", HTMLElement);
+    point(tile, 'pointerover');
+    tile?.click();
+    point(looks.element, 'pointerleave');
+    expect(shownBoard(shown)).toBe('tone-ocean');
+  });
+
+  it('leaves the board to the page world for one of Lichess’s, until the pointer leaves', async () => {
+    const { looks, shown } = await card('board');
+    looks.showLichess(LICHESS_BOARDS);
+    point(queryOne(looks.element, "[data-ln-ext-lichess='brown']", HTMLElement), 'pointerover');
+    expect(shownBoard(shown)).toBeNull();
+    expect(window.postMessage).toHaveBeenLastCalledWith(
+      { type: 'ln-ext:lichess-look-preview', part: 'board', id: 'brown' },
+      location.origin,
+    );
+    point(looks.element, 'pointerleave');
+    expect(shownBoard(shown)).toBe('accent');
+    expect(window.postMessage).toHaveBeenLastCalledWith(
+      { type: 'ln-ext:lichess-look-preview', part: 'board', id: null },
+      location.origin,
+    );
+  });
+
+  it('shows nothing for a touch, nor for a sound set, and names no tile in a tooltip', async () => {
+    const boards = await card('board');
+    const count = boards.shown.length;
+    point(queryOne(boards.looks.element, '.ln-ext-src-item', HTMLElement), 'pointerover', 'touch');
+    expect(boards.shown).toHaveLength(count);
+    expect(queryAll(boards.looks.element, '.ln-ext-src-item[title]', HTMLElement)).toEqual([]);
+    const sounds = await card('sound', [CLICKS]);
+    const before = sounds.shown.length;
+    point(queryOne(sounds.looks.element, '.ln-ext-src-item', HTMLElement), 'pointerover');
+    expect(sounds.shown).toHaveLength(before);
   });
 });

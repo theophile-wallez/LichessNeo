@@ -17,6 +17,7 @@ import { ACCENT_BOARD, familyOf, themesOf } from '#content/packs/themes.ts';
 import { settingsHash } from './address.ts';
 import { lichessCurrent, type LichessLook } from './lichess-looks.ts';
 import { familySections, hasFamilies, subLabel } from './looks-families.ts';
+import { previewOnHover } from './looks-hover.ts';
 
 // A card of the settings' Board & sounds page (styles/pages/settings-looks.css):
 // the extension's looks for one part, its themes and the packs that have it,
@@ -74,7 +75,7 @@ function thumbnail(kind: PartKind, { id, image, whole, colors }: Tile): HTMLElem
 function tileButton(kind: PartKind, tile: Tile, data: string): HTMLButtonElement {
   const button = createElement('button', {
     className: 'ln-ext-src-item',
-    attrs: { type: 'button', [data]: tile.id, title: tile.name },
+    attrs: { type: 'button', [data]: tile.id },
   });
   // Sounds have no picture: a pill with the name.
   if (kind !== 'sound') button.append(thumbnail(kind, tile));
@@ -236,6 +237,7 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
   };
   card.addEventListener('error', onPieceError, true);
   card.addEventListener('click', event => onCardClick(kind, library, event));
+  previewOnHover(card, kind, library);
   mark();
   return {
     element: card,

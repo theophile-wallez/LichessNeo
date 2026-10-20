@@ -57,6 +57,8 @@ export interface Library {
   /** What the part shows: a pack's id, a theme's, or LICHESS. */
   readonly current: (kind: PartKind) => string;
   readonly choose: (kind: PartKind, id: string) => void;
+  /** Shows `id` on the part, unsaved, while its tile is hovered; null shows the pick again. */
+  readonly preview: (kind: PartKind, id: string | null) => void;
   /** Stores a pack, replacing one of the same id, and shows each part it has. */
   readonly add: (pack: Pack) => Promise<void>;
   readonly remove: (id: string) => Promise<void>;
@@ -93,11 +95,21 @@ const idOf = (look: Look): string => {
 
 const UNREADABLE = '[LichessNeo] the imported packs could not be read';
 
-const shownFrom = (packs: readonly Pack[]): Shown => ({
-  board: lookOf('board', packs),
-  piece: lookOf('piece', packs),
-  sound: lookOf('sound', packs),
-});
+/** A tile hovered in the settings, shown on its part a moment. */
+interface Preview {
+  readonly kind: PartKind;
+  readonly id: string;
+}
+
+function shownFrom(packs: readonly Pack[], preview: Preview | null): Shown {
+  const shown = {
+    board: lookOf('board', packs),
+    piece: lookOf('piece', packs),
+    sound: lookOf('sound', packs),
+  };
+  const look = preview && lookOfPick(preview.kind, preview.id, packs);
+  return preview && look !== undefined ? { ...shown, [preview.kind]: look } : shown;
+}
 
 async function readOrNone(read: () => Promise<readonly Pack[]>): Promise<readonly Pack[]> {
   try {
@@ -115,8 +127,9 @@ export function createLibrary(options: LibraryOptions): Library {
   let loading: Promise<void> | null = null;
   let failed = false;
   const listeners: (() => void)[] = [];
+  let preview: Preview | null = null;
   const update = (): void => {
-    show(shownFrom(list));
+    show(shownFrom(list, preview));
     for (const listener of listeners) listener();
   };
   // The packs already shown keep their objects: a new one would send its sounds again.
@@ -147,6 +160,10 @@ export function createLibrary(options: LibraryOptions): Library {
     choose: (kind, id) => {
       pick(kind, id);
       update();
+    },
+    preview: (kind, id) => {
+      preview = id === null ? null : { kind, id };
+      show(shownFrom(list, preview));
     },
     add: async pack => {
       await save(pack);

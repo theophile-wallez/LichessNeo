@@ -88,6 +88,24 @@ describe('createLibrary', () => {
     expect(ids(shown.at(-1))).toEqual({ board: null, piece: null, sound: CLICKS.id });
   });
 
+  it('shows a hovered look a moment, unsaved, and the pick again after', async () => {
+    const { shown, library: packs } = await library([WOOD, CLICKS]);
+    packs.preview('board', WOOD.id);
+    expect(ids(shown.at(-1))).toEqual({ board: WOOD.id, piece: null, sound: null });
+    expect(packs.current('board')).toBe(ACCENT_BOARD);
+    expect(localStorage.getItem('ln-ext-board')).toBeNull();
+    // Still shown as the pieces are picked, until the pointer leaves.
+    packs.choose('piece', WOOD.id);
+    expect(ids(shown.at(-1))).toEqual({ board: WOOD.id, piece: WOOD.id, sound: null });
+    packs.preview('board', null);
+    expect(ids(shown.at(-1))).toEqual({ board: ACCENT_BOARD, piece: WOOD.id, sound: null });
+    // A pack without the part shows the pick.
+    packs.preview('board', CLICKS.id);
+    expect(ids(shown.at(-1)).board).toBe(ACCENT_BOARD);
+    packs.preview('board', LICHESS);
+    expect(ids(shown.at(-1)).board).toBeNull();
+  });
+
   it('shows the default for a pick whose pack is gone or lacks the part', async () => {
     localStorage.setItem('ln-ext-board', CLICKS.id);
     localStorage.setItem('ln-ext-pieces', 'ann/packs/main/gone/');
