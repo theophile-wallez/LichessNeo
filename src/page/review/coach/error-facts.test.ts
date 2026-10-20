@@ -58,7 +58,9 @@ describe('an error the reply punishes', () => {
 
   it('says what the reply does first, then the better move', () => {
     const { fact, followUp } = findings(playedBetween([39, before, after], 'e5g4'), en);
-    expect(plain(fact?.text)).toBe('That allows [[m:b:f5]], attacking the [[p:wn]]knight.');
+    expect(plain(fact?.text)).toBe(
+      'That allows [[m:b:f5]], gaining a tempo on the [[p:wn]]knight.',
+    );
     expect(plain(followUp?.text)).toBe('[[m:w:Rfd1]] was the better move.');
   });
 });

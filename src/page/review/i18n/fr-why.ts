@@ -43,7 +43,7 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string, tense: Ten
   if (reason.kind === 'outpost')
     return `${tense('installait', 'installe')} ${piece} sur un avant-poste`;
   if (reason.kind === 'chases')
-    return `${tense('attaquait', 'attaque')} ${piece}${reason.square ? ` en ${reason.square}` : ''}`;
+    return `${tense('gagnait', 'gagne')} un tempo sur ${piece}${reason.square ? ` en ${reason.square}` : ''}`;
   if (reason.kind === 'attacksPawn')
     return `${tense('attaquait', 'attaque')} le ${pieceName(reason.piece)} ${squareToken(reason.square)}, que rien ne ${tense('défendait', 'défend')}`;
   if (reason.kind === 'pins')

@@ -40,7 +40,7 @@ export function tacticPlansEn(
       return [
         `${capitalize(target)} is under attack and has to move.`,
         `That hits ${target}, gaining time.`,
-        `${capitalize(target)} has to move: that gains a tempo.`,
+        `${capitalize(target)} has to move, gaining a tempo.`,
       ];
     },
     pins: (piece, behind) => [

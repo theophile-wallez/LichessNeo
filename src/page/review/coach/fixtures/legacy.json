@@ -110,7 +110,7 @@
       },
       {
         "remark": "The engine’s top move. Well played.",
-        "parts": [["The [[p:wb]]bishop on [[s:c4]] has to move: that gains a tempo."]]
+        "parts": [["The [[p:wb]]bishop on [[s:c4]] has to move, gaining a tempo."]]
       },
       {
         "remark": "The right piece to take.",
@@ -287,7 +287,7 @@
       },
       {
         "remark": "Le coup du moteur. Bien joué.",
-        "parts": [["Le [[p:wb]]fou en [[s:c4]] doit bouger : du temps de gagné."]]
+        "parts": [["Le [[p:wb]]fou en [[s:c4]] doit bouger, avec gain de tempo."]]
       },
       {
         "remark": "La bonne pièce à prendre.",
@@ -451,7 +451,7 @@
       {
         "remark": "Nothing better here.",
         "parts": [
-          ["The [[p:wb]]bishop on [[s:b5]] has to move: that gains a tempo."],
+          ["The [[p:wb]]bishop on [[s:b5]] has to move, gaining a tempo."],
           ["White’s lead shrinks to a clear advantage.", true]
         ]
       },
@@ -541,7 +541,7 @@
         "remark": "Hmm, this gives the opponent some air.",
         "parts": [
           ["Black goes from a slight edge to a clear advantage.", true],
-          ["[[m:w:Bc1]] was more precise, attacking the [[p:bq]]queen."]
+          ["[[m:w:Bc1]] was more precise, gaining a tempo on the [[p:bq]]queen."]
         ]
       },
       {
@@ -684,7 +684,7 @@
       {
         "remark": "Rien de mieux ici.",
         "parts": [
-          ["Le [[p:wb]]fou en [[s:b5]] doit bouger : du temps de gagné."],
+          ["Le [[p:wb]]fou en [[s:b5]] doit bouger, avec gain de tempo."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un net avantage.", true]
         ]
       },
@@ -780,7 +780,7 @@
         "remark": "Hmm, ça laisse respirer l’adversaire.",
         "parts": [
           ["Les Noirs passent d’un léger avantage à un net avantage.", true],
-          ["Mieux valait [[m:w:Bc1]], qui attaquait la [[p:bq]]dame."]
+          ["Mieux valait [[m:w:Bc1]], qui gagnait un tempo sur la [[p:bq]]dame."]
         ]
       },
       {
@@ -874,7 +874,7 @@
       {
         "remark": "Couldn’t have done better.",
         "parts": [
-          ["The [[p:bb]]bishop on [[s:b4]] has to move: that gains a tempo."],
+          ["The [[p:bb]]bishop on [[s:b4]] has to move, gaining a tempo."],
           ["White goes from a slight edge to a clear advantage.", true]
         ]
       },
@@ -1130,7 +1130,7 @@
       {
         "remark": "Impossible de faire mieux.",
         "parts": [
-          ["Le [[p:bb]]fou en [[s:b4]] doit bouger : du temps de gagné."],
+          ["Le [[p:bb]]fou en [[s:b4]] doit bouger, avec gain de tempo."],
           ["Les Blancs passent d’un léger avantage à un net avantage.", true]
         ]
       },
@@ -1479,7 +1479,7 @@
       { "remark": "Clean and precise.", "parts": [["A recapture on [[s:d4]]."]] },
       {
         "remark": "That’s a costly slip.",
-        "parts": [["The move was [[m:b:g5]], attacking the [[p:wb]]bishop on [[s:h4]]."]]
+        "parts": [["The move was [[m:b:g5]], gaining a tempo on the [[p:wb]]bishop on [[s:h4]]."]]
       }
     ],
     "fr": [
@@ -1609,7 +1609,9 @@
       { "remark": "Propre et précis.", "parts": [["Une reprise en [[s:d4]]."]] },
       {
         "remark": "Un faux pas qui coûte cher.",
-        "parts": [["Le bon coup était [[m:b:g5]], qui attaquait le [[p:wb]]fou en [[s:h4]]."]]
+        "parts": [
+          ["Le bon coup était [[m:b:g5]], qui gagnait un tempo sur le [[p:wb]]fou en [[s:h4]]."]
+        ]
       }
     ]
   },
@@ -1896,7 +1898,7 @@
         "remark": "Not a disaster, but not ideal either.",
         "parts": [
           ["White had a winning position; now it’s only a clear advantage.", true],
-          ["More precise was [[m:w:Ne5]], attacking the [[p:bb]]bishop."]
+          ["More precise was [[m:w:Ne5]], gaining a tempo on the [[p:bb]]bishop."]
         ]
       },
       {
@@ -2243,7 +2245,7 @@
         "remark": "Pas une catastrophe, mais pas idéal non plus.",
         "parts": [
           ["Les Blancs avaient une position gagnante, il ne leur reste qu’un net avantage.", true],
-          ["Plus précis : [[m:w:Ne5]], qui attaquait le [[p:bb]]fou."]
+          ["Plus précis : [[m:w:Ne5]], qui gagnait un tempo sur le [[p:bb]]fou."]
         ]
       },
       {
@@ -2538,7 +2540,7 @@
       {
         "remark": "Just right. Keep it up!",
         "parts": [
-          ["The [[p:wb]]bishop has to move: that gains a tempo."],
+          ["The [[p:wb]]bishop has to move, gaining a tempo."],
           ["Even better for Black: a clear advantage.", true]
         ]
       },
@@ -2845,7 +2847,7 @@
       {
         "remark": "Parfait. Continue comme ça !",
         "parts": [
-          ["Le [[p:wb]]fou doit bouger : du temps de gagné."],
+          ["Le [[p:wb]]fou doit bouger, avec gain de tempo."],
           ["Encore mieux pour les Noirs : un net avantage à présent.", true]
         ]
       },
@@ -3066,7 +3068,7 @@
         "remark": "That’s a serious error.",
         "parts": [
           ["Black’s lead grows: a clear advantage now.", true],
-          ["[[m:w:g4]] was the better move, attacking the [[p:bn]]knight on [[s:h5]]."]
+          ["[[m:w:g4]] was the better move, gaining a tempo on the [[p:bn]]knight on [[s:h5]]."]
         ]
       },
       {
@@ -3244,7 +3246,7 @@
         "remark": "This one hurts.",
         "parts": [
           ["No longer level: White has a winning position.", true],
-          ["Better was [[m:b:Kb5]], attacking the [[p:wr]]rook."]
+          ["Better was [[m:b:Kb5]], gaining a tempo on the [[p:wr]]rook."]
         ]
       },
       {
@@ -3359,7 +3361,7 @@
         "remark": "C’est une grosse erreur.",
         "parts": [
           ["L’avantage grandit : les Noirs ont maintenant un net avantage.", true],
-          ["[[m:w:g4]] s’imposait : ce coup attaquait le [[p:bn]]cavalier en [[s:h5]]."]
+          ["[[m:w:g4]] s’imposait : ce coup gagnait un tempo sur le [[p:bn]]cavalier en [[s:h5]]."]
         ]
       },
       {
@@ -3546,7 +3548,7 @@
         "remark": "Celle-là fait mal.",
         "parts": [
           ["Fini l’égalité : les Blancs ont une position gagnante.", true],
-          ["Il fallait jouer [[m:b:Kb5]], qui attaquait la [[p:wr]]tour."]
+          ["Il fallait jouer [[m:b:Kb5]], qui gagnait un tempo sur la [[p:wr]]tour."]
         ]
       },
       {
@@ -4168,7 +4170,7 @@
         "remark": "A capture that holds up.",
         "parts": [
           ["White goes from a clear advantage to a winning position.", true],
-          ["That allows [[m:w:Kh1]], attacking the [[p:br]]rook on [[s:g2]]."]
+          ["That allows [[m:w:Kh1]], gaining a tempo on the [[p:br]]rook on [[s:g2]]."]
         ]
       },
       {
@@ -4260,7 +4262,7 @@
         "remark": "That’s a costly slip.",
         "parts": [
           ["Back to equal.", true],
-          ["Better was [[m:b:Kc8]], attacking the [[p:wr]]rook on [[s:d7]]."]
+          ["Better was [[m:b:Kc8]], gaining a tempo on the [[p:wr]]rook on [[s:d7]]."]
         ]
       },
       {
@@ -4506,7 +4508,7 @@
         "remark": "Une prise qui tient la route.",
         "parts": [
           ["Les Blancs passent d’un net avantage à une position gagnante.", true],
-          ["Ça ouvre la porte à [[m:w:Kh1]], qui attaque la [[p:br]]tour en [[s:g2]]."]
+          ["Ça ouvre la porte à [[m:w:Kh1]], qui gagne un tempo sur la [[p:br]]tour en [[s:g2]]."]
         ]
       },
       {
@@ -4595,7 +4597,7 @@
         "remark": "Un faux pas qui coûte cher.",
         "parts": [
           ["Retour à l’égalité.", true],
-          ["Il fallait jouer [[m:b:Kc8]], qui attaquait la [[p:wr]]tour en [[s:d7]]."]
+          ["Il fallait jouer [[m:b:Kc8]], qui gagnait un tempo sur la [[p:wr]]tour en [[s:d7]]."]
         ]
       },
       {
@@ -6137,7 +6139,7 @@
         "remark": "Ouch, this lets the opponent back in.",
         "parts": [
           ["The gap widens: now White has a clear advantage.", true],
-          ["The move was [[m:b:Kf7]], attacking the [[p:wr]]rook on [[s:g8]]."]
+          ["The move was [[m:b:Kf7]], gaining a tempo on the [[p:wr]]rook on [[s:g8]]."]
         ]
       },
       {
@@ -6472,7 +6474,7 @@
         "remark": "Aïe, ça remet l’adversaire dans la partie.",
         "parts": [
           ["L’écart se creuse : maintenant les Blancs ont un net avantage.", true],
-          ["Le bon coup était [[m:b:Kf7]], qui attaquait la [[p:wr]]tour en [[s:g8]]."]
+          ["Le bon coup était [[m:b:Kf7]], qui gagnait un tempo sur la [[p:wr]]tour en [[s:g8]]."]
         ]
       },
       {

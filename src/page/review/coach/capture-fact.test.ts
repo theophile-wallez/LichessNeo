@@ -32,7 +32,7 @@ describe('a capture', () => {
     const { fact, followUp } = findings(move, en);
     expect(en.facts.compensation(black, '[[s:c6]]', 'black')).toContain(fact?.text);
     expect(plain(followUp?.text)).toMatch(
-      /\[\[m:w:Bf4\]\].*attacking the \[\[p:br\]\]rook on \[\[s:b8\]\]/,
+      /\[\[m:w:Bf4\]\].*gaining a tempo on the \[\[p:br\]\]rook on \[\[s:b8\]\]/,
     );
   });
 

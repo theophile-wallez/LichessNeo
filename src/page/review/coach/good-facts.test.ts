@@ -135,7 +135,7 @@ describe('a piece attacked that steps away', () => {
   it('is said to be chased, not threatened', () => {
     const move = playedBetween([33, before, after], 'a2a4');
     const said = findings(move, en, { before: null, after: threat }).fact?.text;
-    expect(said).toBe('The [[p:bb]]bishop on [[s:b5]] has to move: that gains a tempo.');
+    expect(said).toBe('The [[p:bb]]bishop on [[s:b5]] has to move, gaining a tempo.');
   });
 });
 
@@ -160,7 +160,7 @@ describe('a piece a line opened onto that steps away', () => {
   it('is said to be chased, not threatened', () => {
     const move = playedBetween([21, before, after], 'f3e5');
     const said = findings(move, en, { before: null, after: threat }).fact?.text;
-    expect(said).toBe('The [[p:bq]]queen has to move: that gains a tempo.');
+    expect(said).toBe('The [[p:bq]]queen has to move, gaining a tempo.');
   });
 });
 

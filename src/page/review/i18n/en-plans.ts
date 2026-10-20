@@ -38,7 +38,9 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string): string {
   if (reason.kind === 'develops') return `developing ${piece}`;
   if (reason.kind === 'outpost') return `planting ${piece} on an outpost`;
   if (reason.kind === 'chases')
-    return reason.square ? `attacking ${piece} on ${reason.square}` : `attacking ${piece}`;
+    return reason.square
+      ? `gaining a tempo on ${piece} on ${reason.square}`
+      : `gaining a tempo on ${piece}`;
   if (reason.kind === 'attacksPawn')
     return `attacking the undefended ${pieceName(reason.piece)} on ${squareToken(reason.square)}`;
   if (reason.kind === 'pins') return `pinning ${piece} to ${bare(reason.behind)}`;

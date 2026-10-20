@@ -40,7 +40,7 @@ export function tacticPlansFr(
       return [
         `${capitalize(target)} est attaqué${agreement(piece)} et doit bouger.`,
         `Ça attaque ${target}, avec gain de temps.`,
-        `${capitalize(target)} doit bouger : du temps de gagné.`,
+        `${capitalize(target)} doit bouger, avec gain de tempo.`,
       ];
     },
     pins: (piece, behind) => [
