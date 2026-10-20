@@ -1,6 +1,14 @@
 import type { Piece } from '#shared/chess/index.ts';
-import { isPlain, type PlainReason, type Reason } from '#page/review/coach/idea.ts';
-import { capitalize, definite, pairOf } from './en-grammar.ts';
+import {
+  isLineReason,
+  isPlain,
+  type LineReason,
+  type PlainReason,
+  type Reason,
+} from '#page/review/coach/idea.ts';
+import { squareToken } from '#page/review/comment/tokens.ts';
+import { capitalize, definite, pairOf, pieceName } from './en-grammar.ts';
+import { tacticPlansEn } from './en-tactic-plans.ts';
 import type { PlanSentences, Viewer } from './types.ts';
 
 // The piece a pin holds is its own side's: named once whose they are, not twice.
@@ -29,12 +37,27 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string): string {
   if (reason.kind === 'develops') return `developing ${piece}`;
   if (reason.kind === 'outpost') return `planting ${piece} on an outpost`;
   if (reason.kind === 'chases') return `attacking ${piece}`;
+  if (reason.kind === 'attacksPawn')
+    return `attacking the undefended ${pieceName(reason.piece)} on ${squareToken(reason.square)}`;
   if (reason.kind === 'pins') return `pinning ${piece} to ${bare(reason.behind)}`;
   if (reason.kind === 'saves') return `getting ${piece} out of danger`;
   if (reason.kind === 'guards') return `defending ${piece}`;
   if (reason.kind === 'centralizes') return `centralizing ${piece}`;
   if (reason.kind === 'takesWith') return `taking with ${piece} instead`;
   return `taking ${piece}`;
+}
+
+// An open file taken, or a battery: with the queen there already, a rook
+// lines up with it rather than taking the file.
+function lineWhy(reason: LineReason, the: (piece: Piece) => string): string {
+  if (reason.kind === 'diagonalBattery')
+    return `forming a battery with ${the(reason.partner)}, aimed at ${the(reason.target)}`;
+  const file = `the ${reason.halfOpen ? 'half-open' : 'open'} file`;
+  if (reason.kind === 'fileBattery')
+    return `forming a battery with ${the(reason.partner)} on ${file}`;
+  if (reason.kind === 'preparesBattery')
+    return `preparing a battery with ${the(reason.partner)} on ${file}`;
+  return reason.contested ? `contesting ${file}` : `taking ${file}`;
 }
 
 // What the better move did, after its name: "Better was Nf6, developing your knight."
@@ -51,8 +74,7 @@ function whyEn(viewer: Viewer): (reason: Reason) => string {
     if (reason.kind === 'doubleThreat')
       return `threatening mate and ${the(reason.target)} at once, and only one can be saved`;
     if ('piece' in reason) return pieceWhy(reason, the);
-    if (reason.kind === 'openFile')
-      return `taking the ${reason.halfOpen ? 'half-open' : 'open'} file`;
+    if (isLineReason(reason)) return lineWhy(reason, the);
     if (reason.kind === 'passedPawn')
       return reason.made ? 'creating a passed pawn' : 'pushing the passed pawn';
     if (reason.kind === 'fork') return `forking ${pairOf(viewer, reason.first, reason.second)}`;
@@ -70,17 +92,26 @@ type PiecePlans =
   | 'develops'
   | 'outpost'
   | 'chases'
+  | 'attacksPawn'
   | 'pins'
   | 'saves'
   | 'guards'
   | 'centralizes'
   | 'outruns'
   | 'entersSquare'
-  | 'discovery';
+  | 'discovery'
+  | 'fileBattery'
+  | 'diagonalBattery';
 
 const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
-  openFile: halfOpen => {
+  openFile: (halfOpen, contested) => {
     const file = `the ${halfOpen ? 'half-open' : 'open'} file`;
+    if (contested)
+      return [
+        `That contests ${file}.`,
+        `A challenge for ${file}: it won’t be the other side’s alone.`,
+        `${capitalize(file)} is contested now.`,
+      ];
     return [
       `The rook takes ${file}, where it belongs.`,
       `The rook takes ${file}.`,
@@ -157,33 +188,6 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
     'A central pawn: more space, more control.',
   ],
 };
-
-// What a quiet move does for the position.
-// What a move sets up against the other side's pieces.
-function tacticPlansEn(
-  the: (piece: Piece) => string,
-): Pick<PlanSentences, 'chases' | 'pins' | 'discovery'> {
-  return {
-    chases: piece => [
-      `${capitalize(the(piece))} is under attack and has to move.`,
-      `That hits ${the(piece)}, gaining time.`,
-      `${capitalize(the(piece))} has to move: that gains a tempo.`,
-    ],
-    pins: (piece, behind) => [
-      `${capitalize(the(piece))} is pinned to ${bare(behind)}.`,
-      `A pin: ${the(piece)} can’t move without exposing ${bare(behind)}.`,
-      `${capitalize(the(piece))} is stuck in front of ${bare(behind)}.`,
-    ],
-    discovery: (slider, screen, target) => {
-      const blow = target.role === 'king' ? 'a discovered check' : 'a discovered attack';
-      return [
-        `${capitalize(the(slider))} lines up behind ${the(screen)} on ${the(target)}: once ${the(screen)} moves, that’s ${blow}.`,
-        `A battery: ${the(slider)} behind ${the(screen)}, aimed at ${the(target)}.`,
-        `${capitalize(the(screen))} only has to move to unleash ${the(slider)} on ${the(target)}.`,
-      ];
-    },
-  };
-}
 
 export function plansEn(viewer: Viewer): PlanSentences {
   const the = (piece: Piece): string => definite(viewer, piece);

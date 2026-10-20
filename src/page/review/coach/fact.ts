@@ -118,16 +118,12 @@ function goodFact(input: FactInput): Fact | null {
 // The plies of the opening, where what a move does matters more than a slightly better one.
 const OPENING_PLIES = 20;
 
-/** Whether the game is decided: a winning position, or a mate, for either side. */
-const decided = (move: MoveVerdict): boolean => Math.abs(evaluationLevel(move.after)) >= 3;
-
-// What a quiet good move does, or the move a little better, unless the game
-// is decided. Of the opponent's, only what the reader must watch out for.
+// What a quiet good move does, or the move a little better: a good move's
+// remarks say there was better, so the coach names it, even in a decided game.
 function quietFact(input: FactInput): Fact | null {
   const { move, facts, before, after, theirs } = input;
   const plan = planFact({ move, sentences: facts, before, after, theirs });
-  const nitpick = move.moveClass === 'good' && !decided(move) && !theirs;
-  const better = nitpick ? littleBetterFact(input) : null;
+  const better = move.moveClass === 'good' ? littleBetterFact(input) : null;
   return move.ply <= OPENING_PLIES ? (plan ?? better) : (better ?? plan);
 }
 

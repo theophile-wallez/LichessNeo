@@ -11,6 +11,7 @@ import {
 import type { Mark, MarkTone } from '#page/board/review-arrows.ts';
 import { forkedSquares } from '#page/review/chess/fork.ts';
 import { pinOf } from '#page/review/chess/rays.ts';
+import { batteryMarks } from './battery.ts';
 import { discoveryMarks } from './discovery.ts';
 import { doubleThreatMarks } from './double-threat.ts';
 import type { Reason } from './idea.ts';
@@ -114,9 +115,11 @@ function pieceMarks(reason: Reason, { after, shown }: Scene, to: Square): Mark[]
     // A line to the piece defended would read as the move going on there: its ring alone.
     return reason.kind === 'chases' ? hits(to, [target], 'attack') : [ring(target, 'defense')];
   }
+  if (reason.kind === 'attacksPawn') return hits(to, [reason.square], 'attack');
   if (reason.kind === 'saves') return [ring(to, 'defense')];
   if (reason.kind === 'discovery') return discoveryMarks(after, to, shown);
   if (reason.kind === 'outpost') return outpostMarks(after, to);
+  if (reason.kind === 'diagonalBattery') return batteryMarks(after, to);
   return null;
 }
 
@@ -135,6 +138,14 @@ export function withMove(
   return [link(from, to, tone), ...marks];
 }
 
+// The reasons drawn as the file of the rook, or the queen, moved.
+const ON_FILE: ReadonlySet<Reason['kind']> = new Set<Reason['kind']>([
+  'openFile',
+  'doublesRooks',
+  'fileBattery',
+  'preparesBattery',
+]);
+
 /** What the coach draws of the reason a move was, or would have been, played for. */
 export function reasonMarks(reason: Reason | null, scene: Scene): Mark[] | null {
   const from = parseSquare(scene.uci.slice(0, 2));
@@ -149,7 +160,7 @@ export function reasonMarks(reason: Reason | null, scene: Scene): Mark[] | null 
   if (reason.kind === 'opposition') return oppositionMarks(scene.after);
   if (reason.kind === 'passedPawn') return roadMarks(scene.after, to);
   if (reason.kind === 'behindPasser') return behindMarks(scene.after, to);
-  if (reason.kind === 'openFile' || reason.kind === 'doublesRooks')
+  if (ON_FILE.has(reason.kind))
     return [{ kind: 'cells', squares: outFrom(to, fileOf(to)), tone: 'plan' }];
   if (reason.kind === 'seventhRank')
     return [{ kind: 'cells', squares: outFrom(to, rankOf(to)), tone: 'plan' }];

@@ -56,9 +56,11 @@ describe('planFact', () => {
 
   it('sees a rook take an open or a half-open file', () => {
     const fen = '4k3/p3p3/8/8/8/8/P3P3/R3K3 w - - 0 1';
-    expect(en.facts.openFile(false)).toContain(planOf({ fen, uci: 'a1b1', san: 'Rb1' }));
+    expect(en.facts.openFile(false, false)).toContain(planOf({ fen, uci: 'a1b1', san: 'Rb1' }));
     const halfOpen = '4k3/pp6/8/8/8/8/P7/R3K3 w - - 0 1';
-    expect(en.facts.openFile(true)).toContain(planOf({ fen: halfOpen, uci: 'a1b1', san: 'Rb1' }));
+    expect(en.facts.openFile(true, false)).toContain(
+      planOf({ fen: halfOpen, uci: 'a1b1', san: 'Rb1' }),
+    );
   });
 
   it('sees a passed pawn made, then pushed', () => {

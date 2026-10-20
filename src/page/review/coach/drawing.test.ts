@@ -75,7 +75,11 @@ describe('reasonMarks', () => {
   it('marks a rook’s file or rank out from the rook, and the square a pawn leaves the king', () => {
     const file = ['d3', 'd5', 'd2', 'd6', 'd1', 'd7', 'd8'];
     expect(
-      marks({ kind: 'openFile', halfOpen: false }, '4k3/8/8/8/R7/8/8/4K3 w - - 0 1', 'a4d4'),
+      marks(
+        { kind: 'openFile', halfOpen: false, contested: false },
+        '4k3/8/8/8/R7/8/8/4K3 w - - 0 1',
+        'a4d4',
+      ),
     ).toEqual([{ kind: 'cells', squares: file, tone: 'plan' }]);
     const rank = ['b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7'];
     expect(marks({ kind: 'seventhRank' }, '4k3/8/8/8/8/8/8/R3K3 w - - 0 1', 'a1a7')).toEqual([
@@ -116,6 +120,31 @@ describe('reasonMarks', () => {
     ]);
     const develops = { kind: 'develops', piece: white('queen') } as const;
     expect(marks({ kind: 'both', first: develops, second: develops }, fen, 'd2b2')).toBeNull();
+  });
+
+  it('draws the line to a pawn left undefended, and a battery’s line to its target', () => {
+    const pawn = { kind: 'attacksPawn', piece: black('pawn'), square: 'a7' } as const;
+    expect(marks(pawn, '4k3/p7/8/8/8/8/8/2B1K3 w - - 0 1', 'c1e3')).toEqual([
+      { kind: 'link', from: 'e3', to: 'a7', tone: 'attack' },
+      { kind: 'ring', square: 'a7', tone: 'attack' },
+    ]);
+    const battery = {
+      kind: 'diagonalBattery',
+      mover: white('queen'),
+      partner: white('bishop'),
+      target: black('pawn'),
+    } as const;
+    expect(marks(battery, '6k1/6pp/8/8/8/8/3Q4/1B4K1 w - - 0 1', 'd2c2')).toEqual([
+      { kind: 'link', from: 'b1', to: 'h7', tone: 'attack' },
+      { kind: 'ring', square: 'h7', tone: 'attack' },
+    ]);
+  });
+
+  it('marks the file a battery is made ready on', () => {
+    const ready = { kind: 'preparesBattery', partner: white('rook'), halfOpen: false } as const;
+    expect(marks(ready, '4k3/8/8/8/8/8/8/1Q2KR2 w - - 0 1', 'b1b7')).toEqual([
+      { kind: 'cells', squares: ['b6', 'b8', 'b5', 'b4', 'b3', 'b2', 'b1'], tone: 'plan' },
+    ]);
   });
 
   it('draws nothing of a reason it has no drawing for, or of none', () => {

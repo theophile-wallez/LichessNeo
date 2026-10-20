@@ -4,7 +4,7 @@ import type { Phase } from '#page/review/rating/phases.ts';
 import type { Reason } from '#page/review/coach/idea.ts';
 import type { Theme } from '#page/review/coach/said.ts';
 import type { MotifKind } from '#page/review/chess/motifs.ts';
-import type { Color, Piece } from '#shared/chess/index.ts';
+import type { Color, Piece, Square } from '#shared/chess/index.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 
 // What the review says, per language. Moves, pieces and squares go into the
@@ -212,9 +212,13 @@ export interface LineFacts {
 export interface PlanSentences {
   readonly develops: (piece: Piece) => Ways;
   readonly outpost: (piece: Piece) => Ways;
-  /** A rook on a file without pawns, or `halfOpen`, the other side's only. */
-  readonly openFile: (halfOpen: boolean) => Ways;
+  /** A rook on a file without pawns, or `halfOpen`, the other side's only; `contested` when the other side's rook or queen is there too. */
+  readonly openFile: (halfOpen: boolean, contested: boolean) => Ways;
   readonly doublesRooks: Ways;
+  /** `mover` lined up with `partner` on a file, `halfOpen` when the other side has pawns there. */
+  readonly fileBattery: (mover: Piece, partner: Piece, halfOpen: boolean) => Ways;
+  /** `mover` lined up with `partner` on a diagonal aimed at `target`. */
+  readonly diagonalBattery: (mover: Piece, partner: Piece, target: Piece) => Ways;
   readonly seventhRank: Ways;
   readonly connectsRooks: Ways;
   /** A pawn pushed with nothing to stop it: `made` passed by the push. */
@@ -225,6 +229,8 @@ export interface PlanSentences {
   readonly supportsCenter: Ways;
   /** A piece attacked, which has to move. */
   readonly chases: (piece: Piece) => Ways;
+  /** A pawn attacked that nothing defends. */
+  readonly attacksPawn: (pawn: Piece, square: Square) => Ways;
   readonly pins: (piece: Piece, behind: Piece) => Ways;
   /** The piece moved, out of danger. */
   readonly saves: (piece: Piece) => Ways;

@@ -42,7 +42,12 @@ export function between(from: Square, to: Square): Square[] {
   return squares;
 }
 
-function firstPiece(board: Board, from: Square, [fileStep, rankStep]: readonly [number, number]) {
+/** The first piece from `from`, the square itself left out, one step at a time. */
+export function firstPiece(
+  board: Board,
+  from: Square,
+  [fileStep, rankStep]: readonly [number, number],
+): { square: Square; piece: Piece } | null {
   const [file, rank] = squareCoords(from);
   for (let k = 1; ; k++) {
     const square = squareAt(file + fileStep * k, rank + rankStep * k);

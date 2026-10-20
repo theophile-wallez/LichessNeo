@@ -109,14 +109,14 @@ describe('the comment', () => {
     expect(parts.some(part => en.trajectory.turningPoint.includes(part.text))).toBe(false);
   });
 
-  it('nitpicks a good move only while the game is undecided', () => {
+  it('names the move a little better than a good one, even in a decided game', () => {
     const nitpick = /more precise|slightly better|more accurate/;
     const good = e4(record(52, 'd2d4'), record(49, 'e7e5'), 41);
     expect(good.moveClass).toBe('good');
     expect(said(good)[0]?.text).toMatch(nitpick);
     const won = e4(record(98, 'd2d4'), record(96, 'e7e5'), 41);
     expect(won.moveClass).toBe('good');
-    expect(said(won)[0]?.text).not.toMatch(nitpick);
+    expect(said(won)[0]?.text).toMatch(nitpick);
   });
 
   it('says a good move’s plan before the nitpick in the opening', () => {

@@ -1,6 +1,14 @@
 import type { Piece } from '#shared/chess/index.ts';
-import { isPlain, type PlainReason, type Reason } from '#page/review/coach/idea.ts';
-import { agreement, capitalize, owned, pairOf, pronoun, subjectPronoun } from './fr-grammar.ts';
+import {
+  isLineReason,
+  isPlain,
+  type LineReason,
+  type PlainReason,
+  type Reason,
+} from '#page/review/coach/idea.ts';
+import { squareToken } from '#page/review/comment/tokens.ts';
+import { agreement, capitalize, owned, pairOf, pieceName, pronoun } from './fr-grammar.ts';
+import { tacticPlansFr } from './fr-tactic-plans.ts';
 import type { PlanSentences, Viewer } from './types.ts';
 
 // The piece a pin holds is its own side's: named once whose they are, not twice.
@@ -32,6 +40,8 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string, tense: Ten
   if (reason.kind === 'outpost')
     return `${tense('installait', 'installe')} ${piece} sur un avant-poste`;
   if (reason.kind === 'chases') return `${tense('attaquait', 'attaque')} ${piece}`;
+  if (reason.kind === 'attacksPawn')
+    return `${tense('attaquait', 'attaque')} le ${pieceName(reason.piece)} ${squareToken(reason.square)}, que rien ne ${tense('défendait', 'défend')}`;
   if (reason.kind === 'pins')
     return `${tense('clouait', 'cloue')} ${piece} sur ${bare(reason.behind)}`;
   if (reason.kind === 'saves') return `${tense('mettait', 'met')} ${piece} à l’abri`;
@@ -54,6 +64,22 @@ function tacticWhy(reason: TacticReason, viewer: Viewer, tense: Tense): string {
     : `${tense('préparait', 'prépare')} une attaque à la découverte sur ${the(reason.target)}`;
 }
 
+// An open file taken, or a battery: with the queen there already, a rook
+// lines up with it rather than taking the file.
+function lineWhy(reason: LineReason, the: (piece: Piece) => string, tense: Tense): string {
+  const forms = tense('formait', 'forme');
+  if (reason.kind === 'diagonalBattery')
+    return `${forms} une batterie avec ${the(reason.partner)}, braquée sur ${the(reason.target)}`;
+  const file = `la colonne ${reason.halfOpen ? 'semi-ouverte' : 'ouverte'}`;
+  if (reason.kind === 'fileBattery')
+    return `${forms} une batterie avec ${the(reason.partner)} sur ${file}`;
+  if (reason.kind === 'preparesBattery')
+    return `${tense('préparait', 'prépare')} une batterie avec ${the(reason.partner)} sur ${file}`;
+  return reason.contested
+    ? `${tense('contestait', 'conteste')} ${file}`
+    : `${tense('prenait', 'prend')} ${file}`;
+}
+
 // What a move did, after « qui » : « Mieux valait Cf6, qui sortait ton cavalier » ;
 // or does, for a move still to come : « Ça permet Fe2, qui attaque ton cavalier ».
 function whyFr(viewer: Viewer): (reason: Reason, now?: boolean) => string {
@@ -65,8 +91,7 @@ function whyFr(viewer: Viewer): (reason: Reason, now?: boolean) => string {
     if (reason.kind === 'discovery' || reason.kind === 'doubleThreat' || reason.kind === 'fork')
       return tacticWhy(reason, viewer, tense);
     if ('piece' in reason) return pieceWhy(reason, the, tense);
-    if (reason.kind === 'openFile')
-      return `${tense('prenait', 'prend')} la colonne ${reason.halfOpen ? 'semi-ouverte' : 'ouverte'}`;
+    if (isLineReason(reason)) return lineWhy(reason, the, tense);
     if (reason.kind === 'passedPawn')
       return reason.made
         ? tense('créait un pion passé', 'crée un pion passé')
@@ -87,17 +112,26 @@ type PiecePlans =
   | 'develops'
   | 'outpost'
   | 'chases'
+  | 'attacksPawn'
   | 'pins'
   | 'saves'
   | 'guards'
   | 'centralizes'
   | 'outruns'
   | 'entersSquare'
-  | 'discovery';
+  | 'discovery'
+  | 'fileBattery'
+  | 'diagonalBattery';
 
 const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
-  openFile: halfOpen => {
+  openFile: (halfOpen, contested) => {
     const file = `la colonne ${halfOpen ? 'semi-ouverte' : 'ouverte'}`;
+    if (contested)
+      return [
+        `Ça conteste ${file}.`,
+        `Ça vient disputer ${file} à l’autre camp.`,
+        `${capitalize(file)} est contestée : l’autre camp ne l’aura pas seul.`,
+      ];
     return [
       `La tour prend ${file}, sa place idéale.`,
       `La tour prend ${file}.`,
@@ -174,32 +208,6 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
     'Un pion central : plus d’espace, plus de contrôle.',
   ],
 };
-
-// What a move sets up against the other side's pieces.
-function tacticPlansFr(
-  the: (piece: Piece) => string,
-): Pick<PlanSentences, 'chases' | 'pins' | 'discovery'> {
-  return {
-    chases: piece => [
-      `${capitalize(the(piece))} est attaqué${agreement(piece)} et doit bouger.`,
-      `Ça attaque ${the(piece)}, avec gain de temps.`,
-      `${capitalize(the(piece))} doit bouger : du temps de gagné.`,
-    ],
-    pins: (piece, behind) => [
-      `${capitalize(the(piece))} est cloué${agreement(piece)} sur ${bare(behind)}.`,
-      `Un clouage : ${the(piece)} ne peut plus bouger sans exposer ${bare(behind)}.`,
-      `${capitalize(the(piece))} est coincé${agreement(piece)} devant ${bare(behind)}.`,
-    ],
-    discovery: (slider, screen, target) => {
-      const blow = target.role === 'king' ? 'échec à la découverte' : 'une attaque à la découverte';
-      return [
-        `${capitalize(the(slider))} se place derrière ${the(screen)}, braqué${agreement(slider)} sur ${the(target)} : dès qu’${subjectPronoun(screen)} bougera, ce sera ${blow}.`,
-        `Une batterie se forme : ${the(slider)} derrière ${the(screen)}, sur ${the(target)}.`,
-        `${capitalize(the(screen))} n’a plus qu’à bouger pour découvrir ${the(slider)} sur ${the(target)}.`,
-      ];
-    },
-  };
-}
 
 // What a quiet move does for the position.
 export function plansFr(viewer: Viewer): PlanSentences {

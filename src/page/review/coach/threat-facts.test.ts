@@ -133,6 +133,17 @@ describe('parriedFact', () => {
 // The bishop on c1 can come to d2, at the undefended knight on b4.
 const KNIGHT_ON_B4 = '6k1/5ppp/8/8/1n6/8/5PPP/2B3K1 w - - 0 1';
 
+// Rb1 eyes the queen on d1, but the rook on b8 may take it first.
+const rookToB1 = (reply: string): MoveVerdict =>
+  move({
+    from: '1r4k1/5ppp/8/8/8/1R4P1/5PPK/3q4 w - - 0 1',
+    uci: 'b3b1',
+    san: 'Rb1',
+    to: '1r4k1/5ppp/8/8/8/6P1/5PPK/1R1q4 b - - 1 1',
+    after: [{ cp: 0 }, [reply, 'h2h3']],
+  });
+const RXD1 = threat(rookToB1('g8f8').position.fen, { cp: 900 }, ['b1d1', 'b8d8', 'h2h3']);
+
 describe('threatensFact', () => {
   const bishopAims = move({
     from: KNIGHT_ON_B4,
@@ -175,6 +186,11 @@ describe('threatensFact', () => {
     });
     const mate = threat(rookSwings.position.fen, { mate: 1 }, ['d1d8']);
     expect(threatensFact(input(rookSwings), mate)?.text).toBe('[[m:w:Rd8#]] would be mate next.');
+  });
+
+  it('says nothing of a threat the reply takes back: that’s a trade', () => {
+    expect(threatensFact(input(rookToB1('b8b1')), RXD1)).toBeNull();
+    expect(threatensFact(input(rookToB1('g8f8')), RXD1)?.text).toMatch(/Rxd1/);
   });
 });
 

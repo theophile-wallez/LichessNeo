@@ -8,7 +8,8 @@ import {
   type Square,
   squareCoords,
 } from '#shared/chess/index.ts';
-import { between, pinOf } from '#page/review/chess/rays.ts';
+import { between, firstPiece, isInBadSpot, pinOf } from '#page/review/chess/rays.ts';
+import { batteryPlan, FILE_STEPS } from './battery.ts';
 import type { Plan } from './idea.ts';
 import { ownRank, pawnsOn } from './structure.ts';
 
@@ -34,6 +35,26 @@ export function pressureOf(after: Board, to: Square, color: Color): Plan | null 
       return { kind: 'chases', piece };
   }
   return null;
+}
+
+/**
+ * A pawn of the other side's that the piece on `to` is the first to attack,
+ * and nothing defends: a threat only if that piece can't be taken first.
+ */
+export function loosePawnOf(before: Board, after: Board, to: Square): Square | null {
+  const mover = after.get(to);
+  if (!mover || isInBadSpot(after, to)) return null;
+  const them = opposite(mover.color);
+  const loose = (square: Square): boolean => {
+    const piece = after.get(square);
+    return (
+      piece?.role === 'pawn' &&
+      piece.color === them &&
+      attackers(after, square, them).length === 0 &&
+      attackers(before, square, mover.color).length === 0
+    );
+  };
+  return attackedSquares(after, to).find(loose) ?? null;
 }
 
 /** The squares of `color`'s rooks. */
@@ -63,8 +84,8 @@ const onSeventh = (after: Board, to: Square, color: Color): boolean =>
         (piece.role === 'king' && ownRank(square, color) === 7)),
   );
 
-/** What a rook's move does: the seventh rank, rooks doubled on a file, an open file. */
-export function rookPlan(after: Board, to: Square, color: Color): Plan | null {
+/** What a rook's move does: the seventh rank, rooks doubled on a file, a battery, an open file. */
+export function rookPlan(after: Board, [from, to]: [Square, Square], color: Color): Plan | null {
   if (onSeventh(after, to, color)) return { kind: 'seventhRank' };
   const [file] = squareCoords(to);
   if (pawnsOn(after, file, color).length > 0) return null;
@@ -72,7 +93,37 @@ export function rookPlan(after: Board, to: Square, color: Color): Plan | null {
     square => square !== to && squareCoords(square)[0] === file,
   );
   if (partner && clear(after, partner, to)) return { kind: 'doublesRooks' };
-  return { kind: 'openFile', halfOpen: pawnsOn(after, file, opposite(color)).length > 0 };
+  const battery = batteryPlan(after, [from, to]);
+  if (battery) return battery;
+  const halfOpen = pawnsOn(after, file, opposite(color)).length > 0;
+  return { kind: 'openFile', halfOpen, contested: faced(after, to, color) };
+}
+
+/** The queen come onto a file free of its pawns, to face a rook or the queen of the other side's there. */
+export function contestsFile(
+  after: Board,
+  [from, to]: [Square, Square],
+  color: Color,
+): Plan | null {
+  const [file] = squareCoords(to);
+  if (squareCoords(from)[0] === file || pawnsOn(after, file, color).length > 0) return null;
+  if (!faced(after, to, color)) return null;
+  return {
+    kind: 'openFile',
+    halfOpen: pawnsOn(after, file, opposite(color)).length > 0,
+    contested: true,
+  };
+}
+
+// Whether a rook or queen of the other side's faces the piece on `to` along its file.
+function faced(after: Board, to: Square, color: Color): boolean {
+  return FILE_STEPS.some(step => {
+    const ahead = firstPiece(after, to, step);
+    return (
+      ahead?.piece.color === opposite(color) &&
+      (ahead.piece.role === 'rook' || ahead.piece.role === 'queen')
+    );
+  });
 }
 
 /** A pawn on its fourth rank in the center: d4 and e4 for White, d5 and e5 for Black. */

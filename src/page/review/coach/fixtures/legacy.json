@@ -85,7 +85,7 @@
       {
         "remark": "Just right. Keep it up!",
         "parts": [
-          ["Just right. Keep it up!"],
+          ["The [[p:wq]]queen and the [[p:wb]]bishop form a battery aimed at the [[p:bp]]pawn."],
           ["A complete turnaround: now Black has a slight edge.", true]
         ]
       },
@@ -260,7 +260,7 @@
       {
         "remark": "Parfait. Continue comme ça !",
         "parts": [
-          ["Parfait. Continue comme ça !"],
+          ["La [[p:wq]]dame et le [[p:wb]]fou forment une batterie braquée sur le [[p:bp]]pion."],
           ["Retournement complet : maintenant les Noirs ont un léger avantage.", true]
         ]
       },
@@ -6136,7 +6136,10 @@
       },
       {
         "remark": "Oh no! This loses a lot.",
-        "parts": [["The game is level again.", true], ["[[m:w:Bg5]] was called for here."]]
+        "parts": [
+          ["The game is level again.", true],
+          ["Better was [[m:w:Bg5]], attacking the undefended [[p:bp]]pawn on [[s:e7]]."]
+        ]
       },
       {
         "remark": "This turns the game around.",
@@ -6466,7 +6469,12 @@
       },
       {
         "remark": "Oh non ! Ça coûte très cher.",
-        "parts": [["La partie redevient équilibrée.", true], ["Le bon coup était [[m:w:Bg5]]."]]
+        "parts": [
+          ["La partie redevient équilibrée.", true],
+          [
+            "Il fallait jouer [[m:w:Bg5]], qui attaquait le [[p:bp]]pion [[s:e7]], que rien ne défendait."
+          ]
+        ]
       },
       {
         "remark": "Ça renverse la partie.",
@@ -6652,7 +6660,10 @@
         "remark": "Playable, though not the most precise.",
         "parts": [["[[m:b:Re8]] was a little more precise, taking the half-open file."]]
       },
-      { "remark": "Nothing better here.", "parts": [["Nothing better here."]] },
+      {
+        "remark": "Nothing better here.",
+        "parts": [["The [[p:bp]]pawn on [[s:f5]] is left hanging: nothing defends it."]]
+      },
       {
         "remark": "Exactly what the engine wanted.",
         "parts": [
@@ -6986,7 +6997,10 @@
         "remark": "Jouable, sans être le plus précis.",
         "parts": [["[[m:b:Re8]], qui prenait la colonne semi-ouverte, était un poil plus juste."]]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Rien de mieux ici."]] },
+      {
+        "remark": "Rien de mieux ici.",
+        "parts": [["Le [[p:bp]]pion [[s:f5]] est en prise : rien ne le défend."]]
+      },
       {
         "remark": "Exactement ce que voulait le moteur.",
         "parts": [

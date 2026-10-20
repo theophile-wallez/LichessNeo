@@ -155,10 +155,48 @@ describe('a quiet move’s plan', () => {
     ).toBe('clouait ton [[p:bn]]cavalier sur le [[p:bk]]roi');
   });
 
+  it('says a battery made or made ready, a file contested, a pawn left undefended', () => {
+    const reasons = [
+      { kind: 'fileBattery', mover: white('rook'), partner: white('queen'), halfOpen: false },
+      {
+        kind: 'diagonalBattery',
+        mover: white('queen'),
+        partner: white('bishop'),
+        target: black('pawn'),
+      },
+      { kind: 'openFile', halfOpen: true, contested: true },
+      {
+        kind: 'both',
+        first: { kind: 'preparesBattery', partner: white('rook'), halfOpen: false },
+        second: { kind: 'attacksPawn', piece: black('pawn'), square: 'a7' },
+      },
+    ] as const;
+    expect(reasons.map(reason => english('white').facts.why(reason))).toEqual([
+      'forming a battery with your [[p:wq]]queen on the open file',
+      'forming a battery with your [[p:wb]]bishop, aimed at the opponent’s [[p:bp]]pawn',
+      'contesting the half-open file',
+      'preparing a battery with your [[p:wr]]rook on the open file and attacking the undefended [[p:bp]]pawn on [[s:a7]]',
+    ]);
+    expect(reasons.map(reason => french('white').facts.why(reason))).toEqual([
+      'formait une batterie avec ta [[p:wq]]dame sur la colonne ouverte',
+      'formait une batterie avec ton [[p:wb]]fou, braquée sur le [[p:bp]]pion adverse',
+      'contestait la colonne semi-ouverte',
+      'préparait une batterie avec ta [[p:wr]]tour sur la colonne ouverte et attaquait le [[p:bp]]pion [[s:a7]], que rien ne défendait',
+    ]);
+    expect(en.facts.attacksPawn(black('pawn'), 'a7')).toContain(
+      'That attacks the undefended [[p:bp]]pawn on [[s:a7]].',
+    );
+    expect(fr.facts.attacksPawn(black('pawn'), 'a7')).toContain(
+      'Le [[p:bp]]pion [[s:a7]] est en prise : rien ne le défend.',
+    );
+    expect(en.facts.openFile(false, true)).toContain('That contests the open file.');
+    expect(fr.facts.openFile(false, true)).toContain('Ça conteste la colonne ouverte.');
+  });
+
   it('is said in both languages', () => {
     expect(en.facts.develops(white('knight'))).toContain('The [[p:wn]]knight comes into play.');
     expect(fr.facts.develops(white('knight'))).toContain('Le [[p:wn]]cavalier entre en jeu.');
-    expect(en.facts.openFile(true)).toContain(
+    expect(en.facts.openFile(true, false)).toContain(
       'The rook takes the half-open file, where it belongs.',
     );
     expect(fr.facts.passedPawn(true)).toContain('Un pion passé est né.');

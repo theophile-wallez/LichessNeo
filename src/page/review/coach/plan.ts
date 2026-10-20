@@ -10,13 +10,16 @@ import type { MoveVerdict } from '#page/review/judge/types.ts';
 import type { PlanSentences, Ways } from '#page/review/i18n/types.ts';
 import { isPlain, type Plan, type Reason } from './idea.ts';
 import {
+  contestsFile,
   fightsCenter,
+  loosePawnOf,
   pressureOf,
   rookPlan,
   rooksConnected,
   supportsCenter,
   takesCenter,
 } from './pressure.ts';
+import { batteryPlan, batteryReady } from './battery.ts';
 import { discoveryOf } from './discovery.ts';
 import { reasonMarks } from './drawing.ts';
 import { takesOpposition } from './opposition.ts';
@@ -52,16 +55,20 @@ const BACK_SQUARES: Readonly<Record<Color, readonly string[]>> = {
   black: ['b8', 'c8', 'f8', 'g8'],
 };
 
-// A knight's or a rook's square: an outpost, the center, behind a passed pawn, a file or rank.
+// A knight's or a rook's square: an outpost, the center, behind a passed pawn, a
+// file or rank; a bishop's or the queen's, a battery, or the queen's, a file contested.
 function squarePlan({ after, color }: Play, from: Square, to: Square): Plan | null {
   const piece = after.get(to);
   if (piece?.role === 'knight') {
     if (isOutpost(after, to, piece)) return { kind: 'outpost', piece };
     return centralSquare(to) && !centralSquare(from) ? { kind: 'centralizes', piece } : null;
   }
+  if (piece?.role === 'bishop') return batteryPlan(after, [from, to]);
+  if (piece?.role === 'queen')
+    return batteryPlan(after, [from, to]) ?? contestsFile(after, [from, to], color);
   if (piece?.role !== 'rook') return null;
   if (behindPasser(after, to, color)) return { kind: 'behindPasser' };
-  return ownRank(from, color) === 6 ? null : rookPlan(after, to, color);
+  return ownRank(from, color) === 6 ? null : rookPlan(after, [from, to], color);
 }
 
 function piecePlan(play: Play, from: Square, to: Square): Plan | null {
@@ -114,34 +121,50 @@ export function planOf(play: Play): Plan | null {
     discoveryOf(play.before, play.after, [from, to]) ??
     piecePlan(play, from, to) ??
     safetyPlan(play.before, play.after, [from, to]) ??
-    (connects(play, from) ? { kind: 'connectsRooks' } : null)
+    (connects(play, from) ? { kind: 'connectsRooks' } : null) ??
+    loosePawnPlan(play, to)
   );
 }
 
-// The tactics a move may set up while it defends a piece of its own.
-const TACTICS: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>(['chases', 'pins', 'discovery']);
+// A pawn left hanging is the move's point only when it has no other.
+function loosePawnPlan({ before, after }: Play, to: Square): Plan | null {
+  const pawn = loosePawnOf(before, after, to);
+  const piece = pawn && after.get(pawn);
+  return pawn && piece ? { kind: 'attacksPawn', piece, square: pawn } : null;
+}
 
-/** The move's plan, and the piece it defends on the way when the plan is a tactic. */
+// The tactics a move may set up while it defends a piece of its own.
+const TACTICS: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>([
+  'chases',
+  'attacksPawn',
+  'pins',
+  'discovery',
+]);
+
+/**
+ * The move's plan, and when the plan is a tactic, the piece it defends on the
+ * way, or else the battery it leaves ready on its file.
+ */
 export function reasonOf(play: Play): Reason | null {
   const plan = planOf(play);
   const from = parseSquare(play.uci.slice(0, 2));
   const to = parseSquare(play.uci.slice(2, 4));
   if (!plan || !from || !to || !TACTICS.has(plan.kind)) return plan;
-  const safety = safetyPlan(play.before, play.after, [from, to]);
-  return safety ? { kind: 'both', first: safety, second: plan } : plan;
+  const also = safetyPlan(play.before, play.after, [from, to]) ?? batteryReady(play.after, to);
+  return also ? { kind: 'both', first: also, second: plan } : plan;
 }
 
 /** The ways to say a plan. */
 export function planWays(plan: Plan, sentences: PlanSentences): Ways {
   if (isPlain(plan)) return sentences[plan.kind];
-  if (plan.kind === 'develops') return sentences.develops(plan.piece);
-  if (plan.kind === 'outpost') return sentences.outpost(plan.piece);
-  if (plan.kind === 'openFile') return sentences.openFile(plan.halfOpen);
+  if (plan.kind === 'attacksPawn') return sentences.attacksPawn(plan.piece, plan.square);
+  if ('piece' in plan && plan.kind !== 'pins') return sentences[plan.kind](plan.piece);
+  if (plan.kind === 'openFile') return sentences.openFile(plan.halfOpen, plan.contested);
+  if (plan.kind === 'fileBattery')
+    return sentences.fileBattery(plan.mover, plan.partner, plan.halfOpen);
+  if (plan.kind === 'diagonalBattery')
+    return sentences.diagonalBattery(plan.mover, plan.partner, plan.target);
   if (plan.kind === 'passedPawn') return sentences.passedPawn(plan.made);
-  if (plan.kind === 'chases') return sentences.chases(plan.piece);
-  if (plan.kind === 'saves') return sentences.saves(plan.piece);
-  if (plan.kind === 'guards') return sentences.guards(plan.piece);
-  if (plan.kind === 'centralizes') return sentences.centralizes(plan.piece);
   if (plan.kind === 'outruns') return sentences.outruns(plan.king);
   if (plan.kind === 'entersSquare') return sentences.entersSquare(plan.king);
   if (plan.kind === 'discovery') return sentences.discovery(plan.slider, plan.screen, plan.target);
@@ -162,12 +185,15 @@ const WATCHED: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>([
   'outpost',
   'openFile',
   'doublesRooks',
+  'fileBattery',
+  'diagonalBattery',
   'seventhRank',
   'passedPawn',
   'outruns',
   'opposition',
   'behindPasser',
   'chases',
+  'attacksPawn',
   'pins',
   'discovery',
 ]);

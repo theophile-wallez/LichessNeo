@@ -114,6 +114,13 @@ function wasThere(move: MoveVerdict, menace: Menace): boolean {
   );
 }
 
+// Whether the reply takes the piece the threat starts with: then it's a trade
+// (a rook taken and taken back), not a threat.
+function takenBack({ after }: MoveVerdict, menace: Menace): boolean {
+  const from = menace.plies[0]?.uci.slice(0, 2);
+  return from !== undefined && after.best?.slice(2, 4) === from;
+}
+
 // Whether the mover could mate already: then the threat isn't the move's doing.
 const matedAlready = ({ before }: MoveVerdict, me: Color): boolean =>
   'mate' in before && before.mate * (me === 'white' ? 1 : -1) > 0;
@@ -139,7 +146,7 @@ export function threatensFact(
   const { move, facts, me } = input;
   const menace = realMenace(threat, move.after, me);
   const first = menace && lineOf(menace.plies.slice(0, 1), null);
-  if (!menace || !first) return null;
+  if (!menace || !first || takenBack(move, menace)) return null;
   // A piece that could take before may still not have mated.
   if (menace.mate !== null) {
     if (matedAlready(move, me)) return null;
