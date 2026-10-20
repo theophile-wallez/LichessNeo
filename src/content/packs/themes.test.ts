@@ -57,9 +57,12 @@ describe('the extension’s themes', () => {
     expect(isTheme('board', 'blue')).toBe(false);
   });
 
-  it('give the sounds the Ascent set, and the pieces nothing yet', async () => {
+  it('give the sounds the Ascent and Naturel sets, and the pieces nothing yet', async () => {
     const { isTheme, themesOf } = await load();
-    expect(themesOf('sound')).toEqual([{ id: 'foley', name: 'Ascent' }]);
+    expect(themesOf('sound')).toEqual([
+      { id: 'foley', name: 'Ascent' },
+      { id: 'naturel', name: 'Naturel' },
+    ]);
     expect(themesOf('piece')).toEqual([]);
     expect(isTheme('sound', 'accent')).toBe(false);
   });

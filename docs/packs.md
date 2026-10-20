@@ -5,8 +5,9 @@ you pick others in the user menu's Board, Piece set and Sound panels: the
 **Extension** tab has the extension's own and your packs, the **Lichess** tab
 Lichess's. The extension's own are its blue board, its backlit boards (one
 **Backlit** tile, which opens onto the six of them and how they light up),
-and its **Foley** sound set, played live, with where it puts each move's
-sound. A pack replaces any of the three with yours: a folder on GitHub
+its **Ascent** sound set, played live, with where it puts each move's
+sound, and its **Naturel** set, wooden pieces recorded on a board, several
+takes of each sound. A pack replaces any of the three with yours: a folder on GitHub
 holding a `pack.json` and the files it names.
 
 To import one, open the extension's settings (your account's settings, then
@@ -73,20 +74,35 @@ it). Paths are relative to the folder of `pack.json` and can't leave it.
 
 The sounds:
 
-| Name            | Played on                                 |
-| --------------- | ----------------------------------------- |
-| `move-self`     | your move, or a move on the side you play |
-| `move-opponent` | the other side's move                     |
-| `move-check`    | a move that gives check                   |
-| `capture`       | a capture                                 |
-| `castle`        | castling                                  |
-| `promote`       | a promotion                               |
-| `premove`       | a premove set                             |
-| `illegal`       | a move the board refuses                  |
-| `notify`        | a challenge, a message, a confirmation    |
-| `tenseconds`    | low time                                  |
-| `game-start`    | the start of a game                       |
-| `game-end`      | the end of a game                         |
+| Name                  | Played on                                 |
+| --------------------- | ----------------------------------------- |
+| `move-self`           | your move, or a move on the side you play |
+| `move-opponent`       | the other side's move                     |
+| `move-check`          | a move that gives check                   |
+| `move-slide`          | a long move: see below                    |
+| `move-slide-check`    | a long move that gives check              |
+| `move-knight`         | a knight's move                           |
+| `capture`             | a capture                                 |
+| `capture-check`       | a capture that gives check                |
+| `capture-slide`       | a capture at the end of a long move       |
+| `capture-slide-check` | the same, giving check                    |
+| `castle`              | castling                                  |
+| `promote`             | a promotion                               |
+| `capture-promote`     | a promotion that captures                 |
+| `premove`             | a premove set                             |
+| `illegal`             | a move the board refuses                  |
+| `notify`              | a challenge, a message, a confirmation    |
+| `tenseconds`          | low time                                  |
+| `game-start`          | the start of a game                       |
+| `game-end`            | the end of a game                         |
+
+A long move is a bishop, rook or queen going two squares or more, or a
+pawn's double step. It plays `move-slide` (or `capture-slide`) in place of
+the move's or the capture's sound, if the pack has it; a knight's move, which
+jumps, plays `move-knight`. A check plays `move-check`, or the sound of its
+whole gesture when the pack has it: `capture-check`, `move-slide-check` or
+`capture-slide-check`. A promotion that captures plays `capture-promote`,
+checking or not, if the pack has it.
 
 ## Files
 

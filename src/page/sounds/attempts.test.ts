@@ -98,7 +98,7 @@ describe('move attempts', () => {
   it.each(attempts)('$name: plays what the original played', async attempt => {
     const { sound, calls } = fakeSoundPlayer();
     const session = createSession();
-    hookSoundPlayer(sound, new Map(SOUND_NAMES.map(name => [name, `blob:${name}`])), session);
+    hookSoundPlayer(sound, new Map(SOUND_NAMES.map(name => [name, [`blob:${name}`]])), session);
     stop = watchMoveAttempts(session);
     let board = placeBoard(renderBoard(attempt));
     for (const step of attempt.steps) {
@@ -127,7 +127,7 @@ describe('move attempts', () => {
   it('stays silent in the board editor, where a piece goes anywhere', async () => {
     const { sound, calls } = fakeSoundPlayer();
     const session = createSession();
-    hookSoundPlayer(sound, new Map(SOUND_NAMES.map(name => [name, `blob:${name}`])), session);
+    hookSoundPlayer(sound, new Map(SOUND_NAMES.map(name => [name, [`blob:${name}`]])), session);
     stop = watchMoveAttempts(session);
     const board = placeBoard(
       renderBoard({ placement: '4k3/8/8/8/8/8/4P3/4K3', orientation: 'white' }),
@@ -161,7 +161,7 @@ describe('move attempts', () => {
   ])('takes a click for a move only with a selection $selection', async ({ display, played }) => {
     const { sound, calls } = fakeSoundPlayer();
     const session = createSession();
-    hookSoundPlayer(sound, new Map(SOUND_NAMES.map(name => [name, `blob:${name}`])), session);
+    hookSoundPlayer(sound, new Map(SOUND_NAMES.map(name => [name, [`blob:${name}`]])), session);
     stop = watchMoveAttempts(session);
     const board = placeBoard(
       renderBoard({ placement: '4k3/8/8/8/8/8/4P3/4K3', orientation: 'white', selected: 'e2' }),

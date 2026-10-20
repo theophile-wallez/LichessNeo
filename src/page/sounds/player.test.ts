@@ -4,7 +4,8 @@ import { SquareSchema } from '#shared/testing/square-schema.ts';
 import { type SoundName, SoundNameSchema } from '#shared/sounds.ts';
 import { ColorSchema, renderBoard } from '#shared/testing/boards.ts';
 import { fakeSoundPlayer, type PlayerCall } from './fixtures/sound-player.ts';
-import { hookSoundPlayer } from './player.ts';
+import { parsePlacement } from '#shared/chess/fen.ts';
+import { hookSoundPlayer, setSoundPaths } from './player.ts';
 import { createSession } from './session.ts';
 import type { Synth } from './synth/synth.ts';
 // Each scenario's calls to Lichess's player, as recorded from the original.
@@ -49,6 +50,15 @@ const played = (calls: readonly PlayerCall[]): unknown[] =>
 // JSON turns an undefined volume into null, as it did when recording.
 const asRecorded = (value: unknown): unknown => JSON.parse(JSON.stringify(value));
 
+// Each sound's takes, `count` of them.
+const takes = (...sounds: [SoundName, number][]): Map<SoundName, string[]> =>
+  new Map(
+    sounds.map(([name, count]) => [
+      name,
+      Array.from({ length: count }, (_, i) => `blob:${name}-${i + 1}`),
+    ]),
+  );
+
 beforeEach(() => {
   vi.useFakeTimers({
     toFake: ['setTimeout', 'clearTimeout', 'requestAnimationFrame', 'cancelAnimationFrame', 'Date'],
@@ -63,7 +73,7 @@ afterEach(() => {
 describe('hookSoundPlayer', () => {
   it.each(scenarios)('$name, as the original did', async scenario => {
     const { sound, calls } = fakeSoundPlayer();
-    const urls = new Map(scenario.names.map(name => [name, `blob:${name}`]));
+    const urls = new Map(scenario.names.map(name => [name, [`blob:${name}`]]));
     expect(hookSoundPlayer(sound, urls, createSession())).toBe(true);
     expect([...sound.paths]).toEqual(scenario.paths);
     expect(sound.lnExtHooked).toBe(scenario.hooked);
@@ -89,7 +99,7 @@ describe('hookSoundPlayer', () => {
     sound.lnExtHooked = true;
     const { play } = sound;
     const session = createSession();
-    expect(hookSoundPlayer(sound, new Map([['capture', 'blob:capture']]), session)).toBe(false);
+    expect(hookSoundPlayer(sound, new Map([['capture', ['blob:capture']]]), session)).toBe(false);
     expect(sound.paths.get('ln-ext-capture')).toBe('blob:capture');
     expect(sound.play).toBe(play);
     expect(session.playOurs).toBeNull();
@@ -98,7 +108,7 @@ describe('hookSoundPlayer', () => {
 
   it('plays the pack’s capture or move for a sound it lacks, else Lichess’s', () => {
     const { sound, calls } = fakeSoundPlayer();
-    hookSoundPlayer(sound, new Map([['move-self', 'blob:move-self']]), createSession());
+    hookSoundPlayer(sound, new Map([['move-self', ['blob:move-self']]]), createSession());
     sound.move({ san: 'exd5', ply: 3 });
     sound.move({ san: 'O-O', ply: 9 });
     expect(played(calls)).toEqual(['capture', 'ln-ext-move-self']);
@@ -106,7 +116,7 @@ describe('hookSoundPlayer', () => {
 
   it('plays a capture’s sound for a capture that checks, when the pack has no check sound', () => {
     const { sound, calls } = fakeSoundPlayer();
-    hookSoundPlayer(sound, new Map([['capture', 'blob:capture']]), createSession());
+    hookSoundPlayer(sound, new Map([['capture', ['blob:capture']]]), createSession());
     sound.move({ san: 'Bxf7+', ply: 5 });
     sound.move({ san: 'Qh5+', ply: 7 });
     // Lichess plays its own check sound beside it: the pack has none to replace it.
@@ -117,7 +127,7 @@ describe('hookSoundPlayer', () => {
   it('remembers the board after each move, for the next one', async () => {
     const { sound } = fakeSoundPlayer();
     const session = createSession();
-    hookSoundPlayer(sound, new Map([['move-self', 'blob:move-self']]), session);
+    hookSoundPlayer(sound, new Map([['move-self', ['blob:move-self']]]), session);
     renderBoard({ placement: '4k3/8/8/8/8/8/8/4K3', orientation: 'white' });
     sound.move({ san: 'Kd2', ply: 1 });
     await vi.advanceTimersByTimeAsync(20);
@@ -157,6 +167,74 @@ describe('hookSoundPlayer', () => {
     expect(calls.at(-1)).toEqual(['move', { san: 'exd5', ply: 3 }]);
   });
 
+  describe('takes', () => {
+    beforeEach(() => {
+      vi.spyOn(Math, 'random').mockReturnValue(0);
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('plays a take at random, never the one just played', () => {
+      const { sound, calls } = fakeSoundPlayer();
+      hookSoundPlayer(sound, takes(['capture', 3]), createSession());
+      for (let i = 0; i < 3; i++) sound.move({ san: 'exd5', ply: 3 });
+      expect(played(calls)).toEqual(['ln-ext-capture', 'ln-ext-capture-2', 'ln-ext-capture']);
+    });
+
+    it('plays a long move’s slide, one of its reach’s takes, and a knight’s jump', () => {
+      const { sound, calls } = fakeSoundPlayer();
+      hookSoundPlayer(
+        sound,
+        takes(['move-self', 1], ['move-slide', 18], ['move-knight', 1]),
+        createSession(),
+      );
+      sound.move({ san: 'Ra8', uci: 'a1a8', ply: 1 });
+      sound.move({ san: 'Bd3', uci: 'f1d3', ply: 3 });
+      sound.move({ san: 'Nf3', uci: 'g1f3', ply: 5 });
+      sound.move({ san: 'Kd2', uci: 'e1d2', ply: 7 });
+      expect(played(calls)).toEqual([
+        'ln-ext-move-slide-16',
+        'ln-ext-move-slide',
+        'ln-ext-move-knight',
+        'ln-ext-move-self',
+      ]);
+    });
+
+    it('plays a promotion that captures as one, checking or not, if the set has it', () => {
+      const { sound, calls } = fakeSoundPlayer();
+      const urls = takes(['move-check', 1], ['promote', 1], ['capture-promote', 2]);
+      hookSoundPlayer(sound, urls, createSession());
+      sound.move({ san: 'exd8=Q', uci: 'e7d8q', ply: 1 });
+      sound.move({ san: 'exd8=Q+', uci: 'e7d8q', ply: 3 });
+      sound.move({ san: 'e8=Q+', uci: 'e7e8q', ply: 5 });
+      urls.delete('capture-promote');
+      sound.move({ san: 'exd8=Q+', uci: 'e7d8q', ply: 7 });
+      expect(played(calls)).toEqual([
+        'ln-ext-capture-promote',
+        'ln-ext-capture-promote-2',
+        'ln-ext-move-check',
+        'ln-ext-move-check',
+      ]);
+    });
+
+    it('tells a promotion on the board from the pieces before it', async () => {
+      const { sound, calls } = fakeSoundPlayer();
+      const session = createSession();
+      hookSoundPlayer(sound, takes(['capture', 1], ['capture-promote', 1]), session);
+      session.lastPieces = parsePlacement('3rk3/4P3/8/8/8/8/8/K7');
+      renderBoard({
+        placement: '3Qk3/8/8/8/8/8/8/K7',
+        orientation: 'white',
+        lastMove: ['e7', 'd8'],
+      });
+      sound.move({ name: 'capture' });
+      await vi.advanceTimersByTimeAsync(20);
+      expect(played(calls)).toEqual(['ln-ext-capture-promote']);
+    });
+  });
+
   describe('jumps', () => {
     const ours: readonly SoundName[] = ['move-self', 'move-opponent', 'capture'];
 
@@ -164,7 +242,7 @@ describe('hookSoundPlayer', () => {
       const player = fakeSoundPlayer();
       hookSoundPlayer(
         player.sound,
-        new Map(ours.map(name => [name, `blob:${name}`])),
+        new Map(ours.map(name => [name, [`blob:${name}`]])),
         createSession(),
       );
       return player;
@@ -222,5 +300,45 @@ describe('hookSoundPlayer', () => {
       expect(played(calls)).toEqual(['ln-ext-move-opponent', 'ln-ext-move-self']);
       expect(calls.filter(call => call[0] === 'move')).toEqual([]);
     });
+  });
+});
+
+describe('setSoundPaths', () => {
+  it('lets Lichess’s player drop the sounds it decoded that are no longer picked', () => {
+    const { sound } = fakeSoundPlayer();
+    const decoded = new Map([
+      ['blob:old', {}],
+      ['blob:kept', {}],
+      ['https://lichess1.org/sound/standard/Move.mp3', {}],
+    ]);
+    sound.sounds = decoded;
+    sound.paths.set('move', 'https://lichess1.org/sound/standard/Move.mp3');
+    setSoundPaths(
+      sound,
+      new Map([
+        ['capture', ['blob:old']],
+        ['castle', ['blob:kept']],
+      ]),
+    );
+    setSoundPaths(sound, new Map([['castle', ['blob:kept', 'blob:new']]]));
+    expect([...decoded.keys()]).toEqual([
+      'blob:kept',
+      'https://lichess1.org/sound/standard/Move.mp3',
+    ]);
+    expect([...sound.paths]).toEqual([
+      ['move', 'https://lichess1.org/sound/standard/Move.mp3'],
+      ['ln-ext-castle', 'blob:kept'],
+      ['ln-ext-castle-2', 'blob:new'],
+    ]);
+  });
+
+  it('has the first sound decoded at once, and nothing with none', () => {
+    const { sound } = fakeSoundPlayer();
+    const load = vi.fn<(name: string) => unknown>(() => Promise.reject(new Error('no audio')));
+    sound.load = load;
+    setSoundPaths(sound, new Map());
+    expect(load).not.toHaveBeenCalled();
+    setSoundPaths(sound, new Map([['capture', ['blob:capture', 'blob:capture-2']]]));
+    expect(load.mock.calls).toEqual([['ln-ext-capture']]);
   });
 });

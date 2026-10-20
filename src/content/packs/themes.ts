@@ -1,5 +1,6 @@
 import type { PartKind } from '#shared/packs/pack.ts';
 import { BACKLIT, BACKLIT_BOARDS } from '#shared/backlit.ts';
+import { RECORDED_SET } from '#shared/recorded-sounds.ts';
 import { SYNTH_SET } from '#shared/sounds.ts';
 import type { SquareColors } from './custom-board.ts';
 import { PRESET_BOARDS } from './flat-boards.ts';
@@ -7,8 +8,8 @@ import { savedBoards } from './saved-boards.ts';
 
 // The extension's own looks for each part: its boards, drawn by its CSS from
 // `data-ln-ext-board` on <html> (styles/board/), the backlit ones lit up in the
-// page (page/backlit), and its sound set, synthesized in the page
-// (page/sounds/synth). A part's pick is one of these,
+// page (page/backlit), and its sound sets: Ascent, synthesized in the page
+// (page/sounds/synth), and Naturel, recorded (#shared/recorded-sounds.ts). A part's pick is one of these,
 // an imported pack or Lichess's own.
 
 export interface Theme {
@@ -51,7 +52,10 @@ const BOARDS_AFTER: readonly Theme[] = [
 
 const THEMES: Readonly<Record<Exclude<PartKind, 'board'>, readonly Theme[]>> = {
   piece: [],
-  sound: [{ id: SYNTH_SET, name: 'Ascent' }],
+  sound: [
+    { id: SYNTH_SET, name: 'Ascent' },
+    { id: RECORDED_SET, name: 'Naturel' },
+  ],
 };
 
 /** The part's themes, in their order: the boards the user saved come after the presets. */

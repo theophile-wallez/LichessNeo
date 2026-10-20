@@ -4,16 +4,20 @@ import { SOUND_NAMES, type SoundName } from '#shared/sounds.ts';
 import { soundPlayer, type SoundPlayer } from '#page/lichess/sound.ts';
 
 /**
- * Puts the posted sounds in `urls` in place of the ones before, as blob: URLs:
+ * Puts the posted sounds' takes in `urls` in place of the ones before, as blob: URLs:
  * Lichess's CSP lets audio load from those, not from the extension. Its
  * player decodes the bytes whatever their type.
  */
-export function replaceSounds(urls: Map<SoundName, string>, files: SoundFiles): void {
-  for (const url of urls.values()) URL.revokeObjectURL(url);
+export function replaceSounds(urls: Map<SoundName, readonly string[]>, files: SoundFiles): void {
+  for (const takes of urls.values()) for (const url of takes) URL.revokeObjectURL(url);
   urls.clear();
   for (const name of SOUND_NAMES) {
-    const bytes = files[name];
-    if (bytes) urls.set(name, URL.createObjectURL(new Blob([bytes])));
+    const takes = files[name];
+    if (takes && takes.length > 0)
+      urls.set(
+        name,
+        takes.map(bytes => URL.createObjectURL(new Blob([bytes]))),
+      );
   }
 }
 

@@ -85,7 +85,7 @@ export function soundFiles(look: Look): SoundFiles {
   const files: SoundFiles = {};
   for (const name of SOUND_NAMES) {
     const url = packOf(look)?.sounds?.[name];
-    if (url !== undefined) files[name] = dataUrlBytes(url);
+    if (url !== undefined) files[name] = [dataUrlBytes(url)];
   }
   return files;
 }

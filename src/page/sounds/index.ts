@@ -19,7 +19,7 @@ function start(): void {
   const session = createSession();
   watchMoveAttempts(session);
   const gameStart = watchGameStart(session);
-  const urls = new Map<SoundName, string>();
+  const urls = new Map<SoundName, readonly string[]>();
   // Made once, the first time the set is picked; `live` while it's the pick.
   let synth: Synth | null = null;
   let live: Synth | null = null;

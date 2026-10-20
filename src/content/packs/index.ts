@@ -3,6 +3,7 @@ import { type BacklitBoardId, backlitWords, isBacklitBoard, keyBox } from '#shar
 import { setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onPageReady, postSounds, type SoundFiles, type SynthPick } from '#shared/protocol.ts';
+import { RECORDED_SET } from '#shared/recorded-sounds.ts';
 import { SYNTH_SET } from '#shared/sounds.ts';
 import { setLoading, showLooks, soundFiles } from './apply.ts';
 import { watchDasher } from './dasher.ts';
@@ -17,6 +18,7 @@ import {
 import { PART_KINDS, type Pack } from '#shared/packs/pack.ts';
 import { paintTiles, showKeys } from './backlit-keys.ts';
 import { onBacklitChange, readBacklit, soundPlace } from './options.ts';
+import { recordedSounds } from './recorded.ts';
 import { deletePack, readPack, readPacks, writePack } from './store.ts';
 
 // The board, pieces and sounds: the extension's own themes, Lichess's, or a
@@ -33,7 +35,7 @@ async function readPicked(): Promise<Pack[]> {
 
 // The page script may start before or after the packs are read: each side
 // sends when it's ready, and every new sound pick is sent again, as is a new
-// place for the extension's own set. A pack imported again keeps its id but
+// place for the extension's own set; Naturel's once read. A pack imported again keeps its id but
 // not its sounds: the pack itself is compared.
 function createSoundSender(): (shown: Shown) => void {
   let files: SoundFiles = {};
@@ -45,12 +47,23 @@ function createSoundSender(): (shown: Shown) => void {
     synth = { place };
     postSounds(files, synth);
   });
+  const sendRecorded = async (): Promise<void> => {
+    const recorded = await recordedSounds();
+    // Another pick came while they were read.
+    if (sent !== RECORDED_SET) return;
+    files = recorded;
+    postSounds(files, synth);
+  };
   return ({ sound }) => {
     if (sound === sent) return;
     sent = sound;
-    files = soundFiles(sound);
     synth = sound === SYNTH_SET ? { place: soundPlace.read() } : null;
-    postSounds(files, synth);
+    if (sound !== RECORDED_SET) {
+      files = soundFiles(sound);
+      postSounds(files, synth);
+      return;
+    }
+    void sendRecorded();
   };
 }
 

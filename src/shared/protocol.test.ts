@@ -47,9 +47,9 @@ describe('protocol', () => {
     const received: unknown[] = [];
     stops.push(onSounds(sounds => received.push(Object.keys(sounds))));
     const bytes = new ArrayBuffer(4);
-    receive({ type: 'ln-ext:sounds', sounds: { capture: bytes } });
-    receive({ type: 'ln-ext:sounds', sounds: { boom: bytes } });
-    receive({ type: 'ln-ext:sounds', sounds: { capture: 'bytes' } });
+    receive({ type: 'ln-ext:sounds', sounds: { capture: [bytes] } });
+    receive({ type: 'ln-ext:sounds', sounds: { boom: [bytes] } });
+    receive({ type: 'ln-ext:sounds', sounds: { capture: ['bytes'] } });
     expect(received).toEqual([['capture']]);
   });
 

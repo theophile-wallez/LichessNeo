@@ -110,9 +110,10 @@ async function ask(
 const count = (fake: Fake): Record<string, number> =>
   Object.fromEntries(Object.entries(fake.listeners).map(([name, list]) => [name, list.length]));
 
-// Every build now listens for pack downloads too (background/packs.ts), which
-// the original had none of: one message listener more than it recorded.
-const PACK_LISTENERS = 1;
+// Every build now listens for pack downloads (background/packs.ts) and the
+// recorded sounds (background/recorded-sounds.ts) too, which the original had
+// none of: two message listeners more than it recorded.
+const PACK_LISTENERS = 2;
 
 function withPackListener<T extends { readonly listeners: Record<string, number> }>(
   recorded: T,

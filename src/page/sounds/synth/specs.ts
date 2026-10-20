@@ -77,7 +77,19 @@ export const CHECK: Spec = [
 
 export type MoveSoundName = Extract<
   SoundName,
-  'move-self' | 'move-opponent' | 'move-check' | 'capture' | 'castle' | 'promote'
+  | 'move-self'
+  | 'move-opponent'
+  | 'move-check'
+  | 'move-slide'
+  | 'move-slide-check'
+  | 'move-knight'
+  | 'capture'
+  | 'capture-check'
+  | 'capture-slide'
+  | 'capture-slide-check'
+  | 'castle'
+  | 'promote'
+  | 'capture-promote'
 >;
 
 /** The sounds that aren't a move's: Foley's own cues. */

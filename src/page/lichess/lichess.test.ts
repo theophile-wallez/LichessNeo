@@ -90,6 +90,7 @@ describe('readMoveOptions', () => {
       readMoveOptions({ san: 'Nf3', ply: 1, filter: 'music', volume: 0.5, uci: 'g1f3' }),
     ).toEqual({
       san: 'Nf3',
+      uci: 'g1f3',
       ply: 1,
       filter: 'music',
       volume: 0.5,

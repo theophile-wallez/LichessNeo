@@ -145,10 +145,11 @@ no ads, it asks for no money, and it's not meant to make money in any way.
 
 It isn't affiliated with, endorsed by or sponsored by Lichess, Chess.com or
 any other chess site or company, and uses none of their names for its
-features. Its images are its own or under free licenses: the bundled
+features. Its images and sounds are its own or under free licenses: the bundled
 packages' ship in each build's `licenses` folder
 ([scripts/lib/licenses.ts](scripts/lib/licenses.ts)), the example pack's are in
-[packs/example](packs/example);
+[packs/example](packs/example), and the Naturel sound set was recorded for it
+([tools/naturel-sounds](tools/naturel-sounds));
 Lichess's own board, pieces and sounds come from lichess.org itself. A pack you
 import is yours: share only what you may share.
 

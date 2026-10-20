@@ -7,6 +7,8 @@ import { startPacks } from './index.ts';
 import type { Library } from './library.ts';
 import { FAMILY_ROWS, OPTION_ROWS } from './options.ts';
 import type { Pack } from '#shared/packs/pack.ts';
+import type { SoundFiles } from '#shared/protocol.ts';
+import { recordedSounds } from './recorded.ts';
 import { readPack, readPacks } from './store.ts';
 
 // IndexedDB isn't in happy-dom: the store is the browser's, so it's mocked.
@@ -17,8 +19,15 @@ vi.mock('./store.ts', () => ({
   deletePack: vi.fn<(id: string) => Promise<void>>(() => Promise.resolve()),
 }));
 
+// Naturel's takes come from the background worker.
+vi.mock('./recorded.ts', () => ({
+  recordedSounds: vi.fn<() => Promise<SoundFiles>>(() => Promise.resolve({})),
+}));
+
 const WOOD = fakePack('ann/packs/main/wood/');
-const SentSoundsSchema = z.object({ sounds: z.record(z.string(), z.instanceof(ArrayBuffer)) });
+const SentSoundsSchema = z.object({
+  sounds: z.record(z.string(), z.array(z.instanceof(ArrayBuffer))),
+});
 const root = document.documentElement;
 let stopListeners: () => void;
 
@@ -165,6 +174,30 @@ describe('packs', () => {
     expect(posted().at(-1)).toEqual({ type: 'ln-ext:sounds', sounds: {} });
     choose(OPTION_ROWS.sound[0], 'space', library);
     expect(posted()).toHaveLength(3);
+  });
+
+  it('sends Naturel’s takes once read, unless another set was picked meanwhile', async () => {
+    const takes = { capture: [new ArrayBuffer(1), new ArrayBuffer(2)] };
+    const read = Promise.withResolvers<SoundFiles>();
+    vi.mocked(recordedSounds).mockReturnValue(read.promise);
+    localStorage.setItem('ln-ext-sounds', 'naturel');
+    const library = startPacks();
+    await library.ready;
+    expect(posted()).toEqual([]);
+    read.resolve(takes);
+    await flush();
+    expect(posted()).toEqual([{ type: 'ln-ext:sounds', sounds: takes }]);
+    const slow = Promise.withResolvers<SoundFiles>();
+    vi.mocked(recordedSounds).mockReturnValue(slow.promise);
+    library.choose('sound', 'lichess');
+    library.choose('sound', 'naturel');
+    library.choose('sound', 'foley');
+    slow.resolve(takes);
+    await flush();
+    expect(posted().slice(1)).toEqual([
+      { type: 'ln-ext:sounds', sounds: {} },
+      { type: 'ln-ext:sounds', sounds: {}, synth: { place: 'space' } },
+    ]);
   });
 
   it('puts the backlit settings on <html> only while a backlit board shows', async () => {

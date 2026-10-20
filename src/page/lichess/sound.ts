@@ -9,6 +9,10 @@ import { lenient } from '#shared/zod.ts';
 
 const SoundPlayerSchema = z.object({
   paths: z.instanceof(Map),
+  // Each sound once decoded, by its path; never let go of.
+  sounds: z.optional(z.instanceof(Map)),
+  // Fetches and decodes a sound ahead of its first play.
+  load: z.optional(method<[name: string]>()),
   play: method<[name: unknown, volume?: unknown]>(),
   move: method<[options?: unknown]>(),
   // Speaks a move, if the user turned speech on; called on every jump.
@@ -51,6 +55,7 @@ export function soundVolume(sound: SoundPlayer): number {
 // A field of another type counts as missing.
 const MoveOptionsSchema = z.object({
   san: lenient(z.string()),
+  uci: lenient(z.string()),
   ply: lenient(z.number()),
   name: lenient(z.string()),
   filter: lenient(z.string()),

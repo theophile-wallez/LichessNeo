@@ -100,7 +100,9 @@ describe('soundFiles', () => {
   it('gives the pack’s sounds as bytes, and none for Lichess’s', () => {
     const files = soundFiles(WOOD);
     expect(Object.keys(files)).toEqual(['capture']);
-    expect(new TextDecoder().decode(files.capture)).toBe(atob(SOUND.split(',')[1] ?? ''));
+    expect(files.capture?.map(take => new TextDecoder().decode(take))).toEqual([
+      atob(SOUND.split(',')[1] ?? ''),
+    ]);
     expect(soundFiles(null)).toEqual({});
   });
 });

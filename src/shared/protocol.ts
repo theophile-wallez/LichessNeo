@@ -12,7 +12,8 @@ const PageReadySchema = z.object({ type: z.literal(messageType('page-ready')) })
 
 const SoundsSchema = z.object({
   type: z.literal(messageType('sounds')),
-  sounds: z.partialRecord(SoundNameSchema, z.instanceof(ArrayBuffer)),
+  // Each sound's takes, one or more: each time it plays, one of them at random.
+  sounds: z.partialRecord(SoundNameSchema, z.array(z.instanceof(ArrayBuffer))),
   // The extension's own set, played in place of any files; absent for a pack's or Lichess's.
   synth: z.optional(z.object({ place: SoundPlaceSchema })),
 });

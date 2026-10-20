@@ -3,6 +3,7 @@ import { parseSquare, squareCoords } from '#shared/chess/squares.ts';
 import { COLORS, opposite } from '#shared/chess/types.ts';
 import type { Board, Color, Piece, Role, Square } from '#shared/chess/types.ts';
 import type { SoundName } from '#shared/sounds.ts';
+import type { Gesture } from './gesture.ts';
 
 // Which of our sounds a move gets, from its SAN or from the board after it.
 
@@ -39,6 +40,32 @@ export interface StandIn {
  */
 export const standIn = (captured: boolean): StandIn =>
   captured ? { ours: 'capture', lichess: 'capture' } : { ours: 'move-self', lichess: 'move' };
+
+function checkGesture(captured: boolean, slid: boolean): SoundName | null {
+  if (captured) return slid ? 'capture-slide-check' : 'capture-check';
+  return slid ? 'move-slide-check' : null;
+}
+
+/**
+ * The sound of a move's whole gesture, which a set may have: a slide, ending
+ * on a capture or a check, a capture slammed for a check, a knight's jump, or
+ * a pawn that takes to promote, checking or not (its new piece is set down
+ * all the same). Null for a move that is `name` alone; one the set lacks is
+ * `name` too (a check's pose, say).
+ */
+export function gestureSound(
+  name: SoundName,
+  captured: boolean,
+  gesture: Gesture | null,
+): SoundName | null {
+  if (captured && gesture?.promoted) return 'capture-promote';
+  const slid = gesture?.reach != null;
+  if (name === 'move-check') return checkGesture(captured, slid);
+  const quiet = name === 'move-self' || name === 'move-opponent';
+  if (!slid) return quiet && gesture?.jumped ? 'move-knight' : null;
+  if (name === 'capture') return 'capture-slide';
+  return quiet ? 'move-slide' : null;
+}
 
 export function soundFromSan(san: string, ply: number | undefined, orientation: Color): SoundName {
   if (/[+#]/.test(san)) return 'move-check';
@@ -133,7 +160,7 @@ function isCastlingHighlight(first: Square, second: Square, mover: Piece | undef
 
 // Auto-queen swaps the pawn for a queen before we read the board, so look at
 // what stood on the origin square before the move.
-function isPromotion(highlight: Highlight, before: Board | null): boolean {
+export function isPromotion(highlight: Highlight, before: Board | null): boolean {
   const { orig, dest, mover } = highlight;
   const was = before?.get(orig);
   const wasPawn = mover?.role === 'pawn' || (was?.role === 'pawn' && was.color === mover?.color);

@@ -7,6 +7,7 @@ import { boardOrientation, mainBoardWrap, readBoard } from './board-reader.ts';
 import {
   castled,
   fallbackSound,
+  gestureSound,
   soundForLichessEvent,
   soundFromBoard,
   soundFromSan,
@@ -116,6 +117,39 @@ describe('soundOfShownMove', () => {
   it('plays a plain move at the start, or when the destination is empty', () => {
     expect(soundOfShownMove(undefined, pieces, 'black')).toBe('move-self');
     expect(soundOfShownMove('Ka2', pieces, 'black')).toBe('move-self');
+  });
+});
+
+describe('gestureSound', () => {
+  const slide = { reach: 4, jumped: false, promoted: false };
+  const jump = { reach: null, jumped: true, promoted: false };
+  const step = { reach: null, jumped: false, promoted: false };
+  const promotion = { reach: null, jumped: false, promoted: true };
+
+  it.each([
+    { name: 'move-self', captured: false, gesture: slide, sound: 'move-slide' },
+    { name: 'move-opponent', captured: false, gesture: jump, sound: 'move-knight' },
+    { name: 'capture', captured: true, gesture: slide, sound: 'capture-slide' },
+    { name: 'move-check', captured: false, gesture: slide, sound: 'move-slide-check' },
+    { name: 'move-check', captured: true, gesture: step, sound: 'capture-check' },
+    { name: 'move-check', captured: true, gesture: jump, sound: 'capture-check' },
+    { name: 'move-check', captured: true, gesture: slide, sound: 'capture-slide-check' },
+    { name: 'promote', captured: true, gesture: promotion, sound: 'capture-promote' },
+    { name: 'move-check', captured: true, gesture: promotion, sound: 'capture-promote' },
+  ] as const)('$name, captured $captured: $sound', ({ name, captured, gesture, sound }) => {
+    expect(gestureSound(name, captured, gesture)).toBe(sound);
+  });
+
+  it.each([
+    { name: 'move-self', captured: false, gesture: step },
+    { name: 'move-self', captured: false, gesture: null },
+    { name: 'capture', captured: true, gesture: jump },
+    { name: 'move-check', captured: false, gesture: jump },
+    { name: 'promote', captured: false, gesture: promotion },
+    { name: 'move-check', captured: false, gesture: promotion },
+    { name: 'castle', captured: false, gesture: slide },
+  ] as const)('$name, captured $captured: the move’s own sound', ({ name, captured, gesture }) => {
+    expect(gestureSound(name, captured, gesture)).toBeNull();
   });
 });
 

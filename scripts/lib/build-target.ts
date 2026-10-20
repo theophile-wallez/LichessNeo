@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs';
-import { cp, readFile, writeFile } from 'node:fs/promises';
+import { cp, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { build } from 'rolldown';
 import { createManifest, ManifestSchema, OUTPUT, type Target } from '#manifest';
@@ -9,6 +9,7 @@ import { assertExtensionUrls } from './extension-urls.ts';
 import { assertNoChromeUrls, toFirefoxCss } from './firefox.ts';
 import { assertLicensed, LICENSES } from './licenses.ts';
 import { fromRoot } from './paths.ts';
+import { assertRecordedTakes, RECORDED_FOLDER } from './recorded-takes.ts';
 import { replaceDir } from './replace-dir.ts';
 
 export const TARGETS: readonly Target[] = ['chrome', 'chrome-store', 'firefox'];
@@ -80,6 +81,7 @@ async function checkFirefoxBuild(out: string): Promise<void> {
 async function buildInto(options: BuildOptions): Promise<void> {
   const { target, out, version } = options;
   await cp(fromRoot('public'), out, { recursive: true });
+  assertRecordedTakes(await readdir(path.join(out, RECORDED_FOLDER)));
   for (const { from, to } of LICENSES) await cp(fromRoot(from), path.join(out, to));
   const moduleIds = await bundleScripts(options);
   assertLicensed(moduleIds);

@@ -36,19 +36,22 @@ afterEach(() => {
 });
 
 describe('replaceSounds', () => {
-  it('makes a blob of each sound it is given, in place of the ones before', () => {
+  it('makes a blob of each take it is given, in place of the ones before', () => {
     const { blobs } = stubBlobUrls();
     const revoke = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {});
-    const urls = new Map<SoundName, string>();
-    replaceSounds(urls, { capture: new ArrayBuffer(4), castle: new ArrayBuffer(2) });
+    const urls = new Map<SoundName, readonly string[]>();
+    replaceSounds(urls, {
+      capture: [new ArrayBuffer(4), new ArrayBuffer(3)],
+      castle: [new ArrayBuffer(2)],
+    });
     expect([...urls]).toEqual([
-      ['capture', 'blob:sound-1'],
-      ['castle', 'blob:sound-2'],
+      ['capture', ['blob:sound-1', 'blob:sound-2']],
+      ['castle', ['blob:sound-3']],
     ]);
-    expect(blobs.map(blob => blob instanceof Blob && blob.size)).toEqual([4, 2]);
-    replaceSounds(urls, { notify: new ArrayBuffer(1) });
-    expect(revoke.mock.calls).toEqual([['blob:sound-1'], ['blob:sound-2']]);
-    expect([...urls]).toEqual([['notify', 'blob:sound-3']]);
+    expect(blobs.map(blob => blob instanceof Blob && blob.size)).toEqual([4, 3, 2]);
+    replaceSounds(urls, { notify: [new ArrayBuffer(1)] });
+    expect(revoke.mock.calls).toEqual([['blob:sound-1'], ['blob:sound-2'], ['blob:sound-3']]);
+    expect([...urls]).toEqual([['notify', ['blob:sound-4']]]);
   });
 });
 
@@ -90,7 +93,7 @@ describe('sounds', () => {
     expect(window.postMessage).toHaveBeenCalledWith({ type: 'ln-ext:page-ready' }, location.origin);
     post({ type: 'ln-ext:sounds', sounds: {} });
     expect(sound.lnExtHooked).toBeUndefined();
-    post({ type: 'ln-ext:sounds', sounds: { capture: new ArrayBuffer(1) } });
+    post({ type: 'ln-ext:sounds', sounds: { capture: [new ArrayBuffer(1)] } });
     expect([...sound.paths.keys()]).toEqual(['ln-ext-capture']);
     expect(sound.lnExtHooked).toBe(true);
     sound.play('capture');
@@ -103,8 +106,8 @@ describe('sounds', () => {
 
   it('plays the sounds of each new pick, and Lichess’s own once none are left', () => {
     const { sound, calls } = startHooked();
-    post({ type: 'ln-ext:sounds', sounds: { capture: new ArrayBuffer(1) } });
-    post({ type: 'ln-ext:sounds', sounds: { castle: new ArrayBuffer(1) } });
+    post({ type: 'ln-ext:sounds', sounds: { capture: [new ArrayBuffer(1)] } });
+    post({ type: 'ln-ext:sounds', sounds: { castle: [new ArrayBuffer(1)] } });
     expect([...sound.paths.keys()]).toEqual(['ln-ext-castle']);
     post({ type: 'ln-ext:sounds', sounds: {} });
     expect([...sound.paths]).toEqual([]);

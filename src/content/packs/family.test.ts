@@ -145,7 +145,7 @@ describe('the sound set', () => {
   it('shows where it puts the sounds while it’s picked, beside the volume', async () => {
     const library = await start();
     const panel = await openPanel('sound');
-    expect(names(panel)).toEqual(['Ascent']);
+    expect(names(panel)).toEqual(['Ascent', 'Naturel']);
     const row = button(panel, '.content .ln-ext-src-option-row[data-ln-ext-for="foley"]');
     expect(row.hidden).toBe(true);
     button(panel, '[data-ln-ext-choice="foley"]').click();
