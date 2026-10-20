@@ -14,10 +14,11 @@ const tight = (markup: string): string => markup.replaceAll(/>\s+</g, '><');
 
 const marks = (): string => queryOne(document, 'svg.ln-ext-marks', SVGElement)?.innerHTML ?? '';
 const layer = (): string => queryOne(document, '#ln-ext-shapes', HTMLElement)?.innerHTML ?? '';
+const mateLayer = (): string => queryOne(document, '#ln-ext-mate', HTMLElement)?.innerHTML ?? '';
 
 /** What a new drawer puts in its layer on the board `setUp` draws. */
 function drawOn(setUp: () => void): string {
-  const draw = createShapeDrawer({ mateLabel: 'Checkmate', redraw: () => {} });
+  const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
   setUp();
   draw();
   return layer();
@@ -45,7 +46,7 @@ afterEach(() => {
 
 describe('createShapeDrawer', () => {
   it('draws each frame as the original did', () => {
-    const draw = createShapeDrawer({ mateLabel: legacy.mateLabel, redraw: () => {} });
+    const draw = createShapeDrawer({ mateLabel: legacy.mateLabel });
     const drawn = [];
     for (const frame of legacy.frames) {
       document.documentElement.className = frame.review ?? '';
@@ -66,14 +67,15 @@ describe('createShapeDrawer', () => {
       legacy.frames.map(frame => ({
         name: frame.name,
         marks: frame.marks,
-        layer: tight(frame.layer),
+        // The mate is drawn in its own layer now, the crown flying to its mater.
+        layer: frame.node?.san?.endsWith('#') ? '' : tight(frame.layer),
         className: frame.htmlClass,
       })),
     );
   });
 
   it('waits for chessground’s svg', () => {
-    const draw = createShapeDrawer({ mateLabel: 'Checkmate', redraw: () => {} });
+    const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
     document.body.innerHTML =
       '<main><div class="main-board"><cg-container></cg-container></div></main>';
     draw();
@@ -81,32 +83,32 @@ describe('createShapeDrawer', () => {
     expect(document.documentElement.classList.contains('ln-ext-shapes')).toBe(false);
   });
 
-  it('asks for a redraw when the label is due', () => {
-    const redraw = vi.fn<() => void>();
-    const draw = createShapeDrawer({ mateLabel: 'Checkmate', redraw });
-    Object.assign(window, { site: { analysis: { node: SCHOLAR_MATE } } });
-    renderBoard({ orientation: 'white' });
-    draw();
-    expect(layer()).toContain('ln-ext-mate__badge');
-    vi.advanceTimersByTime(2499);
-    expect(redraw).not.toHaveBeenCalled();
-    vi.advanceTimersByTime(1);
-    expect(redraw).toHaveBeenCalledOnce();
-    draw();
-    expect(layer()).toContain('ln-ext-mate__label');
-  });
-
   // The original compared the squares, not where they're drawn, and left the
   // badge on the old side after a flip.
   it('moves the checkmate when the board is flipped', () => {
-    const draw = createShapeDrawer({ mateLabel: 'Checkmate', redraw: () => {} });
+    const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
     Object.assign(window, { site: { analysis: { node: SCHOLAR_MATE } } });
     renderBoard({ orientation: 'white' });
     draw();
-    expect(layer()).toContain('left:62.5%;top:0%');
+    expect(mateLayer()).toContain('--ln-ext-king-column:4;--ln-ext-king-row:0');
     renderBoard({ orientation: 'black' });
     draw();
-    expect(layer()).toContain('left:50%;top:87.5%');
+    expect(mateLayer()).toContain('--ln-ext-king-column:3;--ln-ext-king-row:7');
+  });
+
+  it('leaves the checkmate be as arrows come and go, so it doesn’t play again', () => {
+    const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
+    Object.assign(window, { site: { analysis: { node: SCHOLAR_MATE } } });
+    renderBoard({ orientation: 'white' });
+    draw();
+    const badge = document.querySelector('#ln-ext-mate > .ln-ext-mate');
+    expect(badge?.querySelector('.ln-ext-mate__crown')?.getAttribute('style')).toBe(
+      '--ln-ext-by-column:5;--ln-ext-by-row:1',
+    );
+    setReviewArrows([{ orig: 'e2', dest: 'e4', brush: 'best' }]);
+    draw();
+    expect(layer()).not.toBe('');
+    expect(document.querySelector('#ln-ext-mate > .ln-ext-mate')).toBe(badge);
   });
 
   it('draws a board outside a .cg-wrap as seen from White', () => {
@@ -122,7 +124,7 @@ describe('createShapeDrawer', () => {
   });
 
   it('only writes when something changed', () => {
-    const draw = createShapeDrawer({ mateLabel: 'Checkmate', redraw: () => {} });
+    const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
     renderBoard({ orientation: 'white' });
     setReviewArrows([{ orig: 'e2', dest: 'e4', brush: 'best' }]);
     draw();

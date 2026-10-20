@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { queryAll } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
-import { badgesMarkup, cellOf, kingBadges } from './badges.ts';
+import { cellOf } from '#shared/chess/squares.ts';
+import { badgesMarkup, kingBadges } from './badges.ts';
 import { gameOverTexts } from './texts.ts';
 
 const texts = gameOverTexts();

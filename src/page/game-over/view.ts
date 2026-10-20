@@ -1,11 +1,13 @@
 import { createElement, queryOne, setData, setStyleProperty } from '#shared/dom.ts';
-import { setHtml } from '#shared/html.ts';
+import { html, setHtml, type SafeHtml } from '#shared/html.ts';
+import { mateBadgeMarkup } from '#shared/mate-badge.ts';
 import { badgesMarkup, kingBadges } from './badges.ts';
-import { kingCells } from './board.ts';
+import { boardWrap, kingCells } from './board.ts';
 import { cardMarkup, endCardInput, RESULT_MOODS } from './card.ts';
 import { CHIP_STAGGER_MS, createChips, type Chips } from './chips.ts';
 import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from './confetti.ts';
 import { countUp } from './count-up.ts';
+import { type FinalMate, mateCells } from './mate.ts';
 import type { Outcome } from './outcome.ts';
 import type { PlayerSummary } from './quick-review.ts';
 import { accuracyDecimals, formatAccuracy, type GameOverTexts } from './texts.ts';
@@ -16,7 +18,8 @@ import { createVoice, type Voice } from './voice.ts';
 // through, and the card at the head of Lichess's follow-up buttons. The badges
 // show large for a moment, then shrink to pips on the kings' corners as the
 // coach starts speaking. They follow the kings as the player steps through the
-// moves or flips the board.
+// moves or flips the board. A mate shows the board's mate badge instead, on the
+// final position only.
 
 const SYNC_MS = 250;
 const FOLLOW_UP = '.rcontrols .follow-up';
@@ -33,6 +36,8 @@ export interface GameOverInput {
   readonly opponent: string;
   /** Watched as it ended, not opened once over: only then the winner gets confetti. */
   readonly live: boolean;
+  /** The mate the game ended on, if it did. */
+  readonly mate: FinalMate | null;
 }
 
 export interface GameOverView {
@@ -84,17 +89,46 @@ function buildLayer(input: GameOverInput): Layer {
   };
 }
 
+interface KingsView {
+  /** Changes with what the layer shows. */
+  readonly key: string;
+  readonly markup: () => SafeHtml;
+}
+
+/** What the kings' layer shows as the board is now. */
+function kingsView(input: GameOverInput): () => KingsView {
+  const badges = kingBadges(input.outcome, input.texts);
+  const { mate, main } = input;
+  // An analysis board draws its mate itself (page/board): only a dev preview gets here.
+  if (mate && main.classList.contains('analyse')) return () => ({ key: '', markup: () => html`` });
+  if (mate) {
+    const label = input.texts.kingLabels.mate;
+    return () => {
+      const wrap = boardWrap(main);
+      const cells = wrap && mateCells(wrap, mate);
+      setData(main, 'lnExtMate', cells ? '' : null);
+      return {
+        key: JSON.stringify(cells),
+        markup: () => (cells ? mateBadgeMarkup({ ...cells, label }) : html``),
+      };
+    };
+  }
+  return () => {
+    const cells = kingCells(main);
+    return { key: JSON.stringify(cells), markup: () => badgesMarkup(badges, cells) };
+  };
+}
+
 /**
  * Keeps the card at the head of Lichess's follow-up buttons, which Lichess may
  * draw again, and redraws the badges when the kings move.
  */
 function followPage(layer: Layer, input: GameOverInput): void {
-  const badges = kingBadges(input.outcome, input.texts);
-  let kingsKey = '';
+  const kings = kingsView(input);
+  let kingsKey: string | null = null;
   const sync = (): void => {
-    const cells = kingCells(input.main);
-    const key = JSON.stringify(cells);
-    if (key !== kingsKey) setHtml(layer.kings, badgesMarkup(badges, cells));
+    const { key, markup } = kings();
+    if (key !== kingsKey) setHtml(layer.kings, markup());
     kingsKey = key;
     const followUp = queryOne(input.main, FOLLOW_UP, HTMLElement);
     if (!followUp || !layer.card || layer.card.parentElement === followUp) return;

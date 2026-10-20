@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
+import { checkmate } from '#shared/chess/mate.ts';
 import { setHtml } from '#shared/html.ts';
 import { LegacySchema } from './fixtures/schema.ts';
 import { arrowOutline, arrowPath, squareCenter, squareOnScreen } from './geometry.ts';
-import { matedKing } from './mate.ts';
-import { arrowsMarkup, fillsMarkup, mateMarkup } from './render.ts';
+import { arrowsMarkup, fillsMarkup } from './render.ts';
 // What the original script drew.
 import legacyJson from './fixtures/legacy.json' with { type: 'json' };
 
@@ -81,7 +81,7 @@ describe('squareOnScreen', () => {
   );
 });
 
-describe('matedKing', () => {
+describe('checkmate', () => {
   it.each(
     legacy.nodes.map(({ node, king }) => ({
       node,
@@ -90,29 +90,10 @@ describe('matedKing', () => {
       fen: node.fen,
     })),
   )('finds $king after $san in $fen, as the original did', ({ node, king }) => {
-    expect(matedKing(node)).toBe(king);
+    expect(checkmate(node)?.king ?? null).toBe(king);
   });
 
   it('needs a node', () => {
-    expect(matedKing(null)).toBeNull();
-  });
-});
-
-describe('mateMarkup', () => {
-  it('escapes the label and places the badge right of the square', () => {
-    const markup = mateMarkup({
-      king: 'e8',
-      phase: 'badge',
-      whiteAtBottom: true,
-      label: '<b>',
-    }).value;
-    expect(markup).toContain('style="left:62.5%;top:0%"');
-    const label = mateMarkup({
-      king: 'e8',
-      phase: 'label',
-      whiteAtBottom: true,
-      label: '<b>',
-    }).value;
-    expect(label).toContain('>&lt;b&gt;</div>');
+    expect(checkmate(null)).toBeNull();
   });
 });

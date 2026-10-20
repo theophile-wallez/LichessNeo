@@ -5,6 +5,7 @@ import { queryOne } from '#shared/dom.ts';
 import { opponentName } from './board.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
 import { fetchFinishedGame, parseFinishedGame, type FinishedGame } from './game-data.ts';
+import { finalMate, type FinalMate } from './mate.ts';
 import { readOutcome, type Outcome, type Result } from './outcome.ts';
 import type { PlayerSummary } from './quick-review.ts';
 import { gameOverTexts } from './texts.ts';
@@ -61,14 +62,27 @@ function boardOnPage(): Board | null {
 // A finished game's analysis board carries the game in its own data; a game page asks for it.
 let onPage: FinishedGame | null = null;
 
-/** How the game on the page really ended, for its bottom side; null while it goes on. */
-async function realOutcome({ gameId, player }: Board): Promise<Outcome | null> {
-  const finished = onPage ?? (await fetchFinishedGame(gameId, () => true));
-  if (!finished) return null;
-  return readOutcome({ status: finished.game.status.name, winner: finished.game.winner, player });
+interface End {
+  readonly outcome: Outcome;
+  readonly mate: FinalMate | null;
 }
 
-function show({ main, player }: Board, outcome: Outcome): void {
+/** How the game on the page really ended, for its bottom side; null while it goes on. */
+async function realEnd({ gameId, player }: Board): Promise<End | null> {
+  const finished = onPage ?? (await fetchFinishedGame(gameId, () => true));
+  if (!finished) return null;
+  const { status, winner } = finished.game;
+  const outcome = readOutcome({ status: status.name, winner, player });
+  if (!outcome) return null;
+  return { outcome, mate: outcome.reason === 'mate' ? finalMate(finished) : null };
+}
+
+const sampleEnd = (result: Result, player: Color): End => ({
+  outcome: previewOutcome(result, player),
+  mate: null,
+});
+
+function show({ main, player }: Board, { outcome, mate }: End): void {
   const texts = gameOverTexts();
   const view = mountGameOver({
     main,
@@ -77,6 +91,7 @@ function show({ main, player }: Board, outcome: Outcome): void {
     coachId: pickCoach(),
     opponent: opponentName(main, player, texts.anonymous),
     live: true,
+    mate,
   });
   view.analysing();
   setTimeout(() => view.verdict(SAMPLE), SAMPLE_MS);
@@ -88,16 +103,16 @@ export function startPreview(): void {
   });
   let last: Result | null = null;
   // The game's own result first, then each of the others in turn.
-  const next = async (board: Board): Promise<Outcome> => {
-    if (last) return previewOutcome(NEXT[last], board.player);
-    return (await realOutcome(board)) ?? previewOutcome('win', board.player);
+  const next = async (board: Board): Promise<End> => {
+    if (last) return sampleEnd(NEXT[last], board.player);
+    return (await realEnd(board)) ?? sampleEnd('win', board.player);
   };
   const press = async (): Promise<void> => {
     const board = boardOnPage();
     if (!board) return;
-    const outcome = await next(board);
-    last = outcome.result;
-    show(board, outcome);
+    const end = await next(board);
+    last = end.outcome.result;
+    show(board, end);
   };
   document.addEventListener('keydown', event => {
     if (!event.altKey || !event.shiftKey || event.code !== 'KeyE') return;
@@ -111,6 +126,6 @@ export function startPreview(): void {
     if (!board) return;
     clearInterval(timer);
     last = asked;
-    show(board, previewOutcome(asked, board.player));
+    show(board, sampleEnd(asked, board.player));
   }, WATCH_MS);
 }

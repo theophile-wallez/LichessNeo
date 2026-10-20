@@ -4,3 +4,4 @@ export * from './pieces.ts';
 export * from './squares.ts';
 export * from './types.ts';
 export * from './win.ts';
+export * from './mate.ts';

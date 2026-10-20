@@ -1,15 +1,15 @@
 import { wrapOrientation } from '#shared/chessground.ts';
+import { cellOf, type BoardCell } from '#shared/chess/squares.ts';
 import { opposite, type Color } from '#shared/chess/types.ts';
 import { queryOne } from '#shared/dom.ts';
 import { readPlayer } from '#shared/player-bar.ts';
 import { cgKey } from '#page/lichess/chessground.ts';
-import { cellOf, type BoardCell } from './badges.ts';
 
 // What the game over reads off the game page: where the kings stand, and the
 // opponent's name as their bar shows it.
 
 // The game page's board, or the analysis board's, where a dev build previews it (preview.ts).
-const boardWrap = (main: HTMLElement): HTMLElement | null =>
+export const boardWrap = (main: HTMLElement): HTMLElement | null =>
   queryOne(main, ':is(.round__app__board, .analyse__board) .cg-wrap', HTMLElement);
 
 /** Each king's cell, as the board is turned now. */

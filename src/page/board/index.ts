@@ -13,7 +13,7 @@ function start(): void {
   const mateLabel = isFrench() ? 'Échec et mat' : 'Checkmate';
   // Draw at most once a frame, and only when something asks for it. Drawing on
   // every frame kept Chrome restyling every animation on any page with a board.
-  const redraw = oncePerFrame(createShapeDrawer({ mateLabel, redraw: () => redraw() }));
+  const redraw = oncePerFrame(createShapeDrawer({ mateLabel }));
   new MutationObserver(records => {
     if (records.some(mayChangeShapes)) redraw();
   }).observe(document, {

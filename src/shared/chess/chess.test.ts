@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   attackers,
+  checkmate,
   colorLetter,
   COLORS,
   fenTurn,
@@ -114,5 +115,30 @@ describe('checks', () => {
     expect(isInCheck(board, 'black')).toBe(true);
     expect(isInCheck(board, 'white')).toBe(false);
     expect(isInCheck(parsePlacement('8/8/8/8/8/8/8/4R3'), 'black')).toBe(false);
+  });
+});
+
+describe('checkmate', () => {
+  it('names the mated king and the piece that moved to mate it', () => {
+    const scholar = {
+      fen: 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4',
+      san: 'Qxf7#',
+      uci: 'h5f7',
+    };
+    expect(checkmate(scholar)).toEqual({ king: 'e8', by: 'f7' });
+    expect(checkmate({ ...scholar, san: 'Qxf7+' })).toBeNull();
+    expect(checkmate(null)).toBeNull();
+  });
+
+  it('gives a discovered mate to the piece uncovered', () => {
+    const discovered = { fen: 'R6k/6pp/4N3/8/8/8/8/7K b - - 1 1', san: 'Ne6#', uci: 'd8e6' };
+    expect(checkmate(discovered)).toEqual({ king: 'h8', by: 'a8' });
+  });
+
+  it('names no piece where nothing attacks the king', () => {
+    expect(checkmate({ fen: 'k7/8/8/8/8/8/8/K7 b - - 0 1', san: 'Qa2#' })).toEqual({
+      king: 'a8',
+      by: null,
+    });
   });
 });

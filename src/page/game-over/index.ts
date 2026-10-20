@@ -9,6 +9,7 @@ import { bootEngine } from '#page/review/engine-pool.ts';
 import { fetchExport } from '#page/review/game/export.ts';
 import { opponentName } from './board.ts';
 import { fetchFinishedGame, type FinishedGame } from './game-data.ts';
+import { finalMate } from './mate.ts';
 import { readOutcome } from './outcome.ts';
 import { precomputeReview, worthReviewing } from './precompute.ts';
 import { startPreview } from './preview.ts';
@@ -90,6 +91,7 @@ export async function onGameEnd(game: PlayedGame, main: HTMLElement): Promise<vo
     coachId: pickCoach(),
     opponent: opponentName(main, game.color, texts.anonymous),
     live: game.live,
+    mate: outcome.reason === 'mate' ? finalMate(finished) : null,
   });
   const positions = finished.treeParts;
   if (!worthReviewing(finished.game.variant.key, positions.length)) {

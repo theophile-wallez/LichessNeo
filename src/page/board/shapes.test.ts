@@ -6,6 +6,7 @@ import { setReviewArrows } from './review-arrows.ts';
 import labels from './fixtures/legacy-label.json' with { type: 'json' };
 
 const layer = (): HTMLElement | null => queryOne(document, '#ln-ext-shapes', HTMLElement);
+const mateLayer = (): HTMLElement | null => queryOne(document, '#ln-ext-mate', HTMLElement);
 async function nextFrame(): Promise<void> {
   await vi.advanceTimersByTimeAsync(20);
 }
@@ -26,7 +27,6 @@ const FOOLS_MATE = {
   children: [],
 };
 
-// A new node each time: the checkmate's clock restarts on a node it hasn't seen.
 function showMate(): void {
   Object.assign(window, { site: { analysis: { node: { ...FOOLS_MATE } } } });
 }
@@ -75,21 +75,17 @@ describe('shapes', () => {
     showMate();
     renderBoard({ orientation: 'white', shapes: [] });
     await untilDrawn();
-    expect(layer()?.innerHTML).toContain('left:62.5%;top:87.5%');
+    expect(mateLayer()?.innerHTML).toContain('--ln-ext-king-column:4;--ln-ext-king-row:7');
     document.querySelector('.cg-wrap')?.classList.replace('orientation-white', 'orientation-black');
     await untilDrawn();
-    expect(layer()?.innerHTML).toContain('left:50%;top:0%');
+    expect(mateLayer()?.innerHTML).toContain('--ln-ext-king-column:3;--ln-ext-king-row:0');
   });
 
-  it('brings the checkmate label in, in the page’s language, after a moment', async () => {
+  it('names the checkmate in the page’s language', async () => {
     showMate();
     renderBoard({ orientation: 'white', shapes: [] });
     await untilDrawn();
-    expect(layer()?.querySelector('.ln-ext-mate__badge')).not.toBeNull();
-    expect(layer()?.querySelector('.ln-ext-mate__label')).toBeNull();
-    // The label is due 2.5 s after the mate was first drawn, and drawn on the next frame.
-    await vi.advanceTimersByTimeAsync(2500);
-    await nextFrame();
-    expect(layer()?.querySelector('.ln-ext-mate__label')?.textContent).toBe(labels.fr);
+    const pip = mateLayer()?.querySelector('.ln-ext-mate__pip');
+    expect(pip?.getAttribute('aria-label')).toBe(labels.fr);
   });
 });

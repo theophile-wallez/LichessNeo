@@ -1,5 +1,5 @@
-import { squareCoords } from '#shared/chess/squares.ts';
-import { COLORS, type Color, type Square } from '#shared/chess/types.ts';
+import type { BoardCell } from '#shared/chess/squares.ts';
+import { COLORS, type Color } from '#shared/chess/types.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import type { EndReason, Outcome } from './outcome.ts';
 import { ICONS, type IconName } from './icons.ts';
@@ -42,12 +42,6 @@ export function kingBadges(outcome: Outcome, texts: GameOverTexts): Record<Color
   return { white: badge('white'), black: badge('black') };
 }
 
-/** Where a square is on the board, from its top-left corner, in squares. */
-export interface BoardCell {
-  readonly column: number;
-  readonly row: number;
-}
-
 const EDGES: ReadonlyMap<number, string> = new Map([
   [0, ' ln-ext-end__king--start'],
   [7, ' ln-ext-end__king--end'],
@@ -71,10 +65,4 @@ export function badgesMarkup(
     </div>`;
   });
   return html`${items}`;
-}
-
-/** A square's cell on a board with `bottom`'s side at the bottom. */
-export function cellOf(square: Square, bottom: Color): BoardCell {
-  const [file, rank] = squareCoords(square);
-  return bottom === 'white' ? { column: file, row: 7 - rank } : { column: 7 - file, row: rank };
 }

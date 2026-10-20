@@ -1,5 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
+import type { FinishedGame } from './game-data.ts';
+import { finalMate, type FinalMate } from './mate.ts';
 import type { Outcome } from './outcome.ts';
 import { gameOverTexts } from './texts.ts';
 import { MIN_SPIN_MS, mountGameOver, SETTLE_MS, type GameOverInput } from './view.ts';
@@ -16,11 +18,30 @@ const ROUND =
 
 const WIN: Outcome = { result: 'win', reason: 'resign', winner: 'white' };
 
+// The rook on g1 mates the king on g8.
+const MATED: FinishedGame = {
+  game: { status: { name: 'mate' }, winner: 'white', variant: { key: 'standard' } },
+  treeParts: [{ ply: 41, fen: '6k1/8/8/8/8/8/8/4K1R1 b - - 1 21', san: 'Rg1#', uci: 'a1g1' }],
+};
+
+/** Puts White's rook on `square`, or takes it off the board. */
+function placeRook(square: string | null): void {
+  document.querySelector('piece.rook')?.remove();
+  if (!square) return;
+  const rook = Object.assign(document.createElement('piece'), { cgKey: square });
+  rook.className = 'white rook';
+  document.querySelector('cg-board')?.append(rook);
+}
+
 const shownCounts = (): string[] =>
   queryAll(document, '.ln-ext-end__count b', HTMLElement).map(number => number.textContent);
 
-function mount(outcome: Outcome, live = true): ReturnType<typeof mountGameOver> {
-  const main = queryOne(document, 'main.round', HTMLElement);
+function mount(
+  outcome: Outcome,
+  live = true,
+  mate: FinalMate | null = null,
+): ReturnType<typeof mountGameOver> {
+  const main = queryOne(document, 'main', HTMLElement);
   if (!main) throw new Error('no game page');
   const input: GameOverInput = {
     main,
@@ -29,6 +50,7 @@ function mount(outcome: Outcome, live = true): ReturnType<typeof mountGameOver> 
     coachId: 2,
     opponent: 'bob',
     live,
+    mate,
   };
   return mountGameOver(input);
 }
@@ -173,5 +195,32 @@ describe('the game over', () => {
       rcontrols.innerHTML = '<div class="follow-up"><button class="fbt">Rematch</button></div>';
     vi.advanceTimersByTime(250);
     expect(document.querySelector('.follow-up > .ln-ext-end__card:first-child')).not.toBeNull();
+  });
+
+  it('shows a mate on the final position, in place of the kings’ badges', () => {
+    placeRook('g1');
+    mount({ result: 'win', reason: 'mate', winner: 'white' }, true, finalMate(MATED));
+    const main = queryOne(document, 'main.round', HTMLElement);
+    expect(main?.dataset.lnExtMate).toBe('');
+    expect(document.querySelector('.ln-ext-end__king')).toBeNull();
+    const badge = document.querySelector('.ln-ext-end__kings > .ln-ext-mate');
+    expect(badge?.getAttribute('style')).toBe('--ln-ext-king-column:6;--ln-ext-king-row:0');
+    const crown = badge?.querySelector('.ln-ext-mate__crown');
+    expect(crown?.getAttribute('style')).toBe('--ln-ext-by-column:6;--ln-ext-by-row:7');
+    // A step back takes it off, a step forward puts it back.
+    placeRook('a1');
+    vi.advanceTimersByTime(250);
+    expect(document.querySelector('.ln-ext-mate')).toBeNull();
+    expect(main?.dataset.lnExtMate).toBeUndefined();
+    placeRook('g1');
+    vi.advanceTimersByTime(250);
+    expect(document.querySelector('.ln-ext-mate')).not.toBeNull();
+  });
+
+  it('leaves an analysis board’s mate to the board’s own drawing', () => {
+    document.querySelector('main')?.classList.replace('round', 'analyse');
+    placeRook('g1');
+    mount({ result: 'win', reason: 'mate', winner: 'white' }, true, finalMate(MATED));
+    expect(document.querySelector('.ln-ext-end__kings')?.innerHTML).toBe('');
   });
 });

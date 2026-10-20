@@ -2,7 +2,7 @@
  * confetti, in a layer over the board that lets every click through; the result's card is in the
  * right-hand panel (game-end-card.css). Lichess's own badges on the kings give way to ours. The
  * badges show large, then `.ln-ext-end--settled` shrinks them to pips on the kings' corners as the
- * coach starts speaking. */
+ * coach starts speaking. A mate shows the board's mate badge instead (board/mate.css). */
 
 main:is(.round, .analyse)[data-ln-ext-end] .cg-custom-svgs {
   display: none !important;
