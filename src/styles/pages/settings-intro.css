@@ -1,20 +1,73 @@
 /* ---- The game intro's preview (content/settings/intro-preview.ts) --- */
 
-/* In the intro's card, under its title and menu: a little game page, the opponent's bar, the
- * board and the user's, which the intro picked plays over (styles/game/intro). */
+/* In the intro's card, under its title: the list of the intros, then a little game page, the
+ * opponent's bar, the board and the user's, which the intro picked plays over (styles/game/intro). */
 .ln-ext-setting[data-ln-ext-setting='gameIntro'] {
+  container: ln-ext-intro / inline-size;
   flex-wrap: wrap;
+}
+
+.ln-ext-intro-picker {
+  display: grid;
+  flex: 1 0 100%;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 10px;
+}
+
+/* As high as the preview beside it, scrolling past that. */
+.ln-ext-intro-picker__list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  contain: size;
+}
+
+.ln-ext-intro-option {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  min-height: 38px;
+  margin: 0;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: var(--ln-ext-text-dim);
+  font: 600 13.5px var(--ln-ext-font);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s !important;
+}
+
+.ln-ext-intro-option:hover {
+  background: var(--ln-ext-lift-6);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-intro-option.active {
+  background: color-mix(in srgb, var(--ln-ext-accent) 22%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 55%, transparent);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-intro-option:has(:focus-visible) {
+  outline: 2px solid var(--ln-ext-accent);
+  outline-offset: -2px;
+}
+
+/* The radio stays for the keyboard and screen readers; the option is its look. */
+.ln-ext-intro-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .ln-ext-intro-preview {
   display: flex;
-  flex: 1 0 100%;
+  min-width: 0;
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  padding: 18px 16px 16px;
-  border-radius: 12px;
-  background: var(--ln-ext-bg-panel-dark);
 }
 
 /* The bars and the board as a game page's grid has them, so the face-off finds its area. */
@@ -125,4 +178,24 @@
 .ln-ext-intro-preview__play .ln-ext-hi {
   width: 18px;
   height: 18px;
+}
+
+/* Narrow, the preview comes first and the intros wrap under it as pills. */
+@container ln-ext-intro (width < 560px) {
+  .ln-ext-intro-picker {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ln-ext-intro-picker__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    order: 1;
+    contain: none;
+  }
+
+  .ln-ext-intro-option {
+    min-height: 34px;
+    border-radius: 999px;
+  }
 }

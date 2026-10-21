@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { queryOne } from '#shared/dom.ts';
+import { queryAll, queryOne } from '#shared/dom.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { buildInterfacePage } from './interface-page.ts';
 
@@ -34,8 +34,31 @@ const row = (page: HTMLElement, key: string): HTMLElement | null =>
 const switchOf = (page: HTMLElement): HTMLButtonElement | null =>
   queryOne(page, "[data-ln-ext-setting='uiSounds'] .ln-ext-switch", HTMLButtonElement);
 const storedSettings = (): unknown => synced.get('ln-ext-settings');
-const SELECT = "[data-ln-ext-setting='gameIntro'] .ln-ext-setting__select";
+const OPTIONS = '.ln-ext-intro-option input';
+const optionsOf = (page: HTMLElement): HTMLInputElement[] =>
+  queryAll(page, OPTIONS, HTMLInputElement);
+const pick = (page: HTMLElement, kind: string): void => {
+  optionsOf(page)
+    .find(input => input.value === kind)
+    ?.click();
+};
 const PLAY = '.ln-ext-intro-preview__play';
+const optionOf = (page: HTMLElement, kind: string): HTMLElement | null =>
+  queryOne(page, `.ln-ext-intro-option:has(input[value='${kind}'])`, HTMLElement);
+const sceneOf = (page: HTMLElement): HTMLElement | null =>
+  queryOne(page, '.ln-ext-intro-preview__scene', HTMLElement);
+
+function point(target: Element | null, type: string, pointerType = 'mouse'): void {
+  target?.dispatchEvent(new PointerEvent(type, { bubbles: type === 'pointerover', pointerType }));
+}
+
+async function introPage(): Promise<HTMLElement> {
+  const page = buildInterfacePage();
+  document.body.append(page);
+  await flush();
+  vi.useFakeTimers();
+  return page;
+}
 
 describe('the settings’ Interface page', () => {
   it('shows the stored settings once read, and flips a switch', async () => {
@@ -105,9 +128,7 @@ describe('the settings’ Interface page', () => {
     const page = buildInterfacePage();
     document.body.append(page);
     await flush();
-    const select = queryOne(page, SELECT, HTMLSelectElement);
-    if (!select) throw new Error('no menu');
-    expect([...select.options].map(option => option.value)).toEqual([
+    expect(optionsOf(page).map(input => input.value)).toEqual([
       'off',
       'salute',
       'setup',
@@ -119,11 +140,10 @@ describe('the settings’ Interface page', () => {
       'credits',
       'faceoff',
     ]);
-    expect(select.value).toBe('salute');
+    expect(optionsOf(page).find(input => input.checked)?.value).toBe('salute');
     expect(page.querySelector('.ln-ext-intro-preview__bar--bottom b')?.textContent).toBe('Eresy');
     vi.useFakeTimers();
-    select.value = 'ticket';
-    select.dispatchEvent(new Event('change', { bubbles: true }));
+    pick(page, 'ticket');
     expect(storedSettings()).toMatchObject({ gameIntro: 'ticket' });
     const scene = queryOne(page, '.ln-ext-intro-preview__scene', HTMLElement);
     expect(scene?.dataset.lnExtIntro).toBe('ticket');
@@ -138,14 +158,51 @@ describe('the settings’ Interface page', () => {
 
   it('greys the intro’s card and its button out with no animation picked', async () => {
     const page = buildInterfacePage();
+    document.body.append(page);
     await flush();
-    const select = queryOne(page, SELECT, HTMLSelectElement);
-    if (!select) throw new Error('no menu');
-    select.value = 'off';
-    select.dispatchEvent(new Event('change', { bubbles: true }));
+    pick(page, 'off');
     expect(storedSettings()).toMatchObject({ gameIntro: 'off' });
     expect(row(page, 'gameIntro')?.dataset.lnExtOn).toBeUndefined();
     expect(queryOne(page, PLAY, HTMLButtonElement)?.disabled).toBe(true);
     expect(page.querySelector('.ln-ext-intro-fx')).toBeNull();
+  });
+
+  it('plays an intro as the pointer comes over it, unsaved, and goes on across the list', async () => {
+    const page = await introPage();
+    const before = storedSettings();
+    point(optionOf(page, 'ticket')?.querySelector('span') ?? null, 'pointerover');
+    expect(sceneOf(page)?.dataset.lnExtIntro).toBe('ticket');
+    const playing = sceneOf(page)?.querySelector('.ln-ext-intro-fx');
+    expect(playing).not.toBeNull();
+    // Over the same option again, it isn't started over.
+    point(optionOf(page, 'ticket'), 'pointerover');
+    expect(sceneOf(page)?.querySelector('.ln-ext-intro-fx')).toBe(playing);
+    point(optionOf(page, 'credits'), 'pointerover');
+    expect(sceneOf(page)?.dataset.lnExtIntro).toBe('credits');
+    expect(storedSettings()).toBe(before);
+  });
+
+  it('keeps the hovered intro playing when it is clicked, and rings it alone', async () => {
+    const page = await introPage();
+    point(optionOf(page, 'weave'), 'pointerover');
+    const playing = sceneOf(page)?.querySelector('.ln-ext-intro-fx');
+    expect(playing).not.toBeNull();
+    pick(page, 'weave');
+    expect(storedSettings()).toMatchObject({ gameIntro: 'weave' });
+    expect(sceneOf(page)?.querySelector('.ln-ext-intro-fx')).toBe(playing);
+    const ringed = queryAll(page, '.ln-ext-intro-option.active input', HTMLInputElement);
+    expect(ringed.map(input => input.value)).toEqual(['weave']);
+  });
+
+  it('plays nothing on a touch until it picks, nor once the pointer left', async () => {
+    const page = await introPage();
+    point(optionOf(page, 'credits'), 'pointerover', 'touch');
+    expect(sceneOf(page)?.dataset.lnExtIntro).toBeUndefined();
+    point(optionOf(page, 'credits'), 'pointerover');
+    point(queryOne(page, '.ln-ext-intro-picker', HTMLElement), 'pointerleave');
+    vi.runAllTimers();
+    // Hovered no more, a click on it plays it again.
+    pick(page, 'credits');
+    expect(sceneOf(page)?.dataset.lnExtIntro).toBe('credits');
   });
 });
