@@ -32,9 +32,12 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
 - Every piece of data from outside (JSON, fetch responses, `postMessage`,
   storage, `#page-init-data`, Lichess's globals) is validated with a
   zod/mini schema (`import { z } from 'zod/mini'`), and its type is
-  `z.infer` of that schema, not written by hand.
+  `z.infer` of that schema, not written by hand. Read it with `parseJson`,
+  `readStored` / `readStoredJson`.
 - Lichess's live objects keep their identity: narrow them with
   `createGuard(schema)` (`#shared/guards.ts`), not a parse, which copies.
+  The schema describes only the members we use and must not rewrite the
+  value (no `lenient`, catch, default or coerce).
 - DOM lookups narrow with `instanceof` through `queryOne`, `queryAll` and
   `closestTo` (`#shared/dom.ts`).
 
@@ -51,7 +54,7 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
 - Imports across folders use the `#` aliases of `package.json`'s `imports`
   (`#shared/…`, `#content/…`, `#page/…`, `#background/…`, `#scripts/…`,
   `#manifest`), never `../`. `./` is for the same folder or a folder below
-  it. Keep the `.ts` extension.
+  it. Keep the `.ts` extension, and `import type` for types only.
 - At most 250 lines of code per file and 60 per function, 4 parameters (use
   an options object), complexity 15, no nested ternaries. Split by what the
   code does, not to dodge the limit.
@@ -197,15 +200,12 @@ hold:
   from the extension and never bundled into it: each coach and the robot on
   a stage, their colors, skin, fur and moods to change, their moves to play.
 - `tests/e2e/`: Playwright smoke tests on lichess.org.
-- `tools/`: Python generators, run by hand: `sidebar-icons/recolor.py`,
-  `example-pack/sounds.py`, `boxwood-sounds/cut.py`, `game-rating/`.
+- `tools/`: Python generators, run by hand.
 - `packs/`: the example pack users can import (`docs/packs.md` describes the
   format).
-- `store/`: the store images, `<lang>/<name>.png`, and their pages in
-  `templates` (one per image, every language in it, over shots of
-  lichess.org and the playground's coaches), with `templates/icon.html`, the
-  extension icon, and `listing.md`, the Chrome Web Store's and Firefox
-  Add-ons' listing texts and answers.
+- `store/`: the store images (`<lang>/<name>.png`), the pages they and the
+  extension icon are rendered from (`templates/`), and the listings' texts
+  (`listing.md`).
 - `.github/`: CI (`ci.yml`), releases (`release.yml`), Dependabot.
 
 What each feature folder holds is listed in
@@ -279,8 +279,8 @@ What each feature folder holds is listed in
   flair images (the players' own flairs aside, theirs to pick).
 - _Icons as you go:_ don't wait to be asked. On a page you work on, a
   Lichess glyph that has no Hugeicon yet, or an icon drawn by hand in our
-  code, gets its Hugeicons counterpart in the same change (a line in the
-  table, or `hugeicon()`), checked on the page.
+  code, gets its Hugeicons counterpart in the same change (a line in
+  `styles/theme/hugeicons/`, or `hugeicon()`), checked on the page.
 
 ## Product rules
 
@@ -327,18 +327,16 @@ features and its name: free analysis, open data, no ads.
 - **Every language:** Lichess localizes text and some URLs (`/fr/training`).
   Never match on text or exact hrefs: match on structure, classes, or how an
   href ends (`a[href$='/training']`).
-- **Every screen, not just the desktop:** our layout is built from 1020px,
-  and below it Lichess's mobile layout still shows with our theme, board and
-  pieces. That's no longer enough: tablets (about 768 to 1019px, portrait
-  and landscape) and phones (about 390px) are a first-class target. A new or
-  changed design comes with its tablet and phone versions, shown to the user
-  and validated before it's built, and the build covers all three (a page
-  that never scrolls on a desktop may scroll on a phone, but nothing
-  overflows sideways). Leave no page half-done below 1020px. The game page
-  shows how: its parts' look applies at every width, and only its grid
-  changes, a column that scrolls below 1020px
-  (`styles/game/layout-narrow.css`, and so do `styles/analysis` and
-  `styles/review`).
+- **Every screen, not just the desktop:** tablets (about 768 to 1019px,
+  portrait and landscape) and phones (about 390px) are as much a target as
+  the desktop, whose layout starts at 1020px. A new or changed design comes
+  with its tablet and phone versions, shown to the user and validated before
+  it's built, and the build covers all three (a page that never scrolls on a
+  desktop may scroll on a phone, but nothing overflows sideways). Leave no
+  page half-done below 1020px. The game page shows how: its parts' look
+  applies at every width, and only its grid changes, a column that scrolls
+  below 1020px (`styles/game/layout-narrow.css`, and so do `styles/analysis`
+  and `styles/review`).
 - **Playful pages:** a color per section, icons on gradient tiles, cards,
   pills, illustrations (pieces in the board's set, our sidebar's drawings,
   little boards), never emoji (see "No emoji").
@@ -645,21 +643,8 @@ Don't open a PR.
 
 A push to `main` makes no release: `/ci` (or the Release workflow, run by
 hand on `main`) runs the CI, then makes a GitHub release with its zips, but
-doesn't reach the stores. Start it only when the user asks. Send a version
-there only when the user asks (each store reviews it, and the Chrome Web
-Store refuses a new version while one is in review): tag the commit of
-`main` with the version it gets (`/ci store` does it, after checking the
-stores' secrets).
-
-```bash
-git fetch origin
-v=$(node scripts/version.ts --ref origin/main)
-git tag "store-$v" origin/main && git push origin "store-$v"
-```
-
-The release workflow checks the tag, then sends the store zip to the Chrome
-Web Store (`scripts/store/publish-chrome.ts`, secrets `CWS_SERVICE_ACCOUNT`
-and `CWS_PUBLISHER_ID`) and the Firefox zip with its sources to Firefox
-Add-ons (`web-ext sign`, secrets `AMO_JWT_ISSUER` and `AMO_JWT_SECRET`).
-Each goes live once approved; the listings are edited by hand
-(`store/listing.md`).
+doesn't reach the stores. Start it only when the user asks. A version goes
+to the stores only when the user asks too, with `/ci store`
+(`.claude/skills/ci`): it tags `main` `store-<version>`, and the release
+workflow sends that commit to the Chrome Web Store and Firefox Add-ons, each
+live once reviewed. The listings are edited by hand (`store/listing.md`).

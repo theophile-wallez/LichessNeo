@@ -1,4 +1,7 @@
-# Architecture and conventions
+# Architecture
+
+How the code is built. The rules it follows are in
+[AGENTS.md](../AGENTS.md).
 
 ## The three scripts
 
@@ -189,64 +192,15 @@ panels themselves, all in `src/content/packs/`:
   `src/shared/backlit.ts`), drawn as an image on the board and its tiles
   (`backlit-keys.ts`).
 
-## Types
-
-- No `any`, no type assertion (`as`, `<T>x`, `!`): annotate the type, or
-  narrow it. A const assertion (`as const`) is fine: it asserts nothing,
-  only keeps literals literal. Lint enforces it.
-- Data from outside (JSON, `postMessage`, storage, Lichess's API) is parsed
-  with a [zod/mini](https://zod.dev/packages/mini) schema, and its type is
-  `z.infer` of that schema, never written by hand. Use `parseJson`,
-  `readStored` / `readStoredJson`.
-- Lichess's live objects (the analysis controller, tree nodes, the sound
-  player) must keep their identity, and a zod parse returns a copy: narrow
-  them with `createGuard(schema)` instead (`src/shared/guards.ts`). The
-  schema still gives the type, and must not rewrite the value (no
-  `lenient`, catch, default or coerce): the guard narrows the input, not a
-  parsed copy. Describe only the members we use.
-- DOM lookups narrow with `instanceof` through `queryOne`, `queryAll` and
-  `closestTo` (`src/shared/dom.ts`).
-- Import with the `.ts` extension, and `import type` for types only.
-- Never import with `../`: reach a file outside your folder through a `#`
-  alias (`#shared/…`, `#content/…`, `#page/…`, `#background/…`,
-  `#scripts/…` and `#manifest`), declared once in `package.json`'s
-  `imports`, which TypeScript, rolldown, vitest and Node all read. `./` is
-  for a file in the same folder or a folder below it.
-
-## Code
-
-- **Names say what things are**: `square`, `whiteShare`, `moveTimes`, not
-  `sq`, `ws`, `mt`. Single letters only for loop indexes (`i`, `j`, `k`),
-  coordinates (`x`, `y`) and type parameters.
-- **Comments are short and say why**, the way a colleague would: a Lichess
-  quirk, a browser pitfall, a reason a simpler way doesn't work. No comment
-  that repeats the code, no essay. One or two lines is the norm; a module
-  may open with a few lines on what it's for.
-- **Small pieces**: at most 250 lines of code per file and 60 per function,
-  four parameters (take an options object beyond that), complexity 15, no
-  nested ternaries. Split along what the code does, not by line count.
-- **Markup built as text** goes through the `html` tagged template
-  (`src/shared/html.ts`): every interpolated value is escaped unless it's
-  `html` output itself. `trustedHtml` is for constants only.
-- **Never move or remove Lichess's DOM nodes**: it renders with snabbdom,
-  which breaks if its nodes move. Add ours (`ln-ext-` prefixed) beside them,
-  set attributes, and let CSS rearrange.
-- **Write only what changes**: `setData` and `setStyleProperty` skip
-  unchanged values, as every write wakes the page's observers. Prefer
-  `classList.toggle(name, force)` to `add`, which writes even when the class
-  is there.
-- Everything of ours (classes, ids, data attributes, CSS variables, storage
-  keys, messages) starts with `ln-ext`, `PREFIX` in `src/shared/prefix.ts`.
-  Storage keys live in `StorageKey` / `SessionKey`.
-
 ## Styles
 
 `src/styles/index.css` imports each page's stylesheet in cascade order; a
 stylesheet longer than 400 lines is a folder of partials with its own
 `index.css`. The build inlines the imports, byte for byte, into
 `content.css`; a release then drops its comments, blank lines and
-indentation (`scripts/lib/css-strip.ts`). Content-script CSS loses ties with Lichess's, hence the many
-`!important`s; scope every rule to its page (`main.round …`).
+indentation (`scripts/lib/css-strip.ts`). Content-script CSS loses ties
+with Lichess's, hence the many `!important`s; scope every rule to its page
+(`main.round …`).
 
 Colors follow Lichess's scheme, light under `html.light`, dark otherwise.
 `theme/palette.css` writes them: a ramp of neutrals from the page's deepest
@@ -263,33 +217,3 @@ preference, as its Theme menu does. Users make their own in its editor
 (`theme-editor.ts`): kept in the settings beside the built-in ones
 (`colors/built-in.ts`), checked by the same schema, and shared as a code
 (`colors/share.ts`).
-
-## Tests
-
-- Unit tests sit next to the code (`foo.test.ts`), run by vitest in
-  happy-dom. Test the logic through its exports; for the DOM parts, build
-  the markup Lichess serves and check what we add.
-- Code ported from the original scripts is checked against what they
-  produced: `fixtures/legacy*.json` holds outputs recorded from the
-  original for representative inputs (see the radar's test).
-- End-to-end tests (`tests/e2e`) load `dist/chrome` into Playwright's
-  Chromium and drive live lichess.org pages: a dozen smoke tests, one per
-  main page, for what happy-dom can't see (Lichess's markup today, the
-  layout, both scripts, the engine). CI runs them, when started by hand.
-
-## Commands
-
-| Command                     | What it does                            |
-| --------------------------- | --------------------------------------- |
-| `pnpm build`                | builds `dist/chrome`, with source maps  |
-| `pnpm dev`                  | the same, rebuilt on every change       |
-| `pnpm package`              | release builds for every target, zipped |
-| `pnpm typecheck`            | `tsc` over each project                 |
-| `pnpm lint` / `pnpm format` | oxlint (type-aware) / oxfmt             |
-| `pnpm test`                 | unit tests                              |
-| `pnpm test:e2e`             | end-to-end tests (build first)          |
-| `pnpm test:e2e:fast`        | the same, without the `@slow` ones      |
-| `pnpm test:firefox`         | Firefox smoke test (build it first)     |
-| `pnpm check`                | everything but the end-to-end tests     |
-| `pnpm check:fast`           | the same, tests of changed files only   |
-| `pnpm preview`              | builds into the main checkout's `dist`  |
