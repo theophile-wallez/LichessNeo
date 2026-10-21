@@ -87,16 +87,16 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
 
 **Tests**
 
-- Every change ships with tests, written once the user has validated it
-  (see [How a change goes](#how-a-change-goes)). Unit tests sit next to the
-  code (`name.test.ts`, vitest in happy-dom): logic through its exports, DOM
-  features by building the markup Lichess serves and checking what we add,
-  a stylesheet's rule that must beat Lichess's by computing the style under
-  both (`styles/game/game-info.test.ts`). `tests/e2e` is a dozen smoke tests on lichess.org, one per main page, for
-  what happy-dom can't see (Lichess's markup today, the layout, both
-  scripts, the engine). Don't add to it for a feature: its unit tests cover
-  it. Don't run it locally either, it loads the machine: CI does, when
-  the user starts it (`/ci`).
+- Every change ships with tests, written once the user has validated it (see
+  [How a change goes](#how-a-change-goes)). Unit tests sit next to the code
+  (`name.test.ts`, vitest in happy-dom): logic through its exports, DOM
+  features by building the markup Lichess serves and checking what we add, a
+  stylesheet's rule that must beat Lichess's by computing the style under both
+  (`styles/game/game-info.test.ts`). `tests/e2e` is a dozen smoke tests on
+  lichess.org, one per main page, for what happy-dom can't see (Lichess's
+  markup today, the layout, both scripts, the engine). Don't add to it for a
+  feature: its unit tests cover it. Don't run it locally either, it loads the
+  machine: CI does, when the user starts it (`/ci`).
 - See each new test fail once before trusting it: a test that can't fail is
   not a test. Assert on real outputs, not on a mock's own answers.
 - `fixtures/legacy*.json` are outputs recorded from the original code. They
@@ -178,28 +178,45 @@ hold:
 
 ## Where things go
 
-| Path              | What it holds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `src/manifest.ts` | the manifest of each target, and `BASE_VERSION`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `src/content/`    | the isolated-world script: `packs` (the board, pieces and sounds: our themes, Lichess's or imported packs, their pickers, our themes' settings and the settings' import, in the pickers when signed out), `bootstrap`, `layout` (`MARKS`, the `data-ln-ext-has` flags, inset, zoom, controls height), `game`, `analysis` (the players' bars, the eval gauge, the underboard's button, the variations drawn as a tree, long runs folded into a pill), `puzzle` (the puzzle page's one panel, its menu and coach), `learn` (a Learn stage's coach, saying the level's goal and how it ended), `pages`, `ui` (tooltips, hover card, tab bars, users' avatars, the user's own name where Lichess writes it, the interface's Foley sounds behind the settings' switch, the copy fields kept out of Chrome's refill on going back), `charts`, `coach` (the coach's 3D mascots, the coaches' names and the Game Review's coach picker), `computer` (the computer's robot and the level slider of the computer's game setup), `game-setup` (the game setup dialog's tiles for the variant, the time control and the side, the panels they switch, its height easing as they do, and `followSetup`, which syncs a feature as the setup opens and redraws), `profile` (a profile's medals, from `/api/user`, and on the user's own, their avatar's link to the settings'), `puzzle-dashboard` (the puzzle dashboard's overview with its coach's tips, its improvement areas and strengths, from `/api/puzzle/dashboard`, and the puzzle history's week, puzzles to retry and session cards), `dev` (auto-reload), `platform` (the extension APIs it uses), `settings` (the extension's settings, a section of the account pages whose menu gets a link for each of its pages: Personalization (the appearance, the coach and its switches: its 3D, its place on the free analysis board, and its drawings on the board), Profile customization (the user's own avatar, a coach on a color or a picture, and their own name, which only their browser shows), Board & sounds (the extension's, the packs' and Lichess's, over a preview board that shows a board or a set while its tile is hovered), Packs, Quick pairing (the home's cards: a speed's or the player's own, changed, moved, taken off or put back to the defaults, and cards suggested from their recent games), Interface (its sounds, the game intro over a preview of it, the sidebar's rating, or none); kept in `chrome.storage.sync`, but the coach's, the avatar's and the name's picks in localStorage, where the page world reads them), `colors` (the color themes, one picked for each of Lichess's schemes), `sidebar` (the Donate item, its folding to icons, the preferences cog, the account's rating, the light / dark switch, the drawer below 1020px), `notices` (Lichess's connection status and the server's announcements, as stacked toasts) |
-| `src/page/`       | the page-world script: `motion`, `sounds` (`synth`, the Ascent sound set, played live by Foley; a sound's takes, one at random, and the long moves that slide), `labels` (Lichess's words for what the content script adds, copied onto `<html>`), `board` (shapes, checkmate, the coach's drawings), `backlit` (the backlit boards' light around each move), `review`, `charts`, `game-over` (kings' badges, confetti, the coach's card in the panel), `chat` (the chat's lines marked for their bubbles, its game events in the page's language), `seek` (a game's "New opponent" seeking in place, and the home's cards of the player's own), `color-scheme` (the settings' scheme pick, saved as Lichess's own), `looks` (Lichess's boards, piece sets and sound sets picked in the settings, saved as Lichess's own, or shown unsaved while their tile is hovered, and the settings' preview board, which plays a short game), and `lichess/`, typed facades over Lichess's globals                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `src/shared/`     | helpers for both worlds and the worker (DOM, markup, messages, storage, chess, charts, packs), `testing/` for tests                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `src/background/` | the service worker: auto-reload, old cache cleanup, pack downloads, Boxwood's sounds read for the content script                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `src/styles/`     | one stylesheet per page or part, a folder of partials past 400 lines, joined in `index.css`'s order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `public/`         | copied into each build: `_locales/`, `icons/`, `img/` (`icons`, `hugeicons`, `sidebar`, `coaches`), `sounds/boxwood` (the Boxwood set's takes), beside the bundled packages' licenses (`scripts/lib/licenses.ts`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `scripts/`        | build, package, typecheck, source rules, version, icons, store image rendering, store publishing                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `playground/`     | the mascots' playground (`pnpm playground`), a page apart from the extension and never bundled into it: each coach and the robot on a stage, their colors, skin, fur and moods to change, their moves to play                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `tests/e2e/`      | Playwright smoke tests on lichess.org                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `tools/`          | Python generators, run by hand: `sidebar-icons/recolor.py`, `example-pack/sounds.py`, `boxwood-sounds/cut.py`, `game-rating/`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `packs/`          | the example pack users can import (`docs/packs.md` describes the format)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `store/`          | the store images, `<lang>/<name>.png`, and their pages in `templates` (one per image, every language in it, over shots of lichess.org and the playground's coaches), with `templates/icon.html`, the extension icon, and `listing.md`, the Chrome Web Store's and Firefox Add-ons' listing texts and answers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `.github/`        | CI (`ci.yml`), releases (`release.yml`), Dependabot                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+- `src/manifest.ts`: the manifest of each target, and `BASE_VERSION`.
+- `src/content/`: the isolated-world script, a folder per feature.
+- `src/page/`: the page-world script, a folder per feature, and `lichess/`,
+  typed facades over Lichess's globals.
+- `src/shared/`: helpers for both worlds and the worker (DOM, markup,
+  messages, storage, chess, charts, packs), `testing/` for tests.
+- `src/background/`: the service worker: auto-reload, old cache cleanup,
+  pack downloads, Boxwood's sounds read for the content script.
+- `src/styles/`: one stylesheet per page or part, a folder of partials past
+  400 lines, joined in `index.css`'s order.
+- `public/`: copied into each build: `_locales/`, `icons/`, `img/` (`icons`,
+  `hugeicons`, `sidebar`, `coaches`), `sounds/boxwood` (the Boxwood set's
+  takes), beside the bundled packages' licenses (`scripts/lib/licenses.ts`).
+- `scripts/`: build, package, typecheck, source rules, version, icons, store
+  image rendering, store publishing.
+- `playground/`: the mascots' playground (`pnpm playground`), a page apart
+  from the extension and never bundled into it: each coach and the robot on
+  a stage, their colors, skin, fur and moods to change, their moves to play.
+- `tests/e2e/`: Playwright smoke tests on lichess.org.
+- `tools/`: Python generators, run by hand: `sidebar-icons/recolor.py`,
+  `example-pack/sounds.py`, `boxwood-sounds/cut.py`, `game-rating/`.
+- `packs/`: the example pack users can import (`docs/packs.md` describes the
+  format).
+- `store/`: the store images, `<lang>/<name>.png`, and their pages in
+  `templates` (one per image, every language in it, over shots of
+  lichess.org and the playground's coaches), with `templates/icon.html`, the
+  extension icon, and `listing.md`, the Chrome Web Store's and Firefox
+  Add-ons' listing texts and answers.
+- `.github/`: CI (`ci.yml`), releases (`release.yml`), Dependabot.
+
+What each feature folder holds is listed in
+[docs/architecture.md](docs/architecture.md#feature-folders).
 
 **Recipes**
 
 - _A content feature:_ a folder in `src/content/`, a module exporting a
   `Feature`, an entry in `src/content/index.ts` at the right place in the
-  start order, tests beside it.
+  start order, tests beside it, and a line in `docs/architecture.md`'s
+  feature folders.
 - _A page feature:_ the same in `src/page/`. Read Lichess's objects through
   `src/page/lichess/` (add to its facades rather than reading `window` ad
   hoc).
@@ -215,21 +232,23 @@ hold:
   scheme, so a rule is written once. `#fff` and `#000` only on what stays the
   same on both (a fill of the accent or a hue, a picture, the board), as
   `--ln-ext-white` and `--ln-ext-ink`. Check both schemes.
-- _A color theme:_ an entry in `BUILT_IN_THEMES` (`src/content/colors/built-in.ts`),
-  a palette (a tint's hue and chroma, an accent carrying white text at 3:1) per
-  scheme, and its name in `public/_locales`. Users make theirs in the settings'
-  theme editor, kept in `customThemes`.
+- _A color theme:_ an entry in `BUILT_IN_THEMES`
+  (`src/content/colors/built-in.ts`), a palette (a tint's hue and chroma, an
+  accent carrying white text at 3:1) per scheme, and its name in
+  `public/_locales`. Users make theirs in the settings' theme editor, kept in
+  `customThemes`.
 - _A tab bar that slides:_ an entry in `TAB_BARS`
   (`src/content/ui/tab-bars.ts`), then its look in CSS (see "Tabs slide").
-- _An image or a sound:_ never a remote URL, and never another chess
-  site's (see the product rules). Icons are Hugeicons (see "An icon"); the
-  sidebar's are our own drawings, 96px WebP in `img/sidebar`. The build fails on a CSS extension
-  URL whose file is missing or not in `web_accessible_resources`. Boards and piece sets
-  aren't bundled: they're Lichess's, or a pack's (`docs/packs.md`); nor are
-  sounds, but for our two sets, Ascent (synthesized) and Boxwood (recorded,
-  `public/sounds/boxwood`, cut by `tools/boxwood-sounds/cut.py`; the build
-  fails unless its takes are the ones `RECORDED_TAKES` counts).
-  A new sound a pack may have goes in `src/shared/sounds.ts`.
+- _An image or a sound:_ never a remote URL, and never another chess site's
+  (see the product rules). Icons are Hugeicons (see "An icon"); the sidebar's
+  are our own drawings, 96px WebP in `img/sidebar`. The build fails on a CSS
+  extension URL whose file is missing or not in `web_accessible_resources`.
+  Boards and piece sets aren't bundled: they're Lichess's, or a pack's
+  (`docs/packs.md`); nor are sounds, but for our two sets, Ascent
+  (synthesized) and Boxwood (recorded, `public/sounds/boxwood`, cut by
+  `tools/boxwood-sounds/cut.py`; the build fails unless its takes are the ones
+  `RECORDED_TAKES` counts). A new sound a pack may have goes in
+  `src/shared/sounds.ts`.
 - _A chart:_ redrawn in SVG from the page's data, in the rating chart's look
   (see "Every chart is modern"), with `src/shared/charts/`.
 - _An icon:_ an interface icon (a button's, a control's, a menu's, a
@@ -245,12 +264,19 @@ hold:
   `styles/theme/hugeicons/`; a glyph our CSS draws keeps its box,
   see-through, with the icon painted in it (as there). The time controls',
   the variants' and Lichess's own marks (logo, Storm, Berserk, studies) stay
-  its glyphs.
-- _No emoji:_ emoji don't look clean. A colored icon is a Hugeicon in a
-  color of the palette on a tile tinted with it (a side menu's link sets
-  `--ln-ext-nav-glyph` and `--ln-ext-nav-color`, `styles/pages/headings-menus.css`),
-  never an emoji file nor one of Lichess's flair images (the players' own
-  flairs aside, theirs to pick).
+  its glyphs. The time controls' are in `[data-icon]::before` (`\e059`
+  ultrabullet, `\e032` bullet, `\e008` blitz, `\e002` rapid, `\e00a`
+  classical, `\e019` correspondence), colored per mode in
+  `styles/theme/game-modes.css`: set `--ln-ext-mode-color` on the
+  `::before` to recolor one. Elsewhere, draw one with
+  `content: var(--ln-ext-mode-rapid)` (or another mode) in
+  `font-family: lichess`, in `var(--ln-ext-mode-rapid-color)` (every mode
+  but ultrabullet has one).
+- _No emoji:_ emoji don't look clean. A colored icon is a Hugeicon in a color
+  of the palette on a tile tinted with it (a side menu's link sets
+  `--ln-ext-nav-glyph` and `--ln-ext-nav-color`,
+  `styles/pages/headings-menus.css`), never an emoji file nor one of Lichess's
+  flair images (the players' own flairs aside, theirs to pick).
 - _Icons as you go:_ don't wait to be asked. On a page you work on, a
   Lichess glyph that has no Hugeicon yet, or an icon drawn by hand in our
   code, gets its Hugeicons counterpart in the same change (a line in the
@@ -269,17 +295,17 @@ features and its name: free analysis, open data, no ads.
   not even redrawn or traced: an earlier version was taken off the Chrome
   Web Store for that. Draw our own, use Lichess's, or files under a free
   license, with that license in `public/licenses/`.
-- **The look:** dark or light as Lichess's own Theme says, in the color
-  theme the user picked for each, our blue board (or Lichess's, or a pack's), bold
+- **The look:** dark or light as Lichess's own Theme says, in the color theme
+  the user picked for each, our blue board (or Lichess's, or a pack's), bold
   gradient buttons, a fixed left sidebar, roomy player bars with avatars and
   clocks.
 - **The layout:** board on the left, one right-hand panel (moves, controls,
   chat), and a page that never scrolls: everything fits the viewport, like a
   native app. Add nothing below the board.
-- **The feel:** a pack's sounds if the user has one, the players' intro at the start (picked in the settings), the
-  kings' badges, the winner's confetti and the coach's card at the end, and a
-  Game Review ("Bilan") with an eval graph, accuracy, move classes, the
-  coach's card, board badges and an eval bar.
+- **The feel:** a pack's sounds if the user has one, the players' intro at the
+  start (picked in the settings), the kings' badges, the winner's confetti and
+  the coach's card at the end, and a Game Review ("Bilan") with an eval graph,
+  accuracy, move classes, the coach's card, board badges and an eval bar.
 - **The coach talks in a card:** wherever the coach speaks (the review, a
   Learn stage…), it's the Game Review's coach card (`styles/review/bubble.css`,
   "The coach's card"): the coach standing on the card's bottom edge, its
@@ -323,15 +349,16 @@ features and its name: free analysis, open data, no ads.
   item of a side menu, a link to a page, has its icon: the Hugeicon that
   page already has elsewhere if it has one (another menu's link, its
   title's), else the closest one Hugeicons has.
-- **One picture per page:** a page the sidebar lists is drawn with its
-  sidebar picture (`img/sidebar/<page>.webp`, as `styles/sidebar/nav.css`
-  names them) wherever it stands for that page: its title, the profile's
-  activity and rating cards, a button that leads there. Never an emoji or a
-  Lichess glyph in its place. Side menus are the exception: their links
-  are all Hugeicons, alike (see "Playful pages"), and a page with a side
-  menu starts its title with its open link's tile, the same icon
-  (`styles/pages/menu-titles.css`: give a new menu's link a
-  `main.page-menu[data-ln-ext-menu~=…][data-ln-ext-nav-active$=…]` selector too).
+- **One picture per page:** a page the sidebar lists is drawn with its sidebar
+  picture (`img/sidebar/<page>.webp`, as `styles/sidebar/nav.css` names them)
+  wherever it stands for that page: its title, the profile's activity and
+  rating cards, a button that leads there. Never an emoji or a Lichess glyph
+  in its place. Side menus are the exception: their links are all Hugeicons,
+  alike (see "Playful pages"), and a page with a side menu starts its title
+  with its open link's tile, the same icon (`styles/pages/menu-titles.css`:
+  give a new menu's link a
+  `main.page-menu[data-ln-ext-menu~=…][data-ln-ext-nav-active$=…]` selector
+  too).
 - **Cards stay plain:** never fill a card's background with green or red;
   color a badge, a tile or the title instead (buttons aside).
 - **Dark on the bright hues:** never white text or a white icon on a
@@ -348,8 +375,8 @@ features and its name: free analysis, open data, no ads.
   `TAB_BARS`; its CSS gives the piece the active tab's look (`--ln-ext-tab-bg`,
   `-shadow`, `-radius`, `-line`) and takes that look off the active tab
   under `[data-ln-ext-tabs]` (`styles/theme/tooltips-and-tabs.css`).
-- **Motion is never reduced:** never write a `prefers-reduced-motion` query.
-  `src/page/motion` makes every such query answer as if nothing were asked.
+- **Motion is never reduced:** never write a `prefers-reduced-motion` query
+  (see "Lichess reduces motion").
 - **Only the content scrolls:** a page's side panel and title stay put while
   its content scrolls (`position: sticky`, as in `styles/simul`, or a
   scrolling content area). A side menu or column never scrolls with the
@@ -372,12 +399,28 @@ features and its name: free analysis, open data, no ads.
 
 ## Lichess pitfalls
 
-Learned the hard way. Check here before touching the area concerned.
+Learned the hard way. Check here before touching the area concerned. Those
+that hold for one area only are in an `AGENTS.md` beside its code, which
+Claude Code loads as it reads there; any other agent reads the one of the
+area it works on first:
 
-- **Obfuscated tags.** The game move list's tag names change between Lichess
-  releases (now `i5d`, `aPp`, `qZM`, `Z7yx`, `bo3`, active class `a1t`):
-  `styles/game/move-list.css` lists old and new ones in `:is()`. If the move
-  list loses its style, find the new names in Lichess's round bundle.
+- `src/page/`: Lichess's page APIs, the free analysis board, chessground's
+  shapes, a game's charts.
+- `src/page/review/`: the cloud eval, mate distances, the engine's spread.
+- `src/styles/game/`: the move list's obfuscated tags, game over, variants,
+  Zen mode, TV.
+- `src/styles/analysis/`: practice lessons, broadcasts.
+- `src/styles/sidebar/`: the scroll state, the header below 1020px.
+- `src/content/coach/`: the coach's mascots.
+- `src/content/packs/`: Lichess's piece variables.
+- `src/content/pages/`: the home's quick pairing and blog carousel,
+  tournament podiums.
+- `src/content/ui/`: hover cards, tab bars redrawn on click.
+- `src/content/profile/`: profiles.
+
+A new pitfall of one area goes in its file (a new one gets a `CLAUDE.md`
+link to it, and a line here). The rest hold everywhere:
+
 - **Coordinates.** Lichess swaps `body.coords-out` for `coords-in` while its
   eval gauge shows (`forceInnerCoords`). On desktop
   `styles/board/coordinates.css` draws both outside, sized by
@@ -401,56 +444,10 @@ Learned the hard way. Check here before touching the area concerned.
   too, so packs are downloaded by the background worker
   (`background/packs.ts`): GitHub's files allow any origin, so it needs no
   host permission. Other cross-origin data would need one.
-- **Lichess's piece variables.** Lichess draws its pieces from
-  `---white-pawn` … `---black-king` (`.is2d .pawn.white { background-image:
-  var(---white-pawn) }`), set on `:root`, and inline on `<body>` once its
-  menu changes the board or the set: a pack overrides them on both
-  (`content/packs/apply.ts`), and our own pieces (`#shared/piece-glyph.ts`)
-  read them. Before drawing a board Lichess decodes each one, slicing
-  `url(` and `)` off its value: write them unquoted, and know that one image
-  that fails to decode leaves the page without a board. Packs are checked
-  for that at import.
 - **Thin fonts.** Lichess sets weight 300 on Roboto / Noto Sans.
   `content/bootstrap/fonts.ts` appends `@font-face` rules pointing them (and
   `LN Ext Sans`) at the system font; they must come after Lichess's, hence not
   in the manifest CSS.
-- **Icons.** The colored icons are Hugeicons on tinted tiles (see "No
-  emoji"); the sidebar's are our own Dracula-colored drawings
-  (`img/sidebar`). Time-control icons are Lichess font glyphs in
-  `[data-icon]::before` (`\e059` ultrabullet, `\e032` bullet, `\e008` blitz,
-  `\e002` rapid, `\e00a` classical, `\e019` correspondence), kept as they are
-  and colored per mode in `styles/theme/game-modes.css`: set `--ln-ext-mode-color`
-  on the `::before` to recolor one. Outside a `[data-icon]`, draw the glyph with
-  `content: var(--ln-ext-mode-rapid)` (and `ultrabullet`, `bullet`, `blitz`,
-  `classical`, `correspondence`) in `font-family: lichess`, in its color
-  `var(--ln-ext-mode-rapid-color)` (`bullet`, `blitz`, `rapid`, `classical`, `correspondence`). The interface's monochrome icons are Hugeicons'
-  (see the recipe "An icon"). Never copy another site's icons or drawings:
-  use Hugeicons, Lichess's glyphs, or draw your own (illustrations, not
-  icons Hugeicons has).
-- **Practice lessons are analysis pages.** `/practice/…` is `main.analyse`
-  with `.practice__side` and either `.gamebook` (a lesson) or
-  `.practice-box` (a drill). "Practice with computer" adds `.practice-box`
-  to any analysis board, so scope on `.practice__side`. A drill's goal sits
-  in `.analyse__underboard`, which our layout hides. Panel rows need a
-  definite height: `1fr` in a content-sized container just grows.
-- **Game over.** The end-of-game buttons are `.rcontrols > .follow-up`
-  (rematch, new opponent, tournament, then the analysis link, always last).
-  "New opponent" exists only for lobby and pool games; otherwise
-  `content/game/new-game.ts` prepends its own `/?hook_like=<id>` button.
-  `page/game-over` puts its card at the head of these buttons, which are
-  its foot (the analysis link first, as Game Review). The
-  round data has no clock history: move times come from
-  `/game/export/<id>?clocks=true`, and every position of a game just over
-  from its finished page (`/<id>`, `cfg.data.treeParts`), with its status and
-  winner, which `page/game-over` reads rather than the page's words; its
-  `treeParts` are the analysis page's mainline, start included, so the game
-  page fills the review's cache under the key that page reads. Game pages
-  are cross-origin isolated like analysis pages, so Lichess's Stockfish runs
-  there too, but never before the game is over (Lichess's fair play rules).
-  Lichess marks the kings with its own badges (`.cg-custom-svgs`), which ours
-  replace. At a game's end Lichess leaves an empty `.crosstable` before the
-  new one: it's hidden, and the filled one measured. In a scrolling grid, a track like `minmax(30px, auto)` never grows
-  past its minimum: put the minimum on the items.
 - **Two worlds.** `src/content` can't see page objects (`site`,
   chessground's `cgKey` expandos); `src/page` can, but can't call
   `chrome.runtime.getURL`. They talk through the messages of
@@ -463,43 +460,6 @@ Learned the hard way. Check here before touching the area concerned.
   `--ln-ext-btn-{primary,grey,red}[-hover|-shadow]` (`styles/theme/base.css`).
   Where Lichess glues a button to an input or stacks buttons flush, drop the
   shadow or add a gap.
-- **Scroll state.** Once scrolled, Lichess adds `.hide` to `#top`, hiding
-  `#topnav` and the dropdowns with `visibility`, `opacity` and
-  `pointer-events: none`. Our sidebar is fixed, so `styles/sidebar` restores
-  all three; forget `pointer-events` and the sidebar is visible but dead.
-- **JS-sized widgets.** The home blog carousel sizes its cards from its
-  `clientWidth`, which counts padding: inset it with a transparent border,
-  not padding.
-- **The coach's mascots.** Three.js scenes (`content/coach/mascot`), drawn
-  in the content world: the page's CSP keeps the extension's bundle out of
-  the page world. They're the ES chunk `coach-mascot.js`, loaded with
-  `import()` only when a coach shows, and each draws only while on screen
-  in a visible tab (`VisibleLoop`). Its first frame waits for the stage's light and
-  shaders (`Stage.ready`), so its build is spread over two tasks. Each wears a solid finish
-  (`cast/finishes.ts`), drawn in its fur's pattern (`cast/patterned.ts`):
-  clay for the animals and most others, glossy plastic for the computer's
-  robot. Fur is still a skin any mascot may take: shells whose alpha blends
-  with `MaxEquation`, or the canvas shows holes. Without WebGL, the coach's
-  still (`img/coaches/mascot-<n>.webp`) stays. The robot is the eighth
-  coach (`ROBOT_COACH`), in its level 3 blue. The coaches of other shapes
-  than the egg come after it (9 to 26, `CAST` in `cast/cast.ts`); a face
-  off the egg's height moves the bust framing with it (`bust`), and a head
-  turned three quarters looks the other way where it stands on the page's
-  right (`facingLeft`, the home's hero). The avatars are drawn from every coach but the
-  robot (`AVATAR_COACHES`, `#shared/avatar.ts`). Try a mascot's change in `pnpm playground` first: it
-  drives the same rig with its own clock. The stills
-  (`img/coaches/*.webp`) are the live mascots' first frame, looking straight
-  ahead: the `bust` framing at 124 × 114, twice the pixels, read off the
-  canvas from `onDrawn` (a screenshot comes out darker). Render them again
-  when a mascot changes, or the live one won't land on its still.
-  Wherever a still stands in for a live mascot, the swap must be seamless:
-  the live box is the still's box, in its framing and its aspect (124 / 114
-  for `bust`); it comes in neutral, as its still looks, taking a mood only
-  once drawn; and a canvas that spills past a still cut at its sides (for
-  the arms) comes in clipped to the still, then opens out
-  (`styles/dashboard/overview.css`). Check the swap: the still alone (block
-  `coach-mascot.js`), then the first live frame, outlines matching to the
-  pixel.
 - **Firefox.** Its own build (`pnpm build --target firefox`) from the same
   sources. The CSS names bundled files as
   `chrome-extension://__MSG_@@extension_id__/…`, which the build rewrites:
@@ -509,62 +469,11 @@ Learned the hard way. Check here before touching the area concerned.
   Firefox injects the content scripts into open tabs on install or update,
   where an older copy's page script still runs:
   `content/bootstrap/late-reload.ts` reloads such a tab.
-- **Page APIs.** `site.sound` is the sound player, which Lichess calls on a
-  step forward only, but every jump calls its `saySan(san, true)`:
-  `page/sounds/jumps.ts` sounds the others from there. `site.analysis` is the
-  analysis controller (`mainline`, `node`, `path`, `nodeList`,
-  `tree.nodeAtPath`, `jumpToMain`, which doesn't scroll the move list,
-  `getOrientation`), with the arrows in `chessground.state.drawable`; the
-  engine is `npm/stockfish-web/sf_19_smallnet.js`, or its `_relaxed-simd.js`
-  build where the browser runs relaxed SIMD, as Lichess picks it
-  (`page/review/engine/relaxed-simd.ts`). Only analysis pages have
-  a controller: code that must also work on game pages reads the board's
-  DOM (`page/board` does).
-- **The cloud eval.** `/api/cloud-eval?fen=…&multiPv=2`: no account, one
-  position per request, one request at a time; a 404 means nobody analyzed
-  it (in a game: out of the opening). Scores are White's view, castling is
-  king-takes-rook. The export's `evals=true` gives the server analysis when
-  there is one: one line per position, no second best.
-- **A game's charts.** Lichess fills `#acpl-chart-container` and
-  `#movetimes-chart-container`, in the underboard's panels, when their tab is
-  first picked. Their data: each mainline node's `eval` (the server
-  analysis, White's view, filled in as it runs) and `clock` (centiseconds),
-  and `data.game.moveCentis` and `division` (the phases' plies).
-- **Mate distances.** Win probability can't grade a move between two mates,
-  so the review reads mate distances, and our engine only gets short ones
-  right (at depth 16, mate in 5 or fewer is exact; longer comes out longer).
-  Trust a move's short side only (`SURE_MATE`, `page/review/judge/mate.ts`)
-  and never print a long defense's length.
-- **The free analysis board.** `/analysis` is `main.analyse` with
-  `site.analysis.synthetic` set: no game to export, a tree that grows as the
-  user plays. Each `move` in its list carries its tree path in `p`. Opening
-  names come from `explorer.fetchMasterOpening(fen)`, a 401 when signed out.
-- **Chessground's shapes.** `cg-container > svg.cg-shapes`, one `g` per
-  shape (a circle for a marked square, a line for an arrow), in square units
-  from the viewBox corner (`-4 -4 8 8`), orientation already applied. Arrow
-  ends are pulled in from the centers: round back. The group's `cgHash` is
-  `width,height,hilite,orig,dest,brush…`; `hilite` marks the shape being
-  dragged. Engine arrows use a pale brush, so their `opacity` is below 1.
-- **Hover cards.** Each kind has its own popup: the user card `#powerTip`
-  (HTML from `/@/<user>/mini`), `#miniGame`, `#miniBoard`, `#hook`. The card
-  is re-fetched and re-rendered on every hover and created on the first
-  one: watch it with a `MutationObserver` on `childList`, never poll (a poll
-  shows the raw markup first).
 - **`#page-init-data`.** A page's module data is inlined there as JSON (the
   rating stats page also passes its chart data in
   `loadEsm('chart.ratingHistory', …)`), and Lichess removes the element once
   read. Capture the node while the page parses (`#shared/page-init-data.ts`);
   its text stays readable after removal.
-- **Profiles.** Headless browsers get a bot check (Cloudflare's "Just a
-  moment…", a 403) on every `/@/…` page, so the end-to-end tests can't reach
-  one. Logged out, a profile's rating chart and activity feed are
-  empty: to style them, inject plausible markup into
-  `.angle-content .activity` and `#us_profile` (see lila's `ActivityUi.scala`
-  and `PerfStatUi.ratingHistoryContainer`). The awards are
-  `position: absolute` to escape `.user-show { overflow: hidden }`, with
-  margins tuned for that. `bits.dropdownOverflow` counts how many action
-  buttons fit from `.user-actions`'s `offsetWidth`: never change that
-  element's flex sizing.
 - **A transparent box still clips.** Lichess's `.box` (and `.lobby__side`…)
   have `overflow: hidden`: once transparent, the clip still cuts hover
   shadows and focus rings, and it traps `position: sticky`. Add
@@ -615,19 +524,15 @@ Learned the hard way. Check here before touching the area concerned.
   cross-origin sheet, reloads each Lichess sheet with CORS, rewrites its
   reduced-motion rules and disables the original. Until the copy loads,
   Lichess's rule applies: keep our `transition`s `!important`.
-- **Lichess's light theme.** We follow Lichess's scheme: `html.light` is
-  light (its Theme menu sets it, or the device for `system`, also on
-  anonymous visitors and headless Chrome), anything else dark. Lichess
-  rewrites `<html>`'s class when it changes: key on it, never add a class
-  there (the review's, older, are put back on each of its passes,
-  `page/review/view/render.ts`). Its own `.light …` rules still apply here and there: check both.
-  A Hugeicon file in a pastel color vanishes on a light tile: draw the glyph
-  as a mask in its hue, as `styles/pages/menu-titles.css` does.
-- **The header below 1020px.** Lichess keeps its top bar there, and its
-  hamburger (`label.hbg`, for the `#tn-tg` checkbox) slides `#topnav` in as a
-  drawer under it. `styles/sidebar/drawer.css` gives both our look, the
-  drawer the sidebar's pictures; `content/sidebar/drawer.ts` makes a
-  section's own link fold its links open there instead of leaving.
+- **Lichess's light theme.** We follow Lichess's scheme: `html.light` is light
+  (its Theme menu sets it, or the device for `system`, also on anonymous
+  visitors and headless Chrome), anything else dark. Lichess rewrites
+  `<html>`'s class when it changes: key on it, never add a class there (the
+  review's, older, are put back on each of its passes,
+  `page/review/view/render.ts`). Its own `.light …` rules still apply here and
+  there: check both. A Hugeicon file in a pastel color vanishes on a light
+  tile: draw the glyph as a mask in its hue, as `styles/pages/menu-titles.css`
+  does.
 - **800px exactly.** Lichess's phone menu applies up to `max-width: 800px`:
   start desktop rules at `800.02px`, not `800px`.
 - **Side menus below 1020px.** From 800px a `.subnav` stays a column beside
@@ -640,59 +545,14 @@ Learned the hard way. Check here before touching the area concerned.
   window, phones included: below 1020px our layouts go one column upright
   and two under `(orientation: landscape)` (`styles/puzzle/layout-narrow.css`).
   Size the rows a spanning board covers, or one of them grows to its height.
-- **A page column as wide as its content.** From 800px an arena's, a
-  Swiss's and a simul's page set `---main-max-width: auto` on `#main-wrap`,
-  whose page column then sizes to its content between two free ones: a short
-  Swiss stood in the middle. A narrow layout sets it to `100%` behind its
-  `data-ln-ext-has` flag (`styles/events-narrow/layout.css`); a width on `main` can't
-  help, the track takes it as its minimum and overflows.
-- **Variants.** Crazyhouse's pockets are grid areas `mat-top` / `mat-bot`
-  that the game grid must place (`styles/game`). Three-check's checks are
-  kings in `.material`, which our bars hide: `content/game/captured.ts`
-  shows them. Racing Kings and Horde start with other pieces.
-- **Zen mode** (`body.zenable.zen`) hides all but the board, clocks and
-  controls; our `!important` layout rules must yield to it (`styles/game`).
-- **TV.** `/tv` and `/tv/<channel>` don't carry the game's id: take it from
-  the move list's analysis link.
-- **A `main.analyse` without a board.** A broadcast's page is
-  `main.analyse.is-relay.has-relay-tour`: the analysis layout must leave it
-  alone (`styles/broadcast`).
-- **Tab bars redrawn on click.** The profile's games filter, the home
-  lobby's tabs and the explorer's databases are replaced whole when a tab is
-  picked, so nothing can slide: they stay out of `TAB_BARS`. Before adding a
-  snabbdom bar, check in lila that neither it nor a parent changes its
-  selector with the tab.
-- **The home's quick pairing.** Our speed cards (`content/pages/speed-cards`)
-  replace the lobby's pools tab, hidden, and drive it: open that tab (the
-  first; bots have none), click its `.lpool[data-id]`, go back. The settings
-  pick the cards (`quickPairing`, `speed-cards/picks.ts`): a speed's, with its
-  pools, or one of the player's own, a variant, a mode and up to four time
-  controls. Such a card's Standard, rated clock that is a pool joins it, signed
-  in, as a speed's does; any other is a lobby seek `page/seek` posts for a
-  socket of its own (lila's `Setup.hook` form), else Lichess's setup opens with
-  it filled in (`/?…#hook`). Signed in,
-  joining a pool keeps Lichess on that tab, which then glows (`glowing`)
-  while it seeks from another; signed out, a pool's click makes a seek in
-  the lobby. A game's "New opponent" opens `/#pool/<id>`, where the lobby
-  switches to its pools tab while it's built: from another stored tab
-  (`lobby.tab:<user>`, which ours leave on the lobby's), that redraw throws
-  and the lobby never shows, so the link resets it first.
-  `/api/user/<name>/rating-history` names its series by key (`blitz`), not
-  as its docs show them. On a game page, `page/seek` makes "New opponent"
-  seek right there, on a lobby socket of its own (`/lobby/socket/v5`, lila's
-  `ui/lib/src/socket.ts`: `p` and `0` pings, `poolIn` every 10s, `poolOut`,
-  a `redirect` once paired), and falls back to Lichess's link if it fails.
-  So does the review's "New 2+1", in a finished game's analysis. The hero's
-  first button plays the pool last played: Lichess draws its start buttons
-  (`.lobby__start`) again once its lobby boots, so ours is put back at once,
-  and its "Create a game" stays hidden for the cards' "Custom game" to click.
+- **A page column as wide as its content.** From 800px an arena's, a Swiss's
+  and a simul's page set `---main-max-width: auto` on `#main-wrap`, whose page
+  column then sizes to its content between two free ones: a short Swiss stood
+  in the middle. A narrow layout sets it to `100%` behind its
+  `data-ln-ext-has` flag (`styles/events-narrow/layout.css`); a width on
+  `main` can't help, the track takes it as its minimum and overflows.
 - **Picker names.** lila puts a picker's name in its `mselect`'s id
   (`#…__day-select`), not its class.
-- **Tournament podiums.** A finished Arena's and Swiss's `.podium` holds
-  `.second`, `.first`, `.third`, in that order, and Lichess hides it below
-  500px. An Arena's shows no score: `content/pages/podium.ts` reads it from
-  `#page-init-data` (`data.podium`, a Swiss's `points`), and
-  `styles/podium.css` draws the steps for both.
 - **`:has()` slows the board.** Chrome re-checks a `:has()` whenever an
   element is added or removed under its anchor, restyling all the rule
   could style: on a board, every move. Every stylesheet loads on every page,
@@ -728,10 +588,11 @@ Learned the hard way. Check here before touching the area concerned.
 - Wait for elements, not for time: snabbdom draws after `load`. Scroll
   panels yourself (`.analyse__moves`' `scrollTop`) and screenshot with a
   `clip` on the element's `boundingBox()`.
-- Viewports: 1024×768, 1366×640, 1600×900, 1920×1080 and 2560×1440, both
-  sides of each breakpoint the page's CSS uses (1019 / 1020, 1259 / 1260,
-  800 / 801), and the tablet and phone sizes: 768×1024, 820×1180 and 1024×768 (tablets), 390×844 and 360×800 (phones). Nothing overflows,
-  the page doesn't scroll, bars and the eval bar line up with the board.
+- Viewports: 1024×768 (also a landscape tablet), 1366×640, 1600×900,
+  1920×1080 and 2560×1440, both sides of each breakpoint the page's CSS uses
+  (1019 / 1020, 1259 / 1260, 800 / 801), the portrait tablets 768×1024 and
+  820×1180, and the phones 390×844 and 360×800. Nothing overflows, the page
+  doesn't scroll, bars and the eval bar line up with the board.
   A page that scrolls: scroll it, and see its title stay pinned at the top
   and its side menu stay put (see "Only the content scrolls").
 - Headless Chrome reports `prefers-reduced-motion: reduce` (like the user's
@@ -742,24 +603,19 @@ Learned the hard way. Check here before touching the area concerned.
   Its phone emulation answers `hover: hover` where a phone answers `none`:
   a hover a tap would leave stuck goes under `@media (hover: hover)`.
 - Signed in: `pnpm lichess:login` opens Playwright's Chromium on Lichess's
-  sign-in page as a plain browser (its bot check fails one Playwright
-  drives) for the user to sign in and close; `--cookie <lila2>` takes a
-  signed-in browser's session cookie instead, `--check` says who's in. The profile is kept
-  outside the repo (`tests/e2e/support/session.ts`), and a one-off check
+  sign-in page as a plain browser (its bot check fails one Playwright drives)
+  for the user to sign in and close; `--cookie <lila2>` takes a signed-in
+  browser's session cookie instead, `--check` says who's in. The profile is
+  kept outside the repo (`tests/e2e/support/session.ts`), and a one-off check
   opens it with `launchSignedIn()`, one browser at a time. Never sign in for
-  the user, and never put a session or a password in the repo; CI's tests
-  stay signed out.
+  the user, and never put a session or a password in the repo; CI's tests stay
+  signed out.
 - Pages that need an account and that the kept session can't reach (the
   puzzle dashboard of another account) can't be driven live:
   rebuild them locally from a public page's shell, the markup of lila's
   Scala template and Lichess's own stylesheet for the page
   (`assets/css/<key>.<hash>.css`), without the shell's CSP `<meta>`, and
   measure in numbers.
-- The Game Review's Stockfish is nondeterministic (two runs of a game
-  differ on about one verdict in six, mostly by one step, the game rating by
-  100+ points):
-  compare runs from the same `ln-ext-review:*` cache entry, which skips the
-  engine, or against that spread.
 - Firefox: Puppeteer loads `dist/firefox` over WebDriver BiDi
   (puppeteer-core's `launch({ browser: 'firefox' })`, then
   `browser.installExtension(path)`); the dev auto-reload drops its session.
@@ -780,12 +636,6 @@ Don't open a PR.
 2. In the main checkout, `git pull --ff-only`, then
    `pnpm install --frozen-lockfile && pnpm build`: Chrome loads its
    `dist/chrome`, and reloads itself when a Lichess tab next gets focus.
-   Once only, on the first pull that brings this layout: Chrome's unpacked
-   entry still points at the checkout's root, whose `manifest.json` that
-   pull removes, so the old worker reloads it into an error. Tell the user
-   to remove that entry in `chrome://extensions` and load
-   `<main checkout>/dist/chrome` instead (the extension id changes with the
-   path). Drop this note once the main checkout loads `dist/chrome`.
 3. Remove any throwaway files you created.
 4. Don't bump the version: CI stamps `<BASE_VERSION>.<patch>` into each
    release and publishes it as `v<version>`, the patch counting the commits
@@ -795,10 +645,11 @@ Don't open a PR.
 
 A push to `main` makes no release: `/ci` (or the Release workflow, run by
 hand on `main`) runs the CI, then makes a GitHub release with its zips, but
-doesn't reach the stores. Start it only when the user asks. Send a version there only when the user asks (each store reviews
-it, and the Chrome Web Store refuses a new version while one is in review):
-tag the commit of `main` with the version it gets (`/ci store` does it, after
-checking the stores' secrets).
+doesn't reach the stores. Start it only when the user asks. Send a version
+there only when the user asks (each store reviews it, and the Chrome Web
+Store refuses a new version while one is in review): tag the commit of
+`main` with the version it gets (`/ci store` does it, after checking the
+stores' secrets).
 
 ```bash
 git fetch origin

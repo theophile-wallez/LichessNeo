@@ -63,6 +63,82 @@ A feature's folder splits what it does into small modules: pure logic
 (parsing, geometry, text, classification) apart from what touches the DOM,
 so the logic can be unit-tested without a page.
 
+## Feature folders
+
+`src/content/`, the isolated-world script:
+
+- `packs`: the board, pieces and sounds: our themes, Lichess's or imported
+  packs, their pickers, our themes' settings and the settings' import, in the
+  pickers when signed out.
+- `bootstrap`.
+- `layout`: `MARKS`, the `data-ln-ext-has` flags, inset, zoom, controls
+  height.
+- `game`.
+- `analysis`: the players' bars, the eval gauge, the underboard's button, the
+  variations drawn as a tree, long runs folded into a pill.
+- `puzzle`: the puzzle page's one panel, its menu and coach.
+- `learn`: a Learn stage's coach, saying the level's goal and how it ended.
+- `pages`.
+- `ui`: tooltips, hover card, tab bars, users' avatars, the user's own name
+  where Lichess writes it, the interface's Foley sounds behind the settings'
+  switch, the copy fields kept out of Chrome's refill on going back.
+- `charts`.
+- `coach`: the coach's 3D mascots, the coaches' names and the Game Review's
+  coach picker.
+- `computer`: the computer's robot and the level slider of the computer's
+  game setup.
+- `game-setup`: the game setup dialog's tiles for the variant, the time
+  control and the side, the panels they switch, its height easing as they
+  do, and `followSetup`, which syncs a feature as the setup opens and
+  redraws.
+- `profile`: a profile's medals, from `/api/user`, and on the user's own,
+  their avatar's link to the settings'.
+- `puzzle-dashboard`: the puzzle dashboard's overview with its coach's tips,
+  its improvement areas and strengths, from `/api/puzzle/dashboard`, and the
+  puzzle history's week, puzzles to retry and session cards.
+- `dev`: auto-reload.
+- `platform`: the extension APIs it uses.
+- `settings`: the extension's settings, a section of the account pages whose
+  menu gets a link for each of its pages: Personalization (the appearance,
+  the coach and its switches: its 3D, its place on the free analysis board,
+  and its drawings on the board), Profile customization (the user's own
+  avatar, a coach on a color or a picture, and their own name, which only
+  their browser shows), Board & sounds (the extension's, the packs' and
+  Lichess's, over a preview board that shows a board or a set while its tile
+  is hovered), Packs, Quick pairing (the home's cards: a speed's or the
+  player's own, changed, moved, taken off or put back to the defaults, and
+  cards suggested from their recent games), Interface (its sounds, the game
+  intro over a preview of it, the sidebar's rating, or none); kept in
+  `chrome.storage.sync`, but the coach's, the avatar's and the name's picks
+  in localStorage, where the page world reads them.
+- `colors`: the color themes, one picked for each of Lichess's schemes.
+- `sidebar`: the Donate item, its folding to icons, the preferences cog, the
+  account's rating, the light / dark switch, the drawer below 1020px.
+- `notices`: Lichess's connection status and the server's announcements, as
+  stacked toasts.
+
+`src/page/`, the page-world script:
+
+- `motion`.
+- `sounds`: `synth`, the Ascent sound set, played live by Foley; a sound's
+  takes, one at random, and the long moves that slide.
+- `labels`: Lichess's words for what the content script adds, copied onto
+  `<html>`.
+- `board`: shapes, checkmate, the coach's drawings.
+- `backlit`: the backlit boards' light around each move.
+- `review`.
+- `charts`.
+- `game-over`: kings' badges, confetti, the coach's card in the panel.
+- `chat`: the chat's lines marked for their bubbles, its game events in the
+  page's language.
+- `seek`: a game's "New opponent" seeking in place, and the home's cards of
+  the player's own.
+- `color-scheme`: the settings' scheme pick, saved as Lichess's own.
+- `looks`: Lichess's boards, piece sets and sound sets picked in the
+  settings, saved as Lichess's own, or shown unsaved while their tile is
+  hovered, and the settings' preview board, which plays a short game.
+- `lichess/`: typed facades over Lichess's globals.
+
 ## Packs
 
 Each of the board, the pieces and the sounds shows one of the extension's
