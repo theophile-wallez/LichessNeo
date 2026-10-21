@@ -162,6 +162,17 @@ interface PieceWon {
   readonly reply: string;
 }
 
+/** The reply an error lets in, and what it does. */
+export interface AllowedReply {
+  readonly side: Color;
+  readonly reply: string;
+  readonly why: string | null;
+  /** The error, named when the sentence doesn't follow it: after the better move. */
+  readonly played: string | null;
+  /** The capture the reply's line comes to next, when the reply is the means to it. */
+  readonly next: string | null;
+}
+
 /** What a side wins: the other side's pieces, for its own it gives (trades left out). */
 export interface Material {
   readonly won: readonly Piece[];
@@ -332,8 +343,7 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly forks: (first: Piece, second: Piece) => Ways;
   readonly missedFork: (best: string, first: Piece, second: Piece) => Ways;
   readonly allowsFork: (reply: string, first: Piece, second: Piece) => Ways;
-  /** The reply an error lets in, and what it does. */
-  readonly canPlay: (side: Color, reply: string, why: string | null) => Ways;
+  readonly canPlay: (allowed: AllowedReply) => Ways;
 }
 
 export interface ReviewLanguage {

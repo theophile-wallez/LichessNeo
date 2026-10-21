@@ -6,13 +6,14 @@ import {
   type Piece,
   type Square,
 } from '#shared/chess/index.ts';
-import { boardAfter } from '#page/review/chess/line.ts';
+import type { Mark } from '#page/board/review-arrows.ts';
+import { boardAfter, lineMoves } from '#page/review/chess/line.ts';
 import { forkedBy } from '#page/review/chess/fork.ts';
 import { attackerValues, PIECE_VALUES, pieceOn } from '#page/review/chess/material.ts';
 import { sanOf } from '#page/review/chess/notation.ts';
-import { checkers } from '#page/review/chess/rays.ts';
+import { checkers, isDefended } from '#page/review/chess/rays.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
-import { squareToken } from '#page/review/comment/tokens.ts';
+import { moveToken, squareToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { bestFact, bestReason, missFact } from './best-fact.ts';
 import { takesReason } from './which-one.ts';
@@ -131,12 +132,53 @@ function threatFact(input: FactInput): { fact: Fact; leads: boolean } | null {
   // Taking back what the move took wins nothing, and says nothing of the error.
   if (move.san.includes('x') && move.uci.slice(2, 4) === uci.slice(2, 4)) return null;
   const reason = replyReason(input, uci);
-  const why = reason && facts.why(reason, true);
+  return reason && allowedFact(input, reason, marks(reason));
+}
+
+// The reply as said: first when what it does, or the capture it leads to, says
+// why the move was an error; else after the better move, the error named again.
+function allowedFact(
+  input: FactInput,
+  reason: Reason,
+  drawing: readonly Mark[] | null,
+): { fact: Fact; leads: boolean } | null {
+  const { move, facts, them, reply } = input;
+  const why = facts.why(reason, true);
   // A reply that does nothing the coach can name says nothing of the error,
   // and an answer to the move's check is forced: no news.
   if (why === null) return null;
-  const fact = said(oneOf(facts.canPlay(them, reply, why), move), null, marks(reason));
-  return { fact, leads: reason?.kind === 'takes' || bestReason(input) === null };
+  const next = reason.kind === 'chases' ? followThrough(input) : null;
+  const leads = reason.kind === 'takes' || next !== null || bestReason(input) === null;
+  const played = leads ? null : moveToken(move.san, input.me);
+  const allowed = { side: them, reply, why, played, next };
+  return { fact: said(oneOf(facts.canPlay(allowed), move), null, drawing), leads };
+}
+
+// Whether taking on `square`, on `board`, wins: with check, a piece worth more
+// than its taker, or one undefended.
+function captureWins(board: Board, [from, square]: [Square, Square], check: boolean): boolean {
+  const [taker, taken] = [board.get(from), board.get(square)];
+  if (!taker || !taken) return false;
+  return (
+    check ||
+    PIECE_VALUES[taken.role] > PIECE_VALUES[taker.role] ||
+    (taken.role !== 'pawn' && !isDefended(board, square, taken.color))
+  );
+}
+
+/**
+ * The capture a chasing reply's line comes to next, as a token: what the
+ * tempo was for (see `captureWins`).
+ */
+function followThrough({ move, after }: FactInput): string | null {
+  const plies = move.after.line?.slice(0, 3) ?? [];
+  const [reply = '', answer = '', capture = ''] = plies;
+  const [from, square] = [parseSquare(capture.slice(0, 2)), parseSquare(capture.slice(2, 4))];
+  const next = lineMoves(move.position.fen, plies)[2];
+  if (reply !== move.after.best || !next || !from || !square) return null;
+  const board = boardAfter(boardAfter(after, reply), answer);
+  if (!captureWins(board, [from, square], next.san.includes('+'))) return null;
+  return moveToken(next.san, next.color, { base: 'a', ucis: plies });
 }
 
 /**

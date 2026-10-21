@@ -974,7 +974,7 @@
         "remark": "Oh no! This loses a lot.",
         "parts": [
           ["The balance tips: now Black has a winning position.", true],
-          ["The move was [[m:w:Qb3]], pinning the [[p:bb]]bishop to the [[p:br]]rook."]
+          ["[[m:w:Qb3]] was called for here."]
         ]
       },
       {
@@ -1232,7 +1232,7 @@
         "remark": "Oh non ! Ça coûte très cher.",
         "parts": [
           ["L’équilibre est rompu : maintenant les Noirs ont une position gagnante.", true],
-          ["Le bon coup était [[m:w:Qb3]], qui clouait le [[p:bb]]fou sur la [[p:br]]tour."]
+          ["Le bon coup était [[m:w:Qb3]]."]
         ]
       },
       {
@@ -1898,7 +1898,7 @@
         "remark": "Not a disaster, but not ideal either.",
         "parts": [
           ["White had a winning position; now it’s only a clear advantage.", true],
-          ["More precise was [[m:w:Ne5]], gaining a tempo on the [[p:bb]]bishop."]
+          ["More precise was [[m:w:Ne5]], attacking the undefended [[p:bb]]bishop."]
         ]
       },
       {
@@ -2245,7 +2245,7 @@
         "remark": "Pas une catastrophe, mais pas idéal non plus.",
         "parts": [
           ["Les Blancs avaient une position gagnante, il ne leur reste qu’un net avantage.", true],
-          ["Plus précis : [[m:w:Ne5]], qui gagnait un tempo sur le [[p:bb]]fou."]
+          ["Plus précis : [[m:w:Ne5]], qui attaquait le [[p:bb]]fou sans défense."]
         ]
       },
       {

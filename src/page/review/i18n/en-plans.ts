@@ -33,14 +33,19 @@ const PLAIN_REASONS: Readonly<Record<PlainReason, string>> = {
 
 type PieceReason = Extract<Reason, { readonly piece: Piece }>;
 
+// A piece nothing defends isn't only chased: it's there to be taken.
+function chaseWhy(reason: Extract<Reason, { readonly kind: 'chases' }>, piece: string): string {
+  const on = reason.square ? ` on ${reason.square}` : '';
+  return reason.undefended
+    ? `attacking the undefended ${pieceName(reason.piece)}${on}`
+    : `gaining a tempo on ${piece}${on}`;
+}
+
 function pieceWhy(reason: PieceReason, the: (piece: Piece) => string): string {
   const piece = the(reason.piece);
   if (reason.kind === 'develops') return `developing ${piece}`;
   if (reason.kind === 'outpost') return `planting ${piece} on an outpost`;
-  if (reason.kind === 'chases')
-    return reason.square
-      ? `gaining a tempo on ${piece} on ${reason.square}`
-      : `gaining a tempo on ${piece}`;
+  if (reason.kind === 'chases') return chaseWhy(reason, piece);
   if (reason.kind === 'attacksPawn')
     return `attacking the undefended ${pieceName(reason.piece)} on ${squareToken(reason.square)}`;
   if (reason.kind === 'pins') return `pinning ${piece} to ${bare(reason.behind)}`;

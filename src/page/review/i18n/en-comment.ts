@@ -115,19 +115,29 @@ function lossesEn(viewer: Viewer): LossSentences {
       `Now ${reply} forks ${pairOf(viewer, first, second)}.`,
       `That walks into ${reply}, forking ${pairOf(viewer, first, second)}.`,
     ],
-    canPlay: (color, reply, why) =>
-      why
-        ? [
-            `That lets ${party(color).name} play ${reply}, ${why}.`,
-            `Now ${reply} comes, ${why}.`,
-            `That allows ${reply}, ${why}.`,
-          ]
-        : [
-            `That lets ${party(color).name} play ${reply}.`,
-            `${reply} becomes possible.`,
-            `Now ${party(color).name} can play ${reply}.`,
-            `That opens the door to ${reply}.`,
-          ],
+    canPlay: ({ side, reply, why, played, next }) => {
+      const name = party(side).name;
+      const what = `${why ? `, ${why}` : ''}${next ? `, and ${next} follows` : ''}`;
+      // After the better move, "That" would point at it: the error is named instead.
+      if (played !== null)
+        return [
+          `After ${played}, ${reply} comes${what}.`,
+          `${played} lets ${name} play ${reply}${what}.`,
+          `${played} allows ${reply}${what}.`,
+        ];
+      if (what)
+        return [
+          `That lets ${name} play ${reply}${what}.`,
+          `Now ${reply} comes${what}.`,
+          `That allows ${reply}${what}.`,
+        ];
+      return [
+        `That lets ${name} play ${reply}.`,
+        `${reply} becomes possible.`,
+        `Now ${name} can play ${reply}.`,
+        `That opens the door to ${reply}.`,
+      ];
+    },
   };
 }
 

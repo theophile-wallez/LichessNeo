@@ -118,14 +118,24 @@ function lossesFr(viewer: Viewer): LossSentences {
       `Désormais ${reply} fait une fourchette sur ${both(first, second)}.`,
       `Ça tombe dans ${reply}, une fourchette sur ${both(first, second)}.`,
     ],
-    canPlay: (color, reply, why) => {
-      const player = party(color);
+    canPlay: ({ side, reply, why, played, next: capture }) => {
+      const player = party(side);
+      const next = capture ? `, puis vient ${capture}` : '';
+      // After the better move, « Ça » would point at it: the error is named instead.
+      if (played !== null) {
+        const lets = player.to === null ? `${played} te permet` : `${played} permet ${player.to}`;
+        return [
+          `Après ${played}, ${reply} arrive${why ? ` et ${why}` : ''}${next}.`,
+          `${lets} de jouer ${reply}${why ? `, qui ${why}` : ''}${next}.`,
+          `${played} ouvre la porte à ${reply}${why ? `, qui ${why}` : ''}${next}.`,
+        ];
+      }
       const lets = player.to === null ? 'Ça te permet' : `Ça permet ${player.to}`;
       if (why)
         return [
-          `${lets} de jouer ${reply}, qui ${why}.`,
-          `Désormais ${reply} arrive, et ${why}.`,
-          `Ça ouvre la porte à ${reply}, qui ${why}.`,
+          `${lets} de jouer ${reply}, qui ${why}${next}.`,
+          `Désormais ${reply} arrive, et ${why}${next}.`,
+          `Ça ouvre la porte à ${reply}, qui ${why}${next}.`,
         ];
       return [
         `${lets} de jouer ${reply}.`,

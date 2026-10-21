@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { type Analysed, playedBetween } from '#page/review/fixtures/played.ts';
 import { en } from '#page/review/i18n/en.ts';
+import { fr } from '#page/review/i18n/fr.ts';
 import { findings } from './fact.ts';
 
 // What an error is said to have done, on real games' positions and the
@@ -62,6 +63,46 @@ describe('an error the reply punishes', () => {
       'That allows [[m:b:f5]], gaining a tempo on the [[p:wn]]knight.',
     );
     expect(plain(followUp?.text)).toBe('[[m:w:Rfd1]] was the better move.');
+  });
+});
+
+// yks0vLbn, 15...Qxf2?: Rhf1 hits the queen, then Rxf7+ takes back a pawn with check.
+const CHASED_BEFORE: Analysed = {
+  fen: '3r1b1r/1ppk1p1p/2bp2p1/8/8/Q7/PPPBNPqP/2KR3R b - - 1 15',
+  lines: [
+    { cp: 432, pv: ['g2f3', 'e2c3', 'f8g7', 'd2e3', 'h8e8'] },
+    { cp: 360, pv: ['f8g7', 'h1e1', 'd8a8', 'a3b3'] },
+  ],
+};
+const chasedAfter = (pv: string[]): Analysed => ({
+  fen: '3r1b1r/1ppk1p1p/2bp2p1/8/8/Q7/PPPBNq1P/2KR3R w - - 0 16',
+  lines: [
+    { cp: -63, pv },
+    { cp: -320, pv: ['h1e1', 'd8e8', 'a3c3', 'f8e7'] },
+  ],
+});
+const findingsIn = (pv: string[], language = en) =>
+  findings(playedBetween([30, CHASED_BEFORE, chasedAfter(pv)], 'g2f2'), language);
+
+describe('a reply that chases a piece', () => {
+  it('says the capture it leads to first, then the better move', () => {
+    const { fact, followUp } = findingsIn(['h1f1', 'f2h4', 'f1f7', 'f8e7']);
+    expect(plain(fact?.text)).toBe(
+      'That allows [[m:w:Rhf1]], gaining a tempo on the [[p:bq]]queen, and [[m:w:Rxf7+]] follows.',
+    );
+    expect(plain(followUp?.text)).toBe(
+      'The move was [[m:b:Qf3]], attacking the undefended [[p:wn]]knight.',
+    );
+  });
+
+  it('names the error again when it comes after the better move', () => {
+    const { followUp } = findingsIn(['h1f1', 'f2h4']);
+    expect(plain(followUp?.text)).toBe(
+      '[[m:b:Qxf2]] allows [[m:w:Rhf1]], gaining a tempo on the [[p:bq]]queen.',
+    );
+    expect(plain(findingsIn(['h1f1', 'f2h4'], fr).followUp?.text)).toBe(
+      '[[m:b:Qxf2]] ouvre la porte à [[m:w:Rhf1]], qui gagne un tempo sur la [[p:bq]]dame.',
+    );
   });
 });
 

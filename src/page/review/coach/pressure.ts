@@ -10,7 +10,14 @@ import {
   type Square,
   squareCoords,
 } from '#shared/chess/index.ts';
-import { between, firstPiece, isInBadSpot, pinOf } from '#page/review/chess/rays.ts';
+import {
+  between,
+  firstPiece,
+  isDefended,
+  isInBadSpot,
+  type Pin,
+  pinOf,
+} from '#page/review/chess/rays.ts';
 import { batteryPlan, FILE_STEPS } from './battery.ts';
 import type { Plan } from './idea.ts';
 import { ownRank, pawnsOn } from './structure.ts';
@@ -19,10 +26,35 @@ import { whichOne } from './which-one.ts';
 // What a move does to the other side's pieces, and what a rook's does on its
 // file or rank.
 
-// The piece attacked, by its square when its side has more than one like it.
-function chases(board: Board, square: Square, piece: Piece, by?: Square): Plan {
+type Chase = Extract<Plan, { readonly kind: 'chases' }>;
+
+// The piece on `square`, attacked from `from`: by its square when its side has
+// more than one like it, and `undefended` when that's all that makes it a target.
+function chases(board: Board, square: Square, piece: Piece, from: Square): Chase {
   const which = whichOne(board, square, piece);
-  return { kind: 'chases', piece, ...(which === null ? {} : { square: which }), ...(by && { by }) };
+  const attacker = board.get(from);
+  const undefended =
+    attacker !== undefined &&
+    PIECE_VALUES[piece.role] <= PIECE_VALUES[attacker.role] &&
+    attackers(board, square, piece.color).length === 0;
+  return {
+    kind: 'chases',
+    piece,
+    ...(which === null ? {} : { square: which }),
+    ...(undefended && { undefended }),
+  };
+}
+
+// A pin to a piece other than the king holds only if taking that piece wins:
+// it's worth more than the pinner, or nothing defends it once the pinned one moves.
+function holds(board: Board, pinned: Square, { pinner, behind }: Pin): boolean {
+  const [attacker, target] = [board.get(pinner), board.get(behind)];
+  if (!attacker || !target) return false;
+  if (target.role === 'king' || PIECE_VALUES[target.role] > PIECE_VALUES[attacker.role])
+    return true;
+  const moved = new Map(board);
+  moved.delete(pinned);
+  return !isDefended(moved, behind, target.color);
 }
 
 /** A piece of the other side's the move pins, or newly attacks when it's worth more or undefended. */
@@ -31,12 +63,13 @@ export function pressureOf(after: Board, to: Square, color: Color): Plan | null 
   for (const [square, piece] of after) {
     if (piece.color !== them || piece.role === 'pawn') continue;
     const pin = pinOf(after, square, true);
-    const behind = pin?.pinner === to ? after.get(pin.behind) : undefined;
+    const behind =
+      pin?.pinner === to && holds(after, square, pin) ? after.get(pin.behind) : undefined;
     if (behind) return { kind: 'pins', piece, behind };
   }
   const square = attackedSquares(after, to).find(target => threatened(after, target, to));
   const piece = square && after.get(square);
-  return square && piece ? chases(after, square, piece) : null;
+  return square && piece ? chases(after, square, piece, to) : null;
 }
 
 const SLIDERS: ReadonlySet<Role> = new Set<Role>(['bishop', 'rook', 'queen']);
@@ -54,7 +87,7 @@ export function uncoveredOf(before: Board, after: Board, to: Square): Plan | nul
       attacked => !was.includes(attacked) && threatened(after, attacked, square),
     );
     const piece = target && after.get(target);
-    if (target && piece) return chases(after, target, piece, square);
+    if (target && piece) return { ...chases(after, target, piece, square), by: square };
   }
   return null;
 }

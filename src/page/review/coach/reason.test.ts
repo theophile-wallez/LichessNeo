@@ -106,6 +106,20 @@ describe('reasonOf', () => {
     });
   });
 
+  it('says a pin only when taking what stands behind it wins', () => {
+    // The queen on f3 lines the knight up with the rook: taking the rook loses the
+    // queen while the king defends it, so the knight, undefended, is only attacked.
+    const defended = '4k3/8/2q5/8/8/8/4N3/2KR4 b - - 0 1';
+    expect(reasonOf(play(defended, 'c6f3', 'Qf3'))).toEqual({
+      kind: 'chases',
+      piece: KNIGHT,
+      undefended: true,
+    });
+    const pinned = { kind: 'pins', piece: KNIGHT, behind: ROOK };
+    expect(reasonOf(play('4k3/8/2q5/8/8/8/4N3/K2R4 b - - 0 1', 'c6f3', 'Qf3'))).toEqual(pinned);
+    expect(reasonOf(play('4k3/8/2b5/8/8/8/4N3/2KR4 b - - 0 1', 'c6f3', 'Bf3'))).toEqual(pinned);
+  });
+
   it('has no reason for a capture', () => {
     const fen = '4k3/8/8/3r4/8/8/8/3RK3 w - - 0 1';
     expect(reasonOf(play(fen, 'd1d5', 'Rxd5'))).toBeNull();
