@@ -118,6 +118,11 @@ main.account[data-ln-ext-settings] > .page-menu__content:not(.ln-ext-settings) {
   text-transform: none !important;
 }
 
+/* Lichess draws a line after an account page's h2. */
+.ln-ext-setting__title::after {
+  content: none !important;
+}
+
 .ln-ext-setting__body {
   margin: 0;
   color: var(--ln-ext-text-dim);

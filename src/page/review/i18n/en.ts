@@ -108,6 +108,7 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
     },
   },
   accuracy: 'Accuracy',
+  lichessRating: rating => `${rating} on Lichess`,
   anonymous: 'Anonymous',
   close: 'Close debrief',
   back: 'Back',

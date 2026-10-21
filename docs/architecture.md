@@ -35,6 +35,7 @@ the page world would crash on it.
 | `chess/`, `chessground.ts`, `piece-glyph.ts`         | chess basics (squares, FEN, piece letters and values, attacks), a board's pieces read from chessground's classes, a piece of ours in the board's set       |
 | `charts/`, `coach.ts`, `coach-voice.ts`, `sounds.ts` | chart pieces, the coach's moods, the stored coach (`pickCoach`) and switches (`coachOptions`), its words typed out as it talks, the sounds a pack may have |
 | `packs/`, `backlit.ts`                               | packs: their `pack.json`, links, files and stored form, the download the worker runs, its messages; the backlit boards and their settings                  |
+| `chesscom-rating/`                                   | a Lichess rating's Chess.com equivalent, from the study's table, the speed of a rating Lichess shows, its swap in place, and the settings' switch          |
 | `testing/`                                           | helpers only tests import, and the vitest setup filling happy-dom's gaps                                                                                   |
 
 Each directory has its own `tsconfig.json`, so a page-world file that names
@@ -96,6 +97,11 @@ so the logic can be unit-tested without a page.
   redraws.
 - `profile`: a profile's medals, from `/api/user`, and on the user's own,
   their avatar's link to the settings'.
+- `chesscom-ratings`: with the settings' Chess.com ratings on, every rating
+  Lichess writes (`SPOTS`: a game's bars and info, mini games, game lists,
+  rating cards and stats pages, hover cards, leaderboards, the lobby, arenas,
+  TV) swapped in place for its Chess.com equivalent, the Lichess one in its
+  tooltip.
 - `puzzle-dashboard`: the puzzle dashboard's overview with its coach's tips,
   its improvement areas and strengths, from `/api/puzzle/dashboard`, and the
   puzzle history's week, puzzles to retry and session cards.
@@ -111,7 +117,8 @@ so the logic can be unit-tested without a page.
   is hovered), Packs, Quick pairing (the home's cards: a speed's or the
   player's own, changed, moved, taken off or put back to the defaults, and
   cards suggested from their recent games), Interface (its sounds, the game
-  intro over a preview of it, the sidebar's rating, or none); kept in
+  intro over a preview of it, the sidebar's rating, or none), Experimental
+  (the Chess.com ratings, and the study behind them in a frame); kept in
   `chrome.storage.sync`, but the coach's, the avatar's and the name's picks
   in localStorage, where the page world reads them.
 - `colors`: the color themes, one picked for each of Lichess's schemes.

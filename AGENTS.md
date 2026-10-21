@@ -186,13 +186,15 @@ hold:
 - `src/page/`: the page-world script, a folder per feature, and `lichess/`,
   typed facades over Lichess's globals.
 - `src/shared/`: helpers for both worlds and the worker (DOM, markup,
-  messages, storage, chess, charts, packs), `testing/` for tests.
+  messages, storage, chess, charts, packs, a Lichess rating's Chess.com
+  equivalent), `testing/` for tests.
 - `src/background/`: the service worker: auto-reload, old cache cleanup,
   pack downloads, Boxwood's sounds read for the content script.
 - `src/styles/`: one stylesheet per page or part, a folder of partials past
   400 lines, joined in `index.css`'s order.
 - `public/`: copied into each build: `_locales/`, `icons/`, `img/` (`icons`,
-  `hugeicons`, `sidebar`, `coaches`, `boards`: the board textures),
+  `hugeicons`, `sidebar`, `coaches`, `boards`: the board textures), `pages/`
+  (the frame of the rating study),
   `sounds/boxwood` (the Boxwood set's takes), beside the bundled packages'
   licenses (`scripts/lib/licenses.ts`).
 - `scripts/`: build, package, typecheck, source rules, version, icons, store
@@ -328,7 +330,9 @@ features and its name: free analysis, open data, no ads.
 - **Every asset is bundled**: no host permission, nothing loaded from
   another site at run time (Lichess's own assets aside). A pack is
   downloaded from GitHub once, when the user imports it, then kept in the
-  browser.
+  browser. The one page from elsewhere is the rating study's, framed when the
+  user unfolds it on the settings' Experimental page
+  (`public/pages/rating-study.html`).
 - **Use Lichess's own capabilities** (its Stockfish build, its analysis
   controller) rather than reinventing them.
 - **Every language:** Lichess localizes text and some URLs (`/fr/training`).

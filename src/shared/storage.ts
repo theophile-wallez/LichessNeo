@@ -39,6 +39,8 @@ export const StorageKey = {
   accountRating: prefixed('account-rating'),
   // The settings' pick of the speed the sidebar shows, kept here too to show it from document_start.
   sidebarRating: prefixed('sidebar-rating'),
+  // The settings' Chess.com ratings switch, kept here for the page world and document_start.
+  chesscomRating: prefixed('chesscom-rating'),
   // The home's speed cards: each speed's rating, curve and last pool (content/pages/speed-cards).
   speedCards: prefixed('speed-cards'),
   ratingChartRange: prefixed('rchart:range'),

@@ -8,6 +8,7 @@ import { buildAppearance, showScheme } from './appearance.ts';
 import { buildAvatarCard } from './avatar-card.ts';
 import { buildNameCard } from './name-card.ts';
 import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
+import { buildExperimentalPage } from './experimental-page.ts';
 import { buildInterfacePage } from './interface-page.ts';
 import { buildLooksPage } from './looks-page.ts';
 import { buildPairingPage } from './pairing-page.ts';
@@ -55,6 +56,7 @@ export function buildSection(): SettingsSection {
     packs: [importSection(packLibrary())],
     pairing: [pairing.element],
     interface: [buildInterfacePage()],
+    experimental: [buildExperimentalPage()],
   };
   for (const page of SETTINGS_PAGES)
     queryOne(element, `.ln-ext-settings__page[data-ln-ext-page='${page}']`, HTMLElement)?.append(

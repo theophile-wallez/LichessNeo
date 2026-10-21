@@ -100,6 +100,7 @@ export function createManifest(target: Target, version: string): Manifest {
           'img/coaches/*',
           'img/hugeicons/*',
           'img/sidebar/*',
+          'pages/rating-study.html',
         ],
         matches: LICHESS,
       },

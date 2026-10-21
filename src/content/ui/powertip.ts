@@ -1,5 +1,6 @@
 import { closestTo, queryAll, setData, setStyleProperty } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
+import { syncChesscomRatings } from '#content/chesscom-ratings/index.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { syncAvatars } from './avatars.ts';
 import { fitCard } from './card-fit.ts';
@@ -44,12 +45,14 @@ function watch(card: HTMLElement): void {
   new MutationObserver(records => {
     if (records.some(record => record.type === 'childList')) {
       cleanRatings(card);
+      syncChesscomRatings(card);
       syncAvatars(card);
     }
     fitPowertip(card);
   }).observe(card, { childList: true, attributes: true, attributeFilter: ['style'] });
   new ResizeObserver(() => fitPowertip(card)).observe(card);
   cleanRatings(card);
+  syncChesscomRatings(card);
   syncAvatars(card);
 }
 

@@ -1,3 +1,4 @@
+import { lichessRatingOf } from '#shared/chesscom-rating/swap.ts';
 import { createCustomElement, queryOne } from '#shared/dom.ts';
 
 // A bar in the markup of the round's `.ruser` (name, <rating>, rating
@@ -7,7 +8,9 @@ import { createCustomElement, queryOne } from '#shared/dom.ts';
 const CHANGE = 'good, bad, :scope > span:not([class])';
 
 function userParts(link: HTMLAnchorElement): Element[] {
-  const rating = link.querySelector('.rating')?.textContent.replace(/[()\s]/g, '');
+  // Lichess's rating, which the bar shows as on Chess.com in its turn.
+  const source = queryOne(link, '.rating', HTMLElement);
+  const rating = source && lichessRatingOf(source).replace(/[()\s]/g, '');
   const change = link.querySelector(CHANGE);
   for (const extra of link.querySelectorAll(`.rating, ${CHANGE}`)) extra.remove();
   // The title's badge has its own margin: drop the no-break space after it

@@ -149,6 +149,9 @@
   "settingsPageInterface": {
     "message": "Interface"
   },
+  "settingsPageExperimental": {
+    "message": "Expérimental"
+  },
   "coachPickTitle": {
     "message": "Votre coach"
   },
@@ -469,6 +472,24 @@
   },
   "settingSidebarRatingBody": {
     "message": "Le classement affiché à côté de votre nom, ou aucun. Par défaut, la cadence que vous jouez le plus."
+  },
+  "settingChesscomRating": {
+    "message": "Classements Chess.com"
+  },
+  "settingChesscomRatingBody": {
+    "message": "Chaque classement tel qu'il serait sur Chess.com : en partie, sur les profils, dans les listes et les classements. Survolez-en un pour voir son classement Lichess. Bullet, blitz, rapide et classique ; les autres restent ceux de Lichess."
+  },
+  "settingChesscomStudy": {
+    "message": "Comment les classements sont convertis"
+  },
+  "settingChesscomStudyBody": {
+    "message": "L'étude derrière : 35 515 joueurs au classement établi sur les deux sites, et comment distinguer un homonyme du même joueur."
+  },
+  "settingChesscomStudyOpen": {
+    "message": "Ouvrir dans un nouvel onglet"
+  },
+  "lichessRatingTip": {
+    "message": "$1 sur Lichess"
   },
   "settingGameIntro": {
     "message": "Intro de partie"

@@ -55,6 +55,7 @@ import { avatars } from './ui/avatars.ts';
 import { ownNameFeature } from './ui/own-name.ts';
 import { profileMedals } from './profile/medals.ts';
 import { profileAvatarLink } from './profile/avatar-link.ts';
+import { chesscomRatings } from './chesscom-ratings/index.ts';
 import { powertip } from './ui/powertip.ts';
 import { tooltip } from './ui/tooltip.ts';
 import { copyFields } from './ui/copy-fields.ts';
@@ -94,6 +95,7 @@ const FEATURES = [
   controlsHeight,
   movesExtrasHeight,
   analysisPlayers,
+  chesscomRatings,
   underboard,
   activeMove,
   variations,

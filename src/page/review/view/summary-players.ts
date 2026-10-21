@@ -1,15 +1,18 @@
+import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
+import { chesscomShown } from '#shared/chesscom-rating/shown.ts';
 import { avatarAttributes } from '#shared/own-avatar.ts';
 import { shownName } from '#shared/own-name.ts';
 import { COLORS, type Color } from '#shared/chess/types.ts';
 import { queryAll, setData } from '#shared/dom.ts';
 import { html, type SafeHtml, trustedHtml } from '#shared/html.ts';
 import type { Player } from '#page/lichess/analysis.ts';
-import type { ReviewLanguage } from '#page/review/i18n/types.ts';
+import type { InterfaceStrings, ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { Review } from '#page/review/session.ts';
 
 // The summary's two players side by side, each in its side's color: the
-// accuracy, large, and the rating the game was played at. Pointing at one
-// dims the other side's colors through the whole summary.
+// accuracy, large, and the rating the game was played at, as on Chess.com
+// with the settings' Chess.com ratings on. Pointing at one dims the other
+// side's colors through the whole summary.
 
 const NBSP = trustedHtml('&nbsp;');
 
@@ -27,6 +30,8 @@ export interface PlayersInput {
   readonly language: ReviewLanguage;
   /** The sides from left to right (`sideOrder`). */
   readonly order: readonly Color[];
+  /** Lichess's speed of the game (`data.game.speed`), for the rating as on Chess.com. */
+  readonly speed?: string | undefined;
 }
 
 /** White then Black, unless the signed-in user played Black: their own side comes first. */
@@ -51,13 +56,33 @@ function ahead(review: Review | null): Color | null {
   return white > black ? 'white' : 'black';
 }
 
-function playerCard({ review, players, winner, language }: PlayersInput, color: Color): SafeHtml {
+// As on Chess.com with the settings' Chess.com ratings on.
+function shownRating(elo: number | undefined, speed: string | undefined): number | undefined {
+  const equivalent =
+    elo !== undefined && speed && chesscomShown() ? chesscomRating(speed, elo) : null;
+  return equivalent?.rating ?? elo;
+}
+
+// A rating as on Chess.com gives the Lichess one in its tooltip (content/ui/tooltip.ts).
+function ratingTip(
+  elo: number | undefined,
+  shown: number | undefined,
+  ui: InterfaceStrings,
+): SafeHtml | '' {
+  return elo === undefined || shown === elo
+    ? ''
+    : html` data-ln-ext-lichess-rating="${elo}" data-ln-ext-tip="${ui.lichessRating(String(elo))}"`;
+}
+
+function playerCard(input: PlayersInput, color: Color): SafeHtml {
+  const { review, players, winner, language } = input;
   const { ui } = language;
   const side = letter(color);
   const name = playerName(players[color], language);
   const accuracy = review?.accuracy[color];
   const elo = review?.rating?.[color]?.elo;
-  const [lead, tail] = ui.playedLike(color, elo ?? null);
+  const shown = shownRating(elo, input.speed);
+  const [lead, tail] = ui.playedLike(color, shown ?? null);
   const best = ahead(review) === color;
   // The trophy sits at the card's right, beside the accuracy, clear of a long name.
   const trophy = winner === color ? html`<span class="ln-ext-sum-player__trophy"></span>` : '';
@@ -65,7 +90,7 @@ function playerCard({ review, players, winner, language }: PlayersInput, color: 
       <span class="ln-ext-avatar ln-ext-avatar--${side}"${avatarAttributes(players[color]?.user?.username)}></span>
       <span class="ln-ext-sum-player__name"><span>${name}</span></span>${trophy}
       <span class="ln-ext-sum-player__acc"><span class="ln-ext-acc ln-ext-acc--${side}">${accuracy === null || accuracy === undefined ? NBSP : accuracy.toFixed(1)}</span><small>${ui.accuracy}</small></span>
-      <span class="ln-ext-sum-player__elo">${lead} <span class="ln-ext-sum-player__rating"><b>${elo ?? '—'}</b> ${tail}</span></span>
+      <span class="ln-ext-sum-player__elo">${lead} <span class="ln-ext-sum-player__rating"><b${ratingTip(elo, shown, ui)}>${shown ?? '—'}</b> ${tail}</span></span>
     </div>`;
 }
 

@@ -2,6 +2,7 @@ import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
 import Edit02Icon from '@hugeicons/core-free-icons/Edit02Icon';
 import Settings01Icon from '@hugeicons/core-free-icons/Settings01Icon';
 import { gameRatingColor } from '#shared/charts/colors.ts';
+import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
 import { clockLabel, type CustomSeek, type SeekPerf } from '#shared/custom-seek.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
@@ -39,11 +40,18 @@ function curve(index: number, ratings: readonly number[]): SafeHtml {
   </svg>`;
 }
 
-function rating(card: Card, texts: SpeedTexts): SafeHtml {
+// As on Chess.com with the settings' Chess.com ratings on, the Lichess one in its
+// tooltip (content/ui/tooltip.ts).
+function rating(card: Card, { texts, lichessTip }: CardsOptions): SafeHtml {
   if (card.games === 0)
     return html`<div class="ln-ext-speed__rating ln-ext-speed__rating--none">–</div>`;
-  return html`<div class="ln-ext-speed__rating">
-    ${LOCALE_NUMBER.format(Math.round(card.rating))}
+  const lichess = LOCALE_NUMBER.format(Math.round(card.rating));
+  const equivalent = lichessTip && chesscomRating(card.perf, card.rating);
+  const tip = equivalent
+    ? html` data-ln-ext-lichess-rating="${lichess}" data-ln-ext-tip="${lichessTip(lichess)}"`
+    : '';
+  return html`<div class="ln-ext-speed__rating"${tip}>
+    ${equivalent ? LOCALE_NUMBER.format(equivalent.rating) : lichess}
     ${
       card.provisional &&
       html`<small class="ln-ext-speed__provisional" title="${texts.provisional}" aria-label="${texts.provisional}">?</small>`
@@ -69,6 +77,8 @@ interface CardsOptions {
   readonly cards: readonly Card[] | null;
   readonly texts: SpeedTexts;
   readonly user: string | undefined;
+  /** With the settings' Chess.com ratings on, a rating's tooltip, its Lichess one given. */
+  readonly lichessTip?: ((rating: string) => string) | null;
 }
 
 interface Frame {
@@ -79,10 +89,8 @@ interface Frame {
   readonly buttons: (numbers: Card | undefined) => SafeHtml;
 }
 
-function frame(
-  { perf, index, buttons, casual = false }: Frame,
-  { cards, texts, user }: CardsOptions,
-): SafeHtml {
+function frame({ perf, index, buttons, casual = false }: Frame, options: CardsOptions): SafeHtml {
+  const { cards, texts, user } = options;
   const numbers = user === undefined ? undefined : cards?.find(each => each.perf === perf);
   // Signed in, the games and the rating lead to the rating's stats page.
   const stats = `/@/${encodeURIComponent(user ?? '')}/perf/${perf}`;
@@ -98,7 +106,7 @@ function frame(
     ${
       numbers &&
       html`<a class="ln-ext-speed__stats" href="${stats}">
-      ${rating(numbers, texts)} ${curve(index, numbers.history)}
+      ${rating(numbers, options)} ${curve(index, numbers.history)}
     </a>`
     }
     ${buttons(numbers)}

@@ -46,6 +46,12 @@ main.account .ln-ext-settings[data-ln-ext-page='interface'] {
   --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
+.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='experimental'],
+main.account .ln-ext-settings[data-ln-ext-page='experimental'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/labs.svg');
+  --ln-ext-nav-color: var(--ln-ext-red);
+}
+
 /* Open, our link heads its pages: bright, without the picked row's fill, which goes to the
  * page's link. */
 .subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-link[data-ln-ext-open] {

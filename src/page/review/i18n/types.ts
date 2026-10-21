@@ -76,6 +76,8 @@ export interface InterfaceStrings {
    * their accuracy, null while it's unknown.
    */
   readonly playedLike: (side: Color, elo: number | null) => readonly [string, string];
+  /** Its tooltip as on Chess.com, with the settings' Chess.com ratings on: "1850 on Lichess". */
+  readonly lichessRating: (rating: string) => string;
   /** The summary's sections: the move classes, the phases' verdicts, the profile's radar. */
   readonly moves: string;
   readonly phasesTitle: string;

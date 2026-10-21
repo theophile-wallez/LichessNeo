@@ -56,6 +56,7 @@ describe('the settings’ menu links', () => {
       '#ln-ext-extension/packs',
       '#ln-ext-extension/pairing',
       '#ln-ext-extension/interface',
+      '#ln-ext-extension/experimental',
       '/account/preferences/display',
       '/account/preferences/game-display',
     ]);
@@ -68,6 +69,7 @@ describe('the settings’ menu links', () => {
       'settingsPagePacks',
       'settingsPagePairing',
       'settingsPageInterface',
+      'settingsPageExperimental',
     ]);
     expect(queryOne(nav, '.ln-ext-settings-sep + a', HTMLElement)?.textContent).toBe('Display');
   });

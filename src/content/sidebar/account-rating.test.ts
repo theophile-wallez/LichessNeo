@@ -1,4 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
+import { keepChesscomShown } from '#shared/chesscom-rating/shown.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { accountRating } from './account-rating.ts';
 
@@ -113,5 +115,15 @@ describe('the account rating', () => {
     accountRating.start();
     expect(shown()).toEqual([undefined, '']);
     expect(chars()).toBe('');
+  });
+
+  it('shows the Chess.com equivalent instead with the Chess.com ratings on', () => {
+    signIn('eresy');
+    keep('eresy', Date.now());
+    keepChesscomShown(true);
+    accountRating.start();
+    const label = String(chesscomRating('blitz', 1600)?.rating);
+    expect(shown()).toEqual(['blitz', JSON.stringify(label)]);
+    expect(chars()).toBe(String(label.length));
   });
 });

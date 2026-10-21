@@ -8,7 +8,9 @@ import {
   writeStored,
   writeStoredJson,
 } from '#shared/storage.ts';
-import { onSettings } from '#content/settings/settings.ts';
+import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
+import { chesscomShown } from '#shared/chesscom-rating/shown.ts';
+import { onSettings, type Settings } from '#content/settings/settings.ts';
 import {
   pickedRating,
   RatingPickSchema,
@@ -19,6 +21,7 @@ import {
   TopRatingSchema,
   UserSchema,
   type RatingPick,
+  type TopRating,
 } from './top-rating.ts';
 
 // Signed in, the sidebar shows the rating of the player's most played speed
@@ -27,7 +30,8 @@ import {
 // kept, with the pick, and put on <html> from document_start, so they're there
 // with the sidebar's first frame.
 // Lichess is asked again once it's 5 minutes old, and the home page's speed
-// cards bring it a fresh one each time they're drawn.
+// cards bring it a fresh one each time they're drawn. With the Chess.com
+// ratings on, the pill shows the rating's equivalent, where the speed has one.
 
 const MAX_AGE_MS = 5 * 60 * 1000;
 
@@ -43,16 +47,22 @@ type Kept = z.infer<typeof KeptSchema>;
 
 let shown: Kept | null = null;
 let pick: RatingPick = 'mostPlayed';
+let chesscom = false;
+
+function label(rating: TopRating): string {
+  const equivalent = chesscom ? chesscomRating(rating.speed, rating.rating) : null;
+  return equivalent ? String(equivalent.rating) : ratingLabel(rating.rating, rating.provisional);
+}
 
 function show(kept: Kept | null): void {
   shown = kept;
   const rating = kept && pickedRating(kept.top, kept.ratings, pick);
   const root = document.documentElement;
   setData(root, 'lnExtAccountPerf', rating?.speed ?? null);
-  const label = rating && ratingLabel(rating.rating, rating.provisional);
+  const text = rating && label(rating);
   // A CSS string, for the tag's `content`, and its length, which sizes its pill.
-  setStyleProperty(root, '--ln-ext-account-rating', label && JSON.stringify(label));
-  setStyleProperty(root, '--ln-ext-account-chars', label && String(label.length));
+  setStyleProperty(root, '--ln-ext-account-rating', text && JSON.stringify(text));
+  setStyleProperty(root, '--ln-ext-account-chars', text && String(text.length));
 }
 
 /** Keeps and shows the ratings of a profile just asked of Lichess. */
@@ -64,10 +74,11 @@ export function keepAccountRating(user: string, profile: z.infer<typeof UserSche
   show(kept);
 }
 
-function followPick(next: RatingPick): void {
-  if (next === pick) return;
-  pick = next;
-  writeStored(StorageKey.sidebarRating, next);
+function followSettings(settings: Settings): void {
+  if (settings.sidebarRating === pick && settings.chesscomRating === chesscom) return;
+  pick = settings.sidebarRating;
+  chesscom = settings.chesscomRating;
+  writeStored(StorageKey.sidebarRating, pick);
   if (shown) show(shown);
 }
 
@@ -97,9 +108,10 @@ export const accountRating: Feature = {
   name: 'account rating',
   start: () => {
     pick = readStored(StorageKey.sidebarRating, RatingPickSchema) ?? 'mostPlayed';
+    chesscom = chesscomShown();
     const kept = readStoredJson(StorageKey.accountRating, KeptSchema);
     if (kept) show(kept);
     onDomReady(() => void refresh(kept));
-    onSettings(settings => followPick(settings.sidebarRating));
+    onSettings(followSettings);
   },
 };

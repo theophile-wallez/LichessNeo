@@ -26,6 +26,8 @@ const SettingsSchema = z.object({
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
   /** The home's quick pairing cards, in their order (content/pages/speed-cards). */
   quickPairing: CardPicksSchema,
+  /** Every rating shown as on Chess.com, the Experimental page's switch (content/chesscom-ratings). */
+  chesscomRating: z.prefault(z.boolean(), false),
   /** The players' intro at a game's start, or none (content/game/intro). */
   gameIntro: z.catch(IntroKindSchema, DEFAULT_INTRO),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */

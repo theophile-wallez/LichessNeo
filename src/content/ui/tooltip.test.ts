@@ -206,6 +206,24 @@ describe('tooltips', () => {
     document.getElementById('dasher_app')?.remove();
   });
 
+  it('shows a rating’s Lichess one where it shows as on Chess.com, but in the review', () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<div id="powerTip"><span data-ln-ext-lichess-rating="1500" data-ln-ext-tip="1500 on Lichess">1095</span></div>' +
+        '<div id="ln-ext-review"><b data-ln-ext-lichess-rating="1850" data-ln-ext-tip="1850 on Lichess">1460</b></div>',
+    );
+    const [card, review] = document.querySelectorAll('[data-ln-ext-lichess-rating]');
+    if (!card || !review) throw new Error('no rating');
+    hover(card);
+    vi.advanceTimersByTime(250);
+    expect(shown()?.textContent).toBe('1500 on Lichess');
+    hover(review);
+    vi.advanceTimersByTime(250);
+    expect(shown()).toBeNull();
+    document.getElementById('powerTip')?.remove();
+    document.getElementById('ln-ext-review')?.remove();
+  });
+
   it('shows a variation’s move with its eval alone, on glass, and a glyph with its name', () => {
     document.body.insertAdjacentHTML(
       'beforeend',

@@ -6,6 +6,7 @@ import { syncWhileParsing } from '#shared/frame.ts';
 import { clockLabel, type CustomSeek } from '#shared/custom-seek.ts';
 import { onCustomSeekState, postCustomSeek } from '#shared/protocol.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
+import { message } from '#content/platform/runtime.ts';
 import { currentSettings, settingsRead } from '#content/settings/settings.ts';
 import type { Card } from './data.ts';
 import {
@@ -45,15 +46,18 @@ interface State {
   custom: { readonly key: string; readonly seek: CustomSeek } | null;
 }
 
+const chesscomTip = (rating: string): string => message('lichessRatingTip', rating);
+
 // The cards wait for the settings, rather than show the default ones first.
 function draw(section: HTMLElement, state: State): void {
   if (!settingsRead()) return;
-  const picks = currentSettings().quickPairing;
-  const key = JSON.stringify([picks, state.cards]);
+  const { quickPairing: picks, chesscomRating } = currentSettings();
+  const key = JSON.stringify([picks, state.cards, chesscomRating]);
   const holder = queryOne(section, '.ln-ext-speeds__cards', HTMLElement);
   if (!holder || key === state.drawn) return;
   state.drawn = key;
-  setHtml(holder, cardsMarkup({ ...state, picks }));
+  const lichessTip = chesscomRating ? chesscomTip : null;
+  setHtml(holder, cardsMarkup({ ...state, picks, lichessTip }));
 }
 
 /** Seeks the game of a card's button `key`, or stops if it's the one sought. */

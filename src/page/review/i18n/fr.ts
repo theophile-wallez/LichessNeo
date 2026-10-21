@@ -96,6 +96,7 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
     },
   },
   accuracy: 'Précision',
+  lichessRating: rating => `${rating} sur Lichess`,
   anonymous: 'Anonyme',
   close: 'Fermer le débrief',
   back: 'Retour',

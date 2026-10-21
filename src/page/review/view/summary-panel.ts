@@ -32,6 +32,7 @@ interface SummaryInput {
   readonly learn: string | null;
   /** The header's link to a new game like this one. */
   readonly newGame: SafeHtml | '';
+  readonly speed: string | undefined;
 }
 
 // The profiles stand on full-depth verdicts only, as the game rating does.
@@ -76,6 +77,7 @@ export function renderSummary(session: Session, analysis: Analysis): void {
       language,
       learn: learnLabel(analysis),
       newGame: newGameMarkup(analysis, 'ln-ext-review__new'),
+      speed: analysis.data?.game.speed,
     }),
   );
   watchPlayerFocus(elements.panel);

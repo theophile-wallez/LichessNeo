@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- The rating study's page, for the settings' Experimental page
+     (content/settings/experimental-page.ts): Lichess's CSP lets only the
+     extension's pages in a frame, so this one frames the study. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>What is a Lichess rating worth on Chess.com?</title>
+    <style>
+      html,
+      body,
+      iframe {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe
+      src="https://theophile-wallez.github.io/lichess-chesscom-ratings/"
+      title="What is a Lichess rating worth on Chess.com?"
+      credentialless
+    ></iframe>
+  </body>
+</html>

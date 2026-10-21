@@ -1,0 +1,120 @@
+/* ---- The settings' Experimental page (content/settings/experimental-page.ts) --- */
+
+.ln-ext-setting[data-ln-ext-setting='chesscomRating'] {
+  --ln-ext-setting-color: var(--ln-ext-orange);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/exchange-01.svg');
+}
+
+/* Under it, the study the ratings come from: a card like a setting's, unfolded into a frame. */
+.ln-ext-study {
+  --ln-ext-setting-color: var(--ln-ext-purple);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/book-open-01.svg');
+
+  border-radius: 14px;
+  background: var(--ln-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  transition: box-shadow 0.2s !important;
+}
+
+.ln-ext-study:hover {
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border-hover);
+}
+
+.ln-ext-study__summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.ln-ext-study__summary::-webkit-details-marker {
+  display: none;
+}
+
+.ln-ext-study__summary:focus-visible {
+  border-radius: 14px;
+  outline: 2px solid var(--ln-ext-accent);
+  outline-offset: -2px;
+}
+
+.ln-ext-study__summary:hover .ln-ext-setting__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.ln-ext-study .ln-ext-setting__title,
+.ln-ext-study .ln-ext-setting__body {
+  display: block;
+}
+
+.ln-ext-study__chevron {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ln-ext-lift-6);
+  color: var(--ln-ext-text-dim);
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s !important;
+}
+
+.ln-ext-study__chevron svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ln-ext-study__summary:hover .ln-ext-study__chevron {
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-study[open] .ln-ext-study__chevron {
+  transform: rotate(180deg);
+}
+
+.ln-ext-study__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 18px 18px;
+  animation: ln-ext-study-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+@keyframes ln-ext-study-in {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+
+/* The study's page scrolls in it. */
+.ln-ext-study__frame {
+  box-sizing: border-box;
+  width: 100%;
+  height: min(760px, 72dvh);
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 10px;
+  background: var(--ln-ext-shade-25);
+}
+
+.ln-ext-study__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ln-ext-study__link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ln-ext-study__link:hover {
+  color: var(--ln-ext-text-strong) !important;
+}

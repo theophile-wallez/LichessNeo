@@ -199,6 +199,10 @@
     "message": "Interface",
     "description": "The settings' tab for the interface's sounds and the sidebar's rating."
   },
+  "settingsPageExperimental": {
+    "message": "Experimental",
+    "description": "The settings' tab for the features still being tried out."
+  },
   "coachPickTitle": {
     "message": "Your coach",
     "description": "The title of the settings' coach page."
@@ -626,6 +630,30 @@
   "settingSidebarRatingBody": {
     "message": "The rating beside your name, or none. By default, the speed you play the most.",
     "description": "What the sidebar rating setting covers."
+  },
+  "settingChesscomRating": {
+    "message": "Chess.com ratings",
+    "description": "The setting that shows every rating as it would be on Chess.com."
+  },
+  "settingChesscomRatingBody": {
+    "message": "Every rating as it would be on Chess.com: in games, on profiles, in lists and leaderboards. Point at one for its Lichess rating. Bullet, blitz, rapid and classical; the others stay Lichess's.",
+    "description": "What the Chess.com ratings setting covers."
+  },
+  "settingChesscomStudy": {
+    "message": "How the ratings are converted",
+    "description": "The card that unfolds the study behind the Chess.com ratings."
+  },
+  "settingChesscomStudyBody": {
+    "message": "The study behind it: 35,515 players with an established rating on both sites, and how a namesake is told from the same player.",
+    "description": "What the study card holds."
+  },
+  "settingChesscomStudyOpen": {
+    "message": "Open in a new tab",
+    "description": "The study card's link to the study's own page."
+  },
+  "lichessRatingTip": {
+    "message": "$1 on Lichess",
+    "description": "The tooltip of a rating shown as on Chess.com; $1 is its Lichess rating."
   },
   "settingGameIntro": {
     "message": "Game intro",

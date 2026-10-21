@@ -37,12 +37,13 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
     // way back to the summary are new: the original had none. Its phases are named for
     // what they hold now, each with a tip; its player labels went with its table, its game
     // rating's title and tip with its card, and the free board's first words are a title
-    // over a line now.
+    // over a line now. Its rating's tooltip as on Chess.com is new too.
     const {
       bestWas,
       liveIntro: _liveIntro,
       lines: _lines,
       playedLike: _playedLike,
+      lichessRating: _lichessRating,
       moves: _moves,
       phasesTitle: _phasesTitle,
       phases: ourPhases,

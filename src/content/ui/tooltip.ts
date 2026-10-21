@@ -12,7 +12,8 @@ import { evalOf, placeTooltip, splitShortcut } from './tooltip-layout.ts';
 // chat line's reply and report are Lichess's own `action` tags; an opening's popularity, its
 // results' parts and its way back to its parent say what they are in a title; a theme's
 // settings in the user menu say what each does; a variation's move gives its eval, and a
-// move's glyph its name.
+// move's glyph its name. A rating shown as on Chess.com gives its Lichess one, anywhere but
+// in the review, whose own tooltip does.
 const TARGETS = [
   'main :is(button:is([title], [data-ln-ext-tip]), a.tv-channel[data-ln-ext-tip]):not(#ln-ext-review *)',
   'main .board-editor__tools .actions > a[data-ln-ext-tip]',
@@ -23,6 +24,7 @@ const TARGETS = [
   'main.opening h1.opening__title > a:is([title], [data-ln-ext-tip])',
   'main.analyse .tview2 move > :is(san, glyph):is([title], [data-ln-ext-tip])',
   '#dasher_app .ln-ext-src-options > button[data-ln-ext-tip]',
+  '[data-ln-ext-lichess-rating][data-ln-ext-tip]',
 ].join(', ');
 // Lichess's home start buttons carry an English title that only repeats their label:
 // adopted, so the browser's doesn't show either, but never shown.
@@ -36,6 +38,8 @@ const CHAIN_MS = 400;
 
 function hoverTarget(event: MouseEvent): HTMLElement | null {
   const target = closestTo(event.target, TARGETS, HTMLElement);
+  // The review shows its own (#ln-ext-tip).
+  if (target?.closest('#ln-ext-review')) return null;
   // TV's channels only need theirs while their names are hidden (styles/tv/column.css).
   if (target?.matches('a.tv-channel') && !matchMedia('(max-width: 1259.98px)').matches) return null;
   return target;
