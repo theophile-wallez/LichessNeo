@@ -22,6 +22,7 @@ const FLAGS: Readonly<Record<string, string>> = {
   'analyse-chat': 'main.analyse > .mchat',
   'analyse-players': 'main.analyse > .ln-ext-player',
   'analyse-clock': 'main.analyse .analyse__clock',
+  'analyse-captured': 'main.analyse > .ln-ext-captured',
   'analyse-white': 'main.analyse .analyse__board > .orientation-white',
   'analyse-black': 'main.analyse .analyse__board > .orientation-black',
   'round-black': 'main.round .round__app__board > .orientation-black',

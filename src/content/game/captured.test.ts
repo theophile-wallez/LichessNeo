@@ -59,6 +59,58 @@ describe('captured pieces', () => {
   });
 });
 
+// A broadcast's board, with Lichess's bars or not yet.
+const pieces = '<piece class="white queen"></piece><piece class="black rook"></piece>';
+const bar = (side: string): string =>
+  `<div class="relay-board-player relay-board-player-${side}"><div class="left"></div>` +
+  `<div class="material"></div><div class="analyse__clock"></div></div>`;
+const page = (bars: string, extra = ''): string =>
+  `<main class="analyse is-relay"><div class="analyse__board main-board">` +
+  `<div class="cg-wrap orientation-white"><cg-container><cg-board>${pieces}</cg-board>` +
+  `</cg-container></div>${bars}</div>${extra}</main>`;
+
+describe('captured pieces in Lichess’s bars', () => {
+  it('draws a broadcast’s rows in its bars', () => {
+    const sync = createCapturedSync();
+    document.body.innerHTML = page(bar('top') + bar('bot'));
+    sync();
+    const top = document.querySelector('.relay-board-player-top > .ln-ext-captured--top');
+    const bottom = document.querySelector('.relay-board-player-bot > .ln-ext-captured--bottom');
+    // White, at the bottom, kept its queen and Black its rook.
+    expect(top?.querySelectorAll('.ln-ext-pc-wq')).toHaveLength(0);
+    expect(top?.querySelector('.ln-ext-captured__score')).toBeNull();
+    expect(bottom?.querySelectorAll('.ln-ext-pc-br')).toHaveLength(1);
+    expect(bottom?.querySelector('.ln-ext-captured__score')?.textContent).toBe('+4');
+    expect(document.querySelectorAll('main > .ln-ext-captured')).toHaveLength(0);
+  });
+
+  it('moves the rows into the bars a study’s chapter gains', async () => {
+    const sync = createCapturedSync();
+    document.body.innerHTML = page('');
+    sync();
+    expect(document.querySelectorAll('main > .ln-ext-captured')).toHaveLength(2);
+    document
+      .querySelector('.analyse__board')
+      ?.insertAdjacentHTML('beforeend', bar('top') + bar('bot'));
+    await flush();
+    sync();
+    expect(document.querySelectorAll('main > .ln-ext-captured')).toHaveLength(0);
+    expect(document.querySelectorAll('.relay-board-player > .ln-ext-captured')).toHaveLength(2);
+  });
+
+  it('takes the rows off a practice lesson', () => {
+    const sync = createCapturedSync();
+    document.body.innerHTML = page('', '<div class="ln-ext-player"></div>');
+    sync();
+    expect(document.querySelectorAll('.ln-ext-captured')).toHaveLength(2);
+    document
+      .querySelector('main')
+      ?.insertAdjacentHTML('beforeend', '<div class="practice__side"></div>');
+    sync();
+    expect(document.querySelectorAll('.ln-ext-captured')).toHaveLength(0);
+  });
+});
+
 describe('capturedMarkup', () => {
   const pawn: MaterialPiece = { color: 'white', role: 'pawn' };
   it('shows three-check kings after the pieces, and the lead last', () => {

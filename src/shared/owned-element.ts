@@ -6,7 +6,8 @@ export interface OwnedElement<T extends Element> {
 
 /**
  * Keeps one element of ours at the end of a Lichess container, built again
- * when Lichess replaces the container (a new page, a redrawn board).
+ * when Lichess replaces the container (a new page, a redrawn board) or when
+ * asked for another one, which takes it from the last.
  */
 export function createOwnedElement<T extends Element>(
   build: () => T,
@@ -14,6 +15,7 @@ export function createOwnedElement<T extends Element>(
   let current: T | null = null;
   return parent => {
     if (current?.parentNode === parent) return { element: current, isNew: false };
+    current?.remove();
     current = build();
     parent.append(current);
     return { element: current, isNew: true };

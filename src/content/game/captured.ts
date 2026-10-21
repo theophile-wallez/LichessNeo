@@ -7,7 +7,9 @@ import { onEveryTick } from '#content/sync-loop.ts';
 import { CAPTURABLE_ROLES, capturedMarkup, type BarSide, type MaterialPiece } from './material.ts';
 
 // The captured pieces in the game page's and the analysis board's player
-// bars (styles/playerbar.css), read off the board as it is drawn.
+// bars (styles/playerbar.css), read off the board as it is drawn. A board
+// without players gets them too, in thin bars of their own, and studies and
+// broadcasts in Lichess's bars.
 
 function readPieces(board: Element): MaterialPiece[] {
   const pieces: MaterialPiece[] = [];
@@ -32,6 +34,14 @@ function readChecks(main: Element): Record<BarSide, number> {
 function readVariant(main: HTMLElement): string | undefined {
   const classes = queryOne(main, '.round__app', HTMLElement)?.className ?? main.className;
   return /\bvariant-(\w+)/.exec(classes)?.[1];
+}
+
+// Studies and broadcasts have player bars of Lichess's: the rows go in
+// them, in its material difference's place. Elsewhere they go in <main>.
+function rowParents(main: HTMLElement): Record<BarSide, Element> {
+  const top = main.querySelector(':is(.study__player-top, .relay-board-player-top)');
+  const bottom = main.querySelector(':is(.study__player-bot, .relay-board-player-bot)');
+  return top && bottom ? { top, bottom } : { top: main, bottom: main };
 }
 
 /** Tells whether the pieces on `board` may have changed since last asked. */
@@ -77,13 +87,17 @@ export function createCapturedSync(): () => void {
       main && queryOne(main, '.round__app__board .cg-wrap, .analyse__board > .cg-wrap', Element);
     const board = wrap?.querySelector('cg-board');
     if (!main || !wrap || !board) return;
-    // On the analysis board, only under the players of a game.
-    if (main.matches('.analyse') && !main.querySelector(':scope > .ln-ext-player')) return;
+    // A practice lesson has no players.
+    if (main.querySelector('.practice__side')) {
+      for (const row of main.querySelectorAll('.ln-ext-captured')) row.remove();
+      return;
+    }
     const variant = readVariant(main);
     const bottomColor = wrapOrientation(wrap);
     const checks = variant === 'threeCheck' ? readChecks(main) : { top: 0, bottom: 0 };
-    const topRow = ownTopRow(main);
-    const bottomRow = ownBottomRow(main);
+    const parents = rowParents(main);
+    const topRow = ownTopRow(parents.top);
+    const bottomRow = ownBottomRow(parents.bottom);
     const rowsNew = topRow.isNew || bottomRow.isNew;
     // Reading the pieces is the costly part: skip it while nothing it depends on moved.
     const inputs = `${variant}|${bottomColor}|${checks.top}|${checks.bottom}`;

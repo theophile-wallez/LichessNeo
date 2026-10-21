@@ -71,6 +71,15 @@
     --ln-ext-bar: 56px;
   }
 
+  /* A board without players: thin bars for its captured pieces. */
+  html[data-ln-ext-has~='analyse-captured']:not(
+      [data-ln-ext-has~='analyse-players'],
+      [data-ln-ext-has~='analyse-clock']
+    )
+    main.analyse {
+    --ln-ext-bar: 28px;
+  }
+
   main.analyse > :is(.ln-ext-player, .ln-ext-captured) {
     --ln-ext-off: 0px;
   }
@@ -83,7 +92,11 @@
     grid-area: user-bot;
   }
 
-  html:is([data-ln-ext-has~='analyse-players'], [data-ln-ext-has~='analyse-clock'])
+  html:is(
+      [data-ln-ext-has~='analyse-players'],
+      [data-ln-ext-has~='analyse-clock'],
+      [data-ln-ext-has~='analyse-captured']
+    )
     main.analyse
     .analyse__player_strip {
     display: none !important;

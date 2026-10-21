@@ -187,70 +187,39 @@ html[data-ln-ext-ai~='black'][data-ln-ext-has~='analyse-black']
   pointer-events: none;
 }
 
-/* Boards without players (free board, study) keep Lichess's material diff, restyled to match.
-   It lists the pieces a side is up by, so they're drawn in the other color. */
-main.analyse .material {
-  /* Lichess lists the queen first; reversed, pawns lead and the score stays last. */
-  flex-direction: row-reverse !important;
+/* A board without players: alone in its thin bar (analysis/layout.css), level with the board. */
+html:not([data-ln-ext-has~='analyse-players']) main.analyse > .ln-ext-captured {
+  margin: calc(var(--ln-ext-off) + (var(--ln-ext-bar) - 18px) / 2) 0 0 var(--ln-ext-inset-l, 0px);
+}
+
+/* A study's or a broadcast's bar: in the place of Lichess's material difference, before the
+ * clock. */
+main.analyse :is(.study__player, .relay-board-player) > .ln-ext-captured {
+  order: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
   gap: 3px;
   height: 18px;
-  padding: 0 !important;
+  margin: 0 8px;
+  pointer-events: none;
 }
 
-main.analyse .material score {
-  order: -1;
+main.analyse :is(.study__player, .relay-board-player) > .analyse__clock {
+  order: 2;
 }
 
-html:not([data-ln-ext-has~='analyse-clock']) main.analyse .analyse__player_strip {
-  left: var(--ln-ext-inset-l, 0px) !important;
-  right: auto !important;
+/* Our rows show the pieces taken, where Lichess's lists only those a side is up by. */
+main.analyse .material {
+  display: none !important;
 }
 
-html[data-ln-ext-has~='analyse-white'] main.analyse .material-bottom,
-html[data-ln-ext-has~='analyse-black'] main.analyse .material-top {
-  --ln-ext-mpiece-pawn: var(---black-pawn);
-  --ln-ext-mpiece-knight: var(---black-knight);
-  --ln-ext-mpiece-bishop: var(---black-bishop);
-  --ln-ext-mpiece-rook: var(---black-rook);
-  --ln-ext-mpiece-queen: var(---black-queen);
-  --ln-ext-mpiece-king: var(---black-king);
-}
-
-html[data-ln-ext-has~='analyse-white'] main.analyse .material-top,
-html[data-ln-ext-has~='analyse-black'] main.analyse .material-bottom {
-  --ln-ext-mpiece-pawn: var(---white-pawn);
-  --ln-ext-mpiece-knight: var(---white-knight);
-  --ln-ext-mpiece-bishop: var(---white-bishop);
-  --ln-ext-mpiece-rook: var(---white-rook);
-  --ln-ext-mpiece-queen: var(---white-queen);
-  --ln-ext-mpiece-king: var(---white-king);
-}
-
-main.analyse .material mpiece.pawn {
-  background-image: var(--ln-ext-mpiece-pawn) !important;
-}
-main.analyse .material mpiece.knight {
-  background-image: var(--ln-ext-mpiece-knight) !important;
-}
-main.analyse .material mpiece.bishop {
-  background-image: var(--ln-ext-mpiece-bishop) !important;
-}
-main.analyse .material mpiece.rook {
-  background-image: var(--ln-ext-mpiece-rook) !important;
-}
-main.analyse .material mpiece.queen {
-  background-image: var(--ln-ext-mpiece-queen) !important;
-}
-main.analyse .material mpiece.king {
-  background-image: var(--ln-ext-mpiece-king) !important;
-}
-
-:is(.ln-ext-captured__group, main.analyse .material > div) {
+.ln-ext-captured__group {
   display: flex !important;
   margin: 0 !important;
 }
 
-:is(.ln-ext-captured__group .ln-ext-pc, main.analyse .material mpiece) {
+.ln-ext-captured__group .ln-ext-pc {
   display: block;
   width: 18px !important;
   height: 18px !important;
@@ -269,18 +238,16 @@ main
     .ln-ext-pc-br,
     .ln-ext-pc-bq,
     .ln-ext-pc-bk
-  ),
-html[data-ln-ext-has~='analyse-white'] main.analyse .material-bottom mpiece,
-html[data-ln-ext-has~='analyse-black'] main.analyse .material-top mpiece {
+  ) {
   filter: drop-shadow(1px 0 0 var(--ln-ext-text-dim)) drop-shadow(-1px 0 0 var(--ln-ext-text-dim))
     drop-shadow(0 1px 0 var(--ln-ext-text-dim)) drop-shadow(0 -1px 0 var(--ln-ext-text-dim)) !important;
 }
 
-:is(.ln-ext-captured__group .ln-ext-pc, main.analyse .material mpiece) + :is(.ln-ext-pc, mpiece) {
+.ln-ext-captured__group .ln-ext-pc + .ln-ext-pc {
   margin-left: -11px !important;
 }
 
-:is(.ln-ext-captured__score, main.analyse .material score) {
+.ln-ext-captured__score {
   margin: 0 0 0 3px !important;
   color: var(--ln-ext-text-dim);
   font-size: 12px;

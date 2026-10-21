@@ -31,6 +31,7 @@ describe('presentFlags, for flags the original lacked', () => {
       'account',
       '<main class="account page-menu"><div class="page-menu__content box"></div></main>',
     ],
+    ['analyse-captured', '<main class="analyse"><div class="ln-ext-captured"></div></main>'],
     [
       'analyse-training',
       '<main class="analyse"><div class="analyse__round-training"><div class="analyse__acpl"></div></div></main>',
@@ -43,6 +44,12 @@ describe('presentFlags, for flags the original lacked', () => {
   it('leaves the DGT board’s pages out of the account’s', () => {
     document.body.innerHTML = '<main class="account page-menu dgt"></main>';
     expect(presentFlags(document).split(' ')).not.toContain('account');
+  });
+
+  it('leaves out the captured pieces in a broadcast’s bars, which have their own room', () => {
+    document.body.innerHTML =
+      '<main class="analyse is-relay"><div class="relay-board-player"><div class="ln-ext-captured"></div></div></main>';
+    expect(presentFlags(document).split(' ')).not.toContain('analyse-captured');
   });
 
   it('leaves out an empty advice summary', () => {

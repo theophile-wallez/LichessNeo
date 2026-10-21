@@ -128,7 +128,7 @@ describe('onDomReady', () => {
 });
 
 describe('createOwnedElement', () => {
-  it('keeps one element at the end of its container, and builds another for a new one', () => {
+  it('keeps one element at the end of its container, and moves to a new one as a new element', () => {
     const own = createOwnedElement(() => createElement('div', { className: 'ln-ext-owned' }));
     const first = createElement('main');
     first.append(createElement('p'));
@@ -140,7 +140,8 @@ describe('createOwnedElement', () => {
     const remade = own(second);
     expect(remade.isNew).toBe(true);
     expect(remade.element).not.toBe(made.element);
-    expect(first.querySelectorAll('.ln-ext-owned')).toHaveLength(1);
+    expect(first.querySelectorAll('.ln-ext-owned')).toHaveLength(0);
     expect(own(first).isNew).toBe(true);
+    expect(second.querySelectorAll('.ln-ext-owned')).toHaveLength(0);
   });
 });
