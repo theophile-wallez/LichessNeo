@@ -57,6 +57,7 @@ import { profileMedals } from './profile/medals.ts';
 import { profileAvatarLink } from './profile/avatar-link.ts';
 import { powertip } from './ui/powertip.ts';
 import { tooltip } from './ui/tooltip.ts';
+import { copyFields } from './ui/copy-fields.ts';
 import { tabs } from './ui/tabs.ts';
 import { notices } from './notices/index.ts';
 import { devReload } from './dev/reload.ts';
@@ -130,6 +131,7 @@ const FEATURES = [
   profileAvatarLink,
   powertip,
   tooltip,
+  copyFields,
   tabs,
   notices,
   devReload,
