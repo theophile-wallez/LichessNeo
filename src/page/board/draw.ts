@@ -76,7 +76,7 @@ export function createShapeDrawer({ mateLabel }: DrawOptions): () => void {
     const variations = below ? readVariations(below) : [];
     arrows.push(...reviewArrows().map(arrow => reviewArrow(arrow, whiteAtBottom)));
     const mate = checkmate(currentNode());
-    root.classList.toggle('ln-ext-mate', mate !== null);
+    root.classList.toggle('ln-ext-shows-mate', mate !== null);
     const badge = mate
       ? mateBadgeMarkup({
           king: cellOf(mate.king, bottom),

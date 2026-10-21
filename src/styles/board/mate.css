@@ -5,17 +5,17 @@
  * corner, while a red "#" takes its place on the king's. Lichess's red check square and its own
  * "#" on the king (one of its custom svgs) give way. */
 
-html.ln-ext-mate main.analyse cg-board square.check,
+html.ln-ext-shows-mate main.analyse cg-board square.check,
 main.round[data-ln-ext-mate] cg-board square.check {
   background: none !important;
 }
 
-html.ln-ext-mate main.analyse .main-board .cg-custom-svgs {
+html.ln-ext-shows-mate main.analyse .main-board .cg-custom-svgs {
   display: none;
 }
 
 /* The crown lands on the mating piece's corner, where the review's verdict badge sits. */
-html.ln-ext-mate #ln-ext-board-overlay .ln-ext-badge {
+html.ln-ext-shows-mate #ln-ext-board-overlay .ln-ext-badge {
   display: none;
 }
 
