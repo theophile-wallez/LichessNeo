@@ -1358,5 +1358,61 @@
   "pairingCancel": {
     "message": "Cancel",
     "description": "The button that leaves a card as it was and empties the form."
+  },
+  "settingsPageBackup": {
+    "message": "Backup",
+    "description": "The settings' tab that exports them to a file and imports them back."
+  },
+  "backupExportTitle": {
+    "message": "Export my settings",
+    "description": "The card that saves every setting to a file."
+  },
+  "backupExportBody": {
+    "message": "A file with all of Lichess Neo's settings: the look, the coach, your boards, your avatar and your imported packs. Keep it to get them back after clearing your browser's data, or share it.",
+    "description": "What the export card's file holds."
+  },
+  "backupExport": {
+    "message": "Export",
+    "description": "The button that downloads the settings' file."
+  },
+  "backupExportFailed": {
+    "message": "The settings could not be read: reload the page and try again.",
+    "description": "Shown when the export fails."
+  },
+  "backupImportTitle": {
+    "message": "Import settings",
+    "description": "The card that puts a file's settings back."
+  },
+  "backupImportBody": {
+    "message": "Pick a file exported from Lichess Neo, yours or another player's. It replaces your settings; the packs you have are kept.",
+    "description": "What importing a file does."
+  },
+  "backupImport": {
+    "message": "Choose a file",
+    "description": "The button that opens the file picker."
+  },
+  "backupSummary": {
+    "message": "Backup of $1.",
+    "description": "What the picked file is: $1 is when it was made."
+  },
+  "backupSummaryPacks": {
+    "message": "Packs: $1.",
+    "description": "The packs the picked file holds: $1 is their names."
+  },
+  "backupRestore": {
+    "message": "Replace my settings",
+    "description": "The button that puts the picked file's settings in place of the current ones."
+  },
+  "backupCancel": {
+    "message": "Cancel",
+    "description": "The button that drops the picked file."
+  },
+  "backupInvalid": {
+    "message": "This file isn't a Lichess Neo backup.",
+    "description": "Shown when the picked file can't be read as a backup."
+  },
+  "backupRestoreFailed": {
+    "message": "The settings could not be saved: try again.",
+    "description": "Shown when the import fails."
   }
 }

@@ -6,6 +6,7 @@ import { importSection } from '#content/packs/import-section.ts';
 import { PAGE_NAMES, SETTINGS_PAGES, type SettingsPage } from './address.ts';
 import { buildAppearance, showScheme } from './appearance.ts';
 import { buildAvatarCard } from './avatar-card.ts';
+import { buildBackupPage } from './backup-page.ts';
 import { buildNameCard } from './name-card.ts';
 import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
 import { buildExperimentalPage } from './experimental-page.ts';
@@ -57,6 +58,7 @@ export function buildSection(): SettingsSection {
     pairing: [pairing.element],
     interface: [buildInterfacePage()],
     experimental: [buildExperimentalPage()],
+    backup: [buildBackupPage()],
   };
   for (const page of SETTINGS_PAGES)
     queryOne(element, `.ln-ext-settings__page[data-ln-ext-page='${page}']`, HTMLElement)?.append(

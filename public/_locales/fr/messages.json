@@ -1058,5 +1058,47 @@
   "pairingCancel": {
     "message": "Annuler",
     "description": "The button that leaves a card as it was and empties the form."
+  },
+  "settingsPageBackup": {
+    "message": "Sauvegarde"
+  },
+  "backupExportTitle": {
+    "message": "Exporter mes réglages"
+  },
+  "backupExportBody": {
+    "message": "Un fichier avec tous les réglages de Lichess Neo : l’apparence, le coach, vos plateaux, votre avatar et vos packs importés. Gardez-le pour les retrouver après avoir effacé les données du navigateur, ou partagez-le."
+  },
+  "backupExport": {
+    "message": "Exporter"
+  },
+  "backupExportFailed": {
+    "message": "Les réglages n’ont pas pu être lus : rechargez la page et réessayez."
+  },
+  "backupImportTitle": {
+    "message": "Importer des réglages"
+  },
+  "backupImportBody": {
+    "message": "Choisissez un fichier exporté depuis Lichess Neo, le vôtre ou celui d’un autre joueur. Il remplace vos réglages ; vos packs sont gardés."
+  },
+  "backupImport": {
+    "message": "Choisir un fichier"
+  },
+  "backupSummary": {
+    "message": "Sauvegarde du $1."
+  },
+  "backupSummaryPacks": {
+    "message": "Packs : $1."
+  },
+  "backupRestore": {
+    "message": "Remplacer mes réglages"
+  },
+  "backupCancel": {
+    "message": "Annuler"
+  },
+  "backupInvalid": {
+    "message": "Ce fichier n’est pas une sauvegarde de Lichess Neo."
+  },
+  "backupRestoreFailed": {
+    "message": "Les réglages n’ont pas pu être enregistrés : réessayez."
   }
 }

@@ -13,7 +13,7 @@ import { CardPicksSchema } from '#content/pages/speed-cards/picks.ts';
 /** chrome.storage.sync keeps 8 KB per item: room for these and the rest. */
 export const MAX_CUSTOM_THEMES = 24;
 
-const SettingsSchema = z.object({
+export const SettingsSchema = z.object({
   /** The interface's own sounds (content/ui/sounds.ts), not Lichess's nor a pack's. */
   uiSounds: z.prefault(z.boolean(), true),
   /** The coaches play as 3D mascots; off, they stay their still images (content/coach). */

@@ -1,0 +1,84 @@
+/* ---- The settings' Backup page (content/settings/backup-page.ts) --- */
+
+.ln-ext-setting[data-ln-ext-setting='backupExport'] {
+  --ln-ext-setting-color: var(--ln-ext-green);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-export.svg');
+}
+
+.ln-ext-setting[data-ln-ext-setting='backupImport'] {
+  --ln-ext-setting-color: var(--ln-ext-blue);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/file-import.svg');
+}
+
+/* The card's button stays by its title while the text under it grows. */
+.ln-ext-backup {
+  align-items: flex-start;
+}
+
+.ln-ext-backup .ln-ext-setting__icon {
+  margin-top: 2px;
+}
+
+.ln-ext-backup > .button {
+  align-self: center;
+}
+
+.ln-ext-backup .button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ln-ext-backup .button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* The picked file, waiting for the user's word before it replaces anything. */
+.ln-ext-backup__confirm:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--ln-ext-lift-6);
+  animation: ln-ext-backup-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+@keyframes ln-ext-backup-in {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+
+.ln-ext-backup__summary {
+  margin: 0;
+  color: var(--ln-ext-text-strong);
+  font-size: 13.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.ln-ext-backup__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ln-ext-backup__status {
+  margin: 10px 0 0;
+  color: var(--ln-ext-red);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Under the text, the full width (setting-menu.css wraps the cards). */
+@media (max-width: 640px) {
+  .ln-ext-backup > .button {
+    flex: 1 0 100%;
+  }
+}

@@ -10,6 +10,9 @@ export const extensionUrl = (path: string): string => chrome.runtime.getURL(path
 export const isConnected = (): boolean =>
   typeof chrome !== 'undefined' && chrome.runtime?.id !== undefined;
 
+/** The extension's version, as its manifest gives it. */
+export const extensionVersion = (): string => chrome.runtime.getManifest().version;
+
 /** Sends the background worker a message, and its answer, unchecked. */
 export const askWorker = (message: unknown): Promise<unknown> =>
   chrome.runtime.sendMessage<unknown, unknown>(message);

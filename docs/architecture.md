@@ -118,9 +118,10 @@ so the logic can be unit-tested without a page.
   player's own, changed, moved, taken off or put back to the defaults, and
   cards suggested from their recent games), Interface (its sounds, the game
   intro over a preview of it, the sidebar's rating, or none), Experimental
-  (the Chess.com ratings, and the study behind them in a frame); kept in
-  `chrome.storage.sync`, but the coach's, the avatar's and the name's picks
-  in localStorage, where the page world reads them.
+  (the Chess.com ratings, and the study behind them in a frame), Backup
+  (every setting, pick and pack exported to a JSON file, and put back from
+  one); kept in `chrome.storage.sync`, but the coach's, the avatar's and the
+  name's picks in localStorage, where the page world reads them.
 - `colors`: the color themes, one picked for each of Lichess's schemes.
 - `sidebar`: the Donate item, its folding to icons, the preferences cog, the
   account's rating, the light / dark switch, the drawer below 1020px.

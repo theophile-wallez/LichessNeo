@@ -10,6 +10,7 @@ export const SETTINGS_PAGES = [
   'pairing',
   'interface',
   'experimental',
+  'backup',
 ] as const;
 
 export type SettingsPage = (typeof SETTINGS_PAGES)[number];
@@ -23,6 +24,7 @@ export const PAGE_NAMES: Readonly<Record<SettingsPage, string>> = {
   pairing: 'settingsPagePairing',
   interface: 'settingsPageInterface',
   experimental: 'settingsPageExperimental',
+  backup: 'settingsPageBackup',
 };
 
 const SETTINGS_HASH = '#ln-ext-extension';
