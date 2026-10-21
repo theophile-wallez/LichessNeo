@@ -57,8 +57,10 @@ describe('the board panel’s rows', () => {
     expect(rows.map(row => row.firstElementChild?.textContent)).toEqual([
       'Light squares',
       'Dark squares',
+      'Texture',
+      'Strength',
       'Save as',
     ]);
-    expect(rows.map(row => row.dataset.lnExtFor)).toEqual(['custom', 'custom', 'custom']);
+    expect(rows.map(row => row.dataset.lnExtFor)).toEqual(Array(5).fill('custom'));
   });
 });

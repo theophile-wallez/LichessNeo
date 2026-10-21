@@ -17,7 +17,7 @@ export const StorageKey = {
   backlitWaves: prefixed('backlit-waves'),
   backlitGap: prefixed('backlit-gap'),
   backlitRadius: prefixed('backlit-radius'),
-  // The custom board's colors (content/packs/custom-board.ts).
+  // The custom board's colors and texture (content/packs/custom-board.ts).
   customBoard: prefixed('custom-board'),
   // The custom boards saved under a name (content/packs/saved-boards.ts).
   savedBoards: prefixed('saved-boards'),

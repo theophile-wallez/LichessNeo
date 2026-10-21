@@ -82,6 +82,20 @@ describe('a Board & sounds card', () => {
     expect(family()).toBe(true);
   });
 
+  it('draws a material board’s tile in its colors, under its texture', async () => {
+    const { looks } = await card('board');
+    const thumb = queryOne(
+      looks.element,
+      "[data-ln-ext-choice='materials-slate'] .ln-ext-src-thumb",
+      HTMLElement,
+    );
+    expect(thumb?.dataset.lnExtSquares).toBe('');
+    expect(thumb?.style.getPropertyValue('--ln-ext-thumb-light')).toBe('#d0cbc0');
+    expect(thumb?.style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
+      'var(--ln-ext-texture-slate)',
+    );
+  });
+
   it('lists the packs that have the part, or leads to the packs’ page', async () => {
     const pieces = await card('piece', [WOOD, CLICKS]);
     expect(

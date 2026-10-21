@@ -47,6 +47,9 @@
   "looksBacklit": {
     "message": "Rétroéclairés"
   },
+  "looksMaterials": {
+    "message": "Matières"
+  },
   "looksLichess": {
     "message": "Lichess"
   },

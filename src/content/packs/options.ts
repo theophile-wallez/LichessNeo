@@ -21,11 +21,12 @@ import type { Library } from './library.ts';
 import { optionRow, type OptionRowSpec } from './option-row.ts';
 import { sliderRow } from './slider-row.ts';
 import { storedNumber, storedOption } from './stored-option.ts';
+import { strengthRow, textureRow } from './texture-row.ts';
 
 // The settings of the extension's themes, each a row in its panel: the custom
-// board's colors and where the sound set puts a move's sound, under the list,
-// and how the backlit boards light up and the shape of their keys, in their
-// family's view, the same for them all.
+// board's colors and texture and where the sound set puts a move's sound,
+// under the list, and how the backlit boards light up and the shape of their
+// keys, in their family's view, the same for them all.
 
 export const soundPlace = storedOption<SoundPlace>(
   StorageKey.soundPlace,
@@ -117,7 +118,7 @@ type Rows = readonly ((library: Library) => HTMLElement)[];
 
 /** A panel's rows, under its list. */
 export const OPTION_ROWS: Readonly<Record<PartKind, Rows>> = {
-  board: [() => colorRow('light'), () => colorRow('dark'), saveRow],
+  board: [() => colorRow('light'), () => colorRow('dark'), textureRow, strengthRow, saveRow],
   piece: [],
   sound: [() => optionRow(PLACE_ROW)],
 };

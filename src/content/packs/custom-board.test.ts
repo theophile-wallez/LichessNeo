@@ -1,6 +1,9 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   chooseSquareColor,
+  chooseStrength,
+  chooseTexture,
+  customStrength,
   DEFAULT_CUSTOM_BOARD,
   isHexColor,
   onCustomBoardChange,
@@ -9,6 +12,10 @@ import {
 } from './custom-board.ts';
 
 const root = document.documentElement;
+const texture = (): string[] =>
+  ['--ln-ext-board-custom-texture', '--ln-ext-board-custom-strength'].map(name =>
+    root.style.getPropertyValue(name),
+  );
 const shown = (): string[] =>
   ['--ln-ext-board-custom-light', '--ln-ext-board-custom-dark'].map(name =>
     root.style.getPropertyValue(name),
@@ -52,6 +59,38 @@ describe('the custom board', () => {
     localStorage.setItem('ln-ext-custom-board', JSON.stringify({ light: 'red', dark: '#000000' }));
     expect(readCustomBoard()).toEqual(DEFAULT_CUSTOM_BOARD);
     localStorage.setItem('ln-ext-custom-board', '{');
+    expect(readCustomBoard()).toEqual(DEFAULT_CUSTOM_BOARD);
+  });
+
+  it('lays a texture over its colors at the strength picked, and takes it off', () => {
+    const changed = vi.fn<() => void>();
+    onCustomBoardChange(changed);
+    expect(customStrength()).toBe(100);
+    chooseTexture('slate');
+    expect(readCustomBoard()).toEqual({ ...DEFAULT_CUSTOM_BOARD, texture: 'slate' });
+    expect(texture()).toEqual(['var(--ln-ext-texture-slate)', '100%']);
+    chooseStrength(35);
+    expect(customStrength()).toBe(35);
+    expect(texture()).toEqual(['var(--ln-ext-texture-slate)', '35%']);
+    chooseTexture(undefined);
+    expect(JSON.parse(localStorage.getItem('ln-ext-custom-board') ?? '')).toEqual({
+      ...DEFAULT_CUSTOM_BOARD,
+      strength: 35,
+    });
+    expect(texture()).toEqual(['', '']);
+    expect(changed).toHaveBeenCalledTimes(3);
+  });
+
+  it('reads a board kept before textures as it was, and an unknown texture as the default', () => {
+    localStorage.setItem(
+      'ln-ext-custom-board',
+      JSON.stringify({ light: '#ffffff', dark: '#000000' }),
+    );
+    expect(readCustomBoard()).toEqual({ light: '#ffffff', dark: '#000000' });
+    localStorage.setItem(
+      'ln-ext-custom-board',
+      JSON.stringify({ light: '#ffffff', dark: '#000000', texture: 'velvet' }),
+    );
     expect(readCustomBoard()).toEqual(DEFAULT_CUSTOM_BOARD);
   });
 

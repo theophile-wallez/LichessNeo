@@ -1,0 +1,96 @@
+/* ---- Our two-tone boards' tiles, and the custom board's textures --- */
+
+/* Our two-tone boards' colors and texture (styles/board/pieces.css), each its own whichever is
+ * picked: the accent's, the custom one's, or a preset's, a material one's or a saved one's, set
+ * on the tile (content/packs/flat-boards.ts). Two squares here, four in the settings
+ * (pages/settings-board-tiles.css). */
+.ln-ext-src-thumb[data-ln-ext-theme='accent'] {
+  --ln-ext-thumb-light: #f7f8f8;
+  --ln-ext-thumb-dark: var(--ln-ext-accent);
+}
+
+.ln-ext-src-thumb[data-ln-ext-theme='custom'] {
+  --ln-ext-thumb-light: var(--ln-ext-board-custom-light, #f7f8f8);
+  --ln-ext-thumb-dark: var(--ln-ext-board-custom-dark, #5e6ad2);
+  --ln-ext-thumb-texture: var(--ln-ext-board-custom-texture, none);
+  --ln-ext-thumb-strength: var(--ln-ext-board-custom-strength, 100%);
+}
+
+/* The texture's veil, as on the board. */
+.ln-ext-src-thumb:is(
+  [data-ln-ext-theme='accent'],
+  [data-ln-ext-theme='custom'],
+  [data-ln-ext-squares]
+) {
+  --ln-ext-thumb-veil-light: color-mix(
+    in srgb,
+    var(--ln-ext-thumb-light),
+    transparent var(--ln-ext-thumb-strength, 100%)
+  );
+  --ln-ext-thumb-veil-dark: color-mix(
+    in srgb,
+    var(--ln-ext-thumb-dark),
+    transparent var(--ln-ext-thumb-strength, 100%)
+  );
+}
+
+#dasher_app
+  .ln-ext-src-thumb:is(
+    [data-ln-ext-theme='accent'],
+    [data-ln-ext-theme='custom'],
+    [data-ln-ext-squares]
+  ) {
+  background:
+    linear-gradient(90deg, var(--ln-ext-thumb-veil-light) 50%, var(--ln-ext-thumb-veil-dark) 50%),
+    var(--ln-ext-thumb-texture, none) 0 0 / 400% 800%,
+    linear-gradient(90deg, var(--ln-ext-thumb-light) 50%, var(--ln-ext-thumb-dark) 50%);
+  background-blend-mode: normal, hard-light, normal;
+}
+
+/* The custom board's textures (content/packs/texture-row.ts), here and in the settings: each
+ * tile is the board's four top-left squares in its colors, under the texture. */
+.ln-ext-src-textures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ln-ext-src-texture {
+  --ln-ext-thumb-light: var(--ln-ext-board-custom-light, #f7f8f8);
+  --ln-ext-thumb-dark: var(--ln-ext-board-custom-dark, #5e6ad2);
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 7px;
+  background:
+    var(--ln-ext-thumb-texture, none) 0 0 / 400% 400%,
+    linear-gradient(90deg, var(--ln-ext-thumb-light) 50%, var(--ln-ext-thumb-dark) 50%) top / 100%
+      50% no-repeat,
+    linear-gradient(90deg, var(--ln-ext-thumb-dark) 50%, var(--ln-ext-thumb-light) 50%) bottom /
+      100% 50% no-repeat;
+  background-blend-mode: hard-light, normal, normal;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-12);
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-src-texture:hover {
+  transform: scale(1.12);
+}
+
+.ln-ext-src-texture.active {
+  box-shadow:
+    0 0 0 2px var(--ln-ext-bg-panel),
+    0 0 0 4px var(--ln-ext-accent);
+}
+
+/* The strength waits for a texture. */
+.ln-ext-src-slider:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

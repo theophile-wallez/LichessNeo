@@ -149,9 +149,9 @@ Each of the board, the pieces and the sounds shows one of the extension's
 themes (`themes.ts`: our board in the color theme's accent, the default,
 two-tone boards in each color theme's accent and those the user saved,
 `flat-boards.ts` and `saved-boards.ts`, the one they color, `custom-board.ts`,
-the backlit boards, listed as a family under one tile, `family.ts`, and the
-Ascent and Boxwood sound sets), a pack the user imported
-from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
+the material boards and the backlit ones, each listed as a family under one
+tile, `materials.ts` and `family.ts`, and the Ascent and Boxwood sound sets), a
+pack the user imported from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
 menu's own panels, under an Extension and a Lichess tab (`dasher.ts`,
 `panel.ts`, `choices.ts`); packs are imported and removed in the extension's
 settings (`import-section.ts`, `import-form.ts`), or, signed out, in the
@@ -192,6 +192,17 @@ panels themselves, all in `src/content/packs/`:
   keys come in the shape picked (gap and corners, `keyBox` of
   `src/shared/backlit.ts`), drawn as an image on the board and its tiles
   (`backlit-keys.ts`).
+
+A two-tone board may have a texture (`textures.ts`): a grey relief of a
+material, drawn by `tools/board-materials/generate.py` into
+`public/img/boards`, which `styles/board/pieces.css` lays over the squares'
+colors in `hard-light` (mid-grey leaves a color as it is), under a veil of the
+same colors that its strength makes see-through. So any colors take any
+texture: the custom board picks one and its strength under its colors
+(`texture-row.ts`), a saved board keeps them, and a material board is one
+texture over the colors it was drawn in. An extension URL can only be written
+in the CSS, so each texture is a variable there (`styles/board/textures.css`)
+that the content script names.
 
 ## Styles
 

@@ -2,14 +2,18 @@ import { BACKLIT } from '#shared/backlit.ts';
 import { createElement, setData } from '#shared/dom.ts';
 import type { PartKind } from '#shared/packs/pack.ts';
 import { message } from '#content/platform/runtime.ts';
+import { MATERIALS } from '#content/packs/materials.ts';
 import { FAMILY_ROWS } from '#content/packs/options.ts';
 import { FAMILIES, themesOf, type Theme } from '#content/packs/themes.ts';
 
-// A Board & sounds card's sections for its families of themes (the backlit
-// boards), apart from the classic ones: each with its tiles, then the settings
-// they share, shown while one of them is picked (looks-card.ts).
+// A Board & sounds card's sections for its families of themes (the material
+// and the backlit boards), apart from the classic ones: each with its tiles,
+// then the settings they share, shown while one of them is picked (looks-card.ts).
 
-const NAMES: Readonly<Record<string, string>> = { [BACKLIT]: 'looksBacklit' };
+const NAMES: Readonly<Record<string, string>> = {
+  [MATERIALS]: 'looksMaterials',
+  [BACKLIT]: 'looksBacklit',
+};
 
 export const hasFamilies = (kind: PartKind): boolean =>
   themesOf(kind).some(theme => theme.family !== undefined);

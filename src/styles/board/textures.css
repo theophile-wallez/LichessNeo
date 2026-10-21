@@ -1,0 +1,20 @@
+/* The board textures (content/packs/textures.ts): one grey relief per material, from
+ * tools/board-materials. An extension URL can only be written here, so the content script names
+ * a texture by its variable. */
+
+:root {
+  --ln-ext-texture-ash: url('chrome-extension://__MSG_@@extension_id__/img/boards/ash.avif');
+  --ln-ext-texture-parquet: url('chrome-extension://__MSG_@@extension_id__/img/boards/parquet.avif');
+  --ln-ext-texture-end-grain: url('chrome-extension://__MSG_@@extension_id__/img/boards/end-grain.avif');
+  --ln-ext-texture-marble: url('chrome-extension://__MSG_@@extension_id__/img/boards/marble.avif');
+  --ln-ext-texture-terrazzo: url('chrome-extension://__MSG_@@extension_id__/img/boards/terrazzo.avif');
+  --ln-ext-texture-slate: url('chrome-extension://__MSG_@@extension_id__/img/boards/slate.avif');
+  --ln-ext-texture-brushed: url('chrome-extension://__MSG_@@extension_id__/img/boards/brushed.avif');
+  --ln-ext-texture-spun: url('chrome-extension://__MSG_@@extension_id__/img/boards/spun.avif');
+  --ln-ext-texture-zellige: url('chrome-extension://__MSG_@@extension_id__/img/boards/zellige.avif');
+  --ln-ext-texture-felt: url('chrome-extension://__MSG_@@extension_id__/img/boards/felt.avif');
+  --ln-ext-texture-leather: url('chrome-extension://__MSG_@@extension_id__/img/boards/leather.avif');
+  --ln-ext-texture-blueprint: url('chrome-extension://__MSG_@@extension_id__/img/boards/blueprint.avif');
+  --ln-ext-texture-halftone: url('chrome-extension://__MSG_@@extension_id__/img/boards/halftone.avif');
+  --ln-ext-texture-cork: url('chrome-extension://__MSG_@@extension_id__/img/boards/cork.avif');
+}

@@ -6,7 +6,7 @@ import { hasPart, type Pack, type PartKind } from '#shared/packs/pack.ts';
 import { isBacklitBoard } from '#shared/backlit.ts';
 import { postLichessLook } from '#shared/protocol.ts';
 import { message } from '#content/platform/runtime.ts';
-import type { SquareColors } from '#content/packs/custom-board.ts';
+import type { CustomBoard } from '#content/packs/custom-board.ts';
 import { paintTiles } from '#content/packs/backlit-keys.ts';
 import { showSquares } from '#content/packs/flat-boards.ts';
 import { LICHESS, type Library } from '#content/packs/library.ts';
@@ -39,7 +39,7 @@ interface Tile {
   /** The image is a whole board, of which the tile shows the top-left squares (a pack's). */
   readonly whole?: boolean;
   /** A two-tone board's squares, drawn on its tile. */
-  readonly colors?: SquareColors;
+  readonly colors?: CustomBoard;
 }
 
 function packImage(kind: PartKind, pack: Pack): string | null {
@@ -218,8 +218,8 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
     ...(hasFamilies(kind) ? [subLabel(message('looksClassic'))] : []),
     ours,
     ...OPTION_ROWS[kind].map(row => row(library)),
-    ...familySections(kind, ({ id, name }) =>
-      tileButton(kind, { id, name, image: null }, 'data-ln-ext-choice'),
+    ...familySections(kind, ({ id, name, colors }) =>
+      tileButton(kind, { id, name, image: null, ...(colors && { colors }) }, 'data-ln-ext-choice'),
     ),
     label(message('looksLichess')),
     lichess,

@@ -26,8 +26,8 @@
   transform: scaleX(-1);
 }
 
-/* Our two-tone boards (sidebar/dasher-pickers.css): a tile of 2×2, light top left, in two rows
- * (a conic gradient frays at its center). */
+/* Our two-tone boards (sidebar/board-thumbs.css): a tile of 2×2, light top left, in two rows
+ * (a conic gradient frays at its center), under their texture and its veil. */
 .ln-ext-looks
   .ln-ext-src-thumb:is(
     [data-ln-ext-theme='accent'],
@@ -35,10 +35,16 @@
     [data-ln-ext-squares]
   ) {
   background:
+    linear-gradient(90deg, var(--ln-ext-thumb-veil-light) 50%, var(--ln-ext-thumb-veil-dark) 50%)
+      top / 100% 50% no-repeat,
+    linear-gradient(90deg, var(--ln-ext-thumb-veil-dark) 50%, var(--ln-ext-thumb-veil-light) 50%)
+      bottom / 100% 50% no-repeat,
+    var(--ln-ext-thumb-texture, none) 0 0 / 400% 400%,
     linear-gradient(90deg, var(--ln-ext-thumb-light) 50%, var(--ln-ext-thumb-dark) 50%) top / 100%
       50% no-repeat,
     linear-gradient(90deg, var(--ln-ext-thumb-dark) 50%, var(--ln-ext-thumb-light) 50%) bottom /
       100% 50% no-repeat;
+  background-blend-mode: normal, normal, hard-light, normal, normal;
 }
 
 /* A backlit board's four keys (board/backlit.css), each lit as the pointer comes over it,

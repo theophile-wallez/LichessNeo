@@ -1,9 +1,10 @@
 import { z } from 'zod/mini';
 import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
-import { HexSchema, type SquareColors } from './custom-board.ts';
+import { type CustomBoard, CustomBoardSchema } from './custom-board.ts';
 
-// The custom boards the user saved under a name (color-row.ts): each one of
-// the extension's boards from then on, until they delete it in the settings.
+// The custom boards the user saved under a name (color-row.ts), their colors
+// and texture: each one of the extension's boards from then on, until they
+// delete it in the settings.
 
 export const MAX_SAVED_BOARDS = 24;
 export const MAX_BOARD_NAME = 24;
@@ -12,8 +13,7 @@ const ID_PREFIX = 'saved-';
 const SavedBoardSchema = z.object({
   id: z.string().check(z.startsWith(ID_PREFIX)),
   name: z.string().check(z.minLength(1), z.maxLength(MAX_BOARD_NAME)),
-  light: HexSchema,
-  dark: HexSchema,
+  ...CustomBoardSchema.shape,
 });
 
 export type SavedBoard = z.infer<typeof SavedBoardSchema>;
@@ -50,12 +50,12 @@ function write(boards: readonly SavedBoard[]): void {
   cached = boards;
 }
 
-/** Saves `colors` as a board named `name`; its id, or null once the list is full. */
-export function saveBoard(name: string, colors: SquareColors): string | null {
+/** Saves `board` under the name `name`; its id, or null once the list is full. */
+export function saveBoard(name: string, board: CustomBoard): string | null {
   const boards = savedBoards();
   if (boards.length >= MAX_SAVED_BOARDS) return null;
   const id = `${ID_PREFIX}${Date.now().toString(36)}`;
-  write([...boards, { id, name, ...colors }]);
+  write([...boards, { id, name, ...board }]);
   return id;
 }
 

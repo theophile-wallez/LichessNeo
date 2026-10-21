@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { BACKLIT_BOARDS } from '#shared/backlit.ts';
+import { MATERIAL_BOARDS } from './materials.ts';
 import type * as SavedBoards from './saved-boards.ts';
 import type * as Themes from './themes.ts';
 
@@ -17,15 +18,24 @@ afterEach(() => {
 });
 
 describe('the extension’s themes', () => {
-  it('list the accent’s board, the presets, the saved boards, the custom one, then the backlit family', async () => {
+  it('list the accent’s board, the presets, the saved boards, the custom one, then the families', async () => {
     const { saveBoard, themesOf } = await load();
     const before = themesOf('board').map(theme => theme.id);
+    const listedLast = [
+      'custom',
+      ...MATERIAL_BOARDS.map(board => board.id),
+      ...BACKLIT_BOARDS.map(board => board.id),
+    ];
     expect(before[0]).toBe('accent');
     expect(before[1]).toBe('tone-neo');
-    expect(before.slice(-7)).toEqual(['custom', ...BACKLIT_BOARDS.map(board => board.id)]);
+    expect(before.slice(-listedLast.length)).toEqual(listedLast);
     const id = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
     const after = themesOf('board');
-    expect(after.map(theme => theme.id)).toEqual([...before.slice(0, -7), id, ...before.slice(-7)]);
+    expect(after.map(theme => theme.id)).toEqual([
+      ...before.slice(0, -listedLast.length),
+      id,
+      ...listedLast,
+    ]);
     expect(after.find(theme => theme.id === id)).toEqual({
       id,
       name: 'Sea',

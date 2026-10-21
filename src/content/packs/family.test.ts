@@ -47,7 +47,7 @@ const section = (panel: HTMLElement): HTMLElement | null =>
 const familyView = (panel: HTMLElement): HTMLElement | null =>
   queryOne(panel, '.ln-ext-src-family[data-ln-ext-family="backlit"]', HTMLElement);
 const familyTile = (panel: HTMLElement): HTMLElement | null =>
-  queryOne(panel, '.ln-ext-src-family-item', HTMLElement);
+  queryOne(panel, '.ln-ext-src-family-item[data-ln-ext-family="backlit"]', HTMLElement);
 const button = (panel: HTMLElement, selector: string): HTMLElement => {
   const found = queryOne(panel, selector, HTMLElement);
   if (!found) throw new Error(`no ${selector}`);
@@ -104,7 +104,7 @@ describe('the backlit family', () => {
     await flush();
     expect(familyTile(panel)?.classList.contains('active')).toBe(true);
     expect(
-      queryOne(panel, '.ln-ext-src-family-item .ln-ext-src-thumb', HTMLElement)?.dataset.lnExtTheme,
+      familyTile(panel)?.querySelector<HTMLElement>('.ln-ext-src-thumb')?.dataset.lnExtTheme,
     ).toBe('backlit-forest');
     expect(
       button(panel, '[data-ln-ext-choice="backlit-forest"]').classList.contains('active'),
@@ -137,6 +137,28 @@ describe('the backlit family', () => {
     expect(localStorage.getItem('ln-ext-backlit-light')).toBe('rainbow');
     expect(button(light, '[data-ln-ext-option="sides"]').dataset.lnExtTip).toBe(
       'One color for White, one for Black',
+    );
+  });
+});
+
+describe('the material family', () => {
+  it('shows its first board on its tile, then the one picked in it', async () => {
+    await start();
+    const panel = await openPanel('board');
+    const tile = button(panel, '.ln-ext-src-family-item[data-ln-ext-family="materials"]');
+    const thumb = (): HTMLElement => button(tile, '.ln-ext-src-thumb');
+    expect(thumb().style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
+      'var(--ln-ext-texture-ash)',
+    );
+    tile.click();
+    const view = button(panel, '.ln-ext-src-family[data-ln-ext-family="materials"]');
+    expect(queryAll(view, '.ln-ext-src-item', HTMLElement)).toHaveLength(14);
+    button(view, '[data-ln-ext-choice="materials-zellige"]').click();
+    await flush();
+    expect(thumb().dataset.lnExtTheme).toBe('materials-zellige');
+    expect(thumb().style.getPropertyValue('--ln-ext-thumb-dark')).toBe('#2f7a82');
+    expect(thumb().style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
+      'var(--ln-ext-texture-zellige)',
     );
   });
 });

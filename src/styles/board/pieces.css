@@ -17,28 +17,52 @@
 /* ---- Board and pieces --- */
 
 /* Our two-tone boards: white and the color theme's accent (theme/base.css), the custom board
- * the user colors (content/packs/custom-board.ts), or one in set colors, a preset's or a saved
- * one's (content/packs/flat-boards.ts).
+ * the user colors (content/packs/custom-board.ts), or one in set colors, a preset's, a
+ * material one's or a saved one's (content/packs/flat-boards.ts).
  * A tile of 2×2 squares, light top left: a8 and h1 are light whichever side is down. */
 html[data-ln-ext-board='custom'] {
   --ln-ext-board-light: var(--ln-ext-board-custom-light, #f7f8f8);
   --ln-ext-board-dark: var(--ln-ext-board-custom-dark, #5e6ad2);
+  --ln-ext-board-texture: var(--ln-ext-board-custom-texture, none);
+  --ln-ext-board-strength: var(--ln-ext-board-custom-strength, 100%);
 }
 
 html[data-ln-ext-board='flat'] {
   --ln-ext-board-light: var(--ln-ext-board-flat-light, #f7f8f8);
   --ln-ext-board-dark: var(--ln-ext-board-flat-dark, #5e6ad2);
+  --ln-ext-board-texture: var(--ln-ext-board-flat-texture, none);
+  --ln-ext-board-strength: var(--ln-ext-board-flat-strength, 100%);
 }
 
+/* A texture (board/textures.css) is a grey relief over the squares in `hard-light`: mid-grey
+ * leaves a color as it is, darker darkens it, lighter lightens it, so any colors take it. Its
+ * strength veils it with the squares again, the more see-through the stronger it shows. */
 html:is([data-ln-ext-board='accent'], [data-ln-ext-board='custom'], [data-ln-ext-board='flat'])
   body
   .is2d
   cg-board::before {
-  background-image: repeating-conic-gradient(
-    var(--ln-ext-board-dark) 0 25%,
-    var(--ln-ext-board-light) 0 50%
-  ) !important;
-  background-size: 25% 25% !important;
+  --ln-ext-board-veil-light: color-mix(
+    in srgb,
+    var(--ln-ext-board-light),
+    transparent var(--ln-ext-board-strength, 100%)
+  );
+  --ln-ext-board-veil-dark: color-mix(
+    in srgb,
+    var(--ln-ext-board-dark),
+    transparent var(--ln-ext-board-strength, 100%)
+  );
+  background-image:
+    repeating-conic-gradient(
+      var(--ln-ext-board-veil-dark) 0 25%,
+      var(--ln-ext-board-veil-light) 0 50%
+    ),
+    var(--ln-ext-board-texture, none),
+    repeating-conic-gradient(var(--ln-ext-board-dark) 0 25%, var(--ln-ext-board-light) 0 50%) !important;
+  background-size:
+    25% 25%,
+    100% 100%,
+    25% 25% !important;
+  background-blend-mode: normal, hard-light, normal !important;
   filter: none !important;
   opacity: 1 !important;
 }

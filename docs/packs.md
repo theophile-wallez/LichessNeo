@@ -3,7 +3,9 @@
 The extension shows its own blue board and Lichess's pieces and sounds, until
 you pick others in the user menu's Board, Piece set and Sound panels: the
 **Extension** tab has the extension's own and your packs, the **Lichess** tab
-Lichess's. The extension's own are its blue board, its backlit boards (one
+Lichess's. The extension's own are its blue board, the custom board you color
+and may give a texture, its material boards (one **Materials** tile: wood,
+stone, metal, cloth, paper), its backlit boards (one
 **Backlit** tile, which opens onto the six of them and how they light up),
 its **Ascent** sound set, played live, with where it puts each move's
 sound, and its **Boxwood** set, wooden pieces recorded on a board, several

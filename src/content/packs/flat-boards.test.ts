@@ -33,9 +33,16 @@ describe('the two-tone boards', () => {
     ]);
   });
 
-  it('find a preset or a saved board by its id, and nothing else', async () => {
+  it('find a preset, a material or a saved board by its id, and nothing else', async () => {
     const { flatBoard, saveBoard } = await load();
     expect(flatBoard('tone-ember')?.dark).toBe('#e2622a');
+    expect(flatBoard('materials-marble')).toEqual({
+      id: 'materials-marble',
+      name: 'Marble',
+      light: '#f7f5ef',
+      dark: '#636b77',
+      texture: 'marble',
+    });
     const id = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
     expect(flatBoard(id)).toEqual({ id, name: 'Sea', light: '#ffffff', dark: '#123456' });
     expect(flatBoard('accent')).toBeUndefined();
@@ -50,6 +57,15 @@ describe('the two-tone boards', () => {
     expect(shown(root, FLAT)).toEqual(['', '']);
   });
 
+  it('put the shown board’s texture on <html>, and take it off for one without', async () => {
+    const { flatBoard, showFlatBoard } = await load();
+    const texture = ['--ln-ext-board-flat-texture', '--ln-ext-board-flat-strength'];
+    showFlatBoard(flatBoard('materials-felt'));
+    expect(shown(root, texture)).toEqual(['var(--ln-ext-texture-felt)', '100%']);
+    showFlatBoard(flatBoard('tone-grove'));
+    expect(shown(root, texture)).toEqual(['', '']);
+  });
+
   it('give a tile its squares to draw', async () => {
     const { showSquares } = await load();
     const thumb = document.createElement('span');
@@ -58,6 +74,11 @@ describe('the two-tone boards', () => {
     expect(shown(thumb, ['--ln-ext-thumb-light', '--ln-ext-thumb-dark'])).toEqual([
       '#eeeeee',
       '#333333',
+    ]);
+    showSquares(thumb, { light: '#eeeeee', dark: '#333333', texture: 'cork', strength: 20 });
+    expect(shown(thumb, ['--ln-ext-thumb-texture', '--ln-ext-thumb-strength'])).toEqual([
+      'var(--ln-ext-texture-cork)',
+      '20%',
     ]);
   });
 });

@@ -63,6 +63,10 @@
     "message": "Backlit",
     "description": "Over the extension's backlit boards, whose squares light up around each move."
   },
+  "looksMaterials": {
+    "message": "Materials",
+    "description": "Over the extension's textured boards: wood, stone, metal, cloth, paper."
+  },
   "looksLichess": {
     "message": "Lichess",
     "description": "Over Lichess's own boards, pieces or sounds."

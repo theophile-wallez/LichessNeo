@@ -35,6 +35,16 @@ describe('the saved boards', () => {
     expect((await load()).savedBoards()).toEqual(savedBoards());
   });
 
+  it('keeps a board’s texture and its strength', async () => {
+    const { saveBoard, savedBoards } = await load();
+    const id = saveBoard('Oak', { ...COLORS, texture: 'end-grain', strength: 60 });
+    vi.resetModules();
+    expect((await load()).savedBoards()).toEqual([
+      { id, name: 'Oak', ...COLORS, texture: 'end-grain', strength: 60 },
+    ]);
+    expect(savedBoards()).toHaveLength(1);
+  });
+
   it('saves no more once the list is full', async () => {
     const { MAX_SAVED_BOARDS, saveBoard, savedBoards } = await load();
     for (let i = 0; i < MAX_SAVED_BOARDS; i++) {

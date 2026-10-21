@@ -192,8 +192,9 @@ hold:
 - `src/styles/`: one stylesheet per page or part, a folder of partials past
   400 lines, joined in `index.css`'s order.
 - `public/`: copied into each build: `_locales/`, `icons/`, `img/` (`icons`,
-  `hugeicons`, `sidebar`, `coaches`), `sounds/boxwood` (the Boxwood set's
-  takes), beside the bundled packages' licenses (`scripts/lib/licenses.ts`).
+  `hugeicons`, `sidebar`, `coaches`, `boards`: the board textures),
+  `sounds/boxwood` (the Boxwood set's takes), beside the bundled packages'
+  licenses (`scripts/lib/licenses.ts`).
 - `scripts/`: build, package, typecheck, source rules, version, icons, store
   image rendering, store publishing.
 - `playground/`: the mascots' playground (`pnpm playground`), a page apart
@@ -244,13 +245,19 @@ What each feature folder holds is listed in
   are our own drawings, 96px WebP in `img/sidebar`. The build fails on a CSS
   extension URL whose file is missing or not in `web_accessible_resources`.
   Boards and piece sets aren't bundled: they're Lichess's, or a pack's
-  (`docs/packs.md`); nor are sounds, but for our two sets, Ascent
+  (`docs/packs.md`), but for our two-tone boards' textures (see "A board
+  texture"); nor are sounds, but for our two sets, Ascent
   (synthesized) and Boxwood (recorded, `public/sounds/boxwood`, cut by
   `tools/boxwood-sounds/cut.py`; the build fails unless its takes are the ones
   `RECORDED_TAKES` counts). A new sound a pack may have goes in
   `src/shared/sounds.ts`.
 - _A chart:_ redrawn in SVG from the page's data, in the rating chart's look
   (see "Every chart is modern"), with `src/shared/charts/`.
+- _A board texture:_ a material in `tools/board-materials/materials.py`
+  (drawn from seeded noise, never from another site's image), run
+  `generate.py`, then its line in `TEXTURES` (`content/packs/textures.ts`), its
+  variable in `styles/board/textures.css`, and its board in `materials.ts`, in
+  the colors the generator prints.
 - _An icon:_ an interface icon (a button's, a control's, a menu's, a
   field's) is one of Hugeicons' free icons (`@hugeicons/core-free-icons`,
   MIT, stroke rounded), never one drawn by hand. In TS, import it on its

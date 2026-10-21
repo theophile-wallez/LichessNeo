@@ -94,7 +94,13 @@ export function createManifest(target: Target, version: string): Manifest {
     ],
     web_accessible_resources: [
       {
-        resources: [OUTPUT.mascot, 'img/coaches/*', 'img/hugeicons/*', 'img/sidebar/*'],
+        resources: [
+          OUTPUT.mascot,
+          'img/boards/*',
+          'img/coaches/*',
+          'img/hugeicons/*',
+          'img/sidebar/*',
+        ],
         matches: LICHESS,
       },
     ],

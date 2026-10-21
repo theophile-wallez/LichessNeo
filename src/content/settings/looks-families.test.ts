@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { BACKLIT_BOARDS } from '#shared/backlit.ts';
 import { createElement, queryAll } from '#shared/dom.ts';
+import { MATERIAL_BOARDS } from '#content/packs/materials.ts';
 import { FAMILY_ROWS } from '#content/packs/options.ts';
 import type { Theme } from '#content/packs/themes.ts';
 import { familySections, hasFamilies } from './looks-families.ts';
@@ -21,9 +22,19 @@ describe('a looks card’s families', () => {
     expect(familySections('sound', tile)).toEqual([]);
   });
 
-  it('give the backlit boards a title, their tiles, then the settings they share', () => {
-    const [title, grid, rows, ...rest] = familySections('board', tile);
+  it('give the material and the backlit boards a title, their tiles, then the settings they share', () => {
+    const [materialsTitle, materials, materialRows, title, grid, rows, ...rest] = familySections(
+      'board',
+      tile,
+    );
     expect(rest).toEqual([]);
+    expect(materialsTitle?.textContent).toBe('looksMaterials');
+    expect(
+      queryAll(materials ?? document, 'button', HTMLElement).map(
+        button => button.dataset.lnExtChoice,
+      ),
+    ).toEqual(MATERIAL_BOARDS.map(board => board.id));
+    expect(materialRows?.children).toHaveLength(0);
     expect(title?.tagName).toBe('H4');
     expect(title?.textContent).toBe('looksBacklit');
     expect(
