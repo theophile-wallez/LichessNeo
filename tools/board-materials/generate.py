@@ -1,15 +1,12 @@
 """The board textures (public/img/boards): one grey relief per material, which
-styles/board/pieces.css lays over a board's two colors in `hard-light`. AVIF in
-greyscale, at a quality that keeps the rings, chips and dots but not the
-finest speckle: less than half WebP's size for the same look.
+styles/board/pieces.css lays over a board's two colors in `hard-light`.
 
 Each material is drawn in color from seeded noise, then turned into its
 relief: every pixel's lightness around its shade's mean, mid-grey where it
 equals it, so the relief over the material's own colors gives the drawing
 back. Lengths are in design pixels, a square being 80 of them, whatever size
 the board is drawn at. Prints each material's mean colors, which its ready-made
-board (content/packs/materials.ts) takes. Needs NumPy, SciPy and a Pillow that
-writes AVIF (`PIL.features.check('avif')`).
+board (content/packs/materials.ts) takes. Needs NumPy, SciPy and Pillow.
 
   python3 tools/board-materials/generate.py [material …]
 """
@@ -26,7 +23,7 @@ from materials import MATERIALS
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'public/img/boards'
-QUALITY = 50
+QUALITY = 86
 
 
 def lightness(image):
@@ -61,7 +58,7 @@ def main(names):
         level = relief(image)
         if gain != 1:
             level = np.clip(128 + (level.astype(float) - 128) * gain, 0, 255).astype(np.uint8)
-        Image.fromarray(level, 'L').save(OUT / f'{name}.avif', quality=QUALITY, subsampling='4:0:0')
+        Image.fromarray(level, 'L').save(OUT / f'{name}.webp', quality=QUALITY)
         print(f'{name}: light {mean_color(image, ~dark)}, dark {mean_color(image, dark)}')
     print(f'{BOARD}px boards in {OUT.relative_to(ROOT)}')
 
