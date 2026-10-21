@@ -92,14 +92,21 @@ export type MoveSoundName = Extract<
   | 'capture-promote'
 >;
 
-/** The sounds that aren't a move's: Foley's own cues. */
-export const CUES: Readonly<Record<Exclude<SoundName, MoveSoundName>, CueName>> = {
-  premove: 'tick',
-  illegal: 'denied',
-  notify: 'chime',
-  tenseconds: 'warning',
-  'game-start': 'ready',
-  'game-end': 'complete',
-};
+/** What Ascent leaves unsaid: a mate is heard as the check it is. */
+type SilentSoundName = Extract<SoundName, 'checkmate'>;
 
-export const isMoveSound = (name: SoundName): name is MoveSoundName => !(name in CUES);
+/** The sounds that aren't a move's: Foley's own cues. */
+export const CUES: Readonly<Record<Exclude<SoundName, MoveSoundName | SilentSoundName>, CueName>> =
+  {
+    premove: 'tick',
+    illegal: 'denied',
+    notify: 'chime',
+    tenseconds: 'warning',
+    'game-start': 'ready',
+    'game-end': 'complete',
+  };
+
+export const isCue = (name: SoundName): name is keyof typeof CUES => name in CUES;
+
+export const isMoveSound = (name: SoundName): name is MoveSoundName =>
+  !isCue(name) && name !== 'checkmate';

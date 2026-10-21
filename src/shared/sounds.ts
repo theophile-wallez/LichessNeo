@@ -16,6 +16,7 @@ export const SoundNameSchema = z.enum([
   'castle',
   'promote',
   'capture-promote',
+  'checkmate',
   'premove',
   'illegal',
   'notify',

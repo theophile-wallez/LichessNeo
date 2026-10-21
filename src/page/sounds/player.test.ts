@@ -59,6 +59,20 @@ const takes = (...sounds: [SoundName, number][]): Map<SoundName, string[]> =>
     ]),
   );
 
+// A set with a mate's sound.
+const hookedWithMate = (): ReturnType<typeof fakeSoundPlayer> => {
+  const player = fakeSoundPlayer();
+  hookSoundPlayer(
+    player.sound,
+    takes(['move-check', 1], ['capture', 1], ['checkmate', 1]),
+    createSession(),
+  );
+  return player;
+};
+// How many times the mate's sound played.
+const mates = (calls: readonly PlayerCall[]): number =>
+  played(calls).filter(name => name === 'ln-ext-checkmate').length;
+
 beforeEach(() => {
   vi.useFakeTimers({
     toFake: ['setTimeout', 'clearTimeout', 'requestAnimationFrame', 'cancelAnimationFrame', 'Date'],
@@ -299,6 +313,74 @@ describe('hookSoundPlayer', () => {
       await vi.advanceTimersByTimeAsync(20);
       expect(played(calls)).toEqual(['ln-ext-move-opponent', 'ln-ext-move-self']);
       expect(calls.filter(call => call[0] === 'move')).toEqual([]);
+    });
+  });
+
+  describe('mates', () => {
+    it('plays a mate’s sound after its move’s, in place of Lichess’s victory', async () => {
+      const { sound, calls } = hookedWithMate();
+      sound.move({ san: 'Qxf7#', ply: 7 });
+      sound.play('victory');
+      await vi.advanceTimersByTimeAsync(250);
+      expect(played(calls)).toEqual(['ln-ext-move-check', 'ln-ext-checkmate']);
+      await vi.advanceTimersByTimeAsync(3000);
+      sound.play('defeat');
+      expect(played(calls).at(-1)).toBe('defeat');
+    });
+
+    it('plays it once our own move’s SAN comes back a mate, after its board sound', async () => {
+      const { sound, calls } = hookedWithMate();
+      sound.move({ name: 'capture' });
+      await vi.advanceTimersByTimeAsync(20);
+      sound.move({ san: 'Qxf7#', ply: 7, filter: 'music' });
+      sound.play('defeat');
+      await vi.advanceTimersByTimeAsync(600);
+      expect(played(calls)).toEqual(['ln-ext-capture', 'ln-ext-checkmate']);
+    });
+
+    it('plays it once for an opponent’s mate, whose SAN comes before its board sound', async () => {
+      const { sound, calls } = hookedWithMate();
+      sound.move({ san: 'Qxf7#', ply: 7, filter: 'music' });
+      sound.move({ name: 'capture' });
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(played(calls)).toEqual(['ln-ext-move-check', 'ln-ext-checkmate']);
+      expect(mates(calls)).toBe(1);
+    });
+
+    it('plays it after a jump to the mate', async () => {
+      const { sound, calls } = hookedWithMate();
+      renderBoard({
+        placement: 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR',
+        lastMove: ['h5', 'f7'],
+        orientation: 'white',
+      });
+      sound.saySan?.('Qxf7#', true);
+      await vi.advanceTimersByTimeAsync(300);
+      expect(mates(calls)).toBe(1);
+      sound.saySan?.('Nf6', true);
+      await vi.advanceTimersByTimeAsync(300);
+      expect(mates(calls)).toBe(1);
+    });
+
+    it('leaves a mate to its check with the extension’s Ascent, which has no mate’s sound', async () => {
+      const { sound, calls } = fakeSoundPlayer();
+      const synthPlayed: SoundName[] = [];
+      const synth: Synth = { play: name => synthPlayed.push(name), setPlace: () => {} };
+      hookSoundPlayer(sound, takes(['checkmate', 1]), createSession(), () => synth);
+      sound.move({ san: 'Qxf7#', ply: 7 });
+      sound.play('victory');
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(played(calls)).toEqual([]);
+      expect(synthPlayed).toEqual(['move-check', 'game-end']);
+    });
+
+    it('leaves a mate to its check, and Lichess’s victory, for a set without one', async () => {
+      const { sound, calls } = fakeSoundPlayer();
+      hookSoundPlayer(sound, takes(['move-check', 1]), createSession());
+      sound.move({ san: 'Qxf7#', ply: 7 });
+      sound.play('victory');
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(played(calls)).toEqual(['ln-ext-move-check', 'victory']);
     });
   });
 });

@@ -18,12 +18,13 @@ export const RECORDED_TAKES: Readonly<Partial<Record<SoundName, number>>> = {
   'move-slide': 18,
   'move-slide-check': 18,
   capture: 8,
-  'capture-check': 3,
+  'capture-check': 2,
   'capture-slide': 18,
   'capture-slide-check': 18,
   castle: 4,
   promote: 4,
   'capture-promote': 4,
+  checkmate: 1,
   premove: 3,
 };
 

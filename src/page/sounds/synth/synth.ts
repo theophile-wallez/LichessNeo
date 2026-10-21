@@ -9,7 +9,15 @@ import {
   readBoard,
 } from '#page/sounds/board-reader.ts';
 import { advanced, pitchFor, placementFor } from './place.ts';
-import { CHECK, CUES, IMPACT, isMoveSound, type MoveSoundName, PIECE_SPECS } from './specs.ts';
+import {
+  CHECK,
+  CUES,
+  IMPACT,
+  isCue,
+  isMoveSound,
+  type MoveSoundName,
+  PIECE_SPECS,
+} from './specs.ts';
 
 // The extension's own sound set, played live by Foley (Web Audio, no file):
 // each piece its own sound, higher as it nears the other side, placed where
@@ -102,10 +110,11 @@ export function createSynth(initial: SoundPlace): Synth {
   return {
     play(name, volume) {
       if (volume <= 0) return;
-      if (!isMoveSound(name)) {
+      if (isCue(name)) {
         play(CUES[name], { volume });
         return;
       }
+      if (!isMoveSound(name)) return;
       requestAnimationFrame(() => {
         const state = readBoard(mainBoardWrap());
         const landing = state ? lastLanding(state.pieces, state.lastMove) : null;

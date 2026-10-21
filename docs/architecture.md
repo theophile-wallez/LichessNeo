@@ -124,7 +124,8 @@ so the logic can be unit-tested without a page.
 
 - `motion`.
 - `sounds`: `synth`, the Ascent sound set, played live by Foley; a sound's
-  takes, one at random, and the long moves that slide.
+  takes, one at random, the long moves that slide, and a mate's sound after
+  its move.
 - `labels`: Lichess's words for what the content script adds, copied onto
   `<html>`.
 - `board`: shapes, checkmate, the coach's drawings.

@@ -14,7 +14,10 @@ export interface JumpSounds {
   jumped(san: string | undefined): void;
 }
 
-export function watchJumps(session: SoundSession, play: (name: SoundName) => unknown): JumpSounds {
+export function watchJumps(
+  session: SoundSession,
+  play: (name: SoundName, san: string | undefined) => unknown,
+): JumpSounds {
   let movedThisTask = false;
   let pending: number | null = null;
   const cancel = (): void => {
@@ -38,7 +41,7 @@ export function watchJumps(session: SoundSession, play: (name: SoundName) => unk
         pending = null;
         const pieces = readBoard(mainBoardWrap())?.pieces ?? null;
         session.lastPieces = pieces ?? session.lastPieces;
-        play(soundOfShownMove(san, pieces ?? new Map(), boardOrientation()));
+        play(soundOfShownMove(san, pieces ?? new Map(), boardOrientation()), san);
       });
     },
   };

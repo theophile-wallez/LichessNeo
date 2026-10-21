@@ -58,8 +58,12 @@ CAPTURES = [
     (76.695, 76.793),
 ]
 # A capture that gives check is slammed: the hardest knocks, louder, ringing longer.
-SLAMS = [(19.628, 19.765), (29.531, 29.690), (52.948, 53.047)]
+# The hardest of all is the mate's own, left to it.
+SLAMS = [(29.531, 29.690), (52.948, 53.047)]
 SLAM_RING = 0.4
+# A mate: the hardest slam, after which a piece knocked over rocks still,
+# a dozen ever closer knocks over a second. (touch, slam, still)
+MATE = (19.600, 19.765, 21.100)
 # Two poses a quarter second apart: the king, then the rook.
 CASTLES = [(12.165, 12.404), (12.899, 13.148), (63.776, 64.047), (74.096, 74.391)]
 TAPS = [21.718, 66.880, 42.668]
@@ -117,6 +121,7 @@ LOUDNESS = {
     'move-check': -19,
     'capture': -22,
     'capture-check': -18,
+    'checkmate': -18,
     'castle': -21,
     'premove': -27,
     'move-slide': -42,
@@ -141,6 +146,8 @@ def takes():
         yield 'capture', touch, hit, CAPTURE_RING
     for touch, hit in SLAMS:
         yield 'capture-check', touch, hit, SLAM_RING
+    touch, slam, still = MATE
+    yield 'checkmate', touch, slam, still - slam
     for king, rook in CASTLES:
         yield 'castle', king, rook, 0.2
     for hit in TAPS:

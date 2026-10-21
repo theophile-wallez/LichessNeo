@@ -19,6 +19,7 @@ import { watchJumps, type JumpSounds } from './jumps.ts';
 import type { SoundSession } from './session.ts';
 import type { Synth } from './synth/synth.ts';
 import { gestureOfSan, gestureOnBoard, type Gesture } from './gesture.ts';
+import { createMateSound, isMate, type MateSound } from './mate.ts';
 import { createTakePicker } from './takes.ts';
 import { PREFIX } from '#shared/prefix.ts';
 
@@ -63,6 +64,7 @@ interface Hook {
   readonly playLichess: PlaySound;
   readonly playMove: PlayMove;
   readonly jumps: JumpSounds;
+  readonly mate: MateSound;
 }
 
 // Keeps the position the next move is compared with, once the board is redrawn.
@@ -88,13 +90,16 @@ function soundAfterBoardMove(session: SoundSession, lichessName: string | undefi
   };
 }
 
-function hookPlay({ sound, has, playOurs, playLichess }: Hook): void {
+const GAME_ENDS: ReadonlySet<unknown> = new Set(['victory', 'defeat']);
+
+function hookPlay({ sound, has, playOurs, playLichess, mate }: Hook): void {
   sound.play = (name: unknown, volume: unknown = 1): unknown => {
     if (typeof name === 'string' && !name.startsWith(NAME_PREFIX)) {
       // Our one check sound comes from move(). Lichess plays its own check and
       // mate sounds just before an opponent's move, or on the echo of ours.
       const ownCheck = name === 'check' || name === 'checkmate';
       if (ownCheck && has('move-check')) return Promise.resolve();
+      if (GAME_ENDS.has(name) && mate.ended()) return Promise.resolve();
       const ours = soundForLichessEvent(name);
       if (ours && has(ours)) return playOurs(ours, volume);
     }
@@ -103,14 +108,27 @@ function hookPlay({ sound, has, playOurs, playLichess }: Hook): void {
 }
 
 function hookMove(hook: Hook): void {
-  const { sound, session, playMove, jumps } = hook;
+  const { sound, session, playMove, jumps, mate } = hook;
   const moveLichess = sound.move.bind(sound);
   let serverMove: ServerMove | null = null;
 
   const playSan = ({ san, uci, ply }: Omit<ServerMove, 'at'>, volume: unknown): unknown => {
     rememberBoard(session);
     const name = soundFromSan(san, ply, boardOrientation());
-    return playMove(name, volume, san.includes('x'), gestureOfSan(san, uci));
+    const played = playMove(name, volume, san.includes('x'), gestureOfSan(san, uci));
+    if (isMate(san)) mate.mated(volume, played);
+    return played;
+  };
+  // Our own move sounded off the board before its SAN came back: a mate's SAN
+  // that no board sound takes is that echo.
+  const noteServerMove = ({ san, uci, ply, volume }: MoveOptions & { san: string }): void => {
+    const recent = { san, uci, ply, at: Date.now() };
+    serverMove = recent;
+    if (!isMate(san)) return;
+    mate.expect();
+    setTimeout(() => {
+      if (serverMove === recent) mate.mated(volume ?? 1);
+    }, FRESH_SAN_MS);
   };
   // Board moves on the game page, and drops (no argument).
   const playBoardMove = ({ name }: MoveOptions, volume: unknown): unknown => {
@@ -132,8 +150,7 @@ function hookMove(hook: Hook): void {
     const move = readMoveOptions(options);
     // The game page passes each server move here with its SAN (filter "music"),
     // just before chessground asks for the board sound: SAN says exactly what it was.
-    if (move.filter === 'music' && move.san)
-      serverMove = { san: move.san, uci: move.uci, ply: move.ply, at: Date.now() };
+    if (move.filter === 'music' && move.san) noteServerMove({ ...move, san: move.san });
     // Pentatonic, Lichess's 'music' theme, plays its notes on these, which ours replace; the
     // other themes play nothing on them.
     if (move.filter === 'music')
@@ -224,10 +241,18 @@ export function hookSoundPlayer(
     const { ours, lichess } = standIn(captured);
     return playOurs(name, volume) ?? playOurs(ours, volume) ?? playLichess(lichess, volume);
   };
-  const jumps = watchJumps(session, name => playMove(name, undefined, name === 'capture', null));
+  const mate = createMateSound({
+    has: () => synth() === null && urls.has('checkmate'),
+    play: volume => playTake('checkmate', volume),
+    lastMoveAt: () => session.lastMoveSoundAt,
+  });
+  const jumps = watchJumps(session, (name, san) => {
+    const played = playMove(name, undefined, name === 'capture', null);
+    if (san !== undefined && isMate(san)) mate.mated(undefined, played);
+  });
   const has = (name: SoundName): boolean => synth() !== null || urls.has(name);
   const active = (): boolean => synth() !== null || urls.size > 0;
-  const hook: Hook = { sound, has, active, session, playOurs, playLichess, playMove, jumps };
+  const hook: Hook = { sound, has, active, session, playOurs, playLichess, playMove, jumps, mate };
   hookPlay(hook);
   hookMove(hook);
   hookSaySan(hook);

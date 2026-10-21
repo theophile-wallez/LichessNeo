@@ -44,6 +44,15 @@ describe('the extension’s sound set', () => {
     expect(vi.mocked(play).mock.calls).toEqual([['chime', { volume: 0.5 }]]);
   });
 
+  it('leaves a mate to its move’s check', () => {
+    const synth = createSynth('none');
+    show({ placement: '4k3/4Q3/4K3/8/8/8/8/8', lastMove: ['e2', 'e7'] });
+    synth.play('checkmate', 1);
+    vi.runAllTimers();
+    expect(play).not.toHaveBeenCalled();
+    expect(playSpec).not.toHaveBeenCalled();
+  });
+
   it('plays the piece that moved, higher as it nears the other side, once the board shows it', () => {
     const synth = createSynth('none');
     show({ placement: '4k3/8/8/8/8/5N2/8/4K3', lastMove: ['g1', 'f3'] });

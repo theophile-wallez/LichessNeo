@@ -89,6 +89,7 @@ The sounds:
 | `castle`              | castling                                  |
 | `promote`             | a promotion                               |
 | `capture-promote`     | a promotion that captures                 |
+| `checkmate`           | after a move that mates: see below        |
 | `premove`             | a premove set                             |
 | `illegal`             | a move the board refuses                  |
 | `notify`              | a challenge, a message, a confirmation    |
@@ -102,7 +103,8 @@ the move's or the capture's sound, if the pack has it; a knight's move, which
 jumps, plays `move-knight`. A check plays `move-check`, or the sound of its
 whole gesture when the pack has it: `capture-check`, `move-slide-check` or
 `capture-slide-check`. A promotion that captures plays `capture-promote`,
-checking or not, if the pack has it.
+checking or not, if the pack has it. A mate plays its move's sound, then
+`checkmate` just after it, in place of Lichess's victory or defeat.
 
 ## Files
 
