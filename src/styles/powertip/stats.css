@@ -1,0 +1,236 @@
+/* ---- The player's numbers --- */
+
+/* What the hover card adds to Lichess's fragment (content/player-card): who the
+   player is, the rating they play most with its last month, their record, their
+   form, and the visitor's score against them. Each row only shows once Lichess
+   has answered for it, so the card grows as it loads. */
+
+#powerTip .ln-ext-upt {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 var(--ln-ext-upt-pad);
+}
+
+/* Rows of facts: dim, separated by middots, wrapping on a long one. */
+#powerTip :is(.ln-ext-upt__meta, .ln-ext-upt__facts) {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+#powerTip :is(.ln-ext-upt__meta, .ln-ext-upt__facts) > span:not(:first-child)::before {
+  content: '·';
+  margin-inline-end: 6px;
+}
+
+#powerTip .ln-ext-upt__facts {
+  margin-top: -4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Streaming now: Lichess's own red, as on its streamer page. */
+#powerTip .ln-ext-upt__live {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--ln-ext-bad);
+  color: var(--ln-ext-white);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ---- The rating they play most --- */
+
+#powerTip .ln-ext-upt__headline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--ln-ext-lift-4);
+  color: var(--ln-ext-text) !important;
+  transition: background-color 0.15s !important;
+}
+
+#powerTip .ln-ext-upt__headline:hover {
+  background: var(--ln-ext-lift-8);
+}
+
+/* Its glyph, in Lichess's icon font, then its name (theme/rating-glyphs.css). */
+#powerTip .ln-ext-upt__speed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#powerTip .ln-ext-upt__speed::before {
+  content: var(--ln-ext-perf-glyph, '');
+  color: var(--ln-ext-speed-color);
+  font-family: lichess;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+#powerTip .ln-ext-upt__rating {
+  color: var(--ln-ext-text-strong);
+  font-size: 17px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* Provisional, as Lichess marks it. */
+#powerTip .ln-ext-upt__rating > small {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.6;
+}
+
+#powerTip .ln-ext-upt__prog {
+  font-size: 12.5px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+#powerTip .ln-ext-upt__prog[data-ln-ext-trend='up'] {
+  color: var(--ln-ext-good);
+}
+
+#powerTip .ln-ext-upt__prog[data-ln-ext-trend='down'] {
+  color: var(--ln-ext-bad);
+}
+
+/* The last month of that rating, in the color it has on every chart of ours. */
+#powerTip .ln-ext-upt__curve {
+  flex: none;
+  width: 76px;
+  height: 26px;
+  margin-inline-start: auto;
+  overflow: visible;
+}
+
+#powerTip .ln-ext-upt__curve--empty {
+  box-sizing: border-box;
+  height: 1px;
+  margin-block: 12px;
+  border-bottom: 1px dashed var(--ln-ext-lift-12);
+}
+
+#powerTip .ln-ext-upt__line {
+  fill: none;
+  stroke: var(--ln-ext-speed-color);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+#powerTip .ln-ext-upt__stop {
+  stop-color: var(--ln-ext-speed-color);
+  stop-opacity: 0.32;
+}
+
+#powerTip .ln-ext-upt__stop--end {
+  stop-opacity: 0;
+}
+
+/* ---- Games won, drawn and lost --- */
+
+/* The color of a result, for the bar, its legend's bullets and the form's dots. */
+#powerTip [data-ln-ext-result='win'] {
+  --ln-ext-result-color: var(--ln-ext-good);
+}
+
+#powerTip [data-ln-ext-result='draw'] {
+  --ln-ext-result-color: var(--ln-ext-neutral-10);
+}
+
+#powerTip [data-ln-ext-result='loss'] {
+  --ln-ext-result-color: var(--ln-ext-bad);
+}
+
+#powerTip .ln-ext-upt__bar {
+  display: flex;
+  gap: 2px;
+  height: 7px;
+  margin-bottom: -4px;
+}
+
+/* Each share grows by its own count (flex-grow), so no rounding shows. */
+#powerTip .ln-ext-upt__bar > span {
+  flex-basis: 0;
+  min-width: 3px;
+  border-radius: 4px;
+  background: var(--ln-ext-result-color);
+}
+
+#powerTip .ln-ext-upt__legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#powerTip .ln-ext-upt__legend > span::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-inline-end: 5px;
+  border-radius: 50%;
+  background: var(--ln-ext-result-color);
+}
+
+/* ---- Their last games --- */
+
+#powerTip .ln-ext-upt__form {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#powerTip .ln-ext-upt__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--ln-ext-result-color);
+  transition: transform 0.15s !important;
+}
+
+#powerTip .ln-ext-upt__dot:hover {
+  transform: scale(1.3);
+}
+
+#powerTip .ln-ext-upt__streak {
+  margin-inline-start: auto;
+  color: var(--ln-ext-good);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#powerTip .ln-ext-upt__best {
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s !important;
+}
+
+#powerTip .ln-ext-upt__best:hover {
+  color: var(--ln-ext-text-strong) !important;
+}

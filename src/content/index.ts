@@ -57,6 +57,7 @@ import { ownNameFeature } from './ui/own-name.ts';
 import { profileMedals } from './profile/medals.ts';
 import { profileAvatarLink } from './profile/avatar-link.ts';
 import { chesscomRatings } from './chesscom-ratings/index.ts';
+import { playerCard } from './player-card/index.ts';
 import { powertip } from './ui/powertip.ts';
 import { tooltip } from './ui/tooltip.ts';
 import { copyFields } from './ui/copy-fields.ts';
@@ -133,6 +134,7 @@ const FEATURES = [
   ownNameFeature,
   profileMedals,
   profileAvatarLink,
+  playerCard,
   powertip,
   tooltip,
   copyFields,

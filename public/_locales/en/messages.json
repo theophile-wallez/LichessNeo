@@ -1438,5 +1438,53 @@
   "roundPanelGame": {
     "message": "Game",
     "description": "The game panel's tab that shows the game's info, where the game has no chat."
+  },
+  "cardLive": {
+    "message": "Live",
+    "description": "The hover card's badge on a player who is streaming."
+  },
+  "cardFide": {
+    "message": "FIDE $1",
+    "description": "The hover card's FIDE rating; $1 is the rating."
+  },
+  "cardPlayedHours": {
+    "message": "$1 h played",
+    "description": "How long the player has played, in hours; $1 is the number."
+  },
+  "cardPlayedMinutes": {
+    "message": "$1 min played",
+    "description": "How long the player has played, under an hour; $1 is the number of minutes."
+  },
+  "cardTop": {
+    "message": "top $1 %",
+    "description": "Where their rating stands among that speed's players; $1 is a percentage."
+  },
+  "cardHighest": {
+    "message": "best $1",
+    "description": "The highest they ever reached in that rating; $1 is the rating."
+  },
+  "cardOpponents": {
+    "message": "avg opp $1",
+    "description": "The average rating of their opponents in that speed; $1 is the rating."
+  },
+  "cardWinShare": {
+    "message": "$1 % won",
+    "description": "The share of their games won; $1 is a percentage."
+  },
+  "cardDrawShare": {
+    "message": "$1 % drawn",
+    "description": "The share of their games drawn; $1 is a percentage."
+  },
+  "cardLossShare": {
+    "message": "$1 % lost",
+    "description": "The share of their games lost; $1 is a percentage."
+  },
+  "cardStreak": {
+    "message": "$1 wins in a row",
+    "description": "The winning streak they are on; $1 is how many games."
+  },
+  "cardBeat": {
+    "message": "Beat $1 ($2)",
+    "description": "Their best win: $1 is the opponent's name, $2 that opponent's rating."
   }
 }

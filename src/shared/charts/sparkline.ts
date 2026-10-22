@@ -1,7 +1,8 @@
-import { monotoneCurve } from '#shared/charts/curve.ts';
 import type { Point } from '#shared/geometry.ts';
+import { monotoneCurve } from './curve.ts';
 
-// A speed card's rating curve, in a 100 × 30 box: its line, and the area under it.
+// A rating's sparkline in a 100 × 30 box: its line, and the area under it. The
+// home's speed cards and the hover card draw the same one.
 
 const WIDTH = 100;
 const HEIGHT = 30;

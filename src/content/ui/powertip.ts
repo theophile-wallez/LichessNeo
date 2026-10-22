@@ -1,6 +1,7 @@
 import { closestTo, queryAll, setData, setStyleProperty } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { syncChesscomRatings } from '#content/chesscom-ratings/index.ts';
+import { syncPlayerCard } from '#content/player-card/index.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { syncAvatars } from './avatars.ts';
 import { fitCard } from './card-fit.ts';
@@ -47,6 +48,7 @@ function watch(card: HTMLElement): void {
       cleanRatings(card);
       syncChesscomRatings(card);
       syncAvatars(card);
+      syncPlayerCard(card);
     }
     fitPowertip(card);
   }).observe(card, { childList: true, attributes: true, attributeFilter: ['style'] });
@@ -54,6 +56,7 @@ function watch(card: HTMLElement): void {
   cleanRatings(card);
   syncChesscomRatings(card);
   syncAvatars(card);
+  syncPlayerCard(card);
 }
 
 // Lichess only adds the card on the first hover (or when idle, on the pages

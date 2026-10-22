@@ -1118,5 +1118,41 @@
   },
   "roundPanelGame": {
     "message": "Partie"
+  },
+  "cardLive": {
+    "message": "En direct"
+  },
+  "cardFide": {
+    "message": "FIDE $1"
+  },
+  "cardPlayedHours": {
+    "message": "$1 h de jeu"
+  },
+  "cardPlayedMinutes": {
+    "message": "$1 min de jeu"
+  },
+  "cardTop": {
+    "message": "top $1 %"
+  },
+  "cardHighest": {
+    "message": "record $1"
+  },
+  "cardOpponents": {
+    "message": "adv. moy. $1"
+  },
+  "cardWinShare": {
+    "message": "$1 % gagnées"
+  },
+  "cardDrawShare": {
+    "message": "$1 % nulles"
+  },
+  "cardLossShare": {
+    "message": "$1 % perdues"
+  },
+  "cardStreak": {
+    "message": "$1 victoires d’affilée"
+  },
+  "cardBeat": {
+    "message": "A battu $1 ($2)"
   }
 }

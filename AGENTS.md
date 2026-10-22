@@ -452,6 +452,7 @@ area it works on first:
 - `src/content/pages/`: the home's quick pairing and blog carousel,
   tournament podiums.
 - `src/content/ui/`: hover cards, tab bars redrawn on click.
+- `src/content/player-card/`: what Lichess's API says about a hovered player.
 - `src/content/profile/`: profiles.
 
 A new pitfall of one area goes in its file (a new one gets a `CLAUDE.md`

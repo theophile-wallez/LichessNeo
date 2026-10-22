@@ -1,39 +1,13 @@
 import { z } from 'zod/mini';
 import { SEEK_PERFS } from '#shared/custom-seek.ts';
 import { parseJson } from '#shared/json.ts';
+import { curveOf, type HistorySchema, seriesOf, START_RATING } from '#shared/rating-history.ts';
 import { CARD_SPEEDS, poolOfClock, type CardSpeed } from './pools.ts';
 
 // What the home's cards show, from Lichess's public API: each rating's
 // (a speed's or a variant's) value and games (`/api/user/<name>`), its recent ratings
 // (`/api/user/<name>/rating-history`) and the pool of its last game
 // (`/api/games/user/<name>`, one game a line).
-
-export const HistorySchema = z.array(
-  z.object({
-    name: z.string(),
-    points: z.array(z.tuple([z.number(), z.number(), z.number(), z.number()])),
-  }),
-);
-
-const CURVE_POINTS = 30;
-
-// Every rating starts there (Glicko-2's default, as Lichess has it).
-const START_RATING = 1500;
-
-/**
- * The curve's ratings, oldest first. Lichess keeps one a day, its last: a speed's first day
- * draws from where every rating starts, and the current rating ends the curve even before the
- * day's point is written.
- */
-type HistoryPoint = z.infer<typeof HistorySchema>[number]['points'][number];
-
-function curveOf(points: readonly HistoryPoint[], games: number, rating: number): number[] {
-  if (games === 0) return [];
-  const ratings = points.slice(-CURVE_POINTS).map(point => point[3]);
-  if (ratings.at(-1) !== rating) ratings.push(rating);
-  if (ratings.length === 1 && points.length <= 1) ratings.unshift(START_RATING);
-  return ratings.slice(-CURVE_POINTS);
-}
 
 const GameSchema = z.object({
   speed: z.string(),
@@ -113,9 +87,7 @@ const speedOf = (perf: string): CardSpeed | undefined => CARD_SPEEDS.find(speed 
 export function cardsOf({ user, history, last }: CardSources): Card[] {
   return SEEK_PERFS.map(key => {
     const perf = user.perfs[key];
-    // Its series are named by their key (`blitz`); Lichess's docs show them capitalized.
-    const points =
-      history.find(entry => entry.name.toLowerCase() === key.toLowerCase())?.points ?? [];
+    const points = seriesOf(history, key);
     const games = perf?.games ?? 0;
     const rating = perf?.rating ?? START_RATING;
     const card: Card = {

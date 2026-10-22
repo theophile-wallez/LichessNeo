@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { curvePaths } from './curve.ts';
+import { curvePaths } from './sparkline.ts';
 
 describe('curvePaths', () => {
   it('needs two ratings to draw a line', () => {

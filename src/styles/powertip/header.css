@@ -13,6 +13,10 @@
      Wide enough for a full name and four rating chips. */
   width: 340px !important;
   max-width: calc(100vw - 16px);
+  /* With the player's numbers (stats.css) and a mini board, the card can be taller than a
+     short window: it scrolls in place rather than hanging off its edge. */
+  max-height: calc(100dvh - 16px) !important;
+  overflow-y: auto !important;
   padding: var(--ln-ext-upt-pad) 0;
   border: 1px solid var(--ln-ext-menu-border);
   border-radius: 10px !important;

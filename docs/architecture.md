@@ -100,6 +100,11 @@ so the logic can be unit-tested without a page.
   redraws.
 - `profile`: a profile's medals, from `/api/user`, and on the user's own,
   their avatar's link to the settings'.
+- `player-card`: what the hover card says about a player besides Lichess's
+  own fragment, from its public API and only while their name is hovered:
+  who they are and when they last played, the rating they play most with its
+  progress, its last month and where it stands, their games won, drawn and
+  lost, their form and their best win.
 - `chesscom-ratings`: with the settings' Chess.com ratings on, every rating
   Lichess writes (`SPOTS`: a game's bars and info, mini games, game lists,
   rating cards and stats pages, hover cards, leaderboards, the lobby, arenas,

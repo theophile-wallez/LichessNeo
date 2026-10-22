@@ -1,15 +1,8 @@
 import { z } from 'zod/mini';
+import { HistorySchema } from '#shared/rating-history.ts';
 import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
 import { keepAccountRating } from '#content/sidebar/account-rating.ts';
-import {
-  CardSchema,
-  cardsOf,
-  CardUserSchema,
-  HistorySchema,
-  lastPools,
-  newestPool,
-  type Card,
-} from './data.ts';
+import { CardSchema, cardsOf, CardUserSchema, lastPools, newestPool, type Card } from './data.ts';
 import { CARD_SPEEDS, type CardSpeed } from './pools.ts';
 
 // The signed-in player's cards, kept so the home draws them at once, then
