@@ -1,0 +1,126 @@
+/* Insights: the answer's numbers under the chart, and the games it stands on
+ * as little cards. The table says the same as the chart, so it stays quiet. */
+
+main#insight .insight__main > .hscroll {
+  padding: 4px 6px 6px !important;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 18px;
+  background: var(--ln-ext-card-bg);
+  overflow-x: auto;
+}
+
+main#insight table.slist {
+  width: 100%;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+main#insight table.slist thead th {
+  padding: 12px 14px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+main#insight table.slist tbody tr {
+  border: 0 !important;
+  background: transparent !important;
+  transition: background-color 0.15s !important;
+}
+
+main#insight table.slist tbody tr:hover {
+  background: var(--ln-ext-lift-4) !important;
+}
+
+main#insight table.slist tbody :is(th, td) {
+  padding: 10px 14px !important;
+  border: 0 !important;
+  border-top: 1px solid var(--ln-ext-border) !important;
+  font-size: 13.5px;
+}
+
+main#insight table.slist tbody th {
+  color: var(--ln-ext-text) !important;
+  font-weight: 700;
+  text-align: left;
+}
+
+main#insight table.slist tbody td.data {
+  color: var(--ln-ext-text-strong) !important;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+main#insight table.slist tbody td.size {
+  color: var(--ln-ext-text-dim) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- The games behind the answer --- */
+
+main#insight .game-sample {
+  padding: 0 !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 18px !important;
+  overflow: visible !important;
+  background: var(--ln-ext-card-bg) !important;
+  box-shadow: none !important;
+}
+
+main#insight .game-sample > .top {
+  border-bottom: 1px solid var(--ln-ext-border) !important;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13.5px;
+}
+
+main#insight .game-sample > .boards {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 14px;
+  padding: 16px !important;
+}
+
+main#insight .game-sample > .boards > a {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 14px;
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text) !important;
+  text-decoration: none !important;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.2s !important;
+}
+
+main#insight .game-sample > .boards > a:hover {
+  transform: translateY(-3px);
+  border-color: var(--ln-ext-card-border-hover);
+}
+
+main#insight .game-sample > .boards .mini-board {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+main#insight .game-sample > .boards .vstext {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+/* Lichess paints its table's head; the card it sits on is enough. */
+main#insight table.slist thead tr {
+  background: transparent !important;
+}

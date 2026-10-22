@@ -1,0 +1,115 @@
+/* Insights below 1020px: one column, the answer first and the questions under
+ * it, with the title and the pickers still pinned at the top. */
+
+@media (max-width: 1019.98px) {
+  main#insight > .ready {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    margin: 0 8px;
+  }
+
+  /* The answer comes first; the column of questions follows it. */
+  main#insight > .ready > div:first-child {
+    position: static;
+    order: 2;
+    max-height: none;
+    overflow: visible;
+  }
+
+  main#insight > .ready > div:last-child {
+    order: 1;
+  }
+
+  main#insight header {
+    gap: 10px 14px;
+    margin-bottom: 12px;
+  }
+
+  main#insight header > h2.text {
+    flex: 1 1 100%;
+    font-size: 22px !important;
+  }
+
+  main#insight header > h2.text::before {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    mask:
+      url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg') center / 24px
+        24px no-repeat,
+      linear-gradient(#0000003d, #0000003d);
+  }
+
+  main#insight .axis-form {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+  }
+
+  main#insight .axis-form .ms-parent {
+    flex: 1 1 140px;
+  }
+
+  main#insight .axis-form .ms-choice {
+    width: 100% !important;
+  }
+
+  .ln-ext-ins__labels {
+    max-width: 150px;
+    padding-right: 10px;
+  }
+
+  .ln-ext-ins--curve .ln-ext-ins__plot {
+    height: 260px;
+  }
+}
+
+/* Phones: the names over their bars would be too narrow beside them. */
+@media (max-width: 599.98px) {
+  main#insight .chart {
+    padding: 14px 14px 10px !important;
+  }
+
+  .ln-ext-ins__labels {
+    max-width: 96px;
+    padding-right: 8px;
+  }
+
+  .ln-ext-ins__label {
+    font-size: 12px;
+  }
+
+  main#insight .game-sample > .boards {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    padding: 12px !important;
+  }
+}
+
+/* A phone gets Lichess's three views, one at a time (Presets, Filters,
+ * Insights, with the title only in the wide layout): the tabs are the page's
+ * head, so they stay pinned and the question scrolls with the answer. */
+@media (max-width: 649.29px) {
+  main#insight .view-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
+  }
+
+  main#insight header {
+    position: static;
+    box-shadow: none;
+  }
+
+  main#insight .view-tabs > .tab {
+    padding: 12px 6px !important;
+    color: var(--ln-ext-text-dim) !important;
+    font-size: 14px !important;
+    font-weight: 700;
+  }
+
+  main#insight .view-tabs > .tab.active {
+    color: var(--ln-ext-text-strong) !important;
+  }
+}

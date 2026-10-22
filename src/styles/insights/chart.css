@@ -1,0 +1,277 @@
+/* Insights, our chart (page/charts/insights/): a row per category, or a curve
+ * over time for the date dimension. Reuses ratingchart.css's chips, grid and
+ * tooltip. Lichess's canvas is hidden only once ours is in (.ln-ext-ins-on). */
+
+/* Lichess caps the answer's box at 70% of the page; here the grid's track
+ * sizes it, and its chart takes the height its rows need. */
+main#insight .ready .insight__main {
+  width: auto !important;
+  max-width: none !important;
+}
+
+main#insight .insight__main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main#insight .chart {
+  padding: 18px 20px 14px !important;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 18px;
+  background: var(--ln-ext-card-bg);
+}
+
+main#insight .chart.ln-ext-ins-on {
+  height: auto !important;
+}
+
+main#insight .chart.ln-ext-ins-on > canvas {
+  display: none !important;
+}
+
+.ln-ext-ins {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--ln-ext-font);
+}
+
+.ln-ext-ins__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ln-ext-ins__legend:empty {
+  display: none;
+}
+
+/* These chips are a legend, not toggles. */
+.ln-ext-ins__chip,
+.ln-ext-ins__chip:hover {
+  border-color: var(--ln-ext-card-border);
+  background: var(--ln-ext-lift-3);
+  cursor: default;
+}
+
+/* The category names take the first column, the plot the rest; both lay their
+ * rows out at --ln-ext-ins-row, so they line up without a measurement. */
+.ln-ext-ins__plot {
+  display: grid;
+  position: relative;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-width: 0;
+}
+
+.ln-ext-ins--curve .ln-ext-ins__plot {
+  grid-template-columns: minmax(0, 1fr);
+  height: clamp(220px, var(--ln-ext-main-h, 100dvh) - 520px, 420px);
+}
+
+.ln-ext-ins__labels {
+  display: flex;
+  flex-direction: column;
+  max-width: 190px;
+  padding-right: 14px;
+}
+
+.ln-ext-ins__labels:empty {
+  display: none;
+}
+
+.ln-ext-ins__label {
+  display: flex;
+  align-items: center;
+  height: var(--ln-ext-ins-row, 38px);
+  overflow: hidden;
+  color: var(--ln-ext-text);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ln-ext-ins__svg {
+  display: block;
+  overflow: visible;
+  touch-action: pan-y;
+}
+
+.ln-ext-ins--curve .ln-ext-ins__svg {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---- Bars --- */
+
+.ln-ext-ins__track {
+  fill: var(--ln-ext-lift-4);
+}
+
+.ln-ext-ins__bar {
+  transition:
+    opacity 0.2s,
+    filter 0.2s !important;
+}
+
+.ln-ext-ins__zero {
+  stroke: var(--ln-ext-lift-18);
+  stroke-dasharray: none;
+}
+
+.ln-ext-ins__value {
+  fill: var(--ln-ext-text-strong);
+  font: 800 12.5px var(--ln-ext-font);
+  font-variant-numeric: tabular-nums;
+  dominant-baseline: middle;
+}
+
+/* A share written inside its segment, over the series' color. */
+.ln-ext-ins__share {
+  fill: var(--ln-ext-ink);
+  font: 700 11px var(--ln-ext-font);
+  font-variant-numeric: tabular-nums;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.ln-ext-ins__row--on .ln-ext-ins__bar {
+  filter: brightness(1.18);
+}
+
+.ln-ext-ins__row--on .ln-ext-ins__track {
+  fill: var(--ln-ext-lift-8);
+}
+
+/* ---- Curve --- */
+
+.ln-ext-ins__line {
+  fill: none;
+  stroke: var(--ln-ext-series-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ln-ext-ins__point {
+  fill: var(--ln-ext-series-color);
+  opacity: 0.5;
+}
+
+.ln-ext-ins__cursor {
+  stroke: var(--ln-ext-lift-20);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s !important;
+}
+
+.ln-ext-ins__dot {
+  fill: var(--ln-ext-series-color);
+  stroke: var(--ln-ext-bg-panel);
+  stroke-width: 2.5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s !important;
+}
+
+.ln-ext-ins__svg--hover :is(.ln-ext-ins__cursor, .ln-ext-ins__dot) {
+  opacity: 1;
+}
+
+.ln-ext-ins__tip {
+  min-width: 180px;
+}
+
+/* ---- Intro --- */
+
+/* The bars grow from the axis, top row first; a curve draws itself. */
+.ln-ext-ins__svg--intro .ln-ext-ins__bar {
+  transform-box: fill-box;
+  transform-origin: left;
+  animation: ln-ext-ins-grow 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--ln-ext-bar-row, 0) * 45ms + var(--ln-ext-bar-index, 0) * 60ms);
+}
+
+.ln-ext-ins__svg--intro .ln-ext-ins__bar--neg {
+  transform-origin: right;
+}
+
+.ln-ext-ins__svg--intro :is(.ln-ext-ins__value, .ln-ext-ins__share) {
+  animation: ln-ext-ins-fade 0.4s ease-out both;
+  animation-delay: calc(var(--ln-ext-bar-row, 0) * 45ms + 180ms);
+}
+
+.ln-ext-ins__svg--intro .ln-ext-ins__line {
+  stroke-dasharray: 1;
+  animation: ln-ext-ins-draw 1s cubic-bezier(0.45, 0, 0.2, 1) both;
+}
+
+.ln-ext-ins__svg--intro :is(.ln-ext-ins__area, .ln-ext-ins__point) {
+  animation: ln-ext-ins-fade 0.6s ease-out 0.5s both;
+}
+
+@keyframes ln-ext-ins-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes ln-ext-ins-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ln-ext-ins-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Every row's number in one column, left-aligned past the track. */
+.ln-ext-ins__value {
+  text-anchor: start;
+}
+
+/* A value that runs backwards is a loss: it reads in the bad color. */
+.ln-ext-ins__bar--neg {
+  fill: var(--ln-ext-bad);
+}
+
+/* ---- The player's own average --- */
+
+/* Drawn over the bars or the curve, so a category can be read against it. */
+.ln-ext-ins__avg {
+  stroke: var(--ln-ext-text-strong);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Its chip's swatch is a dash, for the line it stands for. */
+.ln-ext-ins__chip--avg .ln-ext-rchart__swatch {
+  width: 14px;
+  height: 3px;
+  border-radius: 1px;
+}
+
+.ln-ext-ins__svg--intro .ln-ext-ins__avg {
+  animation: ln-ext-ins-fade 0.5s ease-out 0.45s both;
+}

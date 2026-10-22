@@ -1,3 +1,4 @@
+import { niceScale, type NiceScale } from '#shared/charts/steps.ts';
 import type { Padding } from '#shared/geometry.ts';
 import { roundTenth } from '#shared/math.ts';
 
@@ -9,20 +10,8 @@ export const PADDING: Padding = { top: 18, right: 48, bottom: 30, left: 50 };
 // Room above the columns for each marker's pill.
 export const MARKER_ROW = 30;
 
-export interface CountScale {
-  readonly step: number;
-  readonly max: number;
-}
-
-/** A round top for the player counts, in about four steps of 1, 2, 2.5 or 5 × 10ⁿ. */
-export function countScale(most: number): CountScale {
-  const rough = most / 4;
-  const magnitude = 10 ** Math.floor(Math.log10(rough === 0 ? 1 : rough));
-  const step =
-    [1, 2, 2.5, 5, 10].map(k => k * magnitude).find(candidate => candidate >= rough) ??
-    10 * magnitude;
-  return { step, max: Math.ceil(most / step) * step };
-}
+/** A round top for the player counts. */
+export const countScale = niceScale;
 
 interface Column {
   readonly x: number;
@@ -51,7 +40,7 @@ export interface Geometry {
   /** The columns' top edge (under the markers' pills) and their axis. */
   readonly top: number;
   readonly bottom: number;
-  readonly counts: CountScale;
+  readonly counts: NiceScale;
   readonly binWidth: number;
   readonly x: (rating: number) => number;
   readonly yCount: (players: number) => number;

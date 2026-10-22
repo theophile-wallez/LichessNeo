@@ -1,7 +1,8 @@
 # Pages
 
-Where each page the sidebar lists stands in the redesign, and what it needs
-next. Update a page's row in the same change that moves it.
+Where each page the sidebar lists stands in the redesign, plus the ones a
+profile leads to, and what each needs next. Update a page's row in the same
+change that moves it.
 
 ## Levels
 
@@ -62,13 +63,14 @@ and a white knob, and a single big number in the state's color.
 
 ## Community
 
-| Page    | Path        | Level | Next                                                                                                                                        |
-| ------- | ----------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Players | `/player`   | 2     |                                                                                                                                             |
-| Profile | `/@/<user>` | 2     | the medals under the chart; below 1020px one column of cards 12px apart, the ratings a strip that fades at its edges                        |
-| Teams   | `/team`     | 1     | one bare card on an empty page: a team card and an empty state with a mascot; a team's page is still Lichess's, without its box below 800px |
-| Forum   | `/forum`    | 2     |                                                                                                                                             |
-| Blog    | `/blog`     | 2     | below 1020px a post has no card around it                                                                                                   |
+| Page     | Path               | Level | Next                                                                                                                                        |
+| -------- | ------------------ | ----- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Players  | `/player`          | 2     |                                                                                                                                             |
+| Profile  | `/@/<user>`        | 2     | the medals under the chart; below 1020px one column of cards 12px apart, the ratings a strip that fades at its edges                        |
+| Teams    | `/team`            | 1     | one bare card on an empty page: a team card and an empty state with a mascot; a team's page is still Lichess's, without its box below 800px |
+| Insights | `/insights/<user>` | 2     | our chart in place of its Chart.js canvas; the table under it says the same thing twice; no signature yet                                   |
+| Forum    | `/forum`           | 2     |                                                                                                                                             |
+| Blog     | `/blog`            | 2     | below 1020px a post has no card around it                                                                                                   |
 
 ## Tools
 

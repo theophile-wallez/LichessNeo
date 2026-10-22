@@ -40,3 +40,7 @@ export function prependSvg(parent: Element, markup: SafeHtml): void {
 /** The pointer's x from the element's left edge. */
 export const pointerX = (event: MouseEvent, element: Element): number =>
   event.clientX - element.getBoundingClientRect().left;
+
+/** The pointer's y from the element's top edge. */
+export const pointerY = (event: MouseEvent, element: Element): number =>
+  event.clientY - element.getBoundingClientRect().top;

@@ -39,6 +39,8 @@ export const TAB_BARS: readonly TabBarKind[] = [
     "[aria-selected='true']",
     'pill',
   ),
+  // The questions' panels, and on a phone the three views Lichess shows one of.
+  kind('main#insight :is(.panel-tabs, .view-tabs)', '.tab', '.active', 'line'),
   kind('#dasher_app .ln-ext-src-tabs', 'button', '.active', 'pill'),
   kind('#dasher_app .ln-ext-src-options', 'button', '.active', 'pill'),
   kind('.ln-ext-looks .ln-ext-src-options', 'button', '.active', 'pill'),

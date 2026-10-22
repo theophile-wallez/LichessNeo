@@ -1,0 +1,209 @@
+/* Chess Insights (/insights/<user>/<metric>/<dimension>): the page's two
+ * columns, its pinned title and the pickers that go with it. The answer's
+ * chart is drawn by page/charts/insights/ (chart.css). */
+
+main#insight {
+  /* The page's color, on its title's tile, its icons and its chart. */
+  --ln-ext-ins-color: var(--ln-ext-cyan);
+  /* Lichess sizes this page's column to its content (1274px at a 1440 window)
+   * and #main-wrap's track then holds that width, which our sidebar leaves no
+   * room for: the column takes what's there instead. */
+  width: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  color: var(--ln-ext-text);
+  font-family: var(--ln-ext-font);
+}
+
+/* Lichess lays the page out in flex columns; ours is a grid, its filler hidden. */
+main#insight > .ready {
+  display: grid !important;
+  grid-template-columns: 302px minmax(0, 1fr);
+  gap: 0 22px;
+  align-items: start;
+}
+
+main#insight > .ready > span {
+  display: none;
+}
+
+/* Lichess gives its right-hand column 70% of the page, and on a phone its
+ * boxes a full 100vw, which our 8px margins then overflow: the grid's track
+ * and the cards size themselves here. */
+main#insight > .ready > div:is(:first-child, :last-child) {
+  width: auto !important;
+}
+
+main#insight :is(header, .axis-form, .hscroll, .game-sample, .box) {
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* The questions stay put while the answer scrolls, and scroll on their own
+ * from the window's edge when they're taller than it (AGENTS.md, "The top room"). */
+main#insight > .ready > div:first-child {
+  position: sticky;
+  top: var(--ln-ext-page-top, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: calc(100dvh - var(--ln-ext-page-top, 16px) * 2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+main#insight > .ready > div:last-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ---- The pinned title --- */
+
+/* Lichess's header has a height of its own, which the pickers overflow once
+ * they wrap under the title. */
+main#insight header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: auto !important;
+  min-height: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 0 0 16px;
+  padding: 0 0 14px;
+  border: 0 !important;
+  background: var(--ln-ext-bg-page);
+  /* The page's color over the scroller's top room, above the title. */
+  box-shadow: var(--ln-ext-pin-cover);
+}
+
+main#insight header > h2.text {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 16px;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 27px !important;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* The page's tile: the icon at full strength over a quarter of it. Lichess's
+ * own glyph is drawn as the same Hugeicon (theme/hugeicons), but its narrow
+ * title ("Insights") carries no glyph at all, so the icon is named here. */
+main#insight header > h2.text::before {
+  content: '' !important;
+  display: block !important;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  margin: 0 !important;
+  border-radius: 13px;
+  background: var(--ln-ext-ins-color) !important;
+  -webkit-text-fill-color: initial;
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg') center / 30px 30px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
+  font-size: 0 !important;
+  opacity: 1 !important;
+}
+
+/* ---- The question's pickers --- */
+
+main#insight .axis-form {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+}
+
+main#insight .axis-form .by {
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* The widget Lichess builds over each select (multiple-select). */
+main#insight .axis-form .ms-parent {
+  width: auto !important;
+}
+
+main#insight .axis-form .ms-choice {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  width: auto !important;
+  height: 40px !important;
+  padding: 0 14px !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 11px !important;
+  background: var(--ln-ext-bg-raised) !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 38px !important;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s !important;
+}
+
+main#insight .axis-form .ms-choice:hover {
+  border-color: var(--ln-ext-ins-color) !important;
+  background: var(--ln-ext-bg-raised-hover) !important;
+}
+
+main#insight .axis-form .ms-choice > span {
+  position: static !important;
+  padding: 0 !important;
+  color: inherit !important;
+  line-height: inherit !important;
+}
+
+main#insight .ms-choice > div.icon-caret {
+  position: static !important;
+  border: 0 !important;
+  margin: 0 !important;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg') center /
+    contain no-repeat;
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+main#insight .axis-form .ms-drop {
+  border: 1px solid var(--ln-ext-menu-border) !important;
+  border-radius: 12px !important;
+  background: var(--ln-ext-menu-bg) !important;
+  box-shadow: var(--ln-ext-menu-shadow) !important;
+  padding: 6px !important;
+}
+
+main#insight .axis-form .ms-drop ul > li {
+  border-radius: 8px;
+}
+
+main#insight .axis-form .ms-drop ul > li.group > .group-label {
+  color: var(--ln-ext-text-dim);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+main#insight .axis-form .ms-drop ul > li label {
+  color: var(--ln-ext-text);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+main#insight .axis-form .ms-drop ul > li:hover {
+  background: var(--ln-ext-menu-hover);
+}

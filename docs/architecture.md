@@ -144,7 +144,8 @@ so the logic can be unit-tested without a page.
 - `board`: shapes, checkmate, the coach's drawings.
 - `backlit`: the backlit boards' light around each move.
 - `review`.
-- `charts`.
+- `charts`: a game's advantage and move times, the rating distribution, and
+  the insights page's answer, read off the data it fetches.
 - `game-over`: kings' badges, confetti, the coach's card in the panel.
 - `chat`: the chat's lines marked for their bubbles, its game events in the
   page's language.

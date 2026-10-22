@@ -18,7 +18,7 @@ export function tipLeft({ anchor, width, gap, limit }: Beside): number {
   return anchor + gap + width > limit ? anchor - gap - width : anchor + gap;
 }
 
-interface Placement {
+export interface Placement {
   readonly anchor: number;
   readonly gap: number;
   readonly limit: number;

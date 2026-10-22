@@ -1,0 +1,7 @@
+/* ---- Chess Insights (/insights/<user>) --- */
+
+@import './layout.css';
+@import './panels.css';
+@import './chart.css';
+@import './data.css';
+@import './narrow.css';

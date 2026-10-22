@@ -7,6 +7,7 @@ import { backlit } from './backlit/index.ts';
 import { review } from './review/index.ts';
 import { distribution } from './charts/distribution/index.ts';
 import { gameCharts } from './charts/game/index.ts';
+import { insights } from './charts/insights/index.ts';
 import { gameOver } from './game-over/index.ts';
 import { chat } from './chat/index.ts';
 import { nextGameSeek } from './seek/index.ts';
@@ -27,6 +28,7 @@ startFeatures([
   review,
   distribution,
   gameCharts,
+  insights,
   gameOver,
   chat,
   nextGameSeek,

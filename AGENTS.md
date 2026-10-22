@@ -423,7 +423,8 @@ features and its name: free analysis, open data, no ads.
 - **Every chart is modern:** Lichess's Chart.js canvases are redrawn in SVG
   from the page's data (`content/charts/rating-chart`,
   `page/charts/distribution`, `content/charts/radar`, `page/charts/game`
-  for a game's advantage and move times): smooth curves or
+  for a game's advantage and move times, `page/charts/insights` for the
+  insights page's answer and the player's own average over it): smooth curves or
   rounded columns over a gradient in the series' color (the same color for
   the same rating everywhere), a faint dashed grid, chips as the legend, a
   frosted tooltip, an entrance animation, labels from `i18n.site`, numbers
