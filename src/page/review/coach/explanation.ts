@@ -5,6 +5,7 @@ import type { MoveVerdict } from '#page/review/judge/types.ts';
 import type { CoachContext } from './context.ts';
 import { type Findings, findings, punishes } from './fact.ts';
 import { hash } from './hash.ts';
+import { continuesLine } from './line-facts.ts';
 import { oneOf, turnStep } from './said.ts';
 import { remark } from './remark.ts';
 import type { Threats } from './threat-facts.ts';
@@ -52,6 +53,35 @@ const speaksOfMate = ({ fact, followUp }: Findings): boolean =>
   [fact, followUp].some(said => said?.theme === 'mate');
 
 /**
+ * A move the coach found nothing concrete about gets a remark, which says
+ * nothing of the position: the engine's own line from there at least shows
+ * where the game is going, and its moves can be played on the board. It's the
+ * first thing dropped when the bubble lacks room.
+ */
+function continuation(move: MoveVerdict, language: ReviewLanguage): CommentPart[] {
+  const line = continuesLine(move);
+  if (!line) return [];
+  return [{ text: oneOf(language.facts.continues(line), move), droppable: true, detail: true }];
+}
+
+interface Good {
+  readonly move: MoveVerdict;
+  readonly context: CoachContext;
+  readonly all: Findings;
+  /** How the evaluation moved, said when it changed level. */
+  readonly told: CommentPart[];
+}
+
+// What the coach says of a move that needs no correction: its fact, or a
+// remark and where the game goes from there, then the move a little better.
+function goodComment({ move, context, all, told }: Good): CommentPart[] {
+  const found = all.fact?.text ?? null;
+  const better = all.followUp ? [say(all.followUp.text)] : [];
+  const ahead = found === null ? continuation(move, context.language) : [];
+  return [say(found ?? remark(move, context)), ...better, ...told, ...detailsOf(all), ...ahead];
+}
+
+/**
  * The coach's comment on a move: how the evaluation moved, and one fact from
  * the board and the engine, or a remark when a good move has nothing concrete
  * to say; after an error, the reply it lets in or the move to play instead. The trajectory
@@ -86,6 +116,5 @@ export function explanation(
     if (found === null) return [say(course), ...turned];
     return [...told, ...turned, say(found), ...(followUp ? [say(followUp.text)] : []), ...details];
   }
-  const better = followUp ? [say(followUp.text)] : [];
-  return [say(found ?? remark(move, context)), ...better, ...told, ...details];
+  return goodComment({ move, context, all, told });
 }

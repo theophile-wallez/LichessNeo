@@ -10,7 +10,7 @@ import {
   within,
 } from './en-grammar.ts';
 import { motifEn } from './en-motifs.ts';
-import type { LineFacts, Viewer } from './types.ts';
+import type { LineFacts, Viewer, Ways } from './types.ts';
 
 // The sentences read off the engine's lines: what a line wins, and the threats.
 
@@ -137,7 +137,20 @@ function mateThreatsEn(viewer: Viewer): MateThreatSentences {
   };
 }
 
+// Where the game is headed, read off the engine's own line: what the coach
+// says of a quiet move it has found nothing else to say about.
+const continuesEn = (line: string): Ways => [
+  `The game goes on: ${line}.`,
+  `From here, the engine plays ${line}.`,
+  `What follows: ${line}.`,
+];
+
+// A better move whose point the coach can't name: the line it was on.
+const betterLineEn = (line: string): Ways => [`The line: ${line}.`, `With it: ${line}.`];
+
 export const lineFactsEn = (viewer: Viewer): LineFacts => ({
+  continues: continuesEn,
+  betterLine: betterLineEn,
   motif: motifEn(viewer),
   material: materialEn,
   ...gainsEn(viewer),

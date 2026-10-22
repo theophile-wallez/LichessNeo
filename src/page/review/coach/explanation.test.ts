@@ -140,6 +140,54 @@ describe('the comment', () => {
     ]);
   });
 
+  // 8…c6 of the opera game: a best move that develops nothing, takes nothing,
+  // threatens nothing. Half the quiet good moves of a game are like it, and a
+  // remark alone ("Spot on.") says nothing of the position.
+  const QUIET = 'rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R b KQkq - 5 8';
+  const quiet = (line: readonly string[]): MoveVerdict =>
+    played({
+      fen: QUIET,
+      uci: 'c7c6',
+      ply: 16,
+      before: engineRecord(45, ['c7c6']),
+      after: engineRecord(46, line),
+    });
+
+  it('shows where the game goes when it has nothing else to say of a move', () => {
+    const parts = said(quiet(['b3a4', 'f8e7', 'c3e2', 'b8d7']));
+    // A remark stays on top: the coach has found no fact to open with.
+    expect(en.remarks('black').best).toContain(parts[0]?.text);
+    const ahead = parts.at(-1);
+    expect(ahead).toMatchObject({ detail: true, droppable: true });
+    expect(ahead?.text).toMatch(/The game goes on|From here, the engine plays|What follows/);
+    // The engine's own line, its moves playable on the board.
+    expect(ahead?.text).toContain('[[m:w:Qa4@a:b3a4]]');
+    expect(ahead?.text).toContain('Nbd7@a:b3a4,f8e7,c3e2,b8d7]]');
+  });
+
+  it('shows the line a better move was on, when it can’t say its point', () => {
+    // The same position, Black playing a6 instead of the engine's c6: a good
+    // move, and the coach has no point to name for c6 either.
+    const good = played({
+      fen: QUIET,
+      uci: 'a7a6',
+      ply: 16,
+      before: engineRecord(45, ['c7c6', 'b3a4', 'f8e7', 'c3e2']),
+      after: engineRecord(48),
+    });
+    const parts = said(good);
+    expect(parts[0]?.text).toMatch(/c6/);
+    const detail = parts.find(part => part.detail);
+    expect(detail?.text).toMatch(/The line|With it/);
+    expect(detail?.text).toContain('[[m:b:c6@b:c7c6]]');
+    expect(detail?.text).toContain('Ne2@b:c7c6,b3a4,f8e7,c3e2]]');
+  });
+
+  it('says nothing ahead without a line long enough to show a plan', () => {
+    expect(said(quiet(['b3a4'])).at(-1)?.detail).toBeUndefined();
+    expect(said(quiet([])).at(-1)?.detail).toBeUndefined();
+  });
+
   it('says a good capture, the better move, then the line below the rest', () => {
     // 20.Qxc6: the pawn falls, but Black wins it back; 20.Bf4 was a little better.
     const fen = '1r1q1rk1/5pbp/b1p1p1p1/p1Qp4/P2P4/4B1P1/1P2PPBP/2R1R1K1 w - - 1 20';

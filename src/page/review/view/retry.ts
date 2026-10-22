@@ -1,17 +1,17 @@
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { firstChild, parentPath } from '#page/lichess/tree.ts';
 import { normalizeUci } from '#page/review/chess/notation.ts';
-import { GOOD, isError } from '#page/review/classes/classes.ts';
+import { isError } from '#page/review/classes/classes.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import { goTo } from './navigation.ts';
+import { HINTS } from './retry-hint.ts';
 
 // Retry: back to the position before an error, the player looks for a better
-// move on the board. The engine's best is found, and so is any move it judges
-// as good as excellent; after two misses, the answer is played.
+// move on the board. The engine's best is found, and so is any move it no
+// longer judges an error; a miss is taken back, for as many tries as the
+// player wants, and the answer only comes when they ask for it.
 
-/** The misses before the answer shows. */
-const TRIES = 2;
 /** How long a miss stays on the board before it's taken back. */
 const MISS_MS = 2000;
 
@@ -34,11 +34,17 @@ export const canRetry = (move: JudgedMove | null, analysis: Analysis): boolean =
 export function startRetry(session: Session, analysis: Analysis, move: JudgedMove): void {
   const { view } = session;
   const path = view.lineOf?.move === move ? view.lineOf.path : analysis.path;
-  view.retry = { path, move, misses: 0, counted: null, revealed: false };
+  view.retry = { path, move, misses: 0, counted: null, hints: 0, revealed: false };
   view.explain = false;
   view.bestOf = null;
   view.lineOf = null;
   goTo(analysis, parentPath(path));
+}
+
+/** Asks for the next hint: which piece has to move, then its square. */
+export function askHint(session: Session): void {
+  const { retry } = session.view;
+  if (retry) retry.hints = Math.min(retry.hints + 1, HINTS);
 }
 
 /** Plays the engine's best from the position before the error. */
@@ -70,8 +76,10 @@ function triedOutcome(session: Session, analysis: Analysis): RetryOutcome {
     return retry.revealed ? { kind: 'revealed', san } : { kind: 'found', san, best: true };
   const tried = judgeAt(session.live, analysis, path);
   if (!tried) return { kind: 'checking' };
-  if (GOOD.has(tried.moveClass) || tried.moveClass === 'excellent')
-    return { kind: 'found', san, best: false };
+  // Any move that isn't an error any more answers the error, not the engine's
+  // alone: asking again for a move that already put the game right would read
+  // as a refusal of what the player found.
+  if (!isError(tried.moveClass)) return { kind: 'found', san, best: false };
   return { kind: 'wrong', tried };
 }
 
@@ -85,8 +93,9 @@ export function retryOutcome(session: Session, analysis: Analysis): RetryOutcome
 }
 
 /**
- * Follows the board: a retry the board has left ends, and a miss is taken
- * back after a moment, or turns into the answer after the last try.
+ * Follows the board: a retry the board has left ends, and a miss is taken back
+ * after a moment, for another try. The answer is never played in the player's
+ * place: the bubble asks them to try again, and only its button gives it.
  */
 export function followRetry(session: Session, analysis: Analysis): void {
   const { retry } = session.view;
@@ -106,8 +115,7 @@ export function followRetry(session: Session, analysis: Analysis): void {
   retry.misses++;
   setTimeout(() => {
     if (session.view.retry !== retry || analysis.path !== path) return;
-    if (retry.misses >= TRIES) revealRetry(session, analysis);
-    else goTo(analysis, parentPath(retry.path));
+    goTo(analysis, parentPath(retry.path));
     session.redraw(true);
   }, MISS_MS);
 }

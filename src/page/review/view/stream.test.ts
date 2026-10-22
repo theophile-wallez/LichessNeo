@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { WORD_MS } from '#shared/coach-voice.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { type CommentPart, commentKey, commentMarkup } from '#page/review/comment/markup.ts';
 import { fakeReviewLayout } from '#page/review/fixtures/fake-review-layout.ts';
@@ -55,5 +56,33 @@ describe('startStream', () => {
     const { session } = fitted([sentence('a', 10, true), sentence('c', 20, false)]);
     refitStream(session);
     expect(session.stream.state.dropped).toBe(0);
+  });
+});
+
+describe('the typing of a line in the title', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  // While retrying, the coach's line is the bubble's title, and it may be all it says.
+  it('types out a title’s words when the bubble has no comment under it', () => {
+    vi.useFakeTimers();
+    fakeReviewLayout();
+    const session = newSession();
+    const parts = [sentence('a', 3, false)];
+    session.stream.state = { key: commentKey(parts), shown: 0, dropped: 0 };
+    const markup = commentMarkup(parts, { stream: session.stream.state, language: en });
+    setHtml(session.elements.panel, html`<p class="ln-ext-bubble__title">${markup}</p>`);
+    startStream(session);
+    const typed = () =>
+      [...session.elements.panel.querySelectorAll('.ln-ext-w')].map(
+        word => !word.classList.contains('ln-ext-w--off'),
+      );
+    expect(typed()).toEqual([false, false, false]);
+    vi.advanceTimersByTime(WORD_MS * 2);
+    expect(typed()).toEqual([true, true, false]);
+    vi.advanceTimersByTime(WORD_MS);
+    expect(typed()).toEqual([true, true, true]);
+    expect(session.stream.timer).toBe(0);
   });
 });

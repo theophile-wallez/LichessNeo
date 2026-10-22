@@ -172,6 +172,31 @@ function scoreShowsGain(move: MoveVerdict, start: Ply | undefined, swing: Swing)
   return score - 100 * materialBalance(start.before, move.color) >= shown(swing.net);
 }
 
+// The plies of the engine's line the coach shows of a game going on: two moves
+// each side, enough to see a plan without reading out a variation.
+const CONTINUES_PLIES = 4;
+
+/**
+ * Where the game goes after the move, on the engine's own line, as playable
+ * chips: '' without a line, or one too short to show a plan. For a move the
+ * coach has found nothing else to say about, this is what it has.
+ */
+export function continuesLine(move: MoveVerdict): string {
+  const line = move.after.line ?? [];
+  const plies = playLine(move.position.fen, line.slice(0, CONTINUES_PLIES));
+  return plies.length < 2 ? '' : lineOf(plies, 'a');
+}
+
+/**
+ * Where the engine's own move would have led, as playable chips, the move
+ * first: what the coach shows of a better move it can't say the point of.
+ */
+export function betterLine(move: MoveVerdict): string {
+  const line = move.before.line ?? [];
+  const plies = playLine(move.previousPosition.fen, line.slice(0, CONTINUES_PLIES));
+  return plies.length < 2 ? '' : lineOf(plies, 'b');
+}
+
 /** What a good move wins along its line, past the reply to the move itself. */
 export function gainFact({ move, facts, me, them }: LineFactInput): Fact | null {
   const line = ownLine(move);

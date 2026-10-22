@@ -181,10 +181,12 @@ export const remarksFr: RemarkPools = {
     'La dame sort trop tôt : elle va se faire chasser.',
   ],
   earlyKing: ['Bouger le roi si tôt coûte le roque.', 'Le roi ferait mieux de rester à l’abri.'],
+  // Le premier coup d'un camp, la réponse comprise : rien ici ne doit se
+  // présenter comme le premier coup de la partie.
   firstMove: [
     'Une façon classique de commencer.',
-    'Un premier coup très joué.',
+    'Un choix très joué ici.',
     'Un début solide.',
-    'Un premier coup que jouent aussi les grands maîtres.',
+    'Les grands maîtres le jouent aussi.',
   ],
 };

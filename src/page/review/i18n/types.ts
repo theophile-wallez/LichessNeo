@@ -34,6 +34,13 @@ export interface RetryStrings {
   readonly wrong: (move: string) => string;
   /** The move played in the game, tried again. */
   readonly same: string;
+  /** The button asking for a hint, then for the one after it. */
+  readonly hint: string;
+  readonly another: string;
+  /** The first hint: which piece has to move, its square unsaid. */
+  readonly hintPiece: (piece: Piece) => string;
+  /** The second: the square it stands on, marked on the board too. */
+  readonly hintSquare: (square: string) => string;
   readonly reveal: string;
   readonly revealed: (best: string) => string;
 }
@@ -227,6 +234,10 @@ export interface LineFacts {
   readonly wouldHaveWon: (side: Color, gain: LineGain) => Ways;
   /** What a move wins along its line, the move first. */
   readonly winsAlong: (gain: LineGain) => Ways;
+  /** Where the game goes from here, for a move the coach finds nothing else to say about. */
+  readonly continues: (line: string) => Ways;
+  /** Where a better move would have led, when the coach can't say its point. */
+  readonly betterLine: (line: string) => Ways;
   /** The threat a move stops, and what it would have won. */
   readonly stopsThreat: (threat: string, material: string) => Ways;
   /** A mate stopped, and the piece given up to stop it, if one is. */

@@ -48,8 +48,8 @@ export function renderKey(session: Session, analysis: Analysis): string {
     session.lines.found.size,
     view.lineOf?.path ?? '',
     view.playing !== null,
-    // Retry's misses and answer.
-    view.retry ? `${view.retry.misses}:${view.retry.revealed}` : '',
+    // Retry's misses, hints and answer.
+    view.retry ? `${view.retry.misses}:${view.retry.hints}:${view.retry.revealed}` : '',
     liveDigest(reviewMove(session, analysis)),
     // The comment waits for the threats around its move.
     spokenReady(session, analysis),

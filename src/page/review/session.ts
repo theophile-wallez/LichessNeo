@@ -60,6 +60,8 @@ export interface RetryState {
   misses: number;
   /** The miss on the board, already counted. */
   counted: string | null;
+  /** The hints asked for, up to `HINTS` (view/retry-hint.ts). */
+  hints: number;
   /** The answer is on the board. */
   revealed: boolean;
 }

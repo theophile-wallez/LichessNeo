@@ -22,9 +22,13 @@ interface Fit {
 export const overflows = ({ scrollHeight, clientHeight, lineHeight }: Fit): boolean =>
   scrollHeight > clientHeight + (Number.parseFloat(lineHeight) || FALLBACK_LINE_HEIGHT) / 2;
 
+// The words the coach types: its comment's, and while retrying, its line in the
+// bubble's title too (a verdict's title is drawn whole, with no words to type).
+const WORDS = ':is(.ln-ext-bubble__title, .ln-ext-bubble__sub) .ln-ext-w';
+
 function tick(session: Session): void {
   const { stream } = session;
-  const words = queryAll(session.elements.panel, '.ln-ext-bubble__sub .ln-ext-w', HTMLElement);
+  const words = queryAll(session.elements.panel, WORDS, HTMLElement);
   const word = words[stream.state.shown];
   stream.state = { ...stream.state, shown: stream.state.shown + 1 };
   if (word) word.className = 'ln-ext-w ln-ext-w--in';
@@ -35,14 +39,9 @@ function tick(session: Session): void {
   }
 }
 
-/**
- * After a render: drops the sentence that doesn't fit, then carries on typing.
- * What still doesn't fit scrolls (review/bubble.css).
- */
-export function startStream(session: Session): void {
+/** Drops the droppable sentences, the first first, until the rest of the comment fits. */
+function dropUnfit(session: Session, sub: HTMLElement): void {
   const { panel } = session.elements;
-  const sub = queryOne(panel, '.ln-ext-bubble__sub', HTMLElement);
-  if (!sub) return;
   const room = queryOne(panel, '.ln-ext-bubble__body', HTMLElement) ?? sub;
   const { stream } = session;
   const fit = (): Fit => ({
@@ -50,7 +49,6 @@ export function startStream(session: Session): void {
     clientHeight: room.clientHeight,
     lineHeight: getComputedStyle(sub).lineHeight,
   });
-  // The droppable sentences go one by one, the first first, until the rest fits.
   let dropped = 0;
   for (
     let drop = queryOne(sub, '.ln-ext-say--drop', HTMLElement);
@@ -60,15 +58,25 @@ export function startStream(session: Session): void {
     drop.remove();
     dropped++;
   }
-  if (dropped > 0) {
-    // Recount the words typed so far, now that the dropped sentences are gone.
-    const shown =
-      stream.state.shown === Infinity
-        ? Infinity
-        : sub.querySelectorAll('.ln-ext-w:not(.ln-ext-w--off)').length;
-    stream.state = { ...stream.state, dropped: stream.state.dropped + dropped, shown };
-  }
-  if (stream.state.shown < sub.querySelectorAll('.ln-ext-w').length && stream.timer === 0) {
+  if (dropped === 0) return;
+  // Recount the words typed so far, now that the dropped sentences are gone.
+  const shown =
+    stream.state.shown === Infinity
+      ? Infinity
+      : sub.querySelectorAll('.ln-ext-w:not(.ln-ext-w--off)').length;
+  stream.state = { ...stream.state, dropped: stream.state.dropped + dropped, shown };
+}
+
+/**
+ * After a render: drops the sentence that doesn't fit, then carries on typing.
+ * What still doesn't fit scrolls (review/bubble.css).
+ */
+export function startStream(session: Session): void {
+  const { panel } = session.elements;
+  const sub = queryOne(panel, '.ln-ext-bubble__sub', HTMLElement);
+  if (sub) dropUnfit(session, sub);
+  const { stream } = session;
+  if (stream.state.shown < queryAll(panel, WORDS, HTMLElement).length && stream.timer === 0) {
     stream.timer = setInterval(() => tick(session), WORD_MS);
     tellCoach(session);
   }

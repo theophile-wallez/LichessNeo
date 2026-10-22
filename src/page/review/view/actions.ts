@@ -20,6 +20,7 @@ const CommandSchema = z.enum([
   'learn',
   'chip',
   'retry',
+  'hint',
   'reveal',
   'graph',
   'share',

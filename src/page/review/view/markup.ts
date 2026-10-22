@@ -6,6 +6,7 @@ import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
 import ArrowRight02Icon from '@hugeicons/core-free-icons/ArrowRight02Icon';
 import ArrowRightDoubleIcon from '@hugeicons/core-free-icons/ArrowRightDoubleIcon';
 import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
+import HelpCircleIcon from '@hugeicons/core-free-icons/HelpCircleIcon';
 import Idea01Icon from '@hugeicons/core-free-icons/Idea01Icon';
 import PauseIcon from '@hugeicons/core-free-icons/PauseIcon';
 import PlayIcon from '@hugeicons/core-free-icons/PlayIcon';
@@ -30,6 +31,7 @@ const ICONS = {
   last: ArrowRightDoubleIcon,
   star: StarIcon,
   bulb: Idea01Icon,
+  hint: HelpCircleIcon,
   arrow: ArrowRight02Icon,
   retry: ReloadIcon,
 } as const;

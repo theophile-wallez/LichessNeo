@@ -12,7 +12,7 @@ import {
   within,
 } from './fr-grammar.ts';
 import { motifFr } from './fr-motifs.ts';
-import type { LineFacts, Viewer } from './types.ts';
+import type { LineFacts, Viewer, Ways } from './types.ts';
 
 // The sentences read off the engine's lines: what a line wins, and the threats.
 
@@ -139,7 +139,20 @@ function mateThreatsFr(viewer: Viewer): MateThreatSentences {
   };
 }
 
+// Où va la partie, lu sur la ligne du moteur : ce que le coach dit d'un coup
+// calme dont il n'a rien d'autre à dire.
+const continuesFr = (line: string): Ways => [
+  `La partie continue : ${line}.`,
+  `À partir d’ici, le moteur joue ${line}.`,
+  `La suite : ${line}.`,
+];
+
+// Un meilleur coup dont le coach ne sait pas dire le but : la ligne qu'il suivait.
+const betterLineFr = (line: string): Ways => [`La ligne : ${line}.`, `Avec lui : ${line}.`];
+
 export const lineFactsFr = (viewer: Viewer): LineFacts => ({
+  continues: continuesFr,
+  betterLine: betterLineFr,
   motif: motifFr(viewer),
   material: materialFr,
   ...gainsFr(viewer),

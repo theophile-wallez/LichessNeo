@@ -44,7 +44,11 @@ opening's name and the page's asset URL.
 - `CoachContext` (`gameId`, `coach`, `language`) → `explanation(move, context,
   { opening, threats, turning })` → `CommentPart[]`: sentences, the droppable
   ones going when the bubble lacks room, the details (a fact's line and
-  squares, its plain sentence said first) last and dim. The game's course is said only when
+  squares, its plain sentence said first) last and dim. Half the quiet good
+  moves of a game give the coach no fact to say (it reads them through
+  `planOf`), and a remark alone says nothing of the position: those get the
+  engine's own line from there as a dim detail, its moves playable on the board
+  (`continuesLine`, `coach/line-facts.ts`), which is dropped first of all. The game's course is said only when
   the advantage changes (for a move that punishes an error, only when it goes
   past what the error gave), and `turning` marks the error the game turned on
   (`turningMove` of the key moments), which says so. The languages give each
@@ -97,6 +101,22 @@ speaks of the move it stands for (`lineShown`, `view/navigation.ts`).
 Explain and Best fold away on a move they'd have nothing to add to, and Next
 grows into their room: their buttons are kept across the panel's renders so
 that they ease (`view/nav.ts`).
+
+Under an error's comment, Retry has the player look for a better move on the
+board (`view/retry.ts`), where the board can play moves: it takes the board
+back before the error and reads what's played from there. The engine's move is
+found, and so is any move it no longer judges an error, as an error often has
+more than one answer; the game's own move again, or a move no better, is a
+miss, taken back two seconds later for another try. The answer is never played
+in the player's place, however many misses: the player asks for help, a step at
+a time (`view/retry-hint.ts`). The first hint names the piece that has to move
+and not its square, the second gives the square and rings it on the board, and
+"Show the answer" plays the move. A move played off the game is judged from the
+live engine's records (`judgeAt`), so a verdict waits for them: until then the
+coach says it's looking. The bubble says where the retry stands
+(`view/retry-bubble.ts`), typed out as a comment is, a hint asked for adding
+only its own line (`streamOn`, `comment/markup.ts`), Explain and Best fold away so as not to give the
+answer, and Next goes on with the game (`view/clicks.ts`).
 
 Before the first move, the coach's brief names the game's opening, its key
 moments and, as a button that goes to it, the move the game turned on

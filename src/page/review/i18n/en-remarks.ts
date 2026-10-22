@@ -182,10 +182,12 @@ export const remarksEn: RemarkPools = {
   ],
   earlyKing: ['Moving the king this early costs castling.', 'The king would rather stay safe.'],
   // A side's first move, out of the books: the book's pool speaks of theory going on.
+  // Either side's first move, the reply included: nothing here may claim to be
+  // the game's own first move.
   firstMove: [
     'A classic way to start.',
-    'A popular first move.',
+    'A popular choice here.',
     'A sound start to the game.',
-    'A first move grandmasters play too.',
+    'Grandmasters play this too.',
   ],
 };

@@ -18,7 +18,7 @@ import {
   toggleLine,
   togglePlay,
 } from './navigation.ts';
-import { endRetry, revealRetry, startRetry } from './retry.ts';
+import { askHint, endRetry, revealRetry, startRetry } from './retry.ts';
 
 // The panel's and the controls' buttons, by their `data-ln-ext` action.
 
@@ -37,7 +37,7 @@ function jumpToMoment(analysis: Analysis, card: HTMLElement): void {
 
 type ReviewCommand = Exclude<
   PanelAction,
-  'coach' | 'jump' | 'moment' | 'learn' | 'chip' | 'retry' | 'reveal' | 'graph' | 'share'
+  'coach' | 'jump' | 'moment' | 'learn' | 'chip' | 'retry' | 'hint' | 'reveal' | 'graph' | 'share'
 >;
 
 function pickGraphView(session: Session, button: HTMLElement): void {
@@ -89,6 +89,7 @@ function dispatch(session: Session, analysis: Analysis, { action, button }: Clic
   // Lichess's exercise, not the review's: it closes the review.
   else if (action === 'learn') learnFromMistakes(session, analysis);
   else if (action === 'retry') toggleRetry(session, analysis);
+  else if (action === 'hint') askHint(session);
   else if (action === 'reveal') revealRetry(session, analysis);
   // Retrying, Next goes on with the game.
   else if (action === 'next' && session.view.retry) endRetry(session, analysis, true);

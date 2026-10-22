@@ -1,7 +1,10 @@
 import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
+import { parentPath } from '#page/lichess/tree.ts';
+import type { Mark } from '#page/board/review-arrows.ts';
 import { classIcon } from '#page/review/classes/icon-svg.ts';
+import { streamOn } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
 import { explainLines } from '#page/review/explain/lines.ts';
 import { isGameNode } from '#page/review/game/work.ts';
@@ -24,8 +27,9 @@ import {
   thinkingMarkup,
 } from './markup.ts';
 import { bestShown, lineShown, spokenMove } from './navigation.ts';
-import { canRetry, retryOutcome } from './retry.ts';
-import { retryBubble } from './retry-bubble.ts';
+import { canRetry, type RetryOutcome, retryOutcome } from './retry.ts';
+import { type Retried, retryBubble, retryParts } from './retry-bubble.ts';
+import { retryHint, type RetryHint } from './retry-hint.ts';
 import { gameTimes, timingAt } from './timing.ts';
 import { type CoachComment, commentOn, followComment, timeTag, verdictMarkup } from './verdict.ts';
 import { newGameMarkup } from './new-game.ts';
@@ -134,6 +138,33 @@ function scrollMoveList(): void {
 /** What the panel shows of the move on the board. */
 interface Spoken extends NavInput {
   readonly comment: CoachComment | null;
+  /** The hints the player asked for while retrying. */
+  readonly hint: RetryHint | null;
+}
+
+/** What the retry's hints give away, read off the position before the error. */
+function retryHintOf(session: Session, analysis: Analysis): RetryHint | null {
+  const { retry } = session.view;
+  if (!retry) return null;
+  return retryHint(analysis.nodeAtPath(parentPath(retry.path)).fen, retry.move.best, retry.hints);
+}
+
+/**
+ * The hint's square, drawn only while the retry waits for a move: a move tried
+ * may have taken that very piece somewhere else.
+ */
+const hintMarks = (hint: RetryHint | null, retried: RetryOutcome | null): readonly Mark[] =>
+  hint && retried?.kind === 'waiting' ? hint.marks : [];
+
+/**
+ * Keeps the typing going while the player retries, as through a comment: the
+ * coach types each new line, and a hint asked for only adds its own.
+ */
+function followRetrying(session: Session, { outcome, hint }: Omit<Retried, 'retry'>): void {
+  const { retry } = session.view;
+  if (!retry) return;
+  const parts = retryParts(session, { retry, outcome, hint });
+  session.stream.state = streamOn(session.stream.state, parts, session.language);
 }
 
 /** The coach's mood: the verdict on the board, or on the move tried. */
@@ -146,7 +177,7 @@ function coachClass({ move, shown, retried }: Spoken): JudgedMove['moveClass'] |
 }
 
 function coachMarkup(session: Session, analysis: Analysis, spoken: Spoken): SafeHtml {
-  const { line, move, shown, comment, retried } = spoken;
+  const { line, move, shown, comment, retried, hint } = spoken;
   const moveClass = coachClass(spoken);
   const avatar = avatarMarkup({
     coachId: session.coach.id,
@@ -157,7 +188,7 @@ function coachMarkup(session: Session, analysis: Analysis, spoken: Spoken): Safe
   const { retry } = session.view;
   const bubble =
     retry && retried
-      ? retryBubble(session, retry, retried)
+      ? retryBubble(session, { retry, outcome: retried, hint })
       : bubbleMarkup(session, analysis, {
           comment,
           shown,
@@ -175,8 +206,10 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const retried = retryOutcome(session, analysis);
   const comment = retried ? null : movesComment(session, analysis, { move, shown });
   if (comment) followComment(session, comment);
-  view.drawing = { path: analysis.path, marks: comment?.drawing ?? [] };
-  const spoken = { line, move, shown, comment, retried };
+  const hint = retryHintOf(session, analysis);
+  if (retried) followRetrying(session, { outcome: retried, hint });
+  view.drawing = { path: analysis.path, marks: comment?.drawing ?? hintMarks(hint, retried) };
+  const spoken = { line, move, shown, comment, retried, hint };
   const moments = momentsMarkup(view.review, language);
   const scrolled = momentsScroll(elements.panel);
   fillAroundNav(

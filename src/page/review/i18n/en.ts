@@ -1,7 +1,7 @@
 import { html } from '#shared/html.ts';
 import type { Color } from '#shared/chess/types.ts';
 import { factsEn } from './en-comment.ts';
-import { capitalize, partyOf } from './en-grammar.ts';
+import { capitalize, indefinite, partyOf } from './en-grammar.ts';
 import { remarksEn } from './en-remarks.ts';
 import { theirRemarksEn } from './en-their-remarks.ts';
 import { trajectoryEn } from './en-trajectory.ts';
@@ -163,6 +163,10 @@ const retryStrings = (viewer: Viewer): RetryStrings => ({
   alsoGood: move => `${move} works too. Well found!`,
   wrong: move => `Not quite: ${move} isn’t it. Try again!`,
   same: 'That’s the move played in the game. Try another one!',
+  hint: 'Hint',
+  another: 'Another hint',
+  hintPiece: piece => `The move is ${indefinite(piece)}.`,
+  hintSquare: square => `It starts on ${square}, marked on the board.`,
   reveal: 'Show the answer',
   revealed: best => `The move was ${best}.`,
 });

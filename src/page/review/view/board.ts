@@ -101,11 +101,12 @@ function renderArrows(session: Session, analysis: Analysis, move: JudgedMove | n
 }
 
 // What the comment speaks of, drawn while its move is on the board, unless the
-// settings keep the coach's drawings off. A retry draws none, as for the arrows.
+// settings keep the coach's drawings off. A retry puts no comment there, only
+// the square of a hint it was asked for, which those settings don't hold back.
 function renderDrawing({ view }: Session, analysis: Analysis): void {
   const { drawing, mode, retry } = view;
-  const shown = mode === 'moves' && !retry && drawing.path === analysis.path;
-  const marks = shown && coachOptions().board ? drawing.marks : [];
+  const shown = mode === 'moves' && drawing.path === analysis.path;
+  const marks = shown && (retry !== null || coachOptions().board) ? drawing.marks : [];
   if (JSON.stringify(marks) !== JSON.stringify(reviewDrawing())) setReviewDrawing(marks);
 }
 

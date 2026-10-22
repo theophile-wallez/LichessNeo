@@ -35,6 +35,32 @@ export function streamFor(stream: StreamState, parts: readonly CommentPart[]): S
   return key === stream.key ? stream : { key, shown: 0, dropped: 0 };
 }
 
+/** The words `part` is typed out in, each with the space after it. */
+const wordsOf = (part: CommentPart, language: ReviewLanguage): string[] =>
+  language.typography(part.text).match(/\S+\s*/g) ?? [];
+
+/** How many words `parts` are typed out in. */
+export const wordCount = (parts: readonly CommentPart[], language: ReviewLanguage): number =>
+  parts.reduce((count, part) => count + wordsOf(part, language).length, 0);
+
+/**
+ * The stream for `parts`, when they may go on from the ones being typed: what
+ * was already said stays said, and only the new sentences are typed (a hint
+ * added under the coach's line). Any other comment starts over.
+ */
+export function streamOn(
+  stream: StreamState,
+  parts: readonly CommentPart[],
+  language: ReviewLanguage,
+): StreamState {
+  const key = commentKey(parts);
+  if (key === stream.key) return stream;
+  const said = parts.findIndex((_, i) => commentKey(parts.slice(0, i + 1)) === stream.key);
+  const shown =
+    said < 0 ? 0 : Math.min(stream.shown, wordCount(parts.slice(0, said + 1), language));
+  return { key, shown, dropped: 0 };
+}
+
 const TOKEN = /\[\[(\w):(.+?)\]\]/g;
 const PIECE_LETTER = /^[KQRBN]/;
 
@@ -103,8 +129,7 @@ export function commentMarkup(parts: readonly CommentPart[], options: CommentOpt
   const sentences = parts
     .filter(part => !left.has(part))
     .map(part => {
-      const words = language.typography(part.text).match(/\S+\s*/g) ?? [];
-      const spans = words.map(word => {
+      const spans = wordsOf(part, language).map(word => {
         const hidden = index++ >= stream.shown;
         return html`<span class="ln-ext-w${hidden ? ' ln-ext-w--off' : ''}">${wordMarkup(word)}</span>`;
       });

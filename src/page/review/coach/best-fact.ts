@@ -17,12 +17,12 @@ import { PUNISHABLE } from '#page/review/judge/judge.ts';
 import type { FactInput } from './fact.ts';
 import type { Reason } from './idea.ts';
 import { takesReason } from './which-one.ts';
-import { bestWins } from './line-facts.ts';
+import { betterLine, bestWins } from './line-facts.ts';
 import { doubleThreatOf } from './double-threat.ts';
 import { reasonMarks, withMove } from './drawing.ts';
 import { reasonOf } from './plan.ts';
 import { isEndgame } from './structure.ts';
-import { type Fact, oneOf, said } from './said.ts';
+import { type Fact, oneOf, said, withDetail } from './said.ts';
 
 // The move that was better than the one played, and what it did: the fork it
 // made, what it took or won, the plan it followed.
@@ -129,12 +129,18 @@ export function bestFact(input: FactInput): Fact | null {
   );
 }
 
-/** For a good move, the move a little better, and what it did. */
+/**
+ * For a good move, the move a little better, and what it did. With no point to
+ * name for it, "that was a little better" alone says nothing: the line it was
+ * on goes below, as a dim detail.
+ */
 export function littleBetterFact(input: FactInput): Fact | null {
   const { move, facts, best } = input;
   if (!best) return null;
   const { why, drawing } = whyBest(input);
-  return said(oneOf(facts.littleMorePrecise(best, why), move), null, drawing);
+  const fact = said(oneOf(facts.littleMorePrecise(best, why), move), null, drawing);
+  const line = why === null ? betterLine(move) : '';
+  return line ? withDetail(fact, oneOf(facts.betterLine(line), move)) : fact;
 }
 
 // The error a miss fails to punish: the opponent's last move, or the one before it, the
