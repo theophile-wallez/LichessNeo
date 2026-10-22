@@ -1,4 +1,4 @@
-import { closestTo, setData } from '#shared/dom.ts';
+import { closestTo, isParsing, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { oncePerFrame } from '#shared/frame.ts';
 
@@ -20,6 +20,10 @@ const FLAGS: Readonly<Record<string, string>> = {
   'clock-extras-bottom': `main.round .rclock-bottom > ${CLOCK_EXTRAS}`,
   analyse: 'main.analyse',
   'analyse-chat': 'main.analyse > .mchat',
+  // A game's analysis, told from Lichess's own game info, which it serves with the page: the
+  // player bars' room is then reserved on the first paint, rather than once our bars are in
+  // (`analyse-players`) and the board has been drawn 112px too tall.
+  'analyse-game': 'main.analyse .game__meta__players',
   'analyse-players': 'main.analyse > .ln-ext-player',
   'analyse-clock': 'main.analyse .analyse__clock',
   'analyse-captured': 'main.analyse > .ln-ext-captured',
@@ -73,10 +77,15 @@ const isBoardOrClock = (record: MutationRecord): boolean =>
 export const hasFlags: Feature = {
   name: 'has flags',
   start: () => {
-    // Before the next frame, so a rule never shows the page without its flag.
+    // Before the next frame, so a rule never shows the page without its flag. While the page
+    // parses, at once instead: a frame later is a frame of the page laid out without its
+    // flags, and the lookups are affordable on the parser's handful of chunks, where they
+    // wouldn't be on a board's mutations.
     const syncSoon = oncePerFrame(syncHasFlags);
     new MutationObserver(records => {
-      if (!records.every(isBoardOrClock)) syncSoon();
+      if (records.every(isBoardOrClock)) return;
+      if (isParsing()) syncHasFlags();
+      else syncSoon();
     }).observe(document, {
       childList: true,
       subtree: true,

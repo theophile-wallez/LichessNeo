@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { rectBetween } from '#shared/testing/layout.ts';
+import { fakeLayout, rectBetween } from '#shared/testing/layout.ts';
 import { squaresInset, watchBoardInset } from './board-inset.ts';
 import { watchControlsHeight } from './controls-height.ts';
 // What the original script measured on the same pages.
@@ -66,6 +66,20 @@ describe('watchControlsHeight', () => {
     document.body.innerHTML = page;
     watchControlsHeight()();
     expect(mainStyle()).toBe(style);
+  });
+
+  // The game over's card goes into the controls, whose row the moves and the chat are sized
+  // around: measured a tick later, the panel showed the card in a row still the old height,
+  // then snapped 240px into place.
+  it('follows a resize without waiting for the next tick', () => {
+    const layout = fakeLayout(() => 0);
+    document.body.innerHTML = '<main class="round"><div class="rcontrols"></div></main>';
+    measureAs('.rcontrols', { top: 0, left: 0, right: 10, bottom: 48 });
+    watchControlsHeight()();
+    expect(mainStyle()).toBe('--ln-ext-controls-h: 48px;');
+    measureAs('.rcontrols', { top: 0, left: 0, right: 10, bottom: 288 });
+    layout.resize();
+    expect(mainStyle()).toBe('--ln-ext-controls-h: 288px;');
   });
 
   it('writes nothing while the height stays', () => {

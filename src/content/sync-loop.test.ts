@@ -1,13 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { restoreReadyState, setReadyState } from '#shared/testing/ready-state.ts';
 
 beforeEach(() => {
   // The loop's tasks live in the module: each test imports a fresh copy.
   vi.resetModules();
   vi.useFakeTimers({ toFake: ['setInterval'] });
+  // The loop starts from document_start: these tests are about its interval.
+  setReadyState('loading');
 });
 
 afterEach(() => {
   vi.useRealTimers();
+  restoreReadyState();
   setHidden(false);
 });
 
@@ -56,6 +60,37 @@ describe('sync loop', () => {
     expect(error).toHaveBeenCalledTimes(2);
     expect(error).toHaveBeenNthCalledWith(1, '[LichessNeo] one failed', expect.any(Error));
     expect(error).toHaveBeenNthCalledWith(2, '[LichessNeo] two failed', expect.any(Error));
+  });
+
+  it('ticks as soon as the page is parsed, and again once it has loaded', async () => {
+    const { onEveryTick, startSyncLoop } = await import('./sync-loop.ts');
+    let runs = 0;
+    onEveryTick('count', () => {
+      runs++;
+    });
+    startSyncLoop();
+    // Started from document_start: waiting out an interval each time showed the page in two
+    // or three layouts in a row.
+    expect(runs).toBe(0);
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+    expect(runs).toBe(1);
+    window.dispatchEvent(new Event('load'));
+    expect(runs).toBe(2);
+    vi.advanceTimersByTime(250);
+    expect(runs).toBe(3);
+  });
+
+  it('skips the early ticks of a tab that is hidden', async () => {
+    const { onEveryTick, startSyncLoop } = await import('./sync-loop.ts');
+    let runs = 0;
+    onEveryTick('count', () => {
+      runs++;
+    });
+    startSyncLoop();
+    setHidden(true);
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+    window.dispatchEvent(new Event('load'));
+    expect(runs).toBe(0);
   });
 
   it('rests while the tab is hidden, and catches up as it shows', async () => {

@@ -45,11 +45,14 @@ function setInset({ main, container, wrapper }: BoardParts): void {
 
 /** A tick that measures the inset when the board is new or resized, never otherwise. */
 export function watchBoardInset(): () => void {
-  const watch = createSizeWatch();
+  let board: BoardParts | null = null;
+  const watch = createSizeWatch(() => {
+    if (board) setInset(board);
+  });
   return () => {
-    const board = findBoard();
+    board = findBoard();
     // The squares only move inside the wrapper when one of the two resizes.
-    if (board && watch.changed([board.main, board.container, board.wrapper])) setInset(board);
+    if (board) watch.watch([board.main, board.container, board.wrapper]);
   };
 }
 

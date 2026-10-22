@@ -72,8 +72,11 @@
 
   /* A game gets the game page's player bars (playerbar.css): ours for the players
    * (content/analysis/players.ts), Lichess's clock strips grown into bars. A board without
-   * players gets thin bars for its captured pieces. The board shrinks; a lesson has none. */
+   * players gets thin bars for its captured pieces. The board shrinks; a lesson has none.
+   * `analyse-game` is the game info Lichess serves with the page, so a game's board is this
+   * size from the first paint; the others only once their bars are in. */
   html:is(
+      [data-ln-ext-has~='analyse-game'],
       [data-ln-ext-has~='analyse-players'],
       [data-ln-ext-has~='analyse-clock'],
       [data-ln-ext-has~='analyse-captured']
@@ -85,6 +88,7 @@
   }
 
   html[data-ln-ext-has~='analyse-captured']:not(
+      [data-ln-ext-has~='analyse-game'],
       [data-ln-ext-has~='analyse-players'],
       [data-ln-ext-has~='analyse-clock']
     )
@@ -93,6 +97,7 @@
   }
 
   html:is(
+      [data-ln-ext-has~='analyse-game'],
       [data-ln-ext-has~='analyse-players'],
       [data-ln-ext-has~='analyse-clock'],
       [data-ln-ext-has~='analyse-captured']

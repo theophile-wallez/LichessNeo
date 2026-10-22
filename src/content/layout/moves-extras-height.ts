@@ -36,12 +36,14 @@ function setHeights({ main, found }: Extras): void {
 
 /** A tick that measures the extras when they're new or resized, never otherwise. */
 export function watchMovesExtras(): () => void {
-  const watch = createSizeWatch();
+  let extras: Extras | null = null;
+  const watch = createSizeWatch(() => {
+    if (extras) setHeights(extras);
+  });
   return () => {
-    const extras = findExtras();
+    extras = findExtras();
     if (!extras) return;
-    const present = extras.found.filter(extra => extra !== null);
-    if (watch.changed([extras.main, ...present])) setHeights(extras);
+    watch.watch([extras.main, ...extras.found.filter(extra => extra !== null)]);
   };
 }
 

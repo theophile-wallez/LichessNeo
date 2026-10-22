@@ -24,6 +24,15 @@ const marked = (panel: HTMLElement): (string | undefined)[] =>
   queryAll(panel, '.ln-ext-moment--on', HTMLElement).map(card => card.dataset.lnExtPly);
 
 describe('the key moments', () => {
+  // The strip's height is its row's room (styles/review/coach.css): drawn only once a card
+  // turned up, the coach's card under it slid down as the analysis found the first one.
+  it('keep their strip while the analysis has found none', () => {
+    const panel = document.createElement('div');
+    setHtml(panel, momentsMarkup(null, en));
+    expect(panel.querySelectorAll('.ln-ext-moments')).toHaveLength(1);
+    expect(panel.querySelectorAll('.ln-ext-moment')).toHaveLength(0);
+  });
+
   it('draw the same cards whatever the move, none marked', () => {
     const panel = momentsPanel();
     expect(panel.querySelectorAll('.ln-ext-moment').length).toBeGreaterThan(1);

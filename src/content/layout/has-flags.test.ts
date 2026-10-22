@@ -1,9 +1,12 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { restoreReadyState, setReadyState } from '#shared/testing/ready-state.ts';
 import { hasFlags, presentFlags, syncHasFlags } from './has-flags.ts';
 // The words the original script wrote for the same pages.
 import legacy from './fixtures/legacy.json' with { type: 'json' };
 
 const root = document.documentElement;
+
+afterEach(restoreReadyState);
 
 describe('presentFlags', () => {
   it.each(legacy.has)('reads $page as the original did', ({ page, has }) => {
@@ -32,6 +35,10 @@ describe('presentFlags, for flags the original lacked', () => {
       '<main class="account page-menu"><div class="page-menu__content box"></div></main>',
     ],
     ['analyse-captured', '<main class="analyse"><div class="ln-ext-captured"></div></main>'],
+    [
+      'analyse-game',
+      '<main class="analyse"><div class="game__meta"><div class="game__meta__players"></div></div></main>',
+    ],
     [
       'analyse-training',
       '<main class="analyse"><div class="analyse__round-training"><div class="analyse__acpl"></div></div></main>',
@@ -84,5 +91,30 @@ describe('hasFlags', () => {
     expect(root.dataset['lnExtHas']).toBe('round');
     for (const frame of frames.splice(0)) frame(0);
     expect(root.dataset['lnExtHas']).toBe('round pocket');
+  });
+
+  // Last: `start` leaves its observer on the document, which would schedule a frame of its
+  // own in the test above.
+  it('flags the page as it parses, without waiting for a frame', async () => {
+    const frames: FrameRequestCallback[] = [];
+    vi.stubGlobal('requestAnimationFrame', (callback: FrameRequestCallback) =>
+      frames.push(callback),
+    );
+    setReadyState('loading');
+    document.body.innerHTML = '';
+    hasFlags.start();
+    expect(root.dataset['lnExtHas']).toBe('');
+
+    // The parser hands the page over in chunks, each a mutation. A frame later would be a
+    // frame of the page laid out without its flags, the board at the wrong size in it.
+    document.body.innerHTML = '<main class="analyse"></main>';
+    await Promise.resolve();
+    expect(root.dataset['lnExtHas']).toBe('analyse');
+    document
+      .querySelector('main')
+      ?.append(Object.assign(document.createElement('div'), { className: 'game__meta__players' }));
+    await Promise.resolve();
+    expect(root.dataset['lnExtHas']).toBe('analyse analyse-game');
+    expect(frames).toHaveLength(0);
   });
 });

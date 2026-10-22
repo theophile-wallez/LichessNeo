@@ -3,6 +3,7 @@ import { BUILT_IN_THEMES } from '#content/colors/built-in.ts';
 import { type CustomBoard, DEFAULT_CUSTOM_BOARD } from './custom-board.ts';
 import { MATERIAL_BOARDS } from './materials.ts';
 import { savedBoards } from './saved-boards.ts';
+import { warmTexture } from './texture-warm.ts';
 import { showTexture } from './textures.ts';
 
 // The extension's two-tone boards in set colors: white and each color theme's
@@ -34,6 +35,7 @@ export function showFlatBoard(board: CustomBoard | undefined): void {
   setStyleProperty(root, '--ln-ext-board-flat-light', board?.light ?? null);
   setStyleProperty(root, '--ln-ext-board-flat-dark', board?.dark ?? null);
   showTexture(root, 'board-flat', board ?? {});
+  warmTexture(board?.texture);
 }
 
 /** Gives a tile's thumbnail a two-tone board's look, which its stylesheet draws as squares. */

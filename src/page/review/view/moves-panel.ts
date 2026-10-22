@@ -176,7 +176,7 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   if (comment) followComment(session, comment);
   view.drawing = { path: analysis.path, marks: comment?.drawing ?? [] };
   const spoken = { line, move, shown, comment, retried };
-  const moments = view.review ? momentsMarkup(view.review, language) : '';
+  const moments = momentsMarkup(view.review, language);
   const scrolled = momentsScroll(elements.panel);
   fillAroundNav(
     elements.panel,

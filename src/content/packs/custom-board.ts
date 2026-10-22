@@ -1,6 +1,7 @@
 import { z } from 'zod/mini';
 import { setStyleProperty } from '#shared/dom.ts';
 import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
+import { warmTexture } from './texture-warm.ts';
 import { FULL_STRENGTH, showTexture, type TextureId, TexturingSchema } from './textures.ts';
 
 // The custom board's two colors, picked under its tile (color-row.ts), and the
@@ -40,6 +41,7 @@ export function showCustomBoard(): void {
   setStyleProperty(root, '--ln-ext-board-custom-light', board.light);
   setStyleProperty(root, '--ln-ext-board-custom-dark', board.dark);
   showTexture(root, 'board-custom', board);
+  warmTexture(board.texture);
 }
 
 function write(board: CustomBoard): void {

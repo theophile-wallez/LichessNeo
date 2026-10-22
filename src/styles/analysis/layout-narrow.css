@@ -63,16 +63,20 @@
   /* ---- Players --- */
 
   /* A game's bars over and under the board, as on the game page; Lichess's own clock strips
-   * would hang over the squares. */
-  html:is([data-ln-ext-has~='analyse-players'], [data-ln-ext-has~='analyse-clock']):not(
-      [data-ln-ext-has~='practice']
-    )
+   * would hang over the squares. `analyse-game` is Lichess's own game info, there from the
+   * first paint, so the board is never drawn at the other size first (layout.css). */
+  html:is(
+      [data-ln-ext-has~='analyse-game'],
+      [data-ln-ext-has~='analyse-players'],
+      [data-ln-ext-has~='analyse-clock']
+    ):not([data-ln-ext-has~='practice'])
     main.analyse {
     --ln-ext-bar: 56px;
   }
 
   /* A board without players: thin bars for its captured pieces. */
   html[data-ln-ext-has~='analyse-captured']:not(
+      [data-ln-ext-has~='analyse-game'],
       [data-ln-ext-has~='analyse-players'],
       [data-ln-ext-has~='analyse-clock']
     )

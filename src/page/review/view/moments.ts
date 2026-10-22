@@ -10,15 +10,19 @@ import type { JudgedMove, Review } from '#page/review/session.ts';
 // sides', in order. A click goes to the move.
 
 /** The moves worth a card, in the order they were played. */
-export const keyMoments = (review: Pick<Review, 'draft'>): JudgedMove[] =>
-  review.draft.flatMap(move => (move && GRAPH_DOTS.has(move.moveClass) ? [move] : []));
+export const keyMoments = (review: Pick<Review, 'draft'> | null): JudgedMove[] =>
+  review?.draft.flatMap(move => (move && GRAPH_DOTS.has(move.moveClass) ? [move] : [])) ?? [];
 
 /** "16. h5" for White, "16… h5" for Black. */
 const moveLabel = ({ ply, san }: Pick<JudgedMove, 'ply' | 'san'>): string =>
   `${Math.ceil(ply / 2)}${ply % 2 === 1 ? '.' : '…'} ${san}`;
 
-/** The cards, the same whatever the move on the board, so a render keeps the strip (`showMoment` marks the move's). */
-export function momentsMarkup(review: Review, language: ReviewLanguage): SafeHtml {
+/**
+ * The cards, the same whatever the move on the board, so a render keeps the strip (`showMoment`
+ * marks the move's). The strip is drawn even with nothing in it yet: it holds its row's room
+ * (`--ln-ext-review-moments`), so the coach below doesn't slide down as the cards come in.
+ */
+export function momentsMarkup(review: Review | null, language: ReviewLanguage): SafeHtml {
   const cards = keyMoments(review).map(
     move =>
       html`<button class="ln-ext-moment" data-ln-ext="moment" data-ln-ext-ply="${move.ply}" style="--ln-ext-class-color:${CLASS_COLORS[move.moveClass]}">
@@ -26,7 +30,7 @@ export function momentsMarkup(review: Review, language: ReviewLanguage): SafeHtm
         <span class="ln-ext-moment__class">${language.classLabels[move.moveClass]}</span>
       </button>`,
   );
-  return cards.length > 0 ? html`<div class="ln-ext-moments">${cards}</div>` : html``;
+  return html`<div class="ln-ext-moments">${cards}</div>`;
 }
 
 const strip = (panel: HTMLElement): HTMLElement | null =>

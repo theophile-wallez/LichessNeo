@@ -1,3 +1,5 @@
+import { onDomReady } from '#shared/dom.ts';
+
 // Most of what the content script adds follows the page as Lichess redraws
 // it. Rather than one observer per feature, each registers a task on one
 // interval; tasks run in registration order and must be cheap when there's
@@ -30,11 +32,16 @@ function tick(): void {
   }
 }
 
+const tickIfShown = (): void => {
+  if (!document.hidden) tick();
+};
+
 export function startSyncLoop(): void {
-  setInterval(() => {
-    if (!document.hidden) tick();
-  }, INTERVAL_MS);
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) tick();
-  });
+  // Started from document_start, where there is no page yet: the first tick runs as soon as
+  // there is one, and another once Lichess's modules have drawn, rather than waiting out an
+  // interval each time. A tick behind the page showed it in two or three layouts in a row.
+  onDomReady(tickIfShown);
+  window.addEventListener('load', tickIfShown);
+  setInterval(tickIfShown, INTERVAL_MS);
+  document.addEventListener('visibilitychange', tickIfShown);
 }

@@ -24,12 +24,14 @@ function setHeight({ main, controls }: Panel): void {
 
 /** A tick that measures the controls when they're new or resized, never otherwise. */
 export function watchControlsHeight(): () => void {
-  const watch = createSizeWatch();
+  let panel: Panel | null = null;
+  const watch = createSizeWatch(() => {
+    if (panel) setHeight(panel);
+  });
   return () => {
-    const panel = findPanel();
+    panel = findPanel();
     if (!panel) return;
-    const watched = panel.controls ? [panel.main, panel.controls] : [panel.main];
-    if (watch.changed(watched)) setHeight(panel);
+    watch.watch(panel.controls ? [panel.main, panel.controls] : [panel.main]);
   };
 }
 
