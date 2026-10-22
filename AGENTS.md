@@ -263,9 +263,15 @@ What each feature folder holds is listed in
   which needs OpenCV. The chequerboard is its own calibration target, so the
   squares are rectified on the corners where four of them meet, each square is
   kept from whichever photograph shows it largest, the photographs are put on
-  one scale by the board's own two colors, and what is not the board is told
-  from it by how far from neutral it runs, in whichever direction (a grey cloth
-  under a wood board, a wooden table under the marble). Only for photographs
+  one scale by the board's own two colors, what is not the board is told from
+  it by how far from neutral it runs, in whichever direction (a grey cloth
+  under a wood board, a wooden table under the marble), and each photograph's
+  own blur is measured on its square boundaries and taken back off
+  (`focus.py`), as far as the pixel grid allows and no further. Don't reach for
+  a model to sharpen them: tried on these squares, super-resolution read a
+  wood's figure as noise and smoothed it away, and a generative model would
+  draw grain the board doesn't have, which is both a worse texture and a claim
+  the license can't make. Only for photographs
   the project holds the rights to, whose license goes in `public/licenses/` and
   which names every texture cut from them — nothing of another chess site's,
   ever (see the product rules). Read what it prints: how many squares each

@@ -39,6 +39,7 @@ from typing import NamedTuple
 
 import cv2
 import numpy as np
+from focus import unblurred
 from PIL import Image
 
 from drawing import (
@@ -273,7 +274,12 @@ def harvested(paths):
                 f'{across:.0f} px to a square, too far to trust, left out'
             )
             continue
-        found = squared(photo, place, rows, columns)
+        # Its own blur comes off before anything is read off it or cut out of it, measured
+        # on the square boundaries themselves (focus.py). A square is only 50 to 300 pixels
+        # across in these photographs where a texture wants 256, so the blur is the whole
+        # difference between a grain one can see and a smudge.
+        lit, blur, sharp = unblurred(to_light(photo), place, rows, columns, LUMA)
+        found = squared(np.clip(from_light(lit), 0, 255).astype(np.uint8), place, rows, columns)
         read = levelled(found, place, rows, columns) if found else None
         if not read:
             print(f'{Path(path).name}: only one face of the board in frame, left out')
@@ -290,7 +296,7 @@ def harvested(paths):
                     f'{casts[True].round(3)}, which no exposure explains, left out'
                 )
                 continue
-        evened = np.clip(from_light(to_light(photo) * gain + offset), 0, 255).astype(np.uint8)
+        evened = np.clip(from_light(lit * gain + offset), 0, 255).astype(np.uint8)
         # The faces as the evened photograph shows them, not as it was shot: the tiles a
         # square is tested against come out of `evened`, so the two must be on one scale.
         faces = {dark: faced(gain * casts[dark] + offset) for dark in (False, True)}
@@ -312,7 +318,8 @@ def harvested(paths):
         print(
             f'{Path(path).name}: {rows}×{columns} corners to {apart:.1f} px, {kept} of '
             f'{len(found)} squares kept whole, {across:.0f} px across, its channels '
-            f'×{np.round(gain, 2)} {np.round(offset, 3)}'
+            f'×{np.round(gain, 2)} {np.round(offset, 3)}, its square boundaries '
+            + (f'{blur:.2f} px wide, {sharp:.2f} once unblurred' if blur else 'too few to read')
         )
     return harvest
 

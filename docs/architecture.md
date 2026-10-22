@@ -216,14 +216,16 @@ extension URL can only be written in the CSS, so each texture is a variable
 there (`styles/board/textures.css`) that the content script names. Ten of the
 textures are not drawn at all: the nine woods and the Portoro each reproduce
 one real board the project holds the photographs of, cut out of them square by
-square (`photo.py`, `rectify.py`). The chequerboard calibrates its own
-rectification — the corners where four squares meet give the perspective and
-the lens together, so a photograph needs no ruler and no lens model — every
-square is cut from whichever photograph shows it largest, the photographs are
-put on one scale by the board's own two colors, and the 32 kept per shade span
-the whole range of how figured that board's squares are, rather than the 32
-best resolved, which would all come from the close-ups and be the plainest.
-Each tile is laid turned any quarter, as the makers lay a real board.
+square (`photo.py`, `rectify.py`, `focus.py`). The chequerboard calibrates
+everything itself: the corners where four squares meet give the perspective
+and the lens together, so a photograph needs no ruler and no lens model, and
+the boundaries between squares, being steps between two known levels, give its
+blur, which `focus.py` takes back off as far as the pixel grid allows and no
+further. Every square is cut from whichever photograph shows it largest, the
+photographs are put on one scale by the board's own two colors, and the 32 kept
+per shade span the whole range of how figured that board's squares are, rather
+than the 32 best resolved, which would all come from the close-ups and be the
+plainest. Each tile is laid turned any quarter, as the makers lay a real board.
 
 ## Styles
 
