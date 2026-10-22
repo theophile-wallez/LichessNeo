@@ -203,16 +203,26 @@ panels themselves, all in `src/content/packs/`:
   `src/shared/backlit.ts`), drawn as an image on the board and its tiles
   (`backlit-keys.ts`).
 
-A two-tone board may have a texture (`textures.ts`): a grey relief of a
-material, drawn by `tools/board-materials/generate.py` into
-`public/img/boards`, which `styles/board/pieces.css` lays over the squares'
-colors in `hard-light` (mid-grey leaves a color as it is), under a veil of the
-same colors that its strength makes see-through. So any colors take any
-texture: the custom board picks one and its strength under its colors
-(`texture-row.ts`), a saved board keeps them, and a material board is one
-texture over the colors it was drawn in. An extension URL can only be written
-in the CSS, so each texture is a variable there (`styles/board/textures.css`)
-that the content script names.
+A two-tone board may have a texture (`textures.ts`): the relief of a material,
+drawn by `tools/board-materials/generate.py` into `public/img/boards`, which
+`styles/board/pieces.css` lays over the squares' colors in `hard-light`
+(mid-grey leaves a color as it is), under a veil of the same colors that its
+strength makes see-through. It holds each channel around its shade's own mean,
+so a square may carry its own color rather than only its own shade of the
+next one's. So any colors take any texture: the custom board picks one and its
+strength under its colors (`texture-row.ts`), a saved board keeps them, and a
+material board is one texture over the mean colors it was drawn in. An
+extension URL can only be written in the CSS, so each texture is a variable
+there (`styles/board/textures.css`) that the content script names. Each wood
+board reproduces one real board, as a pair of species (`species.py`) drawn by
+`wood.py` to numbers measured on photographs — its growth-ring lines, its
+pores, the figure that wanders over them, its eyes, how far its squares sit
+from one another, and its colors — with its light squares turned a quarter
+against its dark ones as a real board's are. The marble board is not drawn but
+taken from photographs of one real board the project holds the rights to
+(`photo.py`): the chequerboard calibrates its own rectification, every square
+is cut from whichever photograph shows it largest, and the 32 kept per shade
+span the whole range of how veined the slab's squares are.
 
 ## Styles
 

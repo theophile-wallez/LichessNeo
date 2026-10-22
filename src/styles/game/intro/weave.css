@@ -23,6 +23,7 @@
   background-size: var(--ln-ext-intro-board-size);
   background-position: var(--ln-ext-intro-board-position);
   background-repeat: var(--ln-ext-intro-board-repeat);
+  background-blend-mode: var(--ln-ext-intro-board-blend);
   filter: var(--ln-ext-intro-board-filter);
 }
 

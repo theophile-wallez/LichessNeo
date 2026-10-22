@@ -1,5 +1,6 @@
 """Cuts the Boxwood sound set, public/sounds/boxwood/<name>-<n>.ogg, out of
-recording.mp3, the author's own microphone recording of wooden pieces on a board: each take is a gesture
+recording.mp3, the author's own microphone recording of wooden pieces on a board: each take is a
+gesture
 of the recording, picked by ear and by its spectrum (the lists below, in
 seconds), then evened in loudness so no take stands out, and encoded as Opus.
 
@@ -225,7 +226,8 @@ def ending_on(slide, hit):
 
 
 def slide_cuts(samples):
-    """For each reach, shortest first, TAKES_PER_REACH slides long enough for it, cut to its length."""
+    """For each reach, shortest first, TAKES_PER_REACH slides long enough for it, cut to its
+    length."""
     for reach in REACHES:
         length = SHORTEST + (LONGEST - SHORTEST) * (reach - REACHES[0]) / (len(REACHES) - 1)
         long_enough = [(start, end) for start, end in SLIDES if end - start >= length]
@@ -284,11 +286,8 @@ def main():
             wav = Path(folder) / 'take.wav'
             wavfile.write(wav, RATE, pcm)
             ogg = OUT / f'{name}-{counts[name]}.ogg'
-            subprocess.run(
-                ['ffmpeg', '-v', 'error', '-y', '-i', str(wav), '-c:a', 'libopus', '-b:a', BITRATE]
-                + ['-map_metadata', '-1', str(ogg)],
-                check=True,
-            )
+            flags = ['-v', 'error', '-y', '-i', str(wav), '-c:a', 'libopus', '-b:a', BITRATE]
+            subprocess.run(['ffmpeg', *flags, '-map_metadata', '-1', str(ogg)], check=True)
 
         for name, start, hit, ring in takes():
             write(name, to_pcm(cut(samples, start, hit, ring, LOUDNESS[name])))

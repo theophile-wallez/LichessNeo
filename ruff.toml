@@ -20,8 +20,13 @@ extend-select = [
   'RUF',
 ]
 
-# The multiplication sign in '2×2' and in array shapes is meant.
-allowed-confusables = ['×']
+# The multiplication sign in '2×2' and in array shapes is meant, and so is the dash in a
+# range like '0–1'.
+allowed-confusables = ['×', '–']
+
+# A tool's own modules sit beside it, so a bare import of one is ours, not a package's.
+[lint.isort]
+known-first-party = ['drawing', 'materials', 'minerals', 'species', 'stone', 'wood']
 
 [format]
 quote-style = 'single'

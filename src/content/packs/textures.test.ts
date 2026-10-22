@@ -18,7 +18,7 @@ describe('the board textures', () => {
   });
 
   it('keep only the textures there are, and strengths from 0 to 100', () => {
-    expect(TextureSchema.safeParse('end-grain').success).toBe(true);
+    expect(TextureSchema.safeParse('cocobolo').success).toBe(true);
     expect(TextureSchema.safeParse('velvet').success).toBe(false);
     expect([0, 55.5, 100].map(value => StrengthSchema.safeParse(value).success)).toEqual([
       true,

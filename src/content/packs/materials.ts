@@ -8,20 +8,27 @@ import { TEXTURES } from './textures.ts';
 export const MATERIALS = 'materials';
 
 const COLORS: Readonly<Record<(typeof TEXTURES)[number]['id'], readonly [string, string]>> = {
-  ash: ['#e5dcca', '#3b4493'],
-  parquet: ['#e4cba1', '#6b4e39'],
-  'end-grain': ['#d6b485', '#6d472c'],
+  'burl-gloss': ['#f1d6a9', '#6e3f2b'],
+  burl: ['#d2a77a', '#623929'],
+  vavona: ['#d3a87b', '#783c2c'],
+  cocobolo: ['#d3a87b', '#883325'],
+  amboyna: ['#d2a77a', '#a84e21'],
+  olmo: ['#e5d7b4', '#8f421e'],
+  padauk: ['#d2a77a', '#c52b09'],
+  palisander: ['#d2a87b', '#462e25'],
+  pomelle: ['#f2d2ae', '#b64417'],
+  portoro: ['#eef1eb', '#3c382f'],
   marble: ['#f7f5ef', '#636b77'],
   terrazzo: ['#efebe6', '#3f49a7'],
-  slate: ['#d0cbc0', '#545f6b'],
-  brushed: ['#d4d6dc', '#414a9f'],
-  spun: ['#d9d9dc', '#977f4f'],
-  zellige: ['#e9e3d8', '#2f7a82'],
+  slate: ['#d0ccc1', '#545f6c'],
+  brushed: ['#d4d7dd', '#414b9f'],
+  spun: ['#d9dadd', '#977f4f'],
+  zellige: ['#e9e3d8', '#2d7981'],
   felt: ['#e6dfcf', '#275c4c'],
-  leather: ['#ccb08b', '#734635'],
-  blueprint: ['#5b94e2', '#20478e'],
-  halftone: ['#f3eee3', '#b6b7dc'],
-  cork: ['#d0a574', '#60422d'],
+  leather: ['#ccb08c', '#734635'],
+  blueprint: ['#5b94e2', '#1f468d'],
+  halftone: ['#f3eee3', '#b6b8dc'],
+  cork: ['#d0a573', '#60422d'],
 };
 
 export const MATERIAL_BOARDS: readonly FlatBoard[] = TEXTURES.map(({ id, name }) => {

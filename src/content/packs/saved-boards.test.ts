@@ -37,10 +37,10 @@ describe('the saved boards', () => {
 
   it('keeps a board’s texture and its strength', async () => {
     const { saveBoard, savedBoards } = await load();
-    const id = saveBoard('Oak', { ...COLORS, texture: 'end-grain', strength: 60 });
+    const id = saveBoard('Cocobolo', { ...COLORS, texture: 'cocobolo', strength: 60 });
     vi.resetModules();
     expect((await load()).savedBoards()).toEqual([
-      { id, name: 'Oak', ...COLORS, texture: 'end-grain', strength: 60 },
+      { id, name: 'Cocobolo', ...COLORS, texture: 'cocobolo', strength: 60 },
     ]);
     expect(savedBoards()).toHaveLength(1);
   });

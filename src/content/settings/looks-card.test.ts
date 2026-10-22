@@ -90,7 +90,7 @@ describe('a Board & sounds card', () => {
       HTMLElement,
     );
     expect(thumb?.dataset.lnExtSquares).toBe('');
-    expect(thumb?.style.getPropertyValue('--ln-ext-thumb-light')).toBe('#d0cbc0');
+    expect(thumb?.style.getPropertyValue('--ln-ext-thumb-light')).toBe('#d0ccc1');
     expect(thumb?.style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
       'var(--ln-ext-texture-slate)',
     );

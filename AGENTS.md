@@ -256,10 +256,29 @@ What each feature folder holds is listed in
 - _A chart:_ redrawn in SVG from the page's data, in the rating chart's look
   (see "Every chart is modern"), with `src/shared/charts/`.
 - _A board texture:_ a material in `tools/board-materials/materials.py`
-  (drawn from seeded noise, never from another site's image), run
+  (drawn from seeded noise, never from another site's image, save a source
+  whose rights the project holds), run
   `generate.py`, then its line in `TEXTURES` (`content/packs/textures.ts`), its
   variable in `styles/board/textures.css`, and its board in `materials.ts`, in
-  the colors the generator prints.
+  the colors the generator prints. Each wood board reproduces one real board:
+  a pair of species of `species.py`'s `SPECIES`, drawn by `wood.py` to numbers
+  measured on photographs, never set by eye. A species' grain comes from a
+  flat veneer scan, which alone is fine enough to tell its lines and pores
+  from its broad figure; how much of it a board shows, how far its squares
+  sit from one another and what colors they are come from the board's own
+  photograph. Add a species from its own measurements, and check what
+  `generate.py` prints its lightness spread as against the ones the table
+  asks for, inside a square and between squares. The marble board is taken
+  from photographs of one real board instead (`photo.py`, which needs
+  OpenCV): the chequerboard is its own calibration target, so the squares are
+  rectified on the corners where four of them meet, each square is kept from
+  whichever photograph shows it largest, and the photographs are put on one
+  scale by the two stones' own colors. Only for photographs the project holds
+  the rights to, whose license goes in `public/licenses/` — nothing of
+  another chess site's, ever (see the product rules). A material without such
+  photographs is drawn from noise like the woods. The relief holds each
+  channel, not just lightness, so a square carries its own color and not only
+  its own shade of the next one's.
 - _An icon:_ an interface icon (a button's, a control's, a menu's, a
   field's) is one of Hugeicons' free icons (`@hugeicons/core-free-icons`,
   MIT, stroke rounded), never one drawn by hand. In TS, import it on its

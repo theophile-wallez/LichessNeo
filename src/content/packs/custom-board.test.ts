@@ -81,7 +81,7 @@ describe('the custom board', () => {
     expect(changed).toHaveBeenCalledTimes(3);
   });
 
-  it('reads a board kept before textures as it was, and an unknown texture as the default', () => {
+  it('reads a board kept before textures as it was, and keeps its colors when its texture is gone', () => {
     localStorage.setItem(
       'ln-ext-custom-board',
       JSON.stringify({ light: '#ffffff', dark: '#000000' }),
@@ -89,9 +89,9 @@ describe('the custom board', () => {
     expect(readCustomBoard()).toEqual({ light: '#ffffff', dark: '#000000' });
     localStorage.setItem(
       'ln-ext-custom-board',
-      JSON.stringify({ light: '#ffffff', dark: '#000000', texture: 'velvet' }),
+      JSON.stringify({ light: '#ffffff', dark: '#000000', texture: 'velvet', strength: 60 }),
     );
-    expect(readCustomBoard()).toEqual(DEFAULT_CUSTOM_BOARD);
+    expect(readCustomBoard()).toEqual({ light: '#ffffff', dark: '#000000', strength: 60 });
   });
 
   it('keeps only colors written #rrggbb', () => {

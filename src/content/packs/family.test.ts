@@ -148,15 +148,15 @@ describe('the material family', () => {
     const tile = button(panel, '.ln-ext-src-family-item[data-ln-ext-family="materials"]');
     const thumb = (): HTMLElement => button(tile, '.ln-ext-src-thumb');
     expect(thumb().style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
-      'var(--ln-ext-texture-ash)',
+      'var(--ln-ext-texture-burl-gloss)',
     );
     tile.click();
     const view = button(panel, '.ln-ext-src-family[data-ln-ext-family="materials"]');
-    expect(queryAll(view, '.ln-ext-src-item', HTMLElement)).toHaveLength(14);
+    expect(queryAll(view, '.ln-ext-src-item', HTMLElement)).toHaveLength(21);
     button(view, '[data-ln-ext-choice="materials-zellige"]').click();
     await flush();
     expect(thumb().dataset.lnExtTheme).toBe('materials-zellige');
-    expect(thumb().style.getPropertyValue('--ln-ext-thumb-dark')).toBe('#2f7a82');
+    expect(thumb().style.getPropertyValue('--ln-ext-thumb-dark')).toBe('#2d7981');
     expect(thumb().style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
       'var(--ln-ext-texture-zellige)',
     );

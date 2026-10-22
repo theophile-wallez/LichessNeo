@@ -1,11 +1,18 @@
-/* The board textures (content/packs/textures.ts): one grey relief per material, from
+/* The board textures (content/packs/textures.ts): one relief per material, from
  * tools/board-materials. An extension URL can only be written here, so the content script names
  * a texture by its variable. */
 
 :root {
-  --ln-ext-texture-ash: url('chrome-extension://__MSG_@@extension_id__/img/boards/ash.webp');
-  --ln-ext-texture-parquet: url('chrome-extension://__MSG_@@extension_id__/img/boards/parquet.webp');
-  --ln-ext-texture-end-grain: url('chrome-extension://__MSG_@@extension_id__/img/boards/end-grain.webp');
+  --ln-ext-texture-burl-gloss: url('chrome-extension://__MSG_@@extension_id__/img/boards/burl-gloss.webp');
+  --ln-ext-texture-burl: url('chrome-extension://__MSG_@@extension_id__/img/boards/burl.webp');
+  --ln-ext-texture-vavona: url('chrome-extension://__MSG_@@extension_id__/img/boards/vavona.webp');
+  --ln-ext-texture-cocobolo: url('chrome-extension://__MSG_@@extension_id__/img/boards/cocobolo.webp');
+  --ln-ext-texture-amboyna: url('chrome-extension://__MSG_@@extension_id__/img/boards/amboyna.webp');
+  --ln-ext-texture-olmo: url('chrome-extension://__MSG_@@extension_id__/img/boards/olmo.webp');
+  --ln-ext-texture-padauk: url('chrome-extension://__MSG_@@extension_id__/img/boards/padauk.webp');
+  --ln-ext-texture-palisander: url('chrome-extension://__MSG_@@extension_id__/img/boards/palisander.webp');
+  --ln-ext-texture-pomelle: url('chrome-extension://__MSG_@@extension_id__/img/boards/pomelle.webp');
+  --ln-ext-texture-portoro: url('chrome-extension://__MSG_@@extension_id__/img/boards/portoro.webp');
   --ln-ext-texture-marble: url('chrome-extension://__MSG_@@extension_id__/img/boards/marble.webp');
   --ln-ext-texture-terrazzo: url('chrome-extension://__MSG_@@extension_id__/img/boards/terrazzo.webp');
   --ln-ext-texture-slate: url('chrome-extension://__MSG_@@extension_id__/img/boards/slate.webp');

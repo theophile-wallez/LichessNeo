@@ -1,12 +1,15 @@
-"""The board textures (public/img/boards): one grey relief per material, which
+"""The board textures (public/img/boards): one relief per material, which
 styles/board/pieces.css lays over a board's two colors in `hard-light`.
 
 Each material is drawn in color from seeded noise, then turned into its
-relief: every pixel's lightness around its shade's mean, mid-grey where it
-equals it, so the relief over the material's own colors gives the drawing
-back. Lengths are in design pixels, a square being 80 of them, whatever size
-the board is drawn at. Prints each material's mean colors, which its ready-made
-board (content/packs/materials.ts) takes. Needs NumPy, SciPy and Pillow.
+relief: every channel of every pixel around its shade's own mean, mid-grey
+where it equals it, so the relief over the material's mean colors gives the
+drawing back whole. Channel by channel rather than on lightness alone, so a
+square may be its own color and not just its own shade of the one next to it,
+as every square of a wooden board is. Lengths are in design pixels, a square
+being 80 of them, whatever size the board is drawn at. Prints each material's
+mean colors, which its ready-made board (content/packs/materials.ts) takes.
+Needs NumPy, SciPy and Pillow.
 
   python3 tools/board-materials/generate.py [material …]
 """
@@ -18,33 +21,12 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from drawing import BOARD, checker
+from drawing import BOARD, checker, mean_color, relief, spreads
 from materials import MATERIALS
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'public/img/boards'
-QUALITY = 86
-
-
-def lightness(image):
-    return image @ np.array([0.2126, 0.7152, 0.0722])
-
-
-def relief(image):
-    """Each pixel's lightness as a gap from its shade's mean, scaled so hard-light undoes it."""
-    level = lightness(image)
-    dark = checker()
-    out = np.zeros_like(level)
-    for shade in (dark, ~dark):
-        mean = level[shade].mean()
-        gap = level[shade] - mean
-        out[shade] = np.where(gap < 0, 0.5 + gap / (2 * mean), 0.5 + gap / (2 * (255 - mean)))
-    return np.clip(out * 255, 0, 255).astype(np.uint8)
-
-
-def mean_color(image, shade):
-    red, green, blue = (int(round(value)) for value in image[shade].mean(axis=0))
-    return f'#{red:02x}{green:02x}{blue:02x}'
+QUALITY = 92
 
 
 def main(names):
@@ -58,8 +40,11 @@ def main(names):
         level = relief(image)
         if gain != 1:
             level = np.clip(128 + (level.astype(float) - 128) * gain, 0, 255).astype(np.uint8)
-        Image.fromarray(level, 'L').save(OUT / f'{name}.webp', quality=QUALITY)
-        print(f'{name}: light {mean_color(image, ~dark)}, dark {mean_color(image, dark)}')
+        Image.fromarray(level, 'RGB').save(OUT / f'{name}.webp', quality=QUALITY)
+        print(
+            f'{name}: light {mean_color(image, ~dark)} spread {spreads(image, False)}, '
+            f'dark {mean_color(image, dark)} spread {spreads(image, True)}'
+        )
     print(f'{BOARD}px boards in {OUT.relative_to(ROOT)}')
 
 

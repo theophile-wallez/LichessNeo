@@ -21,6 +21,9 @@ export function copyDrawing(stage: Stage, layer: HTMLElement): void {
   setStyleProperty(layer, '--ln-ext-intro-board-size', drawing.backgroundSize);
   setStyleProperty(layer, '--ln-ext-intro-board-position', drawing.backgroundPosition);
   setStyleProperty(layer, '--ln-ext-intro-board-repeat', drawing.backgroundRepeat);
+  // A textured board is three layers blended, not one image: without the blend mode the
+  // relief lies flat over the squares and hides their colors (styles/board/pieces.css).
+  setStyleProperty(layer, '--ln-ext-intro-board-blend', drawing.backgroundBlendMode);
   // Lichess's brightness and hue settings, on its own boards.
   setStyleProperty(layer, '--ln-ext-intro-board-filter', drawing.filter);
 }

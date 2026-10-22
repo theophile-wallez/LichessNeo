@@ -34,8 +34,9 @@ html[data-ln-ext-board='flat'] {
   --ln-ext-board-strength: var(--ln-ext-board-flat-strength, 100%);
 }
 
-/* A texture (board/textures.css) is a grey relief over the squares in `hard-light`: mid-grey
- * leaves a color as it is, darker darkens it, lighter lightens it, so any colors take it. Its
+/* A texture (board/textures.css) is a relief over the squares in `hard-light`: mid-grey leaves a
+ * color as it is, darker darkens it, lighter lightens it, and a channel on its own shifts its
+ * hue, which is how a wood's squares each come in their own color. So any colors take it. Its
  * strength veils it with the squares again, the more see-through the stronger it shows. */
 html:is([data-ln-ext-board='accent'], [data-ln-ext-board='custom'], [data-ln-ext-board='flat'])
   body

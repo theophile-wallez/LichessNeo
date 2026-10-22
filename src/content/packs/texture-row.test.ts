@@ -43,9 +43,16 @@ describe('the custom board’s texture row', () => {
     const tiles = queryAll(row, '[data-ln-ext-texture]', HTMLElement);
     expect(tiles.map(tile => tile.dataset.lnExtTip)).toEqual([
       'None',
-      'Ash',
-      'Parquet',
-      'End grain',
+      'Maple & burl',
+      'Bird’s eye & burl',
+      'Bird’s eye & vavona',
+      'Bird’s eye & cocobolo',
+      'Bird’s eye & amboyna',
+      'Maple & olmo',
+      'Bird’s eye & padauk',
+      'Bird’s eye & palisander',
+      'Curly maple & pomelle',
+      'White & Portoro',
       'Marble',
       'Terrazzo',
       'Slate',
@@ -59,7 +66,7 @@ describe('the custom board’s texture row', () => {
       'Cork',
     ]);
     expect(tiles[0]?.style.getPropertyValue('--ln-ext-thumb-texture')).toBe('');
-    expect(tiles[4]?.style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
+    expect(tiles[11]?.style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
       'var(--ln-ext-texture-marble)',
     );
     expect(ringed(row)).toEqual(['none']);

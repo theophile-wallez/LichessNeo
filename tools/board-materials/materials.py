@@ -1,6 +1,7 @@
 """The materials, each drawn in color on a whole board (drawing.py). Woods and
 stones are cut square by square from a bigger slab, so no two squares match;
-the marble is one slab across the board, as a real one is."""
+the marble is one slab across the board, as a real one is. Each wood is one real
+board: a pair of species drawn to what photographs of it measure (wood.py)."""
 
 import numpy as np
 from scipy import ndimage
@@ -20,81 +21,7 @@ from drawing import (
     seams,
     squares,
 )
-
-
-def grain(height, width, rng, density):
-    """Straight wood grain along the columns: growth rings, wavering, and fibres."""
-    columns = np.mgrid[0:height, 0:width][1] / UNIT
-    waver = fbm(height, width, 160, rng, 3) * 56
-    rings = 0.5 + 0.5 * np.sin((columns + waver) * density + fbm(height, width, 60, rng, 2) * 3)
-    fibres = noise(height, width, 2.2, rng, stretch=(18, 1))
-    return 0.55 * rings**1.6 + 0.3 * fibres + 0.15 * fbm(height, width, 40, rng, 3)
-
-
-def wood(stops, rng, density=0.09):
-    return lambda height, width: ramp(grain(height, width, rng, density), stops)
-
-
-def ash(rng):
-    light = cuts(wood(['#d8cdb8', '#e7decc', '#f2ece0'], rng, 0.07), rng)
-    dark = cuts(wood(['#2e3678', '#3c4596', '#4c56ae'], rng, 0.07), rng)
-    return compose(light, dark)
-
-
-# The grain turns a quarter at each row, as in a real inlay.
-def parquet(rng):
-    light = cuts(wood(['#d9b98a', '#ead2a8', '#f1dfbd'], rng), rng, lambda row, _: row % 2 == 0)
-    dark = cuts(wood(['#5a4130', '#6e5039', '#82624a'], rng, 0.11), rng, lambda row, _: row % 2 == 1)
-    return seams(compose(light, dark), '#2a1d14', 0.6, 0.35)
-
-
-def year_bounds(rng, spacing, count=400):
-    """Where each growth ring ends: wide and narrow years, as a tree grows."""
-    swing = 1 + 0.4 * np.sin(np.arange(count) / rng.uniform(4, 12))
-    widths = spacing * rng.lognormal(0, 0.35, count) * swing
-    return np.concatenate([[0], np.cumsum(np.maximum(widths, spacing * 0.25))])
-
-
-def log_end(rng, dark):
-    """A square cut across its own log: the pith inside it, near it, or far off."""
-    rows, columns = np.mgrid[0:SQUARE, 0:SQUARE] / UNIT
-    kind = rng.choice(['pith', 'arcs', 'straight'], p=[0.3, 0.4, 0.3])
-    if kind == 'pith':
-        center_row, center_column = rng.uniform(12, 68, 2)
-    else:
-        distance = (rng.uniform(0.7, 1.6) if kind == 'arcs' else rng.uniform(2.5, 6)) * 80
-        angle = rng.uniform(0, 2 * np.pi)
-        center_row, center_column = 40 + distance * np.sin(angle), 40 + distance * np.cos(angle)
-    tilt, squash = rng.uniform(0, np.pi), rng.uniform(0.75, 1.0)
-    down, across = rows - center_row, columns - center_column
-    along = across * np.cos(tilt) + down * np.sin(tilt)
-    beside = (-across * np.sin(tilt) + down * np.cos(tilt)) / squash
-    radius = np.hypot(along, beside) + fbm(SQUARE, SQUARE, 22, rng, 3) * rng.uniform(2, 7)
-    angle = np.arctan2(down, across)
-    bounds = year_bounds(rng, rng.uniform(2.6, 6.5))
-    year = np.interp(radius, bounds, np.arange(len(bounds)))
-    season = year % 1
-    # Latewood darkens toward the year's end, then the next year starts pale.
-    start = rng.uniform(0.35, 0.65)
-    late = np.clip((season - start) / (0.95 - start), 0, 1) ** 1.3 * (season < 0.95)
-    late = late + (season >= 0.95) * np.clip((1 - season) / 0.05, 0, 1)
-    level = 0.8 - rng.uniform(0.45, 0.65) * late + 0.12 * (noise(SQUARE, SQUARE, 1.4, rng) - 0.5)
-    rays = rng.random(1440) < 0.08
-    level = level + rays[((angle + np.pi) / (2 * np.pi) * 1440).astype(int) % 1440] * (radius > 4) * 0.07
-    level = level - np.clip((rng.uniform(8, 30) - year) / 3, 0, 1) * rng.uniform(0.05, 0.14)
-    if kind == 'pith':
-        level = level - np.exp(-(down**2 + across**2) / 3) * 0.5
-        for _ in range(rng.integers(0, 3)):
-            heading, length = rng.uniform(-np.pi, np.pi), rng.uniform(10, 40)
-            off = np.abs(np.angle(np.exp(1j * (angle - heading))))
-            level = level - ((off < 0.05 * (1 - radius / length)) & (radius < length)) * 0.45
-    stops = ['#4a2f1d', '#6a4429', '#80563a'] if dark else ['#b98e5c', '#d9b483', '#ecd0a3']
-    tint = rng.uniform(0.9, 1.06) * np.array([1, rng.uniform(0.97, 1.02), rng.uniform(0.94, 1.03)])
-    return np.clip(ramp(level, stops) * tint, 0, 255)
-
-
-def end_grain(rng):
-    return seams(squares(log_end)(rng), '#3a2516', 0.7, 0.45)
+from wood import board
 
 
 def veins(rng, scale, sharpness):
@@ -127,13 +54,14 @@ def marble(rng):
 def chips(rng, binder, colors, count):
     """Terrazzo: stone chips, a few sizes, scattered in a binder."""
     shapes = []
-    hues, shares = zip(*colors)
+    hues, shares = zip(*colors, strict=True)
     for _ in range(count):
         center = rng.uniform(-16, BOARD + 16, 2)
         size = rng.choice([2, 3.5, 5.5], p=[0.5, 0.35, 0.15]) * UNIT
         corners = np.sort(rng.uniform(0, 2 * np.pi, rng.integers(4, 7)))
         reach = size * rng.uniform(0.6, 1.2, len(corners))
-        points = [tuple(center + r * np.array([np.cos(a), np.sin(a)])) for a, r in zip(corners, reach)]
+        turns = zip(corners, reach, strict=True)
+        points = [tuple(center + r * np.array([np.cos(a), np.sin(a)])) for a, r in turns]
         shapes.append((points, hues[rng.choice(len(hues), p=shares)]))
     return polygons(binder, shapes) * (0.97 + 0.06 * noise(BOARD, BOARD, 1.5, rng))[..., None]
 
@@ -186,7 +114,8 @@ def spun(rng):
 def glazed_tile(rng, dark):
     """A zellige tile: its own tone, its glaze pooling at the edges, a glint."""
     rows, columns = np.mgrid[0:SQUARE, 0:SQUARE] / UNIT
-    tones = ['#1f6f78', '#24808a', '#1b5f6b', '#2b8a92'] if dark else ['#f1ece1', '#ebe4d6', '#f5f1ea', '#e7dfcf']
+    deep = ['#1f6f78', '#24808a', '#1b5f6b', '#2b8a92']
+    tones = deep if dark else ['#f1ece1', '#ebe4d6', '#f5f1ea', '#e7dfcf']
     base = hex_color(tones[rng.integers(len(tones))])
     glaze = fbm(SQUARE, SQUARE, 26, rng, 3)
     edge = np.minimum(np.minimum(rows, 79 - rows), np.minimum(columns, 79 - columns))
@@ -291,10 +220,17 @@ def cork(rng):
 
 
 # Each material and how much of its relief the texture keeps: the busiest are toned down.
+# The woods name the two species they pair, as a real board does.
 MATERIALS = {
-    'ash': (ash, 1),
-    'parquet': (parquet, 1),
-    'end-grain': (end_grain, 1),
+    'burl-gloss': (board('glossed-maple', 'glossed-burl'), 1),
+    'burl': (board('birds-eye', 'walnut-burl'), 1),
+    'vavona': (board('birds-eye', 'vavona-burl'), 1),
+    'cocobolo': (board('birds-eye', 'cocobolo'), 1),
+    'amboyna': (board('birds-eye', 'amboyna-burl'), 1),
+    'olmo': (board('pale-maple', 'elm-burl'), 1),
+    'padauk': (board('birds-eye', 'padauk'), 1),
+    'palisander': (board('birds-eye', 'palisander'), 1),
+    'pomelle': (board('curly-maple', 'pomelle'), 1),
     'marble': (marble, 1),
     'terrazzo': (terrazzo, 1),
     'slate': (slate, 1),
