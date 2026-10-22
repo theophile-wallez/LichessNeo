@@ -255,3 +255,12 @@
     --ln-ext-board: min(100vw - 96px, 100dvh - 16px);
   }
 }
+
+/* A phone's bar has no room for the first-move countdown's words between the name and
+ * the clock, in any language: the pill keeps its alarm clock and its count. The words
+ * stay in the page, for screen readers. */
+@media (max-width: 599.98px) {
+  main.round .expiration {
+    --ln-ext-expiration-words: 0px;
+  }
+}

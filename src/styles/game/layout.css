@@ -124,21 +124,75 @@ main.round .ln-ext-captured--bottom {
 }
 
 /* The first-move countdown goes under the name, where captured pieces will be:
- * centered, it covered the rating and the clock. */
+ * centered, it covered the rating and the clock. Lichess fills it with flat
+ * green; ours is a tinted pill with an alarm clock, red once it's urgent. */
 main.round .expiration {
+  --ln-ext-expiration: var(--ln-ext-orange);
+  /* The words' size, 0 where the bar has no room for them (phones, Zen mode): they are
+   * one text node around the count's `strong`, so only their size can drop them. */
+  --ln-ext-expiration-words: 11px;
+  box-sizing: border-box;
+  /* Lichess hides the opponent's countdown in its one-column layout; our narrow one
+   * keeps the top bar, so it has room for it. */
+  display: flex !important;
   justify-self: start;
   align-self: start;
+  gap: 4px;
   height: 18px;
   margin: calc(var(--ln-ext-off) + 30px) 0 0 calc(50px + var(--ln-ext-inset-l, 0px)) !important;
-  padding: 0 8px;
-  border-radius: 4px !important;
-  font-size: 12px !important;
+  padding: 0 8px 0 6px;
+  border-radius: 999px !important;
+  background: color-mix(in srgb, var(--ln-ext-expiration) 16%, transparent) !important;
+  color: var(--ln-ext-expiration) !important;
+  font-size: var(--ln-ext-expiration-words) !important;
+  font-weight: 600;
   line-height: 18px !important;
   white-space: nowrap;
 }
 
+/* Under 8 seconds, on the player's own turn. */
+main.round .expiration.emerg {
+  --ln-ext-expiration: var(--ln-ext-red);
+}
+
+main.round .expiration::before {
+  content: '';
+  flex: none;
+  width: 12px;
+  height: 12px;
+  background: var(--ln-ext-expiration);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alarm-clock.svg') center / 12px
+    no-repeat;
+}
+
 main.round .expiration strong {
-  font-size: 13px !important;
+  margin: 0 !important;
+  font-size: 12px !important;
+  font-weight: 800;
+}
+
+/* Lichess sweeps a white glider over it while it's the player's turn, sized for
+ * a bar the panel's width: on a pill this small it flashes by in pixels and
+ * glares. Ours sweeps the pill's own color, across the pill itself. */
+main.round .expiration.bar-glider::after {
+  /* Lichess hides it under `prefers-reduced-motion`, which we answer for. */
+  display: block !important;
+  width: 40% !important;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--ln-ext-expiration) 25%, transparent)
+  ) !important;
+  animation: ln-ext-expiration-glide 2.4s ease-in-out infinite !important;
+}
+
+@keyframes ln-ext-expiration-glide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
 }
 
 /* ---- Clocks --- */

@@ -73,6 +73,15 @@
     justify-self: start;
   }
 
+  /* The first-move countdown level with the clock at the column's other end, where the
+   * clock leaves room for its count alone (layout.css). Under the name, as elsewhere, it
+   * would land on the clock: Zen has no name. */
+  body.zenable.zen main.round .expiration {
+    --ln-ext-expiration-words: 0px;
+    justify-self: end;
+    margin-top: calc(var(--ln-ext-off) + 19px) !important;
+  }
+
   body.zenable.zen #zenzone {
     flex-direction: column;
     align-items: center;

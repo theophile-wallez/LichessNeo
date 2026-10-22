@@ -30,6 +30,14 @@ the root's [AGENTS.md](../../../AGENTS.md).
   that the game grid must place (`styles/game`). Three-check's checks are
   kings in `.material`, which our bars hide: `content/game/captured.ts`
   shows them. Racing Kings and Horde start with other pieces.
+- **The first-move countdown.** `.expiration` shows in a game's first seconds
+  only, in the bar of whoever must move (`bar-glider` on their own turn,
+  `emerg` under 8 seconds), and its words are one text node around a
+  `<strong>`: a phone's bar, which has no room for them, drops them with
+  `font-size: 0` on the pill (`styles/game/layout-narrow.css`). Lichess hides
+  the opponent's in its one-column layout, where ours keeps a top bar for it.
+  Nothing has been captured that early, so the pill shares the captured
+  pieces' row.
 - **Zen mode** (`body.zenable.zen`) hides all but the board, clocks and
   controls; our `!important` layout rules must yield to it (`styles/game`).
 - **TV.** `/tv` and `/tv/<channel>` don't carry the game's id: take it from
