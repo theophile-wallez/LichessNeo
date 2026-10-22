@@ -149,10 +149,10 @@ hold:
 - [ ] `pnpm check` passes: types, lint, formatting, source rules, unit tests.
 - [ ] New or changed behavior is covered by tests you've seen fail without
       the change.
-- [ ] User-visible changes are checked live on lichess.org with the built
-      extension (`pnpm build`, then Playwright): at the viewports under
-      [Testing on lichess.org](#testing-on-lichessorg), with screenshots
-      looked at.
+- [ ] User-visible changes are seen working: `pnpm preview`, then the user
+      looks in their own Chrome, at the viewports that matter (listed under
+      [Testing on lichess.org](#testing-on-lichessorg)). Never drive a
+      browser yourself to check them.
 - [ ] Docs match the code. No throwaway files are left in the repo.
 - [ ] It's shipped (see [Shipping](#shipping)).
 
@@ -621,6 +621,14 @@ link to it, and a line here). The rest hold everywhere:
 
 ## Testing on lichess.org
 
+- **Never launch a browser on the user's machine**, unless they ask for that
+  run: no `pnpm test:e2e`, `test:e2e:fast`, `test:firefox`,
+  `launchSignedIn()`, nor a one-off Playwright or Puppeteer script. A
+  browser tree beside a build or the unit tests fills the RAM, and the
+  machine spends its time swapping instead of working. CI runs `tests/e2e`
+  when the user starts it; the user judges a change in their own Chrome, on
+  `pnpm preview`. What follows is how to write those tests, and how to drive
+  a browser on the runs the user does ask for.
 - The end-to-end tests (`tests/e2e`) and any one-off check use Playwright's
   Chromium with `dist/chrome` loaded (`tests/e2e/fixtures.ts`). Branded
   Chrome ignores `--load-extension`; Playwright's default headless shell
@@ -635,7 +643,8 @@ link to it, and a line here). The rest hold everywhere:
 - Wait for elements, not for time: snabbdom draws after `load`. Scroll
   panels yourself (`.analyse__moves`' `scrollTop`) and screenshot with a
   `clip` on the element's `boundingBox()`.
-- Viewports: 1024×768 (also a landscape tablet), 1366×640, 1600×900,
+- The viewports a change has to hold at, for the user to judge it and for the
+  tests to cover it: 1024×768 (also a landscape tablet), 1366×640, 1600×900,
   1920×1080 and 2560×1440, both sides of each breakpoint the page's CSS uses
   (1019 / 1020, 1259 / 1260, 800 / 801), the portrait tablets 768×1024 and
   820×1180, and the phones 390×844 and 360×800. Nothing overflows, the page
@@ -653,10 +662,10 @@ link to it, and a line here). The rest hold everywhere:
   sign-in page as a plain browser (its bot check fails one Playwright drives)
   for the user to sign in and close; `--cookie <lila2>` takes a signed-in
   browser's session cookie instead, `--check` says who's in. The profile is
-  kept outside the repo (`tests/e2e/support/session.ts`), and a one-off check
-  opens it with `launchSignedIn()`, one browser at a time. Never sign in for
-  the user, and never put a session or a password in the repo; CI's tests stay
-  signed out.
+  kept outside the repo (`tests/e2e/support/session.ts`), and a run the user
+  asks for opens it with `launchSignedIn()`, one browser at a time, closed as
+  soon as it's done. Never sign in for the user, and never put a session or a
+  password in the repo; CI's tests stay signed out.
 - Pages that need an account and that the kept session can't reach (the
   puzzle dashboard of another account) can't be driven live:
   rebuild them locally from a public page's shell, the markup of lila's
