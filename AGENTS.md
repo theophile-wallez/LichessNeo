@@ -263,22 +263,29 @@ What each feature folder holds is listed in
   (`content/packs/textures.ts`), its variable in `styles/board/textures.css`,
   and its board in `materials.ts`, in the colors the tool prints. Which tool
   depends on whether there is a real board behind it. **From photographs of
-  one** (the nine woods and the Portoro): `photo.py <name> <photograph>…`,
-  which needs OpenCV. The chequerboard is its own calibration target, so the
+  one** (the nine woods and the Portoro): `upscale.py <folder>
+  <photograph>…`, then `photo.py <name> <folder>/*.png`, which needs OpenCV.
+  The chequerboard is its own calibration target, so the
   squares are rectified on the corners where four of them meet, each square is
   kept from whichever photograph shows it largest, the photographs are put on
   one scale by the board's own two colors, what is not the board is told from
   it by how far from neutral it runs, in whichever direction (a grey cloth
   under a wood board, a wooden table under the marble), and each photograph's
   own blur is measured on its square boundaries and taken back off
-  (`focus.py`), as far as the pixel grid allows and no further. Don't reach for
-  a model to sharpen them: tried on these squares, super-resolution read a
-  wood's figure as noise and smoothed it away, and a generative model would
-  draw grain the board doesn't have, which is both a worse texture and a claim
-  the license can't make. Only for photographs
-  the project holds the rights to, whose license goes in `public/licenses/` and
-  which names every texture cut from them — nothing of another chess site's,
-  ever (see the product rules). Read what it prints: how many squares each
+  (`focus.py`), as far as the pixel grid allows and no further. The first step
+  is what makes the squares sharp, and the one place a model is allowed near
+  them: a square is 50 to 230 px across in the photographs where a texture
+  wants 256, so each photograph is enlarged four times by Stability's fast
+  upscaler on Bedrock, which draws plausible grain of about the right density
+  rather than recovering the board's own: a square's shape, shade, color and
+  figure are the real board's, measured off the photographs, and its finest
+  grain is the model's. Nothing else sharpens them: super-resolution of the
+  2021 kind read a wood's figure as noise and smoothed it away, and
+  deconvolving past what `focus.py` measures turns grain into gravel. Only for
+  photographs the project holds the rights to — nothing of another chess
+  site's, ever (see the product rules), and the extension ships no license for
+  these ten: they are the project's own photographs of its own boards, so
+  there is nothing to license. Read what it prints: how many squares each
   photograph gave, how many pixels across they are against the 256 a texture
   wants, and the lightness spread inside a square and between squares, which a
   real board puts at 1 to 5 and 1 to 3. **With no real board**: a material in

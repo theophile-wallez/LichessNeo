@@ -9,18 +9,41 @@ vein moves the surface by a fraction of itself instead of tearing a square out o
 import cv2
 import numpy as np
 
+# How large a copy of the photograph the corner detector is shown, in pixels. It wants a
+# square to be tens of pixels across, not hundreds, and which size suits a photograph is
+# not predictable: the same board gives all 7 by 7 corners on a copy 950 px wide and only
+# 7 by 4 on one of 1350, and a photograph enlarged four times (upscale.py) finds a grid in
+# its own grain at full size, or none at all. So it is shown a few sizes and the best grid
+# wins, the largest copy breaking a tie, its corners being the truest.
+DETECT = (300_000, 600_000, 1_200_000, 2_400_000)
 
-def biggest_grid(grey):
-    """The largest grid of inner corners a photograph shows, and its shape. A whole board
-    gives 7 by 7 of them; a close-up of a corner gives whatever it gives."""
+
+def grid_at(grey, pixels):
+    """The largest grid of inner corners the detector finds on a copy of that size, with
+    the corners put back on the photograph's own scale."""
+    scale = min(1.0, float(np.sqrt(pixels / grey.size)))
+    if scale < 1:
+        grey = cv2.resize(grey, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     for rows in range(7, 2, -1):
         for columns in range(7, 2, -1):
             ok, corners = cv2.findChessboardCornersSB(
                 grey, (columns, rows), flags=cv2.CALIB_CB_EXHAUSTIVE
             )
             if ok:
-                return rows, columns, corners.reshape(rows, columns, 2).astype(np.float64)
+                found = corners.reshape(rows, columns, 2).astype(np.float64)
+                return rows, columns, (found + 0.5) / scale - 0.5
     return None
+
+
+def biggest_grid(grey):
+    """The largest grid of inner corners a photograph shows, and its shape. A whole board
+    gives 7 by 7 of them; a close-up of a corner gives whatever it gives."""
+    best = None
+    for pixels in DETECT:
+        grid = grid_at(grey, pixels)
+        if grid and (best is None or grid[0] * grid[1] >= best[0] * best[1]):
+            best = grid
+    return best
 
 
 def terms(points):

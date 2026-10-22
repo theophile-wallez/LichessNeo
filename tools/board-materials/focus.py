@@ -11,9 +11,13 @@ no blur left to take. That stopping rule is the whole point. Run past its own ev
 deconvolution turns the grain of a wood into gravel and a square's JPEG blocks into a
 quilt; stopped by it, what comes out is what the photograph saw.
 
-Nothing here invents detail. A model that paints plausible grain where the photograph has
-none would look sharper still and would not be the board: tried on these squares,
-Real-ESRGAN read a wood's figure as noise and smoothed it away.
+Nothing here invents detail, and nothing here is what makes a square sharp either: the
+photographs are too small for that, 50 to 230 pixels to a square against the 256 a texture
+wants, and upscale.py closes that gap before any of this runs. What is left for this to do
+on a photograph already enlarged is small and real -- the cocobolo's boundaries read 1.45
+pixels wide and 1.13 once unblurred -- and it is the honest part of the two: this takes
+back a blur it measured, where the model draws grain of about the right density in the
+wrong places.
 """
 
 import cv2
@@ -47,7 +51,7 @@ def sampled(glow, place, rows, columns):
             # blur longer one way than the other is read as what it is.
             lines.append(([column, column], [row - 1, row], [0.04, 0]))
             lines.append(([column - 1, column], [row, row], [0, 0.04]))
-    profiles = []
+    walks = []
     for (left, right), (top, bottom), step in lines:
         walk = [(left + (right - left) * t, top + (bottom - top) * t) for t in ALONG]
         at = place(walk)
@@ -56,17 +60,15 @@ def sampled(glow, place, rows, columns):
         for base, way in zip(at, ways, strict=True):
             spots = base + np.outer(REACHES, way)
             off = (spots[:, 0] > width - 2).any() or (spots[:, 1] > height - 2).any()
-            if spots.min() < 1 or off:
-                continue
-            profiles.append(
-                cv2.remap(
-                    glow.astype(np.float32),
-                    spots[:, 0].astype(np.float32).reshape(-1, 1),
-                    spots[:, 1].astype(np.float32).reshape(-1, 1),
-                    cv2.INTER_LINEAR,
-                ).ravel()
-            )
-    return np.array(profiles)
+            if spots.min() >= 1 and not off:
+                walks.append(spots)
+    if not walks:
+        return np.array([])
+    # Every profile read in one call. A photograph enlarged four times holds tens of
+    # millions of pixels and there are over a thousand profiles: converting it, or letting
+    # the remap walk it, once per profile costs more than everything else here together.
+    spots = np.stack(walks).astype(np.float32)
+    return cv2.remap(glow.astype(np.float32), spots[..., 0], spots[..., 1], cv2.INTER_LINEAR)
 
 
 def blurred(profile):

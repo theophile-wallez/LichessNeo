@@ -1,9 +1,8 @@
 """A board texture taken from photographs of one real board, square by square.
 
-Only for photographs the project holds the rights to, and their license belongs in
-public/licenses/ with the rest. Nothing of another chess site's may go in, redrawn or
-traced or not: see the product rules in AGENTS.md. The materials with no board to
-photograph are drawn from seeded noise instead (materials.py).
+Only for photographs the project holds the rights to. Nothing of another chess site's may
+go in, redrawn or traced or not: see the product rules in AGENTS.md. The materials with no
+board to photograph are drawn from seeded noise instead (materials.py).
 
 The chequerboard is its own calibration target. The corners where four squares meet are
 found to sub-pixel accuracy, however few of them a photograph shows, and the perspective
@@ -11,9 +10,15 @@ and the lens are fitted to them together: that says where every square of the bo
 in every photograph, inside the frame or outside it. A square is never looked for by its
 color, which would take the dark table a board stands on for a black square.
 
+The photographs are expected enlarged four times (upscale.py), which is what makes their
+squares sharp enough to cut a texture from, and the one step of this whose finest grain is
+a model's and not the board's. This runs the same on photographs as they were shot, only on
+squares a quarter of the size.
+
 The board is then built from the sharpest copy of each square rather than from one
-photograph: a photograph of the whole board gives all 64 squares but only about 160
-pixels across each where a texture wants 256, and a close-up gives a dozen at up to 300.
+photograph: a photograph of the whole board gives all 64 squares, 180 to 920 pixels across
+each once enlarged against the 256 a texture wants, and a close-up gives a dozen of them at
+more.
 The squares kept are spread over the whole range of how figured a square is, not simply
 the largest, because the largest all come from the close-ups, which on a marble board
 means the plainest squares and a texture with none of the slab's own variety.
