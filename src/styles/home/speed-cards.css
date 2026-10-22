@@ -216,10 +216,13 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   color: color-mix(in srgb, var(--ln-ext-speed-color) 45%, var(--ln-ext-text-strong));
 }
 
+/* No wider than its digits: its Lichess rating's tooltip (content/ui/tooltip.ts) is centered
+   on its box, which stretched over the whole card. */
 .ln-ext-speed__rating {
   display: flex;
   align-items: baseline;
   gap: 8px;
+  width: fit-content;
   color: var(--ln-ext-text-strong);
   font-size: 30px;
   font-weight: 800;
