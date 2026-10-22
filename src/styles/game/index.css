@@ -8,6 +8,8 @@
 @import './game-info.css';
 @import './players.css';
 @import './info-sections.css';
+/* After each part's own sheet: it places them in the panel's one area. */
+@import './panel-tabs.css';
 @import './board-extras.css';
 @import './zen.css';
 @import './intro/index.css';

@@ -331,7 +331,10 @@ features and its name: free analysis, open data, no ads.
   clocks.
 - **The layout:** board on the left, one right-hand panel (moves, controls,
   chat), and a page that never scrolls: everything fits the viewport, like a
-  native app. Add nothing below the board.
+  native app. Add nothing below the board. On the game page the panel's parts
+  share one area under a tab bar of its own (Coups, the chat's tabs, or the
+  game info where there is no chat: `content/game/panel-tabs.ts`), the
+  controls at its foot, so none of them takes a height of its own.
 - **The feel:** a pack's sounds if the user has one, the players' intro at the
   start (picked in the settings), the kings' badges, the winner's confetti and
   the coach's card at the end, and a Game Review ("Bilan") with an eval graph,
@@ -467,9 +470,13 @@ link to it, and a line here). The rest hold everywhere:
   Align anything with the squares through those.
 - **Definite grid rows.** The right panel's rows need known heights: the
   controls' is measured into `--ln-ext-controls-h`, and on the game page the
-  voice bar's and crosstable's, over the moves, into `--ln-ext-voice-h` and
-  `--ln-ext-crosstable-h`. Lichess sets an inline `height` on the analysis
-  chat: override it.
+  voice bar's, the crosstable's and the keyboard-move input's, which stand over
+  the panel's part on show, into `--ln-ext-voice-h`, `--ln-ext-crosstable-h`
+  and `--ln-ext-keyboard-h` (their room at the bottom adds up in
+  `--ln-ext-panel-bottom`). What grows must be one of these overlays, never a
+  row the board spans: the game page's controls carry a card at a game's end,
+  which would otherwise push the board off the screen. Lichess sets an inline
+  `height` on the analysis chat: override it.
 - **CSP.** Images load from anywhere; audio and `fetch` only from Lichess's
   domains, `blob:` and `data:`, not even the extension's files. So
   `content/packs` reads a pack's sounds and `page/sounds` plays them as

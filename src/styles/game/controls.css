@@ -9,6 +9,18 @@ main.round .rcontrols {
   background: var(--ln-ext-bg-panel);
 }
 
+/* From 1020px they stand over the panel's bottom, level with the board's lower edge: the part
+ * on show leaves them room (panel-tabs.css), so a tall one at a game's end squeezes the part
+ * rather than pushing the board or the player's bar off the screen. */
+@media (min-width: 1020px) {
+  main.round .rcontrols {
+    grid-area: moves !important;
+    align-self: end;
+    z-index: 4;
+    border-top: 1px solid var(--ln-ext-border);
+  }
+}
+
 /* While playing: equal big grey buttons, resign first, then abort or takeback, then draw.
  * Lichess's analysis link and menu stay hidden, as on its own desktop layout.
  * Margins, not a gap, so a folded button leaves none: the row reaches 8px past its box.

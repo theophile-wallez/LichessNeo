@@ -1,6 +1,7 @@
 /* Game page (main.round). `.round__app` and `.round__side` become `display: contents`, so their
  * children join one grid without moving Lichess's nodes. From 1020px the grid is the board
- * beside a panel; below, a column (layout-narrow.css). */
+ * beside a panel, whose parts share one area and are picked in a tab bar (panel-tabs.css);
+ * below, a column (layout-narrow.css). */
 
 @media (min-width: 1020px) {
   main.round {
@@ -36,29 +37,32 @@
       500px
     );
     --ln-ext-bar-bot: calc(var(--ln-ext-bar) + var(--ln-ext-coords-off));
-    --ln-ext-chat-h: min(clamp(180px, 32vh, 340px), calc(var(--ln-ext-board) * 0.45));
     --ln-ext-ctrl-h: var(--ln-ext-controls-h, 48px); /* content/layout/controls-height.ts */
+    /* The tab bar's row, 0 while the panel has but one part to show (panel-tabs.css). */
+    --ln-ext-tabs-h: 0px;
+    /* What sits over the panel's bottom: the controls, and the crosstable and the
+     * keyboard-move input above them (moves-extras.css). Both are measured only when
+     * Lichess has one (content/layout/moves-extras-height.ts). */
+    --ln-ext-panel-bottom: calc(
+      var(--ln-ext-ctrl-h) + var(--ln-ext-crosstable-h, 0px) + var(--ln-ext-keyboard-h, 0px)
+    );
 
     display: grid !important;
     grid-template-columns: var(--ln-ext-board) var(--ln-ext-panel-w) !important;
+    /* The panel's part takes the rows between its tab bar and the page's bottom edge: the
+     * controls are over it, so a tall one (a game's end) squeezes the part rather than the
+     * board, whose row stays its own height. */
     grid-template-rows:
-      var(--ln-ext-bar)
-      max(
-        0px,
-        calc(
-          var(--ln-ext-board) + var(--ln-ext-bar-bot) - var(--ln-ext-ctrl-h) - var(--ln-ext-chat-h)
-        )
-      )
-      var(--ln-ext-ctrl-h)
-      max(0px, calc(var(--ln-ext-chat-h) - var(--ln-ext-bar-bot)))
+      var(--ln-ext-tabs-h)
+      calc(var(--ln-ext-bar) - var(--ln-ext-tabs-h))
+      var(--ln-ext-board)
       var(--ln-ext-bar-bot) !important;
     grid-auto-rows: auto !important;
     grid-template-areas:
+      'user-top tabs'
       'user-top moves'
       'board    moves'
-      'board    controls'
-      'board    chat'
-      'user-bot chat' !important;
+      'user-bot moves' !important;
     column-gap: var(--ln-ext-gap) !important;
     row-gap: 0 !important;
     justify-content: center !important;
@@ -67,6 +71,20 @@
 
   body:is(.coords-in, .coords-out) main.round {
     --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
+  }
+
+  /* The page never scrolls: the board and the panel fit the window, and each part of the
+   * panel scrolls on its own. */
+  html[data-ln-ext-has~='round'],
+  html[data-ln-ext-has~='round'] body,
+  html[data-ln-ext-has~='round'] #main-wrap {
+    overflow: hidden !important;
+  }
+
+  html[data-ln-ext-has~='round'] body {
+    height: 100dvh;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
 

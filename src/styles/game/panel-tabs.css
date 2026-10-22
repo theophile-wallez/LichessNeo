@@ -1,0 +1,127 @@
+/* ---- The panel's tabs --- */
+
+/* From 1020px the right-hand panel shows one part at a time, picked in a tab bar of ours at its
+ * head (content/game/panel-tabs.ts): the moves, the chat (Lichess's own Chat room and Notes tabs
+ * join ours), or the game info where there is no chat. They share the `moves` area, so none of
+ * them takes a height of its own, and the controls stay over its bottom. Below 1020px the page
+ * scrolls and the parts follow one another (layout-narrow.css). */
+
+/* No bar below 1020px, where the parts follow one another in the page's column, nor where the
+ * panel has but one part to show. */
+main.round > .ln-ext-panel-tabs {
+  display: none;
+}
+
+@media (min-width: 1020px) {
+  main.round[data-ln-ext-tabbed] {
+    --ln-ext-tabs-h: 44px;
+  }
+
+  main.round[data-ln-ext-tabbed] > .ln-ext-panel-tabs {
+    grid-area: tabs;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 8px;
+    overflow: hidden;
+    border-radius: 6px 6px 0 0;
+    background: var(--ln-ext-bg-panel);
+  }
+
+  /* A segmented control, as the chat's own tabs (styles/chat/tabs.css): its highlight is one
+   * piece that slides (content/ui/tab-bars.ts). */
+  main.round .ln-ext-panel-tabs__bar {
+    flex: 1 1 auto;
+    display: flex;
+    gap: 2px;
+    min-width: 0;
+    padding: 3px;
+    border-radius: 9px;
+    background: var(--ln-ext-bg-panel-dark);
+    box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  }
+
+  main.round .ln-ext-panel-tabs__bar[data-ln-ext-tabs] {
+    --ln-ext-tab-radius: 6px;
+    --ln-ext-tab-bg: var(--ln-ext-bg-raised);
+    --ln-ext-tab-shadow: 0 1px 2px var(--ln-ext-shade-55);
+  }
+
+  main.round .ln-ext-panel-tabs__tab {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
+    height: 28px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ln-ext-text-dim);
+    font-family: var(--ln-ext-font);
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.15s !important;
+  }
+
+  main.round .ln-ext-panel-tabs__tab:hover,
+  main.round .ln-ext-panel-tabs__tab.active {
+    color: var(--ln-ext-text-strong);
+  }
+
+  /* Until the sliding piece is placed, the tab picked carries the pill itself. */
+  main.round .ln-ext-panel-tabs__bar:not([data-ln-ext-tabs]) .ln-ext-panel-tabs__tab.active {
+    background: var(--ln-ext-bg-raised);
+    box-shadow: 0 1px 2px var(--ln-ext-shade-55);
+  }
+
+  /* A line that came in while another part was on show. */
+  main.round .ln-ext-panel-tabs__tab[data-ln-ext-unread]::after {
+    content: '';
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ln-ext-accent);
+  }
+
+  /* ---- The parts --- */
+
+  main.round .mchat,
+  main.round .round__side > .game__meta {
+    grid-area: moves !important;
+  }
+
+  /* The moves are the panel's own part: they go only once another is picked, so the panel
+   * never shows empty while the tab bar is still to come. */
+  main.round[data-ln-ext-panel]:not([data-ln-ext-panel='moves']) :is(i5d, rm6),
+  main.round:not([data-ln-ext-panel='chat']) .mchat,
+  main.round:not([data-ln-ext-panel='meta']) .round__side > .game__meta {
+    display: none !important;
+  }
+
+  main.round[data-ln-ext-panel='meta'] .round__side > .game__meta {
+    display: block !important;
+    margin: 0 !important;
+    overflow-y: auto;
+    border-radius: 0 0 6px 6px;
+  }
+
+  /* Each part leaves the overlays over its bottom their room (moves-extras.css), and the
+   * tab bar carries the panel's top corners. */
+  main.round :is(i5d, rm6),
+  main.round .mchat,
+  main.round .round__side > .game__meta {
+    padding-bottom: var(--ln-ext-panel-bottom) !important;
+    border-radius: 0 0 6px 6px !important;
+  }
+
+  main.round:not([data-ln-ext-tabbed]) :is(i5d, rm6) {
+    border-radius: 6px !important;
+  }
+}

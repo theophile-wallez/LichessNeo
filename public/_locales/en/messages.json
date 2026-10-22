@@ -1430,5 +1430,13 @@
   "backupRestoreFailed": {
     "message": "The settings could not be saved: try again.",
     "description": "Shown when the import fails."
+  },
+  "roundPanelMoves": {
+    "message": "Moves",
+    "description": "The game panel's tab that shows the move list."
+  },
+  "roundPanelGame": {
+    "message": "Game",
+    "description": "The game panel's tab that shows the game's info, where the game has no chat."
   }
 }

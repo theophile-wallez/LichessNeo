@@ -1112,5 +1112,11 @@
   },
   "backupRestoreFailed": {
     "message": "Les réglages n’ont pas pu être enregistrés : réessayez."
+  },
+  "roundPanelMoves": {
+    "message": "Coups"
+  },
+  "roundPanelGame": {
+    "message": "Partie"
   }
 }

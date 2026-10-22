@@ -40,11 +40,10 @@
 
     grid-template-columns: var(--ln-ext-tv-w) var(--ln-ext-board) var(--ln-ext-panel-w) !important;
     grid-template-areas:
+      'tv user-top tabs'
       'tv user-top moves'
       'tv board    moves'
-      'tv board    controls'
-      'tv board    chat'
-      'tv user-bot chat' !important;
+      'tv user-bot moves' !important;
   }
 
   /* Crazyhouse: pockets after the board and no column gap, as in game/; the channels'
@@ -58,11 +57,10 @@
       calc(var(--ln-ext-pocket-gap) + var(--ln-ext-pocket-sq) + var(--ln-ext-gap))
       var(--ln-ext-panel-w) !important;
     grid-template-areas:
+      'tv user-top .      tabs'
       'tv user-top .      moves'
       'tv board    pocket moves'
-      'tv board    pocket controls'
-      'tv board    pocket chat'
-      'tv user-bot .      chat' !important;
+      'tv user-bot .      moves' !important;
   }
 
   /* Zen mode hides the side, channels included (game/). Zen sizes its own board, so there

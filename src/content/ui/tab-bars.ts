@@ -29,6 +29,7 @@ export const TAB_BARS: readonly TabBarKind[] = [
   kind('.ublog-index .btn-rack', '.btn-rack__btn', '.active', 'pill'),
   kind('main.forum-topic .markdown-editor .header', '.header-tab', '.active', 'pill'),
   kind('.mchat__tabs', '.mchat__tab', '.mchat__tab-active', 'pill'),
+  kind('.ln-ext-panel-tabs__bar', '.ln-ext-panel-tabs__tab', '.active', 'pill'),
   kind('.tabs-horiz:not(.lobby__app > .tabs-horiz)', '*', '.active', 'line'),
   kind('.analyse__underboard__menu', 'button', '.active', 'line'),
   kind('.auth .auth-tabs', 'a', '.active', 'line'),

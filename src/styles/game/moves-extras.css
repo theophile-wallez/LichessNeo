@@ -1,10 +1,12 @@
-/* ---- Voice bar and crosstable --- */
+/* ---- What sits over the panel --- */
 
 /* Lichess's voice input (#voice-bar, with the "voice move" preference) and the players'
  * crosstable (in .round__underboard, under the board) join the moves' panel: the bar on top, as
  * in Lichess's own column, the crosstable under the move buttons. The moves make room for them,
  * keyed on `data-ln-ext-has` (content/layout/has-flags.ts), by their measured heights
- * (content/layout/moves-extras-height.ts). */
+ * (content/layout/moves-extras-height.ts). From 1020px the crosstable and the keyboard-move
+ * input stand over the controls, at the panel's bottom, and the part on show leaves all three
+ * their room (`--ln-ext-panel-bottom`, panel-tabs.css). */
 
 main.round #voice-bar {
   grid-area: moves !important;
@@ -56,8 +58,31 @@ main.round .round__underboard > .crosstable:empty {
   display: none !important;
 }
 
-html[data-ln-ext-has~='round-crosstable'] main.round :is(i5d, rm6) {
-  padding-bottom: var(--ln-ext-crosstable-h, 0px) !important;
+/* Below 1020px the crosstable is the moves' only overlay at the bottom. */
+@media (max-width: 1019.98px) {
+  html[data-ln-ext-has~='round-crosstable'] main.round :is(i5d, rm6) {
+    padding-bottom: var(--ln-ext-crosstable-h, 0px) !important;
+  }
+}
+
+/* ---- Over the controls --- */
+
+@media (min-width: 1020px) {
+  main.round .round__underboard > .crosstable {
+    margin-bottom: var(--ln-ext-ctrl-h) !important;
+    border-radius: 0 !important;
+  }
+
+  /* The keyboard-move input (a preference) goes above the crosstable, over the part on show. */
+  main.round .keyboard-move {
+    grid-area: moves !important;
+    align-self: end;
+    z-index: 3;
+    margin: 0 0 calc(var(--ln-ext-ctrl-h) + var(--ln-ext-crosstable-h, 0px)) !important;
+    padding: 6px 8px;
+    border-top: 1px solid var(--ln-ext-border);
+    background: var(--ln-ext-bg-panel);
+  }
 }
 
 body.zenable.zen main.round .round__underboard > .crosstable {

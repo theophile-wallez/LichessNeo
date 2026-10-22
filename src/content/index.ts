@@ -25,6 +25,7 @@ import { activeMove } from './analysis/active-move.ts';
 import { variations } from './analysis/variations.ts';
 import { capturedPieces } from './game/captured.ts';
 import { boardTools } from './game/board-tools.ts';
+import { panelTabs } from './game/panel-tabs.ts';
 import { moveTimes } from './game/move-times.ts';
 import { newGame } from './game/new-game.ts';
 import { ratingRefresh } from './game/rating-refresh.ts';
@@ -101,6 +102,7 @@ const FEATURES = [
   variations,
   capturedPieces,
   boardTools,
+  panelTabs,
   moveTimes,
   newGame,
   ratingRefresh,

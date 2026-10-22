@@ -39,11 +39,10 @@
       calc(var(--ln-ext-pocket-gap) + var(--ln-ext-pocket-sq) + var(--ln-ext-gap))
       var(--ln-ext-panel-w) !important;
     grid-template-areas:
+      'user-top .      tabs'
       'user-top .      moves'
       'board    pocket moves'
-      'board    pocket controls'
-      'board    pocket chat'
-      'user-bot .      chat' !important;
+      'user-bot .      moves' !important;
     column-gap: 0 !important;
   }
 }

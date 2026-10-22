@@ -42,21 +42,38 @@
       )
     );
 
+    /* The controls keep a row of their own here, between the moves and the player's clock. */
+    --ln-ext-panel-bottom: 0px;
+
     grid-template-columns: var(--ln-ext-board) var(--ln-ext-zen-side) !important;
     grid-template-rows:
       var(--ln-ext-bar)
       max(0px, calc(var(--ln-ext-board) - 2 * var(--ln-ext-bar) - var(--ln-ext-ctrl-h)))
       var(--ln-ext-ctrl-h)
-      0
       var(--ln-ext-bar)
       var(--ln-ext-coords-off) !important;
     grid-template-areas:
       'board user-top'
       'board moves'
       'board controls'
-      'board chat'
       'board user-bot'
       'board .' !important;
+  }
+
+  body.zenable.zen main.round .rcontrols {
+    grid-area: controls !important;
+    align-self: start;
+    border-top: 0;
+  }
+
+  /* Zen keeps the moves, whichever part the panel was showing. */
+  body.zenable.zen main.round :is(i5d, rm6) {
+    display: flex !important;
+    border-radius: 6px !important;
+  }
+
+  body.zenable.zen main.round > .ln-ext-panel-tabs {
+    display: none !important;
   }
 
   /* The clocks beside the board, level with its top and its bottom edge (a clock is 40px
