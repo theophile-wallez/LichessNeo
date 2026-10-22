@@ -1,7 +1,7 @@
 import type { Feature } from '#shared/features.ts';
 import { queryOne } from '#shared/dom.ts';
+import { GAME_PAGE } from '#shared/game-path.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
-import { GAME_PAGE } from '#page/lichess/pages.ts';
 import { advantageSpec, moveTimesSpec } from './specs.ts';
 import { PlyChart, type PlyChartSpec } from './plot.ts';
 

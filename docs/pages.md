@@ -22,8 +22,8 @@ and a white knob, and a single big number in the state's color.
 | Home              | `/`           | 2     | the lobby's table is still Lichess's rows; the speed cards could take the track for the day's rating                     |
 | Computer setup    | `/#ai`        | 3     | the reference                                                                                                            |
 | Game setup        | `/#hook`      | 2     | tiles for the variant, the time control and the side over Lichess's controls, a bottom sheet on phones; no signature yet |
-| Game, playing     | `/<id>`       | –     | not audited yet                                                                                                          |
-| Game over         | `/<id>`       | 2     | signature planned: the rating's change on the track, toward the next hundred                                             |
+| Game, playing     | `/game/<id>`  | –     | not audited yet                                                                                                          |
+| Game over         | `/game/<id>`  | 2     | signature planned: the rating's change on the track, toward the next hundred                                             |
 | Arena tournaments | `/tournament` | 2     | the leaderboard beside the schedule is a plain list; a tournament's page is still Lichess's on a desktop                 |
 | Swiss tournaments | `/swiss`      | 2     |                                                                                                                          |
 | Simuls            | `/simul`      | 2     | sets the tone for 2; a simul's page is still Lichess's on a desktop                                                      |
@@ -72,14 +72,14 @@ and a white knob, and a single big number in the state's color.
 
 ## Tools
 
-| Page            | Path               | Level | Next                                                                                                           |
-| --------------- | ------------------ | ----- | -------------------------------------------------------------------------------------------------------------- |
-| Analysis board  | `/analysis`        | 2     | the panel is empty under the coach until a move is played; below 1020px, one column even on a landscape tablet |
-| Game review     | `/<id>` (finished) | 2     | signature planned: each side's accuracy on the track, in its grade's color; below 1020px, one column           |
-| Openings        | `/opening`         | 2     | the popularity chart is still Lichess's Chart.js canvas                                                        |
-| Board editor    | `/editor`          | 2     |                                                                                                                |
-| Import game     | `/paste`           | 2     | the title with its picture, the form on a card, the file picker as a drop zone; no signature yet               |
-| Advanced search | `/games/search`    | 2     | the form on a card, its labels over its fields on phones; the results' game rows are still Lichess's           |
+| Page            | Path                    | Level | Next                                                                                                           |
+| --------------- | ----------------------- | ----- | -------------------------------------------------------------------------------------------------------------- |
+| Analysis board  | `/analysis`             | 2     | the panel is empty under the coach until a move is played; below 1020px, one column even on a landscape tablet |
+| Game review     | `/game/<id>` (finished) | 2     | signature planned: each side's accuracy on the track, in its grade's color; below 1020px, one column           |
+| Openings        | `/opening`              | 2     | the popularity chart is still Lichess's Chart.js canvas                                                        |
+| Board editor    | `/editor`               | 2     |                                                                                                                |
+| Import game     | `/paste`                | 2     | the title with its picture, the form on a card, the file picker as a drop zone; no signature yet               |
+| Advanced search | `/games/search`         | 2     | the form on a card, its labels over its fields on phones; the results' game rows are still Lichess's           |
 
 ## Account
 

@@ -2,6 +2,7 @@ import { DEV_BUILD } from '#shared/build-mode.ts';
 import { pickCoach } from '#shared/coach.ts';
 import { isParsing, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
+import { gameIdFrom } from '#shared/game-path.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
 import { playedGame, type PlayedGame } from '#shared/round-init.ts';
 import type { Stockfish } from '#page/review/engine/stockfish.ts';
@@ -71,7 +72,7 @@ async function quickLook(game: PlayedGame, finished: FinishedGame): Promise<Quic
 const showsOver = (main: HTMLElement, gameId: string): boolean =>
   main.isConnected &&
   main.querySelector('.result-wrap') !== null &&
-  location.pathname.startsWith(`/${gameId}`);
+  gameIdFrom(location.pathname) === gameId;
 
 export async function onGameEnd(game: PlayedGame, main: HTMLElement): Promise<void> {
   const outcomeOf = (finished: FinishedGame): ReturnType<typeof readOutcome> =>

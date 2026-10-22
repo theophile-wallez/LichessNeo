@@ -2,7 +2,7 @@ import { z } from 'zod/mini';
 import { COLORS } from '#shared/chess/types.ts';
 import { parseJson } from '#shared/json.ts';
 
-// A game once it's over, as the page of a finished game (`/<id>`) serves it:
+// A game once it's over, as the page of a finished game (`/game/<id>`) serves it:
 // its status and winner, and every position. The game page's own data stops
 // at the moves played before it loaded.
 

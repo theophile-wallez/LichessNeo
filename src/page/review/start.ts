@@ -21,7 +21,7 @@ import { REVIEWED_VARIANTS } from './variants.ts';
 // The panel looks again this often, for what changes on its own (the analysis,
 // the engines); a move of the board draws it at once (onJump).
 const RENDER_MS = 150;
-// A link to one of the game's moves (/<id>#46), which Lichess opens on that
+// A link to one of the game's moves (/game/<id>#46), which Lichess opens on that
 // move: the review opens on the coach there rather than on the summary.
 // Lichess drops the hash once read, so it's read as our script starts.
 const MOVE_LINK = /^#\d+$/;

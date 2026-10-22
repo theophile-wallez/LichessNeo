@@ -15,7 +15,7 @@ the root's [AGENTS.md](../../../AGENTS.md).
   `page/game-over` puts its card at the head of these buttons, which are its
   foot (the analysis link first, as Game Review). The round data has no clock
   history: move times come from `/game/export/<id>?clocks=true`, and every
-  position of a game just over from its finished page (`/<id>`,
+  position of a game just over from its finished page (`/game/<id>`,
   `cfg.data.treeParts`), with its status and winner, which `page/game-over`
   reads rather than the page's words; its `treeParts` are the analysis page's
   mainline, start included, so the game page fills the review's cache under

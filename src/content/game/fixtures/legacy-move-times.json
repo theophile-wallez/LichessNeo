@@ -2,7 +2,7 @@
   "scenarios": [
     {
       "name": "a blitz game with increment",
-      "path": "/abcdefgh/white",
+      "path": "/game/abcdefgh/white",
       "html": "<main class=\"round\"><div class=\"round__side\"><rm6><l4x><i5z>1</i5z><kwdb>e4</kwdb><kwdb>e5</kwdb><i5z>2</i5z><kwdb>Nf3</kwdb><kwdb>Nc6</kwdb><i5z>3</i5z><kwdb>Bb5</kwdb><kwdb class=\"empty\">…</kwdb><div class=\"result-wrap\"><p class=\"result\">1-0</p></div></l4x></rm6></div></main>",
       "game": {
         "id": "abcdefgh",
@@ -55,7 +55,7 @@
     },
     {
       "name": "long thinks in a classical game",
-      "path": "/classic1",
+      "path": "/game/classic1",
       "html": "<main class=\"round\"><div class=\"round__side\"><rm6><l4x><i5z>1</i5z><kwdb>d4</kwdb><kwdb>Nf6</kwdb><i5z>2</i5z><kwdb>c4</kwdb><kwdb>e6</kwdb><kwdb class=\"empty\">…</kwdb><div class=\"result-wrap\"><p class=\"result\">1-0</p></div></l4x></rm6></div></main>",
       "game": {
         "id": "classic1",
@@ -105,7 +105,7 @@
     {
       "name": "TV: the id comes from the analysis link",
       "path": "/tv/blitz",
-      "html": "<main class=\"round\"><div class=\"round__side\"><rm6><div class=\"buttons\"><a class=\"analysis\" href=\"/tvgame12/black\">Analysis</a></div><l4x><i5z>1</i5z><kwdb>e4</kwdb><kwdb>c5</kwdb><kwdb class=\"empty\">…</kwdb><div class=\"result-wrap\"><p class=\"result\">1-0</p></div></l4x></rm6></div></main>",
+      "html": "<main class=\"round\"><div class=\"round__side\"><rm6><div class=\"buttons\"><a class=\"analysis\" href=\"/game/tvgame12/black/analysis#12\">Analysis</a></div><l4x><i5z>1</i5z><kwdb>e4</kwdb><kwdb>c5</kwdb><kwdb class=\"empty\">…</kwdb><div class=\"result-wrap\"><p class=\"result\">1-0</p></div></l4x></rm6></div></main>",
       "game": {
         "id": "tvgame12",
         "clock": {
@@ -145,7 +145,7 @@
     },
     {
       "name": "a game without a clock",
-      "path": "/corresp1",
+      "path": "/game/corresp1",
       "html": "<main class=\"round\"><div class=\"round__side\"><rm6><l4x><i5z>1</i5z><kwdb>e4</kwdb><kwdb>e5</kwdb><kwdb class=\"empty\">…</kwdb><div class=\"result-wrap\"><p class=\"result\">1-0</p></div></l4x></rm6></div></main>",
       "game": {
         "id": "corresp1"

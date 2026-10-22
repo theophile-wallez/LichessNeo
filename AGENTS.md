@@ -495,6 +495,12 @@ link to it, and a line here). The rest hold everywhere:
   Firefox injects the content scripts into open tabs on install or update,
   where an older copy's page script still runs:
   `content/bootstrap/late-reload.ts` reloads such a tab.
+- **Game URLs.** Every game page sits under `/game/`: `/game/<id>` for a
+  watcher, the side it's seen from after it (`/game/<id>/black`, or
+  `?pov=<user>`), and `/game/<fullId>` for a player, whose id carries four
+  more letters. Lichess redirects the older `/<id>/<color>`, so no page stays
+  there. Tell a game's page from its path through `#shared/game-path.ts`,
+  never by an id at the path's root.
 - **`#page-init-data`.** A page's module data is inlined there as JSON (the
   rating stats page also passes its chart data in
   `loadEsm('chart.ratingHistory', …)`), and Lichess removes the element once

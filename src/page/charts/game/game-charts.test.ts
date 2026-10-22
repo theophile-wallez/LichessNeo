@@ -50,7 +50,7 @@ beforeEach(() => {
 
 beforeAll(() => {
   vi.useFakeTimers();
-  history.pushState({}, '', `/${game.id}`);
+  history.pushState({}, '', `/game/${game.id}`);
   document.body.innerHTML = UNDERBOARD;
   ctrl = fakeController({ id: game.id, positions: game.nodes });
   ctrl.data = {

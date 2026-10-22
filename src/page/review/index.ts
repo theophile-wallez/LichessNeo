@@ -1,6 +1,6 @@
 import type { Feature } from '#shared/features.ts';
+import { GAME_PAGE } from '#shared/game-path.ts';
 import { watchUntil } from '#shared/poll.ts';
-import { GAME_PAGE } from '#page/lichess/pages.ts';
 import { createReview, linksToMove, readyAnalysis, startReview } from './start.ts';
 
 // The Game Review on Lichess's analysis pages: a summary of the game, then a

@@ -182,7 +182,7 @@ export function setUp(scenario: Scenario): Driver {
       JSON.stringify(z.encode(z.array(StoredRecordCodec), [...game.records])),
     );
   const id = scenario.synthetic ? 'synthetic' : game.id;
-  history.pushState({}, '', scenario.synthetic ? '/analysis' : `/${game.id}`);
+  history.pushState({}, '', scenario.synthetic ? '/analysis' : `/game/${game.id}`);
   const ctrl = fakeController({
     id,
     positions,

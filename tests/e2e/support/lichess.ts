@@ -3,7 +3,7 @@ import { expect, type Page } from '@playwright/test';
 // Opening Lichess's pages, and reading what the extension sets on them.
 
 /** A finished game with no server analysis, seen from Black: its review is ours alone. */
-export const FINISHED_GAME = { id: 'tKlG0mrQ', path: '/tKlG0mrQ/black' };
+export const FINISHED_GAME = { id: 'tKlG0mrQ', path: '/game/tKlG0mrQ/black' };
 
 /**
  * Opens a page of lichess.org (relative to the config's baseURL) once it has

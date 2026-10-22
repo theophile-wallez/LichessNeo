@@ -2,6 +2,7 @@ import { opposite, type Color } from '#shared/chess/types.ts';
 import { wrapOrientation } from '#shared/chessground.ts';
 import { pickCoach } from '#shared/coach.ts';
 import { queryOne } from '#shared/dom.ts';
+import { gameIdFrom } from '#shared/game-path.ts';
 import { opponentName } from './board.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
 import { fetchFinishedGame, parseFinishedGame, type FinishedGame } from './game-data.ts';
@@ -52,10 +53,8 @@ function boardOnPage(): Board | null {
   const main = queryOne(document, 'main:is(.round, .analyse)', HTMLElement);
   const wrap =
     main && queryOne(main, ':is(.round__app__board, .analyse__board) .cg-wrap', HTMLElement);
-  // A game's id is the path's first eight letters, a player's link adding four.
-  const gameId = location.pathname.split('/')[1]?.slice(0, 8) ?? '';
-  if (!main || !wrap || gameId.length !== 8 || !main.querySelector('cg-board piece.king'))
-    return null;
+  const gameId = gameIdFrom(location.pathname);
+  if (!main || !wrap || !gameId || !main.querySelector('cg-board piece.king')) return null;
   return { main, gameId, player: wrapOrientation(wrap) };
 }
 
