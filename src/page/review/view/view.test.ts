@@ -126,7 +126,7 @@ const bar = (input: Partial<BarInput>): ReturnType<typeof barPosition> =>
     review: { positions: [record(50), record(60)] },
     reviewing: true,
     live: false,
-    onMainline: true,
+    onGame: true,
     ply: 1,
     bestBefore: null,
     offGame: undefined,
@@ -181,11 +181,11 @@ describe('the board', () => {
   it('shows the eval bar’s score for the position on the board', () => {
     expect(bar({})?.whiteWinChance).toBe(60);
     expect(bar({ bestBefore: record(10) })?.whiteWinChance).toBe(10);
-    expect(bar({ onMainline: false, offGame: record(70) })?.whiteWinChance).toBe(70);
+    expect(bar({ onGame: false, offGame: record(70) })?.whiteWinChance).toBe(70);
     // A move off the game waits for its engine with the last score.
-    expect(bar({ onMainline: false, last: record(33) })?.whiteWinChance).toBe(33);
+    expect(bar({ onGame: false, last: record(33) })?.whiteWinChance).toBe(33);
     expect(
-      bar({ reviewing: false, onMainline: false, offGame: record(70), last: record(33) }),
+      bar({ reviewing: false, onGame: false, offGame: record(70), last: record(33) }),
     ).toBeNull();
     expect(bar({ live: true })).toBeNull();
     expect(bar({ review: null, last: record(33) })).toBeNull();

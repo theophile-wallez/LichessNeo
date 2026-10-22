@@ -162,7 +162,9 @@ export function mountGraph(
   if (!review) return;
   const box = boxFor(container);
   remounts.set(container, () => mountGraph(session, analysis, { container, kind }));
-  const ply = analysis.node.ply;
+  // A move played past the game's last has no place on its graph: the cursor
+  // stays on the last position rather than slide off the right edge.
+  const ply = Math.min(analysis.node.ply, lastIndex(review));
   // Only the move-by-move graph shows the move times, and only a game with clocks has them.
   const times = kind === 'moves' && view.graph === 'time' ? gameTimes(analysis) : [];
   const shown: GraphView = times.length > 0 ? 'time' : 'advantage';

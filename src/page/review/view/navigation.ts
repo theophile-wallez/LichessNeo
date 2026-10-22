@@ -2,6 +2,7 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { firstChild, parentPath } from '#page/lichess/tree.ts';
 import { normalizeUci } from '#page/review/chess/notation.ts';
 import { BEST_PLIES, bestRequest, foundLine } from '#page/review/explain/lines.ts';
+import { isGameNode } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import type { BestShown, JudgedMove, LineShown, Session } from '#page/review/session.ts';
 
@@ -10,12 +11,15 @@ import type { BestShown, JudgedMove, LineShown, Session } from '#page/review/ses
 const PLAY_STEP_MS = 1200;
 const LINE_STEP_MS = 900;
 
-/** The move on the board: the game's, from the review, or one played off it (judged as it comes). */
+/**
+ * The move on the board: the game's, from the review, or one played off it
+ * (judged as it comes), a move played on from the game's last one included.
+ */
 export function reviewMove(session: Session, analysis: Analysis): JudgedMove | null {
   const { review } = session.view;
   const { path } = analysis;
   if (!review || !path) return null;
-  if (analysis.onMainline) return review.moves[analysis.node.ply - 1] ?? null;
+  if (isGameNode(session.work, analysis.node)) return review.moves[analysis.node.ply - 1] ?? null;
   return judgeAt(session.live, analysis, path);
 }
 

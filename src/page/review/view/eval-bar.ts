@@ -11,7 +11,8 @@ export interface BarInput {
   /** The panel is open (any mode but the closed one). */
   readonly reviewing: boolean;
   readonly live: boolean;
-  readonly onMainline: boolean;
+  /** The position on the board is one of the game's own (game/work.ts). */
+  readonly onGame: boolean;
   readonly ply: number;
   /** The position before the best move shown on the board, if one is. */
   readonly bestBefore: PositionRecord | null;
@@ -22,11 +23,11 @@ export interface BarInput {
 }
 
 function knownPosition(input: BarInput): PositionRecord | null {
-  const { review, reviewing, onMainline, ply, bestBefore, offGame } = input;
+  const { review, reviewing, onGame, ply, bestBefore, offGame } = input;
   if (input.live || !review) return null;
   // The best move keeps the eval of the position before it.
   if (bestBefore) return bestBefore;
-  if (onMainline) return review.positions[ply] ?? null;
+  if (onGame) return review.positions[ply] ?? null;
   return reviewing ? (offGame ?? null) : null;
 }
 

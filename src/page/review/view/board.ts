@@ -10,6 +10,7 @@ import {
   setReviewArrows,
   setReviewDrawing,
 } from '#page/board/review-arrows.ts';
+import { isGameNode } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import { badgeMarkup, reviewArrowsFor } from './board-badge.ts';
@@ -28,7 +29,7 @@ function renderBar(session: Session, analysis: Analysis, shown: JudgedMove | nul
     review: view.review,
     reviewing,
     live: view.mode === 'live',
-    onMainline: analysis.onMainline,
+    onGame: isGameNode(session.work, analysis.node),
     ply: analysis.node.ply,
     bestBefore: shown?.before ?? null,
     offGame: live.evals.get(analysis.node.fen),
@@ -82,7 +83,8 @@ function renderBadge(session: Session, analysis: Analysis, move: JudgedMove | nu
 function boardArrows(session: Session, analysis: Analysis, move: JudgedMove | null): ReviewArrow[] {
   const { view, live } = session;
   if (view.retry) return [];
-  const offGame = view.mode !== 'normal' && view.review !== null && !analysis.onMainline;
+  const offGame =
+    view.mode !== 'normal' && view.review !== null && !isGameNode(session.work, analysis.node);
   const arrows = reviewArrowsFor({
     moveClass: move?.moveClass ?? null,
     best: move?.best ?? null,

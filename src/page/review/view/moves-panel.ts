@@ -4,6 +4,7 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { classIcon } from '#page/review/classes/icon-svg.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
 import { explainLines } from '#page/review/explain/lines.ts';
+import { isGameNode } from '#page/review/game/work.ts';
 import { threatsReady } from '#page/review/explain/threats.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import type { PanelAction } from './actions.ts';
@@ -61,7 +62,7 @@ function bubbleMarkup(
   if (!comment) {
     // No verdict yet: the move waits for the engine, as the game's own moves do
     // while the game's analysis runs.
-    const error = analysis.onMainline ? view.error : live.error;
+    const error = isGameNode(session.work, analysis.node) ? view.error : live.error;
     return error === null ? thinkingMarkup(ui.thinking) : bubbleTitle(error);
   }
   return verdictMarkup(session, comment, actions);

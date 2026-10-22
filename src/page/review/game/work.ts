@@ -1,11 +1,20 @@
 import type { Analysis } from '#page/lichess/analysis.ts';
+import type { TreeNode } from '#page/lichess/tree.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { rateGame } from '#page/review/rating/rate-game.ts';
-import type { JudgedMove, Session } from '#page/review/session.ts';
+import type { GameWork, JudgedMove, Session } from '#page/review/session.ts';
 import { buildReview } from './build.ts';
 
 // The game's analysis as it fills in. A deep record is never replaced, so a
 // move, once judged, stays as it is.
+
+/**
+ * Whether `node` is one of the game's own positions. A move played on from the
+ * game's last one extends Lichess's mainline, so `onMainline` isn't enough:
+ * such a move has no verdict in the review, and is judged like a variation's.
+ */
+export const isGameNode = ({ nodes }: GameWork, node: TreeNode): boolean =>
+  nodes[node.ply] === node;
 
 /** A full-depth record just taken: the moves played off the game are judged from it too. */
 export function seeDeep(session: Session, index: number, record: PositionRecord): void {

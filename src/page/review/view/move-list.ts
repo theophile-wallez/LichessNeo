@@ -34,8 +34,7 @@ function markCost(element: HTMLElement, loss: number): void {
 }
 
 /** The game's moves, from the review's draft; a book badge only on the last book move. */
-function mainlineBadges(tree: Element, review: Review): void {
-  const moves = queryAll(tree, ':scope > move:not(.empty)', HTMLElement);
+function mainlineBadges(moves: readonly HTMLElement[], review: Review): void {
   for (const [i, element] of moves.entries()) {
     const move = review.draft[i];
     if (!move) continue;
@@ -117,8 +116,14 @@ export const treeMoves = (): HTMLElement[] =>
 export function reviewBadges(live: LiveState, analysis: Analysis, review: Review): void {
   const tree = queryOne(document, 'main.analyse .tview2', Element);
   if (!tree) return;
-  mainlineBadges(tree, review);
+  const mainline = queryAll(tree, ':scope > move:not(.empty)', HTMLElement);
+  mainlineBadges(mainline, review);
   stripes(tree);
   ownVariations(tree, analysis, live.entered);
-  liveBadges(live, analysis, queryAll(tree, 'interrupt line.ln-ext-var move[p]', HTMLElement));
+  // A move played on from the game's last position grows Lichess's mainline,
+  // not the review: it's judged as a variation's moves are.
+  liveBadges(live, analysis, [
+    ...mainline.slice(review.total - 1),
+    ...queryAll(tree, 'interrupt line.ln-ext-var move[p]', HTMLElement),
+  ]);
 }
