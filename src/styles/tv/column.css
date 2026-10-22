@@ -4,11 +4,39 @@
 
 @media (min-width: 1020px) {
   html[data-ln-ext-has~='tv-channels'] main.round.tv-single {
-    --ln-ext-tv-w: 62px;
-    --ln-ext-lead-w: calc(var(--ln-ext-tv-w) + var(--ln-ext-gap));
+    /* The channels' column before it takes its share of the leftover width, and how wide
+     * it may grow. */
+    --ln-ext-tv-base: 62px;
+    --ln-ext-tv-max: 62px;
+    --ln-ext-lead-w: calc(var(--ln-ext-tv-base) + var(--ln-ext-gap));
+    /* Crazyhouse's pockets, between the board and the panel (below). */
+    --ln-ext-pocket-room: 0px;
     /* TV has no chat: a slimmer panel gives the board back what the channels take. */
     --ln-ext-panel-min: clamp(260px, 20vw, 360px);
-    --ln-ext-panel-w: var(--ln-ext-panel-min);
+    /* The board is as tall as the window allows and no wider (layout.css), so a window
+     * wider than it is tall leaves width the grid doesn't use. It goes to the two columns
+     * rather than to the margins: the channels first, up to --ln-ext-tv-max, then the
+     * panel, which on TV would otherwise stay at its minimum. */
+    --ln-ext-slack: max(
+      0px,
+      calc(
+        var(--ln-ext-main-w, 100vw) - var(--ln-ext-tv-base) - var(--ln-ext-board) -
+          var(--ln-ext-panel-min) - var(--ln-ext-pocket-room) - 2 * var(--ln-ext-gap) - 48px
+      )
+    );
+    --ln-ext-tv-w: clamp(
+      var(--ln-ext-tv-base),
+      calc(var(--ln-ext-tv-base) + 0.4 * var(--ln-ext-slack)),
+      var(--ln-ext-tv-max)
+    );
+    --ln-ext-panel-w: min(
+      360px,
+      calc(
+        var(--ln-ext-panel-min) + var(--ln-ext-slack) + var(--ln-ext-tv-base) - var(--ln-ext-tv-w)
+      )
+    );
+    /* The column and its gap, for the grid that carries its own gaps (crazyhouse, below). */
+    --ln-ext-tv-track: calc(var(--ln-ext-tv-w) + var(--ln-ext-gap));
 
     grid-template-columns: var(--ln-ext-tv-w) var(--ln-ext-board) var(--ln-ext-panel-w) !important;
     grid-template-areas:
@@ -22,8 +50,10 @@
   /* Crazyhouse: pockets after the board and no column gap, as in game/; the channels'
    * column carries its own gap. */
   html[data-ln-ext-has~='tv-channels'][data-ln-ext-has~='pocket'] main.round.tv-single {
+    --ln-ext-pocket-room: calc(var(--ln-ext-pocket-gap) + var(--ln-ext-pocket-sq));
+
     grid-template-columns:
-      var(--ln-ext-lead-w)
+      var(--ln-ext-tv-track)
       var(--ln-ext-board)
       calc(var(--ln-ext-pocket-gap) + var(--ln-ext-pocket-sq) + var(--ln-ext-gap))
       var(--ln-ext-panel-w) !important;
@@ -35,10 +65,13 @@
       'tv user-bot .      chat' !important;
   }
 
-  /* Zen mode hides the side, channels included (game/). */
+  /* Zen mode hides the side, channels included (game/). Zen sizes its own board, so there
+   * is no leftover width to hand out: the column goes and the panel stays as it is. */
   body.zenable.zen main.round.tv-single {
     --ln-ext-tv-w: 0px !important;
+    --ln-ext-tv-track: 0px !important;
     --ln-ext-lead-w: 0px !important;
+    --ln-ext-panel-w: var(--ln-ext-panel-min) !important;
   }
 
   html[data-ln-ext-has~='pocket'] main.round.tv-single > .round__side > .subnav {
@@ -261,7 +294,8 @@
 /* Wide enough for the names: full rows. */
 @media (min-width: 1260px) {
   html[data-ln-ext-has~='tv-channels'] main.round.tv-single {
-    --ln-ext-tv-w: clamp(200px, 14vw, 250px);
+    --ln-ext-tv-base: clamp(200px, 14vw, 250px);
+    --ln-ext-tv-max: 250px;
   }
 }
 
