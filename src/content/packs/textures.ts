@@ -6,9 +6,9 @@ import { setStyleProperty } from '#shared/dom.ts';
 // (styles/board/textures.css). The relief holds a gap per channel, which is how
 // a wood's squares each come in their own color. The custom board picks a
 // texture and how strongly it shows; a ready-made material board comes with its
-// own (materials.ts). The woods and the marbles come first: each is a pair of
-// species or stones drawn to numbers measured on photographs of one real board,
-// and named as it names them.
+// own (materials.ts). The woods and the Portoro come first: each reproduces one
+// real board, cut square by square out of photographs of it, and names the two
+// woods or stones it pairs as that board names them.
 
 export const TEXTURES = [
   { id: 'burl-gloss', name: 'Maple & burl' },

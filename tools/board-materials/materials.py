@@ -1,7 +1,8 @@
-"""The materials, each drawn in color on a whole board (drawing.py). Woods and
-stones are cut square by square from a bigger slab, so no two squares match;
-the marble is one slab across the board, as a real one is. Each wood is one real
-board: a pair of species drawn to what photographs of it measure (wood.py)."""
+"""The materials with no real board to photograph, each drawn in color on a whole board
+(drawing.py). Stones are cut square by square from a bigger slab, so no two squares
+match; the marble is one slab across the board, as a real one is. The materials that do
+reproduce one real board -- the nine woods and the Portoro -- are cut out of its
+photographs instead (photo.py)."""
 
 import numpy as np
 from scipy import ndimage
@@ -21,7 +22,6 @@ from drawing import (
     seams,
     squares,
 )
-from wood import board
 
 
 def veins(rng, scale, sharpness):
@@ -220,17 +220,7 @@ def cork(rng):
 
 
 # Each material and how much of its relief the texture keeps: the busiest are toned down.
-# The woods name the two species they pair, as a real board does.
 MATERIALS = {
-    'burl-gloss': (board('glossed-maple', 'glossed-burl'), 1),
-    'burl': (board('birds-eye', 'walnut-burl'), 1),
-    'vavona': (board('birds-eye', 'vavona-burl'), 1),
-    'cocobolo': (board('birds-eye', 'cocobolo'), 1),
-    'amboyna': (board('birds-eye', 'amboyna-burl'), 1),
-    'olmo': (board('pale-maple', 'elm-burl'), 1),
-    'padauk': (board('birds-eye', 'padauk'), 1),
-    'palisander': (board('birds-eye', 'palisander'), 1),
-    'pomelle': (board('curly-maple', 'pomelle'), 1),
     'marble': (marble, 1),
     'terrazzo': (terrazzo, 1),
     'slate': (slate, 1),

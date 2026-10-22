@@ -26,7 +26,7 @@ allowed-confusables = ['×', '–']
 
 # A tool's own modules sit beside it, so a bare import of one is ours, not a package's.
 [lint.isort]
-known-first-party = ['drawing', 'materials', 'minerals', 'species', 'stone', 'wood']
+known-first-party = ['drawing', 'materials', 'rectify']
 
 [format]
 quote-style = 'single'

@@ -2,22 +2,24 @@ import type { FlatBoard } from './flat-boards.ts';
 import { TEXTURES } from './textures.ts';
 
 // The ready-made material boards, listed under one tile of the Board panel:
-// each texture over the colors it was drawn in (tools/board-materials prints
-// them), at full strength.
+// each texture over the mean colors of the material it shows, which
+// tools/board-materials prints, at full strength. The ten that reproduce a real
+// board read theirs off its photographs (photo.py); the rest are the colors
+// they were drawn in (generate.py).
 
 export const MATERIALS = 'materials';
 
 const COLORS: Readonly<Record<(typeof TEXTURES)[number]['id'], readonly [string, string]>> = {
-  'burl-gloss': ['#f1d6a9', '#6e3f2b'],
-  burl: ['#d2a77a', '#623929'],
-  vavona: ['#d3a87b', '#783c2c'],
-  cocobolo: ['#d3a87b', '#883325'],
-  amboyna: ['#d2a77a', '#a84e21'],
-  olmo: ['#e5d7b4', '#8f421e'],
-  padauk: ['#d2a77a', '#c52b09'],
-  palisander: ['#d2a87b', '#462e25'],
-  pomelle: ['#f2d2ae', '#b64417'],
-  portoro: ['#eef1eb', '#3c382f'],
+  'burl-gloss': ['#f9d09b', '#6c3c27'],
+  burl: ['#d6a978', '#5f3826'],
+  vavona: ['#d7ac7e', '#80402b'],
+  cocobolo: ['#f6c68f', '#6e0c05'],
+  amboyna: ['#f9c991', '#b5430f'],
+  olmo: ['#ecd9b2', '#91401d'],
+  padauk: ['#f6cb98', '#b91905'],
+  palisander: ['#efbc88', '#4a2d24'],
+  pomelle: ['#fad9ab', '#c04512'],
+  portoro: ['#eef1eb', '#39362d'],
   marble: ['#f7f5ef', '#636b77'],
   terrazzo: ['#efebe6', '#3f49a7'],
   slate: ['#d0ccc1', '#545f6c'],

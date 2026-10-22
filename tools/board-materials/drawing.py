@@ -55,8 +55,8 @@ def from_light(linear):
 
 
 def lightness_star(image):
-    """CIE L*, 0 to 100, which the measurements of real wood (wood.py) are in. Nothing
-    like the plain luma the relief is built from: this one is the eye's own scale."""
+    """CIE L*, 0 to 100. Nothing like the plain luma the relief is built from: this one is
+    the eye's own scale, and it is what a real board is measured in."""
     luminance = to_light(image) @ np.array([0.2126, 0.7152, 0.0722])
     root = np.where(luminance > 0.008856, np.cbrt(luminance), 7.787 * luminance + 16 / 116)
     return 116 * root - 16
@@ -101,8 +101,8 @@ def mean_color(image, shade):
 
 def spreads(image, dark):
     """How far a shade's lightness spreads, in CIE L*: inside one square, and from one
-    square to the next. The measurements of real wood (species.py) are in those units, so
-    this is what says whether a wood came out as its own."""
+    square to the next. A real board measures 1 to 5 inside a square and 1 to 3 between
+    them, so this is what says whether a texture came out as varied as one."""
     level = lightness_star(image)
     middles, insides = [], []
     for row in range(8):

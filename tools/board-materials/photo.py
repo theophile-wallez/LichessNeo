@@ -2,8 +2,8 @@
 
 Only for photographs the project holds the rights to, and their license belongs in
 public/licenses/ with the rest. Nothing of another chess site's may go in, redrawn or
-traced or not: see the product rules in AGENTS.md. The other textures are drawn from
-seeded noise (materials.py), which is what a material without such photographs gets.
+traced or not: see the product rules in AGENTS.md. The materials with no board to
+photograph are drawn from seeded noise instead (materials.py).
 
 The chequerboard is its own calibration target. The corners where four squares meet are
 found to sub-pixel accuracy, however few of them a photograph shows, and the perspective
@@ -14,7 +14,7 @@ color, which would take the dark table a board stands on for a black square.
 The board is then built from the sharpest copy of each square rather than from one
 photograph: a photograph of the whole board gives all 64 squares but only about 160
 pixels across each where a texture wants 256, and a close-up gives a dozen at up to 300.
-The squares kept are spread over the whole range of how veined a square is, not simply
+The squares kept are spread over the whole range of how figured a square is, not simply
 the largest, because the largest all come from the close-ups, which on a marble board
 means the plainest squares and a texture with none of the slab's own variety.
 
@@ -23,12 +23,19 @@ The photographs disagree about exposure and about color -- the same stone reads 
 by the pair its own squares give: a gain and an offset on light, which is a camera's
 response and its veiling glare to first order, and all that two known shades can carry.
 
+What is not the board is told from it by color and never by lightness, and in neither
+direction in particular: the marble board stands on a wooden table, a saturated brown
+against a near-neutral stone, and the wood boards on a grey cloth, neutral against a
+saturated wood. So each square is held against the color of its own face of the board,
+which the board itself gives.
+
   python3 tools/board-materials/photo.py <material> <photograph> [<photograph> …]
 """
 
 import sys
 import zlib
 from pathlib import Path
+from typing import NamedTuple
 
 import cv2
 import numpy as np
@@ -44,6 +51,7 @@ from drawing import (
     spreads,
     to_light,
 )
+from rectify import biggest_grid, fitted
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'public/img/boards'
@@ -56,121 +64,131 @@ INSET = 0.11
 # How far past the corners it found a photograph is searched, in squares. A photograph of
 # the whole board knows where the board ends; one of a corner of it does not.
 REACH = 3
+# Softens the ratio of two warmths where a face is all but neutral, since two readings
+# near zero are a ratio of nothing, and how far a tile's warmth may then sit from its own
+# face's, either way. Over the ten boards, the squares that are board sit within 1.7 of
+# their face (the loosest being a white marble square so free of veins it is neutral
+# against a face that is not quite), and the tiles that are the table start at 2.7: a
+# patch of grey cloth reads a third of the maple it would pass for, and the dark wooden
+# table under the marble eight times the stone.
+STEADY = 0.1
+APART = 2.0
 
 
-def biggest_grid(grey):
-    """The largest grid of inner corners a photograph shows, and its shape. A whole board
-    gives 7 by 7 of them; a close-up of a corner gives whatever it gives."""
-    for rows in range(7, 2, -1):
-        for columns in range(7, 2, -1):
-            ok, corners = cv2.findChessboardCornersSB(
-                grey, (columns, rows), flags=cv2.CALIB_CB_EXHAUSTIVE
-            )
-            if ok:
-                return rows, columns, corners.reshape(rows, columns, 2).astype(np.float64)
-    return None
+class Face(NamedTuple):
+    """One of the two surfaces a board alternates, as a photograph reads it."""
+
+    level: float
+    """Its median light."""
+    warmth: float
+    """How far its color runs from neutral, per unit of its own light: near zero for a
+    marble, around one for a wood."""
 
 
-def terms(points):
-    """A point's quadratic terms, which is the shape a lens bends a straight line into."""
-    return np.c_[
-        np.ones(len(points)),
-        points[:, 0],
-        points[:, 1],
-        points[:, 0] ** 2,
-        points[:, 0] * points[:, 1],
-        points[:, 1] ** 2,
-    ]
-
-
-def fitted(corners, rows, columns):
-    """Where a point of the board lies in a photograph, as a function of its place in
-    squares, and how far that function misses the corners it was fitted to. The
-    homography is the perspective exactly; the quadratic on top of it is the lens. Both
-    are fitted to every corner at once, so a corner found on the wrong side of a vein
-    moves the surface by a fraction of itself instead of tearing a square out of line."""
-    places = np.array(
-        [[column + 1, row + 1] for row in range(rows) for column in range(columns)], float
-    )
-    found = corners.reshape(-1, 2)
-    matrix, agreed = cv2.findHomography(places, found, cv2.RANSAC, 4.0)
-    if agreed is not None and agreed.sum() >= 8:
-        held = agreed.ravel() > 0
-        matrix, _ = cv2.findHomography(places[held], found[held], 0)
-    straight = cv2.perspectiveTransform(places.reshape(1, -1, 2), matrix).reshape(-1, 2)
-    # Six terms an axis need corners to spare, or the lens model bends to whatever a
-    # mis-found corner says: a photograph showing only a dozen gets the perspective alone.
-    bend = (
-        np.linalg.lstsq(terms(places), found - straight, rcond=None)[0]
-        if len(places) >= 30
-        else np.zeros((6, 2))
-    )
-
-    def place(points):
-        points = np.asarray(points, float)
-        flat = cv2.perspectiveTransform(points.reshape(1, -1, 2), matrix).reshape(-1, 2)
-        return flat + terms(points) @ bend
-
-    return place, float(np.median(np.hypot(*(place(places) - found).T)))
-
-
-def veined(tile):
+def figured(tile):
     """How much more light a tile sends back than the darker half of its own pixels: what
-    its veins add, and the one reading of a vein that no blur and no threshold can move.
-    The squares of a real slab differ widely in it -- one is shattered and the next nearly
-    plain -- so it is what the harvest is spread over."""
+    its veins or its figure add, and the one reading of them that no blur and no threshold
+    can move. The squares of a real board differ widely in it -- one is a shattered mass of
+    veins and the next nearly plain -- so it is what the harvest is spread over."""
     glow = to_light(tile) @ LUMA
     return float(glow.mean() / glow[glow <= np.median(glow)].mean() - 1)
 
 
-def foreign(glow, between, darker):
-    """The share of `glow` that is the other of the board's two marbles."""
-    return float((glow < between).mean() if darker else (glow > between).mean())
+def warmth(linear, glow):
+    """How far a surface's color runs from neutral, per unit of its own light. Read off the
+    darkest quarter of what it is given, which is the surface itself: a marble's gold veins
+    and a varnish's highlights are warmer than the stone or the wood under them, and on a
+    square shattered with veins they are most of its darker half."""
+    dim = glow <= max(float(np.quantile(glow, 0.25)), 1e-6)
+    darker = linear[dim]
+    spread = np.abs(darker[:, 2] - darker[:, 1]) + np.abs(darker[:, 1] - darker[:, 0])
+    return float(np.median(spread)) / max(float(np.median(glow[dim])), 1e-6)
 
 
-def whole(tile, level, other):
-    """Whether a tile is a square of this stone and nothing else.
+def faced(color):
+    """One of the two faces a board alternates, as a photograph reads its color."""
+    level = float(color @ LUMA)
+    spread = abs(color[2] - color[1]) + abs(color[1] - color[0])
+    return Face(level, float(spread) / max(level, 1e-6))
 
-    A square taken partly off the board holds a stretch of the stone next to it, of the
-    slab's own rim, or of the table; and a grid fitted to a corner of the board cannot
-    know where the board ends, so the tile itself is the only place left to look. Three
-    things are asked of it: that it sits at its own stone's level, that little of it is
-    the other stone, and that no part of its border is. The border is read in blocks and
-    then in the thinnest sliver of all, because the joint between two tiles shows as a
-    line three pixels wide, which is nothing of a block and a third of a sliver.
 
-    What is looked for is the other stone and not merely a brighter or darker patch: a
-    vein crossing a square's edge is no stranger there, and a test on brightness alone
-    throws out every square that has one.
+def strange(linear, glow, face):
+    """Whether a region's color is not this face's.
+
+    A board and the table it stands on differ in how far from neutral they run, whichever
+    way round: the marble board's table is a saturated wood where the stone is near
+    neutral, and the wood boards' is a grey cloth where the wood is saturated. That is
+    what tells the two apart, and lightness cannot be asked anything here -- a grey cloth
+    and a pale maple sit at the same level.
     """
-    linear = to_light(tile)
-    glow = linear @ LUMA
-    middle = max(float(np.median(glow)), 1e-6)
-    darker = other < level
-    # Measured most of the way towards the other stone, since a vein of this one reaches
-    # well past halfway and is not foreign at all.
-    between = float(np.exp(0.75 * np.log(max(other, 1e-6)) + 0.25 * np.log(max(level, 1e-6))))
-    if foreign(glow, between, darker) > 0.2 or abs(np.log(middle / max(level, 1e-6))) > 0.5:
-        return False
-    # How warm the stone itself runs, off the darker half of the tile so its own gold
-    # veins stay out of it: a wooden table is a saturated brown through and through, where
-    # a marble is near neutral.
-    stone = linear[glow <= middle]
-    spread = np.abs(stone[:, 2] - stone[:, 1]) + np.abs(stone[:, 1] - stone[:, 0])
-    if float(np.median(spread)) / max(float(np.median(glow[glow <= middle])), 1e-6) > 0.5:
-        return False
+    off = (warmth(linear, glow) + STEADY) / (face.warmth + STEADY)
+    return abs(np.log(off)) > np.log(APART)
+
+
+def bordered(linear, glow, face, foreign):
+    """Whether every part of a tile's border is the board and not what it stands on. Read
+    in blocks and then in the thinnest sliver of all, because the joint between two tiles
+    shows as a line three pixels wide, which is nothing of a block and a third of a
+    sliver."""
     edge = round(0.14 * len(glow))
     for across in range(4):
         for down in range(4):
             if 0 < across < 3 and 0 < down < 3:
                 continue
             top, left = down * (len(glow) - edge) // 3, across * (len(glow) - edge) // 3
-            block = glow[top : top + edge, left : left + edge]
-            if foreign(block, between, darker) > 0.35:
+            at = (slice(top, top + edge), slice(left, left + edge))
+            if foreign(glow[at]) > 0.35 or strange(linear[at], glow[at], face):
                 return False
     thin = round(0.04 * len(glow))
-    slivers = (glow[:thin], glow[-thin:], glow[:, :thin], glow[:, -thin:])
-    return all(foreign(sliver, between, darker) < 0.38 for sliver in slivers)
+    slivers = (
+        (slice(None, thin),),
+        (slice(-thin, None),),
+        (slice(None), slice(None, thin)),
+        (slice(None), slice(-thin, None)),
+    )
+    return all(foreign(glow[at]) < 0.38 for at in slivers)
+
+
+def whole(tile, face, other):
+    """Whether a tile is a square of this face of the board and nothing else.
+
+    A square taken partly off the board holds a stretch of the face next to it, of the
+    board's own rim, or of the table; and a grid fitted to a corner of the board cannot
+    know where the board ends, so the tile itself is the only place left to look. Four
+    things are asked of it: that it sits at its own face's level, that its color is that
+    face's, that little of it is the other face, and that no part of its border is either.
+
+    What is looked for is the other face and not merely a brighter or darker patch: a vein
+    or a growth ring crossing a square's edge is no stranger there, and a test on
+    brightness alone throws out every square that has one.
+    """
+    linear = to_light(tile)
+    glow = linear @ LUMA
+    middle = max(float(np.median(glow)), 1e-6)
+    darker = other < face.level
+    # Measured most of the way towards the other face, since a vein of this one reaches
+    # well past halfway and is not foreign at all.
+    step = float(np.exp(0.75 * np.log(max(other, 1e-6)) + 0.25 * np.log(max(face.level, 1e-6))))
+
+    def foreign(shine):
+        """The share of a region that is the board's other face."""
+        return float((shine < step).mean() if darker else (shine > step).mean())
+
+    if foreign(glow) > 0.2 or abs(np.log(middle / max(face.level, 1e-6))) > 0.5:
+        return False
+    if strange(linear, glow, face):
+        return False
+    return bordered(linear, glow, face, foreign)
+
+
+def spanned(corners):
+    """Which squares to look for along an axis, given how many inner corners were found
+    along it. Seven is all a board has, so that axis is pinned to the board's own edges and
+    nothing past them is looked at; fewer leaves the board's end unknown, and the squares
+    past the corners are searched and tested instead. It is worth the care: a square placed
+    a little off the board's end carries the rim's bevel, which sits between the two faces
+    in lightness and is of the board's own wood, so no test on color or level sees it."""
+    return (0, 8) if corners == 7 else (-REACH, corners + 1 + REACH)
 
 
 def squared(photo, place, rows, columns):
@@ -179,10 +197,10 @@ def squared(photo, place, rows, columns):
     height, width = photo.shape[:2]
     linear = to_light(photo)
     glow = linear @ LUMA
-    span = (0, 8) if rows == columns == 7 else (-REACH, rows + 1 + REACH)
+    down, across = (spanned(rows), spanned(columns))
     found = []
-    for row in range(*span):
-        for column in range(*span):
+    for row in range(*down):
+        for column in range(*across):
             quad = place(
                 [[column, row], [column + 1, row], [column + 1, row + 1], [column, row + 1]]
             )
@@ -210,9 +228,9 @@ def squared(photo, place, rows, columns):
 
 
 def levelled(found, place, rows, columns):
-    """The two stones' own colors in a photograph, read only off the squares the corners
+    """The board's two own colors in a photograph, read only off the squares the corners
     it found enclose, which are certainly board and not table, and which of the two
-    parities is the darker stone."""
+    parities is the darker face."""
     near, far = place([[1, 1]])[0], place([[columns, rows]])[0]
     sure = [
         (parity, shine, tint)
@@ -258,7 +276,7 @@ def harvested(paths):
         found = squared(photo, place, rows, columns)
         read = levelled(found, place, rows, columns) if found else None
         if not read:
-            print(f'{Path(path).name}: only one stone in frame, left out')
+            print(f'{Path(path).name}: only one face of the board in frame, left out')
             continue
         casts, darker = read
         if reference is None:
@@ -268,12 +286,14 @@ def harvested(paths):
             offset = reference[False] - gain * casts[False]
             if not ((gain > 0.4) & (gain < 2.5)).all():
                 print(
-                    f'{Path(path).name}: its two stones read {casts[False].round(3)} and '
+                    f'{Path(path).name}: its two faces read {casts[False].round(3)} and '
                     f'{casts[True].round(3)}, which no exposure explains, left out'
                 )
                 continue
         evened = np.clip(from_light(to_light(photo) * gain + offset), 0, 255).astype(np.uint8)
-        levels = {dark: float(casts[dark] @ LUMA) for dark in (False, True)}
+        # The faces as the evened photograph shows them, not as it was shot: the tiles a
+        # square is tested against come out of `evened`, so the two must be on one scale.
+        faces = {dark: faced(gain * casts[dark] + offset) for dark in (False, True)}
         target = np.array([[0, 0], [SQUARE, 0], [SQUARE, SQUARE], [0, SQUARE]], np.float32)
         kept = 0
         for parity, quad, side, _, _ in found:
@@ -285,9 +305,9 @@ def harvested(paths):
                 flags=cv2.INTER_LANCZOS4,
             )
             dark = parity == darker
-            if not whole(tile, levels[dark], levels[not dark]):
+            if not whole(tile, faces[dark], faces[not dark].level):
                 continue
-            harvest[dark].append((side, veined(tile), tile))
+            harvest[dark].append((side, figured(tile), tile))
             kept += 1
         print(
             f'{Path(path).name}: {rows}×{columns} corners to {apart:.1f} px, {kept} of '
@@ -298,8 +318,8 @@ def harvested(paths):
 
 
 def chosen(tiles, wanted):
-    """`wanted` tiles that keep the slab's own spread of veining, each the best resolved of
-    its own kind: the harvest is sorted by how veined a square is and cut into that many
+    """`wanted` tiles that keep the board's own spread of figure, each the best resolved of
+    its own kind: the harvest is sorted by how figured a square is and cut into that many
     equal bands, and the largest square in each band is taken. Taking the largest overall
     instead gives whichever squares the close-ups happened to show, which on a marble
     board means a texture of plain ones."""
@@ -314,18 +334,18 @@ def chosen(tiles, wanted):
 
 
 def laid(harvest, rng):
-    """The tiles laid out as a board, each turned any quarter: a slab is cut without a
-    grain, so that is how a real board is laid, and it keeps a square used twice on a
-    board of 64 from reading as the same square twice."""
+    """The tiles laid out as a board, each turned any quarter: that is how the makers lay
+    the real ones, whose squares are cut across the sheet as much as along it, and it keeps
+    a square used twice on a board of 64 from reading as the same square twice."""
     board = np.zeros((BOARD, BOARD, 3), np.uint8)
     chosen_tiles = {dark: chosen(harvest[dark], 32) for dark in (False, True)}
     for dark in (False, True):
         sides = np.array([side for side, _, _ in chosen_tiles[dark]])
-        veins = np.array([vein for _, vein, _ in chosen_tiles[dark]])
+        marks = np.array([mark for _, mark, _ in chosen_tiles[dark]])
         print(
             f'  {"dark" if dark else "light"} squares: {len(harvest[dark])} harvested, 32 '
-            f'kept over the whole spread of veining ({veins.min():+.0%} to {veins.max():+.0%}, '
-            f'{veins.mean():+.0%} on average), {sides.min():.0f} to {sides.max():.0f} px '
+            f'kept over the whole spread of figure ({marks.min():+.0%} to {marks.max():+.0%}, '
+            f'{marks.mean():+.0%} on average), {sides.min():.0f} to {sides.max():.0f} px '
             f'across where a texture wants {SQUARE}'
         )
     order = {dark: rng.permutation(32) for dark in (False, True)}

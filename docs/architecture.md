@@ -213,16 +213,17 @@ next one's. So any colors take any texture: the custom board picks one and its
 strength under its colors (`texture-row.ts`), a saved board keeps them, and a
 material board is one texture over the mean colors it was drawn in. An
 extension URL can only be written in the CSS, so each texture is a variable
-there (`styles/board/textures.css`) that the content script names. Each wood
-board reproduces one real board, as a pair of species (`species.py`) drawn by
-`wood.py` to numbers measured on photographs — its growth-ring lines, its
-pores, the figure that wanders over them, its eyes, how far its squares sit
-from one another, and its colors — with its light squares turned a quarter
-against its dark ones as a real board's are. The marble board is not drawn but
-taken from photographs of one real board the project holds the rights to
-(`photo.py`): the chequerboard calibrates its own rectification, every square
-is cut from whichever photograph shows it largest, and the 32 kept per shade
-span the whole range of how veined the slab's squares are.
+there (`styles/board/textures.css`) that the content script names. Ten of the
+textures are not drawn at all: the nine woods and the Portoro each reproduce
+one real board the project holds the photographs of, cut out of them square by
+square (`photo.py`, `rectify.py`). The chequerboard calibrates its own
+rectification — the corners where four squares meet give the perspective and
+the lens together, so a photograph needs no ruler and no lens model — every
+square is cut from whichever photograph shows it largest, the photographs are
+put on one scale by the board's own two colors, and the 32 kept per shade span
+the whole range of how figured that board's squares are, rather than the 32
+best resolved, which would all come from the close-ups and be the plainest.
+Each tile is laid turned any quarter, as the makers lay a real board.
 
 ## Styles
 
