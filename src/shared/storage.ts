@@ -22,6 +22,8 @@ export const StorageKey = {
   // The custom boards saved under a name (content/packs/saved-boards.ts).
   savedBoards: prefixed('saved-boards'),
   coach: prefixed('coach'),
+  // The home hero's own coach, when it isn't the one above (#shared/coach.ts).
+  homeCoach: prefixed('home-coach'),
   // The settings' coach switches, kept here too for the page world, and to be read before the
   // settings are (#shared/coach.ts).
   coachOptions: prefixed('coach-options'),

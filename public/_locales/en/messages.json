@@ -215,6 +215,22 @@
     "message": "Hi, I'm $1! Let's get better at chess together.",
     "description": "The picked coach's hello in the settings; $1 is its name."
   },
+  "homeCoachTitle": {
+    "message": "The home's coach",
+    "description": "The title of the settings' card for the coach standing in the home page's hero."
+  },
+  "homeCoachBody": {
+    "message": "The coach who greets you on the home page. It's your coach, unless you give the home one of its own.",
+    "description": "What the home's coach card is for."
+  },
+  "homeCoachFollow": {
+    "message": "My coach",
+    "description": "The home coach mode that follows the coach every other page shows."
+  },
+  "homeCoachOwn": {
+    "message": "Another coach",
+    "description": "The home coach mode that gives the home page a coach of its own, from the tiles it opens."
+  },
   "coachPawn": {
     "message": "Pawn",
     "description": "A coach's name: a pawn."

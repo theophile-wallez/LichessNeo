@@ -1,5 +1,12 @@
 import { z } from 'zod/mini';
-import { readStored, readStoredJson, StorageKey, writeStored, writeStoredJson } from './storage.ts';
+import {
+  readStored,
+  readStoredJson,
+  removeStored,
+  StorageKey,
+  writeStored,
+  writeStoredJson,
+} from './storage.ts';
 
 /** The Game Review's coaches: the 3D mascots of content/coach/mascot, a still of each in
  * public/img/coaches. An id kept from the four human coaches is one of the first four. The
@@ -56,6 +63,20 @@ export function pickCoach(): number {
 export function keepCoach(coach: number): void {
   writeStored(StorageKey.coach, coach);
 }
+
+/** The home hero's own coach, or null while it follows the one every other page shows. */
+export function homeCoachChoice(): number | null {
+  return readStored(StorageKey.homeCoach, CoachIdSchema);
+}
+
+/** Keeps the home hero's own coach, null putting it back to following the pick. */
+export function chooseHomeCoach(coach: number | null): void {
+  if (coach === null) removeStored(StorageKey.homeCoach);
+  else writeStored(StorageKey.homeCoach, coach);
+}
+
+/** The coach the home's hero shows: its own if it was given one, else the pick. */
+export const homeCoach = (): number => homeCoachChoice() ?? pickCoach();
 
 const CoachOptionsSchema = z.object({
   /** The coaches play as 3D mascots, or stay their still images. */

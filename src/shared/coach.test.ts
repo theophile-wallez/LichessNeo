@@ -1,5 +1,14 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { COACH_COUNT, coachOptions, keepCoachOptions, pickCoach, ROBOT_COACH } from './coach.ts';
+import {
+  chooseHomeCoach,
+  COACH_COUNT,
+  coachOptions,
+  homeCoach,
+  homeCoachChoice,
+  keepCoachOptions,
+  pickCoach,
+  ROBOT_COACH,
+} from './coach.ts';
 
 afterEach(() => localStorage.clear());
 
@@ -42,6 +51,43 @@ describe('pickCoach', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.1);
     expect(pickCoach()).toBe(3);
     expect(localStorage.getItem('ln-ext-coach')).toBe('3');
+  });
+});
+
+describe('the home’s coach', () => {
+  it('follows the coach until the home is given one', () => {
+    localStorage.setItem('ln-ext-coach', '4');
+    expect(homeCoachChoice()).toBeNull();
+    expect(homeCoach()).toBe(4);
+  });
+
+  it('is the home’s own once picked, whatever the coach', () => {
+    localStorage.setItem('ln-ext-coach', '4');
+    chooseHomeCoach(ROBOT_COACH);
+    expect(localStorage.getItem('ln-ext-home-coach')).toBe(String(ROBOT_COACH));
+    expect(homeCoachChoice()).toBe(ROBOT_COACH);
+    expect(homeCoach()).toBe(ROBOT_COACH);
+  });
+
+  it('follows the coach again once the pick is dropped', () => {
+    localStorage.setItem('ln-ext-coach', '4');
+    chooseHomeCoach(COACH_COUNT);
+    chooseHomeCoach(null);
+    expect(localStorage.getItem('ln-ext-home-coach')).toBeNull();
+    expect(homeCoach()).toBe(4);
+  });
+
+  it.each(['0', '27', 'x', '2.5', ''])('follows the coach over a stored "%s"', stored => {
+    localStorage.setItem('ln-ext-coach', '4');
+    localStorage.setItem('ln-ext-home-coach', stored);
+    expect(homeCoachChoice()).toBeNull();
+    expect(homeCoach()).toBe(4);
+  });
+
+  it('picks a coach to follow, and keeps it, when there’s none yet', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0.15);
+    expect(homeCoach()).toBe(4);
+    expect(localStorage.getItem('ln-ext-coach')).toBe('4');
   });
 });
 

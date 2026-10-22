@@ -9,6 +9,7 @@ import { buildAvatarCard } from './avatar-card.ts';
 import { buildBackupPage } from './backup-page.ts';
 import { buildNameCard } from './name-card.ts';
 import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
+import { buildHomeCoachCard } from './home-coach-card.ts';
 import { buildExperimentalPage } from './experimental-page.ts';
 import { buildInterfacePage } from './interface-page.ts';
 import { buildLooksPage } from './looks-page.ts';
@@ -48,10 +49,11 @@ export function buildSection(): SettingsSection {
     </div>`,
   );
   const coach = buildCoachCard();
+  const homeCoach = buildHomeCoachCard();
   const looks = buildLooksPage(packLibrary());
   const pairing = buildPairingPage();
   const pages: Readonly<Record<SettingsPage, readonly HTMLElement[]>> = {
-    personalization: [buildAppearance(), coach.element, buildCoachSwitches()],
+    personalization: [buildAppearance(), coach.element, homeCoach.element, buildCoachSwitches()],
     profile: [buildAvatarCard(), buildNameCard()],
     board: looks.elements,
     packs: [importSection(packLibrary())],
@@ -73,6 +75,7 @@ export function buildSection(): SettingsSection {
     show: page => {
       showPage(element, page);
       coach.show(page === 'personalization');
+      homeCoach.show(page === 'personalization');
       looks.show(page === 'board');
       pairing.show(page === 'pairing');
       if (page === 'personalization') showScheme(element);

@@ -17,10 +17,18 @@ function showChoice(coach: number): void {
   still.decode().catch(() => undefined);
 }
 
+const listeners = new Set<(coach: number) => void>();
+
+/** Calls `listener` each time the coach is picked on this page, in the settings or the review. */
+export function onCoachChosen(listener: (coach: number) => void): void {
+  listeners.add(listener);
+}
+
 /** The settings' pick: kept for every page, and shown on this one at once. */
 export function chooseCoach(coach: number): void {
   keepCoach(coach);
   showChoice(coach);
+  for (const listener of listeners) listener(coach);
 }
 
 export const coachChoice: Feature = {

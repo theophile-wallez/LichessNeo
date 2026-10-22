@@ -17,26 +17,26 @@ only the DOM and `window.postMessage`. A third runs in the background.
 `src/shared/` holds what several of them use, and must not touch `chrome.*`:
 the page world would crash on it.
 
-| Module                                               | What it gives                                                                                                                                              |
-| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dom.ts`, `owned-element.ts`, `svg.ts`               | typed lookups, element builders, writes that skip unchanged values, an element of ours kept in a Lichess container                                         |
-| `html.ts`, `escape.ts`                               | the escaping `html` template and `setHtml`; the escaping alone, for the build's scripts                                                                    |
-| `protocol.ts`, `dev-check.ts`                        | the messages between the worlds, and with the background worker                                                                                            |
-| `json.ts`, `zod.ts`, `guards.ts`                     | parsing and validating outside data                                                                                                                        |
-| `storage.ts`, `prefix.ts`                            | the `ln-ext` prefix and every storage key; writes that survive a full or blocked storage, and reads that throw on a blocked one                            |
-| `page-init-data.ts`, `round-init.ts`                 | the page's `#page-init-data`, captured before Lichess removes it; a game page's, read for a game just begun                                                |
-| `features.ts`, `frame.ts`, `poll.ts`                 | starting features, once-per-frame work, waiting for Lichess's globals                                                                                      |
-| `build-mode.ts`                                      | whether this is a dev build, which reloads itself when rebuilt                                                                                             |
-| `lang.ts`, `text.ts`, `math.ts`, `geometry.ts`       | the page's language, small text and number helpers, points and boxes                                                                                       |
-| `time-control.ts`, `clock-time.ts`                   | a time control in words, for a "New 10+5" button; a clock's time                                                                                           |
-| `player-bar.ts`, `flag.ts`                           | a player as their bar on the game page shows them; the image of a profile's flag                                                                           |
-| `avatar.ts`, `own-avatar.ts`, `own-name.ts`          | users' avatars, a coach on a color picked from their name; the signed-in user's own avatar and name                                                        |
-| `hugeicons.ts`, `hugeicons-svg.ts`                   | Hugeicons drawn inline, or as files for the stylesheets (`pnpm icons`)                                                                                     |
-| `chess/`, `chessground.ts`, `piece-glyph.ts`         | chess basics (squares, FEN, piece letters and values, attacks), a board's pieces read from chessground's classes, a piece of ours in the board's set       |
-| `charts/`, `coach.ts`, `coach-voice.ts`, `sounds.ts` | chart pieces, the coach's moods, the stored coach (`pickCoach`) and switches (`coachOptions`), its words typed out as it talks, the sounds a pack may have |
-| `packs/`, `backlit.ts`                               | packs: their `pack.json`, links, files and stored form, the download the worker runs, its messages; the backlit boards and their settings                  |
-| `chesscom-rating/`                                   | a Lichess rating's Chess.com equivalent, from the study's table, the speed of a rating Lichess shows, its swap in place, and the settings' switch          |
-| `testing/`                                           | helpers only tests import, and the vitest setup filling happy-dom's gaps                                                                                   |
+| Module                                               | What it gives                                                                                                                                                                                |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dom.ts`, `owned-element.ts`, `svg.ts`               | typed lookups, element builders, writes that skip unchanged values, an element of ours kept in a Lichess container                                                                           |
+| `html.ts`, `escape.ts`                               | the escaping `html` template and `setHtml`; the escaping alone, for the build's scripts                                                                                                      |
+| `protocol.ts`, `dev-check.ts`                        | the messages between the worlds, and with the background worker                                                                                                                              |
+| `json.ts`, `zod.ts`, `guards.ts`                     | parsing and validating outside data                                                                                                                                                          |
+| `storage.ts`, `prefix.ts`                            | the `ln-ext` prefix and every storage key; writes that survive a full or blocked storage, and reads that throw on a blocked one                                                              |
+| `page-init-data.ts`, `round-init.ts`                 | the page's `#page-init-data`, captured before Lichess removes it; a game page's, read for a game just begun                                                                                  |
+| `features.ts`, `frame.ts`, `poll.ts`                 | starting features, once-per-frame work, waiting for Lichess's globals                                                                                                                        |
+| `build-mode.ts`                                      | whether this is a dev build, which reloads itself when rebuilt                                                                                                                               |
+| `lang.ts`, `text.ts`, `math.ts`, `geometry.ts`       | the page's language, small text and number helpers, points and boxes                                                                                                                         |
+| `time-control.ts`, `clock-time.ts`                   | a time control in words, for a "New 10+5" button; a clock's time                                                                                                                             |
+| `player-bar.ts`, `flag.ts`                           | a player as their bar on the game page shows them; the image of a profile's flag                                                                                                             |
+| `avatar.ts`, `own-avatar.ts`, `own-name.ts`          | users' avatars, a coach on a color picked from their name; the signed-in user's own avatar and name                                                                                          |
+| `hugeicons.ts`, `hugeicons-svg.ts`                   | Hugeicons drawn inline, or as files for the stylesheets (`pnpm icons`)                                                                                                                       |
+| `chess/`, `chessground.ts`, `piece-glyph.ts`         | chess basics (squares, FEN, piece letters and values, attacks), a board's pieces read from chessground's classes, a piece of ours in the board's set                                         |
+| `charts/`, `coach.ts`, `coach-voice.ts`, `sounds.ts` | chart pieces, the coach's moods, the stored coach (`pickCoach`), the home's own (`homeCoach`) and the switches (`coachOptions`), its words typed out as it talks, the sounds a pack may have |
+| `packs/`, `backlit.ts`                               | packs: their `pack.json`, links, files and stored form, the download the worker runs, its messages; the backlit boards and their settings                                                    |
+| `chesscom-rating/`                                   | a Lichess rating's Chess.com equivalent, from the study's table, the speed of a rating Lichess shows, its swap in place, and the settings' switch                                            |
+| `testing/`                                           | helpers only tests import, and the vitest setup filling happy-dom's gaps                                                                                                                     |
 
 Each directory has its own `tsconfig.json`, so a page-world file that names
 `chrome` fails to type-check, and the linter says why.
@@ -109,7 +109,8 @@ so the logic can be unit-tested without a page.
 - `platform`: the extension APIs it uses.
 - `settings`: the extension's settings, a section of the account pages whose
   menu gets a link for each of its pages: Personalization (the appearance,
-  the coach and its switches: its 3D, its place on the free analysis board,
+  the coach, the home hero's own coach or the same one, and the coach's
+  switches: its 3D, its place on the free analysis board,
   and its drawings on the board), Profile customization (the user's own
   avatar, a coach on a color or a picture, and their own name, which only
   their browser shows), Board & sounds (the extension's, the packs' and
@@ -120,8 +121,9 @@ so the logic can be unit-tested without a page.
   intro over a preview of it, the sidebar's rating, or none), Experimental
   (the Chess.com ratings, and the study behind them in a frame), Backup
   (every setting, pick and pack exported to a JSON file, and put back from
-  one); kept in `chrome.storage.sync`, but the coach's, the avatar's and the
-  name's picks in localStorage, where the page world reads them.
+  one); kept in `chrome.storage.sync`, but the coach's (the home's own too),
+  the avatar's and the name's picks in localStorage, where the page world
+  reads them.
 - `colors`: the color themes, one picked for each of Lichess's schemes.
 - `sidebar`: the Donate item, its folding to icons, the preferences cog, the
   account's rating, the light / dark switch, the drawer below 1020px.

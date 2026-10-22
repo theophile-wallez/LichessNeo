@@ -161,6 +161,18 @@
   "coachPickHello": {
     "message": "Salut, moi c’est $1 ! Progressons ensemble aux échecs."
   },
+  "homeCoachTitle": {
+    "message": "Le coach de l’accueil"
+  },
+  "homeCoachBody": {
+    "message": "Le coach qui vous accueille sur la page d’accueil. C’est votre coach, sauf si vous en donnez un autre à l’accueil."
+  },
+  "homeCoachFollow": {
+    "message": "Mon coach"
+  },
+  "homeCoachOwn": {
+    "message": "Un autre coach"
+  },
   "coachPawn": {
     "message": "Pion"
   },

@@ -27,9 +27,9 @@
     0 12px 32px var(--ln-ext-shade-25);
 }
 
-/* The user's coach, big and whole, as the hero illustration (content/pages/hero-coach.ts).
-   The live one makes an entrance, so the corner stays empty until it's in: its still (the
-   number set by content/bootstrap/coach-choice.ts) shows only if it can't load. */
+/* The home's coach, big and whole, as the hero illustration (content/pages/hero-coach.ts).
+   The live one makes an entrance, so the corner stays empty until it's in: its still shows
+   only if it can't load. */
 .ln-ext-hero__coach {
   position: absolute;
   top: 4px;
@@ -44,83 +44,10 @@
   pointer-events: none;
 }
 
-html[data-ln-ext-coach='1'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
-}
-html[data-ln-ext-coach='2'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
-}
-html[data-ln-ext-coach='3'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
-}
-html[data-ln-ext-coach='4'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
-}
-html[data-ln-ext-coach='5'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
-}
-html[data-ln-ext-coach='6'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
-}
-html[data-ln-ext-coach='7'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
-}
-html[data-ln-ext-coach='8'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
-}
-html[data-ln-ext-coach='9'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
-}
-html[data-ln-ext-coach='10'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
-}
-html[data-ln-ext-coach='11'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
-}
-html[data-ln-ext-coach='12'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
-}
-html[data-ln-ext-coach='13'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
-}
-html[data-ln-ext-coach='14'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
-}
-html[data-ln-ext-coach='15'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
-}
-html[data-ln-ext-coach='16'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
-}
-html[data-ln-ext-coach='17'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
-}
-html[data-ln-ext-coach='18'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
-}
-html[data-ln-ext-coach='19'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
-}
-html[data-ln-ext-coach='20'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
-}
-html[data-ln-ext-coach='21'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
-}
-html[data-ln-ext-coach='22'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
-}
-html[data-ln-ext-coach='23'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
-}
-html[data-ln-ext-coach='24'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
-}
-html[data-ln-ext-coach='25'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
-}
-html[data-ln-ext-coach='26'] .ln-ext-hero__coach--still {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
+/* Its still, the coach set on the box itself (content/pages/hero-coach.ts): the home's
+   own coach isn't always the one <html> carries. */
+.ln-ext-hero__coach--still {
+  background-image: var(--ln-ext-avatar-coach);
 }
 
 /* Live, its canvas spills past the sides so arms and tails show, and a click makes it react. */

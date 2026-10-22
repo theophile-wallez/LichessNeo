@@ -27,6 +27,7 @@ export const BACKED_UP_KEYS = [
   'customBoard',
   'savedBoards',
   'coach',
+  'homeCoach',
   'avatar',
   'name',
   'boardZoom',
