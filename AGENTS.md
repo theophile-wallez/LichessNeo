@@ -181,7 +181,7 @@ hold:
 | `pnpm store:render`             | renders the store images and the extension icons from `store/templates`          |
 | `pnpm icons`                    | writes `public/img/hugeicons`, the Hugeicons the CSS names                       |
 | `/ci`                           | (Claude Code) starts the release of `main`: the CI, then a GitHub release        |
-| `/ci store`                     | (Claude Code) tags `main` `store-<version>`, which sends it to the stores        |
+| `/ci-publish`                   | (Claude Code) tags `main` `store-<version>`, which sends it to the stores        |
 
 ## Where things go
 
@@ -709,7 +709,7 @@ Don't open a PR.
 A push to `main` makes no release: `/ci` (or the Release workflow, run by
 hand on `main`) runs the CI, then makes a GitHub release with its zips, but
 doesn't reach the stores. Start it only when the user asks. A version goes
-to the stores only when the user asks too, with `/ci store`
-(`.claude/skills/ci`): it tags `main` `store-<version>`, and the release
+to the stores only when the user asks too, with `/ci-publish`
+(`.claude/skills/ci-publish`): it tags `main` `store-<version>`, and the release
 workflow sends that commit to the Chrome Web Store and Firefox Add-ons, each
 live once reviewed. The listings are edited by hand (`store/listing.md`).

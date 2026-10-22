@@ -10,7 +10,8 @@
 # this commit gets) packages that commit the same way and sends it, for
 # review, to both stores: the store zip to the Chrome Web Store, the Firefox
 # zip and its sources to Firefox Add-ons (AMO). Each store has its own job:
-# one failing doesn't hold the other. `/ci store` in Claude Code pushes the tag.
+# one failing doesn't hold the other. `/ci-publish` in Claude Code pushes the
+# tag.
 name: Release
 
 on:
