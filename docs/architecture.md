@@ -110,7 +110,9 @@ so the logic can be unit-tested without a page.
   Lichess writes (`SPOTS`: a game's bars and info, mini games, game lists,
   rating cards and stats pages, hover cards, leaderboards, the lobby, arenas,
   TV) swapped in place for its Chess.com equivalent, the Lichess one in its
-  tooltip.
+  tooltip. The change beside a rating (a game's, a profile's progress) follows:
+  the gap between the two ratings it spans, each converted, as the scales'
+  slopes differ.
 - `puzzle-dashboard`: the puzzle dashboard's overview with its coach's tips,
   its improvement areas and strengths, from `/api/puzzle/dashboard`, and the
   puzzle history's week, puzzles to retry and session cards.

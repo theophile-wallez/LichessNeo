@@ -61,3 +61,31 @@ export function chesscomRating(
     spread: Math.round(low[2] + inside * (high[2] - low[2])),
   };
 }
+
+/** The two ratings a change sits between, on Lichess. */
+export interface RatingSpan {
+  before: number;
+  after: number;
+}
+
+/**
+ * What a change of rating is worth on Chess.com: the gap between its two
+ * ratings, each converted. The change itself can't carry over, as the scales
+ * don't share a slope: +28 at 1800 Lichess blitz spans 49 Chess.com points.
+ * Null for a speed Chess.com has no pool for.
+ */
+export function chesscomRatingChange(
+  speed: string,
+  ratings: RatingSpan,
+  from = conversionModel(),
+): number | null {
+  const before = chesscomRating(speed, ratings.before, from);
+  const after = chesscomRating(speed, ratings.after, from);
+  if (!before || !after) return null;
+  const change = after.rating - before.rating;
+  // Below the table's ratings the scale flattens onto Chess.com's floor,
+  // where a won game would round to nothing: a change never reads as none.
+  if (change === 0 && ratings.after !== ratings.before)
+    return ratings.after > ratings.before ? 1 : -1;
+  return change;
+}

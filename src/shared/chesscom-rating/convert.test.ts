@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { chesscomRating, conversionModel, type ConversionModel } from './convert.ts';
+import {
+  chesscomRating,
+  chesscomRatingChange,
+  conversionModel,
+  type ConversionModel,
+} from './convert.ts';
 
 const MODEL: ConversionModel = {
   fitted: '2026-10',
@@ -45,5 +50,25 @@ describe('the Chess.com equivalent', () => {
         expect(high?.[1]).toBeGreaterThanOrEqual(low?.[1] ?? Infinity);
       }
     }
+  });
+});
+
+describe('a change of rating on Chess.com', () => {
+  it('is the gap between its two ratings, each converted, not the change itself', () => {
+    // 1000 to 1500 Lichess spans 600 Chess.com points: +50 is worth +60 there.
+    expect(chesscomRatingChange('blitz', { before: 1200, after: 1250 }, MODEL)).toBe(60);
+    expect(chesscomRatingChange('blitz', { before: 1250, after: 1200 }, MODEL)).toBe(-60);
+    // Past 1500 the slope is 1.6.
+    expect(chesscomRatingChange('blitz', { before: 1600, after: 1650 }, MODEL)).toBe(80);
+  });
+
+  it('never reads as none on Chess.com’s floor, where the scale flattens', () => {
+    expect(chesscomRatingChange('blitz', { before: 400, after: 405 }, MODEL)).toBe(1);
+    expect(chesscomRatingChange('blitz', { before: 405, after: 400 }, MODEL)).toBe(-1);
+    expect(chesscomRatingChange('blitz', { before: 400, after: 400 }, MODEL)).toBe(0);
+  });
+
+  it('has none for a speed without a table', () => {
+    expect(chesscomRatingChange('rapid', { before: 1500, after: 1510 }, MODEL)).toBeNull();
   });
 });

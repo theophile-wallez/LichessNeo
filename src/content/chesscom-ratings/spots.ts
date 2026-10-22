@@ -8,7 +8,34 @@ export interface Spot {
   readonly selector: string;
   /** The speed of their ratings, or null for one Chess.com has no pool for. */
   readonly speed: (element: HTMLElement) => string | null;
+  /** The change Lichess writes beside the rating, where it writes one. */
+  readonly change?: SpotChange;
 }
+
+export interface SpotChange {
+  /** The element holding the change, found from the rating's. */
+  readonly find: (rating: HTMLElement) => HTMLElement | null;
+  /** Whether the rating shown is the one before the change, or after it. */
+  readonly shows: 'before' | 'after';
+}
+
+// A change is `good` or `bad`, which say which way it goes (a profile's has
+// no sign of its own, drawn in CSS); the span Lichess writes for "±0" is left
+// out, as nothing of it changes.
+const CHANGE = ':is(good, bad, .rp)';
+
+// Where a change stands beside its rating differs (a bar's rating is a tag of
+// its own, a profile's a `strong` inside its `rating`, a game row's the
+// element's own text), so it's looked for in the block the two share.
+const changeIn =
+  (block: string) =>
+  (rating: HTMLElement): HTMLElement | null => {
+    const shared = rating.closest(block);
+    return shared && queryOne(shared, CHANGE, HTMLElement);
+  };
+
+// A game's rating is the one it was played at, so its change is what it became.
+const gameChange = { find: changeIn('.ruser, .ln-ext-player, .player'), shows: 'before' } as const;
 
 // The glyph of the element `selector` finds from `root`, a speed's or a variant's.
 const glyphOf = (root: ParentNode | null | undefined, selector: string): string | null =>
@@ -28,6 +55,7 @@ export const SPOTS: readonly Spot[] = [
   {
     selector: '.ruser > rating, .ln-ext-player > rating, .game__meta__players .rating',
     speed: gameSpeed,
+    change: gameChange,
   },
   { selector: '.mini-game__user > .rating', speed: miniGameSpeed },
   // A list of games, each headed by its perf's glyph.
@@ -35,11 +63,14 @@ export const SPOTS: readonly Spot[] = [
     selector: '.game-row__infos > .versus > .player',
     speed: element =>
       speedOfGlyph(glyphOf(element.closest('.game-row__infos'), ':scope > .header')),
+    change: gameChange,
   },
   // A profile's rating cards, also the menu of a rating's stats page, and that page's rating.
+  // Their rating is today's, and the progress beside it where it stood a dozen games ago.
   {
     selector: '.side.sub-ratings > a rating > strong',
     speed: element => speedOfPath(element.closest('a')?.pathname),
+    change: { find: changeIn('rating'), shows: 'after' },
   },
   { selector: '.perf-stat h2 > strong:first-child', speed: () => speedOfPath(location.pathname) },
   // The hover card's chips.

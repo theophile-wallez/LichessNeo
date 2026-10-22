@@ -1,6 +1,10 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { chesscomRating, chesscomRatingChange } from '#shared/chesscom-rating/convert.ts';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { playerCard, syncPlayerCard } from './index.ts';
+
+const settings = vi.hoisted(() => ({ chesscomRating: false }));
+vi.mock('#content/settings/settings.ts', () => ({ currentSettings: () => settings }));
 
 const HOUR = 3_600_000;
 const NOW = Date.UTC(2026, 9, 22, 12);
@@ -95,6 +99,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  settings.chesscomRating = false;
   vi.useRealTimers();
   vi.unstubAllGlobals();
   document.body.innerHTML = '';
@@ -193,6 +198,20 @@ describe('the hovered player’s own rows', () => {
     await vi.advanceTimersByTimeAsync(DETAILS_DELAY_MS);
     expect(fetches).toEqual([]);
     expect(queryOne(card, '.ln-ext-upt', HTMLElement)).toBeNull();
+  });
+});
+
+describe('a card with the Chess.com ratings on', () => {
+  it('converts the headline’s progress as the gap between its two ratings, Lichess’s in its tooltip', async () => {
+    settings.chesscomRating = true;
+    const card = await hover('cardchess');
+    const rating = queryOne(card, '.ln-ext-upt__rating', HTMLElement);
+    const progress = queryOne(card, '.ln-ext-upt__prog', HTMLElement);
+    const change = chesscomRatingChange('blitz', { before: 2387, after: 2410 }) ?? 0;
+    expect(rating?.textContent).toBe(String(chesscomRating('blitz', 2410)?.rating));
+    expect(progress?.textContent).toBe(`+${change}`);
+    expect(change).not.toBe(23);
+    expect(progress?.dataset.lnExtTip).toBe('lichessRatingTip:+23');
   });
 });
 

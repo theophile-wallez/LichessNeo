@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
+import { chesscomRating, chesscomRatingChange } from '#shared/chesscom-rating/convert.ts';
 import { chesscomShown } from '#shared/chesscom-rating/shown.ts';
 import { queryAll } from '#shared/dom.ts';
 import { createPlayersSync } from '#content/analysis/players.ts';
@@ -23,6 +23,10 @@ const tick = (): void => {
 
 const equivalent = (speed: string, rating: number): string =>
   String(chesscomRating(speed, rating)?.rating);
+
+// A change is the gap between the converted ratings it sits between.
+const equivalentChange = (speed: string, rating: number, change: number): number =>
+  chesscomRatingChange(speed, { before: rating, after: rating + change }) ?? 0;
 
 // What each rating shows, and the Lichess one its tooltip gives.
 const shown = (selector: string): (string | undefined)[][] =>
@@ -59,6 +63,22 @@ describe('the ratings as on Chess.com', () => {
     ]);
   });
 
+  it('swap the change a game’s bars and info show at its end, from the rating it was played at', () => {
+    // A blitz game just over (JPlQIL4q): the loser's bar, then the info, as Lichess writes them.
+    document.body.innerHTML = `<main class="round">
+      <div class="game__meta__infos" data-icon="\ue008"></div>
+      <div class="ruser-top ruser"><a class="user-link">KapetanKapitalizma</a><rating>1724</rating><bad class="rp">7</bad></div>
+      <div class="game__meta__players"><div class="player white"><a class="user-link">Eresy<span class="rating"> (1640)</span> <good>+28</good></a></div></div>
+      </main>`;
+    tick();
+    expect(shown('rating, .rating, .rp, good')).toEqual([
+      [equivalent('blitz', 1724), '1724 on Lichess'],
+      [String(-equivalentChange('blitz', 1724, -7)), '−7 on Lichess'],
+      [`(${equivalent('blitz', 1640)})`, '1640 on Lichess'],
+      [`+${equivalentChange('blitz', 1640, 28)}`, '+28 on Lichess'],
+    ]);
+  });
+
   it('keep a variant’s and correspondence’s', () => {
     document.body.innerHTML = `<div class="game__meta__infos" data-icon="\ue00b"></div><div class="ruser"><rating>1800</rating></div>
       <a class="mini-game crazyhouse" data-tc="180+0"><span class="mini-game__user">a<span class="rating">1700</span></span></a>
@@ -74,19 +94,27 @@ describe('the ratings as on Chess.com', () => {
     tick();
     expect(shown('.mini-game .rating, .player')).toEqual([
       [equivalent('rapid', 1900), '1900 on Lichess'],
-      [`alex1${equivalent('blitz', 1400)} +6`, '1400 on Lichess'],
+      [
+        `alex1${equivalent('blitz', 1400)} +${equivalentChange('blitz', 1400, 6)}`,
+        '1400 on Lichess',
+      ],
     ]);
   });
 
-  it('swap a profile’s cards and a rating’s stats page', () => {
+  it('swap a profile’s cards and their progress, from today’s rating, and a rating’s stats page', () => {
     history.replaceState(null, '', '/@/eresy/perf/rapid');
-    document.body.innerHTML = `<div class="side sub-ratings"><a href="/@/eresy/perf/classical"><span><h3>Classical</h3><rating><strong>2000</strong> <span>12 games</span></rating></span></a></div>
+    document.body.innerHTML = `<div class="side sub-ratings"><a href="/@/eresy/perf/classical"><span><h3>Classical</h3><rating><strong>2000</strong> <good class="rp">15</good> <span>12 games</span></rating></span></a></div>
       <div class="perf-stat"><h2>Rating: <strong>1650.37</strong>. <span class="details">Better than <strong>60%</strong></span></h2></div>`;
     tick();
     expect(shown('strong')).toEqual([
       [equivalent('classical', 2000), '2000 on Lichess'],
       [equivalent('rapid', 1650.37), '1650.37 on Lichess'],
       ['60%', undefined],
+    ]);
+    // The progress led to today's rating; the count beside it is no change.
+    expect(shown('rating > span, .rp')).toEqual([
+      [String(equivalentChange('classical', 1985, 15)), '+15 on Lichess'],
+      ['12 games', undefined],
     ]);
   });
 

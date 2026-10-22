@@ -1,6 +1,6 @@
 import { gameRatingColor } from '#shared/charts/colors.ts';
 import { curvePaths } from '#shared/charts/sparkline.ts';
-import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
+import { chesscomRating, chesscomRatingChange } from '#shared/chesscom-rating/convert.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { pageLocale } from '#shared/lang.ts';
 import { nonEmpty } from '#shared/text.ts';
@@ -111,18 +111,32 @@ const trendOf = (progress: number | undefined): 'up' | 'down' | null => {
   return progress > 0 ? 'up' : 'down';
 };
 
+// The progress beside the rating, flat ones left out. With the setting on it
+// spans the two converted ratings, today's and the one a dozen games back,
+// and gives Lichess's own in its tooltip, as the rating does.
+function headlineProgress({ speed, rating, progress }: Headline, chesscom: boolean): SafeHtml | '' {
+  const trend = trendOf(progress);
+  if (trend === null || progress === undefined) return '';
+  const lichess = SIGNED.format(progress);
+  const today = Math.round(rating);
+  const equivalent = chesscom
+    ? chesscomRatingChange(speed, { before: today - progress, after: today })
+    : null;
+  const tip =
+    equivalent === null ? '' : html` data-ln-ext-tip="${message('lichessRatingTip', lichess)}"`;
+  return html`<span class="ln-ext-upt__prog" data-ln-ext-trend="${trend}"${tip}>${
+    equivalent === null ? lichess : SIGNED.format(equivalent)
+  }</span>`;
+}
+
 /** The rating they play most, its progress and its last month, a link to its stats. */
 function headlineRow(headline: Headline, data: CardData): SafeHtml {
-  const { speed, progress, curve } = headline;
+  const { speed, curve } = headline;
   const stats = `/@/${encodeURIComponent(data.name)}/perf/${speed}`;
-  const trend = trendOf(progress);
   return html`<a class="ln-ext-upt__headline" href="${stats}" data-ln-ext-speed="${speed}" style="--ln-ext-speed-color: ${gameRatingColor(speed)}">
     <span class="ln-ext-upt__speed">${message(SPEED_NAMES[speed])}</span>
     ${headlineRating(headline, data.chesscom)}
-    ${
-      trend &&
-      html`<span class="ln-ext-upt__prog" data-ln-ext-trend="${trend}">${SIGNED.format(progress ?? 0)}</span>`
-    }
+    ${headlineProgress(headline, data.chesscom)}
     ${sparkline(curve)}
   </a>`;
 }
