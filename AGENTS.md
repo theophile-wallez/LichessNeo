@@ -130,11 +130,11 @@ must be short. A change goes in two steps.
    bar above, but no new tests, no Playwright, no viewport sweep. Run
    `pnpm check:fast` (types, lint, format, source rules, and only the unit
    tests of what changed since `origin/main`: seconds, not a minute) and fix
-   what it finds, then `pnpm preview`: it builds into the main checkout's
-   `dist/chrome`, which Chrome reloads when a Lichess tab next gets focus.
-   Tell the user what to look at, and iterate on their feedback. Commit
-   nothing yet. Previews from several worktrees overwrite each other: the
-   last one built is what Chrome shows.
+   what it finds, then `pnpm preview --thread <id>`: it builds into the main
+   checkout's `dist/chrome`, which Chrome reloads when a Lichess tab next
+   gets focus. Chrome shows one draft at a time: take your turn at it first
+   (see [Sessions side by side](#sessions-side-by-side)). Tell the user what
+   to look at, and iterate on their feedback. Commit nothing yet.
 2. **Finish, once the user says it's good** (or asks to ship). Write the
    tests, then meet the [Definition of done](#definition-of-done) and ship.
 
@@ -144,6 +144,53 @@ push starts it, to spare the Actions minutes: only the user does, by hand on
 GitHub or with `/ci` (`.claude/skills/ci`), which runs it on `main` and
 releases what passes. Don't start it unasked; its results are looked at
 afterwards, not waited for.
+
+## Sessions side by side
+
+The user runs several T3 sessions at once, each in its own worktree, and they
+share two things: the preview Chrome loads (the main checkout's
+`dist/chrome`) and `main`. A session takes its turn at either with
+`pnpm turn` (claims kept in the repository's common git folder, which every
+worktree sees), and talks to the others with T3's tools: `t3_thread_list`
+gives this session's id (`currentThreadId`) and the others', `t3_thread_read`
+a session's worktree and where it stands, `t3_thread_send` a message to it.
+Pass your id as `--thread <id>`, so the others know whom to tell.
+
+**Before a preview.** `pnpm preview` doesn't replace another session's
+draft: it names that session and stops. The user may be judging that draft,
+so:
+
+- if that session is running, tell it (`t3_thread_send`) that Chrome won't
+  show its draft any more and that it must preview again before asking the
+  user to look; an idle one needs no message, see the next point. Then run
+  `pnpm preview --take --thread <id>`, and tell the user, linking the other
+  session, that Chrome shows this draft in its place;
+- when the user comes back to a draft, run `pnpm turn` before telling them
+  what to look at: if Chrome shows another draft, preview again.
+
+**Before shipping.** Ships go one at a time, in an order the sessions agree
+on, since each rebases onto the one before it:
+
+1. Look at the other sessions: `pnpm turn`, then each one of the project
+   that isn't settled (`t3_thread_list`): its worktree's commits not on
+   `origin/main` and its uncommitted changes (`git -C <worktree> log
+   origin/main..HEAD`, `status --short`), and whether the user asked it to
+   ship (its last messages).
+2. Order the ships that are due:
+   - a session that holds the ship turn finishes first;
+   - a fix for something broken on `main` goes before the rest;
+   - one that's ready (its checks green) goes before one still testing, which
+     doesn't hold it up;
+   - when two touch the same files, the second rebases onto the first and
+     runs `pnpm check` again, and looks again at what the overlap changes;
+   - otherwise, in the order the user asked for them.
+3. Tell each session concerned its place in a short message, and the user
+   the order in your reply.
+4. `pnpm turn take ship --thread <id> --wait` waits for your turn (30 minutes
+   at most: then look at who holds it, and why). Hold it from the last
+   rebase to the main checkout's build (see [Shipping](#shipping)), then
+   `pnpm turn release ship`, also when the ship fails, and tell the next
+   session in line that it's its turn.
 
 ## Definition of done
 
@@ -167,7 +214,8 @@ hold:
 | `pnpm install`                  | installs the dependencies (Node 24 first, and `corepack enable` for pnpm)        |
 | `pnpm build`                    | builds `dist/chrome` with source maps (`--target firefox`, `--release`, `--out`) |
 | `pnpm dev`                      | the same, rebuilt on every change                                                |
-| `pnpm preview`                  | builds into the main checkout's `dist/chrome`, the one Chrome loads              |
+| `pnpm preview`                  | builds into the main checkout's `dist/chrome`, the one Chrome loads, in turn     |
+| `pnpm turn`                     | who holds the preview and the ship turn (`take ship --wait`, `release ship`)     |
 | `pnpm playground`               | serves the mascots' playground on localhost:5180, reloaded on every change       |
 | `pnpm check`                    | typecheck, lint, format check, source rules, unit tests                          |
 | `pnpm check:fast`               | the same, but only the unit tests of files changed since `origin/main`           |
@@ -689,16 +737,21 @@ When the user has validated the draft and the work is done (see
 [Definition of done](#definition-of-done)), ship it without being asked.
 Don't open a PR.
 
-1. Commit with a short message in English (a one-line summary under ~70
+1. Take your turn, after the other sessions (see
+   [Before shipping](#sessions-side-by-side)). Then commit with a short message in English (a one-line summary under ~70
    characters, in the imperative: "Fix the eval bar on flipped boards"; a
    body only when the why isn't obvious), without a `Co-Authored-By`
    trailer. Rebase onto `origin/main` (`git fetch origin &&
    git rebase origin/main`, never a merge: `main` stays a straight line) and
    push as a fast-forward (`git push origin HEAD:main`). If `main` moved,
-   fetch, rebase and push again.
+   fetch, rebase and push again. If the rebase brought in changes to the
+   files you touched, run `pnpm check` again first.
 2. In the main checkout, `git pull --ff-only`, then
-   `pnpm install --frozen-lockfile && pnpm build`: Chrome loads its
-   `dist/chrome`, and reloads itself when a Lichess tab next gets focus.
+   `pnpm install --frozen-lockfile && pnpm preview`: Chrome loads its
+   `dist/chrome`, and reloads itself when a Lichess tab next gets focus. If
+   `pnpm preview` names another session's draft, leave it on show, as the
+   user is judging it, and say so in your summary. Then
+   `pnpm turn release ship`, and tell the next session in line.
 3. Remove any throwaway files you created.
 4. Don't bump the version: CI stamps `<BASE_VERSION>.<patch>` into each
    release and publishes it as `v<version>`, the patch counting the commits
