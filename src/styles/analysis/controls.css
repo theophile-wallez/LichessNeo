@@ -80,17 +80,9 @@
     text-transform: uppercase;
   }
 
-  /* No chat (the free analysis board): the tools take the whole panel. A study keeps its
-   * chapter list's row, even without a chat (a gamebook has none). */
-  html:not([data-ln-ext-has~='analyse-chat'], [data-ln-ext-has~='study-side']) main.analyse {
-    grid-template-rows:
-      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-ctrl-h)))
-      var(--ln-ext-ctrl-h) !important;
-  }
-
-  html:not([data-ln-ext-has~='analyse-chat'], [data-ln-ext-has~='study-side'])
-    main.analyse
-    .analyse__controls {
+  /* The controls are the panel's foot, unless a study's chapter list or a broadcast's games
+   * take a row under them (layout.css). */
+  html:not([data-ln-ext-has~='study-side']) main.analyse:not(.is-relay) .analyse__controls {
     border-radius: 0 0 6px 6px;
   }
 

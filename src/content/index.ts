@@ -19,13 +19,14 @@ import { boardZoom } from './layout/board-zoom.ts';
 import { mainScroll } from './layout/main-scroll.ts';
 import { controlsHeight } from './layout/controls-height.ts';
 import { movesExtrasHeight } from './layout/moves-extras-height.ts';
+import { panelTabs } from './layout/panel-tabs.ts';
 import { analysisPlayers } from './analysis/players.ts';
 import { underboard } from './analysis/underboard.ts';
 import { activeMove } from './analysis/active-move.ts';
 import { variations } from './analysis/variations.ts';
 import { capturedPieces } from './game/captured.ts';
 import { boardTools } from './game/board-tools.ts';
-import { panelTabs } from './game/panel-tabs.ts';
+
 import { moveTimes } from './game/move-times.ts';
 import { newGame } from './game/new-game.ts';
 import { ratingRefresh } from './game/rating-refresh.ts';
@@ -96,6 +97,7 @@ const FEATURES = [
   mainScroll,
   controlsHeight,
   movesExtrasHeight,
+  panelTabs,
   analysisPlayers,
   chesscomRatings,
   underboard,
@@ -103,7 +105,6 @@ const FEATURES = [
   variations,
   capturedPieces,
   boardTools,
-  panelTabs,
   moveTimes,
   newGame,
   ratingRefresh,

@@ -79,7 +79,8 @@ so the logic can be unit-tested without a page.
   pickers when signed out.
 - `bootstrap`.
 - `layout`: `MARKS`, the `data-ln-ext-has` flags, inset, zoom, controls
-  height.
+  height, and the right-hand panel's tabs, which give the moves, the chat and
+  the game info one area to share.
 - `game`.
 - `analysis`: the players' bars, the eval gauge, the underboard's button, the
   variations drawn as a tree, long runs folded into a pill.

@@ -1,5 +1,7 @@
 /* Analysis page (main.analyse, finished games too) from 1020px: the board, then one panel with
- * engine, moves, controls and chat. The page never scrolls; the rows add up to `--ln-ext-stage`. */
+ * the engine and moves, the controls, and the chat where the page has one, which shares the
+ * tools' area under a tab bar (panel-tabs.css). The page never scrolls; the rows add up to
+ * `--ln-ext-stage`. */
 
 @media (min-width: 1020px) {
   main.analyse {
@@ -31,8 +33,9 @@
       500px
     );
     --ln-ext-stage: calc(var(--ln-ext-board) + 2 * var(--ln-ext-bar) + var(--ln-ext-coords-off));
-    --ln-ext-chat-h: min(clamp(180px, 30vh, 320px), calc(var(--ln-ext-board) * 0.4));
     --ln-ext-ctrl-h: var(--ln-ext-controls-h, 48px); /* content/layout/controls-height.ts */
+    /* The tab bar's row, 0 while the panel has but one part to show (panel-tabs.css). */
+    --ln-ext-tabs-h: 0px;
 
     display: grid !important;
     /* The eval bar's column is kept without one: turning the engine on doesn't move the board,
@@ -41,14 +44,14 @@
       calc(var(--ln-ext-gauge-w) + var(--ln-ext-gauge-gap)) var(--ln-ext-board)
       calc(var(--ln-ext-panel-w) + var(--ln-ext-gap)) !important;
     grid-template-rows:
-      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-ctrl-h) - var(--ln-ext-chat-h)))
-      var(--ln-ext-ctrl-h)
-      var(--ln-ext-chat-h) !important;
+      var(--ln-ext-tabs-h)
+      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-tabs-h) - var(--ln-ext-ctrl-h)))
+      var(--ln-ext-ctrl-h) !important;
     grid-auto-rows: auto !important;
     grid-template-areas:
+      'gauge board tabs'
       'gauge board tools'
-      'gauge board controls'
-      'gauge board chat' !important;
+      'gauge board controls' !important;
     gap: 0 !important;
     justify-content: center !important;
     align-content: start !important;
@@ -160,15 +163,22 @@
   /* ---- Study, broadcast --- */
 
   /* Lichess puts a study's chapters and a broadcast's games in a column left of the board, which
-   * our grid lacks. They take the panel's last row instead, where a game's chat goes. */
+   * our grid lacks. They take the panel's last row instead. */
   html[data-ln-ext-has~='study-side'] main.analyse,
   main.analyse.is-relay:not(.has-relay-tour) {
     --ln-ext-side-h: min(clamp(200px, 36vh, 400px), calc(var(--ln-ext-board) * 0.45));
     grid-template-rows:
-      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-ctrl-h) - var(--ln-ext-side-h)))
+      var(--ln-ext-tabs-h)
+      max(
+        0px,
+        calc(
+          var(--ln-ext-stage) - var(--ln-ext-tabs-h) - var(--ln-ext-ctrl-h) - var(--ln-ext-side-h)
+        )
+      )
       var(--ln-ext-ctrl-h)
       var(--ln-ext-side-h) !important;
     grid-template-areas:
+      'gauge board tabs'
       'gauge board tools'
       'gauge board controls'
       'gauge board side' !important;
@@ -180,7 +190,12 @@
     main.analyse.gamebook-play {
     height: var(--ln-ext-stage);
     grid-template-rows:
-      fit-content(calc(var(--ln-ext-stage) - var(--ln-ext-ctrl-h) - var(--ln-ext-side-h)))
+      var(--ln-ext-tabs-h)
+      fit-content(
+        calc(
+          var(--ln-ext-stage) - var(--ln-ext-tabs-h) - var(--ln-ext-ctrl-h) - var(--ln-ext-side-h)
+        )
+      )
       var(--ln-ext-ctrl-h)
       minmax(var(--ln-ext-side-h), 1fr) !important;
   }
@@ -290,8 +305,8 @@
     color: var(--ln-ext-text-strong) !important;
   }
 
+  /* It shares the tools' area, picked in the panel's tab bar (panel-tabs.css). */
   main.analyse > .mchat {
-    grid-area: chat !important;
     align-self: stretch !important;
     /* Lichess sets an inline height on the analysis chat; the grid row wins. */
     height: auto !important;

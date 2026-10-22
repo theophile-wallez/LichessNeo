@@ -335,10 +335,10 @@ features and its name: free analysis, open data, no ads.
   clocks.
 - **The layout:** board on the left, one right-hand panel (moves, controls,
   chat), and a page that never scrolls: everything fits the viewport, like a
-  native app. Add nothing below the board. On the game page the panel's parts
-  share one area under a tab bar of its own (Coups, the chat's tabs, or the
-  game info where there is no chat: `content/game/panel-tabs.ts`), the
-  controls at its foot, so none of them takes a height of its own.
+  native app. Add nothing below the board. The panel's parts share one area
+  under a tab bar of its own (Coups, the chat's tabs, or the game info where a
+  game has no chat: `content/layout/panel-tabs.ts`), on the game page and the
+  analysis pages alike, so none of them takes a height of its own.
 - **The feel:** a pack's sounds if the user has one, the players' intro at the
   start (picked in the settings), the kings' badges, the winner's confetti and
   the coach's card at the end, and a Game Review ("Bilan") with an eval graph,

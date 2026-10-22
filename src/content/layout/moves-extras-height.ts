@@ -3,13 +3,14 @@ import type { Feature } from '#shared/features.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { createSizeWatch } from './size-watch.ts';
 
-// On the game page, Lichess's voice bar, the players' crosstable and the
-// keyboard-move input sit over the panel, whose part on show makes room for
-// them (styles/game/moves-extras.css): their heights go into `--ln-ext-voice-h`,
-// `--ln-ext-crosstable-h` and `--ln-ext-keyboard-h`. They wrap or grow with the
-// panel's width and the player's language, so they're measured. At a game's end
-// Lichess leaves an empty crosstable before the new one, hidden by the
-// stylesheet: the filled one is measured.
+// Lichess's voice bar, the players' crosstable and the keyboard-move input sit
+// over the panel, whose part on show makes room for them
+// (styles/game/moves-extras.css, styles/panel-tabs.css): their heights go into
+// `--ln-ext-voice-h`, `--ln-ext-crosstable-h` and `--ln-ext-keyboard-h`. They
+// wrap or grow with the panel's width and the player's language, so they're
+// measured. At a game's end Lichess leaves an empty crosstable before the new
+// one, hidden by the stylesheet: the filled one is measured. The analysis pages
+// only have the input, which stands over the chat's own.
 
 const EXTRAS: readonly (readonly [selector: string, variable: string])[] = [
   ['#voice-bar', '--ln-ext-voice-h'],
@@ -24,7 +25,7 @@ interface Extras {
 }
 
 function findExtras(): Extras | null {
-  const main = queryOne(document, 'main.round', HTMLElement);
+  const main = queryOne(document, 'main.round, main.analyse', HTMLElement);
   return main ? { main, found: EXTRAS.map(([selector]) => main.querySelector(selector)) } : null;
 }
 

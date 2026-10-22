@@ -11,6 +11,8 @@
 @import './coach-avatar.css';
 @import './coach-picker.css';
 @import './review/index.css';
+/* After game/, analysis/ and review/: it places their panel's parts in one area. */
+@import './panel-tabs.css';
 @import './pages/index.css';
 @import './editor/index.css';
 @import './dropdowns/index.css';

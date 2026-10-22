@@ -11,40 +11,28 @@
      review (view/closed-panel.ts, game/game-end-card.css), its coach smaller on a short window. */
   html.ln-ext-review-normal main.analyse {
     --ln-ext-review-top: 328px;
-    --ln-ext-chat-h: min(clamp(150px, 24vh, 260px), calc(var(--ln-ext-board) * 0.32));
     grid-template-rows:
+      var(--ln-ext-tabs-h)
       max(
         0px,
         calc(
-          var(--ln-ext-stage) - var(--ln-ext-review-top) - var(--ln-ext-ctrl-h) -
-            var(--ln-ext-chat-h)
+          var(--ln-ext-stage) - var(--ln-ext-tabs-h) - var(--ln-ext-review-top) -
+            var(--ln-ext-ctrl-h)
         )
       )
       var(--ln-ext-review-top)
-      var(--ln-ext-ctrl-h)
-      var(--ln-ext-chat-h) !important;
+      var(--ln-ext-ctrl-h) !important;
     grid-template-areas:
+      'gauge board tabs'
       'gauge board tools'
       'gauge board rtop'
-      'gauge board controls'
-      'gauge board chat' !important;
+      'gauge board controls' !important;
   }
 
   @media (max-height: 820px) {
     html.ln-ext-review-normal main.analyse {
       --ln-ext-review-top: 300px;
     }
-  }
-
-  html.ln-ext-review-normal:not([data-ln-ext-has~='analyse-chat']) main.analyse {
-    grid-template-rows:
-      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-review-top) - var(--ln-ext-ctrl-h)))
-      var(--ln-ext-review-top)
-      var(--ln-ext-ctrl-h) !important;
-    grid-template-areas:
-      'gauge board tools'
-      'gauge board rtop'
-      'gauge board controls' !important;
   }
 
   /* The graph, as tall in the summary as in the move-by-move review; it shrinks on a short
@@ -75,33 +63,23 @@
   }
 
   /* The free board: the coach on top of Lichess's engine, moves and controls. */
+  /* The tab bar goes under the coach's card, over the part it switches. */
   html.ln-ext-review-live main.analyse {
     --ln-ext-review-top: 140px;
     grid-template-rows:
       var(--ln-ext-review-top)
+      var(--ln-ext-tabs-h)
       max(
         0px,
         calc(
-          var(--ln-ext-stage) - var(--ln-ext-review-top) - var(--ln-ext-ctrl-h) -
-            var(--ln-ext-chat-h)
+          var(--ln-ext-stage) - var(--ln-ext-review-top) - var(--ln-ext-tabs-h) -
+            var(--ln-ext-ctrl-h)
         )
       )
-      var(--ln-ext-ctrl-h)
-      var(--ln-ext-chat-h) !important;
-    grid-template-areas:
-      'gauge board rtop'
-      'gauge board tools'
-      'gauge board controls'
-      'gauge board chat' !important;
-  }
-
-  html.ln-ext-review-live:not([data-ln-ext-has~='analyse-chat']) main.analyse {
-    grid-template-rows:
-      var(--ln-ext-review-top)
-      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-review-top) - var(--ln-ext-ctrl-h)))
       var(--ln-ext-ctrl-h) !important;
     grid-template-areas:
       'gauge board rtop'
+      'gauge board tabs'
       'gauge board tools'
       'gauge board controls' !important;
   }

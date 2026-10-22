@@ -20,10 +20,14 @@ const round = (side: string): string =>
   '<qZM>1</qZM><Z7yx>e4</Z7yx><Z7yx class="a1t">e5</Z7yx></aPp></i5d></div>' +
   `<div class="round__side">${side}<div class="game__meta"></div></div></main>`;
 
+const analyse = (side: string): string =>
+  '<main class="analyse"><div class="analyse__tools"><div class="analyse__moves"></div></div>' +
+  `<div class="analyse__controls"></div>${side}</main>`;
+
 /** Reloaded for each test: which part is on show outlives one sync. */
 let syncPanelTabs: () => void;
 
-const main = (): HTMLElement | null => queryOne(document, 'main.round', HTMLElement);
+const main = (): HTMLElement | null => queryOne(document, 'main', HTMLElement);
 
 const tabs = (): HTMLElement[] => queryAll(document, '.ln-ext-panel-tabs__tab', HTMLElement);
 
@@ -45,6 +49,7 @@ beforeEach(async () => {
 
 afterEach(() => {
   document.body.innerHTML = '';
+  document.documentElement.className = '';
   vi.unstubAllGlobals();
 });
 
@@ -130,6 +135,38 @@ describe('the game panel’s tabs', () => {
     );
     syncPanelTabs();
     expect(main()?.dataset.lnExtChatToggle).toBe('');
+  });
+
+  it('gives the analysis panel the same tabs, the engine and moves as one part', () => {
+    document.body.innerHTML = analyse(chat([]));
+    syncPanelTabs();
+    expect(labels()).toEqual(['roundPanelMoves', 'Chat room', 'Notes']);
+    expect(main()?.dataset.lnExtPanel).toBe('moves');
+    tab('note')?.click();
+    expect(main()?.dataset.lnExtPanel).toBe('chat');
+  });
+
+  // A study's chat sits in its side column, beside the chapters, which is no part of the
+  // panel: a tab for it would switch nothing.
+  it('leaves a study’s chat where Lichess puts it, with no tab of its own', () => {
+    document.body.innerHTML = analyse(
+      `<aside class="analyse__side"><div class="study__side">${chat([])}</div></aside>`,
+    );
+    syncPanelTabs();
+    expect(labels()).toEqual(['roundPanelMoves']);
+    expect(main()?.dataset.lnExtTabbed).toBeUndefined();
+    expect(main()?.dataset.lnExtChatToggle).toBeUndefined();
+  });
+
+  it('leaves the panel to the Game Review while it has it', () => {
+    document.documentElement.classList.add('ln-ext-review-moves');
+    document.body.innerHTML = analyse(chat([]));
+    syncPanelTabs();
+    expect(labels()).toEqual(['roundPanelMoves']);
+    expect(main()?.dataset.lnExtTabbed).toBeUndefined();
+    document.documentElement.classList.remove('ln-ext-review-moves');
+    syncPanelTabs();
+    expect(labels()).toEqual(['roundPanelMoves', 'Chat room', 'Notes']);
   });
 
   it('draws the tabs again only when they change', () => {
