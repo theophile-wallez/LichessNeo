@@ -97,10 +97,10 @@
   gap: 8px;
 }
 
-/* One card per game: board, then time control, players and result. */
+/* One card per game: board, then time control, players and result. A flex row,
+   not a grid: LiChess Tools puts a checkbox before the board. */
 .user-show .game-row {
-  display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
+  display: flex !important;
   align-items: center;
   gap: 16px;
   min-height: 0 !important;
@@ -129,6 +129,7 @@
 }
 
 .user-show .game-row__infos {
+  flex: 1 1 0 !important;
   display: grid !important;
   gap: 5px;
   margin: 0 !important;
@@ -262,13 +263,6 @@
   margin: 0 !important;
   font-size: 14px !important;
   opacity: 0.8;
-}
-
-/* Below 800px Lichess hides the board thumbnail: drop its column too. */
-@media (max-width: 799.98px) {
-  .user-show .game-row {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 /* "Playing right now": Lichess shows mini boards instead of rows. */
