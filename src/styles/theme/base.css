@@ -15,6 +15,9 @@
   --ln-ext-bg-raised: var(--ln-ext-neutral-6);
   --ln-ext-bg-raised-hover: var(--ln-ext-neutral-7);
   --ln-ext-border: var(--ln-ext-neutral-6);
+  /* Text fields (pages/tabs-tables-forms.css). */
+  --ln-ext-input-bg: var(--ln-ext-bg-raised);
+  --ln-ext-input-border: var(--ln-ext-neutral-7);
   /* Around the panel right of a board, a step darker than the page (panel-outline.css). */
   --ln-ext-panel-border: var(--ln-ext-lift-10);
   --ln-ext-text: color-mix(in srgb, var(--ln-ext-neutral-14) 88%, transparent);
@@ -38,6 +41,9 @@
   --ln-ext-menu-shadow:
     0 0 0 1px var(--ln-ext-shade-55), 0 16px 40px var(--ln-ext-shade-70),
     0 4px 12px var(--ln-ext-shade-50);
+  /* What floats over the page (flyouts, popovers, dialogs, toasts) drops its own shadow on
+   * dark, the fallback of each var(): this one is for the light scheme only. */
+  --ln-ext-float-shadow: initial;
   /* Buttons: flat, a hairline edge on the grey ones. */
   --ln-ext-btn-primary: var(--ln-ext-accent);
   --ln-ext-btn-primary-hover: var(--ln-ext-accent-hover);
@@ -63,11 +69,22 @@
 }
 
 /* On white, menus are white and a shadow does separate them; cards lift
- * rather than darken. */
+ * rather than darken. Panels are white on a grey page: two near-whites a step
+ * apart, as on dark, can't be told apart. */
 :root.light,
 [data-ln-ext-palette='light'] {
+  --ln-ext-bg-page: var(--ln-ext-neutral-5);
+  --ln-ext-bg-panel: var(--ln-ext-neutral-1);
+  --ln-ext-bg-panel-dark: var(--ln-ext-neutral-4);
+  /* A grey field vanished on the grey page: fields are white, edged a step darker. */
+  --ln-ext-input-bg: var(--ln-ext-neutral-1);
+  --ln-ext-input-border: var(--ln-ext-neutral-8);
   --ln-ext-menu-bg: var(--ln-ext-neutral-1);
   --ln-ext-menu-border: var(--ln-ext-lift-10);
+  /* Dark's shadows, at even half their strength, read as black on white. Menus lose their
+   * ring too: beside the border it drew a dark line. */
+  --ln-ext-float-shadow: 0 12px 32px var(--ln-ext-shade-25), 0 2px 6px var(--ln-ext-shade-12);
+  --ln-ext-menu-shadow: var(--ln-ext-float-shadow);
   --ln-ext-menu-hover: var(--ln-ext-lift-6);
   --ln-ext-card-bg: var(--ln-ext-neutral-1);
   --ln-ext-card-border: var(--ln-ext-lift-8);
@@ -124,7 +141,7 @@
   --c-bg-header-dropdown: var(--ln-ext-bg-panel) !important;
   --c-bg-zebra: var(--ln-ext-bg-mid) !important;
   --c-bg-zebra2: var(--ln-ext-neutral-5) !important;
-  --c-bg-input: var(--ln-ext-bg-raised) !important;
+  --c-bg-input: var(--ln-ext-input-bg) !important;
   --c-page-input: var(--ln-ext-bg-raised) !important;
   --c-bg-variation: var(--ln-ext-bg-mid) !important;
   --c-body-gradient: var(--ln-ext-bg-page) !important;

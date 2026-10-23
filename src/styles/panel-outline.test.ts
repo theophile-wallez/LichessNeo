@@ -10,6 +10,7 @@ const SHEETS = [
   'main { --ln-ext-gap: 24px; }',
   read('panel-outline.css').replaceAll('::after', ' > .outline'),
   read('game/controls.css'),
+  read('game/moves-extras.css'),
 ];
 
 interface Page {
@@ -26,15 +27,15 @@ function outline({ main, width = 1280, body = '' }: Page): CSSStyleDeclaration {
   style.textContent = SHEETS.join('\n');
   document.head.append(style);
   document.body.className = body;
-  document.body.innerHTML = `<main class="${main}"><div class="rcontrols"></div><div class="outline"></div></main>`;
+  document.body.innerHTML = `<main class="${main}"><div class="rcontrols"></div><div class="round__underboard"><div class="crosstable">1</div></div><div class="outline"></div></main>`;
   const element = queryOne(document, '.outline', HTMLElement);
   if (!element) throw new Error('no outline');
   return getComputedStyle(element);
 }
 
-const controls = (): CSSStyleDeclaration => {
-  const element = queryOne(document, '.rcontrols', HTMLElement);
-  if (!element) throw new Error('no controls');
+const styleOf = (selector: string): CSSStyleDeclaration => {
+  const element = queryOne(document, selector, HTMLElement);
+  if (!element) throw new Error(`no ${selector}`);
   return getComputedStyle(element);
 };
 
@@ -55,7 +56,16 @@ describe('the panel’s outline', () => {
 
   it('stands over the game’s controls, which cover the panel’s bottom', () => {
     const style = outline({ main: 'round' });
-    expect(Number(style.zIndex)).toBeGreaterThan(Number(controls().zIndex));
+    expect(Number(style.zIndex)).toBeGreaterThan(Number(styleOf('.rcontrols').zIndex));
+  });
+
+  // White on the light scheme's grey page, a square corner showed past the outline's round one.
+  it('rounds the bottom corners of what covers the game panel’s bottom, as the outline', () => {
+    const style = outline({ main: 'round' });
+    for (const part of ['.rcontrols', '.crosstable']) {
+      expect(styleOf(part).borderBottomLeftRadius).toBe(style.borderBottomLeftRadius);
+      expect(styleOf(part).borderBottomRightRadius).toBe(style.borderBottomRightRadius);
+    }
   });
 
   it('spans the analysis panel’s column, past its parts’ margin', () => {

@@ -12,7 +12,7 @@ dialog {
   border: 1px solid var(--ln-ext-lift-8) !important;
   border-radius: 12px !important;
   background: var(--ln-ext-bg-panel) !important;
-  box-shadow: 0 24px 64px var(--ln-ext-shade-60) !important;
+  box-shadow: var(--ln-ext-float-shadow, 0 24px 64px var(--ln-ext-shade-60)) !important;
   animation: ln-ext-dialog-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 

@@ -261,7 +261,7 @@ html.light .racer .race__post__rank {
   border: 1px solid var(--ln-ext-card-border);
   border-radius: 18px !important;
   background: color-mix(in srgb, var(--ln-ext-bg-panel-dark) 92%, transparent) !important;
-  box-shadow: 0 16px 40px var(--ln-ext-shade-70) !important;
+  box-shadow: var(--ln-ext-float-shadow, 0 16px 40px var(--ln-ext-shade-70)) !important;
   backdrop-filter: blur(6px);
 }
 

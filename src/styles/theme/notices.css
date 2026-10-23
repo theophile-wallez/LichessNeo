@@ -12,7 +12,11 @@
   --ln-ext-toaster-w: 360px;
   /* Softer than a menu's: a toast floats over the page, nothing to separate it from. */
   --ln-ext-toast-bg: color-mix(in srgb, var(--ln-ext-menu-bg) 70%, transparent);
-  --ln-ext-toast-shadow: 0 8px 24px var(--ln-ext-shade-40), 0 2px 6px var(--ln-ext-shade-25);
+  --ln-ext-toast-shadow: var(
+    --ln-ext-float-shadow,
+    0 8px 24px var(--ln-ext-shade-40),
+    0 2px 6px var(--ln-ext-shade-25)
+  );
   position: fixed;
   inset-inline-end: 16px;
   bottom: calc(16px + env(safe-area-inset-bottom));

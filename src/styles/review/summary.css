@@ -185,7 +185,7 @@ html[data-ln-ext-ai~='black'] .ln-ext-avatar--b {
   border-radius: 8px;
   box-shadow:
     0 0 0 1px var(--ln-ext-lift-12),
-    0 14px 34px var(--ln-ext-shade-70);
+    var(--ln-ext-float-shadow, 0 14px 34px var(--ln-ext-shade-70));
   pointer-events: none;
 }
 

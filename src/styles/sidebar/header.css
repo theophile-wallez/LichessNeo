@@ -125,7 +125,7 @@
       background: var(--ln-ext-neutral-5);
       box-shadow:
         inset 0 0 0 1px var(--ln-ext-lift-8),
-        0 12px 32px var(--ln-ext-shade-50);
+        var(--ln-ext-float-shadow, 0 12px 32px var(--ln-ext-shade-50));
       color: var(--ln-ext-neutral-13);
       font-size: 13px;
       white-space: nowrap;

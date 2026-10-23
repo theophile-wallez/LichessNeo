@@ -205,7 +205,7 @@
     overflow-y: auto;
     border-radius: 6px;
     background: var(--ln-ext-bg-panel) !important;
-    box-shadow: 0 6px 24px var(--ln-ext-shade-60) !important;
+    box-shadow: var(--ln-ext-float-shadow, 0 6px 24px var(--ln-ext-shade-60)) !important;
   }
 
   /* Search suggestions too: under the search box they'd open off screen. */

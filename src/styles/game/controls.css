@@ -18,6 +18,7 @@ main.round .rcontrols {
     align-self: end;
     z-index: 4;
     border-top: 1px solid var(--ln-ext-border);
+    border-radius: 0 0 6px 6px;
   }
 }
 

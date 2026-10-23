@@ -70,7 +70,6 @@ main.round .round__underboard > .crosstable:empty {
 @media (min-width: 1020px) {
   main.round .round__underboard > .crosstable {
     margin-bottom: var(--ln-ext-ctrl-h) !important;
-    border-radius: 0 !important;
   }
 
   /* The keyboard-move input (a preference) goes above the crosstable, over the part on show. */

@@ -185,7 +185,7 @@
   border: 1px solid var(--ln-ext-card-border);
   border-radius: 16px !important;
   background: var(--ln-ext-bg-panel) !important;
-  box-shadow: 0 16px 40px var(--ln-ext-shade-50) !important;
+  box-shadow: var(--ln-ext-float-shadow, 0 16px 40px var(--ln-ext-shade-50)) !important;
 }
 
 .learn__screen h1 {

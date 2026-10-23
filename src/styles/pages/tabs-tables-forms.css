@@ -60,9 +60,9 @@
 input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='color']),
 select,
 textarea {
-  border: 1px solid var(--ln-ext-neutral-7) !important;
+  border: 1px solid var(--ln-ext-input-border) !important;
   border-radius: 6px !important;
-  background-color: var(--ln-ext-bg-raised) !important;
+  background-color: var(--ln-ext-input-bg) !important;
   color: var(--ln-ext-text-strong) !important;
 }
 

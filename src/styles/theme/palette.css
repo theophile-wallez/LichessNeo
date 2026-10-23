@@ -90,7 +90,7 @@
   --ln-ext-neutral-8: oklch(88.6% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
   --ln-ext-neutral-9: oklch(80% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
   --ln-ext-neutral-10: oklch(63% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
-  --ln-ext-neutral-11: oklch(54% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
+  --ln-ext-neutral-11: oklch(53% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
   --ln-ext-neutral-12: oklch(44% var(--ln-ext-tint-chroma) var(--ln-ext-tint-hue));
   --ln-ext-neutral-13: oklch(30% calc(var(--ln-ext-tint-chroma) / 2) var(--ln-ext-tint-hue));
   --ln-ext-neutral-14: oklch(18% calc(var(--ln-ext-tint-chroma) / 2) var(--ln-ext-tint-hue));

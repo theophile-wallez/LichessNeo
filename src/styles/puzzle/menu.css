@@ -112,7 +112,7 @@
     background: var(--ln-ext-bg-raised) !important;
     box-shadow:
       inset 0 0 0 1px var(--ln-ext-card-border),
-      0 18px 44px var(--ln-ext-shade-65) !important;
+      var(--ln-ext-float-shadow, 0 18px 44px var(--ln-ext-shade-65)) !important;
   }
 
   html.ln-ext-puzzle-menu-open main.puzzle .puzzle__side > * + * {
