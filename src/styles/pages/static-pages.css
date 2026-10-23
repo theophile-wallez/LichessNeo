@@ -1,6 +1,6 @@
 /* ---- Static pages --- */
 
-/* About, FAQ, the updates, terms, variants, streamers, videos, current games…: Lichess's
+/* About, FAQ, the updates, terms, variants, streamers, videos…: Lichess's
  * plain pages, fixed only where they break the layout or clash with our look. */
 
 /* Side menus and titles stay put while the content scrolls (desktop only: below, Lichess's
@@ -12,7 +12,7 @@
       [data-ln-ext-nav~='variants'],
       [data-ln-ext-nav~='streamers']
     ),
-  main.page-menu:is(.video, .tv-games) > .page-menu__menu {
+  main.page-menu.video > .page-menu__menu {
     position: sticky;
     top: 16px;
     align-self: start;

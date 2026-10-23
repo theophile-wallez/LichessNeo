@@ -1,6 +1,8 @@
-/* Lichess TV and the current games' channels: their colors, TV's column on a desktop, and
- * below 1020px a row of pills on both pages. */
+/* Lichess TV and the current games' channels: their colors, a column on a desktop (TV's grid
+ * in column.css, after channels.css so its narrower tiles win), and below 1020px a row of pills
+ * on both pages. */
 
 @import './colors.css';
+@import './channels.css';
 @import './column.css';
 @import './row.css';

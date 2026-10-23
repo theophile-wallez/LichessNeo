@@ -29,10 +29,27 @@ describe('TV intro', () => {
       expect(document.documentElement.classList.contains('ln-ext-tv-still')).toBe(scenario.still);
     },
   );
+
+  // The current games load again for each channel too.
+  it.each([
+    { path: '/games/blitz', referrer: '/games', still: true },
+    { path: '/games', referrer: '/games/bullet', still: true },
+    { path: '/games', referrer: '/tv', still: false },
+    { path: '/games', referrer: '/', still: false },
+  ])('keeps it still on $path from $referrer: $still', ({ path, referrer, still }) => {
+    history.replaceState(null, '', path);
+    Object.defineProperty(document, 'referrer', {
+      value: `${location.origin}${referrer}`,
+      configurable: true,
+    });
+    vi.spyOn(performance, 'getEntriesByType').mockReturnValue([navigation('navigate')]);
+    markStillIntro();
+    expect(document.documentElement.classList.contains('ln-ext-tv-still')).toBe(still);
+  });
 });
 
-function render(clientHeight: number): HTMLElement {
-  document.body.innerHTML = legacy.html;
+function render(clientHeight: number, html = legacy.html): HTMLElement {
+  document.body.innerHTML = html;
   const list = document.querySelector('.subnav__inner');
   const active = document.querySelector('a.tv-channel.active');
   if (!(list instanceof HTMLElement) || !active) throw new Error('no channels');
@@ -57,6 +74,20 @@ describe('TV channels', () => {
     const list = render(0);
     syncChannels();
     expect(list.dataset.lnExtTv).toBeUndefined();
+    expect(tips().every(tip => tip === null)).toBe(true);
+  });
+
+  // Its column is wide enough for the names at every width.
+  it('scrolls the current games’ channels too, with no tooltips', () => {
+    const games = legacy.html
+      .replace(
+        '<main class="round tv-single"><div class="round__side">',
+        '<main class="page-menu tv-games"><aside class="page-menu__menu">',
+      )
+      .replace(/<\/div><\/main>$/, '</aside></main>');
+    const list = render(legacy.clientHeight, games);
+    syncChannels();
+    expect(list.scrollTop).toBe(legacy.scrollTop);
     expect(tips().every(tip => tip === null)).toBe(true);
   });
 

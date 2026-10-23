@@ -2,14 +2,14 @@ import { queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
-// Lichess TV (styles/tv).
+// Lichess TV and the current games, whose channels look alike (styles/tv).
 
-const TV_PATH = /\/tv(\/|$)/;
+const CHANNEL_PATHS = [/\/tv(\/|$)/, /\/games(\/|$)/];
 
-function comesFromTv(referrer: string): boolean {
+function comesFromSection(referrer: string, section: RegExp): boolean {
   try {
     const url = new URL(referrer);
-    return url.origin === location.origin && TV_PATH.test(url.pathname);
+    return url.origin === location.origin && section.test(url.pathname);
   } catch {
     return false;
   }
@@ -20,12 +20,13 @@ function isReload(): boolean {
   return entry !== undefined && 'type' in entry && entry.type === 'reload';
 }
 
-// The channels slide in when TV is opened, not each time it loads again:
-// from a channel link (the referrer is TV) or for the next game (Lichess
-// reloads the page).
+// The channels slide in when the page is opened, not each time it loads
+// again: from a channel link (the referrer is the same page) or for TV's next
+// game (Lichess reloads the page).
 export function markStillIntro(): void {
-  if (!TV_PATH.test(location.pathname)) return;
-  if (comesFromTv(document.referrer) || isReload())
+  const sections = CHANNEL_PATHS.filter(section => section.test(location.pathname));
+  if (sections.length === 0) return;
+  if (isReload() || sections.some(section => comesFromSection(document.referrer, section)))
     document.documentElement.classList.toggle('ln-ext-tv-still', true);
 }
 
@@ -41,19 +42,24 @@ export function channelTip(name: string | undefined, champion: string | undefine
 export function syncChannels(): void {
   const list = queryOne(
     document,
-    'main.tv-single .subnav__inner:not([data-ln-ext-tv])',
+    'main:is(.tv-single, .tv-games) .subnav__inner:not([data-ln-ext-tv])',
     HTMLElement,
   );
   if (!list || list.clientHeight === 0) return;
   setData(list, 'lnExtTv', '');
+  // The current games' column is wide enough for the names at every width.
+  if (list.closest('main.tv-single')) writeTips(list);
+  const active = queryOne(list, 'a.tv-channel.active', HTMLElement);
+  if (active) list.scrollTop = active.offsetTop - (list.clientHeight - active.offsetHeight) / 2;
+}
+
+function writeTips(list: HTMLElement): void {
   for (const channel of queryAll(list, 'a.tv-channel', HTMLElement)) {
     const name = channel.querySelector('strong')?.textContent.trim();
     const champion = channel.querySelector('.champion')?.textContent.replace(/\s+/g, ' ').trim();
     const tip = channelTip(name, champion);
     if (tip !== null) setData(channel, 'lnExtTip', tip);
   }
-  const active = queryOne(list, 'a.tv-channel.active', HTMLElement);
-  if (active) list.scrollTop = active.offsetTop - (list.clientHeight - active.offsetHeight) / 2;
 }
 
 export const tv: Feature = {

@@ -24,6 +24,13 @@
     margin: 0 0 8px !important;
   }
 
+  /* From 800px Lichess keeps the menu beside the games, as wide as the row: the games ran
+   * off the screen. The row goes over them. */
+  main.page-menu.tv-games {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas: 'menu' 'content' !important;
+  }
+
   main.tv-games > .page-menu__menu {
     margin: 0 !important;
     padding: 12px 0 0 !important;
