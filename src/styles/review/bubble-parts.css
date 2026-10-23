@@ -90,13 +90,6 @@
   margin-top: 8px;
 }
 
-/* Retry stands out from Explain's line button: the player's own turn. */
-#ln-ext-review .ln-ext-bubble__retry,
-#ln-ext-review .ln-ext-bubble__retry:hover {
-  background: var(--ln-ext-btn-primary);
-  color: var(--ln-ext-white);
-}
-
 .ln-ext-bubble__row--retry .ln-ext-bubble__title {
   font-size: 15px;
 }

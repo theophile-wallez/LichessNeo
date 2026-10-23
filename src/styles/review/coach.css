@@ -25,6 +25,25 @@
   .ln-ext-bubble .ln-ext-bubble__title {
     font-size: 14px;
   }
+
+  /* With Retry, four names don't fit side by side ("Réessayer" ran 10px past its button):
+     each goes under its icon, and Next keeps its arrow, which says it alone. */
+  #ln-ext-review .ln-ext-review__nav--four .ln-ext-btn:not(.ln-ext-btn--green) {
+    flex-direction: column;
+    gap: 2px;
+    margin-inline-end: 6px;
+    padding-inline: 4px;
+    font-size: 12px;
+    line-height: 1.1;
+  }
+
+  #ln-ext-review .ln-ext-review__nav--four .ln-ext-btn--green {
+    flex: 0 0 48px;
+  }
+
+  .ln-ext-review__nav--four .ln-ext-btn--green > span {
+    display: none;
+  }
 }
 
 /* Narrowest panels (windows up to ~1380px): the title had ~45px and broke in three.

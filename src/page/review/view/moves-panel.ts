@@ -28,7 +28,7 @@ import {
   thinkingWords,
 } from './markup.ts';
 import { bestShown, lineShown, spokenMove } from './navigation.ts';
-import { canRetry, type RetryOutcome, retryOutcome } from './retry.ts';
+import { type RetryOutcome, retryOutcome } from './retry.ts';
 import { type Retried, retryBubble, retryParts } from './retry-bubble.ts';
 import { retryHint, type RetryHint } from './retry-hint.ts';
 import { gameTimes, timingAt } from './timing.ts';
@@ -103,18 +103,9 @@ function lineButton(session: Session, analysis: Analysis, move: JudgedMove | nul
   return html`<button class="ln-ext-bubble__line" data-ln-ext="line">${label}</button>`;
 }
 
-/** Under an error's comment, the button that has the player look for a better move. */
-const retryButton = (session: Session, analysis: Analysis, move: JudgedMove | null): SafeHtml =>
-  canRetry(move, analysis)
-    ? html`<button class="ln-ext-bubble__line ln-ext-bubble__retry" data-ln-ext="retry">${svgIcon('retry')}${session.language.ui.retry.button}</button>`
-    : html``;
-
 function actionsMarkup(session: Session, analysis: Analysis, move: JudgedMove | null): SafeHtml {
   const line = lineButton(session, analysis, move);
-  const retry = retryButton(session, analysis, move);
-  return line.value || retry.value
-    ? html`<div class="ln-ext-bubble__actions">${retry}${line}</div>`
-    : html``;
+  return line.value ? html`<div class="ln-ext-bubble__actions">${line}</div>` : html``;
 }
 
 /** The player's controls, each drawn with the icon of its name. */

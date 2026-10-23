@@ -165,15 +165,16 @@
   white-space: nowrap;
 }
 
-/* Equal thirds; Explain and Best fold away when they've nothing to do, and only
-   Next grows into their room. Margins, not a gap, so a folded button leaves none. */
+/* Thirds, quarters with Retry; Explain, Best and Retry fold away when they've nothing to
+   do, and only Next grows into their room. Margins, not a gap, so a folded button leaves
+   none. */
 .ln-ext-review__nav {
   display: flex;
   padding: 14px 16px 12px;
 }
 
 .ln-ext-review__nav .ln-ext-btn {
-  flex: 1 1 0;
+  flex: 1 1 calc((100% - 16px) / 3);
   min-width: 0;
   gap: 6px;
   overflow: hidden;
@@ -188,7 +189,7 @@
 }
 
 .ln-ext-review__nav .ln-ext-btn:not(.ln-ext-btn--green) {
-  flex: 0 0 calc((100% - 16px) / 3);
+  flex-grow: 0;
   margin-inline-end: 8px;
 }
 

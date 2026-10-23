@@ -98,9 +98,10 @@ Explain swaps the coach's comment for a book move's opening, or for the
 engine's lines around a move that wasn't best (`view/explain-hint.ts`); its
 button plays the best line on the board as a variation, while the coach still
 speaks of the move it stands for (`lineShown`, `view/navigation.ts`).
-Explain and Best fold away on a move they'd have nothing to add to, and Next
-grows into their room: their buttons are kept across the panel's renders so
-that they ease (`view/nav.ts`).
+Explain, Best and Retry fold away on a move they'd have nothing to add to, and
+Next grows into their room: their buttons are kept across the panel's renders
+so that they ease (`view/nav.ts`). Retry, on an error, has the player look for
+a better move on the board, and lights up while they do (`view/retry.ts`).
 
 Under an error's comment, Retry has the player look for a better move on the
 board (`view/retry.ts`), where the board can play moves: it takes the board

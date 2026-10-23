@@ -24,35 +24,52 @@ function enabledOn(ply: number, input: Partial<NavInput> = {}): Record<keyof Nav
   return {
     explain: state.explain.enabled,
     best: state.best.enabled,
+    retry: state.retry.enabled,
     next: state.next.enabled,
   };
 }
 
 describe('the nav’s buttons', () => {
-  it('fold Explain and Best away on a best move, which they’d have nothing to add to', () => {
-    expect(enabledOn(13)).toEqual({ explain: false, best: false, next: true });
+  it('fold Explain, Best and Retry away on a best move, which they’d have nothing to add to', () => {
+    expect(enabledOn(13)).toEqual({ explain: false, best: false, retry: false, next: true });
   });
 
-  it('keep both on an error, to show the better move and the lines', () => {
-    expect(enabledOn(25)).toEqual({ explain: true, best: true, next: true });
+  it('keep all three on an error, to show the better move and the lines, or look for it', () => {
+    expect(enabledOn(25)).toEqual({ explain: true, best: true, retry: true, next: true });
   });
 
   it('keep Explain alone on a book move that names its opening', () => {
-    expect(enabledOn(9)).toEqual({ explain: true, best: false, next: true });
-    expect(enabledOn(8)).toEqual({ explain: false, best: false, next: true });
+    expect(enabledOn(9)).toEqual({ explain: true, best: false, retry: false, next: true });
+    expect(enabledOn(8)).toEqual({ explain: false, best: false, retry: false, next: true });
   });
 
-  it('leave Next alone while the player retries, even on the game’s last move', () => {
+  it('leave Retry and Next while the player retries, even on the game’s last move', () => {
     const retried = { kind: 'waiting' } as const;
-    expect(enabledOn(25, { retried })).toEqual({ explain: false, best: false, next: true });
+    expect(enabledOn(25, { retried })).toEqual({
+      explain: false,
+      best: false,
+      retry: true,
+      next: true,
+    });
     expect(enabledOn(33).next).toBe(false);
     expect(enabledOn(33, { retried }).next).toBe(true);
+  });
+
+  it('light Retry up while the player retries, so it reads as the way back', () => {
+    const { session, ctrl, facade } = judgedGame('opera');
+    ctrl.jumpToMain(25);
+    const move = session.view.review?.moves[24] ?? null;
+    const input = { line: null, move, shown: null, retried: null };
+    expect(navState(session, facade, input).retry.on).toBe(false);
+    const retried = { kind: 'waiting' } as const;
+    expect(navState(session, facade, { ...input, retried }).retry.on).toBe(true);
   });
 });
 
 const state = (enabled: boolean): NavState => ({
   explain: { on: true, enabled },
   best: { on: false, enabled },
+  retry: { on: false, enabled },
   next: { enabled: true },
 });
 
@@ -88,14 +105,30 @@ describe('the kept nav', () => {
     syncNav(nav, state(false), en.ui);
     expect(nav.querySelector('[data-ln-ext="explain"]')).toBe(explain);
     const buttons = [...nav.querySelectorAll('button')];
-    expect(buttons.map(button => button.disabled)).toEqual([true, true, false]);
+    expect(buttons.map(button => button.dataset.lnExt)).toEqual([
+      'explain',
+      'best',
+      'retry',
+      'next',
+    ]);
+    expect(buttons.map(button => button.disabled)).toEqual([true, true, true, false]);
     expect(buttons.map(button => button.classList.contains('ln-ext-btn--on'))).toEqual([
       true,
+      false,
       false,
       false,
     ]);
     syncNav(nav, state(false), fr.ui);
     expect(nav.querySelector('[data-ln-ext="explain"]')).not.toBe(explain);
     expect(nav.textContent).toContain(fr.ui.next);
+  });
+
+  it('marks the four buttons all there, for a narrow panel to keep Next’s arrow alone', () => {
+    const nav = document.createElement('div');
+    syncNav(nav, state(true), en.ui);
+    expect(nav.classList.contains('ln-ext-review__nav--four')).toBe(true);
+    syncNav(nav, { ...state(true), retry: { on: false, enabled: false } }, en.ui);
+    expect(nav.classList.contains('ln-ext-review__nav--four')).toBe(false);
+    expect(nav.querySelector('[data-ln-ext="next"]')?.getAttribute('aria-label')).toBe(en.ui.next);
   });
 });
