@@ -1,12 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 
-// The sync loop's tasks, run by hand.
-const ticks = vi.hoisted((): (() => void)[] => []);
-vi.mock('#content/sync-loop.ts', () => ({
-  onEveryTick: (_name: string, run: () => void) => ticks.push(run),
-}));
-
 // Lichess's Play section, and the home's lobby with its tabs (pools, lobby, correspondence).
 const NAV = `<nav id="topnav"><section><a href="/">Play</a><div role="group">
   <a href="/?any#hook">Create lobby game</a><a href="/tournament">Arena tournaments</a>
@@ -15,18 +9,15 @@ const LOBBY = `<main class="lobby"><div class="lobby__app"><div class="tabs-hori
   <button>Quick pairing</button><button>Lobby</button><button>Correspondence</button>
 </div></div></main>`;
 
-const scrolls = vi.fn<(options?: boolean | ScrollIntoViewOptions) => void>();
-
 beforeEach(() => {
   vi.resetModules();
-  ticks.length = 0;
   vi.stubGlobal('chrome', { i18n: { getMessage: (name: string) => `[${name}]` } });
-  Element.prototype.scrollIntoView = scrolls;
+  vi.spyOn(window, 'scrollTo').mockReturnValue(undefined);
 });
 
 afterEach(() => {
   vi.unstubAllGlobals();
-  scrolls.mockClear();
+  vi.restoreAllMocks();
   localStorage.clear();
   document.body.innerHTML = '';
   history.replaceState(null, '', '/');
@@ -49,36 +40,36 @@ describe('the nav’s Lobby', () => {
     expect(lobbyLink()?.textContent).toBe('[navLobby]');
   });
 
-  it('opens the home on its lobby tab, without the hash, scrolled to it once drawn', async () => {
+  // The home opens at its top, as any page does: a lobby scrolled to hid the quick pairing.
+  it('opens the home on its lobby tab, without the hash, at its top', async () => {
     localStorage.setItem('lobby.tab:-', 'seeks');
     localStorage.setItem('lobby.tab:eresy', 'pools');
-    await start('/#lobby', NAV);
+    await start('/#lobby', NAV + LOBBY);
     expect(localStorage.getItem('lobby.tab:-')).toBe('real_time');
     expect(localStorage.getItem('lobby.tab:eresy')).toBe('real_time');
     expect(location.hash).toBe('');
-    for (const tick of ticks) tick();
-    expect(scrolls).not.toHaveBeenCalled();
-    document.body.insertAdjacentHTML('beforeend', LOBBY);
-    for (const tick of ticks) tick();
-    for (const tick of ticks) tick();
-    expect(scrolls.mock.calls).toEqual([[{ block: 'start', behavior: 'instant' }]]);
+    expect(window.scrollTo).not.toHaveBeenCalled();
   });
 
-  it('switches the home to its lobby tab when followed there', async () => {
-    await start('/', NAV + LOBBY);
+  it('switches the home to its lobby tab when followed there, and goes back to its top', async () => {
+    await start('/', `${NAV}<div id="main-wrap">${LOBBY}</div>`);
     const picked = vi.fn<(event: Event) => void>();
     document.querySelectorAll('.tabs-horiz button')[1]?.addEventListener('click', picked);
+    const mainWrap = queryOne(document, '#main-wrap', HTMLElement);
+    if (!mainWrap) throw new Error('no #main-wrap');
+    const mainScrolls = vi.spyOn(mainWrap, 'scrollTo').mockReturnValue(undefined);
     history.replaceState(null, '', '/#lobby');
     window.dispatchEvent(new HashChangeEvent('hashchange'));
     expect(picked).toHaveBeenCalledOnce();
     expect(location.hash).toBe('');
-    expect(scrolls.mock.calls).toEqual([[{ block: 'start', behavior: 'smooth' }]]);
+    // On desktop #main-wrap scrolls, below 1020px the window.
+    expect(mainScrolls.mock.calls).toEqual([[{ top: 0, behavior: 'smooth' }]]);
+    expect(vi.mocked(window.scrollTo).mock.calls).toEqual([[{ top: 0, behavior: 'smooth' }]]);
   });
 
   it('leaves the stored tab alone on any other way to the home', async () => {
     localStorage.setItem('lobby.tab:-', 'seeks');
     await start('/', NAV);
     expect(localStorage.getItem('lobby.tab:-')).toBe('seeks');
-    expect(ticks).toEqual([]);
   });
 });
