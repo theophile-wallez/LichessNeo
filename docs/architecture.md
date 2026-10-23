@@ -117,7 +117,7 @@ so the logic can be unit-tested without a page.
   its improvement areas and strengths, from `/api/puzzle/dashboard`, and the
   puzzle history's week, puzzles to retry and session cards.
 - `dev`: auto-reload, and the name of the draft a preview shows (`pnpm preview --name`),
-  a link to the page to review it on with `--url`.
+  linked to the pages to review it on with `--url`.
 - `platform`: the extension APIs it uses.
 - `settings`: the extension's settings, a section of the account pages whose
   menu gets a link for each of its pages: Personalization (the appearance,

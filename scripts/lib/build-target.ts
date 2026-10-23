@@ -3,6 +3,7 @@ import { cp, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { build } from 'rolldown';
 import { createManifest, ManifestSchema, OUTPUT, type Target } from '#manifest';
+import type { PreviewLink } from '#shared/build-mode.ts';
 import { bundleCss } from './css-bundle.ts';
 import { stripCss } from './css-strip.ts';
 import { assertExtensionUrls } from './extension-urls.ts';
@@ -29,7 +30,7 @@ export interface BuildOptions {
   /** Minified, without source maps or CSS comments: what the stores get. */
   readonly release: boolean;
   /** What a preview shows, named on the page (#content/dev/preview-name.ts), and where. */
-  readonly preview?: { readonly name: string; readonly url?: string | undefined } | undefined;
+  readonly preview?: { readonly name: string; readonly links: readonly PreviewLink[] } | undefined;
 }
 
 /** Promise.all that waits for every task before it fails, so none is left writing. */
@@ -53,7 +54,7 @@ async function bundleScripts({ out, release, preview }: BuildOptions): Promise<s
           define: {
             LN_EXT_DEV_BUILD: String(!release),
             LN_EXT_PREVIEW: JSON.stringify(release ? '' : (preview?.name ?? '')),
-            LN_EXT_PREVIEW_URL: JSON.stringify(release ? '' : (preview?.url ?? '')),
+            LN_EXT_PREVIEW_LINKS: JSON.stringify(release ? [] : (preview?.links ?? [])),
           },
         },
         output: {
