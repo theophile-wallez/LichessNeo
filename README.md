@@ -27,6 +27,16 @@ A coach then takes you through the game move by move, in plain words.
 
 ![The Debrief: the advantage graph, the accuracy and the coach on a brilliant move](store/en/2-debrief.png)
 
+### Opening training
+
+Play your openings against the masters' moves, or Lichess players' of your
+level, and the coach tells you why a move isn't the one. What you play becomes
+your repertoire, reviewed day after day until you know it, with a ring of
+mastery per opening, a daily goal and its streak. Then a minute's challenge, a
+quiz, the traps of each opening from Lichess's puzzles, drills on your own
+games' habits, and your own studies to practice. Signed in, your repertoire
+can follow your account in two private studies of yours.
+
 ### A coach by your side
 
 Pick one of 26 coaches in 3D, from a fennec to a dragon. Yours reviews your

@@ -90,6 +90,13 @@
   margin-top: 8px;
 }
 
+/* Practice stands out from Explain's line button: the player's own turn. */
+#ln-ext-review .ln-ext-bubble__practice,
+#ln-ext-review .ln-ext-bubble__practice:hover {
+  background: var(--ln-ext-btn-primary);
+  color: var(--ln-ext-white);
+}
+
 .ln-ext-bubble__row--retry .ln-ext-bubble__title {
   font-size: 15px;
 }

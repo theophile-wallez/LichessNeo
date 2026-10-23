@@ -620,6 +620,12 @@
   "racerStepComboBody": {
     "message": "Les bons coups d'affilée remplissent la barre de combo, pour des points bonus. Une erreur la vide."
   },
+  "openingTraining": {
+    "message": "Entraînement aux ouvertures"
+  },
+  "openingPractice": {
+    "message": "S’entraîner sur cette ouverture"
+  },
   "racerMore": {
     "message": "Autres défis de problèmes"
   },

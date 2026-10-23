@@ -425,6 +425,18 @@ features and its name: free analysis, open data, no ads.
   Learn stage…), it's the Game Review's coach card (`styles/review/bubble.css`,
   "The coach's card"): the coach standing on the card's bottom edge, its
   words to its right on the card itself. Never a speech bubble beside it.
+  Its words are typed out word by word, as the review's coach types its
+  comments, each laid out from the start and hidden until its turn
+  (`WORD_MS`), so the card has its final size at once: in the review's panel
+  through `commentMarkup` and its stream (`page/review/comment/markup.ts`,
+  `view/stream.ts`), elsewhere through `createVoice` (`#shared/coach-voice.ts`).
+  Never a coach's text shown whole; only Lichess's own words on a card it
+  draws (the puzzles') appear at once.
+  Its words are short, fun and playful, a coach cheering a player on: the one
+  thing that matters now (the move, the reply, what to find), never every
+  detail nor how the feature works ("Show me your opening! I'll answer like
+  the masters.", not "I answer with the moves of master games, each as often
+  as it's played…").
   The coach is never cut at its sides: the card cuts it only at its feet
   and over its hops. Leave room for the arms its canvas reaches past its
   avatar's box, the fox's the farthest: about a fifth of the coach's height
@@ -524,7 +536,8 @@ area it works on first:
 
 - `src/page/`: Lichess's page APIs, the free analysis board, chessground's
   shapes, a game's charts.
-- `src/page/review/`: the cloud eval, mate distances, the engine's spread.
+- `src/page/review/`: the cloud eval, mate distances, the engine's spread,
+  and practice's explorer, puzzle batches and studies.
 - `src/styles/game/`: the move list's obfuscated tags, game over, variants,
   Zen mode, TV.
 - `src/styles/analysis/`: practice lessons, broadcasts.

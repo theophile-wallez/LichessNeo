@@ -60,6 +60,13 @@ export const StorageKey = {
   // The threats the coach reads around a game's moves, kept with its records.
   reviewThreats: (gameId: string, positions: number, version: number): string =>
     `${prefixed('review-threats')}:${gameId}:${positions}:v${version}`,
+  // How opening practice goes, the positions the user met in it, their days and
+  // records, and the studies that keep a copy (page/review/practice/settings.ts,
+  // repertoire.ts, progress.ts, sync.ts).
+  practiceSettings: prefixed('practice-settings'),
+  practiceRepertoire: prefixed('practice-repertoire'),
+  practiceProgress: prefixed('practice-progress'),
+  practiceSync: prefixed('practice-sync'),
   // The review caches, least recently opened first.
   reviewIndex: prefixed('review-index'),
   // The extension's settings, in chrome.storage.sync rather than the page's (content/settings).
@@ -72,6 +79,8 @@ export const SessionKey = {
   lateReload: prefixed('late-reload'),
   gameStarted: (gameId: string): string => `${prefixed('started')}:${gameId}`,
   gameIntro: (gameId: string): string => `${prefixed('intro')}:${gameId}`,
+  // The OAuth request that creates practice's studies, across Lichess's consent page.
+  practiceConnect: prefixed('practice-connect'),
 } satisfies Record<string, string | ((...args: never[]) => string)>;
 
 type Area = 'local' | 'session';

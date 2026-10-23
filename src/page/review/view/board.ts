@@ -4,6 +4,7 @@ import { setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { parentPath } from '#page/lichess/tree.ts';
 import {
+  type Mark,
   type ReviewArrow,
   reviewArrows,
   reviewDrawing,
@@ -12,11 +13,12 @@ import {
 } from '#page/board/review-arrows.ts';
 import { isGameNode, plyIndex } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
-import type { JudgedMove, Session } from '#page/review/session.ts';
+import { type JudgedMove, onFreeBoard, type Session } from '#page/review/session.ts';
 import { badgeMarkup, reviewArrowsFor } from './board-badge.ts';
 import { barPosition, drawBar } from './eval-bar.ts';
 import { liveBadges, reviewBadges, treeMoves } from './move-list.ts';
 import { bestShown, reviewMove } from './navigation.ts';
+import { practiceBoardMove, practiceMarks } from './practice-bubble.ts';
 import { renderOpening } from './opening.ts';
 
 // What the review adds on and around the board: the eval bar, the verdict's
@@ -28,7 +30,7 @@ function renderBar(session: Session, analysis: Analysis, shown: JudgedMove | nul
   const position = barPosition({
     review: view.review,
     reviewing,
-    live: view.mode === 'live',
+    live: onFreeBoard(view.mode),
     onGame: isGameNode(session.work, analysis.node),
     ply: plyIndex(session.work, analysis.node),
     bestBefore: shown?.before ?? null,
@@ -46,6 +48,7 @@ function boardMove(
   shown: JudgedMove | null,
 ): JudgedMove | null {
   const { mode, retry } = session.view;
+  if (mode === 'openings') return practiceBoardMove(session, analysis);
   if (mode === 'live') return judgeAt(session.live, analysis, analysis.path);
   // Retrying, only the move tried gets a badge.
   if (retry)
@@ -79,10 +82,11 @@ function renderBadge(session: Session, analysis: Analysis, move: JudgedMove | nu
 
 // Draws the best move and the reply an error lets in with the board's other
 // arrows. Off the game's moves it also draws the engine's move from here, as
-// Lichess does on the free board. A retry draws none: they'd give the answer away.
+// Lichess does on the free board. A retry and practice draw none: they'd give
+// the answer away.
 function boardArrows(session: Session, analysis: Analysis, move: JudgedMove | null): ReviewArrow[] {
   const { view, live } = session;
-  if (view.retry) return [];
+  if (view.retry || view.mode === 'openings') return [];
   const offGame =
     view.mode !== 'normal' && view.review !== null && !isGameNode(session.work, analysis.node);
   const arrows = reviewArrowsFor({
@@ -101,25 +105,31 @@ function renderArrows(session: Session, analysis: Analysis, move: JudgedMove | n
 }
 
 // What the comment speaks of, drawn while its move is on the board, unless the
-// settings keep the coach's drawings off. A retry puts no comment there, only
-// the square of a hint it was asked for, which those settings don't hold back.
-function renderDrawing({ view }: Session, analysis: Analysis): void {
-  const { drawing, mode, retry } = view;
+// settings keep the coach's drawings off. A retry and practice put no comment
+// there, only the square of a hint asked for, which those settings don't hold back.
+function drawnMarks(session: Session, analysis: Analysis): readonly Mark[] {
+  const { drawing, mode, retry } = session.view;
+  if (mode === 'openings') return practiceMarks(session, analysis);
+  if (mode === 'live') return [];
   const shown = mode === 'moves' && drawing.path === analysis.path;
-  const marks = shown && (retry !== null || coachOptions().board) ? drawing.marks : [];
+  return shown && (retry !== null || coachOptions().board) ? drawing.marks : [];
+}
+
+function renderDrawing(session: Session, analysis: Analysis): void {
+  const marks = drawnMarks(session, analysis);
   if (JSON.stringify(marks) !== JSON.stringify(reviewDrawing())) setReviewDrawing(marks);
 }
 
 export function renderBoard(session: Session, analysis: Analysis): void {
   const { view, live } = session;
-  const shown = view.mode === 'live' ? null : bestShown(session, analysis);
+  const shown = onFreeBoard(view.mode) ? null : bestShown(session, analysis);
   renderBar(session, analysis, shown);
   const move = boardMove(session, analysis, shown);
   setData(document.documentElement, 'lnExtCls', move ? move.moveClass : '');
   renderBadge(session, analysis, move);
   renderArrows(session, analysis, move);
   renderDrawing(session, analysis);
-  if (view.mode === 'live') liveBadges(live, analysis, treeMoves());
+  if (onFreeBoard(view.mode)) liveBadges(live, analysis, treeMoves());
   else if (view.review) reviewBadges(live, analysis, view.review);
   if (view.mode === 'live' || view.mode === 'moves') renderOpening(session, analysis);
 }

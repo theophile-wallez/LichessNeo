@@ -1,25 +1,17 @@
-import { createElement, queryOne, setStyleProperty } from '#shared/dom.ts';
-import { parsePlacement } from '#shared/chess/fen.ts';
-import { colorLetter, ROLE_LETTERS } from '#shared/chess/pieces.ts';
-import { parseSquare, squareCoords } from '#shared/chess/squares.ts';
-import type { Color, Square } from '#shared/chess/types.ts';
-import { html, setHtml, type SafeHtml } from '#shared/html.ts';
+import { createElement, queryAll, setStyleProperty } from '#shared/dom.ts';
+import type { Color } from '#shared/chess/types.ts';
+import { setHtml } from '#shared/html.ts';
 import { clamp } from '#shared/math.ts';
 import type { Review } from '#page/review/session.ts';
+import { copyBoardBackground, miniBoard, type MiniPosition } from './mini-board.ts';
 
 // Hovering the graph shows the position there as a little board under it, in
 // the board's colors and set, turned the way the board is, its last move lit.
 
 const MARGIN = 8;
 
-export interface PreviewPosition {
-  readonly fen: string;
-  /** The move that led there, in UCI, or null at the start. */
-  readonly lastMove: string | null;
-}
-
 /** The position after the graph's `index`th move (0 is the start). */
-export function positionAt(review: Pick<Review, 'draft'>, index: number): PreviewPosition | null {
+export function positionAt(review: Pick<Review, 'draft'>, index: number): MiniPosition | null {
   if (index === 0) {
     const first = review.draft[0];
     return first ? { fen: first.previousPosition.fen, lastMove: null } : null;
@@ -28,43 +20,12 @@ export function positionAt(review: Pick<Review, 'draft'>, index: number): Previe
   return move ? { fen: move.position.fen, lastMove: move.uci } : null;
 }
 
-/** A square's column and row on screen, from the top left, the board turned to `orientation`. */
-function cell(square: Square, orientation: Color): string {
-  const [file, rank] = squareCoords(square);
-  const white = orientation === 'white';
-  return `--x:${white ? file : 7 - file};--y:${white ? 7 - rank : rank}`;
-}
-
-function boardMarkup({ fen, lastMove }: PreviewPosition, orientation: Color): SafeHtml {
-  const board = parsePlacement(fen.split(' ')[0] ?? '');
-  const lit = [lastMove?.slice(0, 2), lastMove?.slice(2, 4)].flatMap(text => {
-    const square = text === undefined ? null : parseSquare(text);
-    return square
-      ? [html`<span class="ln-ext-mini__lit" style="${cell(square, orientation)}"></span>`]
-      : [];
-  });
-  const pieces = [...board].map(([square, { color, role }]) => {
-    const code = `${colorLetter(color)}${ROLE_LETTERS[role]}`;
-    return html`<i class="ln-ext-pc ln-ext-pc-${code}" style="${cell(square, orientation)}"></i>`;
-  });
-  return html`<div class="ln-ext-mini">${lit}${pieces}</div>`;
-}
-
-// The board's own background, whichever it is: ours, a pack's or Lichess's.
-function copyBoardBackground(mini: HTMLElement | null): void {
-  const board = queryOne(document, '.is2d cg-board', HTMLElement);
-  if (!board || !mini) return;
-  const style = getComputedStyle(board, '::before');
-  for (const property of ['background-image', 'background-size', 'background-position'])
-    setStyleProperty(mini, property, style.getPropertyValue(property));
-}
-
 let preview: HTMLElement | null = null;
 let shown = '';
 
 /** Shows `position` under the graph's box, centered on the pointer's x. */
 export function showPreview(
-  position: PreviewPosition,
+  position: MiniPosition,
   orientation: Color,
   at: { readonly x: number; readonly graph: DOMRect },
 ): void {
@@ -72,8 +33,8 @@ export function showPreview(
   const key = `${position.fen}|${position.lastMove ?? ''}|${orientation}`;
   if (key !== shown) {
     shown = key;
-    setHtml(preview, boardMarkup(position, orientation));
-    copyBoardBackground(queryOne(preview, '.ln-ext-mini', HTMLElement));
+    setHtml(preview, miniBoard(position, orientation));
+    copyBoardBackground(queryAll(preview, '.ln-ext-mini', HTMLElement));
   }
   if (!preview.isConnected) document.body.append(preview);
   const width = preview.offsetWidth;

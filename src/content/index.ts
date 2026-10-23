@@ -5,6 +5,7 @@ import { colorThemes } from './colors/index.ts';
 import { fonts } from './bootstrap/fonts.ts';
 import { donate } from './sidebar/donate.ts';
 import { navigation } from './sidebar/navigation.ts';
+import { openingsLink } from './sidebar/openings-link.ts';
 import { sidebarCollapse } from './sidebar/collapse.ts';
 import { drawer } from './sidebar/drawer.ts';
 import { sidebarSections } from './sidebar/sections.ts';
@@ -54,6 +55,7 @@ import { practiceIcons } from './pages/practice-icons.ts';
 import { streamerSections } from './pages/streamer-sections.ts';
 import { racerHome } from './pages/racer-home.ts';
 import { videoCountPill } from './pages/video-count.ts';
+import { openingPractice } from './pages/opening-practice.ts';
 import { openings } from './pages/openings.ts';
 import { gameMeta } from './game/game-meta.ts';
 import { avatars } from './ui/avatars.ts';
@@ -88,6 +90,7 @@ const FEATURES = [
   fonts,
   donate,
   navigation,
+  openingsLink,
   sidebarCollapse,
   drawer,
   sidebarSections,
@@ -137,6 +140,7 @@ const FEATURES = [
   racerHome,
   videoCountPill,
   openings,
+  openingPractice,
   gameMeta,
   avatars,
   ownNameFeature,

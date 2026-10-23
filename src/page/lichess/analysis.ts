@@ -8,11 +8,11 @@ import {
   type GameData,
   GameDataSchema,
   isController,
-  isExplorer,
   type MasterOpening,
   MasterOpeningSchema,
   type Player,
 } from './controller.ts';
+import { Explorer, isExplorer } from './explorer.ts';
 import { readSite } from './globals.ts';
 import { method } from './method.ts';
 import { isTreeNode, type TreeNode } from './tree.ts';
@@ -25,6 +25,7 @@ export type { GameCourse, GameData, MasterOpening, Player } from './controller.t
 
 const isToggle = createGuard(method<[value?: boolean]>());
 const isPlayUci = createGuard(method<[uci: string]>());
+const isChangePgn = createGuard(method<[pgn: string, andReload: boolean]>());
 // A method called without arguments.
 const isAction = createGuard(method<[]>());
 
@@ -198,6 +199,36 @@ export class Analysis {
   setRetro(on: boolean): void {
     const { toggleRetro } = this.#controller;
     if (this.retroOn !== on && isAction(toggleRetro)) toggleRetro.call(this.#controller);
+  }
+
+  /** Turns Lichess's "practice with computer" on, which plays the other side's moves. */
+  startComputerPractice(): void {
+    const { practice, togglePractice } = this.#controller;
+    if (!practice && isToggle(togglePractice)) togglePractice.call(this.#controller, true);
+  }
+
+  /** The opening explorer, on pages that have one. */
+  get explorer(): Explorer | null {
+    const { explorer } = this.#controller;
+    return isExplorer(explorer) ? new Explorer(explorer) : null;
+  }
+
+  /** Opens or closes the explorer, as its button under the board does. */
+  toggleExplorer(): void {
+    const { toggleExplorer } = this.#controller;
+    if (isAction(toggleExplorer)) toggleExplorer.call(this.#controller);
+  }
+
+  /** Puts the free board on a line of its own ("1. e4 c5"), at its end, as its PGN box does. */
+  loadLine(pgn: string): void {
+    const { changePgn } = this.#controller;
+    if (isChangePgn(changePgn)) changePgn.call(this.#controller, pgn, true);
+  }
+
+  /** Turns the board around, as Lichess's own button does. */
+  flip(): void {
+    const { flip } = this.#controller;
+    if (isAction(flip)) flip.call(this.#controller);
   }
 
   /** The masters database answers only a signed-in user. */

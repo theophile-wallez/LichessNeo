@@ -2,7 +2,8 @@
 
 On a game's analysis page, a summary of the game, then a move-by-move review
 with a coach; on the free analysis board (`/analysis`), the same coach judging
-each move as it's played. Lichess's analysis controller is reached through
+each move as it's played, and a page of opening practice (see
+[Opening practice](#opening-practice)). Lichess's analysis controller is reached through
 `#page/lichess/analysis.ts`, a typed facade over `site.analysis`.
 
 ## The domain
@@ -83,12 +84,13 @@ moves played off it share (`engine-pool.ts`). Only `start.ts`, which builds the
 session, calls the render directly; every other module goes through
 `session.redraw` and `session.setMode`, which keeps the imports acyclic.
 
-| Folder     | What it holds                                                                                                                                                                                                                                                                                                                                                                                             |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `game/`    | The game's analysis: its export (opening, server analysis), the cache, the cloud, the engine's queue (`nextJob`), and `buildReview`, which judges the moves whose positions are in and drafts the rest                                                                                                                                                                                                    |
-| `live/`    | Moves played on the board (the free board's, and those off a game): `judgeAt`, `bookAt`, `openingAt`, and the queue of engine and masters lookups (`pump`)                                                                                                                                                                                                                                                |
-| `explain/` | Explain's lines: the engine's best line from a move that wasn't best, and the one punishing an error, the records' own when they kept one, else each searched from its first move when Explain asks (`pumpLines`, `explainLines`); and the threats the coach reads, searched quickly for the move shown and the next two, then for the whole game (`pumpThreats`), and kept with the game (`seedThreats`) |
-| `view/`    | The DOM: the panel per mode (summary, moves, closed, live), the graph, the eval bar, the badge and arrows on the board, the move list's badges, the opening's name, the coach's avatar, the typing, the tooltip, the clicks                                                                                                                                                                               |
+| Folder      | What it holds                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `game/`     | The game's analysis: its export (opening, server analysis), the cache, the cloud, the engine's queue (`nextJob`), and `buildReview`, which judges the moves whose positions are in and drafts the rest                                                                                                                                                                                                    |
+| `live/`     | Moves played on the board (the free board's, and those off a game): `judgeAt`, `bookAt`, `openingAt`, and the queue of engine and masters lookups (`pump`)                                                                                                                                                                                                                                                |
+| `explain/`  | Explain's lines: the engine's best line from a move that wasn't best, and the one punishing an error, the records' own when they kept one, else each searched from its first move when Explain asks (`pumpLines`, `explainLines`); and the threats the coach reads, searched quickly for the move shown and the next two, then for the whole game (`pumpThreats`), and kept with the game (`seedThreats`) |
+| `practice/` | Opening practice: the books it plays from (the explorer's, a study's chapter, the repertoire, a trap), whether it takes a move (`verdict.ts`), where it stands with the board (`status.ts`), the repertoire and its reviews, the user's days and records, the rounds of its modes, and the copy in the user's studies (`sync.ts`)                                                                         |
+| `view/`     | The DOM: the panel per mode (summary, moves, closed, live), the graph, the eval bar, the badge and arrows on the board, the move list's badges, the opening's name, the coach's avatar, the typing, the tooltip, the clicks                                                                                                                                                                               |
 
 Once every move is judged at full depth, the summary's counts are buttons:
 one goes to the player's next move of its class after the one on the board,
@@ -189,6 +191,50 @@ shows changes (`render-key.ts`), and then only the parts whose markup changed
 (`view/nav.ts`), keeping the buttons and scroll positions as they were; a move
 of the board moves the graph's cursor, drawing nothing else of it. Then the
 board's marks.
+
+## Opening practice
+
+The free board under `#ln-ext-practice` (`#shared/practice-page.ts`, linked
+from the sidebar's Learn section and from each opening's page) is the review's
+`openings` mode: a page of the user's openings, then lines played on the board
+against a book, the coach answering each move in its card
+(`view/openings-page.ts`, `view/practice.ts`). The book is the explorer's
+games, as Lichess looks the board's positions up, in the database its tabs
+pick, the replies picked as often as they're played (`practice/book.ts`); or a
+book of the line's own (`practice/book-tree.ts`): a chapter of the user's
+studies, their repertoire, a trap.
+
+A move is taken when the book plays it, unless it's rare there or the engine
+finds it worse than the book's main move; where the user's repertoire has a
+move, that one; and another good move asks whether to make it theirs
+(`practice/verdict.ts`). A move refused is taken back for another try, with the
+why (`view/practice-why.ts`) and the opening's plan (`i18n/*-ideas.ts`), and
+hints as Retry gives them. Everything is read off the board each time
+(`practice/status.ts`), so taking moves back or stepping through them just
+works.
+
+Each position the user moved from is kept, per side, with the moves found
+there and how it went (`practice/repertoire.ts`), and comes back in the daily
+review, at once after a miss and further apart each time it's found at the first
+try (1, 3, 7, 14, 30, 60, 120 days). The same records give each opening's
+mastery (`practice/mastery.ts`), its rings on the page, and with the moves a
+day, the daily goal and its streak (`practice/progress.ts`). The modes are
+rounds of cards one after the other (`practice/rounds.ts`): the review, a
+minute's challenge, traps from Lichess's puzzles of the opening, played early
+(`practice/traps.ts`), and drills on the user's own games, where their habit
+isn't their repertoire's or the masters' move (`practice/games.ts`); the quiz
+names an opening's position among four. Lines grow longer as an opening is
+learned (`practice/settings.ts`), Lichess's players are picked at the user's
+level (`practice/player.ts`), and the repertoire's page lists its lines as a
+tree, to star or prune (`practice/repertoire-tree.ts`).
+
+When the user turns it on, the repertoire keeps a copy in two private studies
+of theirs, one per side, so it follows their account (`practice/sync.ts`): read
+once a visit and merged, each position as it was last played, and written back
+chapter by chapter, its records in our comments (`practice/chapters.ts`).
+Creating the studies takes Lichess's consent page once
+(`practice/sync-connect.ts`). See [AGENTS.md](AGENTS.md) for the routes'
+quirks.
 
 ## Tests
 

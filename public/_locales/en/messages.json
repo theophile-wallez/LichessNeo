@@ -827,6 +827,14 @@
     "message": "Right moves in a row fill the combo bar, for bonus points. A wrong move empties it.",
     "description": "Under racerStepCombo."
   },
+  "openingTraining": {
+    "message": "Opening training",
+    "description": "The sidebar's link, under Learn, to the extension's page of opening practice on the analysis board."
+  },
+  "openingPractice": {
+    "message": "Practice this opening",
+    "description": "An opening’s page: the button that opens its line on the analysis board, to practice it against the opening explorer’s games."
+  },
   "racerMore": {
     "message": "More puzzle challenges",
     "description": "Puzzle Racer's home: the title over links to Puzzle Storm, Puzzle Streak and the puzzle themes."

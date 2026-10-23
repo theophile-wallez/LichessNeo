@@ -1,0 +1,85 @@
+/* ---- The practice page's copy in the user's studies --- */
+
+/* Its row among the page's choices (page/review/view/openings-sync.ts): a button that turns
+   it on, its state while it writes, or a link to the side's study and a button to stop. */
+.ln-ext-openings__syncs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+#ln-ext-review .ln-ext-openings__sync {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 36px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--ln-ext-bg-panel-dark);
+  color: var(--ln-ext-accent);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.15s !important;
+}
+
+.ln-ext-openings__sync > span {
+  flex: 1;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ln-ext-openings__sync > svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+#ln-ext-review .ln-ext-openings__sync[aria-busy] {
+  color: var(--ln-ext-text-dim);
+}
+
+#ln-ext-review .ln-ext-openings__sync--on {
+  color: var(--ln-ext-green);
+}
+
+#ln-ext-review .ln-ext-openings__sync--on > span {
+  color: var(--ln-ext-text-strong);
+}
+
+#ln-ext-review .ln-ext-openings__sync--on > svg:last-child {
+  width: 14px;
+  height: 14px;
+  color: var(--ln-ext-text-dim);
+}
+
+#ln-ext-review .ln-ext-openings__sync--failed {
+  color: var(--ln-ext-red);
+}
+
+#ln-ext-review :is(button.ln-ext-openings__sync, a.ln-ext-openings__sync):hover > span {
+  color: var(--ln-ext-text-strong);
+}
+
+#ln-ext-review .ln-ext-openings__unsync {
+  flex: none;
+  height: 36px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+  transition: color 0.15s !important;
+}
+
+#ln-ext-review .ln-ext-openings__unsync:hover {
+  color: var(--ln-ext-text-strong);
+}

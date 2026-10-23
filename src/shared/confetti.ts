@@ -1,7 +1,9 @@
-import { html, type SafeHtml } from '#shared/html.ts';
+import { html, type SafeHtml } from './html.ts';
 
-// The winner's confetti: a one-off shower over the board, each piece its own
-// CSS animation (styles/game/game-end.css) from the numbers drawn here.
+// Confetti: a one-off shower over the board, for the winner of a game
+// (page/game-over) or a cheer of practice's (page/review/view/practice-cheer.ts),
+// each piece its own CSS animation (styles/game/game-end.css) from the numbers
+// drawn here.
 
 type ConfettiShape = 'strip' | 'dot' | 'curl';
 

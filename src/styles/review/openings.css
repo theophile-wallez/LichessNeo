@@ -1,0 +1,390 @@
+/* ---- The practice page --- */
+
+/* The free board's page of opening practice (page/review/view/openings-page.ts): the panel
+   takes the whole column, Lichess's tools giving way to it, as the summary's does. The
+   engine's lines and the explorer's moves would give the book's moves away. */
+
+html.ln-ext-review-openings main.analyse > :is(.analyse__tools, .analyse__controls, .mchat),
+html.ln-ext-review-openings main.analyse > .ln-ext-panel-tabs {
+  display: none !important;
+}
+
+@media (min-width: 1020px) {
+  html.ln-ext-review-openings main.analyse {
+    grid-template-rows: var(--ln-ext-stage) !important;
+    grid-template-areas: 'gauge board rtop' !important;
+  }
+
+  html.ln-ext-review-openings #ln-ext-review {
+    border-radius: 6px;
+  }
+}
+
+/* Its title, with the picture of Lichess's openings, whose practice it is. */
+.ln-ext-openings__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ln-ext-openings__title::before {
+  content: '';
+  flex: none;
+  width: 26px;
+  height: 26px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/openings.webp') center /
+    contain no-repeat;
+}
+
+/* ---- Its buttons, under the coach --- */
+
+/* As the review's Explain / Best / Next, each as wide as the others; a long name ends in an
+   ellipsis rather than spill. */
+#ln-ext-review .ln-ext-review__nav--practice .ln-ext-btn {
+  flex: 1 1 0;
+  margin-inline-end: 8px;
+}
+
+#ln-ext-review .ln-ext-review__nav--practice .ln-ext-btn:last-child {
+  margin-inline-end: 0;
+}
+
+.ln-ext-review__nav--practice .ln-ext-btn > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ln-ext-review__nav--practice:empty {
+  display: none;
+}
+
+/* A narrow panel: each name under its icon, as the review's four buttons. */
+@container ln-ext-review (max-width: 440px) {
+  #ln-ext-review .ln-ext-review__nav--practice .ln-ext-btn {
+    flex-direction: column;
+    gap: 2px;
+    margin-inline-end: 6px;
+    padding-inline: 4px;
+    font-size: 12px;
+    line-height: 1.1;
+  }
+
+  .ln-ext-review__nav--practice .ln-ext-btn > span {
+    max-width: 100%;
+  }
+}
+
+/* The hints asked for, in the coach's words' place, marked as such. */
+#ln-ext-review .ln-ext-bubble__body > .ln-ext-bubble__hint {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  color: var(--ln-ext-text);
+  font-weight: 600;
+}
+
+#ln-ext-review .ln-ext-bubble__hint > svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  color: var(--ln-ext-accent);
+}
+
+/* The streak of book moves found at the first try, by the score: a flame on its tile. */
+.ln-ext-bubble__streak {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 3px;
+  height: 22px;
+  margin-left: auto;
+  padding: 0 7px 0 5px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--ln-ext-orange) 16%, transparent);
+  color: var(--ln-ext-orange);
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-ext-bubble__streak .ln-ext-i {
+  width: 14px;
+  height: 14px;
+}
+
+.ln-ext-bubble__streak + .ln-ext-bubble__evals {
+  margin-left: 6px;
+}
+
+/* ---- Its choices --- */
+
+#ln-ext-review .ln-ext-openings {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px 16px 16px;
+  border-top: 1px solid var(--ln-ext-border);
+}
+
+/* None shrinks to make room: on a desktop the list scrolls, below the page does. */
+#ln-ext-review .ln-ext-openings > * {
+  flex: none;
+}
+
+/* On a desktop the choices, the search and the coach stay put: only the openings, or the
+   line played, scroll. Their room past the cards' sides keeps a lifted card's shadow. */
+@media (min-width: 1020px) {
+  #ln-ext-review .ln-ext-openings {
+    overflow: hidden;
+    padding-bottom: 0;
+  }
+
+  #ln-ext-review .ln-ext-openings > :is(.ln-ext-openings__list, .ln-ext-oline) {
+    flex: 0 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    margin-inline: -8px;
+    padding: 8px 8px 16px;
+    /* Cards fade out under the search rather than end on a cut. */
+    mask-image: linear-gradient(transparent, #000 8px, #000 calc(100% - 12px), transparent);
+  }
+
+  #ln-ext-review .ln-ext-openings > .ln-ext-openings__list {
+    margin-top: -8px;
+  }
+
+  /* The choices open: they may not leave the list room, so it all scrolls as one. */
+  #ln-ext-review .ln-ext-openings[data-ln-ext-settings] {
+    overflow-y: auto;
+    padding-bottom: 16px;
+  }
+
+  #ln-ext-review
+    .ln-ext-openings[data-ln-ext-settings]
+    > :is(.ln-ext-openings__list, .ln-ext-oline) {
+    flex: none;
+    overflow: visible;
+    mask-image: none;
+  }
+
+  #ln-ext-review .ln-ext-openings > .ln-ext-oline {
+    margin-top: -14px;
+  }
+}
+
+/* The labels in a column, the bars beside them as wide as each other, their options too;
+   in a narrow panel, each bar under its label. */
+.ln-ext-openings__choices {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px 16px;
+  padding-top: 12px;
+}
+
+.ln-ext-openings__choices > .ln-ext-openings__choice {
+  display: contents;
+}
+
+.ln-ext-openings__choice {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ln-ext-openings__choice > .ln-ext-seg {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@container ln-ext-review (max-width: 420px) {
+  .ln-ext-openings__choices {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .ln-ext-openings__choices > .ln-ext-openings__choice:not(:last-child) > .ln-ext-seg {
+    margin-bottom: 8px;
+  }
+
+  .ln-ext-openings__choice {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .ln-ext-openings__choice > .ln-ext-seg {
+    flex: none;
+  }
+
+  /* Two options leave room for their label beside them. */
+  .ln-ext-openings__choices > .ln-ext-openings__choice--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .ln-ext-openings__choice--inline > .ln-ext-seg {
+    flex: 1 1 0;
+    margin-bottom: 0 !important;
+  }
+
+  /* The setup's one button keeps its icon beside its name. */
+  #ln-ext-review .ln-ext-review__nav--start .ln-ext-btn {
+    flex-direction: row;
+    gap: 8px;
+    font-size: 14px;
+  }
+}
+
+.ln-ext-openings__label {
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* How lines go, summed up on a line of its own; it opens on their choices. */
+#ln-ext-review .ln-ext-openings__settings {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 34px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 10px;
+  background: var(--ln-ext-bg-panel-dark);
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+  transition: color 0.15s !important;
+}
+
+#ln-ext-review .ln-ext-openings__settings:hover {
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-openings__settings > span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ln-ext-openings__settings > svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.ln-ext-openings__settings[aria-expanded='true'] > svg:last-child {
+  transform: rotate(180deg);
+}
+
+/* A pill of options, its pick raised; it slides (content/ui/tab-bars.ts). */
+#ln-ext-review .ln-ext-seg {
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised-hover);
+  --ln-ext-tab-radius: 7px;
+  --ln-ext-tab-shadow: 0 1px 2px var(--ln-ext-shade-40);
+
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--ln-ext-bg-panel-dark);
+}
+
+#ln-ext-review .ln-ext-seg__opt {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color 0.15s !important;
+}
+
+#ln-ext-review .ln-ext-seg__opt:hover,
+#ln-ext-review .ln-ext-seg__opt.active {
+  color: var(--ln-ext-text-strong);
+}
+
+#ln-ext-review .ln-ext-seg:not([data-ln-ext-tabs]) .ln-ext-seg__opt.active {
+  background: var(--ln-ext-tab-bg);
+  box-shadow: var(--ln-ext-tab-shadow);
+}
+
+#ln-ext-review .ln-ext-seg__opt .ln-ext-pc {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  vertical-align: 0;
+}
+
+/* ---- The search --- */
+
+.ln-ext-openings__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 10px;
+  background: var(--ln-ext-bg-panel-dark);
+  color: var(--ln-ext-text-dim);
+  cursor: text;
+}
+
+.ln-ext-openings__search:focus-within {
+  border-color: var(--ln-ext-accent);
+}
+
+.ln-ext-openings__search .ln-ext-i {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+/* Lichess fills its inputs: the field's box is ours. */
+#ln-ext-review .ln-ext-openings__search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: none !important;
+  outline: none;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text-strong);
+  font: 600 14px var(--ln-ext-font);
+}
+
+.ln-ext-openings__heading {
+  margin: 0;
+  color: var(--ln-ext-text-strong);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ln-ext-openings__note {
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 14px;
+}

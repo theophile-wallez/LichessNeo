@@ -24,7 +24,7 @@ function render(has: string, width: number): HTMLElement {
   document.documentElement.dataset['lnExtHas'] = has;
   document.body.innerHTML =
     '<main class="analyse"><div class="analyse__board"><div class="cg-wrap">' +
-    '<cg-container></cg-container></div></div>' +
+    '<cg-container></cg-container></div></div><div class="eval-gauge"></div>' +
     '<div class="game__meta"><div class="game__meta__players"></div></div></main>';
   const main = queryOne(document, 'main.analyse', HTMLElement);
   if (!main) throw new Error('no analysis page');
@@ -68,5 +68,24 @@ describe('the analysis board’s player bars', () => {
   it('take the same room on a phone', () => {
     expect(bar('analyse analyse-game', 390)).toBe('56px');
     expect(bar('analyse', 390)).toBe('0px');
+  });
+});
+
+/** How Lichess's eval gauge is displayed at `width`. */
+function gauge(width: number): string {
+  render('analyse', width);
+  const element = queryOne(document, '.eval-gauge', HTMLElement);
+  if (!element) throw new Error('no gauge');
+  return getComputedStyle(element).display;
+}
+
+describe('Lichess’s eval gauge', () => {
+  it('stands beside the board on a desktop', () => {
+    expect(gauge(1280)).not.toBe('none');
+  });
+
+  it('is hidden where the board takes the column, not laid over its a-file', () => {
+    expect(gauge(1019)).toBe('none');
+    expect(gauge(820)).toBe('none');
   });
 });

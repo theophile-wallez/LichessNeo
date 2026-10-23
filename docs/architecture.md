@@ -27,12 +27,13 @@ the page world would crash on it.
 | `page-init-data.ts`, `round-init.ts`, `game-path.ts` | the page's `#page-init-data`, captured before Lichess removes it; a game page's, read for a game just begun; what a game page's path holds (`/game/<id>`)                                    |
 | `features.ts`, `frame.ts`, `poll.ts`                 | starting features, once-per-frame work, waiting for Lichess's globals                                                                                                                        |
 | `build-mode.ts`                                      | whether this is a dev build, which reloads itself when rebuilt, and the name of the draft a preview build shows and its page                                                                 |
+| `confetti.ts`, `practice-page.ts`                    | a one-off shower of confetti (a game's winner, a cheer of opening practice); the address of opening practice's page                                                                          |
 | `lang.ts`, `text.ts`, `math.ts`, `geometry.ts`       | the page's language, small text and number helpers, points and boxes                                                                                                                         |
 | `time-control.ts`, `clock-time.ts`                   | a time control in words, for a "New 10+5" button; a clock's time                                                                                                                             |
 | `player-bar.ts`, `flag.ts`                           | a player as their bar on the game page shows them; the image of a profile's flag                                                                                                             |
 | `avatar.ts`, `own-avatar.ts`, `own-name.ts`          | users' avatars, a coach on a color picked from their name; the signed-in user's own avatar and name                                                                                          |
 | `hugeicons.ts`, `hugeicons-svg.ts`                   | Hugeicons drawn inline, or as files for the stylesheets (`pnpm icons`)                                                                                                                       |
-| `chess/`, `chessground.ts`, `piece-glyph.ts`         | chess basics (squares, FEN, piece letters and values, attacks), a board's pieces read from chessground's classes, a piece of ours in the board's set                                         |
+| `chess/`, `chessground.ts`, `piece-glyph.ts`         | chess basics (squares, FEN, piece letters and values, attacks, SAN played on a board), a board's pieces read from chessground's classes, a piece of ours in the board's set                  |
 | `charts/`, `coach.ts`, `coach-voice.ts`, `sounds.ts` | chart pieces, the coach's moods, the stored coach (`pickCoach`), the home's own (`homeCoach`) and the switches (`coachOptions`), its words typed out as it talks, the sounds a pack may have |
 | `packs/`, `backlit.ts`                               | packs: their `pack.json`, links, files and stored form, the download the worker runs, its messages; the backlit boards and their settings                                                    |
 | `chesscom-rating/`                                   | a Lichess rating's Chess.com equivalent, from the study's table, the speed of a rating Lichess shows, its swap in place, and the settings' switch                                            |
@@ -141,7 +142,7 @@ so the logic can be unit-tested without a page.
 - `sidebar`: the Donate item, its folding to icons, and its shape (the
   settings' pick: unfolded, its sections folding open on a click and kept so,
   a rail or a header),
-  the preferences cog, the account's rating, the
+  the Learn section's link to opening practice, the preferences cog, the account's rating, the
   light / dark switch, the drawer below 1020px, and Play's Lobby, which leads
   to the home's lobby tab rather than Lichess's game setup.
 - `notices`: Lichess's connection status and the server's announcements, as
@@ -157,7 +158,8 @@ so the logic can be unit-tested without a page.
   `<html>`.
 - `board`: shapes, checkmate, the coach's drawings.
 - `backlit`: the backlit boards' light around each move.
-- `review`.
+- `review`: the Game Review, and opening practice on the free board
+  (`#ln-ext-practice`, `src/page/review/README.md`).
 - `charts`: a game's advantage and move times, the rating distribution, and
   the insights page's answer, read off the data it fetches.
 - `game-over`: kings' badges, confetti, the coach's card in the panel.

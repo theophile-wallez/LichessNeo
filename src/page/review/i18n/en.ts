@@ -2,6 +2,7 @@ import { html } from '#shared/html.ts';
 import type { Color } from '#shared/chess/types.ts';
 import { factsEn } from './en-comment.ts';
 import { capitalize, indefinite, partyOf } from './en-grammar.ts';
+import { practiceEn } from './en-practice.ts';
 import { remarksEn } from './en-remarks.ts';
 import { theirRemarksEn } from './en-their-remarks.ts';
 import { trajectoryEn } from './en-trajectory.ts';
@@ -40,7 +41,7 @@ const CLASS_PLURALS: Readonly<Record<MoveClass, string>> = {
   blunder: 'blunders',
 };
 
-const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
+const INTERFACE: Omit<InterfaceStrings, 'retry' | 'practice' | 'clock' | 'playedLike'> = {
   review: 'Debrief',
   start: 'Start Debrief',
   summary: 'Summary',
@@ -193,6 +194,7 @@ export const english = (viewer: Viewer): ReviewLanguage => ({
     ...INTERFACE,
     playedLike: (color, elo) => playedLike(viewer, color, elo),
     retry: retryStrings(viewer),
+    practice: practiceEn,
     clock: clockStrings(viewer),
   },
   classLabels: CLASS_LABELS,

@@ -6,6 +6,7 @@ import type { Theme } from '#page/review/coach/said.ts';
 import type { MotifKind } from '#page/review/chess/motifs.ts';
 import type { Color, Piece, Square } from '#shared/chess/index.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
+import type { PracticeStrings } from './practice-types.ts';
 
 // What the review says, per language. Moves, pieces and squares go into the
 // coach's sentences as [[…]] tokens (comment/tokens.ts), already built.
@@ -113,6 +114,7 @@ export interface InterfaceStrings {
   readonly cost: (percent: number) => string;
   readonly lines: LineStrings;
   readonly retry: RetryStrings;
+  readonly practice: PracticeStrings;
   /** The bubble's tags: the tactic a move is about. */
   readonly themes: Readonly<Record<Theme, string>>;
   readonly clock: ClockStrings;

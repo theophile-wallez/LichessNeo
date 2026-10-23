@@ -1,0 +1,366 @@
+/* The practice page's home and modes (page/review/view/openings-home.ts, practice-round-view.ts,
+   openings-quiz.ts): the day's strip, the modes' tiles, a round's strip and the challenge's
+   clock, an opening's idea, and the quiz's choices. */
+
+/* ---- The day's strip --- */
+
+.ln-ext-today {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.ln-ext-today__stat {
+  --ln-ext-hue: var(--ln-ext-orange);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 10px 6px 6px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 999px;
+  background: var(--ln-ext-card-bg);
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ln-ext-today__stat[data-ln-ext-today='goal'] {
+  --ln-ext-hue: var(--ln-ext-green);
+}
+
+.ln-ext-today__stat[data-ln-ext-today='known'] {
+  --ln-ext-hue: var(--ln-ext-purple);
+}
+
+.ln-ext-today__tile {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ln-ext-hue) 18%, transparent);
+  color: var(--ln-ext-hue);
+}
+
+.ln-ext-today__tile .ln-ext-i {
+  width: 15px;
+  height: 15px;
+}
+
+/* The goal's tile is a ring, filled as far as today's moves go. */
+.ln-ext-today__stat[data-ln-ext-today='goal'] .ln-ext-today__tile::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(var(--ln-ext-hue) calc(var(--ln-ext-progress) * 1turn), transparent 0);
+  mask: radial-gradient(circle, transparent 12px, #000 12.5px);
+}
+
+/* ---- The modes --- */
+
+.ln-ext-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.ln-ext-mode {
+  --ln-ext-hue: var(--ln-ext-blue);
+}
+
+/* A tile: its icon over its name and what it says, two lines at most. */
+#ln-ext-review .ln-ext-mode {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px;
+  background: var(--ln-ext-card-bg);
+  color: var(--ln-ext-text);
+  text-align: left;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.15s,
+    box-shadow 0.15s !important;
+}
+
+.ln-ext-mode[data-ln-ext-mode='traps'] {
+  --ln-ext-hue: var(--ln-ext-red);
+}
+
+.ln-ext-mode[data-ln-ext-mode='blitz'] {
+  --ln-ext-hue: var(--ln-ext-orange);
+}
+
+.ln-ext-mode[data-ln-ext-mode='quiz'] {
+  --ln-ext-hue: var(--ln-ext-purple);
+}
+
+.ln-ext-mode[data-ln-ext-mode='games'] {
+  --ln-ext-hue: var(--ln-ext-green);
+}
+
+.ln-ext-mode[data-ln-ext-mode='repertoire'] {
+  --ln-ext-hue: var(--ln-ext-cyan);
+}
+
+.ln-ext-mode__tile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ln-ext-hue) 18%, transparent);
+  color: var(--ln-ext-hue);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-mode__tile .ln-ext-i {
+  width: 20px;
+  height: 20px;
+}
+
+.ln-ext-mode__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.ln-ext-mode__text b {
+  color: var(--ln-ext-text-strong);
+  font-size: 13.5px;
+  font-weight: 800;
+}
+
+.ln-ext-mode__text small {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ln-ext-mode__badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--ln-ext-red);
+  color: var(--ln-ext-white);
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+
+@media (hover: hover) {
+  #ln-ext-review .ln-ext-mode:not(:disabled):hover {
+    transform: translateY(-2px);
+    border-color: var(--ln-ext-card-border-hover);
+    box-shadow: var(--ln-ext-card-shadow-hover);
+  }
+
+  .ln-ext-mode:not(:disabled):hover .ln-ext-mode__tile {
+    transform: rotate(-6deg) scale(1.08);
+  }
+}
+
+#ln-ext-review .ln-ext-mode:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* ---- A round's strip --- */
+
+/* How far the round has got, over the coach: a bar that fills, and the card's number. */
+.ln-ext-round {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 14px 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-ext-round__bar {
+  flex: 1;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--ln-ext-lift-8);
+}
+
+.ln-ext-round__bar::before {
+  content: '';
+  display: block;
+  width: calc(var(--ln-ext-round-done) * 100%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ln-ext-green);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* The challenge: its clock counting down by itself, its score beside it. */
+@property --ln-ext-left {
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.ln-ext-round--blitz {
+  justify-content: center;
+  gap: 12px;
+}
+
+.ln-ext-round__clock,
+.ln-ext-round__score {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-orange) 16%, transparent);
+  color: var(--ln-ext-orange);
+  font-size: 18px;
+}
+
+.ln-ext-round__score {
+  background: color-mix(in srgb, var(--ln-ext-green) 16%, transparent);
+  color: var(--ln-ext-green);
+}
+
+.ln-ext-round__clock {
+  counter-reset: ln-ext-left var(--ln-ext-left);
+  animation: ln-ext-count-down var(--ln-ext-left-ms) linear forwards !important;
+}
+
+.ln-ext-round__clock b::after {
+  content: counter(ln-ext-left) 's';
+}
+
+.ln-ext-round__clock .ln-ext-i,
+.ln-ext-round__score .ln-ext-i {
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes ln-ext-count-down {
+  to {
+    --ln-ext-left: 0;
+  }
+}
+
+/* ---- An opening's idea --- */
+
+.ln-ext-openings__idea {
+  --ln-ext-hue: var(--ln-ext-cyan);
+
+  display: flex;
+  gap: 8px;
+  margin: 2px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid var(--ln-ext-hue);
+  border-radius: 6px;
+  background: var(--ln-ext-lift-3);
+  color: var(--ln-ext-text);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.ln-ext-openings__idea[data-ln-ext-plan='theirs'] {
+  --ln-ext-hue: var(--ln-ext-pink);
+}
+
+.ln-ext-openings__idea > .ln-ext-i {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  color: var(--ln-ext-hue);
+}
+
+.ln-ext-openings__idea b {
+  color: var(--ln-ext-text-strong);
+}
+
+/* ---- The quiz --- */
+
+.ln-ext-quiz {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+#ln-ext-review .ln-ext-quiz__choice {
+  min-height: 56px;
+  padding: 10px 12px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px;
+  background: var(--ln-ext-card-bg);
+  color: var(--ln-ext-text-strong);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: left;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.15s,
+    background-color 0.15s !important;
+}
+
+@media (hover: hover) {
+  #ln-ext-review .ln-ext-quiz__choice:not(:disabled):hover {
+    transform: translateY(-2px);
+    border-color: var(--ln-ext-card-border-hover);
+  }
+}
+
+#ln-ext-review .ln-ext-quiz__choice:disabled {
+  cursor: default;
+}
+
+#ln-ext-review .ln-ext-quiz__choice[data-ln-ext-state='right'] {
+  border-color: var(--ln-ext-green);
+  color: var(--ln-ext-green);
+}
+
+#ln-ext-review .ln-ext-quiz__choice[data-ln-ext-state='wrong'] {
+  border-color: var(--ln-ext-red);
+  color: var(--ln-ext-red);
+}
+
+/* ---- Below 1020px --- */
+
+@media (max-width: 1019.98px) {
+  .ln-ext-modes {
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .ln-ext-today__stat {
+    padding-inline-end: 6px;
+    font-size: 12px;
+  }
+
+  .ln-ext-quiz {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fakeController } from '#page/review/fixtures/fake-lichess.ts';
 import { analysis, currentNode } from './analysis.ts';
 import { assetUrl } from './assets.ts';
@@ -100,6 +100,33 @@ describe('analysis', () => {
     facade.setRetro(false);
     expect(facade.retroOn).toBe(false);
     expect(page().facade.hasServerAnalysis).toBe(false);
+  });
+
+  it('starts practice with the computer once, and drives the free board’s tools', () => {
+    const { ctrl, facade } = page();
+    const toggle = vi.fn<(on?: boolean) => void>(ctrl.togglePractice);
+    const calls: string[] = [];
+    Object.assign(ctrl, {
+      togglePractice: toggle,
+      toggleExplorer: () => calls.push('explorer'),
+      flip: () => calls.push('flip'),
+      changePgn: (pgn: string, andReload: boolean) => calls.push(`${pgn} ${String(andReload)}`),
+    });
+    facade.startComputerPractice();
+    facade.startComputerPractice();
+    expect(toggle.mock.calls).toEqual([[true]]);
+    facade.toggleExplorer();
+    facade.flip();
+    facade.loadLine('1. e4 c5');
+    expect(calls).toEqual(['explorer', 'flip', '1. e4 c5 true']);
+  });
+
+  it('gives the opening explorer where the page has one', () => {
+    const { ctrl, facade } = page();
+    Object.assign(ctrl, { explorer: { opts: { endpoint: 'https://explorer.lichess.ovh' } } });
+    expect(facade.explorer?.endpoint).toBe('https://explorer.lichess.ovh');
+    Object.assign(ctrl, { explorer: 'none' });
+    expect(facade.explorer).toBeNull();
   });
 
   it('plays a move where the page can', () => {

@@ -1,5 +1,6 @@
 @import './layout.css';
 @import './summary.css';
+@import './mini-board.css';
 @import './graph-views.css';
 @import './sheet.css';
 @import './summary-players.css';
@@ -11,5 +12,10 @@
 @import './move-list.css';
 @import './eval-bar.css';
 @import './new-game.css';
+@import './openings.css';
+@import './openings-list.css';
+@import './openings-sync.css';
+@import './practice-modes.css';
+@import './practice-pages.css';
 /* Last: it rearranges the parts above below 1020px. */
 @import './layout-narrow.css';

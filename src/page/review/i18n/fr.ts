@@ -2,6 +2,7 @@ import { html } from '#shared/html.ts';
 import type { Color } from '#shared/chess/types.ts';
 import { factsFr } from './fr-comment.ts';
 import { agreement, capitalize, conjugate, indefinite, partyOf, typography } from './fr-grammar.ts';
+import { practiceFr } from './fr-practice.ts';
 import { remarksFr } from './fr-remarks.ts';
 import { theirRemarksFr } from './fr-their-remarks.ts';
 import { trajectoryFr } from './fr-trajectory.ts';
@@ -27,7 +28,7 @@ const CLASS_PLURALS: Readonly<Record<MoveClass, string>> = {
   blunder: 'Gaffes',
 };
 
-const INTERFACE: Omit<InterfaceStrings, 'retry' | 'clock' | 'playedLike'> = {
+const INTERFACE: Omit<InterfaceStrings, 'retry' | 'practice' | 'clock' | 'playedLike'> = {
   review: 'Débrief',
   start: 'Démarrer le débrief',
   summary: 'Résumé',
@@ -186,6 +187,7 @@ export const french = (viewer: Viewer): ReviewLanguage => ({
     ...INTERFACE,
     playedLike: color => playedLike(viewer, color),
     retry: retryStrings(viewer),
+    practice: practiceFr,
     clock: clockStrings(viewer),
   },
   classLabels: {

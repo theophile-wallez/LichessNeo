@@ -55,6 +55,12 @@
     grid-area: board !important;
   }
 
+  /* Lichess's upright gauge has no room beside a board as wide as the column: from 800px it
+     lay over the a-file. Below, Lichess hides it itself; the engine's line keeps the score. */
+  main.analyse .eval-gauge {
+    display: none !important;
+  }
+
   /* The board takes the column's width here, whatever its handle says. */
   main.analyse cg-resize {
     display: none;

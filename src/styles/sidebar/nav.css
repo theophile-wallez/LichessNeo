@@ -212,6 +212,9 @@
 #topnav div a[href$='/practice'] {
   --ln-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/practice.webp');
 }
+#topnav div a.ln-ext-nav-openings {
+  --ln-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/openings.webp');
+}
 #topnav div a[href$='/training/coordinate'] {
   --ln-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/coordinate-practice.webp');
 }

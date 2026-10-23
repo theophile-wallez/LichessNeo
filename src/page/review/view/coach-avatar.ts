@@ -3,7 +3,7 @@ import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { onCoachPicked, postCoachState } from '#shared/protocol.ts';
 import { CLASS_COLORS, classMood, type MoveClass } from '#page/review/classes/classes.ts';
-import type { AvatarState, Session } from '#page/review/session.ts';
+import { type AvatarState, onFreeBoard, type Session } from '#page/review/session.ts';
 
 // The coach's face shows the verdict, played by the content script's rig
 // (src/content/coach), which can reach the extension's files. Its marks over
@@ -83,6 +83,6 @@ export function watchCoachPicks(session: Session): () => void {
     tellCoach(session);
     // Each coach words the remarks their own way.
     const { mode } = session.view;
-    if (mode === 'moves' || mode === 'live') session.redraw(true);
+    if (mode === 'moves' || onFreeBoard(mode)) session.redraw(true);
   });
 }

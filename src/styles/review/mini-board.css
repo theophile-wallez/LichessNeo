@@ -1,0 +1,29 @@
+/* ---- Little boards --- */
+
+/* A still position (page/review/view/mini-board.ts): the graph's preview, the practice
+   page's openings. Our board's squares, or the board's own background copied onto it, and
+   the set's pieces. */
+.ln-ext-mini {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* Light top left either way the board is turned. */
+  background: repeating-conic-gradient(
+      var(--ln-ext-board-dark) 0 25%,
+      var(--ln-ext-board-light) 0 50%
+    )
+    0 0 / 25% 25%;
+}
+
+.ln-ext-mini > :is(.ln-ext-mini__lit, .ln-ext-pc) {
+  position: absolute;
+  left: calc(var(--x) * 12.5%);
+  top: calc(var(--y) * 12.5%);
+  width: 12.5%;
+  height: 12.5%;
+  margin: 0;
+}
+
+.ln-ext-mini__lit {
+  background: var(--ln-ext-highlight);
+}

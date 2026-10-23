@@ -53,6 +53,7 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
       share: _share,
       cost: _cost,
       retry: _retry,
+      practice: _practice,
       themes: _themes,
       clock: _clock,
       brief: _brief,

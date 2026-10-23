@@ -85,7 +85,7 @@ html.ln-ext-evalbar-on main.analyse .eval-gauge {
 
 /* Lichess draws its server analysis's glyph (?!, ??) on the same corner of the same square:
    the review's badge stands for it. */
-html:is(.ln-ext-review-summary, .ln-ext-review-moves, .ln-ext-review-live)
+html:is(.ln-ext-review-summary, .ln-ext-review-moves, .ln-ext-review-live, .ln-ext-review-openings)
   main.analyse
   .cg-custom-svgs {
   display: none;
@@ -102,37 +102,53 @@ html:is(.ln-ext-review-summary, .ln-ext-review-moves, .ln-ext-review-live)
 
 /* Last-move squares take an annotated move's color (the free board's too); a best, excellent,
    good or book move keeps Lichess's own. */
-html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='brilliant']
+html:is(
+    .ln-ext-review-moves,
+    .ln-ext-review-live,
+    .ln-ext-review-openings
+  )[data-ln-ext-cls='brilliant']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(33, 196, 58, 0.5) !important;
 }
-html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='great']
+html:is(.ln-ext-review-moves, .ln-ext-review-live, .ln-ext-review-openings)[data-ln-ext-cls='great']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(119, 186, 44, 0.5) !important;
 }
-html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='inaccuracy']
+html:is(
+    .ln-ext-review-moves,
+    .ln-ext-review-live,
+    .ln-ext-review-openings
+  )[data-ln-ext-cls='inaccuracy']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(83, 178, 234, 0.5) !important;
 }
-html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='mistake']
+html:is(
+    .ln-ext-review-moves,
+    .ln-ext-review-live,
+    .ln-ext-review-openings
+  )[data-ln-ext-cls='mistake']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(230, 157, 0, 0.5) !important;
 }
-html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='miss']
+html:is(.ln-ext-review-moves, .ln-ext-review-live, .ln-ext-review-openings)[data-ln-ext-cls='miss']
   main.analyse
   cg-board
   square.last-move {
   background-color: rgba(222, 124, 211, 0.5) !important;
 }
-html:is(.ln-ext-review-moves, .ln-ext-review-live)[data-ln-ext-cls='blunder']
+html:is(
+    .ln-ext-review-moves,
+    .ln-ext-review-live,
+    .ln-ext-review-openings
+  )[data-ln-ext-cls='blunder']
   main.analyse
   cg-board
   square.last-move {

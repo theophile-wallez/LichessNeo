@@ -1,0 +1,230 @@
+/* The practice page's openings to pick and the line played (page/review/view/openings-setup.ts,
+   openings-line.ts). */
+
+/* ---- The openings --- */
+
+/* The positions to review, then the side's openings or those the search found. */
+.ln-ext-openings__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ln-ext-openings__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+  gap: 10px;
+}
+
+.ln-ext-openings__grid + .ln-ext-openings__heading {
+  margin-top: 8px;
+}
+
+/* A card: the position the line reaches, its name and its moves. It lifts on hover; its
+   board stays still, as a position is read rather than played with. */
+#ln-ext-review .ln-ext-opening-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px;
+  background: var(--ln-ext-card-bg);
+  color: var(--ln-ext-text);
+  text-align: left;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.15s,
+    box-shadow 0.15s !important;
+}
+
+#ln-ext-review .ln-ext-opening-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ln-ext-card-border-hover);
+  box-shadow: var(--ln-ext-card-shadow-hover);
+}
+
+.ln-ext-opening-card__board {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.ln-ext-opening-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ln-ext-opening-card__eco {
+  align-self: flex-start;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-dim);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.ln-ext-opening-card__name {
+  color: var(--ln-ext-text-strong);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ln-ext-opening-card__moves {
+  overflow: hidden;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- The line --- */
+
+.ln-ext-openings__name {
+  margin: 12px 0 0;
+  color: var(--ln-ext-text-strong);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.ln-ext-oline {
+  display: grid;
+  gap: 2px;
+  margin: -6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ln-ext-oline__row {
+  display: grid;
+  grid-template-columns: 32px 1fr 1fr;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+}
+
+.ln-ext-oline__num {
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Each move in its kind's color, from the main move's green to a rare move's orange; out of
+   the book in red. The opening's own moves, before practice, stand dim. */
+.ln-ext-oline__move {
+  --ln-ext-kind: var(--ln-ext-lift-18);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 8px;
+  border-left: 3px solid var(--ln-ext-kind);
+  border-radius: 4px;
+  background: var(--ln-ext-lift-3);
+  color: var(--ln-ext-text-strong);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ln-ext-oline__move small {
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ln-ext-oline__move[data-ln-ext-kind='theory'] {
+  border-left-color: transparent;
+  background: none;
+  color: var(--ln-ext-text-dim);
+}
+
+.ln-ext-oline__move[data-ln-ext-kind='main'] {
+  --ln-ext-kind: var(--ln-ext-green);
+}
+
+.ln-ext-oline__move[data-ln-ext-kind='popular'] {
+  --ln-ext-kind: var(--ln-ext-cyan);
+}
+
+.ln-ext-oline__move[data-ln-ext-kind='sideline'] {
+  --ln-ext-kind: var(--ln-ext-yellow);
+}
+
+.ln-ext-oline__move[data-ln-ext-kind='rare'] {
+  --ln-ext-kind: var(--ln-ext-orange);
+}
+
+.ln-ext-oline__move[data-ln-ext-kind='out'] {
+  --ln-ext-kind: var(--ln-ext-red);
+}
+
+/* ---- Below 1020px --- */
+
+/* The page scrolls, not the panel's parts (layout-narrow.css): the openings follow the coach. */
+@media (max-width: 1019.98px) {
+  #ln-ext-review .ln-ext-openings {
+    padding: 4px 12px 14px;
+  }
+
+  .ln-ext-openings__grid {
+    grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  }
+}
+
+/* The card's tags over its name: its ECO code, and how well the user knows the opening,
+   tinted by it (view/openings-setup.ts). */
+.ln-ext-opening-card__tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ln-ext-opening-card__tags > .ln-ext-opening-card__eco {
+  align-self: auto;
+}
+
+/* How well the user knows the line: a ring that fills with its positions' levels, its level's
+   name in its color, a crown once mastered (view/openings-cards.ts). */
+.ln-ext-mastery {
+  --ln-ext-mastery: var(--ln-ext-orange);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px 1px 3px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--ln-ext-mastery) 16%, transparent);
+  color: var(--ln-ext-mastery);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.ln-ext-mastery[data-ln-ext-mastery='known'] {
+  --ln-ext-mastery: var(--ln-ext-cyan);
+}
+
+.ln-ext-mastery[data-ln-ext-mastery='mastered'] {
+  --ln-ext-mastery: var(--ln-ext-green);
+}
+
+.ln-ext-mastery__ring {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--ln-ext-mastery) calc(var(--ln-ext-progress) * 1turn),
+    color-mix(in srgb, var(--ln-ext-mastery) 28%, transparent) 0
+  );
+  mask: radial-gradient(circle, transparent 2.5px, #000 3px);
+}
+
+.ln-ext-mastery .ln-ext-i {
+  width: 12px;
+  height: 12px;
+}

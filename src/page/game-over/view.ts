@@ -5,7 +5,7 @@ import { badgesMarkup, kingBadges } from './badges.ts';
 import { boardWrap, kingCells } from './board.ts';
 import { cardMarkup, endCardInput, RESULT_MOODS } from './card.ts';
 import { CHIP_STAGGER_MS, createChips, type Chips } from './chips.ts';
-import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from './confetti.ts';
+import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from '#shared/confetti.ts';
 import { countUp } from './count-up.ts';
 import { type FinalMate, mateCells } from './mate.ts';
 import type { Outcome } from './outcome.ts';

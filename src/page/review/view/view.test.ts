@@ -286,7 +286,7 @@ describe('the coach', () => {
 
 describe('the buttons', () => {
   it('read their actions, and nothing else', () => {
-    expect(MODES).toEqual(['normal', 'summary', 'moves', 'live']);
+    expect(MODES).toEqual(['normal', 'summary', 'moves', 'live', 'openings']);
     for (const action of [...MODES, 'play', 'best', 'coach'])
       expect(PanelActionSchema.safeParse(action).success).toBe(true);
     expect(PanelActionSchema.safeParse('replay').success).toBe(false);

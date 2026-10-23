@@ -7,6 +7,7 @@ import {
   type JudgedMove,
   type Mode,
   MODES,
+  onFreeBoard,
   type Session,
   type ViewState,
 } from '#page/review/session.ts';
@@ -17,9 +18,13 @@ import { keepAvatar } from './coach-avatar.ts';
 import { attach } from './elements.ts';
 import { movesGraph } from './graph.ts';
 import { renderLive } from './live-panel.ts';
+import { keepPage } from './openings-actions.ts';
+import { renderOpenings } from './openings-page.ts';
 import { renderMoves } from './moves-panel.ts';
 import { closeTools, spokenMove, stopPlaying } from './navigation.ts';
 import { renderKey } from './render-key.ts';
+import { stopPractice } from './practice.ts';
+import { followPractice } from './practice-follow.ts';
 import { followRetry } from './retry.ts';
 import { startStream } from './stream.ts';
 import { renderSummary } from './summary-panel.ts';
@@ -38,6 +43,7 @@ function drawPanel(session: Session, analysis: Analysis): void {
   if (mode === 'summary') renderSummary(session, analysis);
   else if (mode === 'moves') renderMoves(session, analysis);
   else if (mode === 'live') renderLive(session, analysis);
+  else if (mode === 'openings') renderOpenings(session, analysis);
   else renderClosed(session, analysis);
 }
 
@@ -96,13 +102,15 @@ function threatsToSearch(session: Session, move: JudgedMove | null): JudgedMove[
 function follow(session: Session, analysis: Analysis): void {
   const { view } = session;
   // Off the game's moves, the review judges them like the free board.
-  if (view.mode === 'live' || (view.mode === 'moves' && view.review)) pump(session, analysis);
+  if (onFreeBoard(view.mode) || (view.mode === 'moves' && view.review)) pump(session, analysis);
   const spoken = view.mode === 'moves' ? spokenMove(session, analysis) : null;
   if (spoken && view.explain) pumpLines(session, analysis, spoken);
   if (view.mode === 'moves' || view.mode === 'summary')
     pumpThreats(session, analysis, threatsToSearch(session, spoken));
   if (view.mode === 'moves') followRetry(session, analysis);
   else view.retry = null;
+  if (view.mode === 'openings') followPractice(session, analysis);
+  else if (view.practice) stopPractice(session, analysis);
 }
 
 // Kept on every pass: Lichess rewrites <html>'s class when its scheme follows
@@ -132,6 +140,7 @@ export function render(session: Session, force = false): void {
   if (!analysis || !attach(session.elements)) return;
   const { view } = session;
   markMode(view);
+  keepPage(session);
   if (view.mode === 'summary' && analysis.node.ply !== view.summaryPly) {
     setMode(session, 'moves');
     return;
@@ -180,6 +189,9 @@ export function setMode(session: Session, mode: Mode): void {
   view.sheet = false;
   if (mode !== 'moves') stopPlaying(session);
   if (mode === 'moves' && analysis) closeTools(analysis);
+  // The page's side starts as the board's.
+  if (mode === 'openings' && analysis && !view.practice)
+    view.openings.side = analysis.orientation();
   markMode(view);
   render(session, true);
 }

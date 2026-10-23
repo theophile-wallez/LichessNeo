@@ -13,7 +13,7 @@ import { HINTS } from './retry-hint.ts';
 // player wants, and the answer only comes when they ask for it.
 
 /** How long a miss stays on the board before it's taken back. */
-const MISS_MS = 2000;
+export const MISS_MS = 2000;
 
 export type RetryOutcome =
   /** The position before the error, waiting for a move. */

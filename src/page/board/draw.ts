@@ -38,9 +38,12 @@ function reviewArrow({ orig, dest, brush }: ReviewArrow, whiteAtBottom: boolean)
   };
 }
 
+// Opening practice too: the engine's arrow would give the move away, and the
+// variation arrows the moves taken back.
 const isReviewing = (root: Element): boolean =>
   root.classList.contains('ln-ext-review-moves') ||
-  root.classList.contains('ln-ext-review-summary');
+  root.classList.contains('ln-ext-review-summary') ||
+  root.classList.contains('ln-ext-review-openings');
 
 /** Sets `element`'s markup if it isn't what it was drawn with last; returns what it is. */
 function redrawn(element: Element, markup: SafeHtml, drawn: string | undefined): string {

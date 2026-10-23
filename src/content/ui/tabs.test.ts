@@ -184,6 +184,25 @@ describe('sliding tabs', () => {
     await nextFrame();
     expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('80px');
   });
+
+  it('slides to the choice the practice page picks', async () => {
+    document.body.innerHTML =
+      '<div id="ln-ext-review"><div class="ln-ext-seg" role="group">' +
+      '<button class="ln-ext-seg__opt active">White</button>' +
+      '<button class="ln-ext-seg__opt">Black</button></div></div>';
+    const [bar] = elements('.ln-ext-seg');
+    const [white, black] = elements('.ln-ext-seg__opt');
+    if (!bar || !white || !black) throw new Error('no bar');
+    layOut(bar, () => ({ top: 0, left: 0, width: 180, height: 32 }));
+    layOut(white, () => ({ top: 0, left: 0, width: 90, height: 32 }));
+    layOut(black, () => ({ top: 0, left: 90, width: 90, height: 32 }));
+    createTabBars().sync();
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('0px');
+    white.classList.remove('active');
+    black.classList.add('active');
+    await nextFrame();
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('90px');
+  });
 });
 
 describe('tab geometry', () => {

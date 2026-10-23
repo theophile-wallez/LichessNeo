@@ -108,6 +108,20 @@ main.opening .opening__actions .button + .button:hover {
   background: var(--ln-ext-btn-grey-hover) !important;
 }
 
+/* Practicing the opening on the free board (content/pages/opening-practice.ts): a Hugeicon
+   where Lichess's buttons have a glyph. */
+main.opening .opening__actions .ln-ext-opening-practice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+}
+
+main.opening .ln-ext-opening-practice .ln-ext-hi {
+  width: 1.25em;
+  height: 1.25em;
+}
+
 /* ---- The panels --- */
 
 /* The continuations and the example games, behind tabs whose highlight slides

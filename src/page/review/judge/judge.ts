@@ -14,7 +14,8 @@ interface Standing {
   readonly second: number | null;
 }
 
-function lossClass(loss: number): MoveClass {
+/** A move's class by the win chance it loses, in points. */
+export function lossClass(loss: number): MoveClass {
   if (loss < 2) return 'excellent';
   if (loss < 5) return 'good';
   if (loss < 10) return 'inaccuracy';

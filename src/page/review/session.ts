@@ -10,15 +10,24 @@ import type { ReviewLanguage } from './i18n/types.ts';
 import type { ClassCounts } from './judge/summary.ts';
 import type { MoveVerdict } from './judge/types.ts';
 import type { GameRating } from './rating/rate-game.ts';
+import { freshSetup, type OpeningsSetup } from './practice/setup.ts';
+import type { Round } from './practice/rounds.ts';
+import type { PracticeState } from './practice/state.ts';
 import type { ReviewElements } from './view/elements.ts';
 import type { Mark, ReviewArrow } from '#page/board/review-arrows.ts';
 
 // Everything the review keeps while a page is open, shared by its parts.
 
-/** What the panel shows: the closed panel, the summary, the move-by-move review, or the free board's coach. */
-export const ModeSchema = z.enum(['normal', 'summary', 'moves', 'live']);
+/**
+ * What the panel shows: the closed panel, the summary, the move-by-move review,
+ * the free board's coach, or the free board's page of opening practice.
+ */
+export const ModeSchema = z.enum(['normal', 'summary', 'moves', 'live', 'openings']);
 export type Mode = z.infer<typeof ModeSchema>;
 export const MODES: readonly Mode[] = ModeSchema.options;
+
+/** The free board's modes: its coach, and its page of opening practice. */
+export const onFreeBoard = (mode: Mode): boolean => mode === 'live' || mode === 'openings';
 
 /** A judged move; one played on the free board or off the game names its opening ('' for none). */
 export interface JudgedMove extends MoveVerdict {
@@ -92,6 +101,12 @@ export interface ViewState {
   bestOf: BestShown | null;
   lineOf: LineShown | null;
   retry: RetryState | null;
+  /** Opening practice against the explorer's games, on the free board. */
+  practice: PracticeState | null;
+  /** The round of cards practice plays one after the other, if it plays one. */
+  round: Round | null;
+  /** The practice page's choices, before a line starts. */
+  readonly openings: OpeningsSetup;
   /** The arrow of the comment's move under the pointer (view/chips.ts). */
   hover: ReviewArrow | null;
   /** The coach's drawing of its comment on the move at `path`. */
@@ -223,6 +238,9 @@ export function createSession(options: SessionOptions): Session {
       bestOf: null,
       lineOf: null,
       retry: null,
+      practice: null,
+      round: null,
+      openings: freshSetup(),
       hover: null,
       drawing: { path: '', marks: [] },
       allRows: false,

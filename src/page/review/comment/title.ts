@@ -7,7 +7,8 @@ import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 
 const FIGURINES: Readonly<Record<string, string>> = { K: '♚', Q: '♛', R: '♜', B: '♝', N: '♞' };
 
-function sanMarkup(san: string): SafeHtml {
+/** A move in SAN, its piece a figurine. */
+export function sanMarkup(san: string): SafeHtml {
   // Split on the piece letters, which then sit at the odd indexes.
   const pieces = san
     .split(/([KQRBN])/)
@@ -19,16 +20,23 @@ function sanMarkup(san: string): SafeHtml {
   return html`${pieces}`;
 }
 
+/** A sentence about a move, `{m}` in it standing for the move. */
+export function moveTitle(sentence: string, san: string, language: ReviewLanguage): SafeHtml {
+  const text = language.typography(sentence);
+  const at = text.indexOf('{m}');
+  if (at < 0) return html`${text}`;
+  return html`${text.slice(0, at)}${sanMarkup(san)}${text.slice(at + 3)}`;
+}
+
 export function verdictTitle(
   moveClass: MoveClass,
   san: string,
   language: ReviewLanguage,
 ): SafeHtml {
   const mates = moveClass === 'best' && san.endsWith('#');
-  const sentence = language.typography(
+  return moveTitle(
     mates ? language.mateSentence : language.classSentences[moveClass],
+    san,
+    language,
   );
-  const at = sentence.indexOf('{m}');
-  if (at < 0) return html`${sentence}`;
-  return html`${sentence.slice(0, at)}${sanMarkup(san)}${sentence.slice(at + 3)}`;
 }

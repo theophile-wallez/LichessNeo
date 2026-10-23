@@ -1,9 +1,11 @@
-import { roleOfLetter } from './pieces.ts';
+import { ROLE_LETTERS, roleOfLetter } from './pieces.ts';
 import { squareAt } from './squares.ts';
 import type { Color, Piece, Square } from './types.ts';
 
 /** The standard start position's placement field. */
 export const START_PLACEMENT = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+
+export const START_FEN = `${START_PLACEMENT} w KQkq - 0 1`;
 
 /**
  * The pieces of a FEN's placement field ("rnbqkbnr/pppppppp/8/…"). Crazyhouse
@@ -28,6 +30,28 @@ export function parsePlacement(placement: string): Map<Square, Piece> {
     }
   }
   return board;
+}
+
+/** A board's placement field, as FEN writes it. */
+export function writePlacement(board: ReadonlyMap<Square, Piece>): string {
+  const rows: string[] = [];
+  for (let rank = 7; rank >= 0; rank--) {
+    let row = '';
+    let empty = 0;
+    for (let file = 0; file < 8; file++) {
+      const square = squareAt(file, rank);
+      const piece = square ? board.get(square) : undefined;
+      if (!piece) {
+        empty++;
+        continue;
+      }
+      const letter = ROLE_LETTERS[piece.role];
+      row += `${empty || ''}${piece.color === 'white' ? letter.toUpperCase() : letter}`;
+      empty = 0;
+    }
+    rows.push(`${row}${empty || ''}`);
+  }
+  return rows.join('/');
 }
 
 export interface Position {

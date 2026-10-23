@@ -1,4 +1,5 @@
 import { coachOptions, pickCoach } from '#shared/coach.ts';
+import { PRACTICE_HASH } from '#shared/practice-page.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import { onJump } from '#page/lichess/jumps.ts';
 import { analyseGame } from './game/analyse-game.ts';
@@ -9,6 +10,9 @@ import { watchClicks } from './view/clicks.ts';
 import { watchCoachPicks } from './view/coach-avatar.ts';
 import { createElements } from './view/elements.ts';
 import { keepMarked, render, renderJump, setMode } from './view/render.ts';
+import { isConsentReturn } from './practice/sync-connect.ts';
+import { canPractice, lastMover, startPractice } from './view/practice.ts';
+import { finishConsent } from './view/openings-sync.ts';
 import { refitStream } from './view/stream.ts';
 import { watchCostTips } from './view/cost-tip.ts';
 import { watchTips } from './view/tooltip.ts';
@@ -28,6 +32,11 @@ const MOVE_LINK = /^#\d+$/;
 
 /** The page was opened from a link to one of the game's moves. */
 export const linksToMove = (): boolean => MOVE_LINK.test(location.hash);
+// The practice page's address: the sidebar links to it, and an opening's page to
+// its line on it (content/pages/opening-practice.ts). Lichess's consent page
+// comes back to it without its hash.
+const consentReturn = isConsentReturn();
+const linksToPractice = location.hash === PRACTICE_HASH || consentReturn;
 // A resize under this (a scrollbar coming and going) keeps the comment as it is.
 const RESIZE_SLACK = 4;
 
@@ -69,11 +78,33 @@ function run(session: Session, mode: Mode): void {
   session.wide.addEventListener('change', refit);
 }
 
+/**
+ * The free board: its coach, unless the settings leave it to Lichess's panel,
+ * or the practice page, which its address opens whatever they say.
+ */
+function startFreeBoard(session: Session, analysis: Analysis): void {
+  // The sidebar's link, followed from the free board itself, only changes the hash.
+  window.addEventListener('hashchange', () => {
+    if (location.hash !== PRACTICE_HASH || session.view.mode === 'openings') return;
+    if (session.view.drawnMode === null) location.reload();
+    else session.setMode('openings');
+  });
+  if (!linksToPractice) {
+    if (coachOptions().analysis) run(session, 'live');
+    return;
+  }
+  run(session, 'openings');
+  if (consentReturn) finishConsent(session);
+  // An opening's line: its last move is the opening's own, and the user practices its side.
+  if (analysis.node.ply > 0 && canPractice(analysis))
+    startPractice(session, analysis, { side: lastMover(analysis) });
+}
+
 /** Starts the review; `onMove`, the page was opened on one of the game's moves. */
 export function startReview(session: Session, analysis: Analysis, onMove = false): void {
   if (!REVIEWED_VARIANTS.has(analysis.data?.game.variant.key ?? '')) return;
   if (analysis.synthetic) {
-    if (coachOptions().analysis) run(session, 'live');
+    startFreeBoard(session, analysis);
     return;
   }
   if (!analysis.gameId || analysis.mainline.length < 2) return;

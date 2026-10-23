@@ -159,7 +159,8 @@ main:is(.round, .analyse) .ln-ext-end__king--end .ln-ext-end__king-label {
 /* ---- Confetti --- */
 
 /* Each piece falls from above the board with its own drift, spin, size and pace
- * (page/game-over/confetti.ts), then is gone. */
+ * (shared/confetti.ts), then is gone. Practice's cheers rain them too, in a layer of their own
+ * (page/review/view/practice-cheer.ts). */
 main:is(.round, .analyse) .ln-ext-confetti {
   position: absolute;
   inset: 0;

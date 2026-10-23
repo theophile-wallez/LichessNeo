@@ -1,3 +1,4 @@
+import ArrowDataTransferHorizontalIcon from '@hugeicons/core-free-icons/ArrowDataTransferHorizontalIcon';
 import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon';
 import ArrowLeft01Icon from '@hugeicons/core-free-icons/ArrowLeft01Icon';
 import ArrowLeft02Icon from '@hugeicons/core-free-icons/ArrowLeft02Icon';
@@ -5,14 +6,38 @@ import ArrowLeftDoubleIcon from '@hugeicons/core-free-icons/ArrowLeftDoubleIcon'
 import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
 import ArrowRight02Icon from '@hugeicons/core-free-icons/ArrowRight02Icon';
 import ArrowRightDoubleIcon from '@hugeicons/core-free-icons/ArrowRightDoubleIcon';
+import ArrowTurnBackwardIcon from '@hugeicons/core-free-icons/ArrowTurnBackwardIcon';
+import BookOpen01Icon from '@hugeicons/core-free-icons/BookOpen01Icon';
+import ArrowUpRight01Icon from '@hugeicons/core-free-icons/ArrowUpRight01Icon';
 import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
+import CloudCheckIcon from '@hugeicons/core-free-icons/CloudCheckIcon';
+import CloudLoadingIcon from '@hugeicons/core-free-icons/CloudLoadingIcon';
+import CloudUploadIcon from '@hugeicons/core-free-icons/CloudUploadIcon';
+import CloudAlertIcon from '@hugeicons/core-free-icons/CloudAlertIcon';
+import ComputerIcon from '@hugeicons/core-free-icons/ComputerIcon';
+import FireIcon from '@hugeicons/core-free-icons/FireIcon';
 import HelpCircleIcon from '@hugeicons/core-free-icons/HelpCircleIcon';
 import Idea01Icon from '@hugeicons/core-free-icons/Idea01Icon';
 import PauseIcon from '@hugeicons/core-free-icons/PauseIcon';
 import PlayIcon from '@hugeicons/core-free-icons/PlayIcon';
 import ReloadIcon from '@hugeicons/core-free-icons/ReloadIcon';
+import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
+import Settings02Icon from '@hugeicons/core-free-icons/Settings02Icon';
 import Share08Icon from '@hugeicons/core-free-icons/Share08Icon';
 import StarIcon from '@hugeicons/core-free-icons/StarIcon';
+import Target02Icon from '@hugeicons/core-free-icons/Target02Icon';
+import Book02Icon from '@hugeicons/core-free-icons/Book02Icon';
+import Calendar03Icon from '@hugeicons/core-free-icons/Calendar03Icon';
+import ChessPawnIcon from '@hugeicons/core-free-icons/ChessPawnIcon';
+import Compass01Icon from '@hugeicons/core-free-icons/Compass01Icon';
+import CrownIcon from '@hugeicons/core-free-icons/CrownIcon';
+import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon';
+import GitBranchIcon from '@hugeicons/core-free-icons/GitBranchIcon';
+import HelpSquareIcon from '@hugeicons/core-free-icons/HelpSquareIcon';
+import RepeatIcon from '@hugeicons/core-free-icons/RepeatIcon';
+import StopWatchIcon from '@hugeicons/core-free-icons/StopWatchIcon';
+import Sword01Icon from '@hugeicons/core-free-icons/Sword01Icon';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { hugeicon } from '#shared/hugeicons.ts';
 import { html, type SafeHtml, trustedHtml } from '#shared/html.ts';
 import { formatEval } from '#page/review/evaluation/format.ts';
@@ -35,6 +60,31 @@ const ICONS = {
   hint: HelpCircleIcon,
   arrow: ArrowRight02Icon,
   retry: ReloadIcon,
+  book: BookOpen01Icon,
+  back: ArrowTurnBackwardIcon,
+  swap: ArrowDataTransferHorizontalIcon,
+  computer: ComputerIcon,
+  search: Search01Icon,
+  fire: FireIcon,
+  settings: Settings02Icon,
+  cloud: CloudUploadIcon,
+  cloudDone: CloudCheckIcon,
+  cloudFailed: CloudAlertIcon,
+  cloudBusy: CloudLoadingIcon,
+  open: ArrowUpRight01Icon,
+  target: Target02Icon,
+  studies: Book02Icon,
+  calendar: Calendar03Icon,
+  games: ChessPawnIcon,
+  plan: Compass01Icon,
+  crown: CrownIcon,
+  prune: Delete02Icon,
+  branch: GitBranchIcon,
+  quiz: HelpSquareIcon,
+  review: RepeatIcon,
+  blitz: StopWatchIcon,
+  trap: Sword01Icon,
+  tick: Tick02Icon,
 } as const;
 
 export type IconName = keyof typeof ICONS;
@@ -42,8 +92,8 @@ export type IconName = keyof typeof ICONS;
 export const svgIcon = (name: IconName): SafeHtml =>
   hugeicon(ICONS[name], { className: 'ln-ext-i' });
 
-const BACK_ICON = hugeicon(ArrowLeft02Icon);
-const CLOSE_ICON = hugeicon(Cancel01Icon);
+export const BACK_ICON = hugeicon(ArrowLeft02Icon);
+export const CLOSE_ICON = hugeicon(Cancel01Icon);
 export const CHEVRON_ICON = hugeicon(ArrowDown01Icon);
 const SHARE_ICON = hugeicon(Share08Icon);
 

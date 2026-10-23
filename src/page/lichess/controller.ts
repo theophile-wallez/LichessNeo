@@ -31,6 +31,9 @@ const ControllerSchema = z.object({
   toggleRetro: z.optional(z.unknown()),
   hasFullComputerAnalysis: z.optional(z.unknown()),
   explorer: z.optional(z.unknown()),
+  toggleExplorer: z.optional(z.unknown()),
+  flip: z.optional(z.unknown()),
+  changePgn: z.optional(z.unknown()),
 });
 
 export type Controller = z.infer<typeof ControllerSchema>;
@@ -90,10 +93,3 @@ export const MasterOpeningSchema = z.object({
 });
 
 export type MasterOpening = z.infer<typeof MasterOpeningSchema>;
-
-const ExplorerSchema = z.object({
-  fetchMasterOpening: z.optional(method<[fen: string]>()),
-  isAuth: z.optional(method<[]>()),
-});
-
-export const isExplorer = createGuard(ExplorerSchema);
