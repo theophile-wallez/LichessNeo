@@ -304,3 +304,8 @@ html[data-ln-ext-pdash] .puzzle-dashboard .box__top h1 {
   font-size: 12.5px;
   font-weight: 600;
 }
+
+/* With no coach (coach-avatar.css), no arms to leave room for: the tips take the card. */
+html[data-ln-ext-coach='none'] .ln-ext-pdash__coach {
+  --ln-ext-pdash-arms: 8px;
+}

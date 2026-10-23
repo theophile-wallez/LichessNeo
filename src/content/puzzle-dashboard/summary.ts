@@ -3,6 +3,7 @@ import { message } from '#content/platform/runtime.ts';
 import type { Line, Tip } from './coach-line.ts';
 import type { Overview, ThemeResult } from './data.ts';
 import { number, sign, signed, trainHref } from './format.ts';
+import { mascotMarkup } from './mascot.ts';
 import { numbersMarkup } from './numbers.ts';
 
 // The overview's head (styles/dashboard/overview.css): the period's numbers
@@ -23,10 +24,11 @@ const pager = (count: number): SafeHtml =>
     <button type="button" class="ln-ext-pdash__turn" data-ln-ext-turn="next" aria-label="${message('pdashCoachNext')}"></button>
   </div>`;
 
-// The still shows until the live mascot is drawn over it (puzzle-dashboard/coach.ts).
-const coach = (tips: readonly Tip[], coachId: number): SafeHtml =>
+// The still shows until the live mascot is drawn over it (puzzle-dashboard/coach.ts). With no
+// coach, the tips are said alone.
+const coach = (tips: readonly Tip[], coachId: number | null): SafeHtml =>
   html`<div class="ln-ext-pdash__coach">
-    <span class="ln-ext-pdash__mascot" data-ln-ext-avatar-coach="${coachId}"></span>
+    ${mascotMarkup(coachId)}
     <div class="ln-ext-pdash__talk">
       <p class="ln-ext-pdash__tip" aria-live="polite">${tips[0] && tipMarkup(tips[0])}</p>
       ${tips.length > 1 && pager(tips.length)}
@@ -62,7 +64,7 @@ function list(kind: 'weak' | 'strong', themes: readonly ThemeResult[]): SafeHtml
 export interface SummaryParts {
   readonly view: Overview;
   readonly tips: readonly Tip[];
-  readonly coachId: number;
+  readonly coachId: number | null;
   /** Lichess's link to the failed puzzles, null when there are none. */
   readonly replayHref: string | null;
 }

@@ -1,3 +1,4 @@
+import { shownCoach } from '#shared/coach.ts';
 import { setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
@@ -7,7 +8,8 @@ import { levelMood } from './moods.ts';
 
 // The computer's robot, live where a game against Stockfish is set up: beside
 // the setup's level slider, its colors and mood following the level. Its still
-// is the computer's avatar everywhere else (styles/theme).
+// is the computer's avatar everywhere else (styles/theme). With no coach, it
+// stays away, as the coaches do (styles/pages/level-slider.css).
 
 // Over its still, which the stylesheet shows at once.
 const setup = new MascotSpot({
@@ -23,7 +25,8 @@ function syncSetup(): void {
   // It reacts to each new level, easing into its colors (mascot/cast/shell.ts).
   if (slider && pickedLevel !== 0 && level !== pickedLevel) setup.poke();
   pickedLevel = level;
-  setup.sync(slider?.robot ?? null, levelMood(level), { computer: level });
+  const robot = shownCoach() === null ? null : (slider?.robot ?? null);
+  setup.sync(robot, levelMood(level), { computer: level });
 }
 
 export const computer: Feature = {

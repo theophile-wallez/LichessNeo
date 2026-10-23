@@ -1,17 +1,18 @@
-import { CoachIdSchema, pickCoach } from '#shared/coach.ts';
-import { closestTo, createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
+import { type CoachPick, coachOf, coachPick, NO_COACH } from '#shared/coach.ts';
+import { createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import { chooseCoach } from '#content/bootstrap/coach-choice.ts';
-import { coachChoices, coachName } from '#content/coach/names.ts';
+import { coachChoices, coachName, tilePick } from '#content/coach/names.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
 import { currentSettings, onSettings } from './settings.ts';
 import { buildSwitchList } from './switch-list.ts';
 
 // The settings' Coach card, on the Profile & coach page, under the profile's cards
 // (styles/pages/settings-coach.css): the coach, live over its still, says
-// hello, over a tile for each coach. The pick is the one every coach shows
-// (#shared/coach.ts): the review, the puzzles, the drills. Under it, the
+// hello, over a tile for each coach, after no coach and one at random. The
+// pick is the one every coach's place shows (#shared/coach.ts): the review,
+// the puzzles, the drills. With none, the stage says so alone. Under it, the
 // coach's switches: its 3D, its place on the analysis board, and its drawings
 // on the board.
 
@@ -34,19 +35,28 @@ export interface CoachCard {
   readonly show: (visible: boolean) => void;
 }
 
-function showPick(card: HTMLElement, coach: number): void {
+/** What the stage says of `pick`, which shows `coach` here. */
+function hello(pick: CoachPick, coach: number | null): string {
+  if (coach === null) return message('coachPickNone');
+  const name = coachName(coach);
+  return pick === coach ? message('coachPickHello', name) : message('coachPickRandom', name);
+}
+
+function showPick(card: HTMLElement, pick: CoachPick): void {
+  const coach = coachOf(pick);
   const mascot = queryOne(card, '.ln-ext-coach-pick__mascot', HTMLElement);
-  if (mascot) setData(mascot, 'lnExtAvatarCoach', String(coach));
+  if (mascot) {
+    setData(mascot, 'lnExtAvatarCoach', coach === null ? null : String(coach));
+    if (mascot.hidden !== (coach === null)) mascot.hidden = coach === null;
+  }
   for (const choice of queryAll(card, '.ln-ext-coach-choice', HTMLElement)) {
-    const pressed = String(choice.dataset.lnExtCoachChoice === String(coach));
+    const pressed = String(choice.dataset.lnExtCoachChoice === String(pick));
     if (choice.getAttribute('aria-pressed') !== pressed)
       choice.setAttribute('aria-pressed', pressed);
   }
   // A new bubble each time, so it pops in again.
   const bubble = queryOne(card, '.ln-ext-coach-pick__bubble', HTMLElement);
-  bubble?.replaceChildren(
-    createElement('span', { text: message('coachPickHello', coachName(coach)) }),
-  );
+  bubble?.replaceChildren(createElement('span', { text: hello(pick, coach) }));
 }
 
 /** The card, its coach live only while its page shows. */
@@ -54,7 +64,7 @@ export function buildCoachCard(): CoachCard {
   const card = createElement('section', { className: 'ln-ext-coach-pick' });
   setHtml(card, CARD);
   const mascot = queryOne(card, '.ln-ext-coach-pick__mascot', HTMLElement);
-  let coach = pickCoach();
+  let pick = coachPick();
   let visible = false;
   // It comes in neutral, as its still looks, and smiles once drawn: the swap never shows.
   const spot = new MascotSpot({
@@ -64,17 +74,22 @@ export function buildCoachCard(): CoachCard {
     whenIdle: true,
     onDrawn: holder => {
       setData(holder, 'lnExtLive', '');
-      spot.sync(holder, 'happy', { coach });
+      play(holder, 'happy');
     },
   });
+  // The pick's coach on the stage, or none.
+  const play = (holder: HTMLElement | null, mood: 'neutral' | 'happy'): void => {
+    const coach = coachOf(pick);
+    spot.sync(coach === null ? null : holder, mood, { coach: coach ?? 1 });
+  };
   const show = (next: boolean): void => {
     if (next === visible) return;
     visible = next;
     // The review may have changed the coach since, in this tab or another.
-    if (visible) coach = pickCoach();
+    if (visible) pick = coachPick();
     if (mascot && !visible) setData(mascot, 'lnExtLive', null);
-    showPick(card, coach);
-    spot.sync(visible ? mascot : null, 'neutral', { coach });
+    showPick(card, pick);
+    play(visible ? mascot : null, 'neutral');
   };
   // Taken off and put back as the 3D is switched: live, or its still.
   let moving = currentSettings().coachMotion;
@@ -83,21 +98,20 @@ export function buildCoachCard(): CoachCard {
     moving = coachMotion;
     if (!visible) return;
     if (mascot) setData(mascot, 'lnExtLive', null);
-    spot.sync(null, 'neutral', { coach });
-    spot.sync(mascot, 'neutral', { coach });
+    play(null, 'neutral');
+    play(mascot, 'neutral');
   });
   card.addEventListener('click', event => {
-    const picked = CoachIdSchema.safeParse(
-      closestTo(event.target, '.ln-ext-coach-choice', HTMLElement)?.dataset.lnExtCoachChoice,
-    );
-    if (!picked.success || picked.data === coach) return;
-    coach = picked.data;
-    chooseCoach(coach);
-    showPick(card, coach);
-    spot.sync(mascot, 'happy', { coach });
+    const picked = tilePick(event.target);
+    if (picked === null || picked === pick) return;
+    pick = picked;
+    chooseCoach(pick);
+    showPick(card, pick);
+    if (pick === NO_COACH) return play(null, 'neutral');
+    play(mascot, 'happy');
     spot.poke();
   });
-  showPick(card, coach);
+  showPick(card, pick);
   return { element: card, show };
 }
 

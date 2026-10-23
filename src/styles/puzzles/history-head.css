@@ -351,3 +351,21 @@
     width: 108px;
   }
 }
+
+/* With no coach (coach-avatar.css), the week takes the mascot's column. */
+html[data-ln-ext-coach='none'] .ln-ext-phist__hero {
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding-left: 24px;
+}
+
+@container (max-width: 760px) {
+  html[data-ln-ext-coach='none'] .ln-ext-phist__hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@container (max-width: 520px) {
+  html[data-ln-ext-coach='none'] .ln-ext-phist__hero {
+    padding-left: 14px;
+  }
+}

@@ -73,6 +73,8 @@
     color-mix(in srgb, var(--ln-ext-setting-color) 20%, transparent);
 }
 
+/* Following no coach or one at random, the face is their glyph. */
+.ln-ext-home-coach__face,
 .ln-ext-home-coach__glyph {
   display: flex;
   align-items: center;

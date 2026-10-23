@@ -42,7 +42,7 @@ const pressedCoach = (card: HTMLElement): (string | undefined)[] =>
     tile => tile.dataset.lnExtCoachChoice,
   );
 
-function pickCoachTile(card: HTMLElement, coach: number): void {
+function pickCoachTile(card: HTMLElement, coach: number | string): void {
   queryOne(
     card,
     `[data-ln-ext-coach-choice='${coach}'] .ln-ext-coach-choice__name`,
@@ -65,7 +65,7 @@ describe('the settings’ home coach card', () => {
     mode(card, 'own')?.click();
     expect(pressedMode(card)).toEqual(['own']);
     expect(grid(card)?.hidden).toBe(false);
-    expect(queryAll(card, '.ln-ext-coach-choice', HTMLElement)).toHaveLength(26);
+    expect(queryAll(card, '.ln-ext-coach-choice', HTMLElement)).toHaveLength(28);
     expect(pressedCoach(card)).toEqual(['3']);
     expect(localStorage.getItem('ln-ext-home-coach')).toBe('3');
   });
@@ -96,6 +96,30 @@ describe('the settings’ home coach card', () => {
     const card = buildHomeCoachCard().element;
     chooseCoach(5);
     expect(followedFace(card)).toBe('5');
+  });
+
+  it('wears no coach’s face, but its icon, as the card above picks none or one at random', () => {
+    const card = buildHomeCoachCard().element;
+    const face = queryOne(card, '.ln-ext-home-coach__face', HTMLElement);
+    chooseCoach('none');
+    expect(followedFace(card)).toBeUndefined();
+    expect(face?.querySelector('svg')).not.toBeNull();
+    chooseCoach('random');
+    expect(followedFace(card)).toBeUndefined();
+    expect(face?.querySelector('svg')).not.toBeNull();
+    chooseCoach(5);
+    expect(face?.querySelector('svg')).toBeNull();
+  });
+
+  it('keeps no coach, or one at random, for the home alone', () => {
+    const card = buildHomeCoachCard().element;
+    mode(card, 'own')?.click();
+    pickCoachTile(card, 'none');
+    expect(localStorage.getItem('ln-ext-home-coach')).toBe('none');
+    expect(pressedCoach(card)).toEqual(['none']);
+    pickCoachTile(card, 'random');
+    expect(localStorage.getItem('ln-ext-home-coach')).toBe('random');
+    expect(localStorage.getItem('ln-ext-coach')).toBe('3');
   });
 
   it('reads the picks again as its page shows, changed in another tab', () => {

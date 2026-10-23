@@ -64,7 +64,7 @@ const pressed = (card: HTMLElement): (string | undefined)[] =>
 const bubble = (card: HTMLElement): string | null | undefined =>
   queryOne(card, '.ln-ext-coach-pick__bubble', HTMLElement)?.textContent;
 
-function pick(card: HTMLElement, coach: number): void {
+function pick(card: HTMLElement, coach: number | string): void {
   queryOne(
     card,
     `[data-ln-ext-coach-choice='${coach}'] .ln-ext-coach-choice__name`,
@@ -73,7 +73,7 @@ function pick(card: HTMLElement, coach: number): void {
 }
 
 describe('the settings’ coach card', () => {
-  it('names every coach, the robot after the animals', () => {
+  it('names every coach after no coach and one at random, the robot after the animals', () => {
     expect(coachName(1)).toBe('coachPawn');
     expect(coachName(8)).toBe('coachRobot');
     expect(coachName(9)).toBe('coachMushroom');
@@ -82,6 +82,8 @@ describe('the settings’ coach card', () => {
     expect(
       queryAll(card, '.ln-ext-coach-choice__name', HTMLElement).map(name => name.textContent),
     ).toEqual([
+      'coachNone',
+      'coachRandom',
       'coachPawn',
       'coachFennec',
       'coachDino',
@@ -127,6 +129,36 @@ describe('the settings’ coach card', () => {
     expect(
       queryOne(card, '.ln-ext-coach-pick__mascot', HTMLElement)?.dataset.lnExtAvatarCoach,
     ).toBe('8');
+  });
+
+  it('keeps no coach, with no mascot on the stage', async () => {
+    const { element, show } = buildCoachCard();
+    document.body.append(element);
+    show(true);
+    await flush();
+    await flush();
+    pick(element, 'none');
+    expect(localStorage.getItem('ln-ext-coach')).toBe('none');
+    expect(document.documentElement.dataset.lnExtCoach).toBe('none');
+    expect(pressed(element)).toEqual(['none']);
+    expect(bubble(element)).toBe('coachPickNone');
+    const stage = queryOne(element, '.ln-ext-coach-pick__mascot', HTMLElement);
+    expect(stage?.hidden).toBe(true);
+    expect(stage?.dataset.lnExtAvatarCoach).toBeUndefined();
+    expect(queryOne(element, '.ln-ext-mascot', HTMLElement)).toBeNull();
+    pick(element, 5);
+    expect(stage?.hidden).toBe(false);
+    expect(queryOne(element, '.ln-ext-mascot', HTMLElement)).not.toBeNull();
+  });
+
+  it('keeps one at random, and names the one this page drew', () => {
+    vi.spyOn(performance, 'timeOrigin', 'get').mockReturnValue(7);
+    const card = buildCoachCard().element;
+    pick(card, 'random');
+    expect(localStorage.getItem('ln-ext-coach')).toBe('random');
+    expect(document.documentElement.dataset.lnExtCoach).toBe('8');
+    expect(pressed(card)).toEqual(['random']);
+    expect(bubble(card)).toBe('coachPickRandom:coachRobot');
   });
 
   it('shows the coach picked since in another page as it shows again', () => {

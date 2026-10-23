@@ -51,28 +51,36 @@ function slide(text: HTMLElement, tip: Tip, turn: Turn): void {
   text.append(said);
 }
 
-export function startCoach(section: HTMLElement, tips: readonly Tip[], coachId: number): void {
+/** The tips said in turn on the overview's card, by the mascot unless there's no coach. */
+export function startCoach(
+  section: HTMLElement,
+  tips: readonly Tip[],
+  coachId: number | null,
+): void {
   const mascot = queryOne(section, '.ln-ext-pdash__mascot', HTMLElement);
   const text = queryOne(section, '.ln-ext-pdash__tip', HTMLElement);
   const dots = queryAll(section, '.ln-ext-pdash__dots > i', HTMLElement);
   const first = tips[0];
-  if (!mascot || !text || !first) return;
+  if (!text || !first) return;
   let at = 0;
-  const spot = liveMascot(mascot, coachId, () => tips[at]?.mood ?? 'neutral');
+  const spot =
+    mascot && coachId !== null
+      ? liveMascot(mascot, coachId, () => tips[at]?.mood ?? 'neutral')
+      : null;
   const turn = (to: Turn): void => {
     at = turned(at, to, tips.length);
     const tip = tips[at];
     if (!tip) return;
     slide(text, tip, to);
     for (const [i, dot] of dots.entries()) setData(dot, 'lnExtOn', i === at ? '' : null);
-    spot.sync(mascot, tip.mood, { coach: coachId });
+    if (coachId !== null) spot?.sync(mascot, tip.mood, { coach: coachId });
   };
   // The mascot pokes itself on a click (MascotSpot); the arrows ask it to.
-  if (tips.length > 1) mascot.addEventListener('click', () => turn('next'));
+  if (tips.length > 1) mascot?.addEventListener('click', () => turn('next'));
   for (const button of queryAll(section, '.ln-ext-pdash__turn', HTMLButtonElement)) {
     button.addEventListener('click', () => {
       turn(button.dataset.lnExtTurn === 'back' ? 'back' : 'next');
-      spot.poke();
+      spot?.poke();
     });
   }
 }

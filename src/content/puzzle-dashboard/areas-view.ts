@@ -2,6 +2,7 @@ import { html, type SafeHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import type { AreaTheme } from './areas-read.ts';
 import { number, sign, signed, trainHref } from './format.ts';
+import { mascotMarkup } from './mascot.ts';
 
 // The improvement areas and strengths (styles/dashboard/areas.css): the
 // first theme in a card of its own, the player's mascot beside it, then the
@@ -26,11 +27,11 @@ function fact(value: SafeHtml | string, label: string): SafeHtml {
   return html`<div class="ln-ext-pdash__fact"><b>${value}</b><span>${label}</span></div>`;
 }
 
-function hero(theme: AreaTheme, kind: AreaKind, coachId: number): SafeHtml {
+function hero(theme: AreaTheme, kind: AreaKind, coachId: number | null): SafeHtml {
   const { result } = theme;
   const strong = kind === 'strong';
   return html`<div class="ln-ext-pdash__hero">
-    <span class="ln-ext-pdash__mascot" data-ln-ext-avatar-coach="${coachId}"></span>
+    ${mascotMarkup(coachId)}
     <div class="ln-ext-pdash__about">
       <small>${message(strong ? 'pdashBestWeapon' : 'pdashStartHere')}</small>
       <h2>${result.name}</h2>
@@ -65,7 +66,7 @@ function row(theme: AreaTheme, kind: AreaKind): SafeHtml {
 export function areasMarkup(
   themes: readonly AreaTheme[],
   kind: AreaKind,
-  coachId: number,
+  coachId: number | null,
 ): SafeHtml {
   const [first, ...rest] = themes;
   if (!first) return html``;

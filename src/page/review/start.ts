@@ -1,4 +1,4 @@
-import { coachOptions, pickCoach } from '#shared/coach.ts';
+import { coachOptions, speakingCoach } from '#shared/coach.ts';
 import { PRACTICE_HASH } from '#shared/practice-page.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import { onJump } from '#page/lichess/jumps.ts';
@@ -44,7 +44,7 @@ const RESIZE_SLACK = 4;
 export function createReview(analysis: Analysis): Session {
   const session: Session = createSession({
     language: pageLanguage(analysis.viewerColor()),
-    coach: pickCoach(),
+    coach: speakingCoach(),
     elements: createElements(),
     redraw: force => render(session, force),
     setMode: mode => setMode(session, mode),

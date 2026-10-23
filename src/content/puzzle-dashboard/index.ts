@@ -1,4 +1,4 @@
-import { pickCoach } from '#shared/coach.ts';
+import { shownCoach } from '#shared/coach.ts';
 import { createElement, onDomReady, queryAll, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { syncWhileParsing } from '#shared/frame.ts';
@@ -35,7 +35,7 @@ import { summaryMarkup } from './summary.ts';
 function addOverview(global: HTMLElement, data: Dashboard): void {
   const view = overview(data);
   const tips = coachTips(view);
-  const coachId = pickCoach();
+  const coachId = shownCoach();
   const replayHref =
     queryOne(global, 'a.puzzle-dashboard__metric--fix[href]', HTMLAnchorElement)?.getAttribute(
       'href',
@@ -52,7 +52,7 @@ function addAreas(box: HTMLElement, data: Dashboard, shown: Shown): void {
   const last = queryAll(box, ':scope > .puzzle-dashboard__theme', HTMLElement).at(-1);
   if (themes.length === 0 || !last) return giveUp();
   const kind = shown.view === 'strengths' ? 'strong' : 'weak';
-  const coachId = pickCoach();
+  const coachId = shownCoach();
   const section = createElement('section', {
     className: 'ln-ext-pdash ln-ext-pdash--areas',
     attrs: { 'data-ln-ext-areas': kind },
@@ -60,7 +60,8 @@ function addAreas(box: HTMLElement, data: Dashboard, shown: Shown): void {
   setHtml(section, areasMarkup(themes, kind, coachId));
   last.after(section);
   const mascot = queryOne(section, '.ln-ext-pdash__mascot', HTMLElement);
-  if (mascot) liveMascot(mascot, coachId, () => (kind === 'strong' ? 'happy' : 'doubt'));
+  if (mascot && coachId !== null)
+    liveMascot(mascot, coachId, () => (kind === 'strong' ? 'happy' : 'doubt'));
   markIn();
 }
 

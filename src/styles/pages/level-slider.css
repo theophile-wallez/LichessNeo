@@ -66,6 +66,11 @@
   cursor: pointer;
 }
 
+/* With no coach (coach-avatar.css), no robot either: the slider takes its room. */
+html[data-ln-ext-coach='none'] .ln-ext-level__robot {
+  display: none;
+}
+
 .ln-ext-level__robot[data-ln-ext-live] {
   background-image: none !important;
 }

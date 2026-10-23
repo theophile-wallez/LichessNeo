@@ -1,17 +1,18 @@
 import MentoringIcon from '@hugeicons/core-free-icons/MentoringIcon';
-import { chooseHomeCoach, CoachIdSchema, homeCoachChoice, pickCoach } from '#shared/coach.ts';
+import { chooseHomeCoach, type CoachPick, coachPick, homeCoachChoice } from '#shared/coach.ts';
 import { closestTo, createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
 import { message } from '#content/platform/runtime.ts';
 import { onCoachChosen } from '#content/bootstrap/coach-choice.ts';
-import { coachChoices } from '#content/coach/names.ts';
+import { coachChoices, pickIcon, tilePick } from '#content/coach/names.ts';
 
 // The settings' Home coach card, under the coach's on the Profile & coach page
 // (styles/pages/settings-coach.css): which coach stands in the home's hero
 // (content/pages/hero-coach.ts). It follows the coach every other page shows,
 // wearing its face, until the card is told to give the home one of its own:
-// then, and only then, the coaches' tiles come out.
+// then, and only then, the coaches' tiles come out, no coach and one at random
+// first.
 
 const FOLLOW = 'follow';
 const OWN = 'own';
@@ -56,7 +57,7 @@ function fillGrid(grid: HTMLElement): void {
 }
 
 /** The mode pressed, the tiles out only for a coach of the home's own, and that coach's tile. */
-function showChoice(card: HTMLElement, choice: number | null): void {
+function showChoice(card: HTMLElement, choice: CoachPick | null): void {
   for (const button of queryAll(card, MODE, HTMLElement))
     setPressed(button, (button.dataset.lnExtHomeCoach === OWN) === (choice !== null));
   const grid = queryOne(card, GRID, HTMLElement);
@@ -68,22 +69,26 @@ function showChoice(card: HTMLElement, choice: number | null): void {
     setPressed(tile, tile.dataset.lnExtCoachChoice === String(choice));
 }
 
-/** The following mode wears the coach it follows, as the card above or the review picks it. */
-function showFollowed(card: HTMLElement, coach: number): void {
+/**
+ * The following mode wears the pick it follows, as the card above or the review picks it:
+ * a coach's face, or the glyph of no coach or of one at random.
+ */
+function showFollowed(card: HTMLElement, pick: CoachPick): void {
   const face = queryOne(card, '.ln-ext-home-coach__face', HTMLElement);
-  if (face) setData(face, 'lnExtAvatarCoach', String(coach));
+  if (!face) return;
+  setData(face, 'lnExtAvatarCoach', typeof pick === 'number' ? String(pick) : null);
+  setHtml(face, typeof pick === 'number' ? html`` : pickIcon(pick));
 }
 
 /**
  * What a click asks of the card: null to follow the coach, a coach of the home's own, or
  * undefined for anything else. Turning to its own starts on the one it followed.
  */
-function asked(target: EventTarget | null, choice: number | null): number | null | undefined {
+function asked(target: EventTarget | null, choice: CoachPick | null): CoachPick | null | undefined {
   const mode = closestTo(target, MODE, HTMLElement)?.dataset.lnExtHomeCoach;
   if (mode === FOLLOW) return null;
-  if (mode === OWN) return choice ?? pickCoach();
-  const tile = closestTo(target, TILE, HTMLElement);
-  return CoachIdSchema.safeParse(tile?.dataset.lnExtCoachChoice).data;
+  if (mode === OWN) return choice ?? coachPick();
+  return tilePick(target) ?? undefined;
 }
 
 /** The card, kept in step with the coach picked for the other pages. */
@@ -100,7 +105,7 @@ export function buildHomeCoachCard(): HomeCoachCard {
     showChoice(card, next);
   });
   onCoachChosen(coach => showFollowed(card, coach));
-  showFollowed(card, pickCoach());
+  showFollowed(card, coachPick());
   showChoice(card, choice);
   return {
     element: card,
@@ -109,7 +114,7 @@ export function buildHomeCoachCard(): HomeCoachCard {
       visible = next;
       if (!visible) return;
       choice = homeCoachChoice();
-      showFollowed(card, pickCoach());
+      showFollowed(card, coachPick());
       showChoice(card, choice);
     },
   };

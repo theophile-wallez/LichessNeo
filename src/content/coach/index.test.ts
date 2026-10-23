@@ -39,6 +39,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals();
   localStorage.clear();
+  delete document.documentElement.dataset.lnExtCoach;
 });
 
 const isLive = (): boolean => document.querySelector('.ln-ext-coach__avatar--live') !== null;
@@ -57,6 +58,22 @@ describe('the coach', () => {
     expect(played).toEqual([{ coach: 12, mood: 'sad' }]);
     showCoach({ coach: 12, mood: 'happy', talking: false });
     expect(played).toEqual([{ coach: 12, mood: 'happy' }]);
+  });
+
+  it('plays no mascot, and takes the one playing away, while no coach is picked', async () => {
+    showCoach({ coach: 4, mood: 'happy', talking: false });
+    await flush();
+    drawn?.();
+    expect(isLive()).toBe(true);
+    document.documentElement.dataset.lnExtCoach = 'none';
+    showCoach({ coach: 4, mood: 'sad', talking: false });
+    expect(isLive()).toBe(false);
+    played.length = 0;
+    document.body.innerHTML =
+      '<button class="ln-ext-coach__avatar"><span class="ln-ext-coach__face"></span></button>';
+    showCoach({ coach: 4, mood: 'happy', talking: false });
+    await flush();
+    expect(played).toEqual([]);
   });
 
   it('stays its still while the settings keep the coaches still, and keeps them so', async () => {

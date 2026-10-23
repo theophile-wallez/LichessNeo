@@ -1,4 +1,3 @@
-import { homeCoach } from '#shared/coach.ts';
 import { setData } from '#shared/dom.ts';
 import { loadMascots } from '#content/coach/load.ts';
 
@@ -12,10 +11,9 @@ import { loadMascots } from '#content/coach/load.ts';
 const LIVE_CLASS = 'ln-ext-hero__coach--live';
 const STILL_CLASS = 'ln-ext-hero__coach--still';
 
-export async function mountHeroCoach(host: HTMLElement): Promise<void> {
+export async function mountHeroCoach(host: HTMLElement, coach: number): Promise<void> {
   const mountMascot = await loadMascots();
   if (!host.isConnected) return;
-  const coach = homeCoach();
   // Large on the page's right, it looks into the page.
   const mascot = mountMascot?.(host, { framing: 'full', facing: 'left' });
   if (!mascot) {

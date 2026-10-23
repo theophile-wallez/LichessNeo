@@ -173,6 +173,24 @@
     clip-path: inset(-60% -60% 0);
     mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
   }
+
+  /* With no coach (coach-avatar.css), the words and the buttons take the card. */
+  html[data-ln-ext-coach='none'] main.puzzle .puzzle__feedback {
+    min-height: 0;
+  }
+
+  html[data-ln-ext-coach='none'] main.puzzle .puzzle__feedback:not(.after) {
+    padding-left: 16px !important;
+  }
+
+  html[data-ln-ext-coach='none'] main.puzzle .puzzle__feedback.after {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'title' 'next' 'more';
+  }
+
+  html[data-ln-ext-coach='none'] main.puzzle .puzzle__feedback.after .complete {
+    min-height: 0;
+  }
 }
 
 @media (min-width: 1020px) and (max-width: 1259.29px) {

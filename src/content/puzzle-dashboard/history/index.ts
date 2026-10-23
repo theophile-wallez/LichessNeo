@@ -1,4 +1,4 @@
-import { pickCoach } from '#shared/coach.ts';
+import { shownCoach } from '#shared/coach.ts';
 import { createElement, isParsing, onDomReady, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { html, setHtml } from '#shared/html.ts';
@@ -36,7 +36,7 @@ function addHead(box: HTMLElement, week: Week | null): void {
   const now = new Date();
   const sessions = readSessions(box);
   const retry = toRetry(sessions);
-  const coachId = pickCoach();
+  const coachId = shownCoach();
   const word =
     week &&
     coachWord(
@@ -53,7 +53,7 @@ function addHead(box: HTMLElement, week: Week | null): void {
   if (!head.firstElementChild) return;
   title.after(head);
   const mascot = queryOne(head, '.ln-ext-pdash__mascot', HTMLElement);
-  if (mascot && word) liveMascot(mascot, coachId, () => word.mood);
+  if (mascot && word && coachId !== null) liveMascot(mascot, coachId, () => word.mood);
 }
 
 function start(): void {

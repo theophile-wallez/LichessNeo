@@ -1,3 +1,4 @@
+import { homeCoach } from '#shared/coach.ts';
 import { createElement, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { syncWhileParsing } from '#shared/frame.ts';
@@ -18,7 +19,6 @@ function buildHero(text: HeroText, user: string | undefined): HTMLElement {
       text: user ? text.greeting(user) : text.title,
     }),
     createElement('p', { className: 'ln-ext-hero__sub', text: text.sub }),
-    createElement('div', { className: 'ln-ext-hero__coach', attrs: { 'aria-hidden': 'true' } }),
   );
   return hero;
 }
@@ -34,8 +34,15 @@ export function addHero(text: HeroText): void {
   if (!main || main.querySelector(':scope > .ln-ext-hero')) return;
   const hero = buildHero(text, userName());
   main.prepend(hero);
-  const coach = hero.querySelector('.ln-ext-hero__coach');
-  if (coach instanceof HTMLElement) void mountHeroCoach(coach);
+  // With no coach, the hero has none: its title alone.
+  const coach = homeCoach();
+  if (coach === null) return;
+  const host = createElement('div', {
+    className: 'ln-ext-hero__coach',
+    attrs: { 'aria-hidden': 'true' },
+  });
+  hero.append(host);
+  void mountHeroCoach(host, coach);
 }
 
 export const homeHero: Feature = {

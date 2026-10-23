@@ -1,5 +1,5 @@
 import { DEV_BUILD } from '#shared/build-mode.ts';
-import { pickCoach } from '#shared/coach.ts';
+import { speakingCoach } from '#shared/coach.ts';
 import { isParsing, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { gameIdFrom } from '#shared/game-path.ts';
@@ -89,7 +89,7 @@ export async function onGameEnd(game: PlayedGame, main: HTMLElement): Promise<vo
     main,
     outcome,
     texts,
-    coachId: pickCoach(),
+    coachId: speakingCoach(),
     opponent: opponentName(main, game.color, texts.anonymous),
     live: game.live,
     mate: outcome.reason === 'mate' ? finalMate(finished) : null,

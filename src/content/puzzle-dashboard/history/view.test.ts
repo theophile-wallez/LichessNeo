@@ -22,8 +22,8 @@ afterEach(() => {
 
 const NOW = new Date(2026, 9, 12, 12);
 
-function hero(week: Week): HTMLElement {
-  setHtml(document.body, heroMarkup(week, coachWord(week, null, NOW), 3));
+function hero(week: Week, coachId: number | null = 3): HTMLElement {
+  setHtml(document.body, heroMarkup(week, coachWord(week, null, NOW), coachId));
   const section = queryOne(document, '.ln-ext-phist__hero', HTMLElement);
   if (!section) throw new Error('no hero');
   return section;
@@ -47,6 +47,12 @@ describe('the week over the history', () => {
     expect(section.querySelector('p')?.textContent).toBe('phistSharp phistMissedMany:2');
     const mascot = queryOne(section, '.ln-ext-pdash__mascot', HTMLElement);
     expect(mascot?.dataset.lnExtAvatarCoach).toBe('3');
+  });
+
+  it('has no mascot with no coach', () => {
+    const section = hero({ puzzles: 8, firstWins: 6, toReplay: 2 }, null);
+    expect(queryOne(section, '.ln-ext-pdash__mascot', HTMLElement)).toBeNull();
+    expect(section.querySelector('p')?.textContent).toBe('phistSharp phistMissedMany:2');
   });
 
   it('leads to the week’s replay while some are left, else to more puzzles', () => {

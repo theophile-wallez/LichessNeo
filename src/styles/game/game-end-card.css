@@ -132,6 +132,12 @@ main.round .rcontrols .follow-up > .ln-ext-end__card {
     );
 }
 
+/* With no coach (coach-avatar.css), the words take its place. */
+html[data-ln-ext-coach='none'] .ln-ext-end__glow {
+  min-height: 0;
+  padding-inline-start: 18px;
+}
+
 .ln-ext-end__card .ln-ext-coach__avatar {
   align-self: flex-end;
   cursor: default;

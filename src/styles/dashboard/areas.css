@@ -293,3 +293,22 @@
     display: none;
   }
 }
+
+/* With no coach (coach-avatar.css), the theme takes the mascot's column. */
+html[data-ln-ext-coach='none'] .ln-ext-pdash__hero {
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding-left: 24px;
+}
+
+@container (max-width: 760px) {
+  html[data-ln-ext-coach='none'] .ln-ext-pdash__hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@container (max-width: 520px) {
+  html[data-ln-ext-coach='none'] .ln-ext-pdash__hero {
+    grid-template-areas: 'tag' 'name' 'text' 'facts' 'acts';
+    padding-left: 14px;
+  }
+}

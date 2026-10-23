@@ -1,6 +1,6 @@
 import { opposite, type Color } from '#shared/chess/types.ts';
 import { wrapOrientation } from '#shared/chessground.ts';
-import { pickCoach } from '#shared/coach.ts';
+import { speakingCoach } from '#shared/coach.ts';
 import { queryOne } from '#shared/dom.ts';
 import { gameIdFrom } from '#shared/game-path.ts';
 import { opponentName } from './board.ts';
@@ -87,7 +87,7 @@ function show({ main, player }: Board, { outcome, mate }: End): void {
     main,
     outcome,
     texts,
-    coachId: pickCoach(),
+    coachId: speakingCoach(),
     opponent: opponentName(main, player, texts.anonymous),
     live: true,
     mate,

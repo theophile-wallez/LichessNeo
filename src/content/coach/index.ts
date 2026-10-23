@@ -1,4 +1,4 @@
-import { keepCoachOptions } from '#shared/coach.ts';
+import { keepCoachOptions, shownCoach } from '#shared/coach.ts';
 import { queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onCoachState, type CoachState } from '#shared/protocol.ts';
@@ -60,6 +60,8 @@ function reveal(mascot: MascotView | null): void {
 }
 
 function sync(): void {
+  // With no coach, the stylesheet hides the avatar (coach-avatar.css): no mascot to play.
+  if (shownCoach() === null) return unmount();
   const avatar = queryOne(document, '.ln-ext-coach__avatar', HTMLElement);
   if (!avatar) return;
   if (live?.avatar === avatar) {

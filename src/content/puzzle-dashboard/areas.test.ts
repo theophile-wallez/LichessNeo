@@ -108,6 +108,13 @@ describe('the areas’ page', () => {
     expect(text(hero, '.ln-ext-pdash__again')).toBe('pdashReplayCount:3');
   });
 
+  it('leaves the mascot out of the first theme’s card with no coach', () => {
+    setHtml(document.body, areasMarkup(readAreas(page(SACRIFICE), DASHBOARD), 'weak', null));
+    const hero = queryOne(document.body, '.ln-ext-pdash__hero', HTMLElement);
+    expect(hero && text(hero, 'h2')).toBe('Sacrifice');
+    expect(queryOne(document.body, '.ln-ext-pdash__mascot', HTMLElement)).toBeNull();
+  });
+
   it('lists the others under it, each with its gap, its level and its links', () => {
     const body = drawn('weak', SACRIFICE, FORK, ENDGAME);
     const rows = queryAll(body, '.ln-ext-pdash__area', HTMLElement);

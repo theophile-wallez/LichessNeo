@@ -56,4 +56,17 @@ describe('home hero', () => {
     await flush();
     expect(stillCoach()).toBe('8');
   });
+
+  it.each([
+    ['the home’s own pick', '3', 'none'],
+    ['the pick the home follows', 'none', null],
+  ])('has no coach when %s is none', async (_pick, coach, home) => {
+    localStorage.setItem('ln-ext-coach', coach);
+    if (home !== null) localStorage.setItem('ln-ext-home-coach', home);
+    document.body.innerHTML = '<main class="lobby"></main>';
+    addHero(heroText('en'));
+    await flush();
+    expect(document.querySelector('.ln-ext-hero__title')).not.toBeNull();
+    expect(document.querySelector('.ln-ext-hero__coach')).toBeNull();
+  });
 });

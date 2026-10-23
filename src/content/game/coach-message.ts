@@ -1,4 +1,4 @@
-import { pickCoach } from '#shared/coach.ts';
+import { shownCoach } from '#shared/coach.ts';
 import { queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
@@ -9,7 +9,8 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // (styles/game/coach-message.css), or by the computer's robot in a game against
 // it. The stylesheet shows its still at once; the live one, built once the
 // page is idle, takes its place when first drawn (`data-ln-ext-live`). The
-// message goes with the first move, and the mascot with it.
+// message goes with the first move, and the mascot with it. With no coach, the
+// robot doesn't show either: the card holds Lichess's words alone.
 
 const spot = new MascotSpot({
   className: 'ln-ext-message-coach',
@@ -18,17 +19,17 @@ const spot = new MascotSpot({
   whenIdle: true,
   onDrawn: message => setData(message, 'lnExtLive', ''),
 });
-let coach: number | null = null;
+let coach: number | null | undefined;
 
 function sync(): void {
   const message = queryOne(document, 'main.round .round__app .message', HTMLElement);
-  if (!message) {
+  if (coach === undefined && message) coach = shownCoach();
+  if (!message || coach === null || coach === undefined) {
     spot.sync(null, 'neutral', { coach: 1 });
     return;
   }
   // Set by ai-players.ts in a game against the computer.
   const level = Number(document.documentElement.dataset.lnExtAiLevel ?? 0);
-  coach ??= pickCoach();
   // Neutral, as its still: a happy mascot hops.
   spot.sync(message, 'neutral', level > 0 ? { computer: level } : { coach });
 }

@@ -167,6 +167,18 @@
   "coachPickHello": {
     "message": "Salut, moi c’est $1 ! Progressons ensemble aux échecs."
   },
+  "coachNone": {
+    "message": "Aucun"
+  },
+  "coachRandom": {
+    "message": "Au hasard"
+  },
+  "coachPickNone": {
+    "message": "Ni coach ni robot : les conseils restent, sans personne pour les dire."
+  },
+  "coachPickRandom": {
+    "message": "Un nouveau coach à chaque page ! Ici, c’est $1."
+  },
   "homeCoachTitle": {
     "message": "Le coach de l’accueil"
   },

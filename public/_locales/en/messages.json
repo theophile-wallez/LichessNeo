@@ -219,6 +219,22 @@
     "message": "Hi, I'm $1! Let's get better at chess together.",
     "description": "The picked coach's hello in the settings; $1 is its name."
   },
+  "coachNone": {
+    "message": "None",
+    "description": "The coach tile that turns the coaches off: no coach anywhere, nor the computer's robot."
+  },
+  "coachRandom": {
+    "message": "Random",
+    "description": "The coach tile that shows a coach at random on each page."
+  },
+  "coachPickNone": {
+    "message": "No coach, no robot: the tips stay, with no one to say them.",
+    "description": "The settings' stage with no coach picked."
+  },
+  "coachPickRandom": {
+    "message": "A new coach on every page! Here, it's $1.",
+    "description": "The settings' stage with a coach at random; $1 is the name of this page's."
+  },
   "homeCoachTitle": {
     "message": "The home's coach",
     "description": "The title of the settings' card for the coach standing in the home page's hero."

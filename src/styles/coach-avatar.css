@@ -19,6 +19,12 @@
   transition: transform 0.15s !important;
 }
 
+/* With no coach (the settings' pick, on <html>: content/bootstrap/coach-choice.ts), each place
+   goes without one, its words taking the room it left (each place's stylesheet). */
+html[data-ln-ext-coach='none'] .ln-ext-coach__avatar {
+  display: none !important;
+}
+
 .ln-ext-coach__avatar:hover {
   transform: scale(1.04);
 }

@@ -85,6 +85,15 @@
   clip-path: inset(0);
 }
 
+/* With no coach, the stage says so alone (content/settings/coach-card.ts). */
+.ln-ext-coach-pick__mascot[hidden] {
+  display: none;
+}
+
+html[data-ln-ext-coach='none'] .ln-ext-coach-pick__stage {
+  padding-left: 22px;
+}
+
 /* Its words on the stage itself, beside it, as on the review's coach card
  * (review/bubble.css): no bubble, no tail. */
 .ln-ext-coach-pick__bubble {
@@ -113,7 +122,8 @@
 
 /* ---- The coaches --- */
 
-/* Two rows of seven, the animals over the robot and the other shapes, else rows of four. */
+/* Rows of seven, no coach and one at random first, then the animals, the robot and the other
+ * shapes; else rows of four. */
 .ln-ext-coach-pick__grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -179,6 +189,23 @@
     var(--ln-ext-avatar-coach) center bottom / 138% auto no-repeat,
     color-mix(in srgb, var(--ln-ext-coach-color) 22%, transparent);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* No coach and one at random: a glyph in their color on its tile. */
+.ln-ext-coach-choice__face--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: color-mix(in srgb, var(--ln-ext-coach-color) 80%, var(--ln-ext-text-strong));
+  font-size: 34px;
+}
+
+.ln-ext-coach-choice[data-ln-ext-coach-choice='none'] {
+  --ln-ext-coach-color: var(--ln-ext-text-dim);
+}
+
+.ln-ext-coach-choice[data-ln-ext-coach-choice='random'] {
+  --ln-ext-coach-color: var(--ln-ext-accent);
 }
 
 .ln-ext-coach-choice:hover .ln-ext-coach-choice__face {

@@ -76,6 +76,16 @@ describe('the Learn coach', () => {
     expect(avatar?.classList.contains('ln-ext-coach__avatar--react')).toBe(true);
   });
 
+  it('says the goal with no coach to play when none is picked', () => {
+    document.documentElement.dataset.lnExtCoach = 'none';
+    waitForWords('Grab the star!');
+    const coach = panel().querySelector('.ln-ext-learn-coach');
+    expect(words()).toBe('Grab the star!');
+    expect(avatarOf(coach)?.dataset.lnExtCoachId).toBeUndefined();
+    expect(showCoach).not.toHaveBeenCalled();
+    document.documentElement.dataset.lnExtCoach = '3';
+  });
+
   it('stays off the other pages', () => {
     document.body.innerHTML = '<div class="learn__table"><div class="goal">Hi</div></div>';
     vi.advanceTimersByTime(TICK_MS * 2);

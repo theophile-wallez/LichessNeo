@@ -1,6 +1,6 @@
+import { shownCoach } from '#shared/coach.ts';
 import { createElement, queryOne, setData } from '#shared/dom.ts';
 import { createOwnedElement } from '#shared/owned-element.ts';
-import { chosenCoach } from '#content/coach/chosen.ts';
 import { showCoach } from '#content/coach/index.ts';
 import { puzzleMood, readStep } from './mood.ts';
 
@@ -36,8 +36,8 @@ export function syncPuzzleCoach(): void {
     ) !== null;
   const mood = puzzleMood(step, solved);
   if (!isNew && avatar.dataset.lnExtMood === mood) return;
-  const coach = chosenCoach();
-  setData(avatar, 'lnExtCoachId', String(coach));
+  const coach = shownCoach();
+  setData(avatar, 'lnExtCoachId', coach === null ? null : String(coach));
   setData(avatar, 'lnExtMood', mood);
   if (!isNew) {
     avatar.classList.toggle(REACT, false);
@@ -45,5 +45,5 @@ export function syncPuzzleCoach(): void {
     void avatar.offsetWidth;
     avatar.classList.toggle(REACT, true);
   }
-  showCoach({ coach, mood, talking: false });
+  if (coach !== null) showCoach({ coach, mood, talking: false });
 }

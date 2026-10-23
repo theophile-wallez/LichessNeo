@@ -130,6 +130,16 @@ html[data-ln-ext-ai] main.round .round__app .message::before {
   background-image: var(--ln-ext-computer-portrait);
 }
 
+/* With no coach (coach-avatar.css), nor the computer's robot: the card holds its words alone. */
+html[data-ln-ext-coach='none'] main.round .round__app .message {
+  height: auto;
+  padding: 14px 18px !important;
+}
+
+html[data-ln-ext-coach='none'] main.round .round__app .message::before {
+  display: none !important;
+}
+
 main.round .round__app .message[data-ln-ext-live]::before {
   background-image: none !important;
 }

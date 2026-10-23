@@ -1,6 +1,7 @@
 import { html, type SafeHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import { number } from '#content/puzzle-dashboard/format.ts';
+import { mascotMarkup } from '#content/puzzle-dashboard/mascot.ts';
 import { boardMarkup } from './board.ts';
 import type { Week, Word } from './coach-word.ts';
 import type { Round } from './read.ts';
@@ -30,10 +31,10 @@ function acts(week: Week): SafeHtml {
     <a class="ln-ext-phist__go" href="${TRAIN_HREF}">${keepGoing}</a>`;
 }
 
-export function heroMarkup(week: Week, word: Word, coachId: number): SafeHtml {
+export function heroMarkup(week: Week, word: Word, coachId: number | null): SafeHtml {
   const share = week.puzzles === 0 ? 0 : week.firstWins / week.puzzles;
   return html`<section class="ln-ext-phist__hero" data-ln-ext-tier="${word.tier}">
-    <span class="ln-ext-pdash__mascot" data-ln-ext-avatar-coach="${coachId}"></span>
+    ${mascotMarkup(coachId)}
     <div class="ln-ext-phist__week">
       <small>${message('phistKicker')}</small>
       <div class="ln-ext-phist__big">

@@ -1,9 +1,8 @@
-import type { CoachMood } from '#shared/coach.ts';
+import { type CoachMood, shownCoach } from '#shared/coach.ts';
 import { createVoice, type Voice } from '#shared/coach-voice.ts';
 import { createElement, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { createOwnedElement } from '#shared/owned-element.ts';
-import { chosenCoach } from '#content/coach/chosen.ts';
 import { showCoach } from '#content/coach/index.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { readSaying } from './saying.ts';
@@ -36,12 +35,12 @@ function build(): LearnCoach {
   const bubble = createElement('div', { className: 'ln-ext-bubble' });
   bubble.append(words);
   root.append(avatar, bubble);
-  const coach = chosenCoach();
-  setData(avatar, 'lnExtCoachId', String(coach));
+  const coach = shownCoach();
+  setData(avatar, 'lnExtCoachId', coach === null ? null : String(coach));
   setData(avatar, 'lnExtMood', 'neutral');
   const talk = (mood: CoachMood, talking: boolean): void => {
     setData(avatar, 'lnExtMood', mood);
-    showCoach({ coach, mood, talking });
+    if (coach !== null) showCoach({ coach, mood, talking });
   };
   const voice = createVoice(words, { talk, emptyClass: 'ln-ext-bubble__title--empty' });
   return { root, avatar, voice, said: '' };

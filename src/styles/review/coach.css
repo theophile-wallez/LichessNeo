@@ -15,6 +15,28 @@
   box-sizing: border-box;
 }
 
+/* With no coach (coach-avatar.css), the remark takes the card, the move's time before it. */
+html[data-ln-ext-coach='none'] #ln-ext-review .ln-ext-coach {
+  /* No room over a head for its hops: a one-line title over a two-line remark, the longer
+     ones scrolling under the verdict as they do beside the coach. */
+  height: 96px;
+  min-height: 0;
+  padding-left: 16px;
+}
+
+/* Below 1020px the card grows to its words (layout-narrow.css). */
+@media (max-width: 1019.98px) {
+  html[data-ln-ext-coach='none'] #ln-ext-review .ln-ext-coach {
+    height: auto;
+  }
+}
+
+html[data-ln-ext-coach='none'] #ln-ext-review .ln-ext-coach > .ln-ext-tag--time {
+  position: static;
+  flex: none;
+  align-self: center;
+}
+
 /* Narrow panels wrap the bubble: a smaller coach gives it room, so two-line titles
    still clear the nav. */
 @container ln-ext-review (max-width: 440px) {

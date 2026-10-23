@@ -170,6 +170,27 @@
     grid-area: toggle;
   }
 
+  /* With no coach (coach-avatar.css), the goal takes the card, as words of no one's. */
+  html[data-ln-ext-coach='none'][data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
+    main.analyse
+    .analyse__underboard {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'say' 'toggle';
+    padding-left: 14px;
+  }
+
+  html[data-ln-ext-coach='none'] main.analyse .analyse__underboard::before,
+  html[data-ln-ext-coach='none'] main.analyse .analyse__underboard .feedback::before {
+    display: none;
+  }
+
+  html[data-ln-ext-coach='none'][data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
+    main.analyse
+    .analyse__underboard
+    .feedback {
+    min-height: 0;
+  }
+
   main.analyse .analyse__underboard .feedback .goal {
     display: flex;
     gap: 8px;
