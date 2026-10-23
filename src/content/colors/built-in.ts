@@ -16,8 +16,8 @@ export const BUILT_IN_THEMES: readonly BuiltInTheme[] = [
   {
     id: 'lichess',
     message: 'themeLichess',
-    light: { hue: 70, chroma: 0.008, accent: '#1b78d0' },
-    dark: { hue: 75, chroma: 0.008, accent: '#3692e7' },
+    light: { hue: 70, chroma: 0.008, accent: '#d64f00' },
+    dark: { hue: 75, chroma: 0.008, accent: '#d64f00' },
   },
   {
     id: 'ocean',

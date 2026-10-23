@@ -28,7 +28,7 @@ describe('the two-tone boards', () => {
     expect(PRESET_BOARDS).toHaveLength(BUILT_IN_THEMES.length);
     expect(PRESET_BOARDS.slice(0, 3)).toEqual([
       { id: 'tone-neo', name: 'Neo', light: '#f7f8f8', dark: '#5e6ad2' },
-      { id: 'tone-lichess', name: 'Lichess', light: '#f7f8f8', dark: '#3692e7' },
+      { id: 'tone-lichess', name: 'Lichess', light: '#f7f8f8', dark: '#d64f00' },
       { id: 'tone-ocean', name: 'Ocean', light: '#f7f8f8', dark: '#2f9bea' },
     ]);
   });
