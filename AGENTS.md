@@ -132,8 +132,9 @@ must be short. A change goes in two steps.
    tests of what changed since `origin/main`: seconds, not a minute) and fix
    what it finds, then `pnpm preview --thread <id>`: it builds into the main
    checkout's `dist/chrome`, which Chrome reloads when a Lichess tab next
-   gets focus. Chrome shows one draft at a time: take your turn at it first
-   (see [Sessions side by side](#sessions-side-by-side)). Tell the user what
+   gets focus. Rebase onto `origin/main` before each preview, and take your
+   turn at it: Chrome shows one draft at a time (see
+   [Sessions side by side](#sessions-side-by-side)). Tell the user what
    to look at, and iterate on their feedback. Commit nothing yet.
 2. **Finish, once the user says it's good** (or asks to ship). Write the
    tests, then meet the [Definition of done](#definition-of-done) and ship.
@@ -156,9 +157,15 @@ gives this session's id (`currentThreadId`) and the others', `t3_thread_read`
 a session's worktree and where it stands, `t3_thread_send` a message to it.
 Pass your id as `--thread <id>`, so the others know whom to tell.
 
-**Before a preview.** `pnpm preview` doesn't replace another session's
-draft: it names that session and stops. The user may be judging that draft,
-so:
+**Before a preview.** Sessions ship side by side, so `main` moves under a
+draft: rebase onto it each time (`git fetch origin && git rebase --autostash
+origin/main`), or the preview would undo in Chrome what the others shipped.
+`pnpm preview` refuses a worktree behind `origin/main`. If putting the draft
+back conflicts, git leaves it in the stash list every worktree shares: apply
+it by its SHA, never with a bare `git stash pop`.
+
+Nor does `pnpm preview` replace another session's draft: it names that
+session and stops. The user may be judging that draft, so:
 
 - if that session is running, tell it (`t3_thread_send`) that Chrome won't
   show its draft any more and that it must preview again before asking the

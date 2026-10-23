@@ -4,18 +4,27 @@
 //   node scripts/preview.ts [--thread <T3 thread id>] [--take]
 //
 // It never replaces another worktree's draft unasked: it names that worktree
-// and stops, for its session to be told first, then --take replaces it.
+// and stops, for its session to be told first, then --take replaces it. Nor
+// does it build a worktree behind origin/main, which would undo in Chrome what
+// other sessions shipped.
 
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 import { describeClaim, isFree, readClaim, takeTurn } from './lib/claims.ts';
 import { fromRoot } from './lib/paths.ts';
-import { claimantHere, turnsDir } from './lib/worktree.ts';
+import { claimantHere, commitsBehindMain, turnsDir } from './lib/worktree.ts';
 
 const { values } = parseArgs({
   options: { thread: { type: 'string' }, take: { type: 'boolean', default: false } },
 });
+
+const behind = commitsBehindMain();
+if (behind > 0) {
+  console.error(`origin/main has ${behind} commits this worktree lacks: other sessions shipped.`);
+  console.error('Rebase onto it first: git rebase --autostash origin/main.');
+  process.exit(1);
+}
 
 const dir = turnsDir();
 const claimant = claimantHere(values.thread);

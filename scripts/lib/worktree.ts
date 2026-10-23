@@ -4,8 +4,20 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import type { Claimant } from './claims.ts';
 
-const git = (...args: string[]): string =>
-  execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+const gitIn = (cwd: string, ...args: string[]): string =>
+  execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+
+const git = (...args: string[]): string => gitIn(process.cwd(), ...args);
+
+/** How many commits of origin/main the checkout at `cwd` lacks, once fetched. */
+export function commitsBehindMain(cwd = process.cwd()): number {
+  try {
+    gitIn(cwd, 'fetch', '--quiet', 'origin', 'main');
+  } catch {
+    // Offline: as of the last fetch.
+  }
+  return Number(gitIn(cwd, 'rev-list', '--count', 'HEAD..origin/main'));
+}
 
 /** The folder of turns, in the git folder every worktree shares. */
 export const turnsDir = (): string =>
