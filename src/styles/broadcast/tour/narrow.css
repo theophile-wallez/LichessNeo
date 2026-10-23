@@ -1,0 +1,185 @@
+/* A broadcast's page below 1020px: one column, the round's games and chat under the content,
+ * and the page scrolls as a whole (Lichess's top bar would cover a pinned title). On phones
+ * the event's banner goes above its pickers. */
+
+@media (max-width: 1019.98px) {
+  main.analyse.is-relay.has-relay-tour {
+    display: flex !important;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0 !important;
+    padding: 0 12px 24px;
+  }
+
+  /* Lichess's order too: the event, then its games and chat. */
+  main.analyse.has-relay-tour .relay-tour {
+    --ln-ext-tour-pad: 16px;
+    order: -1;
+  }
+
+  main.analyse.has-relay-tour .relay-tour h1 {
+    height: auto;
+    padding-block: 12px !important;
+    font-size: 22px !important;
+    line-height: 1.25 !important;
+    white-space: normal;
+  }
+
+  main.analyse.has-relay-tour > .relay-tour__side {
+    max-height: 80dvh;
+  }
+
+  main.analyse.has-relay-tour > .relay-tour__side .relay-games {
+    flex: 0 1 auto;
+    max-height: 40dvh;
+  }
+
+  main.analyse.has-relay-tour > .relay-tour__side .mchat {
+    min-height: 280px;
+  }
+
+  /* Wide tables scroll on their own rather than the page sideways. */
+  main.analyse.has-relay-tour :is(.relay-tour__players, .relay-tour__team-summary__roster) {
+    overflow-x: auto !important;
+  }
+}
+
+@media (max-width: 799.98px) {
+  main.analyse.is-relay.has-relay-tour {
+    padding-inline: 8px;
+  }
+
+  main.analyse.has-relay-tour .relay-tour::before {
+    grid-row: 2 / span 3;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__header__image {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    width: auto;
+    margin: var(--ln-ext-tour-pad) var(--ln-ext-tour-pad) 0;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__header__image.video {
+    width: auto;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__header__selectors,
+  main.analyse.has-relay-tour
+    .relay-tour:not(:has(> .relay-tour__info))
+    .relay-tour__header__selectors {
+    grid-row: 3;
+    grid-column: 1 / -1;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__mselect {
+    flex: 1 1 100%;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__info {
+    grid-row: 4;
+    grid-column: 1 / -1;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__nav {
+    padding-top: 12px;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__tabs {
+    flex: 1 1 100%;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__tabs > :is(button, a) {
+    flex: 1 0 auto;
+    padding: 0 12px !important;
+  }
+
+  main.analyse.has-relay-tour .study__multiboard .now-playing {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px;
+  }
+
+  main.analyse.has-relay-tour .study__multiboard .now-playing > a {
+    padding: 8px !important;
+  }
+
+  main.analyse.has-relay-tour .now-playing .mini-game__user .rating {
+    display: none;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__players__table :is(thead th, tbody td) {
+    padding: 8px 6px !important;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__players__table td.pin {
+    width: 26px !important;
+    padding-inline: 4px 0 !important;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__players__table td.pin button {
+    width: 26px;
+  }
+
+  /* The rating's change under the rating, and the names cut short: the row fits the screen. */
+  main.analyse.has-relay-tour .relay-tour__players__table .diff {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  /* The player's column takes what the others leave, its names cut short. */
+  main.analyse.has-relay-tour .relay-tour__players__table td.player-intro-td {
+    width: 100%;
+    max-width: 0;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__players__table .player-intro__info {
+    min-width: 0;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__players__table thead th {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+
+  main.analyse.has-relay-tour
+    .relay-tour__team-match__game
+    > .relay-tour__team-match__game__player {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 8px 10px !important;
+  }
+
+  main.analyse.has-relay-tour
+    .relay-tour__team-match__game
+    > .relay-tour__team-match__game__status {
+    flex: 0 0 44px;
+    padding: 0 !important;
+  }
+
+  main.analyse.has-relay-tour .fide-player__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  main.analyse.has-relay-tour .fide-player__header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  /* The games played: the standings keep the rank, the player, the rating and the score. */
+  main.analyse.has-relay-tour .relay-tour__players__table :is(th, td):last-child {
+    display: none;
+  }
+
+  main.analyse.has-relay-tour .relay-tour__players__table tbody td:nth-last-child(2) {
+    border-start-end-radius: 12px;
+    border-end-end-radius: 12px;
+  }
+
+  main.analyse.has-relay-tour .relay-tour .player-intro__photo {
+    display: none;
+  }
+}

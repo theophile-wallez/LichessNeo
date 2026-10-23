@@ -75,6 +75,11 @@ describe('the panel’s outline', () => {
     expect(style.marginLeft).toBe('24px');
   });
 
+  // It drew a stray line over a broadcast's side, which is a card of its own.
+  it('leaves a broadcast’s own page alone: it has no board, nor panel', () => {
+    expect(outline({ main: 'analyse is-relay has-relay-tour' }).content).not.toBe("''");
+  });
+
   it('outlines the puzzle’s panel only once it stands right of the board', () => {
     expect(outline({ main: 'puzzle', width: 1280 }).gridColumn).toBe('side');
     document.head.innerHTML = '';

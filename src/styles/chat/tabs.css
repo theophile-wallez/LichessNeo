@@ -46,3 +46,29 @@
 .mchat .mchat__tabs[data-ln-ext-tabs] .mchat__tab-active {
   background: transparent !important;
 }
+
+/* A chat with one tab (a broadcast's) has nothing to pick: the tab is the chat's title, its
+ * switch at the end, not a segmented control. */
+.mchat .mchat__tabs.nb_1 {
+  margin: 0;
+  padding: 10px 12px 10px 16px;
+  border-bottom: 1px solid var(--ln-ext-border) !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.mchat .mchat__tabs.nb_1::before {
+  display: none;
+}
+
+.mchat .mchat__tabs.nb_1 .mchat__tab {
+  justify-content: space-between;
+  height: auto;
+  padding: 0 !important;
+  background: transparent !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 14px;
+  font-weight: 800 !important;
+  cursor: default;
+}

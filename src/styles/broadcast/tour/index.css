@@ -1,0 +1,11 @@
+@import './layout.css';
+@import './header.css';
+@import './tabs.css';
+@import './overview.css';
+@import './boards.css';
+@import './players.css';
+@import './player.css';
+@import './teams.css';
+@import './side.css';
+/* Last: it rearranges the parts above below 1020px. */
+@import './narrow.css';

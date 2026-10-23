@@ -12,4 +12,13 @@ for the whole repo are in the root's [AGENTS.md](../../../AGENTS.md).
   definite height: `1fr` in a content-sized container just grows.
 - **A `main.analyse` without a board.** A broadcast's page is
   `main.analyse.is-relay.has-relay-tour`: the analysis layout must leave it
-  alone (`styles/broadcast`).
+  alone (`styles/broadcast/tour`). It carries the `analyse` flag, whose
+  rules keep `#main-wrap` from scrolling and outline a panel it doesn't have:
+  undo them there, or exclude it.
+- **A broadcast's pickers.** Lichess unsets the round and tour pickers'
+  `position`, so their menu hangs from both pickers' box; and the round's
+  puts its click-away mask in `<body>`, over `#main-wrap`, whose stacking
+  holds the menu (`dropdowns/mselect.css` keeps it see-through).
+- **A broadcast's side sticks inside `main`.** The games and chat are a
+  sticky column: room at the page's end must be the tour's padding, not
+  `main`'s, or it pushes the column up as the page reaches its end.

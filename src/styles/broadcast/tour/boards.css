@@ -1,0 +1,229 @@
+/* A broadcast's boards: a toolbar (pages, how many, a team, what to show), then a card per
+ * game, its players above and below a rounded board with the eval bar at its side. */
+
+/* ---- Toolbar --- */
+
+main.analyse.has-relay-tour .study__multiboard {
+  padding: 0 !important;
+}
+
+main.analyse.has-relay-tour .study__multiboard__top {
+  align-items: center;
+  gap: 10px 20px !important;
+  margin-bottom: 14px;
+  padding: 10px 14px !important;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px;
+  background: var(--ln-ext-bg-panel);
+}
+
+main.analyse.has-relay-tour .study__multiboard__pager {
+  gap: 4px;
+}
+
+main.analyse.has-relay-tour .study__multiboard__pager .fbt {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  color: var(--ln-ext-text) !important;
+  font-size: 16px;
+}
+
+main.analyse.has-relay-tour .study__multiboard__pager .fbt:hover:not(.disabled, [disabled]) {
+  background: var(--ln-ext-lift-6) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.analyse.has-relay-tour .study__multiboard__pager :is(.fbt.disabled, .fbt[disabled]) {
+  opacity: 0.35;
+}
+
+main.analyse.has-relay-tour .study__multiboard__pager .page {
+  min-width: 64px;
+  margin: 0 6px !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+main.analyse.has-relay-tour .study__multiboard__pager select {
+  height: 36px;
+  margin-inline: 8px 0 !important;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+main.analyse.has-relay-tour .study__multiboard__options {
+  gap: 8px 18px !important;
+}
+
+main.analyse.has-relay-tour .study__multiboard__options .cmn-toggle-wrap {
+  gap: 8px !important;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px !important;
+  font-weight: 700;
+}
+
+main.analyse.has-relay-tour .study__multiboard__options .cmn-toggle {
+  transform: none !important;
+}
+
+main.analyse.has-relay-tour .study__multiboard .empty-boards-note {
+  margin: 0 0 14px;
+  color: var(--ln-ext-text-dim);
+}
+
+main.analyse.has-relay-tour .study__multiboard .go-to-pinned {
+  margin: 18px 0 0 !important;
+  font-weight: 700;
+}
+
+/* ---- Games --- */
+
+main.analyse.has-relay-tour .study__multiboard .now-playing {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)) !important;
+  gap: 14px;
+}
+
+main.analyse.has-relay-tour .study__multiboard .now-playing > a {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 12px !important;
+  background: var(--ln-ext-bg-panel) !important;
+  color: var(--ln-ext-text) !important;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    box-shadow 0.15s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+main.analyse.has-relay-tour .study__multiboard .now-playing > a:hover {
+  border-color: var(--ln-ext-card-border-hover) !important;
+  background: var(--ln-ext-card-hover) !important;
+  box-shadow: var(--ln-ext-card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* The game open in the side list: the accent's edge. */
+main.analyse.has-relay-tour .study__multiboard .now-playing > a.active {
+  border-color: color-mix(in srgb, var(--ln-ext-accent) 70%, transparent) !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
+}
+
+main.analyse.has-relay-tour .now-playing .mini-game__player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0 2px !important;
+  font-size: 13px;
+}
+
+main.analyse.has-relay-tour .now-playing .mini-game__user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+main.analyse.has-relay-tour .now-playing .mini-game__user .name {
+  overflow: hidden;
+  color: var(--ln-ext-text-strong);
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.analyse.has-relay-tour .now-playing .mini-game__user .rating {
+  flex: none;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+main.analyse.has-relay-tour :is(.now-playing, .relay-games) .mini-game__flag {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 1 !important;
+}
+
+/* The clocks a pill, the running one in the accent; the result in its color. */
+main.analyse.has-relay-tour .now-playing .mini-game__clock {
+  flex: none;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+main.analyse.has-relay-tour .now-playing .mini-game__clock.clock--run {
+  background: var(--ln-ext-accent);
+  color: var(--ln-ext-white);
+}
+
+main.analyse.has-relay-tour .now-playing .mini-game__result {
+  flex: none;
+  min-width: 22px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--ln-ext-bg-raised);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+main.analyse.has-relay-tour .now-playing good.mini-game__result {
+  background: color-mix(in srgb, var(--ln-ext-good) 16%, transparent);
+  color: var(--ln-ext-good-hover);
+}
+
+main.analyse.has-relay-tour .now-playing bad.mini-game__result {
+  background: color-mix(in srgb, var(--ln-ext-bad) 16%, transparent);
+  color: var(--ln-ext-bad);
+}
+
+/* ---- Board --- */
+
+main.analyse.has-relay-tour .now-playing .cg-gauge {
+  gap: 6px;
+}
+
+main.analyse.has-relay-tour .now-playing .mini-game__board cg-container {
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+/* A thin bar, white rising from the bottom, without Lichess's inset shadow. */
+main.analyse.has-relay-tour :is(.now-playing, .relay-games) .mini-game__gauge {
+  flex: 0 0 8px !important;
+  margin: 0 !important;
+  border-radius: 4px !important;
+}
+
+main.analyse.has-relay-tour :is(.now-playing, .relay-games) .mini-game__gauge::after {
+  box-shadow: none !important;
+}
+
+main.analyse.has-relay-tour :is(.now-playing, .relay-games) .mini-game__gauge tick {
+  top: 0 !important;
+  height: 50% !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--ln-ext-accent) 80%, transparent) !important;
+}

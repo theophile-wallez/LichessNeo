@@ -1,0 +1,362 @@
+/* A broadcast's head: its pinned title with the Broadcasts picture, the event's card (the
+ * banner beside the round's pickers, and on the overview what the event is) and the pinned
+ * tabs. Lichess's header boxes are `display: contents` (layout.css): their parts are placed
+ * on the tour's grid, the card being the tour's `::before` under them. */
+
+/* ---- Title --- */
+
+/* One line, so the tabs know where to pin under it. */
+main.analyse.has-relay-tour .relay-tour h1 {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  display: block !important;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: var(--ln-ext-tour-title-h);
+  margin: 0 !important;
+  padding-inline-start: 50px !important;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/broadcasts.webp') left
+    center / 38px no-repeat;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: clamp(22px, 1.4vw + 8px, 28px) !important;
+  font-weight: 800 !important;
+  line-height: var(--ln-ext-tour-title-h) !important;
+  letter-spacing: -0.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -webkit-line-clamp: none !important;
+}
+
+html[dir='rtl'] main.analyse.has-relay-tour .relay-tour h1 {
+  background-position: right center;
+}
+
+/* ---- Card --- */
+
+main.analyse.has-relay-tour .relay-tour::before {
+  content: '';
+  grid-row: 2 / span 2;
+  grid-column: 1 / -1;
+  align-self: stretch;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 16px;
+  background: var(--ln-ext-bg-panel);
+}
+
+main.analyse.has-relay-tour .relay-tour__header__image {
+  grid-row: 2 / span 2;
+  grid-column: 2;
+  align-self: center;
+  display: block !important;
+  overflow: hidden;
+  width: clamp(200px, 22vw, 320px);
+  margin: var(--ln-ext-tour-pad);
+  margin-inline-start: 0;
+  border-radius: 10px;
+  background: var(--ln-ext-bg-panel-dark);
+  box-shadow: 0 0 0 1px var(--ln-ext-card-border);
+}
+
+main.analyse.has-relay-tour .relay-tour__header__image > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2;
+  object-fit: cover;
+}
+
+/* A live stream takes the banner's place, at its own ratio. */
+main.analyse.has-relay-tour .relay-tour__header__image.video {
+  width: clamp(260px, 30vw, 440px);
+}
+
+main.analyse.has-relay-tour .relay-tour__header__image-upload {
+  margin: 24px auto !important;
+}
+
+/* ---- Pickers --- */
+
+main.analyse.has-relay-tour .relay-tour__header__selectors {
+  grid-row: 2;
+  grid-column: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: var(--ln-ext-tour-pad);
+}
+
+/* Off the overview, the pickers alone beside the banner, in the card's middle. */
+main.analyse.has-relay-tour
+  .relay-tour:not(:has(> .relay-tour__info))
+  .relay-tour__header__selectors {
+  grid-row: 2 / span 2;
+  align-self: center;
+}
+
+/* Lichess unsets the picker's position, so its menu hung from both pickers' box, as wide as
+ * it: each menu drops from its own button, at least as wide. */
+main.analyse.has-relay-tour .relay-tour__mselect {
+  position: relative !important;
+  flex: 0 1 auto;
+  min-width: min(240px, 100%);
+  font-size: 16px !important;
+}
+
+@media (min-width: 800.02px) {
+  main.analyse.has-relay-tour .relay-tour__mselect .mselect__list {
+    inset-inline: 0 auto !important;
+    width: max-content;
+    min-width: 100%;
+    max-width: min(480px, calc(100vw - var(--ln-ext-sidebar-w, 0px) - 48px));
+  }
+}
+
+/* A tour's state at its row's end, before the current one's check (dropdowns/). */
+main.analyse.has-relay-tour .relay-tour__tour-select .tour-state {
+  margin-inline-start: auto;
+}
+
+main.analyse.has-relay-tour .relay-tour__tour-select .mselect__item.current::after {
+  margin-inline-start: 0;
+}
+
+main.analyse.has-relay-tour
+  .relay-tour__tour-select
+  .mselect__item.current:not(:has(> .tour-state))::after {
+  margin-inline-start: auto;
+}
+
+main.analyse.has-relay-tour .relay-tour__mselect .mselect__label {
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 46px;
+  padding: 8px 14px 8px 16px !important;
+  border-radius: 10px !important;
+  font-weight: 800;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__name {
+  flex: 1 1 auto !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__status {
+  margin: 0 !important;
+  font-size: 13px !important;
+}
+
+/* The round's state: a red pill with a pulsing dot when live (as on the lists' cards,
+ * cards.css), a green tick once finished. */
+main.analyse.has-relay-tour .relay-tour__round-select__label .round-state {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px !important;
+  padding: 3px 10px 3px 8px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__label .round-state.finished {
+  background: color-mix(in srgb, var(--ln-ext-good) 14%, transparent);
+  color: var(--ln-ext-good-hover);
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__label .round-state.ongoing {
+  position: relative;
+  background: var(--ln-ext-red-dark);
+  color: var(--ln-ext-white);
+  letter-spacing: 0.02em;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__label .round-state.ongoing::before {
+  content: '' !important;
+  width: 6px;
+  height: 6px;
+  margin-inline: 2px;
+  border-radius: 50%;
+  background: var(--ln-ext-white) !important;
+  mask: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__label .round-state.ongoing::after {
+  --ln-ext-ring-scale: 2.67;
+  content: '';
+  position: absolute;
+  top: calc(50% - 3px);
+  inset-inline-start: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffffb3;
+  animation: ln-ext-live-ring 1.6s ease-out infinite;
+}
+
+/* In the list, the state is an icon at the row's end: a red dot live, a green tick done. */
+main.analyse.has-relay-tour .relay-tour__round-select__list .mselect__item {
+  gap: 12px !important;
+  min-height: 40px;
+  padding: 0 12px 0 0 !important;
+  border-inline-start: none !important;
+  border-radius: 6px;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__list .name {
+  flex: 1 1 auto;
+  width: auto !important;
+  padding-inline-end: 12px !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__list .current-round {
+  background: var(--ln-ext-menu-hover) !important;
+  color: var(--ln-ext-text-strong);
+  font-weight: 800;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__list .round-state.ongoing::before {
+  color: var(--ln-ext-red) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__round-select__list .round-state.finished::before {
+  color: var(--ln-ext-good) !important;
+}
+
+/* ---- Info --- */
+
+/* On the overview, what the event is: chips on tiles, Hugeicons over Lichess's emoji, and
+ * its links as pills. */
+main.analyse.has-relay-tour .relay-tour__info {
+  grid-row: 3;
+  grid-column: 1;
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+  gap: 10px 18px !important;
+  margin: calc(-1 * var(--ln-ext-tour-pad) / 2) 0 0 !important;
+  padding: 0 var(--ln-ext-tour-pad) var(--ln-ext-tour-pad) !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__info > div {
+  position: relative;
+  gap: 10px !important;
+  min-width: 0;
+  color: var(--ln-ext-text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+main.analyse.has-relay-tour .relay-tour__info > div > img {
+  display: none;
+}
+
+/* The facts: the tile, then the Hugeicon over it in the tile's hue. */
+main.analyse.has-relay-tour
+  :is(
+    .relay-tour__info__dates,
+    .relay-tour__info__format,
+    .relay-tour__info__tc,
+    .relay-tour__info__location,
+    .relay-tour__info__players
+  )::before {
+  content: '';
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ln-ext-info-color) 16%, transparent);
+  box-shadow: inset 0 1px #ffffff14;
+}
+
+main.analyse.has-relay-tour
+  :is(
+    .relay-tour__info__dates,
+    .relay-tour__info__format,
+    .relay-tour__info__tc,
+    .relay-tour__info__location,
+    .relay-tour__info__players
+  )::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 9px);
+  inset-inline-start: 7px;
+  width: 18px;
+  height: 18px;
+  background: var(--ln-ext-info-color);
+  -webkit-mask: var(--ln-ext-info-glyph) center / contain no-repeat;
+  mask: var(--ln-ext-info-glyph) center / contain no-repeat;
+}
+
+main.analyse.has-relay-tour .relay-tour__info__dates {
+  --ln-ext-info-color: var(--ln-ext-cyan);
+  --ln-ext-info-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+}
+
+main.analyse.has-relay-tour .relay-tour__info__format {
+  --ln-ext-info-color: var(--ln-ext-orange);
+  --ln-ext-info-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
+}
+
+main.analyse.has-relay-tour .relay-tour__info__tc {
+  --ln-ext-info-color: var(--ln-ext-green);
+  --ln-ext-info-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+}
+
+main.analyse.has-relay-tour .relay-tour__info__location {
+  --ln-ext-info-color: var(--ln-ext-purple);
+  --ln-ext-info-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/location-01.svg');
+}
+
+main.analyse.has-relay-tour .relay-tour__info__players {
+  --ln-ext-info-color: var(--ln-ext-yellow);
+  --ln-ext-info-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star.svg');
+}
+
+/* The links, together on their own line after the facts. */
+main.analyse.has-relay-tour .relay-tour__info::after {
+  content: '';
+  order: 1;
+  flex-basis: 100%;
+  height: 0;
+}
+
+main.analyse.has-relay-tour
+  :is(.relay-tour__info__website, .relay-tour__info__standings, .relay-tour__info__regulations) {
+  order: 2;
+}
+
+main.analyse.has-relay-tour
+  :is(.relay-tour__info__website, .relay-tour__info__standings, .relay-tour__info__regulations)
+  > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background-color 0.15s !important;
+}
+
+main.analyse.has-relay-tour
+  :is(.relay-tour__info__website, .relay-tour__info__standings, .relay-tour__info__regulations)
+  > a:hover {
+  background: var(--ln-ext-btn-grey-hover);
+}
+
+main.analyse.has-relay-tour
+  :is(.relay-tour__info__website, .relay-tour__info__standings, .relay-tour__info__regulations)
+  > a::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: var(--ln-ext-text-dim);
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-up-right-01.svg')
+    center / contain no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-up-right-01.svg')
+    center / contain no-repeat;
+}

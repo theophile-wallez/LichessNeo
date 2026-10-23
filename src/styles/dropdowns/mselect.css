@@ -78,8 +78,10 @@
 /* Desktop: the menu drops below its button instead of unrolling over it. From 800.02px, as
  * Lichess's phone menu (centered on screen) still applies at exactly 800. */
 @media (min-width: 800.02px) {
-  /* Keep the click-away mask, but don't dim the page. */
-  .mselect .fullscreen-mask {
+  /* Keep the click-away mask, but don't dim the page. Some menus (a broadcast's rounds) put
+   * theirs in <body>, over #main-wrap, whose stacking holds the menu: it hid the menu too. */
+  .mselect .fullscreen-mask,
+  body > .mselect__fullscreen-mask {
     background: transparent !important;
   }
 

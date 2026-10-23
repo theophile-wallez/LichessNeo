@@ -1,0 +1,142 @@
+/* A team broadcast's matches: a card per match, the two teams and their score on its head,
+ * then a row per board, the eval bar between the players. */
+
+main.analyse.has-relay-tour .relay-tour__team-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match {
+  overflow: hidden;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 14px;
+  background: var(--ln-ext-bg-panel);
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__teams {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--ln-ext-border) !important;
+  background: var(--ln-ext-bg-panel-dark) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__team {
+  overflow: hidden;
+  padding: 0 8px !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 15px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__team a {
+  color: inherit !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__team a:hover {
+  color: var(--ln-ext-accent-hover) !important;
+}
+
+/* The score: two numbers in a pill, the winner's in green once the match is over. */
+main.analyse.has-relay-tour .relay-tour__team-match__team__points {
+  justify-content: center !important;
+  gap: 10px;
+  justify-self: center;
+  max-width: max-content;
+  margin-inline: auto;
+  padding: 4px 14px !important;
+  border: none !important;
+  border-radius: 999px;
+  background: var(--ln-ext-bg-raised) !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 16px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__team__points vs {
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__team__points good {
+  color: var(--ln-ext-good-hover);
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__team__points bad {
+  color: var(--ln-ext-bad);
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game {
+  border: none !important;
+  border-bottom: 1px solid var(--ln-ext-lift-4) !important;
+  background: transparent !important;
+  color: var(--ln-ext-text) !important;
+  font-size: 14px;
+  transition: background-color 0.15s !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game:last-child {
+  border-bottom: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game:hover {
+  background: var(--ln-ext-lift-4) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game__player {
+  gap: 10px;
+  padding: 9px 16px !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game__player .mini-game__user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game__player .name {
+  color: var(--ln-ext-text-strong);
+  font-weight: 700;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game__player .mini-game__flag {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game__player rating {
+  flex: none;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match__game__status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px !important;
+  border: none !important;
+  font-weight: 800;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match .eval-gauge-horiz {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__team-match .eval-gauge-horiz tick {
+  border-right-width: 1px !important;
+  border-right-color: color-mix(in srgb, var(--ln-ext-accent) 80%, transparent) !important;
+}

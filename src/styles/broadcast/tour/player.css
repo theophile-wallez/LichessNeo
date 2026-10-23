@@ -1,0 +1,210 @@
+/* A broadcast player's own page (#players/<id>): a card with their photo and details, their
+ * ratings and results as tiles, then their games in this event as rows. */
+
+main.analyse.has-relay-tour .fide-player {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+main.analyse.has-relay-tour .fide-player__header {
+  display: flex !important;
+  align-items: center;
+  gap: 24px !important;
+  margin: 0 !important;
+  padding: var(--ln-ext-tour-pad);
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 16px;
+  background: var(--ln-ext-bg-panel);
+}
+
+main.analyse.has-relay-tour .fide-player__photo {
+  flex: none;
+  width: clamp(96px, 12vw, 160px) !important;
+  height: auto !important;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+main.analyse.has-relay-tour .fide-player__photo img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+main.analyse.has-relay-tour .fide-player__header__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+main.analyse.has-relay-tour .fide-player__header__name {
+  color: var(--ln-ext-text-strong) !important;
+  font-size: clamp(22px, 1.4vw + 10px, 32px) !important;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+main.analyse.has-relay-tour .fide-player__header__name .utitle {
+  margin-inline-end: 4px;
+  font-size: 0.7em;
+  vertical-align: 0.15em;
+}
+
+main.analyse.has-relay-tour .fide-player__follow {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px 0 8px !important;
+  border-radius: 999px !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 13px !important;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+main.analyse.has-relay-tour .fide-player__header__table {
+  border-collapse: collapse;
+  font-size: 14px !important;
+}
+
+main.analyse.has-relay-tour .fide-player__header__table :is(th, td) {
+  padding: 3px 0 !important;
+}
+
+main.analyse.has-relay-tour .fide-player__header__table th {
+  padding-inline-end: 18px !important;
+  color: var(--ln-ext-text-dim);
+  font-weight: 600;
+  text-align: start;
+}
+
+main.analyse.has-relay-tour .fide-player__header__table td {
+  color: var(--ln-ext-text-strong);
+  font-size: 15px !important;
+  font-weight: 700;
+}
+
+main.analyse.has-relay-tour .fide-player__header__table td::before {
+  display: none;
+}
+
+main.analyse.has-relay-tour .fide-player__federation {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+main.analyse.has-relay-tour .fide-player .mini-game__flag {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ---- Tiles --- */
+
+main.analyse.has-relay-tour .fide-player__cards {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  font-size: inherit !important;
+}
+
+main.analyse.has-relay-tour .fide-player__card {
+  align-items: flex-start !important;
+  gap: 6px !important;
+  padding: 14px 16px !important;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px !important;
+  background: var(--ln-ext-bg-panel) !important;
+  font-family: var(--ln-ext-font) !important;
+}
+
+main.analyse.has-relay-tour .fide-player__card em {
+  gap: 6px !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+main.analyse.has-relay-tour .fide-player__card > :is(span, div) {
+  color: var(--ln-ext-text-strong);
+  font-size: 22px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The rating of the event's time control, in the accent. */
+main.analyse.has-relay-tour .fide-player__card.active {
+  border-color: color-mix(in srgb, var(--ln-ext-accent) 55%, transparent);
+}
+
+main.analyse.has-relay-tour .fide-player__card.active span {
+  color: var(--ln-ext-accent-hover) !important;
+}
+
+/* ---- Games --- */
+
+main.analyse.has-relay-tour .relay-tour__player__games {
+  border-collapse: separate !important;
+  border-spacing: 0 6px !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__player__games :is(thead, thead tr) {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__player__games thead td {
+  padding: 8px 4px 2px !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+main.analyse.has-relay-tour .relay-tour__player__games tbody tr {
+  background: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__player__games tbody td {
+  padding: 8px 14px !important;
+  border: none !important;
+  background: var(--ln-ext-bg-panel);
+  font-family: var(--ln-ext-font) !important;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+main.analyse.has-relay-tour .relay-tour__player__games tbody td:first-child {
+  border-start-start-radius: 12px;
+  border-end-start-radius: 12px;
+}
+
+main.analyse.has-relay-tour .relay-tour__player__games tbody td:last-child {
+  border-start-end-radius: 12px;
+  border-end-end-radius: 12px;
+}
+
+main.analyse.has-relay-tour .relay-tour__player__games tbody tr:hover > td {
+  background: var(--ln-ext-card-hover);
+}
+
+main.analyse.has-relay-tour .relay-tour__player__games .game-point {
+  font-size: 16px;
+  font-weight: 800;
+}

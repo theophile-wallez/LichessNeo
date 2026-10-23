@@ -1,0 +1,209 @@
+/* A broadcast's side: one card with the round's name, its games (each a row with the eval
+ * bar, the players and their results or clocks) and the chat under them. Lichess sizes the
+ * games and the chat inline (its resize handles): those heights are kept. */
+
+main.analyse.has-relay-tour > .relay-tour__side {
+  grid-area: side;
+  display: flex !important;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 16px;
+  background: var(--ln-ext-bg-panel);
+}
+
+main.analyse.has-relay-tour .relay-tour__side__header {
+  flex: 0 0 52px !important;
+  border-bottom: 1px solid var(--ln-ext-border);
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__side__header button {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text-strong);
+  text-shadow: none !important;
+  transition: background-color 0.15s !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__side__header button:hover {
+  background: var(--ln-ext-lift-4) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__side__name {
+  gap: 10px !important;
+  padding: 0 16px !important;
+  font-size: 15px;
+  font-weight: 800 !important;
+}
+
+/* Lichess's radio tower, drawn from its font as `content`. */
+main.analyse.has-relay-tour .relay-tour__side__name::before {
+  content: '' !important;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: var(--ln-ext-accent);
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg')
+    center / contain no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg')
+    center / contain no-repeat;
+}
+
+main.analyse.has-relay-tour .relay-tour__side__search,
+main.analyse.has-relay-tour .relay-tour__side__header .streamer-show {
+  padding: 0 16px !important;
+  border-inline-start: 1px solid var(--ln-ext-border) !important;
+  color: var(--ln-ext-text-dim) !important;
+}
+
+/* ---- Games --- */
+
+main.analyse.has-relay-tour .relay-tour__side .relay-games {
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  scrollbar-width: thin;
+}
+
+/* The wheel over the games or the chat scrolls them, not the page, once at their end. */
+main.analyse.has-relay-tour .relay-tour__side :is(.relay-games, .mchat__messages) {
+  overscroll-behavior: contain;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game {
+  gap: 10px !important;
+  height: auto !important;
+  min-height: 52px;
+  box-sizing: border-box;
+  padding: 8px 14px 8px 8px !important;
+  border-bottom: 1px solid var(--ln-ext-lift-4) !important;
+  border-inline-start: 3px solid transparent !important;
+  color: var(--ln-ext-text);
+  transition: background-color 0.15s !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game:hover {
+  background: var(--ln-ext-lift-4) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game--current {
+  border-inline-start-color: var(--ln-ext-accent) !important;
+  background: color-mix(in srgb, var(--ln-ext-accent) 10%, transparent) !important;
+}
+
+/* The board's number. */
+main.analyse.has-relay-tour .relay-tour__side .relay-game::before {
+  align-self: center;
+  min-width: 18px;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__players {
+  justify-content: center;
+  gap: 4px !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__player .mini-game__user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__player .name {
+  overflow: hidden;
+  color: var(--ln-ext-text-strong);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__player .mini-game__flag {
+  width: 15px;
+  height: 15px;
+}
+
+main.analyse.has-relay-tour
+  .relay-tour__side
+  .relay-game__player
+  > :is(good, bad, span:last-child) {
+  flex: none;
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__player > good {
+  color: var(--ln-ext-good-hover);
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__player > bad {
+  color: var(--ln-ext-bad);
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__player .mini-game__clock {
+  color: var(--ln-ext-text-dim);
+  font-weight: 700;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-game__player .mini-game__clock.clock--run {
+  color: var(--ln-ext-accent-hover);
+}
+
+main.analyse.has-relay-tour .relay-tour__side .relay-games__separator {
+  border-bottom: 4px solid var(--ln-ext-border) !important;
+}
+
+/* ---- Handles and chat --- */
+
+main.analyse.has-relay-tour .relay-tour__side .vertical-resize {
+  flex: none;
+  height: 14px !important;
+  border-top: 1px solid var(--ln-ext-border);
+}
+
+main.analyse.has-relay-tour .relay-tour__side .vertical-resize hr {
+  width: 32px !important;
+  height: 4px !important;
+  margin: 4px auto 0 !important;
+  border: none !important;
+  border-radius: 2px;
+  background: var(--ln-ext-lift-15) !important;
+}
+
+/* The handle under the chat sized it against nothing: the side ends with the chat, which
+ * takes what the games leave, whatever height Lichess saved for it. */
+main.analyse.has-relay-tour .relay-tour__side .mchat + .vertical-resize {
+  display: none;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .mchat {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__side .mchat__content {
+  background: transparent !important;
+}

@@ -1,0 +1,128 @@
+/* A broadcast's own page (overview, boards, players, teams): an analysis page without a board,
+ * `main.analyse.has-relay-tour`. Its content scrolls; the round's games and chat stay put
+ * beside it. The tour's parts are laid out on one grid: a pinned title, the event's card
+ * (header.css), the pinned tabs, then the tab's content, each part a row of its own. */
+
+/* Lichess sizes the page's column to its content here: the players' tab was narrower. */
+html[data-ln-ext-has~='relay-tour'] #main-wrap {
+  ---main-max-width: 100%;
+}
+
+@media (min-width: 1020px) {
+  /* The analysis layout keeps its pages from scrolling (analysis/controls.css). */
+  html[data-ln-ext-has~='relay-tour'] #main-wrap {
+    overflow: hidden auto !important;
+  }
+
+  main.analyse.is-relay.has-relay-tour {
+    --ln-ext-tour-side-w: clamp(290px, 25vw, 360px);
+    grid-template-columns: minmax(0, 1fr) var(--ln-ext-tour-side-w) !important;
+    grid-template-rows: auto !important;
+    grid-template-areas:
+      'relay-tour side'
+      'relay-admin side' !important;
+    gap: 0 24px !important;
+    justify-content: stretch !important;
+    align-items: start !important;
+    margin: 0 !important;
+  }
+
+  /* The round's games over its chat, the window's height: only the content beside scrolls.
+   * Sticky stays inside main's content box: the room at the page's end is the tour's padding
+   * (below), not main's, which pushed the side up as the page reached its end. */
+  main.analyse.has-relay-tour > .relay-tour__side {
+    position: sticky;
+    top: 0;
+    height: calc(var(--ln-ext-main-h, 100dvh) - 2 * var(--ln-ext-page-top));
+  }
+}
+
+@media (min-width: 1260px) {
+  main.analyse.is-relay.has-relay-tour {
+    --ln-ext-tour-side-w: clamp(320px, 24vw, 380px);
+  }
+}
+
+/* ---- Tour --- */
+
+main.analyse.has-relay-tour .relay-tour {
+  --ln-ext-tour-title-h: 64px;
+  --ln-ext-tour-pad: 20px;
+  grid-area: relay-tour;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0 !important;
+  min-width: 0;
+  overflow: visible !important;
+  padding: 0 0 40px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Each part a full row, in the page's order, under the event's card (header.css). */
+main.analyse.has-relay-tour .relay-tour > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin-inline: 0 !important;
+}
+
+/* Their parts join the tour's grid, where the title can be pinned over all of it. */
+main.analyse.has-relay-tour :is(.relay-tour__header, .relay-tour__header__content) {
+  display: contents !important;
+}
+
+/* The tab's content, below the pinned tabs. */
+main.analyse.has-relay-tour
+  .relay-tour
+  > :is(
+    .study__multiboard,
+    .relay-tour__players,
+    .relay-tour__markup,
+    .relay-tour__share-all,
+    .relay-tour__team-table,
+    .relay-tour__team-summary,
+    .relay-tour__stats
+  ) {
+  margin-top: 4px !important;
+}
+
+/* A note (an empty round, a community broadcast, the organizers' words): a card, its icon in
+ * the hue. Lichess draws the glyph from its font, as `content`. */
+main.analyse.has-relay-tour .relay-tour__note {
+  gap: 14px !important;
+  margin: 12px 0 0 !important;
+  padding: 14px 18px !important;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px !important;
+  background: var(--ln-ext-bg-panel) !important;
+  color: var(--ln-ext-text);
+  font-weight: 600;
+}
+
+main.analyse.has-relay-tour .relay-tour__note::before {
+  content: '' !important;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  background: var(--ln-ext-cyan);
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg')
+    center / contain no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg')
+    center / contain no-repeat;
+}
+
+main.analyse.has-relay-tour .relay-tour__note.pinned::before {
+  background: var(--ln-ext-accent);
+  -webkit-mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
+}
+
+main.analyse.has-relay-tour .relay-tour__note small {
+  display: block;
+  margin-top: 2px;
+  color: var(--ln-ext-text-dim);
+  font-weight: 500;
+}

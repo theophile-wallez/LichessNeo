@@ -1,0 +1,143 @@
+/* A broadcast's overview, under its tabs: the organizers' description in a card, then
+ * sharing, PGN and embedding as cards that fold open. */
+
+main.analyse.has-relay-tour .relay-tour__markup {
+  max-height: none !important;
+  margin-bottom: 14px !important;
+  padding: 18px 22px !important;
+  overflow: visible !important;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 14px;
+  background: var(--ln-ext-bg-panel);
+  color: var(--ln-ext-text);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+main.analyse.has-relay-tour .relay-tour__markup > :first-child {
+  margin-top: 0 !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__markup > :last-child {
+  margin-bottom: 0 !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__markup :is(h1, h2, h3, h4) {
+  margin: 18px 0 8px !important;
+  color: var(--ln-ext-text-strong);
+  font-weight: 800;
+}
+
+main.analyse.has-relay-tour .relay-tour__markup img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* ---- Share, PGN, embed --- */
+
+main.analyse.has-relay-tour .relay-tour__share-all {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 0 !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__share {
+  margin: 0 !important;
+  padding: 0 18px 4px !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 14px !important;
+  background: var(--ln-ext-bg-panel) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__share.toggle-box--toggle-off {
+  padding-bottom: 0 !important;
+}
+
+/* The legend is the card's header row, its chevron at the end: floated, it leaves the
+ * fieldset's border and takes a line of its own. */
+main.analyse.has-relay-tour .relay-tour__share legend {
+  float: inline-start;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: calc(100% + 36px);
+  margin: 0 -18px !important;
+  padding: 14px 18px !important;
+  border: none !important;
+  border-radius: 14px !important;
+  background: transparent !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 15px !important;
+  font-weight: 800;
+  line-height: 1.3 !important;
+  text-align: start !important;
+  transition: background-color 0.15s !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__share legend:hover {
+  background: var(--ln-ext-lift-3) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__share legend::before {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: var(--ln-ext-accent);
+  -webkit-mask: var(--ln-ext-share-glyph) center / contain no-repeat;
+  mask: var(--ln-ext-share-glyph) center / contain no-repeat;
+}
+
+main.analyse.has-relay-tour .relay-tour__share:nth-child(1) {
+  --ln-ext-share-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/share-08.svg');
+}
+
+main.analyse.has-relay-tour .relay-tour__share:nth-child(2) {
+  --ln-ext-share-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/download-04.svg');
+}
+
+main.analyse.has-relay-tour .relay-tour__share:nth-child(3) {
+  --ln-ext-share-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/source-code-square.svg');
+}
+
+main.analyse.has-relay-tour .relay-tour__share legend::after {
+  content: '' !important;
+  position: static !important;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: auto !important;
+  background: var(--ln-ext-text-dim);
+  opacity: 1 !important;
+  -webkit-mask: var(--ln-ext-chevron) center / contain no-repeat;
+  mask: var(--ln-ext-chevron) center / contain no-repeat;
+  transform: rotate(180deg) !important;
+  transition: transform 0.2s ease !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__share.toggle-box--toggle-off legend::after {
+  transform: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__share > :not(legend) {
+  clear: both;
+}
+
+main.analyse.has-relay-tour .relay-tour__share .form-group {
+  margin: 4px 0 14px !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__share .form-label {
+  margin-bottom: 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+main.analyse.has-relay-tour .relay-tour__share .form-help {
+  margin-top: 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+}

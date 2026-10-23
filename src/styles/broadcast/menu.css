@@ -1,4 +1,4 @@
-/* Broadcasts: side menu, pinned title and a broadcast's own page. */
+/* Broadcasts: the side menu and the lists' pinned title. */
 
 /* ---- Menu --- */
 
@@ -105,61 +105,4 @@ main.page-menu[data-ln-ext-menu~='broadcast'][data-ln-ext-nav-active*='/fide/fed
       opacity: 1;
     }
   }
-}
-
-/* ---- Tour page --- */
-
-/* A broadcast's own page (overview, boards, players) is an analysis page without a board.
-   It gets Lichess's two columns back, fluid beside our sidebar, and the page scrolls. */
-@media (min-width: 1020px) {
-  html[data-ln-ext-has~='relay-tour'] {
-    overflow: visible !important;
-  }
-
-  html[data-ln-ext-has~='relay-tour'] body {
-    height: auto !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-  }
-
-  main.analyse.is-relay.has-relay-tour {
-    grid-template-columns: minmax(0, 1fr) var(---block-gap, 15px) minmax(250px, 350px) !important;
-    grid-template-rows: auto !important;
-    grid-template-areas: 'relay-tour . side' !important;
-    justify-content: stretch !important;
-    margin-top: 0 !important;
-  }
-}
-
-@media (min-width: 1260px) {
-  main.analyse.is-relay.has-relay-tour {
-    grid-template-columns: minmax(250px, 350px) var(---block-gap, 15px) minmax(0, 1fr) !important;
-    grid-template-areas: 'side . relay-tour' !important;
-  }
-}
-
-/* Round games: the hovered or current one is a lighter row (Lichess tints it all green).
-   Its green stays on the edge and number, as on a round's page (analysis/). */
-main.analyse.has-relay-tour .relay-tour__side .relay-game:hover {
-  background: var(--ln-ext-lift-6) !important;
-}
-
-main.analyse.has-relay-tour .relay-tour__side .relay-game--current {
-  background: var(--ln-ext-lift-8) !important;
-}
-
-/* Tour tabs: Lichess's gold outline slides to the picked tab ("Sliding tabs" in theme/),
-   drawn over the tabs' own grey outlines. */
-.relay-tour__tabs[data-ln-ext-tabs] {
-  --ln-ext-tab-radius: var(---ui-roundness, 7px);
-  --ln-ext-tab-bg: transparent;
-  --ln-ext-tab-shadow: inset 0 0 0 1px var(--c-brag);
-}
-
-.relay-tour__tabs[data-ln-ext-tabs]::before {
-  z-index: 1;
-}
-
-.relay-tour__tabs[data-ln-ext-tabs] button.active {
-  border-color: var(--c-border) !important;
 }

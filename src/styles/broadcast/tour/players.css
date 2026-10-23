@@ -1,0 +1,213 @@
+/* A broadcast's players: the standings as a list of rounded rows (as the FIDE pages' tables,
+ * fide/), the podium's ranks in medal colors; then a player's own page when one is picked. */
+
+/* ---- Standings --- */
+
+main.analyse.has-relay-tour .relay-tour__players {
+  overflow: visible !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__standings--disclaimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 6px !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 13px;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table {
+  border-collapse: separate !important;
+  border-spacing: 0 6px !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table thead th {
+  padding-block: 6px !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table thead th[aria-sort] {
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table tbody tr {
+  background: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table tbody td {
+  padding: 8px 14px !important;
+  border: none !important;
+  background: var(--ln-ext-bg-panel);
+  color: var(--ln-ext-text);
+  font-family: var(--ln-ext-font) !important;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.15s !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table tbody td:first-child {
+  border-start-start-radius: 12px;
+  border-end-start-radius: 12px;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table tbody td:last-child {
+  border-start-end-radius: 12px;
+  border-end-end-radius: 12px;
+  color: var(--ln-ext-text-dim);
+  font-weight: 600;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table tbody tr:hover > td {
+  background: var(--ln-ext-card-hover);
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table td.score {
+  color: var(--ln-ext-text-strong);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* The rank on a round badge, gold, silver and bronze for the first three. */
+main.analyse.has-relay-tour .relay-tour__players__table td.rank {
+  --ln-ext-rank: var(--ln-ext-bg-raised);
+  width: 32px !important;
+  padding-inline: 6px !important;
+  color: var(--ln-ext-text-strong);
+  text-align: center;
+}
+
+main.analyse.has-relay-tour
+  .relay-tour__players__table
+  tbody
+  td.rank:is([data-sort='-1'], [data-sort='-2'], [data-sort='-3']) {
+  background-image: radial-gradient(
+    circle 14px at center,
+    var(--ln-ext-rank) 13.5px,
+    transparent 14px
+  );
+  color: var(--ln-ext-ink);
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table tbody td.rank[data-sort='-1'] {
+  --ln-ext-rank: #f2c94c;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table tbody td.rank[data-sort='-2'] {
+  --ln-ext-rank: #c9d1dc;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table tbody td.rank[data-sort='-3'] {
+  --ln-ext-rank: #e0a26b;
+}
+
+/* The pin: a Hugeicon over Lichess's emoji, faint until hovered or pinned. */
+main.analyse.has-relay-tour .relay-tour__players__table td.pin {
+  width: 34px !important;
+  padding-inline: 10px 0 !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table td.pin button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0 !important;
+  border-radius: 8px;
+  filter: none !important;
+  transform: none !important;
+  transition: background-color 0.15s !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table td.pin button:hover {
+  background: var(--ln-ext-lift-6);
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table td.pin img {
+  display: none;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table td.pin button::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  background: var(--ln-ext-text-dim);
+  opacity: 0.5;
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pin.svg') center /
+    contain no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pin.svg') center / contain
+    no-repeat;
+  transition:
+    opacity 0.15s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table td.pin button:hover::before {
+  opacity: 1;
+  transform: rotate(-12deg);
+}
+
+main.analyse.has-relay-tour .relay-tour__players__table td.pin button.pinned::before {
+  background: var(--ln-ext-red);
+  opacity: 1;
+  transform: rotate(-30deg);
+}
+
+/* ---- Player --- */
+
+/* The FIDE pages' photo and name (fide/rows.css), a size smaller. */
+main.analyse.has-relay-tour .relay-tour__players__table .fide-players__photo {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* A rating's change, a chip in its color. */
+main.analyse.has-relay-tour .relay-tour .diff {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+main.analyse.has-relay-tour .relay-tour .diff :is(good, bad).rp {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+main.analyse.has-relay-tour .relay-tour .diff good.rp {
+  background: color-mix(in srgb, var(--ln-ext-good) 14%, transparent);
+  color: var(--ln-ext-good-hover);
+}
+
+main.analyse.has-relay-tour .relay-tour .diff bad.rp {
+  background: color-mix(in srgb, var(--ln-ext-bad) 14%, transparent);
+  color: var(--ln-ext-bad);
+}
+
+main.analyse.has-relay-tour .relay-tour .diff .rp::before {
+  display: none;
+}
+
+/* Lichess's hover card for a player, hidden at the page's left edge when unused: at least
+ * 370px wide, it widened a phone's page sideways. */
+#tour-player-tip {
+  min-width: min(370px, calc(100vw - 16px)) !important;
+  overflow: hidden;
+  border: 1px solid var(--ln-ext-menu-border) !important;
+  border-radius: 12px !important;
+  background: var(--ln-ext-menu-bg) !important;
+  box-shadow: var(--ln-ext-menu-shadow) !important;
+}

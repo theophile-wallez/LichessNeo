@@ -17,8 +17,9 @@
     border-radius: 6px;
   }
 
-  /* The panel's parts all sit in the last column, past the gap their margin leaves. */
-  main.analyse::after {
+  /* The panel's parts all sit in the last column, past the gap their margin leaves. A
+   * broadcast's own page has no board, and no panel (broadcast/tour/). */
+  main.analyse:not(.has-relay-tour)::after {
     content: '';
     grid-column: -2 / -1;
     grid-row: 1 / -1;

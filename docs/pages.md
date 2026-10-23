@@ -53,13 +53,13 @@ and a white knob, and a single big number in the state's color.
 
 ## Watch
 
-| Page          | Path         | Level | Next                                                                                    |
-| ------------- | ------------ | ----- | --------------------------------------------------------------------------------------- |
-| Broadcasts    | `/broadcast` | 2     | below 800px the search runs across                                                      |
-| TV            | `/tv`        | 2     |                                                                                         |
-| Current games | `/games`     | 2     | TV's channels, a column on a desktop and pills below; no pinned title with its tile yet |
-| Streamers     | `/streamer`  | 2     | below 800px no card around the list, the cards at the page's margins                    |
-| Videos        | `/video`     | 2     | the tags are a long column of plain pills                                               |
+| Page          | Path         | Level | Next                                                                                                                        |
+| ------------- | ------------ | ----- | --------------------------------------------------------------------------------------------------------------------------- |
+| Broadcasts    | `/broadcast` | 2     | below 800px the search runs across; a broadcast's own page has no signature yet (a live round's games could take the track) |
+| TV            | `/tv`        | 2     |                                                                                                                             |
+| Current games | `/games`     | 2     | TV's channels, a column on a desktop and pills below; no pinned title with its tile yet                                     |
+| Streamers     | `/streamer`  | 2     | below 800px no card around the list, the cards at the page's margins                                                        |
+| Videos        | `/video`     | 2     | the tags are a long column of plain pills                                                                                   |
 
 ## Community
 

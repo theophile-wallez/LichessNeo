@@ -1,0 +1,94 @@
+/* A broadcast's tabs (overview, boards, players, teams) and its pinned head. */
+
+/* ---- Tabs --- */
+
+/* Pinned under the title, in the profile's segmented look (profile/), the subscribe switch at
+ * the end. */
+@media (min-width: 1020px) {
+  main.analyse.has-relay-tour .relay-tour__nav {
+    position: sticky;
+    z-index: 3;
+    top: var(--ln-ext-tour-title-h);
+    box-shadow:
+      -12px 0 var(--ln-ext-bg-page),
+      12px 0 var(--ln-ext-bg-page);
+  }
+
+  main.analyse.has-relay-tour .relay-tour h1 {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background-color: var(--ln-ext-bg-page);
+    box-shadow:
+      var(--ln-ext-pin-cover-wide),
+      -12px 0 var(--ln-ext-bg-page),
+      12px 0 var(--ln-ext-bg-page);
+  }
+}
+
+main.analyse.has-relay-tour .relay-tour__nav {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px !important;
+  padding: 16px 0 12px;
+  background: var(--ln-ext-bg-page);
+}
+
+main.analyse.has-relay-tour .relay-tour__tabs {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  gap: 2px !important;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 4px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px;
+  background: var(--ln-ext-bg-panel-dark);
+  scrollbar-width: none;
+}
+
+main.analyse.has-relay-tour .relay-tour__tabs > :is(button, a) {
+  flex: none;
+  height: 38px;
+  padding: 0 18px !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 14px;
+  font-weight: 700;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__tabs > :is(button, a):hover {
+  background: var(--ln-ext-lift-4) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__tabs > button.active {
+  background: var(--ln-ext-bg-raised) !important;
+  box-shadow: 0 1px 3px var(--ln-ext-shade-50) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+/* The raised tab slides (see "Sliding tabs" in theme/). */
+main.analyse.has-relay-tour .relay-tour__tabs[data-ln-ext-tabs] {
+  --ln-ext-tab-radius: 8px;
+}
+
+main.analyse.has-relay-tour .relay-tour__tabs[data-ln-ext-tabs] > button.active {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main.analyse.has-relay-tour .relay-tour__nav .cmn-toggle-wrap {
+  gap: 10px;
+  color: var(--ln-ext-text-dim);
+  font-size: 14px;
+  font-weight: 700;
+}
