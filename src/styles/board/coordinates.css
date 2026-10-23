@@ -6,29 +6,30 @@ coords {
   opacity: 1 !important;
 }
 
-/* Mobile only (desktop always draws them outside): ranks top-left, files bottom-right, in the
- * opposite square's color. */
+/* Below 1020px always inside: ranks top-left, files bottom-right, in the opposite square's
+ * color, or a pack's (content/packs/apply.ts). From 799.3px Lichess draws "outside" ones past
+ * the board's edge, off a board as wide as the screen and under its player bar. */
 @media (max-width: 1019.98px) {
-  body.coords-in .is2d coords .coord-dark,
-  body.coords-in .is2d coords.files .coord-dark {
+  body:is(.coords-in, .coords-out) .is2d coords .coord-dark,
+  body:is(.coords-in, .coords-out) .is2d coords.files .coord-dark {
     color: var(---cg-ccw) !important;
   }
 
-  body.coords-in .is2d coords .coord-light,
-  body.coords-in .is2d coords.files .coord-light {
+  body:is(.coords-in, .coords-out) .is2d coords .coord-light,
+  body:is(.coords-in, .coords-out) .is2d coords.files .coord-light {
     color: var(---cg-ccb) !important;
   }
 
   /* Ranks move to the left edge, which puts each on the opposite color. */
-  body.coords-in .is2d coords.ranks .coord-dark {
+  body:is(.coords-in, .coords-out) .is2d coords.ranks .coord-dark {
     color: var(---cg-ccb) !important;
   }
 
-  body.coords-in .is2d coords.ranks .coord-light {
+  body:is(.coords-in, .coords-out) .is2d coords.ranks .coord-light {
     color: var(---cg-ccw) !important;
   }
 
-  body.coords-in coords.ranks {
+  body:is(.coords-in, .coords-out) coords.ranks {
     left: 0 !important;
     right: auto !important;
     top: 0 !important;
@@ -36,27 +37,29 @@ coords {
     height: 100% !important;
   }
 
-  body.coords-in coords.ranks coord {
+  body:is(.coords-in, .coords-out) coords.ranks coord {
     transform: none !important;
     padding: 0.25em 0 0 0.3em;
     text-align: left;
   }
 
-  body.coords-in coords.files {
+  body:is(.coords-in, .coords-out) coords.files {
     bottom: 0 !important;
     left: 0 !important;
     height: auto !important;
   }
 
   /* Same 0.25em inset as the ranks. */
-  body.coords-in coords.files coord {
+  body:is(.coords-in, .coords-out) coords.files coord {
     padding: 0 0.3em 0.25em 0 !important;
     text-align: right;
   }
-}
 
-/* Below 1020px "outside" coordinates stay where Lichess puts them: moved left of the board,
- * they fell off phone screens. Inside, a pack's board colors them (content/packs/apply.ts). */
+  /* Lichess's room for the files below an "outside" board. */
+  body.coords-out .main-board {
+    margin-bottom: 0;
+  }
+}
 
 /* Desktop: always outside. Lichess swaps `coords-out` for `coords-in` while its eval gauge
  * shows, so they jumped in and out between moves. Layouts leave room for both classes. */

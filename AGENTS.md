@@ -529,8 +529,8 @@ link to it, and a line here). The rest hold everywhere:
   `styles/board/coordinates.css` draws both outside, sized by
   `--ln-ext-coords-size`; a layout leaves them room under
   `body:is(.coords-in, .coords-out)` (a gutter for the ranks,
-  `--ln-ext-coords-off` for the files). Below 1020px they stay where Lichess
-  puts them.
+  `--ln-ext-coords-off` for the files). Below 1020px both are drawn inside:
+  Lichess's outside ones ran past a board as wide as the screen.
 - **Board inset.** Chessground shrinks the board to whole pixels per square,
   so `cg-container` sits a few px inside its wrapper:
   `content/layout/board-inset.ts` measures it into `--ln-ext-inset-{t,r,b,l}`.
