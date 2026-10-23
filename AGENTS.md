@@ -135,14 +135,17 @@ must be short. A change goes in two steps.
    bar above, but no new tests, no Playwright, no viewport sweep. Run
    `pnpm check:fast` (types, lint, format, source rules, and only the unit
    tests of what changed since `origin/main`: seconds, not a minute) and fix
-   what it finds, then `pnpm preview --name "<what it shows>" --thread <id>`:
+   what it finds, then `pnpm preview --name "<what it shows>" --url <page>
+   --thread <id>`:
    it builds into the main checkout's `dist/chrome`, which Chrome reloads when
    a Lichess tab next gets focus, with the name at the top of every page (a
    few words for the user, in their language: "Barre d'éval, plateau
-   retourné"), so they know which draft they see. Add `--url <page>` (a
-   lichess.org path or URL, named as `"Plateau retourné=/analysis"`) for each
-   page the change shows on: the name then leads there in a click, or lists
-   them on hover when there are several. Rebase onto `origin/main` before each preview, and take your
+   retourné"), so they know which draft they see. Give a `--url` (a
+   lichess.org path or URL, named as `"Plateau retourné=/analysis"`) for every
+   page the change shows on, down to the game, puzzle or profile that shows it
+   best: the name leads there in a click, or lists them on hover when there are
+   several, and the user would otherwise hunt for them. Only a change that
+   looks the same on every page (the sidebar) passes `--everywhere` instead. Rebase onto `origin/main` before each preview, and take your
    turn at it: Chrome shows one draft at a time (see
    [Sessions side by side](#sessions-side-by-side)). Tell the user what
    to look at, and iterate on their feedback. Commit nothing yet.
@@ -183,7 +186,7 @@ session and stops. The user may be judging that draft, so:
 - if that session is running, tell it (`t3_thread_send`) that Chrome won't
   show its draft any more and that it must preview again before asking the
   user to look; an idle one needs no message, see the next point. Then run
-  `pnpm preview --take --name "<what it shows>" --thread <id>`, and tell the user, linking the other
+  `pnpm preview --take` with the same `--name`, `--url` and `--thread`, and tell the user, linking the other
   session, that Chrome shows this draft in its place;
 - when the user comes back to a draft, run `pnpm turn` before telling them
   what to look at: if Chrome shows another draft, preview again.
@@ -234,7 +237,7 @@ hold:
 | `pnpm install`                  | installs the dependencies (Node 24 first, and `corepack enable` for pnpm)        |
 | `pnpm build`                    | builds `dist/chrome` with source maps (`--target firefox`, `--release`, `--out`) |
 | `pnpm dev`                      | the same, rebuilt on every change                                                |
-| `pnpm preview --name <name>`    | builds into the main checkout's `dist/chrome`, the one Chrome loads, in turn     |
+| `pnpm preview --name --url`     | builds into the main checkout's `dist/chrome`, the one Chrome loads, in turn     |
 | `pnpm turn`                     | who holds the preview and the ship turn (`take ship --wait`, `release ship`)     |
 | `pnpm playground`               | serves the mascots' playground on localhost:5180, reloaded on every change       |
 | `pnpm check`                    | typecheck, lint, format check, source rules, unit tests                          |

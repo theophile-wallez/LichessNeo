@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { previewLink, previewName } from './preview-label.ts';
+import { previewLink, previewLinks, previewName } from './preview-label.ts';
 
 const draft = { worktree: '/w/a', branch: 't3/a', mainCheckout: '/w/main' };
 const mainHere = { worktree: '/w/main', branch: 'main', mainCheckout: '/w/main' };
@@ -44,5 +44,22 @@ describe('previewLink', () => {
     expect(() => previewLink('http://lichess.org/')).toThrow('lichess.org');
     expect(() => previewLink('javascript:alert(1)')).toThrow('lichess.org');
     expect(() => previewLink('Board=https://example.com/')).toThrow('lichess.org');
+  });
+});
+
+describe('previewLinks', () => {
+  it('reads every page given', () => {
+    expect(
+      previewLinks(['/analysis', 'Puzzle=/training'], { everywhere: false, claimant: draft }),
+    ).toEqual([
+      { label: '/analysis', href: 'https://lichess.org/analysis' },
+      { label: 'Puzzle', href: 'https://lichess.org/training' },
+    ]);
+  });
+
+  it('wants a page from a draft, unless it shows everywhere', () => {
+    expect(previewLinks([], { everywhere: false, claimant: draft })).toBeNull();
+    expect(previewLinks([], { everywhere: true, claimant: draft })).toEqual([]);
+    expect(previewLinks([], { everywhere: false, claimant: mainHere })).toEqual([]);
   });
 });

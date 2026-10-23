@@ -35,3 +35,16 @@ export function previewLink(given: string): PreviewLink {
   const label = labeled ? text.slice(0, split).trim() : url.href.slice(LICHESS.length);
   return { label, href: url.href };
 }
+
+/**
+ * The pages to review a preview on, read by previewLink. A draft must give
+ * some, for the user to reach them in a click, unless it shows on every page
+ * alike; null when it gives none. The main checkout's build needs none.
+ */
+export function previewLinks(
+  given: readonly string[],
+  { everywhere, claimant }: { readonly everywhere: boolean; readonly claimant: Claimant },
+): PreviewLink[] | null {
+  if (given.length === 0 && !everywhere && claimant.worktree !== claimant.mainCheckout) return null;
+  return given.map(previewLink);
+}
