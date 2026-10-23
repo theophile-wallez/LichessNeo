@@ -85,6 +85,16 @@
     background: transparent !important;
   }
 
+  /* Nor may it catch the clicks meant for the menu: while it's open, #main-wrap and a pinned
+   * title leave the menu to the page's stacking, where Lichess sets it over its mask. */
+  html[data-ln-ext-has~='menu-mask'] #main-wrap {
+    isolation: auto;
+  }
+
+  .box__top:has(.mselect__toggle:checked) {
+    z-index: 111 !important;
+  }
+
   .mselect__list {
     top: calc(100% + 6px) !important;
     max-height: min(60vh, 440px) !important;

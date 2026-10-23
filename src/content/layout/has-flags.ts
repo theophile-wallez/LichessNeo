@@ -31,6 +31,8 @@ const FLAGS: Readonly<Record<string, string>> = {
   'analyse-black': 'main.analyse .analyse__board > .orientation-black',
   'round-black': 'main.round .round__app__board > .orientation-black',
   'relay-tour': 'main.analyse.has-relay-tour',
+  // A broadcast picker's click-away mask, kept in <body>: Lichess points it at the open one.
+  'menu-mask': 'body > .mselect__fullscreen-mask[for]',
   'study-side': 'main.analyse > .analyse__side > .study__side',
   practice: 'main.analyse .practice__side',
   'practice-box': 'main.analyse .practice-box',
@@ -90,7 +92,7 @@ export const hasFlags: Feature = {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['class'],
+      attributeFilter: ['class', 'for'],
     });
     syncHasFlags();
   },

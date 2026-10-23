@@ -18,7 +18,10 @@ for the whole repo are in the root's [AGENTS.md](../../../AGENTS.md).
 - **A broadcast's pickers.** Lichess unsets the round and tour pickers'
   `position`, so their menu hangs from both pickers' box; and the round's
   puts its click-away mask in `<body>`, over `#main-wrap`, whose stacking
-  holds the menu (`dropdowns/mselect.css` keeps it see-through).
+  holds the menu: it hid the menu, then caught its clicks.
+  `dropdowns/mselect.css` keeps it see-through, and while it points at an
+  open menu (`menu-mask`) takes `#main-wrap`'s isolation off and lifts a
+  pinned title holding the menu (the studies' and coaches' lists use it too).
 - **A broadcast's side sticks inside `main`.** The games and chat are a
   sticky column: room at the page's end must be the tour's padding, not
   `main`'s, or it pushes the column up as the page reaches its end.

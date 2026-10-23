@@ -59,6 +59,13 @@ describe('presentFlags, for flags the original lacked', () => {
     expect(presentFlags(document).split(' ')).not.toContain('analyse-captured');
   });
 
+  it('reads a broadcast picker’s mask only while it points at an open menu', () => {
+    document.body.innerHTML = '<label class="fullscreen-mask mselect__fullscreen-mask"></label>';
+    expect(presentFlags(document)).toBe('');
+    document.querySelector('label')?.setAttribute('for', 'mselect-round');
+    expect(presentFlags(document)).toBe('menu-mask');
+  });
+
   it('leaves out an empty advice summary', () => {
     document.body.innerHTML =
       '<main class="analyse"><div class="analyse__round-training"></div></main>';
@@ -91,6 +98,18 @@ describe('hasFlags', () => {
     expect(root.dataset['lnExtHas']).toBe('round');
     for (const frame of frames.splice(0)) frame(0);
     expect(root.dataset['lnExtHas']).toBe('round pocket');
+
+    // A picker's mask stays in the page, open or closed: only its `for` says which.
+    document.body.append(
+      Object.assign(document.createElement('label'), { className: 'mselect__fullscreen-mask' }),
+    );
+    await Promise.resolve();
+    for (const frame of frames.splice(0)) frame(0);
+    document.querySelector('label')?.setAttribute('for', 'mselect-round');
+    await Promise.resolve();
+    expect(frames).toHaveLength(1);
+    for (const frame of frames.splice(0)) frame(0);
+    expect(root.dataset['lnExtHas']).toBe('round pocket menu-mask');
   });
 
   // Last: `start` leaves its observer on the document, which would schedule a frame of its
