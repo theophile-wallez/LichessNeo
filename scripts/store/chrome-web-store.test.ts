@@ -1,6 +1,12 @@
 import { generateKeyPairSync } from 'node:crypto';
 import { describe, expect, it, vi } from 'vitest';
-import { API, ITEM_ID, publishToChromeWebStore, type PublishOptions } from './chrome-web-store.ts';
+import {
+  API,
+  checkChromeWebStore,
+  ITEM_ID,
+  publishToChromeWebStore,
+  type PublishOptions,
+} from './chrome-web-store.ts';
 import { TOKEN_URL } from './google-auth.ts';
 
 const { privateKey } = generateKeyPairSync('rsa', {
@@ -40,6 +46,8 @@ function fakeStore(replies: Record<string, Reply[]>): Request[] {
   return requests;
 }
 
+const SERVICE_ACCOUNT = JSON.stringify({ client_email: 'ci@example.com', private_key: privateKey });
+
 function publish(overrides: Partial<PublishOptions> = {}): {
   lines: string[];
   done: Promise<void>;
@@ -48,7 +56,7 @@ function publish(overrides: Partial<PublishOptions> = {}): {
   const done = publishToChromeWebStore({
     zip: ZIP,
     version: '0.1.295',
-    serviceAccount: JSON.stringify({ client_email: 'ci@example.com', private_key: privateKey }),
+    serviceAccount: SERVICE_ACCOUNT,
     publisherId: 'publisher',
     log: line => lines.push(line),
     sleep: () => Promise.resolve(),
@@ -60,6 +68,18 @@ function publish(overrides: Partial<PublishOptions> = {}): {
 const nothingInReview = {
   body: { publishedItemRevisionStatus: { distributionChannels: [{ crxVersion: '0.1.290' }] } },
 };
+
+const inReview = {
+  body: {
+    submittedItemRevisionStatus: {
+      state: 'PENDING_REVIEW',
+      distributionChannels: [{ crxVersion: '0.1.294' }],
+    },
+  },
+};
+
+const IN_REVIEW_ERROR =
+  '0.1.294 is still in review: wait for it, or cancel it in the dashboard, then run this again';
 
 describe('publishToChromeWebStore', () => {
   it('uploads the zip, then submits it for review', async () => {
@@ -78,7 +98,8 @@ describe('publishToChromeWebStore', () => {
     const { lines, done } = publish();
     await done;
     expect(lines).toEqual([
-      'On the store: 0.1.290. Sending 0.1.295.',
+      'On the store: 0.1.290.',
+      'Sending 0.1.295.',
       '::warning::SLOW: Review may take longer.',
       '0.1.295 submitted: PENDING_REVIEW.',
     ]);
@@ -93,23 +114,10 @@ describe('publishToChromeWebStore', () => {
   });
 
   it('stops while another version is in review, before uploading', async () => {
-    const requests = fakeStore({
-      [STATUS]: [
-        {
-          body: {
-            submittedItemRevisionStatus: {
-              state: 'PENDING_REVIEW',
-              distributionChannels: [{ crxVersion: '0.1.294' }],
-            },
-          },
-        },
-      ],
-    });
+    const requests = fakeStore({ [STATUS]: [inReview] });
     const { lines, done } = publish();
-    await expect(done).rejects.toThrow(
-      '0.1.294 is still in review: wait for it, or cancel it in the dashboard, then run this again',
-    );
-    expect(lines).toEqual(['On the store: nothing yet. Sending 0.1.295.']);
+    await expect(done).rejects.toThrow(IN_REVIEW_ERROR);
+    expect(lines).toEqual(['On the store: nothing yet.']);
     expect(requests.map(request => request.url)).not.toContain(UPLOAD);
   });
 
@@ -159,5 +167,30 @@ describe('publishToChromeWebStore', () => {
     await expect(publish().done).rejects.toThrow(
       `POST ${PUBLISH}: 403 {"error":{"message":"denied"}}`,
     );
+  });
+});
+
+const check = (lines: string[]): Promise<void> =>
+  checkChromeWebStore({
+    serviceAccount: SERVICE_ACCOUNT,
+    publisherId: 'publisher',
+    log: line => lines.push(line),
+  });
+
+describe('checkChromeWebStore', () => {
+  it('says the way is clear when nothing is in review', async () => {
+    const requests = fakeStore({ [STATUS]: [nothingInReview] });
+    const lines: string[] = [];
+    await check(lines);
+    expect(lines).toEqual([
+      'On the store: 0.1.290.',
+      'Nothing in review: a new version can be sent.',
+    ]);
+    expect(requests.map(request => request.url)).toEqual([TOKEN_URL, STATUS]);
+  });
+
+  it('fails while a version is in review', async () => {
+    fakeStore({ [STATUS]: [inReview] });
+    await expect(check([])).rejects.toThrow(IN_REVIEW_ERROR);
   });
 });

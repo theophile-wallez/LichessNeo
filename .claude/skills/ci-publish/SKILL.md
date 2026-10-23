@@ -22,14 +22,22 @@ get-url origin`): the checkout has more than one remote.
    missing, name it and stop: that store's job would fail.
 4. If `store-$v` exists on `origin` already, that commit was sent: say so
    and stop.
-5. Tag and push: `git tag "store-$v" origin/main && git push origin
+5. Check that the Chrome Web Store has no version in review, as it refuses
+   the next one meanwhile: `gh workflow run store-status.yml --ref main`,
+   find its run (`gh run list --workflow store-status.yml --event
+   workflow_dispatch --limit 1 --json databaseId,url,createdAt`, retrying
+   briefly until it's the one just started), then `gh run watch <id>
+   --exit-status`. If it fails, give the line it ends on (`gh run view <id>
+   --log-failed`: the version in review, or what went wrong) and stop.
+6. Tag and push: `git tag "store-$v" origin/main && git push origin
    "store-$v"`. Then find the run it made (`gh run list --workflow
    release.yml --event push --limit 1 --json databaseId,url,headBranch`,
    retrying briefly until its `headBranch` is the tag) and give its URL.
-6. Remind the user that the Chrome Web Store refuses a new version while one
-   is in review: if the previous one is still there, its job fails, and the
-   tag must be deleted (`git push origin :store-$v`, `git tag -d store-$v`)
-   before sending again.
-
-Don't wait for the run to finish unless asked: its results are looked at
-afterwards (`gh run view <id>`, `gh run watch <id>`).
+7. Follow the run to its end: `gh run watch <id> --exit-status` in the
+   background (it takes several minutes, the end-to-end tests most of it),
+   then give each job's outcome (`gh run view <id> --json jobs`). If the
+   CI fails, nothing was sent: name the failing tests (`gh run view <id>
+   --log-failed`) and what they say, then delete the tag (`git push origin
+   :store-$v`, `git tag -d store-$v`): it would say this version was sent. If
+   `store` or `amo` fails, give its error line. If both pass, say each
+   store has the version in review.

@@ -1,0 +1,28 @@
+# Started by hand (`gh workflow run store-status.yml --ref main`), and by
+# `/ci-publish` in Claude Code before it pushes a store tag: the Chrome Web
+# Store reviews one version at a time and refuses the next meanwhile, so this
+# fails while one is in review. Firefox Add-ons queues versions: nothing to
+# check there.
+name: Store status
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+
+      - name: Chrome Web Store
+        env:
+          CWS_SERVICE_ACCOUNT: ${{ secrets.CWS_SERVICE_ACCOUNT }}
+          CWS_PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+        run: node scripts/store/publish-chrome.ts --check

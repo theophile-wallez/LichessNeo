@@ -4,7 +4,7 @@ import { authorize } from './google-auth.ts';
 import { fetchJson, PublishError } from './http.ts';
 
 // Sends the store zip to the Chrome Web Store and submits it for review, with
-// the store's API v2.
+// the store's API v2, or only checks that it has no version in review.
 
 export const ITEM_ID = 'diklhheikbkkodchopfhidgjkdjdjpla';
 export const API = 'https://chromewebstore.googleapis.com';
@@ -41,13 +41,16 @@ const PublishSchema = z.object({
 
 type Channels = z.infer<typeof ChannelsSchema>;
 
-export interface PublishOptions {
-  readonly zip: Uint8Array;
-  readonly version: string;
+export interface StoreAccess {
   /** The service account's JSON key. */
   readonly serviceAccount: string;
   readonly publisherId: string;
   readonly log?: (line: string) => void;
+}
+
+export interface PublishOptions extends StoreAccess {
+  readonly zip: Uint8Array;
+  readonly version: string;
   readonly sleep?: (ms: number) => Promise<void>;
 }
 
@@ -67,14 +70,10 @@ const fetchStatus = ({ item, auth }: Session): Promise<z.infer<typeof StatusSche
 
 // The store reviews one submission at a time: say so rather than have the
 // upload fail on it.
-async function checkNothingInReview(
-  session: Session,
-  version: string,
-  log: (line: string) => void,
-): Promise<void> {
+async function checkNothingInReview(session: Session, log: (line: string) => void): Promise<void> {
   const status = await fetchStatus(session);
   const live = channelVersion(status.publishedItemRevisionStatus?.distributionChannels);
-  log(`On the store: ${live ?? 'nothing yet'}. Sending ${version}.`);
+  log(`On the store: ${live ?? 'nothing yet'}.`);
   const pending = status.submittedItemRevisionStatus;
   if (pending?.state !== 'PENDING_REVIEW') return;
   const inReview = channelVersion(pending.distributionChannels) ?? 'a version';
@@ -121,13 +120,23 @@ async function submit(
   log(`${version} submitted: ${String(published.state)}.`);
 }
 
+const openSession = async ({ serviceAccount, publisherId }: StoreAccess): Promise<Session> => ({
+  item: `publishers/${publisherId}/items/${ITEM_ID}`,
+  auth: await authorize(serviceAccount, SCOPE),
+});
+
+/** Fails if a version is in review, as the store would refuse the next one. */
+export async function checkChromeWebStore(access: StoreAccess): Promise<void> {
+  const log = access.log ?? console.log;
+  await checkNothingInReview(await openSession(access), log);
+  log('Nothing in review: a new version can be sent.');
+}
+
 export async function publishToChromeWebStore(options: PublishOptions): Promise<void> {
   const log = options.log ?? console.log;
-  const session: Session = {
-    item: `publishers/${options.publisherId}/items/${ITEM_ID}`,
-    auth: await authorize(options.serviceAccount, SCOPE),
-  };
-  await checkNothingInReview(session, options.version, log);
+  const session = await openSession(options);
+  await checkNothingInReview(session, log);
+  log(`Sending ${options.version}.`);
   await upload(session, options);
   await submit(session, options.version, log);
 }
