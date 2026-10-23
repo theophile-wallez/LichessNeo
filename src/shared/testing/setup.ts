@@ -12,3 +12,4 @@ if (!('rows' in HTMLTableSectionElement.prototype)) {
 
 // The build's constant (build-mode.ts): a release build's, unless a test stubs it.
 Reflect.set(globalThis, 'LN_EXT_DEV_BUILD', false);
+Reflect.set(globalThis, 'LN_EXT_PREVIEW', '');

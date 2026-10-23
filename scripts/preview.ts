@@ -1,7 +1,11 @@
 // Builds this worktree into the main checkout's dist/chrome, the copy Chrome
 // loads, and notes that Chrome shows it now:
 //
-//   node scripts/preview.ts [--thread <T3 thread id>] [--take]
+//   node scripts/preview.ts --name <what it shows> [--thread <T3 thread id>] [--take]
+//
+// The name, a few words for the user ("Eval bar on flipped boards"), is shown
+// on every Lichess page, so they know which draft they're judging. The main
+// checkout's build, what was shipped, is named main.
 //
 // It never replaces another worktree's draft unasked: it names that worktree
 // and stops, for its session to be told first, then --take replaces it. Nor
@@ -11,12 +15,16 @@
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
-import { describeClaim, isFree, readClaim, takeTurn } from './lib/claims.ts';
+import { describeClaim, isFree, previewName, readClaim, takeTurn } from './lib/claims.ts';
 import { fromRoot } from './lib/paths.ts';
 import { claimantHere, commitsBehindMain, turnsDir } from './lib/worktree.ts';
 
 const { values } = parseArgs({
-  options: { thread: { type: 'string' }, take: { type: 'boolean', default: false } },
+  options: {
+    name: { type: 'string' },
+    thread: { type: 'string' },
+    take: { type: 'boolean', default: false },
+  },
 });
 
 const behind = commitsBehindMain();
@@ -27,7 +35,13 @@ if (behind > 0) {
 }
 
 const dir = turnsDir();
-const claimant = claimantHere(values.thread);
+const here = claimantHere(values.thread);
+const name = previewName(values.name, here);
+if (name === null) {
+  console.error('Name what this preview shows, for the user: --name "Eval bar on flipped boards".');
+  process.exit(1);
+}
+const claimant = { ...here, name };
 const shown = readClaim(dir, 'preview');
 
 if (shown !== null && !values.take && !isFree('preview', shown, claimant, Date.now())) {
@@ -38,13 +52,19 @@ if (shown !== null && !values.take && !isFree('preview', shown, claimant, Date.n
 
 execFileSync(
   process.execPath,
-  [fromRoot('scripts/build.ts'), '--out', path.join(claimant.mainCheckout, 'dist', 'chrome')],
+  [
+    fromRoot('scripts/build.ts'),
+    '--out',
+    path.join(claimant.mainCheckout, 'dist', 'chrome'),
+    '--preview',
+    name,
+  ],
   { stdio: 'inherit' },
 );
 
 const outcome = takeTurn(dir, 'preview', claimant, { force: true });
 const previous = outcome.taken ? outcome.previous : null;
-console.log(`Chrome shows ${claimant.branch} now, once a Lichess tab gets focus.`);
+console.log(`Chrome shows "${name}" (${claimant.branch}) now, once a Lichess tab gets focus.`);
 if (previous !== null && previous.worktree !== claimant.worktree) {
   console.log(`It replaced ${describeClaim(previous)}.`);
 }

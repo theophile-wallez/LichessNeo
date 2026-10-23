@@ -1,9 +1,10 @@
 // Builds the extension into dist/<target>, ready to load unpacked or to zip.
 //
 //   node scripts/build.ts [--target chrome|chrome-store|firefox|all] [--release]
-//                         [--version x.y.z] [--out dir] [--watch]
+//                         [--version x.y.z] [--out dir] [--preview name] [--watch]
 //
 // A --release build without --version counts the commits: it needs a full clone.
+// --preview names on the page what a dev build shows (pnpm preview passes it).
 
 import { watch } from 'node:fs';
 import path from 'node:path';
@@ -16,6 +17,7 @@ const { values } = parseArgs({
   options: {
     target: { type: 'string', default: 'chrome' },
     out: { type: 'string' },
+    preview: { type: 'string' },
     version: { type: 'string' },
     release: { type: 'boolean', default: false },
     watch: { type: 'boolean', default: false },
@@ -27,6 +29,8 @@ const targets =
 if (targets.length === 0) throw new Error(`unknown target: ${values.target}`);
 if (values.out !== undefined && targets.length > 1)
   throw new Error('--out needs a single --target');
+if (values.preview !== undefined && values.release)
+  throw new Error('--preview is for dev builds: a release names nothing');
 
 async function buildAll(): Promise<void> {
   // A dev build may guess its version; a release build must count every commit.
@@ -34,7 +38,7 @@ async function buildAll(): Promise<void> {
   const started = performance.now();
   for (const target of targets) {
     const out = values.out === undefined ? fromRoot('dist', target) : path.resolve(values.out);
-    await buildTarget({ target, out, version, release: values.release });
+    await buildTarget({ target, out, version, release: values.release, preview: values.preview });
   }
   console.log(
     `Built ${targets.join(', ')} ${version} in ${Math.round(performance.now() - started)} ms`,

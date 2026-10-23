@@ -3,6 +3,11 @@
 // (`--release`, `pnpm package`), what users install: a plain constant, so the
 // minifier drops the dev code from release bundles. The tests' setup sets it.
 declare const LN_EXT_DEV_BUILD: boolean;
+// What a preview shows (`pnpm preview --name`): empty in any other build.
+declare const LN_EXT_PREVIEW: string;
 
 /** A dev build, which reloads itself when rebuilt. */
 export const DEV_BUILD: boolean = LN_EXT_DEV_BUILD;
+
+/** The name of the draft a preview build shows, or '' outside a preview. */
+export const PREVIEW_NAME: string = LN_EXT_DEV_BUILD ? LN_EXT_PREVIEW : '';

@@ -66,6 +66,7 @@ import { copyFields } from './ui/copy-fields.ts';
 import { tabs } from './ui/tabs.ts';
 import { notices } from './notices/index.ts';
 import { devReload } from './dev/reload.ts';
+import { previewName } from './dev/preview-name.ts';
 import { radar } from './charts/radar/index.ts';
 import { puzzleDashboard } from './puzzle-dashboard/index.ts';
 import { puzzleHistory } from './puzzle-dashboard/history/index.ts';
@@ -144,6 +145,7 @@ const FEATURES = [
   tabs,
   notices,
   devReload,
+  previewName,
   radar,
   puzzleDashboard,
   puzzleHistory,

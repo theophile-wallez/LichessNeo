@@ -1,0 +1,34 @@
+/* The name of the draft a preview build shows (content/dev/preview-name.ts), hung from the
+ * window's top edge. Clicks go through it: it sits over whatever the page has there. */
+.ln-ext-preview-name {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 2147483647;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  max-width: min(60vw, 520px);
+  padding: 3px 12px 4px;
+  border-radius: 0 0 10px 10px;
+  background: var(--ln-ext-orange);
+  box-shadow: 0 2px 8px var(--ln-ext-shade-25);
+  color: var(--ln-ext-ink);
+  font: 600 12px/1.3 var(--ln-ext-font);
+  white-space: nowrap;
+  pointer-events: none;
+  translate: -50% 0;
+}
+
+.ln-ext-preview-name > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ln-ext-preview-name__label {
+  flex: none;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  text-transform: uppercase;
+}

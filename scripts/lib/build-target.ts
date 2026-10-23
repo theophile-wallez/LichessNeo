@@ -28,6 +28,8 @@ export interface BuildOptions {
   readonly version: string;
   /** Minified, without source maps or CSS comments: what the stores get. */
   readonly release: boolean;
+  /** What a preview shows, named on the page (#content/dev/preview-name.ts). */
+  readonly preview?: string | undefined;
 }
 
 /** Promise.all that waits for every task before it fails, so none is left writing. */
@@ -38,7 +40,7 @@ async function settleAll<T>(tasks: readonly Promise<T>[]): Promise<T[]> {
 }
 
 /** Bundles the scripts, and returns the modules bundled into them. */
-async function bundleScripts({ out, release }: BuildOptions): Promise<string[]> {
+async function bundleScripts({ out, release, preview = '' }: BuildOptions): Promise<string[]> {
   // A failed build removes its staging folder: no bundle may still be writing into it.
   const bundles = await settleAll(
     SCRIPTS.map(({ input, output, format }) =>
@@ -46,8 +48,13 @@ async function bundleScripts({ out, release }: BuildOptions): Promise<string[]> 
         input: fromRoot(input),
         platform: 'browser',
         logLevel: 'warn',
-        // Read by #shared/build-mode.ts: only a dev build reloads itself.
-        transform: { define: { LN_EXT_DEV_BUILD: String(!release) } },
+        // Read by #shared/build-mode.ts: only a dev build reloads itself and names its preview.
+        transform: {
+          define: {
+            LN_EXT_DEV_BUILD: String(!release),
+            LN_EXT_PREVIEW: JSON.stringify(release ? '' : preview),
+          },
+        },
         output: {
           file: path.join(out, output),
           format,

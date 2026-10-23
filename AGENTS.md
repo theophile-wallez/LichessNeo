@@ -135,9 +135,11 @@ must be short. A change goes in two steps.
    bar above, but no new tests, no Playwright, no viewport sweep. Run
    `pnpm check:fast` (types, lint, format, source rules, and only the unit
    tests of what changed since `origin/main`: seconds, not a minute) and fix
-   what it finds, then `pnpm preview --thread <id>`: it builds into the main
-   checkout's `dist/chrome`, which Chrome reloads when a Lichess tab next
-   gets focus. Rebase onto `origin/main` before each preview, and take your
+   what it finds, then `pnpm preview --name "<what it shows>" --thread <id>`:
+   it builds into the main checkout's `dist/chrome`, which Chrome reloads when
+   a Lichess tab next gets focus, with the name at the top of every page (a
+   few words for the user, in their language: "Barre d'éval, plateau
+   retourné"), so they know which draft they see. Rebase onto `origin/main` before each preview, and take your
    turn at it: Chrome shows one draft at a time (see
    [Sessions side by side](#sessions-side-by-side)). Tell the user what
    to look at, and iterate on their feedback. Commit nothing yet.
@@ -178,7 +180,7 @@ session and stops. The user may be judging that draft, so:
 - if that session is running, tell it (`t3_thread_send`) that Chrome won't
   show its draft any more and that it must preview again before asking the
   user to look; an idle one needs no message, see the next point. Then run
-  `pnpm preview --take --thread <id>`, and tell the user, linking the other
+  `pnpm preview --take --name "<what it shows>" --thread <id>`, and tell the user, linking the other
   session, that Chrome shows this draft in its place;
 - when the user comes back to a draft, run `pnpm turn` before telling them
   what to look at: if Chrome shows another draft, preview again.
@@ -229,7 +231,7 @@ hold:
 | `pnpm install`                  | installs the dependencies (Node 24 first, and `corepack enable` for pnpm)        |
 | `pnpm build`                    | builds `dist/chrome` with source maps (`--target firefox`, `--release`, `--out`) |
 | `pnpm dev`                      | the same, rebuilt on every change                                                |
-| `pnpm preview`                  | builds into the main checkout's `dist/chrome`, the one Chrome loads, in turn     |
+| `pnpm preview --name <name>`    | builds into the main checkout's `dist/chrome`, the one Chrome loads, in turn     |
 | `pnpm turn`                     | who holds the preview and the ship turn (`take ship --wait`, `release ship`)     |
 | `pnpm playground`               | serves the mascots' playground on localhost:5180, reloaded on every change       |
 | `pnpm check`                    | typecheck, lint, format check, source rules, unit tests                          |
@@ -762,8 +764,8 @@ Don't open a PR.
    fetch, rebase and push again. If the rebase brought in changes to the
    files you touched, run `pnpm check` again first.
 2. In the main checkout, `git pull --ff-only`, then
-   `pnpm install --frozen-lockfile && pnpm preview`: Chrome loads its
-   `dist/chrome`, and reloads itself when a Lichess tab next gets focus. If
+   `pnpm install --frozen-lockfile && pnpm preview` (named `main` there):
+   Chrome loads its `dist/chrome`, and reloads itself when a Lichess tab next gets focus. If
    `pnpm preview` names another session's draft, leave it on show, as the
    user is judging it, and say so in your summary. Then
    `pnpm turn release ship`, and tell the next session in line.

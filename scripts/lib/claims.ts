@@ -14,6 +14,8 @@ const ClaimSchema = z.object({
   worktree: z.string(),
   branch: z.string(),
   thread: z.optional(z.string()),
+  // What a preview shows, as its badge names it.
+  name: z.optional(z.string()),
   since: z.number(),
 });
 
@@ -24,6 +26,7 @@ export interface Claimant {
   worktree: string;
   branch: string;
   thread?: string | undefined;
+  name?: string | undefined;
   mainCheckout: string;
 }
 
@@ -61,8 +64,8 @@ export function takeTurn(
 ): Outcome {
   mkdirSync(dir, { recursive: true });
   const file = claimFile(dir, turn);
-  const { worktree, branch, thread } = claimant;
-  const text = JSON.stringify({ worktree, branch, thread, since: now });
+  const { worktree, branch, thread, name } = claimant;
+  const text = JSON.stringify({ worktree, branch, thread, name, since: now });
   // Retried while another worktree swaps the file between our read and write.
   for (let attempt = 0; attempt < 5; attempt++) {
     const previous = readClaim(dir, turn);
@@ -103,9 +106,20 @@ function moveAside(file: string): boolean {
 const isCode = (error: unknown, code: string): boolean =>
   error instanceof Error && 'code' in error && error.code === code;
 
+/**
+ * What a preview is named: the name given, or `main` for the main checkout's
+ * build, what was shipped. Null when a draft has none.
+ */
+export function previewName(given: string | undefined, claimant: Claimant): string | null {
+  const name = given?.trim() ?? '';
+  if (name !== '') return name;
+  return claimant.worktree === claimant.mainCheckout ? 'main' : null;
+}
+
 /** One line on who holds a turn, for the scripts' output. */
 export function describeClaim(claim: Claim, now = Date.now()): string {
   const minutes = Math.max(0, Math.round((now - claim.since) / 60_000));
   const thread = claim.thread === undefined ? '' : `, T3 thread ${claim.thread}`;
-  return `${claim.branch} (${claim.worktree}${thread}), ${minutes} min ago`;
+  const name = claim.name === undefined ? '' : `"${claim.name}", `;
+  return `${name}${claim.branch} (${claim.worktree}${thread}), ${minutes} min ago`;
 }
