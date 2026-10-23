@@ -10,7 +10,10 @@ import { isTactical } from './tactical.ts';
 // per phase against what's expected at their rating. A game's moves make a
 // likelihood over the level it was played at, drawn around the player's
 // rating; the estimate is the posterior's mean. Without a rating (an
-// anonymous player, the AI) the population is the prior.
+// anonymous player, the AI) the population is the prior. As in fit.py, the
+// moves of a game already lost for good don't count: weaker players play on
+// to the mate where stronger ones resign, so the easy best moves played there
+// would read as a weak player's.
 
 export type PhaseVerdict =
   | 'book'
@@ -63,12 +66,16 @@ const PHASE_KEYS: Readonly<Record<Phase, PhaseKey>> = {
 // The upper ends of the loss bands (best … blunder), as in fit.py.
 const LOSS_BANDS = [0.5, 2, 5, 10, 20];
 const VERDICTS: readonly PhaseVerdict[] = ['best', 'excellent', 'good', 'inaccuracy', 'mistake'];
+// The mover's win chance under which a move isn't counted, as in fit.py.
+const LOST_FOR_GOOD = 2;
 
 interface ScoredMove {
   readonly color: Color;
   readonly phase: Phase | 'book';
   readonly context: number;
   readonly band: number;
+  /** Out of the book, and not in a game already lost for good. */
+  readonly counted: boolean;
 }
 
 function movePhase(move: RatedMove, previous: RatedMove | undefined, division: Division): Phase {
@@ -87,13 +94,16 @@ function standingIndex(winChance: number): number {
 
 function scoreMoves(moves: readonly RatedMove[], division: Division): ScoredMove[] {
   return moves.map((move, i) => {
-    if (move.moveClass === 'book') return { color: move.color, phase: 'book', context: 0, band: 0 };
+    const { color } = move;
+    if (move.moveClass === 'book')
+      return { color, phase: 'book', context: 0, band: 0, counted: false };
     const phase = movePhase(move, moves[i - 1], division);
+    const before = forColor(move.before.whiteWinChance, color);
     // Lost, level or winning: in a won position even a blunder costs little.
-    const context =
-      PHASES.indexOf(phase) * 3 + standingIndex(forColor(move.before.whiteWinChance, move.color));
+    const context = PHASES.indexOf(phase) * 3 + standingIndex(before);
     const band = LOSS_BANDS.findIndex(limit => move.loss < limit);
-    return { color: move.color, phase, context, band: band < 0 ? LOSS_BANDS.length : band };
+    const counted = before >= LOST_FOR_GOOD;
+    return { color, phase, context, band: band < 0 ? LOSS_BANDS.length : band, counted };
   });
 }
 
@@ -123,7 +133,7 @@ function ratePlayer(
   own: readonly ScoredMove[],
   rating: number | null,
 ): PlayerRating | null {
-  const played = own.filter(move => move.phase !== 'book');
+  const played = own.filter(move => move.counted);
   if (played.length === 0) return null;
   const model = ratingModel();
   const tau = model.tau[rater.speed];

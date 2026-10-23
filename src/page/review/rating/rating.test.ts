@@ -1,5 +1,6 @@
 import { z } from 'zod/mini';
 import { describe, expect, it } from 'vitest';
+import { forColor } from '#page/review/evaluation/score.ts';
 import { fixtureGames, replay } from '#page/review/fixtures/replay.ts';
 import { nearly } from '#shared/testing/numbers.ts';
 import { ratingModel, type Speed } from './model.ts';
@@ -104,6 +105,10 @@ function fromLegacy(rating: z.infer<typeof LegacyRatingSchema>): GameRating['whi
   return { elo: rating.elo, phases: { opening: o, tactics: t, strategy: s, endgame: e } };
 }
 
+/** A move played with under 2% to win, where rate-game.ts stops counting. */
+const lostForGood = (move: ReturnType<typeof replay>[number]): boolean =>
+  forColor(move.before.whiteWinChance, move.color) < 2;
+
 describe('rateGame', () => {
   it('rates each player as the original did', () => {
     for (const { game, speed, white, black, rating } of LegacyRatingsSchema.parse(legacyRatings)) {
@@ -121,6 +126,21 @@ describe('rateGame', () => {
       });
       expect(result).toEqual({ white: fromLegacy(rating.w), black: fromLegacy(rating.b) });
     }
+  });
+
+  // Weaker players play on to the mate where stronger ones resign: what a lost
+  // side plays there must say nothing of its level, good or bad.
+  it('doesn’t count the moves of a game lost for good', () => {
+    const index = games.findIndex(game => replay(game).some(lostForGood));
+    const fixture = games[index];
+    const lost = fixture && replay(fixture).find(lostForGood)?.color;
+    if (!fixture || !lost) throw new Error('no game played on when lost');
+    const moves = replay(fixture);
+    const blundered = moves.map(move => (lostForGood(move) ? { ...move, loss: 50 } : move));
+    // Only the lost side's: a blunder makes its opponent's next move a tactic.
+    const rate = (played: typeof moves): GameRating[typeof lost] =>
+      rateGame({ speed: 'blitz', fens: fensOf(index), moves: played, ratings: {} })[lost];
+    expect(rate(blundered)).toEqual(rate(moves));
   });
 
   it('has nothing to say about a player without a move', () => {

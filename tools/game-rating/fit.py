@@ -13,7 +13,9 @@ strategy, endgame) and whether the mover was lost, level or winning (in a
 won position even a big blunder costs little win%). A game's moves make a
 likelihood over the level it was played at, and that level is drawn around
 the player's rating, with a width (tau) fitted on held-out games: the
-posterior's mean is the game rating. Without a rating (an anonymous player),
+posterior's mean is the game rating. Moves played in a game already lost for
+good don't count: weaker players play on to the mate where stronger ones
+resign, so the easy best moves played there would read as a weak player's. Without a rating (an anonymous player),
 the population is the prior. src/page/review/rating/model.ts reads it.
 """
 
@@ -45,10 +47,18 @@ FEATURES = 3  # 1, x and x², in x = (rating - 1500) / 500
 LOW, HIGH = -1.6, 2.2  # x's range for the quadratic, linear beyond
 GRID = np.arange(100, 3201, 10)  # the ratings the posterior is computed at
 TAUS = range(50, 1001, 25)
-MIN_MOVES = 5  # out of the book, for a player-game to count
+MIN_MOVES = 5  # counted, for a player-game to count
+LOST_FOR_GOOD = 2  # the mover's win% under which a move isn't counted
 RATING_BIN = 50
 # The phase verdicts, from best to blunder: shares of all phases played.
 VERDICT_SHARES = [0.10, 0.20, 0.35, 0.20, 0.10]
+
+
+def counted(move):
+    """Whether a move says something of the player's level: out of the book, and
+    not in a game already lost for good. rate-game.ts counts the same."""
+    _, before, phase = move
+    return phase != 'k' and before >= LOST_FOR_GOOD
 
 
 def band(loss):
@@ -109,7 +119,7 @@ def grid_log_p(theta):
 def game_log_likelihood(log_p, moves, phases=PHASES):
     """At each rating of GRID, from the moves played in `phases`."""
     total = np.zeros(len(GRID))
-    for loss, before, phase in moves:
+    for loss, before, phase in filter(counted, moves):
         if phase in phases:
             total += log_p[context(phase, before), :, band(loss)]
     return total
@@ -123,13 +133,13 @@ def estimate(log_likelihood, mu, sd):
 
 
 def load_player_games(path):
-    """extract.py's player-games by speed, those with enough moves out of the book."""
+    """extract.py's player-games by speed, those with enough moves counted."""
     by_speed = defaultdict(list)
     with Path(path).open() as file:
         for line in file:
             game = json.loads(line)
             speed = SPEED_OF.get(game['s'])
-            if speed and sum(1 for move in game['m'] if move[2] != 'k') >= MIN_MOVES:
+            if speed and sum(map(counted, game['m'])) >= MIN_MOVES:
                 by_speed[speed].append(game)
     return by_speed
 
@@ -139,9 +149,8 @@ def band_counts(games):
     counts = [defaultdict(lambda: [0] * BANDS) for _ in range(CONTEXTS)]
     for game in games:
         rating = round(game['r'] / RATING_BIN) * RATING_BIN
-        for loss, before, phase in game['m']:
-            if phase != 'k':
-                counts[context(phase, before)][rating][band(loss)] += 1
+        for loss, before, phase in filter(counted, game['m']):
+            counts[context(phase, before)][rating][band(loss)] += 1
     return counts
 
 
@@ -162,7 +171,7 @@ def phase_pulls(log_p, games, tau):
     pulls = {phase: [] for phase in PHASES}
     for game in games:
         for phase in PHASES:
-            if any(move[2] == phase for move in game['m']):
+            if any(counted(move) and move[2] == phase for move in game['m']):
                 log_likelihood = game_log_likelihood(log_p, game['m'], phase)
                 pulls[phase].append(estimate(log_likelihood, game['r'], tau) - game['r'])
     return pulls

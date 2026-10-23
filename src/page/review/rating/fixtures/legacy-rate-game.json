@@ -5,8 +5,11 @@
     "white": 1500,
     "black": 2100,
     "rating": {
-      "w": { "elo": 1750, "phases": { "o": "good", "t": "best", "s": "good", "e": "good" } },
-      "b": { "elo": 1950, "phases": { "o": "good", "t": "mistake", "s": "inaccuracy", "e": null } }
+      "w": {
+        "elo": 1800,
+        "phases": { "o": "good", "t": "excellent", "s": "excellent", "e": "good" }
+      },
+      "b": { "elo": 2000, "phases": { "o": "good", "t": "mistake", "s": "good", "e": null } }
     }
   },
   {
@@ -15,8 +18,8 @@
     "white": null,
     "black": 1800,
     "rating": {
-      "w": { "elo": 2000, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } },
-      "b": { "elo": 1750, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": null } }
+      "w": { "elo": 2000, "phases": { "o": "good", "t": "good", "s": "good", "e": "inaccuracy" } },
+      "b": { "elo": 1800, "phases": { "o": "good", "t": "mistake", "s": "good", "e": null } }
     }
   },
   {
@@ -25,8 +28,8 @@
     "white": null,
     "black": null,
     "rating": {
-      "w": { "elo": 2000, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } },
-      "b": { "elo": 1750, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": null } }
+      "w": { "elo": 2000, "phases": { "o": "good", "t": "good", "s": "good", "e": "inaccuracy" } },
+      "b": { "elo": 1750, "phases": { "o": "good", "t": "mistake", "s": "good", "e": null } }
     }
   },
   {
@@ -35,8 +38,11 @@
     "white": 1537,
     "black": 2077,
     "rating": {
-      "w": { "elo": 1150, "phases": { "o": "mistake", "t": "good", "s": "mistake", "e": null } },
-      "b": { "elo": 1600, "phases": { "o": "blunder", "t": "inaccuracy", "s": "good", "e": null } }
+      "w": {
+        "elo": 1300,
+        "phases": { "o": "mistake", "t": "excellent", "s": "inaccuracy", "e": null }
+      },
+      "b": { "elo": 1650, "phases": { "o": "blunder", "t": "inaccuracy", "s": "good", "e": null } }
     }
   },
   {
@@ -46,10 +52,10 @@
     "black": 1800,
     "rating": {
       "w": {
-        "elo": 1200,
-        "phases": { "o": "inaccuracy", "t": "best", "s": "inaccuracy", "e": null }
+        "elo": 1350,
+        "phases": { "o": "inaccuracy", "t": "excellent", "s": "good", "e": null }
       },
-      "b": { "elo": 1400, "phases": { "o": "blunder", "t": "good", "s": "good", "e": null } }
+      "b": { "elo": 1450, "phases": { "o": "mistake", "t": "good", "s": "good", "e": null } }
     }
   },
   {
@@ -59,11 +65,11 @@
     "black": null,
     "rating": {
       "w": {
-        "elo": 1200,
-        "phases": { "o": "inaccuracy", "t": "best", "s": "inaccuracy", "e": null }
+        "elo": 1350,
+        "phases": { "o": "inaccuracy", "t": "excellent", "s": "good", "e": null }
       },
       "b": {
-        "elo": 1350,
+        "elo": 1400,
         "phases": { "o": "mistake", "t": "excellent", "s": "excellent", "e": null }
       }
     }
@@ -75,7 +81,7 @@
     "black": 2054,
     "rating": {
       "w": {
-        "elo": 1250,
+        "elo": 1300,
         "phases": { "o": "inaccuracy", "t": "good", "s": "inaccuracy", "e": null }
       },
       "b": {
@@ -91,7 +97,7 @@
     "black": 1800,
     "rating": {
       "w": {
-        "elo": 1200,
+        "elo": 1250,
         "phases": { "o": "inaccuracy", "t": "excellent", "s": "inaccuracy", "e": null }
       },
       "b": {
@@ -107,7 +113,7 @@
     "black": null,
     "rating": {
       "w": {
-        "elo": 1200,
+        "elo": 1250,
         "phases": { "o": "inaccuracy", "t": "excellent", "s": "inaccuracy", "e": null }
       },
       "b": {
@@ -122,7 +128,7 @@
     "white": 1611,
     "black": 2031,
     "rating": {
-      "w": { "elo": 1150, "phases": { "o": "mistake", "t": null, "s": null, "e": null } },
+      "w": { "elo": 1100, "phases": { "o": "mistake", "t": null, "s": null, "e": null } },
       "b": { "elo": 1450, "phases": { "o": "blunder", "t": null, "s": null, "e": null } }
     }
   },
@@ -153,11 +159,11 @@
     "black": 2008,
     "rating": {
       "w": {
-        "elo": 1450,
+        "elo": 1500,
         "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "inaccuracy" }
       },
       "b": {
-        "elo": 1700,
+        "elo": 1750,
         "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "inaccuracy" }
       }
     }
@@ -168,7 +174,7 @@
     "white": null,
     "black": 1800,
     "rating": {
-      "w": { "elo": 1400, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "good" } },
+      "w": { "elo": 1500, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "good" } },
       "b": {
         "elo": 1600,
         "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "inaccuracy" }
@@ -181,11 +187,8 @@
     "white": null,
     "black": null,
     "rating": {
-      "w": { "elo": 1400, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "good" } },
-      "b": {
-        "elo": 1500,
-        "phases": { "o": "inaccuracy", "t": "good", "s": "excellent", "e": "inaccuracy" }
-      }
+      "w": { "elo": 1500, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "good" } },
+      "b": { "elo": 1500, "phases": { "o": "good", "t": "good", "s": "good", "e": "inaccuracy" } }
     }
   },
   {
@@ -216,13 +219,10 @@
     "black": 1962,
     "rating": {
       "w": {
-        "elo": 1150,
+        "elo": 1200,
         "phases": { "o": "blunder", "t": "good", "s": "excellent", "e": "inaccuracy" }
       },
-      "b": {
-        "elo": 1550,
-        "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "blunder" }
-      }
+      "b": { "elo": 1600, "phases": { "o": "mistake", "t": "good", "s": "good", "e": "mistake" } }
     }
   },
   {
@@ -232,12 +232,12 @@
     "black": 1800,
     "rating": {
       "w": {
-        "elo": 1000,
+        "elo": 1050,
         "phases": { "o": "inaccuracy", "t": "excellent", "s": "excellent", "e": "good" }
       },
       "b": {
-        "elo": 1450,
-        "phases": { "o": "inaccuracy", "t": "excellent", "s": "excellent", "e": "blunder" }
+        "elo": 1500,
+        "phases": { "o": "inaccuracy", "t": "good", "s": "excellent", "e": "mistake" }
       }
     }
   },
@@ -248,12 +248,12 @@
     "black": null,
     "rating": {
       "w": {
-        "elo": 1000,
+        "elo": 1050,
         "phases": { "o": "inaccuracy", "t": "excellent", "s": "excellent", "e": "good" }
       },
       "b": {
-        "elo": 1250,
-        "phases": { "o": "good", "t": "excellent", "s": "excellent", "e": "mistake" }
+        "elo": 1350,
+        "phases": { "o": "inaccuracy", "t": "excellent", "s": "excellent", "e": "inaccuracy" }
       }
     }
   },
@@ -265,10 +265,10 @@
     "rating": {
       "w": {
         "elo": 900,
-        "phases": { "o": "blunder", "t": "inaccuracy", "s": "good", "e": "mistake" }
+        "phases": { "o": "blunder", "t": "inaccuracy", "s": "good", "e": "inaccuracy" }
       },
       "b": {
-        "elo": 1200,
+        "elo": 1300,
         "phases": { "o": "mistake", "t": "inaccuracy", "s": "inaccuracy", "e": "mistake" }
       }
     }
@@ -280,11 +280,11 @@
     "black": 1800,
     "rating": {
       "w": {
-        "elo": 700,
+        "elo": 750,
         "phases": { "o": "inaccuracy", "t": "excellent", "s": "excellent", "e": "excellent" }
       },
       "b": {
-        "elo": 1100,
+        "elo": 1250,
         "phases": { "o": "mistake", "t": "inaccuracy", "s": "inaccuracy", "e": "mistake" }
       }
     }
@@ -296,13 +296,10 @@
     "black": null,
     "rating": {
       "w": {
-        "elo": 700,
+        "elo": 750,
         "phases": { "o": "inaccuracy", "t": "excellent", "s": "excellent", "e": "excellent" }
       },
-      "b": {
-        "elo": 900,
-        "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "inaccuracy" }
-      }
+      "b": { "elo": 1050, "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "good" } }
     }
   },
   {
@@ -316,7 +313,7 @@
         "phases": { "o": "excellent", "t": "inaccuracy", "s": "excellent", "e": "mistake" }
       },
       "b": {
-        "elo": 1150,
+        "elo": 1250,
         "phases": { "o": "mistake", "t": "inaccuracy", "s": "mistake", "e": "mistake" }
       }
     }
@@ -328,11 +325,11 @@
     "black": 1800,
     "rating": {
       "w": {
-        "elo": 2050,
-        "phases": { "o": "good", "t": "inaccuracy", "s": "excellent", "e": "mistake" }
+        "elo": 2100,
+        "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "mistake" }
       },
       "b": {
-        "elo": 1100,
+        "elo": 1200,
         "phases": { "o": "inaccuracy", "t": "good", "s": "mistake", "e": "mistake" }
       }
     }
@@ -344,10 +341,10 @@
     "black": null,
     "rating": {
       "w": {
-        "elo": 2050,
-        "phases": { "o": "good", "t": "inaccuracy", "s": "excellent", "e": "mistake" }
+        "elo": 2100,
+        "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "mistake" }
       },
-      "b": { "elo": 1000, "phases": { "o": "good", "t": "excellent", "s": "good", "e": "good" } }
+      "b": { "elo": 1100, "phases": { "o": "good", "t": "excellent", "s": "good", "e": "good" } }
     }
   },
   {
@@ -357,12 +354,12 @@
     "black": 1893,
     "rating": {
       "w": {
-        "elo": 1500,
-        "phases": { "o": "mistake", "t": "inaccuracy", "s": "inaccuracy", "e": "good" }
+        "elo": 1600,
+        "phases": { "o": "mistake", "t": "inaccuracy", "s": "good", "e": "good" }
       },
       "b": {
-        "elo": 1500,
-        "phases": { "o": "blunder", "t": "excellent", "s": "inaccuracy", "e": "good" }
+        "elo": 1650,
+        "phases": { "o": "blunder", "t": "excellent", "s": "inaccuracy", "e": "excellent" }
       }
     }
   },
@@ -373,11 +370,11 @@
     "black": 1800,
     "rating": {
       "w": {
-        "elo": 1400,
-        "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "excellent" }
+        "elo": 1550,
+        "phases": { "o": "inaccuracy", "t": "good", "s": "excellent", "e": "good" }
       },
       "b": {
-        "elo": 1400,
+        "elo": 1600,
         "phases": { "o": "blunder", "t": "excellent", "s": "inaccuracy", "e": "excellent" }
       }
     }
@@ -389,10 +386,10 @@
     "black": null,
     "rating": {
       "w": {
-        "elo": 1400,
-        "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "excellent" }
+        "elo": 1550,
+        "phases": { "o": "inaccuracy", "t": "good", "s": "excellent", "e": "good" }
       },
-      "b": { "elo": 1350, "phases": { "o": "mistake", "t": "best", "s": "good", "e": "excellent" } }
+      "b": { "elo": 1550, "phases": { "o": "mistake", "t": "best", "s": "good", "e": "excellent" } }
     }
   },
   {
@@ -402,11 +399,11 @@
     "black": 1870,
     "rating": {
       "w": {
-        "elo": 1700,
+        "elo": 1650,
         "phases": { "o": "blunder", "t": "good", "s": "excellent", "e": "excellent" }
       },
       "b": {
-        "elo": 1900,
+        "elo": 1950,
         "phases": { "o": "good", "t": "inaccuracy", "s": "excellent", "e": "inaccuracy" }
       }
     }
@@ -418,12 +415,12 @@
     "black": 1800,
     "rating": {
       "w": {
-        "elo": 1400,
-        "phases": { "o": "mistake", "t": "good", "s": "best", "e": "excellent" }
+        "elo": 1350,
+        "phases": { "o": "blunder", "t": "good", "s": "excellent", "e": "excellent" }
       },
       "b": {
-        "elo": 1850,
-        "phases": { "o": "good", "t": "inaccuracy", "s": "excellent", "e": "inaccuracy" }
+        "elo": 1900,
+        "phases": { "o": "good", "t": "inaccuracy", "s": "excellent", "e": "good" }
       }
     }
   },
@@ -434,12 +431,12 @@
     "black": null,
     "rating": {
       "w": {
-        "elo": 1400,
-        "phases": { "o": "mistake", "t": "good", "s": "best", "e": "excellent" }
+        "elo": 1350,
+        "phases": { "o": "blunder", "t": "good", "s": "excellent", "e": "excellent" }
       },
       "b": {
         "elo": 1800,
-        "phases": { "o": "good", "t": "inaccuracy", "s": "excellent", "e": "inaccuracy" }
+        "phases": { "o": "good", "t": "inaccuracy", "s": "excellent", "e": "good" }
       }
     }
   },
@@ -449,20 +446,7 @@
     "white": 1907,
     "black": 1847,
     "rating": {
-      "w": { "elo": 1850, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } },
-      "b": {
-        "elo": 1550,
-        "phases": { "o": "inaccuracy", "t": "good", "s": "excellent", "e": "mistake" }
-      }
-    }
-  },
-  {
-    "game": 11,
-    "speed": "rapid",
-    "white": null,
-    "black": 1800,
-    "rating": {
-      "w": { "elo": 1450, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } },
+      "w": { "elo": 1900, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } },
       "b": {
         "elo": 1500,
         "phases": { "o": "inaccuracy", "t": "good", "s": "excellent", "e": "mistake" }
@@ -473,12 +457,25 @@
     "game": 11,
     "speed": "rapid",
     "white": null,
+    "black": 1800,
+    "rating": {
+      "w": { "elo": 1650, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } },
+      "b": {
+        "elo": 1450,
+        "phases": { "o": "inaccuracy", "t": "good", "s": "excellent", "e": "mistake" }
+      }
+    }
+  },
+  {
+    "game": 11,
+    "speed": "rapid",
+    "white": null,
     "black": null,
     "rating": {
-      "w": { "elo": 1450, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } },
+      "w": { "elo": 1650, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } },
       "b": {
-        "elo": 1050,
-        "phases": { "o": "inaccuracy", "t": "good", "s": "excellent", "e": "inaccuracy" }
+        "elo": 1100,
+        "phases": { "o": "inaccuracy", "t": "inaccuracy", "s": "excellent", "e": "inaccuracy" }
       }
     }
   },
@@ -489,7 +486,7 @@
     "black": 1824,
     "rating": {
       "w": {
-        "elo": 1500,
+        "elo": 1550,
         "phases": { "o": "inaccuracy", "t": "mistake", "s": "good", "e": "inaccuracy" }
       },
       "b": {
@@ -504,10 +501,7 @@
     "white": null,
     "black": 1800,
     "rating": {
-      "w": {
-        "elo": 1300,
-        "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "inaccuracy" }
-      },
+      "w": { "elo": 1400, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "good" } },
       "b": {
         "elo": 1400,
         "phases": { "o": "mistake", "t": "inaccuracy", "s": "good", "e": "mistake" }
@@ -520,10 +514,7 @@
     "white": null,
     "black": null,
     "rating": {
-      "w": {
-        "elo": 1300,
-        "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "inaccuracy" }
-      },
+      "w": { "elo": 1400, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "good" } },
       "b": { "elo": 1250, "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "good" } }
     }
   },
@@ -534,7 +525,7 @@
     "black": 1801,
     "rating": {
       "w": {
-        "elo": 1350,
+        "elo": 1450,
         "phases": { "o": "inaccuracy", "t": "mistake", "s": "inaccuracy", "e": "inaccuracy" }
       },
       "b": { "elo": 1650, "phases": { "o": "good", "t": "mistake", "s": "good", "e": "good" } }
@@ -547,8 +538,8 @@
     "black": 1800,
     "rating": {
       "w": {
-        "elo": 1000,
-        "phases": { "o": "inaccuracy", "t": "inaccuracy", "s": "good", "e": "good" }
+        "elo": 1150,
+        "phases": { "o": "inaccuracy", "t": "inaccuracy", "s": "good", "e": "inaccuracy" }
       },
       "b": { "elo": 1650, "phases": { "o": "good", "t": "mistake", "s": "good", "e": "good" } }
     }
@@ -560,10 +551,10 @@
     "black": null,
     "rating": {
       "w": {
-        "elo": 1000,
-        "phases": { "o": "inaccuracy", "t": "inaccuracy", "s": "good", "e": "good" }
+        "elo": 1150,
+        "phases": { "o": "inaccuracy", "t": "inaccuracy", "s": "good", "e": "inaccuracy" }
       },
-      "b": { "elo": 1500, "phases": { "o": "good", "t": "mistake", "s": "good", "e": "good" } }
+      "b": { "elo": 1550, "phases": { "o": "good", "t": "mistake", "s": "good", "e": "good" } }
     }
   },
   {
@@ -577,8 +568,8 @@
         "phases": { "o": "blunder", "t": "good", "s": "good", "e": "excellent" }
       },
       "b": {
-        "elo": 1000,
-        "phases": { "o": "blunder", "t": "good", "s": "inaccuracy", "e": "mistake" }
+        "elo": 1050,
+        "phases": { "o": "blunder", "t": null, "s": "inaccuracy", "e": "inaccuracy" }
       }
     }
   },
@@ -594,7 +585,7 @@
       },
       "b": {
         "elo": 1050,
-        "phases": { "o": "blunder", "t": "good", "s": "inaccuracy", "e": "mistake" }
+        "phases": { "o": "blunder", "t": null, "s": "inaccuracy", "e": "inaccuracy" }
       }
     }
   },
@@ -608,7 +599,7 @@
         "elo": 1450,
         "phases": { "o": "mistake", "t": "excellent", "s": "good", "e": "excellent" }
       },
-      "b": { "elo": 800, "phases": { "o": "inaccuracy", "t": "good", "s": "good", "e": "good" } }
+      "b": { "elo": 850, "phases": { "o": "inaccuracy", "t": null, "s": "good", "e": "good" } }
     }
   }
 ]

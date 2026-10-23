@@ -572,7 +572,7 @@
       },
       "rating": {
         "w": { "elo": 1800, "phases": { "o": "good", "t": "excellent", "s": "good", "e": "good" } },
-        "b": { "elo": 1900, "phases": { "o": "good", "t": "mistake", "s": "good", "e": null } }
+        "b": { "elo": 1850, "phases": { "o": "good", "t": "mistake", "s": "good", "e": null } }
       },
       "progress": 1,
       "version": 1,
@@ -2474,10 +2474,10 @@
       },
       "rating": {
         "w": {
-          "elo": 1450,
-          "phases": { "o": "good", "t": "good", "s": "good", "e": "inaccuracy" }
+          "elo": 1650,
+          "phases": { "o": "good", "t": "good", "s": "good", "e": "good" }
         },
-        "b": { "elo": 1250, "phases": { "o": "good", "t": "good", "s": "good", "e": "good" } }
+        "b": { "elo": 1350, "phases": { "o": "good", "t": "inaccuracy", "s": "good", "e": "good" } }
       },
       "progress": 1,
       "version": 2,
@@ -3529,12 +3529,12 @@
       },
       "rating": {
         "w": {
-          "elo": 1150,
+          "elo": 1200,
           "phases": { "o": "mistake", "t": "inaccuracy", "s": "good", "e": "inaccuracy" }
         },
         "b": {
-          "elo": 1500,
-          "phases": { "o": "mistake", "t": "inaccuracy", "s": "good", "e": "blunder" }
+          "elo": 1600,
+          "phases": { "o": "mistake", "t": "inaccuracy", "s": "good", "e": "mistake" }
         }
       },
       "progress": 1,
