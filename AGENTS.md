@@ -155,7 +155,10 @@ share two things: the preview Chrome loads (the main checkout's
 worktree sees), and talks to the others with T3's tools: `t3_thread_list`
 gives this session's id (`currentThreadId`) and the others', `t3_thread_read`
 a session's worktree and where it stands, `t3_thread_send` a message to it.
-Pass your id as `--thread <id>`, so the others know whom to tell.
+Pass your id as `--thread <id>`, so the others know whom to tell. A message
+says what the other session must do, in a line or two: not the story behind
+it, nor what git or `pnpm turn` already tells it. Send none where nothing
+below calls for one.
 
 **Before a preview.** Sessions ship side by side, so `main` moves under a
 draft: rebase onto it each time (`git fetch origin && git rebase --autostash
