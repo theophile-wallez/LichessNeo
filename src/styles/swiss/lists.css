@@ -87,6 +87,7 @@ main.swiss-home .swisses :is(thead, thead tr, thead th) {
 }
 
 main.swiss-home .swisses thead th {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -105,19 +106,23 @@ main.swiss-home .swisses:nth-of-type(1) thead th::before {
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  position: relative;
+  z-index: 1;
   background: var(--ln-ext-good);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
-  animation: ln-ext-swiss-pulse 1.6s ease-out infinite;
 }
 
-@keyframes ln-ext-swiss-pulse {
-  70% {
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--ln-ext-accent) 0%, transparent);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-accent) 0%, transparent);
-  }
+/* Its pulse (theme/live-ring.css), under it. */
+main.swiss-home .swisses:nth-of-type(1) thead th::after {
+  --ln-ext-ring-scale: 2.5;
+  content: '';
+  position: absolute;
+  top: calc(50% - 4px);
+  inset-inline-start: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
+  animation: ln-ext-live-ring 1.6s ease-out infinite;
 }
 
 main.swiss-home .swisses tbody {

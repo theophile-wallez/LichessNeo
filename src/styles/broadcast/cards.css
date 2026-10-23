@@ -189,24 +189,27 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
   margin-inline-end: -4px;
   border-radius: 50%;
   background: var(--ln-ext-white);
-  box-shadow: 0 0 0 0 #ffffffb3;
-  animation: ln-ext-live-pulse 1.6s ease-out infinite;
+}
+
+/* The dot's pulse (theme/live-ring.css), over the pill's padding. */
+.relay-card__live::after {
+  --ln-ext-ring-scale: 2.67;
+  content: '';
+  position: absolute;
+  top: calc(50% - 3px);
+  inset-inline-start: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffffb3;
+  animation: ln-ext-live-ring 1.6s ease-out infinite;
 }
 
 .relay-card__live {
+  position: relative;
   padding: 2px 8px 2px 7px;
   border-radius: 4px;
   background: var(--ln-ext-red-dark);
-}
-
-@keyframes ln-ext-live-pulse {
-  70% {
-    box-shadow: 0 0 0 5px #ffffff00;
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 #ffffff00;
-  }
 }
 
 .relay-card__crowd {

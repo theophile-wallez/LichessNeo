@@ -41,6 +41,7 @@
 }
 
 .community__online > h2 {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -55,19 +56,23 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
+  position: relative;
+  z-index: 1;
   background: var(--ln-ext-good);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
-  animation: ln-ext-online-pulse 1.6s ease-out infinite;
 }
 
-@keyframes ln-ext-online-pulse {
-  70% {
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--ln-ext-accent) 0%, transparent);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-accent) 0%, transparent);
-  }
+/* Its pulse (theme/live-ring.css), under it. */
+.community__online > h2::after {
+  --ln-ext-ring-scale: 2.33;
+  content: '';
+  position: absolute;
+  top: calc(50% - 4.5px);
+  inset-inline-start: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
+  animation: ln-ext-live-ring 1.6s ease-out infinite;
 }
 
 .community__online .user-top {

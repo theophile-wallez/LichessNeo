@@ -227,8 +227,15 @@ main.round .rclock {
   margin-right: var(--ln-ext-inset-r, 0px) !important;
 }
 
+/* Out of sight but not `display: none`: Lichess animates the bar's transform through each
+ * move, and an element with no box can't hand that to the compositor, so Chrome restyled the
+ * page on every frame of a running clock. */
 main.round .rclock .bar {
-  display: none !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none;
 }
 
 /* Lichess's clock extras (tournament rank, +time, berserk) go before the clock, which

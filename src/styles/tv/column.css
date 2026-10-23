@@ -185,18 +185,20 @@
     border: 2px solid var(--ln-ext-bg-panel);
     border-radius: 50%;
     background: var(--ln-ext-red-dark);
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-red-dark) 70%, transparent);
-    animation: ln-ext-tv-live 1.6s ease-out infinite;
   }
 
-  @keyframes ln-ext-tv-live {
-    70% {
-      box-shadow: 0 0 0 6px color-mix(in srgb, var(--ln-ext-red-dark) 0%, transparent);
-    }
-
-    100% {
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-red-dark) 0%, transparent);
-    }
+  /* Its pulse (theme/live-ring.css), on the same spot: the tile has no pseudo-element left. */
+  main.round.tv-single .subnav .tv-channel.active > span::after {
+    --ln-ext-ring-scale: 1.86;
+    content: '';
+    position: absolute;
+    top: calc(50% - 22px);
+    inset-inline-start: 37px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ln-ext-red-dark) 70%, transparent);
+    animation: ln-ext-live-ring 1.6s ease-out infinite;
   }
 
   main.round.tv-single .tv-channel > span {
@@ -312,7 +314,8 @@
     inset-inline-start: calc(50% - 19px);
   }
 
-  main.round.tv-single .subnav .tv-channel.active::after {
+  main.round.tv-single .subnav .tv-channel.active::after,
+  main.round.tv-single .subnav .tv-channel.active > span::after {
     inset-inline-start: calc(50% + 12px);
   }
 

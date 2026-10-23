@@ -78,7 +78,12 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
   must cost next to nothing when nothing changed. Write only what changes
   (`setData`, `setStyleProperty`, `classList.toggle(name, force)`), and
   avoid layout reads in hot paths. No endless `requestAnimationFrame` or
-  animation loops, no `:has()` in hot places (see the pitfalls).
+  animation loops, no `:has()` in hot places (see the pitfalls). An endless
+  CSS animation moves only `transform`, `scale` or `opacity`, which the
+  compositor runs (`styles/animations.test.ts`; a pulse is a ring that
+  scales, `theme/live-ring.css`). Hide what Lichess animates out of sight,
+  not with `display: none`, which keeps its animation off the compositor
+  (the clock's bar, `game/layout.css`).
 - Markup built as text goes through the escaping `html` template
   (`#shared/html.ts`); `trustedHtml` is for constants only. A message
   handler checks `event.source === window` and validates with a schema

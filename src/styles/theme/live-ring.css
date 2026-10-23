@@ -1,0 +1,22 @@
+/* ---- Live rings --- */
+
+/* A live dot's pulse: a ring the dot's size, behind it, that grows by --ln-ext-ring-scale and
+   fades. Scaled, not spread as a box-shadow: the compositor runs a scale, where a box-shadow
+   restyled and repainted the page on every frame. */
+
+@keyframes ln-ext-live-ring {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+
+  70% {
+    opacity: 0;
+    scale: var(--ln-ext-ring-scale);
+  }
+
+  to {
+    opacity: 0;
+    scale: 1;
+  }
+}

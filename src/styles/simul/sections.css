@@ -89,6 +89,7 @@ main.page-menu.simul-list .slist thead th:is(.host, .players) {
 }
 
 main.page-menu.simul-list .slist thead th:first-child {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -120,19 +121,30 @@ main.page-menu.simul-list
     :has(+ tbody > tr:first-child:is(.scheduled, .create))
   )
   th:first-child::before {
+  position: relative;
+  z-index: 1;
   border-radius: 50%;
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
-  animation: ln-ext-simul-pulse 1.6s ease-out infinite;
+  box-shadow: none;
 }
 
-@keyframes ln-ext-simul-pulse {
-  70% {
-    box-shadow: 0 0 0 7px color-mix(in srgb, var(--ln-ext-accent) 0%, transparent);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ln-ext-accent) 0%, transparent);
-  }
+/* Its pulse (theme/live-ring.css), under it. */
+main.page-menu.simul-list
+  .slist
+  thead:has(+ tbody):not(
+    :has(+ tbody:last-child),
+    :has(+ tbody > tr:first-child:is(.scheduled, .create))
+  )
+  th:first-child::after {
+  --ln-ext-ring-scale: 2.17;
+  content: '';
+  position: absolute;
+  top: calc(50% - 6px);
+  inset-inline-start: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
+  animation: ln-ext-live-ring 1.6s ease-out infinite;
 }
 
 /* Lichess stacks the rows below 1020px: tablets keep two columns. */

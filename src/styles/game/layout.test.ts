@@ -101,3 +101,25 @@ describe('the first-move countdown', () => {
     expect(style.justifySelf).toBe('end');
   });
 });
+
+describe('Lichess’s clock bar', () => {
+  // Lichess animates the bar's transform through each move, hidden or not: with no box, the
+  // animation can't go to the compositor, and Chrome restyled the page on every frame.
+  it('keeps a box, out of sight, so its animation stays off the main thread', () => {
+    const style = document.createElement('style');
+    style.textContent =
+      '.rclock .bar { display: block; height: 3px; }' +
+      readFileSync(join(import.meta.dirname, 'layout.css'), 'utf8');
+    document.head.append(style);
+    document.body.innerHTML =
+      '<main class="round"><div class="rclock rclock-bottom running">' +
+      '<div class="time">2:29</div><div class="bar"></div></div></main>';
+    const bar = queryOne(document, '.bar', HTMLElement);
+    if (!bar) throw new Error('no bar');
+    const barStyle = getComputedStyle(bar);
+    expect(barStyle.display).not.toBe('none');
+    expect(barStyle.position).toBe('absolute');
+    expect(barStyle.width).toBe('1px');
+    expect(barStyle.opacity).toBe('0');
+  });
+});
