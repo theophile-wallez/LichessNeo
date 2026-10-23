@@ -263,7 +263,8 @@
   color: inherit !important;
 }
 
-/* Lichess's roundness slider sets its own boxes' radius, which ours don't read. */
-#dasher_app .sub.theme .ui-roundness {
-  display: none !important;
+/* Lichess prints the Roundness slider's value in a monospace font. */
+#dasher_app .sub.theme .slider-label span {
+  font-family: inherit !important;
+  font-variant-numeric: tabular-nums;
 }

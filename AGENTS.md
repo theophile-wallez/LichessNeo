@@ -303,6 +303,10 @@ What each feature folder holds is listed in
 - _A stylesheet:_ a file in `src/styles/`, imported from `index.css` at its
   place in the cascade.
 - _A storage key:_ in `StorageKey` or `SessionKey` (`src/shared/storage.ts`).
+- _A corner:_ a radius in px, as it looks at Lichess's default Roundness (its
+  Theme menu's slider): the build scales it by the slider
+  (`scripts/lib/css-roundness.ts`). A pill (`999px`) or a circle (`50%`)
+  keeps its shape.
 - _A color:_ a role of `styles/theme/base.css` (`--ln-ext-bg-panel`,
   `--ln-ext-text-dim`…), else the palette's (`styles/theme/palette.css`): a
   neutral step, a hue, `--ln-ext-lift-N` (the text's color at N%: hovers,

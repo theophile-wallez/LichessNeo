@@ -259,8 +259,9 @@ plainest. Each tile is laid turned any quarter, as the makers lay a real board.
 `src/styles/index.css` imports each page's stylesheet in cascade order; a
 stylesheet longer than 400 lines is a folder of partials with its own
 `index.css`. The build inlines the imports, byte for byte, into
-`content.css`; a release then drops its comments, blank lines and
-indentation (`scripts/lib/css-strip.ts`). Content-script CSS loses ties
+`content.css`, scales each corner written in px by Lichess's Roundness
+(`scripts/lib/css-roundness.ts`), and in a release drops the comments, blank
+lines and indentation (`scripts/lib/css-strip.ts`). Content-script CSS loses ties
 with Lichess's, hence the many `!important`s; scope every rule to its page
 (`main.round …`).
 

@@ -5,6 +5,7 @@ import { build } from 'rolldown';
 import { createManifest, ManifestSchema, OUTPUT, type Target } from '#manifest';
 import type { PreviewLink } from '#shared/build-mode.ts';
 import { bundleCss } from './css-bundle.ts';
+import { scaleRadii } from './css-roundness.ts';
 import { stripCss } from './css-strip.ts';
 import { assertExtensionUrls } from './extension-urls.ts';
 import { assertNoChromeUrls, toFirefoxCss } from './firefox.ts';
@@ -73,7 +74,7 @@ async function bundleScripts({ out, release, preview }: BuildOptions): Promise<s
 
 /** Writes the stylesheet, and returns it as Chrome gets it. */
 async function bundleStyles({ target, out, release }: BuildOptions): Promise<string> {
-  const bundled = await bundleCss(fromRoot('src/styles/index.css'));
+  const bundled = scaleRadii(await bundleCss(fromRoot('src/styles/index.css')));
   const css = release ? stripCss(bundled) : bundled;
   await writeFile(path.join(out, OUTPUT.styles), target === 'firefox' ? toFirefoxCss(css) : css);
   return css;

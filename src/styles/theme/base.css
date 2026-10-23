@@ -209,6 +209,12 @@
   --ln-ext-computer-bg: linear-gradient(160deg, #ff8a8e, #b3262d);
 }
 
+/* 1px at Lichess's default Roundness (its Theme menu, 0 to 15px): every
+ * corner in px is scaled by it at build time (scripts/lib/css-roundness.ts). */
+:root {
+  --ln-ext-radius-px: calc(var(---ui-roundness, 8px) / 8);
+}
+
 /* Paint html, not body: Lichess draws some things behind the page with a
  * negative z-index (the clock faces), which a painted body hides. */
 html {
