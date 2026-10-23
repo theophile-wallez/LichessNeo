@@ -1,0 +1,44 @@
+/* ---- The panel's outline --- */
+
+/* The panel right of the board is darker than the page by a step, which barely shows: a
+ * hairline around it sets it apart. Its parts are grid items of their own (tabs, moves,
+ * controls, chat, the review), so the line is drawn once, by a box over the cells they share,
+ * and over the game's controls (z-index 4), which stand on the panel's bottom. Below 1020px the parts follow one another and carry no outline. */
+
+@media (min-width: 1020px) {
+  /* Zen mode leaves the board's column only the clocks and the moves: no panel. */
+  body:not(.zen) main.round::after {
+    content: '';
+    grid-column: moves;
+    grid-row: tabs-start / moves-end;
+    z-index: 5;
+    pointer-events: none;
+    border: 1px solid var(--ln-ext-panel-border);
+    border-radius: 6px;
+  }
+
+  /* The panel's parts all sit in the last column, past the gap their margin leaves. */
+  main.analyse::after {
+    content: '';
+    grid-column: -2 / -1;
+    grid-row: 1 / -1;
+    z-index: 5;
+    pointer-events: none;
+    margin-left: var(--ln-ext-gap);
+    border: 1px solid var(--ln-ext-panel-border);
+    border-radius: 6px;
+  }
+}
+
+/* From where the puzzle's panel stands right of the board (puzzle/layout.css). */
+@media (min-width: 1259.3px) {
+  main.puzzle::after {
+    content: '';
+    grid-column: side;
+    grid-row: side-start / tools-end;
+    z-index: 5;
+    pointer-events: none;
+    border: 1px solid var(--ln-ext-panel-border);
+    border-radius: 12px;
+  }
+}

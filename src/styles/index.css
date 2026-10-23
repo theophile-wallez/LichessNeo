@@ -29,6 +29,8 @@
 @import './friends.css';
 @import './friendbox.css';
 @import './puzzle/index.css';
+/* After the game, analysis and puzzle layouts, whose panel it outlines. */
+@import './panel-outline.css';
 @import './blog/index.css';
 @import './practice.css';
 @import './practice-run/index.css';

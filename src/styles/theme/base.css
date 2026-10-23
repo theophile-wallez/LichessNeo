@@ -15,6 +15,8 @@
   --ln-ext-bg-raised: var(--ln-ext-neutral-6);
   --ln-ext-bg-raised-hover: var(--ln-ext-neutral-7);
   --ln-ext-border: var(--ln-ext-neutral-6);
+  /* Around the panel right of a board, a step darker than the page (panel-outline.css). */
+  --ln-ext-panel-border: var(--ln-ext-lift-10);
   --ln-ext-text: color-mix(in srgb, var(--ln-ext-neutral-14) 88%, transparent);
   --ln-ext-text-strong: var(--ln-ext-neutral-14);
   --ln-ext-text-dim: var(--ln-ext-neutral-11);
