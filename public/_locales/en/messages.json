@@ -639,6 +639,22 @@
     "message": "This isn't a theme's code.",
     "description": "When the pasted text isn't a theme's code."
   },
+  "settingNavigation": {
+    "message": "Navigation",
+    "description": "The setting of where the site's navigation sits on a wide window."
+  },
+  "settingNavigationBody": {
+    "message": "Where the site's menu sits on a wide window: a sidebar on the left, or a header across the top.",
+    "description": "What the navigation setting covers."
+  },
+  "navigationSidebar": {
+    "message": "Sidebar",
+    "description": "The navigation as a sidebar on the left."
+  },
+  "navigationHeader": {
+    "message": "Header",
+    "description": "The navigation as a header across the top."
+  },
   "settingSidebarRating": {
     "message": "Rating in the sidebar",
     "description": "The setting of which speed's rating shows beside the player's name in the sidebar."

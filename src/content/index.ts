@@ -4,6 +4,7 @@ import { packs } from './packs/index.ts';
 import { colorThemes } from './colors/index.ts';
 import { fonts } from './bootstrap/fonts.ts';
 import { donate } from './sidebar/donate.ts';
+import { navigation } from './sidebar/navigation.ts';
 import { sidebarCollapse } from './sidebar/collapse.ts';
 import { drawer } from './sidebar/drawer.ts';
 import { preferencesButton } from './sidebar/preferences-button.ts';
@@ -83,6 +84,7 @@ import { startSyncLoop } from './sync-loop.ts';
 const FEATURES = [
   fonts,
   donate,
+  navigation,
   sidebarCollapse,
   drawer,
   schemeToggle,

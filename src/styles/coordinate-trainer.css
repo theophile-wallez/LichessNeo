@@ -1,3 +1,117 @@
+/* ---- Coordinate trainer from 1020px --- */
+
+/* /training/coordinate fits the window. The board is capped as storm/run.css caps Storm's: by
+ * the width the sidebar leaves, and by the height left once the progress bar and, when naming
+ * squares, the keyboard sit under it. Lichess's grid kept a gap for each of its empty rows
+ * under the board, which ran the page past the window: those gaps go. The settings column
+ * scrolls on its own when it is taller than the window. The ranks get a gutter only when
+ * they show. */
+@media (min-width: 1020px) {
+  main#trainer > .trainer {
+    --ln-ext-coords-l: 0px;
+    /* Under the board: the files, then the progress bar. */
+    --ln-ext-trainer-under: calc(12px + var(---block-gap) + 10px);
+    --ln-ext-trainer-board: calc(
+      var(--ln-ext-main-h, 100dvh) - 2 * var(--ln-ext-page-top) - var(--ln-ext-trainer-under)
+    );
+
+    height: calc(var(--ln-ext-main-h, 100dvh) - var(--ln-ext-page-top));
+    row-gap: 0 !important;
+  }
+
+  main#trainer > .trainer:has(coords.ranks) {
+    --ln-ext-coords-l: calc(0.6 * var(--ln-ext-coords-size, 13px) + 10px);
+  }
+
+  /* Naming squares adds the keyboard: a 38px row over two rows of 38px keys. Its gap is set
+   * here, as Lichess's is in vh. */
+  main#trainer > .trainer:has(> .coordinate-input) {
+    --ln-ext-trainer-under: calc(12px + 2 * var(---block-gap) + 10px + 130px);
+  }
+
+  main#trainer .coordinate-input {
+    row-gap: 8px !important;
+  }
+
+  /* "Press enter to start" stays on one line, which keeps the row 38px. */
+  main#trainer .keyboard-container > span {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  main#trainer .keyboard-container strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  main#trainer > .trainer > :is(.progress, .coordinate-input) {
+    margin-top: var(---block-gap);
+  }
+
+  main#trainer .side {
+    min-height: 0;
+    padding-bottom: var(--ln-ext-page-top);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  /* A flex column: its cards would shrink rather than scroll. */
+  main#trainer .side > * {
+    flex-shrink: 0;
+  }
+}
+
+/* The side column under the table, beside the board. */
+@media (min-width: 1020px) and (max-width: 1259.29px) {
+  main#trainer > .trainer {
+    grid-template-columns:
+      min(
+        var(---col2-uniboard-width),
+        var(--ln-ext-trainer-board),
+        calc(
+          var(--ln-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--ln-ext-coords-l) -
+            275px
+        )
+      )
+      var(---block-gap)
+      minmax(240px, 400px) !important;
+    grid-template-rows: auto auto auto auto minmax(0, 1fr) !important;
+    margin-left: var(--ln-ext-coords-l);
+  }
+
+  main#trainer .side {
+    margin-top: var(---block-gap);
+  }
+}
+
+/* The side column on the left, over every row. */
+@media (min-width: 1259.3px) {
+  main#trainer > .trainer {
+    grid-template-columns:
+      minmax(var(---col3-uniboard-side-min, 250px), 350px)
+      calc(var(---block-gap) + var(--ln-ext-coords-l))
+      min(
+        var(---col3-uniboard-width),
+        var(--ln-ext-trainer-board),
+        calc(
+          var(--ln-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--ln-ext-coords-l) -
+            540px
+        )
+      )
+      var(---block-gap)
+      minmax(240px, 400px) !important;
+    grid-template-rows: auto auto auto minmax(0, 1fr) !important;
+  }
+
+  /* Over every row too, or a table taller than the board pushed the progress bar down. */
+  main#trainer .table {
+    grid-row: 1 / -1;
+    align-self: start;
+  }
+}
+
 /* ---- Coordinate trainer below 1020px --- */
 
 /* Phones and tablets (/training/coordinate, main#trainer): one column that scrolls, the board

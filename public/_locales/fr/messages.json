@@ -479,6 +479,18 @@
   "themeCodeInvalid": {
     "message": "Ce n’est pas le code d’un thème."
   },
+  "settingNavigation": {
+    "message": "Navigation"
+  },
+  "settingNavigationBody": {
+    "message": "La place du menu du site sur un grand écran : une barre latérale à gauche, ou un en-tête en haut."
+  },
+  "navigationSidebar": {
+    "message": "Barre latérale"
+  },
+  "navigationHeader": {
+    "message": "En-tête"
+  },
   "settingSidebarRating": {
     "message": "Classement dans la barre latérale"
   },

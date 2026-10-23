@@ -1,19 +1,18 @@
-import { z } from 'zod/mini';
 import { createElement, onDomReady, queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
-import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
+import { StorageKey, writeStored } from '#shared/storage.ts';
 import { message } from '#content/platform/runtime.ts';
+import { isCollapsed, showNavigation } from './navigation.ts';
 
 // The sidebar folds to its icons (styles/sidebar/collapsed.css). The choice is
 // kept and read at document_start, so a page never shows the other width first.
-// Folded, a section's flyout is all that names it: it gets the section's label.
+// Folded, or in the header's narrow widths, a section's flyout is all that names
+// it: it gets the section's label.
 
 const TOGGLE_ID = 'ln-ext-sidebar-toggle';
 
-const isCollapsed = (): boolean => readStored(StorageKey.sidebarCollapsed, z.literal('1')) !== null;
-
 function show(collapsed: boolean): void {
-  setData(document.documentElement, 'lnExtSidebar', collapsed ? 'collapsed' : null);
+  showNavigation();
   const toggle = document.getElementById(TOGGLE_ID);
   if (!toggle) return;
   const label = message(collapsed ? 'sidebarExpand' : 'sidebarCollapse');
@@ -63,8 +62,5 @@ function dressSidebar(): void {
 
 export const sidebarCollapse: Feature = {
   name: 'sidebar-collapse',
-  start: () => {
-    show(isCollapsed());
-    onDomReady(dressSidebar);
-  },
+  start: () => onDomReady(dressSidebar),
 };

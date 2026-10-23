@@ -38,6 +38,12 @@ describe('the settings', () => {
     expect(parseSettings({ sidebarRating: 'puzzle' }).sidebarRating).toBe('mostPlayed');
   });
 
+  it('put the nav in a sidebar by default, or in a header if asked', () => {
+    expect(parseSettings({}).navigation).toBe('sidebar');
+    expect(parseSettings({ navigation: 'header' }).navigation).toBe('header');
+    expect(parseSettings({ navigation: 'bottom' }).navigation).toBe('sidebar');
+  });
+
   it('count as read in a script the extension left behind, which can’t read them', () => {
     expect(settingsRead()).toBe(true);
   });

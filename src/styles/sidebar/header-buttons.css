@@ -1,0 +1,70 @@
+/* ---- Header, its buttons --- */
+
+/* The sidebar's bottom buttons (donate-and-buttons.css) in a row at the header's end: the
+ * search, the icons, then the account, as most sites have it. Their menus drop under it. */
+
+@media (min-width: 1020px) {
+  html[data-ln-ext-sidebar='header'] #top .site-buttons {
+    flex: none;
+    flex-flow: row nowrap !important;
+    gap: 4px;
+    padding: 0 !important;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top .site-buttons .link,
+  html[data-ln-ext-sidebar='header'] #top .site-buttons .toggle {
+    height: 36px !important;
+    line-height: 36px !important;
+    padding: 0 6px !important;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top #clinput {
+    position: relative;
+    flex: none;
+    width: 200px;
+    height: 36px !important;
+    margin-inline-end: 4px;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top #clinput input {
+    line-height: 36px !important;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top .signin-or-signup,
+  html[data-ln-ext-sidebar='header'] #top .dasher:has(#user_tag) {
+    order: 7;
+    flex: none;
+    margin: 0 0 0 6px;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top .signin-or-signup {
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top .signin-or-signup .button {
+    padding: 8px 16px !important;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top #user_tag {
+    width: auto;
+    max-width: 220px !important;
+    height: 36px;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top .site-buttons .dropdown {
+    top: calc(var(--ln-ext-header-h) - 4px) !important;
+    right: 8px !important;
+    bottom: auto !important;
+    left: auto !important;
+    max-height: calc(100dvh - var(--ln-ext-header-h) - 8px);
+  }
+
+  html[data-ln-ext-sidebar='header'] #top #clinput .complete-list {
+    position: absolute !important;
+    top: calc(100% + 6px) !important;
+    bottom: auto;
+    left: 0;
+    max-height: calc(100dvh - var(--ln-ext-header-h) - 16px);
+  }
+}

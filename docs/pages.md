@@ -43,13 +43,13 @@ and a white knob, and a single big number in the state's color.
 
 ## Learn
 
-| Page        | Path                   | Level | Next                                                                                                                             |
-| ----------- | ---------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Learn       | `/learn`               | 2     | a stage's coach says its goal in the review's card; no signature yet; below 1020px, a stage in one column                        |
-| Practice    | `/practice`            | 2     | sets the tone for 2                                                                                                              |
-| Coordinates | `/training/coordinate` | 1     | Lichess's text panel and tabs on a desktop; a title with its tile, the score on a track; below 1020px, cards and segmented picks |
-| Studies     | `/study`               | 2     | below 800px the menu is a strip of links that fades at its edges, as every side menu                                             |
-| Coaches     | `/coach`               | 2     | on phones a card has its picture at its side                                                                                     |
+| Page        | Path                   | Level | Next                                                                                                                                                                                    |
+| ----------- | ---------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Learn       | `/learn`               | 2     | a stage's coach says its goal in the review's card; no signature yet; below 1020px, a stage in one column                                                                               |
+| Practice    | `/practice`            | 2     | sets the tone for 2                                                                                                                                                                     |
+| Coordinates | `/training/coordinate` | 1     | Lichess's text panel and tabs on a desktop, fitting the window (the settings scroll on their own); a title with its tile, the score on a track; below 1020px, cards and segmented picks |
+| Studies     | `/study`               | 2     | below 800px the menu is a strip of links that fades at its edges, as every side menu                                                                                                    |
+| Coaches     | `/coach`               | 2     | on phones a card has its picture at its side                                                                                                                                            |
 
 ## Watch
 

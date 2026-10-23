@@ -1,0 +1,96 @@
+/* ---- The navigation's setting (content/settings/navigation-row.ts) --- */
+
+/* A tile per place, each a little window with its nav: a column on the left, or a bar
+ * across the top, and two cards of content. */
+.ln-ext-setting[data-ln-ext-setting='navigation'] {
+  --ln-ext-setting-color: var(--ln-ext-accent);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layout-top.svg');
+}
+
+.ln-ext-nav-picks {
+  display: flex;
+  flex: none;
+  gap: 8px;
+}
+
+.ln-ext-nav-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 8px 6px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-dim);
+  font: 600 12.5px var(--ln-ext-font);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s,
+    color 0.15s !important;
+}
+
+.ln-ext-nav-pick:hover {
+  background: var(--ln-ext-lift-5);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-nav-pick[aria-checked='true'] {
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--ln-ext-accent);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-nav-pick:focus-visible {
+  outline: 2px solid var(--ln-ext-accent);
+  outline-offset: 2px;
+}
+
+.ln-ext-nav-pick__mock {
+  display: grid;
+  gap: 3px;
+  box-sizing: border-box;
+  width: 72px;
+  height: 48px;
+  padding: 3px;
+  border-radius: 6px;
+  background: var(--ln-ext-bg-page);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-10);
+}
+
+.ln-ext-nav-pick__mock i {
+  border-radius: 2px;
+  background: var(--ln-ext-lift-10);
+}
+
+/* The nav, in the accent while picked. */
+.ln-ext-nav-pick__mock i:first-child {
+  grid-area: nav;
+  background: var(--ln-ext-lift-20);
+  transition: background 0.15s !important;
+}
+
+.ln-ext-nav-pick[aria-checked='true'] .ln-ext-nav-pick__mock i:first-child {
+  background: var(--ln-ext-accent);
+}
+
+.ln-ext-nav-pick[data-ln-ext-navigation='sidebar'] .ln-ext-nav-pick__mock {
+  grid-template: 'nav a' 1fr 'nav b' 1fr / 14px 1fr;
+}
+
+.ln-ext-nav-pick[data-ln-ext-navigation='header'] .ln-ext-nav-pick__mock {
+  grid-template: 'nav nav' 7px 'a b' 1fr / 2fr 1fr;
+}
+
+/* Narrow, the tiles go under the text. */
+@media (max-width: 640px) {
+  .ln-ext-setting[data-ln-ext-setting='navigation'] {
+    flex-wrap: wrap;
+  }
+
+  .ln-ext-nav-picks {
+    flex: 1 0 100%;
+  }
+}

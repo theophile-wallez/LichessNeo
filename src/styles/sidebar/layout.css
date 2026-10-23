@@ -1,5 +1,5 @@
-/* Lichess's top header as a fixed left sidebar, from 1020px.
- * Below that, its header stays, its hamburger opening the nav as a drawer (drawer.css). */
+/* Lichess's top header as a fixed left sidebar, from 1020px, or a bar across the top as the
+ * settings pick (header.css). Below that, its header stays, its hamburger opening the nav as a drawer (drawer.css). */
 
 /* A length, so it can be animated when the sidebar folds (collapsed.css). 0 below 1020px. */
 @property --ln-ext-sidebar-w {

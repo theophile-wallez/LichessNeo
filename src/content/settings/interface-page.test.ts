@@ -99,6 +99,23 @@ describe('the settings’ Interface page', () => {
     expect(storedSettings()).toMatchObject({ sidebarRating: 'hidden' });
   });
 
+  it('puts the nav where it’s picked, a sidebar by default', async () => {
+    const page = buildInterfacePage();
+    await flush();
+    const picks = queryAll(page, '.ln-ext-nav-pick', HTMLButtonElement);
+    const checked = (): (string | undefined)[] =>
+      picks
+        .filter(pick => pick.getAttribute('aria-checked') === 'true')
+        .map(pick => pick.dataset.lnExtNavigation);
+    expect(picks.map(pick => pick.dataset.lnExtNavigation)).toEqual(['sidebar', 'header']);
+    expect(checked()).toEqual(['sidebar']);
+    picks[1]
+      ?.querySelector('.ln-ext-nav-pick__name')
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    expect(storedSettings()).toMatchObject({ navigation: 'header' });
+    expect(checked()).toEqual(['header']);
+  });
+
   it('draws each rating’s option with its icon, a speed’s glyph in its color', async () => {
     const page = buildInterfacePage();
     await flush();

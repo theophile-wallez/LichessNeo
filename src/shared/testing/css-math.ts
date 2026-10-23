@@ -103,7 +103,7 @@ export function cssPixels(expression: string, viewport: Viewport): number {
 }
 
 /** The parts of a space-separated list, a `grid-template-columns`'s tracks, kept whole. */
-function splitTracks(value: string): string[] {
+export function splitTracks(value: string): string[] {
   const tracks: string[] = [];
   let current = '';
   let depth = 0;

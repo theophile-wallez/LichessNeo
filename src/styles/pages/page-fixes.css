@@ -34,51 +34,6 @@
   font-weight: 700;
 }
 
-/* Coordinate trainer: its board capped as storm/run.css caps Storm's, or the explanation and
- * Start button ran past the window. The ranks get a gutter only when shown. */
-@media (min-width: 1020px) {
-  main#trainer > .trainer {
-    --ln-ext-coords-l: 0px;
-  }
-
-  main#trainer > .trainer:has(coords.ranks) {
-    --ln-ext-coords-l: calc(0.6 * var(--ln-ext-coords-size, 13px) + 10px);
-  }
-}
-
-@media (min-width: 1020px) and (max-width: 1259.29px) {
-  main#trainer > .trainer {
-    grid-template-columns:
-      min(
-        var(---col2-uniboard-width),
-        calc(
-          var(--ln-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--ln-ext-coords-l) -
-            275px
-        )
-      )
-      var(---block-gap)
-      minmax(240px, 400px) !important;
-    margin-left: var(--ln-ext-coords-l);
-  }
-}
-
-@media (min-width: 1259.3px) {
-  main#trainer > .trainer {
-    grid-template-columns:
-      minmax(var(---col3-uniboard-side-min, 250px), 350px)
-      calc(var(---block-gap) + var(--ln-ext-coords-l))
-      min(
-        var(---col3-uniboard-width),
-        calc(
-          var(--ln-ext-main-w, 100vw) - 2 * var(---main-margin, 0px) - var(--ln-ext-coords-l) -
-            540px
-        )
-      )
-      var(---block-gap)
-      minmax(240px, 400px) !important;
-  }
-}
-
 /* A private race's invite link: the field shrinks rather than push its copy button out. */
 .racer .copy-me__target {
   min-width: 0;

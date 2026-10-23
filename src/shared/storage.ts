@@ -36,6 +36,9 @@ export const StorageKey = {
   boardZoom: prefixed('board-zoom'),
   // '1' while the sidebar is folded to its icons (content/sidebar/collapse.ts).
   sidebarCollapsed: prefixed('sidebar-collapsed'),
+  // The settings' pick of a sidebar or a header, kept here too to show it from document_start
+  // (content/sidebar/navigation.ts).
+  navigation: prefixed('navigation'),
   // The signed-in player's most played speed and its rating, and the others
   // (content/sidebar/account-rating.ts).
   accountRating: prefixed('account-rating'),

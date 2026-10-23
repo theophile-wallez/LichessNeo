@@ -13,6 +13,9 @@ import { CardPicksSchema } from '#content/pages/speed-cards/picks.ts';
 /** chrome.storage.sync keeps 8 KB per item: room for these and the rest. */
 export const MAX_CUSTOM_THEMES = 24;
 
+/** The nav from 1020px: a sidebar on the left, or a header across the top (content/sidebar). */
+export const NavigationSchema = z.enum(['sidebar', 'header']);
+
 export const SettingsSchema = z.object({
   /** The interface's own sounds (content/ui/sounds.ts), not Lichess's nor a pack's. */
   uiSounds: z.prefault(z.boolean(), true),
@@ -22,6 +25,7 @@ export const SettingsSchema = z.object({
   analysisCoach: z.prefault(z.boolean(), true),
   /** The coach drawing what it explains on the board (a pawn's square); off, it only says it. */
   coachBoard: z.prefault(z.boolean(), true),
+  navigation: z.catch(NavigationSchema, 'sidebar'),
   /** The speed whose rating the sidebar shows beside the player's name (content/sidebar). */
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
   /** The home's quick pairing cards, in their order (content/pages/speed-cards). */
