@@ -40,4 +40,18 @@ describe('the eval bar', () => {
       styled('#ln-ext-evalbar').borderRadius,
     );
   });
+
+  // A transform, unlike a height, lays nothing out again on each frame of the glide.
+  it('slides White’s share in from its side rather than resizing it', () => {
+    const style = document.createElement('style');
+    style.textContent = readFileSync(join(STYLES, 'review/eval-bar.css'), 'utf8');
+    document.head.append(style);
+    document.body.innerHTML = BOARD;
+    const fill = queryOne(document, '.ln-ext-evalbar__fill', HTMLElement);
+    fill?.style.setProperty('--ln-ext-bar-white', '30%');
+    expect(styled('.ln-ext-evalbar__fill').transition).toMatch(/^transform /);
+    expect(styled('.ln-ext-evalbar__fill').transform).toBe('translateY(calc(100% - 30%))');
+    queryOne(document, '#ln-ext-evalbar', HTMLElement)?.classList.add('ln-ext-evalbar--flip');
+    expect(styled('.ln-ext-evalbar__fill').transform).toBe('translateY(calc(30% - 100%))');
+  });
 });

@@ -182,8 +182,9 @@ it runs in Lichess's tools. Starting the move-by-move review turns it off
 has a server analysis, or Lichess offers to make one: not for a game of 4
 moves or fewer), with Lichess's own label.
 
-`render.ts` runs every 150 ms, and at once after each jump of the board
-(`page/lichess/jumps.ts`): it draws the panel again only when what it
+`render.ts` runs every 150 ms, and after each jump of the board
+(`page/lichess/jumps.ts`): the board's marks at once, the panel once the
+frame that shows the move is drawn (`renderJump`). It draws the panel again only when what it
 shows changes (`render-key.ts`), and then only the parts whose markup changed
 (`view/nav.ts`), keeping the buttons and scroll positions as they were; a move
 of the board moves the graph's cursor, drawing nothing else of it. Then the

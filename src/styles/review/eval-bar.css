@@ -26,18 +26,17 @@ html.ln-ext-evalbar-on main.analyse .eval-gauge {
 
 .ln-ext-evalbar__fill {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   /* Rounded at the frontier too. */
   border-radius: 6px;
   background: var(--ln-ext-white);
-  transition: height 0.3s ease !important;
+  /* Slid rather than sized: a transform lays nothing out again as it runs. */
+  transform: translateY(calc(100% - var(--ln-ext-bar-white, 50%)));
+  transition: transform 0.3s ease !important;
 }
 
 .ln-ext-evalbar--flip .ln-ext-evalbar__fill {
-  top: 0;
-  bottom: auto;
+  transform: translateY(calc(var(--ln-ext-bar-white, 50%) - 100%));
 }
 
 .ln-ext-evalbar__label {

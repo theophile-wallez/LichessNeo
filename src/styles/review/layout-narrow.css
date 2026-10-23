@@ -31,9 +31,8 @@
   }
 
   #ln-ext-evalbar .ln-ext-evalbar__fill {
-    top: 0;
-    bottom: auto;
     border-radius: 4px;
+    transform: translateY(calc(var(--ln-ext-bar-white, 50%) - 100%));
   }
 
   /* Upright again once turned. */

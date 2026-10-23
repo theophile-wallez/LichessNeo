@@ -49,7 +49,7 @@ export function drawBar(
 ): void {
   const { bar, barFill, barLabel: label } = elements;
   bar.classList.toggle('ln-ext-evalbar--flip', orientation === 'black');
-  setStyleProperty(barFill, 'height', `${position.whiteWinChance}%`);
+  setStyleProperty(barFill, '--ln-ext-bar-white', `${position.whiteWinChance}%`);
   const text = barLabel(position);
   if (label.textContent !== text) label.textContent = text;
   const side = position.whiteWinChance >= 50 ? 'white' : 'black';

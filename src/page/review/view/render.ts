@@ -146,6 +146,31 @@ export function render(session: Session, force = false): void {
   renderBoard(session, analysis);
 }
 
+let panelDue = false;
+
+/**
+ * After a jump: the board's marks at once, with the move, and the rest once the
+ * frame that shows the move is drawn, so a step costs the board's frame nothing.
+ */
+export function renderJump(session: Session): void {
+  const analysis = pageAnalysis();
+  if (!analysis || !attach(session.elements)) return;
+  const { view } = session;
+  if (view.mode === 'summary' && analysis.node.ply !== view.summaryPly) {
+    render(session);
+    return;
+  }
+  renderBoard(session, analysis);
+  if (panelDue) return;
+  panelDue = true;
+  requestAnimationFrame(() =>
+    setTimeout(() => {
+      panelDue = false;
+      render(session);
+    }),
+  );
+}
+
 /** The summary shows until the user moves; then the move-by-move review. */
 export function setMode(session: Session, mode: Mode): void {
   const { view } = session;

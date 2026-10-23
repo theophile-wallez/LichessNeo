@@ -8,7 +8,7 @@ import { watchChips } from './view/chips.ts';
 import { watchClicks } from './view/clicks.ts';
 import { watchCoachPicks } from './view/coach-avatar.ts';
 import { createElements } from './view/elements.ts';
-import { keepMarked, render, setMode } from './view/render.ts';
+import { keepMarked, render, renderJump, setMode } from './view/render.ts';
 import { refitStream } from './view/stream.ts';
 import { watchCostTips } from './view/cost-tip.ts';
 import { watchTips } from './view/tooltip.ts';
@@ -19,7 +19,7 @@ import { REVIEWED_VARIANTS } from './variants.ts';
 // unless the settings leave that board to Lichess's own panel.
 
 // The panel looks again this often, for what changes on its own (the analysis,
-// the engines); a move of the board draws it at once (onJump).
+// the engines); a move of the board draws it in the next frame (onJump).
 const RENDER_MS = 150;
 // A link to one of the game's moves (/game/<id>#46), which Lichess opens on that
 // move: the review opens on the coach there rather than on the summary.
@@ -54,7 +54,7 @@ function run(session: Session, mode: Mode): void {
   setMode(session, mode);
   keepMarked(session);
   setInterval(() => render(session), RENDER_MS);
-  onJump(() => render(session));
+  onJump(() => renderJump(session));
   let lastWidth = window.innerWidth;
   const refit = (): void => {
     lastWidth = window.innerWidth;

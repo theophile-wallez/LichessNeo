@@ -16,7 +16,7 @@ import { avatarMarkup, takeReaction } from './coach-avatar.ts';
 import { explainHint } from './explain-hint.ts';
 import { movesGraph } from './graph.ts';
 import { syncGraphViews } from './graph-views.ts';
-import { keyMoments, momentsMarkup, momentsScroll, showMoment } from './moments.ts';
+import { keyMoments, momentsMarkup, showMoment } from './moments.ts';
 import {
   bubbleTitle,
   evalChip,
@@ -204,7 +204,6 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   view.drawing = { path: analysis.path, marks: comment?.drawing ?? hintMarks(hint, retried) };
   const spoken = { line, move, shown, comment, retried, hint };
   const moments = momentsMarkup(view.review, language);
-  const scrolled = momentsScroll(elements.panel);
   fillAroundNav(
     elements.panel,
     html`${header(language.ui.review, 'summary', language, html`${shareButton(view.sheet, language.ui)}${newGameMarkup(analysis, 'ln-ext-review__new')}`)}
@@ -229,6 +228,6 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   );
   setHtml(elements.controls, controlsMarkup(view.playing !== null));
   movesGraph(session, analysis, true);
-  showMoment(elements.panel, plyIndex(session.work, analysis.node), scrolled);
+  showMoment(elements.panel, plyIndex(session.work, analysis.node));
   requestAnimationFrame(scrollMoveList);
 }

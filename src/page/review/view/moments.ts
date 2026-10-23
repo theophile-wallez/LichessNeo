@@ -41,26 +41,57 @@ export function momentsMarkup(review: Review | null, language: ReviewLanguage): 
 const strip = (panel: HTMLElement): HTMLElement | null =>
   queryOne(panel, '.ln-ext-moments', HTMLElement);
 
-/** Where the strip was scrolled to, read before a render replaces it. */
-export const momentsScroll = (panel: HTMLElement): number => strip(panel)?.scrollLeft ?? 0;
+// Per panel: the strip on show, where it was last scrolled to (off its scroll
+// events, not its layout), and the card last centered.
+interface StripState {
+  strip: HTMLElement | null;
+  left: number;
+  centered: string | null;
+}
+
+const strips = new WeakMap<HTMLElement, StripState>();
+
+function stateOf(panel: HTMLElement): StripState {
+  const known = strips.get(panel);
+  if (known) return known;
+  const state: StripState = { strip: null, left: 0, centered: null };
+  strips.set(panel, state);
+  return state;
+}
+
+/** Glides the strip to center `card`, read in the next frame, when the browser lays the panel out. */
+function center(moments: HTMLElement, card: HTMLElement): void {
+  requestAnimationFrame(() => {
+    if (!card.isConnected) return;
+    const box = moments.getBoundingClientRect();
+    const cardBox = card.getBoundingClientRect();
+    const left = moments.scrollLeft + cardBox.left - box.left - (box.width - cardBox.width) / 2;
+    moments.scrollTo({ left, behavior: 'smooth' });
+  });
+}
 
 /**
- * Marks the card of the move on the board, and centers it. A strip drawn
- * anew starts where the last one was, then glides there.
+ * Marks the card of the move on the board, and centers it once it changes. A
+ * strip drawn anew starts where the last one was, then glides there. Nothing
+ * here reads the layout the render just changed: a step costs no layout of its own.
  */
-export function showMoment(panel: HTMLElement, ply: number, from: number): void {
+export function showMoment(panel: HTMLElement, ply: number): void {
   const moments = strip(panel);
   if (!moments) return;
+  const state = stateOf(panel);
+  const fresh = state.strip !== moments;
+  if (fresh) {
+    state.strip = moments;
+    moments.scrollLeft = state.left;
+    moments.addEventListener('scroll', () => (state.left = moments.scrollLeft), { passive: true });
+  }
   let card: HTMLElement | null = null;
   for (const each of queryAll(moments, '.ln-ext-moment', HTMLElement)) {
     const on = each.dataset.lnExtPly === String(ply);
     each.classList.toggle('ln-ext-moment--on', on);
     if (on) card = each;
   }
-  if (moments.scrollLeft !== from) moments.scrollLeft = from;
-  if (!card) return;
-  const box = moments.getBoundingClientRect();
-  const cardBox = card.getBoundingClientRect();
-  const left = from + cardBox.left - box.left - (box.width - cardBox.width) / 2;
-  moments.scrollTo({ left, behavior: 'smooth' });
+  const centered = card?.dataset.lnExtPly ?? null;
+  if (card && (fresh || centered !== state.centered)) center(moments, card);
+  state.centered = centered;
 }

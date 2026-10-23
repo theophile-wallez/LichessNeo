@@ -53,6 +53,8 @@ export interface FakeController {
   treeVersion: number;
   drawnVersion: number;
   jumpToMain: (ply: number) => void;
+  /** What Lichess's arrow keys call, and the review hooks (page/lichess/jumps.ts). */
+  jump: (path: string) => void;
   userJump: (path: string) => void;
   playUci: (uci: string) => void;
   redraw: () => void;
@@ -178,6 +180,7 @@ export function fakeController(options: FakeOptions): FakeController {
     menuOpen: false,
     treeVersion: 0,
     drawnVersion: -1,
+    jump: path => jumpTo(ctrl, path),
     userJump: path => jumpTo(ctrl, path),
     jumpToMain: ply => {
       const path = ctrl.mainline
