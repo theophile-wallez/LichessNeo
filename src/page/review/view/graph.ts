@@ -6,6 +6,7 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import type { MoveTime } from '#page/charts/game/series.ts';
 import { spentTime } from '#page/review/coach/clock.ts';
 import { formatEval } from '#page/review/evaluation/format.ts';
+import { plyIndex } from '#page/review/game/work.ts';
 import type { GraphKind, GraphView, Review, Session } from '#page/review/session.ts';
 import { CURSOR_COLOR, graphMarkup, lastIndex } from './graph-markup.ts';
 import { hidePreview, positionAt, showPreview } from './graph-preview.ts';
@@ -164,9 +165,9 @@ export function mountGraph(
   remounts.set(container, () => mountGraph(session, analysis, { container, kind }));
   // A move played past the game's last has no place on its graph: the cursor
   // stays on the last position rather than slide off the right edge.
-  const ply = Math.min(analysis.node.ply, lastIndex(review));
+  const ply = Math.min(plyIndex(session.work, analysis.node), lastIndex(review));
   // Only the move-by-move graph shows the move times, and only a game with clocks has them.
-  const times = kind === 'moves' && view.graph === 'time' ? gameTimes(analysis) : [];
+  const times = kind === 'moves' && view.graph === 'time' ? gameTimes(analysis, session.work) : [];
   const shown: GraphView = times.length > 0 ? 'time' : 'advantage';
   if (moveCursor(container, { review, box, shown, orientation: analysis.orientation() }, ply))
     return;
@@ -187,7 +188,7 @@ export function mountGraph(
   if (!(tip instanceof HTMLElement)) return;
   const pick = (index: number): void => {
     stopPlaying(session);
-    jump(analysis, index);
+    jump(session, analysis, index);
     if (view.mode === 'summary') session.setMode('moves');
   };
   if (!previous) listen(container);

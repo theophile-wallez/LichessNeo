@@ -2,7 +2,6 @@ import { afterEach, expect, it, vi } from 'vitest';
 import { queryAll } from '#shared/dom.ts';
 import { someMove } from '#page/review/fixtures/fake-chess.ts';
 import { setUp } from '#page/review/fixtures/review-script.ts';
-import { en } from '#page/review/i18n/en.ts';
 import { review } from '#page/review/index.ts';
 import { CURSOR_COLOR } from './graph-markup.ts';
 
@@ -11,9 +10,6 @@ import { CURSOR_COLOR } from './graph-markup.ts';
 afterEach(() => {
   vi.useRealTimers();
 });
-
-const bubbleText = (): string =>
-  document.querySelector('#ln-ext-review .ln-ext-bubble')?.textContent ?? '';
 
 it('judges a move played on from the game’s last position', async () => {
   const { ctrl, advance } = setUp({ game: 'opera', lang: 'en', cached: true, steps: [] });
@@ -29,7 +25,7 @@ it('judges a move played on from the game’s last position', async () => {
   await advance(3000);
   expect(ctrl.onMainline).toBe(true);
   expect(ctrl.node.ply).toBe(last + 1);
-  expect(bubbleText()).not.toContain(en.ui.thinking);
+  expect(document.querySelector('#ln-ext-review .ln-ext-bubble__spin')).toBeNull();
   expect(document.querySelector('#ln-ext-review .ln-ext-bubble__title')?.textContent).toContain(
     ctrl.node.san,
   );

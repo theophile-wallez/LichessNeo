@@ -49,7 +49,7 @@ function retrying(): Retrying {
   const { session, ctrl, facade } = judgedGame('opera');
   // As the review does: without the game's own book moves, a move played off
   // it stays unjudged, since the masters database isn't asked in a test.
-  seedBooks(session, facade);
+  seedBooks(session);
   const move = session.view.review?.moves[MISTAKE_PLY - 1];
   if (!move || !canRetry(move, facade)) throw new Error('that move is no longer a retriable error');
   ctrl.jumpToMain(MISTAKE_PLY);

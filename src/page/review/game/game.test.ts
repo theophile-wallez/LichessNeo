@@ -146,9 +146,10 @@ describe('seedBooks', () => {
   it('marks the game’s book moves for the moves played off it, the last one named', () => {
     const { fixture, facade } = fakeGame('opera');
     const session = newSession();
+    session.work.nodes = facade.mainline;
     session.work.bookPly = 2;
     session.view.openingName = 'Open Game';
-    seedBooks(session, facade);
+    seedBooks(session);
     const fen = (i: number): string => fixture.nodes[i]?.fen ?? '';
     expect(session.live.books.get(fen(1))).toEqual({ book: true, name: '', eco: '' });
     expect(session.live.books.get(fen(2))).toEqual({ book: true, name: 'Open Game', eco: '' });

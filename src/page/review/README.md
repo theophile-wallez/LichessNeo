@@ -123,10 +123,13 @@ moments and, as a button that goes to it, the move the game turned on
 (`view/brief.ts`). The move-by-move review then shows the game's opening and
 its ECO code over the move list, from the export (`view/opening.ts`). The list
 hides Lichess's comments and computer lines but keeps the user's variations,
-a computer line they stepped into among them (`view/move-list.ts`). A move
-played on from the game's last position grows Lichess's mainline, so whether
-a position is the game's is read off the review's own (`isGameNode`,
-`game/work.ts`), never `onMainline`: such a move is judged like a variation's.
+a computer line they stepped into among them (`view/move-list.ts`). The
+review counts a game's positions from 0, where Lichess counts a game from a
+position from its FEN's move, and grows its mainline with the moves played past
+the game's end: a node's index in the game is read off the review's own nodes
+(`gameIndex`, `game/work.ts`), never its `ply` nor `onMainline`, and the review
+jumps by the path to its node (`gamePath`), never `jumpToMain`. A move past the
+end is judged like a variation's.
 
 The move-by-move graph has two views, the advantage and, for a game with
 clocks, each move's time as a column (`view/graph-views.ts`,

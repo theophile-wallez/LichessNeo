@@ -17,7 +17,8 @@ import { hugeicon } from '#shared/hugeicons.ts';
 import { html, type SafeHtml, trustedHtml } from '#shared/html.ts';
 import { formatEval } from '#page/review/evaluation/format.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
-import type { InterfaceStrings, ReviewLanguage } from '#page/review/i18n/types.ts';
+import { hash } from '#page/review/coach/hash.ts';
+import type { InterfaceStrings, ReviewLanguage, Ways } from '#page/review/i18n/types.ts';
 import type { Mode } from '#page/review/session.ts';
 
 // Markup the panel's modes share: icons, the header, the score chip.
@@ -85,6 +86,13 @@ export const evalChip = (record: PositionRecord | null | undefined): SafeHtml =>
 
 export const bubbleTitle = (text: string): SafeHtml =>
   html`<p class="ln-ext-bubble__title">${text}</p>`;
+
+/**
+ * The coach waiting for the engine, in one of its ways to say it: the same for
+ * a move each time, another for the next move, the turn the game's own.
+ */
+export const thinkingWords = (ways: Ways, ply: number, gameId: string): string =>
+  ways[(hash(gameId) + ply) % ways.length] ?? ways[0];
 
 /** The coach waiting for the engine: the verdict's row, a spinner for its icon, lines for its comment. */
 export const thinkingMarkup = (text: string): SafeHtml =>

@@ -1,6 +1,7 @@
 import { COLORS } from '#shared/chess/types.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { MOVE_CLASSES } from '#page/review/classes/classes.ts';
+import { plyIndex } from '#page/review/game/work.ts';
 import { nextOfClass } from '#page/review/judge/summary.ts';
 import type { Session } from '#page/review/session.ts';
 import { jump } from './navigation.ts';
@@ -13,8 +14,9 @@ export function jumpToClass(session: Session, analysis: Analysis, button: HTMLEl
   const color = COLORS.find(each => each === button.dataset.lnExtColor);
   const moveClass = MOVE_CLASSES.find(each => each === button.dataset.lnExtClass);
   if (!view.review || !color || !moveClass) return;
-  const move = nextOfClass(view.review.moves, { color, moveClass }, analysis.node.ply);
+  const at = plyIndex(session.work, analysis.node);
+  const move = nextOfClass(view.review.moves, { color, moveClass }, at);
   if (!move) return;
-  jump(analysis, move.ply);
+  jump(session, analysis, move.ply);
   session.setMode('moves');
 }

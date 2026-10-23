@@ -2,7 +2,7 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { firstChild, parentPath } from '#page/lichess/tree.ts';
 import { normalizeUci } from '#page/review/chess/notation.ts';
 import { BEST_PLIES, bestRequest, foundLine } from '#page/review/explain/lines.ts';
-import { isGameNode } from '#page/review/game/work.ts';
+import { gameIndex, gamePath } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import type { BestShown, JudgedMove, LineShown, Session } from '#page/review/session.ts';
 
@@ -19,7 +19,8 @@ export function reviewMove(session: Session, analysis: Analysis): JudgedMove | n
   const { review } = session.view;
   const { path } = analysis;
   if (!review || !path) return null;
-  if (isGameNode(session.work, analysis.node)) return review.moves[analysis.node.ply - 1] ?? null;
+  const index = gameIndex(session.work, analysis.node);
+  if (index !== null) return review.moves[index - 1] ?? null;
   return judgeAt(session.live, analysis, path);
 }
 
@@ -50,9 +51,13 @@ export function lineShown(session: Session, analysis: Analysis): LineShown | nul
 export const spokenMove = (session: Session, analysis: Analysis): JudgedMove | null =>
   lineShown(session, analysis)?.move ?? reviewMove(session, analysis);
 
-export function jump(analysis: Analysis, ply: number): void {
-  analysis.jumpToMain(ply);
-  analysis.redraw();
+/**
+ * Goes to the game's position at `index`. Not by Lichess's `jumpToMain`: its
+ * mainline grows with the moves played past the game's end, and it counts
+ * from the tree's root ply, not from the game's start.
+ */
+export function jump(session: Session, analysis: Analysis, index: number): void {
+  goTo(analysis, gamePath(session.work, index));
 }
 
 export function goTo(analysis: Analysis, path: string): void {
@@ -143,13 +148,13 @@ export function togglePlay(session: Session, analysis: Analysis): void {
     return;
   }
   const step = (): void => {
-    const last = analysis.mainline.length - 1;
-    if (!analysis.onMainline || analysis.node.ply >= last) {
+    const index = gameIndex(session.work, analysis.node);
+    if (index === null || index >= session.work.nodes.length - 1) {
       stopPlaying(session);
       session.redraw(true);
       return;
     }
-    jump(analysis, analysis.node.ply + 1);
+    jump(session, analysis, index + 1);
   };
   session.view.playing = setInterval(step, PLAY_STEP_MS);
   step();

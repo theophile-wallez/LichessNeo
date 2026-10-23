@@ -57,6 +57,7 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
       clock: _clock,
       brief: _brief,
       summary: _summary,
+      thinking,
       ...ui
     } = language.ui;
     const {
@@ -66,9 +67,12 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
       gameRatingTip: _gameRatingTip,
       bestWas: originalBestWas,
       liveIntro: _originalLiveIntro,
+      thinking: originalThinking,
       ...originalUi
     } = T;
     expect(ui).toEqual(originalUi);
+    // The coach waits in other words too, the original's first.
+    expect(thinking[0]).toBe(originalThinking);
     expect([ourPhases.opening.name, ourPhases.endgame.name]).toEqual([T.phases.o, T.phases.e]);
     expect(bestWas('[[m:w:Nf3]]')).toBe(originalBestWas.replace('{m}', '[[m:w:Nf3]]'));
   });

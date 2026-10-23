@@ -78,6 +78,8 @@ export interface Scenario {
   readonly serverAnalysis?: boolean;
   /** Signed out: the masters database refuses every lookup. */
   readonly signedOut?: boolean;
+  /** The tree's root ply, as Lichess has it for a game from a position: 0 unless given. */
+  readonly rootPly?: number;
   readonly steps: readonly Step[];
 }
 
@@ -175,7 +177,9 @@ export function setUp(scenario: Scenario): Driver {
   // The storage keys and format, spelled out rather than taken from the port: a
   // change to them orphans the caches users have (v2 left the original's v1 behind).
   localStorage.setItem('ln-ext-coach', String(game.coach));
-  const positions = scenario.synthetic ? game.nodes.slice(0, 1) : game.nodes;
+  const shift = scenario.rootPly ?? 0;
+  const nodes = game.nodes.map(node => ({ ...node, ply: node.ply + shift }));
+  const positions = scenario.synthetic ? nodes.slice(0, 1) : nodes;
   if (scenario.cached)
     localStorage.setItem(
       `ln-ext-review:${game.id}:${positions.length}:v3`,

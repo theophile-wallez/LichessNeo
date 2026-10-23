@@ -88,12 +88,15 @@ export function pump(session: Session, analysis: Analysis): void {
     live.bookBusy,
     live.error,
     live.noBook,
+    session.view.error,
   ].join('|');
   if (idle.get(live) === key) return;
   let started = false;
   if (!live.busy && live.error === null) {
-    // Skip the game's own positions: the game's analysis evaluates those.
-    const game = analysis.synthetic ? null : new Set(work.nodes.map(node => node.fen));
+    // Skip the game's own positions: the game's analysis evaluates those, unless it failed,
+    // when the moves played off the game would wait on them for good.
+    const gameRuns = !analysis.synthetic && session.view.error === null;
+    const game = gameRuns ? new Set(work.nodes.map(node => node.fen)) : null;
     const node = wanted(analysis, movePaths).find(
       candidate => !live.evals.has(candidate.fen) && !game?.has(candidate.fen),
     );

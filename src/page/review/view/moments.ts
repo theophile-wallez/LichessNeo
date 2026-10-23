@@ -13,9 +13,14 @@ import type { JudgedMove, Review } from '#page/review/session.ts';
 export const keyMoments = (review: Pick<Review, 'draft'> | null): JudgedMove[] =>
   review?.draft.flatMap(move => (move && GRAPH_DOTS.has(move.moveClass) ? [move] : [])) ?? [];
 
-/** "16. h5" for White, "16… h5" for Black. */
-const moveLabel = ({ ply, san }: Pick<JudgedMove, 'ply' | 'san'>): string =>
-  `${Math.ceil(ply / 2)}${ply % 2 === 1 ? '.' : '…'} ${san}`;
+/**
+ * "16." for White, "16…" for Black, as Lichess numbers the move: from its
+ * position's ply, which a game from a position doesn't start at 0.
+ */
+export function moveNumber({ position }: Pick<JudgedMove, 'position'>): string {
+  const { ply } = position;
+  return `${Math.ceil(ply / 2)}${ply % 2 === 1 ? '.' : '…'}`;
+}
 
 /**
  * The cards, the same whatever the move on the board, so a render keeps the strip (`showMoment`
@@ -26,7 +31,7 @@ export function momentsMarkup(review: Review | null, language: ReviewLanguage): 
   const cards = keyMoments(review).map(
     move =>
       html`<button class="ln-ext-moment" data-ln-ext="moment" data-ln-ext-ply="${move.ply}" style="--ln-ext-class-color:${CLASS_COLORS[move.moveClass]}">
-        <span class="ln-ext-moment__move">${classIcon(move.moveClass)}${moveLabel(move)}</span>
+        <span class="ln-ext-moment__move">${classIcon(move.moveClass)}${moveNumber(move)} ${move.san}</span>
         <span class="ln-ext-moment__class">${language.classLabels[move.moveClass]}</span>
       </button>`,
   );

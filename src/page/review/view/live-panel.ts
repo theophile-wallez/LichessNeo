@@ -3,7 +3,7 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import type { Session } from '#page/review/session.ts';
 import { avatarMarkup, takeReaction } from './coach-avatar.ts';
-import { bubbleTitle, thinkingMarkup } from './markup.ts';
+import { bubbleTitle, thinkingMarkup, thinkingWords } from './markup.ts';
 import { type CoachComment, commentOn, followComment, verdictMarkup } from './verdict.ts';
 
 // The free analysis board: the coach judges the move on the board, over
@@ -16,7 +16,8 @@ function liveBubble(session: Session, analysis: Analysis, comment: CoachComment 
     const { title, sub } = language.ui.liveIntro;
     return html`${bubbleTitle(title)}<p class="ln-ext-bubble__sub">${sub}</p>`;
   }
-  if (!comment) return thinkingMarkup(language.ui.thinking);
+  if (!comment)
+    return thinkingMarkup(thinkingWords(language.ui.thinking, analysis.node.ply, analysis.gameId));
   return verdictMarkup(session, comment);
 }
 

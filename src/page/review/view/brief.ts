@@ -5,7 +5,7 @@ import { moveChip } from '#page/review/comment/markup.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { JudgedMove, Review, Session } from '#page/review/session.ts';
 import { bubbleTitle } from './markup.ts';
-import { keyMoments } from './moments.ts';
+import { keyMoments, moveNumber } from './moments.ts';
 
 // The coach's brief before the first move: the game's opening, how many key
 // moments the review found, the move the game turned on and the tactic that
@@ -23,7 +23,7 @@ export function turningMove(moments: readonly JudgedMove[]): JudgedMove | null {
 
 /** The move the game turned on, as its number and chip; a click goes to it, as a key moment's card does. */
 const turningButton = (move: JudgedMove): SafeHtml =>
-  html`<button class="ln-ext-brief__turn" data-ln-ext="moment" data-ln-ext-ply="${move.ply}"><b>${Math.ceil(move.ply / 2)}${move.ply % 2 === 1 ? '.' : '…'}</b>${moveChip(`${move.color.charAt(0)}:${move.san}`)}</button>`;
+  html`<button class="ln-ext-brief__turn" data-ln-ext="moment" data-ln-ext-ply="${move.ply}"><b>${moveNumber(move)}</b>${moveChip(`${move.color.charAt(0)}:${move.san}`)}</button>`;
 
 // A tactic is a theme of the game once it comes back.
 const RECURRING = 2;

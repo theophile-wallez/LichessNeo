@@ -7,7 +7,7 @@ import { classIcon } from '#page/review/classes/icon-svg.ts';
 import { streamOn } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
 import { explainLines } from '#page/review/explain/lines.ts';
-import { isGameNode } from '#page/review/game/work.ts';
+import { isGameNode, plyIndex } from '#page/review/game/work.ts';
 import { threatsReady } from '#page/review/explain/threats.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import type { PanelAction } from './actions.ts';
@@ -25,6 +25,7 @@ import {
   shareButton,
   svgIcon,
   thinkingMarkup,
+  thinkingWords,
 } from './markup.ts';
 import { bestShown, lineShown, spokenMove } from './navigation.ts';
 import { canRetry, type RetryOutcome, retryOutcome } from './retry.ts';
@@ -67,7 +68,8 @@ function bubbleMarkup(
     // No verdict yet: the move waits for the engine, as the game's own moves do
     // while the game's analysis runs.
     const error = isGameNode(session.work, analysis.node) ? view.error : live.error;
-    return error === null ? thinkingMarkup(ui.thinking) : bubbleTitle(error);
+    if (error !== null) return bubbleTitle(error);
+    return thinkingMarkup(thinkingWords(ui.thinking, analysis.node.ply, analysis.gameId));
   }
   return verdictMarkup(session, comment, actions);
 }
@@ -84,7 +86,7 @@ function movesComment(
   // The coach thinks until it knows the threats around the move: then it says all it will.
   if (hint.length === 0 && !threatsReady(session, move)) return null;
   const played = review.moves[move.ply - 1] === move;
-  const timing = played ? timingAt(analysis, move.ply) : null;
+  const timing = played ? timingAt(analysis, session.work, move.ply) : null;
   const turning = played && turningMove(keyMoments(review))?.ply === move.ply;
   return commentOn(session, { move, gameId: analysis.gameId, hint, timing, turning });
 }
@@ -126,7 +128,7 @@ function controlsMarkup(playing: boolean): SafeHtml {
   return html`${buttons}`;
 }
 
-// jumpToMain doesn't scroll Lichess's move list: keep the move in view.
+// Lichess's jumps don't scroll its move list: keep the move in view.
 function scrollMoveList(): void {
   const box = queryOne(document, 'main.analyse .analyse__moves', HTMLElement);
   const active = box && queryOne(box, 'move.active', HTMLElement);
@@ -228,7 +230,7 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   queryOne(elements.panel, '.ln-ext-review__views-slot', HTMLElement)?.replaceWith(
     elements.graphViews,
   );
-  const hasTimes = gameTimes(analysis).length > 0;
+  const hasTimes = gameTimes(analysis, session.work).length > 0;
   syncGraphViews(
     elements.graphViews,
     { shown: hasTimes ? view.graph : 'advantage', hasTimes },
@@ -236,6 +238,6 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   );
   setHtml(elements.controls, controlsMarkup(view.playing !== null));
   movesGraph(session, analysis, true);
-  showMoment(elements.panel, analysis.node.ply, scrolled);
+  showMoment(elements.panel, plyIndex(session.work, analysis.node), scrolled);
   requestAnimationFrame(scrollMoveList);
 }

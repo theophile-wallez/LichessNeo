@@ -1,6 +1,7 @@
 import { closestTo, queryOne } from '#shared/dom.ts';
 import { postCoachPicker } from '#shared/protocol.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
+import { gameIndex } from '#page/review/game/work.ts';
 import type { Session } from '#page/review/session.ts';
 import { type PanelAction, PanelActionSchema } from './actions.ts';
 import { playChip } from './chips.ts';
@@ -30,9 +31,9 @@ function toggleExplain(session: Session, analysis: Analysis): void {
   if (!view.explain && line) goTo(analysis, line.path);
 }
 
-function jumpToMoment(analysis: Analysis, card: HTMLElement): void {
+function jumpToMoment(session: Session, analysis: Analysis, card: HTMLElement): void {
   const ply = Number(card.dataset.lnExtPly);
-  if (Number.isInteger(ply)) jump(analysis, ply);
+  if (Number.isInteger(ply)) jump(session, analysis, ply);
 }
 
 type ReviewCommand = Exclude<
@@ -61,15 +62,16 @@ function act(session: Session, analysis: Analysis, action: ReviewCommand): void 
   else if (action === 'explain') toggleExplain(session, analysis);
   else if (action === 'line') toggleLine(session, analysis);
   else if (action === 'rows') view.allRows = !view.allRows;
-  else if (action === 'first') jump(analysis, 0);
-  else if (action === 'last') jump(analysis, analysis.mainline.length - 1);
+  else if (action === 'first') jump(session, analysis, 0);
+  else if (action === 'last') jump(session, analysis, session.work.nodes.length - 1);
   else if (action === 'prev' || action === 'next') {
     const path = stepPath(session, analysis, action === 'prev' ? -1 : 1);
     if (path !== null) goTo(analysis, path);
   } else if (action === 'best') showBest(session, analysis);
   else {
-    // Starting the review goes to the first move.
-    if (action === 'moves' && (!analysis.onMainline || analysis.node.ply === 0)) jump(analysis, 1);
+    // Starting the review goes to the first move, from the start or off the game.
+    if (action === 'moves' && (gameIndex(session.work, analysis.node) ?? 0) === 0)
+      jump(session, analysis, 1);
     session.setMode(action);
   }
 }
@@ -82,7 +84,7 @@ interface Clicked {
 /** The buttons that carry their own data, Retry's, then the review's commands. */
 function dispatch(session: Session, analysis: Analysis, { action, button }: Clicked): void {
   if (action === 'jump') jumpToClass(session, analysis, button);
-  else if (action === 'moment') jumpToMoment(analysis, button);
+  else if (action === 'moment') jumpToMoment(session, analysis, button);
   else if (action === 'chip') playChip(session, analysis, button);
   else if (action === 'graph') pickGraphView(session, button);
   else if (action === 'share') session.view.sheet = !session.view.sheet;

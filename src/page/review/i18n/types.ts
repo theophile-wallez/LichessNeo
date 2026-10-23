@@ -102,7 +102,8 @@ export interface InterfaceStrings {
   readonly engineError: string;
   /** The free board's first words, before a move: a line, then what the coach will do. */
   readonly liveIntro: { readonly title: string; readonly sub: string };
-  readonly thinking: string;
+  /** The coach waiting on the engine: a way per move, the first the original's. */
+  readonly thinking: Ways;
   readonly startPosition: string;
   readonly more: string;
   readonly less: string;

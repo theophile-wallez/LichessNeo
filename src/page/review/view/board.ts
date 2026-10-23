@@ -10,7 +10,7 @@ import {
   setReviewArrows,
   setReviewDrawing,
 } from '#page/board/review-arrows.ts';
-import { isGameNode } from '#page/review/game/work.ts';
+import { isGameNode, plyIndex } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
 import { badgeMarkup, reviewArrowsFor } from './board-badge.ts';
@@ -30,7 +30,7 @@ function renderBar(session: Session, analysis: Analysis, shown: JudgedMove | nul
     reviewing,
     live: view.mode === 'live',
     onGame: isGameNode(session.work, analysis.node),
-    ply: analysis.node.ply,
+    ply: plyIndex(session.work, analysis.node),
     bestBefore: shown?.before ?? null,
     offGame: live.evals.get(analysis.node.fen),
     last: view.barPosition,

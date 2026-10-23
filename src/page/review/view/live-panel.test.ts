@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { fakeGame, newSession } from '#page/review/fixtures/unit-review.ts';
+import { en } from '#page/review/i18n/en.ts';
 import { renderLive } from './live-panel.ts';
 
 afterEach(() => {
@@ -35,9 +36,8 @@ describe('the free board’s coach', () => {
     const first = ctrl.mainline[1]?.id ?? '';
     const { mood, panel } = drawn(first);
     expect(mood).toBe('thinking');
-    expect(texts(panel, '.ln-ext-bubble__row .ln-ext-bubble__title')).toEqual([
-      'Let me look at this move…',
-    ]);
+    const [title] = texts(panel, '.ln-ext-bubble__row .ln-ext-bubble__title');
+    expect(en.ui.thinking).toContain(title);
     expect(panel.querySelector('.ln-ext-bubble__row .ln-ext-bubble__spin')).not.toBeNull();
     expect(panel.querySelectorAll('.ln-ext-bubble__wait > span')).toHaveLength(2);
   });

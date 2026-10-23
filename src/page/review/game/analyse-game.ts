@@ -5,7 +5,7 @@ import type { GameWork, Mode, Session } from '#page/review/session.ts';
 import { analyseRecords } from './analyse-records.ts';
 import { fetchExport } from './export.ts';
 import { whenFree } from './wait.ts';
-import { refresh, seeDeep, seedBooks } from './work.ts';
+import { gameIndex, refresh, seeDeep, seedBooks } from './work.ts';
 
 // The game's analysis on its analysis page, the move on the board first so
 // the review can start at once.
@@ -19,11 +19,13 @@ export function urgentPositions(work: GameWork, mode: Mode, analysis: Analysis):
   if (mode !== 'moves') return [];
   const urgent = analysis.nodeList
     .slice(-3)
-    // A node's ply is its index in the game (the review's own convention).
-    .filter(node => work.nodes[node.ply] === node)
-    .map(node => node.ply)
+    .flatMap(node => {
+      const index = gameIndex(work, node);
+      return index === null ? [] : [index];
+    })
     .toReversed();
-  if (analysis.onMainline) urgent.push(analysis.node.ply + 1);
+  const index = gameIndex(work, analysis.node);
+  if (index !== null) urgent.push(index + 1);
   return urgent;
 }
 
@@ -52,7 +54,7 @@ export async function analyseGame(session: Session, analysis: Analysis): Promise
   work.nodes = analysis.mainline;
   seedThreats(session, analysis.gameId);
   await applyExport(session, analysis);
-  seedBooks(session, analysis);
+  seedBooks(session);
   const engine = await analyseRecords({
     gameId: analysis.gameId,
     chess960: analysis.chess960,
