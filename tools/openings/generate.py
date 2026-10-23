@@ -70,7 +70,7 @@ def read_list(folder: Path) -> dict[str, tuple[str, str]]:
     """Each line of the list, by its moves: its ECO code and name."""
     names = {}
     for letter in 'abcde':
-        with open(folder / f'{letter}.tsv', encoding='utf-8') as file:
+        with (folder / f'{letter}.tsv').open(encoding='utf-8') as file:
             for row in csv.DictReader(file, delimiter='\t'):
                 names.setdefault(row['pgn'], (row['eco'], row['name']))
     return names
@@ -94,7 +94,7 @@ def main() -> None:
         '// Written by tools/openings/generate.py from lichess-org/chess-openings (CC0):\n'
         '// edit the script, not this file.\n\n'
         '// One opening a line: the side that practices it, its ECO code, its name, its\n'
-        '// moves, the position they reach (a FEN\'s placement) and the last of them.\n'
+        "// moves, the position they reach (a FEN's placement) and the last of them.\n"
         'export const OPENINGS_TABLE = `\n' + '\n'.join(lines) + '\n`;\n',
         encoding='utf-8',
     )

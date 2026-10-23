@@ -34,10 +34,10 @@ const PAGES: readonly PublicPage[] = [
 ];
 
 // Lichess's panels and page, recolored by styles/theme in the default color
-// theme: neutral steps 3 and 4 of each scheme's palette.
+// theme: neutral steps 3 and 4 of the dark palette, 1 and 5 of the light one.
 const PANEL_COLOR = 'oklch(17.3% 0.004 286)';
-const LIGHT_PANEL_COLOR = 'oklch(98.5% 0.006 286)';
-const LIGHT_PAGE_BACKGROUND = 'oklch(0.968 0.006 286)';
+const LIGHT_PANEL_COLOR = 'oklch(100% 0.006 286)';
+const LIGHT_PAGE_BACKGROUND = 'oklch(0.954 0.006 286)';
 
 for (const { name, path, ours } of PAGES) {
   test(`${name} gets the extension`, async ({ page, extensionErrors }) => {

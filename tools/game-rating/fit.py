@@ -15,8 +15,9 @@ likelihood over the level it was played at, and that level is drawn around
 the player's rating, with a width (tau) fitted on held-out games: the
 posterior's mean is the game rating. Moves played in a game already lost for
 good don't count: weaker players play on to the mate where stronger ones
-resign, so the easy best moves played there would read as a weak player's. Without a rating (an anonymous player),
-the population is the prior. src/page/review/rating/model.ts reads it.
+resign, so the easy best moves played there would read as a weak player's.
+Without a rating (an anonymous player), the population is the prior.
+src/page/review/rating/model.ts reads it.
 """
 
 import json

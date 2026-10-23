@@ -23,7 +23,7 @@ const EXTENSION_DIR = path.resolve(
 const CACHE_DIR = path.join(homedir(), '.cache', 'puppeteer');
 const TIMEOUT_MS = 30_000;
 // The default color theme's panels, in each scheme: headless Firefox may answer either.
-const PANEL_COLORS = { dark: 'oklch(17.3% 0.004 286)', light: 'oklch(98.5% 0.006 286)' };
+const PANEL_COLORS = { dark: 'oklch(17.3% 0.004 286)', light: 'oklch(100% 0.006 286)' };
 // From GitHub itself: Firefox runs the download in the background script,
 // whose requests a page's interception never sees.
 const EXAMPLE_LINK = 'https://github.com/theophile-wallez/LichessNeo/tree/main/packs/example';
