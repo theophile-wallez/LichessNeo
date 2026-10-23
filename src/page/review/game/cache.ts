@@ -35,8 +35,20 @@ const progressKey = (gameId: string, positions: number): string =>
 
 const isCurrent = (key: string): boolean => key.endsWith(`:v${CACHE_VERSION}`);
 
+// The threats of an older version: they're in no index, so they're looked for
+// once a page.
+let threatsSwept = false;
+
+function sweepThreats(): void {
+  if (threatsSwept) return;
+  threatsSwept = true;
+  for (const key of storedKeys(`${prefixed('review-threats')}:`))
+    if (!isCurrent(key)) removeStored(key);
+}
+
 /** The index as stored, or, the first time, built from the caches already there. */
 function readIndex(): string[] {
+  sweepThreats();
   const index = readStoredJson(StorageKey.reviewIndex, IndexSchema);
   if (index) {
     for (const key of index.filter(key => !isCurrent(key))) removeStored(key);

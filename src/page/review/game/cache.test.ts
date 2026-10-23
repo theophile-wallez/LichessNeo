@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import {
   type CachedThreat,
@@ -85,5 +85,19 @@ describe('the cache', () => {
     expect(readCachedRecords('game0000', 1)).toBeNull();
     expect(readCachedThreats('game0000', 1)).toEqual([]);
     expect(readCachedThreats('another1', 1)).toEqual([RECORD]);
+  });
+});
+
+describe('an older version’s threats', () => {
+  it('are dropped once a page, though no index lists them', async () => {
+    localStorage.clear();
+    localStorage.setItem('ln-ext-review-threats:oldgame1:3:v2', '[false,null,false]');
+    localStorage.setItem('ln-ext-review-threats:abcdefgh:3:v3', '[false,null,false]');
+    // A page's first look at the cache: the module as it loads.
+    vi.resetModules();
+    const cache = await import('./cache.ts');
+    cache.cacheRecords('abcdefgh', 1, [RECORD]);
+    expect(localStorage.getItem('ln-ext-review-threats:oldgame1:3:v2')).toBeNull();
+    expect(localStorage.getItem('ln-ext-review-threats:abcdefgh:3:v3')).not.toBeNull();
   });
 });

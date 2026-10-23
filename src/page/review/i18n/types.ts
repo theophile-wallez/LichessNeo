@@ -39,8 +39,8 @@ export interface RetryStrings {
   readonly another: string;
   /** The first hint: which piece has to move, its square unsaid. */
   readonly hintPiece: (piece: Piece) => string;
-  /** The second: the square it stands on, marked on the board too. */
-  readonly hintSquare: (square: string) => string;
+  /** The second: the square it stands on, marked on the board too; the piece for its pronoun. */
+  readonly hintSquare: (square: string, piece: Piece) => string;
   readonly reveal: string;
   readonly revealed: (best: string) => string;
 }

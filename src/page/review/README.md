@@ -124,7 +124,9 @@ moments and, as a button that goes to it, the move the game turned on
 (`view/brief.ts`). The move-by-move review then shows the game's opening and
 its ECO code over the move list, from the export (`view/opening.ts`). The list
 hides Lichess's comments and computer lines but keeps the user's variations,
-a computer line they stepped into among them (`view/move-list.ts`). The
+a computer line they stepped into among them (`view/move-list.ts`), and judges
+only those: a game's computer lines can run to hundreds of moves, which the
+engine would otherwise search one by one (`live/queue.ts`). The
 review counts a game's positions from 0, where Lichess counts a game from a
 position from its FEN's move, and grows its mainline with the moves played past
 the game's end: a node's index in the game is read off the review's own nodes
@@ -151,6 +153,8 @@ position of its own (`nextJob`), on Lichess's relaxed SIMD build where the
 browser runs it (`engine/relaxed-simd.ts`), a quarter faster. A position whose
 engine stops answering goes to another, and once the analysis is complete all
 engines but one are ended (a review read whole from the cache boots only one).
+A pool that lost every engine is booted again; one that failed to boot stays
+failed.
 On the analysis page it waits in a hidden tab and while "Learn from your
 mistakes" runs (`game/wait.ts`). Its core (`game/analyse-records.ts`) needs
 only the game's id, positions and variant (`RecordsRun`, `game/records.ts`):
@@ -164,7 +168,11 @@ last, on either page, and drops the others (`game/cache.ts`), and those of an
 older `CACHE_VERSION`, which are analysed again (3: the records' lines run
 12 moves). The threats searched around a game's positions are kept beside it
 (`ln-ext-review-threats:*`, only those the coach can say something of), and
-dropped with it.
+dropped with it, or once a page when of an older version: no index lists them.
+
+The engine never scores the position it searches as a draw by repetition, nor
+counts the fifty moves: a game that ends drawn by rule has its last position
+set level (`game/draws.ts`), or the move that draws would cost a won game.
 
 The summary's "Learn from your mistakes" hands over to Lichess's own
 exercise (`view/learn.ts`): it asks for the server analysis the exercise needs

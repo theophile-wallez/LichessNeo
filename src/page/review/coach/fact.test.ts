@@ -140,3 +140,30 @@ describe('the opponent’s move', () => {
     expect(textOf(takes, threats, english('black'))).toMatch(/Bxb4/);
   });
 });
+
+describe('a quiet good move', () => {
+  // Ra1-b1 takes an open file; Ra1-a3 was a little better.
+  const from = '4k3/p3p3/8/8/8/8/P3P3/R3K3 w - - 0 1';
+  const to = '4k3/p3p3/8/8/8/8/P3P3/1R2K3 b - - 0 1';
+  const quiet = (ply: number, index: number) => ({
+    ...verdict({
+      from,
+      uci: 'a1b1',
+      san: 'Rb1',
+      to,
+      before: record(56, ['a1a3']),
+      after: record(53, ['e8d7']),
+      ply,
+    }),
+    ply: index,
+  });
+
+  it('says its plan in the opening, the better move after it, by its ply on the board', () => {
+    const plan = en.facts.openFile(false, false);
+    expect(quiet(5, 5).moveClass).toBe('good');
+    expect(plan).toContain(textOf(quiet(5, 5)));
+    expect(plan).not.toContain(textOf(quiet(45, 45)));
+    // A game from a position: the review's 5th move, played at move 23.
+    expect(plan).not.toContain(textOf(quiet(45, 5)));
+  });
+});

@@ -100,3 +100,17 @@ describe('the summary’s players', () => {
     ]);
   });
 });
+
+const accuracies = (root: HTMLElement): (string | null)[] =>
+  queryAll(root, '.ln-ext-acc', HTMLElement).map(accuracy => accuracy.textContent);
+
+describe('a player’s accuracy', () => {
+  it('is blank while the analysis runs, and a dash once done for a side without a move', () => {
+    const none = { ...REVIEW, accuracy: { white: 100, black: null } };
+    expect(accuracies(summary({ review: { ...none, complete: false } }))).toEqual([
+      '100.0',
+      '\u00a0',
+    ]);
+    expect(accuracies(summary({ review: none }))).toEqual(['100.0', '—']);
+  });
+});

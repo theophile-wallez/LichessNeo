@@ -71,13 +71,22 @@ export async function startEngines({
 }
 
 /**
- * The page's engines, booted once: the game's analysis and the moves played
- * off it share them. A pool that failed stays failed.
+ * The page's engines: the game's analysis and the moves played off it share
+ * them. A pool that failed to boot stays failed; one that lost every engine
+ * (each gone quiet, on a busy machine) is booted again, or every search to
+ * come would fail until the page is reloaded.
  */
-export function engineFor(session: Session, analysis: Analysis): Promise<EnginePool> {
+export async function engineFor(session: Session, analysis: Analysis): Promise<EnginePool> {
   // Once the game is analysed (or read from the cache), only the moves played
   // and Explain need an engine.
-  const count = isComplete(session.work) ? 1 : engineCount();
-  session.engine ??= startEngines({ chess960: analysis.chess960, count });
+  const start = (): Promise<EnginePool> =>
+    startEngines({
+      chess960: analysis.chess960,
+      count: isComplete(session.work) ? 1 : engineCount(),
+    });
+  const current = (session.engine ??= start());
+  const pool = await current;
+  // Two searches may find it empty at once: the first boots the new one.
+  if (pool.size === 0 && session.engine === current) session.engine = start();
   return session.engine;
 }

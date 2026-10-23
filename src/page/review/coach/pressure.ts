@@ -45,11 +45,17 @@ function chases(board: Board, square: Square, piece: Piece, from: Square): Chase
   };
 }
 
-// A pin to a piece other than the king holds only if taking that piece wins:
-// it's worth more than the pinner, or nothing defends it once the pinned one moves.
+// A pinned piece that can take the pinner along the line isn't held, unless
+// that loses it: it's worth more, and the pinner is defended. Then a pin to a
+// piece other than the king holds only if taking that piece wins: it's worth
+// more than the pinner, or nothing defends it once the pinned one moves.
 function holds(board: Board, pinned: Square, { pinner, behind }: Pin): boolean {
-  const [attacker, target] = [board.get(pinner), board.get(behind)];
-  if (!attacker || !target) return false;
+  const [attacker, target, piece] = [board.get(pinner), board.get(behind), board.get(pinned)];
+  if (!attacker || !target || !piece) return false;
+  if (attackedSquares(board, pinned).includes(pinner)) {
+    const losing = PIECE_VALUES[piece.role] > PIECE_VALUES[attacker.role];
+    if (!losing || !isDefended(board, pinner, attacker.color)) return false;
+  }
   if (target.role === 'king' || PIECE_VALUES[target.role] > PIECE_VALUES[attacker.role])
     return true;
   const moved = new Map(board);

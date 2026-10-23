@@ -45,6 +45,11 @@ let sizes: ResizeObserver | null = null;
 
 function onResize(entries: readonly ResizeObserverEntry[]): void {
   for (const { target, contentRect } of entries) {
+    // A graph the panel drew over shrinks to nothing as it leaves: let it go.
+    if (!target.isConnected) {
+      sizes?.unobserve(target);
+      continue;
+    }
     const kept = target instanceof HTMLElement ? boxes.get(target) : undefined;
     if (!(target instanceof HTMLElement) || !kept) continue;
     const box = boxOf(kept.padX, contentRect.width, contentRect.height);

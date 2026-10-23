@@ -93,11 +93,14 @@ function showLine(session: Session, analysis: Analysis): void {
   view.lineOf = { path: analysis.path, move, line };
   view.bestOf = null;
   goTo(analysis, parentPath(analysis.path));
+  const start = analysis.nodeList.length;
   let played = 0;
   const step = (): void => {
     const uci = line[played];
-    // Done, or the user moved the board elsewhere.
-    if (uci === undefined || (played > 0 && !lineShown(session, analysis))) {
+    // Done, or the user moved the board elsewhere, a step back along the line included:
+    // the next move would then be played from the wrong position.
+    const onLine = analysis.nodeList.length === start + played && lineShown(session, analysis);
+    if (uci === undefined || (played > 0 && !onLine)) {
       stopPlaying(session);
       session.redraw(true);
       return;

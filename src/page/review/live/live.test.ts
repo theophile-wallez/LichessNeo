@@ -5,6 +5,7 @@ import { liveTree } from '#page/review/fixtures/live-tree.ts';
 import { LIVE_TREE } from '#page/review/fixtures/unit-cases.ts';
 import { newSession } from '#page/review/fixtures/unit-review.ts';
 import { bookAt, judgeAt, liveDigest, openingAt } from './judging.ts';
+import { lookUpBook } from './lookups.ts';
 import { bookGap, treeMovePaths, wanted } from './queue.ts';
 // What the original script made of the same tree.
 import legacy from './fixtures/legacy.json' with { type: 'json' };
@@ -69,8 +70,24 @@ describe('the lookup queue', () => {
     const { ctrl, paths, facade } = setUpTree();
     const found = LIVE_TREE.boards.map(board => {
       ctrl.userJump(board === 0 ? '' : (paths[board - 1] ?? ''));
-      return wanted(facade, treeMovePaths()).map(node => node.fen);
+      return wanted(facade, treeMovePaths(facade)).map(node => node.fen);
     });
     expect(found).toEqual(legacy.wanted);
+  });
+});
+
+describe('the masters database', () => {
+  const FEN = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2';
+
+  it('leaves out a position it didn’t answer for, signed in, and is given up signed out', async () => {
+    const { ctrl, facade, session } = setUpTree();
+    const { live } = session;
+    ctrl.explorer.fetchMasterOpening = () => Promise.reject(new Error('Too Many Requests'));
+    await lookUpBook(session, facade, FEN);
+    expect(live.books.get(FEN)).toEqual({ book: false, name: '', eco: '' });
+    expect(live.noBook).toBe(false);
+    ctrl.explorer.isAuth = () => false;
+    await lookUpBook(session, facade, FEN);
+    expect(live.noBook).toBe(true);
   });
 });

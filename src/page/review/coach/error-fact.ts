@@ -99,7 +99,7 @@ function replyReason({ move, me, them, after }: FactInput, uci: string): Reason 
   const san = sanOf(move.position.fen, uci);
   const plan = planOf({
     color: them,
-    ply: move.ply + 1,
+    ply: move.position.ply + 1,
     uci,
     san,
     before: after,

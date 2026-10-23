@@ -4,6 +4,7 @@ import { classCounts, playerAccuracy } from '#page/review/judge/summary.ts';
 import { type GamePosition, isPlayed } from '#page/review/judge/types.ts';
 import type { GameRating } from '#page/review/rating/rate-game.ts';
 import type { Review, JudgedMove } from '#page/review/session.ts';
+import { settleDraw } from './draws.ts';
 
 // The game's review, rebuilt from what's known of its positions.
 
@@ -94,7 +95,12 @@ export interface ReviewInput extends BuildInput {
   readonly rate: (moves: readonly JudgedMove[]) => GameRating;
 }
 
-export function buildReview(input: ReviewInput): Review {
+export function buildReview(given: ReviewInput): Review {
+  const input: ReviewInput = {
+    ...given,
+    deep: settleDraw(given.nodes, given.deep),
+    rough: settleDraw(given.nodes, given.rough),
+  };
   judgeMainline(input);
   const { nodes, deep, rough, moves } = input;
   const draft = draftMoves(input);

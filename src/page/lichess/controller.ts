@@ -73,6 +73,8 @@ export const GameCourseSchema = z.object({
     moveCentis: lenient(z.array(z.number())),
     division: lenient(z.object({ middle: lenient(z.number()), end: lenient(z.number()) })),
   }),
+  // The time control, in seconds; none for correspondence or an imported game.
+  clock: lenient(z.object({ increment: z.number() })),
 });
 
 export type GameCourse = z.infer<typeof GameCourseSchema>;

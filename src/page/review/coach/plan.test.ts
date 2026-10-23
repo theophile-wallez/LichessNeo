@@ -13,14 +13,16 @@ interface Move {
   readonly uci: string;
   readonly san: string;
   readonly ply?: number;
+  /** The review's index of the move, when it isn't its ply (a game from a position). */
+  readonly index?: number;
   readonly mate?: boolean;
 }
 
 /** What the coach says of the move's plan, as the engine's best; one of the ways to say it. */
-function planOf({ fen, uci, san, ply = 20, mate = false }: Move): string | null {
+function planOf({ fen, uci, san, ply = 20, index = ply, mate = false }: Move): string | null {
   const score = mate ? { mate: 4 } : { cp: 0 };
   const record = { ...score, whiteWinChance: 50, secondLineWinChance: null, best: uci };
-  const move = judge({
+  const judged = judge({
     previousPosition: { ply: ply - 1, fen },
     position: { ply, fen, uci, san },
     before: record,
@@ -28,6 +30,7 @@ function planOf({ fen, uci, san, ply = 20, mate = false }: Move): string | null 
     book: false,
     chess960: false,
   });
+  const move = { ...judged, ply: index };
   const before = parseFen(fen).board;
   const after = boardAfter(before, uci);
   return planFact({ move, sentences: en.facts, before, after })?.text ?? null;
@@ -39,6 +42,12 @@ describe('planFact', () => {
       planOf({ fen: START, uci: 'g1f3', san: 'Nf3', ply: 1 }),
     );
     expect(planOf({ fen: START, uci: 'g1f3', san: 'Nf3', ply: 41 })).toBeNull();
+  });
+
+  it('reads the move’s ply on the board, which a game from a position starts past 0', () => {
+    // The game's first move, at move 21.
+    expect(planOf({ fen: START, uci: 'g1f3', san: 'Nf3', ply: 41, index: 1 })).toBeNull();
+    expect(planOf({ fen: START, uci: 'e2e4', san: 'e4', ply: 41, index: 1 })).toBeNull();
   });
 
   it('sees a knight settle where no pawn can chase it', () => {
@@ -97,6 +106,20 @@ describe('planFact', () => {
     expect(en.facts.pins(knight, king)).toContain(planOf({ fen: pinned, uci: 'f1b5', san: 'Bb5' }));
   });
 
+  it('sees no pin a pinned piece breaks by taking the pinner, unless that loses it', () => {
+    const king = { role: 'king', color: 'black' } as const;
+    // ...Rxe1+ takes the rook back at once.
+    const rook = { role: 'rook', color: 'black' } as const;
+    const even = planOf({ fen: '4k3/4r3/8/8/8/8/5PPP/R5K1 w - - 0 1', uci: 'a1e1', san: 'Re1' });
+    expect(en.facts.pins(rook, king)).not.toContain(even);
+    // ...Qxb5 wins a bishop, unless the a4 pawn takes the queen back.
+    const queen = { role: 'queen', color: 'black' } as const;
+    const free = planOf({ fen: '4k3/3q4/8/8/8/8/8/4KB2 w - - 0 1', uci: 'f1b5', san: 'Bb5' });
+    expect(en.facts.pins(queen, king)).not.toContain(free);
+    const held = planOf({ fen: '4k3/3q4/8/8/P7/8/8/4KB2 w - - 0 1', uci: 'f1b5', san: 'Bb5' });
+    expect(en.facts.pins(queen, king)).toContain(held);
+  });
+
   it('sees a rook reach the seventh rank, and rooks doubled or connected', () => {
     const seventh = '4k3/1p6/8/8/8/8/8/R3K3 w - - 0 1';
     expect(en.facts.seventhRank).toContain(planOf({ fen: seventh, uci: 'a1a7', san: 'Ra7' }));
@@ -125,6 +148,9 @@ describe('planFact', () => {
     expect(planOf({ fen, uci: 'h2h3', san: 'h3', ply: 21 })).toBeNull();
     const guarded = 'r5k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1';
     expect(planOf({ fen: guarded, uci: 'h2h3', san: 'h3', ply: 41 })).toBeNull();
+    // The square h3 leaves is the d6 bishop's: no way out for the king.
+    const covered = 'r5k1/5ppp/3b4/8/8/8/5PPP/6K1 w - - 0 1';
+    expect(en.facts.luft).not.toContain(planOf({ fen: covered, uci: 'h2h3', san: 'h3', ply: 41 }));
     // A pawn that attacks a piece does that first.
     const bishop = { role: 'bishop', color: 'black' } as const;
     const chasing = 'r5k1/5ppp/8/8/6b1/8/5PPP/6K1 w - - 0 1';

@@ -58,6 +58,11 @@ export const PUNISHABLE = 10;
 const AHEAD = 60;
 const FORCED = 5;
 
+// An error, by its class too: the engine's own move can read 10 points down
+// where its records were taken at different depths (a cloud one beside ours).
+const punishable = (move: MoveVerdict): boolean =>
+  move.loss >= PUNISHABLE && isError(move.moveClass);
+
 /**
  * Whether an error now fails to punish the opponent's: their move just before was an
  * error, or the mover was punishing one from three plies back, their reply no error (its
@@ -66,13 +71,14 @@ const FORCED = 5;
  */
 function inPunishment(previousMove: MoveVerdict | null | undefined, before: number): boolean {
   if (!previousMove || before < AHEAD) return false;
-  if (previousMove.loss >= PUNISHABLE) return true;
+  if (punishable(previousMove)) return true;
   const own = previousMove.previousMove;
   return (
     previousMove.loss < FORCED &&
     own !== null &&
     !isError(own.moveClass) &&
-    (own.previousMove?.loss ?? 0) >= PUNISHABLE
+    own.previousMove !== null &&
+    punishable(own.previousMove)
   );
 }
 

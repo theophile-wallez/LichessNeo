@@ -8,11 +8,22 @@ import { analyseLive, lookUpBook } from './lookups.ts';
 // What to look up next for the moves played on the board, one engine search
 // and one masters lookup at a time.
 
-/** Every move in Lichess's move list carries its tree path in `p`, variations included. */
-export const treeMovePaths = (): string[] =>
-  queryAll(document, 'main.analyse .tview2 move[p]', Element).map(
-    move => move.getAttribute('p') ?? '',
-  );
+/**
+ * The paths of the moves in Lichess's move list that get a verdict: each move
+ * carries its tree path in `p`. Not the server analysis's computer lines,
+ * which the review hides and doesn't judge (view/move-list.ts), unless the
+ * user stepped into one: a game can have hundreds of their moves.
+ */
+const judgedPaths = (analysis: Analysis, moves: readonly Element[]): string[] =>
+  moves.flatMap(move => {
+    const path = move.getAttribute('p') ?? '';
+    const own = move.closest('line')?.classList.contains('ln-ext-var') ?? false;
+    return own || !analysis.nodeAtPath(path).comp ? [path] : [];
+  });
+
+const listedMoves = (): Element[] => queryAll(document, 'main.analyse .tview2 move[p]', Element);
+
+export const treeMovePaths = (analysis: Analysis): string[] => judgedPaths(analysis, listedMoves());
 
 /** The line on from `node`, following each first child. */
 function lineAfter(node: TreeNode): TreeNode[] {
@@ -78,10 +89,10 @@ const idle = new WeakMap<LiveState, string>();
 /** Starts the next lookups the moves on the board wait for, if none is running. */
 export function pump(session: Session, analysis: Analysis): void {
   const { live, work } = session;
-  const movePaths = treeMovePaths();
+  const listed = listedMoves();
   const key = [
     analysis.path,
-    movePaths.length,
+    listed.length,
     live.evals.size,
     live.books.size,
     live.busy,
@@ -91,6 +102,7 @@ export function pump(session: Session, analysis: Analysis): void {
     session.view.error,
   ].join('|');
   if (idle.get(live) === key) return;
+  const movePaths = judgedPaths(analysis, listed);
   let started = false;
   if (!live.busy && live.error === null) {
     // Skip the game's own positions: the game's analysis evaluates those, unless it failed,

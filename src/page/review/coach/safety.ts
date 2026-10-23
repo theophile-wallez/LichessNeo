@@ -1,8 +1,10 @@
 import {
   attackedSquares,
+  attackers,
   type Board,
   type Color,
   kingSquare,
+  opposite,
   PIECE_VALUES,
   type Square,
   squareAt,
@@ -86,7 +88,8 @@ export const centralSquare = (square: Square): boolean => CENTER.has(squareCoord
 
 /**
  * A pawn pushed from in front of its castled king, on the back rank with no
- * square off it: a king still in the center has other ways out.
+ * square off it: a king still in the center has other ways out. The square it
+ * leaves must be safe, or the king gains nothing.
  */
 export function makesLuft(before: Board, [from, to]: [Square, Square], color: Color): boolean {
   const king = kingSquare(before, color);
@@ -96,5 +99,10 @@ export function makesLuft(before: Board, [from, to]: [Square, Square], color: Co
   const ahead = kingRank + (color === 'white' ? 1 : -1);
   const exits = [kingFile - 1, kingFile, kingFile + 1].flatMap(file => squareAt(file, ahead) ?? []);
   const shut = exits.every(square => before.get(square)?.color === color);
-  return shut && exits.includes(from) && squareCoords(to)[0] === squareCoords(from)[0];
+  if (!shut || !exits.includes(from) || squareCoords(to)[0] !== squareCoords(from)[0]) return false;
+  const after = new Map(before);
+  const pawn = after.get(from);
+  after.delete(from);
+  if (pawn) after.set(to, pawn);
+  return attackers(after, from, opposite(color)).length === 0;
 }

@@ -1,5 +1,6 @@
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { toRecord } from '#page/review/engine/record.ts';
+import type { EngineResult } from '#page/review/engine/uci.ts';
 import { engineFor } from '#page/review/engine-pool.ts';
 import type { Session } from '#page/review/session.ts';
 import { BOOK_GAMES } from './judging.ts';
@@ -22,12 +23,11 @@ export async function analyseLive(
 ): Promise<void> {
   const { live } = session;
   live.busy = true;
+  const search = async (): Promise<EngineResult> =>
+    (await engineFor(session, analysis)).analyse({ position: `fen ${fen}` }, { urgent: true });
   try {
-    const engine = await engineFor(session, analysis);
-    live.evals.set(
-      fen,
-      toRecord(fen, await engine.analyse({ position: `fen ${fen}` }, { urgent: true })),
-    );
+    // Once more, should the last engine have been lost on the way: engineFor boots another.
+    live.evals.set(fen, toRecord(fen, await search().catch(search)));
   } catch (error) {
     console.error('[LichessNeo] engine failed', error);
     live.error = session.language.ui.engineError;
@@ -57,7 +57,10 @@ export async function lookUpBook(session: Session, analysis: Analysis, fen: stri
       eco: found.opening?.eco ?? '',
     });
   } catch {
-    live.noBook = true;
+    // Signed in, a lookup that timed out or was refused leaves out this
+    // position only, not the book for the rest of the page.
+    if (analysis.explorerSignedIn()) live.books.set(fen, { book: false, name: '', eco: '' });
+    else live.noBook = true;
   }
   live.bookBusy = false;
   changed(session);

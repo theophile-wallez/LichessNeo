@@ -47,6 +47,18 @@ const letIn = (
     previousMove,
   });
 
+// White's e4 throwing a lead of 85 away, down to 60.
+const throwingLead = (previousMove: MoveVerdict): MoveVerdict =>
+  judge({
+    previousPosition: { ply: 0, fen: START },
+    position: { ply: 1, fen: AFTER_E4, uci: 'e2e4', san: 'e4' },
+    before: record(85, 'd2d4'),
+    after: record(60, null),
+    book: false,
+    chess960: false,
+    previousMove,
+  });
+
 describe('judge', () => {
   it('judges every fixture move as the original did', () => {
     for (const [index, game] of fixtureGames().entries()) {
@@ -131,6 +143,14 @@ describe('judge', () => {
     const error = { ...letIn(-600, 9.9), loss: 30 };
     expect(letIn(400, 85, 'd2d4', error).moveClass).toBe('blunder');
     expect(withMiss({ ...letIn(400, 85), previousMove: error }).moveClass).toBe('blunder');
+  });
+
+  it('calls an error a miss only when the move it lets go was one', () => {
+    // After a Black move that read 30 points down.
+    const blunder = { ...letIn(-600, 9.9), loss: 30 };
+    expect(throwingLead(blunder).moveClass).toBe('miss');
+    // The engine's own move, its records at two depths: nothing was there to punish.
+    expect(throwingLead({ ...blunder, moveClass: 'best' }).moveClass).toBe('blunder');
   });
 
   it('calls a book move book, at full accuracy', () => {

@@ -1,7 +1,7 @@
 import { html } from '#shared/html.ts';
 import type { Color } from '#shared/chess/types.ts';
 import { factsFr } from './fr-comment.ts';
-import { capitalize, conjugate, indefinite, partyOf, typography } from './fr-grammar.ts';
+import { agreement, capitalize, conjugate, indefinite, partyOf, typography } from './fr-grammar.ts';
 import { remarksFr } from './fr-remarks.ts';
 import { theirRemarksFr } from './fr-their-remarks.ts';
 import { trajectoryFr } from './fr-trajectory.ts';
@@ -161,7 +161,8 @@ const retryStrings = (viewer: Viewer): RetryStrings => ({
   hint: 'Un indice',
   another: 'Un autre indice',
   hintPiece: piece => `C’est ${indefinite(piece)} qui doit jouer.`,
-  hintSquare: square => `Il part de la case ${square}, marquée sur l’échiquier.`,
+  hintSquare: (square, piece) =>
+    `${agreement(piece) ? 'Elle' : 'Il'} part de la case ${square}, marquée sur l’échiquier.`,
   reveal: 'Voir la réponse',
   revealed: best => `Le coup était ${best}.`,
 });
@@ -216,7 +217,7 @@ export const french = (viewer: Viewer): ReviewLanguage => ({
     `${CLASS_PLURALS[moveClass]} des ${color === 'white' ? 'Blancs' : 'Noirs'}\u00a0: ${count}`,
   typography,
   openingLine: name => [
-    `Ouverture: ${name}.`,
+    `Ouverture : ${name}.`,
     `Ouverture jouée : ${name}.`,
     `Au programme : ${name}.`,
   ],

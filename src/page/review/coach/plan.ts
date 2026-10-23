@@ -234,8 +234,9 @@ export const watched = (plan: Plan): boolean => WATCHED.has(plan.kind);
 function planFinding({ move, sentences, before, after, theirs }: PlanInput) {
   // With a mate on the board, the mate is the point, not the plan.
   if ('mate' in move.before || 'mate' in move.after) return null;
-  const { color, ply, uci, san } = move;
-  const plan = planOf({ color, ply, uci, san, before, after });
+  const { color, uci, san } = move;
+  // The move's ply on the board: a game from a position doesn't start at 0.
+  const plan = planOf({ color, ply: move.position.ply, uci, san, before, after });
   if (!plan || (theirs && !watched(plan))) return null;
   const told = racing(plan, move);
   const scene = { uci, before, after, shown: after, toMove: opposite(color) };

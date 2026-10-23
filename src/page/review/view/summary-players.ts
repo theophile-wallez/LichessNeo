@@ -89,9 +89,18 @@ function playerCard(input: PlayersInput, color: Color): SafeHtml {
   return html`<div class="ln-ext-sum-player ln-ext-side-${side}${best ? ' ln-ext-sum-player--ahead' : ''}" data-ln-ext-side="${color}">
       <span class="ln-ext-avatar ln-ext-avatar--${side}"${avatarAttributes(players[color]?.user?.username)}></span>
       <span class="ln-ext-sum-player__name"><span>${name}</span></span>${trophy}
-      <span class="ln-ext-sum-player__acc"><span class="ln-ext-acc ln-ext-acc--${side}">${accuracy === null || accuracy === undefined ? NBSP : accuracy.toFixed(1)}</span><small>${ui.accuracy}</small></span>
+      <span class="ln-ext-sum-player__acc"><span class="ln-ext-acc ln-ext-acc--${side}">${accuracyText(review, accuracy)}</span><small>${ui.accuracy}</small></span>
       <span class="ln-ext-sum-player__elo">${lead} <span class="ln-ext-sum-player__rating"><b${ratingTip(elo, shown, ui)}>${shown ?? '—'}</b> ${tail}</span></span>
     </div>`;
+}
+
+// Blank while the analysis runs, a dash once it's done for a side without a move.
+function accuracyText(
+  review: Review | null | undefined,
+  accuracy: number | null | undefined,
+): SafeHtml | string {
+  if (accuracy !== null && accuracy !== undefined) return accuracy.toFixed(1);
+  return review?.complete ? '—' : NBSP;
 }
 
 export const playersMarkup = (input: PlayersInput): SafeHtml =>

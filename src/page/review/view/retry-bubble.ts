@@ -34,7 +34,9 @@ function hintLines(session: Session, hint: RetryHint | null): string[] {
   if (!hint) return [];
   const { retry: strings } = session.language.ui;
   const piece = strings.hintPiece(hint.piece);
-  return hint.square === null ? [piece] : [piece, strings.hintSquare(squareToken(hint.square))];
+  return hint.square === null
+    ? [piece]
+    : [piece, strings.hintSquare(squareToken(hint.square), hint.piece)];
 }
 
 /** What the coach says while retrying, in the order it types it. */

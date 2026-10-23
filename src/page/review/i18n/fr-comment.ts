@@ -203,7 +203,7 @@ function goodMovesFr(viewer: Viewer): GoodMoveSentences {
     forks: (first, second) => [
       `Une fourchette : ${pairOf(viewer, first, second)} sont attaqué${agreement(first) && agreement(second) ? 'es' : 's'} à la fois.`,
       `Une fourchette, sur ${pairOf(viewer, first, second)}.`,
-      `Fourchette ! ${capitalize(pairOf(viewer, first, second))} sont pris en même temps.`,
+      `Fourchette ! ${capitalize(pairOf(viewer, first, second))} sont pris${agreement(first) && agreement(second) ? 'es' : ''} en même temps.`,
     ],
   };
 }

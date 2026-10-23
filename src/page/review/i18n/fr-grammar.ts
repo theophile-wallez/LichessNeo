@@ -153,5 +153,8 @@ export const has = (party: Party): string =>
 export const had = (party: Party): string => says(party, 'avais', 'avait', 'avaient');
 
 /** "te met", "met l’adversaire": a verb with the party as its object. */
-export const putting = (party: Party, verb: string): string =>
-  party.object === null ? `te ${verb}` : `${verb} ${party.object}`;
+export const putting = (party: Party, verb: string): string => {
+  if (party.object !== null) return `${verb} ${party.object}`;
+  // « t’oblige », not « te oblige ».
+  return /^[aeiouyéèêh]/i.test(verb) ? `t’${verb}` : `te ${verb}`;
+};

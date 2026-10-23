@@ -168,7 +168,7 @@ function quietFact(input: FactInput): Fact | null {
   const { move, facts, before, after, theirs } = input;
   const plan = planFact({ move, sentences: facts, before, after, theirs });
   const better = move.moveClass === 'good' ? littleBetterFact(input) : null;
-  return move.ply <= OPENING_PLIES ? (plan ?? better) : (better ?? plan);
+  return move.position.ply <= OPENING_PLIES ? (plan ?? better) : (better ?? plan);
 }
 
 /** The engine's move from `fen` in SAN, its check a mate when its record mates in one. */

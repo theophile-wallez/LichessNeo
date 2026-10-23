@@ -189,7 +189,7 @@
         "remark": "Du jeu d’ouverture classique.",
         "parts": [
           ["Du jeu d’ouverture classique."],
-          ["Ouverture: Sicilian Defense: Najdorf Variation.", true]
+          ["Ouverture : Sicilian Defense: Najdorf Variation.", true]
         ]
       },
       {
@@ -210,7 +210,7 @@
         "remark": "Un coup joué dans des milliers de parties.",
         "parts": [
           ["Un coup joué dans des milliers de parties."],
-          ["Ouverture: Sicilian Defense: Najdorf Variation.", true]
+          ["Ouverture : Sicilian Defense: Najdorf Variation.", true]
         ]
       },
       {
@@ -231,7 +231,7 @@
         "remark": "De la théorie : les grands maîtres jouent ça tout le temps.",
         "parts": [
           ["De la théorie : les grands maîtres jouent ça tout le temps."],
-          ["Ouverture: Sicilian Defense: Najdorf Variation.", true]
+          ["Ouverture : Sicilian Defense: Najdorf Variation.", true]
         ]
       },
       {
@@ -595,7 +595,10 @@
       },
       {
         "remark": "On suit les lignes principales.",
-        "parts": [["On suit les lignes principales."], ["Ouverture: King's Gambit Accepted.", true]]
+        "parts": [
+          ["On suit les lignes principales."],
+          ["Ouverture : King's Gambit Accepted.", true]
+        ]
       },
       {
         "remark": "Du jeu d’ouverture classique.",
@@ -1374,12 +1377,10 @@
         "parts": [["A flank pawn that takes aim at the center."]]
       },
       {
-        "remark": "Always ask: what did their last move allow?",
+        "remark": "Take a breath before each move.",
         "parts": [
           ["Down from a clear advantage to a slight edge for White.", true],
-          [
-            "Black’s earlier mistake was still there to punish: [[m:w:Bd3]] would have finished the job."
-          ]
+          ["Better was [[m:w:Bd3]], developing the [[p:wb]]bishop."]
         ]
       },
       {
@@ -1429,7 +1430,13 @@
         "remark": "Exactly what the engine wanted.",
         "parts": [["Castling: a safe king, and a rook ready to join in."]]
       },
-      { "remark": "There was a mate on the board.", "parts": [["The game is level again."]] },
+      {
+        "remark": "There was a mate on the board.",
+        "parts": [
+          ["The game is level again.", true],
+          ["That lets White play [[m:w:Bxh7+]], taking the [[s:h7]] [[p:bp]]pawn."]
+        ]
+      },
       {
         "remark": "Ouch. The opponent must be delighted.",
         "parts": [
@@ -1503,10 +1510,10 @@
         "parts": [["Un pion de côté qui vise le centre."]]
       },
       {
-        "remark": "Demande-toi toujours : qu’a permis son dernier coup ?",
+        "remark": "Prends le temps de respirer avant chaque coup.",
         "parts": [
           ["Les Blancs avaient un net avantage, il ne leur reste qu’un léger avantage.", true],
-          ["L’erreur précédente des Noirs restait à punir : [[m:w:Bd3]] aurait conclu."]
+          ["Il fallait jouer [[m:w:Bd3]], qui sortait le [[p:wb]]fou."]
         ]
       },
       {
@@ -1556,7 +1563,13 @@
         "remark": "Exactement ce que voulait le moteur.",
         "parts": [["Roque : un roi en sécurité, une tour prête à jouer."]]
       },
-      { "remark": "Un mat était sur l’échiquier.", "parts": [["La partie redevient équilibrée."]] },
+      {
+        "remark": "Un mat était sur l’échiquier.",
+        "parts": [
+          ["La partie redevient équilibrée.", true],
+          ["Ça permet aux Blancs de jouer [[m:w:Bxh7+]], qui prend le [[p:bp]]pion [[s:h7]]."]
+        ]
+      },
       {
         "remark": "Aïe. L’adversaire doit être ravi.",
         "parts": [
@@ -1950,7 +1963,7 @@
         "remark": "Du jeu d’ouverture classique.",
         "parts": [
           ["Du jeu d’ouverture classique."],
-          ["Ouverture: Sicilian Defense: Najdorf Variation.", true]
+          ["Ouverture : Sicilian Defense: Najdorf Variation.", true]
         ]
       },
       {
@@ -2345,7 +2358,10 @@
       },
       {
         "remark": "Un coup d’ouverture bien connu.",
-        "parts": [["Un coup d’ouverture bien connu."], ["Ouverture: King's Gambit Accepted.", true]]
+        "parts": [
+          ["Un coup d’ouverture bien connu."],
+          ["Ouverture : King's Gambit Accepted.", true]
+        ]
       },
       {
         "remark": "Un coup d’ouverture bien connu.",
@@ -2363,7 +2379,7 @@
       },
       {
         "remark": "La bonne pièce à prendre.",
-        "parts": [["La bonne pièce à prendre."], ["Ouverture: King's Gambit Accepted.", true]]
+        "parts": [["La bonne pièce à prendre."], ["Ouverture : King's Gambit Accepted.", true]]
       },
       {
         "remark": "Ça gagne : garde tes pièces à l’abri et avance.",
@@ -3822,7 +3838,7 @@
         "remark": "Un coup joué dans des milliers de parties.",
         "parts": [
           ["Un coup joué dans des milliers de parties."],
-          ["Ouverture: Sicilian Defense: Najdorf Variation.", true]
+          ["Ouverture : Sicilian Defense: Najdorf Variation.", true]
         ]
       },
       {
@@ -4364,10 +4380,10 @@
         "parts": [["Nothing better here."], ["White’s lead grows: a winning position now.", true]]
       },
       {
-        "remark": "The opponent’s mistake goes unpunished.",
+        "remark": "Ouch, this lets the opponent back in.",
         "parts": [
           ["White’s lead shrinks to a clear advantage.", true],
-          ["Black’s mistake goes unpunished: [[m:w:Rf2]] was the answer."]
+          ["[[m:w:Rf2]] was the better move."]
         ]
       },
       {
@@ -4410,7 +4426,10 @@
       },
       {
         "remark": "Un coup d’ouverture bien connu.",
-        "parts": [["Un coup d’ouverture bien connu."], ["Ouverture: King's Gambit Accepted.", true]]
+        "parts": [
+          ["Un coup d’ouverture bien connu."],
+          ["Ouverture : King's Gambit Accepted.", true]
+        ]
       },
       {
         "remark": "Un coup d’ouverture bien connu.",
@@ -4702,10 +4721,10 @@
         ]
       },
       {
-        "remark": "L’erreur de l’adversaire reste impunie.",
+        "remark": "Aïe, ça remet l’adversaire dans la partie.",
         "parts": [
           ["Les Blancs avaient une position gagnante, il ne leur reste qu’un net avantage.", true],
-          ["L’erreur des Noirs reste impunie : la réponse était [[m:w:Rf2]]."]
+          ["Il fallait jouer [[m:w:Rf2]]."]
         ]
       },
       {
@@ -4884,12 +4903,10 @@
         ]
       },
       {
-        "remark": "Always ask: what did their last move allow?",
+        "remark": "Careful! That move has a concrete flaw.",
         "parts": [
           ["Down from a clear advantage to a slight edge for White.", true],
-          [
-            "Black’s mistake goes unpunished: [[m:w:Rxg7]] was the answer, taking the [[s:g7]] [[p:bp]]pawn."
-          ]
+          ["[[m:b:exd4]] comes next, winning the [[p:wn]]knight on [[s:d4]]."]
         ]
       },
       {
@@ -5171,12 +5188,10 @@
         ]
       },
       {
-        "remark": "Demande-toi toujours : qu’a permis son dernier coup ?",
+        "remark": "Attention ! Ce coup a un défaut concret.",
         "parts": [
           ["Les Blancs perdent du terrain : il ne leur reste qu’un léger avantage.", true],
-          [
-            "L’erreur des Noirs reste impunie : la réponse était [[m:w:Rxg7]], qui prenait le [[p:bp]]pion [[s:g7]]."
-          ]
+          ["[[m:b:exd4]] suit, et le [[p:wn]]cavalier en [[s:d4]] tombe."]
         ]
       },
       {
@@ -5581,7 +5596,7 @@
         "remark": "De la théorie : les grands maîtres jouent ça tout le temps.",
         "parts": [
           ["De la théorie : les grands maîtres jouent ça tout le temps."],
-          ["Ouverture: Italian Game: Evans Gambit.", true]
+          ["Ouverture : Italian Game: Evans Gambit.", true]
         ]
       },
       {
@@ -5602,7 +5617,7 @@
         "remark": "Un coup d’ouverture bien connu.",
         "parts": [
           ["Un coup d’ouverture bien connu."],
-          ["Ouverture: Italian Game: Evans Gambit.", true]
+          ["Ouverture : Italian Game: Evans Gambit.", true]
         ]
       },
       {
@@ -5623,7 +5638,7 @@
         "remark": "Un choix solide, qui a fait ses preuves.",
         "parts": [
           ["Un choix solide, qui a fait ses preuves."],
-          ["Ouverture: Italian Game: Evans Gambit.", true]
+          ["Ouverture : Italian Game: Evans Gambit.", true]
         ]
       },
       {
@@ -6045,12 +6060,10 @@
         ]
       },
       {
-        "remark": "So close! The chance was right there.",
+        "remark": "This turns the game around.",
         "parts": [
           ["Down from a clear advantage to a slight edge for White.", true],
-          [
-            "Black’s mistake goes unpunished: [[m:w:Kxd2]] was the answer, taking with the [[p:wk]]king instead."
-          ]
+          ["Now [[m:b:Bxg3]] comes, taking the [[s:g3]] [[p:wn]]knight."]
         ]
       },
       {
@@ -6220,7 +6233,7 @@
         "remark": "Toujours dans la théorie. Jusqu’ici, tout va bien.",
         "parts": [
           ["Toujours dans la théorie. Jusqu’ici, tout va bien."],
-          ["Ouverture: Sicilian Defense: Najdorf Variation.", true]
+          ["Ouverture : Sicilian Defense: Najdorf Variation.", true]
         ]
       },
       {
@@ -6241,7 +6254,7 @@
         "remark": "Un coup joué dans des milliers de parties.",
         "parts": [
           ["Un coup joué dans des milliers de parties."],
-          ["Ouverture: Sicilian Defense: Najdorf Variation.", true]
+          ["Ouverture : Sicilian Defense: Najdorf Variation.", true]
         ]
       },
       {
@@ -6381,12 +6394,10 @@
         ]
       },
       {
-        "remark": "Si près ! L’occasion était sous tes yeux.",
+        "remark": "Ça renverse la partie.",
         "parts": [
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage.", true],
-          [
-            "L’erreur des Noirs reste impunie : la réponse était [[m:w:Kxd2]], qui prenait plutôt avec le [[p:wk]]roi."
-          ]
+          ["Désormais [[m:b:Bxg3]] arrive, et prend le [[p:wn]]cavalier [[s:g3]]."]
         ]
       },
       {
@@ -6822,10 +6833,10 @@
         ]
       },
       {
-        "remark": "The opponent slipped, but it goes unpunished.",
+        "remark": "Check the opponent’s replies first.",
         "parts": [
           ["White had a slight edge, but the game is now balanced.", true],
-          ["Missed: [[m:w:f4]] would have made Black’s mistake pay."]
+          ["After [[m:b:Bxd1]], the [[p:wr]]rook on [[s:d1]] is lost."]
         ]
       },
       {
@@ -6854,7 +6865,13 @@
         ]
       },
       { "remark": "Couldn’t have done better.", "parts": [["Couldn’t have done better."]] },
-      { "remark": "The opponent’s mistake goes unpunished.", "parts": [["Equality is restored."]] },
+      {
+        "remark": "This turns the game around.",
+        "parts": [
+          ["Equality is restored.", true],
+          ["That allows [[m:b:Rc3+]], with a discovered check."]
+        ]
+      },
       {
         "remark": "Forcing play. Checks are powerful.",
         "parts": [
@@ -6889,7 +6906,7 @@
         "remark": "Tout droit sorti des livres d’ouverture.",
         "parts": [
           ["Tout droit sorti des livres d’ouverture."],
-          ["Ouverture: King's Gambit Accepted.", true]
+          ["Ouverture : King's Gambit Accepted.", true]
         ]
       },
       {
@@ -6910,7 +6927,7 @@
         "remark": "Toujours dans la théorie. Jusqu’ici, tout va bien.",
         "parts": [
           ["Toujours dans la théorie. Jusqu’ici, tout va bien."],
-          ["Ouverture: King's Gambit Accepted.", true]
+          ["Ouverture : King's Gambit Accepted.", true]
         ]
       },
       {
@@ -6928,7 +6945,7 @@
         "remark": "Tout droit sorti des livres d’ouverture.",
         "parts": [
           ["Tout droit sorti des livres d’ouverture."],
-          ["Ouverture: King's Gambit Accepted.", true]
+          ["Ouverture : King's Gambit Accepted.", true]
         ]
       },
       {
@@ -7180,10 +7197,10 @@
         ]
       },
       {
-        "remark": "L’adversaire s’est trompé, mais ce n’est pas puni.",
+        "remark": "Vérifie d’abord les réponses de l’adversaire.",
         "parts": [
           ["Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée.", true],
-          ["Occasion manquée : [[m:w:f4]] punissait le dernier coup des Noirs."]
+          ["Après [[m:b:Bxd1]], la [[p:wr]]tour en [[s:d1]] est perdue."]
         ]
       },
       {
@@ -7213,8 +7230,11 @@
       },
       { "remark": "Impossible de faire mieux.", "parts": [["Impossible de faire mieux."]] },
       {
-        "remark": "L’erreur de l’adversaire reste impunie.",
-        "parts": [["L’équilibre est rétabli."]]
+        "remark": "Ça renverse la partie.",
+        "parts": [
+          ["L’équilibre est rétabli.", true],
+          ["Ça ouvre la porte à [[m:b:Rc3+]], qui donne un échec à la découverte."]
+        ]
       },
       {
         "remark": "Du jeu forcé : les échecs sont puissants.",
