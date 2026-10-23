@@ -106,16 +106,6 @@ function moveAside(file: string): boolean {
 const isCode = (error: unknown, code: string): boolean =>
   error instanceof Error && 'code' in error && error.code === code;
 
-/**
- * What a preview is named: the name given, or `main` for the main checkout's
- * build, what was shipped. Null when a draft has none.
- */
-export function previewName(given: string | undefined, claimant: Claimant): string | null {
-  const name = given?.trim() ?? '';
-  if (name !== '') return name;
-  return claimant.worktree === claimant.mainCheckout ? 'main' : null;
-}
-
 /** One line on who holds a turn, for the scripts' output. */
 export function describeClaim(claim: Claim, now = Date.now()): string {
   const minutes = Math.max(0, Math.round((now - claim.since) / 60_000));

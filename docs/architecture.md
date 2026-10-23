@@ -26,7 +26,7 @@ the page world would crash on it.
 | `storage.ts`, `prefix.ts`                            | the `ln-ext` prefix and every storage key; writes that survive a full or blocked storage, and reads that throw on a blocked one                                                              |
 | `page-init-data.ts`, `round-init.ts`, `game-path.ts` | the page's `#page-init-data`, captured before Lichess removes it; a game page's, read for a game just begun; what a game page's path holds (`/game/<id>`)                                    |
 | `features.ts`, `frame.ts`, `poll.ts`                 | starting features, once-per-frame work, waiting for Lichess's globals                                                                                                                        |
-| `build-mode.ts`                                      | whether this is a dev build, which reloads itself when rebuilt, and the name of the draft a preview build shows                                                                              |
+| `build-mode.ts`                                      | whether this is a dev build, which reloads itself when rebuilt, and the name of the draft a preview build shows and its page                                                                 |
 | `lang.ts`, `text.ts`, `math.ts`, `geometry.ts`       | the page's language, small text and number helpers, points and boxes                                                                                                                         |
 | `time-control.ts`, `clock-time.ts`                   | a time control in words, for a "New 10+5" button; a clock's time                                                                                                                             |
 | `player-bar.ts`, `flag.ts`                           | a player as their bar on the game page shows them; the image of a profile's flag                                                                                                             |
@@ -116,7 +116,8 @@ so the logic can be unit-tested without a page.
 - `puzzle-dashboard`: the puzzle dashboard's overview with its coach's tips,
   its improvement areas and strengths, from `/api/puzzle/dashboard`, and the
   puzzle history's week, puzzles to retry and session cards.
-- `dev`: auto-reload, and the name of the draft a preview shows (`pnpm preview --name`).
+- `dev`: auto-reload, and the name of the draft a preview shows (`pnpm preview --name`),
+  a link to the page to review it on with `--url`.
 - `platform`: the extension APIs it uses.
 - `settings`: the extension's settings, a section of the account pages whose
   menu gets a link for each of its pages: Personalization (the appearance,

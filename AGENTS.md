@@ -139,7 +139,9 @@ must be short. A change goes in two steps.
    it builds into the main checkout's `dist/chrome`, which Chrome reloads when
    a Lichess tab next gets focus, with the name at the top of every page (a
    few words for the user, in their language: "Barre d'éval, plateau
-   retourné"), so they know which draft they see. Rebase onto `origin/main` before each preview, and take your
+   retourné"), so they know which draft they see. Add `--url <page>` (a
+   lichess.org path or URL) when the change shows on one page: the name then
+   leads there in a click. Rebase onto `origin/main` before each preview, and take your
    turn at it: Chrome shows one draft at a time (see
    [Sessions side by side](#sessions-side-by-side)). Tell the user what
    to look at, and iterate on their feedback. Commit nothing yet.

@@ -6,7 +6,6 @@ import {
   type Claimant,
   describeClaim,
   isFree,
-  previewName,
   readClaim,
   releaseTurn,
   takeTurn,
@@ -112,17 +111,5 @@ describe('releaseTurn', () => {
     expect(readClaim(dir, 'ship')?.branch).toBe('t3/a');
     expect(releaseTurn(dir, 'ship', a.worktree)).toBe(true);
     expect(readClaim(dir, 'ship')).toBeNull();
-  });
-});
-
-describe('previewName', () => {
-  it("takes the name given, and main's for the main checkout only", async () => {
-    const { main, a } = await repository();
-    const mainHere = { ...main, worktree: main.mainCheckout };
-    expect(previewName('  Eval bar ', a)).toBe('Eval bar');
-    expect(previewName(undefined, a)).toBeNull();
-    expect(previewName('   ', a)).toBeNull();
-    expect(previewName(undefined, mainHere)).toBe('main');
-    expect(previewName('Hotfix', mainHere)).toBe('Hotfix');
   });
 });
