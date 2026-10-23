@@ -38,6 +38,18 @@ function styleOf(selector: string): CSSStyleDeclaration {
   return getComputedStyle(element);
 }
 
+function ruleOf(selectorEnd: string): CSSStyleDeclaration {
+  const rules = Array.from(document.styleSheets, sheet => Array.from(sheet.cssRules)).flat();
+  const nested = rules.flatMap(rule =>
+    rule instanceof CSSMediaRule ? Array.from(rule.cssRules) : rule,
+  );
+  const found = nested.find(
+    rule => rule instanceof CSSStyleRule && rule.selectorText.endsWith(selectorEnd),
+  );
+  if (!(found instanceof CSSStyleRule)) throw new Error(`no ${selectorEnd}`);
+  return found.style;
+}
+
 afterEach(() => {
   document.head.replaceChildren();
   document.body.replaceChildren();
@@ -58,6 +70,18 @@ describe('The current games’ channels on a desktop', () => {
 
     render(TV, 1366);
     expect(styleOf('.subnav__inner').flexBasis).toBe('0px');
+  });
+
+  // The dot is 10px with its border: a 14px ring from the same corner sat 2px off its center.
+  // happy-dom styles no pseudo-element, hence the rules themselves.
+  it('pulses the live dot from its center', () => {
+    render(GAMES, 1366);
+    const dot = ruleOf('.tv-channel.active::after');
+    const ring = ruleOf('.tv-channel.active > span::after');
+
+    for (const property of ['top', 'inset-inline-start', 'width', 'height']) {
+      expect(ring.getPropertyValue(property)).toBe(dot.getPropertyValue(property));
+    }
   });
 
   it('leaves TV’s gap between the menu and the games', () => {

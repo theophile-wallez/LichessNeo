@@ -129,15 +129,16 @@
     background: var(--ln-ext-red-dark);
   }
 
-  /* Its pulse (theme/live-ring.css), on the same spot: the tile has no pseudo-element left. */
+  /* Its pulse (theme/live-ring.css), on the same spot and the dot's size, its border included:
+   * the tile has no pseudo-element left. */
   main:is(.round.tv-single, .tv-games) .subnav .tv-channel.active > span::after {
-    --ln-ext-ring-scale: 1.86;
+    --ln-ext-ring-scale: 2.6;
     content: '';
     position: absolute;
     top: calc(50% - 22px);
     inset-inline-start: 37px;
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: color-mix(in srgb, var(--ln-ext-red-dark) 70%, transparent);
     animation: ln-ext-live-ring 1.6s ease-out infinite;
