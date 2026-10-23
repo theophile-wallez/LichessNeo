@@ -110,4 +110,40 @@ describe('devReload', () => {
     });
     expect(log).toEqual([]);
   });
+
+  it('reloads a move link on its move, after Lichess dropped its hash', async () => {
+    const address = { pathname: '/game/abcdefgh/white', search: '', hash: '#31' };
+    const reloaded: string[] = [];
+    // Lichess drops the hash through `history`, which a reload then reads.
+    vi.stubGlobal('location', {
+      pathname: address.pathname,
+      search: address.search,
+      reload: () => reloaded.push(`${address.pathname}${address.search}${address.hash}`),
+      get hash() {
+        return address.hash;
+      },
+    });
+    vi.stubGlobal('history', {
+      state: null,
+      replaceState: (_state: unknown, _unused: string, url: string) => {
+        address.hash = new URL(url, 'https://lichess.org').hash;
+      },
+    });
+    const runtime: {
+      id: string | undefined;
+      getManifest: () => object;
+      sendMessage: () => Promise<unknown>;
+    } = {
+      id: 'abc',
+      getManifest: () => ({}),
+      sendMessage: async () => ({ reload: true }),
+    };
+    vi.stubGlobal('chrome', { runtime });
+    (await devReloadFor(true)).start();
+    address.hash = '';
+    await vi.advanceTimersByTimeAsync(10);
+    runtime.id = undefined;
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(reloaded).toEqual(['/game/abcdefgh/white#31']);
+  });
 });

@@ -12,11 +12,22 @@ const ORPHAN_POLL_MS = 100;
 // Leaves the new version time to load before the tab reloads.
 const RELOAD_DELAY_MS = 250;
 
+// The address the page was opened at. Lichess drops a link's hash once read
+// (`/game/<id>#46`, the move it opens on), and a reload without it opens the
+// game at its start.
+let opened = { path: '', hash: '' };
+
+function reloadPage(): void {
+  if (opened.hash !== '' && location.hash === '' && location.pathname === opened.path)
+    history.replaceState(history.state, '', `${location.pathname}${location.search}${opened.hash}`);
+  location.reload();
+}
+
 function reloadWhenOrphaned(): void {
   const poll = setInterval(() => {
     if (isConnected()) return;
     clearInterval(poll);
-    setTimeout(() => location.reload(), RELOAD_DELAY_MS);
+    setTimeout(reloadPage, RELOAD_DELAY_MS);
   }, ORPHAN_POLL_MS);
 }
 
@@ -35,7 +46,7 @@ async function checkForUpdate(): Promise<void> {
   if (document.visibilityState !== 'visible') return;
   // Another tab's check has reloaded the extension, orphaning this script.
   if (!isConnected()) {
-    location.reload();
+    reloadPage();
     return;
   }
   if (await isStale()) reloadWhenOrphaned();
@@ -57,6 +68,7 @@ export const devReload: Feature = {
   name: 'dev reload',
   start: () => {
     if (!DEV_BUILD) return;
+    opened = { path: location.pathname, hash: location.hash };
     document.addEventListener('visibilitychange', onFocus);
     window.addEventListener('focus', onFocus);
     onFocus();
