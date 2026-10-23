@@ -56,15 +56,15 @@ describe('the board panel’s tiles', () => {
     expect(thumb(section, 'accent').dataset.lnExtTheme).toBe('accent');
   });
 
-  it('list the boards the user saved, in their colors, before the custom one', async () => {
+  it('list the boards the user saved, in their colors, after the custom one', async () => {
     const { saveBoard } = await load();
     const id = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
     const section = await boardSection();
     const tile = queryOne(section, `[data-ln-ext-choice="${id}"]`, HTMLElement);
     expect(tile?.getAttribute('aria-label')).toBe('Sea');
     expect(
-      queryOne(section, `[data-ln-ext-choice="${id}"] + *`, HTMLElement)?.dataset.lnExtChoice,
-    ).toBe('custom');
+      queryOne(section, `[data-ln-ext-choice="custom"] + *`, HTMLElement)?.dataset.lnExtChoice,
+    ).toBe(id);
     expect(squares(thumb(section, id))).toEqual(['', '#ffffff', '#123456']);
   });
 });

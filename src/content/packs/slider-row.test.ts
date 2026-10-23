@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 import { KeyGapSchema } from '#shared/backlit.ts';
-import { sliderRow } from './slider-row.ts';
+import { buildSlider, sliderRow } from './slider-row.ts';
 import { storedNumber } from './stored-option.ts';
 
 const KEY = 'ln-ext-backlit-gap';
@@ -56,5 +56,32 @@ describe('sliderRow', () => {
     reset.click();
     expect(localStorage.getItem(KEY)).toBe('5.5');
     expect([slider.value, value.textContent, reset.disabled]).toEqual(['5.5', '5.5%', true]);
+  });
+});
+
+describe('buildSlider', () => {
+  it('shows its unit, and a value set elsewhere without choosing it', () => {
+    const chosen: number[] = [];
+    const slider = buildSlider({
+      label: 'Radius',
+      setting: { read: () => 4, choose: radius => chosen.push(radius) },
+      min: 0,
+      max: 16,
+      step: 1,
+      fallback: 8,
+      unit: 'px',
+    });
+    const [input, value, reset] = slider.elements;
+    if (!(input instanceof HTMLInputElement) || !(reset instanceof HTMLButtonElement))
+      throw new Error('no slider');
+    expect([input.value, value?.textContent, reset.disabled]).toEqual(['4', '4px', false]);
+    slider.show(8);
+    expect([input.value, value?.textContent, fill(input), reset.disabled]).toEqual([
+      '8',
+      '8px',
+      '50%',
+      true,
+    ]);
+    expect(chosen).toEqual([]);
   });
 });

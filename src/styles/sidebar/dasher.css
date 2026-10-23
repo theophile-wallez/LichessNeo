@@ -268,3 +268,12 @@
   font-family: inherit !important;
   font-variant-numeric: tabular-nums;
 }
+
+/* The extension leaves Lichess's background picture out (theme/base.css): no toggle, opacity
+ * or gallery for it in the Theme panel. */
+#dasher_app .sub.theme .cmn-toggle-wrap,
+#dasher_app .sub.theme .bg-opacity,
+#dasher_app .sub.theme .image,
+#dasher-theme-gallery {
+  display: none !important;
+}

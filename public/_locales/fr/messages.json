@@ -17,8 +17,8 @@
   "settingsLink": {
     "message": "Lichess Neo"
   },
-  "settingsPagePersonalization": {
-    "message": "Personnalisation"
+  "settingsPageAppearance": {
+    "message": "Apparence"
   },
   "settingsPageBoard": {
     "message": "Plateau et sons"
@@ -50,8 +50,17 @@
   "looksBacklit": {
     "message": "Rétroéclairés"
   },
-  "looksMaterials": {
-    "message": "Matières"
+  "looksWood": {
+    "message": "Bois"
+  },
+  "looksMarble": {
+    "message": "Marbre"
+  },
+  "looksMisc": {
+    "message": "Divers"
+  },
+  "looksCustom": {
+    "message": "Personnalisés"
   },
   "looksLichess": {
     "message": "Lichess"
@@ -75,7 +84,7 @@
     "message": "Jouer la partie"
   },
   "settingsPageProfile": {
-    "message": "Personnalisation du profil"
+    "message": "Profil et coach"
   },
   "avatarTitle": {
     "message": "Votre avatar"
@@ -145,12 +154,6 @@
   },
   "nameReset": {
     "message": "Reprendre mon pseudo"
-  },
-  "settingsPagePacks": {
-    "message": "Packs"
-  },
-  "settingsPageInterface": {
-    "message": "Interface"
   },
   "settingsPageExperimental": {
     "message": "Expérimental"
@@ -281,8 +284,11 @@
   "packsTitle": {
     "message": "Packs"
   },
+  "packsBeta": {
+    "message": "Bêta"
+  },
   "packsBody": {
-    "message": "Votre propre plateau, vos pièces ou vos sons, depuis un pack sur GitHub. Une fois importés, choisissez-les dans Plateau et sons, ou dans le menu utilisateur."
+    "message": "Votre propre plateau, vos pièces ou vos sons, depuis un pack sur GitHub. Une fois importés, choisissez-les plus haut, ou dans le menu utilisateur."
   },
   "packsEmpty": {
     "message": "Aucun pack importé pour l’instant."
@@ -333,7 +339,7 @@
     "message": "Comment créer un pack"
   },
   "appearanceTitle": {
-    "message": "Apparence"
+    "message": "Couleurs"
   },
   "appearanceBody": {
     "message": "Clair ou sombre, comme dans le menu Thème de Lichess, et un thème de couleurs pour chacun."
@@ -481,6 +487,12 @@
   },
   "themeCodeInvalid": {
     "message": "Ce n’est pas le code d’un thème."
+  },
+  "settingRoundness": {
+    "message": "Arrondi"
+  },
+  "settingRoundnessBody": {
+    "message": "L’arrondi des coins des cartes, des boutons et des menus du site. C’est le réglage de Lichess, aussi dans son menu Thème."
   },
   "settingNavigation": {
     "message": "Navigation"
@@ -938,9 +950,9 @@
   "coachPickerClose": {
     "message": "Fermer"
   },
-  "settingsPagePairing": {
-    "message": "Partie rapide",
-    "description": "The settings' page for the home's quick pairing cards."
+  "settingsPagePlay": {
+    "message": "Jouer",
+    "description": "The settings' page for the game intro and the home's quick pairing cards."
   },
   "pairingCardsTitle": {
     "message": "Vos cartes d’accueil",

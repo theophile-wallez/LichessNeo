@@ -51,11 +51,9 @@ describe('the settings’ menu links', () => {
       '/account/passwd',
       '/account/profile#ln-ext-extension',
       '#ln-ext-extension',
-      '#ln-ext-extension/profile',
       '#ln-ext-extension/board',
-      '#ln-ext-extension/packs',
-      '#ln-ext-extension/pairing',
-      '#ln-ext-extension/interface',
+      '#ln-ext-extension/profile',
+      '#ln-ext-extension/play',
       '#ln-ext-extension/experimental',
       '#ln-ext-extension/backup',
       '/account/preferences/display',
@@ -64,12 +62,10 @@ describe('the settings’ menu links', () => {
     expect(
       queryAll(nav, '.ln-ext-settings-sublink', HTMLElement).map(sub => sub.textContent),
     ).toEqual([
-      'settingsPagePersonalization',
-      'settingsPageProfile',
+      'settingsPageAppearance',
       'settingsPageBoard',
-      'settingsPagePacks',
-      'settingsPagePairing',
-      'settingsPageInterface',
+      'settingsPageProfile',
+      'settingsPagePlay',
       'settingsPageExperimental',
       'settingsPageBackup',
     ]);
@@ -92,8 +88,8 @@ describe('the settings’ menu links', () => {
     showMenu(nav, 'board');
     expect(link.dataset.lnExtOpen).toBe('');
     expect(active(nav)).toEqual(['#ln-ext-extension/board']);
-    showMenu(nav, 'interface');
-    expect(active(nav)).toEqual(['#ln-ext-extension/interface']);
+    showMenu(nav, 'play');
+    expect(active(nav)).toEqual(['#ln-ext-extension/play']);
     showMenu(nav, null);
     expect(link.dataset.lnExtOpen).toBeUndefined();
     expect(active(nav)).toEqual(['/account/profile']);

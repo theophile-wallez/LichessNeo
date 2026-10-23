@@ -6,7 +6,8 @@ import { html, type SafeHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
 import { message } from '#content/platform/runtime.ts';
 import { RatingPickSchema, type RatingPick, type Speed } from '#content/sidebar/top-rating.ts';
-import { saveSetting, type Settings } from './settings.ts';
+import { currentSettings, onSettings, saveSetting, type Settings } from './settings.ts';
+import { buildCardList } from './switch-list.ts';
 
 // The setting of the rating beside the player's name in the sidebar: a card
 // like the switches' (section.ts), with a menu of the speeds, each with its
@@ -39,7 +40,7 @@ function pickIcon(pick: RatingPick): SafeHtml {
 
 const SELECT = "[data-ln-ext-setting='sidebarRating'] .ln-ext-setting__select";
 
-export function ratingRowMarkup(): SafeHtml {
+function ratingRowMarkup(): SafeHtml {
   const id = 'ln-ext-setting-sidebarRating';
   const options = RatingPickSchema.options.map(
     pick => html`<option value="${pick}">${pickIcon(pick)}<span>${pickName(pick)}</span></option>`,
@@ -57,13 +58,22 @@ export function ratingRowMarkup(): SafeHtml {
   </div>`;
 }
 
-export function showRatingRow(section: HTMLElement, settings: Settings): void {
+function showRatingRow(section: HTMLElement, settings: Settings): void {
   const select = queryOne(section, SELECT, HTMLSelectElement);
   if (select && select.value !== settings.sidebarRating) select.value = settings.sidebarRating;
 }
 
-export function onRatingChange(event: Event): void {
+function onRatingChange(event: Event): void {
   const select = closestTo(event.target, SELECT, HTMLSelectElement);
   const pick = RatingPickSchema.safeParse(select?.value);
   if (pick.success) void saveSetting('sidebarRating', pick.data);
+}
+
+/** The card, kept in step with the settings. */
+export function buildRatingRow(): HTMLElement {
+  const list = buildCardList(ratingRowMarkup());
+  list.addEventListener('change', onRatingChange);
+  showRatingRow(list, currentSettings());
+  onSettings(settings => showRatingRow(list, settings));
+  return list;
 }

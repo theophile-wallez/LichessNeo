@@ -42,6 +42,7 @@ describe('the two-tone boards', () => {
       light: '#f7f5ef',
       dark: '#636b77',
       texture: 'marble',
+      family: 'marble',
     });
     const id = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
     expect(flatBoard(id)).toEqual({ id, name: 'Sea', light: '#ffffff', dark: '#123456' });

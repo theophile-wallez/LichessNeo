@@ -4,6 +4,7 @@ import { message } from '#content/platform/runtime.ts';
 import { INTRO_KINDS, IntroKindSchema, type IntroKind } from '#content/game/intro/kinds.ts';
 import { buildIntroPreview, type IntroPreview } from './intro-preview.ts';
 import { currentSettings, onSettings, saveSetting, type Settings } from './settings.ts';
+import { buildCardList } from './switch-list.ts';
 
 // The setting of the players' intro at a game's start: a card like the
 // rating's (rating-row.ts), with a list of the intros, "No animation" first,
@@ -28,7 +29,7 @@ const PICKER = '.ln-ext-intro-picker';
 const OPTION = '.ln-ext-intro-option';
 const PLAY = '.ln-ext-intro-preview__play';
 
-export function introRowMarkup(): SafeHtml {
+function introRowMarkup(): SafeHtml {
   const id = 'ln-ext-setting-gameIntro';
   const options = INTRO_KINDS.map(
     kind => html`<label class="ln-ext-intro-option">
@@ -84,10 +85,11 @@ function playOnHover(picker: HTMLElement, preview: IntroPreview): () => IntroKin
   return () => hovered;
 }
 
-/** Puts the preview in the intro's card of `list`, the card and the settings kept in step. */
-export function wireIntroRow(list: HTMLElement): void {
+/** The card, its preview in it, kept in step with the settings. */
+export function buildIntroRow(): HTMLElement {
+  const list = buildCardList(introRowMarkup());
   const picker = queryOne(list, PICKER, HTMLElement);
-  if (!picker) return;
+  if (!picker) return list;
   const preview = buildIntroPreview();
   picker.append(preview.element);
   const hovered = playOnHover(picker, preview);
@@ -103,4 +105,5 @@ export function wireIntroRow(list: HTMLElement): void {
   });
   showIntroRow(list, currentSettings());
   onSettings(settings => showIntroRow(list, settings));
+  return list;
 }

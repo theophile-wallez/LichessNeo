@@ -1,6 +1,6 @@
 import { createElement, setData, setStyleProperty } from '#shared/dom.ts';
 import { hasPart, type Pack, type PartKind } from '#shared/packs/pack.ts';
-import { settingsUrl } from '#content/settings/address.ts';
+import { packsUrl } from '#content/settings/address.ts';
 import type { Library } from './library.ts';
 import { importForm } from './import-form.ts';
 import { familyItem, familyView, openFamily } from './family.ts';
@@ -105,7 +105,7 @@ function importFoot(kind: PartKind, library: Library): HTMLElement {
   return createElement('a', {
     className: 'ln-ext-src-import-link',
     text: `Import a ${NOUNS[kind]}`,
-    attrs: { href: settingsUrl('packs') },
+    attrs: { href: packsUrl() },
   });
 }
 

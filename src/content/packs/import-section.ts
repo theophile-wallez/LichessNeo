@@ -4,7 +4,7 @@ import { message } from '#content/platform/runtime.ts';
 import { importForm } from './import-form.ts';
 import type { Library } from './library.ts';
 
-// The extension settings' Packs card (styles/pages/extension-settings.css):
+// The extension settings' Packs card (styles/pages/settings-packs.css):
 // the imported packs, each with what it holds and a button to remove it, and
 // the form that imports one. They're picked in the user menu.
 
@@ -65,8 +65,13 @@ export function importSection(library: Library): HTMLElement {
   const section = createElement('section', { className: 'ln-ext-packs' });
   const head = createElement('div', { className: 'ln-ext-packs__head' });
   const heading = createElement('div', { className: 'ln-ext-packs__heading' });
+  const title = createElement('h2', {
+    className: 'ln-ext-setting__title',
+    text: message('packsTitle'),
+  });
+  title.append(createElement('span', { className: 'ln-ext-beta', text: message('packsBeta') }));
   heading.append(
-    createElement('h2', { className: 'ln-ext-setting__title', text: message('packsTitle') }),
+    title,
     createElement('p', { className: 'ln-ext-setting__body', text: message('packsBody') }),
   );
   head.append(

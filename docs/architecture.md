@@ -121,23 +121,25 @@ so the logic can be unit-tested without a page.
   linked to the pages to review it on (`--url`).
 - `platform`: the extension APIs it uses.
 - `settings`: the extension's settings, a section of the account pages whose
-  menu gets a link for each of its pages: Personalization (the appearance,
-  the coach, the home hero's own coach or the same one, and the coach's
-  switches: its 3D, its place on the free analysis board,
-  and its drawings on the board), Profile customization (the user's own
-  avatar, a coach on a color or a picture, and their own name, which only
-  their browser shows), Board & sounds (the extension's, the packs' and
-  Lichess's, over a preview board that shows a board or a set while its tile
-  is hovered), Packs, Quick pairing (the home's cards: a speed's or the
-  player's own, changed, moved, taken off or put back to the defaults, and
-  cards suggested from their recent games), Interface (its sounds, the nav as a
-  sidebar, unfolded or not, a rail or a header, the game intro over a preview of it, the sidebar's
-  rating, or none), Experimental
-  (the Chess.com ratings, and the study behind them in a frame), Backup
-  (every setting, pick and pack exported to a JSON file, and put back from
-  one); kept in `chrome.storage.sync`, but the coach's (the home's own too),
-  the avatar's and the name's picks in localStorage, where the page world
-  reads them.
+  menu gets a link for each of its pages: Appearance (the color scheme, the
+  color themes, Lichess's Roundness, and the nav as a sidebar, unfolded or not, a rail or a
+  header), Board & sounds (the sounds, the board and the pieces, the
+  extension's, the packs' and Lichess's, the boards in sections: classic, each
+  family's, then the user's own and the packs', over a preview board that shows a board or a set while its tile is hovered, then
+  the interface's own sounds and the Packs card, which its own link scrolls
+  to), Profile & coach (the user's own avatar, a coach on a color or a
+  picture, their own name, which only their browser shows, and the sidebar's
+  rating, or none; then the coach, the home hero's own coach or the same one,
+  and the coach's switches: its 3D, its place on the free analysis board, and
+  its drawings on the board), Play (the game intro over a preview of it, and
+  the home's quick pairing cards: a speed's or the player's own, changed,
+  moved, taken off or put back to the defaults, and cards suggested from
+  their recent games), then, a step below, Experimental (the Chess.com
+  ratings, and the study behind them in a frame) and Backup (every setting,
+  pick and pack exported to a JSON file, and put back from one). The links of
+  pages since merged open where their cards went. Kept in
+  `chrome.storage.sync`, but the coach's (the home's own too), the avatar's
+  and the name's picks in localStorage, where the page world reads them.
 - `colors`: the color themes, one picked for each of Lichess's schemes.
 - `sidebar`: the Donate item, its folding to icons, and its shape (the
   settings' pick: unfolded, its sections folding open on a click and kept so,
@@ -168,10 +170,13 @@ so the logic can be unit-tested without a page.
 - `seek`: a game's "New opponent" seeking in place, and the home's cards of
   the player's own.
 - `color-scheme`: the settings' scheme pick, saved as Lichess's own.
+- `roundness`: the settings' Roundness, already on the page, saved as
+  Lichess's own once the slider rests.
 - `looks`: Lichess's boards, piece sets and sound sets picked in the
   settings, saved as Lichess's own, or shown unsaved while their tile is
   hovered, and the settings' preview board, which plays a short game.
-- `lichess/`: typed facades over Lichess's globals.
+- `lichess/`: typed facades over Lichess's globals, and `prefs.ts`, which
+  saves one of the user's preferences as Lichess's menus do.
 
 ## Packs
 
@@ -179,8 +184,9 @@ Each of the board, the pieces and the sounds shows one of the extension's
 themes (`themes.ts`: our board in the color theme's accent, the default,
 two-tone boards in each color theme's accent and those the user saved,
 `flat-boards.ts` and `saved-boards.ts`, the one they color, `custom-board.ts`,
-the material boards and the backlit ones, each listed as a family under one
-tile, `materials.ts` and `family.ts`, and the Ascent and Boxwood sound sets), a
+the material boards, in three families (the woods, the marbles, the rest), and
+the backlit ones, each family listed under one tile, `materials.ts` and
+`family.ts`, and the Ascent and Boxwood sound sets), a
 pack the user imported from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
 menu's own panels, under an Extension and a Lichess tab (`dasher.ts`,
 `panel.ts`, `choices.ts`); packs are imported and removed in the extension's

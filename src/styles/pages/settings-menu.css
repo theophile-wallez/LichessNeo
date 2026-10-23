@@ -10,8 +10,8 @@ main.account .ln-ext-settings {
   --ln-ext-nav-color: var(--ln-ext-accent);
 }
 
-.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='personalization'],
-main.account .ln-ext-settings[data-ln-ext-page='personalization'] {
+.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='appearance'],
+main.account .ln-ext-settings[data-ln-ext-page='appearance'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
   --ln-ext-nav-color: var(--ln-ext-pink);
 }
@@ -28,22 +28,10 @@ main.account .ln-ext-settings[data-ln-ext-page='board'] {
   --ln-ext-nav-color: var(--ln-ext-green);
 }
 
-.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='packs'],
-main.account .ln-ext-settings[data-ln-ext-page='packs'] {
-  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
-  --ln-ext-nav-color: var(--ln-ext-purple);
-}
-
-.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='pairing'],
-main.account .ln-ext-settings[data-ln-ext-page='pairing'] {
+.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='play'],
+main.account .ln-ext-settings[data-ln-ext-page='play'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/flash.svg');
   --ln-ext-nav-color: var(--ln-ext-orange);
-}
-
-.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='interface'],
-main.account .ln-ext-settings[data-ln-ext-page='interface'] {
-  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sliders-horizontal.svg');
-  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
 .subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='experimental'],

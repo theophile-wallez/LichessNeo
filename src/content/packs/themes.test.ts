@@ -18,24 +18,20 @@ afterEach(() => {
 });
 
 describe('the extension’s themes', () => {
-  it('list the accent’s board, the presets, the saved boards, the custom one, then the families', async () => {
+  it('list the accent’s board, the presets, the families, the custom one, then the saved boards', async () => {
     const { saveBoard, themesOf } = await load();
     const before = themesOf('board').map(theme => theme.id);
     const listedLast = [
-      'custom',
       ...MATERIAL_BOARDS.map(board => board.id),
       ...BACKLIT_BOARDS.map(board => board.id),
+      'custom',
     ];
     expect(before[0]).toBe('accent');
     expect(before[1]).toBe('tone-neo');
     expect(before.slice(-listedLast.length)).toEqual(listedLast);
     const id = saveBoard('Sea', { light: '#ffffff', dark: '#123456' }) ?? '';
     const after = themesOf('board');
-    expect(after.map(theme => theme.id)).toEqual([
-      ...before.slice(0, -listedLast.length),
-      id,
-      ...listedLast,
-    ]);
+    expect(after.map(theme => theme.id)).toEqual([...before, id]);
     expect(after.find(theme => theme.id === id)).toEqual({
       id,
       name: 'Sea',

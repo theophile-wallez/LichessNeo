@@ -3,7 +3,7 @@ import { message } from '#content/platform/runtime.ts';
 import { perfOfCard, type CardPick } from '#content/pages/speed-cards/picks.ts';
 import { poolLabel, POOLS } from '#content/pages/speed-cards/pools.ts';
 
-// The words the settings' Quick pairing page says a card with: its name, its rating's, and
+// The words the settings' quick pairing says a card with: its name, its rating's, and
 // its time controls.
 
 const SPEED_NAMES: Readonly<Record<string, string>> = {

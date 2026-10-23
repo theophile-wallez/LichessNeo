@@ -105,13 +105,20 @@
   grid-template: 'nav nav' 7px 'a b' 1fr / 2fr 1fr;
 }
 
-/* Narrow, the tiles go under the text. */
-@media (max-width: 640px) {
+/* Narrow, the tiles go under the text and share its width: four at 88px overflow a phone. */
+@container ln-ext-settings-list (width < 700px) {
   .ln-ext-setting[data-ln-ext-setting='navigation'] {
     flex-wrap: wrap;
   }
 
   .ln-ext-nav-picks {
+    display: grid;
     flex: 1 0 100%;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .ln-ext-nav-pick__mock {
+    width: 100%;
+    max-width: 72px;
   }
 }

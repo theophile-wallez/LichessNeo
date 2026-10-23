@@ -13,7 +13,7 @@ import { formMarkup } from './pairing-form.ts';
 import { perfOfPick, pickDetail, pickName } from './pairing-names.ts';
 import type { Suggestion } from './pairing-suggestions.ts';
 
-// The markup of the settings' Quick pairing page (styles/pages/settings-pairing.css):
+// The markup of the settings' quick pairing, on the Play page (styles/pages/settings-pairing.css):
 // the home's cards in their order, the suggestions, and the form that makes a
 // card of the player's own (pairing-form.ts). Every card is a row: its rating's glyph and color,
 // its name, its time controls, and its buttons.

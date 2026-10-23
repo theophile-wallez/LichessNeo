@@ -80,7 +80,7 @@ describe('the extension’s settings on the account pages', () => {
       queryAll(document, '.subnav a.active', HTMLElement).map(link => link.dataset.lnExtPage),
     ).toEqual(['board']);
     open('#ln-ext-extension');
-    expect(shownPages()).toEqual(['personalization']);
+    expect(shownPages()).toEqual(['appearance']);
     open('#something-else');
     expect(main()?.dataset.lnExtSettings).toBeUndefined();
     expect(shownPages()).toEqual([]);
@@ -90,13 +90,24 @@ describe('the extension’s settings on the account pages', () => {
     const wrap = document.getElementById('main-wrap');
     if (!wrap) throw new Error('no #main-wrap');
     wrap.scrollTop = 400;
-    open('#ln-ext-extension/packs');
+    open('#ln-ext-extension/board');
     expect(wrap.scrollTop).toBe(0);
     wrap.scrollTop = 120;
     syncSettings();
     expect(wrap.scrollTop).toBe(120);
-    open('#ln-ext-extension/interface');
+    open('#ln-ext-extension/play');
     expect(wrap.scrollTop).toBe(0);
+  });
+
+  it('leads to the Packs card on the board’s page, once per visit of its link', () => {
+    const scrolled = vi.spyOn(HTMLElement.prototype, 'scrollIntoView').mockImplementation(() => {});
+    open('#ln-ext-extension/board');
+    expect(scrolled).not.toHaveBeenCalled();
+    open('#ln-ext-extension/packs');
+    expect(shownPages()).toEqual(['board']);
+    expect(scrolled.mock.contexts).toEqual([queryOne(document, '.ln-ext-packs', HTMLElement)]);
+    syncSettings();
+    expect(scrolled).toHaveBeenCalledOnce();
   });
 
   it('builds them again on the next account page, and stays off the DGT board’s', () => {

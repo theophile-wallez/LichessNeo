@@ -1,6 +1,7 @@
 import { z } from 'zod/mini';
 import { CoachMoodSchema } from './coach.ts';
 import { CustomSeekSchema, type CustomSeek } from './custom-seek.ts';
+import { RoundnessSchema } from './roundness.ts';
 import { SoundNameSchema, SoundPlaceSchema } from './sounds.ts';
 import { messageType } from './prefix.ts';
 
@@ -41,6 +42,11 @@ export const ColorSchemeSchema = z.enum(['system', 'light', 'dark']);
 const ColorSchemePickSchema = z.object({
   type: z.literal(messageType('color-scheme')),
   scheme: ColorSchemeSchema,
+});
+
+const RoundnessPickSchema = z.object({
+  type: z.literal(messageType('roundness')),
+  radius: RoundnessSchema,
 });
 
 const LichessLookSchema = z.object({
@@ -132,6 +138,12 @@ export const postColorScheme = (scheme: ColorScheme): void =>
   post({ type: messageType('color-scheme'), scheme });
 export const onColorScheme = (handler: (scheme: ColorScheme) => void): (() => void) =>
   listen(ColorSchemePickSchema, message => handler(message.scheme));
+
+/** Content → page: Lichess's Roundness, in px, set in the extension's settings, for Lichess to keep. */
+export const postRoundness = (radius: number): void =>
+  post({ type: messageType('roundness'), radius });
+export const onRoundness = (handler: (radius: number) => void): (() => void) =>
+  listen(RoundnessPickSchema, message => handler(message.radius));
 
 /** Content → page: one of Lichess's boards, piece sets or sound sets, picked in the settings. */
 export const postLichessLook = (pick: LichessLookPick): void =>

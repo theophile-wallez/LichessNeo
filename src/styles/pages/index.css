@@ -22,6 +22,7 @@
 @import './streamer-list.css';
 @import './about-menu.css';
 @import './extension-settings.css';
+@import './settings-packs.css';
 @import './settings-menu.css';
 @import './settings-coach.css';
 @import './settings-home-coach.css';
@@ -31,6 +32,7 @@
 @import './setting-menu.css';
 @import './settings-intro.css';
 @import './settings-navigation.css';
+@import './settings-roundness.css';
 @import './settings-pairing.css';
 @import './settings-pairing-form.css';
 @import './settings-experimental.css';

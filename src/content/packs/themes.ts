@@ -4,7 +4,7 @@ import { RECORDED_SET } from '#shared/recorded-sounds.ts';
 import { SYNTH_SET } from '#shared/sounds.ts';
 import type { CustomBoard } from './custom-board.ts';
 import { type FlatBoard, PRESET_BOARDS } from './flat-boards.ts';
-import { MATERIAL_BOARDS, MATERIALS } from './materials.ts';
+import { MATERIAL_BOARDS, MATERIAL_FAMILIES } from './materials.ts';
 import { savedBoards } from './saved-boards.ts';
 
 // The extension's own looks for each part: its boards, drawn by its CSS from
@@ -33,25 +33,19 @@ export interface Family {
 export const ACCENT_BOARD = 'accent';
 export const CUSTOM_BOARD = 'custom';
 
-export const FAMILIES: readonly Family[] = [
-  { id: MATERIALS, name: 'Materials' },
-  { id: BACKLIT, name: 'Backlit' },
-];
+export const FAMILIES: readonly Family[] = [...MATERIAL_FAMILIES, { id: BACKLIT, name: 'Backlit' }];
 
 const flat = (
   { id, name, ...look }: FlatBoard,
   listed: Pick<Theme, 'family' | 'saved'> = {},
 ): Theme => ({ id, name, colors: look, ...listed });
 
-const BOARDS_BEFORE: readonly Theme[] = [
+const READY_BOARDS: readonly Theme[] = [
   { id: ACCENT_BOARD, name: 'Accent' },
   ...PRESET_BOARDS.map(board => flat(board)),
-];
-
-const BOARDS_AFTER: readonly Theme[] = [
-  { id: CUSTOM_BOARD, name: 'Custom' },
-  ...MATERIAL_BOARDS.map(board => flat(board, { family: MATERIALS })),
+  ...MATERIAL_BOARDS.map(({ family, ...board }) => flat(board, { family })),
   ...BACKLIT_BOARDS.map(({ id, name }) => ({ id, name, family: BACKLIT })),
+  { id: CUSTOM_BOARD, name: 'Custom' },
 ];
 
 const THEMES: Readonly<Record<Exclude<PartKind, 'board'>, readonly Theme[]>> = {
@@ -62,11 +56,11 @@ const THEMES: Readonly<Record<Exclude<PartKind, 'board'>, readonly Theme[]>> = {
   ],
 };
 
-/** The part's themes, in their order: the boards the user saved come after the presets. */
+/** The part's themes, in their order: the boards the user saved come after the one they color. */
 export function themesOf(kind: PartKind): readonly Theme[] {
   if (kind !== 'board') return THEMES[kind];
   const saved = savedBoards().map(board => flat(board, { saved: true }));
-  return [...BOARDS_BEFORE, ...saved, ...BOARDS_AFTER];
+  return [...READY_BOARDS, ...saved];
 }
 
 export const isTheme = (kind: PartKind, id: string): boolean =>

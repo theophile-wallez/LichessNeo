@@ -1,0 +1,30 @@
+/* ---- The roundness's setting (content/settings/roundness-row.ts) --- */
+
+/* Lichess's Roundness: a slider beside the text, which every corner follows as it's dragged. */
+.ln-ext-setting[data-ln-ext-setting='roundness'] {
+  --ln-ext-setting-color: var(--ln-ext-cyan);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/radius.svg');
+}
+
+.ln-ext-roundness {
+  display: flex;
+  flex: 0 1 300px;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ln-ext-roundness input.ln-ext-src-slider {
+  max-width: none;
+}
+
+/* Narrow, the slider goes under the text, as wide as the card. */
+@container ln-ext-settings-list (width < 600px) {
+  .ln-ext-setting[data-ln-ext-setting='roundness'] {
+    flex-wrap: wrap;
+  }
+
+  .ln-ext-roundness {
+    flex: 1 0 100%;
+  }
+}

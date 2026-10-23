@@ -13,13 +13,15 @@ import { PRESET_BOARDS } from './flat-boards.ts';
 const WOOD = fakePack('ann/packs/main/wood/');
 const CLICKS = fakePack('ann/packs/main/clicks/', ['sound']);
 
-// The accent's board, a two-tone one per color theme, the user's own, and the families.
+// The accent's board, a two-tone one per color theme, the families, and the user's own.
 const BOARDS = [
   'Accent',
   ...PRESET_BOARDS.map(board => board.name),
-  'Custom',
-  'Materials',
+  'Wood',
+  'Marble',
+  'Miscellaneous',
   'Backlit',
+  'Custom',
 ];
 
 // Lichess's user menu, with one panel open, as snabbdom draws it.

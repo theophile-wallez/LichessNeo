@@ -30,7 +30,7 @@
     0 4px 12px var(--ln-ext-shade-25);
 }
 
-/* On the user's own profile, the avatar leads to the settings' Profile customization page
+/* On the user's own profile, the avatar leads to the settings' Profile & coach page
  * (content/profile/avatar-link.ts): a pencil over it on hover. */
 .user-show > .user-show__header > .ln-ext-avatar-edit {
   display: grid;

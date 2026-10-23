@@ -3,7 +3,7 @@ import { html, setHtml } from '#shared/html.ts';
 import { cleanName, keepOwnName, MAX_NAME_LENGTH, onOwnName, ownName } from '#shared/own-name.ts';
 import { message } from '#content/platform/runtime.ts';
 
-// The Name card of the settings' Profile customization page
+// The Name card of the settings' Profile & coach page
 // (styles/pages/settings-profile.css): a name the user sees in place of their
 // own, only in their browser (#shared/own-name.ts, content/ui/own-name.ts).
 

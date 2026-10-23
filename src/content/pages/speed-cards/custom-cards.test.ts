@@ -151,11 +151,11 @@ describe("a card's own game", () => {
 });
 
 describe('the link to their settings', () => {
-  it("leads to the settings' Quick pairing page, for a player signed in only", () => {
+  it("leads to the settings' Play page, for a player signed in only", () => {
     signIn();
     createSpeedCards('eresy', 'fr')();
     const edit = queryOne(document, '.ln-ext-speeds__tools > .ln-ext-speeds__edit', HTMLElement);
-    expect(edit?.getAttribute('href')).toBe('/account/profile#ln-ext-extension/pairing');
+    expect(edit?.getAttribute('href')).toBe('/account/profile#ln-ext-extension/play');
     expect(edit?.textContent).toBe('Modifier');
     expect(edit?.nextElementSibling?.className).toBe('ln-ext-speeds__custom');
     document.body.innerHTML = '<main class="lobby"></main>';

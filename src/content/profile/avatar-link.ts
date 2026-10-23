@@ -10,7 +10,7 @@ import { settingsUrl } from '#content/settings/address.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
 // On the user's own profile, their avatar (the header's `::before`,
-// styles/profile/hero.css) leads to the settings' Profile customization page, to pick another.
+// styles/profile/hero.css) leads to the settings' Profile & coach page, to pick another.
 
 const HEADER = '.user-show > .user-show__header';
 const LINK = 'ln-ext-avatar-edit';

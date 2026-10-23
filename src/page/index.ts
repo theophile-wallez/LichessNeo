@@ -13,6 +13,7 @@ import { chat } from './chat/index.ts';
 import { nextGameSeek } from './seek/index.ts';
 import { customSeek } from './seek/custom-seek.ts';
 import { colorScheme } from './color-scheme/index.ts';
+import { roundness } from './roundness/index.ts';
 import { lichessLooks } from './looks/index.ts';
 
 // The page-world script: it runs in Lichess's own JavaScript context, so it
@@ -34,5 +35,6 @@ startFeatures([
   nextGameSeek,
   customSeek,
   colorScheme,
+  roundness,
   lichessLooks,
 ]);

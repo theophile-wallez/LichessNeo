@@ -58,6 +58,13 @@ afterEach(() => {
 });
 
 describe('the settings’ packs', () => {
+  it('are titled with a Beta badge', async () => {
+    const { section } = await start([]);
+    const title = queryOne(section, '.ln-ext-packs__heading h2', HTMLElement);
+    expect(title?.textContent).toBe('packsTitlepacksBeta');
+    expect(title?.lastElementChild?.className).toBe('ln-ext-beta');
+  });
+
   it('list every pack read, with what it holds', async () => {
     const { section } = await start([WOOD, CLICKS]);
     expect(names(section)).toEqual(['Pack ann/packs/main/wood/', 'Pack ann/packs/main/clicks/']);

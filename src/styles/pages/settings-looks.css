@@ -9,6 +9,27 @@
   container: ln-ext-looks-page / inline-size;
 }
 
+/* The Packs card closes the cards: its link scrolls it in under the pinned title. */
+.ln-ext-looks-page .ln-ext-packs {
+  scroll-margin-top: 100px;
+}
+
+/* Its title's badge: importing packs is still new. */
+.ln-ext-beta {
+  display: inline-block;
+  margin-inline-start: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+  color: var(--ln-ext-accent);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+}
+
 .ln-ext-looks-page,
 .ln-ext-looks-page__cards {
   display: flex;

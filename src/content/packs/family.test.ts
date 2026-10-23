@@ -141,18 +141,18 @@ describe('the backlit family', () => {
   });
 });
 
-describe('the material family', () => {
-  it('shows its first board on its tile, then the one picked in it', async () => {
+describe('the material families', () => {
+  it('show their first board on their tile, then the one picked in it', async () => {
     await start();
     const panel = await openPanel('board');
-    const tile = button(panel, '.ln-ext-src-family-item[data-ln-ext-family="materials"]');
+    const tile = button(panel, '.ln-ext-src-family-item[data-ln-ext-family="misc"]');
     const thumb = (): HTMLElement => button(tile, '.ln-ext-src-thumb');
     expect(thumb().style.getPropertyValue('--ln-ext-thumb-texture')).toBe(
-      'var(--ln-ext-texture-burl-gloss)',
+      'var(--ln-ext-texture-slate)',
     );
     tile.click();
-    const view = button(panel, '.ln-ext-src-family[data-ln-ext-family="materials"]');
-    expect(queryAll(view, '.ln-ext-src-item', HTMLElement)).toHaveLength(21);
+    const view = button(panel, '.ln-ext-src-family[data-ln-ext-family="misc"]');
+    expect(queryAll(view, '.ln-ext-src-item', HTMLElement)).toHaveLength(9);
     button(view, '[data-ln-ext-choice="materials-zellige"]').click();
     await flush();
     expect(thumb().dataset.lnExtTheme).toBe('materials-zellige');

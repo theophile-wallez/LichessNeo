@@ -214,7 +214,7 @@
   color: var(--ln-ext-text-strong) !important;
 }
 
-/* Signed out, the import form itself (pages/extension-settings.css), the link
+/* Signed out, the import form itself (pages/settings-packs.css), the link
  * over its button: the Sound panel leaves it little room beside the slider. */
 #dasher_app .ln-ext-src-choices > .ln-ext-packs__import {
   margin: 10px 2px 4px;

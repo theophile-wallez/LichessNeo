@@ -40,10 +40,16 @@ function showSwitches(list: HTMLElement, rows: readonly SwitchRow[], settings: S
   }
 }
 
+/** A list of the cards of `markup`, which their own module keeps in step. */
+export function buildCardList(markup: SafeHtml): HTMLElement {
+  const list = createElement('div', { className: 'ln-ext-settings__list' });
+  setHtml(list, markup);
+  return list;
+}
+
 /** The cards of `rows`, then `others`, their switches kept in step with the settings. */
 export function buildSwitchList(rows: readonly SwitchRow[], others?: SafeHtml): HTMLElement {
-  const list = createElement('div', { className: 'ln-ext-settings__list' });
-  setHtml(list, html`${rows.map(rowMarkup)}${others ?? ''}`);
+  const list = buildCardList(html`${rows.map(rowMarkup)}${others ?? ''}`);
   list.addEventListener('click', event => {
     if (!closestTo(event.target, '.ln-ext-switch', HTMLButtonElement)) return;
     const card = closestTo(event.target, '.ln-ext-setting', HTMLElement);

@@ -10,7 +10,7 @@ import { message } from '#content/platform/runtime.ts';
 import { pictureFrom } from './avatar-picture.ts';
 import { coachName } from '#content/coach/names.ts';
 
-// The Avatar card of the settings' Profile customization page
+// The Avatar card of the settings' Profile & coach page
 // (styles/pages/settings-profile.css): the avatar of the user's name, one they
 // make of a coach and a color, or a picture of theirs (#shared/own-avatar.ts).
 // The profile's avatar leads here (content/profile/avatar-link.ts).

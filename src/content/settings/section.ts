@@ -2,7 +2,6 @@ import { createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import { packLibrary } from '#content/packs/index.ts';
-import { importSection } from '#content/packs/import-section.ts';
 import { PAGE_NAMES, SETTINGS_PAGES, type SettingsPage } from './address.ts';
 import { buildAppearance, showScheme } from './appearance.ts';
 import { buildAvatarCard } from './avatar-card.ts';
@@ -11,9 +10,12 @@ import { buildNameCard } from './name-card.ts';
 import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
 import { buildHomeCoachCard } from './home-coach-card.ts';
 import { buildExperimentalPage } from './experimental-page.ts';
-import { buildInterfacePage } from './interface-page.ts';
+import { buildIntroRow } from './intro-row.ts';
 import { buildLooksPage } from './looks-page.ts';
+import { buildNavigationRow } from './navigation-row.ts';
 import { buildPairingPage } from './pairing-page.ts';
+import { buildRatingRow } from './rating-row.ts';
+import { buildRoundnessRow } from './roundness-row.ts';
 import { onSettings, settingsRead } from './settings.ts';
 
 // The account page's section for the extension: one of its pages
@@ -53,12 +55,17 @@ export function buildSection(): SettingsSection {
   const looks = buildLooksPage(packLibrary());
   const pairing = buildPairingPage();
   const pages: Readonly<Record<SettingsPage, readonly HTMLElement[]>> = {
-    personalization: [buildAppearance(), coach.element, homeCoach.element, buildCoachSwitches()],
-    profile: [buildAvatarCard(), buildNameCard()],
+    appearance: [buildAppearance(), buildRoundnessRow(), buildNavigationRow()],
     board: looks.elements,
-    packs: [importSection(packLibrary())],
-    pairing: [pairing.element],
-    interface: [buildInterfacePage()],
+    profile: [
+      buildAvatarCard(),
+      buildNameCard(),
+      buildRatingRow(),
+      coach.element,
+      homeCoach.element,
+      buildCoachSwitches(),
+    ],
+    play: [buildIntroRow(), pairing.element],
     experimental: [buildExperimentalPage()],
     backup: [buildBackupPage()],
   };
@@ -74,11 +81,11 @@ export function buildSection(): SettingsSection {
     element,
     show: page => {
       showPage(element, page);
-      coach.show(page === 'personalization');
-      homeCoach.show(page === 'personalization');
+      coach.show(page === 'profile');
+      homeCoach.show(page === 'profile');
       looks.show(page === 'board');
-      pairing.show(page === 'pairing');
-      if (page === 'personalization') showScheme(element);
+      pairing.show(page === 'play');
+      if (page === 'appearance') showScheme(element);
     },
   };
 }

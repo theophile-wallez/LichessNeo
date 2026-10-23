@@ -8,7 +8,7 @@ import { MascotSpot } from '#content/coach/spot.ts';
 import { currentSettings, onSettings } from './settings.ts';
 import { buildSwitchList } from './switch-list.ts';
 
-// The settings' Coach card, on the Personalization page, under Appearance
+// The settings' Coach card, on the Profile & coach page, under the profile's cards
 // (styles/pages/settings-coach.css): the coach, live over its still, says
 // hello, over a tile for each coach. The pick is the one every coach shows
 // (#shared/coach.ts): the review, the puzzles, the drills. Under it, the

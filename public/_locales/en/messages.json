@@ -23,9 +23,9 @@
     "message": "Lichess Neo",
     "description": "The account menu's link to the extension's settings."
   },
-  "settingsPagePersonalization": {
-    "message": "Personalization",
-    "description": "The settings' page for the color scheme, the color themes and the coach."
+  "settingsPageAppearance": {
+    "message": "Appearance",
+    "description": "The settings' page for the color scheme, the color themes and the nav's place."
   },
   "settingsPageBoard": {
     "message": "Board & sounds",
@@ -67,9 +67,17 @@
     "message": "Backlit",
     "description": "Over the extension's backlit boards, whose squares light up around each move."
   },
-  "looksMaterials": {
-    "message": "Materials",
-    "description": "Over the extension's textured boards: wood, stone, metal, cloth, paper."
+  "looksWood": {
+    "message": "Wood"
+  },
+  "looksMarble": {
+    "message": "Marble"
+  },
+  "looksMisc": {
+    "message": "Miscellaneous"
+  },
+  "looksCustom": {
+    "message": "Custom"
   },
   "looksLichess": {
     "message": "Lichess",
@@ -77,7 +85,7 @@
   },
   "looksNoPieces": {
     "message": "No piece set of the extension yet: import your own from a pack in",
-    "description": "The pieces card, with no pack of pieces; a link to the Packs page follows."
+    "description": "The pieces card, with no pack of pieces; a link to the Packs card, at the page's foot, follows."
   },
   "looksLichessFailed": {
     "message": "Lichess's list could not be loaded.",
@@ -100,8 +108,8 @@
     "description": "The button that plays a short game on the preview board, to hear the sounds."
   },
   "settingsPageProfile": {
-    "message": "Profile customization",
-    "description": "The settings' page for the user's avatar and name, in the account menu and as its title."
+    "message": "Profile & coach",
+    "description": "The settings' page for the user's avatar, name and sidebar rating, and their coach, in the account menu and as its title."
   },
   "avatarTitle": {
     "message": "Your avatar",
@@ -194,14 +202,6 @@
   "nameReset": {
     "message": "Use my username",
     "description": "The Name card's button that goes back to the user's Lichess username."
-  },
-  "settingsPagePacks": {
-    "message": "Packs",
-    "description": "The settings' tab for the imported packs."
-  },
-  "settingsPageInterface": {
-    "message": "Interface",
-    "description": "The settings' tab for the interface's sounds and the sidebar's rating."
   },
   "settingsPageExperimental": {
     "message": "Experimental",
@@ -375,8 +375,12 @@
     "message": "Packs",
     "description": "The title of the settings' card for the imported packs."
   },
+  "packsBeta": {
+    "message": "Beta",
+    "description": "The badge beside the Packs card's title: importing packs is still new."
+  },
   "packsBody": {
-    "message": "Your own board, pieces or sounds, from a pack on GitHub. Once imported, pick them in Board & sounds, or in the user menu.",
+    "message": "Your own board, pieces or sounds, from a pack on GitHub. Once imported, pick them above, or in the user menu.",
     "description": "What the packs card is for."
   },
   "packsEmpty": {
@@ -444,7 +448,7 @@
     "description": "The link to the pack format's guide."
   },
   "appearanceTitle": {
-    "message": "Appearance",
+    "message": "Colors",
     "description": "The title of the settings' card for the color scheme and the color themes."
   },
   "appearanceBody": {
@@ -642,6 +646,12 @@
   "themeCodeInvalid": {
     "message": "This isn't a theme's code.",
     "description": "When the pasted text isn't a theme's code."
+  },
+  "settingRoundness": {
+    "message": "Roundness"
+  },
+  "settingRoundnessBody": {
+    "message": "How round the corners of the site’s cards, buttons and menus are. It’s Lichess’s own setting, also in its Theme menu."
   },
   "settingNavigation": {
     "message": "Navigation",
@@ -1251,9 +1261,9 @@
     "message": "Close",
     "description": "The coach picker's close button, read out by screen readers."
   },
-  "settingsPagePairing": {
-    "message": "Quick pairing",
-    "description": "The settings' page for the home's quick pairing cards."
+  "settingsPagePlay": {
+    "message": "Play",
+    "description": "The settings' page for the game intro and the home's quick pairing cards."
   },
   "pairingCardsTitle": {
     "message": "Your home cards",

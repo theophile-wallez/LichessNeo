@@ -61,12 +61,18 @@ const pageHolds = (element: HTMLElement, page: string, selector: string): boolea
 describe('the settings’ section', () => {
   it('holds each page’s cards in its own panel', () => {
     const { element } = buildSection();
-    expect(pageHolds(element, 'personalization', '.ln-ext-coach-pick')).toBe(true);
+    expect(pageHolds(element, 'appearance', '.ln-ext-appearance')).toBe(true);
+    expect(pageHolds(element, 'appearance', "[data-ln-ext-setting='roundness']")).toBe(true);
+    expect(pageHolds(element, 'appearance', '.ln-ext-nav-picks')).toBe(true);
+    expect(pageHolds(element, 'board', '.ln-ext-looks-page')).toBe(true);
+    expect(pageHolds(element, 'board', "[data-ln-ext-setting='uiSounds']")).toBe(true);
+    expect(pageHolds(element, 'board', '.ln-ext-packs')).toBe(true);
     expect(pageHolds(element, 'profile', '.ln-ext-avatar-pick:not(.ln-ext-name-pick)')).toBe(true);
     expect(pageHolds(element, 'profile', '.ln-ext-name-pick')).toBe(true);
-    expect(pageHolds(element, 'board', '.ln-ext-looks-page')).toBe(true);
-    expect(pageHolds(element, 'packs', '.ln-ext-packs')).toBe(true);
-    expect(pageHolds(element, 'interface', '.ln-ext-settings__list')).toBe(true);
+    expect(pageHolds(element, 'profile', "[data-ln-ext-setting='sidebarRating']")).toBe(true);
+    expect(pageHolds(element, 'profile', '.ln-ext-coach-pick')).toBe(true);
+    expect(pageHolds(element, 'play', "[data-ln-ext-setting='gameIntro']")).toBe(true);
+    expect(pageHolds(element, 'play', '.ln-ext-pairing')).toBe(true);
   });
 
   it('shows one page at a time, under its name', () => {
@@ -89,10 +95,10 @@ describe('the settings’ section', () => {
     const section = buildSection();
     document.body.append(section.element);
     const live = (): boolean =>
-      pageHolds(section.element, 'personalization', '.ln-ext-coach-pick__mascot .ln-ext-mascot');
-    section.show('personalization');
+      pageHolds(section.element, 'profile', '.ln-ext-coach-pick__mascot .ln-ext-mascot');
+    section.show('profile');
     expect(live()).toBe(true);
-    section.show('interface');
+    section.show('play');
     expect(live()).toBe(false);
   });
 

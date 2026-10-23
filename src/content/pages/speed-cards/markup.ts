@@ -151,7 +151,7 @@ export const sectionMarkup = (texts: SpeedTexts, signedIn: boolean): SafeHtml =>
       <div class="ln-ext-speeds__tools">
         ${
           signedIn &&
-          html`<a class="ln-ext-speeds__edit" href="${settingsUrl('pairing')}" aria-label="${texts.edit}">${EDIT_ICON}<span>${texts.edit}</span></a>`
+          html`<a class="ln-ext-speeds__edit" href="${settingsUrl('play')}" aria-label="${texts.edit}">${EDIT_ICON}<span>${texts.edit}</span></a>`
         }
         <button type="button" class="ln-ext-speeds__custom">
           ${SETTINGS_ICON}<span>${texts.custom}</span>${CHEVRON_ICON}

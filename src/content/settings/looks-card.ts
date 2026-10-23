@@ -13,16 +13,16 @@ import { LICHESS, type Library } from '#content/packs/library.ts';
 import { OPTION_ROWS } from '#content/packs/options.ts';
 import { showOptionRows } from '#content/packs/option-row.ts';
 import { deleteBoard, savedBoards } from '#content/packs/saved-boards.ts';
-import { ACCENT_BOARD, familyOf, themesOf } from '#content/packs/themes.ts';
-import { settingsHash } from './address.ts';
+import { ACCENT_BOARD, familyOf } from '#content/packs/themes.ts';
+import { PACKS_HASH } from './address.ts';
 import { lichessCurrent, type LichessLook } from './lichess-looks.ts';
-import { familySections, hasFamilies, subLabel } from './looks-families.ts';
+import { familySections, listedThemes } from './looks-families.ts';
 import { previewOnHover } from './looks-hover.ts';
 
 // A card of the settings' Board & sounds page (styles/pages/settings-looks.css):
 // the extension's looks for one part, its themes and the packs that have it,
-// with their settings (the families', as the backlit boards, in sections of
-// their own), over Lichess's own. The part shows one of them; Lichess's
+// with their settings (the boards' in sections, looks-families.ts), over
+// Lichess's own. The part shows one of them; Lichess's
 // is ringed only while the extension leaves the part to it, as in the user menu.
 
 const TEXTS: Readonly<Record<PartKind, readonly [title: string, body: string]>> = {
@@ -103,14 +103,11 @@ function savedTile(kind: PartKind, tile: Tile): HTMLElement {
   return wrap;
 }
 
-// The classic ones: a family's are in its own section (looks-families.ts).
 function themeTiles(kind: PartKind): HTMLElement[] {
-  return themesOf(kind)
-    .filter(theme => theme.family === undefined)
-    .map(({ id, name, colors, saved }) => {
-      const tile: Tile = { id, name, image: null, ...(colors && { colors }) };
-      return saved ? savedTile(kind, tile) : tileButton(kind, tile, 'data-ln-ext-choice');
-    });
+  return listedThemes(kind).map(({ id, name, colors, saved }) => {
+    const tile: Tile = { id, name, image: null, ...(colors && { colors }) };
+    return saved ? savedTile(kind, tile) : tileButton(kind, tile, 'data-ln-ext-choice');
+  });
 }
 
 function oursMarkup(kind: PartKind, library: Library): HTMLElement[] {
@@ -131,8 +128,8 @@ function oursMarkup(kind: PartKind, library: Library): HTMLElement[] {
     message('looksNoPieces'),
     ' ',
     createElement('a', {
-      text: message('settingsPagePacks'),
-      attrs: { href: settingsHash('packs') },
+      text: message('packsTitle'),
+      attrs: { href: PACKS_HASH },
     }),
     '.',
   );
@@ -215,12 +212,11 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
   card.append(
     cardHead(kind),
     label(message('looksOurs')),
-    ...(hasFamilies(kind) ? [subLabel(message('looksClassic'))] : []),
-    ours,
-    ...OPTION_ROWS[kind].map(row => row(library)),
     ...familySections(kind, ({ id, name, colors }) =>
       tileButton(kind, { id, name, image: null, ...(colors && { colors }) }, 'data-ln-ext-choice'),
     ),
+    ours,
+    ...OPTION_ROWS[kind].map(row => row(library)),
     label(message('looksLichess')),
     lichess,
   );

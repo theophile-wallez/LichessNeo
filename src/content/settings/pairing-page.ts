@@ -24,7 +24,7 @@ import {
 import { recentGames, suggestionsOf, type Suggestion } from './pairing-suggestions.ts';
 import { currentSettings, onSettings, saveSetting } from './settings.ts';
 
-// The settings' Quick pairing page: the home's cards, changed, moved, taken
+// The settings' quick pairing, on the Play page: the home's cards, changed, moved, taken
 // off and put back to the defaults; the cards suggested from the player's
 // recent games, read once the page first opens; and a card of their own to
 // make, in the form that also changes one of the home's.

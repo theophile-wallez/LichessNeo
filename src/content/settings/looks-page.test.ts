@@ -66,6 +66,19 @@ afterEach(() => {
 });
 
 describe('the settings’ Board & sounds page', () => {
+  it('lists the sounds first, then the board and the pieces, the interface’s sounds and the packs', () => {
+    const { layout } = page();
+    const cards = queryAll(layout, '.ln-ext-looks-page__cards > *', HTMLElement);
+    expect(
+      cards.map(
+        card =>
+          card.dataset.lnExtPart ??
+          queryOne(card, '[data-ln-ext-setting]', HTMLElement)?.dataset.lnExtSetting ??
+          card.className,
+      ),
+    ).toEqual(['sound', 'board', 'piece', 'uiSounds', 'ln-ext-packs']);
+  });
+
   it('reads Lichess’s lists again the next time it opens, if they couldn’t be read', async () => {
     vi.spyOn(console, 'warn').mockImplementation(() => {});
     fetchDasher.mockResolvedValue(new Response('', { status: 503 }));
@@ -80,6 +93,23 @@ describe('the settings’ Board & sounds page', () => {
     show(true);
     await flush();
     expect(lichessTiles(layout, 'board')).toEqual(['wood4']);
+  });
+
+  it('leads to the packs again once Lichess’s lists push them down, when their link opened it', async () => {
+    const scrolled = vi.spyOn(HTMLElement.prototype, 'scrollIntoView').mockImplementation(() => {});
+    fetchDasher.mockResolvedValue(Response.json(DASHER));
+    history.replaceState(null, '', '/account/profile#ln-ext-extension/board');
+    const board = page();
+    board.show(true);
+    await flush();
+    expect(scrolled).not.toHaveBeenCalled();
+    history.replaceState(null, '', '/account/profile#ln-ext-extension/packs');
+    const packs = page();
+    packs.show(true);
+    expect(scrolled).not.toHaveBeenCalled();
+    await flush();
+    expect(scrolled.mock.contexts).toEqual([queryOne(packs.layout, '.ln-ext-packs', HTMLElement)]);
+    history.replaceState(null, '', '/');
   });
 
   it('draws its preview and lists Lichess’s own as it opens, once', async () => {

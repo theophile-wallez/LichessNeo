@@ -8,6 +8,7 @@ import {
   type LichessLookPreview,
 } from '#shared/protocol.ts';
 import { assetUrl, isHashedAsset } from '#page/lichess/assets.ts';
+import { savePref } from '#page/lichess/prefs.ts';
 import { soundPlayer } from '#page/lichess/sound.ts';
 import { createPreview } from './preview.ts';
 
@@ -23,19 +24,6 @@ const PREFS: Readonly<Record<LichessLookPick['part'], { field: string; data: str
   piece: { field: 'pieceSet', data: 'pieceSet' },
   sound: { field: 'soundSet', data: 'soundSet' },
 };
-
-async function savePref(field: string, id: string): Promise<void> {
-  try {
-    const response = await fetch(`/pref/${field}`, {
-      method: 'POST',
-      headers: { 'X-Requested-With': 'XMLHttpRequest' },
-      body: new URLSearchParams({ [field]: id }),
-    });
-    if (!response.ok) console.warn(`[LichessNeo] ${field} unsaved`, response.status);
-  } catch (error) {
-    console.warn(`[LichessNeo] ${field} unsaved`, error);
-  }
-}
 
 // As lila's menu does: each piece's variable inline on <body>, in WebP for the sets it has so.
 function showPieceSet(set: string): void {
