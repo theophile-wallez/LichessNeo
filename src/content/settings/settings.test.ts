@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { parseSettings, settingsRead } from './settings.ts';
 
 describe('the settings', () => {
-  it('play the salute at a game’s start by default, or for an intro no longer offered', () => {
-    expect(parseSettings({}).gameIntro).toBe('salute');
-    expect(parseSettings({ gameIntro: 'coin' }).gameIntro).toBe('salute');
-    expect(parseSettings({ gameIntro: 'off', uiSounds: false })).toMatchObject({
-      gameIntro: 'off',
+  it('play no intro at a game’s start by default, or for an intro no longer offered', () => {
+    expect(parseSettings({}).gameIntro).toBe('off');
+    expect(parseSettings({ gameIntro: 'coin' }).gameIntro).toBe('off');
+    expect(parseSettings({ gameIntro: 'salute', uiSounds: false })).toMatchObject({
+      gameIntro: 'salute',
       uiSounds: false,
     });
   });

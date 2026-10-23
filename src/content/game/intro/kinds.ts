@@ -21,4 +21,4 @@ export const IntroKindSchema = z.enum(INTRO_KINDS);
 
 export type IntroKind = z.infer<typeof IntroKindSchema>;
 
-export const DEFAULT_INTRO: IntroKind = 'salute';
+export const DEFAULT_INTRO: IntroKind = 'off';

@@ -122,7 +122,7 @@ describe('the settings’ Interface page', () => {
     expect(storedSettings()).toBe(before);
   });
 
-  it('offers no animation first and the salute by default, and plays the one picked', async () => {
+  it('offers no animation first and by default, and plays the one picked', async () => {
     document.body.dataset.user = 'eresy';
     document.body.innerHTML = '<a id="user_tag">Eresy</a>';
     const page = buildInterfacePage();
@@ -140,7 +140,7 @@ describe('the settings’ Interface page', () => {
       'credits',
       'faceoff',
     ]);
-    expect(optionsOf(page).find(input => input.checked)?.value).toBe('salute');
+    expect(optionsOf(page).find(input => input.checked)?.value).toBe('off');
     expect(page.querySelector('.ln-ext-intro-preview__bar--bottom b')?.textContent).toBe('Eresy');
     vi.useFakeTimers();
     pick(page, 'ticket');
