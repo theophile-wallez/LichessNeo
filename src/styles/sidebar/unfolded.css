@@ -1,0 +1,125 @@
+/* ---- Unfolded --- */
+
+/* The settings' unfolded sidebar from 1020px (content/sidebar/navigation.ts): a section's row
+ * folds its pages open under it, on a guide line, instead of a flyout, and the open ones stay
+ * open from page to page (content/sidebar/sections.ts). Folded, it's the folded sidebar. */
+
+@media (min-width: 1020px) {
+  html[data-ln-ext-sidebar='unfolded'] {
+    --ln-ext-sidebar-w: 240px;
+  }
+
+  /* The nav scrolls on its own once its open sections run past the window. */
+  html[data-ln-ext-sidebar='unfolded'] #top .site-title-nav {
+    min-height: 0;
+  }
+
+  html[data-ln-ext-sidebar='unfolded'] #topnav {
+    min-height: 0;
+    overflow: hidden auto !important;
+    overscroll-behavior: contain;
+  }
+
+  /* A chevron that turns as the section opens. */
+  html[data-ln-ext-sidebar='unfolded'] #topnav section > a::after {
+    content: '';
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin-inline-start: auto;
+    background: var(--ln-ext-text-dim);
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg') center /
+      contain no-repeat;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  /* Shut, a section's pages fold into its row, and no flyout shows them on hover. `height:
+     auto` animates where the browser can interpolate it (Chrome); elsewhere they only fade. */
+  html[data-ln-ext-sidebar='unfolded'] #topnav section > div,
+  html[data-ln-ext-sidebar='unfolded'] #topnav section:is(:hover, :focus-within) > div {
+    position: static !important;
+    display: flex !important;
+    flex-direction: column;
+    min-width: 0;
+    height: 0;
+    max-height: none !important;
+    margin: 0 8px 0 26px;
+    padding: 0 0 0 10px !important;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden !important;
+    border-radius: 0 !important;
+    background: none !important;
+    box-shadow: inset 1px 0 0 var(--ln-ext-lift-10) !important;
+    interpolate-size: allow-keywords;
+  }
+
+  /* Open: as kept (content/sidebar/sections.ts), or the page's own section until the first
+     fold. */
+  html[data-ln-ext-sidebar='unfolded']
+    #topnav
+    section:is([data-ln-ext-open='open'], [data-ln-ext-current]:not([data-ln-ext-open]))
+    > div {
+    height: auto;
+    margin: 2px 8px 6px 26px;
+    opacity: 1;
+    visibility: visible !important;
+  }
+
+  html[data-ln-ext-sidebar='unfolded']
+    #topnav
+    section:is([data-ln-ext-open='open'], [data-ln-ext-current]:not([data-ln-ext-open]))
+    > a::after {
+    transform: rotate(180deg);
+  }
+
+  /* The pages drop in a little as they show. A label too long for the column is cut at its
+     edge. */
+  html[data-ln-ext-sidebar='unfolded'] #topnav section > div a {
+    flex: none;
+    height: 30px;
+    overflow: hidden;
+    font-size: 13px;
+    color: var(--ln-ext-text-dim) !important;
+    transform: translateY(-6px);
+  }
+
+  html[data-ln-ext-sidebar='unfolded']
+    #topnav
+    section:is([data-ln-ext-open='open'], [data-ln-ext-current]:not([data-ln-ext-open]))
+    > div
+    a {
+    transform: none;
+  }
+
+  html[data-ln-ext-sidebar='unfolded'] #topnav section > div a:is(:hover, [aria-current]) {
+    color: var(--ln-ext-text-strong) !important;
+  }
+
+  /* Only a fold animates (content/sidebar/sections.ts): a page loads, and the settings switch
+     to this sidebar, with the sections as they are. */
+  html[data-ln-ext-sidebar='unfolded'][data-ln-ext-nav-folding] #topnav section > div {
+    transition:
+      height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      margin 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.2s,
+      visibility 0s 0.3s !important;
+  }
+
+  html[data-ln-ext-sidebar='unfolded'][data-ln-ext-nav-folding]
+    #topnav
+    section:is([data-ln-ext-open='open'], [data-ln-ext-current]:not([data-ln-ext-open]))
+    > div {
+    transition:
+      height 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      margin 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.25s,
+      visibility 0s !important;
+  }
+
+  html[data-ln-ext-sidebar='unfolded'][data-ln-ext-nav-folding] #topnav section > div a {
+    transition:
+      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.15s !important;
+  }
+}

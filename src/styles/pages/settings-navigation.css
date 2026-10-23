@@ -1,7 +1,8 @@
 /* ---- The navigation's setting (content/settings/navigation-row.ts) --- */
 
-/* A tile per place, each a little window with its nav: a column on the left, or a bar
- * across the top, and two cards of content. */
+/* A tile per place, each a little window with its nav: a column on the left, wider with
+ * the open section's pages, narrower as a rail, or a bar across the top, and two cards of
+ * content. */
 .ln-ext-setting[data-ln-ext-setting='navigation'] {
   --ln-ext-setting-color: var(--ln-ext-accent);
   --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/layout-top.svg');
@@ -78,6 +79,26 @@
 
 .ln-ext-nav-pick[data-ln-ext-navigation='sidebar'] .ln-ext-nav-pick__mock {
   grid-template: 'nav a' 1fr 'nav b' 1fr / 14px 1fr;
+}
+
+.ln-ext-nav-pick[data-ln-ext-navigation='unfolded'] .ln-ext-nav-pick__mock {
+  grid-template: 'nav a' 1fr 'nav b' 1fr / 22px 1fr;
+}
+
+/* The open section's pages, as lines down the column. */
+.ln-ext-nav-pick[data-ln-ext-navigation='unfolded'] .ln-ext-nav-pick__mock i:first-child {
+  background-image: repeating-linear-gradient(
+    transparent 0 5px,
+    var(--ln-ext-lift-30) 5px 7px,
+    transparent 7px 9px
+  );
+  background-size: 12px 100%;
+  background-position: 7px 0;
+  background-repeat: no-repeat;
+}
+
+.ln-ext-nav-pick[data-ln-ext-navigation='rail'] .ln-ext-nav-pick__mock {
+  grid-template: 'nav a' 1fr 'nav b' 1fr / 8px 1fr;
 }
 
 .ln-ext-nav-pick[data-ln-ext-navigation='header'] .ln-ext-nav-pick__mock {

@@ -7,6 +7,8 @@ import { donate } from './sidebar/donate.ts';
 import { navigation } from './sidebar/navigation.ts';
 import { sidebarCollapse } from './sidebar/collapse.ts';
 import { drawer } from './sidebar/drawer.ts';
+import { sidebarSections } from './sidebar/sections.ts';
+import { lobbyLink } from './sidebar/lobby-link.ts';
 import { preferencesButton } from './sidebar/preferences-button.ts';
 import { schemeToggle } from './sidebar/scheme-toggle.ts';
 import { currentSection } from './sidebar/current.ts';
@@ -88,6 +90,8 @@ const FEATURES = [
   navigation,
   sidebarCollapse,
   drawer,
+  sidebarSections,
+  lobbyLink,
   schemeToggle,
   preferencesButton,
   currentSection,

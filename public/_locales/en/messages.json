@@ -7,6 +7,10 @@
     "message": "Collapse the sidebar",
     "description": "The sidebar's toggle, while it shows its labels."
   },
+  "navLobby": {
+    "message": "Lobby",
+    "description": "The Play section's link to the home's lobby tab, in place of Lichess's \"Create lobby game\"; Lichess's own name for that tab."
+  },
   "sidebarExpand": {
     "message": "Expand the sidebar",
     "description": "The sidebar's toggle, while it shows only its icons."
@@ -644,12 +648,20 @@
     "description": "The setting of where the site's navigation sits on a wide window."
   },
   "settingNavigationBody": {
-    "message": "Where the site's menu sits on a wide window: a sidebar on the left, or a header across the top.",
+    "message": "Where the site's menu sits on a wide window: a sidebar on the left, with the pages of the section on show listed under it or not, a rail of icons, or a header across the top.",
     "description": "What the navigation setting covers."
   },
   "navigationSidebar": {
     "message": "Sidebar",
     "description": "The navigation as a sidebar on the left."
+  },
+  "navigationUnfolded": {
+    "message": "Unfolded",
+    "description": "The navigation as a sidebar listing the pages of the section on show."
+  },
+  "navigationRail": {
+    "message": "Rail",
+    "description": "The navigation as a narrow rail of icons, each with its label under it."
   },
   "navigationHeader": {
     "message": "Header",

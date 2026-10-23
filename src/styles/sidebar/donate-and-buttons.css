@@ -107,8 +107,8 @@
   }
 
   /* The magnifier as far in as the links' icons above it (Lichess pads it 3px). Folded, it
-   * stands centred alone. */
-  html:not([data-ln-ext-sidebar='collapsed']) #top #clinput .link {
+   * stands centred alone, in the rail too. */
+  html:not([data-ln-ext-sidebar~='collapsed']) #top #clinput .link {
     padding-inline: 8px 4px !important;
   }
 
@@ -186,11 +186,11 @@
   }
 
   /* Before the first rating is known: the name alone, not an avatar the rating would replace. */
-  html:not([data-ln-ext-account-perf], [data-ln-ext-sidebar='collapsed']) #top #user_tag {
+  html:not([data-ln-ext-account-perf], [data-ln-ext-sidebar~='collapsed']) #top #user_tag {
     padding-inline-end: 10px !important;
   }
 
-  html:not([data-ln-ext-account-perf], [data-ln-ext-sidebar='collapsed']) #top #user_tag::after {
+  html:not([data-ln-ext-account-perf], [data-ln-ext-sidebar~='collapsed']) #top #user_tag::after {
     display: none;
   }
 

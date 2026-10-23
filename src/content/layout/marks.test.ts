@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { queryOne } from '#shared/dom.ts';
+import { queryAll, queryOne } from '#shared/dom.ts';
 import { setReadyState } from '#shared/testing/ready-state.ts';
 import { flush, nextFrame } from '#shared/testing/timers.ts';
 import { marks, syncMarks } from './marks.ts';
@@ -31,6 +31,15 @@ describe('syncMarks', () => {
       '<main class="page-menu"><aside class="subnav"><a href="/faq">FAQ</a><a href="/thanks">Thanks</a></aside></main>';
     syncMarks();
     expect(queryOne(document, 'main', HTMLElement)?.dataset['lnExtMenu']).toBe('about');
+  });
+
+  it('marks the nav’s section of the page on show, by its link Lichess marks', () => {
+    document.body.innerHTML =
+      '<nav id="topnav"><section><a href="/">Play</a><div><a href="/tournament">Arena</a></div></section>' +
+      '<section><a href="/training">Puzzles</a><div><a href="/storm" aria-current="page">Storm</a></div></section></nav>';
+    syncMarks();
+    const sections = queryAll(document, '#topnav section', HTMLElement);
+    expect(sections.map(section => section.dataset.lnExtCurrent)).toEqual([undefined, 'page']);
   });
 
   it('writes nothing when the marks are already right', () => {

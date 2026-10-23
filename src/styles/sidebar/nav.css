@@ -81,8 +81,14 @@
     max-height: none !important;
   }
 
-  #topnav section.active > a {
+  /* The section of the page on show (content/layout/marks.ts), and its page in the flyout. */
+  #topnav section:is(.active, [data-ln-ext-current]) > a {
     background: var(--ln-ext-lift-8) !important;
+    color: var(--ln-ext-text-strong) !important;
+  }
+
+  #topnav section > div a[aria-current] {
+    background: var(--ln-ext-lift-6) !important;
     color: var(--ln-ext-text-strong) !important;
   }
 
@@ -169,7 +175,8 @@
 #topnav section:nth-of-type(6) > a {
   --ln-ext-nav-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/tools.webp');
 }
-#topnav div a[href*='#hook'] {
+/* Lichess's Create lobby game, our Lobby (content/sidebar/lobby-link.ts). */
+#topnav div a:is([href*='#hook'], [href$='#lobby']) {
   --ln-ext-sub-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/friendly-challenge.webp');
 }
 #topnav div a[href$='/tournament'] {

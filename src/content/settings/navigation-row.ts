@@ -11,6 +11,8 @@ type Navigation = Settings['navigation'];
 
 const NAMES: Readonly<Record<Navigation, string>> = {
   sidebar: 'navigationSidebar',
+  unfolded: 'navigationUnfolded',
+  rail: 'navigationRail',
   header: 'navigationHeader',
 };
 

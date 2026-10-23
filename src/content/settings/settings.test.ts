@@ -38,9 +38,10 @@ describe('the settings', () => {
     expect(parseSettings({ sidebarRating: 'puzzle' }).sidebarRating).toBe('mostPlayed');
   });
 
-  it('put the nav in a sidebar by default, or in a header if asked', () => {
+  it('put the nav in a sidebar by default, or in the shape asked', () => {
     expect(parseSettings({}).navigation).toBe('sidebar');
-    expect(parseSettings({ navigation: 'header' }).navigation).toBe('header');
+    for (const navigation of ['unfolded', 'rail', 'header'] as const)
+      expect(parseSettings({ navigation }).navigation).toBe(navigation);
     expect(parseSettings({ navigation: 'bottom' }).navigation).toBe('sidebar');
   });
 

@@ -5,6 +5,9 @@
   "sidebarCollapse": {
     "message": "Replier la barre latérale"
   },
+  "navLobby": {
+    "message": "Salon"
+  },
   "sidebarExpand": {
     "message": "Déplier la barre latérale"
   },
@@ -483,10 +486,16 @@
     "message": "Navigation"
   },
   "settingNavigationBody": {
-    "message": "La place du menu du site sur un grand écran : une barre latérale à gauche, ou un en-tête en haut."
+    "message": "La place du menu du site sur un grand écran : une barre latérale à gauche, qui liste ou non les pages de la section affichée, un rail d’icônes, ou un en-tête en haut."
   },
   "navigationSidebar": {
     "message": "Barre latérale"
+  },
+  "navigationUnfolded": {
+    "message": "Déroulante"
+  },
+  "navigationRail": {
+    "message": "Rail"
   },
   "navigationHeader": {
     "message": "En-tête"

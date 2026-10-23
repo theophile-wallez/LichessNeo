@@ -106,6 +106,12 @@ const MARKS: readonly Mark[] = [
     key: 'lnExtSearch',
     read: main => main.querySelector(':scope > .box__top form.search')?.getAttribute('action'),
   },
+  // The nav's section of the page on show, whose link Lichess marks (styles/sidebar/nav.css).
+  {
+    selector: '#topnav section',
+    key: 'lnExtCurrent',
+    read: section => (section.querySelector('a[aria-current]') ? 'page' : null),
+  },
   // The sidebar's bottom buttons Lichess wraps in a bare div, for their order
   // (styles/sidebar/donate-and-buttons.css): the challenges show only while some wait.
   {

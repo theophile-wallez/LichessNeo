@@ -25,14 +25,36 @@ function show(collapsed: boolean): void {
 // is on while this mark is.
 const MOVING = 'lnExtSidebarMoving';
 const MOVE_MS = 400;
+// The sidebar's width transition (styles/sidebar/collapsed.css), which the page follows.
+const SLIDE: KeyframeAnimationOptions = { duration: 280, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' };
 let settling = 0;
+
+const sidebarWidth = (): number =>
+  Number.parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue('--ln-ext-sidebar-w'),
+  );
+
+/**
+ * The page takes its new width at once, then slides from where it stood as a transform,
+ * its edge along the sidebar's: laying it out on every frame of the fold made it stutter.
+ */
+function slidePage(from: number): void {
+  const wrap = document.getElementById('main-wrap');
+  if (!wrap) return;
+  // A fold mid-way starts from where the last one has the page, and takes over from it.
+  const shift = new DOMMatrixReadOnly(getComputedStyle(wrap).transform).m41;
+  const offset = from + shift - sidebarWidth();
+  wrap.animate([{ transform: `translateX(${offset}px)` }, { transform: 'none' }], SLIDE);
+}
 
 function toggle(): void {
   const collapsed = !isCollapsed();
   writeStored(StorageKey.sidebarCollapsed, collapsed ? '1' : '0');
   const root = document.documentElement;
+  const from = sidebarWidth();
   setData(root, MOVING, '');
   show(collapsed);
+  slidePage(from);
   // A second click mid-way keeps the transition on for its own run.
   window.clearTimeout(settling);
   settling = window.setTimeout(() => {

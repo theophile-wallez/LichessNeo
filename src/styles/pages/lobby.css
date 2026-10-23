@@ -5,6 +5,11 @@
   background-image: none !important;
 }
 
+/* Where the nav's Lobby scrolls the page to (content/sidebar/lobby-link.ts), clear of the top room. */
+.lobby__app {
+  scroll-margin-top: 16px;
+}
+
 /* The tabs as a segmented control, like the profile's (styles/profile). Lichess draws the bar
    anew on a click, so its raised tab can't slide (content/ui/tab-bars.ts). */
 .lobby__app > .tabs-horiz {

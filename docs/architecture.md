@@ -130,7 +130,7 @@ so the logic can be unit-tested without a page.
   is hovered), Packs, Quick pairing (the home's cards: a speed's or the
   player's own, changed, moved, taken off or put back to the defaults, and
   cards suggested from their recent games), Interface (its sounds, the nav as a
-  sidebar or a header, the game intro over a preview of it, the sidebar's
+  sidebar, unfolded or not, a rail or a header, the game intro over a preview of it, the sidebar's
   rating, or none), Experimental
   (the Chess.com ratings, and the study behind them in a frame), Backup
   (every setting, pick and pack exported to a JSON file, and put back from
@@ -138,9 +138,12 @@ so the logic can be unit-tested without a page.
   the avatar's and the name's picks in localStorage, where the page world
   reads them.
 - `colors`: the color themes, one picked for each of Lichess's schemes.
-- `sidebar`: the Donate item, its folding to icons or its turning into a
-  header (the settings' pick), the preferences cog, the account's rating, the
-  light / dark switch, the drawer below 1020px.
+- `sidebar`: the Donate item, its folding to icons, and its shape (the
+  settings' pick: unfolded, its sections folding open on a click and kept so,
+  a rail or a header),
+  the preferences cog, the account's rating, the
+  light / dark switch, the drawer below 1020px, and Play's Lobby, which leads
+  to the home's lobby tab rather than Lichess's game setup.
 - `notices`: Lichess's connection status and the server's announcements, as
   stacked toasts.
 

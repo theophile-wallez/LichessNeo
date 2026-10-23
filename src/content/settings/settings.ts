@@ -13,8 +13,11 @@ import { CardPicksSchema } from '#content/pages/speed-cards/picks.ts';
 /** chrome.storage.sync keeps 8 KB per item: room for these and the rest. */
 export const MAX_CUSTOM_THEMES = 24;
 
-/** The nav from 1020px: a sidebar on the left, or a header across the top (content/sidebar). */
-export const NavigationSchema = z.enum(['sidebar', 'header']);
+/**
+ * The nav from 1020px (content/sidebar): a sidebar on the left, one with the open section's
+ * pages listed under it, a rail of icons with their labels, or a header across the top.
+ */
+export const NavigationSchema = z.enum(['sidebar', 'unfolded', 'rail', 'header']);
 
 export const SettingsSchema = z.object({
   /** The interface's own sounds (content/ui/sounds.ts), not Lichess's nor a pack's. */

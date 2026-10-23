@@ -107,9 +107,14 @@ describe('the settings’ Interface page', () => {
       picks
         .filter(pick => pick.getAttribute('aria-checked') === 'true')
         .map(pick => pick.dataset.lnExtNavigation);
-    expect(picks.map(pick => pick.dataset.lnExtNavigation)).toEqual(['sidebar', 'header']);
+    expect(picks.map(pick => pick.dataset.lnExtNavigation)).toEqual([
+      'sidebar',
+      'unfolded',
+      'rail',
+      'header',
+    ]);
     expect(checked()).toEqual(['sidebar']);
-    picks[1]
+    picks[3]
       ?.querySelector('.ln-ext-nav-pick__name')
       ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     expect(storedSettings()).toMatchObject({ navigation: 'header' });

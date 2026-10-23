@@ -4,10 +4,11 @@ import type { Feature } from '#shared/features.ts';
 import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
 import { NavigationSchema, onSettings, type Settings } from '#content/settings/settings.ts';
 
-// What Lichess's header turns into from 1020px: the sidebar, folded to its icons
-// or not (collapse.ts), or a header across the top, as the settings pick
-// (styles/sidebar/header). Both choices are kept in the page's storage and read
-// at document_start, so a page never shows another shape first.
+// What Lichess's header turns into from 1020px, as the settings pick: the sidebar,
+// with the open section's pages under it or not, folded to its icons or not
+// (collapse.ts); a rail, folded for good with its labels under its icons; or a
+// header across the top (styles/sidebar). Both choices are kept in the page's
+// storage and read at document_start, so a page never shows another shape first.
 
 type Navigation = Settings['navigation'];
 
@@ -17,9 +18,13 @@ export const isCollapsed = (): boolean =>
 const storedNavigation = (): Navigation =>
   readStored(StorageKey.navigation, NavigationSchema) ?? 'sidebar';
 
-function shape(): 'header' | 'collapsed' | null {
-  if (storedNavigation() === 'header') return 'header';
-  return isCollapsed() ? 'collapsed' : null;
+// Words of `data-ln-ext-sidebar`: the rail takes the folded sidebar's rules (collapsed.css).
+function shape(): string | null {
+  const navigation = storedNavigation();
+  if (navigation === 'header') return 'header';
+  if (navigation === 'rail') return 'collapsed rail';
+  if (isCollapsed()) return 'collapsed';
+  return navigation === 'unfolded' ? 'unfolded' : null;
 }
 
 /** Marks <html> with the shape to show, in `data-ln-ext-sidebar`. */

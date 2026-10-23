@@ -55,6 +55,30 @@ describe('the nav’s place', () => {
     expect(shape()).toBe('collapsed');
   });
 
+  it('shows the unfolded sidebar, or the folded one when it was folded', async () => {
+    localStorage.setItem('ln-ext-navigation', 'unfolded');
+    synced.set('ln-ext-settings', { navigation: 'unfolded' });
+    await start();
+    await flush();
+    expect(shape()).toBe('unfolded');
+    localStorage.setItem('ln-ext-sidebar-collapsed', '1');
+    const { showNavigation } = await import('./navigation.ts');
+    showNavigation();
+    expect(shape()).toBe('collapsed');
+  });
+
+  it('shows the rail with the folded sidebar’s rules, folded or not', async () => {
+    localStorage.setItem('ln-ext-navigation', 'rail');
+    synced.set('ln-ext-settings', { navigation: 'rail' });
+    await start();
+    await flush();
+    expect(shape()).toBe('collapsed rail');
+    localStorage.setItem('ln-ext-sidebar-collapsed', '1');
+    const { showNavigation } = await import('./navigation.ts');
+    showNavigation();
+    expect(shape()).toBe('collapsed rail');
+  });
+
   it('shows the header whether the sidebar was folded or not', async () => {
     localStorage.setItem('ln-ext-sidebar-collapsed', '1');
     localStorage.setItem('ln-ext-navigation', 'header');

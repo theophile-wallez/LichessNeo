@@ -39,6 +39,8 @@ export const StorageKey = {
   // The settings' pick of a sidebar or a header, kept here too to show it from document_start
   // (content/sidebar/navigation.ts).
   navigation: prefixed('navigation'),
+  // The unfolded sidebar's open sections, by their places (content/sidebar/sections.ts).
+  navigationOpen: prefixed('navigation-open'),
   // The signed-in player's most played speed and its rating, and the others
   // (content/sidebar/account-rating.ts).
   accountRating: prefixed('account-rating'),

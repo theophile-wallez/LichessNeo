@@ -1,0 +1,78 @@
+/* ---- Rail --- */
+
+/* The settings' rail from 1020px (content/sidebar/navigation.ts): the folded sidebar
+ * (collapsed.css), a little wider, each section's picture bigger with its label under it.
+ * It stays folded, so the toggle goes. */
+
+@media (min-width: 1020px) {
+  html[data-ln-ext-sidebar~='rail'] {
+    --ln-ext-sidebar-w: 84px;
+  }
+
+  html[data-ln-ext-sidebar~='rail'] #ln-ext-sidebar-toggle {
+    display: none;
+  }
+
+  html[data-ln-ext-sidebar~='rail'] #top .site-title {
+    margin: 12px 25px 8px !important;
+  }
+
+  html[data-ln-ext-sidebar~='rail'] #topnav {
+    margin-top: 0 !important;
+  }
+
+  html[data-ln-ext-sidebar~='rail'] :is(#topnav section > a, #ln-ext-donate) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px !important;
+    height: 62px !important;
+    margin: 2px 8px !important;
+    padding: 0 2px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+  }
+
+  /* collapsed.css clears the labels; the hover rule is named, as it sets the color too. */
+  html[data-ln-ext-sidebar~='rail'] :is(#topnav section > a, #ln-ext-donate, #ln-ext-donate:hover),
+  html[data-ln-ext-sidebar~='rail'] #topnav section:hover > a {
+    color: var(--ln-ext-neutral-12) !important;
+  }
+
+  html[data-ln-ext-sidebar~='rail'] #topnav section:is(:hover, .active, [data-ln-ext-current]) > a,
+  html[data-ln-ext-sidebar~='rail'] #ln-ext-donate:hover {
+    color: var(--ln-ext-text-strong) !important;
+  }
+
+  html[data-ln-ext-sidebar~='rail'] :is(#topnav section > a, #ln-ext-donate)::before {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  html[data-ln-ext-sidebar~='rail'] #ln-ext-donate {
+    margin-top: 8px !important;
+  }
+
+  /* Tighter on a low window, so the buttons under the nav still fit. */
+  @media (max-height: 760px) {
+    html[data-ln-ext-sidebar~='rail'] :is(#topnav section > a, #ln-ext-donate) {
+      gap: 3px !important;
+      height: 50px !important;
+      margin-block: 1px !important;
+      font-size: 10.5px !important;
+    }
+
+    html[data-ln-ext-sidebar~='rail'] :is(#topnav section > a, #ln-ext-donate)::before {
+      width: 24px !important;
+      height: 24px !important;
+    }
+
+    html[data-ln-ext-sidebar~='rail'] #ln-ext-donate {
+      margin-top: 4px !important;
+    }
+  }
+
+  /* Its label is under it already. */
+  html[data-ln-ext-sidebar~='rail'] #ln-ext-donate::after {
+    display: none !important;
+  }
+}

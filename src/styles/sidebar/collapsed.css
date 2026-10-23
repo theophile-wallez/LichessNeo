@@ -1,8 +1,9 @@
 /* ---- Collapsed --- */
 
 /* The toggle beside the logo, and the sidebar folded to its icons
- * (content/sidebar/collapse.ts sets data-ln-ext-sidebar on <html>). Folded, a flyout
- * opens under its section's label, and the search box floats out of its icon. */
+ * (content/sidebar/navigation.ts sets data-ln-ext-sidebar on <html>). Folded, a flyout
+ * opens under its section's label, and the search box floats out of its icon. The rail
+ * is folded too, its labels under its icons (rail.css). */
 
 #ln-ext-sidebar-toggle {
   display: none;
@@ -47,14 +48,15 @@
     color: var(--ln-ext-text-strong);
   }
 
-  html[data-ln-ext-sidebar='collapsed'] {
+  html[data-ln-ext-sidebar~='collapsed'] {
     --ln-ext-sidebar-w: 56px;
   }
 
-  /* While it folds or unfolds (content/sidebar/collapse.ts), everything follows the width:
-   * labels fade and get clipped, icons barely move, the page resizes along. */
-  html[data-ln-ext-sidebar-moving] {
-    transition: --ln-ext-sidebar-w 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  /* While it folds or unfolds (content/sidebar/collapse.ts), labels fade and get clipped and
+   * icons barely move. Only the sidebar's own width animates: the page takes its new width at
+   * once and slides along, as a transform, or each frame restyled and laid out all of it. */
+  html[data-ln-ext-sidebar-moving] #top {
+    transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
   html[data-ln-ext-sidebar-moving]
@@ -73,39 +75,39 @@
     transition: color 0.2s !important;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #top .site-title {
+  html[data-ln-ext-sidebar~='collapsed'] #top .site-title {
     margin: 12px 11px 6px !important;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #top .site-title::after {
+  html[data-ln-ext-sidebar~='collapsed'] #top .site-title::after {
     color: transparent;
   }
 
   /* Under the logo, folded. */
-  html[data-ln-ext-sidebar='collapsed'] #ln-ext-sidebar-toggle {
+  html[data-ln-ext-sidebar~='collapsed'] #ln-ext-sidebar-toggle {
     top: 52px;
     right: 15px;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #topnav {
+  html[data-ln-ext-sidebar~='collapsed'] #topnav {
     margin-top: 36px !important;
   }
 
   /* Icons only: the labels go transparent and get clipped, so links keep their names. The
    * hover rule is named too, as it sets the color as well. */
-  html[data-ln-ext-sidebar='collapsed'] :is(#topnav section > a, #ln-ext-donate) {
+  html[data-ln-ext-sidebar~='collapsed'] :is(#topnav section > a, #ln-ext-donate) {
     height: 40px !important;
     margin: 2px 8px !important;
     padding: 0 10px !important;
   }
 
-  html[data-ln-ext-sidebar='collapsed']
+  html[data-ln-ext-sidebar~='collapsed']
     :is(#topnav section > a, #ln-ext-donate, #ln-ext-donate:hover),
-  html[data-ln-ext-sidebar='collapsed'] #topnav section:hover > a {
+  html[data-ln-ext-sidebar~='collapsed'] #topnav section:hover > a {
     color: transparent !important;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #topnav section > div::before {
+  html[data-ln-ext-sidebar~='collapsed'] #topnav section > div::before {
     content: attr(data-ln-ext-label);
     display: block;
     padding: 6px 8px 4px;
@@ -117,12 +119,17 @@
   }
 
   /* Donate has no flyout: its label shows beside it, in the flyouts' look. */
-  html[data-ln-ext-sidebar='collapsed'] #ln-ext-donate {
+  html[data-ln-ext-sidebar~='collapsed'] #ln-ext-donate {
     position: relative;
     overflow: visible;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #ln-ext-donate::after {
+  /* Its label, fading as it folds, is clipped like the others'. */
+  html[data-ln-ext-sidebar-moving] #ln-ext-donate {
+    overflow: hidden;
+  }
+
+  html[data-ln-ext-sidebar~='collapsed'] #ln-ext-donate::after {
     content: attr(data-ln-ext-label);
     position: absolute;
     top: 50%;
@@ -140,26 +147,26 @@
     transform: translateY(-50%);
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #ln-ext-donate:hover::after {
+  html[data-ln-ext-sidebar~='collapsed'] #ln-ext-donate:hover::after {
     display: block;
   }
 
   /* ---- Bottom buttons, folded --- */
 
-  html[data-ln-ext-sidebar='collapsed'] #top .site-buttons {
+  html[data-ln-ext-sidebar~='collapsed'] #top .site-buttons {
     justify-content: center;
     padding-inline: 8px !important;
   }
 
   /* Lichess focuses the search on hover and drops it on leaving the box: the field floats
    * flush against the icon, inside the box, so the pointer can reach it. */
-  html[data-ln-ext-sidebar='collapsed'] #top #clinput {
+  html[data-ln-ext-sidebar~='collapsed'] #top #clinput {
     position: relative;
     justify-content: center;
     box-shadow: none;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #top #clinput input {
+  html[data-ln-ext-sidebar~='collapsed'] #top #clinput input {
     position: absolute;
     top: 0;
     left: 100%;
@@ -169,7 +176,7 @@
     opacity: 0;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] body.clinput #top #clinput input {
+  html[data-ln-ext-sidebar~='collapsed'] body.clinput #top #clinput input {
     width: 260px !important;
     padding: 0 10px !important;
     border-radius: 8px;
@@ -180,18 +187,18 @@
     opacity: 1;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #top .signin-or-signup .signup {
+  html[data-ln-ext-sidebar~='collapsed'] #top .signin-or-signup .signup {
     display: none !important;
   }
 
   /* Sign in as Lichess's user glyph. */
-  html[data-ln-ext-sidebar='collapsed'] #top .signin-or-signup .signin {
+  html[data-ln-ext-sidebar~='collapsed'] #top .signin-or-signup .signin {
     height: 34px;
     padding: 0 !important;
     font-size: 0 !important;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #top .signin-or-signup .signin::before {
+  html[data-ln-ext-sidebar~='collapsed'] #top .signin-or-signup .signin::before {
     content: '\e050';
     font-family: lichess;
     font-size: 17px;
@@ -204,24 +211,24 @@
   }
 
   /* Signed in: the avatar alone. */
-  html[data-ln-ext-sidebar='collapsed'] #top #user_tag {
+  html[data-ln-ext-sidebar~='collapsed'] #top #user_tag {
     height: 40px;
     padding: 0 !important;
     font-size: 0 !important;
   }
 
-  html[data-ln-ext-sidebar='collapsed'] #top #user_tag::after {
+  html[data-ln-ext-sidebar~='collapsed'] #top #user_tag::after {
     right: 50%;
     transform: translate(50%, -50%);
   }
 
   /* With a rating, its speed's glyph alone, in the pill's place. */
-  html[data-ln-ext-sidebar='collapsed'] #top #user_tag::before {
+  html[data-ln-ext-sidebar~='collapsed'] #top #user_tag::before {
     display: none;
   }
 
   /* With a rating, its speed's glyph alone. */
-  html[data-ln-ext-sidebar='collapsed'][data-ln-ext-account-perf] #top #user_tag::after {
+  html[data-ln-ext-sidebar~='collapsed'][data-ln-ext-account-perf] #top #user_tag::after {
     content: var(--ln-ext-account-glyph);
     width: auto;
     padding: 0;

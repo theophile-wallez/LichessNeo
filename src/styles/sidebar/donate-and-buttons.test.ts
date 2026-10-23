@@ -53,4 +53,8 @@ describe('the sidebar’s search', () => {
     // Lichess's own even padding, untouched.
     expect(magnifier('collapsed')).toBe('');
   });
+
+  it('leaves it centred in the rail too, folded for good', () => {
+    expect(magnifier('collapsed rail')).toBe('');
+  });
 });

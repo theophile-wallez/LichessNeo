@@ -45,6 +45,11 @@ let driving = false;
 /** Whether a card is clicking through Lichess's tabs, which then mustn't be switched. */
 export const isDriving = (): boolean => driving;
 
+/** Opens the lobby's tab, the second. */
+export function openLobbyTab(): void {
+  tabs()[1]?.click();
+}
+
 /** Leaves the pools tab for the lobby's, unless a card is using it. */
 export function leavePoolsTab(): void {
   if (driving || !poolsShown()) return;
