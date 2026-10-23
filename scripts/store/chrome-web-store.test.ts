@@ -1,12 +1,6 @@
 import { generateKeyPairSync } from 'node:crypto';
 import { describe, expect, it, vi } from 'vitest';
-import {
-  API,
-  checkChromeWebStore,
-  ITEM_ID,
-  publishToChromeWebStore,
-  type PublishOptions,
-} from './chrome-web-store.ts';
+import { API, ITEM_ID, publishToChromeWebStore, type PublishOptions } from './chrome-web-store.ts';
 import { TOKEN_URL } from './google-auth.ts';
 
 const { privateKey } = generateKeyPairSync('rsa', {
@@ -17,6 +11,7 @@ const { privateKey } = generateKeyPairSync('rsa', {
 
 const ITEM = `${API}/v2/publishers/publisher/items/${ITEM_ID}`;
 const STATUS = `${ITEM}:fetchStatus`;
+const CANCEL = `${ITEM}:cancelSubmission`;
 const UPLOAD = `${API}/upload/v2/publishers/publisher/items/${ITEM_ID}:upload`;
 const PUBLISH = `${ITEM}:publish`;
 const ZIP = new Uint8Array([80, 75, 5, 6]);
@@ -46,8 +41,6 @@ function fakeStore(replies: Record<string, Reply[]>): Request[] {
   return requests;
 }
 
-const SERVICE_ACCOUNT = JSON.stringify({ client_email: 'ci@example.com', private_key: privateKey });
-
 function publish(overrides: Partial<PublishOptions> = {}): {
   lines: string[];
   done: Promise<void>;
@@ -56,7 +49,7 @@ function publish(overrides: Partial<PublishOptions> = {}): {
   const done = publishToChromeWebStore({
     zip: ZIP,
     version: '0.1.295',
-    serviceAccount: SERVICE_ACCOUNT,
+    serviceAccount: JSON.stringify({ client_email: 'ci@example.com', private_key: privateKey }),
     publisherId: 'publisher',
     log: line => lines.push(line),
     sleep: () => Promise.resolve(),
@@ -77,9 +70,6 @@ const inReview = {
     },
   },
 };
-
-const IN_REVIEW_ERROR =
-  '0.1.294 is still in review: wait for it, or cancel it in the dashboard, then run this again';
 
 describe('publishToChromeWebStore', () => {
   it('uploads the zip, then submits it for review', async () => {
@@ -113,11 +103,39 @@ describe('publishToChromeWebStore', () => {
     expect(submit?.init.body).toBe('{"publishType":"DEFAULT_PUBLISH"}');
   });
 
-  it('stops while another version is in review, before uploading', async () => {
-    const requests = fakeStore({ [STATUS]: [inReview] });
+  it('takes the place of a version in review', async () => {
+    const requests = fakeStore({
+      [STATUS]: [inReview],
+      [CANCEL]: [{ body: {} }],
+      [UPLOAD]: [{ body: { uploadState: 'SUCCEEDED', crxVersion: '0.1.295' } }],
+      [PUBLISH]: [{ body: { state: 'PENDING_REVIEW' } }],
+    });
     const { lines, done } = publish();
-    await expect(done).rejects.toThrow(IN_REVIEW_ERROR);
-    expect(lines).toEqual(['On the store: nothing yet.']);
+    await done;
+    expect(lines).toEqual([
+      'On the store: nothing yet.',
+      'Cancelled the review of 0.1.294: 0.1.295 takes its place.',
+      'Sending 0.1.295.',
+      '0.1.295 submitted: PENDING_REVIEW.',
+    ]);
+    expect(requests.map(request => request.url)).toEqual([
+      TOKEN_URL,
+      STATUS,
+      CANCEL,
+      UPLOAD,
+      PUBLISH,
+    ]);
+    expect(requests.find(request => request.url === CANCEL)?.init.method).toBe('POST');
+  });
+
+  it('stops if the review in progress cannot be cancelled', async () => {
+    const requests = fakeStore({
+      [STATUS]: [inReview],
+      [CANCEL]: [{ status: 429, body: { error: { message: 'too many cancellations' } } }],
+    });
+    await expect(publish().done).rejects.toThrow(
+      `POST ${CANCEL}: 429 {"error":{"message":"too many cancellations"}}`,
+    );
     expect(requests.map(request => request.url)).not.toContain(UPLOAD);
   });
 
@@ -167,30 +185,5 @@ describe('publishToChromeWebStore', () => {
     await expect(publish().done).rejects.toThrow(
       `POST ${PUBLISH}: 403 {"error":{"message":"denied"}}`,
     );
-  });
-});
-
-const check = (lines: string[]): Promise<void> =>
-  checkChromeWebStore({
-    serviceAccount: SERVICE_ACCOUNT,
-    publisherId: 'publisher',
-    log: line => lines.push(line),
-  });
-
-describe('checkChromeWebStore', () => {
-  it('says the way is clear when nothing is in review', async () => {
-    const requests = fakeStore({ [STATUS]: [nothingInReview] });
-    const lines: string[] = [];
-    await check(lines);
-    expect(lines).toEqual([
-      'On the store: 0.1.290.',
-      'Nothing in review: a new version can be sent.',
-    ]);
-    expect(requests.map(request => request.url)).toEqual([TOKEN_URL, STATUS]);
-  });
-
-  it('fails while a version is in review', async () => {
-    fakeStore({ [STATUS]: [inReview] });
-    await expect(check([])).rejects.toThrow(IN_REVIEW_ERROR);
   });
 });

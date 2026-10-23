@@ -11,7 +11,8 @@
 # review, to both stores: the store zip to the Chrome Web Store, the Firefox
 # zip and its sources to Firefox Add-ons (AMO). Each store has its own job:
 # one failing doesn't hold the other. `/ci-publish` in Claude Code pushes the
-# tag, once store-status.yml has found no version in review.
+# tag. The Chrome Web Store reviews one version at a time: a version still in
+# review there is cancelled, and this one takes its place.
 name: Release
 
 on:

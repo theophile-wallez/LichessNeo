@@ -8,7 +8,9 @@ allowed-tools: Bash(git *), Bash(gh *), Bash(node scripts/version.ts *)
 A `store-<version>` tag on `origin/main`'s last commit runs the Release
 workflow in its store mode: the CI, then the store zip sent to the Chrome
 Web Store and the Firefox zip, with its sources, to Firefox Add-ons. Each
-store reviews it before it goes live. Arguments: `$ARGUMENTS`; refuse any.
+store reviews it before it goes live. A version still in review on the
+Chrome Web Store is cancelled, and the new one takes its place. Arguments:
+`$ARGUMENTS`; refuse any.
 
 Pass `gh` the `origin` repository (`--repo <owner>/<repo>`, from `git remote
 get-url origin`): the checkout has more than one remote.
@@ -22,22 +24,16 @@ get-url origin`): the checkout has more than one remote.
    missing, name it and stop: that store's job would fail.
 4. If `store-$v` exists on `origin` already, that commit was sent: say so
    and stop.
-5. Check that the Chrome Web Store has no version in review, as it refuses
-   the next one meanwhile: `gh workflow run store-status.yml --ref main`,
-   find its run (`gh run list --workflow store-status.yml --event
-   workflow_dispatch --limit 1 --json databaseId,url,createdAt`, retrying
-   briefly until it's the one just started), then `gh run watch <id>
-   --exit-status`. If it fails, give the line it ends on (`gh run view <id>
-   --log-failed`: the version in review, or what went wrong) and stop.
-6. Tag and push: `git tag "store-$v" origin/main && git push origin
+5. Tag and push: `git tag "store-$v" origin/main && git push origin
    "store-$v"`. Then find the run it made (`gh run list --workflow
    release.yml --event push --limit 1 --json databaseId,url,headBranch`,
    retrying briefly until its `headBranch` is the tag) and give its URL.
-7. Follow the run to its end: `gh run watch <id> --exit-status` in the
+6. Follow the run to its end: `gh run watch <id> --exit-status` in the
    background (it takes several minutes, the end-to-end tests most of it),
    then give each job's outcome (`gh run view <id> --json jobs`). If the
    CI fails, nothing was sent: name the failing tests (`gh run view <id>
    --log-failed`) and what they say, then delete the tag (`git push origin
    :store-$v`, `git tag -d store-$v`): it would say this version was sent. If
    `store` or `amo` fails, give its error line. If both pass, say each
-   store has the version in review.
+   store has the version in review and, from the `store` job's `Cancelled
+   the review` line, which version it replaced, if any.
