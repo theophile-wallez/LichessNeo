@@ -1,0 +1,276 @@
+/* Lichess's date picker (flatpickr: a simul's, a tournament's or a Swiss's start), in our
+ * menus' look. Its sizes stay flatpickr's: it lays the days out on its calendar's fixed
+ * width, so a border or a padding on the calendar would push the last column out. */
+
+/* ---- Calendar --- */
+
+.flatpickr-calendar {
+  border-radius: 12px !important;
+  background: var(--ln-ext-menu-bg) !important;
+  box-shadow: var(--ln-ext-float-shadow, var(--ln-ext-menu-shadow)) !important;
+  color: var(--ln-ext-text);
+  font-family: inherit;
+}
+
+/* No pointer: it floats a few pixels off its field, as our menus do. */
+.flatpickr-calendar::before,
+.flatpickr-calendar::after {
+  display: none !important;
+}
+
+.flatpickr-calendar.arrowTop {
+  margin-top: 6px;
+}
+
+.flatpickr-calendar.arrowBottom {
+  margin-top: -6px;
+}
+
+.flatpickr-calendar :is(.flatpickr-months .flatpickr-month, span.flatpickr-weekday) {
+  background: transparent !important;
+  color: var(--ln-ext-text-strong) !important;
+  fill: currentColor !important;
+}
+
+/* ---- Month --- */
+
+.flatpickr-calendar .flatpickr-months .flatpickr-month {
+  height: 46px;
+}
+
+.flatpickr-calendar .flatpickr-current-month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  height: 46px;
+  padding: 0;
+  font-size: 15px;
+}
+
+.flatpickr-calendar .flatpickr-current-month span.cur-month {
+  margin: 0;
+  font-weight: 750;
+}
+
+.flatpickr-calendar .flatpickr-current-month span.cur-month:hover {
+  background: transparent;
+}
+
+/* Our fields' look reaches every input: not the year's, nor the time's. */
+.flatpickr-calendar input.numInput {
+  height: auto;
+  margin: 0;
+  padding: 0 0 0 4px;
+  border: none !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text-strong) !important;
+  font: inherit;
+  font-weight: 650;
+}
+
+.flatpickr-calendar .flatpickr-current-month .numInputWrapper {
+  width: calc(4.5ch + 22px);
+  border-radius: 6px;
+}
+
+.flatpickr-calendar .numInputWrapper:hover {
+  background: var(--ln-ext-lift-6);
+}
+
+/* The steppers: two chevrons that meet in the middle of one pill at the field's end,
+ * the pill shown on the field's hover, the chevron under the pointer brighter. Each
+ * half stays its own button. */
+.flatpickr-calendar .numInputWrapper span:is(.arrowUp, .arrowDown) {
+  top: calc(50% - var(--ln-ext-stepper-half));
+  right: 4px;
+  width: 18px;
+  height: var(--ln-ext-stepper-half);
+  padding: 0;
+  border: none !important;
+  border-radius: 6px 6px 0 0;
+  transition: opacity 0.15s !important;
+}
+
+.flatpickr-calendar .numInputWrapper {
+  --ln-ext-stepper-half: 12px;
+  --ln-ext-stepper-icon: 12px;
+}
+
+.flatpickr-calendar .numInputWrapper span.arrowDown {
+  top: calc(50% - 1px);
+  height: calc(var(--ln-ext-stepper-half) + 1px);
+  border-radius: 0 0 6px 6px;
+}
+
+/* Opaque, so the halves can overlap by a pixel and leave no seam. */
+.flatpickr-calendar .numInputWrapper:hover span,
+.flatpickr-calendar .numInputWrapper span:is(:hover, :active) {
+  background: color-mix(in srgb, var(--ln-ext-text) 12%, var(--ln-ext-menu-bg));
+}
+
+/* The icons keep a third of their box around the stroke: pulled toward the middle by part of it.
+ * Lichess places each arrow's own, 26% and 40% down: ours beat its rules. */
+.flatpickr-calendar .numInputWrapper span:is(.arrowUp, .arrowDown)::after {
+  inset: 0;
+  width: var(--ln-ext-stepper-icon);
+  height: var(--ln-ext-stepper-icon);
+  margin: auto auto calc(var(--ln-ext-stepper-icon) / -6);
+  border: none !important;
+  background: var(--ln-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-up-01.svg') center /
+    contain no-repeat;
+}
+
+.flatpickr-calendar .numInputWrapper span.arrowDown::after {
+  margin: calc(var(--ln-ext-stepper-icon) / -6) auto auto;
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg');
+}
+
+.flatpickr-calendar .numInputWrapper span:hover::after {
+  background: var(--ln-ext-text-strong);
+}
+
+/* The year's field is a line of text high: its steppers stay small. */
+.flatpickr-calendar .flatpickr-current-month .numInputWrapper {
+  --ln-ext-stepper-half: 9px;
+  --ln-ext-stepper-icon: 9px;
+}
+
+.flatpickr-calendar .flatpickr-current-month .numInputWrapper span:is(.arrowUp, .arrowDown) {
+  right: 2px;
+  width: 14px;
+}
+
+.flatpickr-calendar :is(.flatpickr-prev-month, .flatpickr-next-month) {
+  top: 7px !important;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px !important;
+  padding: 0 !important;
+  border-radius: 8px;
+  color: var(--ln-ext-text-dim) !important;
+  fill: currentColor !important;
+  transition: background-color 0.15s !important;
+}
+
+.flatpickr-calendar .flatpickr-prev-month {
+  left: 8px !important;
+}
+
+.flatpickr-calendar .flatpickr-next-month {
+  right: 8px !important;
+}
+
+.flatpickr-calendar :is(.flatpickr-prev-month, .flatpickr-next-month):hover {
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong) !important;
+}
+
+.flatpickr-calendar :is(.flatpickr-prev-month, .flatpickr-next-month):hover svg {
+  fill: currentColor !important;
+}
+
+.flatpickr-calendar :is(.flatpickr-prev-month, .flatpickr-next-month) svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* ---- Days --- */
+
+.flatpickr-calendar span.flatpickr-weekday {
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.flatpickr-calendar .flatpickr-day {
+  border-radius: 8px !important;
+  color: var(--ln-ext-text);
+  font-weight: 550;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s !important;
+}
+
+.flatpickr-calendar .flatpickr-day:is(:hover, :focus) {
+  border-color: transparent;
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
+}
+
+.flatpickr-calendar .flatpickr-day.today {
+  border-color: color-mix(in srgb, var(--ln-ext-accent) 70%, transparent);
+  color: var(--ln-ext-text-strong);
+}
+
+.flatpickr-calendar .flatpickr-day.today:is(:hover, :focus) {
+  border-color: var(--ln-ext-accent);
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+  color: var(--ln-ext-text-strong);
+}
+
+.flatpickr-calendar .flatpickr-day.selected,
+.flatpickr-calendar .flatpickr-day.selected:is(:hover, :focus) {
+  border-color: var(--ln-ext-accent) !important;
+  background: var(--ln-ext-accent) !important;
+  color: var(--ln-ext-white) !important;
+  font-weight: 700;
+}
+
+.flatpickr-calendar
+  .flatpickr-day:is(.flatpickr-disabled, .prevMonthDay, .nextMonthDay, .notAllowed) {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ln-ext-lift-20) !important;
+}
+
+/* ---- Time --- */
+
+.flatpickr-calendar.hasTime .flatpickr-time {
+  align-items: center;
+  gap: 4px;
+  height: 48px;
+  max-height: 48px;
+  padding: 0 6px;
+  border-top: 1px solid var(--ln-ext-lift-6) !important;
+  line-height: 34px;
+}
+
+.flatpickr-calendar .flatpickr-time :is(.numInputWrapper, .flatpickr-am-pm) {
+  height: 34px;
+  border-radius: 8px;
+}
+
+.flatpickr-calendar .flatpickr-time input.numInput {
+  height: 34px;
+  padding: 0;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  line-height: 34px;
+  text-align: center;
+}
+
+.flatpickr-calendar .flatpickr-time .flatpickr-time-separator {
+  height: 34px;
+  color: var(--ln-ext-text-dim);
+  font-weight: 700;
+}
+
+.flatpickr-calendar .flatpickr-time .flatpickr-am-pm {
+  color: var(--ln-ext-text-strong);
+  font-weight: 650;
+}
+
+.flatpickr-calendar .flatpickr-time .flatpickr-am-pm:is(:hover, :focus) {
+  background: var(--ln-ext-lift-6);
+}
+
+/* flatpickr focuses the hour once a day is picked, its text selected. */
+.flatpickr-calendar input.numInput::selection {
+  background: color-mix(in srgb, var(--ln-ext-accent) 35%, transparent);
+}
