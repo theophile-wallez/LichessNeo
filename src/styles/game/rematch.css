@@ -1,5 +1,11 @@
 /* ---- Rematch offers --- */
 
+/* No rematch to offer (the opponent left, an arena's game): Lichess disables the button, which
+ * would only take the others' room. */
+main.round .rcontrols .follow-up .rematch:is(:disabled, .disabled) {
+  display: none !important;
+}
+
 /* Ours, waiting: Lichess leaves only a spinner, and says in the title that it's sent (an
  * aria-label once content/ui/tooltip.ts takes it). A click takes it back, so on hover the spinner
  * becomes a cross. */
