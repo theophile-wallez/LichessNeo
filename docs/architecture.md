@@ -175,7 +175,7 @@ so the logic can be unit-tested without a page.
   (`#ln-ext-practice`, `src/page/review/README.md`).
 - `charts`: a game's advantage and move times, the rating distribution, and
   the insights page's answer, read off the data it fetches.
-- `game-over`: kings' badges, confetti, the coach's card in the panel.
+- `game-over`: kings' badges, confetti, the coach's card in the panel, which folds down to its buttons.
 - `chat`: the chat's lines marked for their bubbles, its game events in the
   page's language.
 - `seek`: a game's "New opponent" seeking in place, and the home's cards of

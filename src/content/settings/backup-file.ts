@@ -33,6 +33,7 @@ export const BACKED_UP_KEYS = [
   'boardZoom',
   'sidebarCollapsed',
   'ratingChartRange',
+  'endCardFolded',
 ] as const satisfies readonly (keyof typeof StorageKey)[];
 
 // Each value is checked where it's read, as anything in the storage is: here only its size.

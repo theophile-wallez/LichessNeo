@@ -28,6 +28,8 @@ export interface GameOverTexts {
   readonly verdict: (result: Result, accuracy: string | null) => string;
   readonly failed: string;
   readonly anonymous: string;
+  /** The card's chevrons: folding it down to the buttons under it, and back. */
+  readonly fold: { readonly hide: string; readonly show: string };
   /** Under a count on the card, the number apart: "meilleurs coups", "coup manqué". */
   readonly countLabel: (moveClass: MoveClass, count: number) => string;
 }
@@ -96,6 +98,7 @@ const fr: GameOverTexts = {
   },
   failed: 'Je n’ai pas pu analyser la partie ici : le Débrief vous montrera tout.',
   anonymous: 'Anonyme',
+  fold: { hide: 'Masquer le coach', show: 'Afficher le coach' },
   // French counts 0 and 1 as singular.
   countLabel: (moveClass, count) => FR_COUNTS[moveClass][count > 1 ? 1 : 0],
 };
@@ -136,6 +139,7 @@ const en: GameOverTexts = {
   },
   failed: 'I couldn’t analyse the game here: the Debrief will show you everything.',
   anonymous: 'Anonymous',
+  fold: { hide: 'Hide the coach', show: 'Show the coach' },
   countLabel: (moveClass, count) => EN_COUNTS[moveClass][count === 1 ? 0 : 1],
 };
 

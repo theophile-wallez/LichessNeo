@@ -4,6 +4,7 @@ import { mateBadgeMarkup } from '#shared/mate-badge.ts';
 import { badgesMarkup, kingBadges } from './badges.ts';
 import { boardWrap, kingCells } from './board.ts';
 import { cardMarkup, endCardInput, RESULT_MOODS } from './card.ts';
+import { foldButtonMarkup, foldingCardMarkup, foldOnClick } from './card-fold.ts';
 import { CHIP_STAGGER_MS, createChips, type Chips } from './chips.ts';
 import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from '#shared/confetti.ts';
 import { countUp } from './count-up.ts';
@@ -59,6 +60,9 @@ function addConfetti(layer: HTMLElement): void {
 interface Layer {
   readonly root: HTMLElement;
   readonly kings: HTMLElement;
+  /** The box that folds the card, at the head of Lichess's buttons, and the chevron at their end. */
+  readonly top: HTMLElement | null;
+  readonly unfold: HTMLElement | null;
   readonly card: HTMLElement | null;
   /** The accuracy and the counts, which go without figures. */
   readonly stats: HTMLElement | null;
@@ -73,7 +77,11 @@ function buildLayer(input: GameOverInput): Layer {
   root.append(kings);
   if (input.outcome.result === 'win' && input.live) addConfetti(root);
   const holder = createElement('div');
-  setHtml(holder, cardMarkup(endCardInput(input)));
+  const { texts } = input;
+  setHtml(
+    holder,
+    html`${foldingCardMarkup(cardMarkup(endCardInput(input)), texts)}${foldButtonMarkup(texts, 'unfold')}`,
+  );
   const card = queryOne(holder, '.ln-ext-end__card', HTMLElement);
   const part = (name: string): HTMLElement | null =>
     card ? queryOne(card, `.ln-ext-end__${name}`, HTMLElement) : null;
@@ -81,6 +89,8 @@ function buildLayer(input: GameOverInput): Layer {
   return {
     root,
     kings,
+    top: queryOne(holder, '.ln-ext-end__top', HTMLElement),
+    unfold: queryOne(holder, '.ln-ext-end__fold--unfold', HTMLElement),
     card,
     stats: part('stats'),
     accuracy: card ? queryOne(card, '.ln-ext-end__accuracy b', HTMLElement) : null,
@@ -131,8 +141,11 @@ function followPage(layer: Layer, input: GameOverInput): void {
     if (key !== kingsKey) setHtml(layer.kings, markup());
     kingsKey = key;
     const followUp = queryOne(input.main, FOLLOW_UP, HTMLElement);
-    if (!followUp || !layer.card || layer.card.parentElement === followUp) return;
-    followUp.prepend(layer.card);
+    const { top, unfold } = layer;
+    if (!followUp || !top || top.parentElement === followUp) return;
+    followUp.prepend(top);
+    // Before Lichess's buttons, whose analysis link must stay the last (chips.ts); CSS puts it after them.
+    if (unfold) top.after(unfold);
     setData(followUp, 'lnExtEndCard', '');
   };
   sync();
@@ -231,10 +244,12 @@ function cardView(layer: Layer, input: GameOverInput, settled: Promise<void>): G
 export function mountGameOver(input: GameOverInput): GameOverView {
   // A dev preview shows it again: the last one goes, its card too.
   input.main.querySelector(':scope > .ln-ext-end')?.remove();
-  input.main.querySelector('.ln-ext-end__card')?.remove();
+  input.main.querySelector('.ln-ext-end__top')?.remove();
+  input.main.querySelector('.ln-ext-end__fold--unfold')?.remove();
   const layer = buildLayer(input);
   setData(input.main, 'lnExtEnd', '');
   input.main.append(layer.root);
+  foldOnClick(input.main);
   followPage(layer, input);
   // What the card shows waits for the badges to settle.
   const settled = new Promise<void>(resolve => {

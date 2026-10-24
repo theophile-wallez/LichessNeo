@@ -1,0 +1,28 @@
+/* The closed review's card folds down to its buttons (view/card-fold.ts, the fold itself in
+   game/game-end-fold.css) under html.ln-ext-review-folded, and the panel's row eases to their
+   height with it (layout.css). */
+
+/* A number, so the row's height can be eased. */
+@property --ln-ext-review-fold {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+html.ln-ext-review-folded main.analyse {
+  --ln-ext-review-fold: 1;
+}
+
+main.analyse {
+  transition: --ln-ext-review-fold 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* The card's own padding spaces it from the buttons, so that it folds away with it. */
+#ln-ext-review .ln-ext-end__frame {
+  gap: 0;
+}
+
+/* The ways back stand in the foot's row, beside the chevron that unfolds the card. */
+.ln-ext-end__ways {
+  display: contents;
+}

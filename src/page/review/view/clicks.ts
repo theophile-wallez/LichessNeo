@@ -4,6 +4,7 @@ import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.
 import { gameIndex } from '#page/review/game/work.ts';
 import type { Session } from '#page/review/session.ts';
 import { type PanelAction, PanelActionSchema } from './actions.ts';
+import { foldCard } from './card-fold.ts';
 import { playChip } from './chips.ts';
 import { jumpToClass } from './class-jump.ts';
 import { viewOf } from './graph-views.ts';
@@ -50,6 +51,8 @@ type ReviewCommand = Exclude<
   | 'reveal'
   | 'graph'
   | 'share'
+  | 'fold'
+  | 'unfold'
   | PracticeCommand
 >;
 
@@ -89,7 +92,7 @@ function act(session: Session, analysis: Analysis, action: ReviewCommand): void 
 }
 
 interface Clicked {
-  readonly action: Exclude<PanelAction, 'coach'>;
+  readonly action: Exclude<PanelAction, 'coach' | 'fold' | 'unfold'>;
   readonly button: HTMLElement;
 }
 
@@ -121,6 +124,11 @@ function onClick(session: Session, event: MouseEvent): void {
   // The coaches are picked in the content script, which has their names (content/coach/picker.ts).
   if (action === 'coach') {
     postCoachPicker(session.coach.id);
+    return;
+  }
+  // Only <html>'s class changes: a redraw would replace the card, and its transition with it.
+  if (action === 'fold' || action === 'unfold') {
+    foldCard(session, action === 'fold');
     return;
   }
   const analysis = pageAnalysis();

@@ -1,0 +1,151 @@
+/* The game over's card folds down to the buttons under it (page/game-over/card-fold.ts), on the
+ * game's page (main[data-ln-ext-card-folded]) as on its analysis (html.ln-ext-review-folded,
+ * review/card-fold.css): the card shrinks and fades out over the buttons, which make room for the
+ * chevron that brings it back. Both chevrons are always there, so that each state eases into the
+ * other. */
+
+/* ---- The card --- */
+
+.ln-ext-end__top {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.ln-ext-end__top-inner {
+  position: relative;
+  min-height: 0;
+  /* Clipped as it folds: the coach's arms stay inside the glow, which clips them anyway. */
+  overflow: hidden;
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.25s ease,
+    scale 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s !important;
+}
+
+:is(html.ln-ext-review-folded, main[data-ln-ext-card-folded]) .ln-ext-end__top {
+  grid-template-rows: 0fr;
+}
+
+/* It fades out first, while the room it leaves closes; hidden once folded, for the focus. */
+:is(html.ln-ext-review-folded, main[data-ln-ext-card-folded]) .ln-ext-end__top-inner {
+  opacity: 0;
+  scale: 0.96;
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease,
+    scale 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s 0.4s !important;
+}
+
+/* The room under the card is its own margin, not its box's padding, which would keep it open. */
+.ln-ext-end__top-inner > .ln-ext-end__card {
+  margin-bottom: 8px;
+}
+
+/* The title gives the chevron its corner. */
+.ln-ext-end__top .ln-ext-end__main {
+  padding-inline-end: 48px;
+}
+
+/* ---- The chevrons --- */
+
+.ln-ext-end__fold {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  color: var(--ln-ext-text-dim);
+  cursor: pointer;
+}
+
+.ln-ext-end__fold svg {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.ln-ext-end__fold:hover {
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-end__fold--fold {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  /* Only its icon, until hovered. */
+  background: transparent;
+  transition:
+    background 0.15s,
+    color 0.15s !important;
+}
+
+.ln-ext-end__fold--fold:hover {
+  background: var(--ln-ext-lift-12);
+}
+
+/* Folded, it grows in at the buttons' end, turned up, as they give it room (their gap is 6px). */
+.ln-ext-end__fold--unfold {
+  flex: none;
+  width: 0;
+  height: 40px;
+  margin-inline-start: -6px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease,
+    background 0.15s,
+    visibility 0s 0.4s !important;
+}
+
+.ln-ext-end__fold--unfold svg {
+  rotate: 180deg;
+}
+
+:is(html.ln-ext-review-folded, main[data-ln-ext-card-folded]) .ln-ext-end__fold--unfold {
+  width: 40px;
+  margin-inline-start: 0;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease 0.1s,
+    background 0.15s,
+    visibility 0s !important;
+}
+
+.ln-ext-end__fold--unfold:hover {
+  background: var(--ln-ext-btn-grey-hover);
+}
+
+/* ---- On the game's page --- */
+
+/* A row of its own over Lichess's buttons, its chevron after them. */
+main.round .rcontrols .follow-up > .ln-ext-end__top {
+  order: -3;
+  flex-basis: 100%;
+}
+
+/* The buttons share one line (flex: 1 1 0): the only row gap is the card's, which its margin
+   makes instead, so that it folds away with it. */
+main.round .rcontrols .follow-up[data-ln-ext-end-card] {
+  row-gap: 0 !important;
+}
+
+main.round .rcontrols .follow-up > .ln-ext-end__fold--unfold {
+  flex: none;
+  order: 1;
+  min-width: 0;
+}

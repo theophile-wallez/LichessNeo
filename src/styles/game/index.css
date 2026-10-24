@@ -15,5 +15,6 @@
 @import './coach-message.css';
 @import './game-end.css';
 @import './game-end-card.css';
+@import './game-end-fold.css';
 @import './game-end-stats.css';
 @import './layout-narrow.css';

@@ -6,9 +6,11 @@
 
 /* ---- Frame --- */
 
+/* As far from the panel's edges above and below as at its sides: the controls' 8px, of which
+ * their top padding gives 4px. */
 main.round .rcontrols .follow-up[data-ln-ext-end-card],
 .ln-ext-end__frame {
-  margin: 10px 0 8px;
+  margin: 4px 0 0;
   padding: 10px !important;
   border-radius: 16px;
   background: var(--ln-ext-neutral-5);
@@ -61,11 +63,9 @@ main.round .rcontrols .follow-up[data-ln-ext-end-card],
   --ln-ext-tag-c: var(--ln-ext-text-dim);
 }
 
-/* At a game's end it comes in once; the closed review draws it again as its analysis goes. */
-main.round .rcontrols .follow-up > .ln-ext-end__card {
-  order: -3;
-  flex-basis: 100%;
-  margin-bottom: 2px;
+/* At a game's end it comes in once, at the head of the buttons (game-end-fold.css); the closed
+   review draws it again as its analysis goes. */
+main.round .rcontrols .follow-up .ln-ext-end__card {
   animation: ln-ext-end-card 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
 }
 

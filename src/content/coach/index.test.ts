@@ -76,6 +76,33 @@ describe('the coach', () => {
     expect(played).toEqual([]);
   });
 
+  it('waits for a folded game over’s card to open before playing its mascot', async () => {
+    vi.stubGlobal('chrome', {
+      runtime: { id: 'test' },
+      storage: {
+        sync: { get: (key: string) => Promise.resolve({ [key]: {} }) },
+        onChanged: { addListener: () => {} },
+      },
+    });
+    document.body.innerHTML =
+      '<main class="round" data-ln-ext-card-folded><div class="ln-ext-end__top">' +
+      '<button class="ln-ext-coach__avatar"><span class="ln-ext-coach__face"></span></button>' +
+      '</div><button class="ln-ext-end__fold--unfold"></button></main>';
+    // The settings are read once per content script: a fresh one, so the next tests read theirs.
+    vi.resetModules();
+    const fresh = await import('./index.ts');
+    fresh.coach.start();
+    fresh.showCoach({ coach: 3, mood: 'happy', talking: false });
+    await flush();
+    expect(played).toEqual([]);
+    // The page world's own listener takes the mark off first.
+    const main = document.querySelector('main');
+    main?.addEventListener('click', () => delete main.dataset.lnExtCardFolded);
+    document.querySelector<HTMLElement>('.ln-ext-end__fold--unfold')?.click();
+    await flush();
+    expect(played).toEqual([{ coach: 3, mood: null }]);
+  });
+
   it('stays its still while the settings keep the coaches still, and keeps them so', async () => {
     let answer: ((settings: unknown) => void) | undefined;
     vi.stubGlobal('chrome', {

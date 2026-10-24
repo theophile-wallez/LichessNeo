@@ -8,9 +8,13 @@
   }
 
   /* Review closed: Lichess's analysis, then the game over's card and the ways back into the
-     review (view/closed-panel.ts, game/game-end-card.css), its coach smaller on a short window. */
+     review (view/closed-panel.ts, game/game-end-card.css), its coach smaller on a short window.
+     The card folds down to the buttons' 77px as --ln-ext-review-fold eases to 1 (card-fold.css). */
   html.ln-ext-review-normal main.analyse {
-    --ln-ext-review-top: 328px;
+    --ln-ext-review-open: 328px;
+    --ln-ext-review-top: calc(
+      var(--ln-ext-review-open) - (var(--ln-ext-review-open) - 77px) * var(--ln-ext-review-fold)
+    );
     grid-template-rows:
       var(--ln-ext-tabs-h)
       max(
@@ -31,7 +35,7 @@
 
   @media (max-height: 820px) {
     html.ln-ext-review-normal main.analyse {
-      --ln-ext-review-top: 300px;
+      --ln-ext-review-open: 300px;
     }
   }
 

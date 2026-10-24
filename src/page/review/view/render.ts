@@ -115,11 +115,17 @@ function follow(session: Session, analysis: Analysis): void {
 
 // Kept on every pass: Lichess rewrites <html>'s class when its scheme follows
 // the device's, which dropped the review's own once it had started.
-function markMode({ mode, sheet }: Pick<ViewState, 'mode' | 'sheet'>): void {
+function markMode({
+  mode,
+  sheet,
+  cardFolded,
+}: Pick<ViewState, 'mode' | 'sheet' | 'cardFolded'>): void {
   const root = document.documentElement;
   root.classList.toggle('ln-ext-review', true);
   for (const each of MODES) root.classList.toggle(`ln-ext-review-${each}`, each === mode);
   root.classList.toggle('ln-ext-review-sheet', mode === 'moves' && sheet);
+  // In every mode, so that it changes only when the card folds, and eases only then.
+  root.classList.toggle('ln-ext-review-folded', cardFolded);
 }
 
 /** Marks <html> again as soon as Lichess rewrites its class (signed out, once it knows the

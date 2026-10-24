@@ -1,5 +1,6 @@
+import { FOLDED_CARD, UNFOLD_CHEVRON } from '#shared/card-fold.ts';
 import { keepCoachOptions, shownCoach } from '#shared/coach.ts';
-import { queryOne } from '#shared/dom.ts';
+import { closestTo, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onCoachState, type CoachState } from '#shared/protocol.ts';
 import { onSettings, type Settings } from '#content/settings/settings.ts';
@@ -13,7 +14,8 @@ import type { MascotView } from './mascot/index.ts';
 // It runs here rather than in the page world because the mascots' bundle is
 // the extension's, which the page's CSP keeps out of reach. Until it's in, or
 // without WebGL or with the settings keeping the coaches still, the avatar
-// shows the coach's still image.
+// shows the coach's still image. In a folded game over's card, it waits for the
+// card to open: the bundle and the scene cost something, and it wouldn't be seen.
 
 const LIVE_CLASS = 'ln-ext-coach__avatar--live';
 
@@ -64,6 +66,11 @@ function sync(): void {
   if (shownCoach() === null) return unmount();
   const avatar = queryOne(document, '.ln-ext-coach__avatar', HTMLElement);
   if (!avatar) return;
+  if (live?.avatar !== avatar && avatar.closest(FOLDED_CARD)) {
+    // A mascot left in a panel drawn over goes now, rather than when the card opens.
+    if (live && !live.avatar.isConnected) unmount();
+    return;
+  }
   if (live?.avatar === avatar) {
     if (live.drawn) apply(live.mascot);
     else live.mascot.setCoach(wanted.coach);
@@ -88,5 +95,10 @@ export const coach: Feature = {
   start: () => {
     onCoachState(showCoach);
     onSettings(followSettings);
+    // The page world marks the card open in its own listener, which runs first, the
+    // chevron being under the element it listens on.
+    document.addEventListener('click', event => {
+      if (closestTo(event.target, UNFOLD_CHEVRON, Element)) sync();
+    });
   },
 };

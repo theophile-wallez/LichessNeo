@@ -51,6 +51,8 @@ export const StorageKey = {
   // The home's speed cards: each speed's rating, curve and last pool (content/pages/speed-cards).
   speedCards: prefixed('speed-cards'),
   ratingChartRange: prefixed('rchart:range'),
+  // '1' while the game over's card is folded down to its buttons (page/game-over/card-fold.ts).
+  endCardFolded: prefixed('end-card-folded'),
   // The metals the player last saw on their own profile's medals (content/profile).
   medalsSeen: prefixed('medals-seen'),
   reviewCache: (gameId: string, positions: number, version: number): string =>

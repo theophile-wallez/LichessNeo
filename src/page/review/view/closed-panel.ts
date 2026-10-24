@@ -3,6 +3,7 @@ import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { opponentName } from '#page/game-over/board.ts';
+import { foldButtonMarkup } from '#page/game-over/card-fold.ts';
 import {
   cardMarkup,
   type Heading,
@@ -82,28 +83,45 @@ function words(session: Session, side: Side, result: Outcome['result']): string 
   return texts.verdict(result, accuracy === null ? null : formatAccuracy(accuracy));
 }
 
-export function renderClosed(session: Session, analysis: Analysis): void {
+/** The ways back into the review: its summary, Game Review, a new game. */
+function ways(session: Session, analysis: Analysis): SafeHtml {
+  const { ui } = session.language;
+  return html`<button class="ln-ext-btn" data-ln-ext="summary">${ui.summary}</button>
+    <button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="moves">${ui.review}</button>
+    ${newGameMarkup(analysis, 'ln-ext-btn')}`;
+}
+
+function card(session: Session, analysis: Analysis): SafeHtml {
   const texts = gameOverTexts();
   const side = sideOf(analysis);
   const outcome = outcomeOf(analysis, side);
   // The glow is the player's result; a spectator's stays neutral.
   const result = side.played ? (outcome?.result ?? 'draw') : 'draw';
-  const { ui } = session.language;
-  const card = cardMarkup({
+  return cardMarkup({
     result,
-    heading: heading(outcome, side, ui.review),
+    heading: heading(outcome, side, session.language.ui.review),
     words: words(session, side, result),
     mood: side.played ? RESULT_MOODS[result] : 'neutral',
     coachId: session.coach.id,
     texts,
     stats: stats(session, side.color, texts),
   });
-  setHtml(
-    session.elements.panel,
-    html`<div class="ln-ext-end__frame">${card}<div class="ln-ext-end__foot">
-      <button class="ln-ext-btn" data-ln-ext="summary">${ui.summary}</button>
-      <button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="moves">${ui.review}</button>
-      ${newGameMarkup(analysis, 'ln-ext-btn')}
-    </div></div>`,
-  );
+}
+
+const frameMarkup = (texts: GameOverTexts): SafeHtml =>
+  html`<div class="ln-ext-end__frame">
+    <div class="ln-ext-end__top"><div class="ln-ext-end__top-inner"></div></div>
+    <div class="ln-ext-end__foot"><div class="ln-ext-end__ways"></div>${foldButtonMarkup(texts, 'unfold')}</div>
+  </div>`;
+
+export function renderClosed(session: Session, analysis: Analysis): void {
+  const { panel } = session.elements;
+  const texts = gameOverTexts();
+  // The frame stays from one draw to the next, so that the card's fold eases on while
+  // the analysis redraws it: only its parts are drawn again.
+  if (!queryOne(panel, '.ln-ext-end__frame', HTMLElement)) setHtml(panel, frameMarkup(texts));
+  const top = queryOne(panel, '.ln-ext-end__top-inner', HTMLElement);
+  const foot = queryOne(panel, '.ln-ext-end__ways', HTMLElement);
+  if (top) setHtml(top, html`${card(session, analysis)}${foldButtonMarkup(texts, 'fold')}`);
+  if (foot) setHtml(foot, ways(session, analysis));
 }

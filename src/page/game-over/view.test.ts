@@ -182,7 +182,8 @@ describe('the game over', () => {
     const followUp = queryOne(document, '.follow-up', HTMLElement);
     expect(followUp?.dataset.lnExtEndCard).toBe('');
     expect(Array.from(followUp?.children ?? [], child => child.className)).toEqual([
-      'ln-ext-end__card ln-ext-end__card--win',
+      'ln-ext-end__top',
+      'ln-ext-end__fold ln-ext-end__fold--unfold',
       'fbt rematch white',
       'fbt',
     ]);
@@ -194,7 +195,12 @@ describe('the game over', () => {
     if (rcontrols)
       rcontrols.innerHTML = '<div class="follow-up"><button class="fbt">Rematch</button></div>';
     vi.advanceTimersByTime(250);
-    expect(document.querySelector('.follow-up > .ln-ext-end__card:first-child')).not.toBeNull();
+    expect(
+      document.querySelector('.follow-up > .ln-ext-end__top:first-child .ln-ext-end__card'),
+    ).not.toBeNull();
+    expect(
+      document.querySelector('.follow-up > .ln-ext-end__top + .ln-ext-end__fold--unfold'),
+    ).not.toBeNull();
   });
 
   it('shows a mate on the final position, in place of the kings’ badges', () => {

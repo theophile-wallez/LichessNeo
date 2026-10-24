@@ -12,6 +12,7 @@
 @import './move-list.css';
 @import './eval-bar.css';
 @import './new-game.css';
+@import './card-fold.css';
 @import './openings.css';
 @import './openings-list.css';
 @import './openings-sync.css';

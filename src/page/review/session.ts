@@ -1,5 +1,6 @@
 import { z } from 'zod/mini';
 import type { Color } from '#shared/chess/types.ts';
+import { isCardFolded } from '#page/game-over/card-fold.ts';
 import type { TreeNode } from '#page/lichess/tree.ts';
 import type { Threat } from './coach/threat.ts';
 import type { StreamState } from './comment/markup.ts';
@@ -98,6 +99,8 @@ export interface ViewState {
   graph: GraphView;
   /** The game's crosstable and export are open over the move-by-move panel. */
   sheet: boolean;
+  /** The closed panel's card is folded down to its buttons. */
+  cardFolded: boolean;
   bestOf: BestShown | null;
   lineOf: LineShown | null;
   retry: RetryState | null;
@@ -235,6 +238,7 @@ export function createSession(options: SessionOptions): Session {
       revealed: new Set(),
       graph: 'advantage',
       sheet: false,
+      cardFolded: isCardFolded(),
       bestOf: null,
       lineOf: null,
       retry: null,
