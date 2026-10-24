@@ -18,6 +18,11 @@
       border-color 0.15s !important;
   }
 
+  /* Lichess's form3 makes its selects blocks, which drop the chevron to a line of its own. */
+  select.form-control:not([multiple], [size]) {
+    display: flex;
+  }
+
   select:not([multiple], [size]):not(:disabled):hover {
     background-color: var(--ln-ext-bg-raised-hover) !important;
   }
