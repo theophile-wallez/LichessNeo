@@ -1,19 +1,34 @@
 /* Online friends (#friend_box, signed in only). Lichess moved it from a dock at the bottom
    right into the header: a button beside the notifications, whose dropdown lists them
-   (styles/sidebar places the dropdowns beside the sidebar). */
+   (styles/sidebar places the dropdowns beside the sidebar and gives them their card). */
 
 #friend_box .content_wrap {
-  min-width: 240px;
-  padding: 0 !important;
+  width: 264px;
+  padding: 6px !important;
   overflow: hidden;
-  font-family: var(--ln-ext-font);
   font-size: 13px;
 }
 
+/* The count heads the card, as a menu's title. */
 #friend_box .friend_box_count {
-  padding: 12px 14px 10px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px !important;
   color: var(--ln-ext-text-dim);
   font-weight: 600;
+}
+
+#friend_box .friend_box_count::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg')
+    center / 18px no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg') center / 18px
+    no-repeat;
 }
 
 #friend_box .friend_box_count strong {
@@ -26,8 +41,9 @@
 
 #friend_box .content {
   max-height: min(60vh, 420px) !important;
+  margin: 6px -6px -6px;
   padding: 6px;
-  border-top: 1px solid var(--ln-ext-menu-border) !important;
+  border-top: 1px solid var(--ln-ext-lift-8) !important;
 }
 
 #friend_box .content:empty {

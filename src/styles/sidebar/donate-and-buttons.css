@@ -200,18 +200,16 @@
     color: var(--ln-ext-text-strong) !important;
   }
 
-  /* Dropdowns (preferences, notifications, challenges) open beside the sidebar. */
+  /* Dropdowns (account, notifications, challenges, friends) open beside the sidebar, their
+     foot level with the buttons'; their look is dropdowns.css's. */
   #top .site-buttons .dropdown {
     position: fixed !important;
     top: auto !important;
     right: auto !important;
     bottom: 12px !important;
-    left: calc(var(--ln-ext-sidebar-w) + 6px) !important;
+    left: calc(var(--ln-ext-sidebar-w) + 8px) !important;
     max-height: calc(100dvh - 24px);
     overflow-y: auto;
-    border-radius: 6px;
-    background: var(--ln-ext-bg-panel) !important;
-    box-shadow: var(--ln-ext-float-shadow, 0 6px 24px var(--ln-ext-shade-60)) !important;
   }
 
   /* Search suggestions too: under the search box they'd open off screen. */
@@ -219,7 +217,7 @@
     position: fixed !important;
     top: auto !important;
     bottom: 12px;
-    left: calc(var(--ln-ext-sidebar-w) + 6px);
+    left: calc(var(--ln-ext-sidebar-w) + 8px);
     width: 280px !important;
     max-height: calc(100dvh - 24px);
     overflow-y: auto !important;

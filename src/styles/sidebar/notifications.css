@@ -1,0 +1,197 @@
+/* ---- Notifications --- */
+
+/* Lichess's list (#notify-app): a pager over it, Clear and Settings in its corners, the
+   rows, a pager under them, and a note when the browser blocks pop-ups. Ours: a header row
+   with the two buttons on its right, rows as the account menu's, the note as a footer. */
+#top #notify-app {
+  width: 340px;
+  padding: 6px;
+}
+
+/* The header's mark, where the friends' card has its count. */
+#top #notify-app::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  background: var(--ln-ext-text-dim);
+  -webkit-mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-01.svg')
+    center / 18px no-repeat;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/notification-01.svg') center /
+    18px no-repeat;
+}
+
+#top #notify-app .pager {
+  display: grid;
+  place-items: center;
+  height: 32px;
+  padding: 0;
+  border-radius: 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#top #notify-app .pager:hover {
+  background: var(--ln-ext-menu-hover);
+  color: var(--ln-ext-text-strong);
+}
+
+/* The upper pager is the header's row, between the mark and the buttons: with nothing
+   before, it hides. */
+#top #notify-app .pager.prev {
+  margin: 0 76px 6px 36px;
+}
+
+#top #notify-app .pager.prev.disabled {
+  visibility: hidden;
+}
+
+#top #notify-app .pager.next {
+  margin-top: 4px;
+}
+
+#top #notify-app .pager.next.disabled {
+  display: none;
+}
+
+#top #notify-app :is(.settings, .delete) {
+  position: absolute;
+  top: 6px;
+  left: auto !important;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 16px;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+#top #notify-app .settings {
+  right: 6px;
+}
+
+#top #notify-app .delete {
+  right: 42px;
+}
+
+#top #notify-app :is(.settings, .delete):hover {
+  background: var(--ln-ext-menu-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+#top #notify-app .notifications {
+  margin: 0 -6px;
+  padding: 6px;
+  border-top: 1px solid var(--ln-ext-lift-8);
+}
+
+#top #notify-app .site_notification {
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--ln-ext-text);
+  transition: background-color 0.1s !important;
+}
+
+#top #notify-app .site_notification + .site_notification {
+  margin-top: 2px;
+}
+
+#top #notify-app .site_notification:hover {
+  background: var(--ln-ext-menu-hover);
+}
+
+/* Unread: tinted with the accent until opened. */
+#top #notify-app .site_notification.new {
+  background: color-mix(in srgb, var(--ln-ext-accent) 10%, transparent);
+}
+
+#top #notify-app .site_notification.new:hover {
+  background: color-mix(in srgb, var(--ln-ext-accent) 16%, transparent);
+}
+
+/* The kind's glyph on a tile in the accent, as the side menus' links. */
+#top #notify-app .site_notification icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ln-ext-accent) 16%, transparent);
+  color: var(--ln-ext-accent);
+  font-size: 18px;
+  line-height: 1;
+}
+
+#top #notify-app .site_notification .content {
+  flex: 1;
+  min-width: 0;
+}
+
+#top #notify-app .site_notification .content > span:first-child {
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+#top #notify-app .site_notification strong {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ln-ext-text-strong);
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#top #notify-app .site_notification time {
+  flex: none;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+}
+
+#top #notify-app .site_notification .content > span:last-child {
+  margin-top: 2px;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#top #notify-app .empty {
+  padding: 28px 12px;
+  border-top: 1px solid var(--ln-ext-lift-8);
+  margin: 0 -6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Lichess's orange bar carried white text: a dim footer line instead. */
+#top #notify-app .browser-notification {
+  display: block;
+  margin: 6px -6px -6px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--ln-ext-lift-8);
+  background: none;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+}
+
+#top #notify-app .browser-notification:hover {
+  color: var(--ln-ext-text-strong);
+}

@@ -65,7 +65,7 @@ describe('the settings’ home coach card', () => {
     mode(card, 'own')?.click();
     expect(pressedMode(card)).toEqual(['own']);
     expect(grid(card)?.hidden).toBe(false);
-    expect(queryAll(card, '.ln-ext-coach-choice', HTMLElement)).toHaveLength(28);
+    expect(queryAll(card, '.ln-ext-coach-choice', HTMLElement)).toHaveLength(27);
     expect(pressedCoach(card)).toEqual(['3']);
     expect(localStorage.getItem('ln-ext-home-coach')).toBe('3');
   });

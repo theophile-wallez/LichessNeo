@@ -73,7 +73,7 @@ function pick(card: HTMLElement, coach: number | string): void {
 }
 
 describe('the settings’ coach card', () => {
-  it('names every coach after no coach and one at random, the robot after the animals', () => {
+  it('names every coach offered after no coach and one at random, the robot after the animals', () => {
     expect(coachName(1)).toBe('coachPawn');
     expect(coachName(8)).toBe('coachRobot');
     expect(coachName(9)).toBe('coachMushroom');
@@ -98,7 +98,6 @@ describe('the settings’ coach card', () => {
       'coachCactus',
       'coachToast',
       'coachRook',
-      'coachKnight',
       'coachBishop',
       'coachKing',
       'coachQueen',

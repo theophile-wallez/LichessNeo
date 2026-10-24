@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ReadyStateSchema, setReadyState } from '#shared/testing/ready-state.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { assets } from './assets.ts';
-import { COACH_COUNT, ROBOT_COACH } from '#shared/coach.ts';
+import { ROBOT_COACH } from '#shared/coach.ts';
 import { chooseCoach, coachChoice } from './coach-choice.ts';
 import { fontFaces, fonts } from './fonts.ts';
 import { reloadIfInjectedLate } from './late-reload.ts';
@@ -47,16 +47,18 @@ describe('fonts', () => {
   });
 });
 
-// The original had four coaches, there are COACH_COUNT now: a stored "5" is one of them, and
-// a new pick is drawn from them all.
-function nowExpected({ stored, random, dataset, storedAfter }: (typeof legacy.coach)[number]): {
+// The original had four coaches, there are COACH_COUNT now: a stored "5" is one of them. Where
+// it drew a coach and kept it, each page now draws its own from when it started, keeping nothing.
+// The coach drawn on a page started at 2 ms, the third offered.
+const PAGE_COACH = 3;
+
+function nowExpected({ stored, dataset, storedAfter }: (typeof legacy.coach)[number]): {
   readonly dataset: string;
-  readonly storedAfter: string;
+  readonly storedAfter: string | null;
 } {
   if (stored === '5') return { dataset: '5', storedAfter: '5' };
   if (storedAfter === stored) return { dataset, storedAfter };
-  const picked = String(1 + Math.floor(random * COACH_COUNT));
-  return { dataset: picked, storedAfter: picked };
+  return { dataset: String(PAGE_COACH), storedAfter: stored };
 }
 
 describe('coach choice', () => {
@@ -70,6 +72,7 @@ describe('coach choice', () => {
     const { stored, random } = legacyCase;
     const { dataset, storedAfter } = nowExpected(legacyCase);
     vi.spyOn(Math, 'random').mockReturnValue(random);
+    vi.spyOn(performance, 'timeOrigin', 'get').mockReturnValue(PAGE_COACH - 1);
     if (stored !== null) localStorage.setItem('ln-ext-coach', stored);
     coachChoice.start();
     expect(document.documentElement.dataset['lnExtCoach']).toBe(dataset);

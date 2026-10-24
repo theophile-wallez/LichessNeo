@@ -65,7 +65,7 @@
   /* The free board: the coach on top of Lichess's engine, moves and controls. */
   /* The tab bar goes under the coach's card, over the part it switches. */
   html.ln-ext-review-live main.analyse {
-    --ln-ext-review-top: 140px;
+    --ln-ext-review-top: 156px;
     grid-template-rows:
       var(--ln-ext-review-top)
       var(--ln-ext-tabs-h)
@@ -124,6 +124,11 @@
 
 html.ln-ext-review-summary #ln-ext-review {
   border-radius: 6px;
+}
+
+/* The free board's card is the panel's only part: room around it, as at its sides. */
+html.ln-ext-review-live #ln-ext-review {
+  padding-block: 10px;
 }
 
 #ln-ext-review button {

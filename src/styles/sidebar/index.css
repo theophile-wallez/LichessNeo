@@ -8,6 +8,8 @@
 @import './header.css';
 @import './header-buttons.css';
 @import './drawer.css';
+@import './dropdowns.css';
+@import './notifications.css';
 @import './dasher.css';
 @import './dasher-pickers.css';
 @import './dasher-options.css';

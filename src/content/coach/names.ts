@@ -5,6 +5,7 @@ import {
   type CoachPick,
   CoachPickSchema,
   NO_COACH,
+  OFFERED_COACHES,
   RANDOM_COACH,
 } from '#shared/coach.ts';
 import { closestTo } from '#shared/dom.ts';
@@ -65,11 +66,11 @@ const pickMarkup = (pick: typeof NO_COACH | typeof RANDOM_COACH, name: string): 
     <span class="ln-ext-coach-choice__name">${message(name)}</span>
   </button>`;
 
-/** No coach and one at random, then a tile for each coach in their numbers' order, none pressed. */
+/** No coach and one at random, then a tile for each coach offered, none pressed. */
 export const coachChoices = (): SafeHtml[] => [
   pickMarkup(NO_COACH, 'coachNone'),
   pickMarkup(RANDOM_COACH, 'coachRandom'),
-  ...NAMES.map(choiceMarkup),
+  ...NAMES.flatMap((name, i) => (OFFERED_COACHES.includes(i + 1) ? [choiceMarkup(name, i)] : [])),
 ];
 
 /** The pick of the tile `target` is in, or null outside the tiles. */

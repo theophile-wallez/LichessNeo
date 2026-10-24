@@ -11,14 +11,8 @@
   --ln-ext-theme-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
   --ln-ext-board-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-view.svg');
   --ln-ext-piece-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-pawn.svg');
-  box-sizing: border-box;
   width: 264px !important;
   padding: 6px !important;
-  border: 1px solid var(--ln-ext-menu-border) !important;
-  border-radius: 10px !important;
-  background: var(--ln-ext-menu-bg) !important;
-  box-shadow: var(--ln-ext-menu-shadow) !important;
-  font-family: var(--ln-ext-font);
   text-shadow: none !important;
 }
 

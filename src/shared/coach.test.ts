@@ -9,11 +9,15 @@ import {
   coachOf,
   coachPick,
   NO_COACH,
+  OFFERED_COACHES,
   RANDOM_COACH,
   ROBOT_COACH,
   shownCoach,
   speakingCoach,
 } from './coach.ts';
+
+// Held back while it's reworked.
+const KNIGHT = 15;
 
 afterEach(() => {
   localStorage.clear();
@@ -39,26 +43,37 @@ describe('coachPick', () => {
     expect(localStorage.getItem('ln-ext-coach')).toBe('4');
   });
 
-  it('picks one at random the first time, and keeps it', () => {
-    vi.spyOn(Math, 'random').mockReturnValue(0.15);
-    expect(coachPick()).toBe(4);
-    expect(localStorage.getItem('ln-ext-coach')).toBe('4');
-    vi.spyOn(Math, 'random').mockReturnValue(0.9);
-    expect(coachPick()).toBe(4);
+  it('is one at random on each page until one is picked, and keeps nothing', () => {
+    expect(coachPick()).toBe(RANDOM_COACH);
+    expect(localStorage.getItem('ln-ext-coach')).toBeNull();
   });
 
-  it.each(['0', '27', 'x', ''])('picks again over a stored "%s"', stored => {
+  it.each(['0', '27', 'x', ''])('is one at random over a stored "%s", left as it was', stored => {
     localStorage.setItem('ln-ext-coach', stored);
-    vi.spyOn(Math, 'random').mockReturnValue(0.99);
-    expect(coachPick()).toBe(COACH_COUNT);
-    expect(localStorage.getItem('ln-ext-coach')).toBe(String(COACH_COUNT));
+    expect(coachPick()).toBe(RANDOM_COACH);
+    expect(localStorage.getItem('ln-ext-coach')).toBe(stored);
   });
 
-  it('picks again for a coach that isn’t a whole number (the original kept "2.5")', () => {
+  it('is one at random for a coach that isn’t a whole number (the original kept "2.5")', () => {
     localStorage.setItem('ln-ext-coach', '2.5');
-    vi.spyOn(Math, 'random').mockReturnValue(0.1);
-    expect(coachPick()).toBe(3);
-    expect(localStorage.getItem('ln-ext-coach')).toBe('3');
+    expect(coachPick()).toBe(RANDOM_COACH);
+  });
+
+  it('is one at random for a coach held back, the knight', () => {
+    localStorage.setItem('ln-ext-coach', String(KNIGHT));
+    expect(coachPick()).toBe(RANDOM_COACH);
+  });
+});
+
+describe('the coaches offered', () => {
+  it('are every coach in order but the knight, held back', () => {
+    expect(OFFERED_COACHES).toHaveLength(COACH_COUNT - 1);
+    expect(OFFERED_COACHES).not.toContain(KNIGHT);
+    expect(OFFERED_COACHES).toEqual(
+      [...OFFERED_COACHES].toSorted((first, second) => first - second),
+    );
+    expect(OFFERED_COACHES).toContain(ROBOT_COACH);
+    expect(OFFERED_COACHES.at(-1)).toBe(COACH_COUNT);
   });
 });
 
@@ -74,10 +89,20 @@ describe('no coach, or one at random', () => {
 
   it('draws a coach from when the page started, the same each time on a page', () => {
     vi.spyOn(performance, 'timeOrigin', 'get').mockReturnValue(1_000_000.7);
-    expect(coachOf(RANDOM_COACH)).toBe(1 + (1_000_000 % COACH_COUNT));
+    expect(coachOf(RANDOM_COACH)).toBe(1);
     expect(coachOf(RANDOM_COACH)).toBe(coachOf(RANDOM_COACH));
     vi.spyOn(performance, 'timeOrigin', 'get').mockReturnValue(1_000_001);
-    expect(coachOf(RANDOM_COACH)).toBe(1 + (1_000_001 % COACH_COUNT));
+    expect(coachOf(RANDOM_COACH)).toBe(2);
+  });
+
+  it('draws every coach offered, and never the knight', () => {
+    const drawn = new Set<number | null>();
+    for (let i = 0; i < COACH_COUNT * 2; i++) {
+      vi.spyOn(performance, 'timeOrigin', 'get').mockReturnValue(i);
+      drawn.add(coachOf(RANDOM_COACH));
+    }
+    expect(OFFERED_COACHES.filter(coach => drawn.has(coach))).toEqual(OFFERED_COACHES);
+    expect(drawn.size).toBe(OFFERED_COACHES.length);
   });
 
   it('shows the coach <html> carries, whatever the pick', () => {
@@ -145,10 +170,15 @@ describe('the home’s coach', () => {
     expect(homeCoach()).toBe(4);
   });
 
-  it('picks a coach to follow, and keeps it, when there’s none yet', () => {
-    vi.spyOn(Math, 'random').mockReturnValue(0.15);
-    expect(homeCoach()).toBe(4);
-    expect(localStorage.getItem('ln-ext-coach')).toBe('4');
+  it('follows one at random on each page when none is picked', () => {
+    vi.spyOn(performance, 'timeOrigin', 'get').mockReturnValue(2);
+    expect(homeCoach()).toBe(3);
+    expect(localStorage.getItem('ln-ext-coach')).toBeNull();
+  });
+
+  it('takes its own coach held back, the knight, for one at random', () => {
+    localStorage.setItem('ln-ext-home-coach', String(KNIGHT));
+    expect(homeCoachChoice()).toBe(RANDOM_COACH);
   });
 });
 

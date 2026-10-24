@@ -1,0 +1,14 @@
+/* ---- Header dropdowns --- */
+
+/* The account menu, the notifications, the challenges and the online friends are one kind
+ * of card, the menus' (theme/base.css), at every width: beside the sidebar on desktop
+ * (donate-and-buttons.css), under Lichess's top bar below 1020px. */
+#top :is(#dasher_app, #notify-app, #challenge-app, #friend_box .content_wrap) {
+  box-sizing: border-box;
+  border: 1px solid var(--ln-ext-menu-border) !important;
+  border-radius: 10px !important;
+  background: var(--ln-ext-menu-bg) !important;
+  box-shadow: var(--ln-ext-menu-shadow) !important;
+  color: var(--ln-ext-text);
+  font-family: var(--ln-ext-font);
+}

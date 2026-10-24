@@ -38,11 +38,11 @@ const tile = (coach: number | string): HTMLElement | null =>
   queryOne(dialog(), `[data-ln-ext-coach-choice="${coach}"]`, HTMLElement);
 
 describe('the coach picker', () => {
-  it('opens over the page with every coach, the one shown pressed and focused', () => {
+  it('opens over the page with every coach offered, the one shown pressed and focused', () => {
     open(3);
     expect(dialog().open).toBe(true);
     expect(dialog().getAttribute('aria-labelledby')).toBe('ln-ext-coach-picker-title');
-    expect(queryAll(dialog(), '.ln-ext-coach-choice', HTMLElement)).toHaveLength(28);
+    expect(queryAll(dialog(), '.ln-ext-coach-choice', HTMLElement)).toHaveLength(27);
     const pressed = queryAll(dialog(), '[aria-pressed="true"]', HTMLElement);
     expect(pressed.map(each => each.dataset.lnExtCoachChoice)).toEqual(['3']);
     expect(document.activeElement).toBe(tile(3));

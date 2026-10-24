@@ -54,16 +54,27 @@ export const RANDOM_COACH = 'random';
 export const CoachPickSchema = z.union([z.enum([NO_COACH, RANDOM_COACH]), CoachIdSchema]);
 export type CoachPick = z.infer<typeof CoachPickSchema>;
 
+/** Coaches held back while they're reworked: kept in the cast, but neither offered nor drawn. */
+const HELD_BACK: ReadonlySet<number> = new Set([
+  15, // the knight
+]);
+
+/** The coaches the settings offer and a random pick draws from, in their numbers' order. */
+export const OFFERED_COACHES: readonly number[] = Array.from(
+  { length: COACH_COUNT },
+  (_, i) => i + 1,
+).filter(coach => !HELD_BACK.has(coach));
+
+/** A kept pick, a held-back coach's turned into one at random. */
+const offered = (pick: CoachPick | null): CoachPick | null =>
+  typeof pick === 'number' && HELD_BACK.has(pick) ? RANDOM_COACH : pick;
+
 /**
- * The pick kept in storage, or a coach picked at random and kept the first time.
+ * The pick kept in storage, or a coach at random on each page until one is picked.
  * The review and the practice drills read the same key, so both show the same coach.
  */
 export function coachPick(): CoachPick {
-  const stored = readStored(StorageKey.coach, CoachPickSchema);
-  if (stored !== null) return stored;
-  const coach = 1 + Math.floor(Math.random() * COACH_COUNT);
-  keepCoach(coach);
-  return coach;
+  return offered(readStored(StorageKey.coach, CoachPickSchema)) ?? RANDOM_COACH;
 }
 
 /** Keeps `pick` for every page that shows a coach, as the settings or the review pick it. */
@@ -72,7 +83,8 @@ export function keepCoach(pick: CoachPick): void {
 }
 
 // Drawn from when the page started, which both worlds see alike: they show the same coach.
-const pageRandomCoach = (): number => 1 + (Math.floor(performance.timeOrigin) % COACH_COUNT);
+const pageRandomCoach = (): number =>
+  OFFERED_COACHES[Math.floor(performance.timeOrigin) % OFFERED_COACHES.length] ?? 1;
 
 /** The coach `pick` shows on this page, or null for none. */
 export function coachOf(pick: CoachPick): number | null {
@@ -99,7 +111,7 @@ export const speakingCoach = (): number => shownCoach() ?? 1;
 
 /** The home hero's own pick, or null while it follows the one every other page shows. */
 export function homeCoachChoice(): CoachPick | null {
-  return readStored(StorageKey.homeCoach, CoachPickSchema);
+  return offered(readStored(StorageKey.homeCoach, CoachPickSchema));
 }
 
 /** Keeps the home hero's own pick, null putting it back to following the pages'. */
