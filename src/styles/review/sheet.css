@@ -2,8 +2,9 @@
 
 /* The header's share button opens Lichess's crosstable and "Share & export" over the
    move-by-move panel, under its header (page/review/view/render.ts sets
-   ln-ext-review-sheet). Below 1020px they're in the page's column already, under the
-   moves (analysis/layout-narrow.css): no button. */
+   ln-ext-review-sheet); the export has its own look (analysis/export.css). Below 1020px
+   they're in the page's column already, under the moves (analysis/layout-narrow.css): no
+   button. */
 
 .ln-ext-review__share.active {
   background: var(--ln-ext-bg-raised);
@@ -39,7 +40,11 @@
     display: none !important;
   }
 
+  /* Lichess's box around its panels: the sheet is the box. */
   html.ln-ext-review-sheet main.analyse .analyse__underboard__panels {
+    border-radius: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -54,6 +59,10 @@
     overflow: visible !important;
   }
 
+  html.ln-ext-review-sheet main.analyse .analyse__underboard__panels > .fen-pgn {
+    display: flex !important;
+  }
+
   html.ln-ext-review-sheet main.analyse .analyse__underboard__panels > .ctable {
     order: -1;
     margin: 0 !important;
@@ -62,13 +71,6 @@
 
   html.ln-ext-review-sheet main.analyse .analyse__underboard__panels > .ctable:empty {
     display: none !important;
-  }
-
-  html.ln-ext-review-sheet main.analyse .analyse__underboard__panels > .fen-pgn {
-    padding: 12px;
-    border: 1px solid var(--ln-ext-card-border);
-    border-radius: 10px;
-    background: var(--ln-ext-bg-panel-dark);
   }
 }
 

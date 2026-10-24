@@ -6,6 +6,7 @@
 @import './controls.css';
 @import './controls-narrow.css';
 @import './underboard.css';
+@import './export.css';
 @import './retro.css';
 @import './game-charts.css';
 /* Last: it rearranges the parts above below 1020px. */
