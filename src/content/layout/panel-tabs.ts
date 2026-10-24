@@ -1,4 +1,11 @@
-import { closestTo, createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
+import {
+  centerInScroller,
+  closestTo,
+  createElement,
+  queryAll,
+  queryOne,
+  setData,
+} from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { createOwnedElement } from '#shared/owned-element.ts';
 import { message } from '#content/platform/runtime.ts';
@@ -157,7 +164,7 @@ function markUnread(host: Host, bar: HTMLElement, page: HTMLElement): void {
 function scrollIntoPlace(host: Host, page: HTMLElement, part: Part): void {
   if (part === 'moves') {
     const move = host.activeMove ? queryOne(page, host.activeMove, HTMLElement) : null;
-    move?.scrollIntoView({ block: 'center' });
+    if (move) centerInScroller(move);
     return;
   }
   const messages = queryOne(page, `${host.chat} .mchat__messages`, HTMLElement);

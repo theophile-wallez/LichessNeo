@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   applyOptions,
+  centerInScroller,
   closestTo,
   createCustomElement,
   createElement,
@@ -111,6 +112,37 @@ describe('setStyleProperty', () => {
       expect(writesOf(element, () => setStyleProperty(element, '--ln-ext-x', null))).toBe(0);
       expect(element.style.getPropertyValue('--ln-ext-x')).toBe('');
     }
+  });
+});
+
+describe('centerInScroller', () => {
+  interface Box {
+    readonly top: number;
+    readonly height: number;
+    readonly content: number;
+  }
+
+  /** A box `height` px tall from `top`, holding `content` px. */
+  function box(element: HTMLElement, { top, height, content }: Box): void {
+    Object.defineProperty(element, 'clientHeight', { value: height });
+    Object.defineProperty(element, 'scrollHeight', { value: content });
+    element.getBoundingClientRect = () => new DOMRect(0, top - element.scrollTop, 100, height);
+  }
+
+  it('scrolls the list only, not the page held still around it', () => {
+    document.body.innerHTML =
+      '<div id="page" style="overflow: hidden"><div id="list" style="overflow-y: auto"><i></i></div></div>';
+    const [page, list, move] = ['#page', '#list', 'i'].map(selector =>
+      queryOne(document, selector, HTMLElement),
+    );
+    if (!page || !list || !move) throw new Error('no page');
+    box(page, { top: 0, height: 800, content: 816 });
+    box(list, { top: 100, height: 400, content: 2000 });
+    // 1000px down the list: its middle once the list has scrolled 820px.
+    move.getBoundingClientRect = () => new DOMRect(0, 1100 - list.scrollTop, 100, 40);
+    centerInScroller(move);
+    expect(list.scrollTop).toBe(820);
+    expect(page.scrollTop).toBe(0);
   });
 });
 

@@ -122,3 +122,20 @@ export function setStyleProperty(
     element.style.setProperty(name, value);
   }
 }
+
+const scrolls = (box: HTMLElement): boolean =>
+  box.scrollHeight > box.clientHeight && /auto|scroll/.test(getComputedStyle(box).overflowY);
+
+/**
+ * Centers `element` in the nearest ancestor that scrolls it, and in that one
+ * only: `scrollIntoView` scrolls every ancestor, a page held still by
+ * `overflow: hidden` too.
+ */
+export function centerInScroller(element: HTMLElement): void {
+  let scroller = element.parentElement;
+  while (scroller && !scrolls(scroller)) scroller = scroller.parentElement;
+  if (!scroller) return;
+  const box = scroller.getBoundingClientRect();
+  const target = element.getBoundingClientRect();
+  scroller.scrollTop += target.top - box.top - (scroller.clientHeight - target.height) / 2;
+}
