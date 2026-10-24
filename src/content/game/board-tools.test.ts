@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 import { boardTools, syncBoardTools } from './board-tools.ts';
 // The tools as the original added them.
@@ -9,9 +9,19 @@ const ROUND = legacy.html;
 const button = (name: string): HTMLButtonElement | null =>
   queryOne(document, `.ln-ext-board-tools__btn--${name}`, HTMLButtonElement);
 
+// The tools the original added, before the Zen button.
+const originalTools = (root: Element | null | undefined): string | undefined => {
+  const copy = root?.cloneNode(true);
+  if (!(copy instanceof Element)) return undefined;
+  copy.querySelector('.ln-ext-board-tools__btn--zen')?.remove();
+  return copy.outerHTML;
+};
+
 afterEach(() => {
   document.body.innerHTML = '';
+  document.body.className = '';
   delete document.documentElement.dataset.lnExtFlipLabel;
+  vi.unstubAllGlobals();
 });
 
 describe('board tools', () => {
@@ -20,10 +30,10 @@ describe('board tools', () => {
     document.documentElement.dataset.lnExtFlipLabel = legacy.flipLabel;
     syncBoardTools();
     syncBoardTools();
-    expect(document.querySelector('.ln-ext-board-tools')?.outerHTML).toBe(legacy.tools);
+    expect(originalTools(document.querySelector('.ln-ext-board-tools'))).toBe(legacy.tools);
     document.querySelector('.board-menu-toggle-btn')?.classList.add('active');
     syncBoardTools();
-    expect(document.querySelector('main')?.lastElementChild?.outerHTML).toBe(legacy.active);
+    expect(originalTools(document.querySelector('main')?.lastElementChild)).toBe(legacy.active);
   });
 
   it('takes the menu’s label from its tooltip once the title has moved there', () => {
@@ -39,7 +49,20 @@ describe('board tools', () => {
     document.addEventListener('keypress', event => keys.push(event.key));
     button('menu')?.click();
     button('flip')?.click();
-    expect(keys).toEqual(['h', 'f']);
+    button('zen')?.click();
+    expect(keys).toEqual(['h', 'f', 'z']);
+  });
+
+  it('names the Zen button as Lichess’s does, and the way out once in Zen', () => {
+    vi.stubGlobal('chrome', { i18n: { getMessage: (name: string) => `[${name}]` } });
+    document.body.innerHTML = `${ROUND}<a id="zentog" class="text"> Zen mode </a>`;
+    syncBoardTools();
+    expect(button('zen')?.getAttribute('aria-label')).toBe('Zen mode');
+    expect(button('zen')?.classList.contains('ln-ext-board-tools__btn--on')).toBe(false);
+    document.body.classList.add('zen');
+    syncBoardTools();
+    expect(button('zen')?.getAttribute('aria-label')).toBe('[zenExit]');
+    expect(button('zen')?.classList.contains('ln-ext-board-tools__btn--on')).toBe(true);
   });
 
   it('comes back when Lichess replaces the page', () => {

@@ -99,7 +99,9 @@
   }
 
   /* A touch screen has no hover to reveal the flip button. */
-  main.round .ln-ext-board-tools:not(.ln-ext-board-tools--hover) .ln-ext-board-tools__btn--flip {
+  main.round
+    .ln-ext-board-tools:not(.ln-ext-board-tools--hover)
+    :is(.ln-ext-board-tools__btn--flip, .ln-ext-board-tools__btn--zen) {
     visibility: visible;
     opacity: 1;
   }
@@ -262,5 +264,13 @@
 @media (max-width: 599.98px) {
   main.round .expiration {
     --ln-ext-expiration-words: 0px;
+  }
+}
+
+/* The phone's row of move buttons ends with the tools: a third, Zen's, in a game the user
+ * plays. A tablet has them beside the board. */
+@media (max-width: 599.98px) {
+  body.zenable main.round :is(i5d, rm6) bo3 {
+    padding-inline-end: calc(8px + 3 * 44px + 2 * 6px) !important;
   }
 }

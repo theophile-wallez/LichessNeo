@@ -27,6 +27,11 @@ describe('presentFlags, for flags the original lacked', () => {
       'round-crosstable',
       '<main class="round"><div class="round__underboard"><div class="crosstable"></div></div></main>',
     ],
+    [
+      'round-end-card',
+      '<main class="round"><div class="rcontrols"><div class="ln-ext-end__card"></div></div></main>',
+    ],
+    ['round-clockless', '<main class="round"><div class="rclock rclock-turn"></div></main>'],
     ['tour', '<main class="tour"><aside class="tour__side"></aside></main>'],
     ['simul', '<main class="simul"><aside class="simul__side"></aside></main>'],
     ['board-editor', '<main><div class="board-editor"><div class="main-board"></div></div></main>'],
@@ -46,6 +51,12 @@ describe('presentFlags, for flags the original lacked', () => {
   ])('reads %s', (flag, page) => {
     document.body.innerHTML = page;
     expect(presentFlags(document).split(' ')).toContain(flag);
+  });
+
+  it('leaves out the clocks’ absence in a timed game', () => {
+    document.body.innerHTML =
+      '<main class="round"><div class="rclock rclock-top"></div><div class="rclock rclock-bottom"></div></main>';
+    expect(presentFlags(document).split(' ')).not.toContain('round-clockless');
   });
 
   it('leaves the DGT board’s pages out of the account’s', () => {

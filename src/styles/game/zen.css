@@ -1,9 +1,9 @@
 /* ---- Zen --- */
 
 /* Zen mode (body.zenable.zen) shows only the board, clocks and controls. Lichess keeps
- * the board's size; ours takes the whole height of the window, with no sidebar, and a
- * narrow column beside it holds the opponent's clock at the top, the controls, and the
- * player's at the bottom. Lichess's way out (#zenzone) shrinks to a column of icons
+ * the board's size; ours takes the whole height of the window, with no sidebar, and the
+ * panel beside it, as wide as it is out of Zen, holds the opponent's clock at the top, the
+ * controls, and the player's at the bottom. Lichess's way out (#zenzone) shrinks to a column of icons
  * in the top left corner, which the board keeps clear of. The rules of layout.css would
  * bring the rest back. */
 
@@ -18,15 +18,22 @@
     display: none !important;
   }
 
+  /* A game with no clock says "Your turn" where the clock goes: out of Zen at the player's
+   * bar's end, here alone under the controls. */
+  body.zenable.zen main.round .rclock-turn {
+    display: none !important;
+  }
+
   body.zenable.zen main.round :is(i5d, rm6),
-  body.zenable.zen main.round :is(i5d, rm6) :is(aPp, l4x) {
+  body.zenable.zen main.round :is(i5d, rm6) :is(aPp, l4x),
+  body.zenable.zen main.round :is(i5d, rm6) .result-wrap {
     background: none !important;
     box-shadow: none !important;
   }
 
   body.zenable.zen main.round {
-    --ln-ext-zen-side: 220px;
-    /* #zenzone's column, kept clear on both sides so the board stays centered. */
+    /* #zenzone's column, kept clear at the left, and at the right too while the window has
+     * room, so the board stays centered: a narrow window gives it to the board. */
     --ln-ext-zen-margin: 56px;
     --ln-ext-board: max(
       320px,
@@ -34,23 +41,42 @@
         min(
             calc(var(--ln-ext-main-h, 100dvh) - 32px - var(--ln-ext-coords-off)),
             calc(
-              var(--ln-ext-main-w, 100vw) - var(--ln-ext-zen-side) - var(--ln-ext-gap) - 48px - 2 *
+              var(--ln-ext-main-w, 100vw) - var(--ln-ext-panel-min) - var(--ln-ext-gap) - 48px -
                 var(--ln-ext-zen-margin)
             )
           ) *
           var(--ln-ext-board-scale, 1)
       )
     );
+    --ln-ext-panel-w: clamp(
+      var(--ln-ext-panel-min),
+      calc(
+        var(--ln-ext-main-w, 100vw) - var(--ln-ext-board) - var(--ln-ext-gap) - 48px - 2 *
+          var(--ln-ext-zen-margin)
+      ),
+      500px
+    );
+
+    padding-inline: var(--ln-ext-zen-margin)
+      clamp(
+        0px,
+        calc(
+          var(--ln-ext-main-w, 100vw) - var(--ln-ext-board) - var(--ln-ext-gap) -
+            var(--ln-ext-panel-w) - 48px - var(--ln-ext-zen-margin)
+        ),
+        var(--ln-ext-zen-margin)
+      ) !important;
 
     /* The controls keep a row of their own here, between the moves and the player's clock. */
     --ln-ext-panel-bottom: 0px;
 
-    grid-template-columns: var(--ln-ext-board) var(--ln-ext-zen-side) !important;
+    grid-template-columns: var(--ln-ext-board) var(--ln-ext-panel-w) !important;
+    --ln-ext-zen-clock: var(--ln-ext-bar);
     grid-template-rows:
-      var(--ln-ext-bar)
-      max(0px, calc(var(--ln-ext-board) - 2 * var(--ln-ext-bar) - var(--ln-ext-ctrl-h)))
+      var(--ln-ext-zen-clock)
+      max(0px, calc(var(--ln-ext-board) - 2 * var(--ln-ext-zen-clock) - var(--ln-ext-ctrl-h)))
       var(--ln-ext-ctrl-h)
-      var(--ln-ext-bar)
+      var(--ln-ext-zen-clock)
       var(--ln-ext-coords-off) !important;
     grid-template-areas:
       'board user-top'
@@ -60,16 +86,44 @@
       'board .' !important;
   }
 
+  /* With no clock, the controls end level with the board's squares. */
+  html[data-ln-ext-has~='round-clockless'] body.zenable.zen main.round {
+    --ln-ext-zen-clock: 0px;
+  }
+
+  html[data-ln-ext-has~='round-clockless'] body.zenable.zen main.round .rcontrols {
+    padding-bottom: 0 !important;
+    translate: 0 calc(-1 * var(--ln-ext-inset-b, 0px));
+  }
+
   body.zenable.zen main.round .rcontrols {
     grid-area: controls !important;
     align-self: start;
     border-top: 0;
+    background: none !important;
   }
 
-  /* Zen keeps the moves, whichever part the panel was showing. */
+  /* Zen keeps the moves, whichever part the panel was showing. It hides the moves themselves,
+   * whose room was left empty between the result and the buttons: what remains goes down to
+   * the controls. */
   body.zenable.zen main.round :is(i5d, rm6) {
     display: flex !important;
+    justify-content: flex-end;
     border-radius: 6px !important;
+  }
+
+  body.zenable.zen main.round :is(i5d, rm6) > :is(aPp, l4x) {
+    flex: 0 1 auto !important;
+  }
+
+  /* The game over's card says the result too, and leaves the moves too little room at 1024px:
+   * Lichess's line was cut there. */
+  html[data-ln-ext-has~='round-end-card'] body.zenable.zen main.round :is(i5d, rm6) .result-wrap {
+    display: none !important;
+  }
+
+  body.zenable.zen main.round :is(i5d, rm6) bo3 {
+    margin-top: 0 !important;
   }
 
   body.zenable.zen main.round > .ln-ext-panel-tabs {
@@ -88,6 +142,7 @@
 
   body.zenable.zen main.round .rclock {
     justify-self: start;
+    margin-inline-start: 8px !important;
   }
 
   /* The first-move countdown level with the clock at the column's other end, where the
@@ -99,30 +154,69 @@
     margin-top: calc(var(--ln-ext-off) + 19px) !important;
   }
 
+  /* As wide as the shut tile, which opens past it: the logo above stays put. */
   body.zenable.zen #zenzone {
     flex-direction: column;
     align-items: center;
+    width: 36px;
     gap: 10px;
     top: 12px !important;
     left: 12px !important;
     padding: 0 !important;
   }
 
-  /* "Zen mode", checked: its check alone, on a tile. Clicking it still leaves zen. */
+  /* "Zen mode", checked: Zen's own icon on a tile (board-menu.css), and on hover what a click
+   * does, "Exit Zen mode" (content/game/zen-exit.ts). */
   body.zenable.zen #zentog {
     display: flex !important;
     align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
+    /* Past the shut tile's edge, so none of the words shows. */
+    gap: 10px;
+    box-sizing: border-box;
+    max-width: 36px;
+    height: 36px;
+    align-self: flex-start;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 9px !important;
+    overflow: hidden;
     border-radius: 8px !important;
-    font-size: 0 !important;
+    background: var(--ln-ext-btn-grey) !important;
+    box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+    color: var(--ln-ext-text-strong) !important;
+    font: 600 14px var(--ln-ext-font) !important;
+    text-transform: none;
+    white-space: nowrap;
+    transition:
+      max-width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.15s !important;
+  }
+
+  body.zenable.zen #zentog:hover {
+    max-width: 260px;
+    background: var(--ln-ext-btn-grey-hover) !important;
   }
 
   body.zenable.zen #zentog::before {
+    content: '' !important;
+    flex: none;
+    width: 18px;
+    height: 18px;
     margin: 0 !important;
+    background: currentColor;
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/yoga-03.svg') center / 18px
+      no-repeat;
+  }
+
+  /* Lichess's words give way to ours once they're in. Theirs, shrunk to nothing, would still
+   * take a gap. */
+  body.zenable.zen #zentog[data-ln-ext-label] {
+    gap: 0;
+    font-size: 0 !important;
+  }
+
+  body.zenable.zen #zentog[data-ln-ext-label]::after {
+    content: attr(data-ln-ext-label);
+    margin-inline-start: 10px;
     font-size: 14px;
   }
 }

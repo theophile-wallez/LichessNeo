@@ -85,6 +85,19 @@ describe('tooltips', () => {
     expect(button.getAttribute('aria-label')).toBe('Create a custom game');
   });
 
+  it("shows none on the board menu's flip button, whose key its row shows", () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main class="round"><div class="board-menu"><section><button class="button" title="Flip board (f)">Flip board</button></section></div></main>',
+    );
+    const button = document.querySelector('.board-menu button');
+    if (!button) throw new Error('no button');
+    hover(button);
+    vi.advanceTimersByTime(250);
+    expect(shown()).toBeNull();
+    expect(button.hasAttribute('title')).toBe(false);
+  });
+
   it('waits before the first one, not from one button to the next', () => {
     const first = addButton('title="One"');
     const second = addButton('title="Two"');

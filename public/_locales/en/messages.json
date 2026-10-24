@@ -1548,5 +1548,9 @@
   "cardBeat": {
     "message": "Beat $1 ($2)",
     "description": "Their best win: $1 is the opponent's name, $2 that opponent's rating."
+  },
+  "zenExit": {
+    "message": "Exit Zen mode",
+    "description": "In Zen mode, the label of Lichess's Zen mode button, which leaves it."
   }
 }

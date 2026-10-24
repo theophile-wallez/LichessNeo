@@ -26,9 +26,10 @@ const TARGETS = [
   '#dasher_app .ln-ext-src-options > button[data-ln-ext-tip]',
   '[data-ln-ext-lichess-rating][data-ln-ext-tip]',
 ].join(', ');
-// Lichess's home start buttons carry an English title that only repeats their label:
-// adopted, so the browser's doesn't show either, but never shown.
-const NO_TIP = 'main.lobby .lobby__start__button';
+// Lichess's home start buttons carry an English title that only repeats their label, and the
+// board menu's flip button one that gives its key, which its row shows on a key cap
+// (styles/game/board-menu.css): adopted, so the browser's doesn't show either, but never shown.
+const NO_TIP = 'main.lobby .lobby__start__button, main.round .board-menu section > .button';
 // A variation's move: its eval alone, on frosted glass over the list.
 const EVAL_TIP = 'main.analyse .tview2 move > san';
 const ON = 'ln-ext-tooltip--on';

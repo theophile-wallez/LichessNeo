@@ -1205,5 +1205,8 @@
   },
   "cardBeat": {
     "message": "A battu $1 ($2)"
+  },
+  "zenExit": {
+    "message": "Quitter le mode Zen"
   }
 }

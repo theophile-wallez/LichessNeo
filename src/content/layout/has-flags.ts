@@ -16,6 +16,11 @@ const FLAGS: Readonly<Record<string, string>> = {
   pocket: 'main.round .pocket',
   'round-voice': 'main.round #voice-bar',
   'round-crosstable': 'main.round .round__underboard > .crosstable',
+  // The game over's card (page/game-over), which says the result Zen's column has no room for.
+  'round-end-card': 'main.round .rcontrols .ln-ext-end__card',
+  // A game with no clock, whose clocks' room Zen gives to its column. Lichess draws an empty
+  // .rclock-turn in their place while it's played, and nothing once it's over.
+  'round-clockless': 'main.round:not(:has(.rclock:not(.rclock-turn)))',
   'clock-extras-top': `main.round .rclock-top > ${CLOCK_EXTRAS}`,
   'clock-extras-bottom': `main.round .rclock-bottom > ${CLOCK_EXTRAS}`,
   analyse: 'main.analyse',

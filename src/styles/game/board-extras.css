@@ -81,8 +81,8 @@ main.round .pocket.usable piece:hover {
 /* ---- Board tools --- */
 
 /* Our board tools (content/game/board-tools.ts) in the gap right of the board: the cog, and
- * the flip button while the pointer is over the board. The cog replaces the move bar's menu
- * button. */
+ * the flip and Zen buttons while the pointer is over the board. The cog replaces the move bar's
+ * menu button. */
 main.round :is(i5d, rm6) bo3 .board-menu-toggle-btn {
   display: none !important;
 }
@@ -135,7 +135,7 @@ main.round .ln-ext-board-tools__btn::before {
   mask: center / contain no-repeat;
 }
 
-/* The cog and the flip arrows. */
+/* The cog, the flip arrows and Zen's figure. */
 main.round .ln-ext-board-tools__btn--menu::before {
   mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
 }
@@ -144,7 +144,18 @@ main.round .ln-ext-board-tools__btn--flip::before {
   mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-reload-vertical.svg');
 }
 
-main.round .ln-ext-board-tools:not(.ln-ext-board-tools--hover) .ln-ext-board-tools__btn--flip {
+main.round .ln-ext-board-tools__btn--zen::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/yoga-03.svg');
+}
+
+/* Zen is only for a game the user plays. */
+body:not(.zenable) main.round .ln-ext-board-tools__btn--zen {
+  display: none;
+}
+
+main.round
+  .ln-ext-board-tools:not(.ln-ext-board-tools--hover)
+  :is(.ln-ext-board-tools__btn--flip, .ln-ext-board-tools__btn--zen) {
   visibility: hidden;
   opacity: 0;
 }

@@ -40,5 +40,9 @@ the root's [AGENTS.md](../../../AGENTS.md).
   pieces' row.
 - **Zen mode** (`body.zenable.zen`) hides all but the board, clocks and
   controls; our `!important` layout rules must yield to it (`styles/game`).
+  It exists only in a game the user plays (`body.zenable`). Lichess's way out
+  (`#zentog`) still says "Zen mode" once in: `content/game/zen-exit.ts` gives
+  it the words that leave. A game with no clock has an empty `.rclock-turn`
+  in each clock's place while it's played, and nothing once it's over.
 - **TV.** `/tv` and `/tv/<channel>` don't carry the game's id: take it from
   the move list's analysis link.

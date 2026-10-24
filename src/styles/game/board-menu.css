@@ -1,0 +1,211 @@
+/* ---- Board menu --- */
+
+/* Lichess's board menu (the cog's, content/game/board-tools.ts) hung from the moves' top, which
+ * clipped its last toggles. It floats instead, in the user menu's look (sidebar/dasher.css),
+ * scrolling if the window is short. Lichess closes it on a click outside. */
+main.round :is(i5d, rm6) .board-menu {
+  /* A row Lichess adds that has no icon here keeps its icon's room, empty. */
+  --ln-ext-row-icon: linear-gradient(transparent, transparent);
+  position: fixed !important;
+  z-index: 108 !important;
+  display: flex !important;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(calc(100vw - 32px), 340px) !important;
+  min-width: 0 !important;
+  padding: 6px !important;
+  overflow-y: auto;
+  border: 1px solid var(--ln-ext-menu-border) !important;
+  border-radius: 12px !important;
+  background: var(--ln-ext-menu-bg) !important;
+  animation: ln-ext-board-menu-in 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* On a phone the cog ends the moves' row, under the board: a dialog in the window's middle,
+ * over the dimmed page. So too where the browser can't anchor to the cog. */
+main.round :is(i5d, rm6) .board-menu {
+  inset: 50% auto auto 50% !important;
+  max-height: calc(100dvh - 32px);
+  margin: 0 !important;
+  box-shadow:
+    var(--ln-ext-menu-shadow),
+    0 0 0 100vmax var(--ln-ext-page-mask) !important;
+  transform: translate(-50%, -50%);
+}
+
+/* Beside the board, it opens from the cog as the user menu does from the sidebar's: right of
+ * it, or left over the board where the window has no room. */
+@supports (anchor-name: --ln-ext-board-cog) {
+  @media (min-width: 600px) {
+    main.round .ln-ext-board-tools__btn--menu {
+      anchor-name: --ln-ext-board-cog;
+    }
+
+    main.round :is(i5d, rm6) .board-menu {
+      position-anchor: --ln-ext-board-cog;
+      position-area: right span-bottom;
+      position-try-fallbacks: flip-inline;
+      inset: auto !important;
+      max-height: calc(100% - 16px);
+      margin: 0 8px !important;
+      box-shadow: var(--ln-ext-menu-shadow) !important;
+      transform: none;
+      transform-origin: top left;
+    }
+  }
+}
+
+@keyframes ln-ext-board-menu-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+main.round :is(i5d, rm6) .board-menu::before {
+  content: none !important;
+}
+
+main.round .board-menu > section {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+main.round .board-menu > section + section {
+  margin: 6px -6px 0 !important;
+  padding: 6px 6px 0 !important;
+  border-top: 1px solid var(--ln-ext-lift-8) !important;
+}
+
+/* Rows: the flip button, the switches, the links to the preferences. */
+main.round .board-menu :is(section > .button, .cmn-toggle-wrap, .board-menu__links a) {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text) !important;
+  font: 600 15px var(--ln-ext-font) !important;
+  text-align: start;
+  text-transform: none !important;
+  cursor: pointer;
+  transition: background-color 0.1s !important;
+}
+
+main.round .board-menu :is(section > .button, .cmn-toggle-wrap, .board-menu__links a):hover {
+  background: var(--ln-ext-menu-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.round .board-menu :is(section > .button, .cmn-toggle-wrap, .board-menu__links a)::before {
+  content: '' !important;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0 !important;
+  background: var(--ln-ext-text-dim) !important;
+  mask: var(--ln-ext-row-icon) center / 20px no-repeat;
+  opacity: 1 !important;
+}
+
+main.round
+  .board-menu
+  :is(section > .button, .cmn-toggle-wrap, .board-menu__links a):hover::before {
+  background: var(--ln-ext-text-strong) !important;
+}
+
+/* The switch at the row's end. */
+main.round .board-menu .cmn-toggle {
+  order: 1;
+  margin: 0 0 0 auto !important;
+}
+
+/* Lichess's keys for the two, on a key cap at the row's end, before Zen's switch. */
+main.round .board-menu section > .button::after,
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-zen)::after {
+  order: 1;
+  min-width: 22px;
+  margin-inline-start: auto;
+  padding: 2px 6px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background: var(--ln-ext-lift-8);
+  box-shadow: inset 0 -1px 0 var(--ln-ext-lift-10);
+  color: var(--ln-ext-text-dim);
+  font: 700 12px/16px var(--ln-ext-font);
+  text-align: center;
+}
+
+main.round .board-menu section > .button::after {
+  content: 'F';
+}
+
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-zen)::after {
+  content: 'Z';
+}
+
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-zen) .cmn-toggle {
+  order: 2;
+  margin-inline-start: 0 !important;
+}
+
+/* Voice and keyboard input need an account. */
+main.round .board-menu .cmn-toggle-wrap:has(input:disabled) {
+  opacity: 0.5;
+  cursor: default;
+}
+
+main.round .board-menu .cmn-toggle-wrap:has(input:disabled):hover {
+  background: none !important;
+}
+
+/* The preferences open in a new tab. */
+main.round .board-menu .board-menu__links a::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  margin-inline-start: auto;
+  background: var(--ln-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-up-right-01.svg')
+    center / 16px no-repeat;
+}
+
+/* Each row's icon, by its switch's id: the labels are localized. */
+main.round .board-menu section > .button {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-reload-vertical.svg');
+}
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-zen) {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/yoga-03.svg');
+}
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-blindfold) {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view-off-slash.svg');
+}
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-haptics) {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg');
+}
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-streamer) {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/live-streaming-02.svg');
+}
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-voice) {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mic-01.svg');
+}
+main.round .board-menu .cmn-toggle-wrap:has(#cmn-tg-keyboard) {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/keyboard.svg');
+}
+main.round .board-menu .board-menu__links a:first-child {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/paint-board.svg');
+}
+main.round .board-menu .board-menu__links a:nth-child(2) {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/game-controller-03.svg');
+}
