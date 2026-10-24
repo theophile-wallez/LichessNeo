@@ -3,7 +3,7 @@ import { createElement, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
-import { PRACTICE_HASH } from '#shared/practice-page.ts';
+import { PRACTICE_HASH, PRACTICE_LINKED } from '#shared/practice-page.ts';
 import { message } from '#content/platform/runtime.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
@@ -42,5 +42,7 @@ export function syncOpeningPractice(): void {
 
 export const openingPractice: Feature = {
   name: 'opening-practice',
-  start: () => onEveryTick('opening-practice', syncOpeningPractice),
+  start: () => {
+    if (PRACTICE_LINKED) onEveryTick('opening-practice', syncOpeningPractice);
+  },
 };

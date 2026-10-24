@@ -146,7 +146,8 @@ so the logic can be unit-tested without a page.
 - `sidebar`: the Donate item, its folding to icons, and its shape (the
   settings' pick: unfolded, its sections folding open on a click and kept so,
   a rail or a header),
-  the Learn section's link to opening practice, the preferences cog, the account's rating, the
+  the Learn section's link to opening practice (dev builds only until it's
+  finished), the preferences cog, the account's rating, the
   light / dark switch, the drawer below 1020px, and Play's Lobby, which leads
   to the home's lobby tab rather than Lichess's game setup.
 - `notices`: Lichess's connection status and the server's announcements, as

@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
+import type { Feature } from '#shared/features.ts';
 import { addOpeningsLink } from './openings-link.ts';
 
 // Lichess's Learn section, and the phone's drawer toggle beside the nav.
@@ -17,6 +18,14 @@ afterEach(() => {
 
 const learnLinks = (): HTMLAnchorElement[] =>
   queryAll(document, '#topnav div a', HTMLAnchorElement);
+
+/** The feature as a build with `LN_EXT_DEV_BUILD` set so would have it: the module reads it once. */
+async function linkFor(devBuild: boolean): Promise<Feature> {
+  vi.stubGlobal('LN_EXT_DEV_BUILD', devBuild);
+  vi.resetModules();
+  const { openingsLink } = await import('./openings-link.ts');
+  return openingsLink;
+}
 
 describe('the sidebar’s opening training', () => {
   it('stands after Lichess’s Practice, and leads to the practice page', () => {
@@ -53,5 +62,13 @@ describe('the sidebar’s opening training', () => {
     document.body.innerHTML = NAV.replace('/practice', '/puzzle');
     addOpeningsLink();
     expect(document.querySelector('.ln-ext-nav-openings')).toBeNull();
+  });
+
+  it('is in a dev build only, until the page is finished', async () => {
+    document.body.innerHTML = NAV;
+    (await linkFor(false)).start();
+    expect(learnLinks()).toHaveLength(3);
+    (await linkFor(true)).start();
+    expect(learnLinks()).toHaveLength(4);
   });
 });

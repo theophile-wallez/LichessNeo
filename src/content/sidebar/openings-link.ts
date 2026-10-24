@@ -1,6 +1,6 @@
 import { createElement, onDomReady, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
-import { PRACTICE_URL } from '#shared/practice-page.ts';
+import { PRACTICE_LINKED, PRACTICE_URL } from '#shared/practice-page.ts';
 import { message } from '#content/platform/runtime.ts';
 
 // The extension's page of opening practice (page/review/view/openings-page.ts)
@@ -24,5 +24,7 @@ export function addOpeningsLink(): void {
 
 export const openingsLink: Feature = {
   name: 'openings-link',
-  start: () => onDomReady(addOpeningsLink),
+  start: () => {
+    if (PRACTICE_LINKED) onDomReady(addOpeningsLink);
+  },
 };

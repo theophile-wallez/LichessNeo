@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
+import { trackListeners } from '#shared/testing/listeners.ts';
 import { practiceHref, syncOpeningPractice } from './opening-practice.ts';
 
 // An opening's page as Lichess serves it: its intro, with the links to its
@@ -64,5 +65,36 @@ describe('an opening’s page', () => {
     document.body.innerHTML = PAGE.replace('main class="opening"', 'main class="page"');
     syncOpeningPractice();
     expect(links()).toHaveLength(2);
+  });
+});
+
+/** Starts the feature and the sync loop as a build with `LN_EXT_DEV_BUILD` set so would. */
+async function startFor(devBuild: boolean): Promise<void> {
+  vi.stubGlobal('LN_EXT_DEV_BUILD', devBuild);
+  vi.resetModules();
+  const { openingPractice } = await import('./opening-practice.ts');
+  const { startSyncLoop } = await import('#content/sync-loop.ts');
+  openingPractice.start();
+  startSyncLoop();
+}
+
+let removeListeners = (): void => {};
+
+describe('a release build', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    removeListeners = trackListeners(document, window);
+  });
+  afterEach(() => {
+    removeListeners();
+    vi.useRealTimers();
+  });
+
+  it('links to nothing until the page is finished, which a dev build does', async () => {
+    document.body.innerHTML = PAGE;
+    await startFor(false);
+    expect(links()).toHaveLength(2);
+    await startFor(true);
+    expect(links()).toHaveLength(3);
   });
 });
