@@ -4,7 +4,8 @@ import { parseJson } from '#shared/json.ts';
 
 // A game once it's over, as the page of a finished game (`/game/<id>`) serves it:
 // its status and winner, and every position. The game page's own data stops
-// at the moves played before it loaded.
+// at the moves played before it loaded: all of them, for a game opened once
+// over, whose own page holds the same (`roundFinishedGame`).
 
 const PositionSchema = z.object({
   ply: z.number(),
@@ -13,20 +14,45 @@ const PositionSchema = z.object({
   san: z.optional(z.string()),
 });
 
+const GameSchema = z.object({
+  status: z.object({ name: z.string() }),
+  winner: z.optional(z.enum(COLORS)),
+  variant: z.object({ key: z.string() }),
+});
+
 const FinishedPageSchema = z.object({
-  cfg: z.object({
-    data: z.object({
-      game: z.object({
-        status: z.object({ name: z.string() }),
-        winner: z.optional(z.enum(COLORS)),
-        variant: z.object({ key: z.string() }),
-      }),
-      treeParts: z.array(PositionSchema),
-    }),
-  }),
+  cfg: z.object({ data: z.object({ game: GameSchema, treeParts: z.array(PositionSchema) }) }),
 });
 
 export type FinishedGame = z.infer<typeof FinishedPageSchema>['cfg']['data'];
+
+// The game page's steps are the finished page's positions, but the first one's move is null.
+const StepSchema = z.object({
+  ply: z.number(),
+  fen: z.string(),
+  uci: z.nullish(z.string()),
+  san: z.nullish(z.string()),
+});
+
+const RoundPageSchema = z.object({
+  data: z.object({
+    game: GameSchema,
+    steps: z.array(StepSchema),
+  }),
+});
+
+/** The game in a game page's own init data, as its finished page would give it. */
+export function roundFinishedGame(initData: string | null): FinishedGame | null {
+  const round = parseJson(initData, RoundPageSchema);
+  if (!round) return null;
+  const treeParts = round.data.steps.map(({ ply, fen, uci, san }) => ({
+    ply,
+    fen,
+    ...(uci ? { uci } : {}),
+    ...(san ? { san } : {}),
+  }));
+  return { game: round.data.game, treeParts };
+}
 
 // The init data is JSON in a script element, which can't hold `</script>`.
 const INIT_DATA = /<script[^>]*\bid="page-init-data"[^>]*>([\s\S]*?)<\/script>/;

@@ -19,7 +19,9 @@ the root's [AGENTS.md](../../../AGENTS.md).
   `cfg.data.treeParts`), with its status and winner, which `page/game-over`
   reads rather than the page's words; its `treeParts` are the analysis page's
   mainline, start included, so the game page fills the review's cache under
-  the key that page reads. Game pages are cross-origin isolated like analysis
+  the key that page reads. A game opened once over has the same positions in
+  its own data's `steps` (the first one's `uci` and `san` null), with its
+  status and winner: no need to fetch them. Game pages are cross-origin isolated like analysis
   pages, so Lichess's Stockfish runs there too, but never before the game is
   over (Lichess's fair play rules). Lichess marks the kings with its own
   badges (`.cg-custom-svgs`), which ours replace. At a game's end Lichess

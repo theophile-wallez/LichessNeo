@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { fetchFinishedGame, readFinishedGame } from './game-data.ts';
+import { fetchFinishedGame, readFinishedGame, roundFinishedGame } from './game-data.ts';
 
 const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -44,6 +44,30 @@ describe('readFinishedGame', () => {
   it('finds nothing in another page', () => {
     expect(readFinishedGame('<html><body>Too many requests</body></html>')).toBeNull();
     expect(readFinishedGame(page('resign').replace('treeParts', 'steps'))).toBeNull();
+  });
+});
+
+// A game page's own data, for a game opened once over.
+const round = (steps: unknown[]): string =>
+  JSON.stringify({
+    data: {
+      game: { status: { name: 'resign' }, winner: 'black', variant: { key: 'standard' } },
+      steps,
+    },
+  });
+
+describe('roundFinishedGame', () => {
+  it('reads its steps as the finished page’s positions', () => {
+    const steps = [
+      { ply: 0, uci: null, san: null, fen: START },
+      { ply: 1, uci: 'e2e4', san: 'e4', fen: 'x' },
+    ];
+    expect(roundFinishedGame(round(steps))).toEqual(readFinishedGame(page('resign', 'black')));
+  });
+
+  it('finds nothing in a page without them', () => {
+    expect(roundFinishedGame(round([]).replace('steps', 'treeParts'))).toBeNull();
+    expect(roundFinishedGame(null)).toBeNull();
   });
 });
 

@@ -9,9 +9,9 @@ import type { Stockfish } from '#page/review/engine/stockfish.ts';
 import { bootEngine } from '#page/review/engine-pool.ts';
 import { fetchExport } from '#page/review/game/export.ts';
 import { opponentName } from './board.ts';
-import { fetchFinishedGame, type FinishedGame } from './game-data.ts';
+import { fetchFinishedGame, type FinishedGame, roundFinishedGame } from './game-data.ts';
 import { finalMate } from './mate.ts';
-import { readOutcome } from './outcome.ts';
+import { type Outcome, readOutcome } from './outcome.ts';
 import { precomputeReview, worthReviewing } from './precompute.ts';
 import { startPreview } from './preview.ts';
 import { type PlayerSummary, quickReview, quickSearch, summarize } from './quick-review.ts';
@@ -23,7 +23,7 @@ import { mountGameOver } from './view.ts';
 // player's best moves and errors before sending them to Game Review, whose
 // analysis then runs here, so the review is ready when opened, and its
 // figures replace the count's. A player's game opened once over gets it too,
-// without the confetti. A dev build can show it at will (preview.ts).
+// without the confetti, and at once. A dev build can show it at will (preview.ts).
 
 const WATCH_MS = 250;
 
@@ -74,16 +74,37 @@ const showsOver = (main: HTMLElement, gameId: string): boolean =>
   main.querySelector('.result-wrap') !== null &&
   gameIdFrom(location.pathname) === gameId;
 
-export async function onGameEnd(game: PlayedGame, main: HTMLElement): Promise<void> {
-  const outcomeOf = (finished: FinishedGame): ReturnType<typeof readOutcome> =>
+interface Ended {
+  readonly finished: FinishedGame;
+  readonly outcome: Outcome;
+}
+
+/**
+ * The game as it ended, for its player. A game opened once over brings all of
+ * it in the page's own data (`opened`), so the card comes in at once; one that
+ * ends as it's watched waits for its finished page.
+ */
+async function endOf(game: PlayedGame, opened: FinishedGame | null): Promise<Ended | null> {
+  const outcomeOf = (finished: FinishedGame): Outcome | null =>
     readOutcome({
       status: finished.game.status.name,
       winner: finished.game.winner,
       player: game.color,
     });
-  const finished = await fetchFinishedGame(game.gameId, data => outcomeOf(data) !== null);
+  const isOver = (data: FinishedGame): boolean => outcomeOf(data) !== null;
+  const finished = opened && isOver(opened) ? opened : await fetchFinishedGame(game.gameId, isOver);
   const outcome = finished && outcomeOf(finished);
-  if (!finished || !outcome || !main.isConnected) return;
+  return finished && outcome ? { finished, outcome } : null;
+}
+
+export async function onGameEnd(
+  game: PlayedGame,
+  main: HTMLElement,
+  opened: FinishedGame | null = null,
+): Promise<void> {
+  const ended = await endOf(game, opened);
+  if (!ended || !main.isConnected) return;
+  const { finished, outcome } = ended;
   const texts = gameOverTexts();
   const view = mountGameOver({
     main,
@@ -144,13 +165,29 @@ async function reviewSummary(
   return summarize({ positions, records, color: game.color, bookPly: book, chess960 });
 }
 
-/** Waits for the game's result to show, then plays its end once. */
-function watchEnd(game: PlayedGame): void {
+/** Plays the game's end once its result shows; false while it doesn't. */
+function endIfShown(game: PlayedGame, opened: FinishedGame | null): boolean {
+  const main = queryOne(document, 'main.round', HTMLElement);
+  if (!main?.querySelector('.result-wrap')) return false;
+  void onGameEnd(game, main, opened);
+  return true;
+}
+
+/**
+ * Waits for the game's result to show, then plays its end once. A game opened
+ * once over shows it as Lichess first draws the page: its card comes in with
+ * the buttons, in the same frame, rather than at the next look.
+ */
+function watchEnd(game: PlayedGame, opened: FinishedGame | null): void {
+  if (opened) {
+    const observer = new MutationObserver(() => {
+      if (endIfShown(game, opened)) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    return;
+  }
   const timer = setInterval(() => {
-    const main = queryOne(document, 'main.round', HTMLElement);
-    if (!main?.querySelector('.result-wrap')) return;
-    clearInterval(timer);
-    void onGameEnd(game, main);
+    if (endIfShown(game, null)) clearInterval(timer);
   }, WATCH_MS);
 }
 
@@ -163,7 +200,7 @@ export const gameOver: Feature = {
     if (!isParsing()) return;
     readPageInitData(text => {
       const game = playedGame(text);
-      if (game) watchEnd(game);
+      if (game) watchEnd(game, game.live ? null : roundFinishedGame(text));
     });
   },
 };
