@@ -207,6 +207,37 @@
   aspect-ratio: 68 / 107;
 }
 
+/* An award won again folds into the first one's tile, which counts them
+ * (content/profile/trophies.ts). */
+.user-show > .user-show__header .trophies [data-ln-ext-trophy-repeat] {
+  display: none !important;
+}
+
+.user-show > .user-show__header .trophies [data-ln-ext-trophy-count] {
+  position: relative;
+}
+
+.user-show > .user-show__header .trophies [data-ln-ext-trophy-count]::after {
+  content: '×' attr(data-ln-ext-trophy-count);
+  position: absolute;
+  inset: auto -5px -5px auto;
+  box-sizing: border-box;
+  min-width: 20px;
+  padding: 0 5px;
+  border: 2px solid var(--ln-ext-bg-panel);
+  border-radius: 999px;
+  background: var(--ln-ext-neutral-8);
+  color: var(--ln-ext-text-strong);
+  font-family: var(--ln-ext-font);
+  font-size: 10px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 15px;
+  text-align: center;
+  text-shadow: none;
+  white-space: nowrap;
+}
+
 .user-show > .user-show__header .trophies :is(.trophy, .shield-trophy, .combo-trophy):hover {
   background-color: var(--ln-ext-lift-15);
   transform: translateY(-2px);

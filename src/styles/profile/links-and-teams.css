@@ -97,3 +97,68 @@
     opacity: 1;
   }
 }
+
+/* Beside the chart the whole card scrolls (chart-and-about.css), so the teams don't: each
+ * section's heading stays at the card's top while its section passes, with a fade under it. */
+@media (min-width: 1260px) {
+  .user-show
+    > #us_profile
+    > .rating-history-container:not(.ln-ext-rchart-none)
+    ~ .profile-side
+    .teams.col2 {
+    container-type: normal;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .user-show
+    > #us_profile
+    > .rating-history-container:not(.ln-ext-rchart-none)
+    ~ .profile-side
+    .teams.col2::after {
+    content: none;
+  }
+
+  .user-show
+    > #us_profile
+    > .rating-history-container:not(.ln-ext-rchart-none)
+    ~ .profile-side
+    .col2
+    > strong {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    margin: 0 !important;
+    padding: 10px 0 4px;
+    background: var(--ln-ext-bg-panel);
+  }
+
+  .user-show
+    > #us_profile
+    > .rating-history-container:not(.ln-ext-rchart-none)
+    ~ .profile-side
+    .col2
+    > strong::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    .user-show
+      > #us_profile
+      > .rating-history-container:not(.ln-ext-rchart-none)
+      ~ .profile-side
+      .col2
+      > strong::after {
+      opacity: 1;
+    }
+  }
+}

@@ -106,6 +106,48 @@
   overflow: hidden;
 }
 
+/* Beside the chart, a long bio and many teams stretched the chart's card past its chart: the
+ * card takes the chart's height (no less than 360px) and scrolls, its section headings pinned
+ * (links-and-teams.css). */
+@media (min-width: 1260px) {
+  .user-show > #us_profile > .rating-history-container:not(.ln-ext-rchart-none) ~ .profile-side {
+    container-type: scroll-state;
+    contain: size;
+    min-height: 360px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  /* A fade at the card's foot while more is below, over the pinned headings. */
+  .user-show
+    > #us_profile
+    > .rating-history-container:not(.ln-ext-rchart-none)
+    ~ .profile-side
+    > .user-infos::after {
+    content: '';
+    display: block;
+    position: sticky;
+    z-index: 2;
+    bottom: 0;
+    height: 32px;
+    margin: -32px -18px 0;
+    background: linear-gradient(transparent, var(--ln-ext-bg-panel));
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(scrollable: bottom) {
+    .user-show
+      > #us_profile
+      > .rating-history-container:not(.ln-ext-rchart-none)
+      ~ .profile-side
+      > .user-infos::after {
+      opacity: 1;
+    }
+  }
+}
+
 .user-show > #us_profile .user-infos {
   padding: 18px !important;
   overflow: visible !important;

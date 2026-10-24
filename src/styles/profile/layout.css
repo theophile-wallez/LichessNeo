@@ -64,6 +64,7 @@
     order: 9;
   }
 
+  main.page-menu:has(.user-show) .user-show > .user-show__social,
   main.page-menu:has(.user-show) .page-menu__menu > .sub-ratings {
     margin-bottom: 16px;
   }

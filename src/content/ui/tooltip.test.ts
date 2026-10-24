@@ -204,6 +204,27 @@ describe('tooltips', () => {
     }
   });
 
+  it('shows a profile’s award in place of its title, on its link or on its tile', () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main class="page-menu"><div class="user-show"><div class="user-show__header"><div class="trophies">' +
+        '<a href="/tournament/marathon" title="Marathon Top 10"><span class="trophy award fire-trophy"></span></a>' +
+        '<span class="trophy award icon3d" title="Lichess coach"></span>' +
+        '</div></div></div></main>',
+    );
+    for (const [selector, label] of [
+      ['.trophies > a', 'Marathon Top 10'],
+      ['.trophies > span', 'Lichess coach'],
+    ] as const) {
+      const award = document.querySelector(selector);
+      if (!award) throw new Error(`no ${selector}`);
+      hover(award.firstElementChild ?? award);
+      expect(award.hasAttribute('title')).toBe(false);
+      vi.advanceTimersByTime(250);
+      expect(shown()?.textContent).toBe(label);
+    }
+  });
+
   it('shows what each of a theme’s settings in the user menu does, outside the page’s main', () => {
     document.body.insertAdjacentHTML(
       'beforeend',
