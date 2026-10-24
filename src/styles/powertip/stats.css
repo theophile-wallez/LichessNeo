@@ -2,8 +2,8 @@
 
 /* What the hover card adds to Lichess's fragment (content/player-card): who the
    player is, the rating they play most with its last month, their record, their
-   form, and the visitor's score against them. Each row only shows once Lichess
-   has answered for it, so the card grows as it loads. */
+   form and their best win. A row Lichess hasn't answered for yet holds its room
+   with a bone (skeleton.css), so the card keeps its size as it loads. */
 
 #powerTip .ln-ext-upt {
   display: flex;
@@ -58,7 +58,7 @@
   transition: background-color 0.15s !important;
 }
 
-#powerTip .ln-ext-upt__headline:hover {
+#powerTip a.ln-ext-upt__headline:hover {
   background: var(--ln-ext-lift-8);
 }
 
@@ -120,10 +120,11 @@
   overflow: visible;
 }
 
+/* As tall as a curve, so the card doesn't shrink when it turns out empty. */
 #powerTip .ln-ext-upt__curve--empty {
   box-sizing: border-box;
-  height: 1px;
-  margin-block: 12px;
+  height: 13px;
+  margin-block-end: 13px;
   border-bottom: 1px dashed var(--ln-ext-lift-12);
 }
 
@@ -196,10 +197,12 @@
 
 /* ---- Their last games --- */
 
+/* As tall with a streak as without, and as its bones. */
 #powerTip .ln-ext-upt__form {
   display: flex;
   align-items: center;
   gap: 5px;
+  min-height: 16px;
 }
 
 #powerTip .ln-ext-upt__dot {
@@ -219,6 +222,7 @@
   color: var(--ln-ext-good);
   font-size: 12px;
   font-weight: 700;
+  line-height: 16px;
 }
 
 #powerTip .ln-ext-upt__best {

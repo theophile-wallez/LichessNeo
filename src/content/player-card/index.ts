@@ -1,9 +1,10 @@
 import { userInHref } from '#shared/avatar.ts';
 import { createElement, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
-import { setHtml } from '#shared/html.ts';
+import { setHtml, type SafeHtml } from '#shared/html.ts';
 import { currentSettings } from '#content/settings/settings.ts';
-import { askCard, cardSources, onCardSources, type CardData } from './sources.ts';
+import { cardSkeleton } from './skeleton.ts';
+import { askCard, cardAwaited, cardSources, onCardSources, type CardData } from './sources.ts';
 import { cardMarkup } from './view.ts';
 
 // What the hover card says about a player besides Lichess's own fragment
@@ -38,7 +39,21 @@ const signatureOf = (data: CardData): string =>
     data.history ? 'history' : '',
     data.stat ? 'stat' : '',
     data.games ? 'games' : '',
+    data.pending.join(','),
   ].join('|');
+
+interface Rows {
+  readonly markup: SafeHtml;
+  readonly signature: string;
+}
+
+/** The rows as the player's data stands: their bones while the profile is on its way. */
+function rowsOf(card: HTMLElement, name: string): Rows | null {
+  if (cardAwaited(name)) return { markup: cardSkeleton(), signature: `${name}|awaited` };
+  const data = dataOf(card, name);
+  const markup = data && cardMarkup(data);
+  return data && markup ? { markup, signature: signatureOf(data) } : null;
+}
 
 function draw(): void {
   if (!shown) return;
@@ -46,13 +61,12 @@ function draw(): void {
   const info = queryOne(card, '.upt__info', HTMLElement);
   if (!info) return;
   const block = queryOne(card, `.${BLOCK}`, HTMLElement);
-  const data = dataOf(card, name);
-  const markup = data && cardMarkup(data);
-  if (!data || !markup) {
+  const rows = rowsOf(card, name);
+  if (!rows) {
     block?.remove();
     return;
   }
-  const signature = signatureOf(data);
+  const { markup, signature } = rows;
   if (block?.dataset.lnExtCard === signature) return;
   const section = block ?? createElement('section', { className: BLOCK });
   setHtml(section, markup);
@@ -70,12 +84,13 @@ export function syncPlayerCard(card: HTMLElement): void {
     return;
   }
   shown = { card, name };
-  draw();
   askCard({
     name,
     // Hovered in passing, the card is already hidden again: its details can wait.
     stays: () => shown?.name === name && getComputedStyle(card).visibility === 'visible',
   });
+  // After the ask, which says whether the profile is on its way.
+  draw();
 }
 
 export const playerCard: Feature = {

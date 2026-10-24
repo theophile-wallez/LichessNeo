@@ -136,7 +136,7 @@ describe('the hovered player’s own rows', () => {
     ]);
     expect(texts(card, '.ln-ext-upt__headline > *')).toEqual(['speedBlitz', '2410', '+23', '']);
     // The curve waits for the history, the record doesn't: it comes with the profile.
-    expect(queryOne(card, '.ln-ext-upt__curve--empty', HTMLElement)).not.toBeNull();
+    expect(queryOne(card, '.ln-ext-upt__curve.ln-ext-upt__bone', HTMLElement)).not.toBeNull();
     expect(texts(card, '.ln-ext-upt__legend > span')).toEqual([
       'cardWinShare:50',
       'cardDrawShare:17',
@@ -198,6 +198,59 @@ describe('the hovered player’s own rows', () => {
     await vi.advanceTimersByTimeAsync(DETAILS_DELAY_MS);
     expect(fetches).toEqual([]);
     expect(queryOne(card, '.ln-ext-upt', HTMLElement)).toBeNull();
+  });
+});
+
+const ROWS = ['meta', 'headline', 'facts', 'bar', 'legend', 'form', 'best'];
+
+const rowsOf = (card: HTMLElement): string[] =>
+  queryAll(card, '.ln-ext-upt > *', HTMLElement).map(row =>
+    row.className.replace('ln-ext-upt__', ''),
+  );
+
+const bones = (card: HTMLElement): HTMLElement[] =>
+  queryAll(card, '.ln-ext-upt__bone', HTMLElement);
+
+describe('a card still loading', () => {
+  it('holds every row’s room with bones while the profile is on its way', async () => {
+    let answerProfile: ((response: Response) => void) | undefined;
+    vi.stubGlobal('fetch', (url: string) => {
+      fetches.push(url);
+      return new Promise<Response>(resolve => {
+        answerProfile = resolve;
+      });
+    });
+    const card = await hover('cardten');
+    expect(rowsOf(card)).toEqual(ROWS);
+    expect(texts(card, '.ln-ext-upt > *')).toEqual(ROWS.map(() => ''));
+    answerProfile?.(Response.json(USER));
+    await vi.advanceTimersByTimeAsync(0);
+    expect(texts(card, '.ln-ext-upt__headline > *')).toEqual(['speedBlitz', '2410', '+23', '']);
+  });
+
+  it('keeps the details’ rows as bones until each one lands', async () => {
+    const card = await hover('cardeleven');
+    expect(rowsOf(card)).toEqual(ROWS);
+    expect(
+      ['.ln-ext-upt__facts', '.ln-ext-upt__form', '.ln-ext-upt__best'].map(
+        row => queryOne(card, `${row} .ln-ext-upt__bone`, HTMLElement) !== null,
+      ),
+    ).toEqual([true, true, true]);
+    await vi.advanceTimersByTimeAsync(DETAILS_DELAY_MS);
+    expect(bones(card)).toEqual([]);
+  });
+
+  it('drops the bones of what Lichess can’t answer', async () => {
+    vi.stubGlobal('fetch', (url: string) => {
+      fetches.push(url);
+      return Promise.resolve(
+        url.includes('/perf/') ? new Response('', { status: 404 }) : answer(url),
+      );
+    });
+    const card = await hover('cardtwelve');
+    await vi.advanceTimersByTimeAsync(DETAILS_DELAY_MS);
+    expect(bones(card)).toEqual([]);
+    expect(rowsOf(card)).toEqual(['meta', 'headline', 'bar', 'legend', 'form']);
   });
 });
 

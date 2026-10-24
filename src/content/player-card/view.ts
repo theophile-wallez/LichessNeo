@@ -14,16 +14,16 @@ import {
   seenSince,
   shareOf,
   tallyOf,
-  type FormGame,
   type Headline,
   type Tally,
 } from './facts.ts';
+import { bestWinBone, curveBone, formBone, standingBone } from './skeleton.ts';
 import type { CardData } from './sources.ts';
 
 // The rows the hover card gets of its own (styles/powertip/stats.css), under
 // Lichess's rating chips: who the player is, the rating they play most with its
-// last month, their record, their form and their best win. Each row shows up as
-// the data behind it lands.
+// last month, their record, their form and their best win. A row whose data is
+// on its way holds its room with a bone (skeleton.ts).
 
 // Below that, a streak isn't worth saying.
 const LEAST_STREAK = 3;
@@ -78,7 +78,8 @@ function metaRow({ user, online, now }: CardData): SafeHtml | null {
   return html`<div class="ln-ext-upt__meta">${items.map(item => html`<span>${item}</span>`)}</div>`;
 }
 
-function sparkline(curve: readonly number[]): SafeHtml {
+function sparkline(curve: readonly number[], pending: boolean): SafeHtml {
+  if (pending) return curveBone();
   const paths = curvePaths(curve);
   if (!paths) return html`<span class="ln-ext-upt__curve ln-ext-upt__curve--empty"></span>`;
   return html`<svg class="ln-ext-upt__curve" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true">
@@ -137,12 +138,13 @@ function headlineRow(headline: Headline, data: CardData): SafeHtml {
     <span class="ln-ext-upt__speed">${message(SPEED_NAMES[speed])}</span>
     ${headlineRating(headline, data.chesscom)}
     ${headlineProgress(headline, data.chesscom)}
-    ${sparkline(curve)}
+    ${sparkline(curve, data.pending.includes('history'))}
   </a>`;
 }
 
 /** Where that rating stands: its rank, its best, and the opponents it was played against. */
 function standingRow(data: CardData, speed: Speed): SafeHtml | null {
+  if (data.pending.includes('stat')) return standingBone();
   const { rank, percentile, stat } = data.stat ?? {};
   const highest = stat?.highest?.int;
   const opponents = stat?.count?.opAvg;
@@ -189,7 +191,10 @@ function tallyRows(tally: Tally): SafeHtml {
 }
 
 /** Their last games, the newest first, each a link to its own, and a streak running. */
-function formRow(form: readonly FormGame[], streak: number | undefined): SafeHtml | null {
+function formRow(data: CardData): SafeHtml | null {
+  if (data.pending.includes('games')) return formBone();
+  const form = data.games ? formOf(data.games, data.name, FORM_GAMES) : [];
+  const streak = data.stat?.stat.resultStreak?.win.cur.v;
   if (form.length === 0) return null;
   const running = streak !== undefined && streak >= LEAST_STREAK ? streak : null;
   return html`<div class="ln-ext-upt__form">
@@ -206,6 +211,7 @@ function formRow(form: readonly FormGame[], streak: number | undefined): SafeHtm
 
 /** The best win Lichess has on record for that rating. */
 function bestWinRow(data: CardData, speed: Speed): SafeHtml | null {
+  if (data.pending.includes('stat')) return bestWinBone();
   const best = data.stat?.stat.bestWins?.results[0];
   if (!best) return null;
   const rating = shownRating(speed, best.opRating, data.chesscom);
@@ -221,10 +227,7 @@ export function cardMarkup(data: CardData): SafeHtml | null {
     headline && headlineRow(headline, data),
     headline && standingRow(data, headline.speed),
     tally && tallyRows(tally),
-    formRow(
-      data.games ? formOf(data.games, data.name, FORM_GAMES) : [],
-      data.stat?.stat.resultStreak?.win.cur.v,
-    ),
+    formRow(data),
     headline && bestWinRow(data, headline.speed),
   ]);
   return rows.length === 0 ? null : html`${rows}`;

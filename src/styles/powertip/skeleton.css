@@ -1,0 +1,45 @@
+/* ---- The rows' bones --- */
+
+/* What the card's rows show while Lichess answers (content/player-card/skeleton.ts):
+   each bone takes the box of what it stands for, its bar painted in a pseudo-element
+   that pulses, so the row keeps its height when the real one comes in. */
+
+#powerTip .ln-ext-upt__bone {
+  position: relative;
+  color: transparent;
+}
+
+#powerTip .ln-ext-upt__bone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ln-ext-lift-8);
+  animation: ln-ext-upt-bone 0.9s ease-in-out infinite alternate;
+}
+
+/* A line of text to come: as tall as the line, its bar as tall as the letters. */
+#powerTip .ln-ext-upt__bone--text {
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+#powerTip .ln-ext-upt__bone--text::before {
+  inset-block: 0.2em;
+}
+
+#powerTip .ln-ext-upt__curve.ln-ext-upt__bone {
+  border-radius: 6px;
+}
+
+#powerTip .ln-ext-upt__bar > .ln-ext-upt__bone {
+  flex: 1;
+  border-radius: 4px;
+}
+
+@keyframes ln-ext-upt-bone {
+  to {
+    opacity: 0.4;
+  }
+}
