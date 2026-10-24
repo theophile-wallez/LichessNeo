@@ -1,0 +1,276 @@
+/* A study's card (content/pages/study-cards.ts): a glow in the study's own hue, its flair on a
+   tile, its likes as a pill, the chapters numbered and the members as
+   avatars. The list view's rows (cards.css) keep only the frame and the tile. */
+
+.study-index .studies .study {
+  --ln-ext-study-hue: var(--ln-ext-accent);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 16px 14px !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 14px;
+  background: var(--ln-ext-bg-panel);
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.15s,
+    box-shadow 0.15s !important;
+}
+
+.study-index .studies .study:hover {
+  border-color: var(--ln-ext-card-border-hover) !important;
+  box-shadow: var(--ln-ext-card-shadow-hover);
+  transform: translateY(-3px);
+}
+
+/* Our links (the owner, the members) go over the card's own. */
+.study-index .studies .study > .overlay {
+  z-index: 1;
+}
+
+.study-index .studies .study:not(.compact)::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 180px;
+  background: radial-gradient(
+    120% 100% at 0 0,
+    color-mix(in srgb, var(--ln-ext-study-hue) 16%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ---- Tile and title --- */
+
+.study-index .studies .study .top {
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  padding-top: 36px;
+}
+
+.study-index .studies .study .top > div:last-child {
+  width: 100%;
+  min-width: 0;
+}
+
+/* The flair (or Lichess's study icon) on a tile of the study's hue. Unlike other cards'
+   tiles, it stays still on hover. */
+.study-index .studies .study__icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--ln-ext-study-hue) 22%, var(--ln-ext-bg-panel));
+  color: var(--ln-ext-study-hue) !important;
+  font-size: 26px !important;
+}
+
+.study-index .studies .study:not(.compact) .study__icon {
+  border: 3px solid var(--ln-ext-bg-panel);
+}
+
+.study-index .studies .study__icon img {
+  width: 32px;
+  height: 32px;
+  margin: 0 !important;
+  /* Lichess nudges a flair up to sit on a line of text: here it would sit high in its tile. */
+  transform: none;
+}
+
+.study-index .studies .study__icon > icon {
+  line-height: 1;
+}
+
+.study-index .studies .study .top .study-name {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  line-height: 1.3;
+  white-space: normal !important;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Lichess's line of likes, owner and date, in case we couldn't read it. */
+.study-index .studies .study .top > div > span {
+  margin-top: 2px;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12px !important;
+  font-weight: 600;
+}
+
+.study-index .studies .study[data-ln-ext-study='card'] .top > div > span,
+.study-index .studies .study[data-ln-ext-study='card'] .members {
+  display: none !important;
+}
+
+/* ---- Owner and likes --- */
+
+.ln-ext-study__by {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.ln-ext-study__owner {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--ln-ext-text-dim) !important;
+  font-weight: 700;
+}
+
+.ln-ext-study__owner:hover {
+  color: var(--ln-ext-text-strong) !important;
+}
+
+.ln-ext-study__owner > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ln-ext-study__owner > .ln-ext-study__avatar {
+  width: 20px;
+  height: 20px;
+}
+
+.ln-ext-study__private {
+  display: inline-flex;
+  color: var(--ln-ext-orange);
+  font-size: 14px;
+}
+
+.ln-ext-study__likes {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  inset-inline-end: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-pink) 16%, var(--ln-ext-bg-panel));
+  color: var(--ln-ext-pink);
+  font-size: 12px;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+/* ---- Chapters --- */
+
+.study-index .studies .study .body {
+  display: block !important;
+  margin: 12px 0 14px;
+  font-size: 13px !important;
+}
+
+.study-index .studies .study .chapters,
+.study-index .studies .study .members {
+  min-width: 0;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.study-index .studies .study .chapters {
+  counter-reset: ln-ext-chapter;
+}
+
+/* A block, not Lichess's flex row: flex clips mid-letter, a block gets an ellipsis. */
+.study-index .studies .study li {
+  display: block !important;
+  overflow: hidden;
+  padding: 2px 0;
+  color: var(--ln-ext-neutral-12) !important;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.study-index .studies .study .members li {
+  color: var(--ln-ext-text-dim) !important;
+}
+
+.study-index .studies .study li::before {
+  margin-inline-end: 6px !important;
+  color: var(--ln-ext-font-dimmer) !important;
+  font-size: 11px !important;
+}
+
+.study-index .studies .study .chapters li {
+  counter-increment: ln-ext-chapter;
+}
+
+.study-index .studies .study .chapters li::before {
+  content: counter(ln-ext-chapter) !important;
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-inline-end: 8px !important;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--ln-ext-study-hue) 15%, transparent);
+  color: var(--ln-ext-study-hue) !important;
+  font-family: inherit !important;
+  font-weight: 800;
+  /* Floated, so a chapter name's leading space doesn't push it right. */
+  float: inline-start;
+}
+
+/* ---- Members and date --- */
+
+.ln-ext-study__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--ln-ext-lift-6);
+  color: var(--ln-ext-font-dimmer);
+  font-size: 12px;
+}
+
+.ln-ext-study__members {
+  display: flex;
+}
+
+.ln-ext-study__avatar {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ln-ext-avatar, var(--ln-ext-lift-12));
+}
+
+.ln-ext-study__members > .ln-ext-study__avatar {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 0 2px var(--ln-ext-bg-panel);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-study__members > .ln-ext-study__avatar + .ln-ext-study__avatar {
+  margin-inline-start: -6px;
+}
+
+.ln-ext-study__members > .ln-ext-study__avatar:hover {
+  z-index: 3;
+  transform: translateY(-2px) scale(1.08);
+}

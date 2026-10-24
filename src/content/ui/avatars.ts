@@ -22,6 +22,9 @@ const SPOTS: readonly Spot[] = [
   { selector: 'main.round .game__meta__players > .player', link: ':scope > a.user-link' },
   { selector: '#powerTip .upt__info', link: '.upt__info__top > a.user-link' },
   { selector: '#friend_box .content a.user-link' },
+  // A study card's owner and members (content/pages/study-cards.ts).
+  { selector: '.study-index a.ln-ext-study__avatar' },
+  { selector: '.study-index a.ln-ext-study__owner' },
   {
     selector: "main.box.page-small[data-ln-ext-list='players'] > table.slist > tbody > tr",
     link: ':scope > td:first-child > .user-link',

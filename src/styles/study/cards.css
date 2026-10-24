@@ -1,4 +1,4 @@
-/* Study lists (.study-index: all, search, a player's studies) as a grid of cards.
+/* Study lists (.study-index: all, search, a player's studies) as a grid of cards (card.css).
    The compact list view becomes dense rows in the same grid. */
 
 /* ---- Toolbar --- */
@@ -184,107 +184,6 @@ main.page-menu[data-ln-ext-menu~='studies'][data-ln-ext-nav-active*='/blog/'] {
 
 .study-index .studies > .pager {
   grid-column: 1 / -1;
-}
-
-/* ---- Card --- */
-
-.study-index .studies .study {
-  display: flex;
-  flex-direction: column;
-  padding: 16px !important;
-  border: 1px solid var(--ln-ext-card-border) !important;
-  border-radius: 10px;
-  background: var(--ln-ext-bg-panel);
-  transition:
-    background-color 0.15s,
-    border-color 0.15s,
-    box-shadow 0.15s !important;
-}
-
-.study-index .studies .study:hover {
-  border-color: var(--ln-ext-card-border-hover) !important;
-  background: var(--ln-ext-card-hover) !important;
-  box-shadow: var(--ln-ext-card-shadow-hover);
-}
-
-.study-index .studies .study .top {
-  gap: 12px !important;
-}
-
-/* The flair (or Lichess's study icon) on a tile, like team avatars. */
-.study-index .studies .study__icon {
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent);
-  color: var(--ln-ext-accent) !important;
-  font-size: 24px !important;
-}
-
-.study-index .studies .study__icon img {
-  width: 28px;
-  height: 28px;
-  margin: 0 !important;
-}
-
-.study-index .studies .study .top .study-name {
-  color: var(--ln-ext-text-strong) !important;
-  font-size: 16px !important;
-  font-weight: 800 !important;
-  line-height: 1.35;
-}
-
-.study-index .studies .study .top span {
-  margin-top: 2px;
-  color: var(--ln-ext-text-dim) !important;
-  font-size: 12px !important;
-  font-weight: 600;
-}
-
-.study-index .studies .study .top .private {
-  color: var(--ln-ext-brag, var(--ln-ext-orange-dark));
-}
-
-.study-index .studies .study .body {
-  display: grid !important;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: 16px;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--ln-ext-lift-6);
-  font-size: 13px !important;
-}
-
-.study-index .studies .study .chapters,
-.study-index .studies .study .members {
-  min-width: 0;
-  max-width: none !important;
-  margin: 0 !important;
-}
-
-/* A block, not Lichess's flex row: flex clips mid-letter, a block gets an ellipsis. */
-.study-index .studies .study li {
-  display: block !important;
-  overflow: hidden;
-  padding: 2px 0;
-  color: var(--ln-ext-neutral-12) !important;
-  line-height: 1.4;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.study-index .studies .study .members li {
-  color: var(--ln-ext-text-dim) !important;
-}
-
-.study-index .studies .study li::before {
-  margin-inline-end: 6px !important;
-  color: var(--ln-ext-font-dimmer) !important;
-  font-size: 11px !important;
 }
 
 /* ---- List view rows --- */

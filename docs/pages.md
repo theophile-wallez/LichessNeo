@@ -49,7 +49,7 @@ and a white knob, and a single big number in the state's color.
 | Practice         | `/practice`                 | 2     | sets the tone for 2                                                                                                                                                                                               |
 | Opening training | `/analysis#ln-ext-practice` | 2     | our own page on the free board, linked from dev builds only until it's finished: the coach's card, mastery rings, the daily goal and its streak; signature planned: the day's moves on the track, toward the goal |
 | Coordinates      | `/training/coordinate`      | 1     | Lichess's text panel and tabs on a desktop, fitting the window (the settings scroll on their own); a title with its tile, the score on a track; below 1020px, cards and segmented picks                           |
-| Studies          | `/study`                    | 2     | below 800px the menu is a strip of links that fades at its edges, as every side menu                                                                                                                              |
+| Studies          | `/study`                    | 2     | cards in each study's own hue: its flair on a tile, its likes as a pill, numbered chapters, the members as avatars; below 800px the menu is a strip of links that fades at its edges, as every side menu          |
 | Coaches          | `/coach`                    | 2     | on phones a card has its picture at its side                                                                                                                                                                      |
 
 ## Watch

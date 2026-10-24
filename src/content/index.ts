@@ -56,6 +56,7 @@ import { practiceIcons } from './pages/practice-icons.ts';
 import { streamerSections } from './pages/streamer-sections.ts';
 import { racerHome } from './pages/racer-home.ts';
 import { videoCountPill } from './pages/video-count.ts';
+import { studyCards } from './pages/study-cards.ts';
 import { openingPractice } from './pages/opening-practice.ts';
 import { openings } from './pages/openings.ts';
 import { gameMeta } from './game/game-meta.ts';
@@ -142,6 +143,7 @@ const FEATURES = [
   streamerSections,
   racerHome,
   videoCountPill,
+  studyCards,
   openings,
   openingPractice,
   gameMeta,
