@@ -108,7 +108,10 @@ main.puzzle .puzzle__feedback .view_solution {
   padding-top: 18px;
 }
 
-main.puzzle .puzzle__feedback .view_solution.show {
+/* Lichess hides hint and solution for the puzzle's first 2 to 4 seconds, leaving a hole in the
+   card: shown at once. The streak's skip shows only while one is left. */
+main.puzzle .puzzle__feedback .view_solution:is(.show, :not(.skip)) {
+  visibility: visible !important;
   opacity: 1 !important;
 }
 
