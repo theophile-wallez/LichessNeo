@@ -1,4 +1,4 @@
-import DiceIcon from '@hugeicons/core-free-icons/DiceIcon';
+import ShuffleIcon from '@hugeicons/core-free-icons/ShuffleIcon';
 import UnavailableIcon from '@hugeicons/core-free-icons/UnavailableIcon';
 import {
   type COACH_COUNT,
@@ -58,7 +58,7 @@ const choiceMarkup = (name: string, i: number): SafeHtml =>
 
 /** The glyph of a pick that isn't a coach. */
 export const pickIcon = (pick: typeof NO_COACH | typeof RANDOM_COACH): SafeHtml =>
-  hugeicon(pick === NO_COACH ? UnavailableIcon : DiceIcon);
+  hugeicon(pick === NO_COACH ? UnavailableIcon : ShuffleIcon);
 
 const pickMarkup = (pick: typeof NO_COACH | typeof RANDOM_COACH, name: string): SafeHtml =>
   html`<button type="button" class="ln-ext-coach-choice" data-ln-ext-coach-choice="${pick}" aria-pressed="false">

@@ -7,7 +7,7 @@ import { SLIME_BOTTOM, slimeGeometry, slimeRadius } from './slime-shape.ts';
 
 // What makes the slime jelly: a see-through skin over its darker heart, bubbles
 // rising in it, a wobble that rings on after every bump, and moods that work on
-// the jelly itself: it slumps into a puddle when sad, bounces when happy, boils
+// the jelly itself: it slumps when sad, bounces when happy, boils
 // red when angry, blushes pink, and a ripple runs down it when it starts.
 
 const { clamp, smoothstep } = MathUtils;
@@ -197,8 +197,8 @@ function wobble(rig: RigBuilder): (jelly: Jelly) => void {
     }
     const squash = spring.step(dt);
     slump = damp(slump, mix.slump, 3, dt);
-    const tall = (1 + squash * 0.12) * (1 - 0.22 * slump);
-    const wide = (1 - squash * 0.06) * (1 + 0.14 * slump);
+    const tall = (1 + squash * 0.12) * (1 - 0.1 * slump);
+    const wide = (1 - squash * 0.06) * (1 + 0.06 * slump);
     rig.body.scale.set(wide, tall, wide);
     // Squashed about its base, which stays on the ground.
     rig.body.position.y = -SLIME_BOTTOM * tall;

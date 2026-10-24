@@ -12,12 +12,13 @@ function play(mood: CoachMood, seconds: number): void {
 }
 
 describe('the slime', () => {
-  it('slumps into a puddle when sad, and stands up again', () => {
+  it('slumps when sad without going flat, and stands up again', () => {
     play('neutral', 3);
     const standing = mascot.body.scale.y;
     play('sad', 3);
-    expect(mascot.body.scale.y).toBeLessThan(standing * 0.85);
-    expect(mascot.body.scale.x).toBeGreaterThan(1.08);
+    expect(mascot.body.scale.y).toBeLessThan(standing * 0.93);
+    expect(mascot.body.scale.y).toBeGreaterThan(standing * 0.85);
+    expect(mascot.body.scale.x).toBeGreaterThan(1.03);
     play('neutral', 4);
     expect(mascot.body.scale.y).toBeCloseTo(standing, 1);
   });

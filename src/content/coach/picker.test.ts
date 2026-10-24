@@ -1,3 +1,4 @@
+import ShuffleIcon from '@hugeicons/core-free-icons/ShuffleIcon';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { openCoachPicker } from './picker.ts';
@@ -65,6 +66,14 @@ describe('the coach picker', () => {
       'random',
       '1',
     ]);
+  });
+
+  it('draws a shuffle on the random tile', () => {
+    open(3);
+    const paths = queryAll(tile('random') ?? dialog(), 'svg path', SVGPathElement);
+    expect(paths.map(path => path.getAttribute('d'))).toEqual(
+      ShuffleIcon.map(([, attributes]) => attributes.d),
+    );
   });
 
   it('takes the coach away for none, with nothing to tell the page', () => {
