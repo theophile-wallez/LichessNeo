@@ -1,0 +1,313 @@
+/* The simul form (main.simul-form, /simul/new), from content/simul-form: its sections as
+ * cards, each a color and an icon, and beside them a column that stays put with the
+ * simul's card as the list will show it, a summary and the form's button. The name and
+ * the games are one card, the start time and the description another: our heads start
+ * them (.ln-ext-simul-form__head), and their parts join edge to edge. */
+
+/* ---- Page --- */
+
+main.simul-form.box {
+  --ln-ext-simul-games: var(--ln-ext-cyan);
+  --ln-ext-simul-clock: var(--ln-ext-orange);
+  --ln-ext-simul-entry: var(--ln-ext-purple);
+  --ln-ext-simul-details: var(--ln-ext-green);
+  display: grid;
+  grid-template: 'title title' auto 'form aside' auto / minmax(0, 1fr) 340px;
+  align-items: start;
+  column-gap: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  overflow: visible !important;
+  padding: 0 0 40px !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text);
+}
+
+main.simul-form > h1.box__top {
+  grid-area: title;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 16px;
+  margin: 0 !important;
+  padding: 16px 0 !important;
+  background: var(--ln-ext-bg-page);
+  box-shadow: var(--ln-ext-pin-cover);
+}
+
+main.simul-form > h1.box__top::before {
+  content: '';
+  flex: none;
+  width: 52px;
+  height: 52px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp')
+    center / contain no-repeat;
+}
+
+/* A container: its rows follow its own width, which the column beside it narrows. */
+main.simul-form > form {
+  container-type: inline-size;
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+main.simul-form > form > br {
+  display: none;
+}
+
+main.simul-form [data-ln-ext-part='intro'] {
+  margin: 0 0 18px;
+  color: var(--ln-ext-text-dim);
+  font-size: 15px;
+}
+
+/* ---- Cards --- */
+
+main.simul-form
+  :where(
+    .ln-ext-simul-form__head,
+    fieldset[data-ln-ext-part],
+    [data-ln-ext-part='name'],
+    [data-ln-ext-part='start'],
+    [data-ln-ext-part='description']
+  ) {
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 22px !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-block: none !important;
+  border-radius: 0 !important;
+  background: var(--ln-ext-bg-panel) !important;
+  box-shadow: none !important;
+}
+
+/* A card's first part. */
+main.simul-form
+  :is(.ln-ext-simul-form__head, [data-ln-ext-part='clock'], [data-ln-ext-part='entry']) {
+  padding-top: 20px !important;
+  border-top: 1px solid var(--ln-ext-card-border) !important;
+  border-start-start-radius: 14px !important;
+  border-start-end-radius: 14px !important;
+}
+
+/* A card's last part. */
+main.simul-form
+  :is(
+    [data-ln-ext-part='games'],
+    [data-ln-ext-part='clock'],
+    [data-ln-ext-part='entry'],
+    [data-ln-ext-part='description']
+  ) {
+  margin-bottom: 18px !important;
+  padding-bottom: 22px !important;
+  border-bottom: 1px solid var(--ln-ext-card-border) !important;
+  border-end-start-radius: 14px !important;
+  border-end-end-radius: 14px !important;
+}
+
+main.simul-form [data-ln-ext-part='description'] {
+  padding-top: 16px !important;
+}
+
+/* The head: a tile in the card's color (::before), its icon over it (::after), the title. */
+main.simul-form :is(.ln-ext-simul-form__head, fieldset[data-ln-ext-part] > legend) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 17px !important;
+  font-weight: 750 !important;
+}
+
+main.simul-form fieldset[data-ln-ext-part] > legend {
+  float: inline-start;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 16px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+main.simul-form .ln-ext-simul-form__head {
+  padding-bottom: 16px !important;
+}
+
+main.simul-form fieldset[data-ln-ext-part] > legend + * {
+  clear: both;
+}
+
+/* Our head stands for it, over the name. */
+main.simul-form fieldset[data-ln-ext-part='games'] > legend {
+  display: none;
+}
+
+main.simul-form .ln-ext-simul-form__head h2 {
+  margin: 0;
+  font: inherit;
+}
+
+main.simul-form :where(.ln-ext-simul-form__head, fieldset[data-ln-ext-part] > legend)::before {
+  content: '';
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ln-ext-card-color) 18%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-card-color) 30%, transparent);
+}
+
+main.simul-form :where(.ln-ext-simul-form__head, fieldset[data-ln-ext-part] > legend)::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  inset-inline-start: 9px;
+  width: 20px;
+  height: 20px;
+  background: var(--ln-ext-card-color);
+  mask: var(--ln-ext-card-icon) center / contain no-repeat;
+}
+
+main.simul-form .ln-ext-simul-form__head::after {
+  top: 29px;
+  inset-inline-start: 31px;
+}
+
+main.simul-form [data-ln-ext-card='games'] {
+  --ln-ext-card-color: var(--ln-ext-simul-games);
+  --ln-ext-card-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
+}
+
+main.simul-form [data-ln-ext-part='clock'] {
+  --ln-ext-card-color: var(--ln-ext-simul-clock);
+  --ln-ext-card-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/stop-watch.svg');
+}
+
+main.simul-form [data-ln-ext-part='entry'] {
+  --ln-ext-card-color: var(--ln-ext-simul-entry);
+  --ln-ext-card-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+}
+
+main.simul-form [data-ln-ext-card='details'] {
+  --ln-ext-card-color: var(--ln-ext-simul-details);
+  --ln-ext-card-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-02.svg');
+}
+
+/* ---- Fields --- */
+
+main.simul-form .form-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 18px;
+  margin: 0;
+}
+
+main.simul-form .form-split + .form-split {
+  margin-top: 16px;
+}
+
+main.simul-form :is(.form-group, .form-half) {
+  width: auto;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0;
+}
+
+main.simul-form .form-label {
+  display: block;
+  margin: 0 0 7px !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+main.simul-form .form-help {
+  display: block;
+  margin-top: 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+main.simul-form :is(input.form-control, select.form-control) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 8px !important;
+  font-size: 14.5px;
+  font-weight: 550;
+}
+
+main.simul-form [data-ln-ext-part='name'] {
+  padding-bottom: 18px !important;
+}
+
+/* Lichess writes "Simul" after the field as bare text: hidden, and drawn in the field. */
+main.simul-form [data-ln-ext-suffix] {
+  position: relative;
+  font-size: 0;
+}
+
+/* Lichess gives it half the width, for the word beside it. */
+main.simul-form [data-ln-ext-suffix] #form3-name {
+  width: 100% !important;
+  padding-inline-end: 84px;
+}
+
+main.simul-form [data-ln-ext-suffix]:not([data-ln-ext-suffix=''])::after {
+  content: attr(data-ln-ext-suffix);
+  position: absolute;
+  top: 21px;
+  inset-inline-end: 9px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: var(--ln-ext-lift-6);
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+  font-weight: 700;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* The games' rows apart, as the name's is. */
+main.simul-form [data-ln-ext-part='games'] > :is(.form-group, .form-split) {
+  padding-top: 18px !important;
+  border-top: 1px solid var(--ln-ext-lift-6);
+}
+
+main.simul-form [data-ln-ext-part='games'] > .form-split {
+  margin-top: 18px;
+}
+
+main.simul-form textarea.form-control {
+  box-sizing: border-box;
+  width: 100%;
+  height: 110px;
+  padding: 12px 14px;
+  border-radius: 8px !important;
+  resize: vertical;
+}
+
+main.simul-form [data-ln-ext-part='start'] input.form-control:not([type='hidden']) {
+  padding-inline-start: 40px;
+  background: var(--ln-ext-input-bg)
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01--989795.svg') 14px
+    center / 16px no-repeat !important;
+}
+
+html[dir='rtl'] main.simul-form [data-ln-ext-part='start'] input.form-control:not([type='hidden']) {
+  background-position: calc(100% - 14px) center !important;
+}

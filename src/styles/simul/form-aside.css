@@ -1,0 +1,340 @@
+/* The simul form's column (form.css): the simul's card as the list shows it
+ * (simul/cards.css), the summary and the form's button. Below 1020px the card goes over
+ * the form, and Lichess's own Cancel and button stand in a bar at the window's foot. */
+
+/* ---- Column --- */
+
+main.simul-form .ln-ext-simul-form__aside {
+  grid-area: aside;
+  position: sticky;
+  top: 84px;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+/* Our button submits through Lichess's. */
+main.simul-form [data-ln-ext-part='actions'] {
+  display: none !important;
+}
+
+main.simul-form .ln-ext-simul-form__preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+main.simul-form .ln-ext-simul-form__preview::before {
+  content: '';
+  width: 15px;
+  height: 15px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view.svg') center / contain
+    no-repeat;
+}
+
+main.simul-form .ln-ext-simul-form__card {
+  display: grid;
+  grid-template: 'tile head' auto 'host host' auto / 58px minmax(0, 1fr);
+  gap: 14px 16px;
+  padding: 18px 16px 12px;
+  border: 1px solid color-mix(in srgb, var(--ln-ext-simul-games) 45%, transparent);
+  border-radius: 12px;
+  background: var(--ln-ext-bg-panel);
+  box-shadow: 0 10px 30px var(--ln-ext-shade-35);
+}
+
+/* A 4x4 board, two more fanned out behind it, and a queen of the board's set on it. */
+main.simul-form .ln-ext-simul-form__card-tile {
+  grid-area: tile;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-top: 6px;
+  border-radius: 9px;
+  background: repeating-conic-gradient(
+      var(--ln-ext-simul-games) 0 25%,
+      var(--ln-ext-cyan-darker) 0 50%
+    )
+    0 0 / 50% 50%;
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    inset 0 -3px 0 #00000026,
+    4px -4px 0 -1px color-mix(in srgb, var(--ln-ext-cyan-darker) 70%, var(--ln-ext-neutral-2)),
+    8px -8px 0 -2px color-mix(in srgb, var(--ln-ext-cyan-darker) 40%, var(--ln-ext-neutral-2));
+}
+
+main.simul-form .ln-ext-simul-form__card-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(---white-queen) center / 78% no-repeat;
+  filter: drop-shadow(0 2px 2px #00000080);
+}
+
+main.simul-form .ln-ext-simul-form__card-head {
+  grid-area: head;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+main.simul-form .ln-ext-simul-form__card-name {
+  overflow: hidden;
+  margin: 0;
+  color: var(--ln-ext-text-strong);
+  font-size: 17px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.simul-form .ln-ext-simul-form__card-meta {
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+}
+
+main.simul-form .ln-ext-simul-form__card-host {
+  grid-area: host;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+main.simul-form .ln-ext-simul-form__card-players {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--ln-ext-lift-6);
+  font-size: 12px;
+}
+
+main.simul-form .ln-ext-simul-form__card-players::before {
+  content: '';
+  width: 13px;
+  height: 13px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user.svg') center / contain
+    no-repeat;
+}
+
+/* ---- Summary --- */
+
+main.simul-form .ln-ext-simul-form__summary {
+  margin: 0;
+  padding: 4px 16px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px;
+  background: var(--ln-ext-bg-panel);
+}
+
+main.simul-form .ln-ext-simul-form__summary > div {
+  --ln-ext-row-color: var(--ln-ext-simul-games);
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  font-size: 13.5px;
+}
+
+main.simul-form .ln-ext-simul-form__summary > div + div {
+  border-top: 1px solid var(--ln-ext-lift-6);
+}
+
+main.simul-form .ln-ext-simul-form__summary > div[hidden] {
+  display: none;
+}
+
+main.simul-form .ln-ext-simul-form__summary > div::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--ln-ext-row-color);
+  mask: var(--ln-ext-row-icon) center / contain no-repeat;
+}
+
+main.simul-form .ln-ext-simul-form__summary [data-ln-ext-row='clock'] {
+  --ln-ext-row-color: var(--ln-ext-simul-clock);
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alarm-clock.svg');
+}
+
+main.simul-form .ln-ext-simul-form__summary [data-ln-ext-row='entry'] {
+  --ln-ext-row-color: var(--ln-ext-simul-entry);
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+}
+
+main.simul-form .ln-ext-simul-form__summary [data-ln-ext-row='start'] {
+  --ln-ext-row-color: var(--ln-ext-simul-details);
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-02.svg');
+}
+
+main.simul-form .ln-ext-simul-form__summary dt {
+  flex: none;
+  color: var(--ln-ext-text);
+}
+
+main.simul-form .ln-ext-simul-form__summary dd {
+  min-width: 0;
+  margin: 0 0 0 auto;
+  color: var(--ln-ext-text-strong);
+  font-weight: 700;
+  text-align: end;
+}
+
+/* ---- Button --- */
+
+main.simul-form .ln-ext-simul-form__submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 52px;
+  margin: 0;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 750;
+  text-transform: none;
+}
+
+main.simul-form .ln-ext-simul-form__cancel {
+  justify-self: center;
+  color: var(--ln-ext-text-dim);
+  font-weight: 600;
+}
+
+main.simul-form .ln-ext-simul-form__cancel:hover {
+  color: var(--ln-ext-text-strong);
+}
+
+/* ---- Below 1020px --- */
+
+@media (max-width: 1019.98px) {
+  main.simul-form.box {
+    grid-template: 'title' auto 'aside' auto 'form' auto / minmax(0, 1fr);
+    padding: 0 12px 96px !important;
+  }
+
+  main.simul-form > h1.box__top {
+    position: static;
+    gap: 12px;
+    padding: 12px 0 !important;
+    box-shadow: none;
+    font-size: 26px;
+  }
+
+  main.simul-form > h1.box__top::before {
+    width: 42px;
+    height: 42px;
+  }
+
+  main.simul-form .ln-ext-simul-form__aside {
+    position: static;
+    margin-bottom: 18px;
+    padding-top: 0;
+  }
+
+  main.simul-form
+    .ln-ext-simul-form__aside
+    > :is(.ln-ext-simul-form__summary, .ln-ext-simul-form__submit, .ln-ext-simul-form__cancel) {
+    display: none;
+  }
+
+  main.simul-form [data-ln-ext-part='actions'] {
+    position: fixed;
+    z-index: 50;
+    inset: auto 0 0;
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    margin: 0 !important;
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom)) !important;
+    border-top: 1px solid var(--ln-ext-lift-6);
+    background: color-mix(in srgb, var(--ln-ext-bg-page) 88%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  main.simul-form [data-ln-ext-part='actions'] > a {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 10px;
+    background: var(--ln-ext-btn-grey);
+    box-shadow: var(--ln-ext-btn-grey-shadow);
+    color: var(--ln-ext-text-strong);
+    font-weight: 650;
+  }
+
+  main.simul-form [data-ln-ext-part='actions'] > button {
+    flex: 1;
+    justify-content: center;
+    height: 48px;
+    margin: 0;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1020px) and (max-width: 1259.98px) {
+  main.simul-form.box {
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+}
+
+/* The variants two by two, the position and the color one under the other. */
+@container (max-width: 680px) {
+  main.simul-form .variants {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main.simul-form [data-ln-ext-part='games'] > .form-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 799.98px) {
+  main.simul-form :is(.ln-ext-simul-form__head, fieldset[data-ln-ext-part]),
+  main.simul-form [data-ln-ext-part]:is([data-ln-ext-part='name'], [data-ln-ext-part='start']),
+  main.simul-form [data-ln-ext-part='description'] {
+    padding-inline: 16px !important;
+  }
+
+  main.simul-form .ln-ext-simul-form__head::after {
+    inset-inline-start: 25px;
+  }
+
+  main.simul-form .form-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Everyone's time and increment stay side by side: short and alike. */
+  main.simul-form [data-ln-ext-part='clock'] > .form-split:first-of-type {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  main.simul-form .ln-ext-simul-form__editor {
+    width: 42px;
+    padding: 0;
+    justify-content: center;
+    font-size: 0;
+  }
+}

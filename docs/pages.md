@@ -28,6 +28,7 @@ and a white knob, and a single big number in the state's color.
 | Arena tournaments | `/tournament` | 2     | the leaderboard beside the schedule is a plain list; a tournament's page is still Lichess's on a desktop                 |
 | Swiss tournaments | `/swiss`      | 2     |                                                                                                                          |
 | Simuls            | `/simul`      | 2     | sets the tone for 2; a simul's page is still Lichess's on a desktop                                                      |
+| Host a simul      | `/simul/new`  | 2     | its sections as cards, the variants as tiles, the simul's card and a summary beside the form; no signature yet           |
 
 ## Puzzles
 

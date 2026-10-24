@@ -1,0 +1,109 @@
+/* The simul form's clock and entry conditions (form.css): the time control in the
+ * clock's head, the heading over the host's extra time, the host's time for a simul of a
+ * fair size; an icon in each condition's field. */
+
+/* ---- Clock --- */
+
+main.simul-form [data-ln-ext-part='clock'] > legend + p {
+  margin: -12px 0 18px;
+  padding-inline-start: 50px;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+}
+
+main.simul-form .ln-ext-simul-form__chip {
+  margin-inline-start: auto;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-simul-clock) 15%, transparent);
+  color: var(--ln-ext-simul-clock);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+main.simul-form .ln-ext-simul-form__sub {
+  margin: 18px 0 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ln-ext-lift-6);
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+main.simul-form .ln-ext-simul-form__sub + .form-split {
+  margin-top: 0;
+}
+
+main.simul-form .ln-ext-simul-form__host {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 8px;
+  margin-top: 16px;
+  padding-block: 12px;
+  padding-inline: 48px 14px;
+  border: 1px dashed color-mix(in srgb, var(--ln-ext-simul-clock) 35%, transparent);
+  border-radius: 10px;
+  position: relative;
+  background: color-mix(in srgb, var(--ln-ext-simul-clock) 8%, transparent);
+}
+
+main.simul-form .ln-ext-simul-form__host::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 14px;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  background: var(--ln-ext-simul-clock);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alarm-clock.svg') center /
+    contain no-repeat;
+}
+
+main.simul-form .ln-ext-simul-form__host-time {
+  color: var(--ln-ext-text-strong);
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+}
+
+main.simul-form :is(.ln-ext-simul-form__host-note, .ln-ext-simul-form__host-others) {
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+}
+
+main.simul-form .ln-ext-simul-form__host-others {
+  grid-column: 1 / -1;
+}
+
+/* ---- Entry conditions --- */
+
+@supports (appearance: base-select) {
+  main.simul-form [data-ln-ext-part='entry'] select::before {
+    content: '';
+    flex: none;
+    width: 16px;
+    height: 16px;
+    background: var(--ln-ext-text-dim);
+    mask: var(--ln-ext-field-icon) center / contain no-repeat;
+  }
+}
+
+main.simul-form select[name='conditions.team.teamId'] {
+  --ln-ext-field-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+}
+
+main.simul-form select[name='conditions.accountAge'] {
+  --ln-ext-field-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+}
+
+main.simul-form select[name='conditions.minRating.rating'] {
+  --ln-ext-field-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-up-right-01.svg');
+}
+
+main.simul-form select[name='conditions.maxRating.rating'] {
+  --ln-ext-field-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-right-01.svg');
+}

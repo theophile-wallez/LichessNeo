@@ -105,6 +105,10 @@ so the logic can be unit-tested without a page.
   avatar's link to the settings'. `perf-stat` redraws a rating's stats page
   (`/@/<user>/perf/<perf>`) as cards, read off lila's markup with its labels,
   so they come in the page's language; Lichess's sections stay, hidden.
+- `simul-form`: the simul form's sections as cards, the host's color as
+  buttons, the clock's time control and the host's time with its extra
+  minutes, and beside the form the simul's card as the list will show it, a
+  summary and the form's button.
 - `player-card`: what the hover card says about a player besides Lichess's
   own fragment, from its public API and only while their name is hovered:
   who they are and when they last played, the rating they play most with its

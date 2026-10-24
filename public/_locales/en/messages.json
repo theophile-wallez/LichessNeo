@@ -1552,5 +1552,49 @@
   "zenExit": {
     "message": "Exit Zen mode",
     "description": "In Zen mode, the label of Lichess's Zen mode button, which leaves it."
+  },
+  "simulFormDetails": {
+    "message": "Details",
+    "description": "The simul form's card for the start time and the description."
+  },
+  "simulFormExtraTime": {
+    "message": "Your extra time",
+    "description": "The simul form's heading over the host's extra clock time, at the start and per player."
+  },
+  "simulFormClockWith": {
+    "message": "on your clock with $1 players",
+    "description": "After the host's time in the simul form's clock card (\"45 min\"); $1 is how many players."
+  },
+  "simulFormClockAlone": {
+    "message": "on your clock",
+    "description": "After the host's time in the simul form's clock card (\"20 min\"), when no time is added per player."
+  },
+  "simulFormClockOthers": {
+    "message": "Your opponents get $1 each.",
+    "description": "Below the host's time in the simul form; $1 is everyone else's initial time (\"20 min\")."
+  },
+  "simulFormPreview": {
+    "message": "Preview in the list",
+    "description": "Over the simul form's preview of the simul's card in the simuls list."
+  },
+  "simulFormYouPlay": {
+    "message": "You play",
+    "description": "The simul form's summary: the host's color."
+  },
+  "simulFormYourClock": {
+    "message": "Your clock",
+    "description": "The simul form's summary: the host's initial time."
+  },
+  "simulFormPerPlayer": {
+    "message": "$1 + $2 per player",
+    "description": "The host's initial time in the simul form's summary; $1 the time at the start, $2 the time added per player."
+  },
+  "simulFormConditions": {
+    "message": "$1 conditions",
+    "description": "The simul form's summary of its entry conditions, when several are set; $1 is how many."
+  },
+  "simulFormStarts": {
+    "message": "Starts",
+    "description": "The simul form's summary: the estimated start time."
   }
 }

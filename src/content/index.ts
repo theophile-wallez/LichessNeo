@@ -49,6 +49,7 @@ import { coachTitles } from './pages/coach-titles.ts';
 import { swiss } from './pages/swiss.ts';
 import { podium } from './pages/podium.ts';
 import { simulScores } from './pages/simul-scores.ts';
+import { simulForm } from './simul-form/index.ts';
 import { editorTools } from './pages/editor-tools.ts';
 import { forumLabels } from './pages/forum.ts';
 import { tv } from './pages/tv.ts';
@@ -137,6 +138,7 @@ const FEATURES = [
   swiss,
   podium,
   simulScores,
+  simulForm,
   editorTools,
   forumLabels,
   tv,

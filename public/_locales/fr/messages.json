@@ -1208,5 +1208,38 @@
   },
   "zenExit": {
     "message": "Quitter le mode Zen"
+  },
+  "simulFormDetails": {
+    "message": "Détails"
+  },
+  "simulFormExtraTime": {
+    "message": "Votre temps en plus"
+  },
+  "simulFormClockWith": {
+    "message": "à votre pendule avec $1 joueurs"
+  },
+  "simulFormClockAlone": {
+    "message": "à votre pendule"
+  },
+  "simulFormClockOthers": {
+    "message": "Vos adversaires ont $1 chacun."
+  },
+  "simulFormPreview": {
+    "message": "Aperçu dans la liste"
+  },
+  "simulFormYouPlay": {
+    "message": "Vous jouez"
+  },
+  "simulFormYourClock": {
+    "message": "Votre pendule"
+  },
+  "simulFormPerPlayer": {
+    "message": "$1 + $2 par joueur"
+  },
+  "simulFormConditions": {
+    "message": "$1 conditions"
+  },
+  "simulFormStarts": {
+    "message": "Début"
   }
 }
