@@ -3,7 +3,7 @@
 @import './counters-and-actions.css';
 @import './rating-cards.css';
 @import './rating-strip.css';
-@import './perf-stat.css';
+@import './perf-stat/index.css';
 @import './chart-and-about.css';
 @import './links-and-teams.css';
 @import './medals.css';

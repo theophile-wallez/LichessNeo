@@ -1,0 +1,311 @@
+/* ---- Rating stats: the cards --- */
+
+/* The stats page's cards (content/profile/perf-stat): its rating's above the chart, the
+ * counts, streaks and opponents under it. Lichess's sections stay in the page, hidden. */
+
+.perf-stat__content[data-ln-ext-perf] > section {
+  display: none !important;
+}
+
+/* The rating's own color, the accent for a variant without one. */
+.perf-stat {
+  --ln-ext-perf-color: var(--ln-ext-accent);
+}
+.perf-stat.bullet {
+  --ln-ext-perf-color: var(--ln-ext-mode-bullet-color);
+}
+.perf-stat.blitz {
+  --ln-ext-perf-color: var(--ln-ext-mode-blitz-color);
+}
+.perf-stat.rapid {
+  --ln-ext-perf-color: var(--ln-ext-mode-rapid-color);
+}
+.perf-stat.classical {
+  --ln-ext-perf-color: var(--ln-ext-mode-classical-color);
+}
+.perf-stat.correspondence {
+  --ln-ext-perf-color: var(--ln-ext-mode-correspondence-color);
+}
+.perf-stat.crazyhouse {
+  --ln-ext-perf-color: var(--ln-ext-mode-crazyhouse-color);
+}
+.perf-stat.chess960 {
+  --ln-ext-perf-color: var(--ln-ext-mode-chess960-color);
+}
+.perf-stat.kingOfTheHill {
+  --ln-ext-perf-color: var(--ln-ext-mode-koth-color);
+}
+.perf-stat.threeCheck {
+  --ln-ext-perf-color: var(--ln-ext-mode-three-check-color);
+}
+
+.ln-ext-perf [data-ln-ext-tone='green'] {
+  --ln-ext-perf-tone: var(--ln-ext-green);
+}
+.ln-ext-perf [data-ln-ext-tone='red'] {
+  --ln-ext-perf-tone: var(--ln-ext-red);
+}
+.ln-ext-perf [data-ln-ext-tone='orange'] {
+  --ln-ext-perf-tone: var(--ln-ext-orange);
+}
+.ln-ext-perf [data-ln-ext-tone='purple'] {
+  --ln-ext-perf-tone: var(--ln-ext-purple);
+}
+.ln-ext-perf [data-ln-ext-tone='cyan'] {
+  --ln-ext-perf-tone: var(--ln-ext-cyan);
+}
+.ln-ext-perf [data-ln-ext-tone='blue'] {
+  --ln-ext-perf-tone: var(--ln-ext-blue);
+}
+.ln-ext-perf [data-ln-ext-tone='dim'] {
+  --ln-ext-perf-tone: var(--ln-ext-text-dim);
+}
+
+/* Lichess dashes whatever has a tooltip in the box, a hint for its rating deviation: not the
+ * cards' titles, badges and chips. */
+.perf-stat__content .ln-ext-perf [title] {
+  border-bottom: none;
+  cursor: auto;
+}
+
+.ln-ext-perf {
+  display: grid;
+  gap: 14px;
+  font-family: var(--ln-ext-font);
+  font-variant-numeric: tabular-nums;
+}
+
+/* A container, so the first row lays out by its own width, whatever the menu and sidebar
+ * leave it. */
+.perf-stat > .ln-ext-perf--hero {
+  container-type: inline-size;
+  margin: 0 var(---box-padding, 20px) 20px;
+}
+
+.ln-ext-perf__row--hero {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.perf-stat__content > .ln-ext-perf--body {
+  margin: 6px 0 8px;
+}
+
+.ln-ext-perf__row {
+  display: grid;
+  gap: 14px;
+}
+
+.ln-ext-perf__row--figures {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.ln-ext-perf__row--streaks {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.ln-ext-perf__row--opponents {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Sections, which Lichess spaces out in the box. */
+.ln-ext-perf .ln-ext-perf__card {
+  min-width: 0;
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 14px;
+  background: var(--ln-ext-card-bg);
+}
+
+.ln-ext-perf__tile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ln-ext-perf-tone) 16%, transparent);
+  color: var(--ln-ext-perf-tone);
+  font-size: 16px;
+}
+
+/* Over Lichess's own headings in the box. */
+.ln-ext-perf h3:is(.ln-ext-perf__label, .ln-ext-perf__head) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ln-ext-perf h3.ln-ext-perf__head > b {
+  margin-inline-start: auto;
+  color: var(--ln-ext-text-strong);
+  font-size: 14px;
+}
+
+.ln-ext-perf__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.ln-ext-perf__chip {
+  --ln-ext-perf-tone: var(--ln-ext-text-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-perf-tone) 14%, transparent);
+  color: var(--ln-ext-perf-tone);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ---- The first row: rating, percentile, range --- */
+
+.ln-ext-perf__rating {
+  display: block;
+  color: var(--ln-ext-text-strong);
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ln-ext-perf__percentile {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.ln-ext-perf__percentile p {
+  margin: 0;
+  color: var(--ln-ext-text);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.ln-ext-perf__percentile p a {
+  color: var(--ln-ext-text-strong);
+  font-weight: 700;
+}
+
+.ln-ext-perf__ring {
+  position: relative;
+  flex: none;
+  width: 86px;
+  height: 86px;
+}
+
+.ln-ext-perf__ring svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  rotate: -90deg;
+}
+
+.ln-ext-perf__ring circle {
+  fill: none;
+  stroke: var(--ln-ext-lift-8);
+  stroke-width: 9;
+}
+
+.ln-ext-perf__ring circle + circle {
+  stroke: var(--ln-ext-perf-color);
+  stroke-linecap: round;
+}
+
+.ln-ext-perf__ring b {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--ln-ext-text-strong);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.ln-ext-perf__range {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.ln-ext-perf__bar {
+  position: relative;
+  height: 8px;
+  margin-top: 30px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--ln-ext-red) 75%, transparent),
+    color-mix(in srgb, var(--ln-ext-yellow) 60%, transparent),
+    color-mix(in srgb, var(--ln-ext-green) 80%, transparent)
+  );
+}
+
+.ln-ext-perf__bar > i {
+  position: absolute;
+  top: 50%;
+  left: var(--ln-ext-perf-at);
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 3px solid var(--ln-ext-bg-panel);
+  border-radius: 50%;
+  background: var(--ln-ext-text-strong);
+  translate: -50% -50%;
+}
+
+.ln-ext-perf__bar > em {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: var(--ln-ext-perf-at);
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: var(--ln-ext-bg-raised);
+  color: var(--ln-ext-text-strong);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  translate: -50% 0;
+}
+
+.ln-ext-perf__ends {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ln-ext-perf__end {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ln-ext-perf__end:last-child {
+  align-items: flex-end;
+  text-align: end;
+}
+
+.ln-ext-perf__end span {
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+}
+
+.ln-ext-perf__end b {
+  color: var(--ln-ext-perf-tone);
+  font-size: 26px;
+  line-height: 1.15;
+}
+
+.ln-ext-perf__end a {
+  color: var(--ln-ext-font-dimmer);
+  font-size: 12px;
+}

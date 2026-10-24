@@ -111,6 +111,13 @@ describe('the ratings as on Chess.com', () => {
       [equivalent('rapid', 1650.37), '1650.37 on Lichess'],
       ['60%', undefined],
     ]);
+    // Ours, on the same page, from Lichess's own rating.
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<strong class="ln-ext-perf__rating">1650</strong>',
+    );
+    tick();
+    expect(shown('.ln-ext-perf__rating')).toEqual([[equivalent('rapid', 1650), '1650 on Lichess']]);
     // The progress led to today's rating; the count beside it is no change.
     expect(shown('rating > span, .rp')).toEqual([
       [String(equivalentChange('classical', 1985, 15)), '+15 on Lichess'],

@@ -1,0 +1,49 @@
+/* ---- Rating stats: the title --- */
+
+/* A leaderboard place ("Classical Top 10!") as a pill after the name, in place of Lichess's
+ * cup drawn before it. Its words are the cup's tooltip, so they're Lichess's, translated. */
+
+main.page-menu > .perf-stat > .box__top > .box__top__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+main.page-menu > .perf-stat > .box__top > .box__top__title > a {
+  order: 1;
+}
+
+main.page-menu > .perf-stat .box__top__title .trophy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 5px 12px 5px 9px;
+  border: 1px solid var(--ln-ext-lift-12);
+  border-radius: 999px;
+  background: linear-gradient(var(--ln-ext-lift-12), var(--ln-ext-lift-4));
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+main.page-menu > .perf-stat .box__top__title .trophy::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion.svg') center / contain
+    no-repeat;
+}
+
+main.page-menu > .perf-stat .box__top__title .trophy::after {
+  content: attr(title);
+}
+
+main.page-menu > .perf-stat .box__top__title .trophy > img {
+  display: none;
+}

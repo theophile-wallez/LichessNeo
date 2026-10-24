@@ -72,7 +72,10 @@ export const SPOTS: readonly Spot[] = [
     speed: element => speedOfPath(element.closest('a')?.pathname),
     change: { find: changeIn('rating'), shows: 'after' },
   },
-  { selector: '.perf-stat h2 > strong:first-child', speed: () => speedOfPath(location.pathname) },
+  {
+    selector: '.perf-stat h2 > strong:first-child, .ln-ext-perf__rating',
+    speed: () => speedOfPath(location.pathname),
+  },
   // The hover card's chips.
   {
     selector: '.upt__info__ratings > span[data-icon]',

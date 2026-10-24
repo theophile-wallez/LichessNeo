@@ -102,7 +102,9 @@ so the logic can be unit-tested without a page.
   redraws.
 - `profile`: a profile's medals, from `/api/user`, its awards won more than
   once folded into one tile with their count, and on the user's own, their
-  avatar's link to the settings'.
+  avatar's link to the settings'. `perf-stat` redraws a rating's stats page
+  (`/@/<user>/perf/<perf>`) as cards, read off lila's markup with its labels,
+  so they come in the page's language; Lichess's sections stay, hidden.
 - `player-card`: what the hover card says about a player besides Lichess's
   own fragment, from its public API and only while their name is hovered:
   who they are and when they last played, the rating they play most with its

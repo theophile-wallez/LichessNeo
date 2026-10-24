@@ -1,0 +1,105 @@
+/* ---- Rating stats on a phone --- */
+
+/* The stats page (/@/<user>/perf/<speed>) below 560px: the player's name over the page's,
+ * beside the tile. Lichess kept them on one line at its desktop size, past the screen's edge. */
+@media (max-width: 559.98px) {
+  main.page-menu > .perf-stat > .box__top h1[data-ln-ext-icon] {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 2px;
+    font-size: 22px !important;
+  }
+
+  main.page-menu > .perf-stat > .box__top h1[data-ln-ext-icon]::before {
+    grid-row: span 2;
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    font-size: 24px;
+  }
+
+  main.page-menu > .perf-stat > .box__top h1 > a {
+    align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  main.page-menu > .perf-stat > .box__top h1 > span {
+    align-self: start;
+    color: var(--ln-ext-text-dim);
+    font-size: 15px;
+    font-weight: 700;
+  }
+}
+
+/* A first row too narrow for three cards: the rating and its percentile side by side, the
+ * ring over its sentence, and the range under both. */
+@container (max-width: 699.98px) {
+  .ln-ext-perf__row--hero {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ln-ext-perf__range {
+    grid-column: 1 / -1;
+  }
+
+  .ln-ext-perf__percentile {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .ln-ext-perf__percentile p {
+    font-size: 13px;
+  }
+
+  .ln-ext-perf__ring {
+    width: 72px;
+    height: 72px;
+  }
+
+  .ln-ext-perf__ring b {
+    font-size: 13px;
+  }
+
+  .ln-ext-perf__rating {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 559.98px) {
+  .ln-ext-perf .ln-ext-perf__card {
+    padding: 14px;
+  }
+
+  .ln-ext-perf__counts {
+    gap: 10px;
+  }
+
+  .ln-ext-perf__count {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .ln-ext-perf__count .ln-ext-perf__tile {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    font-size: 16px;
+  }
+
+  .ln-ext-perf__count b {
+    font-size: 16px;
+  }
+
+  .ln-ext-perf__result b {
+    font-size: 20px;
+  }
+
+  .ln-ext-perf__streak > b.ln-ext-perf__long {
+    font-size: 17px;
+  }
+}

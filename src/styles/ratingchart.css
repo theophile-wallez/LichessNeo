@@ -14,7 +14,7 @@
 /* On the stats page the container isn't a card, unlike the profile's. */
 .perf-stat > .rating-history-container.ln-ext-rchart-on {
   height: auto !important;
-  margin: 0 var(--box-padding, 20px) 8px;
+  margin: 0 var(---box-padding, 20px) 8px;
 }
 
 .ln-ext-rchart {

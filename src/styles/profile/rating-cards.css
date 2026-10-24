@@ -243,7 +243,8 @@
   --ln-ext-puzzle-icon: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/puzzle-streak.webp');
 }
 
-/* The stats page's title, after its rating's glyph (content/layout/marks.ts), on a tile. */
+/* The stats page's title, after its rating's glyph (content/layout/marks.ts), on a tile in
+ * the rating's color (profile/perf-stat/cards.css). */
 main.page-menu > .perf-stat > .box__top h1[data-ln-ext-icon] {
   display: flex;
   align-items: center;
@@ -258,11 +259,11 @@ main.page-menu > .perf-stat > .box__top h1[data-ln-ext-icon]::before {
   width: 52px;
   height: 52px;
   border-radius: 13px;
-  background: color-mix(in srgb, var(--ln-ext-accent) 24%, transparent);
+  background: color-mix(in srgb, var(--ln-ext-perf-color) 18%, transparent);
   box-shadow:
     inset 0 1px #ffffff26,
-    0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 40%, transparent);
-  color: var(--ln-ext-text-strong);
+    0 0 0 1px color-mix(in srgb, var(--ln-ext-perf-color) 35%, transparent);
+  color: var(--ln-ext-perf-color);
   font-family: lichess;
   font-size: 28px;
   font-weight: normal;
