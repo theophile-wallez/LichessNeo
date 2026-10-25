@@ -1604,5 +1604,41 @@
   "simulFormStarts": {
     "message": "Starts",
     "description": "The simul form's summary: the estimated start time."
+  },
+  "paletteSearch": {
+    "message": "Search",
+    "description": "The sidebar's search button, and the command palette's name."
+  },
+  "palettePlaceholder": {
+    "message": "Search a player, a page, an action…",
+    "description": "The command palette's field, empty."
+  },
+  "paletteGroupPages": {
+    "message": "Pages",
+    "description": "The command palette's group of the sidebar's pages."
+  },
+  "paletteGroupActions": {
+    "message": "Actions",
+    "description": "The command palette's group of actions (theme, settings…)."
+  },
+  "paletteGroupPlayers": {
+    "message": "Players",
+    "description": "The command palette's group of players found."
+  },
+  "paletteMyProfile": {
+    "message": "My profile",
+    "description": "The command palette's action to go to one's own profile."
+  },
+  "paletteNothing": {
+    "message": "Nothing found",
+    "description": "The command palette when nothing matches."
+  },
+  "paletteMove": {
+    "message": "to move",
+    "description": "The command palette's hint after the arrow keys."
+  },
+  "paletteOpen": {
+    "message": "to open",
+    "description": "The command palette's hint after the Enter key."
   }
 }

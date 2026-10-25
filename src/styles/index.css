@@ -16,6 +16,7 @@
 @import './pages/index.css';
 @import './editor/index.css';
 @import './dropdowns/index.css';
+@import './command-palette.css';
 @import './powertip/index.css';
 @import './profile/index.css';
 @import './ratingchart.css';

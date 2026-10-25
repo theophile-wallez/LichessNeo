@@ -51,4 +51,15 @@ describe('the sidebar’s fold', () => {
       { transform: 'none' },
     ]);
   });
+
+  it('names each flyout after its section, without the hidden "lichess.org" of Play', () => {
+    document.body.innerHTML =
+      '<header id="top"><a class="site-title" href="/">lichess</a><nav id="topnav"><section>' +
+      '<a href="/"><span class="play">Play</span><span class="home">lichess.org</span></a>' +
+      '<div role="group"></div></section></nav></header>';
+    sidebarCollapse.start();
+    expect(queryOne(document, '#topnav section > div', HTMLElement)?.dataset.lnExtLabel).toBe(
+      'Play',
+    );
+  });
 });

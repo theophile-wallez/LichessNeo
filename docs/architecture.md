@@ -95,6 +95,10 @@ so the logic can be unit-tested without a page.
   switch, the copy fields kept out of Chrome's refill on going back, a dropdown
   closed by a click outside it.
 - `charts`.
+- `command-palette`: the sidebar's search button and the palette it opens
+  (⌘K / Ctrl+K, or Lichess's own `s` and `/`, which focus its search box,
+  kept out of sight): the sidebar's pages, a few actions, the settings' pages,
+  and the players Lichess finds, picked with the arrows.
 - `coach`: the coach's 3D mascots, the coaches' names and the Game Review's
   coach picker.
 - `computer`: the computer's robot and the level slider of the computer's

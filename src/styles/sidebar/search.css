@@ -1,0 +1,97 @@
+/* ---- Search --- */
+
+/* The button that opens the command palette (content/command-palette), in the place of
+ * Lichess's search box, which stays in the page out of sight: Lichess's shortcuts focus it,
+ * and its focus opens the palette. A box in the sidebar and the header, its magnifier alone
+ * folded and in Lichess's top bar below 1020px. */
+
+#top #clinput {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#ln-ext-search {
+  order: -1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  /* Lichess's top bar glyphs' size and color, as the light / dark switch's. */
+  color: var(--ln-ext-neutral-13);
+  font-size: 16px;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+#ln-ext-search:hover {
+  color: var(--ln-ext-text-strong);
+}
+
+#ln-ext-search :is(.ln-ext-search__label, .ln-ext-search__keys) {
+  display: none;
+}
+
+@media (min-width: 1020px) {
+  #top #ln-ext-search {
+    order: 0;
+    flex: 1 0 100%;
+    height: 32px !important;
+    padding: 0 8px !important;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px var(--ln-ext-lift-7);
+    line-height: 1 !important;
+  }
+
+  #top #ln-ext-search:hover {
+    background: var(--ln-ext-sb-hover);
+  }
+
+  #top #ln-ext-search .ln-ext-search__label {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: start;
+    color: var(--ln-ext-text-dim);
+    font-size: 13.5px;
+  }
+
+  #top #ln-ext-search .ln-ext-search__keys {
+    display: block;
+    padding: 3px 5px;
+    border-radius: 5px;
+    background: var(--ln-ext-lift-7);
+    color: var(--ln-ext-text-dim);
+    font: 600 11px/1 var(--ln-ext-font);
+  }
+
+  /* Folded, in the rail too: the magnifier alone, centred. */
+  html[data-ln-ext-sidebar~='collapsed'] #top #ln-ext-search {
+    justify-content: center;
+    padding: 0 !important;
+    box-shadow: none;
+  }
+
+  html[data-ln-ext-sidebar~='collapsed']
+    #top
+    #ln-ext-search
+    :is(.ln-ext-search__label, .ln-ext-search__keys) {
+    display: none;
+  }
+
+  html[data-ln-ext-sidebar='header'] #top #ln-ext-search {
+    flex: none;
+    width: 200px;
+    height: 36px !important;
+    margin-inline-end: 4px;
+  }
+}

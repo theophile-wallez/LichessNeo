@@ -14,6 +14,7 @@ import { preferencesButton } from './sidebar/preferences-button.ts';
 import { schemeToggle } from './sidebar/scheme-toggle.ts';
 import { currentSection } from './sidebar/current.ts';
 import { accountRating } from './sidebar/account-rating.ts';
+import { commandPalette } from './command-palette/index.ts';
 import { coachChoice } from './bootstrap/coach-choice.ts';
 import { fideOffset } from './pages/fide.ts';
 import { marks } from './layout/marks.ts';
@@ -104,6 +105,7 @@ const FEATURES = [
   lobbyLink,
   schemeToggle,
   preferencesButton,
+  commandPalette,
   currentSection,
   coachChoice,
   fideOffset,

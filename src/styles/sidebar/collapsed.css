@@ -2,8 +2,8 @@
 
 /* The toggle beside the logo, and the sidebar folded to its icons
  * (content/sidebar/navigation.ts sets data-ln-ext-sidebar on <html>). Folded, a flyout
- * opens under its section's label, and the search box floats out of its icon. The rail
- * is folded too, its labels under its icons (rail.css). */
+ * opens under its section's label. The rail is folded too, its labels under its icons
+ * (rail.css). */
 
 #ln-ext-sidebar-toggle {
   display: none;
@@ -156,35 +156,6 @@
   html[data-ln-ext-sidebar~='collapsed'] #top .site-buttons {
     justify-content: center;
     padding-inline: 8px !important;
-  }
-
-  /* Lichess focuses the search on hover and drops it on leaving the box: the field floats
-   * flush against the icon, inside the box, so the pointer can reach it. */
-  html[data-ln-ext-sidebar~='collapsed'] #top #clinput {
-    position: relative;
-    justify-content: center;
-    box-shadow: none;
-  }
-
-  html[data-ln-ext-sidebar~='collapsed'] #top #clinput input {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 0 !important;
-    height: 32px;
-    padding: 0 !important;
-    opacity: 0;
-  }
-
-  html[data-ln-ext-sidebar~='collapsed'] body.clinput #top #clinput input {
-    width: 260px !important;
-    padding: 0 10px !important;
-    border-radius: 8px;
-    background: var(--ln-ext-neutral-5) !important;
-    box-shadow:
-      inset 0 0 0 1px var(--ln-ext-lift-8),
-      var(--ln-ext-float-shadow, 0 12px 32px var(--ln-ext-shade-50));
-    opacity: 1;
   }
 
   html[data-ln-ext-sidebar~='collapsed'] #top .signin-or-signup .signup {

@@ -1247,5 +1247,32 @@
   },
   "simulFormStarts": {
     "message": "Début"
+  },
+  "paletteSearch": {
+    "message": "Rechercher"
+  },
+  "palettePlaceholder": {
+    "message": "Un joueur, une page, une action…"
+  },
+  "paletteGroupPages": {
+    "message": "Pages"
+  },
+  "paletteGroupActions": {
+    "message": "Actions"
+  },
+  "paletteGroupPlayers": {
+    "message": "Joueurs"
+  },
+  "paletteMyProfile": {
+    "message": "Mon profil"
+  },
+  "paletteNothing": {
+    "message": "Rien trouvé"
+  },
+  "paletteMove": {
+    "message": "naviguer"
+  },
+  "paletteOpen": {
+    "message": "ouvrir"
   }
 }

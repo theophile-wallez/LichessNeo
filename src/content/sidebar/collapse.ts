@@ -65,6 +65,10 @@ function toggle(): void {
   }, MOVE_MS);
 }
 
+/** A section's name, as its link says it: Play's link adds "lichess.org", hidden. */
+export const sectionName = (link: HTMLAnchorElement): string =>
+  (queryOne(link, '.play', HTMLElement) ?? link).textContent.trim();
+
 /** Adds the toggle after the logo, and each section's label to its flyout. */
 function dressSidebar(): void {
   const title = queryOne(document, '#top .site-title', HTMLElement);
@@ -75,7 +79,7 @@ function dressSidebar(): void {
   for (const section of queryAll(document, '#topnav section', HTMLElement)) {
     const link = queryOne(section, ':scope > a', HTMLAnchorElement);
     const flyout = queryOne(section, ':scope > div', HTMLElement);
-    if (link && flyout) setData(flyout, 'lnExtLabel', link.textContent.trim());
+    if (link && flyout) setData(flyout, 'lnExtLabel', sectionName(link));
   }
   const donate = document.getElementById('ln-ext-donate');
   if (donate) setData(donate, 'lnExtLabel', donate.textContent.trim());

@@ -97,38 +97,6 @@
     font-size: 18.5px;
   }
 
-  #top #clinput {
-    order: 0;
-    flex: 1 0 100%;
-    height: 32px !important;
-    align-items: center;
-    border-radius: 8px;
-    box-shadow: inset 0 0 0 1px var(--ln-ext-lift-7);
-  }
-
-  /* The magnifier as far in as the links' icons above it (Lichess pads it 3px). Folded, it
-   * stands centred alone, in the rail too. */
-  html:not([data-ln-ext-sidebar~='collapsed']) #top #clinput .link {
-    padding-inline: 8px 4px !important;
-  }
-
-  #top #clinput input {
-    width: 100% !important;
-    padding: 0 4px !important;
-    line-height: 32px !important;
-    font-size: 13.5px;
-    color: var(--ln-ext-text) !important;
-  }
-
-  #top #clinput input::placeholder {
-    color: var(--ln-ext-text-dim);
-  }
-
-  #top #clinput:hover,
-  #top #clinput:focus-within {
-    background: var(--ln-ext-sb-hover);
-  }
-
   #top .signin-or-signup {
     order: 1;
     flex: 1 0 100%;
@@ -210,17 +178,6 @@
     left: calc(var(--ln-ext-sidebar-w) + 8px) !important;
     max-height: calc(100dvh - 24px);
     overflow-y: auto;
-  }
-
-  /* Search suggestions too: under the search box they'd open off screen. */
-  #top #clinput .complete-list {
-    position: fixed !important;
-    top: auto !important;
-    bottom: 12px;
-    left: calc(var(--ln-ext-sidebar-w) + 8px);
-    width: 280px !important;
-    max-height: calc(100dvh - 24px);
-    overflow-y: auto !important;
   }
 
   #top .site-buttons .shown .toggle {

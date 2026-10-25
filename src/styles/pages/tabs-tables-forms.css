@@ -171,12 +171,6 @@ input[type='file']::file-selector-button:hover {
   outline-offset: 2px;
 }
 
-/* The sidebar search box stays borderless. */
-#top #clinput input {
-  border: none !important;
-  background: transparent !important;
-}
-
 /* An input with a button glued to it reads as one control: square the joined corners
  * and drop the button's shadow, which hung below the input. */
 input:not([type='hidden']):has(+ .button) {
