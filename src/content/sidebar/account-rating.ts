@@ -10,6 +10,7 @@ import {
 } from '#shared/storage.ts';
 import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
 import { chesscomShown } from '#shared/chesscom-rating/shown.ts';
+import { onOwnName, ownName } from '#shared/own-name.ts';
 import { onSettings, type Settings } from '#content/settings/settings.ts';
 import {
   pickedRating,
@@ -32,6 +33,8 @@ import {
 // Lichess is asked again once it's 5 minutes old, and the home page's speed
 // cards bring it a fresh one each time they're drawn. With the Chess.com
 // ratings on, the pill shows the rating's equivalent, where the speed has one.
+// Folded, the sidebar draws the player as their name's initial over the rating,
+// the one they picked here if they did (#shared/own-name.ts).
 
 const MAX_AGE_MS = 5 * 60 * 1000;
 
@@ -65,6 +68,19 @@ function show(kept: Kept | null): void {
   setStyleProperty(root, '--ln-ext-account-chars', text && String(text.length));
 }
 
+// The signed-in user, whose initial the folded sidebar shows.
+let account: string | null = null;
+
+function showInitial(): void {
+  const name = account && (ownName() ?? account);
+  const initial = name && Array.from(name)[0]?.toUpperCase();
+  setStyleProperty(
+    document.documentElement,
+    '--ln-ext-account-initial',
+    initial ? JSON.stringify(initial) : null,
+  );
+}
+
 /** Keeps and shows the ratings of a profile just asked of Lichess. */
 export function keepAccountRating(user: string, profile: z.infer<typeof UserSchema>): void {
   const top = topRating(profile);
@@ -94,6 +110,8 @@ export async function fetchProfile(user: string): Promise<z.infer<typeof UserSch
 
 async function refresh(kept: Kept | null): Promise<void> {
   const user = document.body.dataset.user;
+  account = user ?? null;
+  showInitial();
   // Signed out, or another account than the one kept.
   if (!user || !document.getElementById('user_tag')) return show(null);
   const mine = kept?.user === user ? kept : null;
@@ -111,6 +129,9 @@ export const accountRating: Feature = {
     chesscom = chesscomShown();
     const kept = readStoredJson(StorageKey.accountRating, KeptSchema);
     if (kept) show(kept);
+    account = kept?.user ?? null;
+    showInitial();
+    onOwnName(showInitial);
     onDomReady(() => void refresh(kept));
     onSettings(followSettings);
   },

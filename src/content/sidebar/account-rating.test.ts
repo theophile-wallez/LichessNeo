@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
 import { keepChesscomShown } from '#shared/chesscom-rating/shown.ts';
+import { keepOwnName } from '#shared/own-name.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { accountRating } from './account-rating.ts';
 
@@ -35,6 +36,8 @@ const shown = (): [string | undefined, string] => [
 
 const chars = (): string => root.style.getPropertyValue('--ln-ext-account-chars');
 
+const initial = (): string => root.style.getPropertyValue('--ln-ext-account-initial');
+
 let fetchUser: ReturnType<typeof vi.fn<(url: string) => Promise<Response>>>;
 
 beforeEach(() => {
@@ -46,6 +49,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.unstubAllGlobals();
+  keepOwnName(null);
   localStorage.clear();
   delete root.dataset.lnExtAccountPerf;
   root.removeAttribute('style');
@@ -125,5 +129,22 @@ describe('the account rating', () => {
     const label = String(chesscomRating('blitz', 1600)?.rating);
     expect(shown()).toEqual(['blitz', JSON.stringify(label)]);
     expect(chars()).toBe(String(label.length));
+  });
+
+  it('gives the folded sidebar the account’s initial', () => {
+    signIn('eresy');
+    keep('eresy', Date.now());
+    accountRating.start();
+    expect(initial()).toBe('"E"');
+  });
+
+  it('follows the name the player picked here, and back', async () => {
+    signIn('eresy');
+    accountRating.start();
+    await flush();
+    keepOwnName('alex');
+    expect(initial()).toBe('"A"');
+    keepOwnName(null);
+    expect(initial()).toBe('"E"');
   });
 });

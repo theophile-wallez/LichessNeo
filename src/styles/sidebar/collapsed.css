@@ -210,30 +210,70 @@
       no-repeat;
   }
 
-  /* Signed in: the avatar alone. */
+  /* Signed in: the name's initial as an avatar, the rating under it in its color
+   * (content/sidebar/account-rating.ts puts both on <html>). The rating's color and font are account-rating.css's. */
   html[data-ln-ext-sidebar~='collapsed'] #top #user_tag {
-    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40px !important;
     padding: 0 !important;
     font-size: 0 !important;
+    /* The name's line, hidden, takes no room. */
+    line-height: 0 !important;
+  }
+
+  html[data-ln-ext-sidebar~='collapsed'][data-ln-ext-account-perf] #top #user_tag {
+    height: 52px !important;
+  }
+
+  html[data-ln-ext-sidebar~='collapsed'] #top #user_tag::before {
+    content: var(--ln-ext-account-initial, '');
+    position: static;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--ln-ext-lift-12);
+    color: var(--ln-ext-text-strong);
+    font-family: var(--ln-ext-font);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+    transform: none;
   }
 
   html[data-ln-ext-sidebar~='collapsed'] #top #user_tag::after {
-    right: 50%;
-    transform: translate(50%, -50%);
+    display: none !important;
   }
 
-  /* With a rating, its speed's glyph alone, in the pill's place. */
-  html[data-ln-ext-sidebar~='collapsed'] #top #user_tag::before {
-    display: none;
-  }
-
-  /* With a rating, its speed's glyph alone. */
   html[data-ln-ext-sidebar~='collapsed'][data-ln-ext-account-perf] #top #user_tag::after {
-    content: var(--ln-ext-account-glyph);
+    display: block !important;
+    position: static;
     width: auto;
+    margin-top: 4px !important;
     padding: 0;
     background: none;
-    font-family: lichess;
-    font-size: 22px !important;
+    font-size: 10px !important;
+    transform: none;
+  }
+
+  /* Smaller on a low window, so the buttons under the nav still fit. */
+  @media (max-height: 760px) {
+    html[data-ln-ext-sidebar~='collapsed'][data-ln-ext-account-perf] #top #user_tag {
+      height: 42px !important;
+    }
+
+    html[data-ln-ext-sidebar~='collapsed'] #top #user_tag::before {
+      width: 26px;
+      height: 26px;
+      font-size: 12.5px;
+    }
+
+    html[data-ln-ext-sidebar~='collapsed'][data-ln-ext-account-perf] #top #user_tag::after {
+      margin-top: 2px !important;
+    }
   }
 }
