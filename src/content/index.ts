@@ -73,6 +73,7 @@ import { playerCard } from './player-card/index.ts';
 import { powertip } from './ui/powertip.ts';
 import { tooltip } from './ui/tooltip.ts';
 import { copyFields } from './ui/copy-fields.ts';
+import { menus } from './ui/menus.ts';
 import { tabs } from './ui/tabs.ts';
 import { notices } from './notices/index.ts';
 import { devReload } from './dev/reload.ts';
@@ -162,6 +163,7 @@ const FEATURES = [
   powertip,
   tooltip,
   copyFields,
+  menus,
   tabs,
   notices,
   devReload,

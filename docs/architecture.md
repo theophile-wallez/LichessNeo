@@ -92,7 +92,8 @@ so the logic can be unit-tested without a page.
 - `pages`.
 - `ui`: tooltips, hover card, tab bars, users' avatars, the user's own name
   where Lichess writes it, the interface's Foley sounds behind the settings'
-  switch, the copy fields kept out of Chrome's refill on going back.
+  switch, the copy fields kept out of Chrome's refill on going back, a dropdown
+  closed by a click outside it.
 - `charts`.
 - `coach`: the coach's 3D mascots, the coaches' names and the Game Review's
   coach picker.
