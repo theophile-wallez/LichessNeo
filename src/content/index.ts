@@ -40,6 +40,7 @@ import { gameIntro } from './game/intro/index.ts';
 import { coachMessage } from './game/coach-message.ts';
 import { boardInset } from './layout/board-inset.ts';
 import { evalGauge } from './analysis/eval-gauge.ts';
+import { engineSettings } from './analysis/engine-settings.ts';
 import { puzzle } from './puzzle/index.ts';
 import { learnCoach } from './learn/coach.ts';
 import { extensionSettings } from './settings/index.ts';
@@ -129,6 +130,7 @@ const FEATURES = [
   coachMessage,
   boardInset,
   evalGauge,
+  engineSettings,
   puzzle,
   learnCoach,
   extensionSettings,

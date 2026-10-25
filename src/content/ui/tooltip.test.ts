@@ -182,6 +182,21 @@ describe('tooltips', () => {
     expect(shown()?.textContent).toBe('Report');
   });
 
+  it('shows a puzzle’s link to playing it against the computer, an icon only', () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main class="puzzle"><div class="puzzle__feedback after"><div class="puzzle__more">' +
+        '<a class="practice button button-empty" href="/analysis#practice" data-icon="" title="Play against computer"></a>' +
+        '</div></div></main>',
+    );
+    const practice = document.querySelector('a.practice');
+    if (!practice) throw new Error('no practice link');
+    hover(practice);
+    expect(practice.hasAttribute('title')).toBe(false);
+    vi.advanceTimersByTime(250);
+    expect(shown()?.textContent).toBe('Play against computer');
+  });
+
   it('shows an opening’s way back, popularity and results in place of their title', () => {
     document.body.insertAdjacentHTML(
       'beforeend',

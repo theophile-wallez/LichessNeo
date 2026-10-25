@@ -60,8 +60,10 @@
     gap: 6px;
     box-sizing: border-box;
     min-width: 0;
+    --ln-ext-session-pad: 12px;
+
     margin: 12px 0 0 !important;
-    padding: 10px 12px;
+    padding: 10px var(--ln-ext-session-pad);
     overflow-x: auto;
     border-radius: 12px;
     background: var(--ln-ext-bg-panel);
@@ -82,21 +84,15 @@
      first, next to the buttons; the moves scroll in a few rows under it. */
   main.puzzle .puzzle__tools {
     --ln-ext-coach-h: 114px;
+    /* The review's coach, 34px in the card for its arms: the fox waves past the review's 24px
+       (AGENTS.md, "The coach talks in a card"); coach 20 reaches 21px past its box's right. */
+    --ln-ext-coach-left: 44px;
+    --ln-ext-coach-arms: 32px;
 
     grid-template-areas: 'card' 'ceval' 'moves' !important;
     grid-template-rows: auto auto auto !important;
     height: auto !important;
     margin-top: 12px;
-  }
-
-  /* The review's coach, 34px in the card (which sits 10px in) for its arms: the fox waves
-     past the review's 24px (AGENTS.md, "The coach talks in a card"). */
-  main.puzzle .ln-ext-puzzle-coach {
-    margin-left: 44px;
-  }
-
-  main.puzzle .puzzle__feedback:not(.after) {
-    padding-left: calc(var(--ln-ext-coach-w) + 36px) !important;
   }
 
   main.puzzle .puzzle__moves {

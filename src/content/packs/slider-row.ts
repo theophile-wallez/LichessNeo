@@ -1,7 +1,8 @@
 import ArrowTurnBackwardIcon from '@hugeicons/core-free-icons/ArrowTurnBackwardIcon';
-import { createElement, setStyleProperty } from '#shared/dom.ts';
+import { createElement } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
+import { setSliderFill } from '#shared/slider-fill.ts';
 import type { StoredOption } from './stored-option.ts';
 
 // A setting that takes a number: a slider, which the page follows as it's
@@ -47,8 +48,7 @@ export function buildSlider(spec: SliderSpec): Slider {
     if (input.valueAsNumber !== shown) input.value = String(shown);
     value.textContent = `${shown}${unit}`;
     reset.disabled = shown === fallback;
-    // The track is filled up to the thumb.
-    setStyleProperty(input, '--ln-ext-slider-fill', `${((shown - min) / (max - min)) * 100}%`);
+    setSliderFill(input);
   };
   const choose = (chosen: number): void => {
     setting.choose(chosen);

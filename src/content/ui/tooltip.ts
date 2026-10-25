@@ -13,7 +13,8 @@ import { evalOf, placeTooltip, splitShortcut } from './tooltip-layout.ts';
 // results' parts and its way back to its parent say what they are in a title; a theme's
 // settings in the user menu say what each does; a variation's move gives its eval, and a
 // move's glyph its name. A rating shown as on Chess.com gives its Lichess one, anywhere but
-// in the review, whose own tooltip does. A profile's award names itself.
+// in the review, whose own tooltip does. A profile's award names itself, and a puzzle's link to
+// playing its position against the computer is an icon only.
 const TARGETS = [
   'main :is(button:is([title], [data-ln-ext-tip]), a.tv-channel[data-ln-ext-tip]):not(#ln-ext-review *)',
   'main .board-editor__tools .actions > a[data-ln-ext-tip]',
@@ -24,6 +25,7 @@ const TARGETS = [
   'main.opening .result-bar > span:is([title], [data-ln-ext-tip])',
   'main.opening h1.opening__title > a:is([title], [data-ln-ext-tip])',
   'main.analyse .tview2 move > :is(san, glyph):is([title], [data-ln-ext-tip])',
+  'main.puzzle .puzzle__more > a.practice:is([title], [data-ln-ext-tip])',
   '#dasher_app .ln-ext-src-options > button[data-ln-ext-tip]',
   '[data-ln-ext-lichess-rating][data-ln-ext-tip]',
 ].join(', ');

@@ -7,12 +7,35 @@
 @media (min-width: 1259.3px), (max-width: 1019.98px) {
   main.puzzle .puzzle__tools {
     --ln-ext-coach-h: 140px;
-    --ln-ext-coach-w: calc(var(--ln-ext-coach-h) * 1.09);
+    /* The coach's box from the cell's edge, then room for the arms it waves past it (coach 20's
+       reach 26px at 140px). */
+    --ln-ext-coach-left: 40px;
+    --ln-ext-coach-arms: 40px;
+    --ln-ext-card-foot-h: 68px;
 
+    container: ln-ext-puzzle-tools / inline-size;
     display: grid !important;
     grid-template-rows: auto minmax(0, 1fr) auto;
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'ceval' 'moves' 'card';
+  }
+
+  /* Worked out on the card and the coach, so that a narrow panel's smaller coach (below) counts:
+     the words start after the coach and its arms, the card sitting 10px in. */
+  main.puzzle .puzzle__tools > :is(.puzzle__feedback, .ln-ext-puzzle-coach) {
+    --ln-ext-coach-w: calc(var(--ln-ext-coach-h) * 1.09);
+    --ln-ext-coach-room: calc(
+      var(--ln-ext-coach-left) - 10px + var(--ln-ext-coach-w) + var(--ln-ext-coach-arms)
+    );
+  }
+
+  /* A panel narrower than its widest (440px) leaves the words too little room by a full-size
+     coach. */
+  @container ln-ext-puzzle-tools (max-width: 399.98px) {
+    main.puzzle .puzzle__tools > :is(.puzzle__feedback, .ln-ext-puzzle-coach) {
+      --ln-ext-coach-h: 100px;
+      --ln-ext-coach-arms: 28px;
+    }
   }
 
   main.puzzle .puzzle__tools > .ceval-wrap {
@@ -32,8 +55,7 @@
   }
 
   main.puzzle .puzzle__feedback:not(.after) {
-    /* The mascot is narrower than its box: the words start over the box's empty edge. */
-    padding: 16px 16px 16px calc(var(--ln-ext-coach-w) + 20px) !important;
+    padding: 16px 16px 16px var(--ln-ext-coach-room) !important;
   }
 
   /* Over the coach, whose arms reach past its box. */
@@ -81,9 +103,6 @@
   }
 
   main.puzzle .puzzle__feedback:is(.good, .fail) .icon {
-    box-shadow:
-      inset 0 1px 0 #ffffff40,
-      0 0 0 4px color-mix(in srgb, var(--ln-ext-feedback) 18%, transparent);
     font-size: 19px !important;
     line-height: 34px !important;
   }
@@ -111,7 +130,7 @@
     grid-area: card;
     align-self: end;
     justify-self: start;
-    margin: 0 0 10px 40px;
+    margin: 0 0 10px var(--ln-ext-coach-left);
     clip-path: inset(-60% -60% 0);
     cursor: default;
     pointer-events: none;
@@ -126,52 +145,80 @@
     width: 180%;
   }
 
-  /* Solved or failed: the title and the next button beside the coach, who fades out above
-     the row of smaller buttons. */
+  /* Solved or failed: the verdict and the rating's change beside the coach, who stands on a
+     line over one row of buttons: the next one, then the smaller ones. */
   main.puzzle .puzzle__feedback.after {
     display: grid !important;
-    grid-template-columns: calc(var(--ln-ext-coach-w) + 4px) minmax(0, 1fr);
-    grid-template-areas:
-      '. title'
-      '. next'
-      'more more';
-    gap: 10px 0 !important;
-    padding: 16px !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: minmax(0, 1fr) auto auto minmax(12px, 1fr) var(--ln-ext-card-foot-h);
+    grid-template-areas: '. .' 'title title' 'rating rating' '. .' 'next more';
+    gap: 0 !important;
+    min-height: calc(var(--ln-ext-coach-h) + 16px + var(--ln-ext-card-foot-h));
+    padding: 16px 16px 0 !important;
+    background:
+      linear-gradient(var(--ln-ext-lift-8), var(--ln-ext-lift-8)) left 0 bottom
+        var(--ln-ext-card-foot-h) / 100% 1px no-repeat,
+      var(--ln-ext-bg-raised) !important;
+  }
+
+  /* The coach's room as a margin, not a column: the buttons' row keeps the card's width. */
+  main.puzzle .puzzle__feedback.after :is(.complete, .ln-ext-puzzle-result) {
+    margin-left: calc(var(--ln-ext-coach-room) - 16px);
   }
 
   main.puzzle .puzzle__feedback.after .complete {
-    display: flex;
-    flex-direction: column;
     grid-area: title;
     align-items: flex-start;
-    justify-content: center;
-    /* With the next button and the gap, as tall as the coach over the card's padding. */
-    min-height: calc(var(--ln-ext-coach-h) - 70px);
+    justify-content: flex-start;
     text-align: start;
   }
 
+  main.puzzle .puzzle__feedback.after .ln-ext-puzzle-result {
+    grid-area: rating;
+    justify-content: flex-start;
+    margin-top: 8px;
+  }
+
+  /* Its label wraps where the row leaves it too little room. */
   main.puzzle .puzzle__feedback.after .continue {
     grid-area: next;
-    justify-self: end;
-    padding: 10px 18px 10px 14px !important;
+    align-self: center;
+    height: 44px;
+    padding: 0 14px 0 12px !important;
     font-size: 15px !important;
-    /* On one line: in a narrow panel it reaches over the coach's side. */
-    white-space: nowrap;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  main.puzzle .puzzle__feedback.after .continue icon {
+    flex: none;
   }
 
   main.puzzle .puzzle__feedback.after .continue icon::before {
     font-size: 1.2em !important;
   }
 
+  /* A margin, not a gap: with no small buttons the next one keeps the row. */
   main.puzzle .puzzle__feedback.after .puzzle__more {
     grid-area: more;
+    align-self: center;
+    flex-wrap: nowrap !important;
+    margin-left: 8px;
   }
 
+  main.puzzle .puzzle__feedback.after .puzzle__more .button {
+    flex: 0 0 44px !important;
+    height: 44px;
+  }
+
+  /* "Did you like this puzzle?", for new players: no room in the row; the thumbs' titles say it. */
+  main.puzzle .puzzle__feedback.after .puzzle__vote__help {
+    display: none;
+  }
+
+  /* The card sits 10px into its cell. */
   main.puzzle .puzzle__feedback.after ~ .ln-ext-puzzle-coach {
-    align-self: start;
-    margin-top: 10px;
-    clip-path: inset(-60% -60% 0);
-    mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
+    margin-bottom: calc(10px + var(--ln-ext-card-foot-h));
   }
 
   /* With no coach (coach-avatar.css), the words and the buttons take the card. */
@@ -184,12 +231,15 @@
   }
 
   html[data-ln-ext-coach='none'] main.puzzle .puzzle__feedback.after {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'title' 'next' 'more';
+    grid-template-rows: auto auto var(--ln-ext-card-foot-h);
+    grid-template-areas: 'title title' 'rating rating' 'next more';
   }
 
-  html[data-ln-ext-coach='none'] main.puzzle .puzzle__feedback.after .complete {
-    min-height: 0;
+  html[data-ln-ext-coach='none']
+    main.puzzle
+    .puzzle__feedback.after
+    :is(.complete, .ln-ext-puzzle-result) {
+    margin-left: 0;
   }
 }
 

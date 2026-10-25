@@ -85,15 +85,18 @@ main.puzzle .tview2-column > move.empty {
   font-weight: 400 !important;
 }
 
-/* Right and wrong moves take their color, the verdict a badge before them. */
+/* Right and wrong moves take their color, the verdict a badge before them, its mark in that
+   color on a tint of it (AGENTS.md, "Tinted, not filled"). */
 main.puzzle .tview2 move:is(.good, .win) {
-  --ln-ext-glyph: var(--ln-ext-green-dark);
+  --ln-ext-glyph-c: var(--ln-ext-good-hover);
+  --ln-ext-glyph-tint: var(--ln-ext-good);
 
   color: var(--ln-ext-good-hover) !important;
 }
 
 main.puzzle .tview2 move.fail {
-  --ln-ext-glyph: var(--ln-ext-red);
+  --ln-ext-glyph-c: var(--ln-ext-red);
+  --ln-ext-glyph-tint: var(--ln-ext-red-dark);
 
   color: var(--ln-ext-red) !important;
 }
@@ -108,9 +111,8 @@ main.puzzle :is(.tview2-column > move, interrupt[data-ln-ext-tries] move) glyph 
   height: 18px;
   margin: 0 !important;
   border-radius: 50%;
-  background: var(--ln-ext-glyph, var(--ln-ext-neutral-10));
-  box-shadow: 0 1px 0 var(--ln-ext-shade-30);
-  color: var(--ln-ext-white) !important;
+  background: color-mix(in srgb, var(--ln-ext-glyph-tint, var(--ln-ext-text)) 18%, transparent);
+  color: var(--ln-ext-glyph-c, var(--ln-ext-text)) !important;
   font-family: var(--ln-ext-font) !important;
   font-size: 11px !important;
   font-weight: 900;
@@ -202,8 +204,6 @@ main.puzzle .tview2 interrupt[data-ln-ext-tries] line {
 }
 
 main.puzzle .tview2 interrupt[data-ln-ext-tries] move.fail {
-  --ln-ext-glyph: var(--ln-ext-red);
-
   display: flex !important;
   align-items: center;
   gap: 4px;

@@ -498,7 +498,14 @@ features and its name: free analysis, open data, no ads.
   bright hue of the palette (green, yellow, cyan, orange, pink): it can't be
   read. Write it in `--ln-ext-ink` (a Hugeicon as a file:
   `tick-02--0c0c0d.svg`), or put the hue on the icon over a tile tinted with
-  it instead.
+  it instead. Never white on green, whatever its shade.
+- **Tinted, not filled:** a result, a verdict, a chip or a badge is its hue on
+  a tint of it, `color-mix(in srgb, var(--ln-ext-good) 18%, transparent)`
+  under text or an icon in `--ln-ext-good-hover` (`--ln-ext-red-dark` under
+  `--ln-ext-red` for a loss), as a game's result pill
+  (`styles/profile/games.css`) and the puzzles' session chips. Never white on
+  a filled hue or on the accent: only buttons keep their filled gradients
+  (`--ln-ext-btn-primary`, `-red`).
 - **Hover feels the same everywhere:** a card lifts and its icon tile hops,
   `rotate(-6deg) scale(1.08)` on cards, `translateY(-2px) rotate(-8deg)
   scale(1.08)` on menu links, both

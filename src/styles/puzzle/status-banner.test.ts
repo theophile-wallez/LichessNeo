@@ -42,3 +42,60 @@ describe('the hint and solution buttons', () => {
     expect(getComputedStyle(viewSolution('view_solution skip show')).visibility).toBe('visible');
   });
 });
+
+// The palette's roles the end card's colors name (theme/palette.css), as plain values.
+const PALETTE =
+  ':root { --ln-ext-good: #3cb371; --ln-ext-good-hover: #7fe0a8; --ln-ext-red: #ff6b6b;' +
+  ' --ln-ext-red-dark: #c0392b; }';
+// Lichess's own: its row of votes hidden on phones.
+const LICHESS_MORE = '.puzzle__feedback .puzzle__more { display: none; }';
+
+function endCard(html: string): void {
+  const style = document.createElement('style');
+  style.textContent =
+    PALETTE + LICHESS_MORE + readFileSync(join(import.meta.dirname, 'status-banner.css'), 'utf8');
+  document.head.append(style);
+  document.body.innerHTML = `<main class="puzzle"><div class="puzzle__feedback after">${html}</div></main>`;
+}
+
+const display = (selector: string): string => {
+  const element = queryOne(document, selector, HTMLElement);
+  if (!element) throw new Error(`no ${selector}`);
+  return getComputedStyle(element).display;
+};
+
+const partColor = (part: string): string => {
+  const element = queryOne(document, `.ln-ext-puzzle-result__${part}`, HTMLElement);
+  return element ? getComputedStyle(element).color : '';
+};
+
+describe('the end card', () => {
+  it('keeps the row of the computer and the votes on phones, but an empty one', () => {
+    endCard('<div class="puzzle__more"><a class="practice button"></a></div>');
+    expect(display('.puzzle__more')).toBe('flex');
+    endCard('<div class="puzzle__more"></div>');
+    expect(display('.puzzle__more')).toBe('none');
+  });
+
+  const RESULT =
+    '<span class="ln-ext-puzzle-result__verdict">Missed</span>' +
+    '<span class="ln-ext-puzzle-result__change"><span class="ln-ext-puzzle-result__diff">−8</span>' +
+    '<span class="ln-ext-puzzle-result__rating">1,503</span></span>';
+
+  it('shows only the parts of the result it has', () => {
+    endCard(`<div class="ln-ext-puzzle-result" data-ln-ext-verdict="failed">${RESULT}</div>`);
+    expect(display('.ln-ext-puzzle-result__verdict')).not.toBe('none');
+    expect(display('.ln-ext-puzzle-result__change')).toBe('none');
+    endCard(`<div class="ln-ext-puzzle-result" data-ln-ext-sign="down">${RESULT}</div>`);
+    expect(display('.ln-ext-puzzle-result__verdict')).toBe('none');
+    expect(display('.ln-ext-puzzle-result__change')).toBe('flex');
+  });
+
+  it('writes the verdict and the change in their hue, on a tint of it', () => {
+    endCard(
+      `<div class="ln-ext-puzzle-result" data-ln-ext-verdict="solved" data-ln-ext-sign="down">${RESULT}</div>`,
+    );
+    expect(partColor('verdict')).toBe('#7fe0a8');
+    expect(partColor('diff')).toBe('#ff6b6b');
+  });
+});

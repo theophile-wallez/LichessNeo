@@ -32,15 +32,15 @@ and a white knob, and a single big number in the state's color.
 
 ## Puzzles
 
-| Page             | Path                  | Level | Next                                                                                                                                                    |
-| ---------------- | --------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Puzzles          | `/training`           | 2     | a solved puzzle has no moment of its own; the rating's change could; below 1020px, one column with the coach's card, two on a tablet on its side        |
-| Puzzle themes    | `/training/themes`    | 2     |                                                                                                                                                         |
-| Puzzle dashboard | `/training/dashboard` | 3     | the numbers, a live coach's tips, every theme against its level; the improvement areas and strengths lead with their first theme and its mascot         |
-| Puzzle history   | `/training/history`   | 3     | the week's number on the track with a live coach, the puzzles to retry; each session a card with its score, under its day                               |
-| Puzzle Streak    | `/streak`             | 2     | the streak's count doesn't show in the panel: a flame and the track, the best streak on it; below 1020px, as puzzles                                    |
-| Puzzle Storm     | `/storm`              | 2     | signature planned: the combo on the track, its bonuses as stops; the panel is empty in the middle; below 1020px, one column, the clock beside the title |
-| Puzzle Racer     | `/racer`              | 2     | below 1020px, a race in one column, the clock beside the title                                                                                          |
+| Page             | Path                  | Level | Next                                                                                                                                                                                        |
+| ---------------- | --------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Puzzles          | `/training`           | 2     | the end card gives the verdict and the rating's change, but a puzzle solved first try has no moment of its own; below 1020px, one column with the coach's card, two on a tablet on its side |
+| Puzzle themes    | `/training/themes`    | 2     |                                                                                                                                                                                             |
+| Puzzle dashboard | `/training/dashboard` | 3     | the numbers, a live coach's tips, every theme against its level; the improvement areas and strengths lead with their first theme and its mascot                                             |
+| Puzzle history   | `/training/history`   | 3     | the week's number on the track with a live coach, the puzzles to retry; each session a card with its score, under its day                                                                   |
+| Puzzle Streak    | `/streak`             | 2     | the streak's count doesn't show in the panel: a flame and the track, the best streak on it; below 1020px, as puzzles                                                                        |
+| Puzzle Storm     | `/storm`              | 2     | signature planned: the combo on the track, its bonuses as stops; the panel is empty in the middle; below 1020px, one column, the clock beside the title                                     |
+| Puzzle Racer     | `/racer`              | 2     | below 1020px, a race in one column, the clock beside the title                                                                                                                              |
 
 ## Learn
 

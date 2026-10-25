@@ -19,6 +19,14 @@
     "message": "Puzzle details and settings",
     "description": "The puzzle page's cog, which opens the puzzle's details, its theme and the settings."
   },
+  "puzzleSolved": {
+    "message": "First try",
+    "description": "On a puzzle's end card: solved without a mistake."
+  },
+  "puzzleFailed": {
+    "message": "Missed",
+    "description": "On a puzzle's end card: a mistake was made or the solution was shown, so it counts as failed."
+  },
   "settingsLink": {
     "message": "Lichess Neo",
     "description": "The account menu's link to the extension's settings."

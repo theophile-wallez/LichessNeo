@@ -147,8 +147,10 @@
     gap: 6px;
     box-sizing: border-box;
     min-width: 0;
+    --ln-ext-session-pad: 14px;
+
     margin: 0 !important;
-    padding: 0 14px;
+    padding: 0 var(--ln-ext-session-pad);
     overflow-x: auto;
     scrollbar-width: none;
     background: var(--ln-ext-bg-panel);

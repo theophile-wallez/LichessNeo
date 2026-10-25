@@ -83,9 +83,11 @@ so the logic can be unit-tested without a page.
   height, and the right-hand panel's tabs, which give the moves, the chat and
   the game info one area to share.
 - `game`.
-- `analysis`: the players' bars, the eval gauge, the underboard's button, the
-  variations drawn as a tree, long runs folded into a pill.
-- `puzzle`: the puzzle page's one panel, its menu and coach.
+- `analysis`: the players' bars, the eval gauge, the engine settings' sliders,
+  the underboard's button, the variations drawn as a tree, long runs folded
+  into a pill.
+- `puzzle`: the puzzle page's one panel, its menu and coach, and the verdict and
+  rating change on its end card.
 - `learn`: a Learn stage's coach, saying the level's goal and how it ended.
 - `pages`.
 - `ui`: tooltips, hover card, tab bars, users' avatars, the user's own name

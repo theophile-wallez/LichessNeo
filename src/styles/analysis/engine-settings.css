@@ -1,0 +1,213 @@
+/* ---- Engine settings --- */
+
+/* The engine's settings (the cog of its header) dropped open across the panel, pushing the
+ * lines down. They float instead, in the board menu's look (game/board-menu.css): from the cog,
+ * or in the window's middle over the dimmed page where the browser can't anchor to it.
+ * Lichess closes them on a click outside. */
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings {
+  position: fixed !important;
+  inset: 50% auto auto 50% !important;
+  z-index: 108 !important;
+  display: flex !important;
+  flex-direction: column;
+  gap: 18px !important;
+  box-sizing: border-box;
+  width: min(calc(100vw - 32px), 340px) !important;
+  max-height: calc(100dvh - 32px);
+  margin: 0 !important;
+  padding: 16px !important;
+  overflow-y: auto;
+  border: 1px solid var(--ln-ext-menu-border) !important;
+  border-radius: 12px !important;
+  background: var(--ln-ext-menu-bg) !important;
+  box-shadow:
+    var(--ln-ext-menu-shadow),
+    0 0 0 100vmax var(--ln-ext-page-mask) !important;
+  color: var(--ln-ext-text);
+  transform: translate(-50%, -50%);
+  animation: ln-ext-engine-settings-in 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@supports (anchor-name: --ln-ext-ceval-cog) {
+  :is(main.analyse, main.puzzle, .board-editor) .ceval > .settings-gear {
+    anchor-name: --ln-ext-ceval-cog;
+  }
+
+  /* Under the cog, its right edge on the cog's; over it where the window has no room below. */
+  :is(main.analyse, main.puzzle, .board-editor) #ceval-settings {
+    position-anchor: --ln-ext-ceval-cog;
+    position-area: bottom span-left;
+    position-try-fallbacks: flip-block;
+    inset: auto !important;
+    max-height: calc(100dvh - 16px);
+    margin: 6px 0 !important;
+    box-shadow: var(--ln-ext-menu-shadow) !important;
+    transform: none;
+    transform-origin: top right;
+  }
+}
+
+@keyframes ln-ext-engine-settings-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+/* Each setting: its name and value on a line, the slider across under them. */
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .setting {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: 'label value' 'control control';
+  align-items: center;
+  gap: 10px 8px;
+}
+
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .setting > label {
+  grid-area: label;
+  overflow: hidden;
+  color: var(--ln-ext-text-strong);
+  font: 600 14px var(--ln-ext-font);
+  text-overflow: ellipsis;
+}
+
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .range_value {
+  grid-area: value;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text);
+  font: 700 12px var(--ln-ext-font);
+  font-variant-numeric: tabular-nums;
+}
+
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .setting > :is(input, span, select) {
+  grid-area: control;
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0;
+  margin: 0 !important;
+}
+
+/* The engine first, apart from the sliders: its picker across, its info (and an external
+   engine's delete) at the line's end. */
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .setting:first-child {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas: 'label delete info' 'control control control';
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--ln-ext-lift-8);
+}
+
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .setting > .button-red {
+  grid-area: delete;
+  margin: 0 !important;
+  padding: 4px 8px !important;
+}
+
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .engine-info-button {
+  display: grid;
+  grid-area: info;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: 0 !important;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--ln-ext-text-dim);
+  font-size: 16px;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .engine-info-button:hover {
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
+}
+
+/* The sliders filled in the accent up to the thumb (content/analysis/engine-settings.ts). */
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings input[type='range'] {
+  --ln-ext-slider-track: linear-gradient(
+    90deg,
+    var(--ln-ext-accent) var(--ln-ext-slider-fill, 0%),
+    var(--ln-ext-lift-15) var(--ln-ext-slider-fill, 0%)
+  );
+
+  height: 20px !important;
+  padding: 0 !important;
+  border: none !important;
+  appearance: none;
+  background: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+:is(main.analyse, main.puzzle, .board-editor)
+  #ceval-settings
+  input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--ln-ext-slider-track);
+}
+
+:is(main.analyse, main.puzzle, .board-editor)
+  #ceval-settings
+  input[type='range']::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--ln-ext-slider-track);
+}
+
+:is(main.analyse, main.puzzle, .board-editor)
+  #ceval-settings
+  input[type='range']::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  border-radius: 50%;
+  appearance: none;
+  background: var(--ln-ext-white);
+  box-shadow: 0 1px 4px var(--ln-ext-shade-60);
+  transition: box-shadow 0.15s !important;
+}
+
+:is(main.analyse, main.puzzle, .board-editor)
+  #ceval-settings
+  input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--ln-ext-white);
+  box-shadow: 0 1px 4px var(--ln-ext-shade-60);
+}
+
+@media (hover: hover) {
+  :is(main.analyse, main.puzzle, .board-editor)
+    #ceval-settings
+    input[type='range']:hover::-webkit-slider-thumb {
+    box-shadow:
+      0 1px 4px var(--ln-ext-shade-60),
+      0 0 0 5px color-mix(in srgb, var(--ln-ext-accent) 22%, transparent);
+  }
+}
+
+/* The threads' recommended count: two chevrons over and under the slider, smaller, in the
+   accent, green once the slider is on it. */
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .tick {
+  top: -10px !important;
+  height: 40px !important;
+}
+
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .tick div {
+  left: -3px !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-width: 0 0 2px 2px !important;
+  border-color: var(--ln-ext-accent) !important;
+  cursor: pointer;
+}
+
+:is(main.analyse, main.puzzle, .board-editor) #ceval-settings .tick.recommended div {
+  border-color: var(--ln-ext-good) !important;
+}

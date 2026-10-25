@@ -98,7 +98,8 @@ main.puzzle .puzzle__side__config {
   color: var(--ln-ext-text);
 }
 
-/* Puzzles played this session: rounded green and red chips. */
+/* Puzzles played this session: chips tinted green or red, their mark in the hue (AGENTS.md,
+   "Tinted, not filled"). The puzzle on the board is ringed in its own color. */
 main.puzzle .puzzle__session a {
   height: 26px !important;
   border-radius: 6px !important;
@@ -107,15 +108,82 @@ main.puzzle .puzzle__session a {
 }
 
 main.puzzle .puzzle__session a.result-true {
-  background: var(--ln-ext-btn-primary) !important;
+  background: color-mix(in srgb, var(--ln-ext-good) 18%, transparent) !important;
+  color: var(--ln-ext-good-hover) !important;
 }
 
 main.puzzle .puzzle__session a.result-false {
-  background: var(--ln-ext-btn-red) !important;
+  background: color-mix(in srgb, var(--ln-ext-red-dark) 18%, transparent) !important;
+  color: var(--ln-ext-red) !important;
 }
 
 main.puzzle .puzzle__session a.current {
-  box-shadow: 0 0 0 2px var(--ln-ext-text-strong);
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+/* Where the chips' row scrolls (layout.css, layout-narrow.css), it fades out at an edge while
+   more chips hide past it: a fade in the row's color, sticky at each end, which shows as the
+   scroll leaves that end. None where nothing scrolls, or without scroll timelines. */
+@media (min-width: 1259.3px), (max-width: 1019.98px) {
+  main.puzzle .puzzle__session::before,
+  main.puzzle .puzzle__session::after {
+    content: '';
+    position: sticky;
+    z-index: 1;
+    flex: none;
+    align-self: stretch;
+    width: 32px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Sticky stops at the row's padding: the offsets take it back to the edge. The margins
+     give back its width and the chips' gap, so it takes no room. */
+  main.puzzle .puzzle__session::before {
+    left: calc(-1 * var(--ln-ext-session-pad));
+    margin-right: -38px;
+    background: linear-gradient(to right, var(--ln-ext-bg-panel), transparent);
+  }
+
+  main.puzzle .puzzle__session::after {
+    right: calc(-1 * var(--ln-ext-session-pad));
+    margin-left: -38px;
+    background: linear-gradient(to left, var(--ln-ext-bg-panel), transparent);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    main.puzzle .puzzle__session::before {
+      animation: ln-ext-session-fade-start linear both !important;
+      animation-timeline: scroll(nearest inline) !important;
+    }
+
+    main.puzzle .puzzle__session::after {
+      animation: ln-ext-session-fade-end linear both !important;
+      animation-timeline: scroll(nearest inline) !important;
+    }
+  }
+}
+
+@keyframes ln-ext-session-fade-start {
+  from {
+    opacity: 0;
+  }
+
+  8%,
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ln-ext-session-fade-end {
+  from,
+  92% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 /* Next puzzle: Lichess paints it in the link color (our accent), so it looked solved.
