@@ -20,6 +20,7 @@ import { movesGraph } from './graph.ts';
 import { renderLive } from './live-panel.ts';
 import { keepPage } from './openings-actions.ts';
 import { renderOpenings } from './openings-page.ts';
+import { syncModeTabs } from './mode-tabs.ts';
 import { renderMoves } from './moves-panel.ts';
 import { closeTools, spokenMove, stopPlaying } from './navigation.ts';
 import { renderKey } from './render-key.ts';
@@ -67,6 +68,7 @@ function redrawPanel(session: Session, analysis: Analysis): void {
       : [];
   view.drawnMode = view.mode;
   drawPanel(session, analysis);
+  if (!onFreeBoard(view.mode)) syncModeTabs(session, analysis);
   for (const button of queryAll(panel, KEPT_BUTTONS, Element)) {
     const old = kept.get(button.outerHTML);
     if (old && old !== button) button.replaceWith(old);
@@ -123,7 +125,7 @@ function markMode({
   const root = document.documentElement;
   root.classList.toggle('ln-ext-review', true);
   for (const each of MODES) root.classList.toggle(`ln-ext-review-${each}`, each === mode);
-  root.classList.toggle('ln-ext-review-sheet', mode === 'moves' && sheet);
+  root.classList.toggle('ln-ext-review-sheet', !onFreeBoard(mode) && sheet);
   // In every mode, so that it changes only when the card folds, and eases only then.
   root.classList.toggle('ln-ext-review-folded', cardFolded);
 }

@@ -2,7 +2,7 @@ import { closestTo, queryOne } from '#shared/dom.ts';
 import { postCoachPicker } from '#shared/protocol.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import { gameIndex } from '#page/review/game/work.ts';
-import type { Session } from '#page/review/session.ts';
+import type { Mode, Session } from '#page/review/session.ts';
 import { type PanelAction, PanelActionSchema } from './actions.ts';
 import { foldCard } from './card-fold.ts';
 import { playChip } from './chips.ts';
@@ -71,6 +71,15 @@ function toggleRetry(session: Session, analysis: Analysis): void {
   if (move) startRetry(session, analysis, move);
 }
 
+/** A tab, or a button that leads to a mode; the tab already picked does nothing. */
+function showMode(session: Session, analysis: Analysis, mode: Mode): void {
+  if (mode === session.view.mode) return;
+  // Starting the review goes to the first move, from the start or off the game.
+  if (mode === 'moves' && (gameIndex(session.work, analysis.node) ?? 0) === 0)
+    jump(session, analysis, 1);
+  session.setMode(mode);
+}
+
 function act(session: Session, analysis: Analysis, action: ReviewCommand): void {
   const { view } = session;
   if (action === 'play') togglePlay(session, analysis);
@@ -83,12 +92,7 @@ function act(session: Session, analysis: Analysis, action: ReviewCommand): void 
     const path = stepPath(session, analysis, action === 'prev' ? -1 : 1);
     if (path !== null) goTo(analysis, path);
   } else if (action === 'best') showBest(session, analysis);
-  else {
-    // Starting the review goes to the first move, from the start or off the game.
-    if (action === 'moves' && (gameIndex(session.work, analysis.node) ?? 0) === 0)
-      jump(session, analysis, 1);
-    session.setMode(action);
-  }
+  else showMode(session, analysis, action);
 }
 
 interface Clicked {
@@ -142,7 +146,7 @@ function onClick(session: Session, event: MouseEvent): void {
 
 /** The redraw replaced the button: the focus stays in the review, on the same action if it's there. */
 function keepFocus({ elements }: Session, action: PanelAction): void {
-  const same = [elements.panel, elements.controls]
+  const same = [elements.panel, elements.modes, elements.controls]
     .map(root => queryOne(root, `[data-ln-ext="${action}"]`, HTMLElement))
     .find(element => element !== null);
   (same ?? elements.panel).focus({ preventScroll: true });
@@ -150,6 +154,6 @@ function keepFocus({ elements }: Session, action: PanelAction): void {
 
 export function watchClicks(session: Session): void {
   const listener = (event: MouseEvent): void => onClick(session, event);
-  session.elements.panel.addEventListener('click', listener);
-  session.elements.controls.addEventListener('click', listener);
+  for (const root of [session.elements.panel, session.elements.modes, session.elements.controls])
+    root.addEventListener('click', listener);
 }

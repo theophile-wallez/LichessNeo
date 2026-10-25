@@ -20,9 +20,7 @@ import { keyMoments, momentsMarkup, showMoment } from './moments.ts';
 import {
   bubbleTitle,
   evalChip,
-  header,
   type IconName,
-  shareButton,
   svgIcon,
   thinkingMarkup,
   thinkingWords,
@@ -33,7 +31,6 @@ import { type Retried, retryBubble, retryParts } from './retry-bubble.ts';
 import { retryHint, type RetryHint } from './retry-hint.ts';
 import { gameTimes, timingAt } from './timing.ts';
 import { type CoachComment, commentOn, followComment, timeTag, verdictMarkup } from './verdict.ts';
-import { newGameMarkup } from './new-game.ts';
 import { fillAroundNav, type NavInput, navState, syncNav } from './nav.ts';
 
 // The move-by-move review: the graph and the game's key moments on top, then
@@ -206,8 +203,7 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const moments = momentsMarkup(view.review, language);
   fillAroundNav(
     elements.panel,
-    html`${header(language.ui.review, 'summary', language, html`${shareButton(view.sheet, language.ui)}${newGameMarkup(analysis, 'ln-ext-review__new')}`)}
-      <div class="ln-ext-review__graph-box"><div class="ln-ext-review__graph-slot"></div><div class="ln-ext-review__views-slot"></div></div>${moments}
+    html`<div class="ln-ext-review__graph-box"><div class="ln-ext-review__graph-slot"></div><div class="ln-ext-review__views-slot"></div></div>${moments}
       ${coachMarkup(session, analysis, spoken)}`,
     elements.nav,
   );

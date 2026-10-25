@@ -14,11 +14,10 @@ import {
 import { type Outcome, readOutcome } from '#page/game-over/outcome.ts';
 import { formatAccuracy, type GameOverTexts, gameOverTexts } from '#page/game-over/texts.ts';
 import type { Session } from '#page/review/session.ts';
-import { newGameMarkup } from './new-game.ts';
 
 // The review closed: the game over's card (page/game-over/card.ts), as the
-// game's page showed it at its end, over the ways back into the review: its
-// summary, or Game Review itself, move by move. It speaks to the player of
+// game's page showed it at its end; the tabs over the column lead back into the
+// review, and to a new game (view/mode-tabs.ts). It speaks to the player of
 // their moves; to anyone else, of the board's bottom side's.
 
 interface Side {
@@ -83,14 +82,6 @@ function words(session: Session, side: Side, result: Outcome['result']): string 
   return texts.verdict(result, accuracy === null ? null : formatAccuracy(accuracy));
 }
 
-/** The ways back into the review: its summary, Game Review, a new game. */
-function ways(session: Session, analysis: Analysis): SafeHtml {
-  const { ui } = session.language;
-  return html`<button class="ln-ext-btn" data-ln-ext="summary">${ui.summary}</button>
-    <button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="moves">${ui.review}</button>
-    ${newGameMarkup(analysis, 'ln-ext-btn')}`;
-}
-
 function card(session: Session, analysis: Analysis): SafeHtml {
   const texts = gameOverTexts();
   const side = sideOf(analysis);
@@ -111,7 +102,7 @@ function card(session: Session, analysis: Analysis): SafeHtml {
 const frameMarkup = (texts: GameOverTexts): SafeHtml =>
   html`<div class="ln-ext-end__frame">
     <div class="ln-ext-end__top"><div class="ln-ext-end__top-inner"></div></div>
-    <div class="ln-ext-end__foot"><div class="ln-ext-end__ways"></div>${foldButtonMarkup(texts, 'unfold')}</div>
+    <div class="ln-ext-end__foot">${foldButtonMarkup(texts, 'unfold')}</div>
   </div>`;
 
 export function renderClosed(session: Session, analysis: Analysis): void {
@@ -121,7 +112,5 @@ export function renderClosed(session: Session, analysis: Analysis): void {
   // the analysis redraws it: only its parts are drawn again.
   if (!queryOne(panel, '.ln-ext-end__frame', HTMLElement)) setHtml(panel, frameMarkup(texts));
   const top = queryOne(panel, '.ln-ext-end__top-inner', HTMLElement);
-  const foot = queryOne(panel, '.ln-ext-end__ways', HTMLElement);
   if (top) setHtml(top, html`${card(session, analysis)}${foldButtonMarkup(texts, 'fold')}`);
-  if (foot) setHtml(foot, ways(session, analysis));
 }

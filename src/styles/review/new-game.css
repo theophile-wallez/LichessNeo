@@ -1,17 +1,6 @@
-/* A new game like the one reviewed (page/review/view/new-game.ts): a primary pill in the
-   header, beside the close button, and a button under the closed review's card. Seeking, it
-   takes the game page's look (game/game-over.css). */
-
-.ln-ext-review__head > :first-child {
-  justify-self: start;
-}
-
-.ln-ext-review__actions {
-  display: flex;
-  align-items: center;
-  justify-self: end;
-  gap: 4px;
-}
+/* A new game like the one reviewed (page/review/view/new-game.ts): a primary pill beside the
+   review's tabs, and a button under the closed review's card. Seeking, it takes the game
+   page's look (game/game-over.css). */
 
 .ln-ext-review__new {
   display: inline-flex;
@@ -29,26 +18,11 @@
   text-shadow: 0 1px 1px #00000033;
 }
 
-/* The 300px panel from 1020px: tighter buttons leave the title its room, */
-@container (max-width: 320px) {
-  .ln-ext-review__actions {
-    gap: 2px;
-  }
-
+/* A narrow panel from 1020px (300px at 1024): a tighter pill leaves the tabs their room. */
+@container ln-ext-review-modes (max-width: 380px) {
   .ln-ext-review__new {
-    padding: 0 9px;
-  }
-
-  .ln-ext-review__head :is(.ln-ext-review__back, .ln-ext-review__share, .ln-ext-review__close) {
-    width: 32px;
-  }
-}
-
-/* and the title takes all the room between them rather than stay centered on the header and
-   be cut. The header can't query itself: the panel stands for it. */
-@container ln-ext-review (max-width: 320px) {
-  .ln-ext-review__head {
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 0 8px;
+    font-size: 12px;
   }
 }
 

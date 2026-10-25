@@ -2,7 +2,7 @@ import { queryOne } from '#shared/dom.ts';
 import { focusOtherChevron, storeCardFolded } from '#page/game-over/card-fold.ts';
 import type { Session } from '#page/review/session.ts';
 
-// The closed panel's card folds down to its buttons (page/game-over/card-fold.ts),
+// The closed panel's card folds down to its chevron (page/game-over/card-fold.ts),
 // so Lichess's analysis gets the room back: <html>'s ln-ext-review-folded class
 // (view/render.ts) is the mark, which also eases the panel's row (card-fold.css).
 

@@ -220,7 +220,18 @@ export function syncPanelTabs(): void {
   markUnread(host, bar, page);
 }
 
+// The review's state is on <html>'s class: the bar follows it at once rather than a tick
+// later, or Lichess's panel showed without its tabs' row for a moment, then moved down.
+export function followReviewState(): MutationObserver {
+  const observer = new MutationObserver(syncPanelTabs);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  return observer;
+}
+
 export const panelTabs: Feature = {
   name: 'panel tabs',
-  start: () => onEveryTick('panel tabs', syncPanelTabs),
+  start: () => {
+    followReviewState();
+    onEveryTick('panel tabs', syncPanelTabs);
+  },
 };

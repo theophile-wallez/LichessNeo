@@ -99,7 +99,7 @@ export interface ViewState {
   graph: GraphView;
   /** The game's crosstable and export are open over the move-by-move panel. */
   sheet: boolean;
-  /** The closed panel's card is folded down to its buttons. */
+  /** The closed panel's card is folded down to its chevron. */
   cardFolded: boolean;
   bestOf: BestShown | null;
   lineOf: LineShown | null;

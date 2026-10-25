@@ -5,6 +5,8 @@ import { createElement, queryOne } from '#shared/dom.ts';
 
 export interface ReviewElements {
   readonly panel: HTMLElement;
+  /** The tabs over the panel, kept for their pick to slide (view/mode-tabs.ts). */
+  readonly modes: HTMLElement;
   readonly graphBox: HTMLElement;
   /** The move-by-move graph's views, kept for their pick to slide. */
   readonly graphViews: HTMLElement;
@@ -27,6 +29,7 @@ export function createElements(): ReviewElements {
   return {
     // Focusable, to keep the focus of a button its redraw replaced.
     panel: createElement('div', { id: 'ln-ext-review', attrs: { tabindex: '-1' } }),
+    modes: createElement('div', { id: 'ln-ext-review-modes' }),
     graphBox: createElement('div', { id: 'ln-ext-review-graph' }),
     graphViews: createElement('div', { className: 'ln-ext-graph-views' }),
     nav: createElement('div', { className: 'ln-ext-review__nav' }),
@@ -50,7 +53,8 @@ export function attach(elements: ReviewElements): boolean {
   const main = queryOne(document, 'main.analyse', HTMLElement);
   const board = main && queryOne(main, '.analyse__board', HTMLElement);
   if (!main || !board) return false;
-  for (const element of [elements.panel, elements.graphBox, elements.controls, elements.bar])
+  const { panel, modes, graphBox, controls, bar } = elements;
+  for (const element of [panel, modes, graphBox, controls, bar])
     if (element.parentNode !== main && !isInPanel(elements, element)) main.append(element);
   if (elements.overlay.parentNode !== board) board.append(elements.overlay);
   return true;

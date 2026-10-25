@@ -33,8 +33,9 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
   it('has the original’s interface strings', () => {
     const { T } = original;
     // Explain's lines, the summary's profile, the graph's views, the share button, the cost
-    // bars, Retry, the tactics' tags, the clock's advice, the brief and the closed review's
-    // way back to the summary are new: the original had none. Its phases are named for
+    // bars, Retry, the tactics' tags, the clock's advice, the brief, the summary's tab and its
+    // button to resume the debrief are new: the original had none, and its close button went
+    // with the header the tabs replaced. Its phases are named for
     // what they hold now, each with a tip; its player labels went with its table, its game
     // rating's title and tip with its card, and the free board's first words are a title
     // over a line now. Its rating's tooltip as on Chess.com is new too.
@@ -58,6 +59,7 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
       clock: _clock,
       brief: _brief,
       summary: _summary,
+      resume: _resume,
       thinking,
       ...ui
     } = language.ui;
@@ -69,6 +71,7 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
       bestWas: originalBestWas,
       liveIntro: _originalLiveIntro,
       thinking: originalThinking,
+      close: _close,
       ...originalUi
     } = T;
     expect(ui).toEqual(originalUi);

@@ -1,32 +1,37 @@
 /* Game Review (page/review/). It sets a state class on <html>: ln-ext-review-normal (Lichess's
    analysis and a Game Review button), -summary, -moves (move by move) or -live (the free
-   board), plus ln-ext-evalbar-on and data-ln-ext-cls (the current move's classification). */
+   board), plus ln-ext-evalbar-on and data-ln-ext-cls (the current move's classification).
+   A game's three modes share the tabs at the column's head (mode-tabs.css). */
 
 @media (min-width: 1020px) {
   html.ln-ext-review main.analyse {
     --ln-ext-review-top: 48px;
+    --ln-ext-review-modes: 48px;
   }
 
-  /* Review closed: Lichess's analysis, then the game over's card and the ways back into the
-     review (view/closed-panel.ts, game/game-end-card.css), its coach smaller on a short window.
-     The card folds down to the buttons' 77px as --ln-ext-review-fold eases to 1 (card-fold.css). */
+  /* Review closed: Lichess's analysis, then the game over's card (view/closed-panel.ts,
+     game/game-end-card.css), its coach smaller on a short window. The card folds down to its
+     chevron's 77px, the frame's padding and the panel's around it, as --ln-ext-review-fold
+     eases to 1 (card-fold.css). */
   html.ln-ext-review-normal main.analyse {
-    --ln-ext-review-open: 328px;
+    --ln-ext-review-open: 280px;
     --ln-ext-review-top: calc(
       var(--ln-ext-review-open) - (var(--ln-ext-review-open) - 77px) * var(--ln-ext-review-fold)
     );
     grid-template-rows:
+      var(--ln-ext-review-modes)
       var(--ln-ext-tabs-h)
       max(
         0px,
         calc(
-          var(--ln-ext-stage) - var(--ln-ext-tabs-h) - var(--ln-ext-review-top) -
-            var(--ln-ext-ctrl-h)
+          var(--ln-ext-stage) - var(--ln-ext-review-modes) - var(--ln-ext-tabs-h) -
+            var(--ln-ext-review-top) - var(--ln-ext-ctrl-h)
         )
       )
       var(--ln-ext-review-top)
       var(--ln-ext-ctrl-h) !important;
     grid-template-areas:
+      'gauge board rmodes'
       'gauge board tabs'
       'gauge board tools'
       'gauge board rtop'
@@ -35,7 +40,7 @@
 
   @media (max-height: 820px) {
     html.ln-ext-review-normal main.analyse {
-      --ln-ext-review-open: 300px;
+      --ln-ext-review-open: 264px;
     }
   }
 
@@ -46,21 +51,33 @@
   }
 
   html.ln-ext-review-summary main.analyse {
-    grid-template-rows: var(--ln-ext-stage) !important;
-    grid-template-areas: 'gauge board rtop' !important;
+    grid-template-rows:
+      var(--ln-ext-review-modes)
+      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-review-modes))) !important;
+    grid-template-areas:
+      'gauge board rmodes'
+      'gauge board rtop' !important;
   }
 
   /* Move by move: the graph and the key moments over the coach (all in the panel), the
      moves, then our controls (with play) instead of Lichess's. */
   html.ln-ext-review-moves main.analyse {
     --ln-ext-review-moments: 58px;
-    --ln-ext-review-top: calc(262px + var(--ln-ext-review-graph) + var(--ln-ext-review-moments));
+    --ln-ext-review-top: calc(214px + var(--ln-ext-review-graph) + var(--ln-ext-review-moments));
     --ln-ext-review-ctrl: 64px;
     grid-template-rows:
+      var(--ln-ext-review-modes)
       var(--ln-ext-review-top)
-      max(0px, calc(var(--ln-ext-stage) - var(--ln-ext-review-top) - var(--ln-ext-review-ctrl)))
+      max(
+        0px,
+        calc(
+          var(--ln-ext-stage) - var(--ln-ext-review-modes) - var(--ln-ext-review-top) -
+            var(--ln-ext-review-ctrl)
+        )
+      )
       var(--ln-ext-review-ctrl) !important;
     grid-template-areas:
+      'gauge board rmodes'
       'gauge board rtop'
       'gauge board tools'
       'gauge board rctrl' !important;
@@ -115,10 +132,15 @@
   min-height: 0;
   margin-left: var(--ln-ext-gap);
   overflow: hidden;
-  border-radius: 6px 6px 0 0;
+  border-radius: 0;
   background: var(--ln-ext-bg-panel);
   color: var(--ln-ext-text);
   font-family: var(--ln-ext-font);
+}
+
+/* The free board's panel has no tabs over it. */
+html:is(.ln-ext-review-live, .ln-ext-review-openings) #ln-ext-review {
+  border-radius: 6px 6px 0 0;
 }
 
 /* It holds the focus only for a button its redraw replaced (view/clicks.ts). */
@@ -127,7 +149,7 @@
 }
 
 html.ln-ext-review-summary #ln-ext-review {
-  border-radius: 6px;
+  border-radius: 0 0 6px 6px;
 }
 
 /* The free board's card is the panel's only part: room around it, as at its sides. */
@@ -144,14 +166,25 @@ html.ln-ext-review-normal #ln-ext-review {
   justify-content: flex-end;
   padding: 8px;
   border-top: 1px solid var(--ln-ext-border);
-  border-radius: 0;
 }
 
+/* The 300px panel from 1020px: a two-line title and a smaller coach keep the card within its
+   row, which a third line overflowed. */
+@container ln-ext-review (max-width: 340px) {
+  html.ln-ext-review-normal #ln-ext-review .ln-ext-end__glow {
+    --ln-ext-coach-h: 80px;
+  }
+
+  html.ln-ext-review-normal #ln-ext-review .ln-ext-end__title {
+    font-size: 18px;
+  }
+}
+
+/* The practice page's header (view/openings-page.ts). */
 .ln-ext-review__head {
   flex: none;
   display: grid;
-  /* Even sides keep the title centered, the new game's link beside the close button. Where the
-     buttons need more than half the room left, the title gives way rather than go under them. */
+  /* Even sides keep the title centered. */
   grid-template-columns: minmax(40px, 1fr) auto minmax(max-content, 1fr);
   gap: 8px;
   align-items: center;
@@ -162,7 +195,6 @@ html.ln-ext-review-normal #ln-ext-review {
 }
 
 .ln-ext-review__back,
-.ln-ext-review__close,
 .ln-ext-review__share {
   display: grid;
   place-items: center;
@@ -180,7 +212,6 @@ html.ln-ext-review-normal #ln-ext-review {
 }
 
 .ln-ext-review__back svg,
-.ln-ext-review__close svg,
 .ln-ext-review__share svg {
   width: 22px;
   height: 22px;
@@ -188,7 +219,6 @@ html.ln-ext-review-normal #ln-ext-review {
 }
 
 .ln-ext-review__back:hover,
-.ln-ext-review__close:hover,
 .ln-ext-review__share:hover {
   background: var(--ln-ext-lift-7);
   color: var(--ln-ext-text-strong);

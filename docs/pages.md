@@ -77,14 +77,14 @@ and a white knob, and a single big number in the state's color.
 
 ## Tools
 
-| Page            | Path                    | Level | Next                                                                                                           |
-| --------------- | ----------------------- | ----- | -------------------------------------------------------------------------------------------------------------- |
-| Analysis board  | `/analysis`             | 2     | the panel is empty under the coach until a move is played; below 1020px, one column even on a landscape tablet |
-| Game review     | `/game/<id>` (finished) | 2     | signature planned: each side's accuracy on the track, in its grade's color; below 1020px, one column           |
-| Openings        | `/opening`              | 2     | the popularity chart is still Lichess's Chart.js canvas                                                        |
-| Board editor    | `/editor`               | 2     |                                                                                                                |
-| Import game     | `/paste`                | 2     | the title with its picture, the form on a card, the file picker as a drop zone; no signature yet               |
-| Advanced search | `/games/search`         | 2     | the form on a card, its labels over its fields on phones; the results' game rows are still Lichess's           |
+| Page            | Path                    | Level | Next                                                                                                                                                   |
+| --------------- | ----------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Analysis board  | `/analysis`             | 2     | the panel is empty under the coach until a move is played; below 1020px, one column even on a landscape tablet                                         |
+| Game review     | `/game/<id>` (finished) | 2     | its summary, debrief and Lichess's panel as tabs; signature planned: each side's accuracy on the track, in its grade's color; below 1020px, one column |
+| Openings        | `/opening`              | 2     | the popularity chart is still Lichess's Chart.js canvas                                                                                                |
+| Board editor    | `/editor`               | 2     |                                                                                                                                                        |
+| Import game     | `/paste`                | 2     | the title with its picture, the form on a card, the file picker as a drop zone; no signature yet                                                       |
+| Advanced search | `/games/search`         | 2     | the form on a card, its labels over its fields on phones; the results' game rows are still Lichess's                                                   |
 
 ## Account
 

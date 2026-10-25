@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
+import { flush } from '#shared/testing/timers.ts';
 
 // The bar names its own tab from the extension's messages; the chat's come from Lichess.
 const i18n = { getMessage: (name: string): string => name };
@@ -26,6 +27,7 @@ const analyse = (side: string): string =>
 
 /** Reloaded for each test: which part is on show outlives one sync. */
 let syncPanelTabs: () => void;
+let followReviewState: () => MutationObserver;
 
 const main = (): HTMLElement | null => queryOne(document, 'main', HTMLElement);
 
@@ -44,7 +46,7 @@ const activeLabel = (): string | undefined =>
 beforeEach(async () => {
   vi.stubGlobal('chrome', { i18n });
   vi.resetModules();
-  ({ syncPanelTabs } = await import('./panel-tabs.ts'));
+  ({ syncPanelTabs, followReviewState } = await import('./panel-tabs.ts'));
 });
 
 afterEach(() => {
@@ -167,6 +169,19 @@ describe('the game panel’s tabs', () => {
     document.documentElement.classList.remove('ln-ext-review-moves');
     syncPanelTabs();
     expect(labels()).toEqual(['roundPanelMoves', 'Chat room', 'Notes']);
+  });
+
+  it('follows the Game Review as it takes the panel and gives it back, not a tick later', async () => {
+    document.body.innerHTML = analyse(chat([]));
+    syncPanelTabs();
+    const observer = followReviewState();
+    document.documentElement.classList.add('ln-ext-review-moves');
+    await flush();
+    expect(main()?.dataset.lnExtTabbed).toBeUndefined();
+    document.documentElement.classList.remove('ln-ext-review-moves');
+    await flush();
+    expect(main()?.dataset.lnExtTabbed).toBe('');
+    observer.disconnect();
   });
 
   it('draws the tabs again only when they change', () => {

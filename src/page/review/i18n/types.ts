@@ -72,7 +72,9 @@ interface BriefStrings {
 export interface InterfaceStrings {
   readonly review: string;
   readonly start: string;
-  /** The closed review's way back to the summary, beside Game Review's. */
+  /** The summary's button once the board is past the game's start. */
+  readonly resume: string;
+  /** The tabs' names, with `review` and `moves` (view/mode-tabs.ts). */
   readonly summary: string;
   readonly brief: BriefStrings;
   readonly next: string;
@@ -86,7 +88,10 @@ export interface InterfaceStrings {
   readonly playedLike: (side: Color, elo: number | null) => readonly [string, string];
   /** Its tooltip as on Chess.com, with the settings' Chess.com ratings on: "1850 on Lichess". */
   readonly lichessRating: (rating: string) => string;
-  /** The summary's sections: the move classes, the phases' verdicts, the profile's radar. */
+  /**
+   * The summary's sections: the move classes, the phases' verdicts, the profile's radar.
+   * `moves` also names the tab of Lichess's own panel.
+   */
   readonly moves: string;
   readonly phasesTitle: string;
   /** The verdicts' phases (rating/phases.ts): a name, and which moves it holds. */
@@ -96,7 +101,6 @@ export interface InterfaceStrings {
   readonly profile: Readonly<Record<ProfileAxis, { readonly name: string; readonly how: string }>>;
   readonly accuracy: string;
   readonly anonymous: string;
-  readonly close: string;
   readonly back: string;
   readonly coach: string;
   readonly intro: string;

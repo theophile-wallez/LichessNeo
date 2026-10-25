@@ -1,0 +1,125 @@
+/* ---- The review's tabs --- */
+
+/* A game's summary, debrief and Lichess's own panel, as tabs at the head of the right-hand
+   column (page/review/view/mode-tabs.ts), the move-by-move review's share button and a new
+   game at their right. Their pick slides (content/ui/tab-bars.ts). The free board has
+   none. */
+
+#ln-ext-review-modes {
+  display: none;
+}
+
+html:is(.ln-ext-review-normal, .ln-ext-review-summary, .ln-ext-review-moves) #ln-ext-review-modes {
+  grid-area: rmodes;
+  container: ln-ext-review-modes / inline-size;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  margin-left: var(--ln-ext-gap);
+  padding: 0 8px;
+  border-radius: 6px 6px 0 0;
+  background: var(--ln-ext-bg-panel-dark);
+  font-family: var(--ln-ext-font);
+}
+
+/* As wide in every mode, whatever buttons stand at their right: a tab stays under the pointer. */
+.ln-ext-review-modes__tabs {
+  flex: 0 1 300px;
+  display: flex;
+  gap: 2px;
+  min-width: 0;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--ln-ext-shade-30);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+}
+
+.ln-ext-review-modes__tabs[data-ln-ext-tabs] {
+  --ln-ext-tab-radius: 7px;
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised);
+  --ln-ext-tab-shadow: 0 1px 2px var(--ln-ext-shade-55);
+}
+
+/* Each as wide as its name at least, the room left shared out. */
+.ln-ext-review-modes__tabs button {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 30px;
+  padding: 0 8px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ln-ext-text-dim);
+  font-family: var(--ln-ext-font);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: color 0.15s !important;
+}
+
+.ln-ext-review-modes__tabs button:hover,
+.ln-ext-review-modes__tabs button.active {
+  color: var(--ln-ext-text-strong);
+}
+
+/* Until the sliding piece is placed, the tab picked carries the pill itself. */
+.ln-ext-review-modes__tabs:not([data-ln-ext-tabs]) button.active {
+  background: var(--ln-ext-bg-raised);
+  box-shadow: 0 1px 2px var(--ln-ext-shade-55);
+}
+
+.ln-ext-review-modes__actions {
+  flex: none;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ln-ext-review-modes__actions:empty {
+  display: none;
+}
+
+/* Lichess's own tabs under ours, in its panel: ours carry the column's corners. */
+@media (min-width: 1020px) {
+  html.ln-ext-review-normal main.analyse[data-ln-ext-tabbed] > .ln-ext-panel-tabs {
+    border-radius: 0;
+  }
+}
+
+/* A narrow panel from 1020px (300px at 1024): tighter tabs leave the new game its room. */
+@container ln-ext-review-modes (max-width: 380px) {
+  #ln-ext-review-modes {
+    gap: 4px;
+    padding: 0 6px;
+  }
+
+  .ln-ext-review-modes__tabs {
+    gap: 0;
+    padding: 2px;
+  }
+
+  .ln-ext-review-modes__tabs button {
+    padding: 0 3px;
+    font-size: 12px;
+  }
+
+  .ln-ext-review-modes__actions .ln-ext-review__share {
+    width: 30px;
+  }
+}
+
+@media (max-width: 1019.98px) {
+  html:is(.ln-ext-review-normal, .ln-ext-review-summary, .ln-ext-review-moves)
+    #ln-ext-review-modes {
+    height: 52px;
+    margin: 12px 0 0;
+    border-radius: 10px;
+  }
+}

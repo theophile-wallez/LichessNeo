@@ -57,14 +57,18 @@
 
   #ln-ext-review {
     grid-area: rtop;
-    margin: 12px 0 0;
+    margin: 8px 0 0;
     overflow: visible;
     border-radius: 10px;
   }
 
   html.ln-ext-review-normal #ln-ext-review {
     border-top: none;
-    border-radius: 10px;
+  }
+
+  /* The free board's panel has no tabs over it. */
+  html:is(.ln-ext-review-live, .ln-ext-review-openings) #ln-ext-review {
+    margin-top: 12px;
   }
 
   #ln-ext-review .ln-ext-review__head {

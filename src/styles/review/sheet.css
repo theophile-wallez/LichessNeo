@@ -1,7 +1,7 @@
 /* ---- The game's sheet --- */
 
-/* The header's share button opens Lichess's crosstable and "Share & export" over the
-   move-by-move panel, under its header (page/review/view/render.ts sets
+/* The tabs' share button opens Lichess's crosstable and "Share & export" over what the tab
+   shows, under the tabs (page/review/view/render.ts sets
    ln-ext-review-sheet); the export has its own look (analysis/export.css). Below 1020px
    they're in the page's column already, under the moves (analysis/layout-narrow.css): no
    button. */
@@ -18,20 +18,32 @@
 }
 
 @media (min-width: 1020px) {
-  html.ln-ext-review-moves.ln-ext-review-sheet main.analyse > .analyse__underboard {
-    grid-row: rtop-start / tools-end !important;
+  html.ln-ext-review-sheet main.analyse > .analyse__underboard {
     grid-column: rtop !important;
     z-index: 4;
     display: block !important;
     box-sizing: border-box;
     min-height: 0;
-    margin: 48px 0 0 var(--ln-ext-gap) !important;
+    margin: 0 0 0 var(--ln-ext-gap) !important;
     padding: 12px;
     overflow-y: auto;
     border-top: 1px solid var(--ln-ext-border);
     background: var(--ln-ext-bg-panel);
     box-shadow: 0 -12px 24px -16px var(--ln-ext-shade-50);
     animation: ln-ext-sheet-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html.ln-ext-review-moves.ln-ext-review-sheet main.analyse > .analyse__underboard {
+    grid-row: rtop-start / tools-end !important;
+  }
+
+  html.ln-ext-review-summary.ln-ext-review-sheet main.analyse > .analyse__underboard {
+    grid-row: rtop !important;
+  }
+
+  /* Lichess's panel: its tabs, its moves and the card, down to its controls. */
+  html.ln-ext-review-normal.ln-ext-review-sheet main.analyse > .analyse__underboard {
+    grid-row: tabs-start / rtop-end !important;
   }
 
   /* No tabs: the crosstable, then the export. The charts are the graph's views already. */

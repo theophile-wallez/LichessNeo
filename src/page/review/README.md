@@ -90,7 +90,14 @@ session, calls the render directly; every other module goes through
 | `live/`     | Moves played on the board (the free board's, and those off a game): `judgeAt`, `bookAt`, `openingAt`, and the queue of engine and masters lookups (`pump`)                                                                                                                                                                                                                                                |
 | `explain/`  | Explain's lines: the engine's best line from a move that wasn't best, and the one punishing an error, the records' own when they kept one, else each searched from its first move when Explain asks (`pumpLines`, `explainLines`); and the threats the coach reads, searched quickly for the move shown and the next two, then for the whole game (`pumpThreats`), and kept with the game (`seedThreats`) |
 | `practice/` | Opening practice: the books it plays from (the explorer's, a study's chapter, the repertoire, a trap), whether it takes a move (`verdict.ts`), where it stands with the board (`status.ts`), the repertoire and its reviews, the user's days and records, the rounds of its modes, and the copy in the user's studies (`sync.ts`)                                                                         |
-| `view/`     | The DOM: the panel per mode (summary, moves, closed, its card folding down to its buttons, live), the graph, the eval bar, the badge and arrows on the board, the move list's badges, the opening's name, the coach's avatar, the typing, the tooltip, the clicks                                                                                                                                         |
+| `view/`     | The DOM: the tabs over a game's modes, the panel per mode (summary, moves, closed, its card folding down to its chevron, live), the graph, the eval bar, the badge and arrows on the board, the move list's badges, the opening's name, the coach's avatar, the typing, the tooltip, the clicks                                                                                                           |
+
+A game's three modes are tabs at the head of the right-hand column, side by
+side: the summary, the debrief move by move and Lichess's own panel ("Moves",
+`view/mode-tabs.ts`). The page opens on the summary, or on the debrief from a
+link to a move; a step of the board from the summary goes on to the debrief,
+which its tab slides to. The summary's button starts the debrief, or resumes
+it where the board stands.
 
 Once every move is judged at full depth, the summary's counts are buttons:
 one goes to the player's next move of its class after the one on the board,
@@ -139,7 +146,7 @@ end is judged like a variation's.
 The move-by-move graph has two views, the advantage and, for a game with
 clocks, each move's time as a column (`view/graph-views.ts`,
 `view/graph-times.ts`): the toggle over its corner is kept across renders so
-that its pick slides. The header's share button opens Lichess's crosstable
+that its pick slides. The share button beside the tabs opens Lichess's crosstable
 and "Share & export" over the panel (`ln-ext-review-sheet`,
 `styles/review/sheet.css`); changing modes closes them.
 

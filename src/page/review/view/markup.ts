@@ -9,7 +9,6 @@ import ArrowRightDoubleIcon from '@hugeicons/core-free-icons/ArrowRightDoubleIco
 import ArrowTurnBackwardIcon from '@hugeicons/core-free-icons/ArrowTurnBackwardIcon';
 import BookOpen01Icon from '@hugeicons/core-free-icons/BookOpen01Icon';
 import ArrowUpRight01Icon from '@hugeicons/core-free-icons/ArrowUpRight01Icon';
-import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
 import CloudCheckIcon from '@hugeicons/core-free-icons/CloudCheckIcon';
 import CloudLoadingIcon from '@hugeicons/core-free-icons/CloudLoadingIcon';
 import CloudUploadIcon from '@hugeicons/core-free-icons/CloudUploadIcon';
@@ -23,7 +22,6 @@ import PlayIcon from '@hugeicons/core-free-icons/PlayIcon';
 import ReloadIcon from '@hugeicons/core-free-icons/ReloadIcon';
 import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
 import Settings02Icon from '@hugeicons/core-free-icons/Settings02Icon';
-import Share08Icon from '@hugeicons/core-free-icons/Share08Icon';
 import StarIcon from '@hugeicons/core-free-icons/StarIcon';
 import Target02Icon from '@hugeicons/core-free-icons/Target02Icon';
 import Book02Icon from '@hugeicons/core-free-icons/Book02Icon';
@@ -39,12 +37,11 @@ import StopWatchIcon from '@hugeicons/core-free-icons/StopWatchIcon';
 import Sword01Icon from '@hugeicons/core-free-icons/Sword01Icon';
 import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { hugeicon } from '#shared/hugeicons.ts';
-import { html, type SafeHtml, trustedHtml } from '#shared/html.ts';
+import { html, type SafeHtml } from '#shared/html.ts';
 import { formatEval } from '#page/review/evaluation/format.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { hash } from '#page/review/coach/hash.ts';
-import type { InterfaceStrings, ReviewLanguage, Ways } from '#page/review/i18n/types.ts';
-import type { Mode } from '#page/review/session.ts';
+import type { Ways } from '#page/review/i18n/types.ts';
 
 // Markup the panel's modes share: icons, the header, the score chip.
 
@@ -93,35 +90,7 @@ export const svgIcon = (name: IconName): SafeHtml =>
   hugeicon(ICONS[name], { className: 'ln-ext-i' });
 
 export const BACK_ICON = hugeicon(ArrowLeft02Icon);
-export const CLOSE_ICON = hugeicon(Cancel01Icon);
 export const CHEVRON_ICON = hugeicon(ArrowDown01Icon);
-const SHARE_ICON = hugeicon(Share08Icon);
-
-/**
- * The panel's header; `back` is the mode its back button returns to, null for none. `action`
- * goes before the close button: the new game's link (view/new-game.ts).
- */
-export function header(
-  title: string,
-  back: Mode | null,
-  language: ReviewLanguage,
-  action: SafeHtml | '' = '',
-): SafeHtml {
-  const { ui } = language;
-  const backButton =
-    back === null
-      ? trustedHtml('<span></span>')
-      : html`<button class="ln-ext-review__back" data-ln-ext="${back}" aria-label="${ui.back}">${BACK_ICON}</button>`;
-  return html`<div class="ln-ext-review__head">
-      ${backButton}
-      <div class="ln-ext-review__title">${title}</div>
-      <div class="ln-ext-review__actions">${action}<button class="ln-ext-review__close" data-ln-ext="normal" data-ln-ext-tip="${ui.close}" aria-label="${ui.close}">${CLOSE_ICON}</button></div>
-    </div>`;
-}
-
-/** The header's button that opens the game's crosstable and export over the panel, or closes them. */
-export const shareButton = (open: boolean, ui: InterfaceStrings): SafeHtml =>
-  html`<button class="ln-ext-review__share${open ? ' active' : ''}" data-ln-ext="share" data-ln-ext-tip="${ui.share}" aria-label="${ui.share}" aria-pressed="${String(open)}">${SHARE_ICON}</button>`;
 
 function blackIsBetter(record: PositionRecord | null | undefined): boolean {
   if (!record) return false;

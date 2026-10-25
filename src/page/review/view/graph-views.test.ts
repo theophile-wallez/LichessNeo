@@ -5,6 +5,7 @@ import { judgedGame } from '#page/review/fixtures/unit-review.ts';
 import type { Session } from '#page/review/session.ts';
 import { watchClicks } from './clicks.ts';
 import { timesMarkup } from './graph-times.ts';
+import { syncModeTabs } from './mode-tabs.ts';
 import { renderMoves } from './moves-panel.ts';
 import { keepMarked } from './render.ts';
 
@@ -17,7 +18,11 @@ afterEach(() => {
 /** The opera game's move-by-move panel on its tenth move, with its clicks watched. */
 function movesPanel(clocks: boolean): Session {
   const { session: judged, ctrl, facade } = judgedGame('opera');
-  const session: Session = { ...judged, redraw: () => renderMoves(session, facade) };
+  const redraw = (): void => {
+    renderMoves(session, facade);
+    syncModeTabs(session, facade);
+  };
+  const session: Session = { ...judged, redraw };
   if (clocks) {
     const game = ctrl.data.game;
     // Each move a second longer than the one before.
@@ -114,10 +119,10 @@ describe('the move-by-move graph’s views', () => {
 });
 
 describe('the game’s sheet', () => {
-  it('opens over the panel from the header’s share button, and closes from it', () => {
+  it('opens over the panel from the tabs’ share button, and closes from it', () => {
     const session = movesPanel(false);
     const share = (): HTMLElement | null =>
-      queryOne(session.elements.panel, '[data-ln-ext="share"]', HTMLElement);
+      queryOne(session.elements.modes, '[data-ln-ext="share"]', HTMLElement);
     expect(share()?.getAttribute('aria-pressed')).toBe('false');
     share()?.click();
     expect(session.view.sheet).toBe(true);
@@ -126,7 +131,7 @@ describe('the game’s sheet', () => {
     expect(session.view.sheet).toBe(false);
   });
 
-  it('marks the page while it’s open in the move-by-move review only', async () => {
+  it('marks the page while it’s open in a game’s modes, not on the free board', async () => {
     const root = document.documentElement;
     const session = movesPanel(false);
     session.view.sheet = true;
@@ -135,6 +140,10 @@ describe('the game’s sheet', () => {
     await flush();
     expect(root.classList.contains('ln-ext-review-sheet')).toBe(true);
     session.view.mode = 'summary';
+    root.className = 'light';
+    await flush();
+    expect(root.classList.contains('ln-ext-review-sheet')).toBe(true);
+    session.view.mode = 'live';
     root.className = 'light';
     await flush();
     expect(root.classList.contains('ln-ext-review-sheet')).toBe(false);

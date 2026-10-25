@@ -7,12 +7,11 @@ import { playerProfile, type Profile } from '#page/review/judge/profile.ts';
 import type { Review, Session } from '#page/review/session.ts';
 import { mountGraph } from './graph.ts';
 import { learnLabel } from './learn.ts';
-import { header } from './markup.ts';
 import { movesMarkup } from './summary-moves.ts';
 import { phasesMarkup } from './summary-phases.ts';
 import { playerName, playersMarkup, sideOrder, watchPlayerFocus } from './summary-players.ts';
 import { radarMarkup } from './summary-radar.ts';
-import { newGameMarkup } from './new-game.ts';
+import { gameIndex } from '#page/review/game/work.ts';
 
 // The summary: the graph and the two players over the moves, the phases'
 // verdicts and the profile. It keeps its layout while the game is analyzed, filling in from
@@ -30,8 +29,8 @@ interface SummaryInput {
   readonly language: ReviewLanguage;
   /** "Learn from your mistakes", when the exercise can start. */
   readonly learn: string | null;
-  /** The header's link to a new game like this one. */
-  readonly newGame: SafeHtml | '';
+  /** The board is past the game's start: its button takes the debrief up there. */
+  readonly resume: boolean;
   readonly speed: string | undefined;
 }
 
@@ -50,14 +49,13 @@ const namesOf = ({ players, language }: SummaryInput): Record<Color, string> => 
 function summaryMarkup(input: SummaryInput): SafeHtml {
   const { review, error, language, learn } = input;
   const canStart = review !== null && !error;
-  return html`${header(language.ui.review, 'normal', language, input.newGame)}
-      <div class="ln-ext-review__top">
+  return html`<div class="ln-ext-review__top">
         ${error ? html`<p class="ln-ext-review__error">${error}</p>` : ''}
         <div class="ln-ext-review__graph ln-ext-summary-graph"></div>
         ${playersMarkup(input)}
       </div>
       <div class="ln-ext-review__body">${movesMarkup(input)}${phasesMarkup({ rating: review?.rating ?? null, language, order: input.order })}${radarMarkup({ profiles: profilesOf(review), names: namesOf(input), language, order: input.order })}</div>
-      <div class="ln-ext-review__foot"><button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="moves" ${canStart ? '' : 'disabled'}>${language.ui.start}</button>${learn === null ? '' : html`<button class="ln-ext-btn ln-ext-review__learn" data-ln-ext="learn">${learn}</button>`}</div>`;
+      <div class="ln-ext-review__foot"><button class="ln-ext-btn ln-ext-btn--green" data-ln-ext="moves" ${canStart ? '' : 'disabled'}>${input.resume ? language.ui.resume : language.ui.start}</button>${learn === null ? '' : html`<button class="ln-ext-btn ln-ext-review__learn" data-ln-ext="learn">${learn}</button>`}</div>`;
 }
 
 export function renderSummary(session: Session, analysis: Analysis): void {
@@ -76,7 +74,7 @@ export function renderSummary(session: Session, analysis: Analysis): void {
       winner: analysis.winner,
       language,
       learn: learnLabel(analysis),
-      newGame: newGameMarkup(analysis, 'ln-ext-review__new'),
+      resume: (gameIndex(session.work, analysis.node) ?? 0) > 0,
       speed: analysis.data?.game.speed,
     }),
   );

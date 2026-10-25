@@ -44,6 +44,7 @@ const CLASS_PLURALS: Readonly<Record<MoveClass, string>> = {
 const INTERFACE: Omit<InterfaceStrings, 'retry' | 'practice' | 'clock' | 'playedLike'> = {
   review: 'Debrief',
   start: 'Start Debrief',
+  resume: 'Resume Debrief',
   summary: 'Summary',
   brief: {
     opening: name => html`This game opened with the <b>${name}</b>.`,
@@ -111,7 +112,6 @@ const INTERFACE: Omit<InterfaceStrings, 'retry' | 'practice' | 'clock' | 'played
   accuracy: 'Accuracy',
   lichessRating: rating => `${rating} on Lichess`,
   anonymous: 'Anonymous',
-  close: 'Close debrief',
   back: 'Back',
   coach: 'Change coach',
   intro: "Let's debrief this game!",

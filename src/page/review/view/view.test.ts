@@ -8,14 +8,14 @@ import { CLASS_COLORS } from '#page/review/classes/classes.ts';
 import { en } from '#page/review/i18n/en.ts';
 import { UNIT_CASES } from '#page/review/fixtures/unit-cases.ts';
 import { builtSession, newSession } from '#page/review/fixtures/unit-review.ts';
-import { MODES, ModeSchema } from '#page/review/session.ts';
+import { MODES } from '#page/review/session.ts';
 import { PanelActionSchema } from './actions.ts';
 import { badgeMarkup, landingSquare, reviewArrowsFor } from './board-badge.ts';
 import { type AvatarInput, avatarMarkup, takeReaction } from './coach-avatar.ts';
 import { barPosition, type BarInput } from './eval-bar.ts';
 import { indexAt } from './graph.ts';
 import { graphMarkup, knownRuns } from './graph-markup.ts';
-import { evalChip, header } from './markup.ts';
+import { evalChip } from './markup.ts';
 import { openingMarkup } from './opening.ts';
 import { overflows } from './stream.ts';
 import { keepMarked } from './render.ts';
@@ -69,22 +69,6 @@ describe('markup', () => {
     'draws score chip %i as the original did',
     (_, record, expected) => {
       expect(evalChip(RecordSchema.parse(record)).value).toBe(expected);
-    },
-  );
-
-  // The original wrote no back button as ''.
-  const BackSchema = z.union([
-    ModeSchema,
-    z.pipe(
-      z.literal(''),
-      z.transform(() => null),
-    ),
-  ]);
-
-  it.each(UNIT_CASES.headers.map(([title = '', back = ''], i) => [title, back, legacy.headers[i]]))(
-    'draws the header “%s” (back to %s) as the original did',
-    (title, back, expected) => {
-      expect(header(title, BackSchema.parse(back), en).value).toBe(expected);
     },
   );
 

@@ -28,7 +28,7 @@
     grid-template-columns: var(--ln-ext-board) !important;
     grid-template-rows:
       var(--ln-ext-strip) var(--ln-ext-bar) auto var(--ln-ext-bar) auto auto auto auto auto
-      auto auto auto auto auto !important;
+      auto auto auto auto auto auto !important;
     grid-template-areas:
       'gauge'
       'user-top'
@@ -37,6 +37,7 @@
       'rctrl'
       'controls'
       'kb-move'
+      'rmodes'
       'rtop'
       'tools'
       'side'
