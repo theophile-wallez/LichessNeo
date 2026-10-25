@@ -9,50 +9,121 @@
   body {
     --w: 440px;
     --h: 280px;
-    --glow-x: 0%;
-    --glow-y: 0%;
-  }
-
-  body::before {
-    background-size: 40px 40px;
+    --glow-x: 80%;
+    --glow-y: 30%;
+    --grid-x: 20%;
+    --grid-y: 0%;
   }
 
   header {
-    top: 46px;
-    left: 28px;
-    width: 250px;
-    gap: 10px;
+    top: 30px;
+    left: 24px;
+    width: 170px;
+    gap: 16px;
   }
 
-  header img {
-    width: 64px;
-    height: 64px;
-    margin: -6px 0 0 -6px;
-  }
-
-  header b {
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  header span {
-    color: var(--dim);
+  .brand {
+    gap: 8px;
     font-size: 16px;
-    font-weight: 600;
   }
 
-  .robot {
-    top: 56px;
-    left: 262px;
-    height: 200px;
+  .brand img {
+    width: 28px;
+    height: 28px;
+  }
+
+  h1 {
+    font-size: 31px;
+    line-height: 1.04;
+  }
+
+  .stage {
+    top: 22px;
+    left: 186px;
+    width: 300px;
+    height: 210px;
+    perspective: 700px;
+  }
+
+  .stage > .window {
+    width: 330px;
+    transform: rotateY(-22deg) rotateX(5deg);
+  }
+
+  .window::before {
+    top: 8px;
+    left: 10px;
+    width: 8px;
+    height: 8px;
+    box-shadow: 13px 0 #febc2e, 26px 0 #28c840;
+  }
+
+  .window > p {
+    height: 22px;
+  }
+
+  .window > div {
+    height: calc(100% - 22px);
+  }
+
+  .window > div img {
+    left: -84px;
+    top: -12px;
+    width: 520px;
+  }
+
+  .say {
+    top: 168px;
+    right: 14px;
+    height: 82px;
+    gap: 4px;
+    padding: 12px 16px 12px 104px;
+    border-radius: 14px;
+    transform: rotate(-3deg);
+  }
+
+  .say > img {
+    left: 6px;
+    bottom: -12px;
+    height: 92px;
+  }
+
+  .say .move {
+    gap: 8px;
+    font-size: 19px;
+  }
+
+  .say .move b {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .say .why {
+    font-size: 13px;
   }
 </style>
 
 <header>
-  <img src="../../public/icons/icon128.png">
-  <b>Lichess Neo</b>
-  <span lang="en">Lichess, made modern</span>
-  <span lang="fr">Lichess, version moderne</span>
+  <p class="brand"><img src="../../public/icons/icon128.png">Lichess Neo</p>
+  <h1 lang="en">Lichess, <em>made modern</em></h1>
+  <h1 lang="fr">Lichess, <em>version moderne</em></h1>
 </header>
-<img class="coach robot" src="coaches/robot-2-happy.webp">
+
+<div class="stage">
+  <div class="window">
+    <p></p>
+    <div>
+      <img lang="en" src="shots/review-brilliant-en.webp">
+      <img lang="fr" src="shots/review-brilliant-fr.webp">
+    </div>
+  </div>
+</div>
+
+<div class="say">
+  <img src="coaches/coach-2-delight.webp">
+  <p class="move"><b>!!</b><span lang="en">Qxc1, brilliant!</span><span lang="fr">Dxc1, brillant !</span></p>
+  <p class="why" lang="en">Explained by your coach</p>
+  <p class="why" lang="fr">Expliqué par votre coach</p>
+</div>

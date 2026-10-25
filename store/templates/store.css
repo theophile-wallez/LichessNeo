@@ -309,6 +309,61 @@ h1 em {
   box-shadow: 0 0 0 1px #ffffff26, 0 26px 60px #000000b8, 0 8px 20px #00000080;
 }
 
+/* A window in perspective, its shot cropped: the stage sets the depth, a page
+   the tilt, the crop's size and where the shot sits in it. */
+.stage > .window {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 50%;
+}
+
+.window > div {
+  position: relative;
+  overflow: hidden;
+  height: calc(100% - 34px);
+}
+
+.window > div img {
+  position: absolute;
+}
+
+/* The Debrief's coach card, redrawn large enough to read on a promo tile: the
+   coach on its bottom edge, its words on its right. A page sets the sizes. */
+.say {
+  display: grid;
+  align-content: center;
+  width: max-content;
+  overflow: hidden;
+  background: #24242b;
+  box-shadow: 0 0 0 1px #ffffff26, var(--shadow);
+}
+
+.say > img {
+  position: absolute;
+}
+
+.say .move {
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.say .move b {
+  display: grid;
+  place-items: center;
+  flex: none;
+  background: #1f5f33;
+  color: var(--green);
+  letter-spacing: -0.06em;
+}
+
+.say .why {
+  color: #c9c9d2;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .coach {
   filter: drop-shadow(0 18px 26px #00000066);
 }
