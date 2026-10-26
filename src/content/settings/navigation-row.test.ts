@@ -26,7 +26,7 @@ beforeEach(() => {
 const storedSettings = (): unknown => synced.get('ln-ext-settings');
 
 describe('the settings’ navigation', () => {
-  it('puts the nav where it’s picked, a sidebar by default', async () => {
+  it('puts the nav where it’s picked, a rail by default', async () => {
     const page = buildNavigationRow();
     await flush();
     const picks = queryAll(page, '.ln-ext-nav-pick', HTMLButtonElement);
@@ -40,7 +40,7 @@ describe('the settings’ navigation', () => {
       'rail',
       'header',
     ]);
-    expect(checked()).toEqual(['sidebar']);
+    expect(checked()).toEqual(['rail']);
     picks[3]
       ?.querySelector('.ln-ext-nav-pick__name')
       ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));

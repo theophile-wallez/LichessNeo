@@ -38,11 +38,11 @@ describe('the settings', () => {
     expect(parseSettings({ sidebarRating: 'puzzle' }).sidebarRating).toBe('mostPlayed');
   });
 
-  it('put the nav in a sidebar by default, or in the shape asked', () => {
-    expect(parseSettings({}).navigation).toBe('sidebar');
-    for (const navigation of ['unfolded', 'rail', 'header'] as const)
+  it('put the nav in a rail by default, or in the shape asked', () => {
+    expect(parseSettings({}).navigation).toBe('rail');
+    for (const navigation of ['sidebar', 'unfolded', 'header'] as const)
       expect(parseSettings({ navigation }).navigation).toBe(navigation);
-    expect(parseSettings({ navigation: 'bottom' }).navigation).toBe('sidebar');
+    expect(parseSettings({ navigation: 'bottom' }).navigation).toBe('rail');
   });
 
   it('count as read in a script the extension left behind, which can’t read them', () => {

@@ -10,6 +10,8 @@ const WIDTHS =
 
 beforeEach(() => {
   vi.stubGlobal('chrome', { i18n: { getMessage: (name: string) => name } });
+  // The sidebar, which folds; the rail, the default, stays folded.
+  localStorage.setItem('ln-ext-navigation', 'sidebar');
   const style = document.createElement('style');
   style.textContent = WIDTHS;
   document.head.replaceChildren(style);

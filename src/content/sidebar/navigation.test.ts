@@ -36,10 +36,10 @@ async function start(): Promise<void> {
 const shape = (): string | undefined => document.documentElement.dataset.lnExtSidebar;
 
 describe('the nav’s place', () => {
-  it('shows the sidebar unfolded by default', async () => {
+  it('shows the rail by default', async () => {
     await start();
     await flush();
-    expect(shape()).toBeUndefined();
+    expect(shape()).toBe('collapsed rail');
   });
 
   it('shows the page’s copy at once, before the settings are read', async () => {
@@ -50,6 +50,7 @@ describe('the nav’s place', () => {
   });
 
   it('folds the sidebar to its icons', async () => {
+    localStorage.setItem('ln-ext-navigation', 'sidebar');
     localStorage.setItem('ln-ext-sidebar-collapsed', '1');
     await start();
     expect(shape()).toBe('collapsed');

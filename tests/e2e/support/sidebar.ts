@@ -3,8 +3,8 @@ import { boxOf } from './layout.ts';
 
 // Lichess's top header, drawn as a fixed left sidebar from 1020px wide.
 
-// `--ln-ext-sidebar-w` in styles/sidebar/layout.css.
-const SIDEBAR_WIDTH = 168;
+// `--ln-ext-sidebar-w` of the rail, the default nav (styles/sidebar/rail.css).
+const SIDEBAR_WIDTH = 84;
 
 export async function expectSidebar(page: Page): Promise<void> {
   const sidebar = page.locator('#top');

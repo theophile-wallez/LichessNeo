@@ -137,7 +137,7 @@ so the logic can be unit-tested without a page.
 - `platform`: the extension APIs it uses.
 - `settings`: the extension's settings, a section of the account pages whose
   menu gets a link for each of its pages: Appearance (the color scheme, the
-  color themes, Lichess's Roundness, and the nav as a sidebar, unfolded or not, a rail or a
+  color themes, Lichess's Roundness, and the nav as a rail, the default, a sidebar, unfolded or not, or a
   header), Board & sounds (the sounds, the board and the pieces, the
   extension's, the packs' and Lichess's, the boards in sections: classic, each
   family's, then the user's own and the packs', over a preview board that shows a board or a set while its tile is hovered, then

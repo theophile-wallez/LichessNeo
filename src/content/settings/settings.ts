@@ -18,6 +18,7 @@ export const MAX_CUSTOM_THEMES = 24;
  * pages listed under it, a rail of icons with their labels, or a header across the top.
  */
 export const NavigationSchema = z.enum(['sidebar', 'unfolded', 'rail', 'header']);
+export const DEFAULT_NAVIGATION = 'rail';
 
 export const SettingsSchema = z.object({
   /** The interface's own sounds (content/ui/sounds.ts), not Lichess's nor a pack's. */
@@ -28,7 +29,7 @@ export const SettingsSchema = z.object({
   analysisCoach: z.prefault(z.boolean(), true),
   /** The coach drawing what it explains on the board (a pawn's square); off, it only says it. */
   coachBoard: z.prefault(z.boolean(), true),
-  navigation: z.catch(NavigationSchema, 'sidebar'),
+  navigation: z.catch(NavigationSchema, DEFAULT_NAVIGATION),
   /** The speed whose rating the sidebar shows beside the player's name (content/sidebar). */
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
   /** The home's quick pairing cards, in their order (content/pages/speed-cards). */

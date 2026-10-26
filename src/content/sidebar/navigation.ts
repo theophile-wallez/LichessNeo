@@ -2,7 +2,12 @@ import { z } from 'zod/mini';
 import { setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
-import { NavigationSchema, onSettings, type Settings } from '#content/settings/settings.ts';
+import {
+  DEFAULT_NAVIGATION,
+  NavigationSchema,
+  onSettings,
+  type Settings,
+} from '#content/settings/settings.ts';
 
 // What Lichess's header turns into from 1020px, as the settings pick: the sidebar,
 // with the open section's pages under it or not, folded to its icons or not
@@ -16,7 +21,7 @@ export const isCollapsed = (): boolean =>
   readStored(StorageKey.sidebarCollapsed, z.literal('1')) !== null;
 
 const storedNavigation = (): Navigation =>
-  readStored(StorageKey.navigation, NavigationSchema) ?? 'sidebar';
+  readStored(StorageKey.navigation, NavigationSchema) ?? DEFAULT_NAVIGATION;
 
 // Words of `data-ln-ext-sidebar`: the rail takes the folded sidebar's rules (collapsed.css).
 function shape(): string | null {
