@@ -1,9 +1,10 @@
 import { createElement } from '#shared/dom.ts';
 import { message } from '#content/platform/runtime.ts';
-import { fetchPack } from './import.ts';
+import { packTitle } from '#shared/packs/pack.ts';
+import { fetchPacks } from './import.ts';
 import type { Library } from './library.ts';
 
-// The form that imports a pack from a GitHub link, in the extension's
+// The form that imports packs from a GitHub link, in the extension's
 // settings, and in the user menu's panels when signed out. A private
 // repository's token is used for that import and never kept: the page's
 // storage is Lichess's to read.
@@ -42,13 +43,14 @@ async function importPack(link: string, token: string, library: Library): Promis
   importState.busy = true;
   setStatus(message('packsImporting'), false);
   try {
-    const download = await fetchPack(link, token);
+    const download = await fetchPacks(link, token);
     if ('error' in download) {
       setStatus(download.error, true);
       return;
     }
-    await library.add(download.pack);
-    setStatus(message('packsImported', download.pack.name), false);
+    const [first] = download.packs;
+    await library.add(download.packs, download.source);
+    setStatus(message('packsImported', first ? packTitle(first) : ''), false);
   } catch (error) {
     console.error('[LichessNeo] pack import failed', error);
     setStatus(message('packsImportFailed'), true);

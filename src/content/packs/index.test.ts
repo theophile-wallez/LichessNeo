@@ -156,11 +156,17 @@ describe('packs', () => {
     vi.mocked(readPack).mockResolvedValue(WOOD);
     const library = startPacks();
     await library.ready;
+    await library.loadAll();
     vi.mocked(window.postMessage).mockClear();
-    await library.add({
-      ...WOOD,
-      sounds: { capture: WOOD.sounds?.capture ?? '', notify: WOOD.sounds?.capture ?? '' },
-    });
+    await library.add(
+      [
+        {
+          ...WOOD,
+          sounds: { capture: WOOD.sounds?.capture ?? '', notify: WOOD.sounds?.capture ?? '' },
+        },
+      ],
+      WOOD.id,
+    );
     const [sent] = posted();
     expect(Object.keys(SentSoundsSchema.parse(sent).sounds)).toEqual(['capture', 'notify']);
   });

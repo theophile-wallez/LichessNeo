@@ -30,3 +30,8 @@ export function fakePack(
     ...(parts.includes('sound') && { sounds: { capture: SOUND } }),
   };
 }
+
+/** One of the boards or piece sets a pack.json at `source` lists, under `packName`. */
+export function listedPack(source: string, part: 'board' | 'piece', name: string): Pack {
+  return { ...fakePack(`${source}#${part}:${name}`, [part]), name, packName: 'Set' };
+}

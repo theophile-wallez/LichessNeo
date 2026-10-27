@@ -1,11 +1,16 @@
 import { afterEach, describe, expect, it, vi, type Mock } from 'vitest';
-import { fakePack } from '#shared/testing/packs.ts';
+import { fakePack, listedPack } from '#shared/testing/packs.ts';
 import { createLibrary, LICHESS, storedPick, type Look, type Shown } from './library.ts';
 import type { Pack } from '#shared/packs/pack.ts';
 import { ACCENT_BOARD } from './themes.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
 const CLICKS = fakePack('ann/packs/main/clicks/', ['sound']);
+// The boards a pack.json lists, beside its lone pieces.
+const SET = 'ann/packs/main/set/';
+const LONE = fakePack(SET, ['piece']);
+const LIGHT = listedPack(SET, 'board', 'Light');
+const DARK = listedPack(SET, 'board', 'Dark');
 
 type Save = (pack: Pack) => Promise<void>;
 type Erase = (id: string) => Promise<void>;
@@ -43,6 +48,8 @@ const ids = (shown: Shown | undefined): Record<string, string | null> => ({
   piece: idOf(shown?.piece),
   sound: idOf(shown?.sound),
 });
+
+const erased = (erase: Mock<Erase>): Set<string> => new Set(erase.mock.calls.map(([id]) => id));
 
 afterEach(() => {
   localStorage.clear();
@@ -119,9 +126,10 @@ describe('createLibrary', () => {
   it('stores an imported pack and shows each part it has', async () => {
     localStorage.setItem('ln-ext-board', WOOD.id);
     const { shown, save, library: packs } = await library([WOOD]);
+    await packs.loadAll();
     const listener = vi.fn<() => void>();
     packs.onChange(listener);
-    await packs.add(CLICKS);
+    await packs.add([CLICKS], CLICKS.id);
     expect(save).toHaveBeenCalledWith(CLICKS);
     expect(ids(shown.at(-1))).toEqual({ board: WOOD.id, piece: null, sound: CLICKS.id });
     expect(packs.packs()).toEqual([WOOD, CLICKS]);
@@ -131,7 +139,7 @@ describe('createLibrary', () => {
   it('replaces a pack imported again, keeping one of each', async () => {
     const { library: packs } = await library([WOOD, CLICKS]);
     const renamed = { ...WOOD, name: 'Wood, again' };
-    await packs.add(renamed);
+    await packs.add([renamed], renamed.id);
     expect(packs.packs()).toEqual([CLICKS, renamed]);
   });
 
@@ -147,10 +155,37 @@ describe('createLibrary', () => {
     expect(localStorage.getItem('ln-ext-pieces')).toBe(LICHESS);
   });
 
+  it('drops what a pack.json no longer lists, and shows its first of each part', async () => {
+    const { shown, save, erase, library: packs } = await library([CLICKS, LONE, LIGHT, DARK]);
+    packs.choose('board', DARK.id);
+    packs.choose('sound', CLICKS.id);
+    const light = { ...LIGHT, name: 'Light, again' };
+    await packs.add([light], SET);
+    expect(save.mock.calls).toEqual([[light]]);
+    expect(erased(erase)).toEqual(new Set([DARK.id, LONE.id]));
+    expect(packs.packs()).toEqual([CLICKS, light]);
+    expect(ids(shown.at(-1))).toEqual({ board: LIGHT.id, piece: null, sound: CLICKS.id });
+  });
+
+  it('sends a part back to its default when its pick is dropped', async () => {
+    const { library: packs } = await library([LONE, DARK]);
+    packs.choose('board', DARK.id);
+    await packs.add([LONE], SET);
+    expect(localStorage.getItem('ln-ext-board')).toBe(ACCENT_BOARD);
+    expect(packs.current('piece')).toBe(LONE.id);
+  });
+
+  it('removes every pack a pack.json gave, and those of no other', async () => {
+    const { erase, library: packs } = await library([CLICKS, LONE, LIGHT]);
+    await packs.remove(SET);
+    expect(erased(erase)).toEqual(new Set([LIGHT.id, LONE.id]));
+    expect(packs.packs()).toEqual([CLICKS]);
+  });
+
   it('changes nothing when the store fails', async () => {
     const { save, library: packs } = await library([]);
     save.mockRejectedValueOnce(new Error('quota'));
-    await expect(packs.add(WOOD)).rejects.toThrow('quota');
+    await expect(packs.add([WOOD], WOOD.id)).rejects.toThrow('quota');
     expect(packs.packs()).toEqual([]);
     expect(localStorage.getItem('ln-ext-board')).toBeNull();
   });

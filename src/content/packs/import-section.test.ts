@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { fakeGithub } from '#shared/testing/github.ts';
-import { fakePack } from '#shared/testing/packs.ts';
+import { fakePack, listedPack } from '#shared/testing/packs.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { fakeWorker } from '#shared/testing/worker.ts';
 import type { Pack } from '#shared/packs/pack.ts';
@@ -79,6 +79,22 @@ describe('the settings’ packs', () => {
     await flush();
     expect(library.packs()).toEqual([CLICKS]);
     expect(names(section)).toEqual(['Pack ann/packs/main/clicks/']);
+  });
+
+  it('list a pack.json once, with how many of each it holds, and remove it whole', async () => {
+    const set = 'ann/packs/main/set/';
+    const { library, section } = await start([
+      listedPack(set, 'board', 'Light'),
+      listedPack(set, 'board', 'Dark'),
+      listedPack(set, 'piece', 'Neo'),
+      CLICKS,
+    ]);
+    expect(names(section)).toEqual(['Set', 'Pack ann/packs/main/clicks/']);
+    expect(section.querySelector('.ln-ext-pack__parts')?.textContent).toBe(
+      'packsPartBoards:2 · packsPartPieces',
+    );
+    queryOne(section, '.ln-ext-pack__remove', HTMLButtonElement)?.click();
+    await vi.waitFor(() => expect(library.packs()).toEqual([CLICKS]));
   });
 
   it('say so when the packs can’t be read', async () => {

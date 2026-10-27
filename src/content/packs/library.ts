@@ -1,6 +1,7 @@
 import { z } from 'zod/mini';
 import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
 import { hasPart, PART_KINDS, type Pack, type PartKind } from '#shared/packs/pack.ts';
+import { sourceIdOf } from '#shared/packs/source.ts';
 import { ACCENT_BOARD, isTheme } from './themes.ts';
 
 // The imported packs, and what each part shows: one of the extension's
@@ -59,9 +60,13 @@ export interface Library {
   readonly choose: (kind: PartKind, id: string) => void;
   /** Shows `id` on the part, unsaved, while its tile is hovered; null shows the pick again. */
   readonly preview: (kind: PartKind, id: string | null) => void;
-  /** Stores a pack, replacing one of the same id, and shows each part it has. */
-  readonly add: (pack: Pack) => Promise<void>;
-  readonly remove: (id: string) => Promise<void>;
+  /**
+   * Stores the packs of one pack.json, in place of those it gave before, and
+   * shows each part they have: the first pack's that has it.
+   */
+  readonly add: (packs: readonly Pack[], source: string) => Promise<void>;
+  /** Removes every pack a pack.json gave, by the id of its folder. */
+  readonly remove: (source: string) => Promise<void>;
   readonly onChange: (listener: () => void) => void;
   /** Shows the picks again, once any pack they name is read: another tab changed them. */
   readonly refresh: () => Promise<void>;
@@ -113,6 +118,36 @@ function shownFrom(packs: readonly Pack[], preview: Preview | null): Shown {
   return preview && look !== undefined ? { ...shown, [preview.kind]: look } : shown;
 }
 
+function pickImported(packs: readonly Pack[], dropped: readonly string[]): void {
+  for (const kind of PART_KINDS) {
+    const first = packs.find(pack => hasPart(pack, kind));
+    if (first) pick(kind, first.id);
+    // Else every page would hide the part a moment, waiting for a pack that's gone.
+    else if (dropped.includes(storedPick(kind))) pick(kind, DEFAULT_PICKS[kind]);
+  }
+}
+
+interface SourcePacks {
+  readonly packs: readonly Pack[];
+  /** The id of the pack.json they came from. */
+  readonly source: string;
+}
+
+/** Stores a pack.json's packs in place of those it gave before, and gives the list after. */
+async function replaceSource(
+  list: readonly Pack[],
+  { packs, source }: SourcePacks,
+  { save, erase }: Pick<LibraryOptions, 'save' | 'erase'>,
+): Promise<Pack[]> {
+  const dropped = list
+    .filter(entry => sourceIdOf(entry.id) === source && !packs.some(pack => pack.id === entry.id))
+    .map(entry => entry.id);
+  await Promise.all(packs.map(pack => save(pack)));
+  await Promise.all(dropped.map(id => erase(id)));
+  pickImported(packs, dropped);
+  return [...list.filter(entry => sourceIdOf(entry.id) !== source), ...packs];
+}
+
 async function readOrNone(read: () => Promise<readonly Pack[]>): Promise<readonly Pack[]> {
   try {
     return await read();
@@ -124,7 +159,7 @@ async function readOrNone(read: () => Promise<readonly Pack[]>): Promise<readonl
 
 /** Shows the parts at once, those whose pack is unread again once it's read. */
 export function createLibrary(options: LibraryOptions): Library {
-  const { readAll, save, erase, show } = options;
+  const { readAll, show } = options;
   let list: Pack[] = [];
   let loading: Promise<void> | null = null;
   let failed = false;
@@ -152,6 +187,12 @@ export function createLibrary(options: LibraryOptions): Library {
     list = [...list, ...read.filter(pack => !list.some(entry => entry.id === pack.id))];
     update();
   };
+  const replace = async (packs: readonly Pack[], source: string): Promise<void> => {
+    // All of them, to find those of the pack.json that it no longer gives.
+    await (loading ??= load());
+    list = await replaceSource(list, { packs, source }, options);
+    update();
+  };
   update();
   return {
     packs: () => list,
@@ -167,19 +208,8 @@ export function createLibrary(options: LibraryOptions): Library {
       preview = id === null ? null : { kind, id };
       show(shownFrom(list, preview));
     },
-    add: async pack => {
-      await save(pack);
-      list = [...list.filter(entry => entry.id !== pack.id), pack];
-      for (const kind of PART_KINDS) if (hasPart(pack, kind)) pick(kind, pack.id);
-      update();
-    },
-    remove: async id => {
-      await erase(id);
-      list = list.filter(pack => pack.id !== id);
-      // Else every page would hide the part a moment, waiting for a pack that's gone.
-      for (const kind of PART_KINDS) if (storedPick(kind) === id) pick(kind, DEFAULT_PICKS[kind]);
-      update();
-    },
+    add: replace,
+    remove: source => replace([], source),
     onChange: listener => listeners.add(listener),
     refresh: loadPicked,
   };

@@ -25,23 +25,39 @@ afterEach(() => {
 });
 
 describe('servePackDownloads', () => {
-  it('downloads the pack asked for, and answers with it', async () => {
+  it('reads the pack.json asked for, and answers with it', async () => {
     const files = new Map([
       ['pack.json', new TextEncoder().encode('{"name":"S","sounds":{"capture":"c.mp3"}}')],
-      ['c.mp3', new Uint8Array([0x49, 0x44, 0x33, 4])],
     ]);
     fakeGithub({ repo: 'ann/packs', files });
     const respond = vi.fn<(answer: unknown) => void>();
     const message = {
-      type: 'ln-ext:download-pack',
+      type: 'ln-ext:pack-manifest',
       link: 'https://github.com/ann/packs',
       token: '',
     };
     expect(serve()(message, {}, respond)).toBe(true);
     await vi.waitFor(() => expect(respond).toHaveBeenCalledOnce());
-    expect(respond.mock.calls[0]?.[0]).toMatchObject({
-      pack: { name: 'S', id: 'ann/packs/HEAD/' },
+    expect(respond.mock.calls[0]?.[0]).toEqual({
+      source: 'ann/packs/HEAD/',
+      manifest: { name: 'S', sounds: { capture: 'c.mp3' } },
     });
+  });
+
+  it('reads a file asked for, and answers with it', async () => {
+    const files = new Map([['c.mp3', new Uint8Array([0x49, 0x44, 0x33, 4])]]);
+    fakeGithub({ repo: 'ann/packs', files });
+    const respond = vi.fn<(answer: unknown) => void>();
+    const message = {
+      type: 'ln-ext:pack-file',
+      link: 'https://github.com/ann/packs',
+      token: '',
+      path: 'c.mp3',
+      kind: 'sound',
+    };
+    expect(serve()(message, {}, respond)).toBe(true);
+    await vi.waitFor(() => expect(respond).toHaveBeenCalledOnce());
+    expect(respond.mock.calls[0]?.[0]).toEqual({ url: 'data:audio/mpeg;base64,SUQzBA==' });
   });
 
   it('leaves other messages to other listeners', () => {
@@ -56,7 +72,7 @@ describe('servePackDownloads', () => {
     vi.stubGlobal('fetch', () => answered.promise);
     const respond = vi.fn<(answer: unknown) => void>();
     const message = {
-      type: 'ln-ext:download-pack',
+      type: 'ln-ext:pack-manifest',
       link: 'https://github.com/ann/packs',
       token: '',
     };

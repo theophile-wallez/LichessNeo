@@ -323,6 +323,15 @@
   "packsPartSounds": {
     "message": "Sons"
   },
+  "packsPartBoards": {
+    "message": "$1 plateaux"
+  },
+  "packsPartPieceSets": {
+    "message": "$1 jeux de pièces"
+  },
+  "packsPartSoundSets": {
+    "message": "$1 jeux de sons"
+  },
   "packsRemove": {
     "message": "Retirer"
   },

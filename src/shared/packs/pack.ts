@@ -4,7 +4,9 @@ import type { Color, Role } from '#shared/chess/types.ts';
 import { SoundNameSchema } from '#shared/sounds.ts';
 
 // A pack as the extension keeps it once imported: its pieces, board and
-// sounds as data: URLs, so it needs nothing from GitHub again.
+// sounds as data: URLs, so it needs nothing from GitHub again. A pack.json
+// that lists several boards, piece sets or sound sets gives a stored pack for
+// each, named by its own name, beside one for its lone parts.
 
 /** Each piece as Lichess names its images (public/piece/<set>/wK.svg). */
 const PieceNameSchema = z.enum([
@@ -62,6 +64,8 @@ export const SoundsSchema = z.partialRecord(SoundNameSchema, AudioSchema);
 export const PackSchema = z.object({
   id: z.string(),
   name: z.string(),
+  /** The name of the pack.json, for one of the items it lists. */
+  packName: z.optional(z.string()),
   /** The link it was imported from. */
   link: z.string(),
   pieces: z.optional(PiecesSchema),
@@ -77,6 +81,9 @@ export const PackSchema = z.object({
 });
 
 export type Pack = z.infer<typeof PackSchema>;
+
+/** The name of the pack.json the pack came from. */
+export const packTitle = (pack: Pack): string => pack.packName ?? pack.name;
 
 /** What a pack can change, each picked on its own. */
 export type PartKind = 'board' | 'piece' | 'sound';

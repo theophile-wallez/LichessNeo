@@ -24,8 +24,38 @@ describe('ManifestSchema', () => {
     );
   });
 
+  it('reads lists of boards, piece sets and sound sets, beside a lone part', () => {
+    const manifest = {
+      name: 'Wood',
+      board: [
+        { name: 'Light', image: 'light.svg', light: '#f2e4cc', dark: '#c4936a' },
+        { name: 'Dark', image: 'dark.png' },
+      ],
+      pieces: 'pieces/{piece}.svg',
+      sounds: [{ name: 'Clicks', files: { capture: 'c.wav' } }],
+    };
+    expect(ManifestSchema.parse(manifest)).toEqual(manifest);
+    expect(firstIssuePath(manifest)).toBeNull();
+  });
+
   it.each([
     [{ name: 'Empty' }, ''],
+    [{ name: 'Up', board: [{ name: 'A', image: '../a.png' }] }, 'board.0.image'],
+    [{ name: 'Nameless', board: [{ image: 'a.png' }] }, 'board.0.name'],
+    [{ name: 'Half', board: [{ name: 'A', image: 'a.png', dark: '#000000' }] }, 'board.0'],
+    [
+      {
+        name: 'Twice',
+        pieces: [
+          { name: 'A', path: 'a/{piece}.svg' },
+          { name: 'A', path: 'b/{piece}.svg' },
+        ],
+      },
+      'pieces',
+    ],
+    [{ name: 'Token', pieces: [{ name: 'A', path: 'a/wK.svg' }] }, 'pieces.0.path'],
+    [{ name: 'None', sounds: [] }, 'sounds'],
+    [{ name: 'Mute', sounds: [{ name: 'A', files: {} }] }, 'sounds.0.files'],
     [{ name: '', board: { image: 'b.png' } }, 'name'],
     [{ name: 'x'.repeat(41), board: { image: 'b.png' } }, 'name'],
     [{ name: 'No token', pieces: 'pieces/wK.svg' }, 'pieces'],

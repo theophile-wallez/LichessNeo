@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 import type { Pack } from '#shared/packs/pack.ts';
-import { fakePack } from '#shared/testing/packs.ts';
+import { fakePack, listedPack } from '#shared/testing/packs.ts';
 import { readPacks, writePack } from '#content/packs/store.ts';
 import { buildBackupPage } from './backup-page.ts';
 
@@ -95,13 +95,19 @@ describe('the settings’ Backup page', () => {
   it('shows what a file holds, and replaces nothing until asked', async () => {
     synced.set('ln-ext-settings', { gameIntro: 'off' });
     localStorage.setItem('ln-ext-name', 'Ann');
-    vi.mocked(readPacks).mockResolvedValueOnce([WOOD]);
+    // Two boards one pack.json lists: the pack is named once.
+    const set = 'ann/packs/main/set/';
+    vi.mocked(readPacks).mockResolvedValueOnce([
+      WOOD,
+      listedPack(set, 'board', 'Light'),
+      listedPack(set, 'board', 'Dark'),
+    ]);
     const page = buildBackupPage();
     document.body.append(page);
     const text = await exportFile(page);
     localStorage.setItem('ln-ext-name', 'Bob');
     await pickFile(page, text);
-    expect(part(page, 'summary')?.textContent).toContain(`backupSummaryPacks ${WOOD.name}`);
+    expect(part(page, 'summary')?.textContent).toMatch(/backupSummaryPacks Pack \S+, Set$/);
     expect(localStorage.getItem('ln-ext-name')).toBe('Bob');
     button(page, 'cancel')?.click();
     expect(part(page, 'confirm')?.hidden).toBe(true);

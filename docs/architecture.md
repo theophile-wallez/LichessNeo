@@ -228,16 +228,20 @@ menu's own panels, under an Extension and a Lichess tab (`dasher.ts`,
 settings (`import-section.ts`, `import-form.ts`), or, signed out, in the
 panels themselves, all in `src/content/packs/`:
 
-- `src/shared/packs/download.ts` reads the pack's `pack.json` and files from
-  GitHub's raw host, or through its API with a token for a private
-  repository, checks what each file is, and turns them into `data:` URLs. It
-  runs in the background worker (`src/background/packs.ts`), as Firefox holds
-  a content script's requests to the page's CSP; `import.ts` asks for it, then
-  checks that each image decodes, which needs a DOM.
+- `src/shared/packs/download.ts` reads a `pack.json`, then each file it
+  names, one request each, from GitHub's raw host, or through its API with a
+  token for a private repository, checks what each file is, and turns it into
+  a `data:` URL. It runs in the background worker (`src/background/packs.ts`),
+  as Firefox holds a content script's requests to the page's CSP. `import.ts`
+  asks for them, six files at a time, so no message carries more than a file;
+  `src/shared/packs/assemble.ts` puts them together, a stored pack for the
+  `pack.json`'s lone parts and one for each board, piece set or sound set it
+  lists; `import.ts` then checks that each image decodes, which needs a DOM.
 - `store.ts` keeps the packs in an IndexedDB database of the page's origin;
   `library.ts` keeps what each part shows in localStorage, so the content
   script knows it at `document_start`, shows a theme or Lichess's at once, and
-  hides a part whose pack is picked until it's read, 2 s at most. Only the
+  hides a part whose pack is picked until it's read, 2 s at most. A
+  `pack.json` imported again replaces every stored pack it gave before. Only the
   picked packs are read then; the menu and the settings read the others when
   they open.
 - `apply.ts` names the board in `data-ln-ext-board` (a theme's id, `pack`, or

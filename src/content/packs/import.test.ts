@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fakeGithub } from '#shared/testing/github.ts';
 import { fakeWorker } from '#shared/testing/worker.ts';
-import { fetchPack } from './import.ts';
+import { fetchPacks } from './import.ts';
 
 const text = (value: string): Uint8Array => new TextEncoder().encode(value);
 const PNG = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
@@ -14,12 +14,12 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-describe('fetchPack', () => {
+describe('fetchPacks', () => {
   it('has the background worker download the pack', async () => {
     fakeWorker();
     fakeGithub({ repo: 'ann/packs', files: FILES });
-    const download = await fetchPack('https://github.com/ann/packs', '');
-    expect('pack' in download && download.pack.name).toBe('B');
+    const download = await fetchPacks('https://github.com/ann/packs', '');
+    expect('packs' in download && download.packs.map(pack => pack.name)).toEqual(['B']);
   });
 
   it('turns down an image the browser can’t draw', async () => {
@@ -33,14 +33,14 @@ describe('fetchPack', () => {
     );
     fakeWorker();
     fakeGithub({ repo: 'ann/packs', files: FILES });
-    expect(await fetchPack('https://github.com/ann/packs', '')).toEqual({
+    expect(await fetchPacks('https://github.com/ann/packs', '')).toEqual({
       error: "The board can't be drawn.",
     });
   });
 
   it('turns down what isn’t an answer of the worker’s', async () => {
-    vi.stubGlobal('chrome', { runtime: { sendMessage: () => Promise.resolve({ pack: 'x' }) } });
-    expect(await fetchPack('https://github.com/ann/packs', '')).toEqual({
+    vi.stubGlobal('chrome', { runtime: { sendMessage: () => Promise.resolve({ packs: 'x' }) } });
+    expect(await fetchPacks('https://github.com/ann/packs', '')).toEqual({
       error: 'The pack could not be downloaded.',
     });
   });
@@ -49,7 +49,7 @@ describe('fetchPack', () => {
     vi.stubGlobal('chrome', {
       runtime: { sendMessage: () => Promise.reject(new Error('Extension context invalidated.')) },
     });
-    expect(await fetchPack('https://github.com/ann/packs', '')).toEqual({
+    expect(await fetchPacks('https://github.com/ann/packs', '')).toEqual({
       error: 'The extension was updated: reload the page.',
     });
   });
@@ -61,7 +61,7 @@ describe('fetchPack', () => {
           Promise.reject(new Error('The message port closed before a response was received.')),
       },
     });
-    expect(await fetchPack('https://github.com/ann/packs', '')).toEqual({
+    expect(await fetchPacks('https://github.com/ann/packs', '')).toEqual({
       error: 'The extension did not answer: try again.',
     });
   });

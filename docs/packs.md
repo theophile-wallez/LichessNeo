@@ -10,7 +10,8 @@ and may give a texture, its material boards (a **Wood**, a **Marble** and a
 its **Ascent** sound set, played live, with where it puts each move's
 sound, and its **Boxwood** set, wooden pieces recorded on a board, several
 takes of each sound. A pack replaces any of the three with yours: a folder on GitHub
-holding a `pack.json` and the files it names.
+holding a `pack.json` and the files it names. A pack may hold several boards,
+piece sets and sound sets: see [Several of each](#several-of-each).
 
 To import one, open the extension's settings (your account's settings, then
 **Lichess Neo**, or **Import** in a panel's Extension tab), paste the
@@ -36,7 +37,8 @@ Any of these, to a public repository or a private one (see below):
 | `https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<folder>/pack.json` | `<folder>` on `<branch>` |
 
 `<branch>` may also be a tag or a commit, but not a branch with a `/` in its
-name. Importing the same link again replaces the pack with its new files.
+name. Importing the same link again replaces the pack with its new files: a
+board, piece set or sound set it no longer lists is removed.
 
 ### A private repository
 
@@ -108,13 +110,42 @@ whole gesture when the pack has it: `capture-check`, `move-slide-check` or
 checking or not, if the pack has it. A mate plays its move's sound, then
 `checkmate` just after it, in place of Lichess's victory or defeat.
 
+### Several of each
+
+`board`, `pieces` and `sounds` may each be a list, of boards, piece sets or
+sound sets, each with a `name` of its own (1 to 40 characters, a different
+one for each of the list):
+
+```json
+{
+  "name": "Wood",
+  "board": [
+    { "name": "Light", "image": "light/board.svg", "light": "#f2e4cc", "dark": "#c4936a" },
+    { "name": "Dark", "image": "dark/board.png" }
+  ],
+  "pieces": [
+    { "name": "Staunton", "path": "staunton/{piece}.svg" },
+    { "name": "Flat", "path": "flat/{piece}.png" }
+  ],
+  "sounds": [{ "name": "Clicks", "files": { "move-self": "clicks/move.wav" } }]
+}
+```
+
+A board in a list takes the fields of `board` above, a piece set's `path` is
+what `pieces` would be, and a sound set's `files` what `sounds` would be. Each
+shows in the menus under its own name, picked like any other; once imported,
+the first of each list is shown. A part may be a list while another is one
+value, which then goes by the pack's name. The settings list the pack once,
+with what it holds, and remove it whole.
+
 ## Files
 
 - **Images:** SVG, PNG, WebP, JPEG, GIF or AVIF. The pieces are drawn square,
   so give them a square canvas; 128px or more, or SVG, stays sharp.
 - **Sounds:** MP3, Ogg or WAV, short.
-- **Sizes:** `pack.json` up to 64 KB, each file up to 2 MB, the whole pack up
-  to 16 MB.
+- **Sizes:** `pack.json` up to 64 KB, each file up to 2 MB, and each board,
+  piece set or sound set up to 16 MB (a pack's lone ones, together). A pack
+  may hold as many as you like: its files are downloaded one by one.
 
 The extension tells what a file is from its first bytes, not its name, and
 turns down anything else. Each image must also draw: Lichess draws no board

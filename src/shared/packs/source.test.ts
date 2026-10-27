@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { apiFileUrl, fileUrl, packId, parsePackLink } from './source.ts';
+import { apiFileUrl, fileUrl, itemId, packId, parsePackLink, sourceIdOf } from './source.ts';
 
 describe('parsePackLink', () => {
   it.each([
@@ -66,5 +66,13 @@ describe('the files', () => {
     expect(packId(source)).toBe('ann/packs/main/my wood/');
     expect(packId({ ...source, owner: 'ANN' })).toBe(packId(source));
     expect(packId({ ...source, folder: 'My wood/' })).not.toBe(packId(source));
+  });
+
+  it('tell what pack.json an item came from, and not one of a folder below it', () => {
+    const id = itemId(packId(source), 'board', 'Dark #2');
+    expect(id).toBe('ann/packs/main/my wood/#board:Dark #2');
+    expect(sourceIdOf(id)).toBe(packId(source));
+    expect(sourceIdOf(packId(source))).toBe(packId(source));
+    expect(sourceIdOf(packId({ ...source, folder: 'my wood/dark/' }))).not.toBe(packId(source));
   });
 });

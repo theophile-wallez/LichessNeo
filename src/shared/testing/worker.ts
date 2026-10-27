@@ -1,18 +1,18 @@
 import { vi } from 'vitest';
-import { downloadPack } from '#shared/packs/download.ts';
-import { DownloadRequestSchema } from '#shared/packs/messages.ts';
+import { downloadFile, downloadManifest } from '#shared/packs/download.ts';
+import { FileRequestSchema, ManifestRequestSchema } from '#shared/packs/messages.ts';
 
 // Test support: the background worker as the content script reaches it, over
-// chrome.runtime.sendMessage, answering pack downloads as it does
-// (background/packs.ts), with fetch as the test stubs it.
+// chrome.runtime.sendMessage, answering for a pack's pack.json and files as it
+// does (background/packs.ts), with fetch as the test stubs it.
+
+function answer(message: unknown): Promise<unknown> {
+  const manifest = ManifestRequestSchema.safeParse(message);
+  if (manifest.success) return downloadManifest(manifest.data.link, manifest.data.token);
+  const { link, token, path, kind } = FileRequestSchema.parse(message);
+  return downloadFile(link, token, path, kind);
+}
 
 export function fakeWorker(): void {
-  vi.stubGlobal('chrome', {
-    runtime: {
-      sendMessage: async (message: unknown): Promise<unknown> => {
-        const request = DownloadRequestSchema.parse(message);
-        return downloadPack(request.link, request.token);
-      },
-    },
-  });
+  vi.stubGlobal('chrome', { runtime: { sendMessage: answer } });
 }

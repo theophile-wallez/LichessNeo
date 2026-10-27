@@ -427,6 +427,18 @@
     "message": "Sounds",
     "description": "A pack holds sounds."
   },
+  "packsPartBoards": {
+    "message": "$1 boards",
+    "description": "A pack holds several boards; $1 is how many."
+  },
+  "packsPartPieceSets": {
+    "message": "$1 piece sets",
+    "description": "A pack holds several piece sets; $1 is how many."
+  },
+  "packsPartSoundSets": {
+    "message": "$1 sound sets",
+    "description": "A pack holds several sound sets; $1 is how many."
+  },
   "packsRemove": {
     "message": "Remove",
     "description": "The button that removes an imported pack."

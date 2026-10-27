@@ -83,6 +83,15 @@ export function parsePackLink(link: string): PackSource | null {
 export const packId = ({ owner, repo, ref, folder }: PackSource): string =>
   `${owner.toLowerCase()}/${repo.toLowerCase()}/${ref}/${folder}`;
 
+// No folder holds a `#` (isSegment), so a pack.json's items can't be taken
+// for those of a folder below it.
+/** The id of one of a pack.json's boards, piece sets or sound sets, listed under its name. */
+export const itemId = (sourceId: string, kind: string, name: string): string =>
+  `${sourceId}#${kind}:${name}`;
+
+/** The id of the pack.json the stored pack of that id came from. */
+export const sourceIdOf = (id: string): string => id.split('#', 1)[0] ?? id;
+
 const encodedPath = (path: string): string => path.split('/').map(encodeURIComponent).join('/');
 
 /** A file of a public pack, from its path relative to the pack's folder. */

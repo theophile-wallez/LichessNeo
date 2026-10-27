@@ -4,6 +4,7 @@ import { closestTo, createElement, queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
 import { message } from '#content/platform/runtime.ts';
+import { packTitle } from '#shared/packs/pack.ts';
 import { type Backup, backupFileName, readBackup } from './backup-file.ts';
 import { createBackup, restoreBackup } from './backup.ts';
 
@@ -69,7 +70,7 @@ function download(text: string, name: string): void {
 function summary(backup: Backup): string {
   const date = new Intl.DateTimeFormat(undefined, { dateStyle: 'long', timeStyle: 'short' });
   const made = message('backupSummary', date.format(new Date(backup.created)));
-  const packs = backup.packs.map(pack => pack.name).join(', ');
+  const packs = [...new Set(backup.packs.map(packTitle))].join(', ');
   return packs ? `${made} ${message('backupSummaryPacks', packs)}` : made;
 }
 

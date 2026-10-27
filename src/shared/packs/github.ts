@@ -18,18 +18,12 @@ export const tooBig = (what: string, maxBytes: number): PackError =>
 /** Reads one of the pack's files, at most `maxBytes` of it. */
 export type Read = (path: string, maxBytes: number) => Promise<Uint8Array>;
 
-function request(
-  source: PackSource,
-  path: string,
-  token: string | null,
-  signal: AbortSignal,
-): Promise<Response> {
+function request(source: PackSource, path: string, token: string | null): Promise<Response> {
   if (token === null)
-    return fetch(fileUrl(source, path), { credentials: 'omit', cache: 'no-store', signal });
+    return fetch(fileUrl(source, path), { credentials: 'omit', cache: 'no-store' });
   return fetch(apiFileUrl(source, path), {
     credentials: 'omit',
     cache: 'no-store',
-    signal,
     headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.raw+json' },
   });
 }
@@ -69,12 +63,12 @@ async function readBody(response: Response, path: string, maxBytes: number): Pro
   return bytes;
 }
 
-/** Reads the files of `source`, all stopped by `signal`. */
-export function createReader(source: PackSource, token: string | null, signal: AbortSignal): Read {
+/** Reads the files of `source`. */
+export function createReader(source: PackSource, token: string | null): Read {
   return async (path, maxBytes) => {
     let response: Response;
     try {
-      response = await request(source, path, token, signal);
+      response = await request(source, path, token);
     } catch {
       throw new PackError('GitHub could not be reached.');
     }
