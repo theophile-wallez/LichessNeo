@@ -71,6 +71,26 @@ describe('the board’s highlights', () => {
   });
 });
 
+const blend = (options: Square): string => square(options).mixBlendMode;
+
+describe('the move hints', () => {
+  it('take the square’s hue on our two-tone boards', () => {
+    for (const board of ['accent', 'custom', 'flat']) {
+      expect(blend({ classes: 'move-dest', board })).toBe('luminosity');
+      expect(blend({ classes: 'premove-dest oc', board })).toBe('luminosity');
+    }
+  });
+
+  it('keep their color on boards whose squares we don’t know, and over a highlight', () => {
+    expect(blend({ classes: 'move-dest', board: null })).not.toBe('luminosity');
+    expect(blend({ classes: 'move-dest', board: 'pack' })).not.toBe('luminosity');
+    expect(blend({ classes: 'move-dest', board: 'accent', dimension: 'is3d' })).not.toBe(
+      'luminosity',
+    );
+    expect(blend({ classes: 'move-dest last-move', board: 'accent' })).not.toBe('luminosity');
+  });
+});
+
 function filtersOf(markup: string, tinted: boolean): string[] {
   const style = document.createElement('style');
   style.textContent = readFileSync(join(import.meta.dirname, 'pieces.css'), 'utf8');

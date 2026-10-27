@@ -197,6 +197,26 @@ cg-board square.oc:is(.move-dest, .premove-dest) {
   ) !important;
 }
 
+/* On our two-tone boards a hint keeps the square's own hue and takes the lightness halfway
+   between the two squares: darker on the light ones, lighter on the dark ones, whatever their
+   colors. A highlight under it would lose its color in the blend. */
+html:is([data-ln-ext-board='accent'], [data-ln-ext-board='custom'], [data-ln-ext-board='flat'])
+  .is2d
+  cg-board {
+  --ln-ext-hint: color-mix(
+    in srgb,
+    color-mix(in srgb, var(--ln-ext-board-light), var(--ln-ext-board-dark)) 80%,
+    transparent
+  );
+}
+
+html:is([data-ln-ext-board='accent'], [data-ln-ext-board='custom'], [data-ln-ext-board='flat'])
+  .is2d
+  cg-board
+  square:is(.move-dest, .premove-dest):not(.last-move) {
+  mix-blend-mode: luminosity;
+}
+
 cg-board square.move-dest:hover,
 cg-board square.move-dest.hover {
   box-shadow: inset 0 0 0 max(3px, 0.35vmin) rgba(255, 255, 255, 0.65);
