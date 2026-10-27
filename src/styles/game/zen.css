@@ -9,7 +9,7 @@
 
 /* At every width: the rules of playerbar.css and layout-narrow.css would bring back the names,
  * the captured pieces, the chat and the game info, which Lichess hides in Zen. */
-body.zenable.zen main.round :is(.ruser, .ln-ext-captured, .mchat, .round__side),
+body.zenable.zen main.round :is(.ruser, .ln-ext-captured, .ln-ext-stakes, .mchat, .round__side),
 body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
   display: none !important;
 }

@@ -40,6 +40,8 @@ const SettingsFields = z.object({
   chesscomRating: z.prefault(z.boolean(), false),
   /** Lichess's clock bar, hidden unless picked on Lichess's preferences page (content/clock-bar). */
   clockBar: z.prefault(z.boolean(), false),
+  /** What each outcome of a rated game in play does to the ratings (content/game/stakes). */
+  ratingStakes: z.prefault(z.boolean(), true),
   /** The players' intro at a game's start, or none (content/game/intro). */
   gameIntro: z.catch(IntroKindSchema, DEFAULT_INTRO),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */

@@ -23,6 +23,8 @@ const FLAGS: Readonly<Record<string, string>> = {
   'round-clockless': 'main.round:not(:has(.rclock:not(.rclock-turn)))',
   'clock-extras-top': `main.round .rclock-top > ${CLOCK_EXTRAS}`,
   'clock-extras-bottom': `main.round .rclock-bottom > ${CLOCK_EXTRAS}`,
+  // A game's stakes on show (content/game/stakes), which a phone's bars grow for.
+  'round-stakes': 'main.round > .ln-ext-stakes:not([hidden])',
   analyse: 'main.analyse',
   'analyse-chat': 'main.analyse > .mchat',
   // A game's analysis, told from Lichess's own game info, which it serves with the page: the

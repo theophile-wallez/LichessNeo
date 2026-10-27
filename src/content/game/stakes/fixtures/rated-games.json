@@ -1,0 +1,202 @@
+{
+  "games": [
+    {
+      "id": "UpuPfF4B",
+      "perf": "bullet",
+      "variant": "standard",
+      "winner": "white",
+      "white": {
+        "user": "ediz_gurel",
+        "glicko": {
+          "rating": 3358.47,
+          "deviation": 45
+        },
+        "ratingDiff": 1
+      },
+      "black": {
+        "user": "smihir6",
+        "glicko": {
+          "rating": 2979.3,
+          "deviation": 45
+        },
+        "ratingDiff": -1
+      }
+    },
+    {
+      "id": "YSXqi5Ve",
+      "perf": "blitz",
+      "variant": "standard",
+      "winner": "black",
+      "white": {
+        "user": "filolog",
+        "glicko": {
+          "rating": 2697.82,
+          "deviation": 45.01
+        },
+        "ratingDiff": -6
+      },
+      "black": {
+        "user": "thomas_mcallister13",
+        "glicko": {
+          "rating": 2675.46,
+          "deviation": 45
+        },
+        "ratingDiff": 6
+      }
+    },
+    {
+      "id": "n9kGWvNE",
+      "perf": "ultraBullet",
+      "variant": "standard",
+      "winner": null,
+      "white": {
+        "user": "leogla",
+        "glicko": {
+          "rating": 2069.63,
+          "deviation": 45
+        },
+        "ratingDiff": 0
+      },
+      "black": {
+        "user": "danielrabbers",
+        "glicko": {
+          "rating": 2089.43,
+          "deviation": 45
+        },
+        "ratingDiff": 0
+      }
+    },
+    {
+      "id": "r6fBWoaZ",
+      "perf": "crazyhouse",
+      "variant": "crazyhouse",
+      "winner": "white",
+      "white": {
+        "user": "cuqa",
+        "glicko": {
+          "rating": 2052.56,
+          "deviation": 45.05
+        },
+        "ratingDiff": 10
+      },
+      "black": {
+        "user": "gdhoward88",
+        "glicko": {
+          "rating": 2354.94,
+          "deviation": 45.02
+        },
+        "ratingDiff": -9
+      }
+    },
+    {
+      "id": "E3AAlzDj",
+      "perf": "chess960",
+      "variant": "chess960",
+      "winner": "white",
+      "white": {
+        "user": "attack2gm",
+        "glicko": {
+          "rating": 2334.72,
+          "deviation": 45
+        },
+        "ratingDiff": 5
+      },
+      "black": {
+        "user": "mhennigan",
+        "glicko": {
+          "rating": 2295.3,
+          "deviation": 45
+        },
+        "ratingDiff": -5
+      }
+    },
+    {
+      "id": "n9ZaJJDr",
+      "perf": "classical",
+      "variant": "standard",
+      "winner": "white",
+      "white": {
+        "user": "mrbadbeat",
+        "glicko": {
+          "rating": 2372.04,
+          "deviation": 70.54
+        },
+        "ratingDiff": 8
+      },
+      "black": {
+        "user": "trrak55",
+        "glicko": {
+          "rating": 2230.42,
+          "deviation": 45
+        },
+        "ratingDiff": -3
+      }
+    },
+    {
+      "id": "tL9Rz5At",
+      "perf": "bullet",
+      "variant": "standard",
+      "winner": "black",
+      "white": {
+        "user": "smihir6",
+        "glicko": {
+          "rating": 2978.19,
+          "deviation": 45
+        },
+        "ratingDiff": -2
+      },
+      "black": {
+        "user": "ediz_gurel",
+        "glicko": {
+          "rating": 3359.59,
+          "deviation": 45
+        },
+        "ratingDiff": 1
+      }
+    },
+    {
+      "id": "KAvK2t1m",
+      "perf": "blitz",
+      "variant": "standard",
+      "winner": "black",
+      "white": {
+        "user": "viejotortuga",
+        "glicko": {
+          "rating": 2750.12,
+          "deviation": 45
+        },
+        "ratingDiff": -7
+      },
+      "black": {
+        "user": "pseudobenko",
+        "glicko": {
+          "rating": 2693.76,
+          "deviation": 45
+        },
+        "ratingDiff": 7
+      }
+    },
+    {
+      "id": "zKaZVWvt",
+      "perf": "crazyhouse",
+      "variant": "crazyhouse",
+      "winner": "black",
+      "white": {
+        "user": "kansaschess",
+        "glicko": {
+          "rating": 2268.31,
+          "deviation": 63.55
+        },
+        "ratingDiff": -12
+      },
+      "black": {
+        "user": "hamomoistan",
+        "glicko": {
+          "rating": 2267.16,
+          "deviation": 45.04
+        },
+        "ratingDiff": 6
+      }
+    }
+  ]
+}

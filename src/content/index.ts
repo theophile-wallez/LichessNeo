@@ -31,6 +31,7 @@ import { underboard } from './analysis/underboard.ts';
 import { activeMove } from './analysis/active-move.ts';
 import { variations } from './analysis/variations.ts';
 import { capturedPieces } from './game/captured.ts';
+import { ratingStakes } from './game/stakes/index.ts';
 import { boardTools } from './game/board-tools.ts';
 
 import { moveTimes } from './game/move-times.ts';
@@ -132,6 +133,7 @@ const FEATURES = [
   activeMove,
   variations,
   capturedPieces,
+  ratingStakes,
   boardTools,
   zenExit,
   moveTimes,

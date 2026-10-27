@@ -16,6 +16,11 @@ describe('the settings', () => {
     expect(parseSettings({ coachBoard: false }).coachBoard).toBe(false);
   });
 
+  it('show the points at stake in rated games unless switched off', () => {
+    expect(parseSettings({}).ratingStakes).toBe(true);
+    expect(parseSettings({ ratingStakes: false }).ratingStakes).toBe(false);
+  });
+
   it('keep the quick pairing cards in their order, or the defaults if they can’t be read', () => {
     const defaults = [
       { speed: 'bullet' },

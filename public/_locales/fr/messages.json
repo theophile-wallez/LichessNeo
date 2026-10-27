@@ -1296,5 +1296,20 @@
   },
   "studyPanelInfo": {
     "message": "Infos"
+  },
+  "stakesWin": {
+    "message": "Victoire"
+  },
+  "stakesDraw": {
+    "message": "Nulle"
+  },
+  "stakesLoss": {
+    "message": "Défaite"
+  },
+  "settingRatingStakes": {
+    "message": "Points en jeu"
+  },
+  "settingRatingStakesBody": {
+    "message": "En partie classée, une pastille près de votre pendule montre les points qu’une victoire, une nulle ou une défaite vous rapporterait ou vous coûterait. Quand vous regardez une partie, ceux de chaque joueur."
   }
 }

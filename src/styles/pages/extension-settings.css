@@ -70,6 +70,11 @@ main.account[data-ln-ext-settings] > .page-menu__content:not(.ln-ext-settings) {
   --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sparkles.svg');
 }
 
+.ln-ext-setting[data-ln-ext-setting='ratingStakes'] {
+  --ln-ext-setting-color: var(--ln-ext-green);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-increase.svg');
+}
+
 .ln-ext-setting__icon {
   position: relative;
   flex: none;

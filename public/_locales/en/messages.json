@@ -1668,5 +1668,25 @@
   "studyPanelInfo": {
     "message": "Info",
     "description": "The tab of a study's panel that shows its description, tags and sharing."
+  },
+  "stakesWin": {
+    "message": "Win",
+    "description": "The tooltip on what a rated game in play gives its player for a win, in the pill of their bar."
+  },
+  "stakesDraw": {
+    "message": "Draw",
+    "description": "The tooltip on what a rated game in play gives its player for a draw, in the pill of their bar."
+  },
+  "stakesLoss": {
+    "message": "Loss",
+    "description": "The tooltip on what a rated game in play gives its player for a loss, in the pill of their bar."
+  },
+  "settingRatingStakes": {
+    "message": "Points at stake",
+    "description": "The setting that shows, in a rated game, what each outcome does to the player's rating."
+  },
+  "settingRatingStakesBody": {
+    "message": "In a rated game, a pill by your clock shows the points a win, a draw or a loss would bring or cost you. Watching a game, each player's.",
+    "description": "What the points at stake setting covers."
   }
 }

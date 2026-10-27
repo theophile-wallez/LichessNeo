@@ -76,6 +76,14 @@ describe('the extension’s settings on the account pages', () => {
     );
   });
 
+  it('has the points at stake’s switch on the Play page, on by default', () => {
+    open('#ln-ext-extension/play');
+    const page = queryOne(document, ".ln-ext-settings__page[data-ln-ext-page='play']", HTMLElement);
+    const button =
+      page && queryOne(page, "[data-ln-ext-setting='ratingStakes'] .ln-ext-switch", HTMLElement);
+    expect(button?.getAttribute('aria-checked')).toBe('true');
+  });
+
   it('opens the page its hash names, and marks it in the menu', () => {
     open('#ln-ext-extension/board');
     expect(main()?.dataset.lnExtSettings).toBe('');

@@ -13,8 +13,9 @@ import { evalOf, placeTooltip, splitShortcut } from './tooltip-layout.ts';
 // results' parts and its way back to its parent say what they are in a title; a theme's
 // settings in the user menu say what each does; a variation's move gives its eval, and a
 // move's glyph its name. A rating shown as on Chess.com gives its Lichess one, anywhere but
-// in the review, whose own tooltip does. A profile's award names itself, and a puzzle's link to
-// playing its position against the computer is an icon only.
+// in the review, whose own tooltip does. A game's stakes name each outcome. A profile's award
+// names itself, and a puzzle's link to playing its position against the computer is an icon
+// only.
 const TARGETS = [
   'main :is(button:is([title], [data-ln-ext-tip]), a.tv-channel[data-ln-ext-tip]):not(#ln-ext-review *)',
   'main .board-editor__tools .actions > a[data-ln-ext-tip]',
@@ -28,6 +29,7 @@ const TARGETS = [
   'main.puzzle .puzzle__more > a.practice:is([title], [data-ln-ext-tip])',
   '#dasher_app .ln-ext-src-options > button[data-ln-ext-tip]',
   '[data-ln-ext-lichess-rating][data-ln-ext-tip]',
+  'main.round .ln-ext-stakes__outcome[data-ln-ext-tip]',
 ].join(', ');
 // Lichess's home start buttons carry an English title that only repeats their label, and the
 // board menu's flip button one that gives its key, which its row shows on a key cap

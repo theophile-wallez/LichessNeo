@@ -17,6 +17,7 @@ import { buildPairingPage } from './pairing-page.ts';
 import { buildRatingRow } from './rating-row.ts';
 import { buildRoundnessRow } from './roundness-row.ts';
 import { onSettingsRead, settingsRead } from './settings.ts';
+import { buildSwitchList } from './switch-list.ts';
 
 // The account page's section for the extension: one of its pages
 // (address.ts) at a time, the one the menu's link picked (menu.ts), under its
@@ -65,7 +66,17 @@ export function buildSection(): SettingsSection {
       homeCoach.element,
       buildCoachSwitches(),
     ],
-    play: [buildIntroRow(), pairing.element],
+    play: [
+      buildIntroRow(),
+      buildSwitchList([
+        {
+          key: 'ratingStakes',
+          title: message('settingRatingStakes'),
+          body: message('settingRatingStakesBody'),
+        },
+      ]),
+      pairing.element,
+    ],
     experimental: [buildExperimentalPage()],
     backup: [buildBackupPage()],
   };
