@@ -3,8 +3,7 @@ import { topRating, type Speed } from '#content/sidebar/top-rating.ts';
 import type { CardUser, RecentGame } from './api.ts';
 
 // What the hover card's numbers mean, apart from the markup that shows them:
-// the rating it leads with, how a record splits, how long ago the player was
-// seen, and how their last games went.
+// the rating it leads with, how a record splits, and how their last games went.
 
 export interface Headline {
   readonly speed: Speed;
@@ -52,35 +51,6 @@ export function tallyOf(user: CardUser): Tally | null {
 
 /** A share of the tally, as a whole percentage. */
 export const shareOf = (part: number, total: number): number => Math.round((part / total) * 100);
-
-interface SinceUnit {
-  readonly ms: number;
-  readonly unit: Intl.RelativeTimeFormatUnit;
-}
-
-const MINUTE: SinceUnit = { ms: 60_000, unit: 'minute' };
-
-const SINCE_UNITS: readonly SinceUnit[] = [
-  MINUTE,
-  { ms: 3_600_000, unit: 'hour' },
-  { ms: 86_400_000, unit: 'day' },
-  { ms: 2_592_000_000, unit: 'month' },
-  { ms: 31_536_000_000, unit: 'year' },
-];
-
-export interface Since {
-  /** Negative, as a relative time in the past. */
-  readonly value: number;
-  readonly unit: Intl.RelativeTimeFormatUnit;
-}
-
-/** How long ago they were last seen, in the largest unit that counts at least one. */
-export function seenSince(seenAt: number, now: number): Since {
-  const elapsed = Math.max(now - seenAt, 0);
-  let chosen = MINUTE;
-  for (const candidate of SINCE_UNITS) if (elapsed >= candidate.ms) chosen = candidate;
-  return { value: -Math.max(1, Math.floor(elapsed / chosen.ms)), unit: chosen.unit };
-}
 
 export interface Played {
   readonly value: number;

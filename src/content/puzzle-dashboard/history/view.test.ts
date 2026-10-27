@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
+import { parseBoardState } from '#shared/still-board.ts';
 import { BOARD_STATE } from '#content/puzzle-dashboard/fixtures/history.ts';
-import { parseBoardState } from './board.ts';
 import { coachWord, type Week } from './coach-word.ts';
 import type { Round } from './read.ts';
 import { heroMarkup, REPLAY_HREF, SHELF_SIZE, shelfMarkup } from './view.ts';

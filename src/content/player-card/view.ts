@@ -4,6 +4,7 @@ import { chesscomRating, chesscomRatingChange } from '#shared/chesscom-rating/co
 import { html, type SafeHtml } from '#shared/html.ts';
 import { pageLocale } from '#shared/lang.ts';
 import { nonEmpty } from '#shared/text.ts';
+import { timeSince } from '#shared/time-since.ts';
 import { message } from '#content/platform/runtime.ts';
 import type { Speed } from '#content/sidebar/top-rating.ts';
 import {
@@ -11,7 +12,6 @@ import {
   FORM_GAMES,
   headlineOf,
   playedTime,
-  seenSince,
   shareOf,
   tallyOf,
   type Headline,
@@ -61,7 +61,7 @@ function shownRating(speed: string, rating: number, chesscom: boolean): string {
 function metaRow({ user, online, now }: CardData): SafeHtml | null {
   const played = user.playTime ? playedTime(user.playTime.total) : null;
   // The green dot on their avatar already says they're here.
-  const since = user.seenAt === undefined || online ? null : seenSince(user.seenAt, now);
+  const since = user.seenAt === undefined || online ? null : timeSince(user.seenAt, now);
   const items = listed([
     user.streaming === true && html`<span class="ln-ext-upt__live">${message('cardLive')}</span>`,
     user.profile?.fideRating !== undefined &&

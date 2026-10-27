@@ -1,5 +1,4 @@
 import { z } from 'zod/mini';
-import { userInHref } from '#shared/avatar.ts';
 import { createElement, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { setHtml } from '#shared/html.ts';
@@ -7,14 +6,10 @@ import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts'
 import { onEveryTick } from '#content/sync-loop.ts';
 import { MEDAL_IDS, medals, METALS, type Medal, type MedalId } from './medals-model.ts';
 import { medalsMarkup } from './medals-view.ts';
-import { profileUser } from './user.ts';
+import { profileName, profileUser } from './user.ts';
 
 // The profile's medals, a row under its chart. On the player's own profile,
 // those won since they last looked are new: they glow and spin in.
-
-/** The profile's user, from the name in its header. */
-const profileName = (): string | undefined =>
-  userInHref(queryOne(document, '.user-show__header h1 [data-href]', HTMLElement)?.dataset.href);
 
 const SeenSchema = z.object({
   user: z.string(),

@@ -1,0 +1,17 @@
+/* ---- Still boards --- */
+
+/* Our still boards (#shared/still-board.ts): chessground's markup, square, at any size. */
+.ln-ext-still-board {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.ln-ext-still-board cg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

@@ -1,5 +1,5 @@
 import { queryAll, queryOne } from '#shared/dom.ts';
-import { parseBoardState, type BoardState } from './board.ts';
+import { parseBoardState, type BoardState } from '#shared/still-board.ts';
 
 // The puzzle history as Lichess serves it (/training/history): sessions,
 // newest first, each a title, a time and its rounds, a mini board each, its

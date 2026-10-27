@@ -1,8 +1,8 @@
 import { html, type SafeHtml } from '#shared/html.ts';
+import { boardMarkup } from '#shared/still-board.ts';
 import { message } from '#content/platform/runtime.ts';
 import { number } from '#content/puzzle-dashboard/format.ts';
 import { mascotMarkup } from '#content/puzzle-dashboard/mascot.ts';
-import { boardMarkup } from './board.ts';
 import type { Week, Word } from './coach-word.ts';
 import type { Round } from './read.ts';
 

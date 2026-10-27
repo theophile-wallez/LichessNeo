@@ -74,6 +74,7 @@ import { gameMeta } from './game/game-meta.ts';
 import { avatars } from './ui/avatars.ts';
 import { ownNameFeature } from './ui/own-name.ts';
 import { profileMedals } from './profile/medals.ts';
+import { profileRecentGames } from './profile/recent-games/index.ts';
 import { profileAvatarLink } from './profile/avatar-link.ts';
 import { profileTrophies } from './profile/trophies.ts';
 import { perfStat } from './profile/perf-stat/index.ts';
@@ -174,6 +175,7 @@ const FEATURES = [
   avatars,
   ownNameFeature,
   profileMedals,
+  profileRecentGames,
   profileAvatarLink,
   profileTrophies,
   perfStat,

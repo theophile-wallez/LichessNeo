@@ -8,8 +8,8 @@ export interface Clock {
 
 const NO_BREAK_SPACE = '\u00a0';
 
-// Lichess's way of writing a clock with an increment: "10+5".
-function timeControlText({ initial, increment }: Clock): string {
+/** Lichess's way of writing a clock: "10+5", "3 min", "30 s". */
+export function timeControlText({ initial, increment }: Clock): string {
   const minutes = Number((initial / 60).toFixed(2));
   if (increment !== 0) return `${minutes}+${increment}`;
   return initial < 60 ? `${initial} s` : `${minutes} min`;

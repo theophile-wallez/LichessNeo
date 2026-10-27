@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { setHtml } from '#shared/html.ts';
-import { boardMarkup, parseBoardState } from './board.ts';
+import { setHtml } from './html.ts';
+import { boardMarkup, parseBoardState } from './still-board.ts';
 
 const FEN = '6k1/8/8/8/8/8/4P3/4K3 w - - 0 1';
 
@@ -14,7 +14,7 @@ function drawn(state: string): string[] {
   );
 }
 
-describe('a history board', () => {
+describe('a still board', () => {
   it('reads a mini board’s state, its last move a square each', () => {
     expect(parseBoardState(`${FEN},black,e7e8q`)).toEqual({
       fen: FEN,
@@ -37,8 +37,8 @@ describe('a history board', () => {
       'white pawn transform: translate(400%, 600%)',
       'white king transform: translate(400%, 700%)',
     ]);
-    expect(document.querySelector('.ln-ext-phist__board')?.className).toBe(
-      'ln-ext-phist__board cg-wrap is2d orientation-white',
+    expect(document.querySelector('.ln-ext-still-board')?.className).toBe(
+      'ln-ext-still-board cg-wrap is2d orientation-white',
     );
   });
 

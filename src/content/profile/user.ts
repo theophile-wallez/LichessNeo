@@ -1,7 +1,13 @@
 import { z } from 'zod/mini';
+import { userInHref } from '#shared/avatar.ts';
+import { queryOne } from '#shared/dom.ts';
 
-// The profile's user from Lichess's public API (`/api/user/<name>`), asked
-// once per page, for its medals.
+// The profile's user: its name, from the page, and what Lichess's public API
+// says of it (`/api/user/<name>`), asked once per page, for its medals.
+
+/** The profile's user, from the name in its header. */
+export const profileName = (): string | undefined =>
+  userInHref(queryOne(document, '.user-show__header h1 [data-href]', HTMLElement)?.dataset.href);
 
 const PerfSchema = z.object({
   games: z.number(),

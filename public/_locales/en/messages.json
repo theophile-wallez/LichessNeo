@@ -905,6 +905,34 @@
     "message": "$1 videos · all free",
     "description": "The video library's pill beside its title; $1 is how many videos it has."
   },
+  "recentGamesTitle": {
+    "message": "Recent games",
+    "description": "The title of a profile's last games."
+  },
+  "recentGamesAll": {
+    "message": "See all",
+    "description": "The link from a profile's last games to the list of all its games."
+  },
+  "recentGamesWin": {
+    "message": "Win",
+    "description": "A game the profile's player won."
+  },
+  "recentGamesLoss": {
+    "message": "Loss",
+    "description": "A game the profile's player lost."
+  },
+  "recentGamesDraw": {
+    "message": "Draw",
+    "description": "A drawn game."
+  },
+  "recentGamesStockfish": {
+    "message": "Stockfish level $1",
+    "description": "The computer as an opponent; $1 is its level."
+  },
+  "recentGamesAnonymous": {
+    "message": "Anonymous",
+    "description": "An opponent who played without an account."
+  },
   "medalsTitle": {
     "message": "Medals",
     "description": "The title of a profile's medals."

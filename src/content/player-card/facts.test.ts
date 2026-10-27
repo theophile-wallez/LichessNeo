@@ -1,18 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { RatingHistory } from '#shared/rating-history.ts';
 import type { CardUser, RecentGame } from './api.ts';
-import {
-  formOf,
-  headlineOf,
-  playedTime,
-  seenSince,
-  shareOf,
-  tallyOf,
-  type GameResult,
-} from './facts.ts';
-
-const HOUR = 3_600_000;
-const DAY = 24 * HOUR;
+import { formOf, headlineOf, playedTime, shareOf, tallyOf, type GameResult } from './facts.ts';
 
 const PLAYER: CardUser = {
   perfs: {
@@ -83,21 +72,6 @@ describe('their record', () => {
   it('is none for a player who has played none, or whom Lichess counts none for', () => {
     expect(tallyOf({ perfs: {}, count: { win: 0, loss: 0, draw: 0 } })).toBeNull();
     expect(tallyOf({ perfs: {} })).toBeNull();
-  });
-});
-
-describe('when they were last seen', () => {
-  const now = Date.UTC(2026, 9, 22, 12);
-
-  it('is said in the largest unit that counts at least one', () => {
-    expect(seenSince(now - 3 * HOUR, now)).toEqual({ value: -3, unit: 'hour' });
-    expect(seenSince(now - 40 * DAY, now)).toEqual({ value: -1, unit: 'month' });
-    expect(seenSince(now - 800 * DAY, now)).toEqual({ value: -2, unit: 'year' });
-  });
-
-  it('is a minute at the least, for someone seen seconds ago or in the future', () => {
-    expect(seenSince(now - 10_000, now)).toEqual({ value: -1, unit: 'minute' });
-    expect(seenSince(now + HOUR, now)).toEqual({ value: -1, unit: 'minute' });
   });
 });
 

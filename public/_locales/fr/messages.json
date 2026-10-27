@@ -684,6 +684,27 @@
   "videosCount": {
     "message": "$1 vidéos · toutes gratuites"
   },
+  "recentGamesTitle": {
+    "message": "Dernières parties"
+  },
+  "recentGamesAll": {
+    "message": "Tout voir"
+  },
+  "recentGamesWin": {
+    "message": "Victoire"
+  },
+  "recentGamesLoss": {
+    "message": "Défaite"
+  },
+  "recentGamesDraw": {
+    "message": "Nulle"
+  },
+  "recentGamesStockfish": {
+    "message": "Stockfish niveau $1"
+  },
+  "recentGamesAnonymous": {
+    "message": "Anonyme"
+  },
   "medalsTitle": {
     "message": "Médailles"
   },

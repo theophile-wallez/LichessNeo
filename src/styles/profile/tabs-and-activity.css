@@ -78,6 +78,11 @@
   color: var(--ln-ext-text-strong) !important;
 }
 
+/* Where the recent games' "See all" scrolls to, the page's top room above it. */
+.user-show > .angles {
+  scroll-margin-top: var(--ln-ext-page-top, 16px);
+}
+
 /* The raised tab slides (see "Sliding tabs" in theme/). */
 .user-show > .angles[data-ln-ext-tabs] {
   --ln-ext-tab-radius: 8px;
