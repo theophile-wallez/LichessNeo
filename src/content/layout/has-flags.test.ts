@@ -49,6 +49,7 @@ describe('presentFlags, for flags the original lacked', () => {
       'analyse-training',
       '<main class="analyse"><div class="analyse__round-training"><div class="analyse__acpl"></div></div></main>',
     ],
+    ['inbox', '<main class="box msg-app pane-side"><div class="msg-app__side"></div></main>'],
   ])('reads %s', (flag, page) => {
     document.body.innerHTML = page;
     expect(presentFlags(document).split(' ')).toContain(flag);

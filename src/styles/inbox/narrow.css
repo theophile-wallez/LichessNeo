@@ -1,12 +1,7 @@
 /* ---- The inbox below 800px --- */
 
-/* Lichess shows the list or the conversation, never both, edge to edge. */
+/* Lichess shows the list or the conversation, never both. */
 @media (max-width: 799.29px) {
-  main.msg-app {
-    border: none;
-    border-radius: 0;
-  }
-
   main.msg-app .msg-app__convo__head {
     padding: 0 12px 0 4px;
   }

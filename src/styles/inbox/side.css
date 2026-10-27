@@ -1,18 +1,18 @@
-/* ---- The inbox: the app's frame and its list of conversations --- */
+/* ---- The inbox: its list of conversations --- */
 
-/* Lichess draws the inbox as one box: its list of contacts (or a search's results) beside the
- * conversation open. The title and the avatars are ours (content/inbox, content/ui/avatars.ts). */
-
-main.msg-app {
-  box-sizing: border-box;
-  border: 1px solid var(--ln-ext-panel-border);
-  border-radius: 16px;
-  background: var(--ln-ext-bg-panel);
-}
+/* The list of contacts, or a search's results. The title and the avatars are ours
+ * (content/inbox, content/ui/avatars.ts). */
 
 main.msg-app .msg-app__side {
   border-inline-end: 1px solid var(--ln-ext-lift-6);
-  background: var(--ln-ext-bg-panel-dark);
+  background: none;
+}
+
+/* Lichess's list takes 50 characters, too wide once the page is the inbox's own. */
+@media (min-width: 799.3px) {
+  main.msg-app .msg-app__side {
+    flex: 0 0 360px;
+  }
 }
 
 main.msg-app .ln-ext-inbox__title {
@@ -106,6 +106,8 @@ main.msg-app .msg-app__side__contact__icon {
   border-radius: 50%;
   background: var(--ln-ext-avatar);
   font-size: 0;
+  /* Lichess clips a user link: the online dot hangs past the avatar's round edge. */
+  overflow: visible;
 }
 
 /* Lichess's online mark, a glyph, becomes a dot on the avatar's corner. */
@@ -120,7 +122,7 @@ main.msg-app .msg-app__side__contact__icon.online > .line {
   box-sizing: border-box;
   width: 14px;
   height: 14px;
-  border: 3px solid var(--ln-ext-bg-panel-dark);
+  border: 3px solid var(--ln-ext-bg-page);
   border-radius: 50%;
   background: var(--ln-ext-good);
 }

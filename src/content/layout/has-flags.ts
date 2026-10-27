@@ -66,6 +66,7 @@ const FLAGS: Readonly<Record<string, string>> = {
   'perf-stat': 'main.page-menu > .perf-stat',
   'puzzle-themes': 'main.page-menu .puzzle-themes',
   'tournament-calendar': 'main.box > #tournament-calendar',
+  inbox: 'main.msg-app',
   // The leagues' page is one of Lichess's plain pages: told by its first section.
   'leagues-page': 'main.page #lichess-streamer-battles',
 };

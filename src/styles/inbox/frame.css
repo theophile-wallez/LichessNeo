@@ -1,0 +1,45 @@
+/* ---- The inbox: the page --- */
+
+/* Lichess draws the inbox as a box in the page's column. Ours is the page itself, as a
+ * messaging app's: from the sidebar to the window's edges, its parts parted by hairlines. */
+
+main.msg-app {
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+@media (min-width: 799.3px) {
+  html[data-ln-ext-has~='inbox'] #main-wrap {
+    ---main-max-width: 100%;
+    ---main-margin: 0;
+  }
+}
+
+/* No room above: the list and the conversation scroll in place. */
+@media (min-width: 1020px) {
+  html[data-ln-ext-has~='inbox'] #main-wrap {
+    padding-top: 0;
+    overflow: hidden;
+  }
+
+  main.msg-app {
+    height: var(--ln-ext-main-h);
+  }
+}
+
+/* No conversation open: its place shows the inbox's glyph on a tint of the accent. */
+@media (min-width: 799.3px) {
+  main.msg-app.pane-side::after {
+    content: '';
+    flex: 1;
+    background: var(--ln-ext-accent);
+    mask:
+      url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat.svg') center / 44px
+        44px no-repeat,
+      radial-gradient(closest-side, #00000029 calc(100% - 1px), #0000) center / 112px 112px
+        no-repeat;
+  }
+}
