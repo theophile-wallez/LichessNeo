@@ -1,0 +1,45 @@
+/* ---- The inbox below 800px --- */
+
+/* Lichess shows the list or the conversation, never both, edge to edge. */
+@media (max-width: 799.29px) {
+  main.msg-app {
+    border: none;
+    border-radius: 0;
+  }
+
+  main.msg-app .msg-app__convo__head {
+    padding: 0 12px 0 4px;
+  }
+
+  main.msg-app .msg-app__convo__head__back {
+    padding: 0 8px;
+    color: var(--ln-ext-text-dim);
+    font-size: 20px;
+  }
+
+  main.msg-app .msg-app__convo__msgs {
+    padding: 0 12px;
+  }
+
+  main.msg-app .msg-app__convo__msgs :is(mine, their) {
+    max-width: 82%;
+  }
+
+  main.msg-app .msg-app__convo__reply {
+    padding: 10px 12px 12px;
+  }
+}
+
+/* A phone's challenge button keeps only its icon. */
+@media (max-width: 499.29px) {
+  main.msg-app .msg-app__convo__head .user-link {
+    font-size: 16px;
+  }
+
+  main.msg-app .ln-ext-inbox__challenge {
+    justify-content: center;
+    width: 46px;
+    padding: 0;
+    font-size: 0;
+  }
+}

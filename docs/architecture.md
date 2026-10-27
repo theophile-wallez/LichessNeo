@@ -99,6 +99,8 @@ so the logic can be unit-tested without a page.
   chapter list as a sheet over it, and the study's head at the top of the
   panel (its flair, name, likes and share button, which click Lichess's own).
 - `pages`.
+- `inbox`: the inbox's title, the word "online" in a conversation's head, and
+  its challenge button beside the message box, a link of ours.
 - `ui`: tooltips, hover card, tab bars, users' avatars, the user's own name
   where Lichess writes it, the interface's Foley sounds behind the settings'
   switch, the copy fields kept out of Chrome's refill on going back, a dropdown

@@ -17,6 +17,17 @@
     linear-gradient(145deg, var(--ln-ext-avatar-from), var(--ln-ext-avatar-to));
 }
 
+/* Lichess's own account: its horse (sidebar/layout.css) on a dark tile, in either scheme. */
+[data-ln-ext-avatar-lichess] {
+  --ln-ext-avatar:
+    var(--ln-ext-logo) center / 58% no-repeat,
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--ln-ext-ink) 78%, var(--ln-ext-white)),
+      var(--ln-ext-ink)
+    );
+}
+
 [data-ln-ext-avatar-coach='1'] {
   --ln-ext-avatar-coach: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
 }

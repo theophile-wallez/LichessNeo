@@ -17,6 +17,8 @@ afterEach(() => {
   delete dataset.lnExtPointsLabel;
   delete dataset.lnExtVariantLabel;
   delete dataset.lnExtTimeControlLabel;
+  delete dataset.lnExtInboxLabel;
+  delete dataset.lnExtOnlineLabel;
   document.body.replaceChildren();
 });
 
@@ -28,6 +30,13 @@ describe('labels', () => {
     labels.start();
     expect(dataset.lnExtFlipLabel).toBe('Tourner l’échiquier');
     expect(dataset.lnExtToolsLabel).toBe('Outils');
+  });
+
+  it('copies the inbox’s title and the word for online', () => {
+    Object.assign(window, { i18n: { site: { inbox: 'Messagerie', online: 'en ligne' } } });
+    labels.start();
+    expect(dataset.lnExtInboxLabel).toBe('Messagerie');
+    expect(dataset.lnExtOnlineLabel).toBe('en ligne');
   });
 
   it('leaves out a label Lichess doesn’t have', () => {

@@ -1,0 +1,201 @@
+/* ---- The inbox: the app's frame and its list of conversations --- */
+
+/* Lichess draws the inbox as one box: its list of contacts (or a search's results) beside the
+ * conversation open. The title and the avatars are ours (content/inbox, content/ui/avatars.ts). */
+
+main.msg-app {
+  box-sizing: border-box;
+  border: 1px solid var(--ln-ext-panel-border);
+  border-radius: 16px;
+  background: var(--ln-ext-bg-panel);
+}
+
+main.msg-app .msg-app__side {
+  border-inline-end: 1px solid var(--ln-ext-lift-6);
+  background: var(--ln-ext-bg-panel-dark);
+}
+
+main.msg-app .ln-ext-inbox__title {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 20px 20px 12px;
+  color: var(--ln-ext-text-strong);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* The tile of a page's title (pages/menu-titles.css): the glyph in its hue over a tint of it. */
+main.msg-app .ln-ext-inbox__title::before {
+  content: '';
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--ln-ext-blue);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/inbox.svg') center / 20px 20px
+      no-repeat,
+    linear-gradient(#0000003d, #0000003d);
+}
+
+/* ---- Search --- */
+
+main.msg-app .msg-app__side__search {
+  flex: none;
+  padding: 4px 16px 12px;
+  border: none;
+  background: none;
+  overflow: visible;
+}
+
+main.msg-app .msg-app__side__search input {
+  box-sizing: border-box;
+  height: 40px;
+  margin: 0;
+  padding: 0 16px 0 40px;
+  border-radius: 999px !important;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/search-01--989795.svg')
+    14px center / 16px no-repeat;
+  font-size: 14px;
+}
+
+html[dir='rtl'] main.msg-app .msg-app__side__search input {
+  padding: 0 40px 0 16px;
+  background-position: right 14px center;
+}
+
+main.msg-app .msg-app__side__content {
+  flex: 1;
+  padding: 0 8px 8px;
+}
+
+/* A search's sections: its contacts, friends and other players. */
+main.msg-app .msg-app__search h2 {
+  margin: 16px 12px 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ---- A contact --- */
+
+main.msg-app .msg-app__side__contact {
+  gap: 12px;
+  margin: 2px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  transition: background-color 0.15s !important;
+}
+
+main.msg-app .msg-app__side__contact:hover {
+  background: var(--ln-ext-lift-5);
+}
+
+main.msg-app .msg-app__side__contact:is(.active, :active) {
+  background: color-mix(in srgb, var(--ln-ext-accent) 20%, transparent);
+}
+
+main.msg-app .msg-app__side__contact__icon {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--ln-ext-avatar);
+  font-size: 0;
+}
+
+/* Lichess's online mark, a glyph, becomes a dot on the avatar's corner. */
+main.msg-app .msg-app__side__contact__icon > .line {
+  display: none;
+}
+
+main.msg-app .msg-app__side__contact__icon.online > .line {
+  position: absolute;
+  inset: auto -1px -1px auto;
+  display: block;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--ln-ext-bg-panel-dark);
+  border-radius: 50%;
+  background: var(--ln-ext-good);
+}
+
+main.msg-app .msg-app__side__contact__icon > .line::before {
+  display: none;
+}
+
+/* Lichess's own account is always online. */
+main.msg-app .msg-app__side__contact[data-ln-ext-avatar-lichess] .line {
+  display: none;
+}
+
+main.msg-app .msg-app__side__contact__user {
+  min-width: 0;
+  padding: 0;
+}
+
+main.msg-app .msg-app__side__contact__head {
+  gap: 8px;
+}
+
+main.msg-app .msg-app__side__contact__name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  color: var(--ln-ext-text-strong);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+main.msg-app .msg-app__side__contact__name .uflair {
+  width: 16px;
+  height: 16px;
+}
+
+main.msg-app .msg-app__side__contact__date time {
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+main.msg-app .msg-app__side__contact__body {
+  height: auto;
+  margin-top: 2px;
+}
+
+main.msg-app .msg-app__side__contact__msg {
+  color: var(--ln-ext-text-dim);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+main.msg-app .msg-app__side__contact.active .msg-app__side__contact__msg {
+  color: var(--ln-ext-text);
+}
+
+/* Unread: the last message in full strength, and a dot in the accent. */
+main.msg-app .msg-app__side__contact__msg--new {
+  color: var(--ln-ext-text-strong);
+  font-weight: 700;
+}
+
+main.msg-app .msg-app__side__contact__new {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-inline-start: 8px;
+  border-radius: 50%;
+  background: var(--ln-ext-accent);
+  font-size: 0;
+}
+
+main.msg-app .msg-app__side__contact__new::before {
+  display: none;
+}

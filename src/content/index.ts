@@ -62,6 +62,7 @@ import { simulScores } from './pages/simul-scores.ts';
 import { simulForm } from './simul-form/index.ts';
 import { editorTools } from './pages/editor-tools.ts';
 import { forumLabels } from './pages/forum.ts';
+import { inbox } from './inbox/inbox.ts';
 import { tv } from './pages/tv.ts';
 import { practiceIcons } from './pages/practice-icons.ts';
 import { streamerSections } from './pages/streamer-sections.ts';
@@ -163,6 +164,7 @@ const FEATURES = [
   simulForm,
   editorTools,
   forumLabels,
+  inbox,
   tv,
   practiceIcons,
   streamerSections,

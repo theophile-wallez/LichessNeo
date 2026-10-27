@@ -78,6 +78,25 @@ const SPOTS = [
       '</div></div></main>',
     avatar: '.first',
   },
+  {
+    name: 'an inbox contact',
+    markup:
+      '<main class="box msg-app"><div class="msg-app__side"><div class="msg-app__side__contact">' +
+      '<div class="user-link msg-app__side__contact__icon online"><icon class="line"></icon></div>' +
+      '<div class="msg-app__side__contact__user"><div class="msg-app__side__contact__head">' +
+      '<div class="msg-app__side__contact__name"><span class="utitle">GM</span>tjychess' +
+      '<img class="uflair" src="/flair.webp"></div></div></div></div></div></main>',
+    avatar: '.msg-app__side__contact',
+  },
+  {
+    name: 'the inbox’s conversation',
+    markup:
+      '<main class="box msg-app"><div class="msg-app__convo"><div class="msg-app__convo__head">' +
+      '<div class="msg-app__convo__head__left">' +
+      '<a class="user-link ulpt online" href="/@/tjychess"><icon class="line"></icon>tjychess</a>' +
+      '</div></div><div class="msg-app__convo__msgs"></div></div></main>',
+    avatar: '.msg-app__convo',
+  },
 ];
 
 function avatarIn(selector: string): HTMLElement {
@@ -116,6 +135,20 @@ describe('syncAvatars', () => {
       expect(bar.getAttributeNames().filter(name => name.startsWith('data-ln-ext-avatar'))).toEqual(
         [],
       );
+  });
+
+  it('gives Lichess’s own account its logo, not a coach', () => {
+    document.body.innerHTML =
+      '<main class="box msg-app"><div class="msg-app__side__contact">' +
+      '<div class="msg-app__side__contact__name">Lichess</div></div><div class="msg-app__convo">' +
+      '<div class="msg-app__convo__head"><a class="user-link" href="/@/lichess">Lichess</a></div>' +
+      '</div></main>';
+    syncAvatars();
+    for (const selector of ['.msg-app__side__contact', '.msg-app__convo']) {
+      const element = avatarIn(selector);
+      expect(element.dataset.lnExtAvatarLichess).toBe('');
+      expect(element.dataset.lnExtAvatarCoach).toBeUndefined();
+    }
   });
 
   it('follows the bar to its next player, and drops the avatar when there’s none', () => {

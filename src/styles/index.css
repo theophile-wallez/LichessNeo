@@ -30,6 +30,7 @@
 @import './study-page/index.css';
 @import './friends.css';
 @import './friendbox.css';
+@import './inbox/index.css';
 @import './puzzle/index.css';
 /* After the game, analysis and puzzle layouts, whose panel it outlines. */
 @import './panel-outline.css';

@@ -2,18 +2,24 @@ import { userInHref } from '#shared/avatar.ts';
 import { createElement, queryAll, queryOne, setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onOwnAvatar, ownAvatar, type OwnAvatar, userAvatar } from '#shared/own-avatar.ts';
+import { nonEmpty } from '#shared/text.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
 // Gives each user their own avatar (#shared/avatar.ts) where ours stands in for
 // a profile picture: the element that draws it gets the user's coach and color.
-// Anonymous players and the computer keep the default. The signed-in user's own
-// picture, if they picked one, is a variable of ours (styles/theme/avatars.css).
+// Anonymous players and the computer keep the default, Lichess's own account gets
+// its logo. The signed-in user's own picture, if they picked one, is a variable of
+// ours (styles/theme/avatars.css).
 
 interface Spot {
   readonly selector: string;
   /** The user's profile link in the spot; the spot itself when there's none. */
   readonly link?: string;
+  /** Where the spot writes its user's name, when it has no link. */
+  readonly name?: string;
 }
+
+const LICHESS = 'lichess';
 
 const SPOTS: readonly Spot[] = [
   // The game page's player bars, and ours on the analysis board.
@@ -34,15 +40,32 @@ const SPOTS: readonly Spot[] = [
   { selector: 'main:is(.tour, .swiss) .podium > div', link: ':scope > a.user-link' },
   // A profile names its user in a span with a `data-href`.
   { selector: '.user-show > .user-show__header', link: 'h1 [data-href]' },
+  // The inbox's contacts, and the conversation open, whose head and messages show it.
+  { selector: 'main.msg-app .msg-app__side__contact', name: '.msg-app__side__contact__name' },
+  { selector: 'main.msg-app .msg-app__convo', link: '.msg-app__convo__head a.user-link' },
 ];
 
-function userIn(spot: HTMLElement, link: string | undefined): string | undefined {
+// A contact's name sits beside its flair and title, in elements of their own.
+const ownText = (element: Element): string =>
+  [...element.childNodes]
+    .filter(node => node instanceof Text)
+    .map(node => node.data)
+    .join('')
+    .trim();
+
+function userIn(spot: HTMLElement, { link, name }: Spot): string | undefined {
+  if (name !== undefined) {
+    const label = queryOne(spot, name, HTMLElement);
+    return label ? nonEmpty(ownText(label)) : undefined;
+  }
   const anchor = link === undefined ? spot : queryOne(spot, link, HTMLElement);
   return userInHref(anchor?.getAttribute('href') ?? anchor?.dataset.href);
 }
 
 function markAvatar(element: HTMLElement, user: string | undefined): void {
-  const avatar = user === undefined ? null : userAvatar(user);
+  const lichess = user?.toLowerCase() === LICHESS;
+  const avatar = user === undefined || lichess ? null : userAvatar(user);
+  setData(element, 'lnExtAvatarLichess', lichess ? '' : null);
   setData(element, 'lnExtAvatarCoach', avatar && String(avatar.coach));
   setData(element, 'lnExtAvatarColor', avatar && avatar.color);
   setData(element, 'lnExtAvatarPicture', avatar?.picture ? '' : null);
@@ -64,8 +87,9 @@ function showPicture(avatar: OwnAvatar | null): void {
 }
 
 export function syncAvatars(root: ParentNode = document): void {
-  for (const { selector, link } of SPOTS) {
-    for (const spot of queryAll(root, selector, HTMLElement)) markAvatar(spot, userIn(spot, link));
+  for (const spot of SPOTS) {
+    for (const element of queryAll(root, spot.selector, HTMLElement))
+      markAvatar(element, userIn(element, spot));
   }
 }
 
