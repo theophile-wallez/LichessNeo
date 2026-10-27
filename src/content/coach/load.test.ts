@@ -43,3 +43,22 @@ describe('loadMascots', () => {
     expect(getURL).not.toHaveBeenCalled();
   });
 });
+
+describe('onCoachMotion', () => {
+  it('tells of the 3D switched, in this tab or another, until stopped', async () => {
+    vi.resetModules();
+    const fresh = await import('./load.ts');
+    const told = vi.fn<(moving: boolean) => void>();
+    const stop = fresh.onCoachMotion(told);
+    answer({ coachMotion: true });
+    await flush();
+    expect(told).not.toHaveBeenCalled();
+    const { saveSetting } = await import('#content/settings/settings.ts');
+    await saveSetting('coachMotion', false).catch(() => undefined);
+    expect(told).toHaveBeenCalledExactlyOnceWith(false);
+    await saveSetting('uiSounds', false).catch(() => undefined);
+    stop();
+    await saveSetting('coachMotion', true).catch(() => undefined);
+    expect(told).toHaveBeenCalledOnce();
+  });
+});

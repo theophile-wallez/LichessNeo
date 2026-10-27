@@ -19,6 +19,7 @@ import { coachChoice } from './bootstrap/coach-choice.ts';
 import { fideOffset } from './pages/fide.ts';
 import { marks } from './layout/marks.ts';
 import { hasFlags } from './layout/has-flags.ts';
+import { lichessPrefs } from './layout/lichess-prefs.ts';
 import { aiPlayers } from './game/ai-players.ts';
 import { boardZoom } from './layout/board-zoom.ts';
 import { mainScroll } from './layout/main-scroll.ts';
@@ -45,6 +46,7 @@ import { engineSettings } from './analysis/engine-settings.ts';
 import { puzzle } from './puzzle/index.ts';
 import { learnCoach } from './learn/coach.ts';
 import { extensionSettings } from './settings/index.ts';
+import { clockBar } from './clock-bar/index.ts';
 import { homeHero } from './pages/home-hero.ts';
 import { speedCards } from './pages/speed-cards/index.ts';
 import { coachTitles } from './pages/coach-titles.ts';
@@ -111,6 +113,8 @@ const FEATURES = [
   fideOffset,
   marks,
   hasFlags,
+  lichessPrefs,
+  clockBar,
   aiPlayers,
   boardZoom,
   mainScroll,

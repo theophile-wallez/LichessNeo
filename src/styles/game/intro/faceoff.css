@@ -248,3 +248,41 @@
     opacity: 1;
   }
 }
+
+/* A phone's board, or a landscape phone's: the cards take more of it, and the words keep sizes
+ * a phone can read, where a desktop's shares of the board would leave the rating at 9px. */
+@container (max-width: 479.98px) {
+  main.round .ln-ext-intro__card {
+    width: 78cqw;
+    height: 15cqh;
+    border-radius: 1cqh;
+  }
+
+  main.round .ln-ext-intro__who {
+    gap: 0.5cqh;
+    padding: 0 3.5cqw;
+  }
+
+  main.round .ln-ext-intro__name {
+    font-size: max(14px, 4.2cqh);
+  }
+
+  main.round .ln-ext-intro__title {
+    font-size: max(10px, 3cqh);
+  }
+
+  main.round .ln-ext-intro__details {
+    font-size: max(11.5px, 3.1cqh);
+    opacity: 0.7;
+  }
+
+  main.round .ln-ext-intro__swords {
+    width: 18cqh;
+    height: 18cqh;
+  }
+
+  main.round .ln-ext-intro__versus {
+    padding: 1.6cqh 3cqh;
+    font-size: 5.4cqh;
+  }
+}

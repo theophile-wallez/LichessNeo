@@ -383,6 +383,10 @@
   "themeForDark": {
     "message": "$1, pour le mode sombre"
   },
+  "prefNeoDefault": {
+    "message": "Neo",
+    "description": "A tag on the choice Lichess Neo makes, on a Lichess preference it sets its own default for."
+  },
   "themeNeo": {
     "message": "Neo"
   },

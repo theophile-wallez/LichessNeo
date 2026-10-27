@@ -2,7 +2,10 @@ import { queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { parseJson } from '#shared/json.ts';
 import { readPageInitData } from '#shared/page-init-data.ts';
+import { chesscomShown } from '#shared/chesscom-rating/shown.ts';
+import { currentSettings, onSettings, settingsRead } from '#content/settings/settings.ts';
 import { mountChart } from './chart.ts';
+import { inChesscomRatings } from './chesscom.ts';
 import { readInlineInit } from './inline-init.ts';
 import { RatingHistorySchema } from './schema.ts';
 import { readSeries, type Series, toSeries } from './series.ts';
@@ -31,7 +34,16 @@ function boot(initData: string | null): void {
   // its box, an empty gap, so we hide the box.
   if (series?.length === 0) host.classList.toggle('ln-ext-rchart-none', true);
   if (!series || series.length === 0 || host.querySelector('.ln-ext-rchart')) return;
-  mountChart(host, series);
+  // The switch as last kept, until the settings are read.
+  let chesscom = settingsRead() ? currentSettings().chesscomRating : chesscomShown();
+  const shown = (): Series[] => (chesscom ? inChesscomRatings(series) : [...series]);
+  const chart = mountChart(host, shown());
+  // The settings' Chess.com ratings, switched in any tab.
+  onSettings(settings => {
+    if (settings.chesscomRating === chesscom) return;
+    chesscom = settings.chesscomRating;
+    chart?.showSeries(shown());
+  });
 }
 
 export const ratingChart: Feature = {

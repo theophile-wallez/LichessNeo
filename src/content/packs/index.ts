@@ -1,15 +1,17 @@
-import { showCustomBoard } from './custom-board.ts';
+import { followCustomBoard } from './custom-board.ts';
 import { type BacklitBoardId, backlitWords, isBacklitBoard, keyBox } from '#shared/backlit.ts';
 import { setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onPageReady, postSounds, type SoundFiles, type SynthPick } from '#shared/protocol.ts';
 import { RECORDED_SET } from '#shared/recorded-sounds.ts';
+import { onStoredElsewhere } from '#shared/storage.ts';
 import { SYNTH_SET } from '#shared/sounds.ts';
 import { setLoading, showLooks, soundFiles } from './apply.ts';
 import { watchDasher } from './dasher.ts';
 import {
   createLibrary,
   isPackId,
+  PICK_KEYS,
   storedPick,
   type Library,
   type Look,
@@ -93,7 +95,7 @@ const LOADING_MAX_MS = 2000;
 
 /** Shows the picks at once, and the picked packs once they're read. */
 export function startPacks(): Library {
-  showCustomBoard();
+  followCustomBoard();
   setLoading([
     ...(isPackId(storedPick('board')) ? ['board'] : []),
     ...(isPackId(storedPick('piece')) ? ['pieces'] : []),
@@ -116,6 +118,7 @@ export function startPacks(): Library {
     window.clearTimeout(timer);
     setLoading([]);
   });
+  onStoredElsewhere(Object.values(PICK_KEYS), () => void library.refresh());
   return library;
 }
 

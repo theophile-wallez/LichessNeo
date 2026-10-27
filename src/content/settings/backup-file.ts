@@ -11,8 +11,9 @@ import { SettingsSchema, type Settings } from './settings.ts';
 const FORMAT = 'lichess-neo-settings';
 
 /**
- * The picks kept in the page's storage, by their name in StorageKey. Not the caches, nor the
- * settings' copies, which the settings write again as they change.
+ * The picks kept in the page's storage, by their name in StorageKey, and opening practice's
+ * records. Not the caches, nor the settings' copies, which the settings write again as they
+ * change, nor practice's link to its studies, which are the account's, not the browser's.
  */
 export const BACKED_UP_KEYS = [
   'board',
@@ -34,7 +35,17 @@ export const BACKED_UP_KEYS = [
   'sidebarCollapsed',
   'ratingChartRange',
   'endCardFolded',
+  'practiceSettings',
+  'practiceRepertoire',
+  'practiceProgress',
 ] as const satisfies readonly (keyof typeof StorageKey)[];
+
+/** Records rather than picks: one a backup lacks (made before they were in) is kept, not reset. */
+export const KEPT_UNLESS_BACKED_UP: ReadonlySet<string> = new Set([
+  'practiceSettings',
+  'practiceRepertoire',
+  'practiceProgress',
+] satisfies (typeof BACKED_UP_KEYS)[number][]);
 
 // Each value is checked where it's read, as anything in the storage is: here only its size.
 const MAX_STORED_LENGTH = 1_000_000;

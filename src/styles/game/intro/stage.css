@@ -92,3 +92,9 @@
     scale: 1.28;
   }
 }
+
+/* Lichess animates no piece in this game (its "Piece animation" set to None, or a game too fast
+ * for one: content/layout/lichess-prefs.ts): the board's pieces stay in place. */
+html[data-ln-ext-prefs~='no-animation'] [data-ln-ext-intro] cg-board piece {
+  animation: none !important;
+}

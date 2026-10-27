@@ -1,6 +1,8 @@
 import { type CoachPick, coachOf, coachPick, keepCoach, NO_COACH } from '#shared/coach.ts';
 import { setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
+import { postCoachPicked } from '#shared/protocol.ts';
+import { onStoredElsewhere, StorageKey } from '#shared/storage.ts';
 import { extensionUrl } from '#content/platform/runtime.ts';
 
 // The coach this page shows, on <html> for every coach's place to read
@@ -27,14 +29,29 @@ export function onCoachChosen(listener: (pick: CoachPick) => void): void {
   listeners.add(listener);
 }
 
-/** The settings' pick: kept for every page, and shown on this one at once. */
-export function chooseCoach(pick: CoachPick): void {
-  keepCoach(pick);
+function show(pick: CoachPick): void {
   showChoice(coachOf(pick));
   for (const listener of listeners) listener(pick);
 }
 
+/** The settings' pick: kept for every page, and shown on this one at once. */
+export function chooseCoach(pick: CoachPick): void {
+  keepCoach(pick);
+  show(pick);
+}
+
+// Picked in another tab: shown here too, the review's coach with it.
+function followOtherTabs(): void {
+  const pick = coachPick();
+  show(pick);
+  const coach = coachOf(pick);
+  if (coach !== null) postCoachPicked(coach);
+}
+
 export const coachChoice: Feature = {
   name: 'coach choice',
-  start: () => showChoice(coachOf(coachPick())),
+  start: () => {
+    showChoice(coachOf(coachPick()));
+    onStoredElsewhere([StorageKey.coach], followOtherTabs);
+  },
 };

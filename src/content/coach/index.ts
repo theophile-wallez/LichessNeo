@@ -1,8 +1,8 @@
 import { FOLDED_CARD, UNFOLD_CHEVRON } from '#shared/card-fold.ts';
-import { keepCoachOptions, shownCoach } from '#shared/coach.ts';
+import { type CoachOptions, coachOptions, keepCoachOptions, shownCoach } from '#shared/coach.ts';
 import { closestTo, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
-import { onCoachState, type CoachState } from '#shared/protocol.ts';
+import { onCoachState, postCoachOptions, type CoachState } from '#shared/protocol.ts';
 import { onSettings, type Settings } from '#content/settings/settings.ts';
 import { loadMascots } from './load.ts';
 import type { MascotView } from './mascot/index.ts';
@@ -83,9 +83,21 @@ export function showCoach(state: CoachState): void {
   sync();
 }
 
-// Kept for the page world, which can't read the settings, and for the next page's first look.
+// What the page world was last told, or read as it started.
+let told: CoachOptions | null = null;
+
+const sameOptions = (one: CoachOptions, other: CoachOptions): boolean =>
+  one.motion === other.motion && one.analysis === other.analysis && one.board === other.board;
+
+// Kept for the page world, which can't read the settings, and for the next page's first look;
+// told to it too, as a page open in this tab doesn't hear its storage change.
 function followSettings({ coachMotion, analysisCoach, coachBoard }: Settings): void {
-  keepCoachOptions({ motion: coachMotion, analysis: analysisCoach, board: coachBoard });
+  const options = { motion: coachMotion, analysis: analysisCoach, board: coachBoard };
+  if (!told || !sameOptions(told, options)) {
+    told = options;
+    keepCoachOptions(options);
+    postCoachOptions(options);
+  }
   if (coachMotion) sync();
   else unmount();
 }
@@ -94,6 +106,7 @@ export const coach: Feature = {
   name: 'coach',
   start: () => {
     onCoachState(showCoach);
+    told = coachOptions();
     onSettings(followSettings);
     // The page world marks the card open in its own listener, which runs first, the
     // chevron being under the element it listens on.

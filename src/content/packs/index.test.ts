@@ -91,6 +91,22 @@ describe('packs', () => {
     expect(root.dataset.lnExtBoard).toBe('pack');
   });
 
+  it('shows a board picked in another tab, its pack read first, and that tab’s custom colors', async () => {
+    vi.mocked(readPack).mockResolvedValue(WOOD);
+    startPacks();
+    expect(root.dataset.lnExtBoard).toBe('accent');
+    localStorage.setItem('ln-ext-board', WOOD.id);
+    window.dispatchEvent(new StorageEvent('storage', { key: 'ln-ext-board' }));
+    await flush();
+    expect(root.dataset.lnExtBoard).toBe('pack');
+
+    localStorage.setItem('ln-ext-custom-board', '{"light":"#ffffff","dark":"#112233"}');
+    window.dispatchEvent(new StorageEvent('storage', { key: 'ln-ext-custom-board' }));
+    expect(root.style.getPropertyValue('--ln-ext-board-custom-dark')).toBe('#112233');
+    root.style.removeProperty('--ln-ext-board-custom-light');
+    root.style.removeProperty('--ln-ext-board-custom-dark');
+  });
+
   it('hides nothing and shows our board at once while no pack is picked', () => {
     vi.mocked(readPack).mockResolvedValue(WOOD);
     startPacks();

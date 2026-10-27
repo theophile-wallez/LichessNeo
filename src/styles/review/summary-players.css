@@ -155,6 +155,11 @@ html.light .ln-ext-sum-player__trophy {
   font-weight: 600;
 }
 
+/* Lichess's "Show player ratings" off (`body.no-rating`): no rating the game was played at. */
+body.no-rating .ln-ext-sum-player__elo {
+  display: none;
+}
+
 /* The rating and its unit never part. */
 .ln-ext-sum-player__rating {
   white-space: nowrap;

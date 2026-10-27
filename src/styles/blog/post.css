@@ -227,7 +227,11 @@
 /* On desktop board/ draws the coordinates outside the board: a game embed
  * needs room for them on the left and below. */
 @media (min-width: 1020px) {
-  body:is(.coords-in, .coords-out) .ublog-post .ublog-post__markup .lpv__board {
+  html:not([data-ln-ext-prefs~='coords-in'])
+    body:is(.coords-in, .coords-out)
+    .ublog-post
+    .ublog-post__markup
+    .lpv__board {
     padding: 0 0 calc(1.2 * var(--ln-ext-coords-size) + 10px)
       calc(0.6 * var(--ln-ext-coords-size) + 16px);
   }

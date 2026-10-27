@@ -23,10 +23,7 @@ export function liveMascot(
     className: 'ln-ext-pdash__live',
     framing: 'bust',
     whenIdle: true,
-    onDrawn: drawn => {
-      setData(drawn, 'lnExtLive', '');
-      spot.sync(holder, mood(), { coach: coachId });
-    },
+    onDrawn: () => spot.sync(holder, mood(), { coach: coachId }),
   });
   spot.sync(holder, 'neutral', { coach: coachId });
   return spot;

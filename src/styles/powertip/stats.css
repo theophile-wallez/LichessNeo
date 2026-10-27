@@ -238,3 +238,9 @@
 #powerTip .ln-ext-upt__best:hover {
   color: var(--ln-ext-text-strong) !important;
 }
+
+/* Lichess's "Show player ratings" off (`body.no-rating`), which hides its own chips: the rows
+ * that tell ratings go too, bones included. */
+body.no-rating #powerTip :is(.ln-ext-upt__headline, .ln-ext-upt__facts, .ln-ext-upt__best) {
+  display: none !important;
+}

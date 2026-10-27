@@ -12,7 +12,8 @@ const mascot = vi.hoisted(() => {
   const shown: { coach: number; mood: CoachMood }[] = [];
   return { shown, draw: (): void => {} };
 });
-vi.mock('#content/coach/load.ts', () => ({
+vi.mock(import('#content/coach/load.ts'), async importOriginal => ({
+  ...(await importOriginal()),
   loadMascots: () =>
     Promise.resolve((_host: HTMLElement, options: MascotOptions = {}) => {
       let coach = 0;

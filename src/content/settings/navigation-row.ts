@@ -5,8 +5,8 @@ import {
   currentSettings,
   NavigationSchema,
   onSettings,
-  saveSetting,
   type Settings,
+  updateSettings,
 } from './settings.ts';
 import { buildCardList } from './switch-list.ts';
 
@@ -55,7 +55,12 @@ function showNavigationRow(section: HTMLElement, settings: Settings): void {
 function onNavigationClick(event: Event): void {
   const pick = closestTo(event.target, PICK, HTMLButtonElement);
   const navigation = NavigationSchema.safeParse(pick?.dataset.lnExtNavigation);
-  if (navigation.success) void saveSetting('navigation', navigation.data);
+  if (!navigation.success) return;
+  void updateSettings(settings => ({
+    ...settings,
+    navigation: navigation.data,
+    navigationPicked: true,
+  }));
 }
 
 /** The card, kept in step with the settings. */

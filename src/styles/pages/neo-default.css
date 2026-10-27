@@ -1,0 +1,12 @@
+/* The tag on the choice Neo makes for a Lichess preference it sets its own default for
+ * (content/clock-bar). */
+.ln-ext-neo-default {
+  margin-inline-start: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-accent) 20%, transparent);
+  color: var(--ln-ext-accent-hover);
+  font-size: 0.75em;
+  font-weight: 700;
+  vertical-align: 1px;
+}

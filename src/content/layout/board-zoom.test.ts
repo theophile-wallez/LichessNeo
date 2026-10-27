@@ -105,6 +105,35 @@ describe('boardZoom', () => {
     expect(steps).toEqual(legacy.steps);
   });
 
+  // lila's ui/dasher/src/board.ts sets the zoom in the slider's own handlers.
+  it.each(['input', 'wheel'])('follows the user menu’s Size slider, moved by %s', async type => {
+    document.body.innerHTML =
+      '<div id="dasher_app"><div class="sub board d2"><div class="zoom"><label>Size</label>' +
+      '<input class="range" type="range" min="0" max="100"></div></div></div>';
+    boardZoom.start();
+    const slider = document.querySelector('.zoom input');
+    slider?.addEventListener(type, () => document.body.style.setProperty('---zoom', '64'));
+    let resizes = 0;
+    const onResize = (): void => {
+      resizes++;
+    };
+    window.addEventListener('resize', onResize);
+    slider?.dispatchEvent(new Event(type, { bubbles: true }));
+    await flush();
+    window.removeEventListener('resize', onResize);
+    expect(zoomState()).toEqual({ zoom: '64', stored: '64', bodyZoom: '64' });
+    expect(resizes).toBe(1);
+  });
+
+  it('ignores another input’s events', async () => {
+    document.body.innerHTML = '<div id="dasher_app"><input class="other" type="range"></div>';
+    boardZoom.start();
+    document.body.style.setProperty('---zoom', '64');
+    document.querySelector('.other')?.dispatchEvent(new Event('input', { bubbles: true }));
+    await flush();
+    expect(zoomState().zoom).toBe('');
+  });
+
   it('ends a touch drag the browser cancels', async () => {
     document.body.innerHTML = '<cg-resize></cg-resize>';
     boardZoom.start();

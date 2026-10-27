@@ -19,9 +19,6 @@ import { avatarBox, readSetup, type Side } from './stage.ts';
 // begun, in the kind the settings pick (play.ts). It never blocks the board:
 // all of it lets the clicks through.
 
-// Our layout's: below, the board isn't in the grid the face-off is placed in.
-const DESKTOP = '(min-width: 1020px)';
-
 const ShownSchema = z.string().check(z.minLength(1));
 
 interface Pending {
@@ -75,7 +72,7 @@ function readScene(): Scene | null {
 export function syncIntro(): void {
   if (!pending?.loaded || document.visibilityState !== 'visible' || !settingsRead()) return;
   const kind = currentSettings().gameIntro;
-  if (kind === 'off' || (kind === 'faceoff' && !window.matchMedia(DESKTOP).matches)) {
+  if (kind === 'off') {
     pending = null;
     return;
   }

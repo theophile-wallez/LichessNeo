@@ -18,7 +18,11 @@
       calc(
         min(
             calc(
-              var(--ln-ext-main-h, 100dvh) - 32px - 2 * var(--ln-ext-bar) - var(--ln-ext-coords-off)
+              (
+                  var(--ln-ext-main-h, 100dvh) - 32px - 2 * var(--ln-ext-bar) -
+                    var(--ln-ext-coords-off)
+                ) /
+                var(--ln-ext-board-ratio, 1)
             ),
             calc(
               var(--ln-ext-main-w, 100vw) - var(--ln-ext-lead-w, 0px) - var(--ln-ext-panel-min) -
@@ -36,6 +40,8 @@
       ),
       500px
     );
+    /* Its row: a 3D board is less tall than wide. */
+    --ln-ext-board-h: calc(var(--ln-ext-board) * var(--ln-ext-board-ratio, 1));
     --ln-ext-bar-bot: calc(var(--ln-ext-bar) + var(--ln-ext-coords-off));
     --ln-ext-ctrl-h: var(--ln-ext-controls-h, 48px); /* content/layout/controls-height.ts */
     /* The tab bar's row, 0 while the panel has but one part to show (panel-tabs.css). */
@@ -55,7 +61,7 @@
     grid-template-rows:
       var(--ln-ext-tabs-h)
       calc(var(--ln-ext-bar) - var(--ln-ext-tabs-h))
-      var(--ln-ext-board)
+      var(--ln-ext-board-h)
       var(--ln-ext-bar-bot) !important;
     grid-auto-rows: auto !important;
     grid-template-areas:
@@ -69,7 +75,7 @@
     align-content: start !important;
   }
 
-  body:is(.coords-in, .coords-out) main.round {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) main.round {
     --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
   }
 
@@ -236,6 +242,33 @@ main.round .rclock .bar {
   height: 1px !important;
   opacity: 0 !important;
   pointer-events: none;
+}
+
+/* Picked on Lichess's preferences page (content/clock-bar): a strip along the clock's bottom
+ * edge, in the clock's ink. */
+html[data-ln-ext-clock-bar] main.round .rclock .bar {
+  --ln-ext-clock-bar: var(--ln-ext-ink);
+  inset: auto 8px 4px auto !important;
+  width: 124px !important;
+  height: 3px !important;
+  border-radius: 999px;
+  background: var(--ln-ext-clock-bar) !important;
+  opacity: 0.5 !important;
+  /* The clock's box paints over what comes before it. */
+  z-index: 1;
+}
+
+html[data-ln-ext-clock-bar]
+  main.round
+  :is(.rclock-black, .rclock.emerg.running, .rclock.outoftime)
+  .bar {
+  --ln-ext-clock-bar: var(--ln-ext-white);
+}
+
+/* A berserk player's, as Lichess has it. */
+html[data-ln-ext-clock-bar] main.round .rclock .bar.berserk {
+  --ln-ext-clock-bar: var(--ln-ext-red);
+  opacity: 1 !important;
 }
 
 /* Lichess's clock extras (tournament rank, +time, berserk) go before the clock, which

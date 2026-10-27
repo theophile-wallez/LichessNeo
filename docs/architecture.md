@@ -23,14 +23,14 @@ the page world would crash on it.
 | `html.ts`, `escape.ts`                               | the escaping `html` template and `setHtml`; the escaping alone, for the build's scripts                                                                                                                                                                                                                                                                             |
 | `protocol.ts`, `dev-check.ts`                        | the messages between the worlds, and with the background worker                                                                                                                                                                                                                                                                                                     |
 | `json.ts`, `zod.ts`, `guards.ts`                     | parsing and validating outside data                                                                                                                                                                                                                                                                                                                                 |
-| `storage.ts`, `prefix.ts`                            | the `ln-ext` prefix and every storage key; writes that survive a full or blocked storage, and reads that throw on a blocked one                                                                                                                                                                                                                                     |
+| `storage.ts`, `prefix.ts`                            | the `ln-ext` prefix and every storage key; writes that survive a full or blocked storage, reads that throw on a blocked one, and other tabs' changes                                                                                                                                                                                                                |
 | `page-init-data.ts`, `round-init.ts`, `game-path.ts` | the page's `#page-init-data`, captured before Lichess removes it; a game page's, read for a game just begun; what a game page's path holds (`/game/<id>`)                                                                                                                                                                                                           |
 | `features.ts`, `frame.ts`, `poll.ts`                 | starting features, once-per-frame work, waiting for Lichess's globals                                                                                                                                                                                                                                                                                               |
 | `build-mode.ts`                                      | whether this is a dev build, which reloads itself when rebuilt, and the name of the draft a preview build shows and its page                                                                                                                                                                                                                                        |
 | `confetti.ts`, `practice-page.ts`                    | a one-off shower of confetti (a game's winner, a cheer of opening practice); the address of opening practice's page                                                                                                                                                                                                                                                 |
 | `lang.ts`, `text.ts`, `math.ts`, `geometry.ts`       | the page's language, small text and number helpers, points and boxes                                                                                                                                                                                                                                                                                                |
 | `time-control.ts`, `clock-time.ts`                   | a time control in words, for a "New 10+5" button; a clock's time                                                                                                                                                                                                                                                                                                    |
-| `player-bar.ts`, `flag.ts`                           | a player as their bar on the game page shows them; the image of a profile's flag                                                                                                                                                                                                                                                                                    |
+| `player-bar.ts`, `flag.ts`, `ratings-shown.ts`       | a player as their bar on the game page shows them; the image of a profile's flag; whether Lichess shows ratings on the page                                                                                                                                                                                                                                         |
 | `avatar.ts`, `own-avatar.ts`, `own-name.ts`          | users' avatars, a coach on a color picked from their name; the signed-in user's own avatar and name                                                                                                                                                                                                                                                                 |
 | `hugeicons.ts`, `hugeicons-svg.ts`                   | Hugeicons drawn inline, or as files for the stylesheets (`pnpm icons`)                                                                                                                                                                                                                                                                                              |
 | `chess/`, `chessground.ts`, `piece-glyph.ts`         | chess basics (squares, FEN, piece letters and values, attacks, SAN played on a board), a board's pieces read from chessground's classes, a piece of ours in the board's set                                                                                                                                                                                         |
@@ -79,9 +79,11 @@ so the logic can be unit-tested without a page.
   packs, their pickers, our themes' settings and the settings' import, in the
   pickers when signed out.
 - `bootstrap`.
-- `layout`: `MARKS`, the `data-ln-ext-has` flags, inset, zoom, controls
-  height, and the right-hand panel's tabs, which give the moves, the chat and
-  the game info one area to share.
+- `layout`: `MARKS`, the `data-ln-ext-has` flags, the Lichess preferences
+  our parts follow (`data-ln-ext-prefs`), inset, zoom (the board's handle
+  and the user menu's Size slider), controls height, and the right-hand
+  panel's tabs, which give the moves, the chat and the game info one area to
+  share.
 - `game`.
 - `analysis`: the players' bars, the eval gauge, the engine settings' sliders,
   the underboard's button, the variations drawn as a tree, long runs folded
@@ -122,11 +124,14 @@ so the logic can be unit-tested without a page.
   progress, its last month and where it stands, their games won, drawn and
   lost, their form and their best win. A row still loading holds its room
   with a skeleton, so the card keeps its size.
+- `clock-bar`: Lichess's clock bar, hidden unless the user picks Yes for it on
+  Lichess's preferences page, whose radios show Neo's choice, tagged Neo.
 - `chesscom-ratings`: with the settings' Chess.com ratings on, every rating
   Lichess writes (`SPOTS`: a game's bars and info, mini games, game lists,
-  rating cards and stats pages, hover cards, leaderboards, the lobby, arenas,
-  TV) swapped in place for its Chess.com equivalent, the Lichess one in its
-  tooltip. The change beside a rating (a game's, a profile's progress) follows:
+  rating cards and stats pages, our cards of those, hover cards, leaderboards,
+  the lobby, arenas, Swiss tournaments, TV) swapped in place for its Chess.com
+  equivalent, the Lichess one in its tooltip; the rating history chart is drawn
+  in them. The change beside a rating (a game's, a profile's progress) follows:
   the gap between the two ratings it spans, each converted, as the scales'
   slopes differ.
 - `puzzle-dashboard`: the puzzle dashboard's overview with its coach's tips,
@@ -139,7 +144,7 @@ so the logic can be unit-tested without a page.
   menu gets a link for each of its pages: Appearance (the color scheme, the
   color themes, Lichess's Roundness, and the nav as a rail, the default, a sidebar, unfolded or not, or a
   header), Board & sounds (the sounds, the board and the pieces, the
-  extension's, the packs' and Lichess's, the boards in sections: classic, each
+  extension's, the packs' and Lichess's, followed in the other tabs, the boards in sections: classic, each
   family's, then the user's own and the packs', over a preview board that shows a board or a set while its tile is hovered, then
   the interface's own sounds and the Packs card, which its own link scrolls
   to), Profile & coach (the user's own avatar, a coach on a color or a
@@ -153,7 +158,9 @@ so the logic can be unit-tested without a page.
   moved, taken off or put back to the defaults, and cards suggested from
   their recent games), then, a step below, Experimental (the Chess.com
   ratings, and the study behind them in a frame) and Backup (every setting,
-  pick and pack exported to a JSON file, and put back from one). The links of
+  pick and pack, and opening practice's records, exported to a JSON file, and
+  put back from one). A control waits for the stored settings, and a change is
+  saved over them, never over the defaults. The links of
   pages since merged open where their cards went. Kept in
   `chrome.storage.sync`, but the coach's (the home's own too), the avatar's
   and the name's picks in localStorage, where the page world reads them.

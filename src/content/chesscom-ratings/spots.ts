@@ -50,6 +50,12 @@ function miniGameSpeed(element: HTMLElement): string | null {
   return speedOfTimeControl(game?.dataset.tc);
 }
 
+// The progress chip beside a rating stats page's rating, our own (perf-stat/view-hero.ts).
+function perfProgress(rating: HTMLElement): HTMLElement | null {
+  const card = rating.closest('.ln-ext-perf__now');
+  return card && queryOne(card, '.ln-ext-perf__chip[data-ln-ext-tone]', HTMLElement);
+}
+
 export const SPOTS: readonly Spot[] = [
   // A game's player bars, ours on the analysis board, and its info.
   {
@@ -72,8 +78,17 @@ export const SPOTS: readonly Spot[] = [
     speed: element => speedOfPath(element.closest('a')?.pathname),
     change: { find: changeIn('rating'), shows: 'after' },
   },
+  { selector: '.perf-stat h2 > strong:first-child', speed: () => speedOfPath(location.pathname) },
+  // Our cards of that page (content/profile/perf-stat): the rating with its progress, where it
+  // stands between its lowest and highest, and the opponents' ratings.
   {
-    selector: '.perf-stat h2 > strong:first-child, .ln-ext-perf__rating',
+    selector: '.ln-ext-perf__rating',
+    speed: () => speedOfPath(location.pathname),
+    change: { find: perfProgress, shows: 'after' },
+  },
+  {
+    selector:
+      '.ln-ext-perf__bar > em, .ln-ext-perf__end > b, .ln-ext-perf__opponent .ln-ext-perf__pill',
     speed: () => speedOfPath(location.pathname),
   },
   // The hover card's chips.
@@ -102,9 +117,13 @@ export const SPOTS: readonly Spot[] = [
     selector: '.hooks__list tr.hook > td:nth-child(2)',
     speed: element => speedOfGlyph(glyphOf(element.parentElement, ':scope > td:last-child > span')),
   },
-  // An arena's standings.
+  // An arena's standings and its player's card, then a Swiss's, each its speed in its info's glyph.
   {
-    selector: '.tour__standing td.player .rating',
+    selector: '.tour__standing td.player .rating, .tour__player-info .stats h2 .rating',
     speed: () => speedOfGlyph(glyphOf(document, '.tour__meta__head')),
+  },
+  {
+    selector: '.swiss__standing td.player .rating, .swiss__player-info .stats h2 .rating',
+    speed: () => speedOfGlyph(glyphOf(document, '.swiss__meta > section[data-icon]')),
   },
 ];

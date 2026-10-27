@@ -54,6 +54,7 @@ afterEach(() => {
   document.head.innerHTML = '';
   document.body.innerHTML = '';
   document.body.className = '';
+  delete document.documentElement.dataset.lnExtPrefs;
 });
 
 describe('the board’s coordinates', () => {
@@ -74,4 +75,16 @@ describe('the board’s coordinates', () => {
     expect(ranks.left).toMatch(/^calc\(-/);
     expect(files.top).toBe('calc(100% + 6px)');
   });
+
+  // The user's pick, which only the body the server sent says (content/layout/lichess-prefs.ts).
+  it.each(['coords-in', 'coords-out'] as const)(
+    'are drawn inside on a desktop when the user picked inside, under %s',
+    coords => {
+      document.documentElement.dataset.lnExtPrefs = 'coords-in';
+      const { ranks, files } = render(coords, 1280);
+      expect(ranks.left).toBe('0px');
+      expect(files.bottom).toBe('0px');
+      expect(files.top).not.toBe('calc(100% + 6px)');
+    },
+  );
 });

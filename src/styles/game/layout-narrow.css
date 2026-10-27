@@ -10,6 +10,7 @@
     --ln-ext-coords-off: 0px;
     --ln-ext-gap: 12px;
     --ln-ext-board: calc(100vw - 16px);
+    --ln-ext-board-h: calc(var(--ln-ext-board) * var(--ln-ext-board-ratio, 1));
     --ln-ext-bar-bot: var(--ln-ext-bar);
     --ln-ext-chat-h: 360px;
 
@@ -17,7 +18,7 @@
     grid-template-columns: var(--ln-ext-board) !important;
     /* TV's channels first (styles/tv); a row with nothing in it takes no room. */
     grid-template-rows:
-      auto var(--ln-ext-bar) auto var(--ln-ext-board) auto var(--ln-ext-bar-bot)
+      auto var(--ln-ext-bar) auto var(--ln-ext-board-h) auto var(--ln-ext-bar-bot)
       auto auto auto auto !important;
     grid-template-areas:
       'tv'
@@ -124,6 +125,39 @@
   }
 }
 
+/* ---- Clock on the left --- */
+
+/* Lichess's "clock on the left" (a touch device's setting) puts the clocks at the board's left
+ * edge in its one-column layout: the bars are mirrored, the avatar and the name at the right. */
+@media (max-width: 799.29px) {
+  html[data-ln-ext-has~='round-swap-clock'] main.round .ruser {
+    justify-self: end;
+    margin: calc(var(--ln-ext-off) + 8px) var(--ln-ext-inset-r, 0px) 0 0 !important;
+    padding: 0 50px 0 0 !important;
+  }
+
+  html[data-ln-ext-has~='round-swap-clock'] main.round .ruser::before {
+    left: auto;
+    right: 0;
+  }
+
+  html[data-ln-ext-has~='round-swap-clock'] main.round :is(.ln-ext-captured, .expiration) {
+    justify-self: end;
+    margin-right: calc(50px + var(--ln-ext-inset-r, 0px)) !important;
+    margin-left: 0 !important;
+  }
+
+  html[data-ln-ext-has~='round-swap-clock'] main.round .rclock {
+    justify-self: start;
+    margin-right: 0 !important;
+    margin-left: var(--ln-ext-inset-l, 0px) !important;
+  }
+
+  html[data-ln-ext-has~='round-swap-clock'] main.round .rclock > :not(.time, .bar) {
+    order: 1;
+  }
+}
+
 /* ---- Phones' moves --- */
 
 /* Below 800px Lichess renders the moves as one row (`.col1-moves`): chips that scroll
@@ -209,7 +243,8 @@
     --ln-ext-gap: 24px;
     --ln-ext-board: min(
       100vw - 96px,
-      100dvh - var(---site-header-height, 50px) - 2 * var(--ln-ext-bar) - 88px
+      (100dvh - var(---site-header-height, 50px) - 2 * var(--ln-ext-bar) - 88px) /
+        var(--ln-ext-board-ratio, 1)
     );
   }
 
@@ -254,7 +289,7 @@
 /* A phone on its side: the board as tall as the screen, its bars above and under it. */
 @media (max-width: 1019.98px) and (max-height: 599.98px) {
   main.round {
-    --ln-ext-board: min(100vw - 96px, 100dvh - 16px);
+    --ln-ext-board: min(100vw - 96px, (100dvh - 16px) / var(--ln-ext-board-ratio, 1));
   }
 }
 

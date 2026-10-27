@@ -41,10 +41,12 @@ describe('the color scheme picked in the settings', () => {
     expect(posted()).toEqual(['/pref/bg bg=light']);
   });
 
-  it('turns Lichess’s background picture off, which the extension leaves out', () => {
+  it('keeps the background picture the user has, which the extension only hides', () => {
     document.documentElement.className = 'transp dark';
-    receive('dark');
-    expect(document.documentElement.className).toBe('dark');
-    expect(posted()).toEqual(['/pref/bg bg=dark']);
+    document.body.dataset.theme = 'transp dark';
+    receive('light');
+    expect(document.documentElement.className).toBe('transp light');
+    expect(document.body.dataset.theme).toBe('transp light');
+    expect(posted()).toEqual(['/pref/bg bg=transp+light']);
   });
 });

@@ -20,8 +20,9 @@ type Navigation = Settings['navigation'];
 export const isCollapsed = (): boolean =>
   readStored(StorageKey.sidebarCollapsed, z.literal('1')) !== null;
 
-const storedNavigation = (): Navigation =>
-  readStored(StorageKey.navigation, NavigationSchema) ?? DEFAULT_NAVIGATION;
+const keptNavigation = (): Navigation | null => readStored(StorageKey.navigation, NavigationSchema);
+
+const storedNavigation = (): Navigation => keptNavigation() ?? DEFAULT_NAVIGATION;
 
 // Words of `data-ln-ext-sidebar`: the rail takes the folded sidebar's rules (collapsed.css).
 function shape(): string | null {
@@ -37,9 +38,12 @@ export function showNavigation(): void {
   setData(document.documentElement, 'lnExtSidebar', shape());
 }
 
+// The copy is kept even when it's the default, so a later default can't show first.
 function followSettings(settings: Settings): void {
-  if (settings.navigation === storedNavigation()) return;
+  if (settings.navigation === keptNavigation()) return;
+  const moved = settings.navigation !== storedNavigation();
   writeStored(StorageKey.navigation, settings.navigation);
+  if (!moved) return;
   showNavigation();
   // The board moved: chessground keeps its old bounds until a scroll clears them.
   document.dispatchEvent(new Event('scroll'));

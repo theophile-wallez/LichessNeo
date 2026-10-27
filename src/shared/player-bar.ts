@@ -1,5 +1,6 @@
 import { userInHref } from './avatar.ts';
 import { queryOne } from './dom.ts';
+import { ratingsShown } from './ratings-shown.ts';
 import { nonEmpty } from './text.ts';
 
 // A player as their bar on the game page shows them, for the players' intro
@@ -28,13 +29,17 @@ function barName(bar: HTMLElement): string {
     .trim();
 }
 
-/** The player of a bar; the computer has no rating there, so it comes from its level. */
+/**
+ * The player of a bar; the computer has no rating there, so it comes from its level. None when
+ * the page hides ratings, where Lichess keeps them in the bar, out of sight.
+ */
 export function readPlayer(bar: HTMLElement, computerRating: string | undefined): BarPlayer {
+  const rating = computerRating ?? nonEmpty(bar.querySelector('rating')?.textContent.trim());
   return {
     name: barName(bar),
     user: userInHref(bar.querySelector('a.user-link')?.getAttribute('href')),
     title: nonEmpty(bar.querySelector('.utitle')?.textContent.trim()),
-    rating: computerRating ?? nonEmpty(bar.querySelector('rating')?.textContent.trim()),
+    rating: ratingsShown() ? rating : undefined,
     flag: nonEmpty(bar.dataset.lnExtFlag),
     computer: computerRating !== undefined,
   };

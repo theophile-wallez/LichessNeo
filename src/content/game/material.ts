@@ -20,6 +20,7 @@ export const CAPTURABLE_ROLES: readonly CapturableRole[] = [
 type Army = Readonly<Record<CapturableRole, number>>;
 
 const START: Army = { pawn: 8, knight: 2, bishop: 2, rook: 2, queen: 1 };
+const NOTHING: Army = { pawn: 0, knight: 0, bishop: 0, rook: 0, queen: 0 };
 // Variants that start with other pieces. Crazyhouse shows no captured pieces:
 // they change sides into the pockets, which show them.
 const VARIANT_START = new Map<string, Readonly<Record<Color, Army>>>([
@@ -40,6 +41,8 @@ export interface CapturedInput {
   readonly variant: string | undefined;
   /** Three-check: the checks each bar's player gave, shown as kings. */
   readonly checks: Readonly<Record<BarSide, number>>;
+  /** Only the checks: the pieces taken and the lead aren't to be shown. */
+  readonly checksOnly?: boolean;
 }
 
 export type CapturedMarkup = Readonly<Record<BarSide, SafeHtml>>;
@@ -84,13 +87,13 @@ function rowMarkup({ color, missing, lead, checks }: RowOptions): SafeHtml {
 /** Both bars' captured pieces: each shows the pieces of the other color that are gone. */
 export function capturedMarkup(input: CapturedInput): CapturedMarkup {
   if (input.variant === 'crazyhouse') return { top: html``, bottom: html`` };
-  const { pieces, bottom, variant, checks } = input;
+  const { pieces, bottom, variant, checks, checksOnly = false } = input;
   const top = opposite(bottom);
   const armies = { white: countArmy(pieces, 'white'), black: countArmy(pieces, 'black') };
   const row = (color: Color, lead: number, given: number): SafeHtml => {
     const start = VARIANT_START.get(variant ?? '')?.[color] ?? START;
-    const missing = countMissing(start, armies[color]);
-    return rowMarkup({ color, missing, lead, checks: given });
+    const missing = checksOnly ? NOTHING : countMissing(start, armies[color]);
+    return rowMarkup({ color, missing, lead: checksOnly ? 0 : lead, checks: given });
   };
   const topMaterial = materialOf(armies[top]);
   const bottomMaterial = materialOf(armies[bottom]);

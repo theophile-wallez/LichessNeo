@@ -1,6 +1,6 @@
 import { z } from 'zod/mini';
 import { setStyleProperty } from '#shared/dom.ts';
-import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
+import { onStoredElsewhere, readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
 import { warmTexture } from './texture-warm.ts';
 import { FULL_STRENGTH, showTexture, type TextureId, TexturingSchema } from './textures.ts';
 
@@ -44,10 +44,20 @@ export function showCustomBoard(): void {
   warmTexture(board.texture);
 }
 
-function write(board: CustomBoard): void {
-  writeStoredJson(StorageKey.customBoard, board);
+function changed(): void {
   showCustomBoard();
   for (const listener of listeners) listener();
+}
+
+function write(board: CustomBoard): void {
+  writeStoredJson(StorageKey.customBoard, board);
+  changed();
+}
+
+/** Shows the board, then again each time another tab changes it. */
+export function followCustomBoard(): void {
+  showCustomBoard();
+  onStoredElsewhere([StorageKey.customBoard], changed);
 }
 
 export function chooseSquareColor(shade: SquareShade, color: string): void {

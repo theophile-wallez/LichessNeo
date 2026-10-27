@@ -20,7 +20,7 @@ export const MAX_CUSTOM_THEMES = 24;
 export const NavigationSchema = z.enum(['sidebar', 'unfolded', 'rail', 'header']);
 export const DEFAULT_NAVIGATION = 'rail';
 
-export const SettingsSchema = z.object({
+const SettingsFields = z.object({
   /** The interface's own sounds (content/ui/sounds.ts), not Lichess's nor a pack's. */
   uiSounds: z.prefault(z.boolean(), true),
   /** The coaches play as 3D mascots; off, they stay their still images (content/coach). */
@@ -30,12 +30,16 @@ export const SettingsSchema = z.object({
   /** The coach drawing what it explains on the board (a pawn's square); off, it only says it. */
   coachBoard: z.prefault(z.boolean(), true),
   navigation: z.catch(NavigationSchema, DEFAULT_NAVIGATION),
+  /** Whether the user picked the nav in the settings (navigation-row.ts), not just kept the default. */
+  navigationPicked: z.prefault(z.boolean(), false),
   /** The speed whose rating the sidebar shows beside the player's name (content/sidebar). */
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
   /** The home's quick pairing cards, in their order (content/pages/speed-cards). */
   quickPairing: CardPicksSchema,
   /** Every rating shown as on Chess.com, the Experimental page's switch (content/chesscom-ratings). */
   chesscomRating: z.prefault(z.boolean(), false),
+  /** Lichess's clock bar, hidden unless picked on Lichess's preferences page (content/clock-bar). */
+  clockBar: z.prefault(z.boolean(), false),
   /** The players' intro at a game's start, or none (content/game/intro). */
   gameIntro: z.catch(IntroKindSchema, DEFAULT_INTRO),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */
@@ -43,6 +47,17 @@ export const SettingsSchema = z.object({
   /** The themes the user made. Unreadable, they're dropped rather than every setting. */
   customThemes: z.catch(z.array(CustomThemeSchema).check(z.maxLength(MAX_CUSTOM_THEMES)), []),
 });
+
+type Fields = z.infer<typeof SettingsFields>;
+
+// Every save stores every setting, so the sidebar, the default before the rail, was kept by
+// all who saved anything: unless picked, it reads as today's default.
+const withDefaultNavigation = (settings: Fields): Fields =>
+  settings.navigationPicked || settings.navigation !== 'sidebar'
+    ? settings
+    : { ...settings, navigation: DEFAULT_NAVIGATION };
+
+export const SettingsSchema = z.pipe(SettingsFields, z.transform(withDefaultNavigation));
 
 export type Settings = z.infer<typeof SettingsSchema>;
 
@@ -56,29 +71,38 @@ export function parseSettings(value: unknown): Settings {
 let current: Settings = DEFAULTS;
 let loaded = false;
 let read = false;
+// Whether the stored settings were read: a write is made of them, never of the defaults.
+let readOk = false;
+let reading: Promise<boolean> = Promise.resolve(false);
 const listeners = new Set<(settings: Settings) => void>();
+const readListeners = new Set<() => void>();
 
 function update(next: Settings): void {
   current = next;
   for (const listener of listeners) listener(next);
 }
 
-async function readSettings(): Promise<void> {
-  let stored = current;
+// A failed read leaves the defaults without telling the settings' listeners: what keeps a
+// copy of them (the nav's, the coach's) keeps the one it has.
+async function readSettings(): Promise<boolean> {
   try {
-    stored = parseSettings(await readSynced(StorageKey.settings));
+    update(parseSettings(await readSynced(StorageKey.settings)));
+    readOk = true;
+    return true;
   } catch (error) {
     console.warn('[LichessNeo] settings unread', error);
+    return false;
+  } finally {
+    read = true;
+    for (const listener of readListeners) listener();
   }
-  read = true;
-  update(stored);
 }
 
 // A content script left behind by a reload of the extension can't reach its storage.
 function load(): void {
   if (loaded || !isConnected()) return;
   loaded = true;
-  void readSettings();
+  reading = readSettings();
   onSyncedChange(StorageKey.settings, value => update(parseSettings(value)));
 }
 
@@ -103,18 +127,30 @@ export function onSettings(listener: (settings: Settings) => void): void {
   listeners.add(listener);
 }
 
-export async function saveSetting<K extends keyof Settings>(
-  key: K,
-  value: Settings[K],
-): Promise<void> {
-  const next = { ...current, [key]: value };
+/** Calls `listener` once the storage has answered, or failed to. */
+export function onSettingsRead(listener: () => void): void {
+  load();
+  readListeners.add(listener);
+}
+
+// Waits for the read, tried again if it failed: callers that wait on the same failed read
+// share the one retry, so each change applies over the one before.
+async function readBeforeWrite(): Promise<boolean> {
+  load();
+  const attempt = reading;
+  if (await attempt) return true;
+  if (reading === attempt && isConnected()) reading = readSettings();
+  return reading;
+}
+
+/** Saves the settings `change` makes of the current ones, once those are read. */
+export async function updateSettings(change: (settings: Settings) => Settings): Promise<void> {
+  // Once read, at once: the controls show the change in the same frame.
+  if (!readOk && !(await readBeforeWrite())) return;
+  const next = SettingsSchema.parse(change(current));
   update(next);
   await writeSynced(StorageKey.settings, next);
 }
 
-/** Saves the settings `change` makes of the current ones, several fields at once. */
-export async function updateSettings(change: (settings: Settings) => Settings): Promise<void> {
-  const next = change(current);
-  update(next);
-  await writeSynced(StorageKey.settings, next);
-}
+export const saveSetting = <K extends keyof Settings>(key: K, value: Settings[K]): Promise<void> =>
+  updateSettings(settings => ({ ...settings, [key]: value }));

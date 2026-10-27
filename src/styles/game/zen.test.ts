@@ -67,3 +67,31 @@ describe('Zen', () => {
     expect(styled('bo3').paddingInlineEnd).toBe('8px');
   });
 });
+
+// The bars, the captured pieces and the side, which our rules show at every width.
+const BARS =
+  '<main class="round"><div class="round__app"><div class="ruser ruser-top"><a>someone</a></div>' +
+  '<div class="rclock rclock-top"><div class="time">3:00</div></div></div>' +
+  '<div class="ln-ext-captured ln-ext-captured--top"></div>' +
+  '<div class="round__side"><div class="game__meta"></div><div class="mchat"></div></div></main>';
+
+describe('Zen on a phone', () => {
+  const PARTS = ['.ruser', '.ln-ext-captured', '.round__side', '.rclock'];
+
+  function shown(bodyClass: string): string[] {
+    Reflect.set(window, 'innerWidth', 390);
+    const style = document.createElement('style');
+    style.textContent = ['../playerbar.css', 'layout.css', 'layout-narrow.css', 'zen.css']
+      .map(sheet => readFileSync(join(import.meta.dirname, sheet), 'utf8').replace(/\s+/g, ' '))
+      .join('\n');
+    document.head.replaceChildren(style);
+    document.body.className = bodyClass;
+    document.body.innerHTML = BARS;
+    return PARTS.filter(part => styled(part).display !== 'none');
+  }
+
+  it('hides the names, the captured pieces and the side, as on a desktop: the clocks stay', () => {
+    expect(shown('zenable')).toEqual(PARTS);
+    expect(shown('zenable zen')).toEqual(['.rclock']);
+  });
+});

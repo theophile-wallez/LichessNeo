@@ -1,5 +1,4 @@
 import { shownCoach } from '#shared/coach.ts';
-import { setData } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
 import { followSetup } from '#content/game-setup/redraws.ts';
@@ -15,7 +14,6 @@ import { levelMood } from './moods.ts';
 const setup = new MascotSpot({
   className: 'ln-ext-level__live',
   framing: 'bust',
-  onDrawn: slot => setData(slot, 'lnExtLive', ''),
 });
 let pickedLevel = 0;
 

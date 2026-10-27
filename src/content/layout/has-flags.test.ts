@@ -32,6 +32,7 @@ describe('presentFlags, for flags the original lacked', () => {
       '<main class="round"><div class="rcontrols"><div class="ln-ext-end__card"></div></div></main>',
     ],
     ['round-clockless', '<main class="round"><div class="rclock rclock-turn"></div></main>'],
+    ['round-swap-clock', '<main class="round"><div class="round__app swap-clock"></div></main>'],
     ['tour', '<main class="tour"><aside class="tour__side"></aside></main>'],
     ['simul', '<main class="simul"><aside class="simul__side"></aside></main>'],
     ['board-editor', '<main><div class="board-editor"><div class="main-board"></div></div></main>'],

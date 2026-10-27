@@ -16,7 +16,7 @@ import { buildNavigationRow } from './navigation-row.ts';
 import { buildPairingPage } from './pairing-page.ts';
 import { buildRatingRow } from './rating-row.ts';
 import { buildRoundnessRow } from './roundness-row.ts';
-import { onSettings, settingsRead } from './settings.ts';
+import { onSettingsRead, settingsRead } from './settings.ts';
 
 // The account page's section for the extension: one of its pages
 // (address.ts) at a time, the one the menu's link picked (menu.ts), under its
@@ -73,10 +73,10 @@ export function buildSection(): SettingsSection {
     queryOne(element, `.ln-ext-settings__page[data-ln-ext-page='${page}']`, HTMLElement)?.append(
       ...pages[page],
     );
-  // The switches wait for the stored settings, rather than flip from the defaults to them.
+  // The controls wait for the stored settings, rather than flip from the defaults to them.
   const showPending = (): void => setData(element, 'lnExtPending', settingsRead() ? null : '');
   showPending();
-  onSettings(showPending);
+  onSettingsRead(showPending);
   return {
     element,
     show: page => {

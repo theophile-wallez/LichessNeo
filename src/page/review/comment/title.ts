@@ -3,12 +3,14 @@ import type { MoveClass } from '#page/review/classes/classes.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 
 // The verdict over the coach's comment ("Nf3 is best", "Qh5# is checkmate"), the
-// move's piece as a solid figurine drawn by Lichess's "Noto Chess" font.
+// move's piece as a solid figurine drawn by Lichess's "Noto Chess" font, or as its
+// letter with Lichess's piece notation set to letters (`body.piece-letter`).
 
 const FIGURINES: Readonly<Record<string, string>> = { K: '♚', Q: '♛', R: '♜', B: '♝', N: '♞' };
 
-/** A move in SAN, its piece a figurine. */
+/** A move in SAN, its piece a figurine unless the user reads letters. */
 export function sanMarkup(san: string): SafeHtml {
+  if (document.body.classList.contains('piece-letter')) return html`${san}`;
   // Split on the piece letters, which then sit at the odd indexes.
   const pieces = san
     .split(/([KQRBN])/)

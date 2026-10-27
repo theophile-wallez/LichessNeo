@@ -87,6 +87,20 @@ describe('coach choice', () => {
     expect(localStorage.getItem('ln-ext-coach')).toBe(String(ROBOT_COACH));
   });
 
+  it('shows a coach picked in another tab, and tells the review’s', () => {
+    const posted = vi.spyOn(window, 'postMessage').mockImplementation(() => {});
+    localStorage.setItem('ln-ext-coach', '2');
+    coachChoice.start();
+    localStorage.setItem('ln-ext-coach', '5');
+    window.dispatchEvent(new StorageEvent('storage', { key: 'ln-ext-coach' }));
+    expect(document.documentElement.dataset['lnExtCoach']).toBe('5');
+    expect(posted).toHaveBeenCalledWith({ type: 'ln-ext:coach-picked', coach: 5 }, location.origin);
+    localStorage.setItem('ln-ext-coach', 'none');
+    window.dispatchEvent(new StorageEvent('storage', { key: 'ln-ext-coach' }));
+    expect(document.documentElement.dataset['lnExtCoach']).toBe('none');
+    posted.mockRestore();
+  });
+
   it('decodes the coach’s still at once, so a card drawn later shows it in its first frame', () => {
     const decoded: string[] = [];
     vi.spyOn(HTMLImageElement.prototype, 'decode').mockImplementation(function (

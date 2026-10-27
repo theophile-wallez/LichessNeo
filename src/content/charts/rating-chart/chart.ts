@@ -50,7 +50,7 @@ interface Setup {
 
 /** The chart's state: the range, the ratings hidden, and what's drawn. */
 class RatingChart {
-  readonly #series: readonly Series[];
+  #series: readonly Series[];
   readonly #parts: ChartParts;
   readonly #span: HistorySpan;
   readonly #formats: DateFormats;
@@ -118,6 +118,13 @@ class RatingChart {
     prependSvg(axis, ratingGrid(plot));
   }
 
+  /** Draws other ratings over the same days: the Chess.com ones, or Lichess's back. */
+  showSeries(series: readonly Series[]): void {
+    this.#series = series;
+    this.leave();
+    this.draw(false);
+  }
+
   #renderLegend(): void {
     if (!this.#plot) return;
     const single = this.#series.length === 1;
@@ -175,8 +182,8 @@ function redrawOnResize(plot: HTMLElement, draw: (animate: boolean) => void): vo
   }).observe(plot);
 }
 
-/** Adds our chart to Lichess's rating history card. */
-export function mountChart(host: HTMLElement, series: readonly Series[]): void {
+/** Adds our chart to Lichess's rating history card; null if it couldn't. */
+export function mountChart(host: HTMLElement, series: readonly Series[]): RatingChart | null {
   const span = historySpan(series);
   // Read before adding anything, so that Lichess's chart stays if blocked storage throws.
   const range = initialRange(readStored(StorageKey.ratingChartRange, RangeKeySchema), span);
@@ -187,7 +194,7 @@ export function mountChart(host: HTMLElement, series: readonly Series[]): void {
   const parts = findParts(root);
   if (!parts) {
     root.remove();
-    return;
+    return null;
   }
   // Lichess's own chart is hidden from here on (styles/ratingchart.css).
   host.classList.toggle('ln-ext-rchart-on', true);
@@ -196,4 +203,5 @@ export function mountChart(host: HTMLElement, series: readonly Series[]): void {
   parts.svg.addEventListener('pointermove', event => chart.hover(event));
   parts.svg.addEventListener('pointerleave', () => chart.leave());
   redrawOnResize(parts.plot, animate => chart.draw(animate));
+  return chart;
 }

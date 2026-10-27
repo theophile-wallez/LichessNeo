@@ -1,5 +1,5 @@
 import { shownCoach } from '#shared/coach.ts';
-import { queryOne, setData } from '#shared/dom.ts';
+import { queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
@@ -17,7 +17,6 @@ const spot = new MascotSpot({
   framing: 'bust',
   greets: false,
   whenIdle: true,
-  onDrawn: message => setData(message, 'lnExtLive', ''),
 });
 let coach: number | null | undefined;
 

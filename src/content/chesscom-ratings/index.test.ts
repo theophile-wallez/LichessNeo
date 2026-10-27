@@ -125,6 +125,42 @@ describe('the ratings as on Chess.com', () => {
     ]);
   });
 
+  it('swap our cards of a rating’s stats page: its progress, its range and its opponents', () => {
+    history.replaceState(null, '', '/@/eresy/perf/blitz');
+    // As perf-stat/view-hero.ts and view-records.ts draw them.
+    document.body.innerHTML = `<section class="ln-ext-perf__card ln-ext-perf__now"><strong class="ln-ext-perf__rating">1800</strong>
+        <div class="ln-ext-perf__chips"><span class="ln-ext-perf__chip" data-ln-ext-tone="green" title="Progress"><svg></svg>+28</span><span class="ln-ext-perf__chip" title="Deviation">± 60</span></div></section>
+      <section class="ln-ext-perf__range"><div class="ln-ext-perf__bar"><i></i><em>1800</em></div>
+        <div class="ln-ext-perf__ends"><div class="ln-ext-perf__end"><span>Lowest</span><b>1200</b></div><div class="ln-ext-perf__end"><span>Highest</span><b>1900</b></div></div></section>
+      <div class="ln-ext-perf__opponent"><a class="ln-ext-perf__game"><span class="ln-ext-perf__pill">2100</span></a></div>`;
+    tick();
+    expect(shown('.ln-ext-perf__chip')).toEqual([
+      [`+${equivalentChange('blitz', 1772, 28)}`, '+28 on Lichess · Progress'],
+      ['± 60', undefined],
+    ]);
+    expect(shown('em, b, .ln-ext-perf__pill').map(([text]) => text)).toEqual([
+      equivalent('blitz', 1800),
+      equivalent('blitz', 1200),
+      equivalent('blitz', 1900),
+      equivalent('blitz', 2100),
+    ]);
+  });
+
+  it('swap a Swiss’s standings and an arena’s or a Swiss’s player card, by the event’s glyph', () => {
+    document.body.innerHTML = `<div class="swiss__meta"><section data-icon="\ue032"></section></div>
+      <table class="swiss__standing"><tr><td class="player"><a class="user-link"><span class="name">a</span><span class="rating">2444</span></a></td></tr></table>
+      <div class="swiss__player-info"><div class="stats"><h2><span class="rank">1. </span><a class="user-link"><span class="name">a</span><span class="rating">2444</span></a></h2></div></div>`;
+    tick();
+    expect(shown('.rating').map(([text]) => text)).toEqual([
+      equivalent('bullet', 2444),
+      equivalent('bullet', 2444),
+    ]);
+    document.body.innerHTML = `<div class="tour__meta__head" data-icon="\ue002"></div>
+      <div class="tour__player-info"><div class="stats"><h2><span class="rank">3</span><a class="user-link"><span class="name">b</span><span class="rating">1750</span></a></h2></div></div>`;
+    tick();
+    expect(shown('.rating')).toEqual([[equivalent('rapid', 1750), '1750 on Lichess']]);
+  });
+
   it('swap the leaderboards, the lobby’s seeks, an arena’s standings and TV’s channels', () => {
     history.replaceState(null, '', '/player/top/blitz');
     document.body.innerHTML = `<ol class="user-top"><li><a class="user-link">a</a><span data-icon="\ue032" title="Bullet rating over 9 games">3000</span></li></ol>

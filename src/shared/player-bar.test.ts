@@ -19,6 +19,7 @@ function bar(markup: string): HTMLElement {
 
 afterEach(() => {
   document.body.innerHTML = '';
+  document.body.className = '';
 });
 
 describe('readPlayer', () => {
@@ -42,5 +43,13 @@ describe('readPlayer', () => {
       flag: undefined,
       computer: true,
     });
+  });
+
+  // Lichess keeps the rating in its bar, out of sight: the intro must not show it.
+  it('gives no rating, the computer’s neither, where the page hides ratings', () => {
+    const user = bar(USER_BAR);
+    document.body.className = 'no-rating';
+    expect(readPlayer(user, undefined).rating).toBeUndefined();
+    expect(readPlayer(bar(COMPUTER_BAR), '~800').rating).toBeUndefined();
   });
 });

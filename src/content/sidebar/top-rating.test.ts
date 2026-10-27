@@ -47,8 +47,12 @@ describe('pickedRating', () => {
     });
   });
 
-  it('falls back to the most played one for a speed without a rating, or ratings kept before', () => {
-    expect(pickedRating(top, ratingsOf(profile), 'classical')).toEqual(top);
+  it('shows a speed never played at Lichess’s start, and the most played for ratings kept before', () => {
+    expect(pickedRating(top, ratingsOf(profile), 'classical')).toEqual({
+      speed: 'classical',
+      rating: 1500,
+      provisional: true,
+    });
     expect(pickedRating(top, undefined, 'blitz')).toEqual(top);
   });
 

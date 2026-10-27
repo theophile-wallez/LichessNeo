@@ -6,77 +6,83 @@ coords {
   opacity: 1 !important;
 }
 
-/* Below 1020px always inside: ranks top-left, files bottom-right, in the opposite square's
- * color, or a pack's (content/packs/apply.ts). From 799.3px Lichess draws "outside" ones past
- * the board's edge, off a board as wide as the screen and under its player bar. */
+/* Inside below 1020px, and on a desktop too when that's the user's pick (`coords-in` in
+ * `data-ln-ext-prefs`, content/layout/lichess-prefs.ts): ranks top-left, files bottom-right, in
+ * the opposite square's color, or a pack's (content/packs/apply.ts). From 799.3px Lichess draws
+ * "outside" ones past the board's edge, off a board as wide as the screen and under its bar. */
+body:is(.coords-in, .coords-out) .is2d coords .coord-dark,
+body:is(.coords-in, .coords-out) .is2d coords.files .coord-dark {
+  color: var(---cg-ccw) !important;
+}
+
+body:is(.coords-in, .coords-out) .is2d coords .coord-light,
+body:is(.coords-in, .coords-out) .is2d coords.files .coord-light {
+  color: var(---cg-ccb) !important;
+}
+
+/* Ranks move to the left edge, which puts each on the opposite color. */
+body:is(.coords-in, .coords-out) .is2d coords.ranks .coord-dark {
+  color: var(---cg-ccb) !important;
+}
+
+body:is(.coords-in, .coords-out) .is2d coords.ranks .coord-light {
+  color: var(---cg-ccw) !important;
+}
+
+body:is(.coords-in, .coords-out) coords.ranks {
+  left: 0 !important;
+  right: auto !important;
+  top: 0 !important;
+  width: 12.5% !important;
+  height: 100% !important;
+}
+
+body:is(.coords-in, .coords-out) coords.ranks coord {
+  transform: none !important;
+  padding: 0.25em 0 0 0.3em;
+  text-align: left;
+}
+
+body:is(.coords-in, .coords-out) coords.files {
+  bottom: 0 !important;
+  left: 0 !important;
+  height: auto !important;
+}
+
+/* Same 0.25em inset as the ranks. */
+body:is(.coords-in, .coords-out) coords.files coord {
+  padding: 0 0.3em 0.25em 0 !important;
+  text-align: right;
+}
+
 @media (max-width: 1019.98px) {
-  body:is(.coords-in, .coords-out) .is2d coords .coord-dark,
-  body:is(.coords-in, .coords-out) .is2d coords.files .coord-dark {
-    color: var(---cg-ccw) !important;
-  }
-
-  body:is(.coords-in, .coords-out) .is2d coords .coord-light,
-  body:is(.coords-in, .coords-out) .is2d coords.files .coord-light {
-    color: var(---cg-ccb) !important;
-  }
-
-  /* Ranks move to the left edge, which puts each on the opposite color. */
-  body:is(.coords-in, .coords-out) .is2d coords.ranks .coord-dark {
-    color: var(---cg-ccb) !important;
-  }
-
-  body:is(.coords-in, .coords-out) .is2d coords.ranks .coord-light {
-    color: var(---cg-ccw) !important;
-  }
-
-  body:is(.coords-in, .coords-out) coords.ranks {
-    left: 0 !important;
-    right: auto !important;
-    top: 0 !important;
-    width: 12.5% !important;
-    height: 100% !important;
-  }
-
-  body:is(.coords-in, .coords-out) coords.ranks coord {
-    transform: none !important;
-    padding: 0.25em 0 0 0.3em;
-    text-align: left;
-  }
-
-  body:is(.coords-in, .coords-out) coords.files {
-    bottom: 0 !important;
-    left: 0 !important;
-    height: auto !important;
-  }
-
-  /* Same 0.25em inset as the ranks. */
-  body:is(.coords-in, .coords-out) coords.files coord {
-    padding: 0 0.3em 0.25em 0 !important;
-    text-align: right;
-  }
-
   /* Lichess's room for the files below an "outside" board. */
   body.coords-out .main-board {
     margin-bottom: 0;
   }
 }
 
-/* Desktop: always outside. Lichess swaps `coords-out` for `coords-in` while its eval gauge
- * shows, so they jumped in and out between moves. Layouts leave room for both classes. */
+/* Desktop: outside, unless the user picked inside. Lichess swaps `coords-out` for `coords-in`
+ * while its eval gauge shows, so they jumped in and out between moves: the class says nothing
+ * of the pick. Layouts leave room for both classes. */
 @media (min-width: 1020px) {
-  body:is(.coords-in, .coords-out) {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) {
     --ln-ext-coords-size: clamp(13px, 1.7vh, 16px);
   }
 
-  body:is(.coords-in, .coords-out) coords {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) coords {
     font-size: var(--ln-ext-coords-size) !important;
   }
 
-  body:is(.coords-in, .coords-out) .is2d coords coord {
+  html:not([data-ln-ext-prefs~='coords-in'])
+    body:is(.coords-in, .coords-out)
+    .is2d
+    coords
+    :is(coord, .coord-dark, .coord-light) {
     color: var(--ln-ext-text-dim) !important;
   }
 
-  body:is(.coords-in, .coords-out) coords.ranks {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) coords.ranks {
     top: 0 !important;
     left: calc(-0.6em - 10px) !important;
     right: auto !important;
@@ -85,13 +91,14 @@ coords {
     text-align: center;
   }
 
-  body:is(.coords-in, .coords-out) coords.ranks coord {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) coords.ranks coord {
     padding: 0 !important;
     transform: translateY(42%) !important;
+    text-align: inherit;
   }
 
   /* As far below the squares as the ranks stand left of them. */
-  body:is(.coords-in, .coords-out) coords.files {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) coords.files {
     top: calc(100% + 6px) !important;
     bottom: auto !important;
     left: 0 !important;
@@ -100,12 +107,13 @@ coords {
     text-align: center !important;
   }
 
-  body:is(.coords-in, .coords-out) coords.files coord {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) coords.files coord {
     padding: 0 !important;
+    text-align: inherit;
   }
 
   /* The margin Lichess gives an "outside" board, for the files. */
-  body.coords-in .main-board {
+  html:not([data-ln-ext-prefs~='coords-in']) body.coords-in .main-board {
     margin-bottom: 12px;
   }
 }

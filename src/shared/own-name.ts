@@ -1,6 +1,6 @@
 import { z } from 'zod/mini';
 import { isSignedInUser } from './own-avatar.ts';
-import { readStored, removeStored, StorageKey, writeStored } from './storage.ts';
+import { onStoredElsewhere, readStored, removeStored, StorageKey, writeStored } from './storage.ts';
 
 // The name the signed-in user picked in the settings to see in place of their
 // own, as Lichess's usernames go: only their browser shows it, as with their
@@ -28,8 +28,7 @@ function readOwn(): string | null {
 export function ownName(): string | null {
   if (cached) return cached.name;
   cached = { name: readOwn() };
-  window.addEventListener('storage', event => {
-    if (event.key !== StorageKey.name) return;
+  onStoredElsewhere([StorageKey.name], () => {
     cached = { name: readOwn() };
     for (const listener of listeners) listener(cached.name);
   });

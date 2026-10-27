@@ -1,5 +1,5 @@
 import { z } from 'zod/mini';
-import { readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
+import { onStoredElsewhere, readStoredJson, StorageKey, writeStoredJson } from '#shared/storage.ts';
 import { type CustomBoard, CustomBoardSchema } from './custom-board.ts';
 
 // The custom boards the user saved under a name (color-row.ts), their colors
@@ -31,8 +31,7 @@ let listening = false;
 function listenToOtherTabs(): void {
   if (listening) return;
   listening = true;
-  window.addEventListener('storage', event => {
-    if (event.key !== StorageKey.savedBoards) return;
+  onStoredElsewhere([StorageKey.savedBoards], () => {
     cached = null;
   });
 }

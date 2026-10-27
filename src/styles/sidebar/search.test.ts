@@ -55,6 +55,16 @@ describe('the sidebar’s search', () => {
     }
   });
 
+  it('draws a box with its shortcut under the account in the rail', () => {
+    buttonsAt(1440, 'collapsed rail');
+    const button = getComputedStyle(element('#ln-ext-search'));
+    // The account's .dasher comes first, at 1 (styles/sidebar/donate-and-buttons.css).
+    expect([button.order, button.height]).toEqual(['2', '38px']);
+    expect(button.boxShadow).toContain('inset');
+    expect(getComputedStyle(element('.ln-ext-search__keys')).display).toBe('block');
+    expect(getComputedStyle(element('.ln-ext-search__label')).display).toBe('none');
+  });
+
   it('leaves the magnifier alone in Lichess’s top bar below 1020px', () => {
     buttonsAt(1019);
     expect(getComputedStyle(element('.ln-ext-search__label')).display).toBe('none');

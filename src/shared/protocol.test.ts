@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
+  onCoachOptions,
   onCoachPicked,
   onCoachPicker,
   onCoachState,
@@ -7,6 +8,7 @@ import {
   onLooksPreview,
   onPageReady,
   onSounds,
+  postCoachOptions,
   postCoachPicked,
   postCoachPicker,
   postLichessLook,
@@ -96,6 +98,15 @@ describe('protocol', () => {
     expect(picked).toEqual([5]);
     receive({ type: 'ln-ext:coach-picked', coach: 'fox' });
     expect(picked).toEqual([5]);
+  });
+
+  it('carries the coach’s switches to the page world, and drops a message out of shape', () => {
+    const told: unknown[] = [];
+    stops.push(onCoachOptions(options => told.push(options)));
+    vi.spyOn(window, 'postMessage').mockImplementation((data: unknown) => receive(data));
+    postCoachOptions({ motion: false, analysis: true, board: true });
+    receive({ type: 'ln-ext:coach-options', options: { motion: 'no' } });
+    expect(told).toEqual([{ motion: false, analysis: true, board: true }]);
   });
 
   it('stops listening once told', () => {

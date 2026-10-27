@@ -1,5 +1,5 @@
 import { z } from 'zod/mini';
-import { onDomReady, setData, setStyleProperty } from '#shared/dom.ts';
+import { onDomReady, onHeadParsed, setData, setStyleProperty } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import {
   readStored,
@@ -11,6 +11,7 @@ import {
 import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
 import { chesscomShown } from '#shared/chesscom-rating/shown.ts';
 import { onOwnName, ownName } from '#shared/own-name.ts';
+import { ratingsShown } from '#shared/ratings-shown.ts';
 import { onSettings, type Settings } from '#content/settings/settings.ts';
 import {
   pickedRating,
@@ -32,8 +33,8 @@ import {
 // with the sidebar's first frame.
 // Lichess is asked again once it's 5 minutes old, and the home page's speed
 // cards bring it a fresh one each time they're drawn. With the Chess.com
-// ratings on, the pill shows the rating's equivalent, where the speed has one.
-// Folded, the sidebar draws the player as their name's initial over the rating,
+// ratings on, the pill shows the rating's equivalent, where the speed has one;
+// with Lichess's "Show player ratings" off, no rating at all. Folded, the sidebar draws the player as their name's initial over the rating,
 // the one they picked here if they did (#shared/own-name.ts).
 
 const MAX_AGE_MS = 5 * 60 * 1000;
@@ -59,7 +60,7 @@ function label(rating: TopRating): string {
 
 function show(kept: Kept | null): void {
   shown = kept;
-  const rating = kept && pickedRating(kept.top, kept.ratings, pick);
+  const rating = kept && ratingsShown() ? pickedRating(kept.top, kept.ratings, pick) : null;
   const root = document.documentElement;
   setData(root, 'lnExtAccountPerf', rating?.speed ?? null);
   const text = rating && label(rating);
@@ -129,6 +130,8 @@ export const accountRating: Feature = {
     chesscom = chesscomShown();
     const kept = readStoredJson(StorageKey.accountRating, KeptSchema);
     if (kept) show(kept);
+    // Lichess's "Show player ratings" off, which only <body> says: before the sidebar is drawn.
+    onHeadParsed(() => show(shown));
     account = kept?.user ?? null;
     showInitial();
     onOwnName(showInitial);

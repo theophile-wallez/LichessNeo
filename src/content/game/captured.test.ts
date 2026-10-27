@@ -122,4 +122,58 @@ describe('capturedMarkup', () => {
     });
     expect(markup.bottom.value).toMatch(/ln-ext-pc-bk.*ln-ext-pc-bk.*ln-ext-captured__score">\+1</);
   });
+
+  it('draws the checks alone when asked to', () => {
+    const markup = capturedMarkup({
+      pieces: [pawn],
+      bottom: 'white',
+      variant: 'threeCheck',
+      checks: { top: 0, bottom: 2 },
+      checksOnly: true,
+    });
+    expect(markup.top.value).toBe('');
+    expect(markup.bottom.value).not.toMatch(/ln-ext-pc-b[pnbrq]|score/);
+    expect(markup.bottom.value).toMatch(/ln-ext-pc-bk.*ln-ext-pc-bk/);
+  });
+});
+
+// A three-check game: Black lost its queen and a rook, and the top player (Black) gave a check.
+const threeCheck = (boardClass: string): string =>
+  '<main class="round"><div class="round__app variant-threeCheck">' +
+  `<div class="round__app__board main-board${boardClass}"><div class="cg-wrap orientation-white">` +
+  '<cg-container><cg-board><piece class="white queen"></piece><piece class="white rook"></piece>' +
+  '<piece class="white rook"></piece><piece class="black rook"></piece></cg-board></cg-container>' +
+  '</div></div><div class="material material-top"><div><mpiece class="king"></mpiece></div></div>' +
+  '<div class="material material-bottom"></div></div></main>';
+
+const shownPieces = (selector: string): string[] =>
+  [...document.querySelectorAll(`${selector} .ln-ext-pc`)].map(piece => piece.className);
+
+describe('captured pieces Lichess would hide', () => {
+  afterEach(() => {
+    delete document.documentElement.dataset.lnExtPrefs;
+  });
+
+  it('keeps only the checks with "Material difference" off', () => {
+    document.documentElement.dataset.lnExtPrefs = 'coords-in no-captured';
+    const sync = createCapturedSync();
+    document.body.innerHTML = threeCheck('');
+    sync();
+    expect(shownPieces('.ln-ext-captured--top')).toEqual(['ln-ext-pc ln-ext-pc-wk']);
+    expect(shownPieces('.ln-ext-captured--bottom')).toEqual([]);
+    expect(document.querySelector('.ln-ext-captured__score')).toBeNull();
+  });
+
+  it('gives no material away in a blindfold game, and shows it once the game is over', () => {
+    const sync = createCapturedSync();
+    document.body.innerHTML = threeCheck(' blindfold');
+    sync();
+    expect(shownPieces('.ln-ext-captured--bottom')).toEqual([]);
+    document.querySelector('.main-board')?.classList.remove('blindfold');
+    sync();
+    expect(shownPieces('.ln-ext-captured--bottom')).toContain('ln-ext-pc ln-ext-pc-bq');
+    expect(
+      document.querySelector('.ln-ext-captured--bottom .ln-ext-captured__score'),
+    ).not.toBeNull();
+  });
 });

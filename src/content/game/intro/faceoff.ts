@@ -5,8 +5,8 @@ import { introBoardImage, introMarkup, type BarPlayers } from './markup.ts';
 
 // The face-off, the extension's first intro: a board in other colors drops over
 // the opponent's half with their card, faces the player's card for a second,
-// then lifts (styles/game/intro/faceoff.css). In the board's grid area: on the
-// game page, only our desktop layout has one; the settings' preview too.
+// then lifts (styles/game/intro/faceoff.css). In the board's grid area, which
+// the game page has at every width, and the settings' preview too.
 
 /** How long it lasts; the stylesheet's keyframes are shares of it. */
 export const FACEOFF_MS = 1900;

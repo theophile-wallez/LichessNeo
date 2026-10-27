@@ -7,7 +7,11 @@ import { addHero, homeHero } from './home-hero.ts';
 import legacy from './fixtures/legacy-home-hero.json' with { type: 'json' };
 
 // The extension's APIs aren't here, nor WebGL: the mascots' bundle won't load.
-vi.mock('#content/coach/load.ts', () => ({ loadMascots: () => Promise.resolve(null) }));
+vi.mock('#content/coach/load.ts', () => ({
+  coachesMove: () => true,
+  loadMascots: () => Promise.resolve(null),
+  onCoachMotion: () => () => {},
+}));
 
 afterEach(() => {
   document.body.innerHTML = '';

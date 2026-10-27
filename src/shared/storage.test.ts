@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi, type Mock } from 'vitest';
 import { z } from 'zod/mini';
 import {
+  onStoredElsewhere,
   readStored,
   readStoredJson,
   removeStored,
@@ -91,6 +92,24 @@ describe('storage', () => {
     // Read as missing, a once-per-game check would pass on every load.
     expect(() => readStored(StorageKey.coach, z.string())).toThrow('denied');
     expect(() => readStoredJson('ln-ext-test', z.unknown(), 'session')).toThrow('denied');
+  });
+
+  it('hears another tab change one of its keys or clear them all, until stopped', () => {
+    const heard = vi.fn<() => void>();
+    const stop = onStoredElsewhere([StorageKey.coach, StorageKey.board], heard);
+    window.dispatchEvent(new StorageEvent('storage', { key: StorageKey.name }));
+    window.dispatchEvent(
+      new StorageEvent('storage', { key: StorageKey.coach, storageArea: sessionStorage }),
+    );
+    expect(heard).not.toHaveBeenCalled();
+    window.dispatchEvent(
+      new StorageEvent('storage', { key: StorageKey.board, storageArea: localStorage }),
+    );
+    window.dispatchEvent(new StorageEvent('storage', { key: null }));
+    expect(heard).toHaveBeenCalledTimes(2);
+    stop();
+    window.dispatchEvent(new StorageEvent('storage', { key: StorageKey.coach }));
+    expect(heard).toHaveBeenCalledTimes(2);
   });
 
   it('lists the keys with a prefix', () => {

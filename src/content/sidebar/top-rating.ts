@@ -82,14 +82,19 @@ export function ratingsOf({ perfs }: z.infer<typeof UserSchema>): Ratings {
   return ratings;
 }
 
-/** The rating picked, or the most played one for a speed the player has none in; null if hidden. */
+/** Where Glicko starts a player, as Lichess shows a speed they never played: "1500?". */
+const UNPLAYED: NonNullable<Ratings[Speed]> = { rating: 1500, provisional: true };
+
+/**
+ * The rating picked, null if hidden. A speed the player never played is at Lichess's start (its
+ * API leaves out UltraBullet then); one kept before the other speeds were, the most played.
+ */
 export function pickedRating(
   top: TopRating | null,
   ratings: Ratings | undefined,
   pick: RatingPick,
 ): TopRating | null {
   if (pick === 'hidden') return null;
-  if (pick === 'mostPlayed') return top;
-  const rating = ratings?.[pick];
-  return rating ? { speed: pick, ...rating } : top;
+  if (pick === 'mostPlayed' || !ratings) return top;
+  return { speed: pick, ...(ratings[pick] ?? UNPLAYED) };
 }

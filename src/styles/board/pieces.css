@@ -12,6 +12,13 @@
    * 0-100, from content/layout/board-zoom.ts), down to a quarter, like Lichess's
    * `---board-scale`. */
   --ln-ext-board-scale: calc(var(--ln-ext-zoom, 100) / 100 * 0.75 + 0.25);
+  /* A board's height over its width, for the layouts' rows. */
+  --ln-ext-board-ratio: 1;
+}
+
+/* Lichess's 3D boards are 476/512 as tall as they are wide (lila's board-3d.scss). */
+#main-wrap.is3d {
+  --ln-ext-board-ratio: calc(476 / 512);
 }
 
 /* ---- Board and pieces --- */
@@ -145,14 +152,15 @@ html[data-ln-ext-loading~='pieces'] .is2d piece {
 
 /* ---- Highlights --- */
 
-/* Chessground puts all of a square's classes on one element: highlights paint its color
+/* Our boards' and a pack's (`data-ln-ext-board`, in 2D only); Lichess's own keep its colors.
+   Chessground puts all of a square's classes on one element: highlights paint its color
    and move hints its image, so a hint on the last move's square draws over the highlight. */
-cg-board square.last-move,
-body[data-board] .is2d cg-board square.last-move {
+html[data-ln-ext-board] .is2d cg-board square.last-move,
+html[data-ln-ext-board] body[data-board] .is2d cg-board square.last-move {
   background-color: var(--ln-ext-highlight) !important;
 }
 
-cg-board square.selected {
+html[data-ln-ext-board] .is2d cg-board square.selected {
   background-color: var(--ln-ext-highlight) !important;
 }
 
@@ -174,16 +182,21 @@ cg-board square.move-dest.hover {
 }
 
 /* A set premove: both squares, opaque (chessground already shows the piece on the new one). */
-cg-board square.current-premove,
-body[data-board] .is2d cg-board square.current-premove {
+html[data-ln-ext-board] .is2d cg-board square.current-premove,
+html[data-ln-ext-board] body[data-board] .is2d cg-board square.current-premove {
   background-color: var(--ln-ext-premove) !important;
 }
 
-cg-board square.check {
+html[data-ln-ext-board] .is2d cg-board square.check {
   background: radial-gradient(
     ellipse at center,
     #ff3b3b 0%,
     #e70000 25%,
     rgba(169, 0, 0, 0) 89%
   ) !important;
+}
+
+/* Blindfold: Lichess hides the check with the pieces, which ours above would show. */
+html[data-ln-ext-board] .blindfold.main-board cg-board square.check {
+  background: none !important;
 }

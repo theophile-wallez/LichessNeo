@@ -39,7 +39,10 @@ html[data-ln-ext-has~='storm'] main {
 
   /* The files under the board use the page's padding, not the board's margin,
      so the right-hand column ends level with the squares. */
-  html[data-ln-ext-has~='storm-play'] body:is(.coords-in, .coords-out) #main-wrap > main {
+  html[data-ln-ext-has~='storm-play']:not([data-ln-ext-prefs~='coords-in'])
+    body:is(.coords-in, .coords-out)
+    #main-wrap
+    > main {
     --ln-ext-coords-l: calc(0.6 * var(--ln-ext-coords-size, 13px) + 10px);
 
     padding-bottom: 12px;

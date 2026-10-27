@@ -132,8 +132,9 @@ main.account[data-ln-ext-settings] > .page-menu__content:not(.ln-ext-settings) {
   line-height: 1.45;
 }
 
-/* Until the stored settings are read (content/settings/section.ts). */
-.ln-ext-settings[data-ln-ext-pending] .ln-ext-switch {
+/* Until the stored settings are read (content/settings/section.ts): no control shows the
+   defaults, nor takes a click. */
+.ln-ext-settings[data-ln-ext-pending] .ln-ext-settings__page {
   visibility: hidden;
 }
 

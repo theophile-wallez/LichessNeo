@@ -139,13 +139,13 @@ export function keepMarked(session: Session): void {
     root.classList.contains(`ln-ext-review-${session.view.mode}`);
   // Marking changes the class too: only a rewrite that dropped the marks needs them again.
   new MutationObserver(() => {
-    if (!marked()) markMode(session.view);
+    if (!session.view.switchedOff && !marked()) markMode(session.view);
   }).observe(root, { attributes: true, attributeFilter: ['class'] });
 }
 
 export function render(session: Session, force = false): void {
   const analysis = pageAnalysis();
-  if (!analysis || !attach(session.elements)) return;
+  if (!analysis || session.view.switchedOff || !attach(session.elements)) return;
   const { view } = session;
   markMode(view);
   keepPage(session);
@@ -171,7 +171,7 @@ let panelDue = false;
  */
 export function renderJump(session: Session): void {
   const analysis = pageAnalysis();
-  if (!analysis || !attach(session.elements)) return;
+  if (!analysis || session.view.switchedOff || !attach(session.elements)) return;
   const { view } = session;
   if (view.mode === 'summary' && analysis.node.ply !== view.summaryPly) {
     render(session);

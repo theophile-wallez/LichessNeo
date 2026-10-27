@@ -17,7 +17,7 @@ const DEFAULT_PICKS: Readonly<Record<PartKind, string>> = {
   sound: LICHESS,
 };
 
-const PICK_KEYS: Readonly<Record<PartKind, string>> = {
+export const PICK_KEYS: Readonly<Record<PartKind, string>> = {
   board: StorageKey.board,
   piece: StorageKey.pieces,
   sound: StorageKey.sounds,
@@ -63,6 +63,8 @@ export interface Library {
   readonly add: (pack: Pack) => Promise<void>;
   readonly remove: (id: string) => Promise<void>;
   readonly onChange: (listener: () => void) => void;
+  /** Shows the picks again, once any pack they name is read: another tab changed them. */
+  readonly refresh: () => Promise<void>;
 }
 
 export interface LibraryOptions {
@@ -126,7 +128,7 @@ export function createLibrary(options: LibraryOptions): Library {
   let list: Pack[] = [];
   let loading: Promise<void> | null = null;
   let failed = false;
-  const listeners: (() => void)[] = [];
+  const listeners = new Set<() => void>();
   let preview: Preview | null = null;
   const update = (): void => {
     show(shownFrom(list, preview));
@@ -178,8 +180,7 @@ export function createLibrary(options: LibraryOptions): Library {
       for (const kind of PART_KINDS) if (storedPick(kind) === id) pick(kind, DEFAULT_PICKS[kind]);
       update();
     },
-    onChange: listener => {
-      listeners.push(listener);
-    },
+    onChange: listener => listeners.add(listener),
+    refresh: loadPicked,
   };
 }

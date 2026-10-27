@@ -20,7 +20,8 @@ const SHEETS = [
 ];
 
 // Lichess's header, as the sidebar takes it over, with our Donate item.
-const HEADER = `<header id="top"><div class="site-title-nav"><nav id="topnav">
+const HEADER = `<header id="top"><div class="site-title-nav"><a class="site-title" href="/"></a>
+<nav id="topnav">
   <section><a href="/">Play</a><div role="group"><a href="/tournament">Arena</a></div></section>
   <section><a href="/training">Puzzles</a><div role="group"><a href="/storm">Storm</a></div></section>
 </nav></div><a id="ln-ext-donate" href="/patron">Donate</a></header><div id="main-wrap"></div>`;
@@ -79,6 +80,18 @@ describe('the sidebar’s shapes', () => {
   it('keep the pages in a flyout outside the unfolded sidebar', () => {
     render(null);
     expect(pagesOf(0, { open: 'open' }).position).toBe('absolute');
+  });
+});
+
+describe('the rail', () => {
+  // The rail's links are inset 8px on its 84px; the logo's row was a box around the logo.
+  it('gives the logo a row as wide as the links under it, the logo in its middle', () => {
+    render('collapsed rail');
+    const logo = queryOne(document, '#top .site-title', HTMLElement);
+    if (!logo) throw new Error('no logo');
+    const style = getComputedStyle(logo);
+    expect([style.marginLeft, style.marginRight]).toEqual(['8px', '8px']);
+    expect(style.justifyContent).toBe('center');
   });
 });
 

@@ -146,3 +146,18 @@ export function storedKeys(prefix: string, from: Area = 'local'): string[] {
     return [];
   }
 }
+
+/**
+ * Calls `listener` each time another tab of the site changes one of `keys` in localStorage, or
+ * clears it: a tab never hears its own writes. Returns the function that stops it.
+ */
+export function onStoredElsewhere(keys: readonly string[], listener: () => void): () => void {
+  const watched = new Set(keys);
+  const onStorage = (event: StorageEvent): void => {
+    // sessionStorage's are heard too, from the tab's frames.
+    if (event.storageArea && event.storageArea !== localStorage) return;
+    if (event.key === null || watched.has(event.key)) listener();
+  };
+  window.addEventListener('storage', onStorage);
+  return () => window.removeEventListener('storage', onStorage);
+}

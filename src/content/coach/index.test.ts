@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { z } from 'zod/mini';
 import type { CoachMood } from '#shared/coach.ts';
 import { flush } from '#shared/testing/timers.ts';
 import type { MascotOptions, MascotView } from './mascot/index.ts';
@@ -40,6 +41,12 @@ afterEach(() => {
   vi.unstubAllGlobals();
   localStorage.clear();
   delete document.documentElement.dataset.lnExtCoach;
+});
+
+// The message the page world hears the switches from (#shared/protocol.ts).
+const CoachOptionsMessage = z.object({
+  type: z.literal('ln-ext:coach-options'),
+  options: z.object({ motion: z.boolean(), analysis: z.boolean(), board: z.boolean() }),
 });
 
 const isLive = (): boolean => document.querySelector('.ln-ext-coach__avatar--live') !== null;
@@ -145,5 +152,39 @@ describe('the coach', () => {
     expect(localStorage.getItem('ln-ext-coach-options')).toBe(
       '{"motion":true,"analysis":true,"board":false}',
     );
+  });
+
+  it('tells the page world of the switches as they change, and only then', async () => {
+    let stored: unknown = { analysisCoach: false };
+    vi.stubGlobal('chrome', {
+      runtime: { id: 'test' },
+      storage: {
+        sync: {
+          get: (key: string) => Promise.resolve({ [key]: stored }),
+          set: (items: Record<string, unknown>) => {
+            stored = Object.values(items)[0];
+            return Promise.resolve();
+          },
+        },
+        onChanged: { addListener: () => {} },
+      },
+    });
+    const posted = vi.spyOn(window, 'postMessage').mockImplementation(() => {});
+    const told = (): unknown[] =>
+      posted.mock.calls
+        .map(([message]) => CoachOptionsMessage.safeParse(message).data?.options)
+        .filter(options => options !== undefined);
+    vi.resetModules();
+    const fresh = await import('./index.ts');
+    fresh.coach.start();
+    await flush();
+    expect(told()).toEqual([{ motion: true, analysis: false, board: true }]);
+
+    const { saveSetting } = await import('#content/settings/settings.ts');
+    await saveSetting('uiSounds', false);
+    expect(told()).toHaveLength(1);
+    await saveSetting('analysisCoach', true);
+    expect(told().at(-1)).toEqual({ motion: true, analysis: true, board: true });
+    posted.mockRestore();
   });
 });

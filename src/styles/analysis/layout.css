@@ -19,8 +19,11 @@
       calc(
         min(
             calc(
-              var(--ln-ext-main-h, 100dvh) - var(--ln-ext-v-room) - 2 * var(--ln-ext-bar) -
-                var(--ln-ext-coords-off)
+              (
+                  var(--ln-ext-main-h, 100dvh) - var(--ln-ext-v-room) - 2 * var(--ln-ext-bar) -
+                    var(--ln-ext-coords-off)
+                ) /
+                var(--ln-ext-board-ratio, 1)
             ),
             calc(var(--ln-ext-main-w, 100vw) - var(--ln-ext-panel-min) - var(--ln-ext-gap) - 72px)
           ) *
@@ -32,7 +35,9 @@
       calc(var(--ln-ext-main-w, 100vw) - var(--ln-ext-board) - var(--ln-ext-gap) - 72px),
       500px
     );
-    --ln-ext-stage: calc(var(--ln-ext-board) + 2 * var(--ln-ext-bar) + var(--ln-ext-coords-off));
+    /* A 3D board is less tall than wide (board/pieces.css). */
+    --ln-ext-board-h: calc(var(--ln-ext-board) * var(--ln-ext-board-ratio, 1));
+    --ln-ext-stage: calc(var(--ln-ext-board-h) + 2 * var(--ln-ext-bar) + var(--ln-ext-coords-off));
     --ln-ext-ctrl-h: var(--ln-ext-controls-h, 48px); /* content/layout/controls-height.ts */
     /* The tab bar's row, 0 while the panel has but one part to show (panel-tabs.css). */
     --ln-ext-tabs-h: 0px;
@@ -104,14 +109,14 @@
       [data-ln-ext-has~='analyse-players'],
       [data-ln-ext-has~='analyse-clock'],
       [data-ln-ext-has~='analyse-captured']
-    ):not([data-ln-ext-has~='practice'])
+    ):not([data-ln-ext-has~='practice'], [data-ln-ext-prefs~='coords-in'])
     body:is(.coords-in, .coords-out)
     main.analyse {
     --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
   }
 
   /* Room for the ranks left of the board (board/). */
-  body:is(.coords-in, .coords-out) main.analyse {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) main.analyse {
     --ln-ext-gauge-gap: calc(0.6 * var(--ln-ext-coords-size, 13px) + 18px);
   }
 
@@ -125,7 +130,7 @@
 
   main.analyse > :is(.ln-ext-player--bottom, .ln-ext-captured--bottom) {
     --ln-ext-off: calc(
-      var(--ln-ext-bar) + var(--ln-ext-board) + var(--ln-ext-coords-off) -
+      var(--ln-ext-bar) + var(--ln-ext-board-h) + var(--ln-ext-coords-off) -
         var(--ln-ext-inset-b, 0px)
     );
   }
@@ -246,7 +251,9 @@
     margin-top: 0 !important;
   }
 
-  body:is(.coords-in, .coords-out) main.analyse.is-relay:not(.has-relay-tour) {
+  html:not([data-ln-ext-prefs~='coords-in'])
+    body:is(.coords-in, .coords-out)
+    main.analyse.is-relay:not(.has-relay-tour) {
     --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
   }
 
@@ -261,7 +268,7 @@
     margin-top: 0 !important;
   }
 
-  html:not([data-ln-ext-has~='practice'])
+  html:not([data-ln-ext-has~='practice'], [data-ln-ext-prefs~='coords-in'])
     body:is(.coords-in, .coords-out)
     main.analyse.has-players:not(.has-relay-tour) {
     --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);

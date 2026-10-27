@@ -315,7 +315,11 @@ main.forum-topic .forum-post__blocked > button {
 /* board/ draws the coordinates outside the board on desktop: leave the embed's
    board room for them, or they overlap the player below and get cut off. */
 @media (min-width: 1020px) {
-  body:is(.coords-in, .coords-out) main.forum-topic .forum-post__message .lpv__board {
+  html:not([data-ln-ext-prefs~='coords-in'])
+    body:is(.coords-in, .coords-out)
+    main.forum-topic
+    .forum-post__message
+    .lpv__board {
     padding: 0 0 calc(1.2 * var(--ln-ext-coords-size) + 10px)
       calc(0.6 * var(--ln-ext-coords-size) + 16px);
   }

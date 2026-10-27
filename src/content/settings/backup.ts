@@ -2,7 +2,7 @@ import { z } from 'zod/mini';
 import { readStored, removeStored, StorageKey, writeStored } from '#shared/storage.ts';
 import { extensionVersion, readSynced } from '#content/platform/runtime.ts';
 import { readPacks, writePack } from '#content/packs/store.ts';
-import { BACKED_UP_KEYS, type Backup, makeBackup } from './backup-file.ts';
+import { BACKED_UP_KEYS, type Backup, KEPT_UNLESS_BACKED_UP, makeBackup } from './backup-file.ts';
 import { parseSettings, updateSettings } from './settings.ts';
 
 // Makes a backup of what the extension keeps (backup-file.ts), and puts one
@@ -30,14 +30,14 @@ export async function createBackup(): Promise<Backup> {
 
 /**
  * Replaces the settings and the picks with the backup's, a pick it doesn't have going back to
- * its default. The packs are added to those kept, first, so a failure there changes nothing else.
+ * its default, a record it doesn't have staying as it is. The packs are added to those kept, first, so a failure there changes nothing else.
  */
 export async function restoreBackup(backup: Backup): Promise<void> {
   for (const pack of backup.packs) await writePack(pack);
   for (const key of BACKED_UP_KEYS) {
     const value = backup.stored[key];
-    if (value === undefined) removeStored(StorageKey[key]);
-    else writeStored(StorageKey[key], value);
+    if (value !== undefined) writeStored(StorageKey[key], value);
+    else if (!KEPT_UNLESS_BACKED_UP.has(key)) removeStored(StorageKey[key]);
   }
   await updateSettings(() => backup.settings);
 }

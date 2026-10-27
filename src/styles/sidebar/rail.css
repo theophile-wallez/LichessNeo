@@ -13,8 +13,15 @@
     display: none;
   }
 
+  /* As wide as the links under it, the logo in its middle. */
   html[data-ln-ext-sidebar~='rail'] #top .site-title {
-    margin: 12px 25px 8px !important;
+    justify-content: center;
+    margin: 12px 8px 8px !important;
+  }
+
+  /* The folded sidebar's hidden name would still push the logo aside. */
+  html[data-ln-ext-sidebar~='rail'] #top .site-title::after {
+    display: none;
   }
 
   html[data-ln-ext-sidebar~='rail'] #topnav {

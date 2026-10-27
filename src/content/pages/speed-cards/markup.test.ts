@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
 import { queryAll } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
@@ -24,6 +24,10 @@ function ratings(lichessTip: ((rating: string) => string) | null): (string | und
   ]);
 }
 
+afterEach(() => {
+  document.body.className = '';
+});
+
 describe('the speed cards’ ratings', () => {
   it('are Lichess’s, or as on Chess.com with the Lichess one in their tooltip', () => {
     expect(ratings(null)).toEqual([
@@ -36,5 +40,10 @@ describe('the speed cards’ ratings', () => {
       // No games yet: no rating to give.
       ['–', undefined],
     ]);
+  });
+
+  it('are left out, curve and all, with Lichess’s "Show player ratings" off', () => {
+    document.body.className = 'no-rating';
+    expect(ratings(null)).toEqual([]);
   });
 });

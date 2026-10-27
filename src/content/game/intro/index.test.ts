@@ -170,7 +170,7 @@ describe('the game intro', () => {
     expect(sessionStorage.getItem(SessionKey.gameIntro(GAME_ID))).toBeNull();
   });
 
-  it('keeps the face-off to our desktop layout, but not the others', async () => {
+  it('plays the face-off below 1020px too, where the board has its grid area as well', async () => {
     const narrow = vi.spyOn(window, 'matchMedia').mockReturnValue(
       Object.assign(new EventTarget(), {
         matches: false,
@@ -184,14 +184,7 @@ describe('the game intro', () => {
     decoded();
     await flush();
     syncIntro();
-    expect(intro()).toBeNull();
-    sessionStorage.clear();
-    settings.gameIntro = 'salute';
-    prepareIntro(initData(false));
-    decoded();
-    await flush();
-    syncIntro();
-    expect(document.querySelector('.ln-ext-intro-fx')).not.toBeNull();
+    expect(intro()).not.toBeNull();
     narrow.mockRestore();
   });
 });

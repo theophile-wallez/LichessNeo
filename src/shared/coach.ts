@@ -126,7 +126,7 @@ export function homeCoach(): number | null {
   return choice === null ? shownCoach() : coachOf(choice);
 }
 
-const CoachOptionsSchema = z.object({
+export const CoachOptionsSchema = z.object({
   /** The coaches play as 3D mascots, or stay their still images. */
   motion: z.boolean(),
   /** The coach judges each move on the free analysis board. */

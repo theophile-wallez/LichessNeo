@@ -136,6 +136,13 @@ html[data-ln-ext-ai~='black'][data-ln-ext-has~='analyse-black']
   content: ')';
 }
 
+/* Lichess's "Show player ratings" off, or off in a game: `body.no-rating` hides the ratings in
+ * its own bars only, not in ours, nor the level's rating we give the computer. */
+body.no-rating :is(main.round .ruser, main.analyse > .ln-ext-player) rating,
+body.no-rating :is(main.round .ruser, main.analyse > .ln-ext-player)::after {
+  display: none !important;
+}
+
 /* The rating's change follows the rating: `good`, `bad`, or a bare span for "±0". */
 :is(main.round .ruser, main.analyse > .ln-ext-player) :is(rating, good, bad) {
   order: 2;

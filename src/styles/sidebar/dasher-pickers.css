@@ -108,6 +108,16 @@
   display: none;
 }
 
+/* Lichess's color sliders filter its own 2D board, which ours and a pack's replace with them
+ * off (board/pieces.css): in either tab they would do nothing. The size stays. */
+html[data-ln-ext-board]
+  #top
+  #dasher_app
+  .sub.board.d2
+  > :is(.board-opacity, .board-brightness, .board-contrast, .board-hue, .reset) {
+  display: none !important;
+}
+
 /* The Sound panel's choices sit beside its volume slider. */
 #dasher_app .sub.sound .ln-ext-src-choices {
   flex: 1;

@@ -30,6 +30,16 @@ function readChecks(main: Element): Record<BarSide, number> {
   return { top: count('top'), bottom: count('bottom') };
 }
 
+// Lichess's "Material difference" off (content/layout/lichess-prefs.ts), or a blindfold game,
+// whose pieces are out of sight: the rows would give the material away. Three-check's checks
+// stay, as in Lichess's.
+function onlyChecks(main: Element): boolean {
+  const prefs = document.documentElement.dataset.lnExtPrefs ?? '';
+  return (
+    prefs.split(' ').includes('no-captured') || main.querySelector('.main-board.blindfold') !== null
+  );
+}
+
 // The game page names the variant on its app, the analysis board on <main>.
 function readVariant(main: HTMLElement): string | undefined {
   const classes = queryOne(main, '.round__app', HTMLElement)?.className ?? main.className;
@@ -95,12 +105,13 @@ export function createCapturedSync(): () => void {
     const variant = readVariant(main);
     const bottomColor = wrapOrientation(wrap);
     const checks = variant === 'threeCheck' ? readChecks(main) : { top: 0, bottom: 0 };
+    const checksOnly = onlyChecks(main);
     const parents = rowParents(main);
     const topRow = ownTopRow(parents.top);
     const bottomRow = ownBottomRow(parents.bottom);
     const rowsNew = topRow.isNew || bottomRow.isNew;
     // Reading the pieces is the costly part: skip it while nothing it depends on moved.
-    const inputs = `${variant}|${bottomColor}|${checks.top}|${checks.bottom}`;
+    const inputs = `${variant}|${bottomColor}|${checks.top}|${checks.bottom}|${checksOnly}`;
     if (!piecesChanged(board) && !rowsNew && inputs === lastInputs) return;
     lastInputs = inputs;
     const markup = capturedMarkup({
@@ -108,6 +119,7 @@ export function createCapturedSync(): () => void {
       bottom: bottomColor,
       variant,
       checks,
+      checksOnly,
     });
     if (rowsNew) lastKey = '';
     const key = `${markup.top.value}|${markup.bottom.value}`;

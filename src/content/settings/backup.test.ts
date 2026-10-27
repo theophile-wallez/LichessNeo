@@ -3,6 +3,7 @@ import type { Pack } from '#shared/packs/pack.ts';
 import { fakePack } from '#shared/testing/packs.ts';
 import { readPacks, writePack } from '#content/packs/store.ts';
 import { createBackup, restoreBackup } from './backup.ts';
+import { readBackup } from './backup-file.ts';
 import { parseSettings } from './settings.ts';
 
 // IndexedDB isn't in happy-dom: the packs' store is mocked.
@@ -62,6 +63,38 @@ describe('the settings’ backup', () => {
     expect(localStorage.getItem('ln-ext-review-index')).toBe('[1]');
     expect(synced.get('ln-ext-settings')).toEqual({ ...parseSettings({}), uiSounds: false });
     expect(writePack).toHaveBeenCalledWith(WOOD);
+  });
+
+  it('carries opening practice’s records through the file, not its link to the account’s studies', async () => {
+    const records = {
+      'ln-ext-practice-settings': '{"moves":"book"}',
+      'ln-ext-practice-repertoire': '{"white":[]}',
+      'ln-ext-practice-progress': '{"days":["2026-10-20"]}',
+    };
+    for (const [key, value] of Object.entries(records)) localStorage.setItem(key, value);
+    localStorage.setItem('ln-ext-practice-sync', '{"studies":{"white":"a","black":"b"}}');
+    const file = readBackup(JSON.stringify(await createBackup()));
+    if (!file) throw new Error('no backup read back');
+    expect(file.stored).toEqual({
+      practiceSettings: records['ln-ext-practice-settings'],
+      practiceRepertoire: records['ln-ext-practice-repertoire'],
+      practiceProgress: records['ln-ext-practice-progress'],
+    });
+    localStorage.clear();
+    await restoreBackup(file);
+    for (const [key, value] of Object.entries(records))
+      expect(localStorage.getItem(key)).toBe(value);
+    expect(localStorage.getItem('ln-ext-practice-sync')).toBeNull();
+  });
+
+  it('keeps the practice records here when the file was made before it held them', async () => {
+    localStorage.setItem('ln-ext-name', 'Ann');
+    const older = await createBackup();
+    localStorage.setItem('ln-ext-practice-progress', '{"days":["2026-10-20"]}');
+    localStorage.setItem('ln-ext-board', 'other');
+    await restoreBackup(older);
+    expect(localStorage.getItem('ln-ext-practice-progress')).toBe('{"days":["2026-10-20"]}');
+    expect(localStorage.getItem('ln-ext-board')).toBeNull();
   });
 
   it('changes nothing if a pack can’t be kept', async () => {

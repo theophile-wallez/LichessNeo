@@ -35,6 +35,8 @@ const FLAGS: Readonly<Record<string, string>> = {
   'analyse-white': 'main.analyse .analyse__board > .orientation-white',
   'analyse-black': 'main.analyse .analyse__board > .orientation-black',
   'round-black': 'main.round .round__app__board > .orientation-black',
+  // Lichess's "clock on the left", a touch device's setting, in its one-column layout.
+  'round-swap-clock': 'main.round .round__app.swap-clock',
   'relay-tour': 'main.analyse.has-relay-tour',
   // A broadcast picker's click-away mask, kept in <body>: Lichess points it at the open one.
   'menu-mask': 'body > .mselect__fullscreen-mask[for]',

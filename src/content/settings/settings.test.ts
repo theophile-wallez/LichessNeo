@@ -40,8 +40,13 @@ describe('the settings', () => {
 
   it('put the nav in a rail by default, or in the shape asked', () => {
     expect(parseSettings({}).navigation).toBe('rail');
-    for (const navigation of ['sidebar', 'unfolded', 'header'] as const)
+    for (const navigation of ['unfolded', 'header'] as const)
       expect(parseSettings({ navigation }).navigation).toBe(navigation);
+    // The sidebar, every save's default before the rail, only once picked.
+    expect(parseSettings({ navigation: 'sidebar' }).navigation).toBe('rail');
+    expect(parseSettings({ navigation: 'sidebar', navigationPicked: true }).navigation).toBe(
+      'sidebar',
+    );
     expect(parseSettings({ navigation: 'bottom' }).navigation).toBe('rail');
   });
 

@@ -1,5 +1,5 @@
 import { z } from 'zod/mini';
-import { CoachMoodSchema } from './coach.ts';
+import { CoachMoodSchema, CoachOptionsSchema, type CoachOptions } from './coach.ts';
 import { CustomSeekSchema, type CustomSeek } from './custom-seek.ts';
 import { RoundnessSchema } from './roundness.ts';
 import { SoundNameSchema, SoundPlaceSchema } from './sounds.ts';
@@ -34,6 +34,11 @@ const CoachPickerSchema = z.object({
 const CoachPickedSchema = z.object({
   type: z.literal(messageType('coach-picked')),
   coach: z.int(),
+});
+
+const CoachOptionsMessageSchema = z.object({
+  type: z.literal(messageType('coach-options')),
+  options: CoachOptionsSchema,
 });
 
 /** Lichess's own color schemes, as its Theme menu offers them. */
@@ -132,6 +137,12 @@ export const postCoachPicked = (coach: number): void =>
   post({ type: messageType('coach-picked'), coach });
 export const onCoachPicked = (handler: (coach: number) => void): (() => void) =>
   listen(CoachPickedSchema, message => handler(message.coach));
+
+/** Content → page: the settings' coach switches changed, here or in another tab. */
+export const postCoachOptions = (options: CoachOptions): void =>
+  post({ type: messageType('coach-options'), options });
+export const onCoachOptions = (handler: (options: CoachOptions) => void): (() => void) =>
+  listen(CoachOptionsMessageSchema, message => handler(message.options));
 
 /** Content → page: the color scheme picked in the extension's settings, for Lichess to keep. */
 export const postColorScheme = (scheme: ColorScheme): void =>

@@ -40,4 +40,16 @@ describe('storedOption', () => {
     localStorage.setItem(KEY, '"wide"');
     expect(setting.read()).toBe('short');
   });
+
+  it('tells its listeners of a choice made in another tab, as that tab stored it', () => {
+    const setting = storedOption(`${KEY}-tabs`, z.enum(['short', 'wide']), 'short');
+    const changed = vi.fn<(value: string) => void>();
+    setting.onChange(changed);
+    setting.onChange(() => {});
+    localStorage.setItem(`${KEY}-tabs`, 'wide');
+    window.dispatchEvent(new StorageEvent('storage', { key: KEY }));
+    expect(changed).not.toHaveBeenCalled();
+    window.dispatchEvent(new StorageEvent('storage', { key: `${KEY}-tabs` }));
+    expect(changed).toHaveBeenCalledExactlyOnceWith('wide');
+  });
 });

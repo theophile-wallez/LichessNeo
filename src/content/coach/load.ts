@@ -2,7 +2,7 @@ import { z } from 'zod/mini';
 import { OUTPUT } from '#manifest';
 import { coachOptions } from '#shared/coach.ts';
 import { extensionUrl } from '#content/platform/runtime.ts';
-import { currentSettings, settingsRead } from '#content/settings/settings.ts';
+import { currentSettings, onSettings, settingsRead } from '#content/settings/settings.ts';
 import type { MascotOptions, MascotView } from './mascot/index.ts';
 
 // The 3D mascots' bundle, loaded once, the first time a coach shows: three.js
@@ -33,4 +33,26 @@ export function loadMascots(): Promise<MountMascot | null> {
     },
   );
   return loading;
+}
+
+const motionListeners = new Set<(moving: boolean) => void>();
+let moving: boolean | null = null;
+
+/**
+ * Calls `listener` each time the coaches start or stop moving, as the settings change in any
+ * tab; the returned function stops it.
+ */
+export function onCoachMotion(listener: (moving: boolean) => void): () => void {
+  if (moving === null) {
+    moving = coachesMove();
+    onSettings(({ coachMotion }) => {
+      if (coachMotion === moving) return;
+      moving = coachMotion;
+      for (const each of motionListeners) each(coachMotion);
+    });
+  }
+  motionListeners.add(listener);
+  return () => {
+    motionListeners.delete(listener);
+  };
 }

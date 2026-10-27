@@ -100,11 +100,44 @@ describe('the nav’s place', () => {
     // Chessground keeps the board's old bounds until a scroll clears them.
     expect(scrolls).toHaveBeenCalledOnce();
 
-    const { saveSetting } = await import('#content/settings/settings.ts');
-    await saveSetting('navigation', 'sidebar');
+    const { updateSettings } = await import('#content/settings/settings.ts');
+    await updateSettings(settings => ({
+      ...settings,
+      navigation: 'sidebar',
+      navigationPicked: true,
+    }));
     expect(shape()).toBeUndefined();
     expect(localStorage.getItem('ln-ext-navigation')).toBe('sidebar');
     document.removeEventListener('scroll', scrolls);
+  });
+
+  it('keeps the default in the page’s copy too, without moving the board', async () => {
+    const scrolls = vi.fn<() => void>();
+    document.addEventListener('scroll', scrolls);
+    await start();
+    await flush();
+    expect(localStorage.getItem('ln-ext-navigation')).toBe('rail');
+    expect(scrolls).not.toHaveBeenCalled();
+    document.removeEventListener('scroll', scrolls);
+  });
+
+  it('turns a sidebar kept by an older save, never picked, into the rail', async () => {
+    localStorage.setItem('ln-ext-navigation', 'sidebar');
+    synced.set('ln-ext-settings', { navigation: 'sidebar', uiSounds: false });
+    await start();
+    expect(shape()).toBeUndefined();
+    await flush();
+    expect(shape()).toBe('collapsed rail');
+    expect(localStorage.getItem('ln-ext-navigation')).toBe('rail');
+  });
+
+  it('keeps a sidebar the user picked', async () => {
+    localStorage.setItem('ln-ext-navigation', 'sidebar');
+    synced.set('ln-ext-settings', { navigation: 'sidebar', navigationPicked: true });
+    await start();
+    await flush();
+    expect(shape()).toBeUndefined();
+    expect(localStorage.getItem('ln-ext-navigation')).toBe('sidebar');
   });
 
   it('leaves the page alone when the settings change something else', async () => {

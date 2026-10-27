@@ -1,4 +1,5 @@
 import { coachOptions, speakingCoach } from '#shared/coach.ts';
+import { onCoachOptions } from '#shared/protocol.ts';
 import { PRACTICE_HASH } from '#shared/practice-page.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import { onJump } from '#page/lichess/jumps.ts';
@@ -16,6 +17,7 @@ import { finishConsent } from './view/openings-sync.ts';
 import { refitStream } from './view/stream.ts';
 import { watchCostTips } from './view/cost-tip.ts';
 import { watchTips } from './view/tooltip.ts';
+import { switchOff, switchOn } from './view/switch-off.ts';
 import { REVIEWED_VARIANTS } from './variants.ts';
 
 // Starts the review once Lichess's analysis controller is up: on a game's
@@ -78,6 +80,21 @@ function run(session: Session, mode: Mode): void {
   session.wide.addEventListener('change', refit);
 }
 
+// The settings' switch, flipped while the board is open: practice stays, as its address opened it.
+function followAnalysisCoach(session: Session, started: boolean): void {
+  let running = started;
+  onCoachOptions(({ analysis }) => {
+    if (session.view.mode === 'openings') return;
+    if (!analysis) {
+      if (running) switchOff(session);
+    } else if (running) switchOn(session);
+    else {
+      running = true;
+      run(session, 'live');
+    }
+  });
+}
+
 /**
  * The free board: its coach, unless the settings leave it to Lichess's panel,
  * or the practice page, which its address opens whatever they say.
@@ -87,10 +104,15 @@ function startFreeBoard(session: Session, analysis: Analysis): void {
   window.addEventListener('hashchange', () => {
     if (location.hash !== PRACTICE_HASH || session.view.mode === 'openings') return;
     if (session.view.drawnMode === null) location.reload();
-    else session.setMode('openings');
+    else {
+      session.view.switchedOff = false;
+      session.setMode('openings');
+    }
   });
   if (!linksToPractice) {
-    if (coachOptions().analysis) run(session, 'live');
+    const started = coachOptions().analysis;
+    if (started) run(session, 'live');
+    followAnalysisCoach(session, started);
     return;
   }
   run(session, 'openings');

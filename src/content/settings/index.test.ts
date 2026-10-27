@@ -10,7 +10,11 @@ vi.mock('#content/packs/store.ts', () => ({
   writePack: vi.fn<(pack: Pack) => Promise<void>>(() => Promise.resolve()),
   deletePack: vi.fn<(id: string) => Promise<void>>(() => Promise.resolve()),
 }));
-vi.mock('#content/coach/load.ts', () => ({ loadMascots: () => Promise.resolve(null) }));
+vi.mock('#content/coach/load.ts', () => ({
+  coachesMove: () => true,
+  loadMascots: () => Promise.resolve(null),
+  onCoachMotion: () => () => {},
+}));
 
 // The cards' markup names its messages as their modules load.
 const i18n = vi.hoisted(() => {

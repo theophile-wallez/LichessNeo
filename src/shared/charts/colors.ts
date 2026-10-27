@@ -23,11 +23,15 @@ const BLITZ_COLOR = '#45a3f5';
 
 // The rating history lists its series in this order, puzzles last. Their
 // names are translated, so the order is all that tells them apart.
+const SERIES_KEYS: readonly string[] = [...GAME_COLORS.keys(), 'puzzle'];
 const SERIES_COLORS: readonly string[] = [...GAME_COLORS.values(), PUZZLE_COLOR];
 
 /** The color of the rating history's series at `index`. */
 export const seriesColor = (index: number): string =>
   SERIES_COLORS[index % SERIES_COLORS.length] ?? BLITZ_COLOR;
+
+/** The rating of the rating history's series at `index`, by its key (`blitz`, `puzzle`…). */
+export const seriesKey = (index: number): string | undefined => SERIES_KEYS[index];
 
 /** The color of a game rating by its key (`blitz`, `threeCheck`…), Blitz's if unknown. */
 export const gameRatingColor = (key: string | undefined): string =>

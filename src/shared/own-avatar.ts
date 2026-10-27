@@ -2,7 +2,13 @@ import { z } from 'zod/mini';
 import { AVATAR_COLORS, type Avatar, avatarOf } from './avatar.ts';
 import { CoachIdSchema } from './coach.ts';
 import { html, type SafeHtml } from './html.ts';
-import { readStoredJson, removeStored, StorageKey, writeStoredJson } from './storage.ts';
+import {
+  onStoredElsewhere,
+  readStoredJson,
+  removeStored,
+  StorageKey,
+  writeStoredJson,
+} from './storage.ts';
 
 // The signed-in user's own avatar, picked in the settings: a coach on a color,
 // or a picture of theirs. It's kept in the page's storage, which both worlds
@@ -53,8 +59,7 @@ function readOwn(): OwnAvatar | null {
 export function ownAvatar(): OwnAvatar | null {
   if (cached) return cached.avatar;
   cached = { avatar: readOwn() };
-  window.addEventListener('storage', event => {
-    if (event.key !== StorageKey.avatar) return;
+  onStoredElsewhere([StorageKey.avatar], () => {
     cached = { avatar: readOwn() };
     for (const listener of listeners) listener(cached.avatar);
   });

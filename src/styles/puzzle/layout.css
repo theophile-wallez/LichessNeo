@@ -26,12 +26,15 @@
     margin-left: var(--ln-ext-coords-l);
   }
 
-  body:is(.coords-in, .coords-out) main.puzzle {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) main.puzzle {
     --ln-ext-coords-l: calc(0.6 * var(--ln-ext-coords-size, 13px) + 10px);
   }
 
   /* The files under the board ran into the session chips' row. */
-  body:is(.coords-in, .coords-out) main.puzzle .puzzle__session {
+  html:not([data-ln-ext-prefs~='coords-in'])
+    body:is(.coords-in, .coords-out)
+    main.puzzle
+    .puzzle__session {
     margin-top: calc(1.2 * var(--ln-ext-coords-size, 13px) - 10px) !important;
   }
 
@@ -68,7 +71,11 @@
       calc(
         min(
             calc(
-              var(--ln-ext-main-h, 100dvh) - 28px - var(--ln-ext-coords-off) - var(--ln-ext-kb-h)
+              (
+                  var(--ln-ext-main-h, 100dvh) - 28px - var(--ln-ext-coords-off) -
+                    var(--ln-ext-kb-h)
+                ) /
+                var(--ln-ext-board-ratio, 1)
             ),
             calc(var(--ln-ext-cols-w) - var(--ln-ext-panel-min))
           ) *
@@ -86,7 +93,10 @@
       var(--ln-ext-panel-w) !important;
     grid-template-rows:
       var(--ln-ext-head-h) var(--ln-ext-session-h)
-      calc(var(--ln-ext-board) - var(--ln-ext-head-h) - var(--ln-ext-session-h))
+      calc(
+        var(--ln-ext-board) * var(--ln-ext-board-ratio, 1) - var(--ln-ext-head-h) -
+          var(--ln-ext-session-h)
+      )
       var(--ln-ext-coords-off) auto !important;
     grid-template-areas:
       'gauge board . side'
@@ -100,7 +110,7 @@
   }
 
   /* Coordinates sit outside the board (board/): a gutter for ranks, a strip for files. */
-  body:is(.coords-in, .coords-out) main.puzzle {
+  html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in, .coords-out) main.puzzle {
     --ln-ext-coords-l: calc(0.6 * var(--ln-ext-coords-size, 13px) + 10px);
     --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
   }
@@ -115,8 +125,10 @@
     --ln-ext-kb-h: 44px;
   }
 
+  /* Lichess's 3D board steps down a little (lila's board-3d.scss), past its row's end. */
   main.puzzle .puzzle__board {
     grid-area: board !important;
+    margin-top: 0 !important;
   }
 
   /* The page never scrolls: Lichess keeps a bottom margin and its hidden hover cards at the end.

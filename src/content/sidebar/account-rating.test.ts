@@ -67,6 +67,16 @@ describe('the account rating', () => {
     expect(shown()).toEqual(['blitz', '"1600?"']);
   });
 
+  it('shows none with Lichess’s "Show player ratings" off, which <body> says', async () => {
+    signIn('eresy');
+    document.body.classList.add('no-rating');
+    keep('eresy', Date.now());
+    accountRating.start();
+    await flush();
+    expect(shown()).toEqual([undefined, '']);
+    document.body.classList.remove('no-rating');
+  });
+
   it('asks Lichess when the kept one is 5 minutes old, and keeps the answer', async () => {
     signIn('eresy');
     keep('eresy', Date.now() - MAX_AGE - 1);

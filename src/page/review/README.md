@@ -2,7 +2,8 @@
 
 On a game's analysis page, a summary of the game, then a move-by-move review
 with a coach; on the free analysis board (`/analysis`), the same coach judging
-each move as it's played, and a page of opening practice (see
+each move as it's played, which the settings' switch turns on and off on an
+open board (`view/switch-off.ts`), and a page of opening practice (see
 [Opening practice](#opening-practice)). Lichess's analysis controller is reached through
 `#page/lichess/analysis.ts`, a typed facade over `site.analysis`.
 

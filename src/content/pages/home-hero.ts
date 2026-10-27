@@ -42,7 +42,7 @@ export function addHero(text: HeroText): void {
     attrs: { 'aria-hidden': 'true' },
   });
   hero.append(host);
-  void mountHeroCoach(host, coach);
+  mountHeroCoach(host, coach);
 }
 
 export const homeHero: Feature = {

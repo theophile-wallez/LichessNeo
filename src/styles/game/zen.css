@@ -7,14 +7,19 @@
  * in the top left corner, which the board keeps clear of. The rules of layout.css would
  * bring the rest back. */
 
+/* At every width: the rules of playerbar.css and layout-narrow.css would bring back the names,
+ * the captured pieces, the chat and the game info, which Lichess hides in Zen. */
+body.zenable.zen main.round :is(.ruser, .ln-ext-captured, .mchat, .round__side),
+body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
+  display: none !important;
+}
+
 @media (min-width: 1020px) {
   body.zenable.zen {
     --ln-ext-sidebar-w: 0px;
   }
 
-  body.zenable.zen #top,
-  body.zenable.zen main.round :is(.ruser, .ln-ext-captured, .mchat, .round__side),
-  body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
+  body.zenable.zen #top {
     display: none !important;
   }
 
@@ -39,7 +44,10 @@
       320px,
       calc(
         min(
-            calc(var(--ln-ext-main-h, 100dvh) - 32px - var(--ln-ext-coords-off)),
+            calc(
+              (var(--ln-ext-main-h, 100dvh) - 32px - var(--ln-ext-coords-off)) /
+                var(--ln-ext-board-ratio, 1)
+            ),
             calc(
               var(--ln-ext-main-w, 100vw) - var(--ln-ext-panel-min) - var(--ln-ext-gap) - 48px -
                 var(--ln-ext-zen-margin)
@@ -74,7 +82,7 @@
     --ln-ext-zen-clock: var(--ln-ext-bar);
     grid-template-rows:
       var(--ln-ext-zen-clock)
-      max(0px, calc(var(--ln-ext-board) - 2 * var(--ln-ext-zen-clock) - var(--ln-ext-ctrl-h)))
+      max(0px, calc(var(--ln-ext-board-h) - 2 * var(--ln-ext-zen-clock) - var(--ln-ext-ctrl-h)))
       var(--ln-ext-ctrl-h)
       var(--ln-ext-zen-clock)
       var(--ln-ext-coords-off) !important;

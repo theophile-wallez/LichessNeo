@@ -57,6 +57,11 @@
     margin: 0 auto !important;
   }
 
+  /* Coordinates inside the board, the user's pick (board/coordinates.css): no strip for them. */
+  html[data-ln-ext-prefs~='coords-in'] .board-editor {
+    --ln-ext-coords-off: 0px;
+  }
+
   .board-editor .main-board {
     width: var(--ln-ext-board) !important;
     height: var(--ln-ext-board) !important;

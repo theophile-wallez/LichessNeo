@@ -507,6 +507,10 @@
     "message": "$1, for the dark scheme",
     "description": "A theme's dark side, a button; $1 is the theme's name."
   },
+  "prefNeoDefault": {
+    "message": "Neo",
+    "description": "A tag on the choice Lichess Neo makes, on a Lichess preference it sets its own default for."
+  },
   "themeNeo": {
     "message": "Neo",
     "description": "The default color theme: neutral greys and a blue accent."

@@ -102,24 +102,41 @@ describe('the first-move countdown', () => {
   });
 });
 
+/** Lichess's clock bar's style, under its own rule and ours. */
+function clockBar(): CSSStyleDeclaration {
+  const style = document.createElement('style');
+  style.textContent =
+    '.rclock .bar { display: block; height: 3px; }' +
+    readFileSync(join(import.meta.dirname, 'layout.css'), 'utf8');
+  document.head.append(style);
+  document.body.innerHTML =
+    '<main class="round"><div class="rclock rclock-bottom running">' +
+    '<div class="time">2:29</div><div class="bar"></div></div></main>';
+  const bar = queryOne(document, '.bar', HTMLElement);
+  if (!bar) throw new Error('no bar');
+  return getComputedStyle(bar);
+}
+
 describe('Lichess’s clock bar', () => {
+  afterEach(() => {
+    delete document.documentElement.dataset.lnExtClockBar;
+  });
+
   // Lichess animates the bar's transform through each move, hidden or not: with no box, the
   // animation can't go to the compositor, and Chrome restyled the page on every frame.
   it('keeps a box, out of sight, so its animation stays off the main thread', () => {
-    const style = document.createElement('style');
-    style.textContent =
-      '.rclock .bar { display: block; height: 3px; }' +
-      readFileSync(join(import.meta.dirname, 'layout.css'), 'utf8');
-    document.head.append(style);
-    document.body.innerHTML =
-      '<main class="round"><div class="rclock rclock-bottom running">' +
-      '<div class="time">2:29</div><div class="bar"></div></div></main>';
-    const bar = queryOne(document, '.bar', HTMLElement);
-    if (!bar) throw new Error('no bar');
-    const barStyle = getComputedStyle(bar);
+    const barStyle = clockBar();
     expect(barStyle.display).not.toBe('none');
     expect(barStyle.position).toBe('absolute');
     expect(barStyle.width).toBe('1px');
     expect(barStyle.opacity).toBe('0');
+  });
+
+  it('shows as a strip along the clock once picked (content/clock-bar)', () => {
+    document.documentElement.dataset.lnExtClockBar = '';
+    const barStyle = clockBar();
+    expect(barStyle.position).toBe('absolute');
+    expect([barStyle.width, barStyle.height]).toEqual(['124px', '3px']);
+    expect(barStyle.opacity).toBe('0.5');
   });
 });

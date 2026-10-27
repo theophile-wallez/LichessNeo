@@ -7,6 +7,7 @@ import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
 import { clockLabel, type CustomSeek, type SeekPerf } from '#shared/custom-seek.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
+import { ratingsShown } from '#shared/ratings-shown.ts';
 import { settingsUrl } from '#content/settings/address.ts';
 import type { Card } from './data.ts';
 import { perfOfCard, poolOfSeek, seekKey, seeksOf, type CardPick } from './picks.ts';
@@ -16,7 +17,8 @@ import type { SpeedTexts } from './texts.ts';
 // The cards' markup (styles/home/speed-cards.css): a heading with the custom
 // game's pill, then the cards the settings pick, each with its rating and its
 // curve. A speed's has its pools, the last one played as the primary button; a
-// game of the player's own has one button, which seeks it.
+// game of the player's own has one button, which seeks it. With Lichess's "Show
+// player ratings" off, no rating nor curve: the card is as a visitor's.
 
 const SETTINGS_ICON = hugeicon(Settings01Icon);
 const CHEVRON_ICON = hugeicon(ArrowRight01Icon);
@@ -105,6 +107,7 @@ function frame({ perf, index, buttons, casual = false }: Frame, options: CardsOp
     </div>
     ${
       numbers &&
+      ratingsShown() &&
       html`<a class="ln-ext-speed__stats" href="${stats}">
       ${rating(numbers, options)} ${curve(index, numbers.history)}
     </a>`

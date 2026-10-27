@@ -44,7 +44,16 @@ describe('the settings’ navigation', () => {
     picks[3]
       ?.querySelector('.ln-ext-nav-pick__name')
       ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    expect(storedSettings()).toMatchObject({ navigation: 'header' });
+    expect(storedSettings()).toMatchObject({ navigation: 'header', navigationPicked: true });
     expect(checked()).toEqual(['header']);
+  });
+
+  it('keeps the sidebar once picked: only one never picked reads as the rail', async () => {
+    const page = buildNavigationRow();
+    await flush();
+    const sidebar = queryAll(page, '.ln-ext-nav-pick', HTMLButtonElement)[0];
+    sidebar?.click();
+    expect(storedSettings()).toMatchObject({ navigation: 'sidebar', navigationPicked: true });
+    expect(sidebar?.getAttribute('aria-checked')).toBe('true');
   });
 });

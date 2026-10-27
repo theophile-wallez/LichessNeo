@@ -127,6 +127,8 @@ export interface ViewState {
   barPosition: PositionRecord | null;
   /** The board overlay's markup, as last drawn. */
   overlay: string;
+  /** The free board's coach was switched off in the settings since the board opened. */
+  switchedOff: boolean;
 }
 
 export interface BookEntry {
@@ -254,6 +256,7 @@ export function createSession(options: SessionOptions): Session {
       openingEco: '',
       barPosition: null,
       overlay: '',
+      switchedOff: false,
     },
     live: emptyLive(),
     work: {

@@ -5,7 +5,6 @@ import { message } from '#content/platform/runtime.ts';
 import { chooseCoach } from '#content/bootstrap/coach-choice.ts';
 import { coachChoices, coachName, tilePick } from '#content/coach/names.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
-import { currentSettings, onSettings } from './settings.ts';
 import { buildSwitchList } from './switch-list.ts';
 
 // The settings' Coach card, on the Profile & coach page, under the profile's cards
@@ -72,10 +71,7 @@ export function buildCoachCard(): CoachCard {
     framing: 'bust',
     // Under the themes, it never holds up the page.
     whenIdle: true,
-    onDrawn: holder => {
-      setData(holder, 'lnExtLive', '');
-      play(holder, 'happy');
-    },
+    onDrawn: holder => play(holder, 'happy'),
   });
   // The pick's coach on the stage, or none.
   const play = (holder: HTMLElement | null, mood: 'neutral' | 'happy'): void => {
@@ -87,20 +83,9 @@ export function buildCoachCard(): CoachCard {
     visible = next;
     // The review may have changed the coach since, in this tab or another.
     if (visible) pick = coachPick();
-    if (mascot && !visible) setData(mascot, 'lnExtLive', null);
     showPick(card, pick);
     play(visible ? mascot : null, 'neutral');
   };
-  // Taken off and put back as the 3D is switched: live, or its still.
-  let moving = currentSettings().coachMotion;
-  onSettings(({ coachMotion }) => {
-    if (coachMotion === moving) return;
-    moving = coachMotion;
-    if (!visible) return;
-    if (mascot) setData(mascot, 'lnExtLive', null);
-    play(null, 'neutral');
-    play(mascot, 'neutral');
-  });
   card.addEventListener('click', event => {
     const picked = tilePick(event.target);
     if (picked === null || picked === pick) return;

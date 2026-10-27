@@ -81,9 +81,9 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
   animation loops, no `:has()` in hot places (see the pitfalls). An endless
   CSS animation moves only `transform`, `scale` or `opacity`, which the
   compositor runs (`styles/animations.test.ts`; a pulse is a ring that
-  scales, `theme/live-ring.css`). Hide what Lichess animates out of sight,
-  not with `display: none`, which keeps its animation off the compositor
-  (the clock's bar, `game/layout.css`).
+  scales, `theme/live-ring.css`). What Lichess animates keeps a box, out of
+  sight if it must go: `display: none` keeps its animation off the
+  compositor (the clock's bar, `game/layout.css`).
 - Markup built as text goes through the escaping `html` template
   (`#shared/html.ts`); `trustedHtml` is for constants only. A message
   handler checks `event.source === window` and validates with a schema
@@ -565,12 +565,22 @@ A new pitfall of one area goes in its file (a new one gets a `CLAUDE.md`
 link to it, and a line here). The rest hold everywhere:
 
 - **Coordinates.** Lichess swaps `body.coords-out` for `coords-in` while its
-  eval gauge shows (`forceInnerCoords`). On desktop
-  `styles/board/coordinates.css` draws both outside, sized by
-  `--ln-ext-coords-size`; a layout leaves them room under
-  `body:is(.coords-in, .coords-out)` (a gutter for the ranks,
-  `--ln-ext-coords-off` for the files). Below 1020px both are drawn inside:
-  Lichess's outside ones ran past a board as wide as the screen.
+  eval gauge shows (`forceInnerCoords`), so only the `<body>` the server sent
+  says the user's pick: `content/layout/lichess-prefs.ts` copies an inside
+  one as `coords-in` in `data-ln-ext-prefs`. On desktop
+  `styles/board/coordinates.css` draws both classes outside, sized by
+  `--ln-ext-coords-size`, unless the user picked inside; a layout leaves them
+  room under `html:not([data-ln-ext-prefs~='coords-in']) body:is(.coords-in,
+  .coords-out)` (a gutter for the ranks, `--ln-ext-coords-off` for the
+  files). Below 1020px both are drawn inside: Lichess's outside ones ran past
+  a board as wide as the screen.
+- **Lichess's preferences.** Our own parts follow the ones Lichess's do:
+  `body.no-rating` ("Show player ratings" off, or off in a game;
+  `#shared/ratings-shown.ts` where CSS can't reach), `body.piece-letter`, a
+  blindfold game's `.main-board.blindfold`, and from a game's or an analysis
+  board's init data, "Material difference" and the pieces' animation
+  (`content/layout/lichess-prefs.ts`). That data leaves a false pref out,
+  and has none at all for some watchers.
 - **Board inset.** Chessground shrinks the board to whole pixels per square,
   so `cg-container` sits a few px inside its wrapper:
   `content/layout/board-inset.ts` measures it into `--ln-ext-inset-{t,r,b,l}`.
@@ -647,8 +657,10 @@ link to it, and a line here). The rest hold everywhere:
   `body`, which Lichess turns into `---board-scale` and saves as a pref that
   may predate our layout. Ours ignores it: the board takes all its room
   until dragged, and `content/layout/board-zoom.ts` keeps the dragged size
-  (`ln-ext-board-zoom`, `--ln-ext-zoom`). A layout that sizes its own board
-  multiplies by `var(--ln-ext-board-scale, 1)`. Use `dvh`, not `vh`: on phones
+  (`ln-ext-board-zoom`, `--ln-ext-zoom`), or the one the user menu's Size
+  slider sets. A layout that sizes its own board multiplies by
+  `var(--ln-ext-board-scale, 1)`, and sizes the board's row by
+  `var(--ln-ext-board-ratio)`: a 3D board is less tall than wide. Use `dvh`, not `vh`: on phones
   and headsets `100vh` is taller than the view.
 - **Pinned titles.** Don't widen a sticky title with negative margins (it
   overflows at 1024px): use side box-shadows in the page's color.
