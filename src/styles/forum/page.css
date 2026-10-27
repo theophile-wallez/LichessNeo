@@ -84,6 +84,8 @@ main.forum.index > .box__top:first-child h1::before {
   margin: 0 !important;
   background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/forum.webp') center /
     contain no-repeat;
+  /* Its Lichess glyph's Hugeicon (theme/hugeicons) would mask the picture down to its shape. */
+  mask: none;
 }
 
 /* "Your Team Boards", above the team categories. */
