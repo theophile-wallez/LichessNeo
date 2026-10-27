@@ -8,8 +8,13 @@ for the whole repo are in the root's [AGENTS.md](../../../AGENTS.md).
   with `.practice__side` and either `.gamebook` (a lesson) or
   `.practice-box` (a drill). "Practice with computer" adds `.practice-box`
   to any analysis board, so scope on `.practice__side`. A drill's goal sits
-  in `.analyse__underboard`, which our layout hides. Panel rows need a
-  definite height: `1fr` in a content-sized container just grows.
+  in `.analyse__underboard`, which our layout hides elsewhere: on a lesson
+  it's the goal's card, the coach's on it (`practice-run/drill.css`). Panel
+  rows need a definite height: `1fr` in a content-sized container just grows.
+- **A `piece` of our own.** Lichess places every `piece` as on a board's
+  square (`position: absolute`, an eighth of its box): one we draw elsewhere,
+  as the practice coach's king, takes `position: static` and its tile's size
+  (`practice-run/turn-row.css`).
 - **A `main.analyse` without a board.** A broadcast's page is
   `main.analyse.is-relay.has-relay-tour`: the analysis layout must leave it
   alone (`styles/broadcast/tour`). It carries the `analyse` flag, whose

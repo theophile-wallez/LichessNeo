@@ -1,7 +1,8 @@
 /* Practice lessons (/practice/...): a gamebook lesson (.gamebook) or a drill against
  * the engine (.practice-box). Both become one panel beside the board: the lesson
- * card with its steps, then the coach or the drill's goal. Loads after
- * analysis/, whose main.analyse grid it reshapes. */
+ * card with its steps, then the coach or the drill's goal. Below 1020px the drill's
+ * goal comes right under the board, the steps last. Loads after analysis/, whose
+ * main.analyse grid it reshapes. */
 
 /* ---- Lesson header --- */
 
@@ -11,8 +12,7 @@
   position: relative;
   isolation: isolate;
   gap: 12px;
-  padding: 13px 16px !important;
-  border-bottom: 1px solid var(--ln-ext-card-border);
+  padding: 13px 16px 13px 12px !important;
   background: none !important;
   box-shadow: none;
   color: var(--ln-ext-text-strong) !important;
@@ -25,7 +25,7 @@
   position: absolute;
   z-index: -1;
   top: 50%;
-  inset-inline-start: 16px;
+  inset-inline-start: 12px;
   width: 44px;
   height: 44px;
   margin-top: -22px;
@@ -80,25 +80,24 @@ main.analyse .practice-box > .title {
   /* ---- Layout --- */
 
   html[data-ln-ext-has~='practice'] main.analyse {
-    /* Rows are shares of a definite height: without one, 1fr grows with its content
-     * and the chapter list pushed the coach off the page. A small board still gets
-     * a panel up to 660px tall. */
+    /* Rows are shares of a definite height: without one, 1fr grows with its content.
+     * A small board still gets a panel up to 660px tall. */
     height: max(
       var(--ln-ext-board),
       min(var(--ln-ext-main-h, 100dvh) - var(--ln-ext-v-room, 56px), 660px)
     );
     row-gap: 10px !important;
-    grid-template-rows: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
     grid-template-areas:
       'gauge board side'
       'gauge board book' !important;
   }
 
-  /* A drill: the goal card, then the engine, moves and controls. Not keyed on
-   * .practice-box alone: "practice with computer" adds it to any analysis board.
-   * The tools keep 190px so the verdict isn't cut off; the chapter list gives way. */
+  /* A drill: the lesson's steps, the goal card, then the drill's box and moves, and the
+   * controls. Not keyed on .practice-box alone: "practice with computer" adds it to any
+   * analysis board. The goal's card gives way, scrolling, before the box does. */
   html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box'] main.analyse {
-    grid-template-rows: minmax(0, 1fr) auto minmax(190px, 1fr) var(--ln-ext-ctrl-h) !important;
+    grid-template-rows: auto minmax(0, auto) minmax(64px, 1fr) var(--ln-ext-ctrl-h) !important;
     grid-template-areas:
       'gauge board side'
       'gauge board goal'
@@ -109,7 +108,7 @@ main.analyse .practice-box > .title {
   /* The keyboard-move input gets a row of its own, or it lands in the chapter
    * list's. Only when it's on: an empty row still costs a gap. */
   html[data-ln-ext-has~='practice'][data-ln-ext-has~='keyboard-move'] main.analyse {
-    grid-template-rows: minmax(0, 1fr) auto auto !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
     grid-template-areas:
       'gauge board side'
       'gauge board book'
@@ -118,7 +117,7 @@ main.analyse .practice-box > .title {
 
   html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box'][data-ln-ext-has~='keyboard-move']
     main.analyse {
-    grid-template-rows: minmax(0, 1fr) auto minmax(190px, 1fr) var(--ln-ext-ctrl-h) auto !important;
+    grid-template-rows: auto minmax(0, auto) minmax(64px, 1fr) var(--ln-ext-ctrl-h) auto !important;
     grid-template-areas:
       'gauge board side'
       'gauge board goal'
@@ -133,6 +132,16 @@ main.analyse .practice-box > .title {
     margin: 0 0 0 var(--ln-ext-gap) !important;
   }
 
+  main.analyse .practice__side {
+    grid-area: side !important;
+  }
+
+  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
+    main.analyse
+    .analyse__underboard {
+    grid-area: goal !important;
+  }
+
   /* A lesson has no players: Lichess's bars would only show captured material. */
   html[data-ln-ext-has~='practice'] main.analyse .study__player {
     display: none !important;
@@ -142,5 +151,69 @@ main.analyse .practice-box > .title {
     grid-area: kb !important;
     align-self: stretch !important;
     border-radius: 10px;
+  }
+}
+
+/* ---- No spoilers --- */
+
+/* The engine judges the drill's moves, but its line, the moves' scores and the eval bar
+ * showed the answer ("#1", "M1"). The bar's column stays: chessground would go on reading the board where it
+ * was. */
+html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
+  main.analyse
+  :is(.analyse__tools > .ceval, .analyse__tools > .pv_box, .analyse__moves eval) {
+  display: none !important;
+}
+
+html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box'] main.analyse .eval-gauge {
+  visibility: hidden;
+}
+
+/* ---- Below 1020px --- */
+
+@media (max-width: 1019.98px) {
+  /* A drill's goal under the board and its controls, then its box and moves, then the
+   * lesson's steps: analysis/layout-narrow.css put the goal last, under 18 steps. A
+   * gamebook's underboard is the lesson's long introduction, and stays last. */
+  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
+    main.analyse:not(.has-relay-tour) {
+    grid-template-areas:
+      'gauge'
+      'user-top'
+      'board'
+      'user-bot'
+      'rctrl'
+      'controls'
+      'kb-move'
+      'under'
+      'rmodes'
+      'rtop'
+      'tools'
+      'side'
+      'round-training'
+      'chat'
+      'uchat' !important;
+  }
+
+  html[data-ln-ext-has~='practice'] main.analyse > .practice__side {
+    grid-area: side !important;
+    box-sizing: border-box;
+    width: 100% !important;
+    margin: 12px 0 0 !important;
+  }
+
+  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
+    main.analyse
+    .analyse__underboard {
+    padding: 10px !important;
+  }
+
+  /* Before a move, no room kept for the moves: the box alone. */
+  html[data-ln-ext-has~='practice'] main.analyse .analyse__moves {
+    min-height: 0;
+  }
+
+  html[data-ln-ext-has~='practice'] main.analyse .analyse__moves .tview2:empty {
+    display: none;
   }
 }

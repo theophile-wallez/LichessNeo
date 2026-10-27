@@ -21,15 +21,15 @@ function voiceIn(bubble: HTMLElement): { readonly talk: Mock<Talk>; readonly voi
 }
 
 describe('the coach’s voice', () => {
-  it('types the words out where they already hold their place, talking while they come', () => {
+  it('lays the words out at once, then types them out, talking while they come', () => {
     const bubble = document.createElement('p');
     const { talk, voice } = voiceIn(bubble);
     voice.typeOut('Well played, again!', 'happy', 500);
-    expect(bubble.textContent).toBe('');
+    expect(bubble.textContent).toBe('Well played, again!');
+    expect(shown(bubble)).toBe('');
     expect(bubble.classList.contains('empty')).toBe(true);
     expect(talk).toHaveBeenLastCalledWith('happy', false);
     vi.advanceTimersByTime(500);
-    expect(bubble.textContent).toBe('Well played, again!');
     expect(bubble.classList.contains('empty')).toBe(false);
     expect(shown(bubble)).toBe('');
     expect(talk).toHaveBeenLastCalledWith('happy', true);

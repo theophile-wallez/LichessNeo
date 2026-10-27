@@ -1,137 +1,186 @@
 /* ---- Lesson card --- */
 
+/* At every width: the back link and the lesson's title, then its exercises, numbered. The
+ * lesson picker goes: the practice list is a click away. */
+main.analyse .practice__side {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'back title'
+    'steps steps';
+  align-items: center;
+  min-height: 0;
+  container: ln-ext-steps / inline-size;
+  overflow: hidden !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 12px !important;
+  background: var(--ln-ext-bg-panel) !important;
+  box-shadow: none !important;
+}
+
+main.analyse .practice__side__title {
+  grid-area: title;
+  min-width: 0;
+  border-bottom: none;
+}
+
+main.analyse .practice__side__title .text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+main.analyse .practice__side .finally {
+  display: contents !important;
+}
+
+main.analyse .practice__side .finally > :not(.back) {
+  display: none !important;
+}
+
+main.analyse .practice__side .finally .back {
+  display: flex;
+  grid-area: back;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin: 0 0 0 12px !important;
+  padding: 0 !important;
+  border-radius: 9px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text) !important;
+  font-size: 15px !important;
+}
+
+main.analyse .practice__side .finally .back:hover {
+  background: var(--ln-ext-btn-grey-hover);
+  color: var(--ln-ext-text-strong) !important;
+}
+
+/* ---- Steps --- */
+
+/* A row per exercise, its number on a disc, in two columns where the card is wide. On a desktop
+ * the list scrolls, short of a window's room, the exercise on show kept in view
+ * (content/practice/steps.ts). */
+main.analyse .practice__side__chapters {
+  /* Lichess's grey checkmark on every step reads as "done": they're numbered instead. */
+  counter-reset: ln-ext-step;
+  display: grid !important;
+  grid-area: steps;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px 6px;
+  height: auto !important;
+  max-height: none !important;
+  padding: 8px !important;
+  overflow-y: auto !important;
+  border-top: 1px solid var(--ln-ext-card-border);
+}
+
+@container ln-ext-steps (min-width: 340px) {
+  main.analyse .practice__side__chapters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 1020px) {
-  main.analyse .practice__side {
-    grid-area: side !important;
-    min-height: 0;
-    overflow: hidden !important;
-    border: 1px solid var(--ln-ext-card-border) !important;
-    border-radius: 12px !important;
-    background: var(--ln-ext-bg-panel) !important;
-    box-shadow: none !important;
+  /* Four rows and a half at most, which says it scrolls; fewer in a short window, which the
+   * goal's card needs. */
+  main.analyse .practice__side__chapters {
+    max-height: clamp(84px, 100dvh - 560px, 176px) !important;
   }
+}
 
-  .practice__side__chapters {
-    /* Number the steps: Lichess's grey checkmark on every chapter reads as "done". */
-    counter-reset: ln-ext-step;
-    min-height: 0;
-    padding: 8px !important;
-    /* Snap to a step, not mid-title. */
-    scroll-snap-type: y proximity;
-    scrollbar-width: thin;
-  }
+main.analyse .ps__chapter {
+  counter-increment: ln-ext-step;
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  padding: 4px 8px 4px 4px !important;
+  border: none !important;
+  border-radius: 9px;
+  background: none !important;
+  color: var(--ln-ext-text) !important;
+  transition: background-color 0.15s !important;
+}
 
-  .ps__chapter {
-    counter-increment: ln-ext-step;
-    scroll-snap-align: start;
-    gap: 10px;
-    align-items: center !important;
-    padding: 6px 10px 6px 6px !important;
-    border: none !important;
-    border-radius: 9px;
-    color: var(--ln-ext-text) !important;
-    transition:
-      background-color 0.15s,
-      box-shadow 0.15s !important;
-  }
+main.analyse .ps__chapter:hover {
+  background: var(--ln-ext-lift-7) !important;
+}
 
-  .ps__chapter h3 {
-    padding: 0 !important;
-    font-size: 14.5px;
-    font-weight: 700;
-    line-height: 1.3;
-  }
+main.analyse .ps__chapter.active {
+  background: color-mix(in srgb, var(--ln-ext-accent) 14%, transparent) !important;
+}
 
-  .ps__chapter .status {
-    flex: 0 0 26px !important;
-    height: 26px;
-    border-radius: 50%;
-    background: var(--ln-ext-lift-7);
-    color: var(--ln-ext-text-dim) !important;
-    font-size: 13px !important;
-    font-weight: 800;
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-  }
+main.analyse .ps__chapter h3 {
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  color: inherit;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.3;
+  /* A long name on a phone's column takes a second line rather than losing its end. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
 
-  /* Lichess's glyph here (a play triangle, a checkmark) is painted as its Hugeicon's mask
-   * (theme/hugeicons): a step's number takes its place, unmasked, and the done step's check
-   * gets a whole 1em box, which the narrower glyph's would crop. */
-  .ps__chapter .status:not(.done)::before {
-    content: counter(ln-ext-step);
-    background: none;
-    font-family: var(--ln-ext-font);
-    mask: none;
-    -webkit-text-fill-color: currentColor;
-  }
+main.analyse .ps__chapter.active h3 {
+  color: var(--ln-ext-text-strong);
+  font-weight: 800 !important;
+}
 
-  .ps__chapter .status.done::before {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-  }
+main.analyse .ps__chapter .status {
+  display: flex !important;
+  flex: none !important;
+  align-items: center;
+  justify-content: center;
+  width: 26px !important;
+  height: 26px;
+  margin: 0 !important;
+  border-radius: 50%;
+  background: var(--ln-ext-lift-7);
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12px !important;
+  font-weight: 800;
+  line-height: 1;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.15s !important;
+}
 
-  .ps__chapter:hover {
-    background: var(--ln-ext-lift-6) !important;
-  }
+/* Lichess's glyph here (a play triangle, a checkmark) is painted as its Hugeicon's mask
+ * (theme/hugeicons): a step's number takes its place, unmasked, and the done step's check
+ * gets a whole 1em box, which the narrower glyph's would crop. */
+main.analyse .ps__chapter .status:not(.done)::before {
+  content: counter(ln-ext-step);
+  background: none;
+  font-family: var(--ln-ext-font);
+  mask: none;
+  -webkit-text-fill-color: currentColor;
+}
 
-  .ps__chapter:hover h3 {
-    color: var(--ln-ext-text-strong);
-  }
+main.analyse .ps__chapter .status.done::before {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
 
-  .ps__chapter:hover .status {
-    transform: scale(1.1);
-  }
+main.analyse .ps__chapter:hover .status {
+  transform: translateY(-2px) rotate(-8deg) scale(1.08);
+}
 
-  /* The current step: a lighter row, its number on the accent badge. */
-  .ps__chapter.active {
-    background: var(--ln-ext-lift-8) !important;
-    box-shadow: inset 0 0 0 1px var(--ln-ext-lift-10);
-  }
+main.analyse .ps__chapter .status.done {
+  background: color-mix(in srgb, var(--ln-ext-good) 20%, transparent);
+  color: var(--ln-ext-good-hover) !important;
+}
 
-  .ps__chapter.active h3 {
-    color: var(--ln-ext-text-strong);
-  }
-
-  .ps__chapter.active .status {
-    background: var(--ln-ext-btn-primary) !important;
-    box-shadow: var(--ln-ext-btn-primary-shadow);
-    color: var(--ln-ext-white) !important;
-  }
-
-  .ps__chapter .status.done {
-    background: color-mix(in srgb, var(--ln-ext-good) 20%, transparent);
-    color: var(--ln-ext-good-hover) !important;
-  }
-
-  /* Footer: back to the practice list, and the lesson picker. */
-  .practice__side .finally {
-    gap: 8px;
-    padding: 10px !important;
-    border-top: 1px solid var(--ln-ext-card-border);
-    background: var(--ln-ext-bg-panel-dark) !important;
-    font-size: 14px !important;
-  }
-
-  .practice__side .finally .back {
-    display: flex;
-    flex: 0 0 34px !important;
-    align-items: center;
-    justify-content: center;
-    height: 34px;
-    margin: 0 !important;
-    border-radius: 8px;
-    background: var(--ln-ext-btn-grey);
-    box-shadow: var(--ln-ext-btn-grey-shadow);
-    color: var(--ln-ext-text) !important;
-    font-size: 15px !important;
-  }
-
-  .practice__side .finally .back:hover {
-    background: var(--ln-ext-btn-grey-hover);
-    color: var(--ln-ext-text-strong) !important;
-  }
-
-  .practice__side .finally select {
-    height: 34px;
-  }
+/* The step on show: on the accent. */
+main.analyse .ps__chapter.active .status {
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white) !important;
 }

@@ -1,340 +1,204 @@
 /* ---- Drill --- */
 
-@media (min-width: 1020px) {
-  /* The goal is in the underboard, which analysis/ hides, and a drill needs it:
-   * it comes back as a card above the moves, read out by the Game Review's coach. */
-  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-    main.analyse
-    .analyse__underboard {
-    --ln-ext-coach-h: 78px;
-    display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-areas:
-      'coach say'
-      'toggle toggle';
-    column-gap: 14px;
-    grid-area: goal !important;
-    padding: 12px 14px 12px 8px;
-    border: 1px solid var(--ln-ext-card-border);
-    border-radius: 12px;
-    background: var(--ln-ext-bg-panel);
+/* At every width, the goal's card: Lichess's underboard, which analysis/ hides elsewhere. The
+ * coach says the goal in its card (content/practice/coach.ts), the lesson's words under it;
+ * once the exercise ends, the coach cheers or comforts and the card's button retries it or
+ * moves on. */
+html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
+  main.analyse
+  .analyse__underboard {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  container: ln-ext-goal / inline-size;
+  padding: 10px !important;
+  overflow-y: auto;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 12px;
+  background: var(--ln-ext-bg-panel) !important;
+}
+
+main.analyse .analyse__underboard > .ln-ext-practice-coach {
+  --ln-ext-coach-h: 88px;
+
+  flex: none;
+  order: -1;
+}
+
+/* A narrow panel (a 1024px window): a smaller coach leaves its words room. Its arms keep a fifth
+ * of its height on each side. */
+@container ln-ext-goal (max-width: 320px) {
+  main.analyse .analyse__underboard > .ln-ext-practice-coach {
+    --ln-ext-coach-h: 64px;
+
+    gap: 12px;
+    padding-inline: 14px 10px;
+  }
+}
+
+/* The goal is the coach's to say; the lesson's words stay Lichess's, under its card. */
+main.analyse .analyse__underboard > .feedback.ongoing {
+  display: contents !important;
+}
+
+main.analyse .analyse__underboard > .feedback.ongoing .goal {
+  display: none !important;
+}
+
+main.analyse .analyse__underboard > .feedback.ongoing .comment {
+  margin: 0 !important;
+  padding: 0 4px !important;
+  color: var(--ln-ext-text-dim);
+  font-size: 13.5px !important;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: start !important;
+}
+
+/* The verdict in its color: a card filled green or red would shout. */
+.ln-ext-practice-coach[data-ln-ext-mood='delight'] .ln-ext-bubble__title {
+  color: var(--ln-ext-good-hover);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.ln-ext-practice-coach[data-ln-ext-mood='worry'] .ln-ext-bubble__title {
+  color: var(--ln-ext-red);
+  font-weight: 700;
+}
+
+/* Over: Lichess's whole verdict is a link, which retries or moves on. Its first words are
+ * the coach's to say; the rest, "Click to retry" or "Go to next exercise", is the button. */
+main.analyse .analyse__underboard > .feedback:is(.fail, .win) {
+  display: flex !important;
+  flex: none;
+  gap: 8px;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 44px;
+  padding: 0 16px !important;
+  border-radius: 10px;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
+  color: var(--ln-ext-white) !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+main.analyse .analyse__underboard > .feedback:is(.fail, .win):hover {
+  background: var(--ln-ext-btn-primary-hover) !important;
+}
+
+main.analyse .analyse__underboard > .feedback:is(.fail, .win):active {
+  transform: translateY(1px);
+}
+
+main.analyse .analyse__underboard > .feedback:is(.fail, .win) > span {
+  display: none !important;
+}
+
+main.analyse .analyse__underboard > .feedback:is(.fail, .win) strong {
+  color: inherit;
+  font-weight: inherit;
+}
+
+main.analyse .analyse__underboard > .feedback:is(.fail, .win)::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: var(--ln-ext-verdict-icon) center / contain no-repeat;
+  mask: var(--ln-ext-verdict-icon) center / contain no-repeat;
+}
+
+main.analyse .analyse__underboard > .feedback.fail {
+  --ln-ext-verdict-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/reload.svg');
+}
+
+/* The arrow after the words, where "next" points. */
+main.analyse .analyse__underboard > .feedback.win {
+  --ln-ext-verdict-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-01.svg');
+  flex-direction: row-reverse;
+}
+
+/* "Load next exercise immediately": a setting's row at the card's foot, an icon on its tile, the
+ * label and what it does (content/practice/auto-next.ts), the switch at the end. Lichess's label
+ * wraps it all, so the whole row toggles it. */
+main.analyse .analyse__underboard > .cmn-toggle-wrap {
+  display: grid !important;
+  flex: none;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  grid-template-areas:
+    'tile label switch'
+    'tile hint switch';
+  column-gap: 12px;
+  align-items: center;
+  margin: 0 !important;
+  padding: 10px 12px 10px 10px;
+  border-radius: 10px;
+  background: var(--ln-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  color: var(--ln-ext-text-strong);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+main.analyse .analyse__underboard > .cmn-toggle-wrap::before {
+  content: '';
+  grid-area: tile;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/next--ffffff.svg') center / 18px
+      no-repeat,
+    var(--ln-ext-btn-primary);
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    inset 0 -2px 0 #00000026,
+    0 3px 8px var(--ln-ext-shade-25);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+main.analyse .analyse__underboard > .cmn-toggle-wrap:hover::before {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+main.analyse .analyse__underboard > .cmn-toggle-wrap::after {
+  content: attr(data-ln-ext-hint);
+  grid-area: hint;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+main.analyse .analyse__underboard > .cmn-toggle-wrap:not([data-ln-ext-hint])::after {
+  display: none;
+}
+
+main.analyse .analyse__underboard > .cmn-toggle-wrap > .cmn-toggle {
+  grid-area: switch;
+  margin: 0 !important;
+}
+
+/* A short window: a smaller coach. */
+@media (max-height: 760px) and (min-width: 1020px) {
+  main.analyse .analyse__underboard > .ln-ext-practice-coach {
+    --ln-ext-coach-h: 72px;
   }
 
-  /* The coach's still (public/img/coaches/mascot-<n>.webp, the number set by
-   * content/bootstrap/coach-choice.ts). Face and bubble share the card's bottom row, so the
-   * mouth is at a fixed height. */
-  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-    main.analyse
-    .analyse__underboard::before {
-    content: '';
-    grid-area: coach;
-    align-self: end;
-    width: calc(var(--ln-ext-coach-h) * 1.09);
-    height: var(--ln-ext-coach-h);
-    /* Longhands: the shorthand would reset the image set below. */
-    background-position: bottom center;
-    background-size: auto 100%;
-    background-repeat: no-repeat;
+  main.analyse .analyse__underboard > .feedback.ongoing .comment {
+    font-size: 13px !important;
+    line-height: 1.4;
   }
 
-  html[data-ln-ext-coach='1'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-1.webp');
-  }
-  html[data-ln-ext-coach='2'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-2.webp');
-  }
-  html[data-ln-ext-coach='3'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-3.webp');
-  }
-  html[data-ln-ext-coach='4'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-4.webp');
-  }
-  html[data-ln-ext-coach='5'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-5.webp');
-  }
-  html[data-ln-ext-coach='6'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-6.webp');
-  }
-  html[data-ln-ext-coach='7'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-7.webp');
-  }
-  html[data-ln-ext-coach='8'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-8.webp');
-  }
-  html[data-ln-ext-coach='9'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-9.webp');
-  }
-  html[data-ln-ext-coach='10'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-10.webp');
-  }
-  html[data-ln-ext-coach='11'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-11.webp');
-  }
-  html[data-ln-ext-coach='12'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-12.webp');
-  }
-  html[data-ln-ext-coach='13'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-13.webp');
-  }
-  html[data-ln-ext-coach='14'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-14.webp');
-  }
-  html[data-ln-ext-coach='15'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-15.webp');
-  }
-  html[data-ln-ext-coach='16'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-16.webp');
-  }
-  html[data-ln-ext-coach='17'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-17.webp');
-  }
-  html[data-ln-ext-coach='18'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-18.webp');
-  }
-  html[data-ln-ext-coach='19'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-19.webp');
-  }
-  html[data-ln-ext-coach='20'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-20.webp');
-  }
-  html[data-ln-ext-coach='21'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-21.webp');
-  }
-  html[data-ln-ext-coach='22'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-22.webp');
-  }
-  html[data-ln-ext-coach='23'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-23.webp');
-  }
-  html[data-ln-ext-coach='24'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-24.webp');
-  }
-  html[data-ln-ext-coach='25'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-25.webp');
-  }
-  html[data-ln-ext-coach='26'] main.analyse .analyse__underboard::before {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/img/coaches/mascot-26.webp');
-  }
-
-  main.analyse .analyse__underboard .feedback {
-    padding: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-    main.analyse
-    .analyse__underboard
-    .feedback {
-    position: relative;
-    grid-area: say;
-    align-self: end;
-    box-sizing: border-box;
-    min-height: var(--ln-ext-coach-h);
-    padding: 10px 14px !important;
-    border-radius: 12px;
-    background: var(--ln-ext-white) !important;
-    box-shadow: 0 6px 18px var(--ln-ext-shade-35) !important;
-    color: var(--ln-ext-ink) !important;
-    /* Every new exercise, and every verdict, is a new bubble. */
-    animation: ln-ext-say 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-    transform-origin: 0 calc(100% - var(--ln-ext-coach-h) * 0.36);
-  }
-
-  /* The tail, as in review/, its point at the coach's mouth. */
-  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-    main.analyse
-    .analyse__underboard
-    .feedback::before {
-    content: '';
-    position: absolute;
-    left: -17px;
-    bottom: calc(var(--ln-ext-coach-h) * 0.36 - 10px);
-    width: 18px;
-    height: 25px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 69'%3E%3Cpath fill='%23fff' d='M49 0A49 42 0 0 1 0 42A49 27 0 0 0 49 69H50V0z'/%3E%3C/svg%3E")
-      center / 100% 100% no-repeat;
-  }
-
-  @keyframes ln-ext-say {
-    from {
-      opacity: 0;
-      transform: scale(0.92);
-    }
-  }
-
-  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-    main.analyse
-    .analyse__underboard
-    .cmn-toggle-wrap {
-    grid-area: toggle;
-  }
-
-  /* With no coach (coach-avatar.css), the goal takes the card, as words of no one's. */
-  html[data-ln-ext-coach='none'][data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-    main.analyse
-    .analyse__underboard {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'say' 'toggle';
-    padding-left: 14px;
-  }
-
-  html[data-ln-ext-coach='none'] main.analyse .analyse__underboard::before,
-  html[data-ln-ext-coach='none'] main.analyse .analyse__underboard .feedback::before {
-    display: none;
-  }
-
-  html[data-ln-ext-coach='none'][data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-    main.analyse
-    .analyse__underboard
-    .feedback {
-    min-height: 0;
-  }
-
-  main.analyse .analyse__underboard .feedback .goal {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    width: auto !important;
-    margin: 0 !important;
-    color: var(--ln-ext-ink);
-    font-size: 15px !important;
-    font-weight: 800;
-    text-align: start !important;
-  }
-
-  main.analyse .analyse__underboard .feedback .goal::before {
-    content: '';
-    flex: none;
-    width: 18px;
-    height: 18px;
-    --ln-ext-goal: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/target-02.svg');
-    background: var(--ln-ext-accent);
-    -webkit-mask: var(--ln-ext-goal) center / contain no-repeat;
-    mask: var(--ln-ext-goal) center / contain no-repeat;
-  }
-
-  main.analyse .analyse__underboard .feedback .comment {
-    margin-top: 4px;
-    color: color-mix(in srgb, var(--ln-ext-ink) 75%, var(--ln-ext-white));
-    font-size: 13.5px;
-    font-weight: 500;
-    line-height: 1.45;
-  }
-
-  /* Solved / failed: the verdict in green or red, and the bubble stays clickable
-   * (next exercise, retry). */
-  main.analyse .analyse__underboard .feedback:is(.win, .fail) {
-    display: flex !important;
-    flex-flow: column;
-    justify-content: center;
-    align-items: flex-start !important;
-    color: color-mix(in srgb, var(--ln-ext-ink) 75%, var(--ln-ext-white)) !important;
-    font-size: 14px;
-    font-weight: 600;
-    opacity: 1 !important;
-    transition: background-color 0.15s !important;
-  }
-
-  main.analyse .analyse__underboard .feedback:is(.win, .fail):hover {
-    background: color-mix(in srgb, var(--ln-ext-ink) 3%, var(--ln-ext-white)) !important;
-  }
-
-  main.analyse .analyse__underboard .feedback:is(.win, .fail):hover::before {
-    filter: brightness(0.949);
-  }
-
-  main.analyse .analyse__underboard .feedback:is(.win, .fail) span {
-    margin: 0 0 2px !important;
-    color: var(--ln-ext-accent-dim);
-    font-size: 17px;
-    font-weight: 800;
-  }
-
-  main.analyse .analyse__underboard .feedback.fail span {
-    color: var(--ln-ext-red-dark);
-  }
-
-  main.analyse .analyse__underboard .feedback.fail strong {
-    color: var(--ln-ext-ink);
-    font-weight: 700;
-  }
-
-  /* "Load next exercise immediately" as a quiet switch under the goal. */
-  main.analyse .analyse__underboard .cmn-toggle-wrap {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-top: 10px !important;
-    padding-top: 10px;
-    border-top: 1px solid var(--ln-ext-card-border);
-    color: var(--ln-ext-text-dim);
-    font-size: 12.5px;
-    font-weight: 600;
-  }
-
-  /* Short screens: a smaller coach and a tighter bubble leave the chapter list
-   * a few more steps. */
-  @media (max-height: 760px) {
-    html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-      main.analyse
-      .analyse__underboard {
-      --ln-ext-coach-h: 62px;
-      column-gap: 12px;
-      padding: 9px 12px 9px 6px;
-    }
-
-    html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
-      main.analyse
-      .analyse__underboard
-      .feedback {
-      padding: 8px 12px !important;
-    }
-
-    main.analyse .analyse__underboard .feedback .goal {
-      font-size: 14px !important;
-    }
-
-    main.analyse .analyse__underboard .feedback .comment {
-      margin-top: 2px;
-      font-size: 13px;
-      line-height: 1.38;
-    }
-
-    main.analyse .analyse__underboard .cmn-toggle-wrap {
-      margin-top: 8px !important;
-      padding-top: 8px;
-    }
-
-    /* The lesson card tightens too: two steps stay in view beside a drill at 640px. */
-    .practice__side__title {
-      padding-block: 8px !important;
-    }
-
-    .practice__side__title::before {
-      width: 38px;
-      height: 38px;
-      margin-top: -19px;
-      border-radius: 10px;
-    }
-
-    .practice__side__title icon {
-      flex-basis: 38px !important;
-      height: 38px !important;
-      background-size: 26px !important;
-    }
-
-    .practice__side .finally {
-      padding: 6px 8px !important;
-    }
-
-    .practice__side .finally .back {
-      flex-basis: 30px !important;
-      height: 30px;
-    }
-
-    .practice__side .finally select {
-      height: 30px;
-    }
+  main.analyse .practice__side__title {
+    padding-block: 8px !important;
   }
 }

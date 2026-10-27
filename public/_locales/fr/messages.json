@@ -924,6 +924,12 @@
   "phistMissedMany": {
     "message": "$1 problèmes te résistent encore : on y retourne ?"
   },
+  "practiceAutoNextHint": {
+    "message": "Dès que tu réussis, l'exercice suivant s'ouvre."
+  },
+  "practiceMissed": {
+    "message": "Pas tout à fait ! Retente ta chance."
+  },
   "phistAllClear": {
     "message": "Plus rien à retenter : place aux nouveaux."
   },

@@ -1,15 +1,8 @@
-import type { CoachMood } from '#shared/coach.ts';
 import { queryOne } from '#shared/dom.ts';
+import type { Saying } from '#content/coach/card.ts';
 
 // What the coach says on a Learn stage's panel, read from Lichess's: the
 // level's goal, or how it ended (lila's ui/learn/src/run/runView.ts).
-
-export interface Saying {
-  /** Changes when the coach has something new to say, even in the same words. */
-  readonly key: string;
-  readonly text: string;
-  readonly mood: CoachMood;
-}
 
 // Lichess breaks the goal in lines for its narrow panel: in the bubble, it wraps by itself.
 const lineText = (element: Element): string =>

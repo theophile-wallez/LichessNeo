@@ -91,6 +91,10 @@ so the logic can be unit-tested without a page.
 - `puzzle`: the puzzle page's one panel, its menu and coach, and the verdict and
   rating change on its end card.
 - `learn`: a Learn stage's coach, saying the level's goal and how it ended.
+- `practice`: a practice drill's coach, saying the exercise's goal and how it
+  ended, with whose turn it is, the last move's verdict and the hint on its
+  card; the lesson's steps kept in view as they scroll, and what "Load next
+  exercise immediately" does.
 - `pages`.
 - `ui`: tooltips, hover card, tab bars, users' avatars, the user's own name
   where Lichess writes it, the interface's Foley sounds behind the settings'
@@ -101,8 +105,9 @@ so the logic can be unit-tested without a page.
   (⌘K / Ctrl+K, or Lichess's own `s` and `/`, which focus its search box,
   kept out of sight): the sidebar's pages, a few actions, the settings' pages,
   and the players Lichess finds, picked with the arrows.
-- `coach`: the coach's 3D mascots, the coaches' names and the Game Review's
-  coach picker.
+- `coach`: the coach's 3D mascots, the coaches' names, the Game Review's
+  coach picker, and its coach card for the places outside the review that say
+  a goal (`card.ts`: Learn, practice).
 - `computer`: the computer's robot and the level slider of the computer's
   game setup.
 - `game-setup`: the game setup dialog's tiles for the variant, the time

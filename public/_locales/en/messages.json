@@ -1225,6 +1225,14 @@
     "message": "$1 still beat you: shall we go back to them?",
     "description": "The coach; $1 is how many failed puzzles are left to retry."
   },
+  "practiceAutoNextHint": {
+    "message": "Straight on to the next one once you solve it.",
+    "description": "Under a practice drill's \"Load next exercise immediately\" switch: what it does."
+  },
+  "practiceMissed": {
+    "message": "Not quite! Give it another go.",
+    "description": "The coach, when a practice exercise was missed."
+  },
   "phistAllClear": {
     "message": "Nothing left to retry: on to new ones.",
     "description": "The coach, when every failed puzzle was solved since."

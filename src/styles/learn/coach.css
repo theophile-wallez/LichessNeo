@@ -49,33 +49,9 @@
   border-radius: 10px;
 }
 
-/* As in the Game Review (review/bubble.css): the coach stands on the card's bottom edge, its
- * words beside it, no bubble. */
+/* The card (coach-card.css), its coach larger in a wide panel. */
 .ln-ext-learn-coach {
-  --ln-ext-coach-h: 96px;
-  --ln-ext-mood-c: var(--ln-ext-good-hover);
-
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  gap: 18px;
-  box-sizing: border-box;
-  /* Room over its head for its hops. */
-  min-height: calc(var(--ln-ext-coach-h) + 16px);
   margin: 12px 12px 0;
-  /* Room for its arms at its sides, as in the review: the card cuts it only at its feet and
-     over its hops. */
-  padding: 0 14px 0 24px;
-  overflow: hidden;
-  border-radius: 12px;
-  background: var(--ln-ext-bg-raised);
-  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
-}
-
-/* With no coach (coach-avatar.css), its words take the card. */
-html[data-ln-ext-coach='none'] .ln-ext-learn-coach {
-  min-height: 0;
-  padding: 2px 14px;
 }
 
 .learn__table[data-ln-ext-learn-coach] .progress {
@@ -87,57 +63,6 @@ html[data-ln-ext-coach='none'] .ln-ext-learn-coach {
   .ln-ext-learn-coach {
     --ln-ext-coach-h: 112px;
   }
-}
-
-.ln-ext-learn-coach .ln-ext-coach__avatar[data-ln-ext-mood='worry'] {
-  --ln-ext-mood-c: var(--ln-ext-red);
-}
-
-/* Not a button here: it doesn't change coach. */
-.ln-ext-learn-coach .ln-ext-coach__avatar {
-  cursor: default;
-}
-
-.ln-ext-learn-coach .ln-ext-coach__avatar:hover {
-  transform: none;
-}
-
-/* Its canvas spills past the avatar, so its arms and hops show: only the card cuts it. */
-.ln-ext-learn-coach .ln-ext-coach__face canvas {
-  top: -50%;
-  left: -40%;
-  width: 180%;
-  height: 150%;
-}
-
-.ln-ext-learn-coach .ln-ext-bubble {
-  flex: 1;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: safe center;
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  padding: 10px 0;
-  background: transparent;
-  color: var(--ln-ext-text);
-  /* Lichess centers the panel's text. */
-  text-align: start;
-}
-
-.ln-ext-learn-coach .ln-ext-bubble::before {
-  display: none;
-}
-
-.ln-ext-learn-coach .ln-ext-bubble__title {
-  /* The review's grows to its row (review/bubble.css): here it's centered on the card. */
-  flex: none;
-  margin: 0;
-  color: var(--ln-ext-text-strong);
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.35;
 }
 
 /* A narrow panel (tablets): the words over the coach, who still stands on the edge. */

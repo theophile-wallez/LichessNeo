@@ -15,14 +15,14 @@ const TALK_MS = 1200;
 export interface Voice {
   /** Says the words at once. */
   readonly say: (text: string, mood: CoachMood) => void;
-  /** Empties the bubble, then types the words out after `delayMs`. */
+  /** Lays the words out hidden, then types them out after `delayMs`. */
   readonly typeOut: (text: string, mood: CoachMood, delayMs: number) => void;
 }
 
 export interface VoiceOptions {
   /** Plays the coach's face: its mood, and whether its mouth moves. */
   readonly talk: (mood: CoachMood, talking: boolean) => void;
-  /** The bubble's class while it waits for its words. */
+  /** The bubble's class while its words wait to show. */
   readonly emptyClass: string;
 }
 
@@ -42,18 +42,18 @@ export function createVoice(bubble: HTMLElement, { talk, emptyClass }: VoiceOpti
     },
     typeOut: (text, mood, delayMs) => {
       cancel();
-      bubble.textContent = '';
+      // Laid out at once, hidden: the bubble has its size before the first word shows.
+      const words = text.match(/\S+\s*/g) ?? [];
+      setHtml(
+        bubble,
+        html`${words.map(word => html`<span class="ln-ext-w ln-ext-w--off">${word}</span>`)}`,
+      );
       bubble.classList.toggle(emptyClass, true);
       talk(mood, false);
+      const spans = [...bubble.children];
       timer = window.setTimeout(() => {
-        const words = text.match(/\S+\s*/g) ?? [];
-        setHtml(
-          bubble,
-          html`${words.map(word => html`<span class="ln-ext-w ln-ext-w--off">${word}</span>`)}`,
-        );
         bubble.classList.toggle(emptyClass, false);
         talk(mood, true);
-        const spans = [...bubble.children];
         let shown = 0;
         timer = window.setInterval(() => {
           const word = spans[shown++];

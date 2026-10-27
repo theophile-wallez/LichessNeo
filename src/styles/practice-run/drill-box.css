@@ -1,152 +1,165 @@
 /* ---- Drill box --- */
 
-@media (min-width: 1020px) {
-  /* The drill's box, at the bottom of the moves panel, without Lichess's 3px
-   * green underline. */
-  main.analyse .practice-box {
-    flex: none !important;
-    margin-top: auto;
-    border-top: 1px solid var(--ln-ext-border);
-    border-bottom: none !important;
-  }
+/* In a lesson's drill, the box's turn, hint and verdict are on the coach's card
+ * (turn-row.css), the box out of sight; its engine line goes, and the eval bar with it
+ * (layout.css): both gave the answer away ("#1"). The rest styles the box the analysis board's
+ * "Practice with computer" opens, at every width: whose turn on the left, the hint at the right. */
+html[data-ln-ext-has~='practice'] main.analyse .practice-box {
+  display: none !important;
+}
 
-  /* A short panel only fits the engine line and the drill's box: hide the moves
-   * until a whole row fits (222px with a verdict) rather than show a sliver. */
-  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box'] main.analyse .analyse__tools {
-    container: ln-ext-drill-tools / size;
-  }
-
-  @container ln-ext-drill-tools (max-height: 221px) {
-    main.analyse .analyse__moves {
-      display: none !important;
-    }
-
-    /* The room kept for the verdict is then under the box, not a hole above it. */
-    main.analyse .practice-box {
-      margin-top: 0;
-    }
-  }
-
+main.analyse .practice-box .feedback {
   /* Lichess's `.feedback` centers its row; the instruction reads left. */
-  main.analyse .practice-box .feedback {
-    justify-content: flex-start !important;
-    padding: 10px 14px !important;
-    background: transparent !important;
+  justify-content: flex-start !important;
+  padding: 10px 12px !important;
+  background: transparent !important;
+}
+
+main.analyse .practice-box .feedback .player {
+  display: flex;
+  flex: 1;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+}
+
+main.analyse .practice-box .feedback :is(.no-square, .icon) {
+  box-sizing: border-box;
+  flex: 0 0 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--ln-ext-lift-8);
+}
+
+main.analyse .practice-box .feedback .player .no-square > piece.black {
+  border-radius: 7px;
+  background-color: #ffffffd9;
+  box-shadow: 0 0 0 3px #ffffffd9;
+}
+
+main.analyse .practice-box .feedback .icon.off {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ln-ext-orange);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* Whose turn on the left, the hint pushed to the row's end. */
+main.analyse .practice-box .feedback .instruction {
+  display: flex;
+  flex: 1;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+main.analyse .practice-box .feedback .instruction strong {
+  display: block;
+  color: var(--ln-ext-text-strong);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+main.analyse .practice-box .feedback .instruction em {
+  flex-basis: 100%;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* The hint, then the best move: a grey button with the puzzles' bulb. */
+main.analyse .practice-box .feedback .choices a {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px 0 10px;
+  border-radius: 9px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text) !important;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+main.analyse .practice-box .feedback .choices a::before {
+  --ln-ext-hint-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/idea-01.svg');
+
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--ln-ext-yellow);
+  -webkit-mask: var(--ln-ext-hint-icon) center / contain no-repeat;
+  mask: var(--ln-ext-hint-icon) center / contain no-repeat;
+}
+
+main.analyse .practice-box .feedback .choices a:hover {
+  background: var(--ln-ext-btn-grey-hover);
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.analyse .practice-box > .comment {
+  flex: none !important;
+  align-items: center !important;
+  min-height: 34px;
+  padding: 0 14px 10px !important;
+  background: transparent !important;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.3 !important;
+}
+
+/* No verdict yet: Lichess still renders the row, which reads as a hole. */
+main.analyse .practice-box > .comment:empty {
+  display: none !important;
+}
+
+main.analyse .practice-box .verdict::before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px !important;
+  height: 20px;
+  margin-inline-end: 8px !important;
+  border-radius: 6px;
+  font-size: 13px !important;
+  font-weight: 800;
+}
+
+main.analyse .practice-box > .comment .next {
+  border-radius: 8px !important;
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
+  color: var(--ln-ext-white) !important;
+  font-weight: 800;
+}
+
+main.analyse .practice-box > .comment .next:hover {
+  background: var(--ln-ext-btn-primary-hover) !important;
+}
+
+@media (min-width: 1020px) {
+  /* One card with the controls under it: the moves reach over the panel's row gap. */
+  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box'] main.analyse .analyse__tools {
+    margin-bottom: -10px !important;
+    border-radius: 12px 12px 0 0 !important;
   }
 
-  main.analyse .practice-box .feedback .player {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  main.analyse .practice-box .feedback :is(.no-square, .icon) {
-    box-sizing: border-box;
-    flex: 0 0 48px !important;
-    width: 48px !important;
-    height: 48px !important;
-    margin: 0 !important;
-    padding: 4px;
-    border-radius: 12px;
-    background: var(--ln-ext-lift-8);
-  }
-
-  main.analyse .practice-box .feedback .player .no-square > piece.black {
-    border-radius: 8px;
-    background-color: #ffffffd9;
-    box-shadow: 0 0 0 4px #ffffffd9;
-  }
-
-  main.analyse .practice-box .feedback .icon.off {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ln-ext-orange);
-    font-size: 24px;
-    font-weight: 800;
-  }
-
-  main.analyse .practice-box .feedback .instruction strong {
-    display: block;
-    color: var(--ln-ext-text-strong);
-    font-size: 17px;
-    font-weight: 800;
-    line-height: 1.2;
-  }
-
-  main.analyse .practice-box .feedback .instruction em {
-    color: var(--ln-ext-text-dim);
-    font-size: 13.5px;
-    font-style: normal;
-    font-weight: 600;
-  }
-
-  /* The hint is the one action here: an accent pill instead of a bare link. */
-  main.analyse .practice-box .feedback .choices a {
-    display: inline-block;
-    margin-top: 4px;
-    padding: 3px 10px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
-    color: var(--ln-ext-accent-hover) !important;
-    font-size: 12.5px;
-    font-weight: 800;
-  }
-
-  main.analyse .practice-box .feedback .choices a:hover {
-    background: color-mix(in srgb, var(--ln-ext-accent) 28%, transparent);
-    color: var(--ln-ext-text-strong) !important;
-  }
-
-  main.analyse .practice-box > .comment {
-    flex: none !important;
-    align-items: center !important;
-    min-height: 34px;
-    padding: 0 14px 10px !important;
-    background: transparent !important;
-    font-size: 13.5px;
-    font-weight: 700;
-    line-height: 1.3 !important;
-  }
-
-  /* No verdict yet: Lichess still renders the row, which reads as a hole. */
-  main.analyse .practice-box > .comment:empty {
-    display: none !important;
-  }
-
-  main.analyse .practice-box .verdict::before {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px !important;
-    height: 20px;
-    margin-inline-end: 8px !important;
-    border-radius: 6px;
-    font-size: 13px !important;
-    font-weight: 800;
-  }
-
-  main.analyse .practice-box > .comment .next {
-    border-radius: 8px !important;
-    background: var(--ln-ext-btn-primary) !important;
-    box-shadow: var(--ln-ext-btn-primary-shadow) !important;
-    color: var(--ln-ext-white) !important;
-    font-weight: 800;
-  }
-
-  main.analyse .practice-box > .comment .next:hover {
-    background: var(--ln-ext-btn-primary-hover) !important;
-  }
-
-  /* Lichess's controls end the panel, so they get the card's bottom corners. */
   html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box']
     main.analyse
     .analyse__controls {
-    align-self: stretch !important;
-    border-radius: 12px !important;
-  }
-
-  html[data-ln-ext-has~='practice'][data-ln-ext-has~='practice-box'] main.analyse .analyse__tools {
-    border-radius: 12px !important;
+    border-radius: 0 0 12px 12px !important;
   }
 }

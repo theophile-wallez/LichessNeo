@@ -45,6 +45,9 @@ import { evalGauge } from './analysis/eval-gauge.ts';
 import { engineSettings } from './analysis/engine-settings.ts';
 import { puzzle } from './puzzle/index.ts';
 import { learnCoach } from './learn/coach.ts';
+import { practiceAutoNext } from './practice/auto-next.ts';
+import { practiceCoach } from './practice/coach.ts';
+import { practiceSteps } from './practice/steps.ts';
 import { extensionSettings } from './settings/index.ts';
 import { clockBar } from './clock-bar/index.ts';
 import { homeHero } from './pages/home-hero.ts';
@@ -140,6 +143,9 @@ const FEATURES = [
   engineSettings,
   puzzle,
   learnCoach,
+  practiceCoach,
+  practiceSteps,
+  practiceAutoNext,
   extensionSettings,
   homeHero,
   speedCards,
