@@ -39,7 +39,7 @@ describe('drawingMarkup', () => {
     expect(layers(drawn)).toEqual([
       ['ln-ext-drawing__area'],
       ['ln-ext-drawing__cell', 'ln-ext-drawing__cell'],
-      ['ln-ext-drawing__run'],
+      ['ln-ext-drawing__lane'],
       ['ln-ext-drawing__link'],
       ['ln-ext-drawing__barred'],
       ['ln-ext-drawing__ring'],

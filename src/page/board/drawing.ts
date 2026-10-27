@@ -97,7 +97,7 @@ function markMarkup(mark: Mark, whiteAtBottom: boolean, index: number): SafeHtml
   if (mark.kind === 'area') return areaMarkup(mark.from, mark.to, whiteAtBottom);
   const color = TONES[mark.tone];
   if (mark.kind === 'cells') return cellsMarkup(mark.squares, color, whiteAtBottom);
-  if (mark.kind === 'run') return runMarkup(mark, whiteAtBottom, index);
+  if (mark.kind === 'run') return runMarkup(mark, color, whiteAtBottom);
   if (mark.kind === 'link') return linkMarkup(mark, index, whiteAtBottom);
   if (mark.kind === 'barred') return barredMarkup(mark.square, color, whiteAtBottom, index);
   return ringMarkup(mark.square, color, whiteAtBottom);

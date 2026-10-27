@@ -1,16 +1,19 @@
 import { describe, expect, it } from 'vitest';
 import { setHtml } from '#shared/html.ts';
-import { RUN_COLOR, RUN_END_COLOR } from './colors.ts';
+import { PLAN_COLOR } from './colors.ts';
 import type { Mark } from './review-arrows.ts';
 import { runMarkup } from './run.ts';
 
 type Run = Extract<Mark, { readonly kind: 'run' }>;
 
-const svg = (run: Run, whiteAtBottom = true): SVGElement => {
+const lanes = (run: Run, whiteAtBottom = true): Element[] => {
   const element = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  setHtml(element, runMarkup(run, whiteAtBottom, 3));
-  return element;
+  setHtml(element, runMarkup(run, PLAN_COLOR, whiteAtBottom));
+  return [...element.querySelectorAll('.ln-ext-drawing__lane')];
 };
+
+const box = (lane: Element | undefined): (string | null | undefined)[] =>
+  ['x', 'y', 'width', 'height'].map(name => lane?.getAttribute(name));
 
 const ROOK_FILE: Run = {
   kind: 'run',
@@ -21,74 +24,41 @@ const ROOK_FILE: Run = {
 
 const PAWN_ROAD: Run = { kind: 'run', from: 'b6', squares: ['b7', 'b8'], tone: 'plan' };
 
-const stops = (element: SVGElement): [string | null, string | null][] =>
-  [...element.querySelectorAll('stop')].map(stop => [
-    stop.getAttribute('offset'),
-    stop.getAttribute('stop-color'),
-  ]);
-
-const knobs = (element: SVGElement): (string | null)[] =>
-  [...element.querySelectorAll('.ln-ext-drawing__knob')].map(
-    knob => knob.parentElement?.getAttribute('style') ?? null,
-  );
-
-const litTimes = (element: SVGElement): number[] =>
-  [...element.querySelectorAll('.ln-ext-drawing__notch')].map(notch =>
-    Number.parseFloat(notch.getAttribute('style')?.replace('--ln-ext-lit:', '') ?? ''),
-  );
-
 describe('runMarkup', () => {
   it('draws nothing of a run without squares', () => {
-    expect(runMarkup({ ...PAWN_ROAD, squares: [] }, true, 0).value).toBe('');
+    expect(runMarkup({ ...PAWN_ROAD, squares: [] }, PLAN_COLOR, true).value).toBe('');
   });
 
-  it('sends a knob each way from a piece in the middle of its line, to the line’s ends', () => {
-    const drawn = svg(ROOK_FILE);
-    expect(knobs(drawn)).toEqual([
-      '--ln-ext-run:0.220s;--ln-ext-dx:0px;--ln-ext-dy:-1px',
-      '--ln-ext-run:0.360s;--ln-ext-dx:0px;--ln-ext-dy:6px',
-    ]);
-    const rail = drawn.querySelector('.ln-ext-drawing__rail line');
-    expect([rail?.getAttribute('y1'), rail?.getAttribute('y2')]).toEqual(['0.5', '7.5']);
-    expect(drawn.querySelectorAll('.ln-ext-drawing__notch')).toHaveLength(7);
+  it('covers a pawn’s road with one pill, inside the squares’ edges', () => {
+    const [lane, ...rest] = lanes(PAWN_ROAD);
+    expect(rest).toEqual([]);
+    expect(box(lane)).toEqual(['1.1', '0.1', '0.8', '1.8']);
+    expect(lane?.getAttribute('stroke')).toBe(`rgba(${PLAN_COLOR},0.9)`);
   });
 
-  it('shades the whole line with one gradient, blue at the piece and purple at both ends', () => {
-    const drawn = svg(ROOK_FILE);
-    expect(stops(drawn)).toEqual([
-      ['0', `rgb(${RUN_END_COLOR})`],
-      ['0.143', `rgb(${RUN_COLOR})`],
-      ['1', `rgb(${RUN_END_COLOR})`],
-    ]);
-    const paints = [
-      ...[...drawn.querySelectorAll('.ln-ext-drawing__fill')].map(fill =>
-        fill.getAttribute('stroke'),
-      ),
-      ...[...drawn.querySelectorAll('.ln-ext-drawing__notch')].map(notch =>
-        notch.getAttribute('fill'),
-      ),
-    ];
-    expect(new Set(paints)).toEqual(new Set(['url(#ln-ext-drawing-run-3)']));
-  });
-
-  it('keeps the blue at the piece on a line that runs one way only', () => {
-    expect(stops(svg(PAWN_ROAD))).toEqual([
-      ['0', `rgb(${RUN_END_COLOR})`],
-      ['1.000', `rgb(${RUN_COLOR})`],
-      ['1', `rgb(${RUN_COLOR})`],
+  it('draws a pill on each side of a piece in the middle of its line, leaving its square', () => {
+    expect(lanes(ROOK_FILE).map(box)).toEqual([
+      ['1.1', '0.1', '0.8', '0.8'],
+      ['1.1', '2.1', '0.8', '5.8'],
     ]);
   });
 
-  it('lights the notches in turn as the knob reaches them, the last one before it stops', () => {
-    const times = litTimes(svg({ ...ROOK_FILE, squares: ['b6', 'b5', 'b4', 'b3', 'b2', 'b1'] }));
-    expect(times).toEqual(times.toSorted((first, second) => first - second));
-    expect(new Set(times).size).toBe(times.length);
-    expect(times.at(-1)).toBeLessThan(0.36);
+  it('stretches each pill out from the piece', () => {
+    const styles = lanes(ROOK_FILE).map(lane => lane.getAttribute('style'));
+    expect(styles).toEqual([
+      '--ln-ext-origin:50% 100%;--ln-ext-from:1 0;--ln-ext-run:0.240s',
+      '--ln-ext-origin:50% 0%;--ln-ext-from:1 0;--ln-ext-run:0.240s',
+    ]);
+  });
+
+  it('stretches along a rank from the piece’s side', () => {
+    const [lane] = lanes({ kind: 'run', from: 'a1', squares: ['b1', 'c1', 'd1'], tone: 'plan' });
+    expect(lane?.getAttribute('style')).toContain('--ln-ext-origin:0% 50%;--ln-ext-from:0 1');
   });
 
   it('runs the other way on a board seen from Black', () => {
-    expect(knobs(svg(PAWN_ROAD, false))).toEqual([
-      '--ln-ext-run:0.220s;--ln-ext-dx:0px;--ln-ext-dy:2px',
-    ]);
+    const [lane] = lanes(PAWN_ROAD, false);
+    expect(box(lane)).toEqual(['6.1', '6.1', '0.8', '1.8']);
+    expect(lane?.getAttribute('style')).toContain('--ln-ext-origin:50% 0%');
   });
 });
