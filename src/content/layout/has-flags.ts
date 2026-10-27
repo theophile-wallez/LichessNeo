@@ -79,7 +79,13 @@ export function presentFlags(root: ParentNode): string {
 }
 
 export function syncHasFlags(): void {
-  setData(document.documentElement, 'lnExtHas', presentFlags(document));
+  const root = document.documentElement;
+  const flags = presentFlags(document);
+  if (root.dataset['lnExtHas'] === flags) return;
+  setData(root, 'lnExtHas', flags);
+  // The layouts these flags key move the board, which chessground's cached bounds don't follow:
+  // a tap would pick the square beside, until a scroll clears them.
+  document.dispatchEvent(new Event('scroll'));
 }
 
 // The pieces and the clock's digits change all the time and hold none of the

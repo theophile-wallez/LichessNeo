@@ -585,6 +585,10 @@ link to it, and a line here). The rest hold everywhere:
   so `cg-container` sits a few px inside its wrapper:
   `content/layout/board-inset.ts` measures it into `--ln-ext-inset-{t,r,b,l}`.
   Align anything with the squares through those.
+- **Chessground's bounds.** It caches where the board is, and only a scroll or a resize
+  clears them: once our layout moves a board, a click picks the square beside until one
+  does. A change of `data-ln-ext-has` fires a scroll (`content/layout/has-flags.ts`); code
+  that moves a board otherwise does so itself (`content/sidebar/collapse.ts`).
 - **Definite grid rows.** The right panel's rows need known heights: the
   controls' is measured into `--ln-ext-controls-h`, and on the game page the
   voice bar's, the crosstable's and the keyboard-move input's, which stand over

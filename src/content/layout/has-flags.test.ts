@@ -85,6 +85,25 @@ describe('presentFlags, for flags the original lacked', () => {
   });
 });
 
+describe('syncHasFlags', () => {
+  it('has chessground measure the board again when the layout changes, and only then', () => {
+    document.body.innerHTML = '<main class="analyse"></main>';
+    syncHasFlags();
+    const scrolls = vi.fn<() => void>();
+    document.addEventListener('scroll', scrolls);
+    syncHasFlags();
+    expect(scrolls).not.toHaveBeenCalled();
+
+    // The captured pieces' bars come in over a phone's board, moving it down.
+    document
+      .querySelector('main')
+      ?.append(Object.assign(document.createElement('div'), { className: 'ln-ext-captured' }));
+    syncHasFlags();
+    document.removeEventListener('scroll', scrolls);
+    expect(scrolls).toHaveBeenCalledOnce();
+  });
+});
+
 describe('hasFlags', () => {
   it('follows the page before the next frame, but not the board or the clock', async () => {
     const frames: FrameRequestCallback[] = [];
