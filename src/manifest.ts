@@ -99,6 +99,7 @@ export function createManifest(target: Target, version: string): Manifest {
           'img/boards/*',
           'img/coaches/*',
           'img/hugeicons/*',
+          'img/pieces/*',
           'img/sidebar/*',
           'pages/rating-study.html',
         ],

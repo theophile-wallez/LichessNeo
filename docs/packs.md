@@ -2,22 +2,24 @@
 
 The extension shows its own blue board and Lichess's pieces and sounds, until
 you pick others in the user menu's Board, Piece set and Sound panels: the
-**Extension** tab has the extension's own and your packs, the **Lichess** tab
-Lichess's. The extension's own are its blue board, the custom board you color
+**Extension** tab has the extension's own, the **Packs** tab yours, the
+**Lichess** tab Lichess's (the settings' Board & sounds cards keep them apart
+the same way). The extension's own are its blue board, the custom board you color
 and may give a texture, its material boards (a **Wood**, a **Marble** and a
 **Miscellaneous** tile: stone, metal, cloth, paper), its backlit boards (one
 **Backlit** tile, which opens onto the six of them and how they light up),
-its **Ascent** sound set, played live, with where it puts each move's
+its eight piece sets (Mochi, Mellow, Poppy, Bop, Pebble, Loop, Fold and
+Bitty), its **Ascent** sound set, played live, with where it puts each move's
 sound, and its **Boxwood** set, wooden pieces recorded on a board, several
 takes of each sound. A pack replaces any of the three with yours: a folder on GitHub
 holding a `pack.json` and the files it names. A pack may hold several boards,
 piece sets and sound sets: see [Several of each](#several-of-each).
 
 To import one, open the extension's settings (your account's settings, then
-**Lichess Neo**, or **Import** in a panel's Extension tab), paste the
+**Lichess Neo**, or **Import** in a panel's Packs tab), paste the
 link to the pack's folder under **Packs** and press **Import**. Signed out,
-the account's settings are out of reach: the form is in each panel's Extension
-tab of the user menu instead. The extension
+the account's settings are out of reach: the form is in each panel's Packs tab
+of the user menu instead. The extension
 downloads every file once and keeps them in the browser; it asks GitHub for
 nothing after that. An import shows every part the pack has; then each part is
 picked on its own: a pack's pieces with Lichess's board, say. The settings also

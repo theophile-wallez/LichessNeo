@@ -1,0 +1,195 @@
+/* The extension's piece sets (content/packs/piece-sets.ts), from tools/piece-sets. The one named
+ * in `data-ln-ext-pieces` takes the variables Lichess draws its pieces from, on <body> too, where
+ * Lichess sets its own inline once its menu changes the set. Unquoted, as Lichess writes its own:
+ * it reads them back and slices off `url(` and `)` to decode each image before drawing a board. */
+
+:root[data-ln-ext-pieces='mochi'],
+:root[data-ln-ext-pieces='mochi'] body {
+  ---white-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/wK.webp) !important;
+  ---white-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/wQ.webp) !important;
+  ---white-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/wR.webp) !important;
+  ---white-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/wB.webp) !important;
+  ---white-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/wN.webp) !important;
+  ---white-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/wP.webp) !important;
+  ---black-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/bK.webp) !important;
+  ---black-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/bQ.webp) !important;
+  ---black-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/bR.webp) !important;
+  ---black-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/bB.webp) !important;
+  ---black-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/bN.webp) !important;
+  ---black-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/bP.webp) !important;
+}
+
+:root[data-ln-ext-pieces='mellow'],
+:root[data-ln-ext-pieces='mellow'] body {
+  ---white-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/wK.webp) !important;
+  ---white-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/wQ.webp) !important;
+  ---white-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/wR.webp) !important;
+  ---white-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/wB.webp) !important;
+  ---white-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/wN.webp) !important;
+  ---white-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/wP.webp) !important;
+  ---black-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/bK.webp) !important;
+  ---black-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/bQ.webp) !important;
+  ---black-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/bR.webp) !important;
+  ---black-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/bB.webp) !important;
+  ---black-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/bN.webp) !important;
+  ---black-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/bP.webp) !important;
+}
+
+:root[data-ln-ext-pieces='poppy'],
+:root[data-ln-ext-pieces='poppy'] body {
+  ---white-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/wK.webp) !important;
+  ---white-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/wQ.webp) !important;
+  ---white-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/wR.webp) !important;
+  ---white-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/wB.webp) !important;
+  ---white-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/wN.webp) !important;
+  ---white-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/wP.webp) !important;
+  ---black-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/bK.webp) !important;
+  ---black-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/bQ.webp) !important;
+  ---black-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/bR.webp) !important;
+  ---black-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/bB.webp) !important;
+  ---black-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/bN.webp) !important;
+  ---black-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/bP.webp) !important;
+}
+
+:root[data-ln-ext-pieces='bop'],
+:root[data-ln-ext-pieces='bop'] body {
+  ---white-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/wK.webp) !important;
+  ---white-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/wQ.webp) !important;
+  ---white-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/wR.webp) !important;
+  ---white-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/wB.webp) !important;
+  ---white-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/wN.webp) !important;
+  ---white-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/wP.webp) !important;
+  ---black-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/bK.webp) !important;
+  ---black-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/bQ.webp) !important;
+  ---black-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/bR.webp) !important;
+  ---black-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/bB.webp) !important;
+  ---black-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/bN.webp) !important;
+  ---black-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bop/bP.webp) !important;
+}
+
+:root[data-ln-ext-pieces='pebble'],
+:root[data-ln-ext-pieces='pebble'] body {
+  ---white-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/wK.webp) !important;
+  ---white-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/wQ.webp) !important;
+  ---white-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/wR.webp) !important;
+  ---white-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/wB.webp) !important;
+  ---white-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/wN.webp) !important;
+  ---white-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/wP.webp) !important;
+  ---black-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/bK.webp) !important;
+  ---black-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/bQ.webp) !important;
+  ---black-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/bR.webp) !important;
+  ---black-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/bB.webp) !important;
+  ---black-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/bN.webp) !important;
+  ---black-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/bP.webp) !important;
+}
+
+:root[data-ln-ext-pieces='loop'],
+:root[data-ln-ext-pieces='loop'] body {
+  ---white-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/wK.webp) !important;
+  ---white-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/wQ.webp) !important;
+  ---white-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/wR.webp) !important;
+  ---white-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/wB.webp) !important;
+  ---white-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/wN.webp) !important;
+  ---white-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/wP.webp) !important;
+  ---black-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/bK.webp) !important;
+  ---black-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/bQ.webp) !important;
+  ---black-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/bR.webp) !important;
+  ---black-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/bB.webp) !important;
+  ---black-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/bN.webp) !important;
+  ---black-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/bP.webp) !important;
+}
+
+:root[data-ln-ext-pieces='fold'],
+:root[data-ln-ext-pieces='fold'] body {
+  ---white-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/wK.webp) !important;
+  ---white-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/wQ.webp) !important;
+  ---white-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/wR.webp) !important;
+  ---white-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/wB.webp) !important;
+  ---white-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/wN.webp) !important;
+  ---white-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/wP.webp) !important;
+  ---black-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/bK.webp) !important;
+  ---black-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/bQ.webp) !important;
+  ---black-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/bR.webp) !important;
+  ---black-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/bB.webp) !important;
+  ---black-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/bN.webp) !important;
+  ---black-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/bP.webp) !important;
+}
+
+:root[data-ln-ext-pieces='bitty'],
+:root[data-ln-ext-pieces='bitty'] body {
+  ---white-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/wK.webp) !important;
+  ---white-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/wQ.webp) !important;
+  ---white-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/wR.webp) !important;
+  ---white-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/wB.webp) !important;
+  ---white-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/wN.webp) !important;
+  ---white-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/wP.webp) !important;
+  ---black-king: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/bK.webp) !important;
+  ---black-queen: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/bQ.webp) !important;
+  ---black-rook: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/bR.webp) !important;
+  ---black-bishop: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/bB.webp) !important;
+  ---black-knight: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/bN.webp) !important;
+  ---black-pawn: url(chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/bP.webp) !important;
+}
+
+/* The captured pieces' black gets a light edge on the dark page (playerbar.css): ours draw it in
+ * grey, edged dark already, which that edge would wash out. More specific than its rules. */
+html[data-ln-ext-pieces]
+  main
+  .ln-ext-captured__group
+  .ln-ext-pc:is(
+    .ln-ext-pc-bp,
+    .ln-ext-pc-bn,
+    .ln-ext-pc-bb,
+    .ln-ext-pc-br,
+    .ln-ext-pc-bq,
+    .ln-ext-pc-bk
+  ) {
+  filter: none !important;
+}
+
+html[data-ln-ext-pieces][data-ln-ext-black-pieces]
+  main
+  .ln-ext-captured__group
+  .ln-ext-pc:is(
+    .ln-ext-pc-bp,
+    .ln-ext-pc-bn,
+    .ln-ext-pc-bb,
+    .ln-ext-pc-br,
+    .ln-ext-pc-bq,
+    .ln-ext-pc-bk
+  ) {
+  filter: url('#ln-ext-black-pieces') !important;
+}
+
+/* Each set's tile in the pickers shows its white knight (dasher-pickers.css, settings-board-tiles.css). */
+.ln-ext-src-thumb[data-ln-ext-theme='mochi'] {
+  --ln-ext-piece-thumb: url('chrome-extension://__MSG_@@extension_id__/img/pieces/mochi/wN.webp');
+}
+
+.ln-ext-src-thumb[data-ln-ext-theme='mellow'] {
+  --ln-ext-piece-thumb: url('chrome-extension://__MSG_@@extension_id__/img/pieces/mellow/wN.webp');
+}
+
+.ln-ext-src-thumb[data-ln-ext-theme='poppy'] {
+  --ln-ext-piece-thumb: url('chrome-extension://__MSG_@@extension_id__/img/pieces/poppy/wN.webp');
+}
+
+.ln-ext-src-thumb[data-ln-ext-theme='bop'] {
+  --ln-ext-piece-thumb: url('chrome-extension://__MSG_@@extension_id__/img/pieces/bop/wN.webp');
+}
+
+.ln-ext-src-thumb[data-ln-ext-theme='pebble'] {
+  --ln-ext-piece-thumb: url('chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/wN.webp');
+}
+
+.ln-ext-src-thumb[data-ln-ext-theme='loop'] {
+  --ln-ext-piece-thumb: url('chrome-extension://__MSG_@@extension_id__/img/pieces/loop/wN.webp');
+}
+
+.ln-ext-src-thumb[data-ln-ext-theme='fold'] {
+  --ln-ext-piece-thumb: url('chrome-extension://__MSG_@@extension_id__/img/pieces/fold/wN.webp');
+}
+
+.ln-ext-src-thumb[data-ln-ext-theme='bitty'] {
+  --ln-ext-piece-thumb: url('chrome-extension://__MSG_@@extension_id__/img/pieces/bitty/wN.webp');
+}

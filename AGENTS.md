@@ -268,7 +268,8 @@ hold:
 - `src/styles/`: one stylesheet per page or part, a folder of partials past
   400 lines, joined in `index.css`'s order.
 - `public/`: copied into each build: `_locales/`, `icons/`, `img/` (`icons`,
-  `hugeicons`, `sidebar`, `coaches`, `boards`: the board textures), `pages/`
+  `hugeicons`, `sidebar`, `coaches`, `boards`: the board textures, `pieces`:
+  our piece sets), `pages/`
   (the frame of the rating study),
   `sounds/boxwood` (the Boxwood set's takes), beside the bundled packages'
   licenses (`scripts/lib/licenses.ts`).
@@ -325,9 +326,12 @@ What each feature folder holds is listed in
   (see the product rules). Icons are Hugeicons (see "An icon"); the sidebar's
   are our own drawings, 96px WebP in `img/sidebar`. The build fails on a CSS
   extension URL whose file is missing or not in `web_accessible_resources`.
-  Boards and piece sets aren't bundled: they're Lichess's, or a pack's
-  (`docs/packs.md`), but for our two-tone boards' textures (see "A board
-  texture"); nor are sounds, but for our two sets, Ascent
+  Boards aren't bundled: they're Lichess's, or a pack's (`docs/packs.md`),
+  but for our two-tone boards' textures (see "A board texture"). Our piece
+  sets are, drawn for the project: 384px WebP in `img/pieces/<set>`, from
+  its PNGs by `tools/piece-sets/convert.py`, each a line in `PIECE_SETS`
+  (`content/packs/piece-sets.ts`) and a rule in
+  `styles/board/piece-sets.css`. Nor are sounds, but for our two sets, Ascent
   (synthesized) and Boxwood (recorded, `public/sounds/boxwood`, cut by
   `tools/boxwood-sounds/cut.py`; the build fails unless its takes are the ones
   `RECORDED_TAKES` counts). A new sound a pack may have goes in

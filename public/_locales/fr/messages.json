@@ -50,6 +50,9 @@
   "looksOurs": {
     "message": "Lichess Neo"
   },
+  "looksPacks": {
+    "message": "Vos packs"
+  },
   "looksClassic": {
     "message": "Classiques"
   },
@@ -70,9 +73,6 @@
   },
   "looksLichess": {
     "message": "Lichess"
-  },
-  "looksNoPieces": {
-    "message": "Pas encore de jeu de pièces de l’extension : importez le vôtre depuis un pack dans"
   },
   "looksLichessFailed": {
     "message": "La liste de Lichess n’a pas pu être chargée."

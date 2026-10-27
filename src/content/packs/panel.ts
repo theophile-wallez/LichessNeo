@@ -1,33 +1,38 @@
 import { createElement, queryAll, setData } from '#shared/dom.ts';
-import { LICHESS, type Library } from './library.ts';
+import { isPackId, LICHESS, type Library } from './library.ts';
 import type { PartKind } from '#shared/packs/pack.ts';
-import { choiceSection } from './choices.ts';
+import { choiceSection, importedSection } from './choices.ts';
 import { markFamilies } from './family.ts';
 import { showOptionRows } from './option-row.ts';
 import { FOOT_ROWS } from './options.ts';
 
-// The Extension / Lichess tabs added to the user menu's Board, Piece set and
-// Sound panels (styles/sidebar/dasher-pickers.css).
+// The Extension / Packs / Lichess tabs added to the user menu's Board, Piece
+// set and Sound panels (styles/sidebar/dasher-pickers.css): the extension's
+// own looks, the packs the user imported, and Lichess's, each apart.
 
-export type View = 'extension' | typeof LICHESS;
+export type View = 'extension' | 'packs' | typeof LICHESS;
 
 const TABS: readonly (readonly [View, string])[] = [
   ['extension', 'Extension'],
+  ['packs', 'Packs'],
   [LICHESS, 'Lichess'],
 ];
 
-export const viewOf = (pick: string): View => (pick === LICHESS ? LICHESS : 'extension');
+export function viewOf(pick: string): View {
+  if (pick === LICHESS) return LICHESS;
+  return isPackId(pick) ? 'packs' : 'extension';
+}
 
 /** Lichess's panel for a part: `.sub.board`, `.sub.piece`, `.sub.sound`. */
 export const panelSelector = (kind: PartKind): string => `#dasher_app .sub.${kind}`;
 
 /**
- * Rings the current pick, in its own tab only: while the extension's is on,
- * Lichess's current board isn't the one the page shows.
+ * Rings the current pick, in its own tab only: while the extension's or a
+ * pack's is on, Lichess's current board isn't the one the page shows.
  */
 export function markPanel(panel: HTMLElement, kind: PartKind, library: Library): void {
   const current = library.current(kind);
-  setData(panel, 'lnExtSrcOn', viewOf(current));
+  setData(panel, 'lnExtSrcOn', current === LICHESS ? LICHESS : 'extension');
   for (const item of queryAll(panel, '.ln-ext-src-item[data-ln-ext-choice]', HTMLElement))
     item.classList.toggle('active', item.dataset.lnExtChoice === current);
   markFamilies(panel, kind, current);
@@ -61,16 +66,16 @@ export interface DressOptions {
 }
 
 /**
- * Puts the tabs after the panel's title and the extension's choices after
- * them, or, in the Sound panel, beside the volume slider, and the rows of both
- * tabs at the foot. Snabbdom leaves alone the nodes it
- * didn't create, so ours can sit among Lichess's.
+ * Puts the tabs after the panel's title and the extension's choices and the
+ * packs after them, or, in the Sound panel, beside the volume slider, and the
+ * rows of every tab at the foot. Snabbdom leaves alone the nodes it didn't
+ * create, so ours can sit among Lichess's.
  */
 export function dressPanel(panel: HTMLElement, options: DressOptions): void {
   const { kind, library, view } = options;
   for (const ours of queryAll(
     panel,
-    '.ln-ext-src-tabs, .ln-ext-src-choices, .ln-ext-src-foot',
+    '.ln-ext-src-tabs, .ln-ext-src-choices, .ln-ext-src-packs, .ln-ext-src-foot',
     HTMLElement,
   ))
     ours.remove();
@@ -79,10 +84,10 @@ export function dressPanel(panel: HTMLElement, options: DressOptions): void {
     showView(panel, next);
   });
   panel.querySelector(':scope > .head')?.after(tabs);
-  const section = choiceSection(kind, library);
+  const sections = [choiceSection(kind, library), importedSection(kind, library)];
   const content = kind === 'sound' ? panel.querySelector(':scope > .content') : null;
-  if (content) content.append(section);
-  else tabs.after(section);
+  if (content) content.append(...sections);
+  else tabs.after(...sections);
   const foot = FOOT_ROWS[kind];
   if (foot.length > 0) {
     const rows = createElement('div', { className: 'ln-ext-src-foot' });

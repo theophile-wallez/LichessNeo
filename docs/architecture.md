@@ -223,9 +223,10 @@ two-tone boards in each color theme's accent and those the user saved,
 `flat-boards.ts` and `saved-boards.ts`, the one they color, `custom-board.ts`,
 the material boards, in three families (the woods, the marbles, the rest), and
 the backlit ones, each family listed under one tile, `materials.ts` and
-`family.ts`, and the Ascent and Boxwood sound sets), a
+`family.ts`, its piece sets, `piece-sets.ts`, and the Ascent and Boxwood sound
+sets), a
 pack the user imported from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
-menu's own panels, under an Extension and a Lichess tab (`dasher.ts`,
+menu's own panels, under an Extension, a Packs and a Lichess tab (`dasher.ts`,
 `panel.ts`, `choices.ts`); packs are imported and removed in the extension's
 settings (`import-section.ts`, `import-form.ts`), or, signed out, in the
 panels themselves, all in `src/content/packs/`:
@@ -249,6 +250,8 @@ panels themselves, all in `src/content/packs/`:
 - `apply.ts` names the board in `data-ln-ext-board` (a theme's id, `pack`, or
   none for Lichess's) and writes one stylesheet: a pack's pieces override the
   variables Lichess draws its own from, its board comes as `--ln-ext-board-img`.
+  A piece set of ours is named in `data-ln-ext-pieces`, and
+  `styles/board/piece-sets.css` puts its bundled images in those variables.
   The sounds go to the page world as bytes
   (`ln-ext:sounds`), where `src/page/sounds` puts them in Lichess's player. With
   no pack, Lichess's player is left alone.

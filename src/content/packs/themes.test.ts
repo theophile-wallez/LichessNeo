@@ -63,13 +63,22 @@ describe('the extension’s themes', () => {
     expect(isTheme('board', 'blue')).toBe(false);
   });
 
-  it('give the sounds the Ascent and Boxwood sets, and the pieces nothing yet', async () => {
+  it('give the sounds the Ascent and Boxwood sets, and the pieces the extension’s own', async () => {
     const { isTheme, themesOf } = await load();
     expect(themesOf('sound')).toEqual([
       { id: 'foley', name: 'Ascent' },
       { id: 'boxwood', name: 'Boxwood' },
     ]);
-    expect(themesOf('piece')).toEqual([]);
+    expect(themesOf('piece').map(theme => theme.id)).toEqual([
+      'mochi',
+      'mellow',
+      'poppy',
+      'bop',
+      'pebble',
+      'loop',
+      'fold',
+      'bitty',
+    ]);
     expect(isTheme('sound', 'accent')).toBe(false);
   });
 });

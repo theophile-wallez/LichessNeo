@@ -5,13 +5,15 @@ import { PIECE_NAMES, pieceVariable, type Pack } from '#shared/packs/pack.ts';
 import { dataUrlBytes } from '#shared/packs/sniff.ts';
 import { flatBoard, showFlatBoard } from './flat-boards.ts';
 import type { Look } from './library.ts';
+import { isPieceSet } from './piece-sets.ts';
 
 // Puts the picked looks on the page. A pack's images go in a stylesheet of
 // ours, as data: URLs too long for <html>'s style attribute, which other
 // features rewrite. Pieces override the variables Lichess draws its own from;
 // the board is named in `data-ln-ext-board` for styles/board/pieces.css: a theme
 // of ours ('flat' for a two-tone board in set colors, beside them), a pack's, or
-// none for Lichess's.
+// none for Lichess's. A piece set of ours is named in `data-ln-ext-pieces`, for
+// styles/board/piece-sets.css.
 
 const STYLE_ID = 'ln-ext-packs';
 
@@ -74,6 +76,12 @@ function packStyle(): HTMLStyleElement {
 
 export function showLooks(shown: Shown): void {
   setData(document.documentElement, 'lnExtBoard', boardName(shown.board));
+  const { pieces } = shown;
+  setData(
+    document.documentElement,
+    'lnExtPieces',
+    typeof pieces === 'string' && isPieceSet(pieces) ? pieces : null,
+  );
   showFlatBoard(typeof shown.board === 'string' ? flatBoard(shown.board) : undefined);
   const text = packRules(shown);
   const style = document.getElementById(STYLE_ID) ?? (text === '' ? null : packStyle());

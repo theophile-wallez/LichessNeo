@@ -29,8 +29,8 @@
   box-shadow: 0 0 0 3px var(--ln-ext-accent);
 }
 
-/* With the extension's on, Lichess's current board, set or sounds aren't what the page shows:
- * no ring. */
+/* With the extension's or a pack's on, Lichess's current board, set or sounds aren't what the
+ * page shows: no ring. */
 #top #dasher_app .sub[data-ln-ext-src-on='extension'] :is(.list, .selector) > button.active {
   background: none !important;
   box-shadow: none;
@@ -45,7 +45,7 @@
   background: var(--ln-ext-menu-hover) !important;
 }
 
-/* The Extension / Lichess tabs (content/packs/panel.ts), whose pill slides
+/* The Extension / Packs / Lichess tabs (content/packs/panel.ts), whose pill slides
  * (content/ui/tab-bars.ts). */
 #dasher_app .ln-ext-src-tabs {
   --ln-ext-tab-bg: var(--ln-ext-bg-raised-hover);
@@ -98,13 +98,17 @@
 
 #top
   #dasher_app
-  .sub:not(.sound)[data-ln-ext-view='extension']
-  > :not(.head, .ln-ext-src-tabs, .ln-ext-src-choices, .ln-ext-src-foot),
-#top #dasher_app .sub.sound[data-ln-ext-view='extension'] .selector {
+  .sub:not(.sound):is([data-ln-ext-view='extension'], [data-ln-ext-view='packs'])
+  > :not(.head, .ln-ext-src-tabs, .ln-ext-src-choices, .ln-ext-src-packs, .ln-ext-src-foot),
+#top
+  #dasher_app
+  .sub.sound:is([data-ln-ext-view='extension'], [data-ln-ext-view='packs'])
+  .selector {
   display: none !important;
 }
 
-#dasher_app .sub[data-ln-ext-view='lichess'] .ln-ext-src-choices {
+#dasher_app .sub:not([data-ln-ext-view='extension']) .ln-ext-src-choices,
+#dasher_app .sub:not([data-ln-ext-view='packs']) .ln-ext-src-packs {
   display: none;
 }
 
@@ -119,7 +123,7 @@ html[data-ln-ext-board]
 }
 
 /* The Sound panel's choices sit beside its volume slider. */
-#dasher_app .sub.sound .ln-ext-src-choices {
+#dasher_app .sub.sound :is(.ln-ext-src-choices, .ln-ext-src-packs) {
   flex: 1;
   min-width: 0;
 }
@@ -226,7 +230,7 @@ html[data-ln-ext-board]
 
 /* Signed out, the import form itself (pages/settings-packs.css), the link
  * over its button: the Sound panel leaves it little room beside the slider. */
-#dasher_app .ln-ext-src-choices > .ln-ext-packs__import {
+#dasher_app .ln-ext-src-packs > .ln-ext-packs__import {
   margin: 10px 2px 4px;
 }
 
@@ -308,7 +312,7 @@ html[data-ln-ext-board]
   width: 100%;
   height: 100%;
   border-radius: 0;
-  background: center / contain no-repeat;
+  background: var(--ln-ext-piece-thumb, none) center / contain no-repeat;
 }
 /* Drop the light marble backdrop behind Lichess's piece grid. */
 #top #dasher_app .piece .list {

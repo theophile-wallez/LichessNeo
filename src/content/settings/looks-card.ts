@@ -14,15 +14,15 @@ import { FOOT_ROWS, OPTION_ROWS } from '#content/packs/options.ts';
 import { showOptionRows } from '#content/packs/option-row.ts';
 import { deleteBoard, savedBoards } from '#content/packs/saved-boards.ts';
 import { ACCENT_BOARD, familyOf } from '#content/packs/themes.ts';
-import { PACKS_HASH } from './address.ts';
 import { lichessCurrent, type LichessLook } from './lichess-looks.ts';
 import { familySections, listedThemes } from './looks-families.ts';
 import { previewOnHover } from './looks-hover.ts';
 
 // A card of the settings' Board & sounds page (styles/pages/settings-looks.css):
-// the extension's looks for one part, its themes and the packs that have it,
-// with their settings (the boards' in sections, looks-families.ts), over
-// Lichess's own, then what holds for both (the black pieces' color). The part
+// the extension's looks for one part, its themes with their settings (the
+// boards' in sections, looks-families.ts), then the imported packs that have
+// it, each section apart, over Lichess's own, then what holds for all (the
+// black pieces' color). The part
 // shows one of them; Lichess's is ringed only while the extension leaves the
 // part to it, as in the user menu.
 
@@ -111,9 +111,8 @@ function themeTiles(kind: PartKind): HTMLElement[] {
   });
 }
 
-function oursMarkup(kind: PartKind, library: Library): HTMLElement[] {
-  const themes = themeTiles(kind);
-  const packs = library
+const packTiles = (kind: PartKind, library: Library): HTMLElement[] =>
+  library
     .packs()
     .filter(pack => hasPart(pack, kind))
     .map(pack =>
@@ -123,19 +122,6 @@ function oursMarkup(kind: PartKind, library: Library): HTMLElement[] {
         'data-ln-ext-choice',
       ),
     );
-  if (themes.length + packs.length > 0) return [...themes, ...packs];
-  const note = createElement('p', { className: 'ln-ext-looks__empty' });
-  note.append(
-    message('looksNoPieces'),
-    ' ',
-    createElement('a', {
-      text: message('packsTitle'),
-      attrs: { href: PACKS_HASH },
-    }),
-    '.',
-  );
-  return [note];
-}
 
 export interface LooksCard {
   readonly element: HTMLElement;
@@ -209,6 +195,8 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
   const card = createElement('section', { className: 'ln-ext-looks' });
   setData(card, 'lnExtPart', kind);
   const ours = createElement('div', { className: 'ln-ext-looks__grid' });
+  const packsLabel = label(message('looksPacks'));
+  const packs = createElement('div', { className: 'ln-ext-looks__grid' });
   const lichess = createElement('div', { className: 'ln-ext-looks__grid' });
   card.append(
     cardHead(kind),
@@ -218,6 +206,8 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
     ),
     ours,
     ...OPTION_ROWS[kind].map(row => row(library)),
+    packsLabel,
+    packs,
     label(message('looksLichess')),
     lichess,
     ...FOOT_ROWS[kind].map(row => row()),
@@ -228,7 +218,11 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
     if (library.packs() !== listedPacks || savedBoards() !== listedBoards) {
       listedPacks = library.packs();
       listedBoards = savedBoards();
-      ours.replaceChildren(...oursMarkup(kind, library));
+      ours.replaceChildren(...themeTiles(kind));
+      packs.replaceChildren(...packTiles(kind, library));
+      // The packs' section shows once the part has one.
+      packsLabel.hidden = packs.childElementCount === 0;
+      packs.hidden = packsLabel.hidden;
     }
     markCard(card, kind, library);
     paintTiles(card);

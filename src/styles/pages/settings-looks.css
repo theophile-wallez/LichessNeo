@@ -73,6 +73,10 @@
   transform: rotate(-6deg) scale(1.08);
 }
 
+.ln-ext-looks > [hidden] {
+  display: none !important;
+}
+
 .ln-ext-looks__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
@@ -117,11 +121,6 @@
   margin: 0;
   color: var(--ln-ext-text-dim);
   font-size: 13.5px;
-}
-
-.ln-ext-looks__empty a {
-  color: var(--ln-ext-accent);
-  font-weight: 700;
 }
 
 /* ---- The preview: its board, drawn in the page world (page/looks/preview.ts) --- */

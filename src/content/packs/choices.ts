@@ -9,10 +9,10 @@ import { showSquares } from './flat-boards.ts';
 import { FAMILIES, familyOf, themesOf, type Theme } from './themes.ts';
 
 // The Extension tab of a panel: the extension's themes for its part, a
-// family's under its one tile (family.ts), then the imported packs that have
-// it, and the themes' settings. Packs are imported and removed in the
-// extension's settings, which a link at the foot leads to; signed out, they're
-// imported right there.
+// family's under its one tile (family.ts), and the themes' settings; and its
+// Packs tab: the imported packs that have the part. Packs are imported and
+// removed in the extension's settings, which a link under them leads to;
+// signed out, they're imported right there.
 
 const NOUNS: Readonly<Record<PartKind, string>> = {
   board: 'board',
@@ -73,29 +73,39 @@ function themeItems(kind: PartKind, library: Library): HTMLElement[] {
   });
 }
 
-/** The part's themes and packs, and a line if there are none or the packs can't be read. */
-function choiceListing(kind: PartKind, library: Library): HTMLElement {
+function themeListing(kind: PartKind, library: Library): HTMLElement {
+  const listing = createElement('div', { className: 'ln-ext-src-listing' });
+  const list = createElement('div', { className: 'ln-ext-src-list' });
+  list.append(...themeItems(kind, library));
+  listing.append(list);
+  return listing;
+}
+
+/** The imported packs that have the part, or a line if there are none or they can't be read. */
+function packListing(kind: PartKind, library: Library): HTMLElement {
   const listing = createElement('div', { className: 'ln-ext-src-listing' });
   const packs = library.packs().filter(pack => hasPart(pack, kind));
-  const items = [...themeItems(kind, library), ...packs.map(pack => packItem(kind, pack, library))];
-  if (items.length > 0) {
+  if (packs.length > 0) {
     const list = createElement('div', { className: 'ln-ext-src-list' });
-    list.append(...items);
+    list.append(...packs.map(pack => packItem(kind, pack, library)));
     listing.append(list);
   }
   const note = library.unreadable()
     ? 'The imported packs could not be read.'
-    : `No ${NOUNS[kind]} of the extension yet: import your own from GitHub.`;
-  if (library.unreadable() || items.length === 0)
+    : `No ${NOUNS[kind]} imported yet: bring your own from GitHub.`;
+  if (library.unreadable() || packs.length === 0)
     listing.append(createElement('p', { className: 'ln-ext-src-empty', text: note }));
   return listing;
 }
 
-/** Draws the panel's choices again, as packs are read, imported or removed. */
+/** Draws the panel's lists again, as packs are read, imported or removed, and boards saved. */
 export function refreshListing(panel: HTMLElement, kind: PartKind, library: Library): void {
   panel
     .querySelector('.ln-ext-src-choices > .ln-ext-src-listing')
-    ?.replaceWith(choiceListing(kind, library));
+    ?.replaceWith(themeListing(kind, library));
+  panel
+    .querySelector('.ln-ext-src-packs > .ln-ext-src-listing')
+    ?.replaceWith(packListing(kind, library));
 }
 
 // Signed out, the account pages, and the settings with them, are out of
@@ -121,9 +131,15 @@ export function choiceSection(kind: PartKind, library: Library): HTMLElement {
         )
       : null;
   }).filter(view => view !== null);
-  section.append(choiceListing(kind, library), ...families);
+  section.append(themeListing(kind, library), ...families);
   section.append(...OPTION_ROWS[kind].map(row => row(library)));
-  section.append(importFoot(kind, library));
   openFamily(section, familyOf(kind, library.current(kind)));
+  return section;
+}
+
+/** The Packs tab's content: the imported packs that have the part, and how to import one. */
+export function importedSection(kind: PartKind, library: Library): HTMLElement {
+  const section = createElement('div', { className: 'ln-ext-src-packs' });
+  section.append(packListing(kind, library), importFoot(kind, library));
   return section;
 }

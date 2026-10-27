@@ -5,13 +5,15 @@ import { SYNTH_SET } from '#shared/sounds.ts';
 import type { CustomBoard } from './custom-board.ts';
 import { type FlatBoard, PRESET_BOARDS } from './flat-boards.ts';
 import { MATERIAL_BOARDS, MATERIAL_FAMILIES } from './materials.ts';
+import { PIECE_SETS } from './piece-sets.ts';
 import { savedBoards } from './saved-boards.ts';
 
 // The extension's own looks for each part: its boards, drawn by its CSS from
 // `data-ln-ext-board` on <html> (styles/board/), the material ones textured
-// (materials.ts), the backlit ones lit up in the page (page/backlit), and its sound sets: Ascent, synthesized in the page
-// (page/sounds/synth), and Boxwood, recorded (#shared/recorded-sounds.ts). A part's pick is one of these,
-// an imported pack or Lichess's own.
+// (materials.ts), the backlit ones lit up in the page (page/backlit); its piece
+// sets (piece-sets.ts); and its sound sets: Ascent, synthesized in the page
+// (page/sounds/synth), and Boxwood, recorded (#shared/recorded-sounds.ts). A
+// part's pick is one of these, an imported pack or Lichess's own.
 
 export interface Theme {
   readonly id: string;
@@ -49,7 +51,7 @@ const READY_BOARDS: readonly Theme[] = [
 ];
 
 const THEMES: Readonly<Record<Exclude<PartKind, 'board'>, readonly Theme[]>> = {
-  piece: [],
+  piece: PIECE_SETS,
   sound: [
     { id: SYNTH_SET, name: 'Ascent' },
     { id: RECORDED_SET, name: 'Boxwood' },

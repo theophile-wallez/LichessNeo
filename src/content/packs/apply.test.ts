@@ -4,6 +4,7 @@ import { fakePack, IMAGE, SOUND } from '#shared/testing/packs.ts';
 import { deleteBoard, saveBoard } from './saved-boards.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
+const named = (): string | undefined => document.documentElement.dataset.lnExtPieces;
 const style = (): HTMLStyleElement | null => document.querySelector('style#ln-ext-packs');
 const flatColors = (): string[] =>
   ['--ln-ext-board-flat-light', '--ln-ext-board-flat-dark'].map(name =>
@@ -13,6 +14,7 @@ const flatColors = (): string[] =>
 afterEach(() => {
   style()?.remove();
   delete document.documentElement.dataset.lnExtBoard;
+  delete document.documentElement.dataset.lnExtPieces;
   delete document.documentElement.dataset.lnExtLoading;
   document.documentElement.removeAttribute('style');
   localStorage.clear();
@@ -93,6 +95,22 @@ describe('showLooks', () => {
     expect(flatColors()).toEqual(['', '']);
     showLooks({ board: WOOD, pieces: null });
     expect(flatColors()).toEqual(['', '']);
+  });
+});
+
+describe('showLooks’s pieces', () => {
+  it('names a piece set of ours on <html>, and none for a pack’s, Lichess’s or an unknown one', () => {
+    showLooks({ board: null, pieces: 'mochi' });
+    expect(named()).toBe('mochi');
+    // Drawn by styles/board/piece-sets.css alone: no rule of ours.
+    expect(style()).toBeNull();
+    showLooks({ board: null, pieces: WOOD });
+    expect(named()).toBeUndefined();
+    showLooks({ board: null, pieces: 'bitty' });
+    showLooks({ board: null, pieces: null });
+    expect(named()).toBeUndefined();
+    showLooks({ board: null, pieces: 'neo' });
+    expect(named()).toBeUndefined();
   });
 });
 

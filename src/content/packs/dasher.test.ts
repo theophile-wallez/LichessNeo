@@ -88,7 +88,7 @@ afterEach(() => {
 });
 
 describe('the user menu’s panels', () => {
-  it('get an Extension and a Lichess tab, open on what the page shows', async () => {
+  it('get an Extension, a Packs and a Lichess tab, open on what the page shows', async () => {
     localStorage.setItem('ln-ext-pieces', WOOD.id);
     localStorage.setItem('ln-ext-sounds', LICHESS);
     await start([WOOD, CLICKS]);
@@ -96,7 +96,7 @@ describe('the user menu’s panels', () => {
     await flush();
     expect(
       queryAll(board, '.ln-ext-src-tabs button', HTMLElement).map(button => button.textContent),
-    ).toEqual(['Extension', 'Lichess']);
+    ).toEqual(['Extension', 'Packs', 'Lichess']);
     // Our boards, then only the packs with a board, named in their tooltip only.
     expect(board.dataset.lnExtView).toBe('extension');
     expect(names(board)).toEqual([...BOARDS, 'Pack ann/packs/main/wood/']);
@@ -106,7 +106,7 @@ describe('the user menu’s panels', () => {
     );
     const piece = openPanel('piece');
     await flush();
-    expect(piece.dataset.lnExtView).toBe('extension');
+    expect(piece.dataset.lnExtView).toBe('packs');
     expect(piece.dataset.lnExtSrcOn).toBe('extension');
     expect(queryOne(piece, '.ln-ext-src-item.active', HTMLElement)?.dataset.lnExtChoice).toBe(
       WOOD.id,
@@ -114,6 +114,35 @@ describe('the user menu’s panels', () => {
     const sound = openPanel('sound');
     await flush();
     expect(sound.dataset.lnExtView).toBe(LICHESS);
+  });
+
+  it('keep the imported packs in a Packs tab, apart from the extension’s own', async () => {
+    const library = await start([WOOD]);
+    const panel = openPanel('board');
+    await flush();
+    const choices = (section: string): (string | undefined)[] =>
+      queryAll(panel, `${section} .ln-ext-src-listing .ln-ext-src-item`, HTMLElement).map(
+        item => item.dataset.lnExtChoice,
+      );
+    expect(choices('.ln-ext-src-choices')).not.toContain(WOOD.id);
+    expect(choices('.ln-ext-src-packs')).toEqual([WOOD.id]);
+    expect(panel.querySelector('.ln-ext-src-packs > .ln-ext-src-import-link')).not.toBeNull();
+    expect(panel.querySelector('.ln-ext-src-choices .ln-ext-src-import-link')).toBeNull();
+    tab(panel, 'packs')?.click();
+    expect(panel.dataset.lnExtView).toBe('packs');
+    queryOne(panel, `.ln-ext-src-packs [data-ln-ext-choice="${WOOD.id}"]`, HTMLElement)?.click();
+    expect(library.current('board')).toBe(WOOD.id);
+    expect(panel.dataset.lnExtSrcOn).toBe('extension');
+  });
+
+  it('say so in the Packs tab when no pack has the part', async () => {
+    await start([CLICKS]);
+    const panel = openPanel('piece');
+    await flush();
+    expect(queryAll(panel, '.ln-ext-src-packs .ln-ext-src-item', HTMLElement)).toEqual([]);
+    expect(panel.querySelector('.ln-ext-src-packs .ln-ext-src-empty')?.textContent).toBe(
+      'No piece set imported yet: bring your own from GitHub.',
+    );
   });
 
   it('pick a theme or a pack, and hand the part back to Lichess from its own list', async () => {

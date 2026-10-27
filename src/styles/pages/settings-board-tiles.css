@@ -72,10 +72,13 @@
   transition-duration: 0.08s !important;
 }
 
+/* A pack's white knight is an <img>; a set of ours is drawn from its id (board/piece-sets.css). */
 .ln-ext-looks[data-ln-ext-part='piece'] .ln-ext-src-thumb {
   width: 58px;
   height: 58px;
   aspect-ratio: auto;
+  border-radius: 0;
+  background: var(--ln-ext-piece-thumb, none) center / contain no-repeat;
   object-fit: contain;
   box-shadow: none;
 }

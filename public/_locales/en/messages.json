@@ -65,7 +65,11 @@
   },
   "looksOurs": {
     "message": "Lichess Neo",
-    "description": "Over the extension's own boards, pieces or sounds, and the imported packs'."
+    "description": "Over the extension's own boards, pieces or sounds."
+  },
+  "looksPacks": {
+    "message": "Your packs",
+    "description": "Over the boards, pieces or sounds of the packs the user imported."
   },
   "looksClassic": {
     "message": "Classic",
@@ -90,10 +94,6 @@
   "looksLichess": {
     "message": "Lichess",
     "description": "Over Lichess's own boards, pieces or sounds."
-  },
-  "looksNoPieces": {
-    "message": "No piece set of the extension yet: import your own from a pack in",
-    "description": "The pieces card, with no pack of pieces; a link to the Packs card, at the page's foot, follows."
   },
   "looksLichessFailed": {
     "message": "Lichess's list could not be loaded.",

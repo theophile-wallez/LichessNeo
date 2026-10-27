@@ -4,6 +4,7 @@ import type { Pack, PartKind } from '#shared/packs/pack.ts';
 import { fakePack } from '#shared/testing/packs.ts';
 import { createLibrary, LICHESS, type Library, type Shown } from '#content/packs/library.ts';
 import { saveBoard, savedBoards } from '#content/packs/saved-boards.ts';
+import { PIECE_SETS } from '#content/packs/piece-sets.ts';
 import { buildLooksCard, type LooksCard } from './looks-card.ts';
 
 const WOOD = fakePack('ann/packs/main/wood/');
@@ -38,6 +39,9 @@ const ringed = (root: HTMLElement): (string | undefined)[] =>
   queryAll(root, '.ln-ext-src-item.active', HTMLElement).map(
     item => item.dataset.lnExtChoice ?? item.dataset.lnExtLichess,
   );
+
+const choices = (grid: HTMLElement | undefined): (string | undefined)[] =>
+  grid ? queryAll(grid, '.ln-ext-src-item', HTMLElement).map(item => item.dataset.lnExtChoice) : [];
 
 function click(root: HTMLElement, selector: string): void {
   const item = queryOne(root, selector, HTMLElement);
@@ -96,17 +100,27 @@ describe('a Board & sounds card', () => {
     );
   });
 
-  it('lists the packs that have the part, or leads to the packs’ page', async () => {
+  it('lists the packs that have the part under their own heading, apart from ours', async () => {
     const pieces = await card('piece', [WOOD, CLICKS]);
+    // The extension's sets, the packs', then Lichess's.
+    const [ours, packs] = queryAll(pieces.looks.element, '.ln-ext-looks__grid', HTMLElement);
+    expect(choices(ours)).toEqual(PIECE_SETS.map(set => set.id));
+    expect(choices(packs)).toEqual([WOOD.id]);
+    expect(packs?.hidden).toBe(false);
+    expect(packs?.previousElementSibling?.textContent).toBe('looksPacks');
     expect(
       queryAll(pieces.looks.element, 'img.ln-ext-src-thumb', HTMLImageElement).map(image =>
         image.getAttribute('src'),
       ),
     ).toEqual([WOOD.pieces?.wN]);
-    document.body.innerHTML = '';
-    const none = await card('piece');
-    const empty = queryOne(none.looks.element, '.ln-ext-looks__empty a', HTMLElement);
-    expect(empty?.getAttribute('href')).toBe('#ln-ext-extension/packs');
+  });
+
+  it('leaves the packs’ heading out while no pack has the part', async () => {
+    const pieces = await card('piece', [CLICKS]);
+    const [, packs] = queryAll(pieces.looks.element, '.ln-ext-looks__grid', HTMLElement);
+    expect(packs?.childElementCount).toBe(0);
+    expect(packs?.hidden).toBe(true);
+    expect(packs?.previousElementSibling).toHaveProperty('hidden', true);
   });
 
   it('ends the pieces’ card with their black’s color, which holds for Lichess’s sets too', async () => {
