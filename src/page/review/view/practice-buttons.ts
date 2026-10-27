@@ -26,7 +26,7 @@ function endButtons(card: Card): SafeHtml[] {
   return [
     navButton('practice-again', 'retry', strings.again, true),
     ...(due > 0 ? [navButton('practice-mode-review', 'book', strings.review(due))] : []),
-    navButton('practice-computer', 'computer', strings.computer),
+    navButton('practice-computer', 'robot', strings.computer),
   ];
 }
 

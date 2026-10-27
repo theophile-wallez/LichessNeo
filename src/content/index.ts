@@ -48,6 +48,8 @@ import { learnCoach } from './learn/coach.ts';
 import { practiceAutoNext } from './practice/auto-next.ts';
 import { practiceCoach } from './practice/coach.ts';
 import { practiceSteps } from './practice/steps.ts';
+import { studyChapterBar } from './study/chapter-bar.ts';
+import { studyHead } from './study/head.ts';
 import { extensionSettings } from './settings/index.ts';
 import { clockBar } from './clock-bar/index.ts';
 import { homeHero } from './pages/home-hero.ts';
@@ -146,6 +148,8 @@ const FEATURES = [
   practiceCoach,
   practiceSteps,
   practiceAutoNext,
+  studyChapterBar,
+  studyHead,
   extensionSettings,
   homeHero,
   speedCards,

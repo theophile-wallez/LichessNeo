@@ -1,0 +1,217 @@
+/* ---- The contents --- */
+
+/* Lichess's chapter list, its members' and their tabs, out of sight until the chapter bar
+ * opens them (content/study/chapter-bar.ts): then a sheet over the board, under the bar, the
+ * board dimmed behind it. */
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice']) main.analyse:not(.is-relay) {
+  /* From the board area's top: under the chapter bar on a desktop, its own row below. */
+  --ln-ext-sheet-top: 6px;
+  --ln-ext-sheet-tabs-h: 44px;
+  --ln-ext-sheet-max: calc(var(--ln-ext-board) * 0.82);
+}
+
+@media (min-width: 1020px) {
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay) {
+    --ln-ext-sheet-top: calc(var(--ln-ext-chapter-h) - 6px);
+  }
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study__side
+  > :is(.tabs-horiz, .study__chapters, .study__members),
+.ln-ext-study-backdrop {
+  display: none !important;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse[data-ln-ext-contents]:not(.is-relay)
+  > .ln-ext-study-backdrop {
+  grid-area: board;
+  z-index: 5;
+  display: block !important;
+  border-radius: 8px;
+  background: var(--ln-ext-shade-45);
+  cursor: pointer;
+  animation: ln-ext-study-fade 0.2s ease-out;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse[data-ln-ext-contents]:not(.is-relay)
+  .study__side
+  > :is(.tabs-horiz, .study__chapters, .study__members) {
+  grid-area: board;
+  z-index: 6;
+  align-self: start;
+  justify-self: start;
+  box-sizing: border-box;
+  width: min(100%, 560px) !important;
+  margin: var(--ln-ext-sheet-top) 0 0 !important;
+  background: var(--ln-ext-bg-panel) !important;
+  animation: ln-ext-study-drop 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse[data-ln-ext-contents]:not(.is-relay)
+  .study__side
+  > .tabs-horiz {
+  display: flex !important;
+  align-items: stretch;
+  height: var(--ln-ext-sheet-tabs-h);
+  padding: 6px 6px 0;
+  border-radius: 14px 14px 0 0;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse[data-ln-ext-contents]:not(.is-relay)
+  .study__side
+  > :is(.study__chapters, .study__members) {
+  display: block !important;
+  max-height: calc(var(--ln-ext-sheet-max) - var(--ln-ext-sheet-tabs-h));
+  margin-top: calc(var(--ln-ext-sheet-top) + var(--ln-ext-sheet-tabs-h)) !important;
+  padding: 6px;
+  overflow-y: auto;
+  border-radius: 0 0 14px 14px;
+  box-shadow:
+    inset 0 0 0 1px var(--ln-ext-card-border),
+    0 18px 48px var(--ln-ext-shade-55);
+}
+
+/* Lichess sizes its list to its side column: the sheet scrolls instead. */
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study__chapters
+  > .study-list {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* ---- A chapter --- */
+
+/* A row as a practice lesson's steps (practice-run/lesson-card.css): its number on a disc,
+ * the one on the board on the accent. */
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button {
+  display: flex !important;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 10px 6px 6px !important;
+  border: 0 !important;
+  border-radius: 10px;
+  background: none !important;
+  color: var(--ln-ext-text) !important;
+  text-align: start;
+  transition: background-color 0.15s !important;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button:hover {
+  background: var(--ln-ext-lift-7) !important;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button.active {
+  background: color-mix(in srgb, var(--ln-ext-accent) 14%, transparent) !important;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button
+  > span:first-child {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: 0 !important;
+  border-radius: 50%;
+  background: var(--ln-ext-lift-7);
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button:hover
+  > span:first-child {
+  transform: translateY(-2px) rotate(-8deg) scale(1.08);
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button.active
+  > span:first-child {
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white) !important;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button
+  > h3 {
+  display: -webkit-box;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 !important;
+  overflow: hidden;
+  color: inherit !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button.active
+  > h3 {
+  color: var(--ln-ext-text-strong) !important;
+  font-weight: 800 !important;
+}
+
+/* The game's result. */
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study-list
+  > button
+  > res {
+  flex: none;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@keyframes ln-ext-study-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ln-ext-study-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}

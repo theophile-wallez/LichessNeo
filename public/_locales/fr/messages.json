@@ -1284,5 +1284,17 @@
   },
   "paletteOpen": {
     "message": "ouvrir"
+  },
+  "studyChapterOf": {
+    "message": "Chapitre $1 sur $2"
+  },
+  "studyPreviousChapter": {
+    "message": "Chapitre précédent"
+  },
+  "studyNextChapter": {
+    "message": "Chapitre suivant"
+  },
+  "studyPanelInfo": {
+    "message": "Infos"
   }
 }

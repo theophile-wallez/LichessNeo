@@ -95,6 +95,9 @@ so the logic can be unit-tested without a page.
   ended, with whose turn it is, the last move's verdict and the hint on its
   card; the lesson's steps kept in view as they scroll, and what "Load next
   exercise immediately" does.
+- `study`: a study's chapter bar over the board, whose title opens Lichess's
+  chapter list as a sheet over it, and the study's head at the top of the
+  panel (its flair, name, likes and share button, which click Lichess's own).
 - `pages`.
 - `ui`: tooltips, hover card, tab bars, users' avatars, the user's own name
   where Lichess writes it, the interface's Foley sounds behind the settings'

@@ -1,0 +1,203 @@
+/* ---- A study's layout --- */
+
+/* Lichess's side column holds the chapters, the members and the chat (in the chapters' box
+ * from 1260px), and our grid has no column for it: its parts are placed one by one. The chat is one of the panel's parts
+ * (content/layout/panel-tabs.ts), the chapters and members open as a sheet over the board
+ * (sheet.css). A practice lesson is a study too, and a broadcast's round: neither has this. */
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  > .analyse__side,
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study__side {
+  display: contents !important;
+}
+
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  > .analyse__side
+  .vertical-resize {
+  display: none !important;
+}
+
+/* A chapter that isn't a game (an introduction, a gamebook) gets empty player bars from
+ * Lichess, or ones its title is split into: the chapter bar takes their room
+ * (content/study/chapter-bar.ts). */
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not([data-ln-ext-players], .is-relay)
+  .study__player {
+  display: none !important;
+}
+
+/* The head shows the study's name and likes. */
+html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+  main.analyse:not(.is-relay)
+  .study__metadata
+  > h2 {
+  display: none !important;
+}
+
+@media (min-width: 1020px) {
+  /* The chapter bar stands over the board, in its column: the board's height makes room for
+   * it as for the player bars. The head is the panel's first row, over its tabs. */
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay) {
+    --ln-ext-chapter-h: 68px;
+    --ln-ext-head-h: 80px;
+    --ln-ext-v-room: calc(32px + var(--ln-ext-chapter-h));
+    --ln-ext-stage: calc(
+      var(--ln-ext-board-h) + 2 * var(--ln-ext-bar) + var(--ln-ext-coords-off) +
+        var(--ln-ext-chapter-h)
+    );
+    grid-template-rows:
+      var(--ln-ext-head-h)
+      var(--ln-ext-tabs-h)
+      max(
+        0px,
+        calc(
+          var(--ln-ext-stage) - var(--ln-ext-head-h) - var(--ln-ext-tabs-h) - var(--ln-ext-ctrl-h)
+        )
+      )
+      var(--ln-ext-ctrl-h) !important;
+    grid-template-areas:
+      'gauge board head'
+      'gauge board tabs'
+      'gauge board tools'
+      'gauge board controls' !important;
+    margin-top: 0 !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not([data-ln-ext-players], .is-relay) {
+    --ln-ext-bar: 0px;
+  }
+}
+
+/* A narrow panel's head takes two rows (head.css). */
+@media (min-width: 1020px) and (max-width: 1259.98px) {
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay) {
+    --ln-ext-head-h: 112px;
+  }
+}
+
+@media (min-width: 1020px) {
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    .analyse__board {
+    margin-top: calc(var(--ln-ext-chapter-h) + var(--ln-ext-bar)) !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    .eval-gauge {
+    margin-top: calc(
+      var(--ln-ext-chapter-h) + var(--ln-ext-bar) + var(--ln-ext-inset-t, 0px)
+    ) !important;
+  }
+
+  /* A gamebook has no moves nor controls: its coach takes the panel's area. */
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse.gamebook-play:not(.is-relay) {
+    height: var(--ln-ext-stage);
+    grid-template-rows: var(--ln-ext-head-h) var(--ln-ext-tabs-h) minmax(0, 1fr) !important;
+    grid-template-areas:
+      'gauge board head'
+      'gauge board tabs'
+      'gauge board tools' !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .gamebook {
+    grid-area: tools !important;
+    justify-content: flex-start !important;
+    min-height: 0;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse[data-ln-ext-panel]:not([data-ln-ext-panel='moves'], .is-relay)
+    > .gamebook {
+    display: none !important;
+  }
+
+  /* The head carries the panel's top corners. */
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .ln-ext-panel-tabs {
+    border-radius: 0;
+  }
+
+  /* ---- The chat, the info --- */
+
+  /* The chat in the panel's area, as an analysis board's (analysis/layout.css). */
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .analyse__side
+    .mchat {
+    grid-area: tools !important;
+    align-self: stretch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 0 var(--ln-ext-gap) !important;
+    padding-bottom: var(--ln-ext-keyboard-h, 0px) !important;
+    overflow: hidden;
+    border-radius: 0 !important;
+    background: var(--ln-ext-bg-panel) !important;
+    box-shadow: none !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not([data-ln-ext-panel='chat'], .is-relay)
+    > .analyse__side
+    .mchat,
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .analyse__side
+    .chat__members {
+    display: none !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .analyse__side
+    .mchat
+    .mchat__content {
+    min-height: 0;
+    overflow: hidden;
+    background: transparent !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .analyse__side
+    .mchat
+    .mchat__messages {
+    max-height: none !important;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  /* What Lichess draws under the board: the description, the topics, the tags, sharing. */
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse[data-ln-ext-panel='meta']:not(.is-relay)
+    > .analyse__underboard {
+    grid-area: tools !important;
+    display: block !important;
+    box-sizing: border-box;
+    min-height: 0;
+    margin: 0 0 0 var(--ln-ext-gap) !important;
+    padding: 14px 16px !important;
+    overflow-y: auto;
+    background: var(--ln-ext-bg-panel);
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse[data-ln-ext-panel='meta']:not(.is-relay)
+    .analyse__underboard__panels {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}

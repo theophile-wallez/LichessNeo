@@ -109,6 +109,11 @@ export function setDataText(element: HTMLElement | SVGElement, key: string, valu
   if ((element.dataset[key] ?? '') !== value) element.dataset[key] = value;
 }
 
+/** Sets an element's text only when it changes. */
+export function setText(element: HTMLElement, text: string): void {
+  if (element.textContent !== text) element.textContent = text;
+}
+
 /** Sets an inline style property (a custom one, or any other) only when it changes. */
 export function setStyleProperty(
   element: HTMLElement | SVGElement,

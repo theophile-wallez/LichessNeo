@@ -1652,5 +1652,21 @@
   "paletteOpen": {
     "message": "to open",
     "description": "The command palette's hint after the Enter key."
+  },
+  "studyChapterOf": {
+    "message": "Chapter $1 of $2",
+    "description": "Over a study's board, the chapter on show; $1 is its number, $2 how many there are. A click opens the list of chapters."
+  },
+  "studyPreviousChapter": {
+    "message": "Previous chapter",
+    "description": "The button over a study's board that opens the chapter before this one."
+  },
+  "studyNextChapter": {
+    "message": "Next chapter",
+    "description": "The button over a study's board that opens the chapter after this one."
+  },
+  "studyPanelInfo": {
+    "message": "Info",
+    "description": "The tab of a study's panel that shows its description, tags and sharing."
   }
 }

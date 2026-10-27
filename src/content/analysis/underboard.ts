@@ -8,7 +8,8 @@ import { onEveryTick } from '#content/sync-loop.ts';
 // "Request a computer analysis" and "Share & export"; a study's toolbar
 // (comments, glyphs, server eval, tags, share). A button in the controls opens
 // it over the engine and the moves (styles/analysis/underboard.css), with the
-// advice summary and its "Learn from your mistakes" over the chat.
+// advice summary and its "Learn from your mistakes" over the chat. A study's
+// is the panel's Infos tab instead (content/layout/panel-tabs.ts).
 
 export const OPEN = 'ln-ext-underboard-open';
 const BUTTON = 'ln-ext-underboard';
@@ -21,6 +22,7 @@ const FALLBACK_LABEL = 'Tools';
 const UNDERBOARD = 'main.analyse > .analyse__underboard';
 // A practice drill shows its goal there already (styles/practice-run).
 const PRACTICE = 'main.analyse .practice__side';
+const STUDY = `${UNDERBOARD} > :is(.study__metadata, .study__buttons)`;
 // Lichess's "Learn from your mistakes" box, in place of the moves' tools.
 const RETRO = 'main.analyse .analyse__tools > .retro-box';
 
@@ -51,7 +53,11 @@ function setLabel(button: HTMLButtonElement): void {
 
 function hasUnderboard(): boolean {
   const underboard = document.querySelector(UNDERBOARD);
-  return Boolean(underboard?.firstElementChild) && !document.querySelector(PRACTICE);
+  return (
+    Boolean(underboard?.firstElementChild) &&
+    !document.querySelector(PRACTICE) &&
+    !document.querySelector(STUDY)
+  );
 }
 
 // Starting "Learn from your mistakes" from the panel closes it, or it would

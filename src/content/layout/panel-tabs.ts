@@ -12,8 +12,8 @@ import { message } from '#content/platform/runtime.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
 // The right-hand panel's tabs (styles/panel-tabs.css): from 1020px the moves, the chat and,
-// on the game page, the game info where there is no chat, share one area of the panel, so
-// none of them takes a height of its own. Lichess's own chat tabs (Chat room, Notes) join
+// on the game page, the game info where there is no chat, on a study its info, share one
+// area of the panel, so none of them takes a height of its own. Lichess's own chat tabs (Chat room, Notes) join
 // ours and a click on one is passed to it: Lichess keeps which of them is open, we keep
 // which part the panel shows.
 
@@ -34,7 +34,7 @@ interface PartSpec {
 
 interface Host {
   readonly page: string;
-  /** The chat that shares the panel's area; a study's, in its side column, doesn't. */
+  /** The chat that shares the panel's area. */
   readonly chat: string;
   /** The message naming the part the panel opens on. */
   readonly moves: string;
@@ -42,6 +42,8 @@ interface Host {
   readonly activeMove?: string;
   /** Parts offered in the chat's place where the page has none. */
   readonly instead: readonly PartSpec[];
+  /** Parts offered after the chat, where the page has them. */
+  readonly after: readonly PartSpec[];
 }
 
 const HOSTS: readonly Host[] = [
@@ -51,10 +53,26 @@ const HOSTS: readonly Host[] = [
     moves: 'roundPanelMoves',
     activeMove: ':is(i5d, rm6) :is(Z7yx, kwdb):is(.a1t, .active)',
     instead: [{ part: 'meta', message: 'roundPanelGame', selector: '.round__side > .game__meta' }],
+    after: [],
   },
   // The analysis page's move list keeps its own scroll (content/analysis/active-move.ts),
-  // which follows it back into view as the list is resized.
-  { page: 'main.analyse', chat: ':scope > .mchat', moves: 'roundPanelMoves', instead: [] },
+  // which follows it back into view as the list is resized. A study's chat is in its side
+  // column (in its chapters' box from 1260px), which styles/study-page/layout.css
+  // spreads over the page's grid; its info is what Lichess draws under the board.
+  {
+    page: 'main.analyse',
+    chat: ':is(:scope > .mchat, :scope > .analyse__side .mchat)',
+    moves: 'roundPanelMoves',
+    instead: [],
+    after: [
+      {
+        part: 'meta',
+        message: 'studyPanelInfo',
+        // Sharing takes the metadata's place, and a gamebook has no buttons.
+        selector: ':scope > .analyse__underboard > :is(.study__metadata, .study__buttons)',
+      },
+    ],
+  },
 ];
 
 interface TabSpec {
@@ -91,18 +109,21 @@ const REVIEW_STATES = ['ln-ext-review-summary', 'ln-ext-review-moves'];
 const reviewOwnsPanel = (): boolean =>
   REVIEW_STATES.some(state => document.documentElement.classList.contains(state));
 
-/** The bar's tabs: the moves, then the chat's own, or what stands in for a chat there is none of. */
+const presentTabs = (page: HTMLElement, specs: readonly PartSpec[]): TabSpec[] =>
+  specs
+    .filter(spec => page.querySelector(spec.selector))
+    .map(spec => ({ key: spec.part, part: spec.part, label: message(spec.message) }));
+
+/**
+ * The bar's tabs: the moves, then the chat's own, or what stands in for a chat there is none
+ * of, then the page's other parts.
+ */
 function tabsFor(host: Host, page: HTMLElement): TabSpec[] {
   const moves: TabSpec = { key: 'moves', part: 'moves', label: message(host.moves) };
   if (reviewOwnsPanel()) return [moves];
   const chat = chatTabs(host, page);
-  if (chat.length > 0) return [moves, ...chat];
-  return [
-    moves,
-    ...host.instead
-      .filter(spec => page.querySelector(spec.selector))
-      .map(spec => ({ key: spec.part, part: spec.part, label: message(spec.message) })),
-  ];
+  const instead = chat.length > 0 ? chat : presentTabs(page, host.instead);
+  return [moves, ...instead, ...presentTabs(page, host.after)];
 }
 
 const tabButton = (spec: TabSpec): HTMLButtonElement =>
@@ -187,6 +208,12 @@ function onBarClick(event: MouseEvent): void {
   if (picked === 'chat') openChatTab(found.host, found.page, button.dataset['lnExtTab'] ?? '');
   syncPanelTabs();
   scrollIntoPlace(found.host, found.page, picked);
+}
+
+/** Shows one of the panel's parts, as its tab would. */
+export function showPanelPart(part: Part): void {
+  shown = part;
+  syncPanelTabs();
 }
 
 function findHost(): { readonly host: Host; readonly page: HTMLElement } | null {

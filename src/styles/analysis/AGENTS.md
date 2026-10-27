@@ -1,7 +1,7 @@
 # Analysis pages
 
 Lichess's pitfalls on the pages built on `main.analyse` (`styles/analysis`,
-`styles/practice-run`, `styles/broadcast`), learned the hard way. The rules
+`styles/practice-run`, `styles/study-page`, `styles/broadcast`), learned the hard way. The rules
 for the whole repo are in the root's [AGENTS.md](../../../AGENTS.md).
 
 - **Practice lessons are analysis pages.** `/practice/…` is `main.analyse`
@@ -11,6 +11,12 @@ for the whole repo are in the root's [AGENTS.md](../../../AGENTS.md).
   in `.analyse__underboard`, which our layout hides elsewhere: on a lesson
   it's the goal's card, the coach's on it (`practice-run/drill.css`). Panel
   rows need a definite height: `1fr` in a content-sized container just grows.
+- **A study's side column moves its chat.** From 1260px the chat is in
+  `.study__side`, below in `.analyse__side`: a selector for it covers both
+  (`content/layout/panel-tabs.ts`). Its chapter list, `.study-list`, sets its
+  own height, which cut the contents' sheet to four chapters
+  (`study-page/sheet.css`). A gamebook's underboard has no `.study__buttons`,
+  and sharing replaces `.study__metadata` with its own panel.
 - **A `piece` of our own.** Lichess places every `piece` as on a board's
   square (`position: absolute`, an eighth of its box): one we draw elsewhere,
   as the practice coach's king, takes `position: static` and its tile's size

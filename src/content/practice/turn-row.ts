@@ -1,4 +1,4 @@
-import { createCustomElement, createElement, setData } from '#shared/dom.ts';
+import { createCustomElement, createElement, setData, setText } from '#shared/dom.ts';
 import type { Turn } from './turn.ts';
 
 // The drill's turn on the coach's card, under its words
@@ -9,10 +9,6 @@ import type { Turn } from './turn.ts';
 export interface TurnRow {
   readonly root: HTMLElement;
   readonly show: (turn: Turn | null) => void;
-}
-
-function setText(element: HTMLElement, text: string): void {
-  if (element.textContent !== text) element.textContent = text;
 }
 
 export function buildTurnRow(onHint: () => void): TurnRow {

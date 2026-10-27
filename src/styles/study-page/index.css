@@ -1,0 +1,7 @@
+/* A study's own page (/study/<id>): the chapter over the board, the study's head over the
+ * panel, the chapters as a sheet. After analysis/ and panel-tabs.css, whose grid it changes. */
+@import './layout.css';
+@import './layout-narrow.css';
+@import './chapter-bar.css';
+@import './head.css';
+@import './sheet.css';

@@ -1,5 +1,11 @@
 /* ---- Controls --- */
 
+/* "Practice with computer": the robot, as on the puzzles' and the review's buttons, not
+ * Lichess's bullseye. */
+main.analyse .analyse__controls > .fbt[data-act='engine-mode']::before {
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
+}
+
 @media (min-width: 1020px) {
   /* Four big grey buttons, the explorer and practice toggles left, the menu right. */
   main.analyse .analyse__controls {

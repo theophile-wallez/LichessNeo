@@ -1,0 +1,82 @@
+/* ---- A study below 1020px --- */
+
+/* The column of analysis/layout-narrow.css, with the study's head and its chapter bar over
+ * the board, and the chat as a card of its own. */
+@media (max-width: 1019.98px) {
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay, .has-relay-tour) {
+    grid-template-rows:
+      auto auto var(--ln-ext-strip) var(--ln-ext-bar) auto var(--ln-ext-bar) auto auto auto
+      auto auto auto auto auto auto auto auto !important;
+    grid-template-areas:
+      'head'
+      'chapter'
+      'gauge'
+      'user-top'
+      'board'
+      'user-bot'
+      'rctrl'
+      'controls'
+      'kb-move'
+      'rmodes'
+      'rtop'
+      'tools'
+      'side'
+      'round-training'
+      'under'
+      'chat'
+      'uchat' !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .ln-ext-study-head {
+    grid-area: head;
+    margin: 0 0 10px;
+    border-radius: 10px;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .ln-ext-study-bar {
+    grid-area: chapter;
+    margin: 0 0 8px;
+  }
+
+  /* Lichess hangs a game's player bars over and under the board, in the bar's and the
+   * controls' margins. */
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse[data-ln-ext-players]:not(.is-relay)
+    > .ln-ext-study-bar {
+    margin-bottom: calc(8px + 1.6rem);
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse[data-ln-ext-players]:not(.is-relay)
+    > .analyse__controls {
+    margin-top: calc(8px + 1.6rem) !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .analyse__side
+    .mchat {
+    grid-area: chat !important;
+    box-sizing: border-box;
+    width: 100% !important;
+    height: 360px !important;
+    margin: 12px 0 0 !important;
+    overflow: hidden;
+    border-radius: 10px !important;
+    background: var(--ln-ext-bg-panel) !important;
+    box-shadow: none !important;
+  }
+
+  html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
+    main.analyse:not(.is-relay)
+    > .analyse__side
+    .chat__members {
+    grid-area: uchat !important;
+    margin-top: 8px;
+  }
+}

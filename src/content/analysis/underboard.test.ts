@@ -3,7 +3,8 @@ import { queryAll } from '#shared/dom.ts';
 import { OPEN } from './underboard.ts';
 
 // The markup Lichess serves under the board: the free board's FEN and PGN, a
-// game's tabs, a study's toolbar; and a practice drill's goal, which stays.
+// game's tabs; a study's toolbar, which the panel's Info tab shows; and a
+// practice drill's goal, which stays.
 const CONTROLS =
   '<div class="analyse__controls"><div class="jumps"></div><button class="fbt" data-act="menu"></button></div>';
 const TOOLS = '<div class="analyse__tools"><div class="analyse__moves"></div></div>';
@@ -36,7 +37,6 @@ describe('the underboard button', () => {
   it.each([
     ['the free board', FREE_BOARD],
     ['a game’s analysis', GAME],
-    ['a study', STUDY],
   ])('joins the controls on %s, once', (_name, markup) => {
     document.body.innerHTML = markup;
     syncUnderboard();
@@ -47,6 +47,7 @@ describe('the underboard button', () => {
 
   it.each([
     ['a practice drill, whose goal shows already', DRILL],
+    ['a study, whose panel has a tab for it', STUDY],
     ['an empty underboard', EMPTY],
   ])('stays out of %s', (_name, markup) => {
     document.body.innerHTML = markup;

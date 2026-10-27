@@ -148,16 +148,19 @@ describe('the game panel’s tabs', () => {
     expect(main()?.dataset.lnExtPanel).toBe('chat');
   });
 
-  // A study's chat sits in its side column, beside the chapters, which is no part of the
-  // panel: a tab for it would switch nothing.
-  it('leaves a study’s chat where Lichess puts it, with no tab of its own', () => {
+  // Lichess puts a study's chat in its chapters' box from 1260px, beside it below.
+  it.each([
+    ['in its chapters’ box', (markup: string) => `<div class="study__side">${markup}</div>`],
+    ['beside it', (markup: string) => `<div class="study__side"></div>${markup}`],
+  ])('gives a study’s chat a tab %s, and its info one', (_where, place) => {
     document.body.innerHTML = analyse(
-      `<aside class="analyse__side"><div class="study__side">${chat([])}</div></aside>`,
+      `<aside class="analyse__side">${place(chat([]))}</aside>` +
+        '<div class="analyse__underboard"><div class="study__metadata"></div></div>',
     );
     syncPanelTabs();
-    expect(labels()).toEqual(['roundPanelMoves']);
-    expect(main()?.dataset.lnExtTabbed).toBeUndefined();
-    expect(main()?.dataset.lnExtChatToggle).toBeUndefined();
+    expect(labels()).toEqual(['roundPanelMoves', 'Chat room', 'Notes', 'studyPanelInfo']);
+    tab('meta')?.click();
+    expect(main()?.dataset.lnExtPanel).toBe('meta');
   });
 
   it('leaves the panel to the Game Review while it has it', () => {

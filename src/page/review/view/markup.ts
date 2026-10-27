@@ -13,7 +13,7 @@ import CloudCheckIcon from '@hugeicons/core-free-icons/CloudCheckIcon';
 import CloudLoadingIcon from '@hugeicons/core-free-icons/CloudLoadingIcon';
 import CloudUploadIcon from '@hugeicons/core-free-icons/CloudUploadIcon';
 import CloudAlertIcon from '@hugeicons/core-free-icons/CloudAlertIcon';
-import ComputerIcon from '@hugeicons/core-free-icons/ComputerIcon';
+import Robot01Icon from '@hugeicons/core-free-icons/Robot01Icon';
 import FireIcon from '@hugeicons/core-free-icons/FireIcon';
 import HelpCircleIcon from '@hugeicons/core-free-icons/HelpCircleIcon';
 import Idea01Icon from '@hugeicons/core-free-icons/Idea01Icon';
@@ -60,7 +60,7 @@ const ICONS = {
   book: BookOpen01Icon,
   back: ArrowTurnBackwardIcon,
   swap: ArrowDataTransferHorizontalIcon,
-  computer: ComputerIcon,
+  robot: Robot01Icon,
   search: Search01Icon,
   fire: FireIcon,
   settings: Settings02Icon,
