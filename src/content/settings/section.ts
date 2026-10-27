@@ -56,7 +56,7 @@ export function buildSection(): SettingsSection {
   const looks = buildLooksPage(packLibrary());
   const pairing = buildPairingPage();
   const pages: Readonly<Record<SettingsPage, readonly HTMLElement[]>> = {
-    appearance: [buildAppearance(), buildRoundnessRow(), buildNavigationRow()],
+    appearance: [buildNavigationRow(), buildAppearance(), buildRoundnessRow()],
     board: looks.elements,
     profile: [
       buildAvatarCard(),

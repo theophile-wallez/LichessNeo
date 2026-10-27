@@ -24,9 +24,18 @@ const game = (own: Color | null): RatedGame => ({
 function page(orientation: Color, over = false): void {
   document.body.innerHTML = `<main class="round"><div class="round__app">
     <div class="round__app__board"><div class="cg-wrap orientation-${orientation}"></div></div>
+    <i5d><bo3><a class="fbt analysis" href=""></a></bo3></i5d>
     ${over ? '<div class="result-wrap"></div>' : ''}
   </div></main>`;
 }
+
+// TV's analysis button, which links to the game on show.
+const showOnTv = (id: string): void =>
+  document.querySelector('a.analysis')?.setAttribute('href', `/game/${id}/white/analysis#22`);
+
+// The stakes of `rated` alone, as the feature knows them once read.
+const syncOf = (rated: RatedGame): (() => void) =>
+  createStakesSync(id => (id === rated.id ? rated : null), TEXTS);
 
 const pill = (side: string): HTMLElement | null =>
   document.querySelector(`.ln-ext-stakes--${side}`);
@@ -59,13 +68,13 @@ describe('stakesMarkup', () => {
 describe('the stakes in the bars', () => {
   it("shows a watcher both players' stakes, each in its bar", () => {
     page('white');
-    createStakesSync(game(null), TEXTS)();
+    syncOf(game(null))();
     expect(shown('bottom')).toBe('+8−6−20');
     expect(shown('top')).toBe('+8+2−3');
   });
 
   it('follows the board when it is flipped', () => {
-    const sync = createStakesSync(game(null), TEXTS);
+    const sync = syncOf(game(null));
     page('white');
     sync();
     const board = document.querySelector('.cg-wrap');
@@ -77,20 +86,20 @@ describe('the stakes in the bars', () => {
 
   it("shows a player only their own stakes, whichever side they're on", () => {
     page('black');
-    createStakesSync(game('white'), TEXTS)();
+    syncOf(game('white'))();
     expect(shown('top')).toBe('+8−6−20');
     expect(shown('bottom')).toBeNull();
   });
 
   it('goes once the game is over', () => {
     page('white', true);
-    createStakesSync(game(null), TEXTS)();
+    syncOf(game(null))();
     expect(shown('top')).toBeNull();
     expect(shown('bottom')).toBeNull();
   });
 
   it('goes when the settings turn it off, and comes back', () => {
-    const sync = createStakesSync(game(null), TEXTS);
+    const sync = syncOf(game(null));
     page('white');
     settings.ratingStakes = false;
     sync();
@@ -103,7 +112,30 @@ describe('the stakes in the bars', () => {
   it('draws nothing on another game, as TV swaps them without a reload', () => {
     history.replaceState(null, '', '/game/abcdefgh');
     page('white');
-    createStakesSync(game(null), TEXTS)();
+    syncOf(game(null))();
     expect(pill('bottom')).toBeNull();
+  });
+
+  it('follows the game TV shows, as it swaps them without a reload', () => {
+    history.replaceState(null, '', '/tv/classical');
+    const first = game(null);
+    const next: RatedGame = {
+      ...first,
+      id: 'Zz9Yy8Xx',
+      players: { white: first.players.black, black: first.players.white },
+    };
+    const sync = createStakesSync(id => ({ n9ZaJJDr: first, Zz9Yy8Xx: next })[id] ?? null, TEXTS);
+    page('white');
+    sync();
+    expect(shown('bottom')).toBeNull();
+    showOnTv('n9ZaJJDr');
+    sync();
+    expect(shown('bottom')).toBe('+8−6−20');
+    showOnTv('Zz9Yy8Xx');
+    sync();
+    expect(shown('bottom')).toBe('+8+2−4');
+    showOnTv('Unknown1');
+    sync();
+    expect(shown('bottom')).toBeNull();
   });
 });

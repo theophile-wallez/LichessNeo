@@ -10,7 +10,8 @@ const PerfStatSchema = z.object({
   perf: z.object({ glicko: z.object({ rating: z.number(), deviation: z.number() }) }),
 });
 
-async function exactGlicko(user: string, perf: string): Promise<Glicko | null> {
+/** A user's rating and deviation in `perf`, the rating to the hundredth. */
+export async function exactGlicko(user: string, perf: string): Promise<Glicko | null> {
   try {
     const url = `/api/user/${encodeURIComponent(user)}/perf/${encodeURIComponent(perf)}`;
     const response = await fetch(url, { headers: { Accept: 'application/json' } });

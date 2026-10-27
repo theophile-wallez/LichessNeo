@@ -1,7 +1,7 @@
 /* ---- Rating stakes --- */
 
-/* What a player wins, draws or loses (content/game/stakes), in one pill on the captured
- * pieces' line, against the clock. */
+/* What a player wins, draws or loses (content/game/stakes), in one pill before the clock,
+ * centered on it: the clock is 40px tall, 8px down the bar (layout.css). */
 
 main.round .ln-ext-stakes {
   justify-self: end;
@@ -9,7 +9,7 @@ main.round .ln-ext-stakes {
   display: flex;
   align-items: center;
   height: 20px;
-  margin: calc(var(--ln-ext-off) + 29px)
+  margin: calc(var(--ln-ext-off) + 18px)
     calc(var(--ln-ext-inset-r, 0px) + var(--ln-ext-clock-room, 152px)) 0 0;
   padding: 0 1px 0 8px;
   border-radius: 999px;
@@ -40,6 +40,23 @@ main.round .ln-ext-stakes--bottom {
 html[data-ln-ext-has~='clock-extras-top'] main.round .ln-ext-stakes--top,
 html[data-ln-ext-has~='clock-extras-bottom'] main.round .ln-ext-stakes--bottom {
   --ln-ext-clock-room: 212px;
+}
+
+/* The name ends in an ellipsis clear of the pill too, whose words are at most about 110px. */
+@media (min-width: 600px) {
+  html[data-ln-ext-has~='round-stakes-top'] main.round .ruser-top,
+  html[data-ln-ext-has~='round-stakes-bottom'] main.round .ruser-bottom {
+    --ln-ext-clock-room: 272px;
+  }
+
+  html[data-ln-ext-has~='round-stakes-top'][data-ln-ext-has~='clock-extras-top']
+    main.round
+    .ruser-top,
+  html[data-ln-ext-has~='round-stakes-bottom'][data-ln-ext-has~='clock-extras-bottom']
+    main.round
+    .ruser-bottom {
+    --ln-ext-clock-room: 332px;
+  }
 }
 
 main.round .ln-ext-stakes::before {
@@ -87,7 +104,8 @@ main.round .ln-ext-stakes__outcome--loss {
 /* A phone's bar has no room for the pill beside the captured pieces: it goes under the clock,
  * and the bars grow for it. */
 @media (max-width: 599.98px) {
-  html[data-ln-ext-has~='round-stakes'] main.round {
+  html:is([data-ln-ext-has~='round-stakes-top'], [data-ln-ext-has~='round-stakes-bottom'])
+    main.round {
     --ln-ext-bar: 74px;
   }
 

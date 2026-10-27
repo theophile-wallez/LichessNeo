@@ -1,7 +1,5 @@
 import { queryOne, setData, setStyleProperty } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
-import { gameIdFrom } from '#shared/game-path.ts';
-import { nonEmpty } from '#shared/text.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import {
   formatSpent,
@@ -10,6 +8,7 @@ import {
   type Clock,
   type GameExport,
 } from './clock-times.ts';
+import { currentGameId } from './current-game.ts';
 
 // Move times, once a game is over: the time spent on each move, with a bar
 // scaled to the longest think (styles/game/game-over.css). The move list is
@@ -42,13 +41,6 @@ async function fetchExport(id: string): Promise<GameExport | null> {
   } catch {
     return null;
   }
-}
-
-// TV shows its games at /tv/<channel>, so the path has no game id. Once a game
-// is over, the analysis button links to the game.
-function currentGameId(): string | null {
-  const link = document.querySelector('main.round :is(i5d, rm6) a.analysis')?.getAttribute('href');
-  return gameIdFrom(nonEmpty(link) ?? location.pathname);
 }
 
 // The list starts with a move number, and the moves use the other tag.

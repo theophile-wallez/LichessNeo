@@ -149,9 +149,9 @@ so the logic can be unit-tested without a page.
   linked to the pages to review it on (`--url`).
 - `platform`: the extension APIs it uses.
 - `settings`: the extension's settings, a section of the account pages whose
-  menu gets a link for each of its pages: Appearance (the color scheme, the
-  color themes, Lichess's Roundness, and the nav as a rail, the default, a sidebar, unfolded or not, or a
-  header), Board & sounds (the sounds, the board and the pieces, the
+  menu gets a link for each of its pages: Appearance (the nav as a rail, the
+  default, a sidebar, unfolded or not, or a header, then the color scheme, the color themes and
+  Lichess's Roundness), Board & sounds (the sounds, the board and the pieces, the
   extension's, the packs' and Lichess's, followed in the other tabs, the boards in sections: classic, each
   family's, then the user's own and the packs', over a preview board that shows a board or a set while its tile is hovered, then
   the interface's own sounds and the Packs card, which its own link scrolls
