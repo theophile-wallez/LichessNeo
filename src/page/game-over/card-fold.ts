@@ -22,9 +22,14 @@ export function storeCardFolded(folded: boolean): void {
   writeStored(StorageKey.endCardFolded, folded ? '1' : '0');
 }
 
-export function foldButtonMarkup(texts: GameOverTexts, action: FoldAction): SafeHtml {
+/** A chevron's button; what it may hold besides comes before the chevron. */
+export function foldButtonMarkup(
+  texts: GameOverTexts,
+  action: FoldAction,
+  content?: SafeHtml,
+): SafeHtml {
   const label = action === 'fold' ? texts.fold.hide : texts.fold.show;
-  return html`<button type="button" class="ln-ext-end__fold ln-ext-end__fold--${action}" data-ln-ext="${action}" aria-label="${label}" title="${label}">${CHEVRON}</button>`;
+  return html`<button type="button" class="ln-ext-end__fold ln-ext-end__fold--${action}" data-ln-ext="${action}" aria-label="${label}" title="${label}">${content}${CHEVRON}</button>`;
 }
 
 /** The box that folds: the card, its chevron in the corner. */

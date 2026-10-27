@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 import { setHtml, type SafeHtml } from '#shared/html.ts';
-import { cardClasses, cardMarkup, CHIP_COUNT, endCardInput } from './card.ts';
+import { cardClasses, cardMarkup, CHIP_COUNT, endCardInput, lastCardClass } from './card.ts';
 import { gameOverTexts } from './texts.ts';
 
 const texts = gameOverTexts();
@@ -80,5 +80,14 @@ describe('cardClasses', () => {
   it('shows the finest moves of a game without errors', () => {
     expect(cardClasses({ best: 4, great: 1 })).toEqual(['best', 'excellent', 'great']);
     expect(cardClasses({})).toEqual(['best', 'excellent', 'good']);
+  });
+});
+
+describe('lastCardClass', () => {
+  it('is the class the card ends on, which its folded strip counts', () => {
+    expect(lastCardClass({ best: 9, inaccuracy: 2, mistake: 1 })).toBe('mistake');
+    expect(lastCardClass({ great: 2, inaccuracy: 1 })).toBe('inaccuracy');
+    expect(lastCardClass({ brilliant: 1 })).toBe('brilliant');
+    expect(lastCardClass({ best: 3 })).toBe('good');
   });
 });

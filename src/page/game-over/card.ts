@@ -19,12 +19,16 @@ const GOOD: readonly MoveClass[] = ['best', 'excellent'];
 const ERRORS: readonly MoveClass[] = ['blunder', 'miss', 'mistake', 'inaccuracy'];
 const FINEST: readonly MoveClass[] = ['brilliant', 'great'];
 
-/** The three classes the card counts for the player. */
-export function cardClasses(counts: Readonly<Partial<Record<MoveClass, number>>>): MoveClass[] {
+type Counts = Readonly<Partial<Record<MoveClass, number>>>;
+
+/** The class the card ends on: the player's worst error, else their finest moves. */
+export function lastCardClass(counts: Counts): MoveClass {
   const made = (moveClass: MoveClass): boolean => (counts[moveClass] ?? 0) > 0;
-  const third = ERRORS.find(made) ?? FINEST.find(made) ?? 'good';
-  return [...GOOD, third];
+  return ERRORS.find(made) ?? FINEST.find(made) ?? 'good';
 }
+
+/** The three classes the card counts for the player. */
+export const cardClasses = (counts: Counts): MoveClass[] => [...GOOD, lastCardClass(counts)];
 
 /** The coach's face for a result: proud of a win, sad for a loss. */
 export const RESULT_MOODS: Readonly<Record<Result, CoachMood>> = {

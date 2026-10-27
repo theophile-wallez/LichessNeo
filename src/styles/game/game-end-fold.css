@@ -60,7 +60,7 @@
   cursor: pointer;
 }
 
-.ln-ext-end__fold svg {
+.ln-ext-end__fold > svg {
   width: 20px;
   height: 20px;
   pointer-events: none;
@@ -109,7 +109,7 @@
     visibility 0s 0.4s !important;
 }
 
-.ln-ext-end__fold--unfold svg {
+.ln-ext-end__fold--unfold > svg {
   rotate: 180deg;
 }
 

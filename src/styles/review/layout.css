@@ -11,7 +11,7 @@
 
   /* Review closed: Lichess's analysis, then the game over's card (view/closed-panel.ts,
      game/game-end-card.css), its coach smaller on a short window. The card folds down to its
-     chevron's 77px, the frame's padding and the panel's around it, as --ln-ext-review-fold
+     strip's 77px, the frame's padding and the panel's around it, as --ln-ext-review-fold
      eases to 1 (card-fold.css). */
   html.ln-ext-review-normal main.analyse {
     --ln-ext-review-open: 280px;
