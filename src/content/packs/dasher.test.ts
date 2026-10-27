@@ -149,6 +149,23 @@ describe('the user menu’s panels', () => {
     expect(library.current('sound')).toBe(LICHESS);
   });
 
+  it('put the black pieces’ color at the Piece set panel’s foot, under both tabs', async () => {
+    await start([]);
+    const panel = openPanel('piece');
+    await flush();
+    const foot = (): HTMLElement[] => queryAll(panel, ':scope > .ln-ext-src-foot', HTMLElement);
+    expect(foot()).toHaveLength(1);
+    expect(foot()[0]?.textContent).toContain('Black pieces');
+    // Not in the Extension tab's choices, which the Lichess tab hides.
+    expect(panel.querySelector('.ln-ext-src-choices .ln-ext-src-foot')).toBeNull();
+    // Dressed again, as a panel drawn anew is: still one.
+    panel.querySelector(':scope > .ln-ext-src-tabs')?.remove();
+    panel.append(document.createElement('i'));
+    await flush();
+    expect(foot()).toHaveLength(1);
+    expect(openPanel('board').querySelector('.ln-ext-src-foot')).toBeNull();
+  });
+
   it('list the packs read once the menu opens, and lead to the settings to import one', async () => {
     const all = Promise.withResolvers<readonly Pack[]>();
     await start([], () => all.promise);

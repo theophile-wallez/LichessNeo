@@ -250,6 +250,23 @@ main
     drop-shadow(0 1px 0 var(--ln-ext-text-dim)) drop-shadow(0 -1px 0 var(--ln-ext-text-dim)) !important;
 }
 
+/* Their color first (board/pieces.css), then the edge. */
+html[data-ln-ext-black-pieces]
+  main
+  .ln-ext-captured__group
+  .ln-ext-pc:is(
+    .ln-ext-pc-bp,
+    .ln-ext-pc-bn,
+    .ln-ext-pc-bb,
+    .ln-ext-pc-br,
+    .ln-ext-pc-bq,
+    .ln-ext-pc-bk
+  ) {
+  filter: url('#ln-ext-black-pieces') drop-shadow(1px 0 0 var(--ln-ext-text-dim))
+    drop-shadow(-1px 0 0 var(--ln-ext-text-dim)) drop-shadow(0 1px 0 var(--ln-ext-text-dim))
+    drop-shadow(0 -1px 0 var(--ln-ext-text-dim)) !important;
+}
+
 .ln-ext-captured__group .ln-ext-pc + .ln-ext-pc {
   margin-left: -11px !important;
 }

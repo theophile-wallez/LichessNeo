@@ -109,6 +109,15 @@ describe('a Board & sounds card', () => {
     expect(empty?.getAttribute('href')).toBe('#ln-ext-extension/packs');
   });
 
+  it('ends the pieces’ card with their black’s color, which holds for Lichess’s sets too', async () => {
+    const { looks } = await card('piece');
+    looks.showLichess([]);
+    expect(looks.element.lastElementChild?.textContent).toContain('Black pieces');
+    document.body.innerHTML = '';
+    const board = await card('board');
+    expect(board.looks.element.textContent).not.toContain('Black pieces');
+  });
+
   it('picks one of Lichess’s own, and tells the page world', async () => {
     document.body.dataset.board = 'wood4';
     const { library, looks } = await card('board');

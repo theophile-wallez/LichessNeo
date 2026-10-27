@@ -99,7 +99,7 @@
 #top
   #dasher_app
   .sub:not(.sound)[data-ln-ext-view='extension']
-  > :not(.head, .ln-ext-src-tabs, .ln-ext-src-choices),
+  > :not(.head, .ln-ext-src-tabs, .ln-ext-src-choices, .ln-ext-src-foot),
 #top #dasher_app .sub.sound[data-ln-ext-view='extension'] .selector {
   display: none !important;
 }

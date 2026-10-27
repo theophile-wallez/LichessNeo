@@ -19,6 +19,8 @@ export const StorageKey = {
   backlitRadius: prefixed('backlit-radius'),
   // The custom board's colors and texture (content/packs/custom-board.ts).
   customBoard: prefixed('custom-board'),
+  // The black pieces' color (content/packs/black-pieces.ts).
+  blackPieces: prefixed('black-pieces'),
   // The custom boards saved under a name (content/packs/saved-boards.ts).
   savedBoards: prefixed('saved-boards'),
   coach: prefixed('coach'),

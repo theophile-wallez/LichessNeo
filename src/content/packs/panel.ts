@@ -4,6 +4,7 @@ import type { PartKind } from '#shared/packs/pack.ts';
 import { choiceSection } from './choices.ts';
 import { markFamilies } from './family.ts';
 import { showOptionRows } from './option-row.ts';
+import { FOOT_ROWS } from './options.ts';
 
 // The Extension / Lichess tabs added to the user menu's Board, Piece set and
 // Sound panels (styles/sidebar/dasher-pickers.css).
@@ -61,12 +62,17 @@ export interface DressOptions {
 
 /**
  * Puts the tabs after the panel's title and the extension's choices after
- * them, or, in the Sound panel, beside the volume slider. Snabbdom leaves alone the nodes it
+ * them, or, in the Sound panel, beside the volume slider, and the rows of both
+ * tabs at the foot. Snabbdom leaves alone the nodes it
  * didn't create, so ours can sit among Lichess's.
  */
 export function dressPanel(panel: HTMLElement, options: DressOptions): void {
   const { kind, library, view } = options;
-  for (const ours of queryAll(panel, '.ln-ext-src-tabs, .ln-ext-src-choices', HTMLElement))
+  for (const ours of queryAll(
+    panel,
+    '.ln-ext-src-tabs, .ln-ext-src-choices, .ln-ext-src-foot',
+    HTMLElement,
+  ))
     ours.remove();
   const tabs = tabBar(next => {
     options.onTab(next);
@@ -77,6 +83,12 @@ export function dressPanel(panel: HTMLElement, options: DressOptions): void {
   const content = kind === 'sound' ? panel.querySelector(':scope > .content') : null;
   if (content) content.append(section);
   else tabs.after(section);
+  const foot = FOOT_ROWS[kind];
+  if (foot.length > 0) {
+    const rows = createElement('div', { className: 'ln-ext-src-foot' });
+    rows.append(...foot.map(row => row()));
+    panel.append(rows);
+  }
   markPanel(panel, kind, library);
   showView(panel, view);
 }

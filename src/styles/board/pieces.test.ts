@@ -70,3 +70,31 @@ describe('the board’s highlights', () => {
     );
   });
 });
+
+function filtersOf(markup: string, tinted: boolean): string[] {
+  const style = document.createElement('style');
+  style.textContent = readFileSync(join(import.meta.dirname, 'pieces.css'), 'utf8');
+  document.head.replaceChildren(style);
+  if (tinted) document.documentElement.dataset.lnExtBlackPieces = '';
+  else delete document.documentElement.dataset.lnExtBlackPieces;
+  document.body.innerHTML = markup;
+  return [...document.body.children].map(element => getComputedStyle(element).filter);
+}
+
+const tinted = (filters: string[]): boolean[] =>
+  filters.map(filter => filter.includes('#ln-ext-black-pieces'));
+
+const PIECES =
+  '<piece class="black knight"></piece><piece class="white knight"></piece>' +
+  '<i class="ln-ext-pc ln-ext-pc-bq"></i><i class="ln-ext-pc ln-ext-pc-wq"></i>';
+
+describe('the black pieces’ color', () => {
+  afterEach(() => {
+    delete document.documentElement.dataset.lnExtBlackPieces;
+  });
+
+  it('filters the black pieces only, the board’s and ours, once a color is picked', () => {
+    expect(tinted(filtersOf(PIECES, true))).toEqual([true, false, true, false]);
+    expect(tinted(filtersOf(PIECES, false))).toEqual([false, false, false, false]);
+  });
+});

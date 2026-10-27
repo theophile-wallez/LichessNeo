@@ -10,7 +10,7 @@ import type { CustomBoard } from '#content/packs/custom-board.ts';
 import { paintTiles } from '#content/packs/backlit-keys.ts';
 import { showSquares } from '#content/packs/flat-boards.ts';
 import { LICHESS, type Library } from '#content/packs/library.ts';
-import { OPTION_ROWS } from '#content/packs/options.ts';
+import { FOOT_ROWS, OPTION_ROWS } from '#content/packs/options.ts';
 import { showOptionRows } from '#content/packs/option-row.ts';
 import { deleteBoard, savedBoards } from '#content/packs/saved-boards.ts';
 import { ACCENT_BOARD, familyOf } from '#content/packs/themes.ts';
@@ -22,8 +22,9 @@ import { previewOnHover } from './looks-hover.ts';
 // A card of the settings' Board & sounds page (styles/pages/settings-looks.css):
 // the extension's looks for one part, its themes and the packs that have it,
 // with their settings (the boards' in sections, looks-families.ts), over
-// Lichess's own. The part shows one of them; Lichess's
-// is ringed only while the extension leaves the part to it, as in the user menu.
+// Lichess's own, then what holds for both (the black pieces' color). The part
+// shows one of them; Lichess's is ringed only while the extension leaves the
+// part to it, as in the user menu.
 
 const TEXTS: Readonly<Record<PartKind, readonly [title: string, body: string]>> = {
   board: ['looksBoard', 'looksBoardBody'],
@@ -219,6 +220,7 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
     ...OPTION_ROWS[kind].map(row => row(library)),
     label(message('looksLichess')),
     lichess,
+    ...FOOT_ROWS[kind].map(row => row()),
   );
   let listedPacks: readonly Pack[] | null = null;
   let listedBoards: unknown = null;

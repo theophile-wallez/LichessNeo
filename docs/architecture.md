@@ -153,7 +153,7 @@ so the logic can be unit-tested without a page.
 - `settings`: the extension's settings, a section of the account pages whose
   menu gets a link for each of its pages: Appearance (the nav as a rail, the
   default, a sidebar, unfolded or not, or a header, then the color scheme, the color themes and
-  Lichess's Roundness), Board & sounds (the sounds, the board and the pieces, the
+  Lichess's Roundness), Board & sounds (the sounds, the board and the pieces and their black's color, the
   extension's, the packs' and Lichess's, followed in the other tabs, the boards in sections: classic, each
   family's, then the user's own and the packs', over a preview board that shows a board or a set while its tile is hovered, then
   the interface's own sounds and the Packs card, which its own link scrolls
@@ -247,8 +247,11 @@ panels themselves, all in `src/content/packs/`:
   (`ln-ext:sounds`), where `src/page/sounds` puts them in Lichess's player. With
   no pack, Lichess's player is left alone.
 - A theme's settings are rows in its panel (`options.ts`: options,
-  `option-row.ts`, sliders, `slider-row.ts`, colors, `color-row.ts`), kept in
-  localStorage (`stored-option.ts`). The Ascent set
+  `option-row.ts`, sliders, `slider-row.ts`, colors, `swatch-row.ts` and
+  `color-row.ts`), kept in localStorage (`stored-option.ts`). The black pieces'
+  color (`black-pieces.ts`) is a row under both tabs of the Piece set panel and
+  at the foot of the settings' card: an SVG filter of ours, on `<body>`, maps
+  their black to it and keeps their white, so it holds for any set. The Ascent set
   comes to the page in the same message, with no file and its placement, and
   `src/page/sounds/synth` plays it through Foley's Web Audio. Boxwood's
   recorded takes (`public/sounds/boxwood`, `#shared/recorded-sounds.ts`) are

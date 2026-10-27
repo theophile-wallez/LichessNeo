@@ -16,6 +16,7 @@ import {
 import type { PartKind } from '#shared/packs/pack.ts';
 import { type SoundPlace, SoundPlaceSchema, SYNTH_SET } from '#shared/sounds.ts';
 import { StorageKey } from '#shared/storage.ts';
+import { blackPiecesRow } from './black-pieces.ts';
 import { colorRow, saveRow } from './color-row.ts';
 import type { Library } from './library.ts';
 import { optionRow, type OptionRowSpec } from './option-row.ts';
@@ -25,8 +26,9 @@ import { strengthRow, textureRow } from './texture-row.ts';
 
 // The settings of the extension's themes, each a row in its panel: the custom
 // board's colors and texture and where the sound set puts a move's sound,
-// under the list, and how the backlit boards light up and the shape of their
-// keys, in their family's view, the same for them all.
+// under the list, how the backlit boards light up and the shape of their
+// keys, in their family's view, the same for them all, and the black pieces'
+// color, under both tabs.
 
 export const soundPlace = storedOption<SoundPlace>(
   StorageKey.soundPlace,
@@ -121,6 +123,13 @@ export const OPTION_ROWS: Readonly<Record<PartKind, Rows>> = {
   board: [() => colorRow('light'), () => colorRow('dark'), textureRow, strengthRow, saveRow],
   piece: [],
   sound: [() => optionRow(PLACE_ROW)],
+};
+
+/** A panel's rows under both its tabs, for whatever the part shows. */
+export const FOOT_ROWS: Readonly<Record<PartKind, readonly (() => HTMLElement)[]>> = {
+  board: [],
+  piece: [blackPiecesRow],
+  sound: [],
 };
 
 /** A family's rows, under its boards in its view. */

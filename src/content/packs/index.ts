@@ -1,3 +1,4 @@
+import { followBlackPieces } from './black-pieces.ts';
 import { followCustomBoard } from './custom-board.ts';
 import { type BacklitBoardId, backlitWords, isBacklitBoard, keyBox } from '#shared/backlit.ts';
 import { setData } from '#shared/dom.ts';
@@ -96,6 +97,7 @@ const LOADING_MAX_MS = 2000;
 /** Shows the picks at once, and the picked packs once they're read. */
 export function startPacks(): Library {
   followCustomBoard();
+  followBlackPieces();
   setLoading([
     ...(isPackId(storedPick('board')) ? ['board'] : []),
     ...(isPackId(storedPick('piece')) ? ['pieces'] : []),

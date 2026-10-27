@@ -150,6 +150,27 @@ html[data-ln-ext-loading~='pieces'] .is2d piece {
   background-image: var(---black-king);
 }
 
+/* ---- The black pieces' color (content/packs/black-pieces.ts) --- */
+
+/* The SVG that holds the filter: out of sight, but rendered, or Firefox drops the filter. */
+.ln-ext-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+html[data-ln-ext-black-pieces] piece.black,
+html[data-ln-ext-black-pieces] .ln-ext-pc-bp,
+html[data-ln-ext-black-pieces] .ln-ext-pc-bn,
+html[data-ln-ext-black-pieces] .ln-ext-pc-bb,
+html[data-ln-ext-black-pieces] .ln-ext-pc-br,
+html[data-ln-ext-black-pieces] .ln-ext-pc-bq,
+html[data-ln-ext-black-pieces] .ln-ext-pc-bk {
+  filter: url('#ln-ext-black-pieces');
+}
+
 /* ---- Highlights --- */
 
 /* Our boards' and a pack's (`data-ln-ext-board`, in 2D only); Lichess's own keep its colors.

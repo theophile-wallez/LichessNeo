@@ -26,6 +26,7 @@ export const BACKED_UP_KEYS = [
   'backlitGap',
   'backlitRadius',
   'customBoard',
+  'blackPieces',
   'savedBoards',
   'coach',
   'homeCoach',
