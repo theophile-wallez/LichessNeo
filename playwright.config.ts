@@ -17,7 +17,8 @@ export default defineConfig({
   workers: CI ? 2 : 3,
   retries: CI ? 2 : 0,
   forbidOnly: CI,
-  reporter: CI ? [['github'], ['html', { open: 'never' }]] : 'list',
+  // CI keeps no report: its failures show in the run's log and annotations.
+  reporter: CI ? 'github' : 'list',
   use: {
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
