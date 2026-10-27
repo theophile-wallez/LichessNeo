@@ -1213,6 +1213,9 @@
   "roundPanelMoves": {
     "message": "Coups"
   },
+  "roundPanelChat": {
+    "message": "Chat"
+  },
   "roundPanelGame": {
     "message": "Partie"
   },

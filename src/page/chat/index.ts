@@ -5,8 +5,8 @@ import { translate } from '#page/lichess/globals.ts';
 import { chatEvent, eventKey, type ChatEvent, type Offerer } from './events.ts';
 
 // Marks each line of a chat for its bubbles (styles/chat): whose it is, whether it
-// follows or is followed by one of the same author's, and which game event a system
-// line reports, with that event's words in the page's language.
+// follows one of the same author's, and which game event a system line reports, with
+// that event's words in the page's language.
 
 // An anonymous player's lines carry their color, not `.me`: the board is turned to it.
 function isMine(line: HTMLElement, author: string | null): boolean {
@@ -66,7 +66,6 @@ function markLines(chat: HTMLElement): void {
     const author = authors[i] ?? null;
     setData(line, 'lnExtMine', isMine(line, author) ? '' : null);
     setData(line, 'lnExtFollows', author !== null && authors[i - 1] === author ? '' : null);
-    setData(line, 'lnExtFollowed', author !== null && authors[i + 1] === author ? '' : null);
     markEvent(line, events[i] ?? null, i === latestOffer);
   }
 }

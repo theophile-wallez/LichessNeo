@@ -1,8 +1,8 @@
 /* ---- Bubbles --- */
 
-/* The others' on the left, the player's on the right in the accent, as on a phone. A run
- * of one author's lines shares the name, shown over its first, and the tail, on its last
- * (page/chat marks `data-ln-ext-mine`, `-follows`, `-followed`). */
+/* The others' on the left, the player's on the right in a tint of the accent, as in the inbox.
+ * A run of one author's lines shares the name, shown over its first (page/chat marks
+ * `data-ln-ext-mine` and `-follows`). */
 .mchat .mchat__messages {
   padding: 6px 12px 4px !important;
   font-size: 13px !important;
@@ -56,8 +56,7 @@
 }
 
 .mchat .mchat__messages > li[data-ln-ext-mine] > t {
-  background: var(--ln-ext-accent);
-  color: var(--ln-ext-white);
+  background: color-mix(in srgb, var(--ln-ext-accent) 30%, var(--ln-ext-bg-panel));
 }
 
 .mchat .mchat__messages > li.mentioned > t {
@@ -69,47 +68,22 @@
   text-decoration: underline;
 }
 
-/* Inside a run, the corners on the run's side tighten. */
-.mchat .mchat__messages > li:not(.system, [data-ln-ext-mine])[data-ln-ext-follows] > t {
-  border-top-left-radius: 5px;
+/* No tail, as in the inbox (styles/inbox/convo.css): the corner on the author's side tightens
+ * at the bottom, and at the top inside a run too. */
+.mchat .mchat__messages > li:not(.system, [data-ln-ext-mine]) > t {
+  border-bottom-left-radius: 6px;
 }
 
-.mchat .mchat__messages > li:not(.system, [data-ln-ext-mine])[data-ln-ext-followed] > t {
-  border-bottom-left-radius: 5px;
+.mchat .mchat__messages > li:not(.system, [data-ln-ext-mine])[data-ln-ext-follows] > t {
+  border-top-left-radius: 6px;
+}
+
+.mchat .mchat__messages > li[data-ln-ext-mine] > t {
+  border-bottom-right-radius: 6px;
 }
 
 .mchat .mchat__messages > li[data-ln-ext-mine][data-ln-ext-follows] > t {
-  border-top-right-radius: 5px;
-}
-
-.mchat .mchat__messages > li[data-ln-ext-mine][data-ln-ext-followed] > t {
-  border-bottom-right-radius: 5px;
-}
-
-/* The tail on a run's last bubble: a curl off its bottom corner, which tightens to meet it. */
-.mchat .mchat__messages > li:not(.system, [data-ln-ext-mine], [data-ln-ext-followed]) > t {
-  border-bottom-left-radius: 4px;
-}
-
-.mchat .mchat__messages > li[data-ln-ext-mine]:not([data-ln-ext-followed]) > t {
-  border-bottom-right-radius: 4px;
-}
-
-.mchat .mchat__messages > li:not(.system, [data-ln-ext-followed]) > t::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: -9px;
-  width: 11px;
-  height: 17px;
-  background: inherit;
-  mask: radial-gradient(ellipse 100% 100% at 0 0, #0000 98%, #000);
-}
-
-.mchat .mchat__messages > li[data-ln-ext-mine]:not([data-ln-ext-followed]) > t::before {
-  right: -9px;
-  left: auto;
-  mask: radial-gradient(ellipse 100% 100% at 100% 0, #0000 98%, #000);
+  border-top-right-radius: 6px;
 }
 
 /* Lichess's reply and report, shown on hover, beside the bubble rather than at the line's

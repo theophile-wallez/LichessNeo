@@ -94,12 +94,18 @@ const isPart = (value: string | undefined): value is Part =>
 const chatKey = (tab: HTMLElement): string =>
   [...tab.classList].find(name => !name.startsWith('mchat__tab')) ?? 'discussion';
 
+// Lichess's name for its room ("Chat room") is longer than the bar's others: ours is "Chat".
+function chatLabel(tab: HTMLElement, key: string): string {
+  if (key === 'discussion') return message('roundPanelChat');
+  // The name is in a span of its own, beside the switch an optional chat's tab holds.
+  return queryOne(tab, ':scope > span', HTMLElement)?.textContent.trim() ?? '';
+}
+
 function chatTabs(host: Host, page: HTMLElement): TabSpec[] {
   return queryAll(page, `${host.chat} .mchat__tab`, HTMLElement).map(tab => ({
     key: chatKey(tab),
     part: 'chat',
-    // The name is in a span of its own, beside the switch an optional chat's tab holds.
-    label: queryOne(tab, ':scope > span', HTMLElement)?.textContent.trim() ?? '',
+    label: chatLabel(tab, chatKey(tab)),
   }));
 }
 
@@ -169,7 +175,9 @@ function markActive(host: Host, bar: HTMLElement, page: HTMLElement): void {
     tab.classList.toggle('active', tab.dataset['lnExtTab'] === active);
 }
 
-/** A dot on the chat's tab for a line that came in while another part was on show. */
+const unreadCount = (unread: number): string => (unread > 9 ? '9+' : String(unread));
+
+/** A count on the chat's tab of the lines that came in while another part was on show. */
 function markUnread(host: Host, bar: HTMLElement, page: HTMLElement): void {
   const list = queryOne(page, `${host.chat} .mchat__messages`, HTMLElement);
   if (!list) return;
@@ -178,7 +186,8 @@ function markUnread(host: Host, bar: HTMLElement, page: HTMLElement): void {
   // the oldest lines of a long chat, and a new game starts with none.
   if (shown === 'chat' || seenLines === null || lines < seenLines) seenLines = lines;
   const tab = queryOne(bar, `.${TAB}[data-ln-ext-tab='discussion']`, HTMLElement);
-  if (tab) setData(tab, 'lnExtUnread', lines > seenLines ? '' : null);
+  const unread = lines - seenLines;
+  if (tab) setData(tab, 'lnExtUnread', unread > 0 ? unreadCount(unread) : null);
 }
 
 // The panel's parts keep their scroll only while they show.
@@ -214,6 +223,8 @@ function onBarClick(event: MouseEvent): void {
 export function showPanelPart(part: Part): void {
   shown = part;
   syncPanelTabs();
+  const found = findHost();
+  if (found) scrollIntoPlace(found.host, found.page, part);
 }
 
 function findHost(): { readonly host: Host; readonly page: HTMLElement } | null {

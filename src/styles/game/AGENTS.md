@@ -11,7 +11,9 @@ the root's [AGENTS.md](../../../AGENTS.md).
 - **Game over.** The end-of-game buttons are `.rcontrols > .follow-up`
   (rematch, new opponent, tournament, then the analysis link, always last).
   "New opponent" exists only for lobby and pool games; otherwise
-  `content/game/new-game.ts` prepends its own `/?hook_like=<id>` button.
+  `content/game/new-game.ts` prepends its own `/?hook_like=<id>` button, and
+  `content/game/chat-presets.ts` the chat's quick replies (`.mchat__presets`),
+  which Lichess draws only in the chat's room, not while its notes are open.
   `page/game-over` puts its card at the head of these buttons, which are its
   foot (the analysis link first, as Game Review). The round data has no clock
   history: move times come from `/game/export/<id>?clocks=true`, and every

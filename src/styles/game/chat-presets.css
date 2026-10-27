@@ -1,0 +1,69 @@
+/* Lichess's quick replies at a game's end (content/game/chat-presets.ts): a row of chips between
+ * the game over's card and the follow-up buttons, after a chat bubble, in place of the chat's. */
+
+main.round[data-ln-ext-chat-presets] .round__side > .mchat .mchat__presets {
+  display: none !important;
+}
+
+main.round .rcontrols .follow-up > .ln-ext-chat-presets {
+  display: flex;
+  flex: 0 0 100%;
+  flex-wrap: wrap;
+  order: -2;
+  align-items: center;
+  gap: 6px;
+  animation: ln-ext-chat-presets 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+/* The card's margin makes the gap over the buttons (game-end-fold.css): this row makes its own. */
+main.round .rcontrols .follow-up[data-ln-ext-end-card] > .ln-ext-chat-presets {
+  margin-bottom: 8px;
+}
+
+main.round .rcontrols .follow-up > .ln-ext-chat-presets::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-inline: 2px;
+  background: var(--ln-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat.svg') center /
+    contain no-repeat;
+}
+
+.ln-ext-chat-presets__reply {
+  flex: none;
+  height: 28px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 999px;
+  background: var(--ln-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  color: var(--ln-ext-text-strong);
+  font: 600 12px / 28px var(--ln-ext-font);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    box-shadow 0.15s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-chat-presets__reply:hover {
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 40%, transparent);
+  color: var(--ln-ext-accent-hover);
+  transform: translateY(-1px);
+}
+
+.ln-ext-chat-presets__reply:active {
+  transform: scale(0.96);
+}
+
+@keyframes ln-ext-chat-presets {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+}

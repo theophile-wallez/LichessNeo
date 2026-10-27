@@ -1557,6 +1557,10 @@
     "message": "Moves",
     "description": "The game panel's tab that shows the move list."
   },
+  "roundPanelChat": {
+    "message": "Chat",
+    "description": "The game panel's tab that shows the chat room."
+  },
   "roundPanelGame": {
     "message": "Game",
     "description": "The game panel's tab that shows the game's info, where the game has no chat."

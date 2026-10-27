@@ -59,7 +59,7 @@ describe('the game panel’s tabs', () => {
   it('gives the moves, the chat and its notes one tab each, the moves on show', () => {
     document.body.innerHTML = round(chat([]));
     syncPanelTabs();
-    expect(labels()).toEqual(['roundPanelMoves', 'Chat room', 'Notes']);
+    expect(labels()).toEqual(['roundPanelMoves', 'roundPanelChat', 'Notes']);
     expect(main()?.dataset.lnExtPanel).toBe('moves');
     expect(main()?.dataset.lnExtTabbed).toBe('');
     expect(activeLabel()).toBe('roundPanelMoves');
@@ -91,7 +91,7 @@ describe('the game panel’s tabs', () => {
     document.body.innerHTML = round(chat([]));
     syncPanelTabs();
     tab('discussion')?.click();
-    expect(activeLabel()).toBe('Chat room');
+    expect(activeLabel()).toBe('roundPanelChat');
     // Lichess moves its own active class as it draws the pane.
     queryOne(document, '.mchat__tab.discussion', HTMLElement)?.classList.remove(
       'mchat__tab-active',
@@ -101,7 +101,7 @@ describe('the game panel’s tabs', () => {
     expect(activeLabel()).toBe('Notes');
   });
 
-  it('dots the chat’s tab for a line that came in while another part was on show', () => {
+  it('counts on the chat’s tab the lines that came in while another part was on show', () => {
     document.body.innerHTML = round(chat(['hello']));
     syncPanelTabs();
     // The lines the room already held when it was drawn aren't unread.
@@ -111,7 +111,13 @@ describe('the game panel’s tabs', () => {
       '<li><t>good game</t></li>',
     );
     syncPanelTabs();
-    expect(tab('discussion')?.dataset.lnExtUnread).toBe('');
+    expect(tab('discussion')?.dataset.lnExtUnread).toBe('1');
+    queryOne(document, '.mchat__messages', HTMLElement)?.insertAdjacentHTML(
+      'beforeend',
+      '<li><t>well played</t></li>',
+    );
+    syncPanelTabs();
+    expect(tab('discussion')?.dataset.lnExtUnread).toBe('2');
     tab('discussion')?.click();
     expect(tab('discussion')?.dataset.lnExtUnread).toBeUndefined();
   });
@@ -142,7 +148,7 @@ describe('the game panel’s tabs', () => {
   it('gives the analysis panel the same tabs, the engine and moves as one part', () => {
     document.body.innerHTML = analyse(chat([]));
     syncPanelTabs();
-    expect(labels()).toEqual(['roundPanelMoves', 'Chat room', 'Notes']);
+    expect(labels()).toEqual(['roundPanelMoves', 'roundPanelChat', 'Notes']);
     expect(main()?.dataset.lnExtPanel).toBe('moves');
     tab('note')?.click();
     expect(main()?.dataset.lnExtPanel).toBe('chat');
@@ -158,7 +164,7 @@ describe('the game panel’s tabs', () => {
         '<div class="analyse__underboard"><div class="study__metadata"></div></div>',
     );
     syncPanelTabs();
-    expect(labels()).toEqual(['roundPanelMoves', 'Chat room', 'Notes', 'studyPanelInfo']);
+    expect(labels()).toEqual(['roundPanelMoves', 'roundPanelChat', 'Notes', 'studyPanelInfo']);
     tab('meta')?.click();
     expect(main()?.dataset.lnExtPanel).toBe('meta');
   });
@@ -171,7 +177,7 @@ describe('the game panel’s tabs', () => {
     expect(main()?.dataset.lnExtTabbed).toBeUndefined();
     document.documentElement.classList.remove('ln-ext-review-moves');
     syncPanelTabs();
-    expect(labels()).toEqual(['roundPanelMoves', 'Chat room', 'Notes']);
+    expect(labels()).toEqual(['roundPanelMoves', 'roundPanelChat', 'Notes']);
   });
 
   it('follows the Game Review as it takes the panel and gives it back, not a tick later', async () => {
@@ -196,6 +202,6 @@ describe('the game panel’s tabs', () => {
     expect(tabs()[0]).toBe(first);
     queryOne(document, '.mchat__tab.note', HTMLElement)?.remove();
     syncPanelTabs();
-    expect(labels()).toEqual(['roundPanelMoves', 'Chat room']);
+    expect(labels()).toEqual(['roundPanelMoves', 'roundPanelChat']);
   });
 });

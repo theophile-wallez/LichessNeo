@@ -93,16 +93,28 @@ main.round .rcontrols .follow-up .ln-ext-end__card {
   }
 }
 
-/* A phone: a smaller coach leaves the words room. */
-@media (max-width: 1019.98px) {
-  @container (max-width: 360px) {
-    .ln-ext-end__card .ln-ext-end__glow {
-      --ln-ext-coach-h: 92px;
-    }
+/* A phone, or the desktop's panel just past 1020px: a smaller coach leaves the words room. */
+@container (max-width: 360px) {
+  .ln-ext-end__card .ln-ext-end__glow {
+    --ln-ext-coach-h: 92px;
+  }
 
-    .ln-ext-end__card .ln-ext-end__title {
-      font-size: 20px;
-    }
+  .ln-ext-end__card .ln-ext-end__title {
+    font-size: 20px;
+  }
+}
+
+@container (max-width: 300px) {
+  .ln-ext-end__card .ln-ext-end__glow {
+    --ln-ext-coach-h: 76px;
+  }
+
+  .ln-ext-end__card .ln-ext-end__title {
+    font-size: 17px;
+  }
+
+  .ln-ext-end__card .ln-ext-end__bubble {
+    font-size: 12.5px;
   }
 }
 

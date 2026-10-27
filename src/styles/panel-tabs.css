@@ -85,14 +85,34 @@ main:is(.round, .analyse) > .ln-ext-panel-tabs {
     box-shadow: 0 1px 2px var(--ln-ext-shade-55);
   }
 
-  /* A line that came in while another part was on show. */
+  /* How many lines came in while another part was on show. */
   .ln-ext-panel-tabs__tab[data-ln-ext-unread]::after {
-    content: '';
+    content: attr(data-ln-ext-unread);
     flex: none;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--ln-ext-accent);
+    box-sizing: border-box;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ln-ext-accent) 32%, transparent);
+    color: var(--ln-ext-accent-hover);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    animation: ln-ext-unread-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+  }
+
+  html.light .ln-ext-panel-tabs__tab[data-ln-ext-unread]::after {
+    background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+    color: var(--ln-ext-accent-dim);
+  }
+
+  @keyframes ln-ext-unread-in {
+    from {
+      scale: 0.4;
+      opacity: 0;
+    }
   }
 
   /* Lichess's chat tabs: ours carry them. A chat nobody may post in has one tab, which holds

@@ -36,6 +36,7 @@ import { boardTools } from './game/board-tools.ts';
 
 import { moveTimes } from './game/move-times.ts';
 import { newGame } from './game/new-game.ts';
+import { chatPresets } from './game/chat-presets.ts';
 import { zenExit } from './game/zen-exit.ts';
 import { ratingRefresh } from './game/rating-refresh.ts';
 import { countryFlags } from './game/flags.ts';
@@ -140,6 +141,7 @@ const FEATURES = [
   zenExit,
   moveTimes,
   newGame,
+  chatPresets,
   ratingRefresh,
   countryFlags,
   gameIntro,
