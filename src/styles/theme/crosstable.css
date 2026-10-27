@@ -2,9 +2,9 @@
 
 /* The players' crosstable, on a game's page (game/moves-extras.css) and in an analysis's tools
  * (analysis/underboard.css). Lichess's strip of columns, one per game, cuts the names short in
- * a narrow panel. Ours reads as two rows, one per player: the name, the last games as squares
- * (green for the winner), the current match's score, then the lifetime score. As many games
- * show as the width allows, at every width. */
+ * a narrow panel. Ours reads as two rows, one per player: the name, the last games as tinted
+ * squares (green for the winner, yellow for a draw), the current match's score, then the
+ * lifetime score. As many games show as the width allows, at every width. */
 
 main:is(.round, .analyse) .crosstable {
   display: flex !important;
@@ -18,6 +18,12 @@ main:is(.round, .analyse) .crosstable {
   container-type: inline-size;
   font-family: var(--ln-ext-font);
   line-height: 20px;
+}
+
+/* An analysis's tab holds it in a flex row (`.ctable`), where it would shrink to its squares and
+ * leave the names no room. */
+main.analyse .ctable > .crosstable {
+  flex: 1 1 auto;
 }
 
 main:is(.round, .analyse)
@@ -62,10 +68,12 @@ main:is(.round, .analyse) .crosstable__users .uflair {
   vertical-align: -2px;
 }
 
-/* The names come first: three games in the narrowest panel, more as it widens. */
+/* The names come first: three games in the narrowest panel, more as it widens. Content-box, so
+ * a column set apart by a hairline (`.sep`, `.current`) adds it to its squares' width. */
 main:is(.round, .analyse) .crosstable povs {
   display: none !important;
   flex: 0 0 20px;
+  box-sizing: content-box;
 }
 
 main:is(.round, .analyse) .crosstable povs:nth-last-of-type(-n + 3) {
@@ -99,8 +107,8 @@ main:is(.round, .analyse) .crosstable povs.sep {
 
 main:is(.round, .analyse) .crosstable povs a {
   flex: 0 0 20px;
-  border-radius: 3px;
-  background: var(--ln-ext-bg-raised);
+  border-radius: 5px;
+  background: var(--ln-ext-lift-6);
   color: var(--ln-ext-text-dim) !important;
   font-size: 11px;
   font-weight: 700;
@@ -109,18 +117,39 @@ main:is(.round, .analyse) .crosstable povs a {
   transition: filter 0.15s;
 }
 
-/* Dark on the bright green: white is hard to read there. */
 main:is(.round, .analyse) .crosstable povs a.win {
-  background: var(--ln-ext-good);
-  color: var(--ln-ext-ink) !important;
+  background: color-mix(in srgb, var(--ln-ext-good) 18%, transparent);
+  color: var(--ln-ext-good-hover) !important;
+}
+
+/* Lichess gives a draw neither class. */
+main:is(.round, .analyse) .crosstable povs a:not(.win, .loss) {
+  background: color-mix(in srgb, var(--ln-ext-yellow) 14%, transparent);
+  color: var(--ln-ext-yellow) !important;
 }
 
 main:is(.round, .analyse) .crosstable povs a:hover {
   filter: brightness(1.2);
 }
 
-main:is(.round, .analyse) .crosstable povs.current a {
-  box-shadow: inset 0 0 0 2px var(--ln-ext-accent);
+/* The game on show stands apart behind a hairline, its squares a touch larger. A first game
+ * needs neither, nor the scores, which only repeat its squares. */
+main:is(.round, .analyse) .crosstable povs.current:not(:only-of-type) {
+  margin-inline-start: 5px;
+  padding-inline-start: 6px;
+  border-inline-start: 1px solid var(--ln-ext-lift-15);
+  border-radius: 0;
+}
+
+main:is(.round, .analyse) .crosstable povs.current:not(:only-of-type) a {
+  transform: scale(1.1);
+}
+
+main:is(.round, .analyse)
+  .crosstable
+  povs:only-of-type
+  ~ :is(.crosstable__matchup, .crosstable__score) {
+  display: none !important;
 }
 
 main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) {
@@ -140,7 +169,9 @@ main:is(.round, .analyse) .crosstable .crosstable__matchup {
 
 main:is(.round, .analyse) .crosstable__score {
   min-width: 2.5ch;
-  font-size: 14px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800 !important;
 }
 
 main:is(.round, .analyse) .crosstable :is(.crosstable__matchup, .crosstable__score) span {
