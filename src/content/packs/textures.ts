@@ -7,20 +7,21 @@ import { setStyleProperty } from '#shared/dom.ts';
 // a wood's squares each come in their own color. The custom board picks a
 // texture and how strongly it shows; a ready-made material board comes with its
 // own (materials.ts). The woods and the Portoro come first: each reproduces one
-// real board, cut square by square out of photographs of it, and names the two
-// woods or stones it pairs as that board names them.
+// real board, cut square by square out of photographs of it, and is named after
+// its darker wood or stone, the one it's told apart by: the full pairing ran past
+// the Board panel's tiles.
 
 export const TEXTURES = [
-  { id: 'burl-gloss', name: 'Maple & burl' },
-  { id: 'burl', name: 'Bird’s eye & burl' },
-  { id: 'vavona', name: 'Bird’s eye & vavona' },
-  { id: 'cocobolo', name: 'Bird’s eye & cocobolo' },
-  { id: 'amboyna', name: 'Bird’s eye & amboyna' },
-  { id: 'olmo', name: 'Maple & olmo' },
-  { id: 'padauk', name: 'Bird’s eye & padauk' },
-  { id: 'palisander', name: 'Bird’s eye & palisander' },
-  { id: 'pomelle', name: 'Curly maple & pomelle' },
-  { id: 'portoro', name: 'White & Portoro' },
+  { id: 'burl-gloss', name: 'Glossy burl' },
+  { id: 'burl', name: 'Burl' },
+  { id: 'vavona', name: 'Vavona' },
+  { id: 'cocobolo', name: 'Cocobolo' },
+  { id: 'amboyna', name: 'Amboyna' },
+  { id: 'olmo', name: 'Olmo' },
+  { id: 'padauk', name: 'Padauk' },
+  { id: 'palisander', name: 'Palisander' },
+  { id: 'pomelle', name: 'Pomelle' },
+  { id: 'portoro', name: 'Portoro' },
   { id: 'marble', name: 'Marble' },
   { id: 'terrazzo', name: 'Terrazzo' },
   { id: 'slate', name: 'Slate' },
