@@ -1,7 +1,7 @@
 /* ---- The graph's views --- */
 
 /* Advantage or move times (page/review/view/graph-views.ts), a frosted pill over the
-   graph's top left corner; its pick slides (content/ui/tab-bars.ts). */
+   graph's top left corner, or its bottom one; its pick slides (content/ui/tab-bars.ts). */
 #ln-ext-review .ln-ext-graph-views {
   --ln-ext-tab-bg: var(--ln-ext-bg-raised-hover);
   --ln-ext-tab-radius: 6px;
@@ -18,6 +18,12 @@
   background: color-mix(in srgb, var(--ln-ext-bg-panel-dark) 82%, transparent);
   box-shadow: 0 1px 4px var(--ln-ext-shade-30);
   backdrop-filter: blur(6px);
+}
+
+/* Down in the bottom corner where the graph runs under the top one (view/graph-corner.ts). */
+#ln-ext-review .ln-ext-graph-views[data-ln-ext-corner='bottom'] {
+  top: auto;
+  bottom: 6px;
 }
 
 #ln-ext-review .ln-ext-graph-views[hidden] {

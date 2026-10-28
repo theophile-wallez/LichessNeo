@@ -147,7 +147,13 @@ end is judged like a variation's.
 The move-by-move graph has two views, the advantage and, for a game with
 clocks, each move's time as a column (`view/graph-views.ts`,
 `view/graph-times.ts`): the toggle over its corner is kept across renders so
-that its pick slides. The share button beside the tabs opens Lichess's crosstable
+that its pick slides, and goes down to the bottom corner when what the view
+draws runs under the top one, as when White leads from the start
+(`view/graph-corner.ts`). Both graphs mark the game's phases as Lichess's chart
+does, a dashed line where the middlegame and the endgame start, named at the
+bottom (`view/phases.ts`), and the move list heads the row each phase starts on
+with its name (`view/move-list-phases.ts`). The phases are the rating's own
+division (`game/division.ts`, `rating/phases.ts`). The share button beside the tabs opens Lichess's crosstable
 and "Share & export" over the panel (`ln-ext-review-sheet`,
 `styles/review/sheet.css`); changing modes closes them.
 

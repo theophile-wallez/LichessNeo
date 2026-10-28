@@ -6,11 +6,14 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import type { MoveTime } from '#page/charts/game/series.ts';
 import { spentTime } from '#page/review/coach/clock.ts';
 import { formatEval } from '#page/review/evaluation/format.ts';
+import { gameDivision } from '#page/review/game/division.ts';
 import { plyIndex } from '#page/review/game/work.ts';
 import type { GraphKind, GraphView, Review, Session } from '#page/review/session.ts';
-import { CURSOR_COLOR, graphMarkup, lastIndex } from './graph-markup.ts';
+import { placeToggle } from './graph-corner.ts';
+import { CURSOR_COLOR, curveSpans, graphMarkup, lastIndex } from './graph-markup.ts';
 import { hidePreview, positionAt, showPreview } from './graph-preview.ts';
-import { timesMarkup } from './graph-times.ts';
+import { timeSpans, timesMarkup } from './graph-times.ts';
+import { phaseStarts } from './phases.ts';
 import { jump, stopPlaying } from './navigation.ts';
 import { gameTimes } from './timing.ts';
 
@@ -176,10 +179,14 @@ export function mountGraph(
   const shown: GraphView = times.length > 0 ? 'time' : 'advantage';
   if (moveCursor(container, { review, box, shown, orientation: analysis.orientation() }, ply))
     return;
+  const timesGraph = { times, last: lastIndex(review), ply };
+  const spans = () => (shown === 'time' ? timeSpans(timesGraph, box) : curveSpans(review, box));
+  const toggleBelow = kind === 'moves' ? placeToggle(container, spans, box.height) : 0;
+  const phases = { starts: phaseStarts(gameDivision(session.work)), toggleBelow };
   const svg =
     shown === 'time'
-      ? timesMarkup({ times, last: lastIndex(review), ply }, box)
-      : graphMarkup(review, ply, box);
+      ? timesMarkup({ ...timesGraph, phases }, box)
+      : graphMarkup(review, ply, box, phases);
   setHtml(container, html`${svg}<span class="ln-ext-graph-tip"></span>`);
   // The first time each graph shows, it draws itself from left to right; on a change of
   // view, faster, as the toggle's pick slides.

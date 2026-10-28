@@ -14,7 +14,7 @@ export interface PhaseNames {
 export const PLOT_TOP = 18;
 
 // A name's width at the phases' font (10.5px bold), near enough to keep two apart.
-const nameWidth = (name: string): number => name.length * 6.2;
+export const nameWidth = (name: string): number => name.length * 6.2;
 const NAME_GAP = 4;
 
 export interface PhaseLabel {
@@ -25,18 +25,27 @@ export interface PhaseLabel {
 
 /**
  * Where each phase's name goes: right of its line, or left of it when the next
- * name would cover it, or nowhere when neither side has room.
+ * name or the plot's edge would cut it, or nowhere when neither side has room.
  */
-export function phaseLabels(lines: readonly { x: number; name: string }[]): PhaseLabel[] {
-  return lines.flatMap((line, i): PhaseLabel[] => {
-    const next = lines[i + 1];
+export function phaseLabels(
+  lines: readonly { x: number; name: string }[],
+  plotWidth: number,
+): PhaseLabel[] {
+  const labels: PhaseLabel[] = [];
+  // Where the last name placed ends: one moved left of its line must not cover it.
+  let taken = 0;
+  for (const [i, line] of lines.entries()) {
+    const limit = lines[i + 1]?.x ?? plotWidth;
     const width = nameWidth(line.name);
-    if (!next || line.x + NAME_GAP + width + NAME_GAP <= next.x)
-      return [{ x: line.x + NAME_GAP, name: line.name, anchor: 'start' }];
-    if (line.x - NAME_GAP - width >= 0)
-      return [{ x: line.x - NAME_GAP, name: line.name, anchor: 'end' }];
-    return [];
-  });
+    if (line.x + NAME_GAP + width + NAME_GAP <= limit) {
+      labels.push({ x: line.x + NAME_GAP, name: line.name, anchor: 'start' });
+      taken = line.x + NAME_GAP + width;
+    } else if (line.x - NAME_GAP - width >= taken + NAME_GAP) {
+      labels.push({ x: line.x - NAME_GAP, name: line.name, anchor: 'end' });
+      taken = line.x;
+    }
+  }
+  return labels;
 }
 
 /** A dashed line where the middlegame and the endgame start, named at the top. */
@@ -54,7 +63,7 @@ export function phasesMarkup(
     ({ x }) =>
       html`<line class="ln-ext-gchart__phase" x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${PLOT_TOP}" y2="${size.height}"/>`,
   );
-  const labels = phaseLabels(lines).map(
+  const labels = phaseLabels(lines, size.width).map(
     ({ x, name, anchor }) =>
       html`<text class="ln-ext-gchart__phase-name" x="${x.toFixed(1)}" y="12" text-anchor="${anchor}">${name}</text>`,
   );

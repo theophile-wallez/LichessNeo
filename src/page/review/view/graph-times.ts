@@ -3,6 +3,8 @@ import { clamp } from '#shared/math.ts';
 import { timeShare } from '#page/charts/game/move-times.ts';
 import type { MoveTime } from '#page/charts/game/series.ts';
 import type { GraphSize } from './graph-markup.ts';
+import type { Span } from './graph-corner.ts';
+import { NO_PHASES, phaseLinesMarkup, type PhaseMarks } from './phases.ts';
 
 // The move-by-move graph's other view: each move's time as a column, White's
 // above the middle line and Black's below, on the advantage's x, so a long
@@ -13,22 +15,41 @@ export interface TimesGraph {
   /** The last position's index, as the advantage spaces it. */
   readonly last: number;
   readonly ply: number;
+  readonly phases?: PhaseMarks;
 }
 
-export function timesMarkup(
-  { times, last, ply }: TimesGraph,
-  { width, height }: GraphSize,
-): SafeHtml {
+interface Bar {
+  readonly time: MoveTime;
+  /** Its middle. */
+  readonly x: number;
+  readonly top: number;
+  readonly length: number;
+}
+
+function timeBars({ times, last }: TimesGraph, { width, height }: GraphSize): Bar[] {
   const span = last || 1;
   const middle = height / 2;
   const longest = Math.max(0, ...times.map(time => time.seconds));
-  const barWidth = clamp((width / span) * 0.6, 1, 6);
-  const bars = times.map(time => {
+  return times.map(time => {
     const length = Math.max(1, timeShare(time.seconds, longest) * (middle - 2));
     const top = time.color === 'white' ? middle - length : middle;
-    const x = (time.ply / span) * width - barWidth / 2;
+    return { time, x: (time.ply / span) * width, top, length };
+  });
+}
+
+/** What the columns cover of the graph. */
+export const timeSpans = (graph: TimesGraph, size: GraphSize): Span[] =>
+  timeBars(graph, size).map(({ x, top, length }) => ({ x, top, bottom: top + length }));
+
+export function timesMarkup(graph: TimesGraph, size: GraphSize): SafeHtml {
+  const { last, ply, phases = NO_PHASES } = graph;
+  const { width, height } = size;
+  const span = last || 1;
+  const middle = height / 2;
+  const barWidth = clamp((width / span) * 0.6, 1, 6);
+  const bars = timeBars(graph, size).map(({ time, x, top, length }) => {
     const now = time.ply === ply ? ' ln-ext-graph-bar--now' : '';
-    return html`<rect class="ln-ext-graph-bar ln-ext-graph-bar--${time.color}${now}" x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${length.toFixed(1)}" rx="${Math.min(2, barWidth / 2).toFixed(1)}"/>`;
+    return html`<rect class="ln-ext-graph-bar ln-ext-graph-bar--${time.color}${now}" x="${(x - barWidth / 2).toFixed(1)}" y="${top.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${length.toFixed(1)}" rx="${Math.min(2, barWidth / 2).toFixed(1)}"/>`;
   });
   const marker =
     ply > 0
@@ -37,5 +58,5 @@ export function timesMarkup(
   return html`<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
       <rect width="${width}" height="${height}" fill="#403d39"/>
       <line x1="0" x2="${width}" y1="${middle}" y2="${middle}" stroke="#8b8987" stroke-width="1" opacity="0.6"/>
-      ${marker}<g>${bars}</g></svg>`;
+      ${phaseLinesMarkup(phases, { width, height }, { x: index => (index / span) * width, areaBelow: false })}${marker}<g>${bars}</g></svg>`;
 }

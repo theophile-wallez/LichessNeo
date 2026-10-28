@@ -60,6 +60,33 @@ html.light :is(.ln-ext-summary-graph, #ln-ext-review-graph) svg > rect {
 html.light :is(.ln-ext-summary-graph, #ln-ext-review-graph) svg > path {
   fill: var(--ln-ext-neutral-1);
 }
+/* The phases (view/phases.ts): a dashed line where each starts, its name at the bottom, ringed
+   in what it stands on: the ground under the move times, White's area under the advantage. */
+.ln-ext-graph-phase {
+  stroke: var(--ln-ext-neutral-10);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.8;
+}
+.ln-ext-graph-phase-name {
+  fill: var(--ln-ext-neutral-11);
+  stroke: var(--ln-ext-neutral-6);
+  stroke-width: 3px;
+  paint-order: stroke;
+  font: 700 10.5px var(--ln-ext-font);
+}
+html.light .ln-ext-graph-phase-name {
+  fill: var(--ln-ext-neutral-4);
+  stroke: var(--ln-ext-neutral-12);
+}
+.ln-ext-graph-phase-name--area {
+  fill: var(--ln-ext-neutral-8);
+  stroke: var(--ln-ext-neutral-13);
+}
+html.light .ln-ext-graph-phase-name--area {
+  fill: var(--ln-ext-neutral-10);
+  stroke: var(--ln-ext-neutral-1);
+}
 /* In the move-by-move panel, under its header: the story of the game, large. Its views'
    toggle sits over its corner (graph-views.css). */
 #ln-ext-review .ln-ext-review__graph-box {

@@ -11,12 +11,14 @@ import {
   setReviewArrows,
   setReviewDrawing,
 } from '#page/board/review-arrows.ts';
+import { gameDivision } from '#page/review/game/division.ts';
 import { isGameNode, plyIndex } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import { type JudgedMove, onFreeBoard, type Session } from '#page/review/session.ts';
 import { badgeMarkup, reviewArrowsFor } from './board-badge.ts';
 import { barPosition, drawBar } from './eval-bar.ts';
 import { liveBadges, reviewBadges, treeMoves } from './move-list.ts';
+import { markPhaseRows } from './move-list-phases.ts';
 import { bestShown, reviewMove } from './navigation.ts';
 import { practiceBoardMove, practiceMarks } from './practice-bubble.ts';
 import { renderOpening } from './opening.ts';
@@ -130,6 +132,9 @@ export function renderBoard(session: Session, analysis: Analysis): void {
   renderArrows(session, analysis, move);
   renderDrawing(session, analysis);
   if (onFreeBoard(view.mode)) liveBadges(live, analysis, treeMoves());
-  else if (view.review) reviewBadges(live, analysis, view.review);
+  else if (view.review) {
+    reviewBadges(live, analysis, view.review);
+    markPhaseRows(gameDivision(session.work));
+  }
   if (view.mode === 'live' || view.mode === 'moves') renderOpening(session, analysis);
 }

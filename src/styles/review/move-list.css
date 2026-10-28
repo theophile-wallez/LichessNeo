@@ -56,6 +56,36 @@ html.ln-ext-review-moves main.analyse .tview2-column > index::after {
   content: '.';
 }
 
+/* The game's phases (view/move-list-phases.ts): the row a phase starts on drops below a heading
+   with its name. The column holds the heading, laid where the row's number would be. */
+html.ln-ext-review-moves main.analyse .tview2-column {
+  position: relative;
+}
+
+html.ln-ext-review-moves main.analyse .tview2-column > index[data-ln-ext-phase],
+html.ln-ext-review-moves main.analyse .tview2-column > index[data-ln-ext-phase] + move,
+html.ln-ext-review-moves main.analyse .tview2-column > index[data-ln-ext-phase] + move + move {
+  margin-top: 30px;
+}
+
+html.ln-ext-review-moves main.analyse .tview2-column > index[data-ln-ext-phase]::before {
+  content: attr(data-ln-ext-phase);
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  margin-top: -30px;
+  height: 30px;
+  padding-top: 8px;
+  box-sizing: border-box;
+  border-bottom: 1px dashed var(--ln-ext-lift-15);
+  color: var(--ln-ext-text-dim);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
 html.ln-ext-review-moves main.analyse .tview2-column > move {
   position: relative;
   flex: 0 0 26% !important;
