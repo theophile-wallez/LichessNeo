@@ -53,7 +53,7 @@ back. `pnpm check` enforces much of what follows; the rest is on you.
   before writing a helper. Test-only helpers go in `src/shared/testing/`.
 - Imports across folders use the `#` aliases of `package.json`'s `imports`
   (`#shared/…`, `#content/…`, `#page/…`, `#background/…`, `#scripts/…`,
-  `#manifest`), never `../`. `./` is for the same folder or a folder below
+  `#locales/…`, `#manifest`), never `../`. `./` is for the same folder or a folder below
   it. Keep the `.ts` extension, and `import type` for types only.
 - At most 250 lines of code per file and 60 per function, 4 parameters (use
   an options object), complexity 15, no nested ternaries. Split by what the

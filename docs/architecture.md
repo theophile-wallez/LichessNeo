@@ -151,7 +151,8 @@ so the logic can be unit-tested without a page.
   puzzle history's week, puzzles to retry and session cards.
 - `dev`: auto-reload, and the name of the draft a preview shows (`pnpm preview --name`),
   linked to the pages to review it on (`--url`).
-- `platform`: the extension APIs it uses.
+- `platform`: the extension APIs it uses, and its messages in the page's language, which
+  `chrome.i18n` takes from the browser's.
 - `settings`: the extension's settings, a section of the account pages whose
   menu gets a link for each of its pages: Appearance (the nav as a rail, the
   default, a sidebar, unfolded or not, or a header, then the color scheme, the color themes and

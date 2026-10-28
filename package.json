@@ -10,6 +10,7 @@
     "#content/*": "./src/content/*",
     "#page/*": "./src/page/*",
     "#shared/*": "./src/shared/*",
+    "#locales/*": "./public/_locales/*",
     "#manifest": "./src/manifest.ts",
     "#scripts/*": "./scripts/*"
   },

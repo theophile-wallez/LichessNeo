@@ -1,3 +1,6 @@
+import { isFrench } from '#shared/lang.ts';
+import { bundledMessage } from './messages.ts';
+
 // The extension APIs the content script uses, in one place.
 
 /** A bundled file's URL, from its path in public/ (`img/…`). */
@@ -17,9 +20,16 @@ export const extensionVersion = (): string => chrome.runtime.getManifest().versi
 export const askWorker = (message: unknown): Promise<unknown> =>
   chrome.runtime.sendMessage<unknown, unknown>(message);
 
-/** One of the extension's messages (public/_locales), in the browser's language, `$1`… filled in. */
-export const message = (name: string, ...substitutions: string[]): string =>
-  chrome.i18n.getMessage(name, substitutions);
+// chrome.i18n speaks the browser's language, which may not be Lichess's (an English
+// Chrome on a French Lichess): the page world's review follows Lichess's, and so do these.
+const browserFrench = (): boolean => chrome.i18n.getMessage('messagesLanguage', []) === 'fr';
+
+/** One of the extension's messages (public/_locales), in the page's language, `$1`… filled in. */
+export function message(name: string, ...substitutions: string[]): string {
+  const french = isFrench();
+  if (french === browserFrench()) return chrome.i18n.getMessage(name, substitutions);
+  return bundledMessage(french ? 'fr' : 'en', name, substitutions);
+}
 
 /** A value of the browser's synced storage, which follows the user to their other browsers. */
 export async function readSynced(key: string): Promise<unknown> {

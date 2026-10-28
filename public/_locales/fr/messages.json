@@ -1,4 +1,7 @@
 {
+  "messagesLanguage": {
+    "message": "fr"
+  },
   "extDescription": {
     "message": "Un Lichess moderne : mise en page aérée, pages ludiques, votre échiquier, vos pièces et vos sons, et un débrief par partie."
   },
@@ -775,7 +778,7 @@
     "message": "Performance"
   },
   "pdashAgainst": {
-    "message": "face à des problèmes classés $1"
+    "message": "face à des problèmes classés $1"
   },
   "pdashReplay": {
     "message": "Les rejouer"

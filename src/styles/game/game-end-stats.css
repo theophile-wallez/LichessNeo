@@ -111,43 +111,42 @@ a.ln-ext-end__count[href]:hover .ln-ext-end__count-label {
   line-height: 1;
 }
 
+/* French's names ("très bons coups") are too long for a narrow panel's line: they break
+   in two rather than lose their end. */
 .ln-ext-end__count-label {
-  overflow: hidden;
   color: var(--ln-ext-text-dim);
   font-size: 11.5px;
   font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.2;
 }
 
-/* A phone's card: the accuracy on a line of its own, its name beside it, so the counts get
-   the width for theirs. The card is the container (game-end-card.css). */
-@media (max-width: 1019.98px) {
-  @container (max-width: 360px) {
-    .ln-ext-end__stats {
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+/* A narrow card, a phone's or a narrow desktop panel's: the accuracy on a line of its own,
+   its name beside it, so the counts get the width for theirs. The card is the container
+   (game-end-card.css). */
+@container (max-width: 360px) {
+  .ln-ext-end__stats {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
 
-    .ln-ext-end__accuracy {
-      flex: 1 1 100%;
-      flex-direction: row;
-      align-items: baseline;
-      gap: 8px;
-    }
+  .ln-ext-end__accuracy {
+    flex: 1 1 100%;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
 
-    .ln-ext-end__accuracy b {
-      align-self: auto;
-      font-size: 30px;
-    }
+  .ln-ext-end__accuracy b {
+    align-self: auto;
+    font-size: 30px;
+  }
 
-    .ln-ext-end__accuracy b:empty {
-      height: 30px;
-    }
+  .ln-ext-end__accuracy b:empty {
+    height: 30px;
+  }
 
-    .ln-ext-end__counts {
-      flex-basis: 100%;
-    }
+  .ln-ext-end__counts {
+    flex-basis: 100%;
   }
 }
 

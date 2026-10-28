@@ -23,10 +23,12 @@ afterEach(() => {
   history.replaceState(null, '', '/');
 });
 
+// Imported first: happy-dom fires a hashchange after replaceState, which the last test's
+// listener would answer, dropping the hash, while the import is still on its way.
 async function start(path: string, markup: string): Promise<void> {
+  const { lobbyLink } = await import('./lobby-link.ts');
   history.replaceState(null, '', path);
   document.body.innerHTML = markup;
-  const { lobbyLink } = await import('./lobby-link.ts');
   lobbyLink.start();
 }
 

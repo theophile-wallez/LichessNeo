@@ -20,6 +20,7 @@ export const ALIASES: Readonly<Record<string, string>> = {
   '#content/': 'src/content/',
   '#page/': 'src/page/',
   '#shared/': 'src/shared/',
+  '#locales/': 'public/_locales/',
   '#scripts/': 'scripts/',
 };
 

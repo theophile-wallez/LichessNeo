@@ -76,10 +76,19 @@
   background: var(--ln-ext-neutral-9);
 }
 
+/* The buttons stay whole when the comment overflows: pinned to the foot of its scroll,
+   the words going under them. French's two-line "S’entraîner aux ouvertures" was cut. */
 .ln-ext-bubble__actions {
+  position: sticky;
+  bottom: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+#ln-ext-review .ln-ext-bubble__actions {
+  background: var(--ln-ext-bg-raised);
+  box-shadow: 0 -4px 4px var(--ln-ext-bg-raised);
 }
 
 .ln-ext-bubble__actions:empty {
@@ -95,6 +104,24 @@
 #ln-ext-review .ln-ext-bubble__practice:hover {
   background: var(--ln-ext-btn-primary);
   color: var(--ln-ext-white);
+}
+
+/* In a narrow panel's column (122px from 1020px) its name breaks in two even lines, not
+   three, so the pinned button leaves the comment a line. */
+@container ln-ext-review (max-width: 440px) {
+  #ln-ext-review .ln-ext-bubble__practice {
+    gap: 3px;
+    padding-inline: 5px 9px;
+    font-size: 12px;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .ln-ext-bubble__practice .ln-ext-i {
+    flex: none;
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .ln-ext-bubble__row--retry .ln-ext-bubble__title {
