@@ -1,0 +1,208 @@
+/* ---- The server analysis --- */
+
+/* Lichess's server analysis at the end of a game's move list (page/server-analysis): its
+ * request, a grey button, then its progress, its chart and each side's errors. Plain on
+ * purpose: the Debrief is the analysis the extension puts first. Below 1020px Lichess's
+ * underboard and advice summary stay on the page (layout-narrow.css), which show it already. */
+
+.ln-ext-sanalysis {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 4px 8px 12px;
+  padding: 10px 12px 12px;
+  border-radius: 10px;
+  background: var(--ln-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  font: 13px/1.3 var(--ln-ext-font);
+}
+
+.ln-ext-sanalysis[data-ln-ext-state='none'],
+html:is(.ln-ext-review-summary, .ln-ext-review-moves) .ln-ext-sanalysis {
+  display: none;
+}
+
+@media (max-width: 1019.98px) {
+  .ln-ext-sanalysis {
+    display: none;
+  }
+}
+
+/* Before it's asked for, the button alone. */
+.ln-ext-sanalysis[data-ln-ext-state='request'] {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.ln-ext-sanalysis
+  :is(.ln-ext-sanalysis__top, .ln-ext-sanalysis__chart, .ln-ext-sanalysis__bottom):empty {
+  display: none;
+}
+
+.ln-ext-sanalysis__request,
+.ln-ext-sanalysis__learn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  min-height: 34px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text);
+  font: 600 12.5px/1.2 var(--ln-ext-font);
+  cursor: pointer;
+}
+
+.ln-ext-sanalysis__request:hover,
+.ln-ext-sanalysis__learn:hover {
+  background: var(--ln-ext-btn-grey-hover);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-sanalysis__request .ln-ext-hi {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--ln-ext-text-dim);
+}
+
+.ln-ext-sanalysis__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ln-ext-sanalysis__title {
+  color: var(--ln-ext-text-dim);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ln-ext-sanalysis__status {
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-ext-sanalysis__bar {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--ln-ext-lift-8);
+}
+
+.ln-ext-sanalysis__bar > i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ln-ext-text-dim);
+  transform: scaleX(var(--ln-ext-share, 0));
+  transform-origin: left;
+  transition: transform 0.4s ease-out !important;
+}
+
+.ln-ext-sanalysis__sides {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) repeat(5, auto);
+  align-items: center;
+  gap: 6px 5px;
+}
+
+.ln-ext-sanalysis__side {
+  display: contents;
+}
+
+.ln-ext-sanalysis__player {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.ln-ext-sanalysis__dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-30);
+}
+
+.ln-ext-sanalysis__dot--white {
+  background: var(--ln-ext-side-white);
+}
+
+.ln-ext-sanalysis__dot--black {
+  background: var(--ln-ext-side-black);
+}
+
+.ln-ext-sanalysis__name {
+  overflow: hidden;
+  color: var(--ln-ext-text);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ln-ext-sanalysis__accuracy,
+.ln-ext-sanalysis__acpl {
+  min-width: 26px;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.ln-ext-sanalysis__accuracy {
+  color: var(--ln-ext-text-strong);
+}
+
+/* A count tinted with its glyph's color, as the move list's glyphs. */
+.ln-ext-sanalysis__count {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  min-width: 34px;
+  padding: 2px 6px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--ln-ext-glyph) 16%, transparent);
+  color: var(--ln-ext-glyph);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-ext-sanalysis__count--none {
+  opacity: 0.45;
+}
+
+.ln-ext-sanalysis__count > b {
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.ln-ext-sanalysis__count--inaccuracy {
+  --ln-ext-glyph: var(--ln-ext-glyph-inaccuracy);
+}
+
+.ln-ext-sanalysis__count--mistake {
+  --ln-ext-glyph: var(--ln-ext-glyph-mistake);
+}
+
+.ln-ext-sanalysis__count--blunder {
+  --ln-ext-glyph: var(--ln-ext-glyph-blunder);
+}
+
+.ln-ext-sanalysis__learn {
+  margin-top: 10px;
+}

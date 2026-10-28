@@ -12,7 +12,7 @@ const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
 // Lichess's request form, in the underboard our layout hides.
 const requestForm = (className: string): string =>
-  `<main class="analyse"><div class="analyse__underboard"><form class="${className}" action="/request"><button type="submit"></button></form></div></main>`;
+  `<main class="analyse"><div class="analyse__underboard"><div class="analyse__underboard__panels"><div class="computer-analysis active"><form class="${className}" action="/request"><button type="submit"></button></form></div></div></div></main>`;
 
 function setUp(serverAnalysis: boolean) {
   const ctrl = fakeController({

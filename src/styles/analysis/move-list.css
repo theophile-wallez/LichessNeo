@@ -85,7 +85,14 @@ main.analyse .tview2-column > move eval {
   opacity: 0.8;
 }
 
-/* Annotated moves take the Debrief's colors; the glyph is a chip tinted with it before the move. */
+/* Annotated moves take the Debrief's colors; the glyph is a chip tinted with it before the move.
+ * The errors' are the server analysis' card's too (server-analysis.css). */
+main.analyse {
+  --ln-ext-glyph-inaccuracy: #53b2ea;
+  --ln-ext-glyph-mistake: #e69d00;
+  --ln-ext-glyph-blunder: #df5353;
+}
+
 main.analyse .tview2 move.brilliant {
   --ln-ext-glyph: #21c43a;
 }
@@ -96,13 +103,13 @@ main.analyse .tview2 move.interesting {
   --ln-ext-glyph: var(--ln-ext-neutral-11);
 }
 main.analyse .tview2 move.inaccuracy {
-  --ln-ext-glyph: #53b2ea;
+  --ln-ext-glyph: var(--ln-ext-glyph-inaccuracy);
 }
 main.analyse .tview2 move.mistake {
-  --ln-ext-glyph: #e69d00;
+  --ln-ext-glyph: var(--ln-ext-glyph-mistake);
 }
 main.analyse .tview2 move.blunder {
-  --ln-ext-glyph: #df5353;
+  --ln-ext-glyph: var(--ln-ext-glyph-blunder);
 }
 
 main.analyse .tview2 move:is(.brilliant, .good, .interesting, .inaccuracy, .mistake, .blunder) {

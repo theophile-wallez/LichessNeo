@@ -10,5 +10,6 @@
 @import './export.css';
 @import './retro.css';
 @import './game-charts.css';
+@import './server-analysis.css';
 /* Last: it rearranges the parts above below 1020px. */
 @import './layout-narrow.css';

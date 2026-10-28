@@ -550,7 +550,7 @@ Claude Code loads as it reads there; any other agent reads the one of the
 area it works on first:
 
 - `src/page/`: Lichess's page APIs, the free analysis board, chessground's
-  shapes, a game's charts.
+  shapes, a game's charts, the server analysis' request.
 - `src/page/review/`: the cloud eval, mate distances, the engine's spread,
   and practice's explorer, puzzle batches and studies.
 - `src/styles/game/`: the move list's obfuscated tags, game over, variants,

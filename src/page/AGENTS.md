@@ -20,6 +20,12 @@ learned the hard way. The rules for the whole repo are in the root's
   first picked. Their data: each mainline node's `eval` (the server
   analysis, White's view, filled in as it runs) and `clock` (centiseconds),
   and `data.game.moveCentis` and `division` (the phases' plies).
+- **The server analysis' request.** A `form.future-game-analysis` in the
+  `.computer-analysis` panel, there only while the game has none and can have
+  one (not at 4 moves or fewer). Lichess's script posts it and swaps its chart
+  container in, or signed out (`must-login`) opens its own sign-in dialog.
+  Each side's counts and accuracy come in `data.analysis.white` / `.black`
+  (no accuracy on older ones); `hasFullComputerAnalysis()` says it's whole.
 - **The free analysis board.** `/analysis` is `main.analyse` with
   `site.analysis.synthetic` set: no game to export, a tree that grows as the
   user plays. Each `move` in its list carries its tree path in `p`. Opening

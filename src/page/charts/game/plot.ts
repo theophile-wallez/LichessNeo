@@ -19,6 +19,7 @@ export interface PlyChartSpec {
   readonly dotY: (ply: number, size: PlotSize) => number | null;
 }
 
+/** The plot's height in Lichess's panel. */
 const HEIGHT = 170;
 const ON = 'ln-ext-rchart__dot--on';
 
@@ -27,14 +28,16 @@ const shell = html`<div class="ln-ext-gchart__legend"></div><div class="ln-ext-r
 export class PlyChart {
   readonly root = createElement('div', { className: 'ln-ext-gchart' });
   readonly #onPick: (ply: number) => void;
+  readonly #height: number;
   #spec: PlyChartSpec | null = null;
-  #size: PlotSize = { width: 0, height: HEIGHT };
+  #size: PlotSize = { width: 0, height: 0 };
   #scale: PlyScale = plyScale(1, 0);
   #followed: number | null = null;
   #drawn = false;
 
-  constructor(container: HTMLElement, onPick: (ply: number) => void) {
+  constructor(container: HTMLElement, onPick: (ply: number) => void, height = HEIGHT) {
     this.#onPick = onPick;
+    this.#height = height;
     setHtml(this.root, shell);
     container.prepend(this.root);
     // Lichess's canvas is hidden from here on (styles/analysis/game-charts.css).
@@ -51,7 +54,7 @@ export class PlyChart {
     this.#spec = spec;
     const legend = queryOne(this.root, '.ln-ext-gchart__legend', HTMLElement);
     if (legend) setHtml(legend, spec.legend ?? html``);
-    this.#size = { width: 0, height: HEIGHT };
+    this.#size = { width: 0, height: this.#height };
     this.#redraw();
   }
 
@@ -82,9 +85,9 @@ export class PlyChart {
     const spec = this.#spec;
     const width = Math.round(plot?.clientWidth ?? 0);
     if (!svg || !spec || width === 0 || width === this.#size.width) return;
-    this.#size = { width, height: HEIGHT };
+    this.#size = { width, height: this.#height };
     this.#scale = plyScale(spec.lastPly, width);
-    sizeSvg(svg, width, HEIGHT);
+    sizeSvg(svg, width, this.#height);
     setHtml(svg, spec.draw(this.#size));
     svg.classList.toggle('ln-ext-rchart__svg--intro', !this.#drawn);
     this.#drawn = true;

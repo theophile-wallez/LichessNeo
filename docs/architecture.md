@@ -202,6 +202,9 @@ so the logic can be unit-tested without a page.
   (`#ln-ext-practice`, `src/page/review/README.md`).
 - `charts`: a game's advantage and move times, the rating distribution, and
   the insights page's answer, read off the data it fetches.
+- `server-analysis`: Lichess's server analysis at the end of a game's move
+  list, which our layout took from under the board: its request, its progress,
+  its chart and each side's errors. Plain, below the Debrief.
 - `game-over`: kings' badges, confetti, the coach's card in the panel, which folds down to its buttons.
 - `chat`: the chat's lines marked for their bubbles, its game events in the
   page's language.
