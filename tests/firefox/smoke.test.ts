@@ -79,7 +79,8 @@ function pageScriptIsIn(page: Page): Promise<boolean> {
 
 /**
  * Imports the example pack from the user menu's Board panel, as a user would.
- * Signed out, as here, the account pages are out of reach: the form is in the panel.
+ * Signed out, as here, the account pages are out of reach: the form is in the
+ * panel's Packs tab.
  */
 async function importExamplePack(page: Page): Promise<void> {
   await page.click('#top .dasher > .toggle');
@@ -88,6 +89,9 @@ async function importExamplePack(page: Page): Promise<void> {
     for (const item of document.querySelectorAll('#dasher_app .subs > button.sub'))
       if (item.textContent === 'Board' && item instanceof HTMLElement) item.click();
   });
+  const packsTab = '#dasher_app div.sub.board .ln-ext-src-tabs button[data-ln-ext-tab="packs"]';
+  await page.waitForSelector(packsTab, { visible: true, timeout: TIMEOUT_MS });
+  await page.click(packsTab);
   const form = '#dasher_app div.sub.board .ln-ext-packs__import';
   await page.waitForSelector(`${form} input[type="url"]`, { visible: true, timeout: TIMEOUT_MS });
   await page.type(`${form} input[type="url"]`, EXAMPLE_LINK);
