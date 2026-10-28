@@ -1,6 +1,5 @@
 /* A new game like the one reviewed (page/review/view/new-game.ts): a primary pill beside the
-   review's tabs, and a button under the closed review's card. Seeking, it takes the game
-   page's look (game/game-over.css). */
+   review's tabs. Seeking, it takes the game page's look (game/game-over.css). */
 
 .ln-ext-review__new {
   display: inline-flex;
@@ -34,10 +33,4 @@
   background: var(--ln-ext-btn-grey);
   color: var(--ln-ext-text-strong) !important;
   text-shadow: none;
-}
-
-.ln-ext-end__foot .ln-ext-new-game {
-  color: var(--ln-ext-text-strong) !important;
-  white-space: nowrap;
-  text-decoration: none !important;
 }

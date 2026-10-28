@@ -181,7 +181,7 @@ main.round .rcontrols .follow-up .new-opponent[data-ln-ext-label]::after {
  * how long it has waited and a cross that stops it. */
 :is(
   main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
-  #ln-ext-review .ln-ext-new-game
+  #ln-ext-review-modes .ln-ext-new-game
 )[data-ln-ext-seek] {
   gap: 8px;
   font-size: 0 !important;
@@ -192,7 +192,7 @@ main.round .rcontrols .follow-up .new-opponent[data-ln-ext-label]::after {
 
 :is(
     main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
-    #ln-ext-review .ln-ext-new-game
+    #ln-ext-review-modes .ln-ext-new-game
   )[data-ln-ext-seek]::before {
   content: '';
   flex: none;
@@ -203,7 +203,7 @@ main.round .rcontrols .follow-up .new-opponent[data-ln-ext-label]::after {
 
 :is(
     main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
-    #ln-ext-review .ln-ext-new-game
+    #ln-ext-review-modes .ln-ext-new-game
   )[data-ln-ext-seek='connecting']::before {
   border: 2px solid var(--ln-ext-lift-20);
   border-top-color: var(--ln-ext-text-strong);
@@ -213,7 +213,7 @@ main.round .rcontrols .follow-up .new-opponent[data-ln-ext-label]::after {
 
 :is(
     main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
-    #ln-ext-review .ln-ext-new-game
+    #ln-ext-review-modes .ln-ext-new-game
   )[data-ln-ext-seek='seeking']::before {
   background: currentColor;
   mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/cancel-01.svg') center /
@@ -222,7 +222,7 @@ main.round .rcontrols .follow-up .new-opponent[data-ln-ext-label]::after {
 
 :is(
     main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game),
-    #ln-ext-review .ln-ext-new-game
+    #ln-ext-review-modes .ln-ext-new-game
   )[data-ln-ext-seek='seeking']::after {
   content: attr(data-ln-ext-waited);
   font-size: 14px;

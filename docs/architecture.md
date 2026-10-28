@@ -205,8 +205,8 @@ so the logic can be unit-tested without a page.
 - `game-over`: kings' badges, confetti, the coach's card in the panel, which folds down to its buttons.
 - `chat`: the chat's lines marked for their bubbles, its game events in the
   page's language.
-- `seek`: a game's "New opponent" seeking in place, and the home's cards of
-  the player's own.
+- `seek`: a game's "New opponent" (and the review's new game, beside its tabs)
+  seeking in place, and the home's cards of the player's own.
 - `color-scheme`: the settings' scheme pick, saved as Lichess's own.
 - `roundness`: the settings' Roundness, already on the page, saved as
   Lichess's own once the slider rests.

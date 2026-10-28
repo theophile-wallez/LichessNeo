@@ -14,9 +14,10 @@ import { rangeKey, waited, type PoolMember } from './pool-link.ts';
 // and a cross, and a click stops it (styles/game/game-over.css). If our socket
 // fails, the button does what Lichess's does.
 
-// And the review's link to a new game like the one reviewed (page/review/view/new-game.ts).
+// And the review's link to a new game like the one reviewed, beside its tabs
+// (page/review/view/new-game.ts).
 const BUTTON =
-  'main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game), #ln-ext-review .ln-ext-new-game';
+  'main.round .rcontrols .follow-up :is(.new-opponent, .ln-ext-new-game), #ln-ext-review-modes .ln-ext-new-game';
 const SECOND_MS = 1000;
 
 interface Seeking {
