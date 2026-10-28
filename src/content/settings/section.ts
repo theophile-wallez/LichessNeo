@@ -15,6 +15,7 @@ import { buildLooksPage } from './looks-page.ts';
 import { buildNavigationRow } from './navigation-row.ts';
 import { buildPairingPage } from './pairing-page.ts';
 import { buildRatingRow } from './rating-row.ts';
+import { buildRepliesCard } from './replies-card.ts';
 import { buildRoundnessRow } from './roundness-row.ts';
 import { onSettingsRead, settingsRead } from './settings.ts';
 import { buildSwitchList } from './switch-list.ts';
@@ -75,6 +76,7 @@ export function buildSection(): SettingsSection {
           body: message('settingRatingStakesBody'),
         },
       ]),
+      buildRepliesCard(),
       pairing.element,
     ],
     experimental: [buildExperimentalPage()],

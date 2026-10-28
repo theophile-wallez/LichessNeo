@@ -1,18 +1,56 @@
-/* Lichess's quick replies at a game's end (content/game/chat-presets.ts): a row of chips between
- * the game over's card and the follow-up buttons, after a chat bubble, in place of the chat's. */
+/* The chat's quick replies (content/game/chat-presets.ts), in place of Lichess's: under the chat's
+ * input at a game's start; at its end a row of chips between the game over's card and the
+ * follow-up buttons, after a chat bubble. Five at most, on one line that scrolls sideways when they
+ * don't fit, fading out at an edge where more are hidden (the side menus' fade,
+ * pages/menu-narrow.css); a long one shows its start. */
 
 main.round[data-ln-ext-chat-presets] .round__side > .mchat .mchat__presets {
   display: none !important;
 }
 
-main.round .rcontrols .follow-up > .ln-ext-chat-presets {
+main.round .ln-ext-chat-presets {
   display: flex;
-  flex: 0 0 100%;
-  flex-wrap: wrap;
-  order: -2;
   align-items: center;
   gap: 6px;
+  min-width: 0;
+  /* Room for a chip's hop, which the scroller would cut. */
+  padding-block: 2px;
+  overflow: auto hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 var(--ln-ext-menu-fade-start),
+    #000 calc(100% - var(--ln-ext-menu-fade-end)),
+    transparent
+  );
+}
+
+main.round .mchat .ln-ext-chat-presets {
+  flex: none;
+  padding: 4px 8px 2px;
+}
+
+main.round .rcontrols .follow-up > .ln-ext-chat-presets {
+  flex: 0 0 100%;
+  order: -2;
   animation: ln-ext-chat-presets 0.45s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+/* The fade follows the scroll; the end row keeps its entrance beside it. */
+@supports (animation-timeline: scroll()) {
+  main.round .ln-ext-chat-presets {
+    animation: ln-ext-menu-fade linear both !important;
+    animation-timeline: scroll(self inline) !important;
+  }
+
+  main.round .rcontrols .follow-up > .ln-ext-chat-presets {
+    animation:
+      ln-ext-chat-presets 0.45s cubic-bezier(0.22, 1, 0.36, 1) both,
+      ln-ext-menu-fade linear both !important;
+    animation-timeline: auto, scroll(self inline) !important;
+  }
 }
 
 /* The card's margin makes the gap over the buttons (game-end-fold.css): this row makes its own. */
@@ -33,7 +71,9 @@ main.round .rcontrols .follow-up > .ln-ext-chat-presets::before {
 
 .ln-ext-chat-presets__reply {
   flex: none;
+  max-width: 160px;
   height: 28px;
+  overflow: hidden;
   padding: 0 12px;
   border: none;
   border-radius: 999px;
@@ -41,6 +81,7 @@ main.round .rcontrols .follow-up > .ln-ext-chat-presets::before {
   box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
   color: var(--ln-ext-text-strong);
   font: 600 12px / 28px var(--ln-ext-font);
+  text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
   transition:
@@ -48,6 +89,12 @@ main.round .rcontrols .follow-up > .ln-ext-chat-presets::before {
     color 0.15s,
     box-shadow 0.15s,
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.mchat .ln-ext-chat-presets__reply {
+  height: 26px;
+  padding: 0 11px;
+  line-height: 26px;
 }
 
 .ln-ext-chat-presets__reply:hover {

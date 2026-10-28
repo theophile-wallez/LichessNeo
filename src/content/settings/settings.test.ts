@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { DEFAULT_REPLIES } from '#content/game/chat-replies.ts';
 import { parseSettings, settingsRead } from './settings.ts';
 
 describe('the settings', () => {
@@ -14,6 +15,15 @@ describe('the settings', () => {
   it('have the coach draw on the board unless switched off', () => {
     expect(parseSettings({}).coachBoard).toBe(true);
     expect(parseSettings({ coachBoard: false }).coachBoard).toBe(false);
+  });
+
+  it('keep the chat’s quick replies the user made, or Lichess’s', () => {
+    expect(parseSettings({}).chatReplies).toEqual(DEFAULT_REPLIES);
+    expect(parseSettings({ chatReplies: { end: ['GG'] } }).chatReplies).toEqual({
+      start: DEFAULT_REPLIES.start,
+      end: ['GG'],
+    });
+    expect(parseSettings({ chatReplies: 3 }).chatReplies).toEqual(DEFAULT_REPLIES);
   });
 
   it('show the points at stake in rated games unless switched off', () => {

@@ -1,0 +1,126 @@
+/* ---- The settings' quick replies, on the Play page (content/settings/replies-card.ts) --- */
+
+/* A card in the quick pairing's look (settings-pairing.css): for a game's start and its end, the
+   replies as rows, each a field (tabs-tables-forms.css) to change in place beside its buttons; a field for a new one;
+   Lichess's own left out, as chips that put them back. */
+
+.ln-ext-replies {
+  --ln-ext-setting-color: var(--ln-ext-pink);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/bubble-chat.svg');
+}
+
+.ln-ext-replies__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ln-ext-replies__group + .ln-ext-replies__group {
+  padding-top: 14px;
+  border-top: 1px solid var(--ln-ext-lift-8);
+}
+
+.ln-ext-replies__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--ln-ext-text-strong);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ln-ext-replies__count {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-pink) 16%, transparent);
+  color: color-mix(in srgb, var(--ln-ext-pink) 80%, var(--ln-ext-text-strong));
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-ext-replies__row {
+  padding: 6px 6px 6px 8px;
+}
+
+.ln-ext-replies .ln-ext-replies__text {
+  flex: 1;
+  box-sizing: border-box;
+  min-width: 0;
+  height: 32px;
+  padding: 0 10px;
+  font: 600 14px var(--ln-ext-font);
+}
+
+.ln-ext-replies .ln-ext-replies__text::placeholder {
+  color: var(--ln-ext-text-dim);
+  font-weight: 500;
+}
+
+.ln-ext-replies .ln-ext-replies__text:disabled {
+  opacity: 0.5;
+}
+
+.ln-ext-replies__new {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ln-ext-replies__lichess {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.ln-ext-replies__lichess[hidden],
+.ln-ext-replies__empty[hidden] {
+  display: none;
+}
+
+.ln-ext-replies__lichess-label {
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ln-ext-replies__lichess-list {
+  display: contents;
+}
+
+.ln-ext-replies__lichess-reply {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 11px 0 8px;
+  border: none;
+  border-radius: 999px;
+  background: var(--ln-ext-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+  color: var(--ln-ext-text-strong);
+  font: 600 12.5px var(--ln-ext-font);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    box-shadow 0.15s !important;
+}
+
+.ln-ext-replies__lichess-reply .ln-ext-hi {
+  width: 14px;
+  height: 14px;
+}
+
+.ln-ext-replies__lichess-reply:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 40%, transparent);
+  color: var(--ln-ext-accent-hover);
+}
+
+.ln-ext-replies__lichess-reply:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

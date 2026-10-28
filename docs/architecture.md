@@ -166,11 +166,13 @@ so the logic can be unit-tested without a page.
   the room it left) or one at random, the home hero's own the same way or the
   same one,
   and the coach's switches: its 3D, its place on the free analysis board, and
-  its drawings on the board), Play (the game intro over a preview of it, and
-  the home's quick pairing cards: a speed's or the player's own, changed,
-  moved, taken off or put back to the defaults, and cards suggested from
-  their recent games), then, a step below, Experimental (the Chess.com
-  ratings, and the study behind them in a frame) and Backup (every setting,
+  its drawings on the board), Play (the game intro over a preview of it, the
+  chat's quick replies at a game's start and end: Lichess's at first, five at
+  most, to change, reorder, take off or add to; and the home's quick pairing
+  cards: a speed's or the player's own, changed, moved, taken off or put back
+  to the defaults, and cards suggested from their recent games), then, a step
+  below, Experimental (the Chess.com ratings, and the study behind them in a
+  frame) and Backup (every setting,
   pick and pack, and opening practice's records, exported to a JSON file, and
   put back from one). A control waits for the stored settings, and a change is
   saved over them, never over the defaults. The links of

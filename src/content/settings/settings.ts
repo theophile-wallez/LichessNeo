@@ -5,6 +5,7 @@ import { CustomThemeSchema, DEFAULT_THEME, ThemePicksSchema } from '#content/col
 import { RatingPickSchema } from '#content/sidebar/top-rating.ts';
 import { DEFAULT_INTRO, IntroKindSchema } from '#content/game/intro/kinds.ts';
 import { CardPicksSchema } from '#content/pages/speed-cards/picks.ts';
+import { ChatRepliesSchema, DEFAULT_REPLIES } from '#content/game/chat-replies.ts';
 
 // The extension's settings (the account page's Lichess Neo section),
 // kept in chrome.storage.sync so they follow the user to their other
@@ -44,6 +45,8 @@ const SettingsFields = z.object({
   ratingStakes: z.prefault(z.boolean(), true),
   /** The players' intro at a game's start, or none (content/game/intro). */
   gameIntro: z.catch(IntroKindSchema, DEFAULT_INTRO),
+  /** The chat's quick replies at a game's start and end, in place of Lichess's (content/game). */
+  chatReplies: z.catch(ChatRepliesSchema, DEFAULT_REPLIES),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */
   colorThemes: z.prefault(ThemePicksSchema, { light: DEFAULT_THEME, dark: DEFAULT_THEME }),
   /** The themes the user made. Unreadable, they're dropped rather than every setting. */

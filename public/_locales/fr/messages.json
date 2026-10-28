@@ -1347,5 +1347,57 @@
   },
   "settingRatingStakesBody": {
     "message": "En partie classée, une pastille près de votre pendule montre les points qu’une victoire, une nulle ou une défaite vous rapporterait ou vous coûterait. Quand vous regardez une partie, ceux de chaque joueur."
+  },
+  "repliesTitle": {
+    "message": "Messages rapides",
+    "description": "The title of the settings card of the chat's quick replies."
+  },
+  "repliesBody": {
+    "message": "Les messages que le chat d’une partie propose en un clic : $1 au plus au début et à la fin, sur une ligne, un long coupé.",
+    "description": "What the quick replies card is; $1 is the most replies of each list."
+  },
+  "repliesReset": {
+    "message": "Reprendre ceux de Lichess",
+    "description": "The button that puts back Lichess's own quick replies."
+  },
+  "repliesStart": {
+    "message": "En début de partie",
+    "description": "The label of the quick replies offered at a game's start."
+  },
+  "repliesEnd": {
+    "message": "En fin de partie",
+    "description": "The label of the quick replies offered at a game's end."
+  },
+  "repliesMessage": {
+    "message": "Message",
+    "description": "A quick reply's field, read out by screen readers."
+  },
+  "repliesPlaceholder": {
+    "message": "Un message à vous",
+    "description": "The field to write a new quick reply in."
+  },
+  "repliesAdd": {
+    "message": "Ajouter",
+    "description": "The button that adds the message written to the quick replies."
+  },
+  "repliesLichess": {
+    "message": "De Lichess :",
+    "description": "Before Lichess's own quick replies that the list left out, to put back."
+  },
+  "repliesEmpty": {
+    "message": "Aucun : le chat n’en propose pas ici.",
+    "description": "When a list of quick replies is empty."
+  },
+  "repliesMoveUp": {
+    "message": "Monter",
+    "description": "A quick reply's button that moves it one place up, read out by screen readers."
+  },
+  "repliesMoveDown": {
+    "message": "Descendre",
+    "description": "A quick reply's button that moves it one place down, read out by screen readers."
+  },
+  "repliesRemove": {
+    "message": "Retirer",
+    "description": "A quick reply's button that takes it off the list, read out by screen readers."
   }
 }
