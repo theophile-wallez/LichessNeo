@@ -25,48 +25,27 @@
     margin-top: 6px;
   }
 
+  /* The coach's cards, cut out of their pages at one scale: the analysis board's, a puzzle's
+     and a lesson's. */
   .analysis {
-    top: 70px;
-    left: 690px;
-    width: 374px;
+    top: 52px;
+    left: 610px;
+    width: 520px;
     transform: rotate(-2deg);
   }
 
-  .tips {
-    top: 340px;
+  .puzzle {
+    top: 236px;
+    left: 942px;
+    width: 326px;
+    transform: rotate(3deg);
+  }
+
+  .learn {
+    top: 372px;
     left: 600px;
-    width: 534px;
-    transform: rotate(1.5deg);
-  }
-
-  .tips[lang='fr'] {
-    top: 336px;
-    left: 640px;
-    width: 528px;
-  }
-
-  .count {
-    top: 108px;
-    left: 1094px;
-    display: grid;
-    justify-items: center;
-    line-height: 1;
-  }
-
-  .count b {
-    font-size: 96px;
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    background: linear-gradient(160deg, #a3aaff, #ff8fd0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .count span {
-    color: var(--dim);
-    font-size: 20px;
-    font-weight: 800;
+    width: 330px;
+    transform: rotate(-1deg);
   }
 
   /* The lineup, standing on the bottom edge, every other one in front. */
@@ -82,8 +61,8 @@
   <span class="pill"><span lang="en">Your coach</span><span lang="fr">Votre coach</span></span>
   <h1 lang="en">A coach <em>by your side</em></h1>
   <h1 lang="fr">Un coach <em>à vos côtés</em></h1>
-  <p class="sub" lang="en">26 coaches in 3D, from a fennec to a dragon. Yours reviews your games, cheers you on in puzzles and reads you the lessons’ goals.</p>
-  <p class="sub" lang="fr">26 coachs en 3D, du fennec au dragon. Le vôtre débriefe vos parties, vous encourage dans les problèmes et vous lit le but des leçons.</p>
+  <p class="sub" lang="en">Coaches in 3D, from a fennec to a dragon. Yours reviews your games, cheers you on in puzzles and reads you the lessons’ goals.</p>
+  <p class="sub" lang="fr">Des coachs en 3D, du fennec au dragon. Le vôtre débriefe vos parties, vous encourage dans les problèmes et vous lit le but des leçons.</p>
   <ul class="points" lang="en">
     <li><span class="tile pink i-happy"></span><span>Reacts to every move</span></li>
     <li><span class="tile green i-puzzle"></span><span>In puzzles, lessons and the analysis board</span></li>
@@ -98,10 +77,10 @@
 
 <img class="card analysis" lang="en" src="shots/analysis-card-en.webp">
 <img class="card analysis" lang="fr" src="shots/analysis-card-fr.webp">
-<img class="card tips" lang="en" src="shots/dashboard-tips-en.webp">
-<img class="card tips" lang="fr" src="shots/coach-card-wide-fr.webp">
-
-<p class="count"><b>26</b><span lang="en">coaches</span><span lang="fr">coachs</span></p>
+<img class="card puzzle" lang="en" src="shots/puzzle-card-en.webp">
+<img class="card puzzle" lang="fr" src="shots/puzzle-card-fr.webp">
+<img class="card learn" lang="en" src="shots/learn-card-en.webp">
+<img class="card learn" lang="fr" src="shots/learn-card-fr.webp">
 
 <img class="coach" style="--i: 0; --height: 176px" src="coaches/coach-21-proud.webp">
 <img class="coach" style="--i: 1; --height: 164px" src="coaches/coach-2-delight.webp">

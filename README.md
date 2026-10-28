@@ -25,7 +25,7 @@ with its turning points marked, each player's accuracy, a rating for how well
 they played, and every move marked brilliant, great, best, mistake, blunder…
 A coach then takes you through the game move by move, in plain words.
 
-![The Debrief: the advantage graph, the accuracy and the coach on a brilliant move](store/en/2-debrief.png)
+![The Debrief: the advantage graph and the coach on a brilliant move](store/en/2-debrief.png)
 
 ### Opening training
 
@@ -39,18 +39,17 @@ can follow your account in two private studies of yours.
 
 ### A coach by your side
 
-Pick one of 26 coaches in 3D, from a fennec to a dragon. Yours reviews your
-games, cheers you on in puzzles and reads you the lessons' goals, and it can
-be your avatar too.
+Pick a coach in 3D, from a fennec to a dragon. Yours reviews your games,
+cheers you on in puzzles and reads you the lessons' goals, and it can be your
+avatar too.
 
-![The coaches, in puzzles and on the puzzle dashboard](store/en/3-coach.png)
+![The coaches, on the analysis board, in puzzles and in lessons](store/en/3-coach.png)
 
 ### Your colors, your board, your sounds
 
-16 color themes, for Lichess's light and dark modes, or one you make in the
+Color themes for Lichess's light and dark modes, or one you make in the
 settings' theme editor. Boards: the extension's, all of Lichess's, or one
-you draw. Pieces and sounds: Lichess's sets or the extension's Ascent
-sounds.
+you draw. Pieces and sounds: the extension's own, or Lichess's.
 
 Or bring your own: put them in a folder on GitHub with a `pack.json`, paste
 its link in the extension's settings (**Packs**), pick them in **Board &
@@ -65,7 +64,7 @@ start from: [packs/example](packs/example).
 Home, puzzles, lessons, profiles, tournaments, the forum: every page gets the
 same treatment, on any screen.
 
-![The home page, the puzzle dashboard, Learn and tournaments](store/en/5-pages.png)
+![The home page, the puzzle dashboard, a rating's stats and tournaments](store/en/5-pages.png)
 
 ## Install it
 

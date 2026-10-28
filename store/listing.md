@@ -40,13 +40,13 @@ A DEBRIEF FOR EVERY GAME
 • Accuracy and a game rating for each player, phase by phase.
 • A coach who explains each move in plain words, shows the better one and lets you try again.
 
-26 COACHES
-Pick yours among 26 characters in 3D. It talks to you in the Debrief, in puzzles and in lessons.
+PICK YOUR COACH
+Pick yours among characters in 3D, from a fennec to a dragon. It talks to you in the Debrief, in puzzles and in lessons.
 
 MAKE IT YOURS
-• 16 color themes, each in light and dark, or make your own.
+• Color themes, each in light and dark, or make your own.
 • Boards: ours, Lichess's, or one you draw.
-• Lichess's piece sets and sounds, or a pack you import.
+• Piece sets and sounds: ours, Lichess's, or a pack you import.
 
 FREE
 No ads, nothing to sign up for, and no data collected: everything stays in your browser.
@@ -72,13 +72,13 @@ UN DÉBRIEF POUR CHAQUE PARTIE
 • La précision et le niveau de jeu de chaque joueur, phase par phase.
 • Un coach qui explique chaque coup avec des mots simples, montre le meilleur et vous laisse réessayer.
 
-26 COACHS
-Choisissez le vôtre parmi 26 personnages en 3D. Il vous parle dans le débrief, les problèmes et les leçons.
+CHOISISSEZ VOTRE COACH
+Choisissez le vôtre parmi des personnages en 3D, du fennec au dragon. Il vous parle dans le débrief, les problèmes et les leçons.
 
 À VOTRE GOÛT
-• 16 thèmes de couleur, chacun en clair et en sombre, ou le vôtre.
+• Des thèmes de couleur, chacun en clair et en sombre, ou le vôtre.
 • Plateaux : les nôtres, ceux de Lichess, ou celui que vous dessinez.
-• Les pièces et les sons de Lichess, ou un pack que vous importez.
+• Pièces et sons : les nôtres, ceux de Lichess, ou un pack que vous importez.
 
 GRATUIT
 Sans pub, sans inscription, et aucune donnée collectée : tout reste dans votre navigateur.
@@ -127,7 +127,7 @@ no errors, and the warnings the notes below explain.
 - **Privacy policy:** none; the manifest declares no data collection
   (`data_collection_permissions: none`).
 - **Screenshots:** the five 1280×800 images, with their captions:
-  "A game's Debrief", "Every move explained", "26 coaches",
+  "A game's Debrief", "Every move explained", "A coach by your side",
   "Your colors, board and sounds", "Every page redesigned".
 
 ### Notes to the reviewer

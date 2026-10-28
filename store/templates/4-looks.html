@@ -43,16 +43,17 @@
     transform: rotate(5deg);
   }
 
-  .backlit {
+  .wood {
     top: 270px;
     left: 590px;
     width: 540px;
     transform: rotate(-1deg);
   }
 
-  /* The settings' pickers, cut out of their page: a few of the boards, the custom one first. */
+  /* The settings' pickers, cut out of their page: a few of the boards, the custom one first,
+     then the extension's piece sets. */
   .boards {
-    top: 586px;
+    top: 562px;
     left: 474px;
     display: grid;
     grid-template-columns: repeat(5, 70px);
@@ -71,6 +72,10 @@
 
   .boards img:first-child {
     box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .boards .pieces {
+    border-radius: 0;
   }
 
   /* A few of the settings' color themes, each with its light and dark orbs. */
@@ -111,14 +116,14 @@
   <p class="sub" lang="en">Pick a look or build your own: it follows you on every page.</p>
   <p class="sub" lang="fr">Choisissez un style ou créez le vôtre : il vous suit sur chaque page.</p>
   <ul class="points" lang="en">
-    <li><span class="tile purple i-paint"></span><span>16 color themes<small>Each in light and dark, or make your own</small></span></li>
+    <li><span class="tile purple i-paint"></span><span>Color themes<small>Each in light and dark, or make your own</small></span></li>
     <li><span class="tile cyan i-grid"></span><span>Boards<small>Ours, Lichess’s, or one you draw</small></span></li>
-    <li><span class="tile orange i-music"></span><span>Pieces &amp; sounds<small>Lichess’s sets and sounds, or a pack you import</small></span></li>
+    <li><span class="tile orange i-music"></span><span>Pieces &amp; sounds<small>Ours, Lichess’s, or a pack you import</small></span></li>
   </ul>
   <ul class="points" lang="fr">
-    <li><span class="tile purple i-paint"></span><span>16 thèmes de couleur<small>Chacun en clair et en sombre, ou le vôtre</small></span></li>
+    <li><span class="tile purple i-paint"></span><span>Thèmes de couleur<small>Chacun en clair et en sombre, ou le vôtre</small></span></li>
     <li><span class="tile cyan i-grid"></span><span>Plateaux<small>Les nôtres, ceux de Lichess, ou celui que vous dessinez</small></span></li>
-    <li><span class="tile orange i-music"></span><span>Pièces et sons<small>Ceux de Lichess, ou un pack que vous importez</small></span></li>
+    <li><span class="tile orange i-music"></span><span>Pièces et sons<small>Les nôtres, ceux de Lichess, ou un pack que vous importez</small></span></li>
   </ul>
 </header>
 
@@ -132,23 +137,28 @@
   <img lang="en" src="shots/theme-home-blossom-en.webp">
   <img lang="fr" src="shots/theme-home-blossom-fr.webp">
 </div>
-<div class="window backlit">
-  <p><span>lichess.org<b lang="en">/17ZV0Vk1</b><b lang="fr">/C3jhe2tN</b></span></p>
-  <img lang="en" src="shots/backlit-en.webp">
-  <img lang="fr" src="shots/backlit-fr.webp">
+<div class="window wood">
+  <p><span>lichess.org<b>/game/HmLzqg5C/black</b></span></p>
+  <img lang="en" src="shots/wood-game-en.webp">
+  <img lang="fr" src="shots/wood-game-fr.webp">
 </div>
 
 <div class="boards">
   <img src="shots/board-custom.webp">
+  <img src="shots/board-materials-burl.webp">
   <img src="shots/board-backlit-midnight.webp">
-  <img src="shots/board-wood.webp">
-  <img src="shots/board-ember.webp">
-  <img src="shots/board-blue-marble.webp">
-  <img src="shots/board-backlit-walnut.webp">
-  <img src="shots/board-horsey.webp">
+  <img src="shots/board-materials-portoro.webp">
+  <img src="shots/board-tone-ember.webp">
+  <img src="shots/board-materials-padauk.webp">
+  <img src="shots/board-materials-marble.webp">
   <img src="shots/board-backlit-amethyst.webp">
-  <img src="shots/board-newspaper.webp">
-  <img src="shots/board-plum.webp">
+  <img src="shots/board-materials-cocobolo.webp">
+  <img src="shots/board-materials-zellige.webp">
+  <img class="pieces" src="shots/pieces-mochi.webp">
+  <img class="pieces" src="shots/pieces-poppy.webp">
+  <img class="pieces" src="shots/pieces-bop.webp">
+  <img class="pieces" src="shots/pieces-pebble.webp">
+  <img class="pieces" src="shots/pieces-loop.webp">
 </div>
 <div class="themes">
   <img src="shots/theme-neo.webp">
