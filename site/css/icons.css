@@ -1,0 +1,91 @@
+/* The Hugeicons the page draws, by name: a mask over the text's color
+   (`.icon`, base.css). A URL in a custom property would resolve against
+   each sheet that reads it, so each icon is named here. */
+
+.i-arrow-data-transfer-horizontal {
+  --icon: url('../img/hugeicons/arrow-data-transfer-horizontal.svg');
+}
+
+.i-arrow-down-01 {
+  --icon: url('../img/hugeicons/arrow-down-01.svg');
+}
+
+.i-arrow-left-01 {
+  --icon: url('../img/hugeicons/arrow-left-01.svg');
+}
+
+.i-arrow-left-double {
+  --icon: url('../img/hugeicons/arrow-left-double.svg');
+}
+
+.i-arrow-right-01 {
+  --icon: url('../img/hugeicons/arrow-right-01.svg');
+}
+
+.i-arrow-right-double {
+  --icon: url('../img/hugeicons/arrow-right-double.svg');
+}
+
+.i-chess-pawn {
+  --icon: url('../img/hugeicons/chess-pawn.svg');
+}
+
+.i-gift {
+  --icon: url('../img/hugeicons/gift.svg');
+}
+
+.i-github {
+  --icon: url('../img/hugeicons/github.svg');
+}
+
+.i-link-01 {
+  --icon: url('../img/hugeicons/link-01.svg');
+}
+
+.i-moon-02 {
+  --icon: url('../img/hugeicons/moon-02.svg');
+}
+
+.i-package-open {
+  --icon: url('../img/hugeicons/package-open.svg');
+}
+
+.i-pause {
+  --icon: url('../img/hugeicons/pause.svg');
+}
+
+.i-play {
+  --icon: url('../img/hugeicons/play.svg');
+}
+
+.i-search-01 {
+  --icon: url('../img/hugeicons/search-01.svg');
+}
+
+.i-settings-01 {
+  --icon: url('../img/hugeicons/settings-01.svg');
+}
+
+.i-square-lock-02 {
+  --icon: url('../img/hugeicons/square-lock-02.svg');
+}
+
+.i-volume-high {
+  --icon: url('../img/hugeicons/volume-high.svg');
+}
+
+.i-book-02 {
+  --icon: url('../img/hugeicons/book-02.svg');
+}
+
+.i-menu-01 {
+  --icon: url('../img/hugeicons/menu-01.svg');
+}
+
+.i-robot-01 {
+  --icon: url('../img/hugeicons/robot-01.svg');
+}
+
+.i-wrench-01 {
+  --icon: url('../img/hugeicons/wrench-01.svg');
+}

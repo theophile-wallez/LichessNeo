@@ -1,0 +1,257 @@
+/* The live review (site/demo): a browser window holding lichess.org's game
+   page as the extension draws it, the board on the left and the review's
+   panel on the right (demo-panel.css). */
+
+.demo-stage {
+  position: relative;
+  container-type: inline-size;
+  margin-top: clamp(48px, 7vw, 88px);
+  perspective: 1600px;
+}
+
+/* The board's light under the window. */
+.demo-stage::before {
+  content: '';
+  position: absolute;
+  inset: -12% 0 30%;
+  z-index: -1;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    color-mix(in srgb, var(--accent) 28%, transparent),
+    transparent 70%
+  );
+  filter: blur(20px);
+}
+
+.demo {
+  --board: clamp(300px, calc(100cqw - 520px), 760px);
+  --eval-w: 16px;
+
+  overflow: hidden;
+  border-radius: 16px;
+  background: oklch(16.5% var(--tint) var(--hue));
+  box-shadow:
+    0 0 0 1px var(--line-strong),
+    0 40px 100px #000000a6,
+    0 12px 32px #00000080;
+  outline: none;
+}
+
+.demo-chrome {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  background: oklch(18% var(--tint) var(--hue));
+  box-shadow: inset 0 -1px var(--line);
+}
+
+.demo-lights {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #ff5f57;
+  box-shadow:
+    18px 0 #febc2e,
+    36px 0 #28c840;
+}
+
+.demo-url {
+  padding: 3px 48px;
+  border-radius: 7px;
+  background: var(--ink);
+  color: var(--faint);
+  font-size: 12.5px;
+}
+
+.demo-url b {
+  color: var(--dim);
+  font-weight: 500;
+}
+
+.demo-app {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 20px;
+  padding: 18px 20px 20px;
+}
+
+/* ---- the board and its players ---- */
+
+.demo-play {
+  display: grid;
+  gap: 10px;
+}
+
+.demo-boardrow {
+  display: grid;
+  grid-template-columns: var(--eval-w) var(--board);
+  gap: 8px;
+}
+
+/* White's share rises from the bottom, as the review's bar. */
+.demo-evalbar {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #2a2c38;
+}
+
+.demo-evalbar::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--white, 50%);
+  background: #eceef6;
+  transition: height 0.7s var(--ease-out);
+}
+
+.demo-evalbar span {
+  position: absolute;
+  inset: auto 0 5px;
+  color: #23263a;
+  font-size: 8.5px;
+  font-weight: 620;
+  text-align: center;
+}
+
+.demo-evalbar[data-side='black'] span {
+  inset: 5px 0 auto;
+  color: #c9cbe0;
+}
+
+.demo-board {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  /* a8 is light, as on every board. */
+  background:
+    var(--board-texture) 0 0 / 100% 100%,
+    repeating-conic-gradient(var(--board-dark) 0 25%, var(--board-light) 0 50%) 0 0 / 25% 25%;
+  /* A texture is a relief over the squares, as the extension lays it (board/pieces.css). */
+  background-blend-mode: hard-light, normal;
+}
+
+.demo-board > div,
+.demo-shapes {
+  position: absolute;
+  inset: 0;
+}
+
+.demo-shapes {
+  width: 100%;
+  height: 100%;
+}
+
+.demo-pieces {
+  z-index: 1;
+}
+
+.demo-over {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.demo-piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12.5%;
+  height: 12.5%;
+  transform: translate(calc(var(--x) * 100%), calc(var(--y) * 100%));
+  transition:
+    transform 0.34s var(--ease-out),
+    opacity 0.25s;
+  user-select: none;
+}
+
+.demo-piece--in {
+  animation: piece-in 0.3s var(--ease-out);
+}
+
+.demo-piece--out {
+  opacity: 0;
+}
+
+@keyframes piece-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.demo-last {
+  position: absolute;
+  left: calc(var(--x) * 12.5%);
+  top: calc(var(--y) * 12.5%);
+  width: 12.5%;
+  height: 12.5%;
+  /* The extension's on this board: Lichess's yellow turns olive on the blue. */
+  background: #8be9fd80;
+}
+
+/* A brilliant or a great move's squares take its class's color, as the review's. */
+.demo-last[data-class='brilliant'] {
+  background: rgb(33 196 58 / 50%);
+}
+
+.demo-last[data-class='great'] {
+  background: rgb(119 186 44 / 50%);
+}
+
+/* The class's badge on the square's top right corner (review/eval-bar.css). */
+.ln-ext-badge {
+  position: absolute;
+  width: 4.8%;
+  aspect-ratio: 1;
+  transform: translate(-72%, -28%);
+  animation: badge-in 0.45s var(--hop);
+}
+
+/* The chip is translucent: a dark base under it keeps it readable on any square. */
+.ln-ext-badge svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 25%;
+  background: color-mix(in srgb, var(--ln-ext-badge-c, transparent) 14%, #1a1820);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 50%);
+}
+
+@keyframes badge-in {
+  from {
+    scale: 0.3;
+    opacity: 0;
+  }
+}
+
+.demo-coord {
+  position: absolute;
+  z-index: 1;
+  font-size: clamp(7px, 1.6cqw, 10px);
+  font-weight: 620;
+  pointer-events: none;
+}
+
+.demo-coord--file {
+  bottom: 2px;
+  left: calc((var(--x) + 1) * 12.5% - 9px);
+  color: var(--board-light);
+}
+
+.demo-coord--file:nth-child(even of .demo-coord--file) {
+  color: var(--board-dark);
+}
+
+.demo-coord--rank {
+  top: calc(var(--y) * 12.5% + 2px);
+  left: 3px;
+  color: var(--board-dark);
+}
+
+.demo-coord--rank:nth-child(even of .demo-coord--rank) {
+  color: var(--board-light);
+}

@@ -1,0 +1,140 @@
+/* The live review's controls, then the coach and piece pickers under its
+   window. */
+
+.demo-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr 1fr 1fr;
+  gap: 6px;
+}
+
+.demo-controls button {
+  display: grid;
+  place-items: center;
+  height: 38px;
+  border: 0;
+  border-radius: 9px;
+  background: #ffffff0a;
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--dim);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+
+.demo-controls button:hover {
+  background: #ffffff14;
+  color: var(--text);
+}
+
+.demo-controls .demo-controls__play {
+  background: linear-gradient(var(--accent-top), var(--accent-low));
+  box-shadow:
+    inset 0 1px #ffffff4d,
+    inset 0 -1px var(--accent-edge);
+  color: #fff;
+}
+
+.demo-controls .demo-controls__play > * {
+  grid-area: 1 / 1;
+}
+
+[data-playing='true'] .demo-icon-play,
+[data-playing='false'] .demo-icon-pause {
+  visibility: hidden;
+}
+
+/* ---- the pickers under it ---- */
+
+.demo-pickers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 16px;
+  margin-top: 22px;
+}
+
+.picker {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 6px 5px 14px;
+  border-radius: 14px;
+  background: #ffffff08;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.picker__label {
+  margin-right: 6px;
+  color: var(--faint);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.picker button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 3px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    transform 0.25s var(--hop);
+}
+
+.picker button:hover {
+  background: #ffffff0f;
+  transform: translateY(-2px);
+}
+
+.picker button[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-light) 50%, transparent);
+}
+
+.picker img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* A group the script fills (demo/pickers.ts). */
+.picker__buttons {
+  display: contents;
+}
+
+.picker img[src*='board-'],
+.board-thumb {
+  border-radius: 6px;
+}
+
+/* The accent's board, drawn: four squares in the theme. */
+.board-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    var(--board-texture) 0 0 / 100% 100%,
+    repeating-conic-gradient(var(--board-dark) 0 25%, var(--board-light) 0 50%) 0 0 / 50% 50%;
+  background-blend-mode: hard-light, normal;
+}
+
+/* The accent's own button keeps its look whatever board is picked. */
+.picker [data-board='accent'] .board-thumb {
+  --board-light: #f7f8f8;
+  --board-dark: var(--accent);
+  --board-texture: none;
+}
+
+/* A theme's swatch: its accent, on a ring of the page while picked. */
+.picker [data-theme] i {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: inset 0 1px #ffffff40;
+}

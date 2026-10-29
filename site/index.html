@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lichess Neo: Lichess, made modern</title>
+    <meta
+      name="description"
+      content="A free extension that redesigns lichess.org and adds a coach who reviews every game with you."
+    />
+    <meta name="theme-color" content="#0e0f14" />
+    <link rel="icon" href="img/icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lichess Neo: Lichess, made modern" />
+    <meta
+      property="og:description"
+      content="A free extension that redesigns lichess.org and adds a coach who reviews every game with you."
+    />
+    <meta property="og:url" content="https://theophile-wallez.github.io/LichessNeo/" />
+    <meta
+      property="og:image"
+      content="https://theophile-wallez.github.io/LichessNeo/img/social.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/icons.css" />
+    <link rel="stylesheet" href="css/demo-window.css" />
+    <link rel="stylesheet" href="css/demo-players.css" />
+    <link rel="stylesheet" href="css/demo-drawing.css" />
+    <link rel="stylesheet" href="css/demo-panel.css" />
+    <link rel="stylesheet" href="css/demo-card-parts.css" />
+    <link rel="stylesheet" href="css/demo-modes.css" />
+    <link rel="stylesheet" href="css/demo-end.css" />
+    <link rel="stylesheet" href="css/demo-moves.css" />
+    <link rel="stylesheet" href="css/demo-controls.css" />
+    <link rel="stylesheet" href="css/demo-narrow.css" />
+    <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/summary.css" />
+    <link rel="stylesheet" href="css/summary-rows.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+    <link rel="stylesheet" href="css/mock.css" />
+    <link rel="stylesheet" href="css/mock-page.css" />
+    <link rel="stylesheet" href="css/more.css" />
+    <link rel="stylesheet" href="css/convert.css" />
+    <link rel="stylesheet" href="css/narrow.css" />
+    <script>
+      // Firefox's visitors get its button first (base.css).
+      if (navigator.userAgent.includes('Firefox')) document.documentElement.dataset.browser = 'firefox';
+    </script>
+    <script type="module" src="demo.js"></script>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap">
+        <a class="brand" href="#top"
+          ><img src="img/icon.png" alt="" width="28" height="28" />Lichess Neo</a
+        >
+        <nav class="links">
+          <a href="#review">Review</a>
+          <a href="#coaches">Coach</a>
+          <a href="#yours"><span>Make it yours</span></a>
+          <a href="#more">More</a>
+        </nav>
+        <div class="nav-end">
+          <a class="ghost" href="https://github.com/theophile-wallez/LichessNeo" aria-label="GitHub"
+            ><span class="icon i-github"></span
+          ></a>
+          <a
+            class="button small chrome"
+            href="https://chromewebstore.google.com/detail/lichess-neo/diklhheikbkkodchopfhidgjkdjdjpla"
+            ><img class="browser-logo" src="logos/chrome.svg" alt="" width="16" height="16" /><span
+              >Add to Chrome</span
+            ></a
+          >
+          <a
+            class="button small firefox"
+            href="https://addons.mozilla.org/firefox/addon/lichess-neo/"
+            ><img class="browser-logo" src="logos/firefox.svg" alt="" width="16" height="16" /><span
+              >Add to Firefox</span
+            ></a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap hero-words">
+          <h1>Lichess, made&nbsp;modern</h1>
+          <p class="lead">
+            A free extension that redesigns lichess.org, and adds a coach who reviews every game
+            with you.
+          </p>
+          <div class="install">
+            <a
+              class="button chrome"
+              href="https://chromewebstore.google.com/detail/lichess-neo/diklhheikbkkodchopfhidgjkdjdjpla"
+              ><img
+                class="browser-logo"
+                src="logos/chrome.svg"
+                alt=""
+                width="20"
+                height="20"
+              /><span>Add to Chrome</span></a
+            >
+            <a class="button firefox" href="https://addons.mozilla.org/firefox/addon/lichess-neo/"
+              ><img
+                class="browser-logo"
+                src="logos/firefox.svg"
+                alt=""
+                width="20"
+                height="20"
+              /><span>Add to Firefox</span></a
+            >
+          </div>
+          <p class="note">Free and open source. Also in Edge, Brave, Arc, Opera and Vivaldi.</p>
+        </div>
+
+        <div class="wrap demo-stage">
+          <div class="demo" id="demo" data-playing="true" tabindex="-1">
+            <div class="demo-chrome">
+              <span class="demo-lights"></span>
+              <span class="demo-url">lichess.org<b>/opera1858</b></span>
+            </div>
+            <div class="demo-app">
+              <div class="demo-play">
+                <div class="demo-player" data-player="black"></div>
+                <div class="demo-boardrow">
+                  <div class="demo-evalbar"><span></span></div>
+                  <div class="demo-board" aria-label="Chessboard"></div>
+                </div>
+                <div class="demo-player" data-player="white"></div>
+              </div>
+              <div class="demo-panel" data-mode="moves">
+                <div class="demo-tabs" role="tablist">
+                  <i class="demo-tabs__pill"></i>
+                  <button type="button" role="tab" data-mode="summary" aria-selected="false">
+                    Summary
+                  </button>
+                  <button type="button" role="tab" data-mode="moves" aria-selected="true">
+                    Debrief
+                  </button>
+                  <button type="button" role="tab" data-mode="normal" aria-selected="false">
+                    Moves
+                  </button>
+                </div>
+                <div class="demo-graph" role="presentation">
+                  <div class="demo-graph__plot"></div>
+                  <i class="demo-graph__cursor"></i>
+                </div>
+                <div class="demo-summary summary"></div>
+                <div class="ln-ext-review__foot">
+                  <button type="button" class="ln-ext-btn ln-ext-btn--green" data-mode="moves">
+                    Start Debrief
+                  </button>
+                  <button type="button" class="ln-ext-btn ln-ext-review__learn" data-action="learn">
+                    Learn from your mistakes
+                  </button>
+                </div>
+                <div class="demo-moments"></div>
+                <div class="demo-card">
+                  <button
+                    type="button"
+                    class="demo-coach"
+                    data-action="poke"
+                    aria-label="Coach"
+                  ></button>
+                  <div class="demo-say" aria-live="polite"></div>
+                </div>
+                <div class="ln-ext-review__nav"></div>
+                <div class="demo-moves"></div>
+                <div class="demo-lichess">
+                  <div class="demo-lichess__tools"></div>
+                  <div class="demo-moves demo-moves--plain"></div>
+                  <div class="demo-end"></div>
+                </div>
+                <div class="demo-controls">
+                  <button type="button" data-action="first" aria-label="First move">
+                    <span class="icon i-arrow-left-double"></span>
+                  </button>
+                  <button type="button" data-action="prev" aria-label="Previous move">
+                    <span class="icon i-arrow-left-01"></span>
+                  </button>
+                  <button
+                    type="button"
+                    data-action="play"
+                    class="demo-controls__play"
+                    aria-label="Play or pause"
+                  >
+                    <span class="icon demo-icon-pause i-pause"></span
+                    ><span class="icon demo-icon-play i-play"></span>
+                  </button>
+                  <button type="button" data-action="next" aria-label="Next move">
+                    <span class="icon i-arrow-right-01"></span>
+                  </button>
+                  <button type="button" data-action="last" aria-label="Last move">
+                    <span class="icon i-arrow-right-double"></span>
+                  </button>
+                  <span class="demo-controls__tools" aria-hidden="true"
+                    ><span class="icon i-book-02"></span><span class="icon i-robot-01"></span
+                    ><span class="icon i-wrench-01"></span><span class="icon i-menu-01"></span
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="demo-pickers">
+            <div class="picker" role="group" aria-label="Coach">
+              <span class="picker__label">Coach</span>
+              <button type="button" data-coach="4" aria-pressed="true">
+                <img src="img/coaches/mascot-4.webp" alt="Axolotl" width="62" height="57" />
+              </button>
+              <button type="button" data-coach="2" aria-pressed="false">
+                <img src="img/coaches/mascot-2.webp" alt="Fennec" width="62" height="57" />
+              </button>
+              <button type="button" data-coach="21" aria-pressed="false">
+                <img src="img/coaches/mascot-21.webp" alt="Dragon" width="62" height="57" />
+              </button>
+              <button type="button" data-coach="8" aria-pressed="false">
+                <img src="img/coaches/mascot-8.webp" alt="Robot" width="62" height="57" />
+              </button>
+              <button type="button" data-coach="14" aria-pressed="false">
+                <img src="img/coaches/mascot-14.webp" alt="Rook" width="62" height="57" />
+              </button>
+              <button type="button" data-coach="5" aria-pressed="false">
+                <img src="img/coaches/mascot-5.webp" alt="Frog" width="62" height="57" />
+              </button>
+              <button type="button" data-coach="26" aria-pressed="false">
+                <img src="img/coaches/mascot-26.webp" alt="Star" width="62" height="57" />
+              </button>
+            </div>
+            <div class="picker" role="group" aria-label="Pieces">
+              <span class="picker__label"><span>Pieces</span></span>
+              <button type="button" data-pieces="cburnett" aria-pressed="true">
+                <img src="pieces/cburnett/wN.svg" alt="Lichess" width="40" height="40" />
+              </button>
+              <button type="button" data-pieces="mochi" aria-pressed="false">
+                <img src="img/pieces/mochi/wN.webp" alt="Mochi" width="40" height="40" />
+              </button>
+              <button type="button" data-pieces="mellow" aria-pressed="false">
+                <img src="img/pieces/mellow/wN.webp" alt="Mellow" width="40" height="40" />
+              </button>
+              <button type="button" data-pieces="loop" aria-pressed="false">
+                <img src="img/pieces/loop/wN.webp" alt="Loop" width="40" height="40" />
+              </button>
+              <button type="button" data-pieces="poppy" aria-pressed="false">
+                <img src="img/pieces/poppy/wN.webp" alt="Poppy" width="40" height="40" />
+              </button>
+              <button type="button" data-pieces="fold" aria-pressed="false">
+                <img src="img/pieces/fold/wN.webp" alt="Fold" width="40" height="40" />
+              </button>
+              <button type="button" data-pieces="bitty" aria-pressed="false">
+                <img src="img/pieces/bitty/wN.webp" alt="Bitty" width="40" height="40" />
+              </button>
+            </div>
+            <div class="picker" role="group" aria-label="Board">
+              <span class="picker__label">Board</span>
+              <span class="picker__buttons" data-picks="board"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="statement">
+        <div class="wrap">
+          <p>
+            It’s still Lichess.
+            <span
+              >Your account, your games and your friends stay as they are. Only the look and the
+              sounds change, and a coach comes along.</span
+            >
+          </p>
+        </div>
+      </section>
+
+      <section class="bento-section" id="review">
+        <div class="wrap">
+          <h2>A review for every game</h2>
+          <p class="lead">
+            Open any finished game on lichess.org: the review is there, free, worked out in your
+            browser.
+          </p>
+          <div class="bento">
+            <article class="tile tile--summary">
+              <h3>The summary</h3>
+              <p>
+                Each player’s accuracy, the rating they played like, their moves by class and each
+                phase’s verdict. Here, the Opera Game’s: click a count to see its move.
+              </p>
+              <label class="switch"
+                ><input type="checkbox" data-chesscom-switch /><span class="switch__track"></span
+                ><span>Ratings as on Chess.com</span><span class="badge">Experimental</span></label
+              >
+              <div class="summary"></div>
+            </article>
+            <article class="tile tile--graph">
+              <h3>The game at a glance</h3>
+              <p>The advantage graph marks each turning point.</p>
+              <div class="demo-graph tile-graph" aria-hidden="true"></div>
+            </article>
+            <article class="tile tile--retry">
+              <h3>The coach explains each move</h3>
+              <p>
+                What the move did, the better one when there was, and a chance to find it yourself
+                on the board.
+              </p>
+              <div class="tile-cards"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="coaches" id="coaches">
+        <div class="wrap">
+          <h2>A coach by your side</h2>
+          <p class="lead">
+            Twenty-six of them, in 3D, from a fennec to a dragon. Yours reviews your games, cheers
+            you on in puzzles and reads you the lessons’ goals. It can be your avatar too.
+          </p>
+        </div>
+        <div class="wrap crowd" aria-hidden="true">
+          <img
+            src="coaches/coach-14-happy.webp"
+            alt=""
+            width="640"
+            height="635"
+            loading="lazy"
+            style="--x: 15%; --i: 0"
+            data-row="0"
+          />
+          <img
+            src="coaches/coach-24-delight.webp"
+            alt=""
+            width="640"
+            height="682"
+            loading="lazy"
+            style="--x: 37%; --i: 1"
+            data-row="0"
+          />
+          <img
+            src="coaches/coach-26-delight.webp"
+            alt=""
+            width="640"
+            height="572"
+            loading="lazy"
+            style="--x: 61%; --i: 2"
+            data-row="0"
+          />
+          <img
+            src="coaches/coach-6-delight.webp"
+            alt=""
+            width="640"
+            height="671"
+            loading="lazy"
+            style="--x: 84%; --i: 3"
+            data-row="0"
+          />
+          <img
+            src="coaches/coach-1-happy.webp"
+            alt=""
+            width="640"
+            height="564"
+            loading="lazy"
+            style="--x: 6%; --i: 4"
+            data-row="1"
+          />
+          <img
+            src="coaches/coach-2-delight.webp"
+            alt=""
+            width="640"
+            height="640"
+            loading="lazy"
+            style="--x: 26%; --i: 5"
+            data-row="1"
+          />
+          <img
+            src="coaches/robot-2-delight.webp"
+            alt=""
+            width="640"
+            height="710"
+            loading="lazy"
+            style="--x: 48%; --i: 6"
+            data-row="1"
+          />
+          <img
+            src="coaches/coach-22-happy.webp"
+            alt=""
+            width="640"
+            height="576"
+            loading="lazy"
+            style="--x: 71%; --i: 7"
+            data-row="1"
+          />
+          <img
+            src="coaches/coach-7-happy.webp"
+            alt=""
+            width="640"
+            height="587"
+            loading="lazy"
+            style="--x: 93%; --i: 8"
+            data-row="1"
+          />
+          <img
+            src="coaches/coach-21-proud.webp"
+            alt=""
+            width="640"
+            height="568"
+            loading="lazy"
+            style="--x: 15%; --i: 9"
+            data-row="2"
+          />
+          <img
+            src="coaches/coach-4-happy.webp"
+            alt=""
+            width="640"
+            height="571"
+            loading="lazy"
+            style="--x: 38%; --i: 10"
+            data-row="2"
+          />
+          <img
+            src="coaches/coach-5-happy.webp"
+            alt=""
+            width="640"
+            height="602"
+            loading="lazy"
+            style="--x: 62%; --i: 11"
+            data-row="2"
+          />
+          <img
+            src="coaches/coach-20-delight.webp"
+            alt=""
+            width="640"
+            height="553"
+            loading="lazy"
+            style="--x: 85%; --i: 12"
+            data-row="2"
+          />
+        </div>
+      </section>
+
+      <section class="yours" id="yours">
+        <div class="wrap">
+          <h2>Make it yours</h2>
+          <p class="lead">
+            Pick a color theme, a board and where the menu goes. This page follows along, as Lichess
+            would.
+          </p>
+          <div class="yours-pickers">
+            <div class="picker" role="group" aria-label="Theme">
+              <span class="picker__label">Theme</span>
+              <span class="picker__buttons picker__buttons--swatches" data-picks="theme"></span>
+            </div>
+            <div class="picker" role="group" aria-label="Board">
+              <span class="picker__label">Board</span>
+              <span class="picker__buttons" data-picks="board"></span>
+            </div>
+            <div class="picker picker--layout" role="group" aria-label="Layout">
+              <span class="picker__label">Layout</span>
+              <span class="picker__buttons" data-picks="layout"></span>
+            </div>
+          </div>
+          <div class="mock-stage">
+            <div class="mock" data-shape="sidebar" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="more" id="more">
+        <div class="wrap">
+          <h2>Ratings, packs, shortcuts and sounds</h2>
+          <div class="more-grid">
+            <article class="tile tile--chesscom">
+              <div class="tile__words">
+                <span class="tile__icon"
+                  ><span class="icon i-arrow-data-transfer-horizontal"></span
+                ></span>
+                <h3>Ratings as on Chess.com <span class="badge">Experimental</span></h3>
+                <p>
+                  Turn it on, and every rating on Lichess shows as it would be on Chess.com: in
+                  games, on profiles, in lists and leaderboards. Point at one for its Lichess
+                  rating.
+                </p>
+                <p class="tile__note">
+                  Converted from
+                  <a href="https://theophile-wallez.github.io/lichess-chesscom-ratings/"
+                    >a study of 35,515 players</a
+                  >
+                  with an established rating on both sites.
+                </p>
+              </div>
+              <div class="convert">
+                <div class="convert__speeds" role="group" aria-label="Speed">
+                  <button type="button" data-speed="bullet" aria-pressed="false">Bullet</button>
+                  <button type="button" data-speed="blitz" aria-pressed="true">Blitz</button>
+                  <button type="button" data-speed="rapid" aria-pressed="false">Rapid</button>
+                  <button type="button" data-speed="classical" aria-pressed="false">
+                    Classical
+                  </button>
+                </div>
+                <div class="convert__numbers">
+                  <p><span>On Lichess</span><b data-convert="lichess"></b></p>
+                  <span class="icon i-arrow-right-01"></span>
+                  <p>
+                    <span>On Chess.com</span><b data-convert="chesscom"></b
+                    ><small data-convert="spread"></small>
+                  </p>
+                </div>
+                <input
+                  type="range"
+                  min="800"
+                  max="2800"
+                  step="10"
+                  value="1500"
+                  aria-label="Lichess rating"
+                />
+              </div>
+            </article>
+            <article class="tile tile--packs">
+              <span class="tile__icon"><span class="icon i-package-open"></span></span>
+              <h3>Packs from GitHub</h3>
+              <p>
+                Your own pieces, board and sounds: a folder on GitHub with a pack.json and the files
+                it names. Paste its link, and it’s yours.
+              </p>
+              <div class="pack-form" aria-hidden="true">
+                <span class="pack-form__link"
+                  ><span class="icon i-link-01"></span>github.com/you/your-pack</span
+                >
+                <span class="pack-form__button">Import</span>
+              </div>
+              <ul class="pack-parts" aria-hidden="true">
+                <li><img src="img/pieces/mochi/wN.webp" alt="" width="40" height="40" />Pieces</li>
+                <li><i class="board-thumb"></i>Board</li>
+                <li><span class="icon i-volume-high"></span>Sounds</li>
+              </ul>
+            </article>
+            <article class="tile tile--palette">
+              <span class="tile__icon"><span class="icon i-search-01"></span></span>
+              <h3>Go anywhere from the keyboard</h3>
+              <p>Press ⌘K, or Ctrl+K, for any page, any player or a setting.</p>
+              <div class="palette" aria-hidden="true">
+                <span class="palette__field"
+                  ><span class="icon i-search-01"></span>puz<i></i><kbd>⌘K</kbd></span
+                >
+                <span class="palette__row palette__row--on"
+                  ><img src="img/sidebar/puzzles.webp" alt="" width="96" height="96" />Puzzles</span
+                >
+                <span class="palette__row"
+                  ><img src="img/sidebar/puzzle-storm.webp" alt="" width="96" height="96" />Puzzle
+                  Storm</span
+                >
+                <span class="palette__row"
+                  ><img
+                    src="img/sidebar/puzzle-dashboard.webp"
+                    alt=""
+                    width="96"
+                    height="96"
+                  />Puzzle dashboard</span
+                >
+              </div>
+            </article>
+            <article class="tile tile--sounds">
+              <span class="tile__icon"><span class="icon i-volume-high"></span></span>
+              <h3>Choose how moves sound</h3>
+              <p>Two sets of our own, Lichess’s, or the sounds of a pack.</p>
+              <ul class="sound-sets" aria-hidden="true">
+                <li><b>Boxwood</b><span>Real wooden pieces, recorded</span></li>
+                <li><b>Ascent</b><span>A different sound for each piece</span></li>
+                <li><b>Lichess</b><span>The sounds you know</span></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="facts">
+        <div class="wrap">
+          <dl>
+            <div>
+              <dt><span class="icon i-gift"></span><span>Free, for good</span></dt>
+              <dd>No ads, no sign-up, nothing to pay.</dd>
+            </div>
+            <div>
+              <dt><span class="icon i-square-lock-02"></span><span>Nothing collected</span></dt>
+              <dd>Your settings stay in your browser.</dd>
+            </div>
+            <div>
+              <dt><span class="icon i-github"></span>Open source</dt>
+              <dd>Every line is on GitHub, under the MIT license.</dd>
+            </div>
+            <div>
+              <dt><span class="icon i-chess-pawn"></span><span>Fair play</span></dt>
+              <dd>No help during a game you’re playing: the review waits for the end.</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="cta" id="install">
+        <div class="wrap">
+          <h2>Your next game deserves a debrief</h2>
+          <div class="install">
+            <a
+              class="button chrome"
+              href="https://chromewebstore.google.com/detail/lichess-neo/diklhheikbkkodchopfhidgjkdjdjpla"
+              ><img
+                class="browser-logo"
+                src="logos/chrome.svg"
+                alt=""
+                width="20"
+                height="20"
+              /><span>Add to Chrome</span></a
+            >
+            <a class="button firefox" href="https://addons.mozilla.org/firefox/addon/lichess-neo/"
+              ><img
+                class="browser-logo"
+                src="logos/firefox.svg"
+                alt=""
+                width="20"
+                height="20"
+              /><span>Add to Firefox</span></a
+            >
+          </div>
+          <p class="note">
+            Or
+            <a href="https://github.com/theophile-wallez/LichessNeo#install-it"
+              >install it from GitHub</a
+            >.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <a class="brand" href="#top"
+          ><img src="img/icon.png" alt="" width="24" height="24" />Lichess Neo</a
+        >
+        <p>An unofficial fan project, made for fun. Not affiliated with Lichess.org.</p>
+        <nav>
+          <a href="https://github.com/theophile-wallez/LichessNeo">GitHub</a>
+          <a href="https://github.com/theophile-wallez/LichessNeo/issues"
+            ><span>Report a problem</span></a
+          >
+          <a href="https://github.com/theophile-wallez/LichessNeo/blob/main/LICENSE"
+            ><span>MIT license</span></a
+          >
+          <a href="https://lichess.org">lichess.org</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

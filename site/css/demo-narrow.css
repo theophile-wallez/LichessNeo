@@ -1,0 +1,106 @@
+/* The live review below 900px: the board as wide as the window, the panel
+   under it, its parts as tall as they are, the debrief without its list. */
+
+@container (max-width: 900px) {
+  .demo {
+    --board: min(600px, calc(100cqw - 24px - var(--eval-w) - 8px));
+  }
+
+  .demo-play {
+    justify-self: center;
+  }
+
+  .demo-app {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .demo-panel {
+    height: auto;
+  }
+
+  /* No room left to take: each part as tall as it is, Lichess's list a few rows. */
+  .demo-panel > :is(.demo-summary, .demo-moves, .demo-lichess) {
+    flex: none;
+  }
+
+  .demo-summary {
+    overflow: visible;
+  }
+
+  .demo-moves:not(.demo-moves--plain) {
+    display: none;
+  }
+
+  .demo-lichess > .demo-moves {
+    flex: none;
+    height: 240px;
+  }
+
+  .demo-graph {
+    height: 56px;
+  }
+}
+
+@container (max-width: 560px) {
+  .demo {
+    --eval-w: 8px;
+    border-radius: 12px;
+  }
+
+  .demo-chrome {
+    height: 30px;
+  }
+
+  /* Too thin for its label. */
+  .demo-evalbar span {
+    display: none;
+  }
+
+  .demo-lights {
+    top: 10px;
+    left: 11px;
+    width: 9px;
+    height: 9px;
+    box-shadow:
+      14px 0 #febc2e,
+      28px 0 #28c840;
+  }
+
+  .demo-url {
+    padding: 1px 24px;
+    font-size: 11px;
+  }
+
+  .demo-name {
+    font-size: 13px;
+  }
+
+  .demo-card {
+    min-height: 140px;
+    padding: 12px 12px 14px 124px;
+  }
+
+  .demo-coach {
+    left: 18px;
+    width: 96px;
+  }
+
+  .demo-say__words {
+    font-size: 14px;
+  }
+
+  .demo-graph {
+    display: none;
+  }
+
+  .picker {
+    padding-left: 10px;
+  }
+
+  .picker button {
+    width: 36px;
+    height: 36px;
+  }
+}

@@ -1,0 +1,191 @@
+/* The closed review's card in the Moves tab (page/game-over/card.ts), as the
+   extension styles it (styles/game/game-end-card.css, game-end-stats.css): the
+   coach in a glow of the result's color beside how the game ended, then the
+   accuracy and counts of the board's bottom side. A spectator's is neutral. */
+
+.demo-end {
+  flex: none;
+  padding: 10px;
+  border-radius: 16px;
+  background: #ffffff08;
+  box-shadow: inset 0 0 0 1px #ffffff14;
+}
+
+.ln-ext-end__card {
+  --coach-h: 112px;
+  --tag-c: var(--dim);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  container-type: inline-size;
+  color: var(--text);
+}
+
+.ln-ext-end__glow {
+  display: flex;
+  gap: calc(var(--coach-h) / 6);
+  min-height: calc(var(--coach-h) + 18px);
+  padding-inline-start: calc(var(--coach-h) / 5);
+  overflow: hidden;
+  border-radius: 12px;
+  background:
+    radial-gradient(
+      70% 140% at 18% 125%,
+      color-mix(in srgb, var(--tag-c) 55%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(100deg, color-mix(in srgb, var(--tag-c) 22%, transparent), transparent 85%);
+}
+
+/* The coach on the glow's bottom edge, its canvas spilling past its box for its arms. */
+.ln-ext-end__card .ln-ext-coach__avatar {
+  position: relative;
+  flex: none;
+  align-self: flex-end;
+  width: calc(var(--coach-h) * 1.09);
+  height: var(--coach-h);
+}
+
+.ln-ext-end__card .demo-coach__face canvas {
+  top: -13%;
+  left: -60%;
+  width: 220%;
+  height: 113%;
+}
+
+.ln-ext-end__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 14px 14px 14px 0;
+}
+
+.ln-ext-end__reason {
+  color: var(--tag-c);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ln-ext-end__title {
+  margin: 2px 0 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.ln-ext-end__bubble:empty {
+  display: none;
+}
+
+/* ---- the figures ---- */
+
+.ln-ext-end__stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #ffffff0a;
+  box-shadow: inset 0 0 0 1px #ffffff0f;
+}
+
+.ln-ext-end__accuracy {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+}
+
+.ln-ext-end__accuracy b {
+  font-size: 34px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ln-ext-end__accuracy span {
+  margin-top: 3px;
+  color: var(--dim);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.ln-ext-end__counts {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ln-ext-end__count {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ln-ext-end__count-top {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ln-ext-end__count-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.ln-ext-end__count-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ln-ext-end__count b {
+  color: var(--ln-ext-count-c, var(--text));
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.ln-ext-end__count-label {
+  color: var(--dim);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* A narrow card: the accuracy on a line of its own, the counts the width for theirs. */
+@container (max-width: 360px) {
+  .ln-ext-end__card .ln-ext-end__glow {
+    --coach-h: 92px;
+  }
+
+  .ln-ext-end__card .ln-ext-end__title {
+    font-size: 20px;
+  }
+
+  .ln-ext-end__stats {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ln-ext-end__accuracy {
+    flex: 1 1 100%;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .ln-ext-end__counts {
+    flex-basis: 100%;
+  }
+}

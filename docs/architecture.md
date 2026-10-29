@@ -341,3 +341,22 @@ preference, as its Theme menu does. Users make their own in its editor
 (`theme-editor.ts`): kept in the settings beside the built-in ones
 (`colors/built-in.ts`), checked by the same schema, and shared as a code
 (`colors/share.ts`).
+
+## The site
+
+`site/` is the extension's promotional page, published on GitHub Pages
+(<https://theophile-wallez.github.io/LichessNeo/>) by `.github/workflows/pages.yml`
+whenever a push to `main` changes it or what it draws from. `scripts/site.ts`
+builds it into `dist/site` (`pnpm site` serves it on localhost:5181, rebuilt on
+every change): the page and its sheets as written, the pictures they name
+copied from the repository (`scripts/lib/site-assets.ts`), the Hugeicons they
+name, and `site/demo` bundled.
+
+`site/demo` is a live Debrief of Morphy's Opera Game. It runs no engine: the
+records come from `opera.json`, which `scripts/site/record-demo.ts` writes by
+hand with a native Stockfish, and the review's own code (`src/page/review`)
+judges the moves, writes the coach's words and draws its summary, key moments
+and buttons from them, so the page shows what the extension would. What the
+extension does through Lichess (its board, its move list, its panel) the demo
+draws itself, in the same markup where it can, for the review's stylesheets'
+look, which `site/css` copies in the site's own tokens.

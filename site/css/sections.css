@@ -1,0 +1,241 @@
+/* The page's other sections: the coaches, the looks to try, what holds and
+   the last call. The rest of the tiles are in more.css. */
+
+/* ---- the coaches ---- */
+
+.coaches {
+  padding-top: clamp(112px, 14vw, 180px);
+}
+
+/* A class photo in three rows: the back row smaller and in the shade, each
+   coach bobbing on its own beat, hopping when pointed at. */
+.crowd {
+  position: relative;
+  aspect-ratio: 1200 / 560;
+  margin-top: clamp(24px, 4vw, 48px);
+}
+
+/* A glow under the front row, larger than the crowd and faded out before its own edges,
+   so that nothing ends in a line. */
+.crowd::before {
+  content: '';
+  position: absolute;
+  inset: 20% -12% -22%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    color-mix(in srgb, var(--accent) 6%, transparent) 55%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.crowd img {
+  --s: 1;
+
+  position: absolute;
+  bottom: 0;
+  left: var(--x);
+  z-index: 3;
+  width: calc(var(--s) * 19%);
+  height: auto;
+  margin-left: calc(var(--s) * -9.5%);
+  filter: drop-shadow(0 14px 18px #00000080);
+  transform-origin: 50% 100%;
+  animation: bob 3.6s ease-in-out calc(var(--i) * -0.55s) infinite;
+  transition:
+    scale 0.3s var(--hop),
+    rotate 0.3s var(--hop);
+}
+
+.crowd img[data-row='1'] {
+  --s: 0.84;
+
+  bottom: 27%;
+  z-index: 2;
+}
+
+.crowd img[data-row='0'] {
+  --s: 0.7;
+
+  bottom: 53%;
+  z-index: 1;
+  filter: drop-shadow(0 10px 14px #00000080) brightness(0.86);
+}
+
+@media (hover: hover) {
+  .crowd img:hover {
+    scale: 1.1;
+    rotate: -6deg;
+  }
+}
+
+@keyframes bob {
+  50% {
+    translate: 0 -5%;
+  }
+}
+
+/* ---- make it yours ---- */
+
+.yours {
+  padding-top: clamp(112px, 14vw, 180px);
+}
+
+.yours-pickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-top: clamp(32px, 4vw, 44px);
+}
+
+/* A layout's button: its little window, then its name. */
+.picker--layout button {
+  display: flex;
+  gap: 8px;
+  width: auto;
+  padding: 3px 12px 3px 8px;
+  color: var(--dim);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.picker--layout button[aria-pressed='true'] {
+  color: var(--text);
+}
+
+.layout-icon {
+  display: grid;
+  gap: 2px;
+  width: 26px;
+  height: 18px;
+  padding: 2px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.layout-icon i {
+  border-radius: 1px;
+  background: #ffffff1f;
+}
+
+.layout-icon i:first-child {
+  grid-area: nav;
+  background: var(--accent-light);
+}
+
+.layout-icon--sidebar {
+  grid-template: 'nav a' 1fr 'nav b' 1fr / 6px 1fr;
+}
+
+.layout-icon--unfolded {
+  grid-template: 'nav a' 1fr 'nav b' 1fr / 9px 1fr;
+}
+
+.layout-icon--rail {
+  grid-template: 'nav a' 1fr 'nav b' 1fr / 3px 1fr;
+}
+
+.layout-icon--header {
+  grid-template: 'nav nav' 3px 'a b' 1fr / 2fr 1fr;
+}
+
+/* ---- what holds ---- */
+
+.facts {
+  padding-top: clamp(96px, 12vw, 160px);
+}
+
+.facts dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  padding-top: 32px;
+  box-shadow: 0 -1px var(--line);
+}
+
+.facts dt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 590;
+}
+
+.facts dt .icon {
+  color: var(--accent-light);
+}
+
+.facts dd {
+  margin-top: 6px;
+  color: var(--dim);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ---- the last call ---- */
+
+.cta {
+  margin-top: clamp(112px, 14vw, 180px);
+  padding: clamp(80px, 11vw, 140px) 0;
+  background: radial-gradient(
+    60% 80% at 50% 100%,
+    color-mix(in srgb, var(--accent) 19%, transparent),
+    transparent 70%
+  );
+  box-shadow: inset 0 1px var(--line);
+}
+
+.cta .wrap {
+  display: grid;
+  justify-items: center;
+  gap: 26px;
+  text-align: center;
+}
+
+.cta h2 {
+  max-width: 14ch;
+  font-size: clamp(40px, 6vw, 76px);
+}
+
+.footer {
+  padding: 32px 0 44px;
+  box-shadow: inset 0 1px var(--line);
+}
+
+.footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.footer .brand {
+  font-size: 15px;
+}
+
+.footer .brand img {
+  width: 24px;
+  height: 24px;
+}
+
+.footer p {
+  color: var(--faint);
+  font-size: 13.5px;
+}
+
+.footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-left: auto;
+}
+
+.footer nav a {
+  color: var(--dim);
+  font-size: 13.5px;
+  text-decoration: none;
+}
+
+.footer nav a:hover {
+  color: var(--text);
+}

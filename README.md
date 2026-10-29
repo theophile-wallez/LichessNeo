@@ -8,6 +8,9 @@ game.
 Your Lichess account, your games and your friends don't change. Only the look
 and the sounds do.
 
+**[See it on its website](https://theophile-wallez.github.io/LichessNeo/)**, with a
+game's Debrief you can play through, the coaches and the looks to try.
+
 ![A game's Debrief on lichess.org with the extension, on a computer and on a phone](store/en/1-game.png)
 
 ## What you get
@@ -129,7 +132,8 @@ doesn't).
 `pnpm check` runs the type checks, the linter, the formatting check and the
 unit tests (`pnpm check:fast` only those of the files changed since
 `origin/main`), and `pnpm test:e2e` the end-to-end smoke tests on
-lichess.org (after `pnpm build`), which CI runs when started by hand. How the code is organized:
+lichess.org (after `pnpm build`), which CI runs when started by hand.
+`pnpm site` serves the website on localhost:5181. How the code is organized:
 [docs/architecture.md](docs/architecture.md).
 
 ### Building from the sources

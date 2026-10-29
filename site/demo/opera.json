@@ -1,0 +1,1261 @@
+{
+  "opening": "Philidor Defense",
+  "bookPly": 4,
+  "nodes": [
+    { "ply": 0, "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" },
+    {
+      "ply": 1,
+      "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+      "uci": "e2e4",
+      "san": "e4"
+    },
+    {
+      "ply": 2,
+      "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "uci": "e7e5",
+      "san": "e5"
+    },
+    {
+      "ply": 3,
+      "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2",
+      "uci": "g1f3",
+      "san": "Nf3"
+    },
+    {
+      "ply": 4,
+      "fen": "rnbqkbnr/ppp2ppp/3p4/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3",
+      "uci": "d7d6",
+      "san": "d6"
+    },
+    {
+      "ply": 5,
+      "fen": "rnbqkbnr/ppp2ppp/3p4/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3",
+      "uci": "d2d4",
+      "san": "d4"
+    },
+    {
+      "ply": 6,
+      "fen": "rn1qkbnr/ppp2ppp/3p4/4p3/3PP1b1/5N2/PPP2PPP/RNBQKB1R w KQkq - 1 4",
+      "uci": "c8g4",
+      "san": "Bg4"
+    },
+    {
+      "ply": 7,
+      "fen": "rn1qkbnr/ppp2ppp/3p4/4P3/4P1b1/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 4",
+      "uci": "d4e5",
+      "san": "dxe5"
+    },
+    {
+      "ply": 8,
+      "fen": "rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5b2/PPP2PPP/RNBQKB1R w KQkq - 0 5",
+      "uci": "g4f3",
+      "san": "Bxf3"
+    },
+    {
+      "ply": 9,
+      "fen": "rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5Q2/PPP2PPP/RNB1KB1R b KQkq - 0 5",
+      "uci": "d1f3",
+      "san": "Qxf3"
+    },
+    {
+      "ply": 10,
+      "fen": "rn1qkbnr/ppp2ppp/8/4p3/4P3/5Q2/PPP2PPP/RNB1KB1R w KQkq - 0 6",
+      "uci": "d6e5",
+      "san": "dxe5"
+    },
+    {
+      "ply": 11,
+      "fen": "rn1qkbnr/ppp2ppp/8/4p3/2B1P3/5Q2/PPP2PPP/RNB1K2R b KQkq - 1 6",
+      "uci": "f1c4",
+      "san": "Bc4"
+    },
+    {
+      "ply": 12,
+      "fen": "rn1qkb1r/ppp2ppp/5n2/4p3/2B1P3/5Q2/PPP2PPP/RNB1K2R w KQkq - 2 7",
+      "uci": "g8f6",
+      "san": "Nf6"
+    },
+    {
+      "ply": 13,
+      "fen": "rn1qkb1r/ppp2ppp/5n2/4p3/2B1P3/1Q6/PPP2PPP/RNB1K2R b KQkq - 3 7",
+      "uci": "f3b3",
+      "san": "Qb3"
+    },
+    {
+      "ply": 14,
+      "fen": "rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1Q6/PPP2PPP/RNB1K2R w KQkq - 4 8",
+      "uci": "d8e7",
+      "san": "Qe7"
+    },
+    {
+      "ply": 15,
+      "fen": "rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R b KQkq - 5 8",
+      "uci": "b1c3",
+      "san": "Nc3"
+    },
+    {
+      "ply": 16,
+      "fen": "rn2kb1r/pp2qppp/2p2n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R w KQkq - 0 9",
+      "uci": "c7c6",
+      "san": "c6"
+    },
+    {
+      "ply": 17,
+      "fen": "rn2kb1r/pp2qppp/2p2n2/4p1B1/2B1P3/1QN5/PPP2PPP/R3K2R b KQkq - 1 9",
+      "uci": "c1g5",
+      "san": "Bg5"
+    },
+    {
+      "ply": 18,
+      "fen": "rn2kb1r/p3qppp/2p2n2/1p2p1B1/2B1P3/1QN5/PPP2PPP/R3K2R w KQkq - 0 10",
+      "uci": "b7b5",
+      "san": "b5"
+    },
+    {
+      "ply": 19,
+      "fen": "rn2kb1r/p3qppp/2p2n2/1N2p1B1/2B1P3/1Q6/PPP2PPP/R3K2R b KQkq - 0 10",
+      "uci": "c3b5",
+      "san": "Nxb5"
+    },
+    {
+      "ply": 20,
+      "fen": "rn2kb1r/p3qppp/5n2/1p2p1B1/2B1P3/1Q6/PPP2PPP/R3K2R w KQkq - 0 11",
+      "uci": "c6b5",
+      "san": "cxb5"
+    },
+    {
+      "ply": 21,
+      "fen": "rn2kb1r/p3qppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/R3K2R b KQkq - 0 11",
+      "uci": "c4b5",
+      "san": "Bxb5+"
+    },
+    {
+      "ply": 22,
+      "fen": "r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/R3K2R w KQkq - 1 12",
+      "uci": "b8d7",
+      "san": "Nbd7"
+    },
+    {
+      "ply": 23,
+      "fen": "r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R b kq - 2 12",
+      "uci": "e1a1",
+      "san": "O-O-O"
+    },
+    {
+      "ply": 24,
+      "fen": "3rkb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R w k - 3 13",
+      "uci": "a8d8",
+      "san": "Rd8"
+    },
+    {
+      "ply": 25,
+      "fen": "3rkb1r/p2Rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2K4R b k - 0 13",
+      "uci": "d1d7",
+      "san": "Rxd7"
+    },
+    {
+      "ply": 26,
+      "fen": "4kb1r/p2rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2K4R w k - 0 14",
+      "uci": "d8d7",
+      "san": "Rxd7"
+    },
+    {
+      "ply": 27,
+      "fen": "4kb1r/p2rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR4 b k - 1 14",
+      "uci": "h1d1",
+      "san": "Rd1"
+    },
+    {
+      "ply": 28,
+      "fen": "4kb1r/p2r1ppp/4qn2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR4 w k - 2 15",
+      "uci": "e7e6",
+      "san": "Qe6"
+    },
+    {
+      "ply": 29,
+      "fen": "4kb1r/p2B1ppp/4qn2/4p1B1/4P3/1Q6/PPP2PPP/2KR4 b k - 0 15",
+      "uci": "b5d7",
+      "san": "Bxd7+"
+    },
+    {
+      "ply": 30,
+      "fen": "4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4 w k - 0 16",
+      "uci": "f6d7",
+      "san": "Nxd7"
+    },
+    {
+      "ply": 31,
+      "fen": "1Q2kb1r/p2n1ppp/4q3/4p1B1/4P3/8/PPP2PPP/2KR4 b k - 1 16",
+      "uci": "b3b8",
+      "san": "Qb8+"
+    },
+    {
+      "ply": 32,
+      "fen": "1n2kb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2KR4 w k - 0 17",
+      "uci": "d7b8",
+      "san": "Nxb8"
+    },
+    {
+      "ply": 33,
+      "fen": "1n1Rkb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2K5 b k - 1 17",
+      "uci": "d1d8",
+      "san": "Rd8#"
+    }
+  ],
+  "records": [
+    {
+      "cp": 30,
+      "whiteWinChance": 52.75875538925041,
+      "secondLineWinChance": 51.9321294202434,
+      "best": "e2e4",
+      "line": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "g8f6",
+        "e1g1",
+        "f8e7",
+        "f1e1",
+        "b7b5"
+      ]
+    },
+    {
+      "cp": 32,
+      "whiteWinChance": 52.94226081270875,
+      "secondLineWinChance": 53.30902822991305,
+      "best": "e7e5",
+      "line": [
+        "e7e5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "g8f6",
+        "e1g1",
+        "f6e4",
+        "f1e1",
+        "e4c5",
+        "a4c6"
+      ]
+    },
+    {
+      "cp": 29,
+      "whiteWinChance": 52.66697440308632,
+      "secondLineWinChance": 50.73636275599663,
+      "best": "g1f3",
+      "line": [
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "g8f6",
+        "e1g1",
+        "f6e4",
+        "d2d4",
+        "e5d4",
+        "f1e1",
+        "d7d5"
+      ]
+    },
+    {
+      "cp": 30,
+      "whiteWinChance": 52.75875538925041,
+      "secondLineWinChance": 54.132888835792336,
+      "best": "b8c6",
+      "line": [
+        "b8c6",
+        "f1b5",
+        "a7a6",
+        "b5a4",
+        "g8f6",
+        "e1g1",
+        "b7b5",
+        "a4b3",
+        "f8c5",
+        "a2a4",
+        "c8b7",
+        "d2d3"
+      ]
+    },
+    {
+      "cp": 47,
+      "whiteWinChance": 54.315678521975045,
+      "secondLineWinChance": 52.85051773118131,
+      "best": "d2d4",
+      "line": [
+        "d2d4",
+        "e5d4",
+        "f3d4",
+        "g8f6",
+        "b1c3",
+        "f8e7",
+        "g2g3",
+        "e8g8",
+        "f1g2",
+        "a7a5",
+        "e1g1",
+        "a5a4"
+      ]
+    },
+    {
+      "cp": 54,
+      "whiteWinChance": 54.95449603745888,
+      "secondLineWinChance": 56.317641764335946,
+      "best": "g8f6",
+      "line": [
+        "g8f6",
+        "b1c3",
+        "b8d7",
+        "a2a4",
+        "c7c6",
+        "a4a5",
+        "f8e7",
+        "f1c4",
+        "e5d4",
+        "d1d4",
+        "e8g8"
+      ]
+    },
+    {
+      "cp": 105,
+      "whiteWinChance": 59.54683835833042,
+      "secondLineWinChance": 58.746113715199876,
+      "best": "c1e3",
+      "line": [
+        "c1e3",
+        "b8c6",
+        "d4d5",
+        "c6e7",
+        "c2c4",
+        "g7g6",
+        "b1c3",
+        "f8h6",
+        "h2h3",
+        "g4f3",
+        "d1f3",
+        "h6e3"
+      ]
+    },
+    {
+      "cp": 97,
+      "whiteWinChance": 58.835320297549366,
+      "secondLineWinChance": 61.04522820914586,
+      "best": "b8c6",
+      "line": [
+        "b8c6",
+        "e5d6",
+        "f8d6",
+        "h2h3",
+        "g4h5",
+        "f1b5",
+        "d8d7",
+        "b1c3",
+        "e8c8",
+        "c1e3",
+        "a7a6",
+        "b5c6"
+      ]
+    },
+    {
+      "cp": 151,
+      "whiteWinChance": 63.55251419984302,
+      "secondLineWinChance": 59.10258971916129,
+      "best": "d1f3",
+      "line": [
+        "d1f3",
+        "d6e5",
+        "f3b3",
+        "b8d7",
+        "c1e3",
+        "f8c5",
+        "e3c5",
+        "d7c5",
+        "b3b5",
+        "c5d7",
+        "b5b7",
+        "a8b8"
+      ]
+    },
+    {
+      "cp": 157,
+      "whiteWinChance": 64.06270050754314,
+      "secondLineWinChance": 68.34245628600051,
+      "best": "d6e5",
+      "line": [
+        "d6e5",
+        "f3b3",
+        "b8d7",
+        "c1e3",
+        "f8c5",
+        "e3c5",
+        "d7c5",
+        "b3b5",
+        "c5d7",
+        "b5b7",
+        "a8b8",
+        "b7a7"
+      ]
+    },
+    {
+      "cp": 166,
+      "whiteWinChance": 64.8220254322344,
+      "secondLineWinChance": 63.722921558389366,
+      "best": "f3b3",
+      "line": [
+        "f3b3",
+        "b8d7",
+        "c1e3",
+        "f8c5",
+        "e3c5",
+        "d7c5",
+        "b3b5",
+        "c5d7",
+        "b5b7",
+        "a8b8",
+        "b7a7",
+        "b8b2"
+      ]
+    },
+    {
+      "cp": 128,
+      "whiteWinChance": 61.56928792462818,
+      "secondLineWinChance": 66.31811026712697,
+      "best": "d8f6",
+      "line": [
+        "d8f6",
+        "f3h3",
+        "b8d7",
+        "b1c3",
+        "f8c5",
+        "e1g1",
+        "c7c6",
+        "c3a4",
+        "c5d6",
+        "f1d1",
+        "a8d8",
+        "c1g5"
+      ]
+    },
+    {
+      "cp": 301,
+      "whiteWinChance": 75.18131775349545,
+      "secondLineWinChance": 60.3425129353426,
+      "best": "f3b3",
+      "line": [
+        "f3b3",
+        "f8c5",
+        "c4f7",
+        "e8e7",
+        "f7d5",
+        "b8d7",
+        "e1g1",
+        "c7c6",
+        "d5e6",
+        "c5b6",
+        "e6f5",
+        "d7c5"
+      ]
+    },
+    {
+      "cp": 299,
+      "whiteWinChance": 75.04365514263222,
+      "secondLineWinChance": 75.31847075065126,
+      "best": "d8e7",
+      "line": [
+        "d8e7",
+        "b3b7",
+        "e7b4",
+        "b7b4",
+        "f8b4",
+        "c1d2",
+        "a7a5",
+        "b1c3",
+        "b8d7",
+        "f2f3",
+        "e8e7",
+        "e1c1"
+      ]
+    },
+    {
+      "cp": 296,
+      "whiteWinChance": 74.83620769618608,
+      "secondLineWinChance": 72.99091321665176,
+      "best": "b3b7",
+      "line": [
+        "b3b7",
+        "e7b4",
+        "b7b4",
+        "f8b4",
+        "c1d2",
+        "a7a5",
+        "b1c3",
+        "e8e7",
+        "f2f3",
+        "b8d7",
+        "e1c1",
+        "d7b6"
+      ]
+    },
+    {
+      "cp": 264,
+      "whiteWinChance": 72.55317251331462,
+      "secondLineWinChance": 77.8900650960456,
+      "best": "c7c6",
+      "line": [
+        "c7c6",
+        "c1g5",
+        "e8d8",
+        "e1c1",
+        "d8c7",
+        "c4f7",
+        "b8d7",
+        "a2a4",
+        "a7a5",
+        "f2f3",
+        "h7h6",
+        "g5e3"
+      ]
+    },
+    {
+      "cp": 276,
+      "whiteWinChance": 73.42422977111448,
+      "secondLineWinChance": 70.68257687656248,
+      "best": "c1g5",
+      "line": [
+        "c1g5",
+        "e8d8",
+        "c4f7",
+        "b8d7",
+        "e1c1",
+        "d8c7",
+        "a2a4",
+        "e7b4",
+        "b3a2",
+        "a7a5",
+        "f2f3",
+        "f8c5"
+      ]
+    },
+    {
+      "cp": 282,
+      "whiteWinChance": 73.85308477502252,
+      "secondLineWinChance": 76.33079165915984,
+      "best": "e8d8",
+      "line": [
+        "e8d8",
+        "e1c1",
+        "d8c7",
+        "c4f7",
+        "b8d7",
+        "a2a4",
+        "a7a5",
+        "f2f3",
+        "e7b4",
+        "b3a2",
+        "f8c5",
+        "c1b1"
+      ]
+    },
+    {
+      "cp": 517,
+      "whiteWinChance": 87.03024236418142,
+      "secondLineWinChance": 63.38176636011208,
+      "best": "c3b5",
+      "line": [
+        "c3b5",
+        "b8a6",
+        "e1c1",
+        "a6c5",
+        "b3f3",
+        "c5b7",
+        "g5h4",
+        "a7a6",
+        "b5a3",
+        "b7a5",
+        "c4b3",
+        "a5b3"
+      ]
+    },
+    {
+      "cp": 457,
+      "whiteWinChance": 84.32631204203119,
+      "secondLineWinChance": 90.71403124659402,
+      "best": "e7b4",
+      "line": [
+        "e7b4",
+        "b5c3",
+        "b4b3",
+        "a2b3",
+        "a7a5",
+        "f2f3",
+        "f8c5",
+        "c3d1",
+        "f6d7",
+        "g5d2",
+        "d7b6",
+        "a1a5"
+      ]
+    },
+    {
+      "cp": 696,
+      "whiteWinChance": 92.84239320354783,
+      "secondLineWinChance": 52.75875538925041,
+      "best": "c4b5",
+      "line": [
+        "c4b5",
+        "e8d8",
+        "e1c1",
+        "d8c7",
+        "d1d3",
+        "e7b4",
+        "b3f7",
+        "f8e7",
+        "h1d1",
+        "a7a6",
+        "b5a4",
+        "h8f8"
+      ]
+    },
+    {
+      "cp": 736,
+      "whiteWinChance": 93.76147850301388,
+      "secondLineWinChance": 94.73714646201228,
+      "best": "e8d8",
+      "line": [
+        "e8d8",
+        "e1c1",
+        "d8c8",
+        "d1d3",
+        "e7b4",
+        "d3c3",
+        "c8b7",
+        "b3f7",
+        "b4e7",
+        "f7c4",
+        "e7c5",
+        "c4c5"
+      ]
+    },
+    {
+      "cp": 785,
+      "whiteWinChance": 94.73714646201228,
+      "secondLineWinChance": 81.2928143673567,
+      "best": "e1c1",
+      "line": [
+        "e1c1",
+        "e7c5",
+        "g5f6",
+        "g7f6",
+        "b5d7",
+        "e8e7",
+        "c1b1",
+        "f8h6",
+        "d1d5",
+        "h8b8",
+        "d5c5",
+        "b8b3"
+      ]
+    },
+    {
+      "cp": 793,
+      "whiteWinChance": 94.88209305808851,
+      "secondLineWinChance": 94.93546818291817,
+      "best": "e7c5",
+      "line": [
+        "e7c5",
+        "g5f6",
+        "g7f6",
+        "b5d7",
+        "e8e7",
+        "c1b1",
+        "f8h6",
+        "d1d5",
+        "h8b8",
+        "d5c5",
+        "b8b3",
+        "a2b3"
+      ]
+    },
+    {
+      "cp": 841,
+      "whiteWinChance": 95.67534918377399,
+      "secondLineWinChance": 89.04263551648037,
+      "best": "d1d7",
+      "line": [
+        "d1d7",
+        "f6d7",
+        "g5e7",
+        "f8e7",
+        "b3a4",
+        "e8f8",
+        "b5d7",
+        "h7h5",
+        "a4a7",
+        "h8h6",
+        "h1d1",
+        "h6d6"
+      ]
+    },
+    {
+      "cp": 851,
+      "whiteWinChance": 95.82516333341273,
+      "secondLineWinChance": 96.13746666859143,
+      "best": "f6d7",
+      "line": [
+        "f6d7",
+        "g5e7",
+        "f8e7",
+        "b3a4",
+        "h7h5",
+        "h1d1",
+        "h8h6",
+        "b5d7",
+        "e8f8",
+        "c2c3",
+        "h6d6",
+        "d1d6"
+      ]
+    },
+    {
+      "cp": 864,
+      "whiteWinChance": 96.01251223887283,
+      "secondLineWinChance": 74.06582830702547,
+      "best": "h1d1",
+      "line": [
+        "h1d1",
+        "e7b4",
+        "g5f6",
+        "f8c5",
+        "d1d7",
+        "e8g8",
+        "b3b4",
+        "c5b4",
+        "f6g5",
+        "f8b8",
+        "c2c4",
+        "g7g6"
+      ]
+    },
+    {
+      "cp": 829,
+      "whiteWinChance": 95.48879375551829,
+      "secondLineWinChance": 96.16471959226058,
+      "best": "e7e6",
+      "line": [
+        "e7e6",
+        "g5f6",
+        "f8d6",
+        "b3e6",
+        "f7e6",
+        "b5d7",
+        "e8d7",
+        "f6e5",
+        "h8f8",
+        "e5d6",
+        "f8f2",
+        "d6g3"
+      ]
+    },
+    {
+      "cp": 980,
+      "whiteWinChance": 97.36206026323285,
+      "secondLineWinChance": 95.66008847009226,
+      "best": "b5d7",
+      "line": [
+        "b5d7",
+        "e6d7",
+        "b3b8",
+        "e8e7",
+        "b8e5",
+        "e7d8",
+        "e5b8",
+        "d8e7",
+        "d1d7",
+        "e7d7",
+        "b8b7",
+        "d7e6"
+      ]
+    },
+    {
+      "cp": 1002,
+      "whiteWinChance": 97.56231898689657,
+      "secondLineWinChance": 100,
+      "best": "e6d7",
+      "line": [
+        "e6d7",
+        "b3b8",
+        "e8e7",
+        "d1d5",
+        "h8g8",
+        "d5e5",
+        "d7e6",
+        "e5e6",
+        "f7e6",
+        "b8c7",
+        "e7e8"
+      ]
+    },
+    {
+      "mate": 2,
+      "whiteWinChance": 100,
+      "secondLineWinChance": 85.22892607055502,
+      "best": "b3b8",
+      "line": ["b3b8", "d7b8", "d1d8"]
+    },
+    {
+      "mate": 1,
+      "whiteWinChance": 100,
+      "secondLineWinChance": null,
+      "best": "d7b8",
+      "line": ["d7b8", "d1d8"]
+    },
+    { "mate": 1, "whiteWinChance": 100, "secondLineWinChance": 3.848883713867103, "best": "d1d8" },
+    { "mate": 0, "whiteWinChance": 100, "secondLineWinChance": null, "best": null }
+  ],
+  "threats": {
+    "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1": {
+      "cp": -34,
+      "whiteWinChance": 46.8743132675129,
+      "secondLineWinChance": 49.079583987119136,
+      "best": "e7e5",
+      "line": ["e7e5", "e2e4", "g8f6", "g1f3", "b8c6"]
+    },
+    "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2": {
+      "cp": 95,
+      "whiteWinChance": 58.65684965842631,
+      "secondLineWinChance": 57.850978049841984,
+      "best": "d2d4",
+      "line": [
+        "d2d4",
+        "e7e6",
+        "g1f3",
+        "d7d5",
+        "e4e5",
+        "c7c5",
+        "c2c3",
+        "b8c6",
+        "f1d3",
+        "c5d4",
+        "c3d4",
+        "g8e7"
+      ]
+    },
+    "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2": {
+      "cp": -35,
+      "whiteWinChance": 46.7826316589383,
+      "secondLineWinChance": 48.711557303526725,
+      "best": "g8f6",
+      "line": [
+        "g8f6",
+        "b1c3",
+        "d7d5",
+        "e4d5",
+        "f6d5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "d5c3",
+        "d2c3",
+        "d8d1",
+        "e1d1"
+      ]
+    },
+    "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 1 3": {
+      "cp": 200,
+      "whiteWinChance": 67.6211637485054,
+      "secondLineWinChance": 60.7822300927273,
+      "best": "f3e5",
+      "line": ["f3e5", "d8e7", "e5f3", "e7e4", "f1e2", "e4g6", "e1g1", "f8e7"]
+    },
+    "rnbqkbnr/ppp2ppp/3p4/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 0 3": {
+      "cp": 17,
+      "whiteWinChance": 51.56437324214209,
+      "secondLineWinChance": 51.65632973121441,
+      "best": "g8f6",
+      "line": [
+        "g8f6",
+        "b1c3",
+        "g7g6",
+        "f1c4",
+        "f8g7",
+        "e1g1",
+        "e8g8",
+        "a2a4",
+        "f6e4",
+        "c3e4",
+        "d6d5",
+        "d2d4"
+      ]
+    },
+    "rnbqkbnr/ppp2ppp/3p4/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4": {
+      "cp": 197,
+      "whiteWinChance": 67.37883770370706,
+      "secondLineWinChance": 62.86751633890878,
+      "best": "d4e5",
+      "line": [
+        "d4e5",
+        "b8d7",
+        "c1g5",
+        "f8e7",
+        "g5e7",
+        "d8e7",
+        "e5d6",
+        "e7e4",
+        "d1e2",
+        "e4e2",
+        "f1e2",
+        "c7d6"
+      ]
+    },
+    "rn1qkbnr/ppp2ppp/3p4/4p3/3PP1b1/5N2/PPP2PPP/RNBQKB1R b KQkq - 1 4": {
+      "cp": 34,
+      "whiteWinChance": 53.1256867324871,
+      "secondLineWinChance": 53.58387144707508,
+      "best": "e5d4",
+      "line": ["e5d4", "d1d4", "b8c6", "d4c4", "g7g6", "b1c3", "f8g7", "c1g5", "d8d7"]
+    },
+    "rn1qkbnr/ppp2ppp/3p4/4P3/4P1b1/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 5": {
+      "cp": 221,
+      "whiteWinChance": 69.29058344072114,
+      "secondLineWinChance": 68.73942354748303,
+      "best": "h2h3",
+      "line": [
+        "h2h3",
+        "g4f3",
+        "d1f3",
+        "d6e5",
+        "f3b3",
+        "f8c5",
+        "f1c4",
+        "d8f6",
+        "e1g1",
+        "b8c6",
+        "b3b7",
+        "a8b8"
+      ]
+    },
+    "rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5b2/PPP2PPP/RNBQKB1R b KQkq - 0 5": {
+      "cp": -1034,
+      "whiteWinChance": 2.1726199243870923,
+      "secondLineWinChance": 11.32181301288611,
+      "best": "f3d1",
+      "line": [
+        "f3d1",
+        "c1g5",
+        "d8g5",
+        "f1b5",
+        "c7c6",
+        "b5c4",
+        "g5g2",
+        "b1c3",
+        "g2h1",
+        "e1d2",
+        "d6e5"
+      ]
+    },
+    "rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5Q2/PPP2PPP/RNB1KB1R w KQkq - 0 6": {
+      "cp": 528,
+      "whiteWinChance": 87.48060686370383,
+      "secondLineWinChance": 80.49620219857331,
+      "best": "f1c4",
+      "line": [
+        "f1c4",
+        "d8d7",
+        "f3b3",
+        "c7c6",
+        "e5e6",
+        "f7e6",
+        "c4e6",
+        "d7e7",
+        "c1e3",
+        "b8d7",
+        "b3b7"
+      ]
+    },
+    "rn1qkbnr/ppp2ppp/8/4p3/4P3/5Q2/PPP2PPP/RNB1KB1R b KQkq - 0 6": {
+      "cp": 69,
+      "whiteWinChance": 56.317641764335946,
+      "secondLineWinChance": 56.67962794387496,
+      "best": "g8f6",
+      "line": ["g8f6", "c1e3", "b8d7", "g2g4", "h7h6", "b1c3", "f8c5", "h2h4", "c5e3"]
+    },
+    "rn1qkbnr/ppp2ppp/8/4p3/2B1P3/5Q2/PPP2PPP/RNB1K2R w KQkq - 1 7": {
+      "mate": 1,
+      "whiteWinChance": 100,
+      "secondLineWinChance": 94.71875779295696,
+      "best": "f3f7"
+    },
+    "rn1qkb1r/ppp2ppp/5n2/4p3/2B1P3/5Q2/PPP2PPP/RNB1K2R b KQkq - 2 7": {
+      "cp": 60,
+      "whiteWinChance": 55.50076484124536,
+      "secondLineWinChance": 57.131105741498935,
+      "best": "f8c5",
+      "line": [
+        "f8c5",
+        "b1d2",
+        "d8e7",
+        "d2b3",
+        "c5b6",
+        "c1g5",
+        "h7h6",
+        "g5f6",
+        "e7f6",
+        "f3f6",
+        "g7f6",
+        "e1c1"
+      ]
+    },
+    "rn1qkb1r/ppp2ppp/5n2/4p3/2B1P3/1Q6/PPP2PPP/RNB1K2R w KQkq - 3 8": {
+      "mate": 2,
+      "whiteWinChance": 100,
+      "secondLineWinChance": 85.3213948464882,
+      "best": "c4f7",
+      "line": ["c4f7", "e8d7", "b3e6"]
+    },
+    "rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1Q6/PPP2PPP/RNB1K2R b KQkq - 4 8": {
+      "cp": 73,
+      "whiteWinChance": 56.67962794387496,
+      "secondLineWinChance": 57.31136939018822,
+      "best": "c7c6",
+      "line": [
+        "c7c6",
+        "c1e3",
+        "e7b4",
+        "b1d2",
+        "b4b3",
+        "a2b3",
+        "b8d7",
+        "c4d3",
+        "f8c5",
+        "e1e2",
+        "e8g8"
+      ]
+    },
+    "rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R w KQkq - 5 9": {
+      "cp": 699,
+      "whiteWinChance": 92.9154522170876,
+      "secondLineWinChance": 82.38701637214191,
+      "best": "b3b7",
+      "line": [
+        "b3b7",
+        "c7c6",
+        "b7a8",
+        "e7c7",
+        "c1e3",
+        "f8b4",
+        "a8a7",
+        "c7a7",
+        "e3a7",
+        "b8d7",
+        "a7e3"
+      ]
+    },
+    "rn2kb1r/pp2qppp/2p2n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R b KQkq - 0 9": {
+      "cp": 1,
+      "whiteWinChance": 50.09205189599892,
+      "secondLineWinChance": 58.9244688568345,
+      "best": "b7b5",
+      "line": [
+        "b7b5",
+        "c4e2",
+        "b8d7",
+        "c3d1",
+        "d7c5",
+        "b3f3",
+        "g7g6",
+        "a2a4",
+        "c5a4",
+        "c2c4",
+        "a7a6",
+        "d1c3"
+      ]
+    },
+    "rn2kb1r/pp2qppp/2p2n2/4p1B1/2B1P3/1QN5/PPP2PPP/R3K2R w KQkq - 1 10": {
+      "cp": 437,
+      "whiteWinChance": 83.32820836373895,
+      "secondLineWinChance": 78.26818427327368,
+      "best": "e1c1",
+      "line": [
+        "e1c1",
+        "h7h6",
+        "g5f6",
+        "g7f6",
+        "d1d3",
+        "f8g7",
+        "h1d1",
+        "e8g8",
+        "a2a4",
+        "b8a6",
+        "d3d7",
+        "e7d7"
+      ]
+    },
+    "rn2kb1r/p3qppp/2p2n2/1p2p1B1/2B1P3/1QN5/PPP2PPP/R3K2R b KQkq - 0 10": {
+      "cp": -508,
+      "whiteWinChance": 13.348426760561978,
+      "secondLineWinChance": 34.01166567266681,
+      "best": "b5c4",
+      "line": [
+        "b5c4",
+        "b3c4",
+        "e7e6",
+        "c4e6",
+        "f7e6",
+        "f2f3",
+        "b8d7",
+        "c3a4",
+        "d7b6",
+        "a4b6",
+        "a7b6",
+        "g5e3"
+      ]
+    },
+    "rn2kb1r/p3qppp/2p2n2/1N2p1B1/2B1P3/1Q6/PPP2PPP/R3K2R w KQkq - 0 11": {
+      "cp": 840,
+      "whiteWinChance": 95.66008847009226,
+      "secondLineWinChance": 93.88946215797787,
+      "best": "e1c1",
+      "line": ["e1c1", "c6b5", "c4b5", "b8d7", "d1d7", "e7d7", "b5d7", "f6d7", "b3d5"]
+    },
+    "rn2kb1r/p3qppp/5n2/1p2p1B1/2B1P3/1Q6/PPP2PPP/R3K2R b KQkq - 0 11": {
+      "cp": -777,
+      "whiteWinChance": 5.411671095866716,
+      "secondLineWinChance": 11.101893141984768,
+      "best": "b5c4",
+      "line": [
+        "b5c4",
+        "b3c4",
+        "e7b4",
+        "c4b4",
+        "f8b4",
+        "c2c3",
+        "b4e7",
+        "e1c1",
+        "b8a6",
+        "g5f6",
+        "e7f6"
+      ]
+    },
+    "r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/R3K2R b KQkq - 1 12": {
+      "cp": -168,
+      "whiteWinChance": 35.0102329214358,
+      "secondLineWinChance": 48.98756640291563,
+      "best": "e7b4",
+      "line": ["e7b4", "b3b4", "f8b4", "c2c3", "b4e7", "e1c1", "a7a6", "g5f6"]
+    },
+    "r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R w kq - 2 13": {
+      "cp": 902,
+      "whiteWinChance": 96.51501939931941,
+      "secondLineWinChance": 95.91265594657645,
+      "best": "d1d7",
+      "line": [
+        "d1d7",
+        "f6d7",
+        "g5e7",
+        "f8e7",
+        "b5d7",
+        "e8d7",
+        "b3b7",
+        "d7e6",
+        "b7c6",
+        "e7d6",
+        "c6d5",
+        "e6e7"
+      ]
+    },
+    "3rkb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R b k - 3 13": {
+      "cp": 456,
+      "whiteWinChance": 84.27758429925689,
+      "secondLineWinChance": 84.94862867151542,
+      "best": "e7c5",
+      "line": [
+        "e7c5",
+        "b5d7",
+        "d8d7",
+        "b3b8",
+        "e8e7",
+        "d1d7",
+        "e7d7",
+        "g5f6",
+        "g7f6",
+        "h1d1",
+        "d7c6",
+        "b8e8"
+      ]
+    },
+    "3rkb1r/p2Rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2K4R w k - 0 14": {
+      "cp": 1349,
+      "whiteWinChance": 99.30850180300438,
+      "secondLineWinChance": 98.88869015988465,
+      "best": "d7e7",
+      "line": ["d7e7", "e8e7", "b3b4", "d8d6", "h1d1", "e7e6", "b5c4", "e6d7"]
+    },
+    "4kb1r/p2rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2K4R b k - 0 14": {
+      "cp": 97,
+      "whiteWinChance": 58.835320297549366,
+      "secondLineWinChance": 62.60928550975975,
+      "best": "e7d6",
+      "line": ["e7d6", "c2c4", "a7a6", "b5a4", "e8e7", "a4d7", "d6d7", "b3b6"]
+    },
+    "4kb1r/p2rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR4 w k - 1 15": {
+      "cp": 946,
+      "whiteWinChance": 97.02073380695649,
+      "secondLineWinChance": 95.78074798668287,
+      "best": "b5d7",
+      "line": ["b5d7", "f6d7", "g5e7", "f8e7", "b3b7", "e8g8", "d1d7", "e7h4", "c1b1"]
+    },
+    "4kb1r/p2r1ppp/4qn2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR4 b k - 2 15": {
+      "cp": 441,
+      "whiteWinChance": 83.53181555713567,
+      "secondLineWinChance": 84.80684627039938,
+      "best": "f8c5",
+      "line": [
+        "f8c5",
+        "b3e6",
+        "f7e6",
+        "g5f6",
+        "e8f7",
+        "d1d7",
+        "f7f6",
+        "d7d2",
+        "f6e7",
+        "c2c3",
+        "h8d8",
+        "d2e2"
+      ]
+    },
+    "4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4 b k - 0 16": {
+      "cp": -263,
+      "whiteWinChance": 27.520211606290008,
+      "secondLineWinChance": 42.50856097123301,
+      "best": "e6b3",
+      "line": [
+        "e6b3",
+        "a2b3",
+        "f8c5",
+        "f2f3",
+        "h7h5",
+        "c2c3",
+        "c5b6",
+        "b3b4",
+        "f7f6",
+        "g5d2",
+        "e8e7",
+        "c3c4"
+      ]
+    },
+    "1n2kb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2KR4 b k - 0 17": {
+      "cp": -934,
+      "whiteWinChance": 3.109671172283278,
+      "secondLineWinChance": 4.116311434515019,
+      "best": "f7f6",
+      "line": ["f7f6", "d1d5", "f6g5", "d5a5", "g5g4", "c1b1", "a7a6", "a5d5", "h7h6"]
+    }
+  }
+}

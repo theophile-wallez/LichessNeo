@@ -4,5 +4,7 @@
     "lib": ["ES2024"],
     "types": ["node"]
   },
-  "include": ["./**/*.ts", "../src/manifest.ts", "../src/manifest.test.ts"]
+  "include": ["./**/*.ts", "../src/manifest.ts", "../src/manifest.test.ts"],
+  // The site's recorder reads the review's modules, which need the DOM's types: its own project.
+  "exclude": ["./site/**"]
 }

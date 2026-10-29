@@ -1,0 +1,309 @@
+/* The parts of the live review's panel around its card, as the review's own
+   (styles/review/coach.css, bubble.css, bubble-parts.css): the key moments
+   under the graph, the card's buttons under it, and the buttons inside it. */
+
+/* ---- the key moments (page/review/view/moments.ts) ---- */
+
+.ln-ext-moments {
+  display: flex;
+  gap: 8px;
+  height: 48px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* The cards fade out at an edge while there are more past it. */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--fade-start),
+    #000 calc(100% - var(--fade-end)),
+    transparent
+  );
+  animation: moments-fade linear both;
+  animation-timeline: scroll(self inline);
+}
+
+@property --fade-start {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --fade-end {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 36px;
+}
+
+@keyframes moments-fade {
+  0% {
+    --fade-start: 0px;
+    --fade-end: 36px;
+  }
+
+  10% {
+    --fade-start: 36px;
+  }
+
+  90% {
+    --fade-end: 36px;
+  }
+
+  100% {
+    --fade-start: 36px;
+    --fade-end: 0px;
+  }
+}
+
+.ln-ext-moments::-webkit-scrollbar {
+  display: none;
+}
+
+.ln-ext-moment {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-width: 104px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--panel-raised);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--text);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.ln-ext-moment:hover {
+  background: color-mix(in srgb, var(--panel-raised) 88%, #fff);
+}
+
+.ln-ext-moment--on {
+  box-shadow: inset 0 0 0 1.5px var(--accent-light);
+}
+
+.ln-ext-moment__move {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ln-ext-moment__move > :first-child {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.ln-ext-moment__move svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ln-ext-moment__class {
+  color: var(--ln-ext-class-color);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---- the card ---- */
+
+/* On a desktop the card keeps one height, as the review's: words that don't fit scroll in
+   it, and the move list keeps its room. */
+.demo-card {
+  height: 172px;
+}
+
+.demo-say {
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff1f transparent;
+}
+
+@container (max-width: 900px) {
+  .demo-card {
+    height: auto;
+  }
+
+  .demo-say {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+/* ---- the card's buttons (page/review/view/nav.ts) ---- */
+
+/* Explain, Best and Retry fold away when they've nothing to do, and Next grows into their
+   room: margins, not a gap, so a folded button leaves none. */
+.ln-ext-review__nav {
+  display: flex;
+}
+
+.ln-ext-review__nav .ln-ext-btn {
+  flex: 1 1 calc((100% - 16px) / 3);
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    flex-basis 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s,
+    background-color 0.15s;
+}
+
+.ln-ext-review__nav .ln-ext-btn:not(.ln-ext-btn--green) {
+  flex-grow: 0;
+  margin-inline-end: 8px;
+}
+
+.ln-ext-review__nav .ln-ext-btn:not(.ln-ext-btn--green):disabled {
+  flex-basis: 0;
+  margin-inline-end: 0;
+  padding-inline: 0;
+  opacity: 0;
+}
+
+.ln-ext-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 9px;
+  background: #ffffff0f;
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.ln-ext-btn:hover:not(:disabled) {
+  background: #ffffff1a;
+}
+
+/* Next, in the accent, as the extension's buttons are. */
+.ln-ext-btn--green {
+  background: linear-gradient(var(--accent-top), var(--accent-low));
+  box-shadow:
+    inset 0 1px #ffffff4d,
+    inset 0 -1px var(--accent-edge);
+  color: #fff;
+  text-shadow: 0 1px 1px #00000033;
+}
+
+.ln-ext-btn--green:hover:not(:disabled) {
+  background: linear-gradient(color-mix(in oklch, var(--accent) 76%, #fff), var(--accent));
+}
+
+.ln-ext-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ln-ext-btn .ln-ext-i {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.ln-ext-review__nav .ln-ext-btn:not(.ln-ext-btn--green) .ln-ext-i {
+  color: var(--dim);
+}
+
+/* A button that's on: its icon in the review's orange. */
+.ln-ext-review__nav .ln-ext-btn--on .ln-ext-i {
+  color: #ffb86c;
+}
+
+/* ---- the buttons inside the card: Explain's line, Retry's hints ---- */
+
+.ln-ext-bubble__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.ln-ext-bubble__line {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px 4px 6px;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff14;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.ln-ext-bubble__line:hover {
+  background: #ffffff24;
+}
+
+.ln-ext-bubble__line .ln-ext-i {
+  width: 16px;
+  height: 16px;
+}
+
+/* A move of the coach's words that can be played on the board. */
+.demo-say .ln-ext-mv--play {
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.demo-say .ln-ext-mv--play:hover {
+  background: #ffffff2e;
+}
+
+/* ---- the board while retrying ---- */
+
+.demo[data-retrying='true'] .demo-board {
+  cursor: pointer;
+}
+
+/* The piece picked to move, as Lichess marks it. */
+.demo-last--picked {
+  background: rgb(20 85 30 / 50%);
+}
+
+/* ---- a phone's panel ---- */
+
+/* With Retry, four names don't fit side by side: each goes under its icon, and Next keeps
+   its arrow, which says it alone (styles/review/coach.css). */
+@container (max-width: 560px) {
+  .ln-ext-review__nav--four .ln-ext-btn:not(.ln-ext-btn--green) {
+    flex-direction: column;
+    gap: 2px;
+    margin-inline-end: 6px;
+    padding-inline: 4px;
+    font-size: 12px;
+    line-height: 1.1;
+  }
+
+  .ln-ext-review__nav--four .ln-ext-btn--green {
+    flex: 0 0 48px;
+  }
+
+  .ln-ext-review__nav--four .ln-ext-btn--green > span {
+    display: none;
+  }
+}

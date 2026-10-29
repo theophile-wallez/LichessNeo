@@ -1,0 +1,53 @@
+# Publishes the promotional site (site/, built by scripts/site.ts) on GitHub
+# Pages. It runs when a push to main changes the site or what it draws from,
+# or by hand: a build of a few seconds, no tests.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'scripts/site.ts'
+      - 'scripts/lib/site-assets.ts'
+      - 'scripts/lib/hugeicon-files.ts'
+      - 'store/templates/shots/**'
+      - 'store/templates/coaches/**'
+      - 'public/img/**'
+      - 'src/page/review/**'
+      - 'src/content/coach/mascot/**'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - run: node scripts/site.ts
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,61 @@
+/* The coach's drawing on the demo's board (page/board/drawing.ts), coming in
+   as the extension's does (styles/board/shapes-promotion.css): its layers
+   one after the other, the dots one by one, the runs and the lines from
+   their start. */
+
+.ln-ext-drawing__layer {
+  --ln-ext-delay: calc(var(--ln-ext-step) * 0.15s);
+}
+
+.ln-ext-drawing__cell {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: drawing-pop 0.2s var(--hop) calc(var(--ln-ext-delay) + var(--ln-ext-i) * 0.03s) both;
+}
+
+.ln-ext-drawing__reveal {
+  stroke-dasharray: 1;
+  animation: drawing-stroke 0.25s ease-out var(--ln-ext-delay) both;
+}
+
+.ln-ext-drawing__barred {
+  animation: drawing-fade 0.15s ease-out var(--ln-ext-delay) both;
+}
+
+.ln-ext-drawing__ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: drawing-pop 0.22s var(--hop) var(--ln-ext-delay) both;
+}
+
+.ln-ext-drawing__lane {
+  transform-box: fill-box;
+  transform-origin: var(--ln-ext-origin);
+  animation: drawing-lane var(--ln-ext-run) var(--ease-out) var(--ln-ext-delay) both;
+}
+
+@keyframes drawing-lane {
+  from {
+    opacity: 0;
+    scale: var(--ln-ext-from);
+  }
+}
+
+@keyframes drawing-stroke {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes drawing-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes drawing-fade {
+  from {
+    opacity: 0;
+  }
+}

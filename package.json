@@ -20,6 +20,7 @@
     "preview": "node scripts/preview.ts",
     "turn": "node scripts/turn.ts",
     "playground": "node scripts/playground.ts",
+    "site": "node scripts/site.ts --serve",
     "package": "node scripts/package.ts",
     "store:render": "node scripts/store/render.ts",
     "icons": "node scripts/icons.ts",

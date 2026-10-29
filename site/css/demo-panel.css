@@ -1,0 +1,355 @@
+/* The live review's panel: the tabs, the graph, the coach's card and the
+   comment's markup (src/page/review/comment/markup.ts). */
+
+.demo-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  /* As tall as the board's column, whatever the move list holds. */
+  height: 0;
+  min-height: 100%;
+}
+
+.demo-panel > * {
+  flex: none;
+}
+
+/* As the review's (styles/review/mode-tabs.css): at most 300px, the tab picked a raised
+   pill that slides to the next one picked (demo/modes.ts). */
+.demo-tabs {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  max-width: 300px;
+  padding: 3px;
+  border-radius: 10px;
+  background: #0000004d;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.demo-tabs button {
+  position: relative;
+  flex: 1 1 auto;
+  height: 30px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  color: var(--dim);
+  font-size: 13.5px;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.demo-tabs button:hover,
+.demo-tabs button[aria-selected='true'] {
+  color: var(--text);
+}
+
+.demo-tabs__pill {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: var(--tab-w, 0);
+  height: 30px;
+  border-radius: 7px;
+  background: var(--panel-raised);
+  box-shadow: 0 1px 2px #0000008c;
+  translate: var(--tab-x, 0) 0;
+  transition:
+    translate 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.demo-graph {
+  position: relative;
+  height: 78px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--panel-raised);
+  cursor: pointer;
+}
+
+.demo-graph__plot,
+.demo-graph__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.demo-graph__dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 2px var(--panel-raised);
+  translate: -50% -50%;
+}
+
+/* Where a phase starts, as the review's graph marks it: a dashed line, named at the bottom. */
+.demo-graph__phase {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-left: 1px dashed #7d819780;
+}
+
+.demo-graph__phase span {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  color: #23263a;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.demo-graph__phase--end span {
+  right: 4px;
+  left: auto;
+}
+
+.demo-graph__cursor {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--accent-light);
+  box-shadow: 0 0 12px var(--accent-light);
+  transition: left 0.45s var(--ease-out);
+}
+
+/* The coach stands on the card's bottom edge, its words on its right. */
+.demo-card {
+  position: relative;
+  min-height: 156px;
+  overflow: hidden;
+  padding: 14px 16px 16px 162px;
+  border-radius: 14px;
+  background: linear-gradient(
+    oklch(20.5% var(--tint) var(--hue)),
+    oklch(18.5% var(--tint) var(--hue))
+  );
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    inset 0 1px #ffffff0d;
+}
+
+/* As the review's avatar (styles/coach-avatar.css): the still spans half again
+   its box's width, and the live canvas spills past it, so the two line up and
+   the coach's arms and hops aren't cut. 24px before it for the fox's arms. */
+.demo-coach {
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  width: 124px;
+  aspect-ratio: 124 / 114;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.demo-coach__face {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 100%;
+  animation: breathe 3.5s ease-in-out infinite;
+}
+
+.demo-coach__face::before {
+  content: '';
+  position: absolute;
+  inset: 0 -25%;
+  background: var(--still) bottom center / auto 100% no-repeat;
+}
+
+.demo-coach__face canvas {
+  position: absolute;
+  top: -50%;
+  left: -40%;
+  width: 180%;
+  height: 150%;
+  pointer-events: none;
+}
+
+.demo-coach--live .demo-coach__face {
+  animation: none;
+}
+
+.demo-coach--live .demo-coach__face::before {
+  content: none;
+}
+
+@keyframes breathe {
+  50% {
+    transform: scaleY(1.012);
+  }
+}
+
+.demo-say__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 26px;
+}
+
+.demo-say__icon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.demo-say__icon svg {
+  display: block;
+}
+
+.demo-say__title {
+  font-size: 15.5px;
+  font-weight: 590;
+  letter-spacing: -0.01em;
+}
+
+.demo-say__eval {
+  flex: none;
+  margin-left: auto;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: 12.5px;
+  font-weight: 590;
+  font-variant-numeric: tabular-nums;
+}
+
+.demo-say__words {
+  margin-top: 6px;
+  color: oklch(84% var(--tint) var(--hue));
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.demo-say__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.demo-tag {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #bd93f924;
+  color: #d4bcff;
+  font-size: 12px;
+  font-weight: 590;
+}
+
+/* The comment's markup (src/page/review/comment/markup.ts). */
+.ln-ext-w--off {
+  visibility: hidden;
+}
+
+.ln-ext-w--in {
+  animation: word-in 0.28s ease-out;
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+.ln-ext-say--detail {
+  display: block;
+  margin-top: 6px;
+  color: var(--faint);
+  font-size: 13px;
+}
+
+.ln-ext-pc {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.08em;
+  vertical-align: -0.24em;
+  background: center / contain no-repeat;
+}
+
+/* A black piece vanishes on the dark panel: a dim edge outlines it, as the extension's comments do. */
+:is(.demo-panel, .mini-card)
+  :is(.ln-ext-pc-bp, .ln-ext-pc-bn, .ln-ext-pc-bb, .ln-ext-pc-br, .ln-ext-pc-bq, .ln-ext-pc-bk) {
+  filter: drop-shadow(1px 0 0 #9a9cab) drop-shadow(-1px 0 0 #9a9cab) drop-shadow(0 1px 0 #9a9cab)
+    drop-shadow(0 -1px 0 #9a9cab);
+}
+
+.ln-ext-pc-wp {
+  background-image: var(--pc-wP);
+}
+.ln-ext-pc-wn {
+  background-image: var(--pc-wN);
+}
+.ln-ext-pc-wb {
+  background-image: var(--pc-wB);
+}
+.ln-ext-pc-wr {
+  background-image: var(--pc-wR);
+}
+.ln-ext-pc-wq {
+  background-image: var(--pc-wQ);
+}
+.ln-ext-pc-wk {
+  background-image: var(--pc-wK);
+}
+.ln-ext-pc-bp {
+  background-image: var(--pc-bP);
+}
+.ln-ext-pc-bn {
+  background-image: var(--pc-bN);
+}
+.ln-ext-pc-bb {
+  background-image: var(--pc-bB);
+}
+.ln-ext-pc-br {
+  background-image: var(--pc-bR);
+}
+.ln-ext-pc-bq {
+  background-image: var(--pc-bQ);
+}
+.ln-ext-pc-bk {
+  background-image: var(--pc-bK);
+}
+
+/* Inline-block, not flex: a flex box takes its baseline from the piece's empty
+   box, which lifted the chip above the line's text. */
+.ln-ext-mv {
+  display: inline-block;
+  padding: 1px 6px 1px 3px;
+  line-height: 1.4;
+  white-space: nowrap;
+  border: 0;
+  border-radius: 6px;
+  background: #ffffff12;
+  color: var(--text);
+  font: inherit;
+  font-weight: 590;
+}
+
+.ln-ext-mv--play {
+  cursor: default;
+}
+
+.ln-ext-sq {
+  color: var(--text);
+  font-weight: 590;
+}
+
+.ln-ext-fig {
+  font-variant-emoji: text;
+}

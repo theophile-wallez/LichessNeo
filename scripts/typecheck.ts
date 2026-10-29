@@ -12,8 +12,10 @@ const PROJECTS = [
   'src/background',
   'src/styles',
   'scripts',
+  'scripts/site',
   'tests',
   'playground',
+  'site',
   '.',
 ];
 

@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fromRoot, ROOT } from './lib/paths.ts';
 import { findProblems, isChecked } from './lib/source-rules.ts';
 
-const DIRS = ['src', 'scripts', 'tests', 'playground'];
+const DIRS = ['src', 'scripts', 'tests', 'playground', 'site'];
 
 async function filesBelow(dir: string): Promise<string[]> {
   const entries = await readdir(fromRoot(dir), { recursive: true, withFileTypes: true });

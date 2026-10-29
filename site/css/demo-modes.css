@@ -1,0 +1,149 @@
+/* The panel's three modes (demo/modes.ts), each with its own parts: the
+   summary (the graph, the players, the moves and phases, and its two
+   buttons), the debrief (the graph, the key moments, the coach's card and the
+   move list), and Lichess's own panel (its tools, its list and the closed
+   review's card, styles/game/game-end-card.css). */
+
+.demo-panel:not([data-mode='summary']) :is(.demo-summary, .ln-ext-review__foot),
+.demo-panel:not([data-mode='moves'])
+  :is(.demo-moments, .demo-card, .ln-ext-review__nav, .demo-moves:not(.demo-moves--plain)),
+.demo-panel:not([data-mode='normal']) :is(.demo-lichess, .demo-controls__tools),
+.demo-panel[data-mode='summary'] .demo-controls,
+.demo-panel[data-mode='normal'] :is(.demo-graph, .demo-controls__play) {
+  display: none;
+}
+
+/* What takes the room left: the summary, the move list, Lichess's panel. */
+.demo-panel > :is(.demo-summary, .demo-moves, .demo-lichess) {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.demo-summary {
+  margin-top: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff1f transparent;
+}
+
+/* ---- the summary's buttons (styles/review/bubble.css) ---- */
+
+.ln-ext-review__foot {
+  display: flex;
+  gap: 10px;
+}
+
+.ln-ext-review__foot .ln-ext-btn {
+  flex: 1.4;
+  height: 52px;
+  font-size: 18px;
+}
+
+.ln-ext-review__foot .ln-ext-review__learn {
+  flex: 1;
+  padding-inline: 14px;
+  font-size: 14px;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+/* ---- Lichess's panel ---- */
+
+.demo-lichess {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demo-lichess > .demo-moves {
+  flex: 1 1 0;
+  min-height: 60px;
+}
+
+.demo-lichess__tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 3px;
+  border-radius: 8px;
+  background: #0000004d;
+  color: var(--dim);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.demo-lichess__tabs > span {
+  padding: 5px 0;
+  border-radius: 6px;
+}
+
+.demo-lichess__tabs .demo-lichess__tab--on {
+  background: var(--panel-raised);
+  color: var(--text);
+}
+
+/* Lichess's engine, off: its switch, its name and where it runs, its settings. */
+.demo-ceval {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 4px 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.demo-ceval__toggle {
+  position: relative;
+  flex: none;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: #ffffff1f;
+}
+
+.demo-ceval__toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.demo-ceval__engine {
+  display: grid;
+  color: var(--dim);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.demo-ceval__engine b {
+  color: #8fd14f;
+  font-weight: 650;
+}
+
+.demo-ceval .icon {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  color: var(--dim);
+}
+
+/* Lichess's tools after the arrows: the explorer, practice, the underboard, its menu. */
+.demo-panel[data-mode='normal'] .demo-controls {
+  grid-template-columns: repeat(4, 1fr) auto;
+}
+
+.demo-controls__tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 6px;
+  color: var(--dim);
+}
+
+.demo-controls__tools .icon {
+  width: 20px;
+  height: 20px;
+}

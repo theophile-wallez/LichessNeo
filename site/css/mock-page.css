@@ -1,0 +1,135 @@
+/* The little Lichess's page (demo/layout.ts): the board, in the board and
+   the pieces picked, and the panel beside it, as the extension draws an
+   analysis board. */
+
+.mock-main {
+  display: grid;
+  grid-area: 2 / 2;
+  grid-template-columns: minmax(0, 1fr) 28cqw;
+  gap: 1.6cqw;
+  min-width: 0;
+  min-height: 0;
+  padding: 2.2cqw;
+}
+
+/* As tall as the page leaves it (the window's 62.5cqw, less the header's bar
+   and the padding), or as wide as its column. */
+.mock-board {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 58.1cqw - var(--bar-h));
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 0.6cqw;
+  background:
+    var(--board-texture) 0 0 / 100% 100%,
+    repeating-conic-gradient(var(--board-dark) 0 25%, var(--board-light) 0 50%) 0 0 / 25% 25%;
+  background-blend-mode: hard-light, normal;
+}
+
+.mock-piece {
+  position: absolute;
+  top: calc(var(--y) * 12.5%);
+  left: calc(var(--x) * 12.5%);
+  width: 12.5%;
+  height: 12.5%;
+  background: center / 92% no-repeat;
+}
+
+.mock-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 1cqw;
+  min-width: 0;
+  padding: 0.8cqw;
+  border-radius: 1cqw;
+  background: var(--ink-raised);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+/* The coach's card: the coach on its bottom edge, its words to its right. */
+.mock-card {
+  display: flex;
+  align-items: flex-end;
+  gap: 1cqw;
+  overflow: hidden;
+  padding: 1cqw 1.2cqw 0;
+  border-radius: 0.8cqw;
+  background: linear-gradient(
+    oklch(20.5% var(--tint) var(--hue)),
+    oklch(18.5% var(--tint) var(--hue))
+  );
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.mock-coach {
+  flex: none;
+  width: 8.5cqw;
+  height: auto;
+  margin-bottom: -0.5cqw;
+}
+
+.mock-card p {
+  display: grid;
+  gap: 0.3cqw;
+  align-self: center;
+  padding-bottom: 1cqw;
+  color: var(--dim);
+}
+
+.mock-card b {
+  color: var(--text);
+  font-weight: 590;
+}
+
+.mock-moves {
+  display: grid;
+  align-content: start;
+  gap: 0.15cqw;
+  overflow: hidden;
+  padding: 0;
+  list-style: none;
+}
+
+.mock-moves li {
+  display: grid;
+  grid-template-columns: 2.2cqw 1fr 1fr;
+  padding: 0.25cqw 0.5cqw;
+  border-radius: 0.4cqw;
+  font-variant-numeric: tabular-nums;
+}
+
+.mock-moves li:nth-child(odd) {
+  background: #ffffff05;
+}
+
+.mock-moves li:last-child b:last-child {
+  color: var(--accent-light);
+}
+
+.mock-moves span {
+  color: var(--faint);
+}
+
+.mock-moves b {
+  font-weight: 500;
+}
+
+.mock-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4cqw;
+}
+
+.mock-controls i {
+  height: 2.6cqw;
+  border-radius: 0.5cqw;
+  background: #ffffff0a;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+/* The play button, in the accent as the review's. */
+.mock-controls i:nth-child(3) {
+  background: linear-gradient(var(--accent-top), var(--accent-low));
+  box-shadow: inset 0 1px #ffffff4d;
+}

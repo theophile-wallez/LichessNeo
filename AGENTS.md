@@ -240,6 +240,7 @@ hold:
 | `pnpm preview --name --url`     | builds into the main checkout's `dist/chrome`, the one Chrome loads, in turn     |
 | `pnpm turn`                     | who holds the preview and the ship turn (`take ship --wait`, `release ship`)     |
 | `pnpm playground`               | serves the mascots' playground on localhost:5180, reloaded on every change       |
+| `pnpm site`                     | serves the promotional site on localhost:5181, rebuilt on every change           |
 | `pnpm check`                    | typecheck, lint, format check, source rules, unit tests                          |
 | `pnpm check:fast`               | the same, but only the unit tests of files changed since `origin/main`           |
 | `pnpm test` / `pnpm test:watch` | unit tests                                                                       |
@@ -278,6 +279,9 @@ hold:
 - `playground/`: the mascots' playground (`pnpm playground`), a page apart
   from the extension and never bundled into it: each coach and the robot on
   a stage, their colors, skin, fur and moods to change, their moves to play.
+- `site/`: the promotional site, on GitHub Pages (`pnpm site`, built by
+  `scripts/site.ts`), with a live Debrief of a recorded game run by the
+  review's own code (`site/demo`, see docs/architecture.md's "The site").
 - `tests/e2e/`: Playwright smoke tests on lichess.org.
 - `tools/`: Python generators, run by hand.
 - `packs/`: the example pack users can import (`docs/packs.md` describes the
@@ -285,7 +289,8 @@ hold:
 - `store/`: the store images (`<lang>/<name>.png`), the pages they and the
   extension icon are rendered from (`templates/`), and the listings' texts
   (`listing.md`).
-- `.github/`: CI (`ci.yml`), releases (`release.yml`), Dependabot.
+- `.github/`: CI (`ci.yml`), releases (`release.yml`), the site (`pages.yml`),
+  Dependabot.
 
 What each feature folder holds is listed in
 [docs/architecture.md](docs/architecture.md#feature-folders).

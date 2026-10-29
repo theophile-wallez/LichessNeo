@@ -1,0 +1,105 @@
+/* The page's sections on tablets and phones, where they lay out in columns. */
+
+/* ---- tablets ---- */
+
+@media (max-width: 1019px) {
+  .tile--summary,
+  .tile--graph,
+  .tile--retry {
+    grid-column: auto / span 3;
+    grid-row: auto !important;
+  }
+
+  .tile--summary {
+    grid-column: 1 / -1;
+  }
+
+  .more-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tile--packs {
+    grid-column: 1 / -1;
+  }
+
+  .facts dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- phones ---- */
+
+@media (max-width: 640px) {
+  .bento,
+  .more-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tile--summary,
+  .tile--graph,
+  .tile--retry,
+  .tile--packs {
+    grid-column: 1;
+  }
+
+  .tile {
+    padding: 22px;
+  }
+
+  /* A picker's buttons wrap under its name. */
+  .picker {
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .picker__label {
+    flex-basis: 100%;
+    padding: 0 0 4px 6px;
+  }
+
+  .picker button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .picker--layout button {
+    width: auto;
+  }
+
+  /* The little Lichess keeps a window's width, and scrolls sideways in its stage. */
+  .mock-stage {
+    overflow-x: auto;
+    /* Out to the screen's edges, past the page's margins (base.css's .wrap). */
+    margin-inline: -24px;
+    padding: 0 24px 24px;
+    scrollbar-width: none;
+  }
+
+  .mock {
+    width: 680px;
+  }
+
+  .facts dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .install {
+    width: 100%;
+  }
+
+  .install .button {
+    flex: 1 1 100%;
+  }
+
+  .footer nav {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .mock-stage {
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
+}

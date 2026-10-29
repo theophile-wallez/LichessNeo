@@ -1,0 +1,353 @@
+/* The promotional site's base: its colors, its type, its buttons and the bar
+   on top. The live review is drawn by the demo-*.css sheets, the page's
+   sections by hero.css, sections.css and narrow.css. */
+
+/* The theme's three values, as the extension's palettes have them
+   (content/colors/built-in.ts): registered, so a change of theme fades. */
+@property --hue {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 286;
+}
+
+@property --chroma {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.004;
+}
+
+@property --accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #5e6ad2;
+}
+
+/* Inter's variable font: its optical size axis turns it into Inter Display
+   from 32px up, so the headings get the tighter cut on their own. */
+@font-face {
+  font-family: Inter;
+  src: url('../fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* Lichess's figurine font, for the move list: its piece letters are the pieces. */
+@font-face {
+  font-family: 'Lichess Chess';
+  src: url('../fonts/lichess-chess.woff2') format('woff2');
+  font-display: swap;
+}
+
+:root {
+  /* A touch more tint than the extension's, which a page this dark wants. */
+  --tint: calc(var(--chroma) + 0.008);
+  --ink: oklch(15.5% var(--tint) var(--hue));
+  --ink-raised: oklch(17% var(--tint) var(--hue));
+  --panel: oklch(19% var(--tint) var(--hue));
+  --panel-raised: oklch(21.5% var(--tint) var(--hue));
+  --well: oklch(13.5% var(--tint) var(--hue));
+  --line: #ffffff12;
+  --line-strong: #ffffff21;
+  --text: oklch(95% calc(var(--tint) / 2) var(--hue));
+  --dim: oklch(71% var(--tint) var(--hue));
+  --faint: oklch(55% var(--tint) var(--hue));
+  --accent-light: color-mix(in oklch, var(--accent) 60%, #fff);
+  --accent-top: color-mix(in oklch, var(--accent) 84%, #fff);
+  --accent-low: color-mix(in oklch, var(--accent) 92%, #000);
+  --accent-edge: color-mix(in oklch, var(--accent) 52%, #000);
+  /* The board the pickers set (demo/looks.ts): the accent's, as the extension's own. */
+  --board-light: #f7f8f8;
+  --board-dark: var(--accent);
+  --board-texture: none;
+  --sans:
+    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --hop: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  color-scheme: dark;
+  transition:
+    --hue 0.6s var(--ease-out),
+    --chroma 0.6s var(--ease-out),
+    --accent 0.6s var(--ease-out);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  background: var(--ink);
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  overflow-x: clip;
+  color: var(--text);
+  font: 400 16px / 1.6 var(--sans);
+  font-feature-settings: 'cv01', 'ss03';
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
+}
+
+.wrap {
+  width: min(1200px, 100% - 48px);
+  margin-inline: auto;
+}
+
+/* ---- type ---- */
+
+h1,
+h2 {
+  font-weight: 590;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(44px, 6.6vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.032em;
+  background: linear-gradient(180deg, #fff 35%, oklch(76% calc(var(--tint) * 3) var(--hue)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.06em;
+}
+
+h2 {
+  font-size: clamp(32px, 4.4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 590;
+  letter-spacing: -0.012em;
+}
+
+.lead {
+  max-width: 34em;
+  color: var(--dim);
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.note {
+  color: var(--faint);
+  font-size: 14px;
+}
+
+.note a {
+  color: var(--dim);
+  text-underline-offset: 3px;
+}
+
+.note a:hover {
+  color: var(--text);
+}
+
+.icon {
+  display: block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+/* ---- buttons: the theme's accent, a top highlight and a darker bottom edge, as the extension's ---- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: 46px;
+  padding: 0 20px;
+  border-radius: 12px;
+  background: #ffffff0d;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: 15.5px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.25s var(--hop);
+}
+
+.button:hover {
+  background: #ffffff17;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* The visitor's own browser gets the accent's button, and leads. */
+.chrome,
+[data-browser='firefox'] .firefox {
+  order: -1;
+  background: linear-gradient(var(--accent-top), var(--accent-low));
+  box-shadow:
+    inset 0 1px #ffffff4d,
+    inset 0 -1px var(--accent-edge),
+    0 8px 24px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.chrome:hover,
+[data-browser='firefox'] .firefox:hover {
+  background: linear-gradient(color-mix(in oklch, var(--accent) 76%, #fff), var(--accent));
+}
+
+[data-browser='firefox'] .chrome {
+  order: 0;
+  background: #ffffff0d;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+/* The browser's own logo, as its brand publishes it. */
+.browser-logo {
+  flex: none;
+  filter: drop-shadow(0 1px 2px #0000004d);
+}
+
+.button.small {
+  gap: 7px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+/* The bar shows the visitor's own browser's button only. */
+.nav .firefox,
+[data-browser='firefox'] .nav .chrome {
+  display: none;
+}
+
+[data-browser='firefox'] .nav .firefox {
+  display: inline-flex;
+}
+
+.install {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ---- the bar on top ---- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--ink) 70%, transparent);
+  box-shadow: inset 0 -1px var(--line);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 60px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 590;
+  letter-spacing: -0.012em;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 28px;
+  height: 28px;
+}
+
+.links {
+  display: flex;
+  gap: 2px;
+  margin-inline: auto;
+}
+
+.links a,
+.ghost {
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: var(--dim);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+
+.links a:hover,
+.ghost:hover {
+  background: #ffffff0d;
+  color: var(--text);
+}
+
+.ghost {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+}
+
+.nav-end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 860px) {
+  .links {
+    display: none;
+  }
+
+  .nav-end {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .wrap {
+    width: calc(100% - 32px);
+  }
+
+  .nav .button {
+    display: none !important;
+  }
+}

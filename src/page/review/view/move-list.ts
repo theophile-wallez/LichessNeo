@@ -25,9 +25,13 @@ const FULL_COST = 30;
 // Below this, the bar would be a speck: none.
 const MIN_COST = 2;
 
+/** How full a move's cost bar is, from what it gave away: null for none. */
+export const costShare = (loss: number): string | null =>
+  loss >= MIN_COST ? Math.min(1, loss / FULL_COST).toFixed(2) : null;
+
 /** What a move gave away, as a bar beside it (review/move-list.css). */
 function markCost(element: HTMLElement, loss: number): void {
-  const cost = loss >= MIN_COST ? Math.min(1, loss / FULL_COST).toFixed(2) : null;
+  const cost = costShare(loss);
   setStyleProperty(element, '--ln-ext-cost', cost);
   // Its tooltip says how much (view/cost-tip.ts).
   setData(element, 'lnExtCost', cost === null ? null : String(Math.round(loss)));
