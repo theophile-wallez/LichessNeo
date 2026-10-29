@@ -9,6 +9,7 @@ export const SETTINGS_PAGES = [
   'play',
   'experimental',
   'backup',
+  'support',
 ] as const;
 
 export type SettingsPage = (typeof SETTINGS_PAGES)[number];
@@ -21,6 +22,7 @@ export const PAGE_NAMES: Readonly<Record<SettingsPage, string>> = {
   play: 'settingsPagePlay',
   experimental: 'settingsPageExperimental',
   backup: 'settingsPageBackup',
+  support: 'settingsPageSupport',
 };
 
 const SETTINGS_HASH = '#ln-ext-extension';

@@ -18,6 +18,7 @@ import { buildRatingRow } from './rating-row.ts';
 import { buildRepliesCard } from './replies-card.ts';
 import { buildRoundnessRow } from './roundness-row.ts';
 import { onSettingsRead, settingsRead } from './settings.ts';
+import { buildSupportPage } from './support-page.ts';
 import { buildSwitchList } from './switch-list.ts';
 
 // The account page's section for the extension: one of its pages
@@ -42,8 +43,8 @@ function showPage(section: HTMLElement, page: SettingsPage | null): void {
   }
 }
 
-/** The section, for the account page's content column, kept in step with the settings. */
-export function buildSection(): SettingsSection {
+/** The section's frame: the title, and an empty panel for each page. */
+function buildFrame(): HTMLElement {
   const element = createElement('div', { className: 'page-menu__content ln-ext-settings' });
   setHtml(
     element,
@@ -52,10 +53,17 @@ export function buildSection(): SettingsSection {
       ${SETTINGS_PAGES.map(page => html`<div class="ln-ext-settings__page" data-ln-ext-page="${page}" hidden></div>`)}
     </div>`,
   );
+  return element;
+}
+
+/** The section, for the account page's content column, kept in step with the settings. */
+export function buildSection(): SettingsSection {
+  const element = buildFrame();
   const coach = buildCoachCard();
   const homeCoach = buildHomeCoachCard();
   const looks = buildLooksPage(packLibrary());
   const pairing = buildPairingPage();
+  const support = buildSupportPage();
   const pages: Readonly<Record<SettingsPage, readonly HTMLElement[]>> = {
     appearance: [buildNavigationRow(), buildAppearance(), buildRoundnessRow()],
     board: looks.elements,
@@ -81,6 +89,7 @@ export function buildSection(): SettingsSection {
     ],
     experimental: [buildExperimentalPage()],
     backup: [buildBackupPage()],
+    support: [support.element],
   };
   for (const page of SETTINGS_PAGES)
     queryOne(element, `.ln-ext-settings__page[data-ln-ext-page='${page}']`, HTMLElement)?.append(
@@ -98,6 +107,7 @@ export function buildSection(): SettingsSection {
       homeCoach.show(page === 'profile');
       looks.show(page === 'board');
       pairing.show(page === 'play');
+      support.show(page === 'support');
       if (page === 'appearance') showScheme(element);
     },
   };

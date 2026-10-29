@@ -1,0 +1,333 @@
+/* ---- The settings' Support page (content/settings/support-page.ts) --- */
+
+/* The page's own scale for the stage: its stars, specks and coach shrink together. */
+.ln-ext-support {
+  --ln-ext-support-k: 1;
+  --ln-ext-support-coach-h: 150px;
+  /* Where the stars' arc is centered: over the coach's head. */
+  --ln-ext-support-arc-y: calc(100% - var(--ln-ext-support-coach-h) * 0.25);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ln-ext-support__hero,
+.ln-ext-support__card {
+  border-radius: 20px;
+  background: var(--ln-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+}
+
+.ln-ext-support__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px 26px;
+  text-align: center;
+}
+
+/* The coach on its stage's bottom edge, which cuts it at the waist, under its arc of stars. */
+.ln-ext-support__stage {
+  position: relative;
+  align-self: stretch;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    radial-gradient(
+      42% 70% at 50% 72%,
+      color-mix(in srgb, var(--ln-ext-yellow) 22%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      80% 120% at 50% 120%,
+      color-mix(in srgb, var(--ln-ext-accent) 34%, transparent),
+      transparent 70%
+    ),
+    var(--ln-ext-lift-4);
+}
+
+.ln-ext-support__ring {
+  position: absolute;
+  bottom: -170px;
+  left: 50%;
+  width: 400px;
+  aspect-ratio: 1;
+  border: 1px solid var(--ln-ext-lift-8);
+  border-radius: 50%;
+  translate: -50% 0;
+}
+
+.ln-ext-support__ring:nth-child(2) {
+  width: 580px;
+  opacity: 0.6;
+}
+
+.ln-ext-support__ring:nth-child(3) {
+  width: 780px;
+  opacity: 0.35;
+}
+
+.ln-ext-support__star {
+  position: absolute;
+  top: calc(var(--ln-ext-support-arc-y) + var(--ln-ext-star-y) * var(--ln-ext-support-k) * 1px);
+  left: calc(50% + var(--ln-ext-star-x) * var(--ln-ext-support-k) * 1px);
+  width: calc(var(--ln-ext-star-size) * var(--ln-ext-support-k) * 1px);
+  height: calc(var(--ln-ext-star-size) * var(--ln-ext-support-k) * 1px);
+  color: var(--ln-ext-yellow);
+  filter: drop-shadow(0 6px 16px color-mix(in srgb, var(--ln-ext-yellow) 45%, transparent));
+  translate: -50% -50%;
+  rotate: var(--ln-ext-star-tilt);
+  /* From the middle outward, then each floats at its own pace. */
+  animation:
+    ln-ext-support-star-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)
+      calc(0.15s + var(--ln-ext-star-order) * 0.09s) backwards,
+    ln-ext-support-float 3.6s ease-in-out calc(var(--ln-ext-star-order) * -0.7s) infinite !important;
+}
+
+.ln-ext-support__star svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ln-ext-support__star path {
+  fill: currentColor;
+}
+
+@keyframes ln-ext-support-star-in {
+  from {
+    opacity: 0;
+    scale: 0;
+  }
+}
+
+@keyframes ln-ext-support-float {
+  50% {
+    translate: -50% calc(-50% - 5px);
+  }
+}
+
+.ln-ext-support__spark,
+.ln-ext-support__dot {
+  position: absolute;
+  top: calc(var(--ln-ext-speck-y) * 1px);
+  left: calc(50% + var(--ln-ext-speck-x) * var(--ln-ext-support-k) * 1px);
+  width: calc(var(--ln-ext-speck-size) * 1px);
+  height: calc(var(--ln-ext-speck-size) * 1px);
+  color: var(--ln-ext-speck-color);
+  translate: -50% -50%;
+}
+
+.ln-ext-support__spark {
+  opacity: 0.8;
+  animation: ln-ext-support-twinkle 2.8s ease-in-out infinite !important;
+}
+
+.ln-ext-support__spark:nth-of-type(2n) {
+  animation-delay: -1.4s !important;
+}
+
+.ln-ext-support__spark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes ln-ext-support-twinkle {
+  50% {
+    opacity: 0.3;
+    scale: 0.7;
+  }
+}
+
+.ln-ext-support__dot {
+  border-radius: 50%;
+  background: var(--ln-ext-speck-color);
+  opacity: 0.8;
+}
+
+/* The coach's still (img/coaches), in its own box: the live mascot lands on it only there. */
+.ln-ext-support__mascot {
+  --ln-ext-support-arms: 30px;
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: var(--ln-ext-support-coach-h);
+  aspect-ratio: 124 / 114;
+  background: var(--ln-ext-avatar-coach) center bottom / auto 100% no-repeat;
+  translate: -50% 0;
+}
+
+.ln-ext-support__mascot[data-ln-ext-live] {
+  background: none;
+}
+
+.ln-ext-support__mascot[hidden] {
+  display: none;
+}
+
+.ln-ext-support__live {
+  position: absolute;
+  inset: 0;
+}
+
+/* Its canvas spills past the sides, for the arms the still cuts, but comes in cut as the
+   still is, then opens out (settings-coach.css). */
+.ln-ext-support__mascot .ln-ext-support__live canvas {
+  left: calc(-1 * var(--ln-ext-support-arms));
+  width: calc(100% + 2 * var(--ln-ext-support-arms));
+  clip-path: inset(0 var(--ln-ext-support-arms));
+  transition: clip-path 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.1s !important;
+}
+
+.ln-ext-support__mascot[data-ln-ext-live] .ln-ext-support__live canvas {
+  clip-path: inset(0);
+}
+
+.ln-ext-support__title,
+.ln-ext-support__name {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  color: var(--ln-ext-text-strong) !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+/* Lichess draws a line after an account page's h2. */
+.ln-ext-support__title::after,
+.ln-ext-support__name::after {
+  content: none !important;
+}
+
+.ln-ext-support__title {
+  margin-top: 12px !important;
+  font-size: 30px !important;
+  font-weight: 800 !important;
+  line-height: 1.15;
+  letter-spacing: -0.02em !important;
+}
+
+.ln-ext-support__lead {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* The two cards side by side where they fit, their rows shared: the buttons line up. */
+.ln-ext-support__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 14px;
+}
+
+.ln-ext-support__card {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 14px;
+  padding: 20px;
+}
+
+.ln-ext-support__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ln-ext-support__logo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-support__card:hover .ln-ext-support__logo {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.ln-ext-support__logo svg {
+  width: 26px;
+  height: 26px;
+}
+
+.ln-ext-support__step {
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ln-ext-support__name {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.ln-ext-support__body {
+  margin: 6px 0 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ln-ext-support__card > .button {
+  display: inline-flex;
+  align-items: center;
+  align-self: end;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  font-size: 14px;
+}
+
+.ln-ext-support__card > .button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* The other store's link: dim, out of the button's way. */
+.ln-ext-support__other {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  gap: 2px;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.ln-ext-support__other svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ln-ext-support__other:hover {
+  color: var(--ln-ext-text-strong) !important;
+}
+
+/* On a phone: a smaller stage, its stars and coach shrunk with it. */
+@media (max-width: 640px) {
+  .ln-ext-support {
+    --ln-ext-support-k: 0.8;
+    --ln-ext-support-coach-h: 120px;
+  }
+
+  .ln-ext-support__stage {
+    height: 190px;
+  }
+
+  .ln-ext-support__title {
+    font-size: 24px !important;
+  }
+}

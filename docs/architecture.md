@@ -174,8 +174,10 @@ so the logic can be unit-tested without a page.
   below, Experimental (the Chess.com ratings, and the study behind them in a
   frame) and Backup (every setting,
   pick and pack, and opening practice's records, exported to a JSON file, and
-  put back from one). A control waits for the stored settings, and a change is
-  saved over them, never over the defaults. The links of
+  put back from one), and Support (the user's coach under an arc of stars,
+  then a star on GitHub and a review on the store the extension came from,
+  the other store a quieter link). A control waits for the stored settings,
+  and a change is saved over them, never over the defaults. The links of
   pages since merged open where their cards went. Kept in
   `chrome.storage.sync`, but the coach's (the home's own too), the avatar's
   and the name's picks in localStorage, where the page world reads them.

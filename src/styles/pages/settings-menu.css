@@ -46,6 +46,12 @@ main.account .ln-ext-settings[data-ln-ext-page='backup'] {
   --ln-ext-nav-color: var(--ln-ext-blue);
 }
 
+.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='support'],
+main.account .ln-ext-settings[data-ln-ext-page='support'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
+  --ln-ext-nav-color: var(--ln-ext-pink);
+}
+
 /* Open, our link heads its pages: bright, without the picked row's fill, which goes to the
  * page's link. */
 .subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-link[data-ln-ext-open] {

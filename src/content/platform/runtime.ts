@@ -13,6 +13,9 @@ export const extensionUrl = (path: string): string => chrome.runtime.getURL(path
 export const isConnected = (): boolean =>
   typeof chrome !== 'undefined' && chrome.runtime?.id !== undefined;
 
+/** Whether the extension runs in Firefox, whose files are served from moz-extension: URLs. */
+export const isFirefox = (): boolean => chrome.runtime.getURL('').startsWith('moz-extension:');
+
 /** The extension's version, as its manifest gives it. */
 export const extensionVersion = (): string => chrome.runtime.getManifest().version;
 

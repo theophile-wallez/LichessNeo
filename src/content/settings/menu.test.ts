@@ -56,6 +56,7 @@ describe('the settings’ menu links', () => {
       '#ln-ext-extension/play',
       '#ln-ext-extension/experimental',
       '#ln-ext-extension/backup',
+      '#ln-ext-extension/support',
       '/account/preferences/display',
       '/account/preferences/game-display',
     ]);
@@ -68,6 +69,7 @@ describe('the settings’ menu links', () => {
       'settingsPagePlay',
       'settingsPageExperimental',
       'settingsPageBackup',
+      'settingsPageSupport',
     ]);
     expect(queryOne(nav, '.ln-ext-settings-sep + a', HTMLElement)?.textContent).toBe('Display');
   });

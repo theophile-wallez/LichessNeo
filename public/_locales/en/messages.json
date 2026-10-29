@@ -1505,6 +1505,51 @@
     "message": "Backup",
     "description": "The settings' tab that exports them to a file and imports them back."
   },
+  "settingsPageSupport": {
+    "message": "Support",
+    "description": "The settings' tab for those who'd like to help the extension: a star, a review."
+  },
+  "supportLead": {
+    "message": "Free, ad-free and open source. Two quick things help it reach more players."
+  },
+  "supportTitle": {
+    "message": "Enjoying Lichess Neo?",
+    "description": "The Support page's headline, under the coach and its stars."
+  },
+  "supportStarStep": {
+    "message": "01 · 10 sec",
+    "description": "Over the GitHub card: its place, then how long it takes."
+  },
+  "supportReviewStep": {
+    "message": "02 · 1 min",
+    "description": "Over the review card: its place, then how long it takes."
+  },
+  "supportStarTitle": {
+    "message": "Star it on GitHub",
+    "description": "The Support page's first card: a star on the project's repository."
+  },
+  "supportStarBody": {
+    "message": "The project shows up for more players and developers."
+  },
+  "supportStar": {
+    "message": "Give a star",
+    "description": "The button that opens the repository on GitHub."
+  },
+  "supportReviewTitle": {
+    "message": "Review it on $1",
+    "description": "The Support page's second card: $1 is the store's name (Chrome Web Store, Firefox Add-ons)."
+  },
+  "supportReviewBody": {
+    "message": "A few stars and a word: that's what people read before they install it."
+  },
+  "supportReviewOther": {
+    "message": "Or on $1",
+    "description": "The quieter link under the review's button: $1 is the other store's name."
+  },
+  "supportReview": {
+    "message": "Write a review",
+    "description": "The button that opens the extension's page on its store."
+  },
   "backupExportTitle": {
     "message": "Export my settings",
     "description": "The card that saves every setting to a file."

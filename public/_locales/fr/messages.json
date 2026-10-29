@@ -1174,6 +1174,42 @@
   "settingsPageBackup": {
     "message": "Sauvegarde"
   },
+  "settingsPageSupport": {
+    "message": "Soutenir"
+  },
+  "supportLead": {
+    "message": "Gratuit, sans pub et open source. Deux gestes suffisent pour l'aider à trouver d'autres joueurs."
+  },
+  "supportTitle": {
+    "message": "Lichess Neo vous plaît ?"
+  },
+  "supportStarStep": {
+    "message": "01 · 10 s"
+  },
+  "supportReviewStep": {
+    "message": "02 · 1 min"
+  },
+  "supportStarTitle": {
+    "message": "Une star sur GitHub"
+  },
+  "supportStarBody": {
+    "message": "Le projet se montre à plus de joueurs et de développeurs."
+  },
+  "supportStar": {
+    "message": "Mettre une star"
+  },
+  "supportReviewTitle": {
+    "message": "Un avis sur $1"
+  },
+  "supportReviewBody": {
+    "message": "Quelques étoiles et un mot : c'est ce que lisent ceux qui hésitent à l'installer."
+  },
+  "supportReviewOther": {
+    "message": "Ou sur $1"
+  },
+  "supportReview": {
+    "message": "Laisser un avis"
+  },
   "backupExportTitle": {
     "message": "Exporter mes réglages"
   },
