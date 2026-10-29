@@ -29,9 +29,23 @@ describe('home hero', () => {
     document.body.innerHTML = `${header}<main class="lobby"><div class="lobby__app"></div></main>`;
     if (scenario.bodyUser !== null) document.body.dataset.user = scenario.bodyUser;
     const text = heroText(scenario.lang);
-    addHero(text);
-    addHero(text);
+    // The first greeting is the one the original always showed.
+    addHero(text, () => 0);
+    addHero(text, () => 0);
     expect(document.querySelector('main.lobby')?.innerHTML).toBe(scenario.main);
+  });
+
+  it('greets with every line once before one comes back, across loads', () => {
+    document.body.dataset.user = 'eresy';
+    const greetings = heroText('en').greetings.length;
+    const titles = Array.from({ length: greetings * 2 }, () => {
+      document.body.innerHTML = '<main class="lobby"></main>';
+      addHero(heroText('en'), Math.random);
+      return document.querySelector('.ln-ext-hero__title')?.textContent;
+    });
+    expect(new Set(titles.slice(0, greetings)).size).toBe(greetings);
+    expect(new Set(titles.slice(greetings)).size).toBe(greetings);
+    expect(titles[greetings]).not.toBe(titles[greetings - 1]);
   });
 
   it('reads the language when it starts, and adds the hero once the page is parsed', () => {

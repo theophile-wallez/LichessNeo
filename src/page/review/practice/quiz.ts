@@ -1,3 +1,4 @@
+import { shuffled } from '#shared/shuffle.ts';
 import { chapterOf } from './chapters.ts';
 import { type Opening, OPENINGS } from './openings.ts';
 
@@ -23,12 +24,6 @@ export interface Quiz {
   /** The score beat the best, once over. */
   record: boolean;
 }
-
-const shuffled = <T>(items: readonly T[], random: () => number): T[] =>
-  items
-    .map(item => ({ item, order: random() }))
-    .toSorted((first, second) => first.order - second.order)
-    .map(({ item }) => item);
 
 export function quizQuestions(random: () => number): QuizQuestion[] {
   return shuffled(OPENINGS, random)

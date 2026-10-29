@@ -1,4 +1,5 @@
 import type { Color } from '#shared/chess/types.ts';
+import { shuffled } from '#shared/shuffle.ts';
 import { OPENINGS } from './openings.ts';
 import type { PgnTree } from './pgn-tree.ts';
 import type { Entry } from './repertoire.ts';
@@ -43,11 +44,7 @@ export function blitzCards(entries: readonly Entry[], random: () => number): Bli
   for (const entry of entries)
     if (entry.answers.length > 0 && entry.name)
       add({ side: entry.side, moves: entry.moves, answers: entry.answers, name: entry.name });
-  return [...byKey.values()]
-    .map(card => ({ card, order: random() }))
-    .toSorted((first, second) => first.order - second.order)
-    .slice(0, MAX_CARDS)
-    .map(({ card }) => card);
+  return shuffled([...byKey.values()], random).slice(0, MAX_CARDS);
 }
 
 /** A card's position and its moves as a tree, for its own book. */
