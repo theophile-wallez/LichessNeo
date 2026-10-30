@@ -1,5 +1,6 @@
 import { queryOne } from '#shared/dom.ts';
 import { html, setHtml } from '#shared/html.ts';
+import { classMood } from '#page/review/classes/classes.ts';
 import { en } from '#page/review/i18n/en.ts';
 import { cardMarkup } from './card.ts';
 import { graphMarkup } from './graph.ts';
@@ -9,9 +10,11 @@ import { commentOn, division, moves, records } from './review.ts';
 // The review's tiles further down the page, drawn live from the demo's game
 // rather than shown as pictures: the advantage graph, and a feed of the coach's
 // cards on the game's turning points, each by another coach, which words it its
-// own way.
+// own way, with the face the review's coach makes at the move's class.
 
-// The Opera Game's moves worth a card, in order, each with its coach.
+// The Opera Game's moves worth a card, in order, each with its coach. Each has
+// a still in its mood in site/coaches, captured from the playground on a canvas
+// 150px tall framed on its bottom 114px, so a tall coach keeps its top.
 const CARDS: readonly { readonly san: string; readonly coach: number }[] = [
   { san: 'Nf6', coach: 9 },
   { san: 'Qb3', coach: 14 },
@@ -30,8 +33,9 @@ function drawCard(san: string, coach: number): HTMLElement | null {
   const card = document.createElement('div');
   card.className = 'mini-card';
   card.dataset.class = move.moveClass;
+  const mood = classMood(move.moveClass) ?? 'neutral';
   // Absolute: a URL in a variable would resolve against the sheet that reads it.
-  const still = new URL(`img/coaches/mascot-${coach}.webp`, document.baseURI).href;
+  const still = new URL(`coaches/mascot-${coach}-${mood}.webp`, document.baseURI).href;
   setHtml(
     card,
     html`<span class="mini-card__coach" style="--still:url(${still})"></span><div class="demo-say">${cardMarkup(move, commentOn(move, coach, en), en)}</div>`,

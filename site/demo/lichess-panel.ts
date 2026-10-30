@@ -1,5 +1,5 @@
 import { html, type SafeHtml } from '#shared/html.ts';
-import { cardMarkup, statsMarkup } from '#page/game-over/card.ts';
+import { cardMarkup, RESULT_MOODS, statsMarkup } from '#page/game-over/card.ts';
 import { gameOverTexts } from '#page/game-over/texts.ts';
 import { translate } from '#page/lichess/globals.ts';
 import { accuracy, moves } from './review.ts';
@@ -8,19 +8,19 @@ import { classCounts } from '#page/review/judge/summary.ts';
 // The Moves tab: Lichess's own panel as the extension dresses it, its Moves
 // and Chat tabs, its engine's switch over its move list (movesMarkup, bare),
 // and under them the closed review's card (page/review/view/closed-panel.ts),
-// as a spectator sees it: how the game ended, and the board's bottom side's
-// figures, White's here.
+// as a spectator sees it: how the game ended for the board's bottom side, a
+// win for White here, and that side's figures.
 
 const counts = classCounts(moves);
 
-/** The card a spectator gets: Morphy's mate, and his accuracy and counts. */
+/** The card a spectator gets with White at the bottom: Morphy's mate, and his accuracy and counts. */
 export function endCardMarkup(coachId: number): SafeHtml {
   const texts = gameOverTexts();
   return cardMarkup({
-    result: 'draw',
+    result: 'win',
     heading: { tag: texts.kingLabels.mate, title: texts.watchedTitle('white') },
     words: '',
-    mood: 'neutral',
+    mood: RESULT_MOODS.win,
     coachId,
     texts,
     stats: statsMarkup({ accuracy: accuracy.white, counts: counts.white, firstPlies: {} }, texts),

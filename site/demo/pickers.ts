@@ -1,13 +1,25 @@
 import { closestTo, queryAll, queryOne } from '#shared/dom.ts';
 import { type SafeHtml, setHtml } from '#shared/html.ts';
 import { isLayout, layoutButtons, mockMarkup } from './layout.ts';
-import { BOARDS, boardButtons, showBoard, showTheme, THEMES, themeButtons } from './looks.ts';
+import {
+  BOARDS,
+  boardButtons,
+  pieceButtons,
+  showBoard,
+  showTheme,
+  THEMES,
+  themeButtons,
+} from './looks.ts';
+import { LICHESS_SET } from './pieces.ts';
 import { startConverter } from './chesscom.ts';
+import { showLayout, startMenus } from './menu-folds.ts';
+import { showScheme } from './scheme.ts';
 import { hopPieces, revealFrom } from './motion/reveal.ts';
 
-// The page's pickers beyond the review's own: the color theme, the board and
-// the layout, each a group of buttons; a board's groups (by the review and by
-// the layout) stay in step. And the Chess.com tile's converter.
+// The page's pickers beyond the review's coach: the scheme, the color theme, the
+// board, the piece set and the layout, each a group of buttons; a board's and a set's
+// groups (by the review and by the layout) stay in step. And the Chess.com
+// tile's converter.
 
 /** Marks the button of `value` picked in every group of `attribute`. */
 function press(attribute: string, value: string): void {
@@ -19,7 +31,7 @@ function fill(selector: string, markup: SafeHtml): void {
   for (const group of queryAll(document, selector, HTMLElement)) setHtml(group, markup);
 }
 
-const PICKS = '[data-theme], [data-board], [data-layout]';
+const PICKS = '[data-scheme-pick], [data-theme], [data-board], [data-pieces], [data-layout]';
 
 // While a look spreads, its transition takes the pointer, aimed at the root: a pick would
 // neither show its hover nor take its click until the circle ends. The button under the
@@ -63,7 +75,10 @@ function clicked(event: MouseEvent): EventTarget | null {
   return pickAt(event.clientX, event.clientY);
 }
 
-function pick(target: EventTarget | null): void {
+function pick(target: EventTarget | null, setPieces: (pieceSet: string) => void): void {
+  const schemeButton = closestTo(target, '[data-scheme-pick]', HTMLElement);
+  if (schemeButton)
+    hoverWhile(showScheme(schemeButton, schemeButton.dataset.schemePick === 'light'));
   const themeButton = closestTo(target, '[data-theme]', HTMLElement);
   const theme = THEMES.find(entry => entry.id === themeButton?.dataset.theme);
   if (theme && themeButton)
@@ -82,12 +97,21 @@ function pick(target: EventTarget | null): void {
         showBoard(board);
       }),
     );
+  const piecesButton = closestTo(target, '[data-pieces]', HTMLElement);
+  const pieceSet = piecesButton?.dataset.pieces;
+  if (piecesButton && pieceSet)
+    hoverWhile(
+      revealFrom(piecesButton, () => {
+        press('pieces', pieceSet);
+        setPieces(pieceSet);
+      }),
+    );
   const mock = queryOne(document, '.mock', HTMLElement);
-  if (board && mock) hopPieces(mock);
+  if (pieceSet && mock) hopPieces(mock);
   const layout = closestTo(target, '[data-layout]', HTMLElement)?.dataset.layout;
   if (isLayout(layout) && mock) {
     press('layout', layout);
-    mock.dataset.shape = layout;
+    showLayout(mock, layout);
   }
 }
 
@@ -97,14 +121,17 @@ export function showMockCoach(coach: number): void {
   if (picture) picture.src = `img/coaches/mascot-${coach}.webp`;
 }
 
-export function startPickers(coach: number): void {
+/** Fills and wires the pickers: `setPieces` draws the review's board and the layout's in a set. */
+export function startPickers(coach: number, setPieces: (pieceSet: string) => void): void {
   fill('[data-picks=theme]', themeButtons('neo'));
   fill('[data-picks=board]', boardButtons('accent'));
+  fill('[data-picks=pieces]', pieceButtons(LICHESS_SET));
   fill('[data-picks=layout]', layoutButtons('rail'));
   const mock = queryOne(document, '.mock', HTMLElement);
   if (mock) setHtml(mock, mockMarkup(coach));
+  startMenus();
   document.addEventListener('click', event => {
-    pick(clicked(event));
+    pick(clicked(event), setPieces);
     followPointer(event);
   });
   document.addEventListener('pointermove', followPointer);

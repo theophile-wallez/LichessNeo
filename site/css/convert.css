@@ -1,6 +1,6 @@
-/* The Chess.com tile (demo/chesscom.ts): its words, then a Lichess rating on
-   a slider and what it would be on Chess.com; and the Experimental badge it
-   and the rating tile's switch carry, as the settings' page is named. */
+/* The Chess.com tile (demo/chesscom.ts): its words, then a Lichess Elo on a
+   ruler and what it would be on Chess.com on another; and the Experimental badge
+   it and the rating tile's switch carry, as the settings' page is named. */
 
 .tile--chesscom {
   grid-column: 1 / -1;
@@ -56,7 +56,7 @@
   gap: 4px;
   padding: 4px;
   border-radius: 11px;
-  background: #ffffff06;
+  background: color-mix(in srgb, var(--glow) 2.4%, transparent);
 }
 
 .convert__speeds button {
@@ -85,67 +85,181 @@
   inset: 4px auto 4px 0;
   width: var(--tab-w, 0);
   border-radius: 8px;
-  background: #ffffff12;
+  background: color-mix(in srgb, var(--glow) 7.1%, transparent);
   translate: var(--tab-x, 0) 0;
   transition:
     translate 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Both sides share the rows, so their labels and numbers line up, the spread under
-   Chess.com's alone, and the arrow sits by the numbers. */
-.convert__numbers {
+/* Each speed's glyph, Lichess's own, in the extension's colors (theme/game-modes.css). */
+.mode-glyph {
+  display: inline-block;
+  margin-right: 7px;
+  color: var(--mode);
+  font: normal 15px/1 'Lichess Icons';
+  vertical-align: -2px;
+}
+
+.mode-glyph[data-mode='bullet'] {
+  --mode: #e3aa24;
+}
+
+.mode-glyph[data-mode='blitz'] {
+  --mode: #fad541;
+}
+
+.mode-glyph[data-mode='rapid'] {
+  --mode: #77ba2c;
+}
+
+.mode-glyph[data-mode='classical'] {
+  --mode: #2dd4bf;
+}
+
+.mode-glyph[data-mode='bullet']::before {
+  content: '\e032';
+}
+
+.mode-glyph[data-mode='blitz']::before {
+  content: '\e008';
+}
+
+.mode-glyph[data-mode='rapid']::before {
+  content: '\e002';
+}
+
+.mode-glyph[data-mode='classical']::before {
+  content: '\e00a';
+}
+
+/* The two rulers (demo/chesscom.ts), Lichess's over Chess.com's on one scale, a line
+   between them; each one's Elo on its right. The script draws the line from the top
+   ruler's middle, 20% down the track, to the top of Chess.com's bar. */
+.convert__scales {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 2px 12px;
+  grid-template-columns: minmax(0, 1fr) 7.5em;
+  grid-template-rows: 56px 28px 56px auto;
+  column-gap: 20px;
 }
 
-.convert__numbers p {
-  display: grid;
-  grid-row: span 3;
-  grid-template-rows: subgrid;
+.convert__track {
+  position: relative;
+  grid-area: 1 / 1 / 4 / 2;
 }
 
-.convert__numbers p:last-child {
-  text-align: right;
-}
-
-.convert__numbers span:not(.icon) {
-  color: var(--faint);
-  font-size: 13px;
-}
-
-.convert__numbers b {
-  color: var(--text);
-  font-size: clamp(34px, 4vw, 48px);
-  font-weight: 590;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  font-variant-numeric: tabular-nums;
-}
-
-.convert__numbers p:last-child b {
-  color: var(--accent-light);
-}
-
-.convert__numbers small {
-  color: var(--faint);
-  font-size: 12.5px;
-  font-variant-numeric: tabular-nums;
-}
-
-.convert__numbers .icon {
-  grid-area: 2 / 2;
-  align-self: center;
-  width: 22px;
-  height: 22px;
-  color: var(--faint);
-}
-
-/* The slider: the accent up to the rating, a hairline after. */
-.convert input[type='range'] {
+.convert__link {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 22px;
+  height: 100%;
+  overflow: visible;
+}
+
+.convert__link path {
+  fill: none;
+  stroke: var(--accent-light);
+  stroke-dasharray: 3 4;
+  stroke-linecap: round;
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+}
+
+.convert__ruler {
+  position: absolute;
+  inset-inline: 0;
+  height: 56px;
+}
+
+.convert__ruler--lichess {
+  top: 0;
+}
+
+.convert__ruler--chesscom {
+  bottom: 0;
+}
+
+.convert__ruler::before {
+  content: '';
+  position: absolute;
+  inset: 27px 0 auto;
+  height: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--glow) 9%, transparent);
+}
+
+/* Each ruler filled up to its Elo, so the two lengths compare. */
+.convert__ruler::after {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: 0;
+  width: calc(var(--lichess) * 100%);
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.convert__ruler--chesscom::after {
+  width: calc(var(--chesscom) * 100%);
+  background: color-mix(in srgb, var(--accent-light) 55%, transparent);
+}
+
+.convert__tick {
+  position: absolute;
+  top: 23px;
+  left: calc(var(--at) * 100%);
+  width: 1px;
+  height: 10px;
+  background: color-mix(in srgb, var(--glow) 14.9%, transparent);
+}
+
+/* The bell curve rests on the ruler's line, 24px tall (the viewBox's height). */
+.convert__bell {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  overflow: visible;
+}
+
+.convert__bell-whole {
+  fill: color-mix(in srgb, var(--accent) 16%, transparent);
+  stroke: color-mix(in srgb, var(--accent-light) 50%, transparent);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.convert__bell-middle {
+  fill: color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+/* Chess.com's Elo, a bar from the bell's peak through the line, 6px past it. */
+.convert__dot {
+  position: absolute;
+  z-index: 1;
+  top: 4px;
+  left: calc(var(--chesscom) * 100%);
+  width: 4px;
+  height: 30px;
+  translate: -50% 0;
+  border-radius: 2px;
+  background: var(--accent-light);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+/* The slider covers the slider's span of the ruler, a thumb's width more, so the
+   thumb's middle is on its Elo. */
+.convert input[type='range'] {
+  position: absolute;
+  inset-block: 0;
+  /* Over the ruler's fill, a pseudo-element painted after it. */
+  z-index: 1;
+  left: calc(var(--from) * 100% - 10px);
+  width: calc((var(--to) - var(--from)) * 100% + 20px);
+  height: 100%;
   margin: 0;
   background: none;
   appearance: none;
@@ -153,26 +267,24 @@
 }
 
 .convert input[type='range']::-webkit-slider-runnable-track {
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent) var(--share, 35%), #ffffff17 var(--share, 35%));
+  height: 100%;
+  background: none;
 }
 
 .convert input[type='range']::-moz-range-track {
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent) var(--share, 35%), #ffffff17 var(--share, 35%));
+  height: 100%;
+  background: none;
 }
 
 .convert input[type='range']::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
-  margin-top: -7px;
+  margin-top: 18px;
   border-radius: 50%;
   background: #fff;
   box-shadow:
     0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent),
-    0 2px 6px #00000080;
+    0 2px 6px color-mix(in srgb, var(--shadow) 50.2%, transparent);
   appearance: none;
 }
 
@@ -184,12 +296,102 @@
   background: #fff;
   box-shadow:
     0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent),
-    0 2px 6px #00000080;
+    0 2px 6px color-mix(in srgb, var(--shadow) 50.2%, transparent);
+}
+
+.convert input[type='range']:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 4px;
+}
+
+.convert__value {
+  display: grid;
+  grid-column: 2;
+  align-content: center;
+  justify-items: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.convert__value--chesscom {
+  grid-row: 3;
+}
+
+.convert__value span {
+  color: var(--faint);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.convert__value > b {
+  color: var(--text);
+  font-size: 28px;
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.convert__value--chesscom > b {
+  color: var(--accent-light);
+}
+
+.convert__value small {
+  color: var(--faint);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.convert__value small b {
+  font-weight: 500;
+}
+
+.convert__axis {
+  position: relative;
+  grid-area: 4 / 1;
+  height: 18px;
+  margin-top: 4px;
+}
+
+.convert__axis span {
+  position: absolute;
+  left: calc(var(--at) * 100%);
+  translate: -50% 0;
+  color: var(--faint);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 1019px) {
   .tile--chesscom {
     grid-template-columns: minmax(0, 1fr);
     gap: 22px;
+  }
+}
+
+/* A phone's rulers keep their room: the Elo and its words smaller, every other label
+   gone, the speeds' names alone. */
+@media (max-width: 640px) {
+  .convert {
+    padding: 14px;
+  }
+
+  .convert__scales {
+    grid-template-columns: minmax(0, 1fr) 5em;
+    column-gap: 12px;
+  }
+
+  .convert__value > b {
+    font-size: 22px;
+  }
+
+  .convert__value :is(span, small) {
+    font-size: 11px;
+  }
+
+  .convert__axis span:nth-child(odd) {
+    display: none;
+  }
+
+  .convert__speeds .mode-glyph {
+    display: none;
   }
 }

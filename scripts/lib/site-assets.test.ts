@@ -12,6 +12,12 @@ describe('the pictures the site names', () => {
     ]);
   });
 
+  it('copies Boxwood’s takes', () => {
+    expect(namedAssets('new Audio(`sounds/boxwood/move-self-1.ogg`)')).toEqual(
+      new Map([['sounds/boxwood/move-self-1.ogg', 'public/sounds/boxwood/move-self-1.ogg']]),
+    );
+  });
+
   it('leaves a folder that only ends like one of them', () => {
     expect(namedAssets('img/coaches/mascot-4.webp')).toEqual(new Map());
   });

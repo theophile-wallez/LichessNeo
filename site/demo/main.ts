@@ -7,18 +7,21 @@ import { Demo, type DemoParts } from './demo.ts';
 import { graphMarkup } from './graph.ts';
 import { movesMarkup } from './moves.ts';
 import { PanelModes } from './modes.ts';
-import { LICHESS_SET } from './pieces.ts';
+import { railMarkup } from './menu.ts';
 import { showMockCoach, startPickers } from './pickers.ts';
 import { division, moves, records, review } from './review.ts';
 import { playerMarkup } from './players.ts';
 import { showChesscom } from './rating.ts';
 import { startStakes } from './stakes.ts';
 import { showStars } from './stars.ts';
+import { startScheme } from './scheme.ts';
+import { startSounds } from './sounds.ts';
 import { Summary } from './summary.ts';
 import { drawTiles } from './tiles.ts';
 import { startTooltips } from './tooltip.ts';
 import { countUpIn } from './motion/panel.ts';
 import { startCrowd } from './motion/crowd.ts';
+import { startWordCycle } from './motion/cycle.ts';
 import { playEntrance } from './motion/entrance.ts';
 import { startFacts } from './motion/facts.ts';
 import { chesscomShown, keepChesscomShown } from '#shared/chesscom-rating/shown.ts';
@@ -63,6 +66,8 @@ function drawOnce(root: HTMLElement, found: DemoParts): void {
 }
 
 function drawPlayers(root: HTMLElement): void {
+  const rail = queryOne(root, '.demo-rail', HTMLElement);
+  if (rail) setHtml(rail, railMarkup());
   for (const color of ['white', 'black'] as const) {
     const bar = queryOne(root, `[data-player='${color}']`, HTMLElement);
     if (bar) setHtml(bar, playerMarkup(color));
@@ -122,11 +127,6 @@ function wirePickers(demo: Demo, modes: PanelModes): void {
       modes.setCoach(Number(coach.dataset.coach));
       showMockCoach(Number(coach.dataset.coach));
     }
-    const pieces = closestTo(event.target, '[data-pieces]', HTMLElement);
-    if (pieces) {
-      press(pieces);
-      demo.setPieceSet(pieces.dataset.pieces ?? LICHESS_SET);
-    }
   });
 }
 
@@ -135,6 +135,8 @@ showStars();
 startCompare();
 startStakes();
 startFacts();
+startWordCycle();
+startSounds();
 const crowd = queryOne(document, '.crowd', HTMLElement);
 if (crowd) startCrowd(crowd);
 const root = queryOne(document, '#demo', HTMLElement);
@@ -143,8 +145,9 @@ if (root) {
   drawTiles();
   const found = parts(root);
   drawOnce(root, found);
-  startPickers(FIRST_COACH);
   const demo = new Demo(found, FIRST_COACH);
+  startPickers(FIRST_COACH, pieceSet => demo.setPieceSet(pieceSet));
+  startScheme();
   const modes = new PanelModes(found.panel, FIRST_COACH);
   modes.set('moves');
   wirePickers(demo, modes);

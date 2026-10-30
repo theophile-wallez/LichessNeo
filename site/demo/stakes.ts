@@ -1,4 +1,4 @@
-import { inView } from 'motion';
+import { animate, inView } from 'motion';
 import { avatarOf } from '#shared/avatar.ts';
 import { queryOne } from '#shared/dom.ts';
 import { html, setHtml, type SafeHtml } from '#shared/html.ts';
@@ -34,18 +34,39 @@ function barMarkup(side: 'top' | 'bottom', clock: string): SafeHtml {
   </div>`;
 }
 
+const stillOf = (user: string): string =>
+  // Absolute: a URL in a variable would resolve against the sheet that reads it.
+  new URL(`img/coaches/mascot-${avatarOf(user).coach}.webp`, document.baseURI).href;
+
+/** Blurs `parts` out, runs `change`, then brings them back sharp. */
+async function blurSwap(parts: HTMLElement[], change: () => void): Promise<void> {
+  await animate(
+    parts,
+    { opacity: 0, filter: 'blur(8px)', scale: 0.92 },
+    { duration: 0.2, ease: 'easeIn' },
+  );
+  change();
+  await animate(
+    parts,
+    { opacity: 1, filter: 'blur(0px)', scale: 1 },
+    { type: 'spring', visualDuration: 0.4, bounce: 0.3 },
+  );
+}
+
 function showPlayer(bar: HTMLElement, player: RatedPlayer, stakes: Stakes): void {
   const avatar = queryOne(bar, '.demo-avatar', HTMLElement);
   const name = queryOne(bar, '.stakes-bar__name', HTMLElement);
   const elo = queryOne(bar, '.stakes-bar__elo', HTMLElement);
-  if (avatar) {
-    const { color, coach } = avatarOf(player.user);
-    avatar.dataset.color = color;
-    // Absolute: a URL in a variable would resolve against the sheet that reads it.
-    const still = new URL(`img/coaches/mascot-${coach}.webp`, document.baseURI).href;
-    avatar.style.setProperty('--avatar-coach', `url(${still})`);
+  if (avatar && name && name.textContent !== player.user) {
+    const change = (): void => {
+      avatar.dataset.color = avatarOf(player.user).color;
+      avatar.style.setProperty('--avatar-coach', `url(${stillOf(player.user)})`);
+      name.textContent = player.user;
+    };
+    // The first time, at once; then the old player blurs into the new one.
+    if (name.textContent === '') change();
+    else blurSwap([avatar, name], change).catch(() => undefined);
   }
-  if (name) name.textContent = player.user;
   if (elo) flowTo(elo, player.glicko.rating, { format: { useGrouping: false } });
   for (const outcome of OUTCOMES) {
     const figure = queryOne(bar, `.stakes-pill__outcome--${outcome}`, HTMLElement);
@@ -60,6 +81,8 @@ export function startStakes(): void {
   const top = queryOne(root, '[data-side=top]', HTMLElement);
   const bottom = queryOne(root, '[data-side=bottom]', HTMLElement);
   if (!top || !bottom) return;
+  // Loaded ahead, so a new opponent's coach is there once the old one blurs out.
+  for (const opponent of OPPONENTS) new Image().src = stillOf(opponent.user);
   let shown = 0;
   const show = (): void => {
     const opponent = OPPONENTS[shown % OPPONENTS.length] ?? YOU;

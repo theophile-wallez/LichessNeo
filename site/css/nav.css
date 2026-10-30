@@ -19,6 +19,8 @@
 
 .brand {
   display: flex;
+  flex: none;
+  white-space: nowrap;
   align-items: center;
   gap: 10px;
   font-size: 15px;
@@ -51,8 +53,38 @@
 }
 
 .links a:hover {
-  background: #ffffff0d;
+  background: color-mix(in srgb, var(--glow) 5.1%, transparent);
   color: var(--text);
+}
+
+/* The scheme's switch shows the scheme it turns to (demo/scheme.ts). */
+.scheme-switch {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--dim);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+
+.scheme-switch:hover {
+  background: color-mix(in srgb, var(--glow) 5%, transparent);
+  color: var(--text);
+}
+
+.scheme-switch .icon {
+  grid-area: 1 / 1;
+}
+
+:root[data-scheme='light'] .scheme-switch .i-sun-03,
+:root:not([data-scheme='light']) .scheme-switch .i-moon-02 {
+  visibility: hidden;
 }
 
 /* The GitHub link asks for a star, the repository's count beside (demo/stars.ts). It
@@ -77,7 +109,7 @@
 }
 
 .star-link:hover {
-  background: #ffffff0d;
+  background: color-mix(in srgb, var(--glow) 5.1%, transparent);
   color: var(--text);
 }
 
@@ -88,7 +120,7 @@
   height: 24px;
   padding: 0 8px 0 7px;
   border-radius: 6px;
-  background: #ffffff0f;
+  background: color-mix(in srgb, var(--glow) 5.9%, transparent);
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
@@ -131,6 +163,13 @@
 @media (max-width: 520px) {
   .nav .button {
     display: none !important;
+  }
+}
+
+/* With the scheme's switch beside, the star keeps its icon and its count. */
+@media (max-width: 420px) {
+  .star-link > span:not([class]) {
+    display: none;
   }
 }
 

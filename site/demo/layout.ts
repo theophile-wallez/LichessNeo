@@ -1,11 +1,12 @@
 import { html, type SafeHtml } from '#shared/html.ts';
 import { piecesOf, squareStyle } from './board.ts';
+import { sectionsMarkup } from './menu.ts';
 import { positions } from './review.ts';
 
 // The page's little Lichess (index.html's .mock): an analysis board in the
 // layout picked, the extension's four places for the site's menu (its
 // settings' Navigation), drawn in the theme, the board and the pieces picked
-// above (looks.css). The menu holds the sidebar's own pictures.
+// above (looks.css). Its menu is menu.ts's, to hover and fold.
 
 export const LAYOUTS = [
   { id: 'rail', name: 'Rail' },
@@ -19,46 +20,24 @@ export type LayoutId = (typeof LAYOUTS)[number]['id'];
 export const isLayout = (id: string | undefined): id is LayoutId =>
   LAYOUTS.some(layout => layout.id === id);
 
-const SECTIONS = [
-  { name: 'Play', picture: 'play' },
-  { name: 'Puzzles', picture: 'puzzles' },
-  { name: 'Learn', picture: 'learn' },
-  { name: 'Watch', picture: 'watch-binoculars' },
-  { name: 'Community', picture: 'community' },
-  { name: 'Tools', picture: 'tools' },
-  { name: 'Donate', picture: 'donation' },
-];
-
-// The open section's pages, the unfolded sidebar's: the analysis board is on show.
-const TOOLS = [
-  { name: 'Analysis board', picture: 'analysis-board' },
-  { name: 'Openings', picture: 'openings' },
-  { name: 'Board editor', picture: 'board-editor' },
-  { name: 'Import game', picture: 'import-game' },
-  { name: 'Advanced search', picture: 'advanced-search' },
+// The analysis board's buttons, as the review's (index.html's .demo-controls).
+const CONTROLS = [
+  'i-arrow-left-double',
+  'i-arrow-left-01',
+  'i-play',
+  'i-arrow-right-01',
+  'i-arrow-right-double',
 ];
 
 // The Opera Game after Black's tenth move: the position its turn hangs on.
 const SHOWN_PLY = 20;
 
-const picture = (name: string): SafeHtml =>
-  html`<img src="img/sidebar/${name}.webp" alt="" width="96" height="96" loading="lazy" />`;
-
 function navMarkup(): SafeHtml {
-  const sections = SECTIONS.map(section => {
-    const open = section.name === 'Tools';
-    const pages = open
-      ? html`<span class="mock-pages">${TOOLS.map(
-          (page, i) =>
-            html`<span class="mock-page${i === 0 ? ' mock-page--on' : ''}">${picture(page.picture)}<span>${page.name}</span></span>`,
-        )}</span>`
-      : '';
-    return html`<span class="mock-section${open ? ' mock-section--on' : ''}"><span class="mock-link">${picture(section.picture)}<span>${section.name}</span><i class="mock-chevron icon i-arrow-down-01"></i></span>${pages}</span>`;
-  });
-  return html`<nav class="mock-nav">
+  return html`<nav class="mock-nav menu" aria-label="Lichess’s menu">
     <span class="mock-logo"><span class="mock-horse"></span><span>Lichess</span></span>
-    <span class="mock-sections">${sections}</span>
-    <span class="mock-tools"><span class="mock-search"><span class="icon i-search-01"></span><span>Search</span></span><span class="icon i-settings-01"></span><span class="icon i-moon-02"></span></span>
+    <button type="button" class="menu-toggle" aria-label="Collapse the sidebar" aria-expanded="true"><span class="icon i-sidebar-left"></span></button>
+    <span class="mock-sections">${sectionsMarkup({ section: 'Tools', page: 'Analysis board' })}</span>
+    <span class="mock-tools" aria-hidden="true"><span class="mock-search"><span class="icon i-search-01"></span><span>Search</span></span><span class="icon i-settings-01"></span><span class="icon i-moon-02"></span></span>
   </nav>`;
 }
 
@@ -84,12 +63,12 @@ function movesMarkup(): SafeHtml {
 export function mockMarkup(coach: number): SafeHtml {
   return html`<div class="mock-app">
     ${navMarkup()}
-    <div class="mock-main">
+    <div class="mock-main" aria-hidden="true">
       ${boardMarkup()}
       <div class="mock-panel">
-        <div class="mock-card"><img class="mock-coach" src="img/coaches/mascot-${coach}.webp" alt="" width="62" height="57" /><p><b>Play a move.</b><span>I’ll tell you if it’s the best, an inaccuracy or a blunder.</span></p></div>
+        <div class="mock-card"><img class="mock-coach" src="img/coaches/mascot-${coach}.webp" alt="" width="124" height="76" /><p><b>Play a move.</b><span>I’ll tell you if it’s the best, an inaccuracy or a blunder.</span></p></div>
         ${movesMarkup()}
-        <div class="mock-controls"><i></i><i></i><i></i><i></i></div>
+        <div class="mock-controls">${CONTROLS.map(icon => html`<i><span class="icon ${icon}"></span></i>`)}</div>
       </div>
     </div>
   </div>`;

@@ -349,10 +349,14 @@ preference, as its Theme menu does. Users make their own in its editor
 whenever a push to `main` changes it or what it draws from. `scripts/site.ts`
 builds it into `dist/site` (`pnpm site` serves it on localhost:5181, rebuilt on
 every change): the page as written, its sheets joined into one and minified
-(`scripts/lib/site-sheets.ts`), the pictures they name copied from the
-repository (`scripts/lib/site-assets.ts`), the Hugeicons they name, and
+(`scripts/lib/site-sheets.ts`), the pictures and Boxwood's takes they name
+copied from the repository (`scripts/lib/site-assets.ts`), the Hugeicons they
+name, and
 `site/demo` bundled. `site/compare` holds before-and-after shots of lichess.org,
-with and without the extension, for the page's comparison.
+with and without the extension, for the page's comparison, and `site/coaches`
+the stills of the coaches on the review's tile in the mood of their move,
+captured from the playground (its "Capture PNG", on a 186 by 150 stage framed
+on its bottom 114 pixels, room above for a tall coach).
 
 `site/demo` is a live Debrief of Morphy's Opera Game. It runs no engine: the
 records come from `opera.json`, which `scripts/site/record-demo.ts` writes by
@@ -366,4 +370,10 @@ look, which `site/css` copies in the site's own tokens. The page's motion
 look's reveal) is [Motion](https://motion.dev)'s, and its figures roll with
 [NumberFlow](https://number-flow.barvian.me): two dev dependencies the extension
 never bundles. The Elo tile's stakes come from the extension's own rules
-(`content/game/stakes`), and the bar's star count from GitHub's API.
+(`content/game/stakes`), the sounds tile plays our two sets as the extension
+does (Ascent through `page/sounds/synth`), the menus of the hero's window and of
+the little Lichess open, fold and collapse as the sidebar's (`site/demo/menu.ts`,
+after `styles/sidebar`), and the bar's star count comes from GitHub's API. The page is dark unless the visitor turns it light
+(`site/demo/scheme.ts`): its sheets write a surface's lightness for the dark
+scheme, which the light one turns around, and a hairline or a lift as the
+text's color at a few percent (`--glow`), so each rule is written once.

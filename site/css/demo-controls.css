@@ -13,7 +13,7 @@
   height: 38px;
   border: 0;
   border-radius: 9px;
-  background: #ffffff0a;
+  background: color-mix(in srgb, var(--glow) 3.9%, transparent);
   box-shadow: inset 0 0 0 1px var(--line);
   color: var(--dim);
   cursor: pointer;
@@ -23,7 +23,7 @@
 }
 
 .demo-controls button:hover {
-  background: #ffffff14;
+  background: color-mix(in srgb, var(--glow) 7.8%, transparent);
   color: var(--text);
 }
 
@@ -54,13 +54,42 @@
   margin-top: 22px;
 }
 
+/* On a desktop the window fills the screen, which would leave the pickers under its
+   fold: they float at the screen's bottom, over the window, until it scrolls past.
+   Personalize's float under the bar while its little Lichess shows, and leave with it. */
+@media (min-width: 1020px) {
+  .hero .demo-pickers {
+    position: sticky;
+    bottom: 16px;
+    z-index: 2;
+  }
+
+  .yours-pickers {
+    position: sticky;
+    top: 72px;
+    z-index: 2;
+  }
+
+  :is(.hero .demo-pickers, .yours-pickers) .picker {
+    background: color-mix(in oklch, var(--panel-raised) 82%, transparent);
+    box-shadow:
+      inset 0 0 0 1px var(--line-strong),
+      0 12px 32px color-mix(in srgb, var(--shadow) 50.2%, transparent);
+    backdrop-filter: blur(16px) saturate(1.4);
+  }
+
+  :is(.hero .demo-pickers, .yours-pickers) .picker__label {
+    color: var(--dim);
+  }
+}
+
 .picker {
   display: flex;
   align-items: center;
   gap: 4px;
   padding: 5px 6px 5px 14px;
   border-radius: 14px;
-  background: #ffffff08;
+  background: color-mix(in srgb, var(--glow) 3.1%, transparent);
   box-shadow: inset 0 0 0 1px var(--line);
 }
 
@@ -88,7 +117,7 @@
 
 /* Marked hovered while a look spreads, when the page can't tell (demo/pickers.ts). */
 .picker button:is(:hover, [data-hover]) {
-  background: #ffffff0f;
+  background: color-mix(in srgb, var(--glow) 5.9%, transparent);
   transform: translateY(-2px);
 }
 

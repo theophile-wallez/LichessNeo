@@ -1,10 +1,11 @@
 import { html, type SafeHtml } from '#shared/html.ts';
 import { BUILT_IN_THEMES } from '#content/colors/built-in.ts';
 import { MATERIAL_BOARDS } from '#content/packs/materials.ts';
+import { LICHESS_SET, pieceUrl } from './pieces.ts';
 
-// The color themes and the boards the page lets a visitor try, the
-// extension's own: a theme recolors the whole page, as it does Lichess, and a
-// board both the review's and the layout's (looks.css, demo-window.css).
+// The color themes, the boards and the piece sets the page lets a visitor try,
+// the extension's own: a theme recolors the whole page, as it does Lichess, and
+// a board or a set both the review's and the layout's (demo-window.css, mock.css).
 
 const SHOWN_THEMES = new Set([
   'neo',
@@ -31,24 +32,24 @@ const SHOWN_MATERIALS: Readonly<Record<string, { relief: string; still: string }
 
 const capitalized = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
-export interface SiteTheme {
-  readonly id: string;
-  readonly name: string;
+interface Palette {
   readonly hue: number;
   readonly chroma: number;
   readonly accent: string;
 }
 
-/** The dark scheme's palette of each theme shown: the page is dark. */
+export interface SiteTheme {
+  readonly id: string;
+  readonly name: string;
+  readonly dark: Palette;
+  readonly light: Palette;
+}
+
 export const THEMES: readonly SiteTheme[] = BUILT_IN_THEMES.filter(theme =>
   SHOWN_THEMES.has(theme.id),
-).map(({ id, dark }) => ({
-  id,
-  name: capitalized(id),
-  hue: dark.hue,
-  chroma: dark.chroma,
-  accent: dark.accent,
-}));
+).map(({ id, dark, light }) => ({ id, name: capitalized(id), dark, light }));
+
+export const isLight = (): boolean => document.documentElement.dataset.scheme === 'light';
 
 export interface SiteBoard {
   readonly id: string;
@@ -88,11 +89,13 @@ export const BOARDS: readonly SiteBoard[] = [
 
 const fileUrl = (file: string): string => `url("${new URL(file, document.baseURI).href}")`;
 
+/** The theme's palette for the scheme on show, as the extension has one for each. */
 export function showTheme(theme: SiteTheme): void {
+  const palette = isLight() ? theme.light : theme.dark;
   const root = document.documentElement.style;
-  root.setProperty('--hue', String(theme.hue));
-  root.setProperty('--chroma', String(theme.chroma));
-  root.setProperty('--accent', theme.accent);
+  root.setProperty('--hue', String(palette.hue));
+  root.setProperty('--chroma', String(palette.chroma));
+  root.setProperty('--accent', palette.accent);
 }
 
 /** A board's colors and texture, as the variables the boards are drawn from. */
@@ -110,7 +113,7 @@ export function showBoard(board: SiteBoard): void {
 export const themeButtons = (picked: string): SafeHtml =>
   html`${THEMES.map(
     theme =>
-      html`<button type="button" data-theme="${theme.id}" aria-pressed="${String(theme.id === picked)}" aria-label="${theme.name}" title="${theme.name}" style="--swatch:${theme.accent}"><i></i></button>`,
+      html`<button type="button" data-theme="${theme.id}" aria-pressed="${String(theme.id === picked)}" aria-label="${theme.name}" title="${theme.name}" style="--swatch:${theme.dark.accent}"><i></i></button>`,
   )}`;
 
 // A material's button shows its still; the accent's is drawn, in the theme.
@@ -118,4 +121,21 @@ export const boardButtons = (picked: string): SafeHtml =>
   html`${BOARDS.map(
     board =>
       html`<button type="button" data-board="${board.id}" aria-pressed="${String(board.id === picked)}" aria-label="${board.name}" title="${board.name}">${board.still ? html`<img src="${board.still}" alt="" width="174" height="174" />` : html`<i class="board-thumb"></i>`}</button>`,
+  )}`;
+
+// Lichess's set, then some of the extension's.
+const PIECE_SETS: readonly { id: string; name: string }[] = [
+  { id: LICHESS_SET, name: 'Lichess' },
+  { id: 'mochi', name: 'Mochi' },
+  { id: 'mellow', name: 'Mellow' },
+  { id: 'loop', name: 'Loop' },
+  { id: 'poppy', name: 'Poppy' },
+  { id: 'fold', name: 'Fold' },
+  { id: 'bitty', name: 'Bitty' },
+];
+
+export const pieceButtons = (picked: string): SafeHtml =>
+  html`${PIECE_SETS.map(
+    set =>
+      html`<button type="button" data-pieces="${set.id}" aria-pressed="${String(set.id === picked)}" aria-label="${set.name}" title="${set.name}"><img src="${pieceUrl(set.id, 'wN')}" alt="" width="40" height="40" /></button>`,
   )}`;

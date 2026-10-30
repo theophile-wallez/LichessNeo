@@ -42,7 +42,7 @@
   width: calc(var(--s) * 19%);
   height: auto;
   margin-left: calc(var(--s) * -9.5%);
-  filter: drop-shadow(0 14px 18px #00000080);
+  filter: drop-shadow(0 14px 18px color-mix(in srgb, var(--shadow) 50.2%, transparent));
   transform-origin: 50% 100%;
   animation: bob 3.6s ease-in-out calc(var(--i) * -0.55s) infinite;
   transition:
@@ -62,7 +62,8 @@
 
   bottom: 53%;
   z-index: 1;
-  filter: drop-shadow(0 10px 14px #00000080) brightness(0.86);
+  filter: drop-shadow(0 10px 14px color-mix(in srgb, var(--shadow) 50.2%, transparent))
+    brightness(0.86);
 }
 
 @media (hover: hover) {
@@ -84,6 +85,75 @@
   padding-top: clamp(112px, 14vw, 180px);
 }
 
+/* The heading's last word, the things to pick in turn (demo/motion/cycle.ts): one
+   grid cell for them all, so the heading has the longest's width. */
+.word-cycle {
+  display: inline-grid;
+}
+
+/* A color per word, at one lightness so none stands out. */
+.word-cycle > span {
+  grid-area: 1 / 1;
+  color: oklch(var(--vivid-l) 0.13 var(--word-hue));
+}
+
+.word-cycle > :nth-child(1) {
+  --word-hue: 295;
+}
+
+.word-cycle > :nth-child(2) {
+  --word-hue: 225;
+}
+
+.word-cycle > :nth-child(3) {
+  --word-hue: 150;
+}
+
+.word-cycle > :nth-child(4) {
+  --word-hue: 70;
+}
+
+/* Its letters move one by one. */
+.word-cycle > span > span {
+  display: inline-block;
+}
+
+/* Without the script, the first word alone. */
+.word-cycle > span:not(:first-child):not(:has(span)) {
+  visibility: hidden;
+}
+
+/* A word of the lead that leads to its tile: the tile's icon, on a tint of the accent.
+   Inline-block, not flex: a flex box takes its baseline from the icon's empty box, which
+   lifted the word above the line's. */
+.lead-chip {
+  display: inline-block;
+  padding: 0 9px 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent-light);
+  font-weight: 590;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.lead-chip:hover {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.lead-chip .icon {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  margin-right: 5px;
+  vertical-align: -0.12em;
+  transition: transform 0.25s var(--hop);
+}
+
+.lead-chip:hover .icon {
+  transform: rotate(-8deg) scale(1.1);
+}
+
 .yours-pickers {
   display: flex;
   flex-wrap: wrap;
@@ -91,8 +161,8 @@
   margin-top: clamp(32px, 4vw, 44px);
 }
 
-/* A layout's button: its little window, then its name. */
-.picker--layout button {
+/* A button with its name: a layout's, its little window first; a scheme's, its icon. */
+.picker--named button {
   display: flex;
   gap: 8px;
   width: auto;
@@ -102,7 +172,12 @@
   font-weight: 500;
 }
 
-.picker--layout button[aria-pressed='true'] {
+.picker--named button .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.picker--named button[aria-pressed='true'] {
   color: var(--text);
 }
 
@@ -118,7 +193,7 @@
 
 .layout-icon i {
   border-radius: 1px;
-  background: #ffffff1f;
+  background: color-mix(in srgb, var(--glow) 12.2%, transparent);
 }
 
 .layout-icon i:first-child {

@@ -70,7 +70,7 @@
   height: 24px;
   padding: 0 2px 0 9px;
   border-radius: 999px;
-  background: #ffffff0f;
+  background: color-mix(in srgb, var(--glow) 5.9%, transparent);
   font-size: 12.5px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -94,7 +94,11 @@
 }
 
 .stakes-pill__outcome + .stakes-pill__outcome {
-  background: linear-gradient(#ffffff26, #ffffff26) left center / 1px 11px no-repeat;
+  background: linear-gradient(
+      color-mix(in srgb, var(--glow) 14.9%, transparent),
+      color-mix(in srgb, var(--glow) 14.9%, transparent)
+    )
+    left center / 1px 11px no-repeat;
 }
 
 .stakes-pill__outcome--win {
@@ -121,6 +125,11 @@
 .stakes-bar[data-side='bottom'] .stakes-bar__clock {
   background: #fff;
   color: var(--ink);
+}
+
+/* The running clock stands out of the bar: dark on a light page, as Lichess's. */
+:root[data-scheme='light'] .stakes-bar[data-side='bottom'] .stakes-bar__clock {
+  background: var(--text);
 }
 
 @media (max-width: 1019px) {

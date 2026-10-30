@@ -31,6 +31,13 @@
   font-display: swap;
 }
 
+/* Lichess's icon font, cut to the four speeds' glyphs (fonts/README.md). */
+@font-face {
+  font-family: 'Lichess Icons';
+  src: url('../fonts/lichess-modes.woff2') format('woff2');
+  font-display: block;
+}
+
 /* Lichess's figurine font, for the move list: its piece letters are the pieces. */
 @font-face {
   font-family: 'Lichess Chess';
@@ -38,16 +45,26 @@
   font-display: swap;
 }
 
+/* The scheme: dark unless the visitor picks light (demo/scheme.ts). A surface's lightness
+   is written for the dark one, as `--l0 + L * --lk`, which the light one turns around
+   to near white; lifts and hairlines are the text's color at a few percent (`--glow`). */
 :root {
+  --l0: 0%;
+  --lk: 1;
+  --glow: #fff;
+  --shadow: #000;
+  --vivid-l: 80%;
+  /* A win's green, the extension's palette's for each scheme. */
+  --good: #50fa7b;
   /* A touch more tint than the extension's, which a page this dark wants. */
   --tint: calc(var(--chroma) + 0.008);
-  --ink: oklch(15.5% var(--tint) var(--hue));
-  --ink-raised: oklch(17% var(--tint) var(--hue));
-  --panel: oklch(19% var(--tint) var(--hue));
-  --panel-raised: oklch(21.5% var(--tint) var(--hue));
-  --well: oklch(13.5% var(--tint) var(--hue));
-  --line: #ffffff12;
-  --line-strong: #ffffff21;
+  --ink: oklch(calc(var(--l0) + 15.5% * var(--lk)) var(--tint) var(--hue));
+  --ink-raised: oklch(calc(var(--l0) + 17% * var(--lk)) var(--tint) var(--hue));
+  --panel: oklch(calc(var(--l0) + 19% * var(--lk)) var(--tint) var(--hue));
+  --panel-raised: oklch(calc(var(--l0) + 21.5% * var(--lk)) var(--tint) var(--hue));
+  --well: oklch(calc(var(--l0) + 13.5% * var(--lk)) var(--tint) var(--hue));
+  --line: color-mix(in srgb, var(--glow) 7.1%, transparent);
+  --line-strong: color-mix(in srgb, var(--glow) 12.9%, transparent);
   --text: oklch(95% calc(var(--tint) / 2) var(--hue));
   --dim: oklch(71% var(--tint) var(--hue));
   --faint: oklch(55% var(--tint) var(--hue));
@@ -70,6 +87,24 @@
     --hue 0.6s var(--ease-out),
     --chroma 0.6s var(--ease-out),
     --accent 0.6s var(--ease-out);
+}
+
+:root[data-scheme='light'] {
+  --l0: 84%;
+  --lk: 0.75;
+  --glow: oklch(24% 0.03 var(--hue));
+  --shadow: oklch(32% 0.05 var(--hue) / 40%);
+  --vivid-l: 58%;
+  --good: #1e9e50;
+  --tint: calc(var(--chroma) + 0.004);
+  --text: oklch(22% calc(var(--tint) * 2) var(--hue));
+  --dim: oklch(44% var(--tint) var(--hue));
+  --faint: oklch(58% var(--tint) var(--hue));
+  --accent-light: color-mix(in oklch, var(--accent) 82%, #000);
+  --headline-top: var(--text);
+  --headline-end: 46%;
+
+  color-scheme: light;
 }
 
 * {
@@ -134,7 +169,11 @@ h1 {
   font-size: clamp(44px, 6.6vw, 84px);
   line-height: 1;
   letter-spacing: -0.032em;
-  --headline: linear-gradient(180deg, #fff 35%, oklch(76% calc(var(--tint) * 3) var(--hue)));
+  --headline: linear-gradient(
+    180deg,
+    var(--headline-top, #fff) 35%,
+    oklch(var(--headline-end, 76%) calc(var(--tint) * 3) var(--hue))
+  );
 
   background: var(--headline);
   -webkit-background-clip: text;
@@ -196,7 +235,7 @@ h3 {
   height: 46px;
   padding: 0 20px;
   border-radius: 12px;
-  background: #ffffff0d;
+  background: color-mix(in srgb, var(--glow) 5.1%, transparent);
   box-shadow: inset 0 0 0 1px var(--line-strong);
   font-size: 15.5px;
   font-weight: 600;
@@ -209,7 +248,7 @@ h3 {
 }
 
 .button:hover {
-  background: #ffffff17;
+  background: color-mix(in srgb, var(--glow) 9%, transparent);
 }
 
 .button:active {
@@ -221,6 +260,7 @@ h3 {
 [data-browser='firefox'] .firefox {
   order: -1;
   background: linear-gradient(var(--accent-top), var(--accent-low));
+  color: #fff;
   box-shadow:
     inset 0 1px #ffffff4d,
     inset 0 -1px var(--accent-edge),
@@ -234,14 +274,15 @@ h3 {
 
 [data-browser='firefox'] .chrome {
   order: 0;
-  background: #ffffff0d;
+  color: inherit;
+  background: color-mix(in srgb, var(--glow) 5.1%, transparent);
   box-shadow: inset 0 0 0 1px var(--line-strong);
 }
 
 /* The browser's own logo, as its brand publishes it. */
 .browser-logo {
   flex: none;
-  filter: drop-shadow(0 1px 2px #0000004d);
+  filter: drop-shadow(0 1px 2px color-mix(in srgb, var(--shadow) 30.2%, transparent));
 }
 
 .button.small {

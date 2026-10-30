@@ -2,17 +2,16 @@ import { animate } from 'motion';
 import { queryOne } from '#shared/dom.ts';
 import { Typist } from './card.ts';
 
-// The coach's cards as a feed of notifications: each new one rises from the
-// bottom and its coach hops onto it, typing its words, the ones before slide up
-// to make room, and the oldest leave through the top. It plays while the feed is
-// on screen, and holds while the pointer is over it, for a card to be read.
+// The coach's cards as a feed of notifications: it starts full, then each new
+// one rises from the bottom and its coach hops onto it, typing its words, the
+// ones before slide up to make room, and the oldest leave through the top. It
+// plays while the feed is on screen, and holds while the pointer is over it, for
+// a card to be read.
 
 const SHOWN = 4;
-// The pause once a card's words are typed, and between the first cards, which
-// come in together.
+// The pause once a card's words are typed, and before the first new card.
 const READ_MS = 1800;
-const FIRST_MS = 650;
-const FIRST_CARDS = 3;
+const FIRST_MS = 900;
 
 const SPRING = { type: 'spring', visualDuration: 0.55, bounce: 0.2 } as const;
 
@@ -31,12 +30,16 @@ export class CardFeed {
     this.#cards = cards;
   }
 
-  /** Plays the feed whenever it's on screen. */
+  /** Fills the feed, then plays it whenever it's on screen. */
   start(): void {
     const feed = this.#feed;
+    this.#fill();
     new IntersectionObserver(([entry]) => {
       this.#onScreen = entry?.isIntersecting ?? false;
-      this.#resume();
+      // The first new card comes a moment after the feed is first seen.
+      if (this.#onScreen && this.#next === SHOWN && this.#timer === 0 && !this.#due)
+        this.#wait(FIRST_MS);
+      else this.#resume();
     }).observe(feed);
     // A mouse only: a tap leaves no pointer to leave, and would hold the feed for good.
     feed.addEventListener('pointerenter', event => {
@@ -48,10 +51,21 @@ export class CardFeed {
     });
   }
 
+  /** The first cards, their words written out: the feed doesn't start empty. */
+  #fill(): void {
+    for (let i = 0; i < SHOWN; i++) {
+      const card = this.#cards[this.#next]?.() ?? null;
+      this.#next += 1;
+      if (!card) continue;
+      for (const word of card.querySelectorAll('.ln-ext-w--off')) word.className = 'ln-ext-w';
+      this.#feed.append(card);
+    }
+  }
+
   /** Pushes the next card once the feed may play, else when it next may. */
   #resume(): void {
     if (this.#timer !== 0 || !this.#onScreen || this.#held) return;
-    if (this.#next === 0 || this.#due) this.#push();
+    if (this.#due) this.#push();
   }
 
   #wait(ms: number): void {
@@ -66,12 +80,16 @@ export class CardFeed {
     // Spent: until the card's words are typed, nothing else pushes one, not even the
     // feed coming back on screen.
     this.#due = false;
-    const first = this.#next < FIRST_CARDS;
     const card = this.#cards[this.#next % this.#cards.length]?.() ?? null;
     if (!card) return;
     this.#next += 1;
     this.#slideUp(() => this.#feed.append(card));
     this.#leave();
+    // It rises from behind the card before it, not over it. The flag goes when the
+    // next one comes: sliding up stops its rise, which then never resolves.
+    for (const other of this.#feed.children)
+      if (other instanceof HTMLElement && other !== card) delete other.dataset.entering;
+    card.dataset.entering = 'true';
     animate(
       card,
       { opacity: [0, 1], y: [56, 0], scale: [0.94, 1], filter: ['blur(6px)', 'blur(0px)'] },
@@ -91,12 +109,9 @@ export class CardFeed {
         { scale: [0.3, 1], rotate: [-25, 0] },
         { type: 'spring', visualDuration: 0.45, bounce: 0.45, delay: 0.25 },
       );
-    if (first) this.#wait(FIRST_MS);
     // Its words come once its coach is on it, and the next card once they're read.
     window.setTimeout(() => {
-      new Typist(() => undefined).type(card, () => {
-        if (!first) this.#wait(READ_MS);
-      });
+      new Typist(() => undefined).type(card, () => this.#wait(READ_MS));
     }, 400);
   }
 

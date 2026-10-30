@@ -2,8 +2,14 @@
    under it, its parts as tall as they are, the debrief without its list. */
 
 @container (max-width: 900px) {
+  /* No menu on a phone's window: the extension's is a header there. */
   .demo {
+    --rail-w: 0px;
     --board: min(600px, calc(100cqw - 24px - var(--eval-w) - 8px));
+  }
+
+  .demo-rail {
+    display: none;
   }
 
   .demo-play {

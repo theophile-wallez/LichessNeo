@@ -13,10 +13,17 @@ import { phaseStarts } from '#page/review/view/phases.ts';
 
 const WIDTH = 300;
 const HEIGHT = 72;
+// Each graph's gradient has its own id: a url() finds the first in the page,
+// and the hero's is hidden on phones, which leaves the other graphs unfilled.
+let drawn = 0;
+
+// Room over a won position, for its dot not to be cut at the top.
+const HEADROOM = 7;
+const heightOf = (chance: number): number => HEIGHT - (chance / 100) * (HEIGHT - HEADROOM);
 
 const pointOf = (index: number, count: number, record: PositionRecord): [number, number] => [
   (index / (count - 1)) * WIDTH,
-  HEIGHT - (record.whiteWinChance / 100) * HEIGHT,
+  heightOf(record.whiteWinChance),
 ];
 
 export function graphMarkup(
@@ -40,9 +47,11 @@ export function graphMarkup(
     const side = left > 80 ? ' demo-graph__phase--end' : '';
     return html`<i class="demo-graph__phase${side}" style="left:${left.toFixed(2)}%"><span>${name}</span></i>`;
   });
+  drawn += 1;
+  const fill = `demo-white-${drawn}`;
   return html`<svg class="demo-graph__svg" viewBox="0 0 ${WIDTH} ${HEIGHT}" preserveAspectRatio="none" aria-hidden="true">
-    <defs><linearGradient id="demo-white" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f5fa"/><stop offset="1" stop-color="#c9ccdb"/></linearGradient></defs>
-    <polygon points="0,${HEIGHT} ${line} ${WIDTH},${HEIGHT}" fill="url(#demo-white)"/>
-    <line x1="0" y1="${HEIGHT / 2}" x2="${WIDTH}" y2="${HEIGHT / 2}" stroke="#7d8197" stroke-width="1" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/>
+    <defs><linearGradient id="${fill}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f5fa"/><stop offset="1" stop-color="#c9ccdb"/></linearGradient></defs>
+    <polygon points="0,${HEIGHT} ${line} ${WIDTH},${HEIGHT}" fill="url(#${fill})"/>
+    <line x1="0" y1="${heightOf(50)}" x2="${WIDTH}" y2="${heightOf(50)}" stroke="#7d8197" stroke-width="1" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/>
   </svg>${phases}${dots}`;
 }

@@ -7,7 +7,7 @@
   overflow-y: auto;
   border-radius: 10px;
   scrollbar-width: thin;
-  scrollbar-color: #ffffff1f transparent;
+  scrollbar-color: color-mix(in srgb, var(--glow) 12.2%, transparent) transparent;
 }
 
 .demo-moves__list {
@@ -63,11 +63,11 @@
 }
 
 .demo-move:hover .demo-move__san {
-  background: #ffffff0f;
+  background: color-mix(in srgb, var(--glow) 5.9%, transparent);
 }
 
 .demo-move[aria-current] .demo-move__san {
-  background: #ffffff1f;
+  background: color-mix(in srgb, var(--glow) 12.2%, transparent);
 }
 
 .demo-move__icon {
@@ -94,7 +94,11 @@
   height: 4px;
   margin-top: -2px;
   border-radius: 2px;
-  background: linear-gradient(to right, var(--class-color) calc(var(--cost) * 100%), #ffffff14 0);
+  background: linear-gradient(
+    to right,
+    var(--class-color) calc(var(--cost) * 100%),
+    color-mix(in srgb, var(--glow) 7.8%, transparent) 0
+  );
 }
 
 /* A phase's name over the row it starts on. */
@@ -103,7 +107,7 @@
   height: 30px;
   margin: 0 10px;
   padding-top: 8px;
-  border-bottom: 1px dashed #ffffff26;
+  border-bottom: 1px dashed color-mix(in srgb, var(--glow) 14.9%, transparent);
   color: var(--dim);
   font-size: 11px;
   font-weight: 700;

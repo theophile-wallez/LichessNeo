@@ -1,19 +1,19 @@
 /* The closed review's card in the Moves tab (page/game-over/card.ts), as the
    extension styles it (styles/game/game-end-card.css, game-end-stats.css): the
    coach in a glow of the result's color beside how the game ended, then the
-   accuracy and counts of the board's bottom side. A spectator's is neutral. */
+   accuracy and counts of the board's bottom side, whose result the glow's color is. */
 
 .demo-end {
   flex: none;
   padding: 10px;
   border-radius: 16px;
-  background: #ffffff08;
-  box-shadow: inset 0 0 0 1px #ffffff14;
+  background: color-mix(in srgb, var(--glow) 3.1%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glow) 7.8%, transparent);
 }
 
 .ln-ext-end__card {
   --coach-h: 112px;
-  --tag-c: var(--dim);
+  --tag-c: var(--good);
 
   display: flex;
   flex-direction: column;
@@ -90,8 +90,8 @@
   gap: 16px;
   padding: 12px;
   border-radius: 12px;
-  background: #ffffff0a;
-  box-shadow: inset 0 0 0 1px #ffffff0f;
+  background: color-mix(in srgb, var(--glow) 3.9%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glow) 5.9%, transparent);
 }
 
 .ln-ext-end__accuracy {

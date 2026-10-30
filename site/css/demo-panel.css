@@ -15,22 +15,21 @@
   flex: none;
 }
 
-/* As the review's (styles/review/mode-tabs.css): at most 300px, the tab picked a raised
-   pill that slides to the next one picked (demo/modes.ts). */
+/* As the review's (styles/review/mode-tabs.css), but across the panel, each tab as wide:
+   the tab picked a raised pill that slides to the next one picked (demo/modes.ts). */
 .demo-tabs {
   position: relative;
   display: flex;
   gap: 2px;
-  max-width: 300px;
   padding: 3px;
   border-radius: 10px;
-  background: #0000004d;
+  background: color-mix(in srgb, var(--shadow) 30%, transparent);
   box-shadow: inset 0 0 0 1px var(--line);
 }
 
 .demo-tabs button {
   position: relative;
-  flex: 1 1 auto;
+  flex: 1 1 0;
   height: 30px;
   padding: 0 8px;
   border: 0;
@@ -57,7 +56,7 @@
   height: 30px;
   border-radius: 7px;
   background: var(--panel-raised);
-  box-shadow: 0 1px 2px #0000008c;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--shadow) 54.9%, transparent);
   translate: var(--tab-x, 0) 0;
   transition:
     translate 0.35s cubic-bezier(0.22, 1, 0.36, 1),
@@ -69,8 +68,13 @@
   height: 78px;
   overflow: hidden;
   border-radius: 10px;
-  background: var(--panel-raised);
+  background: var(--graph-black, var(--panel-raised));
   cursor: pointer;
+}
+
+/* Black's share stays darker than White's, whatever the page's scheme. */
+:root[data-scheme='light'] .demo-graph {
+  --graph-black: oklch(68% calc(var(--tint) * 2) var(--hue));
 }
 
 .demo-graph__plot,
@@ -132,12 +136,12 @@
   padding: 14px 16px 16px 162px;
   border-radius: 14px;
   background: linear-gradient(
-    oklch(20.5% var(--tint) var(--hue)),
-    oklch(18.5% var(--tint) var(--hue))
+    oklch(calc(var(--l0) + 20.5% * var(--lk)) var(--tint) var(--hue)),
+    oklch(calc(var(--l0) + 18.5% * var(--lk)) var(--tint) var(--hue))
   );
   box-shadow:
     inset 0 0 0 1px var(--line),
-    inset 0 1px #ffffff0d;
+    inset 0 1px color-mix(in srgb, var(--glow) 5.1%, transparent);
 }
 
 /* As the review's avatar (styles/coach-avatar.css): the still spans half again
@@ -229,7 +233,7 @@
 
 .demo-say__words {
   margin-top: 6px;
-  color: oklch(84% var(--tint) var(--hue));
+  color: color-mix(in oklch, var(--text) 82%, var(--dim));
   font-size: 14.5px;
   line-height: 1.55;
 }
@@ -335,7 +339,7 @@
   white-space: nowrap;
   border: 0;
   border-radius: 6px;
-  background: #ffffff12;
+  background: color-mix(in srgb, var(--glow) 7.1%, transparent);
   color: var(--text);
   font: inherit;
   font-weight: 590;

@@ -78,6 +78,14 @@
   --icon: url('../img/hugeicons/star.svg');
 }
 
+.i-sidebar-left {
+  --icon: url('../img/hugeicons/sidebar-left.svg');
+}
+
+.i-sun-03 {
+  --icon: url('../img/hugeicons/sun-03.svg');
+}
+
 .i-volume-high {
   --icon: url('../img/hugeicons/volume-high.svg');
 }

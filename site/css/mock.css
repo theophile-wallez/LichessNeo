@@ -7,7 +7,9 @@
   margin-top: 28px;
 }
 
+/* Its own stacking context: its menu's layers stay under the pickers that float over it. */
 .mock {
+  isolation: isolate;
   container-type: inline-size;
   aspect-ratio: 16 / 10;
   overflow: hidden;
@@ -15,8 +17,8 @@
   background: var(--ink);
   box-shadow:
     0 0 0 1px var(--line-strong),
-    0 40px 100px #000000a6,
-    0 12px 32px #00000080;
+    0 40px 100px color-mix(in srgb, var(--shadow) 65.1%, transparent),
+    0 12px 32px color-mix(in srgb, var(--shadow) 50.2%, transparent);
   font-size: 0.95cqw;
   line-height: 1.3;
 }
@@ -42,6 +44,15 @@
   --nav-w: 5.8cqw;
 }
 
+/* The sidebar folded to its icons (the menu's toggle), quicker, as the extension's. */
+[data-folded] .mock-app {
+  --nav-w: 3.9cqw;
+}
+
+[data-moving='fold'] .mock-app {
+  transition-duration: 0.28s;
+}
+
 [data-shape='header'] .mock-app {
   --nav-w: 0cqw;
   --bar-h: 3.9cqw;
@@ -53,13 +64,20 @@
   display: flex;
   flex-direction: column;
   grid-area: 1 / 1 / 3 / 2;
+  position: relative;
+  z-index: 2;
   gap: 1.4cqw;
   min-width: 0;
-  overflow: hidden;
   padding: 1.1cqw 0.6cqw 0.9cqw;
   background: var(--ink-raised);
   box-shadow: inset -1px 0 var(--line);
   animation: nav-sidebar 0.45s var(--ease-out);
+}
+
+/* Its flyouts reach past it; while its column grows or shrinks, its rows are cut at
+   its edge (demo/menu-folds.ts). */
+.mock[data-moving] .mock-nav {
+  overflow: hidden;
 }
 
 /* A name per layout, so the menu's entrance plays again at each change. */
@@ -125,109 +143,12 @@
     center / contain no-repeat;
 }
 
-.mock-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25cqw;
-}
-
-[data-shape='header'] .mock-sections {
-  flex-direction: row;
-  gap: 0.2cqw;
-}
-
-.mock-link {
-  display: flex;
-  align-items: center;
-  gap: 0.6cqw;
-  padding: 0.45cqw 0.5cqw;
-  border-radius: 0.55cqw;
-  color: var(--dim);
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.mock-link img,
-.mock-page img {
-  flex: none;
-  width: 1.45cqw;
-  height: 1.45cqw;
-}
-
-.mock-section--on > .mock-link {
-  background: #ffffff0f;
-  color: var(--text);
-}
-
-.mock-chevron {
-  display: none;
-  width: 0.9cqw;
-  height: 0.9cqw;
-  margin-left: auto;
-  color: var(--faint);
-}
-
-[data-shape='unfolded'] .mock-chevron {
-  display: block;
-}
-
-[data-shape='unfolded'] .mock-section--on .mock-chevron {
-  rotate: 180deg;
-}
-
-/* The open section's pages: the unfolded sidebar's alone. */
-.mock-pages {
-  display: none;
-  flex-direction: column;
-  gap: 0.15cqw;
-  margin: 0.3cqw 0 0.3cqw 1.15cqw;
-  padding-left: 0.6cqw;
-  box-shadow: inset 1px 0 var(--line);
-}
-
-[data-shape='unfolded'] .mock-pages {
-  display: flex;
-}
-
-.mock-page {
-  display: flex;
-  align-items: center;
-  gap: 0.6cqw;
-  padding: 0.3cqw 0.5cqw;
-  border-radius: 0.45cqw;
-  color: var(--dim);
-  font-size: 0.85cqw;
-  white-space: nowrap;
-}
-
-.mock-page img {
-  width: 1.15cqw;
-  height: 1.15cqw;
-}
-
-.mock-page--on {
-  background: color-mix(in srgb, var(--accent) 18%, transparent);
-  color: var(--text);
-}
-
-/* The rail: each picture over its label, the logo's name and the search box's words gone. */
-[data-shape='rail'] .mock-link {
-  flex-direction: column;
-  gap: 0.3cqw;
-  padding: 0.55cqw 0.2cqw;
-  font-size: 0.72cqw;
-}
-
-[data-shape='rail'] .mock-link img {
-  width: 1.75cqw;
-  height: 1.75cqw;
-}
-
-[data-shape='rail'] :is(.mock-logo, .mock-search) > :not(.mock-horse, .icon) {
+/* The rail and the folded sidebar: the logo's name and the search box's words gone. */
+:is([data-shape='rail'], [data-folded]) :is(.mock-logo, .mock-search) > :not(.mock-horse, .icon) {
   display: none;
 }
 
-[data-shape='rail'] .mock-logo {
+:is([data-shape='rail'], [data-folded]) .mock-logo {
   justify-content: center;
 }
 
@@ -241,7 +162,7 @@
   color: var(--faint);
 }
 
-[data-shape='rail'] .mock-tools {
+:is([data-shape='rail'], [data-folded]) .mock-tools {
   flex-direction: column;
 }
 
@@ -271,7 +192,7 @@
   width: 13cqw;
 }
 
-[data-shape='rail'] .mock-search {
+:is([data-shape='rail'], [data-folded]) .mock-search {
   flex: none;
   padding: 0;
   box-shadow: none;

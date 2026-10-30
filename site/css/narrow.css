@@ -3,15 +3,16 @@
 /* ---- tablets ---- */
 
 @media (max-width: 1019px) {
+  .bento {
+    grid-template-rows: none;
+  }
+
+  /* One per row: beside the coach's taller tile, the graph's would gape under it. */
   .tile--summary,
   .tile--graph,
   .tile--retry {
-    grid-column: auto / span 3;
-    grid-row: auto !important;
-  }
-
-  .tile--summary {
     grid-column: 1 / -1;
+    grid-row: auto !important;
   }
 
   .more-grid {
@@ -59,7 +60,7 @@
     height: 36px;
   }
 
-  .picker--layout button {
+  .picker--named button {
     width: auto;
   }
 

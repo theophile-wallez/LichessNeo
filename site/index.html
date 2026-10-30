@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/icons.css" />
+    <link rel="stylesheet" href="css/menu.css" />
     <link rel="stylesheet" href="css/demo-window.css" />
     <link rel="stylesheet" href="css/demo-players.css" />
     <link rel="stylesheet" href="css/demo-drawing.css" />
@@ -43,6 +44,7 @@
     <link rel="stylesheet" href="css/sections.css" />
     <link rel="stylesheet" href="css/facts.css" />
     <link rel="stylesheet" href="css/mock.css" />
+    <link rel="stylesheet" href="css/mock-menu.css" />
     <link rel="stylesheet" href="css/mock-page.css" />
     <link rel="stylesheet" href="css/more.css" />
     <link rel="stylesheet" href="css/stakes.css" />
@@ -51,6 +53,11 @@
     <script>
       // Firefox's visitors get its button first (base.css).
       if (navigator.userAgent.includes('Firefox')) document.documentElement.dataset.browser = 'firefox';
+      // The scheme picked last, before the page paints (demo/scheme.ts).
+      try {
+        if (localStorage.getItem('lichess-neo-site-scheme') === 'light')
+          document.documentElement.dataset.scheme = 'light';
+      } catch {}
       // The hero waits for its entrance (demo/motion/entrance.ts, hero.css).
       document.documentElement.dataset.motion = '';
     </script>
@@ -63,12 +70,16 @@
           ><img src="img/icon.png" alt="" width="28" height="28" />Lichess Neo</a
         >
         <nav class="links">
+          <a href="#pages">Pages</a>
           <a href="#review">Review</a>
-          <a href="#yours"><span>Make it yours</span></a>
+          <a href="#yours">Personalize</a>
           <a href="#more">More</a>
-          <a href="#coaches">Coach</a>
+          <a href="#coaches">Coaches</a>
         </nav>
         <div class="nav-end">
+          <button class="scheme-switch" type="button" aria-label="Light or dark">
+            <span class="icon i-sun-03"></span><span class="icon i-moon-02"></span>
+          </button>
           <a class="star-link" href="https://github.com/theophile-wallez/LichessNeo"
             ><span class="icon i-github"></span><span>Star on GitHub</span
             ><span class="star-link__count"><span class="icon i-star"></span><b></b></span
@@ -126,10 +137,7 @@
 
         <div class="wrap demo-stage">
           <div class="demo" id="demo" data-playing="true" tabindex="-1">
-            <div class="demo-chrome">
-              <span class="demo-lights"></span>
-              <span class="demo-url">lichess.org<b>/opera1858</b></span>
-            </div>
+            <nav class="demo-rail menu menu--named" aria-label="Lichess’s menu"></nav>
             <div class="demo-app">
               <div class="demo-play">
                 <div class="demo-player" data-player="black"></div>
@@ -239,28 +247,8 @@
               </button>
             </div>
             <div class="picker" role="group" aria-label="Pieces">
-              <span class="picker__label"><span>Pieces</span></span>
-              <button type="button" data-pieces="cburnett" aria-pressed="true">
-                <img src="pieces/cburnett/wN.svg" alt="Lichess" width="40" height="40" />
-              </button>
-              <button type="button" data-pieces="mochi" aria-pressed="false">
-                <img src="img/pieces/mochi/wN.webp" alt="Mochi" width="40" height="40" />
-              </button>
-              <button type="button" data-pieces="mellow" aria-pressed="false">
-                <img src="img/pieces/mellow/wN.webp" alt="Mellow" width="40" height="40" />
-              </button>
-              <button type="button" data-pieces="loop" aria-pressed="false">
-                <img src="img/pieces/loop/wN.webp" alt="Loop" width="40" height="40" />
-              </button>
-              <button type="button" data-pieces="poppy" aria-pressed="false">
-                <img src="img/pieces/poppy/wN.webp" alt="Poppy" width="40" height="40" />
-              </button>
-              <button type="button" data-pieces="fold" aria-pressed="false">
-                <img src="img/pieces/fold/wN.webp" alt="Fold" width="40" height="40" />
-              </button>
-              <button type="button" data-pieces="bitty" aria-pressed="false">
-                <img src="img/pieces/bitty/wN.webp" alt="Bitty" width="40" height="40" />
-              </button>
+              <span class="picker__label">Pieces</span>
+              <span class="picker__buttons" data-picks="pieces"></span>
             </div>
             <div class="picker" role="group" aria-label="Board">
               <span class="picker__label">Board</span>
@@ -388,12 +376,28 @@
 
       <section class="yours" id="yours">
         <div class="wrap">
-          <h2>Make it yours</h2>
+          <h2 aria-label="Personalize your theme, board, layout and pieces">
+            Personalize your
+            <span class="word-cycle" aria-hidden="true"
+              ><span>theme</span><span>board</span><span>layout</span><span>pieces</span></span
+            >
+          </h2>
           <p class="lead">
-            Pick a color theme, a board and where the menu goes. This page follows along, as Lichess
-            would.
+            Pick a built-in theme, board, layout and piece set, or make your own in your colors. You
+            can even import your own
+            <a class="lead-chip" href="#packs"><span class="icon i-package-open"></span>packs</a>
+            from GitHub!
           </p>
           <div class="yours-pickers">
+            <div class="picker picker--named" role="group" aria-label="Mode">
+              <span class="picker__label">Mode</span>
+              <button type="button" data-scheme-pick="dark" aria-pressed="true">
+                <span class="icon i-moon-02"></span><span>Dark</span>
+              </button>
+              <button type="button" data-scheme-pick="light" aria-pressed="false">
+                <span class="icon i-sun-03"></span><span>Light</span>
+              </button>
+            </div>
             <div class="picker" role="group" aria-label="Theme">
               <span class="picker__label">Theme</span>
               <span class="picker__buttons picker__buttons--swatches" data-picks="theme"></span>
@@ -402,13 +406,17 @@
               <span class="picker__label">Board</span>
               <span class="picker__buttons" data-picks="board"></span>
             </div>
-            <div class="picker picker--layout" role="group" aria-label="Layout">
+            <div class="picker" role="group" aria-label="Pieces">
+              <span class="picker__label">Pieces</span>
+              <span class="picker__buttons" data-picks="pieces"></span>
+            </div>
+            <div class="picker picker--named" role="group" aria-label="Layout">
               <span class="picker__label">Layout</span>
               <span class="picker__buttons" data-picks="layout"></span>
             </div>
           </div>
           <div class="mock-stage">
-            <div class="mock" data-shape="rail" aria-hidden="true"></div>
+            <div class="mock" data-shape="rail"></div>
           </div>
         </div>
       </section>
@@ -438,32 +446,65 @@
               <div class="convert">
                 <div class="convert__speeds" role="group" aria-label="Speed">
                   <i class="convert__pill"></i>
-                  <button type="button" data-speed="bullet" aria-pressed="false">Bullet</button>
-                  <button type="button" data-speed="blitz" aria-pressed="true">Blitz</button>
-                  <button type="button" data-speed="rapid" aria-pressed="false">Rapid</button>
+                  <button type="button" data-speed="bullet" aria-pressed="false">
+                    <i class="mode-glyph" data-mode="bullet"></i>Bullet
+                  </button>
+                  <button type="button" data-speed="blitz" aria-pressed="true">
+                    <i class="mode-glyph" data-mode="blitz"></i>Blitz
+                  </button>
+                  <button type="button" data-speed="rapid" aria-pressed="false">
+                    <i class="mode-glyph" data-mode="rapid"></i>Rapid
+                  </button>
                   <button type="button" data-speed="classical" aria-pressed="false">
-                    Classical
+                    <i class="mode-glyph" data-mode="classical"></i>Classical
                   </button>
                 </div>
-                <div class="convert__numbers">
-                  <p><span>On Lichess</span><b data-convert="lichess"></b></p>
-                  <span class="icon i-arrow-right-01"></span>
-                  <p>
-                    <span>On Chess.com</span><b data-convert="chesscom"></b
-                    ><small data-convert="spread"></small>
+                <div class="convert__scales">
+                  <div class="convert__track">
+                    <svg
+                      class="convert__link"
+                      viewBox="0 0 100 100"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      <path />
+                    </svg>
+                    <div class="convert__ruler convert__ruler--lichess">
+                      <span class="convert__ticks"></span>
+                      <input
+                        type="range"
+                        min="800"
+                        max="2800"
+                        step="10"
+                        value="1500"
+                        aria-label="Lichess Elo"
+                      />
+                    </div>
+                    <div class="convert__ruler convert__ruler--chesscom">
+                      <span class="convert__ticks"></span
+                      ><svg
+                        class="convert__bell"
+                        viewBox="0 0 100 24"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <path class="convert__bell-whole" />
+                        <path class="convert__bell-middle" /></svg
+                      ><i class="convert__dot"></i>
+                    </div>
+                  </div>
+                  <p class="convert__value">
+                    <span>On Lichess</span><b data-convert="lichess"></b>
                   </p>
+                  <p class="convert__value convert__value--chesscom">
+                    <span>On Chess.com</span><b data-convert="chesscom"></b
+                    ><small><b data-convert="low"></b> to <b data-convert="high"></b></small>
+                  </p>
+                  <div class="convert__axis" aria-hidden="true"></div>
                 </div>
-                <input
-                  type="range"
-                  min="800"
-                  max="2800"
-                  step="10"
-                  value="1500"
-                  aria-label="Lichess Elo"
-                />
               </div>
             </article>
-            <article class="tile tile--packs">
+            <article class="tile tile--packs" id="packs">
               <span class="tile__icon"><span class="icon i-package-open"></span></span>
               <h3>Packs from GitHub</h3>
               <p>
@@ -510,12 +551,22 @@
             <article class="tile tile--sounds">
               <span class="tile__icon"><span class="icon i-volume-high"></span></span>
               <h3>Choose how moves sound</h3>
-              <p>Two sets of our own, Lichess’s, or the sounds of a pack.</p>
-              <ul class="sound-sets" aria-hidden="true">
-                <li><b>Boxwood</b><span>Real wooden pieces, recorded</span></li>
-                <li><b>Ascent</b><span>A different sound for each piece</span></li>
-                <li><b>Lichess</b><span>The sounds you know</span></li>
-                <li><b>A pack’s</b><span>The sounds you import</span></li>
+              <p>Two sets of our own, all of Lichess’s, or a pack’s.</p>
+              <ul class="sound-sets">
+                <li>
+                  <b>Boxwood</b><span>Real wooden pieces, recorded</span
+                  ><button type="button" data-sound-set="boxwood" aria-label="Play Boxwood">
+                    <span class="icon i-play"></span><span class="icon i-pause"></span>
+                  </button>
+                </li>
+                <li>
+                  <b>Ascent</b><span>A different sound for each piece</span
+                  ><button type="button" data-sound-set="ascent" aria-label="Play Ascent">
+                    <span class="icon i-play"></span><span class="icon i-pause"></span>
+                  </button>
+                </li>
+                <li><b>Lichess</b><span>All of Lichess’s sound sets</span></li>
+                <li><b>A pack’s</b><span>Your own, from GitHub</span></li>
               </ul>
             </article>
             <article class="tile tile--stakes">
@@ -537,8 +588,8 @@
         <div class="wrap">
           <h2>A coach by your side</h2>
           <p class="lead">
-            Twenty-six of them, in 3D, from a fennec to a dragon. Yours reviews your games, cheers
-            you on in puzzles and reads you the lessons’ goals. It can be your avatar too.
+            Pick a coach you like, from a fennec to a dragon. It’ll go over your games with you,
+            cheer you on in puzzles and explain what each lesson is for.
           </p>
         </div>
         <div class="wrap crowd" aria-hidden="true">

@@ -1,0 +1,241 @@
+/* The little Lichess's menu in each shape (demo/layout.ts), after the extension's
+   styles/sidebar: flyouts beside the sidebar and the rail, under the header's bar;
+   the unfolded sidebar's sections folding open under their rows instead; the toggle
+   that folds either sidebar to its icons. A 1440px window's pixels, in cqw. */
+
+.mock .menu {
+  --u: calc(100cqw / 1440);
+}
+
+.mock-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25cqw;
+}
+
+.mock .menu-link {
+  gap: 0.6cqw;
+  padding: 0.45cqw 0.5cqw;
+  border-radius: 0.55cqw;
+  font-weight: 500;
+}
+
+.mock .menu-link img {
+  width: 1.45cqw;
+  height: 1.45cqw;
+}
+
+/* ---- the toggle, beside the logo (styles/sidebar/collapsed.css) ---- */
+
+.menu-toggle {
+  position: absolute;
+  top: 1.1cqw;
+  right: 0.55cqw;
+  display: none;
+  place-items: center;
+  width: 1.8cqw;
+  height: 1.8cqw;
+  padding: 0;
+  border: 0;
+  border-radius: 0.42cqw;
+  background: none;
+  color: var(--dim);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    top 0.28s var(--ease-out),
+    right 0.28s var(--ease-out);
+}
+
+.menu-toggle:hover {
+  background: color-mix(in srgb, var(--glow) 5%, transparent);
+  color: var(--text);
+}
+
+.menu-toggle .icon {
+  width: 1.1cqw;
+  height: 1.1cqw;
+}
+
+:is([data-shape='sidebar'], [data-shape='unfolded']) .menu-toggle {
+  display: grid;
+}
+
+/* The logo's row leaves it its room. */
+:is([data-shape='sidebar'], [data-shape='unfolded']) .mock-logo {
+  margin-inline-end: 2.8cqw;
+}
+
+/* ---- folded to its icons: the labels go see-through and are cut ---- */
+
+[data-folded] .mock-logo {
+  margin-inline-end: 0;
+}
+
+/* Under the logo. */
+[data-folded] .menu-toggle {
+  top: 3.6cqw;
+  right: 1.05cqw;
+}
+
+[data-folded] .mock-sections {
+  margin-top: 2.5cqw;
+}
+
+[data-folded] .menu-link {
+  padding-inline: 0.62cqw;
+  color: transparent;
+}
+
+[data-folded] .menu-section:is(:hover, .menu-section--on) > .menu-link {
+  color: transparent;
+}
+
+[data-moving] .menu-link {
+  transition:
+    background-color 0.15s,
+    color 0.2s;
+}
+
+/* Donate has no flyout: its name shows beside it, in the flyouts' look. */
+[data-folded] .menu-pages:empty {
+  top: 50%;
+  left: calc(100% + 0.55cqw);
+  min-width: 0;
+  padding: 0.5cqw 0.7cqw;
+  translate: 0 -50%;
+}
+
+[data-folded] .menu-section:hover > .menu-pages:empty {
+  visibility: visible;
+}
+
+[data-folded] .menu-pages:empty::before {
+  padding: 0;
+  color: var(--dim);
+  font-size: 0.9cqw;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ---- the rail: each picture over its label ---- */
+
+[data-shape='rail'] .menu-link {
+  flex-direction: column;
+  gap: 0.3cqw;
+  padding: 0.55cqw 0.2cqw;
+  font-size: 0.72cqw;
+  font-weight: 600;
+}
+
+[data-shape='rail'] .menu-link img {
+  width: 1.75cqw;
+  height: 1.75cqw;
+}
+
+/* ---- the header: the sections across the bar, their flyouts hanging from it ---- */
+
+[data-shape='header'] .mock-sections {
+  flex-direction: row;
+  align-self: stretch;
+  gap: 0.2cqw;
+}
+
+[data-shape='header'] .menu-section {
+  display: flex;
+  align-items: center;
+}
+
+[data-shape='header'] .menu-pages {
+  top: calc(100% - 6 * var(--u));
+  left: 0;
+}
+
+/* ---- unfolded: a section's row folds its pages open under it, on a guide line ---- */
+
+[data-shape='unfolded']:not([data-folded]) .mock-sections {
+  min-height: 0;
+  overflow: hidden auto;
+  scrollbar-width: none;
+}
+
+[data-shape='unfolded']:not([data-folded]) .menu-chevron {
+  display: block;
+  flex: none;
+  width: 1.1cqw;
+  height: 1.1cqw;
+  margin-left: auto;
+  color: var(--dim);
+  transition: rotate 0.3s var(--ease-out);
+}
+
+[data-shape='unfolded']:not([data-folded]) .menu-pages {
+  position: static;
+  height: 0;
+  min-width: 0;
+  margin: 0 0.55cqw 0 1.8cqw;
+  padding: 0 0 0 0.7cqw;
+  overflow: hidden;
+  opacity: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: inset 1px 0 var(--line-strong);
+  visibility: hidden;
+  interpolate-size: allow-keywords;
+}
+
+/* Open: as folded open, or the page's own section until the first fold. */
+[data-shape='unfolded']:not([data-folded])
+  .menu-section:is([data-open='open'], .menu-section--on:not([data-open]))
+  > .menu-pages {
+  height: auto;
+  margin: 0.14cqw 0.55cqw 0.42cqw 1.8cqw;
+  opacity: 1;
+  visibility: visible;
+}
+
+[data-shape='unfolded']:not([data-folded])
+  .menu-section:is([data-open='open'], .menu-section--on:not([data-open]))
+  .menu-chevron {
+  rotate: 180deg;
+}
+
+/* The pages drop in a little as they show. */
+[data-shape='unfolded']:not([data-folded]) .menu-page {
+  height: 2.1cqw;
+  font-size: 0.9cqw;
+  translate: 0 -0.42cqw;
+}
+
+[data-shape='unfolded']:not([data-folded])
+  .menu-section:is([data-open='open'], .menu-section--on:not([data-open]))
+  .menu-page {
+  translate: none;
+}
+
+/* Only a fold animates (demo/menu-folds.ts), not a change of layout. */
+[data-folding] .menu-pages {
+  transition:
+    height 0.3s var(--ease-out),
+    margin 0.3s var(--ease-out),
+    opacity 0.2s,
+    visibility 0s 0.3s;
+}
+
+[data-folding]
+  .menu-section:is([data-open='open'], .menu-section--on:not([data-open]))
+  > .menu-pages {
+  transition:
+    height 0.32s var(--ease-out),
+    margin 0.32s var(--ease-out),
+    opacity 0.25s,
+    visibility 0s;
+}
+
+[data-folding] .menu-page {
+  transition:
+    translate 0.32s var(--ease-out),
+    background-color 0.15s;
+}

@@ -23,7 +23,7 @@
   margin-top: 0;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #ffffff1f transparent;
+  scrollbar-color: color-mix(in srgb, var(--glow) 12.2%, transparent) transparent;
 }
 
 /* ---- the summary's buttons (styles/review/bubble.css) ---- */
@@ -65,7 +65,7 @@
   grid-template-columns: 1fr 1fr;
   padding: 3px;
   border-radius: 8px;
-  background: #0000004d;
+  background: color-mix(in srgb, var(--shadow) 30%, transparent);
   color: var(--dim);
   font-size: 13px;
   font-weight: 600;
@@ -97,7 +97,7 @@
   width: 40px;
   height: 22px;
   border-radius: 999px;
-  background: #ffffff1f;
+  background: color-mix(in srgb, var(--glow) 12.2%, transparent);
 }
 
 .demo-ceval__toggle::after {

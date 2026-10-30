@@ -1,0 +1,115 @@
+/* Lichess's menu as the extension draws it (demo/menu.ts, after
+   src/styles/sidebar/nav.css): a section's pages in a flyout card that opens on
+   hover, overlapping the menu's edge so the pointer never leaves the section on
+   its way over. Sized in `--u`, a pixel of the window it's drawn in: the hero's
+   rail is real size, the little Lichess a 1440px window scaled to the page. */
+
+.menu {
+  --u: 1px;
+}
+
+.menu-section {
+  position: relative;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  color: var(--dim);
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.menu-link img {
+  flex: none;
+}
+
+.menu-section:hover > .menu-link {
+  background: color-mix(in srgb, var(--glow) 5%, transparent);
+  color: var(--text);
+}
+
+/* The section of the page on show. */
+.menu-section--on > .menu-link {
+  background: color-mix(in srgb, var(--glow) 8%, transparent);
+  color: var(--text);
+}
+
+.menu-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.menu-chevron {
+  display: none;
+}
+
+.menu-pages {
+  position: absolute;
+  top: calc(-4 * var(--u));
+  left: calc(100% - 4 * var(--u));
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  min-width: calc(230 * var(--u));
+  padding: calc(5 * var(--u));
+  border-radius: calc(10 * var(--u));
+  background: var(--panel-raised);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 calc(12 * var(--u)) calc(32 * var(--u)) color-mix(in srgb, var(--shadow) 50%, transparent);
+  visibility: hidden;
+}
+
+/* Low, so a shape that folds the pages into the menu wins over it (mock.css). The keyboard
+   opens it too. */
+:where(.menu-section:hover, .menu-section:has(> .menu-link:focus-visible))
+  > .menu-pages:not(:empty) {
+  visibility: visible;
+}
+
+.menu-page {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: calc(10 * var(--u));
+  height: calc(32 * var(--u));
+  padding: 0 calc(8 * var(--u));
+  border-radius: calc(6 * var(--u));
+  color: var(--dim);
+  font-size: calc(13.5 * var(--u));
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+}
+
+.menu-page img {
+  flex: none;
+  width: calc(18 * var(--u));
+  height: calc(18 * var(--u));
+}
+
+.menu-page:hover,
+.menu-page--on {
+  background: color-mix(in srgb, var(--glow) 6%, transparent);
+  color: var(--text);
+}
+
+/* Folded to its icons, nothing else names a section: its flyout heads with its name
+   (styles/sidebar/collapsed.css). */
+.menu--named .menu-pages::before {
+  content: attr(data-label);
+  padding: calc(6 * var(--u)) calc(8 * var(--u)) calc(4 * var(--u));
+  color: var(--faint);
+  font-size: calc(11.5 * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

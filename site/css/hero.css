@@ -21,7 +21,11 @@ section h2 + .lead {
   inset: 0 0 auto;
   z-index: -1;
   height: 760px;
-  background: repeating-conic-gradient(#ffffff06 0 25%, transparent 0 50%) 0 0 / 96px 96px;
+  background: repeating-conic-gradient(
+      color-mix(in srgb, var(--glow) 2.4%, transparent) 0 25%,
+      transparent 0 50%
+    )
+    0 0 / 96px 96px;
   mask: radial-gradient(ellipse 60% 70% at 30% 0%, #000, transparent);
   pointer-events: none;
 }
@@ -49,12 +53,12 @@ html[data-motion] :is(.hero-words > *, .hero .demo-stage) {
   }
 }
 
-/* The window fits the screen's height: its board takes what the bars and the page's own
-   header leave, and the window narrows with it, so its panel keeps its width. */
+/* The window fits the screen's height: its board takes what the players' bars and the
+   page's own header leave, and the window narrows with it, so its panel keeps its width. */
 .hero .demo-stage {
-  --board-fit: calc(100dvh - 300px);
+  --board-fit: calc(100dvh - 260px);
 
-  width: min(1480px, 100% - 48px, var(--board-fit) + 660px);
+  width: min(1480px, 100% - 48px, var(--board-fit) + 660px + var(--rail-w));
 }
 
 /* The headline's words come in one by one, each with the headline's gradient. */
@@ -102,6 +106,8 @@ html[data-motion] :is(.hero-words > *, .hero .demo-stage) {
 .bento {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
+  /* The graph's row is as tall as the graph: the coach's cards take what the summary leaves. */
+  grid-template-rows: auto 1fr;
   gap: 14px;
   margin-top: clamp(36px, 5vw, 56px);
 }
@@ -115,12 +121,12 @@ html[data-motion] :is(.hero-words > *, .hero .demo-stage) {
   padding: 26px 28px;
   border-radius: 22px;
   background: linear-gradient(
-    oklch(18.5% var(--tint) var(--hue)),
-    oklch(16.5% var(--tint) var(--hue))
+    oklch(calc(var(--l0) + 18.5% * var(--lk)) var(--tint) var(--hue)),
+    oklch(calc(var(--l0) + 16.5% * var(--lk)) var(--tint) var(--hue))
   );
   box-shadow:
     inset 0 0 0 1px var(--line),
-    inset 0 1px #ffffff0a;
+    inset 0 1px color-mix(in srgb, var(--glow) 3.9%, transparent);
 }
 
 .tile p {
@@ -135,7 +141,7 @@ html[data-motion] :is(.hero-words > *, .hero .demo-stage) {
   border-radius: 12px;
   box-shadow:
     0 0 0 1px var(--line-strong),
-    0 18px 40px #00000080;
+    0 18px 40px color-mix(in srgb, var(--shadow) 50.2%, transparent);
 }
 
 .tile--summary {
@@ -181,10 +187,14 @@ html[data-motion] :is(.hero-words > *, .hero .demo-stage) {
   padding: 12px 14px 12px 124px;
   border-radius: 14px;
   background: linear-gradient(
-    oklch(20.5% var(--tint) var(--hue)),
-    oklch(18.5% var(--tint) var(--hue))
+    oklch(calc(var(--l0) + 20.5% * var(--lk)) var(--tint) var(--hue)),
+    oklch(calc(var(--l0) + 18.5% * var(--lk)) var(--tint) var(--hue))
   );
   box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.mini-card[data-entering] {
+  z-index: -1;
 }
 
 .mini-card__coach {
@@ -198,7 +208,9 @@ html[data-motion] :is(.hero-words > *, .hero .demo-stage) {
 .mini-card__coach::before {
   content: '';
   position: absolute;
-  inset: 0 -25%;
+  /* Its still (site/coaches) has room above the bust's frame, for a tall coach's top. */
+  inset: auto -25% 0;
+  height: calc(100% * 150 / 114);
   background: var(--still) bottom center / auto 100% no-repeat;
 }
 

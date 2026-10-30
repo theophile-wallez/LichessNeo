@@ -3,6 +3,9 @@
    panel on the right (demo-panel.css). */
 
 .demo-stage {
+  /* The extension's rail, the window's menu (demo/layout.ts). */
+  --rail-w: 76px;
+
   position: relative;
   container-type: inline-size;
   margin-top: clamp(48px, 7vw, 88px);
@@ -24,25 +27,30 @@
 }
 
 .demo {
-  --board: clamp(300px, min(100cqw - 520px, var(--board-fit, 760px)), 760px);
+  --board: clamp(300px, min(100cqw - 520px - var(--rail-w), var(--board-fit, 760px)), 760px);
   --eval-w: 16px;
 
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  /* Its own stacking context: the rail's flyouts stay under the pickers that float over it. */
+  isolation: isolate;
   overflow: hidden;
   border-radius: 16px;
-  background: oklch(16.5% var(--tint) var(--hue));
+  background: oklch(calc(var(--l0) + 16.5% * var(--lk)) var(--tint) var(--hue));
   box-shadow:
     0 0 0 1px var(--line-strong),
-    0 40px 100px #000000a6,
-    0 12px 32px #00000080;
+    0 40px 100px color-mix(in srgb, var(--shadow) 65.1%, transparent),
+    0 12px 32px color-mix(in srgb, var(--shadow) 50.2%, transparent);
   outline: none;
 }
 
 .demo-chrome {
   position: relative;
   display: grid;
+  grid-column: 1 / -1;
   place-items: center;
   height: 40px;
-  background: oklch(18% var(--tint) var(--hue));
+  background: oklch(calc(var(--l0) + 18% * var(--lk)) var(--tint) var(--hue));
   box-shadow: inset 0 -1px var(--line);
 }
 
@@ -72,7 +80,58 @@
   font-weight: 500;
 }
 
+/* ---- the rail: the site's menu, as the extension folds it (menu.css) ---- */
+
+.demo-rail {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 0;
+  padding: 14px 7px;
+  background: oklch(calc(var(--l0) + 18% * var(--lk)) var(--tint) var(--hue));
+  box-shadow: inset -1px 0 var(--line);
+}
+
+.demo-rail__logo.mock-horse {
+  flex: none;
+  align-self: center;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+/* Each as tall as there's room for, up to 58px. */
+.demo-rail .menu-section {
+  display: flex;
+  flex: 0 1 58px;
+  min-height: 0;
+}
+
+.demo-rail .menu-link {
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 10px;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.demo-rail .menu-link img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Its label under its picture already. */
+.demo-rail .menu-pages:empty {
+  display: none;
+}
+
 .demo-app {
+  /* In its column also when the rail is hidden, at 0px wide. */
+  grid-column: 2;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 20px;
