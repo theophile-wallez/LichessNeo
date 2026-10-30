@@ -159,6 +159,33 @@ describe('createShapeDrawer', () => {
     expect(marks()).not.toContain('ln-ext-drawing');
   });
 
+  it('leaves the shape being dragged to Lichess until it’s let go', () => {
+    const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
+    // A right-button drag from e2 draws a circle there first, then the arrow once over e4.
+    const circle = {
+      tag: 'circle' as const,
+      attrs: { stroke: '#15781B', cx: '0.5', cy: '2.5', r: '0.47' },
+    };
+    const arrow = {
+      tag: 'line' as const,
+      attrs: { stroke: '#15781B', x1: '0.5', y1: '2.5', x2: '0.5', y2: '0.5' },
+    };
+    for (const shape of [circle, arrow]) {
+      renderBoard({
+        orientation: 'white',
+        shapes: [{ ...shape, hash: '800,800,true,e2,e4,green' }],
+      });
+      draw();
+      expect(marks() + layer()).not.toMatch(/rect|polygon/);
+      renderBoard({
+        orientation: 'white',
+        shapes: [{ ...shape, hash: '800,800,false,e2,e4,green' }],
+      });
+      draw();
+      expect(marks() + layer()).toMatch(/rect|polygon/);
+    }
+  });
+
   it('draws Lichess’s variation arrows under the pieces in our colors, but not in the review', () => {
     const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
     renderBoard({ orientation: 'white' });

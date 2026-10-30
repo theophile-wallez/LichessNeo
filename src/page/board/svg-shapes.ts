@@ -83,14 +83,15 @@ export function readShapes(
   const center = centerIn(svg);
   const isEngineShape = (element: Element): boolean => reviewing && opacityOf(element) < 0.8;
 
+  // Skip the shape being dragged: Lichess draws it as you drag, we wait for the release.
+  // Its first one is a circle on the square the drag started from.
   const fills = queryAll(svg, 'circle', Element)
-    .filter(circle => !isEngineShape(circle))
+    .filter(circle => !isBeingDrawn(circle) && !isEngineShape(circle))
     .map(circle => ({
       at: center(circle, 'cx', 'cy'),
       color: squareColor(circle.getAttribute('stroke')),
       opacity: opacityOf(circle),
     }));
-  // Skip the arrow being dragged: Lichess draws it as you drag, we wait for the release.
   const arrows = queryAll(svg, 'line', Element)
     .filter(line => !isBeingDrawn(line) && !isEngineShape(line))
     .map(line => ({
