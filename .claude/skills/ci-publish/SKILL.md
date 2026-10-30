@@ -6,8 +6,9 @@ allowed-tools: Bash(git *), Bash(gh *), Bash(node scripts/version.ts *)
 ---
 
 A `store-<version>` tag on `origin/main`'s last commit runs the Release
-workflow in its store mode: the CI, then the store zip sent to the Chrome
-Web Store and the Firefox zip, with its sources, to Firefox Add-ons. Each
+workflow in its store mode: the CI, then the version's GitHub release, the
+store zip sent to the Chrome Web Store and the Firefox zip, with its
+sources, to Firefox Add-ons. Each
 store reviews it before it goes live. A version still in review on the
 Chrome Web Store is cancelled, and the new one takes its place. Arguments:
 `$ARGUMENTS`; refuse any.
@@ -34,6 +35,8 @@ get-url origin`): the checkout has more than one remote.
    CI fails, nothing was sent: name the failing tests (`gh run view <id>
    --log-failed`) and what they say, then delete the tag (`git push origin
    :store-$v`, `git tag -d store-$v`): it would say this version was sent. If
-   `store` or `amo` fails, give its error line. If both pass, say each
-   store has the version in review and, from the `store` job's `Cancelled
-   the review` line, which version it replaced, if any.
+   `release`, `store` or `amo` fails, give its error line: none holds the
+   others up. If the release passed, give its URL (`gh release view
+   "v$v" --json url`). If both stores passed, say each has the version in
+   review and, from the `store` job's `Cancelled the review` line, which
+   version it replaced, if any.

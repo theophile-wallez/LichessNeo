@@ -7,12 +7,13 @@
 # nobody changes it by hand.
 #
 # A `store-<version>` tag on a commit of main (`store-0.1.295`: the version
-# this commit gets) packages that commit the same way and sends it, for
-# review, to both stores: the store zip to the Chrome Web Store, the Firefox
-# zip and its sources to Firefox Add-ons (AMO). Each store has its own job:
-# one failing doesn't hold the other. `/ci-publish` in Claude Code pushes the
-# tag. The Chrome Web Store reviews one version at a time: a version still in
-# review there is cancelled, and this one takes its place.
+# this commit gets) packages that commit the same way, makes its release too,
+# and sends it, for review, to both stores: the store zip to the Chrome Web
+# Store, the Firefox zip and its sources to Firefox Add-ons (AMO). The release
+# and each store have their own job: one failing doesn't hold the others.
+# `/ci-publish` in Claude Code pushes the tag. The Chrome Web Store reviews one
+# version at a time: a version still in review there is cancelled, and this one
+# takes its place.
 name: Release
 
 on:
@@ -72,10 +73,9 @@ jobs:
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
-  # A tag only goes to the stores: a run started on main makes the release.
+  # Every version sent to the stores has its release, so a run of a tag makes it too.
   release:
     needs: version
-    if: github.ref_type != 'tag'
     runs-on: ubuntu-latest
     permissions:
       contents: write

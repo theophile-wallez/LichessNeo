@@ -836,6 +836,6 @@ hand on `main`) runs the CI, then makes a GitHub release with its zips, but
 doesn't reach the stores. Start it only when the user asks. A version goes
 to the stores only when the user asks too, with `/ci-publish`
 (`.claude/skills/ci-publish`): it tags `main` `store-<version>` and follows
-the run: the release workflow sends that commit to the Chrome Web Store, where
-it takes the place of a version still in review, and to Firefox Add-ons, each
-live once reviewed. The listings are edited by hand (`store/listing.md`).
+the run: the release workflow makes that commit's GitHub release and sends it
+to the Chrome Web Store, where it takes the place of a version still in
+review, and to Firefox Add-ons, each live once reviewed. The listings are edited by hand (`store/listing.md`).
