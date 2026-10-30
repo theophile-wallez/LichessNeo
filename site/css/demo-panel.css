@@ -127,7 +127,7 @@
 /* The coach stands on the card's bottom edge, its words on its right. */
 .demo-card {
   position: relative;
-  min-height: 156px;
+  min-height: 140px;
   overflow: hidden;
   padding: 14px 16px 16px 162px;
   border-radius: 14px;

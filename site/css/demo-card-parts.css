@@ -119,7 +119,7 @@
 /* On a desktop the card keeps one height, as the review's: words that don't fit scroll in
    it, and the move list keeps its room. */
 .demo-card {
-  height: 172px;
+  height: 140px;
 }
 
 .demo-say {

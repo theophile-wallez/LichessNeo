@@ -4,6 +4,8 @@
 /* ---- the coaches ---- */
 
 .coaches {
+  /* The crowd's glow reaches past a phone's sides. */
+  overflow-x: clip;
   padding-top: clamp(112px, 14vw, 180px);
 }
 
@@ -138,38 +140,6 @@
 
 .layout-icon--header {
   grid-template: 'nav nav' 3px 'a b' 1fr / 2fr 1fr;
-}
-
-/* ---- what holds ---- */
-
-.facts {
-  padding-top: clamp(96px, 12vw, 160px);
-}
-
-.facts dl {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
-  padding-top: 32px;
-  box-shadow: 0 -1px var(--line);
-}
-
-.facts dt {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 590;
-}
-
-.facts dt .icon {
-  color: var(--accent-light);
-}
-
-.facts dd {
-  margin-top: 6px;
-  color: var(--dim);
-  font-size: 15px;
-  line-height: 1.5;
 }
 
 /* ---- the last call ---- */

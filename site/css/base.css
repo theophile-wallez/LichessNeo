@@ -116,6 +116,12 @@ button {
   margin-inline: auto;
 }
 
+@media (max-width: 520px) {
+  .wrap {
+    width: calc(100% - 32px);
+  }
+}
+
 /* ---- type ---- */
 
 h1,
@@ -128,7 +134,9 @@ h1 {
   font-size: clamp(44px, 6.6vw, 84px);
   line-height: 1;
   letter-spacing: -0.032em;
-  background: linear-gradient(180deg, #fff 35%, oklch(76% calc(var(--tint) * 3) var(--hue)));
+  --headline: linear-gradient(180deg, #fff 35%, oklch(76% calc(var(--tint) * 3) var(--hue)));
+
+  background: var(--headline);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -244,110 +252,23 @@ h3 {
   font-size: 14px;
 }
 
-/* The bar shows the visitor's own browser's button only. */
-.nav .firefox,
-[data-browser='firefox'] .nav .chrome {
-  display: none;
-}
-
-[data-browser='firefox'] .nav .firefox {
-  display: inline-flex;
-}
-
 .install {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-/* ---- the bar on top ---- */
-
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: color-mix(in srgb, var(--ink) 70%, transparent);
-  box-shadow: inset 0 -1px var(--line);
-  backdrop-filter: blur(16px) saturate(1.5);
+/* A look picked spreads from its button (demo/motion/reveal.ts): the page after
+   it in a growing circle over the page before, neither of them fading. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-.nav .wrap {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  height: 60px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  font-weight: 590;
-  letter-spacing: -0.012em;
-  text-decoration: none;
-}
-
-.brand img {
-  width: 28px;
-  height: 28px;
-}
-
-.links {
-  display: flex;
-  gap: 2px;
-  margin-inline: auto;
-}
-
-.links a,
-.ghost {
-  padding: 6px 12px;
-  border-radius: 8px;
-  color: var(--dim);
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  transition:
-    color 0.2s,
-    background-color 0.2s;
-}
-
-.links a:hover,
-.ghost:hover {
-  background: #ffffff0d;
-  color: var(--text);
-}
-
-.ghost {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-}
-
-.nav-end {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-@media (max-width: 860px) {
-  .links {
-    display: none;
-  }
-
-  .nav-end {
-    margin-left: auto;
-  }
-}
-
-@media (max-width: 520px) {
-  .wrap {
-    width: calc(100% - 32px);
-  }
-
-  .nav .button {
-    display: none !important;
-  }
+/* A rolling figure (demo/motion/flow.ts) takes the height of the text it replaces:
+   NumberFlow pads its digits twice above and below for their fade, which would make
+   the line taller once it rolls (a summary's card grew 16px). */
+number-flow {
+  margin-block: calc(-2 * round(nearest, calc(var(--number-flow-mask-height, 0.25em) / 2), 1px));
 }

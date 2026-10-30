@@ -8,9 +8,9 @@ import { positions } from './review.ts';
 // above (looks.css). The menu holds the sidebar's own pictures.
 
 export const LAYOUTS = [
+  { id: 'rail', name: 'Rail' },
   { id: 'sidebar', name: 'Sidebar' },
   { id: 'unfolded', name: 'Unfolded' },
-  { id: 'rail', name: 'Rail' },
   { id: 'header', name: 'Header' },
 ] as const;
 

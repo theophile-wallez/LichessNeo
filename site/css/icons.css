@@ -26,6 +26,10 @@
   --icon: url('../img/hugeicons/arrow-right-double.svg');
 }
 
+.i-chart-increase {
+  --icon: url('../img/hugeicons/chart-increase.svg');
+}
+
 .i-chess-pawn {
   --icon: url('../img/hugeicons/chess-pawn.svg');
 }
@@ -68,6 +72,10 @@
 
 .i-square-lock-02 {
   --icon: url('../img/hugeicons/square-lock-02.svg');
+}
+
+.i-star {
+  --icon: url('../img/hugeicons/star.svg');
 }
 
 .i-volume-high {

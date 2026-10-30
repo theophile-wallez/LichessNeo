@@ -1,6 +1,7 @@
 import { chesscomRating } from '#shared/chesscom-rating/convert.ts';
 import { queryAll } from '#shared/dom.ts';
 import type { Color } from '#shared/chess/types.ts';
+import { flowTo } from './motion/flow.ts';
 import { rateGame } from '#page/review/rating/rate-game.ts';
 import { moves, positions } from './review.ts';
 
@@ -29,5 +30,7 @@ export function playedLike(color: Color): { lichess: number; chesscom: number } 
 /** The bars' ratings as on Chess.com, or back as on Lichess. */
 export function showChesscom(on: boolean): void {
   for (const value of queryAll(document, '[data-chesscom]', HTMLElement))
-    value.textContent = (on ? value.dataset.chesscom : value.dataset.lichess) ?? '';
+    flowTo(value, Number(on ? value.dataset.chesscom : value.dataset.lichess), {
+      format: { useGrouping: false },
+    });
 }

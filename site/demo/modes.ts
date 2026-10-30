@@ -2,10 +2,12 @@ import { queryAll, queryOne } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { DemoCoach } from './coach.ts';
 import { endCardMarkup, lichessToolsMarkup } from './lichess-panel.ts';
+import { showPanel } from './motion/panel.ts';
+import { SlidingPill } from './motion/pill.ts';
 
 // The panel's three tabs, as the review's (page/review/view/mode-tabs.ts): the
 // summary, the move-by-move debrief and Lichess's own panel. The tab picked
-// carries a pill that slides to the next one picked (content/ui/tab-bars.ts);
+// carries a pill that slides to the next one picked (motion/pill.ts);
 // each mode shows its own parts of the panel (demo-modes.css).
 
 export type Mode = 'summary' | 'moves' | 'normal';
@@ -17,7 +19,7 @@ export const isMode = (value: string | undefined): value is Mode =>
 
 export class PanelModes {
   readonly #panel: HTMLElement;
-  readonly #tabs: HTMLElement | null;
+  readonly #pill: SlidingPill | null;
   #coach: number;
   // Lichess's panel, drawn the first time it's opened, with its own live coach.
   #endCoach: DemoCoach | null = null;
@@ -25,9 +27,8 @@ export class PanelModes {
   constructor(panel: HTMLElement, coach: number) {
     this.#panel = panel;
     this.#coach = coach;
-    this.#tabs = queryOne(panel, '.demo-tabs', HTMLElement);
-    // The pill follows its tab's box, which a resize changes.
-    if (this.#tabs) new ResizeObserver(() => this.#placePill()).observe(this.#tabs);
+    const tabs = queryOne(panel, '.demo-tabs', HTMLElement);
+    this.#pill = tabs && new SlidingPill(tabs, '[aria-selected=true]');
   }
 
   get mode(): Mode {
@@ -36,18 +37,13 @@ export class PanelModes {
   }
 
   set(mode: Mode): void {
+    const changed = this.#panel.dataset.mode !== mode;
     this.#panel.dataset.mode = mode;
     for (const tab of queryAll(this.#panel, '[role=tab]', HTMLElement))
       tab.setAttribute('aria-selected', String(tab.dataset.mode === mode));
-    this.#placePill();
+    this.#pill?.follow();
     if (mode === 'normal') this.#drawLichess();
-  }
-
-  #placePill(): void {
-    const tab = this.#tabs && queryOne(this.#tabs, '[aria-selected=true]', HTMLElement);
-    if (!this.#tabs || !tab) return;
-    this.#tabs.style.setProperty('--tab-x', `${tab.offsetLeft}px`);
-    this.#tabs.style.setProperty('--tab-w', `${tab.offsetWidth}px`);
+    if (changed) showPanel(this.#panel);
   }
 
   #drawLichess(): void {

@@ -9,6 +9,8 @@ section h2 + .lead {
 
 .hero {
   position: relative;
+  /* Lying back, the window is wider than the screen below the fold. */
+  overflow-x: clip;
   padding-top: clamp(56px, 8vw, 104px);
 }
 
@@ -34,52 +36,42 @@ section h2 + .lead {
   margin-top: 6px;
 }
 
-/* The page's one entrance: the words, then the window. */
-@keyframes rise {
-  from {
-    opacity: 0;
-    translate: 0 24px;
+/* The page's one entrance (demo/motion/entrance.ts) hides its parts until their
+   turn. Should the script not run, they show anyway after a moment. */
+html[data-motion] :is(.hero-words > *, .hero .demo-stage) {
+  opacity: 0;
+  animation: entrance-fallback 0s 2.6s forwards;
+}
+
+@keyframes entrance-fallback {
+  to {
+    opacity: 1;
   }
 }
 
-.hero-words > *,
+/* The window fits the screen's height: its board takes what the bars and the page's own
+   header leave, and the window narrows with it, so its panel keeps its width. */
 .hero .demo-stage {
-  animation: rise 0.9s var(--ease-out) both;
+  --board-fit: calc(100dvh - 300px);
+
+  width: min(1480px, 100% - 48px, var(--board-fit) + 660px);
 }
 
-.hero-words > :nth-child(3) {
-  animation-delay: 0.08s;
-}
-.hero-words > :nth-child(4) {
-  animation-delay: 0.16s;
-}
-.hero-words > :nth-child(5),
-.hero-words > :nth-child(6) {
-  animation-delay: 0.22s;
-}
-.hero .demo-stage {
-  width: min(1480px, 100% - 48px);
-  animation-delay: 0.3s;
-  animation-duration: 1.2s;
+/* The headline's words come in one by one, each with the headline's gradient. */
+.hero-word {
+  display: inline-block;
+  background: var(--headline);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
-/* The window lies back, and stands up as it scrolls into view. */
-@supports (animation-timeline: view()) {
-  .demo {
-    transform-origin: 50% 0;
-    animation: stand-up linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 45%;
-  }
+.hero h1:has(.hero-word) {
+  background: none;
+}
 
-  @keyframes stand-up {
-    from {
-      transform: rotateX(32deg) scale(0.86) translateY(-4%);
-    }
-    60% {
-      transform: rotateX(10deg) scale(0.96);
-    }
-  }
+/* The window lies back, larger, and stands up to its size as it scrolls into view. */
+.demo {
+  transform-origin: 50% 0;
 }
 
 /* ---- the statement ---- */
@@ -157,6 +149,7 @@ section h2 + .lead {
 
 .tile--retry {
   grid-column: 4 / 7;
+  grid-template-rows: auto auto minmax(390px, 1fr);
 }
 
 /* The graph, larger than the review's. */
@@ -166,15 +159,23 @@ section h2 + .lead {
   cursor: default;
 }
 
-/* The coach's cards, stacked, each coach standing on its card's edge. */
+/* The coach's cards, each coach standing on its card's edge, as a feed: new ones rise
+   at the bottom, old ones fade out at the top (demo/motion/feed.ts). */
 .tile-cards {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   gap: 10px;
+  /* As tall as the tile leaves it, whatever cards it holds. */
+  contain: size;
+  overflow: clip;
   margin-top: 14px;
+  mask: linear-gradient(transparent, #000 56px);
 }
 
 .mini-card {
   position: relative;
+  flex: none;
   min-height: 104px;
   overflow: hidden;
   padding: 12px 14px 12px 124px;

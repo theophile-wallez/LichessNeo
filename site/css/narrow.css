@@ -21,10 +21,6 @@
   .tile--packs {
     grid-column: 1 / -1;
   }
-
-  .facts dl {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 /* ---- phones ---- */
@@ -78,10 +74,6 @@
 
   .mock {
     width: 680px;
-  }
-
-  .facts dl {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .install {

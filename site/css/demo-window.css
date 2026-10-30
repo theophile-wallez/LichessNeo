@@ -24,7 +24,7 @@
 }
 
 .demo {
-  --board: clamp(300px, calc(100cqw - 520px), 760px);
+  --board: clamp(300px, min(100cqw - 520px, var(--board-fit, 760px)), 760px);
   --eval-w: 16px;
 
   overflow: hidden;

@@ -24,6 +24,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/icons.css" />
     <link rel="stylesheet" href="css/demo-window.css" />
     <link rel="stylesheet" href="css/demo-players.css" />
@@ -36,17 +37,22 @@
     <link rel="stylesheet" href="css/demo-controls.css" />
     <link rel="stylesheet" href="css/demo-narrow.css" />
     <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/compare.css" />
     <link rel="stylesheet" href="css/summary.css" />
     <link rel="stylesheet" href="css/summary-rows.css" />
     <link rel="stylesheet" href="css/sections.css" />
+    <link rel="stylesheet" href="css/facts.css" />
     <link rel="stylesheet" href="css/mock.css" />
     <link rel="stylesheet" href="css/mock-page.css" />
     <link rel="stylesheet" href="css/more.css" />
+    <link rel="stylesheet" href="css/stakes.css" />
     <link rel="stylesheet" href="css/convert.css" />
     <link rel="stylesheet" href="css/narrow.css" />
     <script>
       // Firefox's visitors get its button first (base.css).
       if (navigator.userAgent.includes('Firefox')) document.documentElement.dataset.browser = 'firefox';
+      // The hero waits for its entrance (demo/motion/entrance.ts, hero.css).
+      document.documentElement.dataset.motion = '';
     </script>
     <script type="module" src="demo.js"></script>
   </head>
@@ -58,13 +64,14 @@
         >
         <nav class="links">
           <a href="#review">Review</a>
-          <a href="#coaches">Coach</a>
           <a href="#yours"><span>Make it yours</span></a>
           <a href="#more">More</a>
+          <a href="#coaches">Coach</a>
         </nav>
         <div class="nav-end">
-          <a class="ghost" href="https://github.com/theophile-wallez/LichessNeo" aria-label="GitHub"
-            ><span class="icon i-github"></span
+          <a class="star-link" href="https://github.com/theophile-wallez/LichessNeo"
+            ><span class="icon i-github"></span><span>Star on GitHub</span
+            ><span class="star-link__count"><span class="icon i-star"></span><b></b></span
           ></a>
           <a
             class="button small chrome"
@@ -275,6 +282,73 @@
         </div>
       </section>
 
+      <section class="compare-section" id="pages">
+        <div class="wrap">
+          <h2>Every page, made modern</h2>
+          <p class="lead">
+            Not just the review: the home, your games, puzzles and profiles are drawn anew. Drag the
+            line to see Lichess as it was.
+          </p>
+          <div class="compare-pick">
+            <div class="demo-tabs compare-tabs" role="tablist" aria-label="Page">
+              <i class="demo-tabs__pill"></i>
+              <button type="button" role="tab" data-page="home" aria-selected="true">Home</button>
+              <button type="button" role="tab" data-page="game" aria-selected="false">Game</button>
+              <button type="button" role="tab" data-page="puzzle" aria-selected="false">
+                Puzzles
+              </button>
+              <button type="button" role="tab" data-page="profile" aria-selected="false">
+                Profile
+              </button>
+            </div>
+          </div>
+          <div class="compare">
+            <div class="demo-chrome">
+              <span class="demo-lights"></span>
+              <span class="demo-url">lichess.org<b data-compare-path>/</b></span>
+            </div>
+            <div class="compare__view">
+              <img
+                class="compare__shot"
+                data-shot="lichess"
+                src="compare/home-lichess.webp"
+                alt="The page as Lichess draws it"
+                width="2400"
+                height="1500"
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                class="compare__shot compare__shot--neo"
+                data-shot="neo"
+                src="compare/home-neo.webp"
+                alt="The same page with Lichess Neo"
+                width="2400"
+                height="1500"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="compare__label">Lichess</span>
+              <span class="compare__label compare__label--neo">Lichess Neo</span>
+              <input
+                class="compare__range"
+                type="range"
+                min="0"
+                max="100"
+                step="0.1"
+                value="50"
+                aria-label="Where Lichess ends and Lichess Neo begins"
+              />
+              <span class="compare__handle" aria-hidden="true"
+                ><span class="compare__knob"
+                  ><span class="icon i-arrow-left-01"></span
+                  ><span class="icon i-arrow-right-01"></span></span
+              ></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="bento-section" id="review">
         <div class="wrap">
           <h2>A review for every game</h2>
@@ -286,12 +360,12 @@
             <article class="tile tile--summary">
               <h3>The summary</h3>
               <p>
-                Each player’s accuracy, the rating they played like, their moves by class and each
+                Each player’s accuracy, the Elo they played like, their moves by class and each
                 phase’s verdict. Here, the Opera Game’s: click a count to see its move.
               </p>
               <label class="switch"
                 ><input type="checkbox" data-chesscom-switch /><span class="switch__track"></span
-                ><span>Ratings as on Chess.com</span><span class="badge">Experimental</span></label
+                ><span>Elo as on Chess.com</span><span class="badge">Experimental</span></label
               >
               <div class="summary"></div>
             </article>
@@ -307,6 +381,153 @@
                 on the board.
               </p>
               <div class="tile-cards"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="yours" id="yours">
+        <div class="wrap">
+          <h2>Make it yours</h2>
+          <p class="lead">
+            Pick a color theme, a board and where the menu goes. This page follows along, as Lichess
+            would.
+          </p>
+          <div class="yours-pickers">
+            <div class="picker" role="group" aria-label="Theme">
+              <span class="picker__label">Theme</span>
+              <span class="picker__buttons picker__buttons--swatches" data-picks="theme"></span>
+            </div>
+            <div class="picker" role="group" aria-label="Board">
+              <span class="picker__label">Board</span>
+              <span class="picker__buttons" data-picks="board"></span>
+            </div>
+            <div class="picker picker--layout" role="group" aria-label="Layout">
+              <span class="picker__label">Layout</span>
+              <span class="picker__buttons" data-picks="layout"></span>
+            </div>
+          </div>
+          <div class="mock-stage">
+            <div class="mock" data-shape="rail" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="more" id="more">
+        <div class="wrap">
+          <h2>Elo, packs, shortcuts and sounds</h2>
+          <div class="more-grid">
+            <article class="tile tile--chesscom">
+              <div class="tile__words">
+                <span class="tile__icon"
+                  ><span class="icon i-arrow-data-transfer-horizontal"></span
+                ></span>
+                <h3>Elo as on Chess.com <span class="badge">Experimental</span></h3>
+                <p>
+                  Turn it on, and every Elo on Lichess shows as it would be on Chess.com: in games,
+                  on profiles, in lists and leaderboards. Point at one for its Lichess Elo.
+                </p>
+                <p class="tile__note">
+                  Converted from
+                  <a href="https://theophile-wallez.github.io/lichess-chesscom-ratings/"
+                    >a study of 35,515 players</a
+                  >
+                  with an established Elo on both sites.
+                </p>
+              </div>
+              <div class="convert">
+                <div class="convert__speeds" role="group" aria-label="Speed">
+                  <i class="convert__pill"></i>
+                  <button type="button" data-speed="bullet" aria-pressed="false">Bullet</button>
+                  <button type="button" data-speed="blitz" aria-pressed="true">Blitz</button>
+                  <button type="button" data-speed="rapid" aria-pressed="false">Rapid</button>
+                  <button type="button" data-speed="classical" aria-pressed="false">
+                    Classical
+                  </button>
+                </div>
+                <div class="convert__numbers">
+                  <p><span>On Lichess</span><b data-convert="lichess"></b></p>
+                  <span class="icon i-arrow-right-01"></span>
+                  <p>
+                    <span>On Chess.com</span><b data-convert="chesscom"></b
+                    ><small data-convert="spread"></small>
+                  </p>
+                </div>
+                <input
+                  type="range"
+                  min="800"
+                  max="2800"
+                  step="10"
+                  value="1500"
+                  aria-label="Lichess Elo"
+                />
+              </div>
+            </article>
+            <article class="tile tile--packs">
+              <span class="tile__icon"><span class="icon i-package-open"></span></span>
+              <h3>Packs from GitHub</h3>
+              <p>
+                Your own pieces, board and sounds: a folder on GitHub with a pack.json and the files
+                it names. Paste its link, and it’s yours.
+              </p>
+              <div class="pack-form" aria-hidden="true">
+                <span class="pack-form__link"
+                  ><span class="icon i-link-01"></span>github.com/you/your-pack</span
+                >
+                <span class="pack-form__button">Import</span>
+              </div>
+              <ul class="pack-parts" aria-hidden="true">
+                <li><img src="img/pieces/mochi/wN.webp" alt="" width="40" height="40" />Pieces</li>
+                <li><i class="board-thumb"></i>Board</li>
+                <li><span class="icon i-volume-high"></span>Sounds</li>
+              </ul>
+            </article>
+            <article class="tile tile--palette">
+              <span class="tile__icon"><span class="icon i-search-01"></span></span>
+              <h3>Go anywhere from the keyboard</h3>
+              <p>Press ⌘K, or Ctrl+K, for any page, any player or a setting.</p>
+              <div class="palette" aria-hidden="true">
+                <span class="palette__field"
+                  ><span class="icon i-search-01"></span>puz<i></i><kbd>⌘K</kbd></span
+                >
+                <span class="palette__row palette__row--on"
+                  ><img src="img/sidebar/puzzles.webp" alt="" width="96" height="96" />Puzzles</span
+                >
+                <span class="palette__row"
+                  ><img src="img/sidebar/puzzle-storm.webp" alt="" width="96" height="96" />Puzzle
+                  Storm</span
+                >
+                <span class="palette__row"
+                  ><img
+                    src="img/sidebar/puzzle-dashboard.webp"
+                    alt=""
+                    width="96"
+                    height="96"
+                  />Puzzle dashboard</span
+                >
+              </div>
+            </article>
+            <article class="tile tile--sounds">
+              <span class="tile__icon"><span class="icon i-volume-high"></span></span>
+              <h3>Choose how moves sound</h3>
+              <p>Two sets of our own, Lichess’s, or the sounds of a pack.</p>
+              <ul class="sound-sets" aria-hidden="true">
+                <li><b>Boxwood</b><span>Real wooden pieces, recorded</span></li>
+                <li><b>Ascent</b><span>A different sound for each piece</span></li>
+                <li><b>Lichess</b><span>The sounds you know</span></li>
+                <li><b>A pack’s</b><span>The sounds you import</span></li>
+              </ul>
+            </article>
+            <article class="tile tile--stakes">
+              <div class="tile__words">
+                <span class="tile__icon"><span class="icon i-chart-increase"></span></span>
+                <h3>The Elo at stake</h3>
+                <p>
+                  In a rated game, each bar shows the Elo its player would win, draw or lose, worked
+                  out as Lichess will. The higher your opponent, the more a win brings.
+                </p>
+              </div>
+              <div class="stakes-demo" aria-hidden="true"></div>
             </article>
           </div>
         </div>
@@ -441,159 +662,34 @@
         </div>
       </section>
 
-      <section class="yours" id="yours">
-        <div class="wrap">
-          <h2>Make it yours</h2>
-          <p class="lead">
-            Pick a color theme, a board and where the menu goes. This page follows along, as Lichess
-            would.
-          </p>
-          <div class="yours-pickers">
-            <div class="picker" role="group" aria-label="Theme">
-              <span class="picker__label">Theme</span>
-              <span class="picker__buttons picker__buttons--swatches" data-picks="theme"></span>
-            </div>
-            <div class="picker" role="group" aria-label="Board">
-              <span class="picker__label">Board</span>
-              <span class="picker__buttons" data-picks="board"></span>
-            </div>
-            <div class="picker picker--layout" role="group" aria-label="Layout">
-              <span class="picker__label">Layout</span>
-              <span class="picker__buttons" data-picks="layout"></span>
-            </div>
-          </div>
-          <div class="mock-stage">
-            <div class="mock" data-shape="sidebar" aria-hidden="true"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="more" id="more">
-        <div class="wrap">
-          <h2>Ratings, packs, shortcuts and sounds</h2>
-          <div class="more-grid">
-            <article class="tile tile--chesscom">
-              <div class="tile__words">
-                <span class="tile__icon"
-                  ><span class="icon i-arrow-data-transfer-horizontal"></span
-                ></span>
-                <h3>Ratings as on Chess.com <span class="badge">Experimental</span></h3>
-                <p>
-                  Turn it on, and every rating on Lichess shows as it would be on Chess.com: in
-                  games, on profiles, in lists and leaderboards. Point at one for its Lichess
-                  rating.
-                </p>
-                <p class="tile__note">
-                  Converted from
-                  <a href="https://theophile-wallez.github.io/lichess-chesscom-ratings/"
-                    >a study of 35,515 players</a
-                  >
-                  with an established rating on both sites.
-                </p>
-              </div>
-              <div class="convert">
-                <div class="convert__speeds" role="group" aria-label="Speed">
-                  <button type="button" data-speed="bullet" aria-pressed="false">Bullet</button>
-                  <button type="button" data-speed="blitz" aria-pressed="true">Blitz</button>
-                  <button type="button" data-speed="rapid" aria-pressed="false">Rapid</button>
-                  <button type="button" data-speed="classical" aria-pressed="false">
-                    Classical
-                  </button>
-                </div>
-                <div class="convert__numbers">
-                  <p><span>On Lichess</span><b data-convert="lichess"></b></p>
-                  <span class="icon i-arrow-right-01"></span>
-                  <p>
-                    <span>On Chess.com</span><b data-convert="chesscom"></b
-                    ><small data-convert="spread"></small>
-                  </p>
-                </div>
-                <input
-                  type="range"
-                  min="800"
-                  max="2800"
-                  step="10"
-                  value="1500"
-                  aria-label="Lichess rating"
-                />
-              </div>
-            </article>
-            <article class="tile tile--packs">
-              <span class="tile__icon"><span class="icon i-package-open"></span></span>
-              <h3>Packs from GitHub</h3>
-              <p>
-                Your own pieces, board and sounds: a folder on GitHub with a pack.json and the files
-                it names. Paste its link, and it’s yours.
-              </p>
-              <div class="pack-form" aria-hidden="true">
-                <span class="pack-form__link"
-                  ><span class="icon i-link-01"></span>github.com/you/your-pack</span
-                >
-                <span class="pack-form__button">Import</span>
-              </div>
-              <ul class="pack-parts" aria-hidden="true">
-                <li><img src="img/pieces/mochi/wN.webp" alt="" width="40" height="40" />Pieces</li>
-                <li><i class="board-thumb"></i>Board</li>
-                <li><span class="icon i-volume-high"></span>Sounds</li>
-              </ul>
-            </article>
-            <article class="tile tile--palette">
-              <span class="tile__icon"><span class="icon i-search-01"></span></span>
-              <h3>Go anywhere from the keyboard</h3>
-              <p>Press ⌘K, or Ctrl+K, for any page, any player or a setting.</p>
-              <div class="palette" aria-hidden="true">
-                <span class="palette__field"
-                  ><span class="icon i-search-01"></span>puz<i></i><kbd>⌘K</kbd></span
-                >
-                <span class="palette__row palette__row--on"
-                  ><img src="img/sidebar/puzzles.webp" alt="" width="96" height="96" />Puzzles</span
-                >
-                <span class="palette__row"
-                  ><img src="img/sidebar/puzzle-storm.webp" alt="" width="96" height="96" />Puzzle
-                  Storm</span
-                >
-                <span class="palette__row"
-                  ><img
-                    src="img/sidebar/puzzle-dashboard.webp"
-                    alt=""
-                    width="96"
-                    height="96"
-                  />Puzzle dashboard</span
-                >
-              </div>
-            </article>
-            <article class="tile tile--sounds">
-              <span class="tile__icon"><span class="icon i-volume-high"></span></span>
-              <h3>Choose how moves sound</h3>
-              <p>Two sets of our own, Lichess’s, or the sounds of a pack.</p>
-              <ul class="sound-sets" aria-hidden="true">
-                <li><b>Boxwood</b><span>Real wooden pieces, recorded</span></li>
-                <li><b>Ascent</b><span>A different sound for each piece</span></li>
-                <li><b>Lichess</b><span>The sounds you know</span></li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <section class="facts">
         <div class="wrap">
-          <dl>
-            <div>
-              <dt><span class="icon i-gift"></span><span>Free, for good</span></dt>
-              <dd>No ads, no sign-up, nothing to pay.</dd>
+          <h2>Made the Lichess way</h2>
+          <p class="lead">Lichess is free, open and fair. So is everything Lichess Neo adds.</p>
+          <dl class="facts__list">
+            <div class="fact" style="--fact-hue: 150">
+              <span class="fact__tile"><span class="icon i-gift"></span></span>
+              <dt>Free, for good</dt>
+              <dd>No ads, no sign-up, nothing to pay. Ever.</dd>
             </div>
-            <div>
-              <dt><span class="icon i-square-lock-02"></span><span>Nothing collected</span></dt>
-              <dd>Your settings stay in your browser.</dd>
+            <div class="fact" style="--fact-hue: 215">
+              <span class="fact__tile"><span class="icon i-square-lock-02"></span></span>
+              <dt>Nothing collected</dt>
+              <dd>No account, no tracking: your settings stay in your browser.</dd>
             </div>
-            <div>
-              <dt><span class="icon i-github"></span>Open source</dt>
-              <dd>Every line is on GitHub, under the MIT license.</dd>
+            <div class="fact" style="--fact-hue: 300">
+              <span class="fact__tile"><span class="icon i-github"></span></span>
+              <dt>Open source</dt>
+              <dd>
+                Every line is
+                <a href="https://github.com/theophile-wallez/LichessNeo">on GitHub</a>, under the
+                MIT license.
+              </dd>
             </div>
-            <div>
-              <dt><span class="icon i-chess-pawn"></span><span>Fair play</span></dt>
-              <dd>No help during a game you’re playing: the review waits for the end.</dd>
+            <div class="fact" style="--fact-hue: 55">
+              <span class="fact__tile"><span class="icon i-chess-pawn"></span></span>
+              <dt>Fair play</dt>
+              <dd>No engine during a game you’re playing: the review waits for the end.</dd>
             </div>
           </dl>
         </div>

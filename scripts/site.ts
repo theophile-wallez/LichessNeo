@@ -1,6 +1,7 @@
 // Builds the promotional site (site/) into dist/site, the folder GitHub Pages
-// serves (.github/workflows/pages.yml): its page, sheets and fonts as written,
-// the live review (site/demo) bundled, the pictures they name
+// serves (.github/workflows/pages.yml): its page and fonts as written, its
+// sheets joined into one (scripts/lib/site-sheets.ts), the live review
+// (site/demo) bundled, the pictures they name
 // (scripts/lib/site-assets.ts), the piece sets, the coaches' stills and the
 // sidebar's pictures the review and the layout draw, and the Hugeicons the
 // sheets name.
@@ -13,10 +14,12 @@ import { copyFile, cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/p
 import { createServer, type ServerResponse } from 'node:http';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
+import { transform as transformCss } from 'lightningcss';
 import { build as bundle } from 'rolldown';
 import { iconFile, NAMED_ICON } from './lib/hugeicon-files.ts';
 import { fromRoot } from './lib/paths.ts';
 import { namedAssets } from './lib/site-assets.ts';
+import { JOINED_SHEET, joinSheetLinks } from './lib/site-sheets.ts';
 
 const { values } = parseArgs({
   options: {
@@ -24,6 +27,10 @@ const { values } = parseArgs({
     port: { type: 'string', default: '5181' },
   },
 });
+
+// The browsers the sheets are minified for: older ones, the minifier puts an
+// `animation-timeline` in the `animation` shorthand, where Chrome drops the declaration.
+const CSS_TARGETS = { chrome: 120 << 16, firefox: 128 << 16, safari: 17 << 16 };
 
 const SOURCE = fromRoot('site');
 const OUT = fromRoot('dist', 'site');
@@ -61,14 +68,36 @@ async function bundleDemo(): Promise<void> {
   });
 }
 
+/** The page's sheets, one request instead of one each. */
+async function joinSheets(): Promise<void> {
+  const pagePath = path.join(OUT, 'index.html');
+  const { sheets, page } = joinSheetLinks(await readFile(pagePath, 'utf8'));
+  const texts = await Promise.all(sheets.map(sheet => readFile(path.join(SOURCE, sheet), 'utf8')));
+  const { code } = transformCss({
+    filename: JOINED_SHEET,
+    code: Buffer.from(texts.join('\n')),
+    minify: true,
+    targets: CSS_TARGETS,
+  });
+  await writeFile(path.join(OUT, JOINED_SHEET), code);
+  await writeFile(pagePath, page);
+}
+
 async function build(): Promise<void> {
   await rm(OUT, { recursive: true, force: true });
-  // The live review's modules are bundled, not copied.
-  const modules = path.join(SOURCE, 'demo');
+  // The live review's modules are bundled and the sheets joined, not copied; the
+  // TypeScript project stays behind.
+  const left = [
+    path.join(SOURCE, 'demo'),
+    path.join(SOURCE, 'css'),
+    path.join(SOURCE, 'tsconfig.json'),
+  ];
   await cp(SOURCE, OUT, {
     recursive: true,
-    filter: file => path.relative(modules, file).startsWith('..'),
+    filter: file => left.every(folder => path.relative(folder, file).startsWith('..')),
   });
+  await mkdir(path.join(OUT, 'css'), { recursive: true });
+  await joinSheets();
   await bundleDemo();
   for (const folder of DRAWN)
     await cp(fromRoot('public', folder), path.join(OUT, folder), { recursive: true });

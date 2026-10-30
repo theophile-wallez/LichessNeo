@@ -76,8 +76,6 @@ export class Demo {
   start(): void {
     setPieceGlyphs(document.documentElement, LICHESS_SET);
     this.#show(0, true);
-    // Without the mascot's chunk (offline, no WebGL), the still stays.
-    this.#coach.mount().catch(() => undefined);
   }
 
   #setVisible(visible: boolean): void {

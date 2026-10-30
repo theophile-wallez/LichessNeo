@@ -1,0 +1,155 @@
+/* The Elo at stake: the words, then two bars of a rated game (demo/stakes.ts). */
+
+/* Under the packs and the palette, the sounds' tile beside both. */
+.tile--sounds {
+  grid-row: span 2;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+}
+
+.tile--sounds .sound-sets {
+  grid-auto-rows: 1fr;
+}
+
+.sound-sets li {
+  align-content: center;
+}
+
+.tile--stakes {
+  grid-column: 1 / 3;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  align-items: center;
+  gap: 32px;
+}
+
+.stakes-demo {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--well);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.stakes-bar {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.stakes-bar .demo-avatar {
+  grid-row: auto;
+  width: 44px;
+  height: 44px;
+}
+
+.stakes-bar__who {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  font-size: 15px;
+}
+
+.stakes-bar__name {
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stakes-bar__elo {
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* As the extension's pill (styles/game/stakes.css): a rising chart, then the three outcomes. */
+.stakes-pill {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 2px 0 9px;
+  border-radius: 999px;
+  background: #ffffff0f;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.stakes-pill::before {
+  width: 13px;
+  height: 13px;
+  margin-inline-end: 2px;
+  background: var(--dim);
+  mask: url('../img/hugeicons/chart-increase.svg') center / contain no-repeat;
+  content: '';
+}
+
+/* Each as wide as "+10", so the two pills line up whatever their figures. */
+.stakes-pill__outcome {
+  box-sizing: content-box;
+  width: 2.4em;
+  padding: 0 2px;
+  text-align: center;
+}
+
+.stakes-pill__outcome + .stakes-pill__outcome {
+  background: linear-gradient(#ffffff26, #ffffff26) left center / 1px 11px no-repeat;
+}
+
+.stakes-pill__outcome--win {
+  color: #6fdc8c;
+}
+
+.stakes-pill__outcome--draw {
+  color: var(--dim);
+}
+
+.stakes-pill__outcome--loss {
+  color: #ff7a7a;
+}
+
+.stakes-bar__clock {
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--panel-raised);
+  font-size: 15px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.stakes-bar[data-side='bottom'] .stakes-bar__clock {
+  background: #fff;
+  color: var(--ink);
+}
+
+@media (max-width: 1019px) {
+  .tile--sounds {
+    grid-row: auto;
+  }
+
+  .tile--stakes {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .tile--stakes {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .stakes-bar {
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  .stakes-bar .demo-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .stakes-bar__clock {
+    display: none;
+  }
+}

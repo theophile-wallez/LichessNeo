@@ -1,6 +1,8 @@
+import { inView } from 'motion';
 import { closestTo, queryOne } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { wireDemo } from './clicks.ts';
+import { startCompare } from './compare.ts';
 import { Demo, type DemoParts } from './demo.ts';
 import { graphMarkup } from './graph.ts';
 import { movesMarkup } from './moves.ts';
@@ -10,9 +12,15 @@ import { showMockCoach, startPickers } from './pickers.ts';
 import { division, moves, records, review } from './review.ts';
 import { playerMarkup } from './players.ts';
 import { showChesscom } from './rating.ts';
+import { startStakes } from './stakes.ts';
+import { showStars } from './stars.ts';
 import { Summary } from './summary.ts';
 import { drawTiles } from './tiles.ts';
 import { startTooltips } from './tooltip.ts';
+import { countUpIn } from './motion/panel.ts';
+import { startCrowd } from './motion/crowd.ts';
+import { playEntrance } from './motion/entrance.ts';
+import { startFacts } from './motion/facts.ts';
 import { chesscomShown, keepChesscomShown } from '#shared/chesscom-rating/shown.ts';
 import { en } from '#page/review/i18n/en.ts';
 import { momentsMarkup } from '#page/review/view/moments.ts';
@@ -71,6 +79,7 @@ function startSummaries(root: HTMLElement, demo: Demo, modes: PanelModes): void 
   };
   if (panel) summaries.push(new Summary(panel, { language: en, go, radar: true }));
   const tile = queryOne(document, '.tile--summary .summary', HTMLElement);
+  if (tile) inView(tile, () => countUpIn(tile), { amount: 0.5 });
   if (tile)
     summaries.push(
       new Summary(tile, {
@@ -121,6 +130,13 @@ function wirePickers(demo: Demo, modes: PanelModes): void {
   });
 }
 
+const entered = playEntrance();
+showStars();
+startCompare();
+startStakes();
+startFacts();
+const crowd = queryOne(document, '.crowd', HTMLElement);
+if (crowd) startCrowd(crowd);
 const root = queryOne(document, '#demo', HTMLElement);
 if (root) {
   drawPlayers(root);
@@ -136,4 +152,8 @@ if (root) {
   startSummaries(root, demo, modes);
   startTooltips();
   demo.start();
+  // The mascot's chunk carries Three.js, and its first frames take a while: they wait
+  // for the entrance to end, the still showing until then. Without the chunk (offline,
+  // no WebGL), the still stays.
+  void entered.then(() => demo.coach.mount()).catch(() => undefined);
 }

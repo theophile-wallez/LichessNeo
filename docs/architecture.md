@@ -348,9 +348,11 @@ preference, as its Theme menu does. Users make their own in its editor
 (<https://theophile-wallez.github.io/LichessNeo/>) by `.github/workflows/pages.yml`
 whenever a push to `main` changes it or what it draws from. `scripts/site.ts`
 builds it into `dist/site` (`pnpm site` serves it on localhost:5181, rebuilt on
-every change): the page and its sheets as written, the pictures they name
-copied from the repository (`scripts/lib/site-assets.ts`), the Hugeicons they
-name, and `site/demo` bundled.
+every change): the page as written, its sheets joined into one and minified
+(`scripts/lib/site-sheets.ts`), the pictures they name copied from the
+repository (`scripts/lib/site-assets.ts`), the Hugeicons they name, and
+`site/demo` bundled. `site/compare` holds before-and-after shots of lichess.org,
+with and without the extension, for the page's comparison.
 
 `site/demo` is a live Debrief of Morphy's Opera Game. It runs no engine: the
 records come from `opera.json`, which `scripts/site/record-demo.ts` writes by
@@ -359,4 +361,9 @@ judges the moves, writes the coach's words and draws its summary, key moments
 and buttons from them, so the page shows what the extension would. What the
 extension does through Lichess (its board, its move list, its panel) the demo
 draws itself, in the same markup where it can, for the review's stylesheets'
-look, which `site/css` copies in the site's own tokens.
+look, which `site/css` copies in the site's own tokens. The page's motion
+(`site/demo/motion`: the hero's entrance, the coaches' jump, the panel's tabs, a
+look's reveal) is [Motion](https://motion.dev)'s, and its figures roll with
+[NumberFlow](https://number-flow.barvian.me): two dev dependencies the extension
+never bundles. The Elo tile's stakes come from the extension's own rules
+(`content/game/stakes`), and the bar's star count from GitHub's API.
