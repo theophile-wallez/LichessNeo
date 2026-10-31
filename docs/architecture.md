@@ -77,7 +77,8 @@ so the logic can be unit-tested without a page.
 
 - `packs`: the board, pieces and sounds: our themes, Lichess's or imported
   packs, their pickers, our themes' settings and the settings' import, in the
-  pickers when signed out.
+  pickers when signed out, and Lichess's piece variables made whole URLs for
+  Firefox (`piece-urls.ts`).
 - `bootstrap`.
 - `layout`: `MARKS`, the `data-ln-ext-has` flags, the Lichess preferences
   our parts follow (`data-ln-ext-prefs`), inset, zoom (the board's handle

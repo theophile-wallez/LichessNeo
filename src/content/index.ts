@@ -3,6 +3,7 @@ import { assets } from './bootstrap/assets.ts';
 import { packs } from './packs/index.ts';
 import { colorThemes } from './colors/index.ts';
 import { fonts } from './bootstrap/fonts.ts';
+import { pieceUrls } from './packs/piece-urls.ts';
 import { donate } from './sidebar/donate.ts';
 import { navigation } from './sidebar/navigation.ts';
 import { openingsLink } from './sidebar/openings-link.ts';
@@ -107,6 +108,7 @@ import { startSyncLoop } from './sync-loop.ts';
 // The rest, in start order: a feature can rely on those before it.
 const FEATURES = [
   fonts,
+  pieceUrls,
   donate,
   navigation,
   openingsLink,

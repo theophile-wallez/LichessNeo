@@ -12,4 +12,6 @@ repo are in the root's [AGENTS.md](../../../AGENTS.md).
   read them. Before drawing a board Lichess decodes each one, slicing
   `url(` and `)` off its value: write them unquoted, and know that one image
   that fails to decode leaves the page without a board. Packs are checked
-  for that at import.
+  for that at import. Lichess writes them as paths (`url(/assets/…)`), which
+  Firefox resolves against the sheet that uses the variable: in ours, the
+  extension's files. `piece-urls.ts` writes them again as whole URLs.
