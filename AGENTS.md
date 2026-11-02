@@ -765,6 +765,13 @@ link to it, and a line here). The rest hold everywhere:
   Chrome ignores `--load-extension`; Playwright's default headless shell
   drops extensions silently, hence `channel: 'chromium'`. Use a desktop
   user agent, or Lichess serves its mobile layout.
+- **Cloudflare's bot check.** Lichess sometimes puts a page behind it (a 403
+  "Just a moment…", no `#top`), and a headless browser fails it, so the
+  end-to-end tests of that page fail in CI whatever the change. Check it's
+  that, by opening the page once without the extension, then skip those tests
+  with `BOT_CHECKED` (`tests/e2e/support/lichess.ts`) in the same change,
+  rather than chase them or hold the release. Lift the skip once the page
+  loads again.
 - Check the extension is in before trusting a screenshot: read a computed
   style one of our rules sets (on an analysis page, `.analyse__controls` has
   a 1px `border-top`).

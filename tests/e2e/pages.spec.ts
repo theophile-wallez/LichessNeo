@@ -1,6 +1,6 @@
 import { expect, test } from './fixtures.ts';
 import { horizontalOverflow } from './support/layout.ts';
-import { FINISHED_GAME, openLichess, rootVariable } from './support/lichess.ts';
+import { BOT_CHECKED, FINISHED_GAME, openLichess, rootVariable } from './support/lichess.ts';
 import { expectSidebar } from './support/sidebar.ts';
 
 // The main pages get the extension: the theme, the sidebar, both of its
@@ -23,6 +23,7 @@ const PAGES: readonly PublicPage[] = [
     name: 'a finished game’s analysis',
     path: FINISHED_GAME.path,
     ours: 'main.analyse > #ln-ext-review',
+    skip: BOT_CHECKED,
   },
   { name: 'the free analysis board', path: '/analysis', ours: '#ln-ext-review .ln-ext-coach' },
   { name: 'TV', path: '/tv', ours: 'main.round > .ln-ext-board-tools' },
@@ -31,7 +32,7 @@ const PAGES: readonly PublicPage[] = [
     name: 'a practice lesson',
     path: '/practice/checkmates/piece-checkmates-i/BJy6fEDf',
     ours: 'html[data-ln-ext-has~="practice"]',
-    skip: 'Lichess puts practice lessons behind a bot check headless browsers fail',
+    skip: BOT_CHECKED,
   },
   { name: 'the forum', path: '/forum', ours: 'main.forum .categs tr[data-ln-ext-href]' },
 ];

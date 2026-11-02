@@ -6,6 +6,12 @@ import { expect, type Page } from '@playwright/test';
 export const FINISHED_GAME = { id: 'tKlG0mrQ', path: '/game/tKlG0mrQ/black' };
 
 /**
+ * Why a test is skipped while Lichess serves its page Cloudflare's bot check
+ * (a 403 "Just a moment…"), which a headless browser fails, extension or not.
+ */
+export const BOT_CHECKED = 'Lichess puts the page behind a bot check headless browsers fail';
+
+/**
  * Opens a page of lichess.org (relative to the config's baseURL) once it has
  * loaded, and waits for the content script's mark on <html>, set at
  * document_start: without it the extension isn't there, and nothing else

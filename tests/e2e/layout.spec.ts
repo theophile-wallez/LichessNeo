@@ -7,7 +7,7 @@ import {
   wheelScroll,
   type BoardNeighbour,
 } from './support/layout.ts';
-import { FINISHED_GAME, openLichess } from './support/lichess.ts';
+import { BOT_CHECKED, FINISHED_GAME, openLichess } from './support/lichess.ts';
 import { seedReviewCache } from './support/review.ts';
 import { onOneTvGame } from './support/tv.ts';
 
@@ -73,6 +73,7 @@ test('a game’s analysis fits the window, its bars, clocks and eval bar in line
   page,
   context,
 }) => {
+  test.skip(true, BOT_CHECKED);
   // From the cache, the review's eval bar is there at once.
   await seedReviewCache(context);
   await openLichess(page, FINISHED_GAME.path);

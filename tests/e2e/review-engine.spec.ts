@@ -1,6 +1,6 @@
 import type { Locator } from '@playwright/test';
 import { expect, test } from './fixtures.ts';
-import { FINISHED_GAME, openLichess } from './support/lichess.ts';
+import { BOT_CHECKED, FINISHED_GAME, openLichess } from './support/lichess.ts';
 import {
   recordReview,
   REVIEW_CACHE,
@@ -24,6 +24,7 @@ test(
   'analyses a game with the engine, then keeps its review',
   { tag: '@slow' },
   async ({ page }) => {
+    test.skip(true, BOT_CHECKED);
     test.setTimeout(ANALYSIS_MS + 60_000);
     const { panel, start } = reviewParts(page);
     await openLichess(page, FINISHED_GAME.path);
