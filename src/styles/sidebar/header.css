@@ -98,9 +98,14 @@
       display: none !important;
     }
 
+    /* Out of Lichess's blur layer, as in collapsed.css. */
     html[data-ln-ext-sidebar='header'] #topnav section > div::before {
       content: attr(data-ln-ext-label);
+      position: static;
       display: block;
+      width: auto;
+      height: auto;
+      backdrop-filter: none;
       padding: 6px 8px 4px;
       color: var(--ln-ext-text-dim);
       font-size: 11.5px;

@@ -107,9 +107,15 @@
     color: transparent !important;
   }
 
+  /* Lichess's transparent background puts a blur layer in this ::before, absolute and full
+   * size (html.transp): the heading takes it back into the flow. */
   html[data-ln-ext-sidebar~='collapsed'] #topnav section > div::before {
     content: attr(data-ln-ext-label);
+    position: static;
     display: block;
+    width: auto;
+    height: auto;
+    backdrop-filter: none;
     padding: 6px 8px 4px;
     color: var(--ln-ext-text-dim);
     font-size: 11.5px;
