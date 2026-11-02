@@ -1366,6 +1366,9 @@
   "studyNextChapter": {
     "message": "Chapitre suivant"
   },
+  "studyAddChapter": {
+    "message": "Ajouter un chapitre"
+  },
   "studyPanelInfo": {
     "message": "Infos"
   },

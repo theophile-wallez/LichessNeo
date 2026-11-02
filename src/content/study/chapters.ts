@@ -5,22 +5,25 @@ import { queryAll, queryOne } from '#shared/dom.ts';
 
 /** A study's page; a broadcast's is one too, with its own side column. */
 export const STUDY_PAGE = 'main.analyse:not(.is-relay)';
-const LIST = ':scope > .analyse__side > .study__side > .study__chapters > .study-list';
+const CHAPTERS = ':scope > .analyse__side > .study__side > .study__chapters';
 
 export interface Chapters {
   readonly buttons: readonly HTMLButtonElement[];
   /** The chapter on the board, from 0. */
   readonly index: number;
   readonly title: string;
+  /** Lichess's button for a new chapter, there for those who can edit the study. */
+  readonly add: HTMLButtonElement | null;
 }
 
 export function readChapters(page: HTMLElement): Chapters | null {
-  const buttons = queryAll(page, `${LIST} > button`, HTMLButtonElement);
+  const buttons = queryAll(page, `${CHAPTERS} > .study-list > button`, HTMLButtonElement);
   const index = buttons.findIndex(button => button.classList.contains('active'));
   const active = buttons[index];
   if (!active) return null;
   const title = queryOne(active, 'h3', HTMLElement)?.textContent.trim() ?? '';
-  return { buttons, index, title };
+  const add = queryOne(page, `${CHAPTERS} > button.add`, HTMLButtonElement);
+  return { buttons, index, title, add };
 }
 
 /** The study's own name: Lichess titles the page with the study's and the chapter's. */

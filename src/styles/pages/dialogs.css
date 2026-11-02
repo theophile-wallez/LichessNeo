@@ -139,6 +139,26 @@ dialog .help th p {
   font-weight: 800 !important;
 }
 
+/* A study chapter's lesser destructive actions: Lichess writes them as text, side by side,
+ * where ours are filled. Grey buttons in red words, with room between them. */
+dialog .study-modal .form-actions-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0 !important;
+}
+
+dialog .study-modal .form-actions-secondary .button {
+  opacity: 1 !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+  color: var(--ln-ext-bad) !important;
+}
+
+dialog .study-modal .form-actions-secondary .button:not(.disabled):hover {
+  background: var(--ln-ext-btn-grey-hover) !important;
+}
+
 /* ---- Game setup --- */
 
 /* Create a game, challenge a friend, play the computer: segments on a track,

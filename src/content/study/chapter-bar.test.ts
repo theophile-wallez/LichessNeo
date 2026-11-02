@@ -74,6 +74,39 @@ describe('a study’s chapter bar', () => {
     expect(page()?.dataset.lnExtContents).toBeUndefined();
   });
 
+  it('turns a study of one chapter, opened on its members, to its chapter', () => {
+    document.body.innerHTML = studyMarkup({ chapters: 1, tab: 'members' });
+    queryOne(document, '.tabs-horiz > .chapters', HTMLElement)?.addEventListener('click', () => {
+      document.body.innerHTML = studyMarkup({ chapters: 1, tab: 'chapters' });
+    });
+    vi.advanceTimersByTime(TICK_MS * 2);
+    expect(bar('kicker')?.textContent).toBe('studyChapterOf 1 1');
+  });
+
+  it('closes the contents on their members’ tab', () => {
+    show(studyMarkup());
+    bar('words')?.click();
+    queryOne(document, '.study__chapters', HTMLElement)?.replaceWith(
+      Object.assign(document.createElement('div'), { className: 'study__members' }),
+    );
+    vi.advanceTimersByTime(TICK_MS);
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(page()?.dataset.lnExtContents).toBeUndefined();
+  });
+
+  it('adds a chapter through Lichess’s button, for those who can edit the study', () => {
+    show(studyMarkup());
+    expect(bar('add')?.hidden).toBe(true);
+    show(studyMarkup({ editable: true }));
+    let added = false;
+    queryOne(document, '.study__chapters > .add', HTMLElement)?.addEventListener('click', () => {
+      added = true;
+    });
+    expect(bar('add')?.hidden).toBe(false);
+    bar('add')?.click();
+    expect(added).toBe(true);
+  });
+
   it('keeps the player bars of a game, not the names split out of an introduction', () => {
     show(studyMarkup({ players: ['Kasparov', 'Anand'], result: true }));
     expect(page()?.dataset.lnExtPlayers).toBe('');

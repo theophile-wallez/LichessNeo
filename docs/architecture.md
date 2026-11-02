@@ -97,7 +97,8 @@ so the logic can be unit-tested without a page.
   card; the lesson's steps kept in view as they scroll, and what "Load next
   exercise immediately" does.
 - `study`: a study's chapter bar over the board, whose title opens Lichess's
-  chapter list as a sheet over it, and the study's head at the top of the
+  chapter list as a sheet over it and whose + adds a chapter for those who
+  can edit the study, and the study's head at the top of the
   panel (its flair, name, likes and share button, which click Lichess's own).
 - `pages`.
 - `inbox`: the inbox's title, the word "online" in a conversation's head, and

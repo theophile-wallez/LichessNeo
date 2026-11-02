@@ -15,12 +15,15 @@ import { onEveryTick } from '#content/sync-loop.ts';
 import { type Chapters, namesPlayers, readChapters, STUDY_PAGE } from './chapters.ts';
 
 // A study's chapter over its board (styles/study-page/chapter-bar.css): its number and
-// name, the chapters beside it a click away, and the contents, Lichess's own chapter list,
+// name, the chapters beside it a click away, a new one for those who can edit the study,
+// and the contents, Lichess's own chapter list,
 // which opens as a sheet over the board (sheet.css) while `data-ln-ext-contents` is on the
 // page. Picking a chapter there closes it. Lichess's player bars stay only while they name
 // players (`data-ln-ext-players`): the bar takes their room.
 
 const BAR = 'ln-ext-study-bar';
+const CHAPTERS_TAB =
+  ':scope > .analyse__side > .study__side > .tabs-horiz > button.chapters:not(.active)';
 
 interface Bar {
   readonly root: HTMLElement;
@@ -29,6 +32,7 @@ interface Bar {
   readonly title: HTMLElement;
   readonly previous: HTMLButtonElement;
   readonly next: HTMLButtonElement;
+  readonly add: HTMLButtonElement;
   readonly progress: HTMLElement;
 }
 
@@ -45,6 +49,22 @@ function stepButton(direction: 'previous' | 'next', step: number): HTMLButtonEle
   return button;
 }
 
+function addButton(): HTMLButtonElement {
+  const label = message('studyAddChapter');
+  const button = createElement('button', {
+    className: `${BAR}__add`,
+    attrs: { type: 'button', 'aria-label': label, 'data-ln-ext-tip': label },
+  });
+  button.hidden = true;
+  button.addEventListener('click', () => {
+    const page = studyPage();
+    const add = page && readChapters(page)?.add;
+    setOpen(false);
+    add?.click();
+  });
+  return button;
+}
+
 function buildBar(): HTMLElement {
   const root = createElement('div', { className: BAR });
   const number = createElement('span', { className: `${BAR}__number` });
@@ -58,9 +78,10 @@ function buildBar(): HTMLElement {
   words.addEventListener('click', () => setOpen(!open));
   const previous = stepButton('previous', -1);
   const next = stepButton('next', 1);
+  const add = addButton();
   const progress = createElement('span', { className: `${BAR}__progress` });
-  root.append(number, words, previous, next, progress);
-  bars.set(root, { root, number, kicker, title, previous, next, progress });
+  root.append(number, words, previous, next, add, progress);
+  bars.set(root, { root, number, kicker, title, previous, next, add, progress });
   return root;
 }
 
@@ -100,6 +121,8 @@ function show(bar: Bar, chapters: Chapters): void {
   if (bar.previous.disabled !== first) bar.previous.disabled = first;
   const last = chapters.index === total - 1;
   if (bar.next.disabled !== last) bar.next.disabled = last;
+  const editable = chapters.add !== null;
+  if (bar.add.hidden === editable) bar.add.hidden = !editable;
   setStyleProperty(bar.progress, '--ln-ext-progress', String((chapters.index + 1) / total));
 }
 
@@ -112,13 +135,19 @@ function showsPlayers(page: HTMLElement, title: string): boolean {
 
 function sync(): void {
   const page = studyPage();
-  const chapters = page && readChapters(page);
-  if (!page || !chapters) return;
+  if (!page) return;
+  setData(page, 'lnExtContents', open ? '' : null);
+  const chapters = readChapters(page);
+  if (!chapters) {
+    // Lichess opens a one-chapter study on its members, where the bar can't read the
+    // chapter: back to the chapters once the sheet is closed.
+    if (!open) queryOne(page, CHAPTERS_TAB, HTMLButtonElement)?.click();
+    return;
+  }
   const bar = bars.get(ownBar(page).element);
   ownBackdrop(page);
   if (!bar) return;
   show(bar, chapters);
-  setData(page, 'lnExtContents', open ? '' : null);
   setData(page, 'lnExtPlayers', showsPlayers(page, chapters.title) ? '' : null);
   const words = queryOne(bar.root, `.${BAR}__words`, HTMLElement);
   if (words?.getAttribute('aria-expanded') !== String(open))

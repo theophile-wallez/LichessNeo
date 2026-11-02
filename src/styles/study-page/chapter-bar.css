@@ -1,8 +1,8 @@
 /* ---- The chapter bar --- */
 
 /* Over a study's board (content/study/chapter-bar.ts): the chapter's number and name, a click
- * on which opens the contents (sheet.css), the chapters before and after it, and how far into
- * the study it stands, along its foot. */
+ * on which opens the contents (sheet.css), the chapters before and after it, a new chapter for
+ * those who can edit the study, and how far into the study it stands, along its foot. */
 
 .ln-ext-study-bar {
   display: none;
@@ -14,7 +14,9 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
   position: relative;
   z-index: 7;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  grid-auto-columns: auto;
+  grid-auto-flow: column;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 8px;
   align-items: center;
   box-sizing: border-box;
@@ -106,7 +108,8 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
   unicode-bidi: plaintext;
 }
 
-.ln-ext-study-bar__step {
+.ln-ext-study-bar__step,
+.ln-ext-study-bar__add {
   display: grid;
   place-items: center;
   width: 36px;
@@ -127,7 +130,8 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
   color: var(--ln-ext-white);
 }
 
-.ln-ext-study-bar__step::before {
+.ln-ext-study-bar__step::before,
+.ln-ext-study-bar__add::before {
   content: '';
   width: 18px;
   height: 18px;
@@ -154,6 +158,23 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
 
 .ln-ext-study-bar__step--next:hover:not(:disabled) {
   transform: translateX(2px);
+}
+
+.ln-ext-study-bar__add {
+  margin-inline-start: 4px;
+}
+
+.ln-ext-study-bar__add[hidden] {
+  display: none;
+}
+
+.ln-ext-study-bar__add::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-01.svg');
+}
+
+.ln-ext-study-bar__add:hover {
+  background: var(--ln-ext-btn-grey-hover);
+  transform: rotate(90deg) scale(1.08);
 }
 
 .ln-ext-study-bar__step:disabled {
