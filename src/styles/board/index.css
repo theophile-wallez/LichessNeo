@@ -1,5 +1,7 @@
 @import './textures.css';
 @import './piece-sets.css';
+@import './piece-rings.css';
+@import './piece-ring-sets.css';
 @import './pieces.css';
 @import './backlit.css';
 @import './shapes-promotion.css';

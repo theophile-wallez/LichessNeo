@@ -1,0 +1,161 @@
+/* Each ringed set's masks and edges (piece-rings.css), which tools/piece-sets/rings.py makes and
+ * prints: the mean OKLab lightness of each side's edges, and a ring outside each piece. */
+
+html[data-ln-ext-pieces='pebble'] {
+  --ln-ext-ring-edge-white: 0.853;
+  --ln-ext-ring-edge-black: 0.43;
+}
+
+html[data-ln-ext-pieces='pebble'] piece.white.king {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/wK.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.white.queen {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/wQ.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.white.rook {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/wR.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.white.bishop {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/wB.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.white.knight {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/wN.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.white.pawn {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/wP.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.black.king {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/bK.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.black.queen {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/bQ.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.black.rook {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/bR.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.black.bishop {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/bB.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.black.knight {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/bN.webp);
+}
+
+html[data-ln-ext-pieces='pebble'] piece.black.pawn {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/pebble/rings/bP.webp);
+}
+
+html[data-ln-ext-pieces='loop'] {
+  --ln-ext-ring-edge-white: 0.819;
+  --ln-ext-ring-edge-black: 0.441;
+}
+
+html[data-ln-ext-pieces='loop'] piece.white.king {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/wK.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.white.queen {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/wQ.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.white.rook {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/wR.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.white.bishop {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/wB.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.white.knight {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/wN.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.white.pawn {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/wP.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.black.king {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/bK.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.black.queen {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/bQ.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.black.rook {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/bR.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.black.bishop {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/bB.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.black.knight {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/bN.webp);
+}
+
+html[data-ln-ext-pieces='loop'] piece.black.pawn {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/loop/rings/bP.webp);
+}
+
+html[data-ln-ext-pieces='fold'] {
+  --ln-ext-ring-edge-white: 0.87;
+  --ln-ext-ring-edge-black: 0.412;
+}
+
+html[data-ln-ext-pieces='fold'] piece.white.king {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/wK.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.white.queen {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/wQ.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.white.rook {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/wR.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.white.bishop {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/wB.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.white.knight {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/wN.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.white.pawn {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/wP.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.black.king {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/bK.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.black.queen {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/bQ.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.black.rook {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/bR.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.black.bishop {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/bB.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.black.knight {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/bN.webp);
+}
+
+html[data-ln-ext-pieces='fold'] piece.black.pawn {
+  --ln-ext-ring-mask: url(chrome-extension://__MSG_@@extension_id__/img/pieces/fold/rings/bP.webp);
+}

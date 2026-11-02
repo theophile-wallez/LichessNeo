@@ -203,6 +203,8 @@ so the logic can be unit-tested without a page.
   `<html>`.
 - `board`: shapes, checkmate, the coach's drawings.
 - `backlit`: the backlit boards' light around each move.
+- `piece-squares`: each piece's square, light or dark, on the piece, for the
+  rings a set of ours draws where a piece blends into its square.
 - `review`: the Game Review, and opening practice on the free board
   (`#ln-ext-practice`, `src/page/review/README.md`).
 - `charts`: a game's advantage and move times, the rating distribution, and
@@ -261,6 +263,14 @@ panels themselves, all in `src/content/packs/`:
   variables Lichess draws its own from, its board comes as `--ln-ext-board-img`.
   A piece set of ours is named in `data-ln-ext-pieces`, and
   `styles/board/piece-sets.css` puts its bundled images in those variables.
+  Some of ours ring a piece where it blends into its square
+  (`#shared/piece-rings.ts`): `src/page/piece-squares` marks each piece's
+  square, and `styles/board/piece-rings.css` draws a ring outside it, a shade
+  of a light square or a sheen of a dark one, as strong as the contrast
+  between the pieces' edges and that square lacks. Its masks and the edges'
+  lightness come from `tools/piece-sets/rings.py`. A transform makes each piece
+  a stacking context, which a blend can't see out of: hence the marks. Only our
+  boards' squares, and a pack's that names them, have known colors.
   The sounds go to the page world as bytes
   (`ln-ext:sounds`), where `src/page/sounds` puts them in Lichess's player. With
   no pack, Lichess's player is left alone.

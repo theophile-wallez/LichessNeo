@@ -7,6 +7,7 @@ import {
   fenTurn,
   isAttacked,
   isInCheck,
+  isLightSquare,
   kingSquare,
   parseFen,
   parsePlacement,
@@ -18,6 +19,7 @@ import {
   sideToMove,
   squareAt,
   squareCoords,
+  type Square,
 } from './index.ts';
 
 describe('squares', () => {
@@ -29,6 +31,13 @@ describe('squares', () => {
     expect(squareCoords('e4')).toEqual([4, 3]);
     expect(parseSquare('e2e4')).toBe('e2');
     expect(parseSquare('z9')).toBeNull();
+  });
+
+  it('tell the light ones from the dark, a1 dark', () => {
+    const dark: readonly Square[] = ['a1', 'c1', 'b2', 'd4', 'h8'];
+    const light: readonly Square[] = ['b1', 'h1', 'a8', 'e4', 'g8'];
+    expect(dark.filter(square => isLightSquare(square))).toEqual([]);
+    expect(light.filter(square => isLightSquare(square))).toEqual(light);
   });
 });
 

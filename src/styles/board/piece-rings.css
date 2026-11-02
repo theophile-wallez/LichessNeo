@@ -1,0 +1,53 @@
+/* A ring just outside a piece where it blends into its square, on the sets of ours that draw
+ * them (#shared/piece-rings.ts, their masks and edges in piece-ring-sets.css): a shade of a light
+ * square, a sheen of a dark one, in the square's own hue. page/piece-squares marks each piece's
+ * square. Lightness tells a silhouette from its square, a hue half as much: past 0.2 of the two
+ * between the pieces' edges and the square, there is no ring, and it fades in from 0.15. Only on
+ * boards whose squares' colors we know: ours, and a pack's that gives them. */
+
+html:is([data-ln-ext-board='accent'], [data-ln-ext-board='custom'], [data-ln-ext-board='flat']) {
+  --ln-ext-ring-light: var(--ln-ext-board-light);
+  --ln-ext-ring-dark: var(--ln-ext-board-dark);
+}
+
+html[data-ln-ext-board='pack'] {
+  --ln-ext-ring-light: var(--ln-ext-sq-light);
+  --ln-ext-ring-dark: var(--ln-ext-sq-dark);
+}
+
+.is2d cg-board piece[data-ln-ext-square='light'] {
+  --ln-ext-ring-square: var(--ln-ext-ring-light);
+}
+
+.is2d cg-board piece[data-ln-ext-square='dark'] {
+  --ln-ext-ring-square: var(--ln-ext-ring-dark);
+}
+
+.is2d cg-board piece.white {
+  --ln-ext-ring-edge: var(--ln-ext-ring-edge-white);
+  --ln-ext-ring-shift: -0.32;
+}
+
+.is2d cg-board piece.black {
+  --ln-ext-ring-edge: var(--ln-ext-ring-edge-black);
+  --ln-ext-ring-shift: 0.32;
+}
+
+/* Without a square's color, or a set's edges, the ring's is invalid, so transparent; without a
+ * set's masks, so is the mask. */
+.is2d cg-board piece[data-ln-ext-square]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: oklch(
+    from var(--ln-ext-ring-square) clamp(0.35, l + var(--ln-ext-ring-shift), 0.9) calc(c * 0.6) h /
+      clamp(
+        0,
+        (0.2 - max(l - var(--ln-ext-ring-edge), var(--ln-ext-ring-edge) - l) - 0.5 * c) * 20,
+        1
+      )
+  );
+  mask: var(--ln-ext-ring-mask, linear-gradient(transparent, transparent)) center / contain
+    no-repeat;
+  pointer-events: none;
+}

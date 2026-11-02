@@ -3,6 +3,7 @@ import { motion } from './motion/index.ts';
 import { sounds } from './sounds/index.ts';
 import { labels } from './labels/labels.ts';
 import { shapes } from './board/index.ts';
+import { pieceSquares } from './piece-squares/index.ts';
 import { backlit } from './backlit/index.ts';
 import { review } from './review/index.ts';
 import { distribution } from './charts/distribution/index.ts';
@@ -26,6 +27,7 @@ startFeatures([
   sounds,
   labels,
   shapes,
+  pieceSquares,
   backlit,
   review,
   distribution,

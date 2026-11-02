@@ -37,3 +37,9 @@ export function cellOf(square: Square, bottom: Color): BoardCell {
   const [file, rank] = squareCoords(square);
   return bottom === 'white' ? { column: file, row: 7 - rank } : { column: 7 - file, row: rank };
 }
+
+/** Whether a square is one of the board's light ones: a1 is dark. */
+export function isLightSquare(square: Square): boolean {
+  const [file, rank] = squareCoords(square);
+  return (file + rank) % 2 === 1;
+}
