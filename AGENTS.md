@@ -338,8 +338,8 @@ What each feature folder holds is listed in
   (`content/packs/piece-sets.ts`) and a rule in
   `styles/board/piece-sets.css`. A set whose pieces blend into some squares
   gets rings: `tools/piece-sets/rings.py <set>` writes its masks and prints
-  its edges for `styles/board/piece-ring-sets.css`, and its id goes in
-  `#shared/piece-rings.ts`. Nor are sounds, but for our two sets, Ascent
+  its edges for `styles/board/piece-ring-sets.css` and for `RING_EDGES`
+  (`#shared/piece-rings.ts`), which the site's boards read. Nor are sounds, but for our two sets, Ascent
   (synthesized) and Boxwood (recorded, `public/sounds/boxwood`, cut by
   `tools/boxwood-sounds/cut.py`; the build fails unless its takes are the ones
   `RECORDED_TAKES` counts). A new sound a pack may have goes in

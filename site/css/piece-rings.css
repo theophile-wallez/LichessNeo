@@ -1,0 +1,44 @@
+/* The ring the extension draws just outside a piece where it blends into its square
+   (src/styles/board/piece-rings.css, the same reckoning): a shade of a light square, a sheen of a
+   dark one, in the square's own hue. demo/pieces.ts puts the set's masks and edges on <html>;
+   a set without has none, which leaves the ring's color invalid, so transparent. */
+
+:is(.demo-piece, .mock-piece)[data-square='light'] {
+  --ring-square: var(--board-light);
+}
+
+:is(.demo-piece, .mock-piece)[data-square='dark'] {
+  --ring-square: var(--board-dark);
+}
+
+:is(.demo-piece, .mock-piece)[data-side='white'] {
+  --ring-edge: var(--ring-edge-white);
+  --ring-shift: -0.32;
+}
+
+:is(.demo-piece, .mock-piece)[data-side='black'] {
+  --ring-edge: var(--ring-edge-black);
+  --ring-shift: 0.32;
+}
+
+:is(.demo-piece, .mock-piece)[data-square]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: oklch(
+    from var(--ring-square) clamp(0.35, l + var(--ring-shift), 0.9) calc(c * 0.6) h /
+      clamp(0, (0.2 - max(l - var(--ring-edge), var(--ring-edge) - l) - 0.5 * c) * 20, 1)
+  );
+  mask: var(--ring-mask, linear-gradient(transparent, transparent)) center / var(--ring-size)
+    no-repeat;
+  pointer-events: none;
+}
+
+/* Each ring as large as its piece. */
+.demo-piece {
+  --ring-size: contain;
+}
+
+.mock-piece {
+  --ring-size: 92%;
+}

@@ -11,7 +11,7 @@ import { DemoCoach } from './coach.ts';
 import { bestLine, type Line } from './explain.ts';
 import { navState, toggled } from './nav.ts';
 import { drawCursor, drawEval, setPieceGlyphs } from './gauges.ts';
-import { LICHESS_SET } from './pieces.ts';
+import { LICHESS_SET, setPieceRings } from './pieces.ts';
 import { capturedOf } from './players.ts';
 import { pickedOn, retryParts, type RetryState } from './retry.ts';
 import { moves, positions } from './review.ts';
@@ -61,7 +61,7 @@ export class Demo {
   constructor(parts: DemoParts, coach: number) {
     this.#parts = parts;
     this.#coachNumber = coach;
-    this.#board = new DemoBoard(parts.board, LICHESS_SET);
+    this.#board = new DemoBoard(parts.board);
     this.#coach = new DemoCoach(parts.coach, coach);
     this.#typist = new Typist(talking => this.#coach.setTalking(talking));
     new IntersectionObserver(([entry]) => this.#setVisible(entry?.isIntersecting ?? false), {
@@ -253,7 +253,7 @@ export class Demo {
   }
 
   setPieceSet(pieceSet: string): void {
-    this.#board.setPieceSet(pieceSet);
     setPieceGlyphs(document.documentElement, pieceSet);
+    setPieceRings(document.documentElement, pieceSet);
   }
 }

@@ -1,6 +1,7 @@
 import { html, type SafeHtml } from '#shared/html.ts';
-import { piecesOf, squareStyle } from './board.ts';
+import { piecesOf, squareShade, squareStyle } from './board.ts';
 import { sectionsMarkup } from './menu.ts';
+import { pieceSide, pieceStyle } from './pieces.ts';
 import { positions } from './review.ts';
 
 // The page's little Lichess (index.html's .mock): an analysis board in the
@@ -46,7 +47,7 @@ function boardMarkup(): SafeHtml {
   if (!position) return html``;
   const pieces = [...piecesOf(position.fen)].map(
     ([square, code]) =>
-      html`<i class="mock-piece" style="${squareStyle(square)};background-image:var(--pc-${code})"></i>`,
+      html`<i class="mock-piece" data-square="${squareShade(square)}" data-side="${pieceSide(code)}" style="${squareStyle(square)};${pieceStyle(code)}"></i>`,
   );
   return html`<div class="mock-board">${pieces}</div>`;
 }

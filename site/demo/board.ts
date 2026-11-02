@@ -1,12 +1,13 @@
 import {
   colorLetter,
+  isLightSquare,
   parseFen,
   ROLE_LETTERS,
   type Square,
   squareCoords,
 } from '#shared/chess/index.ts';
 import { html, setHtml, type SafeHtml } from '#shared/html.ts';
-import { pieceUrl } from './pieces.ts';
+import { pieceSide, pieceStyle } from './pieces.ts';
 
 // The demo's board, in the board and the piece set picked: a piece moves
 // from square to square as chessground moves it, each position matched
@@ -44,7 +45,7 @@ const coordinates = (): SafeHtml => {
 };
 
 interface Placed {
-  readonly element: HTMLImageElement;
+  readonly element: HTMLElement;
   readonly code: string;
 }
 
@@ -53,10 +54,8 @@ export class DemoBoard {
   readonly #under: HTMLElement;
   readonly #over: HTMLElement;
   #placed = new Map<Square, Placed>();
-  #set: string;
 
-  constructor(host: HTMLElement, pieceSet: string) {
-    this.#set = pieceSet;
+  constructor(host: HTMLElement) {
     setHtml(
       host,
       html`<div class="demo-under"></div>${coordinates()}<div class="demo-pieces"></div><div class="demo-over"></div>`,
@@ -73,26 +72,19 @@ export class DemoBoard {
     this.#over = over;
   }
 
-  #src(code: string): string {
-    return pieceUrl(this.#set, code);
-  }
-
-  setPieceSet(pieceSet: string): void {
-    this.#set = pieceSet;
-    for (const { element, code } of this.#placed.values()) element.src = this.#src(code);
-  }
-
   #place(element: HTMLElement, square: Square): void {
     const { x, y } = cell(square);
     element.style.setProperty('--x', String(x));
     element.style.setProperty('--y', String(y));
+    element.dataset.square = squareShade(square);
   }
 
+  // Drawn in the set picked, which gauges.ts and pieces.ts put on <html>.
   #add(square: Square, code: string): void {
-    const element = document.createElement('img');
+    const element = document.createElement('i');
     element.className = 'demo-piece demo-piece--in';
-    element.alt = '';
-    element.src = this.#src(code);
+    element.dataset.side = pieceSide(code);
+    element.setAttribute('style', pieceStyle(code));
     this.#place(element, square);
     this.#pieces.append(element);
     this.#placed.set(square, { element, code });
@@ -140,6 +132,10 @@ export class DemoBoard {
     setHtml(this.#over, markup);
   }
 }
+
+/** Which of the board's two colors a square is, the one a piece's ring is drawn against. */
+export const squareShade = (square: Square): 'light' | 'dark' =>
+  isLightSquare(square) ? 'light' : 'dark';
 
 /** A square's box, as a style the layers' children take. */
 export function squareStyle(square: Square): string {

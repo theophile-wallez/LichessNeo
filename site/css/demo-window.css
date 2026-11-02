@@ -222,6 +222,7 @@
   width: 12.5%;
   height: 12.5%;
   transform: translate(calc(var(--x) * 100%), calc(var(--y) * 100%));
+  background: center / contain no-repeat;
   transition:
     transform 0.34s var(--ease-out),
     opacity 0.25s;

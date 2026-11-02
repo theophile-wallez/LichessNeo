@@ -382,7 +382,9 @@ look's reveal) is [Motion](https://motion.dev)'s, and its figures roll with
 [NumberFlow](https://number-flow.barvian.me): two dev dependencies the extension
 never bundles. The Elo tile's stakes come from the extension's own rules
 (`content/game/stakes`), the sounds tile plays our two sets as the extension
-does (Ascent through `page/sounds/synth`), the menus of the hero's window and of
+does (Ascent through `page/sounds/synth`), the boards' pieces ring where they blend
+into their square as the extension's do (`site/css/piece-rings.css`, the edges from
+`#shared/piece-rings.ts`), the menus of the hero's window and of
 the little Lichess open, fold and collapse as the sidebar's (`site/demo/menu.ts`,
 after `styles/sidebar`), and the bar's star count comes from GitHub's API. The page is dark unless the visitor turns it light
 (`site/demo/scheme.ts`): its sheets write a surface's lightness for the dark

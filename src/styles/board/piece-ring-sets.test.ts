@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { PIECE_SETS } from '#content/packs/piece-sets.ts';
-import { RINGED_SETS } from '#shared/piece-rings.ts';
+import { RING_EDGES, RINGED_SETS } from '#shared/piece-rings.ts';
 
 const ROOT = join(import.meta.dirname, '../../..');
 const CSS = readFileSync(join(import.meta.dirname, 'piece-ring-sets.css'), 'utf8');
@@ -16,11 +16,13 @@ describe('the ringed sets', () => {
     expect(RINGED_SETS.filter(id => !ours.some(set => set === id))).toEqual([]);
   });
 
-  it('give each side’s edges, a lightness', () => {
-    for (const id of RINGED_SETS) {
-      const rule = CSS.slice(CSS.indexOf(`html[data-ln-ext-pieces='${id}'] {`));
-      expect(rule).toMatch(/^[^}]*--ln-ext-ring-edge-white: 0\.\d+;[^}]*}/);
-      expect(rule).toMatch(/^[^}]*--ln-ext-ring-edge-black: 0\.\d+;[^}]*}/);
+  it('give each side’s edges, the ones the site reads', () => {
+    for (const [id, edges] of Object.entries(RING_EDGES)) {
+      const start = CSS.indexOf(`html[data-ln-ext-pieces='${id}'] {`);
+      const rule = CSS.slice(start, CSS.indexOf('}', start));
+      expect(start).toBeGreaterThanOrEqual(0);
+      expect(rule).toContain(`--ln-ext-ring-edge-white: ${edges.white};`);
+      expect(rule).toContain(`--ln-ext-ring-edge-black: ${edges.black};`);
     }
   });
 

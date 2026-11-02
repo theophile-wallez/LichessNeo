@@ -1,7 +1,7 @@
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { barLabel } from '#page/review/evaluation/format.ts';
 import type { DemoParts } from './demo.ts';
-import { pieceUrl } from './pieces.ts';
+import { PIECE_CODES, pieceUrl } from './pieces.ts';
 import { positions, records } from './review.ts';
 
 // What follows the move on the board around the demo's card: the eval bar, the
@@ -29,8 +29,6 @@ export function drawCursor(parts: Pick<DemoParts, 'graphCursor' | 'panel'>, ply:
       list.scrollTo({ top: current.offsetTop - list.clientHeight / 2, behavior: 'smooth' });
   }
 }
-
-const PIECE_CODES = ['wP', 'wN', 'wB', 'wR', 'wQ', 'wK', 'bP', 'bN', 'bB', 'bR', 'bQ', 'bK'];
 
 /**
  * The comments' pieces (`.ln-ext-pc-*`, demo-panel.css) and the layout's board
