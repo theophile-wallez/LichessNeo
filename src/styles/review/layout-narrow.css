@@ -115,7 +115,8 @@
   }
 
   /* The review hides what it takes the place of, as on the desktop (layout.css). */
-  html.ln-ext-review-summary main.analyse > :is(.analyse__tools, .analyse__controls, .mchat),
+  html.ln-ext-review-summary main.analyse > :is(.analyse__controls, .mchat),
+  html.ln-ext-review-summary main.analyse .analyse__tools > :not(.action-menu),
   html.ln-ext-review-moves main.analyse > :is(.analyse__controls, .mchat),
   html.ln-ext-review-moves
     main.analyse

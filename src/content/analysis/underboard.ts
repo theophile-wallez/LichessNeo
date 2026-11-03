@@ -1,90 +1,74 @@
-import { createElement, queryOne, setData } from '#shared/dom.ts';
+import { closestTo, createElement, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { createOwnedElement } from '#shared/owned-element.ts';
+import { ANALYSIS } from '#content/board-tools/pages.ts';
+import { message } from '#content/platform/runtime.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
-// What Lichess shows under the board, which our layout drops so the page never
-// scrolls: the free board's FEN and PGN fields; a game's charts, crosstable,
-// "Request a computer analysis" and "Share & export"; a study's toolbar
-// (comments, glyphs, server eval, tags, share). A button in the controls opens
-// it over the engine and the moves (styles/analysis/underboard.css), with the
-// advice summary and its "Learn from your mistakes" over the chat. A study's
-// is the panel's Infos tab instead (content/layout/panel-tabs.ts).
+// The free board's FEN and PGN fields, which Lichess shows under the board and
+// our layout drops so the page never scrolls: a row of the analysis menu opens
+// them over the engine and the moves (styles/analysis/underboard.css), and a
+// close button over them puts them away. A game's underboard needs no way in:
+// its charts are the review's graph's views, its crosstable and export the
+// review's share sheet, its server analysis the move list's end.
 
 export const OPEN = 'ln-ext-underboard-open';
-const BUTTON = 'ln-ext-underboard';
-// Lichess's tools glyph.
-const ICON = '';
-// Lichess's own "Tools" (i18n.site.tools), which the page world copies onto
-// <html> (src/page/labels); English until it's there.
-const FALLBACK_LABEL = 'Tools';
+const ROW = 'ln-ext-menu-fen';
+const CLOSE = 'ln-ext-underboard-close';
+// The fields' own names, which Lichess doesn't translate either.
+const LABEL = 'FEN & PGN';
 
-const UNDERBOARD = 'main.analyse > .analyse__underboard';
-// A practice drill shows its goal there already (styles/practice-run).
-const PRACTICE = 'main.analyse .practice__side';
-const STUDY = `${UNDERBOARD} > :is(.study__metadata, .study__buttons)`;
-// Lichess's "Learn from your mistakes" box, in place of the moves' tools.
-const RETRO = 'main.analyse .analyse__tools > .retro-box';
+const FIELDS = 'main.analyse > .analyse__underboard > .copyables';
+const MENU = 'main.analyse .analyse__tools > .action-menu';
 
-let retroShown = false;
+function setOpen(open: boolean): void {
+  document.documentElement.classList.toggle(OPEN, open);
+}
 
-function buildButton(): HTMLButtonElement {
-  const button = createElement('button', {
-    className: `fbt ${BUTTON}`,
-    attrs: { type: 'button', 'data-icon': ICON },
+const isOpen = (): boolean => document.documentElement.classList.contains(OPEN);
+
+function buildRow(): HTMLButtonElement {
+  const row = createElement('button', { className: ROW, text: LABEL, attrs: { type: 'button' } });
+  row.addEventListener('click', () => {
+    setOpen(true);
+    const main = closestTo(row, 'main.analyse', HTMLElement);
+    if (main) ANALYSIS.toggleMenu(main);
   });
-  button.addEventListener('click', () => {
-    const root = document.documentElement;
-    root.classList.toggle(OPEN, !root.classList.contains(OPEN));
-    syncUnderboard();
+  return row;
+}
+
+function buildClose(): HTMLButtonElement {
+  const close = createElement('button', {
+    className: CLOSE,
+    attrs: { type: 'button', 'aria-label': message('underboardClose') },
   });
-  return button;
+  close.addEventListener('click', () => setOpen(false));
+  return close;
 }
 
-const ownButton = createOwnedElement(buildButton);
-
-// Our tooltips read data-ln-ext-tip.
-function setLabel(button: HTMLButtonElement): void {
-  const label = document.documentElement.dataset.lnExtToolsLabel ?? FALLBACK_LABEL;
-  if (button.dataset.lnExtTip === label) return;
-  setData(button, 'lnExtTip', label);
-  button.setAttribute('aria-label', label);
-}
-
-function hasUnderboard(): boolean {
-  const underboard = document.querySelector(UNDERBOARD);
-  return (
-    Boolean(underboard?.firstElementChild) &&
-    !document.querySelector(PRACTICE) &&
-    !document.querySelector(STUDY)
-  );
-}
-
-// Starting "Learn from your mistakes" from the panel closes it, or it would
-// cover the box that runs the exercise.
-function closeOnRetro(): void {
-  const shown = document.querySelector(RETRO) !== null;
-  if (shown && !retroShown) document.documentElement.classList.toggle(OPEN, false);
-  retroShown = shown;
-}
+const ownRow = createOwnedElement(buildRow);
+const ownClose = createOwnedElement(buildClose);
 
 export function syncUnderboard(): void {
-  const root = document.documentElement;
-  const controls = queryOne(document, 'main.analyse .analyse__controls', HTMLElement);
-  if (!controls || !hasUnderboard()) {
-    if (root.classList.contains(OPEN)) root.classList.toggle(OPEN, false);
+  const fields = queryOne(document, FIELDS, HTMLElement);
+  if (!fields) {
+    if (isOpen()) setOpen(false);
     return;
   }
-  closeOnRetro();
-  const button = ownButton(controls).element;
-  setLabel(button);
-  const open = root.classList.contains(OPEN);
-  button.classList.toggle('active', open);
-  if (button.getAttribute('aria-pressed') !== String(open))
-    button.setAttribute('aria-pressed', String(open));
+  const tools = queryOne(document, `${MENU} .action-menu__tools`, HTMLElement);
+  if (tools) ownRow(tools);
+  if (fields.parentElement) ownClose(fields.parentElement);
+}
+
+function onKeyDown(event: KeyboardEvent): void {
+  if (event.key === 'Escape' && isOpen() && !closestTo(event.target, 'dialog', Element))
+    setOpen(false);
 }
 
 export const underboard: Feature = {
   name: 'underboard',
-  start: () => onEveryTick('underboard', syncUnderboard),
+  start: () => {
+    onEveryTick('underboard', syncUnderboard);
+    document.addEventListener('keydown', onKeyDown);
+  },
 };

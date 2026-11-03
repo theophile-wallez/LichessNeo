@@ -1,7 +1,8 @@
 /* ---- Controls below 1020px --- */
 
 /* One rounded bar under the board, as the desktop's (controls.css): the engine's switch and
- * the explorer left, the four jumps, the menu right. Lichess wraps them in two rows here. */
+ * the explorer left, the four jumps, then our cog and flip button (board-tools.css). Lichess
+ * wraps them in two rows here. */
 
 @media (max-width: 1019.98px) {
   main.analyse .analyse__controls {
@@ -46,11 +47,6 @@
     background: none !important;
     color: var(--ln-ext-text-dim) !important;
     font-size: 18px;
-  }
-
-  /* Lichess's mobile layout keeps its underboard in view: no button to open it. */
-  main.analyse .analyse__controls > .ln-ext-underboard {
-    display: none !important;
   }
 
   main.analyse .analyse__controls > .fbt[data-act='menu'] {
@@ -103,22 +99,5 @@
 
   main.analyse .analyse__controls .jumps .fbt:disabled {
     opacity: 0.45;
-  }
-
-  /* The menu opens in place of the moves, as on the desktop. */
-  main.analyse .analyse__tools > .action-menu {
-    border: none !important;
-    background: var(--ln-ext-bg-panel) !important;
-  }
-
-  main.analyse .action-menu > .title {
-    padding: 14px 12px 6px !important;
-    background: none !important;
-    color: var(--ln-ext-text-dim) !important;
-    font-size: 12px !important;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    line-height: 1.2 !important;
-    text-transform: uppercase;
   }
 }

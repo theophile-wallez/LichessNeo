@@ -7,7 +7,8 @@ main.analyse .analyse__controls > .fbt[data-act='engine-mode']::before {
 }
 
 @media (min-width: 1020px) {
-  /* Four big grey buttons, the explorer and practice toggles left, the menu right. */
+  /* Four big grey buttons, the explorer and practice toggles left (the menu is the cog's,
+   * board-tools.css). */
   main.analyse .analyse__controls {
     display: flex !important;
     align-items: center;
@@ -64,28 +65,6 @@ main.analyse .analyse__controls > .fbt[data-act='engine-mode']::before {
     opacity: 0.45;
   }
 
-  /* ---- Menu --- */
-
-  /* The analysis menu takes the move list's room and scrolls there: it couldn't shrink, and in a
-   * short panel its end ran under the controls. Lichess's green header goes. */
-  main.analyse .analyse__tools > .action-menu {
-    min-height: 0;
-    overflow-y: auto;
-    border: none !important;
-    background: var(--ln-ext-bg-panel) !important;
-  }
-
-  main.analyse .action-menu > .title {
-    padding: 14px 12px 6px !important;
-    background: none !important;
-    color: var(--ln-ext-text-dim) !important;
-    font-size: 12px !important;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    line-height: 1.2 !important;
-    text-transform: uppercase;
-  }
-
   /* The controls are the panel's foot, unless a study's chapter list or a broadcast's games
    * take a row under them (layout.css). */
   html:not([data-ln-ext-has~='study-side']) main.analyse:not(.is-relay) .analyse__controls {
@@ -95,8 +74,8 @@ main.analyse .analyse__controls > .fbt[data-act='engine-mode']::before {
   /* ---- No scrolling --- */
 
   /* The page never scrolls: the underboard, game info and the advice summary go, and the
-   * keyboard-move input sits at the bottom of the tools. The underboard and the advice summary
-   * open in the panel instead (underboard.css). */
+   * keyboard-move input sits at the bottom of the tools. The review has their parts elsewhere,
+   * and the free board's FEN and PGN open in the panel (underboard.css). */
   html[data-ln-ext-has~='analyse'],
   html[data-ln-ext-has~='analyse'] body,
   html[data-ln-ext-has~='analyse'] #main-wrap {

@@ -84,9 +84,9 @@ main.round .pocket.usable piece:hover {
 
 /* ---- Board tools --- */
 
-/* Our board tools (content/game/board-tools.ts) in the gap right of the board: the cog, and
- * the flip and Zen buttons while the pointer is over the board. The cog replaces the move bar's
- * menu button. */
+/* Our board tools (content/board-tools, their look in board/board-tools.css) in the gap
+ * right of the board: the cog, and the flip and Zen buttons while the pointer is over the
+ * board. The cog replaces the move bar's menu button. */
 main.round :is(i5d, rm6) bo3 .board-menu-toggle-btn {
   display: none !important;
 }
@@ -109,59 +109,9 @@ html[data-ln-ext-has~='pocket'] main.round > .ln-ext-board-tools {
   margin-inline-end: 0;
 }
 
-main.round .ln-ext-board-tools__btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  border: 0;
-  border-radius: 4px;
-  background: none;
-  color: var(--ln-ext-neutral-10);
-  cursor: pointer;
-  transition:
-    color 0.15s,
-    opacity 0.2s,
-    visibility 0.2s !important;
-}
-
-main.round .ln-ext-board-tools__btn:is(:hover, .ln-ext-board-tools__btn--on) {
-  color: var(--ln-ext-text-strong);
-}
-
-main.round .ln-ext-board-tools__btn::before {
-  content: '';
-  width: 17px;
-  height: 17px;
-  background: currentColor;
-  mask: center / contain no-repeat;
-}
-
-/* The cog, the flip arrows and Zen's figure. */
-main.round .ln-ext-board-tools__btn--menu::before {
-  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
-}
-
-main.round .ln-ext-board-tools__btn--flip::before {
-  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-reload-vertical.svg');
-}
-
-main.round .ln-ext-board-tools__btn--zen::before {
-  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/yoga-03.svg');
-}
-
 /* Zen is only for a game the user plays. */
 body:not(.zenable) main.round .ln-ext-board-tools__btn--zen {
   display: none;
-}
-
-main.round
-  .ln-ext-board-tools:not(.ln-ext-board-tools--hover)
-  :is(.ln-ext-board-tools__btn--flip, .ln-ext-board-tools__btn--zen) {
-  visibility: hidden;
-  opacity: 0;
 }
 
 /* ---- Mobile --- */

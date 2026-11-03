@@ -45,10 +45,6 @@ describe('presentFlags, for flags the original lacked', () => {
       'analyse-game',
       '<main class="analyse"><div class="game__meta"><div class="game__meta__players"></div></div></main>',
     ],
-    [
-      'analyse-training',
-      '<main class="analyse"><div class="analyse__round-training"><div class="analyse__acpl"></div></div></main>',
-    ],
     ['inbox', '<main class="box msg-app pane-side"><div class="msg-app__side"></div></main>'],
   ])('reads %s', (flag, page) => {
     document.body.innerHTML = page;

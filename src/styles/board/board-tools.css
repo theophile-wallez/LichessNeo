@@ -1,0 +1,56 @@
+/* ---- Board tools --- */
+
+/* The cog, flip and Zen buttons beside a board (content/board-tools), the same on the game and
+ * analysis pages; each page places them (game/board-extras.css, analysis/board-tools.css). */
+.ln-ext-board-tools__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--ln-ext-neutral-10);
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    opacity 0.2s,
+    visibility 0.2s !important;
+}
+
+.ln-ext-board-tools__btn[hidden] {
+  display: none !important;
+}
+
+.ln-ext-board-tools__btn:is(:hover, .ln-ext-board-tools__btn--on) {
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-board-tools__btn::before {
+  content: '';
+  width: 17px;
+  height: 17px;
+  background: currentColor;
+  mask: center / contain no-repeat;
+}
+
+/* The cog, the flip arrows and Zen's figure. */
+.ln-ext-board-tools__btn--menu::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
+}
+
+.ln-ext-board-tools__btn--flip::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-reload-vertical.svg');
+}
+
+.ln-ext-board-tools__btn--zen::before {
+  mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/yoga-03.svg');
+}
+
+.ln-ext-board-tools:not(.ln-ext-board-tools--hover)
+  :is(.ln-ext-board-tools__btn--flip, .ln-ext-board-tools__btn--zen) {
+  visibility: hidden;
+  opacity: 0;
+}

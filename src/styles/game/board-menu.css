@@ -1,6 +1,6 @@
 /* ---- Board menu --- */
 
-/* Lichess's board menu (the cog's, content/game/board-tools.ts) hung from the moves' top, which
+/* Lichess's board menu (the cog's, content/board-tools) hung from the moves' top, which
  * clipped its last toggles. It floats instead, in the user menu's look (sidebar/dasher.css),
  * scrolling if the window is short. Lichess closes it on a click outside. */
 main.round :is(i5d, rm6) .board-menu {

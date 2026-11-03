@@ -107,7 +107,8 @@
 
   /* The review hides the engine lines, the explorer (left open, it squeezed the moves) and
      the fork picker (it offered the computer's move). All come back once it's closed. */
-  html.ln-ext-review-summary main.analyse > :is(.analyse__tools, .analyse__controls, .mchat),
+  html.ln-ext-review-summary main.analyse > :is(.analyse__controls, .mchat),
+  html.ln-ext-review-summary main.analyse .analyse__tools > :not(.action-menu),
   html.ln-ext-review-moves main.analyse > :is(.analyse__controls, .mchat),
   html.ln-ext-review-moves
     main.analyse
@@ -120,6 +121,12 @@
   html.ln-ext-review:not(.ln-ext-review-normal) main.analyse .analyse__tools {
     border-radius: 0 !important;
   }
+}
+
+/* The summary and the openings' page take Lichess's tools' place, but for its menu, which
+   floats from the board's cog (analysis/board-tools.css): the tools keep no box of their own. */
+html:is(.ln-ext-review-summary, .ln-ext-review-openings) main.analyse > .analyse__tools {
+  display: contents !important;
 }
 
 /* ---- Panel --- */

@@ -1,0 +1,107 @@
+/* ---- Continue from here --- */
+
+/* The analysis menu's "Continue from here" opens a sub-menu in place of the menu
+ * (content/board-tools/continue-menu.ts), as the user menu's do (sidebar/dasher.css): a back
+ * row as its title, then the two ways on, against the computer or a friend, as the menu's
+ * rows. */
+main.analyse .action-menu[data-ln-ext-sub='continue'] > .title,
+main.analyse .action-menu[data-ln-ext-sub='continue'] .inner > :not(.continue-with),
+main.analyse .action-menu:not([data-ln-ext-sub]) > .ln-ext-menu-back {
+  display: none !important;
+}
+
+main.analyse .action-menu > .ln-ext-menu-back {
+  order: -1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  width: calc(100% + 12px);
+  height: 44px;
+  margin: -6px -6px 6px;
+  padding: 0 16px;
+  border: 0;
+  border-bottom: 1px solid var(--ln-ext-lift-8);
+  background: none;
+  color: var(--ln-ext-text-strong);
+  font: 700 15px var(--ln-ext-font);
+  text-align: start;
+  cursor: pointer;
+}
+
+main.analyse .action-menu > .ln-ext-menu-back::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--ln-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-left-01.svg') center /
+    contain no-repeat;
+}
+
+main.analyse .action-menu > .ln-ext-menu-back:hover::before {
+  background: var(--ln-ext-text-strong);
+}
+
+/* Lichess keeps the links hidden (`.none`) for its dialog. */
+main.analyse .action-menu[data-ln-ext-sub='continue'] .continue-with {
+  display: flex !important;
+  flex-direction: column;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+main.analyse .action-menu .continue-with .button {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text) !important;
+  font: 600 15px var(--ln-ext-font) !important;
+  text-align: start;
+  text-transform: none !important;
+  white-space: nowrap;
+  transition: background-color 0.1s !important;
+}
+
+main.analyse .action-menu .continue-with .button + .button {
+  --ln-ext-row-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg');
+}
+
+main.analyse .action-menu .continue-with .button:hover {
+  background: var(--ln-ext-menu-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.analyse .action-menu .continue-with .button::before {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: var(--ln-ext-text-dim);
+  mask: var(--ln-ext-row-icon) center / 20px no-repeat;
+}
+
+main.analyse .action-menu .continue-with .button:hover::before {
+  background: var(--ln-ext-text-strong);
+}
+
+/* Its row in the menu ends with a chevron, as a sub-menu's does. */
+main.analyse .action-menu__tools > button[data-icon='\e033']::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  margin-inline-start: auto;
+  background: var(--ln-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-01.svg') center /
+    contain no-repeat;
+}

@@ -4,9 +4,8 @@ import { pollUntil } from '#shared/poll.ts';
 import { nonEmpty } from '#shared/text.ts';
 import { translate } from '#page/lichess/globals.ts';
 
-// Lichess's own labels for what the content script adds: the game page's flip
-// button (src/content/game/board-tools.ts), the analysis controls' tools
-// (src/content/analysis/underboard.ts), the tournament podium's scores
+// Lichess's own labels for what the content script adds: the board tools' flip
+// button (src/content/board-tools), the tournament podium's scores
 // (src/content/pages/podium.ts), the game setup's tiles (src/content/game-setup) and
 // the inbox's title and status (src/content/inbox).
 // Only the page world can read Lichess's translations, so this copies them onto <html>.
@@ -14,7 +13,6 @@ import { translate } from '#page/lichess/globals.ts';
 /** Each label's `i18n.site` key, by the data attribute it goes into. */
 const LABELS = {
   lnExtFlipLabel: 'flipBoard',
-  lnExtToolsLabel: 'tools',
   lnExtPointsLabel: 'points',
   lnExtVariantLabel: 'variant',
   lnExtTimeControlLabel: 'timeControl',

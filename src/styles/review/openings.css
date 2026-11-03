@@ -4,7 +4,8 @@
    takes the whole column, Lichess's tools giving way to it, as the summary's does. The
    engine's lines and the explorer's moves would give the book's moves away. */
 
-html.ln-ext-review-openings main.analyse > :is(.analyse__tools, .analyse__controls, .mchat),
+html.ln-ext-review-openings main.analyse > :is(.analyse__controls, .mchat),
+html.ln-ext-review-openings main.analyse .analyse__tools > :not(.action-menu),
 html.ln-ext-review-openings main.analyse > .ln-ext-panel-tabs {
   display: none !important;
 }

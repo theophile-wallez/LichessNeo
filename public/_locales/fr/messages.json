@@ -1002,6 +1002,10 @@
   "noticeClose": {
     "message": "Fermer"
   },
+  "underboardClose": {
+    "message": "Fermer",
+    "description": "The close button over the free analysis board's FEN and PGN fields, read out by screen readers."
+  },
   "coachPickerTitle": {
     "message": "Choisissez votre coach"
   },

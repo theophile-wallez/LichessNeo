@@ -1,0 +1,249 @@
+/* ---- Board tools and menu --- */
+
+/* As on the game page (game/board-extras.css): the cog and the flip button in the gap right of
+ * the board (content/board-tools). The controls' menu button is a cog too, from 1020px; below,
+ * our tools take its place at the controls' end. Lichess's menu, which it put at the panel's
+ * end in the panel's color, floats from the cog pressed instead, in the game's board menu's
+ * look (game/board-menu.css). A broadcast's page has no board. */
+main.analyse .analyse__controls > .fbt[data-act='menu']::before {
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
+}
+
+@media (max-width: 1019.98px) {
+  main.analyse:not(.has-relay-tour) .analyse__controls > .fbt[data-act='menu'] {
+    display: none !important;
+  }
+}
+
+main.analyse > .ln-ext-board-tools {
+  grid-area: board;
+  justify-self: end;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: var(--ln-ext-gap);
+  margin: var(--ln-ext-bar, 0px) calc(-1 * var(--ln-ext-gap)) 0 0;
+  z-index: 2;
+}
+
+main.analyse .analyse__tools > .action-menu {
+  position: fixed !important;
+  z-index: 108 !important;
+  display: flex !important;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(calc(100vw - 32px), 340px) !important;
+  max-height: calc(100dvh - 32px);
+  margin: 0 !important;
+  padding: 6px !important;
+  overflow-y: auto;
+  border: 1px solid var(--ln-ext-menu-border) !important;
+  border-radius: 12px !important;
+  background: var(--ln-ext-menu-bg) !important;
+  /* A dialog in the window's middle, over the dimmed page, where it can't hang from the cog. */
+  inset: 50% auto auto 50% !important;
+  box-shadow:
+    var(--ln-ext-menu-shadow),
+    0 0 0 100vmax var(--ln-ext-page-mask) !important;
+  transform: translate(-50%, -50%);
+  animation: ln-ext-board-menu-in 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Beside the board, it opens from the cog as the game's does: right of it, over the panel. From
+ * the controls' cog (content/board-tools marks which), above it. */
+@supports (anchor-name: --ln-ext-analysis-cog) {
+  @media (min-width: 1020px) {
+    main.analyse .ln-ext-board-tools__btn--menu {
+      anchor-name: --ln-ext-analysis-cog;
+    }
+
+    main.analyse .analyse__controls > .fbt[data-act='menu'] {
+      anchor-name: --ln-ext-controls-cog;
+    }
+
+    main.analyse .analyse__tools > .action-menu {
+      position-anchor: --ln-ext-analysis-cog;
+      position-area: right span-bottom;
+      position-try-fallbacks: flip-inline;
+      inset: auto !important;
+      max-height: calc(100% - 16px);
+      margin: 0 8px !important;
+      box-shadow: var(--ln-ext-menu-shadow) !important;
+      transform: none;
+    }
+
+    main.analyse[data-ln-ext-menu-from='controls'] .analyse__tools > .action-menu {
+      position-anchor: --ln-ext-controls-cog;
+      position-area: top span-left;
+      position-try-fallbacks: none;
+      margin: 0 0 8px !important;
+    }
+  }
+}
+
+main.analyse .action-menu > .title,
+main.analyse .action-menu h2 {
+  margin: 0 !important;
+  padding: 8px 12px 6px !important;
+  border: 0 !important;
+  background: none !important;
+  color: var(--ln-ext-text-dim) !important;
+  font: 700 12px/1.2 var(--ln-ext-font) !important;
+  letter-spacing: 0.04em;
+  text-align: start !important;
+  text-transform: uppercase;
+}
+
+/* Lichess draws its heading between two rules: the line above is enough. */
+main.analyse .action-menu h2 {
+  display: block !important;
+  margin-top: 6px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid var(--ln-ext-lift-8) !important;
+}
+
+main.analyse .action-menu h2::before,
+main.analyse .action-menu h2::after {
+  content: none !important;
+}
+
+main.analyse .action-menu .inner {
+  padding: 0 !important;
+}
+
+/* Lichess's grid of tiles, as the board menu's rows: icon, label. */
+main.analyse .action-menu__tools {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0 !important;
+  margin: 0 !important;
+}
+
+main.analyse .action-menu__tools form {
+  display: contents;
+}
+
+main.analyse .action-menu__tools :is(button, a) {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  /* Lichess's tiles are 60px tall. */
+  height: 40px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text) !important;
+  font: 600 15px var(--ln-ext-font) !important;
+  text-align: start;
+  text-transform: none !important;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.1s !important;
+}
+
+main.analyse .action-menu__tools :is(button, a):hover {
+  background: var(--ln-ext-menu-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.analyse .action-menu__tools :is(button, a)::before {
+  flex: none;
+  width: 20px;
+  margin: 0 !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 18px !important;
+  text-align: center;
+}
+
+main.analyse .action-menu__tools :is(button, a):hover::before {
+  color: var(--ln-ext-text-strong) !important;
+}
+
+/* "Practice with computer", in the menu below 1020px: the robot, as in the controls. */
+main.analyse .action-menu__tools [data-icon='\e05c']::before {
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
+}
+
+/* Replay mode's speeds: a row of grey buttons. */
+main.analyse .action-menu .autoplay {
+  display: flex !important;
+  gap: 6px;
+  margin: 0 !important;
+  padding: 0 6px 6px !important;
+}
+
+/* Flex to center: Lichess's padding put the words above the middle. */
+main.analyse .action-menu .autoplay .button {
+  flex: 1 1 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 36px;
+  margin: 0 !important;
+  padding: 0 8px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: var(--ln-ext-btn-grey) !important;
+  box-shadow: var(--ln-ext-btn-grey-shadow) !important;
+  color: var(--ln-ext-text) !important;
+  font: 600 14px/1 var(--ln-ext-font) !important;
+  text-transform: none !important;
+}
+
+main.analyse .action-menu .autoplay .button:hover {
+  background: var(--ln-ext-btn-grey-hover) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.analyse .action-menu .autoplay .button.active {
+  background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent) !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-accent-hover) !important;
+}
+
+/* ---- Below 1020px --- */
+
+/* The tools end the controls' row under the board, where the menu button was, always shown:
+ * a touch screen has no hover to reveal the flip button. */
+@media (max-width: 1019.98px) {
+  main.analyse > .ln-ext-board-tools {
+    grid-area: controls !important;
+    flex-direction: row;
+    align-self: center;
+    gap: 0;
+    width: auto;
+    /* Level with the controls' buttons, under their 8px top margin. */
+    margin: 12px 6px 0 0;
+  }
+
+  main.analyse:not(.has-relay-tour) .analyse__controls {
+    padding-inline-end: calc(6px + 2 * 40px) !important;
+  }
+
+  main.analyse .ln-ext-board-tools__btn {
+    width: 40px;
+    height: 44px;
+    border-radius: 6px;
+    color: var(--ln-ext-text-dim);
+  }
+
+  main.analyse .ln-ext-board-tools__btn::before {
+    width: 19px;
+    height: 19px;
+  }
+
+  main.analyse .ln-ext-board-tools:not(.ln-ext-board-tools--hover) .ln-ext-board-tools__btn--flip {
+    visibility: visible;
+    opacity: 1;
+  }
+}

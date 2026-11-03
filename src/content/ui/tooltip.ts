@@ -59,6 +59,14 @@ function adoptTitle(target: HTMLElement): void {
   target.removeAttribute('title');
 }
 
+const normalized = (text: string): string => text.replace(/\s+/g, ' ').trim().toLowerCase();
+
+// A title that only repeats the button's words, as some of the analysis menu's rows have.
+function repeatsLabel(target: HTMLElement, tip: string): boolean {
+  const words = normalized(target.textContent);
+  return words !== '' && words === normalized(tip);
+}
+
 export class Tooltip {
   readonly #element = createElement('div', {
     className: 'ln-ext-tooltip',
@@ -81,7 +89,8 @@ export class Tooltip {
     this.hide();
     if (!target) return;
     adoptTitle(target);
-    if (!target.dataset.lnExtTip || target.matches(NO_TIP)) return;
+    const tip = target.dataset.lnExtTip;
+    if (!tip || target.matches(NO_TIP) || repeatsLabel(target, tip)) return;
     this.#target = target;
     const delay = Date.now() - this.#hiddenAt < CHAIN_MS ? 0 : FIRST_DELAY_MS;
     this.#timer = setTimeout(() => this.#show(target), delay);

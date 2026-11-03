@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 
-const SHEETS = ['zen.css', 'board-extras.css', 'layout-narrow.css'];
+const SHEETS = ['../board/board-tools.css', 'zen.css', 'board-extras.css', 'layout-narrow.css'];
 
 const ROUND =
   '<main class="round"><rm6><l4x></l4x><div class="result-wrap"></div><bo3></bo3></rm6>' +

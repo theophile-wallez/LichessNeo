@@ -6,6 +6,8 @@
 @import './context-menu.css';
 @import './controls.css';
 @import './controls-narrow.css';
+@import './board-tools.css';
+@import './continue-with.css';
 @import './underboard.css';
 @import './export.css';
 @import './retro.css';

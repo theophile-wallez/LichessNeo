@@ -1329,6 +1329,10 @@
     "message": "Close",
     "description": "A toast's close button, read out by screen readers."
   },
+  "underboardClose": {
+    "message": "Close",
+    "description": "The close button over the free analysis board's FEN and PGN fields, read out by screen readers."
+  },
   "coachPickerTitle": {
     "message": "Choose your coach",
     "description": "The title of the Game Review's coach picker, opened by a click on the coach."

@@ -1,108 +1,96 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { queryAll } from '#shared/dom.ts';
-import { OPEN } from './underboard.ts';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { queryAll, queryOne } from '#shared/dom.ts';
+import { OPEN, syncUnderboard, underboard } from './underboard.ts';
 
-// The markup Lichess serves under the board: the free board's FEN and PGN, a
-// game's tabs; a study's toolbar, which the panel's Info tab shows; and a
-// practice drill's goal, which stays.
+// The markup Lichess serves: the analysis menu, open, then what's under the
+// board: the free board's FEN and PGN, a game's tabs, a study's toolbar.
 const CONTROLS =
-  '<div class="analyse__controls"><div class="jumps"></div><button class="fbt" data-act="menu"></button></div>';
-const TOOLS = '<div class="analyse__tools"><div class="analyse__moves"></div></div>';
-const FREE_BOARD = `<main class="analyse">${TOOLS}${CONTROLS}<div class="analyse__underboard"><div class="copyables"><div class="pair"><label class="name">FEN</label><input class="copyable"></div></div></div></main>`;
+  '<div class="analyse__controls"><div class="jumps"></div><button class="fbt active" data-act="menu"></button></div>';
+const MENU =
+  '<div class="action-menu sub-box"><div class="title">Analysis board</div><div class="inner"><div class="action-menu__tools"><button data-icon="">Flip board</button></div></div></div>';
+const TOOLS = `<div class="analyse__tools"><div class="analyse__moves"></div>${MENU}</div>`;
+const FIELDS =
+  '<div class="copyables"><div class="pair"><label class="name">FEN</label><input class="copyable"></div></div>';
+const FREE_BOARD = `<main class="analyse">${TOOLS}${CONTROLS}<div class="analyse__underboard">${FIELDS}</div></main>`;
 const GAME = `<main class="analyse">${TOOLS}${CONTROLS}<div class="analyse__underboard"><div class="analyse__underboard__menu"></div><div class="analyse__underboard__panels"><div class="fen-pgn"></div></div></div></main>`;
 const STUDY = `<main class="analyse">${TOOLS}${CONTROLS}<div class="analyse__underboard"><div class="study__buttons"></div></div></main>`;
-const DRILL = `<main class="analyse">${TOOLS}${CONTROLS}<div class="analyse__underboard"><div class="feedback"></div></div><div class="practice__side"></div></main>`;
-const EMPTY = `<main class="analyse">${TOOLS}${CONTROLS}<div class="analyse__underboard"></div></main>`;
-const RETRO_BOX = '<div class="retro-box training-box sub-box"></div>';
 
 const root = document.documentElement;
-const buttons = (): HTMLButtonElement[] =>
-  queryAll(document, '.ln-ext-underboard', HTMLButtonElement);
+const rows = (): HTMLButtonElement[] => queryAll(document, '.ln-ext-menu-fen', HTMLButtonElement);
+const closeButton = (): HTMLButtonElement | null =>
+  queryOne(document, '.ln-ext-underboard-close', HTMLButtonElement);
+const isOpen = (): boolean => root.classList.contains(OPEN);
 
-// A fresh module per test: it remembers whether "Learn from your mistakes" showed.
-let syncUnderboard: () => void;
+beforeAll(() => underboard.start());
 
-beforeEach(async () => {
-  vi.resetModules();
-  ({ syncUnderboard } = await import('./underboard.ts'));
+beforeEach(() => {
+  vi.stubGlobal('chrome', { i18n: { getMessage: (name: string) => `[${name}]` } });
 });
 
 afterEach(() => {
   document.body.innerHTML = '';
   root.classList.toggle(OPEN, false);
-  delete root.dataset.lnExtToolsLabel;
 });
 
-describe('the underboard button', () => {
-  it.each([
-    ['the free board', FREE_BOARD],
-    ['a game’s analysis', GAME],
-  ])('joins the controls on %s, once', (_name, markup) => {
-    document.body.innerHTML = markup;
+describe('the free board’s FEN and PGN', () => {
+  it('get a row at the end of the analysis menu’s tools, once', () => {
+    document.body.innerHTML = FREE_BOARD;
     syncUnderboard();
     syncUnderboard();
-    expect(buttons()).toHaveLength(1);
-    expect(buttons()[0]?.parentElement?.className).toBe('analyse__controls');
+    expect(rows()).toHaveLength(1);
+    expect(rows()[0]?.parentElement?.className).toBe('action-menu__tools');
+    expect(rows()[0]?.textContent).toBe('FEN & PGN');
   });
 
   it.each([
-    ['a practice drill, whose goal shows already', DRILL],
-    ['a study, whose panel has a tab for it', STUDY],
-    ['an empty underboard', EMPTY],
-  ])('stays out of %s', (_name, markup) => {
+    ['a game’s analysis, whose parts the review shows', GAME],
+    ['a study, whose panel has a tab for its toolbar', STUDY],
+  ])('leave out %s', (_name, markup) => {
     document.body.innerHTML = markup;
     syncUnderboard();
-    expect(buttons()).toHaveLength(0);
+    expect(rows()).toHaveLength(0);
+    expect(closeButton()).toBeNull();
   });
 
-  it('opens the underboard and closes it again', () => {
-    document.body.innerHTML = GAME;
-    syncUnderboard();
-    buttons()[0]?.click();
-    expect(root.classList.contains(OPEN)).toBe(true);
-    expect(buttons()[0]?.getAttribute('aria-pressed')).toBe('true');
-    expect(buttons()[0]?.classList.contains('active')).toBe(true);
-    buttons()[0]?.click();
-    expect(root.classList.contains(OPEN)).toBe(false);
-    expect(buttons()[0]?.getAttribute('aria-pressed')).toBe('false');
-  });
-
-  it('closes once the page has no underboard left', () => {
+  it('open from the row, which closes the menu as its button does', () => {
     document.body.innerHTML = FREE_BOARD;
     syncUnderboard();
-    buttons()[0]?.click();
-    document.body.innerHTML = EMPTY;
-    syncUnderboard();
-    expect(root.classList.contains(OPEN)).toBe(false);
+    const presses: string[] = [];
+    for (const type of ['pointerdown', 'pointerup'])
+      document.addEventListener(type, event => presses.push(event.type), { once: true });
+    rows()[0]?.click();
+    expect(isOpen()).toBe(true);
+    expect(presses).toEqual(['pointerdown', 'pointerup']);
   });
 
-  it('closes when "Learn from your mistakes" starts, and may open again during it', () => {
-    document.body.innerHTML = GAME;
-    syncUnderboard();
-    buttons()[0]?.click();
-    document.querySelector('.analyse__tools')?.insertAdjacentHTML('beforeend', RETRO_BOX);
-    syncUnderboard();
-    expect(root.classList.contains(OPEN)).toBe(false);
-    buttons()[0]?.click();
-    syncUnderboard();
-    expect(root.classList.contains(OPEN)).toBe(true);
-  });
-
-  it('takes Lichess’s label once the page world has copied it', () => {
-    document.body.innerHTML = GAME;
-    syncUnderboard();
-    expect(buttons()[0]?.getAttribute('aria-label')).toBe('Tools');
-    root.dataset.lnExtToolsLabel = 'Outils';
-    syncUnderboard();
-    expect(buttons()[0]?.getAttribute('aria-label')).toBe('Outils');
-    expect(buttons()[0]?.dataset.lnExtTip).toBe('Outils');
-  });
-
-  it('comes back when Lichess redraws the controls', () => {
+  it('close from their close button, or Escape', () => {
     document.body.innerHTML = FREE_BOARD;
     syncUnderboard();
+    rows()[0]?.click();
+    expect(closeButton()?.getAttribute('aria-label')).toBe('[underboardClose]');
+    closeButton()?.click();
+    expect(isOpen()).toBe(false);
+    rows()[0]?.click();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(isOpen()).toBe(false);
+  });
+
+  it('close once the page has no fields left', () => {
     document.body.innerHTML = FREE_BOARD;
     syncUnderboard();
-    expect(buttons()).toHaveLength(1);
+    rows()[0]?.click();
+    document.body.innerHTML = GAME;
+    syncUnderboard();
+    expect(isOpen()).toBe(false);
+  });
+
+  it('come back when Lichess draws the menu again', () => {
+    document.body.innerHTML = FREE_BOARD;
+    syncUnderboard();
+    document
+      .querySelector('.action-menu')
+      ?.replaceWith(document.createRange().createContextualFragment(MENU));
+    syncUnderboard();
+    expect(rows()).toHaveLength(1);
   });
 });

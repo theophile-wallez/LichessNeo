@@ -13,7 +13,6 @@ afterEach(() => {
   setReadyState('complete');
   Reflect.deleteProperty(window, 'i18n');
   delete dataset.lnExtFlipLabel;
-  delete dataset.lnExtToolsLabel;
   delete dataset.lnExtPointsLabel;
   delete dataset.lnExtVariantLabel;
   delete dataset.lnExtTimeControlLabel;
@@ -25,11 +24,11 @@ afterEach(() => {
 describe('labels', () => {
   it('copies Lichess’s labels onto <html>', () => {
     Object.assign(window, {
-      i18n: { site: { flipBoard: 'Tourner l’échiquier', tools: 'Outils' } },
+      i18n: { site: { flipBoard: 'Tourner l’échiquier', points: 'Points' } },
     });
     labels.start();
     expect(dataset.lnExtFlipLabel).toBe('Tourner l’échiquier');
-    expect(dataset.lnExtToolsLabel).toBe('Outils');
+    expect(dataset.lnExtPointsLabel).toBe('Points');
   });
 
   it('copies the inbox’s title and the word for online', () => {
@@ -40,9 +39,9 @@ describe('labels', () => {
   });
 
   it('leaves out a label Lichess doesn’t have', () => {
-    Object.assign(window, { i18n: { site: { tools: 'Werkzeuge' } } });
+    Object.assign(window, { i18n: { site: { points: 'Punkte' } } });
     labels.start();
-    expect(dataset.lnExtToolsLabel).toBe('Werkzeuge');
+    expect(dataset.lnExtPointsLabel).toBe('Punkte');
     expect(dataset.lnExtFlipLabel).toBeUndefined();
   });
 
@@ -63,9 +62,9 @@ describe('labels', () => {
     document.body.innerHTML = markup;
     labels.start();
     vi.advanceTimersByTime(29_000);
-    Object.assign(window, { i18n: { site: { tools: 'Tools' } } });
+    Object.assign(window, { i18n: { site: { flipBoard: 'Flip board' } } });
     vi.advanceTimersByTime(250);
-    expect(dataset.lnExtToolsLabel).toBe('Tools');
+    expect(dataset.lnExtFlipLabel).toBe('Flip board');
   });
 
   it('keeps waiting on a tournament page, for the podium’s scores', () => {

@@ -98,6 +98,22 @@ describe('tooltips', () => {
     expect(button.hasAttribute('title')).toBe(false);
   });
 
+  it('shows none whose words are only the button’s own, but one that adds to them', () => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      '<main class="analyse"><button title="Clear local data"> Clear  local data </button><button title="Hotkey: f">Flip board</button></main>',
+    );
+    const [same, more] = document.querySelectorAll('main.analyse > button');
+    if (!same || !more) throw new Error('no buttons');
+    hover(same);
+    vi.advanceTimersByTime(250);
+    expect(shown()).toBeNull();
+    expect(same.hasAttribute('title')).toBe(false);
+    hover(more);
+    vi.advanceTimersByTime(250);
+    expect(shown()?.textContent).toBe('Hotkey: f');
+  });
+
   it('waits before the first one, not from one button to the next', () => {
     const first = addButton('title="One"');
     const second = addButton('title="Two"');
