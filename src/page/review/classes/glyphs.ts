@@ -1,17 +1,28 @@
+import StarIcon from '@hugeicons/core-free-icons/StarIcon';
+import ThumbsUpIcon from '@hugeicons/core-free-icons/ThumbsUpIcon';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
+import type { HugeIcon } from '#shared/hugeicons.ts';
 import type { MoveClass } from './classes.ts';
 
 // The class icons' glyphs, in the class's color over a tint of it, in a 20 x 20
-// viewBox: the annotation symbols (!!, !, ?!, ?, ??) where chess has one, dots
-// for the good tiers, lines for the book and a slashed circle for a miss.
+// viewBox: the annotation symbols (!!, !, ?!, ?, ??) where chess has one,
+// Hugeicons for the good tiers (a star, a thumb up, a tick: told apart at a
+// glance), lines for the book and a slashed circle for a miss.
 
-/** One path of a glyph: its `d`, stroked, or filled when solid. */
+/** One path of a glyph: its `d`, stroked, or filled when solid; `icon` when in Hugeicons' 24-unit grid. */
 export interface GlyphPath {
   readonly path: string;
   readonly solid: boolean;
+  readonly icon?: boolean;
 }
 
 const stroke = (path: string): GlyphPath => ({ path, solid: false });
-const solid = (path: string): GlyphPath => ({ path, solid: true });
+
+/** A Hugeicon's paths, in its own grid: the icon's markup scales them into the box. */
+const iconPaths = (icon: HugeIcon, solid = false): GlyphPath[] =>
+  icon.flatMap(([tag, { d }]) =>
+    tag === 'path' && typeof d === 'string' ? [{ path: d, solid, icon: true }] : [],
+  );
 
 const round = (value: number): number => Math.round(value * 100) / 100;
 
@@ -35,25 +46,13 @@ function question(x: number, radius: number): GlyphPath {
   );
 }
 
-const DOT_RADIUS = 1.6;
-const DOT_GAP = 4.6;
-
-/** `count` dots in a row, centered: three for best, two for excellent, one for good. */
-function dots(count: number): GlyphPath[] {
-  return Array.from({ length: count }, (_, i) => {
-    const x = round(10 + (i - (count - 1) / 2) * DOT_GAP - DOT_RADIUS);
-    const arc = `a${DOT_RADIUS} ${DOT_RADIUS} 0 1 0`;
-    return solid(`M${x} 10${arc} ${DOT_RADIUS * 2} 0${arc} -${DOT_RADIUS * 2} 0`);
-  });
-}
-
 export const CLASS_GLYPHS: Readonly<Record<MoveClass, readonly GlyphPath[]>> = {
   brilliant: [exclamation(7.2), exclamation(12.8)],
   great: [exclamation(10)],
   book: [stroke('M5.6 6.4h8.8M5.6 10h8.8M5.6 13.6h8.8')],
-  best: dots(3),
-  excellent: dots(2),
-  good: dots(1),
+  best: iconPaths(StarIcon, true),
+  excellent: iconPaths(ThumbsUpIcon),
+  good: iconPaths(Tick02Icon),
   inaccuracy: [question(7.6, 2.3), exclamation(13.6)],
   mistake: [question(10, 2.3)],
   miss: [stroke('M14.4 10a4.4 4.4 0 1 1-8.8 0 4.4 4.4 0 1 1 8.8 0M6.9 13.1l6.2-6.2')],

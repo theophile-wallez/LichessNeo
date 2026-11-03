@@ -120,6 +120,37 @@ describe('reasonOf', () => {
     expect(reasonOf(play('4k3/8/2b5/8/8/8/4N3/2KR4 b - - 0 1', 'c6f3', 'Bf3'))).toEqual(pinned);
   });
 
+  // Bb5 pins the c6 knight to the queen on e8; Ba4 stays on the same diagonal.
+  const PINNED_TO_QUEEN = '4q1k1/8/2n5/1B6/8/8/8/6K1 w - - 0 1';
+  const BLACK_KNIGHT = { role: 'knight', color: 'black' } as const;
+  const BLACK_QUEEN = { role: 'queen', color: 'black' } as const;
+
+  it('sees no news in a pin that already held, nor in a piece already attacked', () => {
+    expect(reasonOf(play(PINNED_TO_QUEEN, 'b5a4', 'Ba4'))).toBeNull();
+    // The rook on d1 already attacked the d5 knight; from a3 it didn't.
+    const knight = '4k3/8/8/3n4/8/R7/8/3RK3 w - - 0 1';
+    expect(reasonOf(play(knight, 'd1d3', 'Rd3'))).toBeNull();
+    expect(reasonOf(play(knight, 'a3d3', 'Rd3'))).toMatchObject({
+      kind: 'chases',
+      piece: BLACK_KNIGHT,
+    });
+  });
+
+  it('says a pin kept by a pinner chased off along its line', () => {
+    // The a6 pawn chases the bishop, which keeps the knight pinned from a4.
+    const chased = '4q1k1/8/p1n5/1B6/8/8/8/6K1 w - - 0 1';
+    expect(reasonOf(play(chased, 'b5a4', 'Ba4'))).toEqual({
+      kind: 'both',
+      first: { kind: 'saves', piece: { role: 'bishop', color: 'white' } },
+      second: { kind: 'pins', piece: BLACK_KNIGHT, behind: BLACK_QUEEN, kept: true },
+    });
+    // Off the diagonal, the pin goes.
+    expect(reasonOf(play(chased, 'b5f1', 'Bf1'))).toEqual({
+      kind: 'saves',
+      piece: { role: 'bishop', color: 'white' },
+    });
+  });
+
   it('has no reason for a capture', () => {
     const fen = '4k3/8/8/3r4/8/8/8/3RK3 w - - 0 1';
     expect(reasonOf(play(fen, 'd1d5', 'Rxd5'))).toBeNull();

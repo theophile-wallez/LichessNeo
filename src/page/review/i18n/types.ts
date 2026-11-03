@@ -241,10 +241,6 @@ export interface LineFacts {
   readonly wouldHaveWon: (side: Color, gain: LineGain) => Ways;
   /** What a move wins along its line, the move first. */
   readonly winsAlong: (gain: LineGain) => Ways;
-  /** Where the game goes from here, for a move the coach finds nothing else to say about. */
-  readonly continues: (line: string) => Ways;
-  /** Where a better move would have led, when the coach can't say its point. */
-  readonly betterLine: (line: string) => Ways;
   /** The threat a move stops, and what it would have won. */
   readonly stopsThreat: (threat: string, material: string) => Ways;
   /** A mate stopped, and the piece given up to stop it, if one is. */
@@ -350,6 +346,8 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly takesBack: (square: string) => Ways;
   /** A piece taken with nothing taken back, on `square` when the side had more than one. */
   readonly winsForFree: (piece: Piece, square: string | null) => Ways;
+  /** A piece taken in a trade the other side can't finish: taking back loses `defender`. */
+  readonly retakeCosts: (piece: Piece, square: string | null, defender: Piece) => Ways;
   /** A piece taken for one worth less, on `square` when the side had more than one. */
   readonly winsMaterial: (won: Piece, given: Piece, square: string | null) => Ways;
   /** A piece taken, on `square` when there were more, whose worth `side` wins back: said plainly. */

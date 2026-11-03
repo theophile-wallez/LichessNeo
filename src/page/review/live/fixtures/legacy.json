@@ -182,7 +182,7 @@
     [false, "miss,+2.37,a2a3,a7a6,King's Pawn Game,blunder"],
     [false, "miss,-0.86,a7a6,a2a3,King's Pawn Game,miss"],
     [false, "good,-0.46,a2a3,a7a6,King's Pawn Game,miss"],
-    [false, "best,+0.11,a7a6,a2a3,King's Pawn Game,good"],
+    [false, "excellent,+0.11,a7a6,a2a3,King's Pawn Game,good"],
     [false, ""],
     [false, "miss,-2.20,a7a6,a2a3,King's Pawn Game,miss"],
     [false, "miss,+2.32,a2a3,a7a6,Open Game: Kings Knight,miss"],

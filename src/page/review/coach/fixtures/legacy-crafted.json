@@ -27,7 +27,7 @@
     "node": { "ply": 61, "fen": "1N2k3/8/8/8/8/8/8/4K3 b - - 0 31", "uci": "b7b8n", "san": "b8=N" },
     "a": { "cp": 300, "wp": 75.11255009383484, "wp2": null, "best": "b7b8q" },
     "b": { "cp": 296, "wp": 74.83620769618608, "wp2": null, "best": "e8d7" },
-    "cls": "best",
+    "cls": "excellent",
     "slower": false,
     "en": {
       "fact": "The pawn reaches the last rank and becomes a [[p:wn]]knight.",
@@ -157,12 +157,12 @@
     "cls": "great",
     "slower": false,
     "en": {
-      "fact": "The one move that kept the edge.",
-      "parts": [["The one move that kept the edge."]]
+      "fact": "The [[s:e4]] [[p:wp]]pawn taken, and nothing to pay.",
+      "parts": [["The [[s:e4]] [[p:wp]]pawn taken, and nothing to pay."]]
     },
     "fr": {
-      "fact": "Le seul coup qui gardait l’avantage.",
-      "parts": [["Le seul coup qui gardait l’avantage."]]
+      "fact": "Le [[p:wp]]pion [[s:e4]] pris sans rien payer.",
+      "parts": [["Le [[p:wp]]pion [[s:e4]] pris sans rien payer."]]
     }
   }
 ]

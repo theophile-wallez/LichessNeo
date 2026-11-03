@@ -63,19 +63,44 @@ function holds(board: Board, pinned: Square, { pinner, behind }: Pin): boolean {
   return !isDefended(moved, behind, target.color);
 }
 
-/** A piece of the other side's the move pins, or newly attacks when it's worth more or undefended. */
-export function pressureOf(after: Board, to: Square, color: Color): Plan | null {
+/**
+ * A piece of the other side's the move pins, or newly attacks when it's worth more or
+ * undefended. A pin that already held, or a piece the mover already attacked, is no news.
+ */
+export function pressureOf(
+  before: Board,
+  after: Board,
+  [from, to]: [Square, Square],
+  color: Color,
+): Plan | null {
   const them = opposite(color);
   for (const [square, piece] of after) {
     if (piece.color !== them || piece.role === 'pawn') continue;
     const pin = pinOf(after, square, true);
-    const behind =
-      pin?.pinner === to && holds(after, square, pin) ? after.get(pin.behind) : undefined;
-    if (behind) return { kind: 'pins', piece, behind };
+    if (!pin || pin.pinner !== to || !holds(after, square, pin)) continue;
+    const behind = after.get(pin.behind);
+    if (behind && pinOf(before, square, true)?.behind !== pin.behind)
+      return { kind: 'pins', piece, behind };
   }
-  const square = attackedSquares(after, to).find(target => threatened(after, target, to));
+  const was = attackedSquares(before, from);
+  const square = attackedSquares(after, to).find(
+    target => !was.includes(target) && threatened(after, target, to),
+  );
   const piece = square && after.get(square);
   return square && piece ? chases(after, square, piece, to) : null;
+}
+
+/** A pin of the other side's piece that the piece moved held before and still holds. */
+export function keptPinOf(before: Board, after: Board, [from, to]: [Square, Square]): Plan | null {
+  const color = after.get(to)?.color;
+  for (const [square, piece] of after) {
+    if (piece.color === color || piece.role === 'pawn') continue;
+    const [was, pin] = [pinOf(before, square, true), pinOf(after, square, true)];
+    if (was?.pinner !== from || pin?.pinner !== to || pin.behind !== was.behind) continue;
+    const behind = holds(after, square, pin) ? after.get(pin.behind) : undefined;
+    if (behind) return { kind: 'pins', piece, behind, kept: true };
+  }
+  return null;
 }
 
 const SLIDERS: ReadonlySet<Role> = new Set<Role>(['bishop', 'rook', 'queen']);

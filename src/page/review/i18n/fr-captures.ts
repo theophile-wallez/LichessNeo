@@ -14,7 +14,13 @@ import type { FactSentences, Viewer } from './types.ts';
 // The piece taken goes by its square when it was one of several, « le [pion] c6 ».
 type CaptureSentences = Pick<
   FactSentences,
-  'takesBack' | 'winsForFree' | 'winsMaterial' | 'givenBack' | 'compensation' | 'trades'
+  | 'takesBack'
+  | 'winsForFree'
+  | 'retakeCosts'
+  | 'winsMaterial'
+  | 'givenBack'
+  | 'compensation'
+  | 'trades'
 >;
 
 export function capturesFr(viewer: Viewer): CaptureSentences {
@@ -30,6 +36,10 @@ export function capturesFr(viewer: Viewer): CaptureSentences {
       `De quoi gagner ${indefiniteOn(piece, square)} sans contrepartie.`,
       `Du matériel offert : ${indefiniteOn(piece, square)}, sans rien en échange.`,
       `${capitalize(indefiniteOn(piece, square))} pris${agreement(piece)} sans rien payer.`,
+    ],
+    retakeCosts: (piece, square, defender) => [
+      `De quoi gagner ${indefiniteOn(piece, square)} : reprendre coûterait ${the(defender)}.`,
+      `${capitalize(indefiniteOn(piece, square))} gagné${agreement(piece)}, car reprendre perd ${the(defender)}.`,
     ],
     winsMaterial: (won, given, square) => [
       `De quoi gagner ${indefiniteOn(won, square)} contre ${indefinite(given)}.`,

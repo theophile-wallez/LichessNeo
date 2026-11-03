@@ -66,7 +66,7 @@
       },
       {
         "remark": "The right piece to take.",
-        "parts": [["The one move that kept Black out of trouble."]]
+        "parts": [["The [[s:e5]] [[p:wp]]pawn taken, and nothing to pay."]]
       },
       {
         "remark": "The only move that holds everything together.",
@@ -96,20 +96,23 @@
           ["[[m:b:Bc5]] was more precise, developing the [[p:bb]]bishop."]
         ]
       },
-      { "remark": "Nothing better here.", "parts": [["Another piece out: the [[p:wn]]knight."]] },
+      {
+        "remark": "Nicely done, the position stays healthy.",
+        "parts": [["Another piece out: the [[p:wn]]knight."]]
+      },
       {
         "remark": "Exactly what the engine wanted.",
         "parts": [["Exactly what the engine wanted."]]
       },
       {
-        "remark": "Strong and simple.",
+        "remark": "Good judgment here.",
         "parts": [
           ["The [[p:bn]]knight is pinned to the [[p:bq]]queen."],
           ["The game was balanced, and now White has a clear advantage.", true]
         ]
       },
       {
-        "remark": "The engine’s top move. Well played.",
+        "remark": "Very close to the best move.",
         "parts": [["The [[p:wb]]bishop on [[s:c4]] has to move, gaining a tempo."]]
       },
       {
@@ -132,15 +135,15 @@
         "parts": [["A mate in 4 started with [[m:w:Qxb5+]]."]]
       },
       {
-        "remark": "Every good move makes the win harder for the opponent.",
+        "remark": "When behind, look for counterplay: the opponent can still slip.",
         "parts": [["The [[p:bn]]knight comes into play."]]
       },
       {
-        "remark": "Winning now. Safety first: leave no counterplay.",
+        "remark": "No hurry: a winning game is won one safe move at a time.",
         "parts": [["The king is safe, and the rook joins the game."]]
       },
       {
-        "remark": "Hang in there: the position still has resources.",
+        "remark": "Not over yet: set problems and keep fighting.",
         "parts": [["The rook grabs the open file: that’s where rooks come alive."]]
       },
       {
@@ -166,7 +169,10 @@
         "remark": "The right piece to take.",
         "parts": [["That wins the [[s:d7]] [[p:br]]rook for a [[p:wb]]bishop."]]
       },
-      { "remark": "Nothing better here.", "parts": [["The natural recapture on [[s:d7]]."]] },
+      {
+        "remark": "Nothing better here.",
+        "parts": [["The natural recapture on [[s:d7]]."]]
+      },
       {
         "remark": "Check! The opponent has to respond.",
         "parts": [["Check! Black has to respond."]]
@@ -175,7 +181,10 @@
         "remark": "Strong and simple.",
         "parts": [["Free material: a [[p:wq]]queen with nothing in return."]]
       },
-      { "remark": "Checkmate! Game over.", "parts": [["Checkmate, and the game is over."]] }
+      {
+        "remark": "Checkmate! Game over.",
+        "parts": [["Checkmate, and the game is over."]]
+      }
     ],
     "fr": [
       {
@@ -243,7 +252,7 @@
       },
       {
         "remark": "La bonne pièce à prendre.",
-        "parts": [["Le seul coup qui tirait les Noirs d’affaire."]]
+        "parts": [["Le [[p:wp]]pion [[s:e5]] pris sans rien payer."]]
       },
       {
         "remark": "Le seul coup qui tient tout ensemble.",
@@ -273,20 +282,23 @@
           ["Mieux valait [[m:b:Bc5]], qui sortait le [[p:bb]]fou."]
         ]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Développement : le [[p:wn]]cavalier sort."]] },
+      {
+        "remark": "Bien joué, la position reste saine.",
+        "parts": [["Développement : le [[p:wn]]cavalier sort."]]
+      },
       {
         "remark": "Exactement ce que voulait le moteur.",
         "parts": [["Exactement ce que voulait le moteur."]]
       },
       {
-        "remark": "Simple et fort.",
+        "remark": "Bon jugement ici.",
         "parts": [
           ["Le [[p:bn]]cavalier est cloué sur la [[p:bq]]dame."],
           ["La partie était équilibrée, et maintenant les Blancs ont un net avantage.", true]
         ]
       },
       {
-        "remark": "Le coup du moteur. Bien joué.",
+        "remark": "Tout près du meilleur coup.",
         "parts": [["Le [[p:wb]]fou en [[s:c4]] doit bouger, avec gain de tempo."]]
       },
       {
@@ -309,15 +321,15 @@
         "parts": [["Un mat en 4 commençait par [[m:w:Qxb5+]]."]]
       },
       {
-        "remark": "Chaque bon coup complique la victoire de l’adversaire.",
+        "remark": "Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper.",
         "parts": [["Le [[p:bn]]cavalier entre en jeu."]]
       },
       {
-        "remark": "Position gagnante : la sécurité d’abord, ne laisse aucun contre-jeu.",
+        "remark": "Pas de précipitation : une partie gagnée se gagne coup après coup.",
         "parts": [["Le roi est à l’abri, et la tour entre en jeu."]]
       },
       {
-        "remark": "Tiens bon : la position a encore des ressources.",
+        "remark": "Rien n’est fini : complique la tâche de l’adversaire.",
         "parts": [["La tour s’empare de la colonne ouverte : c’est là qu’une tour s’épanouit."]]
       },
       {
@@ -345,7 +357,10 @@
         "remark": "La bonne pièce à prendre.",
         "parts": [["De quoi gagner la [[p:br]]tour [[s:d7]] contre un [[p:wb]]fou."]]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["La reprise naturelle en [[s:d7]]."]] },
+      {
+        "remark": "Rien de mieux ici.",
+        "parts": [["La reprise naturelle en [[s:d7]]."]]
+      },
       {
         "remark": "Échec ! L’adversaire doit répondre.",
         "parts": [["Échec : il oblige les Noirs à répondre."]]
@@ -374,7 +389,10 @@
         "remark": "Classic opening play.",
         "parts": [["Classic opening play."], ["The game follows the King's Gambit Accepted.", true]]
       },
-      { "remark": "Taking is right here.", "parts": [["The [[s:f4]] [[p:wp]]pawn for free."]] },
+      {
+        "remark": "The right piece to take.",
+        "parts": [["The [[s:f4]] [[p:wp]]pawn for free."]]
+      },
       {
         "remark": "Playable, but it misses the point of the position.",
         "parts": [
@@ -394,7 +412,7 @@
         ]
       },
       {
-        "remark": "Couldn’t have done better.",
+        "remark": "Very good. The engine barely disagrees.",
         "parts": [["The [[p:wb]]bishop on [[s:c4]] is under attack and has to move."]]
       },
       {
@@ -420,15 +438,15 @@
         ]
       },
       {
-        "remark": "Spot on.",
+        "remark": "Almost perfect.",
         "parts": [
           ["A pawn to support the center."],
           ["The gap widens: now White has a winning position.", true]
         ]
       },
       {
-        "remark": "A tough position, but keep making it hard for the opponent.",
-        "parts": [["A tough position, but keep making it hard for the opponent."]]
+        "remark": "When behind, look for counterplay: the opponent can still slip.",
+        "parts": [["When behind, look for counterplay: the opponent can still slip."]]
       },
       {
         "remark": "That’s the most accurate move.",
@@ -442,14 +460,14 @@
         "parts": [["A fork on the [[p:wb]]bishop and the [[p:wn]]knight."]]
       },
       {
-        "remark": "Clean and precise.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [
           ["The [[p:wn]]knight gets out of danger."],
           ["Even better for White: a winning position.", true]
         ]
       },
       {
-        "remark": "Nothing better here.",
+        "remark": "Solid play. Keep going.",
         "parts": [
           ["The [[p:wb]]bishop on [[s:b5]] has to move, gaining a tempo."],
           ["White’s lead shrinks to a clear advantage.", true]
@@ -459,7 +477,10 @@
         "remark": "Just right. Keep it up!",
         "parts": [["That hits the [[p:bn]]knight on [[s:h5]], gaining time."]]
       },
-      { "remark": "Strong and simple.", "parts": [["The [[p:bn]]knight gets out of danger."]] },
+      {
+        "remark": "Very close to the best move.",
+        "parts": [["The [[p:bn]]knight gets out of danger."]]
+      },
       {
         "remark": "Playable, but it misses the point of the position.",
         "parts": [
@@ -505,8 +526,8 @@
         "parts": [["[[m:b:Nd5]] was slightly better, centralizing the [[p:bn]]knight."]]
       },
       {
-        "remark": "Couldn’t have done better.",
-        "parts": [["Couldn’t have done better."], ["Black’s lead shrinks to a slight edge.", true]]
+        "remark": "Almost perfect.",
+        "parts": [["Almost perfect."], ["Black’s lead shrinks to a slight edge.", true]]
       },
       {
         "remark": "A small slip. There was a stronger idea.",
@@ -534,7 +555,7 @@
         ]
       },
       {
-        "remark": "Just right. Keep it up!",
+        "remark": "Solid play. Keep going.",
         "parts": [["The [[s:b2]] [[p:wp]]pawn taken, and nothing to pay."]]
       },
       {
@@ -547,19 +568,25 @@
       {
         "remark": "Precise. Nothing else holds here.",
         "parts": [
-          ["Every other move would have let the advantage slip."],
+          ["Giving a [[p:bb]]bishop for the [[s:g1]] [[p:wr]]rook: a good deal."],
           ["Black’s lead grows: a winning position now.", true]
         ]
       },
       {
-        "remark": "Just right. Keep it up!",
+        "remark": "Solid play. Keep going.",
         "parts": [
           ["A pawn on the fifth rank cramps the other side."],
           ["Black’s lead shrinks to a clear advantage.", true]
         ]
       },
-      { "remark": "Strong and simple.", "parts": [["That wins a [[p:wr]]rook for free."]] },
-      { "remark": "Nothing better here.", "parts": [["Nothing better here."]] },
+      {
+        "remark": "Strong and simple.",
+        "parts": [["That wins a [[p:wr]]rook for free."]]
+      },
+      {
+        "remark": "Very close to the best move.",
+        "parts": [["Very close to the best move."]]
+      },
       {
         "remark": "Sharp eyes! This was hard to see.",
         "parts": [["Anything else let the advantage go."]]
@@ -567,7 +594,7 @@
       {
         "remark": "The king has to deal with this first.",
         "parts": [
-          ["The only move that didn’t leave White worse off."],
+          ["That wins the [[s:g7]] [[p:bp]]pawn for free."],
           ["Down from a clear advantage to a slight edge for Black.", true]
         ]
       },
@@ -583,7 +610,10 @@
         "remark": "Under pressure, the right answer.",
         "parts": [["That wins a [[p:wq]]queen for a [[p:bn]]knight."]]
       },
-      { "remark": "Checkmate. A perfect finish.", "parts": [["Checkmate, and the game is over."]] }
+      {
+        "remark": "Checkmate. A perfect finish.",
+        "parts": [["Checkmate, and the game is over."]]
+      }
     ],
     "fr": [
       {
@@ -608,7 +638,7 @@
         ]
       },
       {
-        "remark": "Prendre est la bonne décision ici.",
+        "remark": "La bonne pièce à prendre.",
         "parts": [["Le [[p:wp]]pion [[s:f4]], gratuit."]]
       },
       {
@@ -630,7 +660,7 @@
         ]
       },
       {
-        "remark": "Impossible de faire mieux.",
+        "remark": "Très bien. Le moteur chipote à peine.",
         "parts": [["Le [[p:wb]]fou en [[s:c4]] est attaqué et doit bouger."]]
       },
       {
@@ -656,15 +686,17 @@
         ]
       },
       {
-        "remark": "Dans le mille.",
+        "remark": "Presque parfait.",
         "parts": [
           ["Un pion pour épauler le centre."],
           ["L’écart se creuse : maintenant les Blancs ont une position gagnante.", true]
         ]
       },
       {
-        "remark": "Position difficile, mais continue à poser des problèmes.",
-        "parts": [["Position difficile, mais continue à poser des problèmes."]]
+        "remark": "Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper.",
+        "parts": [
+          ["Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper."]
+        ]
       },
       {
         "remark": "C’est le coup le plus précis.",
@@ -678,14 +710,14 @@
         "parts": [["Une fourchette, sur le [[p:wb]]fou et le [[p:wn]]cavalier."]]
       },
       {
-        "remark": "Propre et précis.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [
           ["Le [[p:wn]]cavalier se met à l’abri."],
           ["Encore mieux pour les Blancs : une position gagnante à présent.", true]
         ]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
           ["Le [[p:wb]]fou en [[s:b5]] doit bouger, avec gain de tempo."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un net avantage.", true]
@@ -695,7 +727,10 @@
         "remark": "Parfait. Continue comme ça !",
         "parts": [["Ça attaque le [[p:bn]]cavalier en [[s:h5]], avec gain de temps."]]
       },
-      { "remark": "Simple et fort.", "parts": [["Le [[p:bn]]cavalier se met à l’abri."]] },
+      {
+        "remark": "Tout près du meilleur coup.",
+        "parts": [["Le [[p:bn]]cavalier se met à l’abri."]]
+      },
       {
         "remark": "Jouable, mais ça passe à côté de l’essentiel.",
         "parts": [
@@ -734,7 +769,10 @@
           ["[[m:b:Qxf5]], qui prenait le [[p:wn]]cavalier [[s:f5]], était un poil plus juste."]
         ]
       },
-      { "remark": "Le coup du moteur. Bien joué.", "parts": [["Le coup du moteur. Bien joué."]] },
+      {
+        "remark": "Le coup du moteur. Bien joué.",
+        "parts": [["Le coup du moteur. Bien joué."]]
+      },
       {
         "remark": "Sûr, quoiqu’un peu passif.",
         "parts": [
@@ -742,9 +780,9 @@
         ]
       },
       {
-        "remark": "Impossible de faire mieux.",
+        "remark": "Presque parfait.",
         "parts": [
-          ["Impossible de faire mieux."],
+          ["Presque parfait."],
           ["Les Noirs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -776,7 +814,7 @@
         ]
       },
       {
-        "remark": "Parfait. Continue comme ça !",
+        "remark": "Du jeu solide. Continue.",
         "parts": [["Le [[p:wp]]pion [[s:b2]] pris sans rien payer."]]
       },
       {
@@ -789,12 +827,12 @@
       {
         "remark": "Précis. Rien d’autre ne tenait ici.",
         "parts": [
-          ["Tout autre coup laissait filer l’avantage."],
+          ["Donner un [[p:bb]]fou pour la [[p:wr]]tour [[s:g1]] : une bonne affaire."],
           ["L’avantage grandit : les Noirs ont maintenant une position gagnante.", true]
         ]
       },
       {
-        "remark": "Parfait. Continue comme ça !",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
           ["Un pion en cinquième rangée, qui étouffe l’adversaire."],
           ["Les Noirs perdent du terrain : il ne leur reste qu’un net avantage.", true]
@@ -804,7 +842,10 @@
         "remark": "Simple et fort.",
         "parts": [["De quoi gagner une [[p:wr]]tour sans contrepartie."]]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Rien de mieux ici."]] },
+      {
+        "remark": "Tout près du meilleur coup.",
+        "parts": [["Tout près du meilleur coup."]]
+      },
       {
         "remark": "Bien vu ! Ce n’était pas facile à trouver.",
         "parts": [["Tout le reste laissait échapper l’avantage."]]
@@ -812,7 +853,7 @@
       {
         "remark": "Le roi doit d’abord s’en occuper.",
         "parts": [
-          ["C’était le seul coup qui ne mettait pas les Blancs en difficulté."],
+          ["De quoi gagner le [[p:bp]]pion [[s:g7]] sans contrepartie."],
           ["Les Noirs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -861,7 +902,7 @@
         "parts": [["The only move that didn’t leave Black worse off."]]
       },
       {
-        "remark": "The engine’s top move. Well played.",
+        "remark": "A strong move that keeps things under control.",
         "parts": [
           ["That hits the [[p:bb]]bishop on [[s:c5]], gaining time."],
           ["Equality is restored.", true]
@@ -875,7 +916,7 @@
         ]
       },
       {
-        "remark": "Couldn’t have done better.",
+        "remark": "Very good. The engine barely disagrees.",
         "parts": [
           ["The [[p:bb]]bishop on [[s:b4]] has to move, gaining a tempo."],
           ["White goes from a slight edge to a clear advantage.", true]
@@ -886,7 +927,7 @@
         "parts": [["The [[p:bb]]bishop steps out of harm’s way."], ["Back to equal.", true]]
       },
       {
-        "remark": "Spot on.",
+        "remark": "Almost perfect.",
         "parts": [
           ["The pawn takes the center."],
           ["The balance tips: now White has a clear advantage.", true]
@@ -943,7 +984,7 @@
         "parts": [["[[m:w:Bxd3]] was slightly better, taking the [[s:d3]] [[p:bp]]pawn."]]
       },
       {
-        "remark": "Exactly what the engine wanted.",
+        "remark": "A strong move that keeps things under control.",
         "parts": [["Another piece out: the [[p:bn]]knight."], ["Equality is restored.", true]]
       },
       {
@@ -958,7 +999,7 @@
         ]
       },
       {
-        "remark": "Taking is right here.",
+        "remark": "The right piece to take.",
         "parts": [["The [[s:b5]] [[p:bp]]pawn for free."], ["Equality is restored.", true]]
       },
       {
@@ -972,7 +1013,10 @@
         "remark": "The engine’s top move. Well played.",
         "parts": [["The [[p:wq]]queen steps out of harm’s way."]]
       },
-      { "remark": "Spot on.", "parts": [["Spot on."], ["Back to equal.", true]] },
+      {
+        "remark": "Spot on.",
+        "parts": [["Spot on."], ["Back to equal.", true]]
+      },
       {
         "remark": "Oh no! This loses a lot.",
         "parts": [
@@ -981,11 +1025,11 @@
         ]
       },
       {
-        "remark": "That’s the most accurate move.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [["Another piece out: the [[p:bb]]bishop."]]
       },
       {
-        "remark": "Spot on.",
+        "remark": "A sensible, strong continuation.",
         "parts": [
           ["The [[p:wn]]knight heads for the center."],
           ["Black’s lead slips: only a clear advantage left.", true]
@@ -1007,7 +1051,7 @@
         ]
       },
       {
-        "remark": "A check that keeps the initiative.",
+        "remark": "Forcing play. Checks are powerful.",
         "parts": [["Check: Black must answer first."]]
       },
       {
@@ -1035,16 +1079,19 @@
         "remark": "Nothing better here.",
         "parts": [["The rook moves to the half-open file, ready to strike."]]
       },
-      { "remark": "Taking is right here.", "parts": [["Taking is right here."]] },
+      {
+        "remark": "Taking is right here.",
+        "parts": [["Taking is right here."]]
+      },
       {
         "remark": "That’s the move a master would pick.",
         "parts": [
-          ["Every other move would have left White worse off."],
+          ["Check: Black must answer first."],
           ["Down from a clear advantage to a slight edge for Black.", true]
         ]
       },
       {
-        "remark": "A good capture.",
+        "remark": "Taking is right here.",
         "parts": [
           ["Taking back on [[s:e7]], as expected."],
           ["The gap widens: now Black has a clear advantage.", true]
@@ -1117,7 +1164,7 @@
         "parts": [["C’était le seul coup qui ne mettait pas les Noirs en difficulté."]]
       },
       {
-        "remark": "Le coup du moteur. Bien joué.",
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [
           ["Ça attaque le [[p:bb]]fou en [[s:c5]], avec gain de temps."],
           ["L’équilibre est rétabli.", true]
@@ -1131,7 +1178,7 @@
         ]
       },
       {
-        "remark": "Impossible de faire mieux.",
+        "remark": "Très bien. Le moteur chipote à peine.",
         "parts": [
           ["Le [[p:bb]]fou en [[s:b4]] doit bouger, avec gain de tempo."],
           ["Les Blancs passent d’un léger avantage à un net avantage.", true]
@@ -1142,7 +1189,7 @@
         "parts": [["Le [[p:bb]]fou échappe à la menace."], ["Retour à l’égalité.", true]]
       },
       {
-        "remark": "Dans le mille.",
+        "remark": "Presque parfait.",
         "parts": [
           ["Le pion prend le centre."],
           ["L’équilibre est rompu : maintenant les Blancs ont un net avantage.", true]
@@ -1201,7 +1248,7 @@
         ]
       },
       {
-        "remark": "Exactement ce que voulait le moteur.",
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [["Développement : le [[p:bn]]cavalier sort."], ["L’équilibre est rétabli.", true]]
       },
       {
@@ -1216,7 +1263,7 @@
         ]
       },
       {
-        "remark": "Prendre est la bonne décision ici.",
+        "remark": "La bonne pièce à prendre.",
         "parts": [["Le [[p:bp]]pion [[s:b5]], gratuit."], ["L’équilibre est rétabli.", true]]
       },
       {
@@ -1230,7 +1277,10 @@
         "remark": "Le coup du moteur. Bien joué.",
         "parts": [["La [[p:wq]]dame échappe à la menace."]]
       },
-      { "remark": "Dans le mille.", "parts": [["Dans le mille."], ["Retour à l’égalité.", true]] },
+      {
+        "remark": "Dans le mille.",
+        "parts": [["Dans le mille."], ["Retour à l’égalité.", true]]
+      },
       {
         "remark": "Oh non ! Ça coûte très cher.",
         "parts": [
@@ -1239,11 +1289,11 @@
         ]
       },
       {
-        "remark": "C’est le coup le plus précis.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [["Développement : le [[p:bb]]fou sort."]]
       },
       {
-        "remark": "Dans le mille.",
+        "remark": "Une suite sensée et solide.",
         "parts": [
           ["Le [[p:wn]]cavalier se centralise."],
           ["Les Noirs perdent du terrain : il ne leur reste qu’un net avantage.", true]
@@ -1265,7 +1315,7 @@
         ]
       },
       {
-        "remark": "Un échec qui garde l’initiative.",
+        "remark": "Du jeu forcé : les échecs sont puissants.",
         "parts": [["Échec, et les Noirs doivent d’abord parer."]]
       },
       {
@@ -1300,12 +1350,12 @@
       {
         "remark": "Le coup qu’un maître aurait choisi.",
         "parts": [
-          ["Tout autre coup mettait les Blancs en difficulté."],
+          ["Échec, et les Noirs doivent d’abord parer."],
           ["Les Noirs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
         ]
       },
       {
-        "remark": "Une bonne prise.",
+        "remark": "Prendre est la bonne décision ici.",
         "parts": [
           ["On reprend en [[s:e7]], comme prévu."],
           ["L’écart se creuse : maintenant les Noirs ont un net avantage.", true]
@@ -1406,7 +1456,7 @@
         "parts": [["The [[p:wn]]knight comes into play."]]
       },
       {
-        "remark": "Exactly what the engine wanted.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [
           ["Development: the [[p:bb]]bishop steps out."],
           ["Down from a winning position to a clear advantage for White.", true]
@@ -1420,14 +1470,14 @@
         ]
       },
       {
-        "remark": "Winning now: keep the pieces safe and push on.",
+        "remark": "Safety first. Nice castle.",
         "parts": [
           ["The king is safe, and the rook joins the game."],
           ["The game is decided: Black has mate in 2.", true]
         ]
       },
       {
-        "remark": "Exactly what the engine wanted.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [["Castling: a safe king, and a rook ready to join in."]]
       },
       {
@@ -1464,7 +1514,10 @@
         "remark": "A critical moment, handled perfectly.",
         "parts": [["The one move that kept the edge."]]
       },
-      { "remark": "Spot on.", "parts": [["The [[p:wb]]bishop joins the game, right on time."]] },
+      {
+        "remark": "Very close to the best move.",
+        "parts": [["The [[p:wb]]bishop joins the game, right on time."]]
+      },
       {
         "remark": "Sharp eyes! This was hard to see.",
         "parts": [["Every other move would have let the advantage slip."]]
@@ -1483,7 +1536,10 @@
           ["Better here was [[m:b:Nxd4]], taking with the [[p:bn]]knight instead."]
         ]
       },
-      { "remark": "Clean and precise.", "parts": [["A recapture on [[s:d4]]."]] },
+      {
+        "remark": "Very good. The engine barely disagrees.",
+        "parts": [["A recapture on [[s:d4]]."]]
+      },
       {
         "remark": "That’s a costly slip.",
         "parts": [["The move was [[m:b:g5]], gaining a tempo on the [[p:wb]]bishop on [[s:h4]]."]]
@@ -1504,7 +1560,10 @@
           ["Encore mieux pour les Blancs : un net avantage à présent.", true]
         ]
       },
-      { "remark": "C’est le coup le plus précis.", "parts": [["Plus d’espace : le pion avance."]] },
+      {
+        "remark": "C’est le coup le plus précis.",
+        "parts": [["Plus d’espace : le pion avance."]]
+      },
       {
         "remark": "Ça marche, mais la position offrait plus.",
         "parts": [["Un pion de côté qui vise le centre."]]
@@ -1539,7 +1598,7 @@
         "parts": [["Le [[p:wn]]cavalier entre en jeu."]]
       },
       {
-        "remark": "Exactement ce que voulait le moteur.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [
           ["Le [[p:bb]]fou quitte sa case de départ."],
           ["Les Blancs perdent du terrain : il ne leur reste qu’un net avantage.", true]
@@ -1553,14 +1612,14 @@
         ]
       },
       {
-        "remark": "Ça gagne : garde tes pièces à l’abri et avance.",
+        "remark": "La sécurité d’abord. Bien roqué.",
         "parts": [
           ["Le roi est à l’abri, et la tour entre en jeu."],
           ["La partie est jouée : les Noirs ont un mat en 2.", true]
         ]
       },
       {
-        "remark": "Exactement ce que voulait le moteur.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [["Roque : un roi en sécurité, une tour prête à jouer."]]
       },
       {
@@ -1598,7 +1657,7 @@
         "parts": [["Le seul coup qui gardait l’avantage."]]
       },
       {
-        "remark": "Dans le mille.",
+        "remark": "Tout près du meilleur coup.",
         "parts": [["Le [[p:wb]]fou entre dans la partie, au bon moment."]]
       },
       {
@@ -1619,7 +1678,10 @@
           ["[[m:b:Nxd4]], qui prenait plutôt avec le [[p:bn]]cavalier, était plus précis."]
         ]
       },
-      { "remark": "Propre et précis.", "parts": [["Une reprise en [[s:d4]]."]] },
+      {
+        "remark": "Très bien. Le moteur chipote à peine.",
+        "parts": [["Une reprise en [[s:d4]]."]]
+      },
       {
         "remark": "Un faux pas qui coûte cher.",
         "parts": [
@@ -1685,8 +1747,8 @@
         "parts": [["The [[p:wn]]knight comes into play."]]
       },
       {
-        "remark": "Nothing better here.",
-        "parts": [["Nothing better here."], ["White’s lead shrinks to a clear advantage.", true]]
+        "remark": "Solid play. Keep going.",
+        "parts": [["Solid play. Keep going."], ["White’s lead shrinks to a clear advantage.", true]]
       },
       {
         "remark": "Taking was the right call.",
@@ -1712,7 +1774,10 @@
           ["The [[p:br]]rook on [[s:h8]] is left undefended: [[m:w:Bxh8]] wins it."]
         ]
       },
-      { "remark": "Taking is right here.", "parts": [["The [[s:h8]] [[p:br]]rook for free."]] },
+      {
+        "remark": "Taking is right here.",
+        "parts": [["The [[s:h8]] [[p:br]]rook for free."]]
+      },
       {
         "remark": "A good capture.",
         "parts": [
@@ -1724,7 +1789,10 @@
         "remark": "Exactly what the engine wanted.",
         "parts": [["Exactly what the engine wanted."]]
       },
-      { "remark": "A capture that holds up.", "parts": [["[[m:b:Kf7]] was the cleaner move."]] },
+      {
+        "remark": "A capture that holds up.",
+        "parts": [["[[m:b:Kf7]] was the cleaner move."]]
+      },
       {
         "remark": "Sharp eyes! This was hard to see.",
         "parts": [
@@ -1739,7 +1807,10 @@
           ["Back to equal.", true]
         ]
       },
-      { "remark": "Couldn’t have done better.", "parts": [["Check: Black must answer first."]] },
+      {
+        "remark": "Couldn’t have done better.",
+        "parts": [["Check: Black must answer first."]]
+      },
       {
         "remark": "The only move that holds everything together.",
         "parts": [
@@ -1763,7 +1834,7 @@
         "parts": [["That hits the [[p:bn]]knight, gaining time."], ["Equality is restored.", true]]
       },
       {
-        "remark": "Taking is right here.",
+        "remark": "A good capture.",
         "parts": [
           ["A [[p:wq]]queen taken, and nothing to pay."],
           ["The balance tips: now Black has a clear advantage.", true]
@@ -1785,7 +1856,10 @@
       },
       {
         "remark": "The one good move in the position.",
-        "parts": [["A fair trade: the [[p:bp]]pawn comes off."], ["The game is level again.", true]]
+        "parts": [
+          ["That wins the [[s:d5]] [[p:bp]]pawn: taking back would cost the [[p:bq]]queen."],
+          ["The game is level again.", true]
+        ]
       },
       {
         "remark": "Check! The opponent has to respond.",
@@ -1817,9 +1891,9 @@
         ]
       },
       {
-        "remark": "Exactly what the engine wanted.",
+        "remark": "Very good. The engine barely disagrees.",
         "parts": [
-          ["Exactly what the engine wanted."],
+          ["Very good. The engine barely disagrees."],
           ["Black had a clear advantage, but now White has a clear advantage.", true]
         ]
       },
@@ -1830,7 +1904,10 @@
           ["White’s lead slips: only a slight edge left.", true]
         ]
       },
-      { "remark": "A bit careless. Take a closer look.", "parts": [["The game is level again."]] },
+      {
+        "remark": "A bit careless. Take a closer look.",
+        "parts": [["The game is level again."]]
+      },
       {
         "remark": "A small slip. There was a stronger idea.",
         "parts": [
@@ -1947,9 +2024,18 @@
           ["Even better for Black: a winning position.", true]
         ]
       },
-      { "remark": "No escape for the king now.", "parts": [["No escape for the king now."]] },
-      { "remark": "Spot on.", "parts": [["Spot on."]] },
-      { "remark": "The mating net tightens.", "parts": [["Check: White must answer first."]] }
+      {
+        "remark": "No escape for the king now.",
+        "parts": [["No escape for the king now."]]
+      },
+      {
+        "remark": "Good judgment here.",
+        "parts": [["Good judgment here."]]
+      },
+      {
+        "remark": "The mating net tightens.",
+        "parts": [["Check: White must answer first."]]
+      }
     ],
     "fr": [
       {
@@ -2007,9 +2093,9 @@
         "parts": [["Le [[p:wn]]cavalier entre en jeu."]]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
-          ["Rien de mieux ici."],
+          ["Du jeu solide. Continue."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un net avantage.", true]
         ]
       },
@@ -2053,7 +2139,10 @@
         "remark": "Exactement ce que voulait le moteur.",
         "parts": [["Exactement ce que voulait le moteur."]]
       },
-      { "remark": "Une prise qui tient la route.", "parts": [["[[m:b:Kf7]] était plus propre."]] },
+      {
+        "remark": "Une prise qui tient la route.",
+        "parts": [["[[m:b:Kf7]] était plus propre."]]
+      },
       {
         "remark": "Bien vu ! Ce n’était pas facile à trouver.",
         "parts": [
@@ -2098,7 +2187,7 @@
         ]
       },
       {
-        "remark": "Prendre est la bonne décision ici.",
+        "remark": "Une bonne prise.",
         "parts": [
           ["Une [[p:wq]]dame prise sans rien payer."],
           ["L’équilibre est rompu : maintenant les Noirs ont un net avantage.", true]
@@ -2121,7 +2210,7 @@
       {
         "remark": "Le seul bon coup de la position.",
         "parts": [
-          ["Un échange équitable : le [[p:bp]]pion disparaît."],
+          ["De quoi gagner le [[p:bp]]pion [[s:d5]] : reprendre coûterait la [[p:bq]]dame."],
           ["La partie redevient équilibrée.", true]
         ]
       },
@@ -2155,9 +2244,9 @@
         ]
       },
       {
-        "remark": "Exactement ce que voulait le moteur.",
+        "remark": "Très bien. Le moteur chipote à peine.",
         "parts": [
-          ["Exactement ce que voulait le moteur."],
+          ["Très bien. Le moteur chipote à peine."],
           [
             "Les Noirs avaient un net avantage, mais maintenant les Blancs ont un net avantage.",
             true
@@ -2298,7 +2387,10 @@
         "remark": "Plus d’échappatoire pour le roi.",
         "parts": [["Plus d’échappatoire pour le roi."]]
       },
-      { "remark": "Dans le mille.", "parts": [["Dans le mille."]] },
+      {
+        "remark": "Bon jugement ici.",
+        "parts": [["Bon jugement ici."]]
+      },
       {
         "remark": "Le filet de mat se resserre.",
         "parts": [["Échec, et les Blancs doivent d’abord parer."]]
@@ -2403,15 +2495,30 @@
         "remark": "Theory. Grandmasters play this all the time.",
         "parts": [["Theory. Grandmasters play this all the time."]]
       },
-      { "remark": "Classic opening play.", "parts": [["Classic opening play."]] },
+      {
+        "remark": "Classic opening play.",
+        "parts": [["Classic opening play."]]
+      },
       {
         "remark": "Theory. Grandmasters play this all the time.",
         "parts": [["Theory. Grandmasters play this all the time."]]
       },
-      { "remark": "Following the main lines.", "parts": [["Following the main lines."]] },
-      { "remark": "Taking is right here.", "parts": [["Taking is right here."]] },
-      { "remark": "Classic opening play.", "parts": [["Classic opening play."]] },
-      { "remark": "Following the main lines.", "parts": [["Following the main lines."]] },
+      {
+        "remark": "Following the main lines.",
+        "parts": [["Following the main lines."]]
+      },
+      {
+        "remark": "Taking is right here.",
+        "parts": [["Taking is right here."]]
+      },
+      {
+        "remark": "Classic opening play.",
+        "parts": [["Classic opening play."]]
+      },
+      {
+        "remark": "Following the main lines.",
+        "parts": [["Following the main lines."]]
+      },
       {
         "remark": "Still in theory. So far, so good.",
         "parts": [["Still in theory. So far, so good."]]
@@ -2437,7 +2544,10 @@
           ["Better was [[m:w:Nh3]], developing the [[p:wn]]knight."]
         ]
       },
-      { "remark": "Spot on.", "parts": [["The [[s:g4]] [[p:wp]]pawn for free."]] },
+      {
+        "remark": "A strong move that keeps things under control.",
+        "parts": [["The [[s:g4]] [[p:wp]]pawn for free."]]
+      },
       {
         "remark": "Safe, if a bit passive.",
         "parts": [["That hits the [[p:bn]]knight on [[s:g4]], gaining time."]]
@@ -2454,11 +2564,8 @@
         "parts": [["The [[s:f2]] [[p:bn]]knight for free."], ["Equality is restored.", true]]
       },
       {
-        "remark": "Clean and precise.",
-        "parts": [
-          ["Clean and precise."],
-          ["The balance tips: now Black has a clear advantage.", true]
-        ]
+        "remark": "Almost perfect.",
+        "parts": [["Almost perfect."], ["The balance tips: now Black has a clear advantage.", true]]
       },
       {
         "remark": "That’s the most accurate move.",
@@ -2468,8 +2575,11 @@
         ]
       },
       {
-        "remark": "Just right. Keep it up!",
-        "parts": [["Just right. Keep it up!"], ["Black’s lead grows: a clear advantage now.", true]]
+        "remark": "A sensible, strong continuation.",
+        "parts": [
+          ["A sensible, strong continuation."],
+          ["Black’s lead grows: a clear advantage now.", true]
+        ]
       },
       {
         "remark": "A check that sets the pace.",
@@ -2485,7 +2595,10 @@
           ["Down from a winning position to a clear advantage for Black.", true]
         ]
       },
-      { "remark": "Just right. Keep it up!", "parts": [["Just right. Keep it up!"]] },
+      {
+        "remark": "Just right. Keep it up!",
+        "parts": [["Just right. Keep it up!"]]
+      },
       {
         "remark": "A mistake that hands over a real advantage.",
         "parts": [
@@ -2512,12 +2625,18 @@
         "remark": "Careful: the king is in a mating net now.",
         "parts": [["White can now force mate, starting with [[m:w:Ne2]]."]]
       },
-      { "remark": "No escape for the king now.", "parts": [["No escape for the king now."]] },
       {
-        "remark": "Hang in there: the position still has resources.",
+        "remark": "No escape for the king now.",
+        "parts": [["No escape for the king now."]]
+      },
+      {
+        "remark": "A good capture.",
         "parts": [["The [[s:c2]] [[p:wp]]pawn for free."], ["Now White has mate in 5.", true]]
       },
-      { "remark": "The mating net tightens.", "parts": [["[[m:w:Qxf7]] mated in 5."]] },
+      {
+        "remark": "The mating net tightens.",
+        "parts": [["[[m:w:Qxf7]] mated in 5."]]
+      },
       {
         "remark": "Wow! Giving up material for a winning attack.",
         "parts": [
@@ -2528,7 +2647,7 @@
         ]
       },
       {
-        "remark": "Couldn’t have done better.",
+        "remark": "A strong move that keeps things under control.",
         "parts": [
           ["Taking back on [[s:d2]], as expected."],
           ["Down from a clear advantage to a slight edge for Black.", true]
@@ -2537,7 +2656,7 @@
       {
         "remark": "The only move that holds everything together.",
         "parts": [
-          ["Anything else let the advantage go."],
+          ["Free material: a [[p:wq]]queen with nothing in return."],
           ["The gap widens: now Black has a clear advantage.", true]
         ]
       },
@@ -2552,9 +2671,12 @@
         "remark": "Great find! Everything else was worse.",
         "parts": [["The [[s:c8]] [[p:wb]]bishop taken, and nothing to pay."]]
       },
-      { "remark": "That’s the most accurate move.", "parts": [["That’s the most accurate move."]] },
       {
-        "remark": "Just right. Keep it up!",
+        "remark": "Almost perfect.",
+        "parts": [["Almost perfect."]]
+      },
+      {
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [
           ["The [[p:wb]]bishop has to move, gaining a tempo."],
           ["Even better for Black: a clear advantage.", true]
@@ -2569,7 +2691,10 @@
           ["A complete turnaround: now White has a clear advantage.", true]
         ]
       },
-      { "remark": "Nothing better here.", "parts": [["A recapture on [[s:e7]]."]] },
+      {
+        "remark": "Nothing better here.",
+        "parts": [["A recapture on [[s:e7]]."]]
+      },
       {
         "remark": "The one good move in the position.",
         "parts": [
@@ -2585,14 +2710,14 @@
         ]
       },
       {
-        "remark": "Nothing better here.",
+        "remark": "Good judgment here.",
         "parts": [
           ["A recapture on [[s:h2]]."],
           ["White goes from a clear advantage to a winning position.", true]
         ]
       },
       {
-        "remark": "Exactly what the engine wanted.",
+        "remark": "Very close to the best move.",
         "parts": [["Check: White must answer first."]]
       },
       {
@@ -2600,9 +2725,9 @@
         "parts": [["In the endgame the king is a fighter: it heads for the center."]]
       },
       {
-        "remark": "A good capture.",
+        "remark": "Taking is right here.",
         "parts": [
-          ["The [[s:h2]] [[p:wr]]rook for free."],
+          ["The [[s:h2]] [[p:wr]]rook is won, but White gets enough play for it."],
           ["Down from a winning position to a slight edge for White.", true]
         ]
       },
@@ -2641,7 +2766,10 @@
           ["The game was balanced, and now White has a clear advantage.", true]
         ]
       },
-      { "remark": "That’s the most accurate move.", "parts": [["That’s the most accurate move."]] },
+      {
+        "remark": "That’s the most accurate move.",
+        "parts": [["That’s the most accurate move."]]
+      },
       {
         "remark": "The only move that holds everything together.",
         "parts": [
@@ -2650,7 +2778,7 @@
         ]
       },
       {
-        "remark": "Clean and precise.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [["Check! White has to respond."], ["Equality is restored.", true]]
       },
       {
@@ -2666,8 +2794,8 @@
         "parts": [["A fork on the [[p:bk]]king and the [[p:bb]]bishop."]]
       },
       {
-        "remark": "Every good move makes the win harder for the opponent.",
-        "parts": [["Every good move makes the win harder for the opponent."]]
+        "remark": "When behind, look for counterplay: the opponent can still slip.",
+        "parts": [["When behind, look for counterplay: the opponent can still slip."]]
       },
       {
         "remark": "A checkmate slipped away.",
@@ -2678,7 +2806,7 @@
         "parts": [["No time wasted: White’s mistake is punished."]]
       },
       {
-        "remark": "A check that sets the pace.",
+        "remark": "Check! The opponent has to respond.",
         "parts": [["The check forces Black to respond."]]
       },
       {
@@ -2694,7 +2822,10 @@
         "remark": "De la théorie : les grands maîtres jouent ça tout le temps.",
         "parts": [["De la théorie : les grands maîtres jouent ça tout le temps."]]
       },
-      { "remark": "Du jeu d’ouverture classique.", "parts": [["Du jeu d’ouverture classique."]] },
+      {
+        "remark": "Du jeu d’ouverture classique.",
+        "parts": [["Du jeu d’ouverture classique."]]
+      },
       {
         "remark": "De la théorie : les grands maîtres jouent ça tout le temps.",
         "parts": [["De la théorie : les grands maîtres jouent ça tout le temps."]]
@@ -2707,7 +2838,10 @@
         "remark": "Prendre est la bonne décision ici.",
         "parts": [["Prendre est la bonne décision ici."]]
       },
-      { "remark": "Du jeu d’ouverture classique.", "parts": [["Du jeu d’ouverture classique."]] },
+      {
+        "remark": "Du jeu d’ouverture classique.",
+        "parts": [["Du jeu d’ouverture classique."]]
+      },
       {
         "remark": "On suit les lignes principales.",
         "parts": [["On suit les lignes principales."]]
@@ -2737,7 +2871,10 @@
           ["Il fallait jouer [[m:w:Nh3]], qui sortait le [[p:wn]]cavalier."]
         ]
       },
-      { "remark": "Dans le mille.", "parts": [["Le [[p:wp]]pion [[s:g4]], gratuit."]] },
+      {
+        "remark": "Un coup fort, la position reste sous contrôle.",
+        "parts": [["Le [[p:wp]]pion [[s:g4]], gratuit."]]
+      },
       {
         "remark": "Sûr, quoiqu’un peu passif.",
         "parts": [["Ça attaque le [[p:bn]]cavalier en [[s:g4]], avec gain de temps."]]
@@ -2754,9 +2891,9 @@
         "parts": [["Le [[p:bn]]cavalier [[s:f2]], gratuit."], ["L’équilibre est rétabli.", true]]
       },
       {
-        "remark": "Propre et précis.",
+        "remark": "Presque parfait.",
         "parts": [
-          ["Propre et précis."],
+          ["Presque parfait."],
           ["L’équilibre est rompu : maintenant les Noirs ont un net avantage.", true]
         ]
       },
@@ -2768,9 +2905,9 @@
         ]
       },
       {
-        "remark": "Parfait. Continue comme ça !",
+        "remark": "Une suite sensée et solide.",
         "parts": [
-          ["Parfait. Continue comme ça !"],
+          ["Une suite sensée et solide."],
           ["L’avantage grandit : les Noirs ont maintenant un net avantage.", true]
         ]
       },
@@ -2788,7 +2925,10 @@
           ["L’écart se réduit pour les Noirs : il ne leur reste qu’un net avantage.", true]
         ]
       },
-      { "remark": "Parfait. Continue comme ça !", "parts": [["Parfait. Continue comme ça !"]] },
+      {
+        "remark": "Parfait. Continue comme ça !",
+        "parts": [["Parfait. Continue comme ça !"]]
+      },
       {
         "remark": "Une erreur, qui donne un vrai avantage à l’adversaire.",
         "parts": [
@@ -2820,13 +2960,16 @@
         "parts": [["Plus d’échappatoire pour le roi."]]
       },
       {
-        "remark": "Tiens bon : la position a encore des ressources.",
+        "remark": "Une bonne prise.",
         "parts": [
           ["Le [[p:wp]]pion [[s:c2]], gratuit."],
           ["Désormais, les Blancs ont un mat en 5.", true]
         ]
       },
-      { "remark": "Le filet de mat se resserre.", "parts": [["[[m:w:Qxf7]] matait en 5."]] },
+      {
+        "remark": "Le filet de mat se resserre.",
+        "parts": [["[[m:w:Qxf7]] matait en 5."]]
+      },
       {
         "remark": "Waouh ! Du matériel donné pour une attaque gagnante.",
         "parts": [
@@ -2835,7 +2978,7 @@
         ]
       },
       {
-        "remark": "Impossible de faire mieux.",
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [
           ["On reprend en [[s:d2]], comme prévu."],
           ["Les Noirs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
@@ -2844,7 +2987,7 @@
       {
         "remark": "Le seul coup qui tient tout ensemble.",
         "parts": [
-          ["Tout le reste laissait échapper l’avantage."],
+          ["Du matériel offert : une [[p:wq]]dame, sans rien en échange."],
           ["L’écart se creuse : maintenant les Noirs ont un net avantage.", true]
         ]
       },
@@ -2859,9 +3002,12 @@
         "remark": "Belle trouvaille ! Tout le reste était moins bon.",
         "parts": [["Le [[p:wb]]fou [[s:c8]] pris sans rien payer."]]
       },
-      { "remark": "C’est le coup le plus précis.", "parts": [["C’est le coup le plus précis."]] },
       {
-        "remark": "Parfait. Continue comme ça !",
+        "remark": "Presque parfait.",
+        "parts": [["Presque parfait."]]
+      },
+      {
+        "remark": "Bien joué, la position reste saine.",
         "parts": [
           ["Le [[p:wb]]fou doit bouger, avec gain de tempo."],
           ["Encore mieux pour les Noirs : un net avantage à présent.", true]
@@ -2874,7 +3020,10 @@
           ["Retournement complet : maintenant les Blancs ont un net avantage.", true]
         ]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Une reprise en [[s:e7]]."]] },
+      {
+        "remark": "Rien de mieux ici.",
+        "parts": [["Une reprise en [[s:e7]]."]]
+      },
       {
         "remark": "Le seul bon coup de la position.",
         "parts": [
@@ -2890,14 +3039,14 @@
         ]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Bon jugement ici.",
         "parts": [
           ["Une reprise en [[s:h2]]."],
           ["Les Blancs passent d’un net avantage à une position gagnante.", true]
         ]
       },
       {
-        "remark": "Exactement ce que voulait le moteur.",
+        "remark": "Tout près du meilleur coup.",
         "parts": [["Échec, et les Blancs doivent d’abord parer."]]
       },
       {
@@ -2905,9 +3054,9 @@
         "parts": [["En finale, le roi est une pièce de combat : il rejoint le centre."]]
       },
       {
-        "remark": "Une bonne prise.",
+        "remark": "Prendre est la bonne décision ici.",
         "parts": [
-          ["La [[p:wr]]tour [[s:h2]], gratuite."],
+          ["La [[p:wr]]tour [[s:h2]] est gagnée, mais les Blancs ont du jeu en compensation."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -2946,7 +3095,10 @@
           ["La partie était équilibrée, et maintenant les Blancs ont un net avantage.", true]
         ]
       },
-      { "remark": "C’est le coup le plus précis.", "parts": [["C’est le coup le plus précis."]] },
+      {
+        "remark": "C’est le coup le plus précis.",
+        "parts": [["C’est le coup le plus précis."]]
+      },
       {
         "remark": "Le seul coup qui tient tout ensemble.",
         "parts": [
@@ -2955,7 +3107,7 @@
         ]
       },
       {
-        "remark": "Propre et précis.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [["Échec : il oblige les Blancs à répondre."], ["L’équilibre est rétabli.", true]]
       },
       {
@@ -2971,8 +3123,10 @@
         "parts": [["Une fourchette, sur le [[p:bk]]roi et le [[p:bb]]fou."]]
       },
       {
-        "remark": "Chaque bon coup complique la victoire de l’adversaire.",
-        "parts": [["Chaque bon coup complique la victoire de l’adversaire."]]
+        "remark": "Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper.",
+        "parts": [
+          ["Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper."]
+        ]
       },
       {
         "remark": "Un échec et mat s’est échappé.",
@@ -2983,7 +3137,7 @@
         "parts": [["Pas de temps perdu : l’erreur des Blancs est punie."]]
       },
       {
-        "remark": "Un échec qui donne le tempo.",
+        "remark": "Échec ! L’adversaire doit répondre.",
         "parts": [["L’échec force les Noirs à réagir."]]
       },
       {
@@ -3014,7 +3168,10 @@
         "remark": "That’s a costly slip.",
         "parts": [["Black’s lead grows: a clear advantage now."]]
       },
-      { "remark": "Spot on.", "parts": [["White’s mistake is punished right away."]] },
+      {
+        "remark": "Spot on.",
+        "parts": [["White’s mistake is punished right away."]]
+      },
       {
         "remark": "The only move that holds everything together.",
         "parts": [["The one move that kept White out of trouble."], ["Equality is restored.", true]]
@@ -3053,9 +3210,9 @@
         ]
       },
       {
-        "remark": "Nothing better here.",
+        "remark": "Very good. The engine barely disagrees.",
         "parts": [
-          ["Nothing better here."],
+          ["Very good. The engine barely disagrees."],
           ["White had a winning position; now it’s only a clear advantage.", true]
         ]
       },
@@ -3063,7 +3220,10 @@
         "remark": "This loosens the grip a little.",
         "parts": [["[[m:w:Rh3]] was the cleaner move."]]
       },
-      { "remark": "A reasonable choice.", "parts": [["The pawn takes the center."]] },
+      {
+        "remark": "A reasonable choice.",
+        "parts": [["The pawn takes the center."]]
+      },
       {
         "remark": "Every good move makes the win harder for the opponent.",
         "parts": [["Nothing stops the mate now: [[m:b:cxd5#]]."]]
@@ -3072,7 +3232,10 @@
         "remark": "The mating net tightens.",
         "parts": [["There was mate in one with [[m:b:cxd5]]."]]
       },
-      { "remark": "Strong and simple.", "parts": [["Nothing stops the mate now: [[m:b:Bxh3#]]."]] },
+      {
+        "remark": "Almost perfect.",
+        "parts": [["Nothing stops the mate now: [[m:b:Bxh3#]]."]]
+      },
       {
         "remark": "There was a mate on the board.",
         "parts": [
@@ -3110,7 +3273,10 @@
           ["The game is decided: Black has mate in one.", true]
         ]
       },
-      { "remark": "Spot on.", "parts": [["Mate can no longer be avoided: [[m:b:exd4#]]."]] },
+      {
+        "remark": "Solid play. Keep going.",
+        "parts": [["Mate can no longer be avoided: [[m:b:exd4#]]."]]
+      },
       {
         "remark": "Mate is coming. Keep going!",
         "parts": [["The [[s:d4]] [[p:wp]]pawn taken, and nothing to pay."]]
@@ -3131,16 +3297,19 @@
         ]
       },
       {
-        "remark": "Nothing better here.",
-        "parts": [["Nothing better here."], ["The game is decided: Black has mate in one.", true]]
+        "remark": "Almost perfect.",
+        "parts": [["Almost perfect."], ["The game is decided: Black has mate in one.", true]]
       },
       {
-        "remark": "Every good move makes the win harder for the opponent.",
+        "remark": "The right piece to take.",
         "parts": [["Mate can no longer be avoided: [[m:b:Rgxb8#]]."]]
       },
-      { "remark": "The mating net tightens.", "parts": [["A recapture on [[s:b8]]."]] },
       {
-        "remark": "Nothing better here.",
+        "remark": "The mating net tightens.",
+        "parts": [["A recapture on [[s:b8]]."]]
+      },
+      {
+        "remark": "Almost perfect.",
         "parts": [["Mate can no longer be avoided: [[m:b:Bxc5#]]."]]
       },
       {
@@ -3156,7 +3325,7 @@
         "parts": [["[[m:b:Kb6]] was more precise."]]
       },
       {
-        "remark": "A good capture.",
+        "remark": "With this lead, every trade brings the end closer.",
         "parts": [
           ["Taking back on [[s:c3]], as expected."],
           ["The scales tip, and White has a winning position.", true]
@@ -3171,15 +3340,15 @@
         "parts": [["[[m:w:Bd3]] was a little more precise."]]
       },
       {
-        "remark": "The king has to deal with this first.",
+        "remark": "A check that sets the pace.",
         "parts": [
           ["Check! White has to respond."],
           ["No longer level: Black has a clear advantage.", true]
         ]
       },
       {
-        "remark": "Couldn’t have done better.",
-        "parts": [["Couldn’t have done better."], ["Black’s lead shrinks to a slight edge.", true]]
+        "remark": "Solid play. Keep going.",
+        "parts": [["Solid play. Keep going."], ["Black’s lead shrinks to a slight edge.", true]]
       },
       {
         "remark": "This loosens the grip a little.",
@@ -3233,7 +3402,7 @@
         "parts": [["The check forces White to respond."], ["Equality is restored.", true]]
       },
       {
-        "remark": "Nothing better here.",
+        "remark": "A sensible, strong continuation.",
         "parts": [
           ["Free material: the [[s:c2]] [[p:bp]]pawn with nothing in return."],
           ["No longer level: White has a slight edge.", true]
@@ -3281,9 +3450,9 @@
         "parts": [["More accurate was [[m:w:Kd2]]."]]
       },
       {
-        "remark": "That’s the most accurate move.",
+        "remark": "Very good. The engine barely disagrees.",
         "parts": [
-          ["That’s the most accurate move."],
+          ["Very good. The engine barely disagrees."],
           ["White had a clear advantage; now it’s only a slight edge.", true]
         ]
       }
@@ -3304,7 +3473,10 @@
         "remark": "Un faux pas qui coûte cher.",
         "parts": [["L’avantage grandit : les Noirs ont maintenant un net avantage."]]
       },
-      { "remark": "Dans le mille.", "parts": [["L’erreur des Blancs est punie aussitôt."]] },
+      {
+        "remark": "Dans le mille.",
+        "parts": [["L’erreur des Blancs est punie aussitôt."]]
+      },
       {
         "remark": "Le seul coup qui tient tout ensemble.",
         "parts": [
@@ -3349,14 +3521,20 @@
         ]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Très bien. Le moteur chipote à peine.",
         "parts": [
-          ["Rien de mieux ici."],
+          ["Très bien. Le moteur chipote à peine."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un net avantage.", true]
         ]
       },
-      { "remark": "L’emprise se relâche un peu.", "parts": [["[[m:w:Rh3]] était plus propre."]] },
-      { "remark": "Un choix raisonnable.", "parts": [["Le pion prend le centre."]] },
+      {
+        "remark": "L’emprise se relâche un peu.",
+        "parts": [["[[m:w:Rh3]] était plus propre."]]
+      },
+      {
+        "remark": "Un choix raisonnable.",
+        "parts": [["Le pion prend le centre."]]
+      },
       {
         "remark": "Chaque bon coup complique la victoire de l’adversaire.",
         "parts": [["Plus rien n’arrête le mat : [[m:b:cxd5#]]."]]
@@ -3365,7 +3543,10 @@
         "remark": "Le filet de mat se resserre.",
         "parts": [["Il y avait mat en un avec [[m:b:cxd5]]."]]
       },
-      { "remark": "Simple et fort.", "parts": [["Plus rien n’arrête le mat : [[m:b:Bxh3#]]."]] },
+      {
+        "remark": "Presque parfait.",
+        "parts": [["Plus rien n’arrête le mat : [[m:b:Bxh3#]]."]]
+      },
       {
         "remark": "Un mat était sur l’échiquier.",
         "parts": [
@@ -3404,7 +3585,7 @@
         ]
       },
       {
-        "remark": "Dans le mille.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [["Le mat ne peut plus être évité : [[m:b:exd4#]]."]]
       },
       {
@@ -3427,19 +3608,19 @@
         ]
       },
       {
-        "remark": "Rien de mieux ici.",
-        "parts": [
-          ["Rien de mieux ici."],
-          ["La partie est jouée : les Noirs ont un mat en un.", true]
-        ]
+        "remark": "Presque parfait.",
+        "parts": [["Presque parfait."], ["La partie est jouée : les Noirs ont un mat en un.", true]]
       },
       {
-        "remark": "Chaque bon coup complique la victoire de l’adversaire.",
+        "remark": "La bonne pièce à prendre.",
         "parts": [["Le mat ne peut plus être évité : [[m:b:Rgxb8#]]."]]
       },
-      { "remark": "Le filet de mat se resserre.", "parts": [["Une reprise en [[s:b8]]."]] },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Le filet de mat se resserre.",
+        "parts": [["Une reprise en [[s:b8]]."]]
+      },
+      {
+        "remark": "Presque parfait.",
         "parts": [["Le mat ne peut plus être évité : [[m:b:Bxc5#]]."]]
       },
       {
@@ -3455,7 +3636,7 @@
         "parts": [["[[m:b:Kb6]] était plus précis."]]
       },
       {
-        "remark": "Une bonne prise.",
+        "remark": "Avec une telle avance, chaque échange rapproche la fin.",
         "parts": [
           ["On reprend en [[s:c3]], comme prévu."],
           ["La balance penche : les Blancs ont une position gagnante.", true]
@@ -3470,16 +3651,16 @@
         "parts": [["[[m:w:Bd3]] était un peu plus précis."]]
       },
       {
-        "remark": "Le roi doit d’abord s’en occuper.",
+        "remark": "Un échec qui donne le tempo.",
         "parts": [
           ["Échec : il oblige les Blancs à répondre."],
           ["Fini l’égalité : les Noirs ont un net avantage.", true]
         ]
       },
       {
-        "remark": "Impossible de faire mieux.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
-          ["Impossible de faire mieux."],
+          ["Du jeu solide. Continue."],
           ["Les Noirs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -3535,7 +3716,7 @@
         "parts": [["L’échec force les Blancs à réagir."], ["L’équilibre est rétabli.", true]]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Une suite sensée et solide.",
         "parts": [
           ["Du matériel offert : le [[p:bp]]pion [[s:c2]], sans rien en échange."],
           ["Fini l’égalité : les Blancs ont un léger avantage.", true]
@@ -3583,9 +3764,9 @@
         "parts": [["Plus juste : [[m:w:Kd2]]."]]
       },
       {
-        "remark": "C’est le coup le plus précis.",
+        "remark": "Très bien. Le moteur chipote à peine.",
         "parts": [
-          ["C’est le coup le plus précis."],
+          ["Très bien. Le moteur chipote à peine."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage.", true]
         ]
       }
@@ -3614,8 +3795,14 @@
           ["The game follows the Sicilian Defense: Najdorf Variation.", true]
         ]
       },
-      { "remark": "Clean and precise.", "parts": [["Clean and precise."]] },
-      { "remark": "That’s the most accurate move.", "parts": [["That’s the most accurate move."]] },
+      {
+        "remark": "Clean and precise.",
+        "parts": [["Clean and precise."]]
+      },
+      {
+        "remark": "That’s the most accurate move.",
+        "parts": [["That’s the most accurate move."]]
+      },
       {
         "remark": "That took courage, and it pays off.",
         "parts": [
@@ -3624,12 +3811,18 @@
           ]
         ]
       },
-      { "remark": "Clean and precise.", "parts": [["Taking back on [[s:c2]], as expected."]] },
+      {
+        "remark": "A sensible, strong continuation.",
+        "parts": [["Taking back on [[s:c2]], as expected."]]
+      },
       {
         "remark": "Great find! Everything else was worse.",
         "parts": [["Anything else let the advantage go."]]
       },
-      { "remark": "Taking is right here.", "parts": [["Taking is right here."]] },
+      {
+        "remark": "The right piece to take.",
+        "parts": [["The right piece to take."]]
+      },
       {
         "remark": "The position deserved more care here.",
         "parts": [["[[m:b:Qxh4]] was the better move, taking the [[s:h4]] [[p:wp]]pawn."]]
@@ -3649,7 +3842,7 @@
         ]
       },
       {
-        "remark": "Strong and simple.",
+        "remark": "Solid play. Keep going.",
         "parts": [
           ["That hits the [[p:bq]]queen, gaining time."],
           ["The game is level again.", true]
@@ -3659,7 +3852,10 @@
         "remark": "A good capture.",
         "parts": [["Nothing stops the mate now: [[m:w:Rh2#]]."]]
       },
-      { "remark": "A checkmate slipped away.", "parts": [["[[m:w:Rh2]] mated on the spot."]] },
+      {
+        "remark": "A checkmate slipped away.",
+        "parts": [["[[m:w:Rh2]] mated on the spot."]]
+      },
       {
         "remark": "Sharp eyes! This was hard to see.",
         "parts": [
@@ -3689,8 +3885,14 @@
           ["That lets White play [[m:w:hxg5]], taking the [[s:g5]] [[p:bp]]pawn."]
         ]
       },
-      { "remark": "Spot on.", "parts": [["The [[s:g5]] [[p:bp]]pawn taken, and nothing to pay."]] },
-      { "remark": "Clean and precise.", "parts": [["Clean and precise."]] },
+      {
+        "remark": "Spot on.",
+        "parts": [["The [[s:g5]] [[p:bp]]pawn taken, and nothing to pay."]]
+      },
+      {
+        "remark": "Nicely done, the position stays healthy.",
+        "parts": [["Nicely done, the position stays healthy."]]
+      },
       {
         "remark": "That’s the most accurate move.",
         "parts": [["That’s the most accurate move."], ["Back to equal.", true]]
@@ -3711,11 +3913,14 @@
         "remark": "Great find! Everything else was worse.",
         "parts": [["Anything else let the advantage go."]]
       },
-      { "remark": "The right piece to take.", "parts": [["The [[s:f4]] [[p:wp]]pawn for free."]] },
       {
-        "remark": "Winning now. Safety first: leave no counterplay.",
+        "remark": "The right piece to take.",
+        "parts": [["The [[s:f4]] [[p:wp]]pawn for free."]]
+      },
+      {
+        "remark": "No hurry: a winning game is won one safe move at a time.",
         "parts": [
-          ["Winning now. Safety first: leave no counterplay."],
+          ["No hurry: a winning game is won one safe move at a time."],
           ["The gap widens: now White has a winning position.", true]
         ]
       },
@@ -3726,19 +3931,37 @@
           ["The game is decided: White has mate in 5.", true]
         ]
       },
-      { "remark": "The mating net tightens.", "parts": [["[[m:w:Kd2]] was mate in 5."]] },
       {
-        "remark": "Hang in there: the position still has resources.",
-        "parts": [["Hang in there: the position still has resources."]]
+        "remark": "The mating net tightens.",
+        "parts": [["[[m:w:Kd2]] was mate in 5."]]
       },
-      { "remark": "Mate is coming. Keep going!", "parts": [["Mate is coming. Keep going!"]] },
-      { "remark": "Couldn’t have done better.", "parts": [["Couldn’t have done better."]] },
-      { "remark": "One step closer to checkmate.", "parts": [["[[m:w:Nh3]] mated in 3."]] },
-      { "remark": "Spot on.", "parts": [["Spot on."]] },
-      { "remark": "No escape for the king now.", "parts": [["No escape for the king now."]] },
       {
-        "remark": "That’s the most accurate move.",
-        "parts": [["That’s the most accurate move."], ["Equality is restored.", true]]
+        "remark": "Not over yet: set problems and keep fighting.",
+        "parts": [["Not over yet: set problems and keep fighting."]]
+      },
+      {
+        "remark": "Mate is coming. Keep going!",
+        "parts": [["Mate is coming. Keep going!"]]
+      },
+      {
+        "remark": "Almost perfect.",
+        "parts": [["Almost perfect."]]
+      },
+      {
+        "remark": "One step closer to checkmate.",
+        "parts": [["[[m:w:Nh3]] mated in 3."]]
+      },
+      {
+        "remark": "Spot on.",
+        "parts": [["Spot on."]]
+      },
+      {
+        "remark": "No escape for the king now.",
+        "parts": [["No escape for the king now."]]
+      },
+      {
+        "remark": "Nicely done, the position stays healthy.",
+        "parts": [["Nicely done, the position stays healthy."], ["Equality is restored.", true]]
       },
       {
         "remark": "Taking is right here.",
@@ -3746,12 +3969,15 @@
       },
       {
         "remark": "Great find! Everything else was worse.",
-        "parts": [["Anything else would have left Black in trouble."]]
+        "parts": [["Free material: the [[s:d6]] [[p:wb]]bishop with nothing in return."]]
       },
-      { "remark": "That’s the most accurate move.", "parts": [["That’s the most accurate move."]] },
+      {
+        "remark": "That’s the most accurate move.",
+        "parts": [["That’s the most accurate move."]]
+      },
       {
         "remark": "Taking is right here.",
-        "parts": [["Simplifying while ahead: exactly right."]]
+        "parts": [["That wins a [[p:wn]]knight: taking back would cost the [[p:wb]]bishop."]]
       },
       {
         "remark": "A blunder that throws away the position.",
@@ -3775,7 +4001,10 @@
         "remark": "The opponent’s mistake goes unpunished.",
         "parts": [["White’s earlier mistake could still be punished: [[m:b:f6]] finished it off."]]
       },
-      { "remark": "Nothing better here.", "parts": [["Nothing better here."]] },
+      {
+        "remark": "Nothing better here.",
+        "parts": [["Nothing better here."]]
+      },
       {
         "remark": "This allows a forced checkmate.",
         "parts": [["[[m:w:Kd1]] starts a forced mate now."]]
@@ -3788,7 +4017,10 @@
         "remark": "A tough position, but keep making it hard for the opponent.",
         "parts": [["A [[p:wb]]bishop taken, and nothing to pay."]]
       },
-      { "remark": "One step closer to checkmate.", "parts": [["One step closer to checkmate."]] },
+      {
+        "remark": "One step closer to checkmate.",
+        "parts": [["One step closer to checkmate."]]
+      },
       {
         "remark": "With this lead, every trade brings the end closer.",
         "parts": [
@@ -3800,16 +4032,22 @@
         "remark": "The engine’s top move. Well played.",
         "parts": [["A [[p:br]]rook taken, and nothing to pay."]]
       },
-      { "remark": "Mate is coming. Keep going!", "parts": [["Mate is coming. Keep going!"]] },
       {
-        "remark": "Hang in there: the position still has resources.",
-        "parts": [["Hang in there: the position still has resources."]]
+        "remark": "Mate is coming. Keep going!",
+        "parts": [["Mate is coming. Keep going!"]]
+      },
+      {
+        "remark": "Not over yet: set problems and keep fighting.",
+        "parts": [["Not over yet: set problems and keep fighting."]]
       },
       {
         "remark": "One step closer to checkmate.",
         "parts": [["One step closer to checkmate."], ["Now Black has mate in 5.", true]]
       },
-      { "remark": "Spot on.", "parts": [["Spot on."]] },
+      {
+        "remark": "Spot on.",
+        "parts": [["Spot on."]]
+      },
       {
         "remark": "No escape for the king now.",
         "parts": [
@@ -3824,7 +4062,10 @@
           ["Black had a winning position, but now White has a slight edge.", true]
         ]
       },
-      { "remark": "Not every capture is a good one.", "parts": [["[[m:b:Kc7]] was more precise."]] }
+      {
+        "remark": "Not every capture is a good one.",
+        "parts": [["[[m:b:Kc7]] was more precise."]]
+      }
     ],
     "fr": [
       {
@@ -3848,8 +4089,14 @@
           ["Au programme : Sicilian Defense: Najdorf Variation.", true]
         ]
       },
-      { "remark": "Propre et précis.", "parts": [["Propre et précis."]] },
-      { "remark": "C’est le coup le plus précis.", "parts": [["C’est le coup le plus précis."]] },
+      {
+        "remark": "Propre et précis.",
+        "parts": [["Propre et précis."]]
+      },
+      {
+        "remark": "C’est le coup le plus précis.",
+        "parts": [["C’est le coup le plus précis."]]
+      },
       {
         "remark": "Il fallait oser, et ça paie.",
         "parts": [
@@ -3858,14 +4105,17 @@
           ]
         ]
       },
-      { "remark": "Propre et précis.", "parts": [["On reprend en [[s:c2]], comme prévu."]] },
+      {
+        "remark": "Une suite sensée et solide.",
+        "parts": [["On reprend en [[s:c2]], comme prévu."]]
+      },
       {
         "remark": "Belle trouvaille ! Tout le reste était moins bon.",
         "parts": [["Tout le reste laissait échapper l’avantage."]]
       },
       {
-        "remark": "Prendre est la bonne décision ici.",
-        "parts": [["Prendre est la bonne décision ici."]]
+        "remark": "La bonne pièce à prendre.",
+        "parts": [["La bonne pièce à prendre."]]
       },
       {
         "remark": "La position méritait plus d’attention.",
@@ -3886,7 +4136,7 @@
         ]
       },
       {
-        "remark": "Simple et fort.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
           ["Ça attaque la [[p:bq]]dame, avec gain de temps."],
           ["La partie redevient équilibrée.", true]
@@ -3936,7 +4186,10 @@
         "remark": "Dans le mille.",
         "parts": [["Le [[p:bp]]pion [[s:g5]] pris sans rien payer."]]
       },
-      { "remark": "Propre et précis.", "parts": [["Propre et précis."]] },
+      {
+        "remark": "Bien joué, la position reste saine.",
+        "parts": [["Bien joué, la position reste saine."]]
+      },
       {
         "remark": "C’est le coup le plus précis.",
         "parts": [["C’est le coup le plus précis."], ["Retour à l’égalité.", true]]
@@ -3957,11 +4210,14 @@
         "remark": "Belle trouvaille ! Tout le reste était moins bon.",
         "parts": [["Tout le reste laissait échapper l’avantage."]]
       },
-      { "remark": "La bonne pièce à prendre.", "parts": [["Le [[p:wp]]pion [[s:f4]], gratuit."]] },
       {
-        "remark": "Position gagnante : la sécurité d’abord, ne laisse aucun contre-jeu.",
+        "remark": "La bonne pièce à prendre.",
+        "parts": [["Le [[p:wp]]pion [[s:f4]], gratuit."]]
+      },
+      {
+        "remark": "Pas de précipitation : une partie gagnée se gagne coup après coup.",
         "parts": [
-          ["Position gagnante : la sécurité d’abord, ne laisse aucun contre-jeu."],
+          ["Pas de précipitation : une partie gagnée se gagne coup après coup."],
           ["L’écart se creuse : maintenant les Blancs ont une position gagnante.", true]
         ]
       },
@@ -3972,22 +4228,37 @@
           ["La partie est jouée : les Blancs ont un mat en 5.", true]
         ]
       },
-      { "remark": "Le filet de mat se resserre.", "parts": [["[[m:w:Kd2]] donnait un mat en 5."]] },
       {
-        "remark": "Tiens bon : la position a encore des ressources.",
-        "parts": [["Tiens bon : la position a encore des ressources."]]
+        "remark": "Le filet de mat se resserre.",
+        "parts": [["[[m:w:Kd2]] donnait un mat en 5."]]
       },
-      { "remark": "Le mat arrive. Continue !", "parts": [["Le mat arrive. Continue !"]] },
-      { "remark": "Impossible de faire mieux.", "parts": [["Impossible de faire mieux."]] },
-      { "remark": "Encore un pas vers le mat.", "parts": [["[[m:w:Nh3]] matait en 3."]] },
-      { "remark": "Dans le mille.", "parts": [["Dans le mille."]] },
+      {
+        "remark": "Rien n’est fini : complique la tâche de l’adversaire.",
+        "parts": [["Rien n’est fini : complique la tâche de l’adversaire."]]
+      },
+      {
+        "remark": "Le mat arrive. Continue !",
+        "parts": [["Le mat arrive. Continue !"]]
+      },
+      {
+        "remark": "Presque parfait.",
+        "parts": [["Presque parfait."]]
+      },
+      {
+        "remark": "Encore un pas vers le mat.",
+        "parts": [["[[m:w:Nh3]] matait en 3."]]
+      },
+      {
+        "remark": "Dans le mille.",
+        "parts": [["Dans le mille."]]
+      },
       {
         "remark": "Plus d’échappatoire pour le roi.",
         "parts": [["Plus d’échappatoire pour le roi."]]
       },
       {
-        "remark": "C’est le coup le plus précis.",
-        "parts": [["C’est le coup le plus précis."], ["L’équilibre est rétabli.", true]]
+        "remark": "Bien joué, la position reste saine.",
+        "parts": [["Bien joué, la position reste saine."], ["L’équilibre est rétabli.", true]]
       },
       {
         "remark": "Prendre est la bonne décision ici.",
@@ -3995,12 +4266,15 @@
       },
       {
         "remark": "Belle trouvaille ! Tout le reste était moins bon.",
-        "parts": [["Tout le reste mettait les Noirs en danger."]]
+        "parts": [["Du matériel offert : le [[p:wb]]fou [[s:d6]], sans rien en échange."]]
       },
-      { "remark": "C’est le coup le plus précis.", "parts": [["C’est le coup le plus précis."]] },
+      {
+        "remark": "C’est le coup le plus précis.",
+        "parts": [["C’est le coup le plus précis."]]
+      },
       {
         "remark": "Prendre est la bonne décision ici.",
-        "parts": [["Simplifier quand on mène : exactement ce qu’il faut."]]
+        "parts": [["De quoi gagner un [[p:wn]]cavalier : reprendre coûterait le [[p:wb]]fou."]]
       },
       {
         "remark": "Une gaffe, qui gâche la position.",
@@ -4031,7 +4305,10 @@
           ]
         ]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Rien de mieux ici."]] },
+      {
+        "remark": "Rien de mieux ici.",
+        "parts": [["Rien de mieux ici."]]
+      },
       {
         "remark": "Ça permet un mat forcé.",
         "parts": [["[[m:w:Kd1]] lance maintenant un mat forcé."]]
@@ -4044,7 +4321,10 @@
         "remark": "Position difficile, mais continue à poser des problèmes.",
         "parts": [["Un [[p:wb]]fou pris sans rien payer."]]
       },
-      { "remark": "Encore un pas vers le mat.", "parts": [["Encore un pas vers le mat."]] },
+      {
+        "remark": "Encore un pas vers le mat.",
+        "parts": [["Encore un pas vers le mat."]]
+      },
       {
         "remark": "Avec une telle avance, chaque échange rapproche la fin.",
         "parts": [
@@ -4056,16 +4336,22 @@
         "remark": "Le coup du moteur. Bien joué.",
         "parts": [["Une [[p:br]]tour prise sans rien payer."]]
       },
-      { "remark": "Le mat arrive. Continue !", "parts": [["Le mat arrive. Continue !"]] },
       {
-        "remark": "Tiens bon : la position a encore des ressources.",
-        "parts": [["Tiens bon : la position a encore des ressources."]]
+        "remark": "Le mat arrive. Continue !",
+        "parts": [["Le mat arrive. Continue !"]]
+      },
+      {
+        "remark": "Rien n’est fini : complique la tâche de l’adversaire.",
+        "parts": [["Rien n’est fini : complique la tâche de l’adversaire."]]
       },
       {
         "remark": "Encore un pas vers le mat.",
         "parts": [["Encore un pas vers le mat."], ["Désormais, les Noirs ont un mat en 5.", true]]
       },
-      { "remark": "Dans le mille.", "parts": [["Dans le mille."]] },
+      {
+        "remark": "Dans le mille.",
+        "parts": [["Dans le mille."]]
+      },
       {
         "remark": "Plus d’échappatoire pour le roi.",
         "parts": [
@@ -4150,11 +4436,11 @@
         ]
       },
       {
-        "remark": "Couldn’t have done better.",
+        "remark": "A strong move that keeps things under control.",
         "parts": [["A fair trade: the [[p:bn]]knight comes off."], ["Equality is restored.", true]]
       },
       {
-        "remark": "That’s the most accurate move.",
+        "remark": "Almost perfect.",
         "parts": [["The natural recapture on [[s:g8]]."]]
       },
       {
@@ -4177,7 +4463,10 @@
           ["The balance tips: now White has a clear advantage.", true]
         ]
       },
-      { "remark": "Taking is right here.", "parts": [["Taking back on [[s:g6]], as expected."]] },
+      {
+        "remark": "Taking is right here.",
+        "parts": [["Taking back on [[s:g6]], as expected."]]
+      },
       {
         "remark": "Great find! Everything else was worse.",
         "parts": [["The only way to keep the advantage, and it was found."]]
@@ -4186,24 +4475,33 @@
         "remark": "A capture that holds up.",
         "parts": [
           ["White goes from a clear advantage to a winning position.", true],
-          ["That allows [[m:w:Kh1]], gaining a tempo on the [[p:br]]rook on [[s:g2]]."]
+          ["The right move was [[m:b:d6]]."]
         ]
       },
       {
         "remark": "Winning now. Safety first: leave no counterplay.",
-        "parts": [["That hits the [[p:br]]rook on [[s:g2]], gaining time."]]
+        "parts": [["Winning now. Safety first: leave no counterplay."]]
       },
-      { "remark": "A good capture.", "parts": [["A good capture."]] },
-      { "remark": "Nothing better here.", "parts": [["The natural recapture on [[s:d2]]."]] },
+      {
+        "remark": "A good capture.",
+        "parts": [["A good capture."]]
+      },
+      {
+        "remark": "Good judgment here.",
+        "parts": [["The natural recapture on [[s:d2]]."]]
+      },
       {
         "remark": "Exactly what the engine wanted.",
         "parts": [["Exactly what the engine wanted."]]
       },
-      { "remark": "Strong and simple.", "parts": [["Strong and simple."]] },
       {
-        "remark": "The engine’s top move. Well played.",
+        "remark": "Strong and simple.",
+        "parts": [["Strong and simple."]]
+      },
+      {
+        "remark": "A strong move that keeps things under control.",
         "parts": [
-          ["The engine’s top move. Well played."],
+          ["A strong move that keeps things under control."],
           ["Down from a winning position to a clear advantage for White.", true]
         ]
       },
@@ -4219,14 +4517,17 @@
         "parts": [["The one move that kept the edge."]]
       },
       {
-        "remark": "The engine’s top move. Well played.",
-        "parts": [["The engine’s top move. Well played."]]
+        "remark": "A strong move that keeps things under control.",
+        "parts": [["A strong move that keeps things under control."]]
       },
       {
         "remark": "The only move that holds everything together.",
         "parts": [["Every other move would have let the advantage slip."]]
       },
-      { "remark": "Couldn’t have done better.", "parts": [["Couldn’t have done better."]] },
+      {
+        "remark": "Very good. The engine barely disagrees.",
+        "parts": [["Very good. The engine barely disagrees."]]
+      },
       {
         "remark": "Every good move makes the win harder for the opponent.",
         "parts": [
@@ -4257,18 +4558,18 @@
         "parts": [["[[m:b:Nb8]] was a hair more accurate."]]
       },
       {
-        "remark": "Clean and precise.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [["The check forces Black to respond."], ["Equality is restored.", true]]
       },
       {
-        "remark": "Nothing better here.",
+        "remark": "Solid play. Keep going.",
         "parts": [
-          ["Nothing better here."],
+          ["Solid play. Keep going."],
           ["The balance tips: now Black has a clear advantage.", true]
         ]
       },
       {
-        "remark": "A check that keeps the initiative.",
+        "remark": "A good capture.",
         "parts": [
           ["Check! Black has to respond."],
           ["Black had a clear advantage; now it’s only a slight edge.", true]
@@ -4276,10 +4577,7 @@
       },
       {
         "remark": "That’s a costly slip.",
-        "parts": [
-          ["Back to equal.", true],
-          ["Better was [[m:b:Kc8]], gaining a tempo on the [[p:wr]]rook on [[s:d7]]."]
-        ]
+        "parts": [["Back to equal.", true], ["Better was [[m:b:Kc8]]."]]
       },
       {
         "remark": "Ouch, this lets the opponent back in.",
@@ -4349,23 +4647,26 @@
         "remark": "A bit careless. Take a closer look.",
         "parts": [["More precise was [[m:b:Kc6]], bringing the king to the center."]]
       },
-      { "remark": "A good capture.", "parts": [["Check! Black has to respond."]] },
       {
-        "remark": "Clean and precise.",
+        "remark": "A good capture.",
+        "parts": [["Check! Black has to respond."]]
+      },
+      {
+        "remark": "Good judgment here.",
         "parts": [
-          ["Clean and precise."],
+          ["Good judgment here."],
           ["Black goes from a slight edge to a clear advantage.", true]
         ]
       },
       {
-        "remark": "That’s the most accurate move.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [
           ["Giving a [[p:wb]]bishop for a [[p:br]]rook: a good deal."],
           ["Everything changes: now White has a winning position.", true]
         ]
       },
       {
-        "remark": "Just right. Keep it up!",
+        "remark": "Solid play. Keep going.",
         "parts": [
           ["Taking back on [[s:b8]], as expected."],
           ["White’s lead shrinks to a clear advantage.", true]
@@ -4398,22 +4699,22 @@
         ]
       },
       {
-        "remark": "Exactly what the engine wanted.",
+        "remark": "Very good. The engine barely disagrees.",
         "parts": [
           ["That hits the [[p:wr]]rook, gaining time."],
           ["White had a slight edge, but the game is now balanced.", true]
         ]
       },
       {
-        "remark": "Strong and simple.",
+        "remark": "A strong move that keeps things under control.",
         "parts": [
           ["Free material: the [[s:b7]] [[p:bp]]pawn with nothing in return."],
           ["The scales tip, and White has a winning position.", true]
         ]
       },
       {
-        "remark": "Every good move makes the win harder for the opponent.",
-        "parts": [["Every good move makes the win harder for the opponent."]]
+        "remark": "When behind, look for counterplay: the opponent can still slip.",
+        "parts": [["When behind, look for counterplay: the opponent can still slip."]]
       }
     ],
     "fr": [
@@ -4485,14 +4786,14 @@
         ]
       },
       {
-        "remark": "Impossible de faire mieux.",
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [
           ["Un échange équitable : le [[p:bn]]cavalier disparaît."],
           ["L’équilibre est rétabli.", true]
         ]
       },
       {
-        "remark": "C’est le coup le plus précis.",
+        "remark": "Presque parfait.",
         "parts": [["La reprise naturelle en [[s:g8]]."]]
       },
       {
@@ -4527,24 +4828,33 @@
         "remark": "Une prise qui tient la route.",
         "parts": [
           ["Les Blancs passent d’un net avantage à une position gagnante.", true],
-          ["Ça ouvre la porte à [[m:w:Kh1]], qui gagne un tempo sur la [[p:br]]tour en [[s:g2]]."]
+          ["Mieux valait [[m:b:d6]]."]
         ]
       },
       {
         "remark": "Position gagnante : la sécurité d’abord, ne laisse aucun contre-jeu.",
-        "parts": [["Ça attaque la [[p:br]]tour en [[s:g2]], avec gain de temps."]]
+        "parts": [["Position gagnante : la sécurité d’abord, ne laisse aucun contre-jeu."]]
       },
-      { "remark": "Une bonne prise.", "parts": [["Une bonne prise."]] },
-      { "remark": "Rien de mieux ici.", "parts": [["La reprise naturelle en [[s:d2]]."]] },
+      {
+        "remark": "Une bonne prise.",
+        "parts": [["Une bonne prise."]]
+      },
+      {
+        "remark": "Bon jugement ici.",
+        "parts": [["La reprise naturelle en [[s:d2]]."]]
+      },
       {
         "remark": "Exactement ce que voulait le moteur.",
         "parts": [["Exactement ce que voulait le moteur."]]
       },
-      { "remark": "Simple et fort.", "parts": [["Simple et fort."]] },
       {
-        "remark": "Le coup du moteur. Bien joué.",
+        "remark": "Simple et fort.",
+        "parts": [["Simple et fort."]]
+      },
+      {
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [
-          ["Le coup du moteur. Bien joué."],
+          ["Un coup fort, la position reste sous contrôle."],
           ["Les Blancs perdent du terrain : il ne leur reste qu’un net avantage.", true]
         ]
       },
@@ -4559,12 +4869,18 @@
         "remark": "Sous la pression, la bonne réponse.",
         "parts": [["Le seul coup qui gardait l’avantage."]]
       },
-      { "remark": "Le coup du moteur. Bien joué.", "parts": [["Le coup du moteur. Bien joué."]] },
+      {
+        "remark": "Un coup fort, la position reste sous contrôle.",
+        "parts": [["Un coup fort, la position reste sous contrôle."]]
+      },
       {
         "remark": "Le seul coup qui tient tout ensemble.",
         "parts": [["Tout autre coup laissait filer l’avantage."]]
       },
-      { "remark": "Impossible de faire mieux.", "parts": [["Impossible de faire mieux."]] },
+      {
+        "remark": "Très bien. Le moteur chipote à peine.",
+        "parts": [["Très bien. Le moteur chipote à peine."]]
+      },
       {
         "remark": "Chaque bon coup complique la victoire de l’adversaire.",
         "parts": [
@@ -4595,18 +4911,18 @@
         "parts": [["[[m:b:Nb8]] était à peine meilleur."]]
       },
       {
-        "remark": "Propre et précis.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [["L’échec force les Noirs à réagir."], ["L’équilibre est rétabli.", true]]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
-          ["Rien de mieux ici."],
+          ["Du jeu solide. Continue."],
           ["L’équilibre est rompu : maintenant les Noirs ont un net avantage.", true]
         ]
       },
       {
-        "remark": "Un échec qui garde l’initiative.",
+        "remark": "Une bonne prise.",
         "parts": [
           ["Échec : il oblige les Noirs à répondre."],
           ["Les Noirs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
@@ -4614,10 +4930,7 @@
       },
       {
         "remark": "Un faux pas qui coûte cher.",
-        "parts": [
-          ["Retour à l’égalité.", true],
-          ["Il fallait jouer [[m:b:Kc8]], qui gagnait un tempo sur la [[p:wr]]tour en [[s:d7]]."]
-        ]
+        "parts": [["Retour à l’égalité.", true], ["[[m:b:Kc8]] s’imposait."]]
       },
       {
         "remark": "Aïe, ça remet l’adversaire dans la partie.",
@@ -4690,29 +5003,35 @@
         "remark": "Un peu négligent. Regarde de plus près.",
         "parts": [["Plus précis : [[m:b:Kc6]], qui centralisait le roi."]]
       },
-      { "remark": "Une bonne prise.", "parts": [["Échec : il oblige les Noirs à répondre."]] },
       {
-        "remark": "Propre et précis.",
+        "remark": "Une bonne prise.",
+        "parts": [["Échec : il oblige les Noirs à répondre."]]
+      },
+      {
+        "remark": "Bon jugement ici.",
         "parts": [
-          ["Propre et précis."],
+          ["Bon jugement ici."],
           ["Les Noirs passent d’un léger avantage à un net avantage.", true]
         ]
       },
       {
-        "remark": "C’est le coup le plus précis.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [
           ["Donner un [[p:wb]]fou pour une [[p:br]]tour : une bonne affaire."],
           ["Tout change : les Blancs ont une position gagnante.", true]
         ]
       },
       {
-        "remark": "Parfait. Continue comme ça !",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
           ["On reprend en [[s:b8]], comme prévu."],
           ["Les Blancs avaient une position gagnante, il ne leur reste qu’un net avantage.", true]
         ]
       },
-      { "remark": "Cette prise a un inconvénient caché.", "parts": [["Mieux valait [[m:w:h4]]."]] },
+      {
+        "remark": "Cette prise a un inconvénient caché.",
+        "parts": [["Mieux valait [[m:w:h4]]."]]
+      },
       {
         "remark": "Rien de mieux ici.",
         "parts": [
@@ -4739,22 +5058,24 @@
         ]
       },
       {
-        "remark": "Exactement ce que voulait le moteur.",
+        "remark": "Très bien. Le moteur chipote à peine.",
         "parts": [
           ["Ça attaque la [[p:wr]]tour, avec gain de temps."],
           ["Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée.", true]
         ]
       },
       {
-        "remark": "Simple et fort.",
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [
           ["Du matériel offert : le [[p:bp]]pion [[s:b7]], sans rien en échange."],
           ["La balance penche : les Blancs ont une position gagnante.", true]
         ]
       },
       {
-        "remark": "Chaque bon coup complique la victoire de l’adversaire.",
-        "parts": [["Chaque bon coup complique la victoire de l’adversaire."]]
+        "remark": "Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper.",
+        "parts": [
+          ["Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper."]
+        ]
       }
     ]
   },
@@ -4764,9 +5085,18 @@
         "remark": "Still in theory. So far, so good.",
         "parts": [["Still in theory. So far, so good."]]
       },
-      { "remark": "Classic opening play.", "parts": [["Classic opening play."]] },
-      { "remark": "A solid, time-tested choice.", "parts": [["A solid, time-tested choice."]] },
-      { "remark": "A check that sets the pace.", "parts": [["A check that sets the pace."]] },
+      {
+        "remark": "Classic opening play.",
+        "parts": [["Classic opening play."]]
+      },
+      {
+        "remark": "A solid, time-tested choice.",
+        "parts": [["A solid, time-tested choice."]]
+      },
+      {
+        "remark": "A check that sets the pace.",
+        "parts": [["A check that sets the pace."]]
+      },
       {
         "remark": "Take a breath before each move.",
         "parts": [
@@ -4781,7 +5111,10 @@
           ["Black’s lead shrinks to a clear advantage.", true]
         ]
       },
-      { "remark": "Spot on.", "parts": [["Spot on."]] },
+      {
+        "remark": "Very good. The engine barely disagrees.",
+        "parts": [["Very good. The engine barely disagrees."]]
+      },
       {
         "remark": "Under pressure, the right answer.",
         "parts": [["Anything else let the advantage go."]]
@@ -4792,10 +5125,16 @@
       },
       {
         "remark": "The only move that holds everything together.",
-        "parts": [["The one move that kept the edge."]]
+        "parts": [["The [[p:wn]]knight is traded off."]]
       },
-      { "remark": "Safe, if a bit passive.", "parts": [["A recapture on [[s:g1]]."]] },
-      { "remark": "Nothing better here.", "parts": [["Nothing better here."]] },
+      {
+        "remark": "Safe, if a bit passive.",
+        "parts": [["A recapture on [[s:g1]]."]]
+      },
+      {
+        "remark": "Nothing better here.",
+        "parts": [["Nothing better here."]]
+      },
       {
         "remark": "This walks into a forced mate.",
         "parts": [["That allows a forced mate, beginning with [[m:b:g6]]."]]
@@ -4812,40 +5151,55 @@
         ]
       },
       {
-        "remark": "Exactly what the engine wanted.",
-        "parts": [["Exactly what the engine wanted."]]
+        "remark": "Very close to the best move.",
+        "parts": [["Very close to the best move."]]
       },
       {
         "remark": "No escape for the king now.",
         "parts": [["That wins the [[s:b5]] [[p:bp]]pawn for free."]]
       },
       {
-        "remark": "Not over yet: set problems and keep fighting.",
+        "remark": "A good capture.",
         "parts": [["The [[s:h3]] [[p:wp]]pawn taken, and nothing to pay."]]
       },
-      { "remark": "The mating net tightens.", "parts": [["Check! Black has to respond."]] },
       {
-        "remark": "Winning now: keep the pieces safe and push on.",
+        "remark": "The mating net tightens.",
+        "parts": [["Check! Black has to respond."]]
+      },
+      {
+        "remark": "The right piece to take.",
         "parts": [
           ["A recapture on [[s:d7]]."],
           ["White had a winning position, but now Black has a winning position.", true]
         ]
       },
       {
-        "remark": "Every good move makes the win harder for the opponent.",
+        "remark": "A tough position, but keep making it hard for the opponent.",
         "parts": [
-          ["Every good move makes the win harder for the opponent."],
+          ["A tough position, but keep making it hard for the opponent."],
           ["The game is decided: Black has mate in 5.", true]
         ]
       },
-      { "remark": "No escape for the king now.", "parts": [["[[m:b:Qd4]] was mate in 5."]] },
-      { "remark": "Couldn’t have done better.", "parts": [["A recapture on [[s:d2]]."]] },
+      {
+        "remark": "No escape for the king now.",
+        "parts": [["[[m:b:Qd4]] was mate in 5."]]
+      },
+      {
+        "remark": "Very good. The engine barely disagrees.",
+        "parts": [["A recapture on [[s:d2]]."]]
+      },
       {
         "remark": "The mating net tightens.",
         "parts": [["A mate in 4 started with [[m:b:Bh3]]."]]
       },
-      { "remark": "Spot on.", "parts": [["Spot on."]] },
-      { "remark": "Mate is coming. Keep going!", "parts": [["A recapture on [[s:h6]]."]] },
+      {
+        "remark": "Spot on.",
+        "parts": [["Spot on."]]
+      },
+      {
+        "remark": "Mate is coming. Keep going!",
+        "parts": [["A recapture on [[s:h6]]."]]
+      },
       {
         "remark": "Stunning. The engine agrees.",
         "parts": [
@@ -4868,8 +5222,8 @@
         ]
       },
       {
-        "remark": "Nothing better here.",
-        "parts": [["Nothing better here."], ["White’s lead shrinks to a slight edge.", true]]
+        "remark": "Solid play. Keep going.",
+        "parts": [["Solid play. Keep going."], ["White’s lead shrinks to a slight edge.", true]]
       },
       {
         "remark": "Great find! Everything else was worse.",
@@ -4878,7 +5232,10 @@
           ["White goes from a slight edge to a clear advantage.", true]
         ]
       },
-      { "remark": "Strong and simple.", "parts": [["Strong and simple."]] },
+      {
+        "remark": "Strong and simple.",
+        "parts": [["Strong and simple."]]
+      },
       {
         "remark": "Nothing better here.",
         "parts": [["Nothing better here."], ["White’s lead shrinks to a slight edge.", true]]
@@ -4919,13 +5276,16 @@
       {
         "remark": "Taking is right here.",
         "parts": [
-          ["Every other move would have left White worse off."],
+          ["The [[s:e4]] [[p:bp]]pawn for free."],
           ["White had a clear advantage; now it’s only a slight edge.", true]
         ]
       },
       {
         "remark": "The right piece to take.",
-        "parts": [["Anything else would have left Black in trouble."], ["Back to equal.", true]]
+        "parts": [
+          ["Free material: a [[p:wn]]knight with nothing in return."],
+          ["Back to equal.", true]
+        ]
       },
       {
         "remark": "Seeing that far ahead, impressive.",
@@ -4946,28 +5306,43 @@
         "remark": "Check! The opponent has to respond.",
         "parts": [["The check forces White to respond."]]
       },
-      { "remark": "A small slip. There was a stronger idea.", "parts": [["Still level."]] },
+      {
+        "remark": "A small slip. There was a stronger idea.",
+        "parts": [["Still level."]]
+      },
       {
         "remark": "Playable, but it misses the point of the position.",
         "parts": [["[[m:b:a5]] was better here."]]
       },
       {
-        "remark": "Clean and precise.",
+        "remark": "Good judgment here.",
         "parts": [
-          ["Clean and precise."],
+          ["Good judgment here."],
           ["The game was balanced, and now White has a slight edge.", true]
         ]
       },
       {
         "remark": "Precise. Nothing else holds here.",
-        "parts": [["Anything else would have left Black in trouble."], ["Back to equal.", true]]
+        "parts": [
+          ["Free material: the [[s:c2]] [[p:wp]]pawn with nothing in return."],
+          ["Back to equal.", true]
+        ]
       },
-      { "remark": "Just right. Keep it up!", "parts": [["The passed pawn marches on."]] },
       {
-        "remark": "Strong and simple.",
-        "parts": [["Strong and simple."], ["The scales tip, and Black has a slight edge.", true]]
+        "remark": "Just right. Keep it up!",
+        "parts": [["The passed pawn marches on."]]
       },
-      { "remark": "Nothing better here.", "parts": [["Check: Black must answer first."]] },
+      {
+        "remark": "A strong move that keeps things under control.",
+        "parts": [
+          ["A strong move that keeps things under control."],
+          ["The scales tip, and Black has a slight edge.", true]
+        ]
+      },
+      {
+        "remark": "Very close to the best move.",
+        "parts": [["Check: Black must answer first."]]
+      },
       {
         "remark": "Not a disaster, but not ideal either.",
         "parts": [
@@ -4984,9 +5359,9 @@
         "parts": [["The engine’s top move. Well played."]]
       },
       {
-        "remark": "Exactly what the engine wanted.",
+        "remark": "Very good. The engine barely disagrees.",
         "parts": [
-          ["Exactly what the engine wanted."],
+          ["Very good. The engine barely disagrees."],
           ["The game was balanced, and now White has a slight edge.", true]
         ]
       },
@@ -4998,11 +5373,8 @@
         ]
       },
       {
-        "remark": "The engine’s top move. Well played.",
-        "parts": [
-          ["The engine’s top move. Well played."],
-          ["The tables turn: now White has a slight edge.", true]
-        ]
+        "remark": "Almost perfect.",
+        "parts": [["Almost perfect."], ["The tables turn: now White has a slight edge.", true]]
       },
       {
         "remark": "A good capture.",
@@ -5028,12 +5400,18 @@
         "remark": "Toujours dans la théorie. Jusqu’ici, tout va bien.",
         "parts": [["Toujours dans la théorie. Jusqu’ici, tout va bien."]]
       },
-      { "remark": "Du jeu d’ouverture classique.", "parts": [["Du jeu d’ouverture classique."]] },
+      {
+        "remark": "Du jeu d’ouverture classique.",
+        "parts": [["Du jeu d’ouverture classique."]]
+      },
       {
         "remark": "Un choix solide, qui a fait ses preuves.",
         "parts": [["Un choix solide, qui a fait ses preuves."]]
       },
-      { "remark": "Un échec qui donne le tempo.", "parts": [["Un échec qui donne le tempo."]] },
+      {
+        "remark": "Un échec qui donne le tempo.",
+        "parts": [["Un échec qui donne le tempo."]]
+      },
       {
         "remark": "Prends le temps de respirer avant chaque coup.",
         "parts": [
@@ -5048,7 +5426,10 @@
           ["L’écart se réduit pour les Noirs : il ne leur reste qu’un net avantage.", true]
         ]
       },
-      { "remark": "Dans le mille.", "parts": [["Dans le mille."]] },
+      {
+        "remark": "Très bien. Le moteur chipote à peine.",
+        "parts": [["Très bien. Le moteur chipote à peine."]]
+      },
       {
         "remark": "Sous la pression, la bonne réponse.",
         "parts": [["Tout le reste laissait échapper l’avantage."]]
@@ -5059,10 +5440,16 @@
       },
       {
         "remark": "Le seul coup qui tient tout ensemble.",
-        "parts": [["Le seul coup qui gardait l’avantage."]]
+        "parts": [["Le [[p:wn]]cavalier s’échange."]]
       },
-      { "remark": "Sûr, quoiqu’un peu passif.", "parts": [["Une reprise en [[s:g1]]."]] },
-      { "remark": "Rien de mieux ici.", "parts": [["Rien de mieux ici."]] },
+      {
+        "remark": "Sûr, quoiqu’un peu passif.",
+        "parts": [["Une reprise en [[s:g1]]."]]
+      },
+      {
+        "remark": "Rien de mieux ici.",
+        "parts": [["Rien de mieux ici."]]
+      },
       {
         "remark": "Ce coup tombe dans un mat forcé.",
         "parts": [["Ça permet un mat forcé, qui commence par [[m:b:g6]]."]]
@@ -5082,15 +5469,15 @@
         ]
       },
       {
-        "remark": "Exactement ce que voulait le moteur.",
-        "parts": [["Exactement ce que voulait le moteur."]]
+        "remark": "Tout près du meilleur coup.",
+        "parts": [["Tout près du meilleur coup."]]
       },
       {
         "remark": "Plus d’échappatoire pour le roi.",
         "parts": [["De quoi gagner le [[p:bp]]pion [[s:b5]] sans contrepartie."]]
       },
       {
-        "remark": "Rien n’est fini : complique la tâche de l’adversaire.",
+        "remark": "Une bonne prise.",
         "parts": [["Le [[p:wp]]pion [[s:h3]] pris sans rien payer."]]
       },
       {
@@ -5098,7 +5485,7 @@
         "parts": [["Échec : il oblige les Noirs à répondre."]]
       },
       {
-        "remark": "Ça gagne : garde tes pièces à l’abri et avance.",
+        "remark": "La bonne pièce à prendre.",
         "parts": [
           ["Une reprise en [[s:d7]]."],
           [
@@ -5108,9 +5495,9 @@
         ]
       },
       {
-        "remark": "Chaque bon coup complique la victoire de l’adversaire.",
+        "remark": "Position difficile, mais continue à poser des problèmes.",
         "parts": [
-          ["Chaque bon coup complique la victoire de l’adversaire."],
+          ["Position difficile, mais continue à poser des problèmes."],
           ["La partie est jouée : les Noirs ont un mat en 5.", true]
         ]
       },
@@ -5118,13 +5505,22 @@
         "remark": "Plus d’échappatoire pour le roi.",
         "parts": [["[[m:b:Qd4]] donnait un mat en 5."]]
       },
-      { "remark": "Impossible de faire mieux.", "parts": [["Une reprise en [[s:d2]]."]] },
+      {
+        "remark": "Très bien. Le moteur chipote à peine.",
+        "parts": [["Une reprise en [[s:d2]]."]]
+      },
       {
         "remark": "Le filet de mat se resserre.",
         "parts": [["Un mat en 4 commençait par [[m:b:Bh3]]."]]
       },
-      { "remark": "Dans le mille.", "parts": [["Dans le mille."]] },
-      { "remark": "Le mat arrive. Continue !", "parts": [["Une reprise en [[s:h6]]."]] },
+      {
+        "remark": "Dans le mille.",
+        "parts": [["Dans le mille."]]
+      },
+      {
+        "remark": "Le mat arrive. Continue !",
+        "parts": [["Une reprise en [[s:h6]]."]]
+      },
       {
         "remark": "Superbe. Le moteur est bien d’accord.",
         "parts": [
@@ -5147,9 +5543,9 @@
         ]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
-          ["Rien de mieux ici."],
+          ["Du jeu solide. Continue."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -5160,7 +5556,10 @@
           ["Les Blancs passent d’un léger avantage à un net avantage.", true]
         ]
       },
-      { "remark": "Simple et fort.", "parts": [["Simple et fort."]] },
+      {
+        "remark": "Simple et fort.",
+        "parts": [["Simple et fort."]]
+      },
       {
         "remark": "Rien de mieux ici.",
         "parts": [
@@ -5204,13 +5603,16 @@
       {
         "remark": "Prendre est la bonne décision ici.",
         "parts": [
-          ["Tout autre coup mettait les Blancs en difficulté."],
+          ["Le [[p:bp]]pion [[s:e4]], gratuit."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage.", true]
         ]
       },
       {
         "remark": "La bonne pièce à prendre.",
-        "parts": [["Tout le reste mettait les Noirs en danger."], ["Retour à l’égalité.", true]]
+        "parts": [
+          ["Du matériel offert : un [[p:wn]]cavalier, sans rien en échange."],
+          ["Retour à l’égalité.", true]
+        ]
       },
       {
         "remark": "Voir aussi loin, chapeau.",
@@ -5242,25 +5644,34 @@
         "parts": [["[[m:b:a5]] était mieux ici."]]
       },
       {
-        "remark": "Propre et précis.",
+        "remark": "Bon jugement ici.",
         "parts": [
-          ["Propre et précis."],
+          ["Bon jugement ici."],
           ["La partie était équilibrée, et maintenant les Blancs ont un léger avantage.", true]
         ]
       },
       {
         "remark": "Précis. Rien d’autre ne tenait ici.",
-        "parts": [["Tout le reste mettait les Noirs en danger."], ["Retour à l’égalité.", true]]
-      },
-      { "remark": "Parfait. Continue comme ça !", "parts": [["Le pion passé poursuit sa route."]] },
-      {
-        "remark": "Simple et fort.",
         "parts": [
-          ["Simple et fort."],
+          ["Du matériel offert : le [[p:wp]]pion [[s:c2]], sans rien en échange."],
+          ["Retour à l’égalité.", true]
+        ]
+      },
+      {
+        "remark": "Parfait. Continue comme ça !",
+        "parts": [["Le pion passé poursuit sa route."]]
+      },
+      {
+        "remark": "Un coup fort, la position reste sous contrôle.",
+        "parts": [
+          ["Un coup fort, la position reste sous contrôle."],
           ["La balance penche : les Noirs ont un léger avantage.", true]
         ]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Échec, et les Noirs doivent d’abord parer."]] },
+      {
+        "remark": "Tout près du meilleur coup.",
+        "parts": [["Échec, et les Noirs doivent d’abord parer."]]
+      },
       {
         "remark": "Pas une catastrophe, mais pas idéal non plus.",
         "parts": [
@@ -5272,11 +5683,14 @@
         "remark": "Un moment critique, bien négocié.",
         "parts": [["Le seul coup qui tirait les Blancs d’affaire."]]
       },
-      { "remark": "Le coup du moteur. Bien joué.", "parts": [["Le coup du moteur. Bien joué."]] },
       {
-        "remark": "Exactement ce que voulait le moteur.",
+        "remark": "Le coup du moteur. Bien joué.",
+        "parts": [["Le coup du moteur. Bien joué."]]
+      },
+      {
+        "remark": "Très bien. Le moteur chipote à peine.",
         "parts": [
-          ["Exactement ce que voulait le moteur."],
+          ["Très bien. Le moteur chipote à peine."],
           ["La partie était équilibrée, et maintenant les Blancs ont un léger avantage.", true]
         ]
       },
@@ -5288,9 +5702,9 @@
         ]
       },
       {
-        "remark": "Le coup du moteur. Bien joué.",
+        "remark": "Presque parfait.",
         "parts": [
-          ["Le coup du moteur. Bien joué."],
+          ["Presque parfait."],
           ["La partie bascule : maintenant les Blancs ont un léger avantage.", true]
         ]
       },
@@ -5367,7 +5781,10 @@
         "remark": "It’s fine, just a little slow.",
         "parts": [["A central pawn: more space, more control."]]
       },
-      { "remark": "Spot on.", "parts": [["A pawn in the center, controlling key squares."]] },
+      {
+        "remark": "A strong move that keeps things under control.",
+        "parts": [["A pawn in the center, controlling key squares."]]
+      },
       {
         "remark": "Couldn’t have done better.",
         "parts": [
@@ -5378,7 +5795,7 @@
       {
         "remark": "The right piece to take.",
         "parts": [
-          ["Every other move would have left Black worse off."],
+          ["The right piece to take."],
           ["White had a slight edge, but the game is now balanced.", true]
         ]
       },
@@ -5404,8 +5821,14 @@
         "remark": "Not over yet: set problems and keep fighting.",
         "parts": [["Not over yet: set problems and keep fighting."]]
       },
-      { "remark": "Almost perfect.", "parts": [["The check forces Black to respond."]] },
-      { "remark": "A good capture.", "parts": [["A [[p:wr]]rook taken, and nothing to pay."]] },
+      {
+        "remark": "Almost perfect.",
+        "parts": [["The check forces Black to respond."]]
+      },
+      {
+        "remark": "Not over yet: set problems and keep fighting.",
+        "parts": [["A [[p:wr]]rook falls, at a price: White has activity in return."]]
+      },
       {
         "remark": "Grabbing material here is risky.",
         "parts": [
@@ -5413,7 +5836,10 @@
           ["More accurate was [[m:w:Bf3]]."]
         ]
       },
-      { "remark": "A good capture.", "parts": [["A recapture on [[s:h6]]."]] },
+      {
+        "remark": "A good capture.",
+        "parts": [["A recapture on [[s:h6]]."]]
+      },
       {
         "remark": "Nothing better here.",
         "parts": [["The [[p:bp]]pawn goes, in an even exchange."]]
@@ -5427,29 +5853,44 @@
         "parts": [["Black’s mistake is punished right away."]]
       },
       {
-        "remark": "The engine’s top move. Well played.",
+        "remark": "Very close to the best move.",
         "parts": [["Free material: the [[s:e5]] [[p:wp]]pawn with nothing in return."]]
       },
-      { "remark": "No escape for the king now.", "parts": [["No escape for the king now."]] },
       {
-        "remark": "Not over yet: set problems and keep fighting.",
-        "parts": [["Not over yet: set problems and keep fighting."]]
+        "remark": "No escape for the king now.",
+        "parts": [["No escape for the king now."]]
       },
-      { "remark": "The mating net tightens.", "parts": [["The natural recapture on [[s:c2]]."]] },
-      { "remark": "Spot on.", "parts": [["The [[s:e4]] [[p:wp]]pawn for free."]] },
-      { "remark": "Mate is coming. Keep going!", "parts": [["Mate is coming. Keep going!"]] },
       {
-        "remark": "Not over yet: set problems and keep fighting.",
+        "remark": "A good capture.",
+        "parts": [["A good capture."]]
+      },
+      {
+        "remark": "The mating net tightens.",
+        "parts": [["The natural recapture on [[s:c2]]."]]
+      },
+      {
+        "remark": "Spot on.",
+        "parts": [["The [[s:e4]] [[p:wp]]pawn for free."]]
+      },
+      {
+        "remark": "Mate is coming. Keep going!",
+        "parts": [["Mate is coming. Keep going!"]]
+      },
+      {
+        "remark": "Hang in there: the position still has resources.",
         "parts": [
           ["Check: White must answer first."],
           ["The game is decided: White has mate in 5.", true]
         ]
       },
-      { "remark": "One step closer to checkmate.", "parts": [["A [[p:br]]rook for free."]] },
       {
-        "remark": "Winning now: keep the pieces safe and push on.",
+        "remark": "One step closer to checkmate.",
+        "parts": [["A [[p:br]]rook for free."]]
+      },
+      {
+        "remark": "This is winning: trade pieces and keep it simple.",
         "parts": [
-          ["Winning now: keep the pieces safe and push on."],
+          ["This is winning: trade pieces and keep it simple."],
           ["A complete turnaround: now Black has a winning position.", true]
         ]
       },
@@ -5460,15 +5901,18 @@
           ["Black’s lead shrinks to a clear advantage.", true]
         ]
       },
-      { "remark": "Just right. Keep it up!", "parts": [["Check! White has to respond."]] },
+      {
+        "remark": "Just right. Keep it up!",
+        "parts": [["Check! White has to respond."]]
+      },
       {
         "remark": "Clean and precise.",
         "parts": [["Clean and precise."], ["Black’s lead slips: only a slight edge left.", true]]
       },
       {
-        "remark": "This is winning: trade pieces and keep it simple.",
+        "remark": "With this lead, every trade brings the end closer.",
         "parts": [
-          ["This is winning: trade pieces and keep it simple."],
+          ["With this lead, every trade brings the end closer."],
           ["Black goes from a slight edge to a winning position.", true]
         ]
       },
@@ -5477,13 +5921,13 @@
         "parts": [["Nicely done, the position stays healthy."]]
       },
       {
-        "remark": "Check! The opponent has to respond.",
+        "remark": "A check that sets the pace.",
         "parts": [["The check forces White to respond."]]
       },
       {
-        "remark": "Nothing better here.",
+        "remark": "Good judgment here.",
         "parts": [
-          ["Nothing better here."],
+          ["Good judgment here."],
           ["Black had a winning position; now it’s only a clear advantage.", true]
         ]
       },
@@ -5495,7 +5939,7 @@
         ]
       },
       {
-        "remark": "Strong and simple.",
+        "remark": "Solid play. Keep going.",
         "parts": [["That wins the [[s:g2]] [[p:bb]]bishop for free."]]
       },
       {
@@ -5524,7 +5968,10 @@
         "remark": "Now there’s a mate coming against this king.",
         "parts": [["That allows a forced mate, beginning with [[m:w:Bf5]]."]]
       },
-      { "remark": "One step closer to checkmate.", "parts": [["One step closer to checkmate."]] },
+      {
+        "remark": "One step closer to checkmate.",
+        "parts": [["One step closer to checkmate."]]
+      },
       {
         "remark": "When behind, look for counterplay: the opponent can still slip.",
         "parts": [["When behind, look for counterplay: the opponent can still slip."]]
@@ -5552,10 +5999,13 @@
         ]
       },
       {
-        "remark": "Clean and precise.",
-        "parts": [["No time wasted: Black’s mistake is punished."]]
+        "remark": "Nicely done, the position stays healthy.",
+        "parts": [["Nicely done, the position stays healthy."]]
       },
-      { "remark": "Nothing better here.", "parts": [["That wins a [[p:wn]]knight for free."]] },
+      {
+        "remark": "Solid play. Keep going.",
+        "parts": [["A [[p:wn]]knight falls, at a price: White has activity in return."]]
+      },
       {
         "remark": "Every good move makes the win harder for the opponent.",
         "parts": [
@@ -5568,14 +6018,17 @@
         "parts": [["Free material: the [[s:h2]] [[p:wp]]pawn with nothing in return."]]
       },
       {
-        "remark": "Hang in there: the position still has resources.",
-        "parts": [["Hang in there: the position still has resources."]]
+        "remark": "When behind, look for counterplay: the opponent can still slip.",
+        "parts": [["When behind, look for counterplay: the opponent can still slip."]]
       },
       {
-        "remark": "Winning now. Safety first: leave no counterplay.",
-        "parts": [["Winning now. Safety first: leave no counterplay."]]
+        "remark": "Winning now: keep the pieces safe and push on.",
+        "parts": [["Winning now: keep the pieces safe and push on."]]
       },
-      { "remark": "Strong and simple.", "parts": [["Strong and simple."]] },
+      {
+        "remark": "Strong and simple.",
+        "parts": [["Strong and simple."]]
+      },
       {
         "remark": "Forcing play. Checks are powerful.",
         "parts": [
@@ -5646,7 +6099,7 @@
         "parts": [["Un pion central : plus d’espace, plus de contrôle."]]
       },
       {
-        "remark": "Dans le mille.",
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [["Un pion au centre, qui contrôle des cases clés."]]
       },
       {
@@ -5659,7 +6112,7 @@
       {
         "remark": "La bonne pièce à prendre.",
         "parts": [
-          ["Tout autre coup mettait les Noirs en difficulté."],
+          ["La bonne pièce à prendre."],
           ["Les Blancs avaient un léger avantage, mais la partie est maintenant équilibrée.", true]
         ]
       },
@@ -5685,8 +6138,18 @@
         "remark": "Rien n’est fini : complique la tâche de l’adversaire.",
         "parts": [["Rien n’est fini : complique la tâche de l’adversaire."]]
       },
-      { "remark": "Presque parfait.", "parts": [["L’échec force les Noirs à réagir."]] },
-      { "remark": "Une bonne prise.", "parts": [["Une [[p:wr]]tour prise sans rien payer."]] },
+      {
+        "remark": "Presque parfait.",
+        "parts": [["L’échec force les Noirs à réagir."]]
+      },
+      {
+        "remark": "Rien n’est fini : complique la tâche de l’adversaire.",
+        "parts": [
+          [
+            "Une [[p:wr]]tour tombe, mais ça se paie : les Blancs obtiennent de l’activité en échange."
+          ]
+        ]
+      },
       {
         "remark": "Prendre du matériel ici est risqué.",
         "parts": [
@@ -5694,7 +6157,10 @@
           ["Plus juste : [[m:w:Bf3]]."]
         ]
       },
-      { "remark": "Une bonne prise.", "parts": [["Une reprise en [[s:h6]]."]] },
+      {
+        "remark": "Une bonne prise.",
+        "parts": [["Une reprise en [[s:h6]]."]]
+      },
       {
         "remark": "Rien de mieux ici.",
         "parts": [["Le [[p:bp]]pion disparaît, dans un échange égal."]]
@@ -5708,7 +6174,7 @@
         "parts": [["L’erreur des Noirs est punie aussitôt."]]
       },
       {
-        "remark": "Le coup du moteur. Bien joué.",
+        "remark": "Tout près du meilleur coup.",
         "parts": [["Du matériel offert : le [[p:wp]]pion [[s:e5]], sans rien en échange."]]
       },
       {
@@ -5716,27 +6182,36 @@
         "parts": [["Plus d’échappatoire pour le roi."]]
       },
       {
-        "remark": "Rien n’est fini : complique la tâche de l’adversaire.",
-        "parts": [["Rien n’est fini : complique la tâche de l’adversaire."]]
+        "remark": "Une bonne prise.",
+        "parts": [["Une bonne prise."]]
       },
       {
         "remark": "Le filet de mat se resserre.",
         "parts": [["La reprise naturelle en [[s:c2]]."]]
       },
-      { "remark": "Dans le mille.", "parts": [["Le [[p:wp]]pion [[s:e4]], gratuit."]] },
-      { "remark": "Le mat arrive. Continue !", "parts": [["Le mat arrive. Continue !"]] },
       {
-        "remark": "Rien n’est fini : complique la tâche de l’adversaire.",
+        "remark": "Dans le mille.",
+        "parts": [["Le [[p:wp]]pion [[s:e4]], gratuit."]]
+      },
+      {
+        "remark": "Le mat arrive. Continue !",
+        "parts": [["Le mat arrive. Continue !"]]
+      },
+      {
+        "remark": "Tiens bon : la position a encore des ressources.",
         "parts": [
           ["Échec, et les Blancs doivent d’abord parer."],
           ["La partie est jouée : les Blancs ont un mat en 5.", true]
         ]
       },
-      { "remark": "Encore un pas vers le mat.", "parts": [["Une [[p:br]]tour gratuite."]] },
       {
-        "remark": "Ça gagne : garde tes pièces à l’abri et avance.",
+        "remark": "Encore un pas vers le mat.",
+        "parts": [["Une [[p:br]]tour gratuite."]]
+      },
+      {
+        "remark": "C’est gagnant : échange les pièces et reste simple.",
         "parts": [
-          ["Ça gagne : garde tes pièces à l’abri et avance."],
+          ["C’est gagnant : échange les pièces et reste simple."],
           ["Retournement complet : maintenant les Noirs ont une position gagnante.", true]
         ]
       },
@@ -5759,9 +6234,9 @@
         ]
       },
       {
-        "remark": "C’est gagnant : échange les pièces et reste simple.",
+        "remark": "Avec une telle avance, chaque échange rapproche la fin.",
         "parts": [
-          ["C’est gagnant : échange les pièces et reste simple."],
+          ["Avec une telle avance, chaque échange rapproche la fin."],
           ["Les Noirs passent d’un léger avantage à une position gagnante.", true]
         ]
       },
@@ -5770,13 +6245,13 @@
         "parts": [["Bien joué, la position reste saine."]]
       },
       {
-        "remark": "Échec ! L’adversaire doit répondre.",
+        "remark": "Un échec qui donne le tempo.",
         "parts": [["L’échec force les Blancs à réagir."]]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Bon jugement ici.",
         "parts": [
-          ["Rien de mieux ici."],
+          ["Bon jugement ici."],
           ["L’écart se réduit pour les Noirs : il ne leur reste qu’un net avantage.", true]
         ]
       },
@@ -5788,7 +6263,7 @@
         ]
       },
       {
-        "remark": "Simple et fort.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [["De quoi gagner le [[p:bb]]fou [[s:g2]] sans contrepartie."]]
       },
       {
@@ -5817,7 +6292,10 @@
         "remark": "Un mat se prépare maintenant contre ce roi.",
         "parts": [["Ça permet un mat forcé, qui commence par [[m:w:Bf5]]."]]
       },
-      { "remark": "Encore un pas vers le mat.", "parts": [["Encore un pas vers le mat."]] },
+      {
+        "remark": "Encore un pas vers le mat.",
+        "parts": [["Encore un pas vers le mat."]]
+      },
       {
         "remark": "Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper.",
         "parts": [
@@ -5847,12 +6325,16 @@
         ]
       },
       {
-        "remark": "Propre et précis.",
-        "parts": [["Pas de temps perdu : l’erreur des Noirs est punie."]]
+        "remark": "Bien joué, la position reste saine.",
+        "parts": [["Bien joué, la position reste saine."]]
       },
       {
-        "remark": "Rien de mieux ici.",
-        "parts": [["De quoi gagner un [[p:wn]]cavalier sans contrepartie."]]
+        "remark": "Du jeu solide. Continue.",
+        "parts": [
+          [
+            "Un [[p:wn]]cavalier tombe, mais ça se paie : les Blancs obtiennent de l’activité en échange."
+          ]
+        ]
       },
       {
         "remark": "Chaque bon coup complique la victoire de l’adversaire.",
@@ -5869,14 +6351,19 @@
         "parts": [["Du matériel offert : le [[p:wp]]pion [[s:h2]], sans rien en échange."]]
       },
       {
-        "remark": "Tiens bon : la position a encore des ressources.",
-        "parts": [["Tiens bon : la position a encore des ressources."]]
+        "remark": "Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper.",
+        "parts": [
+          ["Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper."]
+        ]
       },
       {
-        "remark": "Position gagnante : la sécurité d’abord, ne laisse aucun contre-jeu.",
-        "parts": [["Position gagnante : la sécurité d’abord, ne laisse aucun contre-jeu."]]
+        "remark": "Ça gagne : garde tes pièces à l’abri et avance.",
+        "parts": [["Ça gagne : garde tes pièces à l’abri et avance."]]
       },
-      { "remark": "Simple et fort.", "parts": [["Simple et fort."]] },
+      {
+        "remark": "Simple et fort.",
+        "parts": [["Simple et fort."]]
+      },
       {
         "remark": "Du jeu forcé : les échecs sont puissants.",
         "parts": [
@@ -5950,11 +6437,8 @@
         "parts": [["The one move that kept the edge."]]
       },
       {
-        "remark": "That’s the most accurate move.",
-        "parts": [
-          ["That’s the most accurate move."],
-          ["Black’s lead shrinks to a slight edge.", true]
-        ]
+        "remark": "Almost perfect.",
+        "parts": [["Almost perfect."], ["Black’s lead shrinks to a slight edge.", true]]
       },
       {
         "remark": "Careful! That move has a concrete flaw.",
@@ -5980,15 +6464,15 @@
         ]
       },
       {
-        "remark": "Every good move makes the win harder for the opponent.",
+        "remark": "A tough position, but keep making it hard for the opponent.",
         "parts": [["The pawn gains space."]]
       },
       {
-        "remark": "Exactly what the engine wanted.",
+        "remark": "Very close to the best move.",
         "parts": [["Castling: a safe king, and a rook ready to join in."]]
       },
       {
-        "remark": "Strong and simple.",
+        "remark": "Solid play. Keep going.",
         "parts": [
           ["The [[p:bp]]pawn is traded off."],
           ["Black’s lead shrinks to a clear advantage.", true]
@@ -6035,7 +6519,7 @@
         "parts": [["The one move that kept the edge."]]
       },
       {
-        "remark": "Check! The opponent has to respond.",
+        "remark": "A check that sets the pace.",
         "parts": [
           ["Check: Black must answer first."],
           ["Black’s lead shrinks to a clear advantage.", true]
@@ -6069,7 +6553,7 @@
       {
         "remark": "The right piece to take.",
         "parts": [
-          ["Anything else would have left Black in trouble."],
+          ["A fair trade: the [[p:wn]]knight comes off."],
           ["The tables turn: now Black has a slight edge.", true]
         ]
       },
@@ -6084,7 +6568,10 @@
           ["Black’s lead grows: a clear advantage now.", true]
         ]
       },
-      { "remark": "Nothing better here.", "parts": [["Nothing better here."]] },
+      {
+        "remark": "Nothing better here.",
+        "parts": [["Nothing better here."]]
+      },
       {
         "remark": "This changes the evaluation a lot.",
         "parts": [
@@ -6130,11 +6617,11 @@
         "parts": [["That allows a forced mate, beginning with [[m:b:Kg7]]."]]
       },
       {
-        "remark": "No escape for the king now.",
-        "parts": [["White’s mistake is punished right away."]]
+        "remark": "Mate is coming. Keep going!",
+        "parts": [["The check forces White to respond."]]
       },
       {
-        "remark": "The right piece to take.",
+        "remark": "When behind, look for counterplay: the opponent can still slip.",
         "parts": [["A [[p:bn]]knight taken, and nothing to pay."]]
       },
       {
@@ -6169,14 +6656,14 @@
         ]
       },
       {
-        "remark": "A check that keeps the initiative.",
+        "remark": "Forcing play. Checks are powerful.",
         "parts": [
           ["Check: Black must answer first."],
           ["The balance tips: now White has a clear advantage.", true]
         ]
       },
       {
-        "remark": "Strong and simple.",
+        "remark": "A strong move that keeps things under control.",
         "parts": [
           ["In the endgame the king is a fighter: it heads for the center."],
           ["Down from a clear advantage to a slight edge for White.", true]
@@ -6193,8 +6680,14 @@
         "remark": "Playable, though not the most precise.",
         "parts": [["A touch better was [[m:b:Kf6]], bringing the king to the center."]]
       },
-      { "remark": "Strong and simple.", "parts": [["Strong and simple."]] },
-      { "remark": "A good capture.", "parts": [["A fair trade: the [[p:wp]]pawn comes off."]] },
+      {
+        "remark": "A strong move that keeps things under control.",
+        "parts": [["A strong move that keeps things under control."]]
+      },
+      {
+        "remark": "A good capture.",
+        "parts": [["A fair trade: the [[p:wp]]pawn comes off."]]
+      },
       {
         "remark": "A blunder that throws away the position.",
         "parts": [
@@ -6281,9 +6774,9 @@
         "parts": [["Le seul coup qui gardait l’avantage."]]
       },
       {
-        "remark": "C’est le coup le plus précis.",
+        "remark": "Presque parfait.",
         "parts": [
-          ["C’est le coup le plus précis."],
+          ["Presque parfait."],
           ["Les Noirs perdent du terrain : il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -6311,15 +6804,15 @@
         ]
       },
       {
-        "remark": "Chaque bon coup complique la victoire de l’adversaire.",
+        "remark": "Position difficile, mais continue à poser des problèmes.",
         "parts": [["Le pion gagne de l’espace."]]
       },
       {
-        "remark": "Exactement ce que voulait le moteur.",
+        "remark": "Tout près du meilleur coup.",
         "parts": [["Roque : un roi en sécurité, une tour prête à jouer."]]
       },
       {
-        "remark": "Simple et fort.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
           ["Le [[p:bp]]pion s’échange."],
           ["L’écart se réduit pour les Noirs : il ne leur reste qu’un net avantage.", true]
@@ -6366,7 +6859,7 @@
         "parts": [["Le seul coup qui gardait l’avantage."]]
       },
       {
-        "remark": "Échec ! L’adversaire doit répondre.",
+        "remark": "Un échec qui donne le tempo.",
         "parts": [
           ["Échec, et les Noirs doivent d’abord parer."],
           ["Les Noirs avaient une position gagnante, il ne leur reste qu’un net avantage.", true]
@@ -6403,7 +6896,7 @@
       {
         "remark": "La bonne pièce à prendre.",
         "parts": [
-          ["Tout le reste mettait les Noirs en danger."],
+          ["Un échange équitable : le [[p:wn]]cavalier disparaît."],
           ["La partie bascule : maintenant les Noirs ont un léger avantage.", true]
         ]
       },
@@ -6418,7 +6911,10 @@
           ["L’avantage grandit : les Noirs ont maintenant un net avantage.", true]
         ]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Rien de mieux ici."]] },
+      {
+        "remark": "Rien de mieux ici.",
+        "parts": [["Rien de mieux ici."]]
+      },
       {
         "remark": "Ça change beaucoup l’évaluation.",
         "parts": [
@@ -6444,7 +6940,10 @@
           ["Tout change : les Blancs ont un léger avantage.", true]
         ]
       },
-      { "remark": "L’emprise se relâche un peu.", "parts": [["Plus juste : [[m:b:Nf4]]."]] },
+      {
+        "remark": "L’emprise se relâche un peu.",
+        "parts": [["Plus juste : [[m:b:Nf4]]."]]
+      },
       {
         "remark": "Sous la pression, la bonne réponse.",
         "parts": [
@@ -6461,11 +6960,11 @@
         "parts": [["Ça permet un mat forcé, qui commence par [[m:b:Kg7]]."]]
       },
       {
-        "remark": "Plus d’échappatoire pour le roi.",
-        "parts": [["L’erreur des Blancs est punie aussitôt."]]
+        "remark": "Le mat arrive. Continue !",
+        "parts": [["L’échec force les Blancs à réagir."]]
       },
       {
-        "remark": "La bonne pièce à prendre.",
+        "remark": "Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper.",
         "parts": [["Un [[p:bn]]cavalier pris sans rien payer."]]
       },
       {
@@ -6500,14 +6999,14 @@
         ]
       },
       {
-        "remark": "Un échec qui garde l’initiative.",
+        "remark": "Du jeu forcé : les échecs sont puissants.",
         "parts": [
           ["Échec, et les Noirs doivent d’abord parer."],
           ["L’équilibre est rompu : maintenant les Blancs ont un net avantage.", true]
         ]
       },
       {
-        "remark": "Simple et fort.",
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [
           ["En finale, le roi est une pièce de combat : il rejoint le centre."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage.", true]
@@ -6524,7 +7023,10 @@
         "remark": "Jouable, sans être le plus précis.",
         "parts": [["Un poil mieux : [[m:b:Kf6]], qui centralisait le roi."]]
       },
-      { "remark": "Simple et fort.", "parts": [["Simple et fort."]] },
+      {
+        "remark": "Un coup fort, la position reste sous contrôle.",
+        "parts": [["Un coup fort, la position reste sous contrôle."]]
+      },
       {
         "remark": "Une bonne prise.",
         "parts": [["Un échange équitable : le [[p:wp]]pion disparaît."]]
@@ -6615,8 +7117,8 @@
         ]
       },
       {
-        "remark": "Just right. Keep it up!",
-        "parts": [["Just right. Keep it up!"]]
+        "remark": "Almost perfect.",
+        "parts": [["Almost perfect."]]
       },
       {
         "remark": "No hurry: a winning game is won one safe move at a time.",
@@ -6636,9 +7138,9 @@
         "parts": [["Taking the [[p:bq]]queen with [[m:w:Bxg8]] was stronger."]]
       },
       {
-        "remark": "Strong and simple.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [
-          ["That wins a [[p:wb]]bishop for free."],
+          ["A [[p:wb]]bishop is won, but White gets enough play for it."],
           ["Down from a winning position to a clear advantage for White.", true]
         ]
       },
@@ -6675,9 +7177,9 @@
         "parts": [["Playable, though not the most precise."]]
       },
       {
-        "remark": "Couldn’t have done better.",
+        "remark": "Very close to the best move.",
         "parts": [
-          ["Couldn’t have done better."],
+          ["Very close to the best move."],
           ["White’s lead slips: only a slight edge left.", true]
         ]
       },
@@ -6703,7 +7205,10 @@
           ["The game was balanced, and now Black has a clear advantage.", true]
         ]
       },
-      { "remark": "Spot on.", "parts": [["Spot on."]] },
+      {
+        "remark": "Spot on.",
+        "parts": [["Spot on."]]
+      },
       {
         "remark": "A sacrifice that works. Beautiful.",
         "parts": [["The [[p:br]]rook is offered, and White can’t safely take it."]]
@@ -6714,7 +7219,7 @@
       },
       {
         "remark": "Under pressure, the right answer.",
-        "parts": [["Every other move would have let the advantage slip."]]
+        "parts": [["The [[s:h4]] [[p:wp]]pawn for free."]]
       },
       {
         "remark": "Every good move makes the win harder for the opponent.",
@@ -6723,7 +7228,10 @@
           ["The gap widens: now Black has a winning position.", true]
         ]
       },
-      { "remark": "Nothing better here.", "parts": [["Nothing better here."]] },
+      {
+        "remark": "Nothing better here.",
+        "parts": [["Nothing better here."]]
+      },
       {
         "remark": "Taking is right here.",
         "parts": [
@@ -6736,7 +7244,7 @@
         "parts": [["[[m:b:Re8]] was a little more precise, taking the half-open file."]]
       },
       {
-        "remark": "Nothing better here.",
+        "remark": "Nicely done, the position stays healthy.",
         "parts": [["The [[p:bp]]pawn on [[s:f5]] is left hanging: nothing defends it."]]
       },
       {
@@ -6754,7 +7262,7 @@
         ]
       },
       {
-        "remark": "The engine’s top move. Well played.",
+        "remark": "Very close to the best move.",
         "parts": [
           ["The natural recapture on [[s:c6]]."],
           ["White’s lead slips: only a slight edge left.", true]
@@ -6781,7 +7289,10 @@
           ["White’s lead grows: a clear advantage now.", true]
         ]
       },
-      { "remark": "Spot on.", "parts": [["Spot on."]] },
+      {
+        "remark": "Very good. The engine barely disagrees.",
+        "parts": [["Very good. The engine barely disagrees."]]
+      },
       {
         "remark": "Material is temporary; this idea isn’t.",
         "parts": [
@@ -6790,7 +7301,10 @@
           ]
         ]
       },
-      { "remark": "The right piece to take.", "parts": [["The natural recapture on [[s:f7]]."]] },
+      {
+        "remark": "The right piece to take.",
+        "parts": [["The natural recapture on [[s:f7]]."]]
+      },
       {
         "remark": "Spot on.",
         "parts": [
@@ -6799,10 +7313,16 @@
         ]
       },
       {
-        "remark": "Clean and precise.",
-        "parts": [["Clean and precise."], ["No longer level: Black has a slight edge.", true]]
+        "remark": "A sensible, strong continuation.",
+        "parts": [
+          ["A sensible, strong continuation."],
+          ["No longer level: Black has a slight edge.", true]
+        ]
       },
-      { "remark": "A check that sets the pace.", "parts": [["Check: Black must answer first."]] },
+      {
+        "remark": "A check that sets the pace.",
+        "parts": [["Check: Black must answer first."]]
+      },
       {
         "remark": "Taking is right here.",
         "parts": [["Taking back on [[s:c6]], as expected."], ["Equality is restored.", true]]
@@ -6847,8 +7367,8 @@
         ]
       },
       {
-        "remark": "Strong and simple.",
-        "parts": [["Strong and simple."], ["The game is level again.", true]]
+        "remark": "Solid play. Keep going.",
+        "parts": [["Solid play. Keep going."], ["The game is level again.", true]]
       },
       {
         "remark": "A critical moment, handled perfectly.",
@@ -6864,7 +7384,10 @@
           ["White’s lead grows: a clear advantage now.", true]
         ]
       },
-      { "remark": "Couldn’t have done better.", "parts": [["Couldn’t have done better."]] },
+      {
+        "remark": "Very good. The engine barely disagrees.",
+        "parts": [["Very good. The engine barely disagrees."]]
+      },
       {
         "remark": "This turns the game around.",
         "parts": [
@@ -6956,8 +7479,8 @@
         ]
       },
       {
-        "remark": "Parfait. Continue comme ça !",
-        "parts": [["Parfait. Continue comme ça !"]]
+        "remark": "Presque parfait.",
+        "parts": [["Presque parfait."]]
       },
       {
         "remark": "Pas de précipitation : une partie gagnée se gagne coup après coup.",
@@ -6979,9 +7502,9 @@
         "parts": [["Mieux valait [[m:w:Bxg8]], qui prenait la [[p:bq]]dame."]]
       },
       {
-        "remark": "Simple et fort.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [
-          ["De quoi gagner un [[p:wb]]fou sans contrepartie."],
+          ["Un [[p:wb]]fou est gagné, mais les Blancs ont du jeu en compensation."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un net avantage.", true]
         ]
       },
@@ -7018,9 +7541,9 @@
         "parts": [["Jouable, sans être le plus précis."]]
       },
       {
-        "remark": "Impossible de faire mieux.",
+        "remark": "Tout près du meilleur coup.",
         "parts": [
-          ["Impossible de faire mieux."],
+          ["Tout près du meilleur coup."],
           ["L’écart se réduit pour les Blancs : il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -7052,7 +7575,10 @@
           ["La partie était équilibrée, et maintenant les Noirs ont un net avantage.", true]
         ]
       },
-      { "remark": "Dans le mille.", "parts": [["Dans le mille."]] },
+      {
+        "remark": "Dans le mille.",
+        "parts": [["Dans le mille."]]
+      },
       {
         "remark": "Un sacrifice qui fonctionne. Magnifique.",
         "parts": [
@@ -7067,7 +7593,7 @@
       },
       {
         "remark": "Sous la pression, la bonne réponse.",
-        "parts": [["Tout autre coup laissait filer l’avantage."]]
+        "parts": [["Le [[p:wp]]pion [[s:h4]], gratuit."]]
       },
       {
         "remark": "Chaque bon coup complique la victoire de l’adversaire.",
@@ -7076,7 +7602,10 @@
           ["L’écart se creuse : maintenant les Noirs ont une position gagnante.", true]
         ]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Rien de mieux ici."]] },
+      {
+        "remark": "Rien de mieux ici.",
+        "parts": [["Rien de mieux ici."]]
+      },
       {
         "remark": "Prendre est la bonne décision ici.",
         "parts": [
@@ -7089,7 +7618,7 @@
         "parts": [["[[m:b:Re8]], qui prenait la colonne semi-ouverte, était un poil plus juste."]]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Bien joué, la position reste saine.",
         "parts": [["Le [[p:bp]]pion [[s:f5]] est en prise : rien ne le défend."]]
       },
       {
@@ -7107,7 +7636,7 @@
         ]
       },
       {
-        "remark": "Le coup du moteur. Bien joué.",
+        "remark": "Tout près du meilleur coup.",
         "parts": [
           ["La reprise naturelle en [[s:c6]]."],
           ["Les Blancs perdent du terrain : il ne leur reste qu’un léger avantage.", true]
@@ -7134,7 +7663,10 @@
           ["L’avantage grandit : les Blancs ont maintenant un net avantage.", true]
         ]
       },
-      { "remark": "Dans le mille.", "parts": [["Dans le mille."]] },
+      {
+        "remark": "Très bien. Le moteur chipote à peine.",
+        "parts": [["Très bien. Le moteur chipote à peine."]]
+      },
       {
         "remark": "Le matériel passe, l’idée reste.",
         "parts": [
@@ -7143,7 +7675,10 @@
           ]
         ]
       },
-      { "remark": "La bonne pièce à prendre.", "parts": [["La reprise naturelle en [[s:f7]]."]] },
+      {
+        "remark": "La bonne pièce à prendre.",
+        "parts": [["La reprise naturelle en [[s:f7]]."]]
+      },
       {
         "remark": "Dans le mille.",
         "parts": [
@@ -7152,9 +7687,9 @@
         ]
       },
       {
-        "remark": "Propre et précis.",
+        "remark": "Une suite sensée et solide.",
         "parts": [
-          ["Propre et précis."],
+          ["Une suite sensée et solide."],
           ["Fini l’égalité : les Noirs ont un léger avantage.", true]
         ]
       },
@@ -7211,8 +7746,8 @@
         ]
       },
       {
-        "remark": "Simple et fort.",
-        "parts": [["Simple et fort."], ["La partie redevient équilibrée.", true]]
+        "remark": "Du jeu solide. Continue.",
+        "parts": [["Du jeu solide. Continue."], ["La partie redevient équilibrée.", true]]
       },
       {
         "remark": "Un moment critique, bien négocié.",
@@ -7228,7 +7763,10 @@
           ["L’avantage grandit : les Blancs ont maintenant un net avantage.", true]
         ]
       },
-      { "remark": "Impossible de faire mieux.", "parts": [["Impossible de faire mieux."]] },
+      {
+        "remark": "Très bien. Le moteur chipote à peine.",
+        "parts": [["Très bien. Le moteur chipote à peine."]]
+      },
       {
         "remark": "Ça renverse la partie.",
         "parts": [
@@ -7269,7 +7807,10 @@
         "remark": "A move played in thousands of games.",
         "parts": [["A move played in thousands of games."]]
       },
-      { "remark": "A well-known opening move.", "parts": [["A well-known opening move."]] },
+      {
+        "remark": "A well-known opening move.",
+        "parts": [["A well-known opening move."]]
+      },
       {
         "remark": "Theory. Grandmasters play this all the time.",
         "parts": [["Theory. Grandmasters play this all the time."]]
@@ -7278,7 +7819,10 @@
         "remark": "Straight out of the opening books.",
         "parts": [["Straight out of the opening books."]]
       },
-      { "remark": "A solid, time-tested choice.", "parts": [["A solid, time-tested choice."]] },
+      {
+        "remark": "A solid, time-tested choice.",
+        "parts": [["A solid, time-tested choice."]]
+      },
       {
         "remark": "A critical moment, handled perfectly.",
         "parts": [
@@ -7298,7 +7842,7 @@
         "parts": [["The only way to keep the advantage, and it was found."]]
       },
       {
-        "remark": "The engine’s top move. Well played.",
+        "remark": "Very good. The engine barely disagrees.",
         "parts": [
           ["A pawn to support the center."],
           ["White had a clear advantage, but now Black has a clear advantage.", true]
@@ -7308,7 +7852,10 @@
         "remark": "A strong move that keeps things under control.",
         "parts": [["The pawn takes the center."]]
       },
-      { "remark": "Couldn’t have done better.", "parts": [["Couldn’t have done better."]] },
+      {
+        "remark": "Couldn’t have done better.",
+        "parts": [["Couldn’t have done better."]]
+      },
       {
         "remark": "The engine’s top move. Well played.",
         "parts": [
@@ -7320,7 +7867,10 @@
         "remark": "This gives the opponent a clear chance.",
         "parts": [["Back to equal.", true], ["Better was [[m:b:e5]], taking the center."]]
       },
-      { "remark": "Almost perfect.", "parts": [["Another piece out: the [[p:wb]]bishop."]] },
+      {
+        "remark": "Almost perfect.",
+        "parts": [["Another piece out: the [[p:wb]]bishop."]]
+      },
       {
         "remark": "A sacrifice that works. Beautiful.",
         "parts": [
@@ -7337,9 +7887,9 @@
         "parts": [["The one move that kept the edge."]]
       },
       {
-        "remark": "A good capture.",
+        "remark": "Taking is right here.",
         "parts": [
-          ["The [[p:bb]]bishop is traded off."],
+          ["The [[s:c5]] [[p:bb]]bishop won, as taking back loses the [[p:bn]]knight."],
           ["Down from a clear advantage to a slight edge for Black.", true]
         ]
       },
@@ -7347,8 +7897,14 @@
         "remark": "A capture that holds up.",
         "parts": [["[[m:b:Ne5]] was more precise, centralizing the [[p:bn]]knight."]]
       },
-      { "remark": "Taking is right here.", "parts": [["The natural recapture on [[s:c5]]."]] },
-      { "remark": "That’s a costly slip.", "parts": [["Back to equal."]] },
+      {
+        "remark": "Taking is right here.",
+        "parts": [["The natural recapture on [[s:c5]]."]]
+      },
+      {
+        "remark": "That’s a costly slip.",
+        "parts": [["Back to equal."]]
+      },
       {
         "remark": "A critical moment, handled perfectly.",
         "parts": [["Every other move would have left White worse off."]]
@@ -7369,7 +7925,7 @@
         ]
       },
       {
-        "remark": "A tough position, but keep making it hard for the opponent.",
+        "remark": "A good capture.",
         "parts": [["Giving a [[p:wp]]pawn for a [[p:bn]]knight: a good deal."]]
       },
       {
@@ -7377,20 +7933,35 @@
         "parts": [["There was a mate on the board."], ["Now White has mate in 4.", true]]
       },
       {
-        "remark": "The mating net tightens.",
+        "remark": "One step closer to checkmate.",
         "parts": [["A fair trade: the [[p:bp]]pawn comes off."]]
       },
-      { "remark": "Couldn’t have done better.", "parts": [["The natural recapture on [[s:c7]]."]] },
-      { "remark": "Mate is coming. Keep going!", "parts": [["Check! Black has to respond."]] },
+      {
+        "remark": "Couldn’t have done better.",
+        "parts": [["The natural recapture on [[s:c7]]."]]
+      },
+      {
+        "remark": "No escape for the king now.",
+        "parts": [["Check! Black has to respond."]]
+      },
       {
         "remark": "Hang in there: the position still has resources.",
         "parts": [["Nothing stops the mate now: [[m:w:Bxd5#]]."]]
       },
-      { "remark": "One step closer to checkmate.", "parts": [["One step closer to checkmate."]] },
-      { "remark": "That’s the most accurate move.", "parts": [["That’s the most accurate move."]] },
-      { "remark": "No escape for the king now.", "parts": [["No escape for the king now."]] },
       {
-        "remark": "Check! The opponent has to respond.",
+        "remark": "One step closer to checkmate.",
+        "parts": [["One step closer to checkmate."]]
+      },
+      {
+        "remark": "Good judgment here.",
+        "parts": [["Good judgment here."]]
+      },
+      {
+        "remark": "No escape for the king now.",
+        "parts": [["No escape for the king now."]]
+      },
+      {
+        "remark": "A tough position, but keep making it hard for the opponent.",
         "parts": [["Check: White must answer first."]]
       },
       {
@@ -7405,9 +7976,9 @@
         ]
       },
       {
-        "remark": "Clean and precise.",
+        "remark": "Solid play. Keep going.",
         "parts": [
-          ["The [[s:c2]] [[p:br]]rook for free."],
+          ["The [[s:c2]] [[p:br]]rook is won, but Black gets enough play for it."],
           ["Black’s lead shrinks to a slight edge.", true]
         ]
       },
@@ -7431,9 +8002,9 @@
         ]
       },
       {
-        "remark": "Nothing better here.",
+        "remark": "A strong move that keeps things under control.",
         "parts": [
-          ["That hits the [[p:br]]rook, gaining time."],
+          ["A strong move that keeps things under control."],
           ["Down from a winning position to a clear advantage for Black.", true]
         ]
       },
@@ -7485,19 +8056,28 @@
         "parts": [["[[m:w:Re4]] was the cleaner move."]]
       },
       {
-        "remark": "Clean and precise.",
+        "remark": "Very close to the best move.",
         "parts": [
-          ["Clean and precise."],
+          ["Very close to the best move."],
           ["White’s lead slips: only a clear advantage left.", true]
         ]
       },
-      { "remark": "A reasonable choice.", "parts": [["A reasonable choice."]] },
-      { "remark": "Just right. Keep it up!", "parts": [["Just right. Keep it up!"]] },
+      {
+        "remark": "A reasonable choice.",
+        "parts": [["A reasonable choice."]]
+      },
+      {
+        "remark": "A strong move that keeps things under control.",
+        "parts": [["A strong move that keeps things under control."]]
+      },
       {
         "remark": "Clean and precise.",
         "parts": [["That wins the [[s:h6]] [[p:bp]]pawn for free."]]
       },
-      { "remark": "Nothing better here.", "parts": [["Nothing better here."]] },
+      {
+        "remark": "Very good. The engine barely disagrees.",
+        "parts": [["Very good. The engine barely disagrees."]]
+      },
       {
         "remark": "Taking is right here.",
         "parts": [["Free material: a [[p:bb]]bishop with nothing in return."]]
@@ -7551,7 +8131,7 @@
         "parts": [["C’était le seul moyen de garder l’avantage, et il a été trouvé."]]
       },
       {
-        "remark": "Le coup du moteur. Bien joué.",
+        "remark": "Très bien. Le moteur chipote à peine.",
         "parts": [
           ["Un pion pour épauler le centre."],
           [
@@ -7564,7 +8144,10 @@
         "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [["Le pion prend le centre."]]
       },
-      { "remark": "Impossible de faire mieux.", "parts": [["Impossible de faire mieux."]] },
+      {
+        "remark": "Impossible de faire mieux.",
+        "parts": [["Impossible de faire mieux."]]
+      },
       {
         "remark": "Le coup du moteur. Bien joué.",
         "parts": [
@@ -7579,7 +8162,10 @@
           ["Il fallait jouer [[m:b:e5]], qui prenait le centre."]
         ]
       },
-      { "remark": "Presque parfait.", "parts": [["Développement : le [[p:wb]]fou sort."]] },
+      {
+        "remark": "Presque parfait.",
+        "parts": [["Développement : le [[p:wb]]fou sort."]]
+      },
       {
         "remark": "Un sacrifice qui fonctionne. Magnifique.",
         "parts": [
@@ -7599,9 +8185,9 @@
         "parts": [["Le seul coup qui gardait l’avantage."]]
       },
       {
-        "remark": "Une bonne prise.",
+        "remark": "Prendre est la bonne décision ici.",
         "parts": [
-          ["Le [[p:bb]]fou s’échange."],
+          ["Le [[p:bb]]fou [[s:c5]] gagné, car reprendre perd le [[p:bn]]cavalier."],
           ["Les Noirs avaient un net avantage, il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -7613,7 +8199,10 @@
         "remark": "Prendre est la bonne décision ici.",
         "parts": [["La reprise naturelle en [[s:c5]]."]]
       },
-      { "remark": "Un faux pas qui coûte cher.", "parts": [["Retour à l’égalité."]] },
+      {
+        "remark": "Un faux pas qui coûte cher.",
+        "parts": [["Retour à l’égalité."]]
+      },
       {
         "remark": "Un moment critique, bien négocié.",
         "parts": [["Tout autre coup mettait les Blancs en difficulté."]]
@@ -7637,7 +8226,7 @@
         ]
       },
       {
-        "remark": "Position difficile, mais continue à poser des problèmes.",
+        "remark": "Une bonne prise.",
         "parts": [["Donner un [[p:wp]]pion pour un [[p:bn]]cavalier : une bonne affaire."]]
       },
       {
@@ -7648,26 +8237,35 @@
         ]
       },
       {
-        "remark": "Le filet de mat se resserre.",
+        "remark": "Encore un pas vers le mat.",
         "parts": [["Un échange équitable : le [[p:bp]]pion disparaît."]]
       },
-      { "remark": "Impossible de faire mieux.", "parts": [["La reprise naturelle en [[s:c7]]."]] },
       {
-        "remark": "Le mat arrive. Continue !",
+        "remark": "Impossible de faire mieux.",
+        "parts": [["La reprise naturelle en [[s:c7]]."]]
+      },
+      {
+        "remark": "Plus d’échappatoire pour le roi.",
         "parts": [["Échec : il oblige les Noirs à répondre."]]
       },
       {
         "remark": "Tiens bon : la position a encore des ressources.",
         "parts": [["Plus rien n’arrête le mat : [[m:w:Bxd5#]]."]]
       },
-      { "remark": "Encore un pas vers le mat.", "parts": [["Encore un pas vers le mat."]] },
-      { "remark": "C’est le coup le plus précis.", "parts": [["C’est le coup le plus précis."]] },
+      {
+        "remark": "Encore un pas vers le mat.",
+        "parts": [["Encore un pas vers le mat."]]
+      },
+      {
+        "remark": "Bon jugement ici.",
+        "parts": [["Bon jugement ici."]]
+      },
       {
         "remark": "Plus d’échappatoire pour le roi.",
         "parts": [["Plus d’échappatoire pour le roi."]]
       },
       {
-        "remark": "Échec ! L’adversaire doit répondre.",
+        "remark": "Position difficile, mais continue à poser des problèmes.",
         "parts": [["Échec, et les Blancs doivent d’abord parer."]]
       },
       {
@@ -7682,9 +8280,9 @@
         ]
       },
       {
-        "remark": "Propre et précis.",
+        "remark": "Du jeu solide. Continue.",
         "parts": [
-          ["La [[p:br]]tour [[s:c2]], gratuite."],
+          ["La [[p:br]]tour [[s:c2]] est gagnée, mais les Noirs ont du jeu en compensation."],
           ["Les Noirs perdent du terrain : il ne leur reste qu’un léger avantage.", true]
         ]
       },
@@ -7708,9 +8306,9 @@
         ]
       },
       {
-        "remark": "Rien de mieux ici.",
+        "remark": "Un coup fort, la position reste sous contrôle.",
         "parts": [
-          ["Ça attaque la [[p:br]]tour, avec gain de temps."],
+          ["Un coup fort, la position reste sous contrôle."],
           ["Les Noirs avaient une position gagnante, il ne leur reste qu’un net avantage.", true]
         ]
       },
@@ -7762,19 +8360,28 @@
         "parts": [["[[m:w:Re4]] était plus propre."]]
       },
       {
-        "remark": "Propre et précis.",
+        "remark": "Tout près du meilleur coup.",
         "parts": [
-          ["Propre et précis."],
+          ["Tout près du meilleur coup."],
           ["Les Blancs perdent du terrain : il ne leur reste qu’un net avantage.", true]
         ]
       },
-      { "remark": "Un choix raisonnable.", "parts": [["Un choix raisonnable."]] },
-      { "remark": "Parfait. Continue comme ça !", "parts": [["Parfait. Continue comme ça !"]] },
+      {
+        "remark": "Un choix raisonnable.",
+        "parts": [["Un choix raisonnable."]]
+      },
+      {
+        "remark": "Un coup fort, la position reste sous contrôle.",
+        "parts": [["Un coup fort, la position reste sous contrôle."]]
+      },
       {
         "remark": "Propre et précis.",
         "parts": [["De quoi gagner le [[p:bp]]pion [[s:h6]] sans contrepartie."]]
       },
-      { "remark": "Rien de mieux ici.", "parts": [["Rien de mieux ici."]] },
+      {
+        "remark": "Très bien. Le moteur chipote à peine.",
+        "parts": [["Très bien. Le moteur chipote à peine."]]
+      },
       {
         "remark": "Prendre est la bonne décision ici.",
         "parts": [["Du matériel offert : un [[p:bb]]fou, sans rien en échange."]]

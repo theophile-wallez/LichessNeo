@@ -5,7 +5,6 @@ import type { MoveVerdict } from '#page/review/judge/types.ts';
 import type { CoachContext } from './context.ts';
 import { type Findings, findings, punishes } from './fact.ts';
 import { hash } from './hash.ts';
-import { continuesLine } from './line-facts.ts';
 import { oneOf, turnStep } from './said.ts';
 import { remark } from './remark.ts';
 import type { Threats } from './threat-facts.ts';
@@ -52,18 +51,6 @@ function courseOf(move: MoveVerdict, language: ReviewLanguage, seed: number): Co
 const speaksOfMate = ({ fact, followUp }: Findings): boolean =>
   [fact, followUp].some(said => said?.theme === 'mate');
 
-/**
- * A move the coach found nothing concrete about gets a remark, which says
- * nothing of the position: the engine's own line from there at least shows
- * where the game is going, and its moves can be played on the board. It's the
- * first thing dropped when the bubble lacks room.
- */
-function continuation(move: MoveVerdict, language: ReviewLanguage): CommentPart[] {
-  const line = continuesLine(move);
-  if (!line) return [];
-  return [{ text: oneOf(language.facts.continues(line), move), droppable: true, detail: true }];
-}
-
 interface Good {
   readonly move: MoveVerdict;
   readonly context: CoachContext;
@@ -73,12 +60,11 @@ interface Good {
 }
 
 // What the coach says of a move that needs no correction: its fact, or a
-// remark and where the game goes from there, then the move a little better.
+// remark, then the move a little better.
 function goodComment({ move, context, all, told }: Good): CommentPart[] {
   const found = all.fact?.text ?? null;
   const better = all.followUp ? [say(all.followUp.text)] : [];
-  const ahead = found === null ? continuation(move, context.language) : [];
-  return [say(found ?? remark(move, context)), ...better, ...told, ...detailsOf(all), ...ahead];
+  return [say(found ?? remark(move, context)), ...better, ...told, ...detailsOf(all)];
 }
 
 /**

@@ -59,6 +59,17 @@ const throwingLead = (previousMove: MoveVerdict): MoveVerdict =>
     previousMove,
   });
 
+// White's e4 from an even game, the engine's move `best`, scored `after` once played.
+const e4 = (best: string | null, after: number): MoveVerdict =>
+  judge({
+    previousPosition: { ply: 0, fen: START },
+    position: { ply: 1, fen: AFTER_E4, uci: 'e2e4', san: 'e4' },
+    before: record(50, best),
+    after: record(after, null),
+    book: false,
+    chess960: false,
+  });
+
 describe('judge', () => {
   it('judges every fixture move as the original did', () => {
     for (const [index, game] of fixtureGames().entries()) {
@@ -105,6 +116,15 @@ describe('judge', () => {
     expect(move(false).moveClass).toBe('best');
     expect(move(true).moveClass).toBe('excellent');
     expect(move(false).bestSan).toBe('O-O');
+  });
+
+  it('calls only the engine’s move best, another losing nothing excellent', () => {
+    expect(e4('e2e4', 50).moveClass).toBe('best');
+    expect(e4('d2d4', 50).moveClass).toBe('excellent');
+    // Even a move the engine scores a bit higher once played.
+    expect(e4('d2d4', 51).moveClass).toBe('excellent');
+    // A server analysis names no move to tell.
+    expect(e4(null, 50).moveClass).toBe('best');
   });
 
   it('calls another way to a long mate excellent, not best', () => {

@@ -156,11 +156,15 @@ describe('Stockfish', () => {
     ]);
     expect(first?.lines).toEqual([{ cp: 42, pv: ['e2e4', 'for', 'one'] }]);
     expect(second?.lines[0]?.pv.at(-1)).toBe('two');
-    expect(sent.slice(-6)).toEqual([
+    // Each search starts on an empty table: what the last one left would change its verdict.
+    expect(sent.slice(-9)).toEqual([
+      'ucinewgame',
       'position fen one',
       'go depth 16 movetime 5000',
+      'ucinewgame',
       'position fen two',
       'go depth 12 movetime 1000',
+      'ucinewgame',
       'position fen three',
       'go depth 12 movetime 1000 searchmoves g1f3 e1h1',
     ]);

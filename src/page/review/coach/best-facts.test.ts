@@ -30,6 +30,14 @@ describe('the better move', () => {
     expect(factOf(fen, ['e1d2', 'd4b3'], [60, 55])).toMatch(/out of danger/);
   });
 
+  it('says the pin the better move kept, where both moves saved the piece', () => {
+    // a6 chases the bishop pinning the knight: Ba4 keeps the pin, Bf1 drops it.
+    const fen = '4q1k1/8/p1n5/1B6/8/8/8/6K1 w - - 0 1';
+    const text = factOf(fen, ['b5f1', 'b5a4'], [60, 55]);
+    expect(text).toMatch(/keeping the \[\[p:bn\]\]knight pinned to the \[\[p:bq\]\]queen/);
+    expect(text).not.toMatch(/danger|harm/);
+  });
+
   it('takes a pawn by the king as a pawn in an endgame', () => {
     const endgame = '6k1/8/7p/8/8/8/7R/6K1 w - - 0 1';
     expect(factOf(endgame, ['g1f1', 'h2h6'], [80, 60])).toMatch(/taking the \[\[p:bp\]\]pawn/);

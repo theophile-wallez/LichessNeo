@@ -158,6 +158,22 @@ describe('a quiet move’s plan', () => {
     ).toBe('clouait ton [[p:bn]]cavalier sur le [[p:bk]]roi');
   });
 
+  it('says a pin kept, out of danger, apart from a pin made', () => {
+    const kept = {
+      kind: 'both',
+      first: { kind: 'saves', piece: white('bishop') },
+      second: { kind: 'pins', piece: black('knight'), behind: black('queen'), kept: true },
+    } as const;
+    expect(english('white').facts.why(kept)).toBe(
+      'getting your [[p:wb]]bishop out of danger and keeping the opponent’s [[p:bn]]knight pinned to the [[p:bq]]queen',
+    );
+    expect(french('white').facts.why(kept)).toBe(
+      'mettait ton [[p:wb]]fou à l’abri et gardait le [[p:bn]]cavalier adverse cloué sur la [[p:bq]]dame',
+    );
+    const rook = { kind: 'pins', piece: black('rook'), behind: black('king'), kept: true } as const;
+    expect(fr.facts.why(rook, true)).toBe('garde la [[p:br]]tour clouée sur le [[p:bk]]roi');
+  });
+
   it('says a battery made or made ready, a file contested, a pawn left undefended', () => {
     const reasons = [
       { kind: 'fileBattery', mover: white('rook'), partner: white('queen'), halfOpen: false },

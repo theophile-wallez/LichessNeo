@@ -15,10 +15,12 @@ practice's lookups, learned the hard way. The review's design is in
   right (at depth 16, mate in 5 or fewer is exact; longer comes out longer).
   Trust a move's short side only (`SURE_MATE`, `page/review/judge/mate.ts`)
   and never print a long defense's length.
-- **The engine is nondeterministic.** Two runs of a game differ on about
-  one verdict in six, mostly by one step, the game rating by 100+ points:
-  compare runs from the same `ln-ext-review:*` cache entry, which skips the
-  engine, or against that spread.
+- **The engine's table.** A search reads what the engine searched before
+  from its hash table, and which engine searched what varies from run to run:
+  two runs of a game differed on one verdict in six, the game rating by 100+
+  points. Each search starts with `ucinewgame` (`engine/stockfish.ts`), so a
+  position gets the same record every time; runs still differ where the cloud
+  answered one and not the other, or a search reached its `movetime` first.
 - **The explorer, away from the board.** The explorer's host is the analysis
   controller's `explorer.opts.endpoint`; Lichess asks it
   `<endpoint>/masters?fen=<start>&play=<uci,…>` with the session's cookies

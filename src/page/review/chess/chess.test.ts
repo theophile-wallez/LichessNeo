@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { parseFen } from '#shared/chess/index.ts';
+import { parseFen, type Square } from '#shared/chess/index.ts';
 import { fixtureGames } from '#page/review/fixtures/replay.ts';
-import { attackerValues, isHanging, isSacrifice } from './material.ts';
+import {
+  attackerSquares,
+  attackerValues,
+  exchangeGain,
+  isHanging,
+  isSacrifice,
+} from './material.ts';
 import { normalizeUci, sanOf, uciToSan } from './notation.ts';
 // What the original script wrote for these moves.
 import legacy from './fixtures/legacy.json' with { type: 'json' };
@@ -71,10 +77,32 @@ describe('isSacrifice', () => {
   });
 });
 
+/** What White wins by trading on `square` of `fen`. */
+const gain = (fen: string, square: Square): number =>
+  exchangeGain(parseFen(fen).board, square, 'white');
+
 describe('material', () => {
   it('values an attacking king above everything', () => {
     const { board } = parseFen('8/8/8/8/3q4/4K3/8/8 w - - 0 1');
     expect(attackerValues(board, 'd4', 'white')).toEqual([100]);
     expect(isHanging(board, 'd4', { color: 'black', role: 'queen' })).toBe(true);
+  });
+
+  it('lists a square’s attackers cheapest first, the king last', () => {
+    const { board } = parseFen('6k1/8/8/3p4/2P1K3/8/8/3Q4 w - - 0 1');
+    expect(attackerSquares(board, 'd5', 'white')).toEqual(['c4', 'd1', 'e4']);
+  });
+
+  it('weighs a trade on a square, either side free to stop', () => {
+    // Rxd5 Rxd5 loses the rook for the knight, unless a rook behind takes back.
+    expect(gain('3r2k1/8/8/3n4/8/8/3R4/6K1 w - - 0 1', 'd5')).toBe(0);
+    expect(gain('3r2k1/8/8/3n4/8/8/3R4/3R2K1 w - - 0 1', 'd5')).toBe(3);
+    // A queen takes a pawn nothing defends, not one a pawn does.
+    expect(gain('6k1/8/8/3p4/8/8/8/3Q2K1 w - - 0 1', 'd5')).toBe(1);
+    expect(gain('6k1/8/2p5/3p4/8/8/8/3Q2K1 w - - 0 1', 'd5')).toBe(0);
+    // A king takes only what nothing defends.
+    expect(gain('6k1/8/8/3p4/4K3/8/8/8 w - - 0 1', 'd5')).toBe(1);
+    expect(gain('6k1/8/2p5/3p4/4K3/8/8/8 w - - 0 1', 'd5')).toBe(0);
+    expect(gain('6k1/8/8/8/4K3/8/8/8 w - - 0 1', 'd5')).toBe(0);
   });
 });

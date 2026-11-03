@@ -13,6 +13,7 @@ import { isPlain, type Plan, type Reason } from './idea.ts';
 import {
   contestsFile,
   fightsCenter,
+  keptPinOf,
   loosePawnOf,
   pressureOf,
   rookPlan,
@@ -131,8 +132,8 @@ function pawnShape({ before, after, color, ply }: Play, from: Square, to: Square
 }
 
 // A piece pinned or chased, by the piece moved or a line it opened.
-const attackOf = ({ before, after, color }: Play, to: Square): Plan | null =>
-  pressureOf(after, to, color) ?? uncoveredOf(before, after, to);
+const attackOf = ({ before, after, color }: Play, from: Square, to: Square): Plan | null =>
+  pressureOf(before, after, [from, to], color) ?? uncoveredOf(before, after, to);
 
 /** What the move does for the position, if it's one of the plans the coach names. */
 export function planOf(play: Play): Plan | null {
@@ -141,8 +142,8 @@ export function planOf(play: Play): Plan | null {
   if (!from || !to || /[x+]/.test(play.san) || play.san.startsWith('O-O')) return null;
   // A pawn that attacks a piece does so before it does anything for the king.
   if (play.after.get(to)?.role === 'pawn')
-    return pawnPlan(play, from, to) ?? attackOf(play, to) ?? pawnShape(play, from, to);
-  const pressure = attackOf(play, to);
+    return pawnPlan(play, from, to) ?? attackOf(play, from, to) ?? pawnShape(play, from, to);
+  const pressure = attackOf(play, from, to);
   if (pressure) return pressure;
   return (
     discoveryOf(play.before, play.after, [from, to]) ??
@@ -176,7 +177,13 @@ export function reasonOf(play: Play): Reason | null {
   const plan = planOf(play);
   const from = parseSquare(play.uci.slice(0, 2));
   const to = parseSquare(play.uci.slice(2, 4));
-  if (!plan || !from || !to || !TACTICS.has(plan.kind)) return plan;
+  if (!plan || !from || !to) return plan;
+  // A piece pinning another, chased off, that keeps the pin from its new square.
+  if (plan.kind === 'saves') {
+    const kept = keptPinOf(play.before, play.after, [from, to]);
+    return kept ? { kind: 'both', first: plan, second: kept } : plan;
+  }
+  if (!TACTICS.has(plan.kind)) return plan;
   const also = safetyPlan(play.before, play.after, [from, to]) ?? batteryReady(play.after, to);
   return also ? { kind: 'both', first: also, second: plan } : plan;
 }

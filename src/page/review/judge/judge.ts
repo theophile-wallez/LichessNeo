@@ -43,14 +43,23 @@ const takesBack = ({ previousPosition, position }: JudgeInput): boolean =>
   position.san.includes('x') &&
   previousPosition.uci?.slice(2, 4) === position.uci.slice(2, 4);
 
-/** The mover had a mate too long to judge by distance, and doesn't reach it sooner. */
-function keepsLongMate({ before, after, previousPosition }: JudgeInput): boolean {
-  if (!('mate' in before)) return false;
+/** The mover had a mate too long to judge by distance, and gets there sooner than the engine's line. */
+function nearsLongMate({ before, after, previousPosition }: JudgeInput): boolean {
+  if (!('mate' in before) || !('mate' in after)) return false;
   const sign = fenTurn(previousPosition.fen) === 'white' ? 1 : -1;
   const own = sign * before.mate;
-  if (own <= SURE_MATE) return false;
   // The engine's line reaches the mate a move closer; a move that does better beat it.
-  return !('mate' in after) || sign * after.mate >= own - 1;
+  return own > SURE_MATE && sign * after.mate < own - 1;
+}
+
+/**
+ * A move as good as the engine's that isn't it. Only the engine's move is best,
+ * unless this one gets to a long mate sooner; a server analysis names no move.
+ */
+function asGoodClass(input: JudgeInput, standing: Standing): MoveClass {
+  const top = topClass(input, standing);
+  const named = input.before.best !== null;
+  return top === 'best' && named && !nearsLongMate(input) ? 'excellent' : top;
 }
 
 // Win probability an error must lose for the opponent to have something to punish, the
@@ -88,12 +97,8 @@ const isMistake = (moveClass: MoveClass): boolean =>
 
 function baseClass(input: JudgeInput, standing: Standing, isBest: boolean): MoveClass {
   if (input.book) return 'book';
-  // Another way to a mate too long to judge by distance loses no win
-  // probability, but it isn't the engine's move. A server analysis has no
-  // engine move to tell.
-  const otherWay = !isBest && input.before.best !== null;
-  if (otherWay && standing.loss < 0.5 && keepsLongMate(input)) return 'excellent';
-  if (isBest || standing.loss < 0.5) return topClass(input, standing);
+  if (isBest) return topClass(input, standing);
+  if (standing.loss < 0.5) return asGoodClass(input, standing);
   const moveClass = lossClass(standing.loss);
   return isMistake(moveClass) && inPunishment(input.previousMove, standing.before)
     ? 'miss'

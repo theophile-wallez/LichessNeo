@@ -1,4 +1,8 @@
+import StarIcon from '@hugeicons/core-free-icons/StarIcon';
+import ThumbsUpIcon from '@hugeicons/core-free-icons/ThumbsUpIcon';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { describe, expect, it } from 'vitest';
+import type { HugeIcon } from '#shared/hugeicons.ts';
 import {
   CLASS_COLORS,
   classMood,
@@ -7,12 +11,18 @@ import {
   isError,
   LIST_BADGES,
   MOVE_CLASSES,
+  type MoveClass,
   RANK,
   SUMMARY_ROWS,
 } from './classes.ts';
+import { CLASS_GLYPHS } from './glyphs.ts';
 import { classIcon, classImage, classSvg } from './icon-svg.ts';
 // The original script's class table and sets, with our own colors and icons.
 import legacy from './fixtures/legacy.json' with { type: 'json' };
+
+const iconPaths = (icon: HugeIcon): string[] =>
+  icon.flatMap(([, { d }]) => (typeof d === 'string' ? [d] : []));
+const drawn = (moveClass: MoveClass): string[] => CLASS_GLYPHS[moveClass].map(glyph => glyph.path);
 
 describe('move classes', () => {
   it('come in the original’s order, in the fixture’s colors', () => {
@@ -45,9 +55,9 @@ describe('move classes', () => {
       expect(glyph?.getAttribute('stroke')).toBe(color);
       const paths = [...(glyph?.children ?? [])];
       expect(paths.length).toBeGreaterThan(0);
-      // Strokes leave the fill unset, solid shapes fill in the color.
-      const fills = new Set(paths.map(path => path.getAttribute('fill') ?? color));
-      expect([...fills]).toEqual([color]);
+      // Strokes leave the fill unset (a Hugeicon's says none), solid shapes fill in the color.
+      const fills = new Set(paths.map(path => path.getAttribute('fill') ?? 'none'));
+      expect([...fills].filter(fill => fill !== 'none').every(fill => fill === color)).toBe(true);
     }
   });
 
@@ -78,5 +88,18 @@ describe('move classes', () => {
 
   it('tell the errors apart', () => {
     expect(MOVE_CLASSES.filter(isError)).toEqual(['inaccuracy', 'mistake', 'miss', 'blunder']);
+  });
+
+  it('draw the good tiers as Hugeicons: a solid star, a thumb up, a tick', () => {
+    expect(drawn('best')).toEqual(iconPaths(StarIcon));
+    expect(drawn('excellent')).toEqual(iconPaths(ThumbsUpIcon));
+    expect(drawn('good')).toEqual(iconPaths(Tick02Icon));
+    expect(CLASS_GLYPHS.best.every(glyph => glyph.solid && glyph.icon)).toBe(true);
+    expect(CLASS_GLYPHS.good.some(glyph => glyph.solid)).toBe(false);
+    // Hugeicons' 24-unit grid, scaled into the 20-unit box around its middle.
+    const svg = new DOMParser().parseFromString(classSvg('good').value, 'image/svg+xml');
+    expect(svg.querySelector('path')?.getAttribute('transform')).toBe(
+      'translate(2.5 2.5) scale(0.625)',
+    );
   });
 });

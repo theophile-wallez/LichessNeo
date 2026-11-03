@@ -41,6 +41,12 @@ function chaseWhy(reason: Extract<Reason, { readonly kind: 'chases' }>, piece: s
     : `gaining a tempo on ${piece}${on}`;
 }
 
+function pinWhy({ kept, behind }: Extract<PieceReason, { kind: 'pins' }>, piece: string): string {
+  return kept
+    ? `keeping ${piece} pinned to ${bare(behind)}`
+    : `pinning ${piece} to ${bare(behind)}`;
+}
+
 function pieceWhy(reason: PieceReason, the: (piece: Piece) => string): string {
   const piece = the(reason.piece);
   if (reason.kind === 'develops') return `developing ${piece}`;
@@ -48,7 +54,7 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string): string {
   if (reason.kind === 'chases') return chaseWhy(reason, piece);
   if (reason.kind === 'attacksPawn')
     return `attacking the undefended ${pieceName(reason.piece)} on ${squareToken(reason.square)}`;
-  if (reason.kind === 'pins') return `pinning ${piece} to ${bare(reason.behind)}`;
+  if (reason.kind === 'pins') return pinWhy(reason, piece);
   if (reason.kind === 'saves') return `getting ${piece} out of danger`;
   if (reason.kind === 'guards')
     return reason.square ? `defending ${piece} on ${reason.square}` : `defending ${piece}`;

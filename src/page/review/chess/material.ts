@@ -1,4 +1,11 @@
-import { attackers, opposite, parseFen, parseSquare, PIECE_VALUES } from '#shared/chess/index.ts';
+import {
+  attackedSquares,
+  attackers,
+  opposite,
+  parseFen,
+  parseSquare,
+  PIECE_VALUES,
+} from '#shared/chess/index.ts';
 import type { Board, Color, Piece, Role, Square } from '#shared/chess/index.ts';
 
 // The review's facts still import the values from here.
@@ -10,6 +17,30 @@ const ATTACKER_VALUES: Readonly<Record<Role, number>> = { ...PIECE_VALUES, king:
 /** The values of `by`'s pieces attacking `target`, pins ignored. */
 export const attackerValues = (board: Board, target: Square, by: Color): number[] =>
   attackers(board, target, by).map(role => ATTACKER_VALUES[role]);
+
+/** The squares of `by`'s pieces attacking `target`, the cheapest first, pins ignored. */
+export const attackerSquares = (board: Board, target: Square, by: Color): Square[] =>
+  [...board]
+    .filter(([from, piece]) => piece.color === by && attackedSquares(board, from).includes(target))
+    .toSorted(([, first], [, second]) => ATTACKER_VALUES[first.role] - ATTACKER_VALUES[second.role])
+    .map(([from]) => from);
+
+/**
+ * What `side` wins by taking on `square`, then trading on there cheapest piece
+ * first, either side free to stop: 0 when taking loses. Pins ignored.
+ */
+export function exchangeGain(board: Board, square: Square, side: Color): number {
+  const target = board.get(square);
+  const [from] = attackerSquares(board, square, side);
+  const taker = from && board.get(from);
+  if (!target || !from || !taker) return 0;
+  const next = new Map(board);
+  next.delete(from);
+  next.set(square, taker);
+  // A king takes only what nothing defends.
+  if (taker.role === 'king' && attackers(next, square, opposite(side)).length > 0) return 0;
+  return Math.max(0, PIECE_VALUES[target.role] - exchangeGain(next, square, opposite(side)));
+}
 
 /** The piece on a square named in text ("e4"), if any. */
 export function pieceOn(board: Board, name: string): Piece | undefined {

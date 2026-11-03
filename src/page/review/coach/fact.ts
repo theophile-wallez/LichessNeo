@@ -87,10 +87,9 @@ function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
   return onlyMoveFact(input);
 }
 
-// The only move, unless it takes back, which the capture says: a recapture is no feat.
+// The only move, unless it captures, which the capture says: what it takes is the point.
 function onlyMoveFact({ move, facts, me, sign }: FactInput): Fact | null {
-  const retakes = move.previousPosition.uci?.slice(2, 4) === move.uci.slice(2, 4);
-  if (move.moveClass !== 'great' || (retakes && move.san.includes('x'))) return null;
+  if (move.moveClass !== 'great' || move.san.includes('x')) return null;
   const ahead = evaluationLevel(move.after) * sign >= 2;
   return said(ahead ? oneOf(facts.keepsAdvantage, move) : oneOf(facts.holdsPosition(me), move));
 }

@@ -48,9 +48,8 @@ opening's name and the page's asset URL.
   ones going when the bubble lacks room, the details (a fact's line and
   squares, its plain sentence said first) last and dim. Half the quiet good
   moves of a game give the coach no fact to say (it reads them through
-  `planOf`), and a remark alone says nothing of the position: those get the
-  engine's own line from there as a dim detail, its moves playable on the board
-  (`continuesLine`, `coach/line-facts.ts`), which is dropped first of all. The game's course is said only when
+  `planOf`): those get a remark, never a bare engine line, which players read
+  as moves to puzzle out rather than as an explanation. The game's course is said only when
   the advantage changes (for a move that punishes an error, only when it goes
   past what the error gave), and `turning` marks the error the game turned on
   (`turningMove` of the key moments), which says so. The languages give each

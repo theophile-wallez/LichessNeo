@@ -7,7 +7,7 @@ import {
   type Reason,
 } from '#page/review/coach/idea.ts';
 import { squareToken } from '#page/review/comment/tokens.ts';
-import { indefiniteOn, owned, pairOf, pieceName } from './fr-grammar.ts';
+import { agreement, indefiniteOn, owned, pairOf, pieceName } from './fr-grammar.ts';
 import type { Viewer } from './types.ts';
 
 // Why a move was, or is, played, as a clause after its name: the better move's
@@ -50,6 +50,8 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string, tense: Ten
   }
   if (reason.kind === 'attacksPawn')
     return `${tense('attaquait', 'attaque')} le ${pieceName(reason.piece)} ${squareToken(reason.square)}, que rien ne ${tense('défendait', 'défend')}`;
+  if (reason.kind === 'pins' && reason.kept)
+    return `${tense('gardait', 'garde')} ${piece} cloué${agreement(reason.piece)} sur ${bare(reason.behind)}`;
   if (reason.kind === 'pins')
     return `${tense('clouait', 'cloue')} ${piece} sur ${bare(reason.behind)}`;
   if (reason.kind === 'saves') return `${tense('mettait', 'met')} ${piece} à l’abri`;

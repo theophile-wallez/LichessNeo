@@ -116,7 +116,6 @@ export class Stockfish {
     module.uci('setoption name Hash value 16');
     module.uci('setoption name MultiPV value 2');
     if (this.#chess960) module.uci('setoption name UCI_Chess960 value true');
-    module.uci('ucinewgame');
   }
 
   /** Booted, and still answering. */
@@ -172,6 +171,10 @@ export class Stockfish {
         this.#onLine = null;
         resolve(result);
       };
+      // A table left by the last search changes this one's line and score, and
+      // which engine searched what before varies: cleared, a position always
+      // gets the same verdict.
+      module.uci('ucinewgame');
       module.uci(`position ${position}`);
       // `searchmoves` takes the rest of the command: it goes last.
       const only = searchMoves.length > 0 ? ` searchmoves ${searchMoves.join(' ')}` : '';
