@@ -88,3 +88,24 @@ describe('the board’s coordinates', () => {
     },
   );
 });
+
+const SHEET = readFileSync(join(import.meta.dirname, 'coordinates.css'), 'utf8');
+
+describe('the eval bar', () => {
+  // Lichess registers --eval-percent as not inherited: two @property rules for one name, the
+  // last loaded wins, and the fill stuck at the middle under Lichess's.
+  it('registers none of Lichess’s own properties', () => {
+    expect(SHEET).not.toMatch(/@property\s+--eval-percent\b/);
+  });
+
+  it('copies Lichess’s share onto a property of its own, read by the fill', () => {
+    const style = document.createElement('style');
+    style.textContent = oneLine(SHEET);
+    document.head.append(style);
+    document.body.innerHTML = '<div class="eval-gauge" style="--eval-percent: 20%"></div>';
+    const gauge = queryOne(document, '.eval-gauge', HTMLElement);
+    if (!gauge) throw new Error('no gauge');
+    expect(getComputedStyle(gauge).getPropertyValue('--ln-ext-gauge-black')).toBe('20%');
+    expect(SHEET).toMatch(/\.eval-gauge::before \{[^}]*inset: var\(--ln-ext-gauge-black\) 0 0;/);
+  });
+});

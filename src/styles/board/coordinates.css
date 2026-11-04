@@ -121,28 +121,29 @@ body:is(.coords-in, .coords-out) coords.files coord {
 /* ---- Eval bar --- */
 
 /* Lichess's eval bar drawn like the Game Review's, the score from content/analysis/eval-gauge.ts.
- * Registered so it slides. Lichess flips it for Black, which would flip the score: turn the
- * fill instead. */
-@property --eval-percent {
+ * Lichess registers its --eval-percent (Black's share) as not inherited: ours copies it for the
+ * fill, and slides. Lichess flips the bar for Black, which would flip the score: turn the fill. */
+@property --ln-ext-gauge-black {
   syntax: '<percentage>';
   inherits: true;
   initial-value: 50%;
 }
 
 .eval-gauge {
+  --ln-ext-gauge-black: var(--eval-percent, 50%);
   box-sizing: border-box;
   width: var(--ln-ext-gauge-w, 15px) !important;
   overflow: hidden;
   border-radius: 6px !important;
   background: #3a393e !important;
-  transition: --eval-percent 0.3s ease !important;
+  transition: --ln-ext-gauge-black 0.3s ease !important;
 }
 
 /* White's share, rounded at the frontier too. */
 .eval-gauge::before {
   content: '';
   position: absolute;
-  inset: var(--eval-percent) 0 0;
+  inset: var(--ln-ext-gauge-black) 0 0;
   border-radius: 6px;
   background: var(--ln-ext-white);
 }
@@ -152,7 +153,7 @@ body:is(.coords-in, .coords-out) coords.files coord {
 }
 
 .eval-gauge.reverse::before {
-  inset: 0 0 var(--eval-percent);
+  inset: 0 0 var(--ln-ext-gauge-black);
 }
 
 .eval-gauge tick {
