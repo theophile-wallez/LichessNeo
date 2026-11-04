@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { type Analysed, playedBetween } from '#page/review/fixtures/played.ts';
+import { type Analysed, played, playedBetween, record } from '#page/review/fixtures/played.ts';
 import { en } from '#page/review/i18n/en.ts';
 import { fr } from '#page/review/i18n/fr.ts';
 import { findings } from './fact.ts';
@@ -10,6 +10,7 @@ import { findings } from './fact.ts';
 
 const PLAY = /@[ab]:[^\]]*/g;
 const plain = (text: string | undefined): string | undefined => text?.replace(PLAY, '');
+const pv = (moves: string): string[] => moves.split(' ');
 
 describe('an error that trades', () => {
   // 24.Bxf6+?: the king takes back, and the d4 pawn falls after Rad1 Rxd4.
@@ -165,5 +166,77 @@ describe('a reply that checks', () => {
     };
     const { fact } = findings(playedBetween([36, before, after], 'e3d2'), en);
     expect(plain(fact?.text)).toBe('That allows [[m:w:Nd8+]], with a discovered check.');
+  });
+});
+
+describe('an inaccuracy', () => {
+  // 4…Nf6?!: Ng5 and the bishop both hit f7, which only the king defends.
+  const move = played({
+    fen: 'r1bqkbnr/ppp2ppp/2np4/4p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R b KQkq - 0 4',
+    uci: 'g8f6',
+    ply: 8,
+    before: record(50.4, ['c6a5', 'c4d5', 'c7c6']),
+    after: record(56.3, ['f3g5', 'd6d5', 'e4d5']),
+  });
+
+  it('says the reply it lets in, as an error does', () => {
+    expect(move.moveClass).toBe('inaccuracy');
+    expect(plain(findings(move, en).fact?.text)).toBe(
+      'That lets White play [[m:w:Ng5]], piling up on the [[p:bp]]pawn on [[s:f7]].',
+    );
+  });
+});
+
+describe('an error that loses time', () => {
+  // 11.Bg4?: after Ngf6 the bishop's best is back to h3, where it came from.
+  const move = played({
+    fen: 'r3kbnr/pp1n1pp1/1qp1p3/3p3b/3P1B1P/4PP1B/PPP5/RNQ1K1NR w KQkq - 0 11',
+    uci: 'h3g4',
+    ply: 21,
+    before: record(35, ['c2c4', 'f8e7', 'f4g5']),
+    after: record(22.6, ['g8f6', 'g4h3', 'c6c5']),
+  });
+
+  it('says the piece goes back, then the better move', () => {
+    const { fact, followUp } = findings(move, en);
+    expect(plain(fact?.text)).toMatch(/\[\[p:wb\]\]bishop.* back to \[\[s:h3\]\]/);
+    expect(plain(followUp?.text)).toContain('[[m:w:c4]]');
+    expect(fr.facts.goesBack({ role: 'bishop', color: 'white' }, '[[s:h3]]', 'Cf6')).toContain(
+      'Du temps perdu : après Cf6, le [[p:wb]]fou retourne aussitôt en [[s:h3]].',
+    );
+  });
+});
+
+describe('an error that loses a piece for a pawn', () => {
+  // 13…Ncxe4?: Nxe4 Nxe4 Qxe4. The better line's trades far down it don't
+  // make up for the knight now.
+  const move = played({
+    fen: 'r1q2rk1/pp2bppp/2p2n2/2n1p3/1PB1P3/4BQN1/P1P2PPP/3R1RK1 b - - 0 13',
+    uci: 'c5e4',
+    ply: 26,
+    before: record(79.9, pv('c5e6 g3f5 e7d8 f5d6 c8c7 f3f5 e6d4 f5e5 d4b5 c4b5 f6g4 e5c5')),
+    after: record(92.2, pv('g3e4 f6e4 f3e4 b7b5 c4d3 f7f5 e4e5 e7b4 e3c1 a7a5')),
+  });
+
+  it('says what the line wins', () => {
+    expect(plain(findings(move, en).fact?.text)).toContain(
+      'picks up a [[p:bn]]knight for a [[p:wp]]pawn',
+    );
+  });
+});
+
+describe('an inaccuracy that allows a capture', () => {
+  // 4.Kf1 in the Immortal Game, with Qxh2 as the reply: the rook takes back.
+  const move = played({
+    fen: 'rnb1kbnr/pppp1ppp/8/8/2B1Pp1q/8/PPPP2PP/RNBQK1NR w KQkq - 2 4',
+    uci: 'e1f1',
+    ply: 7,
+    before: record(50, pv('e1e2 b7b5')),
+    after: record(43, pv('h4h2 h1h2 b7b5')),
+  });
+
+  it('says nothing of a capture its side doesn’t keep', () => {
+    expect(move.moveClass).toBe('inaccuracy');
+    expect(plain(findings(move, en).fact?.text)).not.toMatch(/Qxh2/);
   });
 });

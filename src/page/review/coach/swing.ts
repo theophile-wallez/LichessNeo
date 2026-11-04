@@ -47,6 +47,10 @@ function netAfter(plies: readonly Ply[], count: number, side: Color): number {
 export const finalNet = (plies: readonly Ply[], side: Color): number =>
   netAfter(plies, settledPoints(plies).at(-1) ?? 0, side);
 
+/** What `side` comes out ahead where the line last settles within its first `count` plies. */
+export const netWithin = (plies: readonly Ply[], side: Color, count: number): number =>
+  netAfter(plies, settledPoints(plies).findLast(point => point <= count) ?? 0, side);
+
 /** Drops the pieces traded for one of the same worth: a knight for a bishop wins nothing. */
 function withoutTrades(won: readonly Piece[], lost: readonly Piece[]): [Piece[], Piece[]] {
   const left = [...lost];
@@ -60,14 +64,22 @@ function withoutTrades(won: readonly Piece[], lost: readonly Piece[]): [Piece[],
 }
 
 // Where the one piece won was taken, said as "the c6 pawn": not when the line
-// takes more than one like it, nor en passant, the pawn not on the square taken.
-function wonOn(taken: readonly Ply[], won: readonly Piece[], side: Color): string | null {
+// takes more than one like it, nor en passant, the pawn not on the square taken,
+// nor when it came there in the line, the square showing another piece now.
+function wonOn(
+  start: Board,
+  taken: readonly Ply[],
+  won: readonly Piece[],
+  side: Color,
+): string | null {
   const [piece] = won;
   if (!piece || won.length > 1) return null;
   const takes = taken.filter(ply => ply.color === side && ply.captured?.role === piece.role);
   const [take] = takes;
   const square = take?.uci.slice(2, 4) ?? '';
-  if (!take || takes.length > 1 || !pieceOn(take.before, square)) return null;
+  const there = pieceOn(start, square);
+  if (!take || takes.length > 1 || there?.role !== piece.role || there.color !== piece.color)
+    return null;
   return whichOne(take.before, square, piece);
 }
 
@@ -77,7 +89,7 @@ function swingAfter(plies: readonly Ply[], count: number, side: Color): Swing {
     taken.flatMap(ply => (ply.color === side && ply.captured ? [ply.captured] : [])),
     taken.flatMap(ply => (ply.color !== side && ply.captured ? [ply.captured] : [])),
   );
-  const square = wonOn(taken, won, side);
+  const square = plies[0] ? wonOn(plies[0].before, taken, won, side) : null;
   return { won, lost, net: netAfter(plies, count, side), plies: count, square };
 }
 

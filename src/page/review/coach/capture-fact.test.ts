@@ -59,6 +59,33 @@ describe('a capture', () => {
     expect(en.facts.trades(knight, false)).toContain(open?.text);
   });
 
+  it('wins back what the side was behind, in a run of captures', () => {
+    // The Opera game's 5…dxe5, after 4.dxe5 Bxf3 5.Qxf3: the pawn comes back.
+    const recapture = played({
+      fen: 'rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5b2/PPP2PPP/RNBQKB1R w KQkq - 0 5',
+      uci: 'd1f3',
+      ply: 9,
+      before: record(60, ['d1f3']),
+      after: record(60, ['d6e5']),
+    });
+    const fen = 'rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5Q2/PPP2PPP/RNB1KB1R b KQkq - 0 5';
+    const pawnBack = (previousMove?: MoveVerdict) =>
+      findings(
+        played({
+          fen,
+          uci: 'd6e5',
+          ply: 10,
+          before: record(60, ['d6e5']),
+          after: record(60),
+          ...(previousMove ? { previousMove } : {}),
+        }),
+        en,
+      ).fact?.text;
+    const white = { role: 'pawn', color: 'white' } as const;
+    expect(en.facts.winsBack(white, '[[s:e5]]', true)).toContain(pawnBack(recapture));
+    expect(en.facts.winsForFree(white, '[[s:e5]]')).toContain(pawnBack());
+  });
+
   it('isn’t faulted when it’s the engine’s own move', () => {
     const { fact, followUp } = findings(takes(WON_BACK, 'c5c6'), en);
     expect(en.facts.winsForFree(black, '[[s:c6]]')).toContain(fact?.text);

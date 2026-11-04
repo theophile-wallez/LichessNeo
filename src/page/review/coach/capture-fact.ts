@@ -1,4 +1,4 @@
-import { attackers, parseSquare, type Piece } from '#shared/chess/index.ts';
+import { attackers, parseSquare, type Piece, type Square } from '#shared/chess/index.ts';
 import { attackerSquares, exchangeGain, PIECE_VALUES } from '#page/review/chess/material.ts';
 import { squareToken } from '#page/review/comment/tokens.ts';
 import type { FactInput } from './fact.ts';
@@ -7,9 +7,9 @@ import { whichOne } from './which-one.ts';
 import { type Fact, oneOf, said, withDetail } from './said.ts';
 import { materialBalance } from './swing.ts';
 
-// What a good capture does: take back, win a piece for free or for less, or
-// where taking back costs more, or trade, which a side ahead in material is
-// glad to, pieces rather than pawns.
+// What a good capture does: take back, win back what the side was behind, win
+// a piece for free or for less, or where taking back costs more, or trade,
+// which a side ahead in material is glad to, pieces rather than pawns.
 // What it wins may only be for a while: the engine's line wins it back.
 
 // Two pawns' worth ahead: enough for trades to help.
@@ -53,8 +53,37 @@ function gainedFact(input: FactInput, { victim, by, on, free }: Gain): Fact {
   return said(oneOf(facts.winsMaterial(victim, { role: by.role, color: me }, on), move));
 }
 
+// A capture in a run of them, by a side behind, only wins back what it lacked:
+// no piece for free, though the piece taken took nothing on its square.
+function wonBackFact(
+  { move, facts, me, before, after }: FactInput,
+  victim: Piece,
+  on: string | null,
+): Fact | null {
+  const now = materialBalance(after, me);
+  const trading = move.previousPosition.san?.includes('x') === true;
+  if (!trading || materialBalance(before, me) >= 0 || now > 0) return null;
+  return said(oneOf(facts.winsBack(victim, on, now === 0), move));
+}
+
+// An even capture: won where taking back would lose more, or a trade.
+function evenFact(input: FactInput, square: Square, victim: Piece, on: string | null): Fact {
+  const { move, facts, me, them, before, after } = input;
+  // Taking back would lose more than it wins back.
+  const [from] = attackerSquares(after, square, them);
+  const taker = from && after.get(from);
+  if (taker && exchangeGain(after, square, them) === 0)
+    return (
+      wonBackFact(input, victim, on) ??
+      said(oneOf(facts.retakeCosts(victim, on, taker), move), 'hanging')
+    );
+  // Ahead, trade pieces, not pawns.
+  const ahead = victim.role !== 'pawn' && materialBalance(before, me) >= AHEAD;
+  return said(oneOf(facts.trades(victim, ahead), move));
+}
+
 export function captureFact(input: FactInput, moved: Piece, dest: string): Fact | null {
-  const { move, facts, me, them, before } = input;
+  const { move, facts, them, before } = input;
   const square = parseSquare(dest);
   if (!square) return null;
   // Nothing on the square: en passant.
@@ -65,14 +94,7 @@ export function captureFact(input: FactInput, moved: Piece, dest: string): Fact 
   const on = whichOne(before, dest, victim);
   const free = attackers(before, square, them).length === 0;
   const [taken, given] = [PIECE_VALUES[victim.role], PIECE_VALUES[moved.role]];
-  if (free || taken > given) return gainedFact(input, { victim, by: moved, on, free });
-  if (taken < given) return null;
-  // Taking back would lose more than it wins back.
-  const [from] = attackerSquares(input.after, square, them);
-  const taker = from && input.after.get(from);
-  if (taker && exchangeGain(input.after, square, them) === 0)
-    return said(oneOf(facts.retakeCosts(victim, on, taker), move), 'hanging');
-  // Ahead, trade pieces, not pawns.
-  const ahead = victim.role !== 'pawn' && materialBalance(before, me) >= AHEAD;
-  return said(oneOf(facts.trades(victim, ahead), move));
+  if (free || taken > given)
+    return wonBackFact(input, victim, on) ?? gainedFact(input, { victim, by: moved, on, free });
+  return taken < given ? null : evenFact(input, square, victim, on);
 }

@@ -15,21 +15,23 @@ import { checkers, isDefended } from '#page/review/chess/rays.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import { moveToken, squareToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
+import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { bestFact, bestReason, missFact } from './best-fact.ts';
 import { takesReason } from './which-one.ts';
 import type { FactInput, Findings } from './fact.ts';
 import type { Reason } from './idea.ts';
-import { bestGainFact, lossFact, mateLine } from './line-facts.ts';
+import { bestGainFact, endsAhead, lossFact, mateLine } from './line-facts.ts';
 import { reasonMarks, withMove } from './drawing.ts';
 import { planOf, watched } from './plan.ts';
 import { type Fact, oneOf, said } from './said.ts';
 import { hangingMarks, mateMarks } from './tactic-marks.ts';
+import { goesBackFact } from './tempo-fact.ts';
 import { letsThrough } from './threat-facts.ts';
 
 // What an error did: the piece it left, the mate it let in or missed, the
 // material it gave, the reply it lets in, the move to play instead.
 
-const THREATENED: ReadonlySet<MoveClass> = new Set<MoveClass>(['mistake', 'blunder']);
+const THREATENED: ReadonlySet<MoveClass> = new Set<MoveClass>(['inaccuracy', 'mistake', 'blunder']);
 
 /** Whether the side of `sign` has a mate on the board. */
 export const mates = (record: PositionRecord, sign: number): boolean =>
@@ -92,10 +94,17 @@ function mateFact(input: FactInput): Fact | null {
   return null;
 }
 
-/** What the reply does: what it takes, the plan to watch out for, its check. */
+// What a reply takes is the error's point if its side keeps it: an inaccuracy
+// that allows a capture often only allows a trade, or a sacrifice that the
+// error's mover takes back.
+const keeps = (move: MoveVerdict, side: Color): boolean =>
+  move.moveClass !== 'inaccuracy' || endsAhead(move, side);
+
+/** What the reply does: what it takes (see `keeps`), the plan to watch out for, its check. */
 function replyReason({ move, me, them, after }: FactInput, uci: string): Reason | null {
   const taken = pieceOn(after, uci.slice(2, 4));
-  if (taken?.color === me) return takesReason(after, uci.slice(2, 4), taken);
+  if (taken?.color === me)
+    return keeps(move, them) ? takesReason(after, uci.slice(2, 4), taken) : null;
   const san = sanOf(move.position.fen, uci);
   const plan = planOf({
     color: them,
@@ -199,5 +208,7 @@ export function errorFindings(input: FactInput): Findings {
   const better = gain ?? bestFact(input);
   const reply = threatFact(input);
   if (reply?.leads) return { fact: reply.fact, followUp: better };
+  const back = goesBackFact(input);
+  if (back !== null) return { fact: back, followUp: better };
   return { fact: better, followUp: reply?.fact ?? null };
 }

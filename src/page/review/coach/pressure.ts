@@ -10,6 +10,7 @@ import {
   type Square,
   squareCoords,
 } from '#shared/chess/index.ts';
+import { exchangeGain } from '#page/review/chess/material.ts';
 import {
   between,
   firstPiece,
@@ -149,24 +150,37 @@ function threatened(board: Board, square: Square, to: Square): boolean {
   return mover.role !== 'king' && PIECE_VALUES[piece.role] > PIECE_VALUES[mover.role];
 }
 
+/** A pawn the move attacks: `outnumbered` when defended, but by fewer than attack it. */
+export interface PawnTarget {
+  readonly square: Square;
+  readonly outnumbered: boolean;
+}
+
 /**
- * A pawn of the other side's that the piece on `to` is the first to attack,
- * and nothing defends: a threat only if that piece can't be taken first.
+ * A pawn of the other side's that the piece on `to` newly threatens: the first
+ * to attack it with nothing defending it, or one attacker more than its
+ * defenders can hold off. A threat only if that piece can't be taken first.
  */
-export function loosePawnOf(before: Board, after: Board, to: Square): Square | null {
+export function pawnTargetOf(before: Board, after: Board, to: Square): PawnTarget | null {
   const mover = after.get(to);
   if (!mover || isInBadSpot(after, to)) return null;
   const them = opposite(mover.color);
-  const loose = (square: Square): boolean => {
+  const target = (square: Square): PawnTarget | null => {
     const piece = after.get(square);
-    return (
-      piece?.role === 'pawn' &&
-      piece.color === them &&
-      attackers(after, square, them).length === 0 &&
-      attackers(before, square, mover.color).length === 0
-    );
+    if (piece?.role !== 'pawn' || piece.color !== them) return null;
+    const defended = attackers(after, square, them).length > 0;
+    if (!defended && attackers(before, square, mover.color).length === 0)
+      return { square, outnumbered: false };
+    const wins = exchangeGain(after, square, mover.color) > 0;
+    return defended && wins && exchangeGain(before, square, mover.color) === 0
+      ? { square, outnumbered: true }
+      : null;
   };
-  return attackedSquares(after, to).find(loose) ?? null;
+  for (const square of attackedSquares(after, to)) {
+    const found = target(square);
+    if (found) return found;
+  }
+  return null;
 }
 
 /** The squares of `color`'s rooks. */

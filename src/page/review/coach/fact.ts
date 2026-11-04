@@ -49,7 +49,12 @@ export interface FactInput {
   readonly theirs: boolean;
 }
 
-const PUNISHERS: ReadonlySet<MoveClass> = new Set<MoveClass>(['brilliant', 'great', 'best']);
+const PUNISHERS: ReadonlySet<MoveClass> = new Set<MoveClass>([
+  'brilliant',
+  'great',
+  'best',
+  'excellent',
+]);
 const PUNISHED: ReadonlySet<MoveClass> = new Set<MoveClass>(['mistake', 'blunder', 'miss']);
 
 /** Whether the move punishes the opponent's error just before it. */

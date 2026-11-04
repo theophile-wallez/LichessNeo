@@ -14,8 +14,14 @@ export function tacticPlansEn(
   'chases' | 'attacksPawn' | 'pins' | 'discovery' | 'fileBattery' | 'diagonalBattery'
 > {
   return {
-    attacksPawn: (pawn, square) => {
+    attacksPawn: (pawn, square, outnumbered) => {
       const named = `${pieceName(pawn)} on ${squareToken(square)}`;
+      if (outnumbered)
+        return [
+          `The ${named} is attacked more times than it's defended.`,
+          `Pressure on the ${named}: more attackers than defenders.`,
+          `One attacker too many for the ${named}.`,
+        ];
       return [
         `That attacks the undefended ${named}.`,
         `The ${named} is under attack, and nothing defends it.`,

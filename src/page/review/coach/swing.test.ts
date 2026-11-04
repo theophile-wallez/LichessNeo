@@ -6,6 +6,7 @@ import {
   finalNet,
   gives,
   materialBalance,
+  netWithin,
   securedSwing,
   worthSaying,
 } from './swing.ts';
@@ -16,6 +17,14 @@ const line = (fen: string, moves: string) => playLine(fen, moves.split(' '));
 const FORK = 'r3k3/8/8/3N4/8/8/8/4K3 w - - 0 1';
 // A bishop for a knight on d5, the pawn taking back.
 const TRADE = '4k3/8/4p3/3n4/8/5B2/8/4K3 w - - 0 1';
+
+describe('netWithin', () => {
+  it('is what a side is ahead where the line last settles within the plies given', () => {
+    const fork = line(FORK, 'd5c7 e8d7 c7a8 d7c8');
+    expect(netWithin(fork, 'white', 2)).toBe(0);
+    expect(netWithin(fork, 'white', 3)).toBe(5);
+  });
+});
 
 describe('securedSwing', () => {
   it('is what a side takes once the trades are over', () => {
@@ -33,6 +42,14 @@ describe('securedSwing', () => {
     const pawns = '4k3/8/8/3p4/4P3/8/p7/4K3 w - - 0 1';
     expect(securedSwing(line(pawns, 'e4d5 e8e7'), 'white')?.square).toBe('[[s:d5]]');
     expect(securedSwing(line(FORK, 'd5c7 e8d7 c7a8 d7c8'), 'white')?.square).toBeNull();
+  });
+
+  it('names no square the piece won came to in the line, another piece there now', () => {
+    // Bxg3+ Rxg3 Qxg3: the rook is taken on g3, where the knight stands.
+    const knight = '3k4/8/3b4/8/8/5qNR/8/R3K3 b - - 0 1';
+    const won = securedSwing(line(knight, 'd6g3 h3g3 f3g3 e1d1'), 'black');
+    expect(won?.won).toEqual([{ role: 'rook', color: 'white' }]);
+    expect(won?.square).toBeNull();
   });
 
   it('leaves out a trade of pieces of the same worth', () => {

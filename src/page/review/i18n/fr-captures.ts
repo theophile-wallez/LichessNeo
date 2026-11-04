@@ -17,11 +17,24 @@ type CaptureSentences = Pick<
   | 'takesBack'
   | 'winsForFree'
   | 'retakeCosts'
+  | 'winsBack'
   | 'winsMaterial'
   | 'givenBack'
   | 'compensation'
   | 'trades'
 >;
+
+// Material a side behind takes back, level with the other again or not yet.
+const winsBackFr: FactSentences['winsBack'] = (piece, square, level) =>
+  level
+    ? [
+        `De quoi récupérer ${indefiniteOn(piece, square)} : le matériel est de nouveau égal.`,
+        `Matériel rétabli, ${indefiniteOn(piece, square)} récupéré${agreement(piece)}.`,
+      ]
+    : [
+        `De quoi récupérer ${indefiniteOn(piece, square)}.`,
+        `${capitalize(indefiniteOn(piece, square))} récupéré${agreement(piece)}.`,
+      ];
 
 export function capturesFr(viewer: Viewer): CaptureSentences {
   const the = (piece: Piece): string => owned(viewer, piece);
@@ -41,6 +54,7 @@ export function capturesFr(viewer: Viewer): CaptureSentences {
       `De quoi gagner ${indefiniteOn(piece, square)} : reprendre coûterait ${the(defender)}.`,
       `${capitalize(indefiniteOn(piece, square))} gagné${agreement(piece)}, car reprendre perd ${the(defender)}.`,
     ],
+    winsBack: winsBackFr,
     winsMaterial: (won, given, square) => [
       `De quoi gagner ${indefiniteOn(won, square)} contre ${indefinite(given)}.`,
       `${capitalize(indefiniteOn(won, square))} contre ${indefinite(given)} : un bon échange.`,

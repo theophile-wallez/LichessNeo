@@ -10,6 +10,7 @@ import { type Fact, oneOf } from './said.ts';
 import {
   finalNet,
   gives,
+  netWithin,
   materialBalance,
   securedSwing,
   type Swing,
@@ -88,6 +89,12 @@ const PUNISHED_WITHIN = 6;
 const BEST_WINS_WITHIN = 5;
 const MOVE_WINS_WITHIN = 3;
 
+/** Whether the error's line leaves `side` material ahead, in time to be its punishment. */
+export function endsAhead(move: MoveVerdict, side: Color): boolean {
+  const played = playLine(move.previousPosition.fen, [move.uci, ...(move.after.line ?? [])]);
+  return netWithin(played, side, PUNISHED_WITHIN) >= 1;
+}
+
 /**
  * After an error, the line that wins the opponent material the best move kept;
  * `threatened` when it's what the opponent threatened before the move.
@@ -96,7 +103,8 @@ export function lossFact({ move, facts, them }: LineFactInput, threatened = fals
   const lines = errorLines(move);
   const won = lines && securedSwing(lines.played, them);
   if (!lines || !won || !worthSaying(won) || won.plies > PUNISHED_WITHIN) return null;
-  const gap = won.net - finalNet(lines.best, them);
+  // Over the same moves: what the best line wins later is no excuse for losing it now.
+  const gap = won.net - netWithin(lines.best, them, PUNISHED_WITHIN);
   if (gap < 1 || !scoreDrops(move, gap) || gives(lines.played, move.color, [1, won.plies]))
     return null;
   const material = facts.material(won);

@@ -14,8 +14,14 @@ export function tacticPlansFr(
   'chases' | 'attacksPawn' | 'pins' | 'discovery' | 'fileBattery' | 'diagonalBattery'
 > {
   return {
-    attacksPawn: (pawn, square) => {
+    attacksPawn: (pawn, square, outnumbered) => {
       const named = `${pieceName(pawn)} ${squareToken(square)}`;
+      if (outnumbered)
+        return [
+          `Le ${named} est plus attaqué que défendu.`,
+          `Pression sur le ${named} : plus d’attaquants que de défenseurs.`,
+          `Un attaquant de trop pour le ${named}.`,
+        ];
       return [
         `Ça attaque le ${named}, que rien ne défend.`,
         `Le ${named} est attaqué, et rien ne le défend.`,

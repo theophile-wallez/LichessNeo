@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { type Analysed, playedBetween } from '#page/review/fixtures/played.ts';
+import { type Analysed, played, playedBetween, record } from '#page/review/fixtures/played.ts';
 import { en } from '#page/review/i18n/en.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { toRecord } from '#page/review/engine/record.ts';
-import { findings } from './fact.ts';
+import { findings, punishes } from './fact.ts';
 import { passedFen } from './threat.ts';
 
 // What a good move is said to do, read off real games' positions and the
@@ -40,6 +40,29 @@ describe('a move that punishes an error', () => {
     const move = playedBetween([24, mistake, fork], 'g5f7', error);
     expect(findings(move, en).fact?.theme).toBe('fork');
     expect(en.facts.punishesAtOnce('black')).not.toContain(textOf(move));
+  });
+});
+
+describe('a move a hair short of the engine’s', () => {
+  it('punishes an error too', () => {
+    // 1…f6?, and 2.Nf3 rather than the engine's 2.d4.
+    const error = played({
+      fen: 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1',
+      uci: 'f7f6',
+      ply: 2,
+      before: record(52, ['e7e5']),
+      after: record(65, ['d2d4']),
+    });
+    const move = played({
+      fen: 'rnbqkbnr/ppppp1pp/5p2/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2',
+      uci: 'g1f3',
+      ply: 3,
+      before: record(65, ['d2d4']),
+      after: record(64.8, ['e7e5']),
+      previousMove: error,
+    });
+    expect([error.moveClass, move.moveClass]).toEqual(['mistake', 'excellent']);
+    expect(punishes(move)).toBe(true);
   });
 });
 

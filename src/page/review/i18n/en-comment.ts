@@ -90,7 +90,7 @@ function matesEn(viewer: Viewer): MateSentences {
 // What an error lets the opponent do: take a piece, fork, play a move.
 type LossSentences = Pick<
   FactSentences,
-  'leftUndefended' | 'answersAndWins' | 'allowsFork' | 'canPlay'
+  'leftUndefended' | 'answersAndWins' | 'allowsFork' | 'goesBack' | 'canPlay'
 >;
 
 function lossesEn(viewer: Viewer): LossSentences {
@@ -114,6 +114,11 @@ function lossesEn(viewer: Viewer): LossSentences {
       `That allows ${reply}, a fork of ${pairOf(viewer, first, second)}.`,
       `Now ${reply} forks ${pairOf(viewer, first, second)}.`,
       `That walks into ${reply}, forking ${pairOf(viewer, first, second)}.`,
+    ],
+    goesBack: (piece, square, reply) => [
+      `After ${reply}, ${the(piece)} is best off going back to ${square}: time lost.`,
+      `Time lost: after ${reply}, ${the(piece)} heads straight back to ${square}.`,
+      `${reply}, and ${the(piece)} goes back to ${square}: a wasted tempo.`,
     ],
     canPlay: ({ side, reply, why, played, next }) => {
       const name = party(side).name;

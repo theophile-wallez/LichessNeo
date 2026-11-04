@@ -51,8 +51,16 @@ export type Plan =
       readonly by?: Square;
       readonly undefended?: true;
     }
-  /** A pawn of the other side's on `square`, newly attacked, which nothing defends. */
-  | { readonly kind: 'attacksPawn'; readonly piece: Piece; readonly square: Square }
+  /**
+   * A pawn of the other side's on `square`, newly attacked, which nothing
+   * defends, or too little: `outnumbered`, it's attacked more than it's defended.
+   */
+  | {
+      readonly kind: 'attacksPawn';
+      readonly piece: Piece;
+      readonly square: Square;
+      readonly outnumbered?: true;
+    }
   /** A piece of the other side's newly pinned to `behind`, or `kept` pinned by the piece moved. */
   | { readonly kind: 'pins'; readonly piece: Piece; readonly behind: Piece; readonly kept?: true }
   /** The piece moved, attacked where it stood, safe where it goes. */

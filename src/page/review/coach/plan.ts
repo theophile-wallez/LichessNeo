@@ -14,7 +14,7 @@ import {
   contestsFile,
   fightsCenter,
   keptPinOf,
-  loosePawnOf,
+  pawnTargetOf,
   pressureOf,
   rookPlan,
   rooksConnected,
@@ -154,11 +154,15 @@ export function planOf(play: Play): Plan | null {
   );
 }
 
-// A pawn left hanging is the move's point only when it has no other.
+// A pawn left hanging, or outnumbered, is the move's point only when it has no other.
 function loosePawnPlan({ before, after }: Play, to: Square): Plan | null {
-  const pawn = loosePawnOf(before, after, to);
-  const piece = pawn && after.get(pawn);
-  return pawn && piece ? { kind: 'attacksPawn', piece, square: pawn } : null;
+  const target = pawnTargetOf(before, after, to);
+  const piece = target && after.get(target.square);
+  if (!target || !piece) return null;
+  const { square, outnumbered } = target;
+  return outnumbered
+    ? { kind: 'attacksPawn', piece, square, outnumbered }
+    : { kind: 'attacksPawn', piece, square };
 }
 
 // The tactics a move may set up while it defends a piece of its own.
@@ -191,7 +195,8 @@ export function reasonOf(play: Play): Reason | null {
 /** The ways to say a plan. */
 export function planWays(plan: Plan, sentences: PlanSentences): Ways {
   if (isPlain(plan)) return sentences[plan.kind];
-  if (plan.kind === 'attacksPawn') return sentences.attacksPawn(plan.piece, plan.square);
+  if (plan.kind === 'attacksPawn')
+    return sentences.attacksPawn(plan.piece, plan.square, plan.outnumbered === true);
   if (plan.kind === 'chases' || plan.kind === 'guards')
     return sentences[plan.kind](plan.piece, plan.square ?? null);
   if ('piece' in plan && plan.kind !== 'pins') return sentences[plan.kind](plan.piece);

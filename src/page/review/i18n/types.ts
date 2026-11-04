@@ -274,11 +274,10 @@ export interface PlanSentences {
   readonly center: Ways;
   readonly fightsCenter: Ways;
   readonly supportsCenter: Ways;
-  /** A piece attacked, which has to move. */
   /** A piece attacked, on `square` when its side has more than one like it. */
   readonly chases: (piece: Piece, square: string | null) => Ways;
-  /** A pawn attacked that nothing defends. */
-  readonly attacksPawn: (pawn: Piece, square: Square) => Ways;
+  /** A pawn attacked that nothing defends, or that more attack than defend. */
+  readonly attacksPawn: (pawn: Piece, square: Square, outnumbered: boolean) => Ways;
   readonly pins: (piece: Piece, behind: Piece) => Ways;
   /** The piece moved, out of danger. */
   readonly saves: (piece: Piece) => Ways;
@@ -348,6 +347,8 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly winsForFree: (piece: Piece, square: string | null) => Ways;
   /** A piece taken in a trade the other side can't finish: taking back loses `defender`. */
   readonly retakeCosts: (piece: Piece, square: string | null, defender: Piece) => Ways;
+  /** A piece taken by a side behind in material, `level` with it now. */
+  readonly winsBack: (piece: Piece, square: string | null, level: boolean) => Ways;
   /** A piece taken for one worth less, on `square` when the side had more than one. */
   readonly winsMaterial: (won: Piece, given: Piece, square: string | null) => Ways;
   /** A piece taken, on `square` when there were more, whose worth `side` wins back: said plainly. */
@@ -361,6 +362,8 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly forks: (first: Piece, second: Piece) => Ways;
   readonly missedFork: (best: string, first: Piece, second: Piece) => Ways;
   readonly allowsFork: (reply: string, first: Piece, second: Piece) => Ways;
+  /** A piece that, after `reply`, best goes back to `square`, where the move took it from. */
+  readonly goesBack: (piece: Piece, square: string, reply: string) => Ways;
   readonly canPlay: (allowed: AllowedReply) => Ways;
 }
 

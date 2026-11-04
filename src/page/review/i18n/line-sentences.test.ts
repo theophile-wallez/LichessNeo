@@ -202,11 +202,27 @@ describe('a quiet move’s plan', () => {
       'contestait la colonne semi-ouverte',
       'préparait une batterie avec ta [[p:wr]]tour sur la colonne ouverte et attaquait le [[p:bp]]pion [[s:a7]], que rien ne défendait',
     ]);
-    expect(en.facts.attacksPawn(black('pawn'), 'a7')).toContain(
+    expect(en.facts.attacksPawn(black('pawn'), 'a7', false)).toContain(
       'That attacks the undefended [[p:bp]]pawn on [[s:a7]].',
     );
-    expect(fr.facts.attacksPawn(black('pawn'), 'a7')).toContain(
+    expect(fr.facts.attacksPawn(black('pawn'), 'a7', false)).toContain(
       'Le [[p:bp]]pion [[s:a7]] est en prise : rien ne le défend.',
+    );
+    const piled = {
+      kind: 'attacksPawn',
+      piece: black('pawn'),
+      square: 'f7',
+      outnumbered: true,
+    } as const;
+    expect(english('white').facts.why(piled)).toBe('piling up on the [[p:bp]]pawn on [[s:f7]]');
+    expect(french('white').facts.why(piled)).toBe(
+      's’en prenait au [[p:bp]]pion [[s:f7]], trop peu défendu',
+    );
+    expect(en.facts.attacksPawn(black('pawn'), 'f7', true)).toContain(
+      'Pressure on the [[p:bp]]pawn on [[s:f7]]: more attackers than defenders.',
+    );
+    expect(fr.facts.attacksPawn(black('pawn'), 'f7', true)).toContain(
+      'Le [[p:bp]]pion [[s:f7]] est plus attaqué que défendu.',
     );
     expect(en.facts.openFile(false, true)).toContain('That contests the open file.');
     expect(fr.facts.openFile(false, true)).toContain('Ça conteste la colonne ouverte.');

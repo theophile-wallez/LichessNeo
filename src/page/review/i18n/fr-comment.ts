@@ -92,7 +92,7 @@ function matesFr(viewer: Viewer): MateSentences {
 // What an error lets the opponent do: take a piece, fork, play a move.
 type LossSentences = Pick<
   FactSentences,
-  'leftUndefended' | 'answersAndWins' | 'allowsFork' | 'canPlay'
+  'leftUndefended' | 'answersAndWins' | 'allowsFork' | 'goesBack' | 'canPlay'
 >;
 
 function lossesFr(viewer: Viewer): LossSentences {
@@ -117,6 +117,11 @@ function lossesFr(viewer: Viewer): LossSentences {
       `Ça permet ${reply}, une fourchette sur ${both(first, second)}.`,
       `Désormais ${reply} fait une fourchette sur ${both(first, second)}.`,
       `Ça tombe dans ${reply}, une fourchette sur ${both(first, second)}.`,
+    ],
+    goesBack: (piece, square, reply) => [
+      `Après ${reply}, ${the(piece)} n’a rien de mieux que de revenir en ${square} : du temps perdu.`,
+      `Du temps perdu : après ${reply}, ${the(piece)} retourne aussitôt en ${square}.`,
+      `${reply}, et ${the(piece)} repart en ${square} : un temps de perdu.`,
     ],
     canPlay: ({ side, reply, why, played, next: capture }) => {
       const player = party(side);

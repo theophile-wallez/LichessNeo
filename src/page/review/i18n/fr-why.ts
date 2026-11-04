@@ -48,8 +48,7 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string, tense: Ten
       ? `${tense('attaquait', 'attaque')} ${piece} sans défense${on}`
       : `${tense('gagnait', 'gagne')} un tempo sur ${piece}${on}`;
   }
-  if (reason.kind === 'attacksPawn')
-    return `${tense('attaquait', 'attaque')} le ${pieceName(reason.piece)} ${squareToken(reason.square)}, que rien ne ${tense('défendait', 'défend')}`;
+  if (reason.kind === 'attacksPawn') return pawnWhy(reason, tense);
   if (reason.kind === 'pins' && reason.kept)
     return `${tense('gardait', 'garde')} ${piece} cloué${agreement(reason.piece)} sur ${bare(reason.behind)}`;
   if (reason.kind === 'pins')
@@ -59,6 +58,16 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string, tense: Ten
     return `${tense('protégeait', 'protège')} ${piece}${reason.square ? ` en ${reason.square}` : ''}`;
   if (reason.kind === 'centralizes') return `${tense('centralisait', 'centralise')} ${piece}`;
   return takesWhy(reason, piece, tense);
+}
+
+function pawnWhy(
+  { piece, square, outnumbered }: Extract<Reason, { kind: 'attacksPawn' }>,
+  tense: Tense,
+): string {
+  const named = `le ${pieceName(piece)} ${squareToken(square)}`;
+  return outnumbered
+    ? `${tense('s’en prenait', 's’en prend')} au ${pieceName(piece)} ${squareToken(square)}, trop peu défendu`
+    : `${tense('attaquait', 'attaque')} ${named}, que rien ne ${tense('défendait', 'défend')}`;
 }
 
 // A capture, its piece by its square when it's one of several: « prend le [pion] a5 ».
