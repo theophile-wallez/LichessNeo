@@ -1,9 +1,9 @@
+import { conceptsFr } from './fr-concepts.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
 import {
   agreement,
   capitalize,
   conjugate,
-  indefinite,
   owned,
   ownedBy,
   pairOf,
@@ -13,6 +13,7 @@ import {
   putting,
   says,
 } from './fr-grammar.ts';
+import { routinesFr } from './fr-routines.ts';
 import { betterMovesFr } from './fr-better.ts';
 import { capturesFr } from './fr-captures.ts';
 import { lineFactsFr } from './fr-lines.ts';
@@ -75,11 +76,21 @@ function matesFr(viewer: Viewer): MateSentences {
       `Désormais ${reply} fait mat tout de suite.`,
       `Plus rien n’arrête ${reply}, et c’est mat.`,
     ],
-    wouldForceMate: (best, moves) => [
-      `${best} forçait le mat en ${moves}.`,
-      `Un mat en ${moves} était là, à commencer par ${best}.`,
-      `${best} menait à un mat forcé en ${moves}.`,
-    ],
+    wouldForceMate: (best, line, moves) => {
+      if (line !== null)
+        return [`Un mat forcé était là : ${line}.`, `Le mat était sur l’échiquier : ${line}.`];
+      return moves === null
+        ? [
+            `${best} forçait le mat.`,
+            `Un mat forcé était là, à commencer par ${best}.`,
+            `${best} menait à un mat forcé.`,
+          ]
+        : [
+            `${best} forçait le mat en ${moves}.`,
+            `Un mat en ${moves} était là, à commencer par ${best}.`,
+            `${best} menait à un mat forcé en ${moves}.`,
+          ];
+    },
     mateFollows: line => [`Le mat suit de force : ${line}.`, `Le mat est en route : ${line}.`],
     mateUnstoppable: line => [
       `Plus rien n’arrête le mat : ${line}.`,
@@ -214,32 +225,6 @@ function goodMovesFr(viewer: Viewer): GoodMoveSentences {
 }
 
 // What a routine move does: castle, promote, check.
-type RoutineSentences = Pick<FactSentences, 'castles' | 'promotes' | 'checkForces'>;
-
-function routinesFr(viewer: Viewer): RoutineSentences {
-  return {
-    promotes: piece => [
-      `Le pion devient ${indefinite(piece)}.`,
-      `Le pion atteint la dernière rangée et devient ${indefinite(piece)}.`,
-      `Promotion : le pion se transforme en ${indefinite(piece)}.`,
-    ],
-    castles: [
-      'Le roi est à l’abri, et la tour entre en jeu.',
-      'Le roque met le roi à l’abri et prépare la tour à l’action.',
-      'Le roi se met à l’abri, et la tour entre en jeu.',
-      'Roque : un roi en sécurité, une tour prête à jouer.',
-    ],
-    checkForces: color => {
-      const checked = partyOf(viewer, color);
-      return [
-        `L’échec ${putting(checked, 'force')} à réagir.`,
-        `Échec : il ${putting(checked, 'oblige')} à répondre.`,
-        `Échec, et ${checked.subject} ${conjugate(checked, 'dois', 'doit', 'doivent')} d’abord parer.`,
-      ];
-    },
-  };
-}
-
 export const factsFr = (viewer: Viewer): FactSentences => ({
   ...matesFr(viewer),
   ...lossesFr(viewer),
@@ -248,6 +233,7 @@ export const factsFr = (viewer: Viewer): FactSentences => ({
   ...capturesFr(viewer),
   ...betterMovesFr(viewer),
   ...lineFactsFr(viewer),
+  ...conceptsFr(viewer),
   ...plansFr(viewer),
   ...pinsFr(viewer),
 });

@@ -9,20 +9,28 @@ import type { MoveClass } from './classes.ts';
 // Hugeicons for the good tiers (a star, a thumb up, a tick: told apart at a
 // glance), lines for the book and a slashed circle for a miss.
 
-/** One path of a glyph: its `d`, stroked, or filled when solid; `icon` when in Hugeicons' 24-unit grid. */
+/**
+ * One path of a glyph: its `d`, stroked, or filled when solid; `icon` when in
+ * Hugeicons' 24-unit grid, raised by `lift` units of it.
+ */
 export interface GlyphPath {
   readonly path: string;
   readonly solid: boolean;
   readonly icon?: boolean;
+  readonly lift?: number;
 }
 
 const stroke = (path: string): GlyphPath => ({ path, solid: false });
 
 /** A Hugeicon's paths, in its own grid: the icon's markup scales them into the box. */
-const iconPaths = (icon: HugeIcon, solid = false): GlyphPath[] =>
+const iconPaths = (icon: HugeIcon, { solid = false, lift = 0 } = {}): GlyphPath[] =>
   icon.flatMap(([tag, { d }]) =>
-    tag === 'path' && typeof d === 'string' ? [{ path: d, solid, icon: true }] : [],
+    tag === 'path' && typeof d === 'string' ? [{ path: d, solid, icon: true, lift }] : [],
   );
+
+// The star's box is centered, but its two wide feet put its weight lower: its
+// centroid is 0.93 units below the middle, so it's raised by that to look centered.
+const STAR_LIFT = 0.93;
 
 const round = (value: number): number => Math.round(value * 100) / 100;
 
@@ -50,7 +58,7 @@ export const CLASS_GLYPHS: Readonly<Record<MoveClass, readonly GlyphPath[]>> = {
   brilliant: [exclamation(7.2), exclamation(12.8)],
   great: [exclamation(10)],
   book: [stroke('M5.6 6.4h8.8M5.6 10h8.8M5.6 13.6h8.8')],
-  best: iconPaths(StarIcon, true),
+  best: iconPaths(StarIcon, { solid: true, lift: STAR_LIFT }),
   excellent: iconPaths(ThumbsUpIcon),
   good: iconPaths(Tick02Icon),
   inaccuracy: [question(7.6, 2.3), exclamation(13.6)],

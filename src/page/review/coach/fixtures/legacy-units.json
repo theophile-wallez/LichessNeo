@@ -1776,7 +1776,7 @@
       "w",
       0,
       "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       4,
@@ -1792,7 +1792,7 @@
       "b",
       0,
       "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       4,
@@ -2068,7 +2068,7 @@
       "w",
       0,
       "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       4,
@@ -2084,7 +2084,7 @@
       "b",
       0,
       "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       4,
@@ -3156,7 +3156,7 @@
       "w",
       0,
       "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       7,
@@ -3172,7 +3172,7 @@
       "b",
       0,
       "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       7,
@@ -3384,7 +3384,7 @@
       "w",
       0,
       "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       7,
@@ -3400,7 +3400,7 @@
       "b",
       0,
       "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       7,
@@ -3502,7 +3502,7 @@
       "w",
       0,
       "White had a mate in 3; now it’s only a slight edge.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient un mat en 3 : il ne leur reste plus qu’un léger avantage."
     ],
     [
       8,
@@ -3518,7 +3518,7 @@
       "b",
       0,
       "White had a mate in 3; now it’s only a slight edge.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient un mat en 3 : il ne leur reste plus qu’un léger avantage."
     ],
     [
       8,
@@ -3566,7 +3566,7 @@
       "w",
       0,
       "White had a mate in 3; now it’s only a winning position.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’une position gagnante."
+      "Les Blancs avaient un mat en 3 : il ne leur reste plus qu’une position gagnante."
     ],
     [
       8,
@@ -3582,7 +3582,7 @@
       "b",
       0,
       "White had a mate in 3; now it’s only a winning position.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’une position gagnante."
+      "Les Blancs avaient un mat en 3 : il ne leur reste plus qu’une position gagnante."
     ],
     [
       8,
@@ -3766,7 +3766,7 @@
       "w",
       0,
       "White had a mate in 3; now it’s only a slight edge.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient un mat en 3 : il ne leur reste plus qu’un léger avantage."
     ],
     [
       8,
@@ -3782,7 +3782,7 @@
       "b",
       0,
       "White had a mate in 3; now it’s only a slight edge.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient un mat en 3 : il ne leur reste plus qu’un léger avantage."
     ],
     [
       8,
@@ -3830,7 +3830,7 @@
       "w",
       0,
       "White had a mate in 3; now it’s only a winning position.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’une position gagnante."
+      "Les Blancs avaient un mat en 3 : il ne leur reste plus qu’une position gagnante."
     ],
     [
       8,
@@ -3846,7 +3846,7 @@
       "b",
       0,
       "White had a mate in 3; now it’s only a winning position.",
-      "Les Blancs avaient un mat en 3, il ne leur reste qu’une position gagnante."
+      "Les Blancs avaient un mat en 3 : il ne leur reste plus qu’une position gagnante."
     ],
     [
       8,
@@ -4012,7 +4012,7 @@
       "w",
       0,
       "Black had a mate in 2; now it’s only a slight edge.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient un mat en 2 : il ne leur reste plus qu’un léger avantage."
     ],
     [
       9,
@@ -4028,7 +4028,7 @@
       "b",
       0,
       "Black had a mate in 2; now it’s only a slight edge.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient un mat en 2 : il ne leur reste plus qu’un léger avantage."
     ],
     [
       9,
@@ -4076,7 +4076,7 @@
       "w",
       0,
       "Black had a mate in 2; now it’s only a winning position.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’une position gagnante."
+      "Les Noirs avaient un mat en 2 : il ne leur reste plus qu’une position gagnante."
     ],
     [
       9,
@@ -4092,7 +4092,7 @@
       "b",
       0,
       "Black had a mate in 2; now it’s only a winning position.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’une position gagnante."
+      "Les Noirs avaient un mat en 2 : il ne leur reste plus qu’une position gagnante."
     ],
     [
       9,
@@ -4212,7 +4212,7 @@
       "w",
       0,
       "Black had a mate in 2; now it’s only a slight edge.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient un mat en 2 : il ne leur reste plus qu’un léger avantage."
     ],
     [
       9,
@@ -4228,7 +4228,7 @@
       "b",
       0,
       "Black had a mate in 2; now it’s only a slight edge.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient un mat en 2 : il ne leur reste plus qu’un léger avantage."
     ],
     [
       9,
@@ -4276,7 +4276,7 @@
       "w",
       0,
       "Black had a mate in 2; now it’s only a winning position.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’une position gagnante."
+      "Les Noirs avaient un mat en 2 : il ne leur reste plus qu’une position gagnante."
     ],
     [
       9,
@@ -4292,7 +4292,7 @@
       "b",
       0,
       "Black had a mate in 2; now it’s only a winning position.",
-      "Les Noirs avaient un mat en 2, il ne leur reste qu’une position gagnante."
+      "Les Noirs avaient un mat en 2 : il ne leur reste plus qu’une position gagnante."
     ],
     [
       9,
@@ -4458,7 +4458,7 @@
       "w",
       0,
       "Black had a forced mate; now it’s only a clear advantage.",
-      "Les Noirs avaient un mat forcé, il ne leur reste qu’un net avantage."
+      "Les Noirs avaient un mat forcé : il ne leur reste plus qu’un net avantage."
     ],
     [
       10,
@@ -4474,7 +4474,7 @@
       "b",
       0,
       "Black had a forced mate; now it’s only a clear advantage.",
-      "Les Noirs avaient un mat forcé, il ne leur reste qu’un net avantage."
+      "Les Noirs avaient un mat forcé : il ne leur reste plus qu’un net avantage."
     ],
     [
       10,
@@ -4776,7 +4776,7 @@
       "w",
       0,
       "White had a forced mate; now it’s only a clear advantage.",
-      "Les Blancs avaient un mat forcé, il ne leur reste qu’un net avantage."
+      "Les Blancs avaient un mat forcé : il ne leur reste plus qu’un net avantage."
     ],
     [
       11,
@@ -4792,7 +4792,7 @@
       "b",
       0,
       "White had a forced mate; now it’s only a clear advantage.",
-      "Les Blancs avaient un mat forcé, il ne leur reste qu’un net avantage."
+      "Les Blancs avaient un mat forcé : il ne leur reste plus qu’un net avantage."
     ],
     [
       11,
@@ -6000,7 +6000,7 @@
       "w",
       0,
       "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       14,
@@ -6016,7 +6016,7 @@
       "b",
       0,
       "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       14,
@@ -6292,7 +6292,7 @@
       "w",
       0,
       "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       14,
@@ -6308,7 +6308,7 @@
       "b",
       0,
       "White had a winning position; now it’s only a slight edge.",
-      "Les Blancs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Blancs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       14,
@@ -6538,7 +6538,7 @@
       "w",
       0,
       "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       15,
@@ -6554,7 +6554,7 @@
       "b",
       0,
       "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       15,
@@ -6766,7 +6766,7 @@
       "w",
       0,
       "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       15,
@@ -6782,7 +6782,7 @@
       "b",
       0,
       "Black had a winning position; now it’s only a slight edge.",
-      "Les Noirs avaient une position gagnante, il ne leur reste qu’un léger avantage."
+      "Les Noirs avaient une position gagnante : il ne leur reste plus qu’un léger avantage."
     ],
     [
       15,

@@ -34,7 +34,7 @@ describe('a capture', () => {
     const move = takes(PLAY_ON);
     expect(move.moveClass).toBe('good');
     const { fact, followUp } = findings(move, en);
-    expect(en.facts.compensation(black, '[[s:c6]]', 'black')).toContain(fact?.text);
+    expect(en.facts.compensation(black, '[[s:c6]]', 'black', false)).toContain(fact?.text);
     expect(plain(followUp?.text)).toMatch(
       /\[\[m:w:Bf4\]\].*gaining a tempo on the \[\[p:br\]\]rook on \[\[s:b8\]\]/,
     );

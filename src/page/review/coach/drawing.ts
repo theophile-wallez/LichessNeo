@@ -10,11 +10,11 @@ import {
 } from '#shared/chess/index.ts';
 import type { Mark, MarkTone } from '#page/board/review-arrows.ts';
 import { forkedSquares } from '#page/review/chess/fork.ts';
-import { pinOf } from '#page/review/chess/rays.ts';
+import { between, pinOf } from '#page/review/chess/rays.ts';
 import { batteryMarks } from './battery.ts';
 import { discoveryMarks } from './discovery.ts';
 import { doubleThreatMarks } from './double-threat.ts';
-import type { Reason } from './idea.ts';
+import { isQuietReason, type QuietReason, type Reason } from './idea.ts';
 import { oppositionMarks } from './opposition.ts';
 import { pathOf, squareMarks } from './pawn-square.ts';
 import { ownRank } from './structure.ts';
@@ -123,6 +123,30 @@ function pieceMarks(reason: Reason, { after, shown }: Scene, to: Square): Mark[]
   return null;
 }
 
+// The line a slider gained, from the square the move left on.
+function openedMarks(after: Board, slider: Square, left: Square): Mark[] {
+  const squares = attackedSquares(after, slider).filter(
+    square => square === left || between(slider, square).includes(left),
+  );
+  return [{ kind: 'run', from: slider, squares, tone: 'plan' }];
+}
+
+// The marks of a king's walk, a line opened, a piece backed up, a pinned one hit.
+function quietMarks(
+  reason: QuietReason,
+  { after }: Scene,
+  [from, to]: [Square, Square],
+): Mark[] | null {
+  if (reason.kind === 'escorts')
+    return [link(to, reason.square, 'defense'), ...roadMarks(after, reason.square)];
+  if (reason.kind === 'stopsPasser') return roadMarks(after, reason.square);
+  if (reason.kind === 'opensLine') return openedMarks(after, reason.from, from);
+  if (reason.kind === 'hitsPinned') return hits(to, [reason.square], 'attack');
+  if (reason.kind !== 'backs') return null;
+  const backed = attackedOne(after, to, reason.piece);
+  return backed ? [ring(backed, 'defense')] : null;
+}
+
 /**
  * The line of a move not played, under the rest of a drawing that starts where
  * it lands: an arrow shows it only after an error.
@@ -163,5 +187,6 @@ export function reasonMarks(reason: Reason | null, scene: Scene): Mark[] | null 
   if (ON_FILE.has(reason.kind)) return runFrom(to, fileOf(to));
   if (reason.kind === 'seventhRank') return runFrom(to, rankOf(to));
   if (reason.kind === 'luft') return [{ kind: 'cells', squares: [from], tone: 'defense' }];
+  if (isQuietReason(reason)) return quietMarks(reason, scene, [from, to]);
   return pieceMarks(reason, scene, to);
 }

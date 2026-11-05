@@ -12,6 +12,7 @@ import type { Mark } from '#page/board/review-arrows.ts';
 import { boardAfter } from '#page/review/chess/line.ts';
 import { forkedBy } from '#page/review/chess/fork.ts';
 import { pieceOn } from '#page/review/chess/material.ts';
+import { playLine } from '#page/review/chess/played-line.ts';
 import { sanOf } from '#page/review/chess/notation.ts';
 import { PUNISHABLE } from '#page/review/judge/judge.ts';
 import type { FactInput } from './fact.ts';
@@ -23,6 +24,8 @@ import { reasonMarks, withMove } from './drawing.ts';
 import { reasonOf } from './plan.ts';
 import { isEndgame } from './structure.ts';
 import { type Fact, oneOf, said } from './said.ts';
+import { netAfterTrade, takeWins } from './swing.ts';
+import { sayOnce } from './told.ts';
 
 // The move that was better than the one played, and what it did: the fork it
 // made, what it took or won, the plan it followed.
@@ -48,6 +51,16 @@ function takesWith({ move, before }: FactInput, best: string, taker: Piece): Rea
     : { kind: 'takesWith', piece: taker };
 }
 
+// What the engine's capture comes to: material won, a trade taken back
+// evenly, or a sacrifice, which gives more than it takes for now.
+function takeOutcome({ move, me, before }: FactInput, best: string): 'wins' | 'trades' | 'gives' {
+  const square = parseSquare(best.slice(2, 4));
+  if (square === null) return 'wins';
+  const line = playLine(move.previousPosition.fen, move.before.line ?? [best]);
+  if (takeWins(before, square, me, line)) return 'wins';
+  return netAfterTrade(line, me) < 0 ? 'gives' : 'trades';
+}
+
 function captureReason(input: FactInput, best: string, san: string): Reason | null {
   const { move, them, before } = input;
   const target = best.slice(2, 4);
@@ -56,10 +69,22 @@ function captureReason(input: FactInput, best: string, san: string): Reason | nu
   if (taken?.color === them && taker && move.uci.slice(2, 4) === target)
     return takesWith(input, best, taker);
   const small = !taken || taken.role === 'pawn';
-  const atKing = san.includes('+') || (taken !== undefined && nextToKing(before, target, them));
+  // A pawn by the king taken and kept is said as the pawn; with check, or given back, it's the attack.
+  const near = taken !== undefined && nextToKing(before, target, them);
+  const atKing = san.includes('+') || (near && takeOutcome(input, best) !== 'wins');
   if (small && atKing && move.loss >= ATTACK_LOSS)
     return { kind: 'attacksKing', king: { role: 'king', color: them } };
-  return taken?.color === them ? takesReason(before, target, taken) : null;
+  return taken?.color === them ? takenReason(input, best, taken) : null;
+}
+
+// The piece the capture takes, the trade it is, or nothing for a sacrifice,
+// whose point is what comes after.
+function takenReason(input: FactInput, best: string, taken: Piece): Reason | null {
+  const square = parseSquare(best.slice(2, 4));
+  if (!square) return null;
+  const outcome = takeOutcome(input, best);
+  if (outcome === 'trades') return { kind: 'trades', piece: taken, square };
+  return outcome === 'wins' ? takesReason(input.before, square, taken) : null;
 }
 
 // A capture by `color`'s king, before the endgame, where kings come out and a
@@ -106,11 +131,15 @@ function beyondPlayed({ move }: FactInput, reason: Reason | null): Reason | null
   return reason.kind === 'both' && reason.first.kind === 'saves' ? reason.second : reason;
 }
 
+// Why the engine's move was better, unless a move just before said it.
+const toldWhy = (input: FactInput, reason: Reason | null): string | null =>
+  reason && sayOnce(input.told, reason, input.move.best ?? '', input.facts.why(reason));
+
 /** What the engine's move did, said after it, and drawn. */
 function whyBest(input: FactInput): { why: string | null; drawing: Mark[] | null } {
   const reason = bestReason(input);
   const told = beyondPlayed(input, reason);
-  return { why: told && input.facts.why(told), drawing: bestMarks(input, reason) };
+  return { why: toldWhy(input, told), drawing: bestMarks(input, reason) };
 }
 
 /** The better move, a fork or a capture when it was one, else what it did. */
@@ -124,7 +153,9 @@ export function bestFact(input: FactInput): Fact | null {
   }
   const target = move.best.slice(2, 4);
   const taken = pieceOn(before, target);
-  if (taken?.color === them && taken.role !== 'pawn' && move.uci.slice(2, 4) !== target)
+  const stronger =
+    taken?.color === them && taken.role !== 'pawn' && move.uci.slice(2, 4) !== target;
+  if (stronger && takeOutcome(input, move.best) === 'wins')
     return said(oneOf(facts.strongerCapture(best, taken), move));
   const { why, drawing } = whyBest(input);
   return said(
@@ -151,11 +182,13 @@ export function missFact(input: FactInput): Fact {
   const { move, facts, them, best } = input;
   if ((move.previousMove?.loss ?? 0) < PUNISHABLE)
     return said(oneOf(facts.unfinishedPunishment(them, best), move));
-  const reason = bestReason(input);
+  const found = bestReason(input);
+  // A capture the opponent takes back evenly punishes nothing.
+  const reason = found?.kind === 'trades' ? null : found;
   const tactic =
     reason?.kind === 'fork' || reason?.kind === 'doubleThreat' || reason?.kind === 'attacksKing';
   const material = tactic ? null : bestWins(input);
   const why: Reason | null = material === null ? reason : { kind: 'wins', material };
-  const text = oneOf(facts.missedPunishment(them, best, why && facts.why(why)), move);
+  const text = oneOf(facts.missedPunishment(them, best, toldWhy(input, why)), move);
   return said(text, reason?.kind === 'fork' ? 'fork' : null, bestMarks(input, reason));
 }

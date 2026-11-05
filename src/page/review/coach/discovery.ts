@@ -19,7 +19,9 @@ export function discoveryOf(
   if (was?.screen === battery.screen && was.target === battery.target) return null;
   const screen = after.get(battery.screen);
   const target = after.get(battery.target);
-  return screen && target ? { kind: 'discovery', slider, screen, target } : null;
+  // A king in front, facing the other one in an ending, uncovers nothing worth naming.
+  if (!screen || !target || screen.role === 'king') return null;
+  return { kind: 'discovery', slider, screen, target };
 }
 
 /**

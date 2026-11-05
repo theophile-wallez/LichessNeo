@@ -11,9 +11,17 @@ export function tacticPlansFr(
   the: (piece: Piece) => string,
 ): Pick<
   PlanSentences,
-  'chases' | 'attacksPawn' | 'pins' | 'discovery' | 'fileBattery' | 'diagonalBattery'
+  | 'chases'
+  | 'developsWithTempo'
+  | 'traps'
+  | 'attacksPawn'
+  | 'pins'
+  | 'discovery'
+  | 'fileBattery'
+  | 'diagonalBattery'
 > {
   return {
+    ...chasesFr(the),
     attacksPawn: (pawn, square, outnumbered) => {
       const named = `${pieceName(pawn)} ${squareToken(square)}`;
       if (outnumbered)
@@ -41,14 +49,6 @@ export function tacticPlansFr(
       `${capitalize(the(mover))} et ${the(partner)} forment une batterie braquée sur ${the(target)}.`,
       `${capitalize(the(mover))} rejoint ${the(partner)} sur la diagonale, tous deux braqués sur ${the(target)}.`,
     ],
-    chases: (piece, square) => {
-      const target = square === null ? the(piece) : `${the(piece)} en ${square}`;
-      return [
-        `${capitalize(target)} est attaqué${agreement(piece)} et doit bouger.`,
-        `Ça attaque ${target}, avec gain de temps.`,
-        `${capitalize(target)} doit bouger, avec gain de tempo.`,
-      ];
-    },
     pins: (piece, behind) => [
       `${capitalize(the(piece))} est cloué${agreement(piece)} sur ${bare(behind)}.`,
       `Un clouage : ${the(piece)} ne peut plus bouger sans exposer ${bare(behind)}.`,
@@ -60,6 +60,36 @@ export function tacticPlansFr(
         `${capitalize(the(slider))} se place derrière ${the(screen)}, braqué${agreement(slider)} sur ${the(target)} : dès qu’${subjectPronoun(screen)} bougera, ce sera ${blow}.`,
         `Une batterie se forme : ${the(slider)} derrière ${the(screen)}, sur ${the(target)}.`,
         `${capitalize(the(screen))} n’a plus qu’à bouger pour découvrir ${the(slider)} sur ${the(target)}.`,
+      ];
+    },
+  };
+}
+
+// A piece attacked, maybe with nowhere to go.
+function chasesFr(
+  the: (piece: Piece) => string,
+): Pick<PlanSentences, 'chases' | 'developsWithTempo' | 'traps'> {
+  return {
+    chases: (piece, square) => {
+      const target = square === null ? the(piece) : `${the(piece)} en ${square}`;
+      return [
+        `${capitalize(target)} est attaqué${agreement(piece)} et doit bouger.`,
+        `Ça attaque ${target}, avec gain de temps.`,
+        `Un tempo de gagné : ${target} doit bouger.`,
+      ];
+    },
+    developsWithTempo: (piece, target, square) => {
+      const hit = square === null ? the(target) : `${the(target)} en ${square}`;
+      return [
+        `Développement avec gain de temps : ${the(piece)} sort et attaque ${hit}.`,
+        `${capitalize(the(piece))} entre en jeu en gagnant un temps : ${hit} doit bouger.`,
+      ];
+    },
+    traps: (piece, square) => {
+      const target = square === null ? the(piece) : `${the(piece)} en ${square}`;
+      return [
+        `${capitalize(target)} est pris${agreement(piece)} au piège : plus aucune case sûre.`,
+        `Ça enferme ${target}, sans case de fuite.`,
       ];
     },
   };

@@ -11,7 +11,8 @@ import {
 import type { CoachContext } from '#page/review/coach/context.ts';
 import { explanation } from '#page/review/coach/explanation.ts';
 import type { Mark } from '#page/board/review-arrows.ts';
-import { findings, type Theme, themesOf } from '#page/review/coach/fact.ts';
+import { findings, ideasOf, type Theme, themesOf } from '#page/review/coach/fact.ts';
+import { freshTold, recalled } from '#page/review/coach/told.ts';
 import { type CommentPart, commentMarkup, streamFor } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
 import { forColor } from '#page/review/evaluation/score.ts';
@@ -66,12 +67,25 @@ interface Advice {
   readonly text: string;
 }
 
+// What the game's moves just before said why of: a variation's moves have no
+// comments before them to repeat.
+function recentIdeas(session: Session, move: JudgedMove): ReadonlySet<string> {
+  const moves = session.view.review?.moves ?? [];
+  if (moves[move.ply - 1] !== move) return new Set();
+  return new Set(
+    recalled(moves, move.ply).flatMap(played =>
+      played ? Array.from(ideasOf(played, session.language, threatsAround(session, played))) : [],
+    ),
+  );
+}
+
 /** The coach's comment on a move, or Explain's hint in its place. */
 export function commentOn(session: Session, input: VerdictInput): CoachComment {
   const { move, gameId, hint, timing, turning } = input;
   const { language } = session;
   const threats = threatsAround(session, move);
-  const found = findings(move, language, threats);
+  const recent = recentIdeas(session, move);
+  const found = findings(move, language, threats, freshTold(recent));
   const themes = themesOf(found);
   const note = timing && clockNote(move.moveClass, timing);
   const advice =
@@ -85,6 +99,7 @@ export function commentOn(session: Session, input: VerdictInput): CoachComment {
           opening: openingOf(session, move),
           threats,
           turning,
+          recent,
         });
   // Explain's sentences say other things.
   const drawing = hint.length > 0 ? [] : (found.fact?.drawing ?? found.followUp?.drawing ?? []);

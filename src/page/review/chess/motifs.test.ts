@@ -13,15 +13,19 @@ const piece = (color: Color, role: string) => ({ color, role });
 
 describe('lineMotif', () => {
   it('finds a knight forking the king and a rook', () => {
-    expect(motifOf('r3k3/8/8/3N4/8/8/8/4K3 w - - 0 1', 'd5c7 e8d7 c7a8')).toEqual({
+    expect(motifOf('r3k3/8/8/3N4/8/8/8/4K3 w - - 0 1', 'd5c7 e8d7 c7a8')).toMatchObject({
       kind: 'fork',
       ply: 0,
       pieces: [piece('black', 'king'), piece('black', 'rook')],
     });
   });
 
+  it('says where the pieces it hits stand at its move', () => {
+    expect(motifOf('r3k3/8/8/3N4/8/8/8/4K3 w - - 0 1', 'd5c7 e8d7 c7a8')?.at).toEqual(['e8', 'a8']);
+  });
+
   it('finds a queen pinned to its king by a cheaper bishop', () => {
-    expect(motifOf('7k/8/p4q2/8/8/2P1B3/8/6K1 w - - 0 1', 'e3d4 a6a5 d4f6')).toEqual({
+    expect(motifOf('7k/8/p4q2/8/8/2P1B3/8/6K1 w - - 0 1', 'e3d4 a6a5 d4f6')).toMatchObject({
       kind: 'pin',
       ply: 0,
       pieces: [piece('black', 'queen'), piece('black', 'king')],
@@ -29,7 +33,7 @@ describe('lineMotif', () => {
   });
 
   it('finds a pinned knight that cannot take the queen', () => {
-    expect(motifOf('5k2/p7/5n2/2b5/8/8/8/3Q1R1K w - - 0 1', 'd1h5 a7a6 h5c5')).toEqual({
+    expect(motifOf('5k2/p7/5n2/2b5/8/8/8/3Q1R1K w - - 0 1', 'd1h5 a7a6 h5c5')).toMatchObject({
       kind: 'pin',
       ply: 0,
       pieces: [piece('black', 'knight'), piece('black', 'king')],
@@ -37,7 +41,7 @@ describe('lineMotif', () => {
   });
 
   it('finds a rook skewering the king to the rook behind it', () => {
-    expect(motifOf('4r3/8/4k3/8/8/8/8/R5K1 w - - 0 1', 'a1e1 e6d6 e1e8')).toEqual({
+    expect(motifOf('4r3/8/4k3/8/8/8/8/R5K1 w - - 0 1', 'a1e1 e6d6 e1e8')).toMatchObject({
       kind: 'skewer',
       ply: 0,
       pieces: [piece('black', 'king'), piece('black', 'rook')],
@@ -45,7 +49,7 @@ describe('lineMotif', () => {
   });
 
   it('finds a knight check that opens the rook onto the queen', () => {
-    expect(motifOf('3q4/6k1/8/8/3N4/8/8/3R2K1 w - - 0 1', 'd4f5 g7g6 d1d8')).toEqual({
+    expect(motifOf('3q4/6k1/8/8/3N4/8/8/3R2K1 w - - 0 1', 'd4f5 g7g6 d1d8')).toMatchObject({
       kind: 'discoveredAttack',
       ply: 0,
       pieces: [piece('black', 'queen')],
@@ -53,7 +57,7 @@ describe('lineMotif', () => {
   });
 
   it('finds a discovered check by a knight that attacks the queen', () => {
-    expect(motifOf('4k3/3q4/8/8/4N3/8/8/4R1K1 w - - 0 1', 'e4c5 e8f8 c5d7')).toEqual({
+    expect(motifOf('4k3/3q4/8/8/4N3/8/8/4R1K1 w - - 0 1', 'e4c5 e8f8 c5d7')).toMatchObject({
       kind: 'discoveredCheck',
       ply: 0,
       pieces: [piece('black', 'king'), piece('black', 'queen')],
@@ -61,7 +65,7 @@ describe('lineMotif', () => {
   });
 
   it('names a double check before the fork it also is', () => {
-    expect(motifOf('4k3/7q/8/8/4N3/8/8/4R1K1 w - - 0 1', 'e4f6 e8d8 f6h7')).toEqual({
+    expect(motifOf('4k3/7q/8/8/4N3/8/8/4R1K1 w - - 0 1', 'e4f6 e8d8 f6h7')).toMatchObject({
       kind: 'doubleCheck',
       ply: 0,
       pieces: [piece('black', 'king'), piece('black', 'queen')],
@@ -69,7 +73,7 @@ describe('lineMotif', () => {
   });
 
   it('finds the capture of the knight that defended the bishop', () => {
-    expect(motifOf('6k1/1p6/2n5/1B2b3/8/8/8/4R1K1 w - - 0 1', 'b5c6 b7c6 e1e5')).toEqual({
+    expect(motifOf('6k1/1p6/2n5/1B2b3/8/8/8/4R1K1 w - - 0 1', 'b5c6 b7c6 e1e5')).toMatchObject({
       kind: 'capturingDefender',
       ply: 0,
       pieces: [piece('black', 'knight'), piece('black', 'bishop')],
@@ -77,7 +81,7 @@ describe('lineMotif', () => {
   });
 
   it('finds a bishop trapped on a2', () => {
-    expect(motifOf('7k/7p/8/8/8/8/bPP5/R1K5 w - - 0 1', 'b2b3 h7h6 a1a2')).toEqual({
+    expect(motifOf('7k/7p/8/8/8/8/bPP5/R1K5 w - - 0 1', 'b2b3 h7h6 a1a2')).toMatchObject({
       kind: 'trappedPiece',
       ply: 0,
       pieces: [piece('black', 'bishop')],
@@ -86,7 +90,7 @@ describe('lineMotif', () => {
 
   it('finds a rook left hanging by the move before', () => {
     const fen = '3r2k1/8/8/8/8/8/8/3Q2K1 b - - 0 1';
-    expect(motifOf(fen, 'd8d4 d1d4', opposite(fenTurn(fen)))).toEqual({
+    expect(motifOf(fen, 'd8d4 d1d4', opposite(fenTurn(fen)))).toMatchObject({
       kind: 'hangingPiece',
       ply: 1,
       pieces: [piece('black', 'rook')],

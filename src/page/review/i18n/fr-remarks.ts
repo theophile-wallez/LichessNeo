@@ -156,14 +156,14 @@ export const remarksFr: RemarkPools = {
     'Cette prise a un inconvénient caché.',
     'Toutes les prises ne sont pas bonnes.',
     'Prendre du matériel ici est risqué.',
-    'Une prise qui tient la route.',
-    'Prendre était le bon choix.',
+    'Prendre ici ouvre la porte à l’adversaire.',
+    'Une prise qui cache un piège.',
   ],
   // A won game: how to win it.
   winning: [
-    'C’est gagnant : échange les pièces et reste simple.',
+    'C’est gagnant : reste simple, sans prendre de risques.',
     'Position gagnante : la sécurité d’abord, ne laisse aucun contre-jeu.',
-    'Avec une telle avance, chaque échange rapproche la fin.',
+    'Avec une telle avance, la ligne d’arrivée est en vue.',
     'Ça gagne : garde tes pièces à l’abri et avance.',
     'Pas de précipitation : une partie gagnée se gagne coup après coup.',
   ],
@@ -174,7 +174,7 @@ export const remarksFr: RemarkPools = {
     'Quand on est derrière, on cherche le contre-jeu : l’adversaire peut encore se tromper.',
     'Rien n’est fini : complique la tâche de l’adversaire.',
     'Chaque bon coup complique la victoire de l’adversaire.',
-    'Tiens bon : la position a encore des ressources.',
+    'Tiens bon : chaque coup compte.',
   ],
   earlyQueen: [
     'Sortir la dame si tôt est risqué.',

@@ -24,7 +24,8 @@ describe('reasonOf', () => {
     const fen = 'r3qr2/1p3bkp/2n3p1/3p2P1/3N3P/1P1B4/N2Q1P2/1K1R3R w - - 1 26';
     expect(reasonOf(play(fen, 'd2b2', 'Qb2'))).toEqual({
       kind: 'both',
-      first: { kind: 'guards', piece: KNIGHT },
+      // White has two knights: the one guarded goes by its square.
+      first: { kind: 'guards', piece: KNIGHT, square: '[[s:d4]]' },
       second: {
         kind: 'discovery',
         slider: QUEEN,

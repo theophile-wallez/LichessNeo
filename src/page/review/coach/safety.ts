@@ -10,7 +10,7 @@ import {
   squareAt,
   squareCoords,
 } from '#shared/chess/index.ts';
-import { isHanging } from '#page/review/chess/material.ts';
+import { exchangeGain, isHanging } from '#page/review/chess/material.ts';
 import { between } from '#page/review/chess/rays.ts';
 import type { Plan } from './idea.ts';
 import { isPassed, ownRank } from './structure.ts';
@@ -22,11 +22,11 @@ import { whichOne } from './which-one.ts';
 
 const CENTER = new Set(['33', '34', '43', '44']);
 
-/** Whether `color`'s piece on `square`, not a pawn nor the king, could be won. */
+/** Whether `color`'s piece on `square`, not the king, could be won: a pawn when attacked more than defended. */
 function inDanger(board: Board, square: Square, color: Color): boolean {
   const piece = board.get(square);
-  if (!piece || piece.color !== color || piece.role === 'pawn' || piece.role === 'king')
-    return false;
+  if (!piece || piece.color !== color || piece.role === 'king') return false;
+  if (piece.role === 'pawn') return exchangeGain(board, square, opposite(color)) > 0;
   return isHanging(board, square, piece);
 }
 
@@ -40,10 +40,17 @@ export function safetyPlan(before: Board, after: Board, [from, to]: [Square, Squ
     .filter(
       square => inDanger(before, square, piece.color) && !inDanger(after, square, piece.color),
     )
-    .flatMap(square => after.get(square) ?? [])
-    .toSorted((first, second) => PIECE_VALUES[second.role] - PIECE_VALUES[first.role]);
+    .flatMap(square => {
+      const there = after.get(square);
+      return there ? [{ square, piece: there }] : [];
+    })
+    .toSorted((first, second) => PIECE_VALUES[second.piece.role] - PIECE_VALUES[first.piece.role]);
   const [most] = guarded;
-  return most ? { kind: 'guards', piece: most } : null;
+  if (!most) return null;
+  const which = whichOne(after, most.square, most.piece);
+  return which === null
+    ? { kind: 'guards', piece: most.piece }
+    : { kind: 'guards', piece: most.piece, square: which };
 }
 
 /**
@@ -69,6 +76,32 @@ export function pawnGuards(before: Board, after: Board, to: Square): Plan | null
     : { kind: 'guards', piece: most.piece, square: which };
 }
 
+/**
+ * A piece of its own, under attack though not lost, that a pawn's move now
+ * backs up where no pawn did: the most valuable, by its square when it's one of several.
+ */
+export function pawnBacks(before: Board, after: Board, to: Square): Plan | null {
+  const pawn = after.get(to);
+  if (!pawn) return null;
+  const them = opposite(pawn.color);
+  const backed = attackedSquares(after, to)
+    .flatMap(square => {
+      const piece = after.get(square);
+      if (piece?.color !== pawn.color || piece.role === 'pawn' || piece.role === 'king') return [];
+      const attacked = attackers(after, square, them).length > 0;
+      return attacked && !attackers(before, square, pawn.color).includes('pawn')
+        ? [{ square, piece }]
+        : [];
+    })
+    .toSorted((first, second) => PIECE_VALUES[second.piece.role] - PIECE_VALUES[first.piece.role]);
+  const [most] = backed;
+  if (!most) return null;
+  const which = whichOne(after, most.square, most.piece);
+  return which === null
+    ? { kind: 'backs', piece: most.piece }
+    : { kind: 'backs', piece: most.piece, square: which };
+}
+
 /** A rook come behind a passed pawn of its own, nothing between them. */
 export function behindPasser(after: Board, to: Square, color: Color): boolean {
   const [file] = squareCoords(to);
@@ -79,6 +112,25 @@ export function behindPasser(after: Board, to: Square, color: Color): boolean {
       squareCoords(square)[0] === file &&
       ownRank(square, color) > ownRank(to, color) &&
       isPassed(after, square, color) &&
+      between(to, square).every(step => !after.has(step)),
+  );
+}
+
+// A passed pawn worth stopping: on its fifth rank or past it.
+const RUNNING_RANK = 4;
+
+/** A rook on `to` in front of a running passed pawn of the other side's, nothing between them. */
+export function blocksPasser(after: Board, to: Square, color: Color): boolean {
+  const [file] = squareCoords(to);
+  const them = opposite(color);
+  return [...after].some(
+    ([square, piece]) =>
+      piece.role === 'pawn' &&
+      piece.color === them &&
+      squareCoords(square)[0] === file &&
+      ownRank(square, them) >= RUNNING_RANK &&
+      ownRank(square, them) < ownRank(to, them) &&
+      isPassed(after, square, them) &&
       between(to, square).every(step => !after.has(step)),
   );
 }

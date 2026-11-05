@@ -9,6 +9,7 @@ import {
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { pieceOn, PIECE_VALUES } from '#page/review/chess/material.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
+import { mateBoard, withPattern } from './mate-pattern.ts';
 import { lineOf, type LineFactInput, mateLine } from './line-facts.ts';
 import { type Fact, oneOf, said } from './said.ts';
 import { type Menace, menaceOf, stillThreatens, type Threat } from './threat.ts';
@@ -62,21 +63,32 @@ function givenUp(move: MoveVerdict): Piece | null {
   return PIECE_VALUES[piece.role] > (taken ? PIECE_VALUES[taken.role] : 0) ? piece : null;
 }
 
+/**
+ * The rook or queen a long mate starts by taking: the threat to the piece is
+ * what to see first, the mate only what losing it leads to.
+ */
+function startsByTaking({ mate, plies: [first] }: Menace): Piece | null {
+  const taken = first?.captured;
+  if (mate === null || mate <= MATE_SHOWN || !taken) return null;
+  return PIECE_VALUES[taken.role] >= PIECE_VALUES.rook ? taken : null;
+}
+
 function stopsText(input: LineFactInput, threat: Threat, menace: Menace): string | null {
   const { facts, move } = input;
   const first = lineOf(menace.plies.slice(0, 1), null);
+  // The piece that moves away from the threat, rather than its defense.
+  const escapes = menace.plies.some(
+    ply => ply.captured && ply.uci.slice(2, 4) === move.uci.slice(0, 2),
+  );
+  const piece = pieceOn(menace.plies[0]?.before ?? new Map(), move.uci.slice(0, 2));
+  if (escapes && piece && (menace.mate === null || startsByTaking(menace)))
+    return oneOf(facts.escapes(piece, first), move);
   if (menace.mate !== null) {
     const cost = givenUp(move);
     if (menace.mate > MATE_SHOWN) return oneOf(facts.stopsLongMate(menace.mate, first, cost), move);
     const line = mateLine(threat.record, threat.fen, null);
     return line && oneOf(facts.stopsMate(line, cost), move);
   }
-  // The piece that moves away from the threat, rather than its defense.
-  const escapes = menace.plies.some(
-    ply => ply.captured && ply.uci.slice(2, 4) === move.uci.slice(0, 2),
-  );
-  const piece = pieceOn(menace.plies[0]?.before ?? new Map(), move.uci.slice(0, 2));
-  if (escapes && piece) return oneOf(facts.escapes(piece, first), move);
   const material = menace.won && facts.material(menace.won);
   return material ? oneOf(facts.stopsThreat(first, material), move) : null;
 }
@@ -160,14 +172,32 @@ export function threatensFact(
   const first = menace && lineOf(menace.plies.slice(0, 1), null);
   if (!menace || !first || takenBack(move, menace)) return null;
   // A piece that could take before may still not have mated.
-  if (menace.mate !== null) {
-    if (matedAlready(move, me)) return null;
-    const mate = menace.mate === 1 ? mateLine(threat.record, threat.fen, null) : null;
-    return said(mateThreatText(input, mate ?? first, menace.mate));
-  }
+  if (menace.mate !== null && !startsByTaking(menace))
+    return matedAlready(move, me) ? null : mateThreatFact(input, threat, menace.mate, first);
   if (matesOnly || wasThere(move, menace) || stepsAway(move, menace)) return null;
-  const material = menace.won && facts.material(menace.won);
+  const material = threatenedMaterial(input, menace);
   return material ? said(oneOf(facts.threatens(first, material), move)) : null;
+}
+
+// The mate the move threatens, played out when in one, and named if it has a name.
+function mateThreatFact(
+  input: LineFactInput,
+  threat: Threat,
+  distance: number,
+  first: string,
+): Fact {
+  const { facts, them, told } = input;
+  const mate = distance === 1 ? mateLine(threat.record, threat.fen, null) : null;
+  const end = mate ? mateBoard(threat.record, threat.fen) : null;
+  const text = mateThreatText(input, mate ?? first, distance);
+  return said(withPattern(text, end, { mated: them, facts, told }));
+}
+
+/** What a threat wins, written out: the piece a long mate starts by taking, said alone. */
+function threatenedMaterial({ facts }: LineFactInput, menace: Menace): string | null {
+  const takes = startsByTaking(menace);
+  const won = takes ? { won: [takes], lost: [] } : menace.won;
+  return won && facts.material(won);
 }
 
 /** Whether an error lets through what the opponent threatened: its reply is the threat. */

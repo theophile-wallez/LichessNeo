@@ -7,7 +7,8 @@ import {
   PIECE_VALUES,
   type Square,
 } from '#shared/chess/index.ts';
-import { forkedFrom } from './fork.ts';
+import { forkedSquares } from './fork.ts';
+import { PRESSURE_DETECTORS, type PressureKind } from './motifs-pressure.ts';
 import { boardAfter } from './line.ts';
 import { type Move, retakes, type Win, winOf } from './line-win.ts';
 import type { Ply } from './played-line.ts';
@@ -37,7 +38,8 @@ export type MotifKind =
   | 'doubleCheck'
   | 'capturingDefender'
   | 'trappedPiece'
-  | 'hangingPiece';
+  | 'hangingPiece'
+  | PressureKind;
 
 export interface Motif {
   readonly kind: MotifKind;
@@ -51,6 +53,8 @@ export interface Motif {
   readonly pieces: readonly Piece[];
   /** A pinned defender's pin, which the sentence names the squares of. */
   readonly pin?: PinnedTaker;
+  /** Where the pieces stand at the motif's move, for a pressure motif to name them by. */
+  readonly at?: readonly (Square | null)[];
 }
 
 type Detector = (win: Win, i: number) => Motif | null;
@@ -64,9 +68,11 @@ const fork: Detector = ({ moves, capture, target, squares }, i) => {
   const move = moves[i];
   const at = squares[i + 1];
   if (!move || !at || i >= capture || target.role === 'pawn') return null;
-  const forked = forkedFrom(move.ply.after, move.to);
-  const hits = forked.length > 0 && attackedSquares(move.ply.after, move.to).includes(at);
-  return hits ? { kind: 'fork', ply: i, pieces: forked } : null;
+  const board = move.ply.after;
+  const forked = forkedSquares(board, move.to);
+  const pieces = forked.flatMap(square => board.get(square) ?? []);
+  const hits = pieces.length > 0 && attackedSquares(board, move.to).includes(at);
+  return hits ? { kind: 'fork', ply: i, pieces, at: forked } : null;
 };
 
 const doubleCheck: Detector = ({ moves, winner, capture, target }, i) => {
@@ -91,7 +97,9 @@ const discoveredAttack: Detector = ({ moves, capture, target }, i) => {
     return null;
   const opened = between(taking.from, taking.to).includes(move.from);
   const apart = taking.to !== move.to && taking.from !== move.to && reply.to !== taking.to;
-  return opened && apart ? { kind: 'discoveredAttack', ply: i, pieces: [target] } : null;
+  return opened && apart
+    ? { kind: 'discoveredAttack', ply: i, pieces: [target], at: [taking.to] }
+    : null;
 };
 
 /** The piece in front steps off the line, and the one behind it is taken. */
@@ -105,7 +113,9 @@ const skewer: Detector = ({ moves, capture, target }, i) => {
     inFront &&
     value(fled.ply.piece) > value(target) &&
     isInBadSpot(taking.ply.before, taking.to);
-  return found ? { kind: 'skewer', ply: i, pieces: [fled.ply.piece, target] } : null;
+  return found
+    ? { kind: 'skewer', ply: i, pieces: [fled.ply.piece, target], at: [fled.from, taking.to] }
+    : null;
 };
 
 /**
@@ -120,7 +130,7 @@ const pinnedTarget: Detector = ({ moves, capture, target, squares }, i) => {
   const behind = found && board?.get(found.behind);
   if (!board || !at || !pinner || !behind) return null;
   const won = value(pinner) < value(target) || !isDefended(board, at, target.color);
-  return won ? { kind: 'pin', ply: i, pieces: [target, behind] } : null;
+  return won ? { kind: 'pin', ply: i, pieces: [target, behind], at: [at, found.behind] } : null;
 };
 
 /**
@@ -140,7 +150,8 @@ const pinnedAttacker: Detector = ({ moves, winner, capture }, i) => {
     const onLine =
       move.to === found.pinner || between(found.pinner, found.behind).includes(move.to);
     const gains = value(moved) > value(pinned) || !isDefended(board, move.to, winner);
-    if (!onLine && gains) return { kind: 'pin', ply: i, pieces: [pinned, KING(loser)] };
+    if (!onLine && gains)
+      return { kind: 'pin', ply: i, pieces: [pinned, KING(loser)], at: [square, found.behind] };
   }
   return null;
 };
@@ -184,11 +195,11 @@ const capturingDefender: Detector = (win, i) => {
   if (i !== win.capture - 2 || !taking || !defender || !at) return null;
   const defended = attackersOn(taking.ply.before, at, opposite(win.winner)).includes(taking.to);
   if (!defended || !quietlyLeftBare(win, i)) return null;
-  return { kind: 'capturingDefender', ply: i, pieces: [defender, win.target] };
+  return { kind: 'capturingDefender', ply: i, pieces: [defender, win.target], at: [taking.to, at] };
 };
 
 /** Whether the piece on `at` has a square to go to, or a piece to take, that saves it. */
-function canEscape(board: Board, at: Square, piece: Piece): boolean {
+export function canEscape(board: Board, at: Square, piece: Piece): boolean {
   return attackedSquares(board, at).some(square => {
     const taken = board.get(square);
     if (taken?.color === piece.color) return false;
@@ -205,7 +216,7 @@ const trappedPiece: Detector = ({ moves, capture, target, squares }, i) => {
   if (i !== capture - 2 || !board || !at || role === 'pawn' || role === 'king') return null;
   if (checkers(board, target.color).length > 0 || pinOf(board, at)) return null;
   if (!isInBadSpot(board, at) || canEscape(board, at, target)) return null;
-  return { kind: 'trappedPiece', ply: i, pieces: [target] };
+  return { kind: 'trappedPiece', ply: i, pieces: [target], at: [at] };
 };
 
 /** What `color` takes along plies `from` to `to`, less what it gives. */
@@ -225,7 +236,19 @@ function hangingPiece({ moves, winner, capture, target }: Win): Motif | null {
   if (retakes(before, taking) || isDefended(taking.ply.before, taking.to, target.color))
     return null;
   if (netTaken(moves, winner, [capture + 1, capture + 3]) < 0) return null;
-  return { kind: 'hangingPiece', ply: capture, pieces: [target] };
+  return { kind: 'hangingPiece', ply: capture, pieces: [target], at: [taking.to] };
+}
+
+/** The first motif `detectors` find, at the winner's earliest move that makes one. */
+function detected(win: Win, detectors: readonly Detector[]): Motif | null {
+  for (let i = 0; i <= win.capture; i++) {
+    if (win.moves[i]?.ply.color !== win.winner) continue;
+    for (const detect of detectors) {
+      const motif = detect(win, i);
+      if (motif) return motif;
+    }
+  }
+  return null;
 }
 
 const DETECTORS: readonly Detector[] = [
@@ -250,12 +273,5 @@ const DETECTORS: readonly Detector[] = [
 export function lineMotif(plies: readonly Ply[], winner: Color, upTo: number): Motif | null {
   const win = winOf(plies, winner, upTo);
   if (!win) return null;
-  for (let i = 0; i <= win.capture; i++) {
-    if (plies[i]?.color !== winner) continue;
-    for (const detect of DETECTORS) {
-      const motif = detect(win, i);
-      if (motif) return motif;
-    }
-  }
-  return hangingPiece(win);
+  return detected(win, DETECTORS) ?? hangingPiece(win) ?? detected(win, PRESSURE_DETECTORS);
 }

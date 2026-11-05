@@ -11,7 +11,7 @@ import {
   soon,
   within,
 } from './fr-grammar.ts';
-import { motifFr } from './fr-motifs.ts';
+import { motifFr, pressureFr } from './fr-motifs.ts';
 import type { LineFacts, Viewer } from './types.ts';
 
 // The sentences read off the engine's lines: what a line wins, and the threats.
@@ -47,7 +47,7 @@ function gainsFr(viewer: Viewer): GainSentences {
     ],
     winsAlong: ({ material, line, moves }) => [
       `De quoi gagner ${material} ${soon(moves)} : ${line}.`,
-      `${capitalize(material)} à la clé ${soon(moves)} : ${line}.`,
+      `Ça empoche ${material} ${soon(moves)} : ${line}.`,
       `Le coup rapporte ${material} ${soon(moves)} : ${line}.`,
       `Ça gagne ${material} ${soon(moves)} : ${line}.`,
     ],
@@ -96,7 +96,7 @@ function mateThreatsFr(viewer: Viewer): MateThreatSentences {
         ? [
             `Ça empêche le mat, ${line}, en sacrifiant ${the(cost)}.`,
             `${given(cost)} pour parer le mat : ${line}.`,
-            `Le mat menaçait, ${line} : le parer coûte ${the(cost)}.`,
+            `Le mat menaçait avec ${line} : le parer coûte ${the(cost)}.`,
           ]
         : [
             `Le mat est paré : ${line}.`,
@@ -141,6 +141,24 @@ function mateThreatsFr(viewer: Viewer): MateThreatSentences {
 
 export const lineFactsFr = (viewer: Viewer): LineFacts => ({
   motif: motifFr(viewer),
+  pressure: pressureFr(viewer),
+  nextUp: (next, why) => [
+    `Ensuite, ${next}, qui ${why}.`,
+    `L’idée : ${next} au coup suivant, qui ${why}.`,
+    `Et après, ${next}, qui ${why}.`,
+  ],
+  inBetween: (retake, check) =>
+    check
+      ? [
+          `Un échec intermédiaire : ${retake} suit juste après.`,
+          `D’abord un échec, puis ${retake}.`,
+          `Rien ne presse pour reprendre : l’échec d’abord, puis ${retake}.`,
+        ]
+      : [
+          `Un coup intermédiaire : ${retake} suit juste après.`,
+          `Rien ne presse pour reprendre : ${retake} peut attendre un coup.`,
+          `D’abord ce coup, puis ${retake}.`,
+        ],
   material: materialFr,
   ...gainsFr(viewer),
   ...threatsFr(viewer),

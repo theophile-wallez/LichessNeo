@@ -1,122 +1,46 @@
 import type { Piece } from '#shared/chess/index.ts';
-import {
-  isLineReason,
-  isPlain,
-  type LineReason,
-  type PlainReason,
-  type Reason,
-} from '#page/review/coach/idea.ts';
-import { squareToken } from '#page/review/comment/tokens.ts';
-import { capitalize, definite, pairOf, pieceName } from './en-grammar.ts';
+import type { PassedTrait } from '#page/review/coach/passed-pawns.ts';
+import { capitalize, definite } from './en-grammar.ts';
+import { quietPlansEn } from './en-quiet-plans.ts';
 import { tacticPlansEn } from './en-tactic-plans.ts';
-import type { PlanSentences, Viewer } from './types.ts';
+import { whyEn } from './en-why.ts';
+import type { QuietPlanSentences } from './plan-types.ts';
+import type { PlanSentences, Viewer, Ways } from './types.ts';
 
-// The piece a pin holds is its own side's: named once whose they are, not twice.
-const bare = (piece: Piece): string => definite(null, piece);
-
-const PLAIN_REASONS: Readonly<Record<PlainReason, string>> = {
-  doublesRooks: 'doubling the rooks',
-  seventhRank: 'putting the rook on the seventh rank',
-  connectsRooks: 'connecting the rooks',
-  centralKing: 'bringing the king to the center',
-  center: 'taking the center',
-  fightsCenter: 'fighting for the center',
-  supportsCenter: 'supporting the center',
-  castles: 'castling the king to safety',
-  behindPasser: 'putting the rook behind the passed pawn',
-  luft: 'giving the king a square to breathe',
-  space: 'gaining space',
-  opposition: 'taking the opposition',
-  checks: 'with check',
-  discoveredCheck: 'with a discovered check',
+// A passed pawn born or pushed on, or what makes it strong.
+const PASSED: Record<PassedTrait | 'born' | 'pushed', Ways> = {
+  born: [
+    'A passed pawn is born.',
+    'That creates a passed pawn, an asset for the endgame.',
+    'A new passed pawn: a long-term trump.',
+  ],
+  pushed: [
+    'The passed pawn moves on.',
+    'The passed pawn marches on.',
+    'Passed pawns must be pushed, and this one is on its way.',
+    'The passed pawn gets closer to queening.',
+  ],
+  connected: [
+    'Two connected passed pawns: they guard each other as they march on.',
+    'Connected passed pawns, side by side: a pair that is hard to stop.',
+  ],
+  protected: [
+    'A protected passed pawn: another pawn guards it, so the king can’t take it.',
+    'The passed pawn is guarded by a pawn: a lasting trump.',
+  ],
+  outside: [
+    'An outside passed pawn, far from the other pawns: it lures the king away.',
+    'The passed pawn on the edge drags the other king away from the rest.',
+  ],
 };
-
-type PieceReason = Extract<Reason, { readonly piece: Piece }>;
-
-// A piece nothing defends isn't only chased: it's there to be taken.
-function chaseWhy(reason: Extract<Reason, { readonly kind: 'chases' }>, piece: string): string {
-  const on = reason.square ? ` on ${reason.square}` : '';
-  return reason.undefended
-    ? `attacking the undefended ${pieceName(reason.piece)}${on}`
-    : `gaining a tempo on ${piece}${on}`;
-}
-
-function pawnWhy({ piece, square, outnumbered }: Extract<Reason, { kind: 'attacksPawn' }>): string {
-  const named = `${pieceName(piece)} on ${squareToken(square)}`;
-  return outnumbered ? `piling up on the ${named}` : `attacking the undefended ${named}`;
-}
-
-function pinWhy({ kept, behind }: Extract<PieceReason, { kind: 'pins' }>, piece: string): string {
-  return kept
-    ? `keeping ${piece} pinned to ${bare(behind)}`
-    : `pinning ${piece} to ${bare(behind)}`;
-}
-
-function pieceWhy(reason: PieceReason, the: (piece: Piece) => string): string {
-  const piece = the(reason.piece);
-  if (reason.kind === 'develops') return `developing ${piece}`;
-  if (reason.kind === 'outpost') return `planting ${piece} on an outpost`;
-  if (reason.kind === 'chases') return chaseWhy(reason, piece);
-  if (reason.kind === 'attacksPawn') return pawnWhy(reason);
-  if (reason.kind === 'pins') return pinWhy(reason, piece);
-  if (reason.kind === 'saves') return `getting ${piece} out of danger`;
-  if (reason.kind === 'guards')
-    return reason.square ? `defending ${piece} on ${reason.square}` : `defending ${piece}`;
-  if (reason.kind === 'centralizes') return `centralizing ${piece}`;
-  if (reason.kind === 'takesWith')
-    return reason.square
-      ? `taking with the ${pieceName(reason.piece)} on ${reason.square} instead`
-      : `taking with ${piece} instead`;
-  if (reason.kind === 'takes' && reason.square)
-    return `taking the ${reason.square} ${pieceName(reason.piece)}`;
-  return `taking ${piece}`;
-}
-
-// An open file taken, or a battery: with the queen there already, a rook
-// lines up with it rather than taking the file.
-function lineWhy(reason: LineReason, the: (piece: Piece) => string): string {
-  if (reason.kind === 'diagonalBattery')
-    return `forming a battery with ${the(reason.partner)}, aimed at ${the(reason.target)}`;
-  const file = `the ${reason.halfOpen ? 'half-open' : 'open'} file`;
-  if (reason.kind === 'fileBattery')
-    return `forming a battery with ${the(reason.partner)} on ${file}`;
-  if (reason.kind === 'preparesBattery')
-    return `preparing a battery with ${the(reason.partner)} on ${file}`;
-  return reason.contested ? `contesting ${file}` : `taking ${file}`;
-}
-
-// What the better move did, after its name: "Better was Nf6, developing your knight."
-// A participle says a move still to come as well.
-function whyEn(viewer: Viewer): (reason: Reason) => string {
-  const the = (piece: Piece): string => definite(viewer, piece);
-  const why = (reason: Reason): string => {
-    if (isPlain(reason)) return PLAIN_REASONS[reason.kind];
-    if (reason.kind === 'both') return `${why(reason.first)} and ${why(reason.second)}`;
-    if (reason.kind === 'discovery')
-      return reason.target.role === 'king'
-        ? 'setting up a discovered check'
-        : `setting up a discovered attack on ${the(reason.target)}`;
-    if (reason.kind === 'doubleThreat')
-      return `threatening mate and ${the(reason.target)} at once, and only one can be saved`;
-    if ('piece' in reason) return pieceWhy(reason, the);
-    if (isLineReason(reason)) return lineWhy(reason, the);
-    if (reason.kind === 'passedPawn')
-      return reason.made ? 'creating a passed pawn' : 'pushing the passed pawn';
-    if (reason.kind === 'fork') return `forking ${pairOf(viewer, reason.first, reason.second)}`;
-    if (reason.kind === 'attacksKing') return `attacking ${the(reason.king)}`;
-    if (reason.kind === 'outruns') return `outrunning ${the(reason.king)}`;
-    if (reason.kind === 'entersSquare')
-      return `bringing ${the(reason.king)} into the pawn’s square`;
-    return `winning ${reason.material}`;
-  };
-  return why;
-}
 
 // What a rook's, a pawn's or the king's move does, whoever's it is.
 type PiecePlans =
   | 'develops'
   | 'outpost'
   | 'chases'
+  | 'developsWithTempo'
+  | 'traps'
   | 'attacksPawn'
   | 'pins'
   | 'saves'
@@ -128,7 +52,7 @@ type PiecePlans =
   | 'fileBattery'
   | 'diagonalBattery';
 
-const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
+const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | 'why'> = {
   openFile: (halfOpen, contested) => {
     const file = `the ${halfOpen ? 'half-open' : 'open'} file`;
     if (contested)
@@ -154,24 +78,28 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
     'A rook on the seventh: pawns and king come under fire.',
     'The rook invades the seventh rank.',
   ],
+  rooksOnSeventh: [
+    'Both rooks on the seventh: everything on that rank is under fire.',
+    'Two rooks on the seventh rank: a deadly pair.',
+  ],
+  rookLift: [
+    'The rook lifts up the third rank, ready to swing over to the king.',
+    'A rook lift: the rook climbs to the third rank to join the attack.',
+  ],
+  minorityAttack: [
+    'The minority attack: two pawns against three, to leave a weak pawn behind on the queenside.',
+    'The b-pawn goes forward: once it trades, the c-pawn left behind is a target.',
+  ],
+  philidor: [
+    'The Philidor defense: the rook holds the third rank, and checks from behind once the pawn steps up.',
+    'Textbook defense: king in front of the pawn, rook on the third rank. That’s a draw.',
+  ],
   connectsRooks: [
     'The rooks are connected now.',
     'The back rank is clear: the rooks defend each other.',
     'With the back rank clear, the rooks work together.',
   ],
-  passedPawn: made =>
-    made
-      ? [
-          'A passed pawn is born.',
-          'That creates a passed pawn, an asset for the endgame.',
-          'A new passed pawn: a long-term trump.',
-        ]
-      : [
-          'The passed pawn moves on.',
-          'The passed pawn marches on.',
-          'Passed pawns must be pushed, and this one is on its way.',
-          'The passed pawn gets closer to queening.',
-        ],
+  passedPawn: (made, trait) => PASSED[trait ?? (made ? 'born' : 'pushed')],
   centralKing: [
     'The king heads for the center, where it counts in an endgame.',
     'In the endgame the king is a fighter: it heads for the center.',
@@ -181,6 +109,10 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
     'The rook gets behind the passed pawn, to push it on.',
     'Behind the passed pawn: the best place for a rook.',
     'The rook backs the passed pawn from behind.',
+  ],
+  blocksPasser: [
+    'The rook stands in front of the passed pawn: it goes no further.',
+    'In front of the passed pawn, the rook stops it in its tracks.',
   ],
   fightsCenter: [
     'The pawn fights for the center.',
@@ -257,6 +189,7 @@ export function plansEn(viewer: Viewer): PlanSentences {
       `${capitalize(the(king))} steps closer just in time: it’s in the pawn’s square now.`,
     ],
     ...tacticPlansEn(the),
+    ...quietPlansEn(the),
     why: whyEn(viewer),
     ...BOARD_PLANS,
   };

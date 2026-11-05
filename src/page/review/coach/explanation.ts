@@ -9,6 +9,7 @@ import { oneOf, turnStep } from './said.ts';
 import { remark } from './remark.ts';
 import type { Threats } from './threat-facts.ts';
 import { toldLevel, trajectory } from './trajectory.ts';
+import { freshTold } from './told.ts';
 
 const say = (text: string, droppable = false): CommentPart => ({ text, droppable });
 
@@ -26,6 +27,8 @@ export interface MoveContext {
   readonly threats: Threats;
   /** The error the game turned on, the brief's. */
   readonly turning: boolean;
+  /** The ideas the moves just before said why of (`ideasOf`), not to say again. */
+  readonly recent: ReadonlySet<string>;
 }
 
 interface Course {
@@ -78,7 +81,7 @@ function goodComment({ move, context, all, told }: Good): CommentPart[] {
 export function explanation(
   move: MoveVerdict,
   context: CoachContext,
-  { opening, threats, turning }: MoveContext,
+  { opening, threats, turning, recent }: MoveContext,
 ): CommentPart[] {
   const { language } = context;
   if (move.moveClass === 'book')
@@ -86,7 +89,7 @@ export function explanation(
       say(remark(move, context)),
       ...(opening ? [say(oneOf(language.openingLine(opening), move), true)] : []),
     ];
-  const all = findings(move, language, threats);
+  const all = findings(move, language, threats, freshTold(recent));
   const { fact, followUp } = all;
   const found = fact?.text ?? null;
   const details = detailsOf(all);

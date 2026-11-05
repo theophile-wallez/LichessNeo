@@ -25,6 +25,13 @@ export function evaluationLevel(record: PositionRecord): number {
   return winLevel(record.whiteWinChance) - lossLevel(record.whiteWinChance);
 }
 
+/**
+ * Whether the game is decided after the move, one side winning: a pawn's
+ * shape is no news then.
+ */
+export const decided = (move: { readonly after: PositionRecord }): boolean =>
+  Math.abs(evaluationLevel(move.after)) >= 3;
+
 /** The moves to a mate, when the engine is sure of them: longer ones come out long. */
 function sureMate(record: PositionRecord): number | null {
   const moves = 'mate' in record ? Math.abs(record.mate) : 0;

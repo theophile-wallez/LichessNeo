@@ -1,12 +1,16 @@
 import type { SafeHtml } from '#shared/html.ts';
 import type { ProfileAxis } from '#page/review/judge/profile.ts';
 import type { Phase } from '#page/review/rating/phases.ts';
-import type { Reason } from '#page/review/coach/idea.ts';
 import type { Theme } from '#page/review/coach/said.ts';
-import type { MotifKind } from '#page/review/chess/motifs.ts';
-import type { Color, Piece, Square } from '#shared/chess/index.ts';
+import type { Color, Piece } from '#shared/chess/index.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import type { PracticeStrings } from './practice-types.ts';
+import type { LineFacts } from './line-types.ts';
+import type { ConceptSentences } from './concept-types.ts';
+import type { PlanSentences } from './plan-types.ts';
+
+export type { LineFacts, LineGain, MotifNamer, PressureNamer } from './line-types.ts';
+export type { PlanSentences } from './plan-types.ts';
 
 // What the review says, per language. Moves, pieces and squares go into the
 // coach's sentences as [[…]] tokens (comment/tokens.ts), already built.
@@ -209,103 +213,16 @@ export interface PinnedTake {
   readonly punish: string;
 }
 
-/** What names a motif: its kind, its move as a token, and the pieces it hits. */
-export type MotifNamer = (kind: MotifKind, move: string, pieces: readonly Piece[]) => Ways | null;
-
 /** The ways to say the same thing, of which the coach picks one per move. */
 export type Ways = readonly [string, ...string[]];
 
-/** What a line wins: the material, its moves as tokens, and how many of the winner's they are. */
 /** A piece, and its square as a token when its side has more than one like it. */
 export interface Named {
   readonly piece: Piece;
   readonly square: string | null;
 }
 
-export interface LineGain {
-  readonly material: string;
-  readonly line: string;
-  readonly moves: number;
-}
-
-/** The facts read off the engine's lines, their moves unnumbered. */
-export interface LineFacts {
-  /** "a [knight] for a [pawn]", "the exchange"; null when it's too much to say. */
-  readonly material: (material: Material) => string | null;
-  /** The tactic that wins it, after its move: "Qc7+ forks the king and the rook." */
-  readonly motif: MotifNamer;
-  /** The mate an error lets in, move by move. */
-  readonly forcesMate: (side: Color, line: string) => Ways;
-  /** What an error lets `side` win, and the line that wins it: what `side` threatened, maybe. */
-  readonly losesMaterial: (side: Color, gain: LineGain, threatened: boolean) => Ways;
-  readonly wouldHaveWon: (side: Color, gain: LineGain) => Ways;
-  /** What a move wins along its line, the move first. */
-  readonly winsAlong: (gain: LineGain) => Ways;
-  /** The threat a move stops, and what it would have won. */
-  readonly stopsThreat: (threat: string, material: string) => Ways;
-  /** A mate stopped, and the piece given up to stop it, if one is. */
-  readonly stopsMate: (line: string, cost: Piece | null) => Ways;
-  readonly stopsLongMate: (moves: number, first: string, cost: Piece | null) => Ways;
-  /** A piece that moves out of the threat's way. */
-  readonly escapes: (piece: Piece, threat: string) => Ways;
-  /** What a move threatens, were the opponent to pass. */
-  readonly threatens: (threat: string, material: string) => Ways;
-  readonly threatensMate: (threat: string, moves: number) => Ways;
-  /** A capture that threatens mate too. */
-  readonly takesAndThreatensMate: (piece: Piece, threat: string, moves: number) => Ways;
-}
-
-/** What a quiet move does for the position (coach/plan.ts). */
-export interface PlanSentences {
-  readonly develops: (piece: Piece) => Ways;
-  readonly outpost: (piece: Piece) => Ways;
-  /** A rook on a file without pawns, or `halfOpen`, the other side's only; `contested` when the other side's rook or queen is there too. */
-  readonly openFile: (halfOpen: boolean, contested: boolean) => Ways;
-  readonly doublesRooks: Ways;
-  /** `mover` lined up with `partner` on a file, `halfOpen` when the other side has pawns there. */
-  readonly fileBattery: (mover: Piece, partner: Piece, halfOpen: boolean) => Ways;
-  /** `mover` lined up with `partner` on a diagonal aimed at `target`. */
-  readonly diagonalBattery: (mover: Piece, partner: Piece, target: Piece) => Ways;
-  readonly seventhRank: Ways;
-  readonly connectsRooks: Ways;
-  /** A pawn pushed with nothing to stop it: `made` passed by the push. */
-  readonly passedPawn: (made: boolean) => Ways;
-  readonly centralKing: Ways;
-  readonly center: Ways;
-  readonly fightsCenter: Ways;
-  readonly supportsCenter: Ways;
-  /** A piece attacked, on `square` when its side has more than one like it. */
-  readonly chases: (piece: Piece, square: string | null) => Ways;
-  /** A pawn attacked that nothing defends, or that more attack than defend. */
-  readonly attacksPawn: (pawn: Piece, square: Square, outnumbered: boolean) => Ways;
-  readonly pins: (piece: Piece, behind: Piece) => Ways;
-  /** The piece moved, out of danger. */
-  readonly saves: (piece: Piece) => Ways;
-  /** A piece in danger, now defended. */
-  readonly guards: (piece: Piece, square: string | null) => Ways;
-  readonly centralizes: (piece: Piece) => Ways;
-  /** A rook behind its passed pawn. */
-  readonly behindPasser: Ways;
-  /** A square for the king off the back rank. */
-  readonly luft: Ways;
-  /** A pawn to the fifth rank. */
-  readonly space: Ways;
-  /** A king's step into the opposition. */
-  readonly opposition: Ways;
-  /** A passed pawn out of the square of `king`, which can't catch it. */
-  readonly outruns: (king: Piece) => Ways;
-  /** `king` stepping into a passed pawn's square, just in time. */
-  readonly entersSquare: (king: Piece) => Ways;
-  /** `slider` lined up behind `screen` on `target`: a discovery for `screen` to make. */
-  readonly discovery: (slider: Piece, screen: Piece, target: Piece) => Ways;
-  /**
-   * What a move did, said after it: "developing your knight", « sortait ton
-   * cavalier »; `now` for a move still to come, « sort ton cavalier ».
-   */
-  readonly why: (reason: Reason, now?: boolean) => string;
-}
-
-export interface FactSentences extends LineFacts, PlanSentences {
+export interface FactSentences extends LineFacts, PlanSentences, ConceptSentences {
   readonly checkmate: (king: Color) => Ways;
   readonly matedIn: (best: string, moves: number) => Ways;
   readonly heldOutLonger: (best: string) => Ways;
@@ -315,7 +232,8 @@ export interface FactSentences extends LineFacts, PlanSentences {
   /** A sure mate under way, and its moves after the move: for its side, then for the side mated. */
   readonly mateFollows: (line: string) => Ways;
   readonly mateUnstoppable: (line: string) => Ways;
-  readonly wouldForceMate: (best: string, moves: number) => Ways;
+  /** A mate missed: its line when short enough to be sure of, else its first move and length, if sure. */
+  readonly wouldForceMate: (best: string, line: string | null, moves: number | null) => Ways;
   /** A mate in one missed. */
   readonly mateInOne: (best: string) => Ways;
   /** A miss: `side`'s error, and `best`, which punished it, and what it did. */
@@ -340,8 +258,11 @@ export interface FactSentences extends LineFacts, PlanSentences {
   readonly pinLine: (pin: PinnedTake) => Ways;
   readonly keepsAdvantage: Ways;
   readonly holdsPosition: (side: Color) => Ways;
-  readonly promotes: (piece: Piece) => Ways;
+  /** A pawn promoted to `piece`, with `check`: a piece but the queen is an underpromotion. */
+  readonly promotes: (piece: Piece, check: boolean) => Ways;
   readonly castles: Ways;
+  /** Castled to the other wing than the other king's: the storms' race begins. */
+  readonly castlesOpposite: Ways;
   readonly takesBack: (square: string) => Ways;
   /** A piece taken with nothing taken back, on `square` when the side had more than one. */
   readonly winsForFree: (piece: Piece, square: string | null) => Ways;
@@ -354,7 +275,13 @@ export interface FactSentences extends LineFacts, PlanSentences {
   /** A piece taken, on `square` when there were more, whose worth `side` wins back: said plainly. */
   readonly givenBack: (piece: Piece, square: string | null, side: Color) => Ways;
   /** A piece taken, on `square` when there were more, for which `side` gets play: the score shows no gain. */
-  readonly compensation: (piece: Piece, square: string | null, side: Color) => Ways;
+  /** A piece won for `side`'s play; `winning`, `side` wins anyway. */
+  readonly compensation: (
+    piece: Piece,
+    square: string | null,
+    side: Color,
+    winning: boolean,
+  ) => Ways;
   readonly checkForces: (side: Color) => Ways;
   readonly littleMorePrecise: (best: string, why: string | null) => Ways;
   /** An even trade, of `taken`; `ahead` for a side ahead in material. */

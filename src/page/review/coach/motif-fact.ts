@@ -1,9 +1,10 @@
 import { type Color, parseSquare, type Square } from '#shared/chess/index.ts';
-import { lineMotif, type MotifKind } from '#page/review/chess/motifs.ts';
+import { lineMotif, type Motif, type MotifKind } from '#page/review/chess/motifs.ts';
+import { isPressureKind } from '#page/review/chess/motifs-pressure.ts';
 import { playLine, type Ply } from '#page/review/chess/played-line.ts';
 import type { PinnedTaker } from '#page/review/chess/rays.ts';
 import { moveToken } from '#page/review/comment/tokens.ts';
-import type { FactSentences } from '#page/review/i18n/types.ts';
+import type { FactSentences, Named } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import type { Mark } from '#page/board/review-arrows.ts';
 import { withMove } from './drawing.ts';
@@ -14,7 +15,7 @@ import { whichOne } from './which-one.ts';
 // The tactic that wins what a line wins (chess/motifs.ts), named after the
 // line's sentence, and tagged on the bubble.
 
-const THEMES: Readonly<Record<MotifKind, Theme>> = {
+const THEMES: Readonly<Record<MotifKind, Theme | null>> = {
   fork: 'fork',
   pin: 'pin',
   pinnedDefender: 'pin',
@@ -25,6 +26,11 @@ const THEMES: Readonly<Record<MotifKind, Theme>> = {
   capturingDefender: 'defender',
   trappedPiece: 'trapped',
   hangingPiece: 'hanging',
+  deflection: 'defender',
+  chasedDefender: 'defender',
+  doubleAttack: 'fork',
+  outnumbered: null,
+  attacked: null,
 };
 
 export interface MotifLine {
@@ -36,6 +42,8 @@ export interface MotifLine {
   /** The plies up to the gain, the offset's included. */
   readonly upTo: number;
   readonly base: 'a' | 'b';
+  /** The tactic says it all: the line's sentence goes below it. */
+  readonly lead?: boolean;
 }
 
 /**
@@ -93,6 +101,20 @@ export function withMotif(text: string, line: MotifLine, facts: FactSentences): 
     const fact = said(plain, 'pin', pinDrawing(motif.pin, line, last));
     return withDetail(fact, `${text} ${pickBy(facts.pinLine(take), text)}`);
   }
-  const ways = facts.motif(motif.kind, move, motif.pieces);
-  return said(ways ? `${text} ${pickBy(ways, text)}` : text, THEMES[motif.kind]);
+  const ways = isPressureKind(motif.kind)
+    ? facts.pressure(motif.kind, move, named(motif, last))
+    : facts.motif(motif.kind, move, named(motif, last));
+  const theme = THEMES[motif.kind];
+  if (!ways) return said(text, theme);
+  const told = pickBy(ways, text);
+  return line.lead ? withDetail(said(told, theme), text) : said(`${text} ${told}`, theme);
 }
+
+/** The motif's pieces, by their squares where they stand around its move. */
+const named = ({ pieces, at = [] }: Motif, { before, after }: Ply): Named[] =>
+  pieces.map((piece, i) => {
+    const square = at[i];
+    if (square === undefined || square === null) return { piece, square: null };
+    const board = after.get(square)?.role === piece.role ? after : before;
+    return { piece, square: whichOne(board, square, piece) };
+  });

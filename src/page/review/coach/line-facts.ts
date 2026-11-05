@@ -7,6 +7,7 @@ import { SURE_MATE } from '#page/review/judge/mate.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { afterLastMove, withMotif } from './motif-fact.ts';
 import { type Fact, oneOf } from './said.ts';
+import type { Told } from './told.ts';
 import {
   finalNet,
   gives,
@@ -27,6 +28,8 @@ export interface LineFactInput {
   readonly facts: FactSentences;
   readonly me: Color;
   readonly them: Color;
+  /** What the moves just before said, for a mate's name said once. */
+  readonly told?: Told;
 }
 
 // The engine's score must show half a pawn per pawn a line wins, up to a
@@ -73,10 +76,13 @@ interface Lines {
 }
 
 // After a capture the position is mid-trade, and a line from it would count a
-// recapture as a win: an error there keeps to the board's facts.
+// recapture as a win: an error there keeps to the board's facts, unless it
+// takes back itself, its lines then counting from the trade's end.
 function errorLines(move: MoveVerdict): Lines | null {
   const { before, after, previousPosition, uci } = move;
-  if (!before.line || !after.line || previousPosition.san?.includes('x')) return null;
+  const takesBack = previousPosition.uci?.slice(2, 4) === uci.slice(2, 4);
+  const midTrade = previousPosition.san?.includes('x') === true && !takesBack;
+  if (!before.line || !after.line || midTrade) return null;
   const fen = previousPosition.fen;
   return { played: playLine(fen, [uci, ...after.line]), best: playLine(fen, before.line) };
 }
@@ -118,6 +124,7 @@ export function lossFact({ move, facts, them }: LineFactInput, threatened = fals
     winner: them,
     upTo: won.plies,
     base: 'a' as const,
+    lead: true,
   };
   return withMotif(text, motifLine, facts);
 }
@@ -156,16 +163,24 @@ export function bestGainFact(input: LineFactInput): Fact | null {
   return withMotif(text, { ...around, winner: me, upTo, base: 'b' }, facts);
 }
 
+/** Whether the opponent's last move took something without taking back: the position is mid-trade. */
+function midTrade({ previousMove, previousPosition }: MoveVerdict): boolean {
+  const before = previousMove?.previousPosition;
+  return (
+    !before?.san?.includes('x') || before.uci?.slice(2, 4) !== previousPosition.uci?.slice(2, 4)
+  );
+}
+
 /**
- * The move's line, from before the opponent's last move when the move takes
- * back what it took, so that the recapture counts as no gain.
+ * The move's line, from before the opponent's last capture when the move
+ * takes back, or when that capture was no retake, so that taking back, now or
+ * after a move in between, counts as no gain.
  */
 function ownLine(move: MoveVerdict): { plies: Ply[]; from: number } | null {
   const { after, previousMove, previousPosition, uci } = move;
   if (!after.line) return null;
-  const takesBack =
-    previousPosition.san?.includes('x') && previousPosition.uci?.slice(2, 4) === uci.slice(2, 4);
-  if (previousMove && takesBack) {
+  const takesBack = previousPosition.uci?.slice(2, 4) === uci.slice(2, 4);
+  if (previousMove && previousPosition.san?.includes('x') && (takesBack || midTrade(move))) {
     const fen = previousMove.previousPosition.fen;
     return { plies: playLine(fen, [previousMove.uci, uci, ...after.line]), from: 1 };
   }
@@ -202,7 +217,7 @@ export function gainFact({ move, facts, me, them }: LineFactInput): Fact | null 
   const text = oneOf(facts.winsAlong(gain), move);
   const around = afterLastMove(move, [move.uci, ...(move.after.line ?? [])]);
   const upTo = won.plies - from + around.offset;
-  return withMotif(text, { ...around, winner: me, upTo, base: 'b' }, facts);
+  return withMotif(text, { ...around, winner: me, upTo, base: 'b', lead: true }, facts);
 }
 
 // How far the line after a capture may go to win its worth back: six moves

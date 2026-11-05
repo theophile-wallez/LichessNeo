@@ -1,14 +1,5 @@
-import {
-  attackedSquares,
-  type Board,
-  type Color,
-  isInCheck,
-  opposite,
-  type Piece,
-  type Square,
-  squareAt,
-  squareCoords,
-} from '#shared/chess/index.ts';
+import { type Board, type Color, isInCheck, opposite, type Square } from '#shared/chess/index.ts';
+import { destinations, moved } from './moves.ts';
 
 // A mate in one read off the board alone, for the coach to say a move
 // threatens mate only when it's sure. Every reply is tried but castling,
@@ -19,33 +10,6 @@ import {
 export interface MateMove {
   readonly from: Square;
   readonly to: Square;
-}
-
-function moved(board: Board, from: Square, to: Square): Board {
-  const next = new Map(board);
-  const piece = next.get(from);
-  next.delete(from);
-  if (piece) next.set(to, piece);
-  return next;
-}
-
-function pushes(board: Board, from: Square, color: Color): Square[] {
-  const [file, rank] = squareCoords(from);
-  const step = color === 'white' ? 1 : -1;
-  const one = squareAt(file, rank + step);
-  if (!one || board.has(one)) return [];
-  const two = rank === (color === 'white' ? 1 : 6) ? squareAt(file, rank + 2 * step) : null;
-  return two && !board.has(two) ? [one, two] : [one];
-}
-
-/** Where the piece on `from` may go, its king's safety aside. */
-function destinations(board: Board, from: Square, piece: Piece): Square[] {
-  const reach = attackedSquares(board, from).filter(square => {
-    const there = board.get(square);
-    if (piece.role === 'pawn') return there !== undefined && there.color !== piece.color;
-    return there?.color !== piece.color;
-  });
-  return piece.role === 'pawn' ? [...reach, ...pushes(board, from, piece.color)] : reach;
 }
 
 const hasReply = (board: Board, color: Color): boolean =>

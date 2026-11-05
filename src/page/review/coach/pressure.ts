@@ -11,8 +11,10 @@ import {
   squareCoords,
 } from '#shared/chess/index.ts';
 import { exchangeGain } from '#page/review/chess/material.ts';
+import { canEscape } from '#page/review/chess/motifs.ts';
 import {
   between,
+  checkers,
   firstPiece,
   isDefended,
   isInBadSpot,
@@ -43,14 +45,22 @@ function chases(board: Board, square: Square, piece: Piece, from: Square): Chase
     piece,
     ...(which === null ? {} : { square: which }),
     ...(undefended && { undefended }),
+    ...(trapped(board, square, piece) && { trapped: true }),
   };
+}
+
+// A piece chased with nowhere safe to go, and nothing pinning it or checking its king.
+function trapped(board: Board, square: Square, piece: Piece): boolean {
+  if (piece.role === 'king' || piece.role === 'pawn' || !isInBadSpot(board, square)) return false;
+  if (pinOf(board, square) || checkers(board, piece.color).length > 0) return false;
+  return !canEscape(board, square, piece);
 }
 
 // A pinned piece that can take the pinner along the line isn't held, unless
 // that loses it: it's worth more, and the pinner is defended. Then a pin to a
 // piece other than the king holds only if taking that piece wins: it's worth
 // more than the pinner, or nothing defends it once the pinned one moves.
-function holds(board: Board, pinned: Square, { pinner, behind }: Pin): boolean {
+export function holds(board: Board, pinned: Square, { pinner, behind }: Pin): boolean {
   const [attacker, target, piece] = [board.get(pinner), board.get(behind), board.get(pinned)];
   if (!attacker || !target || !piece) return false;
   if (attackedSquares(board, pinned).includes(pinner)) {
@@ -212,7 +222,12 @@ const onSeventh = (after: Board, to: Square, color: Color): boolean =>
 
 /** What a rook's move does: the seventh rank, rooks doubled on a file, a battery, an open file. */
 export function rookPlan(after: Board, [from, to]: [Square, Square], color: Color): Plan | null {
-  if (onSeventh(after, to, color)) return { kind: 'seventhRank' };
+  if (onSeventh(after, to, color)) {
+    const both = rooksOf(after, color).every(square => ownRank(square, color) === 6);
+    return both && rooksOf(after, color).length === 2
+      ? { kind: 'rooksOnSeventh' }
+      : { kind: 'seventhRank' };
+  }
   const [file] = squareCoords(to);
   // Along its own file, the rook was on it already.
   if (squareCoords(from)[0] === file || pawnsOn(after, file, color).length > 0) return null;

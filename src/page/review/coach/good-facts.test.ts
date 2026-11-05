@@ -130,7 +130,9 @@ describe('a mate under way', () => {
 
   it('is played out for the side that mates', () => {
     const move = playedBetween([56, before, check], 'g7d4');
-    expect(textOf(move)).toBe('Mate follows by force: [[m:w:Kh1]] [[m:b:Re1#]].');
+    expect(textOf(move)).toBe(
+      'Mate follows by force: [[m:w:Kh1]] [[m:b:Re1#]]. A back-rank mate: the king’s own pawns wall it in.',
+    );
   });
 
   it('is played out for the side mated, whose move can’t stop it', () => {
@@ -158,7 +160,7 @@ describe('a piece attacked that steps away', () => {
   it('is said to be chased, not threatened', () => {
     const move = playedBetween([33, before, after], 'a2a4');
     const said = findings(move, en, { before: null, after: threat }).fact?.text;
-    expect(said).toBe('The [[p:bb]]bishop on [[s:b5]] has to move, gaining a tempo.');
+    expect(said).toBe('A tempo gained: the [[p:bb]]bishop on [[s:b5]] has to move.');
   });
 });
 
@@ -183,7 +185,7 @@ describe('a piece a line opened onto that steps away', () => {
   it('is said to be chased, not threatened', () => {
     const move = playedBetween([21, before, after], 'f3e5');
     const said = findings(move, en, { before: null, after: threat }).fact?.text;
-    expect(said).toBe('The [[p:bq]]queen has to move, gaining a tempo.');
+    expect(said).toBe('A tempo gained: the [[p:bq]]queen has to move.');
   });
 });
 
@@ -221,6 +223,6 @@ describe('a promotion', () => {
   it('is said for itself, before what it threatens', () => {
     const move = playedBetween([92, before, after], 'f2f1q');
     const said = findings(move, en, { before: null, after: threat }).fact?.text;
-    expect(en.facts.promotes({ role: 'queen', color: 'black' })).toContain(said);
+    expect(en.facts.promotes({ role: 'queen', color: 'black' }, false)).toContain(said);
   });
 });

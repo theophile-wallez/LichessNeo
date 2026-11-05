@@ -47,7 +47,10 @@ describe('planFact', () => {
   it('reads the move’s ply on the board, which a game from a position starts past 0', () => {
     // The game's first move, at move 21.
     expect(planOf({ fen: START, uci: 'g1f3', san: 'Nf3', ply: 41, index: 1 })).toBeNull();
-    expect(planOf({ fen: START, uci: 'e2e4', san: 'e4', ply: 41, index: 1 })).toBeNull();
+    // Past the opening, e4 only opens the bishop's diagonal.
+    expect(en.facts.center).not.toContain(
+      planOf({ fen: START, uci: 'e2e4', san: 'e4', ply: 41, index: 1 }),
+    );
   });
 
   it('sees a knight settle where no pawn can chase it', () => {
@@ -77,29 +80,39 @@ describe('planFact', () => {
     expect(planOf({ fen, uci: 'c5b6', san: 'cxb6' })).toBeNull();
     // Past the c-pawn, which can no longer take it.
     const made = '4k3/8/2p5/1P6/8/8/8/4K3 w - - 0 1';
-    expect(en.facts.passedPawn(true)).toContain(planOf({ fen: made, uci: 'b5b6', san: 'b6' }));
+    expect(en.facts.passedPawn(true, null)).toContain(
+      planOf({ fen: made, uci: 'b5b6', san: 'b6' }),
+    );
     const stopped = '4k3/p7/8/1P6/8/8/8/4K3 w - - 0 1';
     expect(planOf({ fen: stopped, uci: 'b5b6', san: 'b6' })).toBeNull();
     const passed = '4k3/8/8/1P6/8/8/8/4K3 w - - 0 1';
-    expect(en.facts.passedPawn(false)).toContain(planOf({ fen: passed, uci: 'b5b6', san: 'b6' }));
+    expect(en.facts.passedPawn(false, null)).toContain(
+      planOf({ fen: passed, uci: 'b5b6', san: 'b6' }),
+    );
   });
 
   it('sees the king head for the center of an endgame', () => {
-    const fen = '4k3/8/8/8/8/8/8/R5K1 w - - 0 1';
-    expect(en.facts.centralKing).toContain(planOf({ fen, uci: 'g1f2', san: 'Kf2' }));
-    const queens = '3qk3/8/8/8/8/8/8/3Q2K1 w - - 0 1';
-    expect(planOf({ fen: queens, uci: 'g1f2', san: 'Kf2' })).toBeNull();
+    const fen = '4k3/8/8/8/8/8/5K2/R7 w - - 0 1';
+    expect(en.facts.centralKing).toContain(planOf({ fen, uci: 'f2e3', san: 'Ke3' }));
+    const queens = '3qk3/8/8/8/8/8/5K2/3Q4 w - - 0 1';
+    expect(planOf({ fen: queens, uci: 'f2e3', san: 'Ke3' })).toBeNull();
   });
 
   it('sees a central pawn take the center in the opening', () => {
     expect(en.facts.center).toContain(planOf({ fen: START, uci: 'e2e4', san: 'e4', ply: 1 }));
-    expect(planOf({ fen: START, uci: 'e2e4', san: 'e4', ply: 41 })).toBeNull();
+    expect(en.facts.center).not.toContain(planOf({ fen: START, uci: 'e2e4', san: 'e4', ply: 41 }));
   });
 
   it('sees a piece chase one worth more, and pin one to what stands behind it', () => {
     const rook = { role: 'rook', color: 'black' } as const;
     const chased = '4k3/8/8/3r4/8/8/8/1N2K3 w - - 0 1';
-    expect(en.facts.chases(rook, null)).toContain(planOf({ fen: chased, uci: 'b1c3', san: 'Nc3' }));
+    // A knight from its first square develops as it chases.
+    const knightOut = { role: 'knight', color: 'white' } as const;
+    expect(en.facts.developsWithTempo(knightOut, rook, null)).toContain(
+      planOf({ fen: chased, uci: 'b1c3', san: 'Nc3' }),
+    );
+    const out = '4k3/8/8/3r4/8/8/4N3/4K3 w - - 0 1';
+    expect(en.facts.chases(rook, null)).toContain(planOf({ fen: out, uci: 'e2c3', san: 'Nc3' }));
     const pinned = '4k3/8/2n5/8/8/8/8/4KB2 w - - 0 1';
     const knight = { role: 'knight', color: 'black' } as const;
     const king = { role: 'king', color: 'black' } as const;

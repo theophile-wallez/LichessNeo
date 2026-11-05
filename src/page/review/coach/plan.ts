@@ -4,12 +4,11 @@ import {
   opposite,
   parseFen,
   parseSquare,
-  type Role,
   type Square,
 } from '#shared/chess/index.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import type { PlanSentences, Ways } from '#page/review/i18n/types.ts';
-import { isPlain, type Plan, type Reason } from './idea.ts';
+import type { Plan, Reason } from './idea.ts';
 import {
   contestsFile,
   fightsCenter,
@@ -22,22 +21,39 @@ import {
   takesCenter,
   uncoveredOf,
 } from './pressure.ts';
+import { rookLiftOf } from './attack-plans.ts';
 import { batteryPlan, batteryReady } from './battery.ts';
+import { blockadeOf } from './blockade.ts';
 import { discoveryOf } from './discovery.ts';
 import { reasonMarks } from './drawing.ts';
-import { takesOpposition } from './opposition.ts';
-import { entersSquare, outOfReach, outruns } from './pawn-square.ts';
-import { behindPasser, centralSquare, makesLuft, pawnGuards, safetyPlan } from './safety.ts';
+import { cutsOffOf } from './endgame-plans.ts';
+import { fianchettoOf } from './fianchetto.ts';
+import { kingPlan } from './king-plan.ts';
+import { openedLineOf } from './open-line.ts';
+import { passedPlan } from './passed-pawns.ts';
+import { philidorOf } from './philidor.ts';
+import { outOfReach, outruns } from './pawn-square.ts';
+import { pinnedTargetOf } from './pinned-target.ts';
+import { planWays } from './plan-ways.ts';
+import { queenTradeOf } from './queen-trade.ts';
+import { behindPasser, blocksPasser, centralSquare, safetyPlan } from './safety.ts';
 import { type Fact, oneOf, said } from './said.ts';
-import { centerDistance, isEndgame, isOutpost, isPassed, ownRank } from './structure.ts';
+import { pawnShape } from './pawn-shape.ts';
+import { isOutpost, isPassed, OPENING_PLIES, ownRank } from './structure.ts';
 import { evaluationLevel } from './trajectory.ts';
+import { isZugzwang } from './zugzwang.ts';
 
 // What a quiet move does for the position when it wins or stops nothing: it
-// pins or chases a piece, sets up a discovery, develops one, takes an open file or the seventh
-// rank, settles on an outpost or in the center, makes or pushes a passed pawn,
-// backs it with a rook, brings the king to the center of an endgame, takes a
-// piece out of danger or defends one. Said of the move played, or of the
-// better move as what it did.
+// pins or chases a piece, piles up on a pinned one, sets up a discovery,
+// develops one or fianchettoes a bishop, takes an open file or the seventh
+// rank, lifts a rook toward the king, settles on an outpost or in the center,
+// makes or pushes a passed pawn, backs it with a rook or stops the other
+// side's, storms the other king, pushes a majority, frees a bishop's retreat,
+// keeps a piece off a square, cuts a king off, walks the king up in an
+// endgame (king-plan.ts), puts the other side in zugzwang, offers or dodges
+// the queens' trade, takes a piece out of danger or defends one, opens a line
+// for a piece behind. Said of the move played, or of the better move as what
+// it did.
 
 /** A move on the board, to read its plan from. */
 export interface Play {
@@ -51,26 +67,38 @@ export interface Play {
 
 // The opening's moves, by ply, in which a minor piece's first move develops it,
 // and a central pawn's takes the center.
-const OPENING_PLIES = 30;
 const CENTER_PLIES = 16;
 const BACK_SQUARES: Readonly<Record<Color, readonly string[]>> = {
   white: ['b1', 'c1', 'f1', 'g1'],
   black: ['b8', 'c8', 'f8', 'g8'],
 };
 
-// A knight's or a rook's square: an outpost, the center, behind a passed pawn, a
+// A knight's or a rook's square: a blockade, an outpost, the center, behind a passed pawn, a
 // file or rank; a bishop's or the queen's, a battery, or the queen's, a file contested.
 function squarePlan({ after, color }: Play, from: Square, to: Square): Plan | null {
   const piece = after.get(to);
   if (piece?.role === 'knight') {
+    const blockade = blockadeOf(after, to, piece);
+    if (blockade) return blockade;
     if (isOutpost(after, to, piece)) return { kind: 'outpost', piece };
     return centralSquare(to) && !centralSquare(from) ? { kind: 'centralizes', piece } : null;
   }
   if (piece?.role === 'bishop') return batteryPlan(after, [from, to]);
   if (piece?.role === 'queen')
     return batteryPlan(after, [from, to]) ?? contestsFile(after, [from, to], color);
-  if (piece?.role !== 'rook') return null;
+  return piece?.role === 'rook' ? rookSquarePlan(after, [from, to], color) : null;
+}
+
+// Behind a passed pawn, the Philidor defense, in front of the other side's pawn,
+// cutting the other king off,
+// lifted toward the castled king, then the file or rank it takes.
+function rookSquarePlan(after: Board, [from, to]: [Square, Square], color: Color): Plan | null {
   if (behindPasser(after, to, color)) return { kind: 'behindPasser' };
+  const philidor = philidorOf(after, [from, to], color);
+  if (philidor) return philidor;
+  if (blocksPasser(after, to, color)) return { kind: 'blocksPasser' };
+  const cut = cutsOffOf(after, [from, to], color) ?? rookLiftOf(after, [from, to], color);
+  if (cut) return cut;
   return ownRank(from, color) === 6 ? null : rookPlan(after, [from, to], color);
 }
 
@@ -79,15 +107,11 @@ function piecePlan(play: Play, from: Square, to: Square): Plan | null {
   const piece = after.get(to);
   if (!piece) return null;
   const opening = play.ply <= OPENING_PLIES && BACK_SQUARES[color].includes(from);
+  const fianchetto = opening ? fianchettoOf(after, to, color) : null;
+  if (fianchetto) return fianchetto;
   if (opening && (piece.role === 'knight' || piece.role === 'bishop'))
     return { kind: 'develops', piece };
-  if (piece.role === 'king') {
-    const enters = entersSquare(play.before, after, color);
-    if (enters) return enters;
-    if (takesOpposition(play.before, after, color)) return { kind: 'opposition' };
-    if (isEndgame(after) && centerDistance(to) < centerDistance(from))
-      return { kind: 'centralKing' };
-  }
+  if (piece.role === 'king') return kingPlan({ before: play.before, after, color, from, to });
   return squarePlan(play, from, to);
 }
 
@@ -100,7 +124,7 @@ function pawnPlan(play: Play, from: Square, to: Square): Plan | null {
   const made = !isPassed(before, from, color);
   const runs = outruns(after, to, color, made);
   if (runs) return runs;
-  if (isPassed(after, to, color)) return { kind: 'passedPawn', made };
+  if (isPassed(after, to, color)) return passedPlan(play, [from, to], made);
   if (play.ply <= CENTER_PLIES && takesCenter(to, color)) return { kind: 'center' };
   if (play.ply <= CENTER_PLIES && fightsCenter(to, color)) return { kind: 'fightsCenter' };
   if (play.ply <= OPENING_PLIES && supportsCenter(before, after, to, color))
@@ -108,51 +132,34 @@ function pawnPlan(play: Play, from: Square, to: Square): Plan | null {
   return null;
 }
 
-const HEAVY: ReadonlySet<Role> = new Set<Role>(['rook', 'queen']);
-
-// A back rank a rook or queen of the other side's could mate on: none of the
-// side's own guards it.
-function weakBackRank(board: Board, color: Color): boolean {
-  const heavy = [...board].filter(([, piece]) => HEAVY.has(piece.role));
-  const guarded = heavy.some(
-    ([square, piece]) => piece.color === color && ownRank(square, color) === 0,
-  );
-  return !guarded && heavy.some(([, piece]) => piece.color !== color);
-}
-
-// What a pawn's move does once it attacks nothing: a piece or pawn of its own
-// defended; a hole for the king, past the opening and on a weak back rank; a
-// pawn on the fifth rank that cramps the other side.
-function pawnShape({ before, after, color, ply }: Play, from: Square, to: Square): Plan | null {
-  const guards = pawnGuards(before, after, to);
-  if (guards) return guards;
-  const weak = ply > OPENING_PLIES && weakBackRank(after, color);
-  if (weak && makesLuft(before, [from, to], color)) return { kind: 'luft' };
-  return ownRank(to, color) === 4 && !isEndgame(after) ? { kind: 'space' } : null;
-}
-
-// A piece pinned or chased, by the piece moved or a line it opened.
+// A piece pinned already and piled up on, or one pinned or chased, by the
+// piece moved or a line it opened.
 const attackOf = ({ before, after, color }: Play, from: Square, to: Square): Plan | null =>
-  pressureOf(before, after, [from, to], color) ?? uncoveredOf(before, after, to);
+  pinnedTargetOf(before, after, [from, to]) ??
+  pressureOf(before, after, [from, to], color) ??
+  uncoveredOf(before, after, to);
 
 /** What the move does for the position, if it's one of the plans the coach names. */
 export function planOf(play: Play): Plan | null {
   const from = parseSquare(play.uci.slice(0, 2));
   const to = parseSquare(play.uci.slice(2, 4));
   if (!from || !to || /[x+]/.test(play.san) || play.san.startsWith('O-O')) return null;
+  if (isZugzwang(play.after, [from, to], play.color)) return { kind: 'zugzwang' };
   // A pawn that attacks a piece does so before it does anything for the king.
   if (play.after.get(to)?.role === 'pawn')
     return pawnPlan(play, from, to) ?? attackOf(play, from, to) ?? pawnShape(play, from, to);
-  const pressure = attackOf(play, from, to);
-  if (pressure) return pressure;
-  return (
-    discoveryOf(play.before, play.after, [from, to]) ??
-    piecePlan(play, from, to) ??
-    safetyPlan(play.before, play.after, [from, to]) ??
-    (connects(play, from) ? { kind: 'connectsRooks' } : null) ??
-    loosePawnPlan(play, to)
-  );
+  return attackOf(play, from, to) ?? pieceMovePlan(play, from, to);
 }
+
+// What a piece's move does once it attacks nothing.
+const pieceMovePlan = (play: Play, from: Square, to: Square): Plan | null =>
+  discoveryOf(play.before, play.after, [from, to]) ??
+  piecePlan(play, from, to) ??
+  safetyPlan(play.before, play.after, [from, to]) ??
+  (connects(play, from) ? { kind: 'connectsRooks' } : null) ??
+  loosePawnPlan(play, to) ??
+  queenTradeOf(play.before, play.after, [from, to], play.color) ??
+  openedLineOf(play.before, play.after, [from, to]);
 
 // A pawn left hanging, or outnumbered, is the move's point only when it has no other.
 function loosePawnPlan({ before, after }: Play, to: Square): Plan | null {
@@ -169,6 +176,7 @@ function loosePawnPlan({ before, after }: Play, to: Square): Plan | null {
 const TACTICS: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>([
   'chases',
   'attacksPawn',
+  'hitsPinned',
   'pins',
   'discovery',
 ]);
@@ -192,26 +200,6 @@ export function reasonOf(play: Play): Reason | null {
   return also ? { kind: 'both', first: also, second: plan } : plan;
 }
 
-/** The ways to say a plan. */
-export function planWays(plan: Plan, sentences: PlanSentences): Ways {
-  if (isPlain(plan)) return sentences[plan.kind];
-  if (plan.kind === 'attacksPawn')
-    return sentences.attacksPawn(plan.piece, plan.square, plan.outnumbered === true);
-  if (plan.kind === 'chases' || plan.kind === 'guards')
-    return sentences[plan.kind](plan.piece, plan.square ?? null);
-  if ('piece' in plan && plan.kind !== 'pins') return sentences[plan.kind](plan.piece);
-  if (plan.kind === 'openFile') return sentences.openFile(plan.halfOpen, plan.contested);
-  if (plan.kind === 'fileBattery')
-    return sentences.fileBattery(plan.mover, plan.partner, plan.halfOpen);
-  if (plan.kind === 'diagonalBattery')
-    return sentences.diagonalBattery(plan.mover, plan.partner, plan.target);
-  if (plan.kind === 'passedPawn') return sentences.passedPawn(plan.made);
-  if (plan.kind === 'outruns') return sentences.outruns(plan.king);
-  if (plan.kind === 'entersSquare') return sentences.entersSquare(plan.king);
-  if (plan.kind === 'discovery') return sentences.discovery(plan.slider, plan.screen, plan.target);
-  return sentences.pins(plan.piece, plan.behind);
-}
-
 export interface PlanInput {
   readonly move: MoveVerdict;
   readonly sentences: PlanSentences;
@@ -232,9 +220,14 @@ const WATCHED: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>([
   'passedPawn',
   'outruns',
   'opposition',
+  'zugzwang',
+  'majority',
+  'cutsOff',
   'behindPasser',
+  'escorts',
   'chases',
   'attacksPawn',
+  'hitsPinned',
   'pins',
   'discovery',
 ]);
@@ -250,10 +243,34 @@ function planFinding({ move, sentences, before, after, theirs }: PlanInput) {
   // The move's ply on the board: a game from a position doesn't start at 0.
   const plan = planOf({ color, ply: move.position.ply, uci, san, before, after });
   if (!plan || (theirs && !watched(plan))) return null;
+  // A line opened behind is too slight a point to stand for a move a better one beat.
+  if (plan.kind === 'opensLine' && move.moveClass === 'good') return null;
+  // A chase the engine answers by taking the chaser: the piece needn't move.
+  if (plan.kind === 'chases' && move.after.best?.slice(2, 4) === uci.slice(2, 4)) return null;
   const told = racing(plan, move);
   const scene = { uci, before, after, shown: after, toMove: opposite(color) };
-  const fact = said(oneOf(planWays(told, sentences), move), null, reasonMarks(told, scene));
+  const ways = withTempo(
+    told,
+    { color, ply: move.position.ply, uci, san, before, after },
+    sentences,
+  );
+  const fact = said(oneOf(ways, move), null, reasonMarks(told, scene));
   return { plan: told, fact };
+}
+
+// A minor piece's first move in the opening that chases a piece: development
+// with tempo, said as both.
+function withTempo(plan: Plan, play: Play, sentences: PlanSentences): Ways {
+  const from = play.uci.slice(0, 2);
+  const moved = parseSquare(play.uci.slice(2, 4));
+  const piece = moved ? play.after.get(moved) : undefined;
+  const developing =
+    play.ply <= OPENING_PLIES &&
+    BACK_SQUARES[play.color].includes(from) &&
+    (piece?.role === 'knight' || piece?.role === 'bishop');
+  if (plan.kind !== 'chases' || plan.trapped || !developing || !piece)
+    return planWays(plan, sentences);
+  return sentences.developsWithTempo(piece, plan.piece, plan.square ?? null);
 }
 
 /** What the quiet move played does for the position. */
@@ -264,6 +281,7 @@ const RACES: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>([
   'outruns',
   'entersSquare',
   'opposition',
+  'zugzwang',
 ]);
 
 /** The rule of the square or the opposition the move follows, said before its threats. */
@@ -276,7 +294,7 @@ export function raceFact(input: PlanInput): Fact | null {
 // only if the engine agrees it wins: else it's a passed pawn pushed on.
 function racing(plan: Plan, move: MoveVerdict): Plan {
   if (plan.kind !== 'outruns') return plan;
-  const pushed: Plan = { kind: 'passedPawn', made: plan.made };
+  const pushed: Plan = { kind: 'passedPawn', made: plan.made, trait: null };
   if (evaluationLevel(move.after) * (move.color === 'white' ? 1 : -1) < 2) return pushed;
   const earlier = move.previousMove && parseFen(move.previousMove.previousPosition.fen).board;
   return earlier && outOfReach(plan, earlier, plan.king.color) ? pushed : plan;

@@ -33,7 +33,12 @@ const toParts = (parts: z.infer<typeof LegacyPartsSchema>) =>
 
 const langs: readonly ('en' | 'fr')[] = ['en', 'fr'];
 
-const NO_CONTEXT: MoveContext = { opening: '', threats: NO_THREATS, turning: false };
+const NO_CONTEXT: MoveContext = {
+  opening: '',
+  threats: NO_THREATS,
+  turning: false,
+  recent: new Set(),
+};
 
 // The port's move chips carry the moves they play ([[m:w:Nf3@b:g1f3]]), and an
 // error's comment ends on the reply it lets in: the original had neither. Both
@@ -81,6 +86,7 @@ describe('the coach’s comment', () => {
               opening: game.opening,
               threats: NO_THREATS,
               turning: false,
+              recent: new Set(),
             }),
             move,
             LANGUAGES[lang],

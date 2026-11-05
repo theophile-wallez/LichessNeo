@@ -74,7 +74,19 @@ export function pairOf(viewer: Viewer, first: Piece, second: Piece): string {
     : `both ${partyOf(viewer, first.color).possessive} ${plural}`;
 }
 
-const COUNTS: readonly string[] = ['', '', 'two', 'three', 'four'];
+const COUNTS: readonly string[] = [
+  '',
+  '',
+  'two',
+  'three',
+  'four',
+  'five',
+  'six',
+  'seven',
+  'eight',
+  'nine',
+  'ten',
+];
 
 /** "on the next move", "in two moves": how soon a line gets there. */
 export const within = (moves: number): string =>

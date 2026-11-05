@@ -1,13 +1,7 @@
+import { conceptsEn } from './en-concepts.ts';
 import type { Color, Piece } from '#shared/chess/index.ts';
-import {
-  agree,
-  capitalize,
-  definite,
-  indefinite,
-  pairOf,
-  partyOf,
-  type Party,
-} from './en-grammar.ts';
+import { agree, capitalize, definite, pairOf, partyOf, type Party } from './en-grammar.ts';
+import { routinesEn } from './en-routines.ts';
 import { betterMovesEn } from './en-better.ts';
 import { capturesEn } from './en-captures.ts';
 import { lineFactsEn } from './en-lines.ts';
@@ -73,11 +67,21 @@ function matesEn(viewer: Viewer): MateSentences {
       `Now ${reply} mates on the spot.`,
       `Nothing stops ${reply}, and it’s mate.`,
     ],
-    wouldForceMate: (best, moves) => [
-      `${best} would have forced mate in ${moves}.`,
-      `Mate in ${moves} was there, starting with ${best}.`,
-      `${best} led to a forced mate in ${moves}.`,
-    ],
+    wouldForceMate: (best, line, moves) => {
+      if (line !== null)
+        return [`A forced mate was there: ${line}.`, `Mate was on the board: ${line}.`];
+      return moves === null
+        ? [
+            `${best} would have forced mate.`,
+            `There was a forced mate, starting with ${best}.`,
+            `${best} led to a forced mate.`,
+          ]
+        : [
+            `${best} would have forced mate in ${moves}.`,
+            `Mate in ${moves} was there, starting with ${best}.`,
+            `${best} led to a forced mate in ${moves}.`,
+          ];
+    },
     mateFollows: line => [`Mate follows by force: ${line}.`, `The mate is on its way: ${line}.`],
     mateUnstoppable: line => [
       `Nothing stops the mate now: ${line}.`,
@@ -197,39 +201,13 @@ function goodMovesEn(viewer: Viewer): GoodMoveSentences {
     },
     forks: (first, second) => [
       `A fork: ${pairOf(viewer, first, second)} are attacked at once.`,
-      `A fork on ${pairOf(viewer, first, second)}.`,
+      `A fork of ${pairOf(viewer, first, second)}.`,
       `Fork! ${capitalize(pairOf(viewer, first, second))} are hit together.`,
     ],
   };
 }
 
 // What a routine move does: castle, promote, check.
-type RoutineSentences = Pick<FactSentences, 'castles' | 'promotes' | 'checkForces'>;
-
-function routinesEn(viewer: Viewer): RoutineSentences {
-  return {
-    promotes: piece => [
-      `The pawn promotes to ${indefinite(piece)}.`,
-      `The pawn reaches the last rank and becomes ${indefinite(piece)}.`,
-      `Promotion: the pawn turns into ${indefinite(piece)}.`,
-    ],
-    castles: [
-      'The king is safe, and the rook joins the game.',
-      'Castled: the king tucked away, the rook ready for action.',
-      'The king goes to safety, and the rook comes into play.',
-      'Castling: a safe king, and a rook ready to join in.',
-    ],
-    checkForces: color => {
-      const checked = partyOf(viewer, color);
-      return [
-        `The check forces ${checked.name} to respond.`,
-        `Check! ${subject(checked)} ${agree(checked, 'has', 'have')} to respond.`,
-        `Check: ${checked.name} must answer first.`,
-      ];
-    },
-  };
-}
-
 export const factsEn = (viewer: Viewer): FactSentences => ({
   ...matesEn(viewer),
   ...lossesEn(viewer),
@@ -238,6 +216,7 @@ export const factsEn = (viewer: Viewer): FactSentences => ({
   ...capturesEn(viewer),
   ...betterMovesEn(viewer),
   ...lineFactsEn(viewer),
+  ...conceptsEn(viewer),
   ...plansEn(viewer),
   ...pinsEn(viewer),
 });

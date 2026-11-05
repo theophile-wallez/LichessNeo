@@ -30,12 +30,12 @@
     "cls": "excellent",
     "slower": false,
     "en": {
-      "fact": "The pawn reaches the last rank and becomes a [[p:wn]]knight.",
-      "parts": [["The pawn reaches the last rank and becomes a [[p:wn]]knight."]]
+      "fact": "Underpromotion: a [[p:wn]]knight rather than a queen, and rightly so.",
+      "parts": [["Underpromotion: a [[p:wn]]knight rather than a queen, and rightly so."]]
     },
     "fr": {
-      "fact": "Le pion atteint la dernière rangée et devient un [[p:wn]]cavalier.",
-      "parts": [["Le pion atteint la dernière rangée et devient un [[p:wn]]cavalier."]]
+      "fact": "Sous-promotion : un [[p:wn]]cavalier plutôt qu’une dame, et c’est le bon choix.",
+      "parts": [["Sous-promotion : un [[p:wn]]cavalier plutôt qu’une dame, et c’est le bon choix."]]
     }
   },
   {
@@ -157,8 +157,8 @@
     "cls": "great",
     "slower": false,
     "en": {
-      "fact": "The [[s:e4]] [[p:wp]]pawn taken, and nothing to pay.",
-      "parts": [["The [[s:e4]] [[p:wp]]pawn taken, and nothing to pay."]]
+      "fact": "The [[s:e4]] [[p:wp]]pawn taken, and it costs nothing.",
+      "parts": [["The [[s:e4]] [[p:wp]]pawn taken, and it costs nothing."]]
     },
     "fr": {
       "fact": "Le [[p:wp]]pion [[s:e4]] pris sans rien payer.",

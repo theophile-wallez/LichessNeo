@@ -31,6 +31,14 @@ export function owned(viewer: Viewer, piece: Piece): string {
   return `${definite(piece)} adverse`;
 }
 
+/** « du [fou] », « de ta [dame] »: `de` before a piece named by `owned`. */
+export const ofThe = (named: string): string =>
+  named.startsWith('le ') ? `du ${named.slice(3)}` : `de ${named}`;
+
+/** « au [fou] », « à ta [dame] »: `à` before a piece named by `owned`. */
+export const toThe = (named: string): string =>
+  named.startsWith('le ') ? `au ${named.slice(3)}` : `à ${named}`;
+
 /** `owned`, by its square when there's one: « ton [fou] c4 », « le [pion] d5 adverse ». */
 export function ownedOn(viewer: Viewer, { piece, square }: Named): string {
   if (square === null) return owned(viewer, piece);
@@ -119,7 +127,19 @@ export function conjugate(party: Party, tu: string, il: string, ils: string): st
 export const ownedBy = (party: Party, mine: string, theirs: string): string =>
   party.of === null ? mine : `${theirs} ${party.of}`;
 
-const COUNTS: readonly string[] = ['', '', 'deux', 'trois', 'quatre'];
+const COUNTS: readonly string[] = [
+  '',
+  '',
+  'deux',
+  'trois',
+  'quatre',
+  'cinq',
+  'six',
+  'sept',
+  'huit',
+  'neuf',
+  'dix',
+];
 
 /** « au coup suivant », « en deux coups » : how soon a line gets there. */
 export const within = (moves: number): string =>

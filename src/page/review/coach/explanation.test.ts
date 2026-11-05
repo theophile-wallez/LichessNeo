@@ -26,7 +26,7 @@ const record = (whiteWinChance: number, best: string | null): PositionRecord => 
 
 const CONTEXT = { gameId: 'abcdefgh', coach: 1, language: en };
 const said = (move: MoveVerdict, turning = false) =>
-  explanation(move, CONTEXT, { opening: '', threats: NO_THREATS, turning });
+  explanation(move, CONTEXT, { opening: '', threats: NO_THREATS, turning, recent: new Set() });
 
 /** White's e4 at `ply`, from a position worth `before` to one worth `after`. */
 function e4(before: PositionRecord, after: PositionRecord, ply = 1): MoveVerdict {
@@ -145,12 +145,12 @@ describe('the comment', () => {
   // get a remark, never a bare engine line, which players read as moves to
   // puzzle out rather than as an explanation.
   const QUIET = 'rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R b KQkq - 5 8';
-  const quiet = (line: readonly string[]): MoveVerdict =>
+  const quiet = (line: readonly string[], uci = 'a7a6'): MoveVerdict =>
     played({
       fen: QUIET,
-      uci: 'c7c6',
+      uci,
       ply: 16,
-      before: engineRecord(45, ['c7c6']),
+      before: engineRecord(45, [uci]),
       after: engineRecord(46, line),
     });
 
@@ -159,6 +159,14 @@ describe('the comment', () => {
     expect(parts).toHaveLength(1);
     expect(en.remarks('black').best).toContain(parts[0]?.text);
     expect(parts[0]?.text).not.toContain('@a:');
+  });
+
+  it('says what a quiet move takes from the other side’s piece', () => {
+    // ...c6 takes d5 from the knight, which would hit the queen there.
+    const parts = said(quiet(['b3a4', 'f8e7', 'c3e2', 'b8d7'], 'c7c6'));
+    expect(parts.map(part => part.text)).toEqual([
+      'Prophylaxis: no [[s:d5]] for the [[p:wn]]knight, and the [[p:bq]]queen is left in peace.',
+    ]);
   });
 
   it('names the better move without its line, when it can’t say its point', () => {

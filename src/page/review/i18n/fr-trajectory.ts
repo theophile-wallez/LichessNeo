@@ -39,9 +39,10 @@ function changesFr(viewer: Viewer): Changes {
     },
     shrinks: (color, from, to) => {
       const ahead = party(color);
-      const left = `il ne ${conjugate(ahead, 'te', 'lui', 'leur')} reste qu’${to}`;
+      const them = conjugate(ahead, 'te', 'lui', 'leur');
+      const left = `il ne ${them} reste qu’${to}`;
       return [
-        `${had(ahead)} ${from}, ${left}.`,
+        `${had(ahead)} ${from} : il ne ${them} reste plus qu’${to}.`,
         `${says(ahead, 'perds', 'perd', 'perdent')} du terrain : ${left}.`,
         `L’écart se réduit pour ${ahead.object ?? 'toi'} : ${left}.`,
       ];

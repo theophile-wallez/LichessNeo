@@ -1,14 +1,46 @@
 import type { Piece } from '#shared/chess/index.ts';
+import type { PassedTrait } from '#page/review/coach/passed-pawns.ts';
 import { agreement, capitalize, owned, pronoun } from './fr-grammar.ts';
+import { quietPlansFr } from './fr-quiet-plans.ts';
 import { tacticPlansFr } from './fr-tactic-plans.ts';
 import { whyFr } from './fr-why.ts';
-import type { PlanSentences, Viewer } from './types.ts';
+import type { QuietPlanSentences } from './plan-types.ts';
+import type { PlanSentences, Viewer, Ways } from './types.ts';
+
+// A passed pawn born or pushed on, or what makes it strong.
+const PASSED: Record<PassedTrait | 'born' | 'pushed', Ways> = {
+  born: [
+    'Un pion passé est né.',
+    'Voilà un pion passé, un atout pour la finale.',
+    'Un nouveau pion passé : un atout à long terme.',
+  ],
+  pushed: [
+    'Le pion passé avance.',
+    'Le pion passé poursuit sa route.',
+    'Un pion passé doit avancer, et celui-ci est en route.',
+    'Le pion passé se rapproche de la promotion.',
+  ],
+  connected: [
+    'Deux pions passés liés : ils se protègent en avançant.',
+    'Des pions passés liés, côte à côte : une paire difficile à arrêter.',
+  ],
+  protected: [
+    'Un pion passé protégé : un autre pion le garde, le roi ne peut pas le prendre.',
+    'Le pion passé est protégé par un pion : un atout durable.',
+  ],
+  outside: [
+    'Un pion passé éloigné, loin des autres pions : il attire le roi adverse.',
+    'Le pion passé sur l’aile entraîne le roi adverse loin du reste.',
+  ],
+};
 
 // What a rook's, a pawn's or the king's move does, whoever's it is.
 type PiecePlans =
   | 'develops'
   | 'outpost'
   | 'chases'
+  | 'developsWithTempo'
+  | 'traps'
   | 'attacksPawn'
   | 'pins'
   | 'saves'
@@ -20,7 +52,7 @@ type PiecePlans =
   | 'fileBattery'
   | 'diagonalBattery';
 
-const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
+const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | 'why'> = {
   openFile: (halfOpen, contested) => {
     const file = `la colonne ${halfOpen ? 'semi-ouverte' : 'ouverte'}`;
     if (contested)
@@ -46,24 +78,28 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
     'Une tour en septième : pions et roi sous le feu.',
     'La tour envahit la septième rangée.',
   ],
+  rooksOnSeventh: [
+    'Les deux tours en septième : tout ce qui est sur cette rangée est sous le feu.',
+    'Deux tours en septième rangée : une paire redoutable.',
+  ],
+  rookLift: [
+    'La tour monte en troisième rangée, prête à basculer vers le roi.',
+    'La tour grimpe en troisième rangée pour rejoindre l’attaque.',
+  ],
+  minorityAttack: [
+    'L’attaque de minorité : deux pions contre trois, pour laisser un pion faible à l’aile dame.',
+    'Le pion b avance : après l’échange, le pion c restera faible.',
+  ],
+  philidor: [
+    'La défense Philidor : la tour tient la troisième rangée, et passera derrière dès que le pion avancera.',
+    'La défense des manuels : le roi devant le pion, la tour sur la troisième rangée. C’est nulle.',
+  ],
   connectsRooks: [
     'Les tours sont maintenant reliées.',
     'La première rangée est dégagée : les tours se protègent.',
     'Les tours se défendent maintenant l’une l’autre.',
   ],
-  passedPawn: made =>
-    made
-      ? [
-          'Un pion passé est né.',
-          'Voilà un pion passé, un atout pour la finale.',
-          'Un nouveau pion passé : un atout à long terme.',
-        ]
-      : [
-          'Le pion passé avance.',
-          'Le pion passé poursuit sa route.',
-          'Un pion passé doit avancer, et celui-ci est en route.',
-          'Le pion passé se rapproche de la promotion.',
-        ],
+  passedPawn: (made, trait) => PASSED[trait ?? (made ? 'born' : 'pushed')],
   centralKing: [
     'Le roi rejoint le centre, où il compte en finale.',
     'En finale, le roi est une pièce de combat : il rejoint le centre.',
@@ -73,6 +109,10 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | 'why'> = {
     'La tour se place derrière le pion passé, pour le pousser.',
     'Derrière le pion passé : la meilleure place pour une tour.',
     'La tour soutient le pion passé par derrière.',
+  ],
+  blocksPasser: [
+    'La tour se plante devant le pion passé : il n’ira pas plus loin.',
+    'Devant le pion passé, la tour lui barre la route.',
   ],
   fightsCenter: [
     'Le pion dispute le centre.',
@@ -150,6 +190,7 @@ export function plansFr(viewer: Viewer): PlanSentences {
       `${capitalize(the(king))} se rapproche juste à temps : le voilà dans le carré du pion.`,
     ],
     ...tacticPlansFr(the),
+    ...quietPlansFr(the),
     why: whyFr(viewer),
     ...BOARD_PLANS,
   };

@@ -190,7 +190,9 @@ describe('threatensFact', () => {
       after: [{ cp: 600 }, ['h7h6', 'd1d8']],
     });
     const mate = threat(rookSwings.position.fen, { mate: 1 }, ['d1d8']);
-    expect(threatensFact(input(rookSwings), mate)?.text).toBe('[[m:w:Rd8#]] would be mate next.');
+    expect(threatensFact(input(rookSwings), mate)?.text).toBe(
+      '[[m:w:Rd8#]] would be mate next. A back-rank mate: the king’s own pawns wall it in.',
+    );
   });
 
   it('says nothing of a threat the reply takes back: that’s a trade', () => {

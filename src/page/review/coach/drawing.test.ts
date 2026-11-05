@@ -72,7 +72,11 @@ describe('reasonMarks', () => {
 
   it('marks a passed pawn’s road, and the rook come behind it', () => {
     expect(
-      marks({ kind: 'passedPawn', made: false }, '4k3/8/8/1P6/8/8/8/4K3 w - - 0 1', 'b5b6'),
+      marks(
+        { kind: 'passedPawn', made: false, trait: null },
+        '4k3/8/8/1P6/8/8/8/4K3 w - - 0 1',
+        'b5b6',
+      ),
     ).toEqual([{ kind: 'run', from: 'b6', squares: ['b7', 'b8'], tone: 'plan' }]);
     expect(marks({ kind: 'behindPasser' }, '4k3/8/1P6/8/8/8/8/R3K3 w - - 0 1', 'a1b1')).toEqual([
       { kind: 'link', from: 'b1', to: 'b6', tone: 'defense' },

@@ -219,9 +219,9 @@ describe('an error that loses a piece for a pawn', () => {
   });
 
   it('says what the line wins', () => {
-    expect(plain(findings(move, en).fact?.text)).toContain(
-      'picks up a [[p:bn]]knight for a [[p:wp]]pawn',
-    );
+    const { fact } = findings(move, en);
+    expect(plain(fact?.text)).toBe('The [[p:bn]]knight has more attackers than defenders.');
+    expect(plain(fact?.detail)).toContain('picks up a [[p:bn]]knight for a [[p:wp]]pawn');
   });
 });
 

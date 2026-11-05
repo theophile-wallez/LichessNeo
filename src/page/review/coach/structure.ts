@@ -11,6 +11,9 @@ import {
 // What the board's pawns and pieces make of a square: passed pawns, outposts,
 // open files, the endgame.
 
+/** The plies of the opening, for what counts as development and as an early move. */
+export const OPENING_PLIES = 30;
+
 /** The rank as seen from `color`'s side, 0 its own back rank. */
 export const ownRank = (square: Square, color: Color): number => {
   const rank = squareCoords(square)[1];
@@ -36,6 +39,12 @@ function pawnAhead(board: Board, square: Square, color: Color, files: readonly n
       return seen !== null && ownRank(seen, color) > ahead;
     }),
   );
+}
+
+/** Whether a pawn of `color` can still come to attack `square`: one is behind it, beside its file. */
+export function pawnCanHit(board: Board, square: Square, color: Color): boolean {
+  const file = squareCoords(square)[0];
+  return pawnAhead(board, square, opposite(color), [file - 1, file + 1]);
 }
 
 export function isPassed(board: Board, square: Square, color: Color): boolean {

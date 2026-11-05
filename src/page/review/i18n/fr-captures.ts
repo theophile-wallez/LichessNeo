@@ -7,6 +7,7 @@ import {
   indefiniteOn,
   owned,
   partyOf,
+  pieceName,
 } from './fr-grammar.ts';
 import type { FactSentences, Viewer } from './types.ts';
 
@@ -24,6 +25,29 @@ type CaptureSentences = Pick<
   | 'trades'
 >;
 
+// A piece won where taking back loses more: a king can't take a guarded piece
+// back, and a piece like the one taken is a second one lost.
+const retakeCostsFr =
+  (the: (piece: Piece) => string): FactSentences['retakeCosts'] =>
+  (piece, square, defender) => {
+    if (defender.role === 'king')
+      return [
+        `De quoi gagner ${indefiniteOn(piece, square)} : le roi ne peut pas reprendre.`,
+        `${capitalize(indefiniteOn(piece, square))} gagné${agreement(piece)} : le roi ne peut pas reprendre.`,
+      ];
+    if (defender.role === piece.role) {
+      const another = `un${agreement(defender)} autre ${pieceName(defender)}`;
+      return [
+        `De quoi gagner ${indefiniteOn(piece, square)} : reprendre coûterait ${another}.`,
+        `${capitalize(indefiniteOn(piece, square))} gagné${agreement(piece)} : reprendre ne fait que perdre ${another}.`,
+      ];
+    }
+    return [
+      `De quoi gagner ${indefiniteOn(piece, square)} : reprendre coûterait ${the(defender)}.`,
+      `${capitalize(indefiniteOn(piece, square))} gagné${agreement(piece)}, car reprendre perd ${the(defender)}.`,
+    ];
+  };
+
 // Material a side behind takes back, level with the other again or not yet.
 const winsBackFr: FactSentences['winsBack'] = (piece, square, level) =>
   level
@@ -35,6 +59,21 @@ const winsBackFr: FactSentences['winsBack'] = (piece, square, level) =>
         `De quoi récupérer ${indefiniteOn(piece, square)}.`,
         `${capitalize(indefiniteOn(piece, square))} récupéré${agreement(piece)}.`,
       ];
+
+// A piece won for the other side's play, or won with the other side winning anyway.
+const compensationFr =
+  (viewer: Viewer): FactSentences['compensation'] =>
+  (piece, square, color, winning) => {
+    const taker = partyOf(viewer, color);
+    if (winning)
+      return [
+        `${capitalize(indefiniteOn(piece, square))} tombe, mais ça ne change rien : ${taker.subject} ${conjugate(taker, 'gagnes', 'gagne', 'gagnent')} toujours.`,
+      ];
+    return [
+      `${capitalize(indefiniteOn(piece, square))} est gagné${agreement(piece)}, mais ${taker.subject} ${conjugate(taker, 'as', 'a', 'ont')} du jeu en compensation.`,
+      `${capitalize(indefiniteOn(piece, square))} tombe, mais ça se paie : ${taker.subject} ${conjugate(taker, 'obtiens', 'obtient', 'obtiennent')} de l’activité en échange.`,
+    ];
+  };
 
 export function capturesFr(viewer: Viewer): CaptureSentences {
   const the = (piece: Piece): string => owned(viewer, piece);
@@ -50,10 +89,7 @@ export function capturesFr(viewer: Viewer): CaptureSentences {
       `Du matériel offert : ${indefiniteOn(piece, square)}, sans rien en échange.`,
       `${capitalize(indefiniteOn(piece, square))} pris${agreement(piece)} sans rien payer.`,
     ],
-    retakeCosts: (piece, square, defender) => [
-      `De quoi gagner ${indefiniteOn(piece, square)} : reprendre coûterait ${the(defender)}.`,
-      `${capitalize(indefiniteOn(piece, square))} gagné${agreement(piece)}, car reprendre perd ${the(defender)}.`,
-    ],
+    retakeCosts: retakeCostsFr(the),
     winsBack: winsBackFr,
     winsMaterial: (won, given, square) => [
       `De quoi gagner ${indefiniteOn(won, square)} contre ${indefinite(given)}.`,
@@ -68,19 +104,13 @@ export function capturesFr(viewer: Viewer): CaptureSentences {
         `Prendre ${indefiniteOn(piece, square)} ne rapporte rien au bout du compte : ${wins} le matériel.`,
       ];
     },
-    compensation: (piece, square, color: Color) => {
-      const taker = partyOf(viewer, color);
-      return [
-        `${capitalize(indefiniteOn(piece, square))} est gagné${agreement(piece)}, mais ${taker.subject} ${conjugate(taker, 'as', 'a', 'ont')} du jeu en compensation.`,
-        `${capitalize(indefiniteOn(piece, square))} tombe, mais ça se paie : ${taker.subject} ${conjugate(taker, 'obtiens', 'obtient', 'obtiennent')} de l’activité en échange.`,
-      ];
-    },
+    compensation: compensationFr(viewer),
     trades: (taken, ahead) => {
       if (ahead)
         return [
           'Avec du matériel en plus, chaque échange rapproche la victoire.',
           'Un échange : moins il reste de pièces, plus l’avance matérielle pèse.',
-          'Simplifier quand on mène : exactement ce qu’il faut.',
+          'Simplifier quand on mène : moins de pièces, moins de soucis.',
         ];
       if (taken.role === 'queen')
         return [

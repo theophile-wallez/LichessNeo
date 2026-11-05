@@ -1,5 +1,11 @@
-import { type Board, type Color, type Piece, PIECE_VALUES } from '#shared/chess/index.ts';
-import { pieceOn } from '#page/review/chess/material.ts';
+import {
+  type Board,
+  type Color,
+  type Piece,
+  PIECE_VALUES,
+  type Square,
+} from '#shared/chess/index.ts';
+import { exchangeGain, pieceOn } from '#page/review/chess/material.ts';
 import type { Ply } from '#page/review/chess/played-line.ts';
 import { whichOne } from './which-one.ts';
 
@@ -50,6 +56,28 @@ export const finalNet = (plies: readonly Ply[], side: Color): number =>
 /** What `side` comes out ahead where the line last settles within its first `count` plies. */
 export const netWithin = (plies: readonly Ply[], side: Color, count: number): number =>
   netAfter(plies, settledPoints(plies).findLast(point => point <= count) ?? 0, side);
+
+// The plies over which a capture taken back evenly is a trade.
+const TRADE_PLIES = 4;
+
+/** What `side` is ahead a few plies into `line`, once a trade there is taken back. */
+export const netAfterTrade = (line: readonly Ply[], side: Color): number =>
+  netWithin(line, side, TRADE_PLIES);
+
+/** Whether `side` is ahead a few plies into `line`, past what a trade gives back. */
+export const winsWithin = (line: readonly Ply[], side: Color): boolean =>
+  netAfterTrade(line, side) >= 1;
+
+/**
+ * Whether `side`'s capture on `square` of `board` wins: more than it gives
+ * back, or ahead a few plies into `line`, which starts with it. A trade doesn't.
+ */
+export const takeWins = (
+  board: Board,
+  square: Square,
+  side: Color,
+  line: readonly Ply[],
+): boolean => exchangeGain(board, square, side) > 0 || winsWithin(line, side);
 
 /** Drops the pieces traded for one of the same worth: a knight for a bishop wins nothing. */
 function withoutTrades(won: readonly Piece[], lost: readonly Piece[]): [Piece[], Piece[]] {

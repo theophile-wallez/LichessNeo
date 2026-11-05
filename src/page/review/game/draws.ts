@@ -10,7 +10,7 @@ const REPETITIONS = 3;
 const FIFTY_MOVES = 100;
 
 /** A FEN's position, without its move counters: what a repetition compares. */
-const placement = (fen: string): string => fen.split(' ').slice(0, 4).join(' ');
+export const placement = (fen: string): string => fen.split(' ').slice(0, 4).join(' ');
 
 /** Whether the game's last position is a draw by threefold repetition or the fifty-move rule. */
 export function drawnByRule(nodes: readonly GamePosition[]): boolean {

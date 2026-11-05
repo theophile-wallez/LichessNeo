@@ -156,14 +156,14 @@ export const remarksEn: RemarkPools = {
     'This capture has a hidden downside.',
     'Not every capture is a good one.',
     'Grabbing material here is risky.',
-    'A capture that holds up.',
-    'Taking was the right call.',
+    'Taking here lets the opponent in.',
+    'A capture with a catch.',
   ],
   // A won game: how to win it.
   winning: [
-    'This is winning: trade pieces and keep it simple.',
+    'This is winning: keep it simple, take no risks.',
     'Winning now. Safety first: leave no counterplay.',
-    'With this lead, every trade brings the end closer.',
+    'With this lead, the finish line is in sight.',
     'Winning now: keep the pieces safe and push on.',
     'No hurry: a winning game is won one safe move at a time.',
   ],
@@ -174,7 +174,7 @@ export const remarksEn: RemarkPools = {
     'When behind, look for counterplay: the opponent can still slip.',
     'Not over yet: set problems and keep fighting.',
     'Every good move makes the win harder for the opponent.',
-    'Hang in there: the position still has resources.',
+    'Hang in there: make every move count.',
   ],
   earlyQueen: [
     'Bringing the queen out this early is risky.',

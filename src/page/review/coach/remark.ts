@@ -1,5 +1,6 @@
 import { forColor } from '#page/review/evaluation/score.ts';
 import { isError } from '#page/review/classes/classes.ts';
+import { SURE_MATE } from '#page/review/judge/mate.ts';
 import type { RemarkPools } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { type CoachContext, moveSeed } from './context.ts';
@@ -21,9 +22,11 @@ function overridingPool(move: MoveVerdict, pools: RemarkPools): readonly string[
   if (move.san.includes('#')) return pools.mate;
   if (move.moveClass === 'book' && move.position.ply <= 2) return pools.firstMove;
   if (isError(move.moveClass) && mateAfter !== null && mateAfter < 0) return pools.allowsMate;
-  if ((signedMate(move.before, sign) ?? 0) > 0)
-    return (mateAfter ?? 0) > 0 ? pools.mating : pools.missedMate;
-  return null;
+  const mateBefore = signedMate(move.before, sign) ?? 0;
+  if (mateBefore <= 0) return null;
+  if ((mateAfter ?? 0) > 0) return pools.mating;
+  // A long mate the engine stops seeing after a good move was never sure: no mate missed.
+  return isError(move.moveClass) || mateBefore <= SURE_MATE ? pools.missedMate : null;
 }
 
 function situationPool(move: MoveVerdict, pools: RemarkPools): string[] {

@@ -772,6 +772,11 @@ link to it, and a line here). The rest hold everywhere:
   with `BOT_CHECKED` (`tests/e2e/support/lichess.ts`) in the same change,
   rather than chase them or hold the release. Lift the skip once the page
   loads again.
+- **Crawlers get a 404.** Lichess's API answers a script it takes for a
+  crawler (`curl` or `python-requests` by their own user agent) with its
+  "Page not found" page, on routes such as `/api/games/user/<name>`. Send a
+  browser's user agent (`curl -A 'Mozilla/5.0 …'`); `/game/export/<id>`
+  isn't guarded.
 - Check the extension is in before trusting a screenshot: read a computed
   style one of our rules sets (on an analysis page, `.analyse__controls` has
   a 1px `border-top`).

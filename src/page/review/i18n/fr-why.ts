@@ -1,13 +1,19 @@
+import type { PassedTrait } from '#page/review/coach/passed-pawns.ts';
 import type { Piece } from '#shared/chess/index.ts';
 import {
   isLineReason,
   isPlain,
+  isQuietReason,
   type LineReason,
   type PlainReason,
   type Reason,
 } from '#page/review/coach/idea.ts';
 import { squareToken } from '#page/review/comment/tokens.ts';
 import { agreement, indefiniteOn, owned, pairOf, pieceName } from './fr-grammar.ts';
+import { quietWhyFr } from './fr-quiet-plans.ts';
+
+const TRAITS_FR = { connected: ' lié', protected: ' protégé', outside: ' éloigné' };
+const TRAIT_FR = (trait: PassedTrait | null): string => (trait ? TRAITS_FR[trait] : '');
 import type { Viewer } from './types.ts';
 
 // Why a move was, or is, played, as a clause after its name: the better move's
@@ -20,6 +26,10 @@ const bare = (piece: Piece): string => owned(null, piece);
 const PLAIN_REASONS: Readonly<Record<PlainReason, readonly [string, string]>> = {
   doublesRooks: ['doublait les tours', 'double les tours'],
   seventhRank: ['mettait la tour en septième rangée', 'met la tour en septième rangée'],
+  rooksOnSeventh: ['doublait les tours en septième rangée', 'double les tours en septième rangée'],
+  rookLift: ['faisait monter la tour vers le roi', 'fait monter la tour vers le roi'],
+  minorityAttack: ['lançait l’attaque de minorité', 'lance l’attaque de minorité'],
+  philidor: ['installait la défense Philidor', 'installe la défense Philidor'],
   connectsRooks: ['reliait les tours', 'relie les tours'],
   centralKing: ['centralisait le roi', 'centralise le roi'],
   center: ['prenait le centre', 'prend le centre'],
@@ -27,6 +37,7 @@ const PLAIN_REASONS: Readonly<Record<PlainReason, readonly [string, string]>> = 
   supportsCenter: ['soutenait le centre', 'soutient le centre'],
   castles: ['mettait le roi à l’abri', 'met le roi à l’abri'],
   behindPasser: ['plaçait la tour derrière le pion passé', 'place la tour derrière le pion passé'],
+  blocksPasser: ['arrêtait le pion passé', 'arrête le pion passé'],
   luft: ['donnait de l’air au roi', 'donne de l’air au roi'],
   space: ['gagnait de l’espace', 'gagne de l’espace'],
   opposition: ['prenait l’opposition', 'prend l’opposition'],
@@ -44,6 +55,7 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string, tense: Ten
     return `${tense('installait', 'installe')} ${piece} sur un avant-poste`;
   if (reason.kind === 'chases') {
     const on = reason.square ? ` en ${reason.square}` : '';
+    if (reason.trapped) return `${tense('enfermait', 'enferme')} ${piece}${on}`;
     return reason.undefended
       ? `${tense('attaquait', 'attaque')} ${piece} sans défense${on}`
       : `${tense('gagnait', 'gagne')} un tempo sur ${piece}${on}`;
@@ -75,6 +87,13 @@ function takesWhy(reason: PieceReason, piece: string, tense: Tense): string {
   const square = 'square' in reason && typeof reason.square === 'string' ? reason.square : null;
   const named = square === null ? piece : indefiniteOn(reason.piece, square);
   if (reason.kind === 'takesWith') return `${tense('prenait', 'prend')} plutôt avec ${named}`;
+  if (reason.kind === 'trades') {
+    const trades = tense('échangeait', 'échange');
+    if (reason.piece.role === 'queen') return `${trades} les dames`;
+    return reason.piece.role === 'pawn'
+      ? `${trades} en ${squareToken(reason.square)}`
+      : `${trades} ${piece}`;
+  }
   return `${tense('prenait', 'prend')} ${named}`;
 }
 
@@ -111,9 +130,11 @@ function lineWhy(reason: LineReason, the: (piece: Piece) => string, tense: Tense
 // or does, for a move still to come : « Ça permet Fe2, qui attaque ton cavalier ».
 export function whyFr(viewer: Viewer): (reason: Reason, now?: boolean) => string {
   const the = (piece: Piece): string => owned(viewer, piece);
+  const quiet = quietWhyFr(the);
   const why = (reason: Reason, now = false): string => {
     const tense: Tense = (past, present) => (now ? present : past);
     if (isPlain(reason)) return tense(...PLAIN_REASONS[reason.kind]);
+    if (isQuietReason(reason)) return quiet(reason, now);
     if (reason.kind === 'both') return `${why(reason.first, now)} et ${why(reason.second, now)}`;
     if (reason.kind === 'discovery' || reason.kind === 'doubleThreat' || reason.kind === 'fork')
       return tacticWhy(reason, viewer, tense);
@@ -121,7 +142,10 @@ export function whyFr(viewer: Viewer): (reason: Reason, now?: boolean) => string
     if (isLineReason(reason)) return lineWhy(reason, the, tense);
     if (reason.kind === 'passedPawn')
       return reason.made
-        ? tense('créait un pion passé', 'crée un pion passé')
+        ? tense(
+            `créait un pion passé${TRAIT_FR(reason.trait)}`,
+            `crée un pion passé${TRAIT_FR(reason.trait)}`,
+          )
         : tense('poussait le pion passé', 'pousse le pion passé');
     if (reason.kind === 'attacksKing')
       return `${tense('lançait', 'lance')} l’attaque contre ${the(reason.king)}`;

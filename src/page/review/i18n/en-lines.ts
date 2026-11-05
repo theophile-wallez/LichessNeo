@@ -9,7 +9,7 @@ import {
   soon,
   within,
 } from './en-grammar.ts';
-import { motifEn } from './en-motifs.ts';
+import { motifEn, pressureEn } from './en-motifs.ts';
 import type { LineFacts, Viewer } from './types.ts';
 
 // The sentences read off the engine's lines: what a line wins, and the threats.
@@ -42,14 +42,14 @@ function gainsEn(viewer: Viewer): GainSentences {
     wouldHaveWon: (color, { material, line, moves }) => [
       `Better was to win ${material} ${soon(moves)}: ${line}.`,
       `${capitalize(party(color).name)} could have won ${material} ${soon(moves)}: ${line}.`,
-      `${capitalize(material)} was there for the taking ${soon(moves)}: ${line}.`,
-      `There was ${material} to win ${soon(moves)}: ${line}.`,
+      `There was a way to win ${material} ${soon(moves)}: ${line}.`,
+      `The chance was there to win ${material} ${soon(moves)}: ${line}.`,
     ],
     winsAlong: ({ material, line, moves }) => [
       `This wins ${material} ${soon(moves)}: ${line}.`,
-      `${capitalize(material)} won ${soon(moves)}: ${line}.`,
+      `That picks up ${material} ${soon(moves)}: ${line}.`,
       `That nets ${material} ${soon(moves)}: ${line}.`,
-      `${capitalize(material)} in the bag ${soon(moves)}: ${line}.`,
+      `That comes away with ${material} ${soon(moves)}: ${line}.`,
     ],
   };
 }
@@ -94,7 +94,7 @@ function mateThreatsEn(viewer: Viewer): MateThreatSentences {
         ? [
             `That stops the mate, ${line}, giving up ${the(cost)}.`,
             `${capitalize(the(cost))} is given up to stop the mate: ${line}.`,
-            `Mate was coming, ${line}: stopping it costs ${the(cost)}.`,
+            `Mate was coming with ${line}: stopping it costs ${the(cost)}.`,
           ]
         : [
             `The mate is stopped: ${line}.`,
@@ -139,6 +139,24 @@ function mateThreatsEn(viewer: Viewer): MateThreatSentences {
 
 export const lineFactsEn = (viewer: Viewer): LineFacts => ({
   motif: motifEn(viewer),
+  pressure: pressureEn(viewer),
+  nextUp: (next, why) => [
+    `Next up: ${next}, ${why}.`,
+    `The idea: ${next} next, ${why}.`,
+    `And then ${next}, ${why}.`,
+  ],
+  inBetween: (retake, check) =>
+    check
+      ? [
+          `A check in between: ${retake} comes right after.`,
+          `First a check, then ${retake}.`,
+          `No rush to take back: the check first, then ${retake}.`,
+        ]
+      : [
+          `An in-between move: ${retake} comes right after.`,
+          `No rush to take back: ${retake} can wait a move.`,
+          `First this, then ${retake}.`,
+        ],
   material: materialEn,
   ...gainsEn(viewer),
   ...threatsEn(viewer),

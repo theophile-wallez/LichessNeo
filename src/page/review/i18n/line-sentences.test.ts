@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Piece } from '#shared/chess/index.ts';
+import type { Named } from './types.ts';
 import { en, english } from './en.ts';
 import { fr, french } from './fr.ts';
 
@@ -7,6 +8,7 @@ import { fr, french } from './fr.ts';
 // quiet move's plan, in both languages.
 
 const black = (role: Piece['role']): Piece => ({ role, color: 'black' });
+const named = (role: Piece['role']): Named => ({ piece: black(role), square: null });
 const white = (role: Piece['role']): Piece => ({ role, color: 'white' });
 
 describe('the material won', () => {
@@ -48,50 +50,50 @@ describe('the tactic', () => {
   const MOVE = '16. [[m:w:Qc7+]]';
 
   it('names a fork, two of a kind as a pair', () => {
-    expect(en.facts.motif('fork', MOVE, [black('king'), black('rook')])).toContain(
+    expect(en.facts.motif('fork', MOVE, [named('king'), named('rook')])).toContain(
       `${MOVE} forks the [[p:bk]]king and the [[p:br]]rook.`,
     );
-    expect(en.facts.motif('fork', MOVE, [black('rook'), black('rook')])).toContain(
+    expect(en.facts.motif('fork', MOVE, [named('rook'), named('rook')])).toContain(
       `${MOVE} forks both [[p:br]]rooks.`,
     );
-    expect(fr.facts.motif('fork', MOVE, [black('rook'), black('rook')])).toContain(
+    expect(fr.facts.motif('fork', MOVE, [named('rook'), named('rook')])).toContain(
       `${MOVE} fait une fourchette sur les deux [[p:br]]tours.`,
     );
-    expect(french('white').facts.motif('fork', MOVE, [black('rook'), black('rook')])).toContain(
+    expect(french('white').facts.motif('fork', MOVE, [named('rook'), named('rook')])).toContain(
       `${MOVE} fait une fourchette sur les deux [[p:br]]tours adverses.`,
     );
   });
 
   it('says what a pinned piece is pinned to, agreed in French', () => {
-    expect(en.facts.motif('pin', MOVE, [black('queen'), black('king')])).toContain(
+    expect(en.facts.motif('pin', MOVE, [named('queen'), named('king')])).toContain(
       'The [[p:bq]]queen is pinned to the [[p:bk]]king.',
     );
-    expect(fr.facts.motif('pin', MOVE, [black('queen'), black('king')])).toContain(
+    expect(fr.facts.motif('pin', MOVE, [named('queen'), named('king')])).toContain(
       'La [[p:bq]]dame est clouée au [[p:bk]]roi.',
     );
   });
 
   it('speaks of the viewer’s own pieces as theirs', () => {
-    expect(english('black').facts.motif('trappedPiece', MOVE, [black('bishop')])).toContain(
+    expect(english('black').facts.motif('trappedPiece', MOVE, [named('bishop')])).toContain(
       'Your [[p:bb]]bishop is trapped: it has nowhere to go.',
     );
-    expect(french('black').facts.motif('trappedPiece', MOVE, [black('bishop')])).toContain(
+    expect(french('black').facts.motif('trappedPiece', MOVE, [named('bishop')])).toContain(
       'Ton [[p:bb]]fou est pris au piège : il n’a plus de case.',
     );
   });
 
   it('names the piece a pin holds without saying whose it is again', () => {
-    expect(english('white').facts.motif('pin', MOVE, [black('queen'), black('king')])).toContain(
+    expect(english('white').facts.motif('pin', MOVE, [named('queen'), named('king')])).toContain(
       'The opponent’s [[p:bq]]queen is pinned to the [[p:bk]]king.',
     );
-    expect(french('black').facts.motif('pin', MOVE, [black('queen'), black('king')])).toContain(
+    expect(french('black').facts.motif('pin', MOVE, [named('queen'), named('king')])).toContain(
       'Ta [[p:bq]]dame est clouée au [[p:bk]]roi.',
     );
   });
 
   it('needs the piece a check wins to name it', () => {
-    expect(en.facts.motif('doubleCheck', MOVE, [black('king')])).toBeNull();
-    expect(fr.facts.motif('discoveredCheck', MOVE, [black('king')])).toBeNull();
+    expect(en.facts.motif('doubleCheck', MOVE, [named('king')])).toBeNull();
+    expect(fr.facts.motif('discoveredCheck', MOVE, [named('king')])).toBeNull();
   });
 });
 
@@ -234,7 +236,7 @@ describe('a quiet move’s plan', () => {
     expect(en.facts.openFile(true, false)).toContain(
       'The rook takes the half-open file, where it belongs.',
     );
-    expect(fr.facts.passedPawn(true)).toContain('Un pion passé est né.');
+    expect(fr.facts.passedPawn(true, null)).toContain('Un pion passé est né.');
   });
 });
 

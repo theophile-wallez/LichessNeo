@@ -1,6 +1,7 @@
 import { z } from 'zod/mini';
 import type { Mark } from '#page/board/review-arrows.ts';
-import { findings, type Theme, themesOf } from '#page/review/coach/fact.ts';
+import { findings, ideasOf, type Theme, themesOf } from '#page/review/coach/fact.ts';
+import { freshTold, recalled } from '#page/review/coach/told.ts';
 import { explanation } from '#page/review/coach/explanation.ts';
 import { passedFen, type Threat } from '#page/review/coach/threat.ts';
 import type { Threats } from '#page/review/coach/threat-facts.ts';
@@ -111,9 +112,19 @@ export interface DemoComment {
   readonly drawing: readonly Mark[];
 }
 
+// As view/verdict.ts has them: what the moves just before said why of.
+function recentIdeas(move: MoveVerdict, language: ReviewLanguage): ReadonlySet<string> {
+  return new Set(
+    recalled(moves, move.ply).flatMap(played =>
+      Array.from(ideasOf(played, language, threatsAround(played))),
+    ),
+  );
+}
+
 export function commentOn(move: MoveVerdict, coach: number, language: ReviewLanguage): DemoComment {
   const threats = threatsAround(move);
-  const found = findings(move, language, threats);
+  const recent = recentIdeas(move, language);
+  const found = findings(move, language, threats, freshTold(recent));
   const parts = explanation(
     move,
     { gameId: GAME_ID, coach, language },
@@ -121,6 +132,7 @@ export function commentOn(move: MoveVerdict, coach: number, language: ReviewLang
       opening: move.ply === demo.bookPly ? demo.opening : '',
       threats,
       turning: move === turning,
+      recent,
     },
   );
   return {

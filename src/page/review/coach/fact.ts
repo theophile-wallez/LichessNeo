@@ -7,16 +7,28 @@ import { moveToken } from '#page/review/comment/tokens.ts';
 import type { FactSentences, ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
-import { littleBetterFact } from './best-fact.ts';
+import { oppositeWings } from './attack-plans.ts';
+import { bestFact, littleBetterFact } from './best-fact.ts';
 import { captureFact } from './capture-fact.ts';
+import { blocksFact, castlingFact } from './castling.ts';
 import { reasonMarks } from './drawing.ts';
 import { errorFindings, mateDistance, mates } from './error-fact.ts';
+import { inBetweenFact } from './in-between.ts';
+import { nextFact } from './next-fact.ts';
 import { gainFact, mateLine } from './line-facts.ts';
 import { pinnedOfferFact } from './pinned-take.ts';
 import { planFact, raceFact } from './plan.ts';
+import { withGift } from './greek-gift.ts';
+import { desperadoFact } from './desperado.ts';
+import { mateBoard, matedBy, withPattern } from './mate-pattern.ts';
+import { perpetualFact } from './perpetual.ts';
+import { stalemateFact } from './stalemate.ts';
 import { type Fact, oneOf, said, type Theme } from './said.ts';
+import { doubledFact } from './shape-facts.ts';
+import { isolatedFact } from './structure-facts.ts';
 import { NO_THREATS, parriedFact, type Threats, threatensFact } from './threat-facts.ts';
 import { evaluationLevel } from './trajectory.ts';
+import { freshTold, isNew, type Told } from './told.ts';
 
 // One concrete thing the board or the engine shows about a move: a piece left
 // hanging, a mate allowed or missed, a fork, the better move, what a capture
@@ -47,6 +59,8 @@ export interface FactInput {
   readonly threats: Threats;
   /** The move isn't the reader's: what it threatens comes first. */
   readonly theirs: boolean;
+  /** The ideas said on the moves just before, and those said now. */
+  readonly told: Told;
 }
 
 const PUNISHERS: ReadonlySet<MoveClass> = new Set<MoveClass>([
@@ -71,7 +85,7 @@ export function punishes(move: MoveVerdict): boolean {
 function standoutFact(input: FactInput, moved: Piece | undefined): Fact | null {
   const { move, facts, me, them } = input;
   const sacrifice = move.moveClass === 'brilliant';
-  const gain = sacrifice ? null : gainFact(input);
+  const gain = sacrifice ? null : (gainFact(input) ?? inBetweenFact(input));
   if (gain !== null) return gain;
   const { facts: sentences, before, after, theirs } = input;
   const race = raceFact({ move, sentences, before, after, theirs });
@@ -102,20 +116,27 @@ function onlyMoveFact({ move, facts, me, sign }: FactInput): Fact | null {
 // A quiet move's point is often the threat it stops, else the one it makes.
 function threatsFact(input: FactInput, matesOnly: boolean): Fact | null {
   const { before, after } = input.threats;
-  return (
-    (before && parriedFact(input, before, matesOnly)) ??
-    (after && threatensFact(input, after, matesOnly))
-  );
+  const parried = before && parriedFact(input, before, matesOnly);
+  if (parried) return parried;
+  const threat = after && threatensFact(input, after, matesOnly);
+  // The same material threat, said a move before, is no news; a mate always is.
+  if (!threat || 'mate' in after.record) return threat;
+  return isNew(input.told, 'threatens', after.record.best ?? '') ? threat : null;
 }
 
 const alone = (fact: Fact | null): Findings => ({ fact, followUp: null });
 
 // A sure mate under way after the move, move by move: the mover's, or the one it can't stop.
-function mateUnderWay({ move, facts, sign }: FactInput): Fact | null {
+function mateUnderWay({ move, facts, sign, me, them, told }: FactInput): Fact | null {
   const line = mateLine(move.after, move.position.fen, 'a', { short: true });
   if (line === null) return null;
-  const ways = mates(move.after, sign) ? facts.mateFollows(line) : facts.mateUnstoppable(line);
-  return said(oneOf(ways, move), 'mate');
+  const ours = mates(move.after, sign);
+  const ways = ours ? facts.mateFollows(line) : facts.mateUnstoppable(line);
+  const end = mateBoard(move.after, move.position.fen);
+  return said(
+    withPattern(oneOf(ways, move), end, { mated: ours ? them : me, facts, told }),
+    'mate',
+  );
 }
 
 // An error punished, said when nothing more concrete is (a recapture says it
@@ -128,11 +149,16 @@ function punishedFact({ move, facts, them, sign }: FactInput): Fact | null {
   return punishes(move) && better ? said(oneOf(facts.punishesAtOnce(them), move)) : null;
 }
 
-// A mate under way, what stands out, else the fork the move makes.
+// A mate under way, what stands out, else the fork a quiet move makes: a
+// capture says what it takes first.
 function tacticFact(input: FactInput, moved: Piece | undefined): Fact | null {
-  const { move, facts, them, after } = input;
   const standout = mateUnderWay(input) ?? standoutFact(input, moved);
   if (standout !== null) return standout;
+  return input.move.san.includes('x') ? null : forkFact(input);
+}
+
+function forkFact(input: FactInput): Fact | null {
+  const { move, facts, them, after } = input;
   const [first, second] = forkedBy(move.previousPosition.fen, move.uci);
   if (!first || !second) return null;
   const scene = { uci: move.uci, before: input.before, after, shown: after, toMove: them };
@@ -140,27 +166,46 @@ function tacticFact(input: FactInput, moved: Piece | undefined): Fact | null {
   return said(oneOf(facts.forks(first, second), move), 'fork', drawing);
 }
 
+// What a capture takes, then the better move when it fell short, else the fork it makes.
+function captureFindings(input: FactInput, moved: Piece, dest: string): Findings | null {
+  const capture = desperadoFact(input, moved) ?? captureFact(input, moved, dest);
+  const short = input.move.moveClass === 'good' || input.move.moveClass === 'excellent';
+  if (capture === null) return null;
+  const after =
+    forkFact(input) ?? doubledFact(input) ?? isolatedFact(input, input.them) ?? castlingFact(input);
+  return { fact: capture, followUp: short ? littleBetterFact(input) : after };
+}
+
 function goodFindings(input: FactInput): Findings {
-  const { move, facts, me, them, after } = input;
+  const { move, facts, me, after } = input;
   const dest = move.uci.slice(2, 4);
   const moved = pieceOn(after, dest);
-  const tactic = tacticFact(input, moved);
+  // Checks to a draw are the story, whatever else they parry.
+  const tactic = perpetualFact(input) ?? withGift(input, tacticFact(input, moved));
   if (tactic !== null) return alone(tactic);
   const promotion = roleOfLetter(/=([QRBN])/.exec(move.san)?.[1] ?? '');
-  if (promotion) return alone(said(oneOf(facts.promotes({ role: promotion, color: me }), move)));
+  if (promotion)
+    return alone(
+      said(oneOf(facts.promotes({ role: promotion, color: me }, move.san.includes('+')), move)),
+    );
   // The opponent's castling is theirs to care about: a remark says it.
-  if (move.san.startsWith('O-O'))
-    return alone(input.theirs ? null : said(oneOf(facts.castles, move)));
-  const capture = moved && move.san.includes('x') ? captureFact(input, moved, dest) : null;
-  // A capture short of the best says the move a little better too.
-  const short = move.moveClass === 'good' || move.moveClass === 'excellent';
-  if (capture !== null) return { fact: capture, followUp: short ? littleBetterFact(input) : null };
-  // What the move does says more than that it punishes an error.
-  const quiet = quietFact(input);
-  if (quiet !== null) return alone(quiet);
-  const punished = punishedFact(input);
-  if (punished !== null) return alone(punished);
-  return alone(move.san.includes('+') ? said(oneOf(facts.checkForces(them), move)) : null);
+  if (move.san.startsWith('O-O')) {
+    const ways = oppositeWings(after, me) ? facts.castlesOpposite : facts.castles;
+    return alone(input.theirs ? null : said(oneOf(ways, move)));
+  }
+  const capture = moved && move.san.includes('x') ? captureFindings(input, moved, dest) : null;
+  if (capture !== null) return capture;
+  return alone(quietFindings(input));
+}
+
+// What a quiet move does says more than that it punishes an error; a check
+// that does nothing else forces an answer.
+function quietFindings(input: FactInput): Fact | null {
+  const { move, facts, them } = input;
+  const quiet = blocksFact(input) ?? quietFact(input) ?? castlingFact(input);
+  const told = quiet ?? punishedFact(input) ?? nextFact(input);
+  if (told !== null) return told;
+  return move.san.includes('+') ? said(oneOf(facts.checkForces(them), move)) : null;
 }
 
 // The plies of the opening, where what a move does matters more than a slightly better one.
@@ -189,12 +234,16 @@ export function findings(
   move: MoveVerdict,
   { facts, viewer }: Pick<ReviewLanguage, 'facts' | 'viewer'>,
   threats: Threats = NO_THREATS,
+  told: Told = freshTold(),
 ): Findings {
   const me = move.color;
   const them = opposite(me);
   const sign = me === 'white' ? 1 : -1;
-  if (move.san.includes('#'))
-    return { fact: said(oneOf(facts.checkmate(them), move), 'mate'), followUp: null };
+  if (move.san.includes('#')) {
+    const end = matedBy(move.previousPosition.fen, move.uci);
+    const text = withPattern(oneOf(facts.checkmate(them), move), end, { mated: them, facts, told });
+    return { fact: said(text, 'mate'), followUp: null };
+  }
   const best =
     move.bestSan && move.best
       ? moveToken(mateMarked(move.previousPosition.fen, move.best, move.before), me, {
@@ -232,8 +281,29 @@ export function findings(
     reply,
     threats,
     theirs,
+    told,
   };
+  return judgedFindings(input);
+}
+
+// A stalemate says it all, the move that kept the win after it; else the error's or the good move's.
+function judgedFindings(input: FactInput): Findings {
+  const { move } = input;
+  const stalemate = stalemateFact(input);
+  if (stalemate !== null)
+    return { fact: stalemate, followUp: isError(move.moveClass) ? bestFact(input) : null };
   return isError(move.moveClass) ? errorFindings(input) : goodFindings(input);
+}
+
+/** The ideas a move's comment says why of, for the moves after it not to say them again. */
+export function ideasOf(
+  move: MoveVerdict,
+  language: Pick<ReviewLanguage, 'facts' | 'viewer'>,
+  threats: Threats = NO_THREATS,
+): ReadonlySet<string> {
+  const told = freshTold();
+  findings(move, language, threats, told);
+  return told.now;
 }
 
 /** The tactics the coach's findings are about, for the bubble's tags. */
