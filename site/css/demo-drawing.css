@@ -1,4 +1,4 @@
-/* The coach's drawing on the demo's board (page/board/drawing.ts), coming in
+/* The coach's drawing on the demo's board (shared/board/drawing.ts), coming in
    as the extension's does (styles/board/shapes-promotion.css): its layers
    one after the other, the dots one by one, the runs and the lines from
    their start. */

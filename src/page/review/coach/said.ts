@@ -1,4 +1,5 @@
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { DrawingTopic } from '#shared/coach-drawings.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import type { Ways } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { hash } from './hash.ts';
@@ -15,14 +16,28 @@ export type Theme =
   | 'defender'
   | 'trapped'
   | 'hanging'
+  | 'xray'
+  | 'attraction'
+  | 'interference'
+  | 'clearance'
   | 'mate'
   | 'sacrifice';
+
+/** A fact's drawing on the board, and the kind of drawing it is, which the settings may hide. */
+export interface Drawing {
+  readonly topic: DrawingTopic;
+  readonly marks: readonly Mark[];
+}
+
+/** `marks` as a drawing of `topic`, or none when there are none. */
+export const drawn = (topic: DrawingTopic, marks: readonly Mark[] | null): Drawing | null =>
+  marks && marks.length > 0 ? { topic, marks } : null;
 
 export interface Fact {
   readonly text: string;
   readonly theme: Theme | null;
   /** What the fact speaks of, drawn on the board. */
-  readonly drawing?: readonly Mark[];
+  readonly drawing?: Drawing;
   /** The technical side of it, the moves and squares, said below the rest. */
   readonly detail?: string;
 }
@@ -30,8 +45,8 @@ export interface Fact {
 export const said = (
   text: string,
   theme: Theme | null = null,
-  drawing: readonly Mark[] | null = null,
-): Fact => (drawing && drawing.length > 0 ? { text, theme, drawing } : { text, theme });
+  drawing: Drawing | null = null,
+): Fact => (drawing ? { text, theme, drawing } : { text, theme });
 
 /** `fact`, its technical side said below the rest. */
 export const withDetail = (fact: Fact, detail: string): Fact => ({ ...fact, detail });

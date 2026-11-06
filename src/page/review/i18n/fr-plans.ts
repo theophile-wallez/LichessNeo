@@ -139,6 +139,26 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | '
     'Opposition : les rois se font face, une case entre eux, et l’autre doit s’écarter.',
     'Le roi se place face à l’autre roi : l’opposition, la clé des finales de pions.',
   ],
+  distantOpposition: [
+    'L’opposition à distance : un nombre impair de cases entre les rois, et l’autre devra céder.',
+    'Le roi prend l’opposition de loin : quand les rois se rejoindront, c’est l’autre qui cédera.',
+  ],
+  keySquare: [
+    'Le roi atteint une case clé : le pion ira à dame, quelle que soit la défense.',
+    'Une case clé pour le roi : de là, le pion passe.',
+  ],
+  cornerDraw: [
+    'Le roi gagne le coin : face à un pion tour, c’est nulle.',
+    'Dans le coin : un pion tour ne gagne pas contre un roi installé là.',
+  ],
+  bridge: [
+    'Le pont : depuis la quatrième rangée, la tour arrêtera les échecs. La position de Lucena, et elle gagne.',
+    'Le pont de la position de Lucena : la tour se prépare à abriter le roi des échecs.',
+  ],
+  vancura: [
+    'La défense Vancura : la tour attaque le pion de côté, et la nulle tient.',
+    'La tour frappe le pion tour de côté : la position Vancura, nulle.',
+  ],
   center: [
     'Le pion prend le centre.',
     'Un pion au centre, qui contrôle des cases clés.',

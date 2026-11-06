@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { checkmate } from '#shared/chess/mate.ts';
 import { setHtml } from '#shared/html.ts';
 import { LegacySchema } from './fixtures/schema.ts';
-import { arrowOutline, arrowPath, squareCenter, squareOnScreen } from './geometry.ts';
+import { arrowOutline, arrowPath, squareCenter, squareOnScreen } from '#shared/board/geometry.ts';
 import { arrowsMarkup, fillsMarkup } from './render.ts';
 // What the original script drew.
 import legacyJson from './fixtures/legacy.json' with { type: 'json' };

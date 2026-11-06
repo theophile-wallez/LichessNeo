@@ -42,7 +42,7 @@ describe('a pin', () => {
     const bishop = { piece: { role: 'bishop', color: 'black' }, square: '[[s:c4]]' } as const;
     expect(en.facts.pinnedGuard(bishop, pawn)).toContain(fact?.text);
     expect(fact?.theme).toBe('pin');
-    expect(fact?.drawing?.length).toBeGreaterThan(0);
+    expect(fact?.drawing?.marks.length).toBeGreaterThan(0);
     expect(plain(fact?.detail)).toMatch(/\[\[m:w:Rxc4\]\]/);
   });
 

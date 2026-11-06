@@ -2,8 +2,8 @@ import { parseSquare } from '#shared/chess/squares.ts';
 import type { Color } from '#shared/chess/types.ts';
 import type { Point } from '#shared/geometry.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
-import { squareOnScreen } from '#page/board/geometry.ts';
-import type { ReviewArrow } from '#page/board/review-arrows.ts';
+import { squareOnScreen } from '#shared/board/geometry.ts';
+import type { ReviewArrow } from '#shared/board/marks.ts';
 import { CLASS_COLORS, GOOD, type MoveClass } from '#page/review/classes/classes.ts';
 import { classSvg } from '#page/review/classes/icon-svg.ts';
 

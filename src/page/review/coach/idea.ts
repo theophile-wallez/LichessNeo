@@ -125,6 +125,16 @@ export type Plan =
     }
   /** A king's step into the opposition, in an ending of kings and pawns. */
   | { readonly kind: 'opposition' }
+  /** The same, from afar: three or five squares between the kings. */
+  | { readonly kind: 'distantOpposition' }
+  /** The king of king and pawn against king onto a key square: the pawn queens. */
+  | { readonly kind: 'keySquare' }
+  /** The king into the corner in front of the other side's rook pawn: a draw. */
+  | { readonly kind: 'cornerDraw' }
+  /** The rook to its fourth rank in the Lucena position, to block the checks. */
+  | { readonly kind: 'bridge' }
+  /** The rook beside a rook pawn on its sixth rank: the Vancura defense. */
+  | { readonly kind: 'vancura' }
   /** `king` stepping into the square of the passed pawn on `file`, just in time. */
   | { readonly kind: 'entersSquare'; readonly file: number; readonly king: Piece }
   /** The king come beside the square ahead of its own passed `pawn`, on `square`. */
@@ -198,7 +208,7 @@ export type Reason =
    */
   | { readonly kind: 'both'; readonly first: Reason; readonly second: Reason };
 
-const PLAIN: ReadonlySet<string> = new Set([
+const PLAIN_KINDS = [
   'doublesRooks',
   'seventhRank',
   'rooksOnSeventh',
@@ -216,33 +226,20 @@ const PLAIN: ReadonlySet<string> = new Set([
   'luft',
   'space',
   'opposition',
+  'distantOpposition',
+  'keySquare',
+  'cornerDraw',
+  'bridge',
+  'vancura',
   'checks',
   'discoveredCheck',
   'pawnEnding',
-]);
+] as const;
+
+const PLAIN: ReadonlySet<string> = new Set(PLAIN_KINDS);
 
 /** The reasons that need nothing more to be said. */
-export type PlainReason =
-  | 'doublesRooks'
-  | 'seventhRank'
-  | 'rooksOnSeventh'
-  | 'rookLift'
-  | 'philidor'
-  | 'minorityAttack'
-  | 'connectsRooks'
-  | 'centralKing'
-  | 'center'
-  | 'fightsCenter'
-  | 'supportsCenter'
-  | 'castles'
-  | 'behindPasser'
-  | 'blocksPasser'
-  | 'luft'
-  | 'space'
-  | 'opposition'
-  | 'checks'
-  | 'discoveredCheck'
-  | 'pawnEnding';
+export type PlainReason = (typeof PLAIN_KINDS)[number];
 
 /** The reasons about the line a piece moved to: an open file, a battery. */
 export type LineReason = Extract<

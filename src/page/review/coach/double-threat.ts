@@ -7,7 +7,7 @@ import {
   type Piece,
   type Square,
 } from '#shared/chess/index.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import { forkTargets } from '#page/review/chess/fork.ts';
 import { mateInOne } from '#page/review/chess/mate-in-one.ts';
 import { playLine } from '#page/review/chess/played-line.ts';

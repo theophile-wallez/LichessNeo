@@ -33,9 +33,9 @@ export function quietPlansEn(the: (piece: Piece) => string): QuietPlanSentences 
       `The way is clear: ${the(slider)} sees down the ${line}.`,
     ],
     backs: (piece, square) => [
-      `The pawn backs up ${target(the, piece, square)}.`,
-      `${capitalize(target(the, piece, square))} has a pawn behind it now.`,
-      `${capitalize(target(the, piece, square))} is under attack, and a pawn has its back.`,
+      `The pawn supports ${target(the, piece, square)}.`,
+      `${capitalize(target(the, piece, square))} is supported by a pawn now.`,
+      `${capitalize(target(the, piece, square))} is under attack, and a pawn supports it.`,
     ],
     hitsPinned: (piece, square) => [
       `Piling up on the pinned ${on(piece, square)}.`,
@@ -66,7 +66,7 @@ export function quietWhyEn(the: (piece: Piece) => string): QuietWhy {
       return `stopping the passed ${on(reason.pawn, reason.square)}`;
     if (reason.kind === 'opensLine') return `opening the ${reason.line} for ${the(reason.slider)}`;
     if (reason.kind === 'backs')
-      return `backing up ${target(the, reason.piece, reason.square ?? null)} with a pawn`;
+      return `supporting ${target(the, reason.piece, reason.square ?? null)} with a pawn`;
     if (reason.kind === 'hitsPinned')
       return `piling up on the pinned ${on(reason.piece, reason.square)}`;
     return reason.declined ? 'keeping the queens on' : 'offering the queen trade';

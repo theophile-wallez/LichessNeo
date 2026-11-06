@@ -39,6 +39,27 @@ describe('matePatternOf', () => {
   });
 });
 
+// One mate of each kind Lichess's practice teaches, Black mated.
+const NAMED = {
+  boden: '2kr4/3p4/B7/8/5B2/8/8/6K1 b - - 0 1',
+  anastasia: '8/4N1pk/8/8/8/8/8/6KR b - - 0 1',
+  damiano: '5rk1/5p1Q/6P1/8/8/8/8/6K1 b - - 0 1',
+  lolli: '6k1/6Q1/5P2/8/8/8/8/6K1 b - - 0 1',
+  kissOfDeath: '7k/7Q/6K1/8/8/8/8/8 b - - 0 1',
+  pawn: '7k/5PP1/7K/8/8/8/8/8 b - - 0 1',
+  ladder: '1R5k/R7/8/8/8/8/8/6K1 b - - 0 1',
+  morphy: '7k/7p/8/8/8/8/1B6/6RK b - - 0 1',
+  corner: '7k/5N1p/8/8/8/8/8/6RK b - - 0 1',
+  greco: '7k/6p1/8/8/2B5/8/8/6KR b - - 0 1',
+  opera: '3Rk3/5ppp/8/6B1/8/8/8/6K1 b - - 0 1',
+};
+
+describe('the named mates', () => {
+  it.each(Object.entries(NAMED))('names the %s mate', (pattern, fen) => {
+    expect(matePatternOf(boardOf(fen), 'black')).toBe(pattern);
+  });
+});
+
 describe('mateBoard', () => {
   it('plays the engine’s mate out to its last board', () => {
     const record = toRecord(BACK_RANK, { lines: [{ mate: 1, pv: ['e1e8'] }] });

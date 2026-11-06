@@ -1,11 +1,11 @@
 import { parseSquare } from '#shared/chess/index.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import { playLine, playOn, type Ply } from '#page/review/chess/played-line.ts';
 import { type PinnedTaker, pinnedTaker } from '#page/review/chess/rays.ts';
 import { type ChipPlay, moveToken } from '#page/review/comment/tokens.ts';
 import type { PinnedTake } from '#page/review/i18n/types.ts';
 import type { FactInput } from './fact.ts';
-import { type Fact, oneOf, said, withDetail } from './said.ts';
+import { drawn, type Fact, oneOf, said, withDetail } from './said.ts';
 import { pinLine } from './tactic-marks.ts';
 import { whichOne } from './which-one.ts';
 
@@ -43,6 +43,10 @@ export function pinnedOfferFact({ move, facts, them, after }: FactInput): Fact |
   if (!offered || !pin || !take) return null;
   const named = { piece: offered, square: whichOne(after, at, offered) };
   const pinned = { piece: take.pinned, square: whichOne(after, pin.taker, take.pinned) };
-  const fact = said(oneOf(facts.offeredPinned(named, pinned), move), 'pin', pinMarks(pin));
+  const fact = said(
+    oneOf(facts.offeredPinned(named, pinned), move),
+    'pin',
+    drawn('pins', pinMarks(pin)),
+  );
   return withDetail(fact, oneOf(facts.pinLine(take), move));
 }

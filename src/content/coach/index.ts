@@ -90,17 +90,19 @@ const sameOptions = (one: CoachOptions, other: CoachOptions): boolean =>
   one.motion === other.motion &&
   one.analysis === other.analysis &&
   one.board === other.board &&
-  one.dots === other.dots;
+  one.dots === other.dots &&
+  one.hidden.join() === other.hidden.join();
 
 // Kept for the page world, which can't read the settings, and for the next page's first look;
 // told to it too, as a page open in this tab doesn't hear its storage change.
 function followSettings(settings: Settings): void {
-  const { coachMotion, analysisCoach, coachBoard, classStyle } = settings;
+  const { coachMotion, analysisCoach, coachBoard, classStyle, coachDrawingsHidden } = settings;
   const options = {
     motion: coachMotion,
     analysis: analysisCoach,
     board: coachBoard,
     dots: classStyle === 'dots',
+    hidden: coachDrawingsHidden,
   };
   if (!told || !sameOptions(told, options)) {
     told = options;

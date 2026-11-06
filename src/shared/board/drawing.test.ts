@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { setHtml } from '#shared/html.ts';
 import { PLAN_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
 import { clearOfArrows, drawingMarkup } from './drawing.ts';
-import type { Mark } from './review-arrows.ts';
+import type { Mark } from './marks.ts';
 
 const svg = (marks: readonly Mark[], whiteAtBottom = true): SVGElement => {
   const element = document.createElementNS('http://www.w3.org/2000/svg', 'svg');

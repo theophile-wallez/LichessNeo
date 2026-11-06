@@ -41,6 +41,17 @@ const PLAIN_REASONS: Readonly<Record<PlainReason, readonly [string, string]>> = 
   luft: ['donnait de l’air au roi', 'donne de l’air au roi'],
   space: ['gagnait de l’espace', 'gagne de l’espace'],
   opposition: ['prenait l’opposition', 'prend l’opposition'],
+  distantOpposition: ['prenait l’opposition à distance', 'prend l’opposition à distance'],
+  keySquare: ['atteignait une case clé', 'atteint une case clé'],
+  cornerDraw: [
+    'gagnait le coin, nul contre le pion tour',
+    'gagne le coin, nul contre le pion tour',
+  ],
+  bridge: [
+    'construisait le pont de la position de Lucena',
+    'construit le pont de la position de Lucena',
+  ],
+  vancura: ['installait la défense Vancura', 'installe la défense Vancura'],
   checks: ['donnait échec', 'donne échec'],
   discoveredCheck: ['donnait un échec à la découverte', 'donne un échec à la découverte'],
   pawnEnding: ['menait à une finale de pions gagnée', 'mène à une finale de pions gagnée'],

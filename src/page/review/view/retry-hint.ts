@@ -1,5 +1,5 @@
 import { isSquare, parseFen, type Piece, type Square } from '#shared/chess/index.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 
 // The hints a retry gives, one at a time: first which piece has to move, then
 // the square it stands on, marked on the board. The answer itself stays behind

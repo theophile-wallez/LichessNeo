@@ -10,7 +10,7 @@ import {
 } from '#page/review/coach/clock.ts';
 import type { CoachContext } from '#page/review/coach/context.ts';
 import { explanation } from '#page/review/coach/explanation.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Drawing } from '#page/review/coach/said.ts';
 import { findings, ideasOf, type Theme, themesOf } from '#page/review/coach/fact.ts';
 import { freshTold, recalled } from '#page/review/coach/told.ts';
 import { type CommentPart, commentMarkup, streamFor } from '#page/review/comment/markup.ts';
@@ -56,7 +56,7 @@ export interface CoachComment {
   readonly parts: readonly CommentPart[];
   readonly themes: readonly Theme[];
   /** What the comment speaks of, drawn on the board: its fact's drawing, else its follow-up's. */
-  readonly drawing: readonly Mark[];
+  readonly drawing: Drawing | null;
   readonly timing: MoveTiming | null;
   /** What the coach makes of the move's time, in the time's tooltip. */
   readonly advice: Advice | null;
@@ -102,7 +102,7 @@ export function commentOn(session: Session, input: VerdictInput): CoachComment {
           recent,
         });
   // Explain's sentences say other things.
-  const drawing = hint.length > 0 ? [] : (found.fact?.drawing ?? found.followUp?.drawing ?? []);
+  const drawing = hint.length > 0 ? null : (found.fact?.drawing ?? found.followUp?.drawing ?? null);
   return { move, parts, themes, drawing, timing, advice };
 }
 

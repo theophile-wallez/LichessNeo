@@ -184,21 +184,45 @@ describe('the home’s coach', () => {
 
 describe('coachOptions', () => {
   it('is all on until the settings have been kept', () => {
-    expect(coachOptions()).toEqual({ motion: true, analysis: true, board: true, dots: false });
+    expect(coachOptions()).toEqual({
+      motion: true,
+      analysis: true,
+      board: true,
+      dots: false,
+      hidden: [],
+    });
   });
 
   it('reads back the switches kept', () => {
-    keepCoachOptions({ motion: false, analysis: true, board: false, dots: false });
-    expect(coachOptions()).toEqual({ motion: false, analysis: true, board: false, dots: false });
+    keepCoachOptions({ motion: false, analysis: true, board: false, dots: false, hidden: [] });
+    expect(coachOptions()).toEqual({
+      motion: false,
+      analysis: true,
+      board: false,
+      dots: false,
+      hidden: [],
+    });
   });
 
   it('keeps the drawings on, kept before they had a switch', () => {
     localStorage.setItem('ln-ext-coach-options', '{"motion":false,"analysis":true}');
-    expect(coachOptions()).toEqual({ motion: false, analysis: true, board: true, dots: false });
+    expect(coachOptions()).toEqual({
+      motion: false,
+      analysis: true,
+      board: true,
+      dots: false,
+      hidden: [],
+    });
   });
 
   it('is all on over a stored value of another shape', () => {
     localStorage.setItem('ln-ext-coach-options', '{"motion":"no"}');
-    expect(coachOptions()).toEqual({ motion: true, analysis: true, board: true, dots: false });
+    expect(coachOptions()).toEqual({
+      motion: true,
+      analysis: true,
+      board: true,
+      dots: false,
+      hidden: [],
+    });
   });
 });

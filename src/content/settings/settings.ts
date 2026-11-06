@@ -1,4 +1,5 @@
 import { z } from 'zod/mini';
+import { HiddenDrawingsSchema } from '#shared/coach-drawings.ts';
 import { StorageKey } from '#shared/storage.ts';
 import { isConnected, onSyncedChange, readSynced, writeSynced } from '#content/platform/runtime.ts';
 import { CustomThemeSchema, DEFAULT_THEME, ThemePicksSchema } from '#content/colors/themes.ts';
@@ -35,6 +36,8 @@ const SettingsFields = z.object({
   coachBoard: z.prefault(z.boolean(), true),
   /** How the review draws best, excellent and good moves: icons, or three, two and one dots. */
   classStyle: z.catch(ClassStyleSchema, 'icons'),
+  /** The kinds of the coach's drawing kept off the board while it draws the rest (drawings-card.ts). */
+  coachDrawingsHidden: HiddenDrawingsSchema,
   navigation: z.catch(NavigationSchema, DEFAULT_NAVIGATION),
   /** Whether the user picked the nav in the settings (navigation-row.ts), not just kept the default. */
   navigationPicked: z.prefault(z.boolean(), false),

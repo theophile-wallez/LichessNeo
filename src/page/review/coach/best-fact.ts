@@ -8,7 +8,7 @@ import {
   squareCoords,
 } from '#shared/chess/index.ts';
 import { squareToken } from '#page/review/comment/tokens.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import { boardAfter } from '#page/review/chess/line.ts';
 import { forkedBy } from '#page/review/chess/fork.ts';
 import { pieceOn } from '#page/review/chess/material.ts';
@@ -24,7 +24,8 @@ import { reasonMarks, withMove } from './drawing.ts';
 import { leadsToPawnEnding } from './pawn-ending.ts';
 import { reasonOf } from './plan.ts';
 import { isEndgame } from './structure.ts';
-import { type Fact, oneOf, said } from './said.ts';
+import { type Drawing, drawn, type Fact, oneOf, said } from './said.ts';
+import { reasonTopic } from './drawing-topic.ts';
 import { netAfterTrade, takeWins } from './swing.ts';
 import { sayOnce } from './told.ts';
 
@@ -139,10 +140,11 @@ const toldWhy = (input: FactInput, reason: Reason | null): string | null =>
   reason && sayOnce(input.told, reason, input.move.best ?? '', input.facts.why(reason));
 
 /** What the engine's move did, said after it, and drawn. */
-function whyBest(input: FactInput): { why: string | null; drawing: Mark[] | null } {
+function whyBest(input: FactInput): { why: string | null; drawing: Drawing | null } {
   const reason = bestReason(input);
   const told = beyondPlayed(input, reason);
-  return { why: toldWhy(input, told), drawing: bestMarks(input, reason) };
+  const drawing = drawn(reasonTopic(reason), bestMarks(input, reason));
+  return { why: toldWhy(input, told), drawing };
 }
 
 /** The better move, a fork or a capture when it was one, else what it did. */
@@ -152,7 +154,11 @@ export function bestFact(input: FactInput): Fact | null {
   const [first, second] = forkedBy(move.previousPosition.fen, move.best);
   if (first && second) {
     const drawing = bestMarks(input, { kind: 'fork', first, second });
-    return said(oneOf(facts.missedFork(best, first, second), move), 'fork', drawing);
+    return said(
+      oneOf(facts.missedFork(best, first, second), move),
+      'fork',
+      drawn('forks', drawing),
+    );
   }
   const target = move.best.slice(2, 4);
   const taken = pieceOn(before, target);
@@ -193,5 +199,6 @@ export function missFact(input: FactInput): Fact {
   const material = tactic ? null : bestWins(input);
   const why: Reason | null = material === null ? reason : { kind: 'wins', material };
   const text = oneOf(facts.missedPunishment(them, best, toldWhy(input, why)), move);
-  return said(text, reason?.kind === 'fork' ? 'fork' : null, bestMarks(input, reason));
+  const drawing = drawn(reasonTopic(reason), bestMarks(input, reason));
+  return said(text, reason?.kind === 'fork' ? 'fork' : null, drawing);
 }

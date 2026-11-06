@@ -416,7 +416,7 @@
     "description": "The setting that has the coach draw its explanations on the board, or not."
   },
   "settingCoachBoardBody": {
-    "message": "When the coach explains a move, it also shows it on the board, such as a passed pawn’s square for the rule of the square. Off, it only says it.",
+    "message": "What the coach draws on the board as it explains a move. Show them all, none, or just the ones you like.",
     "description": "What the coach's drawings setting covers."
   },
   "settingClassStyle": {
@@ -434,6 +434,98 @@
   "classStyleDots": {
     "message": "Dots",
     "description": "The evaluation style that draws three, two and one dots."
+  },
+  "drawingsAll": {
+    "message": "All",
+    "description": "The button that shows every kind of the coach's drawings."
+  },
+  "drawingsNone": {
+    "message": "None",
+    "description": "The button that hides every kind of the coach's drawings."
+  },
+  "drawingsCount": {
+    "message": "$1 of $2",
+    "description": "How many kinds of the coach's drawings are shown: $1 of the $2 there are."
+  },
+  "drawingMates": {
+    "message": "Mates",
+    "description": "The coach's drawings of a checkmate."
+  },
+  "drawingMatesBody": {
+    "message": "The net around the king",
+    "description": "What the coach draws of a mate."
+  },
+  "drawingForks": {
+    "message": "Forks",
+    "description": "The coach's drawings of a fork."
+  },
+  "drawingForksBody": {
+    "message": "Two pieces hit at once",
+    "description": "What the coach draws of a fork."
+  },
+  "drawingPins": {
+    "message": "Pins and skewers",
+    "description": "The coach's drawings of pins and skewers."
+  },
+  "drawingPinsBody": {
+    "message": "The line through the pieces",
+    "description": "What the coach draws of a pin."
+  },
+  "drawingLines": {
+    "message": "X-rays and discoveries",
+    "description": "The coach's drawings of tactics along a line."
+  },
+  "drawingLinesBody": {
+    "message": "Lures, clearances, cut lines",
+    "description": "The other line tactics the coach draws."
+  },
+  "drawingHanging": {
+    "message": "Hanging pieces",
+    "description": "The coach's drawings of a piece left to be taken."
+  },
+  "drawingHangingBody": {
+    "message": "What falls, what’s trapped",
+    "description": "What the coach draws of a hanging piece."
+  },
+  "drawingChecks": {
+    "message": "Checks",
+    "description": "The coach's drawings of checks."
+  },
+  "drawingChecksBody": {
+    "message": "Counter-checks, checks in between",
+    "description": "Which checks the coach draws."
+  },
+  "drawingThreats": {
+    "message": "Threats",
+    "description": "The coach's drawings of a piece attacked or defended."
+  },
+  "drawingThreatsBody": {
+    "message": "Pieces attacked, pieces saved",
+    "description": "What the coach draws of a threat."
+  },
+  "drawingPlans": {
+    "message": "Plans",
+    "description": "The coach's drawings of a plan: files, diagonals, outposts."
+  },
+  "drawingPlansBody": {
+    "message": "Files, diagonals, outposts",
+    "description": "What the coach draws of a plan."
+  },
+  "drawingPawns": {
+    "message": "Passed pawns",
+    "description": "The coach's drawings of a passed pawn."
+  },
+  "drawingPawnsBody": {
+    "message": "The pawn’s road, the rule of the square",
+    "description": "What the coach draws of a passed pawn."
+  },
+  "drawingEndings": {
+    "message": "Endgames",
+    "description": "The coach's drawings of an endgame's rules."
+  },
+  "drawingEndingsBody": {
+    "message": "Opposition, key squares, Lucena",
+    "description": "What the coach draws of an endgame."
   },
   "packsTitle": {
     "message": "Packs",

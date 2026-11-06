@@ -5,7 +5,7 @@ import type { FactSentences, Viewer } from './types.ts';
 
 type RoutineSentences = Pick<
   FactSentences,
-  'castles' | 'castlesOpposite' | 'promotes' | 'checkForces'
+  'castles' | 'castlesOpposite' | 'promotes' | 'checkForces' | 'counterCheck'
 >;
 
 export function routinesFr(viewer: Viewer): RoutineSentences {
@@ -39,6 +39,13 @@ export function routinesFr(viewer: Viewer): RoutineSentences {
         `L’échec ${putting(checked, 'force')} à réagir.`,
         `Échec : il ${putting(checked, 'oblige')} à répondre.`,
         `Échec, et ${checked.subject} ${conjugate(checked, 'dois', 'doit', 'doivent')} d’abord parer.`,
+      ];
+    },
+    counterCheck: color => {
+      const checked = partyOf(viewer, color);
+      return [
+        `Un échec en réponse à l’échec : ${checked.subject} ${conjugate(checked, 'dois', 'doit', 'doivent')} parer à présent.`,
+        `Contre-échec ! Il ${putting(checked, 'oblige')} à répondre.`,
       ];
     },
   };

@@ -18,7 +18,7 @@ function drawnOn() {
   const { session, ctrl, facade } = judgedGame('opera');
   ctrl.jumpToMain(25);
   session.view.mode = 'moves';
-  session.view.drawing = { path: facade.path, marks: [RING] };
+  session.view.drawing = { path: facade.path, topic: 'plans', marks: [RING] };
   return { session, ctrl, facade };
 }
 
@@ -33,9 +33,27 @@ describe('the coach’s drawing on the board', () => {
   });
 
   it('stays off while the settings keep the coach’s drawings off', () => {
-    keepCoachOptions({ motion: true, analysis: true, board: false, dots: false });
+    keepCoachOptions({ motion: true, analysis: true, board: false, dots: false, hidden: [] });
     const { session, facade } = drawnOn();
     renderBoard(session, facade);
     expect(reviewDrawing()).toEqual([]);
+  });
+
+  it('stays off while its kind is hidden, the others drawn', () => {
+    keepCoachOptions({ motion: true, analysis: true, board: true, dots: false, hidden: ['plans'] });
+    const { session, facade } = drawnOn();
+    renderBoard(session, facade);
+    expect(reviewDrawing()).toEqual([]);
+    session.view.drawing = { ...session.view.drawing, topic: 'mates' };
+    renderBoard(session, facade);
+    expect(reviewDrawing()).toEqual([RING]);
+  });
+
+  it('shows a retry’s hint, which has no kind, whatever the settings hide', () => {
+    keepCoachOptions({ motion: true, analysis: true, board: false, dots: false, hidden: [] });
+    const { session, facade } = drawnOn();
+    session.view.drawing = { ...session.view.drawing, topic: null };
+    renderBoard(session, facade);
+    expect(reviewDrawing()).toEqual([RING]);
   });
 });

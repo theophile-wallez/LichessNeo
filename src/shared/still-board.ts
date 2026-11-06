@@ -34,7 +34,11 @@ function place(square: Square, orientation: Color): string {
   return `transform: translate(${x * 100}%, ${y * 100}%)`;
 }
 
-export function boardMarkup({ fen, orientation, lastMove }: BoardState): SafeHtml {
+/** The board of `state`, `under` drawn over its squares and under its pieces. */
+export function boardMarkup(
+  { fen, orientation, lastMove }: BoardState,
+  under: SafeHtml = html``,
+): SafeHtml {
   const [placement = ''] = fen.split(' ');
   const pieces = [...parsePlacement(placement)].map(
     ([square, piece]) =>
@@ -44,6 +48,6 @@ export function boardMarkup({ fen, orientation, lastMove }: BoardState): SafeHtm
     square => html`<square class="last-move" style="${place(square, orientation)}"></square>`,
   );
   return html`<span class="ln-ext-still-board cg-wrap is2d orientation-${orientation}">
-    <cg-container><cg-board>${squares}${pieces}</cg-board></cg-container>
+    <cg-container><cg-board>${squares}${under}${pieces}</cg-board></cg-container>
   </span>`;
 }

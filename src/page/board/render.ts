@@ -1,5 +1,5 @@
 import { html, type SafeHtml } from '#shared/html.ts';
-import { arrowOutline, arrowPath } from './geometry.ts';
+import { arrowOutline, arrowPath } from '#shared/board/geometry.ts';
 import type { Arrow, SquareFill } from './svg-shapes.ts';
 
 /** The marked squares, for the layer under the pieces. */

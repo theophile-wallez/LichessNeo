@@ -7,6 +7,7 @@ import {
   squareCoords,
 } from '#shared/chess/index.ts';
 import type { Plan } from './idea.ts';
+import { kingRuleOf } from './endgame-rules.ts';
 import { takesOpposition } from './opposition.ts';
 import { entersSquare, kingDistance, pathOf } from './pawn-square.ts';
 import { passedPawns } from './passed-pawns.ts';
@@ -14,7 +15,7 @@ import { pawnTargetOf } from './pressure.ts';
 import { centerDistance, isEndgame, ownRank } from './structure.ts';
 
 // What a king's step does in an ending: the rule of the square, the
-// opposition, a pawn it goes after, its own passed pawn escorted, the other
+// opposition, a key square or a drawing corner (endgame-rules.ts), a pawn it goes after, its own passed pawn escorted, the other
 // side's stopped, and only then the center, said once, as the king gets there.
 
 // The squares no further from the board's middle than c3 to f6.
@@ -86,7 +87,11 @@ export function kingPlan(step: KingStep): Plan | null {
   const { before, after, color } = step;
   const enters = entersSquare(before, after, color);
   if (enters) return enters;
-  if (takesOpposition(before, after, color)) return { kind: 'opposition' };
+  // A key square is the aim, the opposition only a way there.
+  const rule = kingRuleOf(step);
+  if (rule) return rule;
+  const opposition = takesOpposition(before, after, color);
+  if (opposition) return { kind: opposition };
   if (!isEndgame(after)) return null;
   return (
     huntOf(step) ??

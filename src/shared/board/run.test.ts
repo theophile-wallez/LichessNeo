@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { setHtml } from '#shared/html.ts';
 import { PLAN_COLOR } from './colors.ts';
-import type { Mark } from './review-arrows.ts';
+import type { Mark } from './marks.ts';
 import { runMarkup } from './run.ts';
 
 type Run = Extract<Mark, { readonly kind: 'run' }>;
@@ -60,5 +60,22 @@ describe('runMarkup', () => {
     const [lane] = lanes(PAWN_ROAD, false);
     expect(box(lane)).toEqual(['6.1', '6.1', '0.8', '1.8']);
     expect(lane?.getAttribute('style')).toContain('--ln-ext-origin:50% 0%');
+  });
+  it('lays a diagonal’s pill along it, turned from its first square’s center', () => {
+    const [lane, ...rest] = lanes({
+      kind: 'run',
+      from: 'c1',
+      squares: ['d2', 'e3', 'f4'],
+      tone: 'plan',
+    });
+    expect(rest).toEqual([]);
+    expect(lane?.parentElement?.getAttribute('transform')).toBe('rotate(-45 3.5 6.5)');
+    expect(box(lane)).toEqual(['3.05', '6.217', '3.728', '0.566']);
+  });
+
+  it('draws a pill on each diagonal of a bishop between its squares', () => {
+    const bishop: Run = { kind: 'run', from: 'd4', squares: ['c3', 'e5', 'f6'], tone: 'plan' };
+    const turns = lanes(bishop).map(lane => lane.parentElement?.getAttribute('transform'));
+    expect(turns).toEqual(['rotate(135 2.5 5.5)', 'rotate(-45 4.5 3.5)']);
   });
 });

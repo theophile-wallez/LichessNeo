@@ -3,7 +3,7 @@ import type { Point } from '#shared/geometry.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { PLAN_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
 import { arrowPath, squareCenter, squareOnScreen } from './geometry.ts';
-import type { Mark, MarkTone, ReviewArrow } from './review-arrows.ts';
+import type { Mark, MarkTone, ReviewArrow } from './marks.ts';
 import { runMarkup } from './run.ts';
 
 // The coach's drawing, under the pieces, in square units from the board's top

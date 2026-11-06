@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { setHtml } from './html.ts';
+import { html, setHtml } from './html.ts';
 import { boardMarkup, parseBoardState } from './still-board.ts';
 
 const FEN = '6k1/8/8/8/8/8/4P3/4K3 w - - 0 1';
@@ -48,5 +48,11 @@ describe('a still board', () => {
       'white pawn transform: translate(300%, 100%)',
       'white king transform: translate(300%, 0%)',
     ]);
+  });
+  it('lays what it’s given between the squares and the pieces', () => {
+    const board = { fen: FEN, orientation: 'white', lastMove: ['e1', 'e2'] } as const;
+    setHtml(document.body, boardMarkup(board, html`<svg class="drawing"></svg>`));
+    const order = [...document.querySelectorAll('cg-board > *')].map(element => element.localName);
+    expect(order).toEqual(['square', 'square', 'svg', 'piece', 'piece', 'piece']);
   });
 });

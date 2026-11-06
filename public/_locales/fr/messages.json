@@ -315,7 +315,76 @@
     "message": "Dessins du coach sur l’échiquier"
   },
   "settingCoachBoardBody": {
-    "message": "Quand le coach explique un coup, il le montre aussi sur l’échiquier, comme le carré d’un pion pour la règle du carré. Désactivé, il se contente de l’écrire."
+    "message": "Ce que le coach dessine sur l’échiquier quand il explique un coup. Affiche-les tous, aucun, ou seulement ceux qui te plaisent."
+  },
+  "drawingsAll": {
+    "message": "Tous"
+  },
+  "drawingsNone": {
+    "message": "Aucun"
+  },
+  "drawingsCount": {
+    "message": "$1 sur $2"
+  },
+  "drawingMates": {
+    "message": "Mats"
+  },
+  "drawingMatesBody": {
+    "message": "Le filet autour du roi"
+  },
+  "drawingForks": {
+    "message": "Fourches"
+  },
+  "drawingForksBody": {
+    "message": "Deux pièces touchées d’un coup"
+  },
+  "drawingPins": {
+    "message": "Clouages et brochettes"
+  },
+  "drawingPinsBody": {
+    "message": "La ligne qui traverse les pièces"
+  },
+  "drawingLines": {
+    "message": "Rayons X et découvertes"
+  },
+  "drawingLinesBody": {
+    "message": "Attraction, dégagement, interception"
+  },
+  "drawingHanging": {
+    "message": "Pièces en prise"
+  },
+  "drawingHangingBody": {
+    "message": "Ce qui tombe, ce qui est piégé"
+  },
+  "drawingChecks": {
+    "message": "Échecs"
+  },
+  "drawingChecksBody": {
+    "message": "Contre-échecs, échecs intermédiaires"
+  },
+  "drawingThreats": {
+    "message": "Menaces"
+  },
+  "drawingThreatsBody": {
+    "message": "Pièces attaquées, pièces sauvées"
+  },
+  "drawingPlans": {
+    "message": "Plans"
+  },
+  "drawingPlansBody": {
+    "message": "Colonnes, diagonales, avant-postes"
+  },
+  "drawingPawns": {
+    "message": "Pions passés"
+  },
+  "drawingPawnsBody": {
+    "message": "La route du pion, la règle du carré"
+  },
+  "drawingEndings": {
+    "message": "Finales"
+  },
+  "drawingEndingsBody": {
+    "message": "Opposition, cases clés, Lucena"
   },
   "settingClassStyle": {
     "message": "Style des évaluations"

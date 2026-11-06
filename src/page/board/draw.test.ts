@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
-import { VARIATION_COLOR, VARIATION_PICKED_COLOR } from './colors.ts';
+import { VARIATION_COLOR, VARIATION_PICKED_COLOR } from '#shared/board/colors.ts';
 import { createShapeDrawer } from './draw.ts';
 import { renderBoard } from './fixtures/board-markup.ts';
 import { LegacySchema } from './fixtures/schema.ts';

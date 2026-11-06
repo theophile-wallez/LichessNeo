@@ -31,7 +31,8 @@ export interface LineFacts {
   /** The pressure that wins it: "Na5 chases off the bishop, and the d5 pawn loses its guard." */
   readonly pressure: PressureNamer;
   /** A move slipped in before taking back, a check or not, and the recapture that follows. */
-  readonly inBetween: (retake: string, check: boolean) => Ways;
+  /** The retake `moves` of the mover's moves on, the move itself the first. */
+  readonly inBetween: (retake: string, check: boolean, moves: number) => Ways;
   /** The mover's next move along the line, and what it does, for a quiet move's idea. */
   readonly nextUp: (next: string, why: string) => Ways;
   /** The mate an error lets in, move by move. */

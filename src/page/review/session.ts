@@ -1,5 +1,6 @@
 import { z } from 'zod/mini';
 import type { Color } from '#shared/chess/types.ts';
+import type { DrawingTopic } from '#shared/coach-drawings.ts';
 import { isCardFolded } from '#page/game-over/card-fold.ts';
 import type { TreeNode } from '#page/lichess/tree.ts';
 import type { Threat } from './coach/threat.ts';
@@ -15,7 +16,7 @@ import { freshSetup, type OpeningsSetup } from './practice/setup.ts';
 import type { Round } from './practice/rounds.ts';
 import type { PracticeState } from './practice/state.ts';
 import type { ReviewElements } from './view/elements.ts';
-import type { Mark, ReviewArrow } from '#page/board/review-arrows.ts';
+import type { Mark, ReviewArrow } from '#shared/board/marks.ts';
 
 // Everything the review keeps while a page is open, shared by its parts.
 
@@ -112,8 +113,15 @@ export interface ViewState {
   readonly openings: OpeningsSetup;
   /** The arrow of the comment's move under the pointer (view/chips.ts). */
   hover: ReviewArrow | null;
-  /** The coach's drawing of its comment on the move at `path`. */
-  drawing: { readonly path: string; readonly marks: readonly Mark[] };
+  /**
+   * The coach's drawing of its comment on the move at `path`, and its kind,
+   * which the settings may hide; none for a retry's hint, always shown.
+   */
+  drawing: {
+    readonly path: string;
+    readonly topic: DrawingTopic | null;
+    readonly marks: readonly Mark[];
+  };
   /** The summary's chevron is open. */
   allRows: boolean;
   /** The ply the summary was opened on. Moving to another ply opens the move-by-move review. */
@@ -248,7 +256,7 @@ export function createSession(options: SessionOptions): Session {
       round: null,
       openings: freshSetup(),
       hover: null,
-      drawing: { path: '', marks: [] },
+      drawing: { path: '', topic: null, marks: [] },
       allRows: false,
       summaryPly: undefined,
       drawnMode: null,

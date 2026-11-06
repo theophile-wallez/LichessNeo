@@ -40,7 +40,7 @@ export function quietPlansFr(the: (piece: Piece) => string): QuietPlanSentences 
     ],
     backs: (piece, square) => [
       `Le pion soutient ${target(the, piece, square)}.`,
-      `${capitalize(target(the, piece, square))} a maintenant un pion dans son dos.`,
+      `${capitalize(target(the, piece, square))} est maintenant soutenu${agreement(piece)} par un pion.`,
       `${capitalize(target(the, piece, square))}, attaqué${agreement(piece)}, reçoit le soutien d’un pion.`,
     ],
     hitsPinned: (piece, square) => [

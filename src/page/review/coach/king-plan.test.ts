@@ -30,7 +30,8 @@ describe('kingPlan', () => {
   });
 
   it('sees the king walk beside its own passed pawn, not in front of it', () => {
-    const fen = 'k2K4/8/8/3P4/8/8/8/8 w - - 0 1';
+    // Black's pawn keeps it from king and pawn against king, where the key squares say it.
+    const fen = 'k2K4/p7/8/3P4/8/8/8/8 w - - 0 1';
     expect(stepOf(fen, 'd8', 'c7')).toEqual({
       kind: 'escorts',
       pawn: { role: 'pawn', color: 'white' },

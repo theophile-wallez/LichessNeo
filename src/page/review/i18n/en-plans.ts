@@ -120,9 +120,9 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | '
     'The pawn contests the center from the side.',
   ],
   supportsCenter: [
-    'The pawn backs up the center.',
+    'The pawn supports the center.',
     'A pawn to support the center.',
-    'The central pawn has a pawn behind it now.',
+    'The central pawn is supported now.',
   ],
   luft: [
     'The king gets a square off the back rank: no more back-rank mate.',
@@ -138,6 +138,26 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | '
     'The king takes the opposition: face to face, the other king has to give way.',
     'Opposition: the kings face each other, a square apart, and the other one must step aside.',
     'The king faces the other one: the opposition, the key to pawn endings.',
+  ],
+  distantOpposition: [
+    'The distant opposition: an odd number of squares between the kings, and the other one will have to give way.',
+    'The king takes the opposition from afar: when the kings meet, the other one gives way.',
+  ],
+  keySquare: [
+    'The king reaches a key square: the pawn will queen, whatever the defense.',
+    'A key square for the king: from there, the pawn goes through.',
+  ],
+  cornerDraw: [
+    'The king reaches the corner: against a rook pawn, that’s a draw.',
+    'Into the corner: a rook pawn can’t win against a king there.',
+  ],
+  bridge: [
+    'Building a bridge: from the fourth rank, the rook will block the checks. The Lucena position, and it wins.',
+    'The bridge of the Lucena position: the rook gets ready to shield the king from the checks.',
+  ],
+  vancura: [
+    'The Vancura defense: the rook attacks the pawn from the side, and the draw holds.',
+    'The rook hits the rook pawn from the side: the Vancura position, a draw.',
   ],
   center: [
     'The pawn takes the center.',

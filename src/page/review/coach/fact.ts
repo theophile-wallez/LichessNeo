@@ -21,12 +21,15 @@ import { planFact, raceFact } from './plan.ts';
 import { withGift } from './greek-gift.ts';
 import { desperadoFact } from './desperado.ts';
 import { mateBoard, matedBy, withPattern } from './mate-pattern.ts';
+import { mateIdea } from './motif-fact.ts';
 import { perpetualFact } from './perpetual.ts';
 import { stalemateFact } from './stalemate.ts';
-import { type Fact, oneOf, said, type Theme } from './said.ts';
+import { drawn, type Fact, oneOf, said, type Theme } from './said.ts';
 import { doubledFact } from './shape-facts.ts';
 import { isolatedFact } from './structure-facts.ts';
 import { NO_THREATS, parriedFact, type Threats, threatensFact } from './threat-facts.ts';
+import { mateMarks } from './tactic-marks.ts';
+import { checkFact } from './check-fact.ts';
 import { evaluationLevel } from './trajectory.ts';
 import { freshTold, isNew, type Told } from './told.ts';
 
@@ -133,10 +136,9 @@ function mateUnderWay({ move, facts, sign, me, them, told }: FactInput): Fact | 
   const ours = mates(move.after, sign);
   const ways = ours ? facts.mateFollows(line) : facts.mateUnstoppable(line);
   const end = mateBoard(move.after, move.position.fen);
-  return said(
-    withPattern(oneOf(ways, move), end, { mated: ours ? them : me, facts, told }),
-    'mate',
-  );
+  const text = withPattern(oneOf(ways, move), end, { mated: ours ? them : me, facts, told });
+  const idea = ours ? mateIdea(move, facts) : null;
+  return said(idea ? `${text} ${idea.text}` : text, 'mate', drawn('lines', idea?.drawing ?? null));
 }
 
 // An error punished, said when nothing more concrete is (a recapture says it
@@ -163,7 +165,7 @@ function forkFact(input: FactInput): Fact | null {
   if (!first || !second) return null;
   const scene = { uci: move.uci, before: input.before, after, shown: after, toMove: them };
   const drawing = reasonMarks({ kind: 'fork', first, second }, scene);
-  return said(oneOf(facts.forks(first, second), move), 'fork', drawing);
+  return said(oneOf(facts.forks(first, second), move), 'fork', drawn('forks', drawing));
 }
 
 // What a capture takes, then the better move when it fell short, else the fork it makes.
@@ -199,13 +201,10 @@ function goodFindings(input: FactInput): Findings {
 }
 
 // What a quiet move does says more than that it punishes an error; a check
-// that does nothing else forces an answer.
+// that does nothing else forces an answer, and answers a check with one.
 function quietFindings(input: FactInput): Fact | null {
-  const { move, facts, them } = input;
   const quiet = blocksFact(input) ?? quietFact(input) ?? castlingFact(input);
-  const told = quiet ?? punishedFact(input) ?? nextFact(input);
-  if (told !== null) return told;
-  return move.san.includes('+') ? said(oneOf(facts.checkForces(them), move)) : null;
+  return quiet ?? punishedFact(input) ?? nextFact(input) ?? checkFact(input);
 }
 
 // The plies of the opening, where what a move does matters more than a slightly better one.
@@ -242,7 +241,8 @@ export function findings(
   if (move.san.includes('#')) {
     const end = matedBy(move.previousPosition.fen, move.uci);
     const text = withPattern(oneOf(facts.checkmate(them), move), end, { mated: them, facts, told });
-    return { fact: said(text, 'mate'), followUp: null };
+    const net = mateMarks(parseFen(move.position.fen).board, them);
+    return { fact: said(text, 'mate', drawn('mates', net)), followUp: null };
   }
   const best =
     move.bestSan && move.best

@@ -35,6 +35,7 @@ the page world would crash on it.
 | `hugeicons.ts`, `hugeicons-svg.ts`                             | Hugeicons drawn inline, or as files for the stylesheets (`pnpm icons`)                                                                                                                                                                                                                                                                                              |
 | `chess/`, `chessground.ts`, `piece-glyph.ts`, `still-board.ts` | chess basics (squares, FEN, piece letters and values, attacks, SAN played on a board), a board's pieces read from chessground's classes, a piece of ours in the board's set, a still board in chessground's markup                                                                                                                                                  |
 | `charts/`, `coach.ts`, `coach-voice.ts`, `sounds.ts`           | chart pieces, the coach's moods, the coach picked (`coachPick`: one, none or one at random on each page, the default; `OFFERED_COACHES` leaves out the ones held back while reworked, the knight), the one a page shows (`shownCoach`), the home's own (`homeCoach`) and the switches (`coachOptions`), its words typed out as it talks, the sounds a pack may have |
+| `board/`, `coach-drawings.ts`                                  | the coach's drawing on a board (its marks, their colors and squares, a run's pills), and the kinds of it the settings show or hide                                                                                                                                                                                                                                  |
 | `packs/`, `backlit.ts`                                         | packs: their `pack.json`, links, files and stored form, the download the worker runs, its messages; the backlit boards and their settings                                                                                                                                                                                                                           |
 | `chesscom-rating/`                                             | a Lichess rating's Chess.com equivalent, from the study's table, the speed of a rating Lichess shows, its swap in place, and the settings' switch                                                                                                                                                                                                                   |
 | `testing/`                                                     | helpers only tests import, and the vitest setup filling happy-dom's gaps                                                                                                                                                                                                                                                                                            |
@@ -171,8 +172,9 @@ so the logic can be unit-tested without a page.
   Coach (the coach, none (no robot either, each place closing the room it
   left) or one at random, the home hero's own the same way or the same one,
   and the coaches' 3D), Analysis (the review's badges for its good moves,
-  icons or dots, and the coach's drawings on the board; then the coach on the
-  free analysis board), Games (the game intro over a preview of it, the
+  icons or dots, and the coach's drawings on the board, all, none or the kinds
+  picked, each kind's drawing shown on a little board as its tile is
+  hovered; then the coach on the free analysis board), Games (the game intro over a preview of it, the
   chat's quick replies at a game's start and end: Lichess's at first, five at
   most, to change, reorder, take off or add to; and the home's quick pairing
   cards: a speed's or the player's own, changed, moved, taken off or put back

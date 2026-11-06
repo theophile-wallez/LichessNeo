@@ -154,6 +154,10 @@
 .ln-ext-tag--discovered,
 .ln-ext-tag--doubleCheck,
 .ln-ext-tag--defender,
+.ln-ext-tag--xray,
+.ln-ext-tag--attraction,
+.ln-ext-tag--interference,
+.ln-ext-tag--clearance,
 .ln-ext-tag--sacrifice {
   --ln-ext-tag: color-mix(in srgb, var(--ln-ext-purple) 80%, var(--ln-ext-text-strong));
 }

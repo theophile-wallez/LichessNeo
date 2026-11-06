@@ -2,27 +2,28 @@ import {
   attackedSquares,
   type Board,
   type Color,
+  opposite,
   parseSquare,
   type Piece,
   type Square,
   squareAt,
   squareCoords,
 } from '#shared/chess/index.ts';
-import type { Mark, MarkTone } from '#page/board/review-arrows.ts';
+import type { Mark, MarkTone } from '#shared/board/marks.ts';
 import { forkedSquares } from '#page/review/chess/fork.ts';
 import { between, pinOf } from '#page/review/chess/rays.ts';
 import { batteryMarks } from './battery.ts';
 import { discoveryMarks } from './discovery.ts';
 import { doubleThreatMarks } from './double-threat.ts';
+import { endingMarks } from './ending-marks.ts';
 import { isQuietReason, type QuietReason, type Reason } from './idea.ts';
-import { oppositionMarks } from './opposition.ts';
 import { pathOf, squareMarks } from './pawn-square.ts';
 import { ownRank } from './structure.ts';
 import { pinLine } from './tactic-marks.ts';
 
-// What the coach draws on the board of what a move does (page/board/drawing.ts):
+// What the coach draws on the board of what a move does (shared/board/drawing.ts):
 // the lines of a fork or a pin, a passed pawn's road, a rook's file, the square
-// of the rule of the square. Read from the move's own boards, drawn on the
+// of the rule of the square, an ending's key squares. Read from the move's own boards, drawn on the
 // board shown, which is the same but for the move when it's one not played.
 
 /** A move, the reason it was played for, and the board the drawing goes on. */
@@ -181,7 +182,8 @@ export function reasonMarks(reason: Reason | null, scene: Scene): Mark[] | null 
   }
   if (reason.kind === 'outruns' || reason.kind === 'entersSquare')
     return squareMarks(reason, scene.shown, scene.toMove);
-  if (reason.kind === 'opposition') return oppositionMarks(scene.after);
+  const ending = endingMarks(reason, scene.after, opposite(scene.toMove), to);
+  if (ending) return ending;
   if (reason.kind === 'passedPawn') return roadMarks(scene.after, to);
   if (reason.kind === 'behindPasser') return behindMarks(scene.after, to);
   if (ON_FILE.has(reason.kind)) return runFrom(to, fileOf(to));

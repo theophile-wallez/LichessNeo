@@ -2,7 +2,7 @@ import { queryOne } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { parentPath } from '#page/lichess/tree.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import { classIcon } from '#page/review/classes/icon-svg.ts';
 import { streamOn } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
@@ -198,7 +198,8 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   if (comment) followComment(session, comment);
   const hint = retryHintOf(session, analysis);
   if (retried) followRetrying(session, { outcome: retried, hint });
-  view.drawing = { path: analysis.path, marks: comment?.drawing ?? hintMarks(hint, retried) };
+  const drawing = comment?.drawing ?? { topic: null, marks: hintMarks(hint, retried) };
+  view.drawing = { path: analysis.path, ...drawing };
   const spoken = { line, move, shown, comment, retried, hint };
   const moments = momentsMarkup(view.review, language);
   fillAroundNav(

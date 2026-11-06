@@ -60,16 +60,19 @@ describe('the settings’ Analysis page', () => {
     expect(synced.get('ln-ext-settings')).toMatchObject({ classStyle: 'dots' });
   });
 
-  it('turns the coach’s drawings and the analysis board’s coach on and off', async () => {
+  it('turns the analysis board’s coach on and off', async () => {
     const page = await buildPage();
-    for (const key of ['coachBoard', 'analysisCoach']) {
-      expect(switchOf(page, key)?.getAttribute('aria-checked')).toBe('true');
-      switchOf(page, key)?.click();
-      expect(switchOf(page, key)?.getAttribute('aria-checked')).toBe('false');
-    }
-    expect(synced.get('ln-ext-settings')).toMatchObject({
-      coachBoard: false,
-      analysisCoach: false,
-    });
+    expect(switchOf(page, 'analysisCoach')?.getAttribute('aria-checked')).toBe('true');
+    switchOf(page, 'analysisCoach')?.click();
+    expect(switchOf(page, 'analysisCoach')?.getAttribute('aria-checked')).toBe('false');
+    expect(synced.get('ln-ext-settings')).toMatchObject({ analysisCoach: false });
+  });
+
+  it('has the coach’s drawings’ card in place of their switch', async () => {
+    const page = await buildPage();
+    expect(queryOne(page, '.ln-ext-drawings', HTMLElement)?.dataset.lnExtSetting).toBe(
+      'coachBoard',
+    );
+    expect(switchOf(page, 'coachBoard')).toBeNull();
   });
 });

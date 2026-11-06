@@ -8,10 +8,12 @@ import {
   type Square,
 } from '#shared/chess/index.ts';
 import { forkedSquares } from './fork.ts';
+import type { LinesKind } from './motifs-lines.ts';
 import { PRESSURE_DETECTORS, type PressureKind } from './motifs-pressure.ts';
 import { boardAfter } from './line.ts';
 import { type Move, retakes, type Win, winOf } from './line-win.ts';
 import type { Ply } from './played-line.ts';
+import { attraction, clearance, interference, xray } from './motifs-lines.ts';
 import {
   attackersOn,
   between,
@@ -39,6 +41,7 @@ export type MotifKind =
   | 'capturingDefender'
   | 'trappedPiece'
   | 'hangingPiece'
+  | LinesKind
   | PressureKind;
 
 export interface Motif {
@@ -57,7 +60,7 @@ export interface Motif {
   readonly at?: readonly (Square | null)[];
 }
 
-type Detector = (win: Win, i: number) => Motif | null;
+export type Detector = (win: Win, i: number) => Motif | null;
 
 const KING = (color: Color): Piece => ({ role: 'king', color });
 // As a target the king outweighs everything.
@@ -257,11 +260,14 @@ const DETECTORS: readonly Detector[] = [
   fork,
   skewer,
   discoveredAttack,
+  xray,
+  interference,
   capturingDefender,
   pinnedTarget,
   pinnedAttacker,
   pinnedDefender,
   trappedPiece,
+  clearance,
 ];
 
 /**
@@ -273,5 +279,7 @@ const DETECTORS: readonly Detector[] = [
 export function lineMotif(plies: readonly Ply[], winner: Color, upTo: number): Motif | null {
   const win = winOf(plies, winner, upTo);
   if (!win) return null;
-  return detected(win, DETECTORS) ?? hangingPiece(win) ?? detected(win, PRESSURE_DETECTORS);
+  const found = detected(win, DETECTORS) ?? hangingPiece(win);
+  // A piece lured in is the plainer reading: what it stops guarding says more.
+  return found ?? detected(win, PRESSURE_DETECTORS) ?? detected(win, [attraction]);
 }

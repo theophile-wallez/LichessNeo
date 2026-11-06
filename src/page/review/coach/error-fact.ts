@@ -6,7 +6,6 @@ import {
   type Piece,
   type Square,
 } from '#shared/chess/index.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
 import { boardAfter, lineMoves } from '#page/review/chess/line.ts';
 import { forkedBy } from '#page/review/chess/fork.ts';
 import { attackerValues, PIECE_VALUES, pieceOn } from '#page/review/chess/material.ts';
@@ -29,7 +28,8 @@ import type { Reason } from './idea.ts';
 import { bestGainFact, endsAhead, lossFact, mateLine } from './line-facts.ts';
 import { reasonMarks, withMove } from './drawing.ts';
 import { planOf, watched } from './plan.ts';
-import { type Fact, oneOf, said } from './said.ts';
+import { type Drawing, drawn, type Fact, oneOf, said } from './said.ts';
+import { reasonTopic } from './drawing-topic.ts';
 import { hangingMarks, mateMarks } from './tactic-marks.ts';
 import { takeWins } from './swing.ts';
 import { goesBackFact } from './tempo-fact.ts';
@@ -77,7 +77,7 @@ function lostPieceFact(input: FactInput): Fact | null {
   if (!taker || !square || !victim || victim.color !== me || victim.role === 'king') return null;
   if (!worthTelling(input, square, victim)) return null;
   const lost = { piece: victim, square: squareToken(square), reply };
-  const drawing = hangingMarks(after, square, taker);
+  const drawing = drawn('hanging', hangingMarks(after, square, taker));
   if (attackers(after, square, me).length === 0)
     return said(oneOf(facts.leftUndefended(lost), move), 'hanging', drawing);
   if (Math.min(...attackerValues(after, square, them)) < PIECE_VALUES[victim.role])
@@ -95,7 +95,7 @@ function mateFact(input: FactInput): Fact | null {
   if (mates(move.after, -sign) && !mates(move.before, -sign) && reply) {
     const named = { mated: me, facts, told };
     if (Math.abs(mateDistance(move.after)) === 1) {
-      const mated = mateDrawing(input.after, move.after.best, me);
+      const mated = drawn('mates', mateDrawing(input.after, move.after.best, me));
       const end = move.after.best ? boardAfter(input.after, move.after.best) : null;
       return said(withPattern(oneOf(facts.matesNow(reply), move), end, named), 'mate', mated);
     }
@@ -108,7 +108,7 @@ function mateFact(input: FactInput): Fact | null {
     const named = { mated: them, facts, told };
     const distance = Math.abs(mateDistance(move.before));
     if (distance === 1) {
-      const mated = mateDrawing(input.before, move.best, them);
+      const mated = drawn('mates', mateDrawing(input.before, move.best, them));
       const end = move.best ? boardAfter(input.before, move.best) : null;
       return said(withPattern(oneOf(facts.mateInOne(best), move), end, named), 'mate', mated);
     }
@@ -168,14 +168,14 @@ function threatFact(input: FactInput): { fact: Fact; leads: boolean } | null {
   const marks = (reason: Reason | null) =>
     withMove(uci, 'attack', reasonMarks(reason, { ...scene, shown: input.after, toMove: them }));
   if (first && second) {
-    const drawing = marks({ kind: 'fork', first, second });
+    const drawing = drawn('forks', marks({ kind: 'fork', first, second }));
     const fact = said(oneOf(facts.allowsFork(reply, first, second), move), 'fork', drawing);
     return { fact, leads: true };
   }
   // Taking back what the move took wins nothing, and says nothing of the error.
   if (move.san.includes('x') && move.uci.slice(2, 4) === uci.slice(2, 4)) return null;
   const reason = replyReason(input, uci);
-  return reason && allowedFact(input, reason, marks(reason));
+  return reason && allowedFact(input, reason, drawn(reasonTopic(reason), marks(reason)));
 }
 
 // The plies of the opening, where a queen out early gets chased about.
@@ -196,7 +196,7 @@ function earlyQueen({ move, me, after }: FactInput, reason: Reason): boolean {
 function allowedFact(
   input: FactInput,
   reason: Reason,
-  drawing: readonly Mark[] | null,
+  drawing: Drawing | null,
 ): { fact: Fact; leads: boolean } | null {
   const { move, facts, them, reply } = input;
   if (earlyQueen(input, reason))

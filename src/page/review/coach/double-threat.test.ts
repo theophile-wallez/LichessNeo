@@ -61,6 +61,11 @@ describe('the better move’s reason', () => {
   it('is the double threat, said and drawn', () => {
     const fact = findings(nf5(['g4e4', 'g7g6', 'e4a8']), en).fact;
     expect(fact?.text).toContain('threatening mate and the [[p:br]]rook at once');
-    expect(fact?.drawing).toContainEqual({ kind: 'link', from: 'e4', to: 'h7', tone: 'attack' });
+    expect(fact?.drawing?.marks).toContainEqual({
+      kind: 'link',
+      from: 'e4',
+      to: 'h7',
+      tone: 'attack',
+    });
   });
 });

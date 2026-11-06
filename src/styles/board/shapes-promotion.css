@@ -47,7 +47,7 @@ svg.ln-ext-marks {
   }
 }
 
-/* The coach's drawing (page/board/drawing.ts): its layers come in one after the other, the pawn's
+/* The coach's drawing (shared/board/drawing.ts): its layers come in one after the other, the pawn's
  * square at once, the dots one after the other, the runs and the lines from their start. */
 .ln-ext-drawing__layer {
   --ln-ext-delay: calc(var(--ln-ext-step) * 0.15s);
@@ -75,7 +75,7 @@ svg.ln-ext-marks {
   animation: ln-ext-drawing-pop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) var(--ln-ext-delay) both;
 }
 
-/* A run (page/board/run.ts): each pill stretches out from the piece. */
+/* A run (shared/board/run.ts): each pill stretches out from the piece. */
 .ln-ext-drawing__lane {
   transform-box: fill-box;
   transform-origin: var(--ln-ext-origin);

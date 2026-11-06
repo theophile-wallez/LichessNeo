@@ -88,6 +88,9 @@ const COUNTS: readonly string[] = [
   'ten',
 ];
 
+/** "two", "three": a count of moves, in words. */
+export const countOf = (count: number): string => COUNTS[count] ?? String(count);
+
 /** "on the next move", "in two moves": how soon a line gets there. */
 export const within = (moves: number): string =>
   moves <= 1 ? 'on the next move' : `in ${COUNTS[moves] ?? moves} moves`;

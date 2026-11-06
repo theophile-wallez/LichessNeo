@@ -3,6 +3,7 @@ import {
   agreement,
   capitalize,
   conjugate,
+  countOf,
   materialFr,
   owned,
   partyOf,
@@ -12,7 +13,7 @@ import {
   within,
 } from './fr-grammar.ts';
 import { motifFr, pressureFr } from './fr-motifs.ts';
-import type { LineFacts, Viewer } from './types.ts';
+import type { LineFacts, Viewer, Ways } from './types.ts';
 
 // The sentences read off the engine's lines: what a line wins, and the threats.
 
@@ -145,6 +146,25 @@ function mateThreatsFr(viewer: Viewer): MateThreatSentences {
   };
 }
 
+function inBetweenFr(retake: string, check: boolean, moves: number): Ways {
+  if (moves > 1)
+    return [
+      `Un échec intermédiaire : ${retake} peut attendre ${countOf(moves)} coups, la pièce ne s’échappera pas.`,
+      `D’abord un échec, et ${retake} arrive quand même, ${countOf(moves)} coups plus tard.`,
+    ];
+  return check
+    ? [
+        `Un échec intermédiaire : ${retake} suit juste après.`,
+        `D’abord un échec, puis ${retake}.`,
+        `Rien ne presse pour reprendre : l’échec d’abord, puis ${retake}.`,
+      ]
+    : [
+        `Un coup intermédiaire : ${retake} suit juste après.`,
+        `Rien ne presse pour reprendre : ${retake} peut attendre un coup.`,
+        `D’abord ce coup, puis ${retake}.`,
+      ];
+}
+
 export const lineFactsFr = (viewer: Viewer): LineFacts => ({
   motif: motifFr(viewer),
   pressure: pressureFr(viewer),
@@ -153,18 +173,7 @@ export const lineFactsFr = (viewer: Viewer): LineFacts => ({
     `L’idée : ${next} au coup suivant, qui ${why}.`,
     `Et après, ${next}, qui ${why}.`,
   ],
-  inBetween: (retake, check) =>
-    check
-      ? [
-          `Un échec intermédiaire : ${retake} suit juste après.`,
-          `D’abord un échec, puis ${retake}.`,
-          `Rien ne presse pour reprendre : l’échec d’abord, puis ${retake}.`,
-        ]
-      : [
-          `Un coup intermédiaire : ${retake} suit juste après.`,
-          `Rien ne presse pour reprendre : ${retake} peut attendre un coup.`,
-          `D’abord ce coup, puis ${retake}.`,
-        ],
+  inBetween: inBetweenFr,
   material: materialFr,
   ...gainsFr(viewer),
   ...threatsFr(viewer),

@@ -1,4 +1,5 @@
 import { z } from 'zod/mini';
+import { HiddenDrawingsSchema } from './coach-drawings.ts';
 import {
   readStored,
   readStoredJson,
@@ -135,10 +136,18 @@ export const CoachOptionsSchema = z.object({
   board: z.prefault(z.boolean(), true),
   /** The review's best, excellent and good moves as three, two and one dots, not icons. */
   dots: z.prefault(z.boolean(), false),
+  /** The kinds of drawing it keeps off the board all the same. */
+  hidden: HiddenDrawingsSchema,
 });
 export type CoachOptions = z.infer<typeof CoachOptionsSchema>;
 
-const DEFAULT_OPTIONS: CoachOptions = { motion: true, analysis: true, board: true, dots: false };
+const DEFAULT_OPTIONS: CoachOptions = {
+  motion: true,
+  analysis: true,
+  board: true,
+  dots: false,
+  hidden: [],
+};
 
 /** The settings' coach switches as last kept, for the page world and before the settings are read. */
 export function coachOptions(): CoachOptions {

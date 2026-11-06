@@ -141,6 +141,9 @@ const COUNTS: readonly string[] = [
   'dix',
 ];
 
+/** « deux », « trois » : a count of moves, in words. */
+export const countOf = (count: number): string => COUNTS[count] ?? String(count);
+
 /** « au coup suivant », « en deux coups » : how soon a line gets there. */
 export const within = (moves: number): string =>
   moves <= 1 ? 'au coup suivant' : `en ${COUNTS[moves] ?? moves} coups`;

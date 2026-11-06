@@ -89,6 +89,16 @@ export interface PlanSentences extends QuietPlanSentences {
   readonly space: Ways;
   /** A king's step into the opposition. */
   readonly opposition: Ways;
+  /** The same from afar, three or five squares between the kings. */
+  readonly distantOpposition: Ways;
+  /** The king of king and pawn against king onto a key square. */
+  readonly keySquare: Ways;
+  /** The king into the corner in front of a rook pawn: a draw. */
+  readonly cornerDraw: Ways;
+  /** The Lucena position's bridge: the rook to its fourth rank. */
+  readonly bridge: Ways;
+  /** The Vancura defense: the rook beside the rook pawn. */
+  readonly vancura: Ways;
   /** A passed pawn out of the square of `king`, which can't catch it. */
   readonly outruns: (king: Piece) => Ways;
   /** `king` stepping into a passed pawn's square, just in time. */

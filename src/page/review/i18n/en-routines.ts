@@ -8,7 +8,7 @@ const subject = (party: Party): string => capitalize(party.name);
 
 type RoutineSentences = Pick<
   FactSentences,
-  'castles' | 'castlesOpposite' | 'promotes' | 'checkForces'
+  'castles' | 'castlesOpposite' | 'promotes' | 'checkForces' | 'counterCheck'
 >;
 
 export function routinesEn(viewer: Viewer): RoutineSentences {
@@ -42,6 +42,13 @@ export function routinesEn(viewer: Viewer): RoutineSentences {
         `The check forces ${checked.name} to respond.`,
         `Check! ${subject(checked)} ${agree(checked, 'has', 'have')} to respond.`,
         `Check: ${checked.name} must answer first.`,
+      ];
+    },
+    counterCheck: color => {
+      const checked = partyOf(viewer, color);
+      return [
+        `A check answered with a check: now ${checked.name} must respond.`,
+        `Check met with check! ${subject(checked)} ${agree(checked, 'has', 'have')} to answer now.`,
       ];
     },
   };

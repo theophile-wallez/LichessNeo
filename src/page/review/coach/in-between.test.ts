@@ -34,7 +34,26 @@ describe('inBetweenFact', () => {
   it('sees a check slipped in before taking back', () => {
     const move = answer('d1d3', ['h7g8', 'g2f3']);
     const retake = moveToken('gxf3', 'white', { base: 'a', ucis: ['h7g8', 'g2f3'] });
-    expect(en.facts.inBetween(retake, true)).toContain(inBetweenFact(inputOf(move))?.text);
+    expect(en.facts.inBetween(retake, true, 1)).toContain(inBetweenFact(inputOf(move))?.text);
+  });
+
+  it('draws the check, and rings the square taken back on', () => {
+    expect(inBetweenFact(inputOf(answer('d1d3', ['h7g8', 'g2f3'])))?.drawing).toEqual({
+      topic: 'checks',
+      marks: [
+        { kind: 'link', from: 'd3', to: 'h7', tone: 'attack' },
+        { kind: 'ring', square: 'h7', tone: 'attack' },
+        { kind: 'ring', square: 'f3', tone: 'plan' },
+      ],
+    });
+  });
+
+  it('lets a second check put the retake off', () => {
+    const line = ['h7g8', 'd3h7', 'g8f8', 'g2f3'];
+    const retake = moveToken('gxf3', 'white', { base: 'a', ucis: line });
+    expect(en.facts.inBetween(retake, true, 2)).toContain(
+      inBetweenFact(inputOf(answer('d1d3', line)))?.text,
+    );
   });
 
   it('isn’t said of the recapture itself', () => {

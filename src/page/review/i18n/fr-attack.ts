@@ -1,15 +1,8 @@
 import type { Piece } from '#shared/chess/index.ts';
-import type { MatePattern } from '#page/review/coach/mate-pattern.ts';
 import type { ConceptSentences } from './concept-types.ts';
+import { MATES_FR } from './fr-mates.ts';
 import { capitalize, conjugate, partyOf } from './fr-grammar.ts';
 import type { Viewer } from './types.ts';
-
-const MATES_FR: Readonly<Record<MatePattern, string>> = {
-  backRank: 'Un mat du couloir : les pions du roi l’enferment.',
-  smothered: 'Un mat à l’étouffée : le roi est enseveli sous ses propres pièces.',
-  arabian: 'Le mat arabe : la tour à côté du roi dans le coin, tenue par le cavalier.',
-  epaulette: 'Un mat des épaulettes : les pièces du roi, de chaque côté, lui barrent la route.',
-};
 
 // The attack and its last resorts, in French: a perpetual check, stalemate, a
 // named mate, a pawn ending.

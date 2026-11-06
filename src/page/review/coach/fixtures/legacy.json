@@ -187,7 +187,11 @@
       },
       {
         "remark": "Checkmate! Game over.",
-        "parts": [["Checkmate, and the game is over."]]
+        "parts": [
+          [
+            "Checkmate, and the game is over. The Opera mate: the rook on the back rank, the bishop holding it."
+          ]
+        ]
       }
     ],
     "fr": [
@@ -377,7 +381,11 @@
       },
       {
         "remark": "Échec et mat ! La partie est finie.",
-        "parts": [["Échec et mat, la partie est finie."]]
+        "parts": [
+          [
+            "Échec et mat, la partie est finie. Le mat de l’Opéra : la tour sur la dernière rangée, le fou la protège."
+          ]
+        ]
       }
     ]
   },

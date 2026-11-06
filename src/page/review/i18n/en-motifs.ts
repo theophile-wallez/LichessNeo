@@ -93,6 +93,28 @@ function strikesEn(
       `${The(first)} was left undefended.`,
       `Nothing protected ${the(first)}.`,
     ],
+    xray: (move, first, second) =>
+      second
+        ? [
+            `An x-ray: ${the(first)} backs up ${move} through ${the(second)}.`,
+            `${move}, and ${the(first)} sees right through ${the(second)}: an x-ray.`,
+          ]
+        : null,
+    attraction: (move, first) => [
+      `${move} lures ${the(first)} onto a fatal square.`,
+      `An attraction: ${move} drags ${the(first)} in.`,
+    ],
+    interference: (move, first, second) =>
+      second
+        ? [
+            `${move} cuts ${the(first)} off from ${the(second)}.`,
+            `An interference: ${move} steps between ${the(first)} and ${the(second)}.`,
+          ]
+        : null,
+    clearance: (move, first) => [
+      `${move} clears the way for ${the(first)}.`,
+      `A clearance: ${move} gets out of the way of ${the(first)}.`,
+    ],
   };
 }
 

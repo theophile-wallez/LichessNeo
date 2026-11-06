@@ -283,6 +283,8 @@ export interface FactSentences extends LineFacts, PlanSentences, ConceptSentence
     winning: boolean,
   ) => Ways;
   readonly checkForces: (side: Color) => Ways;
+  /** A check that answers a check, `side` the one checked now. */
+  readonly counterCheck: (side: Color) => Ways;
   readonly littleMorePrecise: (best: string, why: string | null) => Ways;
   /** An even trade, of `taken`; `ahead` for a side ahead in material. */
   readonly trades: (taken: Piece, ahead: boolean) => Ways;

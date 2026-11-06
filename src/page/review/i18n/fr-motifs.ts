@@ -104,6 +104,28 @@ function strikesFr(
       `${The(first)} était sans défense.`,
       `Rien ne protégeait ${the(first)}.`,
     ],
+    xray: (move, first, second) =>
+      second
+        ? [
+            `Une attaque en rayons X : ${the(first)} soutient ${move} à travers ${the(second)}.`,
+            `${move}, et ${the(first)} voit à travers ${the(second)} : une attaque en rayons X.`,
+          ]
+        : null,
+    attraction: (move, first) => [
+      `${move} attire ${the(first)} sur une case fatale.`,
+      `Une attraction : ${move} fait venir ${the(first)}.`,
+    ],
+    interference: (move, first, second) =>
+      second
+        ? [
+            `${move} coupe ${the(first)} de ${the(second)}.`,
+            `Une interception : ${move} s’interpose entre ${the(first)} et ${the(second)}.`,
+          ]
+        : null,
+    clearance: (move, first) => [
+      `${move} libère la voie pour ${the(first)}.`,
+      `Un dégagement : ${move} libère le passage pour ${the(first)}.`,
+    ],
   };
 }
 

@@ -6,11 +6,12 @@ import { html, setHtml, type SafeHtml } from '#shared/html.ts';
 import { mateBadgeMarkup } from '#shared/mate-badge.ts';
 import { createSvgElement } from '#shared/svg.ts';
 import { currentNode } from '#page/lichess/analysis.ts';
-import { ENGINE_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
-import { squareCenter } from './geometry.ts';
-import { clearOfArrows, drawingMarkup } from './drawing.ts';
+import { ENGINE_COLOR, REVIEW_COLOR, THREAT_COLOR } from '#shared/board/colors.ts';
+import { squareCenter } from '#shared/board/geometry.ts';
+import { clearOfArrows, drawingMarkup } from '#shared/board/drawing.ts';
 import { arrowPolygons, arrowsMarkup, fillsMarkup } from './render.ts';
-import { reviewArrows, type ReviewArrow, reviewDrawing } from './review-arrows.ts';
+import type { ReviewArrow } from '#shared/board/marks.ts';
+import { reviewArrows, reviewDrawing } from './review-arrows.ts';
 import { readShapes, readVariations, type Arrow } from './svg-shapes.ts';
 
 // Our shapes on the main board: fills, Lichess's variation arrows and the

@@ -51,6 +51,7 @@ const CoachOptionsMessage = z.object({
     analysis: z.boolean(),
     board: z.boolean(),
     dots: z.boolean(),
+    hidden: z.array(z.string()),
   }),
 });
 
@@ -137,15 +138,18 @@ describe('the coach', () => {
     await flush();
     expect(isLive()).toBe(false);
     expect(localStorage.getItem('ln-ext-coach-options')).toBe(
-      '{"motion":false,"analysis":false,"board":true,"dots":false}',
+      '{"motion":false,"analysis":false,"board":true,"dots":false,"hidden":[]}',
     );
   });
 
-  it('keeps the switch of the coach’s drawings for the page world', async () => {
+  it('keeps the switch of the coach’s drawings, and the kinds hidden, for the page world', async () => {
     vi.stubGlobal('chrome', {
       runtime: { id: 'test' },
       storage: {
-        sync: { get: (key: string) => Promise.resolve({ [key]: { coachBoard: false } }) },
+        sync: {
+          get: (key: string) =>
+            Promise.resolve({ [key]: { coachBoard: false, coachDrawingsHidden: ['pins'] } }),
+        },
         onChanged: { addListener: () => {} },
       },
     });
@@ -155,7 +159,7 @@ describe('the coach', () => {
     fresh.coach.start();
     await flush();
     expect(localStorage.getItem('ln-ext-coach-options')).toBe(
-      '{"motion":true,"analysis":true,"board":false,"dots":false}',
+      '{"motion":true,"analysis":true,"board":false,"dots":false,"hidden":["pins"]}',
     );
   });
 
@@ -183,15 +187,31 @@ describe('the coach', () => {
     const fresh = await import('./index.ts');
     fresh.coach.start();
     await flush();
-    expect(told()).toEqual([{ motion: true, analysis: false, board: true, dots: false }]);
+    expect(told()).toEqual([
+      { motion: true, analysis: false, board: true, dots: false, hidden: [] },
+    ]);
 
     const { saveSetting } = await import('#content/settings/settings.ts');
     await saveSetting('uiSounds', false);
     expect(told()).toHaveLength(1);
     await saveSetting('analysisCoach', true);
-    expect(told().at(-1)).toEqual({ motion: true, analysis: true, board: true, dots: false });
+    expect(told().at(-1)).toEqual({
+      motion: true,
+      analysis: true,
+      board: true,
+      dots: false,
+      hidden: [],
+    });
     await saveSetting('classStyle', 'dots');
-    expect(told().at(-1)).toEqual({ motion: true, analysis: true, board: true, dots: true });
+    expect(told().at(-1)).toEqual({
+      motion: true,
+      analysis: true,
+      board: true,
+      dots: true,
+      hidden: [],
+    });
+    await saveSetting('coachDrawingsHidden', ['mates', 'endings']);
+    expect(told().at(-1)).toMatchObject({ board: true, hidden: ['mates', 'endings'] });
     posted.mockRestore();
   });
 });

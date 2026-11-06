@@ -1,15 +1,8 @@
 import type { Piece } from '#shared/chess/index.ts';
-import type { MatePattern } from '#page/review/coach/mate-pattern.ts';
 import type { ConceptSentences } from './concept-types.ts';
+import { MATES_EN } from './en-mates.ts';
 import { agree, capitalize, partyOf } from './en-grammar.ts';
 import type { Viewer } from './types.ts';
-
-const MATES_EN: Readonly<Record<MatePattern, string>> = {
-  backRank: 'A back-rank mate: the king’s own pawns wall it in.',
-  smothered: 'A smothered mate: the king is buried under its own pieces.',
-  arabian: 'The Arabian mate: the rook beside the cornered king, the knight holding it.',
-  epaulette: 'An epaulette mate: the king’s own pieces on both sides block its way out.',
-};
 
 // The attack and its last resorts, in English: a perpetual check, stalemate, a
 // named mate, a pawn ending.

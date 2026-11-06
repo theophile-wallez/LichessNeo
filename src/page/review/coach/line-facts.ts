@@ -237,7 +237,8 @@ export function gainFact({ move, facts, me, them }: LineFactInput): Fact | null 
   const text = oneOf(facts.winsAlong(gain), move);
   const around = afterLastMove(move, [move.uci, ...(move.after.line ?? [])]);
   const upTo = won.plies - from + around.offset;
-  return withMotif(text, { ...around, winner: me, upTo, base: 'b', lead: true }, facts);
+  const motifLine = { ...around, winner: me, upTo, base: 'b' as const, lead: true, played: true };
+  return withMotif(text, motifLine, facts);
 }
 
 // How far the line after a capture may go to win its worth back: six moves

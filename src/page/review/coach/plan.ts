@@ -27,6 +27,7 @@ import { blockadeOf } from './blockade.ts';
 import { discoveryOf } from './discovery.ts';
 import { reasonMarks } from './drawing.ts';
 import { cutsOffOf } from './endgame-plans.ts';
+import { rookRuleOf } from './rook-endings.ts';
 import { fianchettoOf } from './fianchetto.ts';
 import { kingPlan } from './king-plan.ts';
 import { openedLineOf } from './open-line.ts';
@@ -37,7 +38,8 @@ import { pinnedTargetOf } from './pinned-target.ts';
 import { planWays } from './plan-ways.ts';
 import { queenTradeOf } from './queen-trade.ts';
 import { behindPasser, blocksPasser, centralSquare, safetyPlan } from './safety.ts';
-import { type Fact, oneOf, said } from './said.ts';
+import { drawn, type Fact, oneOf, said } from './said.ts';
+import { reasonTopic } from './drawing-topic.ts';
 import { pawnShape } from './pawn-shape.ts';
 import { isOutpost, isPassed, OPENING_PLIES, ownRank } from './structure.ts';
 import { evaluationLevel } from './trajectory.ts';
@@ -89,10 +91,12 @@ function squarePlan({ after, color }: Play, from: Square, to: Square): Plan | nu
   return piece?.role === 'rook' ? rookSquarePlan(after, [from, to], color) : null;
 }
 
-// Behind a passed pawn, the Philidor defense, in front of the other side's pawn,
+// The Lucena's bridge or the Vancura defense, behind a passed pawn, the Philidor defense, in front of the other side's pawn,
 // cutting the other king off,
 // lifted toward the castled king, then the file or rank it takes.
 function rookSquarePlan(after: Board, [from, to]: [Square, Square], color: Color): Plan | null {
+  const rule = rookRuleOf({ after, color, from, to });
+  if (rule) return rule;
   if (behindPasser(after, to, color)) return { kind: 'behindPasser' };
   const philidor = philidorOf(after, [from, to], color);
   if (philidor) return philidor;
@@ -211,6 +215,11 @@ export interface PlanInput {
 
 // The opponent's plans that bear on the reader's game.
 const WATCHED: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>([
+  'distantOpposition',
+  'keySquare',
+  'cornerDraw',
+  'bridge',
+  'vancura',
   'outpost',
   'openFile',
   'doublesRooks',
@@ -254,7 +263,7 @@ function planFinding({ move, sentences, before, after, theirs }: PlanInput) {
     { color, ply: move.position.ply, uci, san, before, after },
     sentences,
   );
-  const fact = said(oneOf(ways, move), null, reasonMarks(told, scene));
+  const fact = said(oneOf(ways, move), null, drawn(reasonTopic(told), reasonMarks(told, scene)));
   return { plan: told, fact };
 }
 
@@ -278,6 +287,11 @@ export const planFact = (input: PlanInput): Fact | null => planFinding(input)?.f
 
 // The endings' rules, which come before a move's threats.
 const RACES: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>([
+  'distantOpposition',
+  'keySquare',
+  'cornerDraw',
+  'bridge',
+  'vancura',
   'outruns',
   'entersSquare',
   'opposition',

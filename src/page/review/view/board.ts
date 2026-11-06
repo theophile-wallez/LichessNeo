@@ -1,16 +1,16 @@
 import { coachOptions } from '#shared/coach.ts';
+import { drawsTopic } from '#shared/coach-drawings.ts';
 import { setData } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { parentPath } from '#page/lichess/tree.ts';
 import {
-  type Mark,
-  type ReviewArrow,
   reviewArrows,
   reviewDrawing,
   setReviewArrows,
   setReviewDrawing,
 } from '#page/board/review-arrows.ts';
+import type { Mark, ReviewArrow } from '#shared/board/marks.ts';
 import { gameDivision } from '#page/review/game/division.ts';
 import { isGameNode, plyIndex } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
@@ -107,14 +107,16 @@ function renderArrows(session: Session, analysis: Analysis, move: JudgedMove | n
 }
 
 // What the comment speaks of, drawn while its move is on the board, unless the
-// settings keep the coach's drawings off. A retry and practice put no comment
+// settings keep the coach's drawings, or that kind of them, off. A retry and practice put no comment
 // there, only the square of a hint asked for, which those settings don't hold back.
 function drawnMarks(session: Session, analysis: Analysis): readonly Mark[] {
   const { drawing, mode, retry } = session.view;
   if (mode === 'openings') return practiceMarks(session, analysis);
   if (mode === 'live') return [];
   const shown = mode === 'moves' && drawing.path === analysis.path;
-  return shown && (retry !== null || coachOptions().board) ? drawing.marks : [];
+  const { topic } = drawing;
+  const drawn = retry !== null || topic === null || drawsTopic(coachOptions(), topic);
+  return shown && drawn ? drawing.marks : [];
 }
 
 function renderDrawing(session: Session, analysis: Analysis): void {

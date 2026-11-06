@@ -1,5 +1,5 @@
 import type { Board, Square } from '#shared/chess/index.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import { batteryOf } from '#page/review/chess/rays.ts';
 import type { Plan } from './idea.ts';
 

@@ -1,5 +1,5 @@
 import { z } from 'zod/mini';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import { findings, ideasOf, type Theme, themesOf } from '#page/review/coach/fact.ts';
 import { freshTold, recalled } from '#page/review/coach/told.ts';
 import { explanation } from '#page/review/coach/explanation.ts';
@@ -138,6 +138,6 @@ export function commentOn(move: MoveVerdict, coach: number, language: ReviewLang
   return {
     parts,
     themes: themesOf(found),
-    drawing: found.fact?.drawing ?? found.followUp?.drawing ?? [],
+    drawing: (found.fact?.drawing ?? found.followUp?.drawing)?.marks ?? [],
   };
 }

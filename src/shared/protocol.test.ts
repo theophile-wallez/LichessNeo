@@ -104,9 +104,9 @@ describe('protocol', () => {
     const told: unknown[] = [];
     stops.push(onCoachOptions(options => told.push(options)));
     vi.spyOn(window, 'postMessage').mockImplementation((data: unknown) => receive(data));
-    postCoachOptions({ motion: false, analysis: true, board: true, dots: false });
+    postCoachOptions({ motion: false, analysis: true, board: true, dots: false, hidden: [] });
     receive({ type: 'ln-ext:coach-options', options: { motion: 'no' } });
-    expect(told).toEqual([{ motion: false, analysis: true, board: true, dots: false }]);
+    expect(told).toEqual([{ motion: false, analysis: true, board: true, dots: false, hidden: [] }]);
   });
 
   it('stops listening once told', () => {

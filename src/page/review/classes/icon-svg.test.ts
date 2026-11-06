@@ -9,7 +9,7 @@ const iconSvg = async (): Promise<typeof IconSvg> => {
   return import('./icon-svg.ts');
 };
 
-const OPTIONS = { motion: true, analysis: true, board: true };
+const OPTIONS = { motion: true, analysis: true, board: true, hidden: [] };
 
 // The content script telling of the switches (#shared/protocol.ts).
 const tell = (options: object): void => {

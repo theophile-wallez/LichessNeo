@@ -1,10 +1,10 @@
 import { isSquare, type Square } from '#shared/chess/index.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
-import { ENGINE_COLOR, REVIEW_COLOR, THREAT_COLOR } from '#page/board/colors.ts';
-import { drawingMarkup } from '#page/board/drawing.ts';
-import { squareCenter } from '#page/board/geometry.ts';
+import { ENGINE_COLOR, REVIEW_COLOR, THREAT_COLOR } from '#shared/board/colors.ts';
+import { drawingMarkup } from '#shared/board/drawing.ts';
+import { squareCenter } from '#shared/board/geometry.ts';
 import { arrowPolygons } from '#page/board/render.ts';
-import type { Mark, ReviewArrow } from '#page/board/review-arrows.ts';
+import type { Mark, ReviewArrow } from '#shared/board/marks.ts';
 import { normalizeUci } from '#page/review/chess/notation.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';

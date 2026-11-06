@@ -61,6 +61,12 @@ function asRecorded(
     .map(({ text, droppable }) => ({ text: withoutPlay(text), droppable }));
 }
 
+// The ways the coach can say Black is mated by the Opera mate.
+const named = (language: ReviewLanguage): string[] =>
+  language.facts
+    .checkmate('black')
+    .map(text => `${text} ${language.facts.matePattern('opera')[0]}`);
+
 describe('the coach’s comment', () => {
   const texts = GameTextsSchema.parse(legacy);
 
@@ -109,17 +115,17 @@ describe('the coach’s comment', () => {
     expect(en.remarks('white').firstMove).not.toContain(remark(second, context));
   });
 
-  it('names checkmate on its own', () => {
+  it('names checkmate, then the mate’s pattern, and nothing more', () => {
     const game = fixtureGames().find(({ name }) => name === 'opera');
     const mate = game ? replay(game).at(-1) : undefined;
     if (!game || !mate) throw new Error('no opera game');
-    expect(en.facts.checkmate('black')).toContain(fact(mate, en));
+    expect(named(en)).toContain(fact(mate, en));
     const [said, ...more] = explanation(
       mate,
       { gameId: game.id, coach: 1, language: fr },
       NO_CONTEXT,
     );
-    expect(fr.facts.checkmate('black')).toContain(said?.text);
+    expect(named(fr)).toContain(said?.text);
     expect(more).toEqual([]);
   });
 });

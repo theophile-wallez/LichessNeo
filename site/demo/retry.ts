@@ -9,7 +9,7 @@ import {
   type Square,
 } from '#shared/chess/index.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import { boardAfter } from '#page/review/chess/line.ts';
 import { normalizeUci, sanOf } from '#page/review/chess/notation.ts';
 import { classSvg } from '#page/review/classes/icon-svg.ts';

@@ -2,6 +2,7 @@ import type { Color, Piece } from '#shared/chess/index.ts';
 import {
   agree,
   capitalize,
+  countOf,
   definite,
   materialEn,
   partyOf,
@@ -145,6 +146,25 @@ function mateThreatsEn(viewer: Viewer): MateThreatSentences {
   };
 }
 
+function inBetweenEn(retake: string, check: boolean, moves: number): Ways {
+  if (moves > 1)
+    return [
+      `A check in between: ${retake} can wait ${countOf(moves)} moves, the piece isn’t going anywhere.`,
+      `First a check, and ${retake} still comes, ${countOf(moves)} moves later.`,
+    ];
+  return check
+    ? [
+        `A check in between: ${retake} comes right after.`,
+        `First a check, then ${retake}.`,
+        `No rush to take back: the check first, then ${retake}.`,
+      ]
+    : [
+        `An in-between move: ${retake} comes right after.`,
+        `No rush to take back: ${retake} can wait a move.`,
+        `First this, then ${retake}.`,
+      ];
+}
+
 export const lineFactsEn = (viewer: Viewer): LineFacts => ({
   motif: motifEn(viewer),
   pressure: pressureEn(viewer),
@@ -153,18 +173,7 @@ export const lineFactsEn = (viewer: Viewer): LineFacts => ({
     `The idea: ${next} next, ${why}.`,
     `And then ${next}, ${why}.`,
   ],
-  inBetween: (retake, check) =>
-    check
-      ? [
-          `A check in between: ${retake} comes right after.`,
-          `First a check, then ${retake}.`,
-          `No rush to take back: the check first, then ${retake}.`,
-        ]
-      : [
-          `An in-between move: ${retake} comes right after.`,
-          `No rush to take back: ${retake} can wait a move.`,
-          `First this, then ${retake}.`,
-        ],
+  inBetween: inBetweenEn,
   material: materialEn,
   ...gainsEn(viewer),
   ...threatsEn(viewer),

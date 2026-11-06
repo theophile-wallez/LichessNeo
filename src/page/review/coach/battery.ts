@@ -9,7 +9,7 @@ import {
   squareAt,
   squareCoords,
 } from '#shared/chess/index.ts';
-import type { Mark } from '#page/board/review-arrows.ts';
+import type { Mark } from '#shared/board/marks.ts';
 import { firstPiece } from '#page/review/chess/rays.ts';
 import type { Plan, Reason } from './idea.ts';
 import { pawnsOn } from './structure.ts';
