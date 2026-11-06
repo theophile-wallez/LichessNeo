@@ -3,15 +3,17 @@ import { html, setHtml } from '#shared/html.ts';
 import { message } from '#content/platform/runtime.ts';
 import { packLibrary } from '#content/packs/index.ts';
 import { PAGE_NAMES, SETTINGS_PAGES, type SettingsPage } from './address.ts';
+import { buildAnalysisPage } from './analysis-page.ts';
 import { buildAppearance, showScheme } from './appearance.ts';
 import { buildAvatarCard } from './avatar-card.ts';
 import { buildBackupPage } from './backup-page.ts';
-import { buildNameCard } from './name-card.ts';
+import { buildChesscomCards } from './chesscom-card.ts';
 import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
+import { groupTitle } from './group-title.ts';
 import { buildHomeCoachCard } from './home-coach-card.ts';
-import { buildExperimentalPage } from './experimental-page.ts';
 import { buildIntroRow } from './intro-row.ts';
 import { buildLooksPage } from './looks-page.ts';
+import { buildNameCard } from './name-card.ts';
 import { buildNavigationRow } from './navigation-row.ts';
 import { buildPairingPage } from './pairing-page.ts';
 import { buildRatingRow } from './rating-row.ts';
@@ -19,7 +21,7 @@ import { buildRepliesCard } from './replies-card.ts';
 import { buildRoundnessRow } from './roundness-row.ts';
 import { onSettingsRead, settingsRead } from './settings.ts';
 import { buildSupportPage } from './support-page.ts';
-import { buildSwitchList } from './switch-list.ts';
+import { buildSwitchList, type SwitchRow } from './switch-list.ts';
 
 // The account page's section for the extension: one of its pages
 // (address.ts) at a time, the one the menu's link picked (menu.ts), under its
@@ -56,6 +58,9 @@ function buildFrame(): HTMLElement {
   return element;
 }
 
+const switchCard = (key: SwitchRow['key'], title: string, body: string): HTMLElement =>
+  buildSwitchList([{ key, title: message(title), body: message(body) }]);
+
 /** The section, for the account page's content column, kept in step with the settings. */
 export function buildSection(): SettingsSection {
   const element = buildFrame();
@@ -65,29 +70,25 @@ export function buildSection(): SettingsSection {
   const pairing = buildPairingPage();
   const support = buildSupportPage();
   const pages: Readonly<Record<SettingsPage, readonly HTMLElement[]>> = {
-    appearance: [buildNavigationRow(), buildAppearance(), buildRoundnessRow()],
+    appearance: [
+      buildNavigationRow(),
+      buildAppearance(),
+      buildRoundnessRow(),
+      switchCard('uiSounds', 'settingUiSounds', 'settingUiSoundsBody'),
+    ],
     board: looks.elements,
+    coach: [coach.element, homeCoach.element, buildCoachSwitches()],
+    analysis: buildAnalysisPage(),
+    play: [buildIntroRow(), buildRepliesCard(), pairing.element],
     profile: [
+      groupTitle(message('settingsGroupYou')),
       buildAvatarCard(),
       buildNameCard(),
+      groupTitle(message('settingsGroupRatings')),
       buildRatingRow(),
-      coach.element,
-      homeCoach.element,
-      buildCoachSwitches(),
+      buildChesscomCards(),
+      switchCard('ratingStakes', 'settingRatingStakes', 'settingRatingStakesBody'),
     ],
-    play: [
-      buildIntroRow(),
-      buildSwitchList([
-        {
-          key: 'ratingStakes',
-          title: message('settingRatingStakes'),
-          body: message('settingRatingStakesBody'),
-        },
-      ]),
-      buildRepliesCard(),
-      pairing.element,
-    ],
-    experimental: [buildExperimentalPage()],
     backup: [buildBackupPage()],
     support: [support.element],
   };
@@ -103,8 +104,8 @@ export function buildSection(): SettingsSection {
     element,
     show: page => {
       showPage(element, page);
-      coach.show(page === 'profile');
-      homeCoach.show(page === 'profile');
+      coach.show(page === 'coach');
+      homeCoach.show(page === 'coach');
       looks.show(page === 'board');
       pairing.show(page === 'play');
       support.show(page === 'support');

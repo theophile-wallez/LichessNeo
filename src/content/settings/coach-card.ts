@@ -7,13 +7,12 @@ import { coachChoices, coachName, tilePick } from '#content/coach/names.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
 import { buildSwitchList } from './switch-list.ts';
 
-// The settings' Coach card, on the Profile & coach page, under the profile's cards
+// The settings' Coach card, at the top of the Coach page
 // (styles/pages/settings-coach.css): the coach, live over its still, says
 // hello, over a tile for each coach, after no coach and one at random. The
 // pick is the one every coach's place shows (#shared/coach.ts): the review,
-// the puzzles, the drills. With none, the stage says so alone. Under it, the
-// coach's switches: its 3D, its place on the analysis board, and its drawings
-// on the board.
+// the puzzles, the drills. With none, the stage says so alone. Under the home's
+// own (home-coach-card.ts), the coaches' 3D.
 
 const CARD = html`<div class="ln-ext-coach-pick__head">
     <span class="ln-ext-setting__icon" aria-hidden="true"></span>
@@ -100,22 +99,12 @@ export function buildCoachCard(): CoachCard {
   return { element: card, show };
 }
 
-/** The coach's switches, under its card. */
+/** The coaches' 3D switch, under the cards. */
 export const buildCoachSwitches = (): HTMLElement =>
   buildSwitchList([
     {
       key: 'coachMotion',
       title: message('settingCoachMotion'),
       body: message('settingCoachMotionBody'),
-    },
-    {
-      key: 'analysisCoach',
-      title: message('settingAnalysisCoach'),
-      body: message('settingAnalysisCoachBody'),
-    },
-    {
-      key: 'coachBoard',
-      title: message('settingCoachBoard'),
-      body: message('settingCoachBoardBody'),
     },
   ]);

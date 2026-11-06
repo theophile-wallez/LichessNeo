@@ -3,6 +3,7 @@ import { onCoachOptions } from '#shared/protocol.ts';
 import { PRACTICE_HASH } from '#shared/practice-page.ts';
 import { analysis as pageAnalysis, type Analysis } from '#page/lichess/analysis.ts';
 import { onJump } from '#page/lichess/jumps.ts';
+import { followClassDots } from './classes/icon-svg.ts';
 import { analyseGame } from './game/analyse-game.ts';
 import { pageLanguage } from './i18n/language.ts';
 import { createSession, type Mode, type Session } from './session.ts';
@@ -66,6 +67,7 @@ function run(session: Session, mode: Mode): void {
   keepMarked(session);
   setInterval(() => render(session), RENDER_MS);
   onJump(() => renderJump(session));
+  followClassDots(() => render(session, true));
   let lastWidth = window.innerWidth;
   const refit = (): void => {
     lastWidth = window.innerWidth;

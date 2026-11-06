@@ -32,6 +32,24 @@
   "settingsPageBoard": {
     "message": "Plateau et sons"
   },
+  "settingsPageCoach": {
+    "message": "Coach"
+  },
+  "settingsPageAnalysis": {
+    "message": "Analyse"
+  },
+  "settingsGroupYou": {
+    "message": "Vous"
+  },
+  "settingsGroupRatings": {
+    "message": "Classements"
+  },
+  "settingsGroupReview": {
+    "message": "Bilan"
+  },
+  "settingsGroupAnalysisBoard": {
+    "message": "Échiquier d’analyse"
+  },
   "looksBoard": {
     "message": "Plateau"
   },
@@ -93,7 +111,7 @@
     "message": "Jouer la partie"
   },
   "settingsPageProfile": {
-    "message": "Profil et coach"
+    "message": "Profil et classements"
   },
   "avatarTitle": {
     "message": "Votre avatar"
@@ -163,9 +181,6 @@
   },
   "nameReset": {
     "message": "Reprendre mon pseudo"
-  },
-  "settingsPageExperimental": {
-    "message": "Expérimental"
   },
   "coachPickTitle": {
     "message": "Votre coach"
@@ -301,6 +316,18 @@
   },
   "settingCoachBoardBody": {
     "message": "Quand le coach explique un coup, il le montre aussi sur l’échiquier, comme le carré d’un pion pour la règle du carré. Désactivé, il se contente de l’écrire."
+  },
+  "settingClassStyle": {
+    "message": "Style des évaluations"
+  },
+  "settingClassStyleBody": {
+    "message": "Comment le bilan marque les meilleurs coups, les très bons et les bons : une étoile, un pouce et une coche, ou trois, deux et un point."
+  },
+  "classStyleIcons": {
+    "message": "Icônes"
+  },
+  "classStyleDots": {
+    "message": "Points"
   },
   "packsTitle": {
     "message": "Packs"
@@ -1016,7 +1043,7 @@
     "message": "Fermer"
   },
   "settingsPagePlay": {
-    "message": "Jouer",
+    "message": "Parties",
     "description": "The settings' page for the game intro and the home's quick pairing cards."
   },
   "pairingCardsTitle": {

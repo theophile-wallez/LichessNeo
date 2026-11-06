@@ -16,6 +16,20 @@ main.account[data-ln-ext-settings] > .page-menu__content:not(.ln-ext-settings) {
   gap: 10px;
 }
 
+/* A heading over a group of cards (content/settings/group-title.ts), a step apart from the last. */
+.ln-ext-settings__group {
+  margin: 14px 2px 2px !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+.ln-ext-settings__group:first-child {
+  margin-top: 0 !important;
+}
+
 /* Its cards fold by its width, not the window's: the account menu narrows it on tablets. */
 .ln-ext-settings__list {
   container: ln-ext-settings-list / inline-size;
@@ -58,6 +72,11 @@ main.account[data-ln-ext-settings] > .page-menu__content:not(.ln-ext-settings) {
 .ln-ext-setting[data-ln-ext-setting='coachBoard'] {
   --ln-ext-setting-color: var(--ln-ext-cyan);
   --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/drawing-mode.svg');
+}
+
+.ln-ext-setting[data-ln-ext-setting='classStyle'] {
+  --ln-ext-setting-color: var(--ln-ext-green);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star.svg');
 }
 
 .ln-ext-setting[data-ln-ext-setting='sidebarRating'] {

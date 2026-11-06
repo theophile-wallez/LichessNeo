@@ -66,7 +66,7 @@ afterEach(() => {
 });
 
 describe('the settings’ Board & sounds page', () => {
-  it('lists the sounds first, then the board and the pieces, the interface’s sounds and the packs', () => {
+  it('lists the sounds first, then the board and the pieces, and the packs', () => {
     const { layout } = page();
     const cards = queryAll(layout, '.ln-ext-looks-page__cards > *', HTMLElement);
     expect(
@@ -76,7 +76,7 @@ describe('the settings’ Board & sounds page', () => {
           queryOne(card, '[data-ln-ext-setting]', HTMLElement)?.dataset.lnExtSetting ??
           card.className,
       ),
-    ).toEqual(['sound', 'board', 'piece', 'uiSounds', 'ln-ext-packs']);
+    ).toEqual(['sound', 'board', 'piece', 'ln-ext-packs']);
   });
 
   it('reads Lichess’s lists again the next time it opens, if they couldn’t be read', async () => {

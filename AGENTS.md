@@ -465,7 +465,7 @@ features and its name: free analysis, open data, no ads.
   another site at run time (Lichess's own assets aside). A pack is
   downloaded from GitHub once, when the user imports it, then kept in the
   browser. The one page from elsewhere is the rating study's, framed when the
-  user unfolds it on the settings' Experimental page
+  user unfolds it among the settings' ratings
   (`public/pages/rating-study.html`).
 - **Use Lichess's own capabilities** (its Stockfish build, its analysis
   controller) rather than reinventing them.

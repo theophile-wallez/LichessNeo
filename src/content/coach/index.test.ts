@@ -46,7 +46,12 @@ afterEach(() => {
 // The message the page world hears the switches from (#shared/protocol.ts).
 const CoachOptionsMessage = z.object({
   type: z.literal('ln-ext:coach-options'),
-  options: z.object({ motion: z.boolean(), analysis: z.boolean(), board: z.boolean() }),
+  options: z.object({
+    motion: z.boolean(),
+    analysis: z.boolean(),
+    board: z.boolean(),
+    dots: z.boolean(),
+  }),
 });
 
 const isLive = (): boolean => document.querySelector('.ln-ext-coach__avatar--live') !== null;
@@ -132,7 +137,7 @@ describe('the coach', () => {
     await flush();
     expect(isLive()).toBe(false);
     expect(localStorage.getItem('ln-ext-coach-options')).toBe(
-      '{"motion":false,"analysis":false,"board":true}',
+      '{"motion":false,"analysis":false,"board":true,"dots":false}',
     );
   });
 
@@ -150,7 +155,7 @@ describe('the coach', () => {
     fresh.coach.start();
     await flush();
     expect(localStorage.getItem('ln-ext-coach-options')).toBe(
-      '{"motion":true,"analysis":true,"board":false}',
+      '{"motion":true,"analysis":true,"board":false,"dots":false}',
     );
   });
 
@@ -178,13 +183,15 @@ describe('the coach', () => {
     const fresh = await import('./index.ts');
     fresh.coach.start();
     await flush();
-    expect(told()).toEqual([{ motion: true, analysis: false, board: true }]);
+    expect(told()).toEqual([{ motion: true, analysis: false, board: true, dots: false }]);
 
     const { saveSetting } = await import('#content/settings/settings.ts');
     await saveSetting('uiSounds', false);
     expect(told()).toHaveLength(1);
     await saveSetting('analysisCoach', true);
-    expect(told().at(-1)).toEqual({ motion: true, analysis: true, board: true });
+    expect(told().at(-1)).toEqual({ motion: true, analysis: true, board: true, dots: false });
+    await saveSetting('classStyle', 'dots');
+    expect(told().at(-1)).toEqual({ motion: true, analysis: true, board: true, dots: true });
     posted.mockRestore();
   });
 });

@@ -43,6 +43,30 @@
     "message": "Board & sounds",
     "description": "The settings' page for the board, the pieces and the sounds."
   },
+  "settingsPageCoach": {
+    "message": "Coach",
+    "description": "The settings' page for the coach: which one, the home's, and its 3D."
+  },
+  "settingsPageAnalysis": {
+    "message": "Analysis",
+    "description": "The settings' page for the Game Review and the analysis board's coach."
+  },
+  "settingsGroupYou": {
+    "message": "You",
+    "description": "The settings' heading over the user's own avatar and name."
+  },
+  "settingsGroupRatings": {
+    "message": "Ratings",
+    "description": "The settings' heading over how ratings show."
+  },
+  "settingsGroupReview": {
+    "message": "Game Review",
+    "description": "The settings' heading over the Game Review's settings."
+  },
+  "settingsGroupAnalysisBoard": {
+    "message": "Analysis board",
+    "description": "The settings' heading over the free analysis board's settings."
+  },
   "looksBoard": {
     "message": "Board",
     "description": "The settings' card for the board."
@@ -120,8 +144,8 @@
     "description": "The button that plays a short game on the preview board, to hear the sounds."
   },
   "settingsPageProfile": {
-    "message": "Profile & coach",
-    "description": "The settings' page for the user's avatar, name and sidebar rating, and their coach, in the account menu and as its title."
+    "message": "Profile & ratings",
+    "description": "The settings' page for the user's avatar and name, and how ratings show."
   },
   "avatarTitle": {
     "message": "Your avatar",
@@ -214,10 +238,6 @@
   "nameReset": {
     "message": "Use my username",
     "description": "The Name card's button that goes back to the user's Lichess username."
-  },
-  "settingsPageExperimental": {
-    "message": "Experimental",
-    "description": "The settings' tab for the features still being tried out."
   },
   "coachPickTitle": {
     "message": "Your coach",
@@ -398,6 +418,22 @@
   "settingCoachBoardBody": {
     "message": "When the coach explains a move, it also shows it on the board, such as a passed pawn’s square for the rule of the square. Off, it only says it.",
     "description": "What the coach's drawings setting covers."
+  },
+  "settingClassStyle": {
+    "message": "Evaluation style",
+    "description": "The setting of how the review draws its best, excellent and good moves."
+  },
+  "settingClassStyleBody": {
+    "message": "How the review marks best, excellent and good moves: a star, a thumb up and a tick, or three, two and one dots.",
+    "description": "What the evaluation style setting covers."
+  },
+  "classStyleIcons": {
+    "message": "Icons",
+    "description": "The evaluation style that draws a star, a thumb up and a tick."
+  },
+  "classStyleDots": {
+    "message": "Dots",
+    "description": "The evaluation style that draws three, two and one dots."
   },
   "packsTitle": {
     "message": "Packs",
@@ -1346,8 +1382,8 @@
     "description": "The coach picker's close button, read out by screen readers."
   },
   "settingsPagePlay": {
-    "message": "Play",
-    "description": "The settings' page for the game intro and the home's quick pairing cards."
+    "message": "Games",
+    "description": "The settings' page for the game intro, the chat's quick replies and the home's quick pairing cards."
   },
   "pairingCardsTitle": {
     "message": "Your home cards",

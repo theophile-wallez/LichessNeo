@@ -216,26 +216,13 @@ describe('the coach’s switches', () => {
     });
   });
 
-  it('turns the 3D and the analysis board’s coach on and off', async () => {
+  it('turns the 3D on and off', async () => {
     const list = buildCoachSwitches();
     await flush();
     expect(switchOf(list, 'coachMotion')?.getAttribute('aria-checked')).toBe('true');
-    expect(switchOf(list, 'analysisCoach')?.getAttribute('aria-checked')).toBe('true');
-    switchOf(list, 'analysisCoach')?.click();
-    expect(synced.get('ln-ext-settings')).toMatchObject({
-      coachMotion: true,
-      analysisCoach: false,
-    });
-    expect(switchOf(list, 'analysisCoach')?.getAttribute('aria-checked')).toBe('false');
-  });
-
-  it('turns the coach’s drawings on the board on and off', async () => {
-    const list = buildCoachSwitches();
-    await flush();
-    expect(switchOf(list, 'coachBoard')?.getAttribute('aria-checked')).toBe('true');
-    switchOf(list, 'coachBoard')?.click();
-    expect(synced.get('ln-ext-settings')).toMatchObject({ coachBoard: false });
-    expect(switchOf(list, 'coachBoard')?.getAttribute('aria-checked')).toBe('false');
+    switchOf(list, 'coachMotion')?.click();
+    expect(synced.get('ln-ext-settings')).toMatchObject({ coachMotion: false });
+    expect(switchOf(list, 'coachMotion')?.getAttribute('aria-checked')).toBe('false');
   });
 
   it('takes the card’s live coach off as the 3D is switched off', async () => {

@@ -133,14 +133,16 @@ export const CoachOptionsSchema = z.object({
   analysis: z.boolean(),
   /** The coach draws what it explains on the board. Kept before it was a switch: on. */
   board: z.prefault(z.boolean(), true),
+  /** The review's best, excellent and good moves as three, two and one dots, not icons. */
+  dots: z.prefault(z.boolean(), false),
 });
 export type CoachOptions = z.infer<typeof CoachOptionsSchema>;
 
-const ALL_ON: CoachOptions = { motion: true, analysis: true, board: true };
+const DEFAULT_OPTIONS: CoachOptions = { motion: true, analysis: true, board: true, dots: false };
 
 /** The settings' coach switches as last kept, for the page world and before the settings are read. */
 export function coachOptions(): CoachOptions {
-  return readStoredJson(StorageKey.coachOptions, CoachOptionsSchema) ?? ALL_ON;
+  return readStoredJson(StorageKey.coachOptions, CoachOptionsSchema) ?? DEFAULT_OPTIONS;
 }
 
 /** Keeps the coach switches the settings say, for `coachOptions`. */

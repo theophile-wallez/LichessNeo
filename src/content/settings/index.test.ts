@@ -76,9 +76,13 @@ describe('the extension’s settings on the account pages', () => {
     );
   });
 
-  it('has the points at stake’s switch on the Play page, on by default', () => {
-    open('#ln-ext-extension/play');
-    const page = queryOne(document, ".ln-ext-settings__page[data-ln-ext-page='play']", HTMLElement);
+  it('has the points at stake’s switch among the ratings, on by default', () => {
+    open('#ln-ext-extension/profile');
+    const page = queryOne(
+      document,
+      ".ln-ext-settings__page[data-ln-ext-page='profile']",
+      HTMLElement,
+    );
     const button =
       page && queryOne(page, "[data-ln-ext-setting='ratingStakes'] .ln-ext-switch", HTMLElement);
     expect(button?.getAttribute('aria-checked')).toBe('true');

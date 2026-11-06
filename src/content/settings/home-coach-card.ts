@@ -7,7 +7,7 @@ import { message } from '#content/platform/runtime.ts';
 import { onCoachChosen } from '#content/bootstrap/coach-choice.ts';
 import { coachChoices, pickIcon, tilePick } from '#content/coach/names.ts';
 
-// The settings' Home coach card, under the coach's on the Profile & coach page
+// The settings' Home coach card, under the coach's on the Coach page
 // (styles/pages/settings-coach.css): which coach stands in the home's hero
 // (content/pages/hero-coach.ts). It follows the coach every other page shows,
 // wearing its face, until the card is told to give the home one of its own:

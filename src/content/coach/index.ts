@@ -87,12 +87,21 @@ export function showCoach(state: CoachState): void {
 let told: CoachOptions | null = null;
 
 const sameOptions = (one: CoachOptions, other: CoachOptions): boolean =>
-  one.motion === other.motion && one.analysis === other.analysis && one.board === other.board;
+  one.motion === other.motion &&
+  one.analysis === other.analysis &&
+  one.board === other.board &&
+  one.dots === other.dots;
 
 // Kept for the page world, which can't read the settings, and for the next page's first look;
 // told to it too, as a page open in this tab doesn't hear its storage change.
-function followSettings({ coachMotion, analysisCoach, coachBoard }: Settings): void {
-  const options = { motion: coachMotion, analysis: analysisCoach, board: coachBoard };
+function followSettings(settings: Settings): void {
+  const { coachMotion, analysisCoach, coachBoard, classStyle } = settings;
+  const options = {
+    motion: coachMotion,
+    analysis: analysisCoach,
+    board: coachBoard,
+    dots: classStyle === 'dots',
+  };
   if (!told || !sameOptions(told, options)) {
     told = options;
     keepCoachOptions(options);

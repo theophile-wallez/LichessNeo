@@ -159,33 +159,36 @@ so the logic can be unit-tested without a page.
 - `platform`: the extension APIs it uses, and its messages in the page's language, which
   `chrome.i18n` takes from the browser's.
 - `settings`: the extension's settings, a section of the account pages whose
-  menu gets a link for each of its pages: Appearance (the nav as a rail, the
-  default, a sidebar, unfolded or not, or a header, then the color scheme, the color themes and
-  Lichess's Roundness), Board & sounds (the sounds, the board and the pieces and their black's color, the
-  extension's, the packs' and Lichess's, followed in the other tabs, the boards in sections: classic, each
-  family's, then the user's own and the packs', over a preview board that shows a board or a set while its tile is hovered, then
-  the interface's own sounds and the Packs card, which its own link scrolls
-  to), Profile & coach (the user's own avatar, a coach on a color or a
-  picture, their own name, which only their browser shows, and the sidebar's
-  rating, or none; then the coach, none (no robot either, each place closing
-  the room it left) or one at random, the home hero's own the same way or the
-  same one,
-  and the coach's switches: its 3D, its place on the free analysis board, and
-  its drawings on the board), Play (the game intro over a preview of it, the
+  menu gets a link for each of its pages, each named for where its settings
+  show, under headings where a page has groups: Appearance (the nav as a
+  rail, the default, a sidebar, unfolded or not, or a header, then the color
+  scheme, the color themes, Lichess's Roundness and the interface's own
+  sounds), Board & sounds (the sounds, the board and the pieces and their
+  black's color, the extension's, the packs' and Lichess's, followed in the
+  other tabs, the boards in sections: classic, each family's, then the user's
+  own and the packs', over a preview board that shows a board or a set while
+  its tile is hovered, then the Packs card, which its own link scrolls to),
+  Coach (the coach, none (no robot either, each place closing the room it
+  left) or one at random, the home hero's own the same way or the same one,
+  and the coaches' 3D), Analysis (the review's badges for its good moves,
+  icons or dots, and the coach's drawings on the board; then the coach on the
+  free analysis board), Games (the game intro over a preview of it, the
   chat's quick replies at a game's start and end: Lichess's at first, five at
   most, to change, reorder, take off or add to; and the home's quick pairing
   cards: a speed's or the player's own, changed, moved, taken off or put back
-  to the defaults, and cards suggested from their recent games), then, a step
-  below, Experimental (the Chess.com ratings, and the study behind them in a
-  frame) and Backup (every setting,
-  pick and pack, and opening practice's records, exported to a JSON file, and
-  put back from one), and Support (the user's coach under an arc of stars,
-  then a star on GitHub and a review on the store the extension came from,
-  the other store a quieter link). A control waits for the stored settings,
-  and a change is saved over them, never over the defaults. The links of
-  pages since merged open where their cards went. Kept in
-  `chrome.storage.sync`, but the coach's (the home's own too), the avatar's
-  and the name's picks in localStorage, where the page world reads them.
+  to the defaults, and cards suggested from their recent games), Profile &
+  ratings (the user's own avatar, a coach on a color or a picture, and their
+  own name, which only their browser shows; then the sidebar's rating, or
+  none, the Chess.com ratings and the study behind them in a frame, and the
+  points at stake), then, a step below, Backup (every setting, pick and pack,
+  and opening practice's records, exported to a JSON file, and put back from
+  one), and Support (the user's coach under an arc of stars, then a star on
+  GitHub and a review on the store the extension came from, the other store a
+  quieter link). A control waits for the stored settings, and a change is
+  saved over them, never over the defaults. The links of pages since merged
+  open where their cards went. Kept in `chrome.storage.sync`, but the
+  coach's (the home's own too), the avatar's and the name's picks in
+  localStorage, where the page world reads them.
 - `colors`: the color themes, one picked for each of Lichess's schemes.
 - `sidebar`: the Donate item, its folding to icons, and its shape (the
   settings' pick: unfolded, its sections folding open on a click and kept so,

@@ -7,7 +7,8 @@ import type { MoveClass } from './classes.ts';
 // The class icons' glyphs, in the class's color over a tint of it, in a 20 x 20
 // viewBox: the annotation symbols (!!, !, ?!, ?, ??) where chess has one,
 // Hugeicons for the good tiers (a star, a thumb up, a tick: told apart at a
-// glance), lines for the book and a slashed circle for a miss.
+// glance), lines for the book and a slashed circle for a miss. The settings
+// can draw the good tiers as three, two and one dots instead, as they once were.
 
 /**
  * One path of a glyph: its `d`, stroked, or filled when solid; `icon` when in
@@ -21,6 +22,7 @@ export interface GlyphPath {
 }
 
 const stroke = (path: string): GlyphPath => ({ path, solid: false });
+const solid = (path: string): GlyphPath => ({ path, solid: true });
 
 /** A Hugeicon's paths, in its own grid: the icon's markup scales them into the box. */
 const iconPaths = (icon: HugeIcon, { solid = false, lift = 0 } = {}): GlyphPath[] =>
@@ -54,6 +56,18 @@ function question(x: number, radius: number): GlyphPath {
   );
 }
 
+const DOT_RADIUS = 1.6;
+const DOT_GAP = 4.6;
+
+/** `count` dots in a row, centered. */
+function dots(count: number): GlyphPath[] {
+  return Array.from({ length: count }, (_, i) => {
+    const x = round(10 + (i - (count - 1) / 2) * DOT_GAP - DOT_RADIUS);
+    const arc = `a${DOT_RADIUS} ${DOT_RADIUS} 0 1 0`;
+    return solid(`M${x} 10${arc} ${DOT_RADIUS * 2} 0${arc} -${DOT_RADIUS * 2} 0`);
+  });
+}
+
 export const CLASS_GLYPHS: Readonly<Record<MoveClass, readonly GlyphPath[]>> = {
   brilliant: [exclamation(7.2), exclamation(12.8)],
   great: [exclamation(10)],
@@ -65,4 +79,11 @@ export const CLASS_GLYPHS: Readonly<Record<MoveClass, readonly GlyphPath[]>> = {
   mistake: [question(10, 2.3)],
   miss: [stroke('M14.4 10a4.4 4.4 0 1 1-8.8 0 4.4 4.4 0 1 1 8.8 0M6.9 13.1l6.2-6.2')],
   blunder: [question(6.8, 1.9), question(13.2, 1.9)],
+};
+
+/** The good tiers as dots, when the settings pick them over the icons. */
+export const DOT_GLYPHS: Readonly<Partial<Record<MoveClass, readonly GlyphPath[]>>> = {
+  best: dots(3),
+  excellent: dots(2),
+  good: dots(1),
 };

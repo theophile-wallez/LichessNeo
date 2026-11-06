@@ -16,16 +16,22 @@ main.account .ln-ext-settings[data-ln-ext-page='appearance'] {
   --ln-ext-nav-color: var(--ln-ext-pink);
 }
 
-.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='profile'],
-main.account .ln-ext-settings[data-ln-ext-page='profile'] {
-  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg');
-  --ln-ext-nav-color: var(--ln-ext-yellow);
-}
-
 .subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='board'],
 main.account .ln-ext-settings[data-ln-ext-page='board'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-01.svg');
   --ln-ext-nav-color: var(--ln-ext-green);
+}
+
+.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='coach'],
+main.account .ln-ext-settings[data-ln-ext-page='coach'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/mentoring.svg');
+  --ln-ext-nav-color: var(--ln-ext-purple);
+}
+
+.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='analysis'],
+main.account .ln-ext-settings[data-ln-ext-page='analysis'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ai-search-01.svg');
+  --ln-ext-nav-color: var(--ln-ext-cyan);
 }
 
 .subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='play'],
@@ -34,10 +40,10 @@ main.account .ln-ext-settings[data-ln-ext-page='play'] {
   --ln-ext-nav-color: var(--ln-ext-orange);
 }
 
-.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='experimental'],
-main.account .ln-ext-settings[data-ln-ext-page='experimental'] {
-  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/labs.svg');
-  --ln-ext-nav-color: var(--ln-ext-red);
+.subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='profile'],
+main.account .ln-ext-settings[data-ln-ext-page='profile'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-circle.svg');
+  --ln-ext-nav-color: var(--ln-ext-yellow);
 }
 
 .subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='backup'],
@@ -50,6 +56,13 @@ main.account .ln-ext-settings[data-ln-ext-page='backup'] {
 main.account .ln-ext-settings[data-ln-ext-page='support'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/favourite.svg');
   --ln-ext-nav-color: var(--ln-ext-pink);
+}
+
+/* The extension's own pages, Backup and Support, a step below those of what it changes. */
+@media (min-width: 800.02px) {
+  .subnav[data-ln-ext-nav~='account'] a.ln-ext-settings-sublink[data-ln-ext-page='backup'] {
+    margin-top: 12px !important;
+  }
 }
 
 /* Open, our link heads its pages: bright, without the picked row's fill, which goes to the

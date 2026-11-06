@@ -1,17 +1,15 @@
 import { closestTo, createElement } from '#shared/dom.ts';
 import type { PartKind } from '#shared/packs/pack.ts';
-import { message } from '#content/platform/runtime.ts';
 import { importSection } from '#content/packs/import-section.ts';
 import type { Library } from '#content/packs/library.ts';
 import { PACKS_HASH } from './address.ts';
 import { buildLooksCard } from './looks-card.ts';
 import { buildLooksPreview } from './looks-preview.ts';
 import { readLichessLooks } from './lichess-looks.ts';
-import { buildSwitchList } from './switch-list.ts';
 
 // The settings' Board & sounds page: a card for the sounds, the board and the
 // pieces (looks-card.ts), beside a board that shows them (looks-preview.ts),
-// then the interface's own sounds and the packs these cards offer.
+// then the packs these cards offer.
 // Lichess's lists are read the first time it shows.
 
 const KINDS: readonly PartKind[] = ['sound', 'board', 'piece'];
@@ -35,11 +33,8 @@ export function buildLooksPage(library: Library): LooksPage {
   });
   const layout = createElement('div', { className: 'ln-ext-looks-page' });
   const column = createElement('div', { className: 'ln-ext-looks-page__cards' });
-  const uiSounds = buildSwitchList([
-    { key: 'uiSounds', title: message('settingUiSounds'), body: message('settingUiSoundsBody') },
-  ]);
   const packs = importSection(library);
-  column.append(...cards.map(card => card.element), uiSounds, packs);
+  column.append(...cards.map(card => card.element), packs);
   layout.append(preview.element, column);
   let shown = false;
   let read = false;

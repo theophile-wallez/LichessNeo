@@ -33,7 +33,7 @@ describe('the coach’s drawing on the board', () => {
   });
 
   it('stays off while the settings keep the coach’s drawings off', () => {
-    keepCoachOptions({ motion: true, analysis: true, board: false });
+    keepCoachOptions({ motion: true, analysis: true, board: false, dots: false });
     const { session, facade } = drawnOn();
     renderBoard(session, facade);
     expect(reviewDrawing()).toEqual([]);

@@ -2,12 +2,14 @@
 // the section opens from any of them and comes back on reload. Each page adds
 // its name.
 
+// Each page is named for where its settings show; the extension's own (backup, support) last.
 export const SETTINGS_PAGES = [
   'appearance',
   'board',
-  'profile',
+  'coach',
+  'analysis',
   'play',
-  'experimental',
+  'profile',
   'backup',
   'support',
 ] as const;
@@ -18,9 +20,10 @@ export type SettingsPage = (typeof SETTINGS_PAGES)[number];
 export const PAGE_NAMES: Readonly<Record<SettingsPage, string>> = {
   appearance: 'settingsPageAppearance',
   board: 'settingsPageBoard',
-  profile: 'settingsPageProfile',
+  coach: 'settingsPageCoach',
+  analysis: 'settingsPageAnalysis',
   play: 'settingsPagePlay',
-  experimental: 'settingsPageExperimental',
+  profile: 'settingsPageProfile',
   backup: 'settingsPageBackup',
   support: 'settingsPageSupport',
 };
@@ -36,6 +39,7 @@ const MOVED: Readonly<Record<string, SettingsPage>> = {
   interface: 'appearance',
   packs: 'board',
   pairing: 'play',
+  experimental: 'profile',
 };
 
 /** The hash of `page`; the first page's is the section's own. */

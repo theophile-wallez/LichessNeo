@@ -6,9 +6,9 @@ import { hugeicon } from '#shared/hugeicons.ts';
 import { extensionUrl, message } from '#content/platform/runtime.ts';
 import { buildSwitchList } from './switch-list.ts';
 
-// The settings' Experimental page: features still being tried out, each a
-// card with a switch, and under the Chess.com ratings the study they come
-// from, unfolded in a frame.
+// The settings' Chess.com ratings, among the ratings of the Profile & ratings
+// page: a card with a switch, and under it the study they come from, unfolded
+// in a frame.
 
 const STUDY_URL = 'https://theophile-wallez.github.io/lichess-chesscom-ratings/';
 
@@ -34,8 +34,8 @@ const studyMarkup = (): SafeHtml =>
     </div>
   </details>`;
 
-/** The page's cards, kept in step with the settings; the study loads when first unfolded. */
-export function buildExperimentalPage(): HTMLElement {
+/** The cards, kept in step with the settings; the study loads when first unfolded. */
+export function buildChesscomCards(): HTMLElement {
   const list = buildSwitchList(
     [
       {

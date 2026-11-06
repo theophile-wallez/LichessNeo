@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
 import { flush } from '#shared/testing/timers.ts';
-import { buildExperimentalPage } from './experimental-page.ts';
+import { buildChesscomCards } from './chesscom-card.ts';
 
 const synced = new Map<string, unknown>();
 
@@ -23,9 +23,9 @@ beforeEach(() => {
   });
 });
 
-describe('the settings’ Experimental page', () => {
+describe('the settings’ Chess.com ratings', () => {
   it('switches the Chess.com ratings on', async () => {
-    const page = buildExperimentalPage();
+    const page = buildChesscomCards();
     await flush();
     queryOne(page, "[data-ln-ext-setting='chesscomRating'] .ln-ext-switch", HTMLElement)?.click();
     await flush();
@@ -33,7 +33,7 @@ describe('the settings’ Experimental page', () => {
   });
 
   it('frames the study, through our page, only once unfolded', () => {
-    const page = buildExperimentalPage();
+    const page = buildChesscomCards();
     const study = queryOne(page, '.ln-ext-study', HTMLDetailsElement);
     const frame = queryOne(page, '.ln-ext-study__frame', HTMLIFrameElement);
     expect(frame?.hasAttribute('src')).toBe(false);

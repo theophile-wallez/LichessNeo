@@ -23,6 +23,7 @@ describe('the settings’ address', () => {
     expect(settingsPageOf('#ln-ext-extension/personalization')).toBe('appearance');
     expect(settingsPageOf('#ln-ext-extension/interface')).toBe('appearance');
     expect(settingsPageOf('#ln-ext-extension/pairing')).toBe('play');
+    expect(settingsPageOf('#ln-ext-extension/experimental')).toBe('profile');
   });
 
   it('opens the first page for a page it doesn’t know', () => {

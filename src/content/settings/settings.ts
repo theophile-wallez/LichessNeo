@@ -21,6 +21,9 @@ export const MAX_CUSTOM_THEMES = 24;
 export const NavigationSchema = z.enum(['sidebar', 'unfolded', 'rail', 'header']);
 export const DEFAULT_NAVIGATION = 'rail';
 
+/** The review's badges for its good tiers (#page/review/classes/glyphs.ts). */
+export const ClassStyleSchema = z.enum(['icons', 'dots']);
+
 const SettingsFields = z.object({
   /** The interface's own sounds (content/ui/sounds.ts), not Lichess's nor a pack's. */
   uiSounds: z.prefault(z.boolean(), true),
@@ -30,6 +33,8 @@ const SettingsFields = z.object({
   analysisCoach: z.prefault(z.boolean(), true),
   /** The coach drawing what it explains on the board (a pawn's square); off, it only says it. */
   coachBoard: z.prefault(z.boolean(), true),
+  /** How the review draws best, excellent and good moves: icons, or three, two and one dots. */
+  classStyle: z.catch(ClassStyleSchema, 'icons'),
   navigation: z.catch(NavigationSchema, DEFAULT_NAVIGATION),
   /** Whether the user picked the nav in the settings (navigation-row.ts), not just kept the default. */
   navigationPicked: z.prefault(z.boolean(), false),
@@ -37,7 +42,7 @@ const SettingsFields = z.object({
   sidebarRating: z.catch(RatingPickSchema, 'mostPlayed'),
   /** The home's quick pairing cards, in their order (content/pages/speed-cards). */
   quickPairing: CardPicksSchema,
-  /** Every rating shown as on Chess.com, the Experimental page's switch (content/chesscom-ratings). */
+  /** Every rating shown as on Chess.com, a switch of the ratings' settings (content/chesscom-ratings). */
   chesscomRating: z.prefault(z.boolean(), false),
   /** Lichess's clock bar, hidden unless picked on Lichess's preferences page (content/clock-bar). */
   clockBar: z.prefault(z.boolean(), false),

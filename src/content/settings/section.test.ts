@@ -65,18 +65,30 @@ const pageHolds = (element: HTMLElement, page: string, selector: string): boolea
 describe('the settings’ section', () => {
   it('holds each page’s cards in its own panel', () => {
     const { element } = buildSection();
-    expect(pageHolds(element, 'appearance', '.ln-ext-appearance')).toBe(true);
-    expect(pageHolds(element, 'appearance', "[data-ln-ext-setting='roundness']")).toBe(true);
-    expect(pageHolds(element, 'appearance', '.ln-ext-nav-picks')).toBe(true);
-    expect(pageHolds(element, 'board', '.ln-ext-looks-page')).toBe(true);
-    expect(pageHolds(element, 'board', "[data-ln-ext-setting='uiSounds']")).toBe(true);
-    expect(pageHolds(element, 'board', '.ln-ext-packs')).toBe(true);
-    expect(pageHolds(element, 'profile', '.ln-ext-avatar-pick:not(.ln-ext-name-pick)')).toBe(true);
-    expect(pageHolds(element, 'profile', '.ln-ext-name-pick')).toBe(true);
-    expect(pageHolds(element, 'profile', "[data-ln-ext-setting='sidebarRating']")).toBe(true);
-    expect(pageHolds(element, 'profile', '.ln-ext-coach-pick')).toBe(true);
-    expect(pageHolds(element, 'play', "[data-ln-ext-setting='gameIntro']")).toBe(true);
-    expect(pageHolds(element, 'play', '.ln-ext-pairing')).toBe(true);
+    const holds: Readonly<Record<string, readonly string[]>> = {
+      appearance: [
+        '.ln-ext-nav-picks',
+        '.ln-ext-appearance',
+        "[data-ln-ext-setting='roundness']",
+        "[data-ln-ext-setting='uiSounds']",
+      ],
+      board: ['.ln-ext-looks-page', '.ln-ext-packs'],
+      coach: ['.ln-ext-coach-pick', "[data-ln-ext-setting='coachMotion']"],
+      analysis: ["[data-ln-ext-setting='classStyle']", "[data-ln-ext-setting='analysisCoach']"],
+      play: ["[data-ln-ext-setting='gameIntro']", '.ln-ext-pairing'],
+      profile: [
+        '.ln-ext-avatar-pick:not(.ln-ext-name-pick)',
+        '.ln-ext-name-pick',
+        "[data-ln-ext-setting='sidebarRating']",
+        "[data-ln-ext-setting='chesscomRating']",
+        "[data-ln-ext-setting='ratingStakes']",
+      ],
+    };
+    for (const [page, selectors] of Object.entries(holds))
+      for (const selector of selectors)
+        expect(pageHolds(element, page, selector), `${page} ${selector}`).toBe(true);
+    expect(pageHolds(element, 'board', "[data-ln-ext-setting='uiSounds']")).toBe(false);
+    expect(pageHolds(element, 'profile', '.ln-ext-coach-pick')).toBe(false);
   });
 
   it('shows one page at a time, under its name', () => {
@@ -99,8 +111,8 @@ describe('the settings’ section', () => {
     const section = buildSection();
     document.body.append(section.element);
     const live = (): boolean =>
-      pageHolds(section.element, 'profile', '.ln-ext-coach-pick__mascot .ln-ext-mascot');
-    section.show('profile');
+      pageHolds(section.element, 'coach', '.ln-ext-coach-pick__mascot .ln-ext-mascot');
+    section.show('coach');
     expect(live()).toBe(true);
     section.show('play');
     expect(live()).toBe(false);

@@ -1,4 +1,4 @@
-/* ---- The settings' Experimental page (content/settings/experimental-page.ts) --- */
+/* ---- The settings' Chess.com ratings (content/settings/chesscom-card.ts) --- */
 
 .ln-ext-setting[data-ln-ext-setting='chesscomRating'] {
   --ln-ext-setting-color: var(--ln-ext-orange);

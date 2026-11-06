@@ -1,6 +1,6 @@
 /* ---- A setting's menu --- */
 
-/* The settings' card with a menu rather than a switch (content/settings/rating-row.ts): a grey
+/* The settings' card with a menu rather than a switch (content/settings/select-row.ts): a grey
  * button; its chevron and list are every select's (dropdowns/native-select.css). */
 .ln-ext-setting__select {
   flex: none;
@@ -25,7 +25,7 @@
   outline-offset: 2px;
 }
 
-/* An option's icon (content/settings/rating-row.ts): a rating's glyph in its color, or a
+/* An option's icon: a rating's glyph in its color (content/settings/rating-row.ts), or a
  * Hugeicon. Chrome's customizable select shows it, in the list and in the button. */
 .ln-ext-setting__option-icon {
   display: inline-grid;
@@ -54,6 +54,10 @@
 
 .ln-ext-setting__option-icon[data-ln-ext-pick='hidden'] {
   color: var(--ln-ext-text-dim);
+}
+
+[data-ln-ext-setting='classStyle'] .ln-ext-setting__option-icon {
+  color: var(--ln-ext-green);
 }
 
 .ln-ext-setting__select selectedcontent {
