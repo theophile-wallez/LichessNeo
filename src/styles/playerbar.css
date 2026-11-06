@@ -119,6 +119,9 @@ html[data-ln-ext-ai~='black'][data-ln-ext-has~='analyse-black']
   font-size: 11px;
   font-weight: 800;
   line-height: 16px;
+  /* A live game's bar ends the title with a no-break space inside the badge ("NM&nbsp;"),
+   * which pushed the letters off center: word spacing takes back the system font's space. */
+  word-spacing: -0.26em;
   vertical-align: 1px;
 }
 
