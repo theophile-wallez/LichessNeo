@@ -46,7 +46,7 @@ body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
         min(
             calc(
               (var(--ln-ext-main-h, 100dvh) - 32px - var(--ln-ext-coords-off)) /
-                var(--ln-ext-board-ratio, 1)
+                (var(--ln-ext-board-ratio, 1) + var(--ln-ext-board-rise, 0))
             ),
             calc(
               var(--ln-ext-main-w, 100vw) - var(--ln-ext-panel-min) - var(--ln-ext-gap) - 48px -
@@ -80,8 +80,9 @@ body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
 
     grid-template-columns: var(--ln-ext-board) var(--ln-ext-panel-w) !important;
     --ln-ext-zen-clock: var(--ln-ext-bar);
+    /* The first row holds the room over the board for its 3D pieces (layout.css). */
     grid-template-rows:
-      var(--ln-ext-zen-clock)
+      calc(var(--ln-ext-zen-clock) + var(--ln-ext-board-headroom))
       max(0px, calc(var(--ln-ext-board-h) - 2 * var(--ln-ext-zen-clock) - var(--ln-ext-ctrl-h)))
       var(--ln-ext-ctrl-h)
       var(--ln-ext-zen-clock)
@@ -102,6 +103,10 @@ body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
   html[data-ln-ext-has~='round-clockless'] body.zenable.zen main.round .rcontrols {
     padding-bottom: 0 !important;
     translate: 0 calc(-1 * var(--ln-ext-inset-b, 0px));
+  }
+
+  body.zenable.zen main.round .round__app__board {
+    margin-top: var(--ln-ext-board-headroom) !important;
   }
 
   body.zenable.zen main.round .rcontrols {
@@ -139,9 +144,9 @@ body.zenable.zen main.round :is(i5d, rm6) :is(qZM, i5z, Z7yx, kwdb) {
   }
 
   /* The clocks beside the board, level with its top and its bottom edge (a clock is 40px
-   * tall, 8px into its 56px bar). */
+   * tall, 8px into its 56px bar), the top one under the room for 3D pieces. */
   body.zenable.zen main.round :is(.rclock-top, .expiration-top) {
-    --ln-ext-off: calc(var(--ln-ext-inset-t, 0px) - 8px);
+    --ln-ext-off: calc(var(--ln-ext-board-headroom) + var(--ln-ext-inset-t, 0px) - 8px);
   }
 
   body.zenable.zen main.round :is(.rclock-bottom, .expiration-bottom) {

@@ -6,8 +6,11 @@
   position: relative;
   width: var(--ln-ext-gauge-w, 22px);
   margin-right: var(--ln-ext-gauge-gap, 10px);
-  /* Level with the squares, between the player bars if any. */
-  margin-top: calc(var(--ln-ext-bar, 0px) + var(--ln-ext-inset-t, 0px));
+  /* Level with the squares, between the player bars if any, under a 3D board's room
+   * (analysis/layout.css). */
+  margin-top: calc(
+    var(--ln-ext-bar, 0px) + var(--ln-ext-board-headroom, 0px) + var(--ln-ext-inset-t, 0px)
+  );
   margin-bottom: calc(
     var(--ln-ext-bar, 0px) + var(--ln-ext-coords-off, 0px) + var(--ln-ext-inset-b, 0px)
   );
@@ -74,6 +77,14 @@ html.ln-ext-evalbar-on main.analyse .eval-gauge {
   inset: 0;
   z-index: 5;
   pointer-events: none;
+}
+
+/* Over the near ranks' 3D pieces (board/pieces.css), on the squares, which fill 464.5/476 of
+ * the board's box from its top (lila's board-3d.scss). */
+#main-wrap.is3d #ln-ext-board-overlay {
+  bottom: auto;
+  z-index: 10;
+  height: calc(100% * 464.5 / 476);
 }
 
 .ln-ext-badge {

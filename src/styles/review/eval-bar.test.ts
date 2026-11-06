@@ -55,3 +55,27 @@ describe('the eval bar', () => {
     expect(styled('.ln-ext-evalbar__fill').transform).toBe('translateY(calc(30% - 100%))');
   });
 });
+
+function overlay(dimension: 'is2d' | 'is3d'): CSSStyleDeclaration {
+  const style = document.createElement('style');
+  style.textContent = readFileSync(join(STYLES, 'review/eval-bar.css'), 'utf8');
+  document.head.append(style);
+  document.body.innerHTML =
+    `<div id="main-wrap" class="${dimension}"><main class="analyse">` +
+    '<div class="analyse__board main-board"><div id="ln-ext-board-overlay"></div></div>' +
+    '</main></div>';
+  return styled('#ln-ext-board-overlay');
+}
+
+describe('the board’s badges', () => {
+  // Chessground stacks 3D pieces by rank up to z-index 10: the near ranks hid the badge.
+  it('stand over a 3D board’s near pieces, on its squares', () => {
+    const raised = overlay('is3d');
+    expect(Number(raised.zIndex)).toBeGreaterThanOrEqual(10);
+    expect(raised.height).toContain('464.5');
+  });
+
+  it('keep their layer on a flat board', () => {
+    expect(overlay('is2d').zIndex).toBe('5');
+  });
+});

@@ -676,7 +676,10 @@ link to it, and a line here). The rest hold everywhere:
   (`ln-ext-board-zoom`, `--ln-ext-zoom`), or the one the user menu's Size
   slider sets. A layout that sizes its own board multiplies by
   `var(--ln-ext-board-scale, 1)`, and sizes the board's row by
-  `var(--ln-ext-board-ratio)`: a 3D board is less tall than wide. Use `dvh`, not `vh`: on phones
+  `var(--ln-ext-board-ratio)`: a 3D board is less tall than wide. Its far
+  rank's pieces also stand above it, by `var(--ln-ext-board-rise)` of its
+  width (`board/pieces.css`): leave that room over it, under the top bar,
+  or they run under the clock or off the window. Use `dvh`, not `vh`: on phones
   and headsets `100vh` is taller than the view.
 - **Pinned titles.** Don't widen a sticky title with negative margins (it
   overflows at 1024px): use side box-shadows in the page's color.

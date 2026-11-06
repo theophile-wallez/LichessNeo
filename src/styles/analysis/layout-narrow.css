@@ -19,15 +19,20 @@
       100vw - 16px,
       max(
         280px,
-        100dvh - var(---site-header-height, 60px) - 2 * var(--ln-ext-bar) - var(--ln-ext-strip) -
-          84px
+        (
+            100dvh - var(---site-header-height, 60px) - 2 * var(--ln-ext-bar) -
+              var(--ln-ext-strip) - 84px
+          ) /
+          (var(--ln-ext-board-ratio, 1) + var(--ln-ext-board-rise, 0))
       )
     );
 
     display: grid !important;
     grid-template-columns: var(--ln-ext-board) !important;
     grid-template-rows:
-      var(--ln-ext-strip) var(--ln-ext-bar) auto var(--ln-ext-bar) auto auto auto auto auto
+      var(--ln-ext-strip) calc(var(--ln-ext-bar) + var(--ln-ext-board-headroom)) auto var(
+        --ln-ext-bar
+      ) auto auto auto auto auto
       auto auto auto auto auto auto !important;
     grid-template-areas:
       'gauge'
@@ -52,8 +57,10 @@
     padding: 8px 0 32px !important;
   }
 
+  /* Its 3D room is in the top bar's row (layout.css), not a margin (board/pieces.css). */
   main.analyse .analyse__board {
     grid-area: board !important;
+    margin-top: 0 !important;
   }
 
   /* Lichess's upright gauge has no room beside a board as wide as the column: from 800px it

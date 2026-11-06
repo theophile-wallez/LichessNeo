@@ -75,7 +75,7 @@
                   var(--ln-ext-main-h, 100dvh) - 28px - var(--ln-ext-coords-off) -
                     var(--ln-ext-kb-h)
                 ) /
-                var(--ln-ext-board-ratio, 1)
+                (var(--ln-ext-board-ratio, 1) + var(--ln-ext-board-rise, 0))
             ),
             calc(var(--ln-ext-cols-w) - var(--ln-ext-panel-min))
           ) *
@@ -87,6 +87,9 @@
       calc(var(--ln-ext-cols-w) - var(--ln-ext-board)),
       440px
     );
+    /* The room over the board its 3D pieces stand in (board/pieces.css): the window's edge
+     * cut their heads off. */
+    --ln-ext-board-headroom: calc(var(--ln-ext-board) * var(--ln-ext-board-rise, 0));
 
     grid-template-columns:
       var(--ln-ext-gauge-col) var(--ln-ext-board) var(--ln-ext-gap)
@@ -94,8 +97,8 @@
     grid-template-rows:
       var(--ln-ext-head-h) var(--ln-ext-session-h)
       calc(
-        var(--ln-ext-board) * var(--ln-ext-board-ratio, 1) - var(--ln-ext-head-h) -
-          var(--ln-ext-session-h)
+        var(--ln-ext-board-headroom) + var(--ln-ext-board) * var(--ln-ext-board-ratio, 1) -
+          var(--ln-ext-head-h) - var(--ln-ext-session-h)
       )
       var(--ln-ext-coords-off) auto !important;
     grid-template-areas:
@@ -125,10 +128,15 @@
     --ln-ext-kb-h: 44px;
   }
 
-  /* Lichess's 3D board steps down a little (lila's board-3d.scss), past its row's end. */
+  /* Lichess's 3D board steps down a little (lila's board-3d.scss), past its row's end: ours
+   * steps down by the room its pieces stand in. */
   main.puzzle .puzzle__board {
     grid-area: board !important;
-    margin-top: 0 !important;
+    margin-top: var(--ln-ext-board-headroom) !important;
+  }
+
+  main.puzzle .eval-gauge {
+    margin-top: var(--ln-ext-board-headroom);
   }
 
   /* The page never scrolls: Lichess keeps a bottom margin and its hidden hover cards at the end.

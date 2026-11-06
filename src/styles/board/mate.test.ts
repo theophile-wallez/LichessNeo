@@ -34,3 +34,30 @@ describe('the checkmate', () => {
     expect(root.position).not.toBe('absolute');
   });
 });
+
+function layer(dimension: 'is2d' | 'is3d'): CSSStyleDeclaration {
+  const style = document.createElement('style');
+  style.textContent = readFileSync(join(import.meta.dirname, 'mate.css'), 'utf8');
+  document.head.append(style);
+  document.body.innerHTML =
+    `<div id="main-wrap" class="${dimension}"><div id="ln-ext-mate">` +
+    '<div class="ln-ext-mate"></div></div></div>';
+  const element = document.querySelector('.ln-ext-mate');
+  if (!(element instanceof HTMLElement)) throw new Error('no mate');
+  return getComputedStyle(element);
+}
+
+describe('the checkmate on a 3D board', () => {
+  // Its squares are 464.5/512 as tall as wide: counted square, the "#" fell half a square low.
+  it('counts its ranks as tall as its squares are', () => {
+    expect(layer('is2d').getPropertyValue('--ln-ext-mate-rank').trim()).toBe('12.5cqw');
+    expect(layer('is3d').getPropertyValue('--ln-ext-mate-rank')).toContain('464.5');
+  });
+
+  it('stands over its near pieces', () => {
+    layer('is3d');
+    const mate = document.querySelector('#ln-ext-mate');
+    if (!(mate instanceof HTMLElement)) throw new Error('no layer');
+    expect(Number(getComputedStyle(mate).zIndex)).toBeGreaterThanOrEqual(10);
+  });
+});

@@ -27,12 +27,23 @@ html.ln-ext-shows-mate #ln-ext-board-overlay .ln-ext-badge {
   pointer-events: none;
 }
 
+/* Over the near ranks' 3D pieces too (board/pieces.css). */
+#main-wrap.is3d #ln-ext-mate {
+  z-index: 10;
+}
+
 .ln-ext-mate {
+  /* The layer is the squares' box: a square is 12.5cqw wide, and as tall but on a 3D board,
+   * whose squares are 464.5/512 as tall as they are wide (lila's board-3d.scss). */
+  --ln-ext-mate-rank: 12.5cqw;
   position: absolute;
   inset: 0;
   pointer-events: none;
-  /* The layer is the board's square: one square is 12.5cqw either way. */
   container-type: inline-size;
+}
+
+#main-wrap.is3d .ln-ext-mate {
+  --ln-ext-mate-rank: calc(12.5cqw * 464.5 / 512);
 }
 
 .ln-ext-mate__crown,
@@ -57,7 +68,7 @@ html.ln-ext-shows-mate #ln-ext-board-overlay .ln-ext-badge {
 /* Both on their square's top right corner, inside the board on its edges. */
 .ln-ext-mate__pip {
   left: calc((var(--ln-ext-king-column) + 1) * 12.5cqw - 5cqw);
-  top: calc(var(--ln-ext-king-row) * 12.5cqw + 0.5cqw);
+  top: calc(var(--ln-ext-king-row) * var(--ln-ext-mate-rank) + 0.5cqw);
   border-radius: 50%;
   background: linear-gradient(var(--ln-ext-red), var(--ln-ext-red-dark));
   color: var(--ln-ext-white);
@@ -68,11 +79,11 @@ html.ln-ext-shows-mate #ln-ext-board-overlay .ln-ext-badge {
 .ln-ext-mate__crown {
   /* From the king's head, centred, to the mating piece's corner. */
   --ln-ext-from-x: calc((var(--ln-ext-king-column) - var(--ln-ext-by-column)) * 12.5cqw - 3cqw);
-  --ln-ext-from-y: calc((var(--ln-ext-king-row) - var(--ln-ext-by-row)) * 12.5cqw);
+  --ln-ext-from-y: calc((var(--ln-ext-king-row) - var(--ln-ext-by-row)) * var(--ln-ext-mate-rank));
   /* Its hop stays on the board: above it, the top player's bar hides it. */
-  --ln-ext-ceiling: calc(var(--ln-ext-by-row) * -12.5cqw - 0.5cqw);
+  --ln-ext-ceiling: calc(var(--ln-ext-by-row) * -1 * var(--ln-ext-mate-rank) - 0.5cqw);
   left: calc((var(--ln-ext-by-column) + 1) * 12.5cqw - 6cqw);
-  top: calc(var(--ln-ext-by-row) * 12.5cqw + 0.5cqw);
+  top: calc(var(--ln-ext-by-row) * var(--ln-ext-mate-rank) + 0.5cqw);
   z-index: 1;
   width: 5.5cqw;
   height: 5.5cqw;

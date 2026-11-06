@@ -22,7 +22,7 @@
                   var(--ln-ext-main-h, 100dvh) - 32px - 2 * var(--ln-ext-bar) -
                     var(--ln-ext-coords-off)
                 ) /
-                var(--ln-ext-board-ratio, 1)
+                (var(--ln-ext-board-ratio, 1) + var(--ln-ext-board-rise, 0))
             ),
             calc(
               var(--ln-ext-main-w, 100vw) - var(--ln-ext-lead-w, 0px) - var(--ln-ext-panel-min) -
@@ -60,7 +60,7 @@
      * board, whose row stays its own height. */
     grid-template-rows:
       var(--ln-ext-tabs-h)
-      calc(var(--ln-ext-bar) - var(--ln-ext-tabs-h))
+      calc(var(--ln-ext-bar) + var(--ln-ext-board-headroom) - var(--ln-ext-tabs-h))
       var(--ln-ext-board-h)
       var(--ln-ext-bar-bot) !important;
     grid-auto-rows: auto !important;
@@ -96,7 +96,12 @@
 
 /* ---- Parts --- */
 
-/* The same at every width. */
+/* The same at every width. The top bar's row ends with the room its 3D pieces stand in
+ * (board/pieces.css), so they don't run under the bar's clock. */
+main.round {
+  --ln-ext-board-headroom: calc(var(--ln-ext-board) * var(--ln-ext-board-rise, 0));
+}
+
 main.round .round__app,
 main.round .round__side {
   display: contents !important;

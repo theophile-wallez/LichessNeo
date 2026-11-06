@@ -16,7 +16,7 @@
                   var(--ln-ext-main-h, 100dvh) - 32px - 2 * var(--ln-ext-bar) -
                     var(--ln-ext-coords-off)
                 ) /
-                var(--ln-ext-board-ratio, 1)
+                (var(--ln-ext-board-ratio, 1) + var(--ln-ext-board-rise, 0))
             ),
             calc(
               (

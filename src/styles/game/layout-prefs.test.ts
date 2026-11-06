@@ -72,16 +72,21 @@ const strip = (prefs: string | undefined): number =>
     DESKTOP,
   );
 
-/** The board's column and its row, in pixels. */
-function board(page: Page): { width: number; height: number } {
+/** The board's column, its row and the top bar's, in pixels. */
+function board(page: Page): { width: number; height: number; top: number } {
   const main = getComputedStyle(render(page));
   const [width = 0] = cssTracks(main.gridTemplateColumns, page.viewport);
   const narrow = page.viewport.width < 1020;
   // Desktop: tabs, top bar, board, bottom bar. Narrow: TV, top bar, pocket, board.
-  const row = splitTracks(main.gridTemplateRows)[narrow ? 3 : 2] ?? '';
-  const height = cssPixels(row, page.viewport);
-  return { width, height };
+  const rows = splitTracks(main.gridTemplateRows);
+  const height = cssPixels(rows[narrow ? 3 : 2] ?? '', page.viewport);
+  const top = cssPixels(rows[1] ?? '', page.viewport);
+  return { width, height, top };
 }
+
+// Lichess stands a 3D piece 9.1% of the squares' height above its square, which are
+// 464.5/512 of the board's width (lila's board-3d.scss).
+const RISE = (0.091 * 464.5) / 512;
 
 describe('the game page’s coordinates strip', () => {
   it('is kept under the board for coordinates outside, even while Lichess swaps them in', () => {
@@ -104,13 +109,23 @@ describe('the board’s row', () => {
     },
   );
 
-  it('lets a 3D board grow as wide as the window’s height allows it', () => {
+  it('sizes a 3D board and its pieces’ room by the window’s height', () => {
     const viewport = { width: 1920, height: 1080 };
     const flat = board({ viewport });
     const raised = board({ viewport, dimension: 'is3d' });
-    expect(raised.height).toBeCloseTo(flat.height, 3);
-    expect(raised.width).toBeGreaterThan(flat.width);
+    expect(raised.height + raised.top).toBeCloseTo(flat.height + flat.top, 3);
+    expect(raised.width).toBeCloseTo(flat.width / (476 / 512 + RISE), 3);
   });
+
+  // The far rank's heads ran under the top bar's clock (issue 27).
+  it.each([DESKTOP, { width: 390, height: 844 }])(
+    'leaves a 3D board’s pieces room under the top bar, and a flat one none, at %o',
+    viewport => {
+      expect(board({ viewport }).top).toBe(56);
+      const raised = board({ viewport, dimension: 'is3d' });
+      expect(raised.top - 56).toBeCloseTo(raised.width * RISE, 3);
+    },
+  );
 });
 
 describe('the clock on the left', () => {

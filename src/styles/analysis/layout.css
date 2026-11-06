@@ -3,6 +3,11 @@
  * tools' area under a tab bar (panel-tabs.css). The page never scrolls; the rows add up to
  * `--ln-ext-stage`. */
 
+/* The room over the board for its 3D pieces (board/pieces.css), under the top bar if any. */
+main.analyse {
+  --ln-ext-board-headroom: calc(var(--ln-ext-board) * var(--ln-ext-board-rise, 0));
+}
+
 @media (min-width: 1020px) {
   main.analyse {
     --ln-ext-gap: 24px;
@@ -23,7 +28,7 @@
                   var(--ln-ext-main-h, 100dvh) - var(--ln-ext-v-room) - 2 * var(--ln-ext-bar) -
                     var(--ln-ext-coords-off)
                 ) /
-                var(--ln-ext-board-ratio, 1)
+                (var(--ln-ext-board-ratio, 1) + var(--ln-ext-board-rise, 0))
             ),
             calc(var(--ln-ext-main-w, 100vw) - var(--ln-ext-panel-min) - var(--ln-ext-gap) - 72px)
           ) *
@@ -37,7 +42,10 @@
     );
     /* A 3D board is less tall than wide (board/pieces.css). */
     --ln-ext-board-h: calc(var(--ln-ext-board) * var(--ln-ext-board-ratio, 1));
-    --ln-ext-stage: calc(var(--ln-ext-board-h) + 2 * var(--ln-ext-bar) + var(--ln-ext-coords-off));
+    --ln-ext-stage: calc(
+      var(--ln-ext-board-headroom) + var(--ln-ext-board-h) + 2 * var(--ln-ext-bar) +
+        var(--ln-ext-coords-off)
+    );
     --ln-ext-ctrl-h: var(--ln-ext-controls-h, 48px); /* content/layout/controls-height.ts */
     /* The tab bar's row, 0 while the panel has but one part to show (panel-tabs.css). */
     --ln-ext-tabs-h: 0px;
@@ -66,13 +74,15 @@
   main.analyse .analyse__board {
     grid-area: board !important;
     align-self: start;
-    margin: var(--ln-ext-bar) 0 0 !important;
+    margin: 0 !important;
+    margin-top: calc(var(--ln-ext-bar) + var(--ln-ext-board-headroom)) !important;
   }
 
   /* Placed like the Game Review's bar (review/), which replaces it: level with the squares. */
   main.analyse .eval-gauge {
     grid-area: gauge !important;
-    margin: calc(var(--ln-ext-bar) + var(--ln-ext-inset-t, 0px)) var(--ln-ext-gauge-gap)
+    margin: calc(var(--ln-ext-bar) + var(--ln-ext-board-headroom) + var(--ln-ext-inset-t, 0px))
+      var(--ln-ext-gauge-gap)
       calc(var(--ln-ext-bar) + var(--ln-ext-coords-off) + var(--ln-ext-inset-b, 0px)) 0 !important;
   }
 
@@ -130,8 +140,8 @@
 
   main.analyse > :is(.ln-ext-player--bottom, .ln-ext-captured--bottom) {
     --ln-ext-off: calc(
-      var(--ln-ext-bar) + var(--ln-ext-board-h) + var(--ln-ext-coords-off) -
-        var(--ln-ext-inset-b, 0px)
+      var(--ln-ext-bar) + var(--ln-ext-board-headroom) + var(--ln-ext-board-h) +
+        var(--ln-ext-coords-off) - var(--ln-ext-inset-b, 0px)
     );
   }
 
@@ -150,10 +160,11 @@
     pointer-events: auto;
   }
 
-  /* The clock level with the avatar, as on the game page. */
+  /* The clock level with the avatar, as on the game page: it hangs from the board, over the
+   * room left to 3D pieces. */
   html[data-ln-ext-has~='analyse-clock'] main.analyse .analyse__player_strip.top {
     top: auto !important;
-    bottom: calc(100% - var(--ln-ext-inset-t, 0px)) !important;
+    bottom: calc(100% + var(--ln-ext-board-headroom) - var(--ln-ext-inset-t, 0px)) !important;
     align-items: flex-end !important;
     padding: 0 var(--ln-ext-inset-r, 0px) 8px var(--ln-ext-inset-l, 0px) !important;
   }

@@ -18,7 +18,8 @@
     grid-template-columns: var(--ln-ext-board) !important;
     /* TV's channels first (styles/tv); a row with nothing in it takes no room. */
     grid-template-rows:
-      auto var(--ln-ext-bar) auto var(--ln-ext-board-h) auto var(--ln-ext-bar-bot)
+      auto calc(var(--ln-ext-bar) + var(--ln-ext-board-headroom)) auto var(--ln-ext-board-h) auto
+      var(--ln-ext-bar-bot)
       auto auto auto auto !important;
     grid-template-areas:
       'tv'
@@ -244,7 +245,7 @@
     --ln-ext-board: min(
       100vw - 96px,
       (100dvh - var(---site-header-height, 50px) - 2 * var(--ln-ext-bar) - 88px) /
-        var(--ln-ext-board-ratio, 1)
+        (var(--ln-ext-board-ratio, 1) + var(--ln-ext-board-rise, 0))
     );
   }
 
@@ -289,7 +290,10 @@
 /* A phone on its side: the board as tall as the screen, its bars above and under it. */
 @media (max-width: 1019.98px) and (max-height: 599.98px) {
   main.round {
-    --ln-ext-board: min(100vw - 96px, (100dvh - 16px) / var(--ln-ext-board-ratio, 1));
+    --ln-ext-board: min(
+      100vw - 96px,
+      (100dvh - 16px) / (var(--ln-ext-board-ratio, 1) + var(--ln-ext-board-rise, 0))
+    );
   }
 }
 

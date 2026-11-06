@@ -14,11 +14,42 @@
   --ln-ext-board-scale: calc(var(--ln-ext-zoom, 100) / 100 * 0.75 + 0.25);
   /* A board's height over its width, for the layouts' rows. */
   --ln-ext-board-ratio: 1;
+  /* How far its far rank's pieces stand above it, over its width: the room a layout leaves
+   * over the board, so they don't run under a player bar or off the window. */
+  --ln-ext-board-rise: 0;
 }
 
-/* Lichess's 3D boards are 476/512 as tall as they are wide (lila's board-3d.scss). */
+/* Lichess's 3D boards are 476/512 as tall as they are wide, and a piece stands 9.1% of the
+ * squares' height (464.5/512 of the width) above its square, a king's crown at its box's top
+ * (lila's board-3d.scss). */
 #main-wrap.is3d {
   --ln-ext-board-ratio: calc(476 / 512);
+  --ln-ext-board-rise: calc(0.091 * 464.5 / 512);
+}
+
+/* Where Lichess's grid places the board (Learn, Storm, Racer, the coordinate trainer, puzzles
+ * below 1260px), that room is a margin: a percentage of its grid area's width, the board's.
+ * The game, analysis and puzzle layouts leave it in their rows; the editor sizes its own. */
+#main-wrap.is3d :not(.board-editor) > .main-board {
+  margin-top: calc(var(--ln-ext-board-rise) * 100%);
+}
+
+/* Chessground stacks 3D pieces by rank, z-index 3 at the far one to 10 at the near one: kept
+ * inside the board, they don't cover what lies over it (a game's end, a study's chapters). */
+#main-wrap.is3d .main-board {
+  isolation: isolate;
+}
+
+/* A 3D piece off the board (a puzzle's side to move, the editor's spares), in a square tile:
+ * drawn as on the board, in a box shaped like the pictures (360 by 460), here the tile's middle,
+ * from its left with `cover`. Staunton's pictures are square, the piece left of their centre. */
+#main-wrap.is3d .no-square piece {
+  box-sizing: border-box;
+  padding: 0 calc((1 - 360 / 460) / 2 * 100%) !important;
+  background-origin: content-box !important;
+  background-position: 0 0 !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 /* ---- Board and pieces --- */

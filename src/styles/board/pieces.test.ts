@@ -118,3 +118,55 @@ describe('the black pieces’ color', () => {
     expect(tinted(filtersOf(PIECES, false))).toEqual([false, false, false, false]);
   });
 });
+
+const styled = (selector: string): CSSStyleDeclaration => {
+  const element = queryOne(document, selector, HTMLElement);
+  if (!element) throw new Error(`no ${selector}`);
+  return getComputedStyle(element);
+};
+
+describe('a 3D board', () => {
+  // Lichess's 3D sheet draws every piece from its box's corner, `cover` (lila's board-3d.scss).
+  const LICHESS_3D = 'piece { background-size: cover; background-position: 0 0; }';
+
+  function render(dimension: 'is2d' | 'is3d', markup: string): void {
+    const style = document.createElement('style');
+    style.textContent = LICHESS_3D + readFileSync(join(import.meta.dirname, 'pieces.css'), 'utf8');
+    document.head.replaceChildren(style);
+    document.body.innerHTML = `<div id="main-wrap" class="${dimension}">${markup}</div>`;
+  }
+
+  const TILE = '<div class="no-square"><piece class="king white"></piece></div>';
+
+  // Staunton's pictures are square, the piece left of their middle: in a square tile, `cover`
+  // from the corner set it off to the left. A box shaped like the board's centres it.
+  it('draws a piece off the board in a box shaped like the board’s, in its tile’s middle', () => {
+    render('is3d', TILE);
+    const piece = styled('piece');
+    expect(piece.paddingLeft).toBe(piece.paddingRight);
+    expect(piece.paddingLeft).not.toMatch(/^(0(px)?)?$/);
+    expect(piece.backgroundOrigin).toBe('content-box');
+    expect(piece.backgroundRepeat).toBe('no-repeat');
+  });
+
+  it('leaves a flat piece off the board as Lichess draws it', () => {
+    render('is2d', TILE);
+    expect(styled('piece').paddingLeft).toMatch(/^(0(px)?)?$/);
+  });
+
+  // Chessground stacks its pieces up to z-index 10: outside the board they covered a game's end.
+  it('keeps its pieces’ stacking inside it', () => {
+    render('is3d', '<div class="main-board"></div>');
+    expect(styled('.main-board').isolation).toBe('isolate');
+    render('is2d', '<div class="main-board"></div>');
+    expect(styled('.main-board').isolation).not.toBe('isolate');
+  });
+
+  // Learn and the coordinate trainer put the board at the window's top edge, heads cut off.
+  it('takes its pieces’ room over it where Lichess’s grid places it, but in the editor', () => {
+    render('is3d', '<div class="learn"><div class="main-board"></div></div>');
+    expect(styled('.main-board').marginTop).toContain('100%');
+    render('is3d', '<div class="board-editor"><div class="main-board"></div></div>');
+    expect(styled('.main-board').marginTop).not.toContain('100%');
+  });
+});

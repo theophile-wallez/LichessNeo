@@ -62,9 +62,13 @@
     --ln-ext-coords-off: 0px;
   }
 
+  /* A 3D board is less tall than wide (board/pieces.css): squared, its squares and pieces
+   * stretched apart. At its area's foot, it leaves what it doesn't fill to its pieces' heads,
+   * as much as they stand above it with the row's 8px. */
   .board-editor .main-board {
+    align-self: end;
     width: var(--ln-ext-board) !important;
-    height: var(--ln-ext-board) !important;
+    height: calc(var(--ln-ext-board) * var(--ln-ext-board-ratio, 1)) !important;
   }
 
   .board-editor .spare {
@@ -127,9 +131,12 @@
     padding: 8px 0 32px !important;
   }
 
+  /* A 3D board's height, and room over it for its pieces' heads (board/pieces.css), less the
+   * row's gap. */
   .board-editor .main-board {
     width: var(--ln-ext-board) !important;
-    height: var(--ln-ext-board) !important;
+    height: calc(var(--ln-ext-board) * var(--ln-ext-board-ratio, 1)) !important;
+    margin-top: max(0px, var(--ln-ext-board) * var(--ln-ext-board-rise, 0) - 8px) !important;
   }
 
   .board-editor .spare,

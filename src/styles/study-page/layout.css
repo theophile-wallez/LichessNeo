@@ -46,8 +46,8 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
     --ln-ext-head-h: 80px;
     --ln-ext-v-room: calc(32px + var(--ln-ext-chapter-h));
     --ln-ext-stage: calc(
-      var(--ln-ext-board-h) + 2 * var(--ln-ext-bar) + var(--ln-ext-coords-off) +
-        var(--ln-ext-chapter-h)
+      var(--ln-ext-board-headroom) + var(--ln-ext-board-h) + 2 * var(--ln-ext-bar) +
+        var(--ln-ext-coords-off) + var(--ln-ext-chapter-h)
     );
     grid-template-rows:
       var(--ln-ext-head-h)
@@ -85,14 +85,17 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
   html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
     main.analyse:not(.is-relay)
     .analyse__board {
-    margin-top: calc(var(--ln-ext-chapter-h) + var(--ln-ext-bar)) !important;
+    margin-top: calc(
+      var(--ln-ext-chapter-h) + var(--ln-ext-bar) + var(--ln-ext-board-headroom)
+    ) !important;
   }
 
   html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
     main.analyse:not(.is-relay)
     .eval-gauge {
     margin-top: calc(
-      var(--ln-ext-chapter-h) + var(--ln-ext-bar) + var(--ln-ext-inset-t, 0px)
+      var(--ln-ext-chapter-h) + var(--ln-ext-bar) + var(--ln-ext-board-headroom) +
+        var(--ln-ext-inset-t, 0px)
     ) !important;
   }
 

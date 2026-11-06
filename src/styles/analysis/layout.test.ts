@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { queryOne } from '#shared/dom.ts';
+import { cssPixels } from '#shared/testing/css-math.ts';
 
 // The player bars' room on a game's analysis board. It has to be reserved from the first
 // paint: the board is sized from it, so a bar that only counts once our own bars are in had
@@ -87,5 +88,61 @@ describe('Lichess’s eval gauge', () => {
   it('is hidden where the board takes the column, not laid over its a-file', () => {
     expect(gauge(1019)).toBe('none');
     expect(gauge(820)).toBe('none');
+  });
+});
+
+const styled = (selector: string): CSSStyleDeclaration => {
+  const element = queryOne(document, selector, HTMLElement);
+  if (!element) throw new Error(`no ${selector}`);
+  return getComputedStyle(element);
+};
+
+describe('a 3D board’s room for its pieces', () => {
+  const VIEWPORT = { width: 1366, height: 768 };
+  const RISE = (0.091 * 464.5) / 512;
+
+  /** A game's analysis with its clocks, the board 3D or flat. */
+  function game(dimension: 'is2d' | 'is3d', width = VIEWPORT.width): HTMLElement {
+    Reflect.set(window, 'innerWidth', width);
+    Reflect.set(window, 'innerHeight', VIEWPORT.height);
+    const style = document.createElement('style');
+    style.textContent = ['../board/pieces.css', ...SHEETS]
+      .map(sheet => oneLine(readFileSync(join(import.meta.dirname, sheet), 'utf8')))
+      .join('\n');
+    document.head.append(style);
+    document.documentElement.dataset['lnExtHas'] = 'analyse analyse-game analyse-clock';
+    document.body.innerHTML =
+      `<div id="main-wrap" class="${dimension}"><main class="analyse">` +
+      '<div class="analyse__board main-board"><div class="analyse__player_strip top"></div>' +
+      '</div></main></div>';
+    const main = queryOne(document, 'main.analyse', HTMLElement);
+    if (!main) throw new Error('no analysis page');
+    return main;
+  }
+
+  const pixels = (value: string): number => cssPixels(value, VIEWPORT);
+  afterEach(() => {
+    Reflect.set(window, 'innerWidth', 1024);
+    Reflect.set(window, 'innerHeight', 768);
+  });
+
+  it('sets the board under the top bar by as much as its far rank stands above it', () => {
+    const board = pixels(getComputedStyle(game('is3d')).getPropertyValue('--ln-ext-board'));
+    expect(pixels(styled('.analyse__board').marginTop) - 56).toBeCloseTo(board * RISE, 3);
+    game('is2d');
+    expect(pixels(styled('.analyse__board').marginTop)).toBe(56);
+  });
+
+  // The clock hangs from the board: it went down with it, into the pieces' room.
+  it('keeps the top clock in its bar', () => {
+    const board = pixels(getComputedStyle(game('is3d')).getPropertyValue('--ln-ext-board'));
+    const bottom = styled('.analyse__player_strip').bottom.replace('100%', '0px');
+    expect(pixels(bottom)).toBeCloseTo(board * RISE, 3);
+  });
+
+  // Below 1020px the room is the top bar's row, not a margin as on the pages Lichess lays out.
+  it('takes the room once on a phone', () => {
+    game('is3d', 390);
+    expect(pixels(styled('.analyse__board').marginTop)).toBe(0);
   });
 });
