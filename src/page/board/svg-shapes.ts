@@ -29,15 +29,25 @@ export interface Arrow extends Shape {
 
 const DEFAULT_VIEW_BOX = '-4 -4 8 8';
 
+// Each shape's group is hashed as width, height, then whether it's
+// "hilited" (how chessground draws the one being dragged) or about to be
+// erased; its falsy parts are left out.
+const hashOf = (element: Element): string[] =>
+  (element.parentElement?.getAttribute('cgHash') ?? '').split(',');
+
+const isBeingDrawn = (element: Element): boolean => hashOf(element)[2] === 'true';
+
+// A shape a press is over, which a release there would erase, is dimmed to 0.6
+// of its brush's opacity until the pointer leaves it: we keep it as it was.
+const PENDING_ERASE_OPACITY = 0.6;
+
 // Chessground draws its engine arrows in pale brushes (opacity 0.4) and the
 // shape being dragged at 0.9: only the former should look faint.
-const opacityOf = (element: Element): number =>
-  Number(element.getAttribute('opacity') ?? 1) < 0.7 ? 0.5 : 0.8;
-
-// Each shape's group is hashed as width, height, then whether it's
-// "hilited": how chessground draws the one being dragged.
-const isBeingDrawn = (element: Element): boolean =>
-  (element.parentElement?.getAttribute('cgHash') ?? '').split(',')[2] === 'true';
+function opacityOf(element: Element): number {
+  const drawn = Number(element.getAttribute('opacity') ?? 1);
+  const pending = hashOf(element)[2] === 'pendingErase';
+  return (pending ? drawn / PENDING_ERASE_OPACITY : drawn) < 0.7 ? 0.5 : 0.8;
+}
 
 export interface ReadOptions {
   /** During the Game Review, Lichess's engine arrows give way to the review's. */

@@ -34,5 +34,7 @@ learned the hard way. The rules for the whole repo are in the root's
   shape (a circle for a marked square, a line for an arrow), in square units
   from the viewBox corner (`-4 -4 8 8`), orientation already applied. Arrow
   ends are pulled in from the centers: round back. The group's `cgHash` is
-  `width,height,hilite,orig,dest,brush…`; `hilite` marks the shape being
-  dragged. Engine arrows use a pale brush, so their `opacity` is below 1.
+  `width,height,hilite,orig,dest,brush…`, its falsy parts left out; `hilite`
+  marks the shape being dragged, `pendingErase` in its place one a right
+  press is over, which a release there erases, dimmed to 0.6 of its opacity
+  meanwhile. Engine arrows use a pale brush, so their `opacity` is below 1.

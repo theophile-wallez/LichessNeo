@@ -186,6 +186,32 @@ describe('createShapeDrawer', () => {
     }
   });
 
+  it('keeps a marked square as it is while a press over it may erase it', () => {
+    const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
+    const circle = (hash: string, opacity: string): void => {
+      renderBoard({
+        orientation: 'white',
+        shapes: [
+          {
+            tag: 'circle',
+            attrs: { stroke: '#15781B', opacity, cx: '0.5', cy: '2.5', r: '0.47' },
+            hash,
+          },
+        ],
+      });
+      draw();
+    };
+    for (const review of ['', 'ln-ext-review-moves']) {
+      document.documentElement.className = review;
+      circle('800,800,e2,green', '1');
+      const settled = marks();
+      expect(settled).toContain('<rect');
+      // A right press on e2 dims its circle until the pointer leaves the square.
+      circle('800,800,pendingErase,e2,green', '0.6');
+      expect(marks()).toBe(settled);
+    }
+  });
+
   it('draws Lichess’s variation arrows under the pieces in our colors, but not in the review', () => {
     const draw = createShapeDrawer({ mateLabel: 'Checkmate' });
     renderBoard({ orientation: 'white' });
