@@ -252,8 +252,10 @@ sets), a
 pack the user imported from GitHub or their own files (`docs/packs.md`), or Lichess's own. They're picked in the user
 menu's own panels, under an Extension, a Packs and a Lichess tab (`dasher.ts`,
 `panel.ts`, `choices.ts`); packs are imported and removed in the extension's
-settings (`import-section.ts`, `import-form.ts`), or, signed out, in the
-panels themselves, all in `src/content/packs/`:
+settings (`import-section.ts`: the user's own items in a row of tiles per
+kind, `item-tiles.ts`, a sound set's a player, `sound-player.ts`, then the packs imported, each with its repository and
+a button that downloads it again, `pack-rows.ts`, and `import-form.ts`), or,
+signed out, in the panels themselves, all in `src/content/packs/`:
 
 - `src/shared/packs/download.ts` reads a `pack.json`, then each file it
   names, one request each, from GitHub's raw host, or through its API with a
@@ -271,10 +273,12 @@ panels themselves, all in `src/content/packs/`:
   (`local-import.ts`) they go the same way through `src/shared/packs/local.ts`: a
   folder or zip with its `pack.json` is read as GitHub's are, and loose files
   make items of the zone's kind (`loose.ts`, `loose-names.ts`), a board,
-  piece set or sound set each, stored on its own under a name the user can
-  change (`items.ts`); a board that names no colors takes its
+  piece set or sound set each, stored on its own under a name of the user's
+  (`items.ts`), and opened in the dialog again to be edited, its files read
+  back from what's stored (`item-files.ts`); a board that names no colors takes its
   squares' (`board-colors.ts`). `src/shared/packs/export.ts` writes the
-  pack the user puts together in the settings' composer (`composer.ts`) as a
+  pack the user puts together in the settings' composer, a dialog
+  (`compose-dialog.ts`, its choices in `composer.ts`), as a
   `pack.json` and its files, zipped (`zip.ts`, fflate), named as the GitHub
   repository to share it from, `LichessNeoPack_` and its name, with the
   `lichess-neo-pack` topic (`sharing.ts`).

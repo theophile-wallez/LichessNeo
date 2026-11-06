@@ -25,6 +25,7 @@
 @import './extension-settings.css';
 @import './settings-packs.css';
 @import './settings-packs-drop.css';
+@import './settings-packs-items.css';
 @import './settings-packs-compose.css';
 @import './settings-packs-dialog.css';
 @import './settings-packs-slots.css';

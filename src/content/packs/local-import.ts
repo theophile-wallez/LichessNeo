@@ -1,6 +1,6 @@
 import { type Import, importPacks } from '#shared/packs/assemble.ts';
 import { PackError } from '#shared/packs/github.ts';
-import { fileItems, newItemId } from '#shared/packs/items.ts';
+import { editedItems, fileItems, newItemId } from '#shared/packs/items.ts';
 import { type LocalDrop, type LocalFile, localFolder, manifestPath } from '#shared/packs/local.ts';
 import { withSquareColors } from './board-colors.ts';
 import { drawable } from './drawable.ts';
@@ -21,6 +21,8 @@ interface LocalImport {
   readonly gather: () => Promise<readonly LocalFile[]>;
   readonly drop: LocalDrop;
   readonly library: Library;
+  /** The id of the item the files are edited from, which they replace whole. */
+  readonly edited?: string;
 }
 
 async function gathered(gather: LocalImport['gather']): Promise<readonly LocalFile[] | string> {
@@ -33,7 +35,8 @@ async function gathered(gather: LocalImport['gather']): Promise<readonly LocalFi
 }
 
 /** What the files make, each to store in place of its source's. */
-export async function readLocalPacks({ gather, drop, library }: LocalImport): Promise<Imports> {
+export async function readLocalPacks(local: LocalImport): Promise<Imports> {
+  const { gather, drop, library, edited } = local;
   const files = await gathered(gather);
   if (typeof files === 'string') return { error: files };
   const imported = await drawable(await importPacks(localFolder(files, drop), ''));
@@ -41,6 +44,9 @@ export async function readLocalPacks({ gather, drop, library }: LocalImport): Pr
   const packs = await Promise.all(imported.packs.map(withSquareColors));
   if (manifestPath(files) !== null) return { imports: [{ ...imported, packs }] };
   await library.loadAll();
-  const items = fileItems(packs, { stored: library.packs(), newId: newItemId });
+  const items =
+    edited === undefined
+      ? fileItems(packs, { stored: library.packs(), newId: newItemId })
+      : editedItems(packs, edited);
   return { imports: items.map(item => ({ source: item.id, packs: [item] })) };
 }

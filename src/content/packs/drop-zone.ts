@@ -5,8 +5,9 @@ import { repositoryPage } from '#shared/repository.ts';
 import { message } from '#content/platform/runtime.ts';
 import { droppedFiles, pickedFiles } from './local-files.ts';
 
-// The Packs card's zones for the user's own files, one for each kind, and a
-// line for an exported pack's zip, each taking the files dropped on it.
+// The Packs card's zones for the user's own files, one for each kind, the
+// last tile of its row, and a line for an exported pack's zip, each taking
+// the files dropped on it.
 
 export type DropKind = PartKind | 'pack';
 
@@ -19,17 +20,17 @@ interface ZoneText {
 
 const ZONES: Readonly<Record<DropKind, ZoneText>> = {
   piece: {
-    title: 'packsDropPieces',
+    title: 'packsAddPieces',
     hint: 'packsDropPiecesHint',
     example: 'packs/samples/README.md#pieces',
   },
   board: {
-    title: 'packsDropBoard',
+    title: 'packsAddBoard',
     hint: 'packsDropBoardHint',
     example: 'packs/samples/README.md#boards',
   },
   sound: {
-    title: 'packsDropSounds',
+    title: 'packsAddSounds',
     hint: 'packsDropSoundsHint',
     example: 'packs/samples/README.md#sounds',
   },

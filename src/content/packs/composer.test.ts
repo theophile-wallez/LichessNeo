@@ -16,7 +16,7 @@ const OTHER = { ...fakePack('file:3/', ['piece']), name: 'Pop' };
 // The composer keeps what's chosen while the page is open: a fresh one for each test.
 async function start(packs: readonly Pack[]): Promise<{ library: Library; box: HTMLElement }> {
   vi.resetModules();
-  const { composer } = await import('./composer.ts');
+  const { composeButton } = await import('./compose-dialog.ts');
   const library = createLibrary({
     readPicked: () => Promise.resolve([]),
     readAll: () => Promise.resolve(packs),
@@ -26,18 +26,22 @@ async function start(packs: readonly Pack[]): Promise<{ library: Library; box: H
   });
   await library.ready;
   await library.loadAll();
-  const box = composer(library);
-  document.body.append(box);
-  return { library, box };
+  const button = composeButton(library);
+  document.body.append(button);
+  if (!button.hidden) button.click();
+  return {
+    library,
+    box: queryOne(document, '.ln-ext-pack-dialog--compose', HTMLElement) ?? button,
+  };
 }
 
 const chips = (box: HTMLElement): HTMLInputElement[] =>
   queryAll(box, '.ln-ext-compose__chip input', HTMLInputElement);
 const exportButton = (box: HTMLElement): HTMLButtonElement | null =>
-  queryOne(box, '.ln-ext-compose__export', HTMLButtonElement);
+  queryOne(box, '.ln-ext-pack-dialog__confirm', HTMLButtonElement);
 
 function rename(box: HTMLElement, name: string): void {
-  const field = queryOne(box, '.ln-ext-compose__name', HTMLInputElement);
+  const field = queryOne(box, '.ln-ext-pack-dialog__name input', HTMLInputElement);
   if (!field) throw new Error('No name field');
   field.value = name;
   field.dispatchEvent(new Event('input'));
@@ -59,15 +63,32 @@ afterEach(() => {
 });
 
 describe('the composer', () => {
-  it('is empty while there is nothing to put in a pack', async () => {
+  it('is out of reach while there is nothing to put in a pack', async () => {
     const { box } = await start([]);
-    expect(box.childElementCount).toBe(0);
+    expect(box).toHaveProperty('hidden', true);
   });
 
   it('starts from the parts picked', async () => {
     localStorage.setItem('ln-ext-pieces', OTHER.id);
     const { box } = await start([BOARD, PIECES, OTHER]);
     expect(chips(box).map(chip => chip.checked)).toEqual([false, false, true]);
+  });
+
+  it('sets the user’s own items first, and folds each pack imported but the one picked from', async () => {
+    const wood = { ...fakePack('ann/wood/main/', ['piece']), name: 'Wood', added: 2 };
+    const neo = { ...fakePack('ann/neo/main/', ['piece']), name: 'Neo', added: 1 };
+    localStorage.setItem('ln-ext-pieces', neo.id);
+    const { box } = await start([wood, neo, PIECES]);
+    const pieces = queryOne(box, '.ln-ext-compose__group--piece', HTMLElement);
+    if (!pieces) throw new Error('No pieces group');
+    expect(
+      pieces.querySelector('.ln-ext-compose__mine .ln-ext-compose__chip-name')?.textContent,
+    ).toBe('Mochi');
+    const folds = queryAll(pieces, '.ln-ext-compose__source', HTMLDetailsElement);
+    expect(folds.map(fold => [fold.querySelector('summary')?.textContent, fold.open])).toEqual([
+      ['Wood1', false],
+      ['Neo1', true],
+    ]);
   });
 
   it('exports the parts checked, in a zip named as its GitHub repository', async () => {

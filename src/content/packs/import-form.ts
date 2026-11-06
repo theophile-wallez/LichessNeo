@@ -4,7 +4,8 @@ import { message } from '#content/platform/runtime.ts';
 import { fetchPacks } from './import.ts';
 import { importPack, importState, setStatus, statusLine } from './import-status.ts';
 import type { Library } from './library.ts';
-import { localZones } from './local-zones.ts';
+import type { Imports } from './local-import.ts';
+import { localZone, localZones } from './local-zones.ts';
 
 // The form that imports packs, from a GitHub link or the user's own files,
 // in the extension's settings, and in the user menu's panels when signed
@@ -13,12 +14,15 @@ import { localZones } from './local-zones.ts';
 
 const HELP_URL = repositoryPage('docs/packs.md');
 
+/** Downloads the pack a link points at again, in place of what it gave: its latest version. */
+export const downloadPack = (link: string, token: string): Promise<Imports> =>
+  fetchPacks(link, token).then(download =>
+    'error' in download ? download : { imports: [download] },
+  );
+
 // The link stays in its field after a failure, to be fixed.
 async function importInto(link: HTMLInputElement, token: string, library: Library): Promise<void> {
-  await importPack(async () => {
-    const download = await fetchPacks(link.value, token);
-    return 'error' in download ? download : { imports: [download] };
-  }, library);
+  await importPack(() => downloadPack(link.value, token), library);
   if (!importState.failed) link.value = '';
 }
 
@@ -68,8 +72,12 @@ function linkRow(): LinkRow {
   return { row, link, button };
 }
 
-/** The GitHub link and its token, the zones for the user's files, and what the import said. */
-export function importForm(library: Library): HTMLElement {
+/**
+ * The GitHub link and its token, the zones for the user's files, and what the
+ * import said; for `packs` only, the zip's zone after the link: the settings'
+ * card has the zones and the status of its own.
+ */
+export function importForm(library: Library, only?: 'packs'): HTMLElement {
   const form = createElement('div', { className: 'ln-ext-packs__import' });
   const { row, link, button } = linkRow();
   const token = tokenField();
@@ -78,7 +86,8 @@ export function importForm(library: Library): HTMLElement {
     text: message('packsHelp'),
     attrs: { href: HELP_URL, target: '_blank', rel: 'noopener' },
   });
-  form.append(row, token.field, help, ...localZones(library), statusLine());
+  if (only === 'packs') form.append(row, token.field, help, localZone('pack', library));
+  else form.append(row, token.field, help, ...localZones(library), statusLine());
   const submit = (): void => {
     if (importState.busy) return;
     if (link.value.trim() === '') {

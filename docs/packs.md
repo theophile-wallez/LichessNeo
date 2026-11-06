@@ -23,7 +23,10 @@ of the user menu instead. The extension
 downloads every file once and keeps them in the browser; it asks GitHub for
 nothing after that. An import shows every part the pack has; then each part is
 picked on its own: a pack's pieces with Lichess's board, say. The settings also
-list your packs, and remove them.
+list your packs, the newest first, each with the repository it came from (or
+**Local zip**); **Update** downloads one from GitHub again, in its latest
+version, and **Remove** takes it out. A pack from a private repository is
+updated by importing it again with its token, which isn't kept.
 
 The [example pack](../packs/example) uses every field. Copy it to start, or
 try it first: [warm-wood.zip](../packs/warm-wood.zip) is the same pack, to drop
@@ -36,8 +39,11 @@ To try a theme, no pack is needed: under the **Packs** card's link field,
 drop the files on the zone of their kind, or click it. A dialog opens, with
 each file in its place when its name says which; fill in the rest a file at a
 time, by a click on its slot or by dragging a file onto it. Give it a name,
-which it needs, and import it: it's listed on its own and picked at once, and
-its name can be changed there. Each zone links to
+which it needs, and import it: it's listed on its own, in the row of its
+kind, the newest first, and picked at once. A click on its tile picks it
+again later (a sound set's tile is a player too, whose button plays its
+sounds one after the other); **Edit** opens it in the dialog again, to change some of its
+files or its name. Each zone links to
 [samples](../packs/samples/README.md) of its kind, in every format it takes:
 
 - **Pieces:** all twelve. Those named `wK`, `wQ`, `wR`, `wB`, `wN`, `wP`,

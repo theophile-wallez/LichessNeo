@@ -1,24 +1,77 @@
-/* The Packs card's composer (content/packs/composer.ts): a pack of the
-   imported parts, named and exported as a zip. */
-.ln-ext-compose:empty {
-  display: none;
-}
+/* ---- The Packs card's composer (content/packs/compose-dialog.ts) --- */
 
-.ln-ext-compose {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 14px;
+/* The card's button that opens it: a row with its icon tile, title and hint. */
+.ln-ext-packs__compose {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 14px;
+  padding: 12px 14px;
+  border: none;
   border-radius: 12px;
   background: var(--ln-ext-shade-12);
   box-shadow: inset 0 0 0 1px var(--ln-ext-lift-8);
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: box-shadow 0.15s !important;
 }
 
-.ln-ext-compose__title {
-  margin: 0;
+.ln-ext-packs__compose[hidden] {
+  display: none;
+}
+
+.ln-ext-packs__compose:hover {
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-20);
+}
+
+.ln-ext-packs__compose,
+.ln-ext-pack-dialog--compose {
+  --ln-ext-drop-color: var(--ln-ext-green);
+  --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/share-08.svg');
+}
+
+.ln-ext-packs__compose-icon {
+  position: relative;
+  grid-row: span 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 20%, transparent);
+  box-shadow: inset 0 1px #ffffff1a;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-packs__compose-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 22px;
+  height: 22px;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 80%, var(--ln-ext-text-strong));
+  mask: var(--ln-ext-drop-glyph) center / contain no-repeat;
+}
+
+.ln-ext-packs__compose:hover .ln-ext-packs__compose-icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.ln-ext-packs__compose-title {
   color: var(--ln-ext-text-strong);
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
+}
+
+.ln-ext-packs__compose-hint {
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+dialog.ln-ext-pack-dialog--compose {
+  width: min(760px, calc(100vw - 24px));
 }
 
 .ln-ext-compose__hint {
@@ -28,30 +81,14 @@
   line-height: 1.4;
 }
 
-.ln-ext-compose__name {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 360px;
-  height: 38px;
-  padding: 0 12px;
-  border: 1px solid var(--ln-ext-lift-12);
-  border-radius: 8px;
-  background: var(--ln-ext-shade-25);
-  color: var(--ln-ext-text-strong);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.ln-ext-compose__name:focus {
-  border-color: var(--ln-ext-accent);
-  outline: none;
-}
-
 .ln-ext-compose__group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+}
+
+.ln-ext-compose__group + .ln-ext-compose__group {
+  margin-top: 6px;
 }
 
 .ln-ext-compose__label {
@@ -66,6 +103,53 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+/* The user's own items, set apart in the accent, before the packs' parts. */
+.ln-ext-compose__mine {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ln-ext-accent) 10%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 35%, transparent);
+}
+
+.ln-ext-compose__mine-label {
+  color: color-mix(in srgb, var(--ln-ext-accent) 70%, var(--ln-ext-text-strong));
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* An imported pack's parts, folded under its name. */
+.ln-ext-compose__source {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--ln-ext-shade-12);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-8);
+}
+
+.ln-ext-compose__source summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ln-ext-compose__source[open] summary {
+  margin-bottom: 10px;
+}
+
+.ln-ext-compose__count {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
 }
 
 /* A part to put in the pack: a pill, tinted in the accent once it's in (--on). */
@@ -112,30 +196,6 @@
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.ln-ext-compose__export {
-  align-self: flex-start;
-  height: 38px;
-  padding: 0 18px;
-  border: none;
-  border-radius: 8px;
-  background: var(--ln-ext-btn-primary);
-  box-shadow: var(--ln-ext-btn-primary-shadow);
-  color: var(--ln-ext-white);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.ln-ext-compose__export:hover {
-  background: var(--ln-ext-btn-primary-hover);
-}
-
-.ln-ext-compose__export:disabled {
-  opacity: 0.5;
-  cursor: default;
 }
 
 /* How to share the pack on GitHub: its repository's name and topic, each

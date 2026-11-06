@@ -1,6 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { fakePack, SOUND } from '#shared/testing/packs.ts';
-import { fileItems, isFileItem, itemNamed, kindOf, onlyPart, renamed } from './items.ts';
+import {
+  bySource,
+  editedItems,
+  fileItems,
+  isFileItem,
+  itemNamed,
+  kindOf,
+  newestFirst,
+  onlyPart,
+} from './items.ts';
 import type { Pack } from './pack.ts';
 
 const item = (id: string, kind: 'board' | 'piece' | 'sound', name: string): Pack => ({
@@ -69,11 +78,27 @@ describe('fileItems', () => {
   });
 });
 
-describe('renamed', () => {
-  it('trims the name, and refuses an empty one', () => {
-    const board = item('1', 'board', 'Maple');
-    expect(renamed(board, '  Harbor  ')?.name).toBe('Harbor');
-    expect(renamed(board, 'x'.repeat(50))?.name).toHaveLength(40);
-    expect(renamed(board, '   ')).toBeNull();
+describe('editedItems', () => {
+  it('keep the id of the item edited, with only the sounds it was given', () => {
+    const dropped = { ...fakePack('local/', ['sound']), name: 'Pops', sounds: { castle: SOUND } };
+    expect(editedItems([dropped], 'file:old/')).toEqual([
+      { id: 'file:old/', name: 'Pops', link: dropped.link, sounds: { castle: SOUND } },
+    ]);
+  });
+});
+
+describe('bySource', () => {
+  it('groups the packs by their pack.json, in their order', () => {
+    const light = fakePack('ann/set/main/#board:Light');
+    const dark = fakePack('ann/set/main/#board:Dark');
+    const clicks = fakePack('ann/clicks/main/');
+    expect(bySource([light, clicks, dark])).toEqual([[light, dark], [clicks]]);
+  });
+});
+
+describe('newestFirst', () => {
+  it('puts the last stored first, and those with no date last', () => {
+    const packs = [{ added: 1 }, {}, { added: 3 }, { added: 2 }];
+    expect(newestFirst(packs)).toEqual([{ added: 3 }, { added: 2 }, { added: 1 }, {}]);
   });
 });

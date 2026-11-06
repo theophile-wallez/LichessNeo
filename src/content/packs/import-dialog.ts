@@ -4,7 +4,7 @@ import { hugeicon } from '#shared/hugeicons.ts';
 import { setHtml } from '#shared/html.ts';
 import { itemNamed } from '#shared/packs/items.ts';
 import type { LocalFile } from '#shared/packs/local.ts';
-import type { PartKind } from '#shared/packs/pack.ts';
+import type { Pack, PartKind } from '#shared/packs/pack.ts';
 import { message } from '#content/platform/runtime.ts';
 import type { Library } from './library.ts';
 import { droppedFiles } from './local-files.ts';
@@ -12,7 +12,8 @@ import { droppedFiles } from './local-files.ts';
 // The dialog the files dropped on a zone open in, before anything is
 // imported (styles/pages/settings-packs-dialog.css): the item's name, which
 // it must be given, then its slots (dialog-slots.ts), to see what each file
-// went in and to fill the rest, one file at a time.
+// went in and to fill the rest, one file at a time. An item already imported
+// opens in it too, with its files, to change some of them or its name.
 
 export interface DialogBody {
   readonly element: HTMLElement;
@@ -30,6 +31,8 @@ export interface DialogOptions {
   readonly kind: PartKind;
   readonly body: DialogBody;
   readonly library: Library;
+  /** The item edited, whose files the body holds; else the files are a new item. */
+  readonly editing?: Pack;
   /** Imports the files under the name: what went wrong, or null once it's done. */
   readonly confirm: (name: string, files: readonly LocalFile[]) => Promise<string | null>;
 }
@@ -40,12 +43,19 @@ const TEXTS: Readonly<Record<PartKind, readonly [title: string, name: string, hi
   sound: ['packsDialogSounds', 'packsDialogNameSounds', 'packsDialogSoundsHint'],
 };
 
+const EDIT_TITLES: Readonly<Record<PartKind, string>> = {
+  piece: 'packsDialogEditPieces',
+  board: 'packsDialogEditBoard',
+  sound: 'packsDialogEditSounds',
+};
+
 function button(className: string, text: string): HTMLButtonElement {
   return createElement('button', { className, text, attrs: { type: 'button' } });
 }
 
-function head(kind: PartKind, close: () => void): HTMLElement {
-  const [title, , hint] = TEXTS[kind];
+function head({ kind, editing }: DialogOptions, close: () => void): HTMLElement {
+  const [imported, , hint] = TEXTS[kind];
+  const title = editing ? EDIT_TITLES[kind] : imported;
   const box = createElement('div', { className: 'ln-ext-pack-dialog__head' });
   const text = createElement('div', { className: 'ln-ext-pack-dialog__heading' });
   text.append(
@@ -74,14 +84,17 @@ interface NameField {
   readonly input: HTMLInputElement;
   /** Says whether the name replaces one of the user's own. */
   readonly check: () => void;
+  /** Why the name can't be kept: an item edited can't take another's. */
+  readonly taken: () => string | null;
 }
 
-function nameField({ kind, library }: DialogOptions): NameField {
+function nameField({ kind, library, editing }: DialogOptions): NameField {
   const box = createElement('label', { className: 'ln-ext-pack-dialog__name' });
   const input = createElement('input', {
     attrs: {
       type: 'text',
       required: '',
+      value: editing?.name ?? '',
       maxlength: '40',
       spellcheck: 'false',
       placeholder: message(TEXTS[kind][1]),
@@ -96,11 +109,19 @@ function nameField({ kind, library }: DialogOptions): NameField {
     input,
     note,
   );
+  const other = (): Pack | undefined => {
+    const named = itemNamed(library.packs(), { kind, name: input.value });
+    return named?.id === editing?.id ? undefined : named;
+  };
   const check = (): void => {
-    const replaced = itemNamed(library.packs(), { kind, name: input.value });
+    const replaced = editing ? undefined : other();
     note.textContent = replaced ? message('packsDialogReplaces', replaced.name) : '';
   };
-  return { box, input, check };
+  const taken = (): string | null => {
+    const named = editing && other();
+    return named ? message('packsDialogTaken', named.name) : null;
+  };
+  return { box, input, check, taken };
 }
 
 interface Parts {
@@ -122,12 +143,15 @@ function build(options: DialogOptions): Parts {
     attrs: { 'aria-live': 'polite' },
   });
   const cancel = button('ln-ext-pack-dialog__cancel', message('packsDialogCancel'));
-  const confirm = button('ln-ext-pack-dialog__confirm', message('packsDialogImport'));
+  const confirm = button(
+    'ln-ext-pack-dialog__confirm',
+    message(options.editing ? 'packsDialogSave' : 'packsDialogImport'),
+  );
   cancel.addEventListener('click', () => dialog.close());
   const foot = createElement('div', { className: 'ln-ext-pack-dialog__foot' });
   foot.append(status, cancel, confirm);
   card.append(
-    head(kind, () => dialog.close()),
+    head(options, () => dialog.close()),
     name.box,
     body.element,
     foot,
@@ -144,7 +168,10 @@ function build(options: DialogOptions): Parts {
 function statusOf({ name, status, confirm }: Parts, body: DialogBody) {
   let failed = false;
   const refresh = (): void => {
-    const missing = name.input.value.trim() === '' ? message('packsDialogNoName') : body.missing();
+    const missing =
+      name.input.value.trim() === ''
+        ? message('packsDialogNoName')
+        : (name.taken() ?? body.missing());
     confirm.disabled = missing !== null;
     if (!failed) status.textContent = missing ?? '';
     status.classList.toggle('ln-ext-pack-dialog__status--failed', failed);
@@ -183,7 +210,7 @@ export function openImportDialog(options: DialogOptions): Promise<void> {
   body.onChange(changed);
   const submit = async (): Promise<void> => {
     confirm.disabled = true;
-    status.textContent = message('packsImporting');
+    status.textContent = message(options.editing ? 'packsDialogSaving' : 'packsImporting');
     const error = await options.confirm(name.input.value.trim(), body.files());
     if (error === null) dialog.close();
     else fail(error);

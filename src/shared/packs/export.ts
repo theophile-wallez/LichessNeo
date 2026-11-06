@@ -19,7 +19,8 @@ const EXTENSIONS: ReadonlyMap<string, string> = new Map([
   ['audio/wav', '.wav'],
 ]);
 
-const extensionOf = (url: string): string =>
+/** The extension of a data: URL's type, `.png` for a PNG; '' for a type packs don't take. */
+export const extensionOf = (url: string): string =>
   EXTENSIONS.get(url.slice('data:'.length, url.indexOf(';'))) ?? '';
 
 /** A name as a file's: `Warm wood` is `warm-wood`. */

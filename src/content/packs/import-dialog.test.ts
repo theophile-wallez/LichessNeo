@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import type { LocalFile } from '#shared/packs/local.ts';
-import { PIECE_NAMES } from '#shared/packs/pack.ts';
+import { type Pack, PIECE_NAMES } from '#shared/packs/pack.ts';
 import { fakePack } from '#shared/testing/packs.ts';
 import { flush } from '#shared/testing/timers.ts';
 import { fakeWorker } from '#shared/testing/worker.ts';
@@ -41,10 +41,17 @@ async function open(
   {
     answer = null,
     packs = [],
-  }: { answer?: string | null; packs?: ReturnType<typeof fakePack>[] } = {},
+    editing,
+  }: { answer?: string | null; packs?: Pack[]; editing?: Pack } = {},
 ): Promise<Opened> {
   const confirm = vi.fn<Confirm>(() => Promise.resolve(answer));
-  const closed = openImportDialog({ kind: 'piece', body, library: await library(packs), confirm });
+  const closed = openImportDialog({
+    kind: 'piece',
+    body,
+    library: await library(packs),
+    confirm,
+    ...(editing && { editing }),
+  });
   return { closed, confirm };
 }
 
@@ -136,6 +143,23 @@ describe('the import dialog', () => {
     expect(document.querySelector('.ln-ext-pack-dialog__replaces')?.textContent).toBe(
       'packsDialogReplaces:Mochi',
     );
+  });
+
+  it('edits an item under its name, and not under another item’s', async () => {
+    const mochi = { ...fakePack('file:1/', ['piece']), name: 'Mochi' };
+    const pop = { ...fakePack('file:2/', ['piece']), name: 'Pop' };
+    await open(pieceBody(PIECES), { packs: [mochi, pop], editing: mochi });
+    expect(document.querySelector('.ln-ext-pack-dialog__title')?.textContent).toBe(
+      'packsDialogEditPieces',
+    );
+    expect(nameInput()?.value).toBe('Mochi');
+    expect(importButton()?.textContent).toBe('packsDialogSave');
+    typeName('pop');
+    expect(importButton()?.disabled).toBe(true);
+    expect(status()).toBe('packsDialogTaken:Pop');
+    expect(document.querySelector('.ln-ext-pack-dialog__replaces')?.textContent).toBe('');
+    typeName('MOCHI');
+    expect(status()).not.toBe('packsDialogTaken:Mochi');
   });
 
   it('closes on its cancel button without importing', async () => {

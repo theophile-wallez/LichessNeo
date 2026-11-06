@@ -24,7 +24,7 @@ interface Drawn {
 }
 
 /** `move-self` is told by `packsSoundMoveSelf`. */
-const describedBy = (sound: SoundName): string =>
+export const describedBy = (sound: SoundName): string =>
   `packsSound${sound.replace(/(?:^|-)([a-z])/g, (_, letter: string) => letter.toUpperCase())}`;
 
 function iconButton(className: string, label: string, icon: typeof PlayIcon): HTMLButtonElement {

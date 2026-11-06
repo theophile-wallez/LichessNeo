@@ -108,12 +108,49 @@ describe('the settings’ packs', () => {
   });
 });
 
-describe('importing a pack', () => {
-  const files = new Map([
-    ['pack.json', new TextEncoder().encode('{"name":"Clicks","sounds":{"capture":"c.mp3"}}')],
-    ['c.mp3', new Uint8Array([0x49, 0x44, 0x33, 4])],
-  ]);
+const files = new Map([
+  ['pack.json', new TextEncoder().encode('{"name":"Clicks","sounds":{"capture":"c.mp3"}}')],
+  ['c.mp3', new Uint8Array([0x49, 0x44, 0x33, 4])],
+]);
 
+const origins = (section: HTMLElement): (string | null)[] =>
+  queryAll(section, '.ln-ext-pack__origin', HTMLElement).map(origin => origin.textContent);
+
+describe('where a pack came from', () => {
+  const github = {
+    ...fakePack('ann/packs/main/wood/', ['sound']),
+    link: 'https://github.com/ann/packs/tree/main/wood',
+    added: 2,
+  };
+  const zip = { ...fakePack('local:Warm wood/', ['board']), link: '', added: 1 };
+
+  it('is told on each pack, the newest first: its repository, linked, or a zip', async () => {
+    const { section } = await start([zip, github]);
+    expect(origins(section)).toEqual(['ann/packs/wood@main', 'packsFromZip']);
+    expect(queryOne(section, 'a.ln-ext-pack__origin', HTMLAnchorElement)?.href).toBe(github.link);
+    expect(queryAll(section, '.ln-ext-pack__update', HTMLButtonElement)).toHaveLength(1);
+  });
+
+  it('gives a pack from GitHub its latest version, keeping its date and its pick', async () => {
+    fakeGithub({ repo: 'ann/packs', files });
+    const old = {
+      ...CLICKS,
+      id: 'ann/packs/HEAD/',
+      link: 'https://github.com/ann/packs',
+      added: 7,
+    };
+    localStorage.setItem('ln-ext-sounds', old.id);
+    const { library, section } = await start([old]);
+    queryOne(section, '.ln-ext-pack__update', HTMLButtonElement)?.click();
+    expect(queryOne(section, '.ln-ext-pack__update', HTMLButtonElement)?.disabled).toBe(true);
+    await vi.waitFor(() => expect(status(section)).toBe('packsUpdated:Clicks'));
+    expect(library.packs()).toMatchObject([{ id: old.id, name: 'Clicks', added: 7 }]);
+    expect(library.current('sound')).toBe(old.id);
+    expect(names(section)).toEqual(['Clicks']);
+  });
+});
+
+describe('importing a pack', () => {
   it('downloads it, lists it, picks it, and says so', async () => {
     fakeGithub({ repo: 'ann/packs', files });
     const { library, section } = await start([]);
@@ -126,8 +163,8 @@ describe('importing a pack', () => {
     expect(library.current('sound')).toBe('ann/packs/HEAD/');
     expect(status(section)).toBe('packsImported:Clicks');
     expect(queryOne(section, '.ln-ext-packs__row input', HTMLInputElement)?.value).toBe('');
-    // The composer, drawn again, offers it.
-    expect(section.querySelector('.ln-ext-compose__chip-name')?.textContent).toBe('Clicks');
+    // The composer's button, out of reach while there was nothing to put in a pack.
+    expect(queryOne(section, '.ln-ext-packs__compose', HTMLButtonElement)?.hidden).toBe(false);
   });
 
   it('takes the token in no form and no password field, which browsers offer to save', async () => {
@@ -169,23 +206,12 @@ describe('the user’s own items', () => {
   const board = { ...fakePack('file:1/', ['board']), name: 'Harbor', link: '' };
   const sounds = { ...fakePack('file:2/', ['sound']), name: 'Clicks', link: '' };
 
-  it('come after the packs, boards first, each named in a field', async () => {
+  it('come in rows of their kind, boards first, each to edit or remove', async () => {
     const { section } = await start([sounds, WOOD, board]);
-    expect(names(section)).toEqual(['Pack ann/packs/main/wood/']);
     expect(
-      queryAll(section, '.ln-ext-pack__rename', HTMLInputElement).map(field => field.value),
+      queryAll(section, '.ln-ext-item__name', HTMLElement).map(name => name.textContent),
     ).toEqual(['Harbor', 'Clicks']);
-  });
-
-  it('are renamed from their field, which an empty name puts back', async () => {
-    const { library, section } = await start([board]);
-    const field = queryOne(section, '.ln-ext-pack__rename', HTMLInputElement);
-    if (!field) throw new Error('No name field');
-    field.value = '';
-    field.dispatchEvent(new Event('change'));
-    expect(field.value).toBe('Harbor');
-    field.value = 'Maple';
-    field.dispatchEvent(new Event('change'));
-    await vi.waitFor(() => expect(library.packs()[0]?.name).toBe('Maple'));
+    expect(queryAll(section, '.ln-ext-item__edit', HTMLButtonElement)).toHaveLength(2);
+    expect(names(section)).toEqual(['Pack ann/packs/main/wood/']);
   });
 });

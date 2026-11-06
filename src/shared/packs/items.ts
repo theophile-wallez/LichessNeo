@@ -1,13 +1,13 @@
 import { hasPart, PART_KINDS, type Pack, type PartKind } from './pack.ts';
+import { sourceIdOf } from './source.ts';
 
 // The user's own files, kept item by item: a board, a piece set or a sound
-// set each, under a name of their own that they can change. Their id isn't
-// made of that name, so a renamed item stays picked. Files dropped under an
-// item's name again take its place, a sound at a time for a sound set, so a
-// theme can be tried and changed.
+// set each, under a name of their own. Their id isn't made of that name, so
+// an item renamed as it's edited stays picked. Files dropped under an item's
+// name again take its place, a sound at a time for a sound set, so a theme
+// can be tried and changed.
 
 const FILE = 'file:';
-const MAX_NAME = 40;
 
 /** A new item's id: a path, as every pack's is (content/packs/library.ts). */
 export const newItemId = (): string => `${FILE}${crypto.randomUUID()}/`;
@@ -60,8 +60,25 @@ export function fileItems(dropped: readonly Pack[], { stored, newId }: Stored): 
   });
 }
 
-/** The item under its new name, or null for a name that's empty once trimmed. */
-export function renamed(item: Pack, name: string): Pack | null {
-  const trimmed = name.trim().slice(0, MAX_NAME);
-  return trimmed === '' ? null : { ...item, name: trimmed };
+/** The item edited, under its id, with only what the dialog gave it: a sound taken out is gone. */
+export const editedItems = (dropped: readonly Pack[], id: string): Pack[] =>
+  dropped.flatMap(pack => {
+    const kind = kindOf(pack);
+    return kind === undefined ? [] : [{ ...onlyPart(pack, kind), id }];
+  });
+
+/** The packs grouped by the pack.json they came from, in their order. */
+export function bySource(packs: readonly Pack[]): [Pack, ...Pack[]][] {
+  const sources = new Map<string, [Pack, ...Pack[]]>();
+  for (const pack of packs) {
+    const source = sources.get(sourceIdOf(pack.id));
+    if (source) source.push(pack);
+    else sources.set(sourceIdOf(pack.id), [pack]);
+  }
+  return [...sources.values()];
 }
+
+/** The packs, the last stored first; those of a version that kept no date, last. */
+export const newestFirst = <Of extends { readonly added?: number | undefined }>(
+  packs: readonly Of[],
+): Of[] => packs.toSorted((left, right) => (right.added ?? 0) - (left.added ?? 0));

@@ -536,7 +536,7 @@
     "description": "The badge beside the Packs card's title: importing packs is still new."
   },
   "packsBody": {
-    "message": "Your own board, pieces or sounds: import a pack from GitHub, or drop your files below. Once imported, pick them above, or in the user menu.",
+    "message": "Your own boards, pieces and sounds: drop your files on their row, or import a pack from GitHub. Click a tile to use it, or pick it in the user menu.",
     "description": "What the packs card is for."
   },
   "packsEmpty": {
@@ -575,6 +575,22 @@
     "message": "Remove",
     "description": "The button that removes an imported pack."
   },
+  "packsUpdate": {
+    "message": "Update",
+    "description": "The button that downloads a pack imported from GitHub again, in its latest version."
+  },
+  "packsFromZip": {
+    "message": "Local zip",
+    "description": "Where a pack imported from a zip came from, in place of its GitHub repository."
+  },
+  "packsImportedTitle": {
+    "message": "Imported packs",
+    "description": "The title over the packs imported from GitHub or a zip, and the form that imports them."
+  },
+  "packsEdit": {
+    "message": "Edit",
+    "description": "The button that opens one of the user's own boards, piece sets or sound sets in the import dialog, to change its files or its name."
+  },
   "packsLink": {
     "message": "Link to a pack on GitHub",
     "description": "The placeholder of the field for a pack's link."
@@ -603,6 +619,14 @@
     "message": "Imported “$1”.",
     "description": "Once a pack is imported; $1 is its name."
   },
+  "packsUpdated": {
+    "message": "“$1” is up to date.",
+    "description": "Once a pack from GitHub is downloaded again; $1 is its name."
+  },
+  "packsEdited": {
+    "message": "Saved “$1”.",
+    "description": "Once one of the user's own items is edited; $1 is its name."
+  },
   "packsImportFailed": {
     "message": "The pack could not be imported.",
     "description": "An import that failed for an unknown reason."
@@ -619,37 +643,33 @@
     "message": "or from your computer",
     "description": "Between the field for a pack's link and the zones for the user's own files."
   },
-  "packsDropPieces": {
-    "message": "Pieces",
-    "description": "The title of the zone that takes piece images."
-  },
   "packsDropPiecesHint": {
     "message": "12 images: wK, wQ… bP",
     "description": "How the zone for pieces wants its files."
   },
-  "packsDropBoard": {
-    "message": "Board",
-    "description": "The title of the zone that takes a board image."
+  "packsAddPieces": {
+    "message": "Add pieces",
+    "description": "The tile, at the end of the pieces' row, that imports a piece set from the user's files."
   },
   "packsDropBoardHint": {
     "message": "An image of the whole board",
     "description": "What the zone for a board wants."
   },
-  "packsDropSounds": {
-    "message": "Sounds",
-    "description": "The title of the zone that takes sounds."
+  "packsAddBoard": {
+    "message": "Add a board",
+    "description": "The tile, at the end of the boards' row, that imports a board from the user's files."
   },
   "packsDropSoundsHint": {
     "message": "Named move-self, capture…",
     "description": "How the zone for sounds wants its files."
   },
+  "packsAddSounds": {
+    "message": "Add sounds",
+    "description": "The tile, at the end of the sounds' row, that imports a sound set from the user's files."
+  },
   "packsDropPack": {
     "message": "Import a local pack (.zip)",
     "description": "The line that takes a pack exported as a zip."
-  },
-  "packsRename": {
-    "message": "Rename",
-    "description": "The tooltip of the field that renames one of the user's own boards, piece sets or sound sets."
   },
   "packsCompose": {
     "message": "Make a pack to share",
@@ -658,6 +678,10 @@
   "packsComposeHint": {
     "message": "Pick its boards, pieces and sounds, name it, and export it as a zip anyone can drop on their own Packs card.",
     "description": "Under the composer's title."
+  },
+  "packsComposeOpen": {
+    "message": "Pick boards, pieces and sounds, and export them as a zip to share.",
+    "description": "On the button that opens the composer, under its title."
   },
   "packsComposeName": {
     "message": "The pack's name",
@@ -678,6 +702,10 @@
   "packsComposeSounds": {
     "message": "Sounds",
     "description": "The composer's group of sound sets."
+  },
+  "packsMine": {
+    "message": "Yours",
+    "description": "Over the user's own boards, piece sets or sound sets in the composer, set apart from the imported packs' parts."
   },
   "packsComposeExport": {
     "message": "Export (.zip)",
@@ -715,6 +743,18 @@
     "message": "Import sounds",
     "description": "The title of the dialog that imports a sound set."
   },
+  "packsDialogEditPieces": {
+    "message": "Edit your pieces",
+    "description": "The title of the dialog that edits a piece set."
+  },
+  "packsDialogEditBoard": {
+    "message": "Edit your board",
+    "description": "The title of the dialog that edits a board."
+  },
+  "packsDialogEditSounds": {
+    "message": "Edit your sounds",
+    "description": "The title of the dialog that edits a sound set."
+  },
   "packsDialogPiecesHint": {
     "message": "Those named wK, bQ… go in their square on their own. Click a square to pick its image, or drag a file onto it.",
     "description": "Under the pieces dialog's title."
@@ -746,6 +786,10 @@
   "packsDialogReplaces": {
     "message": "Replaces your “$1”.",
     "description": "Under the name field, when the user already has one of that name."
+  },
+  "packsDialogTaken": {
+    "message": "You already have “$1”: pick another name.",
+    "description": "Why an item edited can't take that name, another one of the same kind has it."
   },
   "packsDialogNoName": {
     "message": "Give it a name.",
@@ -794,6 +838,14 @@
   "packsDialogImport": {
     "message": "Import",
     "description": "The dialog's button that imports."
+  },
+  "packsDialogSave": {
+    "message": "Save",
+    "description": "The dialog's button that saves an item edited."
+  },
+  "packsDialogSaving": {
+    "message": "Saving…",
+    "description": "While an item edited is saved."
   },
   "packsDialogClose": {
     "message": "Close",
@@ -2289,5 +2341,21 @@
   "repliesRemove": {
     "message": "Remove",
     "description": "A quick reply's button that takes it off the list, read out by screen readers."
+  },
+  "packsPlaySet": {
+    "message": "Play the set",
+    "description": "A sound set's tile: plays its sounds one after the other."
+  },
+  "packsStopSet": {
+    "message": "Stop",
+    "description": "A sound set's tile: stops it playing."
+  },
+  "packsSoundCount": {
+    "message": "$1 sounds",
+    "description": "A sound set's tile, at rest; $1 is how many sounds it has, 2 or more."
+  },
+  "packsSoundCountOne": {
+    "message": "1 sound",
+    "description": "A sound set's tile, at rest, when it has one sound."
   }
 }

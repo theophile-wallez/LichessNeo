@@ -35,7 +35,12 @@ export function setStatus(text: string, failed: boolean): void {
   }
 }
 
-export async function importPack(read: () => Promise<Imports>, library: Library): Promise<void> {
+/** Imports what `read` gives, saying so as `done` does once it's in: imported, or updated. */
+export async function importPack(
+  read: () => Promise<Imports>,
+  library: Library,
+  done = 'packsImported',
+): Promise<void> {
   importState.busy = true;
   setStatus(message('packsImporting'), false);
   try {
@@ -46,7 +51,7 @@ export async function importPack(read: () => Promise<Imports>, library: Library)
     }
     for (const { packs, source } of download.imports) await library.add(packs, source);
     const first = download.imports[0]?.packs[0];
-    setStatus(message('packsImported', first ? packTitle(first) : ''), false);
+    setStatus(message(done, first ? packTitle(first) : ''), false);
   } catch (error) {
     console.error('[LichessNeo] pack import failed', error);
     setStatus(message('packsImportFailed'), true);

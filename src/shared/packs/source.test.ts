@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { apiFileUrl, fileUrl, itemId, packId, parsePackLink, sourceIdOf } from './source.ts';
+import {
+  apiFileUrl,
+  fileUrl,
+  itemId,
+  packId,
+  parsePackLink,
+  sourceIdOf,
+  sourceLabel,
+} from './source.ts';
 
 describe('parsePackLink', () => {
   it.each([
@@ -74,5 +82,18 @@ describe('the files', () => {
     expect(sourceIdOf(id)).toBe(packId(source));
     expect(sourceIdOf(packId(source))).toBe(packId(source));
     expect(sourceIdOf(packId({ ...source, folder: 'my wood/dark/' }))).not.toBe(packId(source));
+  });
+});
+
+describe('sourceLabel', () => {
+  it.each([
+    [{ owner: 'ann', repo: 'packs', ref: 'HEAD', folder: '' }, 'ann/packs'],
+    [
+      { owner: 'ann', repo: 'packs', ref: 'main', folder: 'wood/dark/' },
+      'ann/packs/wood/dark@main',
+    ],
+    [{ owner: 'ann', repo: 'packs', ref: 'v2', folder: '' }, 'ann/packs@v2'],
+  ])('names %o as %s', (source, label) => {
+    expect(sourceLabel(source)).toBe(label);
   });
 });

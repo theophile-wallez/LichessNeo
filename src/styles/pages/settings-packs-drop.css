@@ -54,18 +54,21 @@
 }
 
 .ln-ext-packs__drop--piece,
+.ln-ext-packs__kind--piece,
 .ln-ext-pack-dialog--piece {
   --ln-ext-drop-color: var(--ln-ext-blue);
   --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-knight.svg');
 }
 
 .ln-ext-packs__drop--board,
+.ln-ext-packs__kind--board,
 .ln-ext-pack-dialog--board {
   --ln-ext-drop-color: var(--ln-ext-orange);
   --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-3x3.svg');
 }
 
 .ln-ext-packs__drop--sound,
+.ln-ext-packs__kind--sound,
 .ln-ext-pack-dialog--sound {
   --ln-ext-drop-color: var(--ln-ext-purple);
   --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/music-note-01.svg');

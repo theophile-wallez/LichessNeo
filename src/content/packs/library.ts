@@ -1,7 +1,6 @@
 import { z } from 'zod/mini';
 import { readStored, StorageKey, writeStored } from '#shared/storage.ts';
 import { hasPart, PART_KINDS, type Pack, type PartKind } from '#shared/packs/pack.ts';
-import { renamed } from '#shared/packs/items.ts';
 import { sourceIdOf } from '#shared/packs/source.ts';
 import { ACCENT_BOARD, isTheme } from './themes.ts';
 
@@ -68,8 +67,6 @@ export interface Library {
   readonly add: (packs: readonly Pack[], source: string) => Promise<void>;
   /** Removes every pack a pack.json gave, by the id of its folder. */
   readonly remove: (source: string) => Promise<void>;
-  /** Stores the pack of that id under a new name; an empty one leaves it as it was. */
-  readonly rename: (id: string, name: string) => Promise<void>;
   readonly onChange: (listener: () => void) => void;
   /** Shows the picks again, once any pack they name is read: another tab changed them. */
   readonly refresh: () => Promise<void>;
@@ -145,23 +142,16 @@ async function replaceSource(
   const dropped = list
     .filter(entry => sourceIdOf(entry.id) === source && !packs.some(pack => pack.id === entry.id))
     .map(entry => entry.id);
-  await Promise.all(packs.map(pack => save(pack)));
+  // One imported again, or edited, keeps the date it was first stored.
+  const now = Date.now();
+  const dated = packs.map(pack => ({
+    ...pack,
+    added: list.find(entry => entry.id === pack.id)?.added ?? now,
+  }));
+  await Promise.all(dated.map(pack => save(pack)));
   await Promise.all(dropped.map(id => erase(id)));
-  pickImported(packs, dropped);
-  return [...list.filter(entry => sourceIdOf(entry.id) !== source), ...packs];
-}
-
-/** Stores the pack under its new name and gives the list after, or null if it's unchanged. */
-async function renameIn(
-  list: readonly Pack[],
-  { id, name }: { readonly id: string; readonly name: string },
-  save: LibraryOptions['save'],
-): Promise<Pack[] | null> {
-  const pack = list.find(entry => entry.id === id);
-  const next = pack && renamed(pack, name);
-  if (!next || next.name === pack.name) return null;
-  await save(next);
-  return list.map(entry => (entry === pack ? next : entry));
+  pickImported(dated, dropped);
+  return [...list.filter(entry => sourceIdOf(entry.id) !== source), ...dated];
 }
 
 async function readOrNone(read: () => Promise<readonly Pack[]>): Promise<readonly Pack[]> {
@@ -209,10 +199,6 @@ export function createLibrary(options: LibraryOptions): Library {
     list = await replaceSource(list, { packs, source }, options);
     update();
   };
-  const rename = async (id: string, name: string): Promise<void> => {
-    list = (await renameIn(list, { id, name }, options.save)) ?? list;
-    update();
-  };
   update();
   return {
     packs: () => list,
@@ -230,7 +216,6 @@ export function createLibrary(options: LibraryOptions): Library {
     },
     add: replace,
     remove: source => replace([], source),
-    rename,
     onChange: listener => listeners.add(listener),
     refresh: loadPicked,
   };

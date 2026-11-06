@@ -78,6 +78,8 @@ export const PackSchema = z.object({
     }),
   ),
   sounds: z.optional(SoundsSchema),
+  /** When it was first stored, in ms: the lists show the newest first. Older versions kept none. */
+  added: z.optional(z.number()),
 });
 
 export type Pack = z.infer<typeof PackSchema>;

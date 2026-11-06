@@ -405,7 +405,7 @@
     "message": "Bêta"
   },
   "packsBody": {
-    "message": "Votre propre plateau, vos pièces ou vos sons : importez un pack depuis GitHub, ou déposez vos fichiers plus bas. Une fois importés, choisissez-les plus haut, ou dans le menu utilisateur."
+    "message": "Vos propres plateaux, pièces et sons : déposez vos fichiers sur leur rangée, ou importez un pack depuis GitHub. Cliquez sur une tuile pour l’utiliser, ou choisissez-la dans le menu utilisateur."
   },
   "packsEmpty": {
     "message": "Aucun pack importé pour l’instant."
@@ -434,6 +434,18 @@
   "packsRemove": {
     "message": "Retirer"
   },
+  "packsUpdate": {
+    "message": "Mettre à jour"
+  },
+  "packsFromZip": {
+    "message": "Zip local"
+  },
+  "packsImportedTitle": {
+    "message": "Packs importés"
+  },
+  "packsEdit": {
+    "message": "Modifier"
+  },
   "packsLink": {
     "message": "Lien vers un pack sur GitHub"
   },
@@ -455,6 +467,12 @@
   "packsImported": {
     "message": "« $1 » importé."
   },
+  "packsUpdated": {
+    "message": "« $1 » est à jour."
+  },
+  "packsEdited": {
+    "message": "« $1 » enregistré."
+  },
   "packsImportFailed": {
     "message": "Le pack n’a pas pu être importé."
   },
@@ -467,35 +485,35 @@
   "packsOrLocal": {
     "message": "ou depuis votre ordinateur"
   },
-  "packsDropPieces": {
-    "message": "Pièces"
-  },
   "packsDropPiecesHint": {
     "message": "12 images : wK, wQ… bP"
   },
-  "packsDropBoard": {
-    "message": "Plateau"
+  "packsAddPieces": {
+    "message": "Ajouter des pièces"
   },
   "packsDropBoardHint": {
     "message": "Une image du plateau entier"
   },
-  "packsDropSounds": {
-    "message": "Sons"
+  "packsAddBoard": {
+    "message": "Ajouter un plateau"
   },
   "packsDropSoundsHint": {
     "message": "Nommés move-self, capture…"
   },
+  "packsAddSounds": {
+    "message": "Ajouter des sons"
+  },
   "packsDropPack": {
     "message": "Importer un pack local (.zip)"
-  },
-  "packsRename": {
-    "message": "Renommer"
   },
   "packsCompose": {
     "message": "Créer un pack à partager"
   },
   "packsComposeHint": {
     "message": "Choisissez ses plateaux, pièces et sons, nommez-le, et exportez-le en zip : n’importe qui pourra le déposer sur sa propre carte Packs."
+  },
+  "packsComposeOpen": {
+    "message": "Choisissez plateaux, pièces et sons, et exportez-les en zip à partager."
   },
   "packsComposeName": {
     "message": "Le nom du pack"
@@ -511,6 +529,9 @@
   },
   "packsComposeSounds": {
     "message": "Sons"
+  },
+  "packsMine": {
+    "message": "Les vôtres"
   },
   "packsComposeExport": {
     "message": "Exporter (.zip)"
@@ -539,6 +560,15 @@
   "packsDialogSounds": {
     "message": "Importer des sons"
   },
+  "packsDialogEditPieces": {
+    "message": "Modifier vos pièces"
+  },
+  "packsDialogEditBoard": {
+    "message": "Modifier votre plateau"
+  },
+  "packsDialogEditSounds": {
+    "message": "Modifier vos sons"
+  },
   "packsDialogPiecesHint": {
     "message": "Celles nommées wK, bQ… se placent seules dans leur case. Cliquez sur une case pour choisir son image, ou glissez-y un fichier."
   },
@@ -562,6 +592,9 @@
   },
   "packsDialogReplaces": {
     "message": "Remplace votre « $1 »."
+  },
+  "packsDialogTaken": {
+    "message": "Vous avez déjà « $1 » : choisissez un autre nom."
   },
   "packsDialogNoName": {
     "message": "Donnez-lui un nom."
@@ -598,6 +631,12 @@
   },
   "packsDialogImport": {
     "message": "Importer"
+  },
+  "packsDialogSave": {
+    "message": "Enregistrer"
+  },
+  "packsDialogSaving": {
+    "message": "Enregistrement…"
   },
   "packsDialogClose": {
     "message": "Fermer"
@@ -1778,5 +1817,21 @@
   "repliesRemove": {
     "message": "Retirer",
     "description": "A quick reply's button that takes it off the list, read out by screen readers."
+  },
+  "packsPlaySet": {
+    "message": "Écouter le jeu de sons",
+    "description": "A sound set's tile: plays its sounds one after the other."
+  },
+  "packsStopSet": {
+    "message": "Arrêter",
+    "description": "A sound set's tile: stops it playing."
+  },
+  "packsSoundCount": {
+    "message": "$1 sons",
+    "description": "A sound set's tile, at rest; $1 is how many sounds it has, 2 or more."
+  },
+  "packsSoundCountOne": {
+    "message": "1 son",
+    "description": "A sound set's tile, at rest, when it has one sound."
   }
 }

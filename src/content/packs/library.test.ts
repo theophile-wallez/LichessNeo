@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi, type Mock } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
 import { fakePack, listedPack } from '#shared/testing/packs.ts';
 import { createLibrary, LICHESS, storedPick, type Look, type Shown } from './library.ts';
 import type { Pack } from '#shared/packs/pack.ts';
@@ -51,7 +51,16 @@ const ids = (shown: Shown | undefined): Record<string, string | null> => ({
 
 const erased = (erase: Mock<Erase>): Set<string> => new Set(erase.mock.calls.map(([id]) => id));
 
+// What a pack stored now is dated.
+const NOW = 1_700_000_000_000;
+
+beforeEach(() => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(NOW);
+});
+
 afterEach(() => {
+  vi.useRealTimers();
   localStorage.clear();
 });
 
@@ -130,17 +139,17 @@ describe('createLibrary', () => {
     const listener = vi.fn<() => void>();
     packs.onChange(listener);
     await packs.add([CLICKS], CLICKS.id);
-    expect(save).toHaveBeenCalledWith(CLICKS);
+    expect(save).toHaveBeenCalledWith({ ...CLICKS, added: NOW });
     expect(ids(shown.at(-1))).toEqual({ board: WOOD.id, piece: null, sound: CLICKS.id });
-    expect(packs.packs()).toEqual([WOOD, CLICKS]);
+    expect(packs.packs()).toEqual([WOOD, { ...CLICKS, added: NOW }]);
     expect(listener).toHaveBeenCalledOnce();
   });
 
-  it('replaces a pack imported again, keeping one of each', async () => {
-    const { library: packs } = await library([WOOD, CLICKS]);
+  it('replaces a pack imported again, keeping one of each and the date it was first stored', async () => {
+    const { library: packs } = await library([{ ...WOOD, added: 5 }, CLICKS]);
     const renamed = { ...WOOD, name: 'Wood, again' };
     await packs.add([renamed], renamed.id);
-    expect(packs.packs()).toEqual([CLICKS, renamed]);
+    expect(packs.packs()).toEqual([CLICKS, { ...renamed, added: 5 }]);
   });
 
   it('removes a pack, and the parts it showed go back to their default', async () => {
@@ -161,9 +170,9 @@ describe('createLibrary', () => {
     packs.choose('sound', CLICKS.id);
     const light = { ...LIGHT, name: 'Light, again' };
     await packs.add([light], SET);
-    expect(save.mock.calls).toEqual([[light]]);
+    expect(save.mock.calls).toEqual([[{ ...light, added: NOW }]]);
     expect(erased(erase)).toEqual(new Set([DARK.id, LONE.id]));
-    expect(packs.packs()).toEqual([CLICKS, light]);
+    expect(packs.packs()).toEqual([CLICKS, { ...light, added: NOW }]);
     expect(ids(shown.at(-1))).toEqual({ board: LIGHT.id, piece: null, sound: CLICKS.id });
   });
 
@@ -200,24 +209,5 @@ describe('createLibrary', () => {
     expect(packs.packs().map(pack => pack.id)).toEqual([WOOD.id, CLICKS.id]);
     // The same object: a new one would send its sounds to the page again.
     expect(shown.at(-1)?.sound).toBe(CLICKS);
-  });
-
-  it('renames an item, keeping its id and its pick', async () => {
-    const mochi = { ...fakePack('file:1/', ['piece']), name: 'Mochi' };
-    const { save, library: packs } = await library([mochi]);
-    packs.choose('piece', mochi.id);
-    await packs.rename(mochi.id, '  Pop ');
-    expect(save).toHaveBeenLastCalledWith({ ...mochi, name: 'Pop' });
-    expect(packs.packs()).toEqual([{ ...mochi, name: 'Pop' }]);
-    expect(packs.current('piece')).toBe(mochi.id);
-  });
-
-  it('keeps the name of an item renamed to nothing, or to the same', async () => {
-    const mochi = { ...fakePack('file:1/', ['piece']), name: 'Mochi' };
-    const { save, library: packs } = await library([mochi]);
-    await packs.rename(mochi.id, '   ');
-    await packs.rename(mochi.id, 'Mochi');
-    expect(save).not.toHaveBeenCalled();
-    expect(packs.packs()).toEqual([mochi]);
   });
 });

@@ -1,0 +1,307 @@
+/* ---- The Packs card's rows of the user's own items (content/packs/item-tiles.ts) --- */
+
+/* A row for each kind, in its zone's hue (settings-packs-drop.css): its
+   items as tiles, then the zone that adds one, a tile too. */
+.ln-ext-packs__kinds {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ln-ext-packs__kind-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 10px;
+  color: var(--ln-ext-text-strong);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.ln-ext-packs__kind-title .ln-ext-packs__drop-icon {
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  border-radius: 8px;
+}
+
+.ln-ext-packs__kind-title .ln-ext-packs__drop-icon::after {
+  width: 16px;
+  height: 16px;
+}
+
+.ln-ext-packs__tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: 10px;
+}
+
+/* An item: a click picks it, its buttons over its corner. */
+.ln-ext-item {
+  position: relative;
+  min-width: 0;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-item:hover {
+  transform: translateY(-2px);
+}
+
+.ln-ext-item__pick {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 12px;
+  background: var(--ln-ext-shade-18);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-8);
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s,
+    background-color 0.15s !important;
+}
+
+.ln-ext-item:hover .ln-ext-item__pick {
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-20);
+}
+
+.ln-ext-item--on .ln-ext-item__pick,
+.ln-ext-item--on .ln-ext-item__pick:hover {
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 14%, transparent);
+  box-shadow: inset 0 0 0 2px var(--ln-ext-drop-color);
+}
+
+/* The board itself, two pieces on a tile in the hue, or the sounds' player. */
+.ln-ext-item__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 18%, var(--ln-ext-shade-18)) center /
+    cover no-repeat;
+}
+
+.ln-ext-item__piece {
+  width: 44%;
+  height: 44%;
+  background: center / contain no-repeat;
+}
+
+.ln-ext-item__name {
+  overflow: hidden;
+  padding: 0 2px 2px;
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The pick's mark: dark on the hue, which may be a bright one. */
+.ln-ext-item__check {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ln-ext-drop-color);
+  box-shadow: 0 1px 3px var(--ln-ext-shade-35);
+  color: var(--ln-ext-ink);
+}
+
+.ln-ext-item--on .ln-ext-item__check {
+  display: flex;
+}
+
+.ln-ext-item__check svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Play, edit, remove: frosted buttons over the preview's corner. */
+.ln-ext-item__actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  transition: opacity 0.15s !important;
+}
+
+@media (hover: hover) {
+  .ln-ext-item:not(:hover, :focus-within) .ln-ext-item__actions {
+    opacity: 0;
+  }
+}
+
+.ln-ext-item__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ln-ext-bg-panel) 82%, transparent);
+  box-shadow: 0 1px 3px var(--ln-ext-shade-35);
+  color: var(--ln-ext-text-strong);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.ln-ext-item__action svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ln-ext-item__edit:hover {
+  background: var(--ln-ext-btn-primary);
+  color: var(--ln-ext-white);
+}
+
+.ln-ext-item__remove:hover {
+  background: var(--ln-ext-btn-red);
+  color: var(--ln-ext-white);
+}
+
+/* A sound set's player, over its preview, dark on the hue as the pick's mark: the button, a wave whose bars the
+   sounds share, lit in turn, and what the one playing plays on. */
+.ln-ext-player {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  aspect-ratio: 1;
+  padding: 24px 8px 6px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.ln-ext-player__play {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ln-ext-drop-color) 88%, var(--ln-ext-white)),
+    var(--ln-ext-drop-color)
+  );
+  box-shadow:
+    inset 0 1px #ffffff40,
+    0 2px 8px color-mix(in srgb, var(--ln-ext-drop-color) 45%, transparent);
+  color: var(--ln-ext-ink);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-player__play:hover {
+  transform: scale(1.08);
+}
+
+.ln-ext-player__play svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ln-ext-player__bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+  height: 24px;
+}
+
+.ln-ext-player__bar {
+  flex: 0 1 3px;
+  min-width: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 40%, transparent);
+  transition: background-color 0.15s !important;
+}
+
+.ln-ext-player__bar--played {
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 75%, transparent);
+}
+
+.ln-ext-player__bar--on {
+  background: var(--ln-ext-drop-color);
+  animation: ln-ext-player-beat 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes ln-ext-player-beat {
+  from {
+    transform: scaleY(0.6);
+  }
+  to {
+    transform: scaleY(1.25);
+  }
+}
+
+.ln-ext-player__caption {
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ln-ext-player--playing .ln-ext-player__caption {
+  color: var(--ln-ext-text-strong);
+}
+
+/* The zone that adds one, as tall as the tiles beside it. */
+.ln-ext-packs__tiles .ln-ext-packs__drop {
+  justify-content: center;
+  min-height: 150px;
+  padding: 12px 8px;
+}
+
+.ln-ext-packs__tiles .ln-ext-packs__drop-title {
+  font-size: 13.5px;
+}
+
+.ln-ext-packs__tiles .ln-ext-packs__drop-hint {
+  margin-bottom: 6px;
+}
+
+.ln-ext-packs__tiles .ln-ext-packs__example {
+  margin-top: 0;
+  padding: 4px 10px 4px 8px;
+  font-size: 12px;
+}
+
+/* A phone: smaller tiles, two or three a row. */
+@media (max-width: 520px) {
+  .ln-ext-packs__tiles {
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+    gap: 8px;
+  }
+}

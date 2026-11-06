@@ -107,3 +107,9 @@ export function apiFileUrl({ owner, repo, ref, folder }: PackSource, path: strin
   const query = ref === 'HEAD' ? '' : `?ref=${encodeURIComponent(ref)}`;
   return `${API_HOST}/repos/${owner}/${repo}/contents/${encodedPath(`${folder}${path}`)}${query}`;
 }
+
+/** The repository a pack is read from, as a user names it: `ann/packs`, its folder and ref after. */
+export function sourceLabel({ owner, repo, ref, folder }: PackSource): string {
+  const path = folder === '' ? '' : `/${folder.slice(0, -1)}`;
+  return `${owner}/${repo}${path}${ref === 'HEAD' ? '' : `@${ref}`}`;
+}
