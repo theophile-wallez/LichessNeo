@@ -35,7 +35,11 @@ const status = (section: HTMLElement): string | null | undefined =>
   section.querySelector('.ln-ext-packs__status')?.textContent;
 
 function submit(section: HTMLElement, link: string, token = ''): void {
-  const [input, secret] = queryAll(section, '.ln-ext-packs__import input', HTMLInputElement);
+  const [input, secret] = queryAll(
+    section,
+    '.ln-ext-packs__import input:not([type=file])',
+    HTMLInputElement,
+  );
   if (!input || !secret) throw new Error('no form');
   input.value = link;
   secret.value = token;
@@ -122,6 +126,8 @@ describe('importing a pack', () => {
     expect(library.current('sound')).toBe('ann/packs/HEAD/');
     expect(status(section)).toBe('packsImported:Clicks');
     expect(queryOne(section, '.ln-ext-packs__row input', HTMLInputElement)?.value).toBe('');
+    // The composer, drawn again, offers it.
+    expect(section.querySelector('.ln-ext-compose__chip-name')?.textContent).toBe('Clicks');
   });
 
   it('takes the token in no form and no password field, which browsers offer to save', async () => {
@@ -146,11 +152,40 @@ describe('importing a pack', () => {
     fakeGithub({ repo: 'ann/packs', files, token: 'secret' });
     const { section } = await start([]);
     submit(section, 'https://github.com/ann/packs', 'nope');
-    const [link, token] = queryAll(section, '.ln-ext-packs__import input', HTMLInputElement);
+    const [link, token] = queryAll(
+      section,
+      '.ln-ext-packs__import input:not([type=file])',
+      HTMLInputElement,
+    );
     // Never left in the page, which Lichess's scripts can read.
     expect(token?.value).toBe('');
     await vi.waitFor(() => expect(status(section)).toBe('GitHub turned the token down.'));
     expect(section.querySelector('.ln-ext-packs__status--failed')).not.toBeNull();
     expect(link?.value).toBe('https://github.com/ann/packs');
+  });
+});
+
+describe('the user’s own items', () => {
+  const board = { ...fakePack('file:1/', ['board']), name: 'Harbor', link: '' };
+  const sounds = { ...fakePack('file:2/', ['sound']), name: 'Clicks', link: '' };
+
+  it('come after the packs, boards first, each named in a field', async () => {
+    const { section } = await start([sounds, WOOD, board]);
+    expect(names(section)).toEqual(['Pack ann/packs/main/wood/']);
+    expect(
+      queryAll(section, '.ln-ext-pack__rename', HTMLInputElement).map(field => field.value),
+    ).toEqual(['Harbor', 'Clicks']);
+  });
+
+  it('are renamed from their field, which an empty name puts back', async () => {
+    const { library, section } = await start([board]);
+    const field = queryOne(section, '.ln-ext-pack__rename', HTMLInputElement);
+    if (!field) throw new Error('No name field');
+    field.value = '';
+    field.dispatchEvent(new Event('change'));
+    expect(field.value).toBe('Harbor');
+    field.value = 'Maple';
+    field.dispatchEvent(new Event('change'));
+    await vi.waitFor(() => expect(library.packs()[0]?.name).toBe('Maple'));
   });
 });

@@ -25,7 +25,8 @@ export type FileDownload = { readonly url: string } | { readonly error: string }
 
 export type FileKind = 'image' | 'sound';
 
-async function readManifest(read: Read): Promise<Manifest> {
+/** Reads and checks a pack.json, from GitHub or the user's files (local.ts). */
+export async function readManifest(read: Read): Promise<Manifest> {
   const bytes = await read(MANIFEST_FILE, MAX_MANIFEST_BYTES);
   let json: unknown;
   try {
@@ -43,11 +44,17 @@ async function readManifest(read: Read): Promise<Manifest> {
   );
 }
 
-async function readFile(read: Read, path: string, kind: FileKind): Promise<string> {
+/** Reads a file and checks it's what it should be, as a data: URL; `shown` is its path for the user. */
+export async function readPackFile(
+  read: Read,
+  path: string,
+  kind: FileKind,
+  shown = path,
+): Promise<string> {
   const bytes = await read(path, MAX_FILE_BYTES);
   const type = kind === 'image' ? imageType(bytes) : audioType(bytes);
   if (type === null)
-    throw new PackError(`${path} is not ${kind === 'image' ? 'an image' : 'a sound'}.`);
+    throw new PackError(`${shown} is not ${kind === 'image' ? 'an image' : 'a sound'}.`);
   return dataUrl(type, bytes);
 }
 
@@ -84,4 +91,4 @@ export const downloadFile = (
   path: string,
   kind: FileKind,
 ): Promise<FileDownload> =>
-  withReader(link, token, async read => ({ url: await readFile(read, path, kind) }));
+  withReader(link, token, async read => ({ url: await readPackFile(read, path, kind) }));

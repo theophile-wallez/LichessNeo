@@ -7,6 +7,7 @@ import { coachOf, coachPick } from '#shared/coach.ts';
 import { createElement, queryOne, setData } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
+import { REPOSITORY_URL } from '#shared/repository.ts';
 import { isFirefox, message } from '#content/platform/runtime.ts';
 import { type Cast, MascotSpot } from '#content/coach/spot.ts';
 import { arcStars } from './support-stars.ts';
@@ -15,8 +16,6 @@ import { arcStars } from './support-stars.ts';
 // user's coach on a stage under an arc of stars, then a star on GitHub, the
 // quickest, and a review on the store the extension came from, the other
 // store's link quieter (styles/pages/settings-support.css).
-
-const REPOSITORY_URL = 'https://github.com/theophile-wallez/LichessNeo';
 
 interface Store {
   readonly name: string;

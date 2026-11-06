@@ -133,7 +133,8 @@ function assemblePacks({ manifest, source, link, readFile }: Assembly): Promise<
 /** Lets `limit` reads run at once, the others in turn; once one fails, none starts. */
 function inTurns(readFile: ReadFile, limit: number): ReadFile {
   let running = 0;
-  let failed = false;
+  // Given again to the reads still waiting, as one of them may be the first to reach the user.
+  let failure: unknown = null;
   const waiting: (() => void)[] = [];
   const start = (): Promise<void> => {
     if (running >= limit) return new Promise(resolve => waiting.push(resolve));
@@ -149,10 +150,10 @@ function inTurns(readFile: ReadFile, limit: number): ReadFile {
   return async (path, kind) => {
     await start();
     try {
-      if (failed) throw new PackError('Stopped.');
+      if (failure !== null) throw failure;
       return await readFile(path, kind);
     } catch (error) {
-      failed = true;
+      failure ??= error;
       throw error;
     } finally {
       end();

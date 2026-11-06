@@ -1,0 +1,226 @@
+/* The Packs card's zones for the user's own files (content/packs/drop-zone.ts),
+   under the GitHub link's field (settings-packs.css). */
+.ln-ext-packs__import {
+  container: ln-ext-packs-import / inline-size;
+}
+
+/* A line across, "or from your computer" in its middle. */
+.ln-ext-packs__or {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0 16px;
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+}
+
+.ln-ext-packs__or::before,
+.ln-ext-packs__or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ln-ext-lift-12);
+}
+
+/* The user's own files, a zone for each kind: dropped on it, or clicked to
+   open the import dialog (settings-packs-dialog.css), which shares its hue. */
+.ln-ext-packs__drops {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ln-ext-packs__drop,
+.ln-ext-pack-dialog {
+  --ln-ext-drop-color: var(--ln-ext-accent);
+  --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/upload-04.svg');
+}
+
+.ln-ext-packs__drop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 10px;
+  border: 1.5px dashed var(--ln-ext-lift-20);
+  border-radius: 12px;
+  background: var(--ln-ext-shade-12);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s !important;
+}
+
+.ln-ext-packs__drop--piece,
+.ln-ext-pack-dialog--piece {
+  --ln-ext-drop-color: var(--ln-ext-blue);
+  --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chess-knight.svg');
+}
+
+.ln-ext-packs__drop--board,
+.ln-ext-pack-dialog--board {
+  --ln-ext-drop-color: var(--ln-ext-orange);
+  --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/grid-3x3.svg');
+}
+
+.ln-ext-packs__drop--sound,
+.ln-ext-pack-dialog--sound {
+  --ln-ext-drop-color: var(--ln-ext-purple);
+  --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/music-note-01.svg');
+}
+
+.ln-ext-packs__drop:hover,
+.ln-ext-packs__drop:focus-within,
+.ln-ext-packs__drop--over {
+  border-color: var(--ln-ext-drop-color);
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 8%, transparent);
+}
+
+.ln-ext-packs__drop-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 20%, transparent);
+  box-shadow: inset 0 1px #ffffff1a;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.ln-ext-packs__drop-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 22px;
+  height: 22px;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 80%, var(--ln-ext-text-strong));
+  mask: var(--ln-ext-drop-glyph) center / contain no-repeat;
+}
+
+.ln-ext-packs__drop:hover .ln-ext-packs__drop-icon,
+.ln-ext-packs__drop--over .ln-ext-packs__drop-icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.ln-ext-packs__drop-title {
+  color: var(--ln-ext-text-strong);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.ln-ext-packs__drop-hint {
+  margin-bottom: 12px;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+/* The example pack's files of the zone's kind, opened rather than picked. */
+/* A pill in the zone's hue, at the foot of every zone alike, however long its hint. */
+.ln-ext-packs__example {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding: 5px 12px 5px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 14%, transparent);
+  color: color-mix(in srgb, var(--ln-ext-drop-color) 75%, var(--ln-ext-text-strong)) !important;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: background-color 0.15s !important;
+}
+
+.ln-ext-packs__example::before {
+  content: '';
+  width: 15px;
+  height: 15px;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/view.svg') center / contain
+    no-repeat;
+}
+
+.ln-ext-packs__example:hover {
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 26%, transparent);
+}
+
+/* An exported pack's zip: a line under the zones, not a zone of its own. */
+.ln-ext-packs__drop--pack {
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 9px 12px;
+  border-color: var(--ln-ext-lift-12);
+  background: none;
+}
+
+.ln-ext-packs__drop--pack .ln-ext-packs__drop-icon {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.ln-ext-packs__drop--pack .ln-ext-packs__drop-icon::after {
+  width: 18px;
+  height: 18px;
+}
+
+.ln-ext-packs__drop--pack .ln-ext-packs__example {
+  margin: 0 0 0 4px;
+}
+
+.ln-ext-packs__drop--pack .ln-ext-packs__drop-title {
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ln-ext-packs__drop--pack:hover .ln-ext-packs__drop-title,
+.ln-ext-packs__drop--pack.ln-ext-packs__drop--over .ln-ext-packs__drop-title {
+  color: var(--ln-ext-text-strong);
+}
+
+/* Out of sight, but still focusable from the keyboard. */
+.ln-ext-packs__file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* A phone's card, or the user menu's panel when signed out: a zone a row. */
+@container ln-ext-packs-import (max-width: 480px) {
+  .ln-ext-packs__drops {
+    grid-template-columns: 1fr;
+  }
+
+  .ln-ext-packs__drops .ln-ext-packs__drop {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    padding: 12px 14px;
+    text-align: start;
+  }
+
+  .ln-ext-packs__drops .ln-ext-packs__drop-icon {
+    grid-row: span 3;
+    margin: 0;
+  }
+
+  .ln-ext-packs__drops .ln-ext-packs__drop-hint {
+    margin-bottom: 8px;
+  }
+
+  .ln-ext-packs__drops .ln-ext-packs__example {
+    justify-self: start;
+    margin: 0;
+  }
+}

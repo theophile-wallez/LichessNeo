@@ -405,7 +405,7 @@
     "message": "Bêta"
   },
   "packsBody": {
-    "message": "Votre propre plateau, vos pièces ou vos sons, depuis un pack sur GitHub. Une fois importés, choisissez-les plus haut, ou dans le menu utilisateur."
+    "message": "Votre propre plateau, vos pièces ou vos sons : importez un pack depuis GitHub, ou déposez vos fichiers plus bas. Une fois importés, choisissez-les plus haut, ou dans le menu utilisateur."
   },
   "packsEmpty": {
     "message": "Aucun pack importé pour l’instant."
@@ -463,6 +463,240 @@
   },
   "packsHelp": {
     "message": "Comment créer un pack"
+  },
+  "packsOrLocal": {
+    "message": "ou depuis votre ordinateur"
+  },
+  "packsDropPieces": {
+    "message": "Pièces"
+  },
+  "packsDropPiecesHint": {
+    "message": "12 images : wK, wQ… bP"
+  },
+  "packsDropBoard": {
+    "message": "Plateau"
+  },
+  "packsDropBoardHint": {
+    "message": "Une image du plateau entier"
+  },
+  "packsDropSounds": {
+    "message": "Sons"
+  },
+  "packsDropSoundsHint": {
+    "message": "Nommés move-self, capture…"
+  },
+  "packsDropPack": {
+    "message": "Importer un pack local (.zip)"
+  },
+  "packsRename": {
+    "message": "Renommer"
+  },
+  "packsCompose": {
+    "message": "Créer un pack à partager"
+  },
+  "packsComposeHint": {
+    "message": "Choisissez ses plateaux, pièces et sons, nommez-le, et exportez-le en zip : n’importe qui pourra le déposer sur sa propre carte Packs."
+  },
+  "packsComposeName": {
+    "message": "Le nom du pack"
+  },
+  "packsComposeDefault": {
+    "message": "Mon pack"
+  },
+  "packsComposeBoards": {
+    "message": "Plateaux"
+  },
+  "packsComposePieces": {
+    "message": "Pièces"
+  },
+  "packsComposeSounds": {
+    "message": "Sons"
+  },
+  "packsComposeExport": {
+    "message": "Exporter (.zip)"
+  },
+  "packsShareTitle": {
+    "message": "Le partager sur GitHub"
+  },
+  "packsShareHint": {
+    "message": "Décompressez-le dans un dépôt de ce nom, avec ce topic : les autres le trouvent parmi les packs, et l'importent par son lien."
+  },
+  "packsShareRepo": {
+    "message": "Dépôt"
+  },
+  "packsShareTopic": {
+    "message": "Topic"
+  },
+  "packsShareHelp": {
+    "message": "Comment partager un pack"
+  },
+  "packsDialogPieces": {
+    "message": "Importer des pièces"
+  },
+  "packsDialogBoard": {
+    "message": "Importer un plateau"
+  },
+  "packsDialogSounds": {
+    "message": "Importer des sons"
+  },
+  "packsDialogPiecesHint": {
+    "message": "Celles nommées wK, bQ… se placent seules dans leur case. Cliquez sur une case pour choisir son image, ou glissez-y un fichier."
+  },
+  "packsDialogBoardHint": {
+    "message": "Une image des 64 cases, a8 en haut à gauche. Cliquez dessus pour en choisir une autre."
+  },
+  "packsDialogSoundsHint": {
+    "message": "Ceux nommés move-self, capture… se placent seuls dans leur ligne. Prenez seulement ceux qui vous plaisent : Lichess joue les autres."
+  },
+  "packsDialogName": {
+    "message": "Nom"
+  },
+  "packsDialogNamePieces": {
+    "message": "Le nom de ces pièces"
+  },
+  "packsDialogNameBoard": {
+    "message": "Le nom de ce plateau"
+  },
+  "packsDialogNameSounds": {
+    "message": "Le nom de ces sons"
+  },
+  "packsDialogReplaces": {
+    "message": "Remplace votre « $1 »."
+  },
+  "packsDialogNoName": {
+    "message": "Donnez-lui un nom."
+  },
+  "packsDialogMissing": {
+    "message": "Il manque encore : $1."
+  },
+  "packsDialogNoBoard": {
+    "message": "Choisissez une image."
+  },
+  "packsDialogNoSound": {
+    "message": "Ajoutez au moins un son."
+  },
+  "packsDialogLoose": {
+    "message": "Pas reconnus : glissez chacun sur sa case, ou touchez-le puis sa case."
+  },
+  "packsDialogAdd": {
+    "message": "Ajouter des fichiers"
+  },
+  "packsDialogPick": {
+    "message": "Choisir un fichier"
+  },
+  "packsDialogChange": {
+    "message": "En choisir une autre"
+  },
+  "packsDialogPlay": {
+    "message": "Écouter"
+  },
+  "packsDialogClear": {
+    "message": "Retirer"
+  },
+  "packsDialogCancel": {
+    "message": "Annuler"
+  },
+  "packsDialogImport": {
+    "message": "Importer"
+  },
+  "packsDialogClose": {
+    "message": "Fermer"
+  },
+  "packsRoleKing": {
+    "message": "Roi"
+  },
+  "packsRoleQueen": {
+    "message": "Dame"
+  },
+  "packsRoleRook": {
+    "message": "Tour"
+  },
+  "packsRoleBishop": {
+    "message": "Fou"
+  },
+  "packsRoleKnight": {
+    "message": "Cavalier"
+  },
+  "packsRolePawn": {
+    "message": "Pion"
+  },
+  "packsSideWhite": {
+    "message": "Blancs"
+  },
+  "packsSideBlack": {
+    "message": "Noirs"
+  },
+  "packsNotImage": {
+    "message": "$1 n’est pas une image."
+  },
+  "packsNotSound": {
+    "message": "$1 n’est pas un son."
+  },
+  "packsSoundMoveSelf": {
+    "message": "Votre coup, ou un coup du camp que vous jouez"
+  },
+  "packsSoundMoveOpponent": {
+    "message": "Le coup de l’autre camp"
+  },
+  "packsSoundMoveCheck": {
+    "message": "Un coup qui donne échec"
+  },
+  "packsSoundMoveSlide": {
+    "message": "Un long coup"
+  },
+  "packsSoundMoveSlideCheck": {
+    "message": "Un long coup qui donne échec"
+  },
+  "packsSoundMoveKnight": {
+    "message": "Un coup de cavalier"
+  },
+  "packsSoundCapture": {
+    "message": "Une prise"
+  },
+  "packsSoundCaptureCheck": {
+    "message": "Une prise qui donne échec"
+  },
+  "packsSoundCaptureSlide": {
+    "message": "Une prise au bout d’un long coup"
+  },
+  "packsSoundCaptureSlideCheck": {
+    "message": "La même, qui donne échec"
+  },
+  "packsSoundCastle": {
+    "message": "Le roque"
+  },
+  "packsSoundPromote": {
+    "message": "Une promotion"
+  },
+  "packsSoundCapturePromote": {
+    "message": "Une promotion avec prise"
+  },
+  "packsSoundCheckmate": {
+    "message": "L’échec et mat"
+  },
+  "packsSoundPremove": {
+    "message": "Un coup anticipé"
+  },
+  "packsSoundIllegal": {
+    "message": "Un coup que le plateau refuse"
+  },
+  "packsSoundNotify": {
+    "message": "Un défi, un message, une confirmation"
+  },
+  "packsSoundTenseconds": {
+    "message": "Le temps qui s’épuise"
+  },
+  "packsSoundGameStart": {
+    "message": "Le début d’une partie"
+  },
+  "packsSoundGameEnd": {
+    "message": "La fin d’une partie"
+  },
+  "packsDialogMoreSounds": {
+    "message": "$1 sons de plus, que peu de jeux ont"
+  },
+  "packsExample": {
+    "message": "Voir un exemple"
   },
   "appearanceTitle": {
     "message": "Couleurs"

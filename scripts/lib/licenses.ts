@@ -19,6 +19,7 @@ export const LICENSES: readonly License[] = [
     from: 'node_modules/@hugeicons/core-free-icons/LICENSE.md',
     to: 'licenses/hugeicons.md',
   },
+  { name: 'fflate', from: 'node_modules/fflate/LICENSE', to: 'licenses/fflate.md' },
   { name: 'three', from: 'node_modules/three/LICENSE', to: 'licenses/three.md' },
   { name: 'zod', from: 'node_modules/zod/LICENSE', to: 'licenses/zod.md' },
 ];

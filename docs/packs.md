@@ -25,7 +25,66 @@ nothing after that. An import shows every part the pack has; then each part is
 picked on its own: a pack's pieces with Lichess's board, say. The settings also
 list your packs, and remove them.
 
-The [example pack](../packs/example) uses every field. Copy it to start.
+The [example pack](../packs/example) uses every field. Copy it to start, or
+try it first: [warm-wood.zip](../packs/warm-wood.zip) is the same pack, to drop
+on the settings' **Import a local pack (.zip)**, or to unzip and drop a
+part at a time.
+
+## From your computer
+
+To try a theme, no pack is needed: under the **Packs** card's link field,
+drop the files on the zone of their kind, or click it. A dialog opens, with
+each file in its place when its name says which; fill in the rest a file at a
+time, by a click on its slot or by dragging a file onto it. Give it a name,
+which it needs, and import it: it's listed on its own and picked at once, and
+its name can be changed there. Each zone links to
+[samples](../packs/samples/README.md) of its kind, in every format it takes:
+
+- **Pieces:** all twelve. Those named `wK`, `wQ`, `wR`, `wB`, `wN`, `wP`,
+  `bK` … `bP` (in any case, so `wk.png` works), `white-king`,
+  `black-pawn`…, or as Wikimedia Commons names them (`Chess_klt45.svg`) go
+  in their square on their own.
+- **Board:** an image, as `board.image` below. The coordinates take its
+  squares' colors.
+- **Sounds:** any of those in the table below. Those named after what they
+  play (`move-self.mp3`, `capture.wav`…; `move`, `check`, `castling`,
+  `promotion`, `lowtime` and `genericnotify` work too) go in their row on
+  their own.
+
+Images are SVG, PNG, JPEG, WebP, GIF or AVIF, sounds MP3, Ogg or WAV. Dropped
+at once, a folder of pieces or of sounds opens a dialog of its own, and so
+does each board. Imported under the name of one you have, of the same kind,
+an item takes its place, and a sound set keeps the sounds it isn't given
+again, so a theme can be tried and changed. A zip dropped on a zone is read
+as its files; one with a `pack.json`, dropped there or on **Import a
+local pack**, is imported whole and replaces the pack of its name. The
+files are checked as a pack's are (see [Files](#files)).
+
+**Make a pack to share**, at the bottom of the card, puts a pack together
+from any boards, piece sets and sound sets you have, yours or a GitHub
+pack's: pick them, name the pack, and **Export** saves it as a zip, its
+`pack.json` and its files, named as the GitHub repository to share it from
+(`LichessNeoPack_WarmWood.zip` for "Warm wood"). Share it as it is, to be
+imported in the same way, or on GitHub by its link: see
+[Sharing a pack](#sharing-a-pack).
+
+## Sharing a pack
+
+A pack anyone can find is a GitHub repository of its own:
+
+1. Name it `LichessNeoPack_` and the pack's name, in one word
+   (`LichessNeoPack_WarmWood`): the composer's zip already has that name.
+2. Put the pack at its root, `pack.json` and its files (unzip the composer's
+   zip there), so the repository's link alone imports it:
+   `https://github.com/<you>/LichessNeoPack_WarmWood`.
+3. Give it the topic `lichess-neo-pack` (the gear beside **About**, on the
+   repository's page).
+
+Packs shared that way are listed by
+[their topic](https://github.com/topics/lichess-neo-pack) and by
+[a search for the prefix](https://github.com/search?q=LichessNeoPack_+in%3Aname&type=repositories&s=stars&o=desc),
+the most starred first: star the ones you like. Any repository's link still
+imports, named so or not, and so does a pack in a folder of a larger one.
 
 ## The links that work
 

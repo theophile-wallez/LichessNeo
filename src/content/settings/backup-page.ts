@@ -5,6 +5,7 @@ import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
 import { message } from '#content/platform/runtime.ts';
 import { packTitle } from '#shared/packs/pack.ts';
+import { saveFile } from '#shared/save-file.ts';
 import { type Backup, backupFileName, readBackup } from './backup-file.ts';
 import { createBackup, restoreBackup } from './backup.ts';
 
@@ -14,8 +15,6 @@ import { createBackup, restoreBackup } from './backup.ts';
 
 // A backup with a few packs weighs a few megabytes: past this, it isn't one.
 const MAX_FILE_SIZE = 200_000_000;
-
-const REVOKE_DELAY = 60_000;
 
 type Action = 'export' | 'choose' | 'restore' | 'cancel';
 
@@ -55,17 +54,6 @@ const cardMarkup = ({ kind, title, body, button, extras }: Card): SafeHtml =>
     ${button}
   </div>`;
 
-function download(text: string, name: string): void {
-  const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
-  // Firefox follows a link's download only while it's in the document.
-  const link = createElement('a', { attrs: { href: url, download: name } });
-  document.body.append(link);
-  link.click();
-  link.remove();
-  // Revoked at once, the file may not be read yet: Firefox then saves nothing.
-  setTimeout(() => URL.revokeObjectURL(url), REVOKE_DELAY);
-}
-
 /** What the file holds, to be read before it replaces anything. */
 function summary(backup: Backup): string {
   const date = new Intl.DateTimeFormat(undefined, { dateStyle: 'long', timeStyle: 'short' });
@@ -99,7 +87,10 @@ function showStatus({ status }: Parts, text: string | null): void {
 async function exportSettings(parts: Parts): Promise<void> {
   try {
     const backup = await createBackup();
-    download(JSON.stringify(backup, null, 2), backupFileName(new Date(backup.created)));
+    saveFile(
+      new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' }),
+      backupFileName(new Date(backup.created)),
+    );
   } catch (error) {
     console.error('[LichessNeo] settings not exported', error);
     showStatus(parts, message('backupExportFailed'));

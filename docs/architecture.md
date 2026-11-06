@@ -245,7 +245,7 @@ the material boards, in three families (the woods, the marbles, the rest), and
 the backlit ones, each family listed under one tile, `materials.ts` and
 `family.ts`, its piece sets, `piece-sets.ts`, and the Ascent and Boxwood sound
 sets), a
-pack the user imported from GitHub (`docs/packs.md`), or Lichess's own. They're picked in the user
+pack the user imported from GitHub or their own files (`docs/packs.md`), or Lichess's own. They're picked in the user
 menu's own panels, under an Extension, a Packs and a Lichess tab (`dasher.ts`,
 `panel.ts`, `choices.ts`); packs are imported and removed in the extension's
 settings (`import-section.ts`, `import-form.ts`), or, signed out, in the
@@ -259,7 +259,21 @@ panels themselves, all in `src/content/packs/`:
   asks for them, six files at a time, so no message carries more than a file;
   `src/shared/packs/assemble.ts` puts them together, a stored pack for the
   `pack.json`'s lone parts and one for each board, piece set or sound set it
-  lists; `import.ts` then checks that each image decodes, which needs a DOM.
+  lists; `drawable.ts` then checks that each image decodes, which needs a DOM.
+- The user's own files, dropped on a zone (`drop-zone.ts`, `local-zones.ts`,
+  `local-files.ts`), open the import dialog (`import-dialog.ts`, its slots in
+  `piece-body.ts`, `board-body.ts` and `sound-body.ts`, sorted by
+  `src/shared/packs/assign.ts` and `slots.ts`), where they're named; then
+  (`local-import.ts`) they go the same way through `src/shared/packs/local.ts`: a
+  folder or zip with its `pack.json` is read as GitHub's are, and loose files
+  make items of the zone's kind (`loose.ts`, `loose-names.ts`), a board,
+  piece set or sound set each, stored on its own under a name the user can
+  change (`items.ts`); a board that names no colors takes its
+  squares' (`board-colors.ts`). `src/shared/packs/export.ts` writes the
+  pack the user puts together in the settings' composer (`composer.ts`) as a
+  `pack.json` and its files, zipped (`zip.ts`, fflate), named as the GitHub
+  repository to share it from, `LichessNeoPack_` and its name, with the
+  `lichess-neo-pack` topic (`sharing.ts`).
 - `store.ts` keeps the packs in an IndexedDB database of the page's origin;
   `library.ts` keeps what each part shows in localStorage, so the content
   script knows it at `document_start`, shows a theme or Lichess's at once, and

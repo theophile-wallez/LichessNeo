@@ -6,6 +6,8 @@ playwright-report/
 blob-report/
 .playwright-mcp/
 *.zip
+# The example pack, zipped to be dropped on the settings (scripts/example-pack.ts).
+!packs/warm-wood.zip
 *.crx
 *.pem
 __pycache__/

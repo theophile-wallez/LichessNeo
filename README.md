@@ -54,11 +54,15 @@ Color themes for Lichess's light and dark modes, or one you make in the
 settings' theme editor. Boards: the extension's, all of Lichess's, or one
 you draw. Pieces and sounds: the extension's own, or Lichess's.
 
-Or bring your own: put them in a folder on GitHub with a `pack.json`, paste
-its link in the extension's settings (**Packs**), pick them in **Board &
-sounds**, and they're yours on every page. Private repositories work too,
-with a token. How to make one: [docs/packs.md](docs/packs.md), and a pack to
-start from: [packs/example](packs/example).
+Or bring your own: paste the link of a folder on GitHub with a `pack.json`,
+or drop your pieces, board and sounds in the extension's settings (**Packs**), pick
+them in **Board & sounds**, and they're yours on every page. Private
+repositories work too, with a token, and a pack of your own, put together
+from them, is exported as a zip to share, or to put on GitHub as a
+`LichessNeoPack_…` repository with the `lichess-neo-pack` topic, where others
+[find it](https://github.com/topics/lichess-neo-pack). How to make one: [docs/packs.md](docs/packs.md), and a pack to
+start from: [packs/example](packs/example), zipped in
+[packs/warm-wood.zip](packs/warm-wood.zip) to try it in a drop.
 
 ![Color themes, boards, pieces and sounds](store/en/4-looks.png)
 

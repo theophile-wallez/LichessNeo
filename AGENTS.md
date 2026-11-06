@@ -275,7 +275,7 @@ hold:
   `sounds/boxwood` (the Boxwood set's takes), beside the bundled packages'
   licenses (`scripts/lib/licenses.ts`).
 - `scripts/`: build, package, typecheck, source rules, version, icons, store
-  image rendering, store publishing.
+  image rendering, store publishing, the example pack's zip and samples.
 - `playground/`: the mascots' playground (`pnpm playground`), a page apart
   from the extension and never bundled into it: each coach and the robot on
   a stage, their colors, skin, fur and moods to change, their moves to play.
@@ -285,7 +285,9 @@ hold:
 - `tests/e2e/`: Playwright smoke tests on lichess.org.
 - `tools/`: Python generators, run by hand.
 - `packs/`: the example pack users can import (`docs/packs.md` describes the
-  format).
+  format), `warm-wood.zip`, the same pack zipped by
+  `scripts/example-pack.ts`, to drop on the settings' Packs card, and
+  `samples/`, its parts in other formats (`scripts/example-samples.ts`).
 - `store/`: the store images (`<lang>/<name>.png`), the pages they and the
   extension icon are rendered from (`templates/`), and the listings' texts
   (`listing.md`).

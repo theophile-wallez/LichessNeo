@@ -1,67 +1,24 @@
 import { createElement } from '#shared/dom.ts';
+import { repositoryPage } from '#shared/repository.ts';
 import { message } from '#content/platform/runtime.ts';
-import { packTitle } from '#shared/packs/pack.ts';
 import { fetchPacks } from './import.ts';
+import { importPack, importState, setStatus, statusLine } from './import-status.ts';
 import type { Library } from './library.ts';
+import { localZones } from './local-zones.ts';
 
-// The form that imports packs from a GitHub link, in the extension's
-// settings, and in the user menu's panels when signed out. A private
-// repository's token is used for that import and never kept: the page's
-// storage is Lichess's to read.
+// The form that imports packs, from a GitHub link or the user's own files,
+// in the extension's settings, and in the user menu's panels when signed
+// out. A private repository's token is used for that import and never kept:
+// the page's storage is Lichess's to read.
 
-const HELP_URL = 'https://github.com/theophile-wallez/LichessNeo/blob/main/docs/packs.md';
-
-/** What the last import said, shown again in a section drawn anew. */
-interface ImportState {
-  busy: boolean;
-  message: string;
-  failed: boolean;
-}
-
-const importState: ImportState = { busy: false, message: '', failed: false };
-
-function statusLine(): HTMLElement {
-  const status = createElement('p', {
-    className: 'ln-ext-packs__status',
-    text: importState.message,
-    attrs: { 'aria-live': 'polite' },
-  });
-  status.classList.toggle('ln-ext-packs__status--failed', importState.failed);
-  return status;
-}
-
-function setStatus(text: string, failed: boolean): void {
-  importState.message = text;
-  importState.failed = failed;
-  for (const status of document.querySelectorAll('.ln-ext-packs__status')) {
-    status.textContent = text;
-    status.classList.toggle('ln-ext-packs__status--failed', failed);
-  }
-}
-
-async function importPack(link: string, token: string, library: Library): Promise<void> {
-  importState.busy = true;
-  setStatus(message('packsImporting'), false);
-  try {
-    const download = await fetchPacks(link, token);
-    if ('error' in download) {
-      setStatus(download.error, true);
-      return;
-    }
-    const [first] = download.packs;
-    await library.add(download.packs, download.source);
-    setStatus(message('packsImported', first ? packTitle(first) : ''), false);
-  } catch (error) {
-    console.error('[LichessNeo] pack import failed', error);
-    setStatus(message('packsImportFailed'), true);
-  } finally {
-    importState.busy = false;
-  }
-}
+const HELP_URL = repositoryPage('docs/packs.md');
 
 // The link stays in its field after a failure, to be fixed.
 async function importInto(link: HTMLInputElement, token: string, library: Library): Promise<void> {
-  await importPack(link.value, token, library);
+  await importPack(async () => {
+    const download = await fetchPacks(link.value, token);
+    return 'error' in download ? download : { imports: [download] };
+  }, library);
   if (!importState.failed) link.value = '';
 }
 
@@ -111,7 +68,7 @@ function linkRow(): LinkRow {
   return { row, link, button };
 }
 
-/** The link to import, the token of a private repository, and what the import said. */
+/** The GitHub link and its token, the zones for the user's files, and what the import said. */
 export function importForm(library: Library): HTMLElement {
   const form = createElement('div', { className: 'ln-ext-packs__import' });
   const { row, link, button } = linkRow();
@@ -121,7 +78,7 @@ export function importForm(library: Library): HTMLElement {
     text: message('packsHelp'),
     attrs: { href: HELP_URL, target: '_blank', rel: 'noopener' },
   });
-  form.append(row, token.field, statusLine(), help);
+  form.append(row, token.field, help, ...localZones(library), statusLine());
   const submit = (): void => {
     if (importState.busy) return;
     if (link.value.trim() === '') {

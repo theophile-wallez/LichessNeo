@@ -61,6 +61,19 @@
   box-shadow: 0 1px 3px var(--ln-ext-shade-35);
 }
 
+.ln-ext-pack__thumb--sound {
+  background: color-mix(in srgb, var(--ln-ext-purple) 20%, transparent);
+}
+
+.ln-ext-pack__thumb--sound::after {
+  content: '';
+  width: 55%;
+  height: 55%;
+  background: color-mix(in srgb, var(--ln-ext-purple) 80%, var(--ln-ext-text-strong));
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/music-note-01.svg') center /
+    contain no-repeat;
+}
+
 .ln-ext-pack__piece {
   width: 80%;
   height: 80%;
@@ -88,12 +101,46 @@
   text-decoration: underline;
 }
 
+/* One of the user's own items: its name a field that looks like text until it's hovered. */
+.ln-ext-pack__rename {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 320px;
+  height: 28px;
+  margin: 0;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  color: var(--ln-ext-text-strong);
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s !important;
+}
+
+.ln-ext-pack--item .ln-ext-pack__parts {
+  padding-inline-start: 9px;
+}
+
+.ln-ext-pack__rename:hover {
+  border-color: var(--ln-ext-lift-12);
+}
+
+.ln-ext-pack__rename:focus {
+  border-color: var(--ln-ext-accent);
+  outline: none;
+  background: var(--ln-ext-shade-25);
+}
+
 .ln-ext-pack__parts {
   color: var(--ln-ext-text-dim);
   font-size: 12.5px;
 }
 
-.ln-ext-pack__remove {
+.ln-ext-pack__button {
   flex: none;
   height: 30px;
   padding: 0 12px;

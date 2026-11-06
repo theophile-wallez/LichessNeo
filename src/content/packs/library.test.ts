@@ -201,4 +201,23 @@ describe('createLibrary', () => {
     // The same object: a new one would send its sounds to the page again.
     expect(shown.at(-1)?.sound).toBe(CLICKS);
   });
+
+  it('renames an item, keeping its id and its pick', async () => {
+    const mochi = { ...fakePack('file:1/', ['piece']), name: 'Mochi' };
+    const { save, library: packs } = await library([mochi]);
+    packs.choose('piece', mochi.id);
+    await packs.rename(mochi.id, '  Pop ');
+    expect(save).toHaveBeenLastCalledWith({ ...mochi, name: 'Pop' });
+    expect(packs.packs()).toEqual([{ ...mochi, name: 'Pop' }]);
+    expect(packs.current('piece')).toBe(mochi.id);
+  });
+
+  it('keeps the name of an item renamed to nothing, or to the same', async () => {
+    const mochi = { ...fakePack('file:1/', ['piece']), name: 'Mochi' };
+    const { save, library: packs } = await library([mochi]);
+    await packs.rename(mochi.id, '   ');
+    await packs.rename(mochi.id, 'Mochi');
+    expect(save).not.toHaveBeenCalled();
+    expect(packs.packs()).toEqual([mochi]);
+  });
 });

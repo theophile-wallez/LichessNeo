@@ -1,0 +1,263 @@
+/* ---- The Packs card's import dialog (content/packs/import-dialog.ts) --- */
+
+/* What's dropped on a zone, before it's imported: its name, then its slots.
+ * The frame and backdrop are every dialog's (pages/dialogs.css); the hue and
+ * the icon, its zone's (settings-packs-drop.css). */
+dialog.ln-ext-pack-dialog {
+  box-sizing: border-box;
+  width: min(640px, calc(100vw - 24px));
+  max-width: none;
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  overflow: hidden;
+  color: var(--ln-ext-text);
+}
+
+/* Centered: every dialog's own rule (pages/dialogs.css) pins it to the top. */
+html dialog.ln-ext-pack-dialog {
+  margin: auto !important;
+}
+
+.ln-ext-pack-dialog__card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  max-height: calc(100dvh - 26px);
+  padding: 20px 22px;
+}
+
+.ln-ext-pack-dialog__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.ln-ext-pack-dialog__head .ln-ext-packs__drop-icon {
+  flex: none;
+  margin: 0;
+}
+
+.ln-ext-pack-dialog__heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.ln-ext-pack-dialog__title {
+  margin: 0;
+  color: var(--ln-ext-text-strong);
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.ln-ext-pack-dialog__hint {
+  margin: 4px 0 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.ln-ext-pack-dialog__close {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ln-ext-text-dim);
+  cursor: pointer;
+}
+
+.ln-ext-pack-dialog__close:hover {
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-pack-dialog__close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ln-ext-pack-dialog__name {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ln-ext-pack-dialog__label {
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ln-ext-pack-dialog__name input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--ln-ext-lift-12);
+  border-radius: 8px;
+  background: var(--ln-ext-shade-25);
+  color: var(--ln-ext-text-strong);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ln-ext-pack-dialog__name input:focus {
+  border-color: var(--ln-ext-drop-color);
+  outline: none;
+}
+
+.ln-ext-pack-dialog__replaces {
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+}
+
+.ln-ext-pack-dialog__replaces:empty {
+  display: none;
+}
+
+/* What scrolls when it's taller than the window: the name and the buttons stay. */
+.ln-ext-pack-dialog__body {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  margin: 0 -8px;
+  padding: 2px 8px;
+  overflow-y: auto;
+}
+
+/* A column that scrolls would squeeze its children to fit otherwise. */
+.ln-ext-pack-dialog__body > * {
+  flex: none;
+}
+
+.ln-ext-pack-dialog__add {
+  align-self: flex-start;
+  height: 34px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ln-ext-pack-dialog__add:hover {
+  background: var(--ln-ext-btn-grey-hover);
+}
+
+/* The files whose name says no slot: chips to drag, or to tap then put. */
+.ln-ext-pack-dialog__aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ln-ext-orange) 10%, transparent);
+}
+
+.ln-ext-pack-dialog__aside-label {
+  flex-basis: 100%;
+  color: var(--ln-ext-text);
+  font-size: 12.5px;
+}
+
+.ln-ext-pack-dialog__loose {
+  max-width: 100%;
+  overflow: hidden;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 999px;
+  background: var(--ln-ext-shade-25);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-12);
+  color: var(--ln-ext-text-strong);
+  font: inherit;
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: grab;
+}
+
+.ln-ext-pack-dialog__loose--picked {
+  box-shadow: inset 0 0 0 2px var(--ln-ext-drop-color);
+}
+
+.ln-ext-pack-dialog__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.ln-ext-pack-dialog__status {
+  flex: 1;
+  min-width: 160px;
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+}
+
+@media (max-width: 520px) {
+  .ln-ext-pack-dialog__status {
+    flex-basis: 100%;
+  }
+
+  .ln-ext-pack-dialog__cancel,
+  .ln-ext-pack-dialog__confirm {
+    flex: 1;
+  }
+}
+
+.ln-ext-pack-dialog__status--failed {
+  color: var(--ln-ext-red-light);
+}
+
+.ln-ext-pack-dialog__cancel,
+.ln-ext-pack-dialog__confirm {
+  height: 38px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ln-ext-pack-dialog__cancel {
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-pack-dialog__cancel:hover {
+  background: var(--ln-ext-btn-grey-hover);
+}
+
+.ln-ext-pack-dialog__confirm {
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white);
+}
+
+.ln-ext-pack-dialog__confirm:hover {
+  background: var(--ln-ext-btn-primary-hover);
+}
+
+.ln-ext-pack-dialog__confirm:disabled {
+  opacity: 0.45;
+  cursor: default;
+}

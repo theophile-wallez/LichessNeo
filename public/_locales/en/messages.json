@@ -536,7 +536,7 @@
     "description": "The badge beside the Packs card's title: importing packs is still new."
   },
   "packsBody": {
-    "message": "Your own board, pieces or sounds, from a pack on GitHub. Once imported, pick them above, or in the user menu.",
+    "message": "Your own board, pieces or sounds: import a pack from GitHub, or drop your files below. Once imported, pick them above, or in the user menu.",
     "description": "What the packs card is for."
   },
   "packsEmpty": {
@@ -614,6 +614,318 @@
   "packsHelp": {
     "message": "How to make a pack",
     "description": "The link to the pack format's guide."
+  },
+  "packsOrLocal": {
+    "message": "or from your computer",
+    "description": "Between the field for a pack's link and the zones for the user's own files."
+  },
+  "packsDropPieces": {
+    "message": "Pieces",
+    "description": "The title of the zone that takes piece images."
+  },
+  "packsDropPiecesHint": {
+    "message": "12 images: wK, wQ… bP",
+    "description": "How the zone for pieces wants its files."
+  },
+  "packsDropBoard": {
+    "message": "Board",
+    "description": "The title of the zone that takes a board image."
+  },
+  "packsDropBoardHint": {
+    "message": "An image of the whole board",
+    "description": "What the zone for a board wants."
+  },
+  "packsDropSounds": {
+    "message": "Sounds",
+    "description": "The title of the zone that takes sounds."
+  },
+  "packsDropSoundsHint": {
+    "message": "Named move-self, capture…",
+    "description": "How the zone for sounds wants its files."
+  },
+  "packsDropPack": {
+    "message": "Import a local pack (.zip)",
+    "description": "The line that takes a pack exported as a zip."
+  },
+  "packsRename": {
+    "message": "Rename",
+    "description": "The tooltip of the field that renames one of the user's own boards, piece sets or sound sets."
+  },
+  "packsCompose": {
+    "message": "Make a pack to share",
+    "description": "The title of the part of the packs card that exports a pack."
+  },
+  "packsComposeHint": {
+    "message": "Pick its boards, pieces and sounds, name it, and export it as a zip anyone can drop on their own Packs card.",
+    "description": "Under the composer's title."
+  },
+  "packsComposeName": {
+    "message": "The pack's name",
+    "description": "The placeholder of the field that names the pack to export."
+  },
+  "packsComposeDefault": {
+    "message": "My pack",
+    "description": "The name of the pack to export until the user changes it."
+  },
+  "packsComposeBoards": {
+    "message": "Boards",
+    "description": "The composer's group of boards."
+  },
+  "packsComposePieces": {
+    "message": "Pieces",
+    "description": "The composer's group of piece sets."
+  },
+  "packsComposeSounds": {
+    "message": "Sounds",
+    "description": "The composer's group of sound sets."
+  },
+  "packsComposeExport": {
+    "message": "Export (.zip)",
+    "description": "The button that saves the composed pack as a zip."
+  },
+  "packsShareTitle": {
+    "message": "Share it on GitHub",
+    "description": "The title of the composer's part on sharing the pack on GitHub."
+  },
+  "packsShareHint": {
+    "message": "Unzip it into a repository of this name, with this topic: others find it among the packs, and import it from its link.",
+    "description": "How to share the exported pack on GitHub so others find it."
+  },
+  "packsShareRepo": {
+    "message": "Repository",
+    "description": "Before the name the pack's GitHub repository takes."
+  },
+  "packsShareTopic": {
+    "message": "Topic",
+    "description": "Before the topic the pack's GitHub repository takes."
+  },
+  "packsShareHelp": {
+    "message": "How to share a pack",
+    "description": "The link to the guide's part on sharing a pack."
+  },
+  "packsDialogPieces": {
+    "message": "Import pieces",
+    "description": "The title of the dialog that imports a piece set."
+  },
+  "packsDialogBoard": {
+    "message": "Import a board",
+    "description": "The title of the dialog that imports a board."
+  },
+  "packsDialogSounds": {
+    "message": "Import sounds",
+    "description": "The title of the dialog that imports a sound set."
+  },
+  "packsDialogPiecesHint": {
+    "message": "Those named wK, bQ… go in their square on their own. Click a square to pick its image, or drag a file onto it.",
+    "description": "Under the pieces dialog's title."
+  },
+  "packsDialogBoardHint": {
+    "message": "One image of the 64 squares, a8 at the top left. Click it to pick another.",
+    "description": "Under the board dialog's title."
+  },
+  "packsDialogSoundsHint": {
+    "message": "Those named move-self, capture… go in their row on their own. Pick only the ones you like: Lichess plays the rest.",
+    "description": "Under the sounds dialog's title."
+  },
+  "packsDialogName": {
+    "message": "Name",
+    "description": "The label of the field that names what is imported."
+  },
+  "packsDialogNamePieces": {
+    "message": "The name of these pieces",
+    "description": "The placeholder of the pieces' name field."
+  },
+  "packsDialogNameBoard": {
+    "message": "The name of this board",
+    "description": "The placeholder of the board's name field."
+  },
+  "packsDialogNameSounds": {
+    "message": "The name of these sounds",
+    "description": "The placeholder of the sounds' name field."
+  },
+  "packsDialogReplaces": {
+    "message": "Replaces your “$1”.",
+    "description": "Under the name field, when the user already has one of that name."
+  },
+  "packsDialogNoName": {
+    "message": "Give it a name.",
+    "description": "Why the import can't go yet."
+  },
+  "packsDialogMissing": {
+    "message": "Still missing: $1.",
+    "description": "Why the pieces can't be imported yet, with the pieces missing."
+  },
+  "packsDialogNoBoard": {
+    "message": "Pick an image.",
+    "description": "Why the board can't be imported yet."
+  },
+  "packsDialogNoSound": {
+    "message": "Add at least one sound.",
+    "description": "Why the sounds can't be imported yet."
+  },
+  "packsDialogLoose": {
+    "message": "Not recognized: drag each onto its slot, or tap it then its slot.",
+    "description": "Before the files whose name says no slot."
+  },
+  "packsDialogAdd": {
+    "message": "Add files",
+    "description": "The button that adds several files at once."
+  },
+  "packsDialogPick": {
+    "message": "Pick a file",
+    "description": "On a slot with no file yet."
+  },
+  "packsDialogChange": {
+    "message": "Pick another",
+    "description": "On the board's slot once it has an image."
+  },
+  "packsDialogPlay": {
+    "message": "Play",
+    "description": "The button that plays a sound."
+  },
+  "packsDialogClear": {
+    "message": "Remove",
+    "description": "The button that empties a slot."
+  },
+  "packsDialogCancel": {
+    "message": "Cancel",
+    "description": "The dialog's button that closes it without importing."
+  },
+  "packsDialogImport": {
+    "message": "Import",
+    "description": "The dialog's button that imports."
+  },
+  "packsDialogClose": {
+    "message": "Close",
+    "description": "The label of the dialog's close button."
+  },
+  "packsRoleKing": {
+    "message": "King",
+    "description": "A piece's role or side, over the pieces dialog's squares."
+  },
+  "packsRoleQueen": {
+    "message": "Queen",
+    "description": "A piece's role or side, over the pieces dialog's squares."
+  },
+  "packsRoleRook": {
+    "message": "Rook",
+    "description": "A piece's role or side, over the pieces dialog's squares."
+  },
+  "packsRoleBishop": {
+    "message": "Bishop",
+    "description": "A piece's role or side, over the pieces dialog's squares."
+  },
+  "packsRoleKnight": {
+    "message": "Knight",
+    "description": "A piece's role or side, over the pieces dialog's squares."
+  },
+  "packsRolePawn": {
+    "message": "Pawn",
+    "description": "A piece's role or side, over the pieces dialog's squares."
+  },
+  "packsSideWhite": {
+    "message": "White",
+    "description": "A piece's role or side, over the pieces dialog's squares."
+  },
+  "packsSideBlack": {
+    "message": "Black",
+    "description": "A piece's role or side, over the pieces dialog's squares."
+  },
+  "packsNotImage": {
+    "message": "$1 is not an image.",
+    "description": "A file dropped on the pieces or the board."
+  },
+  "packsNotSound": {
+    "message": "$1 is not a sound.",
+    "description": "A file dropped on the sounds."
+  },
+  "packsSoundMoveSelf": {
+    "message": "Your move, or a move of the side you play",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundMoveOpponent": {
+    "message": "The other side’s move",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundMoveCheck": {
+    "message": "A move that gives check",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundMoveSlide": {
+    "message": "A long move",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundMoveSlideCheck": {
+    "message": "A long move that gives check",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundMoveKnight": {
+    "message": "A knight’s move",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundCapture": {
+    "message": "A capture",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundCaptureCheck": {
+    "message": "A capture that gives check",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundCaptureSlide": {
+    "message": "A capture at the end of a long move",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundCaptureSlideCheck": {
+    "message": "The same, giving check",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundCastle": {
+    "message": "Castling",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundPromote": {
+    "message": "A promotion",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundCapturePromote": {
+    "message": "A promotion that captures",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundCheckmate": {
+    "message": "Checkmate",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundPremove": {
+    "message": "A premove set",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundIllegal": {
+    "message": "A move the board refuses",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundNotify": {
+    "message": "A challenge, a message, a confirmation",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundTenseconds": {
+    "message": "Low time",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundGameStart": {
+    "message": "The start of a game",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsSoundGameEnd": {
+    "message": "The end of a game",
+    "description": "What the sound of that row plays on, in the sounds dialog."
+  },
+  "packsDialogMoreSounds": {
+    "message": "$1 more sounds, which few sets have",
+    "description": "The fold of the rarer sounds in the sounds dialog, with how many."
+  },
+  "packsExample": {
+    "message": "See an example",
+    "description": "A link, in each zone for the user's files, to the example pack's files of that kind."
   },
   "appearanceTitle": {
     "message": "Colors",

@@ -1,0 +1,239 @@
+/* ---- The import dialog's slots (content/packs/piece-body.ts, sound-body.ts, board-body.ts) --- */
+
+/* A slot: a dashed well until it has a file, a plain card once it has. */
+.ln-ext-pack-slot {
+  position: relative;
+  box-sizing: border-box;
+  border: 1.5px dashed var(--ln-ext-lift-20);
+  border-radius: 10px;
+  background: var(--ln-ext-shade-12);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s !important;
+}
+
+.ln-ext-pack-slot--filled {
+  border-style: solid;
+  border-color: var(--ln-ext-lift-8);
+}
+
+.ln-ext-pack-slot:hover,
+.ln-ext-pack-slot:focus-visible,
+.ln-ext-pack-slot--over {
+  border-color: var(--ln-ext-drop-color);
+  outline: none;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 10%, transparent);
+}
+
+.ln-ext-pack-slot__image {
+  display: block;
+  background: center / contain no-repeat;
+}
+
+.ln-ext-pack-slot__code {
+  color: var(--ln-ext-text-dim);
+  font-family: ui-monospace, monospace;
+  font-size: 11.5px;
+}
+
+.ln-ext-pack-slot__clear {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--ln-ext-shade-35);
+  color: var(--ln-ext-text-strong);
+  cursor: pointer;
+}
+
+.ln-ext-pack-slot__clear:hover {
+  background: var(--ln-ext-btn-red);
+}
+
+.ln-ext-pack-slot__clear svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* The pieces: a column of the sides' names, then a column for each role. */
+.ln-ext-pack-dialog__pieces {
+  display: grid;
+  grid-template-columns: auto repeat(6, minmax(0, 1fr));
+  align-items: center;
+  gap: 6px;
+}
+
+.ln-ext-pack-dialog__role,
+.ln-ext-pack-dialog__side {
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ln-ext-pack-dialog__side {
+  padding-inline-end: 4px;
+  text-align: start;
+}
+
+.ln-ext-pack-dialog__pieces .ln-ext-pack-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  padding: 4px;
+  background-color: color-mix(in srgb, #c4936a 30%, var(--ln-ext-shade-12));
+}
+
+.ln-ext-pack-dialog__pieces .ln-ext-pack-slot__image {
+  flex: 1;
+  width: 100%;
+}
+
+.ln-ext-pack-dialog__pieces .ln-ext-pack-slot--filled .ln-ext-pack-slot__code {
+  display: none;
+}
+
+.ln-ext-pack-dialog__pieces .ln-ext-pack-slot__clear {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  opacity: 0;
+}
+
+.ln-ext-pack-dialog__pieces .ln-ext-pack-slot:hover .ln-ext-pack-slot__clear,
+.ln-ext-pack-dialog__pieces .ln-ext-pack-slot__clear:focus-visible {
+  opacity: 1;
+}
+
+/* A touch screen has no hover to show it on. */
+@media (hover: none) {
+  .ln-ext-pack-dialog__pieces .ln-ext-pack-slot__clear {
+    opacity: 1;
+  }
+}
+
+/* The board: large enough to see it's whole and the right way up. */
+.ln-ext-pack-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+}
+
+.ln-ext-pack-board .ln-ext-pack-slot__image {
+  width: min(240px, 60vw);
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background-size: cover;
+}
+
+.ln-ext-pack-board:not(.ln-ext-pack-slot--filled) .ln-ext-pack-slot__image {
+  background: var(--ln-ext-shade-18);
+}
+
+.ln-ext-pack-board__pick {
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* The sounds: a row each, what it plays on, then its file or a button to pick one. */
+.ln-ext-pack-dialog__sounds {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ln-ext-pack-sound {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 6px 8px 6px 12px;
+}
+
+.ln-ext-pack-sound__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ln-ext-pack-sound__what {
+  color: var(--ln-ext-text-strong);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.ln-ext-pack-sound__pick {
+  flex: none;
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+}
+
+.ln-ext-pack-sound__file {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  max-width: 50%;
+  padding: 3px 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-drop-color) 16%, transparent);
+}
+
+.ln-ext-pack-sound__file-name {
+  overflow: hidden;
+  color: var(--ln-ext-text-strong);
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ln-ext-pack-sound__play {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--ln-ext-drop-color);
+  color: var(--ln-ext-ink);
+  cursor: pointer;
+}
+
+.ln-ext-pack-sound__play svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ln-ext-pack-dialog__more {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ln-ext-pack-dialog__more > summary {
+  padding: 6px 2px;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ln-ext-pack-dialog__more > summary:hover {
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-pack-dialog__more[open] {
+  gap: 6px;
+}

@@ -197,6 +197,9 @@ importers:
       '@hugeicons/core-free-icons':
         specifier: 4.3.5
         version: 4.3.5
+      fflate:
+        specifier: ^0.8.3
+        version: 0.8.3
       three:
         specifier: 0.186.1
         version: 0.186.1
@@ -222,9 +225,6 @@ importers:
       '@vitest/coverage-v8':
         specifier: ^5.0.5
         version: 5.0.5(vitest@5.0.5)
-      fflate:
-        specifier: ^0.8.3
-        version: 0.8.3
       happy-dom:
         specifier: ^21.0.3
         version: 21.0.3
