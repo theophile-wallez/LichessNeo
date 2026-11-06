@@ -7,11 +7,12 @@ import type { Pack } from '#shared/packs/pack.ts';
 import { dataUrlBytes } from '#shared/packs/sniff.ts';
 import { SOUND_NAMES, type SoundName } from '#shared/sounds.ts';
 import { message } from '#content/platform/runtime.ts';
-import { describedBy } from './sound-body.ts';
+import { setBeating } from './wave-beat.ts';
 
 // A sound set's tile on the Packs card, as a little player
-// (styles/pages/settings-packs-items.css): its button plays the set's sounds
-// one after the other, its wave lit as they go, what each plays on below.
+// (styles/pages/settings-packs-items.css): a wave in the middle, lit as the
+// sounds play one after the other, and at its foot the button that plays them
+// beside what the one playing plays on.
 
 /** The pause between two sounds, so each is heard apart. */
 const GAP_MS = 250;
@@ -33,6 +34,10 @@ function tracks({ sounds = {} }: Pack): Track[] {
     return url === undefined ? [] : [{ sound, url }];
   });
 }
+
+/** `move-self` is named by `packsSoundNameMoveSelf`: a few words, where the dialog has a line. */
+const shortName = (sound: SoundName): string =>
+  `packsSoundName${sound.replace(/(?:^|-)([a-z])/g, (_, letter: string) => letter.toUpperCase())}`;
 
 const restingCaption = (count: number): string =>
   count === 1 ? message('packsSoundCountOne') : message('packsSoundCount', String(count));
@@ -56,6 +61,7 @@ function draw(list: readonly Track[], parts: Parts, playing: number | undefined)
   for (const [i, bar] of bars.entries()) {
     const sound = Math.floor((i * list.length) / bars.length);
     bar.classList.toggle('ln-ext-player__bar--on', sound === playing);
+    setBeating(bar, sound === playing, i);
     bar.classList.toggle('ln-ext-player__bar--played', playing !== undefined && sound < playing);
   }
   const label = message(playing === undefined ? 'packsPlaySet' : 'packsStopSet');
@@ -63,7 +69,7 @@ function draw(list: readonly Track[], parts: Parts, playing: number | undefined)
   button.title = label;
   setHtml(button, hugeicon(playing === undefined ? PlayIcon : StopIcon));
   const track = playing === undefined ? undefined : list[playing];
-  caption.textContent = track ? message(describedBy(track.sound)) : restingCaption(list.length);
+  caption.textContent = track ? message(shortName(track.sound)) : restingCaption(list.length);
   caption.title = caption.textContent;
 }
 
@@ -123,7 +129,9 @@ export function soundPlayer(item: Pack): HTMLElement {
   const caption = createElement('span', { className: 'ln-ext-player__caption' });
   const parts = { box, button, bars, caption };
   button.addEventListener('click', player(list, parts));
-  box.append(button, wave, caption);
+  const foot = createElement('span', { className: 'ln-ext-player__foot' });
+  foot.append(button, caption);
+  box.append(wave, foot);
   draw(list, parts, undefined);
   return box;
 }

@@ -92,18 +92,18 @@ describe('a sound set’s player', () => {
     const player = mount(CLICKS);
     button(player).click();
     await vi.advanceTimersByTimeAsync(0);
-    expect(caption(player)).toBe('packsSoundMoveSelf');
+    expect(caption(player)).toBe('packsSoundNameMoveSelf');
     expect(player.classList).toContain('ln-ext-player--playing');
     expect(button(player).getAttribute('aria-label')).toBe('packsStopSet');
     expect(lit(player)).toBe(6);
     expect(last().src).toBe('blob:1');
     last().end();
     vi.advanceTimersByTime(250);
-    expect(caption(player)).toBe('packsSoundCapture');
+    expect(caption(player)).toBe('packsSoundNameCapture');
     expect(revoke).toHaveBeenCalledWith('blob:1');
     last().end();
     vi.advanceTimersByTime(250);
-    expect(caption(player)).toBe('packsSoundCastle');
+    expect(caption(player)).toBe('packsSoundNameCastle');
     expect(queryAll(player, '.ln-ext-player__bar--played', HTMLElement)).toHaveLength(12);
     last().end();
     vi.advanceTimersByTime(250);
@@ -132,7 +132,7 @@ describe('a sound set’s player', () => {
     button(second).click();
     expect(playing.paused).toBe(true);
     expect(first.classList).not.toContain('ln-ext-player--playing');
-    expect(caption(second)).toBe('packsSoundNotify');
+    expect(caption(second)).toBe('packsSoundNameNotify');
   });
 
   it('stops when a sound can’t play, or once its tile is gone', async () => {

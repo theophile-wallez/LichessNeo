@@ -99,6 +99,10 @@
     "message": "Your packs",
     "description": "Over the boards, pieces or sounds of the packs the user imported."
   },
+  "looksPacksMine": {
+    "message": "From your files",
+    "description": "The looks card's section of the boards, pieces and sounds the user made from their own files."
+  },
   "looksClassic": {
     "message": "Classic",
     "description": "Over the extension's plain boards and the packs', apart from the backlit ones."
@@ -976,7 +980,7 @@
     "description": "The fold of the rarer sounds in the sounds dialog, with how many."
   },
   "packsExample": {
-    "message": "See an example",
+    "message": "Example",
     "description": "A link, in each zone for the user's files, to the example pack's files of that kind."
   },
   "appearanceTitle": {
@@ -2357,5 +2361,85 @@
   "packsSoundCountOne": {
     "message": "1 sound",
     "description": "A sound set's tile, at rest, when it has one sound."
+  },
+  "packsSoundNameMoveSelf": {
+    "message": "Your move",
+    "description": "A sound set's tile, while its move-self sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameMoveOpponent": {
+    "message": "Their move",
+    "description": "A sound set's tile, while its move-opponent sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameMoveCheck": {
+    "message": "Check",
+    "description": "A sound set's tile, while its move-check sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameMoveSlide": {
+    "message": "Long move",
+    "description": "A sound set's tile, while its move-slide sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameMoveSlideCheck": {
+    "message": "Long move, check",
+    "description": "A sound set's tile, while its move-slide-check sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameMoveKnight": {
+    "message": "Knight move",
+    "description": "A sound set's tile, while its move-knight sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameCapture": {
+    "message": "Capture",
+    "description": "A sound set's tile, while its capture sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameCaptureCheck": {
+    "message": "Capture, check",
+    "description": "A sound set's tile, while its capture-check sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameCaptureSlide": {
+    "message": "Long capture",
+    "description": "A sound set's tile, while its capture-slide sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameCaptureSlideCheck": {
+    "message": "Long capture, check",
+    "description": "A sound set's tile, while its capture-slide-check sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameCastle": {
+    "message": "Castling",
+    "description": "A sound set's tile, while its castle sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNamePromote": {
+    "message": "Promotion",
+    "description": "A sound set's tile, while its promote sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameCapturePromote": {
+    "message": "Promotion, capture",
+    "description": "A sound set's tile, while its capture-promote sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameCheckmate": {
+    "message": "Checkmate",
+    "description": "A sound set's tile, while its checkmate sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNamePremove": {
+    "message": "Premove",
+    "description": "A sound set's tile, while its premove sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameIllegal": {
+    "message": "Refused move",
+    "description": "A sound set's tile, while its illegal sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameNotify": {
+    "message": "Notification",
+    "description": "A sound set's tile, while its notify sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameTenseconds": {
+    "message": "Low time",
+    "description": "A sound set's tile, while its tenseconds sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameGameStart": {
+    "message": "Game start",
+    "description": "A sound set's tile, while its game-start sound plays: what it plays on, in a few words."
+  },
+  "packsSoundNameGameEnd": {
+    "message": "Game end",
+    "description": "A sound set's tile, while its game-end sound plays: what it plays on, in a few words."
   }
 }

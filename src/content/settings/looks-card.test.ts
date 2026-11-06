@@ -106,8 +106,9 @@ describe('a Board & sounds card', () => {
     const [ours, packs] = queryAll(pieces.looks.element, '.ln-ext-looks__grid', HTMLElement);
     expect(choices(ours)).toEqual(PIECE_SETS.map(set => set.id));
     expect(choices(packs)).toEqual([WOOD.id]);
-    expect(packs?.hidden).toBe(false);
-    expect(packs?.previousElementSibling?.textContent).toBe('looksPacks');
+    const section = queryOne(pieces.looks.element, '.ln-ext-looks__packs', HTMLElement);
+    expect(section?.hidden).toBe(false);
+    expect(section?.previousElementSibling?.textContent).toBe('looksPacks');
     expect(
       queryAll(pieces.looks.element, 'img.ln-ext-src-thumb', HTMLImageElement).map(image =>
         image.getAttribute('src'),
@@ -115,12 +116,30 @@ describe('a Board & sounds card', () => {
     ).toEqual([WOOD.pieces?.wN]);
   });
 
+  it('sets the packs apart by where they came from: the user’s files, then each pack, the newest first', async () => {
+    const own = { ...fakePack('file:1/', ['board']), name: 'Harbor', link: '' };
+    const zip = { ...fakePack('local:Warm/', ['board']), link: '', added: 1 };
+    const set = 'ann/set/main/';
+    const listed = { packName: 'Set', link: 'https://github.com/ann/set/tree/main', added: 2 };
+    const light = { ...fakePack(`${set}#board:Light`, ['board']), ...listed };
+    const dark = { ...fakePack(`${set}#board:Dark`, ['board']), ...listed };
+    const boards = await card('board', [zip, light, own, dark]);
+    const section = queryOne(boards.looks.element, '.ln-ext-looks__packs', HTMLElement);
+    if (!section) throw new Error('No packs');
+    expect(
+      queryAll(section, '.ln-ext-looks__sub', HTMLElement).map(title => title.textContent),
+    ).toEqual(['looksPacksMine', 'Setann/set@main', 'Pack local:Warm/packsFromZip']);
+    expect(
+      queryAll(section, '.ln-ext-looks__grid', HTMLElement).map(grid => choices(grid)),
+    ).toEqual([[own.id], [light.id, dark.id], [zip.id]]);
+  });
+
   it('leaves the packs’ heading out while no pack has the part', async () => {
     const pieces = await card('piece', [CLICKS]);
-    const [, packs] = queryAll(pieces.looks.element, '.ln-ext-looks__grid', HTMLElement);
-    expect(packs?.childElementCount).toBe(0);
-    expect(packs?.hidden).toBe(true);
-    expect(packs?.previousElementSibling).toHaveProperty('hidden', true);
+    const section = queryOne(pieces.looks.element, '.ln-ext-looks__packs', HTMLElement);
+    expect(section?.childElementCount).toBe(0);
+    expect(section?.hidden).toBe(true);
+    expect(section?.previousElementSibling).toHaveProperty('hidden', true);
   });
 
   it('ends the pieces’ card with their black’s color, which holds for Lichess’s sets too', async () => {

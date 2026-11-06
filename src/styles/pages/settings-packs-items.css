@@ -101,6 +101,7 @@
   color: var(--ln-ext-text-strong);
   font-size: 13px;
   font-weight: 700;
+  line-height: 18px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -177,22 +178,28 @@
   color: var(--ln-ext-white);
 }
 
-/* A sound set's player, over its preview, dark on the hue as the pick's mark: the button, a wave whose bars the
-   sounds share, lit in turn, and what the one playing plays on. */
+/* A sound set's player, over its preview: a wave in the middle, clear of
+   the corners' check and buttons, then the button, dark on the hue as the
+   pick's mark, beside what the sound playing plays on. */
 .ln-ext-player {
   position: absolute;
   top: 8px;
   right: 8px;
   left: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  display: grid;
+  grid-template-rows: 1fr auto;
   aspect-ratio: 1;
-  padding: 24px 8px 6px;
+  overflow: hidden;
+  padding: 8px;
   box-sizing: border-box;
   pointer-events: none;
+}
+
+.ln-ext-player__foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
 }
 
 .ln-ext-player__play {
@@ -200,8 +207,8 @@
   flex: none;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border: none;
   border-radius: 50%;
@@ -224,17 +231,19 @@
 }
 
 .ln-ext-player__play svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 
 .ln-ext-player__bars {
   display: flex;
+  align-self: end;
+  margin-bottom: 6px;
   align-items: center;
   justify-content: center;
   gap: 2px;
   width: 100%;
-  height: 24px;
+  height: 30px;
 }
 
 .ln-ext-player__bar {
@@ -249,23 +258,14 @@
   background: color-mix(in srgb, var(--ln-ext-drop-color) 75%, transparent);
 }
 
+/* It beats as its sound plays: content/packs/wave-beat.ts. */
 .ln-ext-player__bar--on {
   background: var(--ln-ext-drop-color);
-  animation: ln-ext-player-beat 0.5s ease-in-out infinite alternate;
-}
-
-@keyframes ln-ext-player-beat {
-  from {
-    transform: scaleY(0.6);
-  }
-  to {
-    transform: scaleY(1.25);
-  }
 }
 
 .ln-ext-player__caption {
   overflow: hidden;
-  max-width: 100%;
+  min-width: 0;
   color: var(--ln-ext-text-dim);
   font-size: 11.5px;
   line-height: 1.3;
@@ -277,25 +277,64 @@
   color: var(--ln-ext-text-strong);
 }
 
-/* The zone that adds one, as tall as the tiles beside it. */
+/* The zone that adds one, the size of a tile: an invisible square spans its
+   rows, with room for a tile's name under it (8px gap, 18px line, 2px
+   padding), and its text sits in the middle. Its border shrinks the square
+   by as much as it adds, so the heights match. */
 .ln-ext-packs__tiles .ln-ext-packs__drop {
-  justify-content: center;
-  min-height: 150px;
-  padding: 12px 8px;
+  display: grid;
+  grid-template-rows: 1fr repeat(4, auto) 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 0;
+  padding: 8px;
+  container-type: inline-size;
+}
+
+.ln-ext-packs__tiles .ln-ext-packs__drop::before {
+  content: '';
+  grid-area: 1 / 1 / -1 / 2;
+  justify-self: stretch;
+  box-sizing: content-box;
+  aspect-ratio: 1;
+  padding-bottom: 28px;
+}
+
+.ln-ext-packs__tiles .ln-ext-packs__drop-icon {
+  grid-area: 2 / 1;
 }
 
 .ln-ext-packs__tiles .ln-ext-packs__drop-title {
+  grid-area: 3 / 1;
   font-size: 13.5px;
 }
 
 .ln-ext-packs__tiles .ln-ext-packs__drop-hint {
-  margin-bottom: 6px;
+  grid-area: 4 / 1;
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 2px 0 8px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .ln-ext-packs__tiles .ln-ext-packs__example {
+  grid-area: 5 / 1;
   margin-top: 0;
   padding: 4px 10px 4px 8px;
   font-size: 12px;
+}
+
+/* A narrow tile keeps its icon, its title and its example: the hint
+   wouldn't fit. */
+@container (max-width: 110px) {
+  .ln-ext-packs__tiles .ln-ext-packs__drop-hint {
+    display: none;
+  }
+
+  .ln-ext-packs__tiles .ln-ext-packs__drop-title {
+    margin-bottom: 8px;
+  }
 }
 
 /* A phone: smaller tiles, two or three a row. */

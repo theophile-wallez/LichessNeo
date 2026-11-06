@@ -2,7 +2,7 @@ import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
 import { closestTo, createElement, queryAll, setData, setStyleProperty } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
-import { hasPart, type Pack, type PartKind } from '#shared/packs/pack.ts';
+import type { Pack, PartKind } from '#shared/packs/pack.ts';
 import { isBacklitBoard } from '#shared/backlit.ts';
 import { postLichessLook } from '#shared/protocol.ts';
 import { message } from '#content/platform/runtime.ts';
@@ -17,11 +17,12 @@ import { ACCENT_BOARD, familyOf } from '#content/packs/themes.ts';
 import { lichessCurrent, type LichessLook } from './lichess-looks.ts';
 import { familySections, listedThemes } from './looks-families.ts';
 import { previewOnHover } from './looks-hover.ts';
+import { type PackTile, packSections } from './looks-packs.ts';
 
 // A card of the settings' Board & sounds page (styles/pages/settings-looks.css):
 // the extension's looks for one part, its themes with their settings (the
-// boards' in sections, looks-families.ts), then the imported packs that have
-// it, each section apart, over Lichess's own, then what holds for all (the
+// boards' in sections, looks-families.ts), then the packs that have it, a
+// section for each origin (looks-packs.ts), over Lichess's own, then what holds for all (the
 // black pieces' color). The part
 // shows one of them; Lichess's is ringed only while the extension leaves the
 // part to it, as in the user menu.
@@ -111,16 +112,13 @@ function themeTiles(kind: PartKind): HTMLElement[] {
   });
 }
 
-const packTiles = (kind: PartKind, library: Library): HTMLElement[] =>
-  library
-    .packs()
-    .filter(pack => hasPart(pack, kind))
-    .map(pack =>
-      tileButton(
-        kind,
-        { id: pack.id, name: pack.name, image: packImage(kind, pack), whole: kind === 'board' },
-        'data-ln-ext-choice',
-      ),
+const packTile =
+  (kind: PartKind): PackTile =>
+  pack =>
+    tileButton(
+      kind,
+      { id: pack.id, name: pack.name, image: packImage(kind, pack), whole: kind === 'board' },
+      'data-ln-ext-choice',
     );
 
 export interface LooksCard {
@@ -196,7 +194,7 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
   setData(card, 'lnExtPart', kind);
   const ours = createElement('div', { className: 'ln-ext-looks__grid' });
   const packsLabel = label(message('looksPacks'));
-  const packs = createElement('div', { className: 'ln-ext-looks__grid' });
+  const packs = createElement('div', { className: 'ln-ext-looks__packs' });
   const lichess = createElement('div', { className: 'ln-ext-looks__grid' });
   card.append(
     cardHead(kind),
@@ -219,7 +217,7 @@ export function buildLooksCard(kind: PartKind, library: Library): LooksCard {
       listedPacks = library.packs();
       listedBoards = savedBoards();
       ours.replaceChildren(...themeTiles(kind));
-      packs.replaceChildren(...packTiles(kind, library));
+      packs.replaceChildren(...packSections(kind, library.packs(), packTile(kind)));
       // The packs' section shows once the part has one.
       packsLabel.hidden = packs.childElementCount === 0;
       packs.hidden = packsLabel.hidden;

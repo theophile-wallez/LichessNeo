@@ -73,9 +73,9 @@ function tile(item: Pack, kind: PartKind, library: Library): HTMLElement {
     createElement('span', { className: 'ln-ext-item__name', text: item.name }),
   );
   pick.addEventListener('click', () => library.choose(kind, item.id));
-  box.append(pick, actions(item, library));
-  // A button can't hold another: the player stands over the pick's preview.
-  if (kind === 'sound') box.append(soundPlayer(item));
+  // A button can't hold another: the player stands over the pick's preview,
+  // under the tile's own buttons.
+  box.append(pick, ...(kind === 'sound' ? [soundPlayer(item)] : []), actions(item, library));
   return box;
 }
 

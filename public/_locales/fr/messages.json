@@ -74,6 +74,9 @@
   "looksPacks": {
     "message": "Vos packs"
   },
+  "looksPacksMine": {
+    "message": "Depuis vos fichiers"
+  },
   "looksClassic": {
     "message": "Classiques"
   },
@@ -735,7 +738,7 @@
     "message": "$1 sons de plus, que peu de jeux ont"
   },
   "packsExample": {
-    "message": "Voir un exemple"
+    "message": "Exemple"
   },
   "appearanceTitle": {
     "message": "Couleurs"
@@ -1833,5 +1836,65 @@
   "packsSoundCountOne": {
     "message": "1 son",
     "description": "A sound set's tile, at rest, when it has one sound."
+  },
+  "packsSoundNameMoveSelf": {
+    "message": "Votre coup"
+  },
+  "packsSoundNameMoveOpponent": {
+    "message": "Coup adverse"
+  },
+  "packsSoundNameMoveCheck": {
+    "message": "Échec"
+  },
+  "packsSoundNameMoveSlide": {
+    "message": "Long coup"
+  },
+  "packsSoundNameMoveSlideCheck": {
+    "message": "Long coup, échec"
+  },
+  "packsSoundNameMoveKnight": {
+    "message": "Coup de cavalier"
+  },
+  "packsSoundNameCapture": {
+    "message": "Prise"
+  },
+  "packsSoundNameCaptureCheck": {
+    "message": "Prise, échec"
+  },
+  "packsSoundNameCaptureSlide": {
+    "message": "Longue prise"
+  },
+  "packsSoundNameCaptureSlideCheck": {
+    "message": "Longue prise, échec"
+  },
+  "packsSoundNameCastle": {
+    "message": "Roque"
+  },
+  "packsSoundNamePromote": {
+    "message": "Promotion"
+  },
+  "packsSoundNameCapturePromote": {
+    "message": "Promotion avec prise"
+  },
+  "packsSoundNameCheckmate": {
+    "message": "Échec et mat"
+  },
+  "packsSoundNamePremove": {
+    "message": "Coup anticipé"
+  },
+  "packsSoundNameIllegal": {
+    "message": "Coup refusé"
+  },
+  "packsSoundNameNotify": {
+    "message": "Notification"
+  },
+  "packsSoundNameTenseconds": {
+    "message": "Temps bas"
+  },
+  "packsSoundNameGameStart": {
+    "message": "Début de partie"
+  },
+  "packsSoundNameGameEnd": {
+    "message": "Fin de partie"
   }
 }

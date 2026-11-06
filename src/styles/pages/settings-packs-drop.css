@@ -74,8 +74,10 @@
   --ln-ext-drop-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/music-note-01.svg');
 }
 
-.ln-ext-packs__drop:hover,
-.ln-ext-packs__drop:focus-within,
+/* Lit as the zone takes files: not over its example's link, which opens
+   something else. The zone is only on the settings, so `:has()` costs nothing. */
+.ln-ext-packs__drop:hover:not(:has(.ln-ext-packs__example:hover)),
+.ln-ext-packs__drop:focus-within:not(:has(.ln-ext-packs__example:focus)),
 .ln-ext-packs__drop--over {
   border-color: var(--ln-ext-drop-color);
   background: color-mix(in srgb, var(--ln-ext-drop-color) 8%, transparent);
@@ -103,7 +105,7 @@
   mask: var(--ln-ext-drop-glyph) center / contain no-repeat;
 }
 
-.ln-ext-packs__drop:hover .ln-ext-packs__drop-icon,
+.ln-ext-packs__drop:hover:not(:has(.ln-ext-packs__example:hover)) .ln-ext-packs__drop-icon,
 .ln-ext-packs__drop--over .ln-ext-packs__drop-icon {
   transform: rotate(-6deg) scale(1.08);
 }
@@ -134,6 +136,7 @@
   color: color-mix(in srgb, var(--ln-ext-drop-color) 75%, var(--ln-ext-text-strong)) !important;
   font-size: 12.5px;
   font-weight: 700;
+  white-space: nowrap;
   text-decoration: none !important;
   transition: background-color 0.15s !important;
 }
@@ -185,7 +188,7 @@
   font-weight: 600;
 }
 
-.ln-ext-packs__drop--pack:hover .ln-ext-packs__drop-title,
+.ln-ext-packs__drop--pack:hover:not(:has(.ln-ext-packs__example:hover)) .ln-ext-packs__drop-title,
 .ln-ext-packs__drop--pack.ln-ext-packs__drop--over .ln-ext-packs__drop-title {
   color: var(--ln-ext-text-strong);
 }
