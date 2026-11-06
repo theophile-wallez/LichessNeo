@@ -55,6 +55,7 @@ import { studyChapterBar } from './study/chapter-bar.ts';
 import { studyHead } from './study/head.ts';
 import { extensionSettings } from './settings/index.ts';
 import { clockBar } from './clock-bar/index.ts';
+import { homeGames } from './pages/home-games/index.ts';
 import { homeHero } from './pages/home-hero.ts';
 import { speedCards } from './pages/speed-cards/index.ts';
 import { coachTitles } from './pages/coach-titles.ts';
@@ -161,6 +162,7 @@ const FEATURES = [
   extensionSettings,
   homeHero,
   speedCards,
+  homeGames,
   coachTitles,
   swiss,
   podium,

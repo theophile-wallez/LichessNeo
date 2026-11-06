@@ -23,9 +23,9 @@ const exported = (overrides: Record<string, unknown> = {}): string =>
     ...overrides,
   });
 
-describe('the profile’s recent games', () => {
+describe('a player’s recent games', () => {
   it('reads a game from the player’s side: their board, their opponent, their outcome', () => {
-    expect(recentGames(exported(), 'Eresy')).toEqual([
+    expect(recentGames(exported(), 'Eresy', 5)).toEqual([
       {
         href: '/game/aDN8u0zd/black',
         board: { fen: FEN, orientation: 'black', lastMove: ['c2', 'a1'] },
@@ -48,6 +48,7 @@ describe('the profile’s recent games', () => {
         exported({ players: asWhite, winner: undefined, status: 'draw' }),
       ].join('\n'),
       'Eresy',
+      5,
     );
     expect(loss?.outcome).toBe('loss');
     expect(loss?.href).toBe('/game/aDN8u0zd');
@@ -70,14 +71,14 @@ describe('the profile’s recent games', () => {
       '',
       exported({ id: 'Kl2X7vcs' }),
     ];
-    expect(recentGames(lines.join('\n'), 'Eresy').map(game => game.href)).toEqual([
+    expect(recentGames(lines.join('\n'), 'Eresy', 5).map(game => game.href)).toEqual([
       '/game/Kl2X7vcs/black',
     ]);
   });
 
   it('keeps the five newest', () => {
     const lines = Array.from({ length: 8 }, (_, i) => exported({ id: `game000${i}` }));
-    expect(recentGames(lines.join('\n'), 'Eresy').map(game => game.href)).toEqual([
+    expect(recentGames(lines.join('\n'), 'Eresy', 5).map(game => game.href)).toEqual([
       '/game/game0000/black',
       '/game/game0001/black',
       '/game/game0002/black',

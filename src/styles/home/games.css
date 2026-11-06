@@ -1,0 +1,233 @@
+/* ---- The user's last games --- */
+
+/* content/pages/home-games: on a desktop a card beside the puzzle of the day, as tall as it,
+ * whose list scrolls; the news go under both. A filter per speed, as pills whose highlight
+ * slides (content/ui/tab-bars.ts). A row's parts are the profile's (profile/recent-games.css),
+ * on two lines, its analyse button beside them. */
+
+@media (min-width: 1020px) {
+  html[data-ln-ext-has~='lobby-games'] main.lobby {
+    grid-template-rows: repeat(8, auto) 1fr !important;
+  }
+  html[data-ln-ext-has~='lobby-games'] main.lobby .ln-ext-home-games {
+    grid-column: 1 / 9;
+    grid-row: 5;
+  }
+  html[data-ln-ext-has~='lobby-games'] main.lobby .lobby__feed {
+    grid-column: 1 / -1 !important;
+    grid-row: 6 !important;
+  }
+  html[data-ln-ext-has~='lobby-games'] main.lobby .lobby__blog {
+    grid-row: 7 !important;
+  }
+  html[data-ln-ext-has~='lobby-games'] main.lobby .lobby__tournaments-simuls {
+    grid-row: 8 !important;
+  }
+  html[data-ln-ext-has~='lobby-games'] main.lobby .lobby__support {
+    grid-row: 9 !important;
+  }
+  html[data-ln-ext-has~='lobby-games'] main.lobby .lobby__side {
+    grid-row: 8 / 10 !important;
+  }
+  html[data-ln-ext-has~='lobby-games'] main.lobby .lobby__about {
+    grid-row: 10 !important;
+  }
+}
+
+/* Before the news, as on a desktop (compact.css orders the rest). */
+@media (max-width: 1019.98px) {
+  main.lobby > .ln-ext-home-games {
+    order: 3;
+  }
+
+  .ln-ext-home-games__list {
+    flex: none !important;
+    max-height: 432px;
+  }
+}
+
+main.lobby > .ln-ext-home-games {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 0;
+  padding: 16px 18px 18px;
+  border-radius: 16px;
+  background: var(--ln-ext-bg-panel);
+  box-shadow:
+    inset 0 1px 0 var(--ln-ext-lift-5),
+    0 10px 28px var(--ln-ext-shade-20);
+}
+
+.ln-ext-home-games .ln-ext-recent__head {
+  flex: none;
+  margin-bottom: 12px;
+}
+
+/* ---- Filters --- */
+
+.ln-ext-home-games__filters {
+  --ln-ext-tab-bg: color-mix(in srgb, var(--ln-ext-accent) 22%, transparent);
+  --ln-ext-tab-radius: 999px;
+  --ln-ext-tab-shadow: none;
+
+  display: flex;
+  flex: none;
+  gap: 6px;
+  margin: 0 -2px 12px;
+  padding: 0 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ln-ext-home-games__filters button {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 13px;
+  border: none;
+  border-radius: 999px;
+  background: var(--ln-ext-lift-5);
+  color: var(--ln-ext-text);
+  font: 700 13px var(--ln-ext-font);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+.ln-ext-home-games__filters button:hover {
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-home-games__filters button.active {
+  background: color-mix(in srgb, var(--ln-ext-accent) 22%, transparent);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-home-games__filters[data-ln-ext-tabs] button.active {
+  background: transparent;
+}
+
+.ln-ext-home-games__glyph::before {
+  font-size: 14px;
+}
+
+/* ---- The list --- */
+
+/* It fades out at an edge where more rows are hidden, as a side menu's strip does
+ * (pages/menu-narrow.css). Room at its sides for the rows' focus rings. */
+.ln-ext-home-games__list {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 0;
+  margin: 0 -4px;
+  padding: 0 4px;
+  overflow: hidden auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+}
+
+.ln-ext-home-games__list::-webkit-scrollbar {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .ln-ext-home-games__list {
+    mask-image: linear-gradient(
+      180deg,
+      transparent,
+      #000 var(--ln-ext-menu-fade-start),
+      #000 calc(100% - var(--ln-ext-menu-fade-end)),
+      transparent
+    );
+    animation: ln-ext-menu-fade linear both !important;
+    animation-timeline: scroll(self block) !important;
+  }
+}
+
+.ln-ext-home-games__row {
+  position: relative;
+  flex: none;
+}
+
+.ln-ext-home-games__row[hidden] {
+  display: none;
+}
+
+/* The row's own link, its right end left to the analyse button. */
+.ln-ext-home-games .ln-ext-recent__game {
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  grid-template-rows: none;
+  grid-template-areas:
+    'board who result'
+    'board meta result';
+  row-gap: 4px;
+  padding: 7px 62px 7px 7px;
+}
+
+.ln-ext-home-games .ln-ext-recent__game:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.ln-ext-home-games .ln-ext-still-board {
+  grid-area: board;
+}
+
+.ln-ext-home-games .ln-ext-recent__opponent {
+  grid-area: who;
+  align-self: end;
+}
+
+.ln-ext-home-games .ln-ext-recent__meta {
+  grid-area: meta;
+  align-self: start;
+}
+
+.ln-ext-home-games .ln-ext-recent__result {
+  grid-area: result;
+  align-self: center;
+}
+
+/* The rating's change before the outcome, so the pills line up at the row's end. */
+.ln-ext-home-games .ln-ext-recent__diff {
+  order: -1;
+}
+
+.ln-ext-home-games__analyse {
+  position: absolute;
+  top: calc(50% - 18px);
+  right: 12px;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text) !important;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+.ln-ext-home-games__analyse::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/chart-line-data-01.svg')
+    center / 18px no-repeat;
+}
+
+.ln-ext-home-games__analyse:hover {
+  background: var(--ln-ext-btn-grey-hover);
+  color: var(--ln-ext-text-strong) !important;
+}

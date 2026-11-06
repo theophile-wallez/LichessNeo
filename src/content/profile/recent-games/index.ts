@@ -3,7 +3,7 @@ import type { Feature } from '#shared/features.ts';
 import { setHtml } from '#shared/html.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { profileName } from '#content/profile/user.ts';
-import { RECENT_GAMES, recentGames } from './games.ts';
+import { fetchRecentGames } from '#content/recent-games/fetch.ts';
 import { recentGamesMarkup } from './view.ts';
 
 // The profile's last games, a row of cards over its activity. The games tab
@@ -19,24 +19,11 @@ function openGamesTab(event: MouseEvent, tabs: HTMLElement): void {
   tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// A few more than shown, for the aborted ones left out.
-const ASKED = RECENT_GAMES + 5;
-
-async function exportedGames(name: string): Promise<string | null> {
-  const query = `max=${ASKED}&moves=false&tags=false&opening=false&lastFen=true`;
-  try {
-    const response = await fetch(`/api/games/user/${encodeURIComponent(name)}?${query}`, {
-      headers: { Accept: 'application/x-ndjson' },
-    });
-    return response.ok ? await response.text() : null;
-  } catch {
-    return null;
-  }
-}
+// How many the section shows.
+const SHOWN = 5;
 
 async function addRecentGames(tabs: HTMLElement, name: string): Promise<void> {
-  const lines = await exportedGames(name);
-  const games = lines === null ? [] : recentGames(lines, name);
+  const games = await fetchRecentGames(name, SHOWN);
   if (games.length === 0) return;
   const section = createElement('section', { className: 'ln-ext-recent' });
   setHtml(section, recentGamesMarkup(games, `/@/${encodeURIComponent(name)}/all`, Date.now()));

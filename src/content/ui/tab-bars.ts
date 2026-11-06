@@ -46,6 +46,7 @@ export const TAB_BARS: readonly TabBarKind[] = [
   kind('#dasher_app .ln-ext-src-options', 'button', '.active', 'pill'),
   kind('.ln-ext-looks .ln-ext-src-options', 'button', '.active', 'pill'),
   kind('.ln-ext-avatar-pick__modes', 'button', '.active', 'pill'),
+  kind('.ln-ext-home-games__filters', 'button', '.active', 'pill'),
   kind('#ln-ext-review .ln-ext-graph-views', 'button', '.active', 'pill'),
   kind('#ln-ext-review-modes .ln-ext-review-modes__tabs', 'button', '.active', 'pill'),
   // The practice page's choices (page/review/view/openings-kept.ts).

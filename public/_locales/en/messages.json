@@ -1389,6 +1389,14 @@
     "message": "Anonymous",
     "description": "An opponent who played without an account."
   },
+  "recentGamesAnalyse": {
+    "message": "Analyse",
+    "description": "The button that opens one of the user's last games in the analysis board."
+  },
+  "recentGamesEvery": {
+    "message": "All",
+    "description": "The filter that shows the user's last games of every speed."
+  },
   "medalsTitle": {
     "message": "Medals",
     "description": "The title of a profile's medals."

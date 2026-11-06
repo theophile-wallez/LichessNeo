@@ -126,12 +126,16 @@ so the logic can be unit-tested without a page.
   do, and `followSetup`, which syncs a feature as the setup opens and
   redraws.
 - `profile`: a profile's medals, from `/api/user`, its last five games over
-  its activity, from `/api/games/user` ("See all" opens the games tab in
-  place), its awards won more than once folded into one tile with their
-  count, and on the user's own, their avatar's link to the settings'.
+  its activity (`recent-games`; "See all" opens the games tab in place), its
+  awards won more than once folded into one tile with their count, and on the
+  user's own, their avatar's link to the settings'.
   `perf-stat` redraws a rating's stats page (`/@/<user>/perf/<perf>`) as
   cards, read off lila's markup with its labels, so they come in the page's
   language; Lichess's sections stay, hidden.
+- `recent-games`: a player's last games, from `/api/games/user`, and what each
+  shows (its board, the opponent, the outcome, the pace), for the profile's
+  cards and the home's list (`pages/home-games`), which sits by the puzzle of
+  the day, filters them by speed and has a button to analyse each.
 - `simul-form`: the simul form's sections as cards, the host's color as
   buttons, the clock's time control and the host's time with its extra
   minutes, and beside the form the simul's card as the list will show it, a

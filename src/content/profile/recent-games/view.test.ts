@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import { setHtml } from '#shared/html.ts';
-import type { RecentGame } from './games.ts';
+import type { RecentGame } from '#content/recent-games/games.ts';
 import { recentGamesMarkup } from './view.ts';
 
 const NOW = Date.UTC(2026, 9, 27, 20);

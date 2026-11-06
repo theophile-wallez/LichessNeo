@@ -58,6 +58,8 @@ const FLAGS: Readonly<Record<string, string>> = {
   simul: 'main.simul',
   'board-editor': 'main > .board-editor',
   lobby: 'main.lobby',
+  // The user's last games (content/pages/home-games), which take a row of the home's grid.
+  'lobby-games': 'main.lobby > .ln-ext-home-games',
   'coach-list': 'main.coach-list',
   'team-list': 'main.team-list',
   'user-show': 'main.page-menu .user-show',

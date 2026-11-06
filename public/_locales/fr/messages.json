@@ -1047,6 +1047,12 @@
   "recentGamesAnonymous": {
     "message": "Anonyme"
   },
+  "recentGamesAnalyse": {
+    "message": "Analyser"
+  },
+  "recentGamesEvery": {
+    "message": "Toutes"
+  },
   "medalsTitle": {
     "message": "Médailles"
   },

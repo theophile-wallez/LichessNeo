@@ -4,9 +4,9 @@ import { parseJson } from '#shared/json.ts';
 import { moveSquares, type BoardState } from '#shared/still-board.ts';
 import type { Clock } from '#shared/time-control.ts';
 
-// The profile's last games, from Lichess's game export
-// (`/api/games/user/<name>`, one game a line), as the player saw them: from
-// their side, against whom, and how it went.
+// A player's last games, from Lichess's game export (`/api/games/user/<name>`,
+// one game a line), as they saw them: from their side, against whom, and how it
+// went. The profile shows them over its activity, the home the user's own.
 
 const PlayerSchema = z.object({
   user: z.optional(z.object({ name: z.string(), id: z.string(), title: z.optional(z.string()) })),
@@ -54,9 +54,6 @@ export interface RecentGame {
   readonly playedAt: number;
 }
 
-// How many the section shows.
-export const RECENT_GAMES = 5;
-
 // Games that never got going, which Lichess's own list leaves out too.
 const UNPLAYED = new Set(['created', 'started', 'aborted', 'noStart']);
 
@@ -89,8 +86,8 @@ export function recentGame(game: ExportedGame, userId: string): RecentGame | nul
   };
 }
 
-/** The export's lines as the player's games, newest first, at most `RECENT_GAMES`. */
-export function recentGames(lines: string, userName: string): RecentGame[] {
+/** The export's lines as the player's games, newest first, at most `limit`. */
+export function recentGames(lines: string, userName: string, limit: number): RecentGame[] {
   const userId = userName.toLowerCase();
   return lines
     .split('\n')
@@ -98,5 +95,5 @@ export function recentGames(lines: string, userName: string): RecentGame[] {
       const game = parseJson(line, ExportedGameSchema);
       return (game && recentGame(game, userId)) ?? [];
     })
-    .slice(0, RECENT_GAMES);
+    .slice(0, limit);
 }
