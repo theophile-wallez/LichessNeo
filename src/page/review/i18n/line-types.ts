@@ -49,7 +49,8 @@ export interface LineFacts {
   /** A piece that moves out of the threat's way. */
   readonly escapes: (piece: Piece, threat: string) => Ways;
   /** What a move threatens, were the opponent to pass. */
-  readonly threatens: (threat: string, material: string) => Ways;
+  /** `threat` wins `material`: by taking it, or `direct` false, by a capture on the way to it. */
+  readonly threatens: (threat: string, material: string, direct: boolean) => Ways;
   readonly threatensMate: (threat: string, moves: number) => Ways;
   /** A capture that threatens mate too. */
   readonly takesAndThreatensMate: (piece: Piece, threat: string, moves: number) => Ways;

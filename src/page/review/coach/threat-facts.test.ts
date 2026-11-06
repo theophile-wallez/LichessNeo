@@ -195,6 +195,30 @@ describe('threatensFact', () => {
     );
   });
 
+  it('says a threat that starts with a trade, and wins something else', () => {
+    // Bb5 eyes the knight that defends the rook: Bxc6 bxc6 Rxe7.
+    const bishopEyes = move({
+      from: '6k1/1p2rppp/2n5/8/8/3B4/4RPPP/5K2 w - - 0 1',
+      uci: 'd3b5',
+      san: 'Bb5',
+      to: '6k1/1p2rppp/2n5/1B6/8/8/4RPPP/5K2 b - - 1 1',
+      after: [{ cp: 0 }, ['g8f8', 'f1e1']],
+    });
+    const removes = threat(bishopEyes.position.fen, { cp: 500 }, [
+      'b5c6',
+      'b7c6',
+      'e2e7',
+      'h7h6',
+      'f1e1',
+    ]);
+    expect(threatensFact(input(bishopEyes), removes)?.text).toMatch(
+      /^(The threat starts with \[\[m:w:Bxc6\]\], and wins|\[\[m:w:Bxc6\]\] would start a line that wins) a \[\[p:br\]\]rook\.$/,
+    );
+    expect(threatensFact(input(bishopEyes, fr), removes)?.text).toMatch(
+      /^(La menace commence par \[\[m:w:Bxc6\]\], et gagne|\[\[m:w:Bxc6\]\] lancerait une suite qui gagne) une \[\[p:br\]\]tour\.$/,
+    );
+  });
+
   it('says nothing of a threat the reply takes back: that’s a trade', () => {
     expect(threatensFact(input(rookToB1('b8b1')), RXD1)).toBeNull();
     expect(threatensFact(input(rookToB1('g8f8')), RXD1)?.text).toMatch(/Rxd1/);

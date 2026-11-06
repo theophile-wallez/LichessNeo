@@ -1,4 +1,4 @@
-import { type Color, fenTurn } from '#shared/chess/index.ts';
+import { type Color, fenTurn, type Piece } from '#shared/chess/index.ts';
 import { playLine, type Ply } from '#page/review/chess/played-line.ts';
 import { moveToken, movesToken } from '#page/review/comment/tokens.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
@@ -53,17 +53,22 @@ export const lineOf = (plies: readonly Ply[], base: 'a' | 'b' | null): string =>
   movesToken(plies, base ? { base, ucis: plies.map(ply => ply.uci) } : undefined);
 
 /**
- * A line that wins material, past four moves as its first and its last,
- * whose chip plays it all: what matters is how it starts and what it takes.
+ * A line that wins material, past four moves as its first and the capture of
+ * `won`, the most valuable piece it wins (else its last move, a recapture
+ * often), whose chip plays it all: what matters is how it starts and what it takes.
  */
-function gainLineOf(plies: readonly Ply[], base: 'a' | 'b'): string {
+function gainLineOf(plies: readonly Ply[], base: 'a' | 'b', won?: Piece): string {
   const [first] = plies;
-  const last = plies.at(-1);
+  const takes = won && plies.findLast(ply => sameKind(ply.captured, won));
+  const last = takes && takes !== first ? takes : plies.at(-1);
   if (plies.length <= 4 || !first || !last) return lineOf(plies, base);
   const ucis = plies.map(ply => ply.uci);
   const start = moveToken(first.san, first.color, { base, ucis: ucis.slice(0, 1) });
   return `${start} … ${moveToken(last.san, last.color, { base, ucis })}`;
 }
+
+const sameKind = (piece: Piece | null | undefined, other: Piece): boolean =>
+  piece?.role === other.role && piece.color === other.color;
 
 /** How many of `color`'s moves `plies` hold. */
 const movesOf = (plies: readonly Ply[], color: Color): number =>
@@ -77,22 +82,32 @@ interface Lines {
 
 // After a capture the position is mid-trade, and a line from it would count a
 // recapture as a win: an error there keeps to the board's facts, unless it
-// takes back itself, its lines then counting from the trade's end.
+// takes back itself, its lines then counting from the trade's end, or neither
+// line takes back on that square, or the capture took back the mover's own
+// (dxe5 dxe5): the trade there is over, and what's taken next is won.
 function errorLines(move: MoveVerdict): Lines | null {
-  const { before, after, previousPosition, uci } = move;
-  const takesBack = previousPosition.uci?.slice(2, 4) === uci.slice(2, 4);
-  const midTrade = previousPosition.san?.includes('x') === true && !takesBack;
-  if (!before.line || !after.line || midTrade) return null;
+  const { before, after, previousPosition, previousMove, uci } = move;
+  const square = previousPosition.uci?.slice(2, 4);
+  if (!before.line || !after.line) return null;
   const fen = previousPosition.fen;
-  return { played: playLine(fen, [uci, ...after.line]), best: playLine(fen, before.line) };
+  const lines = { played: playLine(fen, [uci, ...after.line]), best: playLine(fen, before.line) };
+  const takesBack = square === uci.slice(2, 4);
+  const retaken = [lines.played, lines.best].some(plies =>
+    plies.some(ply => ply.color === move.color && ply.captured && ply.uci.slice(2, 4) === square),
+  );
+  const mine = previousMove?.previousPosition;
+  const closes = mine?.san?.includes('x') === true && mine.uci?.slice(2, 4) === square;
+  const midTrade = previousPosition.san?.includes('x') === true && !takesBack && retaken && !closes;
+  return midTrade ? null : lines;
 }
 
 // How far a line may go to win what the coach says it wins: the punishment of
 // an error within three of the opponent's moves, the best move's gain within
-// three of the mover's, and a good move's within its next one, else the gain
-// is the line's, not the move's.
+// three of the mover's (four for the exchange or more, trades on the way), and
+// a good move's within its next one, else the gain is the line's, not the move's.
 const PUNISHED_WITHIN = 6;
 const BEST_WINS_WITHIN = 5;
+const BEST_PIECE_WITHIN = 8;
 const MOVE_WINS_WITHIN = 3;
 
 /** Whether the error's line leaves `side` material ahead, in time to be its punishment. */
@@ -116,7 +131,11 @@ export function lossFact({ move, facts, them }: LineFactInput, threatened = fals
   const material = facts.material(won);
   const replies = lines.played.slice(1, won.plies);
   if (material === null || replies.length === 0) return null;
-  const gain = { material, line: gainLineOf(replies, 'a'), moves: movesOf(replies, them) };
+  const gain = {
+    material,
+    line: gainLineOf(replies, 'a', won.won[0]),
+    moves: movesOf(replies, them),
+  };
   const text = oneOf(facts.losesMaterial(them, gain, threatened), move);
   const motifLine = {
     plies: lines.played,
@@ -139,7 +158,8 @@ interface BestGain {
 function bestGain({ move, facts, me, them }: LineFactInput): BestGain | null {
   const lines = errorLines(move);
   const won = lines && securedSwing(lines.best, me);
-  if (!lines || !won || !worthSaying(won) || won.plies > BEST_WINS_WITHIN) return null;
+  if (!lines || !won || !worthSaying(won)) return null;
+  if (won.plies > (won.net >= 2 ? BEST_PIECE_WITHIN : BEST_WINS_WITHIN)) return null;
   const gap = won.net - finalNet(lines.played, me);
   if (gap < 1 || !scoreDrops(move, gap) || gives(lines.best, them, [0, won.plies])) return null;
   const material = facts.material(won);
@@ -156,7 +176,7 @@ export function bestGainFact(input: LineFactInput): Fact | null {
   if (!gained) return null;
   const { lines, won, material } = gained;
   const best = lines.best.slice(0, won.plies);
-  const gain = { material, line: gainLineOf(best, 'b'), moves: movesOf(best, me) };
+  const gain = { material, line: gainLineOf(best, 'b', won.won[0]), moves: movesOf(best, me) };
   const text = oneOf(facts.wouldHaveWon(me, gain), move);
   const around = afterLastMove(move, move.before.line ?? []);
   const upTo = won.plies + around.offset;
@@ -213,7 +233,7 @@ export function gainFact({ move, facts, me, them }: LineFactInput): Fact | null 
   const material = facts.material(won);
   if (material === null) return null;
   const own = plies.slice(from, won.plies);
-  const gain = { material, line: gainLineOf(own, 'b'), moves: movesOf(own, me) };
+  const gain = { material, line: gainLineOf(own, 'b', won.won[0]), moves: movesOf(own, me) };
   const text = oneOf(facts.winsAlong(gain), move);
   const around = afterLastMove(move, [move.uci, ...(move.after.line ?? [])]);
   const upTo = won.plies - from + around.offset;
@@ -235,7 +255,7 @@ export function wonBack({ move, facts, them }: LineFactInput, worth: number): Li
   const material = won && won.net >= worth ? facts.material(won) : null;
   if (!won || material === null) return null;
   const line = plies.slice(0, won.plies);
-  return { material, line: gainLineOf(line, 'a'), moves: movesOf(line, them) };
+  return { material, line: gainLineOf(line, 'a', won.won[0]), moves: movesOf(line, them) };
 }
 
 /**

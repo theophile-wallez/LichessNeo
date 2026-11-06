@@ -99,8 +99,12 @@ function evenFact(input: FactInput, square: Square, victim: Piece, on: string | 
       wonBackFact(input, victim, on) ??
       said(oneOf(facts.retakeCosts(victim, on, taker), move), 'hanging')
     );
-  // Ahead, trade pieces, not pawns.
-  const ahead = victim.role !== 'pawn' && materialBalance(before, me) >= AHEAD;
+  // Ahead, trade pieces, not pawns; and ahead in the score too, not only in
+  // the count (a piece up against a pawn about to queen).
+  const ahead =
+    victim.role !== 'pawn' &&
+    materialBalance(before, me) >= AHEAD &&
+    evaluationLevel(move.after) * input.sign >= 1;
   return tradeFact(input) ?? said(oneOf(facts.trades(victim, ahead), move));
 }
 

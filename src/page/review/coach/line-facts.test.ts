@@ -29,13 +29,16 @@ interface Played {
   readonly to: string;
   readonly before: Scored;
   readonly after: Scored;
-  /** The move that led to `from`, its SAN. */
-  readonly last?: string;
+  /** The move that led to `from`, its SAN and UCI. */
+  readonly last?: { readonly san: string; readonly uci: string };
+  /** The opponent's move that led to `from`, judged. */
+  readonly previousMove?: MoveVerdict;
 }
 
-function verdict({ from, uci, san, to, before, after, last }: Played): MoveVerdict {
+function verdict({ from, uci, san, to, before, after, last, previousMove }: Played): MoveVerdict {
   return judge({
-    previousPosition: { ply: 59, fen: from, ...(last ? { san: last } : {}) },
+    previousPosition: { ply: 59, fen: from, ...last },
+    previousMove,
     position: { ply: 60, fen: to, uci, san },
     before: record(before),
     after: record(after),
@@ -77,9 +80,54 @@ describe('lossFact', () => {
     const move = verdict({ ...INTO_FORK, after: { ...INTO_FORK.after, cp: 400 } });
     expect(lossFact(input(move))).toBeNull();
   });
+});
 
-  it('says nothing mid-trade, where a recapture would count as a win', () => {
-    expect(lossFact(input(verdict({ ...INTO_FORK, last: 'Rxa8' })))).toBeNull();
+// Black's knight has just taken one on d4, and White plays h3 instead of Rxd4.
+const NOT_RETAKEN: Played = {
+  from: '7k/8/8/8/3n4/8/7P/3R2K1 w - - 0 30',
+  uci: 'h2h3',
+  san: 'h3',
+  to: '7k/8/8/8/3n4/7P/8/3R2K1 b - - 0 30',
+  before: { cp: 900, whiteWinChance: 99, line: 'd1d4 h8g8 g1f2 g8f7' },
+  after: { cp: 500, whiteWinChance: 97, line: 'd4e2 g1f2 e2f4 d1d7' },
+  last: { san: 'Nxd4', uci: 'c6d4' },
+};
+
+describe('mid-trade', () => {
+  it('says nothing where taking back would count as a win', () => {
+    expect(bestGainFact(input(verdict(NOT_RETAKEN)))).toBeNull();
+  });
+
+  it('counts what is taken on the square once the trade there is over', () => {
+    // 3...dxe5 4.dxe5: Qxd1+ instead of Qa5+, which wins the e5 pawn back.
+    const retake = verdict({
+      from: 'rnbqkbnr/pp2pppp/2p5/4p3/3P4/8/PPP2PPP/RNBQKBNR w KQkq - 0 4',
+      uci: 'd4e5',
+      san: 'dxe5',
+      to: 'rnbqkbnr/pp2pppp/2p5/4P3/8/8/PPP2PPP/RNBQKBNR b KQkq - 0 4',
+      before: { cp: -60, whiteWinChance: 44, line: 'd4e5 d8a5' },
+      after: { cp: -67, whiteWinChance: 44, line: 'd8a5 b1d2 a5e5 g1f3' },
+      last: { san: 'dxe5', uci: 'd6e5' },
+    });
+    const move = verdict({
+      from: retake.position.fen,
+      uci: 'd8d1',
+      san: 'Qxd1+',
+      to: 'rnb1kbnr/pp2pppp/2p5/4P3/8/8/PPP2PPP/RNBqKBNR w KQkq - 0 5',
+      before: { cp: -67, whiteWinChance: 44, line: 'd8a5 b1d2 a5e5 g1f3' },
+      after: { cp: 1, whiteWinChance: 50, line: 'e1d1 c8f5 g1f3 b8d7' },
+      last: { san: 'dxe5', uci: 'd4e5' },
+      previousMove: retake,
+    });
+    expect(text(bestGainFact(input(move)))).toMatch(/win the \[\[s:e5\]\] \[\[p:wp\]\]pawn/);
+  });
+
+  it('counts a line that wins elsewhere, after a capture taken back already', () => {
+    // A capture on a8 that neither line takes back: no trade to wait for.
+    const move = verdict({ ...INTO_FORK, last: { san: 'Rxa8', uci: 'a1a8' } });
+    expect(text(lossFact(input(move)))).toBe(
+      '[[m:b:Nc2+]] is a fork of the [[p:wk]]king and the [[p:wr]]rook.',
+    );
   });
 });
 
@@ -94,6 +142,21 @@ const MISSED_FORK: Played = {
 };
 
 describe('bestGainFact', () => {
+  it('goes four moves deep for a piece, and plays out the start and the capture', () => {
+    // The rook comes round to the knight on h4, which never moves.
+    const slow: Played = {
+      from: '1k6/8/8/8/7n/8/8/R5K1 w - - 0 30',
+      uci: 'g1f2',
+      san: 'Kf2',
+      to: '1k6/8/8/8/7n/8/5K2/R7 b - - 1 30',
+      before: { cp: 400, whiteWinChance: 85, line: 'a1e1 b8a8 e1e2 a8b8 e2h2 b8a8 h2h4 a8b8' },
+      after: { cp: 0, whiteWinChance: 50, line: 'h4f5 a1a5 f5d6 a5d5' },
+    };
+    expect(text(bestGainFact(input(verdict(slow))))).toMatch(
+      /win a \[\[p:bn\]\]knight in four moves: \[\[m:w:Re1\]\] … \[\[m:w:Rxh4\]\]\./,
+    );
+  });
+
   it('plays out what the best move would have won', () => {
     expect(text(bestGainFact(input(verdict(MISSED_FORK))))).toBe(
       'Better was to win a [[p:wr]]rook in two moves: [[m:b:Nc2+]] [[m:w:Kd2]] [[m:b:Nxa1]]. [[m:b:Nc2+]] is a fork of the [[p:wk]]king and the [[p:wr]]rook.',

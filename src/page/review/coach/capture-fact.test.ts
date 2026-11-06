@@ -43,7 +43,8 @@ describe('a capture', () => {
   it('says it’s won back, plainly, and the line below', () => {
     const { fact } = findings(takes(WON_BACK), en);
     expect(en.facts.givenBack(black, '[[s:c6]]', 'black')).toContain(fact?.text);
-    expect(plain(fact?.detail)).toMatch(/\[\[m:b:Bc4\]\] … \[\[m:b:Bxb2\]\]/);
+    // Shown up to the pawn won back, not the rooks' trade after it.
+    expect(plain(fact?.detail)).toMatch(/\[\[m:b:Bc4\]\] … \[\[m:b:Rxb2\]\]/);
   });
 
   it('wins a piece in a trade the other side can’t take back without losing more', () => {

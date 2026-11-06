@@ -21,6 +21,7 @@ import { takesReason } from './which-one.ts';
 import { bestWins } from './line-facts.ts';
 import { doubleThreatOf } from './double-threat.ts';
 import { reasonMarks, withMove } from './drawing.ts';
+import { leadsToPawnEnding } from './pawn-ending.ts';
 import { reasonOf } from './plan.ts';
 import { isEndgame } from './structure.ts';
 import { type Fact, oneOf, said } from './said.ts';
@@ -105,6 +106,8 @@ export function bestReason(input: FactInput): Reason | null {
   if (first && second) return { kind: 'fork', first, second };
   const target = doubleThreatOf(move);
   if (target) return { kind: 'doubleThreat', target };
+  // Trading down to a won pawn ending says more than the capture on the way.
+  if (leadsToPawnEnding(input)) return { kind: 'pawnEnding' };
   const capture = captureReason(input, best, san);
   if (capture) return capture;
   if (san.startsWith('O-O')) return { kind: 'castles' };

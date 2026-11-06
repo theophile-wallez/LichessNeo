@@ -171,6 +171,8 @@ export type Reason =
   /** A threat of mate and one on `target` at once: the mate parried, `target` falls. */
   | { readonly kind: 'doubleThreat'; readonly target: Piece }
   | { readonly kind: 'castles' }
+  /** Trades that lead to a won pawn ending. */
+  | { readonly kind: 'pawnEnding' }
   /** A capture; `square`, as a token, when the side had more than one piece like it. */
   | { readonly kind: 'takes'; readonly piece: Piece; readonly square?: string }
   /** A capture taken back evenly: `piece` traded off, on `square`. */
@@ -216,6 +218,7 @@ const PLAIN: ReadonlySet<string> = new Set([
   'opposition',
   'checks',
   'discoveredCheck',
+  'pawnEnding',
 ]);
 
 /** The reasons that need nothing more to be said. */
@@ -238,7 +241,8 @@ export type PlainReason =
   | 'space'
   | 'opposition'
   | 'checks'
-  | 'discoveredCheck';
+  | 'discoveredCheck'
+  | 'pawnEnding';
 
 /** The reasons about the line a piece moved to: an open file, a battery. */
 export type LineReason = Extract<

@@ -176,7 +176,17 @@ export function threatensFact(
     return matedAlready(move, me) ? null : mateThreatFact(input, threat, menace.mate, first);
   if (matesOnly || wasThere(move, menace) || stepsAway(move, menace)) return null;
   const material = threatenedMaterial(input, menace);
-  return material ? said(oneOf(facts.threatens(first, material), move)) : null;
+  return material ? said(oneOf(facts.threatens(first, material, takesWon(menace)), move)) : null;
+}
+
+/** Whether the threat's first move takes what it wins, not a defender on the way to it. */
+function takesWon({ plies: [first], won }: Menace): boolean {
+  const taken = first?.captured;
+  return (
+    !taken ||
+    !won ||
+    won.won.some(piece => piece.role === taken.role && piece.color === taken.color)
+  );
 }
 
 // The mate the move threatens, played out when in one, and named if it has a name.

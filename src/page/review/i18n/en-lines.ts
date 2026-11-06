@@ -10,7 +10,7 @@ import {
   within,
 } from './en-grammar.ts';
 import { motifEn, pressureEn } from './en-motifs.ts';
-import type { LineFacts, Viewer } from './types.ts';
+import type { LineFacts, Viewer, Ways } from './types.ts';
 
 // The sentences read off the engine's lines: what a line wins, and the threats.
 
@@ -76,14 +76,22 @@ function threatsEn(viewer: Viewer): ThreatSentences {
       `${the(piece)} dodges ${threat}.`,
       `${the(piece)} escapes ${threat} just in time.`,
     ],
-    threatens: (threat, material) => [
-      `The threat is ${threat} on the next move, winning ${material}.`,
-      `Now ${threat} is threatened, winning ${material}.`,
-      `Next comes ${threat}, winning ${material}.`,
-      `${threat} is in the air, and would win ${material}.`,
-    ],
+    threatens: (threat, material, direct) =>
+      direct
+        ? threatensEn(threat, material)
+        : [
+            `The threat starts with ${threat}, and wins ${material}.`,
+            `${threat} would start a line that wins ${material}.`,
+          ],
   };
 }
+
+const threatensEn = (threat: string, material: string): Ways => [
+  `The threat is ${threat} on the next move, winning ${material}.`,
+  `Now ${threat} is threatened, winning ${material}.`,
+  `Next comes ${threat}, winning ${material}.`,
+  `${threat} is in the air, and would win ${material}.`,
+];
 
 // A mate stopped, maybe at a cost, or threatened, maybe by a capture.
 function mateThreatsEn(viewer: Viewer): MateThreatSentences {

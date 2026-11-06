@@ -138,6 +138,25 @@ describe('a quiet move’s plan', () => {
     );
   });
 
+  it('names the opponent’s own pieces plainly in why the opponent moved', () => {
+    const takes = { kind: 'takesWith', piece: white('queen') } as const;
+    const battery = {
+      kind: 'diagonalBattery',
+      mover: white('queen'),
+      partner: white('bishop'),
+      target: black('knight'),
+    } as const;
+    expect([takes, battery].map(reason => english('black').facts.why(reason))).toEqual([
+      'taking with the [[p:wq]]queen instead',
+      'forming a battery with the [[p:wb]]bishop, aimed at your [[p:bn]]knight',
+    ]);
+    expect([takes, battery].map(reason => french('black').facts.why(reason))).toEqual([
+      'prenait plutôt avec la [[p:wq]]dame',
+      'formait une batterie avec le [[p:wb]]fou, braquée sur ton [[p:bn]]cavalier',
+    ]);
+    expect(english('white').facts.why(takes)).toBe('taking with your [[p:wq]]queen instead');
+  });
+
   it('says a double threat, mate and a piece at once', () => {
     const threat = { kind: 'doubleThreat', target: black('rook') } as const;
     expect(english('white').facts.why(threat)).toBe(

@@ -76,12 +76,18 @@ function threatsFr(viewer: Viewer): ThreatSentences {
       `${the(piece)} esquive ${threat}.`,
       `${the(piece)} se dérobe juste à temps à ${threat}.`,
     ],
-    threatens: (threat, material) => [
-      `La menace : ${threat} au coup suivant, qui gagnerait ${material}.`,
-      `Au coup suivant, ${threat} gagnerait ${material}.`,
-      `${threat} se prépare, et gagnerait ${material}.`,
-      `En vue : ${threat}, pour gagner ${material}.`,
-    ],
+    threatens: (threat, material, direct) =>
+      direct
+        ? [
+            `La menace : ${threat} au coup suivant, qui gagnerait ${material}.`,
+            `Au coup suivant, ${threat} gagnerait ${material}.`,
+            `${threat} se prépare, et gagnerait ${material}.`,
+            `En vue : ${threat}, pour gagner ${material}.`,
+          ]
+        : [
+            `La menace commence par ${threat}, et gagne ${material}.`,
+            `${threat} lancerait une suite qui gagne ${material}.`,
+          ],
   };
 }
 

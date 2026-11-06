@@ -5834,7 +5834,7 @@
       {
         "remark": "Taking is right here.",
         "parts": [
-          ["When ahead in material, every trade brings the win closer."],
+          ["A fair trade: the [[p:wr]]rook comes off."],
           ["The gap widens: now White has a winning position.", true]
         ]
       },
@@ -6154,7 +6154,7 @@
       {
         "remark": "Prendre est la bonne décision ici.",
         "parts": [
-          ["Avec du matériel en plus, chaque échange rapproche la victoire."],
+          ["Un échange équitable : la [[p:wr]]tour disparaît."],
           ["L’écart se creuse : maintenant les Blancs ont une position gagnante.", true]
         ]
       },

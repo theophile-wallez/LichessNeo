@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { played, record } from '#page/review/fixtures/played.ts';
 import { en } from '#page/review/i18n/en.ts';
+import { fr } from '#page/review/i18n/fr.ts';
 import { findings } from './fact.ts';
 
 // What the better move is said to have done, against the move played: the
 // other piece to take with, not the danger both moves left, a pawn taken as
-// a pawn once the kings are out.
+// a pawn once the kings are out, a trade into a won pawn ending.
 
 const PLAY = /@[ab]:[^\]]*/g;
 
@@ -43,5 +44,21 @@ describe('the better move', () => {
     expect(factOf(endgame, ['g1f1', 'h2h6'], [80, 60])).toMatch(/taking the \[\[p:bp\]\]pawn/);
     const middlegame = 'q5k1/8/7p/8/8/8/7R/Q5K1 w - - 0 1';
     expect(factOf(middlegame, ['g1f1', 'h2h6'], [80, 60])).toMatch(/king/);
+  });
+
+  it('trades into a won pawn ending', () => {
+    // Rxd8 Kxd8 leaves two pawns against one; Rc1 keeps the rooks on.
+    const move = played({
+      fen: '3r4/4k1p1/8/8/8/8/5PP1/3R2K1 w - - 0 1',
+      uci: 'd1c1',
+      before: record(95, ['d1d8', 'e7d8', 'g1f1', 'd8e7']),
+      after: record(70, ['d8d2', 'g1f1']),
+    });
+    expect(findings(move, en).fact?.text.replace(PLAY, '')).toBe(
+      'Better was [[m:w:Rxd8]], trading into a won pawn ending.',
+    );
+    expect(findings(move, fr).fact?.text.replace(PLAY, '')).toBe(
+      'Il fallait jouer [[m:w:Rxd8]], qui menait à une finale de pions gagnée.',
+    );
   });
 });

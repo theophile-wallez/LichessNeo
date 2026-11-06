@@ -46,7 +46,9 @@ export function sayOnce(
   why: string | null,
 ): string | null {
   const given = JSON.stringify(reason);
-  if (!isNew(told, reason.kind, uci) || why === null || told.said.has(given)) return null;
+  // A piece chased that turns out trapped is news, though the chase was told.
+  const kind = reason.kind === 'chases' && reason.trapped === true ? 'traps' : reason.kind;
+  if (!isNew(told, kind, uci) || why === null || told.said.has(given)) return null;
   told.said.add(given);
   return why;
 }

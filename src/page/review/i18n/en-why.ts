@@ -45,6 +45,7 @@ const PLAIN_REASONS: Readonly<Record<PlainReason, string>> = {
   opposition: 'taking the opposition',
   checks: 'with check',
   discoveredCheck: 'with a discovered check',
+  pawnEnding: 'trading into a won pawn ending',
 };
 
 type PieceReason = Extract<Reason, { readonly piece: Piece }>;
@@ -55,8 +56,21 @@ function pinWhy({ kept, behind }: Extract<PieceReason, { kind: 'pins' }>, piece:
     : `pinning ${piece} to ${bare(behind)}`;
 }
 
-function pieceWhy(reason: PieceReason, the: (piece: Piece) => string): string {
-  const piece = the(reason.piece);
+// The side moving names its own pieces plainly, but for the reader's: "developing
+// your knight", the opponent "developing the knight", not "the opponent's".
+const OWN_KINDS: ReadonlySet<string> = new Set([
+  'develops',
+  'outpost',
+  'saves',
+  'guards',
+  'centralizes',
+  'takesWith',
+]);
+
+type Namer = (piece: Piece) => string;
+
+function pieceWhy(reason: PieceReason, the: Namer, own: Namer): string {
+  const piece = OWN_KINDS.has(reason.kind) ? own(reason.piece) : the(reason.piece);
   if (reason.kind === 'develops') return `developing ${piece}`;
   if (reason.kind === 'outpost') return `planting ${piece} on an outpost`;
   if (reason.kind === 'chases') return chaseWhyEn(reason, piece);
@@ -89,14 +103,14 @@ function takesWhyEn(reason: PieceReason, piece: string): string {
 
 // An open file taken, or a battery: with the queen there already, a rook
 // lines up with it rather than taking the file.
-function lineWhy(reason: LineReason, the: (piece: Piece) => string): string {
+function lineWhy(reason: LineReason, the: Namer, own: Namer): string {
   if (reason.kind === 'diagonalBattery')
-    return `forming a battery with ${the(reason.partner)}, aimed at ${the(reason.target)}`;
+    return `forming a battery with ${own(reason.partner)}, aimed at ${the(reason.target)}`;
   const file = `the ${reason.halfOpen ? 'half-open' : 'open'} file`;
   if (reason.kind === 'fileBattery')
-    return `forming a battery with ${the(reason.partner)} on ${file}`;
+    return `forming a battery with ${own(reason.partner)} on ${file}`;
   if (reason.kind === 'preparesBattery')
-    return `preparing a battery with ${the(reason.partner)} on ${file}`;
+    return `preparing a battery with ${own(reason.partner)} on ${file}`;
   return reason.contested ? `contesting ${file}` : `taking ${file}`;
 }
 
@@ -104,6 +118,7 @@ function lineWhy(reason: LineReason, the: (piece: Piece) => string): string {
 // A participle says a move still to come as well.
 export function whyEn(viewer: Viewer): (reason: Reason) => string {
   const the = (piece: Piece): string => definite(viewer, piece);
+  const own = (piece: Piece): string => (piece.color === viewer ? the(piece) : bare(piece));
   const quiet = quietWhyEn(the);
   const why = (reason: Reason): string => {
     if (isPlain(reason)) return PLAIN_REASONS[reason.kind];
@@ -115,8 +130,8 @@ export function whyEn(viewer: Viewer): (reason: Reason) => string {
         : `setting up a discovered attack on ${the(reason.target)}`;
     if (reason.kind === 'doubleThreat')
       return `threatening mate and ${the(reason.target)} at once, and only one can be saved`;
-    if ('piece' in reason) return pieceWhy(reason, the);
-    if (isLineReason(reason)) return lineWhy(reason, the);
+    if ('piece' in reason) return pieceWhy(reason, the, own);
+    if (isLineReason(reason)) return lineWhy(reason, the, own);
     if (reason.kind === 'passedPawn') return passedWhy(reason.made, reason.trait);
     if (reason.kind === 'fork') return `forking ${pairOf(viewer, reason.first, reason.second)}`;
     if (reason.kind === 'attacksKing') return `attacking ${the(reason.king)}`;

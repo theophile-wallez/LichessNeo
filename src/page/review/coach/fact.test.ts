@@ -52,23 +52,28 @@ const textOf = (move: MoveVerdict, threats?: Threats, language = en) =>
 
 const black = (role: Piece['role']): Piece => ({ role, color: 'black' });
 
-/** White's Nxd6, at a knight the c7 pawn defends. */
-const trade = (from: string, to: string) =>
+/** White's Nxd6, at a knight the c7 pawn defends, White's chances `chance` after it. */
+const trade = (from: string, to: string, chance = 50) =>
   verdict({
     from,
     uci: 'e4d6',
     san: 'Nxd6',
     to,
-    before: record(50, ['e4d6']),
-    after: record(50, ['c7d6']),
+    before: record(chance, ['e4d6']),
+    after: record(chance, ['c7d6']),
   });
 
 describe('a capture', () => {
   it('is a trade, which a side ahead in material is glad of', () => {
     const even = trade('7k/2p5/3n4/8/4N3/8/8/4K3 w - - 0 1', '7k/2p5/3N4/8/8/8/8/4K3 b - - 0 1');
     expect(en.facts.trades(black('knight'), false)).toContain(textOf(even));
-    const ahead = trade('7k/2p5/3n4/8/4N3/8/8/R3K3 w - - 0 1', '7k/2p5/3N4/8/8/8/8/R3K3 b - - 0 1');
-    expect(en.facts.trades(black('knight'), true)).toContain(textOf(ahead));
+    const [rookUp, traded] = [
+      '7k/2p5/3n4/8/4N3/8/8/R3K3 w - - 0 1',
+      '7k/2p5/3N4/8/8/8/8/R3K3 b - - 0 1',
+    ];
+    expect(en.facts.trades(black('knight'), true)).toContain(textOf(trade(rookUp, traded, 90)));
+    // A rook up on the board, but level in the score: no win to bring closer.
+    expect(en.facts.trades(black('knight'), false)).toContain(textOf(trade(rookUp, traded)));
   });
 });
 

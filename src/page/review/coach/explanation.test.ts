@@ -199,6 +199,6 @@ describe('the comment', () => {
     expect(parts[0]?.text).toMatch(/falls|wins nothing/);
     expect(parts[1]?.text).toMatch(/Bf4/);
     expect(parts.at(-1)?.detail).toBe(true);
-    expect(parts.at(-1)?.text).toMatch(/Bxb2/);
+    expect(parts.at(-1)?.text).toMatch(/Rxb2/);
   });
 });

@@ -43,23 +43,31 @@ const PLAIN_REASONS: Readonly<Record<PlainReason, readonly [string, string]>> = 
   opposition: ['prenait l’opposition', 'prend l’opposition'],
   checks: ['donnait échec', 'donne échec'],
   discoveredCheck: ['donnait un échec à la découverte', 'donne un échec à la découverte'],
+  pawnEnding: ['menait à une finale de pions gagnée', 'mène à une finale de pions gagnée'],
 };
 
 type PieceReason = Extract<Reason, { readonly piece: Piece }>;
 type Tense = (past: string, present: string) => string;
 
-function pieceWhy(reason: PieceReason, the: (piece: Piece) => string, tense: Tense): string {
-  const piece = the(reason.piece);
+// The side moving names its own pieces plainly, but for the reader's : « sortait
+// ton cavalier », l'adversaire « sortait le cavalier », pas « de l'adversaire ».
+const OWN_KINDS: ReadonlySet<string> = new Set([
+  'develops',
+  'outpost',
+  'saves',
+  'guards',
+  'centralizes',
+  'takesWith',
+]);
+
+type Namer = (piece: Piece) => string;
+
+function pieceWhy(reason: PieceReason, names: { the: Namer; own: Namer }, tense: Tense): string {
+  const piece = (OWN_KINDS.has(reason.kind) ? names.own : names.the)(reason.piece);
   if (reason.kind === 'develops') return `${tense('sortait', 'sort')} ${piece}`;
   if (reason.kind === 'outpost')
     return `${tense('installait', 'installe')} ${piece} sur un avant-poste`;
-  if (reason.kind === 'chases') {
-    const on = reason.square ? ` en ${reason.square}` : '';
-    if (reason.trapped) return `${tense('enfermait', 'enferme')} ${piece}${on}`;
-    return reason.undefended
-      ? `${tense('attaquait', 'attaque')} ${piece} sans défense${on}`
-      : `${tense('gagnait', 'gagne')} un tempo sur ${piece}${on}`;
-  }
+  if (reason.kind === 'chases') return chaseWhy(reason, piece, tense);
   if (reason.kind === 'attacksPawn') return pawnWhy(reason, tense);
   if (reason.kind === 'pins' && reason.kept)
     return `${tense('gardait', 'garde')} ${piece} cloué${agreement(reason.piece)} sur ${bare(reason.behind)}`;
@@ -70,6 +78,19 @@ function pieceWhy(reason: PieceReason, the: (piece: Piece) => string, tense: Ten
     return `${tense('protégeait', 'protège')} ${piece}${reason.square ? ` en ${reason.square}` : ''}`;
   if (reason.kind === 'centralizes') return `${tense('centralisait', 'centralise')} ${piece}`;
   return takesWhy(reason, piece, tense);
+}
+
+// A piece chased: trapped, undefended, or a tempo gained on it.
+function chaseWhy(
+  { square, trapped, undefended }: Extract<Reason, { kind: 'chases' }>,
+  piece: string,
+  tense: Tense,
+): string {
+  const on = square ? ` en ${square}` : '';
+  if (trapped) return `${tense('enfermait', 'enferme')} ${piece}${on}`;
+  return undefended
+    ? `${tense('attaquait', 'attaque')} ${piece} sans défense${on}`
+    : `${tense('gagnait', 'gagne')} un tempo sur ${piece}${on}`;
 }
 
 function pawnWhy(
@@ -112,15 +133,19 @@ function tacticWhy(reason: TacticReason, viewer: Viewer, tense: Tense): string {
 
 // An open file taken, or a battery: with the queen there already, a rook
 // lines up with it rather than taking the file.
-function lineWhy(reason: LineReason, the: (piece: Piece) => string, tense: Tense): string {
+function lineWhy(
+  reason: LineReason,
+  { the, own }: { the: Namer; own: Namer },
+  tense: Tense,
+): string {
   const forms = tense('formait', 'forme');
   if (reason.kind === 'diagonalBattery')
-    return `${forms} une batterie avec ${the(reason.partner)}, braquée sur ${the(reason.target)}`;
+    return `${forms} une batterie avec ${own(reason.partner)}, braquée sur ${the(reason.target)}`;
   const file = `la colonne ${reason.halfOpen ? 'semi-ouverte' : 'ouverte'}`;
   if (reason.kind === 'fileBattery')
-    return `${forms} une batterie avec ${the(reason.partner)} sur ${file}`;
+    return `${forms} une batterie avec ${own(reason.partner)} sur ${file}`;
   if (reason.kind === 'preparesBattery')
-    return `${tense('préparait', 'prépare')} une batterie avec ${the(reason.partner)} sur ${file}`;
+    return `${tense('préparait', 'prépare')} une batterie avec ${own(reason.partner)} sur ${file}`;
   return reason.contested
     ? `${tense('contestait', 'conteste')} ${file}`
     : `${tense('prenait', 'prend')} ${file}`;
@@ -130,6 +155,10 @@ function lineWhy(reason: LineReason, the: (piece: Piece) => string, tense: Tense
 // or does, for a move still to come : « Ça permet Fe2, qui attaque ton cavalier ».
 export function whyFr(viewer: Viewer): (reason: Reason, now?: boolean) => string {
   const the = (piece: Piece): string => owned(viewer, piece);
+  const names = {
+    the,
+    own: (piece: Piece): string => (piece.color === viewer ? the(piece) : bare(piece)),
+  };
   const quiet = quietWhyFr(the);
   const why = (reason: Reason, now = false): string => {
     const tense: Tense = (past, present) => (now ? present : past);
@@ -138,8 +167,8 @@ export function whyFr(viewer: Viewer): (reason: Reason, now?: boolean) => string
     if (reason.kind === 'both') return `${why(reason.first, now)} et ${why(reason.second, now)}`;
     if (reason.kind === 'discovery' || reason.kind === 'doubleThreat' || reason.kind === 'fork')
       return tacticWhy(reason, viewer, tense);
-    if ('piece' in reason) return pieceWhy(reason, the, tense);
-    if (isLineReason(reason)) return lineWhy(reason, the, tense);
+    if ('piece' in reason) return pieceWhy(reason, names, tense);
+    if (isLineReason(reason)) return lineWhy(reason, names, tense);
     if (reason.kind === 'passedPawn')
       return reason.made
         ? tense(
