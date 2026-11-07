@@ -431,6 +431,14 @@
     "message": "How the review marks best, excellent and good moves: a star, a thumb up and a tick, or three, two and one dots.",
     "description": "What the evaluation style setting covers."
   },
+  "settingReviewRating": {
+    "message": "Show estimated Elo in summary",
+    "description": "The setting that shows, in the review's summary, the rating each side played at."
+  },
+  "settingReviewRatingBody": {
+    "message": "After a game, the review guesses the level you played at, like “You played like a 1600 Elo”.",
+    "description": "What the review's rating setting covers."
+  },
   "classStyleIcons": {
     "message": "Icons",
     "description": "The evaluation style that draws a star, a thumb up and a tick."

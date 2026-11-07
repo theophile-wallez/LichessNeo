@@ -148,6 +148,8 @@ so the logic can be unit-tested without a page.
   with a skeleton, so the card keeps its size.
 - `clock-bar`: Lichess's clock bar, hidden unless the user picks Yes for it on
   Lichess's preferences page, whose radios show Neo's choice, tagged Neo.
+- `review-rating`: the rating the review says each side played at, under its
+  accuracy in the summary, hidden unless the settings show it.
 - `chesscom-ratings`: with the settings' Chess.com ratings on, every rating
   Lichess writes (`SPOTS`: a game's bars and info, mini games, game lists,
   rating cards and stats pages, our cards of those, hover cards, leaderboards,

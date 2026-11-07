@@ -79,6 +79,11 @@ main.account[data-ln-ext-settings] > .page-menu__content:not(.ln-ext-settings) {
   --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/star.svg');
 }
 
+.ln-ext-setting[data-ln-ext-setting='reviewRating'] {
+  --ln-ext-setting-color: var(--ln-ext-yellow);
+  --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/medal-01.svg');
+}
+
 .ln-ext-setting[data-ln-ext-setting='sidebarRating'] {
   --ln-ext-setting-color: var(--ln-ext-green);
   --ln-ext-setting-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');

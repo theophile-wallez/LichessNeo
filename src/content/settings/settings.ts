@@ -36,6 +36,8 @@ const SettingsFields = z.object({
   coachBoard: z.prefault(z.boolean(), true),
   /** How the review draws best, excellent and good moves: icons, or three, two and one dots. */
   classStyle: z.catch(ClassStyleSchema, 'icons'),
+  /** The rating the review says each side played at, under its accuracy (content/review-rating). */
+  reviewRating: z.prefault(z.boolean(), false),
   /** The kinds of the coach's drawing kept off the board while it draws the rest (drawings-card.ts). */
   coachDrawingsHidden: HiddenDrawingsSchema,
   navigation: z.catch(NavigationSchema, DEFAULT_NAVIGATION),

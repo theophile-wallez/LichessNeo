@@ -395,6 +395,12 @@
   "settingClassStyleBody": {
     "message": "Comment le bilan marque les meilleurs coups, les très bons et les bons : une étoile, un pouce et une coche, ou trois, deux et un point."
   },
+  "settingReviewRating": {
+    "message": "Afficher l’Elo estimé dans le bilan"
+  },
+  "settingReviewRatingBody": {
+    "message": "Après une partie, le bilan estime le niveau auquel vous avez joué, par exemple « Vous avez joué comme un 1600 Elo »."
+  },
   "classStyleIcons": {
     "message": "Icônes"
   },

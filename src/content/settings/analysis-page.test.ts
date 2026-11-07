@@ -43,6 +43,7 @@ describe('the settings’ Analysis page', () => {
     expect(order).toEqual([
       'settingsGroupReview',
       'classStyle',
+      'reviewRating',
       'coachBoard',
       'settingsGroupAnalysisBoard',
       'analysisCoach',

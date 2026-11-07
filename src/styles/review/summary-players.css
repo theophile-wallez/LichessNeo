@@ -155,7 +155,9 @@ html.light .ln-ext-sum-player__trophy {
   font-weight: 600;
 }
 
-/* Lichess's "Show player ratings" off (`body.no-rating`): no rating the game was played at. */
+/* No rating the game was played at unless the settings show it (content/review-rating), nor
+   with Lichess's "Show player ratings" off (`body.no-rating`). */
+html:not([data-ln-ext-review-rating]) .ln-ext-sum-player__elo,
 body.no-rating .ln-ext-sum-player__elo {
   display: none;
 }
