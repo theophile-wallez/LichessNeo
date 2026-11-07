@@ -57,12 +57,15 @@ interface Parts {
 
 function draw(list: readonly Track[], parts: Parts, playing: number | undefined): void {
   const { box, button, bars, caption } = parts;
-  box.classList.toggle('ln-ext-player--playing', playing !== undefined);
+  box.classList.toggle('ln-ext-sound-player--playing', playing !== undefined);
   for (const [i, bar] of bars.entries()) {
     const sound = Math.floor((i * list.length) / bars.length);
-    bar.classList.toggle('ln-ext-player__bar--on', sound === playing);
+    bar.classList.toggle('ln-ext-sound-player__bar--on', sound === playing);
     setBeating(bar, sound === playing, i);
-    bar.classList.toggle('ln-ext-player__bar--played', playing !== undefined && sound < playing);
+    bar.classList.toggle(
+      'ln-ext-sound-player__bar--played',
+      playing !== undefined && sound < playing,
+    );
   }
   const label = message(playing === undefined ? 'packsPlaySet' : 'packsStopSet');
   button.setAttribute('aria-label', label);
@@ -111,25 +114,25 @@ function player(list: readonly Track[], parts: Parts): () => void {
 /** The player over a sound set's tile, in place of a preview. */
 export function soundPlayer(item: Pack): HTMLElement {
   const list = tracks(item);
-  const box = createElement('div', { className: 'ln-ext-player' });
+  const box = createElement('div', { className: 'ln-ext-sound-player' });
   const button = createElement('button', {
-    className: 'ln-ext-player__play',
+    className: 'ln-ext-sound-player__play',
     attrs: { type: 'button' },
   });
   const wave = createElement('span', {
-    className: 'ln-ext-player__bars',
+    className: 'ln-ext-sound-player__bars',
     attrs: { 'aria-hidden': 'true' },
   });
   const bars = HEIGHTS.map(height => {
-    const bar = createElement('span', { className: 'ln-ext-player__bar' });
+    const bar = createElement('span', { className: 'ln-ext-sound-player__bar' });
     setStyleProperty(bar, 'height', `${height}%`);
     return bar;
   });
   wave.append(...bars);
-  const caption = createElement('span', { className: 'ln-ext-player__caption' });
+  const caption = createElement('span', { className: 'ln-ext-sound-player__caption' });
   const parts = { box, button, bars, caption };
   button.addEventListener('click', player(list, parts));
-  const foot = createElement('span', { className: 'ln-ext-player__foot' });
+  const foot = createElement('span', { className: 'ln-ext-sound-player__foot' });
   foot.append(button, caption);
   box.append(wave, foot);
   draw(list, parts, undefined);

@@ -42,14 +42,14 @@ function mount(item: Pack): HTMLElement {
 }
 
 const caption = (player: HTMLElement): string | null | undefined =>
-  player.querySelector('.ln-ext-player__caption')?.textContent;
+  player.querySelector('.ln-ext-sound-player__caption')?.textContent;
 const button = (player: HTMLElement): HTMLButtonElement => {
-  const found = queryOne(player, '.ln-ext-player__play', HTMLButtonElement);
+  const found = queryOne(player, '.ln-ext-sound-player__play', HTMLButtonElement);
   if (!found) throw new Error('No button');
   return found;
 };
 const lit = (player: HTMLElement): number =>
-  queryAll(player, '.ln-ext-player__bar--on', HTMLElement).length;
+  queryAll(player, '.ln-ext-sound-player__bar--on', HTMLElement).length;
 const last = (): FakeAudio => {
   const audio = FakeAudio.played.at(-1);
   if (!audio) throw new Error('Nothing played');
@@ -72,7 +72,7 @@ beforeEach(() => {
 
 afterEach(() => {
   // Ends what still plays, so the next test starts with nothing playing.
-  for (const player of queryAll(document, '.ln-ext-player--playing', HTMLElement))
+  for (const player of queryAll(document, '.ln-ext-sound-player--playing', HTMLElement))
     button(player).click();
   vi.useRealTimers();
   vi.unstubAllGlobals();
@@ -93,7 +93,7 @@ describe('a sound set’s player', () => {
     button(player).click();
     await vi.advanceTimersByTimeAsync(0);
     expect(caption(player)).toBe('packsSoundNameMoveSelf');
-    expect(player.classList).toContain('ln-ext-player--playing');
+    expect(player.classList).toContain('ln-ext-sound-player--playing');
     expect(button(player).getAttribute('aria-label')).toBe('packsStopSet');
     expect(lit(player)).toBe(6);
     expect(last().src).toBe('blob:1');
@@ -104,11 +104,11 @@ describe('a sound set’s player', () => {
     last().end();
     vi.advanceTimersByTime(250);
     expect(caption(player)).toBe('packsSoundNameCastle');
-    expect(queryAll(player, '.ln-ext-player__bar--played', HTMLElement)).toHaveLength(12);
+    expect(queryAll(player, '.ln-ext-sound-player__bar--played', HTMLElement)).toHaveLength(12);
     last().end();
     vi.advanceTimersByTime(250);
     expect(FakeAudio.played).toHaveLength(3);
-    expect(player.classList).not.toContain('ln-ext-player--playing');
+    expect(player.classList).not.toContain('ln-ext-sound-player--playing');
     expect(caption(player)).toBe('packsSoundCount:3');
     expect(lit(player)).toBe(0);
   });
@@ -131,7 +131,7 @@ describe('a sound set’s player', () => {
     const playing = last();
     button(second).click();
     expect(playing.paused).toBe(true);
-    expect(first.classList).not.toContain('ln-ext-player--playing');
+    expect(first.classList).not.toContain('ln-ext-sound-player--playing');
     expect(caption(second)).toBe('packsSoundNameNotify');
   });
 
@@ -140,7 +140,7 @@ describe('a sound set’s player', () => {
     FakeAudio.refuse = true;
     button(player).click();
     await vi.advanceTimersByTimeAsync(0);
-    expect(player.classList).not.toContain('ln-ext-player--playing');
+    expect(player.classList).not.toContain('ln-ext-sound-player--playing');
     FakeAudio.refuse = false;
     button(player).click();
     player.remove();

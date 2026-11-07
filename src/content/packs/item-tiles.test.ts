@@ -110,8 +110,8 @@ describe('the user’s own items', () => {
 
   it('give a sound set a player in place of a preview', async () => {
     const { rows } = await start([CLICKS, HARBOR]);
-    expect(queryAll(rows(), '.ln-ext-player', HTMLElement)).toHaveLength(1);
-    expect(row(rows(), 'sound').querySelector('.ln-ext-player__caption')?.textContent).toBe(
+    expect(queryAll(rows(), '.ln-ext-sound-player', HTMLElement)).toHaveLength(1);
+    expect(row(rows(), 'sound').querySelector('.ln-ext-sound-player__caption')?.textContent).toBe(
       'packsSoundCount:2',
     );
   });

@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
+import { bundleCss } from '#scripts/lib/css-bundle.ts';
 import { queryOne } from '#shared/dom.ts';
 
 // Our analysis bar, filled as content/analysis/player-bar.ts fills it.
@@ -47,5 +48,23 @@ describe('the player bars', () => {
     const title = queryOne(document, '.utitle', HTMLElement);
     if (!title) throw new Error('no title');
     expect(Number.parseFloat(getComputedStyle(title).wordSpacing)).toBeLessThan(0);
+  });
+});
+
+describe('our analysis bar, under every stylesheet', () => {
+  // The Packs card's sound player once took its class: its `top: 8px` set the avatar on the
+  // board, and its `pointer-events: none` the name out of reach.
+  it('takes no rule meant for another part of ours', async () => {
+    const css = await bundleCss(join(import.meta.dirname, 'index.css'));
+    const sheet = document.createElement('style');
+    // happy-dom drops a selector whose `:is()` runs over several lines.
+    sheet.textContent = css.replace(/\s+/g, ' ');
+    document.head.replaceChildren(sheet);
+    document.body.innerHTML = BAR;
+    const bar = queryOne(document, '.ln-ext-player', HTMLElement);
+    if (!bar) throw new Error('no bar');
+    const style = getComputedStyle(bar);
+    expect(style.top).not.toMatch(/\d/);
+    expect(style.pointerEvents).not.toBe('none');
   });
 });
