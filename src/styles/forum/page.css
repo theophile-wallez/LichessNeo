@@ -127,25 +127,34 @@ main.search[data-ln-ext-search$='/forum/search'] > .box__top h1 > a[data-icon]:f
   box-shadow: var(--ln-ext-btn-grey-shadow);
   color: var(--ln-ext-text) !important;
   font-size: 0;
-  transition:
-    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    background-color 0.15s !important;
+  transition: background-color 0.15s !important;
 }
 
+/* Only the chevron slides back on hover: were the button to slide, it would leave a
+   cursor on its edge, lose the hover and slide back, over and over. */
 main.forum .box__top h1 > a[data-icon]:first-child::before,
 main.search[data-ln-ext-search$='/forum/search'] > .box__top h1 > a[data-icon]:first-child::before {
   margin: 0 !important;
   font-size: 18px;
   line-height: 1;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 main.forum .box__top h1 > a[data-icon]:first-child:hover,
 main.search[data-ln-ext-search$='/forum/search'] > .box__top h1 > a[data-icon]:first-child:hover {
   background: var(--ln-ext-btn-grey-hover);
   color: var(--ln-ext-text-strong) !important;
+}
+
+main.forum .box__top h1 > a[data-icon]:first-child:hover::before,
+main.search[data-ln-ext-search$='/forum/search']
+  > .box__top
+  h1
+  > a[data-icon]:first-child:hover::before {
   transform: translateX(-3px);
 }
 
+/* Mirrored, the chevron slides the other way with it. */
 html[dir='rtl'] main.forum .box__top h1 > a[data-icon]:first-child,
 html[dir='rtl']
   main.search[data-ln-ext-search$='/forum/search']
@@ -153,15 +162,6 @@ html[dir='rtl']
   h1
   > a[data-icon]:first-child {
   transform: scaleX(-1);
-}
-
-html[dir='rtl'] main.forum .box__top h1 > a[data-icon]:first-child:hover,
-html[dir='rtl']
-  main.search[data-ln-ext-search$='/forum/search']
-  > .box__top
-  h1
-  > a[data-icon]:first-child:hover {
-  transform: scaleX(-1) translateX(-3px);
 }
 
 /* The category's tile, after the back button. */

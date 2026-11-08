@@ -53,3 +53,23 @@ describe('the forum’s box', () => {
     expect(getComputedStyle(box).overflow).toBe('visible');
   });
 });
+
+describe('the back button', () => {
+  // A button that slides on hover leaves a cursor on its edge, which then loses the hover,
+  // and the button slides back under it, over and over.
+  it('stays put on hover, and slides only its chevron', () => {
+    const style = document.createElement('style');
+    style.textContent = stylesheet('page.css');
+    document.head.append(style);
+    const hovers = [...(style.sheet?.cssRules ?? [])]
+      .filter(rule => rule instanceof CSSStyleRule)
+      .filter(rule => rule.selectorText.includes('a[data-icon]:first-child:hover'));
+    const moved = (suffix: string): string[] =>
+      hovers
+        .filter(rule => rule.selectorText.split(',').some(part => part.trim().endsWith(suffix)))
+        .map(rule => rule.style.getPropertyValue('transform'))
+        .filter(transform => transform !== '');
+    expect(moved(':first-child:hover')).toEqual([]);
+    expect(moved(':first-child:hover > .before')).toEqual(['translateX(-3px)']);
+  });
+});
