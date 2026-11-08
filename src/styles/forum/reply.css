@@ -287,6 +287,24 @@ main.forum-topic .markdown-editor .header[data-ln-ext-tabs] .header-tab.active {
   background: transparent !important;
 }
 
+/* As tall as the pills: Lichess hides it under Preview, and at its own 40px the bar
+   would shrink and the tabs jump. */
+main.forum-topic .markdown-editor .header .button-empty {
+  height: 32px;
+  color: var(--ln-ext-text-dim);
+}
+
+main.forum-topic .markdown-editor .header .button-empty:hover {
+  color: var(--ln-ext-text-strong);
+}
+
+/* Lichess paints it its link color on hover: it follows the button, as the pills do. */
+main.forum-topic .markdown-editor .upload-image {
+  background: currentColor !important;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/image-add-02.svg') center /
+    22px no-repeat;
+}
+
 main.forum-topic .markdown-editor textarea {
   min-height: 160px;
   padding: 12px 14px !important;
