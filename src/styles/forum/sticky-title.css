@@ -3,10 +3,8 @@
 /* On long pages (topics, posts, search results) the title sticks and casts a shadow
    once stuck. Desktop only: below, Lichess's fixed top bar would cover it. */
 @media (min-width: 1020px) {
-  /* The box's overflow clip would keep the title from sticking. */
   main.forum:is(.forum-categ, .forum-topic:not(.topic-form)),
   main.box.search[data-ln-ext-search$='/forum/search'] {
-    overflow: visible !important;
     padding-top: 0 !important;
   }
 

@@ -48,8 +48,11 @@ main.forum-topic[data-ln-ext-back*='/forum/team-'] {
 
 /* ---- Page --- */
 
+/* Without its clip: the back button sits on the box's edge, and its hover shift and
+   shadow would be cut. It also lets the title stick. */
 main.forum.box,
 main.box.search[data-ln-ext-search$='/forum/search'] {
+  overflow: visible !important;
   padding: 16px 0 48px !important;
   background: transparent !important;
   box-shadow: none !important;

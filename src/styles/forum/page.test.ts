@@ -38,3 +38,18 @@ describe('the forum index’s title', () => {
     expect(getComputedStyle(picture).getPropertyValue('--mask')).toBe('none');
   });
 });
+
+describe('the forum’s box', () => {
+  it('drops Lichess’s clip, which cut the back button’s hover shift on the new topic form', () => {
+    const style = document.createElement('style');
+    style.textContent = `.box { overflow: hidden; } ${stylesheet('page.css')}`;
+    document.head.append(style);
+    document.body.innerHTML =
+      '<main class="box forum forum-topic topic-form"><div class="box__top">' +
+      '<h1><a href="/forum/game-analysis" data-icon=""></a>Game Analysis</h1>' +
+      '</div></main>';
+    const box = queryOne(document, 'main', HTMLElement);
+    if (!box) throw new Error('no box');
+    expect(getComputedStyle(box).overflow).toBe('visible');
+  });
+});
