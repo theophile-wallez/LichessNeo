@@ -62,6 +62,13 @@ const FLAGS: Readonly<Record<string, string>> = {
   'lobby-games': 'main.lobby > .ln-ext-home-games',
   'coach-list': 'main.coach-list',
   'team-list': 'main.team-list',
+  'team-events': 'main.team-events',
+  // A leaderboard's top players (/player/top/<n>/<mode>).
+  'leaderboard-top': 'main.box > table.slist-leaderboard',
+  // A form in a padded card beside a side menu: a new team, a broadcast, a coach's profile.
+  'menu-form': 'main.page-menu:not(.account) > .page-menu__content.box-pad > form',
+  // A team's tournaments page, whose <main> has no class.
+  'team-tournaments': 'main:not(.page-menu) > .box > .team-tournaments',
   'user-show': 'main.page-menu .user-show',
   account: 'main.account:not(.dgt)',
   'perf-stat': 'main.page-menu > .perf-stat',

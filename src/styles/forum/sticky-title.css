@@ -1,14 +1,15 @@
 /* ---- Sticky title --- */
 
-/* On long pages (topics, posts, search results) the title sticks and casts a shadow
-   once stuck. Desktop only: below, Lichess's fixed top bar would cover it. */
+/* On long pages (the index signed in, topics, posts, search results) the title sticks and
+   casts a shadow once stuck. Desktop only: below, Lichess's fixed top bar would cover it. */
 @media (min-width: 1020px) {
-  main.forum:is(.forum-categ, .forum-topic:not(.topic-form)),
+  main.forum:is(.index, .forum-categ, .forum-topic:not(.topic-form)),
   main.box.search[data-ln-ext-search$='/forum/search'] {
     padding-top: 0 !important;
   }
 
   main.forum:is(.forum-categ, .forum-topic:not(.topic-form)) > .box__top,
+  main.forum.index > .box__top:first-child,
   main.search[data-ln-ext-search$='/forum/search'] > .box__top {
     container-type: scroll-state;
     position: sticky;
@@ -24,6 +25,7 @@
   }
 
   main.forum:is(.forum-categ, .forum-topic:not(.topic-form)) > .box__top::after,
+  main.forum.index > .box__top:first-child::after,
   main.search[data-ln-ext-search$='/forum/search'] > .box__top::after {
     content: '';
     position: absolute;
@@ -38,6 +40,7 @@
 
   @container scroll-state(stuck: top) {
     main.forum:is(.forum-categ, .forum-topic:not(.topic-form)) > .box__top::after,
+    main.forum.index > .box__top:first-child::after,
     main.search[data-ln-ext-search$='/forum/search'] > .box__top::after {
       opacity: 1;
     }

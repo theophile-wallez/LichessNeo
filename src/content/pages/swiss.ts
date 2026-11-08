@@ -1,4 +1,4 @@
-import { queryAll, queryOne, setData, setStyleProperty } from '#shared/dom.ts';
+import { queryAll, setData, setStyleProperty } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
@@ -41,21 +41,10 @@ export function syncMedals(): void {
   }
 }
 
-// From 1260px the page doesn't scroll, only its middle column does. Page keys
-// act on the focused scroller, so the column takes the focus once, unless
-// something else has it.
-export function syncFocus(): void {
-  const column = queryOne(document, 'main.swiss .swiss__main:not([tabindex])', HTMLElement);
-  if (!column || !matchMedia('(min-width: 1260px)').matches) return;
-  column.tabIndex = -1;
-  if (document.activeElement === document.body) column.focus({ preventScroll: true });
-}
-
 export const swiss: Feature = {
   name: 'swiss',
   start: () => {
     onEveryTick('swiss rounds', syncRounds);
     onEveryTick('swiss medals', syncMedals);
-    onEveryTick('swiss focus', syncFocus);
   },
 };

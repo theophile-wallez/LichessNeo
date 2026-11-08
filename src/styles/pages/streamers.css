@@ -25,3 +25,17 @@ main.page-menu[data-ln-ext-menu~='streamers'][data-ln-ext-nav-active$='/about'] 
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/package.svg');
   --ln-ext-nav-color: var(--ln-ext-cyan);
 }
+
+/* A streamer's page: its side (the stream's chat and the menu) stays put while the page
+ * scrolls, scrolling on its own when taller than the window. Lichess stretched it down the
+ * page's whole height. Desktop only: below 1020px Lichess's top bar holds the top edge. */
+@media (min-width: 1020px) {
+  main.streamer-show > .page-menu__menu {
+    position: sticky;
+    top: 16px;
+    align-self: start;
+    max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+}

@@ -37,11 +37,7 @@ main.swiss .podium-wrap {
   display: contents;
 }
 
-/* Finished: the podium carries the trophies. */
-main.swiss .swiss__main-finished .swiss__main__header > icon.img {
-  display: none;
-}
-
+/* Finished, the title keeps its picture: pinned, it stays once the podium has scrolled away. */
 main.swiss .swiss__main-finished .swiss__main__header {
   padding-bottom: 8px !important;
 }

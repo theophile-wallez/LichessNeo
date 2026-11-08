@@ -1,0 +1,60 @@
+/* The features page (/features): one table in two sections, Website then Mobile, each headed
+ * by a row naming the accounts. That row is the page's title: it stays put while the
+ * features scroll, the next section's taking its place (desktop only: below, Lichess's top
+ * bar would cover it). */
+
+@media (min-width: 1020px) {
+  /* `hidden` would catch the sticky row, and have #main-wrap's grid cut the page to the
+   * window's height. `clip` loses a scroller's zero min-width: set it back. */
+  main.box.features {
+    min-width: 0;
+    overflow: clip !important;
+  }
+
+  main.box.features thead th {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    background: var(--ln-ext-bg-panel);
+  }
+
+  /* The strip above, in the page's color as --ln-ext-pin-cover paints it: a collapsed
+   * table's cells draw no shadow. It runs over the card's padding on either side. */
+  main.box.features thead th::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    inset-inline: 0;
+    height: var(--ln-ext-page-top);
+    background: var(--ln-ext-bg-page);
+    pointer-events: none;
+  }
+
+  main.box.features thead th:first-child::before {
+    inset-inline-start: calc(-1 * var(---box-padding));
+  }
+
+  main.box.features thead th:last-child::before {
+    inset-inline-end: calc(-1 * var(---box-padding));
+  }
+
+  /* A soft edge under the row once it's stuck. */
+  main.box.features thead th::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.box.features thead th::after {
+      opacity: 1;
+    }
+  }
+}

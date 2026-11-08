@@ -125,6 +125,13 @@ const MARKS: readonly Mark[] = [
       return count === '0' ? 'challenges' : 'challenges pending';
     },
   },
+  // A page of Lichess's own content (/page/<name>), by that name: its title's picture
+  // (styles/pages/pinned-titles.css). Lichess localizes the path's start, not its end.
+  {
+    selector: 'main.page.box',
+    key: 'lnExtPage',
+    read: () => /\/page\/([\w-]+)$/.exec(location.pathname)?.[1],
+  },
   // A list of players (styles/friends.css): a user link first on each row, or one
   // row of one cell when it's empty.
   {

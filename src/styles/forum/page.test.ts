@@ -73,3 +73,20 @@ describe('the back button', () => {
     expect(moved(':first-child:hover > .before')).toEqual(['translateX(-3px)']);
   });
 });
+
+describe('the forum index’s pinned title', () => {
+  // Signed in, the teams' forums run the index past the window: its title stays put.
+  it('sticks on a desktop, its first title only', () => {
+    Reflect.set(window, 'innerWidth', 1366);
+    const style = document.createElement('style');
+    style.textContent = stylesheet('page.css', 'sticky-title.css');
+    document.head.append(style);
+    document.body.innerHTML =
+      '<main class="box forum index"><div class="box__top"><h1>Lichess Forum</h1></div>' +
+      '<table class="categs"></table><div class="box__top"><h1>Team forums</h1></div></main>';
+    const [title, teams] = document.querySelectorAll('.box__top');
+    if (!title || !teams) throw new Error('no titles');
+    expect(getComputedStyle(title).position).toBe('sticky');
+    expect(getComputedStyle(teams).position).not.toBe('sticky');
+  });
+});

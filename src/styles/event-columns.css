@@ -1,0 +1,90 @@
+/* An arena's and a simul's page from 1260px, as styles/swiss-show/main.css lays out a Swiss's:
+ * only the middle column scrolls, the info, the chat and the side table staying put, and the
+ * card's title is pinned at the column's top (AGENTS.md, "Only the content scrolls"). The
+ * side can't be sticky instead, as Lichess's first row is a window tall. Below 1260px the
+ * columns stack and the page scrolls as one. content/pages/event-columns.ts gives the middle
+ * column the focus, for the keyboard. */
+
+@media (min-width: 1260px) {
+  /* Lichess's hidden hover cards at the document's end leave a little to scroll. */
+  html:is([data-ln-ext-has~='tour'], [data-ln-ext-has~='simul']),
+  html:is([data-ln-ext-has~='tour'], [data-ln-ext-has~='simul']) body,
+  html:is([data-ln-ext-has~='tour'], [data-ln-ext-has~='simul']) #main-wrap {
+    overflow: hidden !important;
+  }
+
+  /* Each column fits the window and scrolls in place. The spectators get what Lichess's
+   * first row leaves (about 60px). */
+  main:is(.tour, .simul) > :is(.tour__side, .simul__side) {
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  main:is(.tour, .simul) > .chat__members {
+    max-height: calc(
+      var(---site-header-height) + var(---site-header-margin) + var(---sticky-gap) + 3rem - 32px
+    );
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  main.tour > :is(.tour__main, .tour__table, .tour__stats),
+  main.simul > .simul__main {
+    align-self: start;
+    max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+
+  main:is(.tour, .simul) > :is(.tour__main, .simul__main):focus {
+    outline: none;
+  }
+
+  /* The arena's card keeps its corners, but `hidden` would catch its title. A finished one
+   * holds it with the podium: let it out (`display: contents`), so it stays put over the
+   * standings too. */
+  main.tour > .tour__main > .box {
+    overflow: clip !important;
+  }
+
+  main.tour > .tour__main > .box > .podium-wrap {
+    display: contents;
+  }
+
+  /* A simul's card is its column: the title sticks at the card's top. Isolated, so
+   * chessground's z-indexes don't paint the boards' pieces over it. */
+  main.simul > .simul__main .mini-game {
+    isolation: isolate;
+  }
+
+  main.tour > .tour__main > .box .tour__main__header,
+  main.simul > .simul__main > .box__top {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background: var(--ln-ext-bg-panel);
+  }
+
+  main.tour > .tour__main > .box .tour__main__header::after,
+  main.simul > .simul__main > .box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.tour > .tour__main > .box .tour__main__header::after,
+    main.simul > .simul__main > .box__top::after {
+      opacity: 1;
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { roundsProgress, syncFocus, syncMedals, syncRounds } from './swiss.ts';
+import { afterEach, describe, expect, it } from 'vitest';
+import { roundsProgress, syncMedals, syncRounds } from './swiss.ts';
 // Round bars and medals as the original set them, before and after a change.
 import legacy from './fixtures/legacy-swiss.json' with { type: 'json' };
 
@@ -26,31 +26,5 @@ describe('swiss rounds and medals', () => {
     expect(roundsProgress('3 / 4')).toBe('75%');
     expect(roundsProgress('3/0')).toBeNull();
     expect(roundsProgress('')).toBeNull();
-  });
-});
-
-describe('swiss focus', () => {
-  const html = '<main class="swiss"><div class="swiss__main"></div></main>';
-
-  it('gives the middle column the focus once, from 1260px', () => {
-    vi.stubGlobal('matchMedia', () => ({ matches: true }));
-    document.body.innerHTML = html;
-    syncFocus();
-    const column = document.querySelector('.swiss__main');
-    expect(column?.getAttribute('tabindex')).toBe('-1');
-    expect(document.activeElement).toBe(column);
-  });
-
-  it('keeps the focus where it is, and does nothing on narrow windows', () => {
-    vi.stubGlobal('matchMedia', () => ({ matches: false }));
-    document.body.innerHTML = html;
-    syncFocus();
-    expect(document.querySelector('.swiss__main')?.hasAttribute('tabindex')).toBe(false);
-    vi.stubGlobal('matchMedia', () => ({ matches: true }));
-    document.body.insertAdjacentHTML('afterbegin', '<input id="search">');
-    document.getElementById('search')?.focus();
-    syncFocus();
-    expect(document.activeElement?.id).toBe('search');
-    expect(document.querySelector('.swiss__main')?.getAttribute('tabindex')).toBe('-1');
   });
 });

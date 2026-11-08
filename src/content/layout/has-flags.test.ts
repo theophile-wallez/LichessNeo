@@ -46,6 +46,19 @@ describe('presentFlags, for flags the original lacked', () => {
       '<main class="analyse"><div class="game__meta"><div class="game__meta__players"></div></div></main>',
     ],
     ['inbox', '<main class="box msg-app pane-side"><div class="msg-app__side"></div></main>'],
+    ['team-events', '<main class="team-events page-menu"></main>'],
+    [
+      'team-tournaments',
+      '<main><div class="box"><div class="team-events team-tournaments"></div></div></main>',
+    ],
+    [
+      'leaderboard-top',
+      '<main class="page-small box"><table class="slist slist-leaderboard"></table></main>',
+    ],
+    [
+      'menu-form',
+      '<main class="page-menu"><div class="page-menu__content box box-pad"><form></form></div></main>',
+    ],
   ])('reads %s', (flag, page) => {
     document.body.innerHTML = page;
     expect(presentFlags(document).split(' ')).toContain(flag);
@@ -55,6 +68,21 @@ describe('presentFlags, for flags the original lacked', () => {
     document.body.innerHTML =
       '<main class="round"><div class="rclock rclock-top"></div><div class="rclock rclock-bottom"></div></main>';
     expect(presentFlags(document).split(' ')).not.toContain('round-clockless');
+  });
+
+  // The events' lists are a team's tournaments too, beside a side menu: their page is another.
+  it('leaves the team events out of a team’s tournaments page', () => {
+    document.body.innerHTML =
+      '<main class="team-events page-menu"><div class="page-menu__content box">' +
+      '<div class="team-events team-tournaments"></div></div></main>';
+    expect(presentFlags(document).split(' ')).not.toContain('team-tournaments');
+  });
+
+  // The settings pin their titles in pages/account-pinned.css.
+  it('leaves the settings’ forms out of the forms beside a side menu', () => {
+    document.body.innerHTML =
+      '<main class="account page-menu"><div class="page-menu__content box box-pad"><form></form></div></main>';
+    expect(presentFlags(document).split(' ')).not.toContain('menu-form');
   });
 
   it('leaves the DGT board’s pages out of the account’s', () => {

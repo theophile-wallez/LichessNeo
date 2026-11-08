@@ -69,23 +69,26 @@ main.account > .page-menu__content > .security > .box {
   }
 
   /* Lichess's box clips, which traps a sticky title. The DGT board's pages are the box
-   * themselves; the settings' hold one. */
+   * themselves; the settings' hold one, the sessions' inside a wrapper. */
   main.account > .page-menu__content.box,
-  main.account > .page-menu__content > .box {
+  main.account > .page-menu__content > .box,
+  main.account > .page-menu__content > .security > .box {
     overflow: visible !important;
   }
 
   /* The box's top padding would hold the title lower than where it sticks: it jumped up as
    * the page scrolled. */
   main.account > .page-menu__content.box,
-  main.account > .page-menu__content > .box {
+  main.account > .page-menu__content > .box,
+  main.account > .page-menu__content > .security > .box {
     padding-top: 0 !important;
   }
 
   /* Stuck at the window's edge, the room above it its own padding, from the start: it never
    * moves, and its text lines up with the menu's first link (twice the top room down). */
   main.account > .page-menu__content.box > h1.box__top,
-  main.account > .page-menu__content > .box > h1.box__top {
+  main.account > .page-menu__content > .box > h1.box__top,
+  main.account > .page-menu__content > .security > .box > h1.box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 4;
@@ -97,7 +100,8 @@ main.account > .page-menu__content > .security > .box {
 
   /* A fade under the stuck title, over what scrolls beneath it. */
   main.account > .page-menu__content.box > h1.box__top::after,
-  main.account > .page-menu__content > .box > h1.box__top::after {
+  main.account > .page-menu__content > .box > h1.box__top::after,
+  main.account > .page-menu__content > .security > .box > h1.box__top::after {
     content: '';
     position: absolute;
     top: 100%;
@@ -111,7 +115,8 @@ main.account > .page-menu__content > .security > .box {
 
   @container scroll-state(stuck: top) {
     main.account > .page-menu__content.box > h1.box__top::after,
-    main.account > .page-menu__content > .box > h1.box__top::after {
+    main.account > .page-menu__content > .box > h1.box__top::after,
+    main.account > .page-menu__content > .security > .box > h1.box__top::after {
       opacity: 1;
     }
   }

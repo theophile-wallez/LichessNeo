@@ -60,6 +60,8 @@ import { homeGames } from './pages/home-games/index.ts';
 import { homeHero } from './pages/home-hero.ts';
 import { speedCards } from './pages/speed-cards/index.ts';
 import { coachTitles } from './pages/coach-titles.ts';
+import { menuPageTitles } from './pages/menu-page-titles.ts';
+import { eventColumns } from './pages/event-columns.ts';
 import { swiss } from './pages/swiss.ts';
 import { podium } from './pages/podium.ts';
 import { simulScores } from './pages/simul-scores.ts';
@@ -166,7 +168,9 @@ const FEATURES = [
   speedCards,
   homeGames,
   coachTitles,
+  menuPageTitles,
   swiss,
+  eventColumns,
   podium,
   simulScores,
   simulForm,

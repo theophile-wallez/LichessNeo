@@ -1,27 +1,37 @@
 /* Team lists (main.team-list: all, search, mine, led) as club cards. Lichess renders a table;
- * each row becomes a card, its avatar the team's flair or the group icon on a tile. */
+ * each row becomes a card, its avatar the team's flair or the group icon on a tile. The
+ * user's team events (main.team-events) share their page: the menu, the title, no box. */
 
 /* ---- Header --- */
 
 /* Transparent now, but its `overflow: hidden` would still clip the cards' hover shadows. */
-main.team-list .page-menu__content.box {
+main:is(.team-list, .team-events) .page-menu__content.box {
   overflow: visible !important;
   padding: 0 !important;
   background: transparent !important;
 }
 
-main.team-list .box__top {
+main:is(.team-list, .team-events) .box__top {
   flex-wrap: wrap;
   gap: 12px 24px;
   padding: 16px 0 20px !important;
 }
 
-main.team-list .box__top h1,
-main.team-list h1.box__top {
+main:is(.team-list, .team-events) .box__top h1,
+main:is(.team-list, .team-events) h1.box__top {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 0 !important;
+  margin-block: 0 !important;
+}
+
+main.team-list .box__top h1 {
+  margin-inline: 0 !important;
+}
+
+/* The events' title is the h1 itself: the lists' size, which `.box__top h1` gives theirs. */
+main.team-events h1.box__top {
+  font-size: 1.9rem !important;
 }
 
 main.team-list .box__top .search input {
@@ -38,7 +48,7 @@ html[dir='rtl'] main.team-list .box__top .search input {
 }
 
 /* The side menu: an icon tile per link (tiles in pages/headings-menus.css); signed in, it
- * has the user's teams and their news, those they lead, the requests and a new team. */
+ * has the user's teams, their news and events, those they lead, the requests and a new team. */
 .subnav[data-ln-ext-nav~='teams'] a[href$='/team/all'],
 main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/all'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
@@ -57,6 +67,12 @@ main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/updates
   --ln-ext-nav-color: var(--ln-ext-green);
 }
 
+.subnav[data-ln-ext-nav~='teams'] a[href$='/team/events'],
+main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/events'] {
+  --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+  --ln-ext-nav-color: var(--ln-ext-pink);
+}
+
 .subnav[data-ln-ext-nav~='teams'] a[href$='/team/leader'],
 main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/leader'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
@@ -73,51 +89,6 @@ main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/request
 main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/new'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/add-circle.svg');
   --ln-ext-nav-color: var(--ln-ext-cyan);
-}
-
-/* Desktop only (Lichess's top bar holds the top edge below 1020px): the menu and title bar stay
- * put while the cards scroll, the bar's shadow showing once stuck (as in styles/simul). */
-@media (min-width: 1020px) {
-  /* Widened to cover the shadows of cards passing under it; no more, the menu is 10px away. */
-  main.team-list .box__top {
-    container-type: scroll-state;
-    position: sticky;
-    top: 0;
-    z-index: 3;
-    margin-inline: -8px !important;
-    padding-inline: 8px !important;
-    background: var(--ln-ext-bg-page);
-    box-shadow: var(--ln-ext-pin-cover);
-  }
-
-  main.team-list .box__top::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    inset-inline: 0;
-    height: 14px;
-    background: linear-gradient(var(--ln-ext-bg-page), transparent);
-    opacity: 0;
-    transition: opacity 0.2s !important;
-    pointer-events: none;
-  }
-
-  @container scroll-state(stuck: top) {
-    main.team-list .box__top::after {
-      opacity: 1;
-    }
-  }
-
-  main.team-list .page-menu__menu {
-    position: sticky;
-    top: 16px;
-    align-self: start;
-  }
-
-  /* Focused elements scroll to below the bar. */
-  html[data-ln-ext-has~='team-list'] {
-    scroll-padding-top: 90px;
-  }
 }
 
 /* ---- Grid --- */
@@ -348,7 +319,7 @@ main.team-list .slist tbody tr > td:only-child {
 
 /* Lichess's mobile layout runs edge to edge: the page's margins, and the search across. */
 @media (max-width: 799.98px) {
-  main.team-list .page-menu__content.box {
+  main:is(.team-list, .team-events) .page-menu__content.box {
     padding: 0 8px 24px !important;
   }
 

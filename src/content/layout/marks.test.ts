@@ -42,6 +42,16 @@ describe('syncMarks', () => {
     expect(sections.map(section => section.dataset.lnExtCurrent)).toEqual([undefined, 'page']);
   });
 
+  // Lichess localizes the path's start (/fr/page/…), not the page's name.
+  it('names a page of Lichess’s own content by its path', () => {
+    window.history.replaceState(null, '', '/page/streamer-arena');
+    document.body.innerHTML =
+      '<main class="page-small box box-pad page"><h1 class="box__top">Rules</h1></main>';
+    syncMarks();
+    expect(queryOne(document, 'main', HTMLElement)?.dataset['lnExtPage']).toBe('streamer-arena');
+    window.history.replaceState(null, '', '/');
+  });
+
   it('writes nothing when the marks are already right', () => {
     document.body.innerHTML = legacy.marks[0]?.marked ?? '';
     syncMarks();

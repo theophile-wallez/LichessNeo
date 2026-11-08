@@ -25,7 +25,9 @@
 @import './feed.css';
 @import './coach/index.css';
 @import './teams.css';
+@import './team-menu.css';
 @import './team-show.css';
+@import './team-tournaments.css';
 @import './study/index.css';
 @import './study-page/index.css';
 @import './friends.css';
@@ -52,6 +54,8 @@
 @import './mascots.css';
 @import './simul/index.css';
 @import './events-narrow/index.css';
+@import './event-columns.css';
+@import './event-titles.css';
 @import './forum/index.css';
 @import './patron/index.css';
 @import './racer/index.css';

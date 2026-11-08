@@ -1,0 +1,33 @@
+/* An arena's and a simul's title start with their sidebar picture, in every state, as a
+ * Swiss's does (swiss-show/main.css): it stays when the title is pinned and the podium has
+ * scrolled away. Lichess's glyph, when it draws one, gives way to it. */
+
+main.tour .tour__main__header,
+main.simul > .simul__main > .box__top {
+  gap: 14px;
+}
+
+main.tour .tour__main__header > icon.img {
+  display: none !important;
+}
+
+main.tour .tour__main__header > h1,
+main.simul > .simul__main > .box__top > h1 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+main.tour .tour__main__header > h1::before,
+main.simul > .simul__main > .box__top > h1::before {
+  content: '';
+  flex: none;
+  width: 48px;
+  height: 48px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp')
+    center / contain no-repeat;
+}
+
+main.simul > .simul__main > .box__top > h1::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp');
+}

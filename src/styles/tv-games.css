@@ -1,11 +1,75 @@
-/* Current games (/games): each mini-game a card, the cards spaced out. Lichess packs the
- * boards edge to edge. */
+/* Current games (/games): each mini-game a card, the cards spaced out under a title. Lichess
+ * packs the boards edge to edge. */
 
 main.tv-games .now-playing {
   gap: 12px;
+  /* Lichess's clip would catch the pinned title; it also kept a scroller's zero min-width,
+   * without which the columns run past the window. */
+  min-width: 0;
+  overflow: visible !important;
 }
 
+/* Lichess gives the page no title: content/pages/menu-page-titles.ts adds the open channel's
+ * name, which starts with the page's sidebar picture and stays put while the games scroll. */
+main.tv-games .now-playing > .ln-ext-menu-page-title {
+  grid-column: 1 / -1;
+  padding: 16px 0 4px;
+}
+
+main.tv-games .now-playing > .ln-ext-menu-page-title > h1 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  color: var(--ln-ext-text-strong);
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+main.tv-games .now-playing > .ln-ext-menu-page-title > h1::before {
+  content: '';
+  flex: none;
+  width: 52px;
+  height: 52px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/current-games.webp')
+    center / contain no-repeat;
+}
+
+@media (min-width: 1020px) {
+  /* Widened to cover the shadows of the cards passing under it, within the page's gutter. */
+  main.tv-games .now-playing > .ln-ext-menu-page-title {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    margin-inline: -8px;
+    padding-inline: 8px;
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
+  }
+
+  main.tv-games .now-playing > .ln-ext-menu-page-title::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main.tv-games .now-playing > .ln-ext-menu-page-title::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* Isolated: chessground's z-indexes would paint the pieces over the pinned title. */
 main.tv-games .now-playing .mini-game {
+  isolation: isolate;
   padding: 8px !important;
   border: 1px solid var(--ln-ext-card-border);
   border-radius: 12px;

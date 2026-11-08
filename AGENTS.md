@@ -670,6 +670,12 @@ link to it, and a line here). The rest hold everywhere:
   shadows and focus rings, and it traps `position: sticky`. Add
   `overflow: visible !important`, then check that a closed `.mselect__list`
   doesn't widen the page (anchor it with `inset-inline: auto 0`).
+- **A clipped page is cut to the window.** From 1020px `#main-wrap` is a
+  grid one window tall, and a `main` (or its card) that clips with
+  `hidden` is a scroller, so its row stops at the window and the rest is
+  cut off: a team's page lost its forum. Clip a page's corners with
+  `overflow: clip !important` and `min-width: 0` (or none), which keeps a
+  sticky title too.
 - **A page that must not scroll.** Lichess's hidden hover cards leave ~40px
   to scroll at the document's end, so a layout that fits still needs
   `html, body { overflow: hidden }` (as `styles/game` and

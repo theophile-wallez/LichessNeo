@@ -1,0 +1,111 @@
+/* Titles pinned on Lichess's pages we don't otherwise restyle (AGENTS.md, "Only the content
+ * scrolls"): the leaderboards, the forms in a card (a tournament's, a broadcast's, a team's,
+ * a coach's or streamer's profile), the mobile app's page and a video's. Each stays put
+ * while the page scrolls, in its card's color, with a soft edge under it once stuck. Desktop
+ * only: below 1020px Lichess's top bar holds the top edge. */
+
+@media (min-width: 1020px) {
+  /* `hidden` would catch the title, and have #main-wrap's grid cut the page to the window's
+   * height. `clip` keeps the corners, and loses a scroller's zero min-width: set it back. */
+  html[data-ln-ext-has~='leaderboard-top'] main.box,
+  html[data-ln-ext-has~='menu-form'] main.page-menu > .page-menu__content.box-pad,
+  main.page-small > .tour__form.box-pad,
+  main > .mobile.box-pad {
+    min-width: 0;
+    overflow: clip !important;
+  }
+
+  html[data-ln-ext-has~='leaderboard-top'] main.box > .box__top,
+  html[data-ln-ext-has~='menu-form'] main.page-menu > .page-menu__content.box-pad > .box__top,
+  main.page-small > .tour__form.box-pad > h1.box__top,
+  main > .mobile.box-pad > h1.box__top,
+  main.video > .page-menu__content > .show > h1 {
+    container-type: scroll-state;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background: var(--ln-ext-bg-panel);
+    box-shadow: var(--ln-ext-pin-cover);
+  }
+
+  /* In a padded card: out to its edges, so what scrolls under it doesn't show beside it. */
+  html[data-ln-ext-has~='menu-form'] main.page-menu > .page-menu__content.box-pad > .box__top,
+  main.page-small > .tour__form.box-pad > h1.box__top,
+  main > .mobile.box-pad > h1.box__top {
+    margin-inline: calc(-1 * var(---box-padding)) !important;
+    padding-inline: var(---box-padding) !important;
+  }
+
+  html[data-ln-ext-has~='leaderboard-top'] main.box > .box__top::after,
+  html[data-ln-ext-has~='menu-form']
+    main.page-menu
+    > .page-menu__content.box-pad
+    > .box__top::after,
+  main.page-small > .tour__form.box-pad > h1.box__top::after,
+  main > .mobile.box-pad > h1.box__top::after,
+  main.video > .page-menu__content > .show > h1::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    html[data-ln-ext-has~='leaderboard-top'] main.box > .box__top::after,
+    html[data-ln-ext-has~='menu-form']
+      main.page-menu
+      > .page-menu__content.box-pad
+      > .box__top::after,
+    main.page-small > .tour__form.box-pad > h1.box__top::after,
+    main > .mobile.box-pad > h1.box__top::after,
+    main.video > .page-menu__content > .show > h1::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* ---- Icons --- */
+
+/* The arenas' sidebar picture on their form, the streamers' on the Streamer Arena's rules. */
+main.page-small > .tour__form > h1.box__top,
+main.page.box > h1.box__top,
+main > .mobile > h1.box__top {
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 16px;
+}
+
+main.page-small > .tour__form > h1.box__top::before,
+main.page.box[data-ln-ext-page='streamer-arena'] > h1.box__top::before {
+  content: '';
+  flex: none;
+  width: 52px;
+  height: 52px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/arena-tournaments.webp')
+    center / contain no-repeat;
+}
+
+main.page.box[data-ln-ext-page='streamer-arena'] > h1.box__top::before {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/streamers.webp');
+}
+
+/* The mobile app has no picture to borrow: a phone's Hugeicon on a tile, as the variants'. */
+main > .mobile > h1.box__top::before {
+  content: '';
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  /* The glyph at full strength over the tile at a quarter, as menu-titles.css draws them. */
+  background: var(--ln-ext-cyan);
+  mask:
+    url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/smart-phone-01.svg') center / 30px
+      30px no-repeat,
+    linear-gradient(#0000003d, #0000003d);
+}

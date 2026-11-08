@@ -1,0 +1,51 @@
+/* The pages of the Teams menu (the lists, the events, a new team…): the menu and the title
+ * stay put while the page scrolls, the title's shadow showing once stuck (as in
+ * styles/simul); a new team's form pins its own in pages/pinned-titles.css. Desktop only:
+ * below 1020px Lichess's top bar holds the top edge. */
+
+@media (min-width: 1020px) {
+  main.page-menu[data-ln-ext-menu~='teams'] > .page-menu__menu {
+    position: sticky;
+    top: 16px;
+    align-self: start;
+    max-height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  /* On the lists and the events, no box: the title in the page's color, widened to cover
+   * the shadows of cards passing under it; no more, the menu is 10px away. */
+  main:is(.team-list, .team-events) .box__top {
+    container-type: scroll-state;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    margin-inline: -8px !important;
+    padding-inline: 8px !important;
+    background: var(--ln-ext-bg-page);
+    box-shadow: var(--ln-ext-pin-cover);
+  }
+
+  main:is(.team-list, .team-events) .box__top::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    height: 14px;
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(stuck: top) {
+    main:is(.team-list, .team-events) .box__top::after {
+      opacity: 1;
+    }
+  }
+
+  /* Focused elements scroll to below the title. */
+  html:is([data-ln-ext-has~='team-list'], [data-ln-ext-has~='team-events']) {
+    scroll-padding-top: 90px;
+  }
+}
