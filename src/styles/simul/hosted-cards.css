@@ -65,10 +65,6 @@ main.page-small.simul-list .slist tbody tr::after {
   pointer-events: none;
 }
 
-main.page-small.simul-list .slist tbody tr:hover::after {
-  animation: ln-ext-simul-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
 /* Lichess's speed glyph: the time control says it. */
 main.page-small.simul-list .slist td.icon {
   display: none;

@@ -45,6 +45,20 @@ describe('hovering', () => {
       .map(rule => rule.selectorText);
     expect(tilting).toEqual([]);
   });
+
+  it('makes nothing hop', () => {
+    const hopping = loadSheets()
+      .filter(rule => rule instanceof CSSStyleRule)
+      .filter(rule => rule.selectorText.includes(':hover'))
+      // happy-dom keeps the shorthand as written.
+      .filter(rule =>
+        ['animation', 'animation-name'].some(
+          name => !['', 'none'].includes(rule.style.getPropertyValue(name)),
+        ),
+      )
+      .map(rule => rule.selectorText);
+    expect(hopping).toEqual([]);
+  });
 });
 
 // The items of a list, in the markup Lichess serves. The user menu's rows are left out:

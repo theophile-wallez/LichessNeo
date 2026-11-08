@@ -73,7 +73,7 @@ main.page-menu.simul-list .slist tbody tr:not(.create):hover::before {
     0 6px 14px var(--ln-ext-shade-35);
 }
 
-/* The piece hops when the card is hovered. */
+/* The simul's piece, on its tile. */
 main.page-menu.simul-list .slist tbody tr:not(.create)::after {
   content: '';
   position: absolute;
@@ -85,16 +85,6 @@ main.page-menu.simul-list .slist tbody tr:not(.create)::after {
   background: var(--ln-ext-piece) center / 78% no-repeat;
   filter: drop-shadow(0 2px 2px #00000080);
   pointer-events: none;
-}
-
-main.page-menu.simul-list .slist tbody tr:not(.create):hover::after {
-  animation: ln-ext-simul-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes ln-ext-simul-hop {
-  40% {
-    transform: translateY(-9px);
-  }
 }
 
 main.page-menu.simul-list .slist td {
@@ -252,13 +242,6 @@ main.page-menu.simul-list .slist tr.create td::before {
   background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/simultaneous-exhibitions.webp')
     center / contain no-repeat;
   filter: drop-shadow(0 6px 10px var(--ln-ext-shade-40));
-  animation: ln-ext-simul-float 4s ease-in-out infinite;
-}
-
-@keyframes ln-ext-simul-float {
-  50% {
-    transform: translateY(-5px);
-  }
 }
 
 main.page-menu.simul-list .slist tr.create .button {
