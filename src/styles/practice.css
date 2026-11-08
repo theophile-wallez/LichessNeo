@@ -184,6 +184,14 @@ html[dir='rtl'] .practice-app .study {
   transform: translateY(-3px) !important;
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.practice-app .study:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -4px;
+}
+
 /* The icon's tile, in the section's color. */
 .practice-app .study::before {
   content: '';

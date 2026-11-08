@@ -42,6 +42,14 @@
   box-shadow: var(--ln-ext-card-shadow-hover);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+#ln-ext-review .ln-ext-opening-card:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 .ln-ext-opening-card__board {
   display: block;
   aspect-ratio: 1;

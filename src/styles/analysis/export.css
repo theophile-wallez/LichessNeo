@@ -200,6 +200,14 @@ main.analyse .fen-pgn :is(a.game-gif, .position-gif, .fetch-content):hover {
   transform: translateY(-1px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.analyse .fen-pgn :is(a.game-gif, .position-gif, .fetch-content):hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -2px;
+}
+
 main.analyse .fen-pgn :is(a.game-gif, .copy-me > a.copy-me__target) {
   position: relative;
   flex: 1;

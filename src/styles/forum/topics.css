@@ -41,6 +41,14 @@ main.forum table.topics tr:not(.pager):hover {
   transform: translateX(4px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.forum table.topics tr:not(.pager):hover::after {
+  content: '';
+  position: absolute;
+  inset: 0 100% 0 -5px;
+}
+
 main.forum table.topics td {
   display: block !important;
   width: auto !important;

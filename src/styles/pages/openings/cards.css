@@ -39,6 +39,14 @@ main.opening :is(.opening__next, .opening__search__result):hover {
   transform: translateY(-3px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.opening :is(.opening__next, .opening__search__result):hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -4px;
+}
+
 main.opening .opening__next__result-board {
   display: contents !important;
 }

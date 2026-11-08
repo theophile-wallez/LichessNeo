@@ -156,6 +156,14 @@ main.page-menu[data-ln-ext-nav-active$='/training/history'] > .page-menu__conten
   transform: translateY(-3px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.puzzle-history .puzzle-history__round:hover::before {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -4px;
+}
+
 .puzzle-history .puzzle-history__round .mini-board {
   width: 100% !important;
   border-radius: 8px;

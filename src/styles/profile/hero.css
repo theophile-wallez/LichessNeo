@@ -243,6 +243,14 @@
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.user-show > .user-show__header .trophies :is(.trophy, .shield-trophy, .combo-trophy):hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 /* Drop the shadows and line heights Lichess tuned for its strip. The flame keeps
  * a glow to read as one at 25px. */
 .user-show > .user-show__header .trophies .fire-trophy {

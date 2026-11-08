@@ -104,6 +104,14 @@ main.plan .plan_checkout group.amount input:not(:checked) + label:hover {
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.plan .plan_checkout group.amount input:not(:checked) + label:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 main.plan .plan_checkout group.amount input:checked + label {
   color: var(--ln-ext-accent-hover) !important;
 }

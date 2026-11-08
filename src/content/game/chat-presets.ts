@@ -72,16 +72,18 @@ function drawReplies(row: HTMLElement, group: ReplyGroup, replies: readonly stri
   const signature = JSON.stringify([group, replies]);
   if (row.dataset['lnExtReplies'] === signature) return;
   setData(row, 'lnExtReplies', signature);
-  row.replaceChildren(
-    ...replies.map(text =>
-      createElement('button', {
-        className: `${ROW}__reply`,
-        text,
-        // The title shows a reply cut short whole; it turns into our tooltip (content/ui).
-        attrs: { type: 'button', title: text, 'data-ln-ext-text': text },
-      }),
-    ),
-  );
+  row.replaceChildren(...replies.map(replyButton));
+}
+
+function replyButton(text: string): HTMLButtonElement {
+  const button = createElement('button', {
+    className: `${ROW}__reply`,
+    // The title shows a reply cut short whole; it turns into our tooltip (content/ui).
+    attrs: { type: 'button', title: text, 'data-ln-ext-text': text },
+  });
+  // The text is cut in a box of its own: a button that clipped would cut its hover bridge.
+  button.append(createElement('span', { className: `${ROW}__text`, text }));
+  return button;
 }
 
 // At the end, before Lichess's buttons, whose analysis link must stay the last

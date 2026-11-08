@@ -111,6 +111,14 @@
   background: var(--ln-ext-lift-6);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.ln-ext-drawing-kind:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 /* Its color on its icon, its ring and its tick only: the tile stays plain. */
 .ln-ext-drawing-kind[aria-pressed='true'] {
   background: var(--ln-ext-lift-4);

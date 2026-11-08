@@ -89,6 +89,12 @@ main.page-small.simul-list .slist td.name a::after {
   border-radius: inherit;
 }
 
+/* The hover bridge: the card's two pseudo-elements are taken, so its link's reaches
+   over the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+main.page-small.simul-list .slist tbody tr:hover td.name a::after {
+  bottom: -4px;
+}
+
 /* The time control as a chip, Lichess's color glyph in it, then the date. */
 main.page-small.simul-list .slist td:nth-child(3) {
   grid-area: meta;

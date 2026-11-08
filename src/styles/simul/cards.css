@@ -111,6 +111,12 @@ main.page-menu.simul-list .slist td.header a::after {
   border-radius: inherit;
 }
 
+/* The hover bridge: the card's two pseudo-elements are taken, so its link's reaches
+   over the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+main.page-menu.simul-list .slist tbody tr:not(.create):hover td.header a::after {
+  bottom: -4px;
+}
+
 main.page-menu.simul-list .slist .name {
   display: -webkit-box;
   overflow: hidden;

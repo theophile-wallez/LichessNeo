@@ -525,7 +525,15 @@ features and its name: free analysis, open data, no ads.
   hover: only a state draws one (picked, open, a drop over it). No tile,
   icon or picture turns, hops or bobs, on hover or for ever, nor sits askew:
   it reads cheap. A `rotate` is for what really turns: a chevron that flips,
-  a spinner, confetti.
+  a spinner, confetti. What moves on hover moves out from under a cursor on
+  its trailing edge, which loses the hover, and it shakes: its hover draws a
+  bridge, a `::after` (or `::before`) over the strip it leaves and its border
+  (`inset: 100% 0 -3px` under a 2px lift), checked by
+  `styles/hover-bridges.test.ts`. It mustn't clip, or the bridge is cut:
+  give its children their own corners, or cut a text in a box of its own
+  (`overflow: clip visible` cut it all the same on an `<a>` and a
+  `<button>`). A small button rather moves its icon alone (the forum's back
+  button).
 - **Tabs slide:** a tab bar's highlight is one piece that slides to the tab
   picked (`0.35s cubic-bezier(0.22, 1, 0.36, 1)`). Register the bar in
   `TAB_BARS`; its CSS gives the piece the active tab's look (`--ln-ext-tab-bg`,

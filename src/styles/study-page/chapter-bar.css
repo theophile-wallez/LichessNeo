@@ -156,8 +156,24 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
   transform: translateX(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.ln-ext-study-bar__step--previous:hover:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  inset: 0 -3px 0 100%;
+}
+
 .ln-ext-study-bar__step--next:hover:not(:disabled) {
   transform: translateX(2px);
+}
+
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.ln-ext-study-bar__step--next:hover:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  inset: 0 100% 0 -3px;
 }
 
 .ln-ext-study-bar__add {

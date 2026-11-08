@@ -100,6 +100,15 @@
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.board-editor .board-editor__tools .actions > :is(button, a):hover::after,
+.board-editor .board-editor__tools .actions > form > button:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 /* "Continue from here": play the computer or a friend, side by side. */
 .board-editor .board-editor__tools .continue-with:not(.none) {
   order: 2;

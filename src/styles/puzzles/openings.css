@@ -182,6 +182,14 @@
   transform: translateY(-1px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.puzzle-openings__link:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -2px;
+}
+
 .puzzle-openings__link:hover h3 {
   color: var(--ln-ext-text-strong);
 }

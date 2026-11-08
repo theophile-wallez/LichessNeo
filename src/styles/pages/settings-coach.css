@@ -164,6 +164,14 @@ html[data-ln-ext-coach='none'] .ln-ext-coach-pick__stage {
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.ln-ext-coach-choice:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 .ln-ext-coach-choice[aria-pressed='true'] {
   box-shadow: inset 0 0 0 2px var(--ln-ext-accent);
   color: var(--ln-ext-text-strong);

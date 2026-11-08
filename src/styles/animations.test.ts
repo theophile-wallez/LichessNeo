@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
+import { cssRules } from '#shared/testing/stylesheets.ts';
 
 // What Chrome's compositor animates by itself. Anything else an endless animation
 // touches is restyled, and most often repainted, on the main thread at every frame,
@@ -19,26 +20,11 @@ const EXEMPT = new Set([
 
 const STYLES = import.meta.dirname;
 
-// A style rule is a grouping rule too, for the rules nested in it.
-function allRules(rules: CSSRuleList): CSSRule[] {
-  const found: CSSRule[] = [];
-  for (const rule of rules) {
-    if (!(rule instanceof CSSGroupingRule) || rule instanceof CSSStyleRule) found.push(rule);
-    if (rule instanceof CSSGroupingRule) found.push(...allRules(rule.cssRules));
-  }
-  return found;
-}
-
 function sheetRules(): CSSRule[] {
   const files = readdirSync(STYLES, { recursive: true, encoding: 'utf8' }).filter(file =>
     file.endsWith('.css'),
   );
-  return files.flatMap(file => {
-    const style = document.createElement('style');
-    style.textContent = readFileSync(join(STYLES, file), 'utf8');
-    document.head.append(style);
-    return style.sheet ? allRules(style.sheet.cssRules) : [];
-  });
+  return files.flatMap(file => cssRules(readFileSync(join(STYLES, file), 'utf8')));
 }
 
 function animatedProperties(keyframes: CSSKeyframesRule): Set<string> {

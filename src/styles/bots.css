@@ -162,6 +162,14 @@
   transform: translateY(-3px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.bots__list__entry:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -4px;
+}
+
 @keyframes ln-ext-bot-in {
   from {
     opacity: 0;

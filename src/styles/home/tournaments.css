@@ -156,6 +156,14 @@ main.lobby .lobby__support-link:hover {
   background: var(--ln-ext-neutral-3) !important;
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.lobby .lobby__support-link:hover::before {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 main.lobby .lobby__support-link icon {
   display: grid !important;
   place-items: center;

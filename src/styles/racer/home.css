@@ -239,6 +239,14 @@ main.racer-home > h1.box__top::before {
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.racer-home .button:not(.disabled):hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 .racer-home .button .car {
   display: inline-block !important;
   height: auto !important;

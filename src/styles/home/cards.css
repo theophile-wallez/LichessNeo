@@ -129,6 +129,8 @@ main.lobby .lobby__blog .ublog-post-card {
   grid-template-columns: auto minmax(0, 1fr);
   align-content: start;
   column-gap: 6px;
+  /* Lichess's clip would cut the hover bridge, and nothing of ours spills out. */
+  overflow: visible;
   border: none !important;
   border-radius: 0 !important;
   background: none !important;
@@ -138,6 +140,14 @@ main.lobby .lobby__blog .ublog-post-card {
 
 main.lobby .lobby__blog .ublog-post-card:hover {
   transform: translateY(-2px);
+}
+
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.lobby .lobby__blog .ublog-post-card:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
 }
 
 main.lobby .lobby__blog .ublog-post-card__top {

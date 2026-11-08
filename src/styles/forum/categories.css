@@ -23,7 +23,10 @@ main.forum table.categs tr {
   flex-wrap: wrap;
   align-items: center;
   gap: 14px 16px;
-  overflow: hidden;
+  /* Clipped across only: clipped down too, it would cut the hover bridge. Unlike a
+     hidden overflow, a clip leaves the grid no room to shrink it, hence the width. */
+  min-width: 0;
+  overflow: clip visible;
   padding: 20px 20px 0;
   border: 1px solid var(--ln-ext-card-border);
   border-radius: 14px;
@@ -39,6 +42,14 @@ main.forum table.categs tr:hover {
   background: var(--ln-ext-bg-panel) !important;
   box-shadow: 0 8px 22px var(--ln-ext-shade-40);
   transform: translateY(-4px);
+}
+
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.forum table.categs tr:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -5px;
 }
 
 @keyframes ln-ext-forum-in {
@@ -179,6 +190,7 @@ main.forum table.categs td:last-child {
   margin: 2px -20px 0;
   padding: 12px 20px !important;
   border-top: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 0 0 13px 13px;
   background: var(--ln-ext-bg-panel-dark);
   color: var(--ln-ext-text-dim);
   font-size: 13px;

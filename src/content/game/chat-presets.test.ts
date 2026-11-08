@@ -91,6 +91,17 @@ describe('the quick replies at a game’s start', () => {
     expect(showPanelPart).not.toHaveBeenCalled();
   });
 
+  // The text is cut short in a box of its own, so the button needn't clip its hover bridge.
+  it('send from a click on their text, which sits in its own box', () => {
+    document.body.innerHTML = page({ presets: START_PRESETS });
+    syncChatPresets();
+    const sent = sentLines();
+    const text = queryOne(reply('Salut') ?? document, '.ln-ext-chat-presets__text', HTMLElement);
+    text?.click();
+    expect(text?.textContent).toBe('Salut');
+    expect(sent).toEqual(['Salut']);
+  });
+
   it('all stay once said, where Lichess takes its own away', () => {
     document.body.innerHTML = page({ presets: START_PRESETS });
     syncChatPresets();

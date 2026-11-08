@@ -65,6 +65,14 @@
     background: var(--ln-ext-lift-6);
     transform: translateY(-2px);
   }
+
+  /* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+  .ln-ext-setup__tile:hover::after {
+    content: '';
+    position: absolute;
+    inset: 100% 0 -3px;
+  }
 }
 
 /* The dialog focuses its first tile as it opens: a ring that doesn't read as the pick. */

@@ -47,6 +47,14 @@
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.ln-ext-item:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 .ln-ext-item__pick {
   display: flex;
   flex-direction: column;

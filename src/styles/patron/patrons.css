@@ -117,6 +117,14 @@ main.plan .best_patrons .list > .paginated:hover {
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.plan .best_patrons .list > .paginated:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 main.plan .best_patrons .list > .paginated > .user-link {
   padding: 9px 12px;
 }
@@ -271,6 +279,14 @@ main.plan .pss__color {
 
 main.plan .pss__color--selectable:hover {
   transform: translateY(-3px);
+}
+
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.plan .pss__color--selectable:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -4px;
 }
 
 main.plan .pss__color:disabled {

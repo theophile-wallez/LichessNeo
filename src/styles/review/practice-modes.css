@@ -171,6 +171,14 @@
     transform: translateY(-2px);
     box-shadow: var(--ln-ext-card-shadow-hover);
   }
+
+  /* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+  #ln-ext-review .ln-ext-mode:not(:disabled):hover::after {
+    content: '';
+    position: absolute;
+    inset: 100% 0 -3px;
+  }
 }
 
 #ln-ext-review .ln-ext-mode:disabled {
@@ -320,6 +328,14 @@
 @media (hover: hover) {
   #ln-ext-review .ln-ext-quiz__choice:not(:disabled):hover {
     transform: translateY(-2px);
+  }
+
+  /* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+  #ln-ext-review .ln-ext-quiz__choice:not(:disabled):hover::after {
+    content: '';
+    position: absolute;
+    inset: 100% 0 -3px;
   }
 }
 

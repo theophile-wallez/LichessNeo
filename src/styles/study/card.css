@@ -7,7 +7,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* Clipped across only: clipped down too, it would cut the hover bridge. Unlike a
+     hidden overflow, a clip leaves the grid no room to shrink it, hence the width. */
+  min-width: 0;
+  overflow: clip visible;
   padding: 0 16px 14px !important;
   border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 14px;
@@ -22,6 +25,14 @@
   transform: translateY(-3px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.study-index .studies .study:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -4px;
+}
+
 /* Our links (the owner, the members) go over the card's own. */
 .study-index .studies .study > .overlay {
   z-index: 1;
@@ -32,6 +43,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 180px;
+  border-radius: 13px 13px 0 0;
   background: radial-gradient(
     120% 100% at 0 0,
     color-mix(in srgb, var(--ln-ext-study-hue) 16%, transparent),
@@ -271,4 +283,12 @@
 .ln-ext-study__members > .ln-ext-study__avatar:hover {
   z-index: 3;
   transform: translateY(-2px) scale(1.08);
+}
+
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.ln-ext-study__members > .ln-ext-study__avatar:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
 }

@@ -196,6 +196,14 @@ html[dir='rtl'] .racer .racer__race__track::before {
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+:is(.racer, .storm) .puz-history__round:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 :is(.racer, .storm) .puz-history__round cg-container {
   outline: none !important;
 }

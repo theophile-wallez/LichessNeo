@@ -25,6 +25,14 @@ html[dir='rtl'] .puzzle-themes__link {
   transform: translateY(-3px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.puzzle-themes__link:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -4px;
+}
+
 /* The icon tile: a gradient in the section's color. */
 .puzzle-themes__link::before {
   content: '' !important;

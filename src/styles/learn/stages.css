@@ -33,6 +33,14 @@ html[dir='rtl'] .learn-stages .stage {
   transform: translateY(-3px) !important;
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+.learn-stages .stage:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -4px;
+}
+
 /* The icon tile, behind the piece. */
 .learn-stages .stage::before {
   content: '';

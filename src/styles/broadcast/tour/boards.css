@@ -112,6 +112,14 @@ main.analyse.has-relay-tour .study__multiboard .now-playing > a:hover {
   transform: translateY(-2px);
 }
 
+/* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
+
+main.analyse.has-relay-tour .study__multiboard .now-playing > a:hover::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 -3px;
+}
+
 /* The game open in the side list: the accent's edge. */
 main.analyse.has-relay-tour .study__multiboard .now-playing > a.active {
   border-color: color-mix(in srgb, var(--ln-ext-accent) 70%, transparent) !important;

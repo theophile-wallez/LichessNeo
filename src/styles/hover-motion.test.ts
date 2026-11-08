@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { bundleCss } from '#scripts/lib/css-bundle.ts';
+import { cssRules } from '#shared/testing/stylesheets.ts';
 
 let css = '';
 
@@ -13,21 +14,7 @@ afterEach(() => {
   document.body.replaceChildren();
 });
 
-function loadSheets(lichess = ''): CSSRule[] {
-  const style = document.createElement('style');
-  style.textContent = lichess + css;
-  document.head.append(style);
-  return style.sheet ? allRules(style.sheet.cssRules) : [];
-}
-
-function allRules(rules: CSSRuleList): CSSRule[] {
-  const found: CSSRule[] = [];
-  for (const rule of rules) {
-    found.push(rule);
-    if (rule instanceof CSSGroupingRule) found.push(...allRules(rule.cssRules));
-  }
-  return found;
-}
+const loadSheets = (lichess = ''): CSSRule[] => cssRules(lichess + css);
 
 // What turns for real: a chevron drawn as a box's two borders, nudged on hover.
 const TURNING = new Set(['main.lobby .lobby__support-link:hover::after']);
