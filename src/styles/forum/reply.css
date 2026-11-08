@@ -24,7 +24,6 @@ main.forum-topic .reactions button {
   font-variant-numeric: tabular-nums;
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     opacity 0.15s,
     filter 0.15s !important;
 }
@@ -36,7 +35,6 @@ main.forum-topic .reactions button img {
 }
 
 main.forum-topic .reactions-auth button:hover {
-  border-color: var(--ln-ext-lift-18);
   background: var(--ln-ext-bg-raised) !important;
 }
 

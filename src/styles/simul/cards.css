@@ -14,13 +14,11 @@ main.page-menu.simul-list .slist tbody tr:not(.create) {
   background: var(--ln-ext-bg-panel) !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    border-color 0.15s,
     background-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 main.page-menu.simul-list .slist tbody tr:not(.create):hover {
-  border-color: color-mix(in srgb, var(--ln-ext-simul) 55%, transparent);
   background: var(--ln-ext-card-hover) !important;
   box-shadow: 0 6px 18px var(--ln-ext-shade-35);
   transform: translateY(-3px);
@@ -219,11 +217,11 @@ main.page-menu.simul-list .slist tr.create {
   border: 2px dashed var(--ln-ext-lift-12);
   border-radius: 12px;
   background: transparent !important;
-  transition: border-color 0.15s !important;
+  transition: background-color 0.15s !important;
 }
 
 main.page-menu.simul-list .slist tr.create:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-accent) 60%, transparent);
+  background: var(--ln-ext-lift-3) !important;
 }
 
 main.page-menu.simul-list .slist tr.create td {

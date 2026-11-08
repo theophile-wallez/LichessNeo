@@ -25,7 +25,7 @@ main.simul-form .variants .checkable {
 }
 
 main.simul-form .variants .checkable:hover {
-  border-color: var(--ln-ext-lift-12);
+  background: var(--ln-ext-lift-5);
 }
 
 /* The switch stays in the tile, out of sight, so the keyboard still reaches it. */

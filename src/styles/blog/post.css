@@ -98,12 +98,10 @@
   font-weight: 700;
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     color 0.15s !important;
 }
 
 .ublog-post .ublog-post__like--mini:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-red-dark) 40%, transparent);
   background: color-mix(in srgb, var(--ln-ext-red-dark) 8%, transparent);
   color: var(--ln-ext-text-strong) !important;
 }
@@ -144,7 +142,6 @@
 }
 
 .ublog-post .ublog-post__topics a:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-accent) 50%, transparent);
   background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent) !important;
   color: var(--ln-ext-text-strong) !important;
 }
@@ -302,7 +299,6 @@
 }
 
 .ublog-post .ublog-post__lichess .connect-links a:hover {
-  border-color: var(--ln-ext-lift-20);
   color: var(--ln-ext-text-strong) !important;
 }
 

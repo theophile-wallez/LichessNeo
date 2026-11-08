@@ -146,12 +146,10 @@ main.swiss-home .swisses tbody tr {
   background: var(--ln-ext-bg-panel) !important;
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 main.swiss-home .swisses tbody tr:hover {
-  border-color: var(--ln-ext-card-border-hover);
   background: var(--ln-ext-card-hover) !important;
   box-shadow: var(--ln-ext-card-shadow-hover);
 }

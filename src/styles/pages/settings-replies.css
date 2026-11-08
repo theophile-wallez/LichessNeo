@@ -116,7 +116,6 @@
 
 .ln-ext-replies__lichess-reply:hover:not(:disabled) {
   background: color-mix(in srgb, var(--ln-ext-accent) 18%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-accent) 40%, transparent);
   color: var(--ln-ext-accent-hover);
 }
 

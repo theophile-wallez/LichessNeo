@@ -74,12 +74,10 @@ main.box.page-small[data-ln-ext-list='players'] {
     background: var(--ln-ext-lift-3) !important;
     transition:
       background-color 0.15s,
-      border-color 0.15s,
       box-shadow 0.15s !important;
   }
 
   & > table.slist > tbody > tr:hover {
-    border-color: var(--ln-ext-card-border-hover);
     background: var(--ln-ext-card-hover) !important;
     box-shadow: var(--ln-ext-card-shadow-hover);
   }

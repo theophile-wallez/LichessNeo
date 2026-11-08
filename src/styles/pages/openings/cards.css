@@ -31,12 +31,10 @@ main.opening :is(.opening__next, .opening__search__result) {
   box-shadow: none !important;
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-    border-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 main.opening :is(.opening__next, .opening__search__result):hover {
-  border-color: var(--ln-ext-card-border-hover) !important;
   box-shadow: var(--ln-ext-card-shadow-hover) !important;
   transform: translateY(-3px);
 }

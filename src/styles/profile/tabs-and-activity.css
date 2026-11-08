@@ -15,12 +15,10 @@
   box-shadow: none !important;
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 .user-show > .user-show__blog .ublog-post-card--link:hover {
-  border-color: var(--ln-ext-card-border-hover) !important;
   background: var(--ln-ext-card-hover) !important;
   box-shadow: var(--ln-ext-card-shadow-hover) !important;
 }

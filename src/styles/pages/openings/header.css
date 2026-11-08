@@ -81,7 +81,6 @@ main.opening .opening__config__summary::-webkit-details-marker {
   display: none;
 }
 
-main.opening .opening__config__summary:hover,
 main.opening .opening__config[open] > .opening__config__summary {
   border-color: var(--ln-ext-card-border-hover);
 }

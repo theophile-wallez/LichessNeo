@@ -113,12 +113,10 @@
   font: 600 13px/1 var(--ln-ext-font);
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     opacity 0.15s !important;
 }
 
 .ln-ext-rchart__chip:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-series-color) 55%, transparent);
   background: color-mix(in srgb, var(--ln-ext-series-color) 10%, transparent);
 }
 
@@ -127,7 +125,6 @@
 }
 
 .ln-ext-rchart__chip:disabled:hover {
-  border-color: var(--ln-ext-card-border);
   background: var(--ln-ext-lift-3);
 }
 

@@ -173,9 +173,12 @@ html[dir='rtl'] .practice-app .study {
   padding: 14px 96px 14px 44px !important;
 }
 
-.practice-app .study:hover,
 .practice-app .study.active {
   border-color: color-mix(in srgb, var(--ln-ext-practice) 60%, transparent) !important;
+}
+
+.practice-app .study:hover,
+.practice-app .study.active {
   background: var(--ln-ext-card-hover) !important;
   box-shadow: 0 6px 18px var(--ln-ext-shade-35) !important;
   transform: translateY(-3px) !important;

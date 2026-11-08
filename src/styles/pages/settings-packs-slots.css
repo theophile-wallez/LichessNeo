@@ -18,11 +18,15 @@
   border-color: var(--ln-ext-lift-8);
 }
 
-.ln-ext-pack-slot:hover,
 .ln-ext-pack-slot:focus-visible,
 .ln-ext-pack-slot--over {
   border-color: var(--ln-ext-drop-color);
   outline: none;
+}
+
+.ln-ext-pack-slot:hover,
+.ln-ext-pack-slot:focus-visible,
+.ln-ext-pack-slot--over {
   background: color-mix(in srgb, var(--ln-ext-drop-color) 10%, transparent);
 }
 

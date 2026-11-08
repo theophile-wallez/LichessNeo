@@ -112,12 +112,10 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
   box-shadow: none !important;
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 .relay-card:hover {
-  border-color: var(--ln-ext-card-border-hover);
   background: var(--ln-ext-card-hover) !important;
   box-shadow: var(--ln-ext-card-shadow-hover) !important;
 }
@@ -125,10 +123,6 @@ html[dir='rtl'] :is(.relay-index, .relay-calendar) .box__top .search input {
 /* Live: a red edge and pill instead of Lichess's thick red frame and glow. */
 .relay-card--live {
   border-color: color-mix(in srgb, var(--ln-ext-red-dark) 50%, transparent);
-}
-
-.relay-card--live:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-red-dark) 80%, transparent);
 }
 
 .relay-card__image {

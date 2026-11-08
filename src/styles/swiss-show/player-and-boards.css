@@ -145,13 +145,10 @@ main.swiss .swiss__board {
   border-radius: 10px !important;
   background: var(--ln-ext-bg-panel) !important;
   box-shadow: none !important;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s !important;
+  transition: box-shadow 0.15s !important;
 }
 
 main.swiss .swiss__board:hover {
-  border-color: var(--ln-ext-card-border-hover);
   box-shadow: var(--ln-ext-card-shadow-hover) !important;
 }
 

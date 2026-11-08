@@ -520,10 +520,12 @@ features and its name: free analysis, open data, no ads.
   (`styles/profile/games.css`) and the puzzles' session chips. Never white on
   a filled hue or on the accent: only buttons keep their filled gradients
   (`--ln-ext-btn-primary`, `-red`).
-- **Hover feels the same everywhere:** a card lifts, and its icon tile stays
-  still. No tile, icon or picture turns, hops or bobs, on hover or for ever,
-  nor sits askew: it reads cheap. A `rotate` is for what really turns: a
-  chevron that flips, a spinner, confetti.
+- **Hover feels the same everywhere:** a card lifts (its fill and shadow),
+  keeps its border, and its icon tile stays still. No edge lights up on
+  hover: only a state draws one (picked, open, a drop over it). No tile,
+  icon or picture turns, hops or bobs, on hover or for ever, nor sits askew:
+  it reads cheap. A `rotate` is for what really turns: a chevron that flips,
+  a spinner, confetti.
 - **Tabs slide:** a tab bar's highlight is one piece that slides to the tab
   picked (`0.35s cubic-bezier(0.22, 1, 0.36, 1)`). Register the bar in
   `TAB_BARS`; its CSS gives the piece the active tab's look (`--ln-ext-tab-bg`,

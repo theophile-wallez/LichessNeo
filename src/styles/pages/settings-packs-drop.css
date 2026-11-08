@@ -79,8 +79,12 @@
 .ln-ext-packs__drop:hover:not(:has(.ln-ext-packs__example:hover)),
 .ln-ext-packs__drop:focus-within:not(:has(.ln-ext-packs__example:focus)),
 .ln-ext-packs__drop--over {
-  border-color: var(--ln-ext-drop-color);
   background: color-mix(in srgb, var(--ln-ext-drop-color) 8%, transparent);
+}
+
+.ln-ext-packs__drop:focus-within:not(:has(.ln-ext-packs__example:focus)),
+.ln-ext-packs__drop--over {
+  border-color: var(--ln-ext-drop-color);
 }
 
 .ln-ext-packs__drop-icon {

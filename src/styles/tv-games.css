@@ -10,13 +10,10 @@ main.tv-games .now-playing .mini-game {
   border: 1px solid var(--ln-ext-card-border);
   border-radius: 12px;
   background: var(--ln-ext-bg-panel);
-  transition:
-    background-color 0.15s,
-    border-color 0.15s !important;
+  transition: background-color 0.15s !important;
 }
 
 main.tv-games .now-playing .mini-game:hover {
-  border-color: var(--ln-ext-card-border-hover);
   background: var(--ln-ext-card-hover);
 }
 

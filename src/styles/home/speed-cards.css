@@ -56,9 +56,7 @@ main.lobby .lobby__app-pools > .lobby__app__content {
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
-  transition:
-    background-color 0.15s,
-    border-color 0.15s !important;
+  transition: background-color 0.15s !important;
 }
 
 .ln-ext-speeds__edit {
@@ -66,7 +64,6 @@ main.lobby .lobby__app-pools > .lobby__app__content {
 }
 
 :is(.ln-ext-speeds__edit, .ln-ext-speeds__custom):hover {
-  border-color: var(--ln-ext-card-border-hover);
   background: var(--ln-ext-btn-grey);
   color: var(--ln-ext-text-strong);
 }

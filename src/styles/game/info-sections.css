@@ -28,13 +28,10 @@ main.round
   border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 10px;
   background: var(--ln-ext-lift-3);
-  transition:
-    background-color 0.15s,
-    border-color 0.15s !important;
+  transition: background-color 0.15s !important;
 }
 
 main.round .game__meta :is(.game__tournament, .game__tournament-link, .game__simul-link):hover {
-  border-color: var(--ln-ext-card-border-hover) !important;
   background: var(--ln-ext-lift-6);
 }
 

@@ -61,6 +61,32 @@ describe('hovering', () => {
   });
 });
 
+// Not a card's edge: form controls, the calendar's days (today's ring stays), legend
+// chips that keep theirs, a chevron drawn with borders, a friend's line.
+const EDGED = new Set([
+  "main.importer form.import .upload input[type='file']:hover",
+  'main#insight .axis-form .ms-choice:hover',
+  '.flatpickr-calendar .flatpickr-day:is(:hover, :focus)',
+  '.flatpickr-calendar .flatpickr-day.today:is(:hover, :focus)',
+  '.flatpickr-calendar .flatpickr-day.selected, .flatpickr-calendar .flatpickr-day.selected:is(:hover, :focus)',
+  '.ln-ext-dist__chip, .ln-ext-dist__chip:hover',
+  '.ln-ext-ins__chip, .ln-ext-ins__chip:hover',
+  'main.lobby .lobby__support-link:hover::after',
+  '#friend_box .content > div:hover a.user-link .line',
+]);
+
+describe('a card under the pointer', () => {
+  it('keeps its border', () => {
+    const lit = loadSheets()
+      .filter(rule => rule instanceof CSSStyleRule)
+      .filter(rule => rule.selectorText.includes(':hover'))
+      .filter(rule => rule.style.getPropertyValue('border-color') !== '')
+      .map(rule => rule.selectorText.replaceAll(/\s+/g, ' '))
+      .filter(selector => !EDGED.has(selector));
+    expect(lit).toEqual([]);
+  });
+});
+
 // The items of a list, in the markup Lichess serves. The user menu's rows are left out:
 // happy-dom doesn't match their `:is()` of descendant selectors.
 const LIST_ITEMS = {

@@ -40,7 +40,6 @@
 }
 
 .ln-ext-home-coach__mode:hover {
-  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border-hover);
   color: var(--ln-ext-text-strong);
   transform: translateY(-2px);
 }

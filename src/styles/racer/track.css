@@ -189,13 +189,10 @@ html[dir='rtl'] .racer .racer__race__track::before {
   border: 1px solid var(--ln-ext-card-border);
   border-radius: 10px;
   background: var(--ln-ext-bg-panel-dark);
-  transition:
-    border-color 0.15s,
-    transform 0.15s !important;
+  transition: transform 0.15s !important;
 }
 
 :is(.racer, .storm) .puz-history__round:hover {
-  border-color: var(--ln-ext-card-border-hover);
   transform: translateY(-2px);
 }
 

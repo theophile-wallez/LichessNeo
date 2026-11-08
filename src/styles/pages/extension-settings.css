@@ -48,11 +48,6 @@ main.account[data-ln-ext-settings] > .page-menu__content:not(.ln-ext-settings) {
   border-radius: 14px;
   background: var(--ln-ext-bg-panel);
   box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
-  transition: box-shadow 0.2s !important;
-}
-
-.ln-ext-setting:hover {
-  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border-hover);
 }
 
 .ln-ext-setting[data-ln-ext-setting='uiSounds'] {

@@ -28,7 +28,6 @@
   }
 
   .side.sub-ratings a[href]:hover {
-    border-color: var(--ln-ext-card-border-hover);
     background: var(--ln-ext-card-hover) !important;
     box-shadow: var(--ln-ext-card-shadow-hover);
     transform: translateY(-2px);

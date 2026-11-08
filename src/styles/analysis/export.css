@@ -191,13 +191,11 @@ main.analyse .fen-pgn :is(a.game-gif, .position-gif, .fetch-content) {
   border-radius: 12px;
   background: var(--ln-ext-card-bg);
   transition:
-    border-color 0.15s,
     background-color 0.15s,
     transform 0.2s !important;
 }
 
 main.analyse .fen-pgn :is(a.game-gif, .position-gif, .fetch-content):hover {
-  border-color: var(--ln-ext-card-border-hover);
   background: var(--ln-ext-card-hover);
   transform: translateY(-1px);
 }

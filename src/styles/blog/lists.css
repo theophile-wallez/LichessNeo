@@ -17,12 +17,10 @@
   box-shadow: none !important;
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card--link:hover {
-  border-color: var(--ln-ext-card-border-hover) !important;
   background: var(--ln-ext-card-hover) !important;
   box-shadow: var(--ln-ext-card-shadow-hover) !important;
 }
@@ -30,10 +28,6 @@
 /* Lichess's own posts: a gold edge instead of a thick gold frame. */
 :is(.ublog-index, .ublog-post) .ublog-post-card--by-lichess {
   border-color: color-mix(in srgb, var(--ln-ext-orange-dark) 40%, transparent) !important;
-}
-
-:is(.ublog-index, .ublog-post) .ublog-post-card--by-lichess:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-orange-dark) 70%, transparent) !important;
 }
 
 :is(.ublog-index, .ublog-post) .ublog-post-card__image {
@@ -299,12 +293,10 @@
   background: var(--ln-ext-bg-panel);
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 .ublog-topics__topic:hover {
-  border-color: var(--ln-ext-card-border-hover);
   background: var(--ln-ext-card-hover);
   box-shadow: var(--ln-ext-card-shadow-hover);
 }

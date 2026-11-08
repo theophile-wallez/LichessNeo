@@ -107,13 +107,11 @@ main.plan .best_patrons .list > .paginated {
   animation: ln-ext-plan-in 0.35s ease-out both;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    border-color 0.15s,
     background-color 0.15s,
     box-shadow 0.15s !important;
 }
 
 main.plan .best_patrons .list > .paginated:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-paco) 55%, transparent);
   background: var(--ln-ext-card-hover);
   box-shadow: var(--ln-ext-card-shadow-hover);
   transform: translateY(-2px);

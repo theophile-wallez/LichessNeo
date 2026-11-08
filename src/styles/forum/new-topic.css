@@ -158,14 +158,12 @@ main.search .search__results tr:not(.pager) {
   background: var(--ln-ext-bg-panel) !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    border-color 0.15s,
     background-color 0.15s !important;
   animation: ln-ext-forum-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   animation-delay: calc(min(sibling-index(), 16) * 25ms);
 }
 
 main.search .search__results tr:not(.pager):hover {
-  border-color: color-mix(in srgb, var(--ln-ext-accent) 50%, transparent);
   background: var(--ln-ext-card-hover) !important;
   transform: translateX(4px);
 }

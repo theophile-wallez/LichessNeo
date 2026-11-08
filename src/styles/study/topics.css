@@ -49,12 +49,10 @@
   font-weight: 600;
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     color 0.15s !important;
 }
 
 .study-topics .topic-list a:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-accent) 50%, transparent);
   background: color-mix(in srgb, var(--ln-ext-accent) 15%, transparent) !important;
   color: var(--ln-ext-text-strong) !important;
 }

@@ -24,13 +24,10 @@ main.team-show .team-show__tour tbody tr {
   border: 1px solid var(--ln-ext-card-border) !important;
   border-radius: 10px;
   background: var(--ln-ext-bg-panel) !important;
-  transition:
-    background-color 0.15s,
-    border-color 0.15s !important;
+  transition: background-color 0.15s !important;
 }
 
 main.team-show .team-show__tour tbody tr:hover {
-  border-color: var(--ln-ext-card-border-hover) !important;
   background: var(--ln-ext-card-hover) !important;
 }
 

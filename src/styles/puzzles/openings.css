@@ -173,13 +173,11 @@
   background: var(--ln-ext-lift-4);
   transition:
     background-color 0.15s,
-    border-color 0.15s,
     transform 0.15s !important;
 }
 
 /* A chip lights up in its family's color. */
 .puzzle-openings__link:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-fam) 60%, transparent);
   background: color-mix(in srgb, var(--ln-ext-fam) 22%, transparent) !important;
   transform: translateY(-1px);
 }

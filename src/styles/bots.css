@@ -151,7 +151,6 @@
   overflow: visible !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    border-color 0.15s,
     box-shadow 0.15s !important;
   animation: ln-ext-bot-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   /* Stagger only the first cards; the hundreds below come in at once. */
@@ -159,7 +158,6 @@
 }
 
 .bots__list__entry:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-bot) 55%, transparent) !important;
   box-shadow: 0 6px 18px var(--ln-ext-shade-35);
   transform: translateY(-3px);
 }

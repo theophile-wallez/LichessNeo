@@ -30,14 +30,12 @@ main.forum table.categs tr {
   background: var(--ln-ext-bg-panel) !important;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    border-color 0.15s,
     box-shadow 0.15s !important;
   animation: ln-ext-forum-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   animation-delay: calc(sibling-index() * 50ms);
 }
 
 main.forum table.categs tr:hover {
-  border-color: color-mix(in srgb, var(--ln-ext-fc) 55%, transparent);
   background: var(--ln-ext-bg-panel) !important;
   box-shadow: 0 8px 22px var(--ln-ext-shade-40);
   transform: translateY(-4px);

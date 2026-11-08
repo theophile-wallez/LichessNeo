@@ -107,7 +107,6 @@ main.analyse.has-relay-tour .study__multiboard .now-playing > a {
 }
 
 main.analyse.has-relay-tour .study__multiboard .now-playing > a:hover {
-  border-color: var(--ln-ext-card-border-hover) !important;
   background: var(--ln-ext-card-hover) !important;
   box-shadow: var(--ln-ext-card-shadow-hover);
   transform: translateY(-2px);

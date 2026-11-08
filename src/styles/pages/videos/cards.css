@@ -42,7 +42,7 @@ main.page-menu.video .list .card .img {
 main.page-menu.video .list .card:hover .img {
   background-size: 140% auto !important;
   box-shadow:
-    0 0 0 1px var(--ln-ext-card-border-hover),
+    0 0 0 1px var(--ln-ext-card-border),
     var(--ln-ext-card-shadow-hover);
 }
 
