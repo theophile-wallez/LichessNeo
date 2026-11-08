@@ -25,7 +25,6 @@
     background: transparent;
     color: var(--ln-ext-text-dim);
     cursor: pointer;
-    transition: background-color 0.15s !important;
   }
 
   /* The logo's row leaves the toggle its room. */

@@ -69,9 +69,7 @@ h3 {
   font-size: 15px;
   font-weight: 600;
   text-shadow: none !important;
-  transition:
-    background-color 0.18s ease-out,
-    color 0.18s ease-out !important;
+  transition: none !important;
 }
 
 .subnav a:hover {
@@ -146,7 +144,6 @@ h3 {
   );
   box-shadow: inset 0 1px #ffffff14;
   transition:
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
     background-color 0.2s,
     box-shadow 0.2s !important;
 }
@@ -182,38 +179,6 @@ h3 {
   /* Without a glyph, a mask that hides it all. */
   mask: var(--ln-ext-nav-glyph, linear-gradient(#0000, #0000)) center / contain no-repeat;
   pointer-events: none;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-.subnav:is(
-    [data-ln-ext-nav~='bots'],
-    [data-ln-ext-nav~='broadcast'],
-    [data-ln-ext-nav~='puzzles'],
-    [data-ln-ext-nav~='account'],
-    [data-ln-ext-nav~='dgt'],
-    [data-ln-ext-nav~='about'],
-    [data-ln-ext-nav~='streamers'],
-    [data-ln-ext-nav~='studies'],
-    [data-ln-ext-nav~='teams'],
-    [data-ln-ext-nav~='blog'],
-    [data-ln-ext-nav~='arena-history']
-  )
-  a:hover::before,
-.subnav:is(
-    [data-ln-ext-nav~='bots'],
-    [data-ln-ext-nav~='broadcast'],
-    [data-ln-ext-nav~='puzzles'],
-    [data-ln-ext-nav~='account'],
-    [data-ln-ext-nav~='dgt'],
-    [data-ln-ext-nav~='about'],
-    [data-ln-ext-nav~='streamers'],
-    [data-ln-ext-nav~='studies'],
-    [data-ln-ext-nav~='teams'],
-    [data-ln-ext-nav~='blog'],
-    [data-ln-ext-nav~='arena-history']
-  )
-  a:hover::after {
-  transform: translateY(-2px) rotate(-8deg) scale(1.08);
 }
 
 .subnav:is(

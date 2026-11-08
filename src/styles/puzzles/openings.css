@@ -124,12 +124,6 @@
     inset 0 1px 0 #ffffff45,
     inset 0 -2px 0 #00000026,
     0 3px 8px var(--ln-ext-shade-30);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-/* The theme cards' hover hop, on the family's link. */
-.puzzle-openings__tree__family h2:has(a:hover)::before {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 .puzzle-openings__tree__family h2 a {

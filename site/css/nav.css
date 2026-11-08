@@ -137,11 +137,6 @@
   width: 14px;
   height: 14px;
   color: #f5c451;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.star-link:hover .star-link__count .icon {
-  transform: rotate(-12deg) scale(1.2);
 }
 
 .nav-end {

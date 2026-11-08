@@ -177,7 +177,7 @@ main.forum-topic:not(.topic-form) .box__top h1::before {
   mask:
     var(--ln-ext-fc-icon) center / 28px no-repeat,
     linear-gradient(#0000003d, #0000003d);
-  animation: ln-ext-forum-wobble 0.6s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation: ln-ext-forum-tile-in 0.6s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
 /* The name is a bare text node (order 0): the button and tile go before it. */
@@ -206,10 +206,10 @@ main.forum-categ .box__top h1 > a:not(:first-child) .uflair {
   height: 1em;
 }
 
-@keyframes ln-ext-forum-wobble {
+@keyframes ln-ext-forum-tile-in {
   from {
     opacity: 0;
-    transform: scale(0.4) rotate(-20deg);
+    transform: scale(0.4);
   }
 }
 
@@ -277,9 +277,4 @@ main.forum-categ .box__top__actions a.button-green:hover {
 
 main.forum-categ .box__top__actions a.button-green::before {
   margin: 0 !important;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.forum-categ .box__top__actions a.button-green:hover::before {
-  transform: rotate(-15deg) scale(1.15);
 }

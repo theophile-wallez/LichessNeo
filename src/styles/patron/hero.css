@@ -290,6 +290,6 @@ main.plan .plan_checkout:not(:has(group)) .service {
 
 @keyframes ln-ext-plan-float {
   50% {
-    transform: translateY(-6px) rotate(-4deg);
+    transform: translateY(-6px);
   }
 }

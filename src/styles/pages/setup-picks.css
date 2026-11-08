@@ -112,13 +112,6 @@
   border-radius: 10px;
   background: color-mix(in srgb, var(--ln-ext-setup-hue) 18%, transparent);
   color: var(--ln-ext-setup-hue);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-@media (hover: hover) {
-  .ln-ext-setup__tile:hover .ln-ext-setup__icon {
-    transform: rotate(-6deg) scale(1.08);
-  }
 }
 
 .ln-ext-setup__icon[data-icon]::before {

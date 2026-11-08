@@ -50,14 +50,14 @@
   color: var(--ln-ext-text-strong) !important;
   font-weight: 500;
   white-space: nowrap;
-  transition: background-color 0.12s;
+  transition: none !important;
 }
 
 #analyse-cm a::before {
   width: auto !important;
   color: var(--ln-ext-text-dim);
   font-size: 16px;
-  transition: color 0.12s;
+  transition: none !important;
 }
 
 #analyse-cm a:hover {

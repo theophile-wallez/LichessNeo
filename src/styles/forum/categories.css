@@ -50,7 +50,7 @@ main.forum table.categs tr:hover {
   }
 }
 
-/* The category's icon on its tile, which tilts on hover. */
+/* The category's icon on its tile. */
 main.forum table.categs tr::before {
   content: '';
   flex: none;
@@ -61,11 +61,6 @@ main.forum table.categs tr::before {
   mask:
     var(--ln-ext-fc-icon) center / 36px no-repeat,
     linear-gradient(#0000003d, #0000003d);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.forum table.categs tr:hover::before {
-  transform: rotate(-8deg) scale(1.1);
 }
 
 main.forum table.categs td {

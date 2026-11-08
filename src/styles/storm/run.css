@@ -94,18 +94,14 @@ html[data-ln-ext-has~='storm'] main {
     0 0 0 1px color-mix(in srgb, var(--ln-ext-storm) 35%, transparent);
 }
 
-/* The icon jolts with each puzzle solved. */
+/* The icon pulses with each puzzle solved. */
 .storm.puz-mod-puzzle .puz-side__top::before {
-  animation: ln-ext-storm-jolt 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  animation: ln-ext-storm-pulse 0.35s ease-out;
 }
 
-@keyframes ln-ext-storm-jolt {
-  30% {
-    transform: rotate(-10deg) scale(1.1);
-  }
-
-  60% {
-    transform: rotate(6deg) scale(1.05);
+@keyframes ln-ext-storm-pulse {
+  40% {
+    transform: scale(1.1);
   }
 }
 

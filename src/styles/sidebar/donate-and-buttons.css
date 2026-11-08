@@ -24,7 +24,6 @@
     font-weight: 500;
     color: var(--ln-ext-neutral-12) !important;
     background: transparent;
-    transition: background-color 0.15s !important;
   }
 
   #ln-ext-donate::before {
@@ -196,19 +195,10 @@
   color: var(--ln-ext-neutral-13);
   font-size: 16px;
   cursor: pointer;
-  transition: color 0.15s !important;
-}
-
-#ln-ext-scheme-toggle .ln-ext-hi {
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 #ln-ext-scheme-toggle:hover {
   color: var(--ln-ext-text-strong);
-}
-
-#ln-ext-scheme-toggle:hover .ln-ext-hi {
-  transform: rotate(-20deg) scale(1.1);
 }
 
 html.light #ln-ext-scheme-toggle .ln-ext-scheme-toggle__dark,
@@ -223,17 +213,8 @@ html:not(.light) #ln-ext-scheme-toggle .ln-ext-scheme-toggle__light {
   align-items: center;
   color: var(--ln-ext-neutral-13);
   font-size: 16px;
-  transition: color 0.15s !important;
-}
-
-#ln-ext-preferences-button .ln-ext-hi {
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 #ln-ext-preferences-button:hover {
   color: var(--ln-ext-text-strong);
-}
-
-#ln-ext-preferences-button:hover .ln-ext-hi {
-  transform: rotate(60deg);
 }

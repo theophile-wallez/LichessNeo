@@ -77,11 +77,6 @@ main.tournament-categ-shields {
   font-size: 22px !important;
   line-height: 42px !important;
   text-shadow: 0 1px 1px #0000004d !important;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-.tournament-shields__item:hover .shield-trophy {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 /* The name right after the tile, the chevron at the end. */
@@ -211,11 +206,6 @@ main.tournament-categ-shields .shield-trophy {
   line-height: 36px !important;
   text-shadow: 0 1px 0 #ffffff59 !important;
   transform: none !important;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.tournament-categ-shields .box > ol > li:hover .shield-trophy {
-  transform: rotate(-6deg) scale(1.08) !important;
 }
 
 main.tournament-categ-shields .shield-trophy {

@@ -69,10 +69,6 @@
   margin-bottom: 4px;
 }
 
-.ln-ext-looks:hover .ln-ext-looks__head .ln-ext-setting__icon {
-  transform: rotate(-6deg) scale(1.08);
-}
-
 .ln-ext-looks > [hidden] {
   display: none !important;
 }
@@ -137,10 +133,6 @@
 .ln-ext-looks-preview .ln-ext-looks__head {
   grid-area: head;
   margin: 0;
-}
-
-.ln-ext-looks-preview:hover .ln-ext-setting__icon {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 .ln-ext-looks-preview__board {

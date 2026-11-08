@@ -54,7 +54,7 @@
   align-items: center;
   gap: 6px;
   border-radius: 6px;
-  transition: background-color 0.15s !important;
+  transition: none !important;
 }
 
 #friend_box .content > div:hover {

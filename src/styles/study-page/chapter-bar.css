@@ -174,7 +174,6 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
 
 .ln-ext-study-bar__add:hover {
   background: var(--ln-ext-btn-grey-hover);
-  transform: rotate(90deg) scale(1.08);
 }
 
 .ln-ext-study-bar__step:disabled {

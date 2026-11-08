@@ -131,9 +131,7 @@
   .mselect__toggle:checked ~ .mselect__list .mselect__item {
     opacity: 1 !important;
     visibility: inherit !important;
-    transition:
-      background-color 0.1s,
-      color 0.1s !important;
+    transition: none !important;
   }
 }
 
@@ -207,7 +205,7 @@ dialog .scrollable:has(.game-setup .mselect__toggle:checked) {
 
 .game-setup .mselect__item td {
   padding: 9px 10px !important;
-  transition: background-color 0.1s !important;
+  transition: none !important;
 }
 
 .game-setup .mselect__item td:first-child {

@@ -143,15 +143,6 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
   font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
-  main.analyse:not(.is-relay)
-  .study-list
-  > button:hover
-  > span:first-child {
-  transform: translateY(-2px) rotate(-8deg) scale(1.08);
 }
 
 html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])

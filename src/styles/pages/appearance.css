@@ -23,10 +23,6 @@
   margin-bottom: 4px;
 }
 
-.ln-ext-appearance:hover .ln-ext-appearance__head .ln-ext-setting__icon {
-  transform: rotate(-6deg) scale(1.08);
-}
-
 .ln-ext-appearance__label {
   margin: 6px 0 0 !important;
   color: var(--ln-ext-text-dim) !important;

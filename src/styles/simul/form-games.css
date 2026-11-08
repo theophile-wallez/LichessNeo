@@ -66,11 +66,6 @@ main.simul-form .variants .checkable > label:not(.form-check__label)::before {
   background: color-mix(in srgb, var(--ln-ext-variant-color) 16%, transparent);
   color: var(--ln-ext-variant-color);
   font: normal 17px lichess;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.simul-form .variants .checkable:hover > label:not(.form-check__label)::before {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 main.simul-form .variants [data-ln-ext-variant='crazyhouse'] {

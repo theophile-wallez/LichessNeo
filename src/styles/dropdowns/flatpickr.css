@@ -192,9 +192,7 @@
   border-radius: 8px !important;
   color: var(--ln-ext-text);
   font-weight: 550;
-  transition:
-    background-color 0.15s,
-    border-color 0.15s !important;
+  transition: border-color 0.15s !important;
 }
 
 .flatpickr-calendar .flatpickr-day:is(:hover, :focus) {

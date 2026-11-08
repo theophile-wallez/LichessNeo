@@ -48,7 +48,7 @@
     border-radius: 8px !important;
     background: transparent !important;
     text-shadow: none !important;
-    transition: background-color 0.15s !important;
+    transition: none !important;
   }
 
   #topnav section > a .home {
@@ -131,7 +131,7 @@
     font-weight: 500;
     color: var(--ln-ext-neutral-13) !important;
     border-radius: 6px !important;
-    transition: background-color 0.15s !important;
+    transition: none !important;
   }
 
   #topnav section > div a:hover {

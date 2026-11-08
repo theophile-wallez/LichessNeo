@@ -148,7 +148,7 @@ main.lobby .lobby__streams .stream {
   font-size: 13px;
   line-height: 1.4 !important;
   text-shadow: none !important;
-  transition: background 0.15s !important;
+  transition: none !important;
 }
 
 main.lobby .lobby__streams .stream:hover {

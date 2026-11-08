@@ -83,7 +83,7 @@ main.analyse.has-relay-tour .relay-tour__side .relay-game {
   border-bottom: 1px solid var(--ln-ext-lift-4) !important;
   border-inline-start: 3px solid transparent !important;
   color: var(--ln-ext-text);
-  transition: background-color 0.15s !important;
+  transition: none !important;
 }
 
 main.analyse.has-relay-tour .relay-tour__side .relay-game:hover {

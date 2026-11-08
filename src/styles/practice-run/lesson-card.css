@@ -147,9 +147,7 @@ main.analyse .ps__chapter .status {
   font-size: 12px !important;
   font-weight: 800;
   line-height: 1;
-  transition:
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-    background-color 0.15s !important;
+  transition: background-color 0.15s !important;
 }
 
 /* Lichess's glyph here (a play triangle, a checkmark) is painted as its Hugeicon's mask
@@ -167,10 +165,6 @@ main.analyse .ps__chapter .status.done::before {
   display: inline-block;
   width: 1em;
   height: 1em;
-}
-
-main.analyse .ps__chapter:hover .status {
-  transform: translateY(-2px) rotate(-8deg) scale(1.08);
 }
 
 main.analyse .ps__chapter .status.done {

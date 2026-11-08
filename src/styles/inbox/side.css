@@ -88,7 +88,7 @@ main.msg-app .msg-app__side__contact {
   margin: 2px 0;
   padding: 10px 12px;
   border-radius: 12px;
-  transition: background-color 0.15s !important;
+  transition: none !important;
 }
 
 main.msg-app .msg-app__side__contact:hover {

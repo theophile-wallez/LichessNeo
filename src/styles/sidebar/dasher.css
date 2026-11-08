@@ -43,7 +43,7 @@
   font-size: 15px;
   font-weight: 600;
   opacity: 1 !important;
-  transition: background-color 0.1s !important;
+  transition: none !important;
 }
 
 #dasher_app :is(.links a, .links button, .subs .sub, .zen button):hover {
@@ -205,7 +205,7 @@
   color: var(--ln-ext-text) !important;
   font-size: 14px;
   font-weight: 600;
-  transition: background-color 0.1s !important;
+  transition: none !important;
 }
 
 /* The current choice gets an accent check, not a fill: a fill looks like the hover. */

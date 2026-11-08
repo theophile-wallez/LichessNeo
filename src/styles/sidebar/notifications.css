@@ -71,9 +71,7 @@
   background: transparent !important;
   color: var(--ln-ext-text-dim) !important;
   font-size: 16px;
-  transition:
-    background-color 0.15s,
-    color 0.15s !important;
+  transition: none !important;
 }
 
 #top #notify-app .settings {
@@ -101,7 +99,7 @@
   padding: 8px 10px;
   border-radius: 8px;
   color: var(--ln-ext-text);
-  transition: background-color 0.1s !important;
+  transition: none !important;
 }
 
 #top #notify-app .site_notification + .site_notification {

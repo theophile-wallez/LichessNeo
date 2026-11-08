@@ -46,7 +46,6 @@ html[dir='rtl'] .learn-stages .stage {
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
     0 4px 10px var(--ln-ext-shade-25);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 /* Lichess's grey drawing, white on the tile (the tile shows a done stage, not Lichess's tint).
@@ -63,12 +62,6 @@ html[dir='rtl'] .learn-stages .stage {
   background: none !important;
   opacity: 1 !important;
   filter: brightness(0) invert(1) drop-shadow(0 1px 1px #0000004d) !important;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-.learn-stages .stage:hover::before,
-.learn-stages .stage:hover img {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 .learn-stages .stage h3 {

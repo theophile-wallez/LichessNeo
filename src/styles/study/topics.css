@@ -142,9 +142,7 @@ main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > ul a {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
-  transition:
-    background-color 0.1s,
-    color 0.1s !important;
+  transition: none !important;
 }
 
 main.page-menu[data-ln-ext-nav-active$='/staff-picks'] .body > ul a::before {

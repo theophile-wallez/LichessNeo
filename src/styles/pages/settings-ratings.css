@@ -39,10 +39,6 @@
   outline-offset: -2px;
 }
 
-.ln-ext-study__summary:hover .ln-ext-setting__icon {
-  transform: rotate(-6deg) scale(1.08);
-}
-
 .ln-ext-study .ln-ext-setting__title,
 .ln-ext-study .ln-ext-setting__body {
   display: block;

@@ -145,7 +145,6 @@
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
     0 4px 10px var(--ln-ext-shade-25);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 :is(.community .leaderboards, .tournament-leaderboards) h2::before {
@@ -159,7 +158,6 @@
   line-height: 24px !important;
   text-align: center;
   filter: brightness(0) invert(1) drop-shadow(0 1px 1px #0000004d);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 /* The time-control and variant glyphs fill the tile's box. */
@@ -176,21 +174,6 @@
     [data-icon='\e00d']
   )::before {
   font-size: 24px !important;
-}
-
-:is(
-    .community .leaderboards .user-top,
-    .tournament-leaderboards__item,
-    .tournament-shields__item
-  ):hover
-  h2::after,
-:is(
-    .community .leaderboards .user-top,
-    .tournament-leaderboards__item,
-    .tournament-shields__item
-  ):hover
-  h2::before {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 :is(.community .leaderboards, .tournament-shields) h2 a {

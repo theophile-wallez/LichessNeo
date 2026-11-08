@@ -76,11 +76,6 @@ main.forum-topic.topic-form .warning p::before {
   mask:
     var(--ln-ext-tip-icon) center / 26px no-repeat,
     linear-gradient(#0000003d, #0000003d);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.forum-topic.topic-form .warning p:hover::before {
-  transform: rotate(-8deg) scale(1.08);
 }
 
 main.forum-topic.topic-form .warning p:nth-of-type(1) {

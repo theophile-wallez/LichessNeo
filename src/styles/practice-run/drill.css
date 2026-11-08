@@ -163,11 +163,6 @@ main.analyse .analyse__underboard > .cmn-toggle-wrap::before {
     inset 0 1px 0 #ffffff40,
     inset 0 -2px 0 #00000026,
     0 3px 8px var(--ln-ext-shade-25);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.analyse .analyse__underboard > .cmn-toggle-wrap:hover::before {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 main.analyse .analyse__underboard > .cmn-toggle-wrap::after {

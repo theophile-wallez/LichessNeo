@@ -112,7 +112,6 @@ html.light main:is(.tour, .swiss) .podium .first .trophy::before {
   from {
     opacity: 0;
     scale: 0;
-    rotate: -25deg;
   }
 }
 

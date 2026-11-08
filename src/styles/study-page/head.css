@@ -72,16 +72,10 @@ html[data-ln-ext-has~='study-side']:not([data-ln-ext-has~='practice'])
   border-radius: 14px;
   background: color-mix(in srgb, var(--ln-ext-accent) 16%, transparent)
     url('chrome-extension://__MSG_@@extension_id__/img/sidebar/study.webp') center / 36px no-repeat;
-  transform: rotate(-6deg);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 .ln-ext-study-head[data-ln-ext-flair] .ln-ext-study-head__tile {
   background-image: none;
-}
-
-.ln-ext-study-head:hover .ln-ext-study-head__tile {
-  transform: rotate(-12deg) scale(1.08);
 }
 
 .ln-ext-study-head__flair {

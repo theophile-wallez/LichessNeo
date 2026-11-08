@@ -57,7 +57,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* One row, scrolling sideways when it doesn't fit; room for the coins' hop and shadow. */
+/* One row, scrolling sideways when it doesn't fit; room for the coins' shadow. */
 .ln-ext-medals__row {
   display: flex;
   gap: 6px;

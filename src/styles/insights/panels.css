@@ -198,11 +198,6 @@ main#insight .presets > .preset::before {
   font-size: 0 !important;
 }
 
-main#insight .presets > .preset:hover::before {
-  transform: rotate(-8deg) scale(1.08);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
 /* ---- Definitions --- */
 
 main#insight .help section {

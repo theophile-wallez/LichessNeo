@@ -92,11 +92,6 @@
   border-radius: 11px;
   background: color-mix(in srgb, var(--accent) 18%, transparent);
   color: var(--accent-light);
-  transition: transform 0.25s var(--hop);
-}
-
-.tile:hover .tile__icon {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 .pack-form {

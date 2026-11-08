@@ -118,8 +118,6 @@
   }
 
   html[data-ln-ext-sidebar='unfolded'][data-ln-ext-nav-folding] #topnav section > div a {
-    transition:
-      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 0.15s !important;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 }

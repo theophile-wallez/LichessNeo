@@ -116,7 +116,7 @@
     transform: none !important;
     font-size: 0 !important;
     color: var(--ln-ext-text-strong) !important;
-    transition: background-color 0.15s !important;
+    transition: none !important;
   }
 
   #top .site-title:hover {

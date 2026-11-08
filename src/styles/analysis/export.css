@@ -247,18 +247,6 @@ main.analyse .fen-pgn :is(a.game-gif, .copy-me > a.copy-me__target)::after {
   mask: var(--ln-ext-tile-icon) center / 20px no-repeat;
 }
 
-main.analyse .fen-pgn :is(a.game-gif, .copy-me > a.copy-me__target)::before,
-main.analyse .fen-pgn :is(a.game-gif, .copy-me > a.copy-me__target)::after {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.analyse .fen-pgn a.game-gif:hover::before,
-main.analyse .fen-pgn a.game-gif:hover::after,
-main.analyse .fen-pgn .copy-me:hover > a.copy-me__target::before,
-main.analyse .fen-pgn .copy-me:hover > a.copy-me__target::after {
-  transform: rotate(-6deg) scale(1.08);
-}
-
 /* Each card's color and icon. */
 main.analyse .fen-pgn a.game-gif {
   --ln-ext-tile: var(--ln-ext-pink);

@@ -64,7 +64,6 @@ main.round .game__meta :is(.game__tournament, .game__tournament-link) a::before 
   line-height: 32px;
   text-align: center;
   text-shadow: 0 1px 1px #0000004d;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 /* A simul has no icon: a knight on a purple tile. */
@@ -81,14 +80,6 @@ main.round .game__meta .game__simul-link a::before {
     inset 0 1px 0 #ffffff40,
     inset 0 -3px 0 #00000026,
     0 2px 6px var(--ln-ext-shade-25);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-main.round
-  .game__meta
-  :is(.game__tournament, .game__tournament-link, .game__simul-link):hover
-  a::before {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 main.round .game__tournament .clock {

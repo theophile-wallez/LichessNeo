@@ -153,9 +153,6 @@ html[data-ln-ext-board]
   color: var(--ln-ext-text-dim);
   font: inherit;
   cursor: pointer;
-  transition:
-    background-color 0.1s,
-    color 0.1s !important;
 }
 
 #dasher_app .piece .ln-ext-src-item {

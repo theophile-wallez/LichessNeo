@@ -22,11 +22,6 @@
     0 6px 14px var(--ln-ext-shade-50),
     inset 0 2px 0 #ffffff70,
     inset 0 -3px 0 #0005;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-.ln-ext-medal:hover .ln-ext-medal__coin {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 .ln-ext-medal__coin::before,

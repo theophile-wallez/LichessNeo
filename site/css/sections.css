@@ -147,11 +147,6 @@
   height: 0.95em;
   margin-right: 5px;
   vertical-align: -0.12em;
-  transition: transform 0.25s var(--hop);
-}
-
-.lead-chip:hover .icon {
-  transform: rotate(-8deg) scale(1.1);
 }
 
 .yours-pickers {

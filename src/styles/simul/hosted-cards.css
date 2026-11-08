@@ -47,7 +47,6 @@ main.page-small.simul-list .slist tbody tr::after {
   align-self: center;
   width: 46px;
   height: 46px;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 main.page-small.simul-list .slist tbody tr::before {
@@ -64,10 +63,6 @@ main.page-small.simul-list .slist tbody tr::after {
   background: var(--ln-ext-piece) center / 76% no-repeat;
   filter: drop-shadow(0 2px 2px #00000080);
   pointer-events: none;
-}
-
-main.page-small.simul-list .slist tbody tr:hover::before {
-  transform: rotate(-6deg) scale(1.08);
 }
 
 main.page-small.simul-list .slist tbody tr:hover::after {

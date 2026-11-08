@@ -138,7 +138,7 @@
     font-size: 15.5px !important;
     font-weight: 600 !important;
     text-transform: none !important;
-    transition: background-color 0.15s !important;
+    transition: none !important;
   }
 
   #topnav section > a .home {
@@ -214,9 +214,7 @@
   /* The links drop in a little as they show. */
   #topnav section > div a {
     transform: translateY(-6px);
-    transition:
-      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 0.15s !important;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
   #topnav section.ln-ext-open > div a {
