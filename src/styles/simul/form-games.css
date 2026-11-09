@@ -217,7 +217,8 @@ main.simul-form .ln-ext-simul-form__editor {
   margin: 0;
   padding: 0 14px 0 10px;
   border: none;
-  border-radius: 8px;
+  /* Apart from the input: our rule that glues a button to an input it follows squares it. */
+  border-radius: 8px !important;
   background: var(--ln-ext-btn-grey) !important;
   box-shadow: var(--ln-ext-btn-grey-shadow) !important;
   color: var(--ln-ext-text-strong) !important;
@@ -283,6 +284,17 @@ main.simul-form .ln-ext-simul-form__colors button[aria-checked='true'] {
     inset 0 1px 0 var(--ln-ext-lift-8),
     0 1px 3px var(--ln-ext-shade-35);
   color: var(--ln-ext-text-strong);
+}
+
+/* The pick is the bar's sliding piece (content/ui/tab-bars.ts). */
+main.simul-form .ln-ext-simul-form__colors[data-ln-ext-tabs] {
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised-hover);
+  --ln-ext-tab-shadow: inset 0 1px 0 var(--ln-ext-lift-8), 0 1px 3px var(--ln-ext-shade-35);
+}
+
+main.simul-form .ln-ext-simul-form__colors[data-ln-ext-tabs] button[aria-checked='true'] {
+  background: transparent;
+  box-shadow: none;
 }
 
 main.simul-form .ln-ext-simul-form__colors button::before {

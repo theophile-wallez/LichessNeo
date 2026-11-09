@@ -1,0 +1,87 @@
+/* ---- Section icons --- */
+
+/* A color and an icon per section of the forms we know, in the order Lichess lists them (its
+ * legends are localized). An arena's: Tournament, Games, Start date, Entry conditions,
+ * Features. A Swiss's (.swiss__form, also a .tour__form): Tournament, Games, Features, Entry
+ * conditions, Custom pairings. A broadcast's: Optional details, Features, Players & Teams,
+ * Tiebreaks, Broadcaster note. */
+
+.tour__form > form.form3 > fieldset.toggle-box--toggle:nth-of-type(1) {
+  --ln-ext-section-color: var(--ln-ext-yellow);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/champion.svg');
+}
+
+.tour__form > form.form3 > fieldset.toggle-box--toggle:nth-of-type(2) {
+  --ln-ext-section-color: var(--ln-ext-cyan);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/clock-01.svg');
+}
+
+.tour__form > form.form3 > fieldset.toggle-box--toggle:nth-of-type(3) {
+  --ln-ext-section-color: var(--ln-ext-orange);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/calendar-03.svg');
+}
+
+.tour__form > form.form3 > fieldset.toggle-box--toggle:nth-of-type(4) {
+  --ln-ext-section-color: var(--ln-ext-purple);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
+}
+
+.tour__form > form.form3 > fieldset.toggle-box--toggle:nth-of-type(5) {
+  --ln-ext-section-color: var(--ln-ext-green);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
+}
+
+.swiss__form > form.form3 > fieldset.toggle-box--toggle:nth-of-type(3) {
+  --ln-ext-section-color: var(--ln-ext-green);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-02.svg');
+}
+
+.swiss__form > form.form3 > fieldset.toggle-box--toggle:nth-of-type(4) {
+  --ln-ext-section-color: var(--ln-ext-purple);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/square-lock-02.svg');
+}
+
+.swiss__form > form.form3 > fieldset.toggle-box--toggle:nth-of-type(5) {
+  --ln-ext-section-color: var(--ln-ext-pink);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-switch.svg');
+}
+
+main[data-ln-ext-menu~='broadcast']
+  .page-menu__content
+  > form.form3
+  > fieldset.toggle-box--toggle:nth-of-type(1) {
+  --ln-ext-section-color: var(--ln-ext-cyan);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg');
+}
+
+main[data-ln-ext-menu~='broadcast']
+  .page-menu__content
+  > form.form3
+  > fieldset.toggle-box--toggle:nth-of-type(2) {
+  --ln-ext-section-color: var(--ln-ext-yellow);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/sparkles.svg');
+}
+
+main[data-ln-ext-menu~='broadcast']
+  .page-menu__content
+  > form.form3
+  > fieldset.toggle-box--toggle:nth-of-type(3) {
+  --ln-ext-section-color: var(--ln-ext-green);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-group.svg');
+}
+
+main[data-ln-ext-menu~='broadcast']
+  .page-menu__content
+  > form.form3
+  > fieldset.toggle-box--toggle:nth-of-type(4) {
+  --ln-ext-section-color: var(--ln-ext-orange);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/ranking.svg');
+}
+
+main[data-ln-ext-menu~='broadcast']
+  .page-menu__content
+  > form.form3
+  > fieldset.toggle-box--toggle:nth-of-type(5) {
+  --ln-ext-section-color: var(--ln-ext-purple);
+  --ln-ext-section-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/note-edit.svg');
+}

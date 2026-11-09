@@ -32,7 +32,10 @@ main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/blog/friends'
   --ln-ext-nav-color: var(--ln-ext-green);
 }
 
-.subnav[data-ln-ext-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']) {
+.subnav[data-ln-ext-nav~='blog'] a[href$='/blog']:not([href$='/@/lichess/blog']),
+main.page-menu[data-ln-ext-menu~='blog'][data-ln-ext-nav-active$='/blog']:not(
+    [data-ln-ext-nav-active$='/@/lichess/blog']
+  ) {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/pen-tool-02.svg');
   --ln-ext-nav-color: var(--ln-ext-purple);
 }

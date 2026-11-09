@@ -67,7 +67,8 @@ main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/events'
 }
 
 .subnav[data-ln-ext-nav~='teams'] a[href$='/team/leader'],
-main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/leader'] {
+main.page-menu[data-ln-ext-menu~='teams'][data-ln-ext-nav-active$='/team/leader'],
+main.page-menu.team-edit[data-ln-ext-menu~='teams'] {
   --ln-ext-nav-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/crown.svg');
   --ln-ext-nav-color: var(--ln-ext-orange);
 }

@@ -38,7 +38,7 @@ export class TabBar {
       subtree: true,
       childList: true,
       attributes: true,
-      attributeFilter: ['class', 'aria-selected'],
+      attributeFilter: ['class', 'aria-selected', 'aria-checked'],
     });
   }
 

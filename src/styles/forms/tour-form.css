@@ -1,0 +1,37 @@
+/* ---- An arena's or a Swiss's form page --- */
+
+/* Its title stays pinned past the form, over the arena's FAQ below it: the form's box gives
+ * way (`display: contents`), as a sticky title can't leave its parent, and the title takes
+ * the simul form's room. Desktop only, as the other pinned titles (pages/pinned-titles.css). */
+
+@media (min-width: 1020px) {
+  main.page-small > .tour__form.box {
+    display: contents;
+  }
+
+  main.page-small > .tour__form > h1.box__top {
+    margin: 0 !important;
+    padding: 16px 0 !important;
+  }
+}
+
+/* ---- The FAQ's table --- */
+
+/* The draws' minimum lengths per variant: a card with its rows inset, not lines running to
+ * the page's edges. */
+main.page-small > .tour__faq table.slist {
+  overflow: clip;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  background: var(--ln-ext-bg-panel);
+}
+
+main.page-small > .tour__faq table.slist :is(th, td) {
+  padding: 12px 20px !important;
+}
+
+main.page-small > .tour__faq table.slist tbody tr:last-child td {
+  border-bottom: none !important;
+}

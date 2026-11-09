@@ -140,6 +140,8 @@ so the logic can be unit-tested without a page.
   buttons, the clock's time control and the host's time with its extra
   minutes, and beside the form the simul's card as the list will show it, a
   summary and the form's button.
+- `form-help`: the help link a page form opens with (an arena's tips, a
+  broadcast's guide), copied to the end of the page's title.
 - `player-card`: what the hover card says about a player besides Lichess's
   own fragment, from its public API and only while their name is hovered:
   who they are and when they last played, the rating they play most with its

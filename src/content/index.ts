@@ -66,6 +66,7 @@ import { swiss } from './pages/swiss.ts';
 import { podium } from './pages/podium.ts';
 import { simulScores } from './pages/simul-scores.ts';
 import { simulForm } from './simul-form/index.ts';
+import { formHelp } from './form-help/index.ts';
 import { editorTools } from './pages/editor-tools.ts';
 import { forumLabels } from './pages/forum.ts';
 import { inbox } from './inbox/inbox.ts';
@@ -175,6 +176,7 @@ const FEATURES = [
   podium,
   simulScores,
   simulForm,
+  formHelp,
   editorTools,
   forumLabels,
   inbox,

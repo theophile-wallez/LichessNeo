@@ -185,6 +185,25 @@ describe('sliding tabs', () => {
     expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('80px');
   });
 
+  it('slides to the color the simul form checks', async () => {
+    document.body.innerHTML =
+      '<main class="simul-form"><div class="ln-ext-simul-form__colors" role="radiogroup">' +
+      '<button role="radio" aria-checked="true">White</button>' +
+      '<button role="radio" aria-checked="false">Black</button></div></main>';
+    const [bar] = elements('.ln-ext-simul-form__colors');
+    const [white, black] = elements('.ln-ext-simul-form__colors > button');
+    if (!bar || !white || !black) throw new Error('no bar');
+    layOut(bar, () => ({ top: 0, left: 0, width: 180, height: 40 }));
+    layOut(white, () => ({ top: 0, left: 0, width: 90, height: 40 }));
+    layOut(black, () => ({ top: 0, left: 90, width: 90, height: 40 }));
+    createTabBars().sync();
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('0px');
+    white.setAttribute('aria-checked', 'false');
+    black.setAttribute('aria-checked', 'true');
+    await nextFrame();
+    expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('90px');
+  });
+
   it('slides to the choice the practice page picks', async () => {
     document.body.innerHTML =
       '<div id="ln-ext-review"><div class="ln-ext-seg" role="group">' +

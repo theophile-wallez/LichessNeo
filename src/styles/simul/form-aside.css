@@ -214,14 +214,10 @@ main.simul-form .ln-ext-simul-form__submit {
   text-transform: none;
 }
 
+/* An outline button under it (forms/actions.css). */
 main.simul-form .ln-ext-simul-form__cancel {
-  justify-self: center;
-  color: var(--ln-ext-text-dim);
-  font-weight: 600;
-}
-
-main.simul-form .ln-ext-simul-form__cancel:hover {
-  color: var(--ln-ext-text-strong);
+  height: 48px;
+  border-radius: 10px;
 }
 
 /* ---- Below 1020px --- */
@@ -272,15 +268,9 @@ main.simul-form .ln-ext-simul-form__cancel:hover {
   }
 
   main.simul-form [data-ln-ext-part='actions'] > a {
-    display: inline-flex;
-    align-items: center;
     height: 48px;
     padding: 0 16px;
     border-radius: 10px;
-    background: var(--ln-ext-btn-grey);
-    box-shadow: var(--ln-ext-btn-grey-shadow);
-    color: var(--ln-ext-text-strong);
-    font-weight: 650;
   }
 
   main.simul-form [data-ln-ext-part='actions'] > button {

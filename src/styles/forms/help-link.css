@@ -1,0 +1,57 @@
+/* ---- A form's help link --- */
+
+/* The link some page forms open with ("Our tips for organizing events", "How to use Lichess
+ * Broadcasts", the reports' FAQ): from 1020px our copy of it stands at the end of the page's
+ * title (content/form-help), and Lichess's goes. Narrower, the title needs the width: the
+ * link stays at the form's top, a pill as well (card.css). */
+
+.ln-ext-form-help {
+  display: none;
+}
+
+@media (min-width: 1020px) {
+  :is(.box > form.form3) > .form-group[data-ln-ext-help='title'] {
+    display: none;
+  }
+
+  /* The section that follows it opens the card, with no hairline over it. */
+  :is(.box > form.form3) > .form-group[data-ln-ext-help='title'] + fieldset.toggle-box--toggle {
+    margin-top: calc(-1 * var(--ln-ext-form-pad)) !important;
+    border-top: none !important;
+  }
+
+  main.report > h1.box__top {
+    display: flex;
+    align-items: center;
+  }
+
+  .ln-ext-form-help {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    margin-inline-start: auto;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ln-ext-accent) 14%, transparent);
+    color: var(--ln-ext-accent-hover) !important;
+    font: 700 14px / 1.2 var(--ln-ext-font);
+    letter-spacing: 0;
+    white-space: nowrap;
+    transition: background-color 0.15s !important;
+  }
+
+  .ln-ext-form-help:hover {
+    background: color-mix(in srgb, var(--ln-ext-accent) 22%, transparent);
+  }
+
+  .ln-ext-form-help::before {
+    content: '';
+    flex: none;
+    width: 18px;
+    height: 18px;
+    background: currentColor;
+    mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg')
+      center / contain no-repeat;
+  }
+}

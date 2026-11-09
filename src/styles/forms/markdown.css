@@ -1,0 +1,96 @@
+/* ---- Markdown editor --- */
+
+/* Lichess's markdown editor (a forum post, a team's descriptions, a blog post): Write / Preview
+ * as pill tabs over the text box. */
+.form3 .markdown-editor .header {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+/* Pills instead of Lichess's folder tabs, whose ::after patch hid the seam with the text box. */
+.form3 .markdown-editor .header-tab {
+  min-width: 0 !important;
+  height: 32px;
+  padding: 0 14px !important;
+  border: none !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form3 .markdown-editor .header-tab:hover {
+  color: var(--ln-ext-text-strong) !important;
+}
+
+.form3 .markdown-editor .header-tab.active {
+  outline: none !important;
+  background: var(--ln-ext-bg-raised) !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+.form3 .markdown-editor .header-tab.active::after {
+  display: none;
+}
+
+/* The pill slides from one to the other (see "Sliding tabs" in theme/). */
+.form3 .markdown-editor .header[data-ln-ext-tabs] {
+  --ln-ext-tab-radius: 999px;
+  --ln-ext-tab-shadow: none;
+}
+
+.form3 .markdown-editor .header[data-ln-ext-tabs] .header-tab.active {
+  background: transparent !important;
+}
+
+/* As tall as the pills: Lichess hides it under Preview, and at its own 40px the bar
+   would shrink and the tabs jump. */
+.form3 .markdown-editor .header .button-empty {
+  height: 32px;
+  color: var(--ln-ext-text-dim);
+}
+
+.form3 .markdown-editor .header .button-empty:hover {
+  color: var(--ln-ext-text-strong);
+}
+
+/* Lichess paints it its link color on hover: it follows the button, as the pills do. */
+.form3 .markdown-editor .upload-image {
+  background: currentColor !important;
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/image-add-02.svg') center /
+    22px no-repeat;
+}
+
+.form3 .markdown-editor textarea {
+  min-height: 160px;
+  padding: 12px 14px !important;
+  border-radius: 10px !important;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* The preview lies over the text box. */
+.form3 .markdown-editor .preview {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--ln-ext-bg-panel-dark) !important;
+  backdrop-filter: none !important;
+}
+
+/* A blog post's editor (Toast UI): its toolbar and text in one box with our fields' corners. */
+.form3 .markdown-editor .toastui-editor-defaultUI {
+  overflow: hidden;
+  border: 1px solid var(--ln-ext-input-border) !important;
+  border-radius: 10px !important;
+}
+
+.form3 .markdown-editor .toastui-editor-defaultUI-toolbar {
+  border-bottom: 1px solid var(--ln-ext-lift-8) !important;
+  border-radius: 0 !important;
+  background: var(--ln-ext-lift-3) !important;
+}

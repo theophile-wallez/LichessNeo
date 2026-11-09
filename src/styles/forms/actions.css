@@ -1,0 +1,56 @@
+/* ---- Form actions --- */
+
+/* A form's buttons, wherever Lichess draws one (.form3 .form-actions): Cancel as an outline
+ * button beside the one that submits, both at the end of a hairline. The submit's words say
+ * what it does, so Lichess's tick before them goes. */
+
+.form3 .form-actions {
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px !important;
+  padding-top: 20px !important;
+  border-top: 1px solid var(--ln-ext-lift-8) !important;
+}
+
+.form3 .form-actions .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 44px;
+  margin: 0 !important;
+  padding: 0 24px !important;
+  font-size: 15px;
+}
+
+.form3 .form-actions .button[data-icon]::before {
+  display: none !important;
+}
+
+.form3 .form-actions > a:not(.button),
+main.simul-form .ln-ext-simul-form__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--ln-ext-lift-20);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 15px;
+  font-weight: 700;
+  transition: background-color 0.15s !important;
+}
+
+.form3 .form-actions > a:not(.button):hover,
+main.simul-form .ln-ext-simul-form__cancel:hover {
+  background: var(--ln-ext-lift-6);
+  color: var(--ln-ext-text-strong) !important;
+}
+
+/* The simul form's own button submits through Lichess's: no tick either. */
+main.simul-form .ln-ext-simul-form__submit[data-icon]::before {
+  display: none !important;
+}

@@ -1,0 +1,138 @@
+/* ---- Form sections --- */
+
+/* A page form's folding sections (fieldset.toggle-box--toggle: a tournament's, a broadcast's)
+ * as parts of its card, edge to edge between hairlines, each headed by its legend with a
+ * chevron at its end. Lichess draws them as tabs on boxes of their own, a card in a card.
+ * A legend that floats is laid out as a block inside its fieldset, not on its border. */
+
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  > fieldset.toggle-box--toggle {
+  margin: 0 calc(-1 * var(--ln-ext-form-pad)) !important;
+  padding: 0 var(--ln-ext-form-pad) 2px !important;
+  border: none !important;
+  border-top: 1px solid var(--ln-ext-lift-8) !important;
+  border-radius: 0 !important;
+  background: none !important;
+}
+
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  > fieldset.toggle-box--toggle
+  > legend {
+  float: inline-start;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 !important;
+  padding: 18px 0 !important;
+  border: none !important;
+  background: none !important;
+  backdrop-filter: none !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 17px !important;
+  font-weight: 800;
+  line-height: 1.3 !important;
+  text-align: start !important;
+}
+
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  > fieldset.toggle-box--toggle
+  > legend
+  + * {
+  clear: both;
+}
+
+/* The chevron: open, it points up; folded, down. */
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  > fieldset.toggle-box--toggle
+  > legend::after {
+  content: '' !important;
+  position: static !important;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0 !important;
+  margin-inline-start: auto !important;
+  background: var(--ln-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-down-01.svg') center /
+    20px no-repeat;
+  opacity: 1 !important;
+  transform: rotate(180deg) !important;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.15s !important;
+}
+
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  > fieldset.toggle-box--toggle-off
+  > legend::after {
+  transform: none !important;
+}
+
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  > fieldset.toggle-box--toggle
+  > legend:hover::after {
+  background: var(--ln-ext-text-strong);
+}
+
+/* The icon tile of a form whose sections we know (section-icons.css). */
+:is(.tour__form, main[data-ln-ext-menu~='broadcast'] .page-menu__content)
+  > form.form3
+  > fieldset.toggle-box--toggle
+  > legend::before {
+  content: '';
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--ln-ext-section-color);
+  mask:
+    var(--ln-ext-section-icon) center / 20px no-repeat,
+    linear-gradient(#0000003d, #0000003d);
+}
+
+/* ---- Tiles --- */
+
+/* Fieldsets that don't fold (a blog post's etiquette and cover image): tiles in the card,
+ * their legend a heading at their top. */
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  fieldset.toggle-box:not(.toggle-box--toggle) {
+  margin: 0 !important;
+  padding: 16px 18px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  background: var(--ln-ext-lift-3) !important;
+}
+
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  fieldset.toggle-box:not(.toggle-box--toggle)
+  > legend {
+  float: inline-start;
+  width: 100%;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 15px !important;
+  font-weight: 800;
+  line-height: 1.3 !important;
+  text-align: start !important;
+}
+
+main:not(.account, .simul-form, .importer, .search)
+  :is(.box > form.form3)
+  fieldset.toggle-box:not(.toggle-box--toggle)
+  > legend
+  + * {
+  clear: both;
+}

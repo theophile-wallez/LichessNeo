@@ -1,0 +1,35 @@
+/* ---- Post form --- */
+
+/* The post form is a page form (forms/card.css); its cover image a drop zone in the card's
+ * look rather than Lichess's black dashes. */
+.ublog-post-form .ublog-image-edit img.ublog-post-image {
+  box-sizing: border-box;
+  border: 1.5px dashed var(--ln-ext-lift-20) !important;
+  border-radius: 10px;
+  background: var(--ln-ext-lift-3);
+}
+
+.ublog-post-form .etiquette-and-image fieldset p {
+  color: var(--ln-ext-text-dim);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* The card pads its fields already: Lichess's own inset, from 800px to 1260px, put them 57px
+ * in. */
+.ublog-post-form .ublog-post-form__main > .form-group,
+.ublog-post-form .ublog-post-form__main .form-split {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Its two tiles side by side while they fit, one over the other where they don't: Lichess
+ * keeps them in one row, each 300px at least, which ran past the card on a tablet. */
+.ublog-post-form .etiquette-and-image {
+  flex-wrap: wrap;
+}
+
+.ublog-post-form .etiquette-and-image > fieldset {
+  flex: 1 1 300px;
+  min-width: min(300px, 100%) !important;
+}
