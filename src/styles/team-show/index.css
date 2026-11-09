@@ -1,0 +1,11 @@
+/* A team's page (/team/<id>): a head card over its events and forum, its recent members in a
+ * column of their own beside them. Its tournaments' cards are in team-tournaments.css. */
+
+@import './layout.css';
+@import './head.css';
+@import './pinned.css';
+@import './actions.css';
+@import './sections.css';
+@import './members.css';
+@import './chat.css';
+@import './narrow.css';

@@ -1,0 +1,177 @@
+/* ---- Below 1020px --- */
+
+/* One column: the head, its join or leave button in full width under the name, the leaders'
+ * tools at its foot, the notices, the last update, the tournaments, the members as a row of
+ * faces that scrolls sideways (Lichess hides them below 800px), the chat, then the forum. */
+@media (max-width: 1019.98px) {
+  main.team-show.box {
+    padding: 8px 8px 32px !important;
+  }
+
+  main.team-show::before {
+    grid-row: 1 / 6;
+    border-radius: 18px;
+  }
+
+  main.team-show > .box__top {
+    flex-direction: column;
+    align-items: flex-start !important;
+    justify-content: center;
+    gap: 10px;
+    box-sizing: border-box;
+    /* The 70px avatar under its 20px top. */
+    min-height: 90px;
+    padding: 20px 20px 0 !important;
+  }
+
+  main.team-show > .box__top h1 {
+    padding-inline-start: 86px;
+    font-size: 1.7rem !important;
+  }
+
+  main.team-show > .box__top h1::after,
+  main.team-show > .box__top h1 > .uflair {
+    top: 20px;
+    inset-inline-start: 20px;
+    width: 70px !important;
+    height: 70px !important;
+    border-radius: 18px;
+  }
+
+  main.team-show > .box__top h1 > .uflair {
+    padding: 12px;
+  }
+
+  main.team-show > .box__top h1::before {
+    top: 40px;
+    inset-inline-start: 40px;
+    width: 30px;
+    height: 30px;
+  }
+
+  main.team-show .team-show__desc {
+    grid-row: 3;
+    margin: 14px 20px 0 !important;
+    font-size: 0.98rem;
+  }
+
+  main.team-show .team-show__meta {
+    grid-row: 4;
+    margin: 14px 20px 20px !important;
+  }
+
+  main.team-show .team-show__actions {
+    grid-row: 2;
+    grid-column: 1;
+    justify-content: flex-start;
+    margin: 16px 20px 0 !important;
+  }
+
+  main.team-show .team-show__actions:has(> a.button-empty) {
+    grid-row: 5;
+    margin: 0 20px 20px !important;
+  }
+
+  main.team-show .team-show__actions > form,
+  main.team-show .team-show__actions > form > .button,
+  main.team-show .team-show__actions > a.button-green {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 44px;
+  }
+
+  /* Leaving stays as small as it is. */
+  main.team-show .team-show__actions > form.quit,
+  main.team-show .team-show__actions > form > .button.button-red {
+    flex: none;
+    width: auto;
+    height: 36px;
+  }
+
+  main.team-show .flash {
+    grid-row: 6;
+    margin: 20px 0 0 !important;
+  }
+
+  main.team-show .flash + .flash {
+    grid-row: 7;
+    margin-top: 8px !important;
+  }
+
+  main.team-show .team-show__log {
+    grid-row: 8;
+  }
+
+  main.team-show .team-show__requests {
+    grid-row: 9;
+  }
+
+  main.team-show .team-show__update {
+    grid-row: 10;
+  }
+
+  main.team-show .team-show__tour {
+    grid-row: 11;
+  }
+
+  main.team-show .team-show__members {
+    display: block !important;
+    grid-row: 12;
+    margin: 28px 0 0 !important;
+  }
+
+  main.team-show .mchat {
+    grid-row: 13;
+    height: min(420px, 70dvh);
+  }
+
+  main.team-show .chat__members {
+    grid-row: 14;
+  }
+
+  main.team-show .team-show__forum {
+    grid-row: 15;
+  }
+
+  main.team-show .recent-members .userlist {
+    flex-direction: row;
+    gap: 4px;
+    margin-inline: -8px !important;
+    padding: 0 8px 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  main.team-show .recent-members .paginated {
+    flex: none;
+  }
+
+  /* A block, not a flex box, so that a long name ends in an ellipsis. */
+  main.team-show .recent-members a.user-link {
+    display: block !important;
+    width: 76px;
+    padding: 8px 2px !important;
+    font-size: 0.78rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  main.team-show .recent-members a.user-link::before {
+    display: block;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 6px;
+  }
+
+  main.team-show .recent-members a.online > .line {
+    top: 46px;
+    inset-inline-start: calc(50% + 12px);
+  }
+
+  main.team-show .recent-members a.user-link > .uflair,
+  main.team-show .recent-members .pager {
+    display: none;
+  }
+}

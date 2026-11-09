@@ -32,3 +32,25 @@ export function fitCard(card: Box, anchor: Box | null, viewport: Size): CardPlac
   }
   return { top, left: clamp(card.left, EDGE_MARGIN, maxLeft) };
 }
+
+/**
+ * Beside a column of names rather than over it (a team's members): before the column if the
+ * card fits there, else after it, level with the name as far as the window allows. Null when
+ * it fits on neither side.
+ */
+export function besideColumn(
+  card: Box,
+  anchor: Box,
+  column: Box,
+  viewport: Size,
+): CardPlacement | null {
+  const before = column.left - NAME_GAP - card.width;
+  const after = column.right + NAME_GAP;
+  let left: number;
+  if (before >= EDGE_MARGIN) left = before;
+  else if (after + card.width <= viewport.width - EDGE_MARGIN) left = after;
+  else return null;
+  const maxTop = Math.max(EDGE_MARGIN, viewport.height - EDGE_MARGIN - card.height);
+  const top = clamp(anchor.top + anchor.height / 2 - card.height / 2, EDGE_MARGIN, maxTop);
+  return { top, left };
+}

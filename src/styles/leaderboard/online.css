@@ -23,7 +23,7 @@
   align-items: center;
   gap: 12px;
   margin: 0 0 18px !important;
-  font-size: 28px !important;
+  font-size: var(--ln-ext-title-size) !important;
   font-weight: 800 !important;
 }
 

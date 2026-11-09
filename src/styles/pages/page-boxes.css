@@ -30,4 +30,10 @@ main.page-menu:not(.account) > .page-menu__content > .box {
   main.page-menu:not(.account) > .page-menu__content > .box {
     ---box-padding: 0px;
   }
+
+  /* A padded box's top room (Lichess's 4vh) under the page's own 16px, as a page without
+   * one has: its title stands where theirs do. */
+  main.page-menu:not(.account) > .page-menu__content.box-pad {
+    padding-top: 16px !important;
+  }
 }

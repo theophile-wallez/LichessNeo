@@ -71,6 +71,21 @@ const SPOTS = [
     avatar: '.user-show__header',
   },
   {
+    name: 'a team’s recent member',
+    markup:
+      '<main class="team-show box"><div class="recent-members"><div class="userlist">' +
+      '<div class="paginated"><a class="online user-link ulpt" href="/@/tjychess">tjychess</a>' +
+      '</div></div></div></main>',
+    avatar: '.user-link',
+  },
+  {
+    name: 'a team’s leader',
+    markup:
+      '<main class="team-show box"><div class="team-show__meta"><p>' +
+      '<a class="user-link ulpt" href="/@/tjychess">tjychess</a></p></div></main>',
+    avatar: '.user-link',
+  },
+  {
     name: 'a tournament’s podium',
     markup:
       '<main class="swiss"><div class="podium"><div class="first"><div class="trophy"></div>' +

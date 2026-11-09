@@ -205,8 +205,11 @@ so the logic can be unit-tested without a page.
   finished), the preferences cog, the account's rating, the
   light / dark switch, the drawer below 1020px, and Play's Lobby, which leads
   to the home's lobby tab rather than Lichess's game setup.
-- `notices`: Lichess's connection status and the server's announcements, as
-  stacked toasts.
+- `notices`: Lichess's connection status, the server's announcements and the
+  success or failure a form's next page flashes, as stacked toasts; a flash
+  with a link in it stays in the page, a card. A feature that knows what its
+  form did has the toast say so (`expected-flash.ts`: joining or leaving a
+  team, `pages/team-show`).
 
 `src/page/`, the page-world script:
 

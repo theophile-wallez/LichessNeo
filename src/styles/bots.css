@@ -28,7 +28,7 @@
   gap: 12px;
   margin: 0 !important;
   color: var(--ln-ext-text-strong);
-  font-size: 28px !important;
+  font-size: var(--ln-ext-title-size) !important;
   font-weight: 800 !important;
   letter-spacing: normal !important;
 }

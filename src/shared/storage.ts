@@ -87,6 +87,8 @@ export const SessionKey = {
   gameIntro: (gameId: string): string => `${prefixed('intro')}:${gameId}`,
   // The OAuth request that creates practice's studies, across Lichess's consent page.
   practiceConnect: prefixed('practice-connect'),
+  // What a form's next page says, as it loads (content/notices/expected-flash.ts).
+  expectedFlash: prefixed('expected-flash'),
 } satisfies Record<string, string | ((...args: never[]) => string)>;
 
 type Area = 'local' | 'session';

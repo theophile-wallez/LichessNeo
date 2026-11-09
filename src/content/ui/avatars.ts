@@ -36,6 +36,8 @@ const SPOTS: readonly Spot[] = [
     link: ':scope > td:first-child > .user-link',
   },
   { selector: 'main.forum-topic .forum-post', link: '.forum-post__metas > a.author' },
+  // A team's leaders and recent members.
+  { selector: 'main.team-show :is(.team-show__meta, .recent-members) a.user-link' },
   // A finished tournament's podium: each player stands on their step.
   { selector: 'main:is(.tour, .swiss) .podium > div', link: ':scope > a.user-link' },
   // A profile names its user in a span with a `data-href`.

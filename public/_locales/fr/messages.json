@@ -1386,6 +1386,14 @@
   "noticeClose": {
     "message": "Fermer"
   },
+  "teamJoined": {
+    "message": "Vous avez rejoint l’équipe",
+    "description": "The toast once the user joined a team."
+  },
+  "teamLeft": {
+    "message": "Vous avez quitté l’équipe",
+    "description": "The toast once the user left a team."
+  },
   "underboardClose": {
     "message": "Fermer",
     "description": "The close button over the free analysis board's FEN and PGN fields, read out by screen readers."

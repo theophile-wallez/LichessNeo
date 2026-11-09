@@ -8,6 +8,8 @@
 @import './tabs-tables-forms.css';
 @import './lobby.css';
 @import './dialogs.css';
+@import './alerts.css';
+@import './flash.css';
 @import './setup-options.css';
 @import './level-slider.css';
 @import './setup-picks.css';

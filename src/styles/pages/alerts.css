@@ -1,0 +1,89 @@
+/* ---- Alerts --- */
+
+/* The dialog frame is enough: no second border on alerts. */
+dialog .dialog-content.alert,
+dialog .dialog-content.debug {
+  border: none !important;
+}
+
+/* Lichess's alert, confirm and prompt (lila's ui/lib/src/view/dialogs.ts): its message in a
+ * div, a prompt's input or a choice's select, then a span of buttons. A compact card instead
+ * of a bare line over a lone button: an icon tile beside the message, the rest across the
+ * card under them. */
+dialog .dialog-content.alert {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: center;
+  box-sizing: border-box;
+  width: 400px !important;
+  max-width: 100%;
+  gap: 20px 16px !important;
+  padding: 24px !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 15px !important;
+  line-height: 1.5;
+  text-align: start !important;
+}
+
+dialog .dialog-content.alert > * {
+  grid-column: 1 / -1;
+}
+
+dialog .dialog-content.alert > div:first-child {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: 600;
+}
+
+dialog .dialog-content.alert::before {
+  content: '';
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ln-ext-accent) 16%, transparent);
+}
+
+dialog .dialog-content.alert::after {
+  content: '';
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  width: 22px;
+  height: 22px;
+  background: var(--ln-ext-accent);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alert-circle.svg') center /
+    contain no-repeat;
+}
+
+html[dir='rtl'] dialog .dialog-content.alert::after {
+  right: 35px;
+  left: auto;
+}
+
+dialog .dialog-content.alert > span {
+  display: flex !important;
+  justify-content: flex-end;
+  gap: 8px !important;
+}
+
+dialog .dialog-content.alert > span > .button {
+  flex: 0 1 auto;
+  min-width: 96px;
+  height: 40px;
+  margin: 0 !important;
+  padding: 0 20px !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+}
+
+dialog .dialog-content.alert input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  border-radius: 8px;
+}

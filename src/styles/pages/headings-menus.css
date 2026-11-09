@@ -11,8 +11,15 @@ h1,
   letter-spacing: -0.02em !important;
 }
 
-.box__top h1 {
-  font-size: 1.9rem !important;
+/* A page's title, the same size everywhere, whether its h1 is the box's top or inside it
+ * (Lichess sets the first larger). */
+:root {
+  --ln-ext-title-size: 28px;
+}
+
+.box__top h1,
+h1.box__top {
+  font-size: var(--ln-ext-title-size) !important;
 }
 
 h2,
@@ -77,10 +84,11 @@ h3 {
   color: var(--ln-ext-text-strong) !important;
 }
 
+/* In the links' weight: a bolder one widened a menu sized to its longest link, which moved
+ * the page beside it from one link's page to the next. */
 .subnav a.active {
   background: var(--ln-ext-lift-10) !important;
   color: var(--ln-ext-text-strong) !important;
-  font-weight: 700;
 }
 
 .subnav a.active::after {

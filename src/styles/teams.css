@@ -27,11 +27,6 @@ main.team-list .box__top h1 {
   margin-inline: 0 !important;
 }
 
-/* The events' title is the h1 itself: the lists' size, which `.box__top h1` gives theirs. */
-main.team-events h1.box__top {
-  font-size: 1.9rem !important;
-}
-
 main.team-list .box__top .search input {
   width: 260px;
   padding-inline-start: 38px !important;

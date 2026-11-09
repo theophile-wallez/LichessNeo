@@ -48,6 +48,10 @@ describe('presentFlags, for flags the original lacked', () => {
     ['inbox', '<main class="box msg-app pane-side"><div class="msg-app__side"></div></main>'],
     ['team-events', '<main class="team-events page-menu"></main>'],
     [
+      'team-menu',
+      '<main class="page-menu"><nav class="page-menu__menu subnav"><a href="/team/all">All teams</a></nav></main>',
+    ],
+    [
       'team-tournaments',
       '<main><div class="box"><div class="team-events team-tournaments"></div></div></main>',
     ],

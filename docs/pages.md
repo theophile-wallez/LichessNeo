@@ -66,15 +66,15 @@ and a white knob, and a single big number in the state's color.
 
 ## Community
 
-| Page         | Path                    | Level | Next                                                                                                                                                                                               |
-| ------------ | ----------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Players      | `/player`               | 2     |                                                                                                                                                                                                    |
-| Profile      | `/@/<user>`             | 2     | the medals under the chart, the last five games over the tabs; below 1020px one column of cards 12px apart, the ratings a strip that fades at its edges                                            |
-| Rating stats | `/@/<user>/perf/<perf>` | 2     | cards for the rating, its range, results, games, streaks and best wins; no signature yet                                                                                                           |
-| Teams        | `/team`                 | 1     | one bare card on an empty page: a team card and an empty state with a mascot; a team's page, its tournaments and the events pin their titles, but are still Lichess's, without the box below 800px |
-| Insights     | `/insights/<user>`      | 2     | our chart in place of its Chart.js canvas; the table under it says the same thing twice; no signature yet                                                                                          |
-| Forum        | `/forum`                | 2     |                                                                                                                                                                                                    |
-| Blog         | `/blog`                 | 2     | below 1020px a post has no card around it                                                                                                                                                          |
+| Page         | Path                    | Level | Next                                                                                                                                                                                          |
+| ------------ | ----------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Players      | `/player`               | 2     |                                                                                                                                                                                               |
+| Profile      | `/@/<user>`             | 2     | the medals under the chart, the last five games over the tabs; below 1020px one column of cards 12px apart, the ratings a strip that fades at its edges                                       |
+| Rating stats | `/@/<user>/perf/<perf>` | 2     | cards for the rating, its range, results, games, streaks and best wins; no signature yet                                                                                                      |
+| Teams        | `/team`                 | 2     | a team's page is ours: its head shrinks into its pinned title, its members scroll in a column of their own over the chat; its tournaments page is still Lichess's two lists; no signature yet |
+| Insights     | `/insights/<user>`      | 2     | our chart in place of its Chart.js canvas; the table under it says the same thing twice; no signature yet                                                                                     |
+| Forum        | `/forum`                | 2     |                                                                                                                                                                                               |
+| Blog         | `/blog`                 | 2     | below 1020px a post has no card around it                                                                                                                                                     |
 
 ## Tools
 

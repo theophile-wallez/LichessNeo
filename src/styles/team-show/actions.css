@@ -1,0 +1,143 @@
+/* ---- Actions --- */
+
+/* Joining, leaving or a pending request: at the title's end, after the member count, and in the
+ * pinned title with it (desktop; below, under the head). */
+main.team-show .team-show__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0 !important;
+}
+
+@media (min-width: 1020px) {
+  /* Level with the name: the title's 24px top padding, then its 40px line (pinned with it,
+   * pinned.css). */
+  main.team-show .team-show__actions {
+    grid-row: 1;
+    grid-column: 2;
+    align-self: start;
+    flex-wrap: nowrap;
+    min-height: 40px;
+    margin: 24px 0 0 !important;
+    margin-inline: 16px 32px !important;
+  }
+}
+
+/* Signed out, there's none: no room either. */
+main.team-show .team-show__actions:empty {
+  display: none;
+}
+
+main.team-show .team-show__actions form {
+  margin: 0;
+}
+
+main.team-show .team-show__actions > strong {
+  color: var(--ln-ext-text-dim);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Joining and leaving: pills with their icon, joining in the accent, leaving a quiet outline,
+ * red only under the pointer. */
+main.team-show .team-show__actions > form > .button,
+main.team-show .team-show__actions > a.button-green {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 40px;
+  margin: 0 !important;
+  padding: 0 20px 0 16px !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s,
+    color 0.15s !important;
+}
+
+main.team-show .team-show__actions > form > .button::before,
+main.team-show .team-show__actions > a.button-green::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  mask: var(--ln-ext-team-action) center / contain no-repeat;
+}
+
+main.team-show .team-show__actions .button.button-green {
+  --ln-ext-team-action: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-add-01.svg');
+  background: var(--ln-ext-btn-primary) !important;
+  box-shadow: var(--ln-ext-btn-primary-shadow) !important;
+  color: var(--ln-ext-white) !important;
+}
+
+main.team-show .team-show__actions .button.button-green:hover {
+  background: var(--ln-ext-btn-primary-hover) !important;
+}
+
+main.team-show .team-show__actions > form > .button.button-red {
+  --ln-ext-team-action: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-remove-01.svg');
+  height: 36px;
+  padding: 0 16px 0 12px !important;
+  background: none !important;
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-12) !important;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+}
+
+main.team-show .team-show__actions > form > .button.button-red:hover {
+  background: color-mix(in srgb, var(--ln-ext-red) 12%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-red) 40%, transparent) !important;
+  color: var(--ln-ext-red) !important;
+}
+
+/* A leader's tools: a row of pills along the head's foot. */
+main.team-show .team-show__actions:has(> a.button-empty) {
+  justify-content: flex-start;
+}
+
+@media (min-width: 1020px) {
+  main.team-show .team-show__actions:has(> a.button-empty) {
+    grid-row: 4;
+    grid-column: 1 / 3;
+    flex-wrap: wrap;
+    margin: -8px 32px 28px !important;
+    margin-inline-start: 140px !important;
+  }
+}
+
+main.team-show .team-show__actions > a.button-empty {
+  display: inline-flex !important;
+  flex: none;
+  width: auto !important;
+  align-items: center;
+  gap: 8px;
+  margin: 0 !important;
+  padding: 7px 14px !important;
+  border-radius: 999px !important;
+  font-size: 0.86rem !important;
+  text-transform: none !important;
+}
+
+main.team-show .team-show__actions > a.button-empty::before {
+  font-size: 1.1em;
+}
+
+/* A tournament's kind is said by its strong; the line under it is the menu's. */
+main.team-show .team-show__actions > a.button-empty em {
+  display: none;
+}
+
+main.team-show .team-show__actions > a.button-empty strong {
+  font-weight: inherit;
+}

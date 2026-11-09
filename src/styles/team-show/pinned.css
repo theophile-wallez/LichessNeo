@@ -1,0 +1,191 @@
+/* ---- The pinned title --- */
+
+/* As the page scrolls, the head card stays put and shrinks into a compact one: its foot rises
+ * with the page, and what it holds slides under its title, until only the avatar, the name and
+ * the actions are left on one short row (desktop only: below, Lichess's top bar would cover
+ * it). Two values follow the page's scroll: `--ln-ext-team-scrolled`, how far it went, for
+ * the card's foot, and `--ln-ext-pin`, from 0 to 1 over its first 120px, for the title's
+ * sizes. The title keeps its height meanwhile, so the page's layout doesn't move under it.
+ * Without scroll-driven animations (Firefox), the head scrolls away with the page. */
+@property --ln-ext-pin {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --ln-ext-team-scrolled {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --ln-ext-team-cut {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+@keyframes ln-ext-team-cut {
+  to {
+    --ln-ext-team-cut: 100%;
+  }
+}
+
+@keyframes ln-ext-team-pin {
+  to {
+    --ln-ext-pin: 1;
+  }
+}
+
+@keyframes ln-ext-team-scrolled {
+  to {
+    --ln-ext-team-scrolled: 4000px;
+  }
+}
+
+main.team-show {
+  --ln-ext-pin-dir: 1;
+}
+
+html[dir='rtl'] main.team-show {
+  --ln-ext-pin-dir: -1;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 1020px) {
+    /* Layers: the page under the head card, what the card holds over it, then the title
+     * and the actions. */
+    main.team-show::before,
+    main.team-show > .box__top,
+    main.team-show .team-show__actions {
+      position: sticky;
+      top: 0;
+      animation: ln-ext-team-pin linear both;
+      animation-timeline: scroll(nearest block);
+      animation-range: 0 120px;
+    }
+
+    /* Its foot where the page carries it, down to the title's own height, 136px (the
+     * avatar's 88px, 24px over and under it) that shrinks to 64px. */
+    main.team-show::before {
+      z-index: 2;
+      align-self: start;
+      height: max(calc(136px - 72px * var(--ln-ext-pin)), calc(100% - var(--ln-ext-team-scrolled)));
+      box-shadow: 0 12px 28px -12px
+        color-mix(in srgb, var(--ln-ext-shade-50) calc(100% * var(--ln-ext-pin)), transparent);
+      animation:
+        ln-ext-team-pin linear both,
+        ln-ext-team-scrolled linear both;
+      animation-timeline: scroll(nearest block);
+      animation-range:
+        0 120px,
+        0 4000px;
+    }
+
+    /* What the card holds (a leader's tools too, which stay in it), cut where it passes the
+     * compact card's foot: the title's ground hides it below, but not over the card's top
+     * border, which lets it show through. */
+    main.team-show :is(.team-show__desc, .team-show__meta),
+    main.team-show .team-show__actions:has(> a.button-empty) {
+      position: relative;
+      top: auto;
+      z-index: 2;
+      mask: linear-gradient(transparent var(--ln-ext-team-cut), #000 var(--ln-ext-team-cut));
+      animation: ln-ext-team-cut linear both;
+      animation-timeline: view(block calc(var(--ln-ext-page-top) + 64px) auto);
+      animation-range: exit;
+    }
+
+    main.team-show > .box__top {
+      z-index: 3;
+    }
+
+    /* Level with the name, from the title's 24px top padding, so both pin at once. */
+    main.team-show .team-show__actions {
+      z-index: 4;
+      top: 24px;
+    }
+
+    /* The title's ground, the card's own over its box, which hides what slides under it;
+     * then the page's color over the strip above it. */
+    main.team-show > .box__top::before,
+    main.team-show > .box__top::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+    }
+
+    /* Inside the card's border, so its edges are the card's own; at the end, the compact
+     * card's 64px. Its last 8px fade, so that what slides under it fades out. */
+    main.team-show > .box__top::before {
+      z-index: -1;
+      top: 1px;
+      inset-inline: 1px;
+      height: calc(100% * (1 - var(--ln-ext-pin)) + 63px * var(--ln-ext-pin) - 1px);
+      border-radius: 19px;
+      background: var(--ln-ext-team-head-bg);
+      mask: linear-gradient(#000 calc(100% - 8px), transparent);
+    }
+
+    main.team-show > .box__top::after {
+      z-index: -2;
+      inset-inline: 0;
+      top: calc(-1 * var(--ln-ext-page-top));
+      height: var(--ln-ext-page-top);
+      background: var(--ln-ext-bg-page);
+    }
+
+    /* The page's color behind the card's top corners, over what scrolls under them. */
+    main.team-show::after {
+      content: '';
+      position: sticky;
+      z-index: 1;
+      top: 0;
+      grid-row: 1;
+      grid-column: 1 / 3;
+      align-self: start;
+      height: 24px;
+      background: var(--ln-ext-bg-page);
+      pointer-events: none;
+    }
+
+    /* Raised 12px to the card's middle, its margin box kept the same, on a fixed line so that
+     * the smaller name keeps the head's height; a long name loses its lines past the first. */
+    main.team-show > .box__top h1 {
+      max-height: calc(200px - 160px * var(--ln-ext-pin));
+      margin: calc(-12px * var(--ln-ext-pin)) 0 calc(12px * var(--ln-ext-pin)) !important;
+      padding-inline-start: calc(108px - 72px * var(--ln-ext-pin));
+      overflow: hidden;
+      font-size: calc(2.2rem - 0.85rem * var(--ln-ext-pin)) !important;
+      line-height: 40px;
+    }
+
+    /* The 88px tile at (32, 24) becomes a 44px one at (10, 10); the glyph, centered on it,
+     * keeps three quarters of its size, as a small tile's icon is a larger share of it. */
+    main.team-show > .box__top h1::after,
+    main.team-show > .box__top h1 > .uflair {
+      translate: calc(-22px * var(--ln-ext-pin) * var(--ln-ext-pin-dir))
+        calc(-14px * var(--ln-ext-pin));
+      scale: calc(1 - 0.5 * var(--ln-ext-pin));
+    }
+
+    main.team-show > .box__top h1::before {
+      translate: calc(-44px * var(--ln-ext-pin) * var(--ln-ext-pin-dir))
+        calc(-36px * var(--ln-ext-pin));
+      scale: calc(1 - var(--ln-ext-pin) / 4);
+    }
+
+    /* To the card's 12px edge, a size smaller. */
+    main.team-show .team-show__actions > * {
+      translate: calc(20px * var(--ln-ext-pin) * var(--ln-ext-pin-dir))
+        calc(-12px * var(--ln-ext-pin));
+      scale: calc(1 - 0.1 * var(--ln-ext-pin));
+    }
+  }
+}
+
+/* From the right in a right-to-left page. */
+html[dir='rtl'] main.team-show > .box__top h1::after,
+html[dir='rtl'] main.team-show > .box__top h1 > .uflair {
+  transform-origin: 100% 0;
+}

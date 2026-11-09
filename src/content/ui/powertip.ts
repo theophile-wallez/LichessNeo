@@ -4,7 +4,7 @@ import { syncChesscomRatings } from '#content/chesscom-ratings/index.ts';
 import { syncPlayerCard } from '#content/player-card/index.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 import { syncAvatars } from './avatars.ts';
-import { fitCard } from './card-fit.ts';
+import { besideColumn, fitCard } from './card-fit.ts';
 import { ratingState, ratingText } from './card-ratings.ts';
 
 // The profile hover card (styles/powertip/). Lichess rebuilds its HTML on
@@ -29,11 +29,18 @@ function trackAnchor(event: MouseEvent): void {
   if (target && !target.closest('#powerTip')) anchor = target;
 }
 
+/** Columns of names whose cards open beside them, so as not to cover the list. */
+const NAME_COLUMNS = 'main.team-show .team-show__members';
+
 export function fitPowertip(card: HTMLElement): void {
   if (getComputedStyle(card).visibility !== 'visible') return;
   const box = card.getBoundingClientRect();
+  const viewport = { width: innerWidth, height: innerHeight };
   const name = anchor?.isConnected ? anchor.getBoundingClientRect() : null;
-  const target = fitCard(box, name, { width: innerWidth, height: innerHeight });
+  const column = anchor?.isConnected ? anchor.closest(NAME_COLUMNS) : null;
+  const beside =
+    name && column ? besideColumn(box, name, column.getBoundingClientRect(), viewport) : null;
+  const target = beside ?? fitCard(box, name, viewport);
   if (!target) return;
   const top = (parseFloat(card.style.top) || 0) + target.top - box.top;
   const left = (parseFloat(card.style.left) || 0) + target.left - box.left;

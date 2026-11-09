@@ -1,0 +1,218 @@
+/* ---- Recent members --- */
+
+main.team-show .team-show__members {
+  --ln-ext-team-tile: var(--ln-ext-purple);
+}
+
+/* A box of its own, beside the head and the content: the window's height, still while the
+ * page scrolls, its list scrolling inside with its title kept at its top. It adds nothing to
+ * the page's height, which the content alone sets: its size is contained, and a height in %
+ * counts for nothing while the rows are sized. */
+@media (min-width: 1020px) {
+  main.team-show .team-show__members {
+    grid-row: 1 / -1;
+    grid-column: 3;
+    align-self: start;
+    position: sticky;
+    top: 0;
+    contain: size;
+    box-sizing: border-box;
+    height: calc(var(--ln-ext-main-h, 100dvh) - 32px);
+    max-height: 100%;
+    margin: 0 !important;
+    margin-inline-start: 24px !important;
+    padding: 0 8px 8px;
+    border: 1px solid var(--ln-ext-card-border);
+    border-radius: 16px;
+    background: linear-gradient(var(--ln-ext-card-bg) 0 0), var(--ln-ext-bg-page);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  main.team-show .recent-members h2 {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    margin: 0 -8px 4px !important;
+    padding: 16px 16px 12px !important;
+    background: linear-gradient(var(--ln-ext-card-bg) 0 0), var(--ln-ext-bg-page);
+  }
+
+  main.team-show .recent-members h2::before {
+    top: 16px;
+    inset-inline-start: 16px;
+  }
+
+  main.team-show .recent-members h2::after {
+    top: 19px;
+    inset-inline-end: 16px;
+  }
+
+  /* The list fades out under the title and at the box's foot while there's more to scroll
+   * that way. The title's fade is 40px of its own, over the list (margin box unchanged), cut
+   * off until the list scrolls; the foot's sits on the border, below the box's padding. */
+  main.team-show .team-show__members {
+    container-type: scroll-state;
+  }
+
+  main.team-show .recent-members h2 {
+    margin-bottom: -36px !important;
+    padding-bottom: 52px !important;
+    mask: linear-gradient(#000 calc(100% - 40px), transparent calc(100% - 40px));
+    pointer-events: none;
+  }
+
+  main.team-show .recent-members h2 a {
+    pointer-events: auto;
+  }
+
+  main.team-show .team-show__members::after {
+    content: '';
+    position: sticky;
+    bottom: -8px;
+    display: block;
+    height: 40px;
+    margin: -40px -8px 0;
+    background: linear-gradient(var(--ln-ext-card-bg) 0 0), var(--ln-ext-bg-page);
+    mask: linear-gradient(transparent, #000);
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    pointer-events: none;
+  }
+
+  @container scroll-state(scrollable: top) {
+    main.team-show .recent-members h2 {
+      mask: linear-gradient(#000 calc(100% - 40px), transparent);
+    }
+  }
+
+  @container scroll-state(scrollable: bottom) {
+    main.team-show .team-show__members::after {
+      opacity: 1;
+    }
+  }
+}
+
+main.team-show .recent-members h2 a::before {
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/user-multiple.svg') center /
+    20px no-repeat;
+}
+
+/* The team's member count under the title (content/pages/team-show/count.ts): the title's text
+ * takes the grid's first free cell, the count the one below it. */
+main.team-show .recent-members h2 a {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0 12px;
+}
+
+main.team-show .recent-members h2 a::before {
+  grid-row: 1 / 3;
+  grid-column: 1;
+  align-self: start;
+}
+
+main.team-show .recent-members h2 a::after {
+  grid-row: 1 / 3;
+  grid-column: 3;
+  align-self: start;
+  margin-top: 10px;
+}
+
+main.team-show .ln-ext-team-count {
+  grid-row: 2;
+  grid-column: 2;
+  color: var(--ln-ext-text-dim);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+main.team-show .ln-ext-team-count strong {
+  color: var(--ln-ext-text);
+  font-weight: 700;
+}
+
+main.team-show .recent-members {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+main.team-show .recent-members .userlist {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 !important;
+}
+
+main.team-show .recent-members .paginated {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Each member: their avatar (content/ui/avatars.ts), a green dot on it while online. */
+main.team-show .recent-members a.user-link {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px !important;
+  border-radius: 10px;
+  color: var(--ln-ext-text) !important;
+  font-size: 0.95rem;
+  transition: background-color 0.15s !important;
+}
+
+main.team-show .recent-members a.user-link:hover {
+  background: var(--ln-ext-lift-6);
+}
+
+main.team-show .recent-members a.user-link::before {
+  content: '';
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ln-ext-avatar);
+}
+
+main.team-show .recent-members a.user-link > .line {
+  display: none !important;
+}
+
+main.team-show .recent-members a.online > .line {
+  position: absolute;
+  top: 30px;
+  inset-inline-start: 32px;
+  display: block !important;
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  margin: 0 !important;
+  border: 2px solid var(--ln-ext-bg-panel);
+  border-radius: 50%;
+  background: var(--ln-ext-good);
+  font-size: 0;
+  opacity: 1 !important;
+}
+
+main.team-show .recent-members a.online > .line::before {
+  display: none !important;
+}
+
+main.team-show .recent-members a.user-link > .uflair {
+  margin-inline-start: auto !important;
+}
+
+/* The next page's link, which Lichess's infinite scroll follows as it comes into view. */
+main.team-show .recent-members .pager a {
+  display: block;
+  margin: 8px 0 4px;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong) !important;
+  font-weight: 600;
+  text-align: center;
+}

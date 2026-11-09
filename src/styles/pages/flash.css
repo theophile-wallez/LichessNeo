@@ -1,0 +1,70 @@
+/* ---- Flash messages --- */
+
+/* One that only says how a form went is a toast instead (content/notices/flash.ts). */
+.flash[data-ln-ext-toasted] {
+  display: none !important;
+}
+
+/* What Lichess says after a form (saved, joined, a team without a description): a band of
+ * the page's width in a bright hue under white text. A plain card instead, its hue on the
+ * icon's tile (the tile is the ::before, the icon the ::after over it). */
+.flash {
+  --ln-ext-flash-hue: var(--ln-ext-good);
+  --ln-ext-flash-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/tick-02.svg');
+  position: relative;
+  gap: 14px;
+  padding: 12px !important;
+  padding-inline-end: 18px !important;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 14px !important;
+  background: var(--ln-ext-card-bg) !important;
+  box-shadow: none !important;
+  color: var(--ln-ext-text) !important;
+  font-size: 0.95rem;
+}
+
+.flash-warning {
+  --ln-ext-flash-hue: var(--ln-ext-orange);
+  --ln-ext-flash-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg');
+}
+
+.flash-failure {
+  --ln-ext-flash-hue: var(--ln-ext-red);
+  --ln-ext-flash-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/alert-circle.svg');
+}
+
+.flash:is(.flash-quiet, .flash-box) {
+  --ln-ext-flash-hue: var(--ln-ext-accent);
+  --ln-ext-flash-icon: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/information-circle.svg');
+}
+
+.flash::before {
+  content: '' !important;
+  flex: none;
+  align-self: flex-start;
+  width: 36px;
+  height: 36px;
+  margin: 0 !important;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ln-ext-flash-hue) 16%, transparent);
+}
+
+.flash::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  inset-inline-start: 20px;
+  width: 20px;
+  height: 20px;
+  background: var(--ln-ext-flash-hue);
+  mask: var(--ln-ext-flash-icon) center / contain no-repeat;
+}
+
+.flash .flash__content {
+  align-self: center;
+}
+
+.flash .flash__content a {
+  color: var(--ln-ext-accent) !important;
+  font-weight: 600;
+}

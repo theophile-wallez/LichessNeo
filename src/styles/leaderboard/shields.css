@@ -127,7 +127,7 @@ main.tournament-categ-shields .box__top h1 {
   align-items: center;
   gap: 12px;
   margin: 0 !important;
-  font-size: 28px !important;
+  font-size: var(--ln-ext-title-size) !important;
 }
 
 /* Back to all the shields, as a round button. */

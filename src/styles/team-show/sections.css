@@ -1,0 +1,231 @@
+/* ---- Sections --- */
+
+main.team-show .team-show__events > section {
+  margin: 28px 0 0 !important;
+}
+
+/* The updates in their menu's icon and color (teams.css). */
+main.team-show .team-show__update {
+  --ln-ext-team-tile: var(--ln-ext-green);
+}
+
+main.team-show .team-show__update .team-show__section-title a::before {
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/news.svg');
+}
+
+main.team-show .team-show__tour {
+  --ln-ext-team-tile: var(--ln-ext-yellow);
+}
+
+main.team-show .team-show__forum {
+  --ln-ext-team-tile: var(--ln-ext-cyan);
+}
+
+/* A section's title: its icon on a tile of its color, and a round arrow to the whole list. */
+main.team-show :is(.team-show__section-title, .recent-members h2) {
+  position: relative;
+  display: flex;
+  margin: 0 0 12px !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+}
+
+main.team-show :is(.team-show__section-title, .recent-members h2)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ln-ext-team-tile) 16%, transparent);
+  pointer-events: none;
+}
+
+main.team-show :is(.team-show__section-title, .recent-members h2) a {
+  display: flex !important;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.team-show :is(.team-show__section-title, .recent-members h2) a::before {
+  content: '' !important;
+  flex: none;
+  width: 20px !important;
+  height: 36px !important;
+  margin: 0 8px !important;
+  background-color: var(--ln-ext-team-tile) !important;
+}
+
+/* The arrow over its round pill, the title's ::after. */
+main.team-show :is(.team-show__section-title, .recent-members h2) a::after {
+  content: '';
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-inline: auto 7px;
+  background: var(--ln-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-01.svg') center /
+    contain no-repeat;
+}
+
+main.team-show :is(.team-show__section-title, .recent-members h2)::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  inset-inline-end: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--ln-ext-lift-6);
+  transition: background-color 0.15s !important;
+  pointer-events: none;
+}
+
+main.team-show :is(.team-show__section-title, .recent-members h2):hover::after {
+  background: var(--ln-ext-lift-12);
+}
+
+html[dir='rtl'] main.team-show :is(.team-show__section-title, .recent-members h2) a::after {
+  scale: -1 1;
+}
+
+/* ---- Updates --- */
+
+main.team-show .team-show__update__last {
+  margin: 0 !important;
+  padding: 16px 20px !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 14px !important;
+  background: var(--ln-ext-card-bg) !important;
+}
+
+main.team-show .team-show__update__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+  gap: 4px 12px;
+  margin: 0 0 8px !important;
+  color: var(--ln-ext-text-dim);
+  font-size: 0.85rem;
+}
+
+main.team-show .team-show__update__body {
+  overflow-wrap: anywhere;
+}
+
+main.team-show .team-show__update__body > :first-child {
+  margin-top: 0 !important;
+}
+
+main.team-show .team-show__update__more {
+  display: block;
+  margin-top: 8px;
+  text-align: end;
+}
+
+/* Lichess frames each section's list: its rows are cards already. */
+main.team-show .team-show__list-wrapper {
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: none !important;
+}
+
+/* ---- Forum --- */
+
+main.team-show .team-show__forum .team-show__list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 8px !important;
+}
+
+main.team-show .team-show__forum .team-show__list-wrapper:empty {
+  display: none;
+}
+
+main.team-show :is(.team-show__forum__post, .team-show__forum > a.more) {
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 14px !important;
+  background: var(--ln-ext-card-bg) !important;
+  transition:
+    background-color 0.15s,
+    box-shadow 0.15s !important;
+}
+
+main.team-show :is(.team-show__forum__post, .team-show__forum > a.more):hover {
+  background: var(--ln-ext-card-hover) !important;
+  box-shadow: var(--ln-ext-card-shadow-hover);
+}
+
+main.team-show .team-show__forum__post {
+  display: block;
+  margin: 0 !important;
+  padding: 14px 18px !important;
+  color: var(--ln-ext-text) !important;
+}
+
+main.team-show .team-show__forum__post .meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+
+main.team-show .team-show__forum__post .meta strong {
+  color: var(--ln-ext-text-strong);
+}
+
+main.team-show .team-show__forum__post .meta em {
+  color: var(--ln-ext-text-dim);
+  font-size: 0.85rem;
+  font-style: normal;
+}
+
+main.team-show .team-show__forum__post p {
+  margin: 4px 0 0 !important;
+  color: var(--ln-ext-text-dim);
+}
+
+/* The link to the whole forum: a card with the forum's picture, and an arrow. */
+main.team-show .team-show__forum > a.more {
+  display: flex !important;
+  align-items: center;
+  gap: 18px;
+  margin: 0 !important;
+  padding: 14px 20px !important;
+  color: var(--ln-ext-text) !important;
+  font-weight: 600;
+  text-align: start !important;
+}
+
+main.team-show .team-show__forum > a.more::before {
+  content: '';
+  flex: none;
+  width: 48px;
+  height: 48px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/sidebar/forum.webp') center /
+    contain no-repeat;
+}
+
+main.team-show .team-show__forum > a.more::after {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-inline-start: auto;
+  background: var(--ln-ext-text-dim);
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/arrow-right-01.svg') center /
+    contain no-repeat;
+}
+
+html[dir='rtl'] main.team-show .team-show__forum > a.more::after {
+  scale: -1 1;
+}

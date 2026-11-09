@@ -1841,6 +1841,14 @@
     "message": "Close",
     "description": "A toast's close button, read out by screen readers."
   },
+  "teamJoined": {
+    "message": "You joined the team",
+    "description": "The toast once the user joined a team."
+  },
+  "teamLeft": {
+    "message": "You left the team",
+    "description": "The toast once the user left a team."
+  },
   "underboardClose": {
     "message": "Close",
     "description": "The close button over the free analysis board's FEN and PGN fields, read out by screen readers."

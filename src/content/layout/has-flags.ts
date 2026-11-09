@@ -63,6 +63,8 @@ const FLAGS: Readonly<Record<string, string>> = {
   'coach-list': 'main.coach-list',
   'team-list': 'main.team-list',
   'team-events': 'main.team-events',
+  // A page of the Teams menu, which keeps the scrollbar's room (styles/team-menu.css).
+  'team-menu': "main.page-menu > .subnav a[href$='/team/all']",
   // A leaderboard's top players (/player/top/<n>/<mode>).
   'leaderboard-top': 'main.box > table.slist-leaderboard',
   // A form in a padded card beside a side menu: a new team, a broadcast, a coach's profile.
