@@ -313,6 +313,6 @@ main.simul-form .ln-ext-simul-form__colors [data-ln-ext-color='random']::before 
   width: 18px;
   height: 18px;
   background: currentColor;
-  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/dice.svg') center / contain
+  mask: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/shuffle.svg') center / contain
     no-repeat;
 }

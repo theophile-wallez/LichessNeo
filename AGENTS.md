@@ -402,6 +402,8 @@ What each feature folder holds is listed in
   `content: var(--ln-ext-mode-rapid)` (or another mode) in
   `font-family: lichess`, in `var(--ln-ext-mode-rapid-color)` (every mode
   but ultrabullet has one).
+  A pick made at random (a side, a coach) is `ShuffleIcon` (`shuffle`),
+  never a die, which stands for the variants (`styles/random-icon.test.ts`).
 - _No emoji:_ emoji don't look clean. A colored icon is a Hugeicon in a color
   of the palette on a tile tinted with it (a side menu's link sets
   `--ln-ext-nav-glyph` and `--ln-ext-nav-color`,
