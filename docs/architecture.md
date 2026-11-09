@@ -389,7 +389,7 @@ preference, as its Theme menu does. Users make their own in its editor
 ## The site
 
 `site/` is the extension's promotional page, published on GitHub Pages
-(<https://theophile-wallez.github.io/LichessNeo/>) by `.github/workflows/pages.yml`
+(<https://lichessneo.com/>) by `.github/workflows/pages.yml`
 whenever a push to `main` changes it or what it draws from. `scripts/site.ts`
 builds it into `dist/site` (`pnpm site` serves it on localhost:5181, rebuilt on
 every change): the page as written, its sheets joined into one and minified

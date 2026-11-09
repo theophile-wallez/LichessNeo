@@ -8,7 +8,7 @@ game.
 Your Lichess account, your games and your friends don't change. Only the look
 and the sounds do.
 
-**[See it on its website](https://theophile-wallez.github.io/LichessNeo/)**, with a
+**[See it on its website](https://lichessneo.com/)**, with a
 game's Debrief you can play through, the coaches and the looks to try.
 
 ![A game's Debrief on lichess.org with the extension, on a computer and on a phone](store/en/1-game.png)
