@@ -173,18 +173,12 @@
     scrollbar-width: thin;
   }
 
-  /* The box's clip would stop the title from sticking. */
-  main.page-menu > .page-menu__content.perf-stat {
-    overflow: visible !important;
-  }
-
   main.page-menu > .perf-stat > .box__top {
     container-type: scroll-state;
     position: sticky;
     top: 0;
     z-index: 3;
-    border-radius: 7px 7px 0 0;
-    background: var(--ln-ext-bg-panel);
+    background: var(--ln-ext-bg-page);
     box-shadow: var(--ln-ext-pin-cover);
   }
 
@@ -194,7 +188,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

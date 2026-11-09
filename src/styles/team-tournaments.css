@@ -175,19 +175,14 @@ main .team-tournaments td.text::before {
 }
 
 /* That page's title stays put while the lists scroll (desktop only: below, Lichess's top bar
- * would cover it). `hidden` would catch it: `clip` keeps the corners. */
-html[data-ln-ext-has~='team-tournaments'] main > .box {
-  min-width: 0;
-  overflow: clip !important;
-}
-
+ * would cover it). */
 @media (min-width: 1020px) {
   html[data-ln-ext-has~='team-tournaments'] main > .box > .box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 3;
     top: 0;
-    background: var(--ln-ext-bg-panel);
+    background: var(--ln-ext-bg-page);
     box-shadow: var(--ln-ext-pin-cover);
   }
 
@@ -197,7 +192,7 @@ html[data-ln-ext-has~='team-tournaments'] main > .box {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

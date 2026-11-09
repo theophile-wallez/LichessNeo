@@ -1,13 +1,5 @@
 /* A team's page (/team/<id>). Its tournaments' cards are in team-tournaments.css. */
 
-/* `hidden` would catch the sticky title, and have #main-wrap's grid cut the page to the
- * window's height. `clip` keeps the corners; the zero width a scroller had keeps a long
- * word in the description from widening the page on a phone. */
-main.team-show {
-  min-width: 0;
-  overflow: clip !important;
-}
-
 /* The title stays put while the page scrolls (desktop only: below, Lichess's top bar would
  * cover it), with a soft edge under it once stuck. */
 @media (min-width: 1020px) {
@@ -16,7 +8,7 @@ main.team-show {
     position: sticky;
     z-index: 3;
     top: 0;
-    background: var(--ln-ext-bg-panel);
+    background: var(--ln-ext-bg-page);
     box-shadow: var(--ln-ext-pin-cover);
   }
 
@@ -26,7 +18,7 @@ main.team-show {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -39,13 +31,10 @@ main.team-show {
   }
 }
 
-/* Below 800px the page runs the window's width: no card around it, the page's margins. */
+/* Below 800px the page runs the window's width, with the page's margins. */
 @media (max-width: 799.98px) {
   main.team-show.box {
     padding-bottom: 24px !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
   }
 
   main.team-show > .box__top {

@@ -140,14 +140,6 @@ main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tour
 /* ---- Pinned titles --- */
 
 @media (min-width: 1020px) {
-  /* Lichess's boxes clip, which would catch the titles: `clip` doesn't. */
-  html[data-ln-ext-has~='tournament-calendar'] main.box,
-  main.page-small.box-pad.page,
-  main.arena-history > .page-menu__content.box {
-    min-width: 0;
-    overflow: clip !important;
-  }
-
   html[data-ln-ext-has~='tournament-calendar'] main.box > h1.box__top,
   main.page-small.box-pad.page > .box__top:has(+ .body),
   main.arena-history > .page-menu__content > .box__top {
@@ -155,11 +147,11 @@ main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tour
     position: sticky;
     z-index: 3;
     top: 0;
-    background: var(--ln-ext-bg-panel);
+    background: var(--ln-ext-bg-page);
     box-shadow: var(--ln-ext-pin-cover);
   }
 
-  /* A plain page's title sits in its card's padding: pulled out to its edges, as on the
+  /* A plain page's title sits in its box's padding: pulled out to its edges, as on the
    * about pages (static-pages.css). Only a title over a body of text: the Racer's home has
    * this card too, its title in a row with a link. */
   main.page-small.box-pad.page > .box__top:has(+ .body) {
@@ -175,7 +167,7 @@ main.page-menu[data-ln-ext-menu~='arena-history'][data-ln-ext-nav-active$='/tour
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;

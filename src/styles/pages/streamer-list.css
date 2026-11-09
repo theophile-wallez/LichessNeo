@@ -65,18 +65,12 @@
     align-self: start;
   }
 
-  /* Lichess's box clips, which traps a sticky title. */
-  .streamer-list.box {
-    overflow: visible !important;
-  }
-
   .streamer-list > .box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 4;
     top: calc(-1 * var(--ln-ext-page-top));
-    border-radius: 6px 6px 0 0;
-    background: var(--ln-ext-bg-panel);
+    background: var(--ln-ext-bg-page);
   }
 
   .streamer-list > .box__top::after {
@@ -85,7 +79,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s !important;

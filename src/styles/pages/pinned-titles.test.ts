@@ -6,7 +6,13 @@ import { queryOne } from '#shared/dom.ts';
 // Lichess's boxes clip from 799.3px (site.css); a padded box takes its padding's variable.
 const LICHESS = ':root { ---box-padding: 50px; } .box { overflow: hidden; }';
 
-const SHEETS = ['pinned-titles.css', 'features.css', 'account-pinned.css', 'streamers.css'];
+const SHEETS = [
+  'page-boxes.css',
+  'pinned-titles.css',
+  'features.css',
+  'account-pinned.css',
+  'streamers.css',
+];
 
 // happy-dom drops a selector over several lines: each run of white space becomes one space.
 const sheet = (name: string): string =>

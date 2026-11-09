@@ -1,0 +1,33 @@
+/* ---- Page boxes --- */
+
+/* A page's content stands on the page itself, as the settings' do (account-pinned.css): Lichess's
+ * box behind it was a slab of the panel's color under cards, tables and fields that have their
+ * own. Only the boxes that hold a page: cards within one (an event's columns, the insights'
+ * panels) keep theirs.
+ *
+ * Without a box, its clip would cut the cards' hover shadows at its edges: `clip` with a margin
+ * lets them out, and unlike `hidden` makes no scroller, which #main-wrap's grid cuts to the
+ * window and which would trap a sticky title. The zero min-width a scroller had is set back,
+ * so a long word doesn't widen the page on a phone. */
+main.box,
+main:not(.page-menu) > .box,
+main.page-menu:not(.account) > .page-menu__content.box,
+main.page-menu:not(.account) > .page-menu__content > .box {
+  min-width: 0;
+  border-radius: 0;
+  background: none !important;
+  overflow: clip !important;
+  overflow-clip-margin: 16px;
+}
+
+/* From 1020px the box's 50px sides go too, so the content lines up with its title and the menu
+ * beside it; below, they are the page's margin. Lichess and our rules pad and pull titles out
+ * by `---box-padding`, so they follow. */
+@media (min-width: 1020px) {
+  main.box,
+  main:not(.page-menu) > .box,
+  main.page-menu:not(.account) > .page-menu__content.box,
+  main.page-menu:not(.account) > .page-menu__content > .box {
+    ---box-padding: 0px;
+  }
+}

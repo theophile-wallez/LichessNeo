@@ -41,7 +41,7 @@
     position: sticky;
     z-index: 2;
     top: 0;
-    background: var(--ln-ext-bg-panel);
+    background: var(--ln-ext-bg-page);
     box-shadow: var(--ln-ext-pin-cover);
   }
 
@@ -63,7 +63,7 @@
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
@@ -80,8 +80,7 @@
   }
 
   /* Source code and Webmasters are a stack of boxes, the title in the first: that box lets it
-   * out (`display: contents`), so it stays put over them all, on the page, and what's left of
-   * the box keeps its look. */
+   * out (`display: contents`), so it stays put over them all. */
   main.page-menu > .page-menu__content.page > section.box:first-child {
     display: contents;
   }
@@ -117,12 +116,6 @@
 
   main.page-menu > .page-menu__content.page > section.box:first-child > :not(h1) {
     margin-bottom: var(---block-gap, 16px);
-    border-radius: 6px;
-    background: var(--c-bg-box);
-  }
-
-  main.page-menu > .page-menu__content.page > section.box-pad:first-child > :not(h1) {
-    padding: var(---box-padding);
   }
 
   /* Anchor links (#tldr, a FAQ question) land below the title, not under it. */

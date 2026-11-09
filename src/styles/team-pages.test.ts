@@ -9,6 +9,7 @@ const LICHESS =
   ':root { ---box-padding: 50px; } .box { overflow: hidden; } .team-show { overflow: hidden; }';
 
 const SHEETS = [
+  'pages/page-boxes.css',
   'friends.css',
   'teams.css',
   'team-menu.css',
@@ -92,11 +93,11 @@ const EVENTS =
   '<div class="team-tournaments__next"></div></div></div></main>';
 
 describe('a team’s tournaments page', () => {
-  it('pins its title in its card, and gives the lists the title’s margins', () => {
+  it('pins its title on the page, and lines the lists up with it', () => {
     render(TOURNAMENTS, { has: 'team-tournaments' });
     expect(styleOf('.box').overflow).toBe('clip');
     expect(styleOf('.box__top').position).toBe('sticky');
-    expect(styleOf('.team-tournaments').paddingLeft).toBe('50px');
+    expect(styleOf('.team-tournaments').paddingLeft).toBe('0px');
   });
 
   it('stacks the upcoming and the past lists on a phone', () => {
@@ -111,7 +112,7 @@ describe('the team events', () => {
     render(EVENTS, { has: 'team-events' });
     expect(styleOf('.page-menu__menu').position).toBe('sticky');
     expect(styleOf('h1.box__top').position).toBe('sticky');
-    expect(styleOf('.page-menu__content').overflow).toBe('visible');
+    expect(styleOf('.page-menu__content').overflow).toBe('clip');
   });
 
   it('take the lists’ title size, and no margins of a page of their own', () => {
@@ -126,7 +127,7 @@ const playerList = (title: string): string =>
   '<table class="slist"><tbody></tbody></table></main>';
 
 describe('a list of players', () => {
-  it('pins its title in its card', () => {
+  it('pins its title over the page', () => {
     render(playerList('<a href="/@/Eresy" data-icon="" class="text"></a>Friends'));
     expect(styleOf('main').overflow).toBe('clip');
     expect(styleOf('.box__top').position).toBe('sticky');

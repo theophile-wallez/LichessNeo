@@ -4,11 +4,9 @@
 
 /* ---- Header --- */
 
-/* Transparent now, but its `overflow: hidden` would still clip the cards' hover shadows. */
+/* No box behind the cards (pages/page-boxes.css), nor its padding. */
 main:is(.team-list, .team-events) .page-menu__content.box {
-  overflow: visible !important;
   padding: 0 !important;
-  background: transparent !important;
 }
 
 main:is(.team-list, .team-events) .box__top {

@@ -61,17 +61,11 @@ main.page-menu.video > .page-menu__content > p.explain[data-ln-ext-counted] {
     overflow: visible !important;
   }
 
-  /* Lichess's box clips, which traps a sticky title. */
-  main.page-menu.video > .page-menu__content.box {
-    overflow: visible !important;
-  }
-
   main.page-menu.video > .page-menu__content > .box__top {
     position: sticky;
     z-index: 4;
     top: calc(-1 * var(--ln-ext-page-top));
-    border-radius: 6px 6px 0 0;
-    background: var(--ln-ext-bg-panel);
+    background: var(--ln-ext-bg-page);
   }
 }
 

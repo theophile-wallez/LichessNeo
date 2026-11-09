@@ -176,7 +176,7 @@ main.box.page-small[data-ln-ext-list='players'] {
     width: 14px;
     height: 14px;
     margin: 0 !important;
-    border: 2px solid var(--ln-ext-bg-panel);
+    border: 2px solid var(--ln-ext-bg-page);
     border-radius: 50%;
     background: var(--ln-ext-good);
     font-size: 0;
@@ -231,21 +231,18 @@ main.box.page-small[data-ln-ext-list='players'] {
 }
 
 /* The title stays put while the list scrolls (desktop only: below, Lichess's top bar would
- * cover it), its shadow showing once stuck. `hidden` would catch it: `clip` keeps the
- * corners, and loses a scroller's zero min-width, set back. */
-main.box.page-small[data-ln-ext-list='players'] {
-  min-width: 0;
-  overflow: clip !important;
-}
-
+ * cover it), its shadow showing once stuck. */
 @media (min-width: 1020px) {
   main.box.page-small[data-ln-ext-list='players'] > .box__top {
     container-type: scroll-state;
     position: sticky;
     z-index: 3;
     top: 0;
-    background: var(--ln-ext-bg-panel);
-    box-shadow: var(--ln-ext-pin-cover);
+    background: var(--ln-ext-bg-page);
+    box-shadow:
+      var(--ln-ext-pin-cover-wide),
+      -12px 0 var(--ln-ext-bg-page),
+      12px 0 var(--ln-ext-bg-page);
   }
 
   main.box.page-small[data-ln-ext-list='players'] > .box__top::after {
@@ -254,7 +251,7 @@ main.box.page-small[data-ln-ext-list='players'] {
     top: 100%;
     inset-inline: 0;
     height: 14px;
-    background: linear-gradient(var(--ln-ext-bg-panel), transparent);
+    background: linear-gradient(var(--ln-ext-bg-page), transparent);
     opacity: 0;
     transition: opacity 0.2s !important;
     pointer-events: none;
