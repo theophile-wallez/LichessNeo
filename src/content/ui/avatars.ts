@@ -45,6 +45,11 @@ const SPOTS: readonly Spot[] = [
   // The inbox's contacts, and the conversation open, whose head and messages show it.
   { selector: 'main.msg-app .msg-app__side__contact', name: '.msg-app__side__contact__name' },
   { selector: 'main.msg-app .msg-app__convo', link: '.msg-app__convo__head a.user-link' },
+  // A team update, beside its sender's bubble.
+  {
+    selector: 'main.team-update .team-update__convo__update',
+    link: '.team-update__convo__update__meta a.user-link',
+  },
 ];
 
 // A contact's name sits beside its flair and title, in elements of their own.

@@ -46,6 +46,7 @@ describe('presentFlags, for flags the original lacked', () => {
       '<main class="analyse"><div class="game__meta"><div class="game__meta__players"></div></div></main>',
     ],
     ['inbox', '<main class="box msg-app pane-side"><div class="msg-app__side"></div></main>'],
+    ['team-updates', '<main class="box team-update team-update--all"></main>'],
     ['team-events', '<main class="team-events page-menu"></main>'],
     [
       'team-menu',

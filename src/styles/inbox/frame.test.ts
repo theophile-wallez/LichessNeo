@@ -9,6 +9,8 @@ const LICHESS_RULES =
   '.box{border-radius:6px;background:#262421;box-shadow:0 2px 2px 0 rgba(0,0,0,.14)}';
 
 const INBOX = '<div id="main-wrap"><main class="box msg-app pane-convo"></main></div>';
+const TEAM_UPDATES =
+  '<div id="main-wrap"><main class="box team-update team-update--all"></main></div>';
 
 function styled(selector: string): CSSStyleDeclaration {
   const element = queryOne(document, selector, HTMLElement);
@@ -17,12 +19,12 @@ function styled(selector: string): CSSStyleDeclaration {
 }
 
 // happy-dom keeps a computed style through a change of attribute: each case loads afresh.
-function load(flagged: boolean): void {
+function load(flagged: boolean, page: 'inbox' | 'team-updates' = 'inbox'): void {
   const style = document.createElement('style');
   style.textContent = LICHESS_RULES + readFileSync(join(import.meta.dirname, 'frame.css'), 'utf8');
   document.head.append(style);
-  document.body.innerHTML = INBOX;
-  if (flagged) document.documentElement.dataset.lnExtHas = 'inbox';
+  document.body.innerHTML = page === 'inbox' ? INBOX : TEAM_UPDATES;
+  if (flagged) document.documentElement.dataset.lnExtHas = page;
 }
 
 afterEach(() => {
@@ -43,6 +45,16 @@ describe('the inbox’s page', () => {
     load(false);
     expect(styled('#main-wrap').getPropertyValue('---main-max-width')).toBe('1300px');
     load(true);
+    expect(styled('#main-wrap').getPropertyValue('---main-max-width')).toBe('100%');
+  });
+});
+
+describe('a team’s updates, in the inbox’s frame', () => {
+  it('drops Lichess’s box and takes the whole page’s width', () => {
+    load(false, 'team-updates');
+    expect(styled('#main-wrap').getPropertyValue('---main-max-width')).toBe('1300px');
+    load(true, 'team-updates');
+    expect(styled('main').borderRadius).toBe('0px');
     expect(styled('#main-wrap').getPropertyValue('---main-max-width')).toBe('100%');
   });
 });

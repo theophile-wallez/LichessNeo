@@ -112,6 +112,16 @@ const SPOTS = [
       '</div></div><div class="msg-app__convo__msgs"></div></div></main>',
     avatar: '.msg-app__convo',
   },
+  {
+    name: 'a team update',
+    markup:
+      '<main class="box team-update team-update--all"><div class="team-update__convo">' +
+      '<div class="team-update__convo__update"><div class="team-update__convo__update__info">' +
+      '<a href="/team/coders">Coders</a><div class="team-update__convo__update__meta">' +
+      '<time>3 hours ago</time><span>by <a class="offline user-link ulpt" href="/@/tjychess">' +
+      'tjychess</a></span></div></div></div></div></main>',
+    avatar: '.team-update__convo__update',
+  },
 ];
 
 function avatarIn(selector: string): HTMLElement {

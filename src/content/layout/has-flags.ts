@@ -77,6 +77,8 @@ const FLAGS: Readonly<Record<string, string>> = {
   'puzzle-themes': 'main.page-menu .puzzle-themes',
   'tournament-calendar': 'main.box > #tournament-calendar',
   inbox: 'main.msg-app',
+  // A team's updates, drawn as the inbox is (styles/team-updates).
+  'team-updates': 'main.team-update',
   // The leagues' page is one of Lichess's plain pages: told by its first section.
   'leagues-page': 'main.page #lichess-streamer-battles',
 };

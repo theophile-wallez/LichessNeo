@@ -1,9 +1,10 @@
 /* ---- The inbox: the page --- */
 
 /* Lichess draws the inbox as a box in the page's column. Ours is the page itself, as a
- * messaging app's: from the sidebar to the window's edges, its parts parted by hairlines. */
+ * messaging app's: from the sidebar to the window's edges, its parts parted by hairlines.
+ * A team's updates (styles/team-updates) stand in the same frame. */
 
-main.msg-app {
+main:is(.msg-app, .team-update) {
   box-sizing: border-box;
   border: none;
   border-radius: 0;
@@ -12,7 +13,7 @@ main.msg-app {
 }
 
 @media (min-width: 799.3px) {
-  html[data-ln-ext-has~='inbox'] #main-wrap {
+  html:is([data-ln-ext-has~='inbox'], [data-ln-ext-has~='team-updates']) #main-wrap {
     ---main-max-width: 100%;
     ---main-margin: 0;
   }
@@ -20,12 +21,12 @@ main.msg-app {
 
 /* No room above: the list and the conversation scroll in place. */
 @media (min-width: 1020px) {
-  html[data-ln-ext-has~='inbox'] #main-wrap {
+  html:is([data-ln-ext-has~='inbox'], [data-ln-ext-has~='team-updates']) #main-wrap {
     padding-top: 0;
     overflow: hidden;
   }
 
-  main.msg-app {
+  main:is(.msg-app, .team-update) {
     height: var(--ln-ext-main-h);
   }
 }
