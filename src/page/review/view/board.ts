@@ -29,16 +29,19 @@ import { renderOpening } from './opening.ts';
 function renderBar(session: Session, analysis: Analysis, shown: JudgedMove | null): void {
   const { view, live } = session;
   const reviewing = view.mode !== 'normal';
-  const position = barPosition({
-    review: view.review,
-    reviewing,
-    live: onFreeBoard(view.mode),
-    onGame: isGameNode(session.work, analysis.node),
-    ply: plyIndex(session.work, analysis.node),
-    bestBefore: shown?.before ?? null,
-    offGame: live.evals.get(analysis.node.fen),
-    last: view.barPosition,
-  });
+  // Lichess's settings can hide the gauge: ours follows.
+  const position = analysis.gaugeAllowed
+    ? barPosition({
+        review: view.review,
+        reviewing,
+        live: onFreeBoard(view.mode),
+        onGame: isGameNode(session.work, analysis.node),
+        ply: plyIndex(session.work, analysis.node),
+        bestBefore: shown?.before ?? null,
+        offGame: live.evals.get(analysis.node.fen),
+        last: view.barPosition,
+      })
+    : null;
   view.barPosition = reviewing ? position : null;
   document.documentElement.classList.toggle('ln-ext-evalbar-on', position !== null);
   if (position) drawBar(session.elements, position, analysis.orientation());

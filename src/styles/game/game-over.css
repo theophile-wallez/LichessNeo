@@ -78,8 +78,9 @@ main.round :is(i5d, rm6) .status {
   font-style: normal !important;
 }
 
-/* The follow-ups in one row: Game Review, the new game, then Rematch. Once the game over's
- * card is in (page/game-over, game-end-card.css), they're its foot, the row its frame. */
+/* The follow-ups in one row: the new game, Rematch, then Game Review, so the next game is the
+ * first button. Once the game over's card is in (page/game-over, game-end-card.css), they're
+ * its foot, the row its frame. */
 main.round .rcontrols .follow-up {
   display: flex !important;
   flex-flow: row wrap !important;
@@ -117,7 +118,7 @@ main.round .rcontrols .follow-up .fbt:hover:not(.disabled, :disabled) {
   background: var(--ln-ext-btn-grey-hover) !important;
 }
 
-/* Game Review: Lichess's analysis link, always the last button, first in the row. It opens
+/* Game Review: Lichess's analysis link, always the last button, and last in the row. It opens
  * the analysis page, where page/review/ starts the review. */
 html {
   --ln-ext-t-review: 'Debrief';
@@ -130,7 +131,6 @@ main.round
   .rcontrols
   .follow-up
   > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']) {
-  order: -2;
   flex-grow: 1.4;
   background: var(--ln-ext-btn-primary) !important;
   color: var(--ln-ext-white) !important;

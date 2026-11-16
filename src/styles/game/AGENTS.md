@@ -17,7 +17,7 @@ the root's [AGENTS.md](../../../AGENTS.md).
   due: start or end), which Lichess draws only in the chat's room, not while
   its notes are open.
   `page/game-over` puts its card at the head of these buttons, which are its
-  foot (the analysis link first, as Game Review). The round data has no clock
+  foot (the new game first, the analysis link last, as Game Review). The round data has no clock
   history: move times come from `/game/export/<id>?clocks=true`, and every
   position of a game just over from its finished page (`/game/<id>`,
   `cfg.data.treeParts`), with its status and winner, which `page/game-over`

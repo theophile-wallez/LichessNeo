@@ -34,6 +34,7 @@ const ControllerSchema = z.object({
   toggleExplorer: z.optional(z.unknown()),
   flip: z.optional(z.unknown()),
   changePgn: z.optional(z.unknown()),
+  settings: z.optional(z.unknown()),
 });
 
 export type Controller = z.infer<typeof ControllerSchema>;

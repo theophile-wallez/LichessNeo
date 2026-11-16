@@ -28,6 +28,8 @@ const isPlayUci = createGuard(method<[uci: string]>());
 const isChangePgn = createGuard(method<[pgn: string, andReload: boolean]>());
 // A method called without arguments.
 const isAction = createGuard(method<[]>());
+// The analysis settings' "Show evaluation gauge" (ui/analyse/src/settingsCtrl.ts).
+const isGaugeSetting = createGuard(z.object({ showGauge: z.boolean() }));
 
 function narrowNode(value: unknown): TreeNode {
   if (!isTreeNode(value)) throw new Error('Lichess’s analysis tree has an unexpected node');
@@ -133,6 +135,12 @@ export class Analysis {
   /** The nodes from the root to the one on the board. */
   get nodeList(): readonly TreeNode[] {
     return narrowNodes(this.#controller.nodeList);
+  }
+
+  /** The settings let an eval bar show beside the board; true where they have no such setting. */
+  get gaugeAllowed(): boolean {
+    const { settings } = this.#controller;
+    return !isGaugeSetting(settings) || settings.showGauge;
   }
 
   /** The free analysis board, whose tree grows as the user plays. */
