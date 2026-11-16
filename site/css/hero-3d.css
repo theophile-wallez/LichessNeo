@@ -1,0 +1,81 @@
+/* The hero window's 3D cascade entrance (demo/motion/hero-3d.ts): while the
+   parts drop onto the tilted chassis, .demo opens preserve-3d and each part
+   casts a soft shadow proportional to its height (--air = 1 -> 0). Once every
+   part lands, z = 0 and --air = 0, so the whole window sits flush on one plane. */
+
+.demo-stage {
+  perspective: 1200px;
+}
+
+.demo[data-assembling] {
+  isolation: auto;
+  overflow: visible;
+  background: none;
+  box-shadow: none;
+  transform-style: preserve-3d;
+}
+
+.demo[data-assembling]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: oklch(calc(var(--l0) + 16.5% * var(--lk)) var(--tint) var(--hue));
+  box-shadow:
+    0 0 0 1px var(--line-strong),
+    0 40px 100px color-mix(in srgb, var(--shadow) 65.1%, transparent),
+    0 12px 32px color-mix(in srgb, var(--shadow) 50.2%, transparent);
+  transform: translateZ(-1px);
+  pointer-events: none;
+}
+
+.demo[data-assembling] :is(.demo-app, .demo-play, .demo-panel) {
+  transform-style: preserve-3d;
+}
+
+.demo[data-assembling] .demo-rail {
+  border-radius: 16px 0 0 16px;
+}
+
+.demo[data-assembling] [data-layer] {
+  --air: 0;
+  --lift: calc(var(--air) * 0.65);
+
+  translate: 0 var(--drop-y, 0px) var(--drop-z, 0px);
+  will-change: translate, opacity;
+}
+
+.demo[data-assembling] .demo-boardrow[data-layer] {
+  border-radius: 10px;
+  box-shadow: 0 calc(34px * var(--lift)) calc(62px * var(--lift))
+    color-mix(in srgb, var(--shadow) calc(64% * var(--lift)), transparent);
+}
+
+.demo[data-assembling] .demo-tabs[data-layer],
+.demo[data-assembling] .demo-graph[data-layer] {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--glow) calc(12% * var(--air)), var(--line)),
+    0 calc(22px * var(--lift)) calc(42px * var(--lift))
+      color-mix(in srgb, var(--shadow) calc(52% * var(--lift)), transparent);
+}
+
+.demo[data-assembling] .demo-moments[data-layer],
+.demo[data-assembling] .ln-ext-review__nav[data-layer] {
+  filter: drop-shadow(
+    0 calc(20px * var(--lift)) calc(26px * var(--lift))
+      color-mix(in srgb, var(--shadow) calc(52% * var(--lift)), transparent)
+  );
+}
+
+.demo[data-assembling] .demo-card[data-layer] {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent-light) calc(36% * var(--air)), var(--line)),
+    inset 0 1px color-mix(in srgb, var(--glow) calc(20% * var(--air)), transparent),
+    0 calc(42px * var(--lift)) calc(76px * var(--lift))
+      color-mix(in srgb, var(--shadow) calc(72% * var(--lift)), transparent);
+}
+
+.demo[data-assembling] :is(.demo-moves, .demo-controls)[data-layer] {
+  box-shadow: 0 calc(20px * var(--lift)) calc(36px * var(--lift))
+    color-mix(in srgb, var(--shadow) calc(44% * var(--lift)), transparent);
+}

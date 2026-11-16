@@ -130,13 +130,6 @@ function wirePickers(demo: Demo, modes: PanelModes): void {
   });
 }
 
-const entered = playEntrance();
-showStars();
-startCompare();
-startStakes();
-startFacts();
-startWordCycle();
-startSounds();
 const crowd = queryOne(document, '.crowd', HTMLElement);
 if (crowd) startCrowd(crowd);
 const root = queryOne(document, '#demo', HTMLElement);
@@ -155,8 +148,17 @@ if (root) {
   startSummaries(root, demo, modes);
   startTooltips();
   demo.start();
+  const entered = playEntrance();
   // The mascot's chunk carries Three.js, and its first frames take a while: they wait
   // for the entrance to end, the still showing until then. Without the chunk (offline,
   // no WebGL), the still stays.
   void entered.then(() => demo.coach.mount()).catch(() => undefined);
+} else {
+  void playEntrance();
 }
+showStars();
+startCompare();
+startStakes();
+startFacts();
+startWordCycle();
+startSounds();

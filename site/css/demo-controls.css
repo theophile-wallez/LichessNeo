@@ -64,6 +64,24 @@
     z-index: 2;
   }
 
+  /* Hidden at the very top of the page so the tilted window stays unobstructed on load;
+     each .picker fades and rises on its own so its backdrop-filter isn't trapped in a
+     parent opacity group, which would snap in only once opacity hits 1. */
+  html[data-motion] .hero .demo-pickers:not([data-shown]) {
+    pointer-events: none;
+  }
+
+  html[data-motion] .hero .demo-pickers:not([data-shown]) .picker {
+    opacity: 0;
+    translate: 0 20px;
+  }
+
+  .hero .demo-pickers .picker {
+    transition:
+      opacity 0.35s var(--ease-out),
+      translate 0.4s var(--ease-out);
+  }
+
   .yours-pickers {
     position: sticky;
     top: 72px;
