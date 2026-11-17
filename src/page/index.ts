@@ -1,5 +1,6 @@
 import { startFeatures } from '#shared/features.ts';
 import { motion } from './motion/index.ts';
+import { dasher } from './dasher/index.ts';
 import { sounds } from './sounds/index.ts';
 import { labels } from './labels/labels.ts';
 import { shapes } from './board/index.ts';
@@ -24,6 +25,7 @@ import { lichessLooks } from './looks/index.ts';
 
 startFeatures([
   motion,
+  dasher,
   sounds,
   labels,
   shapes,

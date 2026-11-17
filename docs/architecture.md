@@ -216,6 +216,9 @@ so the logic can be unit-tested without a page.
 `src/page/`, the page-world script:
 
 - `motion`.
+- `dasher`: Lichess's user menu (`#dasher_app`) preloaded when idle and its
+  `/dasher` lists cached in storage, reconciled with the page's picks, so it
+  opens without waiting on the network.
 - `sounds`: `synth`, the Ascent sound set, played live by Foley; a sound's
   takes, one at random, the long moves that slide, and a mate's sound after
   its move.

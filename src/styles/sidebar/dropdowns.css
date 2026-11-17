@@ -12,3 +12,34 @@
   color: var(--ln-ext-text);
   font-family: var(--ln-ext-font);
 }
+
+/* While a dropdown fetches its data for the first time, Lichess puts its 70px multi-color
+ * logo spinner in `.initiating`: draw a small neutral ring in its place. */
+#top :is(#dasher_app, #notify-app, #challenge-app) .initiating {
+  display: grid;
+  place-items: center;
+  min-height: 76px;
+}
+
+#top :is(#dasher_app, #notify-app, #challenge-app) .initiating .spinner {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+}
+
+#top :is(#dasher_app, #notify-app, #challenge-app) .initiating .spinner svg {
+  display: none;
+}
+
+#top :is(#dasher_app, #notify-app, #challenge-app) .initiating .spinner::before {
+  content: '';
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--ln-ext-lift-15);
+  border-top-color: var(--ln-ext-text-dim);
+  border-radius: 50%;
+  animation: ln-ext-spin 0.8s linear infinite !important;
+}

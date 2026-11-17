@@ -59,6 +59,8 @@ export const StorageKey = {
   endCardFolded: prefixed('end-card-folded'),
   // The metals the player last saw on their own profile's medals (content/profile).
   medalsSeen: prefixed('medals-seen'),
+  // `/dasher`'s last answer, so the user menu opens without waiting on the network (page/dasher).
+  dasherCache: prefixed('dasher-cache'),
   reviewCache: (gameId: string, positions: number, version: number): string =>
     `${prefixed('review')}:${gameId}:${positions}:v${version}`,
   reviewProgress: (gameId: string, positions: number, version: number): string =>

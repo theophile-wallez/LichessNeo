@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, it } from 'vitest';
-import { isHashedAsset } from './assets.ts';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { esmBundleUrl, isHashedAsset, loadCssKey } from './assets.ts';
 import { cgKey } from './chessground.ts';
 import { method } from './method.ts';
 import { readMoveOptions, type SoundPlayer, soundPlayer, soundVolume } from './sound.ts';
@@ -109,5 +109,27 @@ describe('isHashedAsset', () => {
     expect(isHashedAsset('piece/alpha/wP.webp')).toBe(false);
     Object.assign(window, { site: { manifest: {} } });
     expect(isHashedAsset('piece/cburnett/wP.webp')).toBe(false);
+  });
+});
+
+describe('loadCssKey and esmBundleUrl', () => {
+  it('resolves Lichess’s lazy CSS and ES bundle URLs once `site.asset` is ready', () => {
+    expect(loadCssKey('dasher')).toBe(false);
+    expect(esmBundleUrl('dasher')).toBeNull();
+
+    const loadCss = vi.fn<(location: { readonly key: string }) => void>();
+    Object.assign(window, {
+      site: {
+        asset: {
+          loadCss,
+          jsModule: (name: string) => `compiled/${name}.1234.js`,
+          url: (path: string) => `https://lichess1.org/assets/${path}`,
+        },
+      },
+    });
+
+    expect(loadCssKey('dasher')).toBe(true);
+    expect(loadCss).toHaveBeenCalledWith({ key: 'dasher' });
+    expect(esmBundleUrl('dasher')).toBe('https://lichess1.org/assets/compiled/dasher.1234.js');
   });
 });
