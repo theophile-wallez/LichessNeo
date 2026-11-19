@@ -10,22 +10,6 @@
   border-color: var(--ln-ext-border) !important;
 }
 
-/* ---- Sign in --- */
-
-.auth .auth-tabs a {
-  color: var(--ln-ext-text-dim) !important;
-  font-weight: 700 !important;
-}
-
-.auth .auth-tabs a.active {
-  color: var(--ln-ext-text-strong) !important;
-  border-bottom-color: var(--ln-ext-text-strong) !important;
-}
-
-.auth .auth-tabs[data-ln-ext-tabs] a.active {
-  border-bottom-color: transparent !important;
-}
-
 /* ---- Puzzle modes --- */
 
 .puz-side__start__text span,

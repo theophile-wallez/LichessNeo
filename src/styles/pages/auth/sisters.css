@@ -1,0 +1,85 @@
+/* ---- Auth sister pages: OAuth authorization, email & signup confirmation --- */
+
+main.oauth .oauth__top {
+  margin-bottom: 12px !important;
+}
+
+main.oauth .oauth__top h2 {
+  color: var(--ln-ext-text-strong);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+main.oauth .oauth__logo--font {
+  margin-bottom: 12px !important;
+  color: var(--ln-ext-accent-hover) !important;
+  font-size: 48px !important;
+}
+
+main.oauth .oauth__scopes {
+  margin: 18px 0 0 !important;
+  padding: 14px 16px 14px 32px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 10px;
+  background: var(--ln-ext-lift-3);
+  font-size: 13.5px !important;
+}
+
+main.oauth .oauth__scopes .danger {
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ln-ext-bad) 15%, transparent) !important;
+  color: var(--ln-ext-bad) !important;
+}
+
+main.oauth .oauth__scopes .danger::before {
+  color: var(--ln-ext-bad) !important;
+}
+
+main.oauth .oauth__action {
+  margin: 22px 0 18px !important;
+}
+
+main.oauth .oauth__action .button {
+  width: 100%;
+  height: 44px;
+  padding: 0 20px !important;
+  border-radius: 9px !important;
+  font-size: 14.5px;
+}
+
+main.oauth .oauth__footer {
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ln-ext-card-border);
+  font-size: 13px !important;
+}
+
+/* ---- Email & signup confirmation --- */
+
+main.signup-confirm form {
+  margin: 24px 0 0 !important;
+}
+
+main.signup-confirm form .button-fat {
+  width: 100%;
+  height: 46px;
+  padding: 0 20px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 15px;
+}
+
+main.email-confirm ol {
+  padding: 0;
+}
+
+main.email-confirm ol li {
+  margin: 14px 0 !important;
+  padding: 12px 14px;
+  border: 1px solid var(--ln-ext-card-border);
+  border-radius: 10px;
+  background: var(--ln-ext-lift-3);
+  font-size: 13.5px;
+  line-height: 1.5;
+}

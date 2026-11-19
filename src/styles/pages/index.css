@@ -22,6 +22,7 @@
 @import './features.css';
 @import './pinned-titles.css';
 @import './tool-forms.css';
+@import './auth/index.css';
 @import './not-found.css';
 @import './videos/index.css';
 @import './streamers.css';

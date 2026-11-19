@@ -33,7 +33,7 @@ export const TAB_BARS: readonly TabBarKind[] = [
   kind('.ln-ext-panel-tabs__bar', '.ln-ext-panel-tabs__tab', '.active', 'pill'),
   kind('.tabs-horiz:not(.lobby__app > .tabs-horiz)', '*', '.active', 'line'),
   kind('.analyse__underboard__menu', 'button', '.active', 'line'),
-  kind('.auth .auth-tabs', 'a', '.active', 'line'),
+  kind('.auth .auth-tabs', 'a', '.active', 'pill'),
   kind('.relay-tour__tabs', 'button', '.active', 'pill'),
   kind(
     'main.opening .opening__panels > .tab-list',

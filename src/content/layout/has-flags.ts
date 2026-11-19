@@ -81,6 +81,8 @@ const FLAGS: Readonly<Record<string, string>> = {
   'team-updates': 'main.team-update',
   // The leagues' page is one of Lichess's plain pages: told by its first section.
   'leagues-page': 'main.page #lichess-streamer-battles',
+  // Auth pages (login, signup, password reset, magic link, OAuth authorize, email confirm).
+  auth: 'main.auth, main.oauth, main.email-confirm, main.signup-confirm',
 };
 
 /** The words for what `root` holds, space-separated. */

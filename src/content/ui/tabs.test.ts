@@ -112,6 +112,7 @@ describe('sliding tabs', () => {
     layOut(signUp, () => ({ top: 0, left: 100, width: 100, height: 40 }));
     const bars = createTabBars();
     bars.sync();
+    expect(bar.dataset.lnExtTabs).toBe('pill');
     expect(bar.style.getPropertyValue('--ln-ext-tab-x')).toBe('0px');
     const click = new MouseEvent('click', { bubbles: true, cancelable: true });
     Object.defineProperty(click, 'target', { value: signUp });

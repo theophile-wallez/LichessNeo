@@ -1,0 +1,206 @@
+/* ---- Auth shell: stage, card, brand tile & segmented tabs --- */
+
+/* Minimal centered card with a logo tile above and segmented sliding pill tabs. Lichess's
+ * _auth.scss draws a 40em box with oversized controls, and forms/card.css used to wrap the
+ * inner form3 in a second card; this folder owns the single card for every auth page. */
+
+/* Center the auth card vertically in the viewport without pushing it into scroll. */
+html[data-ln-ext-has~='auth'] #main-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
+  min-height: 0 !important;
+  padding: 28px 16px 40px;
+  background:
+    radial-gradient(
+      620px 360px at 50% 0%,
+      color-mix(in srgb, var(--ln-ext-accent) 11%, transparent),
+      transparent 70%
+    ),
+    var(--ln-ext-bg-page);
+}
+
+/* On narrow screens #main-wrap doesn't carry a fixed viewport height: fill below #top. */
+@media (max-width: 1019.98px) {
+  html[data-ln-ext-has~='auth'] #main-wrap {
+    min-height: calc(100dvh - var(---site-header-height, 60px)) !important;
+    padding: 24px 12px 36px;
+  }
+}
+
+/* ---- Card shell --- */
+
+main.auth.box,
+main.oauth.box,
+main.email-confirm.box,
+main.signup-confirm.box {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 440px !important;
+  margin: 0 auto !important;
+  padding: 24px 26px 26px !important;
+  overflow: visible !important;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 16px !important;
+  background: var(--ln-ext-bg-panel) !important;
+  box-shadow: var(--ln-ext-float-shadow, 0 18px 44px var(--ln-ext-shade-40)) !important;
+}
+
+/* Email-confirm carries a longer troubleshooting list, so give it more width. */
+main.email-confirm.box {
+  max-width: 560px !important;
+}
+
+/* ---- Brand tile above the form --- */
+
+/* Lichess hides .auth__brand on desktop (min-width: $large) because its header shows the logo.
+ * Bring it back everywhere as the minimalist logo tile at the top of the card. */
+main.auth .auth__brand {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px !important;
+}
+
+main.auth .auth__brand__logo {
+  position: relative;
+  display: block;
+  width: 48px !important;
+  height: 48px !important;
+  border: 1px solid color-mix(in srgb, var(--ln-ext-accent) 36%, transparent);
+  border-radius: 14px;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--ln-ext-accent) 22%, transparent),
+    color-mix(in srgb, var(--ln-ext-accent) 7%, transparent)
+  ) !important;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--ln-ext-accent) 16%, transparent);
+}
+
+main.auth .auth__brand__logo::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  background: var(--ln-ext-text-strong);
+  -webkit-mask: var(--ln-ext-logo) center / contain no-repeat;
+  mask: var(--ln-ext-logo) center / contain no-repeat;
+}
+
+main.auth .auth__brand__name {
+  color: var(--ln-ext-text-strong);
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ---- Headings on sister pages (password reset, magic link, email confirm) --- */
+
+main:is(.auth, .email-confirm, .signup-confirm) > .box__top {
+  display: block;
+  margin: 0 0 18px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+  text-align: center;
+}
+
+main:is(.auth, .email-confirm, .signup-confirm) > .box__top h1,
+main.signup-confirm > h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0 !important;
+  color: var(--ln-ext-text-strong);
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.25;
+}
+
+main:is(.auth, .email-confirm) > p {
+  margin: 0 0 16px;
+  color: var(--ln-ext-text-dim);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ---- Segmented pill tabs (Sign in / Sign up) --- */
+
+main.auth .auth-tabs {
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised);
+  --ln-ext-tab-shadow: 0 1px 3px var(--ln-ext-shade-40), inset 0 1px 0 var(--ln-ext-lift-6);
+  --ln-ext-tab-radius: 8px;
+
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin: 0 0 20px !important;
+  padding: 4px;
+  border: 1px solid var(--ln-ext-card-border) !important;
+  border-radius: 11px;
+  background: var(--ln-ext-bg-panel-dark);
+}
+
+main.auth .auth-tabs a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px !important;
+  border: none !important;
+  border-radius: 8px;
+  color: var(--ln-ext-text-dim) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.2;
+  transition: color 0.15s !important;
+}
+
+main.auth .auth-tabs a:hover {
+  border-bottom-color: transparent !important;
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.auth .auth-tabs a.active {
+  background: var(--ln-ext-bg-raised);
+  box-shadow:
+    0 1px 3px var(--ln-ext-shade-40),
+    inset 0 1px 0 var(--ln-ext-lift-6);
+  color: var(--ln-ext-text-strong) !important;
+}
+
+main.auth .auth-tabs[data-ln-ext-tabs] a.active {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ---- Narrow screens (phones) --- */
+
+@media (max-width: 559.98px) {
+  main.auth.box,
+  main.oauth.box,
+  main.email-confirm.box,
+  main.signup-confirm.box {
+    padding: 20px 18px 22px !important;
+    border-radius: 14px !important;
+  }
+
+  main.auth .auth__brand {
+    margin-bottom: 14px !important;
+  }
+
+  main.auth .auth__brand__logo {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px;
+  }
+
+  main.auth .auth-tabs {
+    margin-bottom: 16px !important;
+  }
+}

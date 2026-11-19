@@ -6,7 +6,8 @@
  * already (pages/tool-forms.css). `:is()` matches the box against the whole page, so a form
  * right in a `main.box` counts as well as one in a box inside it. */
 
-main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3:not(.edit-post-form)) {
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
+  :is(.box > form.form3:not(.edit-post-form)) {
   --ln-ext-form-pad: 24px;
   box-sizing: border-box;
   padding: var(--ln-ext-form-pad) !important;
@@ -15,11 +16,15 @@ main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3:not(.e
   background: var(--ln-ext-bg-panel);
 }
 
-main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) .form-group {
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
+  :is(.box > form.form3)
+  .form-group {
   margin-bottom: 22px;
 }
 
-main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) .form-label {
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
+  :is(.box > form.form3)
+  .form-label {
   margin-bottom: 8px;
   color: var(--ln-ext-text-strong);
   font-size: 14px;
@@ -27,14 +32,14 @@ main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) .form
 }
 
 /* A switch's label stands beside it, in line. */
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   .form-check__container
   .form-label {
   margin-bottom: 0;
 }
 
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   :is(input.form-control, select.form-control, .select-search__toggle.form-control) {
   box-sizing: border-box;
@@ -43,7 +48,7 @@ main:not(.account, .simul-form, .importer, .search)
   font-size: 15px;
 }
 
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   textarea.form-control:not(.markdown-content-textarea) {
   padding: 12px 14px !important;
@@ -51,7 +56,9 @@ main:not(.account, .simul-form, .importer, .search)
   line-height: 1.5;
 }
 
-main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) small.form-help {
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
+  :is(.box > form.form3)
+  small.form-help {
   display: block;
   margin-top: 6px;
   color: var(--ln-ext-text-dim);
@@ -59,17 +66,20 @@ main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) small
   line-height: 1.45;
 }
 
-main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) .form-help a {
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
+  :is(.box > form.form3)
+  .form-help
+  a {
   color: var(--ln-ext-accent-hover) !important;
   font-weight: 700;
 }
 
 /* The links ahead of the fields ("How to use Lichess Broadcasts"): a pill, not a bare link. */
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   > .form-group:first-child
   > a.text[data-icon],
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   > .form-group:first-child
   > p
@@ -86,11 +96,11 @@ main:not(.account, .simul-form, .importer, .search)
   transition: background-color 0.15s !important;
 }
 
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   > .form-group:first-child
   > a.text[data-icon]:hover,
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   > .form-group:first-child
   > p
@@ -98,7 +108,7 @@ main:not(.account, .simul-form, .importer, .search)
   background: color-mix(in srgb, var(--ln-ext-accent) 22%, transparent);
 }
 
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   > .form-group:first-child
   > p {
@@ -106,7 +116,7 @@ main:not(.account, .simul-form, .importer, .search)
 }
 
 /* The actions' hairline runs edge to edge, as the sections' do (sections.css). */
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3:not(.edit-post-form))
   > .form-actions {
   margin: 0 calc(-1 * var(--ln-ext-form-pad)) !important;
@@ -116,7 +126,7 @@ main:not(.account, .simul-form, .importer, .search)
 /* ---- The chess captcha --- */
 
 /* Its board and its words on a tile of their own. */
-main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) .captcha {
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth) :is(.box > form.form3) .captcha {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -130,12 +140,15 @@ main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) .capt
   line-height: 1.5;
 }
 
-main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3) .captcha .mini-board {
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
+  :is(.box > form.form3)
+  .captcha
+  .mini-board {
   overflow: hidden;
   border-radius: 8px;
 }
 
-main:not(.account, .simul-form, .importer, .search)
+main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
   :is(.box > form.form3)
   .captcha
   .captcha-explanation
@@ -147,7 +160,8 @@ main:not(.account, .simul-form, .importer, .search)
 /* ---- Below 640px --- */
 
 @media (max-width: 639.98px) {
-  main:not(.account, .simul-form, .importer, .search) :is(.box > form.form3:not(.edit-post-form)) {
+  main:not(.account, .simul-form, .importer, .search, .auth, .oauth)
+    :is(.box > form.form3:not(.edit-post-form)) {
     --ln-ext-form-pad: 16px;
     border-radius: 12px;
   }

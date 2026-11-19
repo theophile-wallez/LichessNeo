@@ -64,6 +64,10 @@ describe('presentFlags, for flags the original lacked', () => {
       'menu-form',
       '<main class="page-menu"><div class="page-menu__content box box-pad"><form></form></div></main>',
     ],
+    ['auth', '<main class="auth auth-login box box-pad"></main>'],
+    ['auth', '<main class="oauth box box-pad"></main>'],
+    ['auth', '<main class="email-confirm box box-pad"></main>'],
+    ['auth', '<main class="signup-confirm box box-pad"></main>'],
   ])('reads %s', (flag, page) => {
     document.body.innerHTML = page;
     expect(presentFlags(document).split(' ')).toContain(flag);
