@@ -51,7 +51,6 @@
   text-align: start;
   cursor: pointer;
   transition:
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
     background-color 0.15s,
     box-shadow 0.15s !important;
 }
@@ -60,18 +59,10 @@
   display: none;
 }
 
+/* Its fill lifts; it stays put. */
 @media (hover: hover) {
   .ln-ext-setup__tile:hover {
     background: var(--ln-ext-lift-6);
-    transform: translateY(-2px);
-  }
-
-  /* The hover bridge: the strip the lift leaves, and the border (styles/hover-bridges.test.ts). */
-
-  .ln-ext-setup__tile:hover::after {
-    content: '';
-    position: absolute;
-    inset: 100% 0 -3px;
   }
 }
 

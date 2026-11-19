@@ -30,7 +30,7 @@ interface Parts {
 const built = new WeakMap<HTMLElement, Parts>();
 
 function pick(level: number): void {
-  const radio = document.getElementById(`sf_level_${level}`);
+  const radio = document.getElementById(`sf-level-${level}`);
   if (radio instanceof HTMLInputElement && !radio.checked) radio.click();
 }
 
@@ -95,7 +95,11 @@ function show(parts: Parts, level: number): void {
 
 /** Keeps the slider in the computer's setup in step with its level; null elsewhere. */
 export function syncLevelSlider(): LevelSlider | null {
-  const checked = queryOne(document, '.game-setup input[name="level"]:checked', HTMLInputElement);
+  const checked = queryOne(
+    document,
+    '.game-setup input[name="sf-level"]:checked',
+    HTMLInputElement,
+  );
   const group = checked?.closest('group');
   const pane = group?.parentElement;
   if (!checked || !(group instanceof HTMLElement) || !pane) return null;

@@ -38,3 +38,33 @@ describe('a study chapter’s dialog', () => {
       expect(getComputedStyle(button).opacity).toBe('1');
   });
 });
+
+// Lichess's own rules (ui/lobby/css/_setup.scss): the title and the footer on bands of
+// their own.
+const SETUP_RULES =
+  '.game-setup h2 { padding: 1.5rem 0; background: rgb(38, 36, 33); }' +
+  '.game-setup .footer { padding: 1.5rem; background: rgb(38, 36, 33); }';
+
+const SETUP =
+  '<dialog open><div class="scrollable"><div class="game-setup"><h2>Play against computer</h2>' +
+  '<div class="setup-content"></div><div class="footer"></div></div></div></dialog>';
+
+describe('the game setup’s dialog', () => {
+  it('sets its title and its footer on the dialog itself', () => {
+    const style = document.createElement('style');
+    style.textContent =
+      SETUP_RULES +
+      ['dialogs.css', 'setup-options.css']
+        .map(file => readFileSync(join(import.meta.dirname, file), 'utf8'))
+        .join('');
+    document.head.append(style);
+    document.body.innerHTML = SETUP;
+    for (const selector of ['h2', '.footer']) {
+      const part = queryOne(document, `.game-setup ${selector}`, HTMLElement);
+      if (!part) throw new Error(`no ${selector}`);
+      expect(getComputedStyle(part).backgroundColor).not.toBe('rgb(38, 36, 33)');
+    }
+    const title = queryOne(document, '.game-setup h2', HTMLElement);
+    expect(title && getComputedStyle(title).paddingTop).toBe('0px');
+  });
+});

@@ -48,7 +48,11 @@ function findParts(content: HTMLElement): Map<Section, HTMLElement> {
   add('time', queryOne(content, ':scope > .time-control-tabs', HTMLElement));
   add(
     'mode',
-    closestTo(queryOne(content, '#sf_mode_casual', HTMLInputElement), '.config-group', HTMLElement),
+    closestTo(
+      queryOne(content, 'input[name="game-mode"]', HTMLInputElement),
+      '.config-group',
+      HTMLElement,
+    ),
   );
   add(
     'side',
@@ -57,7 +61,7 @@ function findParts(content: HTMLElement): Map<Section, HTMLElement> {
   add(
     'level',
     closestTo(
-      queryOne(content, 'input[name="level"]', HTMLInputElement),
+      queryOne(content, 'input[name="sf-level"]', HTMLInputElement),
       '.config-group',
       HTMLElement,
     ),
@@ -134,8 +138,6 @@ function build(content: HTMLElement): Picks {
     const part = closestTo(event.target, '[data-ln-ext-part]', HTMLElement)?.dataset.lnExtPart;
     if ((part !== 'time' && part !== 'side') || root.dataset.lnExtOpen === part) return;
     setData(root, 'lnExtOpen', part);
-    // The panel shown as the setup opens comes in still; one switched to slides in.
-    setData(root, 'lnExtSwitched', part);
   });
   content.prepend(root);
   const picks = { root, tiles };

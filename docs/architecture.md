@@ -122,8 +122,8 @@ so the logic can be unit-tested without a page.
 - `computer`: the computer's robot and the level slider of the computer's
   game setup.
 - `game-setup`: the game setup dialog's tiles for the variant, the time
-  control and the side, the panels they switch, its height easing as they
-  do, and `followSetup`, which syncs a feature as the setup opens and
+  control and the side, the panels they switch, the panel easing to
+  its new content as it changes, and `followSetup`, which syncs a feature as the setup opens and
   redraws.
 - `profile`: a profile's medals, from `/api/user`, its last five games over
   its activity (`recent-games`; "See all" opens the games tab in place), its

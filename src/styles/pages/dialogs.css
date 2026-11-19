@@ -102,6 +102,9 @@ dialog .study-modal .form-actions-secondary .button:not(.disabled):hover {
 
 .game-setup h2 {
   margin: 24px 56px 20px !important;
+  /* Lichess gives the title and the footer a band of their own: ours sit on the dialog. */
+  padding: 0 !important;
+  background: none !important;
   font-size: 22px !important;
 }
 
@@ -116,13 +119,7 @@ dialog .study-modal .form-actions-secondary .button:not(.disabled):hover {
   gap: 10px !important;
 }
 
-.game-setup .radio-pane {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.game-setup :is(.config-group, .radio-pane) > .label {
+.game-setup .config-group > .label {
   margin: 0 !important;
   color: var(--ln-ext-text-dim) !important;
   font-size: 13px;
@@ -218,6 +215,19 @@ dialog .study-modal .form-actions-secondary .button:not(.disabled):hover {
   line-height: 1;
 }
 
+/* Lichess keeps a slider's label on one line, cut short on a phone: let it wrap there,
+ * and keep both sliders on one line under their labels. */
+@media (max-width: 459.29px) {
+  .game-setup .time-control-tabs .time-panel .slider-container {
+    justify-content: space-between;
+  }
+
+  .game-setup .time-control-tabs .time-panel .slider-container .label-row label {
+    white-space: normal !important;
+    line-height: 1.2;
+  }
+}
+
 .game-setup .time-control-tabs .time-panel .slider-separator {
   align-self: start;
   color: var(--ln-ext-text-dim);
@@ -276,6 +286,12 @@ dialog .study-modal .form-actions-secondary .button:not(.disabled):hover {
   background: var(--ln-ext-setup-tint) !important;
   box-shadow: var(--ln-ext-setup-chosen);
   color: var(--ln-ext-text-strong) !important;
+}
+
+/* The game setup's height changes with its panel: a scrollbar coming and going would
+ * shift it sideways. */
+dialog > .scrollable:has(> .game-setup) {
+  scrollbar-gutter: stable;
 }
 
 /* ---- Phones --- */

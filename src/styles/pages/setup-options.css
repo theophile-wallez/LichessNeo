@@ -52,20 +52,20 @@
   group.radio
   > div:has(
     > :is(
-      #sf_level_1,
-      #sf_level_2,
-      #sf_level_3,
-      #sf_level_4,
-      #sf_level_5,
-      #sf_level_6,
-      #sf_level_7,
-      #sf_level_8
+      #sf-level-1,
+      #sf-level-2,
+      #sf-level-3,
+      #sf-level-4,
+      #sf-level-5,
+      #sf-level-6,
+      #sf-level-7,
+      #sf-level-8
     )
   ) {
   flex-basis: 0 !important;
 }
 
-.game-setup group.radio label[for^='sf_level_'] {
+.game-setup group.radio label[for^='sf-level-'] {
   flex-direction: column;
   gap: 2px;
   min-height: 46px;
@@ -74,7 +74,7 @@
   line-height: 1;
 }
 
-.game-setup group.radio label[for^='sf_level_']::after {
+.game-setup group.radio label[for^='sf-level-']::after {
   content: var(--ln-ext-level-elo, none);
   color: var(--ln-ext-text-dim);
   font-size: 11px;
@@ -83,39 +83,39 @@
   transition: color 0.15s !important;
 }
 
-.game-setup group.radio input:checked + label[for^='sf_level_']::after {
+.game-setup group.radio input:checked + label[for^='sf-level-']::after {
   color: var(--ln-ext-accent-hover);
 }
 
-.game-setup label[for='sf_level_1'] {
+.game-setup label[for='sf-level-1'] {
   --ln-ext-level-elo: var(--ln-ext-ai-level-1);
 }
 
-.game-setup label[for='sf_level_2'] {
+.game-setup label[for='sf-level-2'] {
   --ln-ext-level-elo: var(--ln-ext-ai-level-2);
 }
 
-.game-setup label[for='sf_level_3'] {
+.game-setup label[for='sf-level-3'] {
   --ln-ext-level-elo: var(--ln-ext-ai-level-3);
 }
 
-.game-setup label[for='sf_level_4'] {
+.game-setup label[for='sf-level-4'] {
   --ln-ext-level-elo: var(--ln-ext-ai-level-4);
 }
 
-.game-setup label[for='sf_level_5'] {
+.game-setup label[for='sf-level-5'] {
   --ln-ext-level-elo: var(--ln-ext-ai-level-5);
 }
 
-.game-setup label[for='sf_level_6'] {
+.game-setup label[for='sf-level-6'] {
   --ln-ext-level-elo: var(--ln-ext-ai-level-6);
 }
 
-.game-setup label[for='sf_level_7'] {
+.game-setup label[for='sf-level-7'] {
   --ln-ext-level-elo: var(--ln-ext-ai-level-7);
 }
 
-.game-setup label[for='sf_level_8'] {
+.game-setup label[for='sf-level-8'] {
   --ln-ext-level-elo: var(--ln-ext-ai-level-8);
 }
 
@@ -126,14 +126,14 @@
     group.radio
     > div:has(
       > :is(
-        #sf_level_1,
-        #sf_level_2,
-        #sf_level_3,
-        #sf_level_4,
-        #sf_level_5,
-        #sf_level_6,
-        #sf_level_7,
-        #sf_level_8
+        #sf-level-1,
+        #sf-level-2,
+        #sf-level-3,
+        #sf-level-4,
+        #sf-level-5,
+        #sf-level-6,
+        #sf-level-7,
+        #sf-level-8
       )
     ) {
     flex: 1 0 calc(25% - 3px) !important;
@@ -192,7 +192,7 @@
   box-shadow: none !important;
 }
 
-.game-setup .color-cards label.card-radio {
+.game-setup .color-cards label {
   border: none !important;
   border-radius: 10px !important;
   background: var(--ln-ext-bg-raised) !important;
@@ -202,24 +202,25 @@
 }
 
 @media (hover: hover) {
-  .game-setup .color-cards label.card-radio:hover {
+  .game-setup .color-cards label:hover {
     background: var(--ln-ext-bg-raised-hover) !important;
   }
 }
 
-.game-setup .color-cards input:checked + label.card-radio {
+.game-setup .color-cards input:checked + label {
   background: var(--ln-ext-setup-tint) !important;
   box-shadow: var(--ln-ext-setup-chosen) !important;
   text-shadow: none !important;
 }
 
-.game-setup .color-cards .card-radio .text {
+.game-setup .color-cards label .text {
   font-weight: 700 !important;
 }
 
 /* The footer button is the dialog's primary action. */
 .game-setup .footer {
   padding: 24px !important;
+  background: none !important;
 }
 
 .game-setup .footer .lobby__start__button.button {

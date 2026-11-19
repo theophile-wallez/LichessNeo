@@ -38,22 +38,22 @@ const TIME = {
 
 const MODE =
   '<div class="config-group"><div class="label">Game mode</div><group class="radio">' +
-  '<div><input id="sf_mode_casual" type="radio" value="casual" checked><label for="sf_mode_casual">Casual</label></div>' +
-  '<div><input id="sf_mode_rated" type="radio" value="rated" disabled><label for="sf_mode_rated">Rated</label></div>' +
+  '<div><input id="game-mode-casual" name="game-mode" type="radio" value="casual" checked><label for="game-mode-casual">Casual</label></div>' +
+  '<div><input id="game-mode-rated" name="game-mode" type="radio" value="rated" disabled><label class="disabled" for="game-mode-rated">Rated</label></div>' +
   '</group></div>';
 
 const LEVEL =
-  '<div class="config-group"><div class="radio-pane"><div class="label">Strength</div><group class="radio">' +
-  '<div><input id="sf_level_1" name="level" type="radio" value="1" checked><label for="sf_level_1">1</label></div>' +
-  '</group></div></div>';
+  '<div class="config-group"><div class="label">Strength</div><group class="radio">' +
+  '<div><input id="sf-level-1" name="sf-level" type="radio" value="1" checked><label for="sf-level-1">1</label></div>' +
+  '</group></div>';
 
 const side = (checked: string): string =>
   '<div class="config-group"><div class="label">Side</div><group class="radio color-picker color-cards">' +
   ['white', 'random', 'black']
     .map(
       color =>
-        `<div><input id="color-picker-${color}" name="color" type="radio" value="${color}"` +
-        `${color === checked ? ' checked' : ''}><label class="card-radio" for="color-picker-${color}">` +
+        `<div><input id="color-${color}" name="color" type="radio" value="${color}"` +
+        `${color === checked ? ' checked' : ''}><label for="color-${color}">` +
         `<div class="color-picker__button ${color}"><icon></icon></div>` +
         `<span class="text">${color === 'random' ? 'Random side' : color}</span></label></div>`,
     )
@@ -197,20 +197,17 @@ describe('the panel under the tiles', () => {
     expect(tile('time').ariaExpanded).toBe('true');
     expect(tile('side').dataset.lnExtExpanded).toBeUndefined();
     expect(tile('side').ariaExpanded).toBe('false');
-    expect(root.dataset.lnExtSwitched).toBeUndefined();
   });
 
-  it('switches to the side, and back, each sliding in', () => {
+  it('switches to the side, and back', () => {
     const root = open(SETUPS.friend());
     tile('side').click();
     syncPicks();
     expect(root.dataset.lnExtOpen).toBe('side');
-    expect(root.dataset.lnExtSwitched).toBe('side');
     expect(tile('side').ariaExpanded).toBe('true');
     expect(tile('time').ariaExpanded).toBe('false');
     tile('time').click();
     expect(root.dataset.lnExtOpen).toBe('time');
-    expect(root.dataset.lnExtSwitched).toBe('time');
   });
 
   it('can’t be closed: its own tile does nothing', () => {
@@ -218,15 +215,12 @@ describe('the panel under the tiles', () => {
     tile('time').click();
     syncPicks();
     expect(root.dataset.lnExtOpen).toBe('time');
-    expect(root.dataset.lnExtSwitched).toBeUndefined();
   });
 
   it('stays on the side as a side is picked', () => {
     const root = open(SETUPS.friend());
     tile('side').click();
-    redraw(
-      SETUPS.friend().replace(' checked><label class="card-radio" for="color-picker-black"', '>'),
-    );
+    redraw(SETUPS.friend().replace(' checked><label for="color-black"', '>'));
     expect(root.dataset.lnExtOpen).toBe('side');
   });
 
