@@ -3,6 +3,7 @@ import type { Mark } from '#shared/board/marks.ts';
 import { findings, ideasOf, type Theme, themesOf } from '#page/review/coach/fact.ts';
 import { freshTold, recalled } from '#page/review/coach/told.ts';
 import { explanation } from '#page/review/coach/explanation.ts';
+import { shownTheory } from '#page/review/coach/theory.ts';
 import { passedFen, type Threat } from '#page/review/coach/threat.ts';
 import type { Threats } from '#page/review/coach/threat-facts.ts';
 import type { CommentPart } from '#page/review/comment/markup.ts';
@@ -15,12 +16,15 @@ import { divide, type Division } from '#page/review/rating/phases.ts';
 import type { Review } from '#page/review/session.ts';
 import { turningMove } from '#page/review/view/brief.ts';
 import { GRAPH_DOTS } from '#page/review/classes/classes.ts';
+import { takeTheory } from '#page/review/theory/book.ts';
 import recorded from './opera.json' with { type: 'json' };
+import theorySnapshot from './theory.json' with { type: 'json' };
 
 // The live review's game, judged and commented on by the Game Review's own
 // code (src/page/review) from the engine's records that
 // scripts/site/record-demo.ts kept in opera.json: the same verdicts and the
-// same words the extension would show on lichess.org.
+// same words the extension would show on lichess.org. The opening's theory is
+// the studies' own, kept in theory.json by scripts/site/theory-snapshot.ts.
 
 const DemoSchema = z.object({
   opening: z.string(),
@@ -38,6 +42,9 @@ const DemoSchema = z.object({
 });
 
 const demo = DemoSchema.parse(recorded);
+
+/** Each language's study's positions along the game, by the study's id. */
+const theories = z.record(z.string(), z.string()).parse(theorySnapshot);
 
 export const GAME_ID = 'opera1858';
 
@@ -122,6 +129,9 @@ function recentIdeas(move: MoveVerdict, language: ReviewLanguage): ReadonlySet<s
 }
 
 export function commentOn(move: MoveVerdict, coach: number, language: ReviewLanguage): DemoComment {
+  const { study } = language.theory;
+  const theory = study ? theories[study] : undefined;
+  if (study && theory !== undefined) takeTheory(study, theory);
   const threats = threatsAround(move);
   const recent = recentIdeas(move, language);
   const found = findings(move, language, threats, freshTold(recent));
@@ -135,6 +145,9 @@ export function commentOn(move: MoveVerdict, coach: number, language: ReviewLang
       recent,
     },
   );
+  // The theory the coach explains draws its own shapes, and says nothing of the tactics found.
+  const explained = shownTheory(move);
+  if (explained) return { parts, themes: [], drawing: explained.drawing?.marks ?? [] };
   return {
     parts,
     themes: themesOf(found),

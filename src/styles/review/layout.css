@@ -59,11 +59,24 @@
       'gauge board rtop' !important;
   }
 
+  /* A move whose opening theory the coach explains (view/board.ts): the card grows by what
+     the move list can spare, nothing on a short window. */
+  html[data-ln-ext-theory='on'] main.analyse {
+    --ln-ext-review-theory: clamp(0px, calc((var(--ln-ext-stage) - 640px) / 2), 120px);
+  }
+
+  html[data-ln-ext-theory='on'] #ln-ext-review .ln-ext-coach {
+    height: calc(136px + var(--ln-ext-review-theory));
+  }
+
   /* Move by move: the graph and the key moments over the coach (all in the panel), the
      moves, then our controls (with play) instead of Lichess's. */
   html.ln-ext-review-moves main.analyse {
     --ln-ext-review-moments: 58px;
-    --ln-ext-review-top: calc(214px + var(--ln-ext-review-graph) + var(--ln-ext-review-moments));
+    --ln-ext-review-top: calc(
+      214px + var(--ln-ext-review-graph) + var(--ln-ext-review-moments) +
+        var(--ln-ext-review-theory, 0px)
+    );
     --ln-ext-review-ctrl: 64px;
     grid-template-rows:
       var(--ln-ext-review-modes)
@@ -86,7 +99,7 @@
   /* The free board: the coach on top of Lichess's engine, moves and controls. */
   /* The tab bar goes under the coach's card, over the part it switches. */
   html.ln-ext-review-live main.analyse {
-    --ln-ext-review-top: 156px;
+    --ln-ext-review-top: calc(156px + var(--ln-ext-review-theory, 0px));
     grid-template-rows:
       var(--ln-ext-review-top)
       var(--ln-ext-tabs-h)

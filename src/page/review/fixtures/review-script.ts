@@ -110,6 +110,8 @@ function stubNetwork(game: FixtureGame, scenario: Scenario): void {
     'fetch',
     vi.fn<(url: string) => Promise<Response>>(async url => {
       if (url.startsWith('/game/export/')) return Response.json(exportFor(game, scenario));
+      // The opening theory's study, with no chapter: no move of the game has theory.
+      if (url.startsWith('/api/study/')) return new Response('');
       // The cloud knows the first two positions only.
       const index = game.nodes.findIndex(node => url.includes(encodeURIComponent(node.fen)));
       if (index < 0 || index > 1) return new Response('', { status: 404 });

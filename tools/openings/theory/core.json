@@ -1,0 +1,79 @@
+[
+  {
+    "line": "e4",
+    "en": "The King's Pawn takes two central squares at once, [d5] and [f5], and opens the way for the queen and the light-squared bishop. It is the most played first move at every level: the game tends to open up quickly, with fast development and early tactics. Black's main answers all fight for the center in their own way: {e5} meets the pawn head-on, {c5} (the Sicilian) attacks [d4] from the side, while {e6} and {c6} prepare {d5} to challenge [e4] directly.",
+    "fr": "Le pion du roi prend deux cases centrales d'un coup, [d5] et [f5], et ouvre la voie à la dame et au fou de cases blanches. C'est le premier coup le plus joué à tous les niveaux : la partie s'ouvre vite, avec un développement rapide et de la tactique tôt. Les grandes réponses des Noirs luttent toutes pour le centre à leur façon : {e5} répond de front, {c5} (la Sicilienne) attaque [d4] par le côté, tandis que {e6} et {c6} préparent {d5} pour contester [e4] directement.",
+    "next": ["c5", "e5", "e6"],
+    "shapes": ["Ge2e4", "Gd5", "Gf5"]
+  },
+  {
+    "line": "e4 e5",
+    "en": "The Open Game: Black copies White, claims an equal share of the center and frees the dark-squared bishop and the queen. The pawn on [e5] stops White from simply playing {d4} for a big center without a trade. The usual way on is {Nf3}, which develops while attacking [e5] and leads to the classical openings (Italian, Ruy Lopez, Scotch). {Bc4} aims at [f7] straight away, {Nc3} keeps things quiet, and {f4}, the King's Gambit, gives a pawn to tear Black's center down.",
+    "fr": "La partie ouverte : les Noirs copient les Blancs, réclament leur part du centre et libèrent le fou de cases noires et la dame. Le pion [e5] empêche les Blancs de jouer simplement {d4} pour un grand centre sans échange. La suite habituelle est {Nf3}, qui développe en attaquant [e5] et mène aux ouvertures classiques (Italienne, Espagnole, Écossaise). {Bc4} vise [f7] tout de suite, {Nc3} garde un jeu calme, et {f4}, le Gambit du Roi, donne un pion pour démolir le centre noir.",
+    "next": ["Nf3", "Bc4", "Nc3"],
+    "shapes": ["Ge7e5", "Gd4", "Gg1f3"]
+  },
+  {
+    "line": "e4 e5 Nf3",
+    "en": "The knight comes out to its best square, attacks the pawn on [e5] and gets White one step closer to castling. Black has to look after that pawn. {Nc6} is the natural way, developing a piece at the same time. {Nf6}, the Petrov, counterattacks [e4] instead, and {d6}, the Philidor, defends with a pawn: solid, but it shuts in the bishop on [f8]. Defending with {f6} is a known mistake: it takes the knight's best square and weakens the diagonal to the king, and {Nxe5} is already strong.",
+    "fr": "Le cavalier sort sur sa meilleure case, attaque le pion [e5] et rapproche les Blancs du roque. Les Noirs doivent s'occuper de ce pion. {Nc6} est la façon naturelle, en développant une pièce au passage. {Nf6}, la Petrov, contre-attaque plutôt [e4], et {d6}, la Philidor, défend avec un pion : solide, mais le fou de [f8] reste enfermé. Défendre par {f6} est une erreur connue : le coup prend la meilleure case du cavalier et affaiblit la diagonale du roi, et {Nxe5} est déjà fort.",
+    "next": ["Nc6", "Nf6", "d6"],
+    "shapes": ["Gf3e5", "Gb8c6", "Gg8f6"]
+  },
+  {
+    "line": "e4 e5 Nf3 Nc6",
+    "en": "The knight on [c6] defends [e5] and also watches [d4], so both sides have a knight out and the fight is about what White does next. {Bb5}, the Ruy Lopez, puts pressure on the knight that guards [e5], the deepest and most respected choice. {Bc4}, the Italian, aims the bishop at [f7], the square only the king defends. {d4}, the Scotch, opens the center at once, and {Nc3} leads to the calm Four Knights.",
+    "fr": "Le cavalier en [c6] défend [e5] et surveille aussi [d4] : chaque camp a sorti un cavalier, et tout dépend de ce que les Blancs jouent ensuite. {Bb5}, l'Espagnole, met la pression sur le cavalier qui garde [e5] : c'est le choix le plus profond et le plus respecté. {Bc4}, l'Italienne, pointe le fou sur [f7], la case que seul le roi défend. {d4}, l'Écossaise, ouvre le centre tout de suite, et {Nc3} mène aux Quatre Cavaliers, plus calmes.",
+    "next": ["Bb5", "Bc4", "d4"],
+    "shapes": ["Gc6e5", "Gf1b5", "Gf1c4", "Gd2d4"]
+  },
+  {
+    "line": "d4",
+    "en": "The Queen's Pawn takes the center with a pawn the queen already protects, so it is harder to attack than one on [e4]. It controls [e5] and [c5] and opens the way for the dark-squared bishop. Games after it tend to be more strategic: White often follows with {c4}, the Queen's Gambit, or with a set-up such as the London ({Bf4}, {e3}, {c3}). Black answers with {Nf6}, the flexible Indian move, with {d5}, the classical reply, or with {e6}, which keeps several defenses open.",
+    "fr": "Le pion de la dame prend le centre avec un pion que la dame protège déjà : il est plus dur à attaquer qu'un pion en [e4]. Il contrôle [e5] et [c5] et ouvre la voie au fou de cases noires. Les parties qui suivent sont souvent plus stratégiques : les Blancs continuent souvent par {c4}, le Gambit Dame, ou par un système comme le London ({Bf4}, {e3}, {c3}). Les Noirs répondent par {Nf6}, le coup indien et souple, par {d5}, la réponse classique, ou par {e6}, qui garde plusieurs défenses ouvertes.",
+    "next": ["Nf6", "d5", "e6"],
+    "shapes": ["Gd2d4", "Ge5", "Gc5", "Gc2c4"]
+  },
+  {
+    "line": "d4 d5",
+    "en": "Black mirrors White and plants a pawn in the center, stopping {e4} for now. The position is closed in the middle, so both sides develop calmly before choosing a plan. {c4}, the Queen's Gambit, is the main try: it attacks the base of the pawn on [d5] from the side. {Nf3} keeps every option open, and {Bf4} heads for the London System, a set-up White can play against almost anything.",
+    "fr": "Les Noirs imitent les Blancs et installent un pion au centre, ce qui empêche {e4} pour l'instant. Le centre est fermé : les deux camps se développent tranquillement avant de choisir un plan. {c4}, le Gambit Dame, est l'essai principal : il attaque par le côté le soutien du pion [d5]. {Nf3} garde toutes les options, et {Bf4} part vers le Système de Londres, un schéma que les Blancs peuvent jouer contre presque tout.",
+    "next": ["c4", "Nf3", "Bf4"],
+    "shapes": ["Gd7d5", "Ge4", "Gc2c4"]
+  },
+  {
+    "line": "d4 Nf6",
+    "en": "The Indian Defense: Black controls [e4] with a piece instead of a pawn, and waits to see White's set-up before committing the center pawns. That flexibility is the point: depending on what follows, Black can choose the King's Indian ({g6}), the Nimzo-Indian or Queen's Indian ({e6}), the Grünfeld or a more classical {d5}. After {c4}, White gains space on the queenside; {Nf3} and {Bf4} are quieter, system-like choices.",
+    "fr": "La défense indienne : les Noirs contrôlent [e4] avec une pièce plutôt qu'avec un pion, et attendent de voir le schéma blanc avant d'engager leurs pions centraux. Toute l'idée est cette souplesse : selon la suite, les Noirs choisissent l'Est-Indienne ({g6}), la Nimzo-Indienne ou l'Ouest-Indienne ({e6}), la Grünfeld ou un {d5} plus classique. Avec {c4}, les Blancs gagnent de l'espace à l'aile dame ; {Nf3} et {Bf4} sont des choix plus calmes, des systèmes.",
+    "next": ["c4", "Nf3", "Bf4"],
+    "shapes": ["Gf6e4", "Gc2c4", "Gg7g6"]
+  },
+  {
+    "line": "d4 e6",
+    "en": "The Horwitz Defense is a waiting move with a purpose: it frees the dark-squared bishop and keeps Black's options open. After {e4}, Black is in a French Defense with {d5}. After {c4}, Black can head for the Queen's Gambit Declined, a Dutch with {f5}, or check with {Bb4} at once. White's quiet choices, {Nf3} or {Bf4}, usually transpose to familiar set-ups once Black plays {Nf6} and {d5}. The price of {e6} is that the light-squared bishop on [c8] is now behind the pawn chain.",
+    "fr": "La défense Horwitz est un coup d'attente qui a un but : il libère le fou de cases noires et garde les options des Noirs ouvertes. Après {e4}, les Noirs sont dans une Française avec {d5}. Après {c4}, ils peuvent aller vers le Gambit Dame refusé, une Hollandaise avec {f5}, ou faire échec tout de suite par {Bb4}. Les choix calmes des Blancs, {Nf3} ou {Bf4}, rejoignent en général des schémas connus dès que les Noirs jouent {Nf6} et {d5}. Le prix de {e6}, c'est que le fou de cases blanches en [c8] se retrouve derrière la chaîne de pions.",
+    "next": ["c4", "e4", "Nf3"],
+    "shapes": ["Ge7e6", "Gd7d5", "Yc8"]
+  },
+  {
+    "line": "d4 d5 Nf3",
+    "en": "White develops first and keeps the choice of plan for later: {c4} can still turn the game into a Queen's Gambit, while {Bf4} or {e3} build a London or a Colle. The knight also guards [e5] and stops a quick {e5} by Black. Black usually answers in kind with {Nf6}; {c6} keeps the Slav in mind, and {e6} the Queen's Gambit Declined.",
+    "fr": "Les Blancs se développent d'abord et gardent le choix du plan pour plus tard : {c4} peut encore transformer la partie en Gambit Dame, tandis que {Bf4} ou {e3} construisent un London ou un Colle. Le cavalier garde aussi [e5] et empêche un {e5} rapide des Noirs. Les Noirs répondent en général de même par {Nf6} ; {c6} garde la Slave en tête, et {e6} le Gambit Dame refusé.",
+    "next": ["Nf6", "c6", "e6"],
+    "shapes": ["Gf3e5", "Gc2c4", "Gc1f4"]
+  },
+  {
+    "line": "d4 Nf6 Nf3",
+    "en": "White develops and keeps the queenside pawns flexible. Played before {c4}, the knight move sidesteps some of Black's sharpest replies to an early {c4}, such as the Budapest Gambit with {e5}, and after {c4} and {e6} it leads to the Queen's Indian rather than the Nimzo-Indian. Black's main answers are {d5}, the classical stand in the center, {g6} for a King's Indian or a Grünfeld, and {e6}.",
+    "fr": "Les Blancs se développent et gardent leurs pions de l'aile dame souples. Joué avant {c4}, le coup de cavalier évite certaines des réponses les plus tranchantes à un {c4} rapide, comme le Gambit de Budapest par {e5}, et après {c4} et {e6} il mène à l'Ouest-Indienne plutôt qu'à la Nimzo-Indienne. Les Noirs répondent surtout par {d5}, le centre classique, par {g6} pour une Est-Indienne ou une Grünfeld, et par {e6}.",
+    "next": ["d5", "g6", "e6"],
+    "shapes": ["Gf3e5", "Gd7d5", "Gg7g6"]
+  },
+  {
+    "line": "d4 d5 Nf3 Nf6",
+    "en": "A symmetrical position where both knights guard the key central squares, [e4] for Black and [e5] for White. White now chooses the character of the game: {c4} leads to the Queen's Gambit, {Bf4} to the London System, {e3} to the Colle, a solid set-up that prepares {e4} later. Black waits with the same flexibility, keeping {e6}, {c6} or {Bf5} in reserve.",
+    "fr": "Une position symétrique où les deux cavaliers gardent les cases centrales clés, [e4] pour les Noirs et [e5] pour les Blancs. Les Blancs choisissent maintenant le caractère de la partie : {c4} mène au Gambit Dame, {Bf4} au Système de Londres, {e3} au Colle, un schéma solide qui prépare {e4} plus tard. Les Noirs attendent avec la même souplesse, en gardant {e6}, {c6} ou {Bf5} en réserve.",
+    "next": ["c4", "Bf4", "e3"],
+    "shapes": ["Gf3e5", "Gf6e4", "Gc2c4"]
+  }
+]

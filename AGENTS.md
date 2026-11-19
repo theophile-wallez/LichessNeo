@@ -456,7 +456,8 @@ features and its name: free analysis, open data, no ads.
   thing that matters now (the move, the reply, what to find), never every
   detail nor how the feature works ("Show me your opening! I'll answer like
   the masters.", not "I answer with the moves of master games, each as often
-  as it's played…").
+  as it's played…"). The opening's theory (`page/review/theory`) is the one
+  exception, on purpose: it teaches a position and its plans, in a paragraph.
   The coach is never cut at its sides: the card cuts it only at its feet
   and over its hops. Leave room for the arms its canvas reaches past its
   avatar's box, the fox's the farthest: about a fifth of the coach's height

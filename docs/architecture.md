@@ -229,7 +229,14 @@ so the logic can be unit-tested without a page.
 - `piece-squares`: each piece's square, light or dark, on the piece, for the
   rings a set of ours draws where a piece blends into its square.
 - `review`: the Game Review, and opening practice on the free board
-  (`#ln-ext-practice`, `src/page/review/README.md`).
+  (`#ln-ext-practice`, `src/page/review/README.md`). Its coach explains the
+  opening's theory, read from a public study per language on lichess.org
+  (`review/theory`, `coach/theory.ts`, `coach/common-mistake.ts`, looked up in
+  `view/opening-lookups.ts`), which `tools/openings/theory.py` writes from
+  `tools/openings/theory/*.json` (split by `split.py` where Lichess's chapter
+  limits call for it) and `study.py` pushes; `wikibooks.py` reads the
+  Wikibooks pages its texts are partly rewritten from, and `generate.py` the
+  openings practice offers.
 - `charts`: a game's advantage and move times, the rating distribution, and
   the insights page's answer, read off the data it fetches.
 - `server-analysis`: Lichess's server analysis at the end of a game's move
@@ -412,7 +419,10 @@ on its bottom 114 pixels, room above for a tall coach).
 
 `site/demo` is a live Debrief of Morphy's Opera Game. It runs no engine: the
 records come from `opera.json`, which `scripts/site/record-demo.ts` writes by
-hand with a native Stockfish, and the review's own code (`src/page/review`)
+hand with a native Stockfish, the opening's theory from `theory.json`, the
+studies' positions along the game, which `scripts/site/theory-snapshot.ts`
+writes by hand (from lichess.org, or from the PGNs `theory.py` wrote in a
+folder it is given), and the review's own code (`src/page/review`)
 judges the moves, writes the coach's words and draws its summary, key moments
 and buttons from them, so the page shows what the extension would. What the
 extension does through Lichess (its board, its move list, its panel) the demo

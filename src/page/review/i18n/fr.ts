@@ -5,6 +5,7 @@ import { agreement, capitalize, conjugate, indefinite, partyOf, typography } fro
 import { practiceFr } from './fr-practice.ts';
 import { remarksFr } from './fr-remarks.ts';
 import { theirRemarksFr } from './fr-their-remarks.ts';
+import { theoryFr } from './fr-theory.ts';
 import { trajectoryFr } from './fr-trajectory.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import type {
@@ -227,6 +228,7 @@ export const french = (viewer: Viewer): ReviewLanguage => ({
     `Ouverture jouée : ${name}.`,
     `Au programme : ${name}.`,
   ],
+  theory: theoryFr,
   viewer,
   // Watching a game, the coach speaks to whoever moved.
   remarks: mover => (viewer === null || mover === viewer ? remarksFr : theirRemarksFr),

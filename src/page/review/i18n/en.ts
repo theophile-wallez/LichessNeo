@@ -5,6 +5,7 @@ import { capitalize, indefinite, partyOf } from './en-grammar.ts';
 import { practiceEn } from './en-practice.ts';
 import { remarksEn } from './en-remarks.ts';
 import { theirRemarksEn } from './en-their-remarks.ts';
+import { theoryEn } from './en-theory.ts';
 import { trajectoryEn } from './en-trajectory.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import type {
@@ -223,6 +224,7 @@ export const english = (viewer: Viewer): ReviewLanguage => ({
     `This is the ${name}.`,
     `The game follows the ${name}.`,
   ],
+  theory: theoryEn,
   viewer,
   // Watching a game, the coach speaks to whoever moved.
   remarks: mover => (viewer === null || mover === viewer ? remarksEn : theirRemarksEn),

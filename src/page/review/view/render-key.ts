@@ -2,6 +2,7 @@ import type { Analysis } from '#page/lichess/analysis.ts';
 import { judgeAt, liveDigest } from '#page/review/live/judging.ts';
 import type { Session } from '#page/review/session.ts';
 import { learnLabel } from './learn.ts';
+import { lookupsKey } from './opening-lookups.ts';
 import { openingsKey } from './openings-page.ts';
 import { threatsReady } from '#page/review/explain/threats.ts';
 import { reviewMove, spokenMove } from './navigation.ts';
@@ -33,7 +34,13 @@ export function renderKey(session: Session, analysis: Analysis): string {
   const { view, live } = session;
   const { path } = analysis;
   if (view.mode === 'live')
-    return ['live', path, liveDigest(judgeAt(live, analysis, path)), live.error ?? ''].join('|');
+    return [
+      'live',
+      path,
+      liveDigest(judgeAt(live, analysis, path)),
+      live.error ?? '',
+      lookupsKey(session, analysis),
+    ].join('|');
   if (view.mode === 'openings') return openingsKey(session, analysis);
   return [
     view.mode,
@@ -56,5 +63,7 @@ export function renderKey(session: Session, analysis: Analysis): string {
     // The comment waits for the threats around its move.
     spokenReady(session, analysis),
     live.error ?? '',
+    // The theory and the players' moves, once their lookups answer.
+    view.mode === 'moves' ? lookupsKey(session, analysis) : '',
   ].join('|');
 }

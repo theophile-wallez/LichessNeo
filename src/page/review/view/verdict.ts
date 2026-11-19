@@ -10,8 +10,9 @@ import {
 } from '#page/review/coach/clock.ts';
 import type { CoachContext } from '#page/review/coach/context.ts';
 import { explanation } from '#page/review/coach/explanation.ts';
+import { shownTheory } from '#page/review/coach/theory.ts';
 import type { Drawing } from '#page/review/coach/said.ts';
-import { findings, ideasOf, type Theme, themesOf } from '#page/review/coach/fact.ts';
+import { type Findings, findings, ideasOf, type Theme, themesOf } from '#page/review/coach/fact.ts';
 import { freshTold, recalled } from '#page/review/coach/told.ts';
 import { type CommentPart, commentMarkup, streamFor } from '#page/review/comment/markup.ts';
 import { verdictTitle } from '#page/review/comment/title.ts';
@@ -19,6 +20,8 @@ import { forColor } from '#page/review/evaluation/score.ts';
 import { threatsAround } from '#page/review/explain/threats.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
+import type { TheoryEntry } from '#page/review/theory/book.ts';
+import { playersAt } from '#page/review/theory/players.ts';
 import { evalChip } from './markup.ts';
 
 // The bubble for a judged move: its icon, the verdict and the score, the
@@ -48,6 +51,8 @@ export interface VerdictInput {
   readonly timing: MoveTiming | null;
   /** The error the game turned on, the brief's. */
   readonly turning: boolean;
+  /** The mover's rating, for what players of its level play there; none on the free board. */
+  readonly rating?: number | undefined;
 }
 
 /** A judged move, and what the coach says of it. */
@@ -81,12 +86,14 @@ function recentIdeas(session: Session, move: JudgedMove): ReadonlySet<string> {
 
 /** The coach's comment on a move, or Explain's hint in its place. */
 export function commentOn(session: Session, input: VerdictInput): CoachComment {
-  const { move, gameId, hint, timing, turning } = input;
+  const { move, gameId, hint, timing, turning, rating } = input;
   const { language } = session;
   const threats = threatsAround(session, move);
   const recent = recentIdeas(session, move);
   const found = findings(move, language, threats, freshTold(recent));
-  const themes = themesOf(found);
+  // The theory the comment explains says nothing of the tactics found.
+  const theory = hint.length > 0 ? null : shownTheory(move);
+  const themes = theory ? [] : themesOf(found);
   const note = timing && clockNote(move.moveClass, timing);
   const advice =
     timing && note
@@ -100,10 +107,21 @@ export function commentOn(session: Session, input: VerdictInput): CoachComment {
           threats,
           turning,
           recent,
+          players: playersAt(move.previousPosition.fen, rating),
         });
+  return { move, parts, themes, drawing: drawingOf(hint, theory, found), timing, advice };
+}
+
+/** What the comment speaks of: the theory's own shapes where it explains the theory. */
+function drawingOf(
+  hint: readonly CommentPart[],
+  theory: TheoryEntry | null,
+  found: Findings,
+): Drawing | null {
   // Explain's sentences say other things.
-  const drawing = hint.length > 0 ? null : (found.fact?.drawing ?? found.followUp?.drawing ?? null);
-  return { move, parts, themes, drawing, timing, advice };
+  if (hint.length > 0) return null;
+  if (theory) return theory.drawing;
+  return found.fact?.drawing ?? found.followUp?.drawing ?? null;
 }
 
 /** Keeps the typing going through the renders of one comment; a new comment starts it over. */

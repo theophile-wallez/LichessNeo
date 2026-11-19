@@ -8,6 +8,7 @@ import type { PracticeStrings } from './practice-types.ts';
 import type { LineFacts } from './line-types.ts';
 import type { ConceptSentences } from './concept-types.ts';
 import type { PlanSentences } from './plan-types.ts';
+import type { TheorySentences } from './theory-types.ts';
 
 export type { LineFacts, LineGain, MotifNamer, PressureNamer } from './line-types.ts';
 export type { PlanSentences } from './plan-types.ts';
@@ -309,6 +310,8 @@ export interface ReviewLanguage {
   readonly typography: (text: string) => string;
   /** The line naming a book move's opening. */
   readonly openingLine: (name: string) => Ways;
+  /** Opening theory, explained. */
+  readonly theory: TheorySentences;
   /** The side the coach calls "you". */
   readonly viewer: Viewer;
   /** The remarks on `mover`'s moves: the reader's own, or another side's. */

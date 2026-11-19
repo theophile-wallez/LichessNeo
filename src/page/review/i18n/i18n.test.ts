@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { MOVE_CLASSES } from '#page/review/classes/classes.ts';
+import { STUDIES } from '#page/review/theory/book.ts';
 import { en, english } from './en.ts';
 import { fr, french } from './fr.ts';
 import { pageLanguage } from './language.ts';
@@ -85,6 +86,13 @@ describe.each(LANGUAGES)('%s', (lang, language) => {
     const line = '12. [[m:w:Nf3]] [[m:b:Qd7]]';
     const written = language.ui.lines;
     expect([written.best(line), written.allows('[[m:w:Bg5]]', line)]).toEqual(EXPLAINED[lang]);
+  });
+
+  it('reads its theory from its own language’s study', () => {
+    expect(language.theory.study).toBe(STUDIES[lang]);
+    expect(language.theory.next(['[[m:w:Nf3]]', '[[m:w:Bc4]]'])[0]).toContain(
+      lang === 'en' ? 'Nf3]] or [[m:w:Bc4' : 'Nf3]] ou [[m:w:Bc4',
+    );
   });
 
   it('names each player’s count of a class', () => {

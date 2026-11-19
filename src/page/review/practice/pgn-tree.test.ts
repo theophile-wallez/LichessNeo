@@ -38,6 +38,23 @@ describe('parseMovetext', () => {
     expect(shape(parseMovetext('*'))).toBe('');
   });
 
+  it('marks a move with its NAG’s glyph, the first of them', () => {
+    const tree = parseMovetext(
+      '1. e4 $1 $2 e5 $2 (1... f6 $4) (1... a5 $6) (1... g5 $3) (1... h5 $5) 2. Nf3 $14 *',
+    );
+    const [e4] = tree.children;
+    expect(e4?.mark).toBe('!');
+    expect(e4?.children.map(move => `${move.san}${move.mark ?? ''}`)).toEqual([
+      'e5?',
+      'f6??',
+      'a5?!',
+      'g5!!',
+      'h5!?',
+    ]);
+    // An evaluation's NAG is no move's glyph.
+    expect(e4?.children[0]?.children[0]?.mark).toBeUndefined();
+  });
+
   it('survives a bracket that closes nothing', () => {
     expect(shape(parseMovetext('1. e4 ) e5'))).toBe('e4 [e5]');
   });

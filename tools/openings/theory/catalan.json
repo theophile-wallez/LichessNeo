@@ -1,0 +1,637 @@
+[
+  {
+    "line": "d4 Nf6 c4 e6 g3",
+    "en": "The Catalan Opening, christened at the 1929 Barcelona tournament when Savielly Tartakower combined the Queen's Gambit center on [d4] and [c4] with a kingside fianchetto on [g2], and later a World Championship staple of Kramnik, Anand and Carlsen. From [g2] the bishop slices down the long light-squared diagonal toward [b7] and [a8] while White sidesteps both the Nimzo-Indian and Queen's Indian. Black's main answer is {d5}; {Bb4+} is the Bogo-Catalan, and {c5 d5} steers into a Fianchetto Benoni.",
+    "next": ["d5", "Bb4+", "c5"],
+    "shapes": ["Yd4", "Yc4", "Yg2", "Gd7d5"],
+    "fr": "L'Ouverture Catalane, baptisée au tournoi de Barcelone 1929 lorsque Savielly Tartakower combina le centre du Gambit Dame en [d4] et [c4] avec le fianchetto roi en [g2], avant de devenir une arme fétiche en championnat du monde chez Kramnik, Anand et Carlsen. Depuis [g2], le fou balaie la grande diagonale vers [b7] et [a8] tout en esquivant la Nimzo-Indienne et l'Ouest-Indienne. La réponse principale des Noirs est {d5} ; {Bb4+} est la Bogo-Catalane, et {c5 d5} mène à une Benoni avec fianchetto."
+  },
+  {
+    "line": "d4 d5 c4 e6 g3",
+    "en": "The Queen's Gambit Declined move order into the Catalan: White prepares to fianchetto on [g2] before bringing out the g1-knight, offering [c4] as a temporary gambit pawn. Black almost always develops {Nf6} to reach the main Catalan crossroads. Taking {dxc4} right away enters an Open Catalan where White either regains the pawn with {w:Qa4+} or develops {w:Bg2} and {w:Nf3} for rapid pressure down the long diagonal, while {c6} builds a Semi-Slav pawn wall.",
+    "next": ["Nf6", "dxc4", "c6"],
+    "shapes": ["Yg2", "Yc4", "Gg8f6"],
+    "fr": "L'ordre de coups du Gambit Dame refusé vers la Catalane : les Blancs préparent le fianchetto en [g2] avant de sortir le cavalier g1, en offrant provisoirement le pion [c4]. Les Noirs développent presque toujours {Nf6} pour rejoindre le grand carrefour catalan. Prendre tout de suite par {dxc4} entre dans une Catalane ouverte où les Blancs récupèrent le pion par {w:Qa4+} ou jouent {w:Bg2} et {w:Nf3} pour faire pression sur la grande diagonale, tandis que {c6} érige un mur Semi-Slave."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 c5",
+    "en": "Black strikes at [d4] before White's bishop reaches [g2], steering away from standard Catalan structures. White's most ambitious reply is {d5}, gaining central space and transposing after {d5 exd5 cxd5 d6} into the Fianchetto Modern Benoni, a solid positional system where White restrains Black's queenside pawn majority from [g2]. {Nf3} is the calmer path, reaching a Symmetrical English or Tarrasch structure after {Nf3 cxd4 Nxd4} with open lines in the center.",
+    "next": ["d5", "Nf3"],
+    "shapes": ["Yd4", "Yg2", "Gd4d5"],
+    "fr": "Les Noirs frappent [d4] avant que le fou blanc n'atteigne [g2], pour sortir des sentiers battus de la Catalane. La réplique la plus ambitieuse des Blancs est {d5}, qui gagne de l'espace et transpose après {d5 exd5 cxd5 d6} dans la variante du fianchetto de la Benoni Moderne, un système solide où le fou en [g2] freine la majorité noire à l'aile dame. {Nf3} est la voie calme, menant après {Nf3 cxd4 Nxd4} à une structure Anglaise symétrique ou Tarrasch aux lignes centrales ouvertes."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 Bb4+",
+    "en": "The Bogo-Catalan check, a practical grandmaster favorite for sidestepping main-line Catalan preparation before committing a pawn to [d5]. By checking on [b4], Black lures White's dark-squared bishop onto [d2], where it blocks the queen's view of [d5] and takes the natural [d2] square away from the b1-knight. White usually blocks with {Bd2}; {Nd2} fights to win the bishop pair after {w:a3}, while {Nc3} transposes into the Romanishin Nimzo-Indian.",
+    "next": ["Bd2", "Nd2", "Nc3"],
+    "shapes": ["Yd5", "Yb4", "Yd2", "Gc1d2"],
+    "fr": "L'échec de la Bogo-Catalane, un favori pratique des grands maîtres pour contourner la préparation théorique de la Catalane pure avant de fixer un pion en [d5]. En donnant échec en [b4], les Noirs attirent le fou de cases noires en [d2], où il coupe l'action de la dame sur [d5] et prive le cavalier b1 de sa case naturelle. Les Blancs parent d'ordinaire par {Bd2} ; {Nd2} vise la paire de fous après {w:a3}, tandis que {Nc3} transpose dans la Nimzo-Indienne Romanichine."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 Bb4+ Bd2",
+    "en": "White blocks the check and forces the b4-bishop to declare its plan at once. Black's most popular modern choice is {Be7}: retreating looks like a lost tempo, yet White's bishop sits clumsily on [d2] once play continues {Be7 Bg2 d5 Nf3 O-O} into a Closed Catalan where the b1-knight lacks [d2]. {Qe7} defends the bishop in Bogo-Indian fashion, {Bxd2+} trades off the dark-squared bishops cleanly, {a5} grabs queenside space, and {c5} strikes at [d4].",
+    "next": ["Be7", "Qe7", "Bxd2+", "a5", "c5"],
+    "shapes": ["Yd2", "Yd4", "Gb4e7"],
+    "fr": "Les Blancs parent l'échec et forcent immédiatement le fou b4 à dévoiler ses intentions. Le choix moderne le plus prisé des Noirs est le repli {Be7} : il semble perdre un temps, mais laisse le fou blanc mal placé en [d2] lorsque le jeu se poursuit par {Be7 Bg2 d5 Nf3 O-O} dans une Catalane fermée où le cavalier b1 n'a plus accès à [d2]. {Qe7} soutient le fou façon Bogo-Indienne, {Bxd2+} échange proprement les fous, {a5} prend de l'espace à l'aile dame, et {c5} attaque [d4]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 Bb4+ Bd2 Be7 Bg2 d5 Nf3",
+    "en": "The Bogo-Catalan Retreat main line, frequent in top-level tournament play. Compared with the normal Closed Catalan, Black has invested two bishop moves to leave White's dark-squared bishop on [d2], where it blocks pressure down the d-file and keeps the b1-knight off [d2]. Black castles short with {O-O} and follows up with {O-O O-O c6 Qc2 Nbd7}, while White usually spends a move redeploying the bishop to {w:Bf4} or {w:Bc3} before preparing {w:e4}.",
+    "next": ["O-O", "c6", "dxc4"],
+    "shapes": ["Yd2", "Ge8g8"],
+    "fr": "La ligne principale du repli Bogo-Catalan, très fréquente à haut niveau. Par rapport à la Catalane fermée habituelle, les Noirs ont investi deux coups de fou pour laisser celui des Blancs en [d2], où il gêne la pression sur la colonne d et bloque la case [d2] au cavalier b1. Les Noirs roquent par {O-O} avant d'enchaîner {O-O O-O c6 Qc2 Nbd7}, tandis que les Blancs replacent souvent leur fou en {w:Bf4} ou {w:Bc3} pour préparer la poussée {w:e4}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 Bb4+ Bd2 Be7 Bg2 d5 Nf3 Nbd7 O-O O-O Qc2",
+    "en": "White places the queen on [c2] to protect [c4], clear [d1] for a rook, and support a later {w:e4} break once the d2-bishop moves to [f4] or [c3]. Here Black needs to shore up [d5] first with {c6}, completing the sturdy Semi-Slav pawn triangle before fianchettoing on the queenside with {b:b6} and {b:Bb7}. Preparing the fianchetto immediately leaves [d5] without pawn support and lets White rip open the center and the long diagonal.",
+    "next": ["c6"],
+    "mistakes": [
+      {
+        "move": "b6",
+        "mark": "?!",
+        "punish": "cxd5 exd5 Bf4",
+        "en": "Playing {b6} before {b:c6} leaves [d5] without pawn support: {cxd5} opens the c-file and the long diagonal at once, forcing Black into a cramped defense of [c7] after {cxd5 exd5 Bf4} or ceding the center to {w:e4} after {b:Nxd5}. Solidify [d5] with {b:c6} first.",
+        "shapes": ["Rd5", "Rc7", "Gc4d5"],
+        "fr": "Jouer {b6} avant {b:c6} laisse [d5] sans soutien de pion : {cxd5} ouvre d'un coup la colonne c et la grande diagonale, condamnant les Noirs à une défense passive de [c7] après {cxd5 exd5 Bf4} ou à céder le centre à {w:e4} après {b:Nxd5}. Consolidez d'abord [d5] par {b:c6}."
+      }
+    ],
+    "shapes": ["Yc2", "Yc4", "Yd1", "Gc7c6"],
+    "fr": "Les Blancs placent la dame en [c2] pour défendre [c4], libérer [d1] pour une tour et préparer une future percée {w:e4} dès que le fou d2 aura gagné [f4] ou [c3]. Ici, les Noirs doivent d'abord étayer [d5] par {c6}, complétant le solide triangle Semi-Slave avant de développer le fianchetto dame par {b:b6} et {b:Bb7}. Préparer le fianchetto tout de suite laisse [d5] sans soutien de pion et permet aux Blancs d'ouvrir le centre et la grande diagonale."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5",
+    "en": "Black plants a pawn firmly on [d5], reaching the pure Catalan. Notice why White keeps the queen's knight on [b1] instead of developing it to [c3]: in the Catalan that knight usually belongs on [d2] or [a3], where it can recapture on [c4] and support the {w:e4} break without blocking the c-file or the queen on [c2]. White continues with {Bg2} or {Nf3}, which transpose to the same main tabiya on the next move.",
+    "next": ["Bg2", "Nf3"],
+    "shapes": ["Yd5", "Yb1", "Yc3", "Gf1g2"],
+    "fr": "Les Noirs installent fermement un pion en [d5] et entrent dans la Catalane pure. Remarquez pourquoi les Blancs gardent leur cavalier dame en [b1] au lieu de le sortir en [c3] : dans la Catalane, ce cavalier se destine le plus souvent à [d2] ou [a3], d'où il peut reprendre en [c4] et soutenir la poussée {w:e4} sans boucher la colonne c ni gêner la dame en [c2]. Les Blancs continuent par {Bg2} ou {Nf3}, qui transposent au coup suivant vers la même position clé."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2",
+    "en": "White places the Catalan bishop on [g2], aiming through [d5] straight at [b7] and the rook on [a8]. Black now faces the central strategic fork of the opening: {dxc4} enters the Open Catalan, winning a pawn at the price of unleashing White's g2-bishop down the open diagonal; {Be7} enters the Closed Catalan, keeping [d5] defended; {Bb4+} checks to misplace White's queen's bishop on [d2]; {c6} builds a Semi-Slav wall; and {c5} counterattacks in Tarrasch style.",
+    "next": ["Be7", "dxc4", "Bb4+", "c6", "c5"],
+    "shapes": ["Yg2", "Yd5", "Yb7", "Gf8e7"],
+    "fr": "Les Blancs installent le fou catalan en [g2], pointé à travers [d5] droit sur [b7] et la tour [a8]. Les Noirs font alors face au grand embranchement stratégique de l'ouverture : {dxc4} entre dans la Catalane ouverte, gagnant un pion au prix de libérer toute la diagonale du fou g2 ; {Be7} choisit la Catalane fermée en tenant [d5] ; {Bb4+} donne échec pour déranger le fou dame en [d2] ; {c6} bâtit un mur Semi-Slave ; enfin {c5} contre-attaque façon Tarrasch."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Nf3 Bb4+ Bd2",
+    "en": "When Black checks on [b4] with [d5] already on the board, blocking with {Bd2} reaches a major Bogo-Catalan crossroads. {Be7} drops back now that White's bishop occupies [d2], heading for a Closed setup after {Be7 Bg2 O-O O-O c6}. {Bxd2+} trades dark-squared bishops at once, where {Bxd2+ Nbxd2} eyes a future c4-pawn and {Bxd2+ Qxd2} keeps [c3] free for the knight, while {a5} and {Qe7} maintain the tension.",
+    "next": ["Be7", "Bxd2+", "a5", "Qe7"],
+    "shapes": ["Yb4", "Yd5", "Yd2", "Gb4e7"],
+    "fr": "Lorsque les Noirs donnent échec en [b4] avec [d5] déjà en place, parer par {Bd2} mène à un carrefour majeur de la Bogo-Catalane. {Be7} replie le fou maintenant que celui des Blancs encombre [d2], vers un schéma fermé après {Be7 Bg2 O-O O-O c6}. {Bxd2+} échange immédiatement les fous de cases noires — où {Bxd2+ Nbxd2} surveille [c4] et {Bxd2+ Qxd2} laisse [c3] libre pour le cavalier — tandis que {a5} et {Qe7} maintiennent la tension."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Nf3 c6",
+    "en": "Black builds the Semi-Slav pawn triangle on move four, blunting White's future g2-bishop along the h1-a8 diagonal before committing the dark-squared bishop. That move order keeps two distinct plans alive: Black can either capture {Bg2 dxc4} and hold the extra pawn with {b:b5}, or play a solid Closed Catalan with {b:Be7} and {b:Nbd7}. White usually plays {Bg2}, while {Qc2} guards [c4] first to rule out the Open capture altogether.",
+    "next": ["Bg2", "Qc2"],
+    "shapes": ["Yc4", "Gf1g2"],
+    "fr": "Les Noirs érigent le triangle de pions Semi-Slave dès le quatrième coup, émoussant par avance le futur fou en [g2] sur la grande diagonale avant d'engager leur fou f8. Cet ordre de coups garde deux plans bien distincts en vie : les Noirs peuvent soit capturer {Bg2 dxc4} pour conserver le pion de plus grâce à {b:b5}, soit jouer une Catalane fermée très solide par {b:Be7} et {b:Nbd7}. Les Blancs jouent d'ordinaire {Bg2}, tandis que {Qc2} protège [c4] d'emblée."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Nf3 c6 Bg2",
+    "en": "With both [c6] and [g2] in place, Black picks between two well-tested structures. {Be7}, {Nbd7} and {Bd6} keep the center closed, fortifying [d5] while accepting a passive light-squared bishop on [c8] that will need {b:b6} and {b:Bb7} later. {dxc4} enters the Semi-Slav Open Catalan instead, grabbing the pawn while [c6] already shields [b7] and [a8] so {b:b5} can follow after White castles.",
+    "next": ["Be7", "dxc4", "Nbd7", "Bd6"],
+    "shapes": ["Yc6", "Yg2", "Yd5", "Gf8e7"],
+    "fr": "Avec [c6] et [g2] en place, les Noirs choisissent entre deux structures éprouvées. {Be7}, {Nbd7} et {Bd6} maintiennent le centre fermé en fortifiant [d5], quitte à laisser le fou de cases blanches enfermé en [c8] jusqu'à la préparation de {b:b6} et {b:Bb7}. À l'inverse, {dxc4} entre dans la Catalane ouverte de type Semi-Slave, prenant le pion alors que [c6] couvre déjà [b7] et [a8] pour soutenir {b:b5} après le roque blanc."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 c5",
+    "en": "The Tarrasch Defense to the Catalan, an active way to fight for equality if Black is willing to play with an isolated queen's pawn. White's two best replies are {cxd5}, when {cxd5 exd5 Nf3 Nc6 O-O Be7} reaches the Rubinstein-Tarrasch battle where White's g2-bishop bears down directly on the isolated d5-pawn, and {Nf3} keeping central tension. Developing {w:Nc3} before {w:Nf3}, however, lets Black liquidate the center on favorable terms.",
+    "next": ["cxd5", "Nf3"],
+    "mistakes": [
+      {
+        "move": "Nc3",
+        "mark": "?",
+        "punish": "cxd4 Qxd4 Nc6",
+        "en": "Playing {Nc3} before {w:Nf3} or {w:cxd5} lets Black seize the initiative with {cxd4 Qxd4 Nc6}, hitting the exposed queen with tempo and threatening {b:d4} or {b:Nxd4} while White's kingside is still asleep. Play {w:cxd5} or {w:Nf3} instead.",
+        "shapes": ["Gc5d4"],
+        "fr": "Jouer {Nc3} avant {w:Nf3} ou {w:cxd5} permet aux Noirs de s'emparer de l'initiative par {cxd4 Qxd4 Nc6}, qui gagne un temps sur la dame exposée et menace {b:d4} ou {b:Nxd4} pendant que l'aile roi blanche dort encore. Préférez {w:cxd5} ou {w:Nf3}."
+      },
+      {
+        "move": "Bg5",
+        "mark": "?!",
+        "punish": "dxc4 Nf3 Nc6",
+        "en": "Developing the bishop to [g5] leaves [c4] and [b2] unguarded while the g1-knight is still at home: {dxc4} grabs the pawn cleanly and opens the d-file, after which {b:Nc6} and {b:Qb6} put White under immediate pressure. Play {w:cxd5} or {w:Nf3}.",
+        "shapes": ["Rg5", "Rc4", "Gd5c4"],
+        "fr": "Sortir le fou en [g5] abandonne [c4] et [b2] alors que le cavalier g1 n'est pas encore développé : {dxc4} récolte proprement le pion et ouvre la colonne d, après quoi {b:Nc6} et {b:Qb6} mettent aussitôt les Blancs sous pression. Jouez {w:cxd5} ou {w:Nf3}."
+      }
+    ],
+    "shapes": ["Gc4d5"],
+    "fr": "La Défense Tarrasch contre la Catalane, une méthode active pour lutter pour l'égalité si les Noirs acceptent de jouer avec un pion dame isolé. Les deux meilleures suites blanches sont {cxd5}, où {cxd5 exd5 Nf3 Nc6 O-O Be7} mène au duel classique Rubinstein-Tarrasch avec le fou g2 braqué sur le pion isolé [d5], et {Nf3}, qui maintient la tension centrale. Développer {w:Nc3} avant {w:Nf3} permet en revanche aux Noirs de liquider avantageusement le centre."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 c5 Nf3 Nc6",
+    "en": "Both sides build maximum tension in the center. White usually castles with {O-O}, after which {O-O Be7} heads into the main Tarrasch isolated-pawn battle following {w:cxd5}, while {O-O dxc4} enters an Open Catalan where White can either trade into a favorable queenless endgame with {O-O dxc4 dxc5 Qxd1 Rxd1 Bxc5} or recover [c4] with {w:Qa4}. Taking {cxd5} right away is equally strong and forces Black to choose between an isolated d-pawn and {b:Nxd5}.",
+    "next": ["O-O", "cxd5"],
+    "shapes": ["Yc4", "Ge1g1"],
+    "fr": "Les deux camps portent la tension centrale à son comble. Les Blancs roquent d'ordinaire par {O-O}, après quoi {O-O Be7} engage la bataille classique contre le pion isolé après {w:cxd5}, tandis que {O-O dxc4} entre dans une Catalane ouverte où les Blancs peuvent soit passer dans une finale sans dames favorable via {O-O dxc4 dxc5 Qxd1 Rxd1 Bxc5}, soit regagner [c4] par {w:Qa4}. Prendre tout de suite par {cxd5} est tout aussi fort."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4",
+    "en": "The Open Catalan. Black takes on [c4] while White's light-squared bishop is already on [g2] and cannot recapture in one move. In return, Black gives up the central stronghold on [d5] and opens the long h1-a8 diagonal for White's Catalan bishop, which presses straight down on [b7] and [a8] and makes Black's queenside awkward to untangle. White's main move is {Nf3}; {Qa4+} regains the pawn safely at once, whereas {w:Qc2} drops [d4].",
+    "next": ["Nf3", "Qa4+"],
+    "mistakes": [
+      {
+        "move": "Qc2",
+        "mark": "?!",
+        "punish": "Qxd4 Nf3 Qc5",
+        "en": "Moving the queen to [c2] to regain [c4] before developing {w:Nf3} leaves [d4] undefended: {Qxd4} snatches a second central pawn, and after {Qxd4 Nf3 Qc5} Black keeps the extra material while White has to fight uphill for compensation. Develop {w:Nf3} first, or check with {w:Qa4+}.",
+        "shapes": ["Rc2", "Rc4", "Gd8d4"],
+        "fr": "Jouer la dame en [c2] pour regagner [c4] avant de sortir {w:Nf3} laisse [d4] sans défense : {Qxd4} cueille un second pion central, et après {Qxd4 Nf3 Qc5} les Noirs conservent leur matériel d'avance avec une position saine. Développez d'abord {w:Nf3} ou donnez échec par {w:Qa4+}."
+      }
+    ],
+    "shapes": ["Yc4", "Yg2", "Yd5", "Gg1f3"],
+    "fr": "La Catalane ouverte. Les Noirs prennent en [c4] alors que le fou de cases blanches est déjà engagé en [g2] et ne peut pas reprendre en un seul coup. En contrepartie, les Noirs cèdent leur point d'appui central en [d5] et ouvrent grand la diagonale h1-a8 au fou catalan, qui pèse directement sur [b7] et [a8] et complique le développement de l'aile dame noire. Le coup principal est {Nf3} ; {Qa4+} récupère le pion sans risque, tandis que {w:Qc2} perd [d4]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Qa4+",
+    "en": "The {Qa4+} Open Catalan, a clean practical choice when White wants to regain the c4-pawn right away without entering deep gambit lines. Black has three solid blocks: {Nbd7} is the most flexible, planning {Nbd7 Qxc4 a6 Qc2 c5} to challenge [d4] and fianchetto on [b7]; {Bd7} invites {Bd7 Qxc4 Bc6}, trading off White's strong g2-bishop along the long diagonal; and {c6} prepares {b:b5} with queenside counterplay.",
+    "next": ["Nbd7", "Bd7", "c6"],
+    "shapes": ["Yd4", "Yb7", "Gb8d7"],
+    "fr": "La Catalane ouverte avec échec en [a4], un choix pratique limpide lorsque les Blancs souhaitent récupérer immédiatement le pion c4 sans s'aventurer dans de longs gambits. Les Noirs disposent de trois parades solides : {Nbd7} est la plus souple, préparant {Nbd7 Qxc4 a6 Qc2 c5} pour contester [d4] et installer le fou en [b7] ; {Bd7} invite {Bd7 Qxc4 Bc6} afin d'échanger le puissant fou g2 ; enfin {c6} prépare le contre-jeu {b:b5} à l'aile dame."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Qa4+ Nbd7 Qxc4",
+    "en": "White has regained the gambit pawn, trading the c-pawn for Black's d-pawn to keep a two-to-one central majority on [d4] and [e2] against [e6]. The drawback is that the queen stands exposed on [c4], giving Black targets for queenside development: {a6} prepares {b:b5} with tempo followed by {b:Bb7} and the freeing {b:c5} break (which White often sidesteps in advance with {w:Qc2}), while {c5} challenges [d4] immediately and {Be7} prepares castling.",
+    "next": ["a6", "c5", "Be7"],
+    "shapes": ["Yd4", "Ye2", "Ye6", "Ga7a6"],
+    "fr": "Les Blancs ont récupéré le pion sacrifié, troquant leur pion c contre le pion d noir pour conserver une majorité centrale de deux contre un avec [d4] et [e2] face à [e6]. En contrepartie, la dame exposée en [c4] offre aux Noirs des cibles pour développer l'aile dame : {a6} prépare {b:b5} avec gain de temps suivi de {b:Bb7} et de la rupture libératrice {b:c5} (que les Blancs anticipent souvent par {w:Qc2}), tandis que {c5} attaque [d4] d'emblée et que {Be7} prépare le roque."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3",
+    "en": "The main crossroads of the Open Catalan. White develops the knight to guard [d4] and eye {w:Ne5}, unleashing the g2-bishop against [c6], [b7] and [a8], while daring Black either to cling to the extra pawn or return it for development. {a6} prepares {b:b5} safely, {Be7} prioritizes kingside castling in the Classical line, {c5} counterattacks [d4], {Nc6} and {Nbd7} develop pieces, {Bb4+} checks to misplace White's bishop, {c6} shields the diagonal, and {b5} defends [c4] directly.",
+    "next": ["Be7", "a6", "c5", "Nc6", "c6", "Bb4+", "Nbd7", "b5"],
+    "shapes": ["Yd4", "Yc6", "Yb7", "Gf8e7"],
+    "fr": "Le grand carrefour de la Catalane ouverte. Les Blancs développent le cavalier pour protéger [d4] et viser {w:Ne5}, dégageant l'action du fou g2 contre [c6], [b7] et [a8] tout en mettant les Noirs au défi de s'accrocher au pion ou de le rendre pour se développer. {a6} prépare {b:b5} en sécurité, {Be7} donne la priorité au roque dans la ligne Classique, {c5} frappe [d4], {Nc6} et {Nbd7} mobilisent les cavaliers, {Bb4+} donne échec, {c6} ferme la diagonale et {b5} tient [c4]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 b5",
+    "en": "Black defends the extra c4-pawn directly on move five. The idea is greedy and double-edged: Black keeps the pawn, but the king is still in the center, the queenside minor pieces are undeveloped, and the rook on [a8] sits undefended in the line of White's g2-bishop. White's sharpest test is {a4}, undermining the b5-pawn at once to force {a4 c6} or {a4 Bb7}; {Ne5} first is also strong, forcing {Ne5 Nd5} before {w:a4} chips at the chain.",
+    "next": ["a4", "Ne5"],
+    "shapes": ["Ya8", "Ga2a4"],
+    "fr": "Les Noirs défendent directement leur pion de plus en [c4] dès le cinquième coup. L'idée est gourmande et à double tranchant : les Noirs gardent le matériel, mais leur roi est encore au centre, leurs pièces de l'aile dame dorment, et la tour [a8] reste en l'air dans la ligne de mire du fou g2. Le test le plus incisif est {a4}, qui sape aussitôt [b5] pour forcer {a4 c6} ou {a4 Bb7} ; {Ne5} d'abord est fort aussi, forçant {Ne5 Nd5} avant {w:a4}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 b5 a4",
+    "en": "White strikes at the base of the pawn chain while White's a1-rook and g2-bishop both converge on the undefended rook at [a8]. Black has only two sound defenses here: {c6} bolsters [b5] and blunts the long diagonal at the cost of taking [c6] away from the knight, while {Bb7} defends [a8] indirectly along the diagonal (so {Bb7 axb5 a6} gives Black active piece play). Natural alternatives like {b:a6}, {b:Bd7} or {b:bxa4} fail tactically on [a8].",
+    "next": ["c6", "Bb7"],
+    "mistakes": [
+      {
+        "move": "a6",
+        "mark": "?",
+        "punish": "Ne5 Nd5 axb5",
+        "en": "Supporting [b5] with {a6} forgets that [a8] is undefended and the a-pawn is now pinned down the a-file. After {Ne5} threatening the rook, {Ne5 Nd5 axb5} wins back the pawn with a crushing queenside bind because recapturing on [b5] drops [a8]. Play {b:c6} instead.",
+        "shapes": ["Rb5", "Ra8", "Gf3e5"],
+        "fr": "Soutenir [b5] par {a6} oublie que [a8] n'est pas défendue et que le pion a se retrouve cloué sur la colonne a. Après {Ne5} qui menace la tour, {Ne5 Nd5 axb5} regagne le pion avec un étau écrasant à l'aile dame car reprendre en [b5] perd [a8]. Jouez {b:c6}."
+      },
+      {
+        "move": "Bd7",
+        "mark": "?",
+        "punish": "Ne5 Bb4+ Nc3",
+        "en": "Blocking the diagonal with {Bd7} walks straight into {Ne5}, attacking both the d7-bishop and the undefended rook on [a8]. Blocking on [c6] loses the knight, and {Ne5 Bb4+ Nc3} (or {b:c6} met by {w:axb5}) leaves Black's queenside collapsing. Play {b:c6} first.",
+        "shapes": ["Ra8", "Rc6", "Gf3e5"],
+        "fr": "Interposer {Bd7} sur la diagonale se heurte de plein fouet à {Ne5}, qui attaque simultanément le fou d7 et la tour non protégée en [a8]. Bloquer en [c6] perd le cavalier, et {Ne5 Bb4+ Nc3} laisse l'aile dame noire en ruines. Jouez d'abord {b:c6}."
+      },
+      {
+        "move": "bxa4",
+        "mark": "?",
+        "punish": "Ne5 Nd5 Qxa4+",
+        "en": "Capturing {bxa4} breaks up Black's own queenside shield and activates White's pieces with tempo: {Ne5} attacks [a8] and [c4], forcing {Ne5 Nd5 Qxa4+ Bd7 Qxc4} when White regains the pawns against weak dark squares and an uncastled king. Hold the chain with {b:c6}.",
+        "shapes": ["Ra8", "Rc4", "Gf3e5"],
+        "fr": "Prendre par {bxa4} disloque le bouclier noir à l'aile dame et active les pièces blanches avec gain de temps : {Ne5} vise [a8] et [c4], forçant {Ne5 Nd5 Qxa4+ Bd7 Qxc4} où les Blancs récupèrent les pions face à des cases noires faibles et un roi au centre. Tenez la chaîne par {b:c6}."
+      }
+    ],
+    "shapes": ["Ya8", "Yb5", "Yc6", "Gc7c6"],
+    "fr": "Les Blancs attaquent la base de la chaîne de pions tandis que la tour a1 et le fou g2 convergent tous deux vers la tour non défendue en [a8]. Les Noirs n'ont ici que deux défenses saines : {c6} soutient [b5] et bouche la grande diagonale au prix de priver le cavalier de [c6], tandis que {Bb7} protège indirectement [a8] sur la diagonale ({Bb7 axb5 a6} offre un jeu de pièces actif). Les suites naturelles {b:a6}, {b:Bd7} ou {b:bxa4} échouent tactiquement sur [a8]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 b5 a4 c6",
+    "en": "Black reinforces [b5] and blunts the long diagonal with {c6}, the standard defense in the {b5} Open Catalan, though the b8-knight loses its natural [c6] post. White has two strong ways to press: {O-O} castles calmly, planning {O-O Bb7 Ne5} followed by {w:b3} or {w:e4} to open lines against Black's queenside, while {axb5} trades {axb5 cxb5} first so {w:Ne5} or {w:Ng5} uncovers immediate threats against [b7] and the rook on [a8].",
+    "next": ["O-O", "axb5", "Ne5"],
+    "shapes": ["Yb5", "Yc6", "Yb7", "Ge1g1"],
+    "fr": "Les Noirs renforcent [b5] et ferment la grande diagonale par {c6}, la défense standard de cette variante, même si le cavalier b8 perd sa case naturelle [c6]. Les Blancs disposent de deux façons énergiques de presser : {O-O} roque calmement en préparant {O-O Bb7 Ne5} suivi de {w:b3} ou {w:e4} pour ouvrir les lignes contre l'aile dame noire, tandis que {axb5} échange d'abord {axb5 cxb5} afin que {w:Ne5} ou {w:Ng5} dévoile des menaces immédiates sur [b7] et [a8]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 a6",
+    "en": "The modern main line of the Open Catalan: Black plays {a6} before pushing {b:b5} so the a8-rook is defended and never pinned along the a-file when White challenges the chain with {w:a4}. White usually castles with {O-O}, keeping every central and queenside plan flexible. Immediate {a4} prevents {b:b5} outright at the price of ceding [b4] after {a4 c5}, while {Ne5} uncovers the g2-bishop early and is met by {b:Bb4+} or {b:c5}.",
+    "next": ["O-O", "Ne5", "a4"],
+    "shapes": ["Yb4", "Ge1g1"],
+    "fr": "La grande ligne moderne de la Catalane ouverte : les Noirs jouent {a6} avant de pousser {b:b5} afin que la tour [a8] soit protégée et ne subisse aucun clouage sur la colonne a lorsque les Blancs s'attaqueront à la chaîne par {w:a4}. Les Blancs roquent le plus souvent par {O-O} en gardant tous leurs plans ouverts. {a4} immédiat empêche {b:b5} au prix d'affaiblir [b4] après {a4 c5}, tandis que {Ne5} découvre tôt le fou g2 face à {b:Bb4+} ou {b:c5}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 a6 O-O",
+    "en": "With White castled, Black chooses between three major setups. {Nc6} develops a piece first to pressure [d4] and prepare {b:Bd7} or {b:Rb8} before expanding with {b:b5}. {b5} defends the extra c4-pawn right away, inviting the forcing theoretical line {b5 Ne5 Nd5 a4 Bb7} where White chips at the pawn chain before Black's kingside comes out. {Be7} prioritizes safe castling and transposes into Classical Open lines.",
+    "next": ["Nc6", "b5", "Be7"],
+    "shapes": ["Yd4", "Gb8c6"],
+    "fr": "Une fois les Blancs roqués, les Noirs choisissent entre trois grands dispositifs. {Nc6} développe d'abord une pièce pour presser [d4] et préparer {b:Bd7} ou {b:Rb8} avant d'avancer {b:b5}. {b5} défend tout de suite le pion de plus en [c4], invitant la suite théorique forcée {b5 Ne5 Nd5 a4 Bb7} où les Blancs rongent la chaîne de pions avant que l'aile roi noire ne sorte. Enfin, {Be7} assure le roque et rejoint les lignes classiques."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 a6 O-O Nc6",
+    "en": "The main tabiya of the {a6} Open Catalan: Black develops the queen's knight to hit [d4] before committing to {b:b5}, keeping {b:Rb8} and {b:Bd7} ready to neutralize the long diagonal. White's most popular plan is {e3}, bolstering [d4] ahead of {w:Qe2}, {w:Rd1} and a permanent pawn sacrifice with {w:b3} for open queenside files. {Nc3} is the sharp tactical alternative, meeting {Nc3 Rb8} with {w:e4} and {w:d5}, while {Nbd2} recovers [c4] directly.",
+    "next": ["e3", "Nc3", "Nbd2"],
+    "shapes": ["Yd4", "Yc4", "Ge2e3"],
+    "fr": "La position clé de la Catalane ouverte avec {a6} : les Noirs développent le cavalier dame pour viser [d4] avant de s'engager par {b:b5}, gardant {b:Rb8} et {b:Bd7} prêts à neutraliser la grande diagonale. Le plan blanc le plus populaire est {e3}, qui consolide [d4] avant {w:Qe2}, {w:Rd1} et le sacrifice de pion durable {w:b3} pour ouvrir les colonnes. {Nc3} est l'option tactique pointue ({Nc3 Rb8} suivi de {w:e4} et {w:d5}), tandis que {Nbd2} reprend [c4]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 a6 O-O Nc6 e3",
+    "en": "White reinforces [d4] and prepares {w:Qe2}, {w:Rd1} and {w:b3}, offering the pawn for good after a capture on [b3] so White's rooks and g2-bishop dominate the open a- and c-files. Because the knight stands on [c6] rather than a pawn, the h1-a8 diagonal is still open: Black has to prepare {b:b5} with {Bd7} or {Rb8} to neutralize the diagonal first, as pushing {b:b5} right away loses the exchange.",
+    "next": ["Bd7", "Rb8"],
+    "mistakes": [
+      {
+        "move": "b5",
+        "mark": "?",
+        "punish": "Ne5 Nxe5 Bxa8",
+        "en": "A classic Catalan trap. Because Black placed the knight on [c6] instead of a pawn, the h1-a8 diagonal is wide open: {Ne5} attacks the c6-knight and uncovers the g2-bishop against the undefended a8-rook at the same time, winning the exchange after {Ne5 Nxe5 Bxa8}. Step off the diagonal with {b:Bd7} or {b:Rb8} first.",
+        "shapes": ["Rc6", "Gf3e5"],
+        "fr": "Un piège classique de la Catalane ! Comme les Noirs ont placé leur cavalier en [c6] plutôt qu'un pion, la diagonale h1-a8 est grande ouverte : {Ne5} attaque le cavalier c6 tout en découvrant le fou g2 contre la tour [a8], ce qui gagne la qualité après {Ne5 Nxe5 Bxa8}. Couvrez d'abord la diagonale par {b:Bd7} ou {b:Rb8}."
+      }
+    ],
+    "shapes": ["Yd4", "Yb3", "Yc6", "Gc8d7"],
+    "fr": "Les Blancs consolident [d4] et préparent {w:Qe2}, {w:Rd1} puis {w:b3}, offrant définitivement le pion après une prise en [b3] pour que leurs tours et le fou g2 dominent les colonnes ouvertes a et c. Comme un cavalier occupe [c6] plutôt qu'un pion, la diagonale h1-a8 reste grande ouverte : les Noirs doivent préparer {b:b5} par {Bd7} ou {Rb8} pour neutraliser d'abord la diagonale, car pousser {b:b5} tout de suite perd la qualité."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 a6 O-O b5",
+    "en": "Black holds onto the extra pawn immediately, daring White to break down the light-square phalanx on [a6], [b5] and [c4] before Black catches up in development. White's critical continuation is {Ne5}, unleashing the g2-bishop against [a8] to force {Ne5 Nd5} before chipping at the chain with {w:a4} (whereas playing {w:a4} or {w:b3} before {Ne5} lets {b:Bb7} defend [a8] comfortably along the diagonal).",
+    "next": ["Ne5"],
+    "shapes": ["Ya6", "Yb5", "Yc4", "Gf3e5"],
+    "fr": "Les Noirs s'accrochent immédiatement au pion supplémentaire, mettant les Blancs au défi de démanteler la phalange sur cases blanches [a6]-[b5]-[c4] avant qu'ils ne rattrapent leur retard de développement. La suite critique est {Ne5}, qui démasque le fou g2 contre [a8] pour forcer {Ne5 Nd5} avant de saper la chaîne par {w:a4} (alors que jouer {w:a4} ou {w:b3} avant {Ne5} permettrait à {b:Bb7} de couvrir confortablement [a8] sur la diagonale)."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 c5",
+    "en": "Viswanathan Anand's favorite counterattack in the Open Catalan: instead of clinging to [c4], Black strikes at [d4] right away to trade off White's central pawn and neutralize White's space advantage. White usually castles with {O-O}, after which {O-O Nc6 Qa4 Bd7 Qxc4 b5} regains the pawn with sharp play, while {O-O Nc6 dxc5 Qxd1 Rxd1 Bxc5 Nbd2} reaches a deceptive queenless middlegame where White's g2-bishop presses Black's queenside. {Qa4+} is a quieter way to recover [c4].",
+    "next": ["O-O", "Qa4+"],
+    "shapes": ["Yc4", "Yd4", "Ge1g1"],
+    "fr": "La contre-attaque favorite de Viswanathan Anand dans la Catalane ouverte : plutôt que de s'accrocher à [c4], les Noirs frappent immédiatement [d4] pour liquider le pion central blanc et neutraliser l'avantage d'espace adverse. Les Blancs roquent d'ordinaire par {O-O}, après quoi {O-O Nc6 Qa4 Bd7 Qxc4 b5} regagne le pion avec un jeu vif, tandis que {O-O Nc6 dxc5 Qxd1 Rxd1 Bxc5 Nbd2} mène à un milieu de jeu sans dames venimeux où le fou g2 pèse sur l'aile dame noire."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 c5 O-O Nc6",
+    "en": "Black adds a second attacker to [d4], forcing White to resolve the tension. {Qa4} is the most testing reply, pinning [c6] while threatening both {w:Qxc4} and {w:Ne5}: Black answers with {Qa4 Bd7 Qxc4 b5 Qd3} or the dynamic pawn sacrifice {Qa4 cxd4 Nxd4 Qxd4 Bxc6+ Bd7 Rd1}. {dxc5} steers into the queenless middlegame {dxc5 Qxd1 Rxd1 Bxc5 Nbd2}, where White's Catalan bishop makes Black's c8-bishop work hard to equalize, and {Ne5} gambits a pawn for activity.",
+    "next": ["Qa4", "dxc5", "Ne5"],
+    "shapes": ["Yd4", "Yc6", "Gd1a4"],
+    "fr": "Les Noirs ajoutent un second attaquant contre [d4], forçant les Blancs à trancher la tension. {Qa4} est la réponse la plus éprouvante, clouant [c6] tout en menaçant à la fois {w:Qxc4} et {w:Ne5} : les Noirs répliquent par {Qa4 Bd7 Qxc4 b5 Qd3} ou par le sacrifice dynamique {Qa4 cxd4 Nxd4 Qxd4 Bxc6+ Bd7 Rd1}. {dxc5} mène à la finale sans dames {dxc5 Qxd1 Rxd1 Bxc5 Nbd2} où le fou catalan gêne durablement l'aile dame noire, et {Ne5} sacrifie un pion pour l'initiative."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Nc6",
+    "en": "The Modern Sharp Variation: Black develops the queen's knight actively to pressure [d4] and keep {b:Rb8} with {b:b5} or an early {b:e5} break in reserve. White has two principled answers: {Qa4} pins the knight to stop {b:e5} and threatens both {w:Qxc4} and {w:Ne5}, inviting the tactical line {Qa4 Bb4+ Bd2 Nd5}; {O-O} castles first, meeting {O-O Rb8} with {w:Nc3} and {w:e4} or quiet {w:e3} buildup.",
+    "next": ["O-O", "Qa4"],
+    "shapes": ["Yd4", "Ge1g1"],
+    "fr": "La variante moderne tranchante : les Noirs développent activement le cavalier dame pour presser [d4] tout en gardant en réserve {b:Rb8} suivi de {b:b5} ou même une poussée centrale {b:e5}. Les Blancs ont deux réponses de principe : {Qa4} cloue le cavalier pour interdire {b:e5} et menace tant {w:Qxc4} que {w:Ne5}, invitant la ligne tactique {Qa4 Bb4+ Bd2 Nd5} ; {O-O} met d'abord le roi à l'abri pour répondre à {O-O Rb8} par {w:Nc3} et {w:e4} ou par le calme {w:e3}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 c6",
+    "en": "Reached from both the {c6} and {dxc4} move orders, Black sets up a Semi-Slav shield on [c6] to blunt White's g2-bishop and defend the c4-pawn with {b:b5} on the next move. White usually castles with {O-O}, planning to undermine the pawn chain after {O-O b5} with {w:b3} or {w:a4} and {w:Ne5}. {Ne5} immediately stops {b:b5} for a moment, while {Qc2} recovers [c4] safely if Black plays passively.",
+    "next": ["O-O", "Ne5", "Qc2"],
+    "shapes": ["Yc6", "Yc4", "Ge1g1"],
+    "fr": "Atteinte aussi bien via {c6} que via {dxc4}, cette position érige un bouclier Semi-Slave en [c6] pour émousser le fou g2 et défendre le pion c4 par {b:b5} au coup suivant. Les Blancs roquent le plus souvent par {O-O}, avec l'intention de saper la chaîne après {O-O b5} grâce à {w:b3} ou {w:a4} combiné à {w:Ne5}. Jouer {Ne5} tout de suite freine momentanément {b:b5}, tandis que {Qc2} récupère tranquillement [c4] si les Noirs restent passifs."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Nbd7",
+    "en": "Smyslov and Korchnoi's flexible {Nbd7}: Black brings the knight to [d7] so it can step to [b6] or support {b:c5}, while clearing [b8] for {b:Rb8} off the h1-a8 diagonal. White's best reply is {O-O}, keeping full pressure: after {O-O Rb8 a4}, White halts an easy {b:b5} push (and against {b:a6}, {w:a5} keeps the b-pawn frozen because an en passant capture on [b6] exposes the b8-rook to {w:Bf4}). {Qa4+} regains [c4] early.",
+    "next": ["O-O", "Qa4+"],
+    "shapes": ["Yd7", "Yb6", "Yb8", "Ge1g1"],
+    "fr": "Le souple développement {Nbd7} de Smyslov et Kortchnoï : les Noirs amènent le cavalier en [d7] pour pouvoir rebondir en [b6] ou soutenir {b:c5}, tout en libérant [b8] pour écarter la tour par {b:Rb8} hors de la grande diagonale. La meilleure suite blanche est {O-O}, qui maintient toute la pression : après {O-O Rb8 a4}, les Blancs freinent {b:b5} (et sur {b:a6}, {w:a5} fige le pion b car une prise en passant en [b6] exposerait la tour b8 à {w:Bf4}). {Qa4+} regagne tôt [c4]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Bb4+",
+    "en": "Black checks on [b4] in the Open Catalan to draw White's dark-squared bishop onto [d2], where it blocks the d-file and the b1-knight before Black decides how to handle [c4]. After {Bd2} (or {Nc3 Nd5}), Black chooses between three main lines: {Bd2 a5} holds the b4-post and prepares queenside space, {Bd2 Be7} retreats calmly once White's bishop is on [d2], and sharp {Bd2 c5} counterattacks [d4] immediately.",
+    "next": ["Bd2", "Nc3"],
+    "shapes": ["Yb4", "Yd2", "Yc4", "Gc1d2"],
+    "fr": "Les Noirs donnent échec en [b4] dans la Catalane ouverte pour attirer le fou de cases noires en [d2], où il obstrue la colonne d et prive le cavalier b1 de sa case naturelle avant que le sort de [c4] ne se décide. Après {Bd2} (ou {Nc3 Nd5}), les Noirs choisissent entre trois suites majeures : {Bd2 a5} consolide le fou b4 et gagne de l'espace, {Bd2 Be7} se replie calmement une fois le fou blanc en [d2], et {Bd2 c5} contre-attaque immédiatement [d4]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Bb4+ Bd2",
+    "en": "White blocks the check and challenges the b4-bishop at once. {Bxd2+} simplifies dark-squared bishops cleanly, {Be7} drops back now that White's bishop blocks [d2] against {w:Qc2} and {w:Nbd2}, and {a5} defends [b4] so {a5 Qc2 Bxd2+ Qxd2 c6} followed by {b:b5} clings to the extra pawn. {c5} is an aggressive counterstrike at [d4], setting subtle traps along the long diagonal if White chases the queenside pawns greedily.",
+    "next": ["Bxd2+", "Be7", "a5", "c5"],
+    "shapes": ["Yd2", "Yb4", "Yd4", "Gb4d2"],
+    "fr": "Les Blancs parent l'échec et questionnent aussitôt le fou b4. {Bxd2+} simplifie proprement les fous de cases noires, {Be7} revient en arrière maintenant que le fou blanc encombre [d2] et gêne {w:Qc2} comme {w:Nbd2}, tandis que {a5} soutient [b4] afin de s'accrocher au pion supplémentaire après {a5 Qc2 Bxd2+ Qxd2 c6} suivi de {b:b5}. Enfin, {c5} lance un contre-jeu agressif sur [d4] riche en pièges sur la grande diagonale."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Be7",
+    "en": "The Classical Line of the Open Catalan (ECO E05). Instead of weakening the queenside early to hold onto [c4], Black develops the kingside bishop to [e7] and gets ready to castle short. Black's plan is to return the c4-pawn on favorable terms, oppose White's g2-bishop on [b7] or [c6], and equalize with a timely {b:c5} break against [d4]. White castles with {O-O} (usually followed by {O-O O-O Qc2}) or regains [c4] with {Qa4+}.",
+    "next": ["O-O", "Qa4+"],
+    "shapes": ["Yc4", "Ye7", "Yb7", "Ge1g1"],
+    "fr": "La variante Classique de la Catalane ouverte. Plutôt que d'affaiblir prématurément l'aile dame pour garder [c4], les Noirs développent le fou roi en [e7] et s'apprêtent à roquer vite. Leur plan consiste à rendre le pion c4 dans de bonnes conditions, à opposer un fou en [b7] ou [c6] au fou catalan, puis à égaliser grâce à la rupture {b:c5} contre [d4]. Les Blancs roquent par {O-O} (suivi de {O-O O-O Qc2}) ou reprennent le pion par {Qa4+}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7",
+    "en": "Black develops the dark-squared bishop calmly to [e7], keeping two major Catalan systems open: Black can castle and build a Closed Catalan wall with {b:c6} and {b:b6}, or castle first and capture {b:dxc4} into the Classical Open Catalan, a move order that neatly rules out White's early {w:Qa4+} check. White develops {Nf3} to protect [d4], control [e5], and prepare short castling on the next move.",
+    "next": ["Nf3"],
+    "shapes": ["Ye7", "Yd4", "Ye5", "Gg1f3"],
+    "fr": "Les Noirs développent calmement leur fou de cases noires en [e7], gardant deux grands systèmes catalans ouverts : ils peuvent roquer puis bâtir un mur de Catalane fermée par {b:c6} et {b:b6}, ou bien roquer d'abord avant de prendre par {b:dxc4} pour entrer dans la Catalane ouverte Classique en ayant habilement écarté l'échec {w:Qa4+}. Les Blancs poursuivent par {Nf3} afin de protéger [d4], contrôler [e5] et préparer le petit roque."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3",
+    "en": "The main Catalan position before castling, reached from both the Indian move order and the Queen's Gambit Declined. Black almost always castles short with {O-O}, waiting until White castles before choosing between {b:dxc4} in the Classical Open Catalan and {b:c6} in the Closed Catalan. Taking {dxc4} right away reaches the Classical Open a move early, while {c6} commits immediately to the Closed pawn triangle.",
+    "next": ["O-O", "dxc4", "c6"],
+    "shapes": ["Ge8g8"],
+    "fr": "La position principale de la Catalane avant le roque, atteinte tant par l'ordre de coups indien que par le Gambit Dame refusé. Les Noirs roquent presque toujours par {O-O}, attendant le roque adverse pour choisir entre {b:dxc4} dans la Catalane ouverte Classique et {b:c6} dans la Catalane fermée. Prendre tout de suite par {dxc4} transpose avec un coup d'avance dans la ligne ouverte, tandis que {c6} s'engage d'emblée dans le triangle fermé."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O",
+    "en": "With Black's king tucked safely away, White normally castles with {O-O} to bring the rook toward [d1] and reach the main tabiya of the Catalan. Playing {Qc2} a move earlier is a playable sideline designed to stop {b:dxc4} altogether, though with White's king still on [e1] Black can challenge the center energetically with {b:c5} followed by {b:cxd4} and {b:Nc6}, gaining easy piece activity.",
+    "next": ["O-O", "Qc2"],
+    "shapes": ["Yd1", "Ye1", "Ge1g1"],
+    "fr": "Une fois le roi noir à l'abri, les Blancs roquent normalement par {O-O} pour amener leur tour vers [d1] et atteindre la position clé de la Catalane. Jouer {Qc2} un coup plus tôt est une variante destinée à interdire complètement {b:dxc4}, mais tant que le roi blanc reste en [e1], les Noirs peuvent contester énergiquement le centre par {b:c5} suivi de {b:cxd4} et {b:Nc6}, avec une activité de pièces facile."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O",
+    "en": "The main tabiya of the Catalan Opening, contested in World Championship matches by Kramnik, Topalov, Anand, Carlsen and Nepomniachtchi. Both kings are castled, and Black chooses the strategic landscape: {dxc4} opens the game in the Classical Open Catalan, {c6} erects the solid Semi-Slav triangle of the Closed Catalan, and {Nbd7} keeps the c-pawn flexible (while {b6} transposes to the Queen's Indian and {c5} to the Tarrasch).",
+    "next": ["dxc4", "c6", "Nbd7", "b6", "c5"],
+    "shapes": ["Gd5c4"],
+    "fr": "La position clé de l'Ouverture Catalane, disputée en championnat du monde par Kramnik, Topalov, Anand, Carlsen et Nepomniachtchi. Les deux rois ont roqué et les Noirs choisissent la physionomie du combat : {dxc4} ouvre le jeu dans la Catalane ouverte Classique, {c6} érige le solide triangle Semi-Slave de la Catalane fermée, et {Nbd7} garde le pion c souple (tandis que {b6} transpose dans l'Ouest-Indienne et {c5} dans la Tarrasch)."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4",
+    "en": "The Classical Open Catalan: Black waits until both sides have castled so {w:Qa4+} is no longer available, then captures [c4]. White's main continuation is {Qc2}, preparing to regain the pawn while vacating [d1] for a rook and supporting {w:e4}. {Ne5} is Vladimir Kramnik's direct alternative, unleashing the g2-bishop at once, which Black often meets with Magnus Carlsen's {Ne5 Nc6 Nxc6 bxc6 Bxc6 Rb8}, trading pawn structure for active b-file play.",
+    "next": ["Qc2", "Ne5", "Na3"],
+    "shapes": ["Yc4", "Yd1", "Gd1c2"],
+    "fr": "La Catalane ouverte Classique : les Noirs attendent que les deux rois aient roqué pour que {w:Qa4+} ne soit plus disponible avant de cueillir [c4]. La suite principale est {Qc2}, qui prépare la récupération du pion tout en libérant [d1] pour une tour et en soutenant {w:e4}. {Ne5} est l'alternative directe de Vladimir Kramnik, démasquant d'emblée le fou g2, à laquelle Magnus Carlsen oppose souvent {Ne5 Nc6 Nxc6 bxc6 Bxc6 Rb8} pour activer la tour sur la colonne b."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2",
+    "en": "White attacks [c4] with the queen while preparing {w:Rd1} and {w:e4}. {a6} is the classical main line, threatening {b:b5} so White chooses between {a6 Qxc4 b5 Qc2 Bb7} and preventing the expansion with {a6 a4}. {b5} is the modern gambit popularized by Ian Nepomniachtchi in the 2021 World Championship, meeting {b5 a4} with {b:Bb7} (or {b:a6}) to sacrifice a queenside pawn for rapid piece activity; {c5} and {Nbd7} are solid alternatives.",
+    "next": ["a6", "b5", "c5", "Nbd7"],
+    "shapes": ["Yc4", "Ga7a6"],
+    "fr": "Les Blancs attaquent [c4] avec la dame tout en préparant {w:Rd1} et {w:e4}. {a6} est la grande ligne classique, menaçant {b:b5} afin que les Blancs choisissent entre {a6 Qxc4 b5 Qc2 Bb7} et l'arrêt net {a6 a4}. {b5} est le gambit moderne popularisé par Ian Nepomniachtchi au championnat du monde 2021, qui répond à {b5 a4} par {b:Bb7} (ou {b:a6}) pour sacrifier un pion de l'aile dame contre un développement fulgurant ; {c5} et {Nbd7} restent solides."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 a6",
+    "en": "The classical crossroads after {a6}: Black threatens {b:b5} to hold the extra pawn. {Qxc4} recovers the pawn at once, leading after {Qxc4 b5 Qc2 Bb7} to a rich strategic battle over the [c5] square: if Black achieves {b:c5} cleanly Black equalizes, so White fights to clamp down on [c5] with {w:Bd2}, {w:Rd1}, {w:Bg5} and knights on [e5] or [c5]. {a4} has become the modern favorite, stopping {b:b5} outright and forcing {a4 Bd7 Qxc4 Bc6 Bg5}.",
+    "next": ["Qxc4", "a4"],
+    "shapes": ["Yc5", "Ye5", "Gc2c4"],
+    "fr": "Le carrefour classique après {a6} : les Noirs menacent {b:b5} pour conserver leur pion de plus. {Qxc4} récupère le pion tout de suite et mène après {Qxc4 b5 Qc2 Bb7} à une riche lutte stratégique autour de la case [c5] : si les Noirs réussissent {b:c5} dans de bonnes conditions, ils égalisent, aussi les Blancs verrouillent-ils [c5] par {w:Bd2}, {w:Rd1}, {w:Bg5} et un cavalier en [e5] ou [c5]. {a4} est devenu le favori moderne, stoppant {b:b5} pour forcer {a4 Bd7 Qxc4 Bc6 Bg5}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O dxc4 Qc2 b5 a4",
+    "en": "White challenges Black's bold expansion along both the a-file and the h1-a8 diagonal. Black's point is the modern gambit {Bb7} (or {b:a6} followed by {b:Bb7}): after {Bb7 axb5 a6 bxa6 Nxa6}, Black gives back a pawn on the queenside to develop every piece rapidly and strike at the center with {b:Nb4} or {b:c5}, while {b4} pushes past into sharp complications. Trying to prop up [b5] passively with {b:c6} walks into a positional bind.",
+    "next": ["Bb7", "b4"],
+    "mistakes": [
+      {
+        "move": "c6",
+        "mark": "?",
+        "punish": "axb5 Nd5 Qxc4",
+        "en": "Defending [b5] passively with {c6} fails because the a8-rook is still undefended on the long diagonal. After {axb5}, recapturing with the c-pawn drops the rook to {w:Ng5} or {w:Ne5}, while {axb5 Nd5 Qxc4 cxb5 Qxb5} leaves White a clean pawn up with dominant central control. Play the active gambit {b:Bb7} instead.",
+        "shapes": ["Rb5", "Ga4b5"],
+        "fr": "Défendre passivement [b5] par {c6} échoue car la tour [a8] reste non protégée sur la grande diagonale. Après {axb5}, reprendre du pion c perd la tour sur {w:Ng5} ou {w:Ne5}, tandis que {axb5 Nd5 Qxc4 cxb5 Qxb5} laisse aux Blancs un pion net de plus et la maîtrise du centre. Jouez plutôt le gambit actif {b:Bb7}."
+      }
+    ],
+    "shapes": ["Yb5", "Gc8b7"],
+    "fr": "Les Blancs défient l'expansion audacieuse des Noirs tant sur la colonne a que sur la diagonale h1-a8. Toute la pointe noire réside dans le gambit moderne {Bb7} (ou {b:a6} suivi de {b:Bb7}) : après {Bb7 axb5 a6 bxa6 Nxa6}, les Noirs rendent un pion à l'aile dame pour mobiliser toutes leurs pièces et frapper le centre par {b:Nb4} ou {b:c5}, tandis que {b4} entraîne de vives complications. Défendre passivement [b5] par {b:c6} subit en revanche un étau sévère."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O Nbd7",
+    "en": "Black develops the queen's knight to [d7] before playing {b:c6}, keeping the c-pawn free to either bolster [d5] with {b:c6} or strike with {b:c5} in one go. White usually plays {Qc2}, which transposes into the Closed Catalan main line after {Qc2 c6}, or {b3} for a quiet double fianchetto. {Nc3} is an enterprising gambit try that punishes {Nc3 dxc4} by seizing the center with {w:e4} and {w:Qe2}.",
+    "next": ["Qc2", "Nc3", "b3"],
+    "shapes": ["Yd7", "Yd5", "Gd1c2"],
+    "fr": "Les Noirs développent leur cavalier dame en [d7] avant de jouer {b:c6}, gardant ainsi le pion c libre soit d'étayer [d5] par {b:c6}, soit de frapper d'un seul temps par {b:c5}. Les Blancs jouent le plus souvent {Qc2}, qui transpose dans la grande ligne de la Catalane fermée après {Qc2 c6}, ou {b3} pour un double fianchetto tranquille. {Nc3} est un gambit entreprenant qui punit {Nc3 dxc4} en prenant tout le centre par {w:e4} et {w:Qe2}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O c6",
+    "en": "The Closed Catalan. Black refuses to open the long diagonal for White's g2-bishop and builds a sturdy Semi-Slav pawn triangle on [c6], [d5] and [e6]. Black's camp is rock-solid, at the price of shutting in the light-squared bishop on [c8]: freeing that bishop via {b:b6}, {b:Bb7} (or {b:Ba6}) and a later {b:c5} break is Black's main strategic task. White's standard move is {Qc2}, guarding [c4] and preparing {w:Rd1}, {w:Nbd2} and {w:e4}.",
+    "next": ["Qc2", "b3", "Nbd2", "Nc3"],
+    "shapes": ["Yc6", "Yd5", "Ye6", "Gd1c2"],
+    "fr": "La Catalane fermée. Les Noirs refusent d'ouvrir la grande diagonale au fou g2 et érigent un robuste triangle de pions Semi-Slave en [c6], [d5] et [e6]. Le camp noir est d'une grande solidité, au prix d'enfermer le fou de cases blanches en [c8] : libérer ce fou via {b:b6}, {b:Bb7} (ou {b:Ba6}) puis une rupture {b:c5} constitue la tâche stratégique majeure des Noirs. Le coup standard des Blancs est {Qc2}, qui protège [c4] et prépare {w:Rd1}, {w:Nbd2} et {w:e4}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O c6 Qc2",
+    "en": "White places the queen on her ideal Closed Catalan post: [c2] protects [c4] now that Black is castled and ready to threaten {b:dxc4} with {b:b5}, vacates [d1] for a rook, and backs up the central {w:e4} break. Black chooses between two main move orders: {b6} prepares {b:Bb7} or {b:Ba6} while keeping the b8-knight flexible (so it can jump to [a6] to support {b:c5}), and {Nbd7} develops the knight to its classical support square first.",
+    "next": ["b6", "Nbd7"],
+    "shapes": ["Yc2", "Yc4", "Yd1", "Gb7b6"],
+    "fr": "Les Blancs installent la dame sur sa case idéale de la Catalane fermée : [c2] protège [c4] maintenant que les Noirs ont roqué et menacent {b:dxc4} suivi de {b:b5}, libère [d1] pour une tour et soutient la percée centrale {w:e4}. Les Noirs choisissent entre deux ordres de coups principaux : {b6} prépare {b:Bb7} ou {b:Ba6} en gardant le cavalier b8 souple (prêt à bondir en [a6] pour appuyer {b:c5}), tandis que {Nbd7} place d'abord le cavalier sur sa case de soutien classique."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O c6 Qc2 b6",
+    "en": "The modern main line of the Closed Catalan: by playing {b6} before moving the b8-knight, Black keeps the active plan of {b:Bb7} followed by {b:Na6} and {b:c5}. White develops with {Nbd2} (or {Rd1}, {Bf4}, or {b3}), preparing the thematic central break {Nbd2 Bb7 e4}, where {Nbd2 Bb7 e4 Na6 a3 c5 exd5 exd5 dxc5 Nxc5 b4} leads to a rich fight between White's bishops and Black's active knights.",
+    "next": ["Nbd2", "Rd1", "b3", "Bf4"],
+    "shapes": ["Gb1d2"],
+    "fr": "La grande ligne moderne de la Catalane fermée : en jouant {b6} avant de bouger le cavalier b8, les Noirs préservent le plan actif {b:Bb7} suivi de {b:Na6} et {b:c5}. Les Blancs se développent par {Nbd2} (ou {Rd1}, {Bf4}, {b3}), préparant la rupture centrale thématique {Nbd2 Bb7 e4}, où {Nbd2 Bb7 e4 Na6 a3 c5 exd5 exd5 dxc5 Nxc5 b4} ouvre une lutte riche entre les fous blancs et les cavaliers noirs actifs."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O c6 Qc2 Nbd7",
+    "en": "The traditional Closed Catalan (ECO E08-E09): Black places the knight on [d7] to support both [e5] and [c5] while planning {b:b6}, {b:Bb7} or {b:Ba6}, and {b:Rc8}. White has four well-tested setups to prepare the {w:e4} break: {Nbd2} is the classical main line, {Rd1} aligns the rook opposite Black's queen to pressure [d5], {b3} sets up a double fianchetto with {w:Bb2}, and {Bf4} eyes the [c7] and [d6] dark squares.",
+    "next": ["Nbd2", "Rd1", "b3", "Bf4"],
+    "shapes": ["Yd7", "Ye5", "Yc5", "Gb1d2"],
+    "fr": "La Catalane fermée traditionnelle : les Noirs placent le cavalier en [d7] pour soutenir à la fois [e5] et [c5], tout en projetant {b:b6}, {b:Bb7} ou {b:Ba6}, puis {b:Rc8}. Les Blancs disposent de quatre schémas éprouvés pour préparer la poussée {w:e4} : {Nbd2} est la ligne principale classique, {Rd1} place la tour en vis-à-vis de la dame noire pour presser [d5], {b3} installe un double fianchetto avec {w:Bb2}, et {Bf4} cible les cases noires [c7] et [d6]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O c6 Qc2 Nbd7 Nbd2",
+    "en": "The Closed Catalan main line (ECO E09). White's knight on [d2] reinforces [c4] and stands ready to recapture on [e4] once White pushes {w:e4}. Black's standard plan is {b6} followed by {b:Bb7} (or {b:Ba6}) and {b:Rc8}, preparing to meet {w:e4} with {b:dxe4} or {b:c5}, while {a5} grabs queenside space first. Surrendering [d5] with {b:dxc4} now hands White the center and long diagonal without a fight.",
+    "next": ["b6", "a5"],
+    "mistakes": [
+      {
+        "move": "dxc4",
+        "mark": "?",
+        "punish": "Nxc4 b5 Nce5",
+        "en": "Capturing {dxc4} after already spending a move on [c6] and letting White reach [d2] is a serious positional error: {Nxc4} recaptures with gain of time, opens the long diagonal against [c6], and after {Nxc4 b5 Nce5} leaves Black with a backward target on [c6]. Keep [d5] intact and play {b:b6} instead.",
+        "shapes": ["Rc6", "Rd2", "Gd2c4"],
+        "fr": "Prendre par {dxc4} après avoir déjà dépensé un temps sur [c6] et laissé le cavalier blanc atteindre [d2] est une sérieuse faute positionnelle : {Nxc4} reprend avec gain de temps, ouvre la grande diagonale contre [c6], et après {Nxc4 b5 Nce5} cloue les Noirs sur une cible arriérée en [c6]. Gardez [d5] intact et jouez {b:b6}."
+      },
+      {
+        "move": "Nb6",
+        "mark": "?!",
+        "punish": "b3 a5 e4",
+        "en": "Hopping to [b6] to hit [c4] blocks Black's own b-pawn, preventing {b:b6} from freeing the hemmed-in bishop on [c8]. White calmly plays {b3}, keeping Black's queenside cramped while preparing {w:Bb2}, {w:Rd1} and {w:e4}. Free the light-squared bishop with {b:b6} instead.",
+        "shapes": ["Rb6", "Rc4", "Gb2b3"],
+        "fr": "Sauter en [b6] pour attaquer [c4] bloque le propre pion b des Noirs et empêche {b:b6} de libérer le fou enfermé en [c8]. Les Blancs jouent tranquillement {b3}, laissant l'aile dame noire à l'étroit tout en préparant {w:Bb2}, {w:Rd1} et {w:e4}. Libérez plutôt le fou de cases blanches par {b:b6}."
+      }
+    ],
+    "shapes": ["Yd2", "Yc4", "Ye4", "Gb7b6"],
+    "fr": "La grande ligne classique de la Catalane fermée. Le cavalier blanc en [d2] renforce [c4] et se tient prêt à reprendre en [e4] dès que les Blancs pousseront {w:e4}. Le plan standard des Noirs consiste à jouer {b6} suivi de {b:Bb7} (ou {b:Ba6}) et {b:Rc8}, afin de répondre à {w:e4} par {b:dxe4} ou {b:c5}, tandis que {a5} prend d'abord de l'espace à l'aile dame. Céder maintenant [d5] par {b:dxc4} abandonne sans combat le centre et la grande diagonale."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O c6 Qc2 Nbd7 Nbd2 b6",
+    "en": "Black prepares {b:Bb7} or {b:Ba6} to bring the light-squared bishop into the game at last. White's sharpest continuation is the central break {e4}, opening the d-file and the g2-bishop's diagonal (while {b3} with {w:Bb2} or {Rd1} builds up more slowly first). After {e4 dxe4 Nxe4}, Black develops {b:Bb7} and prepares {b:Nxe4} with {b:Nf6} and {b:c5}, taking care never to leave [c6] or [d6] loose prematurely.",
+    "next": ["e4", "b3", "Rd1"],
+    "shapes": ["Yc6", "Yd6", "Ge2e4"],
+    "fr": "Les Noirs préparent enfin {b:Bb7} ou {b:Ba6} pour mettre en jeu leur fou de cases blanches. La suite la plus tranchante des Blancs est la percée centrale {e4}, qui ouvre la colonne d et la diagonale du fou g2 (tandis que {b3} suivi de {w:Bb2} ou {Rd1} construit plus patiemment). Après {e4 dxe4 Nxe4}, les Noirs développent {b:Bb7} et préparent la rupture libératrice {b:c5}, en veillant à ne jamais laisser [c6] ou [d6] sans surveillance."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O c6 Qc2 Nbd7 Bf4 b6 Nbd2 Bb7 e4 dxe4 Nxe4",
+    "en": "A classic Closed Catalan tabiya: White has carried out the {e4} break, opened both the d-file and the h1-a8 diagonal, and planted an active knight on [e4] while the f4-bishop eyes [d6] and [c7]. Black needs to challenge that centralized knight right away by trading {Nxe4} ({Nxe4 Qxe4 Nf6 Qe2}, followed by {b:c5}) or striking with {c5}. Routine rook moves on the c-file walk into a crippling knight jump into [d6].",
+    "next": ["Nxe4", "c5"],
+    "mistakes": [
+      {
+        "move": "Rc8",
+        "mark": "?",
+        "punish": "Nd6 Bxd6 Bxd6",
+        "en": "Playing {Rc8} automatically forgets that White's knight on [e4] can leap into [d6] with tempo. {Nd6} forks the b7-bishop and c8-rook, forcing {Nd6 Bxd6 Bxd6} when White's dark-squared bishop paralyzes Black's queenside and stops {b:c5} cold. Trade {b:Nxe4} first.",
+        "shapes": ["Re4", "Rd6", "Ge4d6"],
+        "fr": "Jouer machinalement {Rc8} oublie que le cavalier blanc en [e4] peut bondir en [d6] avec gain de temps ! {Nd6} fait une fourchette entre le fou b7 et la tour c8, forçant {Nd6 Bxd6 Bxd6} où le fou de cases noires paralyse toute l'aile dame noire et interdit {b:c5}. Échangez d'abord par {b:Nxe4}."
+      }
+    ],
+    "shapes": ["Ye4", "Yd6", "Yc7", "Gf6e4"],
+    "fr": "Une position clé de la Catalane fermée : les Blancs ont accompli la poussée {e4}, ouvert tant la colonne d que la diagonale h1-a8, et campé un cavalier actif en [e4] pendant que le fou f4 surveille [d6] et [c7]. Les Noirs doivent contester ce cavalier centralisé sans attendre en échangeant par {Nxe4} ({Nxe4 Qxe4 Nf6 Qe2} suivi de {b:c5}) ou en frappant par {c5}. Un coup de tour routinier sur la colonne c se heurte à une intrusion paralysante en [d6]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Nf3 Bb4+ Bd2 Be7 Bg2 O-O O-O",
+    "en": "The main tabiya of the Bogo-Catalan Retreat after both sides castle. White's bishop on [d2] temporarily blocks the d-file and keeps the b1-knight off [d2], justifying Black's bishop retreat. Black usually builds the Closed triangle with {c6} (or plays {Nbd7} first ahead of {b:c6} and {b:b6}, while {dxc4} enters an Open line), and White answers with {w:Qc2} before shifting the d2-bishop to [f4] or [c3].",
+    "next": ["c6", "Nbd7", "dxc4"],
+    "shapes": ["Yd2", "Yf4", "Yc3", "Gc7c6"],
+    "fr": "La position clé du repli Bogo-Catalan une fois les deux rois roqués. Le fou blanc en [d2] obstrue provisoirement la colonne d et interdit la case [d2] au cavalier b1, ce qui justifie l'aller-retour du fou noir. Les Noirs bâtissent le plus souvent le triangle fermé par {c6} (ou commencent par {Nbd7} avant {b:c6} et {b:b6}, tandis que {dxc4} ouvre le jeu), et les Blancs répondent par {w:Qc2} avant de replacer leur fou d2 en [f4] ou [c3]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Bb4+ Bd2 c5 Bxb4 cxb4 Qa4+ Nc6",
+    "en": "A sharp tactical line in the {Bb4+} Open Catalan: Black accepts doubled b-pawns to lure White's queen out to [a4] while counterattacking [d4]. White's critical move is {Ne5}, unleashing the g2-bishop against [c6] and [a8] so that {Ne5 Bd7 Nxc6 Bxc6 Bxc6+ bxc6 Qxb4} or {Ne5 O-O Nxc6 bxc6 Qxb4} regains the pawns with dynamic balance. Retreating the f3-knight to [d2] drops [d4] and opens the long diagonal against White's own rook.",
+    "next": ["Ne5"],
+    "mistakes": [
+      {
+        "move": "Nfd2",
+        "mark": "?",
+        "punish": "Bd7 Nxc4 Nxd4 Qd1",
+        "en": "Retreating {Nfd2} to regain [c4] leaves [d4] undefended and opens the a8-h1 diagonal toward White's own rook on [h1]. After {Bd7}, greedily playing {Bd7 Bxc6 Bxc6 Qxb4} loses the h1-rook to {b:Bxh1}, while {Bd7 Nxc4 Nxd4 Qd1} leaves Black a central pawn up with a strong initiative. Play {w:Ne5} instead.",
+        "shapes": ["Rc4", "Rd4", "Gc8d7"],
+        "fr": "Replier {Nfd2} pour regagner [c4] laisse [d4] sans défense et ouvre la diagonale a8-h1 vers la tour blanche en [h1]. Après {Bd7}, jouer avidement {Bd7 Bxc6 Bxc6 Qxb4} perd la tour h1 sur {b:Bxh1}, tandis que {Bd7 Nxc4 Nxd4 Qd1} laisse un pion central et l'initiative aux Noirs. Jouez {w:Ne5}."
+      }
+    ],
+    "shapes": ["Ya4", "Yd4", "Yc6", "Gf3e5"],
+    "fr": "Une ligne tactique aiguë de la Catalane ouverte avec échec en [b4] : les Noirs acceptent des pions b doublés pour attirer la dame blanche en [a4] tout en contre-attaquant [d4]. Le coup critique est {Ne5}, qui démasque le fou g2 contre [c6] et [a8] afin que {Ne5 Bd7 Nxc6 Bxc6 Bxc6+ bxc6 Qxb4} ou {Ne5 O-O Nxc6 bxc6 Qxb4} récupère les pions dans un équilibre dynamique. Replier le cavalier f3 en [d2] abandonne [d4] et ouvre la grande diagonale contre la tour h1."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 c5 O-O Nc6 Qa4 Bd7 Qxc4",
+    "en": "The main line of the {c5} Open Catalan: White has regained the c4-pawn with the queen, while Black has developed both queenside minor pieces and unpinned [c6]. Black's sharpest continuation is {b5}, kicking the queen off [c4] to gain queenside space ahead of {b5 Qd3 Rc8} or {b5 Qd3 c4}. {cxd4} is the gambit alternative ({cxd4 Nxd4 Rc8}), and {Rc8} develops calmly; White must take care not to grab a poisoned b5-pawn.",
+    "next": ["b5", "cxd4", "Rc8"],
+    "shapes": ["Yc6", "Yc4", "Gb7b5"],
+    "fr": "La ligne principale de la Catalane ouverte avec {c5} : les Blancs ont repris le pion c4 de la dame, tandis que les Noirs ont mobilisé leurs deux pièces mineures de l'aile dame et décloué [c6]. La suite la plus incisive des Noirs est {b5}, qui chasse la dame de [c4] pour gagner de l'espace avant {b5 Qd3 Rc8} ou {b5 Qd3 c4}. {cxd4} est le gambit dynamique ({cxd4 Nxd4 Rc8}), et {Rc8} développe calmement ; attention pour les Blancs au pion b5 empoisonné."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 c5 O-O Nc6 Qa4 Bd7 Qxc4 b5",
+    "en": "Black chases the queen with {b5}, seizing queenside space while leaving the b5-pawn tactically protected through [d4] and [e2]. White should retreat the queen calmly to {Qd3} (or {Qc2}), keeping [d4] covered against {b:Rc8} or {b:c4} before building the center with {w:dxc5} and {w:Nc3} or {w:e4}. Snatching the seemingly loose pawn on [b5] abandons [d4] and walks into a devastating double attack.",
+    "next": ["Qd3", "Qc2"],
+    "mistakes": [
+      {
+        "move": "Qxb5",
+        "mark": "?",
+        "punish": "Nxd4 Qa6 Bb5",
+        "en": "Taking {Qxb5} forgets that the queen on [c4] was guarding [d4] and keeping Black's d7-bishop off [b5]. {Nxd4} wins the central pawn with tempo on the queen and [e2], and after {Nxd4 Qa6 Bb5} (or {Nxd4 Qc4 Bb5}) Black's pieces swarm [e2] and [f1] with decisive threats. Retreat the queen to {w:Qd3} instead.",
+        "shapes": ["Rc4", "Rd4", "Gc6d4"],
+        "fr": "Prendre par {Qxb5} oublie que la dame en [c4] protégeait [d4] et interdisait la case [b5] au fou d7. {Nxd4} gagne le pion central avec gain de temps sur la dame et [e2], et après {Nxd4 Qa6 Bb5} les pièces noires envahissent [e2] et [f1] avec des menaces décisives. Repliez la dame en {w:Qd3}."
+      }
+    ],
+    "shapes": ["Yd4", "Ye2", "Yb5", "Gc4d3"],
+    "fr": "Les Noirs chassent la dame par {b5}, gagnant de l'espace à l'aile dame tout en laissant ce pion b5 défendu tactiquement grâce aux thèmes sur [d4] et [e2]. Les Blancs doivent replier sagement la dame en {Qd3} (ou {Qc2}) afin de garder [d4] protégé face à {b:Rc8} ou {b:c4}, avant de consolider le centre par {w:dxc5} et {w:Nc3} ou {w:e4}. Cueillir le pion apparemment gratuit en [b5] abandonne [d4] et s'expose à une double attaque dévastatrice."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O c6 Qc2 Nbd7 Bf4 b6 Nbd2 Bb7 e4 dxe4 Nxe4 Nxe4 Qxe4",
+    "en": "After trading knights on [e4], White's queen commands the center while Black's light-squared bishop on [b7] is still blocked behind its own c6-pawn. Black should bring the d7-knight to {Nf6} right away, kicking White's queen off [e4] so {Nf6 Qe2 c5} achieves the freeing Catalan break and wakes up the b7-bishop with full equality. Moving a rook to [c8] before chasing the queen gives White time to clamp down on [c5] for good.",
+    "next": ["Nf6"],
+    "mistakes": [
+      {
+        "move": "Rc8",
+        "mark": "?",
+        "punish": "Rfd1 Nf6 Qe2",
+        "en": "Playing {Rc8} while White's queen still dominates [e4] gives White the tempo needed to double rooks on the central files with {Rfd1} and {w:Rac1} (or jump {w:Ne5}), preventing the {b:c5} break so Black's b7-bishop stays shut out of the game. Kick the queen first with {b:Nf6}.",
+        "shapes": ["Re4", "Gf1d1"],
+        "fr": "Jouer {Rc8} pendant que la dame blanche domine encore [e4] laisse aux Blancs le temps de doubler les tours au centre par {Rfd1} et {w:Rac1} (ou de bondir par {w:Ne5}), empêchant la poussée {b:c5} et condamnant le fou b7 à la passivité. Chassez d'abord la dame par {b:Nf6}."
+      }
+    ],
+    "shapes": ["Ye4", "Yb7", "Yc8", "Gd7f6"],
+    "fr": "Après l'échange des cavaliers en [e4], la dame blanche règne au centre tandis que le fou noir en [b7] reste muré derrière son propre pion c6. Les Noirs doivent amener sans tarder leur cavalier d7 en {Nf6}, chassant la dame blanche de [e4] afin que {Nf6 Qe2 c5} réalise la rupture libératrice et réveille le fou b7 avec une pleine égalité. Jouer une tour en [c8] avant de déloger la dame laisse aux Blancs le temps de verrouiller définitivement [c5]."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 Nf3 d5 g3 Be7",
+    "en": "Reached over a million times via the standard {Nf3} move order, Black develops the bishop to [e7] and prepares short castling before deciding whether to capture on [c4] or build a Closed Catalan wall with {b:c6}. Because White's knight is already on [f3], early {w:Qa4+} lines are off the table if Black later takes [c4]. White completes the fianchetto with {Bg2}, heading into the main Catalan tabiya after {Bg2 O-O O-O}.",
+    "next": ["Bg2"],
+    "shapes": ["Ye7", "Yc4", "Yf3", "Gf1g2"],
+    "fr": "Atteinte plus d'un million de fois via l'ordre de coups standard avec {Nf3}, cette position voit les Noirs développer le fou en [e7] et préparer le petit roque avant de choisir entre la prise en [c4] et le mur fermé {b:c6}. Comme le cavalier blanc est déjà en [f3], les échecs précoces par {w:Qa4+} sont exclus si les Noirs prennent plus tard en [c4]. Les Blancs complètent le fianchetto par {Bg2}, vers la position clé après {Bg2 O-O O-O}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 Nf3 d5 g3 Bb4+",
+    "en": "With [d5] and [f3] already on the board, Black checks on [b4] to disrupt White's smooth Catalan coordination before White can fianchetto and castle. White's main reply is {Bd2}, challenging the bishop at the small cost of occupying the b1-knight's favorite [d2] square. {Nbd2} preserves the bishop pair if Black trades on [d2], while {Nc3} invites Ragozin-style play after {Nc3 O-O Bg2 dxc4}. Blocking with the queen is a catastrophic mouseslip.",
+    "next": ["Bd2", "Nbd2", "Nc3"],
+    "mistakes": [
+      {
+        "move": "Qd2",
+        "mark": "??",
+        "punish": "Bxd2+ Nbxd2 O-O",
+        "en": "Interposing the queen on [d2] hangs her outright to {Bxd2+}, leaving White a queen for a bishop down on move five. Block the check with {w:Bd2}, {w:Nbd2} or {w:Nc3} instead.",
+        "shapes": ["Rd2", "Gb4d2"],
+        "fr": "Interposer la dame en [d2] la donne purement et simplement sur {Bxd2+}, laissant les Blancs avec une dame de moins contre un fou dès le cinquième coup ! Parez l'échec par {w:Bd2}, {w:Nbd2} ou {w:Nc3}."
+      }
+    ],
+    "shapes": ["Yd5", "Yf3", "Yb4", "Gc1d2"],
+    "fr": "Avec [d5] et [f3] déjà sur l'échiquier, les Noirs donnent échec en [b4] pour perturber l'harmonie catalane avant que les Blancs ne puissent achever leur fianchetto et roquer. La réponse principale est {Bd2}, qui conteste le fou au prix modeste d'occuper la case favorite du cavalier b1. {Nbd2} préserve la paire de fous en cas d'échange en [d2], tandis que {Nc3} invite un jeu de type Ragozine après {Nc3 O-O Bg2 dxc4}. Interposer la dame est une gaffe terrible."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 Nf3 d5 g3 Bb4+ Bd2 Be7",
+    "en": "The Bogo-Catalan Retreat: having lured White's queen's bishop onto [d2] — where it blocks the d-file and takes [d2] away from the b1-knight — Black calmly drops the bishop back to [e7]. Although Black spent two moves with the bishop, White will usually spend a move later redeploying the d2-bishop to [f4] or [c3]. White continues with {Bg2} (or {Qc2} first), heading for {Bg2 O-O O-O c6}.",
+    "next": ["Bg2", "Qc2"],
+    "shapes": ["Yd2", "Ye7", "Yf4", "Gf1g2"],
+    "fr": "Le repli de la Bogo-Catalane : après avoir attiré le fou dame blanc en [d2] — où il bouche la colonne d et prive le cavalier b1 de sa case naturelle —, les Noirs ramènent calmement leur fou en [e7]. Même si les Noirs ont joué deux fois ce fou, les Blancs devront le plus souvent dépenser un temps plus tard pour replacer leur fou d2 en [f4] ou [c3]. Les Blancs poursuivent par {Bg2} (ou {Qc2} d'abord), en route vers {Bg2 O-O O-O c6}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 Nf3 d5 g3 Bb4+ Bd2 Be7 Bg2 O-O",
+    "en": "Black castles into safety in the Bogo-Catalan Retreat, ready to meet White's castling with {b:c6} or {b:Nbd7} (or switch plans with {b:dxc4} while White's bishop on [d2] blocks the queen from recapturing). White almost always castles short with {O-O}, though {Qc2} first is a common move-order finesse that protects [c4] before castling so Black never gets a free Open Catalan capture on [c4].",
+    "next": ["O-O", "Qc2"],
+    "shapes": ["Yd2", "Yc4", "Ge1g1"],
+    "fr": "Les Noirs mettent leur roi à l'abri dans le repli Bogo-Catalan, prêts à répondre au roque blanc par {b:c6} ou {b:Nbd7} (ou à bifurquer par {b:dxc4} pendant que le fou en [d2] empêche la dame blanche de reprendre). Les Blancs roquent presque toujours par {O-O}, même si {Qc2} d'abord est une finesse d'ordre de coups courante qui protège [c4] avant le roque pour priver les Noirs d'une Catalane ouverte gratuite."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 Nf3 d5 g3 Bb4+ Bd2 Be7 Bg2 O-O O-O c6",
+    "en": "Black completes the Semi-Slav pawn triangle in the Bogo-Catalan Retreat, blunting White's g2-bishop along the long diagonal and threatening {b:dxc4} now that [b5] is supported. White's main move is {Qc2}, protecting [c4] ahead of {Qc2 Nbd7 Bf4 b6} when the d2-bishop finds an active home on [f4] (or [c3]) and clears [d2] for the b1-knight to support {w:e4}. {Bf4} and {b3} are solid positional alternatives.",
+    "next": ["Qc2", "Bf4", "b3"],
+    "shapes": ["Yb5", "Yc4", "Yf4", "Gd1c2"],
+    "fr": "Les Noirs complètent le triangle de pions Semi-Slave dans le repli Bogo-Catalan, émoussant le fou g2 sur la grande diagonale tout en menaçant enfin {b:dxc4} maintenant que [b5] est soutenu. Le coup principal des Blancs est {Qc2}, qui protège [c4] avant {Qc2 Nbd7 Bf4 b6}, où le fou d2 trouve un poste actif en [f4] (ou [c3]) et libère [d2] au cavalier b1 pour appuyer {w:e4}. {Bf4} et {b3} sont de solides options positionnelles."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 c5 Nf3",
+    "en": "White develops the knight to guard [d4] and maintain full pawn tension in the Tarrasch Catalan rather than trading on [d5] immediately. Black's main move is {Nc6}, increasing pressure on [d4] before developing {b:Be7}; {cxd4} clarifies the center right away so {cxd4 Nxd4 e5} kicks the knight at the price of a backward d-pawn or holes on [d5], while {dxc4} steers into an Open Catalan with {b:c5} already in.",
+    "next": ["Nc6", "cxd4", "dxc4"],
+    "shapes": ["Yd4", "Yd5", "Gb8c6"],
+    "fr": "Les Blancs sortent le cavalier pour protéger [d4] et maintenir toute la tension centrale dans la Catalane Tarrasch plutôt que d'échanger tout de suite en [d5]. Le coup principal des Noirs est {Nc6}, qui accentue la pression sur [d4] avant {b:Be7} ; {cxd4} clarifie immédiatement le centre afin que {cxd4 Nxd4 e5} chasse le cavalier au prix d'un pion d arriéré ou de trous autour de [d5], tandis que {dxc4} entre dans une Catalane ouverte avec {b:c5} déjà joué."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O Nbd7 Qc2",
+    "en": "The classical E08 Closed Catalan: White guards [c4] with the queen and waits to see how Black reinforces the center. {c6} is the main move, transposing into the E09 wall where Black follows up with {b:b6} and {b:Bb7}. Because Black has not committed the c-pawn yet, Black can also fianchetto immediately with {b6} ahead of {b:Bb7} and {b:c5}, or strike directly at [d4] with {c5}.",
+    "next": ["c6", "b6", "c5"],
+    "shapes": ["Yc4", "Yd4", "Gc7c6"],
+    "fr": "La Catalane fermée classique : les Blancs protègent [c4] avec la dame et attendent de voir comment les Noirs renforcent leur centre. {c6} est le coup principal, transposant dans le mur solide où les Noirs enchaînent {b:b6} et {b:Bb7}. Comme le pion c noir n'a pas encore bougé, les Noirs peuvent aussi installer tout de suite le fianchetto dame par {b6} suivi de {b:Bb7} et {b:c5}, ou frapper directement [d4] par {c5}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O Nbd7 Nc3",
+    "en": "An aggressive gambit sideline against {Nbd7}: instead of guarding [c4] with {w:Qc2}, White develops the knight to [c3] to fight directly for [e4] and [d5]. If Black accepts the pawn with {dxc4}, White seizes the center with {dxc4 e4} (or {dxc4 a4}) and uses the open long diagonal to regain [c4] later. Black's safest reply is {c6}, forcing White to guard [c4] with {c6 Qd3} (Botvinnik's move) or {c6 b3}.",
+    "next": ["c6", "dxc4", "b6"],
+    "shapes": ["Yc4", "Yc3", "Ye4", "Gc7c6"],
+    "fr": "Un gambit agressif contre {Nbd7} : plutôt que de défendre [c4] par {w:Qc2}, les Blancs développent le cavalier en [c3] pour disputer directement [e4] et [d5]. Si les Noirs acceptent le pion par {dxc4}, les Blancs s'emparent du centre via {dxc4 e4} (ou {dxc4 a4}) et s'appuient sur la grande diagonale ouverte pour regagner [c4] plus tard. La réponse la plus sûre des Noirs est {c6}, forçant {c6 Qd3} (le coup de Botvinnik) ou {c6 b3}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Bb4+ Bd2 a5 Qc2",
+    "en": "White steps the queen to [c2] to attack [c4] and unpin the d2-bishop while preparing short castling. Black's main continuation is {Bxd2+}, when {Bxd2+ Qxd2 c6} blunts the g2-bishop before expanding with {b:b5} (usually met by {w:a4} followed by {w:Na3} and {w:Ne5} targeting the weakened queenside), while {O-O} returns the c4-pawn for rapid development and {c5} challenges [d4] directly in the center.",
+    "next": ["Bxd2+", "O-O", "c5"],
+    "shapes": ["Yc2", "Yc4", "Yd4", "Gb4d2"],
+    "fr": "Les Blancs amènent la dame en [c2] pour attaquer [c4] et déclouer le fou d2 tout en préparant le petit roque. La suite principale des Noirs est {Bxd2+}, où {Bxd2+ Qxd2 c6} bouche la diagonale du fou g2 avant l'expansion {b:b5} (souvent contrée par {w:a4} suivi de {w:Na3} et {w:Ne5} contre les faiblesses de l'aile dame), tandis que {O-O} rend le pion c4 contre un développement rapide et que {c5} attaque [d4] de front."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Nc6 Qa4 Bb4+",
+    "en": "The Modern Sharp Variation of the Open Catalan: Black meets White's pin on [c6] with a counter-check on [b4] to disrupt White's development. White's main move is {Bd2}, after which {Bd2 Nd5} defends [b4] centrally and guards [c6] so Black threatens {b:Nb6} while White castles short into razor-sharp piece play. {Nc3} is an ambitious alternative offering a second pawn for a central lead in development.",
+    "next": ["Bd2", "Nc3"],
+    "shapes": ["Yc6", "Yb4", "Gc1d2"],
+    "fr": "La variante moderne tranchante de la Catalane ouverte : les Noirs répondent au clouage en [c6] par un contre-échec en [b4] pour dérégler la coordination blanche. Le coup principal est {Bd2}, après quoi {Bd2 Nd5} soutient [b4] depuis le centre tout en couvrant [c6], de sorte que les Noirs menacent {b:Nb6} pendant que les Blancs roquent dans une mêlée tactique très vive. {Nc3} est une alternative ambitieuse qui offre un second pion pour l'initiative."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O a6",
+    "en": "A rare waiting move: Black prepares {b:dxc4} followed by {b:b5}, hoping to reach an Open Catalan with {Be7} and castling already tucked in. Because Black has spent a tempo on the flank without pressuring [d4], White meets it cleanly with {Qc2}, preventing {b:b5} unless Black takes [c4] first, vacating [d1] for {w:Rd1}, and preparing to clamp down on the [c5] square before Black can free the c8-bishop.",
+    "next": ["Qc2", "Ne5", "cxd5"],
+    "shapes": ["Yd4", "Yc4", "Yd1", "Gd1c2"],
+    "fr": "Un coup d'attente rare : les Noirs préparent {b:dxc4} suivi de {b:b5}, dans l'espoir d'atteindre une Catalane ouverte en ayant déjà mis le fou en [e7] et le roi à l'abri. Comme les Noirs ont dépensé un temps sur l'aile sans presser [d4], les Blancs répliquent sobrement par {Qc2}, qui interdit {b:b5} sans prise préalable en [c4], libère [d1] pour {w:Rd1} et prépare un contrôle étroit de la case [c5] avant que le fou c8 ne sorte."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 Nf3 d5 g3 h6",
+    "en": "A subtle modern sideline tried at super-grandmaster level: Black plays {h6} early to rule out {w:Bg5} pins before developing the dark-squared bishop actively to [d6] instead of passive [e7]. After {Bg2 Bd6 O-O O-O}, Black aims either for {b:Nc6}, {b:dxc4} and an active {b:e5} central break (impossible when White could pin on [g5]) or a solid fianchetto with {b:b6}, {b:Bb7} and {b:Nbd7}.",
+    "next": ["Bg2"],
+    "shapes": ["Yd6", "Ye7", "Yg5", "Gf1g2"],
+    "fr": "Une subtilité moderne essayée au niveau des super-grands maîtres : les Noirs jouent {h6} tôt afin d'écarter tout clouage {w:Bg5} avant de développer activement leur fou de cases noires en [d6] plutôt que passivement en [e7]. Après {Bg2 Bd6 O-O O-O}, les Noirs visent soit {b:Nc6}, {b:dxc4} et une rupture centrale directe {b:e5} (impossible tant que le clouage en [g5] existait), soit un fianchetto solide par {b:b6}, {b:Bb7} et {b:Nbd7}."
+  },
+  {
+    "line": "d4 Nf6 c4 e6 g3 c5 d5 exd5 cxd5 d6 Nc3 g6 Bg2 Bg7 Nf3 O-O",
+    "en": "The Fianchetto Variation of the Modern Benoni, often reached from a Catalan move order when Black strikes early with [c5]. Unlike sharp e4-based Benoni lines, White keeps the long h1-a8 diagonal open for the g2-bishop to neutralize Black's counterpart on [g7] and discourage an unassisted {b:b5} break. White usually castles {O-O}—heading into the main tabiya where {O-O a6 a4} clamps down on Black's queenside majority before {w:Nd2} and {w:Nc4} eye the backward d6-pawn—or plays {Bf4} and {Nd2} directly.",
+    "fr": "La variante du fianchetto de la Benoni Moderne, souvent atteinte via l'ordre de coups de la Catalane lorsque les Noirs frappent tôt par [c5]. Contrairement aux lignes tranchantes à base de e4, les Blancs gardent la grande diagonale ouverte pour le fou en [g2] afin de neutraliser son vis-à-vis en [g7] et de freiner la poussée {b:b5}. Les Blancs roquent d'ordinaire par {O-O} — vers la position clé où {O-O a6 a4} bloque la majorité noire à l'aile dame avant que {w:Nd2} et {w:Nc4} ne visent le pion arriéré [d6] — ou jouent {Bf4} et {Nd2} tout de suite.",
+    "next": ["O-O", "Bf4", "Nd2"],
+    "shapes": ["Gg2b7", "Gd5", "Ga7a6", "Gb7b5"]
+  },
+  {
+    "line": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 Nc3",
+    "en": "The Classical Fianchetto Queen's Indian with an early {Nc3}, bridging Catalan and Queen's Indian territory. Bringing the knight to [c3] before castling fights directly for [e4] and [d5], threatening {w:Qc2} or {w:Re1} followed by {w:e4}, though it exposes the knight to an immediate jump. Black's sharpest equalizer is {Ne4}, trading knights or forcing {Ne4 Bd2 Bf6} to challenge [d4], while {O-O} (allowing {O-O Qc2} or {O-O O-O}) and {d5} (transposing toward Catalan/QGD structures) are rock-solid.",
+    "fr": "La variante classique du fianchetto de l'Ouest-Indienne avec {Nc3} rapide, à la croisée de la Catalane et de l'Ouest-Indienne. Sortir le cavalier en [c3] avant le roque dispute directement les cases [e4] et [d5] en préparant {w:Qc2} ou {w:Re1} suivi de {w:e4}, mais expose le cavalier. L'égalisation la plus précise des Noirs est {Ne4}, pour échanger une paire de pièces ou jouer {Ne4 Bd2 Bf6} contre [d4], tandis que {O-O} et {d5} (qui transpose vers des structures Catalane ou Gambit Dame) restent très solides.",
+    "next": ["Ne4", "O-O", "d5"],
+    "shapes": ["Gf6e4", "Gg2b7", "Gd7d5", "Ge2e4"]
+  }
+]

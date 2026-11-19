@@ -29,6 +29,7 @@ import { bestShown, lineShown, spokenMove } from './navigation.ts';
 import { type RetryOutcome, retryOutcome } from './retry.ts';
 import { type Retried, retryBubble, retryParts } from './retry-bubble.ts';
 import { retryHint, type RetryHint } from './retry-hint.ts';
+import { moverRating } from './opening-lookups.ts';
 import { gameTimes, timingAt } from './timing.ts';
 import { type CoachComment, commentOn, followComment, timeTag, verdictMarkup } from './verdict.ts';
 import { fillAroundNav, type NavInput, navState, syncNav } from './nav.ts';
@@ -85,7 +86,8 @@ function movesComment(
   const played = review.moves[move.ply - 1] === move;
   const timing = played ? timingAt(analysis, session.work, move.ply) : null;
   const turning = played && turningMove(keyMoments(review))?.ply === move.ply;
-  return commentOn(session, { move, gameId: analysis.gameId, hint, timing, turning });
+  const rating = moverRating(session, analysis, move);
+  return commentOn(session, { move, gameId: analysis.gameId, hint, timing, turning, rating });
 }
 
 /** Under Explain's lines, the button that plays the best one on the board, or goes back. */

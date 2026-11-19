@@ -1,0 +1,1569 @@
+[
+  {
+    "line": "d4 d5 c4 c6",
+    "en": "The Slav Defense. Black supports [d5] with the c-pawn, so the bishop on [c8] is not shut in, as it is after {e6}. The downside is that the knight on [b8] loses its best square, and that Black has done nothing yet for the kingside. White's main moves are {Nf3} and {Nc3}; {cxd5} gives the symmetrical Exchange Slav. Black's plan in many lines is {dxc4} and then the bishop to [f5] or [g4] before {e6}: the order matters, as we'll see.",
+    "fr": "La défense slave. Les Noirs soutiennent [d5] avec le pion c afin de ne pas enfermer leur fou [c8], contrairement à {e6}. En contrepartie, le cavalier [b8] est privé de sa meilleure case et l'aile roi n'a pas encore avancé d'un pouce. Les coups principaux blancs sont {Nf3} et {Nc3}, tandis que {cxd5} mène à la symétrique Slave d'échange. Dans maintes lignes, le plan noir consiste à jouer {dxc4} puis à sortir le fou en [f5] ou [g4] avant {e6} : l'ordre de coups y est capital.",
+    "next": ["Nf3", "Nc3", "cxd5", "e3"],
+    "mistakes": [
+      {
+        "move": "c5",
+        "mark": "?!",
+        "punish": "e5 e3 a5 Nc3 Nd7",
+        "en": "Closing the queenside looks tempting if you want to lock in Black's pawn on [c6] and grab space, but releasing the tension on [d5] hands Black the entire center for free. {e5} strikes immediately at [d4], and after {e5 e3 a5} Black clamps down on {w:b4} while developing smoothly with {b:Nd7}. Keep central pressure with {w:Nf3}, {w:Nc3} or {w:cxd5} instead.",
+        "fr": "Fermer l'aile dame paraît tentant pour brider le pion [c6] et prendre de l'espace, mais relâcher la tension sur [d5] offre gratuitement tout le centre aux Noirs. {e5} frappe immédiatement [d4], et après {e5 e3 a5} les Noirs enrayent {w:b4} tout en se développant aisément par {b:Nd7}. Gardez la pression centrale avec {w:Nf3}, {w:Nc3} ou {w:cxd5}.",
+        "shapes": ["Re7e5"]
+      }
+    ],
+    "shapes": ["Rd5", "Rc8", "Rb8", "Gg1f3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3",
+    "en": "White develops toward the center and keeps {w:e4} in reserve. Black's main move is {Nf6}, heading for the main Slav and Semi-Slav lines. {dxc4} grabs the pawn at once so {b:b5} or {b:e5} can follow, and {e6} enters the Triangle move order, inviting the Marshall Gambit {w:e4} or the Noteboom after {w:Nf3} {b:dxc4}. {Bf5}?, the bishop's dream square, is premature before {Nf6}: {w:Qb3} hits [b7] and forces {b:Qb6} {w:Qxb6} {b:axb6} {w:cxd5}.",
+    "fr": "Les Blancs développent un cavalier vers le centre en gardant {w:e4} en réserve. La réponse principale est {Nf6}, menant aux grandes lignes de la Slave et de la Semi-Slave. {dxc4} prend d'emblée pour préparer {b:b5} ou {b:e5}, tandis que {e6} forme le système du Triangle en invitant le gambit Marshall {w:e4} ou la variante Noteboom après {w:Nf3} {b:dxc4}. En revanche, sortir {Bf5}? avant {Nf6} est prématuré : {w:Qb3} attaque [b7] et force {b:Qb6} {w:Qxb6} {b:axb6} {w:cxd5}.",
+    "next": ["Nf6", "dxc4", "e6"],
+    "mistakes": [
+      {
+        "move": "Bf5",
+        "mark": "?",
+        "punish": "Qb3",
+        "en": "Putting the bishop on [f5] and the pawn on [c6] before {b:Nf6} or {b:e6} leaves both [b7] and [d5] exposed: {Qb3} attacks [b7] at once, forcing {b:Qb6} {w:Qxb6} {b:axb6} {w:cxd5} with a wrecked queenside. Develop {b:Nf6} first in the Slav, or play {b:e6} in the Baltic.",
+        "fr": "Placer le fou en [f5] et le pion en [c6] avant {b:Nf6} ou {b:e6} expose simultanément [b7] et [d5] : {Qb3} attaque aussitôt [b7] et contraint à {b:Qb6} {w:Qxb6} {b:axb6} {w:cxd5} avec une aile dame délabrée. Développez d'abord {b:Nf6} dans la Slave, ou jouez {b:e6} dans la défense balte.",
+        "shapes": ["Rf6", "Rb7", "Rd5", "Gd1b3"]
+      }
+    ],
+    "shapes": ["Rb7", "Rd5", "Gg8f6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3",
+    "en": "White develops and keeps the choice between {w:e3} and {w:Nc3}. Black's main move is {Nf6}, and after {w:Nc3} Black chooses between {b:dxc4}, {b:e6} and {b:a6}. {dxc4} at once lets White pick {w:e3} or {w:a4}; {e6} heads for the Semi-Slav. The order matters for the bishop on [c8]: it wants to come out before {e6}, yet {Bf5} or {Bg4} too early runs into {w:cxd5} and {w:Qb3}, hitting [b7] and [d5]. That is why Black usually takes on [c4] first or plays {e6}.",
+    "fr": "Les Blancs développent leur cavalier du roi en se réservant le choix entre {w:e3} et {w:Nc3}. Le coup principal noir est {Nf6}, où sur {w:Nc3} les Noirs choisissent entre {b:dxc4}, {b:e6} et {b:a6}. Capturer {dxc4} tout de suite laisse le choix entre {w:e3} et {w:a4}, tandis que {e6} oriente vers la Semi-Slave. Tout tourne autour du fou [c8] : il aspire à sortir avant {e6}, mais jouer trop tôt {Bf5} ou {Bg4} se heurte à {w:cxd5} suivi de {w:Qb3} contre [b7] et [d5].",
+    "next": ["Nf6", "e6", "dxc4"],
+    "shapes": ["Rc8", "Rc4", "Gg8f6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6",
+    "en": "The main crossroads of the Slav. {Nc3} is the most testing move, forcing Black to choose between {b:dxc4}, the pure Slav; {b:e6}, the Semi-Slav; {b:a6}, the Chebanenko; and {b:g6}, the Schlechter. {e3}, the Slow Slav, shuts in White's bishop on [c1] for now so [c4] is safe, which lets Black bring the bishop out cleanly with {b:Bf5} or {b:Bg4}. {cxd5} enters the symmetrical Exchange Slav, and {Bg5} pins the knight early.",
+    "fr": "Le grand carrefour de la défense slave. {Nc3} est le coup le plus exigeant, sommant les Noirs de choisir entre la Slave pure ({b:dxc4}), la Semi-Slave ({b:e6}), la Tchebanenko ({b:a6}) et la Schlechter ({b:g6}). Plus posé, {e3} enferme provisoirement le fou [c1] pour consolider [c4], permettant aux Noirs de sortir sans risque leur fou en {b:Bf5} ou {b:Bg4}. Enfin, {cxd5} ouvre la Slave d'échange et {Bg5} cloue tôt le cavalier.",
+    "next": ["Nc3", "e3", "cxd5", "g3", "Nbd2"],
+    "shapes": ["Rc1", "Gb1c3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3",
+    "en": "Black must decide how to develop the bishop on [c8]. {dxc4}, the main line, takes the pawn so that {Bf5} becomes safe: White has to spend a move winning [c4] back. {e6} gives up on the bishop for now and aims for the Semi-Slav plans with {dxc4} and {b5}. {a6} prepares {b5} and keeps every option open. {Bf5} at once is premature: {cxd5 cxd5 Qb3} hits [b7] and [d5] together, and Black must give up a pawn for play or bring the bishop back home.",
+    "fr": "Les Noirs doivent maintenant décider du sort de leur fou [c8]. {dxc4}, la ligne principale, prend le pion afin de sécuriser la sortie {b:Bf5} pendant que les Blancs dépensent un coup pour récupérer [c4]. {e6} renonce momentanément à sortir ce fou pour préparer le plan Semi-Slave à base de {b:dxc4} et {b:b5}. {a6} prépare {b:b5} en gardant toutes les portes ouvertes. En revanche, {Bf5} tout de suite est prématuré : {cxd5 cxd5 Qb3} attaque simultanément [b7] et [d5].",
+    "next": ["dxc4", "e6", "a6"],
+    "shapes": ["Rc8", "Rc4", "Rb7", "Gd5c4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 Bf5",
+    "en": "Black has developed the bishop before {e6} or {dxc4}, and [b7] has lost its defender. White's best is {cxd5}, and after {b:cxd5} {w:Qb3}, the queen hits [b7] and [d5] at once. Black then has to choose between giving a pawn for quick development and retreating the bishop to [c8]. Taking back with the knight, {Nxd5}, runs into {Qb3} as well. In the Slav, the bishop goes to [f5] after {dxc4} or {e6}.",
+    "fr": "Les Noirs ont sorti leur fou avant {b:e6} ou {b:dxc4}, dégarnissant la case [b7]. Les Blancs exploitent aussitôt cette imprécision par {cxd5}, et après {b:cxd5} {w:Qb3} la dame attaque à la fois [b7] et [d5], forçant les Noirs soit à sacrifier un pion contre du développement, soit à ramener humblement le fou en [c8]. Reprendre du cavalier par {b:Nxd5} s'expose tout autant à {w:Qb3}. Dans la Slave, {Bf5} vient après {b:dxc4} ou {b:e6} !",
+    "next": ["cxd5"],
+    "shapes": ["Rb7", "Rd5", "Rc8", "Gc4d5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 Bf5 cxd5 cxd5 Qb3",
+    "en": "The point of {cxd5}: the queen hits [b7] and [d5]. Black can't hold both, and the engine's answers are practical ones. {Qb6} gives the d-pawn after {Nxd5 Nxd5 Qxd5 e6}, and {Nc6} gives the b-pawn after {Qxb7 Bd7}: in both, Black's lead in development makes up for most of it. The humble {Bc8} keeps the material but hands back a tempo. {b6}, the move that seems to defend everything, loses: {e4} opens the center, and with {w:Bb5+} coming, the pinned knights fall.",
+    "fr": "Toute la pointe de l'échange en [d5] : la dame blanche fait une double attaque sur [b7] et [d5]. Impossible de tenir les deux pions sainement ! Les ressources pratiques des Noirs sont {Qb6}, cédant le pion central après {Nxd5 Nxd5 Qxd5 e6}, et {Nc6}, offrant le pion de flanc après {Qxb7 Bd7} contre une belle avance de mobilisation ; le modeste repli {Bc8} sauve le matériel au prix de deux temps. Surtout, fuyez {b6}?, qui paraît tout tenir mais perd pied sur {e4} !",
+    "next": ["Qb6", "Nc6", "Bc8"],
+    "mistakes": [
+      {
+        "move": "b6",
+        "mark": "??",
+        "punish": "e4",
+        "en": "Defending [b7] with the pawn looks like it holds everything, but it weakens [c6] and the light squares. {e4} opens the center at once: after {b:dxe4} {w:Ne5} and {w:Bb5+}, Black's pinned pieces fall. Give a pawn with {b:Qb6} or {b:Nc6}, or retreat with {b:Bc8}.",
+        "fr": "Protéger [b7] du pion semble tout résoudre, mais affaiblit mortellement [c6] et les cases blanches : {e4} fait éclater le centre sur-le-champ, et après {b:dxe4} {w:Ne5} suivi de {w:Bb5+} les cavaliers cloués tombent. Sacrifiez plutôt un pion avec {b:Qb6} ou {b:Nc6}, ou reculez par {b:Bc8}.",
+        "shapes": ["Rb7", "Rc6", "Ge2e4"]
+      }
+    ],
+    "shapes": ["Rb7", "Rd5", "Gd8b6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4",
+    "en": "The pure Slav. Black takes the pawn, so that the bishop can come to [f5] or [g4] without fear of the exchange on [d5] and {w:Qb3}, and threatens {b5} to keep the pawn. White's main move is {a4}, stopping {b5}; {e3} with {Bxc4} is slower but solid, and {e4}, the Geller Gambit, gives up the pawn for the center. White must act now: after {b5}, the pawn on [c4] is hard to win back.",
+    "fr": "La Slave pure. Les Noirs capturent en [c4] afin de pouvoir sortir leur fou en [f5] ou [g4] sans plus craindre {w:cxd5} suivi de {w:Qb3}, tout en menaçant de conserver le pion grâce à {b:b5}. Le coup principal blanc est {a4}, qui interdit {b:b5} ; {e3} en vue de {w:Bxc4} est plus lent mais solide ; et {e4}, le gambit Tolush-Geller, sacrifie le pion pour s'emparer de tout le centre. Les Blancs doivent agir vite, car une fois {b:b5} joué, [c4] devient très coriace.",
+    "next": ["a4", "e3", "e4"],
+    "shapes": ["Rf5", "Rg4", "Rd5", "Ga2a4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4",
+    "en": "The Alapin or main line Slav. White wins [c4] back later: {a4} stops {b5}, but it costs a tempo and leaves a hole on [b4] for good, where Black's knight or bishop can settle. Black's best is {Bf5}, the Czech Variation, developing the bishop outside the pawn chain. {Bg4} and {Na6} are other tries. The early {Nd5}? hits nothing: {e4} gains time and the center.",
+    "fr": "La ligne principale d'Alapine de la Slave. Les Blancs diffèrent la reprise en [c4] : {a4} empêche définitivement {b:b5}, au prix d'un temps et d'un trou permanent en [b4] dont le fou ou le cavalier noir saura profiter. La meilleure réplique est {Bf5}, la variante tchèque, installant le fou hors de la chaîne de pions ; {Bg4} et {Na6} sont d'autres essais intéressants. En revanche, sauter tôt en {Nd5}? frappe dans le vide et offre un tempo gratuit à {e4}.",
+    "next": ["Bf5", "Bg4", "Na6", "e6"],
+    "mistakes": [
+      {
+        "move": "Nd5",
+        "mark": "?",
+        "punish": "e4",
+        "en": "The knight jumps to the center, but it hits nothing there: {e4} chases it with tempo, and after {b:Nxc3} {w:bxc3}, White has a big center and wins [c4] back. {b:Bf5}, the Czech Variation, was the main move.",
+        "fr": "Le cavalier bondit au centre sans rien menacer : {e4} le chasse avec gain de temps, et après {b:Nxc3} {w:bxc3} les Blancs dominent tout le centre avant de cueillir [c4]. Le coup thématique était {b:Bf5}, la variante tchèque.",
+        "shapes": ["Rc4", "Ge2e4"]
+      }
+    ],
+    "shapes": ["Rc4", "Rb4", "Gc8f5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5",
+    "en": "The Czech Variation. White's main move is {e3}, preparing {Bxc4}; after {b:e6} {w:Bxc4} {b:Bb4} {w:O-O} {b:O-O}, both sides are developed and Black's structure is sound. {Ne5} heads for [c4] and prepares {f3} and {e4}, the sharpest line. {Nh4} hits the bishop and wins the bishop pair, but costs time: Black's best is {e6}, accepting doubled pawns after {w:Nxf5} {b:exf5}, which keep [e4] and [g4] covered.",
+    "fr": "La variante tchèque de la Slave classique. Le coup principal blanc est {e3}, préparant {w:Bxc4} : après {b:e6} {w:Bxc4} {b:Bb4} {w:O-O} {b:O-O}, la mobilisation est complète et la structure noire irréprochable. Plus tranchant, {Ne5} vise [c4] du cavalier afin de préparer le rouleau central {w:f3} et {w:e4}. Enfin, {Nh4} chasse le fou pour récolter la paire de fous au prix de temps précieux : les Noirs répondent {b:e6}, acceptant des pions doublés qui gardent [e4] et [g4].",
+    "next": ["e3", "Ne5", "Nh4"],
+    "shapes": ["Rc4", "Re4", "Rg4", "Ge2e3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 e3",
+    "en": "White prepares to take back on [c4]. Black plays {e6}, then {b:Bb4} and castling: the pawns on [c6] and [e6] and the bishop outside the chain make a structure like the Caro-Kann, very solid. The bishop on [b4] uses the hole White's {a4} left. White aims for {w:e4} with {w:Qe2} and {w:Rd1}, and Black answers {w:e4} by retreating the bishop to [g6] or [h5] and freeing the game with {b:e5} or {b:c5}. If White's knight goes to [h4], Black allows {w:Nxg6} {b:hxg6} for the h-file.",
+    "fr": "Les Blancs s'apprêtent à reprendre en [c4]. Les Noirs répondent {e6}, puis {b:Bb4} et le petit roque : les pions en [c6] et [e6] combinés au fou placé hors de la chaîne forment une forteresse de type Caro-Kann d'une grande solidité, tandis que le fou [b4] exploite le trou laissé par {a4}. Les Blancs préparent la percée {w:e4} grâce à {w:Qe2} et {w:Rd1}, que les Noirs accueillent en repliant leur fou en [g6] ou [h5] avant de contre-attaquer par {b:e5} ou {b:c5}.",
+    "next": ["e6"],
+    "shapes": ["Rc4", "Rc6", "Re6", "Ge7e6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 e3 e6 Bxc4",
+    "en": "The Dutch Variation, the classical main line of the Czech Slav. Black plays {Bb4}, using the [b4] outpost to pin the knight and hold back {w:e4}, then castles and develops with {Nbd7} and {b:Qe7}. White castles, plays {w:Qe2} and prepares {w:e4}, often chasing the light-squared bishop with {w:Nh4}. Once {w:e4} lands, Black tucks the bishop onto [g6] or [h5] and strikes back with {b:e5} or {b:c5}.",
+    "fr": "La variante hollandaise, grande ligne de la Slave classique. Les Noirs utilisent l'avant-poste laissé par {a4} pour clouer par {Bb4} et freiner {w:e4}, puis roquent et complètent leur jeu par {Nbd7} et {b:Qe7}. Les Blancs roquent, jouent {w:Qe2} et préparent méthodiquement {w:e4}, en chassant parfois d'abord le fou de cases blanches par {w:Nh4}. Dès que {w:e4} finit par passer, les Noirs replient leur fou en [g6] ou [h5] et frappent par {b:e5} ou {b:c5}.",
+    "next": ["Bb4", "Nbd7"],
+    "shapes": ["Rb4", "Gf8b4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 e3 e6 Bxc4 Bb4 O-O",
+    "en": "The Dutch Variation of the Classical Slav. Both sides have developed effortlessly: White recovered [c4] and castled, planning {w:Qe2} (or {w:Nh4} to hunt the [f5] bishop) followed by the thematic central advance {w:e4}. Black completes minor-piece development with {Nbd7} or {O-O}: keeping the knight on [d7] supports the twin freeing breaks {b:c5} and {b:e5} while preventing White's knight from ever settling on [e5]. Note that after {Nbd7} {w:Qe2} {b:Bg6}, {w:e4} {b:O-O} {w:Bd3} gives a tense, balanced strategic battle.",
+    "fr": "La variante hollandaise de la Slave classique. Les deux camps se sont développés sans accroc : les Blancs ont repris en [c4], roqué, et préparent {w:Qe2} (ou la chasse au fou par {w:Nh4}) suivi de la poussée centrale {w:e4}. Les Noirs complètent leur mobilisation par {Nbd7} ou {O-O} : placer le cavalier en [d7] soutient les deux ruptures thématiques {b:c5} et {b:e5} tout en contrôlant [e5]. Après {Nbd7} {w:Qe2}, la lutte stratégique bat son plein.",
+    "next": ["Nbd7", "O-O"],
+    "shapes": ["Gb8d7", "Ge8g8", "Be3e4", "Rf5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 Ne5",
+    "en": "The Krause Attack: White's knight heads for [c4], winning the pawn back with a piece, and prepares {w:f3} and {w:e4} to build a big center. Black's best is {e6} or {Nbd7}. After {e6 f3}, Black hits back with {b:Bb4} and, once {w:e4} comes, the sharp {b:Bxe4} sacrifice: three pawns and an open king for the piece. After {Nbd7}, the plan is {w:Nxc4} {b:Qc7} with {b:e5} next. {Na6}, aiming for [b4], is also fine: {w:Nxc4}? runs into {b:Nb4} against [c2].",
+    "fr": "L'attaque Krause : le cavalier blanc file vers [c4] tout en dégageant la voie aux pions {w:f3} et {w:e4} pour bâtir un centre imposant. Les deux meilleures répliques noires sont {e6} et {Nbd7}. Sur {e6 f3}, les Noirs contre-attaquent par {b:Bb4} et accueillent {w:e4} par le célèbre sacrifice de pièce {b:Bxe4}, obtenant trois pions et un roi adverse exposé ! Sur {Nbd7}, l'idée est de suivre {w:Nxc4} par {b:Qc7} et {b:e5}. Quant à {Na6}, il tend le piège {b:Nb4} contre [c2] si les Blancs jouent {w:Nxc4}?.",
+    "next": ["e6", "Nbd7", "Na6"],
+    "shapes": ["Rc4", "Rb4", "Rc2", "Ge7e6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 Ne5 Na6",
+    "en": "Black's knight eyes the hole on [b4] that {a4} left behind. White should seize the center first with {e4}: after {b:Nxe4} {w:Bxc4} {b:e6}, White gets rapid development, castling and {w:Qf3} or {w:g4} threats for the pawn. The natural recapture {Nxc4}?, played in a quarter of club games, walks straight into Black's plan: {b:Nb4} threatens {b:Nc2+}, while the bishop on [f5] bears down on the same square.",
+    "fr": "Le cavalier noir guette le trou en [b4] laissé par {a4}. Les Blancs doivent d'abord occuper le centre par {e4} : après {b:Nxe4} {w:Bxc4} {b:e6}, ils obtiennent un développement fulgurant, le roque et de vives menaces par {w:Qf3} ou {w:g4} en échange du pion. La reprise naturelle {Nxc4}?, choisie dans un quart des parties de club, tombe droit dans le panneau : {b:Nb4} menace {b:Nc2+}, déjà soutenu par le fou [f5] !",
+    "next": ["e4"],
+    "mistakes": [
+      {
+        "move": "Nxc4",
+        "mark": "?",
+        "punish": "Nb4",
+        "en": "A quarter of Lichess players take back at once, but now the knight jumps in: {Nb4} threatens {b:Nc2+} and the bishop on [f5] covers [c2]. White's queenside is tied up. {w:e4} first, with {w:Bxc4} next, was the move.",
+        "fr": "Un quart des joueurs Lichess reprennent immédiatement, mais le cavalier noir plonge alors en {Nb4}, menaçant la fourchette {b:Nc2+} de concert avec le fou [f5] et paralysant toute l'aile dame blanche. Il fallait pousser {w:e4} d'abord avant {w:Bxc4}.",
+        "shapes": ["Rf5", "Rc2", "Ga6b4"]
+      }
+    ],
+    "shapes": ["Rb4", "Rc2", "Rd3", "Ge2e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 Ne5 e6 f3 Bb4 e4",
+    "en": "White has built the ideal center with {f3} and {e4}, forking Black's bishop and central space. Black must strike at once with {Bxe4}, a famous piece sacrifice: after {w:fxe4} {b:Nxe4}, Black threatens both {b:Qh4+} and {b:Nxc3}, winning three pawns with an enduring attack against White's uncastled king. {Nxe4}??, sacrificing the knight instead, fails because after {w:fxe4} {b:Qh4+} {w:Ke2}, the bishop on [f5] hangs and White's king is safe.",
+    "fr": "Les Blancs viennent d'ériger un centre idéal par {f3} et {e4} en attaquant le fou noir. Les Noirs doivent frapper sur-le-champ par le célèbre sacrifice de fou {Bxe4} : après {w:fxe4} {b:Nxe4}, ils menacent simultanément {b:Qh4+} et {b:Nxc3}, récoltant trois pions et une attaque durable contre le roi blanc déroqué ! Attention : sacrifier le cavalier à la place par {Nxe4}?? échoue complètement, car sur {w:fxe4} {b:Qh4+} {w:Ke2} le fou [f5] reste en prise et le roi blanc s'échappe.",
+    "next": ["Bxe4"],
+    "mistakes": [
+      {
+        "move": "Nxe4",
+        "mark": "??",
+        "punish": "fxe4",
+        "en": "The knight sacrifice doesn't work like the bishop's: after {fxe4} {b:Qh4+} {w:Ke2}, Black's queen checks, but the bishop on [f5] is attacked and White's king escapes. {b:Bxe4}, giving the bishop, was the famous sacrifice.",
+        "fr": "Sacrifier le cavalier ne marche pas du tout comme le sacrifice du fou : après {fxe4} {b:Qh4+} {w:Ke2}, l'échec de dame ne mène à rien alors que le fou [f5] est en prise ! Il fallait sacrifier le fou par {b:Bxe4}.",
+        "shapes": ["Rf5", "Gf3e4"]
+      }
+    ],
+    "shapes": ["Gf5e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bg4",
+    "en": "The Steiner Variation: the bishop pins the knight, and Black hopes for {b:Bxf3} and {b:e6} with an easy game. White's best is {Ne5}, stepping out of the pin with tempo on the bishop and heading for [c4]: after {b:Bh5} {w:f3}, White plans {w:e4}, and the bishop risks being locked out on [g6] behind White's pawns. {e3} is calmer: White wins [c4] back with the bishop, and Black trades on [f3] when it suits. Either way, a bishop buried on [g6] is Black's main hazard.",
+    "fr": "La variante Steiner : le fou cloue le cavalier dans l'espoir d'enchaîner tranquillement {b:Bxf3} puis {b:e6}. La réplique la plus énergique des Blancs est {Ne5}, s'affranchissant du clouage avec tempo sur le fou tout en visant [c4] : après {b:Bh5} {w:f3}, les Blancs préparent {w:e4} et menacent d'enterrer le fou en [g6] derrière leur muraille de pions. Plus posé, {e3} regagne [c4] du fou, mais le risque d'un fou emmuré en [g6] reste le danger numéro un pour les Noirs.",
+    "next": ["Ne5"],
+    "shapes": ["Rc4", "Rg6", "Gf3e5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Na6",
+    "en": "The Smyslov Variation: Black's knight heads for [b4], the square {a4} gave away for good. White should take the center with {e4}: after {b:Bg4} {w:Bxc4} {b:e6}, White's pieces are active and the center is White's, while Black's knight on [a6] jumps into [b4] and the bishop pins [f3]. Black's plan is {b:Be7}, castling and a later {b:c5} or {b:e5}. {w:Ne5}, chasing the pawn with the knight, is met by {b:Ng4}, and Black levels the game.",
+    "fr": "La variante Smyslov : le cavalier noir met aussitôt le cap sur l'avant-poste [b4] cédé par {a4}. Les Blancs ont intérêt à occuper le centre par {e4} : après {b:Bg4} {w:Bxc4} {b:e6}, leurs pièces rayonnent derrière leur centre, tandis que les Noirs installent leur cavalier en [b4] et clouent [f3] avant {b:Be7}, le roque et une future rupture {b:c5} ou {b:e5}. Courir après le pion par {w:Ne5} permettrait à {b:Ng4} d'égaliser.",
+    "next": ["e4", "e3"],
+    "shapes": ["Rb4", "Ge2e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 e6",
+    "en": "Soultanbeieff's Variation of the Slav. Instead of bringing the light-squared bishop to [f5] or [g4] in the Classical Slav, Black shuts it in with {e6} to prioritize rapid kingside development ({b:Bb4} and {b:O-O}) and prepare the freeing break {b:c5} once White spends time recovering [c4]. White's sharpest try is {e4}, inviting {b:Bb4} {w:Bg5} or {w:e5} {b:Nd5} {w:Bd2} where White gets dangerous dark-square play; {Bg5} pins [f6] before playing {w:e4}; while {e3} {b:c5} {w:Bxc4} leads to a clean Queen's Gambit Accepted position where White inserted {a4} for {b:c6}.",
+    "fr": "La variante Soultanbeieff de la Slave. Au lieu de sortir le fou en [f5] ou [g4], les Noirs jouent {e6} pour accélérer le développement de l'aile roi ({b:Bb4}, {b:O-O}) et frapper vite le centre par {b:c5}. L'essai le plus incisif des Blancs est {e4}, menant après {b:Bb4} à un combat aigu autour de {w:Bg5} ou {w:e5} {b:Nd5} {w:Bd2} ; {Bg5} cloue d'abord le cavalier avant {w:e4} ; tandis que {e3} suivi de {b:c5} {w:Bxc4} donne une position saine de type Gambit dame accepté.",
+    "next": ["e3", "e4", "Bg5"],
+    "shapes": ["Ge2e4", "Gc1g5", "Bf8b4", "Bc6c5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 e4",
+    "en": "The Geller Gambit: White grabs the center and offers the c-pawn for good. Black's best is {b5}, keeping the pawn: after {w:e5} {b:Nd5}, the knight is strong in the center, Black follows with {b:e6} and {b:Bb7} or {b:a6}, and White's attacking tries with {w:Ng5} and {w:Qh5} barely balance the pawn. {e6}?, the natural move, gives back the pawn for nothing: {w:e5} kicks the knight to [d5], and {w:Bxc4} recovers [c4] with a commanding center.",
+    "fr": "Le gambit Tolush-Geller : les Blancs confisquent tout le centre en sacrifiant résolument le pion c. La réplique critique des Noirs est {b5}, s'accrochant au pion : après {w:e5} {b:Nd5}, le cavalier trône au centre avant {b:e6} et {b:Bb7} ou {b:a6}, forçant les Blancs à tout miser sur l'attaque avec {w:Ng5} et {w:Qh5}. Jouer prudemment {e6}? rend le pion sans combattre : {w:e5} chasse le cavalier en [d5] et {w:Bxc4} récupère tout avec un centre écrasant.",
+    "next": ["b5"],
+    "mistakes": [
+      {
+        "move": "e6",
+        "mark": "?",
+        "punish": "e5",
+        "en": "Setting up pawns on both [c6] and [e6] after {b:dxc4} and {w:e4} is too slow and hands [c4] back for nothing: {e5} drives the knight to [d5], and {w:Bxc4} recovers the pawn with a commanding center. Black needed active play first: {b:Bb4} with [e6] already played, or {b:b5} to hold [c4] in the Geller Gambit.",
+        "fr": "Placer des pions en [c6] et [e6] après {b:dxc4} et {w:e4} perd trop de temps et rend [c4] gratuitement : {e5} refoule le cavalier en [d5] avant que {w:Bxc4} ne récupère le pion avec un centre dominateur. Il fallait tenir le pion de gambit par {b:b5}.",
+        "shapes": ["Rd5", "Ge4e5"]
+      },
+      {
+        "move": "Bg4",
+        "mark": "?!",
+        "punish": "Bxc4 e6 O-O Be7 Be3",
+        "en": "Bringing out the light-squared bishop looks like standard Slav play, but in the Geller Gambit it abandons the extra pawn on [c4] without a fight and leaves [f7] vulnerable if Black tries to get greedy. White simply recovers {Bxc4}—where {Bxc4 Bxf3} would walk into {w:gxf3} or {w:Qb3}—and after {Bxc4 e6 O-O} enjoys an unchallenged central duo. Hold the gambit pawn with {b:b5} instead.",
+        "fr": "Sortir le fou de cases blanches est habituel dans la Slave, mais face au gambit Geller cela abandonne [c4] sans lutte tout en exposant [f7] : les Blancs reprennent simplement par {Bxc4} — où {Bxc4 Bxf3} se heurterait à {w:gxf3} ou {w:Qb3} — et roquent avec un duo central sans rival. Tenez le pion par {b:b5}.",
+        "shapes": ["Rf1c4"]
+      }
+    ],
+    "shapes": ["Gb7b5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 e4 b5 e5",
+    "en": "The Geller (or Tolush-Geller) Gambit, one of the sharpest attacking lines in Queen's Pawn openings! Instead of restraining [b5] with {w:a4}, White sacrifices the [c4] pawn outright and thrusts {e5} to drive Black's knight away from the kingside and rip open lines. Black's only sound reply is {Nd5}, centralizing the knight and blocking the d-file (retreating to [g8] or [d7] leaves Black horribly passive, while {b4}? walks into {w:Na4} {b:Nd5} {w:Bxc4} or {w:exf6} {b:bxc3} {w:Bxc4} with a crushing initiative). After {Nd5} {w:a4} {b:e6}, fierce complications ensue.",
+    "fr": "Le gambit Tolush-Geller, l'une des lignes d'attaque les plus explosives des débuts du pion dame ! Plutôt que de freiner [b5] par {w:a4}, les Blancs sacrifient résolument le pion [c4] et lancent {e5} pour chasser le défenseur de l'aile roi et ouvrir toutes les lignes. L'unique réplique saine des Noirs est {Nd5}, centralisant le cavalier pour obstruer la colonne d (reculer en [g8] ou [d7] reste passif, tandis que {b4}? s'expose à {w:Na4} {b:Nd5} {w:Bxc4} ou à {w:exf6} {b:bxc3} {w:Bxc4} avec une initiative écrasante). Après {Nd5} {w:a4} {b:e6}, la mêlée est totale.",
+    "next": ["Nd5"],
+    "shapes": ["Gf6d5", "Rc4", "Rb5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 a6",
+    "en": "The Chebanenko Slav: Black prepares {b:b5} without giving up the center or locking in the bishop on [c8], keeping {b:Bf5}, {b:Bg4}, {b:dxc4} and {b:e6} all on the table. White's main replies are {e3}, solid and flexible; {c5}, clamping down on [b5] so Black plays for {b:Bf5}, {b:Nbd7} and {b:e5}; and {a4}, stopping {b:b5} at the price of the [b4] square.",
+    "fr": "La Slave Tchebanenko : les Noirs préparent {b:b5} sans céder le centre ni enfermer leur fou [c8], gardant simultanément à leur disposition {b:Bf5}, {b:Bg4}, {b:dxc4} et {b:e6}. Les trois réponses majeures des Blancs sont {e3}, solide et souple ; l'avance {c5}, qui interdit définitivement [b5] et oriente les Noirs vers {b:Bf5}, {b:Nbd7} et la rupture {b:e5} ; et {a4}, empêchant {b:b5} au prix de la case [b4].",
+    "next": ["e3", "c5", "a4"],
+    "shapes": ["Rc3", "Rb4", "Ge2e3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 a6 c5",
+    "en": "The Advance System against the Chebanenko (4...a6) Slav. Since Black spent a move on [a6] to prepare {b:dxc4} and {b:b5}, White clamps down on the queenside with {c5}, locking out {b:b5} forever and fixing [b6] as a hole! In return, White releases all tension on [d5], giving Black a free hand in the center and on the kingside. Black brings out the bishop first via {Bf5} or {b:Bg4} before playing {b:e6}, or prepares the central counterblow {b:e5} (and {b:b6}) with {Nbd7} or {g6} and {b:Bg7}.",
+    "fr": "Le système d'avance contre la Slave Tchebanenko (4...a6). Puisque les Noirs ont joué [a6] en vue de {b:b5}, les Blancs verrouillent l'aile dame par {c5}, interdisant {b:b5} et fixant un trou en [b6]. En contrepartie, toute pression sur [d5] disparaît, laissant aux Noirs les mains libres au centre. Les Noirs sortent d'abord leur fou par {Bf5} avant {b:e6}, ou préparent la contre-attaque centrale {b:e5} via {Nbd7} ou le fianchetto {g6} et {b:Bg7}.",
+    "next": ["Bf5", "Nbd7", "g6"],
+    "shapes": ["Rb6", "Gc8f5", "Gb8d7", "Be7e5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 a6 e3 Bf5",
+    "en": "A clean Chebanenko setup against White's solid {e3}. Because White shut the dark-squared bishop inside on [c1], Black develops {Bf5} outside the pawn chain without having to surrender the [d5] center first, and [a6] already guards [b5] while preparing a future queenside expansion. White can challenge the active bishop via {Bd3} ({b:Bxd3} {w:Qxd3} {b:e6} followed by {w:O-O} and {w:e4}), put immediate pressure on [b7] and [d5] with {Qb3} ({b:Ra7} keeps everything defended!), or clarify the center with {cxd5} {b:cxd5}.",
+    "fr": "Une saine disposition Tchebanenko face au coup tranquille {e3}. Le fou [c1] blanc étant resté derrière sa chaîne, les Noirs sortent confortablement {Bf5} sans avoir à céder le centre [d5], tandis que [a6] contrôle déjà [b5]. Les Blancs peuvent contester ce fou actif par {Bd3} ({b:Bxd3} {w:Qxd3} {b:e6} avant {w:e4}), cibler d'emblée [b7] et [d5] par {Qb3} — auquel l'élégant {b:Ra7} répond parfaitement —, ou fixer la structure par {cxd5} {b:cxd5}.",
+    "next": ["Bd3", "cxd5", "Qb3"],
+    "shapes": ["Gf1d3", "Gd1b3", "Rb7", "Rf5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 g6",
+    "en": "The Schlechter Variation: a Slav with the bishop headed for [g7], close to the Grünfeld. The pawn on [c6] supports [d5], and the fianchettoed bishop will press on [d4] from afar. White's main answers are {e3}, {cxd5} and {Bf4}. Black plans {b:Bg7}, castling, then {b:Bf5} or {b:Bg4} and later {b:dxc4} with {b:Nbd7} and {b:e5}, or {b:Ne4} to trade knights. Black must bring the bishop on [c8] out before playing {b:e6}.",
+    "fr": "La variante Schlechter : une Slave au fou en fianchetto en [g7], cousine germaine de la défense Grünfeld. Le pion [c6] étaye fermement [d5] pendant que le fou [g7] pressera [d4] à distance. Les Blancs répondent principalement par {e3}, {cxd5} ou {Bf4}. Côté noir, on enchaîne {b:Bg7}, le petit roque, la sortie du fou en [f5] ou [g4] avant {b:e6}, puis {b:dxc4} suivi de {b:Nbd7} et {b:e5}, ou des échanges en [e4].",
+    "next": ["cxd5", "e3", "Bf4"],
+    "shapes": ["Rg7", "Rc6", "Rd5", "Gc4d5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3",
+    "en": "The Slow Slav: White shuts in the bishop on [c1] for now so [c4] is defended in advance. Here {Bf5} is completely sound: after {cxd5 cxd5 Qb3}, Black answers {b:Qb6} or {b:Qc7}, hitting [b2] or guarding [b7] comfortably because no White knight stands on [c3] yet to pile on [d5]. {Bg4} pins the knight while the door is open, and {e6} transposes to the Semi-Slav. Black's plan is {b:e6}, {b:Nbd7} and {b:Bd6}.",
+    "fr": "La Slave lente : les Blancs enferment provisoirement leur fou [c1] afin de protéger d'avance [c4]. Du coup, sortir {Bf5} devient ici parfaitement sain : sur {cxd5 cxd5 Qb3}, les Noirs parent sans peine par {b:Qb6} ou {b:Qc7}, car aucun cavalier blanc n'est encore en [c3] pour harceler [d5]. {Bg4} cloue le cavalier avant de refermer la porte, et {e6} rejoint la Semi-Slave. Les Noirs complètent ensuite par {b:e6}, {b:Nbd7} et {b:Bd6}.",
+    "next": ["Bf5", "e6", "Bg4"],
+    "shapes": ["Rc1", "Rc4", "Rb2", "Gc8f5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 Bf5 cxd5 cxd5 Qb3",
+    "en": "White tests [b7] before developing the queen's knight. Black defends cleanly with {Qc7}, keeping the queens on, or {Qb6}, offering a queen trade: after {w:Qxb6} {b:axb6}, Black's doubled b-pawns control [c5] and open the a-file for the rook. Without a White knight on [c3], [d5] is never in danger, which is why {Nc6}? is a mistake here: {w:Qxb7} {b:Bd7} {w:Bb5} leaves Black a clean pawn down.",
+    "fr": "Les Blancs testent [b7] avant d'avoir sorti leur cavalier dame. Les Noirs défendent sereinement par {Qc7}, gardant les dames, ou par {Qb6} en proposant leur échange : après {w:Qxb6} {b:axb6}, les pions doublés contrôlent [c5] et ouvrent la colonne a à la tour noire. Sans cavalier blanc en [c3], le pion [d5] ne court aucun risque, ce qui rend le contre-jeu {Nc6}? fautif ici : {w:Qxb7} {b:Bd7} {w:Bb5} laisse simplement un pion net de moins aux Noirs.",
+    "next": ["Qb6", "Qc7"],
+    "mistakes": [
+      {
+        "move": "Nc6",
+        "mark": "?",
+        "punish": "Qxb7",
+        "en": "A counterattack, but White just takes: {Qxb7} and after {b:Bd7} {w:Ne5}, Black's pieces are tangled and the pawn is gone. {b:Qb6} or {b:Qc7}, defending [b7], was the move.",
+        "fr": "Ce sacrifice de contre-attaque ne donne pas assez ici : les Blancs empochent par {Qxb7}, et après {b:Bd7} {w:Ne5} les pièces noires s'emmêlent avec un pion de retard. Il fallait protéger simplement [b7] avec {b:Qb6} ou {b:Qc7}.",
+        "shapes": ["Rb7", "Gb3b7"]
+      }
+    ],
+    "shapes": ["Rb7", "Rb6", "Rc3", "Gd8b6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 Bf5 cxd5 cxd5 Nc3 e6 Ne5",
+    "en": "White's knight jumps to [e5], ready for {g4} and {Qb3} or {Bb5+}. Black should challenge it at once with {Nfd7}: after {g4 Bg6 Nxg6 hxg6}, Black's structure is fine and the h-file is open. {Nc6} is less exact, and slow moves such as {Nbd7}, {Be7} or {a6} are punished by {g4}, which chases the bishop while the knight on [e5] stays. {Bb4} runs into {Qa4+}.",
+    "fr": "Le cavalier blanc bondit en [e5], prêt à lancer l'assaut {g4} combiné à {Qb3} ou {Bb5+}. Les Noirs doivent contester cet avant-poste sur-le-champ par {Nfd7} : après {g4 Bg6 Nxg6 hxg6}, la structure noire reste compacte et profite de la colonne h ouverte. {Nc6} est moins exact, et tout coup lent comme {Nbd7}, {Be7} ou {a6} est sévèrement puni par {g4}, qui traque le fou pendant que le cavalier trône en [e5]. Quant à {Bb4}, il tombe dans {Qa4+}.",
+    "next": ["Nfd7"],
+    "mistakes": [
+      {
+        "move": "Bb4",
+        "mark": "?",
+        "punish": "Qa4+",
+        "en": "The pin looks active, but the bishop has no defender: {Qa4+} checks and hits it, and after {b:Nc6} {w:Nxc6}, White wins material or the bishop pair with Black's queenside broken. {b:Nfd7}, challenging the knight, was the move.",
+        "fr": "Le clouage semble actif mais le fou n'est pas défendu : {Qa4+} fait échec en attaquant le fou, et après {b:Nc6} {w:Nxc6} les Blancs gagnent du matériel ou la paire de fous contre une aile dame disloquée. Contestez le cavalier par {b:Nfd7}.",
+        "shapes": ["Gd1a4"]
+      },
+      {
+        "move": "Be7",
+        "mark": "?",
+        "punish": "g4",
+        "en": "A solid developing move, but too slow: {g4} chases the bishop, and after {b:Bg6} {w:h4}, the knight takes on [g6] with a big kingside initiative. {b:Nfd7} first was the move.",
+        "fr": "Un développement tranquille mais trop lent ici : {g4} chasse le fou, et après {b:Bg6} {w:h4} le cavalier blanc prend en [g6] avec une forte attaque sur l'aile roi. Il fallait d'abord défier le cavalier [e5] par {b:Nfd7}.",
+        "shapes": ["Rg6", "Gg2g4"]
+      },
+      {
+        "move": "Nbd7",
+        "mark": "?",
+        "punish": "g4",
+        "en": "One in five Lichess players develop this knight, but {g4} hits the bishop, which has no good square, and {w:h4} follows with a strong attack. {b:Nfd7}, hitting the knight on [e5], was the right knight.",
+        "fr": "Un joueur sur cinq sur Lichess choisit le mauvais cavalier : {g4} coince le fou et permet l'assaut {w:h4} pendant que le cavalier [e5] reste indéboulonnable. C'est le cavalier [f6] qu'il fallait replier par {b:Nfd7} !",
+        "shapes": ["Re5", "Gg2g4"]
+      },
+      {
+        "move": "a6",
+        "mark": "?",
+        "punish": "g4",
+        "en": "A waiting move that lets White grab the kingside: {g4} chases the bishop, and the knight on [e5] takes it on [g6] with an attack. {b:Nfd7} was the move.",
+        "fr": "Un coup d'attente qui abandonne toute l'aile roi aux Blancs : {g4} refoule le fou en [g6], où le cavalier [e5] l'élimine en ouvrant l'attaque. Il fallait jouer {b:Nfd7}.",
+        "shapes": ["Re5", "Rg6", "Gg2g4"]
+      }
+    ],
+    "shapes": ["Re5", "Gf6d7"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 Bf5 cxd5 cxd5 Nc3",
+    "en": "The Schallopp Variation via the delayed Exchange move order. Because Black brought the bishop to [f5] while White already committed to {e3}, White swaps on [d5] and plays {Nc3} to aim {w:Qb3} straight at Black's tender [b7] pawn! Notice the crucial move-order nuance: playing {Nc6} is sharp because {w:Bb5} pins the knight and revives {w:Ne5} and {w:Qa4}; {e6} is the sturdiest shield, meeting {w:Qb3} with {b:Qc7} or {b:Qb6} and {w:Bb5+} with {b:Nfd7} or {b:Nc6}; while {a6} stops {w:Bb5+} cold and guards [b7] via {b:Ra7}.",
+    "fr": "La variante Schallopp atteinte via l'échange différé. Les Noirs ayant sorti le fou en [f5] après {e3}, les Blancs échangent en [d5] et jouent {Nc3} pour braquer {w:Qb3} sur le pion vulnérable [b7]. L'ordre de coups compte énormément ici : {e6} est le bouclier le plus fiable, parant {w:Qb3} par {b:Qc7} ou {b:Qb6} ; {a6} interdit tout clouage {w:Bb5+} et prépare la défense latérale {b:Ra7} ; tandis que {Nc6} s'expose à l'énergique {w:Bb5}.",
+    "next": ["e6", "Nc6", "a6"],
+    "shapes": ["Ge7e6", "Ga7a6", "Rb7", "Bd1b3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5 cxd5",
+    "en": "The Exchange Slav: a symmetrical structure, with the extra tempo for White. If both sides play well, the game is often drawn; White's extra move gives small, lasting chances. White develops with {Nc3}, {Nf3}, {Bf4} and only then {e3}, so the bishop on [c1] isn't shut in. Black copies with {Nf6}, {Nc6} and {Bf5}, and must be careful with early queen sorties to [b6], which can backfire.",
+    "fr": "La variante d'échange de la Slave : une symétrie pure où les Blancs ne disposent que du trait. Avec un jeu exact des deux côtés, la partie penche souvent vers la nulle, mais ce temps d'avance offre aux Blancs une initiative durable et sans risque : ils sortent {Nc3}, {Nf3} et {Bf4} avant de jouer {e3} pour ne pas enfermer leur fou. Les Noirs imitent avec {Nf6}, {Nc6} et {Bf5}, en prenant garde aux sorties hâtives de dame en [b6].",
+    "next": ["Nc3", "Nf3", "Bf4"],
+    "shapes": ["Rc1", "Rb6", "Gb1c3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4",
+    "en": "The main position of the Exchange Slav. Black's best is {Bf5}, mirroring White before playing {b:e6}, or {a6} and {e6} to keep [b5] under control. {b:Qb6}, hitting [b2], is playable but sets a trap for Black's own queen: after {w:a3}, grabbing {b:Qxb2}? runs into {w:Na4}, and the queen runs short of safe squares. Both sides fight for the open c-file and the [e5] and [e4] outposts.",
+    "fr": "La position classique de la Slave d'échange. La réponse la plus saine des Noirs est de maintenir la symétrie par {Bf5} avant {b:e6}, ou de jouer {a6} et {e6} pour contrôler [b5]. Sortir activement {b:Qb6} contre [b2] est jouable, mais tend un piège à la dame noire elle-même : après {w:a3}, capturer {b:Qxb2}? s'expose à {w:Na4}, enfermant la dame à court de cases ! La lutte porte sur la colonne c ouverte et les avant-postes [e5] et [e4].",
+    "next": ["Bf5", "a6", "e6"],
+    "shapes": ["Rb2", "Rb6", "Gc8f5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Qb6 a3",
+    "en": "White offers the b-pawn as bait while preparing {w:b4} or {w:Na4}. Black should decline and finish development with {Bf5}, {e6}, or {Nh5} to harass the bishop on [f4]. Taking with {Qxb2}? springs the trap: {w:Na4} chases the queen to [b5], where {w:e3} or {w:Bd2} threatens {w:Bxb5} and {w:Nc3}, forcing Black to part with material just to rescue the stray queen.",
+    "fr": "Les Blancs tendent le pion [b2] comme appât tout en préparant {w:b4} ou {w:Na4}. Les Noirs doivent décliner l'offrande et poursuivre leur développement par {Bf5}, {e6} ou {Nh5} contre le fou [f4]. Croquer le pion empoisonné par {Qxb2}? referme le piège : {w:Na4} repousse la dame en [b5], où {w:e3} ou {w:Bd2} menace de l'enfermer par {w:Bxb5} et {w:Nc3}, forçant les Noirs à céder du matériel pour la sauver !",
+    "next": ["Bf5", "Nh5", "e6"],
+    "mistakes": [
+      {
+        "move": "Qxb2",
+        "mark": "?",
+        "punish": "Na4",
+        "en": "The pawn is poisoned. {Na4} hits the queen, and after {b:Qb5} {w:Bd2}, it is short of squares while White's pieces gain time on it: White wins material within a few moves. {b:Bf5}, {b:e6} or {b:Nh5} was the move.",
+        "fr": "Le pion [b2] est empoisonné ! {Na4} chasse la dame en [b5], et après {w:Bd2} elle manque cruellement de cases sous les menaces de découverte et d'enfermement, coûtant rapidement du matériel aux Noirs. Développez plutôt {b:Bf5}, {b:e6} ou {b:Nh5}.",
+        "shapes": ["Gc3a4"]
+      }
+    ],
+    "shapes": ["Gc8f5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Bf5 e3 e6 Qb3",
+    "en": "White's queen hits [b7], testing Black's bishop outside the pawn chain. Black should counterattack with {Bb4}, pinning the knight on [c3] and preparing {b:Qa5} or {b:Ne4} so {w:Qxb7} runs into {b:Bxc3+}. {b:Na5} gains time on the queen, though the knight sits on the rim. {b6}?? blunders into {w:Bb5}, pinning [c6] before {w:Ne5} and {w:Qa4}, and {Qd7}? fails to {w:Ne5} and {w:Bb5}.",
+    "fr": "La dame blanche attaque [b7] pour éprouver le fou noir sorti de sa chaîne. La meilleure défense active est {Bb4}, clouant le cavalier [c3] et préparant {b:Qa5} ou {b:Ne4} de sorte que {w:Qxb7} se heurte à {b:Bxc3+}. {b:Na5} gagne un temps sur la dame au prix d'un cavalier décentré. Surtout, évitez {b6}??, qui s'effondre sous le clouage {w:Bb5} suivi de {w:Ne5} et {w:Qa4}, ainsi que {Qd7}?, puni par {w:Ne5} et {w:Bb5}.",
+    "next": ["Bb4"],
+    "mistakes": [
+      {
+        "move": "b6",
+        "mark": "??",
+        "punish": "Bb5",
+        "en": "Defending [b7] with the pawn leaves [c6] weak: {Bb5} pins the knight, and {w:Ne5} and {w:Qa4} pile up on it. Black loses material. {b:Bb4}, pinning White's knight, was the move.",
+        "fr": "Protéger [b7] du pion affaiblit gravement [c6] : {Bb5} cloue le cavalier, et l'accumulation {w:Ne5} puis {w:Qa4} gagne du matériel sans parade. Il fallait contre-clouer par {b:Bb4}.",
+        "shapes": ["Rb7", "Rc6", "Gf1b5"]
+      },
+      {
+        "move": "Qd7",
+        "mark": "?",
+        "punish": "Ne5",
+        "en": "The queen defends [b7] but stands in the way: {Ne5} hits it, and {w:Bb5} pins the knight on [c6]. {b:Bb4} was the active defense.",
+        "fr": "La dame défend [b7] mais se met droit dans la ligne de mire : {Ne5} la chasse avec gain de temps avant que {w:Bb5} ne cloue mortellement le cavalier [c6]. La défense active était {b:Bb4}.",
+        "shapes": ["Rb7", "Rc6", "Gf3e5"]
+      }
+    ],
+    "shapes": ["Rb7", "Rc3", "Rc6", "Gf8b4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5",
+    "en": "The Exchange Slav. Black must take back with the c-pawn, {cxd5}: the structure becomes symmetrical, and the c-file opens for both sides' rooks. {Qxd5}? brings the queen out too early, and {w:Nc3} gains time; after {b:Qd8} or {b:Qa5}, White plays {w:e4} with a big center while Black's knight has lost [c6]. After {cxd5}, White develops with {w:Nc3}, {w:Nf3} and {w:Bf4} before {w:e3}, and Black mirrors with {b:Nf6}, {b:Nc6} and {b:Bf5}.",
+    "fr": "La variante d'échange de la Slave. Les Noirs doivent reprendre du pion c par {cxd5}, établissant la symétrie et ouvrant la colonne c aux tours des deux camps. Reprendre de la dame par {Qxd5}? la sort beaucoup trop tôt : {w:Nc3} gagne un temps, et après {b:Qd8} ou {b:Qa5} les Blancs construisent un superbe centre par {w:e4} face à un cavalier noir privé de [c6]. Après {cxd5}, les deux camps développent cavaliers et fou dame avant {e3}/{b:e6}.",
+    "next": ["cxd5"],
+    "mistakes": [
+      {
+        "move": "Qxd5",
+        "mark": "?",
+        "punish": "Nc3",
+        "en": "Taking back with the queen brings it out too early: {Nc3} gains a tempo, and {w:e4} follows with a big center. Black's knight has lost [c6] too. {b:cxd5} was the move.",
+        "fr": "Reprendre de la dame l'expose prématurément : {Nc3} gagne un temps immédiat, suivi de {w:e4} qui confisque le centre alors que le pion [c6] prive déjà le cavalier noir de sa meilleure case. Il fallait reprendre par {b:cxd5}.",
+        "shapes": ["Rc6", "Gb1c3"]
+      }
+    ],
+    "shapes": ["Rc6", "Gc6d5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 e4",
+    "en": "The Diemer Gambit of the Slav: White offers the e-pawn at once to open lines. Black should accept with {dxe4}, and after {Nc3 e5} or {w:Nc3} {b:Nf6}, Black holds a solid position: the pawn on [e4] cramps White's knight and {b:e5} frees Black's pieces. {Nf6}? lets {w:e5} chase the knight to [d7] with a big space edge, and {e6}? gives White a favorable Marshall Gambit after {w:Nc3}.",
+    "fr": "Le gambit Diemer de la Slave : les Blancs offrent d'emblée leur pion e afin d'ouvrir les lignes. Les Noirs ont tout intérêt à accepter par {dxe4}, où après {Nc3 e5} ou {w:Nc3} {b:Nf6} le pion [e4] gêne le cavalier du roi blanc pendant que les pièces noires se libèrent. Refuser par {Nf6}? offre un net gain d'espace à {w:e5} refoulant le cavalier en [d7], et {e6}? transpose dans un gambit Marshall favorable aux Blancs après {w:Nc3}.",
+    "next": ["dxe4"],
+    "mistakes": [
+      {
+        "move": "Nf6",
+        "mark": "?",
+        "punish": "e5",
+        "en": "Developing with gain of time looks right, but {e5} kicks the knight, and after {b:Nfd7} {w:cxd5}, White has space and the better center. {b:dxe4} took the pawn.",
+        "fr": "Développer le cavalier en attaquant [e4] semble logique, mais {e5} le chasse aussitôt en [d7] et laisse aux Blancs après {w:cxd5} tout l'espace et un centre supérieur. Il fallait accepter par {b:dxe4}.",
+        "shapes": ["Ge4e5"]
+      },
+      {
+        "move": "e6",
+        "mark": "?",
+        "punish": "Nc3",
+        "en": "Holding [d5] lets White play a Marshall Gambit with an extra developing move: {Nc3} and White's center and pieces are ahead. {b:dxe4} was the move.",
+        "fr": "Soutenir [d5] permet aux Blancs d'entrer par {Nc3} dans un gambit Marshall avec un temps d'avance et un fort centre. Il valait mieux prendre le pion par {b:dxe4}.",
+        "shapes": ["Rd5", "Gb1c3"]
+      }
+    ],
+    "shapes": ["Gd5e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 e5",
+    "en": "The Winawer Countergambit: Black strikes at [d4] at once and offers a pawn for quick development. White should take, {dxe5}, or exchange first with {cxd5}, and Black has to show that the activity is worth something: after {dxe5 d4} {w:Ne4} {b:Qa5+}, Black recovers a pawn in a sharp fight, though White keeps the better chances. {e4} opens the center too, allowing {b:dxe4}. Objectively dubious, the gambit is tricky in fast games.",
+    "fr": "Le contre-gambit Winawer : les Noirs frappent [d4] au troisième coup et sacrifient un pion pour accélérer leur développement. Les Blancs prennent par {dxe5} ou échangent d'abord en [d5] par {cxd5}, sommant les Noirs de justifier leur audace : après {dxe5 d4} {w:Ne4} {b:Qa5+}, les Noirs regagnent un pion dans une mêlée vive où les Blancs gardent toutefois les meilleures chances. Pousser {e4} ouvre aussi le jeu après {b:dxe4}. Suspect objectivement, ce gambit reste redoutable en blitz.",
+    "next": ["dxe5", "cxd5"],
+    "shapes": ["Rd4", "Re4", "Gd4e5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 e5 e4",
+    "en": "White counters in the center instead of taking on [e5]. Black's best is {dxe4}, capturing while [d4] is still under fire: after {Nge2 f5} or {w:dxe5} {b:Qxd1+} {w:Kxd1}, Black's pieces get active play. {b:exd4} {w:Qxd4} hands White the central initiative. Leaving the tension with {Bb4}?, {Nf6}? or {dxc4}? lets {w:dxe5} or {w:exd5} win a central pawn while Black's king is still uncastled.",
+    "fr": "Les Blancs contre-attaquent au centre au lieu de prendre en [e5]. La meilleure suite noire est {dxe4}, liquidant tant que [d4] est sous pression : tant sur {Nge2 f5} que sur {w:dxe5} {b:Qxd1+} {w:Kxd1}, les pièces noires s'activent bien, tandis que {b:exd4} {w:Qxd4} céderait l'initiative aux Blancs. En revanche, laisser la tension entière par {Bb4}?, {Nf6}? ou {dxc4}? perd un pion central sur {w:dxe5} ou {w:exd5}.",
+    "next": ["dxe4"],
+    "mistakes": [
+      {
+        "move": "Bb4",
+        "mark": "?",
+        "punish": "dxe5",
+        "en": "The pin keeps the tension, but White takes on [e5] first, and after {b:Ne7} {w:Bd2}, White is a pawn up with the better center. {b:dxe4} was the move.",
+        "fr": "Clouer sans clarifier le centre laisse les Blancs prendre d'abord en [e5], émergeant après {b:Ne7} {w:Bd2} avec un pion de plus et le meilleur centre. Il fallait capturer par {b:dxe4}.",
+        "shapes": ["Re5", "Gd4e5"]
+      },
+      {
+        "move": "Nf6",
+        "mark": "?",
+        "punish": "exd5",
+        "en": "Developing lets White open the center: {exd5} and after {b:Bd6} {w:Nf3}, the pawn on [e5] and Black's king are targets. {b:dxe4} was the move.",
+        "fr": "Sortir le cavalier laisse les Blancs ouvrir le centre à leur profit : {exd5} suivi de {b:Bd6} {w:Nf3} cible à la fois le pion [e5] et le roi noir. La bonne prise était {b:dxe4}.",
+        "shapes": ["Re5", "Ge4d5"]
+      },
+      {
+        "move": "dxc4",
+        "mark": "?",
+        "punish": "dxe5",
+        "en": "Taking the wrong pawn: {dxe5} and the queens come off with White a pawn up, after {b:Qxd1+} {w:Kxd1}. {b:dxe4} was the move.",
+        "fr": "C'est le mauvais pion qui est capturé : {dxe5} force l'échange des dames {b:Qxd1+} {w:Kxd1} avec un pion net de plus pour les Blancs. Il fallait jouer {b:dxe4}.",
+        "shapes": ["Gd4e5"]
+      }
+    ],
+    "shapes": ["Gd5e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6",
+    "en": "The Semi-Slav. Black's pawns on [c6], [d5] and [e6] form a solid triangle, and the bishop on [c8] is shut in once more, but Black keeps the threat of {dxc4} and {b5}, holding the extra pawn. White's two main answers set the tone: {e3} leads to the Meran, slow and strategic; {Bg5} to the Botvinnik and the Moscow, the sharpest lines in chess. {cxd5} gives a Carlsbad structure in which White plays the minority attack.",
+    "fr": "La défense Semi-Slave. Les pions noirs en [c6], [d5] et [e6] forment un triangle compact : certes le fou [c8] est de nouveau enfermé, mais les Noirs menacent désormais de prendre en [c4] et de conserver le pion grâce à {b:b5} ! Les deux grandes réponses blanches donnent le ton : {e3} ouvre la variante de Méran, riche et stratégique ; {Bg5} lance les variantes Botvinnik et Moscou, parmi les plus aiguës de toute la théorie. Enfin, {cxd5} rejoint la structure de Carlsbad.",
+    "next": ["e3", "Bg5", "cxd5"],
+    "shapes": ["Rc6", "Rd5", "Re6", "Ge2e3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3",
+    "en": "White protects [c4] in advance. Black's main move is {Nbd7}, waiting: Black takes on [c4] only after White's bishop has moved, so as to win a tempo. {a6}, the Accelerated Meran, prepares {b5} at once. Black's plan is {dxc4}, {b5}, {Bb7} and the freeing break {c5}, after which the bishop on [b7] becomes one of the best pieces on the board.",
+    "fr": "Les Blancs protègent [c4] par avance. Le coup principal noir est {Nbd7}, jouant l'attente : les Noirs ne prendront en [c4] qu'une fois le fou [f1] sorti, afin de gagner un précieux tempo. {a6}, la Méran accélérée, prépare {b:b5} tout de suite. Dans les deux cas, le rêve stratégique noir enchaîne {b:dxc4}, {b:b5}, {b:Bb7} et la rupture libératrice {b:c5}, transformant le fou [b7] en monstre sur la grande diagonale.",
+    "next": ["Nbd7", "a6"],
+    "shapes": ["Rc4", "Rb7", "Gb8d7"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7",
+    "en": "The main crossroads of the Semi-Slav. If White plays the natural {Bd3}, Black captures {b:dxc4} with tempo and expands with {b:b5}, entering the Meran. {Qc2}, the Anti-Meran or Stoltz Variation, sidesteps that tempo loss: because White's bishop is still on [f1], Black usually answers {b:Bd6} and waits before taking on [c4]. Both sides then race for the central breaks {w:e4} and {b:e5}.",
+    "fr": "Le grand carrefour de la Semi-Slave. Si les Blancs développent naturellement {Bd3}, les Noirs capturent {b:dxc4} avec gain de temps et lancent {b:b5}, entrant dans la variante de Méran. {Qc2}, l'Anti-Méran (ou variante Stoltz), esquive cette perte de temps : le fou blanc étant resté en [f1], les Noirs répondent d'ordinaire {b:Bd6} et diffèrent la prise en [c4], lançant une course de vitesse vers les ruptures centrales {w:e4} et {b:e5}.",
+    "next": ["Bd3", "Qc2"],
+    "shapes": ["Rc4", "Rf1", "Gf1d3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3",
+    "en": "White's bishop has moved, so {dxc4} wins a tempo: after {w:Bxc4} {b:b5}, the bishop must move again. This is the Meran. Black's plan is {dxc4}, {b:b5}, {b:Bb7} and {b:c5}, after which the bishop on [b7] comes alive on the long diagonal, while White plays for {w:e4} and a kingside attack. {Bd6} is the Chigorin Variation, keeping the tension; once White castles, {w:e4} forces Black to react quickly.",
+    "fr": "Le fou blanc ayant bougé, {dxc4} gagne un temps net : après {w:Bxc4} {b:b5}, le fou doit repartir, inaugurant la célèbre variante de Méran ! Le plan noir s'articule autour de {dxc4}, {b:b5}, {b:Bb7} et {b:c5} pour embraser la grande diagonale, tandis que les Blancs visent {w:e4} et l'assaut sur l'aile roi. Plus retenue, la variante Tchigorine {Bd6} maintient la tension centrale en attendant le roque et {w:e4}.",
+    "next": ["dxc4", "Bd6", "Be7"],
+    "shapes": ["Gd5c4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4",
+    "en": "White recaptures the pawn and reaches the starting tabiya of the Meran Variation, popularized after Akiba Rubinstein's win at Merano in 1924. Black's whole point in waiting for {Bd3} before taking on [c4] was to strike now with {b5}, gaining a free tempo on the bishop on [c4] to expand on the queenside, fianchetto via {b:Bb7} or push {b:a6} and {b:c5}. Passive alternatives like {Bd6} leave Black cramped without counterplay.",
+    "fr": "Les Blancs reprennent le pion et atteignent le point de départ de la variante de Méran, rendue célèbre par la victoire d'Akiba Rubinstein à Merano en 1924. Toute l'idée noire, en attendant {Bd3} pour capturer en [c4], était de frapper maintenant par {b5}, gagnant un temps gratuit sur le fou [c4] afin d'étendre l'aile dame et de préparer {b:Bb7} ou {b:a6} suivi de {b:c5}. Un coup passif comme {Bd6} laisserait les Noirs à l'étroit sans contre-jeu.",
+    "next": ["b5"],
+    "shapes": ["Gb7b5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5",
+    "en": "The Meran Variation, named after the 1924 tournament in Merano. Black has gained space and time on the queenside, planning {b:Bb7} or {b:a6} followed by the freeing break {b:c5}. White's main retreat is {Bd3}, eyeing [h7] and supporting {w:e4}. {Be2} keeps the queen connected to [d4], and {Bb3} aims at [e6] and [f7]. Against {Bd3}, Black chooses between {b:Bb7} and {b:a6}, answering {w:e4} with {b:b4} or {b:c5}.",
+    "fr": "La variante de Méran, baptisée au tournoi de Merano en 1924. Les Noirs ont conquis de l'espace et un temps à l'aile dame pour préparer {b:Bb7} ou {b:a6} suivi de la poussée libératrice {b:c5}. Le repli principal blanc est {Bd3}, braqué sur [h7] et soutenant {w:e4} ; {Be2} garde la dame en contact avec [d4], et {Bb3} surveille [e6] et [f7]. Face à {Bd3}, les Noirs choisissent entre {b:Bb7} et {b:a6}, prêts à accueillir {w:e4} par {b:b4} ou {b:c5}.",
+    "next": ["Bd3", "Be2", "Bb3"],
+    "shapes": ["Rb7", "Gc4d3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3",
+    "en": "White's bishop is back on [d3], aiming at Black's kingside. Black chooses between {Bb7}, the Modern Meran, and {a6}, the Classical Meran that supports {b:c5}. Against {Bb7}, White usually castles or pushes {w:e4}, met by {b:b4}; against {a6}, White strikes with {w:e4} at once, since quiet play lets {b:c5} equalize effortlessly. Once {b:c5} lands, the bishop on [b7] commands the long diagonal.",
+    "fr": "Revenu en [d3], le fou blanc pointe vers l'aile roi noire. Les Noirs choisissent alors entre {Bb7}, la Méran moderne, et {a6}, la Méran classique qui prépare directement {b:c5}. Contre {Bb7}, les Blancs roquent souvent ou poussent {w:e4} face à la riposte {b:b4} ; contre {a6}, ils doivent lancer {w:e4} sans délai, sous peine de laisser {b:c5} égaliser sans effort en couronnant le fou [b7] sur la grande diagonale.",
+    "next": ["Bb7", "a6"],
+    "shapes": ["Rd3", "Gc8b7"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 e4",
+    "en": "White pushes {e4} before castling to stop an easy {b:c5}. Black must counter with {b4}, driving the knight from [c3] before it backs up {w:e5}: after {Na4 c5 e5 Nd5}, the knight sits firmly on [d5] and the fight is balanced. Routine moves like {a6}? and {Be7}? are too slow: {w:e5} kicks the knight from [f6], locking in Black's bishop on [b7] while White's attack rolls.",
+    "fr": "Les Blancs poussent {e4} avant même de roquer pour enrayer {b:c5}. Les Noirs doivent riposter immédiatement par {b4}, chassant le cavalier [c3] avant qu'il ne soutienne {w:e5} : après {Na4 c5 e5 Nd5}, le cavalier noir s'ancre solidement en [d5] dans une lutte équilibrée. Les coups routiniers {a6}? et {Be7}? sont trop lents : {w:e5} déloge le cavalier [f6] et mure le fou [b7] pendant que l'attaque blanche déferle.",
+    "next": ["b4"],
+    "mistakes": [
+      {
+        "move": "a6",
+        "mark": "?",
+        "punish": "e5",
+        "en": "Spending moves on both [a6] and [b7] without challenging White's center is too slow: {e5} drives the knight from [f6], and after {b:Nd5} {w:Nxd5} {b:cxd5}, Black's c-pawn and light-squared bishop are locked in while White's kingside attack rolls. Strike first: {b:b4} after {b:Bb7}, or {b:c5} after {b:a6}.",
+        "fr": "Dépenser des temps à la fois pour [b7] et [a6] sans contester le centre blanc est fatalement trop lent : {e5} chasse le cavalier [f6], et après {b:Nd5} {w:Nxd5} {b:cxd5} le pion c et le fou [b7] restent murés sous l'attaque blanche. Il fallait frapper par {b:b4}.",
+        "shapes": ["Rd5", "Rc3", "Ge4e5"]
+      },
+      {
+        "move": "Be7",
+        "mark": "?",
+        "punish": "e5",
+        "en": "A calm developing move, but {e5} kicks the knight, and with {w:Nxd5} and {w:h4}, White's attack starts before Black's queenside play. {b:b4} was the move.",
+        "fr": "Un développement tranquille qui laisse {e5} refouler le cavalier : après {w:Nxd5} et {w:h4}, l'assaut blanc à l'aile roi devance le contre-jeu noir à l'aile dame. Il fallait déloger d'abord le cavalier [c3] par {b:b4}.",
+        "shapes": ["Ge4e5"]
+      }
+    ],
+    "shapes": ["Rc3", "Rd5", "Rf6", "Gb5b4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 a6 e4",
+    "en": "The Classical Meran. Black must strike immediately with {c5}: after {w:e5} {b:cxd4} {w:Nxb5}, the sharp Blumenfeld sacrifice begins, while {w:d5} transposes to the Reynolds Attack, met by {b:c4} and {b:Qc7}. {b4} is playable too. Developing casually with {Bb7}? is a serious mistake: {w:e5} chases the knight to [d5], and after {b:Nd5} {w:Nxd5} {b:cxd5}, Black's c-pawn and bishop on [b7] are shut in for good.",
+    "fr": "La Méran classique à son apogée. Les Noirs doivent frapper sur-le-champ par {c5} : sur {w:e5} {b:cxd4} {w:Nxb5} s'engage le célèbre sacrifice Blumenfeld, tandis que {w:d5} mène à l'attaque Reynolds accueillie par {b:c4} et {b:Qc7} ({b4} reste jouable aussi). Sortir nonchalamment {Bb7}? est une faute grave : {w:e5} chasse le cavalier en [d5], et après {b:Nd5} {w:Nxd5} {b:cxd5} le pion c et le fou [b7] sont emmurés pour de bon !",
+    "next": ["c5", "b4"],
+    "mistakes": [
+      {
+        "move": "Bb7",
+        "mark": "?",
+        "punish": "e5",
+        "en": "Spending moves on both [a6] and [b7] without challenging White's center is too slow: {e5} drives the knight from [f6], and after {b:Nd5} {w:Nxd5} {b:cxd5}, Black's c-pawn and light-squared bishop are locked in while White's kingside attack rolls. Strike first: {b:b4} after {b:Bb7}, or {b:c5} after {b:a6}.",
+        "fr": "Cumuler [a6] et [b7] sans frapper le centre blanc coûte un temps décisif : {e5} chasse le cavalier [f6], et après {b:Nd5} {w:Nxd5} {b:cxd5} le pion c et le fou [b7] restent bloqués derrière un mur pendant que les Blancs attaquent le roi. Il fallait jouer {b:c5} tout de suite.",
+        "shapes": ["Rc5", "Ge4e5"]
+      }
+    ],
+    "shapes": ["Rf6", "Gc6c5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 a6 e4 c5 e5 cxd4",
+    "en": "The Blumenfeld Variation of the Meran: both knights are en prise in a razor-sharp clash. White's best is the temporary piece sacrifice {Nxb5}: after {b:axb5} {w:exf6} {b:gxf6} {w:O-O} {b:Qb6}, Black's king stays in the center behind the open g-file while both sides attack. Taking the knight first with {exf6}? is a mistake: {b:dxc3} {w:fxg7} {b:Bxg7} leaves Black's queenside pawns and long-diagonal bishop dominant.",
+    "fr": "La variante Blumenfeld de la Méran : un corps à corps tranchant où un cavalier de chaque camp est en prise ! Le meilleur coup blanc est le sacrifice temporaire de pièce {Nxb5} : après {b:axb5} {w:exf6} {b:gxf6} {w:O-O} {b:Qb6}, le roi noir reste exposé au centre derrière la colonne g ouverte dans une mêlée furieuse. Prendre d'abord en [f6] par {exf6}? est une erreur : {b:dxc3} {w:fxg7} {b:Bxg7} laisse aux Noirs des pions dominants et une grande diagonale royale.",
+    "next": ["Nxb5"],
+    "mistakes": [
+      {
+        "move": "exf6",
+        "mark": "?",
+        "punish": "dxc3",
+        "en": "Taking the knight looks obvious, but {dxc3} wins a piece back and Black's pawns become very strong, while White has lost the center. {w:Nxb5}, the Blumenfeld sacrifice, was the move.",
+        "fr": "Prendre tout de suite le cavalier paraît naturel, mais {dxc3} regagne une pièce en conférant aux Noirs une masse de pions redoutable et un fou souverain en [g7] après {w:fxg7} {b:Bxg7}. Il fallait commencer par le sacrifice Blumenfeld {w:Nxb5}.",
+        "shapes": ["Gd4c3"]
+      }
+    ],
+    "shapes": ["Gc3b5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 e4 b4 Na4 c5 e5 Nd5",
+    "en": "Black's knight has reached the ideal blockade square on [d5], while the c-pawn challenges [d4] and the bishop on [b7] commands the long diagonal. White's main move is {O-O}, preparing {w:Re1}, {w:Bg5} or {w:Ng5} against Black's king; {Nxc5} {b:Nxc5} {w:dxc5} {b:Bxc5} liquidates the queenside tension instead. Black answers {O-O} with {b:cxd4} or {b:Be7} and {b:h6} to guard [g5] before castling.",
+    "fr": "Le cavalier noir a rejoint la case de blocus rêvée en [d5], pendant que le pion c attaque [d4] et que le fou [b7] règne sur la grande diagonale. Le coup principal blanc est {O-O}, préparant {w:Re1}, {w:Bg5} ou {w:Ng5} contre le roi noir ; liquider la tension à l'aile dame par {Nxc5} {b:Nxc5} {w:dxc5} {b:Bxc5} est l'autre grande voie. Sur {O-O}, les Noirs répondent par {b:cxd4} ou par {b:Be7} et {b:h6} afin de couvrir [g5] avant de roquer.",
+    "next": ["O-O", "Nxc5"],
+    "shapes": ["Rd5", "Rd4", "Rc5", "Ge1g1"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Qc2",
+    "en": "The Anti-Meran. White's queen covers [e4] and the bishop stays on [f1], so {b:dxc4} would let White take back in one move and no tempo is won. Black keeps the tension with {Bd6}, castles and prepares {b:e5}, or {b:dxc4} and then {b:e5}, freeing the bishop on [c8]. {b6} with {b:Bb7} is another set-up. White plays {w:Bd3}, {w:b3} or the sharp {w:g4} once the bishop lands on [d6].",
+    "fr": "L'Anti-Méran (ou variante Stoltz). La dame blanche surveille [e4] et le fou reste sagement en [f1], de sorte que {b:dxc4} permettrait aux Blancs de reprendre en un seul coup sans céder de tempo. Les Noirs maintiennent donc la tension par {Bd6}, roquent et préparent la rupture {b:e5} — directement ou précédée de {b:dxc4} — afin d'affranchir le fou [c8] ({b6} suivi de {b:Bb7} existe aussi). Les Blancs poursuivent par {w:Bd3}, {w:b3} ou l'audacieux {w:g4}.",
+    "next": ["Bd6", "b6"],
+    "shapes": ["Re4", "Rf1", "Gf8d6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 a6",
+    "en": "The Accelerated Meran: Black prepares {b:b5} without waiting for {b:Nbd7}. White can keep the tension with {b3} or {Bd3}, or close the queenside with {c5}, which takes away the {b:b5} and {b:c5} plans while giving Black {b:Nbd7} and {b:e5} later. After {Bd3}, Black takes on [c4] and expands with {b:b5}, {b:Bb7} and {b:c5}; after {b3}, Black can pin with {b:Bb4}.",
+    "fr": "La Méran accélérée : les Noirs préparent {b:b5} sans attendre {b:Nbd7}. Les Blancs peuvent maintenir la tension avec {b3} ou {Bd3}, ou verrouiller l'aile dame par {c5}, écartant définitivement {b:b5} et {b:c5} tout en laissant aux Noirs le plan central {b:Nbd7} et {b:e5}. Sur {Bd3}, les Noirs prennent en [c4] et lancent l'expansion {b:b5}, {b:Bb7} et {b:c5} ; sur {b3}, ils peuvent clouer par {b:Bb4}.",
+    "next": ["Bd3", "b3", "c5"],
+    "shapes": ["Gf1d3"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 e3 Nf6 Nf3 a6 Bd3",
+    "en": "White's bishop has moved to [d3], so Black should capture {dxc4} first: after {w:Bxc4} {b:b5} {w:Bd3} {b:Bb7}, Black reaches the Meran a tempo up. {Nbd7} is flexible too. Pushing {b5}? before taking on [c4] is a classic positional mistake: {w:c5} clamps the entire queenside shut, burying Black's bishop on [c8] while White prepares {w:e4} with a free hand.",
+    "fr": "Le fou blanc ayant bougé en [d3], les Noirs doivent capturer d'abord par {dxc4} : après {w:Bxc4} {b:b5} {w:Bd3} {b:Bb7}, ils entrent dans la variante de Méran avec un temps d'avance ({Nbd7} reste souple également). En revanche, pousser {b5}? sans avoir pris en [c4] est une erreur positionnelle classique : {w:c5} boucle hermétiquement toute l'aile dame et enterre le fou [c8] pendant que les Blancs préparent tranquillement {w:e4}.",
+    "next": ["dxc4", "Nbd7"],
+    "mistakes": [
+      {
+        "move": "b5",
+        "mark": "?",
+        "punish": "c5",
+        "en": "Gaining space before taking on [c4] lets White close the queenside: {c5} locks it, and White follows with {w:e4}, while Black's bishop on [c8] stays shut in. {b:dxc4}, then {b:b5}, was the Meran order.",
+        "fr": "Pousser à l'aile dame avant de prendre en [c4] permet aux Blancs de fermer la boutique : {c5} verrouille le flanc et laisse les mains libres pour {w:e4} face à un fou [c8] emmuré. L'ordre exact de la Méran était {b:dxc4} puis {b:b5}.",
+        "shapes": ["Rc4", "Rc8", "Gc4c5"]
+      }
+    ],
+    "shapes": ["Rd5", "Gd5c4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 Bd6",
+    "en": "The Chigorin Variation of the Semi-Slav: Black develops the dark-squared bishop actively to [d6] instead of taking on [c4] at once, preparing castling and {b:e5}. White castles with {O-O} or strikes immediately with {e4}. After {O-O O-O}, Black must time {b:dxc4} and {b:e5} with care: if Black switches to {b:dxc4} and {b:b5}, the bishop on [d6] must watch for {w:e4} and {w:e5} forks.",
+    "fr": "La variante Tchigorine de la Semi-Slave : les Noirs postent activement leur fou en [d6] au lieu de prendre tout de suite en [c4], en vue du roque et de la percée {b:e5}. Les Blancs roquent par {O-O} ou frappent d'emblée par {e4}. Après {O-O O-O}, les Noirs doivent calculer leurs ruptures avec précision : s'ils reviennent au plan {b:dxc4} et {b:b5}, la présence du fou en [d6] les expose à de mortelles fourchettes {w:e4}-{w:e5} !",
+    "next": ["O-O", "e4"],
+    "shapes": ["Rc4", "Ge1g1"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 Bd6 O-O O-O e4 dxc4 Bxc4 b5 Bd3",
+    "en": "Black has set up the Meran queenside with the bishop already on [d6], which puts [d6] and [f6] on a forkable square. Only {e5} holds the balance, striking the center before White's e-pawn can advance: after {w:dxe5} {b:Nxe5} {w:Nxe5} {b:Bxe5}, Black's pieces are free and active. Routine Meran moves like {Bb7}?? and {a6}?? lose a full piece to the pawn fork {w:e5}.",
+    "fr": "Les Noirs ont déployé l'aile dame de la Méran alors que leur fou se trouve déjà en [d6], plaçant le fou [d6] et le cavalier [f6] sous une menace directe de fourchette ! Seul {e5} sauve l'équilibre en bloquant le pion e blanc : après {w:dxe5} {b:Nxe5} {w:Nxe5} {b:Bxe5}, les pièces noires respirent librement. Les coups habituels de la Méran, {Bb7}?? et {a6}??, perdent net une pièce entière sur la fourchette {w:e5} !",
+    "next": ["e5"],
+    "mistakes": [
+      {
+        "move": "Bb7",
+        "mark": "??",
+        "punish": "e5",
+        "en": "The natural development loses a piece: {e5} forks the bishop on [d6] and the knight on [f6]. {b:e5}, hitting the center first, was the only good move.",
+        "fr": "Ce coup de développement machinal perd une pièce sur-le-champ : {e5} fait une fourchette royale entre le fou [d6] et le cavalier [f6] ! Seul {b:e5} empêchait l'avance fatale.",
+        "shapes": ["Rd6", "Rf6", "Ge4e5"]
+      },
+      {
+        "move": "a6",
+        "mark": "??",
+        "punish": "e5",
+        "en": "Preparing {b:c5} leaves the bishop and knight in line: {e5} forks them, and Black loses a piece. {b:e5} was the only good move.",
+        "fr": "Préparer {b:c5} oublie l'alignement du fou et du cavalier : {e5} attaque simultanément [d6] et [f6] et gagne une pièce nette. L'unique bon coup était {b:e5}.",
+        "shapes": ["Ge4e5"]
+      }
+    ],
+    "shapes": ["Rd6", "Rf6", "Ge6e5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 e4 b4 Na4 c5 e5 Nd5 O-O",
+    "en": "White is castled and ready to launch {w:Re1}, {w:Ng5} or {w:Nxc5}, while Black's king is still on [e8]. Black should continue with {cxd4} or {Be7}, often inserting {b:h6} to stop {w:Ng5} and Greek gift sacrifices on [h7] before castling short. The knight on [d5] holds Black's position together, shielding [e3] and [f4] while Black's bishops eye White's center.",
+    "fr": "Roqués, les Blancs s'apprêtent à lancer {w:Re1}, {w:Ng5} ou la liquidation {w:Nxc5} alors que le roi noir attend encore en [e8]. Les Noirs poursuivent par {cxd4} ou {Be7}, en intercalant souvent {b:h6} pour prévenir {w:Ng5} et tout sacrifice en [h7] avant de roquer. Véritable clé de voûte, le cavalier en [d5] couvre [e3] et [f4] pendant que les fous noirs balayent le centre.",
+    "next": ["cxd4", "Be7"],
+    "shapes": ["Rd5", "Rc3", "Re3", "Gc5d4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5",
+    "en": "The Anti-Meran Gambit: White pins the knight before playing {w:e3}, inviting the sharpest battles in the Semi-Slav. {dxc4} enters the Botvinnik System, where {e4 b5 e5 h6 Bh4 g5} blows the board wide open. {h6} first asks the bishop to choose between the positional Moscow {w:Bxf6} and the sharp Anti-Moscow Gambit {w:Bh4}. {Nbd7} prepares the Cambridge Springs {b:Qa5}, and {b:Be7} transposes to a quiet Orthodox.",
+    "fr": "Le gambit Anti-Méran : les Blancs clouent le cavalier avant d'engager {w:e3}, ouvrant les lignes les plus vertigineuses de la Semi-Slave. {dxc4} inaugure le système Botvinnik, où {e4 b5 e5 h6 Bh4 g5} met le feu à tout l'échiquier. {h6} d'abord somme le fou de choisir entre la variante positionnelle de Moscou ({w:Bxf6}) et le gambit aigu Anti-Moscou ({w:Bh4}). Enfin, {Nbd7} prépare la Cambridge Springs {b:Qa5} et {b:Be7} rejoint l'Orthodoxe.",
+    "next": ["h6", "dxc4", "Nbd7"],
+    "shapes": ["Gh7h6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4",
+    "en": "The Botvinnik System. White plays {e4} at once, building the center and threatening {w:e5}: after {b:b5} {w:e5} {b:h6} {w:Bh4} {b:g5}, the knight on [f6] is unpinned by force and both sides go all in, Black with the queenside pawns and White with the attack. {w:e3} and {w:a4} are quieter tries that let {b:b5} hold the extra pawn comfortably. If Black gives [c4] back without a fight, the bishop on [c8] stays passive.",
+    "fr": "Le système Botvinnik. Les Blancs poussent immédiatement {e4}, érigeant un centre complet avec la menace {w:e5} : après {b:b5} {w:e5} {b:h6} {w:Bh4} {b:g5}, les Noirs brisent le clouage par la force et chaque camp brûle ses vaisseaux — marée de pions à l'aile dame contre attaque directe sur le roi. Plus calmes, {w:e3} et {w:a4} laissent {b:b5} conserver le pion de plus sans frayeur.",
+    "next": ["e4"],
+    "shapes": ["Rf6", "Rg5", "Ge2e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4",
+    "en": "White has built a full pawn center and threatens {w:e5}, winning the pinned knight on [f6]. Black's only consistent move is {b5}, defending [c4] and buying room to answer {e5 h6 Bh4 g5} in the Botvinnik main line. Passive unpinning moves like {b:Be7} let {w:Bxc4} recover the pawn with a commanding central duo while Black's light-squared bishop remains locked in.",
+    "fr": "Les Blancs ont pris possession de tout le centre et menacent de gagner le cavalier cloué en [f6] par {w:e5}. L'unique coup cohérent des Noirs est {b5}, tenant [c4] tout en préparant la contre-offensive {e5 h6 Bh4 g5} de la ligne principale Botvinnik. Un déclouage passif comme {b:Be7} permettrait à {w:Bxc4} de récupérer gratuitement le pion avec un duo central dominateur face à un fou [c8] emmuré.",
+    "next": ["b5"],
+    "shapes": ["Rc4", "Rc8", "Gb7b5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6",
+    "en": "Black asks the bishop. White must keep the pin with {Bh4}: {exf6}?? {b:hxg5} hands Black a strong center, the open h-file and the extra pawn. After {Bh4 g5}, White sacrifices a piece with {w:Nxg5}, entering the famous Botvinnik main line where both kings live dangerously. {w:exf6}? after {Bh4 g5}, the Ekström line, leaves Black two pawns up after {b:gxh4} {w:Ne5} {b:Qxf6}.",
+    "fr": "Les Noirs interrogent le fou. Les Blancs doivent impérativement maintenir la tension par {Bh4}, car capturer {exf6}?? rend le fou sur {b:hxg5} en offrant aux Noirs un centre solide, la colonne h ouverte et un pion de plus ! Après {Bh4 g5}, le sacrifice de cavalier {w:Nxg5} ouvre la grande variante Botvinnik où les deux rois marchent sur un fil, tandis que {w:exf6}? (variante Ekström) laisse deux pions de plus aux Noirs après {b:gxh4} {w:Ne5} {b:Qxf6}.",
+    "next": ["Bh4"],
+    "mistakes": [
+      {
+        "move": "exf6",
+        "mark": "??",
+        "punish": "hxg5",
+        "en": "Taking the knight gives up the bishop: {hxg5} and Black has a strong center, the open h-file and the extra pawn on [c4]. {w:Bh4}, keeping the pin, was the move.",
+        "fr": "Prendre le cavalier abandonne le fou sur {hxg5} et livre aux Noirs un centre robuste, la colonne h ouverte et le pion supplémentaire en [c4]. Il fallait reculer par {w:Bh4} pour maintenir le clouage.",
+        "shapes": ["Rc4", "Gh6g5"]
+      }
+    ],
+    "shapes": ["Gg5h4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5",
+    "en": "The main position of the Botvinnik. White's best is {Nxg5}, a piece sacrifice: after {b:hxg5} {w:Bxg5} {b:Nbd7}, White has two pawns for the knight and a strong pawn on [e5] that will come to [f6]. {exf6}? first, the Ekström Variation, is weaker: after {b:gxh4} {w:Ne5} {b:Qxf6}, the pieces are level again and Black is two pawns up, with [f7] covered. Black's king usually castles long, and the bishop on [b7] is the key defender.",
+    "fr": "Le sommet du système Botvinnik. La suite critique des Blancs est le sacrifice de pièce {Nxg5} : après {b:hxg5} {w:Bxg5} {b:Nbd7}, les Blancs obtiennent deux pions pour le cavalier et un puissant pion [e5] prêt à s'enfoncer en [f6]. Prendre d'abord par {exf6}? (variante Ekström) est inférieur : après {b:gxh4} {w:Ne5} {b:Qxf6}, l'égalité de pièces est rétablie avec deux pions de plus pour les Noirs et [f7] bien défendu.",
+    "next": ["Nxg5"],
+    "mistakes": [
+      {
+        "move": "exf6",
+        "mark": "?",
+        "punish": "gxh4",
+        "en": "The Ekström line is playable, but weaker than the main one: after {gxh4} {w:Ne5} {b:Qxf6}, the pieces are level and Black is two pawns up, with [f7] covered. {w:Nxg5}, sacrificing the knight, was White's best.",
+        "fr": "La variante Ekström est nettement moins incisive que le sacrifice de cavalier : après {gxh4} {w:Ne5} {b:Qxf6}, les pièces s'égalisent et les Noirs restent avec deux pions de plus tout en couvrant [f7]. Le coup critique était {w:Nxg5}.",
+        "shapes": ["Rf7", "Gg5h4"]
+      }
+    ],
+    "shapes": ["Re5", "Rf6", "Rb7", "Gf3g5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5",
+    "en": "White has sacrificed the knight. The main line is {hxg5 Bxg5 Nbd7}, with mutual chances: White's pawns on [e5] and [f6] and the bishop pair against Black's extra piece and queenside pawns. {Nd5} looks safer but lets {Nxf7}, and after {b:Qxh4} {w:Nxh8}, White comes out ahead. Only accurate play keeps the balance: this is one of the most analyzed positions in chess.",
+    "fr": "Les Blancs ont sacrifié leur cavalier ! La ligne principale continue par {hxg5 Bxg5 Nbd7}, dans un déséquilibre fascinant : les pions blancs en [e5] et bientôt [f6] ainsi que la paire de fous affrontent la pièce supplémentaire et la phalange de l'aile dame noire. Refuser par {Nd5}? paraît prudent mais s'expose à la fourchette dévastatrice {Nxf7} suivie de {b:Qxh4} {w:Nxh8}. C'est l'une des positions les plus analysées de l'histoire du jeu.",
+    "next": ["hxg5"],
+    "mistakes": [
+      {
+        "move": "Nd5",
+        "mark": "?",
+        "punish": "Nxf7",
+        "en": "The knight blocks the d-file and hits nothing, and White's knight jumps in: {Nxf7} forks the queen and the rook, and after {b:Qxh4} {w:Nxh8}, White comes out ahead. {b:hxg5} was the move.",
+        "fr": "Le cavalier bouche la colonne d sans rien menacer pendant que le cavalier blanc plonge en {Nxf7}, faisant fourchette entre la dame et la tour pour gagner la qualité après {b:Qxh4} {w:Nxh8}. Il fallait accepter le sacrifice par {b:hxg5}.",
+        "shapes": ["Gg5f7"]
+      }
+    ],
+    "shapes": ["Re5", "Rf6", "Gh6g5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 Nxg5 hxg5 Bxg5 Nbd7",
+    "en": "White has given a knight for two pawns, and Black still holds [c4]; in return the pawn on [e5] advances to [f6] and cramps Black's kingside. White's main moves are {exf6} and {g3}, preparing {w:Bg2} on the long diagonal, followed by castling and {w:Re1}. {Ne4}??, aiming at [d6] and [f6], is a blunder: {b:Bb4+} checks first and traps White's king in the middle while Black develops with {b:Bb7}, {b:Qb6} and {b:O-O-O}.",
+    "fr": "Les Blancs ont cédé un cavalier contre deux pions alors que les Noirs tiennent toujours [c4] ; en contrepartie, le pion blanc s'installe en [f6] et paralyse l'aile roi adverse. Les deux grandes suites blanches sont {exf6} et {g3}, préparant {w:Bg2} sur la grande diagonale avant le roque et {w:Re1}. Surtout, ne sautez pas tout de suite en {Ne4}?? : l'échec {b:Bb4+} coince le roi blanc au centre pendant que les Noirs déroulent {b:Bb7}, {b:Qb6} et le grand roque !",
+    "next": ["exf6", "g3"],
+    "mistakes": [
+      {
+        "move": "Ne4",
+        "mark": "??",
+        "punish": "Bb4+",
+        "en": "The knight aims at [d6] and [f6], but it leaves the king's diagonal open: {Bb4+} checks first, and after {w:Ke2}, White's king is stranded in the middle while Black's attack rolls. {w:exf6} or {w:g3} was the move.",
+        "fr": "Le cavalier vise [d6] et [f6], mais découvre fatalement son propre roi : {Bb4+} donne échec d'abord, et après {w:Ke2} le monarque blanc reste bloqué en plein courant d'air sous la contre-attaque noire. Il fallait jouer {w:exf6} ou {w:g3}.",
+        "shapes": ["Rf6", "Rd4", "Gf8b4"]
+      }
+    ],
+    "shapes": ["Rf6", "Ge5f6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 exf6 gxh4",
+    "en": "The Ekström Variation. White's knight goes to [e5], eyeing [f7] and [c6]; {g3}, taking back the pawn on [h4] later and putting the bishop on [g2], is just as good. {Ne4}??, heading for [d6], is a blunder: {b:Bb4+} hits the king first, and after {w:Nfd2} {b:Qxd4}, Black is well ahead. After {Ne5} {b:Qxf6}, Black is two pawns up, though the doubled h-pawns are ugly and Black's king has no safe home.",
+    "fr": "La variante Ekström. Le cavalier blanc bondit en {Ne5} pour menacer [f7] et [c6], ou bien les Blancs jouent {g3} afin de récupérer plus tard [h4] en installant le fou en [g2]. En revanche, {Ne4}?? vers [d6] est une gaffe : {b:Bb4+} donne échec en premier et permet à {b:Qxd4} de rafler le centre après {w:Nfd2}. Même après le juste {Ne5} {b:Qxf6}, les Noirs conservent deux pions de plus malgré leurs pions h doublés.",
+    "next": ["Ne5", "g3"],
+    "mistakes": [
+      {
+        "move": "Ne4",
+        "mark": "??",
+        "punish": "Bb4+",
+        "en": "The knight heads for [d6], but {Bb4+} hits the king first, and after {w:Nfd2} {b:Qxd4}, Black has won a central pawn and White's pieces are tied up. {w:Ne5} or {w:g3} was the move.",
+        "fr": "Le cavalier lorgne sur [d6], mais l'échec intermédiaire {Bb4+} suivi sur {w:Nfd2} de {b:Qxd4} fait tomber un pion central clé et ligote les pièces blanches. Il fallait jouer {w:Ne5} ou {w:g3}.",
+        "shapes": ["Rd6", "Gf8b4"]
+      }
+    ],
+    "shapes": ["Re5", "Rf7", "Rc6", "Gf3e5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 dxc4 e4 b5 e5 h6 Bh4 g5 exf6 gxh4 Ne5",
+    "en": "White's knight hits [f7] and [c6] together. Black's only good reply is {Qxf6}, capturing the dangerous f-pawn while covering [f7] and eyeing [f2]. {Bb7}??, the natural developing move, is a blunder: {w:Nxf7} forks the queen and the rook on [h8], leaving Black's king exposed with material gone. Until the wedge on [f6] is removed, Black's kingside pieces cannot breathe.",
+    "fr": "Le cavalier blanc menace simultanément [f7] et [c6]. L'unique bonne réplique noire est {Qxf6}, éliminant le dangereux clou en [f6] tout en protégeant [f7] et en lorgnant sur [f2]. Développer machinalement {Bb7}?? est un désastre : {w:Nxf7} fait une fourchette royale entre la dame et la tour [h8], laissant le roi noir en ruines. Tant que le pion [f6] subsiste, l'aile roi noire étouffe.",
+    "next": ["Qxf6"],
+    "mistakes": [
+      {
+        "move": "Bb7",
+        "mark": "??",
+        "punish": "Nxf7",
+        "en": "The natural developing move, but [f7] is hit: {Nxf7} forks the queen and the rook, and after {b:Qxf6} {w:Nxh8}, Black's king has no safe home. {b:Qxf6}, covering [f7], was the move.",
+        "fr": "Ce développement naturel oublie la menace directe sur [f7] : {Nxf7} attaque simultanément la dame et la tour [h8], dévastant le camp noir après {b:Qxf6} {w:Nxh8}. Seul {b:Qxf6} protégeait [f7].",
+        "shapes": ["Rf7", "Ge5f7"]
+      }
+    ],
+    "shapes": ["Rf7", "Rc6", "Rh5", "Gd8f6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6",
+    "en": "Black asks the bishop to declare its plan before committing to [c4]. {Bxf6}, the Moscow Variation, gives Black the bishop pair in return for a lead in development and central grip after {b:Qxf6} {w:e3} {b:Nd7} {w:Bd3}. {Bh4}, the Anti-Moscow Gambit, dares Black to grab {b:dxc4} {w:e4} {b:g5} {w:Bg3} {b:b5}, trading a pawn for central control and an exposed Black kingside.",
+    "fr": "Les Noirs somment le fou de dévoiler ses cartes avant de toucher à [c4]. {Bxf6}, la variante de Moscou, cède la paire de fous contre une belle avance de développement et une forte emprise centrale après {b:Qxf6} {w:e3} {b:Nd7} {w:Bd3}. {Bh4}, le gambit Anti-Moscou, met quant à lui les Noirs au défi d'accepter {b:dxc4} {w:e4} {b:g5} {w:Bg3} {b:b5}, sacrifiant un pion pour dominer le centre face à une aile roi exposée.",
+    "next": ["Bxf6", "Bh4"],
+    "shapes": ["Gg5f6"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6",
+    "en": "Black plays the Semi-Slav move order with {e6} first, to avoid the Exchange Slav. White's sharpest answer is {e4}, the Marshall Gambit; {Nf3} allows the Noteboom with {dxc4}; {e3} keeps things quiet. After {Nf3 Nf6}, we are back in the Semi-Slav. The triangle on [c6], [d5] and [e6] is solid, but the bishop on [c8] stays shut in until Black takes on [c4] or plays {e5}.",
+    "fr": "L'ordre du Triangle vers la Semi-Slave : en jouant {e6} avant {c6}, les Noirs contournent la symétrique Slave d'échange. En retour, ils s'exposent au tranchant gambit Marshall ({e4}), tandis que {Nf3} autorise la variante Noteboom ({b:dxc4}) ou rejoint la Semi-Slave après {Nf3 Nf6} ; {e3} garde les eaux calmes. Très robuste, le triangle [c6]-[d5]-[e6] maintient le fou [c8] enfermé jusqu'à {b:dxc4} ou {b:e5}.",
+    "next": ["Nf3", "e4", "e3"],
+    "shapes": ["Rc6", "Rd5", "Re6", "Gg1f3"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3",
+    "en": "White develops and keeps {w:e4} in reserve. Black's best moves are {Nf6}, the Semi-Slav, and {dxc4}, the Noteboom, keeping the pawn with {b:b5} and {b:a5}. {Bd6}?! puts the bishop on its active square before the knight is out, giving White a target: {w:e4} gains space against [d5], and the push {w:e5} comes with tempo on the bishop.",
+    "fr": "Les Blancs développent leur cavalier en gardant {w:e4} sous le coude. Les deux grands choix noirs sont {Nf6}, rejoignant la Semi-Slave, et {dxc4}, la variante Noteboom, qui conserve le pion grâce à {b:b5} et {b:a5}. Sortir le fou par {Bd6}?! avant le cavalier offre une cible toute trouvée : {w:e4} prend le centre et menace déjà de refouler le fou avec gain de temps par {w:e5}.",
+    "next": ["Nf6", "dxc4"],
+    "mistakes": [
+      {
+        "move": "Bd6",
+        "mark": "?!",
+        "punish": "e4",
+        "en": "The bishop takes an active square before the knight is out, and it becomes a target: {e4} grabs the center, and {w:e5} would hit the bishop with tempo. White's pieces come out freely. {b:Nf6} or {b:dxc4} was the move.",
+        "fr": "Le fou s'engage sur une case active avant la sortie du cavalier et prête aussitôt le flanc : {e4} confisque le centre avec la menace directe de gain de temps {w:e5}. Jouez plutôt {b:Nf6} ou {b:dxc4}.",
+        "shapes": ["Ge2e4"]
+      }
+    ],
+    "shapes": ["Gg8f6"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 e4",
+    "en": "The Marshall Gambit. White offers the d-pawn for a quick attack on the dark squares. Black's best is {dxe4}, and after {w:Nxe4} {b:Bb4+} {w:Bd2} {b:Qxd4} {w:Bxb4} {b:Qxe4+} {w:Be2}, Black has a pawn while White's dark-squared bishop stops short castling. {Bb4}, pinning first, is playable too. {Ne7}? is too passive, letting {w:Nf3} and {w:Bd3} build a big center; {dxc4}? cedes the middle to {w:Bxc4}.",
+    "fr": "Le gambit Marshall. Les Blancs offrent un pion central pour lancer une attaque rapide sur les cases noires. La réplique critique est {dxe4} : après {w:Nxe4} {b:Bb4+} {w:Bd2} {b:Qxd4} {w:Bxb4} {b:Qxe4+} {w:Be2}, les Noirs ont un pion en poche mais le fou blanc sur cases noires leur interdit le petit roque ({Bb4} d'abord est jouable aussi). En revanche, {Ne7}? est trop passif face à {w:Nf3} et {w:Bd3}, et {dxc4}? livre le centre à {w:Bxc4}.",
+    "next": ["dxe4", "Bb4"],
+    "mistakes": [
+      {
+        "move": "Ne7",
+        "mark": "?",
+        "punish": "Nf3",
+        "en": "A passive knight move: {Nf3} and White keeps a big center, with {w:Bd3} and {w:h4} ideas. {b:dxe4}, accepting the Marshall Gambit, or {b:Bb4}, pinning first, was the move.",
+        "fr": "Un coup de cavalier trop timide qui laisse aux Blancs un centre imposant après {Nf3} suivi de {w:Bd3} et {w:h4}. Il fallait relever le gant par {b:dxe4} ou clouer par {b:Bb4}.",
+        "shapes": ["Gg1f3"]
+      },
+      {
+        "move": "f5",
+        "mark": "?",
+        "punish": "e5 dxc4 Bxc4",
+        "en": "Setting up a Stonewall barrier against the Marshall Gambit backfires because it leaves [e6] backward, weakens the light squares and entombs the bishop on [c8]. {e5 dxc4 Bxc4} plants a powerful space wedge on [e5], clamps down on [d6] and gives White effortless piece play against [e6]. Accept the gambit with {b:dxe4} or pin with {b:Bb4} instead.",
+        "fr": "Dresser un mur Stonewall contre le gambit Marshall se retourne contre les Noirs : le pion [e6] devient arriéré, les cases blanches s'affaiblissent et le fou [c8] reste emmuré. {e5 dxc4 Bxc4} plante un puissant coin d'espace en [e5], verrouille [d6] et offre aux Blancs un jeu de pièces limpide contre [e6]. Acceptez plutôt le gambit par {b:dxe4} ou clouez par {b:Bb4}.",
+        "shapes": ["Ge4e5", "Re6", "Bd6"]
+      }
+    ],
+    "shapes": ["Gd5e4"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 e4 dxe4 f3",
+    "en": "White offers a second pawn in Gambits style to open the f-file for rapid development. Black's best response is {Bb4} or {Nf6}, keeping the pawn on [e4] and getting ready to castle, since that pawn hampers White's knight and is hard to win back. {exf3}?! helps White bring the knight to [f3] with an open f-file, and {e3}? hands the pawn back so {w:Bxe3} develops with tempo.",
+    "fr": "Fidèles à l'esprit des gambits, les Blancs offrent un second pion pour ouvrir la colonne f et accélérer leur attaque. Les meilleures réponses noires sont {Bb4} et {Nf6}, conservant le pion [e4] qui entrave le cavalier [g1] tout en préparant le roque. Accepter par {exf3}?! aide le cavalier blanc à bondir en [f3] avec la colonne f grande ouverte, et {e3}? rend simplement le pion pour développer {w:Bxe3} avec tempo.",
+    "next": ["Bb4", "Nf6"],
+    "mistakes": [
+      {
+        "move": "e3",
+        "mark": "?",
+        "punish": "Bxe3",
+        "en": "Giving the pawn back on [e3] only helps White develop: {Bxe3} and White's center and lead in development are strong. {b:Bb4} or {b:Nf6} kept Black's extra pawn.",
+        "fr": "Rendre le pion en [e3] fait le jeu de l'adversaire : {Bxe3} développe une pièce avec gain de temps en laissant aux Blancs le centre et l'initiative. Gardez le pion gênant en [e4] avec {b:Bb4} ou {b:Nf6}.",
+        "shapes": ["Re3", "Gc1e3"]
+      },
+      {
+        "move": "exf3",
+        "mark": "?!",
+        "punish": "Nxf3",
+        "en": "A second pawn is the gambit's bait. {Nxf3} develops with the f-file open, and after {w:Bd3} and {w:O-O}, White's pieces aim at Black's king while Black's queenside sleeps. Two pawns don't make up for it. {b:Bb4} or {b:Nf6}, developing first, was the move.",
+        "fr": "Croquer ce second pion réalise le rêve du joueur de gambit : {Nxf3} ouvre la colonne f, et après {w:Bd3} puis {w:O-O} toutes les pièces blanches fondent sur le roi pendant que l'aile dame noire sommeille. Développez plutôt {b:Bb4} ou {b:Nf6}.",
+        "shapes": ["Gg1f3"]
+      }
+    ],
+    "shapes": ["Re4", "Gf8b4"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 e4 dxe4 Nxe4",
+    "en": "White's knight recaptures on [e4], eyeing [d6] and [f6] while offering [d4]. Black's critical test is {Bb4+}: White either sacrifices the pawn with {w:Bd2} {b:Qxd4} {w:Bxb4} {b:Qxe4+} {w:Be2} for fierce dark-square pressure, or retreats {w:Nc3} for a positional bind after {b:c5}. {Nf6} is the solid alternative: after {w:Nxf6+} {b:Qxf6} {w:Nf3}, Black avoids fireworks at the cost of White's space edge.",
+    "fr": "Le cavalier blanc reprend en [e4], visant [d6] et [f6] tout en offrant le pion [d4]. Le test critique des Noirs est {Bb4+} : les Blancs peuvent alors sacrifier le pion par {w:Bd2} {b:Qxd4} {w:Bxb4} {b:Qxe4+} {w:Be2} contre un terrible étau sur cases noires, ou replier {w:Nc3} pour jouer positionnellement contre {b:c5}. Plus sage, {Nf6} évite le feu d'artifice après {w:Nxf6+} {b:Qxf6} {w:Nf3} au prix d'un léger espace blanc.",
+    "next": ["Bb4+", "Nf6"],
+    "shapes": ["Re4", "Gf8b4"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 e4 dxe4 Nxe4 Bb4+ Bd2 Qxd4 Bxb4 Qxe4+ Be2",
+    "en": "The main line of the Marshall Gambit. White is a pawn down but has the bishop pair and attacking chances on the dark squares, especially [d6] and [e7]. Black's best moves are {Na6}, bringing the knight into play with tempo ideas on the bishop, and {c5}, hitting it at once. {Ne7} is less exact: the bishop on [b4] eyes [e7] and Black's king stays in the center.",
+    "fr": "La ligne principale du gambit Marshall. Avec un pion de moins, les Blancs disposent de la paire de fous et d'une emprise redoutable sur les cases noires, notamment [d6] et [e7], qui cloue le roi adverse au centre. Les meilleures répliques noires sont {Na6}, mobilisant le cavalier avec gain de temps sur le fou, et {c5}, le contestant directement. {Ne7} est inférieur, s'exposant au rayonnement du fou [b4] et retardant le roque.",
+    "next": ["Na6", "c5"],
+    "mistakes": [
+      {
+        "move": "Ne7",
+        "mark": "?!",
+        "punish": "Qd2",
+        "en": "The knight looks safe on [e7], but it stands in the bishop's line from [b4], and Black needs more moves before castling. {Qd2} and {w:O-O-O} bring White's queen and rook to the d-file, toward [d7] and [d8], while Black is still untangling. {b:Na6} or {b:c5}, hitting the bishop, was the move.",
+        "fr": "Le cavalier semble à l'abri en [e7], mais il s'aligne sous le regard du fou [b4] et retarde le dégagement noir : {Qd2} suivi du grand roque aligne dame et tour sur la colonne d vers [d7] et [d8]. Il fallait contester le fou par {b:Na6} ou {b:c5}.",
+        "shapes": ["Re7", "Rb4", "Rd7", "Gd1d2"]
+      }
+    ],
+    "shapes": ["Rd6", "Re7", "Rb4", "Gb8a6"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 e4 dxe4 Nxe4 Bb4+ Bd2 Qxd4 Bxb4 Qxe4+ Be2 c5",
+    "en": "Black challenges the powerful bishop on [b4] at once to fight for castling rights. White's best move is {Bxc5}, keeping the bishop on the [f8]-[a3] diagonal so Black's king still cannot castle short. Retreating to {Ba5}? sidelines the bishop and lets {b:Nc6} and {b:Nge7} develop with tempo, while {w:Bc3} drops [g2] without keeping Black's king trapped.",
+    "fr": "Les Noirs attaquent sans tarder le redoutable fou [b4] pour reconquérir le droit de roquer. Le meilleur coup blanc est {Bxc5}, maintenant le fou sur la diagonale vitale [a3]-[f8] qui interdit toujours le petit roque noir ! Exiler le fou en {Ba5}? le met hors-jeu et permet à {b:Nc6} et {b:Nge7} de sortir avec gain de temps, tandis que {w:Bc3} abandonne [g2] en relâchant l'étau sur [f8].",
+    "next": ["Bxc5"],
+    "mistakes": [
+      {
+        "move": "Ba5",
+        "mark": "?",
+        "punish": "Nc6",
+        "en": "The bishop steps out of play: {Nc6} and {b:Nge7} develop with tempo, and Black keeps the extra pawn. {w:Bxc5} kept the bishop on the dark squares, where it stops Black from castling.",
+        "fr": "Le fou se met lui-même sur la touche : {Nc6} et {b:Nge7} se développent avec tempo en conservant tranquillement le pion de plus. Il fallait prendre par {w:Bxc5} pour maintenir le blocus des cases noires empêchant le roque.",
+        "shapes": ["Gb8c6"]
+      }
+    ],
+    "shapes": ["Rb4", "Gb4c5"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 e4 dxe4 Nxe4 Bb4+ Bd2 Qxd4 Bxb4 Qxe4+ Be2 c5 Bxc5",
+    "en": "White's bishop commands [d6] and [f8], cutting Black's king off from the kingside. Black's critical move is {Qxg2}, grabbing a second pawn to hit the rook on [h1]: White answers {w:Bf3} or {w:Qd6} with fierce open-file pressure. {Nd7} develops more cautiously, aiming to trade the bishop. {Na6}? fails to {w:Ba3}, keeping the clamp on [f8] while Black's knight sits offside.",
+    "fr": "Le fou blanc règne sur [d6] et [f8], coupant au roi noir la route de l'aile roi. La suite critique est l'audacieux {Qxg2}, cueillant un second pion en attaquant la tour [h1], ce que les Blancs accueillent par {w:Bf3} ou {w:Qd6} avec une furieuse pression sur colonnes ouvertes. Plus prudent, {Nd7} vise l'échange du fou gênant. En revanche, {Na6}? échoue sur le simple recul {w:Ba3}, qui maintient le verrou sur [f8] devant un cavalier décentré.",
+    "next": ["Qxg2", "Nd7"],
+    "mistakes": [
+      {
+        "move": "Na6",
+        "mark": "?",
+        "punish": "Ba3",
+        "en": "The knight hits the bishop, but after {Ba3}, the bishop still stops Black from castling short, and White develops fast. {b:Qxg2} or {b:Nd7} was the move.",
+        "fr": "Le cavalier attaque le fou, mais après {Ba3} la diagonale [a3]-[f8] reste verrouillée contre le petit roque noir pendant que le cavalier [a6] est hors-jeu. Il fallait jouer {b:Qxg2} ou {b:Nd7}.",
+        "shapes": ["Gc5a3"]
+      }
+    ],
+    "shapes": ["Rg2", "Ge4g2"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3 dxc4",
+    "en": "The Noteboom Variation, introduced by Dutch master Daniël Noteboom: Black takes on [c4] and plans {b:b5} and {b:a5} to create connected queenside passed pawns, ceding the center in return. White's main moves are {a4} and {e3}. After {a4 Bb4 e3 b5 Bd2 a5}, Black's pawns on [a5], [b5] and [c4] roll fast unless White breaks them accurately with {w:axb5} first and only then {w:b3}.",
+    "fr": "La variante Noteboom, popularisée par le maître néerlandais Daniël Noteboom : les Noirs prennent en [c4] et préparent {b:b5} puis {b:a5} afin de se forger deux pions passés liés à l'aile dame, abandonnant le centre en contrepartie ! Les réponses principales sont {a4} et {e3}. Après {a4 Bb4 e3 b5 Bd2 a5}, la phalange noire déferle si les Blancs n'échangent pas dans l'ordre exact {w:axb5} avant {w:b3}.",
+    "next": ["a4", "e3", "e4"],
+    "shapes": ["Rc4", "Ga2a4"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3 dxc4 e3",
+    "en": "White prepares {w:Bxc4} to recover the gambit pawn in one move. Black's consistent Noteboom answer is {b5}, holding [c4]: after {w:a4} {b:b4}, the knight on [c3] is driven to [e4] or [a2] while Black's queenside pawns advance. Developing first with {Bb4}?! hands the pawn back to {w:Bxc4} for nothing, leaving White with an unchallenged center and easy play.",
+    "fr": "Les Blancs préparent {w:Bxc4} pour récupérer le pion en un temps. La suite cohérente de la Noteboom est {b5}, tenant fermement [c4] : sur {w:a4} {b:b4}, le cavalier [c3] est chassé vers [e4] ou [a2] pendant que la marée noire progresse à l'aile dame. Développer d'abord {Bb4}?! rend gratuitement le pion à {w:Bxc4} en laissant aux Blancs un centre sans opposition.",
+    "next": ["b5"],
+    "mistakes": [
+      {
+        "move": "Bb4",
+        "mark": "?!",
+        "punish": "Bxc4",
+        "en": "Developing first gives the pawn back: {Bxc4} and White has the center with easy play. {b:b5}, keeping the pawn, was the Noteboom's point.",
+        "fr": "Développer le fou avant de soutenir le pion rend toute l'idée caduque : {Bxc4} récupère le pion avec le contrôle complet du centre. Toute la pointe de la Noteboom reposait sur {b:b5}.",
+        "shapes": ["Gf1c4"]
+      }
+    ],
+    "shapes": ["Gb7b5"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3 dxc4 e3 b5",
+    "en": "Black holds the pawn with the Noteboom chain on [b5] and [c4]. White hits it with {a4}: after {b:b4}, the knight goes to [e4] or [a2], and White undermines the pawns with {w:Bxc4} or {w:b3}. {Ne5}? and {a3}? are too slow: Black consolidates with {b:Nd7} or {b:Bb7} and {b:a6}. Once Black's b-pawn kicks [c3], Black races to finish development with {b:Bb7}, {b:Nf6} and {b:Nbd7}.",
+    "fr": "Les Noirs tiennent le pion grâce à la chaîne Noteboom en [b5] et [c4]. Les Blancs doivent l'attaquer immédiatement par {a4} : après {b:b4}, le cavalier rejoint [e4] ou [a2] avant de saper les pions avancés par {w:Bxc4} ou {w:b3}. Tant {Ne5}? que {a3}? sont trop lents et permettent aux Noirs de cimenter leur pion de plus avec {b:Nd7} ou {b:Bb7} et {b:a6}.",
+    "next": ["a4"],
+    "mistakes": [
+      {
+        "move": "Ne5",
+        "mark": "?",
+        "punish": "Nd7",
+        "en": "The knight jumps in, but Black challenges it: {Nd7} and after {w:Nxc6} {b:Qb6}, the knight is trapped deep in Black's camp. {w:a4}, hitting the chain, was the move.",
+        "fr": "Le cavalier s'aventure trop tôt : {Nd7} le conteste aussitôt, et s'il insiste par {w:Nxc6} {b:Qb6} il se retrouve piégé en camp ennemi ! Il fallait attaquer la chaîne à la base par {w:a4}.",
+        "shapes": ["Gb8d7"]
+      },
+      {
+        "move": "a3",
+        "mark": "?",
+        "punish": "Bb7",
+        "en": "Too slow: {Bb7} and Black consolidates the extra pawn with {b:a6} and {b:Nf6}. {w:a4}, hitting the chain at once, was the move.",
+        "fr": "Beaucoup trop lent : {Bb7} suivi de {b:a6} et {b:Nf6} permet aux Noirs de blinder définitivement leur pion de plus. Frappez tout de suite la chaîne avec {w:a4}.",
+        "shapes": ["Gc8b7"]
+      }
+    ],
+    "shapes": ["Rc3", "Ga2a4"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3 dxc4 e3 b5 a4",
+    "en": "White undermines the chain. Black's best is {b4}, kicking the knight to [e4] or [a2]. {a6}? supports [b5] the wrong way: {w:axb5} wins a pawn because the a-pawn is pinned to the rook on [a8]. {Bd7}? runs into {w:Ne5}, hitting [d7], [c4] and [f7] while clearing the way for {w:Qf3} or {w:Qg4}. After {b4}, White plays against the advanced pawns with {w:Bxc4} and {w:Qe2}.",
+    "fr": "Les Blancs sapent la chaîne de flanc. Les Noirs doivent pousser {b4} (ou clouer par {Bb4}), chassant le cavalier en [e4] ou [a2] avant d'être attaqués par {w:Bxc4} et {w:Qe2}. Deux défenses apparentes échouent net : {a6}? perd un pion sur {w:axb5} car le pion a est cloué sur la tour [a8], tandis que {Bd7}? se heurte à {w:Ne5} visant [d7], [c4] et [f7] avant {w:Qf3} ou {w:Qg4}.",
+    "next": ["b4"],
+    "mistakes": [
+      {
+        "move": "Bd7",
+        "mark": "?",
+        "punish": "Ne5",
+        "en": "The bishop defends [c6], but it blocks the queen and the knight: {Ne5} hits it, and {w:Qg4} follows on the kingside. {b:b4} or {b:Bb4} was the move.",
+        "fr": "Le fou protège [c6], mais obstrue dame et cavalier : {Ne5} l'attaque avec gain de temps et ouvre la voie à {w:Qg4} sur l'aile roi. Il fallait pousser {b:b4} ou clouer par {b:Bb4}.",
+        "shapes": ["Rc6", "Gf3e5"]
+      },
+      {
+        "move": "a6",
+        "mark": "?",
+        "punish": "axb5",
+        "en": "Supporting the pawn doesn't work: {axb5} {b:cxb5} {w:Nxb5}, and the pawn on [a6] is pinned against the rook. Black's queenside collapses. {b:b4} or {b:Bb4} was the move.",
+        "fr": "Soutenir ainsi [b5] est une illusion tactique : après {axb5} {b:cxb5} {w:Nxb5}, le pion [a6] est cloué sur la tour [a8] et toute l'aile dame noire s'effondre. Jouez {b:b4} ou {b:Bb4}.",
+        "shapes": ["Ra6", "Ga4b5"]
+      }
+    ],
+    "shapes": ["Ra7", "Rb4", "Rc4", "Gb5b4"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3 dxc4 a4 Bb4 e3",
+    "en": "Abrahams's main tabiya of the Noteboom Variation: White opens the [f1] bishop's diagonal to attack [c4] while [a4] already stops an unassisted b-pawn push. Black must play {b5} right now, using the bishop on [b4] to shield [b5] against the rook on [a1] so that after {b5 Bd2 a5} (or {b5 Bd2 Qb6}) Black keeps the connected queenside phalanx intact. Trading prematurely on [c3] surrenders Black's active dark-squared trump.",
+    "fr": "La position clé d'Abrahams dans la variante Noteboom : les Blancs ouvrent la route du fou [f1] vers [c4] alors que [a4] empêchait une poussée directe du pion b. Grâce au bouclier du fou en [b4] devant la tour [a1], les Noirs doivent jouer {b5} maintenant ! Après {b5 Bd2 a5} (ou {b5 Bd2 Qb6}), leur phalange liée tient bon. Échanger prématurément en [c3] dilapide cet atout majeur.",
+    "next": ["b5"],
+    "mistakes": [
+      {
+        "move": "Bxc3+",
+        "mark": "?!",
+        "punish": "bxc3 b5 Nd2 Ne7 Qf3",
+        "en": "Trading off the dark-squared bishop unprovoked hands White the bishop pair and bolsters White's center with a pawn on [c3], while the pawn on [c4] is still loose until Black spends another move on {b5}. After {bxc3 b5 Nd2}, White hits [b5] and [e4] with tremendous dark-square play via {w:Qf3} and {w:Ba3}. Push {b:b5} right away instead, keeping the pin alive.",
+        "fr": "Céder sans y être forcé le fou de cases noires offre aux Blancs la paire de fous et consolide leur centre, alors même que [c4] réclame encore le coup {b:b5}. Après {bxc3 b5 Nd2}, les Blancs visent [b5] et [e4] avec une redoutable initiative sur cases noires via {w:Qf3} et {w:Ba3}. Poussez {b:b5} tout de suite en gardant le clouage !",
+        "shapes": ["Rb2c3"]
+      }
+    ],
+    "shapes": ["Gb7b5"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3 dxc4 a4 Bb4 e3 b5 Bd2 a5",
+    "en": "Black has set up the Noteboom phalanx on [a5], [b5] and [c4]. White must trade on [b5] first with {axb5}: after {b:Bxc3} {w:Bxc3} {b:cxb5}, White plays {w:b3}, and Black answers {b:Bb7} to create connected passed a- and b-pawns against White's central majority. Playing {b3}?? immediately is a blunder: {b:Bxc3} {w:Bxc3} {b:b4} {w:Bb2} {b:c3} creates a protected passed pawn on [c3] right away.",
+    "fr": "Les Noirs ont dressé la phalange classique de la Noteboom en [a5], [b5] et [c4]. Les Blancs doivent impérativement échanger d'abord en [b5] par {axb5} : après {b:Bxc3} {w:Bxc3} {b:cxb5} {w:b3} {b:Bb7}, s'engage le grand duel classique entre les deux pions passés liés noirs et la majorité centrale blanche. Jouer {b3}?? tout de suite est une gaffe : {b:Bxc3} {w:Bxc3} {b:b4} {w:Bb2} {b:c3} crée sur-le-champ un pion passé protégé monstrueux en [c3] !",
+    "next": ["axb5"],
+    "mistakes": [
+      {
+        "move": "b3",
+        "mark": "??",
+        "punish": "Bxc3",
+        "en": "Breaking the chain at once lets Black's pawns run: {Bxc3} {w:Bxc3} {b:b4}, and the passed pawn on [c3] is a monster. {w:axb5} first was the move.",
+        "fr": "Attaquer [c4] avant d'échanger en [b5] libère l'avalanche noire : après {Bxc3} {w:Bxc3} {b:b4}, les Noirs logent un pion passé protégé dévastateur en [c3] ! Il fallait commencer par {w:axb5}.",
+        "shapes": ["Rc3", "Gb4c3"]
+      }
+    ],
+    "shapes": ["Ra5", "Rb5", "Rc4", "Ga4b5"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3 dxc4 a4 Bb4 e3 b5 Bd2 Qb6",
+    "en": "Black's queen backs up [b5] and [c6] instead of pushing {b:a5}. White's strongest reply is {Ne4}, hitting the bishop on [b4] and clearing the way to undermine [c4] with {w:b3}; {w:axb5} first is playable too. Rushing with {b3}? before moving the knight is a mistake: {b:Bxc3} {w:Bxc3} {b:b4} drives the bishop back and lets {b:c3} establish a dangerous passed pawn.",
+    "fr": "La dame noire vient étayer [b5] et [c6] au lieu d'avancer {b:a5}. La réponse la plus forte des Blancs est {Ne4}, attaquant le fou [b4] et dégageant la voie pour miner [c4] par {w:b3} ({w:axb5} d'abord reste jouable aussi). Précipiter {b3}? avant d'avoir déplacé le cavalier est une faute : {b:Bxc3} {w:Bxc3} {b:b4} repousse le fou et installe un dangereux pion passé en [c3].",
+    "next": ["Ne4"],
+    "mistakes": [
+      {
+        "move": "b3",
+        "mark": "?",
+        "punish": "Bxc3",
+        "en": "Too early: {Bxc3} {w:Bxc3} {b:b4} and Black's pawns roll, with a passed pawn coming to [c3]. {w:Ne4} was the move.",
+        "fr": "Un coup trop hâtif : {Bxc3} {w:Bxc3} {b:b4} lance la marée noire et plante un redoutable pion passé en [c3]. Écartez d'abord le cavalier par {w:Ne4}.",
+        "shapes": ["Rc3", "Gb4c3"]
+      }
+    ],
+    "shapes": ["Rb4", "Gc3e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 cxd5",
+    "en": "The Exchange Slav with knights on [f3] and [f6]. Black takes back with the pawn, {cxd5}, keeping a pawn in the center and the symmetrical structure. Taking with the knight looks flexible but gives up the center: after {Nxd5}, {e4} chases the knight with gain of time, and White has the ideal pawn center. {Qxd5} and {Bf5} are also inaccurate.",
+    "fr": "La Slave d'échange avec les cavaliers en [f3] et [f6]. Les Noirs reprennent du pion par {cxd5}, conservant un pied ferme au centre dans une structure symétrique. Reprendre du cavalier paraît souple mais abandonne tout le centre : sur {Nxd5}, la poussée {e4} gagne un temps précieux et installe gratuitement le duo royal en [d4] et [e4]. {Qxd5} et {Bf5} sont également imprécis.",
+    "next": ["cxd5"],
+    "mistakes": [
+      {
+        "move": "Nxd5",
+        "mark": "?",
+        "punish": "e4",
+        "en": "Taking back with the knight gives up the center: {e4} chases it with gain of time, and White has the ideal pawn pair on [d4] and [e4]. {b:cxd5} kept a pawn in the center.",
+        "fr": "Reprendre du cavalier cède le contrôle central : {e4} le chasse avec gain de temps et offre aux Blancs le duo idéal en [d4] et [e4]. Il fallait reprendre du pion par {b:cxd5}.",
+        "shapes": ["Rd4", "Re4", "Ge2e4"]
+      }
+    ],
+    "shapes": ["Rf3", "Rf6", "Gc6d5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 Qb6",
+    "en": "The Süchting Variation: Black's queen hits [b2] and defends [c6] and [d5]. White should cover [b2] calmly with {Bd2} or {Qc2}, or play {h3}, keeping [g4] covered while holding {w:Bf4} or {w:c5} in reserve. Developing with {Bg5}? is a mistake: {b:Qxb2} grabs the pawn and attacks [c3], escaping cleanly via {w:Bd2} {b:Ne4}. Black plans {b:Bf5} or {b:Bg4} followed by {b:e6}.",
+    "fr": "La variante Süchting : la dame noire vise [b2] tout en renforçant [c6] et [d5]. Les Blancs couvrent posément [b2] par {Bd2} ou {Qc2}, ou jouent l'utile {h3} qui interdit [g4] tout en gardant {w:Bf4} ou {w:c5} en réserve. Sortir {Bg5}? est en revanche une erreur : {b:Qxb2} rafle le pion en attaquant [c3] et ressort saine et sauve après {w:Bd2} {b:Ne4}. Les Noirs préparent {b:Bf5} ou {b:Bg4} avant {b:e6}.",
+    "next": ["Bd2", "Qc2", "h3"],
+    "mistakes": [
+      {
+        "move": "Bg5",
+        "mark": "?",
+        "punish": "Qxb2",
+        "en": "Developing the bishop leaves [b2] without a defender: {Qxb2} takes it, and after {w:Bd2} {b:Ne4}, the queen gets out with the extra pawn. {w:Qc2}, {w:Bd2} or {w:h3} was the move.",
+        "fr": "Développer le fou abandonne le pion [b2] sans compensation suffisante : {Qxb2} le capture et s'échappe tranquillement après {w:Bd2} {b:Ne4} avec un pion net de plus. Protégez ou préparez d'abord par {w:Qc2}, {w:Bd2} ou {w:h3}.",
+        "shapes": ["Rb2", "Gb6b2"]
+      }
+    ],
+    "shapes": ["Rb2", "Rc8", "Rg4", "Gc1d2"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 e6 e3 Nf6 Nc3 Bd6 Bd3 dxc4 Bxc4 b5 Bd3",
+    "en": "Black has taken on [c4] with the bishop already on [d6], so {w:e4} followed by {w:e5}, forking the bishop and the knight, is in the air. Black must play {Nbd7}, covering [e5], or {b4}, chasing the knight on [c3] before {w:e4} lands. {Bb7}?! and {a6}?!, chosen in three Lichess games out of five, allow {w:e4}, when the fork threat {w:e5} drives Black's pieces back.",
+    "fr": "Les Noirs ont pris en [c4] alors que leur fou occupait déjà [d6], faisant planer la menace directe {w:e4} suivie de la fourchette {w:e5} ! Ils doivent impérativement parer par {Nbd7}, contrôlant [e5], ou par {b4}, délogeant le cavalier [c3] avant {w:e4}. Les coups naturels {Bb7}?! et {a6}?!, choisis trois fois sur cinq sur Lichess, laissent passer {w:e4} et forcent les pièces noires à battre en retraite.",
+    "next": ["Nbd7", "b4"],
+    "mistakes": [
+      {
+        "move": "Bb7",
+        "mark": "?!",
+        "punish": "e4",
+        "en": "The bishop develops, but the knight on [f6] and the bishop on [d6] stand in line: {e4} threatens {w:e5}, forking them, and Black has to give ground. {b:Nbd7}, covering [e5], or {b:b4} was the move.",
+        "fr": "Le fou se développe sans voir l'alignement du fou [d6] et du cavalier [f6] : {e4} menace immédiatement la fourchette {w:e5} et oblige les Noirs à reculer. Il fallait couvrir [e5] par {b:Nbd7} ou chasser [c3] par {b:b4}.",
+        "shapes": ["Rf6", "Rd6", "Re5", "Ge3e4"]
+      },
+      {
+        "move": "a6",
+        "mark": "?",
+        "punish": "e4",
+        "en": "Preparing {b:c5} is too slow: {e4} threatens {w:e5}, forking the bishop on [d6] and the knight on [f6], and White takes over the center. {b:Nbd7} or {b:b4} was the move.",
+        "fr": "Préparer {b:c5} est trop lent : {e4} prend tout le centre sous la menace directe de fourchette {w:e5} contre [d6] et [f6]. Jouez d'abord {b:Nbd7} ou {b:b4}.",
+        "shapes": ["Rd6", "Rf6", "Ge3e4"]
+      }
+    ],
+    "shapes": ["Rc4", "Rd6", "Re5", "Gb8d7"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6",
+    "en": "The Slav through the knight move order. {Nf3} returns to the main lines of the Slav and the Semi-Slav. {e3} shuts in the bishop on [c1], and Black answers with {b:e6}, {b:Bf5} or {b:a6}. {w:Bg5} pins the knight, and Black can take on [c4] or jump {b:Ne4} to hit the bishop and the knight. {cxd5} {b:cxd5} gives an Exchange Slav. Black aims to bring the bishop on [c8] out once [b7] and [d5] are safe.",
+    "fr": "La défense slave atteinte par l'ordre du cavalier dame. {Nf3} rejoint toutes les grandes lignes de la Slave et de la Semi-Slave. {e3} enferme provisoirement le fou [c1], permettant aux Noirs de choisir entre {b:e6}, {b:Bf5} et {b:a6}. {w:Bg5} cloue tôt le cavalier mais s'expose à {b:dxc4} ou au saut {b:Ne4}, tandis que {cxd5} {b:cxd5} ouvre la Slave d'échange. Les Noirs sortiront leur fou [c8] dès que [b7] et [d5] seront assurés.",
+    "next": ["Nf3", "e3", "cxd5", "Bg5"],
+    "shapes": ["Gg1f3", "Ge2e3", "Bc4d5", "Rc1"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6 e3",
+    "en": "White plays a quiet {e3}, which shuts in the bishop on [c1]. Black's bishop can come out with {Bf5} or {b:Bg4}, though after {Bf5}, White's {w:cxd5} {b:cxd5} {w:Qb3} tests [b7] and [d5], forcing the pawn sacrifice {b:Nc6} or the retreat {b:Bc8}. {e6} leads to the solid Semi-Slav with [e3], and {a6}, the Chebanenko idea, prepares {b:b5}. {b:g6} is the Schlechter set-up.",
+    "fr": "Les Blancs jouent le discret {e3}, murant momentanément leur fou [c1]. Le fou noir peut alors sortir par {Bf5} ou {b:Bg4}, même si sur {Bf5} la suite {w:cxd5} {b:cxd5} {w:Qb3} éprouve [b7] et [d5] en obligeant au sacrifice dynamique {b:Nc6} ou au repli {b:Bc8}. {e6} conduit à la solide Semi-Slave avec [e3], {a6} prépare {b:b5} dans l'esprit Tchebanenko, et {b:g6} adopte le fianchetto Schlechter.",
+    "next": ["e6", "Bf5", "a6"],
+    "shapes": ["Ge7e6", "Gc8f5", "Ba7a6", "Rc1"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6 e3 Bf5 cxd5 cxd5 Qb3",
+    "en": "The queen hits [b7] and, together with the knight on [c3], attacks [d5]. Because [c1] still guards [b2], the routine {Qb6}? fails here to {w:Nxd5} {b:Nxd5} {w:Qxd5}, dropping a central pawn, and {b6}? weakens the light squares against {w:Bb5+}. Black's two sound answers are the modern pawn sacrifice {Nc6}, meeting {w:Qxb7} with {b:Bd7} and {b:Rb8}, and the humble retreat {Bc8}, keeping all pawns intact.",
+    "fr": "La dame blanche attaque [b7] et, épaulée par le cavalier [c3], menace simultanément [d5]. Comme le fou [c1] protège toujours [b2], la défense habituelle {Qb6}? échoue ici sur {w:Nxd5} {b:Nxd5} {w:Qxd5} qui perd un pion central net, tandis que {b6}? affaiblit les cases blanches face à {w:Bb5+}. Les deux bonnes réponses noires sont le sacrifice moderne {Nc6}, accueillant {w:Qxb7} par {b:Bd7} et {b:Rb8}, et le repli prudent {Bc8}.",
+    "next": ["Nc6", "Bc8"],
+    "mistakes": [
+      {
+        "move": "Qb6",
+        "mark": "?",
+        "punish": "Nxd5",
+        "en": "Offering the queen trade works without a knight on [c3], not here: {Nxd5} {b:Nxd5} {w:Qxd5} wins a clean central pawn, since [b2] is still guarded by the bishop on [c1]. {b:Nc6}, sacrificing [b7] for lead in development, or {b:Bc8} was needed.",
+        "fr": "Proposer l'échange des dames fonctionne sans cavalier blanc en [c3], mais pas ici : le fou [c1] gardant [b2], {Nxd5} {b:Nxd5} {w:Qxd5} gagne net le pion central ! Il fallait sacrifier activement par {b:Nc6} ou reculer en {b:Bc8}.",
+        "shapes": ["Yc3", "Yb2", "Yc1", "Gc3d5"]
+      },
+      {
+        "move": "b6",
+        "mark": "?",
+        "punish": "Bb5+",
+        "en": "Pushing the b-pawn weakens [c6] and the light squares: {Bb5+} forces {b:Bd7}, and {w:Nxd5} wins a central pawn with Black's pieces tied up. {b:Nc6} or {b:Bc8} held the balance.",
+        "fr": "Pousser le pion b troue [c6] et les cases blanches : {Bb5+} force {b:Bd7}, puis {w:Nxd5} empoche un pion central contre un camp noir ligoté. Seuls {b:Nc6} ou {b:Bc8} tenaient l'équilibre.",
+        "shapes": ["Yc6", "Gf1b5"]
+      }
+    ],
+    "shapes": ["Yb7", "Yc3", "Yd5", "Gb8c6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6 e3 g6 Nf3",
+    "en": "Against White's quiet {e3} Slav, Black adopts the Schlechter setup with {g6}, fianchettoing the dark-squared bishop rather than playing {b:e6}. With the [c1] bishop shut inside White's chain, Black need not fear a quick kingside h-pawn storm. Completing the fianchetto with {Bg7} is overwhelmingly natural, preparing {b:O-O} and later {b:Bg4}, {b:Nbd7} and {b:e5} or {b:c5}. Bringing the light-squared bishop out first via {Bg4} is also playable to trade off White's active defender of [d4].",
+    "fr": "Face à la Slave tranquille avec {e3}, les Noirs adoptent le système Schlechter par {g6}, développant le fou de cases noires en fianchetto plutôt que derrière {b:e6}. Comme le fou [c1] blanc est enfermé derrière sa propre chaîne, les Noirs ne craignent aucune marée rapide à l'aile roi. Achever le fianchetto par {Bg7} est la suite la plus naturelle avant {b:O-O} et {b:Nbd7}, tandis que sortir d'abord le fou de cases blanches par {Bg4} cloue le défenseur de [d4].",
+    "next": ["Bg7", "Bg4"],
+    "shapes": ["Gf8g7", "Bc8g4", "Rd5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6 e3 g6 Nf3 Bg7",
+    "en": "The Schlechter Variation of the Slav, a solid Grünfeld-Slav hybrid favored by Smyslov and modern positional players alike. Black's pawn wall on [c6] and [d5] neutralizes White's queenside pressure, while the bishop on [g7] eyes the center from safety. White develops calmly with {Bd3} or {Be2} and castles, aiming to expand slowly with {w:b3}, {w:Bb2} and {w:O-O}. Clarifying with {cxd5} {b:cxd5} gives a symmetrical Carlsbad-Grünfeld structure where White retains only a tiny spatial pull.",
+    "fr": "La variante Schlechter de la Slave, solide hybride entre Grünfeld et Slave prisé par Smyslov. Le mur de pions en [c6] et [d5] neutralise la pression blanche à l'aile dame pendant que le fou [g7] surveille le centre en sécurité. Les Blancs se développent posément par {Bd3} ou {Be2} avant de roquer et de préparer {w:b3} et {w:Bb2}. L'échange {cxd5} {b:cxd5} fixe une structure symétrique où les Blancs ne gardent qu'un léger avantage d'espace.",
+    "next": ["Bd3", "Be2", "cxd5"],
+    "shapes": ["Gf1d3", "Gf1e2", "Bg7d4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6 e3 e6 Nf3 Nbd7 Bd3 Be7",
+    "en": "Bogoljubow's Variation of the Semi-Slav: instead of entering the razor-sharp Meran with {b:dxc4}, Black develops {Be7} calmly to castle short and transpose toward Orthodox QGD waters. Because Black has spent a tempo on {c6} without capturing on [c4], White enjoys a pleasant spatial edge. {O-O} or {Qc2} prepares the central advance {w:e4}, {e4} immediately strikes while Black's king is still uncastled ({b:dxe4} {w:Nxe4} {b:Nxe4} {w:Bxe4} {b:Nf6} {w:Bc2}), and {b3} backs [c4] to meet {b:O-O} with {w:Bb2} and {w:O-O}.",
+    "fr": "La variante Bogoljubow de la Semi-Slave : au lieu d'entrer dans les complications tranchantes de la Méran par {b:dxc4}, les Noirs jouent tranquillement {Be7} pour roquer et rejoindre un schéma orthodoxe. Comme les Noirs ont joué {c6} sans prendre en [c4], les Blancs disposent d'un agréable avantage d'espace. {O-O} ou {Qc2} prépare méthodiquement la percée {w:e4}, {e4} frappe sans attendre le roque adverse, et {b3} consolide [c4] en vue de {w:Bb2} et {w:O-O}.",
+    "next": ["O-O", "Qc2", "e4", "b3"],
+    "shapes": ["Gd1c2", "Ge3e4", "Gb2b3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6 e3 e6 Nf3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 a6",
+    "en": "The Classical Meran Variation, one of the richest battlegrounds in chess. Black secures [b5] with {a6} so that the freeing break {b:c5} can follow at once, bringing the [c8] bishop to [b7] with tremendous energy down the long diagonal. White's main strike is {e4}, seizing the center and meeting {b:c5} with the famous thrust {w:e5} {b:cxd4} {w:Nxb5}, or playing {w:d5} (Reynolds' variation). {a4} challenges Black's queenside pawn chain immediately ({b:b4} {w:Ne4}), while {a3} prepares {w:O-O} or {w:b4}.",
+    "fr": "La variante Méran classique, l'un des champs de bataille les plus riches des ouvertures fermées. Les Noirs assurent [b5] par {a6} afin de lancer aussitôt la rupture libératrice {b:c5} et d'installer leur fou en [b7] sur la grande diagonale. La réplique principale des Blancs est {e4}, prenant le centre pour répondre à {b:c5} par la percée aiguë {w:e5} {b:cxd4} {w:Nxb5} ou par {w:d5}. {a4} attaque immédiatement la chaîne de l'aile dame ({b:b4} {w:Ne4}), tandis que {a3} prépare {w:O-O}.",
+    "next": ["e4", "a3", "a4"],
+    "shapes": ["Ge3e4", "Ga2a4", "Bc6c5", "Rb5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6 e3 e6 Nf3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7",
+    "en": "The Wade (or Larsen/Modern) Variation of the Meran. Black develops {Bb7} straight onto the long diagonal before spending a tempo on {b:a6}, keeping {b:b4} followed by {b:c5} in reserve! Because [b5] isn't fortified by [a6] yet, {b:c5} right away is impossible, which alters White's timing: castling {O-O} is the modern main line, waiting for {b:a6} before pushing {w:e4}. {e4} immediately runs into the annoying {b:b4} {w:Na4} {b:c5}, while {a3} stops {b:b4} and {Ne4} forces {b:Nxe4} {w:Bxe4}.",
+    "fr": "La variante Wade (ou Méran moderne). Les Noirs placent tout de suite leur fou en {Bb7} sur la grande diagonale sans dépenser un temps pour {b:a6}, gardant en réserve l'idée dynamique {b:b4} suivie de {b:c5}. Cela change le tempo pour les Blancs : le petit roque {O-O} est la ligne principale moderne, attendant {b:a6} pour pousser {w:e4}. Jouer {e4} tout de suite permet l'énergique {b:b4} {w:Na4} {b:c5}, tandis que {a3} empêche {b:b4} et que {Ne4} simplifie le centre.",
+    "next": ["O-O", "e4", "a3", "Ne4"],
+    "shapes": ["Ge1g1", "Ge3e4", "Bb5b4", "Bc6c5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 dxc4",
+    "en": "Black takes the pawn before developing the knight, sometimes called the Argentinian Defense. {e4} is White's sharpest reply, building the center: Black answers with {b:b5}, keeping the pawn, or {b:e5}, hitting back at once. {a4} stops {b:b5} first, though {b:e5} is strong there, and {e3} prepares {w:Bxc4}. Black's goal is to hold [c4] with {b:b5} or strike the center before White consolidates.",
+    "fr": "Les Noirs prennent le pion avant même de développer leur cavalier, une variante parfois appelée défense argentine. La réplique la plus tranchante des Blancs est {e4}, prenant tout le centre : les Noirs s'accrochent alors au pion par {b:b5} ou contre-attaquent aussitôt avec {b:e5}. {a4} empêche d'abord {b:b5} (mais s'expose à l'énergique {b:e5}), et {e3} prépare sagement {w:Bxc4}.",
+    "next": ["e4", "a4", "e3"],
+    "shapes": ["Yc4", "Ge2e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 dxc4 e4",
+    "en": "White builds the center and threatens {w:Bxc4}. Black's main move is {b5}, keeping the pawn: after {w:a4} {b:b4} {w:Na2} or {w:Nb1}, the knight is driven back and White's center faces Black's extra pawn. {e5} hits back in the center at once and is good too. {e6}? and {Nf6}?! give up [c4] without a fight: {w:Bxc4} recovers the pawn with an ideal central duo.",
+    "fr": "Les Blancs occupent le centre et menacent de reprendre par {w:Bxc4}. Le coup principal noir est {b5}, conservant le pion : après {w:a4} {b:b4} {w:Na2} ou {w:Nb1}, le cavalier blanc recule et le centre affronte la majorité noire à l'aile dame. Frapper immédiatement le centre par {e5} est une autre bonne voie. En revanche, {e6}? et {Nf6}?! rendent [c4] sans combattre, laissant à {w:Bxc4} un duo central de rêve.",
+    "next": ["b5", "e5"],
+    "mistakes": [
+      {
+        "move": "e6",
+        "mark": "?",
+        "punish": "Bxc4",
+        "en": "Opening the dark-squared bishop without holding [c4] gives the pawn back for nothing: {Bxc4} recovers it in one move while White dominates the center. {b:b5} or {b:e5} was required.",
+        "fr": "Ouvrir le fou sans défendre [c4] offre le pion gratuitement : {Bxc4} le récupère en un seul coup avec une maîtrise totale du centre. Il fallait jouer {b:b5} ou {b:e5}.",
+        "shapes": ["Yc4", "Gf1c4"]
+      },
+      {
+        "move": "Nf6",
+        "mark": "?!",
+        "punish": "Bxc4",
+        "en": "Developing the knight lets {Bxc4} recover the pawn cleanly with a broad center and {w:e5} threats in hand. {b:b5}, holding [c4], or {b:e5} fought for equality.",
+        "fr": "Développer le cavalier laisse {Bxc4} reprendre le pion sans encombre en conservant un large centre et des menaces d'avance {w:e5}. Tenez [c4] par {b:b5} ou frappez au centre par {b:e5}.",
+        "shapes": ["Yc4", "Gf1c4"]
+      },
+      {
+        "move": "Be6",
+        "mark": "?",
+        "punish": "d5 cxd5",
+        "en": "Clinging to the [c4] pawn with the bishop puts a minor piece right in the path of White's central roller. {d5 cxd5} followed by {w:exd5} kicks the bishop a second time and lets {w:Bxc4} recover the pawn with a huge lead in space and development. Hold [c4] with {b:b5} or strike at the center with {b:e5} instead.",
+        "fr": "S'accrocher au pion [c4] avec le fou place une pièce mineure pile sur la trajectoire du rouleau compresseur central blanc. {d5 cxd5} suivi de {w:exd5} chasse le fou une seconde fois et permet à {w:Bxc4} de récupérer le pion avec une nette avance d'espace et de développement. Tenez [c4] par {b:b5} ou frappez le centre avec {b:e5}.",
+        "shapes": ["Gd4d5", "Re6", "Rc4"]
+      }
+    ],
+    "shapes": ["Yc4", "Gb7b5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5 cxd5 Nc3",
+    "en": "The Exchange Slav with the knight on [c3]. Black develops symmetrically: {Nf6} and {Nc6} are the main moves, and {e6} is solid. {Bf5} at once is less exact: {w:Qb3} hits [b7] and [d5], and Black has to answer with {Nc6} or {Qd7}. The symmetrical structure gives White a small, lasting edge from the extra tempo; Black's goal is to finish development, castle and trade on the c-file.",
+    "fr": "La Slave d'échange avec le cavalier déjà en [c3]. Les Noirs se développent symétriquement par {Nf6} et {Nc6}, ou consolident par {e6}. Sortir {Bf5} tout de suite est moins précis, car {w:Qb3} attaque d'un coup [b7] et [d5] et contraint à {b:Nc6} ou {b:Qd7}. Dans cette symétrie limpide, le trait confère aux Blancs une légère initiative durable tandis que les Noirs visent les échanges sur la colonne c ouverte.",
+    "next": ["Nf6", "Nc6", "e6"],
+    "shapes": ["Gg8f6", "Gb8c6", "Be7e6", "Rc3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6",
+    "en": "Both knights are out. White's main moves are {Nf3}, {Bf4} and {Bg5}: the bishop goes outside the chain before {e3}, so it isn't shut in. Black copies with {Nc6} and {Bf5}, or plays {e6} and {Be7}. In the Exchange Slav, the c-file opens early, so the rooks often come to [c1] and [c8] and trades follow. Black must keep [d5] defended and watch the queen's trip to [b3].",
+    "fr": "Les deux cavaliers sont en jeu. Les suites principales des Blancs sont {Nf3}, {Bf4} et {Bg5}, sortant le fou de la chaîne de pions avant {e3} pour ne pas l'emmurer. Les Noirs imitent avec {b:Nc6} et {b:Bf5}, ou choisissent le solide {b:e6} suivi de {b:Be7}. La colonne c étant ouverte d'emblée dans la Slave d'échange, les tours s'affrontent vite en [c1] et [c8] tandis que les Noirs surveillent [d5] et l'incursion {w:Qb3}.",
+    "next": ["Nf3", "Bf4", "Bg5", "f3"],
+    "shapes": ["Gg1f3", "Gc1f4", "Bc1g5", "Rc1"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 cxd5 cxd5",
+    "en": "The Exchange Slav with both kings' knights out. White's main move is {Nc3}, and {Bf4} first is also good. The structure is symmetrical, and White's extra tempo gives a small, lasting edge. Black develops with {Nc6}, {Bf5} or {Bg4}, and {e6}, then trades on the c-file. The bishop on [c8] should come out before {e6}, but Black must watch {Qb3} against [b7] each time.",
+    "fr": "La Slave d'échange avec les deux cavaliers rois développés. Le coup principal blanc est {Nc3}, même si {Bf4} d'abord est tout aussi précis. Dans cette structure symétrique, le trait confère aux Blancs un léger avantage durable sans risque. Les Noirs poursuivent par {b:Nc6}, {b:Bf5} ou {b:Bg4} avant {b:e6} afin de ne pas enfermer le fou [c8], tout en gardant un œil attentif sur {w:Qb3} contre [b7].",
+    "next": ["Nc3", "Bf4"],
+    "shapes": ["Yc8", "Yb7", "Gb1c3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 cxd5 cxd5 Nc3",
+    "en": "Black has the full choice of set-ups. {Nc6} is the main move, after which {w:Bf4} reaches the main position of the Exchange Slav. {e6} is solid and shuts in the bishop on [c8]. {Bf5} develops it outside the chain but allows {w:Qb3}, and Black must answer {Nc6} or {Qb6}. {Bg4} pins the knight and is fine too. The symmetrical position calls for careful development rather than an early fight.",
+    "fr": "Les Noirs ont l'embarras du choix : {Nc6} est la grande ligne, menant après {w:Bf4} à la position classique de la Slave d'échange. {e6} est ultra-solide au prix de l'enfermement du fou [c8]. {Bf5} sort ce fou hors de la chaîne mais autorise {w:Qb3}, qu'il faut contrer par {b:Nc6} ou {b:Qb6}, tandis que {Bg4} cloue le cavalier sans histoire. La symétrie invite à un développement soigné.",
+    "next": ["Nc6", "e6", "Bf5"],
+    "shapes": ["Gb8c6", "Ge7e6", "Bc8f5", "Rc8"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 cxd5 cxd5 Nc3 Nc6",
+    "en": "Both sides have developed their knights. White's main move is {Bf4}, getting the bishop out before {e3}, and after {b:Bf5} {w:e3} {b:e6}, the main position is reached. {Bg5} pins the knight instead, and {e3} keeps it simple. Black copies with {b:Bf5} or plays {b:e6}. A tricky idea for White is {Ne5}, hitting [c6]; for Black, {b:Ne4} or {b:Nh5} against the bishops.",
+    "fr": "Les quatre cavaliers sont en lice. Le coup principal blanc est {Bf4}, déployant le fou avant {e3}, ce qui mène après {b:Bf5} {w:e3} {b:e6} à la tabiya de la Slave d'échange ; {Bg5} cloue le cavalier et {e3} reste sobre. Les Noirs répondent en miroir par {b:Bf5} ou jouent {b:e6}. Attention aux pointes tactiques de cavaliers : {Ne5} vise [c6] côté blanc, tout comme {b:Ne4} ou {b:Nh5} côté noir.",
+    "next": ["Bf4", "Bg5", "e3"],
+    "shapes": ["Gc1f4", "Gc1g5", "Be2e3", "Rc6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 e6",
+    "en": "Black plays the Semi-Slav triangle before the knight. {Nc3} is the main move: then {b:Nf6} leads to the Semi-Slav, and {b:dxc4} to the Noteboom, holding the pawn with {b:b5} and {b:a5}. {e3} is solid, and Black can choose between {b:Nf6} and the Stonewall set-up with {b:f5}. With the pawn on [e6], Black's bishop on [c8] is shut in again; it will come out after {b:dxc4} and {b:b5}, or with {b:b6} and {b:Bb7}.",
+    "fr": "Les Noirs forment le triangle de la Semi-Slave avant même de sortir le cavalier roi. {Nc3} est le coup principal : {b:Nf6} rejoint alors la Semi-Slave et {b:dxc4} entre dans la variante Noteboom, conservant le pion grâce à {b:b5} et {b:a5}. Plus calme, {e3} laisse aux Noirs le choix entre {b:Nf6} et le Stonewall {b:f5}. Enfermé derrière [e6], le fou [c8] attendra {b:dxc4} et {b:b5} ou un fianchetto en [b7].",
+    "next": ["Nc3", "e3", "Qc2"],
+    "shapes": ["Gb1c3", "Ge2e3", "Bd1c2", "Re6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 e6 e3",
+    "en": "Both sides have shut in their light-squared bishops. {Nf6} leads back to the Semi-Slav with [e3]. {f5}, the Stonewall, is a solid set-up with pawns on [c6], [d5], [e6] and [f5]: it takes [e4] for a knight but leaves the [e5] square for White, and Black's bishop on [c8] stays bad. {Bd6} with {b:Nd7} and {b:f5} or {b:e5} is another set-up. Black's freeing plan is {b:dxc4} once White's bishop has moved, then {b:b5} or {b:e5}.",
+    "fr": "Chaque camp a muré un fou derrière son pion e. {Nf6} rejoint la Semi-Slave avec [e3]. Le Stonewall {f5} érige une muraille sur cases blanches en [c6], [d5], [e6] et [f5] qui confisque [e4] mais abandonne l'avant-poste chronique [e5] aux Blancs tout en laissant le fou [c8] passif. {Bd6} suivi de {b:Nd7} prépare pour sa part {b:f5} ou {b:e5}, ou encore {b:dxc4} dès que le fou [f1] aura bougé.",
+    "next": ["Nf6", "f5", "Bd6"],
+    "shapes": ["Gg8f6", "Gf7f5", "Bf8d6", "Re3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 e6 e3",
+    "en": "White avoids the sharp lines and plays the quiet {e3}. Black's main move is {Nf6}, and after {w:Nf3} the Semi-Slav with [e3] is reached. {f5}, the Stonewall set-up, is solid but leaves [e5] for a White knight. {Bd6} keeps options open. Black's bishop on [c8] is shut in again, so the freeing plan matters: {b:dxc4} after White's bishop moves, then {b:b5} or {b:e5}. {Bb4}, pinning the knight, scores badly on Lichess: after {w:a3} the bishop must trade or retreat.",
+    "fr": "Les Blancs écartent les gambits tranchants au profit du tranquille {e3}. Le coup principal noir est {Nf6}, rejoignant après {w:Nf3} la Semi-Slave classique. Le Stonewall {f5} contrôle fermement [e4] au prix d'un trou durable en [e5], tandis que {Bd6} garde toutes les portes ouvertes. Pour affranchir leur fou [c8], les Noirs attendront le déplacement du fou [f1] avant de prendre {b:dxc4} puis de lancer {b:b5} ou {b:e5} ; {Bb4} perd du temps sur {w:a3}.",
+    "next": ["Nf6", "f5", "Bd6"],
+    "shapes": ["Gg8f6", "Gf7f5", "Bf8d6", "Re3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 e6 e3 Nf6",
+    "en": "The Semi-Slav with [e3], before White's knight has gone to [f3]. {Nf3} transposes to the main Meran position. {Bd3} and {Qc2} are other tries, though after {Bd3}, Black can take at once, {b:dxc4} {w:Bxc4}, gaining a tempo, and play {b:b5}. Black's plan is the Meran one: {b:Nbd7}, {b:dxc4} when the bishop has moved, {b:b5}, {b:Bb7} and the freeing break {b:c5}.",
+    "fr": "La Semi-Slave avec [e3] avant la sortie du cavalier roi blanc. {Nf3} transpose directement dans la variante de Méran. {Bd3} et {Qc2} sont jouables aussi, même si sur {Bd3} les Noirs peuvent déjà capturer {b:dxc4} {w:Bxc4} avec gain de temps avant d'enchaîner {b:b5}. Fidèles à l'esprit de la Méran, les Noirs visent {b:Nbd7}, {b:dxc4}, {b:b5}, {b:Bb7} et la rupture libératrice {b:c5}.",
+    "next": ["Nf3", "Bd3", "Qc2"],
+    "shapes": ["Gg1f3", "Gf1d3", "Bd1c2", "Re3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 e6 e3 f5",
+    "en": "The Stonewall Semi-Slav: Black clamps down permanently on [e4] with pawns on [c6], [d5], [e6] and [f5], planning {b:Nf6}, {b:Bd6} and {b:O-O} while keeping [c8] tucked safely behind the wall for {b:Nd7}-{b:Nf6} or {b:Bd7}-{b:Be8}-{b:Bh5}. Because [e5] is now a chronic dark-square hole, White gets a comfortable edge with {Bd3} and {Qc2}, often routing the king's knight via {Nh3} and {w:Nf4} or {Nf3} and {w:Ne5}.",
+    "fr": "La Semi-Slave Stonewall : les Noirs verrouillent définitivement [e4] grâce à la muraille [c6]-[d5]-[e6]-[f5], prévoyant {b:Nf6}, {b:Bd6} et {b:O-O} avant de recycler le fou [c8] par {b:Bd7}-{b:Be8}-{b:Bh5}. En contrepartie du trou chronique sur cases noires en [e5], les Blancs obtiennent un jeu très agréable par {Bd3} et {Qc2}, acheminant leur cavalier roi via {Nh3} et {w:Nf4} ou via {Nf3} et {w:Ne5}.",
+    "next": ["Bd3", "Qc2", "Nf3"],
+    "shapes": ["Gf1d3", "Gd1c2"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 e6",
+    "en": "A solid Semi-Slav with [e3]. {Nc3} is White's main move, transposing to the Meran. {Bd3} lets Black take on [c4] with a tempo. {Nbd2} keeps [c4] covered by the knight, so that {b:dxc4} can be met by {w:Nxc4}, though it is slower. Black follows with {b:Nbd7}, {b:Bd6} or {b:Be7}, castling, and then {b:dxc4} and {b:e5} or {b:c5} to free the bishop on [c8].",
+    "fr": "Une Semi-Slave feutrée avec [e3]. {Nc3} est le coup principal blanc, transposant dans la variante de Méran. {Bd3} autorise la prise immédiate en [c4] avec gain de temps, tandis que {Nbd2} protège [c4] du cavalier pour reprendre par {w:Nxc4} au prix d'un rythme plus modeste. Les Noirs poursuivent par {b:Nbd7}, {b:Bd6} ou {b:Be7} et le roque, avant d'émanciper leur fou [c8] grâce à {b:dxc4} suivi de {b:e5} ou {b:c5}.",
+    "next": ["Nc3", "Bd3", "Nbd2"],
+    "shapes": ["Gb1c3", "Gf1d3", "Bb1d2", "Re3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 e6 Nbd2",
+    "en": "The Quiet (or Colle-Zukertort) Variation of the Semi-Slav. By placing the queen's knight on [d2] instead of [c3], White takes all the sting out of Black's Meran plan ({b:dxc4} and {b:b5} no longer hit a knight on [c3]) and prepares a smooth build-up with {w:Bd3}, {w:O-O}, {w:b3}, {w:Bb2} and eventually {w:e4}. Black responds symmetrically with {Nbd7}, preparing {b:Bd6} and the freeing break {b:e5} (or {b:c5} once castled). {Be7} and {Bd6} immediately are just as solid.",
+    "fr": "La variante tranquille de la Semi-Slave, cousine du système Colle-Zukertort. En plaçant le cavalier en [d2] plutôt qu'en [c3], les Blancs privent le plan Méran ({b:dxc4} suivi de {b:b5}) de sa cible habituelle et préparent une harmonieuse mise en place par {w:Bd3}, {w:O-O}, {w:b3}, {w:Bb2} puis {w:e4}. Les Noirs répondent naturellement par {Nbd7}, préparant {b:Bd6}, le roque et la poussée libératrice {b:e5} ou {b:c5}. {Be7} et {Bd6} d'emblée sont tout aussi solides.",
+    "next": ["Nbd7", "Be7", "Bd6"],
+    "shapes": ["Gb8d7", "Gf8d6", "Be3e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 Bf5",
+    "en": "The Slav with [e3]: White shuts in the bishop on [c1], so Black's bishop comes out before {b:e6}. White can test [b7] at once with {Qb3} or {cxd5} and {w:Qb3}: Black answers with {b:Qb6} or {b:Qc7}, and the queen trade on [b6] costs Black little. {Nc3} is the main move, and after {b:e6}, White often plays {w:Nh4} to win the bishop pair. Black's set-up is {b:e6}, {b:Nbd7} and {b:Bd6} or {b:Be7}, with a very solid position.",
+    "fr": "La Slave lente : le coup [e3] ayant enfermé le fou [c1], les Noirs en profitent pour sortir leur fou en [f5] avant de jouer {b:e6}. Les Blancs peuvent tester [b7] tout de suite par {Qb3} ou par {cxd5} suivi de {w:Qb3}, mais {b:Qb6} ou {b:Qc7} tient bon sans peine. Sur la grande ligne {Nc3}, les Noirs répondent {b:e6} et accueillent la chasse au fou {w:Nh4} par {b:Bg6} ou {b:Bg4} dans une structure de granit.",
+    "next": ["Nc3", "cxd5", "Qb3"],
+    "shapes": ["Ye3", "Yc1", "Yb7", "Gb1c3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 Bf5 Nc3",
+    "en": "Black continues with {e6}, the natural way to support [d5] and open the bishop on [f8]: the Slav triangle with the bishop already outside it. {Nbd7} first is also fine. {h6}, making a retreat square for the bishop, is a bit slow, and {w:cxd5} {b:cxd5} {w:Qb3} can follow. In these lines White's pressure on [b7] is the thing to watch, so the queen often goes to [b6] or [c7] early.",
+    "fr": "Les Noirs poursuivent naturellement par {e6}, bouclant le triangle slave avec le fou de cases blanches déjà posté à l'extérieur en [f5] ! {Nbd7} d'abord est jouable aussi, alors que le préventif {h6} est un peu lent face à {w:cxd5} {b:cxd5} {w:Qb3}. Dans toute cette famille de positions, la surveillance du pion [b7] reste la priorité noire, souvent assurée par {b:Qb6} ou {b:Qc7}.",
+    "next": ["e6", "Nbd7"],
+    "shapes": ["Ge7e6", "Gb8d7", "Rd5", "Rf8"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 Bf5 Nc3 e6",
+    "en": "The Slav with [e3] and the bishop on [f5]: a very solid structure for Black. White's plans are {Nh4}, going after the bishop: Black answers {b:Bg6} or {b:Bg4}, and after {w:Nxg6} {b:hxg6}, the open h-file is Black's compensation for the bishop pair; {Bd3}, offering to trade bishops; and {Be2} with castling. Black develops with {b:Nbd7}, {b:Bd6} or {b:Bb4}, castles, and later plays {b:e5} or {b:c5}. {w:Qb3} is met by {b:Qb6}.",
+    "fr": "Le dispositif idéal de la Slave lente : le triangle noir est dressé et le fou rayonne déjà en [f5]. Les Blancs chassent souvent ce fou par {Nh4} : après {b:Bg6} {w:Nxg6} {b:hxg6}, la colonne h semi-ouverte offre aux Noirs un contre-jeu actif contre la paire de fous adverse ({b:Bg4} évite l'échange). Plus posés, {Bd3} propose l'échange des fous et {Be2} prépare le roque ; sur {w:Qb3}, {b:Qb6} égalise.",
+    "next": ["Nh4", "Bd3", "Be2"],
+    "shapes": ["Ye3", "Yf5", "Gf3h4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 e3 Bg4",
+    "en": "Black pins the knight before {b:e6}. White's sharpest answer is {Qb3}, hitting [b7], which the bishop no longer guards: Black answers {b:Qb6} or {b:Qc7}, or takes first with {b:Bxf3}. {h3} asks the bishop to decide, and {Nc3} develops. Black's plan is {b:e6}, {b:Nbd7} and {b:Bd6}, and the bishop on [g4] can trade itself for the knight to ease Black's game.",
+    "fr": "Les Noirs clouent le cavalier en [g4] avant de pousser {b:e6}. La réplique la plus incisive est {Qb3}, ciblant aussitôt [b7] abandonné par le fou : les Noirs répondent par {b:Qb6}, par {b:Qc7} ou en échangeant d'abord {b:Bxf3}. {h3} interroge le fou sans attendre et {Nc3} développe souplement. Les Noirs consolideront ensuite par {b:e6}, {b:Nbd7} et {b:Bd6}, prêts à céder le fou contre le cavalier si nécessaire.",
+    "next": ["Nc3", "h3", "Qb3"],
+    "shapes": ["Yb7", "Yg4", "Gb1c3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 Be7",
+    "en": "Black breaks the pin cleanly, sidestepping the razor-sharp Botvinnik and Moscow lines. The resulting position is an Orthodox Declined with the c-pawn on [c6]: rock-solid, though the bishop on [c8] stays shut in behind the triangle. White plays {e3} or {Qc2}, and after {b:O-O} or {b:Nbd7}, builds with {w:Rd1} and {w:Bd3}. Black's freeing plan is {b:dxc4} once White's bishop moves, followed by Capablanca's {b:Nd5} trade or {b:e5}.",
+    "fr": "Les Noirs déclouent sobrement leur cavalier, écartant d'un revers de main le chaos des variantes Botvinnik et Moscou. On rejoint ainsi un Gambit dame refusé orthodoxe avec le pion en [c6] : ultra-solide, même si le fou [c8] reste enfermé. Après {e3} ou {Qc2}, les Blancs installent {w:Rd1} et {w:Bd3} tandis que les Noirs attendent le départ du fou [f1] pour jouer {b:dxc4} suivi de la manœuvre de Capablanca {b:Nd5} ou de {b:e5}.",
+    "next": ["e3", "Qc2"],
+    "shapes": ["Ge2e3", "Gd1c2", "Rc6", "Rc8"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 Be7 e3",
+    "en": "Black castles with {O-O}, or plays {Nbd7} first, keeping {b:dxc4} and {b:Nd5} in reserve: the Capablanca idea of trading the dark-squared bishops. {h6} asks the bishop first, and {Ne4} is a Lasker-type trade. In all lines White develops with {w:Bd3} or {w:Qc2} and castles, while Black waits for White's bishop to leave [f1] before taking {b:dxc4} and freeing with {b:Nd5} or {b:e5}.",
+    "fr": "Les Noirs roquent par {O-O} ou commencent par {Nbd7}, gardant en réserve la séquence libératrice de Capablanca {b:dxc4} puis {b:Nd5} pour échanger les fous de cases noires ({h6} et l'échange à la Lasker {Ne4} existent également). Les Blancs poursuivent par {w:Bd3} ou {w:Qc2} et le roque, tandis que les Noirs guettent le moment propice pour ouvrir le jeu par {b:e5} ou {b:c5}.",
+    "next": ["O-O", "Nbd7", "h6"],
+    "shapes": ["Ge8g8", "Gb8d7", "Bh7h6", "Rf1"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 Nbd7",
+    "en": "Black supports the knight on [f6] and keeps the queen free for [a5]. White's main move is {e3}, and then Black chooses between {b:Qa5}, the Cambridge Springs, and {b:Be7}, an Orthodox with [c6]. {cxd5} {b:exd5} leads to the Exchange structure. {e4 dxe4} is a sharp try that gives Black free play. With the knight on [d7], Black can meet {cxd5} with {b:exd5} without worrying about the Elephant Trap.",
+    "fr": "Le cavalier noir vient épauler [f6] tout en gardant la diagonale de la dame ouverte vers [a5]. Sur le coup principal {e3}, les Noirs choisissent entre la Cambridge Springs ({b:Qa5}) et l'Orthodoxe ({b:Be7}). L'échange {cxd5} {b:exd5} rejoint la structure de Carlsbad — le cavalier en [d7] rendant impossible le célèbre piège de l'Éléphant — tandis que {e4 dxe4} offre aux Noirs un jeu facile.",
+    "next": ["e3", "cxd5"],
+    "shapes": ["Ge2e3", "Gc4d5", "Rf6", "Ra5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 Nbd7 e3",
+    "en": "Black has a choice of two systems. {Qa5} is the Cambridge Springs: the queen pins the knight on [c3] and prepares {b:Ne4} and {b:Bb4}, with ideas of {b:dxc4} against the bishop on [g5]. {Be7} leads to an Orthodox with the c-pawn on [c6]: solid, with the plan {b:O-O}, {b:dxc4} and {b:Nd5}. {Bb4} mixes both ideas, while {Bd6} exposes the bishop to {w:c5} or {w:e4}.",
+    "fr": "Carrefour majeur entre deux grands classiques : {Qa5} lance la défense Cambridge Springs, clouant le cavalier [c3] sur le roi pour préparer {b:Bb4}, {b:Ne4} et la découverte {b:dxc4} contre le fou [g5] ! Plus classique, {Be7} entre dans l'Orthodoxe avec le plan {b:O-O}, {b:dxc4} et {b:Nd5}. {Bb4} mêle les deux idées, alors que {Bd6} s'expose à {w:c5} ou {w:e4}.",
+    "next": ["Qa5", "Be7"],
+    "shapes": ["Yc3", "Yg5", "Yc6", "Gd8a5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 Nbd7 e3 Be7",
+    "en": "The Orthodox with [c6]. White's main move is {Bd3}, and after {b:dxc4} {w:Bxc4}, Black plays {b:Nd5}, Capablanca's freeing idea: the knight offers to trade the dark-squared bishops, and {b:e5} follows. {Qc2} keeps the bishop on [f1] so that {b:dxc4} doesn't win a tempo, and {Rc1} prepares the c-file. Black castles and waits for the right moment to free the bishop on [c8].",
+    "fr": "La défense Orthodoxe avec [c6]. Le coup principal blanc est {Bd3}, qui permet aux Noirs de déclencher la manœuvre simplificatrice de Capablanca : {b:dxc4} {w:Bxc4} {b:Nd5}, proposant l'échange des fous de cases noires avant de libérer le jeu par {b:e5} ou {b:c5}. Pour éviter de céder ce tempo, les Blancs préfèrent souvent attendre avec {Qc2} ou {Rc1}.",
+    "next": ["Bd3", "Qc2", "Rc1"],
+    "shapes": ["Gf1d3", "Gd1c2", "Ba1c1", "Rc6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Bd6",
+    "en": "Black puts the bishop on [d6] before the knight on [b8] comes out, aiming for {b:e5} later. White's main move is {Bd3}: after {b:Nbd7}, the game is the Chigorin Variation of the Semi-Slav, and after {b:dxc4} {w:Bxc4} {b:b5}, Meran-type play follows with the bishop already on [d6]. {Qc2} covers [e4] and keeps the bishop on [f1] until Black takes on [c4]; {b3} keeps the pawn on [c4] protected. {c5}, chasing the bishop, gains space but fixes nothing: after {b:Bc7}, Black frees the game with {b:e5} or {b:b6}, and the pawn on [c5] can become a target.",
+    "fr": "Les Noirs postent leur fou en [d6] avant même de sortir le cavalier [b8], visant d'emblée la poussée libératrice {b:e5}. Le coup principal blanc est {Bd3} : après {b:Nbd7}, on rejoint la variante Tchigorine de la Semi-Slave, tandis que {b:dxc4} {w:Bxc4} {b:b5} mène à un jeu de type Méran avec le fou déjà actif en [d6]. {Qc2} surveille [e4] tout en gardant le fou en [f1] jusqu'à la prise en [c4], et {b3} protège solidement [c4]. En revanche, chasser le fou par {c5} gagne de l'espace sans rien fixer : après {b:Bc7}, les Noirs se libèrent par {b:e5} ou {b:b6} en ciblant le pion avancé [c5].",
+    "next": ["Bd3", "Qc2", "b3"],
+    "shapes": ["Gf1d3", "Gd1c2", "Bb2b3", "Rd6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Bg5",
+    "en": "White pins the knight before playing {w:Nc3}, leaving [c4] unguarded. Black takes advantage at once with {dxc4}, forcing White to spend time with {w:e3} or {w:Nbd2} to recover the pawn while Black prepares {b:b5} or {b:Be6}. {Ne4} is just as good, unpinning with tempo on the bishop and heading for an easy Slav after {w:Bf4} {b:dxc4} or {b:Bf5}. {Bf5} directly is solid too.",
+    "fr": "Les Blancs clouent le cavalier avant d'avoir joué {w:Nc3}, laissant le pion [c4] sans surveillance. Les Noirs en profitent aussitôt par {dxc4}, obligeant l'adversaire à dépenser du temps avec {w:e3} ou {w:Nbd2} pour regagner le pion face à {b:b5} ou {b:Be6}. Tout aussi énergique, {Ne4} brise le clouage avec gain de temps sur le fou, tandis que {Bf5} développe calmement.",
+    "next": ["dxc4", "Ne4", "Bf5"],
+    "shapes": ["Gd5c4", "Gf6e4", "Bc8f5", "Rc4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 e3",
+    "en": "The Alekhine Variation of the Slav: instead of spending a move on {w:a4}, White opens the bishop's diagonal at once to recover [c4]. Because White skipped {w:a4}, Black must hold the extra pawn with {b5}: after {w:a4} {b:b4}, the knight goes to [a2] or [b1] in a sharp fight between White's center and Black's queenside chain. {e6}?! surrenders [c4] to {w:Bxc4} while locking in [c8].",
+    "fr": "La variante Alekhine de la Slave : au lieu d'investir un coup dans {w:a4}, les Blancs ouvrent immédiatement la diagonale du fou [f1] vers [c4]. Les Noirs doivent donc tenir leur pion de plus par {b5} : après {w:a4} {b:b4}, le cavalier recule en [a2] ou [b1] dans un duel aigu entre le centre blanc et la chaîne noire. Jouer {e6}?! rendrait gratuitement [c4] à {w:Bxc4} tout en murant le fou [c8].",
+    "next": ["b5"],
+    "mistakes": [
+      {
+        "move": "e6",
+        "mark": "?!",
+        "punish": "Bxc4",
+        "en": "Playing {e6} without holding [c4] hands the pawn back for free and shuts in Black's own light-squared bishop: {Bxc4} gives White an ideal center with {w:O-O} and {w:e4} coming. {b:b5} kept the extra pawn.",
+        "fr": "Pousser {b:e6} sans soutenir [c4] rend le pion sans contrepartie et enferme le fou de cases blanches noir : {Bxc4} offre aux Blancs un centre idéal avec {w:O-O} et {w:e4} à suivre. Il fallait tenir le pion par {b:b5}.",
+        "shapes": ["Yc4", "Gf1c4"]
+      }
+    ],
+    "shapes": ["Yc4", "Ya2", "Yb1", "Gb7b5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Bf5",
+    "en": "The Symmetrical Exchange Slav: both sides have placed every minor piece on its natural post outside the pawn chain. White's main move is {e3}, preparing {w:Bd3} or {w:Bb5} and {w:Rc1} after {b:e6}; {Qb3} tests [b7] right away, met by {b:Na5} {w:Qa4+} {b:Bd7} {w:Qc2} with balanced play, never by {b:b6}?? {w:e4}. White's single extra tempo gives a slight, risk-free pull down the open c-file.",
+    "fr": "La Slave d'échange symétrique : chaque camp a déployé toutes ses pièces mineures sur leurs cases idéales hors de la chaîne de pions. Le coup principal blanc est {e3}, préparant {w:Bd3} ou {w:Bb5} et {w:Rc1} après {b:e6} ; {Qb3} éprouve tout de suite [b7], ce que les Noirs parent par l'actif {b:Na5} {w:Qa4+} {b:Bd7} {w:Qc2} (surtout pas {b:b6}?? {w:e4} !). Le trait assure aux Blancs une légère pression sur la colonne c.",
+    "next": ["e3", "Qb3"],
+    "shapes": ["Ge2e3", "Gd1b3", "Rb7"]
+  },
+  {
+    "line": "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 f3",
+    "en": "The Boor Attack in the Exchange Slav—a surprise weapon designed to break Black's easy copycat symmetry! White prepares {w:e4} directly, threatening to build an imposing central pawn duo while keeping [g1] flexible. Copycatting here fails, so Black must react concretely: {Nc6} hits [d4] and meets {w:e4} with the sharp {b:e5}! ({w:dxe5} {b:Nxe4}); {Bf5} controls [e4] while inviting tactical fireworks after {w:g4} {b:Bd7} or {w:Qb3} {b:Nc6}; and {e6} braces solidly against {w:e4} in French Tarrasch style.",
+    "fr": "L'attaque Boor dans la Slave d'échange, une arme surprise conçue pour briser d'emblée la symétrie confortable des Noirs ! Les Blancs préparent directement la poussée {w:e4} afin d'ériger un imposant duo central. Les Noirs doivent réagir avec précision : {Nc6} vise [d4] pour contrer {w:e4} par le coup de tonnerre {b:e5} ; {Bf5} contrôle [e4] quitte à entrer dans des mêlées aiguës après {w:Qb3} ou {w:g4} ; et {e6} érige une solide barrière de type Française.",
+    "next": ["Nc6", "Bf5", "e6"],
+    "shapes": ["Be2e4", "Gb8c6", "Gc8f5", "Rd4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bxf6 Qxf6",
+    "en": "The Moscow Variation: White hands over the bishop pair to win development time and saddle Black with an exposed queen on [f6]. White's main move is {e3}, followed by {b:Nd7} {w:Bd3} {b:dxc4} {w:Bxc4}, when White enjoys more central space and faster castling while Black tucks the queen away, fianchettoes with {b:g6} and {b:Bg7}, and prepares {b:e5} or {b:c5} to unleash the two bishops. {Qb3} and {cxd5} are solid alternatives.",
+    "fr": "La variante de Moscou : les Blancs cèdent la paire de fous pour gagner du temps de développement face à une dame noire exposée en [f6]. La suite principale est {e3}, et après {b:Nd7} {w:Bd3} {b:dxc4} {w:Bxc4}, les Blancs jouissent d'un bel espace central et d'un roque rapide pendant que les Noirs replient leur dame, fianchettent par {b:g6} et {b:Bg7} et préparent {b:e5} ou {b:c5} pour ouvrir le jeu à leurs deux fous. {Qb3} et {cxd5} sont solides.",
+    "next": ["e3", "Qb3", "cxd5"],
+    "shapes": ["Yf6", "Ge2e3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bh4",
+    "en": "The Anti-Moscow Gambit: White keeps the pin on [f6] and dares Black to grab [c4]. Accepting with {dxc4} is the critical test: after {w:e4} {b:g5} {w:Bg3} {b:b5}, Black holds an extra pawn at the price of a loosened kingside and an uncastled king. {Be7} declines the gambit calmly and transposes into Orthodox Declined waters after {w:e3} {b:O-O}. Pushing {b:g5} before {dxc4} weakens the kingside without even winning a pawn.",
+    "fr": "Le gambit Anti-Moscou : les Blancs maintiennent le clouage en [f6] et mettent les Noirs au défi de prendre en [c4]. Relever le gant par {dxc4} est le test critique : après {w:e4} {b:g5} {w:Bg3} {b:b5}, les Noirs gardent un pion de plus au prix d'une aile roi affaiblie et d'un roi sans abri sûr. Plus prudent, {Be7} refuse le gambit et rejoint les eaux calmes de l'Orthodoxe après {w:e3} {b:O-O}.",
+    "next": ["dxc4", "Be7"],
+    "shapes": ["Yf6", "Yc4", "Gd5c4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bh4 dxc4",
+    "en": "Black accepts the Anti-Moscow challenge and threatens {b:b5} to cement the extra pawn. White's principled reply is {e4}, seizing the center and renewing the threat of {w:e5} against the pinned knight, which forces {b:g5} {w:Bg3} {b:b5}. Unlike the pure Slav, {w:a4} fails to stop {b:b5} here because {b:Bb4} pins [c3] and {b:b5} follows anyway, leaving White down a pawn without the big central duo.",
+    "fr": "Les Noirs relèvent le défi de l'Anti-Moscou et menacent de consolider leur butin par {b:b5}. La réponse de principe est {e4}, confisquant le centre avec la menace renouvelée {w:e5} sur le cavalier cloué, ce qui force {b:g5} {w:Bg3} {b:b5}. Contrairement à la Slave pure, {w:a4} n'empêche pas {b:b5} ici car le clouage {b:Bb4} soutient l'avance quand même en privant les Blancs de leur duo central.",
+    "next": ["e4"],
+    "shapes": ["Yc3", "Ge2e4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bh4 dxc4 e4 g5 Bg3 b5",
+    "en": "The tabiya of the Anti-Moscow Gambit. Black has held the extra pawn on [c4] and broken the pin, yet both wings are stretched thin and Black's king has no safe castling side. White's best plans are {Be2}, preparing {w:O-O}, {w:Ne5} and {w:f4} to rip open the center, and {h4}, chipping directly at Black's weakened [g5]-[h6] chain. Prematurely pushing {w:e5} hands the glorious [d5] outpost to Black's knight.",
+    "fr": "La tabiya brûlante du gambit Anti-Moscou. Les Noirs ont conservé leur pion en [c4] et brisé le clouage, mais leurs deux ailes avancées privent le roi noir d'abri sûr. Les meilleurs plans blancs sont {Be2}, préparant {w:O-O}, {w:Ne5} et {w:f4} pour éventrer le centre, ainsi que le coup de bélier {h4} contre la chaîne [g5]-[h6]. Évitez un {w:e5} prématuré qui livrerait le superbe avant-poste [d5] au cavalier noir.",
+    "next": ["Be2", "h4"],
+    "shapes": ["Yc4", "Yg5", "Yh6", "Gf1e2"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Qc2 Bd6",
+    "en": "The main Stoltz / Anti-Meran tabiya. Black develops the dark-squared bishop to its best diagonal, preparing {b:O-O} and {b:e5} while waiting for White's [f1] bishop to move before taking on [c4]. White chooses between Karpov's positional {Bd3}, inviting {b:O-O} {w:O-O} {b:dxc4} {w:Bxc4} {b:b5}; the quiet {b3} and {Be2}; and the wild Shabalov-Shirov Gambit {g4}, sacrificing a flank pawn to destabilize [f6] and [d5].",
+    "fr": "La tabiya principale de l'Anti-Méran (variante Stoltz). Les Noirs installent leur fou sur sa meilleure diagonale en vue de {b:O-O} et {b:e5}, attendant le départ du fou [f1] avant de capturer en [c4]. Les Blancs ont le choix entre le positionnel {Bd3} cher à Karpov, le discret {b3} ou {Be2}, et l'explosif gambit Chabalov-Chirov {g4}, sacrifiant un pion de l'aile pour déstabiliser [f6] et [d5].",
+    "next": ["Bd3", "b3", "g4", "Be2"],
+    "shapes": ["Yc4", "Yf6", "Yd5", "Gf1d3"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 O-O",
+    "en": "The main line of the Modern Meran: against Black's piece move {b:Bb7}, White castles first instead of rushing {w:e4}. Black now prepares the freeing {b:c5} break with {a6}, reaching the Reynolds Attack after {w:e4} {b:c5} {w:d5}, or kicks the knight first with {b4} {w:Ne4} {b:Be7}. Playing {c5}? immediately without {a6} is a classic move-order blunder: [b5] is left unguarded and falls to {w:Bxb5}.",
+    "fr": "La ligne principale de la Méran moderne : face à {b:Bb7}, les Blancs mettent d'abord leur roi à l'abri avant de lancer {w:e4}. Les Noirs préparent maintenant la rupture {b:c5} à l'aide de {a6} — menant à l'attaque Reynolds après {w:e4} {b:c5} {w:d5} — ou chassent d'abord le cavalier par {b4} {w:Ne4} {b:Be7}. Attention au piège d'ordre de coups {c5}? sans {a6}, qui laisse tomber le pion [b5] sur {w:Bxb5} !",
+    "next": ["a6", "b4", "Be7"],
+    "mistakes": [
+      {
+        "move": "c5",
+        "mark": "?",
+        "punish": "Bxb5",
+        "en": "Striking with {c5} works after {b:a6}, not here: with the a-pawn still on [a7], [b5] has lost its c-pawn guard and falls for nothing to {Bxb5}, pinning the knight on [d7] too. Prepare {b:c5} with {b:a6} or play {b:b4} first.",
+        "fr": "Frapper par {c5} fonctionne après {b:a6}, mais pas ici : le pion a étant encore en [a7], le pion [b5] perd le soutien de son pion c et tombe gratuitement sur {Bxb5}, qui cloue en outre le cavalier [d7]. Préparez la rupture par {b:a6} ou jouez {b:b4} d'abord.",
+        "shapes": ["Yb5", "Gd3b5", "Ra7"]
+      }
+    ],
+    "shapes": ["Yb5", "Ga7a6"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7 O-O a6 e4 c5",
+    "en": "Black achieves the thematic {c5} break while White is already castled and Black's king is still on [e8]. White's critical try is {d5}, the Reynolds Attack: Black must keep the e-file closed with {b:Qc7} and {b:c4} {w:Bc2} {b:Bd6}—taking {b:exd5} opens lines straight at [e8]. {e5} is the sharp alternative, met by {b:cxd4} {w:Nxb5} {b:Nxe5} rather than retreating the knight.",
+    "fr": "Les Noirs signent la rupture thématique {b:c5} alors que le roi blanc est déjà roqué et que le roi noir patiente encore en [e8]. L'essai critique est l'attaque Reynolds {d5} : les Noirs doivent garder la colonne e fermée par {b:Qc7} et {b:c4} {w:Bc2} {b:Bd6}, car {b:exd5} ouvrirait toutes les lignes sur [e8] ! L'alternative tranchante {e5} se heurte au contre-coup {b:cxd4} {w:Nxb5} {b:Nxe5}.",
+    "next": ["d5", "e5"],
+    "shapes": ["Ye8", "Gd4d5"]
+  },
+  {
+    "line": "d4 d5 c4 e6 Nc3 c6 Nf3 dxc4 a4 Bb4 e3 b5 Bd2 a5 axb5 Bxc3 Bxc3 cxb5 b3",
+    "en": "White undermines the Noteboom phalanx at its tip to pry open the c-file. Black cannot push {b4}? immediately because the a-pawn is pinned down the open a-file to the rook on [a8], letting {w:Bxb4} win the chain's spearhead. Instead Black plays {Bb7}, shielding [a8]: after {w:bxc4} {b:b4} {w:Bb2} {b:Nf6}, Black gets two connected passed queenside pawns against White's bishop pair and central majority.",
+    "fr": "Les Blancs minent la pointe de la phalange Noteboom pour ouvrir la colonne c. Les Noirs ne peuvent pas pousser {b4}? tout de suite car le pion a est cloué sur la tour [a8] le long de la colonne a ouverte, permettant à {w:Bxb4} de cueillir le fer de lance ! Ils jouent donc d'abord {Bb7} pour couvrir [a8] : après {w:bxc4} {b:b4} {w:Bb2} {b:Nf6}, les deux pions passés liés noirs affrontent la paire de fous et le centre blancs.",
+    "next": ["Bb7"],
+    "mistakes": [
+      {
+        "move": "b4",
+        "mark": "?",
+        "punish": "Bxb4",
+        "en": "Pushing past at once overlooks the pin down the open a-file: {Bxb4} wins a key pawn because {b:axb4} drops the rook on [a8] to {w:Rxa8}. Develop {b:Bb7} first to connect the rooks, then push {b:b4}.",
+        "fr": "Avancer sans préparation oublie le clouage le long de la colonne a ouverte : {Bxb4} gagne un pion clé car {b:axb4} perd la tour [a8] sur {w:Rxa8} ! Développez d'abord {b:Bb7} pour relier les tours avant de pousser {b:b4}.",
+        "shapes": ["Ya8", "Gc3b4"]
+      }
+    ],
+    "shapes": ["Ya8", "Gc8b7"]
+  },
+  {
+    "line": "d4 c6",
+    "en": "The Caro-Slav move order, played in over thirty-six million online games as a universal bridge for Caro-Kann and Slav players alike. By playing {c6} on move one, Black prepares {b:d5} supported by a pawn while keeping the [c8] bishop unobstructed. White can steer straight into the Caro-Kann with {e4}, enter the Slav with {c4} or {Nf3}, or set up the London System with {Bf4}.",
+    "fr": "L'ordre de coups Caro-Slave, passerelle universelle prisée autant des joueurs de Caro-Kann que de Slave dans des dizaines de millions de parties. En jouant {b:c6} au premier coup, les Noirs préparent {b:d5} soutenu par un pion sans enfermer leur fou [c8]. Les Blancs peuvent bifurquer droit vers la Caro-Kann par {e4}, entrer dans la Slave par {c4} ou {Nf3}, ou adopter le système de Londres par {Bf4}.",
+    "next": ["c4", "Nf3", "Bf4", "e4"],
+    "shapes": ["Gc2c4", "Gg1f3", "Bc1f4", "Rc8"]
+  },
+  {
+    "line": "d4 c6 c4",
+    "en": "With {c4}, White claims queenside space and invites the Slav Defence. {d5} is Black's overwhelming main choice, contesting the center at once while keeping the [c8]-[h3] diagonal open for the light-squared bishop. {Nf6} is a flexible Anglo-Slav finesse that keeps {d5} and {d6} (heading toward Old Indian or King's Indian structures after {Nc3}) on the table, whereas passive {d6} at once concedes central space.",
+    "fr": "Par {w:c4}, les Blancs prennent de l'espace à l'aile dame et invitent la défense slave. {d5} est de loin le choix numéro un des Noirs, contestant le centre sur-le-champ tout en gardant la diagonale [c8]-[h3] libre pour le fou de cases blanches. Plus flexible, la finesse anglo-slave {Nf6} garde en réserve {b:d5} comme {b:d6} (vers des structures vieille-indienne après {w:Nc3}), tandis que {b:d6} d'emblée cède le centre.",
+    "next": ["d5", "Nf6"],
+    "shapes": ["Gd7d5", "Gg8f6", "Rc8", "Rh3"]
+  },
+  {
+    "line": "d4 c6 Nf3",
+    "en": "Developing {Nf3} prevents an immediate {e5} and keeps White's options open between the Slav ({c4}), the London ({Bf4}), and quiet Colle or Torre setups ({e3} or {Bg5}). Black almost always answers {d5} to stake out the center and reach standard Slav or London tabiyas; {Nf6} is equally sound, waiting to see whether White commits to {c4} or {Bf4} before placing the d-pawn in the center.",
+    "fr": "Le développement souple {w:Nf3} interdit {b:e5} et garde le cap ouvert entre la Slave ({w:c4}), le système de Londres ({w:Bf4}) et les schémas Colle ou Torre ({w:e3}, {w:Bg5}). Les Noirs répondent presque toujours par {d5} pour planter un jalon central vers les tabiyas slaves ou londoniennes ; {Nf6} est tout aussi sain, attendant de voir si les Blancs s'engagent par {w:c4} ou {w:Bf4}.",
+    "next": ["d5", "Nf6"],
+    "shapes": ["Gd7d5", "Gg8f6"]
+  },
+  {
+    "line": "d4 c6 e3",
+    "en": "A quiet Colle-style reply to 1...c6 that shores up [d4] and opens the [f1]-[a6] diagonal while keeping the c-pawn ready for either {c4} (transposing into a Slow Slav after {d5}) or {c3} in a reversed Caro-Kann Stonewall. Because White's dark-squared bishop is now shut inside [e3], Black equalizes effortlessly with {d5}—freeing the [c8] bishop to [f5] or [g4] without any trouble—or {Nf6}.",
+    "fr": "Une réplique tranquille dans l'esprit du système Colle qui consolide [d4] et ouvre la diagonale [f1]-[a6], gardant le pion c prêt pour {w:c4} (vers une Slave lente) ou {w:c3}. Comme le fou de cases noires blanc s'est lui-même enfermé derrière [e3], les Noirs égalisent sans le moindre effort par {d5} — libérant la sortie idéale du fou [c8] en [f5] ou [g4] — ou par {Nf6}.",
+    "next": ["d5", "Nf6"],
+    "shapes": ["Gd7d5", "Gg8f6", "Rd4", "Rf1"]
+  },
+  {
+    "line": "d4 c6 Nc3",
+    "en": "Bringing the queen's knight to [c3] ahead of the c-pawn prepares an immediate {e4} push into the Caro-Kann Classical or Fantasy, or a Veresov/Jobava setup if Black answers in Slav style. Black should seize the center right away with {d5}, preventing uncontested {e4}—after which {d5 e4} transposes directly into the Classical Caro-Kann, while {d5 Bf4} enters the Jobava London against a solid {c6}–{d5} triangle.",
+    "fr": "Sortir le cavalier en [c3] devant le pion c prépare la poussée immédiate {w:e4} vers la Caro-Kann, ou un schéma Jobava/Veresov si les Noirs répondent dans l'esprit slave. Les Noirs ont tout intérêt à occuper le centre sans attendre par {d5} : {d5 e4} transpose alors directement dans la Caro-Kann classique, tandis que {d5 Bf4} ouvre le système de Londres Jobava face au solide triangle [c6]-[d5].",
+    "next": ["d5"],
+    "shapes": ["Gd7d5", "Rc3"]
+  },
+  {
+    "line": "d4 c6 c4 d6",
+    "en": "Holding the d-pawn at [d6] turns the Anglo-Slav into an Old Indian or Czech Pirc shell where Black plans {Nd7}, {Qc7} and {e5}. Because Black has left [e4] completely uncontested, {e4} claims an ideal three-pawn Maróczy/King's Indian center at once; {Nc3} and {Nf3} are equally strong, developing smoothly before expanding with {e4} while Black's dark-squared bishop remains cramped behind [d6].",
+    "fr": "Retenir le pion en [d6] transforme l'Anglo-Slave en une carapace vieille-indienne ou Pirc tchèque où les Noirs projettent {b:Nd7}, {b:Qc7} et {b:e5}. La case [e4] n'étant nullement contestée, {e4} érige aussitôt un superbe centre à trois pions ; {Nc3} et {Nf3} sont tout aussi forts, développant les cavaliers en souplesse avant d'avancer {w:e4} face à un fou [f8] à l'étroit derrière [d6].",
+    "next": ["Nc3", "e4", "Nf3"],
+    "shapes": ["Gb1c3", "Ge2e4", "Bg1f3", "Rd6"]
+  },
+  {
+    "line": "d4 c6 c4 d6 Nc3",
+    "en": "White develops the queenside knight to bear down on [e4] and [d5] against Black's Caro-Indian setup. Black can push {d5} anyway—conceding a clear tempo to reach a Slav after spending two moves with the d-pawn—or stay in an Old Indian / Czech Pirc structure via {Nf6} and {g6}, letting White claim a spacious center with {w:e4} while Black prepares {b:Nbd7} and {b:e5}.",
+    "fr": "Le cavalier blanc prend le contrôle de [e4] et [d5] face au dispositif caro-indien des Noirs. Ces derniers peuvent encore pousser {d5} — concédant un temps net pour rejoindre une Slave après avoir joué deux fois le pion d — ou rester fidèles à l'esprit vieille-indien / Pirc tchèque par {Nf6} ou {b:g6}, laissant {w:e4} occuper un large centre avant de contre-attaquer par {b:Nbd7} et {b:e5}.",
+    "next": ["Nf6", "g6", "d5"],
+    "shapes": ["Gg8f6", "Gg7g6", "Bd6d5", "Re4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nc3 Nf6 Bg5",
+    "en": "Rushing {Bg5} before playing {w:Nf3} leaves [e4] and [c4] less protected than in the normal Semi-Slav Moscow, giving Black two energetic ways to punish the move order! {dxc4} grabs the gambit pawn when {dxc4 e4 b5} holds onto it cleanly without allowing Geller Gambit tactics, while {Ne4} unpins immediately with tempo on [g5] and [c3] ({Ne4 Nxe4 dxe4} leaves Black's light-squared bishop wide open). Passive {e6} merely transposes into the Queen's Gambit Declined.",
+    "fr": "Clouer par {w:Bg5} avant d'avoir joué {w:Nf3} laisse [e4] et [c4] moins bien défendus que dans la Semi-Slave, offrant aux Noirs deux répliques énergiques pour punir l'ordre de coups ! {dxc4} cueille le pion, que {dxc4 e4 b5} conserve proprement sans craindre le gambit Geller, tandis que {Ne4} décloue immédiatement avec gain de temps sur [g5] et [c3] ({Ne4 Nxe4 dxe4} ouvre grand le fou [c8]). Plus passif, {e6} transpose dans le Gambit dame refusé.",
+    "next": ["dxc4", "Ne4"],
+    "shapes": ["Gd5c4", "Gf6e4", "Re4", "Rc4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 Be7 e3 O-O",
+    "en": "The Anti-Moscow {Be7} Semi-Slav reaches classical Orthodox QGD waters where Black has already played {c6} before {b:Nbd7}. {Qc2} is White's most accurate continuation, fighting for [e4] while waiting for Black to commit to {b:Nbd7} or {b:h6} before moving the bishop on [f1] (avoiding {b:dxc4} with tempo). {Bd3} invites {Bd3 dxc4 Bxc4 Nd5}, Capablanca's simplifying maneuver, while {cxd5} enters a clean Carlsbad Exchange.",
+    "fr": "Après le roque noir, cette Semi-Slave avec {Be7} rejoint les eaux classiques du Gambit dame refusé orthodoxe où {c6} a précédé {b:Nbd7}. {Qc2} est la suite la plus précise des Blancs : elle lutte pour [e4] tout en retenant le fou en [f1] afin de ne pas offrir {b:dxc4} avec gain de temps avant que les Noirs ne jouent {b:Nbd7} ou {b:h6}. {Bd3} autorise la simplification de Capablanca {Bd3 dxc4 Bxc4 Nd5}, et {cxd5} entre dans la structure de Carlsbad.",
+    "next": ["Qc2", "Bd3", "cxd5"],
+    "shapes": ["Gd1c2", "Gf1d3", "Bc4d5", "Re4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 g3",
+    "en": "The Catalan Slav. Instead of committing the queen's knight to [c3] where {b:dxc4} and {b:b5} could gain time, White fianchettoes the king's bishop to rake across the [h1]-[a8] diagonal and press against [d5] and [c6]. Black has three healthy plans: {Bf5}, getting the light-squared bishop outside the chain before playing {b:e6}; {Bg4}, pressuring [f3] and [d4] actively; or a solid {e6} into {b:Be7} or {b:Bb4+}. Grabbing {dxc4} early lets {w:Bg2} and {w:Ne5} recover the pawn with strong pressure.",
+    "fr": "La Catalane slave. Au lieu d'engager le cavalier en [c3] où {b:dxc4} suivi de {b:b5} gagnerait du temps, les Blancs mettent le fou du roi en fianchetto pour balayer la grande diagonale [h1]-[a8] et peser sur [d5] et [c6]. Les Noirs disposent de trois plans sains : {Bf5}, sortant le fou de cases blanches avant {b:e6} ; {Bg4}, faisant pression sur [f3] et [d4] ; ou le solide {e6} suivi de {b:Be7} ou {b:Bb4+}. Prendre tôt par {dxc4} laisse {w:Bg2} et {w:Ne5} regagner le pion avec l'initiative.",
+    "next": ["Bf5", "e6", "Bg4"],
+    "shapes": ["Bf1g2", "Gc8f5", "Ge7e6", "Rd5"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 g3 Bg4 Bg2 e6 O-O",
+    "en": "The Modern {Bg4} Line against the Catalan Slav. Black got the light-squared bishop outside the chain to [g4] before closing the door with {e6}, achieving a rock-solid triangle without a bad bishop! White has castled without wasting time defending [c4], because {b:dxc4} {w:Ne5} always regains the pawn with strong Catalan pressure. Black now develops the dark-squared bishop via {Be7} or {Bd6} (aiming for {b:O-O} and {b:Nbd7}), or plays {Nbd7} first so {w:Qb3} can be met calmly by {b:Qb6}.",
+    "fr": "La ligne moderne avec {Bg4} contre la Catalane slave. Les Noirs ont sorti leur fou de cases blanches avant de refermer la chaîne par {e6}, obtenant une forteresse solide sans mauvais fou. Les Blancs ont roqué sans craindre {b:dxc4}, car {w:Ne5} récupérerait toujours le pion avec un fort rayonnement catalan. Les Noirs développent maintenant leur fou de cases noires par {Be7}, {Bd6} ou {Nbd7} (prêt à répondre sereinement à {w:Qb3} par {b:Qb6}) avant de roquer.",
+    "next": ["Be7", "Nbd7", "Bd6"],
+    "shapes": ["Gf8e7", "Gb8d7", "Bg2c6", "Rg4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nbd2",
+    "en": "Breyer's Variation of the Slav. Placing the knight on [d2] looks modest, yet it carries real venom: White supports [c4], denies Black the usual {b:dxc4} plus {b:b5} tempo against a knight on [c3], and prepares {w:e3} or {w:g3} with zero tactical loose ends. Black develops the light-squared bishop cleanly with {Bf5} (meeting {w:Nh4} with {b:Bg6} or {b:Bc8}, and {w:Qb3} with {b:Qb6}) or {Bg4}, whereas {e6} steers straight into the Quiet Semi-Slav where White completes a harmonious Zukertort setup.",
+    "fr": "La variante Breyer de la Slave. Placer le cavalier en [d2] paraît modeste mais recèle du venin : les Blancs soutiennent [c4], privent les Noirs du gain de temps habituel {b:dxc4} suivi de {b:b5} contre un cavalier [c3], et préparent sereinement {w:g3} ou {w:e3}. Les Noirs sortent volontiers leur fou de cases blanches par {Bf5} (répondant à {w:Qb3} par {b:Qb6}) ou {Bg4}, tandis que {e6} mène tout droit à la Semi-Slave tranquille.",
+    "next": ["Bf5", "e6", "Bg4"],
+    "shapes": ["Gc8f5", "Ge7e6", "Gc8g4", "Rc4"]
+  },
+  {
+    "line": "d4 d5 c4 c6 e3",
+    "en": "Playing {e3} on move three rules out any gambit complications on [c4] at the cost of locking White's dark-squared bishop inside the pawn chain. Because [c8] is still unobstructed, Black equalizes effortlessly by bringing the light-squared bishop out first with {Bf5}—where {Bf5 Qb3} is met solidly by {b:Qb6} or {b:Qc7}—or by developing {Nf6} while keeping both {b:Bf5} and a Semi-Slav {e6} setup open.",
+    "fr": "Jouer {w:e3} dès le troisième coup écarte toute complication à l'aile dame au prix de l'enfermement volontaire du fou [c1]. La diagonale du fou [c8] étant encore grande ouverte, les Noirs égalisent sans effort en le sortant immédiatement par {Bf5} — où {Bf5 Qb3} est neutralisé solidement par {b:Qb6} ou {b:Qc7} — ou en développant {Nf6} tout en gardant le choix entre {b:Bf5} et la Semi-Slave {b:e6}.",
+    "next": ["Nf6", "Bf5", "e6"],
+    "shapes": ["Gg8f6", "Gc8f5", "Be7e6", "Rc4"]
+  }
+]

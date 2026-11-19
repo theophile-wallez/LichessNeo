@@ -14,6 +14,7 @@ import {
   tally,
 } from '#page/review/practice/status.ts';
 import { judged, type Spoken } from './practice-spoken.ts';
+import { theoryEndWords, theoryMissWords } from './practice-theory.ts';
 import { refutationWords } from './practice-why.ts';
 import {
   cheerWords,
@@ -141,7 +142,8 @@ function missWords(spoken: Spoken, miss: Miss): string[] {
   const { practice: strings } = spoken.session.language.ui;
   const { played, tries } = miss;
   const key = `${played.path}|${tries}`;
-  const refutation = refutationWords(spoken, miss);
+  // Theory's word on a known mistake says why, and how it's punished, better than the engine's line.
+  const refutation = theoryMissWords(spoken, miss) ?? refutationWords(spoken, miss);
   return [
     pickBy(whyMissed(spoken, miss), `why|${key}`),
     ...(refutation ? [refutation] : []),
@@ -163,8 +165,10 @@ function endWords(spoken: Spoken, status: Extract<PracticeStatus, { kind: 'end' 
   const { inBook, main } = tally(practice, analysis);
   const { path } = analysis;
   const { misses, bestStreak, grew } = practice;
+  const theory = theoryEndWords(spoken);
   return [
     pickBy(status.reason === 'length' ? strings.lineDone : strings.end, path),
+    ...(theory ? [theory] : []),
     ...(inBook > 0 ? [strings.tally(inBook, main)] : []),
     ...(misses > 0 ? [pickBy(strings.missesTally(misses), `misses|${path}`)] : []),
     ...(bestStreak >= BEST_STREAK

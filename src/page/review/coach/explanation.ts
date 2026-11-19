@@ -2,11 +2,14 @@ import { isError } from '#page/review/classes/classes.ts';
 import type { CommentPart } from '#page/review/comment/markup.ts';
 import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
+import type { PlayersAt } from '#page/review/theory/players.ts';
 import type { CoachContext } from './context.ts';
 import { type Findings, findings, punishes } from './fact.ts';
 import { hash } from './hash.ts';
 import { oneOf, turnStep } from './said.ts';
 import { remark } from './remark.ts';
+import { commonMistake } from './common-mistake.ts';
+import { leftTheory, theoryComment } from './theory.ts';
 import type { Threats } from './threat-facts.ts';
 import { toldLevel, trajectory } from './trajectory.ts';
 import { freshTold } from './told.ts';
@@ -29,6 +32,8 @@ export interface MoveContext {
   readonly turning: boolean;
   /** The ideas the moves just before said why of (`ideasOf`), not to say again. */
   readonly recent: ReadonlySet<string>;
+  /** What Lichess's players around the mover's rating play in the position before it, once looked up. */
+  readonly players?: PlayersAt | null;
 }
 
 interface Course {
@@ -78,7 +83,7 @@ function goodComment({ move, context, all, told }: Good): CommentPart[] {
  * advantage changes, unless it's all an error has to say. The error the game
  * turned on says so.
  */
-export function explanation(
+function judgedComment(
   move: MoveVerdict,
   context: CoachContext,
   { opening, threats, turning, recent }: MoveContext,
@@ -106,4 +111,24 @@ export function explanation(
     return [...told, ...turned, say(found), ...(followUp ? [say(followUp.text)] : []), ...details];
   }
   return goodComment({ move, context, all, told });
+}
+
+/**
+ * The coach's comment on a move: the opening theory of the position it
+ * reaches, explained, while the books have it; past them, the judged comment,
+ * led by what theory played instead on the move that leaves them.
+ */
+export function explanation(
+  move: MoveVerdict,
+  context: CoachContext,
+  moveContext: MoveContext,
+): CommentPart[] {
+  const { language } = context;
+  const common = commonMistake(move, language, moveContext.players ?? null);
+  const theory = theoryComment(move, language, moveContext.opening);
+  if (theory) return [...(common ? [say(common)] : []), ...theory];
+  const left = leftTheory(move, language);
+  const comment = judgedComment(move, context, moveContext);
+  // How common an error is comes first: it's what the player most wants to hear of it.
+  return [...(left ? [say(left)] : []), ...(common ? [say(common)] : []), ...comment];
 }

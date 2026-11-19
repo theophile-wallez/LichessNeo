@@ -7,6 +7,8 @@ export interface PgnNode {
   readonly san: string;
   comment: string;
   readonly children: PgnNode[];
+  /** Its annotation glyph when it came as a NAG ($2 is '?'): the coach's theory marks its mistakes so. */
+  mark?: string;
 }
 
 /** The position before the first move: its comment, and the moves from it. */
@@ -23,6 +25,14 @@ export interface PgnGame {
 const TOKENS = /\{[^}]*\}|[()]|;[^\n]*|\$\d+|\d+\.+|1-0|0-1|1\/2-1\/2|\*|[^\s(){};$]+/g;
 const TAG = /^\[(\w+)\s+"((?:[^"\\]|\\.)*)"\]\s*$/;
 const SKIPPED = /^(?:\$\d+|\d+\.+|1-0|0-1|1\/2-1\/2|\*|;.*)$/;
+const NAG_MARKS: Readonly<Record<string, string>> = {
+  $1: '!',
+  $2: '?',
+  $3: '!!',
+  $4: '??',
+  $5: '!?',
+  $6: '?!',
+};
 
 const addComment = (to: PgnTree, text: string): void => {
   const clean = text.slice(1, -1).trim();
@@ -45,6 +55,7 @@ export function parseMovetext(movetext: string): PgnTree {
       parent = before;
       last = null;
     } else if (token === ')') ({ parent, before, last } = stack.pop() ?? { parent, before, last });
+    else if (last && NAG_MARKS[token]) last.mark ??= NAG_MARKS[token];
     else if (!SKIPPED.test(token)) {
       const node: PgnNode = { san: token, comment: '', children: [] };
       parent.children.push(node);

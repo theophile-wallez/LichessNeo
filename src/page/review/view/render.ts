@@ -22,6 +22,7 @@ import { keepPage } from './openings-actions.ts';
 import { renderOpenings } from './openings-page.ts';
 import { syncModeTabs } from './mode-tabs.ts';
 import { renderMoves } from './moves-panel.ts';
+import { lookUpOpening } from './opening-lookups.ts';
 import { closeTools, spokenMove, stopPlaying } from './navigation.ts';
 import { renderKey } from './render-key.ts';
 import { stopPractice } from './practice.ts';
@@ -154,6 +155,7 @@ export function render(session: Session, force = false): void {
     return;
   }
   follow(session, analysis);
+  lookUpOpening(session, analysis);
   const key = renderKey(session, analysis);
   if (force || key !== view.lastKey) {
     view.lastKey = key;

@@ -11,6 +11,7 @@ import {
   setReviewDrawing,
 } from '#page/board/review-arrows.ts';
 import type { Mark, ReviewArrow } from '#shared/board/marks.ts';
+import { hasTheory } from '#page/review/coach/theory.ts';
 import { gameDivision } from '#page/review/game/division.ts';
 import { isGameNode, plyIndex } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
@@ -133,6 +134,8 @@ export function renderBoard(session: Session, analysis: Analysis): void {
   renderBar(session, analysis, shown);
   const move = boardMove(session, analysis, shown);
   setData(document.documentElement, 'lnExtCls', move ? move.moveClass : '');
+  // A move whose theory the coach explains gets a taller card (styles/review/layout.css).
+  setData(document.documentElement, 'lnExtTheory', move && hasTheory(move) ? 'on' : null);
   renderBadge(session, analysis, move);
   renderArrows(session, analysis, move);
   renderDrawing(session, analysis);

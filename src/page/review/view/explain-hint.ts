@@ -8,9 +8,11 @@ import {
   PUNISHMENT_PLIES,
 } from '#page/review/explain/lines.ts';
 import type { JudgedMove, Session } from '#page/review/session.ts';
+import { theoryAt } from '#page/review/theory/book.ts';
 import { openingOf } from './verdict.ts';
 
-// What Explain says in place of the coach's comment: a book move's opening,
+// What Explain says in place of the coach's comment: a book move's opening
+// where the books have no theory to explain,
 // or the engine's lines around a move that wasn't best. Each move of a line
 // plays the line up to itself (view/chips.ts).
 
@@ -56,6 +58,8 @@ function linesHint(session: Session, move: JudgedMove): CommentPart[] {
 /** Explain's sentences for `move`, none when it has nothing to add to the comment. */
 export function explainHint(session: Session, move: JudgedMove): CommentPart[] {
   if (move.moveClass === 'book') {
+    // The comment already explains the theory, and names the opening.
+    if (theoryAt(move.position.fen)) return [];
     const opening = openingOf(session, move);
     return opening ? [say(opening)] : [];
   }

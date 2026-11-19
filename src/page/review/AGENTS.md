@@ -41,3 +41,9 @@ practice's lookups, learned the hard way. The review's design is in
   place a chapter keeps our data. The session's routes can't create a private
   study: that takes an OAuth token (`study:write`, PKCE, no secret), given back
   once used (`practice/study-api.ts`).
+- **The theory's studies.** `/api/study/<id>/import-pgn` (a token's route)
+  refuses a chapter over 100,000 characters (and 3,000 moves) with a 200 all
+  the same: `{"chapters": [], "error": "PGN too large"}`, so read the answer
+  (`tools/openings/study.py`; `split.py` cuts a long chapter in parts). A
+  study holds 64 chapters, and one left with none gets an empty "Chapter 1"
+  of Lichess's: a push keeps one old chapter until the new ones are in.
