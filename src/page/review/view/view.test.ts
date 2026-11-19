@@ -152,14 +152,40 @@ describe('the board', () => {
 
   it('draws the best move for a move that needed it, and the engine’s off the game', () => {
     expect(
-      reviewArrowsFor({ moveClass: 'mistake', best: 'e2e4', threat: null, engine: null }),
+      reviewArrowsFor({
+        moveClass: 'mistake',
+        best: 'e2e4',
+        threat: null,
+        drawing: [],
+        engine: null,
+      }),
     ).toEqual([{ orig: 'e2', dest: 'e4', brush: 'best' }]);
     expect(
-      reviewArrowsFor({ moveClass: 'best', best: 'e2e4', threat: null, engine: 'g8f6' }),
+      reviewArrowsFor({
+        moveClass: 'best',
+        best: 'e2e4',
+        threat: null,
+        drawing: [],
+        engine: 'g8f6',
+      }),
     ).toEqual([{ orig: 'g8', dest: 'f6', brush: 'engine' }]);
-    expect(reviewArrowsFor({ moveClass: null, best: null, threat: null, engine: 'zz' })).toEqual(
-      [],
-    );
+    expect(
+      reviewArrowsFor({ moveClass: null, best: null, threat: null, drawing: [], engine: 'zz' }),
+    ).toEqual([]);
+  });
+
+  it('draws an inaccuracy’s threat only when the coach says what it does', () => {
+    const inaccuracy = {
+      moveClass: 'inaccuracy',
+      best: null,
+      threat: 'c3b5',
+      engine: null,
+    } as const;
+    const threat = [{ orig: 'c3', dest: 'b5', brush: 'threat' }];
+    expect(reviewArrowsFor({ ...inaccuracy, drawing: [] })).toEqual([]);
+    const said = [{ kind: 'link', from: 'c3', to: 'b5', tone: 'attack' }] as const;
+    expect(reviewArrowsFor({ ...inaccuracy, drawing: said })).toEqual(threat);
+    expect(reviewArrowsFor({ ...inaccuracy, moveClass: 'mistake', drawing: [] })).toEqual(threat);
   });
 
   it('shows the eval bar’s score for the position on the board', () => {

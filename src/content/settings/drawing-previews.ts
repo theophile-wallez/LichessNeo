@@ -1,4 +1,6 @@
 import { drawingMarkup } from '#shared/board/drawing.ts';
+import { occupiedBy } from '#shared/board/geometry.ts';
+import { parseFen } from '#shared/chess/fen.ts';
 import type { Mark } from '#shared/board/marks.ts';
 import type { DrawingTopic } from '#shared/coach-drawings.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
@@ -115,6 +117,6 @@ const SCENES: Readonly<Record<DrawingTopic, Scene>> = {
 /** The board of `topic`'s example, its drawing under the pieces. */
 export function previewMarkup(topic: DrawingTopic): SafeHtml {
   const { fen, move, marks } = SCENES[topic];
-  const drawing = html`<svg class="ln-ext-drawings__marks" viewBox="0 0 8 8">${drawingMarkup(marks, true)}</svg>`;
+  const drawing = html`<svg class="ln-ext-drawings__marks" viewBox="0 0 8 8">${drawingMarkup(marks, true, occupiedBy(parseFen(fen).board.keys(), true))}</svg>`;
   return boardMarkup({ fen, orientation: 'white', lastMove: moveSquares(move) }, drawing);
 }

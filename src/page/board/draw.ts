@@ -7,7 +7,8 @@ import { mateBadgeMarkup } from '#shared/mate-badge.ts';
 import { createSvgElement } from '#shared/svg.ts';
 import { currentNode } from '#page/lichess/analysis.ts';
 import { ENGINE_COLOR, REVIEW_COLOR, THREAT_COLOR } from '#shared/board/colors.ts';
-import { squareCenter } from '#shared/board/geometry.ts';
+import { occupiedBy, squareCenter } from '#shared/board/geometry.ts';
+import { parseFen } from '#shared/chess/fen.ts';
 import { clearOfArrows, drawingMarkup } from '#shared/board/drawing.ts';
 import { arrowPolygons, arrowsMarkup, fillsMarkup } from './render.ts';
 import type { ReviewArrow } from '#shared/board/marks.ts';
@@ -79,7 +80,9 @@ export function createShapeDrawer({ mateLabel }: DrawOptions): () => void {
     const below = reviewing ? null : queryOne(container, 'svg.cg-shapes-below', Element);
     const variations = below ? readVariations(below) : [];
     arrows.push(...reviewArrows().map(arrow => reviewArrow(arrow, whiteAtBottom)));
-    const mate = checkmate(currentNode());
+    const node = currentNode();
+    const occupied = occupiedBy(parseFen(node?.fen ?? '').board.keys(), whiteAtBottom);
+    const mate = checkmate(node);
     root.classList.toggle('ln-ext-shows-mate', mate !== null);
     const badge = mate
       ? mateBadgeMarkup({
@@ -89,10 +92,10 @@ export function createShapeDrawer({ mateLabel }: DrawOptions): () => void {
         })
       : html``;
     const drawing = clearOfArrows(reviewDrawing(), reviewArrows());
-    const under = html`${fillsMarkup(fills)}${arrowPolygons(variations)}${drawingMarkup(drawing, whiteAtBottom)}`;
+    const under = html`${fillsMarkup(fills)}${arrowPolygons(variations, occupied)}${drawingMarkup(drawing, whiteAtBottom, occupied)}`;
     drawn = {
       under: redrawn(marks, under, drawn.under),
-      over: redrawn(layer, arrowsMarkup(arrows), drawn.over),
+      over: redrawn(layer, arrowsMarkup(arrows, occupied), drawn.over),
       mate: redrawn(mateLayer, badge, drawn.mate),
     };
   };

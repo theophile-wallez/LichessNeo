@@ -86,6 +86,10 @@ function renderBadge(session: Session, analysis: Analysis, move: JudgedMove | nu
   else elements.overlay.replaceChildren();
 }
 
+// The comment's drawing on the move at `path`, whatever the settings show of it.
+const commentMarks = ({ drawing }: Session['view'], path: string): readonly Mark[] =>
+  drawing.path === path ? drawing.marks : [];
+
 // Draws the best move and the reply an error lets in with the board's other
 // arrows. Off the game's moves it also draws the engine's move from here, as
 // Lichess does on the free board. A retry and practice draw none: they'd give
@@ -99,6 +103,7 @@ function boardArrows(session: Session, analysis: Analysis, move: JudgedMove | nu
     moveClass: move?.moveClass ?? null,
     best: move?.best ?? null,
     threat: move?.after.best ?? null,
+    drawing: commentMarks(view, analysis.path),
     engine: offGame ? (live.evals.get(analysis.node.fen)?.best ?? null) : null,
   });
   // The comment's move under the pointer (chips.ts).

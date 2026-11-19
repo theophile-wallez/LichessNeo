@@ -77,7 +77,7 @@ function commentScene(move: MoveVerdict, input: SceneInput, line: Line | null): 
       ...base,
       fen: move.position.fen,
       under: underMarkup(shownOf(move), explained.drawing),
-      over: overMarkup(shownOf(move)),
+      over: overMarkup(shownOf(move), explained.drawing),
     };
   const from = lineBase(move, line);
   const last = line.ucis.at(-1) ?? '';

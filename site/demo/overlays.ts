@@ -2,7 +2,8 @@ import { isSquare, type Square } from '#shared/chess/index.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { ENGINE_COLOR, REVIEW_COLOR, THREAT_COLOR } from '#shared/board/colors.ts';
 import { drawingMarkup } from '#shared/board/drawing.ts';
-import { squareCenter } from '#shared/board/geometry.ts';
+import { EMPTY_BOARD, occupiedBy, type Occupied, squareCenter } from '#shared/board/geometry.ts';
+import { parseFen } from '#shared/chess/fen.ts';
 import { arrowPolygons } from '#page/board/render.ts';
 import type { Mark, ReviewArrow } from '#shared/board/marks.ts';
 import { normalizeUci } from '#page/review/chess/notation.ts';
@@ -10,6 +11,7 @@ import type { MoveClass } from '#page/review/classes/classes.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { badgeMarkup, reviewArrowsFor } from '#page/review/view/board-badge.ts';
 import { squareStyle } from './board.ts';
+import { fenAfter } from './explain.ts';
 
 // What the demo draws around the pieces for the move on the board, with the
 // extension's own code (page/board, page/review/view/board-badge.ts): under
@@ -51,6 +53,10 @@ function squaresOf(move: Shown): [Square, Square] | null {
   return isSquare(from) && isSquare(to) ? [from, to] : null;
 }
 
+// The pieces on the board once the move is played, which a knight's lines go round.
+const occupiedAfter = (move: Shown | null): Occupied =>
+  move ? occupiedBy(parseFen(fenAfter(move.fen, [move.uci])).board.keys(), true) : EMPTY_BOARD;
+
 /** The move's squares, the square picked while retrying, and the coach's drawing. */
 export function underMarkup(
   move: Shown | null,
@@ -65,16 +71,18 @@ export function underMarkup(
   const pick = picked
     ? html`<i class="demo-last demo-last--picked" style="${squareStyle(picked)}"></i>`
     : '';
-  return html`${last}${pick}<svg class="demo-shapes" viewBox="0 0 8 8" aria-hidden="true">${drawingMarkup(drawing, true)}</svg>`;
+  return html`${last}${pick}<svg class="demo-shapes" viewBox="0 0 8 8" aria-hidden="true">${drawingMarkup(drawing, true, occupiedAfter(move))}</svg>`;
 }
 
-export function overMarkup(move: Shown | null): SafeHtml {
+/** The arrows and the badge; `drawing` is the coach's, whose reply an inaccuracy's arrow needs. */
+export function overMarkup(move: Shown | null, drawing: readonly Mark[] = []): SafeHtml {
   const { moveClass } = move ?? {};
   if (!move || !moveClass) return html``;
   const arrows = reviewArrowsFor({
     moveClass,
     best: move.best,
     threat: move.threat,
+    drawing,
     engine: null,
   }).map(({ orig, dest, brush }) => ({
     from: squareCenter(orig, true),
@@ -88,5 +96,5 @@ export function overMarkup(move: Shown | null): SafeHtml {
     san: move.san,
     orientation: 'white',
   });
-  return html`<svg class="demo-shapes" viewBox="0 0 8 8" aria-hidden="true">${arrowPolygons(arrows)}</svg>${badge}`;
+  return html`<svg class="demo-shapes" viewBox="0 0 8 8" aria-hidden="true">${arrowPolygons(arrows, occupiedAfter(move))}</svg>${badge}`;
 }

@@ -22,6 +22,18 @@ export function squareCenter(square: Square, whiteAtBottom: boolean): Point {
   return [column + 0.5, row + 0.5];
 }
 
+/** Whether a square, by its center as shown, holds a piece: what a knight's path goes round. */
+export type Occupied = (center: Point) => boolean;
+
+export const EMPTY_BOARD: Occupied = () => false;
+
+const key = ([x, y]: Point): string => `${x},${y}`;
+
+export function occupiedBy(squares: Iterable<Square>, whiteAtBottom: boolean): Occupied {
+  const centers = new Set([...squares].map(square => key(squareCenter(square, whiteAtBottom))));
+  return center => centers.has(key(center));
+}
+
 export interface ArrowPath {
   readonly from: Point;
   /** Where a knight's arrow turns. */
@@ -29,14 +41,31 @@ export interface ArrowPath {
   readonly tip: Point;
 }
 
-/** A straight arrow, or an L for a knight's move: the long leg first. */
-export function arrowPath(from: Point, tip: Point): ArrowPath {
+// The square in the middle of a leg two squares long.
+const middleOf = (start: Point, end: Point): Point[] =>
+  Math.hypot(end[0] - start[0], end[1] - start[1]) === 2
+    ? [[(start[0] + end[0]) / 2, (start[1] + end[1]) / 2]]
+    : [];
+
+// The squares an L crosses between its ends: its corner, and the middle of its long leg.
+function piecesCrossed(from: Point, corner: Point, tip: Point, occupied: Occupied): number {
+  return [corner, ...middleOf(from, corner), ...middleOf(corner, tip)].filter(occupied).length;
+}
+
+/**
+ * A straight arrow, or an L for a knight's move: the long leg first, unless
+ * the other way round crosses fewer pieces, which a path over them hides.
+ */
+export function arrowPath(from: Point, tip: Point, occupied: Occupied = EMPTY_BOARD): ArrowPath {
   const across = Math.abs(tip[0] - from[0]);
   const down = Math.abs(tip[1] - from[1]);
   const isKnightMove = (across === 1 && down === 2) || (across === 2 && down === 1);
   if (!isKnightMove) return { from, tip };
-  const corner: Point = across > down ? [tip[0], from[1]] : [from[0], tip[1]];
-  return { from, corner, tip };
+  const longFirst: Point = across > down ? [tip[0], from[1]] : [from[0], tip[1]];
+  const shortFirst: Point = across > down ? [from[0], tip[1]] : [tip[0], from[1]];
+  const clearer =
+    piecesCrossed(from, shortFirst, tip, occupied) < piecesCrossed(from, longFirst, tip, occupied);
+  return { from, corner: clearer ? shortFirst : longFirst, tip };
 }
 
 function direction(from: Point, to: Point): Point {

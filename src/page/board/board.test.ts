@@ -2,7 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { checkmate } from '#shared/chess/mate.ts';
 import { setHtml } from '#shared/html.ts';
 import { LegacySchema } from './fixtures/schema.ts';
-import { arrowOutline, arrowPath, squareCenter, squareOnScreen } from '#shared/board/geometry.ts';
+import {
+  arrowOutline,
+  arrowPath,
+  occupiedBy,
+  squareCenter,
+  squareOnScreen,
+} from '#shared/board/geometry.ts';
+import { parseFen } from '#shared/chess/fen.ts';
 import { arrowsMarkup, fillsMarkup } from './render.ts';
 // What the original script drew.
 import legacyJson from './fixtures/legacy.json' with { type: 'json' };
@@ -38,6 +45,22 @@ describe('arrowPath', () => {
       tip: [3.5, 2.5],
     });
     expect(arrowPath([4.5, 6.5], [4.5, 4.5])).toEqual({ from: [4.5, 6.5], tip: [4.5, 4.5] });
+  });
+
+  // After 9… Qc7 in lichess.org/hSiTwSSO, seen from Black.
+  const board = parseFen('r1b1kb1r/ppqp1ppp/4pn2/2n5/2P5/P1N1BP2/1P2N1PP/R2QKB1R w KQkq - 1 10');
+  const occupied = occupiedBy(board.board.keys(), false);
+  const path = (from: 'b5' | 'c3', to: 'b5' | 'c7') =>
+    arrowPath(squareCenter(from, false), squareCenter(to, false), occupied);
+
+  it('bends the other way round when it crosses fewer pieces', () => {
+    // By b3 and b4, empty, rather than over the pawn on c4 and the knight on c5.
+    expect(path('c3', 'b5').corner).toEqual(squareCenter('b3', false));
+  });
+
+  it('keeps the long leg first when both ways cross as many pieces', () => {
+    // The pawn on b7 one way, the knight on c5 the other.
+    expect(path('b5', 'c7').corner).toEqual(squareCenter('b7', false));
   });
 });
 

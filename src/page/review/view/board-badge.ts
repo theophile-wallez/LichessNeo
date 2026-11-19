@@ -3,7 +3,7 @@ import type { Color } from '#shared/chess/types.ts';
 import type { Point } from '#shared/geometry.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { squareOnScreen } from '#shared/board/geometry.ts';
-import type { ReviewArrow } from '#shared/board/marks.ts';
+import type { Mark, ReviewArrow } from '#shared/board/marks.ts';
 import { CLASS_COLORS, GOOD, type MoveClass } from '#page/review/classes/classes.ts';
 import { classSvg } from '#page/review/classes/icon-svg.ts';
 
@@ -50,21 +50,33 @@ export interface ArrowsInput {
   readonly moveClass: MoveClass | null;
   /** The engine's best move instead of the one played. */
   readonly best: string | null;
-  /** The reply that punishes a mistake or a blunder. */
+  /** The reply that punishes an error. */
   readonly threat: string | null;
+  /** The coach's drawing of its comment on the move. */
+  readonly drawing: readonly Mark[];
   /** The engine's move from the position on the board, off the game's moves. */
   readonly engine: string | null;
 }
 
 const THREATENED: ReadonlySet<MoveClass> = new Set<MoveClass>(['mistake', 'blunder']);
 
+// An inaccuracy's reply often wins little: its arrow shows when the coach
+// says what it does, which draws the reply's line first.
+const threatSaid = (threat: string, drawing: readonly Mark[]): boolean =>
+  drawing.some(mark => mark.kind === 'link' && `${mark.from}${mark.to}` === threat.slice(0, 4));
+
 /**
  * The best move when the one played needed a correction, the reply that
  * punishes an error, and the engine's move off the game.
  */
-export function reviewArrowsFor({ moveClass, best, threat, engine }: ArrowsInput): ReviewArrow[] {
+export function reviewArrowsFor(input: ArrowsInput): ReviewArrow[] {
+  const { moveClass, best, threat, engine } = input;
   const arrows = moveClass && best && !GOOD.has(moveClass) ? arrow(best, 'best') : [];
-  if (moveClass && threat && THREATENED.has(moveClass)) arrows.push(...arrow(threat, 'threat'));
+  const threatened =
+    moveClass !== null &&
+    (THREATENED.has(moveClass) ||
+      (moveClass === 'inaccuracy' && threat !== null && threatSaid(threat, input.drawing)));
+  if (threat && threatened) arrows.push(...arrow(threat, 'threat'));
   if (engine) arrows.push(...arrow(engine, 'engine'));
   return arrows;
 }

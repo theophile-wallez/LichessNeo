@@ -2,7 +2,7 @@ import type { Square } from '#shared/chess/types.ts';
 import type { Point } from '#shared/geometry.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { PLAN_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
-import { arrowPath, squareCenter, squareOnScreen } from './geometry.ts';
+import { arrowPath, EMPTY_BOARD, squareCenter, squareOnScreen, type Occupied } from './geometry.ts';
 import type { Mark, MarkTone, ReviewArrow } from './marks.ts';
 import { runMarkup } from './run.ts';
 
@@ -45,10 +45,11 @@ function cellsMarkup(squares: readonly Square[], color: string, whiteAtBottom: b
 // A knight's turns as its arrow does, and a quarter square apart, a dot sits
 // on the corner. A solid line under a mask draws them in from the start, its
 // round caps keeping the end dots whole.
-function linkMarkup(link: Link, id: number, whiteAtBottom: boolean): SafeHtml {
+function linkMarkup(link: Link, id: number, board: Board): SafeHtml {
   const { from, corner, tip } = arrowPath(
-    squareCenter(link.from, whiteAtBottom),
-    squareCenter(link.to, whiteAtBottom),
+    squareCenter(link.from, board.whiteAtBottom),
+    squareCenter(link.to, board.whiteAtBottom),
+    board.occupied,
   );
   const points = (corner ? [from, corner, tip] : [from, tip])
     .map(([x, y]) => `${x},${y}`)
@@ -93,25 +94,39 @@ export const clearOfArrows = (marks: readonly Mark[], arrows: readonly ReviewArr
     mark => mark.kind !== 'link' || !arrows.some(arrow => alongArrow([mark.from, mark.to], arrow)),
   );
 
-function markMarkup(mark: Mark, whiteAtBottom: boolean, index: number): SafeHtml {
+interface Board {
+  readonly whiteAtBottom: boolean;
+  readonly occupied: Occupied;
+}
+
+function markMarkup(mark: Mark, board: Board, index: number): SafeHtml {
+  const { whiteAtBottom } = board;
   if (mark.kind === 'area') return areaMarkup(mark.from, mark.to, whiteAtBottom);
   const color = TONES[mark.tone];
   if (mark.kind === 'cells') return cellsMarkup(mark.squares, color, whiteAtBottom);
   if (mark.kind === 'run') return runMarkup(mark, color, whiteAtBottom);
-  if (mark.kind === 'link') return linkMarkup(mark, index, whiteAtBottom);
+  if (mark.kind === 'link') return linkMarkup(mark, index, board);
   if (mark.kind === 'barred') return barredMarkup(mark.square, color, whiteAtBottom, index);
   return ringMarkup(mark.square, color, whiteAtBottom);
 }
 
-/** The coach's drawing, its strokes layered by kind, each layer coming in after the last. */
-export function drawingMarkup(marks: readonly Mark[], whiteAtBottom: boolean): SafeHtml {
+/**
+ * The coach's drawing, its strokes layered by kind, each layer coming in after
+ * the last; a knight's lines go round the `occupied` squares where they can.
+ */
+export function drawingMarkup(
+  marks: readonly Mark[],
+  whiteAtBottom: boolean,
+  occupied: Occupied = EMPTY_BOARD,
+): SafeHtml {
   if (marks.length === 0) return html``;
+  const board = { whiteAtBottom, occupied };
   const layers = LAYERS.flatMap(kind => {
     const strokes = marks.filter(mark => mark.kind === kind);
     return strokes.length > 0 ? [strokes] : [];
   });
   return html`<g class="ln-ext-drawing">${layers.map(
     (strokes, step) =>
-      html`<g class="ln-ext-drawing__layer" style="--ln-ext-step:${step}">${strokes.map((mark, i) => markMarkup(mark, whiteAtBottom, i))}</g>`,
+      html`<g class="ln-ext-drawing__layer" style="--ln-ext-step:${step}">${strokes.map((mark, i) => markMarkup(mark, board, i))}</g>`,
   )}</g>`;
 }

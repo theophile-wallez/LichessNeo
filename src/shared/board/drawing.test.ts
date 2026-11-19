@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { setHtml } from '#shared/html.ts';
 import { PLAN_COLOR, REVIEW_COLOR, THREAT_COLOR } from './colors.ts';
 import { clearOfArrows, drawingMarkup } from './drawing.ts';
+import { occupiedBy } from './geometry.ts';
 import type { Mark } from './marks.ts';
 
 const svg = (marks: readonly Mark[], whiteAtBottom = true): SVGElement => {
@@ -140,6 +141,16 @@ describe('the coach’s lines', () => {
     expect(linePoints({ kind: 'link', from: 'b2', to: 'e5', tone: 'attack' })).toEqual(
       Array(2).fill('1.5,6.5 4.5,3.5'),
     );
+  });
+
+  it('bends a knight’s line round the pieces in its long leg’s way', () => {
+    const knight: Mark = { kind: 'link', from: 'g1', to: 'f3', tone: 'attack' };
+    const element = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    setHtml(element, drawingMarkup([knight], true, occupiedBy(['g2'], true)));
+    const points = [...element.querySelectorAll('polyline')].map(line =>
+      line.getAttribute('points'),
+    );
+    expect(points).toEqual(Array(2).fill('6.5,7.5 5.5,7.5 5.5,5.5'));
   });
 
   it('gives each line a mask of its own', () => {
