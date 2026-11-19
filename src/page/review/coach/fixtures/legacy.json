@@ -983,7 +983,9 @@
         "remark": "An opportunity slips away.",
         "parts": [
           ["White had a clear advantage, but the game is now balanced.", true],
-          ["Black’s last move was a mistake, and [[m:w:Bb5]] would have punished it."]
+          [
+            "Black’s last move was a mistake, and [[m:w:Bb5]] would have punished it, lining the [[p:wb]]bishop up with the [[p:bk]]king."
+          ]
         ]
       },
       {
@@ -1029,7 +1031,12 @@
       },
       {
         "remark": "Spot on.",
-        "parts": [["Spot on."], ["Back to equal.", true]]
+        "parts": [
+          [
+            "The [[p:bb]]bishop lines up with the [[p:wk]]king, creating tactical threats along the line."
+          ],
+          ["Back to equal.", true]
+        ]
       },
       {
         "remark": "Oh no! This loses a lot.",
@@ -1245,7 +1252,9 @@
         "remark": "Une occasion qui s’envole.",
         "parts": [
           ["Les Blancs avaient un net avantage, mais la partie est maintenant équilibrée.", true],
-          ["Le dernier coup des Noirs était une erreur, et [[m:w:Bb5]] l’aurait puni."]
+          [
+            "Le dernier coup des Noirs était une erreur, et [[m:w:Bb5]] l’aurait puni : ce coup alignait le [[p:wb]]fou face au [[p:bk]]roi."
+          ]
         ]
       },
       {
@@ -1291,7 +1300,10 @@
       },
       {
         "remark": "Dans le mille.",
-        "parts": [["Dans le mille."], ["Retour à l’égalité.", true]]
+        "parts": [
+          ["Le [[p:bb]]fou s’aligne face au [[p:wk]]roi, de quoi créer des menaces sur la ligne."],
+          ["Retour à l’égalité.", true]
+        ]
       },
       {
         "remark": "Oh non ! Ça coûte très cher.",

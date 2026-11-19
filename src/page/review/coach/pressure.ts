@@ -3,6 +3,7 @@ import {
   attackers,
   type Board,
   type Color,
+  kingSquare,
   opposite,
   type Piece,
   PIECE_VALUES,
@@ -238,7 +239,19 @@ export function rookPlan(after: Board, [from, to]: [Square, Square], color: Colo
   const battery = batteryPlan(after, [from, to]);
   if (battery) return battery;
   const halfOpen = pawnsOn(after, file, opposite(color)).length > 0;
-  return { kind: 'openFile', halfOpen, contested: faced(after, to, color) };
+  const king = kingOnFile(after, file, opposite(color));
+  return {
+    kind: 'openFile',
+    halfOpen,
+    contested: faced(after, to, color),
+    ...(king ? { king } : {}),
+  };
+}
+
+// The other side's king when it stands on `file`.
+function kingOnFile(after: Board, file: number, them: Color): Piece | null {
+  const king = kingSquare(after, them);
+  return king && squareCoords(king)[0] === file ? { role: 'king', color: them } : null;
 }
 
 /** The queen come onto a file free of its pawns, to face a rook or the queen of the other side's there. */

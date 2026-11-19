@@ -21,10 +21,18 @@ export type Plan =
   /**
    * A rook on a file without pawns of its own, `halfOpen` when the other side
    * has some, `contested` when a rook or queen of the other side's faces it
-   * there; the queen's only when contested.
+   * there (the queen's only when contested), `king` when the other side's king
+   * stands on that file.
    */
-  | { readonly kind: 'openFile'; readonly halfOpen: boolean; readonly contested: boolean }
+  | {
+      readonly kind: 'openFile';
+      readonly halfOpen: boolean;
+      readonly contested: boolean;
+      readonly king?: Piece;
+    }
   | { readonly kind: 'doublesRooks' }
+  /** A slider lined up with the other side's `king` through pieces or pawns in between. */
+  | { readonly kind: 'facesKing'; readonly piece: Piece; readonly king: Piece }
   /** A rook or the queen lined up with `partner`, the other, on a file free of their pawns. */
   | {
       readonly kind: 'fileBattery';
@@ -244,7 +252,9 @@ export type PlainReason = (typeof PLAIN_KINDS)[number];
 /** The reasons about the line a piece moved to: an open file, a battery. */
 export type LineReason = Extract<
   Reason,
-  { readonly kind: 'openFile' | 'fileBattery' | 'diagonalBattery' | 'preparesBattery' }
+  {
+    readonly kind: 'openFile' | 'fileBattery' | 'diagonalBattery' | 'preparesBattery' | 'facesKing';
+  }
 >;
 
 const LINE: ReadonlySet<string> = new Set([
@@ -252,6 +262,7 @@ const LINE: ReadonlySet<string> = new Set([
   'fileBattery',
   'diagonalBattery',
   'preparesBattery',
+  'facesKing',
 ]);
 
 export const isLineReason = (reason: Reason): reason is LineReason => LINE.has(reason.kind);

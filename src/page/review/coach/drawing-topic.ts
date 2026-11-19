@@ -28,6 +28,7 @@ const REASON_TOPICS: Partial<Readonly<Record<Reason['kind'], DrawingTopic>>> = {
   pins: 'pins',
   hitsPinned: 'pins',
   discovery: 'lines',
+  facesKing: 'lines',
   discoveredCheck: 'checks',
   checks: 'checks',
   chases: 'threats',

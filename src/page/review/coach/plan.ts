@@ -10,38 +10,32 @@ import type { MoveVerdict } from '#page/review/judge/types.ts';
 import type { PlanSentences, Ways } from '#page/review/i18n/types.ts';
 import type { Plan, Reason } from './idea.ts';
 import {
-  contestsFile,
   fightsCenter,
   keptPinOf,
   pawnTargetOf,
   pressureOf,
-  rookPlan,
   rooksConnected,
   supportsCenter,
   takesCenter,
   uncoveredOf,
 } from './pressure.ts';
-import { rookLiftOf } from './attack-plans.ts';
-import { batteryPlan, batteryReady } from './battery.ts';
-import { blockadeOf } from './blockade.ts';
+import { batteryReady } from './battery.ts';
 import { discoveryOf } from './discovery.ts';
 import { reasonMarks } from './drawing.ts';
-import { cutsOffOf } from './endgame-plans.ts';
-import { rookRuleOf } from './rook-endings.ts';
 import { fianchettoOf } from './fianchetto.ts';
 import { kingPlan } from './king-plan.ts';
 import { openedLineOf } from './open-line.ts';
 import { passedPlan } from './passed-pawns.ts';
-import { philidorOf } from './philidor.ts';
 import { outOfReach, outruns } from './pawn-square.ts';
 import { pinnedTargetOf } from './pinned-target.ts';
 import { planWays } from './plan-ways.ts';
 import { queenTradeOf } from './queen-trade.ts';
-import { behindPasser, blocksPasser, centralSquare, safetyPlan } from './safety.ts';
+import { safetyPlan } from './safety.ts';
 import { drawn, type Fact, oneOf, said } from './said.ts';
 import { reasonTopic } from './drawing-topic.ts';
 import { pawnShape } from './pawn-shape.ts';
-import { isOutpost, isPassed, OPENING_PLIES, ownRank } from './structure.ts';
+import { squarePlan } from './square-plan.ts';
+import { isPassed, OPENING_PLIES, ownRank } from './structure.ts';
 import { evaluationLevel } from './trajectory.ts';
 import { isZugzwang } from './zugzwang.ts';
 
@@ -75,37 +69,6 @@ const BACK_SQUARES: Readonly<Record<Color, readonly string[]>> = {
   black: ['b8', 'c8', 'f8', 'g8'],
 };
 
-// A knight's or a rook's square: a blockade, an outpost, the center, behind a passed pawn, a
-// file or rank; a bishop's or the queen's, a battery, or the queen's, a file contested.
-function squarePlan({ after, color }: Play, from: Square, to: Square): Plan | null {
-  const piece = after.get(to);
-  if (piece?.role === 'knight') {
-    const blockade = blockadeOf(after, to, piece);
-    if (blockade) return blockade;
-    if (isOutpost(after, to, piece)) return { kind: 'outpost', piece };
-    return centralSquare(to) && !centralSquare(from) ? { kind: 'centralizes', piece } : null;
-  }
-  if (piece?.role === 'bishop') return batteryPlan(after, [from, to]);
-  if (piece?.role === 'queen')
-    return batteryPlan(after, [from, to]) ?? contestsFile(after, [from, to], color);
-  return piece?.role === 'rook' ? rookSquarePlan(after, [from, to], color) : null;
-}
-
-// The Lucena's bridge or the Vancura defense, behind a passed pawn, the Philidor defense, in front of the other side's pawn,
-// cutting the other king off,
-// lifted toward the castled king, then the file or rank it takes.
-function rookSquarePlan(after: Board, [from, to]: [Square, Square], color: Color): Plan | null {
-  const rule = rookRuleOf({ after, color, from, to });
-  if (rule) return rule;
-  if (behindPasser(after, to, color)) return { kind: 'behindPasser' };
-  const philidor = philidorOf(after, [from, to], color);
-  if (philidor) return philidor;
-  if (blocksPasser(after, to, color)) return { kind: 'blocksPasser' };
-  const cut = cutsOffOf(after, [from, to], color) ?? rookLiftOf(after, [from, to], color);
-  if (cut) return cut;
-  return ownRank(from, color) === 6 ? null : rookPlan(after, [from, to], color);
-}
-
 function piecePlan(play: Play, from: Square, to: Square): Plan | null {
   const { after, color } = play;
   const piece = after.get(to);
@@ -116,7 +79,7 @@ function piecePlan(play: Play, from: Square, to: Square): Plan | null {
   if (opening && (piece.role === 'knight' || piece.role === 'bishop'))
     return { kind: 'develops', piece };
   if (piece.role === 'king') return kingPlan({ before: play.before, after, color, from, to });
-  return squarePlan(play, from, to);
+  return squarePlan(after, [from, to], color);
 }
 
 // A piece off the back rank that leaves the rooks seeing each other.
@@ -222,6 +185,7 @@ const WATCHED: ReadonlySet<Plan['kind']> = new Set<Plan['kind']>([
   'vancura',
   'outpost',
   'openFile',
+  'facesKing',
   'doublesRooks',
   'fileBattery',
   'diagonalBattery',

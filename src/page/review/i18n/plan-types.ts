@@ -47,8 +47,10 @@ export type QuietWhy = (reason: QuietReason, now: boolean) => string;
 export interface PlanSentences extends QuietPlanSentences {
   readonly develops: (piece: Piece) => Ways;
   readonly outpost: (piece: Piece) => Ways;
-  /** A rook on a file without pawns, or `halfOpen`, the other side's only; `contested` when the other side's rook or queen is there too. */
-  readonly openFile: (halfOpen: boolean, contested: boolean) => Ways;
+  /** A rook on a file without pawns, or `halfOpen`, the other side's only; `contested` when the other side's rook or queen is there too; `king` when the other king stands on it. */
+  readonly openFile: (halfOpen: boolean, contested: boolean, king?: Piece | null) => Ways;
+  /** A slider lined up with the other side's `king` through pieces or pawns in between. */
+  readonly facesKing: (piece: Piece, king: Piece) => Ways;
   readonly doublesRooks: Ways;
   /** `mover` lined up with `partner` on a file, `halfOpen` when the other side has pawns there. */
   readonly fileBattery: (mover: Piece, partner: Piece, halfOpen: boolean) => Ways;

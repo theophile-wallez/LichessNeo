@@ -1,6 +1,6 @@
 import type { Piece } from '#shared/chess/index.ts';
 import type { PassedTrait } from '#page/review/coach/passed-pawns.ts';
-import { agreement, capitalize, owned, pronoun } from './fr-grammar.ts';
+import { agreement, capitalize, ofThe, owned, pronoun, toThe } from './fr-grammar.ts';
 import { quietPlansFr } from './fr-quiet-plans.ts';
 import { tacticPlansFr } from './fr-tactic-plans.ts';
 import { whyFr } from './fr-why.ts';
@@ -38,6 +38,8 @@ const PASSED: Record<PassedTrait | 'born' | 'pushed', Ways> = {
 type PiecePlans =
   | 'develops'
   | 'outpost'
+  | 'openFile'
+  | 'facesKing'
   | 'chases'
   | 'developsWithTempo'
   | 'traps'
@@ -53,21 +55,6 @@ type PiecePlans =
   | 'diagonalBattery';
 
 const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | 'why'> = {
-  openFile: (halfOpen, contested) => {
-    const file = `la colonne ${halfOpen ? 'semi-ouverte' : 'ouverte'}`;
-    if (contested)
-      return [
-        `Ça conteste ${file}.`,
-        `Ça vient disputer ${file} à l’autre camp.`,
-        `${capitalize(file)} est contestée : l’autre camp ne l’aura pas seul.`,
-      ];
-    return [
-      `La tour prend ${file}, sa place idéale.`,
-      `La tour prend ${file}.`,
-      `La tour s’empare de ${file} : c’est là qu’une tour s’épanouit.`,
-      `La tour se poste sur ${file}, prête à frapper.`,
-    ];
-  },
   doublesRooks: [
     'Les tours se doublent : deux fois plus de pression sur la colonne.',
     'Deux tours sur la même colonne : une batterie redoutable.',
@@ -166,10 +153,40 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | '
   ],
 };
 
+function openFileWays(the: (piece: Piece) => string): PlanSentences['openFile'] {
+  return (halfOpen, contested, king = null) => {
+    const file = `la colonne ${halfOpen ? 'semi-ouverte' : 'ouverte'}`;
+    if (contested)
+      return [
+        `Ça conteste ${file}.`,
+        `Ça vient disputer ${file} à l’autre camp.`,
+        `${capitalize(file)} est contestée : l’autre camp ne l’aura pas seul.`,
+      ];
+    if (king)
+      return [
+        `La tour prend ${file}, pile face ${toThe(the(king))}.`,
+        `La tour s’empare de ${file} et s’aligne face ${toThe(the(king))}.`,
+        `La tour se poste sur ${file}, directement en face ${ofThe(the(king))}.`,
+      ];
+    return [
+      `La tour prend ${file}, sa place idéale.`,
+      `La tour prend ${file}.`,
+      `La tour s’empare de ${file} : c’est là qu’une tour s’épanouit.`,
+      `La tour se poste sur ${file}, prête à frapper.`,
+    ];
+  };
+}
+
 // What a quiet move does for the position.
 export function plansFr(viewer: Viewer): PlanSentences {
   const the = (piece: Piece): string => owned(viewer, piece);
   return {
+    openFile: openFileWays(the),
+    facesKing: (piece, king) => [
+      `${capitalize(the(piece))} s’aligne face ${toThe(the(king))}, de quoi créer des menaces sur la ligne.`,
+      `${capitalize(the(piece))} vise ${the(king)} en rayon X : tout ce qui se trouve entre les deux est sous pression.`,
+      `Alignement sur ${the(king)} : ${the(piece)} garde un œil dessus.`,
+    ],
     develops: piece => [
       `Développement : ${the(piece)} sort.`,
       `${capitalize(the(piece))} entre en jeu.`,

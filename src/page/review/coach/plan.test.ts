@@ -66,12 +66,18 @@ describe('planFact', () => {
     expect(en.facts.outpost(KNIGHT)).toContain(planOf({ fen: outpost, uci: 'f3e5', san: 'Ne5' }));
   });
 
-  it('sees a rook take an open or a half-open file', () => {
+  it('sees a rook take an open or a half-open file, and notes when it faces the king', () => {
     const fen = '4k3/p3p3/8/8/8/8/P3P3/R3K3 w - - 0 1';
     expect(en.facts.openFile(false, false)).toContain(planOf({ fen, uci: 'a1b1', san: 'Rb1' }));
     const halfOpen = '4k3/pp6/8/8/8/8/P7/R3K3 w - - 0 1';
     expect(en.facts.openFile(true, false)).toContain(
       planOf({ fen: halfOpen, uci: 'a1b1', san: 'Rb1' }),
+    );
+    // J3C5rR4Z#24: 12...Rc8 takes the half-open c-file right across from White's castled king.
+    const facing = 'r3kb1r/1p1b1p2/p2p1n1p/q3p1p1/4P3/2NQ2B1/PPP2PPP/2KR3R b kq - 1 12';
+    const whiteKing = { role: 'king', color: 'white' } as const;
+    expect(en.facts.openFile(true, false, whiteKing)).toContain(
+      planOf({ fen: facing, uci: 'a8c8', san: 'Rc8', ply: 24 }),
     );
   });
 

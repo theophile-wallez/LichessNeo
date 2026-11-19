@@ -60,8 +60,8 @@ describe('reasonOf', () => {
       first: { kind: 'preparesBattery', partner: ROOK, halfOpen: false },
       second: { kind: 'attacksPawn', piece: BLACK_PAWN, square: 'a7' },
     });
-    // The rook could join the queen on b3 too, but that move threatens nothing.
-    expect(reasonOf(play(QUEEN_ON_B1, 'b1b3', 'Qb3'))).toBeNull();
+    // The rook could join the queen on b4 too, but that move threatens nothing.
+    expect(reasonOf(play(QUEEN_ON_B1, 'b1b4', 'Qb4'))).toBeNull();
   });
 
   it('says a pawn attacked that nothing defends, unless the attacker hangs', () => {

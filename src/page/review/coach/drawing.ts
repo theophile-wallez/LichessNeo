@@ -2,6 +2,7 @@ import {
   attackedSquares,
   type Board,
   type Color,
+  kingSquare,
   opposite,
   parseSquare,
   type Piece,
@@ -16,6 +17,7 @@ import { batteryMarks } from './battery.ts';
 import { discoveryMarks } from './discovery.ts';
 import { doubleThreatMarks } from './double-threat.ts';
 import { endingMarks } from './ending-marks.ts';
+import { facesKingMarks } from './faces-king.ts';
 import { isQuietReason, type QuietReason, type Reason } from './idea.ts';
 import { pathOf, squareMarks } from './pawn-square.ts';
 import { ownRank } from './structure.ts';
@@ -104,21 +106,29 @@ function holderOf(board: Board, square: Square, color: Color): Square | null {
   return holders.find(holder => samePiece(board.get(holder), { role: 'pawn', color })) ?? null;
 }
 
+// A piece chased (its line and ring) or defended (its ring alone).
+function targetMarks(
+  reason: Extract<Reason, { readonly kind: 'chases' | 'guards' }>,
+  after: Board,
+  to: Square,
+): Mark[] | null {
+  const by = reason.kind === 'chases' ? (reason.by ?? to) : to;
+  const target = attackedOne(after, by, reason.piece);
+  if (!target) return null;
+  // A line to the piece defended would read as the move going on there: its ring alone.
+  return reason.kind === 'chases' ? hits(by, [target], 'attack') : [ring(target, 'defense')];
+}
+
 // The marks of a reason that's about the piece moved, from its square after the move.
 function pieceMarks(reason: Reason, { after, shown }: Scene, to: Square): Mark[] | null {
   if (reason.kind === 'fork') return hits(to, forkedSquares(after, to), 'attack');
   if (reason.kind === 'doubleThreat') return doubleThreatMarks(after, to, reason.target);
   if (reason.kind === 'pins') return pinMarks(after, to);
-  if (reason.kind === 'chases' || reason.kind === 'guards') {
-    const by = reason.kind === 'chases' ? (reason.by ?? to) : to;
-    const target = attackedOne(after, by, reason.piece);
-    if (!target) return null;
-    // A line to the piece defended would read as the move going on there: its ring alone.
-    return reason.kind === 'chases' ? hits(by, [target], 'attack') : [ring(target, 'defense')];
-  }
+  if (reason.kind === 'chases' || reason.kind === 'guards') return targetMarks(reason, after, to);
   if (reason.kind === 'attacksPawn') return hits(to, [reason.square], 'attack');
   if (reason.kind === 'saves') return [ring(to, 'defense')];
   if (reason.kind === 'discovery') return discoveryMarks(after, to, shown);
+  if (reason.kind === 'facesKing') return facesKingMarks(after, to, reason.king.color);
   if (reason.kind === 'outpost') return outpostMarks(after, to);
   if (reason.kind === 'diagonalBattery') return batteryMarks(after, to);
   return null;
@@ -171,6 +181,13 @@ const ON_FILE: ReadonlySet<Reason['kind']> = new Set<Reason['kind']>([
   'preparesBattery',
 ]);
 
+// The file of a rook or queen, plus the other king's ring when the rook faces it there.
+function fileMarks(reason: Reason, after: Board, to: Square): Mark[] {
+  const king =
+    reason.kind === 'openFile' && reason.king ? kingSquare(after, reason.king.color) : null;
+  return [...runFrom(to, fileOf(to)), ...(king ? [ring(king, 'attack')] : [])];
+}
+
 /** What the coach draws of the reason a move was, or would have been, played for. */
 export function reasonMarks(reason: Reason | null, scene: Scene): Mark[] | null {
   const from = parseSquare(scene.uci.slice(0, 2));
@@ -186,7 +203,7 @@ export function reasonMarks(reason: Reason | null, scene: Scene): Mark[] | null 
   if (ending) return ending;
   if (reason.kind === 'passedPawn') return roadMarks(scene.after, to);
   if (reason.kind === 'behindPasser') return behindMarks(scene.after, to);
-  if (ON_FILE.has(reason.kind)) return runFrom(to, fileOf(to));
+  if (ON_FILE.has(reason.kind)) return fileMarks(reason, scene.after, to);
   if (reason.kind === 'seventhRank') return runFrom(to, rankOf(to));
   if (reason.kind === 'luft') return [{ kind: 'cells', squares: [from], tone: 'defense' }];
   if (isQuietReason(reason)) return quietMarks(reason, scene, [from, to]);

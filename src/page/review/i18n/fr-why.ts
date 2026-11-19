@@ -9,7 +9,7 @@ import {
   type Reason,
 } from '#page/review/coach/idea.ts';
 import { squareToken } from '#page/review/comment/tokens.ts';
-import { agreement, indefiniteOn, owned, pairOf, pieceName } from './fr-grammar.ts';
+import { agreement, indefiniteOn, owned, pairOf, pieceName, toThe } from './fr-grammar.ts';
 import { quietWhyFr } from './fr-quiet-plans.ts';
 
 const TRAITS_FR = { connected: ' lié', protected: ' protégé', outside: ' éloigné' };
@@ -149,6 +149,8 @@ function lineWhy(
   { the, own }: { the: Namer; own: Namer },
   tense: Tense,
 ): string {
+  if (reason.kind === 'facesKing')
+    return `${tense('alignait', 'aligne')} ${own(reason.piece)} face ${toThe(the(reason.king))}`;
   const forms = tense('formait', 'forme');
   if (reason.kind === 'diagonalBattery')
     return `${forms} une batterie avec ${own(reason.partner)}, braquée sur ${the(reason.target)}`;
@@ -157,8 +159,9 @@ function lineWhy(
     return `${forms} une batterie avec ${own(reason.partner)} sur ${file}`;
   if (reason.kind === 'preparesBattery')
     return `${tense('préparait', 'prépare')} une batterie avec ${own(reason.partner)} sur ${file}`;
-  return reason.contested
-    ? `${tense('contestait', 'conteste')} ${file}`
+  if (reason.contested) return `${tense('contestait', 'conteste')} ${file}`;
+  return reason.king
+    ? `${tense('prenait', 'prend')} ${file} face ${toThe(the(reason.king))}`
     : `${tense('prenait', 'prend')} ${file}`;
 }
 
@@ -178,8 +181,8 @@ export function whyFr(viewer: Viewer): (reason: Reason, now?: boolean) => string
     if (reason.kind === 'both') return `${why(reason.first, now)} et ${why(reason.second, now)}`;
     if (reason.kind === 'discovery' || reason.kind === 'doubleThreat' || reason.kind === 'fork')
       return tacticWhy(reason, viewer, tense);
-    if ('piece' in reason) return pieceWhy(reason, names, tense);
     if (isLineReason(reason)) return lineWhy(reason, names, tense);
+    if ('piece' in reason) return pieceWhy(reason, names, tense);
     if (reason.kind === 'passedPawn')
       return reason.made
         ? tense(

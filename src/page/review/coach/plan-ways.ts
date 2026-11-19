@@ -19,7 +19,14 @@ const ENDGAME = [
   'outruns',
   'entersSquare',
 ] as const;
-const LINE = ['openFile', 'fileBattery', 'diagonalBattery', 'opensLine', 'discovery'] as const;
+const LINE = [
+  'openFile',
+  'facesKing',
+  'fileBattery',
+  'diagonalBattery',
+  'opensLine',
+  'discovery',
+] as const;
 
 const SQUARE = [
   'prevents',
@@ -62,7 +69,9 @@ function endgameWays(plan: PlanOf<(typeof ENDGAME)[number]>, sentences: PlanSent
 }
 
 function lineWays(plan: PlanOf<(typeof LINE)[number]>, sentences: PlanSentences): Ways {
-  if (plan.kind === 'openFile') return sentences.openFile(plan.halfOpen, plan.contested);
+  if (plan.kind === 'openFile')
+    return sentences.openFile(plan.halfOpen, plan.contested, plan.king ?? null);
+  if (plan.kind === 'facesKing') return sentences.facesKing(plan.piece, plan.king);
   if (plan.kind === 'fileBattery')
     return sentences.fileBattery(plan.mover, plan.partner, plan.halfOpen);
   if (plan.kind === 'diagonalBattery')

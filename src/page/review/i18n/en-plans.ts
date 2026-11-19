@@ -38,6 +38,8 @@ const PASSED: Record<PassedTrait | 'born' | 'pushed', Ways> = {
 type PiecePlans =
   | 'develops'
   | 'outpost'
+  | 'openFile'
+  | 'facesKing'
   | 'chases'
   | 'developsWithTempo'
   | 'traps'
@@ -53,21 +55,6 @@ type PiecePlans =
   | 'diagonalBattery';
 
 const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | 'why'> = {
-  openFile: (halfOpen, contested) => {
-    const file = `the ${halfOpen ? 'half-open' : 'open'} file`;
-    if (contested)
-      return [
-        `That contests ${file}.`,
-        `A challenge for ${file}: it won’t be the other side’s alone.`,
-        `${capitalize(file)} is contested now.`,
-      ];
-    return [
-      `The rook takes ${file}, where it belongs.`,
-      `The rook takes ${file}.`,
-      `The rook grabs ${file}: that’s where rooks come alive.`,
-      `The rook moves to ${file}, ready to strike.`,
-    ];
-  },
   doublesRooks: [
     'The rooks double up: twice the pressure on the file.',
     'Two rooks on one file: a powerful battery.',
@@ -166,9 +153,39 @@ const BOARD_PLANS: Omit<PlanSentences, PiecePlans | keyof QuietPlanSentences | '
   ],
 };
 
+function openFileWays(the: (piece: Piece) => string): PlanSentences['openFile'] {
+  return (halfOpen, contested, king = null) => {
+    const file = `the ${halfOpen ? 'half-open' : 'open'} file`;
+    if (contested)
+      return [
+        `That contests ${file}.`,
+        `A challenge for ${file}: it won’t be the other side’s alone.`,
+        `${capitalize(file)} is contested now.`,
+      ];
+    if (king)
+      return [
+        `The rook takes ${file}, staring right down at ${the(king)}.`,
+        `The rook grabs ${file}, lined up straight against ${the(king)}.`,
+        `The rook seizes ${file} right across from ${the(king)}.`,
+      ];
+    return [
+      `The rook takes ${file}, where it belongs.`,
+      `The rook takes ${file}.`,
+      `The rook grabs ${file}: that’s where rooks come alive.`,
+      `The rook moves to ${file}, ready to strike.`,
+    ];
+  };
+}
+
 export function plansEn(viewer: Viewer): PlanSentences {
   const the = (piece: Piece): string => definite(viewer, piece);
   return {
+    openFile: openFileWays(the),
+    facesKing: (piece, king) => [
+      `${capitalize(the(piece))} lines up with ${the(king)}, creating tactical threats along the line.`,
+      `${capitalize(the(piece))} stares down ${the(king)}: any piece in between will feel the pressure.`,
+      `X-ray on ${the(king)}: ${the(piece)} eyes it down the line.`,
+    ],
     develops: piece => [
       `Another piece out: ${the(piece)}.`,
       `${capitalize(the(piece))} comes into play.`,

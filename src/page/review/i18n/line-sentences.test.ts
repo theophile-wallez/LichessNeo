@@ -247,6 +247,27 @@ describe('a quiet move’s plan', () => {
     );
     expect(en.facts.openFile(false, true)).toContain('That contests the open file.');
     expect(fr.facts.openFile(false, true)).toContain('Ça conteste la colonne ouverte.');
+    expect(english('black').facts.openFile(true, false, white('king'))).toContain(
+      'The rook seizes the half-open file right across from the opponent’s [[p:wk]]king.',
+    );
+    expect(french('white').facts.openFile(true, false, white('king'))).toContain(
+      'La tour prend la colonne semi-ouverte, pile face à ton [[p:wk]]roi.',
+    );
+    const faces = { kind: 'facesKing', piece: white('bishop'), king: black('king') } as const;
+    expect(english('white').facts.why(faces)).toBe(
+      'lining your [[p:wb]]bishop up with the opponent’s [[p:bk]]king',
+    );
+    expect(french('white').facts.why(faces)).toBe(
+      'alignait ton [[p:wb]]fou face au [[p:bk]]roi adverse',
+    );
+    expect(
+      french('white').facts.why({
+        kind: 'openFile',
+        halfOpen: true,
+        contested: false,
+        king: black('king'),
+      }),
+    ).toBe('prenait la colonne semi-ouverte face au [[p:bk]]roi adverse');
   });
 
   it('is said in both languages', () => {

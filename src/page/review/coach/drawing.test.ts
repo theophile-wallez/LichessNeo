@@ -99,6 +99,31 @@ describe('reasonMarks', () => {
         tone: 'plan',
       },
     ]);
+    expect(
+      marks(
+        { kind: 'openFile', halfOpen: true, contested: false, king: white('king') },
+        'r3kb1r/1p1b1p2/p2p1n1p/q3p1p1/4P3/2NQ2B1/PPP2PPP/2KR3R b kq - 1 12',
+        'a8c8',
+      ),
+    ).toEqual([
+      {
+        kind: 'run',
+        from: 'c8',
+        squares: ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'],
+        tone: 'plan',
+      },
+      { kind: 'ring', square: 'c1', tone: 'attack' },
+    ]);
+    expect(
+      marks(
+        { kind: 'facesKing', piece: white('queen'), king: black('king') },
+        '3q1rk1/p1pb1ppp/4p3/8/8/8/P4PPP/1Q3RK1 w - - 0 1',
+        'b1b3',
+      ),
+    ).toEqual([
+      { kind: 'link', from: 'b3', to: 'g8', tone: 'attack' },
+      { kind: 'ring', square: 'g8', tone: 'attack' },
+    ]);
     const rank = ['b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7'];
     expect(marks({ kind: 'seventhRank' }, '4k3/8/8/8/8/8/8/R3K3 w - - 0 1', 'a1a7')).toEqual([
       { kind: 'run', from: 'a7', squares: rank, tone: 'plan' },

@@ -109,6 +109,7 @@ function takesWhyEn(reason: PieceReason, piece: string): string {
 // An open file taken, or a battery: with the queen there already, a rook
 // lines up with it rather than taking the file.
 function lineWhy(reason: LineReason, the: Namer, own: Namer): string {
+  if (reason.kind === 'facesKing') return `lining ${own(reason.piece)} up with ${the(reason.king)}`;
   if (reason.kind === 'diagonalBattery')
     return `forming a battery with ${own(reason.partner)}, aimed at ${the(reason.target)}`;
   const file = `the ${reason.halfOpen ? 'half-open' : 'open'} file`;
@@ -116,7 +117,8 @@ function lineWhy(reason: LineReason, the: Namer, own: Namer): string {
     return `forming a battery with ${own(reason.partner)} on ${file}`;
   if (reason.kind === 'preparesBattery')
     return `preparing a battery with ${own(reason.partner)} on ${file}`;
-  return reason.contested ? `contesting ${file}` : `taking ${file}`;
+  if (reason.contested) return `contesting ${file}`;
+  return reason.king ? `taking ${file} opposite ${the(reason.king)}` : `taking ${file}`;
 }
 
 // What the better move did, after its name: "Better was Nf6, developing your knight."
@@ -135,8 +137,8 @@ export function whyEn(viewer: Viewer): (reason: Reason) => string {
         : `setting up a discovered attack on ${the(reason.target)}`;
     if (reason.kind === 'doubleThreat')
       return `threatening mate and ${the(reason.target)} at once, and only one can be saved`;
-    if ('piece' in reason) return pieceWhy(reason, the, own);
     if (isLineReason(reason)) return lineWhy(reason, the, own);
+    if ('piece' in reason) return pieceWhy(reason, the, own);
     if (reason.kind === 'passedPawn') return passedWhy(reason.made, reason.trait);
     if (reason.kind === 'fork') return `forking ${pairOf(viewer, reason.first, reason.second)}`;
     if (reason.kind === 'attacksKing') return `attacking ${the(reason.king)}`;
