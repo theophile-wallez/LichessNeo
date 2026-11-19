@@ -4,14 +4,15 @@ import { createOwnedElement } from '#shared/owned-element.ts';
 import { nonEmpty } from '#shared/text.ts';
 import { message } from '#content/platform/runtime.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
+import { syncBookmark } from './bookmark.ts';
 import { listenToContinueMenu } from './continue-menu.ts';
 import { ANALYSIS, type BoardPage, pressKey, ROUND, type ToolName } from './pages.ts';
 
 // The board tools of the game and analysis pages (styles/game/board-extras.css,
 // styles/analysis/board-tools.css): a cog right of the board's top corner, and
-// under it a flip button and, in a game the user plays, a Zen button, which
-// show while the pointer is on the board. The cog opens Lichess's menu, the
-// others press its keys: `f` to flip, `z` for Zen.
+// under it a flip button, in a game the user plays a Zen button, and last a
+// bookmark star where Lichess offers one, which show while the pointer is on the
+// board. The cog opens Lichess's menu, flip and Zen press its keys (`f`, `z`).
 
 const HOVER = 'ln-ext-board-tools--hover';
 const BUTTON = 'ln-ext-board-tools__btn';
@@ -27,6 +28,7 @@ function toolButton(page: BoardPage, name: ToolName): HTMLButtonElement {
     else if (main) {
       page.toggleMenu(main);
       if (page.menu) setData(main, 'lnExtMenuFrom', 'board');
+      syncBoardTools();
     }
   });
   return button;
@@ -60,6 +62,7 @@ export function syncBoardTools(): void {
     tools = own(main).element;
     shownOn = page;
     syncMenu(main, tools, page);
+    syncBookmark(main, tools, page);
     if (page === ROUND) syncZen(tools);
     return;
   }
@@ -138,9 +141,18 @@ function onPointerDown(event: PointerEvent): void {
   if (!inside) closeMenu(page);
 }
 
+function onPointerUp(event: PointerEvent): void {
+  const page = shownOn;
+  if (page && closestTo(event.target, `${page.main} ${page.menuToggle}`, Element)) syncBoardTools();
+}
+
 function onKeyDown(event: KeyboardEvent): void {
   const page = event.key === 'Escape' ? openMenuPage() : null;
   if (page) closeMenu(page);
+}
+
+function onKeyPress(event: KeyboardEvent): void {
+  if (event.key === 'h' && shownOn === ROUND) syncBoardTools();
 }
 
 export const boardTools: Feature = {
@@ -150,7 +162,9 @@ export const boardTools: Feature = {
     document.addEventListener('mouseover', onMouseOver);
     document.addEventListener('mouseout', onMouseOut);
     document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('pointerup', onPointerUp);
     document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('keypress', onKeyPress);
     listenToContinueMenu();
   },
 };

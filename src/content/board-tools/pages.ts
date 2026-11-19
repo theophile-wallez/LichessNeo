@@ -14,6 +14,8 @@ export interface BoardPage {
   readonly tools: readonly ToolName[];
   /** Lichess's menu button, whose label and state the cog takes. */
   readonly menuToggle: string;
+  /** Where our rows join Lichess's menu, once open. */
+  readonly menuRows: string;
   /** Lichess's menu, once open: the analysis one is closed by us on a press elsewhere. */
   readonly menu?: string;
   readonly toggleMenu: (main: HTMLElement) => void;
@@ -28,6 +30,7 @@ export const ROUND: BoardPage = {
   board: '.round__app__board',
   tools: ['menu', 'flip', 'zen'],
   menuToggle: '.board-menu-toggle-btn',
+  menuRows: '.board-menu > section:first-child',
   toggleMenu: main => pressKey(main, 'h'),
 };
 
@@ -36,6 +39,7 @@ export const ANALYSIS: BoardPage = {
   board: '.analyse__board',
   tools: ['menu', 'flip'],
   menuToggle: '.analyse__controls > .fbt[data-act="menu"]',
+  menuRows: '.analyse__tools > .action-menu .action-menu__tools',
   menu: '.analyse__tools > .action-menu',
   toggleMenu: main => {
     const toggle = queryOne(main, ANALYSIS.menuToggle, HTMLElement);

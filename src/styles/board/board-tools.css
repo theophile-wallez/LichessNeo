@@ -36,9 +36,28 @@
   mask: center / contain no-repeat;
 }
 
-/* The cog, the flip arrows and Zen's figure. */
+/* The cog, the flip arrows, Zen's figure and, last, a game's bookmark star. */
 .ln-ext-board-tools__btn--menu::before {
   mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/settings-01.svg');
+}
+
+.ln-ext-board-tools__btn--bookmark::before {
+  content: none;
+}
+
+.ln-ext-board-tools__btn--bookmark svg {
+  width: 17px;
+  height: 17px;
+  pointer-events: none;
+}
+
+main:is(.round, .analyse)
+  .ln-ext-board-tools__btn--bookmark:is(:hover, .ln-ext-board-tools__btn--on) {
+  color: var(--ln-ext-yellow);
+}
+
+.ln-ext-board-tools__btn--bookmark.ln-ext-board-tools__btn--on svg {
+  fill: currentColor;
 }
 
 .ln-ext-board-tools__btn--flip::before {
@@ -49,8 +68,9 @@
   mask-image: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/yoga-03.svg');
 }
 
+/* All but the cog show while the pointer is on the board. */
 .ln-ext-board-tools:not(.ln-ext-board-tools--hover)
-  :is(.ln-ext-board-tools__btn--flip, .ln-ext-board-tools__btn--zen) {
+  .ln-ext-board-tools__btn:not(.ln-ext-board-tools__btn--menu) {
   visibility: hidden;
   opacity: 0;
 }

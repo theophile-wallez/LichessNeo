@@ -91,7 +91,8 @@
     color: var(--ln-ext-text);
   }
 
-  main.round .ln-ext-board-tools__btn::before {
+  main.round .ln-ext-board-tools__btn::before,
+  main.round .ln-ext-board-tools__btn svg {
     width: 19px;
     height: 19px;
   }
@@ -100,10 +101,10 @@
     --ln-ext-clock-room: 152px;
   }
 
-  /* A touch screen has no hover to reveal the flip button. */
+  /* A touch screen has no hover to reveal the buttons under the cog. */
   main.round
     .ln-ext-board-tools:not(.ln-ext-board-tools--hover)
-    :is(.ln-ext-board-tools__btn--flip, .ln-ext-board-tools__btn--zen) {
+    .ln-ext-board-tools__btn:not(.ln-ext-board-tools__btn--menu) {
     visibility: visible;
     opacity: 1;
   }
@@ -277,7 +278,8 @@
     box-shadow: none;
   }
 
-  main.round .ln-ext-board-tools__btn::before {
+  main.round .ln-ext-board-tools__btn::before,
+  main.round .ln-ext-board-tools__btn svg {
     width: 17px;
     height: 17px;
   }
@@ -307,8 +309,13 @@
 }
 
 /* The phone's row of move buttons ends with the tools: a third, Zen's, in a game the user
- * plays. A tablet has them beside the board. */
+ * plays. A tablet has them beside the board; the phone's game info and cog menu keep the
+ * bookmark. */
 @media (max-width: 599.98px) {
+  main.round .ln-ext-board-tools__btn--bookmark {
+    display: none;
+  }
+
   body.zenable main.round :is(i5d, rm6) bo3 {
     padding-inline-end: calc(8px + 3 * 44px + 2 * 6px) !important;
   }

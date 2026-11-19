@@ -193,7 +193,7 @@ main.round .game__meta .bookmark.bookmarked {
 }
 
 @media (hover: hover) {
-  main.round .game__meta .bookmark {
+  main.round .game__meta .bookmark:not(.bookmarked) {
     visibility: hidden;
   }
 

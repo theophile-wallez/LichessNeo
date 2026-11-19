@@ -173,6 +173,21 @@ main.analyse .action-menu__tools [data-icon='\e05c']::before {
   --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/robot-01.svg');
 }
 
+main.analyse .action-menu__tools > .ln-ext-menu-bookmark svg {
+  width: 20px;
+  height: 20px;
+  color: var(--ln-ext-text-dim);
+  pointer-events: none;
+}
+
+main.analyse .action-menu__tools > .ln-ext-menu-bookmark:is(:hover, .ln-ext-menu-bookmark--on) svg {
+  color: var(--ln-ext-yellow);
+}
+
+main.analyse .action-menu__tools > .ln-ext-menu-bookmark--on svg {
+  fill: currentColor;
+}
+
 /* Replay mode's speeds: a row of grey buttons. */
 main.analyse .action-menu .autoplay {
   display: flex !important;
@@ -237,12 +252,22 @@ main.analyse .action-menu .autoplay .button.active {
     color: var(--ln-ext-text-dim);
   }
 
-  main.analyse .ln-ext-board-tools__btn::before {
+  main.analyse .ln-ext-board-tools__btn::before,
+  main.analyse .ln-ext-board-tools__btn svg {
     width: 19px;
     height: 19px;
   }
 
-  main.analyse .ln-ext-board-tools:not(.ln-ext-board-tools--hover) .ln-ext-board-tools__btn--flip {
+  /* Lichess's controls leave room for two buttons: the cog's menu keeps the bookmark row. */
+  html:not(.ln-ext-review-summary, .ln-ext-review-moves)
+    main.analyse
+    .ln-ext-board-tools__btn--bookmark {
+    display: none;
+  }
+
+  main.analyse
+    .ln-ext-board-tools:not(.ln-ext-board-tools--hover)
+    .ln-ext-board-tools__btn:not(.ln-ext-board-tools__btn--menu) {
     visibility: visible;
     opacity: 1;
   }

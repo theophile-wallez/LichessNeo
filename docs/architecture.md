@@ -87,9 +87,9 @@ so the logic can be unit-tested without a page.
   panel's tabs, which give the moves, the chat and the game info one area to
   share.
 - `game`.
-- `board-tools`: the cog and flip button beside the game and analysis boards,
-  the analysis menu floating from the cog, and its "Continue from here" as a
-  sub-menu.
+- `board-tools`: the cog, bookmark star and flip button beside the game and
+  analysis boards, the star's row in their menus, the analysis menu floating
+  from the cog, and its "Continue from here" as a sub-menu.
 - `analysis`: the players' bars, the eval gauge, the engine settings' sliders,
   the free board's FEN and PGN, opened from the analysis menu, the variations
   drawn as a tree, long runs folded into a pill.

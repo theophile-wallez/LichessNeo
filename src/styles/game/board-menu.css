@@ -81,8 +81,10 @@ main.round .board-menu > section + section {
   border-top: 1px solid var(--ln-ext-lift-8) !important;
 }
 
-/* Rows: the flip button, the switches, the links to the preferences. */
-main.round .board-menu :is(section > .button, .cmn-toggle-wrap, .board-menu__links a) {
+/* Rows: the flip button, our bookmark, the switches, the links to the preferences. */
+main.round
+  .board-menu
+  :is(section > .button, .ln-ext-menu-bookmark, .cmn-toggle-wrap, .board-menu__links a) {
   display: flex !important;
   align-items: center;
   gap: 12px;
@@ -103,9 +105,26 @@ main.round .board-menu :is(section > .button, .cmn-toggle-wrap, .board-menu__lin
   transition: background-color 0.1s !important;
 }
 
-main.round .board-menu :is(section > .button, .cmn-toggle-wrap, .board-menu__links a):hover {
+main.round
+  .board-menu
+  :is(section > .button, .ln-ext-menu-bookmark, .cmn-toggle-wrap, .board-menu__links a):hover {
   background: var(--ln-ext-menu-hover) !important;
   color: var(--ln-ext-text-strong) !important;
+}
+
+main.round .board-menu .ln-ext-menu-bookmark svg {
+  width: 20px;
+  height: 20px;
+  color: var(--ln-ext-text-dim);
+  pointer-events: none;
+}
+
+main.round .board-menu .ln-ext-menu-bookmark:is(:hover, .ln-ext-menu-bookmark--on) svg {
+  color: var(--ln-ext-yellow);
+}
+
+main.round .board-menu .ln-ext-menu-bookmark--on svg {
+  fill: currentColor;
 }
 
 main.round .board-menu :is(section > .button, .cmn-toggle-wrap, .board-menu__links a)::before {
