@@ -26,7 +26,10 @@ ROOT = Path(__file__).resolve().parents[2]
 IDS = ROOT / 'src/page/review/theory/studies.json'
 NAMES = {'en': 'Lichess Neo: Analysis', 'fr': 'Lichess Neo : Analyse'}
 # Lichess answers a script it takes for a crawler with a 404 page.
-AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36'
+AGENT = (
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 '
+    '(KHTML, like Gecko) Chrome/130 Safari/537.36'
+)
 MAX_CHAPTERS = 64
 CHAPTER_URL = re.compile(r'\[ChapterURL "https://lichess\.org/study/\w{8}/(\w{8})"\]')
 
@@ -43,7 +46,9 @@ def call(method, path, token, form=None):
                 return response.read().decode('utf8')
         except urllib.error.HTTPError as error:
             if error.code != 429:
-                sys.exit(f'{method} {path}: {error.code} {error.read().decode("utf8", "replace")[:300]}')
+                sys.exit(
+                    f'{method} {path}: {error.code} {error.read().decode("utf8", "replace")[:300]}'
+                )
             # Lichess serves one request at a time per address: wait for the other one to end.
             print(f'{method} {path}: 429, waiting a minute', flush=True)
             time.sleep(61)
@@ -64,11 +69,22 @@ def create(language, token):
 
 
 def import_chapter(study, chapter, token):
-    # Lichess answers a chapter it refuses with a 200 too: {"chapters": [], "error": "PGN too large"}.
-    answer = json.loads(call('POST', f'/api/study/{study}/import-pgn', token, {'pgn': chapter, 'orientation': 'white'}))
+    # Lichess answers a chapter it refuses with a 200 too:
+    # {"chapters": [], "error": "PGN too large"}.
+    answer = json.loads(
+        call(
+            'POST',
+            f'/api/study/{study}/import-pgn',
+            token,
+            {'pgn': chapter, 'orientation': 'white'},
+        )
+    )
     if answer.get('error') or not answer.get('chapters'):
         name = chapter.split('\n', 1)[0]
-        sys.exit(f'{name}: refused ({answer.get("error") or "no chapter made"}), the study is half pushed')
+        sys.exit(
+            f'{name}: refused ({answer.get("error") or "no chapter made"}), '
+            'the study is half pushed'
+        )
 
 
 def push(study, pgn, token):
@@ -80,7 +96,10 @@ def push(study, pgn, token):
     ]
     room = MAX_CHAPTERS - min(len(old), 1)
     if len(chapters) > room:
-        sys.exit(f'{len(chapters)} chapters: the study has room for {room}, with one old one kept meanwhile')
+        sys.exit(
+            f'{len(chapters)} chapters: the study has room for {room}, '
+            'with one old one kept meanwhile'
+        )
     for chapter in old[1:]:
         call('DELETE', f'/api/study/{study}/{chapter}', token)
     for chapter in chapters:

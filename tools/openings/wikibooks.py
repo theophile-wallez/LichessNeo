@@ -12,6 +12,7 @@ import json
 import re
 import sys
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 import chess
 
@@ -22,10 +23,10 @@ STEP = re.compile(r'^(\d+)\s*(\.\.\.|\.)\s*(\S+)$')
 
 def plain(wikitext):
     """A page's prose: its templates (diagrams, boxes), references and markup taken out."""
-    text = re.sub(r'<ref[^>]*/>|<ref.*?</ref>|<!--.*?-->', '', wikitext, flags=re.S)
+    text = re.sub(r'<ref[^>]*/>|<ref.*?</ref>|<!--.*?-->', '', wikitext, flags=re.DOTALL)
     while re.search(r'\{\{[^{}]*\}\}', text):
         text = re.sub(r'\{\{[^{}]*\}\}', '', text)
-    text = re.sub(r'\{\|.*?\|\}', '', text, flags=re.S)
+    text = re.sub(r'\{\|.*?\|\}', '', text, flags=re.DOTALL)
     text = re.sub(r'\[\[(?:File|Image|Category):[^\]]*\]\]', '', text)
     text = re.sub(r'\[\[(?:[^|\]]*\|)?([^\]]*)\]\]', r'\1', text)
     text = re.sub(r'\[https?://\S+ ([^\]]*)\]', r'\1', text)
@@ -36,7 +37,7 @@ def plain(wikitext):
 
 def moves_of(title):
     """The SAN moves a page's title spells, or None for a page that isn't a position."""
-    steps = title[len(PREFIX):].split('/')
+    steps = title[len(PREFIX) :].split('/')
     board, moves = chess.Board(), []
     for step in steps:
         match = STEP.match(step.strip())
@@ -63,19 +64,20 @@ def key_of(moves):
 def dump_pages(path):
     """(title, wikitext) of each of the book's pages in the dump, redirects left out."""
     title, text, redirect = None, '', False
-    for _, element in ET.iterparse(bz2.open(path), events=('end',)):
-        tag = element.tag.rsplit('}', 1)[-1]
-        if tag == 'title':
-            title = element.text or ''
-        elif tag == 'redirect':
-            redirect = True
-        elif tag == 'text':
-            text = element.text or ''
-        elif tag == 'page':
-            if title and title.startswith(PREFIX) and not redirect:
-                yield title, text
-            title, text, redirect = None, '', False
-            element.clear()
+    with bz2.open(path) as dump:
+        for _, element in ET.iterparse(dump, events=('end',)):
+            tag = element.tag.rsplit('}', 1)[-1]
+            if tag == 'title':
+                title = element.text or ''
+            elif tag == 'redirect':
+                redirect = True
+            elif tag == 'text':
+                text = element.text or ''
+            elif tag == 'page':
+                if title and title.startswith(PREFIX) and not redirect:
+                    yield title, text
+                title, text, redirect = None, '', False
+                element.clear()
 
 
 def main(dump, out):
@@ -83,19 +85,25 @@ def main(dump, out):
     for title, wikitext in dump_pages(dump):
         moves = moves_of(title)
         if moves:
-            pages.append({'title': title, 'moves': moves, 'key': key_of(moves),
-                          'text': plain(wikitext)})
+            pages.append(
+                {'title': title, 'moves': moves, 'key': key_of(moves), 'text': plain(wikitext)}
+            )
     by_length = {}
     for page in pages:
         by_length.setdefault(len(page['moves']), []).append(page)
     for page in pages:
         line = page['moves']
-        page['children'] = [other['moves'][-1] for other in by_length.get(len(line) + 1, [])
-                            if other['moves'][:-1] == line]
+        page['children'] = [
+            other['moves'][-1]
+            for other in by_length.get(len(line) + 1, [])
+            if other['moves'][:-1] == line
+        ]
     pages.sort(key=lambda page: page['moves'])
-    with open(out, 'w', encoding='utf8') as file:
+    with Path(out).open('w', encoding='utf8') as file:
         json.dump(pages, file, ensure_ascii=False, indent=1)
-    print(f'{len(pages)} positions, {sum(1 for page in pages if len(page["text"]) > 200)} with text')
+    print(
+        f'{len(pages)} positions, {sum(1 for page in pages if len(page["text"]) > 200)} with text'
+    )
 
 
 if __name__ == '__main__':

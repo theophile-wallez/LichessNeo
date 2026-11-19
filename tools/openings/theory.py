@@ -77,7 +77,10 @@ CHAPTERS = {
     'queens-pawn': ("Queen's Pawn systems", 'Débuts du pion dame'),
     'd4-gambits': ('Gambits and sidelines after 1.d4', 'Gambits et variantes rares après 1.d4'),
     'kings-indian': ("King's Indian Defence", 'Défense est-indienne'),
-    'nimzo-indian': ("Nimzo-Indian and Queen's Indian", 'Défenses nimzo-indienne et ouest-indienne'),
+    'nimzo-indian': (
+        "Nimzo-Indian and Queen's Indian",
+        'Défenses nimzo-indienne et ouest-indienne',
+    ),
     'catalan': ('Catalan Opening', 'Ouverture catalane'),
     'grunfeld': ('Grünfeld Defence', 'Défense Grünfeld'),
     'benoni': ('Benoni and Benko', 'Défense Benoni et gambit Benko'),
@@ -90,12 +93,14 @@ CHAPTERS = {
 
 # The first comment of each chapter, for those who read or edit the study.
 INTRO = {
-    'en': 'Lichess Neo\'s coach explains these positions in its Game Review. In a comment, '
+    'en': "Lichess Neo's coach explains these positions in its Game Review. In a comment, "
     '[Nf3] is a move, [Qb3 Qxb3 axb3] moves one after the other, [w:Re1] a later move of White, '
-    'and a square is written as it is, e5. Each position\'s first moves are those theory goes on with.',
+    'and a square is written as it is, e5. '
+    "Each position's first moves are those theory goes on with.",
     'fr': 'Le coach de Lichess Neo explique ces positions dans son Bilan. Dans un commentaire, '
     '[Nf3] est un coup, [Qb3 Qxb3 axb3] des coups à la suite, [w:Re1] un coup blanc plus tard, '
-    'et une case s\'écrit telle quelle, e5. Les premiers coups de chaque position sont ceux de la théorie.',
+    "et une case s'écrit telle quelle, e5. "
+    'Les premiers coups de chaque position sont ceux de la théorie.',
 }
 
 
@@ -142,7 +147,9 @@ def shape_commands(shapes):
     squares = [shape for shape in shapes if len(shape) == 3]
     arrows = [shape for shape in shapes if len(shape) == 5]
     return ''.join(
-        f'[%{command} {",".join(found)}]' for command, found in (('csl', squares), ('cal', arrows)) if found
+        f'[%{command} {",".join(found)}]'
+        for command, found in (('csl', squares), ('cal', arrows))
+        if found
     )
 
 
@@ -217,6 +224,7 @@ class Entry:
         def token(match):
             color, san, square = match.groups()
             return square or self.chip(san.strip(), color)
+
         return MARK.sub(token, (source or self.source).get(language, '').strip())
 
     def next(self):
@@ -238,7 +246,9 @@ class Entry:
         for mistake in self.source.get('mistakes', []):
             move = parse(self.board, mistake['move'])
             if not move or move in theory:
-                self.errors.append(f'mistake {mistake["move"]}' + (' (a theory move)' if move else ''))
+                self.errors.append(
+                    f'mistake {mistake["move"]}' + (' (a theory move)' if move else '')
+                )
                 continue
             after = Entry({'line': f'{self.source["line"]} {self.board.san(move)}'})
             comment = after.comment(language, mistake)
@@ -252,7 +262,9 @@ class Entry:
                 board.push(answer)
             self.errors += after.errors
             self.unchecked += after.unchecked
-            found.append({'move': move, 'mark': mistake.get('mark', '?'), 'punish': punish, 'text': comment})
+            found.append(
+                {'move': move, 'mark': mistake.get('mark', '?'), 'punish': punish, 'text': comment}
+            )
         return found
 
 
@@ -283,7 +295,10 @@ def chapter_tree(entries, language):
         for mistake in entry.mistakes(language):
             child = node.children.setdefault(mistake['move'], Node())
             if child.entry:
-                sys.exit(f'{entry.source["line"]} {mistake["move"]} is an entry of the same chapter: keep one')
+                sys.exit(
+                    f'{entry.source["line"]} {mistake["move"]} '
+                    'is an entry of the same chapter: keep one'
+                )
             child.comment, child.nags = mistake['text'], {MARKS[mistake['mark']]}
             for move in mistake['punish']:
                 child = child.children.setdefault(move, Node())
@@ -317,7 +332,8 @@ def write_chapter(name, entries, language):
     if len(parts) == 1 and fits(whole):
         return [whole]
     games = [
-        write_game(f'{title(name, language)} ({i})', part, language) for i, part in enumerate(parts, 1)
+        write_game(f'{title(name, language)} ({i})', part, language)
+        for i, part in enumerate(parts, 1)
     ]
     for i, game in enumerate(games, 1):
         if not fits(game):
@@ -374,7 +390,9 @@ def read_chapter(source_list, lines, languages):
     for entry in entries:
         key = key_of(entry.board)
         if key in mistaken:
-            sys.exit(f'{entry.source["line"]} is reached by a mistake after {mistaken[key]}: keep one')
+            sys.exit(
+                f'{entry.source["line"]} is reached by a mistake after {mistaken[key]}: keep one'
+            )
     return entries, failed
 
 
@@ -389,7 +407,7 @@ def read_sources(folder, asked):
     if not asked and len(languages) < len(LANGUAGES):
         print(f'Not every text is in {", ".join(set(LANGUAGES) - set(languages))} yet: left out')
     chapters, lines, failed = [], {}, False
-    for name, source_list in zip(names, sources):
+    for name, source_list in zip(names, sources, strict=True):
         entries, chapter_failed = read_chapter(source_list, lines, languages)
         failed = failed or chapter_failed
         chapters.append((name, entries))
@@ -399,7 +417,9 @@ def read_sources(folder, asked):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Writes the coach's opening theory as a study's PGN.")
+    parser = argparse.ArgumentParser(
+        description="Writes the coach's opening theory as a study's PGN."
+    )
     parser.add_argument('folder', type=Path)
     parser.add_argument('languages', nargs='*', choices=LANGUAGES, default=[])
     parser.add_argument('--sources', type=Path, default=SOURCES)
@@ -407,7 +427,9 @@ def main():
     args.folder.mkdir(parents=True, exist_ok=True)
     chapters, languages, count = read_sources(args.sources, args.languages)
     for language in languages:
-        games = [game for name, entries in chapters for game in write_chapter(name, entries, language)]
+        games = [
+            game for name, entries in chapters for game in write_chapter(name, entries, language)
+        ]
         if len(games) > MAX_CHAPTERS:
             sys.exit(f'{language}: {len(games)} chapters, past the {MAX_CHAPTERS} a study holds')
         (args.folder / f'{language}.pgn').write_text('\n\n'.join(games) + '\n', encoding='utf8')

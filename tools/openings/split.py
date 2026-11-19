@@ -1,9 +1,10 @@
 """Splits a chapter's tree of moves into parts Lichess takes: a chapter's PGN
 over 100,000 characters is refused ("PGN too large"), and one over 3,000 moves
 too. A tree too long is cut into subtrees of an eighth of a part's budget,
-packed into parts with what's left of the chapter's own. Each node's comment goes in one part only: the part that carries
-the subtree it's in. That part also holds all of its children, those cut off as
-bare moves, so the review reads the same moves after it (theory/study.ts).
+packed into parts with what's left of the chapter's own. Each node's comment goes
+in one part only: the part that carries the subtree it's in. That part also holds
+all of its children, those cut off as bare moves, so the review reads the same
+moves after it (theory/study.ts).
 Positions on the way to a subtree are bare moves in its part.
 """
 
@@ -46,14 +47,14 @@ def own_weight(node):
 
 def plan(node, path, budget, cuts):
     """The weight left of `node`'s subtree once the cuts it needs are made, each added to `cuts`."""
-    left = {move: plan(child, path + (move,), budget, cuts) for move, child in node.children.items()}
+    left = {move: plan(child, (*path, move), budget, cuts) for move, child in node.children.items()}
     total = own_weight(node)
     for weight in left.values():
         total += weight
     for move in sorted(left, key=lambda each: -left[each].chars):
         if not total.over(budget):
             break
-        cuts.append((path + (move,), left[move] + Weight(MOVE_CHARS * len(path), len(path))))
+        cuts.append(((*path, move), left[move] + Weight(MOVE_CHARS * len(path), len(path))))
         total -= left[move] - STUB
     return total
 
@@ -74,24 +75,24 @@ def pack(cuts, budget):
 
 def build(root, cut, carried):
     """The part that carries the subtrees `carried` (paths; () is the chapter's own part)."""
-    Node = type(root)
+    node_type = type(root)
     ancestors = {path[:i] for path in carried for i in range(len(path))}
 
     def owner(path):
         return next((path[:i] for i in range(len(path), 0, -1) if path[:i] in cut), ())
 
     def copy(node, path, content):
-        part = Node()
+        part = node_type()
         part.first, part.nags = node.first, node.nags
         part.comment = node.comment if content else None
         for move, child in node.children.items():
-            at = path + (move,)
+            at = (*path, move)
             inside = owner(at) in carried
             # A bare move, for a carried node's children: its moves stay whole.
             if inside or at in ancestors:
                 part.children[move] = copy(child, at, inside)
             elif content:
-                stub = part.children[move] = Node()
+                stub = part.children[move] = node_type()
                 stub.nags = child.nags
         return part
 
@@ -108,13 +109,14 @@ def split(root, budget=None):
     cuts = []
     rest = plan(root, (), Weight(budget.chars // PIECES, budget.nodes // PIECES), cuts)
     # The part with the chapter's start comes first.
-    parts = sorted(pack([((), rest)] + cuts, budget), key=lambda paths: () not in paths)
+    parts = sorted(pack([((), rest), *cuts], budget), key=lambda paths: () not in paths)
     cut = {path for path, _ in cuts}
     return [build(root, cut, paths) for paths in parts]
 
 
 def commented(pgns):
-    """Each commented node of the games, by its moves from the start: its comment, the moves on from it, its mark.
+    """Each commented node of the games, by its moves from the start: its comment, the
+    moves on from it, its mark.
 
     Keyed by path, not position: two lines of a chapter may transpose into one position.
     """
