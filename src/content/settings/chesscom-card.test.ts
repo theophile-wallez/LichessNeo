@@ -42,7 +42,7 @@ describe('the settings’ Chess.com ratings', () => {
     study?.dispatchEvent(new Event('toggle'));
     expect(frame?.getAttribute('src')).toBe('chrome-extension://test/pages/rating-study.html');
     expect(queryOne(page, '.ln-ext-study__link', HTMLAnchorElement)?.href).toBe(
-      'https://theophile-wallez.github.io/lichess-chesscom-ratings/',
+      'https://elo.lichessneo.com/',
     );
   });
 });

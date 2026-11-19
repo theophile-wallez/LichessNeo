@@ -10,7 +10,7 @@ import { buildSwitchList } from './switch-list.ts';
 // page: a card with a switch, and under it the study they come from, unfolded
 // in a frame.
 
-const STUDY_URL = 'https://theophile-wallez.github.io/lichess-chesscom-ratings/';
+const STUDY_URL = 'https://elo.lichessneo.com/';
 
 // Lichess's CSP lets no other site in a frame, but the extension's pages: ours
 // frames the study's. Lichess's COEP takes both frames credentialless.
