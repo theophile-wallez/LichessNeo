@@ -16,6 +16,13 @@ dialog {
   animation: ln-ext-dialog-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Lichess's `display: flex` beats the browser's hiding of a closed dialog, and it puts
+ * one in the page before its stylesheets load: an empty one showed as a line and a cross.
+ * Hidden until open, its rise also starts when it shows. */
+dialog:not([open]) {
+  display: none !important;
+}
+
 /* Lichess moves dialogs 16px down to fit its close button above them. Ours is inside,
  * and the shift pushed a window-tall dialog past the bottom edge. */
 dialog:not(.touch-scroll) {

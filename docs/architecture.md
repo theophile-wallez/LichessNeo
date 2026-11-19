@@ -247,6 +247,8 @@ so the logic can be unit-tested without a page.
   page's language.
 - `seek`: a game's "New opponent" (and the review's new game, beside its tabs)
   seeking in place, and the home's cards of the player's own.
+- `setup-warmup`: the home's game setup dialog's stylesheets, loaded when
+  idle and held, so it opens at once rather than after their download.
 - `color-scheme`: the settings' scheme pick, saved as Lichess's own.
 - `roundness`: the settings' Roundness, already on the page, saved as
   Lichess's own once the slider rests.

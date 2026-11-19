@@ -68,3 +68,18 @@ describe('the game setup’s dialog', () => {
     expect(title && getComputedStyle(title).paddingTop).toBe('0px');
   });
 });
+
+describe('a dialog not yet open', () => {
+  it('stays hidden under Lichess’s `display: flex` until it opens', () => {
+    const style = document.createElement('style');
+    style.textContent =
+      'dialog { display: flex; }' + readFileSync(join(import.meta.dirname, 'dialogs.css'), 'utf8');
+    document.head.append(style);
+    document.body.innerHTML = '<dialog><div class="close-button-anchor"></div></dialog>';
+    const dialog = queryOne(document, 'dialog', HTMLDialogElement);
+    if (!dialog) throw new Error('no dialog');
+    expect(getComputedStyle(dialog).display).toBe('none');
+    dialog.setAttribute('open', '');
+    expect(getComputedStyle(dialog).display).toBe('flex');
+  });
+});

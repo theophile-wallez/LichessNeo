@@ -15,6 +15,7 @@ import { gameOver } from './game-over/index.ts';
 import { chat } from './chat/index.ts';
 import { nextGameSeek } from './seek/index.ts';
 import { customSeek } from './seek/custom-seek.ts';
+import { setupWarmup } from './setup-warmup/index.ts';
 import { colorScheme } from './color-scheme/index.ts';
 import { roundness } from './roundness/index.ts';
 import { lichessLooks } from './looks/index.ts';
@@ -40,6 +41,7 @@ startFeatures([
   chat,
   nextGameSeek,
   customSeek,
+  setupWarmup,
   colorScheme,
   roundness,
   lichessLooks,
