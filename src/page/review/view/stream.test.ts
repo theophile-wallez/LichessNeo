@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { WORD_MS } from '#shared/coach-voice.ts';
+import { MAX_STREAM_MS, WORD_MS } from '#shared/coach-voice.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { type CommentPart, commentKey, commentMarkup } from '#page/review/comment/markup.ts';
 import { fakeReviewLayout } from '#page/review/fixtures/fake-review-layout.ts';
@@ -83,6 +83,28 @@ describe('the typing of a line in the title', () => {
     expect(typed()).toEqual([true, true, false]);
     vi.advanceTimersByTime(WORD_MS);
     expect(typed()).toEqual([true, true, true]);
+    expect(session.stream.timer).toBe(0);
+  });
+
+  it('speeds up long comments and updates the pace when switching from a short one', () => {
+    vi.useFakeTimers();
+    fakeReviewLayout();
+    const session = newSession();
+    const renderParts = (parts: readonly CommentPart[]) => {
+      session.stream.state = { key: commentKey(parts), shown: 0, dropped: 0 };
+      const markup = commentMarkup(parts, { stream: session.stream.state, language: en });
+      setHtml(session.elements.panel, html`<div class="ln-ext-bubble__sub">${markup}</div>`);
+      startStream(session);
+    };
+    // Start a short comment, then switch mid-stream to an 80-word paragraph.
+    renderParts([sentence('short', 10, false)]);
+    vi.advanceTimersByTime(WORD_MS * 2);
+    expect(session.stream.timer).not.toBe(0);
+
+    renderParts([sentence('long', 80, false)]);
+    vi.advanceTimersByTime(MAX_STREAM_MS + 1);
+    const remaining = session.elements.panel.querySelectorAll('.ln-ext-w--off').length;
+    expect(remaining).toBe(0);
     expect(session.stream.timer).toBe(0);
   });
 });

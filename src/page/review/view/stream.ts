@@ -1,4 +1,4 @@
-import { WORD_MS } from '#shared/coach-voice.ts';
+import { wordIntervalMs } from '#shared/coach-voice.ts';
 import { queryAll, queryOne } from '#shared/dom.ts';
 import type { Session } from '#page/review/session.ts';
 import { tellCoach } from './coach-avatar.ts';
@@ -26,6 +26,13 @@ export const overflows = ({ scrollHeight, clientHeight, lineHeight }: Fit): bool
 // bubble's title too (a verdict's title is drawn whole, with no words to type).
 const WORDS = ':is(.ln-ext-bubble__title, .ln-ext-bubble__sub) .ln-ext-w';
 
+function stop(session: Session): void {
+  const { stream } = session;
+  clearInterval(stream.timer);
+  stream.timer = 0;
+  stream.intervalMs = 0;
+}
+
 function tick(session: Session): void {
   const { stream } = session;
   const words = queryAll(session.elements.panel, WORDS, HTMLElement);
@@ -33,8 +40,7 @@ function tick(session: Session): void {
   stream.state = { ...stream.state, shown: stream.state.shown + 1 };
   if (word) word.className = 'ln-ext-w ln-ext-w--in';
   if (stream.state.shown >= words.length) {
-    clearInterval(stream.timer);
-    stream.timer = 0;
+    stop(session);
     tellCoach(session);
   }
 }
@@ -76,10 +82,15 @@ export function startStream(session: Session): void {
   const sub = queryOne(panel, '.ln-ext-bubble__sub', HTMLElement);
   if (sub) dropUnfit(session, sub);
   const { stream } = session;
-  if (stream.state.shown < queryAll(panel, WORDS, HTMLElement).length && stream.timer === 0) {
-    stream.timer = setInterval(() => tick(session), WORD_MS);
-    tellCoach(session);
-  }
+  const total = queryAll(panel, WORDS, HTMLElement).length;
+  if (stream.state.shown >= total) return;
+  const intervalMs = wordIntervalMs(total);
+  if (stream.timer !== 0 && stream.intervalMs === intervalMs) return;
+  const wasIdle = stream.timer === 0;
+  if (!wasIdle) clearInterval(stream.timer);
+  stream.intervalMs = intervalMs;
+  stream.timer = setInterval(() => tick(session), intervalMs);
+  if (wasIdle) tellCoach(session);
 }
 
 /**

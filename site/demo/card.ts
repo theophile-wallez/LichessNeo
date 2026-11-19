@@ -1,4 +1,4 @@
-import { WORD_MS } from '#shared/coach-voice.ts';
+import { wordIntervalMs } from '#shared/coach-voice.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { classSvg } from '#page/review/classes/icon-svg.ts';
 import { commentMarkup, commentKey } from '#page/review/comment/markup.ts';
@@ -39,7 +39,7 @@ export const bestCardMarkup = (move: MoveVerdict, language: ReviewLanguage): Saf
       <span class="demo-say__eval">${formatEval(move.before)}</span>
     </div>`;
 
-/** Types a card's hidden words out, one every WORD_MS, as the review's stream does. */
+/** Types a card's hidden words out, as the review's stream does. */
 export class Typist {
   readonly #onTalking: (talking: boolean) => void;
   #timer = 0;
@@ -60,7 +60,7 @@ export class Typist {
       if (shown < words.length) return;
       this.stop();
       done();
-    }, WORD_MS);
+    }, wordIntervalMs(words.length));
   }
 
   stop(): void {

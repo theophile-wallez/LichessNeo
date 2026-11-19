@@ -187,6 +187,8 @@ interface Stream {
   state: StreamState;
   /** The typing's interval, 0 when idle. */
   timer: number;
+  /** The interval's pace in ms, so a comment whose length changes restarts at its own pace. */
+  intervalMs: number;
 }
 
 export interface Session {
@@ -280,7 +282,7 @@ export function createSession(options: SessionOptions): Session {
     lines: { found: new Map(), busy: false },
     threats: { found: new Map(), busy: false },
     coach: { id: coach, reacted: '', avatar: null },
-    stream: { state: { key: '', shown: 0, dropped: 0 }, timer: 0 },
+    stream: { state: { key: '', shown: 0, dropped: 0 }, timer: 0, intervalMs: 0 },
     wide: matchMedia('(min-width: 1020px)'),
     tipFor: null,
     engine: null,

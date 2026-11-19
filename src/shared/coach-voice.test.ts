@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import type { CoachMood } from './coach.ts';
-import { createVoice, type Voice, WORD_MS } from './coach-voice.ts';
+import { createVoice, MAX_STREAM_MS, type Voice, WORD_MS, wordIntervalMs } from './coach-voice.ts';
 
 beforeEach(() => {
   vi.useFakeTimers();
@@ -40,6 +40,18 @@ describe('the coach’s voice', () => {
     expect(talk).toHaveBeenLastCalledWith('happy', false);
   });
 
+  it('types long texts faster so they finish within the stream budget', () => {
+    const bubble = document.createElement('p');
+    const { talk, voice } = voiceIn(bubble);
+    const words = Array.from({ length: 80 }, (_, i) => `w${i}`).join(' ');
+    voice.typeOut(words, 'happy', 0);
+    vi.advanceTimersByTime(0);
+    expect(talk).toHaveBeenLastCalledWith('happy', true);
+    vi.advanceTimersByTime(MAX_STREAM_MS + 1);
+    expect(shown(bubble)).toBe(words);
+    expect(talk).toHaveBeenLastCalledWith('happy', false);
+  });
+
   it('says words at once, talking for a moment, and drops what it was typing', () => {
     const bubble = document.createElement('p');
     const { talk, voice } = voiceIn(bubble);
@@ -51,5 +63,14 @@ describe('the coach’s voice', () => {
     expect(bubble.textContent).toBe('One moment…');
     expect(talk).toHaveBeenLastCalledWith('neutral', false);
     expect(talk).not.toHaveBeenCalledWith('worry', true);
+  });
+});
+
+describe('wordIntervalMs', () => {
+  it('keeps the base pace for short remarks and caps total time for long ones', () => {
+    expect(wordIntervalMs(0)).toBe(WORD_MS);
+    expect(wordIntervalMs(10)).toBe(WORD_MS);
+    expect(wordIntervalMs(100)).toBe(MAX_STREAM_MS / 100);
+    expect(wordIntervalMs(100)).toBeLessThan(WORD_MS);
   });
 });

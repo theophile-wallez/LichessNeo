@@ -6,8 +6,18 @@ import { html, setHtml } from './html.ts';
 // review/bubble.css): its mouth moves while the words come. The game over's
 // card speaks this way, and the Learn stages' coach.
 
-/** A word's turn to show, as the coach types its words out. */
+/** A word's turn to show, as the coach types a short remark out. */
 export const WORD_MS = 35;
+
+/**
+ * Longest a remark may take to finish typing: longer texts (such as an opening's
+ * theory) type faster so they land within this budget.
+ */
+export const MAX_STREAM_MS = 1000;
+
+/** Milliseconds per word when typing `wordCount` words out. */
+export const wordIntervalMs = (wordCount: number): number =>
+  wordCount > 0 ? Math.min(WORD_MS, MAX_STREAM_MS / wordCount) : WORD_MS;
 
 // Words said at once still get a moment of talking.
 const TALK_MS = 1200;
@@ -61,7 +71,7 @@ export function createVoice(bubble: HTMLElement, { talk, emptyClass }: VoiceOpti
           if (shown < spans.length) return;
           clearInterval(timer);
           talk(mood, false);
-        }, WORD_MS);
+        }, wordIntervalMs(spans.length));
       }, delayMs);
     },
   };
