@@ -210,6 +210,9 @@ importers:
         specifier: ^4.6.7
         version: 4.6.7
     devDependencies:
+      '@open-prompts/cli':
+        specifier: 0.1.1
+        version: 0.1.1
       '@playwright/test':
         specifier: ^1.64.1
         version: 1.64.1
@@ -300,6 +303,11 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@open-prompts/cli@0.1.1':
+    resolution: {integrity: sha512-LUDW3CneoMaKT4wgBrc3GYI5WxCng9z1SQgHMovUo1xSIOCGrKGDy4TuJsGfzFP0XZVEjT2HoPRCkChxi/MjtA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@oxc-project/types@0.154.0':
     resolution: {integrity: sha512-KYOUGQFlLWR+s4QMV2Q9ko38TZm7EdO87Qm7rvZLqk/webse/cDjtyxKhg/47l0byCbs/k46LT8qc4PKjAikzA==}
@@ -1397,6 +1405,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
+
+  '@open-prompts/cli@0.1.1': {}
 
   '@oxc-project/types@0.154.0': {}
 

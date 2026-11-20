@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - '@open-prompts/cli@0.1.1'

@@ -241,7 +241,7 @@ hold:
 | `pnpm turn`                     | who holds the preview and the ship turn (`take ship --wait`, `release ship`)     |
 | `pnpm playground`               | serves the mascots' playground on localhost:5180, reloaded on every change       |
 | `pnpm site`                     | serves the promotional site on localhost:5181, rebuilt on every change           |
-| `pnpm check`                    | typecheck, lint, format check, source rules, unit tests                          |
+| `pnpm check`                    | typecheck, lint, format check, source rules, prompt files, unit tests            |
 | `pnpm check:fast`               | the same, but only the unit tests of files changed since `origin/main`           |
 | `pnpm test` / `pnpm test:watch` | unit tests                                                                       |
 | `pnpm test:e2e`                 | end-to-end smoke tests on lichess.org (build first), run by CI                   |
@@ -284,6 +284,12 @@ hold:
   review's own code (`site/demo`, see docs/architecture.md's "The site").
 - `tests/e2e/`: Playwright smoke tests on lichess.org.
 - `tools/`: Python generators, run by hand.
+- `prompts/`: the prompts typed to coding agents here, one JSONL file per
+  session, written by [Open Prompts](https://github.com/theophile-wallez/open-prompts)'
+  hooks (`.open-prompts.json` opts the repository in; `open-prompts install`
+  puts the hooks in each agent, once per machine). Commit a session's file
+  with the change it asked for, after reading it: secrets are redacted on a
+  best-effort basis only.
 - `packs/`: the example pack users can import (`docs/packs.md` describes the
   format), `warm-wood.zip`, the same pack zipped by
   `scripts/example-pack.ts`, to drop on the settings' Packs card, and

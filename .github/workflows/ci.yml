@@ -29,6 +29,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm format:check
       - run: node scripts/check-sources.ts
+      - run: pnpm exec open-prompts validate
       - run: pnpm test:coverage
       - uses: actions/upload-artifact@v7
         with:
