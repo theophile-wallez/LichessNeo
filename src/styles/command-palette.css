@@ -4,10 +4,12 @@
  * menus' look (theme/base.css), high over the page, its list scrolling inside. The dialog
  * covers the window, so a click beside the box lands on it and closes it. */
 
-/* Lichess gives its dialogs a box of their own. */
+/* Lichess gives its dialogs a box of their own, and once its dialog sheet is in (on the
+ * home page from the start) a centering translate and a flex column, closed or not. */
 #ln-ext-palette {
   position: fixed;
   inset: 0;
+  transform: none;
   box-sizing: border-box;
   width: auto !important;
   height: auto !important;
@@ -24,8 +26,13 @@
   overflow: hidden;
 }
 
+#ln-ext-palette:not([open]) {
+  display: none;
+}
+
 #ln-ext-palette[open] {
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: center;
 }
