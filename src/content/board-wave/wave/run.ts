@@ -81,14 +81,32 @@ interface Run {
   readonly source: Rect;
   /** When the picture came in, or null before it does. */
   pictureAt: number | null;
-  /** The wave is over, its renderer gone: a picture that comes now is dropped. */
+  /** The wave is over, its renderer kept for the next: a picture that comes now is dropped. */
   done: boolean;
 }
 
+// A renderer kept between waves, its shaders compiled: compiling them anew
+// held up the main thread for 20 to 30 ms as a wave set off.
+let spare: WaveRenderer | null = null;
+
+function takeRenderer(): WaveRenderer | null {
+  const kept = spare;
+  spare = null;
+  if (kept && !kept.lost) return kept;
+  kept?.dispose();
+  return WaveRenderer.create(createElement('canvas'));
+}
+
+function keepRenderer(renderer: WaveRenderer): void {
+  if (spare) return renderer.dispose();
+  renderer.park();
+  spare = renderer;
+}
+
 function startRun(board: HTMLElement, plan: WavePlan): Run | null {
-  const canvas = createElement('canvas');
-  const renderer = WaveRenderer.create(canvas);
+  const renderer = takeRenderer();
   if (!renderer) return null;
+  const { canvas } = renderer;
   const box = board.getBoundingClientRect();
   const geometry = geometryOf(box, renderer.maxTextureSize);
   const corner = Number.parseFloat(getComputedStyle(board).borderTopLeftRadius) || 0;
@@ -152,9 +170,10 @@ async function takePicture(run: Run): Promise<void> {
   }
 }
 
-/** Compiles the wave's shaders once ahead, so the browser has them at hand when it plays. */
+/** Compiles the wave's shaders ahead, in the renderer the next wave plays with. */
 export function warmWave(): void {
-  WaveRenderer.create(createElement('canvas'))?.dispose();
+  const renderer = takeRenderer();
+  if (renderer) keepRenderer(renderer);
 }
 
 /**
@@ -189,7 +208,7 @@ export async function playWave(
     requestAnimationFrame(tick);
   });
   run.done = true;
-  run.renderer.dispose();
+  keepRenderer(run.renderer);
   run.layer.remove();
   closeSandbox();
 }

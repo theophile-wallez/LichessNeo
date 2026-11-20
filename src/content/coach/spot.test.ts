@@ -105,4 +105,19 @@ describe('a mascot’s spot', () => {
     mascots.mounted[0]?.draw();
     expect(holder.dataset.lnExtLive).toBeUndefined();
   });
+
+  it('is built only once what it waits for is over', async () => {
+    const { promise, resolve } = Promise.withResolvers<void>();
+    const spot = new MascotSpot({
+      className: 'ln-ext-test',
+      framing: 'bust',
+      after: () => promise,
+    });
+    spot.sync(holderOf(), 'neutral', { computer: 1 });
+    await flush();
+    expect(mascots.mounted).toHaveLength(0);
+    resolve();
+    await flush();
+    expect(mascots.mounted).toHaveLength(1);
+  });
 });

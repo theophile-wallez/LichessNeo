@@ -21,6 +21,8 @@ export interface SpotOptions {
   readonly greets?: boolean;
   /** It's built once the browser is idle, so it never holds up the page. */
   readonly whenIdle?: boolean;
+  /** What it waits for before it's built, as an animation it would drop frames of. */
+  readonly after?: () => Promise<void>;
   /** Called once it's drawn, with what holds it. */
   readonly onDrawn?: (holder: HTMLElement) => void;
 }
@@ -86,7 +88,8 @@ export class MascotSpot {
     });
     holder.append(box);
     this.#box = box;
-    const { framing, greets, whenIdle, onDrawn } = this.#options;
+    const { framing, greets, whenIdle, after, onDrawn } = this.#options;
+    if (after) await after();
     if (whenIdle) await idle();
     const mountMascot = await loadMascots();
     if (this.#box !== box || !box.isConnected) return;

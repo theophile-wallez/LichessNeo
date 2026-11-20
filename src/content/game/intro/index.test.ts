@@ -3,6 +3,7 @@ import { queryOne } from '#shared/dom.ts';
 import { userAvatar } from '#shared/own-avatar.ts';
 import { SessionKey } from '#shared/storage.ts';
 import { flush } from '#shared/testing/timers.ts';
+import { afterIntro, introOver } from './after-intro.ts';
 import { FACEOFF_MS } from './faceoff.ts';
 import { prepareIntro, syncIntro } from './index.ts';
 
@@ -59,11 +60,22 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  introOver();
   Object.assign(settings, { gameIntro: 'faceoff', read: true });
   vi.useRealTimers();
   vi.unstubAllGlobals();
   document.body.innerHTML = '';
 });
+
+/** Whether what waits for the intro from now has been let through. */
+function waiting(): () => boolean {
+  let through = false;
+  void (async () => {
+    await afterIntro();
+    through = true;
+  })();
+  return () => through;
+}
 
 const main = (): HTMLElement | null => queryOne(document, 'main.round', HTMLElement);
 const intro = (): Element | null => document.querySelector('main.round > .ln-ext-intro');
@@ -99,6 +111,31 @@ describe('the game intro', () => {
     // Once only.
     syncIntro();
     expect(intro()).toBeNull();
+  });
+
+  it('holds what waits for it from the game’s start until it ends', async () => {
+    prepareIntro(initData(false));
+    const through = waiting();
+    decoded();
+    await flush();
+    vi.useFakeTimers();
+    syncIntro();
+    await vi.advanceTimersByTimeAsync(FACEOFF_MS - 1);
+    expect(through()).toBe(false);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(through()).toBe(true);
+  });
+
+  it('lets what waits for it go when the settings pick none', async () => {
+    settings.gameIntro = 'off';
+    prepareIntro(initData(false));
+    const through = waiting();
+    decoded();
+    await flush();
+    expect(through()).toBe(false);
+    syncIntro();
+    await flush();
+    expect(through()).toBe(true);
   });
 
   it('plays once per game, even across reloads', async () => {

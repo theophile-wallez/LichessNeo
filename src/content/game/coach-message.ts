@@ -3,12 +3,13 @@ import { queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { MascotSpot } from '#content/coach/spot.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
+import { afterIntro } from './intro/after-intro.ts';
 
 // Lichess's word over the moves before the first one ("You play the white
 // pieces. It's your turn!"), said by the coach in the Game Review's bubble
 // (styles/game/coach-message.css), or by the computer's robot in a game against
 // it. The stylesheet shows its still at once; the live one, built once the
-// page is idle, takes its place when first drawn (`data-ln-ext-live`). The
+// intro is over and the page idle, takes its place when first drawn (`data-ln-ext-live`). The
 // message goes with the first move, and the mascot with it. With no coach, the
 // robot doesn't show either: the card holds Lichess's words alone.
 
@@ -17,6 +18,7 @@ const spot = new MascotSpot({
   framing: 'bust',
   greets: false,
   whenIdle: true,
+  after: afterIntro,
 });
 let coach: number | null | undefined;
 

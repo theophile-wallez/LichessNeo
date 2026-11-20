@@ -38,7 +38,7 @@ const paletteValues = (palette: Palette): Float32Array =>
   new Float32Array(palette.colors.slice(0, MAX_COLORS).flatMap(oklab));
 
 export class WaveRenderer {
-  private readonly canvas: HTMLCanvasElement;
+  readonly canvas: HTMLCanvasElement;
   private readonly gl: WebGL2RenderingContext;
   private readonly passes: BlurPasses;
   private readonly main: Program;
@@ -85,6 +85,11 @@ export class WaveRenderer {
       console.warn('[LichessNeo] board wave', error);
       return null;
     }
+  }
+
+  /** The GPU dropped the context (a sleep, a driver reset): it draws nothing any more. */
+  get lost(): boolean {
+    return this.gl.isContextLost();
   }
 
   get maxTextureSize(): number {
@@ -150,6 +155,13 @@ export class WaveRenderer {
     this.setStyle(style);
     gl.uniform3fv(main.uniform('uLumps'), lumps);
     this.passes.drawQuad();
+  }
+
+  /** Kept for the next wave: its programs stay, its picture and its canvas's pixels go. */
+  park(): void {
+    this.dropPicture();
+    this.canvas.width = 1;
+    this.canvas.height = 1;
   }
 
   /** Frees the GPU's memory and gives the context back: browsers allow only so many. */

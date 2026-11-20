@@ -45,6 +45,8 @@ export interface PlayOptions {
   readonly host?: HTMLElement;
   /** The face-off's dropped board, as a CSS image; one picked now by default. */
   readonly board?: string;
+  /** Called as it ends, by itself or sooner. */
+  readonly onEnd?: () => void;
 }
 
 // The corner the layer's boxes count from: the window's, or the host's padding box.
@@ -96,6 +98,7 @@ export function playIntro(scene: Scene, kind: ShownKind, options: PlayOptions = 
     window.clearTimeout(timer);
     end();
     setData(scene.root, 'lnExtIntro', null);
+    options.onEnd?.();
   };
   // A timer rather than `animationend`: with animations off, none would come.
   const timer = window.setTimeout(finish, intro?.ms ?? FACEOFF_MS);

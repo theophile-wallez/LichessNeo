@@ -12,6 +12,7 @@ import { computerRatings } from '#content/game/ai-players.ts';
 import { syncAvatars } from '#content/ui/avatars.ts';
 import { currentSettings, settingsRead } from '#content/settings/settings.ts';
 import { decodeFaceoff, faceoffBoard } from './faceoff.ts';
+import { introComing, introOver, introStarted } from './after-intro.ts';
 import { playIntro, type Scene } from './play.ts';
 import { avatarBox, readSetup, type Side } from './stage.ts';
 
@@ -37,6 +38,7 @@ export function prepareIntro(initData: string | null): void {
   if (readStored(SessionKey.gameIntro(gameId), ShownSchema, 'session') !== null) return;
   const next: Pending = { gameId, board: faceoffBoard(), loaded: false };
   pending = next;
+  introComing();
   void decodeFaceoff().finally(() => {
     next.loaded = true;
   });
@@ -74,12 +76,14 @@ export function syncIntro(): void {
   const kind = currentSettings().gameIntro;
   if (kind === 'off') {
     pending = null;
+    introOver();
     return;
   }
   const scene = readScene();
   if (!scene) return;
   writeStored(SessionKey.gameIntro(pending.gameId), '1', 'session');
-  playIntro(scene, kind, { board: pending.board });
+  introStarted();
+  playIntro(scene, kind, { board: pending.board, onEnd: introOver });
   pending = null;
 }
 

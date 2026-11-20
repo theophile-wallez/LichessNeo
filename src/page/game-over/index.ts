@@ -8,6 +8,7 @@ import { playedGame, type PlayedGame } from '#shared/round-init.ts';
 import type { Stockfish } from '#page/review/engine/stockfish.ts';
 import { bootEngine } from '#page/review/engine-pool.ts';
 import { fetchExport } from '#page/review/game/export.ts';
+import { afterBoardWave } from './after-wave.ts';
 import { opponentName } from './board.ts';
 import { fetchFinishedGame, type FinishedGame, roundFinishedGame } from './game-data.ts';
 import { playEndAnimation, shownResult } from './end-animation.ts';
@@ -48,7 +49,7 @@ async function quickLook(game: PlayedGame, finished: FinishedGame): Promise<Quic
   let engine: Stockfish | null = null;
   try {
     const [booted, book] = await Promise.all([
-      bootEngine(chess960),
+      afterBoardWave().then(() => bootEngine(chess960)),
       bookPly(game.gameId, positions.length),
     ]);
     engine = booted;

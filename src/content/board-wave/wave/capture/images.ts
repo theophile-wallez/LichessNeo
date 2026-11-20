@@ -1,3 +1,4 @@
+import { escapeHtml } from '#shared/escape.ts';
 import { pageImage } from './page-image.ts';
 
 // The images a picture of the board holds (after distortion-waves' capture,
@@ -70,25 +71,40 @@ async function load(url: string): Promise<void> {
   keep(url, data ?? (await drawn(url)));
 }
 
-/** The images one picture needs: those already kept, and those still to load. */
-export class Embeds {
-  private readonly missing = new Set<string>();
+/** What stands in for an image that couldn't be read: a clear pixel. */
+const LEFT_OUT_IMAGE =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
-  /** `url`'s data URL if kept; otherwise null, and it's noted for `loadMissing`. */
+/**
+ * The images one picture needs. One still to load is written as a mark, and
+ * filled in once it's in: the board is walked once, not again after its images.
+ */
+export class Embeds {
+  private readonly missing = new Map<string, string>();
+  private readonly mark = `ln-ext-embed-${crypto.randomUUID()}-`;
+
+  /** `url`'s data URL if kept; otherwise null if it can't be read, or a mark that `fill` replaces. */
   dataOf(url: string): string | null {
     if (url.startsWith('data:')) return url;
     const kept = store.get(url);
-    if (kept === undefined) this.missing.add(url);
-    return kept ?? null;
+    if (kept !== undefined) return kept;
+    let mark = this.missing.get(url);
+    if (mark === undefined) {
+      mark = `${this.mark}${this.missing.size}`;
+      this.missing.set(url, mark);
+    }
+    return mark;
   }
 
-  get complete(): boolean {
-    return this.missing.size === 0;
-  }
-
-  async loadMissing(): Promise<void> {
-    await Promise.all([...this.missing].map(load));
+  /** `markup` with the images it marks loaded in, those that can't be read left clear. */
+  async fill(markup: string): Promise<string> {
+    if (this.missing.size === 0) return markup;
+    await Promise.all([...this.missing.keys()].map(load));
+    let filled = markup;
+    for (const [url, mark] of this.missing)
+      filled = filled.replaceAll(mark, escapeHtml(store.get(url) ?? LEFT_OUT_IMAGE));
     this.missing.clear();
+    return filled;
   }
 }
 

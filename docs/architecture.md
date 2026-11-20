@@ -126,7 +126,7 @@ so the logic can be unit-tested without a page.
   ends unless the settings pick the confetti or nothing, a ring in the result's colour out of the
   mated king or the last move's square, or the centre for a draw (`plan.ts`). The wave
   itself (`wave/`) is the ES chunk `board-wave.js`, loaded with `import()` when one first
-  plays, or ahead with its shaders on a game's page: a clear WebGL 2 canvas of ours fixed over the board, which bends a picture of it
+  plays, or ahead with its shaders on a game's page, whose renderer the next wave takes: a clear WebGL 2 canvas of ours fixed over the board, which bends a picture of it
   (`wave/capture`: the board's tree with its computed styles in an SVG `<foreignObject>`,
   its images inlined) and lays its colour over the live board. In Firefox the picture's
   image is the page's own (`capture/page-image.ts`), or the canvas is tainted. Without
@@ -258,7 +258,8 @@ so the logic can be unit-tested without a page.
 - `game-over`: kings' badges, the end's animation the settings pick, played off the score and
   the board as Lichess shows them (the board's wave, which it asks of the content script with
   the square it starts from, or confetti), the
-  coach's card in the panel, which folds down to its buttons.
+  coach's card in the panel, which folds down to its buttons. Its engine boots once the wave is
+  over (`after-wave.ts`): the boot would stop the wave for half a second.
 - `chat`: the chat's lines marked for their bubbles, its game events in the
   page's language.
 - `seek`: a game's "New opponent" (and the review's new game, beside its tabs)

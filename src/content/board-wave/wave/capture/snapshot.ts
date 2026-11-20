@@ -97,13 +97,9 @@ function backgroundOf(element: Element): string {
 export async function snapshot(request: SnapshotRequest): Promise<HTMLCanvasElement | null> {
   if (!(await prepareSandbox())) return null;
   const embeds = new Embeds();
-  let walk = walkOnce(request, embeds);
-  if (walk && !embeds.complete) {
-    await embeds.loadMissing();
-    walk = walkOnce(request, embeds);
-  }
+  const walk = walkOnce(request, embeds);
   if (!walk) return null;
-  const markup = svgMarkup(walk, request);
+  const markup = await embeds.fill(svgMarkup(walk, request));
   if (FIREFOX) {
     await loadSvg(markup);
     await new Promise(resolve => {
