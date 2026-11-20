@@ -1,6 +1,7 @@
 import { z } from 'zod/mini';
 import { CoachMoodSchema, CoachOptionsSchema, type CoachOptions } from './coach.ts';
 import { CustomSeekSchema, type CustomSeek } from './custom-seek.ts';
+import { GameEndSchema, type GameEnd } from './end-animation.ts';
 import { RoundnessSchema } from './roundness.ts';
 import { SoundNameSchema, SoundPlaceSchema } from './sounds.ts';
 import { messageType } from './prefix.ts';
@@ -82,6 +83,11 @@ const CustomSeekRequestSchema = z.object({
 const CustomSeekStateSchema = z.object({
   type: z.literal(messageType('custom-seek-state')),
   seeking: z.boolean(),
+});
+
+const GameEndMessageSchema = z.object({
+  type: z.literal(messageType('game-end')),
+  end: GameEndSchema,
 });
 
 export type ColorScheme = z.infer<typeof ColorSchemeSchema>;
@@ -189,3 +195,8 @@ export const postCustomSeekState = (seeking: boolean): void =>
   post({ type: messageType('custom-seek-state'), seeking });
 export const onCustomSeekState = (handler: (seeking: boolean) => void): (() => void) =>
   listen(CustomSeekStateSchema, ({ seeking }) => handler(seeking));
+
+/** Page → content: the player's game has just ended on the page, for the board's wave. */
+export const postGameEnd = (end: GameEnd): void => post({ type: messageType('game-end'), end });
+export const onGameEnd = (handler: (end: GameEnd) => void): (() => void) =>
+  listen(GameEndMessageSchema, message => handler(message.end));

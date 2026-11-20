@@ -1,8 +1,7 @@
 import PlayIcon from '@hugeicons/core-free-icons/PlayIcon';
-import { parsePlacement, START_PLACEMENT } from '#shared/chess/fen.ts';
-import { squareCoords } from '#shared/chess/squares.ts';
+import { START_PLACEMENT } from '#shared/chess/fen.ts';
 import type { Color } from '#shared/chess/types.ts';
-import { createCustomElement, createElement, queryOne, setStyleProperty } from '#shared/dom.ts';
+import { createElement, queryOne } from '#shared/dom.ts';
 import { html, setHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
 import { avatarAttributes } from '#shared/own-avatar.ts';
@@ -13,10 +12,12 @@ import { message } from '#content/platform/runtime.ts';
 import type { IntroKind } from '#content/game/intro/kinds.ts';
 import { playIntro, type Scene } from '#content/game/intro/play.ts';
 import { avatarBox, type Side } from '#content/game/intro/stage.ts';
+import { playEndPreview, type EndShow } from './end-preview.ts';
+import { drawBoard, setPosition } from './preview-board.ts';
 
-// The game intro's preview, in its settings card (styles/pages/settings-intro.css):
+// The game animations' preview, in their settings card (styles/pages/settings-intro.css):
 // a little game page, the user against an opponent of ours, which plays the
-// intro picked as a game would.
+// intro or the end picked as a game would.
 
 // The speed's glyph in Lichess's font, as the game's info has it.
 const BLITZ_ICON = '\u{e008}';
@@ -28,6 +29,8 @@ export interface IntroPreview {
   readonly element: HTMLElement;
   /** Plays `kind`, stopping the one playing; nothing for none. */
   readonly play: (kind: IntroKind) => void;
+  /** Plays an end, stopping what's playing; nothing for none. */
+  readonly playEnd: (show: EndShow) => void;
 }
 
 const player = (name: string, user: string | undefined, rating?: string): BarPlayer => ({
@@ -45,22 +48,6 @@ const sideOf = (bar: HTMLElement, who: BarPlayer, color: Color): Side => ({
   player: who,
   color,
 });
-
-function drawBoard(host: HTMLElement): HTMLElement {
-  const wrap = createElement('div', { className: 'cg-wrap orientation-white' });
-  const container = createCustomElement('cg-container');
-  const board = createCustomElement('cg-board');
-  for (const [square, { color, role }] of parsePlacement(START_PLACEMENT)) {
-    const piece = createCustomElement('piece', { className: `${color} ${role}` });
-    const [file, rank] = squareCoords(square);
-    setStyleProperty(piece, 'transform', `translate(${file * 100}%, ${(7 - rank) * 100}%)`);
-    board.append(piece);
-  }
-  container.append(board);
-  wrap.append(container);
-  host.append(wrap);
-  return board;
-}
 
 export function buildIntroPreview(): IntroPreview {
   const user = document.body.dataset.user;
@@ -88,11 +75,15 @@ export function buildIntroPreview(): IntroPreview {
   const host = queryOne(element, '.ln-ext-intro-preview__board', HTMLElement);
   const top = queryOne(element, '.ln-ext-intro-preview__bar--top', HTMLElement);
   const bottom = queryOne(element, '.ln-ext-intro-preview__bar--bottom', HTMLElement);
-  const board = host && drawBoard(host);
+  const board = host && drawBoard(host, START_PLACEMENT);
+  // An end's position stays until something else plays.
+  let ended = false;
   let stop: (() => void) | null = null;
   const play = (kind: IntroKind): void => {
     stop?.();
     stop = null;
+    if (board && ended) setPosition(board, START_PLACEMENT);
+    ended = false;
     if (kind === 'off' || !scene || !board || !top || !bottom) return;
     const shown: Scene = {
       root: scene,
@@ -103,5 +94,12 @@ export function buildIntroPreview(): IntroPreview {
     };
     stop = playIntro(shown, kind, { host: scene });
   };
-  return { element, play };
+  const playEnd = (show: EndShow): void => {
+    stop?.();
+    stop = null;
+    if (show.pick === 'none' || !host || !board) return;
+    ended = true;
+    stop = playEndPreview(host, board, show);
+  };
+  return { element, play, playEnd };
 }

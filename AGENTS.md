@@ -438,7 +438,7 @@ features and its name: free analysis, open data, no ads.
   game has no chat: `content/layout/panel-tabs.ts`), on the game page and the
   analysis pages alike, so none of them takes a height of its own.
 - **The feel:** a pack's sounds if the user has one, the players' intro at the
-  start (picked in the settings), the kings' badges, the winner's confetti and
+  start (picked in the settings), the kings' badges, the end's ripple or confetti and
   the coach's card at the end, and a Game Review ("Bilan") with an eval graph,
   accuracy, move classes, the coach's card, board badges and an eval bar.
 - **The coach talks in a card:** wherever the coach speaks (the review, a

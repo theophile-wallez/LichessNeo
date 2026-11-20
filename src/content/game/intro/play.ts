@@ -4,6 +4,7 @@ import { credits } from './credits.ts';
 import { FACEOFF_MS, faceoffBoard, playFaceoff } from './faceoff.ts';
 import type { IntroKind } from './kinds.ts';
 import { march } from './march.ts';
+import { ripple } from './ripple.ts';
 import { salute } from './salute.ts';
 import { setup } from './setup.ts';
 import { boxOf, type GameSetup, type Intro, type Side, type Stage } from './stage.ts';
@@ -17,6 +18,7 @@ import { weave } from './weave.ts';
 export type ShownKind = Exclude<IntroKind, 'off'>;
 
 const INTROS: Readonly<Record<Exclude<ShownKind, 'faceoff'>, Intro>> = {
+  ripple,
   salute,
   setup,
   march,

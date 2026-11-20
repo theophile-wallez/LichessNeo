@@ -1,5 +1,5 @@
-/* The end of a game the player watched end (page/game-over): the kings' badges and the winner's
- * confetti, in a layer over the board that lets every click through; the result's card is in the
+/* The end of a game the player watched end (page/game-over): the kings' badges in a layer over
+ * the board that lets every click through, and the confetti in one of their own beside it; the result's card is in the
  * right-hand panel (game-end-card.css). Lichess's own badges on the kings give way to ours. The
  * badges show large, then `.ln-ext-end--settled` shrinks them to pips on the kings' corners as the
  * coach starts speaking. A mate shows the board's mate badge instead (board/mate.css). */
@@ -8,7 +8,7 @@ main:is(.round, .analyse)[data-ln-ext-end] .cg-custom-svgs {
   display: none !important;
 }
 
-main:is(.round, .analyse) > .ln-ext-end {
+main:is(.round, .analyse) > :is(.ln-ext-end, .ln-ext-end-fx) {
   grid-area: board;
   position: relative;
   /* Over the review's badges on the board (#ln-ext-board-overlay, review/eval-bar.css). */
@@ -22,7 +22,7 @@ main:is(.round, .analyse) > .ln-ext-end {
 
 /* The analysis board's area also holds its player bars: the layer is the board's square,
    under the top bar. Only a dev build shows it there (page/game-over/preview.ts). */
-main.analyse > .ln-ext-end {
+main.analyse > :is(.ln-ext-end, .ln-ext-end-fx) {
   align-self: start;
   aspect-ratio: 1;
   margin-top: calc(var(--ln-ext-bar, 0px) + var(--ln-ext-inset-t, 0px));
@@ -161,14 +161,14 @@ main:is(.round, .analyse) .ln-ext-end__king--end .ln-ext-end__king-label {
 /* Each piece falls from above the board with its own drift, spin, size and pace
  * (shared/confetti.ts), then is gone. Practice's cheers rain them too, in a layer of their own
  * (page/review/view/practice-cheer.ts). */
-main:is(.round, .analyse) .ln-ext-confetti {
+:is(main:is(.round, .analyse), .ln-ext-intro-preview__board) .ln-ext-confetti {
   position: absolute;
   inset: 0;
   overflow: hidden;
   border-radius: 4px;
 }
 
-main:is(.round, .analyse) .ln-ext-confetti__piece {
+:is(main:is(.round, .analyse), .ln-ext-intro-preview__board) .ln-ext-confetti__piece {
   position: absolute;
   top: 0;
   left: calc(var(--x) * 1%);
@@ -181,14 +181,14 @@ main:is(.round, .analyse) .ln-ext-confetti__piece {
   animation: ln-ext-confetti-fall var(--fall) var(--delay) cubic-bezier(0.25, 0.4, 0.55, 1) both !important;
 }
 
-main:is(.round, .analyse) .ln-ext-confetti__piece--dot {
+:is(main:is(.round, .analyse), .ln-ext-intro-preview__board) .ln-ext-confetti__piece--dot {
   height: calc(var(--size) * 1.3cqh);
   width: calc(var(--size) * 1.3cqh);
   border-radius: 50%;
 }
 
 /* A ribbon: a quarter of a ring, as a curled strip reads. */
-main:is(.round, .analyse) .ln-ext-confetti__piece--curl {
+:is(main:is(.round, .analyse), .ln-ext-intro-preview__board) .ln-ext-confetti__piece--curl {
   width: calc(var(--size) * 4cqh);
   height: calc(var(--size) * 4cqh);
   border: calc(var(--size) * 0.9cqh) solid var(--c);

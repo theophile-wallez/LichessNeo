@@ -949,40 +949,91 @@
     "message": "$1 sur Lichess"
   },
   "settingGameIntro": {
-    "message": "Intro de partie"
+    "message": "Animations de partie"
   },
   "settingGameIntroBody": {
-    "message": "L’animation qui ouvre chacune de vos parties, une fois les joueurs installés."
+    "message": "Ce qui se joue au début de chacune de vos parties, une fois les joueurs installés, et à sa fin."
+  },
+  "animationsStart": {
+    "message": "Début"
+  },
+  "animationsEnd": {
+    "message": "Fin"
+  },
+  "endResultsTitle": {
+    "message": "Quand"
+  },
+  "endResultsWin": {
+    "message": "Je gagne"
+  },
+  "endResultsNotLoss": {
+    "message": "Je gagne ou fais nulle"
+  },
+  "endResultsAll": {
+    "message": "Toujours"
+  },
+  "winColorTitle": {
+    "message": "Couleurs de la victoire"
+  },
+  "winColorGreen": {
+    "message": "Vert"
+  },
+  "winColorRainbow": {
+    "message": "Arc-en-ciel"
+  },
+  "winColorOcean": {
+    "message": "Océan"
+  },
+  "winColorSunset": {
+    "message": "Coucher de soleil"
+  },
+  "winColorAccent": {
+    "message": "Thème"
+  },
+  "endAnimationConfetti": {
+    "message": "Confettis"
+  },
+  "endAnimationWave": {
+    "message": "Ondulation"
+  },
+  "endAnimationNone": {
+    "message": "Aucune animation"
+  },
+  "introNew": {
+    "message": "Nouveau"
   },
   "introOff": {
     "message": "Aucune animation"
   },
   "introSalute": {
-    "message": "Le salut"
+    "message": "Salut"
   },
   "introSetup": {
-    "message": "La mise en place"
+    "message": "Mise en place"
   },
   "introMarch": {
-    "message": "La marche des armées"
+    "message": "Marche des armées"
   },
   "introWeave": {
-    "message": "Le tissage"
+    "message": "Tissage"
   },
   "introWave": {
-    "message": "La ola"
+    "message": "Ola"
+  },
+  "introRipple": {
+    "message": "Ondulation"
   },
   "introTicket": {
-    "message": "Le billet"
+    "message": "Billet"
   },
   "introCamps": {
-    "message": "Les deux camps"
+    "message": "Deux camps"
   },
   "introCredits": {
-    "message": "Le générique"
+    "message": "Générique"
   },
   "introFaceOff": {
-    "message": "Le face-à-face"
+    "message": "Face-à-face"
   },
   "introPreviewPlay": {
     "message": "Lancer"

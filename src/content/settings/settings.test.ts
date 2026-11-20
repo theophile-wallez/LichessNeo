@@ -12,6 +12,24 @@ describe('the settings', () => {
     });
   });
 
+  it('play the board’s wave at a game’s end, unless another animation is picked', () => {
+    expect(parseSettings({}).endAnimation).toBe('wave');
+    expect(parseSettings({ endAnimation: 'fireworks' }).endAnimation).toBe('wave');
+    expect(parseSettings({ endAnimation: 'confetti' }).endAnimation).toBe('confetti');
+  });
+
+  it('play it after a win only, a win’s wave in a rainbow, unless picked otherwise', () => {
+    expect(parseSettings({})).toMatchObject({ endResults: 'win', endWinColor: 'rainbow' });
+    expect(parseSettings({ endResults: 'never', endWinColor: 'plaid' })).toMatchObject({
+      endResults: 'win',
+      endWinColor: 'rainbow',
+    });
+    expect(parseSettings({ endResults: 'all', endWinColor: 'ocean' })).toMatchObject({
+      endResults: 'all',
+      endWinColor: 'ocean',
+    });
+  });
+
   it('have the coach draw on the board unless switched off', () => {
     expect(parseSettings({}).coachBoard).toBe(true);
     expect(parseSettings({ coachBoard: false }).coachBoard).toBe(false);

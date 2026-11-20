@@ -10,6 +10,7 @@ import { bootEngine } from '#page/review/engine-pool.ts';
 import { fetchExport } from '#page/review/game/export.ts';
 import { opponentName } from './board.ts';
 import { fetchFinishedGame, type FinishedGame, roundFinishedGame } from './game-data.ts';
+import { playEndAnimation, shownResult } from './end-animation.ts';
 import { finalMate } from './mate.ts';
 import { type Outcome, readOutcome } from './outcome.ts';
 import { precomputeReview, worthReviewing } from './precompute.ts';
@@ -18,14 +19,13 @@ import { type PlayerSummary, quickReview, quickSearch, summarize } from './quick
 import { gameOverTexts } from './texts.ts';
 import { mountGameOver } from './view.ts';
 
-// The end of a game the player watches end: the kings' badges, confetti for
-// the winner, and a card in the right-hand panel where the coach counts the
-// player's best moves and errors before sending them to Game Review, whose
+// The end of a game the player watches end: the kings' badges, the end's
+// animation the settings pick (confetti or the board's wave, after the results they pick), and
+// a card in the right-hand panel where the coach counts the player's best
+// moves and errors before sending them to Game Review, whose
 // analysis then runs here, so the review is ready when opened, and its
 // figures replace the count's. A player's game opened once over gets it too,
-// without the confetti, and at once. A dev build can show it at will (preview.ts).
-
-const WATCH_MS = 250;
+// without the animation, and at once. A dev build can show it at will (preview.ts).
 
 async function bookPly(gameId: string, positions: number): Promise<number> {
   try {
@@ -112,7 +112,6 @@ export async function onGameEnd(
     texts,
     coachId: speakingCoach(),
     opponent: opponentName(main, game.color, texts.anonymous),
-    live: game.live,
     mate: outcome.reason === 'mate' ? finalMate(finished) : null,
   });
   const positions = finished.treeParts;
@@ -169,26 +168,23 @@ async function reviewSummary(
 function endIfShown(game: PlayedGame, opened: FinishedGame | null): boolean {
   const main = queryOne(document, 'main.round', HTMLElement);
   if (!main?.querySelector('.result-wrap')) return false;
+  // Watched as it ended, its animation plays off the score at once, before the finished game comes.
+  const result = opened ? null : shownResult(main, game.color);
+  if (result) playEndAnimation({ main, result });
   void onGameEnd(game, main, opened);
   return true;
 }
 
 /**
- * Waits for the game's result to show, then plays its end once. A game opened
- * once over shows it as Lichess first draws the page: its card comes in with
- * the buttons, in the same frame, rather than at the next look.
+ * Waits for the game's result to show, then plays its end once, in the frame
+ * Lichess draws it: a game opened once over gets its card with the buttons,
+ * one watched as it ends its animation with the mating move.
  */
 function watchEnd(game: PlayedGame, opened: FinishedGame | null): void {
-  if (opened) {
-    const observer = new MutationObserver(() => {
-      if (endIfShown(game, opened)) observer.disconnect();
-    });
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-    return;
-  }
-  const timer = setInterval(() => {
-    if (endIfShown(game, null)) clearInterval(timer);
-  }, WATCH_MS);
+  const observer = new MutationObserver(() => {
+    if (endIfShown(game, opened)) observer.disconnect();
+  });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 }
 
 export const gameOver: Feature = {

@@ -59,6 +59,8 @@ export const OUTPUT = {
   page: 'page.js',
   /** The coach's 3D mascots, loaded by the content script when a coach shows. */
   mascot: 'coach-mascot.js',
+  /** The board's wave, loaded by the content script when a wave plays. */
+  wave: 'board-wave.js',
   styles: 'content.css',
 } satisfies Record<string, string>;
 
@@ -96,6 +98,7 @@ export function createManifest(target: Target, version: string): Manifest {
       {
         resources: [
           OUTPUT.mascot,
+          OUTPUT.wave,
           'img/boards/*',
           'img/coaches/*',
           'img/hugeicons/*',

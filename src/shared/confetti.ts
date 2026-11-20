@@ -1,7 +1,7 @@
 import { html, type SafeHtml } from './html.ts';
 
-// Confetti: a one-off shower over the board, for the winner of a game
-// (page/game-over) or a cheer of practice's (page/review/view/practice-cheer.ts),
+// Confetti: a one-off shower over the board, at a game's end (page/game-over,
+// and its preview in the settings) or a cheer of practice's (page/review/view/practice-cheer.ts),
 // each piece its own CSS animation (styles/game/game-end.css) from the numbers
 // drawn here.
 
@@ -62,4 +62,16 @@ export function confettiMarkup(pieces: readonly ConfettiPiece[]): SafeHtml {
       html`<i class="ln-ext-confetti__piece ln-ext-confetti__piece--${piece.shape}" style="--x:${piece.x.toFixed(1)};--drift:${piece.drift.toFixed(1)};--spin:${piece.spin.toFixed(2)};--size:${piece.size.toFixed(2)};--delay:${piece.delayMs}ms;--fall:${piece.durationMs}ms;--c:${piece.color}"></i>`,
   );
   return html`<div class="ln-ext-confetti">${items}</div>`;
+}
+
+/** Rains a shower in `layer`, gone once it has fallen; returns what takes it off sooner. */
+export function rainConfetti(layer: HTMLElement): () => void {
+  const pieces = confettiPieces(CONFETTI_COUNT, Math.random);
+  layer.insertAdjacentHTML('beforeend', confettiMarkup(pieces).value);
+  const confetti = layer.lastElementChild;
+  const timer = setTimeout(() => confetti?.remove(), confettiEndMs(pieces));
+  return () => {
+    clearTimeout(timer);
+    confetti?.remove();
+  };
 }

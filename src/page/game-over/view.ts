@@ -6,7 +6,6 @@ import { boardWrap, kingCells } from './board.ts';
 import { cardMarkup, endCardInput, RESULT_MOODS } from './card.ts';
 import { foldButtonMarkup, foldingCardMarkup, foldOnClick } from './card-fold.ts';
 import { CHIP_STAGGER_MS, createChips, type Chips } from './chips.ts';
-import { CONFETTI_COUNT, confettiEndMs, confettiMarkup, confettiPieces } from '#shared/confetti.ts';
 import { countUp } from './count-up.ts';
 import { type FinalMate, mateCells } from './mate.ts';
 import type { Outcome } from './outcome.ts';
@@ -15,7 +14,7 @@ import { accuracyDecimals, formatAccuracy, type GameOverTexts } from './texts.ts
 import { createVoice, type Voice } from './voice.ts';
 
 // The game over (styles/game/game-end.css, game-end-card.css): the kings'
-// badges and the winner's confetti in a layer over the board that lets clicks
+// badges and the end's animation (end-animation.ts) in a layer over the board that lets clicks
 // through, and the card at the head of Lichess's follow-up buttons. The badges
 // show large for a moment, then shrink to pips on the kings' corners as the
 // coach starts speaking. They follow the kings as the player steps through the
@@ -35,8 +34,6 @@ export interface GameOverInput {
   readonly texts: GameOverTexts;
   readonly coachId: number;
   readonly opponent: string;
-  /** Watched as it ended, not opened once over: only then the winner gets confetti. */
-  readonly live: boolean;
   /** The mate the game ended on, if it did. */
   readonly mate: FinalMate | null;
 }
@@ -48,13 +45,6 @@ export interface GameOverView {
   /** The review's own figures once its analysis is done: the card changes where they differ. */
   readonly refine: (summary: PlayerSummary) => void;
   readonly failed: () => void;
-}
-
-function addConfetti(layer: HTMLElement): void {
-  const pieces = confettiPieces(CONFETTI_COUNT, Math.random);
-  layer.insertAdjacentHTML('beforeend', confettiMarkup(pieces).value);
-  const confetti = layer.lastElementChild;
-  setTimeout(() => confetti?.remove(), confettiEndMs(pieces));
 }
 
 interface Layer {
@@ -75,7 +65,6 @@ function buildLayer(input: GameOverInput): Layer {
   const root = createElement('div', { className: 'ln-ext-end' });
   const kings = createElement('div', { className: 'ln-ext-end__kings' });
   root.append(kings);
-  if (input.outcome.result === 'win' && input.live) addConfetti(root);
   const holder = createElement('div');
   const { texts } = input;
   setHtml(

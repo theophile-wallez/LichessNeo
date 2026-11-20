@@ -1258,51 +1258,119 @@
     "description": "The tooltip of a rating shown as on Chess.com; $1 is its Lichess rating."
   },
   "settingGameIntro": {
-    "message": "Game intro",
+    "message": "Game animations",
     "description": "The setting of the players' intro at the start of a game."
   },
   "settingGameIntroBody": {
-    "message": "The animation that opens each game you play, once its players are in.",
+    "message": "What plays as each game you play starts, once its players are in, and as it ends.",
     "description": "What the game intro setting covers."
+  },
+  "animationsStart": {
+    "message": "Start",
+    "description": "Tab of the game animations' setting: the intros at a game's start."
+  },
+  "animationsEnd": {
+    "message": "End",
+    "description": "Tab of the game animations' setting: what plays as a game ends."
+  },
+  "endResultsTitle": {
+    "message": "When",
+    "description": "Heading of the results after which the end animation plays."
+  },
+  "endResultsWin": {
+    "message": "I win",
+    "description": "The end animation plays after a win only."
+  },
+  "endResultsNotLoss": {
+    "message": "I win or draw",
+    "description": "The end animation plays after a win or a draw."
+  },
+  "endResultsAll": {
+    "message": "Every game",
+    "description": "The end animation plays after every result."
+  },
+  "winColorTitle": {
+    "message": "Win colours",
+    "description": "Heading of the colours a win's ripple may take."
+  },
+  "winColorGreen": {
+    "message": "Green",
+    "description": "A win's ripple in greens."
+  },
+  "winColorRainbow": {
+    "message": "Rainbow",
+    "description": "A win's ripple in many colours."
+  },
+  "winColorOcean": {
+    "message": "Ocean",
+    "description": "A win's ripple in blues."
+  },
+  "winColorSunset": {
+    "message": "Sunset",
+    "description": "A win's ripple in oranges, pinks and purples."
+  },
+  "winColorAccent": {
+    "message": "Theme",
+    "description": "A win's ripple in the color theme's accent."
+  },
+  "endAnimationConfetti": {
+    "message": "Confetti",
+    "description": "End animation: confetti over the board."
+  },
+  "endAnimationWave": {
+    "message": "Ripple",
+    "description": "End animation: a colored wave that ripples across the board from the last square."
+  },
+  "endAnimationNone": {
+    "message": "No animation",
+    "description": "End animation: nothing plays."
+  },
+  "introNew": {
+    "message": "New",
+    "description": "The tag on an intro added lately, in the list of intros."
   },
   "introOff": {
     "message": "No animation",
     "description": "No intro at the start of a game."
   },
   "introSalute": {
-    "message": "The salute",
+    "message": "Salute",
     "description": "An intro: the two players' avatars meet on the board and high-five."
   },
   "introSetup": {
-    "message": "The setup",
+    "message": "Setup",
     "description": "An intro: the board's squares and pieces are laid out one by one."
   },
   "introMarch": {
-    "message": "The march",
+    "message": "March",
     "description": "An intro: each army marches onto the board from its own edge."
   },
   "introWeave": {
-    "message": "The weave",
+    "message": "Weave",
     "description": "An intro: the board's ranks slide in one by one, from alternate sides, with their pieces."
   },
   "introWave": {
-    "message": "The wave",
+    "message": "Wave",
     "description": "An intro: a band of light runs up the board rank by rank, and the pieces hop as it passes."
   },
+  "introRipple": {
+    "message": "Ripple",
+    "description": "An intro: a colored wave ripples up the board from the player's side, bending the squares and the pieces as it passes."
+  },
   "introTicket": {
-    "message": "The ticket",
+    "message": "Ticket",
     "description": "An intro: a ticket with both players tears in two."
   },
   "introCamps": {
-    "message": "The two camps",
+    "message": "Two camps",
     "description": "An intro: each half of the board lights up in its player's color."
   },
   "introCredits": {
-    "message": "The credits",
+    "message": "Credits",
     "description": "An intro: the players' names cross the board, as a film's credits."
   },
   "introFaceOff": {
-    "message": "The face-off",
+    "message": "Face-off",
     "description": "An intro: the opponent's card drops on a board of other colors and faces the player's."
   },
   "introPreviewPlay": {

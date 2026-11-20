@@ -1,7 +1,8 @@
-/* ---- The game intro's preview (content/settings/intro-preview.ts) --- */
+/* ---- The game animations' preview (content/settings/intro-preview.ts) --- */
 
-/* In the intro's card, under its title: the list of the intros, then a little game page, the
- * opponent's bar, the board and the user's, which the intro picked plays over (styles/game/intro). */
+/* In the animations' card, under its title: the intros and the end's choices under their tabs,
+ * then a little game page, the opponent's bar, the board and the user's, which the option picked
+ * plays over (styles/game/intro, styles/game/game-end.css). */
 .ln-ext-setting[data-ln-ext-setting='gameIntro'] {
   container: ln-ext-intro / inline-size;
   flex-wrap: wrap;
@@ -14,12 +15,89 @@
   gap: 10px;
 }
 
-/* As high as the preview beside it, scrolling past that. */
+/* The tabs over the list, as high as the preview beside them. */
+.ln-ext-intro-picker__side {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ln-ext-intro-picker__tabs {
+  --ln-ext-tab-bg: var(--ln-ext-bg-raised);
+  --ln-ext-tab-radius: 8px;
+
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 11px;
+  background: var(--ln-ext-bg-panel-dark);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+}
+
+.ln-ext-intro-picker__tabs button {
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ln-ext-text-dim);
+  font: 700 13px var(--ln-ext-font);
+  cursor: pointer;
+  transition: color 0.15s !important;
+}
+
+.ln-ext-intro-picker__tabs .ln-ext-hi {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.ln-ext-intro-picker__tabs button:hover,
+.ln-ext-intro-picker__tabs button.active {
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-intro-picker__tabs button.active {
+  background: var(--ln-ext-bg-raised);
+  box-shadow: 0 1px 3px var(--ln-ext-shade-40);
+}
+
+.ln-ext-intro-picker__tabs[data-ln-ext-tabs] button.active {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Scrolling past the preview's height. */
 .ln-ext-intro-picker__list {
   display: flex;
+  flex: 1 1 0;
   flex-direction: column;
+  padding-inline-end: 10px;
   overflow-y: auto;
   contain: size;
+}
+
+.ln-ext-intro-picker__list[hidden] {
+  display: none;
+}
+
+.ln-ext-intro-picker__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.ln-ext-intro-picker__caption {
+  margin: 14px 12px 4px;
+  color: var(--ln-ext-text-dim);
+  font: 700 11.5px var(--ln-ext-font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .ln-ext-intro-option {
@@ -50,9 +128,81 @@
   color: var(--ln-ext-text-strong);
 }
 
+/* A win's wave's colours, as swatches (content/settings/animation-options.ts): the wave's own
+ * colours (content/board-wave/wave/color.ts), ringed once picked. */
+.ln-ext-intro-picker__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 4px 12px;
+}
+
+.ln-ext-intro-option.ln-ext-intro-swatch,
+.ln-ext-intro-option.ln-ext-intro-swatch:hover,
+.ln-ext-intro-option.ln-ext-intro-swatch.active {
+  width: 28px;
+  height: 28px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--ln-ext-swatch);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-12);
+}
+
+.ln-ext-intro-option.ln-ext-intro-swatch.active {
+  box-shadow:
+    0 0 0 2px var(--ln-ext-bg-panel),
+    0 0 0 4px var(--ln-ext-text-strong);
+}
+
+.ln-ext-intro-swatch[data-ln-ext-win-color='green'] {
+  --ln-ext-swatch: linear-gradient(135deg, #8ceb5a, #35ba00 55%, #00c46e);
+}
+
+.ln-ext-intro-swatch[data-ln-ext-win-color='rainbow'] {
+  --ln-ext-swatch: conic-gradient(#ffc915, #7ec4ff, #b428e6, #eb64a0, #ffb07a, #9aa0ff, #ffc915);
+}
+
+.ln-ext-intro-swatch[data-ln-ext-win-color='ocean'] {
+  --ln-ext-swatch: linear-gradient(135deg, #78e6f0, #2878ff 55%, #1450c8);
+}
+
+.ln-ext-intro-swatch[data-ln-ext-win-color='sunset'] {
+  --ln-ext-swatch: linear-gradient(135deg, #ffc850, #ff5a78 55%, #dc5ac8);
+}
+
+.ln-ext-intro-swatch[data-ln-ext-win-color='accent'] {
+  --ln-ext-swatch: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--ln-ext-accent) 60%, #fff),
+    var(--ln-ext-accent) 55%
+  );
+}
+
+.ln-ext-intro-option.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
 .ln-ext-intro-option:has(:focus-visible) {
   outline: 2px solid var(--ln-ext-accent);
   outline-offset: -2px;
+}
+
+/* An intro added lately. */
+.ln-ext-intro-option__new {
+  margin-inline-start: 8px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ln-ext-pink) 18%, transparent);
+  color: var(--ln-ext-pink);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+html.light .ln-ext-intro-option__new {
+  color: var(--ln-ext-pink-darker);
 }
 
 /* The radio stays for the keyboard and screen readers; the option is its look. */
@@ -84,6 +234,13 @@
   grid-area: board;
   position: relative;
   aspect-ratio: 1;
+  /* The end's confetti are sized by the board's height, as over a game's. */
+  container-type: size;
+}
+
+/* The end's last move slides, as chessground's (content/settings/end-preview.ts). */
+.ln-ext-intro-preview__board piece.ln-ext-preview-move {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.4, 1) !important;
 }
 
 .ln-ext-intro-preview__board .cg-wrap {
@@ -180,18 +337,32 @@
   height: 18px;
 }
 
-/* Narrow, the preview comes first and the intros wrap under it as pills. */
+/* Narrow, the preview comes first and the options wrap under it as pills. */
 @container ln-ext-intro (width < 560px) {
   .ln-ext-intro-picker {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .ln-ext-intro-picker__list {
+  .ln-ext-intro-picker__side {
+    order: 1;
+  }
+
+  .ln-ext-intro-picker__list,
+  .ln-ext-intro-picker__group {
+    flex: none;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 6px;
-    order: 1;
+    padding-inline-end: 0;
     contain: none;
+  }
+
+  .ln-ext-intro-picker__list[data-ln-ext-panel='end'] {
+    flex-direction: column;
+  }
+
+  .ln-ext-intro-picker__caption {
+    margin-top: 8px;
   }
 
   .ln-ext-intro-option {

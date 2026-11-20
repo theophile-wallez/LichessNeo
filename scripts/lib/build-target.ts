@@ -16,12 +16,13 @@ import { replaceDir } from './replace-dir.ts';
 
 export const TARGETS: readonly Target[] = ['chrome', 'chrome-store', 'firefox'];
 
-// Each script is one file. The mascots' is a module, which the content script imports.
+// Each script is one file. The mascots' and the wave's are modules, which the content script imports.
 const SCRIPTS = [
   { input: 'src/background/index.ts', output: OUTPUT.background, format: 'iife' },
   { input: 'src/content/index.ts', output: OUTPUT.content, format: 'iife' },
   { input: 'src/page/index.ts', output: OUTPUT.page, format: 'iife' },
   { input: 'src/content/coach/mascot/index.ts', output: OUTPUT.mascot, format: 'es' },
+  { input: 'src/content/board-wave/wave/index.ts', output: OUTPUT.wave, format: 'es' },
 ] as const;
 
 export interface BuildOptions {

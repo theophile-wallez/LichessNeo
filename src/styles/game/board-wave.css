@@ -1,0 +1,26 @@
+/* The board's wave (content/board-wave): a clear canvas of ours, fixed over
+   the board's box, that lets every click through to it. */
+.ln-ext-board-wave {
+  position: fixed;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ln-ext-board-wave canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* The blank frame the wave reads the browser's own styles in, out of sight. */
+.ln-ext-board-wave__sandbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 0;
+  visibility: hidden;
+  pointer-events: none;
+}

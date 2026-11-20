@@ -36,11 +36,7 @@ function placeRook(square: string | null): void {
 const shownCounts = (): string[] =>
   queryAll(document, '.ln-ext-end__count b', HTMLElement).map(number => number.textContent);
 
-function mount(
-  outcome: Outcome,
-  live = true,
-  mate: FinalMate | null = null,
-): ReturnType<typeof mountGameOver> {
+function mount(outcome: Outcome, mate: FinalMate | null = null): ReturnType<typeof mountGameOver> {
   const main = queryOne(document, 'main', HTMLElement);
   if (!main) throw new Error('no game page');
   const input: GameOverInput = {
@@ -49,7 +45,6 @@ function mount(
     texts: gameOverTexts(),
     coachId: 2,
     opponent: 'bob',
-    live,
     mate,
   };
   return mountGameOver(input);
@@ -68,6 +63,7 @@ afterEach(() => {
   vi.useRealTimers();
   vi.restoreAllMocks();
   document.body.innerHTML = '';
+  localStorage.clear();
 });
 
 describe('the game over', () => {
@@ -88,22 +84,6 @@ describe('the game over', () => {
     vi.advanceTimersByTime(250);
     const white = document.querySelector('.ln-ext-end__king--win');
     expect(white?.getAttribute('style')).toBe('--column:3;--row:0');
-  });
-
-  it('throws confetti for the winner only', () => {
-    mount(WIN);
-    expect(document.querySelectorAll('.ln-ext-confetti__piece').length).toBeGreaterThan(0);
-    vi.advanceTimersByTime(5000);
-    expect(document.querySelector('.ln-ext-confetti')).toBeNull();
-    document.body.innerHTML = ROUND;
-    mount({ result: 'loss', reason: 'mate', winner: 'black' });
-    expect(document.querySelector('.ln-ext-confetti')).toBeNull();
-  });
-
-  it('throws none on a game opened once over', () => {
-    mount(WIN, false);
-    expect(document.querySelector('.ln-ext-end__kings')).not.toBeNull();
-    expect(document.querySelector('.ln-ext-confetti')).toBeNull();
   });
 
   it('shows the large badges a moment, then the card as they shrink to pips', async () => {
@@ -205,7 +185,7 @@ describe('the game over', () => {
 
   it('shows a mate on the final position, in place of the kings’ badges', () => {
     placeRook('g1');
-    mount({ result: 'win', reason: 'mate', winner: 'white' }, true, finalMate(MATED));
+    mount({ result: 'win', reason: 'mate', winner: 'white' }, finalMate(MATED));
     const main = queryOne(document, 'main.round', HTMLElement);
     expect(main?.dataset.lnExtMate).toBe('');
     expect(document.querySelector('.ln-ext-end__king')).toBeNull();
@@ -226,7 +206,7 @@ describe('the game over', () => {
   it('leaves an analysis board’s mate to the board’s own drawing', () => {
     document.querySelector('main')?.classList.replace('round', 'analyse');
     placeRook('g1');
-    mount({ result: 'win', reason: 'mate', winner: 'white' }, true, finalMate(MATED));
+    mount({ result: 'win', reason: 'mate', winner: 'white' }, finalMate(MATED));
     expect(document.querySelector('.ln-ext-end__kings')?.innerHTML).toBe('');
   });
 });

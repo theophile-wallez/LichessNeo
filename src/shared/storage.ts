@@ -57,6 +57,9 @@ export const StorageKey = {
   ratingChartRange: prefixed('rchart:range'),
   // '1' while the game over's card is folded down to its buttons (page/game-over/card-fold.ts).
   endCardFolded: prefixed('end-card-folded'),
+  // The settings' end animation and the results it plays after, for the page world (#shared/end-animation.ts).
+  endAnimation: prefixed('end-animation'),
+  endResults: prefixed('end-results'),
   // The metals the player last saw on their own profile's medals (content/profile).
   medalsSeen: prefixed('medals-seen'),
   // `/dasher`'s last answer, so the user menu opens without waiting on the network (page/dasher).

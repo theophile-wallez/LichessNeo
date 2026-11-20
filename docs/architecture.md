@@ -27,7 +27,7 @@ the page world would crash on it.
 | `page-init-data.ts`, `round-init.ts`, `game-path.ts`           | the page's `#page-init-data`, captured before Lichess removes it; a game page's, read for a game just begun; what a game page's path holds (`/game/<id>`)                                                                                                                                                                                                           |
 | `features.ts`, `frame.ts`, `poll.ts`                           | starting features, once-per-frame work, waiting for Lichess's globals                                                                                                                                                                                                                                                                                               |
 | `build-mode.ts`                                                | whether this is a dev build, which reloads itself when rebuilt, and the name of the draft a preview build shows and its page                                                                                                                                                                                                                                        |
-| `confetti.ts`, `practice-page.ts`                              | a one-off shower of confetti (a game's winner, a cheer of opening practice); the address of opening practice's page                                                                                                                                                                                                                                                 |
+| `confetti.ts`, `end-animation.ts`, `practice-page.ts`          | a one-off shower of confetti (a game's winner, a cheer of opening practice); what plays over the board as a game ends (the board's wave, confetti or nothing), kept for the page world, and the game's end it tells the content script; the address of opening practice's page                                                                                      |
 | `lang.ts`, `text.ts`, `math.ts`, `geometry.ts`                 | the page's language, small text and number helpers, points and boxes                                                                                                                                                                                                                                                                                                |
 | `time-control.ts`, `clock-time.ts`, `time-since.ts`            | a time control in words, for a "New 10+5" button; a clock's time; how long ago something was                                                                                                                                                                                                                                                                        |
 | `player-bar.ts`, `flag.ts`, `ratings-shown.ts`                 | a player as their bar on the game page shows them; the image of a profile's flag; whether Lichess shows ratings on the page                                                                                                                                                                                                                                         |
@@ -119,6 +119,17 @@ so the logic can be unit-tested without a page.
 - `coach`: the coach's 3D mascots, the coaches' names, the Game Review's
   coach picker, and its coach card for the places outside the review that say
   a goal (`card.ts`: Learn, practice).
+- `board-wave`: a colourful wave over the board, rewritten from Jakub Antalik's
+  distortion-waves (MIT, `public/licenses/distortion-waves.md`): one of the game intros
+  (`game/intro/ripple.ts`), up the board from the player's side, and as the player's game
+  ends unless the settings pick the confetti or nothing, a ring in the result's colour out of the
+  mated king or the last move's square, or the centre for a draw (`plan.ts`). The wave
+  itself (`wave/`) is the ES chunk `board-wave.js`, loaded with `import()` when one first
+  plays, or ahead with its shaders on a game's page: a clear WebGL 2 canvas of ours fixed over the board, which bends a picture of it
+  (`wave/capture`: the board's tree with its computed styles in an SVG `<foreignObject>`,
+  its images inlined) and lays its colour over the live board. In Firefox the picture's
+  image is the page's own (`capture/page-image.ts`), or the canvas is tainted. Without
+  WebGL 2 there is no wave; without a picture, the colour crosses the board alone.
 - `computer`: the computer's robot and the level slider of the computer's
   game setup.
 - `game-setup`: the game setup dialog's tiles for the variant, the time
@@ -182,7 +193,8 @@ so the logic can be unit-tested without a page.
   and the coaches' 3D), Analysis (the review's badges for its good moves,
   icons or dots, and the coach's drawings on the board, all, none or the kinds
   picked, each kind's drawing shown on a little board as its tile is
-  hovered; then the coach on the free analysis board), Games (the game intro over a preview of it, the
+  hovered; then the coach on the free analysis board), Games (a game's animations over a preview of them, its intro and what plays at its end
+  (the board's wave, confetti or nothing) after the results picked, the
   chat's quick replies at a game's start and end: Lichess's at first, five at
   most, to change, reorder, take off or add to; and the home's quick pairing
   cards: a speed's or the player's own, changed, moved, taken off or put back
@@ -242,7 +254,10 @@ so the logic can be unit-tested without a page.
 - `server-analysis`: Lichess's server analysis at the end of a game's move
   list, which our layout took from under the board: its request, its progress,
   its chart and each side's errors. Plain, below the Debrief.
-- `game-over`: kings' badges, confetti, the coach's card in the panel, which folds down to its buttons.
+- `game-over`: kings' badges, the end's animation the settings pick, played off the score and
+  the board as Lichess shows them (the board's wave, which it asks of the content script with
+  the square it starts from, or confetti), the
+  coach's card in the panel, which folds down to its buttons.
 - `chat`: the chat's lines marked for their bubbles, its game events in the
   page's language.
 - `seek`: a game's "New opponent" (and the review's new game, beside its tabs)

@@ -4,6 +4,7 @@ import { message } from '#content/platform/runtime.ts';
 import { packLibrary } from '#content/packs/index.ts';
 import { PAGE_NAMES, SETTINGS_PAGES, type SettingsPage } from './address.ts';
 import { buildAnalysisPage } from './analysis-page.ts';
+import { buildAnimationsCard } from './animations-card.ts';
 import { buildAppearance, showScheme } from './appearance.ts';
 import { buildAvatarCard } from './avatar-card.ts';
 import { buildBackupPage } from './backup-page.ts';
@@ -11,7 +12,6 @@ import { buildChesscomCards } from './chesscom-card.ts';
 import { buildCoachCard, buildCoachSwitches } from './coach-card.ts';
 import { groupTitle } from './group-title.ts';
 import { buildHomeCoachCard } from './home-coach-card.ts';
-import { buildIntroRow } from './intro-row.ts';
 import { buildLooksPage } from './looks-page.ts';
 import { buildNameCard } from './name-card.ts';
 import { buildNavigationRow } from './navigation-row.ts';
@@ -79,7 +79,7 @@ export function buildSection(): SettingsSection {
     board: looks.elements,
     coach: [coach.element, homeCoach.element, buildCoachSwitches()],
     analysis: buildAnalysisPage(),
-    play: [buildIntroRow(), buildRepliesCard(), pairing.element],
+    play: [buildAnimationsCard(), buildRepliesCard(), pairing.element],
     profile: [
       groupTitle(message('settingsGroupYou')),
       buildAvatarCard(),

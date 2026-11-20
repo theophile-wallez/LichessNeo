@@ -11,6 +11,7 @@ import { readOutcome, type Outcome, type Result } from './outcome.ts';
 import type { PlayerSummary } from './quick-review.ts';
 import { gameOverTexts } from './texts.ts';
 import { mountGameOver } from './view.ts';
+import { playEndAnimation } from './end-animation.ts';
 
 // A dev build's way to see the game over at will, with sample figures and no
 // engine: on a game page, or a finished game's analysis board (where its page
@@ -89,9 +90,9 @@ function show({ main, player }: Board, { outcome, mate }: End): void {
     texts,
     coachId: speakingCoach(),
     opponent: opponentName(main, player, texts.anonymous),
-    live: true,
     mate,
   });
+  playEndAnimation({ main, result: outcome.result, mated: mate?.mate.king ?? null });
   view.analysing();
   setTimeout(() => view.verdict(SAMPLE), SAMPLE_MS);
 }

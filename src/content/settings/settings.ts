@@ -4,7 +4,14 @@ import { StorageKey } from '#shared/storage.ts';
 import { isConnected, onSyncedChange, readSynced, writeSynced } from '#content/platform/runtime.ts';
 import { CustomThemeSchema, DEFAULT_THEME, ThemePicksSchema } from '#content/colors/themes.ts';
 import { RatingPickSchema } from '#content/sidebar/top-rating.ts';
+import {
+  DEFAULT_END_ANIMATION,
+  DEFAULT_END_RESULTS,
+  EndAnimationSchema,
+  EndResultsSchema,
+} from '#shared/end-animation.ts';
 import { DEFAULT_INTRO, IntroKindSchema } from '#content/game/intro/kinds.ts';
+import { DEFAULT_WIN_COLOR, WinColorSchema } from '#content/board-wave/win-colors.ts';
 import { CardPicksSchema } from '#content/pages/speed-cards/picks.ts';
 import { ChatRepliesSchema, DEFAULT_REPLIES } from '#content/game/chat-replies.ts';
 
@@ -55,6 +62,12 @@ const SettingsFields = z.object({
   ratingStakes: z.prefault(z.boolean(), true),
   /** The players' intro at a game's start, or none (content/game/intro). */
   gameIntro: z.catch(IntroKindSchema, DEFAULT_INTRO),
+  /** What plays over the board as the player's game ends (#shared/end-animation.ts). */
+  endAnimation: z.catch(EndAnimationSchema, DEFAULT_END_ANIMATION),
+  /** After which of the player's results it plays. */
+  endResults: z.catch(EndResultsSchema, DEFAULT_END_RESULTS),
+  /** The colours of a win's wave (content/board-wave/win-colors.ts). */
+  endWinColor: z.catch(WinColorSchema, DEFAULT_WIN_COLOR),
   /** The chat's quick replies at a game's start and end, in place of Lichess's (content/game). */
   chatReplies: z.catch(ChatRepliesSchema, DEFAULT_REPLIES),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */

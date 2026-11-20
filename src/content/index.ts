@@ -42,6 +42,7 @@ import { zenExit } from './game/zen-exit.ts';
 import { ratingRefresh } from './game/rating-refresh.ts';
 import { countryFlags } from './game/flags.ts';
 import { gameIntro } from './game/intro/index.ts';
+import { boardWave } from './board-wave/index.ts';
 import { coachMessage } from './game/coach-message.ts';
 import { boardInset } from './layout/board-inset.ts';
 import { evalGauge } from './analysis/eval-gauge.ts';
@@ -154,6 +155,7 @@ const FEATURES = [
   ratingRefresh,
   countryFlags,
   gameIntro,
+  boardWave,
   coachMessage,
   boardInset,
   evalGauge,
