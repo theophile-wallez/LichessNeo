@@ -1,4 +1,5 @@
 import type { Color } from '#shared/chess/types.ts';
+import type { CoachMood } from '#shared/coach.ts';
 import { queryOne, setData } from '#shared/dom.ts';
 import { html, type SafeHtml, setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
@@ -15,7 +16,7 @@ import {
 import { type Outcome, readOutcome } from '#page/game-over/outcome.ts';
 import { formatAccuracy, type GameOverTexts, gameOverTexts } from '#page/game-over/texts.ts';
 import type { Session } from '#page/review/session.ts';
-import { type PeekFigures, peekMarkup } from './card-peek.ts';
+import { drawPeek, type PeekFigures, peekFrameMarkup } from './card-peek.ts';
 
 // The review closed: the game over's card (page/game-over/card.ts), as the
 // game's page showed it at its end, and folded, a strip of it (view/card-peek.ts);
@@ -103,13 +104,17 @@ function verdictOf(session: Session, analysis: Analysis): Verdict {
   };
 }
 
-function card(session: Session, { side, result, heading }: Verdict): SafeHtml {
+const moodOf = ({ side, result }: Verdict): CoachMood =>
+  side.played ? RESULT_MOODS[result] : 'neutral';
+
+function card(session: Session, verdict: Verdict): SafeHtml {
+  const { side, result, heading } = verdict;
   const texts = gameOverTexts();
   return cardMarkup({
     result,
     heading,
     words: words(session, side, result),
-    mood: side.played ? RESULT_MOODS[result] : 'neutral',
+    mood: moodOf(verdict),
     coachId: session.coach.id,
     texts,
     stats: stats(session, side.color, texts),
@@ -135,7 +140,7 @@ function peekFigures(session: Session, color: Color): PeekFigures | string {
 const frameMarkup = (texts: GameOverTexts): SafeHtml =>
   html`<div class="ln-ext-end__frame">
     <div class="ln-ext-end__top"><div class="ln-ext-end__top-inner"></div></div>
-    <div class="ln-ext-end__foot">${foldButtonMarkup(texts, 'unfold', html`<span class="ln-ext-end__peek"></span>`)}</div>
+    <div class="ln-ext-end__foot">${foldButtonMarkup(texts, 'unfold', peekFrameMarkup())}</div>
   </div>`;
 
 export function renderClosed(session: Session, analysis: Analysis): void {
@@ -152,5 +157,5 @@ export function renderClosed(session: Session, analysis: Analysis): void {
   setData(peek, 'lnExtResult', verdict.result);
   const { heading } = verdict;
   const figures = peekFigures(session, verdict.side.color);
-  setHtml(peek, peekMarkup({ heading, coachId: session.coach.id, figures }));
+  drawPeek(peek, { heading, coachId: session.coach.id, mood: moodOf(verdict), figures });
 }

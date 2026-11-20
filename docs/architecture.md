@@ -118,7 +118,8 @@ so the logic can be unit-tested without a page.
   and the players Lichess finds, picked with the arrows.
 - `coach`: the coach's 3D mascots, the coaches' names, the Game Review's
   coach picker, and its coach card for the places outside the review that say
-  a goal (`card.ts`: Learn, practice).
+  a goal (`card.ts`: Learn, practice), and the live coach of the closed
+  review's folded strip, in the result's face (`peek.ts`).
 - `board-wave`: a colourful wave over the board, rewritten from Jakub Antalik's
   distortion-waves (MIT, `public/licenses/distortion-waves.md`): one of the game intros
   (`game/intro/ripple.ts`), up the board from the player's side, and as the player's game

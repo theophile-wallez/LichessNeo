@@ -4,8 +4,10 @@ import { closestTo, queryOne } from '#shared/dom.ts';
 import type { Feature } from '#shared/features.ts';
 import { onCoachState, postCoachOptions, type CoachState } from '#shared/protocol.ts';
 import { onSettings, type Settings } from '#content/settings/settings.ts';
+import { onEveryTick } from '#content/sync-loop.ts';
 import { loadMascots } from './load.ts';
 import type { MascotView } from './mascot/index.ts';
+import { syncPeekCoach } from './peek.ts';
 
 // Brings the Game Review's coach to life. The page world draws the coach's
 // avatar and posts which coach it is, its mood about the move and whether it's
@@ -16,6 +18,7 @@ import type { MascotView } from './mascot/index.ts';
 // without WebGL or with the settings keeping the coaches still, the avatar
 // shows the coach's still image. In a folded game over's card, it waits for the
 // card to open: the bundle and the scene cost something, and it wouldn't be seen.
+// The closed review's folded strip shows its own (peek.ts).
 
 const LIVE_CLASS = 'ln-ext-coach__avatar--live';
 
@@ -119,6 +122,7 @@ export const coach: Feature = {
     onCoachState(showCoach);
     told = coachOptions();
     onSettings(followSettings);
+    onEveryTick('peek-coach', syncPeekCoach);
     // The page world marks the card open in its own listener, which runs first, the
     // chevron being under the element it listens on.
     document.addEventListener('click', event => {

@@ -101,13 +101,30 @@ html.ln-ext-review-folded #ln-ext-review .ln-ext-end__fold--unfold:hover {
 }
 
 .ln-ext-end__peek-coach {
+  position: relative;
   flex: none;
   width: 36px;
   height: 36px;
+  overflow: clip;
   border-radius: 10px;
   background:
     var(--ln-ext-avatar-coach) center bottom / auto 94% no-repeat,
     color-mix(in srgb, var(--ln-ext-tag-c) 22%, transparent);
+}
+
+/* The live mascot (content/coach/peek.ts) over its still, which goes once it's drawn: the
+   still's box, in its aspect, so that it lands on it. */
+.ln-ext-end__peek-coach[data-ln-ext-live] {
+  --ln-ext-avatar-coach: none;
+}
+
+.ln-ext-end__peek-coach .ln-ext-end__peek-live {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 94%;
+  aspect-ratio: 124 / 114;
+  translate: -50% 0;
 }
 
 html[data-ln-ext-coach='none'] .ln-ext-end__peek-coach {
@@ -140,6 +157,13 @@ html[data-ln-ext-coach='none'] .ln-ext-end__peek-coach {
 .ln-ext-end__peek-title {
   font-size: 14px;
   font-weight: 800;
+}
+
+.ln-ext-end__peek-figures {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
 }
 
 .ln-ext-end__peek-accuracy {
