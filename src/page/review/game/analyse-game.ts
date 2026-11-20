@@ -1,4 +1,5 @@
 import type { Analysis } from '#page/lichess/analysis.ts';
+import { reviewEngine } from '#page/review/engine/review-engine.ts';
 import { engineFor } from '#page/review/engine-pool.ts';
 import { seedThreats } from '#page/review/explain/threats.ts';
 import type { GameWork, Mode, Session } from '#page/review/session.ts';
@@ -51,13 +52,20 @@ function engineFailed(session: Session, what: string, error: unknown): void {
 
 export async function analyseGame(session: Session, analysis: Analysis): Promise<void> {
   const { work } = session;
+  const run = ++work.runs;
+  const superseded = (): boolean => work.runs !== run;
   work.nodes = analysis.mainline;
   seedThreats(session, analysis.gameId);
   await applyExport(session, analysis);
   seedBooks(session);
+  if (superseded()) return;
+  const options = reviewEngine();
+  work.aim = { depth: options.depth, engine: options.engine };
   const engine = await analyseRecords({
     gameId: analysis.gameId,
     chess960: analysis.chess960,
+    options,
+    superseded,
     work,
     engines: () => engineFor(session, analysis),
     whenFree: () => whenFree(analysis),
@@ -68,5 +76,5 @@ export async function analyseGame(session: Session, analysis: Analysis): Promise
     onFailure: (what, error) => engineFailed(session, what, error),
   });
   // Only the moves played on the board and Explain need an engine from now on.
-  engine?.keep(1);
+  if (!superseded()) engine?.keep(1);
 }

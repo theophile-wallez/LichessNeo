@@ -5,6 +5,7 @@ import { GameEndSchema, type GameEnd } from './end-animation.ts';
 import { RoundnessSchema } from './roundness.ts';
 import { SoundNameSchema, SoundPlaceSchema } from './sounds.ts';
 import { messageType } from './prefix.ts';
+import { ReviewEngineSchema, type ReviewEngine } from './review-engine/options.ts';
 
 // Messages between the extension's two worlds on a Lichess tab: the isolated
 // content script, which can reach the extension's files, and the page script,
@@ -40,6 +41,16 @@ const CoachPickedSchema = z.object({
 const CoachOptionsMessageSchema = z.object({
   type: z.literal(messageType('coach-options')),
   options: CoachOptionsSchema,
+});
+
+const ReviewEngineMessageSchema = z.object({
+  type: z.literal(messageType('review-engine')),
+  options: ReviewEngineSchema,
+});
+
+const ReviewEnginePickSchema = z.object({
+  type: z.literal(messageType('review-engine-pick')),
+  options: ReviewEngineSchema,
 });
 
 /** Lichess's own color schemes, as its Theme menu offers them. */
@@ -149,6 +160,18 @@ export const postCoachOptions = (options: CoachOptions): void =>
   post({ type: messageType('coach-options'), options });
 export const onCoachOptions = (handler: (options: CoachOptions) => void): (() => void) =>
   listen(CoachOptionsMessageSchema, message => handler(message.options));
+
+/** Content → page: the Debrief's engine settings changed, here or in another tab. */
+export const postReviewEngine = (options: ReviewEngine): void =>
+  post({ type: messageType('review-engine'), options });
+export const onReviewEngine = (handler: (options: ReviewEngine) => void): (() => void) =>
+  listen(ReviewEngineMessageSchema, message => handler(message.options));
+
+/** Page → content: the review's popover picked engine settings, to keep with the others. */
+export const postReviewEnginePick = (options: ReviewEngine): void =>
+  post({ type: messageType('review-engine-pick'), options });
+export const onReviewEnginePick = (handler: (options: ReviewEngine) => void): (() => void) =>
+  listen(ReviewEnginePickSchema, message => handler(message.options));
 
 /** Content → page: the color scheme picked in the extension's settings, for Lichess to keep. */
 export const postColorScheme = (scheme: ColorScheme): void =>

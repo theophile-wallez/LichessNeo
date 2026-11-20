@@ -61,7 +61,7 @@ it('leaves the analysis page a whole review to show, with no search of its own',
   await advance(1000);
   expect(searches).toBe(0);
   const panel = document.querySelector('#ln-ext-review');
-  expect(panel?.querySelector('.ln-ext-summary-pct')).toBeNull();
+  expect(panel?.querySelector('.ln-ext-graph-engine__ring')).toBeNull();
   expect(panel?.querySelector('.ln-ext-review__top .ln-ext-acc--w')?.textContent).toMatch(
     /^\d{1,3}\.\d$/,
   );

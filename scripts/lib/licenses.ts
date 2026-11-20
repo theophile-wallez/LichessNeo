@@ -20,6 +20,11 @@ export const LICENSES: readonly License[] = [
     to: 'licenses/hugeicons.md',
   },
   { name: 'fflate', from: 'node_modules/fflate/LICENSE', to: 'licenses/fflate.md' },
+  // Motion's packages share its MIT license.
+  { name: 'motion', from: 'node_modules/motion/LICENSE.md', to: 'licenses/motion.md' },
+  { name: 'motion-dom', from: 'node_modules/motion/LICENSE.md', to: 'licenses/motion.md' },
+  { name: 'motion-utils', from: 'node_modules/motion/LICENSE.md', to: 'licenses/motion.md' },
+  { name: 'framer-motion', from: 'node_modules/motion/LICENSE.md', to: 'licenses/motion.md' },
   { name: 'three', from: 'node_modules/three/LICENSE', to: 'licenses/three.md' },
   { name: 'zod', from: 'node_modules/zod/LICENSE', to: 'licenses/zod.md' },
 ];

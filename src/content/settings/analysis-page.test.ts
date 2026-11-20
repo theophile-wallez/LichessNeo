@@ -35,12 +35,13 @@ const switchOf = (page: HTMLElement, key: string): HTMLButtonElement | null =>
   queryOne(page, `[data-ln-ext-setting='${key}'] .ln-ext-switch`, HTMLButtonElement);
 
 describe('the settings’ Analysis page', () => {
-  it('heads the review’s settings, then the analysis board’s', async () => {
+  it('heads the Debrief’s engine, then the review’s settings, then the analysis board’s', async () => {
     const page = await buildPage();
     const order = queryAll(page, '.ln-ext-settings__group, [data-ln-ext-setting]', HTMLElement).map(
       element => element.dataset.lnExtSetting ?? element.textContent,
     );
     expect(order).toEqual([
+      'Debrief engine',
       'settingsGroupReview',
       'classStyle',
       'reviewRating',

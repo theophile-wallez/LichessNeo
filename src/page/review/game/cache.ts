@@ -9,21 +9,38 @@ import {
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { StoredRecordCodec, StoredRecordSchema } from '#page/review/evaluation/stored.ts';
 import { prefixed } from '#shared/prefix.ts';
+import { type Analysed, AnalysedSchema, covers } from '#shared/review-engine/options.ts';
 
 // Each game's records at full depth: kept once its analysis is complete, so
 // opening the game again shows its review at once, and kept as they come in
 // under another key, so a reload doesn't start the analysis over. It's
-// Lichess's storage too: only the games analysed last are kept.
+// Lichess's storage too: only the games analysed last are kept. They're kept
+// with the depth and engine they were found with: records shallower than the
+// settings ask for are found again.
 
 /** Bump to drop every cached review, when the records' meaning changes (2: with their lines, 3: longer). */
 const CACHE_VERSION = 3;
 /** Cached games kept, finished or not. */
 const MAX_GAMES = 200;
 
-const CachedSchema = z.array(StoredRecordCodec);
+// Before the settings, every game was analysed at depth 16 on the light engine,
+// and its records were kept alone.
+const LEGACY: Analysed = { depth: 16, engine: 'light' };
+
+const withAnalysed = <T>(records: z.ZodMiniType<T>) =>
+  z.union([
+    z.pipe(
+      records,
+      z.transform(found => ({ analysed: LEGACY, records: found })),
+    ),
+    z.object({ analysed: AnalysedSchema, records }),
+  ]);
+
+const CachedSchema = withAnalysed(z.array(StoredRecordCodec));
 // A position without a record is written as null.
-const WrittenSchema = z.array(z.optional(StoredRecordCodec));
-const ProgressSchema = z.array(z.nullable(StoredRecordCodec));
+const BareSchema = z.array(z.optional(StoredRecordCodec));
+const WrittenSchema = z.object({ analysed: AnalysedSchema, records: BareSchema });
+const ProgressSchema = withAnalysed(z.array(z.nullable(StoredRecordCodec)));
 const IndexSchema = z.array(z.string());
 
 const threatsKey = (gameId: string, positions: number): string =>
@@ -81,45 +98,71 @@ function remember(key: string, dropped?: string): void {
   }
 }
 
-/** The game's records: all of them once its analysis is complete, else those found so far. */
+export interface CachedRecords {
+  readonly records: (PositionRecord | undefined)[];
+  readonly analysed: Analysed;
+}
+
+/**
+ * The game's records: all of them once its analysis is complete, else those
+ * found so far; none when they were found shallower than `wanted`.
+ */
 export function readCachedRecords(
   gameId: string,
   positions: number,
-): (PositionRecord | undefined)[] | null {
+  wanted: Analysed,
+): CachedRecords | null {
   const key = cacheKey(gameId, positions);
-  const records = readStoredJson(key, CachedSchema);
-  if (records?.length === positions) {
+  const cached = readStoredJson(key, CachedSchema);
+  if (cached?.records.length === positions && covers(cached.analysed, wanted)) {
     remember(key);
-    return records;
+    return cached;
   }
   const progress = readStoredJson(progressKey(gameId, positions), ProgressSchema);
-  if (progress?.length !== positions) return null;
+  if (progress?.records.length !== positions || !covers(progress.analysed, wanted)) return null;
   remember(progressKey(gameId, positions));
-  return progress.map(record => record ?? undefined);
+  return {
+    analysed: progress.analysed,
+    records: progress.records.map(record => record ?? undefined),
+  };
+}
+
+export interface CachedGame {
+  readonly gameId: string;
+  readonly positions: number;
+  readonly records: readonly (PositionRecord | undefined)[];
+  readonly analysed: Analysed;
+}
+
+const isLegacy = ({ depth, engine }: Analysed): boolean =>
+  depth === LEGACY.depth && engine === LEGACY.engine;
+
+// At the default settings, as the records were kept before them: older copies read them still.
+function written({ positions, records, analysed }: CachedGame): unknown {
+  const padded = Array.from({ length: positions }, (_, i) => records[i]);
+  if (isLegacy(analysed)) return z.encode(BareSchema, padded);
+  return z.encode(WrittenSchema, { analysed, records: padded });
 }
 
 /** Keeps the records found so far of a game whose analysis isn't complete. */
-export function cacheProgress(
-  gameId: string,
-  positions: number,
-  records: readonly (PositionRecord | undefined)[],
-): void {
-  const key = progressKey(gameId, positions);
-  const written = Array.from({ length: positions }, (_, i) => records[i]);
-  writeStoredJson(key, z.encode(WrittenSchema, written));
+export function cacheProgress(game: CachedGame): void {
+  const key = progressKey(game.gameId, game.positions);
+  writeStoredJson(key, written(game));
   remember(key);
 }
 
 /** Keeps a game's records once its analysis is complete. */
-export function cacheRecords(
-  gameId: string,
-  positions: number,
-  records: readonly (PositionRecord | undefined)[],
-): void {
-  const progress = progressKey(gameId, positions);
+export function cacheRecords(game: CachedGame): void {
+  const progress = progressKey(game.gameId, game.positions);
   removeStored(progress);
-  writeStoredJson(cacheKey(gameId, positions), z.encode(WrittenSchema, [...records]));
-  remember(cacheKey(gameId, positions), progress);
+  writeStoredJson(cacheKey(game.gameId, game.positions), written(game));
+  remember(cacheKey(game.gameId, game.positions), progress);
+}
+
+/** Forgets a game's records, to be found again; its threats stay. */
+export function dropCachedRecords(gameId: string, positions: number): void {
+  removeStored(cacheKey(gameId, positions));
+  removeStored(progressKey(gameId, positions));
 }
 
 // By position: the threat with the other side to move, false when there's none

@@ -1,5 +1,6 @@
 import type { EnginePool } from '#page/review/engine/pool.ts';
 import type { PathPosition } from '#page/review/engine/position.ts';
+import type { Analysed, ReviewEngine } from '#shared/review-engine/options.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 
 // The game's analysis as a page runs it: the analysis page for its review,
@@ -21,8 +22,12 @@ export interface RecordsWork {
   cloudAt: number;
   /** The positions the engines are searching. */
   readonly pending: Set<number>;
+  /** The positions whose full-depth record came from the cloud. */
+  readonly cloud: Set<number>;
   /** Full-depth searches done, for saving the progress now and then. */
   searched: number;
+  /** What the full-depth records were found with, once they're all in. */
+  analysed: Analysed | null;
 }
 
 export const newRecordsWork = (nodes: readonly PathPosition[]): RecordsWork => ({
@@ -31,12 +36,16 @@ export const newRecordsWork = (nodes: readonly PathPosition[]): RecordsWork => (
   rough: [],
   cloudAt: Infinity,
   pending: new Set(),
+  cloud: new Set(),
   searched: 0,
+  analysed: null,
 });
 
 export interface RecordsRun {
   readonly gameId: string;
   readonly chess960: boolean;
+  /** The depth, engine and cores the settings pick, as the run started. */
+  readonly options: ReviewEngine;
   readonly work: RecordsWork;
   /** The page's engines, booted on the first call. */
   readonly engines: () => Promise<EnginePool>;
@@ -53,6 +62,8 @@ export interface RecordsRun {
   readonly onFailure: (what: string, error: unknown) => void;
   /** The page moved on: the analysis stops, its progress saved. */
   readonly stopped?: () => boolean;
+  /** The analysis started over (the settings changed): this run stops, its finds dropped. */
+  readonly superseded?: () => boolean;
 }
 
 /** Takes a full-depth record, unless the position has one: a judged move stays as it is. */

@@ -24,6 +24,7 @@ const CommandSchema = z.enum([
   'reveal',
   'graph',
   'share',
+  'engine',
   'fold',
   'unfold',
   'practice-start',

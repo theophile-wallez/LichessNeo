@@ -10,11 +10,12 @@
   }
 
   /* Review closed: Lichess's analysis, then the game over's card (view/closed-panel.ts,
-     game/game-end-card.css), its coach smaller on a short window. The card folds down to its
-     strip's 77px, the frame's padding and the panel's around it, as --ln-ext-review-fold
-     eases to 1 (card-fold.css). */
+     game/game-end-card.css), its coach smaller on a short window. Open, the row is the card's
+     measured height (view/card-room.ts) and the 37px of the frame's padding and the panel's
+     around it; it folds down to its strip's 77px as --ln-ext-review-fold eases to 1
+     (card-fold.css). */
   html.ln-ext-review-normal main.analyse {
-    --ln-ext-review-open: 280px;
+    --ln-ext-review-open: calc(var(--ln-ext-review-card, 242px) + 37px);
     --ln-ext-review-top: calc(
       var(--ln-ext-review-open) - (var(--ln-ext-review-open) - 77px) * var(--ln-ext-review-fold)
     );
@@ -36,12 +37,6 @@
       'gauge board tools'
       'gauge board rtop'
       'gauge board controls' !important;
-  }
-
-  @media (max-height: 820px) {
-    html.ln-ext-review-normal main.analyse {
-      --ln-ext-review-open: 264px;
-    }
   }
 
   /* The graph, as tall in the summary as in the move-by-move review; it shrinks on a short

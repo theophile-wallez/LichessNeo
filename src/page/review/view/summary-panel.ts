@@ -6,6 +6,7 @@ import type { ReviewLanguage } from '#page/review/i18n/types.ts';
 import { playerProfile, type Profile } from '#page/review/judge/profile.ts';
 import type { Review, Session } from '#page/review/session.ts';
 import { mountGraph } from './graph.ts';
+import { fillGraphButtons, graphButtonSlots } from './graph-buttons.ts';
 import { learnLabel } from './learn.ts';
 import { movesMarkup } from './summary-moves.ts';
 import { phasesMarkup } from './summary-phases.ts';
@@ -51,7 +52,7 @@ function summaryMarkup(input: SummaryInput): SafeHtml {
   const canStart = review !== null && !error;
   return html`<div class="ln-ext-review__top">
         ${error ? html`<p class="ln-ext-review__error">${error}</p>` : ''}
-        <div class="ln-ext-review__graph ln-ext-summary-graph"></div>
+        <div class="ln-ext-review__graph-box"><div class="ln-ext-review__graph ln-ext-summary-graph"></div>${graphButtonSlots()}</div>
         ${playersMarkup(input)}
       </div>
       <div class="ln-ext-review__body">${movesMarkup(input)}${phasesMarkup({ rating: review?.rating ?? null, language, order: input.order })}${radarMarkup({ profiles: profilesOf(review), names: namesOf(input), language, order: input.order })}</div>
@@ -79,12 +80,9 @@ export function renderSummary(session: Session, analysis: Analysis): void {
     }),
   );
   watchPlayerFocus(elements.panel);
+  fillGraphButtons(session, analysis, elements.panel);
   const graph = queryOne(elements.panel, '.ln-ext-summary-graph', HTMLElement);
   if (!graph) return;
+  // How far the analysis is shows on the graph's engine button (graph-buttons.ts).
   if (review) mountGraph(session, analysis, { container: graph, kind: 'summary' });
-  if (!review?.complete && !error)
-    graph.insertAdjacentHTML(
-      'afterbegin',
-      html`<span class="ln-ext-summary-pct">${Math.round(view.progress * 100)}%</span>`.value,
-    );
 }

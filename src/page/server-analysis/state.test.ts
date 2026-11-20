@@ -6,6 +6,7 @@ const SUMMARY = { white: SIDE, black: SIDE };
 
 const page = (overrides: Partial<PageAnalysis>): PageAnalysis => ({
   requestable: false,
+  local: false,
   started: false,
   full: false,
   positions: 40,
@@ -15,8 +16,12 @@ const page = (overrides: Partial<PageAnalysis>): PageAnalysis => ({
 });
 
 describe('serverAnalysis', () => {
-  it('offers the request while Lichess has its form', () => {
-    expect(serverAnalysis(page({ requestable: true }))).toEqual({ kind: 'request' });
+  it('offers the request while Lichess has its form, and its analysis on the device', () => {
+    expect(serverAnalysis(page({ requestable: true }))).toEqual({ kind: 'request', local: false });
+    expect(serverAnalysis(page({ requestable: true, local: true }))).toEqual({
+      kind: 'request',
+      local: true,
+    });
   });
 
   it('shows nothing for a game Lichess makes none of', () => {
@@ -36,9 +41,8 @@ describe('serverAnalysis', () => {
   });
 
   it('is done once every position has its score', () => {
-    expect(serverAnalysis(page({ full: true, summary: SUMMARY, started: true }))).toEqual({
-      kind: 'done',
-      summary: SUMMARY,
-    });
+    expect(
+      serverAnalysis(page({ full: true, summary: SUMMARY, started: true, local: true })),
+    ).toEqual({ kind: 'done', summary: SUMMARY, local: true });
   });
 });

@@ -8,8 +8,10 @@ export interface ReviewElements {
   /** The tabs over the panel, kept for their pick to slide (view/mode-tabs.ts). */
   readonly modes: HTMLElement;
   readonly graphBox: HTMLElement;
-  /** The move-by-move graph's views, kept for their pick to slide. */
+  /** The graph's views, kept for their pick to slide. */
   readonly graphViews: HTMLElement;
+  /** The graph's engine button, which the engine's popover hangs from (view/engine-popover.ts). */
+  readonly graphEngine: HTMLButtonElement;
   /** The move-by-move panel's Explain / Best / Next, kept for their buttons to ease. */
   readonly nav: HTMLElement;
   readonly controls: HTMLElement;
@@ -32,6 +34,10 @@ export function createElements(): ReviewElements {
     modes: createElement('div', { id: 'ln-ext-review-modes' }),
     graphBox: createElement('div', { id: 'ln-ext-review-graph' }),
     graphViews: createElement('div', { className: 'ln-ext-graph-views' }),
+    graphEngine: createElement('button', {
+      className: 'ln-ext-graph-engine',
+      attrs: { type: 'button', 'data-ln-ext': 'engine' },
+    }),
     nav: createElement('div', { className: 'ln-ext-review__nav' }),
     controls: createElement('div', { id: 'ln-ext-review-controls' }),
     bar,

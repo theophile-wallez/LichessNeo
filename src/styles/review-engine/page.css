@@ -1,0 +1,247 @@
+/* ---- The Debrief's engine card, on the settings' Analysis page --- */
+
+/* The popover's panel at full size (content/settings/engine-card.ts): the curve
+   in a hero with the levels named over it, the engine and the cores in cards
+   side by side, the advanced settings under them. */
+
+.ln-ext-engine--page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.ln-ext-engine__hero,
+.ln-ext-engine__card {
+  border-radius: 14px;
+  background: var(--ln-ext-bg-panel);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-card-border);
+}
+
+.ln-ext-engine__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  padding: 18px 20px 14px;
+}
+
+.ln-ext-engine__hero-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.ln-ext-engine__hero-top .ln-ext-engine__reset {
+  margin-left: auto;
+}
+
+.ln-ext-engine--page .ln-ext-engine__dial {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px 16px;
+}
+
+.ln-ext-engine--page .ln-ext-engine__depth {
+  min-width: 1.2ch;
+  font-size: 64px;
+  letter-spacing: -0.045em;
+  line-height: 0.85;
+}
+
+.ln-ext-engine--page .ln-ext-engine__dial-time {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-bottom: 3px;
+}
+
+.ln-ext-engine--page .ln-ext-engine__estimate {
+  font-size: 13.5px;
+}
+
+.ln-ext-engine--page .ln-ext-engine__stops {
+  margin-top: 4px;
+}
+
+.ln-ext-engine--page .ln-ext-engine__legend {
+  margin-top: 2px;
+}
+
+.ln-ext-engine__pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+}
+
+.ln-ext-engine__card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 16px 18px;
+}
+
+.ln-ext-engine__card--flat {
+  padding: 4px;
+}
+
+.ln-ext-engine__card--flat .ln-ext-engine__advanced {
+  background: none;
+  box-shadow: none;
+}
+
+.ln-ext-engine__card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ln-ext-engine__card-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ln-ext-engine__card-text b {
+  color: var(--ln-ext-text-strong);
+  font-size: 14.5px;
+  font-weight: 750;
+}
+
+.ln-ext-engine__card-text span {
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+}
+
+.ln-ext-engine__card-head > :last-child {
+  margin-left: auto;
+}
+
+.ln-ext-engine__meters {
+  display: grid;
+  gap: 5px;
+}
+
+.ln-ext-engine__meter {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  align-items: center;
+  gap: 8px;
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+}
+
+.ln-ext-engine__meter > span:last-child {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+}
+
+.ln-ext-engine__meter i {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--ln-ext-lift-10);
+}
+
+.ln-ext-engine__meter i.ln-ext-on {
+  background: var(--ln-ext-pink);
+}
+
+.ln-ext-engine__caption {
+  margin: 4px 0 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+}
+
+/* The device's cores, those the analysis takes lit, the suggestion underlined. */
+.ln-ext-engine__cores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 5px;
+  padding-bottom: 6px;
+}
+
+.ln-ext-engine__core {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: var(--ln-ext-lift-6);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-6);
+  color: var(--ln-ext-font-dimmer);
+}
+
+.ln-ext-engine__core svg {
+  width: 15px;
+  height: 15px;
+}
+
+.ln-ext-engine__core:hover {
+  background: var(--ln-ext-lift-10);
+}
+
+.ln-ext-engine__core.ln-ext-on {
+  background: color-mix(in srgb, var(--ln-ext-green) 18%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ln-ext-green) 45%, transparent);
+  color: var(--ln-ext-green);
+}
+
+.ln-ext-engine__core.ln-ext-suggested::after {
+  content: '';
+  position: absolute;
+  inset: auto -2px -6px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ln-ext-text-dim);
+}
+
+.ln-ext-engine__cores-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-top: 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+}
+
+@media (max-width: 1259.98px) {
+  .ln-ext-engine__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .ln-ext-engine__hero {
+    padding: 14px 14px 12px;
+  }
+
+  .ln-ext-engine--page .ln-ext-engine__depth {
+    font-size: 52px;
+  }
+
+  /* Short of room, the reset goes over the depth, still on the right. */
+  .ln-ext-engine__hero-top {
+    flex-wrap: wrap-reverse;
+    row-gap: 4px;
+  }
+
+  .ln-ext-engine__card {
+    padding: 14px;
+  }
+
+  /* The control under the tile and the title. */
+  .ln-ext-engine__card-head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .ln-ext-engine__card-head > :last-child {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-left: 0;
+  }
+}

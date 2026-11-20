@@ -1,0 +1,282 @@
+/* ---- The Debrief's engine panel: the advanced settings and the re-analysis --- */
+
+.ln-ext-engine__advanced {
+  border-radius: 12px;
+  background: var(--ln-ext-lift-3);
+  box-shadow: inset 0 0 0 1px var(--ln-ext-lift-6);
+}
+
+.ln-ext-engine__disclosure {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--ln-ext-text);
+  font-size: 13px;
+  text-align: left;
+}
+
+.ln-ext-engine__disclosure svg {
+  width: 16px;
+  height: 16px;
+  color: var(--ln-ext-text-dim);
+}
+
+.ln-ext-engine__disclosure b {
+  font-weight: 700;
+}
+
+.ln-ext-engine__disclosure [data-ln-ext-bind] {
+  overflow: hidden;
+  color: var(--ln-ext-font-dimmer);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ln-ext-engine__disclosure .ln-ext-engine__chevron {
+  margin-left: auto;
+  transition: rotate 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.ln-ext-engine__disclosure[aria-expanded='true'] .ln-ext-engine__chevron {
+  rotate: 180deg;
+}
+
+.ln-ext-engine__adv {
+  display: grid;
+  gap: 14px;
+  padding: 2px 12px 12px;
+}
+
+.ln-ext-engine__adv-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px 12px;
+}
+
+.ln-ext-engine__adv-row b {
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.ln-ext-engine__adv-row p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* The limit's chips take the row under its name. */
+.ln-ext-engine__adv-row .ln-ext-engine__chips {
+  grid-column: 1 / -1;
+}
+
+.ln-ext-engine__total {
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-ext-engine__foot {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--ln-ext-lift-7);
+}
+
+.ln-ext-engine__primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--ln-ext-btn-primary);
+  box-shadow: var(--ln-ext-btn-primary-shadow);
+  color: var(--ln-ext-white);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.ln-ext-engine__primary:hover {
+  background: var(--ln-ext-btn-primary-hover);
+}
+
+.ln-ext-engine__primary svg {
+  width: 17px;
+  height: 17px;
+}
+
+.ln-ext-engine__primary small {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.78;
+}
+
+.ln-ext-engine__done {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  margin: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.ln-ext-engine__done svg {
+  width: 16px;
+  height: 16px;
+  color: var(--ln-ext-good);
+}
+
+/* The run going on (review-engine/progress-grid.ts): its level and time left beside how far
+   it is, then a square per position, in the game's order. */
+.ln-ext-engine__progress {
+  display: grid;
+  gap: 10px;
+}
+
+.ln-ext-engine__run {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ln-ext-engine__run > span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-ext-engine__run b {
+  color: var(--ln-ext-text-strong);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.ln-ext-engine__run strong {
+  flex: none;
+  color: var(--ln-ext-text-strong);
+  font-size: 24px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.ln-ext-engine__run small {
+  margin-left: 1px;
+  color: var(--ln-ext-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ln-ext-engine__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--ln-ext-columns, 18), minmax(0, 1fr));
+  gap: 3px;
+}
+
+.ln-ext-engine__grid i,
+.ln-ext-engine__key i {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: var(--ln-ext-lift-8);
+  transition:
+    background-color 0.3s ease-out,
+    box-shadow 0.3s ease-out !important;
+}
+
+:is(.ln-ext-engine__grid, .ln-ext-engine__key) i[data-ln-ext-state='engine'] {
+  background: var(--ln-ext-accent);
+}
+
+:is(.ln-ext-engine__grid, .ln-ext-engine__key) i[data-ln-ext-state='cloud'] {
+  background: color-mix(in srgb, var(--ln-ext-cyan) 75%, transparent);
+}
+
+/* Being searched: ringed, and breathing, which only its opacity does. */
+:is(.ln-ext-engine__grid, .ln-ext-engine__key) i[data-ln-ext-state='busy'] {
+  background: color-mix(in srgb, var(--ln-ext-accent) 30%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--ln-ext-accent);
+}
+
+.ln-ext-engine__grid i[data-ln-ext-state='busy'] {
+  animation: ln-ext-engine-searching 1.2s ease-in-out infinite;
+}
+
+@keyframes ln-ext-engine-searching {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.ln-ext-engine__key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.ln-ext-engine__key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ln-ext-engine__key i {
+  width: 9px;
+}
+
+/* Under a run going on, to the settings picked since. */
+.ln-ext-engine__secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--ln-ext-btn-grey);
+  box-shadow: var(--ln-ext-btn-grey-shadow);
+  color: var(--ln-ext-text-strong);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ln-ext-engine__secondary:hover {
+  background: var(--ln-ext-btn-grey-hover);
+}
+
+.ln-ext-engine__secondary svg {
+  width: 15px;
+  height: 15px;
+}
+
+.ln-ext-engine__secondary small {
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  font-weight: 600;
+}

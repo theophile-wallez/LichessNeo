@@ -1,0 +1,42 @@
+/* ---- Lichess's analysis on the device --- */
+
+/* Its editor (#page/lichess/local-analysis.ts), Lichess's own dialog. Its small buttons write
+ * Lichess's font glyphs as text, which our buttons' font turns into empty boxes: each gets its
+ * Hugeicon. The local analysis' buttons are copy and download, then clear; a published one has
+ * clear alone. */
+
+.local-analysis-dialog .actions > button {
+  display: inline-grid !important;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0 !important;
+  border-radius: 7px !important;
+  font-size: 0 !important;
+}
+
+.local-analysis-dialog .actions > button::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: var(--ln-ext-glyph) center / contain no-repeat;
+}
+
+.local-analysis-dialog .actions > button:not(.clear):first-child {
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/copy-01.svg');
+}
+
+.local-analysis-dialog .actions > button:not(.clear):nth-child(2) {
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/download-04.svg');
+}
+
+.local-analysis-dialog .actions > button.clear {
+  --ln-ext-glyph: url('chrome-extension://__MSG_@@extension_id__/img/hugeicons/delete-02.svg');
+}
+
+/* The chart's, clear of the dialog's close button, which ours moves inside its corner
+ * (pages/dialogs.css). */
+.local-analysis-dialog .chart-container .actions {
+  inset-inline-end: 40px !important;
+}

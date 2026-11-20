@@ -5,6 +5,7 @@ import { fixtureGame } from '#page/review/fixtures/review-script.ts';
 import { UNIT_CASES } from '#page/review/fixtures/unit-cases.ts';
 import { builtSession, fakeGame, newSession } from '#page/review/fixtures/unit-review.ts';
 import type { JudgedMove } from '#page/review/session.ts';
+import { type Analysed, DEFAULT_REVIEW_ENGINE } from '#shared/review-engine/options.ts';
 import { nearly } from '#shared/testing/numbers.ts';
 import { urgentPositions } from './analyse-game.ts';
 import { nextJob } from './analyse-records.ts';
@@ -20,6 +21,8 @@ afterEach(() => {
   Reflect.deleteProperty(window, 'site');
   localStorage.clear();
 });
+
+const STANDARD: Analysed = { depth: 16, engine: 'light' };
 
 const short = (color: string): string => (color === 'white' ? 'w' : 'b');
 
@@ -164,14 +167,14 @@ describe('the cache', () => {
       { cp: 20, whiteWinChance: 51.8, secondLineWinChance: 50, best: 'e2e4' },
       { mate: -2, whiteWinChance: 0, secondLineWinChance: null, best: null },
     ];
-    cacheRecords('abcdefgh', 2, records);
+    cacheRecords({ gameId: 'abcdefgh', positions: 2, records, analysed: STANDARD });
     expect(localStorage.getItem('ln-ext-review:abcdefgh:2:v3')).toBe(
       '[{"cp":20,"wp":51.8,"wp2":50,"best":"e2e4"},{"mate":-2,"wp":0,"wp2":null,"best":null}]',
     );
-    expect(readCachedRecords('abcdefgh', 2)).toEqual(records);
-    expect(readCachedRecords('abcdefgh', 3)).toBeNull();
+    expect(readCachedRecords('abcdefgh', 2, STANDARD)?.records).toEqual(records);
+    expect(readCachedRecords('abcdefgh', 3, STANDARD)).toBeNull();
     localStorage.setItem('ln-ext-review:abcdefgh:3:v3', '[1,2,3]');
-    expect(readCachedRecords('abcdefgh', 3)).toBeNull();
+    expect(readCachedRecords('abcdefgh', 3, STANDARD)).toBeNull();
   });
 });
 
@@ -179,6 +182,7 @@ describe('the cache', () => {
 const cloudRun = (work: RecordsWork): RecordsRun => ({
   gameId: 'operaaaa',
   chess960: false,
+  options: DEFAULT_REVIEW_ENGINE,
   work,
   engines: () => Promise.reject(new Error('no engine')),
   whenFree: () => Promise.resolve(),

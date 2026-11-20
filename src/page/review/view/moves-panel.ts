@@ -15,7 +15,7 @@ import { briefMarkup, turningMove } from './brief.ts';
 import { avatarMarkup, takeReaction } from './coach-avatar.ts';
 import { explainHint } from './explain-hint.ts';
 import { movesGraph } from './graph.ts';
-import { syncGraphViews } from './graph-views.ts';
+import { fillGraphButtons, graphButtonSlots } from './graph-buttons.ts';
 import { keyMoments, momentsMarkup, showMoment } from './moments.ts';
 import {
   bubbleTitle,
@@ -30,7 +30,7 @@ import { type RetryOutcome, retryOutcome } from './retry.ts';
 import { type Retried, retryBubble, retryParts } from './retry-bubble.ts';
 import { retryHint, type RetryHint } from './retry-hint.ts';
 import { moverRating } from './opening-lookups.ts';
-import { gameTimes, timingAt } from './timing.ts';
+import { timingAt } from './timing.ts';
 import { type CoachComment, commentOn, followComment, timeTag, verdictMarkup } from './verdict.ts';
 import { fillAroundNav, type NavInput, navState, syncNav } from './nav.ts';
 
@@ -206,25 +206,17 @@ export function renderMoves(session: Session, analysis: Analysis): void {
   const moments = momentsMarkup(view.review, language);
   fillAroundNav(
     elements.panel,
-    html`<div class="ln-ext-review__graph-box"><div class="ln-ext-review__graph-slot"></div><div class="ln-ext-review__views-slot"></div></div>${moments}
+    html`<div class="ln-ext-review__graph-box"><div class="ln-ext-review__graph-slot"></div>${graphButtonSlots()}</div>${moments}
       ${coachMarkup(session, analysis, spoken)}`,
     elements.nav,
   );
   syncNav(elements.nav, navState(session, analysis, spoken), language.ui);
-  // The graph and its views are kept across renders (its listeners, its first draw, their
+  // The graph and its buttons are kept across renders (its listeners, its first draw, their
   // pick's slide): put them back in their slots.
   queryOne(elements.panel, '.ln-ext-review__graph-slot', HTMLElement)?.replaceWith(
     elements.graphBox,
   );
-  queryOne(elements.panel, '.ln-ext-review__views-slot', HTMLElement)?.replaceWith(
-    elements.graphViews,
-  );
-  const hasTimes = gameTimes(analysis, session.work).length > 0;
-  syncGraphViews(
-    elements.graphViews,
-    { shown: hasTimes ? view.graph : 'advantage', hasTimes },
-    language.ui,
-  );
+  fillGraphButtons(session, analysis, elements.panel);
   setHtml(elements.controls, controlsMarkup(view.playing !== null));
   movesGraph(session, analysis, true);
   showMoment(elements.panel, plyIndex(session.work, analysis.node));

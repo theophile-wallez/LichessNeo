@@ -28,6 +28,7 @@ async function lookUp(run: RecordsRun, index: number): Promise<Answer> {
   if (!cloud.success) return 'stop';
   const result = fromCloud(fen, cloud.data);
   if (!result) return 'miss';
+  if (!run.work.deep[index]) run.work.cloud.add(index);
   takeDeep(run, index, toRecord(fen, result));
   run.onChange?.();
   return 'found';

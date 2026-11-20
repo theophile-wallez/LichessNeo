@@ -1,7 +1,8 @@
 /* ---- The graph's views --- */
 
 /* Advantage or move times (page/review/view/graph-views.ts), a frosted pill over the
-   graph's top left corner, or its bottom one; its pick slides (content/ui/tab-bars.ts). */
+   graph's top left corner, or its bottom one, in the summary and the move-by-move review;
+   its pick slides (content/ui/tab-bars.ts). */
 #ln-ext-review .ln-ext-graph-views {
   --ln-ext-tab-bg: var(--ln-ext-bg-raised-hover);
   --ln-ext-tab-radius: 6px;
@@ -60,6 +61,97 @@
   box-shadow: var(--ln-ext-tab-shadow);
 }
 
+/* ---- The engine's button --- */
+
+/* The same pill over the right corner, the depth the settings pick in its level's hue, which
+   opens their popover (review-engine/popover.css). */
+#ln-ext-review .ln-ext-graph-engine {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 9px 0 8px;
+  border: none;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ln-ext-bg-panel-dark) 82%, transparent);
+  box-shadow: 0 1px 4px var(--ln-ext-shade-30);
+  backdrop-filter: blur(6px);
+  color: var(--ln-ext-text-dim);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    background-color 0.15s !important;
+}
+
+#ln-ext-review .ln-ext-graph-engine[data-ln-ext-corner='bottom'] {
+  top: auto;
+  bottom: 6px;
+}
+
+#ln-ext-review .ln-ext-graph-engine svg {
+  width: 14px;
+  height: 14px;
+  color: var(--ln-ext-engine-hue, var(--ln-ext-blue));
+  pointer-events: none;
+}
+
+/* While the game is analysed, a ring that fills in the level's hue, from the top. */
+#ln-ext-review .ln-ext-graph-engine .ln-ext-graph-engine__ring {
+  width: 15px;
+  height: 15px;
+  rotate: -90deg;
+}
+
+.ln-ext-graph-engine__ring circle {
+  fill: none;
+  stroke: var(--ln-ext-lift-15);
+  stroke-width: 2.6;
+}
+
+.ln-ext-graph-engine__ring circle:last-child {
+  stroke: var(--ln-ext-engine-hue, var(--ln-ext-blue));
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+#ln-ext-review .ln-ext-graph-engine__ring ~ b {
+  min-width: 3ch;
+  color: var(--ln-ext-text-strong);
+}
+
+#ln-ext-review .ln-ext-graph-engine__ring ~ span {
+  font-weight: 650;
+}
+
+#ln-ext-review .ln-ext-graph-engine:hover,
+#ln-ext-review .ln-ext-graph-engine.active {
+  background: var(--ln-ext-bg-raised-hover);
+  color: var(--ln-ext-text-strong);
+}
+
+#ln-ext-review .ln-ext-graph-engine[data-ln-ext-hue='cyan'] {
+  --ln-ext-engine-hue: var(--ln-ext-cyan);
+}
+
+#ln-ext-review .ln-ext-graph-engine[data-ln-ext-hue='purple'] {
+  --ln-ext-engine-hue: var(--ln-ext-purple);
+}
+
+#ln-ext-review .ln-ext-graph-engine[data-ln-ext-hue='pink'] {
+  --ln-ext-engine-hue: var(--ln-ext-pink);
+}
+
+#ln-ext-review .ln-ext-graph-engine[data-ln-ext-hue='orange'] {
+  --ln-ext-engine-hue: var(--ln-ext-orange);
+}
+
 /* ---- Move times --- */
 
 /* White's columns in White's color on the graph, Black's dimmer, the move on the board's
@@ -79,9 +171,4 @@ html.light #ln-ext-review-graph .ln-ext-graph-bar--white {
 /* Over the light scheme's White's. */
 html #ln-ext-review-graph .ln-ext-graph-bar.ln-ext-graph-bar--now {
   fill: var(--ln-ext-accent);
-}
-
-/* The tip goes over the toggle, which sits on its row. */
-#ln-ext-review-graph .ln-ext-graph-tip {
-  z-index: 2;
 }

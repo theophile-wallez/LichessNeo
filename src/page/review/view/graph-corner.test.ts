@@ -25,3 +25,15 @@ describe('toggleCorner', () => {
     expect(toggleCorner(columns, BOX)).toBe('top');
   });
 });
+
+describe('toggleCorner on the right, the engine’s button', () => {
+  const RIGHT = { ...BOX, width: 60, graphWidth: 300 };
+
+  it('goes down when White wins, the curve high on the right', () => {
+    expect(toggleCorner([...flat(60, 0, 220), ...flat(15, 220)], RIGHT, 'right')).toBe('bottom');
+  });
+
+  it('heeds only what runs under it: a lead on the left leaves it at the top', () => {
+    expect(toggleCorner([...flat(15, 0, 200), ...flat(60, 200)], RIGHT, 'right')).toBe('top');
+  });
+});

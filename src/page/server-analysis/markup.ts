@@ -1,12 +1,14 @@
-import AnalyticsUpIcon from '@hugeicons/core-free-icons/AnalyticsUpIcon';
+import CloudIcon from '@hugeicons/core-free-icons/CloudIcon';
+import LaptopIcon from '@hugeicons/core-free-icons/LaptopIcon';
+import Settings02Icon from '@hugeicons/core-free-icons/Settings02Icon';
 import { COLORS, type Color } from '#shared/chess/types.ts';
 import { html, type SafeHtml } from '#shared/html.ts';
 import { hugeicon } from '#shared/hugeicons.ts';
 import type { SideSummary } from './state.ts';
 
-// The card's parts, in Lichess's own words: its request's button, the
-// analysis' progress, and once it's in, each side's errors as Lichess counts
-// them, with "Learn from your mistakes".
+// The card's parts, in Lichess's own words: its request's button and its
+// analysis on the device's, the analysis' progress, and once it's in, each
+// side's errors as Lichess counts them, with "Learn from your mistakes".
 
 export interface CardWords {
   readonly title: string;
@@ -19,14 +21,31 @@ export interface CardWords {
   readonly learn: string;
 }
 
-const ICON = hugeicon(AnalyticsUpIcon);
+const SERVER_ICON = hugeicon(CloudIcon);
+const DEVICE_ICON = hugeicon(LaptopIcon);
+const EDITOR_ICON = hugeicon(Settings02Icon);
 
-/** Lichess's request, under the label of its own button. */
-export const requestMarkup = (label: string): SafeHtml =>
-  html`<button type="button" class="ln-ext-sanalysis__request" data-ln-ext-server="request">${ICON}<span>${label}</span></button>`;
+export interface RequestLabels {
+  readonly server: string;
+  /** Lichess's analysis on the device, when it offers one. */
+  readonly local: string | null;
+}
+
+/** Lichess's request, and its analysis on the device, under the labels of its own buttons. */
+export function requestMarkup({ server, local }: RequestLabels): SafeHtml {
+  const device =
+    local === null
+      ? html``
+      : html`<button type="button" class="ln-ext-sanalysis__request" data-ln-ext-server="local">${DEVICE_ICON}<span>${local}</span></button>`;
+  return html`<div class="ln-ext-sanalysis__requests"><button type="button" class="ln-ext-sanalysis__request" data-ln-ext-server="request">${SERVER_ICON}<span>${server}</span></button>${device}</div>`;
+}
 
 const headMarkup = (title: string, status: SafeHtml): SafeHtml =>
   html`<div class="ln-ext-sanalysis__head"><span class="ln-ext-sanalysis__title">${title}</span>${status}</div>`;
+
+/** The cog that opens Lichess's editor again: the analysis on the device, at other settings. */
+const editorMarkup = (label: string): SafeHtml =>
+  html`<button type="button" class="ln-ext-sanalysis__editor" data-ln-ext-server="local" data-ln-ext-tip="${label}" aria-label="${label}">${EDITOR_ICON}</button>`;
 
 export function runningMarkup(
   words: CardWords,
@@ -37,7 +56,9 @@ export function runningMarkup(
   return html`${headMarkup(words.title, status)}<div class="ln-ext-sanalysis__bar"><i style="--ln-ext-share:${share.toFixed(3)}"></i></div>`;
 }
 
-export const doneHeadMarkup = (words: CardWords): SafeHtml => headMarkup(words.title, html``);
+/** The head once the analysis is in, with the editor's cog when Lichess offers it (its label). */
+export const doneHeadMarkup = (words: CardWords, editor: string | null): SafeHtml =>
+  headMarkup(words.title, editor === null ? html`` : editorMarkup(editor));
 
 const ERRORS = [
   ['inaccuracy', '?!'],

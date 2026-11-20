@@ -6,7 +6,7 @@ import type { TreeNode } from '#page/lichess/tree.ts';
 import type { Threat } from './coach/threat.ts';
 import type { StreamState } from './comment/markup.ts';
 import type { EnginePool } from './engine/pool.ts';
-import type { RecordsWork } from './game/records.ts';
+import { newRecordsWork, type RecordsWork } from './game/records.ts';
 import type { PositionRecord } from './evaluation/score.ts';
 import type { ReviewLanguage } from './i18n/types.ts';
 import type { ClassCounts } from './judge/summary.ts';
@@ -17,6 +17,7 @@ import type { Round } from './practice/rounds.ts';
 import type { PracticeState } from './practice/state.ts';
 import type { ReviewElements } from './view/elements.ts';
 import type { Mark, ReviewArrow } from '#shared/board/marks.ts';
+import type { Analysed } from '#shared/review-engine/options.ts';
 
 // Everything the review keeps while a page is open, shared by its parts.
 
@@ -100,6 +101,8 @@ export interface ViewState {
   graph: GraphView;
   /** The game's crosstable and export are open over the move-by-move panel. */
   sheet: boolean;
+  /** The Debrief's engine settings are open under the tabs. */
+  engine: boolean;
   /** The closed panel's card is folded down to its chevron. */
   cardFolded: boolean;
   bestOf: BestShown | null;
@@ -172,6 +175,10 @@ export interface GameWork extends RecordsWork {
   nodes: readonly TreeNode[];
   readonly moves: (JudgedMove | undefined)[];
   bookPly: number;
+  /** The analyses started, the last one running: one started over stops the one before. */
+  runs: number;
+  /** What the last one started with, the settings' depth and engine. */
+  aim: Analysed | null;
 }
 
 export interface AvatarState {
@@ -250,6 +257,7 @@ export function createSession(options: SessionOptions): Session {
       revealed: new Set(),
       graph: 'advantage',
       sheet: false,
+      engine: false,
       cardFolded: isCardFolded(),
       bestOf: null,
       lineOf: null,
@@ -269,16 +277,7 @@ export function createSession(options: SessionOptions): Session {
       switchedOff: false,
     },
     live: emptyLive(),
-    work: {
-      nodes: [],
-      deep: [],
-      rough: [],
-      moves: [],
-      bookPly: 0,
-      cloudAt: Infinity,
-      pending: new Set(),
-      searched: 0,
-    },
+    work: { ...newRecordsWork([]), nodes: [], moves: [], bookPly: 0, runs: 0, aim: null },
     lines: { found: new Map(), busy: false },
     threats: { found: new Map(), busy: false },
     coach: { id: coach, reacted: '', avatar: null },

@@ -3,7 +3,9 @@ import type { Color } from '#shared/chess/types.ts';
 
 // Where a game's server analysis stands, from what Lichess's page holds: its
 // request's form, the chart its script puts in the form's place, and the
-// scores the analysis brings to each position of the mainline as it runs.
+// scores the analysis brings to each position of the mainline as it runs. The
+// analysis on the device (#page/lichess/local-analysis.ts) ends the same way:
+// Lichess merges its scores and summary as a server one's.
 
 const SideSchema = z.object({
   inaccuracy: z.number(),
@@ -25,6 +27,8 @@ export type AnalysisSummary = Readonly<Record<Color, SideSummary>>;
 export interface PageAnalysis {
   /** Lichess offers to make one: its form is there. */
   readonly requestable: boolean;
+  /** Lichess offers its analysis on the device: its editor's button is there. */
+  readonly local: boolean;
   /** Lichess's chart took the form's place, or the analysis' data came in. */
   readonly started: boolean;
   /** Every position of the mainline has its score (`hasFullComputerAnalysis`). */
@@ -37,13 +41,13 @@ export interface PageAnalysis {
 
 export type ServerAnalysis =
   | { readonly kind: 'none' }
-  | { readonly kind: 'request' }
+  | { readonly kind: 'request'; readonly local: boolean }
   | { readonly kind: 'running'; readonly share: number }
-  | { readonly kind: 'done'; readonly summary: AnalysisSummary | null };
+  | { readonly kind: 'done'; readonly summary: AnalysisSummary | null; readonly local: boolean };
 
 export function serverAnalysis(page: PageAnalysis): ServerAnalysis {
-  if (page.full) return { kind: 'done', summary: page.summary };
+  if (page.full) return { kind: 'done', summary: page.summary, local: page.local };
   if (page.started || page.summary)
     return { kind: 'running', share: page.positions > 0 ? page.scored / page.positions : 0 };
-  return page.requestable ? { kind: 'request' } : { kind: 'none' };
+  return page.requestable ? { kind: 'request', local: page.local } : { kind: 'none' };
 }

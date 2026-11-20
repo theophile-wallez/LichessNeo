@@ -7,13 +7,18 @@ import {
   onLichessLook,
   onLooksPreview,
   onPageReady,
+  onReviewEngine,
+  onReviewEnginePick,
   onSounds,
   postCoachOptions,
   postCoachPicked,
   postCoachPicker,
   postLichessLook,
   postLooksPreview,
+  postReviewEngine,
+  postReviewEnginePick,
 } from './protocol.ts';
+import { DEFAULT_REVIEW_ENGINE } from './review-engine/options.ts';
 
 const stops: (() => void)[] = [];
 
@@ -107,6 +112,20 @@ describe('protocol', () => {
     postCoachOptions({ motion: false, analysis: true, board: true, dots: false, hidden: [] });
     receive({ type: 'ln-ext:coach-options', options: { motion: 'no' } });
     expect(told).toEqual([{ motion: false, analysis: true, board: true, dots: false, hidden: [] }]);
+  });
+
+  it('carries the Debrief’s engine settings each way, each its own, and drops a pick out of shape', () => {
+    vi.spyOn(window, 'postMessage').mockImplementation((data: unknown) => receive(data));
+    const told: unknown[] = [];
+    const picked: unknown[] = [];
+    stops.push(onReviewEngine(options => told.push(options)));
+    stops.push(onReviewEnginePick(options => picked.push(options)));
+    const deep = { ...DEFAULT_REVIEW_ENGINE, depth: 24, engine: 'full' } as const;
+    postReviewEngine(DEFAULT_REVIEW_ENGINE);
+    postReviewEnginePick(deep);
+    receive({ type: 'ln-ext:review-engine-pick', options: null });
+    expect(told).toEqual([DEFAULT_REVIEW_ENGINE]);
+    expect(picked).toEqual([deep]);
   });
 
   it('stops listening once told', () => {

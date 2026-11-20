@@ -1,5 +1,6 @@
 import { z } from 'zod/mini';
 import { createGuard } from '#shared/guards.ts';
+import type { EngineKind } from '#shared/review-engine/options.ts';
 import { hasRelaxedSimd } from './relaxed-simd.ts';
 import { FULL_SEARCH, type SearchLimits, STOCKFISH_BUILD, stockfishScript } from './settings.ts';
 import { assetUrl } from '#page/lichess/assets.ts';
@@ -23,7 +24,8 @@ type StockfishModule = z.infer<typeof StockfishModuleSchema>;
 const isFactory = createGuard(FactorySchema);
 const isStockfishModule = createGuard(StockfishModuleSchema);
 
-const INITIAL_PAGES = 1536;
+// Lichess's own sizes for each build, in 64 KB pages.
+const INITIAL_PAGES: Record<EngineKind, number> = { light: 1536, full: 2560 };
 
 // How long an engine may say nothing in a search before it's given up. A
 // search keeps sending lines, late on a busy machine: there a 250 ms one took
@@ -31,12 +33,13 @@ const INITIAL_PAGES = 1536;
 const SILENCE_MS = 10_000;
 
 // Some browsers refuse a large shared memory: ask for less until they agree.
-function sharedMemory(): WebAssembly.Memory {
+function sharedMemory(engine: EngineKind): WebAssembly.Memory {
+  const initial = INITIAL_PAGES[engine];
   for (let maximum = 32767; ; maximum = Math.ceil(maximum * 0.75)) {
     try {
-      return new WebAssembly.Memory({ shared: true, initial: INITIAL_PAGES, maximum });
+      return new WebAssembly.Memory({ shared: true, initial, maximum });
     } catch (error) {
-      if (maximum <= INITIAL_PAGES || !(error instanceof RangeError)) throw error;
+      if (maximum <= initial || !(error instanceof RangeError)) throw error;
     }
   }
 }
@@ -65,10 +68,11 @@ async function loadNetworks(module: StockfishModule): Promise<void> {
   }
 }
 
-async function loadModule(): Promise<StockfishModule> {
+async function loadModule(engine: EngineKind): Promise<StockfishModule> {
   const { root } = STOCKFISH_BUILD;
-  const url = assetUrl(`${root}/${stockfishScript(hasRelaxedSimd())}`, { documentOrigin: true });
-  const wasmMemory = sharedMemory();
+  const script = stockfishScript(hasRelaxedSimd(), engine);
+  const url = assetUrl(`${root}/${script}`, { documentOrigin: true });
+  const wasmMemory = sharedMemory(engine);
   const imported: unknown = await import(url);
   if (!isFactory(imported)) throw new Error('Stockfish did not load');
   const module: unknown = await imported.default({
@@ -90,30 +94,40 @@ export interface EngineSearch {
 
 export interface StockfishOptions {
   readonly chess960: boolean;
+  /** The light network unless given, with one thread and a 16 MB table. */
+  readonly engine?: EngineKind;
+  readonly threads?: number;
+  readonly hash?: number;
 }
 
 export class Stockfish {
   readonly #chess960: boolean;
+  readonly #engine: EngineKind;
+  readonly #threads: number;
+  readonly #hash: number;
   #module: StockfishModule | null = null;
   #onLine: ((text: string) => void) | null = null;
   #queue: Promise<unknown> = Promise.resolve();
 
   constructor(options: StockfishOptions) {
     this.#chess960 = options.chess960;
+    this.#engine = options.engine ?? 'light';
+    this.#threads = options.threads ?? 1;
+    this.#hash = options.hash ?? 16;
   }
 
   async boot(): Promise<void> {
-    const module = await loadModule();
+    const module = await loadModule(this.#engine);
     await loadNetworks(module);
     Object.assign(module, { listen: (text: string) => this.#onLine?.(text) });
     this.#module = module;
     module.uci('uci');
-    // One thread each: the review's short searches reach their depth several
-    // times sooner on one thread than on four, so the page runs several engines.
-    module.uci('setoption name Threads value 1');
-    // The review's searches are short: a small table does as well, and weighs
-    // less with several engines on the page.
-    module.uci('setoption name Hash value 16');
+    // One thread each unless picked: at a fixed depth more threads search wider,
+    // not sooner, so the page runs several engines instead.
+    module.uci(`setoption name Threads value ${this.#threads}`);
+    // Each search starts from an empty table: a small one does as well, and
+    // weighs less with several engines on the page.
+    module.uci(`setoption name Hash value ${this.#hash}`);
     module.uci('setoption name MultiPV value 2');
     if (this.#chess960) module.uci('setoption name UCI_Chess960 value true');
   }
@@ -143,6 +157,8 @@ export class Stockfish {
       const module = this.#module;
       if (!module) throw new Error('Stockfish is not running');
       const collector = new SearchCollector();
+      // A deep search may think longer between two lines.
+      const silence = Math.max(SILENCE_MS, limits.movetime / 2);
       // An engine silent that long is in trouble: its result would be cut
       // short, so the search fails, to be done again, and the engine is ended.
       let timer = 0;
@@ -150,11 +166,11 @@ export class Stockfish {
       const listen = (): void => {
         clearTimeout(timer);
         heardAt = Date.now();
-        timer = window.setTimeout(giveUp, SILENCE_MS);
+        timer = window.setTimeout(giveUp, silence);
       };
       const giveUp = (): void => {
         // Far later by the clock: the machine slept, the search with it.
-        if (Date.now() - heardAt > SILENCE_MS * 2) {
+        if (Date.now() - heardAt > silence * 2) {
           listen();
           return;
         }

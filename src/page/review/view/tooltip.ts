@@ -66,7 +66,9 @@ export function watchTips(session: Session): void {
   const { panel } = session.elements;
   panel.addEventListener('pointerover', event => {
     const target = closestTo(event.target, '[data-ln-ext-tip]', HTMLElement);
-    if (target) showTip(session, target);
+    // The engine's button needs no name while its popover is open.
+    const named = target !== session.elements.graphEngine || !session.view.engine;
+    if (target && named) showTip(session, target);
   });
   panel.addEventListener('pointerout', event => {
     const target = closestTo(event.target, '[data-ln-ext-tip]', HTMLElement);

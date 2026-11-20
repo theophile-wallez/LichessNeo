@@ -1,35 +1,18 @@
-import { clamp } from '#shared/math.ts';
+import { engineCount as countEngines } from '#shared/review-engine/device.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { EnginePool } from './engine/pool.ts';
+import { reviewEngine } from './engine/review-engine.ts';
 import { Stockfish } from './engine/stockfish.ts';
 import { isComplete } from './game/records.ts';
 import type { Session } from './session.ts';
 
-/** More engines barely help: the game's analysis is then held up by the cloud and the page. */
-const MAX_ENGINES = 3;
-/** Gigabytes of memory per engine, so a small machine keeps room for the rest of the browser. */
-const GIGABYTES_PER_ENGINE = 2;
-/** Without the device's memory (Firefox doesn't tell), no more than this. */
-const UNKNOWN_MEMORY_ENGINES = 2;
+/** The engines the settings make: one per core, each with its threads. */
+export const engineCount = (): number => countEngines(reviewEngine());
 
-/** The device's memory in gigabytes, rounded down by the browser (at most 8), if it tells. */
-function deviceMemory(): number | null {
-  const memory: unknown = Reflect.get(navigator, 'deviceMemory');
-  return typeof memory === 'number' && memory > 0 ? memory : null;
-}
-
-/** One engine per core but one, left to the page, as far as the memory allows. */
-export function engineCount(): number {
-  const memory = deviceMemory();
-  const byMemory =
-    memory === null ? UNKNOWN_MEMORY_ENGINES : Math.floor(memory / GIGABYTES_PER_ENGINE);
-  const byCores = (navigator.hardwareConcurrency || 2) - 1;
-  return clamp(Math.min(byCores, byMemory), 1, MAX_ENGINES);
-}
-
-/** Lichess's Stockfish, booted for a game. */
+/** Lichess's Stockfish, booted for a game: the network, threads and table the settings pick. */
 export async function bootEngine(chess960: boolean): Promise<Stockfish> {
-  const engine = new Stockfish({ chess960 });
+  const { engine: kind, threads, hash } = reviewEngine();
+  const engine = new Stockfish({ chess960, engine: kind, threads, hash });
   await engine.boot();
   return engine;
 }

@@ -19,7 +19,8 @@
   min-height: 0;
   margin-top: 6px;
   padding-bottom: 10px;
-  overflow-y: auto;
+  /* Only down: a chip or a word a hair too wide drew a scrollbar across the card's foot. */
+  overflow: hidden auto;
   scrollbar-gutter: stable;
 }
 

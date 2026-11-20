@@ -16,6 +16,7 @@ import { fitBubble } from './bubble.ts';
 import { renderClosed } from './closed-panel.ts';
 import { keepAvatar } from './coach-avatar.ts';
 import { attach } from './elements.ts';
+import { syncEnginePopover } from './engine-popover.ts';
 import { movesGraph } from './graph.ts';
 import { renderLive } from './live-panel.ts';
 import { keepPage } from './openings-actions.ts';
@@ -162,6 +163,7 @@ export function render(session: Session, force = false): void {
     redrawPanel(session, analysis);
   }
   if (view.mode === 'moves') movesGraph(session, analysis);
+  if (!onFreeBoard(view.mode)) syncEnginePopover(session, analysis);
   renderBoard(session, analysis);
 }
 

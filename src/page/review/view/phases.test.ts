@@ -13,7 +13,7 @@ const STARTS = [
 
 function names(toggleBelow: number): { text: string | null; y: string | null }[] {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.innerHTML = phaseLinesMarkup({ starts: STARTS, toggleBelow }, SIZE, {
+  svg.innerHTML = phaseLinesMarkup({ starts: STARTS, toggleBelow, rightBelow: 0 }, SIZE, {
     x: index => index * 5,
     areaBelow: true,
   }).value;

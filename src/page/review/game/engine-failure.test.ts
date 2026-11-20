@@ -20,6 +20,6 @@ it('says the engine failed to start, rather than analyzing forever', async () =>
   await advance(3000);
   const error = document.querySelector('#ln-ext-review .ln-ext-review__error');
   expect(error?.textContent).toBe(en.ui.engineError);
-  expect(document.querySelector('#ln-ext-review .ln-ext-summary-pct')).toBeNull();
+  expect(document.querySelector('#ln-ext-review .ln-ext-graph-engine__ring')).toBeNull();
   expect(logged).toHaveBeenCalledWith('[LichessNeo] engine boot failed', expect.any(RangeError));
 });

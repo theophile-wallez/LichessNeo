@@ -1,8 +1,9 @@
 import { queryOne, setData } from '#shared/dom.ts';
 
-// The move-by-move graph's views toggle sits over its top left corner, and
-// goes down to the bottom one when the curve (or the columns) runs under it
-// there but less so below: a game White leads from the start.
+// The graph's views toggle sits over its top left corner, and the engine's
+// button over its top right one; each goes down to the bottom corner when the
+// curve (or the columns) runs under it there but less so below: the left one
+// for a game White leads from the start, the right one for a game White wins.
 
 /** What a graph draws at one x, from its top to its bottom. */
 export interface Span {
@@ -12,6 +13,7 @@ export interface Span {
 }
 
 export type Corner = 'top' | 'bottom';
+export type Side = 'left' | 'right';
 
 export interface ToggleBox {
   readonly width: number;
@@ -19,18 +21,21 @@ export interface ToggleBox {
   /** Its room from the graph's edges (styles/review/graph-views.css). */
   readonly inset: number;
   readonly graphHeight: number;
+  /** Needed on the right side only. */
+  readonly graphWidth?: number;
 }
 
 // A dot is drawn on the curve, 3.5px around it: some room besides.
 const MARGIN = 5;
 
-/** The left corner where the toggle covers least of the graph: the top one unless it covers more. */
-export function toggleCorner(spans: readonly Span[], box: ToggleBox): Corner {
-  const { width, height, inset, graphHeight } = box;
-  const right = inset + width + MARGIN;
+/** The corner of `side` where the toggle covers least of the graph: the top one unless it covers more. */
+export function toggleCorner(spans: readonly Span[], box: ToggleBox, side: Side = 'left'): Corner {
+  const { width, height, inset, graphHeight, graphWidth = 0 } = box;
+  const reach = inset + width + MARGIN;
+  const under = (x: number): boolean => (side === 'left' ? x <= reach : x >= graphWidth - reach);
   const covered = (top: number): number =>
     spans.filter(
-      span => span.x <= right && span.top <= top + height + MARGIN && span.bottom >= top - MARGIN,
+      span => under(span.x) && span.top <= top + height + MARGIN && span.bottom >= top - MARGIN,
     ).length;
   const up = covered(inset);
   if (up === 0) return 'top';
@@ -39,21 +44,52 @@ export function toggleCorner(spans: readonly Span[], box: ToggleBox): Corner {
 
 const INSET = 6;
 
-/**
- * Puts the toggle beside `graph` where it covers least of what `spans` draws,
- * and says how far it takes the graph's bottom: 0 at the top, or while it's
- * hidden (a game without move times).
- */
-export function placeToggle(
-  graph: HTMLElement,
+interface GraphSize {
+  readonly width: number;
+  readonly height: number;
+}
+
+/** How far the corners' buttons take the graph's bottom, from either side. */
+export interface CornersBelow {
+  readonly left: number;
+  readonly right: number;
+}
+
+function place(
+  toggle: HTMLElement,
+  side: Side,
   spans: () => readonly Span[],
-  graphHeight: number,
+  size: GraphSize,
 ): number {
-  const toggle =
-    graph.parentElement && queryOne(graph.parentElement, '.ln-ext-graph-views', HTMLElement);
-  if (!toggle) return 0;
-  const box = { width: toggle.offsetWidth, height: toggle.offsetHeight, inset: INSET, graphHeight };
-  const corner = toggle.hidden ? 'top' : toggleCorner(spans(), box);
+  const box = {
+    width: toggle.offsetWidth,
+    height: toggle.offsetHeight,
+    inset: INSET,
+    graphHeight: size.height,
+    graphWidth: size.width,
+  };
+  const corner = toggle.hidden ? 'top' : toggleCorner(spans(), box, side);
   setData(toggle, 'lnExtCorner', corner === 'bottom' ? 'bottom' : null);
   return corner === 'bottom' ? INSET + box.width + INSET : 0;
+}
+
+/**
+ * Puts the views toggle and the engine's button beside `graph` where each
+ * covers least of what `spans` draws, and says how far they take the graph's
+ * bottom: 0 at the top, or while hidden (the toggle of a game without move times).
+ */
+export function placeCorners(
+  graph: HTMLElement,
+  spans: () => readonly Span[],
+  size: GraphSize,
+): CornersBelow {
+  const parent = graph.parentElement;
+  let drawn: readonly Span[] | null = null;
+  const once = (): readonly Span[] => (drawn ??= spans());
+  const views = parent && queryOne(parent, '.ln-ext-graph-views', HTMLElement);
+  const engine = parent && queryOne(parent, '.ln-ext-graph-engine', HTMLElement);
+  return {
+    left: views ? place(views, 'left', once, size) : 0,
+    right: engine ? place(engine, 'right', once, size) : 0,
+  };
 }

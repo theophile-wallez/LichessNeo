@@ -80,6 +80,10 @@ export const StorageKey = {
   practiceSync: prefixed('practice-sync'),
   // The review caches, least recently opened first.
   reviewIndex: prefixed('review-index'),
+  // The Debrief's engine settings, kept here too for the page world (#shared/review-engine).
+  reviewEngine: prefixed('review-engine'),
+  // How fast this device's engines search, against the times measured (#shared/review-engine).
+  reviewEngineSpeed: prefixed('review-engine-speed'),
   // The extension's settings, in chrome.storage.sync rather than the page's (content/settings).
   settings: prefixed('settings'),
   // The picked color themes' palettes, kept here too to be drawn from document_start (content/colors).

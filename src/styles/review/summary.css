@@ -4,22 +4,13 @@
 .ln-ext-summary-graph {
   position: relative;
   height: var(--ln-ext-review-graph);
-  margin-bottom: 12px;
   cursor: pointer;
 }
 
-.ln-ext-summary-pct {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  text-align: center;
-  color: var(--ln-ext-white);
-  font-size: 12px;
-  font-weight: 800;
-  mix-blend-mode: difference;
-  pointer-events: none; /* the graph stays clickable while this fills in */
+/* With its buttons over its corners, as the move-by-move one (graph-views.css). */
+#ln-ext-review .ln-ext-review__top > .ln-ext-review__graph-box {
+  position: relative;
+  margin: 0 0 12px;
 }
 
 #ln-ext-review-graph {
@@ -125,6 +116,8 @@ html.light .ln-ext-graph-phase-name--area {
 .ln-ext-graph-tip {
   position: absolute;
   top: 6px;
+  /* Over what shares its row: the views toggle and the engine's button. */
+  z-index: 2;
   display: none;
   padding: 3px 6px;
   border-radius: 3px;

@@ -86,6 +86,7 @@ function act(session: Session, analysis: Analysis, action: ReviewCommand): void 
   else if (action === 'explain') toggleExplain(session, analysis);
   else if (action === 'line') toggleLine(session, analysis);
   else if (action === 'rows') view.allRows = !view.allRows;
+  else if (action === 'engine') view.engine = !view.engine;
   else if (action === 'first') jump(session, analysis, 0);
   else if (action === 'last') jump(session, analysis, session.work.nodes.length - 1);
   else if (action === 'prev' || action === 'next') {

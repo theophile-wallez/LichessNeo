@@ -5,6 +5,7 @@ import { createOwnedElement } from '#shared/owned-element.ts';
 import { shownName } from '#shared/own-name.ts';
 import type { Analysis, Player } from '#page/lichess/analysis.ts';
 import { analysisRequestForm, requestAnalysis } from '#page/lichess/analysis-request.ts';
+import { localAnalysisButton, openLocalAnalysis } from '#page/lichess/local-analysis.ts';
 import { translate } from '#page/lichess/globals.ts';
 import { PlyChart } from '#page/charts/game/plot.ts';
 import { advantageSpec } from '#page/charts/game/specs.ts';
@@ -47,6 +48,14 @@ function requestLabel(): string {
   return label === ''
     ? translate('requestAComputerAnalysis', 'Request a computer analysis')
     : label;
+}
+
+// The editor's label: its button's text before an analysis, its cog's title after. Its
+// words are the study's, which `translate` doesn't reach.
+function localLabel(fallback: string): string {
+  const button = localAnalysisButton();
+  const labels = [button?.textContent, button?.title].map(text => text?.trim() ?? '');
+  return labels.find(text => text !== '') ?? fallback;
 }
 
 const chartKey = (state: ServerAnalysis): string | null => {
@@ -98,10 +107,13 @@ export class Card {
     const bottom = queryOne(root, '.ln-ext-sanalysis__bottom', HTMLElement);
     if (!top || !bottom) return;
     const texts = words();
-    if (state.kind === 'request') setHtml(top, requestMarkup(requestLabel()));
-    else if (state.kind === 'running')
+    if (state.kind === 'request') {
+      const local = state.local ? localLabel('Analyze on your device') : null;
+      setHtml(top, requestMarkup({ server: requestLabel(), local }));
+    } else if (state.kind === 'running')
       setHtml(top, runningMarkup(texts, state.share, this.#percent));
-    else if (state.kind === 'done') setHtml(top, doneHeadMarkup(texts));
+    else if (state.kind === 'done')
+      setHtml(top, doneHeadMarkup(texts, state.local ? localLabel('Analysis editor') : null));
     else setHtml(top, html``);
     const summary = state.kind === 'done' ? state.summary : null;
     setHtml(bottom, summary ? summaryMarkup({ sides: summary, names, words: texts }) : html``);
@@ -123,6 +135,7 @@ export class Card {
     const button = target && closestTo(target, '[data-ln-ext-server]', HTMLElement);
     const action = button?.dataset.lnExtServer;
     if (action === 'request') requestAnalysis();
+    else if (action === 'local') openLocalAnalysis();
     else if (action === 'learn' && this.#analysis) {
       this.#analysis.setRetro(true);
       this.#analysis.redraw();

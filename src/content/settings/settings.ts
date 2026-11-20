@@ -14,6 +14,7 @@ import { DEFAULT_INTRO, IntroKindSchema } from '#content/game/intro/kinds.ts';
 import { DEFAULT_WIN_COLOR, WinColorSchema } from '#content/board-wave/win-colors.ts';
 import { CardPicksSchema } from '#content/pages/speed-cards/picks.ts';
 import { ChatRepliesSchema, DEFAULT_REPLIES } from '#content/game/chat-replies.ts';
+import { DEFAULT_REVIEW_ENGINE, ReviewEngineSchema } from '#shared/review-engine/options.ts';
 
 // The extension's settings (the account page's Lichess Neo section),
 // kept in chrome.storage.sync so they follow the user to their other
@@ -73,6 +74,8 @@ const SettingsFields = z.object({
   chatReplies: z.catch(ChatRepliesSchema, DEFAULT_REPLIES),
   /** The color theme of Lichess's light scheme and of its dark one (content/colors). */
   colorThemes: z.prefault(ThemePicksSchema, { light: DEFAULT_THEME, dark: DEFAULT_THEME }),
+  /** The Debrief's depth and engines (#shared/review-engine), kept for the page world too. */
+  reviewEngine: z.catch(ReviewEngineSchema, DEFAULT_REVIEW_ENGINE),
   /** The themes the user made. Unreadable, they're dropped rather than every setting. */
   customThemes: z.catch(z.array(CustomThemeSchema).check(z.maxLength(MAX_CUSTOM_THEMES)), []),
 });

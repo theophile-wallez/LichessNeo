@@ -168,10 +168,25 @@ asks for it (`postCoachPicker`) and hears back the coach picked, already
 kept for every page (`onCoachPicked`, `watchCoachPicks`), whose words the
 comment is typed in again.
 
-The game's analysis runs on the page's engines (`engine-pool.ts`): up to
-three, on one thread each, as the device's cores and memory allow, each on a
-position of its own (`nextJob`), on Lichess's relaxed SIMD build where the
-browser runs it (`engine/relaxed-simd.ts`), a quarter faster. A position whose
+The game's analysis runs on the page's engines (`engine-pool.ts`), as the
+Debrief's engine settings say (`#shared/review-engine`, read through
+`engine/review-engine.ts`): a depth (16 by default, up to 40; past 16 each
+search gets a third more time per ply, `deepSearch`), Lichess's light network
+or its full one (`sf_19.js`), and the cores it takes (by default all of the
+device's but one, three at most, as its memory allows), split into engines of
+as many threads as picked, each with its own table and on a position of its
+own (`nextJob`), on Lichess's relaxed SIMD build where the browser runs it
+(`engine/relaxed-simd.ts`), a quarter faster. The searches are timed as they
+run, for the times the settings show (`recordSearch`). The settings are
+picked in a popover under the engine's button, over the graph's right corner
+(`view/engine-popover.ts`, `view/graph-buttons.ts`), whose ring fills while the
+game is analysed, or on the settings' Analysis page. Settings that ask for more
+than the game has offer to analyse it again (`game/reanalyse.ts`): the run
+going on stops, the records as fine as the new settings ask are kept and the
+others found again. While a run goes on, its progress stays in sight and
+settings picked meanwhile offer a switch under it. The closed panel's card
+shows that progress too (`view/card-progress.ts`), its row measured to the card
+(`view/card-room.ts`). A position whose
 engine stops answering goes to another, and once the analysis is complete all
 engines but one are ended (a review read whole from the cache boots only one).
 A pool that lost every engine is booted again; one that failed to boot stays
@@ -187,7 +202,9 @@ come in (`ln-ext-review-progress:*`), then under the finished game's key
 (`ln-ext-review:*`); an index (`ln-ext-review-index`) keeps the 200 games analysed
 last, on either page, and drops the others (`game/cache.ts`), and those of an
 older `CACHE_VERSION`, which are analysed again (3: the records' lines run
-12 moves). The threats searched around a game's positions are kept beside it
+12 moves). They're kept with the depth and engine they were found with
+(records kept before the settings were depth 16's, on the light engine):
+those shallower than the settings ask for are found again. The threats searched around a game's positions are kept beside it
 (`ln-ext-review-threats:*`, only those the coach can say something of), and
 dropped with it, or once a page when of an older version: no index lists them.
 

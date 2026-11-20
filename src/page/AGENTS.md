@@ -26,6 +26,13 @@ learned the hard way. The rules for the whole repo are in the root's
   container in, or signed out (`must-login`) opens its own sign-in dialog.
   Each side's counts and accuracy come in `data.analysis.white` / `.black`
   (no accuracy on older ones); `hasFullComputerAnalysis()` says it's whole.
+- **The analysis on the device.** Beside the request, a
+  `button.analysis-editor` (once the game has an analysis, an `i` of that
+  class over the chart) opens Lichess's editor dialog, delegated from the
+  panels, so a click on the hidden one works. Its result is kept in the
+  browser's IndexedDB and merged as a server analysis' (`data.analysis`, the
+  nodes' `eval`), on every visit. The dialog's small buttons write Lichess's
+  font glyphs as text (`styles/analysis/local-analysis.css`).
 - **The free analysis board.** `/analysis` is `main.analyse` with
   `site.analysis.synthetic` set: no game to export, a tree that grows as the
   user plays. Each `move` in its list carries its tree path in `p`. Opening

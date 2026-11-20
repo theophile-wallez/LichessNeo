@@ -29,9 +29,9 @@ it('folds the closed panel’s card to its buttons, as it was left, and keeps it
   expect(root.classList.contains('ln-ext-review-folded')).toBe(false);
   expect(localStorage.getItem('ln-ext-end-card-folded')).toBe('0');
   // The analysis goes on, the card redrawn with it: the boxes that ease stay the same.
-  const progress = part('.ln-ext-end__progress')?.textContent;
+  const progress = part('.ln-ext-end__run')?.textContent;
   await advance(3000);
-  expect(part('.ln-ext-end__progress')?.textContent).not.toBe(progress);
+  expect(part('.ln-ext-end__run')?.textContent).not.toBe(progress);
   expect(part('.ln-ext-end__frame')).toBe(frame);
   expect(part('.ln-ext-end__top-inner')).toBe(box);
 

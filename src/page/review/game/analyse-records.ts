@@ -1,8 +1,10 @@
+import { engineCount } from '#shared/review-engine/device.ts';
+import { recordSearch } from '#shared/review-engine/estimate.ts';
+import type { Analysed } from '#shared/review-engine/options.ts';
 import type { EnginePool } from '#page/review/engine/pool.ts';
 import { uciPosition } from '#page/review/engine/position.ts';
 import { toRecord } from '#page/review/engine/record.ts';
-import { FULL_SEARCH, QUICK_SEARCH } from '#page/review/engine/settings.ts';
-import { engineCount } from '#page/review/engine-pool.ts';
+import { deepSearch, QUICK_SEARCH } from '#page/review/engine/settings.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
 import { cacheProgress, cacheRecords, readCachedRecords } from './cache.ts';
 import { lookUpCloud } from './cloud-lookup.ts';
@@ -52,26 +54,44 @@ export function nextJob({ work, urgent, draft }: JobInput): Job | null {
 }
 
 async function search(run: RecordsRun, pool: EnginePool, job: Job): Promise<PositionRecord> {
-  const { work } = run;
+  const { work, options } = run;
   work.pending.add(job.index);
   try {
     const fen = work.nodes[job.index]?.fen ?? '';
+    const limits = job.deep ? deepSearch(options) : QUICK_SEARCH;
+    const started = performance.now();
     const result = await pool.analyse({
       position: uciPosition(work.nodes.slice(0, job.index + 1), run.chess960),
-      limits: job.deep ? FULL_SEARCH : QUICK_SEARCH,
+      limits,
     });
+    const seconds = (performance.now() - started) / 1000;
+    // The device's pace, for the times the settings show; a search cut short says nothing of it.
+    if (job.deep && seconds * 1000 < limits.movetime * 0.95)
+      recordSearch(options, limits.depth, seconds);
     return toRecord(fen, result);
   } finally {
     work.pending.delete(job.index);
   }
 }
 
+const analysedBy = ({ options }: RecordsRun): Analysed => ({
+  depth: options.depth,
+  engine: options.engine,
+});
+
+const cached = (run: RecordsRun) => ({
+  gameId: run.gameId,
+  positions: run.work.nodes.length,
+  records: run.work.deep,
+  analysed: analysedBy(run),
+});
+
 /** One of the engines' loops: as many run as the pool has engines. */
 async function runWorker(run: RecordsRun, pool: EnginePool): Promise<void> {
   const { work } = run;
   for (;;) {
     await run.whenFree();
-    if (run.stopped?.()) return;
+    if (run.stopped?.() || run.superseded?.()) return;
     const job = nextJob({ work, urgent: run.urgent?.() ?? [], draft: run.draft });
     if (!job) {
       if (isComplete(work)) return;
@@ -80,10 +100,11 @@ async function runWorker(run: RecordsRun, pool: EnginePool): Promise<void> {
       continue;
     }
     const record = await search(run, pool, job);
+    // Started over: what this run found goes.
+    if (run.superseded?.()) return;
     if (job.deep) {
       takeDeep(run, job.index, record);
-      if (++work.searched % PROGRESS_EVERY === 0)
-        cacheProgress(run.gameId, work.nodes.length, work.deep);
+      if (++work.searched % PROGRESS_EVERY === 0) cacheProgress(cached(run));
     } else work.rough[job.index] = record;
     run.onChange?.();
   }
@@ -92,7 +113,35 @@ async function runWorker(run: RecordsRun, pool: EnginePool): Promise<void> {
 // One loop per engine the page will have: while some still boot, their
 // loops' searches wait in the pool for the engines already up.
 function runEngines(run: RecordsRun, pool: EnginePool): Promise<void[]> {
-  return Promise.all(Array.from({ length: engineCount() }, () => runWorker(run, pool)));
+  return Promise.all(Array.from({ length: engineCount(run.options) }, () => runWorker(run, pool)));
+}
+
+/** Takes the records cached for the game: whether they were all there. */
+function takeCached(run: RecordsRun): boolean {
+  const { gameId, work } = run;
+  const found = readCachedRecords(gameId, work.nodes.length, analysedBy(run));
+  for (const [i, record] of (found?.records ?? []).entries()) if (record) takeDeep(run, i, record);
+  if (isComplete(work)) work.analysed = found?.analysed ?? analysedBy(run);
+  return isComplete(work);
+}
+
+/** Boots the engines and searches on them: the pool, or null when they failed. */
+async function searchAll(run: RecordsRun): Promise<EnginePool | null> {
+  let pool: EnginePool;
+  try {
+    pool = await run.engines();
+  } catch (error) {
+    if (!run.superseded?.()) run.onFailure('engine boot failed', error);
+    return null;
+  }
+  try {
+    await runEngines(run, pool);
+  } catch (error) {
+    // An analysis started over ends the engines this one searched on.
+    if (!run.superseded?.()) run.onFailure('engine failed', error);
+    return null;
+  }
+  return pool;
 }
 
 /**
@@ -101,30 +150,18 @@ function runEngines(run: RecordsRun, pool: EnginePool): Promise<void[]> {
  * all (no engine booted), when the engines failed, or when the run stopped.
  */
 export async function analyseRecords(run: RecordsRun): Promise<EnginePool | null> {
-  const { gameId, work } = run;
-  const positions = work.nodes.length;
-  for (const [i, record] of (readCachedRecords(gameId, positions) ?? []).entries())
-    if (record) takeDeep(run, i, record);
+  const { work } = run;
+  const complete = takeCached(run);
   run.onChange?.();
-  if (isComplete(work) || run.stopped?.()) return null;
+  if (complete || run.stopped?.()) return null;
   if (!run.chess960) void lookUpCloud(run);
-  let pool: EnginePool;
-  try {
-    pool = await run.engines();
-  } catch (error) {
-    run.onFailure('engine boot failed', error);
-    return null;
-  }
-  try {
-    await runEngines(run, pool);
-  } catch (error) {
-    run.onFailure('engine failed', error);
-    return null;
-  }
+  const pool = await searchAll(run);
+  if (!pool || run.superseded?.()) return null;
   if (!isComplete(work)) {
-    cacheProgress(gameId, positions, work.deep);
+    cacheProgress(cached(run));
     return null;
   }
-  cacheRecords(gameId, positions, work.deep);
+  work.analysed = analysedBy(run);
+  cacheRecords(cached(run));
   return pool;
 }

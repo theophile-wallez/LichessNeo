@@ -25,12 +25,18 @@ const RENAMED: readonly (readonly [string, string])[] = [
 ];
 
 // What the port added, which the original didn't have: the summary's counts
-// as buttons that go to their moves, where it wrote the bare number.
+// as buttons that go to their moves, where it wrote the bare number; the
+// graph's engine button; the summary graph's views, in a box with it.
 const COUNT_BUTTON = /<button class="ln-ext-t-jump"[^>]*>(\d+)<\/button>/g;
+const ENGINE_BUTTON = /<button class="ln-ext-graph-engine"[\s\S]*?<\/button>/g;
+const SUMMARY_GRAPH_BOX =
+  /<div class="ln-ext-review__graph-box">(<div class="ln-ext-review__graph ln-ext-summary-graph">[\s\S]*?<\/div>)<div class="ln-ext-graph-views"[^>]*>[\s\S]*?<\/div><\/div>/g;
 
 function compact(markup: string): string {
   return RENAMED.reduce((text, [port, original]) => text.replaceAll(port, original), markup)
     .replace(COUNT_BUTTON, '$1')
+    .replace(ENGINE_BUTTON, '')
+    .replace(SUMMARY_GRAPH_BOX, '$1')
     .replace(
       ICON,
       icon => `[icon ${/fill="(#[0-9a-f]+)"/.exec(icon)?.[1] ?? ''} ${shortHash(icon)}]`,

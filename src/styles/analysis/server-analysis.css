@@ -1,7 +1,8 @@
 /* ---- The server analysis --- */
 
 /* Lichess's server analysis at the end of a game's move list (page/server-analysis): its
- * request, a grey button, then its progress, its chart and each side's errors. Plain on
+ * request and its analysis on the device, two grey buttons, then its progress, its chart and
+ * each side's errors, with a cog to open the device's editor again. Plain on
  * purpose: the Debrief is the analysis the extension puts first. Below 1020px Lichess's
  * underboard and advice summary stay on the page (layout-narrow.css), which show it already. */
 
@@ -40,6 +41,18 @@ html:is(.ln-ext-review-summary, .ln-ext-review-moves) .ln-ext-sanalysis {
   display: none;
 }
 
+/* Side by side, one under the other where the panel can't fit both labels. */
+.ln-ext-sanalysis__requests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ln-ext-sanalysis__requests > .ln-ext-sanalysis__request {
+  flex: 1 1 13em;
+  width: auto;
+}
+
 .ln-ext-sanalysis__request,
 .ln-ext-sanalysis__learn {
   display: flex;
@@ -69,6 +82,32 @@ html:is(.ln-ext-review-summary, .ln-ext-review-moves) .ln-ext-sanalysis {
   width: 16px;
   height: 16px;
   color: var(--ln-ext-text-dim);
+}
+
+.ln-ext-sanalysis__editor {
+  display: grid;
+  flex: none;
+  place-items: center;
+  align-self: center;
+  width: 26px;
+  height: 26px;
+  margin: -4px -4px -4px 0;
+  padding: 0;
+  border: none;
+  border-radius: 7px;
+  background: none;
+  color: var(--ln-ext-text-dim);
+  cursor: pointer;
+}
+
+.ln-ext-sanalysis__editor:hover {
+  background: var(--ln-ext-lift-8);
+  color: var(--ln-ext-text-strong);
+}
+
+.ln-ext-sanalysis__editor .ln-ext-hi {
+  width: 16px;
+  height: 16px;
 }
 
 .ln-ext-sanalysis__head {

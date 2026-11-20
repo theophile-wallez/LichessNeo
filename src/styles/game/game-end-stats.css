@@ -143,6 +143,15 @@ a.ln-ext-end__count[href]:hover .ln-ext-end__count-label {
 }
 
 /* While the closed review's analysis goes, in place of the figures. */
+/* The review's run while it goes on (page/review/view/card-progress.ts), in the popover's look
+   (review-engine/advanced.css). */
+.ln-ext-end__run {
+  display: grid;
+  flex: 1;
+  gap: 10px;
+  min-width: 0;
+}
+
 .ln-ext-end__progress {
   margin: 0;
   padding: 8px 0;

@@ -200,6 +200,9 @@ importers:
       fflate:
         specifier: ^0.8.3
         version: 0.8.3
+      motion:
+        specifier: ^14.7.1
+        version: 14.7.1
       three:
         specifier: 0.186.1
         version: 0.186.1
@@ -231,9 +234,6 @@ importers:
       lightningcss:
         specifier: 1.33.0
         version: 1.33.0
-      motion:
-        specifier: ^14.7.1
-        version: 14.7.1
       number-flow:
         specifier: ^0.6.2
         version: 0.6.2

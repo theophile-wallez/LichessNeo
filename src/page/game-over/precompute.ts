@@ -1,6 +1,7 @@
 import type { EnginePool } from '#page/review/engine/pool.ts';
 import type { Stockfish } from '#page/review/engine/stockfish.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
+import { reviewEngine } from '#page/review/engine/review-engine.ts';
 import { startEngines } from '#page/review/engine-pool.ts';
 import { analyseRecords } from '#page/review/game/analyse-records.ts';
 import { isComplete, newRecordsWork } from '#page/review/game/records.ts';
@@ -40,6 +41,7 @@ export async function precomputeReview(
     await analyseRecords({
       gameId,
       chess960,
+      options: reviewEngine(),
       work,
       engines: () => (booted.pool ??= startEngines({ chess960, first: engine })),
       whenFree: () => Promise.resolve(),

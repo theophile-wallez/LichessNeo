@@ -16,7 +16,9 @@ import {
 import { type Outcome, readOutcome } from '#page/game-over/outcome.ts';
 import { formatAccuracy, type GameOverTexts, gameOverTexts } from '#page/game-over/texts.ts';
 import type { Session } from '#page/review/session.ts';
+import { cardProgress } from './card-progress.ts';
 import { drawPeek, type PeekFigures, peekFrameMarkup } from './card-peek.ts';
+import { fitCardRoom } from './card-room.ts';
 
 // The review closed: the game over's card (page/game-over/card.ts), as the
 // game's page showed it at its end, and folded, a strip of it (view/card-peek.ts);
@@ -66,7 +68,10 @@ function stats(session: Session, color: Color, texts: GameOverTexts): SafeHtml {
   if (view.error) return html`<p class="ln-ext-end__progress">${view.error}</p>`;
   const { review } = view;
   if (!review?.complete)
-    return html`<p class="ln-ext-end__progress">${language.ui.analysing} ${Math.round(view.progress * 100)}%</p>`;
+    return (
+      cardProgress(session) ??
+      html`<p class="ln-ext-end__progress">${language.ui.analysing} ${Math.round(view.progress * 100)}%</p>`
+    );
   // Here the review is the page's own: its chips lead nowhere.
   const summary = {
     accuracy: review.accuracy[color],
@@ -152,6 +157,7 @@ export function renderClosed(session: Session, analysis: Analysis): void {
   const verdict = verdictOf(session, analysis);
   const top = queryOne(panel, '.ln-ext-end__top-inner', HTMLElement);
   if (top) setHtml(top, html`${card(session, verdict)}${foldButtonMarkup(texts, 'fold')}`);
+  fitCardRoom(panel);
   const peek = queryOne(panel, '.ln-ext-end__peek', HTMLElement);
   if (!peek) return;
   setData(peek, 'lnExtResult', verdict.result);

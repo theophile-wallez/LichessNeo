@@ -9,7 +9,7 @@ import { formatEval } from '#page/review/evaluation/format.ts';
 import { gameDivision } from '#page/review/game/division.ts';
 import { plyIndex } from '#page/review/game/work.ts';
 import type { GraphKind, GraphView, Review, Session } from '#page/review/session.ts';
-import { placeToggle } from './graph-corner.ts';
+import { placeCorners } from './graph-corner.ts';
 import { CURSOR_COLOR, curveSpans, graphMarkup, lastIndex } from './graph-markup.ts';
 import { hidePreview, positionAt, showPreview } from './graph-preview.ts';
 import { timeSpans, timesMarkup } from './graph-times.ts';
@@ -88,6 +88,8 @@ interface Drawn {
   /** The tip's words over a position, null for none. */
   readonly tipAt: (index: number) => string | null;
   readonly pick: (index: number) => void;
+  /** Whether the engine's popover lies over it, which the pointer is on rather than the graph. */
+  readonly covered: () => boolean;
 }
 
 const drawn = new WeakMap<HTMLElement, Drawn>();
@@ -100,6 +102,10 @@ function hover(container: HTMLElement, event: MouseEvent): void {
   const graph = drawn.get(container);
   if (!graph) return;
   const { tip, review, box } = graph;
+  if (graph.covered()) {
+    leave(container);
+    return;
+  }
   const index = pointedIndex(container, graph, event);
   const words = graph.tipAt(index);
   const shown = positionAt(review, index);
@@ -121,13 +127,15 @@ function hover(container: HTMLElement, event: MouseEvent): void {
   setStyleProperty(tip, 'left', `${left}px`);
 }
 
+function leave(container: HTMLElement): void {
+  const graph = drawn.get(container);
+  if (graph) setStyleProperty(graph.tip, 'display', 'none');
+  hidePreview();
+}
+
 function listen(container: HTMLElement): void {
   container.addEventListener('mousemove', event => hover(container, event));
-  container.addEventListener('mouseleave', () => {
-    const graph = drawn.get(container);
-    if (graph) setStyleProperty(graph.tip, 'display', 'none');
-    hidePreview();
-  });
+  container.addEventListener('mouseleave', () => leave(container));
   container.addEventListener('click', event => {
     hidePreview();
     const graph = drawn.get(container);
@@ -174,15 +182,19 @@ export function mountGraph(
   // A move played past the game's last has no place on its graph: the cursor
   // stays on the last position rather than slide off the right edge.
   const ply = Math.min(plyIndex(session.work, analysis.node), lastIndex(review));
-  // Only the move-by-move graph shows the move times, and only a game with clocks has them.
-  const times = kind === 'moves' && view.graph === 'time' ? gameTimes(analysis, session.work) : [];
+  // Only a game with clocks has move times.
+  const times = view.graph === 'time' ? gameTimes(analysis, session.work) : [];
   const shown: GraphView = times.length > 0 ? 'time' : 'advantage';
   if (moveCursor(container, { review, box, shown, orientation: analysis.orientation() }, ply))
     return;
   const timesGraph = { times, last: lastIndex(review), ply };
   const spans = () => (shown === 'time' ? timeSpans(timesGraph, box) : curveSpans(review, box));
-  const toggleBelow = kind === 'moves' ? placeToggle(container, spans, box.height) : 0;
-  const phases = { starts: phaseStarts(gameDivision(session.work)), toggleBelow };
+  const below = placeCorners(container, spans, box);
+  const phases = {
+    starts: phaseStarts(gameDivision(session.work)),
+    toggleBelow: below.left,
+    rightBelow: below.right,
+  };
   const svg =
     shown === 'time'
       ? timesMarkup({ ...timesGraph, phases }, box)
@@ -213,6 +225,7 @@ export function mountGraph(
     shown,
     tipAt,
     pick,
+    covered: () => view.engine,
   });
 }
 

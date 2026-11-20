@@ -29,9 +29,11 @@ export interface PhaseMarks {
   readonly starts: readonly PhaseStart[];
   /** How far from the left the views toggle takes the bottom: a name there goes to the top. */
   readonly toggleBelow: number;
+  /** The same from the right, for the engine's button. */
+  readonly rightBelow: number;
 }
 
-export const NO_PHASES: PhaseMarks = { starts: [], toggleBelow: 0 };
+export const NO_PHASES: PhaseMarks = { starts: [], toggleBelow: 0, rightBelow: 0 };
 
 export interface PhaseScale {
   readonly x: (index: number) => number;
@@ -42,8 +44,11 @@ export interface PhaseScale {
 const leftOf = ({ x, name, anchor }: PhaseLabel): number =>
   anchor === 'start' ? x : x - nameWidth(name);
 
+const rightOf = ({ x, name, anchor }: PhaseLabel): number =>
+  anchor === 'start' ? x + nameWidth(name) : x;
+
 export function phaseLinesMarkup(
-  { starts, toggleBelow }: PhaseMarks,
+  { starts, toggleBelow, rightBelow }: PhaseMarks,
   { width, height }: GraphSize,
   { x, areaBelow }: PhaseScale,
 ): SafeHtml {
@@ -53,7 +58,7 @@ export function phaseLinesMarkup(
       html`<line class="ln-ext-graph-phase" x1="${line.x.toFixed(1)}" x2="${line.x.toFixed(1)}" y1="0" y2="${height}"/>`,
   );
   const names = phaseLabels(lines, width).map(label => {
-    const top = leftOf(label) < toggleBelow;
+    const top = leftOf(label) < toggleBelow || rightOf(label) > width - rightBelow;
     const look = areaBelow && !top ? ' ln-ext-graph-phase-name--area' : '';
     return html`<text class="ln-ext-graph-phase-name${look}" x="${label.x.toFixed(1)}" y="${top ? 11 : height - 5}" text-anchor="${label.anchor}">${label.name}</text>`;
   });
