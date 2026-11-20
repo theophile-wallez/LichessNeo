@@ -23,10 +23,11 @@ import { ChatRepliesSchema, DEFAULT_REPLIES } from '#content/game/chat-replies.t
 export const MAX_CUSTOM_THEMES = 24;
 
 /**
- * The nav from 1020px (content/sidebar): a sidebar on the left, one with the open section's
- * pages listed under it, a rail of icons with their labels, or a header across the top.
+ * The nav from 1020px (content/sidebar), the default first: a rail of icons with their labels,
+ * a sidebar on the left, one with the open section's pages listed under it, or a header across
+ * the top.
  */
-export const NavigationSchema = z.enum(['sidebar', 'unfolded', 'rail', 'header']);
+export const NavigationSchema = z.enum(['rail', 'sidebar', 'unfolded', 'header']);
 export const DEFAULT_NAVIGATION = 'rail';
 
 /** The review's badges for its good tiers (#page/review/classes/glyphs.ts). */

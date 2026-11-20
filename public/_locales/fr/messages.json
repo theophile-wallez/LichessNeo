@@ -910,7 +910,7 @@
     "message": "Navigation"
   },
   "settingNavigationBody": {
-    "message": "La place du menu du site sur un grand écran : une barre latérale à gauche, qui liste ou non les pages de la section affichée, un rail d’icônes, ou un en-tête en haut."
+    "message": "La place du menu du site sur un grand écran : un rail d’icônes, une barre latérale à gauche, qui liste ou non les pages de la section affichée, ou un en-tête en haut."
   },
   "navigationSidebar": {
     "message": "Barre latérale"

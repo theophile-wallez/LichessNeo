@@ -1206,7 +1206,7 @@
     "description": "The setting of where the site's navigation sits on a wide window."
   },
   "settingNavigationBody": {
-    "message": "Where the site's menu sits on a wide window: a sidebar on the left, with the pages of the section on show listed under it or not, a rail of icons, or a header across the top.",
+    "message": "Where the site's menu sits on a wide window: a rail of icons, a sidebar on the left with the pages of the section on show listed under it or not, or a header across the top.",
     "description": "What the navigation setting covers."
   },
   "navigationSidebar": {

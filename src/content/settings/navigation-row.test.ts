@@ -35,9 +35,9 @@ describe('the settings’ navigation', () => {
         .filter(pick => pick.getAttribute('aria-checked') === 'true')
         .map(pick => pick.dataset.lnExtNavigation);
     expect(picks.map(pick => pick.dataset.lnExtNavigation)).toEqual([
+      'rail',
       'sidebar',
       'unfolded',
-      'rail',
       'header',
     ]);
     expect(checked()).toEqual(['rail']);
@@ -51,7 +51,7 @@ describe('the settings’ navigation', () => {
   it('keeps the sidebar once picked: only one never picked reads as the rail', async () => {
     const page = buildNavigationRow();
     await flush();
-    const sidebar = queryAll(page, '.ln-ext-nav-pick', HTMLButtonElement)[0];
+    const sidebar = queryAll(page, '.ln-ext-nav-pick', HTMLButtonElement)[1];
     sidebar?.click();
     expect(storedSettings()).toMatchObject({ navigation: 'sidebar', navigationPicked: true });
     expect(sidebar?.getAttribute('aria-checked')).toBe('true');

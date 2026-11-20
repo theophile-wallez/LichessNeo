@@ -242,7 +242,8 @@
 }
 
 /* A slider (content/packs/slider-row.ts): a track filled with the accent up to a round white
- * thumb, its value, and a button back to the default, dimmed while it's the default. */
+ * thumb, its value, and a button back to the default, dimmed while it's the default. Lichess
+ * gives every input a border and padding: it has none. */
 .ln-ext-src-slider-row {
   flex-wrap: nowrap !important;
 }
@@ -253,6 +254,8 @@ input.ln-ext-src-slider {
   max-width: 260px;
   height: 20px;
   margin: 0;
+  padding: 0;
+  border: none;
   appearance: none;
   background: none;
   cursor: pointer;
