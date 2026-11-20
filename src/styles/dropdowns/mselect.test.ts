@@ -86,3 +86,17 @@ describe('an open menu', () => {
     expect(styleOf(markup, '.box__top', 'z-index')).toBe(zIndex);
   });
 });
+
+// The setup dialog's scroller stops scrolling while its variant menu is open, so the menu can
+// reach past it, and the dialog lost its scrollbar's gutter: it shrank and moved sideways.
+describe('the game setup’s variant menu', () => {
+  it.each([
+    ['open', ' checked', '0.5rem'],
+    ['closed', '', ''],
+  ])('keeps the gutter’s room while %s', (_state, checked, padding) => {
+    const markup =
+      '<dialog open><div class="scrollable"><div class="game-setup"><div class="mselect">' +
+      `<input class="mselect__toggle" type="checkbox"${checked}></div></div></div></dialog>`;
+    expect(styleOf(markup, 'dialog > .scrollable', 'padding-inline-end')).toBe(padding);
+  });
+});

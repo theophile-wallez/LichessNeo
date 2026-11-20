@@ -190,6 +190,14 @@ dialog .scrollable:has(.game-setup .mselect__toggle:checked) {
   overflow: visible !important;
 }
 
+/* No longer a scroller, it loses its scrollbar's gutter and the dialog shrinks by it:
+ * the gutter's room as padding, Lichess's 0.5rem scrollbar (Firefox draws the system's). */
+@supports not (-moz-appearance: none) {
+  dialog > .scrollable:has(> .game-setup):has(.mselect__toggle:checked) {
+    padding-inline-end: 0.5rem;
+  }
+}
+
 @media (min-width: 800.02px) {
   .game-setup .mselect__list {
     max-height: min(50vh, 440px) !important;
