@@ -121,7 +121,7 @@ html:is(
   main.analyse
   cg-board
   square.last-move {
-  background-color: rgba(33, 196, 58, 0.5) !important;
+  background-color: rgba(30, 200, 240, 0.5) !important;
 }
 html:is(.ln-ext-review-moves, .ln-ext-review-live, .ln-ext-review-openings)[data-ln-ext-cls='great']
   main.analyse
@@ -137,7 +137,7 @@ html:is(
   main.analyse
   cg-board
   square.last-move {
-  background-color: rgba(83, 178, 234, 0.5) !important;
+  background-color: rgba(139, 140, 248, 0.5) !important;
 }
 html:is(
     .ln-ext-review-moves,

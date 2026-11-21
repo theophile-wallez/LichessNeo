@@ -27,16 +27,18 @@ export const MOVE_CLASSES: readonly MoveClass[] = [
   'blunder',
 ];
 
-// Lichess's own annotation colors (--c-brilliant, --c-inaccuracy…), its good-move
-// green a little lighter; the three good tiers in greys, under the annotated ones.
+// Lichess's own annotation colors (--c-mistake, --c-blunder…), its good-move
+// green a little lighter, but ours for a brilliant move (azure) and an
+// inaccuracy (indigo), which Lichess draws in two blues too close to tell apart;
+// the three good tiers in greys, under the annotated ones.
 export const CLASS_COLORS: Readonly<Record<MoveClass, string>> = {
-  brilliant: '#21c43a',
+  brilliant: '#1ec8f0',
   great: '#77ba2c',
   book: '#ba9978',
   best: '#a3a1ad',
   excellent: '#96949f',
   good: '#8a8893',
-  inaccuracy: '#53b2ea',
+  inaccuracy: '#8b8cf8',
   mistake: '#e69d00',
   miss: '#de7cd3',
   blunder: '#df5353',

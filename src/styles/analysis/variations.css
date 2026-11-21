@@ -15,7 +15,7 @@ main.analyse .tview2-column > interrupt {
 }
 
 main.analyse .tview2-column > interrupt:has(> comment.inaccuracy) {
-  --ln-ext-note: #53b2ea;
+  --ln-ext-note: #8b8cf8;
 }
 main.analyse .tview2-column > interrupt:has(> comment.mistake) {
   --ln-ext-note: #e69d00;

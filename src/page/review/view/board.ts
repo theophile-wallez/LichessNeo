@@ -1,7 +1,7 @@
 import { coachOptions } from '#shared/coach.ts';
 import { drawsTopic } from '#shared/coach-drawings.ts';
 import { setData } from '#shared/dom.ts';
-import { setHtml } from '#shared/html.ts';
+import { html, setHtml } from '#shared/html.ts';
 import type { Analysis } from '#page/lichess/analysis.ts';
 import { parentPath } from '#page/lichess/tree.ts';
 import {
@@ -16,7 +16,8 @@ import { gameDivision } from '#page/review/game/division.ts';
 import { isGameNode, plyIndex } from '#page/review/game/work.ts';
 import { judgeAt } from '#page/review/live/judging.ts';
 import { type JudgedMove, onFreeBoard, type Session } from '#page/review/session.ts';
-import { badgeMarkup, reviewArrowsFor } from './board-badge.ts';
+import { badgeMarkup, landingCell, reviewArrowsFor } from './board-badge.ts';
+import { burstMarkup } from './brilliant-burst.ts';
 import { barPosition, drawBar } from './eval-bar.ts';
 import { liveBadges, reviewBadges, treeMoves } from './move-list.ts';
 import { markPhaseRows } from './move-list-phases.ts';
@@ -71,13 +72,10 @@ const sameArrows = (drawn: readonly ReviewArrow[], next: readonly ReviewArrow[])
 function renderBadge(session: Session, analysis: Analysis, move: JudgedMove | null): void {
   const { view, elements } = session;
   const { node } = analysis;
+  const square = { uci: node.uci ?? '', san: node.san ?? '', orientation: analysis.orientation() };
+  const burst = move?.moveClass === 'brilliant' ? burstMarkup(landingCell(square)) : null;
   const badge = move
-    ? badgeMarkup({
-        moveClass: move.moveClass,
-        uci: node.uci ?? '',
-        san: node.san ?? '',
-        orientation: analysis.orientation(),
-      })
+    ? html`${burst}${badgeMarkup({ moveClass: move.moveClass, ...square })}`
     : null;
   const markup = badge?.value ?? '';
   if (view.overlay === markup) return;

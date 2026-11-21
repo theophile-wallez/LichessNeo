@@ -32,8 +32,12 @@ function badgeCell(square: string, orientation: Color): Point {
   return whiteAtBottom ? [-1, Number.NaN] : [8, Number.NaN];
 }
 
+/** The landing square's column and row on screen, from the board's top left. */
+export const landingCell = ({ uci, san, orientation }: Omit<BadgeInput, 'moveClass'>): Point =>
+  badgeCell(landingSquare(uci, san), orientation);
+
 export function badgeMarkup({ moveClass, uci, san, orientation }: BadgeInput): SafeHtml {
-  const [column, row] = badgeCell(landingSquare(uci, san), orientation);
+  const [column, row] = landingCell({ uci, san, orientation });
   const style = `left:${(column + 1) * 12.5}%;top:${row * 12.5}%;--ln-ext-badge-c:${CLASS_COLORS[moveClass]}`;
   return html`<div class="ln-ext-badge" style="${style}">${classSvg(moveClass)}</div>`;
 }

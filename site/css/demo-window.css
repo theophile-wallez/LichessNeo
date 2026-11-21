@@ -255,7 +255,7 @@
 
 /* A brilliant or a great move's squares take its class's color, as the review's. */
 .demo-last[data-class='brilliant'] {
-  background: rgb(33 196 58 / 50%);
+  background: rgb(30 200 240 / 50%);
 }
 
 .demo-last[data-class='great'] {

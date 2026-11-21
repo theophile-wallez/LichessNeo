@@ -88,13 +88,13 @@ main.analyse .tview2-column > move eval {
 /* Annotated moves take the Debrief's colors; the glyph is a chip tinted with it before the move.
  * The errors' are the server analysis' card's too (server-analysis.css). */
 main.analyse {
-  --ln-ext-glyph-inaccuracy: #53b2ea;
+  --ln-ext-glyph-inaccuracy: #8b8cf8;
   --ln-ext-glyph-mistake: #e69d00;
   --ln-ext-glyph-blunder: #df5353;
 }
 
 main.analyse .tview2 move.brilliant {
-  --ln-ext-glyph: #21c43a;
+  --ln-ext-glyph: #1ec8f0;
 }
 main.analyse .tview2 move.good {
   --ln-ext-glyph: #77ba2c;

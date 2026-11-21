@@ -2,9 +2,9 @@
   "classes": [
     {
       "key": "brilliant",
-      "color": "#21c43a",
-      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\"><rect width=\"20\" height=\"20\" rx=\"5\" fill=\"#21c43a\" fill-opacity=\"0.18\"/><g fill=\"none\" stroke=\"#21c43a\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7.2 5V11.4M7.2 14.6v0\"/><path d=\"M12.8 5V11.4M12.8 14.6v0\"/></g></svg>",
-      "img": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%2321c43a%22%20fill-opacity%3D%220.18%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2321c43a%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7.2%205V11.4M7.2%2014.6v0%22%2F%3E%3Cpath%20d%3D%22M12.8%205V11.4M12.8%2014.6v0%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E\")"
+      "color": "#1ec8f0",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\"><rect width=\"20\" height=\"20\" rx=\"5\" fill=\"#1ec8f0\" fill-opacity=\"0.18\"/><g fill=\"none\" stroke=\"#1ec8f0\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7.2 5V11.4M7.2 14.6v0\"/><path d=\"M12.8 5V11.4M12.8 14.6v0\"/></g></svg>",
+      "img": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%231ec8f0%22%20fill-opacity%3D%220.18%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%231ec8f0%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7.2%205V11.4M7.2%2014.6v0%22%2F%3E%3Cpath%20d%3D%22M12.8%205V11.4M12.8%2014.6v0%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E\")"
     },
     {
       "key": "great",
@@ -38,9 +38,9 @@
     },
     {
       "key": "inaccuracy",
-      "color": "#53b2ea",
-      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\"><rect width=\"20\" height=\"20\" rx=\"5\" fill=\"#53b2ea\" fill-opacity=\"0.18\"/><g fill=\"none\" stroke=\"#53b2ea\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5.3 7.3A2.3 2.3 0 1 1 9.23 8.93C8.42 9.74 7.6 9.2 7.6 10.2V11.4M7.6 14.6v0\"/><path d=\"M13.6 5V11.4M13.6 14.6v0\"/></g></svg>",
-      "img": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%2353b2ea%22%20fill-opacity%3D%220.18%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2353b2ea%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5.3%207.3A2.3%202.3%200%201%201%209.23%208.93C8.42%209.74%207.6%209.2%207.6%2010.2V11.4M7.6%2014.6v0%22%2F%3E%3Cpath%20d%3D%22M13.6%205V11.4M13.6%2014.6v0%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E\")"
+      "color": "#8b8cf8",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\"><rect width=\"20\" height=\"20\" rx=\"5\" fill=\"#8b8cf8\" fill-opacity=\"0.18\"/><g fill=\"none\" stroke=\"#8b8cf8\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5.3 7.3A2.3 2.3 0 1 1 9.23 8.93C8.42 9.74 7.6 9.2 7.6 10.2V11.4M7.6 14.6v0\"/><path d=\"M13.6 5V11.4M13.6 14.6v0\"/></g></svg>",
+      "img": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%225%22%20fill%3D%22%238b8cf8%22%20fill-opacity%3D%220.18%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238b8cf8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5.3%207.3A2.3%202.3%200%201%201%209.23%208.93C8.42%209.74%207.6%209.2%207.6%2010.2V11.4M7.6%2014.6v0%22%2F%3E%3Cpath%20d%3D%22M13.6%205V11.4M13.6%2014.6v0%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E\")"
     },
     {
       "key": "mistake",
