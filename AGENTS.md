@@ -159,13 +159,14 @@ GitHub or with `/ci` (`.claude/skills/ci`), which runs it on `main` and
 releases what passes. Don't start it unasked; its results are looked at
 afterwards, not waited for.
 
-**An issue** goes the same way, in a session of its own whose branch is named
-after it (`t3/issue-<n>-<what>`), linked to the issue (T3's `link_issue`).
-Its report holds a way to reproduce it (a game, a FEN, the steps); a bug
-found here gets one before it's filed. Reproduce it first, then fix the
-cause, not the case (the whole family of positions, the other callers of
-what changed). The repro becomes the test of the finish step, seen failing
-on `main`. The commit's body ends with `Fixes #<n>`: the push to `main`
+**A bug report** (a screenshot, a message, an issue) goes the same way, as
+`.claude/skills/issue` (`/issue`) lays out step by step: reproduce it on
+data (a game's FEN, the function at fault run on it), then file a GitHub
+issue with that reproduction and a failing test, linked to the thread
+(T3's `link_issue`); rename the session's branch after it
+(`t3/issue-<n>-<what>`); fix the cause, not the case, as a draft. When the
+user says to ship, the reproduction becomes the test, seen failing without
+the fix, and the commit's body ends with `Fixes #<n>`: the push to `main`
 closes the issue.
 
 ## Sessions side by side
@@ -261,6 +262,7 @@ hold:
 | `pnpm package`                  | release zips of every target into `dist/`, plus the sources zip                  |
 | `pnpm store:render`             | renders the store images and the extension icons from `store/templates`          |
 | `pnpm icons`                    | writes `public/img/hugeicons`, the Hugeicons the CSS names                       |
+| `/issue`                        | (Claude Code) a bug report to a GitHub issue, a fix on its branch, then a ship   |
 | `/ci`                           | (Claude Code) starts the release of `main`: the CI, then a GitHub release        |
 | `/ci-publish`                   | (Claude Code) tags `main` `store-<version>`, which sends it to the stores        |
 
