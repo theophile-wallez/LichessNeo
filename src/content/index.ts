@@ -37,6 +37,7 @@ import { boardTools } from './board-tools/board-tools.ts';
 
 import { moveTimes } from './game/move-times.ts';
 import { newGame } from './game/new-game.ts';
+import { rematchLabel } from './game/rematch-label.ts';
 import { chatPresets } from './game/chat-presets.ts';
 import { zenExit } from './game/zen-exit.ts';
 import { ratingRefresh } from './game/rating-refresh.ts';
@@ -152,6 +153,7 @@ const FEATURES = [
   zenExit,
   moveTimes,
   newGame,
+  rematchLabel,
   chatPresets,
   ratingRefresh,
   countryFlags,

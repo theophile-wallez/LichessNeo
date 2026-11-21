@@ -7,9 +7,13 @@ main.round .rcontrols .follow-up .rematch:is(:disabled, .disabled) {
 }
 
 /* Ours, waiting: Lichess leaves only a spinner, and says in the title that it's sent (an
- * aria-label once content/ui/tooltip.ts takes it). A click takes it back, so on hover the spinner
- * becomes a cross. */
+ * aria-label once content/ui/tooltip.ts takes it), too long for the button in some languages: it
+ * says "Rematch", Lichess's word (content/game/rematch-label.ts), the title staying its tooltip.
+ * A click takes it back, so on hover the spinner becomes a cross. Its width is its share of the
+ * row, whatever it says: the word goes when it doesn't fit, as Lichess has it. */
 main.round .rcontrols .follow-up .rematch.me {
+  min-width: 0;
+  container-type: inline-size;
   background: color-mix(in srgb, var(--ln-ext-accent) 16%, var(--ln-ext-bg-raised)) !important;
   box-shadow: inset 0 0 0 1.5px var(--ln-ext-accent) !important;
 }
@@ -20,6 +24,29 @@ main.round .rcontrols .follow-up .rematch.me::before {
 
 main.round .rcontrols .follow-up .rematch.me::after {
   content: attr(aria-label);
+}
+
+main.round .rcontrols .follow-up .rematch.me[data-ln-ext-label]::after {
+  content: attr(data-ln-ext-label);
+}
+
+main.round .rcontrols .follow-up .rematch.me::after {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The spinner, or the cross, and "Revanche" (93px). */
+@container (max-width: 96px) {
+  main.round .rcontrols .follow-up .rematch.me::after {
+    display: none;
+  }
+
+  main.round .rcontrols .follow-up .rematch.me .spinner,
+  main.round .rcontrols .follow-up .rematch.me:hover::before {
+    margin: 0;
+  }
 }
 
 main.round .rcontrols .follow-up .rematch.me .spinner {

@@ -18,6 +18,7 @@ afterEach(() => {
   delete dataset.lnExtTimeControlLabel;
   delete dataset.lnExtInboxLabel;
   delete dataset.lnExtOnlineLabel;
+  delete dataset.lnExtRematchLabel;
   document.body.replaceChildren();
 });
 
@@ -36,6 +37,12 @@ describe('labels', () => {
     labels.start();
     expect(dataset.lnExtInboxLabel).toBe('Messagerie');
     expect(dataset.lnExtOnlineLabel).toBe('en ligne');
+  });
+
+  it('copies the word for Rematch, for an offer waiting', () => {
+    Object.assign(window, { i18n: { site: { rematch: 'Revanche' } } });
+    labels.start();
+    expect(dataset.lnExtRematchLabel).toBe('Revanche');
   });
 
   it('leaves out a label Lichess doesn’t have', () => {

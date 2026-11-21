@@ -33,3 +33,21 @@ it('lines up the new game, Rematch, then Game Review', () => {
   document.body.innerHTML = FOLLOW_UP;
   expect(laidOut()).toEqual(['New opponent', 'Rematch', 'Analysis board']);
 });
+
+const minWidths = (): string[] =>
+  queryAll(document, '.follow-up > .fbt', HTMLElement).map(
+    button => getComputedStyle(button).minWidth,
+  );
+
+it('keeps each label’s longest word in its button, a waiting Rematch aside', () => {
+  const style = document.createElement('style');
+  style.textContent = ['game-over.css', 'rematch.css']
+    .map(sheet => readFileSync(join(import.meta.dirname, sheet), 'utf8'))
+    .join('\n');
+  document.head.append(style);
+  document.body.innerHTML = FOLLOW_UP;
+  expect(minWidths()).toEqual(['min-content', 'min-content', 'min-content']);
+  // Its word goes when it doesn't fit (rematch.css): the row's share is all it takes.
+  document.querySelector('.rematch')?.classList.add('me');
+  expect(minWidths()).toEqual(['0', 'min-content', 'min-content']);
+});

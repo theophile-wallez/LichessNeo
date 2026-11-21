@@ -6,8 +6,8 @@ import { translate } from '#page/lichess/globals.ts';
 
 // Lichess's own labels for what the content script adds: the board tools' flip
 // button (src/content/board-tools), the tournament podium's scores
-// (src/content/pages/podium.ts), the game setup's tiles (src/content/game-setup) and
-// the inbox's title and status (src/content/inbox).
+// (src/content/pages/podium.ts), the game setup's tiles (src/content/game-setup), the
+// inbox's title and status (src/content/inbox) and a waiting Rematch (src/content/game).
 // Only the page world can read Lichess's translations, so this copies them onto <html>.
 
 /** Each label's `i18n.site` key, by the data attribute it goes into. */
@@ -18,6 +18,7 @@ const LABELS = {
   lnExtTimeControlLabel: 'timeControl',
   lnExtInboxLabel: 'inbox',
   lnExtOnlineLabel: 'online',
+  lnExtRematchLabel: 'rematch',
 };
 
 // All come in the same table: once one is in, they all are.

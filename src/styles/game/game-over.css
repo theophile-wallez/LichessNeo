@@ -132,6 +132,7 @@ main.round
   .follow-up
   > a.fbt:last-child:not(.text, [href^='/tournament/'], [href^='/swiss/']) {
   flex-grow: 1.4;
+  min-width: min-content;
   background: var(--ln-ext-btn-primary) !important;
   color: var(--ln-ext-white) !important;
   font-size: 0 !important;
@@ -157,8 +158,10 @@ main.round
 main.round .rcontrols .follow-up :is(.rematch, .new-opponent, .ln-ext-new-game) {
   display: flex !important;
   align-items: center;
-  /* A label too long for the button wraps, rather than losing its end. */
+  /* A label too long for the button wraps, rather than losing its end, and its longest word
+   * keeps its room: French's ran past the button from 1020px. */
   justify-content: safe center;
+  min-width: min-content;
   line-height: 1.15 !important;
   white-space: normal;
 }
