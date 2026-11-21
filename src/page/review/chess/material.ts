@@ -1,6 +1,7 @@
 import {
   attackedSquares,
   attackers,
+  isInCheck,
   opposite,
   parseFen,
   parseSquare,
@@ -14,20 +15,35 @@ export { PIECE_VALUES } from '#shared/chess/index.ts';
 // As an attacker the king is worth the most: it can only take what's undefended.
 const ATTACKER_VALUES: Readonly<Record<Role, number>> = { ...PIECE_VALUES, king: 100 };
 
-/** The values of `by`'s pieces attacking `target`, pins ignored. */
-export const attackerValues = (board: Board, target: Square, by: Color): number[] =>
-  attackers(board, target, by).map(role => ATTACKER_VALUES[role]);
+/** Whether `piece` on `from` can take on `target` without leaving its own king in check. */
+function canTake(board: Board, from: Square, piece: Piece, target: Square): boolean {
+  if (!attackedSquares(board, from).includes(target)) return false;
+  const next = new Map(board);
+  next.delete(from);
+  next.set(target, piece);
+  return !isInCheck(next, piece.color);
+}
 
-/** The squares of `by`'s pieces attacking `target`, the cheapest first, pins ignored. */
+/**
+ * The squares of `by`'s pieces that can take on `target`, the cheapest first:
+ * not a piece pinned to its king off that line, nor a king onto a defended square.
+ */
 export const attackerSquares = (board: Board, target: Square, by: Color): Square[] =>
   [...board]
-    .filter(([from, piece]) => piece.color === by && attackedSquares(board, from).includes(target))
+    .filter(([from, piece]) => piece.color === by && canTake(board, from, piece, target))
     .toSorted(([, first], [, second]) => ATTACKER_VALUES[first.role] - ATTACKER_VALUES[second.role])
     .map(([from]) => from);
 
+/** The values of `by`'s pieces that can take on `target`, the cheapest first. */
+export const attackerValues = (board: Board, target: Square, by: Color): number[] =>
+  attackerSquares(board, target, by).flatMap(from => {
+    const piece = board.get(from);
+    return piece ? [ATTACKER_VALUES[piece.role]] : [];
+  });
+
 /**
  * What `side` wins by taking on `square`, then trading on there cheapest piece
- * first, either side free to stop: 0 when taking loses. Pins ignored.
+ * first, either side free to stop: 0 when taking loses.
  */
 export function exchangeGain(board: Board, square: Square, side: Color): number {
   const target = board.get(square);
@@ -37,8 +53,6 @@ export function exchangeGain(board: Board, square: Square, side: Color): number 
   const next = new Map(board);
   next.delete(from);
   next.set(square, taker);
-  // A king takes only what nothing defends.
-  if (taker.role === 'king' && attackers(next, square, opposite(side)).length > 0) return 0;
   return Math.max(0, PIECE_VALUES[target.role] - exchangeGain(next, square, opposite(side)));
 }
 

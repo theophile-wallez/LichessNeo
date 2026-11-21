@@ -75,6 +75,14 @@ describe('isSacrifice', () => {
     const after = '4k3/8/4p3/3R4/8/8/8/4K3 b - - 0 1';
     expect(isSacrifice(before, after, 'd1d5')).toBe(false);
   });
+
+  it('is not a sacrifice when the only taker is pinned to its king', () => {
+    // 26...Bxh3 of lichess.org/game/1IpbOVak: gxh3 would leave the king in
+    // check from the g8 rook, so the bishop just wins a pawn.
+    const before = '6rr/1pkq1p2/1p1pb3/2p1b3/P1P1P2p/1P5P/3QBRP1/3R2K1 b - - 0 26';
+    const after = '6rr/1pkq1p2/1p1p4/2p1b3/P1P1P2p/1P5b/3QBRP1/3R2K1 w - - 0 27';
+    expect(isSacrifice(before, after, 'e6h3')).toBe(false);
+  });
 });
 
 /** What White wins by trading on `square` of `fen`. */
@@ -93,6 +101,19 @@ describe('material', () => {
     expect(attackerSquares(board, 'd5', 'white')).toEqual(['c4', 'd1', 'e4']);
   });
 
+  it('leaves out an attacker that taking would leave its king in check', () => {
+    // The g2 pawn is pinned by the g8 rook, so the h3 bishop stands safe.
+    const pinned = parseFen('6rk/8/8/8/8/7b/6P1/6K1 w - - 0 1').board;
+    expect(attackerSquares(pinned, 'h3', 'white')).toEqual([]);
+    expect(isHanging(pinned, 'h3', { color: 'black', role: 'bishop' })).toBe(false);
+    // Taking along the pin's line is still a take.
+    const along = parseFen('6rk/8/8/8/8/6b1/6R1/6K1 w - - 0 1').board;
+    expect(attackerSquares(along, 'g3', 'white')).toEqual(['g2']);
+    // In double check, only the king can move.
+    const doubleCheck = parseFen('3k4/8/1B6/8/8/8/8/1q1RK3 b - - 0 1').board;
+    expect(attackerSquares(doubleCheck, 'b6', 'black')).toEqual([]);
+  });
+
   it('weighs a trade on a square, either side free to stop', () => {
     // Rxd5 Rxd5 loses the rook for the knight, unless a rook behind takes back.
     expect(gain('3r2k1/8/8/3n4/8/8/3R4/6K1 w - - 0 1', 'd5')).toBe(0);
@@ -104,5 +125,7 @@ describe('material', () => {
     expect(gain('6k1/8/8/3p4/4K3/8/8/8 w - - 0 1', 'd5')).toBe(1);
     expect(gain('6k1/8/2p5/3p4/4K3/8/8/8 w - - 0 1', 'd5')).toBe(0);
     expect(gain('6k1/8/8/8/4K3/8/8/8 w - - 0 1', 'd5')).toBe(0);
+    // A pinned piece doesn't take.
+    expect(gain('6rk/8/8/8/8/7b/6P1/6K1 w - - 0 1', 'h3')).toBe(0);
   });
 });

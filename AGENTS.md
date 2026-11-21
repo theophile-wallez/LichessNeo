@@ -159,6 +159,15 @@ GitHub or with `/ci` (`.claude/skills/ci`), which runs it on `main` and
 releases what passes. Don't start it unasked; its results are looked at
 afterwards, not waited for.
 
+**An issue** goes the same way, in a session of its own whose branch is named
+after it (`t3/issue-<n>-<what>`), linked to the issue (T3's `link_issue`).
+Its report holds a way to reproduce it (a game, a FEN, the steps); a bug
+found here gets one before it's filed. Reproduce it first, then fix the
+cause, not the case (the whole family of positions, the other callers of
+what changed). The repro becomes the test of the finish step, seen failing
+on `main`. The commit's body ends with `Fixes #<n>`: the push to `main`
+closes the issue.
+
 ## Sessions side by side
 
 The user runs several T3 sessions at once, each in its own worktree, and they
