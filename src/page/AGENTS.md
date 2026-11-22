@@ -26,6 +26,10 @@ learned the hard way. The rules for the whole repo are in the root's
   container in, or signed out (`must-login`) opens its own sign-in dialog.
   Each side's counts and accuracy come in `data.analysis.white` / `.black`
   (no accuracy on older ones); `hasFullComputerAnalysis()` says it's whole.
+- **Moves past a game's end.** A move played on from a game's last one
+  extends `ctrl.mainline`, and Lichess keeps it in IndexedDB, so the page
+  opens with it again. `ctrl.gamePath`, set before that, is the game's own:
+  read the game through the facade's `gameLine` and `onGameLine`.
 - **The analysis on the device.** Beside the request, a
   `button.analysis-editor` (once the game has an analysis, an `i` of that
   class over the chart) opens Lichess's editor dialog, delegated from the

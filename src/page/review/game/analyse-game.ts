@@ -54,7 +54,7 @@ export async function analyseGame(session: Session, analysis: Analysis): Promise
   const { work } = session;
   const run = ++work.runs;
   const superseded = (): boolean => work.runs !== run;
-  work.nodes = analysis.mainline;
+  work.nodes = analysis.gameLine;
   seedThreats(session, analysis.gameId);
   await applyExport(session, analysis);
   seedBooks(session);

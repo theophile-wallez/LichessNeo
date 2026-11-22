@@ -84,7 +84,7 @@ export class Card {
     setData(root, 'lnExtState', state.kind);
     this.#drawText(root, analysis, state);
     this.#drawChart(root, analysis, state);
-    this.#chart?.follow(analysis.onMainline ? analysis.node.ply : null);
+    this.#chart?.follow(analysis.onGameLine ? analysis.node.ply : null);
   }
 
   #build(): HTMLElement {

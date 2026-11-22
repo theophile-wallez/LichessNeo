@@ -131,7 +131,7 @@ export function startReview(session: Session, analysis: Analysis, onMove = false
     startFreeBoard(session, analysis);
     return;
   }
-  if (!analysis.gameId || analysis.mainline.length < 2) return;
+  if (!analysis.gameId || analysis.gameLine.length < 2) return;
   run(session, onMove ? 'moves' : 'summary');
   analyseGame(session, analysis).catch((error: unknown) => {
     console.error('[LichessNeo] game analysis failed', error);

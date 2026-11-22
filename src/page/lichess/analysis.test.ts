@@ -48,6 +48,30 @@ describe('analysis', () => {
     expect(facade.mainline[0]).toBe(ctrl.tree.root);
   });
 
+  it('tells the game from the moves played on from its end, which Lichess keeps', () => {
+    const { ctrl, facade } = page();
+    ctrl.jumpToMain(1);
+    ctrl.playUci('e7e5');
+    expect(facade.mainline).toHaveLength(3);
+    expect(facade.gameLine).toEqual(ctrl.mainline.slice(0, 2));
+    expect(facade.gameLine[1]).toBe(ctrl.mainline[1]);
+    expect(facade.onMainline).toBe(true);
+    expect(facade.onGameLine).toBe(false);
+    ctrl.jumpToMain(1);
+    expect(facade.onGameLine).toBe(true);
+    ctrl.jumpToMain(0);
+    ctrl.playUci('d2d4');
+    expect(facade.onGameLine).toBe(false);
+  });
+
+  it('takes the whole mainline for the game where Lichess has no game path', () => {
+    const { ctrl, facade } = page({ synthetic: true });
+    ctrl.jumpToMain(1);
+    ctrl.playUci('e7e5');
+    expect(facade.gameLine).toHaveLength(3);
+    expect(facade.onGameLine).toBe(true);
+  });
+
   it('throws on a node of another shape', () => {
     const { ctrl, facade } = page();
     Object.assign(ctrl, { node: { id: 3 } });

@@ -128,8 +128,32 @@ export class Analysis {
     return Array.isArray(this.#controller.mainline);
   }
 
+  /** Lichess's mainline, with the moves played on from the game's end. */
   get mainline(): readonly TreeNode[] {
     return narrowNodes(this.#controller.mainline);
+  }
+
+  /**
+   * The game's positions, its start first. A move played on from its end
+   * extends Lichess's mainline, and Lichess keeps it in IndexedDB: the page
+   * opens with it again. The free board and a game going on are their mainline.
+   */
+  get gameLine(): readonly TreeNode[] {
+    const { mainline } = this;
+    const gamePath = this.#gamePath();
+    // A tree path takes two characters a move.
+    return gamePath === null ? mainline : mainline.slice(0, gamePath.length / 2 + 1);
+  }
+
+  /** The board shows one of the game's positions. */
+  get onGameLine(): boolean {
+    const gamePath = this.#gamePath();
+    return gamePath === null ? this.onMainline : gamePath.startsWith(this.path);
+  }
+
+  #gamePath(): string | null {
+    const { gamePath } = this.#controller;
+    return typeof gamePath === 'string' ? gamePath : null;
   }
 
   /** The nodes from the root to the one on the board. */

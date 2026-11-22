@@ -44,6 +44,8 @@ export interface FakeController {
   nodeList: FakeNode[];
   mainline: FakeNode[];
   onMainline: boolean;
+  /** The game's own moves, none on the free board. */
+  gamePath: string | undefined;
   synthetic: boolean;
   orientation: 'white' | 'black';
   practice: unknown;
@@ -129,6 +131,9 @@ function mainlineOf(root: FakeNode): FakeNode[] {
   return line;
 }
 
+// The root's id is empty: a path is its nodes' ids.
+const pathOf = (nodes: readonly FakeNode[]): string => nodes.map(node => node.id).join('');
+
 const lastOf = (list: readonly FakeNode[], fallback: FakeNode): FakeNode => list.at(-1) ?? fallback;
 
 function jumpTo(ctrl: FakeController, path: string): void {
@@ -173,6 +178,7 @@ export function fakeController(options: FakeOptions): FakeController {
     nodeList: [root],
     mainline: mainlineOf(root),
     onMainline: true,
+    gamePath: options.synthetic ? undefined : pathOf(mainlineOf(root)),
     synthetic: options.synthetic ?? false,
     orientation: 'white',
     practice: undefined,

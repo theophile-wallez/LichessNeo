@@ -23,20 +23,20 @@ const phaseNames = (): PhaseNames => ({
 /** The move that led to each position, as Lichess numbers it. */
 function moveNames(analysis: Analysis): Map<number, string> {
   const names = new Map<number, string>();
-  for (const node of analysis.mainline)
+  for (const node of analysis.gameLine)
     if (node.san) names.set(node.ply, moveName(node.ply, node.san));
   return names;
 }
 
 /** The server analysis' chart, once some of it is in. */
 export function advantageSpec(analysis: Analysis): PlyChartSpec | null {
-  const { mainline } = analysis;
-  const points = advantagePoints(mainline);
+  const { gameLine } = analysis;
+  const points = advantagePoints(gameLine);
   const course = analysis.course;
   if (points.length === 0 || !course) return null;
   const chart = {
     points,
-    lastPly: mainline.at(-1)?.ply ?? 0,
+    lastPly: gameLine.at(-1)?.ply ?? 0,
     phases: phasesOf(course),
     names: phaseNames(),
   };
@@ -74,11 +74,11 @@ function timeFormats(): TimeFormats {
 /** The move times' chart; none for a game without them (an imported one). */
 export function moveTimesSpec(analysis: Analysis): PlyChartSpec | null {
   const course = analysis.course;
-  const times = course ? moveTimes(analysis.mainline, course) : [];
+  const times = course ? moveTimes(analysis.gameLine, course) : [];
   if (!course || times.length === 0) return null;
   const chart = {
     times,
-    lastPly: analysis.mainline.at(-1)?.ply ?? 0,
+    lastPly: analysis.gameLine.at(-1)?.ply ?? 0,
     phases: phasesOf(course),
     names: phaseNames(),
   };

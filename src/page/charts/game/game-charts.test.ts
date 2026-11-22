@@ -119,3 +119,15 @@ it('names the move under the pointer, with its time and clock', () => {
   expect(tip?.textContent).toContain('3... ');
   expect(tip?.textContent).toContain('Clock');
 });
+
+it('ends at the game’s last move, past the moves played on from it', () => {
+  const last = ctrl.mainline.at(-1)?.ply ?? 0;
+  const lastX = columnX(last);
+  ctrl.jumpToMain(last);
+  ctrl.playUci('a2a3');
+  ctrl.playUci('a7a6');
+  vi.advanceTimersByTime(300);
+  expect(columnX(last)).toBe(lastX);
+  const marker = queryOne(document, '#acpl-chart-container .ln-ext-gchart__ply', Element);
+  expect(marker?.classList.contains('ln-ext-gchart__ply--on')).toBe(false);
+});

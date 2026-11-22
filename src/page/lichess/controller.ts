@@ -18,6 +18,8 @@ const ControllerSchema = z.object({
   nodeList: z.unknown(),
   mainline: z.unknown(),
   onMainline: z.unknown(),
+  // The game's own moves, fixed before Lichess restores the moves played after its end.
+  gamePath: z.optional(z.unknown()),
   jumpToMain: method<[ply: number]>(),
   userJump: method<[path: string]>(),
   getOrientation: method<[]>(),

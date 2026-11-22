@@ -25,7 +25,7 @@ const SLOTS: readonly ChartSlot[] = [
     container: '#acpl-chart-container',
     spec: advantageSpec,
     // The server analysis comes in as it runs.
-    key: analysis => String(analysis.mainline.filter(node => node.eval !== undefined).length),
+    key: analysis => String(analysis.gameLine.filter(node => node.eval !== undefined).length),
   },
   {
     container: '#movetimes-chart-container',
@@ -61,7 +61,7 @@ function start(): void {
   setInterval(() => {
     const analysis = pageAnalysis();
     if (!analysis || analysis.synthetic) return;
-    const ply = analysis.onMainline ? analysis.node.ply : null;
+    const ply = analysis.onGameLine ? analysis.node.ply : null;
     for (const slot of SLOTS) {
       const chart = sync(analysis, slot, mounted.get(slot));
       if (!chart) continue;

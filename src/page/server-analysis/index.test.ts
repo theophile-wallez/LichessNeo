@@ -86,6 +86,18 @@ it('follows the analysis as its scores come in, drawing them', () => {
   expect(queryOne(card() ?? document, '.ln-ext-gchart__line', Element)).not.toBeNull();
 });
 
+it('counts the game’s positions only, not the moves played on from its end', () => {
+  const positions = ctrl.mainline.length;
+  const scored = ctrl.mainline.filter(node => 'eval' in node).length;
+  ctrl.jumpToMain(ctrl.mainline.at(-1)?.ply ?? 0);
+  ctrl.playUci('a2a3');
+  ctrl.playUci('a7a6');
+  tick();
+  expect(
+    queryOne(card() ?? document, '.ln-ext-sanalysis__status', HTMLElement)?.textContent,
+  ).toContain(`${Math.round((scored / positions) * 100)}`);
+});
+
 it('shows each side’s errors once it’s in, and starts the exercise on them', () => {
   for (const node of ctrl.mainline) Object.assign(node, { eval: { cp: 20 } });
   ctrl.data = {

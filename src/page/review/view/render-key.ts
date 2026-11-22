@@ -20,7 +20,7 @@ function progressKey(session: Session, analysis: Analysis): string {
   const known = review ? review.positions.filter(Boolean).length : 0;
   return [
     Math.round(view.progress * 100),
-    Math.round((known / analysis.mainline.length) * 20),
+    Math.round((known / analysis.gameLine.length) * 20),
     Boolean(review?.complete),
   ].join(',');
 }

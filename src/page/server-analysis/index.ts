@@ -15,14 +15,14 @@ import { AnalysisDataSchema, serverAnalysis, type ServerAnalysis } from './state
 const CHECK_MS = 250;
 
 function readState(analysis: Analysis): ServerAnalysis {
-  const { mainline } = analysis;
+  const { gameLine } = analysis;
   return serverAnalysis({
     requestable: analysisRequestForm() !== null,
     local: localAnalysisButton() !== null,
     started: analysisRequested(),
     full: analysis.hasServerAnalysis,
-    positions: mainline.length,
-    scored: mainline.filter(node => node.eval !== undefined).length,
+    positions: gameLine.length,
+    scored: gameLine.filter(node => node.eval !== undefined).length,
     summary: analysis.dataOf(AnalysisDataSchema)?.analysis ?? null,
   });
 }
