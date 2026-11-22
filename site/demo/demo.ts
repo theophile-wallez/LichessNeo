@@ -18,15 +18,19 @@ import { moves, positions } from './review.ts';
 import { COMMENT, type Scene, sceneOf, type View } from './scene.ts';
 
 // The live review: the game plays itself, a move once the coach has said its
-// piece, and starts over at the end. A click on a move, the graph, the key
-// moments, the controls or the card's buttons takes over, and the play button
-// hands back.
+// piece, and starts over at the end. It opens on 8…c6, a few moves before
+// Morphy's sacrifices, so the review's best moments come at once. A click on a
+// move, the graph, the key moments, the controls or the card's buttons takes
+// over, and the play button hands back.
 
 // How long a comment stays once typed, how long the mate stays before it all
 // starts over, and how long each move of Explain's line stays on the board.
 const DWELL_MS = 2200;
 const END_MS = 6000;
 const LINE_MS = 700;
+
+// 8…c6: next come 9…b5 (an inaccuracy), then 10.Nxb5, brilliant.
+const OPENING_PLY = 16;
 
 export interface DemoParts {
   readonly root: HTMLElement;
@@ -49,7 +53,7 @@ export class Demo {
   readonly #board: DemoBoard;
   readonly #coach: DemoCoach;
   readonly #typist: Typist;
-  #ply = 0;
+  #ply = OPENING_PLY;
   #view: View = COMMENT;
   // While retrying, the coach's lines already said: a hint asked for only types its own.
   #said = 0;
@@ -75,7 +79,7 @@ export class Demo {
 
   start(): void {
     setPieceGlyphs(document.documentElement, LICHESS_SET);
-    this.#show(0, true);
+    this.#show(OPENING_PLY, true);
   }
 
   #setVisible(visible: boolean): void {
