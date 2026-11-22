@@ -1,5 +1,6 @@
 import type { Square } from '#shared/chess/index.ts';
 import { setHtml } from '#shared/html.ts';
+import { hasTheory } from '#page/review/coach/theory.ts';
 import { en } from '#page/review/i18n/en.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
 import { showMoment } from '#page/review/view/moments.ts';
@@ -125,6 +126,8 @@ export class Demo {
     setHtml(say, scene.card);
     say.dataset.class = scene.look;
     this.#parts.root.dataset.retrying = String(this.#view.kind === 'retry');
+    // A move whose theory the coach explains gets a taller card, as in the review.
+    this.#parts.root.dataset.theory = String(move !== null && hasTheory(move));
     syncNav(nav, navState(move, this.#view, this.#ply < positions.length - 1), en.ui);
     showMoment(panel, this.#ply);
     if (move && this.#view.kind === 'retry')

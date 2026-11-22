@@ -13,5 +13,5 @@ export function introMarkup(): SafeHtml {
     word => html`<span class="ln-ext-w ln-ext-w--off">${word}</span>`,
   );
   return html`<div class="demo-say__head"><p class="demo-say__title">${INTRO_TITLE}</p></div>
-    <p class="demo-say__words">${spans}</p>`;
+    <div class="demo-say__body"><p class="demo-say__words">${spans}</p></div>`;
 }

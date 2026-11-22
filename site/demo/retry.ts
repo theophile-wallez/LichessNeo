@@ -162,6 +162,7 @@ export function retryMarkup(
       ${icon ? html`<span class="demo-say__icon">${icon}</span>` : ''}
       <p class="demo-say__title">${title ?? ''}</p>
     </div>
-    ${hints.map(hint => html`<p class="demo-say__words">${hint}</p>`)}
-    ${buttons(state, language)}`;
+    <div class="demo-say__body">
+      ${hints.map(hint => html`<p class="demo-say__words">${hint}</p>`)}${buttons(state, language)}
+    </div>`;
 }

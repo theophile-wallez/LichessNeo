@@ -27,8 +27,10 @@ export function cardMarkup(
       <p class="demo-say__title">${verdictTitle(move.moveClass, move.san, language)}</p>
       <span class="demo-say__eval">${formatEval(move.after)}</span>
     </div>
-    <p class="demo-say__words">${commentMarkup(comment.parts, { stream, language })}</p>
-    ${tags.length > 0 ? html`<div class="demo-say__tags">${tags}</div>` : html``}${actions}`;
+    <div class="demo-say__body">
+      <p class="demo-say__words">${commentMarkup(comment.parts, { stream, language })}</p>
+      ${tags.length > 0 ? html`<div class="demo-say__tags">${tags}</div>` : html``}${actions}
+    </div>`;
 }
 
 /** The card while Best shows the engine's move in place of the game's: its verdict and score. */

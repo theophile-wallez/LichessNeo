@@ -116,26 +116,58 @@
 
 /* ---- the card ---- */
 
-/* On a desktop the card keeps one height, as the review's: words that don't fit scroll in
-   it, and the move list keeps its room. */
+/* On a desktop the card keeps one height, as the review's: the verdict stays on top, and
+   the words that don't fit scroll under it down to the card's edge, so the move list
+   keeps its room. A move whose theory the coach explains takes what that list can spare
+   (styles/review/layout.css). */
 .demo-card {
   height: 140px;
+  padding-bottom: 0;
 }
 
-.demo-say {
+.demo[data-theory='true'] .demo-card {
+  height: calc(140px + clamp(0px, (var(--board) - 440px) / 2, 120px));
+}
+
+.demo-card > .demo-say {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  overflow-y: auto;
+}
+
+.demo-say__head {
+  flex: none;
+}
+
+.demo-say__body {
+  margin-top: 6px;
+}
+
+.demo-say__body > :first-child {
+  margin-top: 0;
+}
+
+.demo-card .demo-say__body {
+  min-height: 0;
+  padding-bottom: 16px;
+  overflow: hidden auto;
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--glow) 12.2%, transparent) transparent;
 }
 
 @container (max-width: 900px) {
-  .demo-card {
+  .demo-card,
+  .demo[data-theory='true'] .demo-card {
+    height: auto;
+    padding-bottom: 16px;
+  }
+
+  .demo-card > .demo-say {
     height: auto;
   }
 
-  .demo-say {
-    height: auto;
+  .demo-card .demo-say__body {
+    padding-bottom: 0;
     overflow: visible;
   }
 }
