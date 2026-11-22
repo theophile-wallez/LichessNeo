@@ -444,10 +444,13 @@ on its bottom 114 pixels, room above for a tall coach).
 
 `site/demo` is a live Debrief of Morphy's Opera Game. It runs no engine: the
 records come from `opera.json`, which `scripts/site/record-demo.ts` writes by
-hand with a native Stockfish, the opening's theory from `theory.json`, the
+hand as the review on lichess.org's analysis board would: Lichess's own engine
+build run in Node (`scripts/site/stockfish-web.ts`), set up and limited as the
+review's, and the masters' explorer for the book. The opening's theory comes
+from `theory.json`, the
 studies' positions along the game, which `scripts/site/theory-snapshot.ts`
 writes by hand (from lichess.org, or from the PGNs `theory.py` wrote in a
-folder it is given), and the review's own code (`src/page/review`)
+folder it is given). The review's own code (`src/page/review`)
 judges the moves, writes the coach's words and draws its summary, key moments
 and buttons from them, so the page shows what the extension would. What the
 extension does through Lichess (its board, its move list, its panel) the demo

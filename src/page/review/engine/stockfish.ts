@@ -1,6 +1,12 @@
-import { z } from 'zod/mini';
-import { createGuard } from '#shared/guards.ts';
 import type { EngineKind } from '#shared/review-engine/options.ts';
+import {
+  INITIAL_PAGES,
+  isFactory,
+  isStockfishModule,
+  networkNames,
+  setUp,
+  type StockfishModule,
+} from './module.ts';
 import { hasRelaxedSimd } from './relaxed-simd.ts';
 import { FULL_SEARCH, type SearchLimits, STOCKFISH_BUILD, stockfishScript } from './settings.ts';
 import { assetUrl } from '#page/lichess/assets.ts';
@@ -8,24 +14,6 @@ import { type EngineResult, SearchCollector } from './uci.ts';
 
 // Lichess's Stockfish build (stockfish-web), loaded from its own assets in the
 // page world. An engine runs one search at a time: the others queue behind it.
-
-const FactorySchema = z.object({
-  default: z.function({ input: [z.unknown()], output: z.unknown() }),
-});
-
-const StockfishModuleSchema = z.object({
-  uci: z.function({ input: [z.string()], output: z.unknown() }),
-  getRecommendedNnue: z.function({ input: [z.number()], output: z.unknown() }),
-  setNnueBuffer: z.function({ input: [z.instanceof(Uint8Array), z.number()], output: z.unknown() }),
-});
-
-type StockfishModule = z.infer<typeof StockfishModuleSchema>;
-
-const isFactory = createGuard(FactorySchema);
-const isStockfishModule = createGuard(StockfishModuleSchema);
-
-// Lichess's own sizes for each build, in 64 KB pages.
-const INITIAL_PAGES: Record<EngineKind, number> = { light: 1536, full: 2560 };
 
 // How long an engine may say nothing in a search before it's given up. A
 // search keeps sending lines, late on a busy machine: there a 250 ms one took
@@ -61,11 +49,8 @@ async function network(name: string): Promise<Uint8Array<ArrayBuffer>> {
 }
 
 async function loadNetworks(module: StockfishModule): Promise<void> {
-  for (let i = 0; ; i++) {
-    const name = module.getRecommendedNnue(i);
-    if (typeof name !== 'string' || name === '') return;
+  for (const [i, name] of networkNames(module).entries())
     module.setNnueBuffer(await network(name), i);
-  }
 }
 
 async function loadModule(engine: EngineKind): Promise<StockfishModule> {
@@ -121,15 +106,7 @@ export class Stockfish {
     await loadNetworks(module);
     Object.assign(module, { listen: (text: string) => this.#onLine?.(text) });
     this.#module = module;
-    module.uci('uci');
-    // One thread each unless picked: at a fixed depth more threads search wider,
-    // not sooner, so the page runs several engines instead.
-    module.uci(`setoption name Threads value ${this.#threads}`);
-    // Each search starts from an empty table: a small one does as well, and
-    // weighs less with several engines on the page.
-    module.uci(`setoption name Hash value ${this.#hash}`);
-    module.uci('setoption name MultiPV value 2');
-    if (this.#chess960) module.uci('setoption name UCI_Chess960 value true');
+    setUp(module, { threads: this.#threads, hash: this.#hash, chess960: this.#chess960 });
   }
 
   /** Booted, and still answering. */

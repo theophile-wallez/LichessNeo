@@ -1,26 +1,24 @@
-// Records the site's live review (site/demo): Morphy's Opera Game, every
-// position searched by a native Stockfish as the review searches them in the
-// browser (two lines, FULL_SEARCH's depth), and the threats around each move
-// (the null-move searches of explain/threats.ts, QUICK_SEARCH's depth). The
-// page then judges and comments on the game with the review's own code. Run
-// by hand, then commit site/demo/opera.json:
+// Records the site's live review (site/demo): Morphy's Opera Game, as the
+// review on lichess.org's analysis board sees it. Every position is searched
+// by Lichess's own engine, the build the review runs in the browser, set up
+// and limited as it is (FULL_SEARCH), and the threats around each move by the
+// null-move searches of explain/threats.ts (QUICK_SEARCH); the book is what
+// the masters' explorer plays, as the free board reads it (live/judging.ts).
+// The page then judges and comments on the game with the review's own code.
+// Run by hand, then commit site/demo/opera.json:
 //
-//   node scripts/site/record-demo.ts [--stockfish /path/to/stockfish]
+//   node scripts/site/record-demo.ts
 
-import { spawn } from 'node:child_process';
 import { writeFile } from 'node:fs/promises';
-import { createInterface } from 'node:readline';
-import { parseArgs } from 'node:util';
+import { ExplorerDataSchema } from '#page/lichess/explorer.ts';
 import { normalizeUci } from '#page/review/chess/notation.ts';
 import { passedFen } from '#page/review/coach/threat.ts';
-import { uciPosition, type PathPosition } from '#page/review/engine/position.ts';
 import { toRecord } from '#page/review/engine/record.ts';
 import { FULL_SEARCH, QUICK_SEARCH } from '#page/review/engine/settings.ts';
-import { SearchCollector, type EngineResult } from '#page/review/engine/uci.ts';
 import type { PositionRecord } from '#page/review/evaluation/score.ts';
+import { BOOK_GAMES, BOOK_PLIES } from '#page/review/live/judging.ts';
 import { fromRoot } from '#scripts/lib/paths.ts';
-
-const { values } = parseArgs({ options: { stockfish: { type: 'string', default: 'stockfish' } } });
+import { WebStockfish } from './stockfish-web.ts';
 
 const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -62,56 +60,30 @@ const MOVES = [
   ['d1d8', 'Rd8#'],
 ] as const;
 
-/** A UCI engine, one command at a time. */
-class Engine {
-  readonly #process = spawn(values.stockfish, [], { stdio: ['pipe', 'pipe', 'inherit'] });
-  readonly #lines = createInterface({ input: this.#process.stdout });
-  #waiting: ((line: string) => void) | null = null;
+const MASTERS = 'https://explorer.lichess.ovh/masters';
 
-  constructor() {
-    this.#lines.on('line', line => this.#waiting?.(line));
-  }
-
-  send(command: string): void {
-    this.#process.stdin.write(`${command}\n`);
-  }
-
-  /** Sends `command`, then hands each line of output to `read` until it returns a value. */
-  async ask<T>(command: string, read: (line: string) => T | null): Promise<T> {
-    const answer = new Promise<T>(resolve => {
-      this.#waiting = line => {
-        const value = read(line);
-        if (value !== null) resolve(value);
-      };
-    });
-    this.send(command);
-    return answer;
-  }
-
-  async search(position: string, depth: number): Promise<EngineResult> {
-    this.send(`position ${position}`);
-    const collector = new SearchCollector();
-    return this.ask(`go depth ${depth}`, line => collector.read(line));
-  }
-
-  /** The FEN the engine reaches after `position`, as its `d` prints it. */
-  async fen(position: string): Promise<string> {
-    this.send(`position ${position}`);
-    return this.ask('d', line => (line.startsWith('Fen: ') ? line.slice(5) : null));
-  }
-
-  quit(): void {
-    this.send('quit');
-  }
+/** What the masters play in a position: its games, and the opening's name. */
+async function masters(fen: string): Promise<{ games: number; name: string }> {
+  const response = await fetch(`${MASTERS}?fen=${encodeURIComponent(fen)}&moves=0&topGames=0`);
+  if (!response.ok) throw new Error(`the masters' explorer: ${response.status}`);
+  const found = ExplorerDataSchema.parse(await response.json());
+  return { games: found.white + found.draws + found.black, name: found.opening?.name ?? '' };
 }
 
-const engine = new Engine();
-await engine.ask('uci', line => (line === 'uciok' ? true : null));
-engine.send('setoption name Threads value 1');
-engine.send('setoption name MultiPV value 2');
-await engine.ask('isready', line => (line === 'readyok' ? true : null));
+/** The game's last book move, and the opening named along the book. */
+async function book(fens: readonly string[]): Promise<{ bookPly: number; opening: string }> {
+  let opening = '';
+  for (let ply = 1; ply < fens.length && ply <= BOOK_PLIES; ply++) {
+    const found = await masters(fens[ply] ?? '');
+    if (found.games < BOOK_GAMES) return { bookPly: ply - 1, opening };
+    opening = found.name || opening;
+  }
+  return { bookPly: Math.min(fens.length - 1, BOOK_PLIES), opening };
+}
 
-const nodes: PathPosition[] = [{ fen: START }];
+const engine = await WebStockfish.boot();
+
+const nodes: { fen: string; uci?: string }[] = [{ fen: START }];
 const sans: (string | undefined)[] = [undefined];
 const played: string[] = [];
 for (const [uci, san] of MOVES) {
@@ -123,7 +95,8 @@ for (const [uci, san] of MOVES) {
 const records: PositionRecord[] = [];
 for (let i = 0; i < nodes.length; i++) {
   const fen = nodes[i]?.fen ?? START;
-  const result = await engine.search(uciPosition(nodes.slice(0, i + 1), false), FULL_SEARCH.depth);
+  // The free board searches a position by its FEN alone.
+  const result = await engine.search(`fen ${fen}`, FULL_SEARCH);
   records.push(toRecord(fen, result));
   console.log(`Searched ply ${i}: ${sans[i] ?? 'start'}`);
 }
@@ -133,16 +106,17 @@ const threats: Record<string, PositionRecord> = {};
 for (const { fen } of nodes) {
   const passed = passedFen(fen);
   if (passed === null || threats[passed]) continue;
-  threats[passed] = toRecord(passed, await engine.search(`fen ${passed}`, QUICK_SEARCH.depth));
+  threats[passed] = toRecord(passed, await engine.search(`fen ${passed}`, QUICK_SEARCH));
 }
-engine.quit();
+await engine.quit();
 
 const demo = {
-  opening: 'Philidor Defense',
-  bookPly: 4,
+  ...(await book(nodes.map(node => node.fen))),
   nodes: nodes.map((node, i) => ({ ply: i, fen: node.fen, uci: node.uci, san: sans[i] })),
   records,
   threats,
 };
 await writeFile(fromRoot('site/demo/opera.json'), `${JSON.stringify(demo)}\n`);
 console.log('Wrote site/demo/opera.json.');
+// The engine's threads would keep Node running.
+process.exit(0);
