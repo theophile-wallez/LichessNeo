@@ -1,0 +1,106 @@
+/* A brilliant move's moment on the board, as the review's (styles/review/burst.css, markup from
+ * page/review/view/brilliant-burst.ts): its square glows, sparks fly off it and the badge pops. */
+
+.ln-ext-burst {
+  position: absolute;
+  inset: 0;
+  --ln-ext-burst-light: color-mix(in srgb, var(--ln-ext-burst-c) 30%, #fff);
+  /* A deeper blue for every other spark, so the burst isn't flat: the extension's blue. */
+  --ln-ext-burst-alt: color-mix(in srgb, var(--ln-ext-burst-c) 55%, #5e6ad2);
+}
+
+.ln-ext-burst > * {
+  position: absolute;
+  opacity: 0;
+}
+
+.ln-ext-burst + .ln-ext-badge {
+  animation: ln-ext-burst-pop 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ln-ext-burst-pop {
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+  45% {
+    opacity: 1;
+    scale: 1.4;
+  }
+  75% {
+    scale: 0.94;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.ln-ext-burst__glow {
+  left: var(--ln-ext-burst-x);
+  top: var(--ln-ext-burst-y);
+  width: 12.5%;
+  aspect-ratio: 1;
+  background: radial-gradient(
+    circle,
+    var(--ln-ext-burst-light) 0%,
+    color-mix(in srgb, var(--ln-ext-burst-c) 70%, transparent) 38%,
+    transparent 70%
+  );
+  animation: ln-ext-burst-glow 1000ms ease-out;
+}
+
+@keyframes ln-ext-burst-glow {
+  0% {
+    opacity: 0;
+    scale: 0.3;
+  }
+  25% {
+    opacity: 0.85;
+    scale: 1.7;
+  }
+  100% {
+    opacity: 0;
+    scale: 2.1;
+  }
+}
+
+.ln-ext-burst__spark {
+  left: calc(var(--ln-ext-burst-x) + 6.25%);
+  top: calc(var(--ln-ext-burst-y) + 6.25%);
+  width: 4.2%;
+  aspect-ratio: 1;
+  color: var(--ln-ext-burst-light);
+  translate: -50% -50%;
+  animation: ln-ext-burst-spark 820ms cubic-bezier(0.22, 1, 0.36, 1)
+    calc(80ms + var(--ln-ext-burst-i) * 18ms) both;
+}
+.ln-ext-burst__spark:nth-child(odd) {
+  color: var(--ln-ext-burst-alt);
+}
+.ln-ext-burst__spark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 3px var(--ln-ext-burst-c));
+}
+.ln-ext-burst__spark path {
+  fill: currentColor;
+}
+
+@keyframes ln-ext-burst-spark {
+  0% {
+    opacity: 0;
+    scale: 0.2;
+    translate: -50% -50%;
+  }
+  25% {
+    opacity: 1;
+    scale: 1.2;
+  }
+  100% {
+    opacity: 0;
+    scale: 0.4;
+    translate: calc(-50% + var(--ln-ext-burst-dx)) calc(-50% + var(--ln-ext-burst-dy));
+  }
+}

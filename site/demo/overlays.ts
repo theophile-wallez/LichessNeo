@@ -9,14 +9,16 @@ import type { Mark, ReviewArrow } from '#shared/board/marks.ts';
 import { normalizeUci } from '#page/review/chess/notation.ts';
 import type { MoveClass } from '#page/review/classes/classes.ts';
 import type { MoveVerdict } from '#page/review/judge/types.ts';
-import { badgeMarkup, reviewArrowsFor } from '#page/review/view/board-badge.ts';
+import { badgeMarkup, landingCell, reviewArrowsFor } from '#page/review/view/board-badge.ts';
+import { burstMarkup } from '#page/review/view/brilliant-burst.ts';
 import { squareStyle } from './board.ts';
 import { fenAfter } from './explain.ts';
 
 // What the demo draws around the pieces for the move on the board, with the
 // extension's own code (page/board, page/review/view/board-badge.ts): under
 // them, the move's squares and the coach's drawing of its comment; over them,
-// the best move's arrow and the reply an error lets in, and the class's badge.
+// the best move's arrow and the reply an error lets in, and the class's badge
+// (a brilliant move's burst under it).
 
 /** A move on the board: the game's, the engine's best, a line's or one tried. */
 export interface Shown {
@@ -90,11 +92,9 @@ export function overMarkup(move: Shown | null, drawing: readonly Mark[] = []): S
     color: BRUSH_COLORS[brush],
     opacity: 0.8,
   }));
-  const badge = badgeMarkup({
-    moveClass,
-    uci: move.uci,
-    san: move.san,
-    orientation: 'white',
-  });
-  return html`<svg class="demo-shapes" viewBox="0 0 8 8" aria-hidden="true">${arrowPolygons(arrows, occupiedAfter(move))}</svg>${badge}`;
+  const square = { uci: move.uci, san: move.san, orientation: 'white' } as const;
+  // A brilliant move bursts under its badge, as on the review's board (view/board.ts).
+  const burst = moveClass === 'brilliant' ? burstMarkup(landingCell(square)) : null;
+  const badge = badgeMarkup({ moveClass, ...square });
+  return html`<svg class="demo-shapes" viewBox="0 0 8 8" aria-hidden="true">${arrowPolygons(arrows, occupiedAfter(move))}</svg>${burst}${badge}`;
 }
