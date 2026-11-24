@@ -5,7 +5,7 @@ runs:
   using: composite
   steps:
     # The version comes from package.json's packageManager field.
-    - uses: pnpm/action-setup@v6.1.0
+    - uses: pnpm/action-setup@v6.1.1
 
     - uses: actions/setup-node@v7
       with:
