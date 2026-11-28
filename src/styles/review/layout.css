@@ -7,6 +7,12 @@
   html.ln-ext-review main.analyse {
     --ln-ext-review-top: 48px;
     --ln-ext-review-modes: 48px;
+    /* The coach's card (coach.css): the rows over and under it are sized from it. */
+    --ln-ext-review-card-h: 136px;
+  }
+
+  html.ln-ext-review[data-ln-ext-coach='none'] main.analyse {
+    --ln-ext-review-card-h: 96px;
   }
 
   /* Review closed: Lichess's analysis, then the game over's card (view/closed-panel.ts,
@@ -60,8 +66,9 @@
     --ln-ext-review-theory: clamp(0px, calc((var(--ln-ext-stage) - 640px) / 2), 120px);
   }
 
-  html[data-ln-ext-theory='on'] #ln-ext-review .ln-ext-coach {
-    height: calc(136px + var(--ln-ext-review-theory));
+  /* With no coach too: main.analyse outranks coach.css's 96px card. */
+  html[data-ln-ext-theory='on'] main.analyse #ln-ext-review .ln-ext-coach {
+    height: calc(var(--ln-ext-review-card-h) + var(--ln-ext-review-theory));
   }
 
   /* Move by move: the graph and the key moments over the coach (all in the panel), the
@@ -69,8 +76,8 @@
   html.ln-ext-review-moves main.analyse {
     --ln-ext-review-moments: 58px;
     --ln-ext-review-top: calc(
-      214px + var(--ln-ext-review-graph) + var(--ln-ext-review-moments) +
-        var(--ln-ext-review-theory, 0px)
+      78px + var(--ln-ext-review-card-h) + var(--ln-ext-review-graph) +
+        var(--ln-ext-review-moments) + var(--ln-ext-review-theory, 0px)
     );
     --ln-ext-review-ctrl: 64px;
     grid-template-rows:
@@ -94,7 +101,9 @@
   /* The free board: the coach on top of Lichess's engine, moves and controls. */
   /* The tab bar goes under the coach's card, over the part it switches. */
   html.ln-ext-review-live main.analyse {
-    --ln-ext-review-top: calc(156px + var(--ln-ext-review-theory, 0px));
+    --ln-ext-review-top: calc(
+      20px + var(--ln-ext-review-card-h) + var(--ln-ext-review-theory, 0px)
+    );
     grid-template-rows:
       var(--ln-ext-review-top)
       var(--ln-ext-tabs-h)
