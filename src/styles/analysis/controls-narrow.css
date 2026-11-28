@@ -32,6 +32,9 @@
 
   main.analyse .analyse__controls .fbt {
     min-width: 0;
+    /* Lichess's phone layout sets a top margin on them, which set them low in the bar. */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     border: none !important;
     border-radius: 6px;
     color: var(--ln-ext-text) !important;

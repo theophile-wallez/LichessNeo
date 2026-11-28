@@ -169,6 +169,34 @@ describe('the game panel’s tabs', () => {
     expect(main()?.dataset.lnExtPanel).toBe('meta');
   });
 
+  // Lichess puts a broadcast game's round's games and its chat in a side column, its live
+  // board a tab of the chat, and the round's note under the board.
+  it('gives a broadcast’s game its round’s games, its chat, its live board and its info', () => {
+    document.body.innerHTML = analyse(
+      '<aside class="relay-tour__side"><div class="relay-tour__side__header"></div>' +
+        '<div class="relay-games"><a class="relay-game"></a>' +
+        '<a class="relay-game relay-game--current"></a></div>' +
+        '<section class="mchat"><div class="mchat__tabs nb_2">' +
+        '<button class="mchat__tab discussion mchat__tab-active" role="tab"><span>Chat room</span></button>' +
+        '<button class="mchat__tab liveboard" role="tab"><span>Live board</span></button>' +
+        '</div><div class="mchat__content discussion"><ol class="mchat__messages"></ol></div>' +
+        '</section></aside>' +
+        '<div class="analyse__underboard"><div class="study__buttons"></div></div>',
+    );
+    syncPanelTabs();
+    expect(labels()).toEqual([
+      'roundPanelMoves',
+      'relayPanelGames',
+      'roundPanelChat',
+      'relayPanelLive',
+      'studyPanelInfo',
+    ]);
+    tab('games')?.click();
+    expect(main()?.dataset.lnExtPanel).toBe('games');
+    tab('liveboard')?.click();
+    expect(main()?.dataset.lnExtPanel).toBe('chat');
+  });
+
   it('leaves the panel to the Game Review while it has it', () => {
     document.documentElement.classList.add('ln-ext-review-moves');
     document.body.innerHTML = analyse(chat([]));

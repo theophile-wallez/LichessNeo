@@ -1,0 +1,149 @@
+/* ---- From 1020px --- */
+
+/* Lichess puts the round's games and the chat in a column beside the board, and the round's
+ * note under it. Here each is a part of the panel, picked in its tab bar
+ * (content/layout/panel-tabs.ts): the games, the chat's Chat room and Live board, the info. */
+
+@media (min-width: 1020px) {
+  /* The player bars are rows of the stage, which the panel spans, rather than Lichess's
+   * margin over the page. As tall from the first paint as once the clocks are in. */
+  main.analyse.is-relay:not(.has-relay-tour) {
+    --ln-ext-bar: 56px;
+    --ln-ext-v-room: 32px;
+    margin-top: 0 !important;
+  }
+
+  html:not([data-ln-ext-prefs~='coords-in'])
+    body:is(.coords-in, .coords-out)
+    main.analyse.is-relay:not(.has-relay-tour) {
+    --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
+  }
+
+  main.analyse.is-relay:not(.has-relay-tour) > .analyse__tools {
+    margin-top: 0 !important;
+  }
+
+  /* ---- The games and the chat --- */
+
+  /* Their column shows in the panel's area while one of them is picked. */
+  main.analyse.is-relay:not(.has-relay-tour) > .relay-tour__side {
+    grid-area: tools !important;
+    position: static !important;
+    display: none !important;
+    flex-direction: column;
+    align-self: stretch !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0;
+    margin: 0 0 0 var(--ln-ext-gap) !important;
+    overflow: hidden;
+    background: var(--ln-ext-bg-panel);
+  }
+
+  main.analyse.is-relay:not(.has-relay-tour)[data-ln-ext-panel='games'] > .relay-tour__side,
+  main.analyse.is-relay:not(.has-relay-tour)[data-ln-ext-panel='chat'] > .relay-tour__side {
+    display: flex !important;
+  }
+
+  main.analyse.is-relay:not(.has-relay-tour) > .relay-tour__side > .vertical-resize,
+  main.analyse.is-relay:not(.has-relay-tour)[data-ln-ext-panel='games']
+    > .relay-tour__side
+    > :is(.mchat, .chat__members),
+  main.analyse.is-relay:not(.has-relay-tour)[data-ln-ext-panel='chat']
+    > .relay-tour__side
+    > :not(.mchat) {
+    display: none !important;
+  }
+
+  /* Lichess sizes the games inline, to its handle's height. */
+  main.analyse.is-relay:not(.has-relay-tour) > .relay-tour__side > .relay-games {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  /* Lichess's handle between the games and the chat sizes the chat inline. */
+  main.analyse.is-relay:not(.has-relay-tour) > .relay-tour__side > .mchat {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Our tab bar carries the chat's (panel-tabs.css), but for a chat nobody may post in. */
+  main.analyse.is-relay:not([data-ln-ext-chat-toggle]) > .relay-tour__side .mchat__tabs {
+    display: none !important;
+  }
+
+  main.analyse.is-relay > .relay-tour__side .mchat__content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    background: transparent !important;
+  }
+
+  main.analyse.is-relay > .relay-tour__side .mchat__messages {
+    max-height: none !important;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  /* The keyboard-move input stands at the shared area's foot (analysis/controls.css). */
+  main.analyse.is-relay > .relay-tour__side > .mchat {
+    padding-bottom: var(--ln-ext-keyboard-h, 0px) !important;
+  }
+
+  /* ---- The info --- */
+
+  /* The round's note, the game's tags, its server analysis and the other boards. */
+  main.analyse.is-relay:not(.has-relay-tour)[data-ln-ext-panel='meta'] > .analyse__underboard {
+    grid-area: tools !important;
+    display: block !important;
+    box-sizing: border-box;
+    min-height: 0;
+    margin: 0 0 0 var(--ln-ext-gap) !important;
+    padding: 14px 16px !important;
+    overflow-y: auto;
+    background: var(--ln-ext-bg-panel);
+  }
+
+  main.analyse.is-relay[data-ln-ext-panel='meta'] .analyse__underboard__panels {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+/* Lichess drops the bottom of a broadcast's jump buttons' row (its `mq-at-least-col2`), which
+ * set them low in the controls. */
+@media (min-width: 800px), (orientation: landscape) {
+  main.analyse.is-relay .analyse__controls .jumps {
+    padding-bottom: 4px !important;
+  }
+}
+
+/* ---- The live board --- */
+
+/* Lichess sizes it to the column's width, so it ran far below the chat's box: it takes what the
+ * box leaves, its players' rows and its eval bar's sliver (3%) aside. */
+main.analyse.is-relay > .relay-tour__side .mchat__content.liveboard {
+  container-type: size;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px !important;
+  overflow: hidden;
+}
+
+main.analyse.is-relay > .relay-tour__side .chat-liveboard {
+  flex: none;
+  width: min(100cqw, (100cqh - 44px) * 1.03);
+}

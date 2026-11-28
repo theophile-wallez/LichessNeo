@@ -12,16 +12,17 @@ import { message } from '#content/platform/runtime.ts';
 import { onEveryTick } from '#content/sync-loop.ts';
 
 // The right-hand panel's tabs (styles/panel-tabs.css): from 1020px the moves, the chat and,
-// on the game page, the game info where there is no chat, on a study its info, share one
-// area of the panel, so none of them takes a height of its own. Lichess's own chat tabs (Chat room, Notes) join
-// ours and a click on one is passed to it: Lichess keeps which of them is open, we keep
-// which part the panel shows.
+// on the game page, the game info where there is no chat, on a study its info, on a
+// broadcast's game the round's games, share one area of the panel, so none of them takes a
+// height of its own. Lichess's own chat tabs (Chat room, Notes, Live board) join ours and a
+// click on one is passed to it: Lichess keeps which of them is open, we keep which part the
+// panel shows.
 
 const BAR = 'ln-ext-panel-tabs';
 const TAB = `${BAR}__tab`;
 
 /** The parts the panel can show. */
-type Part = 'moves' | 'chat' | 'meta';
+type Part = 'moves' | 'games' | 'chat' | 'meta';
 
 /** A part of ours, as against the chat's, whose tabs Lichess draws. */
 interface PartSpec {
@@ -30,6 +31,8 @@ interface PartSpec {
   readonly message: string;
   /** Where the part is in the page. */
   readonly selector: string;
+  /** What is scrolled back into view as the part comes on show. */
+  readonly focus?: string;
 }
 
 interface Host {
@@ -40,6 +43,8 @@ interface Host {
   readonly moves: string;
   /** Its move on the board, scrolled back into view as the moves come on show again. */
   readonly activeMove?: string;
+  /** Parts offered before the chat, where the page has them. */
+  readonly before: readonly PartSpec[];
   /** Parts offered in the chat's place where the page has none. */
   readonly instead: readonly PartSpec[];
   /** Parts offered after the chat, where the page has them. */
@@ -52,17 +57,27 @@ const HOSTS: readonly Host[] = [
     chat: '.round__side > .mchat',
     moves: 'roundPanelMoves',
     activeMove: ':is(i5d, rm6) :is(Z7yx, kwdb):is(.a1t, .active)',
+    before: [],
     instead: [{ part: 'meta', message: 'roundPanelGame', selector: '.round__side > .game__meta' }],
     after: [],
   },
   // The analysis page's move list keeps its own scroll (content/analysis/active-move.ts),
   // which follows it back into view as the list is resized. A study's chat is in its side
   // column (in its chapters' box from 1260px), which styles/study-page/layout.css
-  // spreads over the page's grid; its info is what Lichess draws under the board.
+  // spreads over the page's grid; its info is what Lichess draws under the board. A broadcast's
+  // game has its round's games and its chat in a side column (styles/broadcast/game).
   {
     page: 'main.analyse',
-    chat: ':is(:scope > .mchat, :scope > .analyse__side .mchat)',
+    chat: ':is(:scope > .mchat, :scope > :is(.analyse__side, .relay-tour__side) .mchat)',
     moves: 'roundPanelMoves',
+    before: [
+      {
+        part: 'games',
+        message: 'relayPanelGames',
+        selector: ':scope > .relay-tour__side > .relay-games',
+        focus: ':scope > .relay-tour__side .relay-game--current',
+      },
+    ],
     instead: [],
     after: [
       {
@@ -87,16 +102,20 @@ let shown: Part = 'moves';
 /** How many chat lines there were when the chat was last on show; null until it is drawn. */
 let seenLines: number | null = null;
 
+const PARTS: readonly string[] = ['moves', 'games', 'chat', 'meta'] satisfies readonly Part[];
+
 const isPart = (value: string | undefined): value is Part =>
-  value === 'moves' || value === 'chat' || value === 'meta';
+  value !== undefined && PARTS.includes(value);
 
 // A chat tab is `button.mchat__tab.<key>` (lila's ui/lib/src/chat/renderChat.ts).
 const chatKey = (tab: HTMLElement): string =>
   [...tab.classList].find(name => !name.startsWith('mchat__tab')) ?? 'discussion';
 
-// Lichess's name for its room ("Chat room") is longer than the bar's others: ours is "Chat".
+// Lichess's names for its room ("Chat room") and a broadcast's live board ("Live board",
+// "Échiquier en direct") are longer than the bar's others: ours are "Chat" and "Live".
 function chatLabel(tab: HTMLElement, key: string): string {
   if (key === 'discussion') return message('roundPanelChat');
+  if (key === 'liveboard') return message('relayPanelLive');
   // The name is in a span of its own, beside the switch an optional chat's tab holds.
   return queryOne(tab, ':scope > span', HTMLElement)?.textContent.trim() ?? '';
 }
@@ -121,15 +140,15 @@ const presentTabs = (page: HTMLElement, specs: readonly PartSpec[]): TabSpec[] =
     .map(spec => ({ key: spec.part, part: spec.part, label: message(spec.message) }));
 
 /**
- * The bar's tabs: the moves, then the chat's own, or what stands in for a chat there is none
- * of, then the page's other parts.
+ * The bar's tabs: the moves, the parts before the chat, then the chat's own, or what stands in
+ * for a chat there is none of, then the page's other parts.
  */
 function tabsFor(host: Host, page: HTMLElement): TabSpec[] {
   const moves: TabSpec = { key: 'moves', part: 'moves', label: message(host.moves) };
   if (reviewOwnsPanel()) return [moves];
   const chat = chatTabs(host, page);
   const instead = chat.length > 0 ? chat : presentTabs(page, host.instead);
-  return [moves, ...instead, ...presentTabs(page, host.after)];
+  return [moves, ...presentTabs(page, host.before), ...instead, ...presentTabs(page, host.after)];
 }
 
 const tabButton = (spec: TabSpec): HTMLButtonElement =>
@@ -190,11 +209,15 @@ function markUnread(host: Host, bar: HTMLElement, page: HTMLElement): void {
   if (tab) setData(tab, 'lnExtUnread', unread > 0 ? unreadCount(unread) : null);
 }
 
+const focusOf = (host: Host, part: Part): string | undefined =>
+  [...host.before, ...host.instead, ...host.after].find(spec => spec.part === part)?.focus;
+
 // The panel's parts keep their scroll only while they show.
 function scrollIntoPlace(host: Host, page: HTMLElement, part: Part): void {
-  if (part === 'moves') {
-    const move = host.activeMove ? queryOne(page, host.activeMove, HTMLElement) : null;
-    if (move) centerInScroller(move);
+  if (part !== 'chat') {
+    const focus = part === 'moves' ? host.activeMove : focusOf(host, part);
+    const item = focus ? queryOne(page, focus, HTMLElement) : null;
+    if (item) centerInScroller(item);
     return;
   }
   const messages = queryOne(page, `${host.chat} .mchat__messages`, HTMLElement);

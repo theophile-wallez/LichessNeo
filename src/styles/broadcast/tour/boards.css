@@ -218,18 +218,19 @@ main.analyse.has-relay-tour .now-playing .mini-game__board cg-container {
   border-radius: 6px;
 }
 
-/* A thin bar, white rising from the bottom, without Lichess's inset shadow. */
-main.analyse.has-relay-tour :is(.now-playing, .relay-games) .mini-game__gauge {
+/* A thin bar, white rising from the bottom, without Lichess's inset shadow, as the round's
+ * games' (broadcast/games.css). */
+main.analyse.has-relay-tour .now-playing .mini-game__gauge {
   flex: 0 0 8px !important;
   margin: 0 !important;
   border-radius: 4px !important;
 }
 
-main.analyse.has-relay-tour :is(.now-playing, .relay-games) .mini-game__gauge::after {
+main.analyse.has-relay-tour .now-playing .mini-game__gauge::after {
   box-shadow: none !important;
 }
 
-main.analyse.has-relay-tour :is(.now-playing, .relay-games) .mini-game__gauge tick {
+main.analyse.has-relay-tour .now-playing .mini-game__gauge tick {
   top: 0 !important;
   height: 50% !important;
   border-bottom: 1px solid color-mix(in srgb, var(--ln-ext-accent) 80%, transparent) !important;

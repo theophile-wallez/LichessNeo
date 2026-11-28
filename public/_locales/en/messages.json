@@ -2194,6 +2194,14 @@
     "message": "The settings could not be saved: try again.",
     "description": "Shown when the import fails."
   },
+  "relayPanelGames": {
+    "message": "Games",
+    "description": "The tab of a broadcast game's panel that lists the round's other games."
+  },
+  "relayPanelLive": {
+    "message": "Live",
+    "description": "The tab of a broadcast game's panel that shows the game's live position."
+  },
   "roundPanelMoves": {
     "message": "Moves",
     "description": "The game panel's tab that shows the move list."

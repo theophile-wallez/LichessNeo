@@ -176,12 +176,12 @@ main.analyse {
     padding: 8px var(--ln-ext-inset-r, 0px) 0 var(--ln-ext-inset-l, 0px) !important;
   }
 
-  /* ---- Study, broadcast --- */
+  /* ---- Study --- */
 
-  /* Lichess puts a study's chapters and a broadcast's games in a column left of the board, which
-   * our grid lacks. They take the panel's last row instead. */
-  html[data-ln-ext-has~='study-side'] main.analyse,
-  main.analyse.is-relay:not(.has-relay-tour) {
+  /* Lichess puts a study's chapters in a column left of the board, which our grid lacks. They
+   * take the panel's last row instead. A broadcast's games are a part of the panel
+   * (broadcast/game). */
+  html[data-ln-ext-has~='study-side'] main.analyse {
     --ln-ext-side-h: min(clamp(200px, 36vh, 400px), calc(var(--ln-ext-board) * 0.45));
     grid-template-rows:
       var(--ln-ext-tabs-h)
@@ -216,8 +216,7 @@ main.analyse {
       minmax(var(--ln-ext-side-h), 1fr) !important;
   }
 
-  main.analyse > .analyse__side:has(> .study__side),
-  main.analyse.is-relay:not(.has-relay-tour) > .relay-tour__side {
+  main.analyse > .analyse__side:has(> .study__side) {
     grid-area: side !important;
     display: block !important;
     align-self: stretch !important;
@@ -229,47 +228,25 @@ main.analyse {
     background: var(--ln-ext-bg-panel);
   }
 
-  html[data-ln-ext-has~='study-side'] main.analyse .analyse__controls,
-  main.analyse.is-relay:not(.has-relay-tour) .analyse__controls {
+  html[data-ln-ext-has~='study-side'] main.analyse .analyse__controls {
     border-radius: 0 !important;
   }
 
-  /* The tabs or header stay at the top as the list scrolls. */
-  main.analyse > .analyse__side .study__side > .tabs-horiz,
-  main.analyse > .relay-tour__side > .relay-tour__side__header {
+  /* The tabs stay at the top as the list scrolls. */
+  main.analyse > .analyse__side .study__side > .tabs-horiz {
     position: sticky;
     top: 0;
     z-index: 2;
     background: var(--ln-ext-bg-panel-dark);
   }
 
-  /* The chapter or game on the board: a lighter row, not Lichess's green tint (on hover too). */
-  main.analyse > .analyse__side .study-list > button:hover,
-  main.analyse > .relay-tour__side .relay-game:hover {
+  /* The chapter on the board: a lighter row, not Lichess's green tint (on hover too). */
+  main.analyse > .analyse__side .study-list > button:hover {
     background: var(--ln-ext-lift-6) !important;
   }
 
-  main.analyse > .analyse__side .study-list > button.active,
-  main.analyse > .relay-tour__side .relay-game--current {
+  main.analyse > .analyse__side .study-list > button.active {
     background: var(--ln-ext-lift-8) !important;
-  }
-
-  /* A broadcast game has Lichess's own 45px player bars: here they're rows of the stage, which
-   * the panel spans, rather than Lichess's margin over the page. */
-  main.analyse.is-relay:not(.has-relay-tour) {
-    --ln-ext-bar: 45px;
-    --ln-ext-v-room: 32px;
-    margin-top: 0 !important;
-  }
-
-  html:not([data-ln-ext-prefs~='coords-in'])
-    body:is(.coords-in, .coords-out)
-    main.analyse.is-relay:not(.has-relay-tour) {
-    --ln-ext-coords-off: calc(1.2 * var(--ln-ext-coords-size, 13px) + 8px);
-  }
-
-  main.analyse.is-relay:not(.has-relay-tour) > :is(.analyse__tools, .relay-tour__side) {
-    margin-top: 0 !important;
   }
 
   /* A study with players has thinner bars (1.6rem), which hung into the margins and the files. */
@@ -286,7 +263,6 @@ main.analyse {
   }
 
   /* Below the files, like the game page's bar. */
-  main.analyse.is-relay:not(.has-relay-tour) .relay-board-player-bot,
   html:not([data-ln-ext-has~='practice']) main.analyse.has-players .study__player-bot {
     top: calc(100% + var(--ln-ext-coords-off)) !important;
   }

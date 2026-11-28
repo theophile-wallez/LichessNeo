@@ -36,3 +36,9 @@ for the whole repo are in the root's [AGENTS.md](../../../AGENTS.md).
 - **A broadcast's side sticks inside `main`.** The games and chat are a
   sticky column: room at the page's end must be the tour's padding, not
   `main`'s, or it pushes the column up as the page reaches its end.
+- **A broadcast's game sizes its side inline.** Lichess's handle between the
+  round's games and the chat sets `flex: 0 0 auto` and a `height` on both
+  (`.relay-games`, `.mchat`): a part of the panel overrides them with
+  `!important`, or the live board runs out of a 256px chat. Below its third
+  column Lichess shows no chat at all, and from its second it drops the jump
+  buttons' bottom padding (`broadcast/game/layout.css`).

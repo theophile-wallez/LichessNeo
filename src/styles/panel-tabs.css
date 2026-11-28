@@ -53,15 +53,16 @@ main:is(.round, .analyse) > .ln-ext-panel-tabs {
     --ln-ext-tab-shadow: 0 1px 2px var(--ln-ext-shade-55);
   }
 
+  /* As wide as their names: a broadcast's game has five. */
   .ln-ext-panel-tabs__tab {
-    flex: 1 1 0;
+    flex: 1 1 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
     min-width: 0;
     height: 28px;
-    padding: 0 10px;
+    padding: 0 6px;
     border: 0;
     border-radius: 6px;
     background: transparent;

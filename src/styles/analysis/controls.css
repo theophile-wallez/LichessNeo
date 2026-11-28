@@ -65,9 +65,9 @@ main.analyse .analyse__controls > .fbt[data-act='engine-mode']::before {
     opacity: 0.45;
   }
 
-  /* The controls are the panel's foot, unless a study's chapter list or a broadcast's games
-   * take a row under them (layout.css). */
-  html:not([data-ln-ext-has~='study-side']) main.analyse:not(.is-relay) .analyse__controls {
+  /* The controls are the panel's foot, unless a study's chapter list takes a row under them
+   * (layout.css). */
+  html:not([data-ln-ext-has~='study-side']) main.analyse .analyse__controls {
     border-radius: 0 0 6px 6px;
   }
 

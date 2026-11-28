@@ -1,0 +1,6 @@
+/* A broadcast's game (`main.analyse.is-relay`, not its tour's page, `.has-relay-tour`): the
+ * analysis layout (analysis/), with the round's games, the chat and its live board, and the
+ * round's info as parts of the panel, and Lichess's player bars in the game page's look. */
+@import './players.css';
+@import './layout.css';
+@import './narrow.css';

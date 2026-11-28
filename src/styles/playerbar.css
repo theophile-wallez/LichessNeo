@@ -202,8 +202,8 @@ html:not([data-ln-ext-has~='analyse-players']) main.analyse > .ln-ext-captured {
   margin: calc(var(--ln-ext-off) + (var(--ln-ext-bar) - 18px) / 2) 0 0 var(--ln-ext-inset-l, 0px);
 }
 
-/* A study's or a broadcast's bar: in the place of Lichess's material difference, before the
- * clock. */
+/* A study's bar: in the place of Lichess's material difference, before the clock. A
+ * broadcast's is placed with its bar's parts (broadcast/game/players.css). */
 main.analyse :is(.study__player, .relay-board-player) > .ln-ext-captured {
   order: 1;
   display: flex;

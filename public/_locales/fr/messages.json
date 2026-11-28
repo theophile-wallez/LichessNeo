@@ -1696,6 +1696,12 @@
   "backupRestoreFailed": {
     "message": "Les réglages n’ont pas pu être enregistrés : réessayez."
   },
+  "relayPanelGames": {
+    "message": "Parties"
+  },
+  "relayPanelLive": {
+    "message": "Direct"
+  },
   "roundPanelMoves": {
     "message": "Coups"
   },

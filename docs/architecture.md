@@ -85,8 +85,8 @@ so the logic can be unit-tested without a page.
 - `layout`: `MARKS`, the `data-ln-ext-has` flags, the Lichess preferences
   our parts follow (`data-ln-ext-prefs`), inset, zoom (the board's handle
   and the user menu's Size slider), controls height, and the right-hand
-  panel's tabs, which give the moves, the chat and the game info one area to
-  share.
+  panel's tabs, which give the moves, the chat and the game info (and on a
+  broadcast's game the round's games and its live board) one area to share.
 - `game`.
 - `board-tools`: the cog, bookmark star and flip button beside the game and
   analysis boards, the star's row in their menus, the analysis menu floating

@@ -1,0 +1,199 @@
+/* ---- Player bars --- */
+
+/* Lichess's own bars (ui/analyse/src/study/playerBars.ts), in the game page's look
+ * (playerbar.css): the photo, then the name, the flag and the rating over the pieces taken
+ * (content/game/captured.ts), the clock at the end. They hang from the board, over and under
+ * it, in the room the layout leaves them (`--ln-ext-bar`, layout.css and narrow.css). */
+main.analyse.is-relay .relay-board-player {
+  left: 0 !important;
+  right: 0 !important;
+  box-sizing: border-box;
+  display: grid !important;
+  grid-template-columns: 40px minmax(0, max-content) auto auto 1fr auto;
+  grid-template-rows: 20px 20px;
+  grid-template-areas:
+    'photo name info result . clock'
+    'photo captured captured captured captured clock';
+  align-content: center;
+  align-items: center;
+  width: auto !important;
+  height: var(--ln-ext-bar, 56px) !important;
+  padding: 0 var(--ln-ext-inset-r, 0px) 0 var(--ln-ext-inset-l, 0px);
+  overflow: visible;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  font-weight: 400;
+  text-shadow: none;
+}
+
+/* Their parts are the bar's grid items. */
+main.analyse.is-relay .relay-board-player :is(.left, .info-split) {
+  display: contents !important;
+}
+
+main.analyse.is-relay .relay-board-player-top {
+  top: auto !important;
+  bottom: calc(100% + var(--ln-ext-board-headroom, 0px) - var(--ln-ext-inset-t, 0px)) !important;
+}
+
+/* Below the files, like the game page's bar. */
+main.analyse.is-relay .relay-board-player-bot {
+  top: calc(100% + var(--ln-ext-coords-off, 0px) - var(--ln-ext-inset-b, 0px)) !important;
+  bottom: auto !important;
+}
+
+/* A FIDE photo, or Lichess's stand-in face: a square cut as the game page's avatars. */
+main.analyse.is-relay .relay-board-player__photo {
+  grid-area: photo;
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: cover;
+  border-radius: 3px;
+  background: var(--ln-ext-lift-7);
+}
+
+/* The title and the name. */
+main.analyse.is-relay .relay-board-player .info-split > :first-child {
+  grid-area: name;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin-left: 10px;
+}
+
+main.analyse.is-relay .relay-board-player a.name {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ln-ext-text-strong) !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.analyse.is-relay .relay-board-player a.name:hover {
+  color: var(--ln-ext-accent-hover) !important;
+}
+
+main.analyse.is-relay .relay-board-player .utitle {
+  flex: none;
+  margin-right: 5px;
+  padding: 0 3px;
+  border-radius: 3px;
+  background: var(--ln-ext-title-bg);
+  color: var(--ln-ext-white) !important;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 16px;
+  /* Lichess ends the title with a no-break space inside the badge ("GM&nbsp;"). */
+  word-spacing: -0.26em;
+}
+
+/* The team, the flag and the rating, after the name as on the game page. */
+main.analyse.is-relay .relay-board-player .info-secondary {
+  grid-area: info;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 6px;
+  color: var(--ln-ext-text-dim);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+main.analyse.is-relay .relay-board-player .info-secondary .mini-game__flag {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+main.analyse.is-relay .relay-board-player .info-secondary .team {
+  max-width: 120px;
+  overflow: hidden;
+  color: var(--ln-ext-text-dim);
+  text-overflow: ellipsis;
+}
+
+main.analyse.is-relay .relay-board-player .elo::before {
+  content: '(';
+}
+
+main.analyse.is-relay .relay-board-player .elo::after {
+  content: ')';
+}
+
+/* The game's points for the player: tinted, green for a win, red for a loss, grey otherwise
+ * (`good`, `bad`, `status`), as a game's result pill on a profile. */
+main.analyse.is-relay .relay-board-player .result {
+  grid-area: result;
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--ln-ext-lift-7);
+  color: var(--ln-ext-text-dim);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+main.analyse.is-relay .relay-board-player good.result {
+  background: color-mix(in srgb, var(--ln-ext-good) 18%, transparent);
+  color: var(--ln-ext-good-hover);
+}
+
+main.analyse.is-relay .relay-board-player bad.result {
+  background: color-mix(in srgb, var(--ln-ext-red-dark) 18%, transparent);
+  color: var(--ln-ext-red);
+}
+
+main.analyse.is-relay .relay-board-player > .ln-ext-captured {
+  grid-area: captured;
+  margin: 0 0 0 10px;
+}
+
+main.analyse.is-relay .relay-board-player > .analyse__clock {
+  grid-area: clock;
+  margin-left: 12px !important;
+}
+
+/* Lichess marks the side to move's clock even in a game long over: only a clock that runs,
+ * a live game's (`ticking`), is lit. */
+main.analyse.is-relay .relay-board-player:not(.ticking) > .analyse__clock.active {
+  background: var(--ln-ext-clock-bg) !important;
+  color: var(--ln-ext-clock-fg) !important;
+}
+
+main.analyse.is-relay .relay-board-player:not(.ticking) > .analyse__clock.active::before {
+  display: none;
+}
+
+/* A phone leaves the name little room: the points go under it, before the pieces taken, and
+ * the clock is smaller. */
+@media (max-width: 599.98px) {
+  main.analyse.is-relay .relay-board-player {
+    grid-template-columns: 40px auto minmax(0, max-content) auto 1fr auto;
+    grid-template-areas:
+      'photo name name info . clock'
+      'photo result captured captured captured clock';
+  }
+
+  main.analyse.is-relay .relay-board-player .result {
+    justify-self: start;
+    margin-left: 10px;
+  }
+
+  main.analyse.is-relay .relay-board-player > .ln-ext-captured {
+    margin-left: 6px;
+  }
+
+  main.analyse.is-relay .relay-board-player > .analyse__clock {
+    width: 100px !important;
+    height: 36px !important;
+    margin-left: 8px !important;
+    padding: 0 10px !important;
+    font-size: 20px !important;
+  }
+}

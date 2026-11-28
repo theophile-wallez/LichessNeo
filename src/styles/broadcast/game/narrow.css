@@ -1,0 +1,63 @@
+/* ---- Below 1020px --- */
+
+/* The analysis page's column (analysis/layout-narrow.css): the bars and the board, the
+ * controls, the moves, then the round's games and the chat in one card, with Lichess's own
+ * tabs, and the round's info. Lichess shows no chat there at all. */
+
+@media (max-width: 1019.98px) {
+  main.analyse.is-relay:not(.has-relay-tour) {
+    --ln-ext-bar: 56px;
+  }
+
+  /* Lichess's room for its bars, which our rows give them. */
+  main.analyse.is-relay:not(.has-relay-tour) {
+    margin-top: 0 !important;
+  }
+
+  main.analyse.is-relay:not(.has-relay-tour) .analyse__controls {
+    margin-top: 0 !important;
+  }
+
+  main.analyse.is-relay:not(.has-relay-tour) > .relay-tour__side {
+    grid-area: side !important;
+    position: static !important;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 12px 0 0 !important;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--ln-ext-bg-panel);
+  }
+
+  main.analyse.is-relay > .relay-tour__side > .vertical-resize {
+    display: none !important;
+  }
+
+  main.analyse.is-relay > .relay-tour__side > .relay-games {
+    flex: none !important;
+    height: auto !important;
+    max-height: 240px !important;
+    overflow-y: auto;
+  }
+
+  main.analyse.is-relay > .relay-tour__side > .mchat {
+    display: flex !important;
+    flex-direction: column;
+    height: 360px !important;
+    min-height: 0;
+    margin: 0 !important;
+    overflow: hidden;
+    border-top: 1px solid var(--ln-ext-border);
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  main.analyse.is-relay > .relay-tour__side .mchat__content {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+}
